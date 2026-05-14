@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-navy-950: #06090f;
+    --color-navy-900: #0a1628;
+    --color-navy-800: #0f2040;
+    --color-navy-700: #1a3058;
+    --color-amber-400: #fbbf24;
+    --color-teal-400: #2dd4bf;
+    --color-cream-100: #fefcf3;
+    --color-coral-400: #fb7185;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-navy-950 text-cream-100 font-sans antialiased;
+  }
+}
+
+@layer components {
+  .theorem-title {
+    @apply font-display text-2xl font-semibold tracking-tight;
+  }
+
+  .question-text {
+    @apply font-sans text-cream-200 leading-relaxed;
+  }
+
+  .accent-correct {
+    @apply text-teal-400;
+  }
+
+  .accent-warn {
+    @apply text-coral-400;
+  }
+}
