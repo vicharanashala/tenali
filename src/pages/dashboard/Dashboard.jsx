@@ -1,7 +1,9 @@
+import { useState } from 'react'
 import CaseStudyCard from '../../components/dashboard/CaseStudyCard'
 import XPBar from '../../components/dashboard/XPBar'
 import theorems from '../../data/theorems.json'
 import { theoremIllustrations } from '../../data/illustrations'
+import LearningLoop from './LearningLoop'
 
 function DashboardHeader({ session, onSignOut }) {
   const initials = session?.name
@@ -27,7 +29,7 @@ function DashboardHeader({ session, onSignOut }) {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <span className="text-xs font-mono text-cream-400">7 Theorems</span>
+            <span className="text-xs font-mono text-cream-400">{theorems.length} Theorems</span>
           </div>
 
           <div className="h-6 w-px bg-white/10 hidden sm:block" />
@@ -59,10 +61,21 @@ function DashboardHeader({ session, onSignOut }) {
 }
 
 export default function Dashboard({ session, onSignOut }) {
+  const [activeTheorem, setActiveTheorem] = useState(null)
   const theoremsWithIcons = theorems.map(t => ({
     ...t,
     icon: theoremIllustrations[t.illustration] || null,
   }))
+
+  if (activeTheorem) {
+    return (
+      <LearningLoop
+        theoremId={activeTheorem}
+        onComplete={() => setActiveTheorem(null)}
+        onExit={() => setActiveTheorem(null)}
+      />
+    )
+  }
 
   return (
     <div className="min-h-screen bg-navy-950">
@@ -102,10 +115,7 @@ export default function Dashboard({ session, onSignOut }) {
             <CaseStudyCard
               key={theorem.id}
               theorem={theorem}
-              onClick={() => {
-                // TODO: wire to case study detail route
-                console.log('Navigate to:', theorem.slug)
-              }}
+              onClick={() => setActiveTheorem(theorem.id)}
             />
           ))}
         </div>
