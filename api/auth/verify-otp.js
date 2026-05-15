@@ -1,11 +1,7 @@
-const crypto = require('crypto');
+import crypto from 'crypto';
+import { otpStore, verifiedTokens, TOKEN_EXPIRY_MS } from './store.js';
 
-const otpStore = {};
-const verifiedTokens = {};
-const OTP_EXPIRY_MS = 5 * 60 * 1000;
-const TOKEN_EXPIRY_MS = 15 * 60 * 1000;
-
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' });
   }
@@ -26,4 +22,4 @@ module.exports = async function handler(req, res) {
   verifiedTokens[token] = { email, expiresAt: Date.now() + TOKEN_EXPIRY_MS };
 
   return res.json({ message: 'OTP verified', token });
-};
+}

@@ -1,16 +1,12 @@
-const { Resend } = require('resend');
-const crypto = require('crypto');
+import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY || 're_b8ERV4vB_PckH1dFUdXwovxJuqztCVF18');
 
 const otpStore = {};
-const verifiedTokens = {};
-const OTP_EXPIRY_MS = 5 * 60 * 1000;
-const TOKEN_EXPIRY_MS = 15 * 60 * 1000;
 
 const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString();
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' });
   }
@@ -21,7 +17,7 @@ module.exports = async function handler(req, res) {
   }
 
   const otp = generateOTP();
-  const expiry = Date.now() + OTP_EXPIRY_MS;
+  const expiry = Date.now() + (5 * 60 * 1000);
   otpStore[email] = { otp, expiry };
 
   try {
@@ -41,4 +37,4 @@ module.exports = async function handler(req, res) {
     console.error('Error sending email:', error);
     return res.status(500).json({ message: 'Failed to send OTP' });
   }
-};
+}
