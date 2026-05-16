@@ -7,11 +7,10 @@ import fundamentalTheoremData from '../../data/fundamental-theorem.json'
 import infinitePiData from '../../data/infinite-pi.json'
 import goldbachConjectureData from '../../data/goldbach-conjecture.json'
 import banachTarskiData from '../../data/banach-tarski.json'
+import { fetchProgress, saveProgress, recordAttempt, XP_FIRST_ATTEMPT, XP_AFTER_HINT, XP_STAGE_COMPLETE, XP_MASTERY } from '../../lib/progress'
 
 const STAGE_CORRECTS_NEEDED = 3
 const MAX_RETRIES = 2
-const XP_PER_CORRECT = 10
-const XP_PER_STAGE_ADVANCE = 25
 
 const QUESTION_BANKS = {
   'fermats-last': fermatsLastData,
@@ -23,7 +22,7 @@ const QUESTION_BANKS = {
   'banach-tarski': banachTarskiData,
 }
 
-export default function LearningLoop({ theoremId, onComplete, onExit }) {
+export default function LearningLoop({ theoremId, onComplete, onExit, userId }) {
   const theoremData = theorems.find(t => t.id === theoremId)
   const [gameState, setGameState] = useState('intro') // intro | playing | payoff
   const [stageIndex, setStageIndex] = useState(0)
@@ -35,11 +34,22 @@ export default function LearningLoop({ theoremId, onComplete, onExit }) {
   const [totalXP, setTotalXP] = useState(0)
   const [xpAnimating, setXpAnimating] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [hintWasUsed, setHintWasUsed] = useState(false)
+  const [savedStage, setSavedStage] = useState(0)
   const inputRef = useRef(null)
 
+  const questionBank = QUESTION_BANKS[theoremId]
 
-  // Debug mount
-  console.log('[LearningLoop] Mounting with theoremId:', theoremId, 'theoremData:', theoremData?.theorem, 'id:', theoremData?.id)
+  // Load saved progress on mount
+  useEffect(() => {
+    if (!userId || !theoremId) return
+    fetchProgress(userId).then(allProgress => {
+      const myProgress = allProgress.find(p => p.id === theoremId)
+      if (myProgress?.progress) {
+        setSavedStage(myProgress.progress.current_stage || 0)
+      }
+    }).catch(() => {})
+  }, [userId, theoremId])
 
   // XP tick animation
   useEffect(() => {
@@ -49,10 +59,6 @@ export default function LearningLoop({ theoremId, onComplete, onExit }) {
       return () => clearTimeout(t)
     }
   }, [totalXP])
-
-
-  const questionBank = QUESTION_BANKS[theoremId]
-  console.log('[LearningLoop] questionBank for', theoremId, ':', questionBank ? 'found (' + questionBank.stageCount + ' stages)' : 'NOT FOUND')
 
   // Simulate async load to prevent instant blank
   useEffect(() => {
@@ -64,6 +70,32 @@ export default function LearningLoop({ theoremId, onComplete, onExit }) {
   useEffect(() => {
     if (gameState === 'playing') inputRef.current?.focus()
   }, [gameState, stageIndex])
+
+  // Save progress to server
+  const doSaveProgress = async (stageNum, status, xp, completedAt = null) => {
+    if (!userId) return
+    await saveProgress({
+      user_id: userId,
+      case_study_id: theoremId,
+      stage_number: stageNum,
+      status,
+      xp_earned: xp,
+      completed_at: completedAt,
+    })
+  }
+
+  // Record attempt
+  const doRecordAttempt = async (stageNum, answer, correct, xp) => {
+    if (!userId) return
+    await recordAttempt({
+      user_id: userId,
+      case_study_id: theoremId,
+      stage_number: stageNum,
+      answer_given: answer,
+      is_correct: correct,
+      xp_earned: xp,
+    })
+  }
 
   // Loading skeleton
   if (isLoading) {
@@ -110,18 +142,12 @@ export default function LearningLoop({ theoremId, onComplete, onExit }) {
     return val.trim().toLowerCase()
   }
 
-  function normalizeAnswer(val) {
-    return val.trim().toLowerCase()
-  }
-
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e?.preventDefault()
 
-    // Normalize input
     const raw = input.trim()
     if (!raw) return
 
-    // Single word / single integer enforcement
     const words = raw.split(/\s+/)
     if (words.length > 1) {
       setFeedback('hint')
@@ -137,24 +163,31 @@ export default function LearningLoop({ theoremId, onComplete, onExit }) {
     if (accepted.includes(answer)) {
       // ✅ CORRECT
       setFeedback('correct')
-      setTotalXP(prev => prev + XP_PER_CORRECT)
+      const xpEarned = hintWasUsed ? XP_AFTER_HINT : XP_FIRST_ATTEMPT
+      setTotalXP(prev => prev + xpEarned)
       const newCorrect = correctCount + 1
       setCorrectCount(newCorrect)
       setInput('')
       setCurrentHint('')
 
+      await doRecordAttempt(stageIndex + 1, raw, true, xpEarned)
+
       if (newCorrect >= STAGE_CORRECTS_NEEDED) {
-        setTimeout(() => {
+        setTimeout(async () => {
           if (stageIndex + 1 >= questionBank.stageCount) {
             setGameState('payoff')
-            setTotalXP(prev => prev + XP_PER_STAGE_ADVANCE)
+            const finalXP = totalXP + XP_PER_STAGE_ADVANCE + XP_MASTERY
+            setTotalXP(prev => prev + XP_STAGE_COMPLETE + XP_MASTERY)
+            await doSaveProgress(stageIndex + 1, 'mastered', finalXP, new Date().toISOString())
           } else {
             const newStage = stageIndex + 1
             setStageIndex(newStage)
             setCorrectCount(0)
             setRetryCount(0)
-            setTotalXP(prev => prev + XP_PER_STAGE_ADVANCE)
+            setHintWasUsed(false)
+            setTotalXP(prev => prev + XP_STAGE_COMPLETE)
             setFeedback(null)
+            await doSaveProgress(newStage, 'in_progress', totalXP + XP_STAGE_COMPLETE)
           }
         }, 1500)
       } else {
@@ -162,24 +195,21 @@ export default function LearningLoop({ theoremId, onComplete, onExit }) {
       }
     } else {
       // ❌ WRONG
+      await doRecordAttempt(stageIndex + 1, raw, false, 0)
       if (retryCount >= MAX_RETRIES) {
-        // Failed retry — regress to previous stage
         setTimeout(() => {
-          if (stageIndex > 0) {
-            setStageIndex(prev => prev - 1)
-          } else {
-            setStageIndex(0)
-          }
+          setStageIndex(prev => Math.max(0, prev - 1))
           setCorrectCount(0)
           setRetryCount(0)
+          setHintWasUsed(false)
           setCurrentHint('')
           setFeedback(null)
           setInput('')
         }, 1500)
       } else {
-        // Show hint and allow retry
         setCurrentHint(currentStage.hint)
         setRetryCount(prev => prev + 1)
+        setHintWasUsed(true)
         setFeedback('hint')
         setTimeout(() => {
           setFeedback(null)
@@ -196,9 +226,10 @@ export default function LearningLoop({ theoremId, onComplete, onExit }) {
 
   function startGame() {
     setGameState('playing')
-    setStageIndex(0)
+    setStageIndex(savedStage)
     setCorrectCount(0)
     setRetryCount(0)
+    setHintWasUsed(false)
     setCurrentHint('')
     setInput('')
     setFeedback(null)
@@ -214,40 +245,34 @@ export default function LearningLoop({ theoremId, onComplete, onExit }) {
     return (
       <div className="min-h-screen bg-navy-950 flex flex-col items-center justify-center px-6">
         <div className="max-w-lg text-center">
-          {/* Stage count badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-teal-400/10 border border-teal-400/20 rounded-full text-teal-400 text-sm font-semibold mb-8 animate-fade-in">
             <div className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
             {questionBank.stageCount} Stages
           </div>
 
-          {/* Theorem name */}
           <h1 className="font-display text-4xl sm:text-5xl text-cream-100 font-bold mb-6 animate-fade-in" style={{animationDelay: '100ms'}}>
             {questionBank.displayName || theoremData.theorem}
           </h1>
 
-          {/* Story intro */}
           <div className="bg-navy-900/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 mb-8 text-left animate-fade-in" style={{animationDelay: '200ms'}}>
             <p className="text-cream-300 leading-relaxed text-base font-sans">
               {questionBank.story.intro}
             </p>
           </div>
 
-          {/* Stage dots */}
           <div className="flex items-center justify-center gap-3 mb-10 animate-fade-in" style={{animationDelay: '300ms'}}>
             {Array.from({ length: questionBank.stageCount }).map((_, i) => (
               <div key={i} className="w-2.5 h-2.5 rounded-full bg-navy-700 border border-white/10" />
             ))}
           </div>
 
-          {/* Begin button */}
           <button
             onClick={startGame}
             className="px-12 py-4 bg-teal-400 text-navy-950 font-bold text-lg rounded-xl hover:bg-teal-300 hover:scale-105 transition-all shadow-xl shadow-teal-400/20 animate-fade-in" style={{animationDelay: '400ms'}}
           >
-            Begin Journey
+            {savedStage > 0 ? `Resume from Step ${savedStage}` : 'Begin Journey'}
           </button>
 
-          {/* Exit link */}
           <button onClick={onExit} className="block mx-auto mt-6 text-cream-400 text-sm hover:text-teal-400 transition-colors animate-fade-in" style={{animationDelay: '500ms'}}>
             ← Back to Dashboard
           </button>
@@ -261,7 +286,6 @@ export default function LearningLoop({ theoremId, onComplete, onExit }) {
     return (
       <div className="min-h-screen bg-navy-950 flex flex-col items-center justify-center px-6 py-12">
         <div className="max-w-lg text-center space-y-8">
-          {/* Completion badge */}
           <div className="inline-flex flex-col items-center gap-3">
             <div className="w-24 h-24 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center shadow-2xl shadow-amber-400/30">
               <span className="text-navy-950 text-4xl">🏆</span>
@@ -276,7 +300,6 @@ export default function LearningLoop({ theoremId, onComplete, onExit }) {
             <p className="text-cream-400">You've completed {questionBank.story.completionBadge}</p>
           </div>
 
-          {/* Theorem statement */}
           <div className="bg-navy-900/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 text-left space-y-4">
             <div>
               <p className="text-xs uppercase tracking-widest text-teal-400 font-semibold mb-2">Formal Statement</p>
@@ -300,7 +323,6 @@ export default function LearningLoop({ theoremId, onComplete, onExit }) {
             </div>
           </div>
 
-          {/* XP earned */}
           <div className="flex items-center justify-center gap-3">
             <div className="w-10 h-10 bg-amber-400/20 rounded-xl flex items-center justify-center">
               <span className="text-amber-400 font-bold text-sm">{totalXP}</span>
@@ -308,7 +330,6 @@ export default function LearningLoop({ theoremId, onComplete, onExit }) {
             <span className="text-cream-400 font-medium">XP Earned</span>
           </div>
 
-          {/* Actions */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={replay}
@@ -370,21 +391,18 @@ export default function LearningLoop({ theoremId, onComplete, onExit }) {
       {/* Question area */}
       <div className="flex-1 flex flex-col items-center justify-center px-6">
         <div className="w-full max-w-2xl space-y-8">
-          {/* Concept label */}
           <div className="text-center">
             <span className="inline-block px-3 py-1 bg-navy-800 border border-white/10 rounded-full text-xs text-cream-400 font-medium">
               {currentStage.conceptLabel}
             </span>
           </div>
 
-          {/* Question */}
           <div className="text-center">
             <h2 className="font-display text-3xl sm:text-4xl text-cream-100 font-bold leading-tight">
               {currentStage.question}
             </h2>
           </div>
 
-          {/* Answer input */}
           <div className={`relative ${feedback === 'hint' ? 'animate-shake' : ''}`}>
             <form onSubmit={handleSubmit}>
               <input
@@ -414,25 +432,22 @@ export default function LearningLoop({ theoremId, onComplete, onExit }) {
                 }`}
               />
 
-              {/* Green flash overlay */}
               {feedback === 'correct' && (
                 <div className="absolute inset-0 bg-teal-400/20 rounded-2xl pointer-events-none animate-flash" />
               )}
             </form>
           </div>
 
-          {/* Feedback message */}
           <div className="h-12 flex items-center justify-center">
             {feedback === 'correct' && (
               <div className="flex items-center gap-2 text-teal-400 animate-fade-in">
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7"/></svg>
                 <span className="font-semibold text-sm">Correct! Keep going...</span>
-                <span className="text-xs text-amber-400 font-mono">+{XP_PER_CORRECT} XP</span>
+                <span className="text-xs text-amber-400 font-mono">+{hintWasUsed ? XP_AFTER_HINT : XP_FIRST_ATTEMPT} XP</span>
               </div>
             )}
           </div>
 
-          {/* Hint slide-in */}
           <div className={`overflow-hidden transition-all duration-500 ${currentHint ? 'animate-hint-slide' : ''}`}>
             {currentHint && (
               <div className="flex items-start gap-3 bg-coral-400/10 border border-coral-400/20 rounded-2xl p-5 mt-2">
@@ -448,7 +463,6 @@ export default function LearningLoop({ theoremId, onComplete, onExit }) {
             )}
           </div>
 
-          {/* Concept explanation */}
           <div className={`space-y-3 overflow-hidden transition-all duration-500 ${feedback === 'correct' && currentStage.conceptShown ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
             <div className="flex items-start gap-3 bg-teal-400/10 border border-teal-400/20 rounded-2xl p-5">
               <div className="w-8 h-8 bg-teal-400/20 rounded-xl flex items-center justify-center flex-shrink-0">
@@ -461,7 +475,6 @@ export default function LearningLoop({ theoremId, onComplete, onExit }) {
             </div>
           </div>
 
-          {/* Correct count indicator */}
           <div className="flex items-center justify-center gap-3">
             {Array.from({ length: STAGE_CORRECTS_NEEDED }).map((_, i) => (
               <div
@@ -474,7 +487,6 @@ export default function LearningLoop({ theoremId, onComplete, onExit }) {
             <span className="text-xs text-cream-400 ml-2">{correctCount}/{STAGE_CORRECTS_NEEDED} to advance</span>
           </div>
 
-          {/* Submit button */}
           <div className="flex justify-center">
             <button
               onClick={handleSubmit}

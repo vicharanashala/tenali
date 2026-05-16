@@ -1,11 +1,28 @@
-const STATUS_CONFIG = {
-  'Not Started': { label: 'Not Started', bg: 'bg-navy-800', text: 'text-cream-400', border: 'border-navy-700' },
-  'In Progress': { label: 'In Progress', bg: 'bg-teal-400/10', text: 'text-teal-400', border: 'border-teal-400/30' },
-  'Completed': { label: 'Completed', bg: 'bg-teal-400/20', text: 'text-teal-400', border: 'border-teal-400/50' },
-}
+export default function CaseStudyCard({ theorem, onClick, progress = {} }) {
+  const { status = 'not_started', current_stage = 0, xp_earned = 0, total_stages = 0 } = progress;
 
-export default function CaseStudyCard({ theorem, onClick }) {
-  const statusCfg = STATUS_CONFIG['Not Started'] || STATUS_CONFIG['Not Started']
+  const STATUS_CONFIG = {
+    'not_started': {
+      label: 'Not Started',
+      bg: 'bg-navy-800',
+      text: 'text-cream-400',
+      border: 'border-navy-700',
+    },
+    'in_progress': {
+      label: `Step ${current_stage} of ${total_stages}`,
+      bg: 'bg-teal-400/10',
+      text: 'text-teal-400',
+      border: 'border-teal-400/30',
+    },
+    'mastered': {
+      label: 'Mastered',
+      bg: 'bg-teal-400/20',
+      text: 'text-teal-400',
+      border: 'border-teal-400/50',
+    },
+  };
+
+  const statusCfg = STATUS_CONFIG[status] || STATUS_CONFIG['not_started'];
 
   return (
     <article
@@ -24,6 +41,15 @@ export default function CaseStudyCard({ theorem, onClick }) {
         </span>
       </div>
 
+      {/* XP earned badge */}
+      {xp_earned > 0 && (
+        <div className="absolute top-4 left-4">
+          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-400">
+            {xp_earned} XP
+          </span>
+        </div>
+      )}
+
       {/* Content */}
       <div className="space-y-2">
         <h3 className="font-display text-xl text-cream-100 font-bold leading-tight group-hover:text-teal-400 transition-colors">
@@ -41,7 +67,7 @@ export default function CaseStudyCard({ theorem, onClick }) {
           <span className="text-xs font-mono text-cream-400">{theorem.illustration}</span>
         </div>
         <div className="flex items-center gap-1 text-teal-400 opacity-0 group-hover:opacity-100 transition-opacity">
-          <span className="text-xs font-semibold">Start</span>
+          <span className="text-xs font-semibold">{status === 'not_started' ? 'Start' : 'Continue'}</span>
           <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
           </svg>

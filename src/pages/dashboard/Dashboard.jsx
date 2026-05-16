@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import CaseStudyCard from '../../components/dashboard/CaseStudyCard'
 import XPBar from '../../components/dashboard/XPBar'
 import theorems from '../../data/theorems.json'
 import { theoremIllustrations } from '../../data/illustrations'
 import LearningLoop from './LearningLoop'
+import { fetchProgress } from '../../lib/progress'
 
 function DashboardHeader({ session, onSignOut }) {
   const initials = session?.name
@@ -62,10 +63,33 @@ function DashboardHeader({ session, onSignOut }) {
 
 export default function Dashboard({ session, onSignOut }) {
   const [activeTheorem, setActiveTheorem] = useState(null)
+  const [progressData, setProgressData] = useState([])
   const theoremsWithIcons = theorems.map(t => ({
     ...t,
     icon: theoremIllustrations[t.illustration] || null,
   }))
+
+  const userId = session?.userId
+
+  useEffect(() => {
+    if (!userId) return
+    fetchProgress(userId).then(data => {
+      setProgressData(data || [])
+    }).catch(() => {})
+  }, [userId])
+
+  // Build progress map: caseStudyId -> { status, current_stage, xp_earned, total_stages }
+  const progressMap = {}
+  for (const p of progressData) {
+    progressMap[p.id] = {
+      status: p.progress?.status || 'not_started',
+      current_stage: p.progress?.current_stage || 0,
+      xp_earned: p.progress?.xp_earned || 0,
+      total_stages: p.total_stages || 0,
+    }
+  }
+
+  const totalXP = progressData.reduce((sum, p) => sum + (p.progress?.xp_earned || 0), 0)
 
   if (activeTheorem) {
     return (
@@ -73,6 +97,7 @@ export default function Dashboard({ session, onSignOut }) {
         theoremId={activeTheorem}
         onComplete={() => setActiveTheorem(null)}
         onExit={() => setActiveTheorem(null)}
+        userId={userId}
       />
     )
   }
@@ -94,7 +119,7 @@ export default function Dashboard({ session, onSignOut }) {
 
         {/* XP Summary Bar */}
         <div className="mb-8">
-          <XPBar totalXP={0} rank="Novice" nextMilestone={100} />
+          <XPBar totalXP={totalXP} rank={totalXP >= 500 ? 'Scholar' : totalXP >= 200 ? 'Apprentice' : 'Novice'} nextMilestone={(Math.floor(totalXP / 100) + 1) * 100} />
         </div>
 
         {/* Section header */}
@@ -111,13 +136,17 @@ export default function Dashboard({ session, onSignOut }) {
 
         {/* Cards grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {theoremsWithIcons.map(theorem => (
-            <CaseStudyCard
-              key={theorem.id}
-              theorem={theorem}
-              onClick={() => setActiveTheorem(theorem.id)}
-            />
-          ))}
+          {theoremsWithIcons.map(theorem => {
+            const prog = progressMap[theorem.id] || {}
+            return (
+              <CaseStudyCard
+                key={theorem.id}
+                theorem={theorem}
+                progress={prog}
+                onClick={() => setActiveTheorem(theorem.id)}
+              />
+            )
+          })}
         </div>
       </main>
     </div>
