@@ -1,0 +1,90 @@
+{
+  "id": "euler-formula",
+  "theorem": "Euler's Identity",
+  "displayName": "Euler's Identity",
+  "slug": "euler-formula",
+  "stageCount": 7,
+  "story": {
+    "intro": "Mathematicians call it the most beautiful equation ever discovered. It connects five of mathematics' most important constants — e, π, i, 1, and 0 — in a single, startling line. Today, you'll explore why it works and what it means for the invisible structures underlying our world.",
+    "theoremStatement": "e^(iπ) + 1 = 0",
+    "plainEnglish": "Raise a special number called 'e' (about 2.718) to the power of i times π, and you get negative one. Add 1, and everything cancels to zero. Five fundamental numbers, one impossible-seeming relationship — and it's mathematically true.",
+    "applications": [
+      "Signal processing and music technology use it to analyze waveforms and filter frequencies",
+      "Electrical engineers use it to calculate alternating current and radio wave behavior",
+      "Animation software uses it to rotate and scale 3D objects smoothly"
+    ],
+    "completionBadge": "Euler's Oracle"
+  },
+  "stages": [
+    {
+      "id": 1,
+      "type": "concept",
+      "question": "What is the approximate value of π (pi) rounded to 2 decimal places?",
+      "expectedAnswer": "3.14",
+      "acceptedAnswers": ["3.14", "3.14159", "3.141"],
+      "hint": "Pi describes the ratio of a circle's circumference to its diameter. What's that ratio, approximately?",
+      "conceptShown": "π ≈ 3.14159... — the ratio of a circle's circumference to its diameter",
+      "conceptLabel": "Understanding π"
+    },
+    {
+      "id": 2,
+      "type": "concept",
+      "question": "What is the imaginary unit i defined as?",
+      "expectedAnswer": "√-1",
+      "acceptedAnswers": ["√-1", "sqrt(-1)", "square root of -1", "i = sqrt(-1)"],
+      "hint": "There's no real number that when squared gives -1. Mathematicians invented one. What is it the square root of?",
+      "conceptShown": "i is defined as √(-1), the imaginary unit — i² = -1",
+      "conceptLabel": "The imaginary unit i"
+    },
+    {
+      "id": 3,
+      "type": "numeric",
+      "question": "What is i² (i squared)?",
+      "expectedAnswer": "-1",
+      "acceptedAnswers": ["-1", "-1.0"],
+      "hint": "i is defined so that i × i = -1. What do you get when you square i?",
+      "conceptShown": "i × i = i² = -1 — by definition of i",
+      "conceptLabel": "Properties of i"
+    },
+    {
+      "id": 4,
+      "type": "concept",
+      "question": "Euler's formula states that e^(iθ) = cos(θ) + i·sin(θ). If θ = π, what does e^(iπ) equal?",
+      "expectedAnswer": "-1",
+      "acceptedAnswers": ["-1"],
+      "hint": "Substitute θ = π into Euler's formula: cos(π) + i·sin(π). What are cos(π) and sin(π)?",
+      "conceptShown": "e^(iπ) = cos(π) + i·sin(π) = -1 + i·0 = -1",
+      "conceptLabel": "Euler's formula"
+    },
+    {
+      "id": 5,
+      "type": "concept",
+      "question": "If e^(iπ) = -1, what does e^(iπ) + 1 equal?",
+      "expectedAnswer": "0",
+      "acceptedAnswers": ["0", "zero"],
+      "hint": "Take the result from the previous step and add 1 to it.",
+      "conceptShown": "e^(iπ) + 1 = -1 + 1 = 0",
+      "conceptLabel": "Euler's identity"
+    },
+    {
+      "id": 6,
+      "type": "concept",
+      "question": "Euler's identity is e^(iπ) + 1 = 0. Name one of the five mathematical constants it contains.",
+      "expectedAnswer": "e",
+      "acceptedAnswers": ["e", "pi", "π", "i", "1", "0", "one", "zero"],
+      "hint": "The five constants are: e (Euler's number), i (imaginary unit), π (pi), 1, and 0. Pick any one of them.",
+      "conceptShown": "The five constants: e ≈ 2.718, π ≈ 3.14159, i = √(-1), 1, and 0",
+      "conceptLabel": "Five constants, one equation"
+    },
+    {
+      "id": 7,
+      "type": "challenge",
+      "question": "Final challenge: According to Euler's formula, what is e^(iπ) + 1?",
+      "expectedAnswer": "0",
+      "acceptedAnswers": ["0", "zero"],
+      "hint": "This is Euler's identity itself. Just plug in: e^(iπ) = -1, then -1 + 1 = ?",
+      "conceptShown": "e^(iπ) + 1 = -1 + 1 = 0 — Euler's Identity, called the most beautiful equation in mathematics",
+      "conceptLabel": "Euler's identity complete"
+    }
+  ]
+}

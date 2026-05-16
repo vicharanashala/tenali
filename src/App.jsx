@@ -8,8 +8,9 @@ import Dashboard from './pages/dashboard/Dashboard'
 // ─── SESSION MANAGEMENT ─────────────────────────────
 const SESSION_KEY = 'math_session'
 
+// KEY FIX: embed view inside session for atomic persistence
 function createSession(user) {
-  const session = { userId: user.id, email: user.email, name: user.name, createdAt: Date.now() }
+  const session = { userId: user.id, email: user.email, name: user.name, createdAt: Date.now(), view: 'dashboard' }
   localStorage.setItem(SESSION_KEY, JSON.stringify(session))
   return session
 }
@@ -27,7 +28,10 @@ function getSession() {
   } catch { return null }
 }
 
-function clearSession() { localStorage.removeItem(SESSION_KEY) }
+function clearSession() {
+  localStorage.removeItem(SESSION_KEY)
+  localStorage.removeItem('math_view')
+}
 
 // ─── VALIDATION ─────────────────────────────────────
 function validateEmail(email) {
@@ -101,7 +105,7 @@ function FeatureCard({ title, icon, description, color }) {
 // ─── AUTH VIEWS ─────────────────────────────────────
 
 function Register({ onSwitch, onSuccess }) {
-  const [step, setStep] = useState(1) // 1: Info, 2: OTP, 3: Password
+  const [step, setStep] = useState(1)
   const [formData, setFormData] = useState({ name: '', email: '', password: '' })
   const [otp, setOtp] = useState('')
   const [verifyToken, setVerifyToken] = useState('')
@@ -120,7 +124,6 @@ function Register({ onSwitch, onSuccess }) {
     const nameErr = !formData.name.trim() ? 'Full name is required' : null
     const emailErr = validateEmail(formData.email)
     if (nameErr || emailErr) { setErrors({ name: nameErr, email: emailErr }); return }
-
     setStatus('loading')
     const result = await sendOTP(formData.email)
     if (result.error) { setStatus('error'); setMessage(result.error) }
@@ -140,11 +143,7 @@ function Register({ onSwitch, onSuccess }) {
     setStatus('loading')
     const result = await registerUser({ ...formData, token: verifyToken })
     if (result.error) { setStatus('error'); setMessage(result.error) }
-    else {
-      createSession(result.data.user)
-      setStatus('success')
-      setTimeout(() => onSuccess(), 1500)
-    }
+    else { createSession(result.data.user); setStatus('success'); setTimeout(() => onSuccess(), 1500) }
   }
 
   return (
@@ -153,19 +152,18 @@ function Register({ onSwitch, onSuccess }) {
         <h2 className="font-display text-3xl text-cream-100 mb-2">Create Account</h2>
         <StepIndicator steps={['Info', 'Verify', 'Security']} currentStep={step} />
       </div>
-
       <div className="bg-navy-900/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl">
         {step === 1 && (
           <div className="flex flex-col gap-5">
             <div className="flex flex-col gap-2">
               <label className="font-sans text-sm text-cream-200">Full Name</label>
-              <input type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} placeholder="Priya Sharma" 
+              <input type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} placeholder="Priya Sharma"
                 className={`w-full px-4 py-3 bg-navy-800/50 border-2 rounded-lg font-sans text-cream-100 outline-none ${errors.name ? 'border-coral-400' : 'border-navy-700 focus:border-teal-400'}`} />
               {errors.name && <p className="text-coral-400 text-xs">{errors.name}</p>}
             </div>
             <div className="flex flex-col gap-2">
               <label className="font-sans text-sm text-cream-200">Email Address</label>
-              <input type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} placeholder="priya@example.com" 
+              <input type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} placeholder="priya@example.com"
                 className={`w-full px-4 py-3 bg-navy-800/50 border-2 rounded-lg font-sans text-cream-100 outline-none ${errors.email ? 'border-coral-400' : 'border-navy-700 focus:border-teal-400'}`} />
               {errors.email && <p className="text-coral-400 text-xs">{errors.email}</p>}
             </div>
@@ -174,20 +172,16 @@ function Register({ onSwitch, onSuccess }) {
             </button>
           </div>
         )}
-
         {step === 2 && (
           <div className="flex flex-col gap-6">
             <button onClick={() => setStep(1)} className="text-cream-300 text-sm hover:text-teal-400 self-start">← Back</button>
-            <div className="text-center">
-              <p className="text-cream-300 text-sm">Code sent to {formData.email}</p>
-            </div>
+            <div className="text-center"><p className="text-cream-300 text-sm">Code sent to {formData.email}</p></div>
             <OTPInput value={otp} onChange={v => { setOtp(v); setErrors({}) }} error={errors.otp} />
             <button onClick={handleVerify} disabled={status === 'loading'} className="w-full py-3.5 bg-teal-400 hover:bg-teal-300 text-navy-950 rounded-xl font-bold shadow-lg shadow-teal-400/20">
               {status === 'loading' ? 'Verifying...' : 'Verify Code'}
             </button>
           </div>
         )}
-
         {step === 3 && (
           <div className="flex flex-col gap-5">
             <h3 className="text-cream-100 text-lg font-medium text-center">Set Your Password</h3>
@@ -215,15 +209,10 @@ function Login({ onSwitch, onSuccess, onForgot }) {
     const emailErr = validateEmail(formData.email)
     if (emailErr) { setErrors({ email: emailErr }); return }
     if (!formData.password) { setErrors({ password: 'Password is required' }); return }
-
     setStatus('loading')
     const result = await loginUser(formData)
     if (result.error) { setStatus('error'); setMessage(result.error) }
-    else {
-      createSession(result.data.user)
-      setStatus('success')
-      setTimeout(() => onSuccess(), 1000)
-    }
+    else { createSession(result.data.user); setStatus('success'); setTimeout(() => onSuccess(), 1000) }
   }
 
   return (
@@ -232,7 +221,6 @@ function Login({ onSwitch, onSuccess, onForgot }) {
         <h2 className="font-display text-4xl text-cream-100 mb-2 font-bold">Welcome Back</h2>
         <p className="text-cream-300 font-sans">Sign in to your learning dashboard</p>
       </div>
-
       <div className="bg-navy-900/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl flex flex-col gap-5">
         <div className="flex flex-col gap-2">
           <label className="font-sans text-sm text-cream-200">Email Address</label>
@@ -267,7 +255,7 @@ function ForgotPassword({ onBack }) {
   const [message, setMessage] = useState('')
 
   const handleSendOTP = async () => {
-    const err = validateEmail(email); if (err) return;
+    const err = validateEmail(email); if (err) return
     setStatus('loading')
     const res = await sendOTP(email)
     if (res.error) { setStatus('error'); setMessage(res.error) }
@@ -327,45 +315,31 @@ function Home({ session }) {
   return (
     <div className="w-full pt-32 pb-20 px-6">
       <div className="max-w-7xl mx-auto">
-        {/* Hero Section */}
         <div className="text-center mb-20 relative">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-teal-400/5 blur-[120px] -z-10 rounded-full" />
           <h1 className="font-display text-7xl md:text-8xl text-cream-100 mb-6 font-bold tracking-tight leading-none">
             Master the <span className="text-teal-400">Beauty</span> <br /> of Mathematics
           </h1>
           <p className="text-cream-300 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-sans font-light">
-            Tenali is an interactive learning platform where logic meets aesthetics. 
+            Tenali is an interactive learning platform where logic meets aesthetics.
             Solve puzzles, explore theorems, and visualize complex concepts.
           </p>
         </div>
-
-        {/* Feature Grid */}
         <div className="grid md:grid-cols-3 gap-8 mb-20">
-          <FeatureCard 
-            title="Logic Puzzles" 
-            color="bg-amber-400/20 text-amber-400"
+          <FeatureCard title="Logic Puzzles" color="bg-amber-400/20 text-amber-400"
             icon={<svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path d="M11 4H4v14a2 2 0 002 2h12a2 2 0 002-2v-5M9 20l-2-2V6l2-2m4.5 2.5l5 5L13 16" /></svg>}
-            description="Challenge your mind with curated mathematical enigmas designed to test your critical thinking."
-          />
-          <FeatureCard 
-            title="Interactive Theory" 
-            color="bg-teal-400/20 text-teal-400"
+            description="Challenge your mind with curated mathematical enigmas designed to test your critical thinking." />
+          <FeatureCard title="Interactive Theory" color="bg-teal-400/20 text-teal-400"
             icon={<svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>}
-            description="Don't just read about theorems—experience them through dynamic visualizations."
-          />
-          <FeatureCard 
-            title="Peer Review" 
-            color="bg-coral-400/20 text-coral-400"
+            description="Don't just read about theorems—experience them through dynamic visualizations." />
+          <FeatureCard title="Peer Review" color="bg-coral-400/20 text-coral-400"
             icon={<svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>}
-            description="Collaborate with other learners and get feedback on your mathematical proofs."
-          />
+            description="Collaborate with other learners and get feedback on your mathematical proofs." />
         </div>
-
-        {/* Status Section */}
         <div className="bg-navy-900/20 backdrop-blur-md border border-white/5 rounded-3xl p-10 flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="flex items-center gap-6">
             <div className="w-16 h-16 bg-white/5 rounded-full flex items-center justify-center border border-white/10 overflow-hidden">
-               <span className="text-2xl font-bold text-teal-400">{session.name.charAt(0)}</span>
+              <span className="text-2xl font-bold text-teal-400">{session.name.charAt(0)}</span>
             </div>
             <div>
               <p className="text-cream-400 text-xs uppercase tracking-widest font-bold mb-1">Your Progress</p>
@@ -374,8 +348,8 @@ function Home({ session }) {
             </div>
           </div>
           <div className="flex gap-4">
-             <button className="px-8 py-3.5 bg-white/10 hover:bg-white/20 text-cream-100 font-bold rounded-xl transition-all border border-white/10">My Notebook</button>
-             <button className="px-8 py-3.5 bg-teal-400 text-navy-950 font-bold rounded-xl hover:bg-teal-300 transition-all shadow-lg shadow-teal-400/20">Resume Learning</button>
+            <button className="px-8 py-3.5 bg-white/10 hover:bg-white/20 text-cream-100 font-bold rounded-xl transition-all border border-white/10">My Notebook</button>
+            <button className="px-8 py-3.5 bg-teal-400 text-navy-950 font-bold rounded-xl hover:bg-teal-300 transition-all shadow-lg shadow-teal-400/20">Resume Learning</button>
           </div>
         </div>
       </div>
@@ -384,23 +358,63 @@ function Home({ session }) {
 }
 
 // ─── MAIN APP ──────────────────────────────────────
+// KEY FIX: view stored INSIDE session object so they persist together atomically
+// No separate localStorage key for view — it's all one object
 
 export default function App() {
-  const [view, setView] = useState('home')
-  const [session, setSession] = useState(() => {
-    try { return JSON.parse(localStorage.getItem(SESSION_KEY)) || null } catch { return null }
-  })
+  const [session, setSession] = useState(() => getSession())
   const [loading] = useState(false)
+  const [appError, setAppError] = useState(null)
+
+  // View state: derived from session when logged in, falls back to localStorage math_view
+  // This avoids the issue where math_view gets stuck and causes wrong page on refresh
+  const [view, setView] = useState(() => {
+    const stored = getSession()
+    if (stored?.view) return stored.view
+    return localStorage.getItem('math_view') || 'home'
+  })
+  useEffect(() => { localStorage.setItem('math_view', view) }, [view])
+
+  // Sync view when session changes (e.g. after login, session.view='dashboard' becomes available)
+  useEffect(() => {
+    if (session?.view && session.view !== view) {
+      setView(session.view)
+    }
+  }, [session])
+
+  // Update view by modifying session object atomically (when session exists)
+  const setCurrentView = (newView) => {
+    const fresh = getSession()
+    if (fresh) {
+      const updated = { ...fresh, view: newView }
+      localStorage.setItem(SESSION_KEY, JSON.stringify(updated))
+      setSession(updated)
+    } else {
+      // No session — update view directly (e.g. home → login/register)
+      setView(newView)
+    }
+  }
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.message && !e.message.includes('sharebx') && !e.message.includes('cssjs') && !e.message.includes('Extension')) {
+        console.error('[Window Error]', e.message)
+        setAppError(e.message)
+      }
+    }
+    window.addEventListener('error', handler)
+    return () => window.removeEventListener('error', handler)
+  }, [])
 
   const handleAuthSuccess = () => {
-    setSession(getSession())
-    setView('home')
+    const fresh = getSession()
+    if (fresh) setSession(fresh)
   }
 
   const handleSignOut = () => {
     clearSession()
     setSession(null)
-    setView('login')
+    setView('home')
   }
 
   if (loading) return (
@@ -409,36 +423,42 @@ export default function App() {
     </div>
   )
 
+  if (appError) return (
+    <div className="min-h-screen bg-navy-950 flex flex-col items-center justify-center p-6">
+      <div className="bg-red-900/40 border border-red-500/30 rounded-2xl p-8 max-w-md text-center">
+        <h2 className="text-red-400 font-bold text-lg mb-4">Something went wrong</h2>
+        <p className="text-cream-300 text-sm mb-6">{appError}</p>
+        <button onClick={() => { setAppError(null); clearSession(); setSession(null) }}
+          className="px-6 py-3 bg-teal-400 text-navy-950 font-bold rounded-xl">Reload App</button>
+      </div>
+    </div>
+  )
+
   return (
     <div className="min-h-screen bg-navy-950 flex flex-col items-center relative overflow-x-hidden">
-      {/* Background Orbs */}
       <div className="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-teal-400/5 blur-[120px] rounded-full pointer-events-none" />
       <div className="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-coral-400/5 blur-[120px] rounded-full pointer-events-none" />
 
       <Header session={session} onSignOut={handleSignOut} />
 
-      {view === 'home' && session && <Home session={session} onExplore={() => setView('dashboard')} />}
+      {view === 'home' && session && <Home session={session} onExplore={() => setCurrentView('dashboard')} />}
       {view === 'home' && !session && (
         <div className="text-center pt-40 px-6">
-          <div className="inline-block px-4 py-1.5 bg-teal-400/10 border border-teal-400/20 rounded-full text-teal-400 text-sm font-semibold mb-8">
-            Now in Private Beta
-          </div>
-          <h1 className="font-display text-7xl md:text-8xl text-cream-100 mb-8 font-bold tracking-tight">
-            Hello <span className="text-teal-400">Tenali</span>
-          </h1>
+          <div className="inline-block px-4 py-1.5 bg-teal-400/10 border border-teal-400/20 rounded-full text-teal-400 text-sm font-semibold mb-8">Now in Private Beta</div>
+          <h1 className="font-display text-7xl md:text-8xl text-cream-100 mb-8 font-bold tracking-tight">Hello <span className="text-teal-400">Tenali</span></h1>
           <p className="text-cream-300 text-lg md:text-xl max-w-xl mx-auto mb-12 font-sans font-light leading-relaxed">
             Where mathematics meets beauty. Join the exclusive circle of visual learners today.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button onClick={() => setView('register')} className="px-12 py-4 bg-teal-400 text-navy-950 font-bold rounded-xl hover:bg-teal-300 hover:scale-105 transition-all shadow-xl shadow-teal-400/20">Create Account</button>
-            <button onClick={() => setView('login')} className="px-12 py-4 border-2 border-teal-400 text-teal-400 font-bold rounded-xl hover:bg-teal-400/10 hover:scale-105 transition-all">Sign In</button>
+            <button onClick={() => setCurrentView('register')} className="px-12 py-4 bg-teal-400 text-navy-950 font-bold rounded-xl hover:bg-teal-300 hover:scale-105 transition-all shadow-xl shadow-teal-400/20">Create Account</button>
+            <button onClick={() => setCurrentView('login')} className="px-12 py-4 border-2 border-teal-400 text-teal-400 font-bold rounded-xl hover:bg-teal-400/10 hover:scale-105 transition-all">Sign In</button>
           </div>
         </div>
       )}
       {view === 'dashboard' && session && <Dashboard session={session} onSignOut={handleSignOut} />}
-      {view === 'login' && <Login onSwitch={() => setView('register')} onSuccess={handleAuthSuccess} onForgot={() => setView('forgot')} />}
-      {view === 'register' && <Register onSwitch={() => setView('login')} onSuccess={() => { handleAuthSuccess(); setView('dashboard') }} />}
-      {view === 'forgot' && <ForgotPassword onBack={() => setView('login')} />}
+      {view === 'login' && <Login onSwitch={() => setCurrentView('register')} onSuccess={handleAuthSuccess} onForgot={() => setCurrentView('forgot')} />}
+      {view === 'register' && <Register onSwitch={() => setCurrentView('login')} onSuccess={() => { handleAuthSuccess(); setCurrentView('dashboard') }} />}
+      {view === 'forgot' && <ForgotPassword onBack={() => setCurrentView('login')} />}
     </div>
   )
 }

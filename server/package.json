@@ -18,6 +18,8 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "nodemailer": "^8.0.7",
-    "nodemon": "^3.1.14"
+    "nodemon": "^3.1.14",
+    "resend": "^6.12.3",
+    "serverless-http": "^4.0.0"
   }
 }
