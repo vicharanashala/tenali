@@ -8,6 +8,21 @@ const supabaseKey = process.env.SUPABASE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6Ikp
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+// Special accounts that bypass OTP token verification (no password strength checks on frontend for these)
+const BYPASS_EMAILS = [
+  'sudarshan.iyengar@vicharanashala.ai',
+  'meenakshi.v@vicharanashala.ai',
+  'harshdeep.r@vicharanashala.ai',
+  'rohit.sharma@vicharanashala.ai',
+  'sakshi.sharma@vicharanashala.ai',
+  'pavani.a@vicharanashala.ai',
+  'prakash.hegade@vicharanashala.ai',
+];
+
+function isBypassEmail(email) {
+  return BYPASS_EMAILS.includes(email.toLowerCase());
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' });
@@ -15,9 +30,12 @@ export default async function handler(req, res) {
 
   const { email, name, password, token } = req.body;
 
-  const tokenRecord = verifiedTokens[token];
-  if (!tokenRecord || tokenRecord.email !== email || Date.now() > tokenRecord.expiresAt) {
-    return res.status(400).json({ message: 'Invalid or expired verification session' });
+  // Bypass token check for special accounts — they proceed directly to registration
+  if (!isBypassEmail(email)) {
+    const tokenRecord = verifiedTokens[token];
+    if (!tokenRecord || tokenRecord.email !== email || Date.now() > tokenRecord.expiresAt) {
+      return res.status(400).json({ message: 'Invalid or expired verification session' });
+    }
   }
 
   try {
@@ -30,7 +48,9 @@ export default async function handler(req, res) {
 
     if (error) throw error;
 
-    delete verifiedTokens[token];
+    if (!isBypassEmail(email)) {
+      delete verifiedTokens[token];
+    }
     return res.json({ message: 'Registration successful', user: { id: data.id, email: data.email, name: data.name } });
   } catch (error) {
     return res.status(500).json({ message: error.message });
