@@ -167,10 +167,10 @@ function Header({ session, onSignOut }) {
         {session ? (
           /* ── Authenticated nav ── */
           <div className="flex items-center gap-6">
-            <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-cream-300">
-              <a href="#" className="hover:text-teal-400 transition-colors">Courses</a>
-              <a href="#" className="hover:text-teal-400 transition-colors">Puzzles</a>
-              <a href="#" className="hover:text-teal-400 transition-colors">Leaderboard</a>
+            <nav aria-label="Main navigation" className="hidden md:flex items-center gap-8 text-sm font-medium text-cream-300">
+              <a href="#" aria-label="Courses" className="hover:text-teal-400 transition-colors">Courses</a>
+              <a href="#" aria-label="Puzzles" className="hover:text-teal-400 transition-colors">Puzzles</a>
+              <a href="#" aria-label="Leaderboard" className="hover:text-teal-400 transition-colors">Leaderboard</a>
             </nav>
             <div className="h-8 w-px bg-white/10 mx-2" />
             <div className="flex items-center gap-3">
@@ -181,7 +181,7 @@ function Header({ session, onSignOut }) {
               <button
                 onClick={onSignOut}
                 className="p-2.5 hover:bg-coral-400/10 text-coral-400 rounded-xl transition-all group"
-                title="Sign out"
+                aria-label="Sign out of Tenali"
               >
                 <svg className="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -192,9 +192,9 @@ function Header({ session, onSignOut }) {
         ) : (
           /* ── Guest nav ── */
           <div className="flex items-center gap-4">
-            <a href="#" className="text-sm font-medium text-cream-300 hover:text-teal-400 transition-colors">About</a>
+            <a href="#" aria-label="About Tenali" className="text-sm font-medium text-cream-300 hover:text-teal-400 transition-colors">About</a>
             <div className="h-6 w-px bg-white/10" />
-            <button className="text-sm font-semibold text-teal-400 px-4 py-2 hover:bg-teal-400/10 rounded-lg transition-all">Support</button>
+            <button aria-label="Get support" className="text-sm font-semibold text-teal-400 px-4 py-2 hover:bg-teal-400/10 rounded-lg transition-all">Support</button>
           </div>
         )}
       </div>
@@ -320,26 +320,34 @@ function Register({ onSwitch, onSuccess }) {
         {step === 1 && (
           <div className="flex flex-col gap-5">
             <div className="flex flex-col gap-2">
-              <label className="font-sans text-sm text-cream-200">Full Name</label>
+              <label htmlFor="register-name" className="font-sans text-sm text-cream-200">Full Name <span aria-hidden="true">*</span></label>
               <input
+                id="register-name"
                 type="text"
                 value={formData.name}
                 onChange={e => setFormData({ ...formData, name: e.target.value })}
                 placeholder="Priya Sharma"
+                aria-required="true"
+                aria-invalid={!!errors.name}
+                aria-describedby={errors.name ? 'register-name-error' : undefined}
                 className={`w-full px-4 py-3 bg-navy-800/50 border-2 rounded-lg font-sans text-cream-100 outline-none ${errors.name ? 'border-coral-400' : 'border-navy-700 focus:border-teal-400'}`}
               />
-              {errors.name && <p className="text-coral-400 text-xs">{errors.name}</p>}
+              {errors.name && <p id="register-name-error" role="alert" className="text-coral-400 text-xs">{errors.name}</p>}
             </div>
             <div className="flex flex-col gap-2">
-              <label className="font-sans text-sm text-cream-200">Email Address</label>
+              <label htmlFor="register-email" className="font-sans text-sm text-cream-200">Email Address <span aria-hidden="true">*</span></label>
               <input
+                id="register-email"
                 type="email"
                 value={formData.email}
                 onChange={e => setFormData({ ...formData, email: e.target.value })}
                 placeholder="priya@example.com"
+                aria-required="true"
+                aria-invalid={!!errors.email}
+                aria-describedby={errors.email ? 'register-email-error' : undefined}
                 className={`w-full px-4 py-3 bg-navy-800/50 border-2 rounded-lg font-sans text-cream-100 outline-none ${errors.email ? 'border-coral-400' : 'border-navy-700 focus:border-teal-400'}`}
               />
-              {errors.email && <p className="text-coral-400 text-xs">{errors.email}</p>}
+              {errors.email && <p id="register-email-error" role="alert" className="text-coral-400 text-xs">{errors.email}</p>}
             </div>
             <button
               onClick={handleSendOTP}
@@ -354,7 +362,7 @@ function Register({ onSwitch, onSuccess }) {
         {/* Step 2: OTP verification */}
         {step === 2 && (
           <div className="flex flex-col gap-6">
-            <button onClick={() => setStep(1)} className="text-cream-300 text-sm hover:text-teal-400 self-start">← Back</button>
+            <button onClick={() => setStep(1)} aria-label="Go back to previous step" className="text-cream-300 text-sm hover:text-teal-400 self-start">← Back</button>
             <div className="text-center">
               <p className="text-cream-300 text-sm">Code sent to {formData.email}</p>
             </div>
@@ -435,42 +443,50 @@ function Login({ onSwitch, onSuccess, onForgot }) {
       <div className="text-center mb-6">
         <h2 className="font-display text-3xl text-cream-100 mb-2">Sign In</h2>
       </div>
-      <form onSubmit={handleSubmit} className="bg-navy-900/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl flex flex-col gap-5">
+      <form onSubmit={handleSubmit} className="bg-navy-900/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl flex flex-col gap-5" noValidate>
         <div className="flex flex-col gap-2">
-          <label className="font-sans text-sm text-cream-200">Email Address</label>
+          <label htmlFor="login-email" className="font-sans text-sm text-cream-200">Email Address <span aria-hidden="true">*</span></label>
           <input
+            id="login-email"
             type="email"
             value={formData.email}
             onChange={e => setFormData({ ...formData, email: e.target.value })}
             placeholder="priya@example.com"
+            autoComplete="email"
+            aria-required="true"
+            aria-invalid={!!errors.email}
+            aria-describedby={errors.email ? 'login-email-error' : undefined}
             className={`w-full px-4 py-3 bg-navy-800/50 border-2 rounded-lg font-sans text-cream-100 outline-none ${errors.email ? 'border-coral-400' : 'border-navy-700 focus:border-teal-400'}`}
           />
-          {errors.email && <p className="text-coral-400 text-xs">{errors.email}</p>}
+          {errors.email && <p id="login-email-error" role="alert" className="text-coral-400 text-xs">{errors.email}</p>}
         </div>
         <div className="flex flex-col gap-2">
-          <label className="font-sans text-sm text-cream-200">Password</label>
+          <label htmlFor="login-password" className="font-sans text-sm text-cream-200">Password <span aria-hidden="true">*</span></label>
           <input
+            id="login-password"
             type="password"
             value={formData.password}
             onChange={e => setFormData({ ...formData, password: e.target.value })}
             placeholder="••••••••"
+            autoComplete="current-password"
+            aria-required="true"
             className="w-full px-4 py-3 bg-navy-800/50 border-2 border-navy-700 focus:border-teal-400 rounded-lg font-sans text-cream-100 outline-none transition-all focus:ring-2 focus:ring-teal-400/30"
           />
         </div>
         <button
           type="submit"
           disabled={status === 'loading'}
-          className="w-full py-3.5 bg-teal-400 hover:bg-teal-300 text-navy-950 rounded-xl font-bold transition-all shadow-lg shadow-teal-400/20"
+          className="w-full py-3.5 bg-teal-400 hover:bg-teal-300 text-navy-950 rounded-xl font-bold transition-all shadow-lg shadow-teal-400/20 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {status === 'loading' ? 'Signing in...' : 'Sign In'}
         </button>
         {status === 'error' && message && (
-          <p className="text-coral-400 text-sm text-center">{message}</p>
+          <p role="alert" className="text-coral-400 text-sm text-center">{message}</p>
         )}
       </form>
       <div className="flex justify-between mt-4">
-        <button onClick={onForgot} className="text-sm text-cream-300 hover:text-teal-400 transition-colors">Forgot password?</button>
-        <button onClick={onSwitch} className="text-sm text-teal-400 font-semibold hover:underline">Create account</button>
+        <button type="button" onClick={onForgot} className="text-sm text-cream-300 hover:text-teal-400 transition-colors">Forgot password?</button>
+        <button type="button" onClick={onSwitch} className="text-sm text-teal-400 font-semibold hover:underline">Create account</button>
       </div>
     </div>
   )
@@ -604,6 +620,14 @@ export default function App() {
     <MotionConfig reducedMotion="user">
     <div className="min-h-screen bg-navy-950 flex flex-col items-center relative overflow-x-hidden">
 
+      {/* Skip-to-main-content link — visible on focus only, WCAG 2.4.1 */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-6 focus:py-3 focus:bg-teal-400 focus:text-navy-950 focus:font-bold focus:rounded-xl focus:shadow-lg"
+      >
+        Skip to main content
+      </a>
+
       {/* Ambient background glow blobs */}
       <div className="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-teal-400/5 blur-[120px] rounded-full pointer-events-none" />
       <div className="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-coral-400/5 blur-[120px] rounded-full pointer-events-none" />
@@ -611,11 +635,12 @@ export default function App() {
       {/* Sticky header */}
       <Header session={session} onSignOut={handleSignOut} />
 
-      {/* ── View routing ── */}
+      {/* ── View routing — all content outlets — aria-label for landmarks ── */}
+      <main id="main-content" aria-label="Tenali main content" className="w-full">
 
       {/* Guest landing page */}
       {view === 'home' && !session && (
-        <div className="text-center pt-40 px-6">
+        <div className="text-center pt-40 px-6" role="main">
           <div className="inline-block px-4 py-1.5 bg-teal-400/10 border border-teal-400/20 rounded-full text-teal-400 text-sm font-semibold mb-8">Now in Private Beta</div>
           <h1 className="font-display text-7xl md:text-8xl text-cream-100 mb-8 font-bold tracking-tight">
             Hello <span className="text-teal-400">Tenali</span>
@@ -672,6 +697,7 @@ export default function App() {
         <ForgotPassword onBack={() => setCurrentView('login')} />
       )}
 
+      </main>
     </div>
     </MotionConfig>
   )
