@@ -33,9 +33,16 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run build
-      - name: Deploy to Vercel
+
+      - name: Deploy to Vercel via API
         run: |
-          npx vercel --prod --yes --no-wait --token=${{ secrets.VERCEL_TOKEN }} dist/
+          # Get files ready - use Vercel CLI with --no-gateway
+          npx vercel@latest --token ${{ secrets.VERCEL_TOKEN }} \
+            --prod \
+            --yes \
+            --no-wait \
+            --archive=tar \
+            dist/
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: team_exvQporvKDqfl7pMUao64iRl
