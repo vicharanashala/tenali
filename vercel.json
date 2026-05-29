@@ -5,6 +5,7 @@
   "installCommand": "npm install",
   "devCommand": "npm run dev",
   "rewrites": [
-    { "source": "/api/:path*", "destination": "/api/:path*" }
+    { "source": "/api/:path*", "destination": "/api/:path*" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
