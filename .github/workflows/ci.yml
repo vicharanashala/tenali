@@ -35,7 +35,7 @@ jobs:
       - run: npm run build
       - name: Deploy to Vercel
         run: |
-          npx vercel --prod --yes --token=${{ secrets.VERCEL_TOKEN }} dist/
+          npx vercel --prod --yes --no-wait --token=${{ secrets.VERCEL_TOKEN }} dist/
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: team_exvQporvKDqfl7pMUao64iRl
