@@ -6,8 +6,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 
-export default function TeacherDashboard({ session, onSignOut }) {
-  const navigate = useNavigate()
+export default function TeacherDashboard({ onSignOut }) {
   const [students, setStudents] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')

@@ -180,9 +180,6 @@ export default function LearningLoop({ theoremId, onComplete, onExit, userId }) 
   // Accumulated XP for this session
   const [totalXP, setTotalXP] = useState(0)
 
-  // Tracked XP for the spring animation (separate from displayed value)
-  const [displayXP, setDisplayXP] = useState(0)
-
   // Tracks whether the user has used a hint in the current stage
   const [hintWasUsed, setHintWasUsed] = useState(false)
 
@@ -218,14 +215,14 @@ export default function LearningLoop({ theoremId, onComplete, onExit, userId }) 
     }).catch(() => {})
   }, [userId, theoremId])
 
+  // Loading state
+  const [isLoading, setIsLoading] = useState(true)
+
   // ── Artificial load delay ───────────────────────────────────────────────
   useEffect(() => {
     const t = setTimeout(() => setIsLoading(false), 500)
     return () => clearTimeout(t)
   }, [])
-
-  // Loading state (local to this render, not React state — controlled by effect above)
-  const [isLoading, setIsLoading] = useState(true)
 
   // ── Auto-focus the input field whenever playing starts or stage changes ─
   useEffect(() => {
