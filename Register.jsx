@@ -346,7 +346,7 @@ export default function Register() {
         createdAt: Date.now(),
         view:      'dashboard',
       }
-      localStorage.setItem('tenali_session', JSON.stringify(session))
+      localStorage.setItem('math_session', JSON.stringify(session))
       setStep(4)
       setTimeout(() => navigate('/dashboard'), 1800)
     }

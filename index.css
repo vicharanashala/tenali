@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-navy-950: #06090f;
+    --color-navy-900: #0a1628;
+    --color-navy-800: #0f2040;
+    --color-navy-700: #1a3058;
+    --color-amber-400: #fbbf24;
+    --color-teal-400: #2dd4bf;
+    --color-cream-100: #fefcf3;
+    --color-coral-400: #fb7185;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-navy-950 text-cream-100 font-sans antialiased;
+  }
+}
+
+@layer components {
+  .theorem-title {
+    @apply font-display text-2xl font-semibold tracking-tight;
+  }
+
+  .question-text {
+    @apply font-sans text-cream-200 leading-relaxed;
+  }
+
+  .accent-correct {
+    @apply text-teal-400;
+  }
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  15% { transform: translateX(-8px); }
+  30% { transform: translateX(8px); }
+  45% { transform: translateX(-6px); }
+  60% { transform: translateX(6px); }
+  75% { transform: translateX(-3px); }
+  90% { transform: translateX(3px); }
+}
+
+@keyframes flash {
+  0% { opacity: 0.5; }
+  50% { opacity: 0.15; }
+  100% { opacity: 0; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes xp-tick {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+@keyframes hint-slide-up {
+  from { opacity: 0; transform: translateY(24px); max-height: 0; }
+  to { opacity: 1; transform: translateY(0); max-height: 200px; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0); }
+  50% { box-shadow: 0 0 0 8px rgba(45, 212, 191, 0.2); }
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+.animate-flash {
+  animation: flash 1.2s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out forwards;
+}
+
+.animate-xp-tick {
+  animation: xp-tick 0.4s ease-out;
+}
+
+.animate-hint-slide {
+  animation: hint-slide-up 0.5s ease-out forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+  .accent-warn {
+    @apply text-coral-400;
+  }
+}

@@ -14,16 +14,9 @@ import { useState, useEffect } from 'react'
 import { MotionConfig } from 'framer-motion'
 import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom'
 
-// ── Auth pages ───────────────────────────────────────────────────────────────
-import RoleSelect            from './pages/auth/RoleSelect'
-import StudentLogin           from './pages/auth/StudentLogin'
-import StudentRegister        from './pages/auth/StudentRegister'
-import TeacherLogin           from './pages/auth/TeacherLogin'
-import TeacherRegister        from './pages/auth/TeacherRegister'
-import TeacherDashboard       from './pages/teacher/TeacherDashboard'
-
-// ── Legacy auth component ────────────────────────────────────────────────────
-import GoogleLogin from './components/auth/GoogleLogin'
+// ── Auth pages (v0.3 – new OTP-based student auth pages) ─────────────────────
+import RegisterPage from './pages/auth/Register'
+import LoginPage    from './pages/auth/Login'
 
 // ── Legacy auth sub-components (still used by old view-based rendering) ──────
 import OTPInput      from './components/auth/OTPInput'
@@ -40,14 +33,13 @@ import Dashboard from './pages/dashboard/Dashboard'
 // SESSION MANAGEMENT
 // ─────────────────────────────────────────────────────────────────────────────
 
-const SESSION_KEY = 'tenali_session'
+const SESSION_KEY = 'math_session'
 
 function createSession(user) {
   const session = {
-    userId:    user.userId || user.id,
+    userId:    user.id,
     email:     user.email,
     name:      user.name,
-    role:      user.role || 'student',   // Google auth passes role explicitly
     createdAt: Date.now(),
     view:      'dashboard',
   }
@@ -269,18 +261,16 @@ function GuestLanding() {
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function App() {
-  const [session, setSession] = useState(() => getSession())
+  const [session, setSession] = useState(null)
   const [view, setView]       = useState('home')
   const [loading, setLoading] = useState(true)
   const [appError, setAppError] = useState(null)
 
-  // Keep view in sync when session changes
   useEffect(() => {
-    if (session) {
-      setView(s => s === 'home' ? (session.view || 'home') : s)
-    }
+    const s = getSession()
+    if (s) { setSession(s); setView(s.view || 'home') }
     setLoading(false)
-  }, [session])
+  }, [])
 
   useEffect(() => {
     const handler = (e) => {
@@ -347,33 +337,53 @@ export default function App() {
 
           <main id="main-content" aria-label="Tenali main content" className="w-full">
 
-            {/* ── React Router routes (v0.4 – role-based auth) ── */}
+            {/* ── React Router routes (v0.3+) ── */}
             <Routes>
-              <Route path="/" element={<RoleSelect />} />
-              <Route path="/student/register" element={<StudentRegister />} />
-              <Route path="/student/login"  element={<StudentLogin />} />
-              <Route path="/teacher/register" element={<TeacherRegister />} />
-              <Route path="/teacher/login"  element={<TeacherLogin />} />
+              <Route path="/"                   element={<HomeOrDashboard session={session} />} />
+              <Route path="/register"          element={<RegisterPage />} />
+              <Route path="/login"              element={<LoginPage />} />
               <Route
                 path="/dashboard"
                 element={session
-                  ? session.role === 'teacher'
-                      ? <Navigate to="/teacher/dashboard" replace />
-                      : <Dashboard session={session} onSignOut={handleSignOut} />
-                  : <Navigate to="/" replace />
-                }
-              />
-              <Route
-                path="/teacher/dashboard"
-                element={session
-                  ? session.role === 'teacher'
-                      ? <TeacherDashboard session={session} onSignOut={handleSignOut} />
-                      : <Navigate to="/dashboard" replace />
-                  : <Navigate to="/" replace />
+                  ? <Dashboard session={session} onSignOut={handleSignOut} />
+                  : <Navigate to="/login" replace />
                 }
               />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
+
+            {/* ── Legacy view-based rendering (old landing page CTAs) ── */}
+            {view === 'home' && !session && (
+              <div className="text-center pt-40 px-6">
+                <div className="inline-block px-4 py-1.5 bg-teal-400/10 border border-teal-400/20 rounded-full text-teal-400 text-sm font-semibold mb-8">Now in Private Beta</div>
+                <h1 className="font-display text-7xl md:text-8xl text-cream-100 mb-8 font-bold tracking-tight">
+                  Hello <span className="text-teal-400">Tenali</span>
+                </h1>
+                <p className="text-cream-300 text-lg md:text-xl max-w-xl mx-auto mb-12 font-sans font-light leading-relaxed">
+                  Where mathematics meets beauty. Join the exclusive circle of visual learners today.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <button onClick={() => setCurrentView('register')} className="px-12 py-4 bg-teal-400 text-navy-950 font-bold rounded-xl hover:bg-teal-300 hover:scale-105 transition-all shadow-xl shadow-teal-400/20">
+                    Create Account
+                  </button>
+                  <button onClick={() => setCurrentView('login')} className="px-12 py-4 border-2 border-teal-400 text-teal-400 font-bold rounded-xl hover:bg-teal-400/10 hover:scale-105 transition-all">
+                    Sign In
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {view === 'home' && session && (
+              <Home session={session} onExplore={() => setCurrentView('dashboard')} />
+            )}
+
+            {view === 'dashboard' && session && (
+              <Dashboard session={session} onSignOut={handleSignOut} />
+            )}
+
+            {view === 'login' && <LegacyLoginWrapper onSwitch={() => setCurrentView('register')} onForgot={() => setCurrentView('forgot')} />}
+            {view === 'register' && <LegacyRegisterWrapper onSwitch={() => setCurrentView('login')} onSuccess={() => { handleAuthSuccess(); setCurrentView('dashboard') }} />}
+            {view === 'forgot' && <ForgotPassword onBack={() => setCurrentView('login')} />}
 
           </main>
         </div>

@@ -1,0 +1,74 @@
+{
+  "id": "chinese-remainder",
+  "theorem": "Chinese Remainder Theorem",
+  "displayName": "Chinese Remainder Theorem",
+  "slug": "chinese-remainder-theorem",
+  "stageCount": 6,
+  "story": {
+    "intro": "Around 300 AD, the Chinese mathematician Sun Tzu asked: 'A number leaves remainder 2 when divided by 3, remainder 3 when divided by 5, and remainder 2 when divided by 7. What is the smallest number?' This puzzle — now called the Chinese Remainder Theorem — turns out to be secretly used in cryptography, error correction, and time-keeping in distributed systems.",
+    "theoremStatement": "If one has several congruences with pairwise coprime moduli, there exists a unique solution modulo the product of these moduli.",
+    "plainEnglish": "When remainders from different divisions seem to conflict, they actually work together perfectly to pinpoint exactly one number.",
+    "applications": [
+      "Cryptography: RSA and many encryption schemes use CRT to speed up modular exponentiation by reducing large calculations to smaller, independent ones",
+      "Error-correcting codes: Reed-Solomon codes (used in CDs, QR codes, satellites) work on the same CRT principle of reconstructing data from partial remainders",
+      "Time synchronization: Distributed computer systems use CRT-like logic to merge timestamps from clocks with different tick rates into one consistent clock"
+    ],
+    "completionBadge": "Sun Tzu's Heir"
+  },
+  "stages": [
+    {
+      "id": 1,
+      "type": "numeric",
+      "conceptLabel": "Reading remainders",
+      "conceptShown": "'Leaves remainder 2 when divided by 3' means x ≡ 2 (mod 3). Written as: x mod 3 = 2.",
+      "question": "If x ≡ 2 (mod 3), x ≡ 3 (mod 5), x ≡ 2 (mod 7), which of these numbers satisfies all three? 23, 52, 107, or 128?",
+      "hint": "Check each number mod 3, mod 5, and mod 7. The correct answer satisfies all three congruences simultaneously.",
+      "acceptedAnswers": ["23"]
+    },
+    {
+      "id": 2,
+      "type": "numeric",
+      "conceptLabel": "Building from two congruences",
+      "conceptShown": "x ≡ 2 (mod 3) and x ≡ 3 (mod 4). Numbers ≡ 2 mod 3: 2, 5, 8, 11, 14, 17, 20... Among these, which are ≡ 3 mod 4? 2 mod 4 = 2, 5 mod 4 = 1, 8 mod 4 = 0, 11 mod 4 = 3 ← found it! So x ≡ 11 (mod 12).",
+      "question": "Find the smallest x satisfying both x ≡ 1 (mod 4) and x ≡ 5 (mod 6).",
+      "hint": "List numbers ≡ 1 mod 4: 1, 5, 9, 13, 17, 21... Check which of these ≡ 5 mod 6.",
+      "acceptedAnswers": ["13"]
+    },
+    {
+      "id": 3,
+      "type": "numeric",
+      "conceptLabel": "The coprime condition",
+      "conceptShown": "For CRT to give a unique answer, the moduli must be coprime — they share no common factors. 4 and 6 share factor 2, so CRT doesn't guarantee a unique solution.",
+      "question": "True or false: CRT guarantees a unique solution for x ≡ 1 (mod 4) and x ≡ 1 (mod 6).",
+      "hint": "CRT only guarantees a unique solution when moduli are coprime (gcd = 1). What is gcd(4, 6)?",
+      "acceptedAnswers": ["false", "no", "f", "0"]
+    },
+    {
+      "id": 4,
+      "type": "numeric",
+      "conceptLabel": "Expanding to three congruences",
+      "conceptShown": "x ≡ 1 (mod 2) means x is odd. x ≡ 2 (mod 3) and x ≡ 3 (mod 5). Systematically: x ≡ 1 (mod 2), x ≡ 2 (mod 3) → smallest is 5. Check 5 mod 5 = 0, not 3. Next is 11: 11 mod 2 = 1, 11 mod 3 = 2, 11 mod 5 = 1, not 3. Next is 17: 17 mod 2 = 1, 17 mod 3 = 2, 17 mod 5 = 2, not 3. Next is 23: 23 mod 2 = 1, 23 mod 3 = 2, 23 mod 5 = 3 ✓",
+      "question": "Find the smallest x satisfying: x ≡ 1 (mod 2), x ≡ 2 (mod 3), x ≡ 3 (mod 5).",
+      "hint": "Start with x ≡ 1 (mod 2) and x ≡ 2 (mod 3). The combined modulus is 6. Start with 5 (mod 6 = 5 works for both). Now find the smallest x ≡ 5 (mod 6) that also satisfies x ≡ 3 (mod 5).",
+      "acceptedAnswers": ["23"]
+    },
+    {
+      "id": 5,
+      "type": "numeric",
+      "conceptLabel": "The general CRT method",
+      "conceptShown": "For x ≡ a (mod n) and x ≡ b (mod m) with gcd(n,m)=1: x = a × m × inv(m,n) + b × n × inv(n,m) (mod n×m), where inv(k,n) is the multiplicative inverse of k modulo n.",
+      "question": "For x ≡ 3 (mod 4) and x ≡ 2 (mod 7), the product of moduli is 4 × 7 = 28. Using the CRT construction, x = 3×7×inv(7,4) + 2×4×inv(4,7) mod 28. inv(7,4) means 7 mod 4 ≡ 3, find the inverse of 3 mod 4 (a number y such that 3y ≡ 1 mod 4). What is inv(3,4)?",
+      "hint": "3 × y ≡ 1 (mod 4). 3 × 1 = 3 mod 4. 3 × 2 = 6 mod 4 = 2. 3 × 3 = 9 mod 4 = 1. So inv(3,4) = 3.",
+      "acceptedAnswers": ["3"]
+    },
+    {
+      "id": 6,
+      "type": "numeric",
+      "conceptLabel": "Putting it together",
+      "conceptShown": "inv(7,4) = 3, inv(4,7) = 2 (since 4×2 = 8 ≡ 1 mod 7). x = 3×7×3 + 2×4×2 mod 28 = 63 + 16 mod 28 = 79 mod 28 = 23. Check: 23 mod 4 = 3 ✓, 23 mod 7 = 2 ✓",
+      "question": "Using the CRT formula from the previous stage: x = 3×7×3 + 2×4×2 mod 28 = 63 + 16 = 79. What is 79 mod 28?",
+      "hint": "79 ÷ 28 = 2 remainder 23. So 79 mod 28 = 23.",
+      "acceptedAnswers": ["23"]
+    }
+  ]
+}

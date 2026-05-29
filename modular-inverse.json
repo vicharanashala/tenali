@@ -1,0 +1,74 @@
+{
+  "id": "modular-inverse",
+  "theorem": "Modular Multiplicative Inverse",
+  "displayName": "Modular Multiplicative Inverse",
+  "slug": "modular-multiplicative-inverse",
+  "stageCount": 6,
+  "story": {
+    "intro": "Division doesn't work the same way in modular arithmetic — sometimes it doesn't exist at all. The modular multiplicative inverse of a mod m is the number x such that a × x ≡ 1 (mod m). It only exists when a and m are coprime. When it exists, it's the key to 'undoing' multiplication in the world of clocks and cycles — which is exactly why RSA encryption works: you encrypt with one number and decrypt with its inverse.",
+    "theoremStatement": "The modular multiplicative inverse of a modulo m exists if and only if gcd(a,m) = 1, and it can be found using the Extended Euclidean Algorithm.",
+    "plainEnglish": "In modular arithmetic, the inverse of a is the number that multiplies with a to give 1. If a and m share any factor other than 1, this inverse doesn't exist.",
+    "applications": [
+      "RSA encryption: To decrypt RSA, you compute m^ed mod n where e and d are multiplicative inverses modulo φ(n). If d didn't exist, decryption would be impossible",
+      "Linear congruences: Solving equations of the form ax ≡ b (mod m) requires the inverse of a modulo m when it exists",
+      "Error correction in QR codes: Reed-Solomon codes (used in all QR codes) use modular inverses to locate and correct data errors"
+    ],
+    "completionBadge": "Inverse Master"
+  },
+  "stages": [
+    {
+      "id": 1,
+      "type": "numeric",
+      "conceptLabel": "What is a modular inverse?",
+      "conceptShown": "The inverse of 3 mod 7 is the number x such that 3 × x ≡ 1 (mod 7). Check: 3×1=3 mod7, 3×2=6 mod7, 3×3=9 mod7=2, 3×4=12 mod7=5, 3×5=15 mod7=1 ← found it! So 5 is the inverse.",
+      "question": "Find the modular inverse of 3 mod 7 — the number x such that 3 × x ≡ 1 (mod 7).",
+      "hint": "Try multiplying 3 by each number 1 through 6 and find which gives remainder 1 when divided by 7. 3×5=15, 15 mod 7 = 1.",
+      "acceptedAnswers": ["5"]
+    },
+    {
+      "id": 2,
+      "type": "numeric",
+      "conceptLabel": "Using Extended Euclidean Algorithm",
+      "conceptShown": "For 3x ≡ 1 (mod 7): since gcd(3,7)=1, inverse exists. Extended Euclid: 7 = 2×3 + 1 → 1 = 7 − 2×3. So x ≡ −2 ≡ 5 mod 7. Inverse is 5.",
+      "question": "What is the modular inverse of 5 mod 11? Find x such that 5 × x ≡ 1 (mod 11).",
+      "hint": "5×1=5 mod11, 5×2=10, 5×3=15 mod11=4, 5×4=20 mod11=9, 5×5=25 mod11=3, 5×6=30 mod11=8, 5×7=35 mod11=2, 5×8=40 mod11=7, 5×9=45 mod11=1. So inverse is 9.",
+      "acceptedAnswers": ["9"]
+    },
+    {
+      "id": 3,
+      "type": "numeric",
+      "conceptLabel": "When the inverse doesn't exist",
+      "conceptShown": "Does inverse of 4 mod 8 exist? gcd(4, 8) = 4 ≠ 1. So no inverse exists. 4×x mod 8 can only give multiples of 4: 0, 4. Never 1.",
+      "question": "Does a modular inverse of 4 modulo 8 exist? Answer yes or no.",
+      "hint": "An inverse of 4 mod 8 means 4 × x ≡ 1 (mod 8). Since gcd(4,8) ≠ 1, no such x can exist. All multiples of 4 mod 8 give 0 or 4, never 1.",
+      "acceptedAnswers": ["no", "n", "false"]
+    },
+    {
+      "id": 4,
+      "type": "numeric",
+      "conceptLabel": "Inverse via extended Euclid",
+      "conceptShown": "For inverse of 7 mod 26: gcd(7,26)=1. 26 = 3×7 + 5, 7 = 1×5 + 2, 5 = 2×2 + 1. Back-substitute: 1 = 5−2×2 = 5−2(7−1×5) = 3×5−2×7 = 3(26−3×7)−2×7 = 3×26−11×7. So inverse of 7 mod 26 is −11 ≡ 15 mod 26. Check: 7×15=105 mod 26 = 105−4×26=1 ✓",
+      "question": "Find the inverse of 7 mod 26. Using extended Euclid: since 7×15 = 105 ≡ 1 (mod 26), the inverse is 15. Confirm: what is 105 mod 26?",
+      "hint": "105 ÷ 26 = 4 remainder 1. So 105 mod 26 = 1. ✓ The inverse of 7 mod 26 is indeed 15.",
+      "acceptedAnswers": ["1"]
+    },
+    {
+      "id": 5,
+      "type": "numeric",
+      "conceptLabel": "Solving linear congruences",
+      "conceptShown": "For 3x ≡ 5 (mod 7), multiply both sides by inverse of 3 (which is 5): x ≡ 5×5 ≡ 25 ≡ 4 (mod 7). Check: 3×4=12 mod7=5 ✓",
+      "question": "Solve for x: 3x ≡ 5 (mod 7). First find the inverse of 3 mod 7 (which is 5), then multiply both sides by it to get x.",
+      "hint": "The inverse of 3 mod 7 is 5. So x ≡ 5×5 ≡ 25 ≡ 4 (mod 7). Check: 3×4=12, 12 mod 7 = 5 ✓",
+      "acceptedAnswers": ["4"]
+    },
+    {
+      "id": 6,
+      "type": "numeric",
+      "conceptLabel": "The RSA connection",
+      "conceptShown": "In RSA, we pick e and d such that e×d ≡ 1 (mod φ(n)). If p=3, q=11, then n=33, φ(n)=20. We pick e=3 (coprime to 20). Then d is the inverse of 3 mod 20. 3×7=21 ≡ 1 mod 20, so d=7. Public key: (e,n)=(3,33). Private key: (d,n)=(7,33).",
+      "question": "In RSA setup: n=33, φ(n)=20, public exponent e=3. What private exponent d satisfies e×d ≡ 1 (mod 20)?",
+      "hint": "We need d such that 3×d ≡ 1 mod 20. 3×7=21 ≡ 1 mod 20. So d=7.",
+      "acceptedAnswers": ["7"]
+    }
+  ]
+}

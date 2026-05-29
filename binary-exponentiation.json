@@ -1,0 +1,74 @@
+{
+  "id": "binary-exponentiation",
+  "theorem": "Binary Exponentiation",
+  "displayName": "Fast Large Powers",
+  "slug": "binary-exponentiation",
+  "stageCount": 6,
+  "story": {
+    "intro": "What if I asked you to calculate 3^16 without a calculator? You could multiply 3 by itself 16 times, or you could notice that 16 in binary is 10000 — and use that structure to do it in just 5 multiplications. Binary exponentiation (also called 'exponentiation by squaring') is how your computer calculates 7^1000000 in milliseconds, and it's the backbone of RSA encryption, fast Fourier transforms, and graphics rendering.",
+    "theoremStatement": "For any integer a and non-negative integer n: a^n = (a^(n/2))^2 when n is even, and a^n = a × a^(n−1) when n is odd, reducing computation from O(n) to O(log n) multiplications.",
+    "plainEnglish": "Instead of multiplying a by itself n times, keep squaring and halving — you get the same result in roughly log(n) operations instead of n operations.",
+    "applications": [
+      "RSA encryption: Every time you see the padlock icon in your browser, your computer is using binary exponentiation to raise numbers to enormous powers modulo n",
+      "Fast Fourier Transform (FFT): The FFT algorithm — used in audio processing, image compression, and solving differential equations — uses binary exponentiation as its computational engine",
+      "Modular arithmetic in graphics: Computing smooth lighting and color gradients in game engines uses this algorithm thousands of times per frame"
+    ],
+    "completionBadge": "Power Calculator"
+  },
+  "stages": [
+    {
+      "id": 1,
+      "type": "numeric",
+      "conceptLabel": "Binary decomposition",
+      "conceptShown": "To compute 3^13, write 13 in binary: 13 = 1101₂ = 8 + 4 + 1. So 3^13 = 3^8 × 3^4 × 3^1. We compute 3^1, 3^2, 3^4, 3^8 by repeated squaring, then multiply the needed powers.",
+      "question": "Write the exponent 13 in binary. (Answer as a binary string, e.g., 1101)",
+      "hint": "13 in binary: 13 = 8 + 4 + 1 = 1101₂. You can verify: 1×8 + 1×4 + 0×2 + 1×1 = 13.",
+      "acceptedAnswers": ["1101", "1101b"]
+    },
+    {
+      "id": 2,
+      "type": "numeric",
+      "conceptLabel": "Repeated squaring",
+      "conceptShown": "To compute 2^10 using binary exponentiation: 10 = 1010₂. Build powers: 2^1 = 2, 2^2 = 4, 2^4 = 16, 2^8 = 256. Then 2^10 = 2^8 × 2^2 = 256 × 4 = 1024. Only 4 multiplications instead of 10!",
+      "question": "Compute 2^10 using binary exponentiation. We need 2^8 and 2^2, then multiply. What is 2^8 × 2^2?",
+      "hint": "2^8 = 256. 2^2 = 4. Multiply: 256 × 4 = 1024.",
+      "acceptedAnswers": ["1024"]
+    },
+    {
+      "id": 3,
+      "type": "numeric",
+      "conceptLabel": "Modular binary exponentiation",
+      "conceptShown": "In cryptography we always reduce modulo m. For 3^13 mod 7: binary 13=1101. Compute mod 7: 3^1≡3, 3^2≡9≡2, 3^4≡(3^2)²≡2²=4, 3^8≡4²=16≡2. Multiply: 3^13=3^8×3^4×3^1 ≡ 2×4×3 = 24 ≡ 3 (mod 7).",
+      "question": "Using binary exponentiation mod 13: compute 5^13 mod 13. Since 5^1 ≡ 5, 5^2 ≡ 25 ≡ 12, 5^4 ≡ 12² mod 13 = 144 mod 13 = 1, 5^8 ≡ 1² = 1. And 5^13 = 5^8 × 5^4 × 5^1. What is 1 × 1 × 5 mod 13?",
+      "hint": "5^4 ≡ 1 mod 13 (Fermat's Little Theorem!). So 5^8 ≡ 1. 5^13 = 5^8 × 5^4 × 5^1 ≡ 1 × 1 × 5 = 5 (mod 13).",
+      "acceptedAnswers": ["5"]
+    },
+    {
+      "id": 4,
+      "type": "numeric",
+      "conceptLabel": "Counting multiplications",
+      "conceptShown": "Naive method: a^n requires (n−1) multiplications. Binary exponentiation: O(log n) multiplications. For n=1000 (binary 1111101000), naive needs 999 multiplications. Binary needs only ~10.",
+      "question": "For n = 1000, approximately how many multiplications does binary exponentiation need? (log₂(1000) ≈ 10)",
+      "hint": "Binary exponentiation needs O(log₂ n) multiplications. log₂(1000) ≈ 10. So about 10 multiplications instead of 999.",
+      "acceptedAnswers": ["10", "10.0"]
+    },
+    {
+      "id": 5,
+      "type": "numeric",
+      "conceptLabel": "The recursive insight",
+      "conceptShown": "Even^odd split: a^13 = (a^6)^2 × a. a^6 = (a^3)^2. a^3 = (a^1)^2 × a. Recursively halving reduces the exponent fast. 13 → 6 → 3 → 1 → 0 (stop).",
+      "question": "Compute 2^5 using the recursive binary method. Break it down: 2^5 = (2^2)^2 × 2. First find 2^2, then square it, then multiply by 2.",
+      "hint": "2^2 = 4. Square it: 4^2 = 16. Multiply by 2: 16 × 2 = 32. So 2^5 = 32.",
+      "acceptedAnswers": ["32"]
+    },
+    {
+      "id": 6,
+      "type": "numeric",
+      "conceptLabel": "The real power: large exponents",
+      "conceptShown": "Computing 7^1000 mod 1000000007 (a common crypto scenario) is impossible naively. Binary exponentiation does it in ~10 squarings + ~5 multiplications. Each step halves the exponent or multiplies in the current bit.",
+      "question": "Using the binary exponentiation algorithm, how many multiplications are theoretically needed to compute a^n where n has k binary digits?",
+      "hint": "The number of bits in n is k = floor(log₂ n) + 1. Binary exponentiation needs at most 2×k multiplications (k squarings + at most k multiplications). So O(log n).",
+      "acceptedAnswers": ["log n", "o(log n)", "log2(n)", "O(log n)", "log n multiplications"]
+    }
+  ]
+}

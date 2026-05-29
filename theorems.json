@@ -1,0 +1,51 @@
+[
+  {
+    "id": "fermats-little",
+    "theorem": "Fermat's Little Theorem",
+    "coreIdea": "a^(p−1) ≡ 1 (mod p) when p is prime and a is not divisible by p — the foundation of modern cryptography.",
+    "slug": "fermats-little-theorem",
+    "illustration": "fermats-little"
+  },
+  {
+    "id": "handshake",
+    "theorem": "The Handshake Lemma",
+    "coreIdea": "In a party of n guests each shaking hands once with everyone else, the total handshakes = n(n−1)/2.",
+    "slug": "handshake-problem",
+    "illustration": "handshake"
+  },
+  {
+    "id": "chinese-remainder",
+    "theorem": "Chinese Remainder Theorem",
+    "coreIdea": "When remainders from different divisions are compatible, they together pinpoint exactly one number modulo the product.",
+    "slug": "chinese-remainder-theorem",
+    "illustration": "chinese-remainder"
+  },
+  {
+    "id": "coupon-collector",
+    "theorem": "Coupon Collector Problem",
+    "coreIdea": "On average, collecting n coupons requires about n × H_n draws — the last few are always the hardest.",
+    "slug": "coupon-collector-problem",
+    "illustration": "coupon-collector"
+  },
+  {
+    "id": "euclidean-algorithm",
+    "theorem": "The Euclidean Algorithm",
+    "coreIdea": "An ancient method to find GCD(a,b) efficiently by repeated remainders — still the backbone of modern cryptography.",
+    "slug": "euclidean-algorithm",
+    "illustration": "euclidean-algorithm"
+  },
+  {
+    "id": "modular-inverse",
+    "theorem": "Modular Multiplicative Inverse",
+    "coreIdea": "The number x satisfying a × x ≡ 1 (mod m) exists iff gcd(a,m)=1 — the key to RSA decryption.",
+    "slug": "modular-multiplicative-inverse",
+    "illustration": "modular-inverse"
+  },
+  {
+    "id": "binary-exponentiation",
+    "theorem": "Binary Exponentiation",
+    "coreIdea": "Computing a^n in O(log n) multiplications instead of O(n) by exploiting binary representation — used in every secure HTTPS connection.",
+    "slug": "binary-exponentiation",
+    "illustration": "binary-exponentiation"
+  }
+]

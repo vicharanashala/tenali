@@ -1,0 +1,90 @@
+{
+  "id": "banach-tarski",
+  "theorem": "Banach-Tarski Paradox",
+  "displayName": "Banach-Tarski Paradox",
+  "slug": "banach-tarski",
+  "stageCount": 7,
+  "story": {
+    "intro": "One of mathematics' most shocking results: it's theoretically possible to take a pea, split it into pieces, and reassemble those pieces into something the size of the Sun — without stretching or compressing a single atom. The Banach-Tarski paradox isn't a trick of physics. It's pure mathematics. Today, you'll see why it works.",
+    "theoremStatement": "A solid sphere can be decomposed and reassembled into two solid spheres identical to the original — using only 5 pieces.",
+    "plainEnglish": "In pure mathematics, volume is a mathematical abstraction — it doesn't correspond to physical matter. A sphere can be cut into 5 pieces, those pieces rotated and rearranged, and you get two spheres of the exact same volume as the original. In the physical world this is impossible. In mathematics, it follows from the axiom of choice.",
+    "applications": [
+      "Advanced set theory and measure theory rely on it to understand what 'size' really means in mathematics",
+      "It challenges assumptions in mathematical finance and economic modeling about infinite divisibility",
+      "Philosophers of mathematics use it to debate the relationship between mathematical objects and physical reality"
+    ],
+    "completionBadge": "Paradox Navigator"
+  },
+  "stages": [
+    {
+      "id": 1,
+      "type": "concept",
+      "question": "What does it mean for two sets to have the same cardinality?",
+      "expectedAnswer": "same size",
+      "acceptedAnswers": ["same size", "same number of elements", "equal size", "same cardinality", " bijection"],
+      "hint": "Two sets have the same cardinality when there's a one-to-one correspondence between their elements. What word describes this?",
+      "conceptShown": "Same cardinality = same 'size' in terms of element count — even if infinite",
+      "conceptLabel": "Cardinality basics"
+    },
+    {
+      "id": 2,
+      "type": "concept",
+      "question": "Is the set of natural numbers {1, 2, 3, ...} countable or uncountable?",
+      "expectedAnswer": "countable",
+      "acceptedAnswers": ["countable", "countably infinite", "countably"],
+      "hint": "Countable means you can list all elements one by one, even if the list is infinite. Can you start listing 1, 2, 3...?",
+      "conceptShown": "The natural numbers are countably infinite — you can enumerate them one by one",
+      "conceptLabel": "Countable infinity"
+    },
+    {
+      "id": 3,
+      "type": "concept",
+      "question": "The Banach-Tarski paradox uses a key axiom that allows arbitrary cuts. What is it called?",
+      "expectedAnswer": "axiom of choice",
+      "acceptedAnswers": ["axiom of choice", "choice axiom", "axiom of choice (ac)"],
+      "hint": "This axiom lets you 'choose' one element from each of infinitely many sets simultaneously. It's called the... of... (two words).",
+      "conceptShown": "The Axiom of Choice — the enabling axiom behind Banach-Tarski",
+      "conceptLabel": "The Axiom of Choice"
+    },
+    {
+      "id": 4,
+      "type": "concept",
+      "question": "In the Banach-Tarski paradox, what happens to volume? Is it preserved, stretched, or compressed?",
+      "expectedAnswer": "not preserved",
+      "acceptedAnswers": ["not preserved", "not conserved", "volume is not preserved", "not constant", "paradoxical increase"],
+      "hint": "The paradox says one sphere becomes two spheres of the same volume as the original. That means volume went from 1 to 2 — so it's definitely not preserved. What happened to it?",
+      "conceptShown": "Volume is NOT preserved — one sphere becomes two equal spheres! This is the 'paradoxical' part",
+      "conceptLabel": "Volume is not preserved"
+    },
+    {
+      "id": 5,
+      "type": "concept",
+      "question": "What does the Banach-Tarski paradox demonstrate about mathematical volume versus physical volume?",
+      "expectedAnswer": "they are different",
+      "acceptedAnswers": ["they are different", "they differ", "mathematical volume differs", "they are not the same", "different concepts", "not physical", "mathematical only"],
+      "hint": "The paradox only works in pure mathematics, not in the physical world. What does that tell you about mathematical volume vs physical volume?",
+      "conceptShown": "Mathematical volume (in set theory) and physical volume behave differently — the paradox reveals this distinction",
+      "conceptLabel": "Mathematical vs physical volume"
+    },
+    {
+      "id": 6,
+      "type": "concept",
+      "question": "The Banach-Tarski paradox shows that spheres can be decomposed into a finite number of pieces. How many?",
+      "expectedAnswer": "5",
+      "acceptedAnswers": ["5", "five"],
+      "hint": "The original proof used 5 pieces. A later simpler version used just 2. What number was the original?",
+      "conceptShown": "The original Banach-Tarski proof used exactly 5 pieces",
+      "conceptLabel": "The minimal pieces"
+    },
+    {
+      "id": 7,
+      "type": "challenge",
+      "question": "Final challenge: The Banach-Tarski paradox is paradoxical because it violates our intuition about volume conservation. But in pure mathematics, what actually happens when you decompose a sphere into 5 pieces and reassemble?",
+      "expectedAnswer": "two spheres",
+      "acceptedAnswers": ["two spheres", "2 spheres", "two identical spheres", "2 identical spheres", "duplicate", "duplicated sphere", "two equal spheres"],
+      "hint": "The theorem literally says: one sphere can be cut and reassembled into TWO spheres identical to the original.",
+      "conceptShown": "You get two spheres, each of the same volume as the original — one pea becomes two peas the size of the Sun",
+      "conceptLabel": "The paradox, complete"
+    }
+  ]
+}

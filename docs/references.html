@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FLN References — All Sources</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #faf8f3;
+      --bg-secondary: #f4f0e8;
+      --bg-card: #ffffff;
+      --border: #e2d9c8;
+      --text-primary: #1a1520;
+      --text-secondary: #5c5040;
+      --text-muted: #9c8e7a;
+      --accent-amber: #c9943a;
+      --accent-amber-dim: #b08030;
+      --accent-teal: #1a8a7e;
+      --accent-india: #d06b2e;
+      --accent-global: #2563a8;
+      --accent-research: #7b4db5;
+      --accent-report: #2d7a3a;
+      --accent-newspaper: #c04040;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+    }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,248,243,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+    nav ul {
+      max-width: 860px; margin: 0 auto;
+      display: flex; align-items: center; gap: 4px;
+      list-style: none; height: 60px;
+    }
+    nav a {
+      text-decoration: none; color: var(--text-secondary);
+      font-size: 13px; font-weight: 500;
+      padding: 6px 14px; border-radius: 8px; transition: all 0.2s;
+    }
+    nav a:hover { background: var(--bg-secondary); color: var(--text-primary); }
+    nav a.active { background: var(--bg-secondary); color: var(--accent-amber); font-weight: 600; }
+    .nav-brand { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--accent-amber); margin-right: auto; text-decoration: none; }
+
+    .page-hero {
+      background: linear-gradient(160deg, #faf8f3 0%, #f0ead8 60%, #faf8f3 100%);
+      padding: 60px 24px 48px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; letter-spacing: 3px;
+      color: var(--accent-amber); text-transform: uppercase; margin-bottom: 16px;
+    }
+    .page-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(24px, 4vw, 44px); font-weight: 900;
+      color: var(--text-primary); margin-bottom: 12px;
+    }
+    .page-hero p {
+      font-size: 14px; color: var(--text-secondary); max-width: 540px; margin: 0 auto;
+    }
+
+    .content {
+      max-width: 860px; margin: 0 auto;
+      padding: 48px 24px;
+    }
+
+    .category {
+      margin-bottom: 48px;
+    }
+    .category-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px; font-weight: 700;
+      color: var(--text-primary);
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--accent-amber);
+      margin-bottom: 20px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .category-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; font-weight: 500;
+      background: var(--bg-secondary);
+      color: var(--text-muted);
+      padding: 2px 10px; border-radius: 20px;
+    }
+
+    .ref-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      transition: all 0.2s;
+    }
+    .ref-card:hover {
+      border-color: var(--accent-amber-dim);
+      box-shadow: 0 2px 10px rgba(201,148,58,0.08);
+    }
+    .ref-title {
+      font-size: 14px; font-weight: 600;
+      color: var(--text-primary); margin-bottom: 6px;
+      line-height: 1.45;
+    }
+    .ref-meta {
+      font-size: 11px; font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+    .ref-link {
+      display: inline-block;
+      font-size: 12px;
+      color: var(--accent-teal);
+      text-decoration: none;
+      word-break: break-all;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .ref-link:hover { text-decoration: underline; }
+
+    .footer {
+      text-align: center; padding: 48px 24px;
+      border-top: 1px solid var(--border); margin-top: 24px;
+    }
+    .footer p { font-size: 12px; color: var(--text-muted); }
+    a { color: var(--accent-teal); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <ul>
+      <a class="nav-brand" href="index.html">FLN Timeline</a>
+      <a href="index.html">Timeline</a>
+      <a href="references.html" class="active">References</a>
+    </ul>
+  </nav>
+
+  <div class="page-hero">
+    <div class="hero-eyebrow">All Sources</div>
+    <h1>FLN References & Sources</h1>
+    <p>Academic papers, government reports, newspaper articles, and international body publications cited in this timeline.</p>
+  </div>
+
+  <div class="content">
+
+    <!-- Government of India -->
+    <div class="category">
+      <div class="category-title">
+        <span>🇮🇳</span> Government of India Reports
+        <span class="category-count">10 sources</span>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">National Education Policy (NEP) 2020</div>
+        <div class="ref-meta">Government of India · Ministry of Education · 2020</div>
+        <a class="ref-link" href="https://www.education.gov.in/sites/upload_files/mhrd/files/NEP_Final_English_0.pdf" target="_blank">https://www.education.gov.in/.../NEP_Final_English_0.pdf</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">NIPUN Bharat Guidelines — National Mission for Foundational Literacy and Numeracy</div>
+        <div class="ref-meta">Ministry of Education · Government of India · 2021</div>
+        <a class="ref-link" href="https://www.education.gov.in/sites/upload_files/mhrd/files/NIPUN%20BHARAT%20GUIDELINES.pdf" target="_blank">https://www.education.gov.in/.../NIPUN%20BHARAT%20GUIDELINES.pdf</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">National Curriculum Framework for Foundational Stage (NCF-FS) 2022</div>
+        <div class="ref-meta">NCERT · Ministry of Education · 2022</div>
+        <a class="ref-link" href="https://ncert.gov.in/curriculum.php" target="_blank">https://ncert.gov.in/curriculum.php</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">National Curriculum Framework (NCF) 2023</div>
+        <div class="ref-meta">NCERT · Ministry of Education · 2023</div>
+        <a class="ref-link" href="https://ncert.gov.in/curriculum.php" target="_blank">https://ncert.gov.in/curriculum.php</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">NAS 2021 — National Achievement Survey Results</div>
+        <div class="ref-meta">NCERT · Ministry of Education · 2021</div>
+        <a class="ref-link" href="https://nas.gov.in/report-card/nas-2021" target="_blank">https://nas.gov.in/report-card/nas-2021</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">District Primary Education Program (DPEP) — Report</div>
+        <div class="ref-meta">Government of India · MHRD · 1993</div>
+        <a class="ref-link" href="https://www.education.gov.in/" target="_blank">https://www.education.gov.in/</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">FLN Study Report — NUEPA</div>
+        <div class="ref-meta">NUEPA · Ministry of Education · 2022</div>
+        <a class="ref-link" href="https://www.education.gov.in/sites/upload_files/mhrd/files/pdfs/FLN_Study_Report.pdf" target="_blank">https://www.education.gov.in/.../FLN_Study_Report.pdf</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">NIPUN Bharat Mission Dashboard</div>
+        <div class="ref-meta">Ministry of Education · Government of India</div>
+        <a class="ref-link" href="https://flnm.education.gov.in" target="_blank">https://flnm.education.gov.in</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">NIPUN Bharat Official Page</div>
+        <div class="ref-meta">Ministry of Education · Government of India</div>
+        <a class="ref-link" href="https://www.education.gov.in/nipun-bharat" target="_blank">https://www.education.gov.in/nipun-bharat</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">NIPUN Bharat Phase 2 Implementation Document</div>
+        <div class="ref-meta">Ministry of Education · GoI · 2025</div>
+        <a class="ref-link" href="https://nipunbharat.education.gov.in/" target="_blank">https://nipunbharat.education.gov.in/</a>
+      </div>
+    </div>
+
+    <!-- ASER Reports -->
+    <div class="category">
+      <div class="category-title">
+        <span>📊</span> ASER Reports (Pratham)
+        <span class="category-count">12 sources</span>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">ASER 2024 — Annual Status of Education Report</div>
+        <div class="ref-meta">Pratham · ASER Centre · 2024</div>
+        <a class="ref-link" href="https://asercentre.org/wp-content/uploads/2022/12/ASER_2024_Final-Report_13_2_24.pdf" target="_blank">https://asercentre.org/.../ASER_2024_Final-Report_13_2_24.pdf</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">ASER 2024 — National Findings Summary</div>
+        <div class="ref-meta">Pratham · ASER Centre · 2024</div>
+        <a class="ref-link" href="https://asercentre.org/wp-content/uploads/2022/12/ASER-2024-National-findings.pdf" target="_blank">https://asercentre.org/.../ASER-2024-National-findings.pdf</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">ASER 2023 — Annual Status of Education Report</div>
+        <div class="ref-meta">Pratham · ASER Centre · 2023</div>
+        <a class="ref-link" href="https://asercentre.org/aser-reports/" target="_blank">https://asercentre.org/aser-reports/</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">ASER 2022 — Annual Status of Education Report</div>
+        <div class="ref-meta">Pratham · ASER Centre · 2022</div>
+        <a class="ref-link" href="https://asercentre.org/aser-reports/" target="_blank">https://asercentre.org/aser-reports/</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">ASER 2019 — Beyond Basics (Youth & Adults)</div>
+        <div class="ref-meta">Pratham · ASER Centre · 2019</div>
+        <a class="ref-link" href="https://asercentre.org/aser-reports/" target="_blank">https://asercentre.org/aser-reports/</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">ASER 2014 — Learning Levels Stagnating Despite Enrollment</div>
+        <div class="ref-meta">Pratham · ASER Centre · 2014</div>
+        <a class="ref-link" href="https://asercentre.org/aser-reports/" target="_blank">https://asercentre.org/aser-reports/</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">ASER 2008 — National Expansion Confirms Crisis</div>
+        <div class="ref-meta">Pratham · ASER Centre · 2008</div>
+        <a class="ref-link" href="https://asercentre.org/aser-reports/" target="_blank">https://asercentre.org/aser-reports/</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">ASER 2005 — First ASER Report Launched</div>
+        <div class="ref-meta">Pratham · ASER Centre · 2005</div>
+        <a class="ref-link" href="https://asercentre.org/aser-reports/" target="_blank">https://asercentre.org/aser-reports/</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">ASER Centre — All Reports Archive</div>
+        <div class="ref-meta">Pratham · ASER Centre</div>
+        <a class="ref-link" href="https://asercentre.org/aser-reports/" target="_blank">https://asercentre.org/aser-reports/</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">ASER Centre — Official Website</div>
+        <div class="ref-meta">Pratham</div>
+        <a class="ref-link" href="https://asercentre.org/" target="_blank">https://asercentre.org/</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">ASER 2024 — Pratham Media Highlights</div>
+        <div class="ref-meta">Pratham · 2024</div>
+        <a class="ref-link" href="https://www.pratham.org/" target="_blank">https://www.pratham.org/</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">Pratham — Every Child In School and Learning Well</div>
+        <div class="ref-meta">Pratham Education Foundation</div>
+        <a class="ref-link" href="https://www.pratham.org/" target="_blank">https://www.pratham.org/</a>
+      </div>
+    </div>
+
+    <!-- International Bodies -->
+    <div class="category">
+      <div class="category-title">
+        <span>🌍</span> International Organizations
+        <span class="category-count">10 sources</span>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">UNESCO — Global Education Monitoring Report on Foundational Learning (2023)</div>
+        <div class="ref-meta">UNESCO · GEM Report · 2023</div>
+        <a class="ref-link" href="https://www.unesco.org/gem-report/en/2023" target="_blank">https://www.unesco.org/gem-report/en/2023</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">UNESCO — Foundational Learning — GEM Report</div>
+        <div class="ref-meta">UNESCO · GEM Report</div>
+        <a class="ref-link" href="https://www.unesco.org/gem-report/en/foundational-learning" target="_blank">https://www.unesco.org/gem-report/en/foundational-learning</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">World Bank — Ending Learning Poverty (2023)</div>
+        <div class="ref-meta">World Bank · 2023</div>
+        <a class="ref-link" href="https://www.worldbank.org/en/topic/education/brief/ending-learning-poverty" target="_blank">https://www.worldbank.org/.../ending-learning-poverty</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">World Bank — Learning Poverty Report (2022)</div>
+        <div class="ref-meta">World Bank · 2022</div>
+        <a class="ref-link" href="https://www.worldbank.org/en/topic/education/brief/learning-poverty" target="_blank">https://www.worldbank.org/.../learning-poverty</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">World Bank — Rapid Measurement of FLN in India (2023)</div>
+        <div class="ref-meta">World Bank · SIEF Trust Fund · 2023</div>
+        <a class="ref-link" href="https://www.worldbank.org/en/programs/sief-trust-fund/publication/rapid-measurement-of-foundational-literacy-and-numeracy" target="_blank">https://www.worldbank.org/.../rapid-measurement-of-foundational-literacy-and-numeracy</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">World Bank — Education & Skills</div>
+        <div class="ref-meta">World Bank</div>
+        <a class="ref-link" href="https://www.worldbank.org/en/topic/education" target="_blank">https://www.worldbank.org/en/topic/education</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">OECD — PISA 2022 Results</div>
+        <div class="ref-meta">OECD · PISA · 2023</div>
+        <a class="ref-link" href="https://www.oecd.org/pisa/" target="_blank">https://www.oecd.org/pisa/</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">UNESCO — Sustainable Development Goal 4 (Quality Education)</div>
+        <div class="ref-meta">United Nations · SDG 4</div>
+        <a class="ref-link" href="https://sdgs.un.org/goals/goal4" target="_blank">https://sdgs.un.org/goals/goal4</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">UNESCO — Jomtien Declaration (Education for All)</div>
+        <div class="ref-meta">UNESCO · Thailand · 1990</div>
+        <a class="ref-link" href="https://unesdoc.unesco.org/ak/documents/c1051/en/4731e0b.pdf" target="_blank">https://unesdoc.unesco.org/.../4731e0b.pdf</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">World Bank — Mission 1 Billion FLN Coalition (2024)</div>
+        <div class="ref-meta">World Bank · UNESCO · Education Cannot Wait · 2024</div>
+        <a class="ref-link" href="https://www.worldbank.org/en/topic/education" target="_blank">https://www.worldbank.org/en/topic/education</a>
+      </div>
+    </div>
+
+    <!-- Academic Papers -->
+    <div class="category">
+      <div class="category-title">
+        <span>📚</span> Academic & Research Papers
+        <span class="category-count">8 sources</span>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">Cognitive Load Theory — Sweller (1988)</div>
+        <div class="ref-meta">J. Sweller · Educational Psychology · 1988</div>
+        <a class="ref-link" href="https://www.sciencedirect.com/science/article/pii/0362161288900296" target="_blank">https://www.sciencedirect.com/.../0362161288900296</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">Teaching at the Right Level — Banerjee, Duflo et al. (J-PAL)</div>
+        <div class="ref-meta">Abhijit Banerjee & Esther Duflo · MIT · J-PAL</div>
+        <a class="ref-link" href="https://www.povertyactionlab.org/" target="_blank">https://www.povertyactionlab.org/</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">"Exploring Behavioral Patterns and Predicting Academic Success" — Springer (2025)</div>
+        <div class="ref-meta">Lecture Notes in Social Networks · Springer · 2025</div>
+        <a class="ref-link" href="https://link.springer.com/chapter/10.1007/978-3-031-99997-0_15" target="_blank">https://link.springer.com/.../10.1007/978-3-031-99997-0_15</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">"Beyond Static Question Banks via LLM-Automated Graph Construction" — arXiv:2602.00020 (2026)</div>
+        <div class="ref-meta">arXiv Preprint · 2026</div>
+        <a class="ref-link" href="https://doi.org/10.48550/arXiv.2602.00020" target="_blank">https://doi.org/10.48550/arXiv.2602.00020</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">"Enhancing Foundational Literacy and Numeracy in India: Key Strategies and Insights"</div>
+        <div class="ref-meta">iDreamEducation · 2024</div>
+        <a class="ref-link" href="https://www.idreameducation.org/blog/foundational-literacy-numeracy-fln-india/" target="_blank">https://www.idreameducation.org/...foundational-literacy-numeracy-fln-india/</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">Central Square Foundation — CSF's Approach to FLN System Reform</div>
+        <div class="ref-meta">Central Square Foundation · India</div>
+        <a class="ref-link" href="https://www.centralsquarefoundation.org/" target="_blank">https://www.centralsquarefoundation.org/</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">HundrED — Pratham's TaRL among world's top education innovations (2018)</div>
+        <div class="ref-meta">HundrED · Finland · 2018</div>
+        <a class="ref-link" href="https://humind.org/" target="_blank">https://humind.org/</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">"Improving FLN in India: Key Strategies and Insights" — iDreamEducation (2024)</div>
+        <div class="ref-meta">iDreamEducation · 2024</div>
+        <a class="ref-link" href="https://www.idreameducation.org/" target="_blank">https://www.idreameducation.org/</a>
+      </div>
+    </div>
+
+    <!-- Media & News -->
+    <div class="category">
+      <div class="category-title">
+        <span>📰</span> Newspaper Articles & Media Coverage
+        <span class="category-count">5 sources</span>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">"India's Education Emergency" — The Economist (2010)</div>
+        <div class="ref-meta">The Economist · 2010</div>
+        <a class="ref-link" href="https://www.economist.com/briefing/2010/09/02/an-education-emergency" target="_blank">https://www.economist.com/briefing/2010/09/02/an-education-emergency</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">"PISA Results Reveal India's Learning Crisis" — The Hindu (2006)</div>
+        <div class="ref-meta">The Hindu · 2006</div>
+        <a class="ref-link" href="https://www.thehindu.com/" target="_blank">https://www.thehindu.com/</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">ASER Coverage — The Hindu (multiple years)</div>
+        <div class="ref-meta">The Hindu</div>
+        <a class="ref-link" href="https://www.thehindu.com/education/aser-2024-india-learning-crisis/article" target="_blank">https://www.thehindu.com/education/</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">"NIPUN Bharat: India's FLN Mission" — Indian Express (2021)</div>
+        <div class="ref-meta">Indian Express · 2021</div>
+        <a class="ref-link" href="https://indianexpress.com/" target="_blank">https://indianexpress.com/</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">"Learning Poverty and FLN" — The Wire (2023)</div>
+        <div class="ref-meta">The Wire · 2023</div>
+        <a class="ref-link" href="https://thewire.in/education" target="_blank">https://thewire.in/education</a>
+      </div>
+    </div>
+
+    <!-- Foundations & NGOs -->
+    <div class="category">
+      <div class="category-title">
+        <span>🤝</span> Foundations & NGOs
+        <span class="category-count">5 sources</span>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">Pratham Education Foundation — Official</div>
+        <div class="ref-meta">Pratham · India</div>
+        <a class="ref-link" href="https://www.pratham.org/" target="_blank">https://www.pratham.org/</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">Central Square Foundation — FLN System Reform</div>
+        <div class="ref-meta">CSF · India</div>
+        <a class="ref-link" href="https://www.centralsquarefoundation.org/" target="_blank">https://www.centralsquarefoundation.org/</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">J-PAL — Poverty Action Lab — FLN RCTs</div>
+        <div class="ref-meta">MIT · J-PAL</div>
+        <a class="ref-link" href="https://www.povertyactionlab.org/" target="_blank">https://www.povertyactionlab.org/</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">Smile Foundation — "Reinventing Foundational Learning: FLN in India" (2024)</div>
+        <div class="ref-meta">Smile Foundation · India · 2024</div>
+        <a class="ref-link" href="https://www.smilefoundationindia.org/blog/reinventing-foundations-fln-in-india/" target="_blank">https://www.smilefoundationindia.org/.../reinventing-foundations-fln-in-india/</a>
+      </div>
+
+      <div class="ref-card">
+        <div class="ref-title">Education Cannot Wait — Global FLN Coalition</div>
+        <div class="ref-meta">Education Cannot Wait · UN · Global</div>
+        <a class="ref-link" href="https://www.educationcannotwait.org/" target="_blank">https://www.educationcannotwait.org/</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <p>All references sourced from publicly available government reports, academic publications, and international organization databases.<br>Last updated: May 2026</p>
+  </div>
+
+</body>
+</html>
