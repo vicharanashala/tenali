@@ -373,6 +373,15 @@ function useTimer() {
  */
 const STORAGE_KEY = 'gymQuizHistory_v1'
 const MAX_HISTORY = 500
+const SUPPORTED_GYMS = [
+  'Gym Decimals',
+  'Functions Gym',
+  'DotProducts Gym',
+  'Fractions-add-gym',
+  'LinearEquations-Gym',
+  'Indices-Gym',
+  'Polynomials Gym',
+]
 
 function loadHistory() {
   try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]') } catch { return [] }
@@ -49639,6 +49648,8 @@ function ProgressTrackerApp({ onBack }) {
   const [page, setPage] = useState(0)
   const [selectedPoint, setSelectedPoint] = useState(null)
   const [allHistory, setAllHistory] = useState([])
+
+  useEffect(() => { setAllHistory(loadHistory()) }, [])
 
   const gymRecords = useMemo(
     () => allHistory.filter(r => r.gymName === selectedGym),
