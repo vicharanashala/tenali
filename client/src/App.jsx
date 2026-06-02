@@ -96,8 +96,15 @@ function AuthMenu() {
   useEffect(() => {
     const onKey = e => { if (e.key === 'Escape') { setOpen(false); setShowLogin(false); setError('') } }
     window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
+    const onNav = e => { setOpen(false) }
+    window.addEventListener('tenali-navigate', onNav)
+    return () => { window.removeEventListener('keydown', onKey); window.removeEventListener('tenali-navigate', onNav) }
   }, [])
+
+  const navigateTo = (mode) => {
+    window.dispatchEvent(new CustomEvent('tenali-navigate', { detail: { mode } }))
+    setOpen(false)
+  }
 
   const submit = async (e) => {
     if (e && e.preventDefault) e.preventDefault()
@@ -167,7 +174,7 @@ function AuthMenu() {
               <>
                 <button
                   type="button"
-                  onClick={() => { setMode('trackProgress'); setOpen(false) }}
+                  onClick={() => navigateTo('trackProgress')}
                   style={{ width: '100%', textAlign: 'left', padding: '10px 12px', borderRadius: 6, background: 'transparent', border: 'none', color: 'var(--clr-text)', cursor: 'pointer', fontSize: '0.95rem' }}
                   onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)' }}
                   onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
@@ -35513,6 +35520,13 @@ function TenthApp({ onBack }) {
 function App() {
   // Currently selected quiz mode (null = home menu, or key like 'gk', 'addition', etc.)
   const [mode, setMode] = useState(null)
+
+  // Listen for navigation events from AuthMenu
+  useEffect(() => {
+    const onNav = (e) => { setMode(e.detail.mode) }
+    window.addEventListener('tenali-navigate', onNav)
+    return () => window.removeEventListener('tenali-navigate', onNav)
+  }, [])
 
   // Current theme: 'dark' or 'light'
   // Initialized from localStorage with fallback to 'dark'
