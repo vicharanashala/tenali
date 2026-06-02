@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FLN Products &amp; Platforms</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #faf8f3;
+      --bg-secondary: #f0ece0;
+      --bg-card: #ffffff;
+      --bg-card-alt: #f5f2ea;
+      --border: #e0d9c8;
+      --text-primary: #1e1e2e;
+      --text-secondary: #5a5a6e;
+      --text-muted: #8b8b9e;
+      --accent-amber: #c07830;
+      --accent-teal: #1a8a8a;
+      --accent-india: #d4581a;
+      --accent-global: #2563a8;
+      --accent-open: #2e7a3e;
+      --accent-ai: #7c4db8;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+    a { color: var(--accent-teal); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      background: rgba(250,248,243,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.1rem; color: var(--accent-amber); }
+    .nav-brand span { color: var(--text-primary); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--text-muted); font-size: 0.875rem; font-weight: 500; letter-spacing: 0.03em; text-transform: uppercase; }
+    .nav-links a:hover { color: var(--accent-teal); text-decoration: none; }
+    .nav-links a.active { color: var(--accent-teal); }
+
+    .hero {
+      background: linear-gradient(135deg, #e8f0f8 0%, #f0ece0 50%, #faf8f3 100%);
+      padding: 72px 24px 56px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 3px; color: var(--accent-amber); text-transform: uppercase; margin-bottom: 20px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(26px, 5vw, 50px); font-weight: 900; line-height: 1.1; margin-bottom: 18px; color: var(--text-primary); }
+    .hero p { font-size: 15px; color: var(--text-secondary); max-width: 680px; margin: 0 auto; }
+
+    .main { max-width: 960px; margin: 0 auto; padding: 0 24px 72px; }
+
+    .intro-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      margin: 40px 0;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    }
+    .intro-icon { font-size: 2rem; flex-shrink: 0; }
+    .intro-box p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.8; }
+    .intro-box em { color: var(--accent-teal); font-style: normal; }
+
+    /* ── Section header ── */
+    .section-header { display: flex; align-items: center; gap: 14px; margin: 56px 0 28px; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; color: var(--text-primary); white-space: nowrap; }
+    .section-line { flex: 1; height: 1px; background: var(--border); }
+
+    /* ── Cards grid ── */
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.1); transform: translateY(-2px); }
+
+    .card-img { width: 100%; height: 150px; object-fit: cover; display: block; }
+    .card-body { padding: 20px; }
+    .card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+    .card-icon { font-size: 1.4rem; }
+    .card-badge { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 3px 8px; border-radius: 4px; flex-shrink: 0; }
+    .badge-india { background: rgba(212,88,26,0.1); color: var(--accent-india); }
+    .badge-global { background: rgba(37,99,168,0.1); color: var(--accent-global); }
+    .badge-open { background: rgba(46,122,62,0.1); color: var(--accent-open); }
+    .badge-ai { background: rgba(124,77,184,0.1); color: var(--accent-ai); }
+
+    .card-title { font-size: 0.92rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; line-height: 1.4; }
+    .card-desc { font-size: 0.78rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 12px; }
+    .card-link { font-size: 0.78rem; font-weight: 600; color: var(--accent-teal); }
+    .card-link::before { content: '🔗 '; font-size: 0.7rem; }
+    .card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
+    .tag { font-size: 0.65rem; font-weight: 600; padding: 2px 7px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .tag.pedagogy { background: rgba(212,88,26,0.1); color: var(--accent-india); }
+    .tag.adaptive { background: rgba(37,99,168,0.1); color: var(--accent-global); }
+    .tag.analytics { background: rgba(124,77,184,0.1); color: var(--accent-ai); }
+    .tag.open-source { background: rgba(46,122,62,0.1); color: var(--accent-open); }
+
+    /* ── Comparison table — enhanced ── */
+    .comparison-table-wrap { margin-top: 8px; overflow-x: auto; }
+    .comparison-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.8rem; background: var(--bg-card); border-radius: 14px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+
+    .comparison-table thead tr th:first-child { border-top-left-radius: 14px; }
+    .comparison-table thead tr th:last-child { border-top-right-radius: 14px; }
+
+    .comparison-table th {
+      text-align: left;
+      padding: 14px 18px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #ffffff;
+      background: var(--accent-teal);
+    }
+    .comparison-table th:first-child { background: var(--accent-amber); }
+    .comparison-table td {
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+      vertical-align: middle;
+    }
+    .comparison-table tbody tr:last-child td { border-bottom: none; }
+    .comparison-table tbody tr:hover td { background: rgba(192,120,48,0.03); }
+    .comparison-table tbody tr:hover td:first-child { background: rgba(192,120,48,0.05); }
+
+    .check-icon { color: #2e7a3e; font-size: 1rem; }
+    .cross-icon { color: #c42b2b; font-size: 1rem; }
+    .partial-icon { color: var(--accent-amber); font-size: 1rem; }
+    .check-label { color: #2e7a3e; font-weight: 600; font-size: 0.78rem; }
+    .cross-label { color: #c42b2b; font-weight: 600; font-size: 0.78rem; }
+    .partial-label { color: var(--accent-amber); font-weight: 600; font-size: 0.78rem; }
+    .cell-highlight { background: rgba(192,120,48,0.04); font-weight: 600; color: var(--text-primary); }
+
+    /* ── Principles grid ── */
+    .principles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
+    .principle-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 22px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    .principle-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent-amber); font-weight: 600; margin-bottom: 8px; }
+    .principle-title { font-size: 0.86rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+    .principle-desc { font-size: 0.77rem; color: var(--text-muted); line-height: 1.6; }
+
+    footer { background: var(--bg-secondary); border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; }
+    footer p { font-size: 0.8rem; color: var(--text-muted); }
+
+    @media (max-width: 640px) {
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: 0.75rem; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .intro-box { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand"><span>FLN</span>Research</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="timeline.html">Timeline</a></li>
+    <li><a href="references.html">References</a></li>
+    <li><a href="products.html" class="active">Products</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">Platforms &amp; Tools</div>
+  <h1>FLN Products &amp; Platforms</h1>
+  <p>Existing platforms, tools, and interventions in the FLN space — categorized by type, with comparisons and links to documentation.</p>
+</div>
+
+<div class="main">
+
+  <div class="intro-box">
+    <div class="intro-icon">🛠️</div>
+    <p><strong>Scope:</strong> This page surveys the existing FLN product landscape — from open-source learning platforms to adaptive engines, assessment tools, and analytics dashboards. It covers <em>products referenced in FLN research</em> and is not a product page for Tenali itself. Tenali's specific architecture and feature set are documented in the <strong>research-report.md</strong> on the main platform repository.</p>
+  </div>
+
+  <!-- ── SECTION 1: FLN PRODUCTS ── -->
+  <div class="section-header">
+    <h2 class="section-title">FLN Platforms &amp; Products</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="cards-grid">
+
+    <div class="card">
+      <img class="card-img" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80" alt="Khan Academy Kids learning" />
+      <div class="card-body">
+        <div class="card-header">
+          <span class="card-icon">🎓</span>
+          <span class="card-badge badge-global">Global</span>
+        </div>
+        <div class="card-title">Khan Academy Kids</div>
+        <div class="card-desc">Free adaptive learning app for ages 2–8, covering math, reading, logic, and socio-emotional learning. 50+ million downloads. The global benchmark for FLN product design.</div>
+        <a class="card-link" href="https://khanacademy.org/kids" target="_blank">khanacademy.org/kids</a>
+        <div class="card-tags">
+          <span class="tag adaptive">Adaptive</span>
+          <span class="tag open-source">Open Source</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="https://images.unsplash.com/photo-1531482615713-819af1debac7?w=600&q=80" alt="Oppia learning platform" />
+      <div class="card-body">
+        <div class="card-header">
+          <span class="card-icon">🧩</span>
+          <span class="card-badge badge-open">Open Source</span>
+        </div>
+        <div class="card-title">Oppia</div>
+        <div class="card-desc">Free, open-source adaptive learning platform focused on underserved communities. Uses "explorations" with adaptive feedback. Active development on GitHub. Adopted in India for FLN remediation.</div>
+        <a class="card-link" href="https://github.com/oppia/oppia" target="_blank">github.com/oppia/oppia</a>
+        <div class="card-tags">
+          <span class="tag adaptive">Adaptive</span>
+          <span class="tag open-source">Open Source</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" alt="BYJU'S ed-tech" />
+      <div class="card-body">
+        <div class="card-header">
+          <span class="card-icon">📱</span>
+          <span class="card-badge badge-india">India</span>
+        </div>
+        <div class="card-title">BYJU'S</div>
+        <div class="card-desc">India's largest ed-tech platform. Adaptive engine uses spaced repetition + concept mapping. Teacher dashboard shows heat maps of concept mastery gaps. Cautionary design for FLN contexts (aggressive pacing).</div>
+        <a class="card-link" href="https://www.byjus.com" target="_blank">byjus.com</a>
+        <div class="card-tags">
+          <span class="tag adaptive">Adaptive</span>
+          <span class="tag analytics">Analytics</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="media/duolingo.png" alt="Duolingo app" />
+      <div class="card-body">
+        <div class="card-header">
+          <span class="card-icon">🦜</span>
+          <span class="card-badge badge-global">Global</span>
+        </div>
+        <div class="card-title">Duolingo</div>
+        <div class="card-desc">Uses spaced repetition with "strength" meter and gamified "hearts" (lives) system. Teacher dashboard shows individual progress. Lesson-level difficulty adjusts based on error rate. Relevant for Tenali's gamification design.</div>
+        <a class="card-link" href="https://www.duolingo.com" target="_blank">duolingo.com</a>
+        <div class="card-tags">
+          <span class="tag adaptive">Adaptive</span>
+          <span class="tag analytics">Analytics</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&q=80" alt="Tenali FLN platform" />
+      <div class="card-body">
+        <div class="card-header">
+          <span class="card-icon">🧠</span>
+          <span class="card-badge badge-ai">AI-Powered</span>
+        </div>
+        <div class="card-title">Tenali (Tenali FLN Platform)</div>
+        <div class="card-desc">Adaptive regression-based FLN platform for ages 10–16. Story-based theorem delivery with adaptive difficulty regression. Teacher analytics dashboard. Targets the "extended FLN window" acknowledged by NIPUN Bharat Phase 2.</div>
+        <a class="card-link" href="https://github.com/sudarshansudarshan/jinal-deploy" target="_blank">github.com/sudarshansudarshan/jinal-deploy</a>
+        <div class="card-tags">
+          <span class="tag adaptive">Adaptive</span>
+          <span class="tag analytics">Analytics</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=600&q=80" alt="DIKSHA platform" />
+      <div class="card-body">
+        <div class="card-header">
+          <span class="card-icon">📊</span>
+          <span class="card-badge badge-india">India</span>
+        </div>
+        <div class="card-title">DIKSHA — National Digital Infrastructure for Teachers</div>
+        <div class="card-desc">India's national ed-tech platform for teacher training and FLN content delivery. Hosts NIPUN Bharat training modules. Used by 1.2+ crore teachers and students. Key delivery channel for NIPUN Bharat Phase 2.</div>
+        <a class="card-link" href="https://diksha.gov.in" target="_blank">diksha.gov.in</a>
+        <div class="card-tags">
+          <span class="tag pedagogy">Pedagogy</span>
+          <span class="tag analytics">Analytics</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&q=80" alt="Moodle LMS" />
+      <div class="card-body">
+        <div class="card-header">
+          <span class="card-icon">🏫</span>
+          <span class="card-badge badge-open">Open Source</span>
+        </div>
+        <div class="card-title">Moodle</div>
+        <div class="card-desc">The world's dominant open-source Learning Management System (LMS). Used by universities and schools globally. Extensive plugin ecosystem includes adaptive learning features.</div>
+        <a class="card-link" href="https://github.com/moodle/moodle" target="_blank">github.com/moodle/moodle</a>
+        <div class="card-tags">
+          <span class="tag open-source">Open Source</span>
+          <span class="tag analytics">Analytics</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="media/teach-for-all.png" alt="Teach For All network" />
+      <div class="card-body">
+        <div class="card-header">
+          <span class="card-icon">🌍</span>
+          <span class="card-badge badge-global">Global</span>
+        </div>
+        <div class="card-title">Teach For All Network</div>
+        <div class="card-desc">Global network of independent non-profit organizations recruiting future leaders as teachers in under-resourced schools. Active in 40+ countries. Each program addresses FLN as part of educational equity work.</div>
+        <a class="card-link" href="https://teachforall.org" target="_blank">teachforall.org</a>
+        <div class="card-tags">
+          <span class="tag pedagogy">Pedagogy</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── SECTION 2: COMPARISON TABLE — enhanced ── -->
+  <div class="section-header">
+    <h2 class="section-title">Platform Comparison</h2>
+    <div class="section-line"></div>
+  </div>
+  <p style="font-size: 0.83rem; color: var(--text-muted); margin-bottom: 16px;">How the major FLN platforms compare on key dimensions relevant to Tenali's design decisions.</p>
+  <div class="comparison-table-wrap">
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Platform</th>
+          <th>Regression Adaptive</th>
+          <th>Story-Based</th>
+          <th>FLN Ages 10–16</th>
+          <th>Teacher Dashboard</th>
+          <th>Open Source</th>
+          <th>Hint System</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="cell-highlight"><strong>Khan Academy Kids</strong></td>
+          <td><span class="check-icon">✔</span> <span class="check-label">Mastery-based</span></td>
+          <td><span class="partial-icon">●</span> <span class="partial-label">Partial</span></td>
+          <td><span class="cross-icon">✘</span> <span class="cross-label">Ages 2–8 only</span></td>
+          <td><span class="check-icon">✔</span> <span class="check-label">Yes</span></td>
+          <td><span class="check-icon">✔</span> <span class="check-label">Yes</span></td>
+          <td><span class="check-icon">✔</span> <span class="check-label">3-level hints</span></td>
+        </tr>
+        <tr>
+          <td class="cell-highlight"><strong>Oppia</strong></td>
+          <td><span class="check-icon">✔</span> <span class="check-label">Yes</span></td>
+          <td><span class="check-icon">✔</span> <span class="check-label">Yes</span></td>
+          <td><span class="partial-icon">●</span> <span class="partial-label">Partial</span></td>
+          <td><span class="cross-icon">✘</span> <span class="cross-label">Limited</span></td>
+          <td><span class="check-icon">✔</span> <span class="check-label">Yes</span></td>
+          <td><span class="check-icon">✔</span> <span class="check-label">Yes</span></td>
+        </tr>
+        <tr>
+          <td class="cell-highlight"><strong>BYJU'S</strong></td>
+          <td><span class="check-icon">✔</span> <span class="check-label">Yes</span></td>
+          <td><span class="check-icon">✔</span> <span class="check-label">Yes</span></td>
+          <td><span class="check-icon">✔</span> <span class="check-label">Yes</span></td>
+          <td><span class="check-icon">✔</span> <span class="check-label">Yes (heat maps)</span></td>
+          <td><span class="cross-icon">✘</span> <span class="cross-label">No</span></td>
+          <td><span class="partial-icon">●</span> <span class="partial-label">Partial</span></td>
+        </tr>
+        <tr>
+          <td class="cell-highlight"><strong>Duolingo</strong></td>
+          <td><span class="check-icon">✔</span> <span class="check-label">Spaced repetition</span></td>
+          <td><span class="partial-icon">●</span> <span class="partial-label">Stories only</span></td>
+          <td><span class="partial-icon">●</span> <span class="partial-label">Partial</span></td>
+          <td><span class="check-icon">✔</span> <span class="check-label">Yes</span></td>
+          <td><span class="cross-icon">✘</span> <span class="cross-label">No</span></td>
+          <td><span class="check-icon">✔</span> <span class="check-label">Yes</span></td>
+        </tr>
+        <tr>
+          <td class="cell-highlight"><strong>DIKSHA</strong></td>
+          <td><span class="cross-icon">✘</span> <span class="cross-label">No</span></td>
+          <td><span class="partial-icon">●</span> <span class="partial-label">Partial</span></td>
+          <td><span class="check-icon">✔</span> <span class="check-label">Yes</span></td>
+          <td><span class="partial-icon">●</span> <span class="partial-label">Partial</span></td>
+          <td><span class="cross-icon">✘</span> <span class="cross-label">Government</span></td>
+          <td><span class="cross-icon">✘</span> <span class="cross-label">No</span></td>
+        </tr>
+        <tr>
+          <td class="cell-highlight" style="background: rgba(192,120,48,0.08);"><strong style="color: var(--accent-amber);">Tenali</strong> <span style="font-size:0.65rem;background:var(--accent-amber-bg,rgba(192,120,48,0.12));color:var(--accent-amber);padding:2px 6px;border-radius:4px;text-transform:uppercase;letter-spacing:0.05em;">★ This Site</span></td>
+          <td><span class="check-icon">✔</span> <span class="check-label">Regression engine</span></td>
+          <td><span class="check-icon">✔</span> <span class="check-label">Story-first</span></td>
+          <td><span class="check-icon">✔</span> <span class="check-label">Ages 10–16</span></td>
+          <td><span class="check-icon">✔</span> <span class="check-label">v0.46–v0.50</span></td>
+          <td><span class="check-icon">✔</span> <span class="check-label">Yes (planned)</span></td>
+          <td><span class="check-icon">✔</span> <span class="check-label">3-level hints</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── SECTION 3: PEDAGOGICAL FRAMEWORKS ── -->
+  <div class="section-header">
+    <h2 class="section-title">FLN Pedagogical Frameworks</h2>
+    <div class="section-line"></div>
+  </div>
+  <p style="font-size: 0.83rem; color: var(--text-muted); margin-bottom: 16px;">Evidence-based principles that should inform any FLN product design, drawn from research literature and Indian government frameworks.</p>
+  <div class="principles-grid">
+
+    <div class="principle-card">
+      <div class="principle-num">01</div>
+      <div class="principle-title">CPA Approach (Concrete → Pictorial → Abstract)</div>
+      <div class="principle-desc">Start with physical/manipulable representations, move to visual, then formal notation. Maps to Tenali's story intro (concrete) → formal theorem (abstract) progression.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-num">02</div>
+      <div class="principle-title">Contextual Scaffolding</div>
+      <div class="principle-desc">Math concepts must be anchored in real-world scenarios before formalization. Story-based contexts increase test scores ~20% vs. traditional instruction.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-num">03</div>
+      <div class="principle-title">Zone of Proximal Development (ZPD)</div>
+      <div class="principle-desc">Optimal learning happens just above current mastery level. Regression-based systems preserve this by backing off when students struggle.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-num">04</div>
+      <div class="principle-title">Narrative-Driven Concept Introduction</div>
+      <div class="principle-desc">Embed theorems within story arcs: protagonist faces problem → mathematical reasoning → resolution. Character investment reduces math anxiety.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-num">05</div>
+      <div class="principle-title">Progressive Formalization</div>
+      <div class="principle-desc">Optimal pedagogical arc: Story → Guided Example → Independent Practice → Real-world Application. Maps to Tenali's Stage 1 structure.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-num">06</div>
+      <div class="principle-title">Cognitive Load Theory (CLT)</div>
+      <div class="principle-desc">Struggling at too-high difficulty causes anxiety and disengagement. Regression preserves dignity — the theoretical foundation for why regression works.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-num">07</div>
+      <div class="principle-title">Dual-Coding Theory</div>
+      <div class="principle-desc">Combining verbal narrative + visual imagery improves retention over text alone. Tenali's story intro + visual coding context activates both channels.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-num">08</div>
+      <div class="principle-title">Hint-First, Regression-Second</div>
+      <div class="principle-desc">Scaffold before retreating. Hints first (1 wrong answer), regression only on repeated failure (3rd wrong attempt). Maintains student agency.</div>
+    </div>
+
+  </div>
+
+  <!-- ── SECTION 4: TEACHER DASHBOARD TIERS ── -->
+  <div class="section-header">
+    <h2 class="section-title">Teacher Dashboard — Recommended Tiers</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="principles-grid">
+
+    <div class="principle-card">
+      <div class="principle-num">Tier 1</div>
+      <div class="principle-title">Must-Have — Actionable Immediately</div>
+      <div class="principle-desc">Student completion rate, mastery score per algorithm/topic (0–100), regression count per session, last active timestamp, alert status.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-num">Tier 2</div>
+      <div class="principle-title">Diagnostic — For Deep Dive</div>
+      <div class="principle-desc">Questions attempted vs. correct first-try rate, time spent per stage, stage-by-stage progression timeline, XP history chart.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-num">Tier 3</div>
+      <div class="principle-title">Systemic — Cohort/Class Level</div>
+      <div class="principle-desc">Cohort mastery heat map, common failure points across cohort, completion funnel, cohort comparison.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-num">Alert Types</div>
+      <div class="principle-title">When to Notify Teacher</div>
+      <div class="principle-desc">5+ regressions/session (in-app + email), same stage stalled 3+ sessions (in-app), inactive 7+ days (in-app + email), accuracy &lt;40% on rolling window (in-app).</div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  <p>Research compiled for <strong>Jinal Gupta</strong> · IIT Ropar · Under Prof. Sudarshan Iyengar</p>
+</footer>
+
+</body>
+</html>

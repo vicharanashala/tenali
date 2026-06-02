@@ -61,6 +61,11 @@ app.use(express.json());
 // Static file serving: Serve built React/Vue client
 app.use(express.static(clientDistPath));
 
+// ─── FLN Research Site (/research) ──────────────────────────────────────────
+const flnResearchPath = path.join(clientDistPath, 'research');
+app.get('/research', (_req, res) => { res.sendFile(path.join(flnResearchPath, 'index.html')); });
+app.use('/research', express.static(flnResearchPath));
+
 // ─── Auth (MongoDB + JWT) ────────────────────────────────────────────────────
 // Adds /api/auth/login and /api/auth/me. Hardcoded users are seeded into
 // MongoDB on startup. If Mongo is unreachable the rest of the server still

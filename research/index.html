@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foundational Literacy & Numeracy — Research Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #faf8f3;
+      --bg-secondary: #f0ece0;
+      --bg-card: #ffffff;
+      --bg-card-alt: #f5f2ea;
+      --border: #e0d9c8;
+      --text-primary: #1e1e2e;
+      --text-secondary: #5a5a6e;
+      --text-muted: #8b8b9e;
+      --accent-amber: #c07830;
+      --accent-amber-light: #f0c070;
+      --accent-amber-bg: rgba(192,120,48,0.08);
+      --accent-teal: #1a8a8a;
+      --accent-teal-bg: rgba(26,138,138,0.08);
+      --accent-india: #d4581a;
+      --accent-global: #2563a8;
+      --accent-research: #7c4db8;
+      --accent-report: #2e7a3e;
+      --accent-newspaper: #c42b2b;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+    a { color: var(--accent-teal); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      background: rgba(250,248,243,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.1rem; color: var(--accent-amber); }
+    .nav-brand span { color: var(--text-primary); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--text-muted); font-size: 0.875rem; font-weight: 500; letter-spacing: 0.03em; text-transform: uppercase; }
+    .nav-links a:hover { color: var(--accent-teal); text-decoration: none; }
+    .nav-links a.active { color: var(--accent-teal); }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(26,138,138,0.72) 0%, rgba(30,30,46,0.85) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 80px 24px;
+      max-width: 860px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: rgba(255,255,255,0.8);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 6vw, 52px);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      color: #ffffff;
+    }
+    .hero p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.9);
+      max-width: 600px;
+      line-height: 1.8;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+    .stat { text-align: left; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--accent-amber-light);
+      line-height: 1;
+    }
+    .stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.75); margin-top: 4px; }
+
+    /* ── Section layouts ── */
+    .section { max-width: 960px; margin: 0 auto; padding: 72px 24px; }
+    .section + .section { padding-top: 0; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .section-icon { font-size: 1.6rem; }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .section-line { flex: 1; height: 1px; background: var(--border); }
+
+    /* ── FLN Definition ── */
+    .definition-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    }
+    .definition-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      min-height: 280px;
+    }
+    .definition-content { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+    .definition-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--accent-amber);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .definition-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+    .definition-content p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 12px; }
+    .definition-content strong { color: var(--text-primary); }
+
+    /* ── Stats band ── */
+    .stats-band {
+      background: linear-gradient(135deg, #1a8a8a 0%, #1e6070 100%);
+      padding: 48px 24px;
+    }
+    .stats-band-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      text-align: center;
+    }
+    .stats-band .stat-num { color: #ffffff; font-size: 2.4rem; }
+    .stats-band .stat-label { color: rgba(255,255,255,0.8); font-size: 0.78rem; }
+    .stats-band .stat-divider { width: 1px; background: rgba(255,255,255,0.2); align-self: stretch; }
+
+    /* ── Problem cards ── */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .problem-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    }
+    .problem-icon { font-size: 1.8rem; margin-bottom: 14px; }
+    .problem-title { font-size: 0.9rem; font-weight: 700; margin-bottom: 10px; }
+    .problem-desc { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.7; }
+    .problem-stat {
+      display: inline-block;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--accent-india);
+      margin-bottom: 6px;
+    }
+
+    /* ── Timeline preview ── */
+    .timeline-preview { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+    .timeline-preview-header {
+      background: var(--bg-card-alt);
+      padding: 20px 28px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .timeline-preview-header h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; }
+    .timeline-preview-header span { font-size: 0.75rem; color: var(--text-muted); }
+    .timeline-preview-events { padding: 24px 28px; }
+    .event-row {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .event-row:last-child { border-bottom: none; }
+    .event-year {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent-amber);
+      font-weight: 600;
+      min-width: 38px;
+      padding-top: 2px;
+    }
+    .event-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+    .event-text { font-size: 0.83rem; color: var(--text-secondary); line-height: 1.5; }
+    .event-text strong { color: var(--text-primary); }
+
+    /* ── Current state ── */
+    .current-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .current-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    }
+    .current-card h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 10px; color: var(--text-primary); }
+    .current-card p { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.7; }
+
+
+
+    footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+    }
+    footer p { font-size: 0.8rem; color: var(--text-muted); }
+
+    @media (max-width: 768px) {
+      .definition-card { grid-template-columns: 1fr; }
+      .definition-img { min-height: 200px; }
+      .stats-band-inner { grid-template-columns: repeat(2, 1fr); }
+      .problem-grid { grid-template-columns: 1fr; }
+      .current-grid { grid-template-columns: 1fr; }
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand"><span>FLN</span>Research</div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="timeline.html">Timeline</a></li>
+    <li><a href="references.html">References</a></li>
+    <li><a href="products.html">Products</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1400&q=80" alt="Children learning" />
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">1955 — 2025 · Global &amp; India</div>
+    <h1>Foundational Literacy<br>&amp; Numeracy (FLN)</h1>
+    <p>From UNESCO's first literacy campaigns to India's NIPUN Bharat Mission — the movement to ensure every child can read, write, and count by the end of Grade 3. And why 270 million of them still can't.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">270M</div>
+        <div class="stat-label">Children affected globally</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">57%</div>
+        <div class="stat-label">Class 3 students below FLN in India</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">2026–27</div>
+        <div class="stat-label">NIPUN Bharat target year</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- What is FLN -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-icon">📖</span>
+    <h2 class="section-title">What is FLN?</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="definition-card">
+    <img class="definition-img" src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&q=80" alt="Children studying together" />
+    <div class="definition-content">
+      <div class="definition-eyebrow">Definition</div>
+      <h2>Reading, Writing &amp; Arithmetic<br>at the Right Time</h2>
+      <p><strong>Foundational Literacy and Numeracy (FLN)</strong> is the ability to read and understand a simple text, and perform basic arithmetic operations — by the end of Grade 3 (ages 8–9). It's the threshold below which a child cannot make further progress in education.</p>
+      <p>Research from World Bank, UNESCO, and India's own NEP 2020 is unambiguous: <strong>children who don't achieve FLN by Grade 3 rarely catch up</strong>. Yet in India, 57% of Class 3 students haven't achieved it (NAS 2021).</p>
+      <p>The FLN window doesn't close at Grade 3 — NIPUN Bharat Phase 2 now extends to Classes 4–8 for older students still missing foundations.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Stats band -->
+<div class="stats-band">
+  <div class="stats-band-inner">
+    <div class="stat">
+      <div class="stat-num">57%</div>
+      <div class="stat-label">of Class 3 students in India haven't achieved FLN (NAS 2021)</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">40%</div>
+      <div class="stat-label">of rural Class 3 children can't read a Class 1 text (ASER 2024)</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">57%</div>
+      <div class="stat-label">of Class 3 students score below 50% in math (NAS 2021)</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">250M</div>
+      <div class="stat-label">children targeted by NIPUN Bharat Mission</div>
+    </div>
+  </div>
+</div>
+
+<!-- The Problem -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-icon">⚠️</span>
+    <h2 class="section-title">The FLN Crisis in Numbers</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="problem-icon">📉</div>
+      <div class="problem-stat">57%</div>
+      <div class="problem-title">Learning Gap in Class 3</div>
+      <div class="problem-desc">NAS 2021 (3.8M students, 1.18 lakh schools) reveals Grade 3 averaging just 59% in language and 57% in mathematics — the most authoritative evidence of India's FLN gap.</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">🏙️</div>
+      <div class="problem-stat">Rural–Urban</div>
+      <div class="problem-title">Widening Divide</div>
+      <div class="problem-desc">ASER 2024 confirms a persistent rural-urban gap. Digital divide adds a new dimension — children without smartphone access are left further behind.</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">😔</div>
+      <div class="problem-stat">COVID</div>
+      <div class="problem-title">Historic Setback</div>
+      <div class="problem-desc">ASER 2021 showed the first ever decline in average learning levels in India — a catastrophic COVID-generated setback. Recovery is fragile and uneven.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Timeline Preview -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-icon">📅</span>
+    <h2 class="section-title">7 Decades of FLN History</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="timeline-preview">
+    <div class="timeline-preview-header">
+      <h3>Abridged Timeline — Key Milestones</h3>
+      <span>1955 – 2025</span>
+    </div>
+    <div class="timeline-preview-events">
+      <div class="event-row">
+        <div class="event-year">1955</div>
+        <div class="event-dot" style="background:#2563a8"></div>
+        <div class="event-text"><strong>UNESCO launches first global literacy campaigns</strong> — framing literacy as a fundamental human right.</div>
+      </div>
+      <div class="event-row">
+        <div class="event-year">1990</div>
+        <div class="event-dot" style="background:#2563a8"></div>
+        <div class="event-text"><strong>Education for All — Jomtien Conference</strong> — 180 countries set learning improvement goals.</div>
+      </div>
+      <div class="event-row">
+        <div class="event-year">2008</div>
+        <div class="event-dot" style="background:#d4581a"></div>
+        <div class="event-text"><strong>ASER goes national</strong> — India's learning crisis revealed. Large proportions of Class 5 students can't read Class 2 text.</div>
+      </div>
+      <div class="event-row">
+        <div class="event-year">2015</div>
+        <div class="event-dot" style="background:#2563a8"></div>
+        <div class="event-text"><strong>EFA goals missed</strong> — UNESCO confirms enrollment gains didn't translate to learning improvement. "Learning poverty" formally adopted.</div>
+      </div>
+      <div class="event-row">
+        <div class="event-year">2020</div>
+        <div class="event-dot" style="background:#d4581a"></div>
+        <div class="event-text"><strong>NEP 2020 declares FLN a "national priority"</strong> — First new NEP in 34 years. Explicitly: children who don't achieve FLN by Grade 3 rarely catch up.</div>
+      </div>
+      <div class="event-row">
+        <div class="event-year">2021</div>
+        <div class="event-dot" style="background:#d4581a"></div>
+        <div class="event-text"><strong>NIPUN Bharat Mission launched</strong> — India's national FLN mission targeting 250 million children, delivery via DIKSHA platform.</div>
+      </div>
+      <div class="event-row">
+        <div class="event-year">2025</div>
+        <div class="event-dot" style="background:#d4581a"></div>
+        <div class="event-text"><strong>NIPUN Bharat Phase 2</strong> — Extends FLN to Classes 4–8, acknowledging the gap extends beyond Grade 3.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Current State -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-icon">🌐</span>
+    <h2 class="section-title">Current State &amp; Open Problems</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="current-grid">
+    <div class="current-card">
+      <h4>🏛️ Government Infrastructure</h4>
+      <p>NCF-FS 2022 (play-based, CPA approach) and NIPUN Bharat Phase 2 (extended to Classes 4–8) represent significant policy progress. PARAKH established as national assessment body. DIKSHA delivers training at scale. Implementation quality remains uneven across states.</p>
+    </div>
+    <div class="current-card">
+      <h4>🌍 Global Learning Crisis</h4>
+      <p>World Bank's Learning Poverty Initiative commits $2B+ to 50+ countries. UNICEF FLN Hub provides evidence synthesis. 270 million children globally still affected. India is the single largest contributor. Post-COVID recovery is fragile.</p>
+    </div>
+    <div class="current-card">
+      <h4">🔧 The Assessment Gap</h4>
+      <p>India lacks a continuous national FLN assessment system. UDISE+ collects school infrastructure data but not learning outcomes. ASER is citizen-led and annual — powerful but not government-adopted for program tracking. PARAKH's 2025 FLN results are a first step.</p>
+    </div>
+    <div class="current-card">
+      <h4>💻 Technology as Double-Edged Sword</h4>
+      <p>COVID accelerated digital FLN delivery (Khan Academy Kids: 50M+ downloads; Oppia: active open-source platform). But digital divide remains real — ASER 2018 showed significant rural children without smartphone access. Tech-enabled FLN risks leaving the most vulnerable behind.</p>
+    </div>
+    <div class="current-card">
+      <h4>🔬 Research Frontier</h4>
+      <p>Adaptive learning research (personalized question banks, knowledge graphs, LLM-driven generation) is advancing rapidly. But FLN-specific adaptive regression systems for ages 10–16 remain underexplored — the space Tenali is designed to address.</p>
+    </div>
+    <div class="current-card">
+      <h4>🎯 Tenali's Position</h4>
+      <p>Tenali targets ages 10–16 — the "extended FLN window" now acknowledged by NIPUN Bharat Phase 2. Story-based adaptive regression approach addresses the gap between early primary FLN (ages 3–8) and secondary remediation (ages 14–18) for students who fell through the cracks.</p>
+    </div>
+  </div>
+</div>
+
+
+
+<footer>
+  <p>Research compiled for <strong>Jinal Gupta</strong> · IIT Ropar · Under Prof. Sudarshan Iyengar</p>
+</footer>
+
+</body>
+</html>

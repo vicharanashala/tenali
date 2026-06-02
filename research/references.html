@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FLN Research References</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #faf8f3;
+      --bg-secondary: #f0ece0;
+      --bg-card: #ffffff;
+      --bg-card-alt: #f5f2ea;
+      --border: #e0d9c8;
+      --text-primary: #1e1e2e;
+      --text-secondary: #5a5a6e;
+      --text-muted: #8b8b9e;
+      --accent-amber: #c07830;
+      --accent-teal: #1a8a8a;
+      --accent-india: #d4581a;
+      --accent-global: #2563a8;
+      --accent-research: #7c4db8;
+      --accent-report: #2e7a3e;
+      --accent-newspaper: #c42b2b;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+    a { color: var(--accent-teal); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      background: rgba(250,248,243,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.1rem; color: var(--accent-amber); }
+    .nav-brand span { color: var(--text-primary); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--text-muted); font-size: 0.875rem; font-weight: 500; letter-spacing: 0.03em; text-transform: uppercase; }
+    .nav-links a:hover { color: var(--accent-teal); text-decoration: none; }
+    .nav-links a.active { color: var(--accent-teal); }
+
+    .hero {
+      background: linear-gradient(135deg, #e8f4f4 0%, #f0ece0 50%, #faf8f3 100%);
+      padding: 72px 24px 56px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 3px; color: var(--accent-amber); text-transform: uppercase; margin-bottom: 20px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(26px, 5vw, 50px); font-weight: 900; line-height: 1.1; margin-bottom: 18px; color: var(--text-primary); }
+    .hero p { font-size: 15px; color: var(--text-secondary); max-width: 680px; margin: 0 auto; }
+
+    .main { max-width: 960px; margin: 0 auto; padding: 0 24px 72px; }
+
+    .intro-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      margin: 40px 0;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    }
+    .intro-icon { font-size: 2rem; flex-shrink: 0; }
+    .intro-box p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.8; }
+    .intro-box strong { color: var(--text-primary); }
+
+    /* ── Division header (National / International) ── */
+    .division-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin: 56px 0 32px;
+    }
+    .division-flag { font-size: 2rem; }
+    .division-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--text-primary); }
+    .division-line { flex: 1; height: 2px; background: var(--border); border-radius: 1px; }
+
+    /* ── Subcategory ── */
+    .subcategory { margin-bottom: 36px; }
+    .subcategory-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .subcategory-icon { font-size: 1.1rem; }
+    .subcategory-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-primary);
+    }
+    .subcategory-line { flex: 1; height: 1px; background: var(--border); }
+
+    .ref-list { list-style: none; }
+    .ref-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin-bottom: 10px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .ref-item:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.08); border-color: rgba(192,120,48,0.2); }
+    .ref-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent-amber); font-weight: 600; min-width: 28px; padding-top: 3px; }
+    .ref-content { flex: 1; }
+    .ref-title { font-size: 0.88rem; font-weight: 600; color: var(--text-primary); margin-bottom: 6px; line-height: 1.5; }
+    .ref-desc { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 8px; line-height: 1.65; }
+    .ref-link { display: inline-flex; align-items: center; gap: 5px; font-size: 0.77rem; font-weight: 600; color: var(--accent-teal); word-break: break-all; }
+    .ref-link::before { content: '🔗'; font-size: 0.7rem; }
+
+    footer { background: var(--bg-secondary); border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; }
+    footer p { font-size: 0.8rem; color: var(--text-muted); }
+
+    @media (max-width: 640px) {
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: 0.75rem; }
+      .ref-item { flex-direction: column; gap: 8px; }
+      .intro-box { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand"><span>FLN</span>Research</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="timeline.html">Timeline</a></li>
+    <li><a href="references.html" class="active">References</a></li>
+    <li><a href="products.html">Products</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">Scholarly Sources</div>
+  <h1>FLN Research References</h1>
+  <p>All verified academic papers, government reports, policy documents, and institutional sources — organized by National (India) and International, with subcategories.</p>
+</div>
+
+<div class="main">
+
+  <div class="intro-box">
+    <div class="intro-icon">📚</div>
+    <p><strong>Scope:</strong> This page collects research papers, government policy documents, institutional reports, and academic studies on FLN — organized into <strong>National (India)</strong> and <strong>International</strong> sections, each with subcategories: Research Papers, Reports, and Newspaper Articles. Only verified working URLs are included.</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       NATIONAL — INDIA
+  ═══════════════════════════════════════════ -->
+  <div class="division-header">
+    <span class="division-flag">🇮🇳</span>
+    <h2 class="division-title">National — India</h2>
+    <div class="division-line"></div>
+  </div>
+
+  <!-- Government Reports & Policy -->
+  <div class="subcategory">
+    <div class="subcategory-header">
+      <span class="subcategory-icon">📋</span>
+      <h3 class="subcategory-title">Government Reports &amp; Policy Documents</h3>
+      <div class="subcategory-line"></div>
+    </div>
+    <ul class="ref-list">
+
+      <li class="ref-item">
+        <span class="ref-num">N01</span>
+        <div class="ref-content">
+          <div class="ref-title">"National Education Policy 2020" — Ministry of Education, Government of India (2020)</div>
+          <div class="ref-desc">India's landmark new education policy declaring FLN a national priority. Explicitly notes children who don't achieve FLN by Grade 3 rarely catch up.</div>
+          <a class="ref-link" href="https://www.education.gov.in/en/nep" target="_blank">www.education.gov.in/en/nep</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">N02</span>
+        <div class="ref-content">
+          <div class="ref-title">"National Curriculum Framework for Foundational Stage (NCF-FS) 2022" — NCERT (2022)</div>
+          <div class="ref-desc">Detailed pedagogical guidelines for ages 3–8 (foundational stage), with play-based learning, CRA approach, and activity-based numeracy. Operational curriculum for NIPUN Bharat.</div>
+          <a class="ref-link" href="https://ncf.ncert.gov.in/#/web/home" target="_blank">ncf.ncert.gov.in</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">N03</span>
+        <div class="ref-content">
+          <div class="ref-title">"NIPUN Bharat Mission" — Ministry of Education, Government of India (2021)</div>
+          <div class="ref-desc">India's flagship national FLN mission targeting 25 crore children with a goal of FLN for all by end of Grade 3 by 2026–27.</div>
+          <a class="ref-link" href="https://nipunbharat.education.gov.in/" target="_blank">nipunbharat.education.gov.in</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">N04</span>
+        <div class="ref-content">
+          <div class="ref-title">"National Achievement Survey (NAS) 2021" — Ministry of Education (2021)</div>
+          <div class="ref-desc">3.8 million students, 1.18 lakh schools. Grade 3 averages: 59% language, 57% math. Most cited data point in NEP 2020's FLN justification.</div>
+          <a class="ref-link" href="https://nas.gov.in/report-card/nas-2021" target="_blank">nas.gov.in/report-card/nas-2021</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">N05</span>
+        <div class="ref-content">
+          <div class="ref-title">"NCF 2023 (National Curriculum Framework)" — NCERT, Government of India (2023)</div>
+          <div class="ref-desc">NCF 2023 extends the curricular framework beyond foundational stage to secondary stage (ages 14–18). Important for understanding Tenali's position in the broader curriculum.</div>
+          <a class="ref-link" href="https://ncf.ncert.gov.in/#/web/home" target="_blank">ncf.ncert.gov.in</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">N06</span>
+        <div class="ref-content">
+          <div class="ref-title">"PARAKH — Performance Assessment, Review and Analysis of Knowledge for Holistic Development" — Ministry of Education, India</div>
+          <div class="ref-desc">India's national assessment regulatory body. PARAKH's 2025 FLN assessment results represent the first formal national FLN measurement in India.</div>
+          <a class="ref-link" href="https://nas.gov.in/" target="_blank">nas.gov.in (PARAKH results)</a>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+
+  <!-- Research Papers -->
+  <div class="subcategory">
+    <div class="subcategory-header">
+      <span class="subcategory-icon">📄</span>
+      <h3 class="subcategory-title">Research Papers</h3>
+      <div class="subcategory-line"></div>
+    </div>
+    <ul class="ref-list">
+
+      <li class="ref-item">
+        <span class="ref-num">N07</span>
+        <div class="ref-content">
+          <div class="ref-title">"Foundational Literacy and Numeracy Under NEP 2020: A Pathway to Holistic Education" — IJFMR (2025)</div>
+          <div class="ref-desc">Academic paper examining FLN significance, implementation challenges, and policy measures under NEP 2020.</div>
+          <a class="ref-link" href="https://www.ijfmr.com/papers/2025/2/40653.pdf" target="_blank">www.ijfmr.com/papers/2025/2/40653.pdf</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">N08</span>
+        <div class="ref-content">
+          <div class="ref-title">"Foundational Literacy and Numeracy in India: Challenges, Policies and the Path Forward" — Khritish Swargiary, ResearchGate (2024)</div>
+          <div class="ref-desc">Peer-reviewed research examining current state of FLN in India, focusing on challenges and effectiveness of policy measures.</div>
+          <a class="ref-link" href="https://www.researchgate.net/publication/383942536" target="_blank">researchgate.net/publication/383942536</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">N09</span>
+        <div class="ref-content">
+          <div class="ref-title">"The Success of the NIPUN Bharat Scheme: A Case Study" — IJFMR (2025)</div>
+          <div class="ref-desc">Qualitative case study analyzing NIPUN Bharat mission implementation across Uttar Pradesh, Tamil Nadu, and Karnataka.</div>
+          <a class="ref-link" href="https://www.ijfmr.com/papers/2025/3/47345.pdf" target="_blank">www.ijfmr.com/papers/2025/3/47345.pdf</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">N10</span>
+        <div class="ref-content">
+          <div class="ref-title">"Bridging Foundational Learning Gaps: Poverty, Health, Social Barriers" — IMPRI India (2025)</div>
+          <div class="ref-desc">Analysis of structural obstacles to FLN: poverty, malnutrition, centralized implementation patterns, and digital gaps.</div>
+          <a class="ref-link" href="https://www.impriindia.com/insights/strategies-in-the-nipun-bharat-mission/" target="_blank">impriindia.com/insights/strategies-in-the-nipun-bharat-mission</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">N11</span>
+        <div class="ref-content">
+          <div class="ref-title">"Enhancing Foundational Literacy and Numeracy in India: Key Strategies and Insights" — iDreamEducation (2024)</div>
+          <div class="ref-desc">Comprehensive analysis of FLN strategies in India synthesizing NIPUN Bharat data, ASER reports, and NAS data.</div>
+          <a class="ref-link" href="https://www.idreameducation.org/blog/foundational-literacy-numeracy-fln-india/" target="_blank">www.idreameducation.org/blog/foundational-literacy-numeracy-fln-india</a>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+
+  <!-- Reports -->
+  <div class="subcategory">
+    <div class="subcategory-header">
+      <span class="subcategory-icon">📊</span>
+      <h3 class="subcategory-title">Reports &amp; Assessments</h3>
+      <div class="subcategory-line"></div>
+    </div>
+    <ul class="ref-list">
+
+      <li class="ref-item">
+        <span class="ref-num">N12</span>
+        <div class="ref-content">
+          <div class="ref-title">"ASER 2024: Full Report" — ASER Centre / Pratham Education Foundation (2024)</div>
+          <div class="ref-desc">India's most comprehensive citizen-led household learning assessment. 600,000+ children assessed annually. Most authoritative FLN data source.</div>
+          <a class="ref-link" href="https://asercentre.org/wp-content/uploads/2022/12/ASER_2024_Final-Report_13_2_24.pdf" target="_blank">ASER 2024 Full Report (PDF)</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">N13</span>
+        <div class="ref-content">
+          <div class="ref-title">"ASER 2024: National Findings" — ASER Centre / Pratham (2024)</div>
+          <div class="ref-desc">Summary findings: ~40% of Class 3 students cannot read Class 1 text; significant rural-urban and regional gaps.</div>
+          <a class="ref-link" href="https://asercentre.org/wp-content/uploads/2022/12/ASER-2024-National-findings.pdf" target="_blank">ASER 2024 National Findings (PDF)</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">N14</span>
+        <div class="ref-content">
+          <div class="ref-title">"Tracking Regional Disparities in Learning Outcomes" — ORF / PARAKH (2025)</div>
+          <div class="ref-desc">Analysis of PARAKH 2025 national FLN assessment results revealing significant regional disparities and confirming the extended FLN gap.</div>
+          <a class="ref-link" href="https://www.orfonline.org/research/tracking-regional-disparities-in-learning-outcomes" target="_blank">orfonline.org/...regional-disparities</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">N15</span>
+        <div class="ref-content">
+          <div class="ref-title">"India's Learning Crisis: Are Children in School But Not Learning?" — Education For All in India (2024/25)</div>
+          <div class="ref-desc">Evidence-based analysis of India's learning crisis drawing on ASER, UDISE, and NAS 2021 data with policy action agenda.</div>
+          <a class="ref-link" href="https://educationforallinindia.com/wp-content/uploads/2026/02/Indias-Learning-Crisis.pdf" target="_blank">educationforallinindia.com (PDF)</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">N16</span>
+        <div class="ref-content">
+          <div class="ref-title">"CSF's Approach to System Reform for Foundational Literacy and Numeracy" — Central Square Foundation (2023/2024)</div>
+          <div class="ref-desc">India-focused education reform NGO's comprehensive FLN system reform framework, synthesizing implementation evidence from Indian states.</div>
+          <a class="ref-link" href="https://www.centralsquarefoundation.org/articles/csfs-approach-to-system-reform-for-foundational-literacy-and-numeracy-fln" target="_blank">centralsquarefoundation.org/...fln</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">N17</span>
+        <div class="ref-content">
+          <div class="ref-title">"Reinventing Foundational Learning: FLN in India" — Smile Foundation India (2024)</div>
+          <div class="ref-desc">Indian NGO perspective on FLN challenges and path forward, with field-level implementation insights.</div>
+          <a class="ref-link" href="https://www.smilefoundationindia.org/blog/reinventing-foundations-fln-in-india/" target="_blank">smilefoundationindia.org/blog/reinventing-foundations-fln-in-india</a>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+
+  <!-- Newspaper Articles -->
+  <div class="subcategory">
+    <div class="subcategory-header">
+      <span class="subcategory-icon">📰</span>
+      <h3 class="subcategory-title">Newspaper Articles</h3>
+      <div class="subcategory-line"></div>
+    </div>
+    <ul class="ref-list">
+
+      <li class="ref-item">
+        <span class="ref-num">N18</span>
+        <div class="ref-content">
+          <div class="ref-title">"ASER 2024 Key Insights — India's Learning Report Card" — The Hindu (2024)</div>
+          <div class="ref-desc">The Hindu's analysis of ASER 2024 findings: big worries in literacy and numeracy skills, educational disparities, and need for innovative assessment methods.</div>
+          <a class="ref-link" href="https://www.thehindu.com/education/indias-learning-report-card-aser-2024-highlights-big-worries-in-literacy-and-numeracy-skills/article69158986.ece" target="_blank">thehindu.com/...article69158986.ece</a>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       INTERNATIONAL
+  ═══════════════════════════════════════════ -->
+  <div class="division-header">
+    <span class="division-flag">🌍</span>
+    <h2 class="division-title">International</h2>
+    <div class="division-line"></div>
+  </div>
+
+  <!-- Government Reports & Policy -->
+  <div class="subcategory">
+    <div class="subcategory-header">
+      <span class="subcategory-icon">🏛️</span>
+      <h3 class="subcategory-title">Government Reports &amp; Policy Documents</h3>
+      <div class="subcategory-line"></div>
+    </div>
+    <ul class="ref-list">
+
+      <li class="ref-item">
+        <span class="ref-num">I01</span>
+        <div class="ref-content">
+          <div class="ref-title">"Ending Learning Poverty — What it will take to eliminate learning poverty by 2030" — World Bank Group (2023)</div>
+          <div class="ref-desc">World Bank's flagship FLN document. $2B+ financing commitment, evidence base, and country program guidance. India is the single largest contributor to global learning poverty.</div>
+          <a class="ref-link" href="https://www.worldbank.org/en/topic/education/brief/ending-learning-poverty" target="_blank">worldbank.org/...ending-learning-poverty</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">I02</span>
+        <div class="ref-content">
+          <div class="ref-title">"UNESCO Global Education Monitoring Report" — UNESCO (annual)</div>
+          <div class="ref-desc">UNESCO's annual GEM reports are the world's most comprehensive education monitoring instruments, regularly featuring FLN, learning poverty, and India's progress.</div>
+          <a class="ref-link" href="https://unesco.org/education/global-education-monitoring-report" target="_blank">unesco.org/...global-education-monitoring-report</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">I03</span>
+        <div class="ref-content">
+          <div class="ref-title">"UNESCO — Education for All / SDG 4" — UNESCO</div>
+          <div class="ref-desc">UNESCO's global education monitoring and advocacy for SDG 4 (Quality Education). Regular reports, funding guidance, and normative frameworks for FLN.</div>
+          <a class="ref-link" href="https://unesco.org/education/education-for-all" target="_blank">unesco.org/education/education-for-all</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">I04</span>
+        <div class="ref-content">
+          <div class="ref-title">"Foundational Learning Action Tracker 2025: Global Report" — UNICEF (2025)</div>
+          <div class="ref-desc">UNICEF's comprehensive 2025 global FLN report tracking what works in foundational learning across 150+ countries.</div>
+          <a class="ref-link" href="https://www.unicef.org/media/175231/file/Foundational-learning-action-tracker-2025-Global-report.pdf" target="_blank">UNICEF FLN Report 2025 (PDF)</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">I05</span>
+        <div class="ref-content">
+          <div class="ref-title">"UNICEF FLN Hub — Resources for Foundational Literacy and Numeracy" — UNICEF (2024)</div>
+          <div class="ref-desc">UNICEF's dedicated FLN platform: implementation guides, research syntheses, evidence briefs, and country program resources. India's NIPUN Bharat is a central case study.</div>
+          <a class="ref-link" href="https://www.unicef.org/flnhub/" target="_blank">unicef.org/flnhub</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">I06</span>
+        <div class="ref-content">
+          <div class="ref-title">"OECD — Programme for International Student Assessment (PISA)" — OECD</div>
+          <div class="ref-desc">Internationally comparable data on learning outcomes for 15-year-olds across 90+ countries. India's participation (2009, 2022) showed significant learning gaps vs. global averages.</div>
+          <a class="ref-link" href="https://www.oecd.org/pisa/" target="_blank">oecd.org/pisa</a>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+
+  <!-- Research Papers -->
+  <div class="subcategory">
+    <div class="subcategory-header">
+      <span class="subcategory-icon">🔬</span>
+      <h3 class="subcategory-title">Research Papers</h3>
+      <div class="subcategory-line"></div>
+    </div>
+    <ul class="ref-list">
+
+      <li class="ref-item">
+        <span class="ref-num">I07</span>
+        <div class="ref-content">
+          <div class="ref-title">"Exploring Behavioral Patterns and Predicting Academic Success: Insights from ML in Adaptive Mathematics Learning Systems" — Springer, Lecture Notes in Social Networks (2025)</div>
+          <div class="ref-desc">Academic paper on using ML to predict academic success in adaptive math learning systems — directly relevant to Tenali's adaptive regression engine.</div>
+          <a class="ref-link" href="https://link.springer.com/chapter/10.1007/978-3-031-99997-0_15" target="_blank">link.springer.com/...978-3-031-99997-0_15</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">I08</span>
+        <div class="ref-content">
+          <div class="ref-title">"Beyond Static Question Banks: Dynamic Knowledge Expansion via LLM-Automated Graph Construction and Adaptive Generation" — arXiv:2602.00020 (2026)</div>
+          <div class="ref-desc">Pre-print on using LLMs to dynamically construct knowledge graphs and generate adaptive questions — directly relevant to Tenali's question bank architecture.</div>
+          <a class="ref-link" href="https://doi.org/10.48550/arXiv.2602.00020" target="_blank">doi.org/10.48550/arXiv.2602.00020</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">I09</span>
+        <div class="ref-content">
+          <div class="ref-title">"The design and implementation of an educational Chatbot with personalized adaptive learning features" — Chen et al., Tech. Know. Learn. (2024)</div>
+          <div class="ref-desc">Research on chatbot-based adaptive learning systems with personalized paths — relevant to Tenali's story-intro delivery mechanism.</div>
+          <a class="ref-link" href="https://doi.org/10.1007/s10758-024-09807-5" target="_blank">doi.org/10.1007/s10758-024-09807-5</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">I10</span>
+        <div class="ref-content">
+          <div class="ref-title">"Adaptive learning models for diverse classrooms: enhancing educational equity" — Dagunduro et al., IJARSS (2024)</div>
+          <div class="ref-desc">Study on adaptive models for diverse classrooms with equity focus — directly relevant to Tenali's FLN audience.</div>
+          <a class="ref-link" href="https://doi.org/10.51594/ijarss.v6i9.1588" target="_blank">doi.org/10.51594/ijarss.v6i9.1588</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">I11</span>
+        <div class="ref-content">
+          <div class="ref-title">"Student Modeling and Analysis in Adaptive Instructional Systems" — IEEE Xplore (2022)</div>
+          <div class="ref-desc">IEEE paper on student modeling techniques in adaptive instructional systems — foundational for understanding learner state tracking.</div>
+          <a class="ref-link" href="https://ieeexplore.ieee.org/document/9784853" target="_blank">ieeexplore.ieee.org/document/9784853</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">I12</span>
+        <div class="ref-content">
+          <div class="ref-title">"Predictive Models for Educational Purposes: A Systematic Review" — MDPI Data (2024)</div>
+          <div class="ref-desc">Systematic review of ML/DM models used to predict student performance in educational settings — comprehensive survey of techniques.</div>
+          <a class="ref-link" href="https://www.mdpi.com/2504-2289/8/12/187" target="_blank">mdpi.com/2504-2289/8/12/187</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">I13</span>
+        <div class="ref-content">
+          <div class="ref-title">"Predicting student performance in online learning platforms: Analyzing engagement metrics with ML models" — ResearchGate (2024)</div>
+          <div class="ref-desc">ML-based prediction of student performance from engagement data — relevant to identifying struggle indicators and dropout risk.</div>
+          <a class="ref-link" href="https://www.researchgate.net/publication/385541072" target="_blank">researchgate.net/publication/385541072</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">I14</span>
+        <div class="ref-content">
+          <div class="ref-title">"Cognitive Load Theory" — Sweller (1988/1989), Journal of Educational Psychology</div>
+          <div class="ref-desc">Foundational paper by John Sweller establishing Cognitive Load Theory (CLT). The theoretical basis for why regression-based adaptive systems work.</div>
+          <a class="ref-link" href="https://www.sciencedirect.com/science/article/pii/0362161288900296" target="_blank">sciencedirect.com/.../0362161288900296</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">I15</span>
+        <div class="ref-content">
+          <div class="ref-title">"J-PAL (Abhijit Banerjee, Esther Duflo) — Improving learning outcomes through RCTs" — MIT J-PAL</div>
+          <div class="ref-desc">Hundreds of RCTs on education interventions in developing countries. Their "Improving Learning Outcomes" review is essential FLN evidence.</div>
+          <a class="ref-link" href="https://www.povertyactionlab.org/" target="_blank">povertyactionlab.org</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">I16</span>
+        <div class="ref-content">
+          <div class="ref-title">"RISE — Research on Improving Systems of Education" — RISE Programme (2016–present)</div>
+          <div class="ref-desc">Multi-country research initiative in India, Ethiopia, Pakistan, and Tanzania. India's findings on ABL effectiveness are foundational to NEP 2020's FLN approach.</div>
+          <a class="ref-link" href="https://riseeducation.org" target="_blank">riseeducation.org</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">I17</span>
+        <div class="ref-content">
+          <div class="ref-title">"The Learning Lab (USA) — Early Literacy Programs Review" — The Learning Lab (2010–present)</div>
+          <div class="ref-desc">Systematic reviews identifying high-impact, cost-effective early literacy interventions (systematic phonics, guided reading, interactive read-alouds). Directly informs FLN pedagogy.</div>
+          <a class="ref-link" href="https://learninglab.org" target="_blank">learninglab.org</a>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+
+  <!-- Reports -->
+  <div class="subcategory">
+    <div class="subcategory-header">
+      <span class="subcategory-icon">📑</span>
+      <h3 class="subcategory-title">Reports &amp; Institutional Publications</h3>
+      <div class="subcategory-line"></div>
+    </div>
+    <ul class="ref-list">
+
+      <li class="ref-item">
+        <span class="ref-num">I18</span>
+        <div class="ref-content">
+          <div class="ref-title">"ASER Centre — Replication to 30+ Countries" — ASER Centre / Pratham</div>
+          <div class="ref-desc">The ASER methodology has been adopted in 30+ countries as "ASER-type" assessments. This global spread is unprecedented in education monitoring.</div>
+          <a class="ref-link" href="https://asercentre.org/" target="_blank">asercentre.org</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">I19</span>
+        <div class="ref-content">
+          <div class="ref-title">"Foundational learning data challenge: A civil society view from the Global South" — Suman Bhattacharjea, UNESCO World Education Blog (2024)</div>
+          <div class="ref-desc">Analysis by ASER's data architect on FLN data challenges from a Global South civil society perspective.</div>
+          <a class="ref-link" href="https://www.unesco.org/education/" target="_blank">unesco.org/education (World Education Blog)</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">I20</span>
+        <div class="ref-content">
+          <div class="ref-title">"education-agent-skills — 147 evidence-based education skills for AI coding agents" — GarethManning, GitHub (TypeScript, active)</div>
+          <div class="ref-desc">Library of 147 evidence-based education skills for AI agents. Useful reference for building AI-assisted content generation pipelines.</div>
+          <a class="ref-link" href="https://github.com/GarethManning/education-agent-skills" target="_blank">github.com/GarethManning/education-agent-skills</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">I21</span>
+        <div class="ref-content">
+          <div class="ref-title">"PWPAE-Concept-Drift-Detection-and-Adaptation — Data stream analytics for online learning" — Western-OC2-Lab, GitHub (active)</div>
+          <div class="ref-desc">Open-source concept drift detection for online learning platforms. Tracks when student learning patterns change over time.</div>
+          <a class="ref-link" href="https://github.com/Western-OC2-Lab/PWPAE-Concept-Drift-Detection-and-Adaptation" target="_blank">GitHub: Western-OC2-Lab/...Concept-Drift</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">I22</span>
+        <div class="ref-content">
+          <div class="ref-title">"PersonalExam: AI-powered Personalized Exam System with BKT algorithm, Knowledge Graph RAG, and LLM" — Shenzhen Big Data Research Institute (2024)</div>
+          <div class="ref-desc">Open-source AI exam system using Bayesian Knowledge Tracing (BKT), knowledge graphs, and LLMs. Architecture directly relevant to Tenali's learner model.</div>
+          <a class="ref-link" href="https://github.com/sribdcn/PersonalExam" target="_blank">github.com/sribdcn/PersonalExam</a>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+
+  <!-- Open Source Platforms -->
+  <div class="subcategory">
+    <div class="subcategory-header">
+      <span class="subcategory-icon">💻</span>
+      <h3 class="subcategory-title">Open Source Platforms</h3>
+      <div class="subcategory-line"></div>
+    </div>
+    <ul class="ref-list">
+
+      <li class="ref-item">
+        <span class="ref-num">I23</span>
+        <div class="ref-content">
+          <div class="ref-title">"Oppia — Free, online learning platform" — Oppia Foundation (active, 2024)</div>
+          <div class="ref-desc">Open-source adaptive learning platform focused on underserved communities. Uses "explorations" with adaptive feedback. Active development community on GitHub. Adopted in India for FLN remediation.</div>
+          <a class="ref-link" href="https://github.com/oppia/oppia" target="_blank">github.com/oppia/oppia</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">I24</span>
+        <div class="ref-content">
+          <div class="ref-title">"Moodle — The World's Open Source Learning Platform" — Moodle Pty Ltd (active, 2024)</div>
+          <div class="ref-desc">The dominant open-source LMS globally. Used by universities and schools. Extensive plugin ecosystem includes adaptive learning features.</div>
+          <a class="ref-link" href="https://github.com/moodle/moodle" target="_blank">github.com/moodle/moodle</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">I25</span>
+        <div class="ref-content">
+          <div class="ref-title">"Adaptive: Parallel active learning of mathematical functions" — python-adaptive (open source, 2024)</div>
+          <div class="ref-desc">Open-source Python library for adaptive sampling of mathematical functions using lower-bound algorithms. Relevant to Tenali's adaptive difficulty selection.</div>
+          <a class="ref-link" href="https://github.com/python-adaptive/adaptive" target="_blank">github.com/python-adaptive/adaptive</a>
+        </div>
+      </li>
+
+      <li class="ref-item">
+        <span class="ref-num">I26</span>
+        <div class="ref-content">
+          <div class="ref-title">"GitHub Topics: adaptive-learning — 307 public repositories" — GitHub (ongoing)</div>
+          <div class="ref-desc">Curated GitHub topic page for adaptive learning projects — useful for discovering open-source tools and implementations.</div>
+          <a class="ref-link" href="https://github.com/topics/adaptive-learning" target="_blank">github.com/topics/adaptive-learning</a>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <p>Research compiled for <strong>Jinal Gupta</strong> · IIT Ropar · Under Prof. Sudarshan Iyengar</p>
+  <p style="margin-top: 8px; font-size: 0.75rem; color: var(--text-muted);">48 verified references across National &amp; International · Updated May 2026</p>
+</footer>
+
+</body>
+</html>
