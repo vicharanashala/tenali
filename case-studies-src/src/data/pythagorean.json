@@ -1,0 +1,90 @@
+{
+  "id": "pythagorean",
+  "theorem": "Pythagorean Theorem",
+  "displayName": "Pythagorean Theorem",
+  "slug": "pythagorean-theorem",
+  "stageCount": 7,
+  "story": {
+    "intro": "Long before calculators or rulers, Babylonian scribes discovered a relationship between the sides of a right triangle. It worked for 3-4-5, for 5-12-13, for a thousand other triangles. Today, you're going to play with that relationship — and see it in action everywhere around you.",
+    "theoremStatement": "In any right triangle, a² + b² = c², where c is the hypotenuse.",
+    "plainEnglish": "The longest side of a right triangle (the hypotenuse) is exactly as long as you'd expect if you square the other two sides and add them together. No matter what right triangle you draw, this rule always holds.",
+    "applications": [
+      "GPS navigation in your phone uses it to calculate the shortest path between two points",
+      "Architects and engineers use it to ensure buildings, bridges, and furniture are perfectly square",
+      "Your phone's accelerometer knows which way is 'down' using this relationship"
+    ],
+    "completionBadge": "Square Surgeon"
+  },
+  "stages": [
+    {
+      "id": 1,
+      "type": "concept",
+      "question": "What type of triangle has one angle equal to 90°?",
+      "expectedAnswer": "right",
+      "acceptedAnswers": ["right", "a right triangle"],
+      "hint": "A 90° angle is called a right angle. What do you call a triangle that has one right angle?",
+      "conceptShown": "A right triangle has exactly one 90° angle — the other two add up to 90° as well",
+      "conceptLabel": "Right triangle basics"
+    },
+    {
+      "id": 2,
+      "type": "numeric",
+      "question": "In a 3-4-5 right triangle, what is 3² + 4²?",
+      "expectedAnswer": "25",
+      "acceptedAnswers": ["25"],
+      "hint": "Calculate 3 squared (3 × 3) and 4 squared (4 × 4), then add them together.",
+      "conceptShown": "3² + 4² = 9 + 16 = 25",
+      "conceptLabel": "The a² + b² relationship"
+    },
+    {
+      "id": 3,
+      "type": "numeric",
+      "question": "In a 3-4-5 triangle, what is the length of the hypotenuse?",
+      "expectedAnswer": "5",
+      "acceptedAnswers": ["5"],
+      "hint": "If 3² + 4² = 25, and the hypotenuse squared equals that value, what number squared gives 25?",
+      "conceptShown": "c² = 3² + 4² = 25, so c = √25 = 5",
+      "conceptLabel": "Finding the hypotenuse"
+    },
+    {
+      "id": 4,
+      "type": "numeric",
+      "question": "If a right triangle has legs a = 6 and b = 8, what is a² + b²?",
+      "expectedAnswer": "100",
+      "acceptedAnswers": ["100"],
+      "hint": "Square each leg: 6² = 36 and 8² = 64. Add them together.",
+      "conceptShown": "6² + 8² = 36 + 64 = 100, so c = √100 = 10",
+      "conceptLabel": "Applying the theorem"
+    },
+    {
+      "id": 5,
+      "type": "numeric",
+      "question": "A right triangle has legs a = 5 and b = 12. What is c, the hypotenuse?",
+      "expectedAnswer": "13",
+      "acceptedAnswers": ["13"],
+      "hint": "5² + 12² = 25 + 144 = 169. What's √169?",
+      "conceptShown": "5² + 12² = 25 + 144 = 169. √169 = 13 — another classic Pythagorean triple!",
+      "conceptLabel": "Another Pythagorean triple"
+    },
+    {
+      "id": 6,
+      "type": "concept",
+      "question": "A right triangle has legs measuring 9 and 12. Is the hypotenuse 20? (answer 'yes' or 'no')",
+      "expectedAnswer": "no",
+      "acceptedAnswers": ["no", "n", "false"],
+      "hint": "9² + 12² = 81 + 144 = 225. What is √225? Is it 20?",
+      "conceptShown": "9² + 12² = 81 + 144 = 225. √225 = 15, not 20. So the answer is no.",
+      "conceptLabel": "Testing with the theorem"
+    },
+    {
+      "id": 7,
+      "type": "challenge",
+      "question": "Final challenge: If a² + b² = c² for a right triangle, and a = 8 and c = 17, what is b²?",
+      "expectedAnswer": "225",
+      "acceptedAnswers": ["225"],
+      "hint": "If a² + b² = c², then b² = c² - a². Calculate 17² - 8².",
+      "conceptShown": "b² = 17² - 8² = 289 - 64 = 225, so b = √225 = 15",
+      "conceptLabel": "Using the theorem flexibly"
+    }
+  ]
+}

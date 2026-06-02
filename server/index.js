@@ -66,6 +66,11 @@ const flnResearchPath = path.join(clientDistPath, 'research');
 app.get('/research', (_req, res) => { res.sendFile(path.join(flnResearchPath, 'index.html')); });
 app.use('/research', express.static(flnResearchPath));
 
+// ─── Math Case Studies (/case-studies) ─────────────────────────────────────
+const caseStudiesPath = path.join(clientDistPath, 'case-studies');
+app.get('/case-studies', (_req, res) => { res.sendFile(path.join(caseStudiesPath, 'index.html')); });
+app.use('/case-studies', express.static(caseStudiesPath));
+
 // ─── Auth (MongoDB + JWT) ────────────────────────────────────────────────────
 // Adds /api/auth/login and /api/auth/me. Hardcoded users are seeded into
 // MongoDB on startup. If Mongo is unreachable the rest of the server still
@@ -8949,3 +8954,4 @@ app.get(/.*/, (_req, res) => {
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Tenali app running on http://0.0.0.0:${PORT}`);
 });
+

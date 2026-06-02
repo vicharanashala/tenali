@@ -1,0 +1,90 @@
+{
+  "id": "goldbach-conjecture",
+  "theorem": "Goldbach's Conjecture",
+  "displayName": "Goldbach's Conjecture",
+  "slug": "goldbach-conjecture",
+  "stageCount": 7,
+  "story": {
+    "intro": "In 1742, a Prussian mathematician named Christian Goldbach wrote a letter to Euler proposing a deceptively simple idea about even numbers and prime numbers. Three centuries later, no one has been able to prove it true or find a single counterexample — despite computers checking trillions of cases. Today, you get to test it yourself.",
+    "theoremStatement": "Every even integer greater than 2 can be expressed as the sum of two prime numbers.",
+    "plainEnglish": "Take any even number bigger than 2 — 4, 6, 8, 100, 1000, a million — and you can always break it into exactly two prime numbers added together. 4 = 2 + 2, 6 = 3 + 3, 8 = 3 + 5, 100 = 53 + 47. Always works. No one knows exactly why.",
+    "applications": [
+      "Cryptographic systems rely on prime number properties that Goldbach's conjecture touches indirectly",
+      "Random number generators for simulations use Goldbach-style decompositions for seeding",
+      "Mathematical research into prime distribution has been driven partly by this conjecture"
+    ],
+    "completionBadge": "Goldbach's Explorer"
+  },
+  "stages": [
+    {
+      "id": 1,
+      "type": "concept",
+      "question": "What is the only even prime number?",
+      "expectedAnswer": "2",
+      "acceptedAnswers": ["2"],
+      "hint": "All other primes are odd. What prime number is divisible by 2?",
+      "conceptShown": "2 is the only even prime — every other prime is odd",
+      "conceptLabel": "Even and odd primes"
+    },
+    {
+      "id": 2,
+      "type": "numeric",
+      "question": "Express 4 as the sum of two prime numbers (write it as 'a + b' format)",
+      "expectedAnswer": "2+2",
+      "acceptedAnswers": ["2+2", "2 + 2"],
+      "hint": "Try starting with the smallest prime, 2. What is 4 - 2? Is that prime?",
+      "conceptShown": "4 = 2 + 2 — both are prime",
+      "conceptLabel": "Goldbach decomposition of 4"
+    },
+    {
+      "id": 3,
+      "type": "numeric",
+      "question": "Express 6 as the sum of two primes (use 'a + b' format, with a ≤ b)",
+      "expectedAnswer": "3+3",
+      "acceptedAnswers": ["3+3", "3 + 3"],
+      "hint": "6 minus what prime gives another prime? Try 3: 6 - 3 = 3, and 3 is prime.",
+      "conceptShown": "6 = 3 + 3",
+      "conceptLabel": "Goldbach decomposition of 6"
+    },
+    {
+      "id": 4,
+      "type": "numeric",
+      "question": "Express 8 as the sum of two primes",
+      "expectedAnswer": "3+5",
+      "acceptedAnswers": ["3+5", "3 + 5", "5+3", "5 + 3"],
+      "hint": "Try splitting 8: 8 - 3 = 5, and both 3 and 5 are prime.",
+      "conceptShown": "8 = 3 + 5 (or 5 + 3)",
+      "conceptLabel": "Goldbach decomposition of 8"
+    },
+    {
+      "id": 5,
+      "type": "numeric",
+      "question": "Express 10 as the sum of two primes",
+      "expectedAnswer": "3+7",
+      "acceptedAnswers": ["3+7", "3 + 7", "5+5", "5 + 5", "7+3", "7 + 3"],
+      "hint": "10 = 5 + 5 also works (both primes!). Or try 3: 10 - 3 = 7.",
+      "conceptShown": "10 = 3 + 7 = 5 + 5 — multiple decompositions possible!",
+      "conceptLabel": "Goldbach decomposition of 10"
+    },
+    {
+      "id": 6,
+      "type": "concept",
+      "question": "The Goldbach conjecture states every even number greater than 2 can be written as the sum of two primes. Is 20 = 7 + 13 a valid decomposition? (answer 'yes' or 'no')",
+      "expectedAnswer": "yes",
+      "acceptedAnswers": ["yes", "y", "true"],
+      "hint": "Check: is 7 prime? Yes. Is 13 prime? Yes. Does 7 + 13 = 20? Yes. Then it's valid.",
+      "conceptShown": "20 = 7 + 13 — both 7 and 13 are prime, so this is a valid Goldbach decomposition",
+      "conceptLabel": "Testing the conjecture"
+    },
+    {
+      "id": 7,
+      "type": "challenge",
+      "question": "Final challenge: Express 100 as the sum of two primes (use 'a + b' format)",
+      "expectedAnswer": "53+47",
+      "acceptedAnswers": ["53+47", "53 + 47", "47+53", "47 + 53", "3+97", "3 + 97", "11+89", "11 + 89", "17+83", "17 + 83", "29+71", "29 + 71", "41+59", "41 + 59"],
+      "hint": "Try pairing 50 (half of 100) with primes equidistant from it. Or: 100 - 3 = 97 (prime). What is 100 - 47?",
+      "conceptShown": "100 = 53 + 47 (among many valid decompositions: 3+97, 11+89, 17+83, 29+71, 41+59, 53+47)",
+      "conceptLabel": "Goldbach's conjecture complete"
+    }
+  ]
+}

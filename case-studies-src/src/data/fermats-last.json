@@ -1,0 +1,90 @@
+{
+  "id": "fermats-last",
+  "theorem": "Fermat's Last Theorem",
+  "displayName": "Fermat's Little Theorem",
+  "slug": "fermats-last-theorem",
+  "stageCount": 7,
+  "story": {
+    "intro": "In 1640, Pierre de Fermat scribbled a startling claim in the margin of his copy of Arithmetica. It took mathematicians 358 years to prove. Today, you'll discover why it matters — not through a proof, but through play.",
+    "theoremStatement": "If p is prime and a is any integer not divisible by p, then a^(p−1) ≡ 1 (mod p)",
+    "plainEnglish": "When you multiply a number enough times and divide by a prime, the remainder is always 1 — as long as your starting number isn't already divisible by that prime.",
+    "applications": [
+      "Netflix uses it to verify your password hasn't been stolen in a data breach",
+      "Your bank encrypts your card details using prime exponents — Fermat's theorem makes it possible",
+      "Mathematicians use it to test whether enormous numbers are prime in seconds"
+    ],
+    "completionBadge": "Fermat's Apprentice"
+  },
+  "stages": [
+    {
+      "id": 1,
+      "type": "concept",
+      "question": "What is 17 mod 5?",
+      "expectedAnswer": "2",
+      "acceptedAnswers": ["2"],
+      "hint": "Divide 17 by 5. How many are left over? That's the remainder — which is what 'mod' gives you.",
+      "conceptShown": "17 = 3 × 5 + 2, so 17 mod 5 = 2",
+      "conceptLabel": "Modulo arithmetic"
+    },
+    {
+      "id": 2,
+      "type": "concept",
+      "question": "Is 11 a prime number? (answer 'yes' or 'no')",
+      "expectedAnswer": "yes",
+      "acceptedAnswers": ["yes", "y", "true"],
+      "hint": "A prime number has no divisors other than 1 and itself. Does 11 divide evenly by any number besides 1 and 11?",
+      "conceptShown": "11 is prime — it has no divisors other than 1 and itself",
+      "conceptLabel": "Prime numbers"
+    },
+    {
+      "id": 3,
+      "type": "numeric",
+      "question": "If p = 7 (prime) and a = 3, what is 3^(7−1) mod 7 — that is, 3^6 mod 7?",
+      "expectedAnswer": "1",
+      "acceptedAnswers": ["1"],
+      "hint": "Calculate 3^6 = 729. Now divide 729 by 7. What's the remainder?",
+      "conceptShown": "3^6 = 729. Divide by 7: 729 = 104 × 7 + 1. Remainder = 1",
+      "conceptLabel": "The theorem in action"
+    },
+    {
+      "id": 4,
+      "type": "numeric",
+      "question": "If p = 11 and a = 5, what is 5^(11−1) mod 11, or 5^10 mod 11?",
+      "expectedAnswer": "1",
+      "acceptedAnswers": ["1"],
+      "hint": "Since 5 is not divisible by 11 (the prime), Fermat's Little Theorem tells us the answer is 1. No complex calculation needed.",
+      "conceptShown": "5^10 mod 11 = 1 — Fermat's Little Theorem at work",
+      "conceptLabel": "Applying the theorem"
+    },
+    {
+      "id": 5,
+      "type": "numeric",
+      "question": "What is 2^10 mod 11?",
+      "expectedAnswer": "1",
+      "acceptedAnswers": ["1"],
+      "hint": "Again apply Fermat's Little Theorem. 2 is not divisible by 11, p = 11, so a^(p-1) = 2^10 ≡ 1 (mod 11).",
+      "conceptShown": "2^10 = 1024. 1024 ÷ 11 = 93 remainder 1. So 2^10 mod 11 = 1",
+      "conceptLabel": "Spot the pattern"
+    },
+    {
+      "id": 6,
+      "type": "numeric",
+      "question": "What is 7^12 mod 13? (hint: a^(p−1) ≡ 1 mod p when p is prime and a is not divisible by p)",
+      "expectedAnswer": "1",
+      "acceptedAnswers": ["1"],
+      "hint": "7 and 13 are coprime (7 is not divisible by 13). p = 13, so 7^12 ≡ 1 (mod 13).",
+      "conceptShown": "7^12 mod 13 = 1 — coprime condition satisfied",
+      "conceptLabel": "The coprime condition"
+    },
+    {
+      "id": 7,
+      "type": "challenge",
+      "question": "Final challenge: For any prime p and any a not divisible by p, a^(p−1) mod p equals...?",
+      "expectedAnswer": "1",
+      "acceptedAnswers": ["1"],
+      "hint": "That's the whole point of Fermat's Little Theorem. The answer is 1 — it's always 1.",
+      "conceptShown": "a^(p−1) ≡ 1 (mod p) — Fermat's Little Theorem, stated formally",
+      "conceptLabel": "The theorem, complete"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "id": "fermats-little",
+  "theorem": "Fermat's Little Theorem",
+  "displayName": "Fermat's Little Theorem",
+  "slug": "fermats-little-theorem",
+  "stageCount": 7,
+  "story": {
+    "intro": "In 1640, Pierre de Fermat wrote a deceptively simple claim in the margin of an ancient Greek math book. It took humanity 358 years and some of the greatest mathematicians alive to prove. Today, you'll discover why a^÷p − 1 ≡ 1 (mod p) when p is prime — and why it secretly protects every password you type online.",
+    "theoremStatement": "If p is a prime number and a is any integer not divisible by p, then a^(p−1) ≡ 1 (mod p).",
+    "plainEnglish": "When you raise any number to (prime minus one) and divide by that prime, the remainder is always 1. No matter what number you start with.",
+    "applications": [
+      "Modern cryptography: RSA encryption uses this theorem to secure HTTPS connections and online banking",
+      "Primality testing: Used in algorithms to check if large numbers are prime without factoring them",
+      "Hash functions: Distributed across computer science for generating unique identifiers"
+    ],
+    "completionBadge": "Fermat's Apprentice"
+  },
+  "stages": [
+    {
+      "id": 1,
+      "type": "numeric",
+      "conceptLabel": "Modulo arithmetic",
+      "conceptShown": "17 = 5 × 3 + 2, so 17 mod 5 = 2. The remainder is what matters.",
+      "question": "What is 17 mod 5?",
+      "hint": "Divide 17 by 5. The remainder after division is the answer.",
+      "acceptedAnswers": ["2"]
+    },
+    {
+      "id": 2,
+      "type": "concept",
+      "conceptLabel": "Prime numbers",
+      "conceptShown": "A prime number has exactly two distinct divisors: 1 and itself. 11 has no other divisors, so it is prime.",
+      "question": "Is 11 a prime number? Answer yes or no.",
+      "hint": "A prime number has no divisors other than 1 and itself. Does 11 divide evenly by any number besides 1 and 11?",
+      "acceptedAnswers": ["yes", "y", "true"]
+    },
+    {
+      "id": 3,
+      "type": "numeric",
+      "conceptLabel": "The theorem in action",
+      "conceptShown": "3^6 = 729. Divide by 7: 729 = 104 × 7 + 1. The remainder is 1.",
+      "question": "If p = 7 and a = 3, what is 3^(7−1) mod 7, i.e., 3^6 mod 7?",
+      "hint": "Calculate 3^6, then divide by 7 and find the remainder.",
+      "acceptedAnswers": ["1"]
+    },
+    {
+      "id": 4,
+      "type": "numeric",
+      "conceptLabel": "Applying the theorem",
+      "conceptShown": "Since 5^10 mod 11 = 1 by Fermat's Little Theorem, the answer is 1.",
+      "question": "If p = 11 and a = 5, what is 5^10 mod 11? (Fermat says the answer is 1!)",
+      "hint": "Fermat's Little Theorem tells us directly: for prime p and integer a, a^(p−1) ≡ 1 mod p.",
+      "acceptedAnswers": ["1"]
+    },
+    {
+      "id": 5,
+      "type": "numeric",
+      "conceptLabel": "Spot the pattern",
+      "conceptShown": "2^10 mod 11 = 1 by Fermat's Little Theorem, since 2^10 = (2^(11−1)).",
+      "question": "What is 2^10 mod 11? (This should equal 1 by Fermat's Little Theorem!)",
+      "hint": "For prime 11, 2^10 ≡ 1 mod 11. So the answer is 1.",
+      "acceptedAnswers": ["1"]
+    },
+    {
+      "id": 6,
+      "type": "numeric",
+      "conceptLabel": "The coprime condition",
+      "conceptShown": "7 and 13 are coprime (gcd = 1). So by FLT: 7^(13−1) = 7^12 ≡ 1 mod 13.",
+      "question": "What is 7^12 mod 13? (Hint: 7 and 13 are coprime, and 13 is prime)",
+      "hint": "Fermat says a^(p−1) ≡ 1 mod p when p is prime and a is not divisible by p.",
+      "acceptedAnswers": ["1"]
+    },
+    {
+      "id": 7,
+      "type": "numeric",
+      "conceptLabel": "The theorem, complete",
+      "conceptShown": "For any prime p and any integer a not divisible by p, a^(p−1) ≡ 1 mod p. This is Fermat's Little Theorem — and now you own it.",
+      "question": "For prime p = 13 and a = 2, what is 2^12 mod 13?",
+      "hint": "Apply Fermat's Little Theorem directly: a^(p−1) ≡ 1 mod p.",
+      "acceptedAnswers": ["1"]
+    }
+  ]
+}

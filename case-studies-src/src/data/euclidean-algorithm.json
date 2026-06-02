@@ -1,0 +1,74 @@
+{
+  "id": "euclidean-algorithm",
+  "theorem": "Euclidean Algorithm",
+  "displayName": "The Euclidean Algorithm",
+  "slug": "euclidean-algorithm",
+  "stageCount": 6,
+  "story": {
+    "intro": "Euclid described this algorithm around 300 BC in his Elements — making it one of the oldest algorithms still in active use. Its job: find the greatest common divisor (GCD) of two numbers quickly. It's surprisingly simple: keep replacing the larger number with its remainder when divided by the smaller, until one number becomes zero. The other number is your GCD. Every computer cryptography system relies on this ancient trick.",
+    "theoremStatement": "For any two integers a and b, gcd(a,b) = gcd(b, a mod b), and the process terminates with gcd(a,b) when the remainder reaches 0.",
+    "plainEnglish": "The GCD of two numbers stays the same if you replace the larger one with its remainder. Keep going until the remainder is zero — the last non-zero remainder is your GCD.",
+    "applications": [
+      "RSA cryptography: Modern internet security depends on computing GCDs quickly when generating public and private keys for encryption",
+      "Reducing fractions: Finding the GCD of numerator and denominator to reduce a fraction to lowest terms uses Euclidean Algorithm",
+      "Antenna design: The Euclidean Algorithm appears in the construction of efficient log-periodic antennas through fractal self-similarity"
+    ],
+    "completionBadge": "Euclid's Apprentice"
+  },
+  "stages": [
+    {
+      "id": 1,
+      "type": "numeric",
+      "conceptLabel": "The division step",
+      "conceptShown": "For gcd(48, 18): 48 ÷ 18 = 2 remainder 12. So gcd(48, 18) = gcd(18, 12).",
+      "question": "For gcd(48, 18), what is 48 divided by 18 with remainder? (Express as 'a remainder b')",
+      "hint": "48 ÷ 18 = 2 with remainder 12. So 48 = 2 × 18 + 12.",
+      "acceptedAnswers": ["12", "2 remainder 12", "48=2*18+12"]
+    },
+    {
+      "id": 2,
+      "type": "numeric",
+      "conceptLabel": "Iterating the algorithm",
+      "conceptShown": "gcd(48, 18): step 1: gcd(18, 12) [48 mod 18 = 12]. Step 2: gcd(12, 6) [18 mod 12 = 6]. Step 3: gcd(6, 0) [12 mod 6 = 0]. GCD = 6.",
+      "question": "Continuing from the previous stage: gcd(18, 12) — what is 18 mod 12?",
+      "hint": "18 ÷ 12 = 1 remainder 6. So 18 mod 12 = 6.",
+      "acceptedAnswers": ["6"]
+    },
+    {
+      "id": 3,
+      "type": "numeric",
+      "conceptLabel": "Complete algorithm trace",
+      "conceptShown": "gcd(48,18): gcd(18,12)→gcd(12,6)→gcd(6,0)→GCD=6. Each step divides the previous remainder.",
+      "question": "Now what is 12 mod 6 in the sequence gcd(12, 6)?",
+      "hint": "12 ÷ 6 = 2 remainder 0. So 12 mod 6 = 0. When remainder is 0, the algorithm stops and GCD = 6.",
+      "acceptedAnswers": ["0"]
+    },
+    {
+      "id": 4,
+      "type": "numeric",
+      "conceptLabel": "New example: gcd(84, 35)",
+      "conceptShown": "gcd(84, 35): 84 mod 35 = 14. gcd(35, 14): 35 mod 14 = 7. gcd(14, 7): 14 mod 7 = 0. GCD = 7.",
+      "question": "Find gcd(84, 35) using the Euclidean Algorithm. First step: what is 84 mod 35?",
+      "hint": "84 ÷ 35 = 2 remainder 14. So 84 mod 35 = 14.",
+      "acceptedAnswers": ["14"]
+    },
+    {
+      "id": 5,
+      "type": "numeric",
+      "conceptLabel": "Extending to coprime numbers",
+      "conceptShown": "Coprime numbers have GCD = 1. gcd(35, 14): 35 mod 14 = 7. gcd(14, 7): 14 mod 7 = 0. GCD = 7. So gcd(84, 35) = 7, meaning they are NOT coprime. For coprime: if GCD = 1 after full algorithm.",
+      "question": "For the pair 17 and 31 (both prime, definitely coprime), what would gcd(31, 17) give as the final GCD? (Think: what's 31 mod 17?)",
+      "hint": "31 ÷ 17 = 1 remainder 14. Next: 17 ÷ 14 = 1 remainder 3. Continue until remainder is 0.",
+      "acceptedAnswers": ["1"]
+    },
+    {
+      "id": 6,
+      "type": "numeric",
+      "conceptLabel": "The efficiency insight",
+      "conceptShown": "Euclidean Algorithm is extremely efficient — it reduces numbers by at least half every 2 steps. To find gcd(1,000,000, 2): 1000000 mod 2 = 0 in one step. GCD = 2.",
+      "question": "Use the Euclidean Algorithm to find gcd(100, 35). Continue until remainder is 0. What is the GCD?",
+      "hint": "100 mod 35 = 30 (since 100 = 2×35 + 30). Then 35 mod 30 = 5. Then 30 mod 5 = 0. GCD = 5.",
+      "acceptedAnswers": ["5"]
+    }
+  ]
+}

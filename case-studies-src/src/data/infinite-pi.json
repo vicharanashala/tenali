@@ -1,0 +1,90 @@
+{
+  "id": "infinite-pi",
+  "theorem": "Leibniz Formula for π",
+  "displayName": "Leibniz Formula for π",
+  "slug": "infinite-pi",
+  "stageCount": 7,
+  "story": {
+    "intro": "The ratio of a circle's circumference to its diameter — π — goes on forever with no repeating pattern. In the 1700s, Gottfried Leibniz discovered that you can generate π using a remarkably simple infinite series. Today, you'll compute π one term at a time through play.",
+    "theoremStatement": "π/4 = 1 - 1/3 + 1/5 - 1/7 + 1/9 - ...",
+    "plainEnglish": "Keep alternating between adding and subtracting fractions with odd denominators: 1/1 minus 1/3 plus 1/5 minus 1/7, forever. The result gets closer and closer to π divided by 4. Add infinite terms, get π exactly.",
+    "applications": [
+      "Computer graphics and game engines use π to render perfect circles, spheres, and arcs",
+      "NASA uses π to calculate orbital trajectories and gravitational slingshot maneuvers",
+      "Statisticians use π in the normal distribution curve that underlies medical research and quality control"
+    ],
+    "completionBadge": "Infinite Seeker"
+  },
+  "stages": [
+    {
+      "id": 1,
+      "type": "concept",
+      "question": "What is the value of π rounded to 4 decimal places?",
+      "expectedAnswer": "3.1415",
+      "acceptedAnswers": ["3.1415", "3.1416", "3.14159"],
+      "hint": "π is approximately 3.14159... Round it to 4 decimal places.",
+      "conceptShown": "π ≈ 3.1415 (rounded to 4 decimal places)",
+      "conceptLabel": "The value of pi"
+    },
+    {
+      "id": 2,
+      "type": "numeric",
+      "question": "In the Leibniz series, the first term is 1/1 = 1. What is the second term (with a minus sign)?",
+      "expectedAnswer": "-1/3",
+      "acceptedAnswers": ["-1/3", "-0.333", "-0.3333"],
+      "hint": "The series alternates: +1/1, -1/3, +1/5, -1/7... What comes after 1?",
+      "conceptShown": "The second term is -1/3 ≈ -0.3333...",
+      "conceptLabel": "Leibniz series pattern"
+    },
+    {
+      "id": 3,
+      "type": "numeric",
+      "question": "What is the third term in the Leibniz series (with its sign)?",
+      "expectedAnswer": "1/5",
+      "acceptedAnswers": ["1/5", "0.2"],
+      "hint": "The pattern is: +1/1, -1/3, +1/5, -1/7... What comes after -1/3?",
+      "conceptShown": "The third term is +1/5 = 0.2",
+      "conceptLabel": "Continuing the series"
+    },
+    {
+      "id": 4,
+      "type": "numeric",
+      "question": "If we add the first three terms of the Leibniz series: 1 - 1/3 + 1/5, what is the sum? (round to 4 decimal places)",
+      "expectedAnswer": "0.8666",
+      "acceptedAnswers": ["0.8666", "0.8667", "0.86666"],
+      "hint": "Calculate: 1 - 0.3333 + 0.2 = ?",
+      "conceptShown": "1 - 1/3 + 1/5 = 1 - 0.3333... + 0.2 = 0.8666...",
+      "conceptLabel": "Summing the series"
+    },
+    {
+      "id": 5,
+      "type": "numeric",
+      "question": "After two terms (1 - 1/3), the partial sum is about 0.667. Multiply this by 4. What do you get?",
+      "expectedAnswer": "2.666",
+      "acceptedAnswers": ["2.666", "2.6666", "2.6667", "2.67"],
+      "hint": "Multiply the partial sum 0.667 by 4. Leibniz formula says π/4 = series sum, so π ≈ 4 × sum.",
+      "conceptShown": "4 × (1 - 1/3) = 4 × 0.667 = 2.667 ≈ π. More terms = closer to 3.14159...",
+      "conceptLabel": "Estimating π"
+    },
+    {
+      "id": 6,
+      "type": "numeric",
+      "question": "What is the denominator of the 5th term in the Leibniz series? (the pattern is: 1, 3, 5, 7, 9, ...)",
+      "expectedAnswer": "9",
+      "acceptedAnswers": ["9"],
+      "hint": "The denominators are odd numbers: 1, 3, 5, 7, 9... What is the 5th odd number?",
+      "conceptShown": "The 5th term is +1/9, so the denominator is 9",
+      "conceptLabel": "Odd number pattern"
+    },
+    {
+      "id": 7,
+      "type": "challenge",
+      "question": "Final challenge: Leibniz formula states π/4 = 1 - 1/3 + 1/5 - 1/7 + ... What is the next term after -1/7?",
+      "expectedAnswer": "1/9",
+      "acceptedAnswers": ["1/9", "0.111", "+1/9"],
+      "hint": "The pattern alternates +, -, +, -,... and the denominators are odd numbers. What comes after 7?",
+      "conceptShown": "The next term is +1/9 — the pattern is +1/1, -1/3, +1/5, -1/7, +1/9, ...",
+      "conceptLabel": "The infinite series, complete"
+    }
+  ]
+}

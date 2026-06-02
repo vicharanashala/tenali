@@ -1,0 +1,90 @@
+{
+  "id": "fundamental-theorem",
+  "theorem": "Fundamental Theorem of Calculus",
+  "displayName": "Fundamental Theorem of Calculus",
+  "slug": "fundamental-theorem",
+  "stageCount": 7,
+  "story": {
+    "intro": "For centuries, mathematicians calculated areas under curves one sliver at a time. Then came two天才 — Barrow and Newton — who proved that differentiation and integration are perfect inverses of each other. Today, you'll feel why this theorem is called the most important link in all of mathematics.",
+    "theoremStatement": "If F(x) = ∫f(x)dx from a to x, then d/dx F(x) = f(x).",
+    "plainEnglish": "The area under a curve and the slope of a curve are two views of the same thing. Finding areas (integration) and finding slopes (differentiation) undo each other — completely. One operation is the reverse of the other.",
+    "applications": [
+      "Physics engines in video games use it to simulate gravity, momentum, and energy realistically",
+      "Your phone's battery indicator uses integration to track energy consumption over time",
+      "Engineers use it to calculate center of mass, moment of inertia, and structural stress"
+    ],
+    "completionBadge": "Integral Master"
+  },
+  "stages": [
+    {
+      "id": 1,
+      "type": "concept",
+      "question": "What is the derivative of x²? (d/dx of x²)",
+      "expectedAnswer": "2x",
+      "acceptedAnswers": ["2x", "2*x", "2 times x"],
+      "hint": "Use the power rule: bring the exponent down as a coefficient, then reduce the exponent by 1.",
+      "conceptShown": "d/dx (x²) = 2x — the power rule in action",
+      "conceptLabel": "Differentiation basics"
+    },
+    {
+      "id": 2,
+      "type": "concept",
+      "question": "What is the derivative of a constant? For example, d/dx(7)?",
+      "expectedAnswer": "0",
+      "acceptedAnswers": ["0", "zero"],
+      "hint": "A constant never changes — it has no rate of change. What is the slope of a flat horizontal line?",
+      "conceptShown": "d/dx(7) = 0 — the derivative of any constant is 0",
+      "conceptLabel": "Derivative of constants"
+    },
+    {
+      "id": 3,
+      "type": "numeric",
+      "question": "If you integrate (find the area under) the function f(x) = 2x from x = 0 to x = 3, what is the exact area?",
+      "expectedAnswer": "9",
+      "acceptedAnswers": ["9"],
+      "hint": "The antiderivative of 2x is x². Evaluate from 0 to 3: 3² - 0².",
+      "conceptShown": "∫2x dx from 0 to 3 = [x²]₀³ = 9 - 0 = 9",
+      "conceptLabel": "Basic integration"
+    },
+    {
+      "id": 4,
+      "type": "concept",
+      "question": "What do you call the reverse of differentiation — the process of finding areas under curves?",
+      "expectedAnswer": "integration",
+      "acceptedAnswers": ["integration", "integrate", "antiderivative"],
+      "hint": "If differentiation finds slopes, what finds areas under curves? Think of the inverse operation.",
+      "conceptShown": "Integration (or finding an antiderivative) is the reverse of differentiation",
+      "conceptLabel": "Integration defined"
+    },
+    {
+      "id": 5,
+      "type": "concept",
+      "question": "According to the Fundamental Theorem of Calculus, if F(x) is the integral of f(x), then F'(x) = ?",
+      "expectedAnswer": "f(x)",
+      "acceptedAnswers": ["f(x)", "f x", "f"],
+      "hint": "The theorem states that differentiation and integration are inverse operations. What happens when you differentiate the integral of a function?",
+      "conceptShown": "F'(x) = f(x) — the integral's derivative is the original function",
+      "conceptLabel": "The fundamental link"
+    },
+    {
+      "id": 6,
+      "type": "numeric",
+      "question": "If F(x) = ∫3x dx from 0 to x, what is F'(x)?",
+      "expectedAnswer": "3x",
+      "acceptedAnswers": ["3x", "3*x", "3 times x"],
+      "hint": "The Fundamental Theorem says: differentiate the integral, and you get back the original function. No calculation needed.",
+      "conceptShown": "F'(x) = 3x — differentiating the integral returns the original integrand",
+      "conceptLabel": "Theorem in action"
+    },
+    {
+      "id": 7,
+      "type": "challenge",
+      "question": "Final challenge: The Fundamental Theorem of Calculus connects differentiation and integration as inverse operations. What is d/dx(∫f(x)dx)?",
+      "expectedAnswer": "f(x)",
+      "acceptedAnswers": ["f(x)", "f x", "f"],
+      "hint": "This is literally the statement of the Fundamental Theorem. Integrate a function, then differentiate the result — what do you get back?",
+      "conceptShown": "d/dx(∫f(x)dx) = f(x) — the Fundamental Theorem of Calculus, in one line",
+      "conceptLabel": "The theorem, complete"
+    }
+  ]
+}
