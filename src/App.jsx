@@ -55,21 +55,39 @@ function createSession(user) {
   return session
 }
 
+function createMockSession() {
+  return {
+    userId:    'mock-user-1',
+    email:     'guest@tenali.fun',
+    name:      'Guest',
+    role:      'student',
+    createdAt: Date.now(),
+    view:      'dashboard',
+  }
+}
+
 function getSession() {
   try {
     const raw = localStorage.getItem(SESSION_KEY)
-    if (!raw) return null
+    if (!raw) {
+      // Auto-create a guest session so dashboard loads without auth
+      const mock = createMockSession()
+      localStorage.setItem(SESSION_KEY, JSON.stringify(mock))
+      return mock
+    }
     const session = JSON.parse(raw)
     const ageMs   = Date.now() - session.createdAt
     const maxAge  = 7 * 24 * 60 * 60 * 1000
     if (ageMs > maxAge) {
       localStorage.removeItem(SESSION_KEY)
       localStorage.removeItem('math_view')
-      return null
+      const mock = createMockSession()
+      localStorage.setItem(SESSION_KEY, JSON.stringify(mock))
+      return mock
     }
     return session
   } catch {
-    return null
+    return createMockSession()
   }
 }
 
@@ -349,30 +367,12 @@ export default function App() {
 
             {/* ── React Router routes (v0.4 – role-based auth) ── */}
             <Routes>
-              <Route path="/" element={<RoleSelect />} />
+              <Route path="/" element={<Dashboard session={getSession()} onSignOut={clearSession} />} />
               <Route path="/student/register" element={<StudentRegister />} />
               <Route path="/student/login"  element={<StudentLogin />} />
               <Route path="/teacher/register" element={<TeacherRegister />} />
               <Route path="/teacher/login"  element={<TeacherLogin />} />
-              <Route
-                path="/dashboard"
-                element={session
-                  ? session.role === 'teacher'
-                      ? <Navigate to="/teacher/dashboard" replace />
-                      : <Dashboard session={session} onSignOut={handleSignOut} />
-                  : <Navigate to="/" replace />
-                }
-              />
-              <Route
-                path="/teacher/dashboard"
-                element={session
-                  ? session.role === 'teacher'
-                      ? <TeacherDashboard session={session} onSignOut={handleSignOut} />
-                      : <Navigate to="/dashboard" replace />
-                  : <Navigate to="/" replace />
-                }
-              />
-              <Route path="*" element={<Navigate to="/" replace />} />
+              <Route path="*" element={<Dashboard session={getSession()} onSignOut={clearSession} />} />
             </Routes>
 
           </main>
