@@ -111,6 +111,13 @@ export default defineConfig({
       '/pythag-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
       '/polygons-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
       '/similarity-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      '/gymdecimals-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      '/funcgym-api':     { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      '/dotprodgym-api':  { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      '/fracaddgym-api':  { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      '/lineqgym-api':    { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      '/indicesgym-api':  { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      '/polygym-api':     { target: 'http://127.0.0.1:4000', changeOrigin: true },
     },
   },
 })
