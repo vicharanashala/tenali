@@ -21,7 +21,7 @@
  * Progress persistence: Adaptive tables app saves current table progress in localStorage
  */
 
-import { useEffect, useState, useRef, useMemo } from 'react'
+import React, { useEffect, useState, useRef, useMemo } from 'react'
 import './App.css'
 
 // API base URL from environment variables (Vite)
@@ -421,7 +421,21 @@ function renderFeedback(feedback, isCorrect) {
   if (!feedback) return null
   const isSolve = isCorrect === false && feedback.startsWith('Solution:')
   if (!isSolve) {
-    return <div className={`feedback ${isCorrect ? 'correct' : 'wrong'}`}>{feedback}</div>
+    if (isCorrect) {
+      return (
+        <div className="feedback correct">
+          <div className="feedback-title">✓ Correct!</div>
+        </div>
+      )
+    } else {
+      const cleanMsg = feedback.replace(/^(?:wrong|incorrect)\.?\s*/i, '');
+      return (
+        <div className="feedback wrong">
+          <div className="feedback-title">✗ Not quite</div>
+          <div className="feedback-detail">{cleanMsg}</div>
+        </div>
+      )
+    }
   }
   // Parse solve feedback: "Solution: ANSWER\nExplanation..."
   const lines = feedback.split('\n')
@@ -443,6 +457,16 @@ function renderFeedback(feedback, isCorrect) {
 
   return (
     <div className="feedback solve">
+      <div className="solve-panel-header">
+        <span className="solve-panel-title">Solution</span>
+        <button 
+          className="solve-panel-close" 
+          type="button"
+          onClick={(e) => e.currentTarget.closest('.feedback.solve').classList.add('hidden-solve-panel')}
+        >
+          &times;
+        </button>
+      </div>
       <div className="solve-answer-badge">{answerLine}</div>
       {steps.length > 0 && (
         <div className="solve-timeline">
@@ -36168,6 +36192,7 @@ function Home({ onSelect }) {
     { key: 'polygym', name: 'Polynomials Gym', subtitle: 'Arithmetic → monomial algebra (MCQ)', color: 'blue' },
   ]
 
+
   // Combined list for search filtering
   const allApps = [...featuredApps, ...regularApps]
 
@@ -36185,6 +36210,7 @@ function Home({ onSelect }) {
 
   // Search term for filtering apps
   const [search, setSearch] = useState('')
+  const [selectedZone, setSelectedZone] = useState(null)
 
   // Filtered lists
   const isSearching = search.trim() !== ''
@@ -36214,13 +36240,235 @@ function Home({ onSelect }) {
   // Calculate number of rows for display (for grid dimension label at bottom)
   const rows = Math.ceil(apps.length / (cols || 1))
 
+  // Zone metadata definitions
+  const zoneData = {
+    pathshala: {
+      key: 'pathshala',
+      name: 'The Pathshala',
+      devanagari: 'पाठशाला',
+      subtitle: 'Ganit ki buniyaad yahan se shuru hoti hai',
+      difficulty: '★☆☆',
+      emoji: '✏️',
+      keys: ['addition', 'decimals', 'fractionadd', 'rounding', 'lineareq', 'indices', 'multiply', 'hcflcm', 'sqrt', 'fracaddgym', 'lineqgym', 'indicesgym', 'gymdecimals', 'primefactor', 'tatsavit']
+    },
+    akhara: {
+      key: 'akhara',
+      name: 'The Akhara',
+      devanagari: 'अखाड़ा',
+      subtitle: 'Pratiyogita ke liye taiyar raho!',
+      difficulty: '★★☆',
+      emoji: '⚔️',
+      keys: ['basicarith', 'squaring', 'bases', 'bounds', 'stdform', 'sequences', 'permcomb', 'binomial', 'surds', 'polygym']
+    },
+    bazaar: {
+      key: 'bazaar',
+      name: 'The Bazaar',
+      devanagari: 'बाज़ार',
+      subtitle: 'Vyaapar mein ganit, ganit mein vyaapar',
+      difficulty: '★★☆',
+      emoji: '🪙',
+      keys: ['gst', 'profitloss', 'banking', 'percent', 'ratio', 'shares', 'sdt', 'variation']
+    },
+    darbar: {
+      key: 'darbar',
+      name: 'The Darbar',
+      devanagari: 'दरबार',
+      subtitle: 'Raj ka ganit — probability aur statistics ka kehetra',
+      difficulty: '★★★',
+      emoji: '👑',
+      keys: ['prob', 'stats', 'sets', 'funceval', 'similarity', 'congruence', 'circleth', 'vectors', 'funcgym']
+    },
+    jungle: {
+      key: 'jungle',
+      name: 'The Jungle',
+      devanagari: 'जंगल',
+      subtitle: 'Prakriti mein chhupa hai geometry ka rahasya',
+      difficulty: '★★☆',
+      emoji: '🌿',
+      keys: ['mensur', 'pythag', 'angles', 'bearings', 'polygons', 'heron', 'trig', 'triangles', 'transform']
+    },
+    observatory: {
+      key: 'observatory',
+      name: 'The Observatory',
+      devanagari: 'वेधशाला',
+      subtitle: 'Brahmand ko samajhne ka ganit',
+      difficulty: '★★★',
+      emoji: '🔭',
+      keys: ['diff', 'integ', 'diffeq', 'limits', 'complex', 'matrix', 'conics', 'invtrig', 'circmeasure']
+    },
+    sabhagraha: {
+      key: 'sabhagraha',
+      name: 'The Sabhagraha',
+      devanagari: 'सभागृह',
+      subtitle: 'Sabhi ko milke seekhna padega ye ganit',
+      difficulty: '★★★',
+      emoji: '🏛️',
+      keys: ['coordgeom', 'linprog', 'dotprod', 'section', 'quadratic', 'qformula', 'simul', 'ineq', 'lineq', 'log', 'polyfactor', 'polymul', 'remfactor', 'dotprodgym']
+    },
+    gurukul: {
+      key: 'gurukul',
+      name: 'The Gurukul',
+      devanagari: 'गुरुकुल',
+      subtitle: 'GK aur vocabulary — gyan ki shakha',
+      difficulty: '★☆☆',
+      emoji: '📜',
+      keys: ['gk', 'vocab', 'guess', 'spot']
+    }
+  }
+
+  // To quickly find the app object by key
+  const appMap = useMemo(() => {
+    const map = {}
+    regularApps.forEach(app => {
+      map[app.key] = app
+    })
+    return map
+  }, [regularApps])
+
+  const renderZoneIllustration = (zoneKey) => {
+    switch (zoneKey) {
+      case 'pathshala':
+        return (
+          <div className="illustration-pathshala">
+            <div className="hut-building">
+              <div className="hut-roof" />
+              <div className="hut-door" />
+              <div className="hut-window left" />
+              <div className="hut-window right" />
+              <div className="hut-smoke-wisp wisp-1" />
+              <div className="hut-smoke-wisp wisp-2" />
+            </div>
+          </div>
+        )
+      case 'akhara':
+        return (
+          <div className="illustration-akhara">
+            <div className="akhara-pit">
+              <div className="akhara-pillar left" />
+              <div className="akhara-pillar right" />
+              <div className="akhara-club left" />
+              <div className="akhara-club right" />
+            </div>
+          </div>
+        )
+      case 'bazaar':
+        return (
+          <div className="illustration-bazaar">
+            <div className="bazaar-stall">
+              <div className="bazaar-awning" />
+              <div className="bazaar-counter" />
+              <div className="bazaar-pots">
+                <div className="bazaar-pot pot-red" />
+                <div className="bazaar-pot pot-orange" />
+                <div className="bazaar-pot pot-yellow" />
+              </div>
+              <div className="bazaar-hanging-item left" />
+              <div className="bazaar-hanging-item right" />
+            </div>
+          </div>
+        )
+      case 'darbar':
+        return (
+          <div className="illustration-darbar">
+            <div className="darbar-palace">
+              <div className="darbar-pillar left"><div className="darbar-palace-cap" /></div>
+              <div className="darbar-pillar right"><div className="darbar-palace-cap" /></div>
+              <div className="darbar-arch">
+                <div className="darbar-keystone" />
+                <span className="darbar-peacock">🦚</span>
+              </div>
+              <div className="darbar-steps">
+                <div className="darbar-step darbar-step-1" />
+                <div className="darbar-step darbar-step-2" />
+                <div className="darbar-step darbar-step-3" />
+              </div>
+            </div>
+          </div>
+        )
+      case 'jungle':
+        return (
+          <div className="illustration-jungle">
+            <div className="jungle-scene">
+              <div className="jungle-trunk" />
+              <div className="jungle-canopy canopy-left" />
+              <div className="jungle-canopy canopy-mid" />
+              <div className="jungle-canopy canopy-right" />
+              <div className="jungle-ground" />
+              <span className="jungle-symbol jsym-1">△</span>
+              <span className="jungle-symbol jsym-2">π</span>
+              <span className="jungle-symbol jsym-3">√</span>
+              <div className="jungle-firefly ff-1" />
+              <div className="jungle-firefly ff-2" />
+              <div className="jungle-firefly ff-3" />
+            </div>
+          </div>
+        )
+      case 'observatory':
+        return (
+          <div className="illustration-observatory">
+            <div className="obs-scene">
+              <div className="obs-sky">
+                <div className="obs-moon" />
+                <span className="obs-star ostar-1">✦</span>
+                <span className="obs-star ostar-2">★</span>
+                <span className="obs-star ostar-3">✧</span>
+              </div>
+              <div className="obs-tower" />
+              <div className="obs-dome">
+                <span className="obs-crescent">🌙</span>
+              </div>
+              <div className="obs-yantra" />
+            </div>
+          </div>
+        )
+      case 'sabhagraha':
+        return (
+          <div className="illustration-sabhagraha">
+            <div className="sabhagraha-hall">
+              <div className="sabha-roof" />
+              <div className="sabha-flagpole" />
+              <div className="sabha-flag" />
+              <div className="sabha-column col-1" />
+              <div className="sabha-column col-2" />
+              <div className="sabha-column col-3" />
+              <div className="sabha-column col-4" />
+              <div className="sabha-frieze" />
+              <div className="sabha-steps">
+                <div className="sabha-step-row sabha-step-1" />
+                <div className="sabha-step-row sabha-step-2" />
+              </div>
+            </div>
+          </div>
+        )
+      case 'gurukul':
+        return (
+          <div className="illustration-gurukul">
+            <div className="gurukul-yard">
+              <div className="gurukul-trunk" />
+              <div className="gurukul-root groot-1" />
+              <div className="gurukul-root groot-2" />
+              <div className="gurukul-canopy" />
+              <div className="canopy-overlay" />
+              <span className="gurukul-om">ॐ</span>
+              <div className="gurukul-fire" />
+              <div className="gurukul-scroll" />
+            </div>
+          </div>
+        )
+      default:
+        return null
+    }
+  }
+
   return (
     <>
       <div style={{ position: 'relative' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', marginBottom: '4px' }}>
           <img src="/tenali.png" alt="Tenali Raman" style={{ width: '80px', height: 'auto', flexShrink: 0 }} />
           <div>
-            <h1 style={{ margin: 0 }}>Tenali</h1>
+            <h1 style={{ margin: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <img src="/heading-tenali.png" alt="Tenali" style={{ height: 'clamp(4.8rem, 11vw, 6.5rem)', width: 'auto', display: 'block' }} />
+            </h1>
             <p className="subtitle" style={{ margin: 0 }}>Choose a learning game to begin</p>
           </div>
         </div>
@@ -36254,24 +36502,167 @@ function Home({ onSelect }) {
           </div>}
         </div>
       </div>
-      <div className="search-bar-row">
-        <input
-          className="search-bar"
-          type="text"
-          placeholder="Search puzzles…"
-          value={search}
-          onChange={e => setSearch(e.target.value)}
-        />
+
+      {/* Search Input styled as Scroll */}
+      <div className="scroll-search-container">
+        <div className="scroll-search-quote">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;॥ विद्या विनयेन शोभते ॥</div>
+        <div className="scroll-search-wrapper">
+          <span className="scroll-search-diya">🪔</span>
+          <input
+            className="scroll-search-input"
+            type="text"
+            placeholder="Kaun sa path dhundh rahe ho?..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+          />
+        </div>
       </div>
-      <div className="menu-grid" ref={gridRef}>
-        {filteredRegular.map((app) => (
-          <button key={app.key} className={`menu-card ${app.color}`} onClick={() => onSelect(app.key)}>
-            <span className="menu-title">{app.name}</span>
-            <span className="menu-subtitle">{app.subtitle}</span>
-          </button>
-        ))}
-      </div>
-      <div className="grid-dimension">{rows} × {cols}</div>
+
+      {isSearching ? (
+        /* Fallback Grid when searching */
+        <>
+          <div className="menu-grid" ref={gridRef}>
+            {filteredRegular.map((app) => (
+              <button key={app.key} className={`menu-card ${app.color}`} onClick={() => onSelect(app.key)}>
+                <span className="menu-title">{app.name}</span>
+                <span className="menu-subtitle">{app.subtitle}</span>
+              </button>
+            ))}
+          </div>
+          <div className="grid-dimension">{rows} × {cols}</div>
+        </>
+      ) : (
+        /* Main Redesigned Village Map */
+        <>
+          {/* Yatra Featured Cards */}
+          <div className="featured-yatra-container">
+            {featuredApps.map(app => (
+              <div key={app.key} className="yatra-scroll-card" onClick={() => onSelect(app.key)}>
+                <span className="yatra-label">Yatra</span>
+                <span className="yatra-title">{app.name}</span>
+                <span className="yatra-subtitle">{app.subtitle}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="village-map-container">
+            <div className="village-map-inner">
+              {/* Corner Ornaments */}
+              <span className="corner-motif top-left">✿</span>
+              <span className="corner-motif top-right">❋</span>
+              <span className="corner-motif bottom-left">ॐ</span>
+              <span className="corner-motif bottom-right">✿</span>
+
+              {/* Title Banner */}
+              <div className="village-title-banner">
+                <h2>तेनाली का गाँव</h2>
+                <div className="village-title-banner-sub">Tenali's Learning Village</div>
+                <div className="village-title-banner-decoration">❋</div>
+              </div>
+
+              {/* Decorative Map Elements */}
+              <div className="decorative-elements-container">
+                <div className="decorative-road road-1"></div>
+                <div className="decorative-road road-2"></div>
+              </div>
+
+              {/* Village Grid */}
+              <div className="village-grid">
+                {Object.keys(zoneData).map((zoneKey) => {
+                  const zone = zoneData[zoneKey]
+                  const topicsInZone = zone.keys.map(k => appMap[k]).filter(Boolean)
+                  const count = topicsInZone.length
+
+                  return (
+                    <div
+                      key={zoneKey}
+                      className={`zone-card zone-${zoneKey} zone-${zoneKey}-card`}
+                      onClick={() => setSelectedZone(zoneKey)}
+                    >
+                      <div className="zone-illustration">
+                        {renderZoneIllustration(zoneKey)}
+                      </div>
+                      <div className="zone-content">
+                        <div>
+                          <div className="zone-devanagari">{zone.devanagari}</div>
+                          <div className="zone-name">{zone.name}</div>
+                          <div className="zone-subtitle">{zone.subtitle}</div>
+                        </div>
+                        <div className="zone-meta-row">
+                          <div className="zone-difficulty">{zone.difficulty}</div>
+                          <div className="zone-topic-count">{count} paths await</div>
+                        </div>
+                      </div>
+
+                      {/* Hover topics list */}
+                      <div className="zone-hover-topics">
+                        {topicsInZone.map(topic => (
+                          <span key={topic.key} className="topic-pill">{topic.name}</span>
+                        ))}
+                      </div>
+
+                      {/* Diya Hover decoration */}
+                      <div className="zone-diya-decoration">🪔</div>
+                    </div>
+                  )
+                })}
+              </div>
+
+              {/* Compass Rose */}
+              <div className="compass-rose">
+                <div className="compass-arrow-v"></div>
+                <div className="compass-arrow-h"></div>
+                <span className="compass-label">दिशा</span>
+              </div>
+
+
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* Zone Detail Modal/Drawer */}
+      {selectedZone && (
+        <div className="zone-modal-overlay" onClick={() => setSelectedZone(null)}>
+          <div className={`zone-modal theme-${selectedZone}`} onClick={e => e.stopPropagation()}>
+            <div className="zone-modal-header">
+              <div className="zone-modal-illustration-wrapper">
+                {renderZoneIllustration(selectedZone)}
+              </div>
+              <div className="zone-modal-title-area">
+                <h3 className="zone-modal-devanagari">{zoneData[selectedZone].devanagari}</h3>
+                <div className="zone-modal-name">{zoneData[selectedZone].name}</div>
+                <div className="zone-modal-subtitle">{zoneData[selectedZone].subtitle}</div>
+              </div>
+            </div>
+            
+            <div className="zone-modal-divider">❋ ❋ ❋</div>
+            
+            <div className="zone-modal-grid">
+              {zoneData[selectedZone].keys.map(k => appMap[k]).filter(Boolean).map(app => (
+                <button
+                  key={app.key}
+                  className="zone-topic-card"
+                  onClick={() => {
+                    onSelect(app.key)
+                    setSelectedZone(null)
+                  }}
+                >
+                  <span className="zone-topic-card-title">
+                    <span>{zoneData[selectedZone].emoji}</span>
+                    <span>{app.name}</span>
+                  </span>
+                  <span className="zone-topic-card-subtitle">{app.subtitle}</span>
+                </button>
+              ))}
+            </div>
+
+            <button className="zone-modal-back-btn" onClick={() => setSelectedZone(null)}>
+              ← Gaon mein wapas jao
+            </button>
+          </div>
+        </div>
+      )}
     </>
   )
 }
@@ -49545,6 +49936,203 @@ function TatsavitLineApp({ onBack }) {
 }
 
 /**
+ * Canvas-based particle animation of falling marigold petals (Genda Phool) and gold sparkles
+ */
+const triggerMarigoldCelebration = () => {
+  let canvas = document.getElementById('celebration-canvas');
+  if (!canvas) {
+    canvas = document.createElement('canvas');
+    canvas.id = 'celebration-canvas';
+    canvas.style.position = 'fixed';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.width = '100vw';
+    canvas.style.height = '100vh';
+    canvas.style.pointerEvents = 'none';
+    canvas.style.zIndex = '9999';
+    document.body.appendChild(canvas);
+  }
+
+  const ctx = canvas.getContext('2d');
+  let width = canvas.width = window.innerWidth;
+  let height = canvas.height = window.innerHeight;
+
+  const handleResize = () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  };
+  window.addEventListener('resize', handleResize);
+
+  const particles = [];
+  const colors = [
+    '#FF8C00', // Deep Orange
+    '#FFA500', // Orange
+    '#FFD700', // Gold
+    '#FF7F50', // Coral
+    '#E07B39'  // Saffron
+  ];
+
+  // Populate particles
+  for (let i = 0; i < 75; i++) {
+    particles.push({
+      x: Math.random() * width,
+      y: Math.random() * -height - 20,
+      r: Math.random() * 6 + 4,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      angle: Math.random() * Math.PI * 2,
+      spin: Math.random() * 0.05 - 0.025,
+      speedY: Math.random() * 2 + 1.5,
+      speedX: Math.random() * 2 - 1,
+      opacity: Math.random() * 0.4 + 0.6,
+      type: Math.random() > 0.4 ? 'petal' : 'sparkle'
+    });
+  }
+
+  let animationFrameId;
+  const draw = () => {
+    ctx.clearRect(0, 0, width, height);
+    let active = false;
+
+    particles.forEach(p => {
+      if (p.y < height + 20) {
+        active = true;
+        p.y += p.speedY;
+        p.x += p.speedX + Math.sin(p.angle) * 0.5;
+        p.angle += p.spin;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.angle);
+        ctx.globalAlpha = p.opacity;
+
+        if (p.type === 'petal') {
+          // Draw marigold petal shape
+          ctx.fillStyle = p.color;
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.quadraticCurveTo(p.r, -p.r * 1.5, 0, -p.r * 2.5);
+          ctx.quadraticCurveTo(-p.r, -p.r * 1.5, 0, 0);
+          ctx.fill();
+
+          // Subtle inner vein
+          ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.lineTo(0, -p.r * 2);
+          ctx.stroke();
+        } else {
+          // Draw small golden sparkle
+          ctx.fillStyle = '#FFD700';
+          ctx.beginPath();
+          for (let k = 0; k < 4; k++) {
+            ctx.lineTo(0, -p.r * 0.7);
+            ctx.rotate(Math.PI / 2);
+            ctx.lineTo(0, -p.r * 0.2);
+            ctx.rotate(Math.PI / 2);
+          }
+          ctx.closePath();
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+    });
+
+    if (active) {
+      animationFrameId = requestAnimationFrame(draw);
+    } else {
+      ctx.clearRect(0, 0, width, height);
+      window.removeEventListener('resize', handleResize);
+      if (canvas.parentNode) {
+        canvas.parentNode.removeChild(canvas);
+      }
+    }
+  };
+
+  draw();
+};
+
+/**
+ * Play synthesizer sound effects using the Web Audio API (zero external assets needed)
+ */
+const playTenaliSound = (type) => {
+  if (localStorage.getItem('tenali_mute_sound') === 'true') return;
+  try {
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+
+    if (type === 'correct') {
+      // Soft Indian bell chime (E5 -> A5)
+      const osc1 = audioCtx.createOscillator();
+      const osc2 = audioCtx.createOscillator();
+      const gainNode1 = audioCtx.createGain();
+      const gainNode2 = audioCtx.createGain();
+
+      osc1.type = 'sine';
+      osc1.frequency.setValueAtTime(659.25, audioCtx.currentTime);
+      gainNode1.gain.setValueAtTime(0.12, audioCtx.currentTime);
+      gainNode1.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.45);
+
+      osc1.connect(gainNode1);
+      gainNode1.connect(audioCtx.destination);
+
+      osc2.type = 'sine';
+      osc2.frequency.setValueAtTime(880, audioCtx.currentTime + 0.08);
+      gainNode2.gain.setValueAtTime(0.12, audioCtx.currentTime + 0.08);
+      gainNode2.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.55);
+
+      osc2.connect(gainNode2);
+      gainNode2.connect(audioCtx.destination);
+
+      osc1.start();
+      osc1.stop(audioCtx.currentTime + 0.45);
+      osc2.start(audioCtx.currentTime + 0.08);
+      osc2.stop(audioCtx.currentTime + 0.55);
+    } else if (type === 'wrong') {
+      // Gentle slide-down triangle wave
+      const osc = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(174.61, audioCtx.currentTime);
+      osc.frequency.linearRampToValueAtTime(146.83, audioCtx.currentTime + 0.35);
+
+      gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
+
+      osc.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.4);
+    } else if (type === 'victory') {
+      // Majestic sitar-like pentatonic arpeggio
+      const notes = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99];
+      notes.forEach((freq, idx) => {
+        const osc = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime + idx * 0.07);
+
+        gainNode.gain.setValueAtTime(0.08, audioCtx.currentTime + idx * 0.07);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + idx * 0.07 + 0.35);
+
+        osc.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+
+        osc.start(audioCtx.currentTime + idx * 0.07);
+        osc.stop(audioCtx.currentTime + idx * 0.07 + 0.35);
+      });
+    }
+  } catch (e) {
+    console.warn("AudioContext initialization failed:", e);
+  }
+};
+
+/**
  * QuizLayout Component
  * Wrapper layout for quiz apps (PolyFactorApp, PrimeFactorApp, QFormulaApp, etc.)
  * Provides consistent header with back button and title section
@@ -49557,17 +50145,398 @@ function TatsavitLineApp({ onBack }) {
  * @param {React.ReactNode} props.children - Quiz content to display
  */
 function QuizLayout({ title, subtitle, onBack, children, timer }) {
+  const [quizState, setQuizState] = React.useState({
+    active: false,
+    current: 1,
+    total: 10
+  });
+
+  const [muted, setMuted] = React.useState(() => localStorage.getItem('tenali_mute_sound') === 'true');
+
+  const toggleMute = () => {
+    const nextVal = !muted;
+    setMuted(nextVal);
+    localStorage.setItem('tenali_mute_sound', String(nextVal));
+  };
+
+  React.useEffect(() => {
+    const updateState = () => {
+      const welcomeBox = document.querySelector('.welcome-box');
+      const isFinished = welcomeBox && document.body.textContent.includes('Quiz complete');
+      const isActive = !welcomeBox && !isFinished;
+      
+      let current = 1;
+      let total = 10;
+      
+      const progressEl = document.querySelector('.progress-pill.center, .progress-pill');
+      if (progressEl) {
+        const text = progressEl.textContent || '';
+        const match = text.match(/(?:Question|Round|Q|Question\s+)?\s*(\d+)\s*(?:\/|of)\s*(\d+)/i);
+        if (match) {
+          current = parseInt(match[1], 10);
+          total = parseInt(match[2], 10);
+        }
+      }
+      
+      setQuizState({
+        active: isActive,
+        current,
+        total
+      });
+      
+      // Toggle entrance animation class when question box text changes
+      const qBox = document.querySelector('.question-box');
+      if (qBox) {
+        const currentText = qBox.textContent || '';
+        if (qBox.dataset.lastText !== currentText) {
+          qBox.dataset.lastText = currentText;
+          qBox.classList.remove('animate-question');
+          void qBox.offsetWidth; // force reflow
+          qBox.classList.add('animate-question');
+        }
+      }
+
+      // Trigger background flashes and input states when feedback is displayed
+      const correctEl = document.querySelector('.feedback.correct');
+      const wrongEl = document.querySelector('.feedback.wrong');
+      const ansInput = document.querySelector('.answer-input:not(.question-count-input)');
+      
+      if (correctEl) {
+        if (qBox && !qBox.classList.contains('flash-correct')) {
+          qBox.classList.remove('flash-wrong');
+          qBox.classList.add('flash-correct');
+        }
+        if (ansInput && !ansInput.classList.contains('status-correct')) {
+          ansInput.classList.remove('status-wrong', 'input-shake');
+          ansInput.classList.add('status-correct');
+        }
+        if (!correctEl.dataset.soundPlayed) {
+          correctEl.dataset.soundPlayed = 'true';
+          playTenaliSound('correct');
+        }
+      } else if (wrongEl) {
+        if (qBox && !qBox.classList.contains('flash-wrong')) {
+          qBox.classList.remove('flash-correct');
+          qBox.classList.add('flash-wrong');
+        }
+        if (ansInput && !ansInput.classList.contains('status-wrong')) {
+          ansInput.classList.remove('status-correct');
+          ansInput.classList.add('status-wrong', 'input-shake');
+        }
+        if (!wrongEl.dataset.soundPlayed) {
+          wrongEl.dataset.soundPlayed = 'true';
+          playTenaliSound('wrong');
+        }
+      } else {
+        if (qBox) {
+          qBox.classList.remove('flash-correct', 'flash-wrong');
+        }
+        if (ansInput) {
+          ansInput.classList.remove('status-correct', 'status-wrong', 'input-shake');
+        }
+      }
+
+      // Convert standard checkbox pills into rich level selection cards
+      const pills = document.querySelectorAll('.checkbox-pill');
+      pills.forEach(pill => {
+        if (pill.querySelector('.pill-desc')) return;
+        
+        const text = pill.textContent || '';
+        const cleanText = text.trim();
+        
+        let levelName = '';
+        let descriptor = '';
+        let stars = '';
+        
+        if (cleanText.toLowerCase().includes('easy')) {
+          levelName = 'Easy';
+          descriptor = 'Warm up';
+          stars = '✦';
+        } else if (cleanText.toLowerCase().includes('extrahard') || cleanText.toLowerCase().includes('extra hard')) {
+          levelName = 'Extra Hard';
+          descriptor = 'Champion level';
+          stars = '✦✦✦✦';
+        } else if (cleanText.toLowerCase().includes('medium')) {
+          levelName = 'Medium';
+          descriptor = 'Getting serious';
+          stars = '✦✦';
+        } else if (cleanText.toLowerCase().includes('hard')) {
+          levelName = 'Hard';
+          descriptor = 'Push yourself';
+          stars = '✦✦✦';
+        } else if (cleanText.toLowerCase().includes('adaptive')) {
+          levelName = 'Adaptive';
+          descriptor = 'Smart difficulty';
+          stars = '✦✦✦';
+        } else {
+          levelName = cleanText;
+          descriptor = 'Practice';
+          stars = '✦';
+        }
+        
+        const inputEl = pill.querySelector('input');
+        
+        pill.innerHTML = '';
+        if (inputEl) {
+          pill.appendChild(inputEl);
+        }
+        
+        const starsEl = document.createElement('span');
+        starsEl.className = 'pill-stars';
+        starsEl.textContent = stars;
+        pill.appendChild(starsEl);
+        
+        const titleEl = document.createElement('strong');
+        titleEl.className = 'pill-title';
+        titleEl.textContent = levelName;
+        pill.appendChild(titleEl);
+        
+        const descEl = document.createElement('span');
+        descEl.className = 'pill-desc';
+        descEl.textContent = descriptor;
+        pill.appendChild(descEl);
+      });
+
+      // Convert standard question count text inputs into connected segment buttons
+      const countInput = document.querySelector('.question-count-input');
+      if (countInput && !countInput.dataset.transformed) {
+        countInput.dataset.transformed = 'true';
+        countInput.style.display = 'none';
+        
+        const wrapper = document.createElement('div');
+        wrapper.className = 'custom-question-counter';
+        
+        const decBtn = document.createElement('button');
+        decBtn.type = 'button';
+        decBtn.className = 'counter-btn dec-btn';
+        decBtn.textContent = '−';
+        
+        const valDisp = document.createElement('span');
+        valDisp.className = 'counter-val';
+        valDisp.textContent = countInput.value || countInput.placeholder || '20';
+        
+        const incBtn = document.createElement('button');
+        incBtn.type = 'button';
+        incBtn.className = 'counter-btn inc-btn';
+        incBtn.textContent = '+';
+        
+        const triggerInputChange = (inputEl, newValue) => {
+          const valueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+          valueSetter.call(inputEl, newValue);
+          inputEl.dispatchEvent(new Event('input', { bubbles: true }));
+        };
+        
+        decBtn.onclick = () => {
+          let val = parseInt(countInput.value || countInput.placeholder || '20', 10);
+          val = Math.max(5, val - 5);
+          triggerInputChange(countInput, String(val));
+          valDisp.textContent = String(val);
+        };
+        
+        incBtn.onclick = () => {
+          let val = parseInt(countInput.value || countInput.placeholder || '20', 10);
+          val = Math.min(50, val + 5);
+          triggerInputChange(countInput, String(val));
+          valDisp.textContent = String(val);
+        };
+        
+        wrapper.appendChild(decBtn);
+        wrapper.appendChild(valDisp);
+        wrapper.appendChild(incBtn);
+        
+        countInput.parentNode.insertBefore(wrapper, countInput.nextSibling);
+      }
+
+      // Convert results screen score display, add count-up animation, status message, and divider
+      const finalScoreEl = document.querySelector('.final-score');
+      if (finalScoreEl && !finalScoreEl.dataset.animated) {
+        finalScoreEl.dataset.animated = 'true';
+        if (!finalScoreEl.dataset.soundPlayed) {
+          finalScoreEl.dataset.soundPlayed = 'true';
+          playTenaliSound('victory');
+          triggerMarigoldCelebration();
+        }
+        const text = finalScoreEl.textContent || '';
+        const match = text.match(/(\d+)\s*\/\s*(\d+)/);
+        if (match) {
+          const score = parseInt(match[1], 10);
+          const total = parseInt(match[2], 10);
+          
+          let current = 0;
+          const duration = 1000;
+          const steps = score;
+          const stepTime = steps > 0 ? duration / steps : 0;
+          
+          finalScoreEl.textContent = `0/${total}`;
+          
+          if (score > 0) {
+            const interval = setInterval(() => {
+              current++;
+              finalScoreEl.textContent = `${current}/${total}`;
+              if (current >= score) {
+                clearInterval(interval);
+              }
+            }, stepTime);
+          }
+          
+          const pct = (score / total) * 100;
+          
+          // Tenali Raman Speech Bubble/Feedback Card
+          const cardEl = document.createElement('div');
+          cardEl.className = 'tenali-feedback-card';
+          
+          const avatarEl = document.createElement('div');
+          avatarEl.className = 'tenali-avatar';
+          avatarEl.textContent = '🪶';
+          
+          const bubbleEl = document.createElement('div');
+          bubbleEl.className = 'tenali-speech-bubble';
+          
+          const quoteTitleEl = document.createElement('div');
+          quoteTitleEl.className = 'tenali-quote-title';
+          quoteTitleEl.textContent = 'Tenali Raman Kehte Hain...';
+          
+          let quoteText = '';
+          if (pct >= 90) {
+            quoteText = "Gajab! Appki buddhi toh swarna ke samaan chamak rahi hai! Maharaja Krishnadevaraya himself would be impressed by your sharp mind!";
+          } else if (pct >= 70) {
+            quoteText = "Sundar! A bit of practice and you shall outsmart the royal court ministers! Keep ascending the path of wisdom.";
+          } else if (pct >= 50) {
+            quoteText = "Uchit hai! You have done well, but there are deeper mathematical mysteries to unfold. Practice daily to sharpen your wit.";
+          } else {
+            quoteText = "Nirash na ho! Every great scholar was once a student. A new journey opens the door to wisdom. Let us try once more!";
+          }
+          
+          const quoteTextEl = document.createElement('p');
+          quoteTextEl.className = 'tenali-quote-text';
+          quoteTextEl.textContent = quoteText;
+          
+          bubbleEl.appendChild(quoteTitleEl);
+          bubbleEl.appendChild(quoteTextEl);
+          cardEl.appendChild(avatarEl);
+          cardEl.appendChild(bubbleEl);
+          
+          finalScoreEl.parentNode.insertBefore(cardEl, finalScoreEl.nextSibling);
+          
+          const welcomeBox = finalScoreEl.closest('.welcome-box');
+          if (welcomeBox) {
+            const buttons = welcomeBox.querySelectorAll('button');
+            if (buttons.length > 0) {
+              const btnContainer = buttons[0].parentNode;
+              if (btnContainer && !welcomeBox.querySelector('.results-divider')) {
+                const divider = document.createElement('div');
+                divider.className = 'results-divider';
+                divider.textContent = '✦ ✦ ✦ ✦ ✦';
+                btnContainer.parentNode.insertBefore(divider, btnContainer);
+              }
+            }
+          }
+        }
+      }
+    };
+    
+    updateState();
+    const observer = new MutationObserver(updateState);
+    observer.observe(document.body, { childList: true, subtree: true });
+    return () => observer.disconnect();
+  }, []);
+
+  const isUrgent = timer && timer.elapsed <= 5;
+  const totalDots = quizState.total && !isNaN(quizState.total) ? quizState.total : 10;
+  
   return (
-    <>
-      <div className="header-row">
-        <button className="back-button" onClick={onBack}>← Home</button>
-        {timer && <div className="timer-pill">{timer.elapsed}s</div>}
+    <div className={`quiz-layout-root ${quizState.active ? 'quiz-active' : ''}`}>
+      {/* Top progress bar */}
+      {quizState.active && (
+        <div className="top-progress-bar-container">
+          <div 
+            className="top-progress-bar-fill" 
+            style={{ width: `${(quizState.current / quizState.total) * 100}%` }}
+          />
+        </div>
+      )}
+
+      {/* Header Row */}
+      {quizState.active ? (
+        <div className="quiz-header-bar">
+          <button className="back-button" onClick={onBack}>← Home</button>
+          <span className="quiz-header-title">{title}</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <button 
+              onClick={toggleMute} 
+              className="sound-toggle-btn"
+              title={muted ? "Unmute Sounds" : "Mute Sounds"}
+            >
+              {muted ? '🔇' : '🔊'}
+            </button>
+            {timer ? (
+              <div className={`timer-pill ${isUrgent ? 'pulse' : ''}`}>{timer.elapsed}s</div>
+            ) : (
+              <div style={{ width: '38px' }}></div>
+            )}
+          </div>
+        </div>
+      ) : (
+        <div className="header-row">
+          <button className="back-button" onClick={onBack}>← Home</button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <button 
+              onClick={toggleMute} 
+              className="sound-toggle-btn"
+              title={muted ? "Unmute Sounds" : "Mute Sounds"}
+            >
+              {muted ? '🔇' : '🔊'}
+            </button>
+            {timer && <div className="timer-pill">{timer.elapsed}s</div>}
+          </div>
+        </div>
+      )}
+
+      {/* Large Title */}
+      {!quizState.active && (
+        <>
+          <h1 className="quiz-layout-title">{title}</h1>
+          <p className="subtitle">{subtitle}</p>
+        </>
+      )}
+
+      {/* Dot Indicators */}
+      {quizState.active && (
+        <div className="quiz-dots-container">
+          <div className="quiz-dots">
+            {Array.from({ length: Math.min(10, totalDots) }).map((_, idx) => {
+              const windowSize = 10;
+              const currentWindow = Math.floor((quizState.current - 1) / windowSize);
+              const startIdx = currentWindow * windowSize;
+              const dotNum = startIdx + idx + 1;
+              
+              if (dotNum > quizState.total) return null;
+              
+              let dotClass = 'dot-empty';
+              if (dotNum < quizState.current) {
+                dotClass = 'dot-filled';
+              } else if (dotNum === quizState.current) {
+                dotClass = 'dot-current';
+              }
+              
+              return (
+                <span 
+                  key={idx} 
+                  className={`quiz-dot ${dotClass}`} 
+                  title={`Question ${dotNum}`}
+                />
+              );
+            })}
+          </div>
+          <div className="quiz-dots-text">{quizState.current} of {quizState.total}</div>
+        </div>
+      )}
+
+      <div className="quiz-layout-content">
+        {children}
       </div>
-      <h1>{title}</h1>
-      <p className="subtitle">{subtitle}</p>
-      {children}
-    </>
-  )
+    </div>
+  );
 }
 
 // Export main App component (entry point)
