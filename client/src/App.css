@@ -2518,3 +2518,35 @@ button:disabled {
     margin: 0 3px;
   }
 }
+
+
+@keyframes oopsBounce {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  50% { transform: translateX(8px); }
+  75% { transform: translateX(-8px); }
+}
+
+.oops-bounce {
+  animation: oopsBounce 0.4s ease-in-out;
+}
+
+@keyframes ahaPulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7); }
+  50% { transform: scale(1.02); box-shadow: 0 0 20px 10px rgba(46, 204, 113, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+}
+
+.aha-celebration {
+  animation: ahaPulse 0.8s ease-out;
+}
+
+@keyframes correctPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); color: #2ecc71; }
+  100% { transform: scale(1); }
+}
+
+.correct-pulse {
+  animation: correctPulse 0.4s ease-out;
+}

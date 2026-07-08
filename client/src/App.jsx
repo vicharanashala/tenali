@@ -22,6 +22,8 @@
  */
 
 import { useEffect, useState, useRef, useMemo } from 'react'
+import ClassSelection from "./lib/ClassSelection";
+import DiagnosticQuiz from "./lib/DiagnosticQuiz";
 import './App.css'
 
 // API base URL from environment variables (Vite)
@@ -643,7 +645,7 @@ function AdaptiveTablesApp({ studentName }) {
   // Question counter (1, 2, 3, ...)
   const [questionNum, setQuestionNum] = useState(0)
   // Score: number of correct answers in this session
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // Timestamp when current question was generated (used to calc response time)
   const [startTime, setStartTime] = useState(null)
   // Array of all results this session: {q, yourAnswer, correct, time, table}
@@ -693,7 +695,7 @@ function AdaptiveTablesApp({ studentName }) {
     setPhase('playing')  // Move to playing phase
     // Reset all quiz counters and state
     setQuestionNum(0)
-    setScore(0)
+    setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
     setResults([])
     setRecentWindow([])  // Clear adaptive window
     setShowTable(true)   // Start by showing the reference table
@@ -1092,7 +1094,7 @@ function ScaffoldedTablesApp({ studentName, defaultTable = 2 }) {
   const [isCorrect, setIsCorrect] = useState(null)
   const [revealed, setRevealed] = useState(false)
   const [questionNum, setQuestionNum] = useState(0)
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   const [startTime, setStartTime] = useState(null)
   const [results, setResults] = useState([])
   const [fastStreak, setFastStreak] = useState(0)
@@ -1199,7 +1201,7 @@ function ScaffoldedTablesApp({ studentName, defaultTable = 2 }) {
     setAppPhase('playing')
     setLevel(1)
     setQuestionNum(1)
-    setScore(0)
+    setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
     setResults([])
     setFastStreak(0)
     setMastered(false)
@@ -1850,7 +1852,7 @@ function YazdanTablesApp({ studentName }) {
   const [currentTable, setCurrentTable] = useState(null)
   const [level, setLevel] = useState(1)
   const [round, setRound] = useState(0) // current round within level (1-based)
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   const [totalAnswered, setTotalAnswered] = useState(0)
   const [results, setResults] = useState([])
 
@@ -2022,7 +2024,7 @@ function YazdanTablesApp({ studentName }) {
     setAppPhase('playing')
     setLevel(1)
     setRound(1)
-    setScore(0)
+    setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
     setTotalAnswered(0)
     setResults([])
     setShowCelebration(false)
@@ -2535,7 +2537,7 @@ function JatinTablesApp({ studentName }) {
   const [currentTable, setCurrentTable] = useState(null)
   const [level, setLevel] = useState(1)
   const [round, setRound] = useState(0)
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   const [totalAnswered, setTotalAnswered] = useState(0)
   const [results, setResults] = useState([])
 
@@ -2679,7 +2681,7 @@ function JatinTablesApp({ studentName }) {
     setAppPhase('playing')
     setLevel(1)
     setRound(1)
-    setScore(0)
+    setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
     setTotalAnswered(0)
     setResults([])
     setShowCelebration(false)
@@ -3177,7 +3179,7 @@ function LakshyaTablesApp({ studentName }) {
   const [currentTable, setCurrentTable] = useState(null)
   const [level, setLevel] = useState(1)
   const [round, setRound] = useState(0)
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   const [totalAnswered, setTotalAnswered] = useState(0)
   const [results, setResults] = useState([])
 
@@ -3339,7 +3341,7 @@ function LakshyaTablesApp({ studentName }) {
     setAppPhase('playing')
     setLevel(1)
     setRound(1)
-    setScore(0)
+    setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
     setTotalAnswered(0)
     setResults([])
     setShowCelebration(false)
@@ -3806,7 +3808,7 @@ function AdaptiveMixedApp({ studentName }) {
   const [isCorrect, setIsCorrect] = useState(null)
   const [revealed, setRevealed] = useState(false)
   const [questionNum, setQuestionNum] = useState(0)
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   const [startTime, setStartTime] = useState(null)
   const [results, setResults] = useState([])
   const [recentWindow, setRecentWindow] = useState([])
@@ -3979,7 +3981,7 @@ function AdaptiveMixedApp({ studentName }) {
   const startSession = () => {
     setPhase('playing')
     setQuestionNum(0)
-    setScore(0)
+    setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
     setResults([])
     setRecentWindow([])
     setStatusMsg(`Level ${diffLevel} — Let's go!`)
@@ -4871,7 +4873,7 @@ function SuperTablesApp() {
   const [tableNum, setTableNum] = useState(null)
   const [currentLevel, setCurrentLevel] = useState(1) // 1–10, auto-progresses
   const [idx, setIdx] = useState(0)
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   const [fb, setFb] = useState(null)
   const [phase, setPhase] = useState('show') // for L3
   const [selected, setSelected] = useState(null) // for L7
@@ -4917,7 +4919,7 @@ function SuperTablesApp() {
 
   // ── setup a level (called with table number + uses currentLevel) ──
   const setupLevel = (num, level) => {
-    setScreen('play'); setIdx(0); setScore(0); setFb(null); setPhase('show')
+    setScreen('play'); setIdx(0); setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0); setFb(null); setPhase('show')
     setSelected(null); setMatched([]); setWrong7(false); setRoundIdx(0); setStartTime(Date.now()); setWrongAttempts(0)
     const tbl = stGenTable(num)
     const first = tbl.slice(0, 5), second = tbl.slice(5)
@@ -6749,14 +6751,14 @@ function BridgeTeachPanel({ teach }) {
 
 // Bridge component factory — drives all 8 bridge apps.
 function makeBridgeApp({ id, title, subtitle, intro, teach, generator, nextHref, nextLabel, currentNode, StripComponent = Lesson1ProgressionStrip }) {
-  return function BridgeApp({ onBack }) {
+  return function BridgeApp({ onBack, initialAdaptScore }) {
     const [phase, setPhase] = useState('intro')
     const [questions, setQuestions] = useState([])
     const [qIdx, setQIdx] = useState(0)
     const [selected, setSelected] = useState(null)
     const [revealed, setRevealed] = useState(false)
     const [isCorrect, setIsCorrect] = useState(false)
-    const [score, setScore] = useState(0)
+    const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
     const [results, setResults] = useState([])
     const [showTeach, setShowTeach] = useState(false)
     const [autoCountdown, setAutoCountdown] = useState(0)
@@ -6787,7 +6789,7 @@ function makeBridgeApp({ id, title, subtitle, intro, teach, generator, nextHref,
     const start = () => {
       const newQs = Array.from({ length: BRIDGE_QUESTIONS_PER_SESSION }, () => generator())
       setQuestions(newQs)
-      setQIdx(0); setScore(0); scoreRef.current = 0; setResults([])
+      setQIdx(0); setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0); scoreRef.current = 0; setResults([])
       setSelected(null); setRevealed(false); setIsCorrect(false); setPhase('quiz')
     }
 
@@ -8529,7 +8531,7 @@ const Bridge27App = makeBridgeApp({
   nextHref: '/chapter5', nextLabel: 'On to Lesson 17',
 })
 
-function Chapter5App({ onBack }) {
+function Chapter5App({ onBack, initialAdaptScore }) {
   const [progress, setProgress] = useState(ch5_loadProgress)
   const [activeId, setActiveId] = useState(null)
   const [phase, setPhase] = useState('teach')
@@ -9565,7 +9567,7 @@ function ch6RenderMath(text) {
 
 const CH6_AUTO_ADVANCE_MS = 5000
 
-function Chapter6App({ onBack }) {
+function Chapter6App({ onBack, initialAdaptScore }) {
   const [progress, setProgress] = useState(ch6_loadProgress)
   const [activeId, setActiveId] = useState(null)
   const [phase, setPhase] = useState('teach')
@@ -10917,7 +10919,7 @@ function ch7RenderMath(text) {
 const CH7_AUTO_ADVANCE_MS = 5000
 // CH7_RETRY_GAP removed: wrong answers now appended to end of playList (see SKILL.md rule #5)
 
-function Chapter7App({ onBack }) {
+function Chapter7App({ onBack, initialAdaptScore }) {
   const [progress, setProgress] = useState(ch7_loadProgress)
   const [activeId, setActiveId] = useState(null)
   const [phase, setPhase] = useState('teach')
@@ -12153,7 +12155,7 @@ function ch8RenderMath(text) {
 const CH8_AUTO_ADVANCE_MS = 5000
 // CH8_RETRY_GAP removed: wrong answers now appended to end of playList (see SKILL.md rule #5)
 
-function Chapter8App({ onBack }) {
+function Chapter8App({ onBack, initialAdaptScore }) {
   const [progress, setProgress] = useState(ch8_loadProgress)
   const [activeId, setActiveId] = useState(null)
   const [phase, setPhase] = useState('teach')
@@ -13519,7 +13521,7 @@ function ch9RenderMath(text) {
 
 const CH9_AUTO_ADVANCE_MS = 5000
 
-function Chapter9App({ onBack }) {
+function Chapter9App({ onBack, initialAdaptScore }) {
   const [progress, setProgress] = useState(ch9_loadProgress)
   const [activeId, setActiveId] = useState(null)
   const [phase, setPhase] = useState('teach')
@@ -14887,7 +14889,7 @@ function ch10RenderMath(text) {
 
 const CH10_AUTO_ADVANCE_MS = 5000
 
-function Chapter10App({ onBack }) {
+function Chapter10App({ onBack, initialAdaptScore }) {
   const [progress, setProgress] = useState(ch10_loadProgress)
   const [activeId, setActiveId] = useState(null)
   const [phase, setPhase] = useState('teach')
@@ -16154,7 +16156,7 @@ function ch11RenderMath(text) {
 
 const CH11_AUTO_ADVANCE_MS = 5000
 
-function Chapter11App({ onBack }) {
+function Chapter11App({ onBack, initialAdaptScore }) {
   const [progress, setProgress] = useState(ch11_loadProgress)
   const [activeId, setActiveId] = useState(null)
   const [phase, setPhase] = useState('teach')
@@ -17427,7 +17429,7 @@ function ch12RenderMath(text) {
 
 const CH12_AUTO_ADVANCE_MS = 5000
 
-function Chapter12App({ onBack }) {
+function Chapter12App({ onBack, initialAdaptScore }) {
   const [progress, setProgress] = useState(ch12_loadProgress)
   const [activeId, setActiveId] = useState(null)
   const [phase, setPhase] = useState('teach')
@@ -18575,7 +18577,7 @@ function ch13RenderMath(text) {
 
 const CH13_AUTO_ADVANCE_MS = 5000
 
-function Chapter13App({ onBack }) {
+function Chapter13App({ onBack, initialAdaptScore }) {
   const [progress, setProgress] = useState(ch13_loadProgress)
   const [activeId, setActiveId] = useState(null)
   const [phase, setPhase] = useState('teach')
@@ -19832,7 +19834,7 @@ function ch14RenderMath(text) {
 
 const CH14_AUTO_ADVANCE_MS = 5000
 
-function Chapter14App({ onBack }) {
+function Chapter14App({ onBack, initialAdaptScore }) {
   const [progress, setProgress] = useState(ch14_loadProgress)
   const [activeId, setActiveId] = useState(null)
   const [phase, setPhase] = useState('teach')
@@ -21180,7 +21182,7 @@ function ch15RenderMath(text) {
 
 const CH15_AUTO_ADVANCE_MS = 5000
 
-function Chapter15App({ onBack }) {
+function Chapter15App({ onBack, initialAdaptScore }) {
   const [progress, setProgress] = useState(ch15_loadProgress)
   const [activeId, setActiveId] = useState(null)
   const [phase, setPhase] = useState('teach')
@@ -22160,7 +22162,7 @@ function ch16RenderMath(text) {
 
 const CH16_AUTO_ADVANCE_MS = 5000
 
-function Chapter16App({ onBack }) {
+function Chapter16App({ onBack, initialAdaptScore }) {
   const [progress, setProgress] = useState(ch16_loadProgress)
   const [activeId, setActiveId] = useState(null)
   const [phase, setPhase] = useState('teach')
@@ -23313,7 +23315,7 @@ function ch17RenderMath(text) {
 
 const CH17_AUTO_ADVANCE_MS = 5000
 
-function Chapter17App({ onBack }) {
+function Chapter17App({ onBack, initialAdaptScore }) {
   const [progress, setProgress] = useState(ch17_loadProgress)
   const [activeId, setActiveId] = useState(null)
   const [phase, setPhase] = useState('teach')
@@ -24652,7 +24654,7 @@ function ch18RenderMath(text) {
 
 const CH18_AUTO_ADVANCE_MS = 5000
 
-function Chapter18App({ onBack }) {
+function Chapter18App({ onBack, initialAdaptScore }) {
   const [progress, setProgress] = useState(ch18_loadProgress)
   const [activeId, setActiveId] = useState(null)
   const [phase, setPhase] = useState('teach')
@@ -25809,7 +25811,7 @@ function ch19RenderMath(text) {
 
 const CH19_AUTO_ADVANCE_MS = 5000
 
-function Chapter19App({ onBack }) {
+function Chapter19App({ onBack, initialAdaptScore }) {
   const [progress, setProgress] = useState(ch19_loadProgress)
   const [activeId, setActiveId] = useState(null)
   const [phase, setPhase] = useState('teach')
@@ -26873,7 +26875,7 @@ function ch20RenderMath(text) {
 
 const CH20_AUTO_ADVANCE_MS = 5000
 
-function Chapter20App({ onBack }) {
+function Chapter20App({ onBack, initialAdaptScore }) {
   const [progress, setProgress] = useState(ch20_loadProgress)
   const [activeId, setActiveId] = useState(null)
   const [phase, setPhase] = useState('teach')
@@ -28120,7 +28122,7 @@ function ch21RenderMath(text) {
 
 const CH21_AUTO_ADVANCE_MS = 5000
 
-function Chapter21App({ onBack }) {
+function Chapter21App({ onBack, initialAdaptScore }) {
   const [progress, setProgress] = useState(ch21_loadProgress)
   const [activeId, setActiveId] = useState(null)
   const [phase, setPhase] = useState('teach')
@@ -29238,7 +29240,7 @@ function ch22RenderMath(text) {
 
 const CH22_AUTO_ADVANCE_MS = 5000
 
-function Chapter22App({ onBack }) {
+function Chapter22App({ onBack, initialAdaptScore }) {
   const [progress, setProgress] = useState(ch22_loadProgress)
   const [activeId, setActiveId] = useState(null)
   const [phase, setPhase] = useState('teach')
@@ -30452,7 +30454,7 @@ function ch23RenderMath(text) {
 
 const CH23_AUTO_ADVANCE_MS = 5000
 
-function Chapter23App({ onBack }) {
+function Chapter23App({ onBack, initialAdaptScore }) {
   const [progress, setProgress] = useState(ch23_loadProgress)
   const [activeId, setActiveId] = useState(null)
   const [phase, setPhase] = useState('teach')
@@ -31621,7 +31623,7 @@ function ch24RenderMath(text) {
 
 const CH24_AUTO_ADVANCE_MS = 5000
 
-function Chapter24App({ onBack }) {
+function Chapter24App({ onBack, initialAdaptScore }) {
   const [progress, setProgress] = useState(ch24_loadProgress)
   const [activeId, setActiveId] = useState(null)
   const [phase, setPhase] = useState('teach')
@@ -32472,7 +32474,7 @@ function ch1RenderMath(text) {
 
 const CH1_AUTO_ADVANCE_MS = 5000
 
-function Chapter1App({ onBack }) {
+function Chapter1App({ onBack, initialAdaptScore }) {
   const [progress, setProgress] = useState(ch1_loadProgress)
   const [activeId, setActiveId] = useState(null)
   const [phase, setPhase] = useState('teach')
@@ -33293,7 +33295,7 @@ function ch2RenderMath(text) {
 
 const CH2_AUTO_ADVANCE_MS = 5000
 
-function Chapter2App({ onBack }) {
+function Chapter2App({ onBack, initialAdaptScore }) {
   const [progress, setProgress] = useState(ch2_loadProgress)
   const [activeId, setActiveId] = useState(null)
   const [phase, setPhase] = useState('teach')
@@ -34089,7 +34091,7 @@ function ch3RenderMath(text) {
 
 const CH3_AUTO_ADVANCE_MS = 5000
 
-function Chapter3App({ onBack }) {
+function Chapter3App({ onBack, initialAdaptScore }) {
   const [progress, setProgress] = useState(ch3_loadProgress)
   const [activeId, setActiveId] = useState(null)
   const [phase, setPhase] = useState('teach')
@@ -34883,7 +34885,7 @@ function ch4RenderMath(text) {
 
 const CH4_AUTO_ADVANCE_MS = 5000
 
-function Chapter4App({ onBack }) {
+function Chapter4App({ onBack, initialAdaptScore }) {
   const [progress, setProgress] = useState(ch4_loadProgress)
   const [activeId, setActiveId] = useState(null)
   const [phase, setPhase] = useState('teach')
@@ -35370,7 +35372,7 @@ const TENTH_UNITS = [
   },
 ]
 
-function TenthApp({ onBack }) {
+function TenthApp({ onBack, initialAdaptScore }) {
   const { user } = useAuth()
   return (
     <div style={{ maxWidth: 980, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
@@ -35461,6 +35463,7 @@ function TenthApp({ onBack }) {
 function App() {
   // Currently selected quiz mode (null = home menu, or key like 'gk', 'addition', etc.)
   const [mode, setMode] = useState(null)
+  const [diagnosticState, setDiagnosticState] = useState({})
 
   // Current theme: 'dark' or 'light'
   // Initialized from localStorage with fallback to 'dark'
@@ -36059,11 +36062,31 @@ function App() {
       </button>
       <div className="card">
         {!mode ? (
-          <Home onSelect={setMode} />
+          <Home onSelect={setMode} onReset={() => { setDiagnosticState({}); Object.keys(localStorage).forEach(k => { if (k.startsWith('tenali-diag-')) localStorage.removeItem(k); }); }} />
         ) : ActiveApp ? (
-          <ActiveApp onBack={() => setMode(null)} />
+          !diagnosticState[mode] ? (
+            <DiagnosticQuiz
+              topicKey={mode}
+              onPass={(score) => {
+                const newScore = score || 0;
+                let initAdapt = 0.1;
+                if (newScore >= 5) initAdapt = 0.8;
+                else if (newScore == 4) initAdapt = 0.6;
+                else if (newScore == 3) initAdapt = 0.4;
+                else if (newScore == 2) initAdapt = 0.2;
+                setDiagnosticState(prev => ({...prev, [mode]: { passed: true, initialAdaptScore: initAdapt }}));
+              }}
+              onFail={() => {
+                setDiagnosticState(prev => ({...prev, [mode]: { passed: true, initialAdaptScore: 0.1 }}));
+              }}
+              onSkip={() => setMode(null)}
+              onNavigate={() => setMode(null)}
+            />
+          ) : (
+            <ActiveApp onBack={() => setMode(null)} initialAdaptScore={diagnosticState[mode].initialAdaptScore} />
+          )
         ) : (
-          <Home onSelect={setMode} />
+          <Home onSelect={setMode} onReset={() => { setDiagnosticState({}); Object.keys(localStorage).forEach(k => { if (k.startsWith('tenali-diag-')) localStorage.removeItem(k); }); }} />
         )}
       </div>
     </div>
@@ -36078,94 +36101,120 @@ function App() {
  * @param {Object} props
  * @param {Function} props.onSelect - Callback when user selects a quiz: receives mode key (e.g., 'gk')
  */
-function Home({ onSelect }) {
+
+function MasteryProgress({ adaptScore }) {
+  if (adaptScore === undefined || adaptScore === null) return null;
+  const pct = Math.min(100, Math.max(0, Math.round(adaptScore * 100)));
+  const label = pct >= 85 ? 'Mastered' : pct >= 40 ? 'Proficient' : 'Familiar';
+  const color = pct >= 85 ? '#9333ea' : pct >= 40 ? '#2563eb' : '#64748b';
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px', background: '#f8fafc', padding: '8px 12px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+      <div style={{ fontWeight: 600, color: '#334155', fontSize: '0.9rem', width: '80px' }}>Mastery:</div>
+      <div style={{ flex: 1, background: '#e2e8f0', height: '10px', borderRadius: '5px', overflow: 'hidden', position: 'relative' }}>
+        <div style={{ width: `${pct}%`, background: color, height: '100%', transition: 'width 0.5s ease-out' }} />
+      </div>
+      <div style={{ fontSize: '0.9rem', fontWeight: 700, color, minWidth: '100px', textAlign: 'right' }}>
+        {pct}% <span style={{fontSize: '0.75rem', opacity: 0.8}}>({label})</span>
+      </div>
+    </div>
+  )
+}
+
+function Home({ onSelect, onReset }) {
+  const [selectedClass, setSelectedClass] = useState(null);
+
+  const handleClassChange = (e) => {
+    const val = e.target.value;
+    setSelectedClass(val);
+    try { localStorage.setItem('tenali-class', val); } catch {}
+  };
   // Special featured apps (shown in highlighted first row)
   const featuredApps = [
-    { key: 'randommix', name: 'Random Mix', subtitle: 'Adaptive cross-topic quiz', color: 'featured' },
-    { key: 'custom', name: 'Custom Lesson', subtitle: 'Build your own mixed quiz', color: 'featured' },
-    { key: 'gym', name: 'Gym', subtitle: 'Adaptive workout across all 7 gym puzzles', color: 'featured' },
+    { key: 'randommix', classGroup: 'Class 8', name: 'Random Mix', subtitle: 'Adaptive cross-topic quiz', color: 'featured' },
+    { key: 'custom', classGroup: 'Class 9', name: 'Custom Lesson', subtitle: 'Build your own mixed quiz', color: 'featured' },
+    { key: 'gym', classGroup: 'Class 10', name: 'Gym', subtitle: 'Adaptive workout across all 7 gym puzzles', color: 'featured' },
   ]
 
   // All regular quiz apps sorted alphabetically by name
   const regularApps = [
-    { key: 'addition', name: 'Addition', subtitle: '20-question addition practice', color: 'blue' },
-    { key: 'angles', name: 'Angles', subtitle: 'Lines, points, parallel lines', color: 'green' },
-    { key: 'basicarith', name: 'Arithmetic', subtitle: '+, −, ×, ÷ with positive & negative', color: 'purple' },
-    { key: 'banking', name: 'Banking (RD)', subtitle: 'Interest & recurring deposits', color: 'blue' },
-    { key: 'bearings', name: 'Bearings', subtitle: 'Three-figure bearings', color: 'green' },
-    { key: 'binomial', name: 'Binomial Theorem', subtitle: 'Expansions & coefficients', color: 'purple' },
-    { key: 'bounds', name: 'Bounds', subtitle: 'Upper & lower bounds', color: 'blue' },
-    { key: 'circmeasure', name: 'Circular Measure', subtitle: 'Radians, arc length, sectors', color: 'green' },
-    { key: 'circleth', name: 'Circle Theorems', subtitle: 'Angles, tangents, cyclic quads', color: 'purple' },
-    { key: 'complex', name: 'Complex Numbers', subtitle: 'Add, multiply, modulus', color: 'blue' },
-    { key: 'congruence', name: 'Congruence', subtitle: 'SSS, SAS, ASA, RHS', color: 'green' },
-    { key: 'conics', name: 'Conic Sections', subtitle: 'Circle, parabola, ellipse, hyperbola', color: 'purple' },
-    { key: 'coordgeom', name: 'Coord. Geometry', subtitle: 'Midpoint, distance, gradient', color: 'blue' },
-    { key: 'decimals', name: 'Decimals', subtitle: 'Add, subtract, multiply, divide', color: 'blue' },
-    { key: 'diff', name: 'Differentiation', subtitle: 'Power rule, turning points', color: 'purple' },
-    { key: 'diffeq', name: 'Differential Eq.', subtitle: 'Order, degree, solve DEs', color: 'green' },
-    { key: 'dotprod', name: 'Dot Products', subtitle: 'Vectors, matrices, fill blanks', color: 'blue' },
-    { key: 'fractionadd', name: 'Fractions', subtitle: 'Add, subtract, multiply & divide', color: 'green' },
-    { key: 'funceval', name: 'Functions', subtitle: 'Evaluate f(x), f(x,y), f(x,y,z)', color: 'green' },
-    { key: 'gk', name: 'GK', subtitle: 'General Knowledge questions', color: 'purple' },
-    { key: 'gst', name: 'GST', subtitle: 'Goods & Services Tax', color: 'purple' },
-    { key: 'hcflcm', name: 'HCF & LCM', subtitle: 'Highest common factor & LCM', color: 'blue' },
-    { key: 'heron', name: "Heron's Formula", subtitle: 'Triangle area from sides', color: 'blue' },
-    { key: 'indices', name: 'Indices', subtitle: 'Laws of exponents', color: 'purple' },
-    { key: 'ineq', name: 'Inequalities', subtitle: 'Linear & quadratic inequalities', color: 'green' },
-    { key: 'integ', name: 'Integration', subtitle: 'Reverse differentiation & areas', color: 'blue' },
-    { key: 'invtrig', name: 'Inverse Trig', subtitle: 'arcsin, arccos, arctan', color: 'green' },
-    { key: 'limits', name: 'Limits', subtitle: 'Evaluate limits', color: 'purple' },
-    { key: 'lineareq', name: 'Linear Equations', subtitle: 'Solve for x in one variable', color: 'blue' },
-    { key: 'lineq', name: 'Line Equation', subtitle: 'Find m and c from two points', color: 'green' },
-    { key: 'linprog', name: 'Linear Programming', subtitle: 'Optimize objective functions', color: 'green' },
-    { key: 'log', name: 'Logarithms', subtitle: 'Evaluate, simplify, solve', color: 'purple' },
-    { key: 'matrix', name: 'Matrices', subtitle: 'Add, multiply, determinant', color: 'blue' },
-    { key: 'mensur', name: 'Mensuration', subtitle: 'Area, volume, surface area', color: 'green' },
-    { key: 'multiply', name: 'Multiplication', subtitle: 'Practice any times table (2–19)', color: 'purple' },
-    { key: 'bases', name: 'Number Bases', subtitle: 'Binary, decimal, hexadecimal', color: 'green' },
-    { key: 'percent', name: 'Percentages', subtitle: 'Find, increase, reverse, compound', color: 'blue' },
-    { key: 'permcomb', name: 'Perm. & Comb.', subtitle: 'Permutations & combinations', color: 'purple' },
-    { key: 'polyfactor', name: 'Poly Factor', subtitle: 'Factor a quadratic expression', color: 'green' },
-    { key: 'polymul', name: 'Poly Multiply', subtitle: 'Multiply two polynomials', color: 'blue' },
-    { key: 'polygons', name: 'Polygons', subtitle: 'Interior & exterior angles', color: 'purple' },
-    { key: 'primefactor', name: 'Prime Factors', subtitle: 'Break a number into primes', color: 'green' },
-    { key: 'prob', name: 'Probability', subtitle: 'Single & combined events', color: 'blue' },
-    { key: 'profitloss', name: 'Profit & Loss', subtitle: 'Cost price, discounts, markup', color: 'purple' },
-    { key: 'pythag', name: "Pythagoras' Theorem", subtitle: 'Hypotenuse, legs, 3D', color: 'green' },
-    { key: 'quadratic', name: 'Quadratic', subtitle: 'Find y for y = ax² + bx + c', color: 'blue' },
-    { key: 'qformula', name: 'Quadratics (Formula)', subtitle: 'Find roots of ax² + bx + c = 0', color: 'purple' },
-    { key: 'ratio', name: 'Ratio', subtitle: 'Ratio & proportion', color: 'green' },
-    { key: 'remfactor', name: 'Remainder Theorem', subtitle: 'Remainder & factor theorem', color: 'blue' },
-    { key: 'rounding', name: 'Rounding', subtitle: 'D.P., sig. figs, estimation', color: 'blue' },
-    { key: 'section', name: 'Section Formula', subtitle: 'Midpoint, section, centroid', color: 'green' },
-    { key: 'sequences', name: 'Sequences', subtitle: 'Arithmetic & geometric sequences', color: 'purple' },
-    { key: 'shares', name: 'Shares & Dividends', subtitle: 'Shares, dividends, returns', color: 'purple' },
-    { key: 'sets', name: 'Sets', subtitle: 'Union, intersection, Venn diagrams', color: 'blue' },
-    { key: 'similarity', name: 'Similarity', subtitle: 'Scale factor, area & volume ratios', color: 'green' },
-    { key: 'squaring', name: 'Squaring', subtitle: 'Square numbers using (a+b)²', color: 'purple' },
-    { key: 'simul', name: 'Sim. Equations', subtitle: '2×2 (easy) or 3×3 (hard)', color: 'purple' },
-    { key: 'sdt', name: 'Speed, Distance, Time', subtitle: 'Rate problems & conversions', color: 'blue' },
-    { key: 'sqrt', name: 'Square Root', subtitle: 'Nearest-integer square root drill', color: 'green' },
-    { key: 'stdform', name: 'Standard Form', subtitle: 'Scientific notation operations', color: 'purple' },
-    { key: 'stats', name: 'Statistics', subtitle: 'Mean, median, mode, range', color: 'blue' },
-    { key: 'surds', name: 'Surds', subtitle: 'Simplify, add, multiply, rationalise', color: 'green' },
-    { key: 'tatsavit', name: 'Tatsavit', subtitle: 'Algebra simplification drill', color: 'blue' },
-    { key: 'transform', name: 'Transformations', subtitle: 'Reflect, rotate, translate, enlarge', color: 'purple' },
-    { key: 'triangles', name: 'Triangles', subtitle: 'Angle sum, isosceles, exterior', color: 'blue' },
-    { key: 'trig', name: 'Trigonometry', subtitle: 'SOH-CAH-TOA, sine/cosine rule', color: 'green' },
-    { key: 'variation', name: 'Variation', subtitle: 'Direct & inverse proportion', color: 'purple' },
-    { key: 'vectors', name: 'Vectors', subtitle: 'Add, scale, magnitude', color: 'blue' },
-    { key: 'vocab', name: 'Vocabulary', subtitle: 'Match words to definitions', color: 'green' },
-    { key: 'spot', name: 'Twin Hunt', subtitle: 'Find the common object', color: 'purple' },
-    { key: 'gymdecimals', name: 'Gym Decimals', subtitle: 'Signed decimal × decimal — 1-digit MCQ', color: 'purple' },
-    { key: 'guess', name: 'Guess the Number', subtitle: 'Binary magic trick — mind-reading game', color: 'blue' },
-    { key: 'funcgym', name: 'Functions Gym', subtitle: 'Evaluate small polynomials (MCQ)', color: 'blue' },
-    { key: 'dotprodgym', name: 'DotProducts Gym', subtitle: '2D/3D dot products (MCQ)', color: 'green' },
-    { key: 'fracaddgym', name: 'Fractions-add-gym', subtitle: 'Add single-digit fractions (MCQ)', color: 'purple' },
-    { key: 'lineqgym', name: 'LinearEquations-Gym', subtitle: 'Solve linear equations (MCQ)', color: 'blue' },
-    { key: 'indicesgym', name: 'Indices-Gym', subtitle: 'Index laws (MCQ)', color: 'green' },
-    { key: 'polygym', name: 'Polynomials Gym', subtitle: 'Arithmetic → monomial algebra (MCQ)', color: 'blue' },
+    { key: 'addition', classGroup: 'Class 1', name: 'Addition', subtitle: '20-question addition practice', color: 'blue' },
+    { key: 'angles', classGroup: 'Class 6', name: 'Angles', subtitle: 'Lines, points, parallel lines', color: 'green' },
+    { key: 'basicarith', classGroup: 'Class 2', name: 'Arithmetic', subtitle: '+, −, ×, ÷ with positive & negative', color: 'purple' },
+    { key: 'banking', classGroup: 'Class 7', name: 'Banking (RD)', subtitle: 'Interest & recurring deposits', color: 'blue' },
+    { key: 'bearings', classGroup: 'Class 10', name: 'Bearings', subtitle: 'Three-figure bearings', color: 'green' },
+    { key: 'binomial', classGroup: 'Class 11', name: 'Binomial Theorem', subtitle: 'Expansions & coefficients', color: 'purple' },
+    { key: 'bounds', classGroup: 'Class 9', name: 'Bounds', subtitle: 'Upper & lower bounds', color: 'blue' },
+    { key: 'circmeasure', classGroup: 'Class 10', name: 'Circular Measure', subtitle: 'Radians, arc length, sectors', color: 'green' },
+    { key: 'circleth', classGroup: 'Class 10', name: 'Circle Theorems', subtitle: 'Angles, tangents, cyclic quads', color: 'purple' },
+    { key: 'complex', classGroup: 'Class 12', name: 'Complex Numbers', subtitle: 'Add, multiply, modulus', color: 'blue' },
+    { key: 'congruence', classGroup: 'Class 10', name: 'Congruence', subtitle: 'SSS, SAS, ASA, RHS', color: 'green' },
+    { key: 'conics', classGroup: 'Class 12', name: 'Conic Sections', subtitle: 'Circle, parabola, ellipse, hyperbola', color: 'purple' },
+    { key: 'coordgeom', classGroup: 'Class 10', name: 'Coord. Geometry', subtitle: 'Midpoint, distance, gradient', color: 'blue' },
+    { key: 'decimals', classGroup: 'Class 3', name: 'Decimals', subtitle: 'Add, subtract, multiply, divide', color: 'blue' },
+    { key: 'diff', classGroup: 'Class 12', name: 'Differentiation', subtitle: 'Power rule, turning points', color: 'purple' },
+    { key: 'diffeq', classGroup: 'Class 12', name: 'Differential Eq.', subtitle: 'Order, degree, solve DEs', color: 'green' },
+    { key: 'dotprod', classGroup: 'Class 12', name: 'Dot Products', subtitle: 'Vectors, matrices, fill blanks', color: 'blue' },
+    { key: 'fractionadd', classGroup: 'Class 3', name: 'Fractions', subtitle: 'Add, subtract, multiply & divide', color: 'green' },
+    { key: 'funceval', classGroup: 'Class 12', name: 'Functions', subtitle: 'Evaluate f(x), f(x,y), f(x,y,z)', color: 'green' },
+    { key: 'gk', classGroup: 'Class 9', name: 'GK', subtitle: 'General Knowledge questions', color: 'purple' },
+    { key: 'gst', classGroup: 'Class 7', name: 'GST', subtitle: 'Goods & Services Tax', color: 'purple' },
+    { key: 'hcflcm', classGroup: 'Class 5', name: 'HCF & LCM', subtitle: 'Highest common factor & LCM', color: 'blue' },
+    { key: 'heron', classGroup: 'Class 12', name: "Heron's Formula", subtitle: 'Triangle area from sides', color: 'blue' },
+    { key: 'indices', classGroup: 'Class 8', name: 'Indices', subtitle: 'Laws of exponents', color: 'purple' },
+    { key: 'ineq', classGroup: 'Class 9', name: 'Inequalities', subtitle: 'Linear & quadratic inequalities', color: 'green' },
+    { key: 'integ', classGroup: 'Class 12', name: 'Integration', subtitle: 'Reverse differentiation & areas', color: 'blue' },
+    { key: 'invtrig', classGroup: 'Class 10', name: 'Inverse Trig', subtitle: 'arcsin, arccos, arctan', color: 'green' },
+    { key: 'limits', classGroup: 'Class 12', name: 'Limits', subtitle: 'Evaluate limits', color: 'purple' },
+    { key: 'lineareq', classGroup: 'Class 6', name: 'Linear Equations', subtitle: 'Solve for x in one variable', color: 'blue' },
+    { key: 'lineq', classGroup: 'Class 10', name: 'Line Equation', subtitle: 'Find m and c from two points', color: 'green' },
+    { key: 'linprog', classGroup: 'Class 12', name: 'Linear Programming', subtitle: 'Optimize objective functions', color: 'green' },
+    { key: 'log', classGroup: 'Class 12', name: 'Logarithms', subtitle: 'Evaluate, simplify, solve', color: 'purple' },
+    { key: 'matrix', classGroup: 'Class 12', name: 'Matrices', subtitle: 'Add, multiply, determinant', color: 'blue' },
+    { key: 'mensur', classGroup: 'Class 7', name: 'Mensuration', subtitle: 'Area, volume, surface area', color: 'green' },
+    { key: 'multiply', classGroup: 'Class 2', name: 'Multiplication', subtitle: 'Practice any times table (2–19)', color: 'purple' },
+    { key: 'bases', classGroup: 'Class 8', name: 'Number Bases', subtitle: 'Binary, decimal, hexadecimal', color: 'green' },
+    { key: 'percent', classGroup: 'Class 5', name: 'Percentages', subtitle: 'Find, increase, reverse, compound', color: 'blue' },
+    { key: 'permcomb', classGroup: 'Class 11', name: 'Perm. & Comb.', subtitle: 'Permutations & combinations', color: 'purple' },
+    { key: 'polyfactor', classGroup: 'Class 9', name: 'Poly Factor', subtitle: 'Factor a quadratic expression', color: 'green' },
+    { key: 'polymul', classGroup: 'Class 9', name: 'Poly Multiply', subtitle: 'Multiply two polynomials', color: 'blue' },
+    { key: 'polygons', classGroup: 'Class 6', name: 'Polygons', subtitle: 'Interior & exterior angles', color: 'purple' },
+    { key: 'primefactor', classGroup: 'Class 5', name: 'Prime Factors', subtitle: 'Break a number into primes', color: 'green' },
+    { key: 'prob', classGroup: 'Class 11', name: 'Probability', subtitle: 'Single & combined events', color: 'blue' },
+    { key: 'profitloss', classGroup: 'Class 7', name: 'Profit & Loss', subtitle: 'Cost price, discounts, markup', color: 'purple' },
+    { key: 'pythag', classGroup: 'Class 10', name: "Pythagoras' Theorem", subtitle: 'Hypotenuse, legs, 3D', color: 'green' },
+    { key: 'quadratic', classGroup: 'Class 10', name: 'Quadratic', subtitle: 'Find y for y = ax² + bx + c', color: 'blue' },
+    { key: 'qformula', classGroup: 'Class 10', name: 'Quadratics (Formula)', subtitle: 'Find roots of ax² + bx + c = 0', color: 'purple' },
+    { key: 'ratio', classGroup: 'Class 5', name: 'Ratio', subtitle: 'Ratio & proportion', color: 'green' },
+    { key: 'remfactor', classGroup: 'Class 9', name: 'Remainder Theorem', subtitle: 'Remainder & factor theorem', color: 'blue' },
+    { key: 'rounding', classGroup: 'Class 4', name: 'Rounding', subtitle: 'D.P., sig. figs, estimation', color: 'blue' },
+    { key: 'section', classGroup: 'Class 10', name: 'Section Formula', subtitle: 'Midpoint, section, centroid', color: 'green' },
+    { key: 'sequences', classGroup: 'Class 2', name: 'Sequences', subtitle: 'Arithmetic & geometric sequences', color: 'purple' },
+    { key: 'shares', classGroup: 'Class 12', name: 'Shares & Dividends', subtitle: 'Shares, dividends, returns', color: 'purple' },
+    { key: 'sets', classGroup: 'Class 11', name: 'Sets', subtitle: 'Union, intersection, Venn diagrams', color: 'blue' },
+    { key: 'similarity', classGroup: 'Class 10', name: 'Similarity', subtitle: 'Scale factor, area & volume ratios', color: 'green' },
+    { key: 'squaring', classGroup: 'Class 9', name: 'Squaring', subtitle: 'Square numbers using (a+b)²', color: 'purple' },
+    { key: 'simul', classGroup: 'Class 9', name: 'Sim. Equations', subtitle: '2×2 (easy) or 3×3 (hard)', color: 'purple' },
+    { key: 'sdt', classGroup: 'Class 11', name: 'Speed, Distance, Time', subtitle: 'Rate problems & conversions', color: 'blue' },
+    { key: 'sqrt', classGroup: 'Class 4', name: 'Square Root', subtitle: 'Nearest-integer square root drill', color: 'green' },
+    { key: 'stdform', classGroup: 'Class 8', name: 'Standard Form', subtitle: 'Scientific notation operations', color: 'purple' },
+    { key: 'stats', classGroup: 'Class 11', name: 'Statistics', subtitle: 'Mean, median, mode, range', color: 'blue' },
+    { key: 'surds', classGroup: 'Class 8', name: 'Surds', subtitle: 'Simplify, add, multiply, rationalise', color: 'green' },
+    { key: 'tatsavit', classGroup: 'Class 4', name: 'Tatsavit', subtitle: 'Algebra simplification drill', color: 'blue' },
+    { key: 'transform', classGroup: 'Class 10', name: 'Transformations', subtitle: 'Reflect, rotate, translate, enlarge', color: 'purple' },
+    { key: 'triangles', classGroup: 'Class 7', name: 'Triangles', subtitle: 'Angle sum, isosceles, exterior', color: 'blue' },
+    { key: 'trig', classGroup: 'Class 10', name: 'Trigonometry', subtitle: 'SOH-CAH-TOA, sine/cosine rule', color: 'green' },
+    { key: 'variation', classGroup: 'Class 11', name: 'Variation', subtitle: 'Direct & inverse proportion', color: 'purple' },
+    { key: 'vectors', classGroup: 'Class 12', name: 'Vectors', subtitle: 'Add, scale, magnitude', color: 'blue' },
+    { key: 'vocab', classGroup: 'Class 1', name: 'Vocabulary', subtitle: 'Match words to definitions', color: 'green' },
+    { key: 'spot', classGroup: 'Class 1', name: 'Twin Hunt', subtitle: 'Find the common object', color: 'purple' },
+    { key: 'gymdecimals', classGroup: 'Class 3', name: 'Gym Decimals', subtitle: 'Signed decimal × decimal — 1-digit MCQ', color: 'purple' },
+    { key: 'guess', classGroup: 'Class 1', name: 'Guess the Number', subtitle: 'Binary magic trick — mind-reading game', color: 'blue' },
+    { key: 'funcgym', classGroup: 'Class 12', name: 'Functions Gym', subtitle: 'Evaluate small polynomials (MCQ)', color: 'blue' },
+    { key: 'dotprodgym', classGroup: 'Class 12', name: 'DotProducts Gym', subtitle: '2D/3D dot products (MCQ)', color: 'green' },
+    { key: 'fracaddgym', classGroup: 'Class 3', name: 'Fractions-add-gym', subtitle: 'Add single-digit fractions (MCQ)', color: 'purple' },
+    { key: 'lineqgym', classGroup: 'Class 6', name: 'LinearEquations-Gym', subtitle: 'Solve linear equations (MCQ)', color: 'blue' },
+    { key: 'indicesgym', classGroup: 'Class 8', name: 'Indices-Gym', subtitle: 'Index laws (MCQ)', color: 'green' },
+    { key: 'polygym', classGroup: 'Class 9', name: 'Polynomials Gym', subtitle: 'Arithmetic → monomial algebra (MCQ)', color: 'blue' },
   ]
 
   // Combined list for search filtering
@@ -36190,7 +36239,10 @@ function Home({ onSelect }) {
   const isSearching = search.trim() !== ''
   const matchFilter = (a) => a.name.toLowerCase().includes(search.toLowerCase()) || a.subtitle.toLowerCase().includes(search.toLowerCase())
   const filteredFeatured = isSearching ? featuredApps.filter(matchFilter) : featuredApps
-  const filteredRegular = isSearching ? regularApps.filter(matchFilter) : regularApps
+  
+  const classFilteredRegular = selectedClass ? regularApps.filter(a => a.classGroup === selectedClass) : regularApps;
+  const filteredRegular = isSearching ? classFilteredRegular.filter(matchFilter) : classFilteredRegular;
+
   const apps = isSearching ? allApps.filter(matchFilter) : allApps
 
   // Grid layout tracking (for responsive display)
@@ -36221,71 +36273,125 @@ function Home({ onSelect }) {
           <img src="/tenali.png" alt="Tenali Raman" style={{ width: '80px', height: 'auto', flexShrink: 0 }} />
           <div>
             <h1 style={{ margin: 0 }}>Tenali</h1>
-            <p className="subtitle" style={{ margin: 0 }}>Choose a learning game to begin</p>
+            <p className="subtitle" style={{ margin: 0 }}>{selectedClass ? `${selectedClass} Modules` : 'Choose your Class to begin'}</p>
           </div>
         </div>
-        {/* Hamburger menu — top right */}
-        <div ref={menuRef} style={{ position: 'absolute', top: '8px', right: '0' }}>
-          <button onClick={() => setMenuOpen(o => !o)} style={{
-            background: 'none', border: 'none', cursor: 'pointer', padding: '8px',
-            display: 'flex', flexDirection: 'column', gap: '4px', alignItems: 'center'
-          }} aria-label="Menu">
-            <span style={{ display: 'block', width: '22px', height: '2.5px', background: 'var(--clr-text)', borderRadius: '2px', transition: 'transform 0.2s, opacity 0.2s', transform: menuOpen ? 'rotate(45deg) translate(4.5px, 4.5px)' : 'none' }} />
-            <span style={{ display: 'block', width: '22px', height: '2.5px', background: 'var(--clr-text)', borderRadius: '2px', transition: 'opacity 0.2s', opacity: menuOpen ? 0 : 1 }} />
-            <span style={{ display: 'block', width: '22px', height: '2.5px', background: 'var(--clr-text)', borderRadius: '2px', transition: 'transform 0.2s, opacity 0.2s', transform: menuOpen ? 'rotate(-45deg) translate(4.5px, -4.5px)' : 'none' }} />
-          </button>
-          {menuOpen && <div style={{
-            position: 'absolute', top: '100%', right: 0, zIndex: 50,
-            background: 'var(--clr-card)', border: '1.5px solid var(--clr-border)',
-            borderRadius: 'var(--radius-sm)', boxShadow: 'var(--shadow-card)',
-            padding: '6px 0', minWidth: '200px', overflow: 'hidden'
-          }}>
-            {featuredApps.map(app => (
-              <button key={app.key} onClick={() => { setMenuOpen(false); onSelect(app.key) }} style={{
-                display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
-                background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
-                fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)'
-              }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
-                 onMouseLeave={e => e.target.style.background = 'none'}>
-                <strong style={{ color: 'var(--clr-accent)' }}>{app.name}</strong>
-                <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>{app.subtitle}</span>
-              </button>
-            ))}
-          </div>}
+      </div>
+      
+      {!selectedClass ? (
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+          gap: '20px',
+          padding: '40px 20px',
+          maxWidth: '1000px',
+          margin: '0 auto'
+        }}>
+          {Array.from({length: 12}, (_, i) => i + 1).map(num => (
+                        <button
+              key={`class-${num}`}
+              onClick={() => setSelectedClass(`Class ${num}`)}
+              style={{
+                padding: '40px 24px',
+                fontSize: '1.4rem',
+                fontFamily: 'var(--font-display)',
+                fontWeight: '600',
+                borderRadius: 'var(--radius)',
+                border: '1.5px solid var(--clr-border)',
+                background: 'var(--clr-card)',
+                color: 'var(--clr-text)',
+                cursor: 'pointer',
+                boxShadow: 'var(--shadow-card)',
+                transition: 'all 0.3s ease',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                textAlign: 'center',
+                position: 'relative',
+                overflow: 'hidden'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.transform = 'translateY(-4px)';
+                e.target.style.borderColor = 'var(--clr-accent)';
+                e.target.style.background = 'var(--clr-surface)';
+                e.target.style.boxShadow = '0 12px 24px rgba(232, 134, 74, 0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.transform = 'none';
+                e.target.style.borderColor = 'var(--clr-border)';
+                e.target.style.background = 'var(--clr-card)';
+                e.target.style.boxShadow = 'var(--shadow-card)';
+              }}
+            >
+              Class {num}
+            </button>
+          ))}
         </div>
-      </div>
-      <div className="search-bar-row">
-        <input
-          className="search-bar"
-          type="text"
-          placeholder="Search puzzles…"
-          value={search}
-          onChange={e => setSearch(e.target.value)}
-        />
-      </div>
-      <div className="menu-grid" ref={gridRef}>
-        {filteredRegular.map((app) => (
-          <button key={app.key} className={`menu-card ${app.color}`} onClick={() => onSelect(app.key)}>
-            <span className="menu-title">{app.name}</span>
-            <span className="menu-subtitle">{app.subtitle}</span>
-          </button>
-        ))}
-      </div>
-      <div className="grid-dimension">{rows} × {cols}</div>
+      ) : (
+        <>
+          <div className="search-bar-row" style={{ display: 'flex', gap: '12px' }}>
+            <button
+              onClick={() => setSelectedClass(null)}
+              style={{
+                padding: '12px 16px', borderRadius: 'var(--radius-full)', border: '1px solid var(--clr-border)',
+                background: 'var(--clr-surface)', color: 'var(--clr-text)', fontSize: '1rem', flexShrink: 0,
+                cursor: 'pointer', outline: 'none', boxShadow: 'var(--shadow-sm)'
+              }}
+            >
+              ← Change Class
+            </button>
+            <button
+              onClick={onReset}
+              style={{
+                padding: '12px 16px', borderRadius: 'var(--radius-full)', border: '1px solid var(--clr-border)',
+                background: 'var(--clr-surface)', color: 'var(--clr-text)', fontSize: '1rem', flexShrink: 0,
+                cursor: 'pointer', outline: 'none', boxShadow: 'var(--shadow-sm)'
+              }}
+            >
+              ↺ Reset Progress
+            </button>
+            <input
+              className="search-bar"
+              style={{ flex: 1 }}
+              type="text"
+              placeholder={`Search ${selectedClass} puzzles…`}
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+            />
+          </div>
+          <div ref={gridRef} style={{ width: '100%' }}>
+            <div className="menu-grid">
+              {filteredRegular.map(app => (
+                <button
+                  key={app.key}
+                  className={`menu-card card-color-${app.color || 'blue'}`}
+                  onClick={() => onSelect(app.key)}
+                >
+                  <span className="card-tag">{app.classGroup || ''}</span>
+                  <div className="card-content">
+                    <h2 className="card-title">{app.name}</h2>
+                    <p className="card-desc">{app.subtitle}</p>
+                  </div>
+                  <div className="card-play-btn">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                  </div>
+                </button>
+              ))}
+            </div>
+            {filteredRegular.length === 0 && (
+              <p style={{ textAlign: 'center', color: 'var(--clr-text-soft)', marginTop: '40px' }}>
+                No modules found for {selectedClass}.
+              </p>
+            )}
+            <div className="grid-dimension">{filteredRegular.length} {filteredRegular.length === 1 ? 'module' : 'modules'} • {cols}×{Math.ceil(filteredRegular.length / (cols || 1))} grid</div>
+          </div>
+        </>
+      )}
     </>
   )
 }
 
-/**
- * GKApp Component (General Knowledge Quiz)
- * Multiple-choice General Knowledge questions fetched from backend API.
- * Questions are randomly selected and not repeated (excludeIds parameter).
- * Questions continue indefinitely until user chooses to go back.
- *
- * @param {Object} props
- * @param {Function} props.onBack - Callback to return to home menu
- */
-function GKApp({ onBack }) {
+function GKApp({ onBack, initialAdaptScore }) {
   // Current question object: {id, question, options: [A, B, C, D], ...}
   const [question, setQuestion] = useState(null)
   // User's selected option: 'A', 'B', 'C', or 'D'
@@ -36297,11 +36403,11 @@ function GKApp({ onBack }) {
   // Is a question being fetched from the API?
   const [loading, setLoading] = useState(false)
   // Total correct answers so far
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // Has the answer been revealed (showing feedback)?
   const [revealed, setRevealed] = useState(false)
   // Question counter (1, 2, 3, ...)
-  const [questionNumber, setQuestionNumber] = useState(0)
+  const [questionNumber, setQuestionNumber] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // All result objects from this session
   const [results, setResults] = useState([])
   // Persist seen GK question IDs in localStorage to avoid repeats across sessions
@@ -36359,7 +36465,7 @@ function GKApp({ onBack }) {
     setTotalQ(count)
     setStarted(true)
     setFinished(false)
-    setScore(0)
+    setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
     setQuestionNumber(0)
     setResults([])
     // Don't clear seenIds — keep the localStorage history for no-repeat
@@ -36476,7 +36582,7 @@ function GKApp({ onBack }) {
   }, [revealed, loading, question])
 
   return (
-    <QuizLayout title="General Knowledge" subtitle="Random question picker" onBack={onBack} timer={started && !finished ? timer : null}>
+    <QuizLayout   title="General Knowledge" subtitle="Random question picker" onBack={onBack} timer={started && !finished ? timer : null}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Test your general knowledge with random questions!</p>
         <div className="question-count-row">
@@ -36528,14 +36634,14 @@ function GKApp({ onBack }) {
  * @param {Object} props
  * @param {Function} props.onBack - Callback to return to home menu
  */
-function AdditionApp({ onBack }) {
+function AdditionApp({ onBack, initialAdaptScore }) {
   // Difficulty level: 'easy' (1-digit), 'medium' (2-digit), 'hard' (3-digit), 'extrahard' (4-digit)
   const [difficulty, setDifficulty] = useState('easy')
   // Adaptive mode enabled?
-  const [isAdaptive, setIsAdaptive] = useState(false)
+  const [isAdaptive, setIsAdaptive] = useState(initialAdaptScore >= 0.8)
   // Adaptive score (0-3)
-  const [adaptScore, setAdaptScore] = useState(0)
-  const adaptScoreRef = useRef(0)
+  const [adaptScore, setAdaptScore] = useState(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+  const adaptScoreRef = useRef(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
   // User-entered number of questions to attempt
   const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
   // Quiz state: has quiz started?
@@ -36547,9 +36653,9 @@ function AdditionApp({ onBack }) {
   // User's text input (numeric answer)
   const [answer, setAnswer] = useState('')
   // Number of correct answers
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // Current question number (1, 2, 3, ...)
-  const [questionNumber, setQuestionNumber] = useState(0)
+  const [questionNumber, setQuestionNumber] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // Total questions to attempt
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
   // Feedback message after submission
@@ -36566,20 +36672,28 @@ function AdditionApp({ onBack }) {
   const timer = useTimer()
   const advanceFnRef = useRef(null)
 
-  const effectiveDiff = () => isAdaptive ? adaptiveLevel(adaptScoreRef.current) : difficulty
+  const effectiveDiff = (qNum) => {
+    if (isAdaptive) {
+      if (qNum < 9) return 'easy'
+      if (qNum < 13) return 'medium'
+      if (qNum < 17) return 'hard'
+      return 'extrahard'
+    }
+    return difficulty
+  }
   const digitMap = { easy: 1, medium: 2, hard: 3, extrahard: 4 }
 
   /**
    * fetchQuestion(selectedDifficulty?): Fetch next addition question from API
    * Generates random a + b = ? with specified digit count
    */
-  const fetchQuestion = async (selectedDifficulty = difficulty) => {
+  const fetchQuestion = async (qNum = questionNumber, selectedDifficulty = difficulty) => {
     setLoading(true)
     setFeedback('')
     setAnswer('')
     setRevealed(false)
     setIsCorrect(null)
-    const res = await fetch(`${API}/addition-api/question?digits=${digitMap[effectiveDiff()]}`)
+    const res = await fetch(`${API}/addition-api/question?digits=${digitMap[effectiveDiff(qNum)]}`)
     const data = await res.json()
     setQuestion(data)
     setLoading(false)
@@ -36595,12 +36709,13 @@ function AdditionApp({ onBack }) {
     setTotalQ(count)
     setStarted(true)
     setFinished(false)
-    setScore(0)
-    setQuestionNumber(1)
+    setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
+    const startQ = initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) + 1 : 1
+    setQuestionNumber(startQ)
     setResults([])
-    setAdaptScore(0)
-    adaptScoreRef.current = 0
-    await fetchQuestion(difficulty)
+    setAdaptScore(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+    adaptScoreRef.current = initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1
+    await fetchQuestion(startQ, difficulty)
   }
 
   // Keyboard shortcuts for faster numeric entry (without needing input focus)
@@ -36660,7 +36775,7 @@ function AdditionApp({ onBack }) {
         time: timeTaken,
       }])
       if (isAdaptive) {
-        setAdaptScore(prev => { const next = data.correct ? Math.min(3, prev + 0.25) : Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next })
+        setAdaptScore(prev => { const next = updateBKT(prev, data.correct); adaptScoreRef.current = next; return next })
       }
       setRevealed(true)
       return
@@ -36674,7 +36789,7 @@ function AdditionApp({ onBack }) {
     }
 
     setQuestionNumber((n) => n + 1)
-    await fetchQuestion(difficulty)
+    await fetchQuestion(questionNumber + 1, difficulty)
   }
 
   /**
@@ -36712,10 +36827,12 @@ function AdditionApp({ onBack }) {
   }, [revealed, isCorrect, questionNumber])
 
   const diffLabels = { easy: 'Easy — 1 digit', medium: 'Medium — 2 digits', hard: 'Hard — 3 digits', extrahard: 'Extra Hard — 4 digits' }
-  const curAdaptLevel = adaptiveLevel(adaptScore)
+  
+
+const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Addition" subtitle="Choose a level and solve addition questions" onBack={onBack} timer={started && !finished ? timer : null}>
+    <QuizLayout adaptScore={adaptScore}    title="Addition" subtitle="Choose a level and solve addition questions" onBack={onBack} timer={started && !finished ? timer : null}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice addition!</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
@@ -36742,7 +36859,7 @@ function AdditionApp({ onBack }) {
           <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
           {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
         </div>
-        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
+        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100); setAdaptScore(v); adaptScoreRef.current = v }} />}
         <div className="question-box">{loading || !question ? 'Loading question…' : `${question.prompt} = ?`}</div>
         <input className="answer-input" type="text" value={answer} onChange={(e) => { if (!revealed) { const v = e.target.value; if (v === '' || v === '-' || /^-?\d+$/.test(v)) setAnswer(v) } }} disabled={revealed} placeholder="Type your answer" />
         <NumPad value={answer} onChange={(v) => !revealed && setAnswer(v)} disabled={revealed} />
@@ -37333,11 +37450,11 @@ function GymQuiz({ title, subtitle, typeKeys, welcomeText, algebraInput, onBack 
   const [adaptive, setAdaptive] = useState(false)             // Adaptive mode: infinite stream until Stop
   // plan is an array of { type, difficulty }. Empty in adaptive mode.
   const [plan, setPlan] = useState([])
-  const [questionNumber, setQuestionNumber] = useState(0)
+  const [questionNumber, setQuestionNumber] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)         // Infinity in adaptive mode
   const [question, setQuestion] = useState(null)
   const [answer, setAnswer] = useState('')
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   const [feedback, setFeedback] = useState('')
   const [isCorrect, setIsCorrect] = useState(null)
   const [revealed, setRevealed] = useState(false)
@@ -37379,8 +37496,8 @@ function GymQuiz({ title, subtitle, typeKeys, welcomeText, algebraInput, onBack 
     setAdaptive(false)
     setStarted(true)
     setFinished(false)
-    setScore(0)
-    setQuestionNumber(1)
+    setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
+    setQuestionNumber(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) + 1 : 1)
     setResults([])
     loadQuestion(p, 0, false)
   }
@@ -37393,8 +37510,8 @@ function GymQuiz({ title, subtitle, typeKeys, welcomeText, algebraInput, onBack 
     setAdaptive(true)
     setStarted(true)
     setFinished(false)
-    setScore(0)
-    setQuestionNumber(1)
+    setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
+    setQuestionNumber(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) + 1 : 1)
     setResults([])
     setAdaptDiff(0.3)
     adaptDiffRef.current = 0.3
@@ -37551,7 +37668,7 @@ function GymQuiz({ title, subtitle, typeKeys, welcomeText, algebraInput, onBack 
   const avgTime = results.length > 0 ? (results.reduce((s, r) => s + r.time, 0) / results.length).toFixed(1) : '—'
 
   return (
-    <QuizLayout title={title} subtitle={subtitle} onBack={onBack} timer={started && !finished ? timer : null}>
+    <QuizLayout   title={title} subtitle={subtitle} onBack={onBack} timer={started && !finished ? timer : null}>
       {!started && !finished && (
         <div className="welcome-box">
           <p className="welcome-text">{welcomeText}</p>
@@ -37661,14 +37778,14 @@ function GymQuiz({ title, subtitle, typeKeys, welcomeText, algebraInput, onBack 
  * @param {Object} props
  * @param {Function} props.onBack - Callback to return to home menu
  */
-function BasicArithApp({ onBack }) {
+function BasicArithApp({ onBack, initialAdaptScore }) {
   // Difficulty level: 'easy', 'medium', 'hard', 'extrahard'
   const [difficulty, setDifficulty] = useState('easy')
   // Adaptive mode enabled?
-  const [isAdaptive, setIsAdaptive] = useState(false)
+  const [isAdaptive, setIsAdaptive] = useState(initialAdaptScore >= 0.8)
   // Adaptive score (0-3)
-  const [adaptScore, setAdaptScore] = useState(0)
-  const adaptScoreRef = useRef(0)
+  const [adaptScore, setAdaptScore] = useState(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+  const adaptScoreRef = useRef(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
   // User-entered number of questions
   const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
   // Quiz started?
@@ -37680,9 +37797,9 @@ function BasicArithApp({ onBack }) {
   // User's numeric answer
   const [answer, setAnswer] = useState('')
   // Correct answer count
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // Current question number
-  const [questionNumber, setQuestionNumber] = useState(0)
+  const [questionNumber, setQuestionNumber] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // Total questions
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
   // Feedback after submission
@@ -37699,16 +37816,24 @@ function BasicArithApp({ onBack }) {
   const timer = useTimer()
   const advanceFnRef = useRef(null)
 
-  const effectiveDiff = () => isAdaptive ? adaptiveLevel(adaptScoreRef.current) : difficulty
+  const effectiveDiff = (qNum) => {
+    if (isAdaptive) {
+      if (qNum < 9) return 'easy'
+      if (qNum < 13) return 'medium'
+      if (qNum < 17) return 'hard'
+      return 'extrahard'
+    }
+    return difficulty
+  }
 
   /**
    * fetchQuestion(): Fetch next arithmetic question
    * Generates random a op b = ? with specified difficulty and operation
    */
-  const fetchQuestion = async () => {
+  const fetchQuestion = async (qNum = questionNumber) => {
     setLoading(true)
     setFeedback(''); setAnswer(''); setRevealed(false); setIsCorrect(null)
-    const res = await fetch(`${API}/basicarith-api/question?difficulty=${effectiveDiff()}`)
+    const res = await fetch(`${API}/basicarith-api/question?difficulty=${effectiveDiff(qNum)}`)
     const data = await res.json()
     setQuestion(data)
     setLoading(false)
@@ -37721,9 +37846,10 @@ function BasicArithApp({ onBack }) {
   const startQuiz = async () => {
     const count = numQuestions !== '' && Number(numQuestions) > 0 ? Number(numQuestions) : DEFAULT_TOTAL
     setTotalQ(count)
-    setStarted(true); setFinished(false); setScore(0); setQuestionNumber(1); setResults([])
-    setAdaptScore(0); adaptScoreRef.current = 0
-    await fetchQuestion()
+    const startQ = initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) + 1 : 1;
+    setStarted(true); setFinished(false); setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0); setQuestionNumber(startQ); setResults([])
+    setAdaptScore(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1); adaptScoreRef.current = initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1
+    await fetchQuestion(startQ)
   }
 
   // Keyboard shortcuts for faster numeric entry (without needing input focus)
@@ -37800,7 +37926,7 @@ function BasicArithApp({ onBack }) {
         time: timeTaken,
       }])
       if (isAdaptive) {
-        setAdaptScore(prev => { const next = data.correct ? Math.min(3, prev + 0.25) : Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next })
+        setAdaptScore(prev => { const next = updateBKT(prev, data.correct); adaptScoreRef.current = next; return next })
       }
       setRevealed(true)
       return
@@ -37808,7 +37934,7 @@ function BasicArithApp({ onBack }) {
     // Quiz progression: check if quiz is finished
     if (questionNumber >= totalQ) { setFinished(true); setQuestion(null); timer.reset(); return }
     setQuestionNumber(n => n + 1)
-    await fetchQuestion()
+    await fetchQuestion(questionNumber + 1)
   }
 
   /**
@@ -37845,10 +37971,12 @@ function BasicArithApp({ onBack }) {
   }, [revealed, isCorrect, questionNumber])
 
   const diffLabels = { easy: 'Easy — 1 digit', medium: 'Medium — 2 digits', hard: 'Hard — 3 digits', extrahard: 'Extra Hard — 4 digits' }
-  const curAdaptLevel = adaptiveLevel(adaptScore)
+  
+
+const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Basic Arithmetic" subtitle="Add, subtract, multiply & divide positive & negative numbers" onBack={onBack} timer={started && !finished ? timer : null}>
+    <QuizLayout adaptScore={adaptScore}    title="Basic Arithmetic" subtitle="Add, subtract, multiply & divide positive & negative numbers" onBack={onBack} timer={started && !finished ? timer : null}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice basic arithmetic!</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
@@ -37875,7 +38003,7 @@ function BasicArithApp({ onBack }) {
           <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
           {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
         </div>
-        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
+        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100); setAdaptScore(v); adaptScoreRef.current = v }} />}
         <div className="question-box">{loading || !question ? 'Loading question…' : `${question.prompt} = ?`}</div>
         <input className="answer-input" type="text" value={answer} onChange={e => { if (!revealed) { const v = e.target.value; if (v === '' || v === '-' || /^-?\d+$/.test(v)) setAnswer(v) } }} disabled={revealed} placeholder="Type your answer" />
         <NumPad value={answer} onChange={v => !revealed && setAnswer(v)} disabled={revealed} />
@@ -37909,14 +38037,14 @@ function BasicArithApp({ onBack }) {
  * @param {Object} props
  * @param {Function} props.onBack - Callback to return to home menu
  */
-function QuadraticApp({ onBack }) {
+function QuadraticApp({ onBack, initialAdaptScore }) {
   // Difficulty level: 'easy', 'medium', 'hard', 'extrahard'
   const [difficulty, setDifficulty] = useState('easy')
   // Adaptive mode enabled?
-  const [isAdaptive, setIsAdaptive] = useState(false)
+  const [isAdaptive, setIsAdaptive] = useState(initialAdaptScore >= 0.8)
   // Adaptive score (0-3)
-  const [adaptScore, setAdaptScore] = useState(0)
-  const adaptScoreRef = useRef(0)
+  const [adaptScore, setAdaptScore] = useState(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+  const adaptScoreRef = useRef(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
   // Number of questions to complete in this quiz session
   const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
   // Quiz started flag
@@ -37928,9 +38056,9 @@ function QuadraticApp({ onBack }) {
   // User's string input for the y value answer
   const [answer, setAnswer] = useState('')
   // Number of correct answers so far
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // Current question number (1-indexed)
-  const [questionNumber, setQuestionNumber] = useState(0)
+  const [questionNumber, setQuestionNumber] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // Total questions in this quiz session
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
   // Feedback string with step-by-step calculation working
@@ -37974,11 +38102,11 @@ function QuadraticApp({ onBack }) {
     setTotalQ(count)
     setStarted(true)
     setFinished(false)
-    setScore(0)
-    setQuestionNumber(1)
+    setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
+    setQuestionNumber(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) + 1 : 1)
     setResults([])
-    setAdaptScore(0)
-    adaptScoreRef.current = 0
+    setAdaptScore(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+    adaptScoreRef.current = initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1
     await fetchQuestion(difficulty)
   }
 
@@ -38041,7 +38169,7 @@ function QuadraticApp({ onBack }) {
         time: timeTaken,
       }])
       if (isAdaptive) {
-        setAdaptScore(prev => { const next = data.correct ? Math.min(3, prev + 0.25) : Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next })
+        setAdaptScore(prev => { const next = updateBKT(prev, data.correct); adaptScoreRef.current = next; return next })
       }
       setRevealed(true)
       return
@@ -38056,7 +38184,7 @@ function QuadraticApp({ onBack }) {
     }
 
     setQuestionNumber((n) => n + 1)
-    await fetchQuestion()
+    await fetchQuestion(questionNumber + 1)
   }
 
   /**
@@ -38100,10 +38228,12 @@ function QuadraticApp({ onBack }) {
   }, [revealed, isCorrect, questionNumber])
 
   const diffLabels = { easy: 'Easy — Small coefficients', medium: 'Medium — Larger values', hard: 'Hard — Big coefficients', extrahard: 'Extra Hard — Very large' }
-  const curAdaptLevel = adaptiveLevel(adaptScore)
+  
+
+const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Quadratic" subtitle="Given x, find y = ax² + bx + c" onBack={onBack} timer={started && !finished ? timer : null}>
+    <QuizLayout adaptScore={adaptScore}    title="Quadratic" subtitle="Given x, find y = ax² + bx + c" onBack={onBack} timer={started && !finished ? timer : null}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice quadratic substitution!</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
@@ -38130,7 +38260,7 @@ function QuadraticApp({ onBack }) {
           <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
           {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
         </div>
-        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
+        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100); setAdaptScore(v); adaptScoreRef.current = v }} />}
         <div className="question-box">
           {loading || !question ? 'Loading question…' : (
             <>
@@ -38290,7 +38420,7 @@ function buildExtensionBatch(sourceTables, count) {
   return pool.slice(0, count)
 }
 
-function MultiplyApp({ onBack }) {
+function MultiplyApp({ onBack, initialAdaptScore }) {
   // --- Persistent state ---
   const [stats, setStats] = useState(() => loadMultStats())
   // --- Phase: 'picker' (level chooser) | 'level2-setup' (weak-table picker) |
@@ -38305,7 +38435,7 @@ function MultiplyApp({ onBack }) {
   const [qIndex, setQIndex] = useState(0)
   const [question, setQuestion] = useState(null)
   const [answer, setAnswer] = useState('')
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   const [feedback, setFeedback] = useState('')
   const [isCorrect, setIsCorrect] = useState(null)
   const [revealed, setRevealed] = useState(false)
@@ -38365,7 +38495,7 @@ function MultiplyApp({ onBack }) {
   // ─── Level launchers ─────────────────────────────────────────────────
   const startLevel1 = () => {
     const p = buildLevel1Plan()
-    setLevel(1); setPlan(p); setQIndex(0); setScore(0); setResults([])
+    setLevel(1); setPlan(p); setQIndex(0); setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0); setResults([])
     setExtensionCount(0); setAllCorrectInRound(true)
     setRoundTotalTime(0); setRoundQuestionsCount(0)
     setSourceTables(MULT_TABLES.slice())
@@ -38390,7 +38520,7 @@ function MultiplyApp({ onBack }) {
     if (tables.length === 0) return
     const initial = buildExtensionBatch(tables, MULT_BASE_QUESTIONS)
     initial.sort((a, b) => a.table - b.table || a.multiplier - b.multiplier)
-    setPlan(initial); setQIndex(0); setScore(0); setResults([])
+    setPlan(initial); setQIndex(0); setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0); setResults([])
     setExtensionCount(0); setAllCorrectInRound(true)
     setRoundTotalTime(0); setRoundQuestionsCount(0)
     setSourceTables(tables)
@@ -38401,7 +38531,7 @@ function MultiplyApp({ onBack }) {
   const startLevel3 = () => {
     // For Level 3 we don't pre-build a plan — we keep generating until the
     // user exits or runs out of time on a question.
-    setLevel(3); setPlan([]); setQIndex(0); setScore(0); setResults([])
+    setLevel(3); setPlan([]); setQIndex(0); setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0); setResults([])
     setStreak(0); setLongestStreak(0); setFastestTime(null)
     setSourceTables(MULT_TABLES.slice())
     setPhase('quiz')
@@ -38570,7 +38700,7 @@ function MultiplyApp({ onBack }) {
   )
 
   return (
-    <QuizLayout title="Multiplication" subtitle="Three-level progressive trainer" onBack={onBack}>
+    <QuizLayout   title="Multiplication" subtitle="Three-level progressive trainer" onBack={onBack}>
       <div className="top-mini-row">
         {phase === 'quiz' && level !== 3 && !revealed && <div className="timer-pill">{timer.elapsed}s</div>}
         {phase === 'quiz' && level === 3 && <div className="timer-pill" style={l3TimeRemaining <= 3 ? { background: 'var(--clr-wrong)', color: '#fff' } : {}}>⏱ {l3TimeRemaining}s</div>}
@@ -38707,14 +38837,14 @@ function MultiplyApp({ onBack }) {
  * @param {Object} props
  * @param {Function} props.onBack - Callback to return to home menu
  */
-function VocabApp({ onBack }) {
+function VocabApp({ onBack, initialAdaptScore }) {
   // Difficulty level: 'easy' | 'medium' | 'hard' | 'extrahard'
   const [difficulty, setDifficulty] = useState('easy')
   // Adaptive mode enabled?
-  const [isAdaptive, setIsAdaptive] = useState(false)
+  const [isAdaptive, setIsAdaptive] = useState(initialAdaptScore >= 0.8)
   // Adaptive score (0-3)
-  const [adaptScore, setAdaptScore] = useState(0)
-  const adaptScoreRef = useRef(0)
+  const [adaptScore, setAdaptScore] = useState(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+  const adaptScoreRef = useRef(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
   // Number of questions to answer in this session
   const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
   // Quiz started flag
@@ -38732,11 +38862,11 @@ function VocabApp({ onBack }) {
   // API call in progress?
   const [loading, setLoading] = useState(false)
   // Number of correct answers so far
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // Answer revealed flag (transition from selection mode to next mode)
   const [revealed, setRevealed] = useState(false)
   // Current question number (1-indexed)
-  const [questionNumber, setQuestionNumber] = useState(0)
+  const [questionNumber, setQuestionNumber] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // Total questions in this quiz session
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
   // Array of {question, userAnswer, correctAnswer, correct, time} result objects
@@ -38786,12 +38916,12 @@ function VocabApp({ onBack }) {
     setTotalQ(count)
     setStarted(true)
     setFinished(false)
-    setScore(0)
-    setQuestionNumber(1)
+    setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
+    setQuestionNumber(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) + 1 : 1)
     setResults([])
     // Keep seenIds from localStorage — don't clear
-    setAdaptScore(0)
-    adaptScoreRef.current = 0
+    setAdaptScore(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+    adaptScoreRef.current = initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1
     await loadQuestion(seenIds)
   }
 
@@ -38834,7 +38964,7 @@ function VocabApp({ onBack }) {
       time: timeTaken,
     }])
     if (isAdaptive) {
-      setAdaptScore(prev => { const next = data.correct ? Math.min(3, prev + 0.25) : Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next })
+      setAdaptScore(prev => { const next = updateBKT(prev, data.correct); adaptScoreRef.current = next; return next })
     }
     setRevealed(true)
   }
@@ -38929,7 +39059,7 @@ function VocabApp({ onBack }) {
   }, [started, finished, revealed, loading, question])
 
   return (
-    <QuizLayout title="Vocab Builder" subtitle="Pick the correct definition for the word" onBack={onBack} timer={started && !finished ? timer : null}>
+    <QuizLayout adaptScore={adaptScore}    title="Vocab Builder" subtitle="Pick the correct definition for the word" onBack={onBack} timer={started && !finished ? timer : null}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Build your vocabulary!</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
@@ -38956,7 +39086,7 @@ function VocabApp({ onBack }) {
           <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
           {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
         </div>
-        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
+        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100); setAdaptScore(v); adaptScoreRef.current = v }} />}
         <div className="question-box vocab-word">{loading || !question ? 'Loading question…' : question.question}</div>
         {question && (
           <div className="options-list">
@@ -39022,8 +39152,25 @@ function VocabApp({ onBack }) {
 const ADAPT_DIFFS = ['easy', 'medium', 'hard', 'extrahard']
 const ADAPT_LABELS = { easy: 'Easy', medium: 'Medium', hard: 'Hard', extrahard: 'Extra Hard' }
 const ADAPT_COLORS = { easy: '#4caf50', medium: '#ff9800', hard: '#f44336', extrahard: '#9c27b0' }
-function adaptiveLevel(score) { return ADAPT_DIFFS[Math.min(Math.max(Math.round(score), 0), 3)] }
-function adaptivePct(score) { return Math.min(100, Math.max(0, (score / 3) * 100)) }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// BAYESIAN KNOWLEDGE TRACING (BKT) ENGINE
+// ─────────────────────────────────────────────────────────────────────────────
+function updateBKT(prior, correct, params = { pGuess: 0.2, pSlip: 0.1, pTransit: 0.3 }) {
+  const { pGuess, pSlip, pTransit } = params;
+  let pKnown;
+  
+  if (correct) {
+    pKnown = (prior * (1 - pSlip)) / (prior * (1 - pSlip) + (1 - prior) * pGuess);
+  } else {
+    pKnown = (prior * pSlip) / (prior * pSlip + (1 - prior) * (1 - pGuess));
+  }
+  
+  return pKnown + (1 - pKnown) * pTransit;
+}
+
+function adaptiveLevel(mastery) { return ADAPT_DIFFS[Math.min(Math.max(Math.floor(mastery * 4), 0), 3)] }
+function adaptivePct(mastery) { return Math.min(100, Math.max(0, mastery * 100)) }
 
 /**
  * GYM_OPTION_LABEL — Display map used by all Gym MCQ rendering. The server
@@ -39047,20 +39194,20 @@ const GYM_OPTION_LABEL = { A: '1', B: '2', C: '3', D: '4' }
  * question as a 4-button options grid instead of a free-form text input.
  */
 function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly }) {
-  return function GeneratedMCQuizApp({ onBack }) {
+  return function GeneratedMCQuizApp({ onBack, initialAdaptScore }) {
     const diffs = Object.keys(diffLabels)
     const [difficulty, setDifficulty] = useState(diffs[0])
     // When adaptiveOnly is set (used by all gym puzzles), the difficulty
     // selector is hidden and the quiz always runs in adaptive mode.
     const [isAdaptive, setIsAdaptive] = useState(!!adaptiveOnly)
-    const [adaptScore, setAdaptScore] = useState(0)
+    const [adaptScore, setAdaptScore] = useState(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
     const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
     const [started, setStarted] = useState(false)
     const [finished, setFinished] = useState(false)
     const [question, setQuestion] = useState(null)
     const [selectedOption, setSelectedOption] = useState('')
-    const [score, setScore] = useState(0)
-    const [questionNumber, setQuestionNumber] = useState(0)
+    const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
+    const [questionNumber, setQuestionNumber] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
     const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
     const [feedback, setFeedback] = useState('')
     const [isCorrect, setIsCorrect] = useState(null)
@@ -39071,7 +39218,7 @@ function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly
     const [correctOption, setCorrectOption] = useState('')
     const timer = useTimer()
     const advanceFnRef = useRef(null)
-    const adaptScoreRef = useRef(0)
+    const adaptScoreRef = useRef(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
     const submittedRef = useRef(false)
     const advancedRef = useRef(false)
 
@@ -39107,8 +39254,8 @@ function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly
 
     const startQuiz = () => {
       const t = Math.max(1, Math.min(100, Number(numQuestions) || DEFAULT_TOTAL))
-      setTotalQ(t); setScore(0); setQuestionNumber(1); setResults([]); setStarted(true); setFinished(false)
-      setAdaptScore(0); adaptScoreRef.current = 0
+      setTotalQ(t); setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0); setQuestionNumber(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) + 1 : 1); setResults([]); setStarted(true); setFinished(false)
+      setAdaptScore(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1); adaptScoreRef.current = initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1
       submittedRef.current = false; advancedRef.current = false
     }
 
@@ -39215,7 +39362,7 @@ function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly
     const curAdaptLevel = adaptiveLevel(adaptScore)
 
     return (
-      <QuizLayout title={title} subtitle={subtitle} onBack={onBack} timer={started && !finished ? timer : null}>
+      <QuizLayout adaptScore={adaptScore}    title={title} subtitle={subtitle} onBack={onBack} timer={started && !finished ? timer : null}>
         {!started && !finished && <div className="welcome-box">
           <p className="welcome-text">Practice {title.toLowerCase()}!</p>
           {tip && <p style={{ fontSize: '0.85rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>{tip}</p>}
@@ -39299,19 +39446,19 @@ function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly
 }
 
 function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, answerField }) {
-  return function GeneratedQuizApp({ onBack }) {
+  return function GeneratedQuizApp({ onBack, initialAdaptScore }) {
     const diffs = Object.keys(diffLabels)
     const [difficulty, setDifficulty] = useState(diffs[0])
-    const [isAdaptive, setIsAdaptive] = useState(false)
-    const [adaptScore, setAdaptScore] = useState(0) // 0.0 (easy) → 3.0 (extrahard)
+    const [isAdaptive, setIsAdaptive] = useState(initialAdaptScore >= 0.8)
+    const [adaptScore, setAdaptScore] = useState(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1) // 0.0 (easy) → 3.0 (extrahard)
     const [reportAck, setReportAck] = useState('')
     const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
     const [started, setStarted] = useState(false)
     const [finished, setFinished] = useState(false)
     const [question, setQuestion] = useState(null)
     const [answer, setAnswer] = useState('')
-    const [score, setScore] = useState(0)
-    const [questionNumber, setQuestionNumber] = useState(0)
+    const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
+    const [questionNumber, setQuestionNumber] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
     const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
     const [feedback, setFeedback] = useState('')
     const [isCorrect, setIsCorrect] = useState(null)
@@ -39322,7 +39469,7 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
     const timer = useTimer()
     const advanceFnRef = useRef(null)
     // Keep a ref for adaptive score so loadQuestion always sees latest
-    const adaptScoreRef = useRef(0)
+    const adaptScoreRef = useRef(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
     // Guards against double-submit and double-advance race conditions
     const submittedRef = useRef(false)
     const advancedRef = useRef(false)
@@ -39360,8 +39507,8 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
     }
     const startQuiz = () => {
       const t = Math.max(1, Math.min(100, Number(numQuestions) || DEFAULT_TOTAL))
-      setTotalQ(t); setScore(0); setQuestionNumber(1); setResults([]); setStarted(true); setFinished(false)
-      setAdaptScore(0); adaptScoreRef.current = 0
+      setTotalQ(t); setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0); setQuestionNumber(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) + 1 : 1); setResults([]); setStarted(true); setFinished(false)
+      setAdaptScore(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1); adaptScoreRef.current = initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1
       submittedRef.current = false; advancedRef.current = false
     }
     useEffect(() => { if (started && !finished && questionNumber > 0) loadQuestion() }, [started, questionNumber])
@@ -39460,7 +39607,7 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
     const curAdaptLevel = adaptiveLevel(adaptScore)
 
     return (
-      <QuizLayout title={title} subtitle={subtitle} onBack={onBack} timer={started && !finished ? timer : null}>
+      <QuizLayout adaptScore={adaptScore}    title={title} subtitle={subtitle} onBack={onBack} timer={started && !finished ? timer : null}>
         {!started && !finished && <div className="welcome-box">
           <p className="welcome-text">Practice {title.toLowerCase()}!</p>
           {tip && <p style={{ fontSize: '0.85rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>{tip}</p>}
@@ -39491,7 +39638,7 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
             {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
           </div>
           {isAdaptive && (
-            <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />
+            <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100); setAdaptScore(v); adaptScoreRef.current = v }} />
           )}
           {question && <div style={{ textAlign: 'center' }}>
             <div className="question-prompt" style={{ fontSize: '1.3rem', margin: '20px 0', lineHeight: '1.6' }}>{question.prompt}</div>
@@ -39601,14 +39748,14 @@ function MatrixBox({ matrix, label }) {
   )
 }
 
-function DotProdApp({ onBack }) {
+function DotProdApp({ onBack, initialAdaptScore }) {
   const DIFFS = ['easy', 'medium', 'hard', 'extrahard']
   const DIFF_LABELS_DP = { easy: 'Easy — 2D Dot', medium: 'Medium — 2D / 3D', hard: 'Hard — Matrix ×', extrahard: 'Extra Hard — Fill Blanks' }
 
   const [difficulty, setDifficulty] = useState('easy')
-  const [isAdaptive, setIsAdaptive] = useState(false)
-  const [adaptScore, setAdaptScore] = useState(0)
-  const adaptScoreRef = useRef(0)
+  const [isAdaptive, setIsAdaptive] = useState(initialAdaptScore >= 0.8)
+  const [adaptScore, setAdaptScore] = useState(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+  const adaptScoreRef = useRef(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
   const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
   const [started, setStarted] = useState(false)
   const [finished, setFinished] = useState(false)
@@ -39617,8 +39764,8 @@ function DotProdApp({ onBack }) {
   // Grid answer for matrix input (2D array of strings)
   const [gridAnswer, setGridAnswer] = useState([])
   const gridRefs = useRef([])
-  const [score, setScore] = useState(0)
-  const [questionNumber, setQuestionNumber] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
+  const [questionNumber, setQuestionNumber] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
   const [feedback, setFeedback] = useState('')
   const [isCorrect, setIsCorrect] = useState(null)
@@ -39671,8 +39818,8 @@ function DotProdApp({ onBack }) {
 
   const startQuiz = () => {
     const t = Math.max(1, Math.min(100, Number(numQuestions) || DEFAULT_TOTAL))
-    setTotalQ(t); setScore(0); setQuestionNumber(1); setResults([]); setStarted(true); setFinished(false)
-    setAdaptScore(0); adaptScoreRef.current = 0
+    setTotalQ(t); setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0); setQuestionNumber(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) + 1 : 1); setResults([]); setStarted(true); setFinished(false)
+    setAdaptScore(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1); adaptScoreRef.current = initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1
     submittedRef.current = false; advancedRef.current = false
   }
 
@@ -39857,7 +40004,7 @@ function DotProdApp({ onBack }) {
   }
 
   return (
-    <QuizLayout title="Dot Products" subtitle="Vectors, matrix multiply, fill blanks" onBack={onBack} timer={started && !finished ? timer : null}>
+    <QuizLayout adaptScore={adaptScore}    title="Dot Products" subtitle="Vectors, matrix multiply, fill blanks" onBack={onBack} timer={started && !finished ? timer : null}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice dot products & matrix multiplication!</p>
         <p style={{ fontSize: '0.85rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Easy/Medium: dot product of vectors. Hard: matrix multiply. Extra Hard: fill missing values.</p>
@@ -39886,7 +40033,7 @@ function DotProdApp({ onBack }) {
           {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
         </div>
         {isAdaptive && (
-          <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />
+          <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100); setAdaptScore(v); adaptScoreRef.current = v }} />
         )}
         {question && <div style={{ textAlign: 'center' }}>
           {renderQuestion()}
@@ -40226,13 +40373,13 @@ const PolyGymApp = makeMCQuizApp({
 // ───────────────────────────────────────────────────────────────────────────
 
 const GYM_PUZZLE_TYPES = [
-  { key: 'gymdecimals', name: 'Decimals',     api: 'gymdecimals-api' },
-  { key: 'funcgym',     name: 'Functions',    api: 'funcgym-api' },
-  { key: 'dotprodgym',  name: 'Dot Products', api: 'dotprodgym-api' },
-  { key: 'fracaddgym',  name: 'Fractions',    api: 'fracaddgym-api' },
-  { key: 'lineqgym',    name: 'Linear Eq.',   api: 'lineqgym-api' },
-  { key: 'indicesgym',  name: 'Indices',      api: 'indicesgym-api' },
-  { key: 'polygym',     name: 'Polynomials',  api: 'polygym-api' },
+  { key: 'gymdecimals', classGroup: 'Class 3', name: 'Decimals',     api: 'gymdecimals-api' },
+  { key: 'funcgym', classGroup: 'Class 12',     name: 'Functions',    api: 'funcgym-api' },
+  { key: 'dotprodgym', classGroup: 'Class 12',  name: 'Dot Products', api: 'dotprodgym-api' },
+  { key: 'fracaddgym', classGroup: 'Class 3',  name: 'Fractions',    api: 'fracaddgym-api' },
+  { key: 'lineqgym', classGroup: 'Class 6',    name: 'Linear Eq.',   api: 'lineqgym-api' },
+  { key: 'indicesgym', classGroup: 'Class 8',  name: 'Indices',      api: 'indicesgym-api' },
+  { key: 'polygym', classGroup: 'Class 9',     name: 'Polynomials',  api: 'polygym-api' },
 ]
 
 const GYM_STATS_KEY = 'tenali-gym-stats-v1'
@@ -40382,13 +40529,13 @@ function updateGymStat(stats, gymKey, correct, timeSec, difficulty) {
  * GymApp — the unified Gym puzzle. Pulls together all six gym MCQ families
  * with adaptive selection and per-gym difficulty progression.
  */
-function GymApp({ onBack }) {
+function GymApp({ onBack, initialAdaptScore }) {
   const [stats, setStats] = useState(() => loadGymStats())
   const [phase, setPhase] = useState('setup')   // 'setup' | 'quiz' | 'finished'
   const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
-  const [questionNumber, setQuestionNumber] = useState(0)
-  const [score, setScore] = useState(0)
+  const [questionNumber, setQuestionNumber] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   const [results, setResults] = useState([])
   // Per-question state — mirrors makeMCQuizApp but tracks which gym sourced it.
   const [question, setQuestion] = useState(null)
@@ -40483,7 +40630,7 @@ function GymApp({ onBack }) {
     // No fixed question count — the workout ends when every skill is done
     // (or when the student backs out). totalQ is kept as a generous safety
     // cap so we don't loop forever in pathological cases.
-    setTotalQ(500); setScore(0); setResults([]); setQuestionNumber(1)
+    setTotalQ(500); setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0); setResults([]); setQuestionNumber(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) + 1 : 1)
     setPhase('quiz')
     submittedRef.current = false; advancedRef.current = false
     // Fresh routing state for the new session.
@@ -40726,7 +40873,7 @@ function GymApp({ onBack }) {
   }
 
   return (
-    <QuizLayout title="Gym" subtitle="Adaptive cross-gym workout — 7 puzzles, one session" onBack={onBack} timer={phase === 'quiz' ? timer : null}>
+    <QuizLayout   title="Gym" subtitle="Adaptive cross-gym workout — 7 puzzles, one session" onBack={onBack} timer={phase === 'quiz' ? timer : null}>
       {phase === 'setup' && (
         <div className="welcome-box">
           <p className="welcome-text">Cross-train across all seven gyms</p>
@@ -41190,14 +41337,14 @@ const generateLikeTermsQuestion = (level) => {
   }
 }
 
-function TatsavitApp({ onBack }) {
+function TatsavitApp({ onBack, initialAdaptScore }) {
   const [homeScreen, setHomeScreen] = useState(true)
   const [drillingScreen, setDrillingScreen] = useState(false)
   const [summaryScreen, setSummaryScreen] = useState(false)
 
   const [level, setLevel] = useState(1)
   const [streak, setStreak] = useState(0)
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   const [currentQuestion, setCurrentQuestion] = useState(null)
   const [revealed, setRevealed] = useState(false)
   const [selectedChoice, setSelectedChoice] = useState(null)
@@ -41218,7 +41365,7 @@ function TatsavitApp({ onBack }) {
     setSummaryScreen(false)
     setLevel(1); levelRef.current = 1
     setStreak(0); streakRef.current = 0
-    setScore(0)
+    setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
     setQuestionsAnswered([])
     // Generate L1 question directly (level state not yet updated)
     const q = generateQuestion(1)
@@ -41516,20 +41663,20 @@ function TatsavitApp({ onBack }) {
 
 /* ── Squaring App ──────────────────────────────────── */
 // (a+b)² = a² + 2ab + b²  — student fills all four boxes
-function SquaringApp({ onBack }) {
+function SquaringApp({ onBack, initialAdaptScore }) {
   const DIFFS = ['easy', 'medium', 'hard', 'extrahard']
   const DIFF_LABELS_SQ = { easy: 'Easy — 11-19', medium: 'Medium — 20-49', hard: 'Hard — 50-99', extrahard: 'Extra Hard — 100-999' }
 
   const [difficulty, setDifficulty] = useState('easy')
-  const [isAdaptive, setIsAdaptive] = useState(false)
-  const [adaptScore, setAdaptScore] = useState(0)
-  const adaptScoreRef = useRef(0)
+  const [isAdaptive, setIsAdaptive] = useState(initialAdaptScore >= 0.8)
+  const [adaptScore, setAdaptScore] = useState(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+  const adaptScoreRef = useRef(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
   const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
   const [started, setStarted] = useState(false)
   const [finished, setFinished] = useState(false)
   const [question, setQuestion] = useState(null)
-  const [score, setScore] = useState(0)
-  const [questionNumber, setQuestionNumber] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
+  const [questionNumber, setQuestionNumber] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
   const [feedback, setFeedback] = useState('')
   const [isCorrect, setIsCorrect] = useState(null)
@@ -41572,8 +41719,8 @@ function SquaringApp({ onBack }) {
 
   const startQuiz = () => {
     const t = Math.max(1, Math.min(100, Number(numQuestions) || DEFAULT_TOTAL))
-    setTotalQ(t); setScore(0); setQuestionNumber(1); setResults([]); setStarted(true); setFinished(false)
-    setAdaptScore(0); adaptScoreRef.current = 0
+    setTotalQ(t); setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0); setQuestionNumber(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) + 1 : 1); setResults([]); setStarted(true); setFinished(false)
+    setAdaptScore(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1); adaptScoreRef.current = initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1
     submittedRef.current = false; advancedRef.current = false
   }
 
@@ -41606,7 +41753,7 @@ function SquaringApp({ onBack }) {
       setFeedback(data.correct ? `Correct! ${question.n}² = ${question.answer}` : `Incorrect. ${question.display}`)
       setResults(prev => [...prev, { prompt: question.prompt, userAnswer: valFinal.trim(), correctAnswer: String(question.answer), correct: data.correct, time: timeTaken }])
       if (isAdaptive) {
-        setAdaptScore(prev => { const next = data.correct ? Math.min(3, prev + 0.25) : Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next })
+        setAdaptScore(prev => { const next = updateBKT(prev, data.correct); adaptScoreRef.current = next; return next })
       }
     } catch (e) { submittedRef.current = false; console.error('Failed to check Squaring answer:', e) }
   }
@@ -41628,7 +41775,7 @@ function SquaringApp({ onBack }) {
       setFeedback(`Solution: ${display}${explanation ? '\n' + explanation : ''}`)
       setResults(prev => [...prev, { prompt: question.prompt, userAnswer: '(solved)', correctAnswer: display, correct: false, time: 0 }])
       if (isAdaptive) {
-        setAdaptScore(prev => Math.max(0, prev - 0.35))
+        setAdaptScore(prev => updateBKT(prev, false))
       }
     } catch (e) { submittedRef.current = false; console.error('Failed to solve Squaring:', e) }
   }
@@ -41662,7 +41809,7 @@ function SquaringApp({ onBack }) {
   )
 
   return (
-    <QuizLayout title="Squaring" subtitle="(a + b)² = a² + 2ab + b²" onBack={onBack} timer={started && !finished ? timer : null}>
+    <QuizLayout adaptScore={adaptScore}    title="Squaring" subtitle="(a + b)² = a² + 2ab + b²" onBack={onBack} timer={started && !finished ? timer : null}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Square numbers quickly using the identity (a + b)² = a² + 2ab + b²</p>
         <p style={{ fontSize: '0.85rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Split any number into a round part (a) and remainder (b), then fill in all four boxes.</p>
@@ -41691,7 +41838,7 @@ function SquaringApp({ onBack }) {
           {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
         </div>
         {isAdaptive && (
-          <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />
+          <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100); setAdaptScore(v); adaptScoreRef.current = v }} />
         )}
         {question && <div style={{ textAlign: 'center' }}>
           <div className="question-prompt" style={{ fontSize: '1.4rem', margin: '16px 0 6px', lineHeight: '1.6' }}>
@@ -41738,7 +41885,7 @@ function SquaringApp({ onBack }) {
 //   Card 3 → bit 2 (4, 5, 6, 7, 12, 13, 14, 15, …)
 //   Card 4 → bit 3 (8–15, 24–31)
 //   Card 5 → bit 4 (16–31)
-function GuessNumberApp({ onBack }) {
+function GuessNumberApp({ onBack, initialAdaptScore }) {
   const [phase, setPhase] = useState('intro') // intro | playing | done
   const [cardIndex, setCardIndex] = useState(0) // 0–4
   const [guessedTotal, setGuessedTotal] = useState(0)
@@ -41916,57 +42063,57 @@ function GuessNumberApp({ onBack }) {
 // polyfactor (needs 4 factor inputs), primefactor (needs factor chain UI),
 // qformula (needs two roots), dotprod (needs matrix grid).
 const RANDOM_MIX_TOPICS = [
-  { key: 'basicarith', name: 'Basic Arithmetic', api: 'basicarith-api' },
-  { key: 'addition', name: 'Addition', api: 'addition-api' },
-  { key: 'quadratic', name: 'Quadratic', api: 'quadratic-api' },
-  { key: 'multiply', name: 'Multiplication', api: 'multiply-api' },
-  { key: 'sqrt', name: 'Square Root', api: 'sqrt-api' },
-  { key: 'funceval', name: 'Functions', api: 'funceval-api' },
-  { key: 'lineq', name: 'Line Equation', api: 'lineq-api' },
-  { key: 'fractionadd', name: 'Fractions', api: 'fractionadd-api' },
-  { key: 'surds', name: 'Surds', api: 'surds-api' },
-  { key: 'indices', name: 'Indices', api: 'indices-api' },
-  { key: 'sequences', name: 'Sequences', api: 'sequences-api' },
-  { key: 'ratio', name: 'Ratio', api: 'ratio-api' },
-  { key: 'percent', name: 'Percentages', api: 'percent-api' },
-  { key: 'sets', name: 'Sets', api: 'sets-api' },
-  { key: 'trig', name: 'Trigonometry', api: 'trig-api' },
-  { key: 'ineq', name: 'Inequalities', api: 'ineq-api' },
-  { key: 'coordgeom', name: 'Coord. Geometry', api: 'coordgeom-api' },
-  { key: 'prob', name: 'Probability', api: 'prob-api' },
-  { key: 'stats', name: 'Statistics', api: 'stats-api' },
-  { key: 'matrix', name: 'Matrices', api: 'matrix-api' },
-  { key: 'vectors', name: 'Vectors', api: 'vectors-api' },
-  { key: 'transform', name: 'Transformations', api: 'transform-api' },
-  { key: 'mensur', name: 'Mensuration', api: 'mensur-api' },
-  { key: 'bearings', name: 'Bearings', api: 'bearings-api' },
-  { key: 'log', name: 'Logarithms', api: 'log-api' },
-  { key: 'diff', name: 'Differentiation', api: 'diff-api' },
-  { key: 'bases', name: 'Number Bases', api: 'bases-api' },
-  { key: 'circleth', name: 'Circle Theorems', api: 'circle-api' },
-  { key: 'integ', name: 'Integration', api: 'integ-api' },
-  { key: 'stdform', name: 'Standard Form', api: 'stdform-api' },
+  { key: 'basicarith', classGroup: 'Class 2', name: 'Basic Arithmetic', api: 'basicarith-api' },
+  { key: 'addition', classGroup: 'Class 1', name: 'Addition', api: 'addition-api' },
+  { key: 'quadratic', classGroup: 'Class 10', name: 'Quadratic', api: 'quadratic-api' },
+  { key: 'multiply', classGroup: 'Class 2', name: 'Multiplication', api: 'multiply-api' },
+  { key: 'sqrt', classGroup: 'Class 4', name: 'Square Root', api: 'sqrt-api' },
+  { key: 'funceval', classGroup: 'Class 12', name: 'Functions', api: 'funceval-api' },
+  { key: 'lineq', classGroup: 'Class 10', name: 'Line Equation', api: 'lineq-api' },
+  { key: 'fractionadd', classGroup: 'Class 3', name: 'Fractions', api: 'fractionadd-api' },
+  { key: 'surds', classGroup: 'Class 8', name: 'Surds', api: 'surds-api' },
+  { key: 'indices', classGroup: 'Class 8', name: 'Indices', api: 'indices-api' },
+  { key: 'sequences', classGroup: 'Class 2', name: 'Sequences', api: 'sequences-api' },
+  { key: 'ratio', classGroup: 'Class 5', name: 'Ratio', api: 'ratio-api' },
+  { key: 'percent', classGroup: 'Class 5', name: 'Percentages', api: 'percent-api' },
+  { key: 'sets', classGroup: 'Class 11', name: 'Sets', api: 'sets-api' },
+  { key: 'trig', classGroup: 'Class 10', name: 'Trigonometry', api: 'trig-api' },
+  { key: 'ineq', classGroup: 'Class 9', name: 'Inequalities', api: 'ineq-api' },
+  { key: 'coordgeom', classGroup: 'Class 10', name: 'Coord. Geometry', api: 'coordgeom-api' },
+  { key: 'prob', classGroup: 'Class 11', name: 'Probability', api: 'prob-api' },
+  { key: 'stats', classGroup: 'Class 11', name: 'Statistics', api: 'stats-api' },
+  { key: 'matrix', classGroup: 'Class 12', name: 'Matrices', api: 'matrix-api' },
+  { key: 'vectors', classGroup: 'Class 12', name: 'Vectors', api: 'vectors-api' },
+  { key: 'transform', classGroup: 'Class 10', name: 'Transformations', api: 'transform-api' },
+  { key: 'mensur', classGroup: 'Class 7', name: 'Mensuration', api: 'mensur-api' },
+  { key: 'bearings', classGroup: 'Class 10', name: 'Bearings', api: 'bearings-api' },
+  { key: 'log', classGroup: 'Class 12', name: 'Logarithms', api: 'log-api' },
+  { key: 'diff', classGroup: 'Class 12', name: 'Differentiation', api: 'diff-api' },
+  { key: 'bases', classGroup: 'Class 8', name: 'Number Bases', api: 'bases-api' },
+  { key: 'circleth', classGroup: 'Class 10', name: 'Circle Theorems', api: 'circle-api' },
+  { key: 'integ', classGroup: 'Class 12', name: 'Integration', api: 'integ-api' },
+  { key: 'stdform', classGroup: 'Class 8', name: 'Standard Form', api: 'stdform-api' },
   { key: 'bounds', name: 'Bounds', api: 'bounds-api' },
-  { key: 'sdt', name: 'Speed/Distance/Time', api: 'sdt-api' },
-  { key: 'variation', name: 'Variation', api: 'variation-api' },
-  { key: 'hcflcm', name: 'HCF & LCM', api: 'hcflcm-api' },
-  { key: 'profitloss', name: 'Profit & Loss', api: 'profitloss-api' },
-  { key: 'rounding', name: 'Rounding', api: 'rounding-api' },
-  { key: 'binomial', name: 'Binomial Theorem', api: 'binomial-api' },
-  { key: 'complex', name: 'Complex Numbers', api: 'complex-api' },
-  { key: 'angles', name: 'Angles', api: 'angles-api' },
-  { key: 'triangles', name: 'Triangles', api: 'triangles-api' },
-  { key: 'congruence', name: 'Congruence', api: 'congruence-api' },
-  { key: 'pythag', name: "Pythagoras' Theorem", api: 'pythag-api' },
-  { key: 'polygons', name: 'Polygons', api: 'polygons-api' },
-  { key: 'similarity', name: 'Similarity', api: 'similarity-api' },
+  { key: 'sdt', classGroup: 'Class 11', name: 'Speed/Distance/Time', api: 'sdt-api' },
+  { key: 'variation', classGroup: 'Class 11', name: 'Variation', api: 'variation-api' },
+  { key: 'hcflcm', classGroup: 'Class 5', name: 'HCF & LCM', api: 'hcflcm-api' },
+  { key: 'profitloss', classGroup: 'Class 7', name: 'Profit & Loss', api: 'profitloss-api' },
+  { key: 'rounding', classGroup: 'Class 4', name: 'Rounding', api: 'rounding-api' },
+  { key: 'binomial', classGroup: 'Class 11', name: 'Binomial Theorem', api: 'binomial-api' },
+  { key: 'complex', classGroup: 'Class 12', name: 'Complex Numbers', api: 'complex-api' },
+  { key: 'angles', classGroup: 'Class 6', name: 'Angles', api: 'angles-api' },
+  { key: 'triangles', classGroup: 'Class 7', name: 'Triangles', api: 'triangles-api' },
+  { key: 'congruence', classGroup: 'Class 10', name: 'Congruence', api: 'congruence-api' },
+  { key: 'pythag', classGroup: 'Class 10', name: "Pythagoras' Theorem", api: 'pythag-api' },
+  { key: 'polygons', classGroup: 'Class 6', name: 'Polygons', api: 'polygons-api' },
+  { key: 'similarity', classGroup: 'Class 10', name: 'Similarity', api: 'similarity-api' },
 ]
 
 const DIFF_LEVELS = ['easy', 'medium', 'hard', 'extrahard']
 const DIFF_LABELS = { easy: 'Easy', medium: 'Medium', hard: 'Hard', extrahard: 'Extra Hard' }
 const DIFF_COLORS = { easy: '#4caf50', medium: '#ff9800', hard: '#f44336', extrahard: '#9c27b0' }
 
-function RandomMixApp({ onBack }) {
+function RandomMixApp({ onBack, initialAdaptScore }) {
   const [phase, setPhase] = useState('setup') // setup | playing | finished
   const [skippedTopics, setSkippedTopics] = useState(new Set())
   const [topicDiffMap, setTopicDiffMap] = useState({}) // { topicKey: diffIndex (0-3) }
@@ -41978,8 +42125,8 @@ function RandomMixApp({ onBack }) {
   const [isCorrect, setIsCorrect] = useState(null)
   const [revealed, setRevealed] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [score, setScore] = useState(0)
-  const [questionNumber, setQuestionNumber] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
+  const [questionNumber, setQuestionNumber] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   const [results, setResults] = useState([])
   const [totalQuestions, setTotalQuestions] = useState(20)
   const [numQInput, setNumQInput] = useState('20')
@@ -42186,7 +42333,7 @@ function RandomMixApp({ onBack }) {
     const n = parseInt(numQInput) || 20
     setTotalQuestions(Math.max(5, Math.min(100, n)))
     setPhase('playing')
-    setScore(0)
+    setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
     setQuestionNumber(0)
     setResults([])
     setTopicDiffMap({})
@@ -42373,18 +42520,18 @@ function RandomMixApp({ onBack }) {
 }
 
 /* ── Sets App ───────────────────────────────────────── */
-function SetsApp({ onBack }) {
+function SetsApp({ onBack, initialAdaptScore }) {
   const [difficulty, setDifficulty] = useState('easy')
-  const [isAdaptive, setIsAdaptive] = useState(false)
-  const [adaptScore, setAdaptScore] = useState(0)
-  const adaptScoreRef = useRef(0)
+  const [isAdaptive, setIsAdaptive] = useState(initialAdaptScore >= 0.8)
+  const [adaptScore, setAdaptScore] = useState(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+  const adaptScoreRef = useRef(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
   const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
   const [started, setStarted] = useState(false)
   const [finished, setFinished] = useState(false)
   const [question, setQuestion] = useState(null)
   const [answer, setAnswer] = useState('')
-  const [score, setScore] = useState(0)
-  const [questionNumber, setQuestionNumber] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
+  const [questionNumber, setQuestionNumber] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
   const [feedback, setFeedback] = useState('')
   const [isCorrect, setIsCorrect] = useState(null)
@@ -42417,8 +42564,8 @@ function SetsApp({ onBack }) {
 
   const startQuiz = () => {
     const t = Math.max(1, Math.min(100, Number(numQuestions) || DEFAULT_TOTAL))
-    setTotalQ(t); setScore(0); setQuestionNumber(1); setResults([]); setStarted(true); setFinished(false)
-    setAdaptScore(0); adaptScoreRef.current = 0
+    setTotalQ(t); setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0); setQuestionNumber(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) + 1 : 1); setResults([]); setStarted(true); setFinished(false)
+    setAdaptScore(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1); adaptScoreRef.current = initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1
     submittedRef.current = false
     advancedRef.current = false
   }
@@ -42448,7 +42595,7 @@ function SetsApp({ onBack }) {
       setFeedback(data.correct ? `Correct! ${data.display}` : `Incorrect. Answer: ${data.display}`)
       setResults(prev => [...prev, { prompt: question.prompt, userAnswer: answer.trim(), correctAnswer: data.display, correct: data.correct, time: timeTaken }])
       if (isAdaptive) {
-        setAdaptScore(prev => { const next = data.correct ? Math.min(3, prev + 0.25) : Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next })
+        setAdaptScore(prev => { const next = updateBKT(prev, data.correct); adaptScoreRef.current = next; return next })
       }
     } catch (e) { console.error('Failed to check sets answer:', e) }
   }
@@ -42470,17 +42617,19 @@ function SetsApp({ onBack }) {
       setFeedback(`Solution: ${display}${explanation ? '\n' + explanation : ''}`)
       setResults(prev => [...prev, { prompt: question.prompt, userAnswer: '(solved)', correctAnswer: display, correct: false, time: 0 }])
       if (isAdaptive) {
-        setAdaptScore(prev => Math.max(0, prev - 0.35))
+        setAdaptScore(prev => updateBKT(prev, false))
       }
     } catch (e) { submittedRef.current = false; console.error('Failed to solve sets:', e) }
   }
 
   const handleKeyDown = (e) => { if (e.key === 'Enter') { e.preventDefault(); if (!revealed) handleSubmit() } }
   const diffLabels = { easy: 'Easy — List elements', medium: 'Medium — Cardinality', hard: 'Hard — 2-set Venn', extrahard: 'Extra Hard — 3-set Venn' }
-  const curAdaptLevel = adaptiveLevel(adaptScore)
+  
+
+const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Sets" subtitle="Union, intersection, Venn diagrams" onBack={onBack} timer={started && !finished ? timer : null}>
+    <QuizLayout adaptScore={adaptScore}    title="Sets" subtitle="Union, intersection, Venn diagrams" onBack={onBack} timer={started && !finished ? timer : null}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice sets and Venn diagrams!</p>
         <p style={{ fontSize: '0.85rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>For listing elements, type like: 1, 3, 5 or {'{'}1, 3, 5{'}'}</p>
@@ -42508,7 +42657,7 @@ function SetsApp({ onBack }) {
           <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
           {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
         </div>
-        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
+        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100); setAdaptScore(v); adaptScoreRef.current = v }} />}
         {question && <div style={{ textAlign: 'center' }}>
           <div className="question-prompt" style={{ fontSize: '1.3rem', margin: '20px 0', lineHeight: '1.6' }}>{question.prompt}</div>
           <input className="answer-input" type="text" value={answer} onChange={e => { if (!revealed) setAnswer(e.target.value) }} disabled={revealed} placeholder={question.type === 'list' ? 'e.g. {1, 3, 5} or empty' : 'e.g. 12'} onKeyDown={handleKeyDown} autoFocus />
@@ -42534,18 +42683,18 @@ function SetsApp({ onBack }) {
 }
 
 /* ── Sequences & Series App ─────────────────────────── */
-function SequencesApp({ onBack }) {
+function SequencesApp({ onBack, initialAdaptScore }) {
   const [difficulty, setDifficulty] = useState('easy')
-  const [isAdaptive, setIsAdaptive] = useState(false)
-  const [adaptScore, setAdaptScore] = useState(0)
-  const adaptScoreRef = useRef(0)
+  const [isAdaptive, setIsAdaptive] = useState(initialAdaptScore >= 0.8)
+  const [adaptScore, setAdaptScore] = useState(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+  const adaptScoreRef = useRef(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
   const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
   const [started, setStarted] = useState(false)
   const [finished, setFinished] = useState(false)
   const [question, setQuestion] = useState(null)
   const [answer, setAnswer] = useState('')
-  const [score, setScore] = useState(0)
-  const [questionNumber, setQuestionNumber] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
+  const [questionNumber, setQuestionNumber] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
   const [feedback, setFeedback] = useState('')
   const [isCorrect, setIsCorrect] = useState(null)
@@ -42571,8 +42720,8 @@ function SequencesApp({ onBack }) {
 
   const startQuiz = () => {
     const t = Math.max(1, Math.min(100, Number(numQuestions) || DEFAULT_TOTAL))
-    setTotalQ(t); setScore(0); setQuestionNumber(1); setResults([]); setStarted(true); setFinished(false)
-    setAdaptScore(0); adaptScoreRef.current = 0
+    setTotalQ(t); setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0); setQuestionNumber(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) + 1 : 1); setResults([]); setStarted(true); setFinished(false)
+    setAdaptScore(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1); adaptScoreRef.current = initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1
     submittedRef.current = false
     advancedRef.current = false
   }
@@ -42602,7 +42751,7 @@ function SequencesApp({ onBack }) {
       setFeedback(data.correct ? `Correct! Answer: ${data.display}` : `Incorrect. Answer: ${data.display}`)
       setResults(prev => [...prev, { prompt: question.prompt, userAnswer: answer.trim(), correctAnswer: data.display, correct: data.correct, time: timeTaken }])
       if (isAdaptive) {
-        setAdaptScore(prev => { const next = data.correct ? Math.min(3, prev + 0.25) : Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next })
+        setAdaptScore(prev => { const next = updateBKT(prev, data.correct); adaptScoreRef.current = next; return next })
       }
     } catch (e) { console.error('Failed to check sequences answer:', e) }
   }
@@ -42624,17 +42773,19 @@ function SequencesApp({ onBack }) {
       setFeedback(`Solution: ${display}${explanation ? '\n' + explanation : ''}`)
       setResults(prev => [...prev, { prompt: question.prompt, userAnswer: '(solved)', correctAnswer: display, correct: false, time: 0 }])
       if (isAdaptive) {
-        setAdaptScore(prev => Math.max(0, prev - 0.35))
+        setAdaptScore(prev => updateBKT(prev, false))
       }
     } catch (e) { submittedRef.current = false; console.error('Failed to solve sequences:', e) }
   }
 
   const handleKeyDown = (e) => { if (e.key === 'Enter') { e.preventDefault(); if (!revealed) handleSubmit() } }
   const diffLabels = { easy: 'Easy — Arith. nth term', medium: 'Medium — Arith. sum', hard: 'Hard — Geom. nth term', extrahard: 'Extra Hard — Geom. sum' }
-  const curAdaptLevel = adaptiveLevel(adaptScore)
+  
+
+const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Sequences & Series" subtitle="Arithmetic & geometric" onBack={onBack} timer={started && !finished ? timer : null}>
+    <QuizLayout adaptScore={adaptScore}    title="Sequences & Series" subtitle="Arithmetic & geometric" onBack={onBack} timer={started && !finished ? timer : null}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice sequences and series!</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
@@ -42661,7 +42812,7 @@ function SequencesApp({ onBack }) {
           <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
           {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
         </div>
-        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
+        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100); setAdaptScore(v); adaptScoreRef.current = v }} />}
         {question && <div style={{ textAlign: 'center' }}>
           <div className="question-prompt" style={{ fontSize: '1.4rem', margin: '20px 0' }}>{question.prompt}</div>
           <input className="answer-input" type="text" value={answer} onChange={e => { if (!revealed) setAnswer(e.target.value) }} disabled={revealed} placeholder="e.g. 42 or 3/4" onKeyDown={handleKeyDown} autoFocus />
@@ -42687,18 +42838,18 @@ function SequencesApp({ onBack }) {
 }
 
 /* ── Ratio & Proportion App ────────────────────────── */
-function RatioApp({ onBack }) {
+function RatioApp({ onBack, initialAdaptScore }) {
   const [difficulty, setDifficulty] = useState('easy')
-  const [isAdaptive, setIsAdaptive] = useState(false)
-  const [adaptScore, setAdaptScore] = useState(0)
-  const adaptScoreRef = useRef(0)
+  const [isAdaptive, setIsAdaptive] = useState(initialAdaptScore >= 0.8)
+  const [adaptScore, setAdaptScore] = useState(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+  const adaptScoreRef = useRef(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
   const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
   const [started, setStarted] = useState(false)
   const [finished, setFinished] = useState(false)
   const [question, setQuestion] = useState(null)
   const [answer, setAnswer] = useState('')
-  const [score, setScore] = useState(0)
-  const [questionNumber, setQuestionNumber] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
+  const [questionNumber, setQuestionNumber] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
   const [feedback, setFeedback] = useState('')
   const [isCorrect, setIsCorrect] = useState(null)
@@ -42732,13 +42883,13 @@ function RatioApp({ onBack }) {
   const startQuiz = () => {
     const t = Math.max(1, Math.min(100, Number(numQuestions) || DEFAULT_TOTAL))
     setTotalQ(t)
-    setScore(0)
-    setQuestionNumber(1)
+    setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
+    setQuestionNumber(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) + 1 : 1)
     setResults([])
     setStarted(true)
     setFinished(false)
-    setAdaptScore(0)
-    adaptScoreRef.current = 0
+    setAdaptScore(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+    adaptScoreRef.current = initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1
     submittedRef.current = false
     advancedRef.current = false
   }
@@ -42769,7 +42920,7 @@ function RatioApp({ onBack }) {
       setFeedback(data.correct ? `Correct! ${data.display}` : `Incorrect. Answer: ${data.display}`)
       setResults(prev => [...prev, { prompt: question.prompt, userAnswer: answer.trim(), correctAnswer: data.display, correct: data.correct, time: timeTaken }])
       if (isAdaptive) {
-        setAdaptScore(prev => { const next = data.correct ? Math.min(3, prev + 0.25) : Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next })
+        setAdaptScore(prev => { const next = updateBKT(prev, data.correct); adaptScoreRef.current = next; return next })
       }
     } catch (e) { console.error('Failed to check ratio answer:', e) }
   }
@@ -42791,7 +42942,7 @@ function RatioApp({ onBack }) {
       setFeedback(`Solution: ${display}${explanation ? '\n' + explanation : ''}`)
       setResults(prev => [...prev, { prompt: question.prompt, userAnswer: '(solved)', correctAnswer: display, correct: false, time: 0 }])
       if (isAdaptive) {
-        setAdaptScore(prev => Math.max(0, prev - 0.35))
+        setAdaptScore(prev => updateBKT(prev, false))
       }
     } catch (e) { submittedRef.current = false; console.error('Failed to solve ratio:', e) }
   }
@@ -42800,10 +42951,12 @@ function RatioApp({ onBack }) {
   const diffLabels = { easy: 'Easy — Simplify', medium: 'Medium — Divide', hard: 'Hard — Direct', extrahard: 'Extra Hard — Inverse' }
   const placeholders = { easy: 'e.g. 3:2', medium: 'e.g. 72, 48', hard: 'e.g. 32', extrahard: 'e.g. 8 or 8/3' }
 
-  const curAdaptLevel = adaptiveLevel(adaptScore)
+  
+
+const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Ratio & Proportion" subtitle="Simplify, divide, direct & inverse" onBack={onBack} timer={started && !finished ? timer : null}>
+    <QuizLayout adaptScore={adaptScore}    title="Ratio & Proportion" subtitle="Simplify, divide, direct & inverse" onBack={onBack} timer={started && !finished ? timer : null}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice ratio and proportion!</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
@@ -42830,7 +42983,7 @@ function RatioApp({ onBack }) {
           <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
           {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
         </div>
-        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
+        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100); setAdaptScore(v); adaptScoreRef.current = v }} />}
         {question && <div style={{ textAlign: 'center' }}>
           <div className="question-prompt" style={{ fontSize: '1.4rem', margin: '20px 0' }}>{question.prompt}</div>
           <input className="answer-input" type="text" value={answer} onChange={e => { if (!revealed) setAnswer(e.target.value) }} disabled={revealed} placeholder={placeholders[isAdaptive ? adaptiveLevel(adaptScore) : difficulty] || 'Type your answer'} onKeyDown={handleKeyDown} autoFocus />
@@ -42856,18 +43009,18 @@ function RatioApp({ onBack }) {
 }
 
 /* ── Percentages App ────────────────────────────────── */
-function PercentApp({ onBack }) {
+function PercentApp({ onBack, initialAdaptScore }) {
   const [difficulty, setDifficulty] = useState('easy')
-  const [isAdaptive, setIsAdaptive] = useState(false)
-  const [adaptScore, setAdaptScore] = useState(0)
-  const adaptScoreRef = useRef(0)
+  const [isAdaptive, setIsAdaptive] = useState(initialAdaptScore >= 0.8)
+  const [adaptScore, setAdaptScore] = useState(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+  const adaptScoreRef = useRef(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
   const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
   const [started, setStarted] = useState(false)
   const [finished, setFinished] = useState(false)
   const [question, setQuestion] = useState(null)
   const [answer, setAnswer] = useState('')
-  const [score, setScore] = useState(0)
-  const [questionNumber, setQuestionNumber] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
+  const [questionNumber, setQuestionNumber] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
   const [feedback, setFeedback] = useState('')
   const [isCorrect, setIsCorrect] = useState(null)
@@ -42901,13 +43054,13 @@ function PercentApp({ onBack }) {
   const startQuiz = () => {
     const t = Math.max(1, Math.min(100, Number(numQuestions) || DEFAULT_TOTAL))
     setTotalQ(t)
-    setScore(0)
-    setQuestionNumber(1)
+    setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
+    setQuestionNumber(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) + 1 : 1)
     setResults([])
     setStarted(true)
     setFinished(false)
-    setAdaptScore(0)
-    adaptScoreRef.current = 0
+    setAdaptScore(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+    adaptScoreRef.current = initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1
     submittedRef.current = false
     advancedRef.current = false
   }
@@ -42938,7 +43091,7 @@ function PercentApp({ onBack }) {
       setFeedback(data.correct ? `Correct! ${data.display}` : `Incorrect. Answer: ${data.display}`)
       setResults(prev => [...prev, { prompt: question.prompt, userAnswer: answer.trim(), correctAnswer: data.display, correct: data.correct, time: timeTaken }])
       if (isAdaptive) {
-        setAdaptScore(prev => { const next = data.correct ? Math.min(3, prev + 0.25) : Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next })
+        setAdaptScore(prev => { const next = updateBKT(prev, data.correct); adaptScoreRef.current = next; return next })
       }
     } catch (e) { console.error('Failed to check percent answer:', e) }
   }
@@ -42960,7 +43113,7 @@ function PercentApp({ onBack }) {
       setFeedback(`Solution: ${display}${explanation ? '\n' + explanation : ''}`)
       setResults(prev => [...prev, { prompt: question.prompt, userAnswer: '(solved)', correctAnswer: display, correct: false, time: 0 }])
       if (isAdaptive) {
-        setAdaptScore(prev => Math.max(0, prev - 0.35))
+        setAdaptScore(prev => updateBKT(prev, false))
       }
     } catch (e) { submittedRef.current = false; console.error('Failed to solve percent:', e) }
   }
@@ -42968,10 +43121,12 @@ function PercentApp({ onBack }) {
   const handleKeyDown = (e) => { if (e.key === 'Enter') { e.preventDefault(); if (!revealed) handleSubmit() } }
   const diffLabels = { easy: 'Easy — Find %', medium: 'Medium — Increase/Decrease', hard: 'Hard — Reverse %', extrahard: 'Extra Hard — Compound' }
 
-  const curAdaptLevel = adaptiveLevel(adaptScore)
+  
+
+const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Percentages" subtitle="Find, increase, reverse, compound" onBack={onBack} timer={started && !finished ? timer : null}>
+    <QuizLayout adaptScore={adaptScore}    title="Percentages" subtitle="Find, increase, reverse, compound" onBack={onBack} timer={started && !finished ? timer : null}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice percentages!</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
@@ -42998,7 +43153,7 @@ function PercentApp({ onBack }) {
           <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
           {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
         </div>
-        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
+        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100); setAdaptScore(v); adaptScoreRef.current = v }} />}
         {question && <div style={{ textAlign: 'center' }}>
           <div className="question-prompt" style={{ fontSize: '1.4rem', margin: '20px 0' }}>{question.prompt}</div>
           <input className="answer-input" type="text" value={answer} onChange={e => { if (!revealed) setAnswer(e.target.value) }} disabled={revealed} placeholder="Type your answer" onKeyDown={handleKeyDown} autoFocus />
@@ -43035,18 +43190,18 @@ function PercentApp({ onBack }) {
  * For 'simplify' questions: user enters the resulting exponent (integer)
  * For 'evaluate' questions: user enters a number or fraction (e.g. "8", "1/4")
  */
-function IndicesApp({ onBack }) {
+function IndicesApp({ onBack, initialAdaptScore }) {
   const [difficulty, setDifficulty] = useState('easy')
-  const [isAdaptive, setIsAdaptive] = useState(false)
-  const [adaptScore, setAdaptScore] = useState(0)
-  const adaptScoreRef = useRef(0)
+  const [isAdaptive, setIsAdaptive] = useState(initialAdaptScore >= 0.8)
+  const [adaptScore, setAdaptScore] = useState(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+  const adaptScoreRef = useRef(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
   const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
   const [started, setStarted] = useState(false)
   const [finished, setFinished] = useState(false)
   const [question, setQuestion] = useState(null)
   const [answer, setAnswer] = useState('')
-  const [score, setScore] = useState(0)
-  const [questionNumber, setQuestionNumber] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
+  const [questionNumber, setQuestionNumber] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
   const [feedback, setFeedback] = useState('')
   const [isCorrect, setIsCorrect] = useState(null)
@@ -43076,13 +43231,13 @@ function IndicesApp({ onBack }) {
   const startQuiz = () => {
     const t = Math.max(1, Math.min(100, Number(numQuestions) || DEFAULT_TOTAL))
     setTotalQ(t)
-    setScore(0)
-    setQuestionNumber(1)
+    setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
+    setQuestionNumber(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) + 1 : 1)
     setResults([])
     setStarted(true)
     setFinished(false)
-    setAdaptScore(0)
-    adaptScoreRef.current = 0
+    setAdaptScore(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+    adaptScoreRef.current = initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1
   }
 
   useEffect(() => {
@@ -43132,7 +43287,7 @@ function IndicesApp({ onBack }) {
         time: timeTaken
       }])
       if (isAdaptive) {
-        setAdaptScore(prev => { const next = data.correct ? Math.min(3, prev + 0.25) : Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next })
+        setAdaptScore(prev => { const next = updateBKT(prev, data.correct); adaptScoreRef.current = next; return next })
       }
     } catch (e) { console.error('Failed to check indices answer:', e) }
   }
@@ -43153,7 +43308,7 @@ function IndicesApp({ onBack }) {
       setFeedback(`Solution: ${display}${explanation ? '\n' + explanation : ''}`)
       setResults(prev => [...prev, { prompt: question.prompt, userAnswer: '(solved)', correctAnswer: display, correct: false, time: 0 }])
       if (isAdaptive) {
-        setAdaptScore(prev => Math.max(0, prev - 0.35))
+        setAdaptScore(prev => updateBKT(prev, false))
       }
     } catch (e) { console.error('Failed to solve indices:', e) }
   }
@@ -43169,10 +43324,12 @@ function IndicesApp({ onBack }) {
   const diffLabels = { easy: 'Easy — Basic Laws', medium: 'Medium — Negative/Zero', hard: 'Hard — Fractional', extrahard: 'Extra Hard — Mixed' }
   const placeholders = { easy: 'Enter the exponent, e.g. 7', medium: 'e.g. 1 or 1/8', hard: 'e.g. 8 or 9', extrahard: 'e.g. 1/4 or 9/4' }
 
-  const curAdaptLevel = adaptiveLevel(adaptScore)
+  
+
+const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Indices" subtitle="Laws of exponents" onBack={onBack} timer={started && !finished ? timer : null}>
+    <QuizLayout adaptScore={adaptScore}    title="Indices" subtitle="Laws of exponents" onBack={onBack} timer={started && !finished ? timer : null}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice laws of indices!</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
@@ -43200,7 +43357,7 @@ function IndicesApp({ onBack }) {
           <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
           {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
         </div>
-        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
+        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100); setAdaptScore(v); adaptScoreRef.current = v }} />}
         {question && (
           <div style={{ textAlign: 'center' }}>
             <div className="question-prompt" style={{ fontSize: '1.6rem', margin: '20px 0' }}>{question.prompt} = ?</div>
@@ -43257,18 +43414,18 @@ function IndicesApp({ onBack }) {
  * User types answers using √ symbol (keyboard hint provided) or "sqrt".
  * Auto-advance on correct answers; Enter key advances after wrong answers.
  */
-function SurdsApp({ onBack }) {
+function SurdsApp({ onBack, initialAdaptScore }) {
   const [difficulty, setDifficulty] = useState('easy')
-  const [isAdaptive, setIsAdaptive] = useState(false)
-  const [adaptScore, setAdaptScore] = useState(0)
-  const adaptScoreRef = useRef(0)
+  const [isAdaptive, setIsAdaptive] = useState(initialAdaptScore >= 0.8)
+  const [adaptScore, setAdaptScore] = useState(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+  const adaptScoreRef = useRef(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
   const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
   const [started, setStarted] = useState(false)
   const [finished, setFinished] = useState(false)
   const [question, setQuestion] = useState(null)
   const [answer, setAnswer] = useState('')
-  const [score, setScore] = useState(0)
-  const [questionNumber, setQuestionNumber] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
+  const [questionNumber, setQuestionNumber] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
   const [feedback, setFeedback] = useState('')
   const [isCorrect, setIsCorrect] = useState(null)
@@ -43298,13 +43455,13 @@ function SurdsApp({ onBack }) {
   const startQuiz = () => {
     const t = Math.max(1, Math.min(100, Number(numQuestions) || DEFAULT_TOTAL))
     setTotalQ(t)
-    setScore(0)
-    setQuestionNumber(1)
+    setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
+    setQuestionNumber(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) + 1 : 1)
     setResults([])
     setStarted(true)
     setFinished(false)
-    setAdaptScore(0)
-    adaptScoreRef.current = 0
+    setAdaptScore(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+    adaptScoreRef.current = initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1
   }
 
   useEffect(() => {
@@ -43387,7 +43544,7 @@ function SurdsApp({ onBack }) {
         time: timeTaken
       }])
       if (isAdaptive) {
-        setAdaptScore(prev => { const next = data.correct ? Math.min(3, prev + 0.25) : Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next })
+        setAdaptScore(prev => { const next = updateBKT(prev, data.correct); adaptScoreRef.current = next; return next })
       }
     } catch (e) { console.error('Failed to check surds answer:', e) }
   }
@@ -43409,7 +43566,7 @@ function SurdsApp({ onBack }) {
       setFeedback(`Solution: ${display}${explanation ? '\n' + explanation : ''}`)
       setResults(prev => [...prev, { prompt, userAnswer: '(solved)', correctAnswer: display, correct: false, time: 0 }])
       if (isAdaptive) {
-        setAdaptScore(prev => Math.max(0, prev - 0.35))
+        setAdaptScore(prev => updateBKT(prev, false))
       }
     } catch (e) { console.error('Failed to solve surds:', e) }
   }
@@ -43424,10 +43581,12 @@ function SurdsApp({ onBack }) {
 
   const diffLabels = { easy: 'Easy — Simplify', medium: 'Medium — Add/Sub', hard: 'Hard — Multiply', extrahard: 'Extra Hard — Rationalise' }
 
-  const curAdaptLevel = adaptiveLevel(adaptScore)
+  
+
+const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Surds" subtitle="Simplify, add, multiply, rationalise" onBack={onBack} timer={started && !finished ? timer : null}>
+    <QuizLayout adaptScore={adaptScore}    title="Surds" subtitle="Simplify, add, multiply, rationalise" onBack={onBack} timer={started && !finished ? timer : null}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice working with surds!</p>
         <p style={{ fontSize: '0.85rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Tip: type √ using "sqrt" or copy-paste √</p>
@@ -43456,7 +43615,7 @@ function SurdsApp({ onBack }) {
           <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
           {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
         </div>
-        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
+        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100); setAdaptScore(v); adaptScoreRef.current = v }} />}
         {question && (
           <div style={{ textAlign: 'center' }}>
             <div className="question-prompt" style={{ fontSize: '1.6rem', margin: '20px 0' }}>{getPrompt(question)}</div>
@@ -43499,15 +43658,15 @@ function SurdsApp({ onBack }) {
   )
 }
 
-function FractionAddApp({ onBack }) {
+function FractionAddApp({ onBack, initialAdaptScore }) {
   // ── State variables ──────────────────────────────────────────────────
   // Difficulty: 'easy' | 'medium' | 'hard' | 'extrahard'
-  const [difficulty, setDifficulty] = useState('easy')
+const [difficulty, setDifficulty] = useState('easy')
   // Adaptive mode enabled?
-  const [isAdaptive, setIsAdaptive] = useState(false)
+  const [isAdaptive, setIsAdaptive] = useState(initialAdaptScore >= 0.8)
   // Adaptive score (0-3)
-  const [adaptScore, setAdaptScore] = useState(0)
-  const adaptScoreRef = useRef(0)
+  const [adaptScore, setAdaptScore] = useState(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+  const adaptScoreRef = useRef(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
   // Number of questions (user-configurable, stored as string for input)
   const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
   // Quiz phase flags
@@ -43518,8 +43677,8 @@ function FractionAddApp({ onBack }) {
   // User's answer as a string: "3/4" or "2 3/4" for mixed numbers
   const [answer, setAnswer] = useState('')
   // Score tracking
-  const [score, setScore] = useState(0)
-  const [questionNumber, setQuestionNumber] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
+  const [questionNumber, setQuestionNumber] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
   // Feedback after submission
   const [feedback, setFeedback] = useState('')
@@ -43566,11 +43725,11 @@ function FractionAddApp({ onBack }) {
   const startQuiz = () => {
     const t = Math.max(1, Math.min(100, Number(numQuestions) || DEFAULT_TOTAL))
     setTotalQ(t)
-    setScore(0)
-    setQuestionNumber(1)
+    setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
+    setQuestionNumber(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) + 1 : 1)
     setResults([])
-    setAdaptScore(0)
-    adaptScoreRef.current = 0
+    setAdaptScore(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+    adaptScoreRef.current = initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1
     setStarted(true)
     setFinished(false)
   }
@@ -43682,7 +43841,7 @@ function FractionAddApp({ onBack }) {
         time: timeTaken
       }])
       if (isAdaptive) {
-        setAdaptScore(prev => { const next = data.correct ? Math.min(3, prev + 0.25) : Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next })
+        setAdaptScore(prev => { const next = updateBKT(prev, data.correct); adaptScoreRef.current = next; return next })
       }
     } catch (e) {
       console.error('Failed to check fraction answer:', e)
@@ -43709,7 +43868,7 @@ function FractionAddApp({ onBack }) {
       setFeedback(`Solution: ${display}${explanation ? '\n' + explanation : ''}`)
       setResults(prev => [...prev, { prompt, userAnswer: '(solved)', correctAnswer: display, correct: false, time: 0 }])
       if (isAdaptive) {
-        setAdaptScore(prev => Math.max(0, prev - 0.35))
+        setAdaptScore(prev => updateBKT(prev, false))
       }
     } catch (e) { console.error('Failed to solve fraction:', e) }
   }
@@ -43749,7 +43908,7 @@ function FractionAddApp({ onBack }) {
 
   // ── Render ─────────────────────────────────────────────────────────────
   return (
-    <QuizLayout title="Fractions" subtitle="Add, subtract, multiply & divide fractions" onBack={onBack} timer={started && !finished ? timer : null}>
+    <QuizLayout adaptScore={adaptScore}    title="Fractions" subtitle="Add, subtract, multiply & divide fractions" onBack={onBack} timer={started && !finished ? timer : null}>
       {/* ── Setup Phase ── */}
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice adding fractions!</p>
@@ -43779,7 +43938,7 @@ function FractionAddApp({ onBack }) {
           <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
           {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
         </div>
-        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
+        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100); setAdaptScore(v); adaptScoreRef.current = v }} />}
         {question && (
           <div className="fraction-problem">
             {/* Render the problem: n1/d1 (op) n2/d2 or mixed numbers (op) mixed numbers.
@@ -43865,7 +44024,7 @@ const TWIN_SYMBOLS = [
   '⚽','🏀','🎾','🎯','🎲','🎸','🎨','📚','✏️','🔔',
 ]
 
-function TwinHuntApp({ onBack }) {
+function TwinHuntApp({ onBack, initialAdaptScore }) {
   // Number of symbols per panel (default 5, configurable 3-15)
   const [count, setCount] = useState('5')
   // Game started flag
@@ -43879,7 +44038,7 @@ function TwinHuntApp({ onBack }) {
   // User input for number of rounds (string to allow editing)
   const [numRoundsInput, setNumRoundsInput] = useState('10')
   // Number of correct matches found so far
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // Array of symbols on left panel (includes common symbol + unique ones)
   const [leftItems, setLeftItems] = useState([])
   // Array of symbols on right panel (includes common symbol + unique ones)
@@ -43999,7 +44158,7 @@ function TwinHuntApp({ onBack }) {
     setTotalRounds(rounds)
     setStarted(true)
     setFinished(false)
-    setScore(0)
+    setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
     setRound(1)
     setResults([])
     generateRound(n)
@@ -44053,7 +44212,7 @@ function TwinHuntApp({ onBack }) {
   useAutoAdvance(revealed, advanceRef, isCorrect)
 
   return (
-    <QuizLayout title="Twin Hunt" subtitle="Find the common object in both panels" onBack={onBack}>
+    <QuizLayout   title="Twin Hunt" subtitle="Find the common object in both panels" onBack={onBack}>
       <div className="top-mini-row">
         {started && !finished && !revealed && <div className="timer-pill">{timer.elapsed}s</div>}
         <div className="score-pill">Score: {score}</div>
@@ -44133,14 +44292,14 @@ function TwinHuntApp({ onBack }) {
  * @param {Object} props
  * @param {Function} props.onBack - Callback to return to home menu
  */
-function SqrtApp({ onBack }) {
+function SqrtApp({ onBack, initialAdaptScore }) {
   // Difficulty level: 'easy' (1-5), 'medium' (6-10), 'hard' (11-20), 'extrahard' (21-50)
   const [difficulty, setDifficulty] = useState('easy')
   // Adaptive mode enabled?
-  const [isAdaptive, setIsAdaptive] = useState(false)
+  const [isAdaptive, setIsAdaptive] = useState(initialAdaptScore >= 0.8)
   // Adaptive score (0-3)
-  const [adaptScore, setAdaptScore] = useState(0)
-  const adaptScoreRef = useRef(0)
+  const [adaptScore, setAdaptScore] = useState(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+  const adaptScoreRef = useRef(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
   // User-entered question limit (empty string = unlimited)
   const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
   // Quiz started flag
@@ -44152,9 +44311,9 @@ function SqrtApp({ onBack }) {
   // User's string input for the answer
   const [answer, setAnswer] = useState('')
   // Number of correct answers so far
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // Current question number (1-indexed)
-  const [questionNumber, setQuestionNumber] = useState(0)
+  const [questionNumber, setQuestionNumber] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // Total questions
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
   // Feedback string with floor/ceiling values
@@ -44202,11 +44361,11 @@ function SqrtApp({ onBack }) {
     setTotalQ(count)
     setStarted(true)
     setFinished(false)
-    setScore(0)
-    setQuestionNumber(1)
+    setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
+    setQuestionNumber(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) + 1 : 1)
     setResults([])
-    setAdaptScore(0)
-    adaptScoreRef.current = 0
+    setAdaptScore(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+    adaptScoreRef.current = initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1
     await fetchQuestion(1)
   }
 
@@ -44262,7 +44421,7 @@ function SqrtApp({ onBack }) {
         time: timeTaken,
       }])
       if (isAdaptive) {
-        setAdaptScore(prev => { const next = data.correct ? Math.min(3, prev + 0.25) : Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next })
+        setAdaptScore(prev => { const next = updateBKT(prev, data.correct); adaptScoreRef.current = next; return next })
       }
       setRevealed(true)
       return
@@ -44298,10 +44457,12 @@ function SqrtApp({ onBack }) {
   }, [revealed, isCorrect, questionNumber])
 
   const diffLabels = { easy: 'Easy — up to 100', medium: 'Medium — up to 1000', hard: 'Hard — up to 10000', extrahard: 'Extra Hard — up to 100000' }
-  const curAdaptLevel = adaptiveLevel(adaptScore)
+  
+
+const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Square Root" subtitle="Floor or ceiling is accepted" onBack={onBack} timer={started && !finished ? timer : null}>
+    <QuizLayout adaptScore={adaptScore}    title="Square Root" subtitle="Floor or ceiling is accepted" onBack={onBack} timer={started && !finished ? timer : null}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice square roots!</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
@@ -44328,7 +44489,7 @@ function SqrtApp({ onBack }) {
           <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
           {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
         </div>
-        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
+        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100); setAdaptScore(v); adaptScoreRef.current = v }} />}
         <div className="question-box">{loading || !question ? 'Loading question…' : `${question.prompt} = ?`}</div>
         <input className="answer-input" type="text" value={answer} onChange={(e) => { if (!revealed) { const v = e.target.value; if (v === '' || v === '-' || /^-?\d+$/.test(v)) setAnswer(v) } }} disabled={revealed} placeholder="Type your answer" />
         <NumPad value={answer} onChange={(v) => !revealed && setAnswer(v)} disabled={revealed} />
@@ -44363,14 +44524,14 @@ function SqrtApp({ onBack }) {
  * @param {Object} props
  * @param {Function} props.onBack - Callback to return to home menu
  */
-function PolyMulApp({ onBack }) {
+function PolyMulApp({ onBack, initialAdaptScore }) {
   // Difficulty level: 'easy' | 'medium' | 'hard' | 'extrahard'
   const [difficulty, setDifficulty] = useState('easy')
   // Adaptive mode enabled?
-  const [isAdaptive, setIsAdaptive] = useState(false)
+  const [isAdaptive, setIsAdaptive] = useState(initialAdaptScore >= 0.8)
   // Adaptive score (0-3)
-  const [adaptScore, setAdaptScore] = useState(0)
-  const adaptScoreRef = useRef(0)
+  const [adaptScore, setAdaptScore] = useState(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+  const adaptScoreRef = useRef(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
   // Number of questions to answer
   const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
   // Quiz started flag
@@ -44388,11 +44549,11 @@ function PolyMulApp({ onBack }) {
   // API call in progress?
   const [loading, setLoading] = useState(false)
   // Number of correct answers so far
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // Answer revealed flag
   const [revealed, setRevealed] = useState(false)
   // Current question number (1-indexed)
-  const [questionNumber, setQuestionNumber] = useState(0)
+  const [questionNumber, setQuestionNumber] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // Total questions
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
   // Array of {question, userAnswer, correctAnswer, correct, time} result objects
@@ -44431,10 +44592,10 @@ function PolyMulApp({ onBack }) {
     setTotalQ(count)
     setStarted(true)
     setFinished(false)
-    setAdaptScore(0)
-    adaptScoreRef.current = 0
-    setScore(0)
-    setQuestionNumber(1)
+    setAdaptScore(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+    adaptScoreRef.current = initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1
+    setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
+    setQuestionNumber(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) + 1 : 1)
     setResults([])
     await loadQuestion()
   }
@@ -44466,7 +44627,7 @@ function PolyMulApp({ onBack }) {
       time: timeTaken,
     }])
     if (isAdaptive) {
-      setAdaptScore(prev => { const next = data.correct ? Math.min(3, prev + 0.25) : Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next })
+      setAdaptScore(prev => { const next = updateBKT(prev, data.correct); adaptScoreRef.current = next; return next })
     }
     setRevealed(true)
   }
@@ -44487,7 +44648,7 @@ function PolyMulApp({ onBack }) {
       setFeedback(`Solution: ${display}${explanation ? '\n' + explanation : ''}`)
       setResults(prev => [...prev, { question: `(${question.p1Display})(${question.p2Display})`, userAnswer: '(solved)', correctAnswer: data.correctCoeffs?.join(', ') || display, correct: false, time: 0 }])
       if (isAdaptive) {
-        setAdaptScore(prev => Math.max(0, prev - 0.35))
+        setAdaptScore(prev => updateBKT(prev, false))
       }
     } catch (e) { console.error('Failed to solve polymul:', e) }
   }
@@ -44524,10 +44685,12 @@ function PolyMulApp({ onBack }) {
   const formatCoeffLabel = (i) => i === 0 ? 'constant' : i === 1 ? 'x' : `x${sup(i)}`
 
   const diffLabels = { easy: 'Easy — Small terms', medium: 'Medium — Moderate', hard: 'Hard — Large terms', extrahard: 'Extra Hard — Higher degree' }
-  const curAdaptLevel = adaptiveLevel(adaptScore)
+  
+
+const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Poly Multiply" subtitle="Multiply two polynomials and enter the coefficients" onBack={onBack} timer={started && !finished ? timer : null}>
+    <QuizLayout adaptScore={adaptScore}    title="Poly Multiply" subtitle="Multiply two polynomials and enter the coefficients" onBack={onBack} timer={started && !finished ? timer : null}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice polynomial multiplication!</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
@@ -44554,7 +44717,7 @@ function PolyMulApp({ onBack }) {
           <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
           {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
         </div>
-        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
+        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100); setAdaptScore(v); adaptScoreRef.current = v }} />}
         {question && <>
           <div className="question-box">
             <span className="poly-expr">({question.p1Display})</span> × <span className="poly-expr">({question.p2Display})</span>
@@ -44603,15 +44766,15 @@ function PolyMulApp({ onBack }) {
  * @param {Object} props
  * @param {Function} props.onBack - Callback to return to home menu
  */
-function PolyFactorApp({ onBack }) {
+function PolyFactorApp({ onBack, initialAdaptScore }) {
   // ─────── Quiz State Management ──────────────────────────────────
   // Difficulty level: 'easy' | 'medium' | 'hard' | 'extrahard'
   const [difficulty, setDifficulty] = useState('easy')
   // Adaptive mode enabled?
-  const [isAdaptive, setIsAdaptive] = useState(false)
+  const [isAdaptive, setIsAdaptive] = useState(initialAdaptScore >= 0.8)
   // Adaptive score (0-3)
-  const [adaptScore, setAdaptScore] = useState(0)
-  const adaptScoreRef = useRef(0)
+  const [adaptScore, setAdaptScore] = useState(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+  const adaptScoreRef = useRef(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
   // Number of questions to answer (as string for input field)
   const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
   // Quiz started flag (controls welcome screen vs quiz content)
@@ -44635,11 +44798,11 @@ function PolyFactorApp({ onBack }) {
   // API call in progress flag
   const [loading, setLoading] = useState(false)
   // Number of correct answers so far
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // Answer revealed flag (prevents further input after submission)
   const [revealed, setRevealed] = useState(false)
   // Current question number (1-indexed)
-  const [questionNumber, setQuestionNumber] = useState(0)
+  const [questionNumber, setQuestionNumber] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // Total questions to answer
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
   // Array of {question, userAnswer, correctAnswer, correct, time} result objects
@@ -44678,8 +44841,8 @@ function PolyFactorApp({ onBack }) {
     const count = numQuestions !== '' && Number(numQuestions) > 0 ? Number(numQuestions) : DEFAULT_TOTAL
     setTotalQ(count)
     // Reset quiz state: mark as started, not finished, score to 0, question 1
-    setStarted(true); setFinished(false); setScore(0); setQuestionNumber(1); setResults([])
-    setAdaptScore(0); adaptScoreRef.current = 0
+    setStarted(true); setFinished(false); setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0); setQuestionNumber(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) + 1 : 1); setResults([])
+    setAdaptScore(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1); adaptScoreRef.current = initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1
     await loadQuestion()
   }
 
@@ -44719,7 +44882,7 @@ function PolyFactorApp({ onBack }) {
       time: timeTaken,
     }])
     if (isAdaptive) {
-      setAdaptScore(prev => { const next = data.correct ? Math.min(3, prev + 0.25) : Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next })
+      setAdaptScore(prev => { const next = updateBKT(prev, data.correct); adaptScoreRef.current = next; return next })
     }
     setRevealed(true)
   }
@@ -44762,10 +44925,12 @@ function PolyFactorApp({ onBack }) {
   const valInput = (setter) => (e) => { const v = e.target.value; if (v === '' || v === '-' || /^-?\d+$/.test(v)) setter(v) }
 
   const diffLabels = { easy: 'Easy — Simple factors', medium: 'Medium — Mixed signs', hard: 'Hard — Leading coefficient', extrahard: 'Extra Hard — Large coefficients' }
-  const curAdaptLevel = adaptiveLevel(adaptScore)
+  
+
+const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Poly Factor" subtitle="Factor the quadratic into (px + q)(rx + s)" onBack={onBack} timer={started && !finished ? timer : null}>
+    <QuizLayout adaptScore={adaptScore}    title="Poly Factor" subtitle="Factor the quadratic into (px + q)(rx + s)" onBack={onBack} timer={started && !finished ? timer : null}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Factor ax² + bx + c into (px + q)(rx + s).</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
@@ -44792,7 +44957,7 @@ function PolyFactorApp({ onBack }) {
           <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
           {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
         </div>
-        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
+        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100); setAdaptScore(v); adaptScoreRef.current = v }} />}
         {question && <>
           <div className="question-box">{question.display} = 0</div>
           <div className="factor-inputs">
@@ -44840,15 +45005,15 @@ function PolyFactorApp({ onBack }) {
  * @param {Object} props
  * @param {Function} props.onBack - Callback to return to home menu
  */
-function PrimeFactorApp({ onBack }) {
+function PrimeFactorApp({ onBack, initialAdaptScore }) {
   // ─────── Quiz State Management ──────────────────────────────────
   // Difficulty level: 'easy' | 'medium' | 'hard' (affects size of numbers)
   const [difficulty, setDifficulty] = useState('easy')
   // Adaptive mode enabled?
-  const [isAdaptive, setIsAdaptive] = useState(false)
+  const [isAdaptive, setIsAdaptive] = useState(initialAdaptScore >= 0.8)
   // Adaptive score (0-3)
-  const [adaptScore, setAdaptScore] = useState(0)
-  const adaptScoreRef = useRef(0)
+  const [adaptScore, setAdaptScore] = useState(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+  const adaptScoreRef = useRef(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
   // Number of questions to answer (as string for input field)
   const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
   // Quiz started flag (controls welcome screen vs quiz content)
@@ -44868,11 +45033,11 @@ function PrimeFactorApp({ onBack }) {
   // Is the factorization correct/complete? (null before submission, true/false after)
   const [isCorrect, setIsCorrect] = useState(null)
   // Number of correct answers so far
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // Factorization revealed/completed flag (prevents further input)
   const [revealed, setRevealed] = useState(false)
   // Current question number (1-indexed)
-  const [questionNumber, setQuestionNumber] = useState(0)
+  const [questionNumber, setQuestionNumber] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // Total questions to answer
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
   // Array of {question, userAnswer, correctAnswer, correct, time} result objects
@@ -44912,8 +45077,8 @@ function PrimeFactorApp({ onBack }) {
     const count = numQuestions !== '' && Number(numQuestions) > 0 ? Number(numQuestions) : DEFAULT_TOTAL
     setTotalQ(count)
     // Reset quiz state: mark as started, not finished, score to 0, question 1
-    setStarted(true); setFinished(false); setScore(0); setQuestionNumber(1); setResults([])
-    setAdaptScore(0); adaptScoreRef.current = 0
+    setStarted(true); setFinished(false); setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0); setQuestionNumber(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) + 1 : 1); setResults([])
+    setAdaptScore(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1); adaptScoreRef.current = initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1
     await loadQuestion()
   }
 
@@ -45038,10 +45203,12 @@ function PrimeFactorApp({ onBack }) {
   }
 
   const diffLabels = { easy: 'Easy — Small numbers', medium: 'Medium — 2-3 digit', hard: 'Hard — Larger composites', extrahard: 'Extra Hard — Big composites' }
-  const curAdaptLevel = adaptiveLevel(adaptScore)
+  
+
+const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Prime Factors" subtitle="Break the number into its prime factors" onBack={onBack} timer={started && !finished ? timer : null}>
+    <QuizLayout adaptScore={adaptScore}    title="Prime Factors" subtitle="Break the number into its prime factors" onBack={onBack} timer={started && !finished ? timer : null}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Enter prime factors one at a time. Watch the remaining number shrink!</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
@@ -45068,7 +45235,7 @@ function PrimeFactorApp({ onBack }) {
           <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
           {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
         </div>
-        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
+        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100); setAdaptScore(v); adaptScoreRef.current = v }} />}
         {question && <>
           <div className="question-box prime-chain">{buildChain()}</div>
           {!revealed && remaining > 1 && <div className="prime-input-row">
@@ -45111,15 +45278,15 @@ function PrimeFactorApp({ onBack }) {
  * @param {Object} props
  * @param {Function} props.onBack - Callback to return to home menu
  */
-function QFormulaApp({ onBack }) {
+function QFormulaApp({ onBack, initialAdaptScore }) {
   // ─────── Quiz State Management ──────────────────────────────────
   // Difficulty level: 'easy' | 'medium' | 'hard'
   const [difficulty, setDifficulty] = useState('easy')
   // Adaptive mode enabled?
-  const [isAdaptive, setIsAdaptive] = useState(false)
+  const [isAdaptive, setIsAdaptive] = useState(initialAdaptScore >= 0.8)
   // Adaptive score (0-3)
-  const [adaptScore, setAdaptScore] = useState(0)
-  const adaptScoreRef = useRef(0)
+  const [adaptScore, setAdaptScore] = useState(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+  const adaptScoreRef = useRef(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
   // Number of questions to answer (as string for input field)
   const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
   // Quiz started flag (controls welcome screen vs quiz content)
@@ -45139,11 +45306,11 @@ function QFormulaApp({ onBack }) {
   // API call in progress flag
   const [loading, setLoading] = useState(false)
   // Number of correct answers so far
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // Answer revealed flag (prevents further input after submission)
   const [revealed, setRevealed] = useState(false)
   // Current question number (1-indexed)
-  const [questionNumber, setQuestionNumber] = useState(0)
+  const [questionNumber, setQuestionNumber] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // Total questions to answer
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
   // Array of {question, userAnswer, correctAnswer, correct, time} result objects
@@ -45184,8 +45351,8 @@ function QFormulaApp({ onBack }) {
     const count = numQuestions !== '' && Number(numQuestions) > 0 ? Number(numQuestions) : DEFAULT_TOTAL
     setTotalQ(count)
     // Reset quiz state: mark as started, not finished, score to 0, question 1
-    setStarted(true); setFinished(false); setScore(0); setQuestionNumber(1); setResults([])
-    setAdaptScore(0); adaptScoreRef.current = 0
+    setStarted(true); setFinished(false); setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0); setQuestionNumber(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) + 1 : 1); setResults([])
+    setAdaptScore(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1); adaptScoreRef.current = initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1
     await loadQuestion()
   }
 
@@ -45227,7 +45394,7 @@ function QFormulaApp({ onBack }) {
       time: timeTaken,
     }])
     if (isAdaptive) {
-      setAdaptScore(prev => { const next = data.correct ? Math.min(3, prev + 0.25) : Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next })
+      setAdaptScore(prev => { const next = updateBKT(prev, data.correct); adaptScoreRef.current = next; return next })
     }
     setRevealed(true)
   }
@@ -45273,10 +45440,12 @@ function QFormulaApp({ onBack }) {
   const valInput = (setter) => (e) => { const v = e.target.value; if (v === '' || v === '-' || v === '.' || /^-?\d*\.?\d*$/.test(v)) setter(v) }
 
   const diffLabels = { easy: 'Easy — Integer roots', medium: 'Medium — Rational roots', hard: 'Hard — Complex roots', extrahard: 'Extra Hard — Large coefficients' }
-  const curAdaptLevel = adaptiveLevel(adaptScore)
+  
+
+const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Quadratic Formula" subtitle="Find the roots of ax² + bx + c = 0" onBack={onBack} timer={started && !finished ? timer : null}>
+    <QuizLayout adaptScore={adaptScore}    title="Quadratic Formula" subtitle="Find the roots of ax² + bx + c = 0" onBack={onBack} timer={started && !finished ? timer : null}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Use the quadratic formula to find roots of ax² + bx + c = 0</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
@@ -45303,7 +45472,7 @@ function QFormulaApp({ onBack }) {
           <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
           {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
         </div>
-        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
+        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100); setAdaptScore(v); adaptScoreRef.current = v }} />}
         {question && <>
           <div className="question-box">{question.a}x² {question.b >= 0 ? '+' : '−'} {Math.abs(question.b)}x {question.c >= 0 ? '+' : '−'} {Math.abs(question.c)} = 0</div>
           <div className="roots-inputs">
@@ -45355,15 +45524,15 @@ function QFormulaApp({ onBack }) {
  * @param {Object} props
  * @param {Function} props.onBack - Callback to return to home menu
  */
-function SimulApp({ onBack }) {
+function SimulApp({ onBack, initialAdaptScore }) {
   // ─────── Quiz State Management ──────────────────────────────────
   // Difficulty level: 'easy' (2×2) | 'hard' (3×3)
   const [difficulty, setDifficulty] = useState('easy')
   // Adaptive mode enabled?
-  const [isAdaptive, setIsAdaptive] = useState(false)
+  const [isAdaptive, setIsAdaptive] = useState(initialAdaptScore >= 0.8)
   // Adaptive score (0-3)
-  const [adaptScore, setAdaptScore] = useState(0)
-  const adaptScoreRef = useRef(0)
+  const [adaptScore, setAdaptScore] = useState(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+  const adaptScoreRef = useRef(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
   // Number of questions to answer (as string for input field)
   const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
   // Quiz started flag (controls welcome screen vs quiz content)
@@ -45385,11 +45554,11 @@ function SimulApp({ onBack }) {
   // API call in progress flag
   const [loading, setLoading] = useState(false)
   // Number of correct answers so far
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // Answer revealed flag (prevents further input after submission)
   const [revealed, setRevealed] = useState(false)
   // Current question number (1-indexed)
-  const [questionNumber, setQuestionNumber] = useState(0)
+  const [questionNumber, setQuestionNumber] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // Total questions to answer
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
   // Array of {question, userAnswer, correctAnswer, correct, time} result objects
@@ -45433,8 +45602,8 @@ function SimulApp({ onBack }) {
     const count = numQuestions !== '' && Number(numQuestions) > 0 ? Number(numQuestions) : DEFAULT_TOTAL
     setTotalQ(count)
     // Reset quiz state: mark as started, not finished, score to 0, question 1
-    setStarted(true); setFinished(false); setScore(0); setQuestionNumber(1); setResults([])
-    setAdaptScore(0); adaptScoreRef.current = 0
+    setStarted(true); setFinished(false); setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0); setQuestionNumber(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) + 1 : 1); setResults([])
+    setAdaptScore(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1); adaptScoreRef.current = initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1
     await loadQuestion()
   }
 
@@ -45472,7 +45641,7 @@ function SimulApp({ onBack }) {
       setResults(prev => [...prev, { question: '2×2 system', userAnswer: `(${userX}, ${userY})`, correctAnswer: `(${s.x}, ${s.y})`, correct: data.correct, time: timeTaken }])
     }
     if (isAdaptive) {
-      setAdaptScore(prev => { const next = data.correct ? Math.min(3, prev + 0.25) : Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next })
+      setAdaptScore(prev => { const next = updateBKT(prev, data.correct); adaptScoreRef.current = next; return next })
     }
     setRevealed(true)
   }
@@ -45527,10 +45696,12 @@ function SimulApp({ onBack }) {
   const fmtEq3 = (eq) => `${eq.a}x ${eq.b >= 0 ? '+' : '−'} ${Math.abs(eq.b)}y ${eq.c >= 0 ? '+' : '−'} ${Math.abs(eq.c)}z = ${eq.d}`
 
   const diffLabels = { easy: 'Easy — 2×2 small', medium: 'Medium — 2×2 larger', hard: 'Hard — 3×3', extrahard: 'Extra Hard — 3×3 large' }
-  const curAdaptLevel = adaptiveLevel(adaptScore)
+  
+
+const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Simultaneous Eq." subtitle={`Solve ${isAdaptive ? 'adaptive' : (effectiveDiff() === 'easy' ? '2×2' : '3×3')} systems`} onBack={onBack} timer={started && !finished ? timer : null}>
+    <QuizLayout adaptScore={adaptScore}    title="Simultaneous Eq." subtitle={`Solve ${isAdaptive ? 'adaptive' : (effectiveDiff() === 'easy' ? '2×2' : '3×3')} systems`} onBack={onBack} timer={started && !finished ? timer : null}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Solve systems of linear equations</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
@@ -45557,7 +45728,7 @@ function SimulApp({ onBack }) {
           <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
           {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
         </div>
-        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
+        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100); setAdaptScore(v); adaptScoreRef.current = v }} />}
         {question && <>
           <div className="question-box equation-system">
             {question.eqs.map((eq, i) => <div key={i}>{is3x3 ? fmtEq3(eq) : fmtEq2(eq)}</div>)}
@@ -45603,15 +45774,15 @@ function SimulApp({ onBack }) {
  * @param {Object} props
  * @param {Function} props.onBack - Callback to return to home menu
  */
-function FuncEvalApp({ onBack }) {
+function FuncEvalApp({ onBack, initialAdaptScore }) {
   // ─────── Quiz State Management ──────────────────────────────────
   // Difficulty level: 'easy' | 'medium' | 'hard' (number of variables)
   const [difficulty, setDifficulty] = useState('easy')
   // Adaptive mode enabled?
-  const [isAdaptive, setIsAdaptive] = useState(false)
+  const [isAdaptive, setIsAdaptive] = useState(initialAdaptScore >= 0.8)
   // Adaptive score (0-3)
-  const [adaptScore, setAdaptScore] = useState(0)
-  const adaptScoreRef = useRef(0)
+  const [adaptScore, setAdaptScore] = useState(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+  const adaptScoreRef = useRef(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
   // Number of questions to answer (as string for input field)
   const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
   // Quiz started flag (controls welcome screen vs quiz content)
@@ -45629,11 +45800,11 @@ function FuncEvalApp({ onBack }) {
   // API call in progress flag
   const [loading, setLoading] = useState(false)
   // Number of correct answers so far
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // Answer revealed flag (prevents further input after submission)
   const [revealed, setRevealed] = useState(false)
   // Current question number (1-indexed)
-  const [questionNumber, setQuestionNumber] = useState(0)
+  const [questionNumber, setQuestionNumber] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // Total questions to answer
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
   // Array of {question, userAnswer, correctAnswer, correct, time} result objects
@@ -45669,8 +45840,8 @@ function FuncEvalApp({ onBack }) {
     const count = numQuestions !== '' && Number(numQuestions) > 0 ? Number(numQuestions) : DEFAULT_TOTAL
     setTotalQ(count)
     // Reset quiz state: mark as started, not finished, score to 0, question 1
-    setStarted(true); setFinished(false); setScore(0); setQuestionNumber(1); setResults([])
-    setAdaptScore(0); adaptScoreRef.current = 0
+    setStarted(true); setFinished(false); setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0); setQuestionNumber(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) + 1 : 1); setResults([])
+    setAdaptScore(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1); adaptScoreRef.current = initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1
     await loadQuestion()
   }
 
@@ -45703,7 +45874,7 @@ function FuncEvalApp({ onBack }) {
       time: timeTaken,
     }])
     if (isAdaptive) {
-      setAdaptScore(prev => { const next = data.correct ? Math.min(3, prev + 0.25) : Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next })
+      setAdaptScore(prev => { const next = updateBKT(prev, data.correct); adaptScoreRef.current = next; return next })
     }
     setRevealed(true)
   }
@@ -45740,10 +45911,12 @@ function FuncEvalApp({ onBack }) {
   const varStr = question ? Object.entries(question.vars).map(([k, v]) => `${k} = ${v}`).join(', ') : ''
 
   const diffLabels = { easy: 'Easy — f(x)', medium: 'Medium — f(x,y)', hard: 'Hard — f(x,y,z)', extrahard: 'Extra Hard — Nested' }
-  const curAdaptLevel = adaptiveLevel(adaptScore)
+  
+
+const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Functions" subtitle="Evaluate the function at the given values" onBack={onBack} timer={started && !finished ? timer : null}>
+    <QuizLayout adaptScore={adaptScore}    title="Functions" subtitle="Evaluate the function at the given values" onBack={onBack} timer={started && !finished ? timer : null}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Evaluate linear functions</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
@@ -45770,7 +45943,7 @@ function FuncEvalApp({ onBack }) {
           <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
           {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
         </div>
-        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
+        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100); setAdaptScore(v); adaptScoreRef.current = v }} />}
         {question && <>
           <div className="question-box">
             <div>{question.formula}</div>
@@ -45816,15 +45989,15 @@ function FuncEvalApp({ onBack }) {
  * @param {Object} props
  * @param {Function} props.onBack - Callback to return to home menu
  */
-function LineEqApp({ onBack }) {
+function LineEqApp({ onBack, initialAdaptScore }) {
   // ─────── Quiz State Management ──────────────────────────────────
   // Difficulty level: 'easy' | 'medium' | 'hard' (affects slope/intercept values)
   const [difficulty, setDifficulty] = useState('easy')
   // Adaptive mode enabled?
-  const [isAdaptive, setIsAdaptive] = useState(false)
+  const [isAdaptive, setIsAdaptive] = useState(initialAdaptScore >= 0.8)
   // Adaptive score (0-3)
-  const [adaptScore, setAdaptScore] = useState(0)
-  const adaptScoreRef = useRef(0)
+  const [adaptScore, setAdaptScore] = useState(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
+  const adaptScoreRef = useRef(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1)
   // Number of questions to answer (as string for input field)
   const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
   // Quiz started flag (controls welcome screen vs quiz content)
@@ -45844,11 +46017,11 @@ function LineEqApp({ onBack }) {
   // API call in progress flag
   const [loading, setLoading] = useState(false)
   // Number of correct answers so far
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // Answer revealed flag (prevents further input after submission)
   const [revealed, setRevealed] = useState(false)
   // Current question number (1-indexed)
-  const [questionNumber, setQuestionNumber] = useState(0)
+  const [questionNumber, setQuestionNumber] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // Total questions to answer
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
   // Array of {question, userAnswer, correctAnswer, correct, time} result objects
@@ -45885,8 +46058,8 @@ function LineEqApp({ onBack }) {
     const count = numQuestions !== '' && Number(numQuestions) > 0 ? Number(numQuestions) : DEFAULT_TOTAL
     setTotalQ(count)
     // Reset quiz state: mark as started, not finished, score to 0, question 1
-    setStarted(true); setFinished(false); setScore(0); setQuestionNumber(1); setResults([])
-    setAdaptScore(0); adaptScoreRef.current = 0
+    setStarted(true); setFinished(false); setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0); setQuestionNumber(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) + 1 : 1); setResults([])
+    setAdaptScore(initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1); adaptScoreRef.current = initialAdaptScore >= 0.8 ? initialAdaptScore / 2 : 0.1
     await loadQuestion()
   }
 
@@ -45918,7 +46091,7 @@ function LineEqApp({ onBack }) {
       time: timeTaken,
     }])
     if (isAdaptive) {
-      setAdaptScore(prev => { const next = data.correct ? Math.min(3, prev + 0.25) : Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next })
+      setAdaptScore(prev => { const next = updateBKT(prev, data.correct); adaptScoreRef.current = next; return next })
     }
     setRevealed(true)
   }
@@ -45959,10 +46132,12 @@ function LineEqApp({ onBack }) {
   const valInput = (setter) => (e) => { const v = e.target.value; if (v === '' || v === '-' || v === '.' || /^-?\d*\.?\d*$/.test(v)) setter(v) }
 
   const diffLabels = { easy: 'Easy — Positive slope', medium: 'Medium — Any slope', hard: 'Hard — Fractional slope', extrahard: 'Extra Hard — Large coordinates' }
-  const curAdaptLevel = adaptiveLevel(adaptScore)
+  
+
+const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Line Equation" subtitle="Find m and c in y = mx + c from two points" onBack={onBack} timer={started && !finished ? timer : null}>
+    <QuizLayout adaptScore={adaptScore}    title="Line Equation" subtitle="Find m and c in y = mx + c from two points" onBack={onBack} timer={started && !finished ? timer : null}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Given two points, find the slope m and intercept c.</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
@@ -45989,7 +46164,7 @@ function LineEqApp({ onBack }) {
           <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
           {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
         </div>
-        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
+        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100); setAdaptScore(v); adaptScoreRef.current = v }} />}
         {question && <>
           <div className="question-box">
             <div>Point A: ({question.x1}, {question.y1})</div>
@@ -46031,75 +46206,75 @@ function LineEqApp({ onBack }) {
  * Keys must match API endpoint names and case types in CustomApp
  */
 const CUSTOM_PUZZLES = [
-  { key: 'basicarith', name: 'Basic Arithmetic' },
-  { key: 'addition', name: 'Addition' },
-  { key: 'quadratic', name: 'Quadratic' },
-  { key: 'multiply', name: 'Multiplication' },
-  { key: 'sqrt', name: 'Square Root' },
-  { key: 'polymul', name: 'Poly Multiply' },
-  { key: 'polyfactor', name: 'Poly Factor' },
-  { key: 'primefactor', name: 'Prime Factors' },
-  { key: 'qformula', name: 'Quadratic Formula' },
-  { key: 'simul', name: 'Simultaneous Eq.' },
-  { key: 'funceval', name: 'Functions' },
-  { key: 'lineq', name: 'Line Equation' },
+  { key: 'basicarith', classGroup: 'Class 2', name: 'Basic Arithmetic' },
+  { key: 'addition', classGroup: 'Class 1', name: 'Addition' },
+  { key: 'quadratic', classGroup: 'Class 10', name: 'Quadratic' },
+  { key: 'multiply', classGroup: 'Class 2', name: 'Multiplication' },
+  { key: 'sqrt', classGroup: 'Class 4', name: 'Square Root' },
+  { key: 'polymul', classGroup: 'Class 9', name: 'Poly Multiply' },
+  { key: 'polyfactor', classGroup: 'Class 9', name: 'Poly Factor' },
+  { key: 'primefactor', classGroup: 'Class 5', name: 'Prime Factors' },
+  { key: 'qformula', classGroup: 'Class 10', name: 'Quadratic Formula' },
+  { key: 'simul', classGroup: 'Class 9', name: 'Simultaneous Eq.' },
+  { key: 'funceval', classGroup: 'Class 12', name: 'Functions' },
+  { key: 'lineq', classGroup: 'Class 10', name: 'Line Equation' },
   { key: 'gk', name: 'General Knowledge' },
-  { key: 'vocab', name: 'Vocab Builder' },
-  { key: 'fractionadd', name: 'Fractions (Add)' },
-  { key: 'surds', name: 'Surds' },
-  { key: 'indices', name: 'Indices' },
-  { key: 'sequences', name: 'Sequences' },
-  { key: 'ratio', name: 'Ratio' },
-  { key: 'percent', name: 'Percentages' },
-  { key: 'sets', name: 'Sets' },
-  { key: 'trig', name: 'Trigonometry' },
-  { key: 'ineq', name: 'Inequalities' },
-  { key: 'coordgeom', name: 'Coord. Geometry' },
-  { key: 'prob', name: 'Probability' },
-  { key: 'stats', name: 'Statistics' },
-  { key: 'matrix', name: 'Matrices' },
-  { key: 'vectors', name: 'Vectors' },
-  { key: 'dotprod', name: 'Dot Products' },
-  { key: 'transform', name: 'Transformations' },
-  { key: 'mensur', name: 'Mensuration' },
-  { key: 'bearings', name: 'Bearings' },
-  { key: 'log', name: 'Logarithms' },
-  { key: 'diff', name: 'Differentiation' },
-  { key: 'bases', name: 'Number Bases' },
-  { key: 'circleth', name: 'Circle Theorems' },
-  { key: 'integ', name: 'Integration' },
-  { key: 'stdform', name: 'Standard Form' },
+  { key: 'vocab', classGroup: 'Class 1', name: 'Vocab Builder' },
+  { key: 'fractionadd', classGroup: 'Class 3', name: 'Fractions (Add)' },
+  { key: 'surds', classGroup: 'Class 8', name: 'Surds' },
+  { key: 'indices', classGroup: 'Class 8', name: 'Indices' },
+  { key: 'sequences', classGroup: 'Class 2', name: 'Sequences' },
+  { key: 'ratio', classGroup: 'Class 5', name: 'Ratio' },
+  { key: 'percent', classGroup: 'Class 5', name: 'Percentages' },
+  { key: 'sets', classGroup: 'Class 11', name: 'Sets' },
+  { key: 'trig', classGroup: 'Class 10', name: 'Trigonometry' },
+  { key: 'ineq', classGroup: 'Class 9', name: 'Inequalities' },
+  { key: 'coordgeom', classGroup: 'Class 10', name: 'Coord. Geometry' },
+  { key: 'prob', classGroup: 'Class 11', name: 'Probability' },
+  { key: 'stats', classGroup: 'Class 11', name: 'Statistics' },
+  { key: 'matrix', classGroup: 'Class 12', name: 'Matrices' },
+  { key: 'vectors', classGroup: 'Class 12', name: 'Vectors' },
+  { key: 'dotprod', classGroup: 'Class 12', name: 'Dot Products' },
+  { key: 'transform', classGroup: 'Class 10', name: 'Transformations' },
+  { key: 'mensur', classGroup: 'Class 7', name: 'Mensuration' },
+  { key: 'bearings', classGroup: 'Class 10', name: 'Bearings' },
+  { key: 'log', classGroup: 'Class 12', name: 'Logarithms' },
+  { key: 'diff', classGroup: 'Class 12', name: 'Differentiation' },
+  { key: 'bases', classGroup: 'Class 8', name: 'Number Bases' },
+  { key: 'circleth', classGroup: 'Class 10', name: 'Circle Theorems' },
+  { key: 'integ', classGroup: 'Class 12', name: 'Integration' },
+  { key: 'stdform', classGroup: 'Class 8', name: 'Standard Form' },
   { key: 'bounds', name: 'Bounds' },
-  { key: 'sdt', name: 'Speed, Distance, Time' },
-  { key: 'variation', name: 'Variation' },
-  { key: 'hcflcm', name: 'HCF & LCM' },
-  { key: 'profitloss', name: 'Profit & Loss' },
-  { key: 'rounding', name: 'Rounding' },
-  { key: 'binomial', name: 'Binomial Theorem' },
-  { key: 'complex', name: 'Complex Numbers' },
-  { key: 'angles', name: 'Angles' },
-  { key: 'triangles', name: 'Triangles' },
-  { key: 'congruence', name: 'Congruence' },
-  { key: 'pythag', name: "Pythagoras' Theorem" },
-  { key: 'polygons', name: 'Polygons' },
-  { key: 'similarity', name: 'Similarity' },
-  { key: 'squaring', name: 'Squaring' },
-  { key: 'tatsavit', name: 'Tatsavit' },
-  { key: 'lineareq', name: 'Linear Equations' },
-  { key: 'decimals', name: 'Decimals' },
-  { key: 'permcomb', name: 'Perm. & Comb.' },
-  { key: 'limits', name: 'Limits' },
-  { key: 'invtrig', name: 'Inverse Trig' },
-  { key: 'remfactor', name: 'Remainder Theorem' },
-  { key: 'heron', name: "Heron's Formula" },
-  { key: 'shares', name: 'Shares & Dividends' },
-  { key: 'banking', name: 'Banking (RD)' },
-  { key: 'gst', name: 'GST' },
-  { key: 'section', name: 'Section Formula' },
-  { key: 'linprog', name: 'Linear Programming' },
-  { key: 'circmeasure', name: 'Circular Measure' },
-  { key: 'conics', name: 'Conic Sections' },
-  { key: 'diffeq', name: 'Differential Equations' },
+  { key: 'sdt', classGroup: 'Class 11', name: 'Speed, Distance, Time' },
+  { key: 'variation', classGroup: 'Class 11', name: 'Variation' },
+  { key: 'hcflcm', classGroup: 'Class 5', name: 'HCF & LCM' },
+  { key: 'profitloss', classGroup: 'Class 7', name: 'Profit & Loss' },
+  { key: 'rounding', classGroup: 'Class 4', name: 'Rounding' },
+  { key: 'binomial', classGroup: 'Class 11', name: 'Binomial Theorem' },
+  { key: 'complex', classGroup: 'Class 12', name: 'Complex Numbers' },
+  { key: 'angles', classGroup: 'Class 6', name: 'Angles' },
+  { key: 'triangles', classGroup: 'Class 7', name: 'Triangles' },
+  { key: 'congruence', classGroup: 'Class 10', name: 'Congruence' },
+  { key: 'pythag', classGroup: 'Class 10', name: "Pythagoras' Theorem" },
+  { key: 'polygons', classGroup: 'Class 6', name: 'Polygons' },
+  { key: 'similarity', classGroup: 'Class 10', name: 'Similarity' },
+  { key: 'squaring', classGroup: 'Class 9', name: 'Squaring' },
+  { key: 'tatsavit', classGroup: 'Class 4', name: 'Tatsavit' },
+  { key: 'lineareq', classGroup: 'Class 6', name: 'Linear Equations' },
+  { key: 'decimals', classGroup: 'Class 3', name: 'Decimals' },
+  { key: 'permcomb', classGroup: 'Class 11', name: 'Perm. & Comb.' },
+  { key: 'limits', classGroup: 'Class 12', name: 'Limits' },
+  { key: 'invtrig', classGroup: 'Class 10', name: 'Inverse Trig' },
+  { key: 'remfactor', classGroup: 'Class 9', name: 'Remainder Theorem' },
+  { key: 'heron', classGroup: 'Class 12', name: "Heron's Formula" },
+  { key: 'shares', classGroup: 'Class 12', name: 'Shares & Dividends' },
+  { key: 'banking', classGroup: 'Class 7', name: 'Banking (RD)' },
+  { key: 'gst', classGroup: 'Class 7', name: 'GST' },
+  { key: 'section', classGroup: 'Class 10', name: 'Section Formula' },
+  { key: 'linprog', classGroup: 'Class 12', name: 'Linear Programming' },
+  { key: 'circmeasure', classGroup: 'Class 10', name: 'Circular Measure' },
+  { key: 'conics', classGroup: 'Class 12', name: 'Conic Sections' },
+  { key: 'diffeq', classGroup: 'Class 12', name: 'Differential Equations' },
 ]
 
 /**
@@ -46270,7 +46445,7 @@ function getPromptForType(type, q) {
  * @param {Object} props
  * @param {Function} props.onBack - Callback to return to home menu
  */
-function CustomApp({ onBack }) {
+function CustomApp({ onBack, initialAdaptScore }) {
   // ─────── Setup Phase State ──────────────────────────────────
   // Current phase: 'setup' | 'quiz' | 'finished'
   const [phase, setPhase] = useState('setup')
@@ -46293,7 +46468,7 @@ function CustomApp({ onBack }) {
   // Current puzzle type (key from CUSTOM_PUZZLES)
   const [curType, setCurType] = useState(null)
   // Number of correct answers so far
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   // Array of {question, userAnswer, correctAnswer, correct, time} result objects
   const [results, setResults] = useState([])
   // Feedback message shown after submission
@@ -46373,7 +46548,7 @@ function CustomApp({ onBack }) {
     }
     setPlan(questionPlan)
     setPhase('quiz')
-    setScore(0)
+    setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
     setResults([])
     setQIndex(0)
     // Load first question asynchronously
@@ -46945,7 +47120,7 @@ function CustomApp({ onBack }) {
   // ─── Setup Phase ─────────────────────────────────────
   if (phase === 'setup') {
     return (
-      <QuizLayout title="Custom Lesson" subtitle="Build your own quiz from any combination of puzzles" onBack={onBack}>
+      <QuizLayout   title="Custom Lesson" subtitle="Build your own quiz from any combination of puzzles" onBack={onBack}>
         <div className="radio-group">
           {['easy', 'medium', 'hard'].map(d => (
             <label key={d} className={`radio-pill ${difficulty === d ? 'active' : ''}`}>
@@ -47006,7 +47181,7 @@ function CustomApp({ onBack }) {
   // ─── Quiz Phase ──────────────────────────────────────
   if (phase === 'quiz') {
     return (
-      <QuizLayout title="Custom Lesson" subtitle={`${selected.length} puzzle types · ${difficulty}`} onBack={onBack}>
+      <QuizLayout   title="Custom Lesson" subtitle={`${selected.length} puzzle types · ${difficulty}`} onBack={onBack}>
         <div className="top-mini-row">
           {!revealed && <div className="timer-pill">{timer.elapsed}s</div>}
           <div className="score-pill">Score: {score}</div>
@@ -47028,7 +47203,7 @@ function CustomApp({ onBack }) {
 
   // ─── Finished Phase ──────────────────────────────────
   return (
-    <QuizLayout title="Custom Lesson" subtitle="Quiz complete!" onBack={onBack}>
+    <QuizLayout   title="Custom Lesson" subtitle="Quiz complete!" onBack={onBack}>
       <div className="welcome-box">
         <p className="final-score">Final score: {score}/{totalQ}</p>
         <ResultsTable results={results} />
@@ -48198,12 +48373,12 @@ const TATSAVIT1_QUESTIONS = [
  * One MCQ at a time: Submit checks the answer, Explanation reveals a stepped
  * timeline via renderFeedback, Next advances. Finishes with a results summary.
  */
-function Tatsavit1App({ onBack }) {
+function Tatsavit1App({ onBack, initialAdaptScore }) {
   const [idx, setIdx] = useState(0)
   const [selected, setSelected] = useState(null)
   const [revealed, setRevealed] = useState(false)
   const [showSolve, setShowSolve] = useState(false)
-  const [score, setScore] = useState(0)
+  const [score, setScore] = useState(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0)
   const [results, setResults] = useState([])
   const [finished, setFinished] = useState(false)
 
@@ -48232,7 +48407,7 @@ function Tatsavit1App({ onBack }) {
 
   const handleRestart = () => {
     setIdx(0); setSelected(null); setRevealed(false); setShowSolve(false)
-    setScore(0); setResults([]); setFinished(false)
+    setScore(initialAdaptScore >= 0.8 ? Math.floor(initialAdaptScore * 10) : 0); setResults([]); setFinished(false)
   }
 
   const handleJumpPrev = () => {
@@ -48243,7 +48418,7 @@ function Tatsavit1App({ onBack }) {
 
   if (finished) {
     return (
-      <QuizLayout title="Tatsavit 1 — Results" subtitle={`Score: ${score} / ${total} (${Math.round(100 * score / total)}%)`} onBack={onBack}>
+      <QuizLayout   title="Tatsavit 1 — Results" subtitle={`Score: ${score} / ${total} (${Math.round(100 * score / total)}%)`} onBack={onBack}>
         <div style={{ textAlign: 'center', marginTop: 16, marginBottom: 16 }}>
           <button className="submit-btn" onClick={handleRestart}>Play Again</button>
         </div>
@@ -48255,7 +48430,7 @@ function Tatsavit1App({ onBack }) {
   const isCorrect = selected === q.correctIndex
 
   return (
-    <QuizLayout title="Tatsavit 1 — IGCSE Practice" subtitle={`Question ${idx + 1} of ${total} · ${q.section}`} onBack={onBack}>
+    <QuizLayout   title="Tatsavit 1 — IGCSE Practice" subtitle={`Question ${idx + 1} of ${total} · ${q.section}`} onBack={onBack}>
       <div className="progress-pill center" style={{ marginBottom: 12 }}>
         Score: {score} · Answered: {results.length}
       </div>
@@ -48656,7 +48831,7 @@ const RIYA_UNITS = [
  * Pass threshold: 4 of 5 correct. Passing advances to the next unit;
  * failing replays the lesson with a "let's review" banner.
  */
-function RiyaApp({ onBack }) {
+function RiyaApp({ onBack, initialAdaptScore }) {
   const [unitIdx, setUnitIdx] = useState(0)
   const [phase, setPhase] = useState('lesson')           // 'lesson' | 'quiz' | 'complete'
   const [quizIdx, setQuizIdx] = useState(0)
@@ -48925,8 +49100,7 @@ function RiyaApp({ onBack }) {
   if (phase === 'complete') {
     const pct = totalAttempted ? Math.round(100 * totalCorrect / totalAttempted) : 0
     return (
-      <QuizLayout
-        title="Riya — course complete"
+      <QuizLayout   title="Riya — course complete"
         subtitle={`You cleared all ${totalUnits} units. Overall: ${totalCorrect} / ${totalAttempted} (${pct}%)`}
         onBack={onBack}
       >
@@ -48954,8 +49128,7 @@ function RiyaApp({ onBack }) {
   // Lesson phase
   if (phase === 'lesson') {
     return (
-      <QuizLayout
-        title={`Lesson ${unitIdx + 1}: ${unit.title}`}
+      <QuizLayout   title={`Lesson ${unitIdx + 1}: ${unit.title}`}
         subtitle={reviewMode ? 'Let us review this together, then try again.' : 'Read the short lesson, then try five practice questions.'}
         onBack={onBack}
       >
@@ -49014,8 +49187,7 @@ function RiyaApp({ onBack }) {
     ? `need all ${roundTotal} correct to pass`
     : `need ${Math.min(passThreshold, roundTotal)} correct to advance`
   return (
-    <QuizLayout
-      title={`Practice: ${unit.title}`}
+    <QuizLayout title={`Practice: ${unit.title}`}
       subtitle={`Question ${quizIdx + 1} of ${roundTotal} · ${needText}${reviewMode ? ' · retry round' : ''}`}
       onBack={onBack}
     >
@@ -49101,7 +49273,7 @@ function RiyaApp({ onBack }) {
  *     y = mx + C for each. If either y is out of the plot window [-7, 7],
  *     retry. This guarantees a tidy integer answer and visible points.
  */
-function TatsavitLineApp({ onBack }) {
+function TatsavitLineApp({ onBack, initialAdaptScore }) {
   // `round` is just a counter that forces regeneration on Next
   const [round, setRound] = useState(0)
   // Point coordinates are stored as strings so the inputs stay editable
@@ -49290,8 +49462,7 @@ function TatsavitLineApp({ onBack }) {
   const handleReset = () => { setMInput(''); setCInput(''); setShowAnswer(false) }
 
   return (
-    <QuizLayout
-      title="Tatsavit — Fit the Line"
+    <QuizLayout title="Tatsavit — Fit the Line"
       subtitle={`Find m and C so y = m·x + C passes through both points · solved: ${solvedCount}`}
       onBack={onBack}
     >
@@ -49556,13 +49727,14 @@ function TatsavitLineApp({ onBack }) {
  * @param {Function} props.onBack - Callback when back button is clicked
  * @param {React.ReactNode} props.children - Quiz content to display
  */
-function QuizLayout({ title, subtitle, onBack, children, timer }) {
+function QuizLayout({ title, subtitle, onBack, children, timer, adaptScore }) {
   return (
     <>
       <div className="header-row">
         <button className="back-button" onClick={onBack}>← Home</button>
         {timer && <div className="timer-pill">{timer.elapsed}s</div>}
       </div>
+      <MasteryProgress adaptScore={adaptScore} />
       <h1>{title}</h1>
       <p className="subtitle">{subtitle}</p>
       {children}

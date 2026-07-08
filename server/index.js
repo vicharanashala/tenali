@@ -3358,11 +3358,7 @@ app.post('/surds-api/check', express.json(), (req, res) => {
     }
   }
 
-  res.json({
-    correct,
-    display,
-    message: correct ? 'Correct!' : 'Incorrect'
-  });
+  res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -3604,11 +3600,7 @@ app.post('/indices-api/check', express.json(), (req, res) => {
     }
   }
 
-  res.json({
-    correct,
-    display,
-    message: correct ? 'Correct!' : 'Incorrect'
-  });
+  res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -3743,7 +3735,7 @@ app.post('/sequences-api/check', express.json(), (req, res) => {
         const expected = s.num / s.den;
         correct = Math.abs(num - expected) < 0.01;
         display = s.den === 1 ? `${s.num}` : `${s.num}/${s.den}`;
-        return res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+        return res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
       }
     }
 
@@ -3754,7 +3746,7 @@ app.post('/sequences-api/check', express.json(), (req, res) => {
     display = s.den === 1 ? `${s.num}` : `${s.num}/${s.den}`;
   }
 
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+  res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -3889,7 +3881,7 @@ app.post('/ratio-api/check', express.json(), (req, res) => {
     display = s.den === 1 ? `${s.num}` : `${s.num}/${s.den}`;
   }
 
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+  res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -4242,7 +4234,7 @@ app.post('/sets-api/check', express.json(), (req, res) => {
     display = String(expected);
   }
 
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+  res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -4466,7 +4458,7 @@ app.post('/ineq-api/check', express.json(), (req, res) => {
     correct = !isNaN(userNum) && userNum === req.body.answer;
   }
 
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+  res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -4966,7 +4958,7 @@ app.post('/stats-api/check', express.json(), (req, res) => {
     display = es.den === 1 ? String(es.num) : `${es.num}/${es.den}`;
   }
 
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+  res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -5038,7 +5030,7 @@ app.post('/matrix-api/check', express.json(), (req, res) => {
     }
   }
 
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+  res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -5235,7 +5227,7 @@ app.post('/dotprod-api/check', express.json(), (req, res) => {
     }
   }
 
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+  res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -6090,7 +6082,7 @@ function lcm(a, b) { return Math.abs(a * b) / gcd(a, b); }
 
 app.get('/hcflcm-api/question', (req, res) => {
   const diff = req.query.difficulty || 'easy';
-  let prompt, answer, display;
+  let prompt, answer, display, metadata;
 
   if (diff === 'easy') {
     // HCF of two numbers
@@ -6100,6 +6092,7 @@ app.get('/hcflcm-api/question', (req, res) => {
     answer = gcd(a, b);
     display = String(answer);
     prompt = `Find the HCF of ${a} and ${b}.`;
+    metadata = { a, b };
   } else if (diff === 'medium') {
     // LCM of two numbers
     const a = randInt(4, 20);
@@ -6107,6 +6100,7 @@ app.get('/hcflcm-api/question', (req, res) => {
     answer = lcm(a, b);
     display = String(answer);
     prompt = `Find the LCM of ${a} and ${b}.`;
+    metadata = { a, b };
   } else if (diff === 'hard') {
     // HCF and LCM of three numbers — ask for LCM
     const a = randInt(4, 15);
@@ -6115,6 +6109,7 @@ app.get('/hcflcm-api/question', (req, res) => {
     answer = lcm(lcm(a, b), c);
     display = String(answer);
     prompt = `Find the LCM of ${a}, ${b}, and ${c}.`;
+    metadata = { a, b, c };
   } else {
     // Word problem: Two buses leave at same time, intervals A and B min, when next together?
     const a = randInt(8, 20);
@@ -6122,9 +6117,10 @@ app.get('/hcflcm-api/question', (req, res) => {
     answer = lcm(a, b);
     display = answer + ' minutes';
     prompt = `Bus A departs every ${a} minutes and Bus B every ${b} minutes. They both leave at 9:00. After how many minutes will they next depart together?`;
+    metadata = { a, b };
   }
 
-  res.json({ prompt, answer, display, difficulty: diff });
+  res.json({ prompt, answer, display, difficulty: diff, metadata });
 });
 
 app.post('/hcflcm-api/check', express.json(), (req, res) => {
@@ -6827,7 +6823,7 @@ app.post('/squaring-api/check', express.json(), (req, res) => {
     correct = parts[0] === answer;
   }
 
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+  res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -7014,7 +7010,7 @@ app.post('/tatsavit-api/check', express.json(), (req, res) => {
     correct = !isNaN(userNum) && Math.abs(userNum - answer) < 0.05;
   }
 
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+  res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -7072,7 +7068,7 @@ app.post('/lineareq-api/check', express.json(), (req, res) => {
   const userStr = (req.body.userAnswer || '').trim();
   const userNum = parseFloat(userStr);
   const correct = !isNaN(userNum) && Math.abs(userNum - answer) < 0.1;
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+  res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -7123,7 +7119,7 @@ app.post('/decimals-api/check', express.json(), (req, res) => {
   const userStr = (req.body.userAnswer || '').trim();
   const userNum = parseFloat(userStr);
   const correct = !isNaN(userNum) && Math.abs(userNum - answer) < 0.01;
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+  res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -7321,7 +7317,7 @@ app.post('/permcomb-api/check', express.json(), (req, res) => {
   const userStr = String(req.body.userAnswer || '').replace(/[\s,]/g, '');
   const userNum = parseInt(userStr, 10);
   const correct = !isNaN(userNum) && userNum === answer;
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+  res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -7375,7 +7371,7 @@ app.post('/limits-api/check', express.json(), (req, res) => {
   const userStr = (req.body.userAnswer || '').trim();
   const userNum = parseFloat(userStr);
   const correct = !isNaN(userNum) && Math.abs(userNum - answer) < 0.05;
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+  res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -7435,7 +7431,7 @@ app.post('/invtrig-api/check', express.json(), (req, res) => {
   const userStr = (req.body.userAnswer || '').trim();
   const userNum = parseFloat(userStr);
   const correct = !isNaN(userNum) && Math.abs(userNum - answer) < 0.5;
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+  res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -7497,7 +7493,7 @@ app.post('/remfactor-api/check', express.json(), (req, res) => {
   const correct = (typeof answer === 'string')
     ? userStr === answer.toLowerCase()
     : !isNaN(parseFloat(userStr)) && Math.abs(parseFloat(userStr) - answer) < 0.1;
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+  res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -7556,7 +7552,7 @@ app.post('/heron-api/check', express.json(), (req, res) => {
   const userStr = (req.body.userAnswer || '').trim();
   const userNum = parseFloat(userStr);
   const correct = !isNaN(userNum) && Math.abs(userNum - answer) < 0.5;
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+  res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -7612,7 +7608,7 @@ app.post('/shares-api/check', express.json(), (req, res) => {
   const userStr = (req.body.userAnswer || '').trim();
   const userNum = parseFloat(userStr);
   const correct = !isNaN(userNum) && Math.abs(userNum - answer) < 1;
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+  res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -7669,7 +7665,7 @@ app.post('/banking-api/check', express.json(), (req, res) => {
   const userStr = (req.body.userAnswer || '').trim();
   const userNum = parseFloat(userStr);
   const correct = !isNaN(userNum) && Math.abs(userNum - answer) < 10;
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+  res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -7732,6 +7728,7 @@ function mcCheck(req, res) {
   const correct = !!b.selectedOption && b.selectedOption === b.correctOption;
   res.json({
     correct,
+    correctAnswer: b.correctOption,
     correctOption: b.correctOption,
     correctDisplay: b.correctDisplay,
     message: correct ? 'Correct!' : 'Incorrect',
@@ -7863,7 +7860,7 @@ app.post('/gymdecimals-api/check', express.json(), (req, res) => {
       correct = Math.abs(userNum - answer) <= tol;
     }
   }
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+  res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -8583,7 +8580,7 @@ app.post('/gst-api/check', express.json(), (req, res) => {
   const userStr = (req.body.userAnswer || '').trim();
   const userNum = parseFloat(userStr);
   const correct = !isNaN(userNum) && Math.abs(userNum - answer) < 1;
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+  res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -8652,11 +8649,11 @@ app.post('/section-api/check', express.json(), (req, res) => {
     const parts = userStr.split(',').map(p => parseFloat(p.trim()));
     const correct = parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1]) &&
                     Math.abs(parts[0] - answer[0]) < 0.2 && Math.abs(parts[1] - answer[1]) < 0.2;
-    res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+    res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
   } else {
     const userNum = parseFloat(userStr);
     const correct = !isNaN(userNum) && Math.abs(userNum - answer) < 0.2;
-    res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+    res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
   }
 });
 
@@ -8731,7 +8728,7 @@ app.post('/linprog-api/check', express.json(), (req, res) => {
   const userStr = (req.body.userAnswer || '').trim();
   const userNum = parseFloat(userStr);
   const correct = !isNaN(userNum) && Math.abs(userNum - answer) < 1;
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+  res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -8783,7 +8780,7 @@ app.post('/circmeasure-api/check', express.json(), (req, res) => {
   const userStr = (req.body.userAnswer || '').trim();
   const userNum = parseFloat(userStr);
   const correct = !isNaN(userNum) && Math.abs(userNum - answer) < 0.5;
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+  res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -8843,7 +8840,7 @@ app.post('/conics-api/check', express.json(), (req, res) => {
   const correct = (typeof answer === 'string')
     ? userStr === answer.toLowerCase()
     : !isNaN(parseFloat(userStr)) && Math.abs(parseFloat(userStr) - answer) < 0.1;
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+  res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -8907,7 +8904,7 @@ app.post('/diffeq-api/check', express.json(), (req, res) => {
   const correct = (typeof answer === 'string')
     ? userStr === answer.toLowerCase() || userStr === answer.toLowerCase().replace(/\s+/g, '')
     : !isNaN(parseInt(userStr, 10)) && parseInt(userStr, 10) === answer;
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+  res.json({ correct, correctAnswer: typeof answer !== 'undefined' ? answer : null, display, message: correct ? 'Correct!' : 'Incorrect' });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
