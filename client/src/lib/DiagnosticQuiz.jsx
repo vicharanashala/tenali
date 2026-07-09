@@ -128,7 +128,17 @@ function renderDiagnosticQuestion(type, q) {
   }
   
   // fallback to string formatting
-  return getPromptForType(type, q) || q.prompt || q.question || JSON.stringify(q);
+  const prompt = getPromptForType(type, q);
+  if (prompt && typeof prompt === 'string') return prompt;
+  if (prompt && typeof prompt === 'object' && prompt.$$typeof) return prompt; // React element
+  if (q.prompt) return String(q.prompt);
+  if (q.question) return String(q.question);
+  
+  // Robust generic text extractor for unrecognized API shapes
+  const textProps = Object.values(q).filter(v => typeof v === 'string' && v.length > 0 && v.length < 100);
+  if (textProps.length > 0) return `Solve: ${textProps.join(' ')}`;
+  
+  return "Solve this problem.";
 }
 
 export default function DiagnosticScreen({ topicKey, onPass, onFail, onSkip, onNavigate }) {

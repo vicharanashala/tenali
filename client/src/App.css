@@ -2550,3 +2550,162 @@ button:disabled {
 .correct-pulse {
   animation: correctPulse 0.4s ease-out;
 }
+
+/* ==========================================================================
+   ACCESSIBILITY OVERRIDES (Feature T: Dyslexia & Low-Vision)
+   ========================================================================== */
+
+/* 1. Dyslexia Font (Lexend is scientifically designed to improve reading fluency) */
+[data-a11y-dyslexia="true"] {
+  --font-body: 'Lexend', sans-serif !important;
+  --font-display: 'Lexend', sans-serif !important;
+}
+[data-a11y-dyslexia="true"] * {
+  font-family: 'Lexend', sans-serif !important;
+}
+
+/* 2. Increased Letter & Word Spacing */
+[data-a11y-spacing="true"] {
+  letter-spacing: 0.05em !important;
+  word-spacing: 0.12em !important;
+  line-height: 1.8 !important;
+}
+[data-a11y-spacing="true"] * {
+  letter-spacing: 0.05em !important;
+  word-spacing: 0.12em !important;
+}
+
+/* 3. High Contrast Mode for Low-Vision Students */
+[data-a11y-contrast="high"] {
+  --clr-bg: #000000 !important;
+  --clr-text: #FFD700 !important;
+  --clr-card: #111111 !important;
+  --clr-surface: #222222 !important;
+  --clr-input: #1a1a1a !important;
+  --clr-border: #FFD700 !important;
+  --clr-accent: #00FFFF !important;
+  --clr-accent-soft: rgba(0, 255, 255, 0.2) !important;
+  --clr-correct: #00FF00 !important;
+  --clr-correct-bg: rgba(0, 255, 0, 0.15) !important;
+  --clr-wrong: #FF0000 !important;
+  --clr-wrong-bg: rgba(255, 0, 0, 0.15) !important;
+  --shadow-card: none !important;
+  --shadow-sm: none !important;
+}
+
+/* 4. Text Size Scaling */
+[data-a11y-size="large"] { font-size: 115% !important; }
+[data-a11y-size="xl"] { font-size: 135% !important; }
+
+/* 5. Accessibility Modal & UI */
+.a11y-toggle-btn {
+  position: absolute;
+  top: 24px;
+  right: 84px; /* Left of the theme toggle */
+  background: var(--clr-card);
+  border: 1px solid var(--clr-border);
+  color: var(--clr-text);
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.a11y-toggle-btn:hover {
+  transform: scale(1.05);
+}
+
+.a11y-modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  z-index: 10000;
+  display: flex;
+  justify-content: flex-end;
+}
+.a11y-panel {
+  width: 100%;
+  max-width: 400px;
+  background: var(--clr-card);
+  height: 100%;
+  border-left: 1px solid var(--clr-border);
+  display: flex;
+  flex-direction: column;
+  animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  color: var(--clr-text);
+}
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+.a11y-header {
+  padding: 24px;
+  border-bottom: 1px solid var(--clr-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.a11y-header h2 { margin: 0; font-size: 1.2rem; }
+.a11y-header button {
+  background: transparent;
+  border: none;
+  color: var(--clr-text);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.a11y-scroll-content {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+.a11y-section {
+  margin-bottom: 32px;
+}
+.a11y-section h3 {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--clr-text-soft);
+  margin-bottom: 16px;
+}
+.a11y-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  padding: 8px 0;
+}
+.a11y-toggle input[type="checkbox"] {
+  width: 24px;
+  height: 24px;
+  accent-color: var(--clr-accent);
+  cursor: pointer;
+}
+.a11y-button-group {
+  display: flex;
+  gap: 8px;
+}
+.a11y-button-group button {
+  flex: 1;
+  padding: 10px;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  color: var(--clr-text);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.a11y-button-group button.active {
+  background: var(--clr-accent);
+  color: #fff;
+  border-color: var(--clr-accent);
+  font-weight: bold;
+}

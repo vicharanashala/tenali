@@ -36674,9 +36674,9 @@ function AdditionApp({ onBack, initialAdaptScore }) {
 
   const effectiveDiff = (qNum) => {
     if (isAdaptive) {
-      if (qNum < 9) return 'easy'
-      if (qNum < 13) return 'medium'
-      if (qNum < 17) return 'hard'
+      if (adaptScoreRef.current < 0.3) return 'easy'
+      if (adaptScoreRef.current < 0.6) return 'medium'
+      if (adaptScoreRef.current < 0.85) return 'hard'
       return 'extrahard'
     }
     return difficulty
@@ -37818,9 +37818,9 @@ function BasicArithApp({ onBack, initialAdaptScore }) {
 
   const effectiveDiff = (qNum) => {
     if (isAdaptive) {
-      if (qNum < 9) return 'easy'
-      if (qNum < 13) return 'medium'
-      if (qNum < 17) return 'hard'
+      if (adaptScoreRef.current < 0.3) return 'easy'
+      if (adaptScoreRef.current < 0.6) return 'medium'
+      if (adaptScoreRef.current < 0.85) return 'hard'
       return 'extrahard'
     }
     return difficulty
