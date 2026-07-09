@@ -21,8 +21,30 @@
  * Progress persistence: Adaptive tables app saves current table progress in localStorage
  */
 
-import { useEffect, useState, useRef, useMemo } from 'react'
+import { useEffect, useState, useRef, useMemo, createContext, useContext } from 'react'
 import './App.css'
+const MascotDisplay = ({ themeName }) => {
+  const mascots = {
+    'Fantasy World': '🧙 Make math feel like magic',
+    'Superhero City': '🦸 Every problem is a mission',
+    'Jurassic Jungle': '🦖 Roar through tricky puzzles',
+    'Space Explorer': '🤖 Think smart. Solve smarter'
+  };
+
+  const fullText = mascots[themeName];
+  if (!fullText) return null;
+
+  // This splits the emoji from the rest of the text
+  const icon = fullText.substring(0, 2); 
+  const label = fullText.substring(2);
+
+  return (
+    <div className="mascot-wrapper">
+      <span className="mascot-emoji">{icon}</span>
+      <span className="mascot-label">{label}</span>
+    </div>
+  );
+};
 
 // API base URL from environment variables (Vite)
 const API = import.meta.env.VITE_API_BASE_URL || '';
@@ -30,6 +52,34 @@ const API = import.meta.env.VITE_API_BASE_URL || '';
 // App version — increment with each commit
 const TENALI_VERSION = '1.0.86'
 const TENALI_BUILD_DATE = '2026-05-03 18:28 IST'
+
+
+// NEW: Theme Context and Selector
+export const ThemeContext = createContext();
+
+const ThemeSelector = ({ onComplete }) => {
+  const themes = [
+    { name: 'Superhero City', mascot: 'Mini-Sidekick' },
+    { name: 'Jurassic Jungle', mascot: 'Baby T-Rex' },
+    { name: 'Fantasy World', mascot: 'Wizard' },
+    { name: 'Space Explorer', mascot: 'Robot' }
+  ];
+
+  return (
+    <div className="selector">
+      <h1>Choose Your Adventure</h1>
+      <div className="grid">
+        {themes.map((t) => (
+          <button key={t.name} onClick={() => onComplete(t)}>
+            {t.name} 
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+
 
 // ─── Auth helpers ───────────────────────────────────────────────────────────
 // Tiny pub/sub on top of localStorage so AuthMenu and AuthGate stay in sync.
@@ -35459,9 +35509,13 @@ function TenthApp({ onBack }) {
 }
 
 function App() {
+  
   // Currently selected quiz mode (null = home menu, or key like 'gk', 'addition', etc.)
-  const [mode, setMode] = useState(null)
+ // Inside your App component
 
+const [step, setStep] = useState('welcome'); // 'welcome', 'chooseTheme', or 'dashboard'
+const [selectedTheme, setSelectedTheme] = useState(null);
+const [mode, setMode] = useState(null);
   // Current theme: 'dark' or 'light'
   // Initialized from localStorage with fallback to 'dark'
   const [theme, setTheme] = useState(() => {
@@ -36052,33 +36106,62 @@ function App() {
   // Get the component to render (or null if mode not set)
   const ActiveApp = mode ? modeMap[mode] : null
 
-  return (
-    <div className="app-shell">
-      <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-        {theme === 'dark' ? '☀️' : '🌙'}
-      </button>
-      <div className="card">
-        {!mode ? (
-          <Home onSelect={setMode} />
-        ) : ActiveApp ? (
-          <ActiveApp onBack={() => setMode(null)} />
-        ) : (
-          <Home onSelect={setMode} />
-        )}
-      </div>
-    </div>
-  )
-}
 
+ return (
+    <ThemeContext.Provider value={{ selectedTheme, setSelectedTheme }}>
+      {step === 'welcome' ? (
+        <div className="welcome-screen">
+          <h1>Welcome to Tenali</h1>
+          <button onClick={() => setStep('chooseTheme')}>Start Adventure</button>
+        </div>
+      ) : step === 'chooseTheme' ? (
+        <ThemeSelector onComplete={(theme) => {
+          setSelectedTheme(theme);
+          setStep('dashboard');
+        }} />
+      ) : (
+        <div className={`app-shell theme-${selectedTheme?.name?.toLowerCase() || 'default'}`}>
+          
+          {/* Dashboard Header Area */}
+          
+          <MascotDisplay themeName={selectedTheme?.name} />
+          {selectedTheme?.name === 'Fantasy World' && (
+            <div className="floating-container">
+              <span className="float-item castle">🏰</span>
+              <span className="float-item moon">🌙</span>
+              <span className="float-item broom-flying">🧹</span>
+              <span className="float-item crystal">🔮</span>
+            </div>
+          )}
+          
+          {/* UPDATED: Added glassmorphism style directly to the content card */}
+          <div className="card" style={{
+            backgroundColor: 'rgba(0, 0, 0, 0.3)',
+            backdropFilter: 'blur(8px)',
+            WebkitBackdropFilter: 'blur(8px)',
+            borderRadius: '16px',
+            boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.1)'
+          }}>
+            {!mode ? (
+              <Home onComplete={setMode} />
+            ) : (
+              <ActiveApp onBack={() => setMode(null)} />
+            )}
+          </div>
+        </div>
+      )}
+    </ThemeContext.Provider>
+  );
+}
 /**
  * Home Component
  * Main menu screen showing all available quizzes in a searchable grid.
  * Displays quiz cards with color coding and allows filtering by name/subtitle.
  *
  * @param {Object} props
- * @param {Function} props.onSelect - Callback when user selects a quiz: receives mode key (e.g., 'gk')
+ * @param {Function} props.onComplete - Callback when user selects a quiz: receives mode key (e.g., 'gk')
  */
-function Home({ onSelect }) {
+function Home({ onComplete }) {
   // Special featured apps (shown in highlighted first row)
   const featuredApps = [
     { key: 'randommix', name: 'Random Mix', subtitle: 'Adaptive cross-topic quiz', color: 'featured' },
@@ -36241,7 +36324,7 @@ function Home({ onSelect }) {
             padding: '6px 0', minWidth: '200px', overflow: 'hidden'
           }}>
             {featuredApps.map(app => (
-              <button key={app.key} onClick={() => { setMenuOpen(false); onSelect(app.key) }} style={{
+              <button key={app.key} onClick={() => { setMenuOpen(false); onComplete(app.key) }} style={{
                 display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
                 background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
                 fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)'
@@ -36265,7 +36348,7 @@ function Home({ onSelect }) {
       </div>
       <div className="menu-grid" ref={gridRef}>
         {filteredRegular.map((app) => (
-          <button key={app.key} className={`menu-card ${app.color}`} onClick={() => onSelect(app.key)}>
+          <button key={app.key} className={`menu-card ${app.color}`} onClick={() => onComplete(app.key)}>
             <span className="menu-title">{app.name}</span>
             <span className="menu-subtitle">{app.subtitle}</span>
           </button>
@@ -49574,4 +49657,4 @@ function QuizLayout({ title, subtitle, onBack, children, timer }) {
 export default App
 
 // Named export so main.jsx can render the global hamburger menu next to <App />
-export { AuthMenu }
+export { AuthMenu };

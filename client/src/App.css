@@ -50,6 +50,27 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap');
 
 /* ── Dark theme (default) ─────────────────────────────── */
+.welcome-screen, .selector {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.theme-grid, .grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.theme-grid button, .grid button {
+  padding: 15px 30px;
+  margin: 5px;
+}
+
 :root {
   /* TYPOGRAPHY FONT FAMILIES */
   --font-display: 'Source Serif 4', 'Georgia', serif;  /* Serif font for headings and emphasis */
@@ -2518,3 +2539,165 @@ button:disabled {
     margin: 0 3px;
   }
 }
+/* --- 1. Theme Definitions --- */
+
+
+/* --- 2. The Bridge (Apply variables here) --- */
+.app-shell {
+  background-color: var(--bg-color, white); /* Uses the theme variable */
+  color: var(--text-color, black);
+  min-height: 100vh;
+  transition: background-color 0.3s ease;
+}
+
+/* --- 3. Existing Layout --- */
+.welcome-screen, .selector {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.theme-grid, .grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.theme-grid button, .grid button {
+  padding: 15px 30px;
+  margin: 5px;
+}
+/* Container inside your dashboard */
+.mascot-wrapper {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+
+.mascot-emoji {
+  font-size: 150px;
+  /* The levitation animation */
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); } /* Bobs up 15px */
+  100% { transform: translateY(0px); }
+}
+
+.mascot-label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #eff1ed;
+  margin-top: 5px;
+}
+atmosphere-overlay {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+  font-size: 0.9rem;
+  pointer-events: none;
+}
+.theme-fantasy { background: linear-gradient(135deg, #2c3e50, #8e44ad); }
+.theme-superhero { background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); }
+.theme-jurassic { background: linear-gradient(135deg, #134e5e, #71b280); }
+.theme-space { background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); }
+/* Container remains the same */
+.floating-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow:visible;
+  z-index:0;
+}
+
+/* Individual Styles */
+.castle {
+  position: absolute;
+  top: 50;
+  right:20px;
+  font-size: 20rem; /* Big size */
+}
+
+.moon {
+  position: absolute;
+  top: 10%;
+  left: 15%;
+  font-size: 2.5rem;
+  animation: pulse 3s infinite; /* Different animation */
+}
+
+
+/* Add this to your existing animations */
+@keyframes flyDiagonal {
+  0% { transform: translate(5vw, 80vh); } /* Start off-screen left */
+  100% { transform: translate(80vh,5vw); } /* End off-screen right */
+}
+
+/* Add this class to your broom element */
+.broom-flying {
+  animation: flyDiagonal 10s linear infinite;
+  position: fixed;
+  top: 50%; /* Adjust height as needed */
+  font-size: 3rem;
+  overflow:visible;
+  z-index:-1;
+}
+
+.crystal {
+  position: absolute;
+  bottom: 15%;
+  right: 10%;
+  font-size: 10rem;
+  animation: pulse 3s infinite;
+}
+
+/* Define different animations */
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+@keyframes drift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+/* --- DYNAMIC THEME ACCENTS --- */
+
+/* If the selected theme is 'Fantasy World' */
+.app-shell.theme-fantasy {
+  --clr-accent: #e1b516;        /* Magical Purple */
+  --clr-accent-soft: rgba(155, 93, 229, 0.22);
+}
+
+/* If the selected theme is 'Space' */
+.app-shell.theme-space {
+  --clr-accent: #00b4d8;        /* Cosmic Blue */
+  --clr-accent-soft: rgba(0, 180, 216, 0.22);
+}
+
+/* If the selected theme is 'Jurassic Jungle' */
+.app-shell.theme-jurassic {
+  --clr-accent: #044647;        /* Jungle Green */
+  --clr-accent-soft: rgba(42, 157, 143, 0.22);
+}
+.app-shell.theme-superhero {
+  --clr-accent:#FBBF24;     /* Jungle Green */
+  --clr-accent-soft: rgba(42, 157, 143, 0.22);
+}
+
