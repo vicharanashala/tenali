@@ -2613,7 +2613,6 @@ atmosphere-overlay {
 .theme-fantasy { background: linear-gradient(135deg, #2c3e50, #8e44ad); }
 .theme-superhero { background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); }
 .theme-jurassic { background: linear-gradient(135deg, #134e5e, #71b280); }
-.theme-space { background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); }
 /* Container remains the same */
 .floating-container {
   position: absolute;
@@ -2700,4 +2699,244 @@ atmosphere-overlay {
   --clr-accent:#FBBF24;     /* Jungle Green */
   --clr-accent-soft: rgba(42, 157, 143, 0.22);
 }
+/* Space Theme Container */
+/* Active Space Theme Styling */
+.app-shell.theme-space {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  /* Deep space cosmic gradient */
+  background: radial-gradient(circle at center, #161f30 0%, #050608 100%);
+  color: #ffffff;
+  overflow: hidden;
+  transition: background 0.5s ease;
+}
 
+/* Creating the stars layer using box-shadows */
+/* Active Space Theme Styling */
+.app-shell.theme-space {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  background: radial-gradient(circle at center, #161f30 0%, #050608 100%);
+  color: #ffffff;
+  overflow: hidden;
+  transition: background 0.5s ease;
+}
+
+/* Creating the stars layer + adding twinkle animation */
+.app-shell.theme-space::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  box-shadow: 
+    15vw 10vh #fff, 35vw 25vh rgba(255,255,255,0.7), 75vw 15vh #fff, 
+    90vw 40vh rgba(255,255,255,0.8), 20vw 60vh #fff, 50vw 50vh rgba(255,255,255,0.5), 
+    85vw 70vh #fff, 10vw 85vh rgba(255,255,255,0.9), 60vw 80vh #fff,
+    40vw 90vh #fff, 65vw 30vh rgba(255,255,255,0.6), 80vw 95vh #fff;
+  
+  /* UPDATED: Runs the twinkle animation indefinitely */
+  animation: twinkle 3s infinite ease-in-out;
+}
+
+/* NEW: Twinkle Keyframes */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3; /* Stars dim down */
+  }
+  50% {
+    opacity: 1; /* Stars shine bright */
+  }
+}
+/* ==========================================
+   SPACE THEME STYLING & ANIMATIONS
+   ========================================== */
+
+/* Active Space Layout Wrapper */
+.app-shell.theme-space,
+[class*="theme-space"] {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  background: radial-gradient(circle at center, #161f30 0%, #050608 100%);
+  color: #ffffff;
+  overflow: hidden;
+  transition: background 0.5s ease;
+  z-index: 0;
+}
+
+/* Twinkling Star Layer Behind Everything */
+.app-shell.theme-space::before,
+[class*="theme-space"]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  box-shadow: 
+    15vw 10vh #fff, 35vw 25vh rgba(255,255,255,0.7), 75vw 15vh #fff, 
+    90vw 40vh rgba(255,255,255,0.8), 20vw 60vh #fff, 50vw 50vh rgba(255,255,255,0.5), 
+    85vw 70vh #fff, 10vw 85vh rgba(255,255,255,0.9), 60vw 80vh #fff,
+    40vw 90vh #fff, 65vw 30vh rgba(255,255,255,0.6), 80vw 95vh #fff;
+  animation: twinkle 3s infinite ease-in-out;
+  z-index: -1;
+}
+
+/* Global Floating Elements Sandbox Layer */
+.floating-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Rocket Motion Styling */
+.floating-container .rocket {
+  position: absolute;
+  bottom: 0;
+  left: 15%;
+  font-size: 2.5rem;
+  /* Starting point: completely hidden below the bottom left viewport boundary */
+  transform: translate(0, 100px) rotate(45deg); 
+  /* UPDATED: Slowed down to 15s for a beautiful, smooth cruise */
+  animation: rocketLaunch 15s infinite linear;
+}
+
+/* Star Twinkle Keyframe Configuration */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* UPDATED: Cleaned up for smooth, non-stop diagonal flight path */
+@keyframes rocketLaunch {
+  0% {
+    transform: translate(0, 100px) rotate(15deg);
+    opacity: 0;
+  }
+  /* Smoothly fade in over the first 10% of the flight */
+  10% {
+    opacity: 1;
+  }
+  /* Maintain solid visibility throughout the journey across space */
+  90% {
+    opacity: 1;
+  }
+  100% {
+    /* Exits smoothly through the top-right corner of the window */
+    transform: translate(80vw, -110vh) rotate(15deg);
+    opacity: 0;
+  }
+}
+/* Clean standalone engine matching your App.jsx layout */
+.floating-container .ufo-path-wrapper {
+  position: absolute;
+  bottom: 0;
+  right: 10%; 
+  font-size: 2.2rem;
+  z-index: 100;
+  animation: ufoFlight 12s infinite linear;
+}
+
+.floating-container .ufo-path-wrapper {
+  position: absolute;
+  bottom: 0;
+  right: 10%; 
+  font-size: 2.2rem;
+  z-index: 100;
+  animation: ufoFlight 14s infinite linear; /* Slightly increased total duration for three clean maneuvers */
+}
+
+@keyframes ufoFlight {
+  0% {
+    /* 1. STARTS BIG at launch */
+    transform: translate(100px, 100px) rotate(-20deg) scale(1.6);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+
+  /* ===================================================
+     PAUSE #1: Long Hover (15% to 30% of timeline)
+     =================================================== */
+  15% {
+    /* Arrives at first stop, size has reduced slightly */
+    transform: translate(-35vw, -25vh) rotate(-22deg) scale(1.4);
+  }
+  30% {
+    /* Holds completely still at first stop for a long interval */
+    transform: translate(-30vw, -25vh) rotate(-18deg) scale(1.3);
+  }
+
+  /* ===================================================
+     PAUSE #2: Short Quick Brake (45% to 50% of timeline)
+     =================================================== */
+  45% {
+    /* Moves to second stop, size continues shrinking */
+    transform: translate(-45vw, -55vh) rotate(-25deg) scale(1.1);
+  }
+  50% {
+    /* Holds briefly for a quick tactical scan */
+    transform: translate(-45vw, -55vh) rotate(-22deg) scale(1.0);
+  }
+
+  /* ===================================================
+     PAUSE #3: Medium Hover (65% to 75% of timeline)
+     =================================================== */
+  65% {
+    /* Moves to third stop deep in the trajectory path */
+    transform: translate(-80vw, -80vh) rotate(-28deg) scale(0.8);
+  }
+  75% {
+    /* Holds for a medium-length interval */
+    transform: translate(-70vw, -80vh) rotate(-25deg) scale(0.7);
+  }
+
+  /* ===================================================
+     FINAL EXIT: Speeds away while steadily fading into deep space
+     =================================================== */
+  95% {
+    opacity: 1;
+  }
+  100% {
+    /* Exits through the top left corner, reduced to a tiny dot */
+    transform: translate(-95vw, -115vh) rotate(-30deg) scale(0.3);
+    opacity: 0;
+  }
+}
+/* Position the planet wrapper firmly in the near bottom-right */
+/* Update the wrapper animation properties for a smooth pulse */
+.floating-container .vibrating-planet-wrapper {
+  position: absolute;
+  bottom: 8%;    
+  right: 6%;     
+  font-size: 10rem; 
+  z-index: 98;   
+  
+  /* UPDATED: Changed to 4 seconds, alternate loop, and ease-in-out for a smooth breathing pace */
+  animation: planetPulse 4s infinite ease-in-out alternate;
+}
+
+/* Smooth breathing pulsation engine */
+@keyframes planetPulse {
+  0% {
+    /* Baseline native size */
+    transform: scale(1);
+    filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0));
+  }
+  100% {
+    /* Expands slightly (5%) and adds a soft, breathing cosmic glow */
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 12px rgba(234, 179, 8, 0.4));
+  }
+}

@@ -36107,7 +36107,7 @@ const [mode, setMode] = useState(null);
   const ActiveApp = mode ? modeMap[mode] : null
 
 
- return (
+return (
     <ThemeContext.Provider value={{ selectedTheme, setSelectedTheme }}>
       {step === 'welcome' ? (
         <div className="welcome-screen">
@@ -36123,8 +36123,9 @@ const [mode, setMode] = useState(null);
         <div className={`app-shell theme-${selectedTheme?.name?.toLowerCase() || 'default'}`}>
           
           {/* Dashboard Header Area */}
-          
           <MascotDisplay themeName={selectedTheme?.name} />
+          
+          {/* Floating Elements for Fantasy World */}
           {selectedTheme?.name === 'Fantasy World' && (
             <div className="floating-container">
               <span className="float-item castle">🏰</span>
@@ -36133,14 +36134,35 @@ const [mode, setMode] = useState(null);
               <span className="float-item crystal">🔮</span>
             </div>
           )}
+
+         {/* Floating Elements for Space Theme (Robust Catch-All Matching) */}
+{(selectedTheme?.name?.toLowerCase().includes('space') || selectedTheme?.id?.toLowerCase().includes('space')) && (
+  <div className="floating-container">
+    
+    {/* 1. Rocket Wrapper (Uses the separated horizontal/vertical curve) */}
+    <div className="rocket-path-wrapper">
+      <span className="float-item rocket">🚀</span>
+    </div>
+
+    {/* 2. UFO Wrapper (Uses the standalone ufoFlight animation) */}
+    <div className="ufo-path-wrapper">
+      <span className="float-item ufo">🛸</span>
+    </div>
+    <div className="vibrating-planet-wrapper">
+      <span className="float-item planet">🌑</span>
+    </div>
+  </div>
+)}
           
-          {/* UPDATED: Added glassmorphism style directly to the content card */}
+          {/* Glassmorphism Content Card */}
           <div className="card" style={{
             backgroundColor: 'rgba(0, 0, 0, 0.3)',
             backdropFilter: 'blur(8px)',
             WebkitBackdropFilter: 'blur(8px)',
             borderRadius: '16px',
-            boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.1)'
+            boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.1)',
+            position: 'relative',
+            zIndex: 2 /* Sits firmly between background and floating emojis */
           }}>
             {!mode ? (
               <Home onComplete={setMode} />
@@ -36152,8 +36174,7 @@ const [mode, setMode] = useState(null);
       )}
     </ThemeContext.Provider>
   );
-}
-/**
+}/**
  * Home Component
  * Main menu screen showing all available quizzes in a searchable grid.
  * Displays quiz cards with color coding and allows filtering by name/subtitle.
