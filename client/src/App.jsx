@@ -22,6 +22,7 @@
  */
 
 import { useEffect, useState, useRef, useMemo } from 'react'
+import { io } from 'socket.io-client'
 import './App.css'
 
 // API base URL from environment variables (Vite)
@@ -556,6 +557,7 @@ function NumPad({ value, onChange, onSubmit, disabled, showDecimal, showSlash, s
         {showCaret && <button type="button" className="numpad-key numpad-special" onClick={() => press('^')} disabled={disabled}>^</button>}
         {showX && <button type="button" className="numpad-key numpad-special" onClick={() => press('x')} disabled={disabled}>x</button>}
         <button type="button" className="numpad-key numpad-special" onClick={() => press('⌫')} disabled={disabled}>⌫</button>
+        {onSubmit && <button type="button" className="numpad-key numpad-special" onClick={onSubmit} disabled={disabled} style={{ background: 'var(--accent)', color: '#fff' }}>↵</button>}
       </div>
     </div>
   )
@@ -35458,9 +35460,191 @@ function TenthApp({ onBack }) {
   )
 }
 
+// ─── Multiplayer Battle App ──────────────────────────────────────────────────
+function BattleApp({ onBack, topic }) {
+  const [socket, setSocket] = useState(null);
+  const [status, setStatus] = useState('waiting'); // menu, waiting, playing, finished
+  const [roomId, setRoomId] = useState(null);
+  const [players, setPlayers] = useState({});
+  const [question, setQuestion] = useState(null);
+  const [answer, setAnswer] = useState('');
+  const [winner, setWinner] = useState(null);
+  const [isIncorrect, setIsIncorrect] = useState(false);
+  const [selectedTopic, setSelectedTopic] = useState('tatsavit');
+
+  useEffect(() => {
+    const backendUrl = API || window.location.origin;
+    const s = io(backendUrl);
+    setSocket(s);
+
+    s.on('connect', () => {
+      console.log('Connected to battle server', s.id);
+      s.emit('join_match', { topic: topic || 'tatsavit' });
+    });
+
+    s.on('match_found', (data) => {
+      setRoomId(data.roomId);
+      setStatus('playing');
+    });
+
+    s.on('new_question', (q) => {
+      setQuestion(q);
+      setAnswer('');
+      setIsIncorrect(false);
+    });
+
+    s.on('score_update', (p) => {
+      setPlayers(p);
+    });
+
+    s.on('answer_incorrect', () => {
+      setIsIncorrect(true);
+      setTimeout(() => setIsIncorrect(false), 1000);
+    });
+
+    s.on('game_over', (data) => {
+      setPlayers(data.players);
+      setWinner(data.winner);
+      setStatus('finished');
+    });
+
+    s.on('opponent_disconnected', () => {
+      alert('Opponent disconnected!');
+      setStatus('menu');
+      setRoomId(null);
+    });
+
+    return () => {
+      s.disconnect();
+    };
+  }, []);
+
+
+
+  const handleSubmit = (e) => {
+    if (e) e.preventDefault();
+    if (!answer.trim() || !roomId) return;
+    socket.emit('submit_answer', { roomId, answer });
+  };
+
+  let myScore = 0;
+  let oppScore = 0;
+  let oppName = 'Opponent';
+  if (socket && players[socket.id]) {
+    myScore = players[socket.id].score;
+    const oppId = Object.keys(players).find(id => id !== socket.id);
+    if (oppId) {
+      oppScore = players[oppId].score;
+      if (oppId === 'BOT') oppName = 'Computer';
+    }
+  }
+
+
+
+  if (status === 'waiting') {
+    return (
+      <QuizLayout title="Live Battle" onBack={() => { socket.emit('disconnect'); onBack(); }}>
+        <div style={{ textAlign: 'center', padding: '2rem' }}>
+          <div className="spinner" style={{ margin: '0 auto 1rem', width: 40, height: 40, border: '4px solid var(--accent)', borderTopColor: 'transparent', borderRadius: '50%', animation: 'spin 1s linear infinite' }}></div>
+          <h2>Searching for opponent...</h2>
+          <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+        </div>
+      </QuizLayout>
+    );
+  }
+
+  if (status === 'finished') {
+    const isWinner = winner === socket.id;
+    return (
+      <QuizLayout title="Live Battle - Game Over" onBack={onBack}>
+        <div style={{ textAlign: 'center', padding: '2rem' }}>
+          <h1 style={{ fontSize: '3rem', color: isWinner ? 'var(--success)' : 'var(--danger)' }}>
+            {isWinner ? '🏆 You Win!' : '💀 You Lose!'}
+          </h1>
+          <h2 style={{ marginTop: '1rem' }}>Final Score: {myScore} - {oppScore}</h2>
+          <button className="btn-primary" onClick={() => { setStatus('waiting'); setWinner(null); setPlayers({}); socket.emit('join_match', { topic: topic || 'tatsavit' }); }} style={{ marginTop: '2rem' }}>
+            Play Again
+          </button>
+        </div>
+      </QuizLayout>
+    );
+  }
+
+  return (
+    <QuizLayout title="Live Battle" onBack={onBack}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem', background: 'var(--bg-secondary)', borderRadius: '12px', marginBottom: '2rem' }}>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: '0.9rem', opacity: 0.8 }}>You</div>
+          <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--accent)' }}>{myScore}</div>
+        </div>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: '0.9rem', opacity: 0.8 }}>{oppName}</div>
+          <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--danger)' }}>{oppScore}</div>
+        </div>
+      </div>
+      
+      {question && (
+        <div className="question-display" style={{ textAlign: 'center', margin: '2rem 0' }}>
+          {question.display ? (
+            <div dangerouslySetInnerHTML={{ __html: question.display }} />
+          ) : (
+            <div style={{ fontSize: '3rem', fontWeight: 'bold' }}>{question.prompt}</div>
+          )}
+        </div>
+      )}
+
+      {isIncorrect && (
+        <div style={{ textAlign: 'center', color: 'var(--danger)', fontWeight: 'bold', marginBottom: '1rem' }}>
+          Incorrect! Try again.
+        </div>
+      )}
+
+      {question && question.options && question.options.length > 0 ? (
+        <>
+          <div className="options-list" style={{ marginBottom: '2rem' }}>
+            {question.options.map((option, idx) => {
+              const letter = ['A', 'B', 'C', 'D'][idx];
+              return (
+                <label key={letter} className={`option-card ${answer === letter ? 'selected' : ''}`}>
+                  <input type="radio" checked={answer === letter} onChange={() => setAnswer(letter)} />
+                  <span><strong>{letter})</strong> {option}</span>
+                </label>
+              );
+            })}
+          </div>
+          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+            <button onClick={handleSubmit} className="btn-primary" style={{ padding: '0.5rem 2rem', fontSize: '1.2rem' }} disabled={!answer}>Submit</button>
+          </div>
+        </>
+      ) : (
+        <>
+          <form onSubmit={handleSubmit} style={{ textAlign: 'center', marginBottom: '2rem' }}>
+            <input 
+              type="text" 
+              value={answer} 
+              onChange={e => setAnswer(e.target.value)} 
+              className="answer-input"
+              placeholder="Type answer..." 
+              autoFocus 
+              style={{ width: '200px', textAlign: 'center', fontSize: '1.5rem', padding: '0.5rem' }}
+            />
+            <button type="submit" className="btn-primary" style={{ marginTop: '1rem', padding: '0.5rem 2rem', fontSize: '1.2rem' }}>Submit</button>
+          </form>
+          <NumPad 
+            value={answer} 
+            onChange={setAnswer} 
+            onSubmit={handleSubmit} 
+          />
+        </>
+      )}
+    </QuizLayout>
+  );
+}
+
 function App() {
   // Currently selected quiz mode (null = home menu, or key like 'gk', 'addition', etc.)
   const [mode, setMode] = useState(null)
+  const [battleTopic, setBattleTopic] = useState(null)
 
   // Current theme: 'dark' or 'light'
   // Initialized from localStorage with fallback to 'dark'
@@ -35966,6 +36150,7 @@ function App() {
   // ========== ROUTING: MODE-BASED (HOME MENU + QUIZZES) ==========
   // Map quiz mode keys to their component classes
   const modeMap = {
+    battle: BattleApp,
     gk: GKApp,                    // General Knowledge
     addition: AdditionApp,         // Basic addition
     quadratic: QuadraticApp,       // Quadratic substitution
@@ -36059,11 +36244,11 @@ function App() {
       </button>
       <div className="card">
         {!mode ? (
-          <Home onSelect={setMode} />
+          <Home onSelect={setMode} onSelectBattle={(topic) => { setBattleTopic(topic); setMode('battle'); }} />
         ) : ActiveApp ? (
-          <ActiveApp onBack={() => setMode(null)} />
+          <ActiveApp onBack={() => { setMode(null); setBattleTopic(null); }} topic={battleTopic} />
         ) : (
-          <Home onSelect={setMode} />
+          <Home onSelect={setMode} onSelectBattle={(topic) => { setBattleTopic(topic); setMode('battle'); }} />
         )}
       </div>
     </div>
@@ -36078,7 +36263,9 @@ function App() {
  * @param {Object} props
  * @param {Function} props.onSelect - Callback when user selects a quiz: receives mode key (e.g., 'gk')
  */
-function Home({ onSelect }) {
+function Home({ onSelect, onSelectBattle }) {
+  const [selectedApp, setSelectedApp] = useState(null);
+
   // Special featured apps (shown in highlighted first row)
   const featuredApps = [
     { key: 'randommix', name: 'Random Mix', subtitle: 'Adaptive cross-topic quiz', color: 'featured' },
@@ -36241,7 +36428,7 @@ function Home({ onSelect }) {
             padding: '6px 0', minWidth: '200px', overflow: 'hidden'
           }}>
             {featuredApps.map(app => (
-              <button key={app.key} onClick={() => { setMenuOpen(false); onSelect(app.key) }} style={{
+              <button key={app.key} onClick={() => { setMenuOpen(false); setSelectedApp(app) }} style={{
                 display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
                 background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
                 fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)'
@@ -36265,13 +36452,26 @@ function Home({ onSelect }) {
       </div>
       <div className="menu-grid" ref={gridRef}>
         {filteredRegular.map((app) => (
-          <button key={app.key} className={`menu-card ${app.color}`} onClick={() => onSelect(app.key)}>
+          <button key={app.key} className={`menu-card ${app.color}`} onClick={() => setSelectedApp(app)}>
             <span className="menu-title">{app.name}</span>
             <span className="menu-subtitle">{app.subtitle}</span>
           </button>
         ))}
       </div>
       <div className="grid-dimension">{rows} × {cols}</div>
+
+      {selectedApp && (
+        <div className="modal-overlay" onClick={() => setSelectedApp(null)} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
+          <div className="modal-content" onClick={e => e.stopPropagation()} style={{ background: 'var(--bg-primary)', padding: '2rem', borderRadius: '12px', textAlign: 'center', minWidth: '300px' }}>
+            <h2>{selectedApp.name}</h2>
+            <p style={{ margin: '1rem 0' }}>How would you like to play?</p>
+            <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem', justifyContent: 'center' }}>
+              <button className="btn-primary" onClick={() => onSelect(selectedApp.key)}>Single Player</button>
+              <button className="btn-primary" onClick={() => onSelectBattle(selectedApp.key)}>Live Battle</button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   )
 }
