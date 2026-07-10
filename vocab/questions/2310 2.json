@@ -1,0 +1,15 @@
+{
+  "id": 2310,
+  "word": "Brontide",
+  "question": "Brontide",
+  "options": [
+    "A female servant or attendant",
+    "The restless tossing of the body in illness",
+    "The practice of burying someone alive",
+    "A low rumbling sound like distant thunder"
+  ],
+  "answerOption": "D",
+  "answerText": "A low rumbling sound like distant thunder",
+  "difficulty": "extra-hard",
+  "sourceFile": "2310.json"
+}

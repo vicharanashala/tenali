@@ -1,0 +1,15 @@
+{
+  "id": 253,
+  "word": "Lead",
+  "question": "Lead",
+  "options": [
+    "Greatly pleased or entertained",
+    "Lacking interest or excitement",
+    "To show the way by going in front",
+    "Lacking consideration for other people"
+  ],
+  "answerOption": "C",
+  "answerText": "To show the way by going in front",
+  "difficulty": "easy",
+  "sourceFile": "0253.json"
+}

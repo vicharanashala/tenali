@@ -1,0 +1,15 @@
+{
+  "id": 125,
+  "word": "Coward",
+  "question": "Coward",
+  "options": [
+    "Of great importance; critical",
+    "To cause someone to feel sudden wonder",
+    "Using imagination to create new things",
+    "A person who lacks courage"
+  ],
+  "answerOption": "D",
+  "answerText": "A person who lacks courage",
+  "difficulty": "easy",
+  "sourceFile": "0125.json"
+}

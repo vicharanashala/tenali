@@ -1,0 +1,15 @@
+{
+  "id": 2169,
+  "word": "AEROMANTIC",
+  "question": "AEROMANTIC",
+  "options": [
+    "The property of varying with direction",
+    "An organism loving air",
+    "Relating to divination by air",
+    "Lacking a plan or purpose; random"
+  ],
+  "answerOption": "C",
+  "answerText": "Relating to divination by air",
+  "difficulty": "hard",
+  "sourceFile": "2169.json"
+}

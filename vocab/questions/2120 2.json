@@ -1,0 +1,15 @@
+{
+  "id": 2120,
+  "word": "Aerobiosis",
+  "question": "Aerobiosis",
+  "options": [
+    "Stubbornly refusing to change one's opinion",
+    "Of an airy nature",
+    "Medicine relating to aviation",
+    "Life dependent on air"
+  ],
+  "answerOption": "D",
+  "answerText": "Life dependent on air",
+  "difficulty": "hard",
+  "sourceFile": "2120.json"
+}

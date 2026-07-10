@@ -1,0 +1,15 @@
+{
+  "id": 1026,
+  "word": "Verbose",
+  "question": "Verbose",
+  "options": [
+    "The removal of salt from water",
+    "Using more words than are needed",
+    "Flourishing or spreading in an uncontrolled way",
+    "To lose courage or hope"
+  ],
+  "answerOption": "B",
+  "answerText": "Using more words than are needed",
+  "difficulty": "medium",
+  "sourceFile": "1026.json"
+}

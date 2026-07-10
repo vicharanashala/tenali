@@ -1,0 +1,15 @@
+{
+  "id": 745,
+  "word": "Terrestrial",
+  "question": "Terrestrial",
+  "options": [
+    "To point out the faults of something",
+    "To become aware of something",
+    "Moving slowly or apathetically",
+    "Relating to the earth or dry land"
+  ],
+  "answerOption": "D",
+  "answerText": "Relating to the earth or dry land",
+  "difficulty": "easy",
+  "sourceFile": "0745.json"
+}

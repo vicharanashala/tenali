@@ -1,0 +1,15 @@
+{
+  "id": 2007,
+  "word": "Adyta",
+  "question": "Adyta",
+  "options": [
+    "Having a harmful effect in a gradual way",
+    "The use of many words where fewer would do",
+    "Inner sanctum of a Greek temple",
+    "To absolve someone from blame"
+  ],
+  "answerOption": "C",
+  "answerText": "Inner sanctum of a Greek temple",
+  "difficulty": "hard",
+  "sourceFile": "2007.json"
+}

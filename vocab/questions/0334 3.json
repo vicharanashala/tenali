@@ -1,0 +1,15 @@
+{
+  "id": 334,
+  "word": "Assist",
+  "question": "Assist",
+  "options": [
+    "To help someone with a task",
+    "Working by itself with little human control",
+    "Large and heavy or solid",
+    "To combine different things together"
+  ],
+  "answerOption": "A",
+  "answerText": "To help someone with a task",
+  "difficulty": "easy",
+  "sourceFile": "0334.json"
+}

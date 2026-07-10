@@ -1,0 +1,15 @@
+{
+  "id": 179,
+  "word": "Lend",
+  "question": "Lend",
+  "options": [
+    "Having a strong unpleasant smell",
+    "To give something to someone temporarily",
+    "Lacking interest or excitement",
+    "To examine and make corrections to something"
+  ],
+  "answerOption": "B",
+  "answerText": "To give something to someone temporarily",
+  "difficulty": "easy",
+  "sourceFile": "0179.json"
+}

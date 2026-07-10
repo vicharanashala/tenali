@@ -1,0 +1,15 @@
+{
+  "id": 512,
+  "word": "Perceive",
+  "question": "Perceive",
+  "options": [
+    "Unusual or surprising; hard to explain",
+    "To rest on the surface of a liquid",
+    "Of great width between opposite sides",
+    "To become aware of through the senses"
+  ],
+  "answerOption": "D",
+  "answerText": "To become aware of through the senses",
+  "difficulty": "easy",
+  "sourceFile": "0512.json"
+}

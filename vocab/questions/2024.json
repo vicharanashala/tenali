@@ -1,0 +1,15 @@
+{
+  "id": 2024,
+  "word": "Deleterious",
+  "question": "Deleterious",
+  "options": [
+    "Lacking a plan or purpose; random",
+    "Causing harm or damage",
+    "Mapping from aircraft",
+    "To make mysterious or obscure"
+  ],
+  "answerOption": "B",
+  "answerText": "Causing harm or damage",
+  "difficulty": "hard",
+  "sourceFile": "2024.json"
+}

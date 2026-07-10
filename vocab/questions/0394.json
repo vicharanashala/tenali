@@ -1,0 +1,15 @@
+{
+  "id": 394,
+  "word": "Decay",
+  "question": "Decay",
+  "options": [
+    "To rot and break down over time",
+    "To make a statement less confusing",
+    "To pick out something from alternatives",
+    "To offer suggestions about the best action"
+  ],
+  "answerOption": "A",
+  "answerText": "To rot and break down over time",
+  "difficulty": "easy",
+  "sourceFile": "0394.json"
+}

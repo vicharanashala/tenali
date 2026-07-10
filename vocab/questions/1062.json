@@ -1,0 +1,15 @@
+{
+  "id": 1062,
+  "word": "Optimistic",
+  "question": "Optimistic",
+  "options": [
+    "To make disorderly or insane",
+    "To shock someone into taking action",
+    "To become gradually worse",
+    "Hopeful and confident about the future"
+  ],
+  "answerOption": "D",
+  "answerText": "Hopeful and confident about the future",
+  "difficulty": "medium",
+  "sourceFile": "1062.json"
+}

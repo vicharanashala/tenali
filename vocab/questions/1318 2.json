@@ -1,0 +1,15 @@
+{
+  "id": 1318,
+  "word": "Magniloquent",
+  "question": "Magniloquent",
+  "options": [
+    "Cunning and unscrupulous in politics",
+    "Pompous or extravagant in language",
+    "Unreasonably prone to go to law",
+    "Using high-flown or bombastic language"
+  ],
+  "answerOption": "D",
+  "answerText": "Using high-flown or bombastic language",
+  "difficulty": "hard",
+  "sourceFile": "1318.json"
+}

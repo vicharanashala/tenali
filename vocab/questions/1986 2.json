@@ -1,0 +1,15 @@
+{
+  "id": 1986,
+  "word": "Advisal",
+  "question": "Advisal",
+  "options": [
+    "Exposed to or mixed with air",
+    "The act of advising someone",
+    "Mental calmness in a difficult situation",
+    "To publicly support or recommend"
+  ],
+  "answerOption": "B",
+  "answerText": "The act of advising someone",
+  "difficulty": "hard",
+  "sourceFile": "1986.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1524,
+  "word": "Depths",
+  "question": "Depths",
+  "options": [
+    "One who detracts or disparages",
+    "Required officially or necessarily",
+    "The deepest or most remote parts",
+    "Using more words than are needed"
+  ],
+  "answerOption": "C",
+  "answerText": "The deepest or most remote parts",
+  "difficulty": "medium",
+  "sourceFile": "1524.json"
+}

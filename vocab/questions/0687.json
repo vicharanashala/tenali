@@ -1,0 +1,15 @@
+{
+  "id": 687,
+  "word": "Frail",
+  "question": "Frail",
+  "options": [
+    "Not asleep; fully conscious",
+    "Weak and delicate in health",
+    "Able to be relied on as honest",
+    "Based on clear thought and reason"
+  ],
+  "answerOption": "B",
+  "answerText": "Weak and delicate in health",
+  "difficulty": "easy",
+  "sourceFile": "0687.json"
+}

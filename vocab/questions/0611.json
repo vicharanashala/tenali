@@ -1,0 +1,15 @@
+{
+  "id": 611,
+  "word": "Vivid",
+  "question": "Vivid",
+  "options": [
+    "To make it easier for someone to do something",
+    "Elaborately or highly decorated",
+    "Able to move quickly and easily",
+    "Producing powerful feelings or strong images"
+  ],
+  "answerOption": "D",
+  "answerText": "Producing powerful feelings or strong images",
+  "difficulty": "easy",
+  "sourceFile": "0611.json"
+}

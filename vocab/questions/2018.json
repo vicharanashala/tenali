@@ -1,0 +1,15 @@
+{
+  "id": 2018,
+  "word": "Vacillate",
+  "question": "Vacillate",
+  "options": [
+    "To alternate between different opinions",
+    "In an adventurous manner",
+    "The action of corroborating something",
+    "A fine, filmy substance; something very light"
+  ],
+  "answerOption": "A",
+  "answerText": "To alternate between different opinions",
+  "difficulty": "hard",
+  "sourceFile": "2018.json"
+}

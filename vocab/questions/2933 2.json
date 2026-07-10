@@ -1,0 +1,15 @@
+{
+  "id": 2933,
+  "word": "Abilene",
+  "question": "Abilene",
+  "options": [
+    "In a manner that abets",
+    "In a temperate manner",
+    "A city in Texas",
+    "The act of sneezing"
+  ],
+  "answerOption": "C",
+  "answerText": "A city in Texas",
+  "difficulty": "extra-hard",
+  "sourceFile": "2933.json"
+}

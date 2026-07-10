@@ -1,0 +1,15 @@
+{
+  "id": 1203,
+  "word": "Substantiate",
+  "question": "Substantiate",
+  "options": [
+    "A system where power rests with people",
+    "Intended for a small group",
+    "To provide evidence to support a claim",
+    "Clearing forest to use the land"
+  ],
+  "answerOption": "C",
+  "answerText": "To provide evidence to support a claim",
+  "difficulty": "medium",
+  "sourceFile": "1203.json"
+}

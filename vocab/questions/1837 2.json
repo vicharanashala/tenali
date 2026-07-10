@@ -1,0 +1,15 @@
+{
+  "id": 1837,
+  "word": "Esoteric",
+  "question": "Esoteric",
+  "options": [
+    "Intended for a small group with special knowledge",
+    "Feeling calm and relaxed; not worried",
+    "The action of killing a king",
+    "A prefix meaning other or different"
+  ],
+  "answerOption": "A",
+  "answerText": "Intended for a small group with special knowledge",
+  "difficulty": "hard",
+  "sourceFile": "1837.json"
+}

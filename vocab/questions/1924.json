@@ -1,0 +1,15 @@
+{
+  "id": 1924,
+  "word": "Distorted",
+  "question": "Distorted",
+  "options": [
+    "Causing someone to feel insulted",
+    "Feeling cautious about possible dangers",
+    "Pulled or twisted out of shape",
+    "Defiant of authority or discipline"
+  ],
+  "answerOption": "C",
+  "answerText": "Pulled or twisted out of shape",
+  "difficulty": "medium",
+  "sourceFile": "1924.json"
+}

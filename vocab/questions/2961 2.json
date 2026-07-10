@@ -1,0 +1,15 @@
+{
+  "id": 2961,
+  "word": "Abissal",
+  "question": "Abissal",
+  "options": [
+    "Mystic or entrancing in nature",
+    "Remaining or continuing in place",
+    "Buzzing or making a buzz",
+    "Relating to the abyssal depths"
+  ],
+  "answerOption": "D",
+  "answerText": "Relating to the abyssal depths",
+  "difficulty": "extra-hard",
+  "sourceFile": "2961.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 108,
+  "word": "Rare",
+  "question": "Rare",
+  "options": [
+    "To give attention to sound or speech",
+    "A long journey by sea or space",
+    "To cause something to come closer",
+    "Not found in large numbers; uncommon"
+  ],
+  "answerOption": "D",
+  "answerText": "Not found in large numbers; uncommon",
+  "difficulty": "easy",
+  "sourceFile": "0108.json"
+}

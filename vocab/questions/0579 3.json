@@ -1,0 +1,15 @@
+{
+  "id": 579,
+  "word": "Pessimistic",
+  "question": "Pessimistic",
+  "options": [
+    "Not supporting either side in a conflict",
+    "Expecting the worst possible outcome",
+    "An act of saying goodbye",
+    "Having a strong or hot flavor from seasoning"
+  ],
+  "answerOption": "B",
+  "answerText": "Expecting the worst possible outcome",
+  "difficulty": "easy",
+  "sourceFile": "0579.json"
+}

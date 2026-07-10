@@ -1,0 +1,15 @@
+{
+  "id": 691,
+  "word": "Trivial",
+  "question": "Trivial",
+  "options": [
+    "To study something thoroughly",
+    "Having high moral standards",
+    "To achieve or realize something desired",
+    "Of very little importance"
+  ],
+  "answerOption": "D",
+  "answerText": "Of very little importance",
+  "difficulty": "easy",
+  "sourceFile": "0691.json"
+}

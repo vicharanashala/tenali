@@ -1,0 +1,15 @@
+{
+  "id": 548,
+  "word": "Persuade",
+  "question": "Persuade",
+  "options": [
+    "Devoted to a task or purpose",
+    "Next to or adjoining something else",
+    "To cause someone to believe something",
+    "Hot and humid weather or manner"
+  ],
+  "answerOption": "C",
+  "answerText": "To cause someone to believe something",
+  "difficulty": "easy",
+  "sourceFile": "0548.json"
+}

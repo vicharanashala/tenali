@@ -1,0 +1,15 @@
+{
+  "id": 615,
+  "word": "Lively",
+  "question": "Lively",
+  "options": [
+    "Relating to the earth or dry land",
+    "Having a natural ability to do something well",
+    "Full of life and energy",
+    "To cause someone to lose confidence"
+  ],
+  "answerOption": "C",
+  "answerText": "Full of life and energy",
+  "difficulty": "easy",
+  "sourceFile": "0615.json"
+}

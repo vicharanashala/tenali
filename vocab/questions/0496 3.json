@@ -1,0 +1,15 @@
+{
+  "id": 496,
+  "word": "Monitor",
+  "question": "Monitor",
+  "options": [
+    "Moving at a low speed",
+    "To have a commanding influence over something",
+    "Of or at a low temperature",
+    "To observe and check progress over time"
+  ],
+  "answerOption": "D",
+  "answerText": "To observe and check progress over time",
+  "difficulty": "easy",
+  "sourceFile": "0496.json"
+}

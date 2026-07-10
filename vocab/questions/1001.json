@@ -1,0 +1,15 @@
+{
+  "id": 1001,
+  "word": "Benevolent",
+  "question": "Benevolent",
+  "options": [
+    "Well meaning and kindly toward others",
+    "To detract from the rank or dignity",
+    "Easily crumbled or reduced",
+    "The quality of being loyal"
+  ],
+  "answerOption": "A",
+  "answerText": "Well meaning and kindly toward others",
+  "difficulty": "medium",
+  "sourceFile": "1001.json"
+}

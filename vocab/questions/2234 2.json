@@ -1,0 +1,15 @@
+{
+  "id": 2234,
+  "word": "AEROSPERM",
+  "question": "AEROSPERM",
+  "options": [
+    "Complaining in a petulant or whining manner",
+    "A seed dispersed by air",
+    "Lasting for a very short time",
+    "Technology for air use"
+  ],
+  "answerOption": "B",
+  "answerText": "A seed dispersed by air",
+  "difficulty": "hard",
+  "sourceFile": "2234.json"
+}

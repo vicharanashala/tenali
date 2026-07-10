@@ -1,0 +1,15 @@
+{
+  "id": 233,
+  "word": "Doubt",
+  "question": "Doubt",
+  "options": [
+    "To feel uncertain about something",
+    "To find out the facts about something",
+    "To drive or force something away",
+    "To do something repeatedly to improve"
+  ],
+  "answerOption": "A",
+  "answerText": "To feel uncertain about something",
+  "difficulty": "easy",
+  "sourceFile": "0233.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2018,
+  "word": "Aegir",
+  "question": "Aegir",
+  "options": [
+    "In relation to atmosphere",
+    "Dislike of people from other countries",
+    "Norse god of the sea",
+    "Building a nest in the air"
+  ],
+  "answerOption": "C",
+  "answerText": "Norse god of the sea",
+  "difficulty": "hard",
+  "sourceFile": "2018.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 253,
+  "word": "Lead",
+  "question": "Lead",
+  "options": [
+    "Moving with speed or done rapidly",
+    "Having or showing a lack of common sense",
+    "To study something thoroughly",
+    "To show the way by going in front"
+  ],
+  "answerOption": "D",
+  "answerText": "To show the way by going in front",
+  "difficulty": "easy",
+  "sourceFile": "0253.json"
+}

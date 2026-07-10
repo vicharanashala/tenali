@@ -1,0 +1,15 @@
+{
+  "id": 145,
+  "word": "Graceful",
+  "question": "Graceful",
+  "options": [
+    "Free of deceit; truthful",
+    "To be the property of someone",
+    "Noticeably happy and optimistic",
+    "Having elegance of movement"
+  ],
+  "answerOption": "D",
+  "answerText": "Having elegance of movement",
+  "difficulty": "easy",
+  "sourceFile": "0145.json"
+}

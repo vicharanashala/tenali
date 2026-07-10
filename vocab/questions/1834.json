@@ -1,0 +1,15 @@
+{
+  "id": 1834,
+  "word": "Economical",
+  "question": "Economical",
+  "options": [
+    "To become gradually worse",
+    "Steady and resolute; not changing",
+    "Providing good value",
+    "Able to exist together"
+  ],
+  "answerOption": "C",
+  "answerText": "Providing good value",
+  "difficulty": "medium",
+  "sourceFile": "1834.json"
+}

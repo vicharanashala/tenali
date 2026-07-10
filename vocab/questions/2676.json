@@ -1,0 +1,15 @@
+{
+  "id": 2676,
+  "word": "Barrier",
+  "question": "Barrier",
+  "options": [
+    "Swallowing of air",
+    "A lover of flying or air",
+    "Description of air and atmosphere",
+    "Something that prevents movement"
+  ],
+  "answerOption": "D",
+  "answerText": "Something that prevents movement",
+  "difficulty": "hard",
+  "sourceFile": "2676.json"
+}

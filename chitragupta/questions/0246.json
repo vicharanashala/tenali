@@ -1,0 +1,14 @@
+{
+  "id": 246,
+  "question": "Which branch of government interprets the law?",
+  "options": [
+    "Executive",
+    "Legislature",
+    "Judiciary",
+    "Secretariat"
+  ],
+  "answerOption": "C",
+  "answerText": "Judiciary",
+  "genre": "mixed",
+  "sourceFile": "0246.json"
+}

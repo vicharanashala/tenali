@@ -1,0 +1,15 @@
+{
+  "id": 1630,
+  "word": "Despondency",
+  "question": "Despondency",
+  "options": [
+    "Not easily upset or excited; calm",
+    "A state of low spirits",
+    "Making a loud confused noise; uproarious",
+    "To continue in a course of action"
+  ],
+  "answerOption": "B",
+  "answerText": "A state of low spirits",
+  "difficulty": "medium",
+  "sourceFile": "1630.json"
+}

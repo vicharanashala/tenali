@@ -1,0 +1,15 @@
+{
+  "id": 26,
+  "word": "Candid",
+  "question": "Candid",
+  "options": [
+    "Strange or unusual in character",
+    "Showing careful and persistent effort",
+    "Truthful and straightforward; frank",
+    "Giving the impression that something bad will happen"
+  ],
+  "answerOption": "C",
+  "answerText": "Truthful and straightforward; frank",
+  "difficulty": "medium",
+  "sourceFile": "0026.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 401,
+  "word": "Transform",
+  "question": "Transform",
+  "options": [
+    "Happening by chance; unintentional",
+    "To make a thorough change in form",
+    "To keep safe from harm or injury",
+    "To study something thoroughly"
+  ],
+  "answerOption": "B",
+  "answerText": "To make a thorough change in form",
+  "difficulty": "easy",
+  "sourceFile": "0401.json"
+}

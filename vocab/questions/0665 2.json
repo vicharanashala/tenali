@@ -1,0 +1,15 @@
+{
+  "id": 665,
+  "word": "Immense",
+  "question": "Immense",
+  "options": [
+    "To drive or force something away",
+    "Extremely large or great in scale",
+    "Acting with care and thought for the future",
+    "Notably large in size or amount"
+  ],
+  "answerOption": "B",
+  "answerText": "Extremely large or great in scale",
+  "difficulty": "easy",
+  "sourceFile": "0665.json"
+}

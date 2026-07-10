@@ -1,0 +1,15 @@
+{
+  "id": 2430,
+  "word": "Palimpsest",
+  "question": "Palimpsest",
+  "options": [
+    "A journey on foot; travels",
+    "Something bearing visible traces of an earlier form",
+    "A commotion or fuss caused by disagreement",
+    "The quality of being abject"
+  ],
+  "answerOption": "B",
+  "answerText": "Something bearing visible traces of an earlier form",
+  "difficulty": "extra-hard",
+  "sourceFile": "2430.json"
+}

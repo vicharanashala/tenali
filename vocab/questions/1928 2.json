@@ -1,0 +1,15 @@
+{
+  "id": 1928,
+  "word": "Adulterated",
+  "question": "Adulterated",
+  "options": [
+    "A public speech of praise",
+    "Made worse by adding inferior matter",
+    "A person who commits adultery",
+    "Intended to gain goodwill or reduce hostility"
+  ],
+  "answerOption": "B",
+  "answerText": "Made worse by adding inferior matter",
+  "difficulty": "hard",
+  "sourceFile": "1928.json"
+}

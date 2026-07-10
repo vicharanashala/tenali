@@ -1,0 +1,14 @@
+{
+  "id": 630,
+  "question": "Which Indian union territory has Jammu as its winter capital and Srinagar as its summer capital?",
+  "options": [
+    "Ladakh",
+    "Jammu and Kashmir",
+    "Delhi",
+    "Chandigarh"
+  ],
+  "answerOption": "B",
+  "answerText": "Jammu and Kashmir",
+  "genre": "geography",
+  "sourceFile": "0630.json"
+}

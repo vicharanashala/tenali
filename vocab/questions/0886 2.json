@@ -1,0 +1,15 @@
+{
+  "id": 886,
+  "word": "Hectic",
+  "question": "Hectic",
+  "options": [
+    "Based on observation rather than theory",
+    "Lacking energy or enthusiasm",
+    "Making a loud confused noise; uproarious",
+    "Full of incessant activity"
+  ],
+  "answerOption": "D",
+  "answerText": "Full of incessant activity",
+  "difficulty": "medium",
+  "sourceFile": "0886.json"
+}

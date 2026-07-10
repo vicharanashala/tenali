@@ -1,0 +1,15 @@
+{
+  "id": 615,
+  "word": "Lively",
+  "question": "Lively",
+  "options": [
+    "Calm, peaceful, and untroubled",
+    "To keep away from something",
+    "Having the skill to do something well",
+    "Full of life and energy"
+  ],
+  "answerOption": "D",
+  "answerText": "Full of life and energy",
+  "difficulty": "easy",
+  "sourceFile": "0615.json"
+}

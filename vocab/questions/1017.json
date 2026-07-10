@@ -1,0 +1,15 @@
+{
+  "id": 1017,
+  "word": "Resilient",
+  "question": "Resilient",
+  "options": [
+    "A place where things are stored",
+    "Lacking compassion or kindness",
+    "Able to recover quickly from difficulties",
+    "To reduce in extent or quantity"
+  ],
+  "answerOption": "C",
+  "answerText": "Able to recover quickly from difficulties",
+  "difficulty": "medium",
+  "sourceFile": "1017.json"
+}

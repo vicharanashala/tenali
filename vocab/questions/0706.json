@@ -1,0 +1,15 @@
+{
+  "id": 706,
+  "word": "Regular",
+  "question": "Regular",
+  "options": [
+    "To express dissatisfaction about something",
+    "Arranged in a constant pattern",
+    "To walk slowly with no clear direction",
+    "To tell someone you will definitely do something"
+  ],
+  "answerOption": "B",
+  "answerText": "Arranged in a constant pattern",
+  "difficulty": "easy",
+  "sourceFile": "0706.json"
+}

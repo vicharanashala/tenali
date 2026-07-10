@@ -1,0 +1,15 @@
+{
+  "id": 779,
+  "word": "Genuine",
+  "question": "Genuine",
+  "options": [
+    "Protected from danger or risk",
+    "To grow and develop well",
+    "Truly what something is said to be",
+    "Very cold in temperature"
+  ],
+  "answerOption": "C",
+  "answerText": "Truly what something is said to be",
+  "difficulty": "easy",
+  "sourceFile": "0779.json"
+}

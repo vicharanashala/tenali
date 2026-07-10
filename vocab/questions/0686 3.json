@@ -1,0 +1,15 @@
+{
+  "id": 686,
+  "word": "Feeble",
+  "question": "Feeble",
+  "options": [
+    "Going straight up and down",
+    "Lacking physical strength",
+    "To start doing something",
+    "Very beautiful or attractive"
+  ],
+  "answerOption": "B",
+  "answerText": "Lacking physical strength",
+  "difficulty": "easy",
+  "sourceFile": "0686.json"
+}

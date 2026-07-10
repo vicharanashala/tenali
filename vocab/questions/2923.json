@@ -1,0 +1,15 @@
+{
+  "id": 2923,
+  "word": "Bestowment",
+  "question": "Bestowment",
+  "options": [
+    "The action of bestowing something",
+    "The action of giving birth",
+    "An organism loving air",
+    "The action of taking an oath"
+  ],
+  "answerOption": "A",
+  "answerText": "The action of bestowing something",
+  "difficulty": "hard",
+  "sourceFile": "2923.json"
+}

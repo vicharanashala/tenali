@@ -1,0 +1,15 @@
+{
+  "id": 796,
+  "word": "Neutral",
+  "question": "Neutral",
+  "options": [
+    "To continue in spite of difficulty",
+    "Having a high amount of moisture in the air",
+    "Containing as much as possible; filled completely",
+    "Not supporting either side in a conflict"
+  ],
+  "answerOption": "D",
+  "answerText": "Not supporting either side in a conflict",
+  "difficulty": "easy",
+  "sourceFile": "0796.json"
+}

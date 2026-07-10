@@ -1,0 +1,15 @@
+{
+  "id": 992,
+  "word": "Succulent",
+  "question": "Succulent",
+  "options": [
+    "Tender and juicy in food",
+    "To move through the air with wings",
+    "To begin to grow; to produce shoots",
+    "Willing to give more than is expected"
+  ],
+  "answerOption": "A",
+  "answerText": "Tender and juicy in food",
+  "difficulty": "easy",
+  "sourceFile": "0992.json"
+}

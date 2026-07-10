@@ -1,0 +1,15 @@
+{
+  "id": 1852,
+  "word": "Simplistic",
+  "question": "Simplistic",
+  "options": [
+    "Too simple or simplified",
+    "Not ready or equipped",
+    "Relating to machines or mechanics",
+    "Made or occurring without plan"
+  ],
+  "answerOption": "A",
+  "answerText": "Too simple or simplified",
+  "difficulty": "medium",
+  "sourceFile": "1852.json"
+}

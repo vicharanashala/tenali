@@ -1,0 +1,15 @@
+{
+  "id": 758,
+  "word": "Stormy",
+  "question": "Stormy",
+  "options": [
+    "To give someone the means to do something",
+    "Having strong winds and usually rain",
+    "Truly what something is said to be",
+    "Arranged neatly and in order"
+  ],
+  "answerOption": "B",
+  "answerText": "Having strong winds and usually rain",
+  "difficulty": "easy",
+  "sourceFile": "0758.json"
+}

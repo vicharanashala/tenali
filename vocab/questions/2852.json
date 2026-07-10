@@ -1,0 +1,15 @@
+{
+  "id": 2852,
+  "word": "Revitalization",
+  "question": "Revitalization",
+  "options": [
+    "A trace of something that once existed",
+    "Pain from atmospheric pressure",
+    "Relating to air pressure balance",
+    "The action of giving new energy"
+  ],
+  "answerOption": "D",
+  "answerText": "The action of giving new energy",
+  "difficulty": "hard",
+  "sourceFile": "2852.json"
+}

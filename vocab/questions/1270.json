@@ -1,0 +1,15 @@
+{
+  "id": 1270,
+  "word": "Whimsy",
+  "question": "Whimsy",
+  "options": [
+    "Playfully quaint or fanciful behavior",
+    "Seeking to take revenge",
+    "To discourage someone from doing something",
+    "Lacking basic necessities or resources"
+  ],
+  "answerOption": "A",
+  "answerText": "Playfully quaint or fanciful behavior",
+  "difficulty": "medium",
+  "sourceFile": "1270.json"
+}

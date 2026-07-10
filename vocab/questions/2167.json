@@ -1,0 +1,15 @@
+{
+  "id": 2167,
+  "word": "Sardonic",
+  "question": "Sardonic",
+  "options": [
+    "A soft boggy area; a complex situation",
+    "Grimly mocking or cynical",
+    "An earnest or solemn request",
+    "Faithful adherence to a person"
+  ],
+  "answerOption": "B",
+  "answerText": "Grimly mocking or cynical",
+  "difficulty": "hard",
+  "sourceFile": "2167.json"
+}

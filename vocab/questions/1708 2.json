@@ -1,0 +1,15 @@
+{
+  "id": 1708,
+  "word": "Quagmire",
+  "question": "Quagmire",
+  "options": [
+    "The state of being unaware of surroundings",
+    "A soft boggy area; a complex situation",
+    "Sarcastic in a scathing and bitter way",
+    "A person who commits adultery"
+  ],
+  "answerOption": "B",
+  "answerText": "A soft boggy area; a complex situation",
+  "difficulty": "hard",
+  "sourceFile": "1708.json"
+}

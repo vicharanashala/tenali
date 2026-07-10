@@ -1,0 +1,15 @@
+{
+  "id": 614,
+  "word": "Energetic",
+  "question": "Energetic",
+  "options": [
+    "To spring back after hitting a surface",
+    "Showing great activity or vitality",
+    "To go out of or leave a place",
+    "Of great extent from side to side"
+  ],
+  "answerOption": "B",
+  "answerText": "Showing great activity or vitality",
+  "difficulty": "easy",
+  "sourceFile": "0614.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1674,
+  "word": "Detection",
+  "question": "Detection",
+  "options": [
+    "Feeling distrust or doubt",
+    "To engage in a close fight or struggle",
+    "The action of discovering something",
+    "Kept secret or done in a hidden way"
+  ],
+  "answerOption": "C",
+  "answerText": "The action of discovering something",
+  "difficulty": "medium",
+  "sourceFile": "1674.json"
+}

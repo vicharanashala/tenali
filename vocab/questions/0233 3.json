@@ -1,0 +1,15 @@
+{
+  "id": 233,
+  "word": "Doubt",
+  "question": "Doubt",
+  "options": [
+    "To extend to full length",
+    "Known for sure; established beyond doubt",
+    "To find the size or amount of something",
+    "To feel uncertain about something"
+  ],
+  "answerOption": "D",
+  "answerText": "To feel uncertain about something",
+  "difficulty": "easy",
+  "sourceFile": "0233.json"
+}

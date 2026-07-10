@@ -1,0 +1,15 @@
+{
+  "id": 343,
+  "word": "Chase",
+  "question": "Chase",
+  "options": [
+    "Having an excessively high opinion of oneself",
+    "To run after someone to catch them",
+    "To move a spoon around in a liquid",
+    "Willing to give more than is expected"
+  ],
+  "answerOption": "B",
+  "answerText": "To run after someone to catch them",
+  "difficulty": "easy",
+  "sourceFile": "0343.json"
+}

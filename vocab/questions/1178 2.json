@@ -1,0 +1,15 @@
+{
+  "id": 1178,
+  "word": "Hapless",
+  "question": "Hapless",
+  "options": [
+    "Indicating mild puzzlement",
+    "A person who dislikes humankind",
+    "Making a loud, confused noise",
+    "Unfortunate and deserving of pity"
+  ],
+  "answerOption": "D",
+  "answerText": "Unfortunate and deserving of pity",
+  "difficulty": "hard",
+  "sourceFile": "1178.json"
+}

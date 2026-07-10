@@ -1,0 +1,15 @@
+{
+  "id": 1304,
+  "word": "Venal",
+  "question": "Venal",
+  "options": [
+    "Showing susceptibility to bribery",
+    "Something that belongs to a different time",
+    "Shady; tending to take offense easily",
+    "Little known; abstruse and difficult"
+  ],
+  "answerOption": "A",
+  "answerText": "Showing susceptibility to bribery",
+  "difficulty": "hard",
+  "sourceFile": "1304.json"
+}

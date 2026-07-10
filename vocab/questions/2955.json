@@ -1,0 +1,15 @@
+{
+  "id": 2955,
+  "word": "Swearing",
+  "question": "Swearing",
+  "options": [
+    "The state of being a fully developed adult",
+    "Loving air exposure",
+    "The action of taking an oath",
+    "The quality of being adustious"
+  ],
+  "answerOption": "C",
+  "answerText": "The action of taking an oath",
+  "difficulty": "hard",
+  "sourceFile": "2955.json"
+}

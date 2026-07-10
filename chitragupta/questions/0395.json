@@ -1,0 +1,14 @@
+{
+  "id": 395,
+  "question": "Which city is the capital of Chhattisgarh?",
+  "options": [
+    "Bilaspur",
+    "Durg",
+    "Raipur",
+    "Korba"
+  ],
+  "answerOption": "C",
+  "answerText": "Raipur",
+  "genre": "geography",
+  "sourceFile": "0395.json"
+}

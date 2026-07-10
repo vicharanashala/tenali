@@ -1,0 +1,15 @@
+{
+  "id": 60,
+  "word": "Difficult",
+  "question": "Difficult",
+  "options": [
+    "Needing much effort or skill to accomplish",
+    "To take part in something",
+    "Showing a willingness to take risks",
+    "To keep safe from harm or injury"
+  ],
+  "answerOption": "A",
+  "answerText": "Needing much effort or skill to accomplish",
+  "difficulty": "easy",
+  "sourceFile": "0060.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2904,
+  "word": "Origination",
+  "question": "Origination",
+  "options": [
+    "Something handed down from predecessor",
+    "The quality of being certain",
+    "A substance sprayed as fine mist",
+    "The action of creating or originating"
+  ],
+  "answerOption": "D",
+  "answerText": "The action of creating or originating",
+  "difficulty": "hard",
+  "sourceFile": "2904.json"
+}

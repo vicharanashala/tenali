@@ -1,0 +1,14 @@
+{
+  "id": 426,
+  "question": "Which city is the capital of Manipur?",
+  "options": [
+    "Kohima",
+    "Aizawl",
+    "Imphal",
+    "Agartala"
+  ],
+  "answerOption": "C",
+  "answerText": "Imphal",
+  "genre": "geography",
+  "sourceFile": "0426.json"
+}

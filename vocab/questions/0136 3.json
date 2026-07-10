@@ -1,0 +1,15 @@
+{
+  "id": 136,
+  "word": "Strange",
+  "question": "Strange",
+  "options": [
+    "To cause a liquid to flow over the edge",
+    "Unusual or surprising; hard to explain",
+    "Open to more than one interpretation",
+    "To break up and move earth with a tool"
+  ],
+  "answerOption": "B",
+  "answerText": "Unusual or surprising; hard to explain",
+  "difficulty": "easy",
+  "sourceFile": "0136.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1121,
+  "word": "Demure",
+  "question": "Demure",
+  "options": [
+    "Difficult or impossible to control",
+    "Giving a sign of future success",
+    "Reserved, modest, and shy in manner",
+    "An inhabitant or occupant of a place"
+  ],
+  "answerOption": "C",
+  "answerText": "Reserved, modest, and shy in manner",
+  "difficulty": "medium",
+  "sourceFile": "1121.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 521,
+  "question": "Which part of the nervous system includes the brain and spinal cord?",
+  "options": [
+    "Peripheral nervous system",
+    "Autonomic nervous system",
+    "Central nervous system",
+    "Somatic nervous system"
+  ],
+  "answerOption": "C",
+  "answerText": "Central nervous system",
+  "genre": "science",
+  "sourceFile": "0521.json"
+}

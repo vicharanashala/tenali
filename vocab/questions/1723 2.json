@@ -1,0 +1,15 @@
+{
+  "id": 1723,
+  "word": "Juggernaut",
+  "question": "Juggernaut",
+  "options": [
+    "A substance sprayed as fine mist",
+    "Extremely poor; poverty-stricken",
+    "A huge and overwhelming force",
+    "An organism loving air"
+  ],
+  "answerOption": "C",
+  "answerText": "A huge and overwhelming force",
+  "difficulty": "hard",
+  "sourceFile": "1723.json"
+}

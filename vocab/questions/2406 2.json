@@ -1,0 +1,15 @@
+{
+  "id": 2406,
+  "word": "Wunderkind",
+  "question": "Wunderkind",
+  "options": [
+    "To howl or wail as an expression of strong emotion",
+    "Tending to wean off",
+    "One who weans child",
+    "A person who achieves great success when young"
+  ],
+  "answerOption": "D",
+  "answerText": "A person who achieves great success when young",
+  "difficulty": "extra-hard",
+  "sourceFile": "2406.json"
+}

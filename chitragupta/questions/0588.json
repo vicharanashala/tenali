@@ -1,0 +1,14 @@
+{
+  "id": 588,
+  "question": "Who discovered the electron charge-to-mass ratio experimentally?",
+  "options": [
+    "Thomson",
+    "Millikan",
+    "Rutherford",
+    "Chadwick"
+  ],
+  "answerOption": "A",
+  "answerText": "Thomson",
+  "genre": "general-knowledge",
+  "sourceFile": "0588.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1944,
+  "word": "Advancer",
+  "question": "Advancer",
+  "options": [
+    "To use ambiguous language to deceive",
+    "One who advances",
+    "Assuming power without justification",
+    "Relating to hot air"
+  ],
+  "answerOption": "B",
+  "answerText": "One who advances",
+  "difficulty": "hard",
+  "sourceFile": "1944.json"
+}

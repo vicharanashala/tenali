@@ -1,0 +1,15 @@
+{
+  "id": 106,
+  "word": "Plain",
+  "question": "Plain",
+  "options": [
+    "To become limp through heat or lack of water",
+    "Using imagination to create new things",
+    "Made impure by exposure to a harmful substance",
+    "Not decorated or elaborate; simple"
+  ],
+  "answerOption": "D",
+  "answerText": "Not decorated or elaborate; simple",
+  "difficulty": "easy",
+  "sourceFile": "0106.json"
+}

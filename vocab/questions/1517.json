@@ -1,0 +1,15 @@
+{
+  "id": 1517,
+  "word": "Depressing",
+  "question": "Depressing",
+  "options": [
+    "Excessively self-centered or self-loving",
+    "Causing feelings of sadness",
+    "The action of discovering something",
+    "A factor that determines something"
+  ],
+  "answerOption": "B",
+  "answerText": "Causing feelings of sadness",
+  "difficulty": "medium",
+  "sourceFile": "1517.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 373,
+  "question": "Which part of the human body contains the patella?",
+  "options": [
+    "Elbow",
+    "Knee",
+    "Wrist",
+    "Ankle"
+  ],
+  "answerOption": "B",
+  "answerText": "Knee",
+  "genre": "science",
+  "sourceFile": "0373.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1257,
+  "word": "Flourish",
+  "question": "Flourish",
+  "options": [
+    "The quality of being harmful",
+    "To stop doing something",
+    "To grow or develop in a healthy way",
+    "The action of releasing from military"
+  ],
+  "answerOption": "C",
+  "answerText": "To grow or develop in a healthy way",
+  "difficulty": "medium",
+  "sourceFile": "1257.json"
+}

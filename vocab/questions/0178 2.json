@@ -1,0 +1,15 @@
+{
+  "id": 178,
+  "word": "Borrow",
+  "question": "Borrow",
+  "options": [
+    "Involving or creating good conditions",
+    "Free from pretense or deceit",
+    "To take and use something temporarily",
+    "To break the connection between things"
+  ],
+  "answerOption": "C",
+  "answerText": "To take and use something temporarily",
+  "difficulty": "easy",
+  "sourceFile": "0178.json"
+}

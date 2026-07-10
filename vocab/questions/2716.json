@@ -1,0 +1,15 @@
+{
+  "id": 2716,
+  "word": "Metallurgy",
+  "question": "Metallurgy",
+  "options": [
+    "Shaped with an adze",
+    "The state of being very poor",
+    "Expressing a strong opinion controversially",
+    "The science of extracting and using metals"
+  ],
+  "answerOption": "D",
+  "answerText": "The science of extracting and using metals",
+  "difficulty": "hard",
+  "sourceFile": "2716.json"
+}

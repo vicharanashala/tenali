@@ -1,0 +1,15 @@
+{
+  "id": 194,
+  "word": "Bend",
+  "question": "Bend",
+  "options": [
+    "To construct something by putting parts together",
+    "To arrange systematically into groups",
+    "To move behind someone in the same direction",
+    "To shape into a curve"
+  ],
+  "answerOption": "D",
+  "answerText": "To shape into a curve",
+  "difficulty": "easy",
+  "sourceFile": "0194.json"
+}

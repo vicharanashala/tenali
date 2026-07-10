@@ -1,0 +1,15 @@
+{
+  "id": 2042,
+  "word": "Verisimilitude",
+  "question": "Verisimilitude",
+  "options": [
+    "The action of attesting something",
+    "The use of clever but false arguments",
+    "A person who is new to a subject",
+    "The appearance of being true or real"
+  ],
+  "answerOption": "D",
+  "answerText": "The appearance of being true or real",
+  "difficulty": "hard",
+  "sourceFile": "2042.json"
+}

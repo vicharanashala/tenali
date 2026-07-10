@@ -1,0 +1,15 @@
+{
+  "id": 817,
+  "word": "Vague",
+  "question": "Vague",
+  "options": [
+    "Not clearly expressed or understood",
+    "Existing at the beginning",
+    "To rest on the surface of a liquid",
+    "Showing a willingness to take risks"
+  ],
+  "answerOption": "A",
+  "answerText": "Not clearly expressed or understood",
+  "difficulty": "easy",
+  "sourceFile": "0817.json"
+}

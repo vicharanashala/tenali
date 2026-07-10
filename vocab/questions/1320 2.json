@@ -1,0 +1,15 @@
+{
+  "id": 1320,
+  "word": "Surreptitious",
+  "question": "Surreptitious",
+  "options": [
+    "Characterized by concern or care",
+    "Vivacious and enthusiastic",
+    "Intended to teach a moral lesson",
+    "Kept secret because it would not be approved"
+  ],
+  "answerOption": "D",
+  "answerText": "Kept secret because it would not be approved",
+  "difficulty": "hard",
+  "sourceFile": "1320.json"
+}

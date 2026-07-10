@@ -1,0 +1,15 @@
+{
+  "id": 2953,
+  "word": "Affidavit",
+  "question": "Affidavit",
+  "options": [
+    "The act of placing things side by side",
+    "The action of allocating something",
+    "To lower the body briefly by bending a knee",
+    "A written statement made under oath"
+  ],
+  "answerOption": "D",
+  "answerText": "A written statement made under oath",
+  "difficulty": "hard",
+  "sourceFile": "2953.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 355,
+  "word": "Collect",
+  "question": "Collect",
+  "options": [
+    "Affected by physical illness",
+    "To bring or gather things together",
+    "Showing strong feelings or beliefs",
+    "To make something untidy or disordered"
+  ],
+  "answerOption": "B",
+  "answerText": "To bring or gather things together",
+  "difficulty": "easy",
+  "sourceFile": "0355.json"
+}

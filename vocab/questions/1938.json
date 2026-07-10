@@ -1,0 +1,15 @@
+{
+  "id": 1938,
+  "word": "Dissonant",
+  "question": "Dissonant",
+  "options": [
+    "Having an untidy or disheveled appearance",
+    "Clear and definite; able to be touched",
+    "Clashing or not in harmony",
+    "Wanting large quantities of food or knowledge"
+  ],
+  "answerOption": "C",
+  "answerText": "Clashing or not in harmony",
+  "difficulty": "medium",
+  "sourceFile": "1938.json"
+}

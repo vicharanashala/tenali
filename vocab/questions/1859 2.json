@@ -1,0 +1,15 @@
+{
+  "id": 1859,
+  "word": "Extrapolate",
+  "question": "Extrapolate",
+  "options": [
+    "A turning point or pivotal event",
+    "A person who behaves badly or unlawfully",
+    "To extend known data into an unknown area",
+    "Of or relating to the air"
+  ],
+  "answerOption": "C",
+  "answerText": "To extend known data into an unknown area",
+  "difficulty": "hard",
+  "sourceFile": "1859.json"
+}

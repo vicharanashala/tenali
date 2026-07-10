@@ -1,0 +1,15 @@
+{
+  "id": 177,
+  "word": "Lose",
+  "question": "Lose",
+  "options": [
+    "Produced without artificial chemicals",
+    "Relating to a continuous physical quantity",
+    "To gain knowledge or skill through study",
+    "To be defeated in a contest"
+  ],
+  "answerOption": "D",
+  "answerText": "To be defeated in a contest",
+  "difficulty": "easy",
+  "sourceFile": "0177.json"
+}

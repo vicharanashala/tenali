@@ -1,0 +1,15 @@
+{
+  "id": 79,
+  "word": "Foolish",
+  "question": "Foolish",
+  "options": [
+    "To capture or seize something",
+    "Lacking good sense or judgment",
+    "To give food to a person or animal",
+    "Unusually good; outstanding"
+  ],
+  "answerOption": "B",
+  "answerText": "Lacking good sense or judgment",
+  "difficulty": "easy",
+  "sourceFile": "0079.json"
+}

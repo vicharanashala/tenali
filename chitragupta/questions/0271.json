@@ -1,0 +1,14 @@
+{
+  "id": 271,
+  "question": "Which Indian state is famous for tea gardens in Darjeeling?",
+  "options": [
+    "Assam",
+    "West Bengal",
+    "Sikkim",
+    "Meghalaya"
+  ],
+  "answerOption": "B",
+  "answerText": "West Bengal",
+  "genre": "india-gk",
+  "sourceFile": "0271.json"
+}

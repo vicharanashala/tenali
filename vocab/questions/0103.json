@@ -1,0 +1,15 @@
+{
+  "id": 103,
+  "word": "Expensive",
+  "question": "Expensive",
+  "options": [
+    "Costing a lot of money",
+    "To recognize what someone or something is",
+    "To break free from confinement",
+    "To have as belonging to one; to own"
+  ],
+  "answerOption": "A",
+  "answerText": "Costing a lot of money",
+  "difficulty": "easy",
+  "sourceFile": "0103.json"
+}

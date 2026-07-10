@@ -1,0 +1,15 @@
+{
+  "id": 773,
+  "word": "Automatic",
+  "question": "Automatic",
+  "options": [
+    "Of considerable size or extent",
+    "To control something by means of rules",
+    "Working by itself with little human control",
+    "Very great in degree; intense"
+  ],
+  "answerOption": "C",
+  "answerText": "Working by itself with little human control",
+  "difficulty": "easy",
+  "sourceFile": "0773.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 196,
+  "question": "Which Indian city is known as the Garden City of India?",
+  "options": [
+    "Mysuru",
+    "Bengaluru",
+    "Hyderabad",
+    "Pune"
+  ],
+  "answerOption": "B",
+  "answerText": "Bengaluru",
+  "genre": "india-gk",
+  "sourceFile": "0196.json"
+}

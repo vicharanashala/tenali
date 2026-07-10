@@ -1,0 +1,15 @@
+{
+  "id": 110,
+  "word": "Straight",
+  "question": "Straight",
+  "options": [
+    "Having the skill to do something well",
+    "Extending in one direction without curves",
+    "In a particular place; existing now",
+    "To state something in an exact way"
+  ],
+  "answerOption": "B",
+  "answerText": "Extending in one direction without curves",
+  "difficulty": "easy",
+  "sourceFile": "0110.json"
+}

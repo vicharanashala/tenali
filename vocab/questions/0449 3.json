@@ -1,0 +1,15 @@
+{
+  "id": 449,
+  "word": "Paint",
+  "question": "Paint",
+  "options": [
+    "Coming at the end; last",
+    "To apply color to a surface with a brush",
+    "Crowded or filled tightly",
+    "Very great in degree; intense"
+  ],
+  "answerOption": "B",
+  "answerText": "To apply color to a surface with a brush",
+  "difficulty": "easy",
+  "sourceFile": "0449.json"
+}

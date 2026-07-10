@@ -1,0 +1,15 @@
+{
+  "id": 198,
+  "word": "Share",
+  "question": "Share",
+  "options": [
+    "To give a portion of something to others",
+    "To make it easier for someone to do something",
+    "To go beyond the limit of something",
+    "Of great importance; critical"
+  ],
+  "answerOption": "A",
+  "answerText": "To give a portion of something to others",
+  "difficulty": "easy",
+  "sourceFile": "0198.json"
+}

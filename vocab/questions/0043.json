@@ -1,0 +1,15 @@
+{
+  "id": 43,
+  "word": "Calm",
+  "question": "Calm",
+  "options": [
+    "Willfully causing pain to others",
+    "To freely offer to do something",
+    "To put someone at risk or in danger",
+    "Not showing or feeling nervousness or anger"
+  ],
+  "answerOption": "D",
+  "answerText": "Not showing or feeling nervousness or anger",
+  "difficulty": "easy",
+  "sourceFile": "0043.json"
+}

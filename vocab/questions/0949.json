@@ -1,0 +1,15 @@
+{
+  "id": 949,
+  "word": "Forlorn",
+  "question": "Forlorn",
+  "options": [
+    "Not according to truth or fact",
+    "Sad or abandoned in appearance",
+    "To move through the air with wings",
+    "To make a displeased facial expression"
+  ],
+  "answerOption": "B",
+  "answerText": "Sad or abandoned in appearance",
+  "difficulty": "easy",
+  "sourceFile": "0949.json"
+}

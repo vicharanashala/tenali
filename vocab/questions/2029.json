@@ -1,0 +1,15 @@
+{
+  "id": 2029,
+  "word": "Imperious",
+  "question": "Imperious",
+  "options": [
+    "A state of balance",
+    "In an advisable manner",
+    "Assuming power without justification",
+    "In equal measure"
+  ],
+  "answerOption": "C",
+  "answerText": "Assuming power without justification",
+  "difficulty": "hard",
+  "sourceFile": "2029.json"
+}

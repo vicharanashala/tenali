@@ -1,0 +1,15 @@
+{
+  "id": 2309,
+  "word": "Adventurous",
+  "question": "Adventurous",
+  "options": [
+    "In an adroit manner",
+    "Willing to undertake risky ventures",
+    "The action of uncovering something",
+    "A space or opening split in something"
+  ],
+  "answerOption": "B",
+  "answerText": "Willing to undertake risky ventures",
+  "difficulty": "hard",
+  "sourceFile": "2309.json"
+}

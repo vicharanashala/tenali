@@ -1,0 +1,15 @@
+{
+  "id": 311,
+  "word": "Threaten",
+  "question": "Threaten",
+  "options": [
+    "To state an intention to harm someone",
+    "Shaped like a ball or globe",
+    "Producing powerful feelings or strong images",
+    "Able to be seen"
+  ],
+  "answerOption": "A",
+  "answerText": "To state an intention to harm someone",
+  "difficulty": "easy",
+  "sourceFile": "0311.json"
+}

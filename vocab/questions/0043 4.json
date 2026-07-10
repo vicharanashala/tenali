@@ -1,0 +1,15 @@
+{
+  "id": 43,
+  "word": "Calm",
+  "question": "Calm",
+  "options": [
+    "Very small; much smaller than normal",
+    "Insufficient for the demand; in short supply",
+    "Not showing or feeling nervousness or anger",
+    "Of very little importance"
+  ],
+  "answerOption": "C",
+  "answerText": "Not showing or feeling nervousness or anger",
+  "difficulty": "easy",
+  "sourceFile": "0043.json"
+}

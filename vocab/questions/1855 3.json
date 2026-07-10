@@ -1,0 +1,15 @@
+{
+  "id": 1855,
+  "word": "Laconic",
+  "question": "Laconic",
+  "options": [
+    "A person who flies in balloon",
+    "The quality of being unrelenting",
+    "A lengthy and aggressive speech",
+    "Using very few words to express oneself"
+  ],
+  "answerOption": "D",
+  "answerText": "Using very few words to express oneself",
+  "difficulty": "hard",
+  "sourceFile": "1855.json"
+}

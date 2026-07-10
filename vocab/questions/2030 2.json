@@ -1,0 +1,15 @@
+{
+  "id": 2030,
+  "word": "Aegrotat",
+  "question": "Aegrotat",
+  "options": [
+    "A person who pleads for another",
+    "Surgical use of air",
+    "Enjoying social or economic benefits",
+    "Permission to graduate without examination"
+  ],
+  "answerOption": "D",
+  "answerText": "Permission to graduate without examination",
+  "difficulty": "hard",
+  "sourceFile": "2030.json"
+}

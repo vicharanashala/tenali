@@ -1,0 +1,15 @@
+{
+  "id": 2537,
+  "word": "AERONAUTICIAN",
+  "question": "AERONAUTICIAN",
+  "options": [
+    "Relating to aircraft operation",
+    "The quality of being believable",
+    "An eagle's nest or high place",
+    "An expert in aeronautics"
+  ],
+  "answerOption": "D",
+  "answerText": "An expert in aeronautics",
+  "difficulty": "hard",
+  "sourceFile": "2537.json"
+}

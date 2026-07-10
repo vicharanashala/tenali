@@ -1,0 +1,15 @@
+{
+  "id": 2170,
+  "word": "Aberrant",
+  "question": "Aberrant",
+  "options": [
+    "Departing from accepted standards",
+    "An ancient heat-driven engine",
+    "A substance that adulterates",
+    "Difficult to understand; obscure"
+  ],
+  "answerOption": "A",
+  "answerText": "Departing from accepted standards",
+  "difficulty": "hard",
+  "sourceFile": "2170.json"
+}

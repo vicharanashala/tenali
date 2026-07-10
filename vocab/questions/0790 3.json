@@ -1,0 +1,15 @@
+{
+  "id": 790,
+  "word": "Fatal",
+  "question": "Fatal",
+  "options": [
+    "Occurring immediately without delay",
+    "Not physically existing but made to appear so",
+    "Causing death",
+    "Arranged in a tidy way"
+  ],
+  "answerOption": "C",
+  "answerText": "Causing death",
+  "difficulty": "easy",
+  "sourceFile": "0790.json"
+}

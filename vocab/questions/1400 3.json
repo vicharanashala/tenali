@@ -1,0 +1,15 @@
+{
+  "id": 1400,
+  "word": "Depopulation",
+  "question": "Depopulation",
+  "options": [
+    "To reduce sensitivity to something",
+    "The action of discovering something",
+    "A Roman silver coin",
+    "The reduction of population"
+  ],
+  "answerOption": "D",
+  "answerText": "The reduction of population",
+  "difficulty": "medium",
+  "sourceFile": "1400.json"
+}

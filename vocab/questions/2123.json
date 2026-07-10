@@ -1,0 +1,15 @@
+{
+  "id": 2123,
+  "word": "Obloquy",
+  "question": "Obloquy",
+  "options": [
+    "One who travels in air",
+    "Strong public criticism or verbal abuse",
+    "One who is advised",
+    "Special importance given to something"
+  ],
+  "answerOption": "B",
+  "answerText": "Strong public criticism or verbal abuse",
+  "difficulty": "hard",
+  "sourceFile": "2123.json"
+}

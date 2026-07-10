@@ -1,0 +1,15 @@
+{
+  "id": 1956,
+  "word": "Mangled",
+  "question": "Mangled",
+  "options": [
+    "To go away from a place",
+    "To make someone weak and infirm",
+    "Torn or crushed out of shape",
+    "Able to be discovered or noticed"
+  ],
+  "answerOption": "C",
+  "answerText": "Torn or crushed out of shape",
+  "difficulty": "medium",
+  "sourceFile": "1956.json"
+}

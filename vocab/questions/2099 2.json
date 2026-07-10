@@ -1,0 +1,15 @@
+{
+  "id": 2099,
+  "word": "Aeric",
+  "question": "Aeric",
+  "options": [
+    "An air-powered projection device",
+    "The use of clever but false arguments",
+    "Relating to air conditions",
+    "An award or privilege given as honor"
+  ],
+  "answerOption": "C",
+  "answerText": "Relating to air conditions",
+  "difficulty": "hard",
+  "sourceFile": "2099.json"
+}

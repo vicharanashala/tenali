@@ -1,0 +1,15 @@
+{
+  "id": 2072,
+  "word": "Fulcrum",
+  "question": "Fulcrum",
+  "options": [
+    "The action of correcting something",
+    "Relating to the theology of Calvin",
+    "The point on which a lever rests",
+    "The origin or creation of something"
+  ],
+  "answerOption": "C",
+  "answerText": "The point on which a lever rests",
+  "difficulty": "hard",
+  "sourceFile": "2072.json"
+}

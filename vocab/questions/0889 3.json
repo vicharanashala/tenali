@@ -1,0 +1,15 @@
+{
+  "id": 889,
+  "word": "Untidy",
+  "question": "Untidy",
+  "options": [
+    "Not arranged in a neat way",
+    "Happening quickly and unexpectedly",
+    "Dark and dirty in appearance",
+    "Extremely large or huge"
+  ],
+  "answerOption": "A",
+  "answerText": "Not arranged in a neat way",
+  "difficulty": "easy",
+  "sourceFile": "0889.json"
+}

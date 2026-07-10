@@ -1,0 +1,14 @@
+{
+  "id": 478,
+  "question": "Which Indian scientist is known as the father of the Indian space program?",
+  "options": [
+    "Homi Bhabha",
+    "Vikram Sarabhai",
+    "A. P. J. Abdul Kalam",
+    "Satish Dhawan"
+  ],
+  "answerOption": "B",
+  "answerText": "Vikram Sarabhai",
+  "genre": "india-gk",
+  "sourceFile": "0478.json"
+}

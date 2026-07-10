@@ -1,0 +1,15 @@
+{
+  "id": 90,
+  "word": "Thick",
+  "question": "Thick",
+  "options": [
+    "Mild in temperament or behavior",
+    "Shaped like a ball or globe",
+    "To move forward on hands and knees",
+    "Of great width between opposite sides"
+  ],
+  "answerOption": "D",
+  "answerText": "Of great width between opposite sides",
+  "difficulty": "easy",
+  "sourceFile": "0090.json"
+}

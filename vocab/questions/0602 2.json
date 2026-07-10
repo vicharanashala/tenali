@@ -1,0 +1,15 @@
+{
+  "id": 602,
+  "word": "Elegant",
+  "question": "Elegant",
+  "options": [
+    "Performed without planning or prompting",
+    "In a state of sleep; not awake",
+    "Graceful and stylish in appearance",
+    "Evil or morally wrong"
+  ],
+  "answerOption": "C",
+  "answerText": "Graceful and stylish in appearance",
+  "difficulty": "easy",
+  "sourceFile": "0602.json"
+}

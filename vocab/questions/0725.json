@@ -1,0 +1,15 @@
+{
+  "id": 725,
+  "word": "Diagonal",
+  "question": "Diagonal",
+  "options": [
+    "Before the usual or expected time",
+    "Going in a slanting direction",
+    "To assign responsibility for a fault",
+    "Belonging to the very distant past"
+  ],
+  "answerOption": "B",
+  "answerText": "Going in a slanting direction",
+  "difficulty": "easy",
+  "sourceFile": "0725.json"
+}

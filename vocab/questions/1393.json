@@ -1,0 +1,15 @@
+{
+  "id": 1393,
+  "word": "Deluxe",
+  "question": "Deluxe",
+  "options": [
+    "To remove from selected status",
+    "Dead or no longer with someone",
+    "Luxuriously elegant and expensive",
+    "The first appearance in a role or on stage"
+  ],
+  "answerOption": "C",
+  "answerText": "Luxuriously elegant and expensive",
+  "difficulty": "medium",
+  "sourceFile": "1393.json"
+}

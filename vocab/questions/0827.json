@@ -1,0 +1,15 @@
+{
+  "id": 827,
+  "word": "Invisible",
+  "question": "Invisible",
+  "options": [
+    "Not even or balanced in shape",
+    "Inspiring a feeling of admiration or amazement",
+    "To grow or develop in a healthy way",
+    "Unable to be seen"
+  ],
+  "answerOption": "D",
+  "answerText": "Unable to be seen",
+  "difficulty": "easy",
+  "sourceFile": "0827.json"
+}

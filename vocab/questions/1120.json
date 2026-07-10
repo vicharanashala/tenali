@@ -1,0 +1,15 @@
+{
+  "id": 1120,
+  "word": "Composure",
+  "question": "Composure",
+  "options": [
+    "The state of being calm and in control",
+    "Complaining in a whiny manner",
+    "A person held in custody",
+    "The action of abandoning a person"
+  ],
+  "answerOption": "A",
+  "answerText": "The state of being calm and in control",
+  "difficulty": "medium",
+  "sourceFile": "1120.json"
+}

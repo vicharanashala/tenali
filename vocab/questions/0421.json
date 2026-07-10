@@ -1,0 +1,15 @@
+{
+  "id": 421,
+  "word": "Exchange",
+  "question": "Exchange",
+  "options": [
+    "To dislike something very intensely",
+    "Unpleasantly rough or sharp",
+    "To carry out a careful examination",
+    "To give and receive things of similar value"
+  ],
+  "answerOption": "D",
+  "answerText": "To give and receive things of similar value",
+  "difficulty": "easy",
+  "sourceFile": "0421.json"
+}

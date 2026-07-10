@@ -1,0 +1,15 @@
+{
+  "id": 414,
+  "word": "Value",
+  "question": "Value",
+  "options": [
+    "To consider something to be important",
+    "Extremely beautiful or impressive",
+    "To make someone afraid or anxious",
+    "To separate something from something else"
+  ],
+  "answerOption": "A",
+  "answerText": "To consider something to be important",
+  "difficulty": "easy",
+  "sourceFile": "0414.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 985,
+  "question": "Who is known as the Father of the Nation in India?",
+  "options": [
+    "Jawaharlal Nehru",
+    "Mahatma Gandhi",
+    "B. R. Ambedkar",
+    "Subhas Chandra Bose"
+  ],
+  "answerOption": "B",
+  "answerText": "Mahatma Gandhi",
+  "genre": "india-gk",
+  "sourceFile": "0985.json"
+}

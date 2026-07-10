@@ -1,0 +1,15 @@
+{
+  "id": 1440,
+  "word": "Denim",
+  "question": "Denim",
+  "options": [
+    "Causing confusion or bewilderment",
+    "A sturdy twilled cotton fabric",
+    "Able to recover quickly from difficulties",
+    "A person forcibly removed from a country"
+  ],
+  "answerOption": "B",
+  "answerText": "A sturdy twilled cotton fabric",
+  "difficulty": "medium",
+  "sourceFile": "1440.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1939,
+  "word": "Compatible",
+  "question": "Compatible",
+  "options": [
+    "Able to exist together",
+    "Prevented or forbidden from",
+    "The desire for revenge",
+    "Not friendly or interested; distant"
+  ],
+  "answerOption": "A",
+  "answerText": "Able to exist together",
+  "difficulty": "medium",
+  "sourceFile": "1939.json"
+}

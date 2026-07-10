@@ -1,0 +1,14 @@
+{
+  "id": 279,
+  "question": "Which part of the plant develops into a fruit after fertilization?",
+  "options": [
+    "Root",
+    "Stem",
+    "Ovary",
+    "Leaf"
+  ],
+  "answerOption": "C",
+  "answerText": "Ovary",
+  "genre": "mixed",
+  "sourceFile": "0279.json"
+}

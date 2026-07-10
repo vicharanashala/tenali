@@ -1,0 +1,15 @@
+{
+  "id": 400,
+  "word": "Evolve",
+  "question": "Evolve",
+  "options": [
+    "To ask for something forcefully",
+    "To develop gradually over time",
+    "Delicious or pleasing to senses",
+    "To put someone at risk or in danger"
+  ],
+  "answerOption": "B",
+  "answerText": "To develop gradually over time",
+  "difficulty": "easy",
+  "sourceFile": "0400.json"
+}

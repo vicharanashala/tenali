@@ -1,0 +1,15 @@
+{
+  "id": 2334,
+  "word": "Aerodesmis",
+  "question": "Aerodesmis",
+  "options": [
+    "Things for which one is responsible",
+    "Ornamental work of fine twisted wire",
+    "Connection by air passages",
+    "The tendency to relapse into a previous behavior"
+  ],
+  "answerOption": "C",
+  "answerText": "Connection by air passages",
+  "difficulty": "hard",
+  "sourceFile": "2334.json"
+}

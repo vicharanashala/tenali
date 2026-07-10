@@ -1,0 +1,15 @@
+{
+  "id": 1180,
+  "word": "Vex",
+  "question": "Vex",
+  "options": [
+    "A substance reducing body odor",
+    "Of such small amount as to be ridiculous",
+    "Feeling regret for something done",
+    "To make someone feel annoyed or frustrated"
+  ],
+  "answerOption": "D",
+  "answerText": "To make someone feel annoyed or frustrated",
+  "difficulty": "medium",
+  "sourceFile": "1180.json"
+}

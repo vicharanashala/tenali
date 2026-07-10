@@ -1,0 +1,15 @@
+{
+  "id": 596,
+  "word": "Exceptional",
+  "question": "Exceptional",
+  "options": [
+    "To control something by means of rules",
+    "Unusually good; outstanding",
+    "To make someone feel weary and uninterested",
+    "Affected by physical illness"
+  ],
+  "answerOption": "B",
+  "answerText": "Unusually good; outstanding",
+  "difficulty": "easy",
+  "sourceFile": "0596.json"
+}

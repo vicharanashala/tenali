@@ -1,0 +1,15 @@
+{
+  "id": 1058,
+  "word": "Kindle",
+  "question": "Kindle",
+  "options": [
+    "Hard to manage or control",
+    "Giving a sign of future success",
+    "To put something in danger of loss or harm",
+    "To light a fire; to arouse an emotion"
+  ],
+  "answerOption": "D",
+  "answerText": "To light a fire; to arouse an emotion",
+  "difficulty": "medium",
+  "sourceFile": "1058.json"
+}

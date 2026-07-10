@@ -1,0 +1,15 @@
+{
+  "id": 2524,
+  "word": "AEROMEDICAL",
+  "question": "AEROMEDICAL",
+  "options": [
+    "Relating to medicine and aviation",
+    "A plant used as herbal medicine",
+    "A gas-filled cavity in organisms",
+    "The action of aerifying"
+  ],
+  "answerOption": "A",
+  "answerText": "Relating to medicine and aviation",
+  "difficulty": "hard",
+  "sourceFile": "2524.json"
+}

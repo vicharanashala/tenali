@@ -1,0 +1,15 @@
+{
+  "id": 31,
+  "word": "Sour",
+  "question": "Sour",
+  "options": [
+    "Having a sharp acidic taste",
+    "To reach a destination",
+    "Existing in or caused by nature",
+    "To let liquid fall in small drops"
+  ],
+  "answerOption": "A",
+  "answerText": "Having a sharp acidic taste",
+  "difficulty": "easy",
+  "sourceFile": "0031.json"
+}

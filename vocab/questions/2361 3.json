@@ -1,0 +1,15 @@
+{
+  "id": 2361,
+  "word": "Aerojet",
+  "question": "Aerojet",
+  "options": [
+    "A jet-powered aircraft",
+    "The action of building something",
+    "A condition giving superiority",
+    "Having a skeptical or cynical outlook"
+  ],
+  "answerOption": "A",
+  "answerText": "A jet-powered aircraft",
+  "difficulty": "hard",
+  "sourceFile": "2361.json"
+}

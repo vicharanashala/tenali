@@ -1,0 +1,15 @@
+{
+  "id": 3006,
+  "word": "Psephology",
+  "question": "Psephology",
+  "options": [
+    "Quality of undergoing ablation",
+    "In manner of killing",
+    "The statistical study of elections and voting",
+    "In abyssal manner"
+  ],
+  "answerOption": "C",
+  "answerText": "The statistical study of elections and voting",
+  "difficulty": "extra-hard",
+  "sourceFile": "3006.json"
+}

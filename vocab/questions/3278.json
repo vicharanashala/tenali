@@ -1,0 +1,15 @@
+{
+  "id": 3278,
+  "word": "Abivious",
+  "question": "Abivious",
+  "options": [
+    "A dealer in rare books",
+    "One who believes in abiogenesis",
+    "Without path or way",
+    "Those who adjoin property"
+  ],
+  "answerOption": "C",
+  "answerText": "Without path or way",
+  "difficulty": "extra-hard",
+  "sourceFile": "3278.json"
+}

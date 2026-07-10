@@ -1,0 +1,15 @@
+{
+  "id": 1966,
+  "word": "Prohibited",
+  "question": "Prohibited",
+  "options": [
+    "A person held in custody",
+    "A person or thing that precipitates change",
+    "A state of being extremely poor",
+    "Formally forbidden by authority"
+  ],
+  "answerOption": "D",
+  "answerText": "Formally forbidden by authority",
+  "difficulty": "medium",
+  "sourceFile": "1966.json"
+}

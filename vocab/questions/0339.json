@@ -1,0 +1,15 @@
+{
+  "id": 339,
+  "word": "Defend",
+  "question": "Defend",
+  "options": [
+    "A series of images during sleep",
+    "To give permission for something",
+    "Able to withstand fire or great heat",
+    "To protect from attack or danger"
+  ],
+  "answerOption": "D",
+  "answerText": "To protect from attack or danger",
+  "difficulty": "easy",
+  "sourceFile": "0339.json"
+}

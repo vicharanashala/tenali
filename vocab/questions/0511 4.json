@@ -1,0 +1,15 @@
+{
+  "id": 511,
+  "word": "Detect",
+  "question": "Detect",
+  "options": [
+    "To discover the presence of something hidden",
+    "To rot and break down over time",
+    "Calm, peaceful, and untroubled",
+    "Relating to computer technology"
+  ],
+  "answerOption": "A",
+  "answerText": "To discover the presence of something hidden",
+  "difficulty": "easy",
+  "sourceFile": "0511.json"
+}

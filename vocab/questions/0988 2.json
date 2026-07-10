@@ -1,0 +1,15 @@
+{
+  "id": 988,
+  "word": "Quell",
+  "question": "Quell",
+  "options": [
+    "Open to more than one interpretation",
+    "Making a loud confused noise; uproarious",
+    "To put an end to a rebellion or disturbance",
+    "Able to recover quickly from difficulties"
+  ],
+  "answerOption": "C",
+  "answerText": "To put an end to a rebellion or disturbance",
+  "difficulty": "medium",
+  "sourceFile": "0988.json"
+}

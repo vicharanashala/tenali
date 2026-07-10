@@ -1,0 +1,15 @@
+{
+  "id": 2216,
+  "word": "AEROPORT",
+  "question": "AEROPORT",
+  "options": [
+    "Preventing success or harmful",
+    "Providing advice or recommendations",
+    "An airport or air terminal",
+    "The quality of being adustious"
+  ],
+  "answerOption": "C",
+  "answerText": "An airport or air terminal",
+  "difficulty": "hard",
+  "sourceFile": "2216.json"
+}

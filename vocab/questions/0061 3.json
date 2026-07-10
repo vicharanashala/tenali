@@ -1,0 +1,15 @@
+{
+  "id": 61,
+  "word": "Lazy",
+  "question": "Lazy",
+  "options": [
+    "Unwilling to work or use energy",
+    "The outer surface of something",
+    "To state an intention to harm someone",
+    "To achieve or realize something desired"
+  ],
+  "answerOption": "A",
+  "answerText": "Unwilling to work or use energy",
+  "difficulty": "easy",
+  "sourceFile": "0061.json"
+}

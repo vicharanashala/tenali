@@ -1,0 +1,14 @@
+{
+  "id": 545,
+  "question": "Which part of the brain controls involuntary actions like breathing and heartbeat?",
+  "options": [
+    "Cerebrum",
+    "Cerebellum",
+    "Medulla oblongata",
+    "Hypothalamus"
+  ],
+  "answerOption": "C",
+  "answerText": "Medulla oblongata",
+  "genre": "science",
+  "sourceFile": "0545.json"
+}

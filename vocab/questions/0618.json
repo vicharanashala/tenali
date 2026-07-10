@@ -1,0 +1,15 @@
+{
+  "id": 618,
+  "word": "Passionate",
+  "question": "Passionate",
+  "options": [
+    "Shaped like a circle or sphere",
+    "Showing strong feelings or beliefs",
+    "To state that something is not true",
+    "Next to or adjoining something else"
+  ],
+  "answerOption": "B",
+  "answerText": "Showing strong feelings or beliefs",
+  "difficulty": "easy",
+  "sourceFile": "0618.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 450,
+  "word": "Sketch",
+  "question": "Sketch",
+  "options": [
+    "To pay out money for goods or services",
+    "Remaining true to a person or belief",
+    "To take part in something",
+    "To make a rough drawing of something"
+  ],
+  "answerOption": "D",
+  "answerText": "To make a rough drawing of something",
+  "difficulty": "easy",
+  "sourceFile": "0450.json"
+}

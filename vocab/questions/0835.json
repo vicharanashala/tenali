@@ -1,0 +1,15 @@
+{
+  "id": 835,
+  "word": "Shiny",
+  "question": "Shiny",
+  "options": [
+    "To arrange into categories or classes",
+    "Relating to the earth or dry land",
+    "Reflecting light brightly",
+    "Not severe or strong; gentle"
+  ],
+  "answerOption": "C",
+  "answerText": "Reflecting light brightly",
+  "difficulty": "easy",
+  "sourceFile": "0835.json"
+}

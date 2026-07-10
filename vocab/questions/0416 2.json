@@ -1,0 +1,15 @@
+{
+  "id": 416,
+  "word": "Require",
+  "question": "Require",
+  "options": [
+    "To impart knowledge or skill to someone",
+    "Lasting for a limited time only",
+    "Acting with care and thought for the future",
+    "To need something as necessary"
+  ],
+  "answerOption": "D",
+  "answerText": "To need something as necessary",
+  "difficulty": "easy",
+  "sourceFile": "0416.json"
+}

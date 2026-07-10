@@ -1,0 +1,15 @@
+{
+  "id": 340,
+  "word": "Rescue",
+  "question": "Rescue",
+  "options": [
+    "To save someone from a dangerous situation",
+    "To ask for something forcefully",
+    "To separate something from something else",
+    "Able to be easily modified or adjusted"
+  ],
+  "answerOption": "A",
+  "answerText": "To save someone from a dangerous situation",
+  "difficulty": "easy",
+  "sourceFile": "0340.json"
+}

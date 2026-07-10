@@ -1,0 +1,15 @@
+{
+  "id": 87,
+  "word": "Shallow",
+  "question": "Shallow",
+  "options": [
+    "Very fine in texture or structure",
+    "Happening with great speed",
+    "Of little depth",
+    "No longer living"
+  ],
+  "answerOption": "C",
+  "answerText": "Of little depth",
+  "difficulty": "easy",
+  "sourceFile": "0087.json"
+}

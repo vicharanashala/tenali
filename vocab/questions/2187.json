@@ -1,0 +1,15 @@
+{
+  "id": 2187,
+  "word": "Cogent",
+  "question": "Cogent",
+  "options": [
+    "The use of air in sound",
+    "Clear, logical, and convincing",
+    "The action of pacifying someone",
+    "A Roman imperial treasury"
+  ],
+  "answerOption": "B",
+  "answerText": "Clear, logical, and convincing",
+  "difficulty": "hard",
+  "sourceFile": "2187.json"
+}

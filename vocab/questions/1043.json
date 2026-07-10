@@ -1,0 +1,15 @@
+{
+  "id": 1043,
+  "word": "Tactful",
+  "question": "Tactful",
+  "options": [
+    "To reduce or use up supplies",
+    "Treating all rivals or disputants equally",
+    "To obtain something from a source",
+    "Having skill in dealing with others"
+  ],
+  "answerOption": "D",
+  "answerText": "Having skill in dealing with others",
+  "difficulty": "medium",
+  "sourceFile": "1043.json"
+}

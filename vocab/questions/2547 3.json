@@ -1,0 +1,15 @@
+{
+  "id": 2547,
+  "word": "Contusion",
+  "question": "Contusion",
+  "options": [
+    "An estimate of the course of a disease",
+    "Confidence or certainty",
+    "A bruise from a blow or impact",
+    "Intended to teach a moral lesson"
+  ],
+  "answerOption": "C",
+  "answerText": "A bruise from a blow or impact",
+  "difficulty": "hard",
+  "sourceFile": "2547.json"
+}

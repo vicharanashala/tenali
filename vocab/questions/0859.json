@@ -1,0 +1,15 @@
+{
+  "id": 859,
+  "word": "Excellent",
+  "question": "Excellent",
+  "options": [
+    "Caught in a place unable to escape",
+    "To find out the facts about something",
+    "To rot and break down over time",
+    "Extremely good or of high quality"
+  ],
+  "answerOption": "D",
+  "answerText": "Extremely good or of high quality",
+  "difficulty": "easy",
+  "sourceFile": "0859.json"
+}

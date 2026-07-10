@@ -1,0 +1,15 @@
+{
+  "id": 691,
+  "word": "Trivial",
+  "question": "Trivial",
+  "options": [
+    "Of very little importance",
+    "To feel curious about something",
+    "Having little or no rain; very dry",
+    "Not even or balanced in shape"
+  ],
+  "answerOption": "A",
+  "answerText": "Of very little importance",
+  "difficulty": "easy",
+  "sourceFile": "0691.json"
+}

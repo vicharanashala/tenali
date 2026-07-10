@@ -1,0 +1,14 @@
+{
+  "id": 653,
+  "question": "Which is the largest species of camel?",
+  "options": [
+    "Dromedary",
+    "Bactrian camel",
+    "Wild Bactrian camel",
+    "Llama"
+  ],
+  "answerOption": "B",
+  "answerText": "Bactrian camel",
+  "genre": "mixed",
+  "sourceFile": "0653.json"
+}

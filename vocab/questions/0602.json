@@ -1,0 +1,15 @@
+{
+  "id": 602,
+  "word": "Elegant",
+  "question": "Elegant",
+  "options": [
+    "To move from one region to another",
+    "To comply with a command or rule",
+    "Graceful and stylish in appearance",
+    "Introducing new and original ideas"
+  ],
+  "answerOption": "C",
+  "answerText": "Graceful and stylish in appearance",
+  "difficulty": "easy",
+  "sourceFile": "0602.json"
+}

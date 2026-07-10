@@ -1,0 +1,15 @@
+{
+  "id": 275,
+  "word": "Find",
+  "question": "Find",
+  "options": [
+    "Able to express oneself easily in a language",
+    "To set up an organization on a firm basis",
+    "To discover something by searching",
+    "To give support and confidence to someone"
+  ],
+  "answerOption": "C",
+  "answerText": "To discover something by searching",
+  "difficulty": "easy",
+  "sourceFile": "0275.json"
+}

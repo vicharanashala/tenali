@@ -1,0 +1,15 @@
+{
+  "id": 1044,
+  "word": "Unruly",
+  "question": "Unruly",
+  "options": [
+    "The quality of holding firmly",
+    "Feeling or expressing great happiness",
+    "Difficult to control or discipline",
+    "An inhabitant or occupant of a place"
+  ],
+  "answerOption": "C",
+  "answerText": "Difficult to control or discipline",
+  "difficulty": "medium",
+  "sourceFile": "1044.json"
+}

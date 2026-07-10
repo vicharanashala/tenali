@@ -1,0 +1,15 @@
+{
+  "id": 2133,
+  "word": "Adulterous",
+  "question": "Adulterous",
+  "options": [
+    "Of or occurring every day; ordinary",
+    "Involved in or constituting adultery",
+    "Stubbornly refusing to change one's opinion",
+    "A substance that adulterates"
+  ],
+  "answerOption": "B",
+  "answerText": "Involved in or constituting adultery",
+  "difficulty": "hard",
+  "sourceFile": "2133.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1441,
+  "word": "Salubrious",
+  "question": "Salubrious",
+  "options": [
+    "Health-giving; healthy",
+    "A system to assist the memory",
+    "The partially shaded outer region of a shadow",
+    "A state of being pleasantly lost in thought"
+  ],
+  "answerOption": "A",
+  "answerText": "Health-giving; healthy",
+  "difficulty": "extra-hard",
+  "sourceFile": "1441.json"
+}

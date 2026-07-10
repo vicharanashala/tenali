@@ -1,0 +1,15 @@
+{
+  "id": 2195,
+  "word": "Advocate",
+  "question": "Advocate",
+  "options": [
+    "The quality of being material",
+    "Having variable teeth patterns",
+    "The state of being very poor",
+    "To publicly support or recommend"
+  ],
+  "answerOption": "D",
+  "answerText": "To publicly support or recommend",
+  "difficulty": "hard",
+  "sourceFile": "2195.json"
+}

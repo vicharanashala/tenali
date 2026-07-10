@@ -1,0 +1,15 @@
+{
+  "id": 704,
+  "word": "Constant",
+  "question": "Constant",
+  "options": [
+    "Going straight up and down",
+    "Occurring continuously over time",
+    "To start doing something",
+    "Very beautiful or attractive"
+  ],
+  "answerOption": "B",
+  "answerText": "Occurring continuously over time",
+  "difficulty": "easy",
+  "sourceFile": "0704.json"
+}

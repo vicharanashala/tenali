@@ -1,0 +1,15 @@
+{
+  "id": 1905,
+  "word": "Adoration",
+  "question": "Adoration",
+  "options": [
+    "A plant used as herbal medicine",
+    "Something reused but still bearing traces of its earlier form",
+    "Love, respect, and deep affection",
+    "Tissue with air spaces in plants"
+  ],
+  "answerOption": "C",
+  "answerText": "Love, respect, and deep affection",
+  "difficulty": "hard",
+  "sourceFile": "1905.json"
+}

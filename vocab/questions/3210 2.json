@@ -1,0 +1,15 @@
+{
+  "id": 3210,
+  "word": "Abyssoplancton",
+  "question": "Abyssoplancton",
+  "options": [
+    "An instrument for measuring blood pressure",
+    "Organisms floating in abyss",
+    "Having a strong religious or spiritual quality",
+    "Remaining or continuing in place"
+  ],
+  "answerOption": "B",
+  "answerText": "Organisms floating in abyss",
+  "difficulty": "extra-hard",
+  "sourceFile": "3210.json"
+}

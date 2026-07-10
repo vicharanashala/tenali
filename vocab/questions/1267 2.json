@@ -1,0 +1,15 @@
+{
+  "id": 1267,
+  "word": "Miscreant",
+  "question": "Miscreant",
+  "options": [
+    "A secret political group or faction",
+    "A huge and overwhelming force",
+    "A person who behaves badly or unlawfully",
+    "A person who is fanatical about a cause"
+  ],
+  "answerOption": "C",
+  "answerText": "A person who behaves badly or unlawfully",
+  "difficulty": "hard",
+  "sourceFile": "1267.json"
+}

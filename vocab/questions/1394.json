@@ -1,0 +1,15 @@
+{
+  "id": 1394,
+  "word": "Delve",
+  "question": "Delve",
+  "options": [
+    "Dangerously steep or sudden",
+    "Standing out and clearly visible",
+    "Coming after something in time",
+    "To search or investigate something"
+  ],
+  "answerOption": "D",
+  "answerText": "To search or investigate something",
+  "difficulty": "medium",
+  "sourceFile": "1394.json"
+}

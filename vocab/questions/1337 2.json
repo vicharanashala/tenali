@@ -1,0 +1,15 @@
+{
+  "id": 1337,
+  "word": "Impugn",
+  "question": "Impugn",
+  "options": [
+    "Relating to awareness of body position",
+    "Excessively flattering or ingratiating",
+    "Strong public criticism or verbal abuse",
+    "To dispute the truth or honesty of"
+  ],
+  "answerOption": "D",
+  "answerText": "To dispute the truth or honesty of",
+  "difficulty": "hard",
+  "sourceFile": "1337.json"
+}

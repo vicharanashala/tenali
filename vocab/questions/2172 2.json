@@ -1,0 +1,15 @@
+{
+  "id": 2172,
+  "word": "AEROMEDICAL",
+  "question": "AEROMEDICAL",
+  "options": [
+    "One who poses riddles",
+    "Relating to medicine and aviation",
+    "Connection by air passages",
+    "Treatment with hot air"
+  ],
+  "answerOption": "B",
+  "answerText": "Relating to medicine and aviation",
+  "difficulty": "hard",
+  "sourceFile": "2172.json"
+}

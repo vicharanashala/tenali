@@ -1,0 +1,15 @@
+{
+  "id": 1512,
+  "word": "Depredator",
+  "question": "Depredator",
+  "options": [
+    "A statement describing something",
+    "The state of relying on something",
+    "A formal statement made under oath",
+    "One who commits depredation"
+  ],
+  "answerOption": "D",
+  "answerText": "One who commits depredation",
+  "difficulty": "medium",
+  "sourceFile": "1512.json"
+}

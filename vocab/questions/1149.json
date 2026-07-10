@@ -1,0 +1,15 @@
+{
+  "id": 1149,
+  "word": "Indelible",
+  "question": "Indelible",
+  "options": [
+    "To end racial segregation",
+    "To discover or identify something",
+    "Making marks that cannot be removed",
+    "Torn or crushed out of shape"
+  ],
+  "answerOption": "C",
+  "answerText": "Making marks that cannot be removed",
+  "difficulty": "medium",
+  "sourceFile": "1149.json"
+}

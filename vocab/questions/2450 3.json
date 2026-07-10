@@ -1,0 +1,15 @@
+{
+  "id": 2450,
+  "word": "AEROTACTIC",
+  "question": "AEROTACTIC",
+  "options": [
+    "Iron meteorite from space",
+    "The action of killing a king",
+    "Designed to impress or attract notice",
+    "Responding to air stimulus"
+  ],
+  "answerOption": "D",
+  "answerText": "Responding to air stimulus",
+  "difficulty": "hard",
+  "sourceFile": "2450.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2305,
+  "word": "Adventure",
+  "question": "Adventure",
+  "options": [
+    "Great technical skill or expertise",
+    "Something that blocks or obstructs",
+    "An exciting and unusual experience",
+    "A person's ability to cope with difficulties"
+  ],
+  "answerOption": "C",
+  "answerText": "An exciting and unusual experience",
+  "difficulty": "hard",
+  "sourceFile": "2305.json"
+}

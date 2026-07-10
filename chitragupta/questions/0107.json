@@ -1,0 +1,14 @@
+{
+  "id": 107,
+  "question": "Which mountain range separates Europe and Asia in the traditional geographic division?",
+  "options": [
+    "Andes",
+    "Rockies",
+    "Alps",
+    "Ural Mountains"
+  ],
+  "answerOption": "D",
+  "answerText": "Ural Mountains",
+  "genre": "mixed",
+  "sourceFile": "0107.json"
+}

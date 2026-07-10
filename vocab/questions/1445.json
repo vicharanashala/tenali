@@ -1,0 +1,15 @@
+{
+  "id": 1445,
+  "word": "Denominator",
+  "question": "Denominator",
+  "options": [
+    "Unable to be appeased",
+    "Free from disagreement or dissent",
+    "Holding firmly to something; persistent",
+    "The number below the line in a fraction"
+  ],
+  "answerOption": "D",
+  "answerText": "The number below the line in a fraction",
+  "difficulty": "medium",
+  "sourceFile": "1445.json"
+}

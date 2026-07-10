@@ -1,0 +1,15 @@
+{
+  "id": 1903,
+  "word": "Adorable",
+  "question": "Adorable",
+  "options": [
+    "Relating to hot air",
+    "In an adoring manner",
+    "Extremely charming or appealing",
+    "An eagle's nest or high place"
+  ],
+  "answerOption": "C",
+  "answerText": "Extremely charming or appealing",
+  "difficulty": "hard",
+  "sourceFile": "1903.json"
+}

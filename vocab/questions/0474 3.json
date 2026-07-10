@@ -1,0 +1,15 @@
+{
+  "id": 474,
+  "word": "Communicate",
+  "question": "Communicate",
+  "options": [
+    "To make a statement less confusing",
+    "To share information with others",
+    "To cause someone to believe something",
+    "Of very great extent or quantity"
+  ],
+  "answerOption": "B",
+  "answerText": "To share information with others",
+  "difficulty": "easy",
+  "sourceFile": "0474.json"
+}

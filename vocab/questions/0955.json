@@ -1,0 +1,15 @@
+{
+  "id": 955,
+  "word": "Succinct",
+  "question": "Succinct",
+  "options": [
+    "Briefly and clearly expressed",
+    "To grow or develop in a healthy way",
+    "To cause someone to believe something",
+    "To give out a bright light"
+  ],
+  "answerOption": "A",
+  "answerText": "Briefly and clearly expressed",
+  "difficulty": "easy",
+  "sourceFile": "0955.json"
+}

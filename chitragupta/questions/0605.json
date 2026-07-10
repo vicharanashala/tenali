@@ -1,0 +1,14 @@
+{
+  "id": 605,
+  "question": "Who wrote 'Madame Bovary'?",
+  "options": [
+    "Victor Hugo",
+    "Gustave Flaubert",
+    "Balzac",
+    "Camus"
+  ],
+  "answerOption": "B",
+  "answerText": "Gustave Flaubert",
+  "genre": "general-knowledge",
+  "sourceFile": "0605.json"
+}

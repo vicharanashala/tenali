@@ -1,0 +1,15 @@
+{
+  "id": 3379,
+  "word": "Aburnt",
+  "question": "Aburnt",
+  "options": [
+    "The opposite of paranoia; belief that the world conspires to help you",
+    "Quality of washing",
+    "Burned or scorched",
+    "In manner of death"
+  ],
+  "answerOption": "C",
+  "answerText": "Burned or scorched",
+  "difficulty": "extra-hard",
+  "sourceFile": "3379.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 362,
+  "word": "Decorate",
+  "question": "Decorate",
+  "options": [
+    "To make something look more attractive",
+    "Of chief importance; principal",
+    "To confess something to be true",
+    "To make something stronger"
+  ],
+  "answerOption": "A",
+  "answerText": "To make something look more attractive",
+  "difficulty": "easy",
+  "sourceFile": "0362.json"
+}

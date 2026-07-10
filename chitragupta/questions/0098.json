@@ -1,0 +1,14 @@
+{
+  "id": 98,
+  "question": "Which animal is known as the Ship of the Desert?",
+  "options": [
+    "Horse",
+    "Camel",
+    "Donkey",
+    "Llama"
+  ],
+  "answerOption": "B",
+  "answerText": "Camel",
+  "genre": "general-knowledge",
+  "sourceFile": "0098.json"
+}

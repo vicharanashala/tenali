@@ -1,0 +1,15 @@
+{
+  "id": 1092,
+  "word": "Tenuous",
+  "question": "Tenuous",
+  "options": [
+    "Very weak or slight; insubstantial",
+    "In a despicable manner",
+    "To lose courage or hope",
+    "To remove from selected status"
+  ],
+  "answerOption": "A",
+  "answerText": "Very weak or slight; insubstantial",
+  "difficulty": "medium",
+  "sourceFile": "1092.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 494,
+  "word": "Examine",
+  "question": "Examine",
+  "options": [
+    "To allow liquid to escape through a hole",
+    "To arouse the curiosity of someone",
+    "To cause a liquid to flow over the edge",
+    "To inspect something in detail"
+  ],
+  "answerOption": "D",
+  "answerText": "To inspect something in detail",
+  "difficulty": "easy",
+  "sourceFile": "0494.json"
+}

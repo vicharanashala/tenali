@@ -1,0 +1,15 @@
+{
+  "id": 3125,
+  "word": "Cynosure",
+  "question": "Cynosure",
+  "options": [
+    "A person or thing that is the center of attention",
+    "State of being blind",
+    "One who causes death",
+    "Causing loss of life"
+  ],
+  "answerOption": "A",
+  "answerText": "A person or thing that is the center of attention",
+  "difficulty": "extra-hard",
+  "sourceFile": "3125.json"
+}

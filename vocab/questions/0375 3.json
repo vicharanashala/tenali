@@ -1,0 +1,15 @@
+{
+  "id": 375,
+  "word": "Smell",
+  "question": "Smell",
+  "options": [
+    "To cause someone to feel sudden wonder",
+    "Of a rough or irregular surface",
+    "To perceive the scent of something",
+    "Able to withstand fire or great heat"
+  ],
+  "answerOption": "C",
+  "answerText": "To perceive the scent of something",
+  "difficulty": "easy",
+  "sourceFile": "0375.json"
+}

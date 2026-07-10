@@ -1,0 +1,15 @@
+{
+  "id": 475,
+  "word": "Express",
+  "question": "Express",
+  "options": [
+    "To convey thoughts or feelings in words",
+    "A long journey by sea or space",
+    "Of or at a low temperature",
+    "Of extreme force or strength"
+  ],
+  "answerOption": "A",
+  "answerText": "To convey thoughts or feelings in words",
+  "difficulty": "easy",
+  "sourceFile": "0475.json"
+}

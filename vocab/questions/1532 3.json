@@ -1,0 +1,15 @@
+{
+  "id": 1532,
+  "word": "Despicably",
+  "question": "Despicably",
+  "options": [
+    "A mental state of sadness",
+    "In a despicable manner",
+    "A modest view of one's own importance",
+    "Tending to decrease in value"
+  ],
+  "answerOption": "B",
+  "answerText": "In a despicable manner",
+  "difficulty": "medium",
+  "sourceFile": "1532.json"
+}

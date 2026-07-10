@@ -1,0 +1,15 @@
+{
+  "id": 2783,
+  "word": "Witzelsucht",
+  "question": "Witzelsucht",
+  "options": [
+    "A person learning the alphabet",
+    "Eating organisms from abyss",
+    "A tropical tree species",
+    "A tendency to make puns or tell inappropriate jokes"
+  ],
+  "answerOption": "D",
+  "answerText": "A tendency to make puns or tell inappropriate jokes",
+  "difficulty": "extra-hard",
+  "sourceFile": "2783.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 540,
+  "word": "Detest",
+  "question": "Detest",
+  "options": [
+    "To give money or goods to a cause",
+    "To dislike something very intensely",
+    "To tell a story or give an account",
+    "To remove the wrapping from something"
+  ],
+  "answerOption": "B",
+  "answerText": "To dislike something very intensely",
+  "difficulty": "easy",
+  "sourceFile": "0540.json"
+}

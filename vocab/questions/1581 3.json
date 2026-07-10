@@ -1,0 +1,15 @@
+{
+  "id": 1581,
+  "word": "Desperate",
+  "question": "Desperate",
+  "options": [
+    "In grave danger or great need",
+    "Not ready or equipped",
+    "Not competent or skilled",
+    "Deserving strong disapproval"
+  ],
+  "answerOption": "A",
+  "answerText": "In grave danger or great need",
+  "difficulty": "medium",
+  "sourceFile": "1581.json"
+}

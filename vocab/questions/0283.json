@@ -1,0 +1,15 @@
+{
+  "id": 283,
+  "word": "Notice",
+  "question": "Notice",
+  "options": [
+    "To impart knowledge or skill to someone",
+    "To become aware of something",
+    "To become limp through heat or lack of water",
+    "Able to be seen"
+  ],
+  "answerOption": "B",
+  "answerText": "To become aware of something",
+  "difficulty": "easy",
+  "sourceFile": "0283.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 83,
+  "question": "Which part of the plant conducts photosynthesis most commonly?",
+  "options": [
+    "Root",
+    "Stem",
+    "Leaf",
+    "Flower"
+  ],
+  "answerOption": "C",
+  "answerText": "Leaf",
+  "genre": "mixed",
+  "sourceFile": "0083.json"
+}

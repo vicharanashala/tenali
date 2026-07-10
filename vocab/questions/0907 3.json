@@ -1,0 +1,15 @@
+{
+  "id": 907,
+  "word": "Huge",
+  "question": "Huge",
+  "options": [
+    "Of very great size",
+    "To shine with a soft trembling light",
+    "Not present in a place",
+    "Refusing to change one's mind"
+  ],
+  "answerOption": "A",
+  "answerText": "Of very great size",
+  "difficulty": "easy",
+  "sourceFile": "0907.json"
+}

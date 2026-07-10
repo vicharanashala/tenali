@@ -1,0 +1,15 @@
+{
+  "id": 1303,
+  "word": "Cornucopia",
+  "question": "Cornucopia",
+  "options": [
+    "Wild or untamed",
+    "An abundant supply of something",
+    "Rough or abrupt in speech or manner",
+    "A strong habitual liking for something"
+  ],
+  "answerOption": "B",
+  "answerText": "An abundant supply of something",
+  "difficulty": "medium",
+  "sourceFile": "1303.json"
+}

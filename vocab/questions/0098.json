@@ -1,0 +1,15 @@
+{
+  "id": 98,
+  "word": "Neat",
+  "question": "Neat",
+  "options": [
+    "Available to be chosen but not required",
+    "To set up an organization on a firm basis",
+    "To keep safe from harm or injury",
+    "Arranged in a tidy way"
+  ],
+  "answerOption": "D",
+  "answerText": "Arranged in a tidy way",
+  "difficulty": "easy",
+  "sourceFile": "0098.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 679,
+  "word": "Severe",
+  "question": "Severe",
+  "options": [
+    "Very great in degree; intense",
+    "Evil or morally wrong",
+    "Having experience, knowledge, and good judgment",
+    "Lacking in liveliness or joy"
+  ],
+  "answerOption": "A",
+  "answerText": "Very great in degree; intense",
+  "difficulty": "easy",
+  "sourceFile": "0679.json"
+}

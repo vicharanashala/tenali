@@ -1,0 +1,15 @@
+{
+  "id": 1989,
+  "word": "Argumentative",
+  "question": "Argumentative",
+  "options": [
+    "Unable to feel or perceive",
+    "Relating to a religious sect",
+    "A person or thing used to entice or lure",
+    "Given to arguing or prone to argument"
+  ],
+  "answerOption": "D",
+  "answerText": "Given to arguing or prone to argument",
+  "difficulty": "medium",
+  "sourceFile": "1989.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1312,
+  "word": "Trepidation",
+  "question": "Trepidation",
+  "options": [
+    "Not able to be corrected or reformed",
+    "A leader who seeks support by appealing to emotions",
+    "A feeling of fear about something",
+    "The pursuit of pleasure as the highest good"
+  ],
+  "answerOption": "C",
+  "answerText": "A feeling of fear about something",
+  "difficulty": "hard",
+  "sourceFile": "1312.json"
+}

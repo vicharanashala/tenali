@@ -1,0 +1,15 @@
+{
+  "id": 104,
+  "word": "Ancient",
+  "question": "Ancient",
+  "options": [
+    "Required by law or rule; mandatory",
+    "To move downward from a higher point",
+    "Belonging to the very distant past",
+    "Different from what is normal or expected"
+  ],
+  "answerOption": "C",
+  "answerText": "Belonging to the very distant past",
+  "difficulty": "easy",
+  "sourceFile": "0104.json"
+}

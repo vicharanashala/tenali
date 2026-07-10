@@ -1,0 +1,15 @@
+{
+  "id": 20,
+  "word": "Strong",
+  "question": "Strong",
+  "options": [
+    "Lacking interest or excitement",
+    "Of very great size",
+    "To receive money in return for labor",
+    "Having the power to move heavy things"
+  ],
+  "answerOption": "D",
+  "answerText": "Having the power to move heavy things",
+  "difficulty": "easy",
+  "sourceFile": "0020.json"
+}

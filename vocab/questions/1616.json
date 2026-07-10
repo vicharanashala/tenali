@@ -1,0 +1,15 @@
+{
+  "id": 1616,
+  "word": "Desperado",
+  "question": "Desperado",
+  "options": [
+    "The reduction of supplies or resources",
+    "A violent criminal or fugitive",
+    "To place money in a bank account",
+    "Causing or likely to cause debate"
+  ],
+  "answerOption": "B",
+  "answerText": "A violent criminal or fugitive",
+  "difficulty": "medium",
+  "sourceFile": "1616.json"
+}

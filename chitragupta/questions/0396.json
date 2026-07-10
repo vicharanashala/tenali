@@ -1,0 +1,14 @@
+{
+  "id": 396,
+  "question": "What is the boiling point of water in Kelvin at standard pressure?",
+  "options": [
+    "273 K",
+    "300 K",
+    "373 K",
+    "473 K"
+  ],
+  "answerOption": "C",
+  "answerText": "373 K",
+  "genre": "science",
+  "sourceFile": "0396.json"
+}

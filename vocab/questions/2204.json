@@ -1,0 +1,15 @@
+{
+  "id": 2204,
+  "word": "Misanthrope",
+  "question": "Misanthrope",
+  "options": [
+    "The action of noticing something",
+    "A family of sea slugs",
+    "A person who dislikes humankind",
+    "The action of bestowing something"
+  ],
+  "answerOption": "C",
+  "answerText": "A person who dislikes humankind",
+  "difficulty": "hard",
+  "sourceFile": "2204.json"
+}

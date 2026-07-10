@@ -1,0 +1,14 @@
+{
+  "id": 487,
+  "question": "Which Indian state has Gandhinagar as its capital?",
+  "options": [
+    "Maharashtra",
+    "Gujarat",
+    "Rajasthan",
+    "Madhya Pradesh"
+  ],
+  "answerOption": "B",
+  "answerText": "Gujarat",
+  "genre": "geography",
+  "sourceFile": "0487.json"
+}

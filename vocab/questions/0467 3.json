@@ -1,0 +1,15 @@
+{
+  "id": 467,
+  "word": "Illustrate",
+  "question": "Illustrate",
+  "options": [
+    "To move forward on hands and knees",
+    "To grow and develop well",
+    "To explain something by using examples",
+    "To keep away from something"
+  ],
+  "answerOption": "C",
+  "answerText": "To explain something by using examples",
+  "difficulty": "easy",
+  "sourceFile": "0467.json"
+}

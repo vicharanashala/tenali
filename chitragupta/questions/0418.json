@@ -1,0 +1,14 @@
+{
+  "id": 418,
+  "question": "Which city is the capital of Tripura?",
+  "options": [
+    "Imphal",
+    "Agartala",
+    "Aizawl",
+    "Silchar"
+  ],
+  "answerOption": "B",
+  "answerText": "Agartala",
+  "genre": "geography",
+  "sourceFile": "0418.json"
+}

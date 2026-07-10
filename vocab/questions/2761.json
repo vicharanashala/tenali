@@ -1,0 +1,15 @@
+{
+  "id": 2761,
+  "word": "Poise",
+  "question": "Poise",
+  "options": [
+    "Full of or giving advice",
+    "Relating to space and air",
+    "Graceful and elegant bearing",
+    "A plant needing air exposure"
+  ],
+  "answerOption": "C",
+  "answerText": "Graceful and elegant bearing",
+  "difficulty": "hard",
+  "sourceFile": "2761.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2413,
+  "word": "AEROPONICS",
+  "question": "AEROPONICS",
+  "options": [
+    "The quality of being calm",
+    "Strong public criticism or verbal abuse",
+    "Dedication to a cause",
+    "Growing plants without soil"
+  ],
+  "answerOption": "D",
+  "answerText": "Growing plants without soil",
+  "difficulty": "hard",
+  "sourceFile": "2413.json"
+}

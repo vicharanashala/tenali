@@ -1,0 +1,15 @@
+{
+  "id": 383,
+  "word": "Splash",
+  "question": "Splash",
+  "options": [
+    "To manage or guide the operations of something",
+    "To conduct the affairs of a state or organization",
+    "To have an effect on someone's character",
+    "To cause liquid to scatter in drops"
+  ],
+  "answerOption": "D",
+  "answerText": "To cause liquid to scatter in drops",
+  "difficulty": "easy",
+  "sourceFile": "0383.json"
+}

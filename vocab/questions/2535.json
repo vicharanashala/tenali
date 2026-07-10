@@ -1,0 +1,15 @@
+{
+  "id": 2535,
+  "word": "AERONAUTICALLY",
+  "question": "AERONAUTICALLY",
+  "options": [
+    "An unpleasant or unhealthy atmosphere",
+    "In an aeronautical manner",
+    "An engine powered by air",
+    "The quality of being calm"
+  ],
+  "answerOption": "B",
+  "answerText": "In an aeronautical manner",
+  "difficulty": "hard",
+  "sourceFile": "2535.json"
+}

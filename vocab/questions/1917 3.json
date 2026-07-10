@@ -1,0 +1,15 @@
+{
+  "id": 1917,
+  "word": "Demagogue",
+  "question": "Demagogue",
+  "options": [
+    "A leader who seeks support by appealing to emotions",
+    "Treatment with hot air",
+    "Divination by air and weather",
+    "Fear of flying or air"
+  ],
+  "answerOption": "A",
+  "answerText": "A leader who seeks support by appealing to emotions",
+  "difficulty": "hard",
+  "sourceFile": "1917.json"
+}

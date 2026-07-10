@@ -1,0 +1,15 @@
+{
+  "id": 2702,
+  "word": "Trauma",
+  "question": "Trauma",
+  "options": [
+    "The state of not being active",
+    "Severe emotional or physical shock",
+    "To reprimand someone firmly",
+    "Loss of energy or vitality"
+  ],
+  "answerOption": "B",
+  "answerText": "Severe emotional or physical shock",
+  "difficulty": "hard",
+  "sourceFile": "2702.json"
+}

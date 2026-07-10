@@ -1,0 +1,15 @@
+{
+  "id": 2223,
+  "word": "Panache",
+  "question": "Panache",
+  "options": [
+    "A person who flies in balloon",
+    "Flamboyant confidence of style or manner",
+    "The act of placing things side by side",
+    "The quality of lasting long"
+  ],
+  "answerOption": "B",
+  "answerText": "Flamboyant confidence of style or manner",
+  "difficulty": "hard",
+  "sourceFile": "2223.json"
+}

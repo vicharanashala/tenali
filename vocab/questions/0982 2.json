@@ -1,0 +1,15 @@
+{
+  "id": 982,
+  "word": "Kudos",
+  "question": "Kudos",
+  "options": [
+    "Praise and honor received for achievement",
+    "Living the life of a wanderer",
+    "Extremely happy and excited",
+    "Neatly skillful and quick in movement"
+  ],
+  "answerOption": "A",
+  "answerText": "Praise and honor received for achievement",
+  "difficulty": "medium",
+  "sourceFile": "0982.json"
+}

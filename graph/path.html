@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tenali — Prerequisite Path Finder</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: #0f1117; color: #e0e0e0;
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center;
+  padding: 40px 20px;
+}
+
+h1 { font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.subtitle { font-size: 0.85rem; color: #888; margin-bottom: 30px; }
+.subtitle a { color: #42a5f5; text-decoration: none; }
+.subtitle a:hover { text-decoration: underline; }
+
+.controls {
+  display: flex; gap: 14px; align-items: center; flex-wrap: wrap;
+  justify-content: center; margin-bottom: 28px;
+}
+.control-group { display: flex; flex-direction: column; gap: 4px; }
+.control-group label { font-size: 0.75rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; }
+select {
+  background: #1a1c2a; color: #e0e0e0; border: 1px solid #3a3d4a;
+  border-radius: 8px; padding: 10px 14px; font-size: 0.95rem;
+  min-width: 200px; cursor: pointer; appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23888' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center;
+}
+select:focus { outline: none; border-color: #42a5f5; }
+select option { background: #1a1c2a; color: #e0e0e0; }
+
+.arrow-icon {
+  font-size: 1.6rem; color: #4a4d5a; margin-top: 16px;
+}
+
+.btn {
+  background: #42a5f5; border: none; color: #fff; padding: 10px 24px;
+  border-radius: 8px; cursor: pointer; font-size: 0.95rem; font-weight: 600;
+  margin-top: 16px; transition: background 0.2s;
+}
+.btn:hover { background: #1e88e5; }
+.btn:disabled { background: #2a2d3a; color: #555; cursor: not-allowed; }
+
+/* Result area */
+#result {
+  margin-top: 30px; width: 100%; max-width: 700px;
+  display: flex; flex-direction: column; align-items: center;
+}
+
+.no-path { color: #ef5350; font-size: 1rem; font-weight: 600; padding: 16px 0; }
+.same-node { color: #ffa726; font-size: 1rem; padding: 16px 0; }
+
+/* Path visualisation */
+.path-container {
+  display: flex; flex-direction: column; align-items: center; gap: 0; width: 100%;
+}
+.path-node {
+  background: #1a1c2a; border: 2px solid #3a3d4a; border-radius: 12px;
+  padding: 14px 24px; text-align: center; min-width: 220px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.path-node:hover { transform: scale(1.03); }
+.path-node.start { border-color: #66bb6a; }
+.path-node.end { border-color: #42a5f5; }
+.path-node.mid { border-color: #ffa726; }
+.path-node .node-label { font-size: 1.05rem; font-weight: 600; color: #fff; }
+.path-node .node-sub { font-size: 0.78rem; color: #888; margin-top: 2px; }
+.path-node .node-cat { font-size: 0.68rem; color: #555; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+.path-arrow {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 4px 0; color: #4a4d5a; font-size: 1.2rem;
+}
+.path-arrow .edge-label { font-size: 0.7rem; color: #666; }
+
+.path-summary {
+  margin-top: 18px; font-size: 0.85rem; color: #888; text-align: center;
+}
+.path-summary strong { color: #fff; }
+
+select option.none-opt { color: #ef5350; font-weight: 600; }
+
+/* Play sequence button */
+.play-btn {
+  background: linear-gradient(135deg, #66bb6a, #42a5f5);
+  border: none; color: #fff; padding: 12px 32px;
+  border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: 700;
+  margin-top: 20px; transition: transform 0.2s, box-shadow 0.2s;
+  letter-spacing: 0.02em;
+}
+.play-btn:hover { transform: scale(1.04); box-shadow: 0 4px 20px rgba(66,165,245,0.3); }
+
+/* ── Quiz overlay ───────────────────────────── */
+#quizOverlay {
+  display: none; position: fixed; inset: 0; z-index: 100;
+  background: #0f1117; overflow-y: auto;
+  padding: 40px 20px;
+}
+#quizOverlay.active { display: flex; flex-direction: column; align-items: center; }
+
+.quiz-header {
+  text-align: center; margin-bottom: 24px; width: 100%; max-width: 600px;
+}
+.quiz-header h2 { font-size: 1.3rem; color: #fff; margin-bottom: 4px; }
+.quiz-header .step-label { font-size: 0.85rem; color: #888; }
+
+.quiz-progress-bar {
+  width: 100%; max-width: 600px; height: 8px; background: #1a1c2a;
+  border-radius: 4px; overflow: hidden; margin-bottom: 24px;
+}
+.quiz-progress-fill {
+  height: 100%; border-radius: 4px; transition: width 0.5s ease;
+  background: linear-gradient(90deg, #66bb6a, #42a5f5);
+}
+
+.quiz-step-pills {
+  display: flex; gap: 6px; flex-wrap: wrap; justify-content: center;
+  margin-bottom: 20px; max-width: 600px;
+}
+.step-pill {
+  font-size: 0.72rem; padding: 4px 10px; border-radius: 999px;
+  border: 1px solid #3a3d4a; color: #888; background: transparent;
+  transition: all 0.2s;
+}
+.step-pill.done { border-color: #66bb6a; color: #66bb6a; background: rgba(102,187,106,0.1); }
+.step-pill.active { border-color: #42a5f5; color: #42a5f5; background: rgba(66,165,245,0.1); }
+.step-pill.locked { opacity: 0.4; }
+
+.quiz-card {
+  background: #1a1c2a; border: 2px solid #3a3d4a; border-radius: 16px;
+  padding: 32px 28px; width: 100%; max-width: 600px; text-align: center;
+}
+.quiz-card .q-type { font-size: 0.78rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+.quiz-card .q-prompt { font-size: 1.4rem; color: #fff; font-weight: 600; margin-bottom: 20px; line-height: 1.5; }
+.quiz-card .q-input {
+  font-size: 1.1rem; padding: 12px 20px; border: 2px solid #3a3d4a;
+  border-radius: 10px; background: #0f1117; color: #fff; text-align: center;
+  width: 100%; max-width: 300px; outline: none; transition: border-color 0.2s;
+  font-family: inherit;
+}
+.quiz-card .q-input:focus { border-color: #42a5f5; }
+.quiz-card .q-input:disabled { opacity: 0.5; }
+
+.quiz-card .q-feedback {
+  margin-top: 12px; font-size: 0.95rem; font-weight: 600; min-height: 1.3em;
+}
+.quiz-card .q-feedback.correct { color: #66bb6a; }
+.quiz-card .q-feedback.wrong { color: #ef5350; }
+.quiz-card .q-feedback.solve {
+  color: #e8e0d8; text-align: center; line-height: 1.8; font-weight: 400;
+  background: #2c2622; border: 1.5px solid #e8864a; border-radius: 16px;
+  padding: 24px 28px; max-width: 400px; margin: 14px auto 0;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+}
+.quiz-card .q-feedback.solve .solve-answer {
+  font-size: 1.4rem; font-weight: 700; color: #e8864a; margin-bottom: 14px;
+}
+.quiz-card .q-feedback.solve .solve-explain {
+  text-align: left; font-size: 0.86rem; line-height: 1.75; color: #a89e94;
+  border-top: 1px solid rgba(255,245,230,0.10); padding-top: 12px;
+}
+
+.quiz-card .q-numpad {
+  display: flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 14px;
+}
+.quiz-card .q-numpad .np-row { display: flex; gap: 6px; }
+.quiz-card .np-key {
+  width: 52px; height: 44px; border: 1px solid #3a3d4a; border-radius: 8px;
+  background: #1a1c2a; color: #e0e0e0; font-size: 1.1rem; font-weight: 600;
+  cursor: pointer; transition: background 0.15s;
+  display: flex; align-items: center; justify-content: center;
+}
+.quiz-card .np-key:hover { background: #2a2d3a; }
+.quiz-card .np-key:active { background: #3a3d4a; }
+.quiz-card .np-special { font-size: 0.9rem; color: #888; }
+
+.quiz-btns {
+  display: flex; gap: 10px; justify-content: center; margin-top: 18px;
+}
+.quiz-btns button {
+  padding: 10px 24px; border: none; border-radius: 8px;
+  font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+}
+.quiz-btns .submit-btn { background: #42a5f5; color: #fff; }
+.quiz-btns .submit-btn:hover { background: #1e88e5; }
+.quiz-btns .submit-btn:disabled { background: #2a2d3a; color: #555; cursor: not-allowed; }
+.quiz-btns .next-btn { background: #66bb6a; color: #fff; }
+.quiz-btns .next-btn:hover { background: #4caf50; }
+.quiz-btns .quit-btn { background: #2a2d3a; color: #888; }
+.quiz-btns .quit-btn:hover { background: #3a3d4a; color: #e0e0e0; }
+
+.quiz-adapt-bar {
+  width: 100%; max-width: 300px; height: 6px; background: #1a1c2a;
+  border-radius: 3px; overflow: hidden; margin: 10px auto 0;
+}
+.quiz-adapt-fill { height: 100%; border-radius: 3px; transition: width 0.4s ease; }
+
+.quiz-congrats {
+  text-align: center; width: 100%; max-width: 600px;
+}
+.quiz-congrats h2 { font-size: 1.5rem; color: #66bb6a; margin-bottom: 8px; }
+.quiz-congrats p { color: #888; margin-bottom: 6px; }
+.quiz-congrats .stat { color: #fff; font-weight: 600; }
+
+/* Responsive */
+@media (max-width: 600px) {
+  select { min-width: 160px; font-size: 0.85rem; }
+  .path-node { min-width: 180px; padding: 10px 16px; }
+  .quiz-card { padding: 24px 16px; }
+  .quiz-card .np-key { width: 44px; height: 38px; font-size: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<h1>Prerequisite Path Finder</h1>
+<div class="subtitle">Find the learning path between any two puzzles &middot; <a href="/graph">View full graph</a></div>
+
+<div class="controls">
+  <div class="control-group">
+    <label>From</label>
+    <select id="source"></select>
+  </div>
+  <div class="arrow-icon">→</div>
+  <div class="control-group">
+    <label>To (I want to learn this)</label>
+    <select id="target"></select>
+  </div>
+  <button class="btn" id="findBtn" onclick="findPath()">Find Path</button>
+</div>
+
+<div id="result"></div>
+
+<!-- Quiz overlay (fullscreen adaptive experience) -->
+<div id="quizOverlay"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// Same node + edge data as the main graph
+// ═══════════════════════════════════════════════════════════════
+const nodes = [
+  { id: 'basicarith',   label: 'Basic Arithmetic',   sub: '+, −, ×  single→4-digit',         cat: 'Arithmetic' },
+  { id: 'addition',     label: 'Addition',            sub: 'Multi-digit addition drill',       cat: 'Arithmetic' },
+  { id: 'multiply',     label: 'Multiplication',      sub: 'Times tables 2-19',                cat: 'Arithmetic' },
+  { id: 'rounding',     label: 'Rounding',            sub: 'D.P., sig. figs, estimation',      cat: 'Arithmetic' },
+  { id: 'fractionadd',  label: 'Fractions (Add)',     sub: 'LCD, mixed numbers',               cat: 'Arithmetic' },
+  { id: 'percent',      label: 'Percentages',         sub: 'Find %, increase, reverse',        cat: 'Arithmetic' },
+  { id: 'profitloss',   label: 'Profit & Loss',       sub: 'CP, SP, discounts, markup',        cat: 'Arithmetic' },
+  { id: 'ratio',        label: 'Ratio',               sub: 'Simplify, divide, proportion',     cat: 'Arithmetic' },
+  { id: 'sdt',          label: 'Speed / Dist / Time', sub: 'd=st, average speed, units',       cat: 'Arithmetic' },
+  { id: 'squaring',     label: 'Squaring',            sub: '(a+b)² identity drill',            cat: 'Arithmetic' },
+  { id: 'hcflcm',       label: 'HCF & LCM',          sub: 'Euclidean algorithm, word probs',  cat: 'Number Theory' },
+  { id: 'primefactor',  label: 'Prime Factors',       sub: 'Prime decomposition',              cat: 'Number Theory' },
+  { id: 'bases',        label: 'Number Bases',        sub: 'Binary, hex, conversions',         cat: 'Number Theory' },
+  { id: 'indices',      label: 'Indices',             sub: 'Laws, negative, fractional exp',   cat: 'Algebra' },
+  { id: 'surds',        label: 'Surds',               sub: 'Simplify, add, rationalise',       cat: 'Algebra' },
+  { id: 'stdform',      label: 'Standard Form',       sub: 'Scientific notation ops',          cat: 'Algebra' },
+  { id: 'log',          label: 'Logarithms',          sub: 'Evaluate, laws, solve equations',  cat: 'Algebra' },
+  { id: 'sqrt',         label: 'Square Root',         sub: 'Nearest-integer √ drill',          cat: 'Algebra' },
+  { id: 'quadratic',    label: 'Quadratic (eval)',    sub: 'y = ax²+bx+c  substitution',      cat: 'Algebra' },
+  { id: 'funceval',     label: 'Functions',           sub: 'Evaluate f(x), f(x,y), f(x,y,z)', cat: 'Algebra' },
+  { id: 'polymul',      label: 'Poly Multiply',       sub: 'Expand products of polys',         cat: 'Algebra' },
+  { id: 'polyfactor',   label: 'Poly Factor',         sub: 'Factorise quadratics',             cat: 'Algebra' },
+  { id: 'qformula',     label: 'Quadratic Formula',   sub: 'Find roots of ax²+bx+c = 0',      cat: 'Algebra' },
+  { id: 'simul',        label: 'Simultaneous Eq.',    sub: '2×2 and 3×3 linear systems',       cat: 'Algebra' },
+  { id: 'ineq',         label: 'Inequalities',        sub: 'Linear & quadratic inequalities',  cat: 'Algebra' },
+  { id: 'sequences',    label: 'Sequences',           sub: 'AP & GP: nth term, sum',           cat: 'Algebra' },
+  { id: 'variation',    label: 'Variation',            sub: 'Direct & inverse proportion',      cat: 'Algebra' },
+  { id: 'binomial',     label: 'Binomial Theorem',    sub: 'nCr, expansion, coefficients',     cat: 'Algebra' },
+  { id: 'complex',      label: 'Complex Numbers',     sub: 'Add, multiply, modulus',           cat: 'Algebra' },
+  { id: 'bounds',       label: 'Bounds',              sub: 'Error intervals, propagation',     cat: 'Algebra' },
+  { id: 'angles',       label: 'Angles',              sub: 'Straight line, point, parallel',   cat: 'Geometry' },
+  { id: 'triangles',    label: 'Triangles',           sub: 'Angle sum, isosceles, exterior',   cat: 'Geometry' },
+  { id: 'polygons',     label: 'Polygons',            sub: 'Interior / exterior angles',       cat: 'Geometry' },
+  { id: 'congruence',   label: 'Congruence',          sub: 'SSS, SAS, ASA conditions',         cat: 'Geometry' },
+  { id: 'similarity',   label: 'Similarity',          sub: 'Scale factor, area/vol ratios',    cat: 'Geometry' },
+  { id: 'pythag',       label: "Pythagoras' Theorem", sub: 'Hypotenuse, legs, 3D',             cat: 'Geometry' },
+  { id: 'circleth',     label: 'Circle Theorems',     sub: 'Semicircle, cyclic quad, tangent', cat: 'Geometry' },
+  { id: 'mensur',       label: 'Mensuration',         sub: 'Area, perimeter, volume, SA',      cat: 'Geometry' },
+  { id: 'transform',    label: 'Transformations',     sub: 'Reflect, rotate, translate',       cat: 'Geometry' },
+  { id: 'bearings',     label: 'Bearings',            sub: '3-figure bearings, back bearing',  cat: 'Geometry' },
+  { id: 'coordgeom',    label: 'Coord. Geometry',     sub: 'Midpoint, distance, gradient',     cat: 'Geometry' },
+  { id: 'lineq',        label: 'Line Equation',       sub: 'y = mx + c from two points',       cat: 'Geometry' },
+  { id: 'trig',         label: 'Trigonometry',        sub: 'SOH-CAH-TOA, sine/cosine rule',   cat: 'Geometry' },
+  { id: 'diff',         label: 'Differentiation',     sub: 'Power rule, turning points',       cat: 'Calculus' },
+  { id: 'integ',        label: 'Integration',         sub: 'Antiderivatives, definite integral', cat: 'Calculus' },
+  { id: 'stats',        label: 'Statistics',           sub: 'Mean, median, mode, range',        cat: 'Statistics' },
+  { id: 'prob',         label: 'Probability',          sub: 'Simple, combined, conditional',    cat: 'Statistics' },
+  { id: 'sets',         label: 'Sets',                 sub: 'Union, intersection, Venn',        cat: 'Statistics' },
+  { id: 'vectors',      label: 'Vectors',              sub: 'Add, scale, magnitude',            cat: 'Vectors & Matrices' },
+  { id: 'dotprod',      label: 'Dot Products',         sub: 'Dot product, matrix multiply',     cat: 'Vectors & Matrices' },
+  { id: 'matrix',       label: 'Matrices',             sub: 'Add, scalar ×, det, multiply',     cat: 'Vectors & Matrices' },
+  { id: 'gk',           label: 'General Knowledge',    sub: 'Multiple-choice trivia',           cat: 'Other' },
+  { id: 'vocab',        label: 'Vocabulary',            sub: 'Word definitions',                 cat: 'Other' },
+  { id: 'spot',         label: 'Twin Hunt',             sub: 'Find the common object',           cat: 'Other' },
+  { id: 'lineareq',     label: 'Linear Equations',     sub: 'Solve ax + b = c',                 cat: 'Algebra' },
+  { id: 'decimals',     label: 'Decimals',             sub: '+, −, ×, ÷ with decimal places',   cat: 'Arithmetic' },
+  { id: 'permcomb',     label: 'Perm. & Comb.',        sub: 'nPr, nCr, counting principles',    cat: 'Statistics' },
+  { id: 'limits',       label: 'Limits',               sub: 'Limits at a point, infinity',      cat: 'Calculus' },
+  { id: 'invtrig',      label: 'Inverse Trig',         sub: 'arcsin, arccos, arctan',           cat: 'Geometry' },
+  { id: 'remfactor',    label: 'Remainder Theorem',    sub: 'Polynomial division, roots',       cat: 'Algebra' },
+  { id: 'heron',        label: "Heron's Formula",      sub: 'Area from three sides',            cat: 'Geometry' },
+  { id: 'shares',       label: 'Shares & Dividends',   sub: 'Stock, dividends, returns',        cat: 'Arithmetic' },
+  { id: 'banking',      label: 'Banking (RD)',         sub: 'Recurring deposits, interest',     cat: 'Arithmetic' },
+  { id: 'gst',          label: 'GST',                  sub: 'Goods and Services Tax',           cat: 'Arithmetic' },
+  { id: 'section',      label: 'Section Formula',      sub: 'Internal & external division',     cat: 'Geometry' },
+  { id: 'linprog',      label: 'Linear Programming',   sub: 'Optimise linear objective',        cat: 'Algebra' },
+  { id: 'circmeasure',  label: 'Circular Measure',     sub: 'Radians, arc length, area',        cat: 'Geometry' },
+  { id: 'conics',       label: 'Conic Sections',       sub: 'Circle, parabola, ellipse',        cat: 'Geometry' },
+  { id: 'diffeq',       label: 'Differential Eq.',     sub: 'Solve dy/dx = f(x)',               cat: 'Calculus' },
+]
+
+const edges = [
+  ['basicarith', 'addition'],
+  ['basicarith', 'multiply'],
+  ['basicarith', 'rounding'],
+  ['multiply',   'squaring'],
+  ['addition',   'squaring'],
+  ['multiply',   'fractionadd'],
+  ['fractionadd','percent'],
+  ['percent',    'profitloss'],
+  ['ratio',      'percent'],
+  ['basicarith', 'ratio'],
+  ['multiply',   'sdt'],
+  ['ratio',      'sdt'],
+  ['multiply',    'hcflcm'],
+  ['hcflcm',      'primefactor'],
+  ['basicarith',  'bases'],
+  ['multiply',   'indices'],
+  ['indices',    'surds'],
+  ['indices',    'log'],
+  ['indices',    'stdform'],
+  ['multiply',   'sqrt'],
+  ['squaring',   'sqrt'],
+  ['basicarith', 'funceval'],
+  ['multiply',   'quadratic'],
+  ['indices',    'quadratic'],
+  ['multiply',   'polymul'],
+  ['indices',    'polymul'],
+  ['polymul',    'polyfactor'],
+  ['polyfactor', 'qformula'],
+  ['sqrt',       'qformula'],
+  ['basicarith', 'simul'],
+  ['funceval',   'simul'],
+  ['basicarith', 'ineq'],
+  ['polyfactor', 'ineq'],
+  ['basicarith', 'sequences'],
+  ['multiply',   'sequences'],
+  ['indices',    'sequences'],
+  ['ratio',      'variation'],
+  ['indices',    'variation'],
+  ['indices',    'binomial'],
+  ['polymul',    'binomial'],
+  ['sqrt',       'complex'],
+  ['qformula',   'complex'],
+  ['rounding',   'bounds'],
+  ['basicarith', 'angles'],
+  ['angles',     'triangles'],
+  ['angles',     'polygons'],
+  ['triangles',  'polygons'],
+  ['triangles',  'congruence'],
+  ['triangles',  'similarity'],
+  ['ratio',      'similarity'],
+  ['triangles',  'pythag'],
+  ['squaring',   'pythag'],
+  ['angles',     'circleth'],
+  ['triangles',  'circleth'],
+  ['multiply',   'mensur'],
+  ['squaring',   'mensur'],
+  ['polygons',   'mensur'],
+  ['angles',     'transform'],
+  ['coordgeom',  'transform'],
+  ['angles',     'bearings'],
+  ['basicarith', 'coordgeom'],
+  ['pythag',     'coordgeom'],
+  ['coordgeom',  'lineq'],
+  ['fractionadd','lineq'],
+  ['pythag',     'trig'],
+  ['angles',     'trig'],
+  ['ratio',      'trig'],
+  ['indices',    'diff'],
+  ['polymul',    'diff'],
+  ['quadratic',  'diff'],
+  ['diff',       'integ'],
+  ['basicarith', 'stats'],
+  ['fractionadd','prob'],
+  ['basicarith', 'prob'],
+  ['basicarith', 'sets'],
+  ['basicarith', 'vectors'],
+  ['vectors',    'dotprod'],
+  ['multiply',   'matrix'],
+  ['basicarith', 'matrix'],
+  ['matrix',     'dotprod'],
+  ['basicarith', 'decimals'],
+  ['basicarith', 'lineareq'],
+  ['lineareq',   'simul'],
+  ['basicarith', 'shares'],
+  ['basicarith', 'banking'],
+  ['percent',    'gst'],
+  ['percent',    'shares'],
+  ['percent',    'banking'],
+  ['basicarith', 'permcomb'],
+  ['sequences',  'limits'],
+  ['limits',     'diff'],
+  ['trig',       'invtrig'],
+  ['trig',       'circmeasure'],
+  ['coordgeom',  'section'],
+  ['coordgeom',  'conics'],
+  ['polyfactor', 'remfactor'],
+  ['polymul',    'remfactor'],
+  ['pythag',     'heron'],
+  ['triangles',  'heron'],
+  ['mensur',     'heron'],
+  ['lineareq',   'linprog'],
+  ['ineq',       'linprog'],
+  ['diff',       'diffeq'],
+  ['integ',      'diffeq'],
+]
+
+// ═══════════════════════════════════════════════════════════════
+// Build adjacency + BFS shortest path
+// ═══════════════════════════════════════════════════════════════
+const nodeMap = {}
+nodes.forEach(n => nodeMap[n.id] = n)
+
+// Build adjacency in BOTH directions for path finding
+// Forward: prerequisite → dependent (child)
+const children = {}
+// Backward: dependent → prerequisite (parent)
+const parents = {}
+nodes.forEach(n => { children[n.id] = []; parents[n.id] = [] })
+edges.forEach(([s, t]) => { children[s].push(t); parents[t].push(s) })
+
+// BFS from source to target following edges FORWARD (source is a prereq of target)
+function bfsForward(src, tgt) {
+  if (src === tgt) return [src]
+  const visited = new Set([src])
+  const prev = { [src]: null }
+  const queue = [src]
+  while (queue.length) {
+    const cur = queue.shift()
+    for (const next of children[cur]) {
+      if (visited.has(next)) continue
+      visited.add(next)
+      prev[next] = cur
+      if (next === tgt) {
+        // Reconstruct path
+        const path = []
+        let node = tgt
+        while (node !== null) { path.unshift(node); node = prev[node] }
+        return path
+      }
+      queue.push(next)
+    }
+  }
+  return null
+}
+
+// BFS from source to target following edges BACKWARD (target is a prereq of source)
+function bfsBackward(src, tgt) {
+  if (src === tgt) return [src]
+  const visited = new Set([src])
+  const prev = { [src]: null }
+  const queue = [src]
+  while (queue.length) {
+    const cur = queue.shift()
+    for (const next of parents[cur]) {
+      if (visited.has(next)) continue
+      visited.add(next)
+      prev[next] = cur
+      if (next === tgt) {
+        const path = []
+        let node = tgt
+        while (node !== null) { path.unshift(node); node = prev[node] }
+        return path
+      }
+      queue.push(next)
+    }
+  }
+  return null
+}
+
+// Longest path ending at `tgt` in a DAG (DFS + memoisation)
+function longestPathTo(tgt) {
+  const memo = {} // id → longest path (array) from any root to id
+  function dfs(node) {
+    if (memo[node]) return memo[node]
+    const pars = parents[node] || []
+    if (pars.length === 0) {
+      memo[node] = [node]
+      return memo[node]
+    }
+    let best = []
+    for (const p of pars) {
+      const sub = dfs(p)
+      if (sub.length > best.length) best = sub
+    }
+    memo[node] = [...best, node]
+    return memo[node]
+  }
+  return dfs(tgt)
+}
+
+// ═══════════════════════════════════════════════════════════════
+// Populate dropdowns (sorted alphabetically by label)
+// ═══════════════════════════════════════════════════════════════
+const sorted = [...nodes].sort((a, b) => a.label.localeCompare(b.label))
+const srcSel = document.getElementById('source')
+const tgtSel = document.getElementById('target')
+
+// Add NONE as default source — means "show longest path to destination"
+const noneOpt = document.createElement('option')
+noneOpt.value = '__none__'; noneOpt.textContent = 'NONE (longest path)'
+noneOpt.className = 'none-opt'; noneOpt.style.color = '#ef5350'
+srcSel.appendChild(noneOpt)
+
+sorted.forEach(n => {
+  const o1 = document.createElement('option')
+  o1.value = n.id; o1.textContent = n.label
+  srcSel.appendChild(o1)
+
+  const o2 = document.createElement('option')
+  o2.value = n.id; o2.textContent = n.label
+  tgtSel.appendChild(o2)
+})
+
+// Set sensible defaults
+srcSel.value = '__none__'
+tgtSel.value = 'integ'
+
+// Make select text red when NONE is selected
+function updateSrcColor() {
+  srcSel.style.color = srcSel.value === '__none__' ? '#ef5350' : '#e0e0e0'
+}
+srcSel.addEventListener('change', updateSrcColor)
+updateSrcColor()
+
+// ═══════════════════════════════════════════════════════════════
+// Find & render path
+// ═══════════════════════════════════════════════════════════════
+function findPath() {
+  const src = srcSel.value
+  const tgt = tgtSel.value
+  const result = document.getElementById('result')
+
+  // ── NONE source: show longest path ending at destination ──
+  if (src === '__none__') {
+    const path = longestPathTo(tgt)
+    if (path.length <= 1) {
+      result.innerHTML = `<div class="same-node"><strong>${nodeMap[tgt].label}</strong> has no prerequisites — it's a starting topic.</div>`
+      return
+    }
+    renderPath(path, result)
+    return
+  }
+
+  if (src === tgt) {
+    result.innerHTML = '<div class="same-node">Source and destination are the same puzzle.</div>'
+    return
+  }
+
+  // Try forward (src is prerequisite of tgt)
+  let path = bfsForward(src, tgt)
+  let direction = 'forward'
+
+  // If no forward path, try backward (tgt is prerequisite of src)
+  if (!path) {
+    path = bfsBackward(src, tgt)
+    direction = 'backward'
+  }
+
+  if (!path) {
+    const srcLabel = nodeMap[src].label
+    const tgtLabel = nodeMap[tgt].label
+    result.innerHTML = `<div class="no-path">No prerequisite path exists between <strong>${srcLabel}</strong> and <strong>${tgtLabel}</strong>.<br><span style="font-size:0.85rem;font-weight:400;color:#888">These topics are independent of each other.</span></div>`
+    return
+  }
+
+  // If backward, reverse for display (show prereq → dependent order)
+  if (direction === 'backward') {
+    path.reverse()
+  }
+
+  renderPath(path, result)
+}
+
+// Store last rendered path for the play button
+let lastRenderedPath = null
+
+function renderPath(path, result) {
+  lastRenderedPath = path
+
+  let html = '<div class="path-container">'
+  path.forEach((id, i) => {
+    const n = nodeMap[id]
+    const cls = i === 0 ? 'start' : i === path.length - 1 ? 'end' : 'mid'
+    html += `<div class="path-node ${cls}">
+      <div class="node-label">${n.label}</div>
+      <div class="node-sub">${n.sub}</div>
+      <div class="node-cat">${n.cat}</div>
+    </div>`
+    if (i < path.length - 1) {
+      html += `<div class="path-arrow">
+        <span>↓</span>
+        <span class="edge-label">is prerequisite for</span>
+      </div>`
+    }
+  })
+  html += '</div>'
+
+  const steps = path.length - 1
+  html += `<div class="path-summary"><strong>${steps}</strong> step${steps !== 1 ? 's' : ''} from <strong>${nodeMap[path[0]].label}</strong> to <strong>${nodeMap[path[path.length-1]].label}</strong></div>`
+
+  // Filter: only include puzzles that have API endpoints (skip gk, vocab, spot — they're MCQ or visual)
+  const NON_QUIZ = new Set(['gk', 'vocab', 'spot'])
+  const playable = path.filter(id => !NON_QUIZ.has(id))
+  if (playable.length >= 2) {
+    html += `<button class="play-btn" onclick="startJourney()">Start the Journey</button>`
+  }
+
+  result.innerHTML = html
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ADAPTIVE JOURNEY — quiz through the path sequence
+// ═══════════════════════════════════════════════════════════════
+
+// Map puzzle IDs to their API path names
+const API_MAP = {
+  basicarith:'basicarith-api', addition:'addition-api', multiply:'multiply-api', rounding:'rounding-api',
+  fractionadd:'fractionadd-api', percent:'percent-api', profitloss:'profitloss-api', ratio:'ratio-api',
+  sdt:'sdt-api', squaring:'squaring-api', hcflcm:'hcflcm-api', primefactor:'primefactor-api',
+  bases:'bases-api', indices:'indices-api', surds:'surds-api', stdform:'stdform-api', log:'log-api',
+  sqrt:'sqrt-api', quadratic:'quadratic-api', funceval:'funceval-api', polymul:'polymul-api',
+  polyfactor:'polyfactor-api', qformula:'qformula-api', simul:'simul-api', ineq:'ineq-api',
+  sequences:'sequences-api', variation:'variation-api', binomial:'binomial-api', complex:'complex-api',
+  bounds:'bounds-api', angles:'angles-api', triangles:'triangles-api', polygons:'polygons-api',
+  congruence:'congruence-api', similarity:'similarity-api', pythag:'pythag-api', circleth:'circle-api',
+  mensur:'mensur-api', transform:'transform-api', bearings:'bearings-api', coordgeom:'coordgeom-api',
+  lineq:'lineq-api', trig:'trig-api', diff:'diff-api', integ:'integ-api',
+  stats:'stats-api', prob:'prob-api', sets:'sets-api', vectors:'vectors-api',
+  dotprod:'dotprod-api', matrix:'matrix-api', decimals:'decimals-api', lineareq:'lineareq-api',
+  permcomb:'permcomb-api', limits:'limits-api', invtrig:'invtrig-api', remfactor:'remfactor-api',
+  heron:'heron-api', shares:'shares-api', banking:'banking-api', gst:'gst-api',
+  section:'section-api', linprog:'linprog-api', circmeasure:'circmeasure-api', conics:'conics-api',
+  diffeq:'diffeq-api',
+}
+
+// Per-step mastery: need 3 correct out of last 5 to advance
+const MASTERY_WINDOW = 5
+const MASTERY_NEEDED = 3
+
+// Journey state
+let journey = {
+  path: [],           // array of puzzle IDs
+  stepIndex: 0,       // current step in path
+  difficulty: 'easy', // adaptive difficulty for current step
+  adaptScore: 0,      // 0.0 (easy) → 3.0 (extrahard)
+  streak: 0,          // consecutive correct
+  history: [],        // recent correct/wrong booleans for current step
+  question: null,     // current question object
+  answer: '',         // user's typed answer
+  revealed: false,    // answer shown
+  isCorrect: null,    // last answer correctness
+  feedback: '',       // feedback text
+  totalCorrect: 0,    // across entire journey
+  totalAttempted: 0,  // across entire journey
+  startTime: 0,       // journey start timestamp
+}
+
+const ADAPT_DIFFS = ['easy', 'medium', 'hard', 'extrahard']
+function adaptLevel(score) { return ADAPT_DIFFS[Math.min(Math.max(Math.round(score), 0), 3)] }
+
+function startJourney() {
+  const NON_QUIZ = new Set(['gk', 'vocab', 'spot'])
+  const playable = lastRenderedPath.filter(id => !NON_QUIZ.has(id))
+  if (playable.length < 1) return
+
+  journey.path = playable
+  journey.stepIndex = 0
+  journey.difficulty = 'easy'
+  journey.adaptScore = 0
+  journey.streak = 0
+  journey.history = []
+  journey.totalCorrect = 0
+  journey.totalAttempted = 0
+  journey.startTime = Date.now()
+
+  const overlay = document.getElementById('quizOverlay')
+  overlay.classList.add('active')
+  loadJourneyQuestion()
+}
+
+function quitJourney() {
+  document.getElementById('quizOverlay').classList.remove('active')
+}
+
+async function loadJourneyQuestion() {
+  const puzzleId = journey.path[journey.stepIndex]
+  const apiPath = API_MAP[puzzleId]
+  if (!apiPath) { advanceStep(); return }
+
+  journey.difficulty = adaptLevel(journey.adaptScore)
+  journey.answer = ''
+  journey.revealed = false
+  journey.isCorrect = null
+  journey.feedback = ''
+
+  try {
+    const r = await fetch(`/${apiPath}/question?difficulty=${journey.difficulty}`)
+    journey.question = await r.json()
+  } catch (e) {
+    console.error('Failed to load question:', e)
+    journey.question = { prompt: 'Error loading question', answer: 0, display: '?' }
+  }
+
+  renderQuiz()
+  setTimeout(() => {
+    const inp = document.getElementById('quizInput')
+    if (inp) inp.focus()
+  }, 100)
+}
+
+async function submitJourneyAnswer() {
+  if (journey.revealed || !journey.answer.trim()) return
+
+  const puzzleId = journey.path[journey.stepIndex]
+  const apiPath = API_MAP[puzzleId]
+  journey.revealed = true
+  journey.totalAttempted++
+
+  try {
+    const r = await fetch(`/${apiPath}/check`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...journey.question, userAnswer: journey.answer.trim() }),
+    })
+    const data = await r.json()
+    journey.isCorrect = data.correct
+    const displayAnswer = data.display || data.answer || ''
+    journey.feedback = data.correct ? `Correct!${displayAnswer ? ' ' + displayAnswer : ''}` : `Incorrect.${displayAnswer ? ' Answer: ' + displayAnswer : ''}`
+
+    if (data.correct) {
+      journey.totalCorrect++
+      journey.streak = Math.max(0, journey.streak) + 1
+      const bump = journey.streak >= 3 ? 0.5 : 0.3
+      journey.adaptScore = Math.min(3, journey.adaptScore + bump)
+    } else {
+      journey.streak = Math.min(0, journey.streak) - 1
+      journey.adaptScore = Math.max(0, journey.adaptScore - 0.4)
+    }
+
+    // Track mastery for this step
+    journey.history.push(data.correct)
+    if (journey.history.length > MASTERY_WINDOW) journey.history.shift()
+  } catch (e) {
+    journey.isCorrect = false
+    journey.feedback = 'Error checking answer'
+  }
+
+  renderQuiz()
+}
+
+function checkMastery() {
+  if (journey.history.length < MASTERY_NEEDED) return false
+  const recent = journey.history.slice(-MASTERY_WINDOW)
+  return recent.filter(Boolean).length >= MASTERY_NEEDED
+}
+
+function advanceStep() {
+  journey.stepIndex++
+  journey.history = []  // reset mastery tracking for new step
+  // Keep adaptScore — it carries across steps
+  if (journey.stepIndex >= journey.path.length) {
+    renderJourneyComplete()
+  } else {
+    loadJourneyQuestion()
+  }
+}
+
+function skipJourneyQuestion() {
+  if (journey.revealed) return
+  journey.revealed = true
+  journey.isCorrect = false
+  journey.feedback = 'Skipped'
+  journey.history.push(false)
+  if (journey.history.length > MASTERY_WINDOW) journey.history.shift()
+  journey.streak = 0
+  renderQuiz()
+}
+
+async function solveJourneyQuestion() {
+  if (journey.revealed || !journey.question) return
+  journey.revealed = true
+
+  const puzzleId = journey.path[journey.stepIndex]
+  const apiPath = API_MAP[puzzleId]
+
+  try {
+    const r = await fetch(`/${apiPath}/check`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...journey.question, userAnswer: '', solve: true }),
+    })
+    const data = await r.json()
+    journey.isCorrect = false
+    const displayAnswer = data.display || data.correctAnswer || data.answer || ''
+    const explanation = data.explanation || ''
+    journey.feedback = `Solution: ${displayAnswer}${explanation ? '\n' + explanation : ''}`
+    journey.history.push(false)
+    if (journey.history.length > MASTERY_WINDOW) journey.history.shift()
+  } catch (e) {
+    journey.isCorrect = false
+    journey.feedback = 'Error getting solution'
+  }
+  renderQuiz()
+}
+
+function reportJourneyDifficulty(wasDifficult) {
+  if (wasDifficult) {
+    journey.adaptScore = Math.max(0, journey.adaptScore - 0.5)
+  } else {
+    journey.adaptScore = Math.min(3, journey.adaptScore + 0.3)
+  }
+}
+
+function journeyNext() {
+  if (checkMastery()) {
+    advanceStep()
+  } else {
+    loadJourneyQuestion()
+  }
+}
+
+function numpadPress(key) {
+  if (journey.revealed) return
+  if (key === 'backspace') {
+    journey.answer = journey.answer.slice(0, -1)
+  } else if (key === '+-') {
+    journey.answer = journey.answer.startsWith('-') ? journey.answer.slice(1) : '-' + journey.answer
+  } else if (key === '.') {
+    if (!journey.answer.includes('.')) journey.answer += '.'
+  } else if (key === '/') {
+    if (!journey.answer.includes('/')) journey.answer += '/'
+  } else {
+    journey.answer += key
+  }
+  renderQuiz()
+  document.getElementById('quizInput')?.focus()
+}
+
+function handleQuizKey(e) {
+  if (e.key === 'Enter') {
+    e.preventDefault()
+    if (journey.revealed) {
+      if (checkMastery()) advanceStep()
+      else journeyNext()
+    } else {
+      submitJourneyAnswer()
+    }
+  }
+}
+
+// Global keydown so Enter works even when input is disabled after reveal
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && journey.revealed && document.getElementById('quizOverlay')?.style.display !== 'none') {
+    e.preventDefault()
+    if (checkMastery()) advanceStep()
+    else journeyNext()
+  }
+})
+
+function renderQuiz() {
+  const overlay = document.getElementById('quizOverlay')
+  const puzzleId = journey.path[journey.stepIndex]
+  const n = nodeMap[puzzleId]
+  const totalSteps = journey.path.length
+  const progressPct = (journey.stepIndex / totalSteps) * 100
+
+  // Mastery progress for current step
+  const masteryCount = journey.history.filter(Boolean).length
+  const masteryPct = Math.min(100, (masteryCount / MASTERY_NEEDED) * 100)
+  const mastered = checkMastery()
+
+  let html = ''
+
+  // Header
+  html += `<div class="quiz-header">
+    <h2>The Journey to ${nodeMap[journey.path[journey.path.length-1]].label}</h2>
+    <div class="step-label">Step ${journey.stepIndex + 1} of ${totalSteps}</div>
+  </div>`
+
+  // Overall progress bar
+  html += `<div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:${progressPct}%"></div></div>`
+
+  // Step pills
+  html += '<div class="quiz-step-pills">'
+  journey.path.forEach((id, i) => {
+    const cls = i < journey.stepIndex ? 'done' : i === journey.stepIndex ? 'active' : 'locked'
+    html += `<span class="step-pill ${cls}">${nodeMap[id].label}</span>`
+  })
+  html += '</div>'
+
+  // Question card
+  const prompt = journey.question?.prompt || journey.question?.display || 'Loading...'
+  html += `<div class="quiz-card">`
+  html += `<div class="q-type">${n.label} — ${journey.difficulty}</div>`
+  html += `<div class="q-prompt">${prompt}</div>`
+  html += `<input class="q-input" id="quizInput" type="text" value="${escHtml(journey.answer)}"
+    oninput="journey.answer=this.value" onkeydown="handleQuizKey(event)"
+    ${journey.revealed ? 'disabled' : ''} placeholder="Type your answer" autocomplete="off">`
+
+  // Numpad
+  html += '<div class="q-numpad">'
+  html += '<div class="np-row">' + [1,2,3].map(k => `<button class="np-key" onclick="numpadPress('${k}')">${k}</button>`).join('') + '</div>'
+  html += '<div class="np-row">' + [4,5,6].map(k => `<button class="np-key" onclick="numpadPress('${k}')">${k}</button>`).join('') + '</div>'
+  html += '<div class="np-row">' + [7,8,9].map(k => `<button class="np-key" onclick="numpadPress('${k}')">${k}</button>`).join('') + '</div>'
+  html += `<div class="np-row">
+    <button class="np-key np-special" onclick="numpadPress('+-')">&#177;</button>
+    <button class="np-key" onclick="numpadPress('0')">0</button>
+    <button class="np-key np-special" onclick="numpadPress('.')">.</button>
+    <button class="np-key np-special" onclick="numpadPress('backspace')">&#9003;</button>
+  </div>`
+  html += '</div>'
+
+  // Feedback
+  if (journey.feedback) {
+    const isSolve = !journey.isCorrect && journey.feedback.startsWith('Solution:')
+    if (isSolve) {
+      const lines = journey.feedback.split('\n')
+      const ansLine = lines[0].replace('Solution: ', '').trim()
+      const explainLines = lines.slice(1).join('\n').trim()
+      html += `<div class="q-feedback solve">`
+      html += `<div class="solve-answer">${ansLine}</div>`
+      if (explainLines) html += `<div class="solve-explain" style="white-space:pre-line">${explainLines}</div>`
+      html += `</div>`
+    } else {
+      const cls = journey.isCorrect ? 'correct' : 'wrong'
+      html += `<div class="q-feedback ${cls}">${journey.feedback}</div>`
+    }
+  }
+
+  // Mastery bar for current step
+  html += `<div style="margin-top:14px;font-size:0.78rem;color:#888;">
+    Mastery: ${masteryCount}/${MASTERY_NEEDED} correct ${mastered ? '<span style="color:#66bb6a;">✓ Ready to advance!</span>' : `(need ${MASTERY_NEEDED} of last ${MASTERY_WINDOW})`}
+  </div>`
+  html += `<div class="quiz-adapt-bar"><div class="quiz-adapt-fill" style="width:${masteryPct}%;background:${mastered ? '#66bb6a' : '#42a5f5'}"></div></div>`
+
+  html += '</div>' // end quiz-card
+
+  // Self-report buttons (always visible)
+  html += `<div style="text-align:center;margin:10px 0 4px;">
+    <span style="font-size:0.75rem;color:#888;margin-right:8px;">How are you feeling?</span>
+    <button onclick="reportJourneyDifficulty(false)" style="font-size:0.78rem;padding:5px 14px;border-radius:8px;margin-right:6px;background:transparent;border:1px solid #66bb6a;color:#66bb6a;cursor:pointer;">Too Easy</button>
+    <button onclick="reportJourneyDifficulty(true)" style="font-size:0.78rem;padding:5px 14px;border-radius:8px;background:transparent;border:1px solid #ef5350;color:#ef5350;cursor:pointer;">Too Hard</button>
+  </div>`
+
+  // Buttons
+  html += '<div class="quiz-btns">'
+  if (!journey.revealed) {
+    html += `<button class="submit-btn" onclick="submitJourneyAnswer()" ${!journey.answer.trim() ? 'disabled' : ''}>Submit</button>`
+    html += `<button class="submit-btn" onclick="solveJourneyQuestion()" style="background:transparent;border:1px solid #42a5f5;color:#42a5f5;">Solve</button>`
+    html += `<button class="quit-btn" onclick="skipJourneyQuestion()">Skip</button>`
+  } else if (mastered) {
+    html += `<button class="next-btn" onclick="advanceStep()">${journey.stepIndex >= totalSteps - 1 ? 'Finish Journey' : 'Next Topic →'}</button>`
+  } else {
+    html += `<button class="next-btn" onclick="journeyNext()">Next Question</button>`
+  }
+  html += `<button class="quit-btn" onclick="quitJourney()">Quit</button>`
+  html += '</div>'
+
+  overlay.innerHTML = html
+}
+
+function renderJourneyComplete() {
+  const overlay = document.getElementById('quizOverlay')
+  const elapsed = Math.round((Date.now() - journey.startTime) / 1000)
+  const mins = Math.floor(elapsed / 60)
+  const secs = elapsed % 60
+
+  let html = `<div class="quiz-congrats">
+    <h2>Journey Complete!</h2>
+    <p>You walked the path from <span class="stat">${nodeMap[journey.path[0]].label}</span>
+       to <span class="stat">${nodeMap[journey.path[journey.path.length-1]].label}</span></p>
+    <p><span class="stat">${journey.path.length}</span> topics mastered</p>
+    <p><span class="stat">${journey.totalCorrect}</span> correct out of <span class="stat">${journey.totalAttempted}</span> attempts</p>
+    <p>Time: <span class="stat">${mins}m ${secs}s</span></p>
+    <div style="margin-top:20px;">
+      <button class="play-btn" onclick="quitJourney()">Back to Path Finder</button>
+    </div>
+  </div>`
+
+  // Show completed pills
+  html += '<div class="quiz-step-pills" style="margin-top:20px;">'
+  journey.path.forEach(id => {
+    html += `<span class="step-pill done">${nodeMap[id].label}</span>`
+  })
+  html += '</div>'
+
+  overlay.innerHTML = html
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')
+}
+
+// Run on load with defaults
+findPath()
+</script>
+</body>
+</html>

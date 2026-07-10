@@ -1,0 +1,15 @@
+{
+  "id": 1600,
+  "word": "Designing",
+  "question": "Designing",
+  "options": [
+    "Scheming in a manipulative way",
+    "To reduce to a lower rank or position",
+    "Able to be denied or refuted",
+    "Lacking important necessities"
+  ],
+  "answerOption": "A",
+  "answerText": "Scheming in a manipulative way",
+  "difficulty": "medium",
+  "sourceFile": "1600.json"
+}

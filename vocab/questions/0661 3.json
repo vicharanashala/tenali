@@ -1,0 +1,15 @@
+{
+  "id": 661,
+  "word": "Tiny",
+  "question": "Tiny",
+  "options": [
+    "To become mature and ready to eat",
+    "Feeling pleasure or happiness",
+    "To carefully choose as being the best",
+    "Very small in size"
+  ],
+  "answerOption": "D",
+  "answerText": "Very small in size",
+  "difficulty": "easy",
+  "sourceFile": "0661.json"
+}

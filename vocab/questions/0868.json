@@ -1,0 +1,15 @@
+{
+  "id": 868,
+  "word": "Long",
+  "question": "Long",
+  "options": [
+    "To become limp through heat or lack of water",
+    "Lasting a considerable time",
+    "To order someone not to do something",
+    "Having lived for a long time; no longer young"
+  ],
+  "answerOption": "B",
+  "answerText": "Lasting a considerable time",
+  "difficulty": "easy",
+  "sourceFile": "0868.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 326,
+  "word": "Warn",
+  "question": "Warn",
+  "options": [
+    "Luxuriously expensive or rich",
+    "To tell someone about a possible danger",
+    "To feel or detect something",
+    "Very bad or disagreeable"
+  ],
+  "answerOption": "B",
+  "answerText": "To tell someone about a possible danger",
+  "difficulty": "easy",
+  "sourceFile": "0326.json"
+}

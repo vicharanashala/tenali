@@ -1,0 +1,14 @@
+{
+  "id": 114,
+  "question": "Which is the only continent through which the equator, Tropic of Cancer, and Tropic of Capricorn all pass?",
+  "options": [
+    "Asia",
+    "Africa",
+    "South America",
+    "Australia"
+  ],
+  "answerOption": "B",
+  "answerText": "Africa",
+  "genre": "geography",
+  "sourceFile": "0114.json"
+}

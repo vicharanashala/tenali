@@ -1,0 +1,15 @@
+{
+  "id": 2345,
+  "word": "Kairosclerosis",
+  "question": "Kairosclerosis",
+  "options": [
+    "The state of deviating or straying",
+    "A city in Texas",
+    "The moment you realize you're happy",
+    "Relating to paradise; blissful"
+  ],
+  "answerOption": "C",
+  "answerText": "The moment you realize you're happy",
+  "difficulty": "extra-hard",
+  "sourceFile": "2345.json"
+}

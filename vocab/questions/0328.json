@@ -1,0 +1,15 @@
+{
+  "id": 328,
+  "word": "Suggest",
+  "question": "Suggest",
+  "options": [
+    "To put forward an idea for consideration",
+    "To carry out an action or task",
+    "Shaped like a circle or sphere",
+    "Of very great size"
+  ],
+  "answerOption": "A",
+  "answerText": "To put forward an idea for consideration",
+  "difficulty": "easy",
+  "sourceFile": "0328.json"
+}

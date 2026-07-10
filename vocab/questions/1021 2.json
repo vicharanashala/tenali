@@ -1,0 +1,15 @@
+{
+  "id": 1021,
+  "word": "Formidable",
+  "question": "Formidable",
+  "options": [
+    "To persuade someone by force or threats",
+    "Inspiring fear or respect through size",
+    "To move back and forth at a regular speed",
+    "Dealing with things in a practical way"
+  ],
+  "answerOption": "B",
+  "answerText": "Inspiring fear or respect through size",
+  "difficulty": "medium",
+  "sourceFile": "1021.json"
+}

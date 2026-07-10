@@ -1,0 +1,15 @@
+{
+  "id": 1719,
+  "word": "Detrainment",
+  "question": "Detrainment",
+  "options": [
+    "The action of holding someone",
+    "Stripping leaves from a plant",
+    "The action of getting off train",
+    "To conclude by reasoning"
+  ],
+  "answerOption": "C",
+  "answerText": "The action of getting off train",
+  "difficulty": "medium",
+  "sourceFile": "1719.json"
+}

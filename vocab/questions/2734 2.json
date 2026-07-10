@@ -1,0 +1,15 @@
+{
+  "id": 2734,
+  "word": "Zugzwang",
+  "question": "Zugzwang",
+  "options": [
+    "A situation where any move will worsen one's position",
+    "Relating to abyss viewing",
+    "In manner of abyss cutting",
+    "In abyssal manner"
+  ],
+  "answerOption": "A",
+  "answerText": "A situation where any move will worsen one's position",
+  "difficulty": "extra-hard",
+  "sourceFile": "2734.json"
+}

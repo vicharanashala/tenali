@@ -1,0 +1,15 @@
+{
+  "id": 579,
+  "word": "Pessimistic",
+  "question": "Pessimistic",
+  "options": [
+    "Eager to know or learn something",
+    "To interfere with the peace of someone",
+    "To establish the truth of something",
+    "Expecting the worst possible outcome"
+  ],
+  "answerOption": "D",
+  "answerText": "Expecting the worst possible outcome",
+  "difficulty": "easy",
+  "sourceFile": "0579.json"
+}

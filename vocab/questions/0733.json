@@ -1,0 +1,15 @@
+{
+  "id": 733,
+  "word": "Translucent",
+  "question": "Translucent",
+  "options": [
+    "Too small to be seen by the eye",
+    "To be turned into ice or become very cold",
+    "To move smoothly along a surface",
+    "Allowing light through but not transparent"
+  ],
+  "answerOption": "D",
+  "answerText": "Allowing light through but not transparent",
+  "difficulty": "easy",
+  "sourceFile": "0733.json"
+}

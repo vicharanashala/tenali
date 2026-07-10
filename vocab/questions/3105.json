@@ -1,0 +1,15 @@
+{
+  "id": 3105,
+  "word": "Saudade",
+  "question": "Saudade",
+  "options": [
+    "In an abulic manner",
+    "In manner of taking away",
+    "A melancholic longing for something absent",
+    "Tending to remove limits"
+  ],
+  "answerOption": "C",
+  "answerText": "A melancholic longing for something absent",
+  "difficulty": "extra-hard",
+  "sourceFile": "3105.json"
+}

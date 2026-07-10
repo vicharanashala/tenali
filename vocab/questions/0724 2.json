@@ -1,0 +1,15 @@
+{
+  "id": 724,
+  "word": "Horizontal",
+  "question": "Horizontal",
+  "options": [
+    "To give someone the authority to do something",
+    "Parallel to the ground; flat",
+    "To go down below the surface of a liquid",
+    "To have something come into the mind again"
+  ],
+  "answerOption": "B",
+  "answerText": "Parallel to the ground; flat",
+  "difficulty": "easy",
+  "sourceFile": "0724.json"
+}

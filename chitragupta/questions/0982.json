@@ -1,0 +1,14 @@
+{
+  "id": 982,
+  "question": "Which bird is known for mimicking human speech?",
+  "options": [
+    "Sparrow",
+    "Parrot",
+    "Crow",
+    "Peacock"
+  ],
+  "answerOption": "B",
+  "answerText": "Parrot",
+  "genre": "general-knowledge",
+  "sourceFile": "0982.json"
+}

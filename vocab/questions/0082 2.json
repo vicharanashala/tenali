@@ -1,0 +1,15 @@
+{
+  "id": 82,
+  "word": "Fresh",
+  "question": "Fresh",
+  "options": [
+    "Feeling pleasure and contentment",
+    "Unable to be seen",
+    "Recently made or obtained; not stale",
+    "To put forward someone or something as good"
+  ],
+  "answerOption": "C",
+  "answerText": "Recently made or obtained; not stale",
+  "difficulty": "easy",
+  "sourceFile": "0082.json"
+}

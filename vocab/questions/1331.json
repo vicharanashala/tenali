@@ -1,0 +1,15 @@
+{
+  "id": 1331,
+  "word": "Deed",
+  "question": "Deed",
+  "options": [
+    "An action or performance",
+    "Not competent or skilled",
+    "Tending to decrease in value",
+    "A state of being deserted or lonely"
+  ],
+  "answerOption": "A",
+  "answerText": "An action or performance",
+  "difficulty": "medium",
+  "sourceFile": "1331.json"
+}

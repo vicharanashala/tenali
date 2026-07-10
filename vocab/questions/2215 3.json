@@ -1,0 +1,15 @@
+{
+  "id": 2215,
+  "word": "Aecium",
+  "question": "Aecium",
+  "options": [
+    "Relating to measuring air",
+    "The act of advising someone",
+    "The action of explaining something",
+    "The fruiting body producing aeciospore"
+  ],
+  "answerOption": "D",
+  "answerText": "The fruiting body producing aeciospore",
+  "difficulty": "hard",
+  "sourceFile": "2215.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 384,
+  "word": "Drip",
+  "question": "Drip",
+  "options": [
+    "Covered or saturated with water",
+    "To determine an amount by mathematics",
+    "To let liquid fall in small drops",
+    "To move something quickly back and forth"
+  ],
+  "answerOption": "C",
+  "answerText": "To let liquid fall in small drops",
+  "difficulty": "easy",
+  "sourceFile": "0384.json"
+}

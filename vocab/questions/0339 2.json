@@ -1,0 +1,15 @@
+{
+  "id": 339,
+  "word": "Defend",
+  "question": "Defend",
+  "options": [
+    "To continue in spite of difficulty",
+    "To firmly press something from both sides",
+    "To protect from attack or danger",
+    "To have enough money to pay for something"
+  ],
+  "answerOption": "C",
+  "answerText": "To protect from attack or danger",
+  "difficulty": "easy",
+  "sourceFile": "0339.json"
+}

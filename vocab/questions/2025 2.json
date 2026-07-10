@@ -1,0 +1,15 @@
+{
+  "id": 2025,
+  "word": "Aegithus",
+  "question": "Aegithus",
+  "options": [
+    "Toxemia from air exposure",
+    "Dental pain from altitude",
+    "A genus of terns or seabirds",
+    "Serving to advocate or plead"
+  ],
+  "answerOption": "C",
+  "answerText": "A genus of terns or seabirds",
+  "difficulty": "hard",
+  "sourceFile": "2025.json"
+}

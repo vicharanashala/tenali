@@ -1,0 +1,15 @@
+{
+  "id": 1987,
+  "word": "Contentious",
+  "question": "Contentious",
+  "options": [
+    "To cause something to cease to exist",
+    "Causing or likely to cause debate",
+    "To unfasten or separate something",
+    "To remove toxic substances from"
+  ],
+  "answerOption": "B",
+  "answerText": "Causing or likely to cause debate",
+  "difficulty": "medium",
+  "sourceFile": "1987.json"
+}

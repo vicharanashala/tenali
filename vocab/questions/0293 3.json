@@ -1,0 +1,15 @@
+{
+  "id": 293,
+  "word": "Pause",
+  "question": "Pause",
+  "options": [
+    "To stop briefly before continuing",
+    "Able to express oneself easily in a language",
+    "Free from pretense or deceit",
+    "Large and heavy or solid"
+  ],
+  "answerOption": "A",
+  "answerText": "To stop briefly before continuing",
+  "difficulty": "easy",
+  "sourceFile": "0293.json"
+}

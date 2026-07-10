@@ -1,0 +1,15 @@
+{
+  "id": 2254,
+  "word": "AEROTECHNICAL",
+  "question": "AEROTECHNICAL",
+  "options": [
+    "Relating to air technology",
+    "To renounce or reject something",
+    "A prehistoric stone artifact",
+    "Relating to meteorites from space"
+  ],
+  "answerOption": "A",
+  "answerText": "Relating to air technology",
+  "difficulty": "hard",
+  "sourceFile": "2254.json"
+}

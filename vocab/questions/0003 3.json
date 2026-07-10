@@ -1,0 +1,15 @@
+{
+  "id": 3,
+  "word": "Angry",
+  "question": "Angry",
+  "options": [
+    "Feeling strong displeasure or hostility",
+    "Not making or accompanied by any sound",
+    "Feeling a need to drink something",
+    "Having a sharp, unpleasant taste"
+  ],
+  "answerOption": "A",
+  "answerText": "Feeling strong displeasure or hostility",
+  "difficulty": "easy",
+  "sourceFile": "0003.json"
+}

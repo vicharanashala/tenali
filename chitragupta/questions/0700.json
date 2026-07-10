@@ -1,0 +1,14 @@
+{
+  "id": 700,
+  "question": "Who discovered radio waves experimentally?",
+  "options": [
+    "Maxwell",
+    "Hertz",
+    "Faraday",
+    "Marconi"
+  ],
+  "answerOption": "B",
+  "answerText": "Hertz",
+  "genre": "general-knowledge",
+  "sourceFile": "0700.json"
+}

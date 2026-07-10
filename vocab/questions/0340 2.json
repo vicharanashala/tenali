@@ -1,0 +1,15 @@
+{
+  "id": 340,
+  "word": "Rescue",
+  "question": "Rescue",
+  "options": [
+    "To come or go into a place",
+    "Having lived or existed for only a short time",
+    "To save someone from a dangerous situation",
+    "Noticeably happy and optimistic"
+  ],
+  "answerOption": "C",
+  "answerText": "To save someone from a dangerous situation",
+  "difficulty": "easy",
+  "sourceFile": "0340.json"
+}

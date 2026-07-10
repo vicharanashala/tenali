@@ -1,0 +1,15 @@
+{
+  "id": 142,
+  "word": "Sorry",
+  "question": "Sorry",
+  "options": [
+    "To make something look more attractive",
+    "Feeling regret or sadness",
+    "The inner part of something",
+    "To show how something is done"
+  ],
+  "answerOption": "B",
+  "answerText": "Feeling regret or sadness",
+  "difficulty": "easy",
+  "sourceFile": "0142.json"
+}

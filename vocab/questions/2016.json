@@ -1,0 +1,15 @@
+{
+  "id": 2016,
+  "word": "Truculent",
+  "question": "Truculent",
+  "options": [
+    "Eager or quick to argue or fight",
+    "A large heavy book",
+    "One with fear of flying",
+    "Recovery from illness or tiredness"
+  ],
+  "answerOption": "A",
+  "answerText": "Eager or quick to argue or fight",
+  "difficulty": "hard",
+  "sourceFile": "2016.json"
+}

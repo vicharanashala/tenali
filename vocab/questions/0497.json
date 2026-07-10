@@ -1,0 +1,15 @@
+{
+  "id": 497,
+  "word": "Survey",
+  "question": "Survey",
+  "options": [
+    "To discover the presence of something hidden",
+    "Restricted within limits",
+    "To give authorization for something",
+    "To examine and record the features of something"
+  ],
+  "answerOption": "D",
+  "answerText": "To examine and record the features of something",
+  "difficulty": "easy",
+  "sourceFile": "0497.json"
+}

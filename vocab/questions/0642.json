@@ -1,0 +1,15 @@
+{
+  "id": 642,
+  "word": "Talented",
+  "question": "Talented",
+  "options": [
+    "Having a natural ability to do something well",
+    "Free from disturbance; calm",
+    "To cause strong feelings of enthusiasm",
+    "Able to withstand wear and tear"
+  ],
+  "answerOption": "A",
+  "answerText": "Having a natural ability to do something well",
+  "difficulty": "easy",
+  "sourceFile": "0642.json"
+}

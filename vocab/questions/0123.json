@@ -1,0 +1,15 @@
+{
+  "id": 123,
+  "word": "Friendly",
+  "question": "Friendly",
+  "options": [
+    "To produce flowers; to flourish",
+    "To take delight or pleasure in something",
+    "To make great efforts under difficulty",
+    "Kind and pleasant to others"
+  ],
+  "answerOption": "D",
+  "answerText": "Kind and pleasant to others",
+  "difficulty": "easy",
+  "sourceFile": "0123.json"
+}

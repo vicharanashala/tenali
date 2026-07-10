@@ -1,0 +1,15 @@
+{
+  "id": 795,
+  "word": "Unfavorable",
+  "question": "Unfavorable",
+  "options": [
+    "Having the ability to speak clearly",
+    "To consider something to be important",
+    "To remove goods from a vehicle",
+    "Not likely to bring success"
+  ],
+  "answerOption": "D",
+  "answerText": "Not likely to bring success",
+  "difficulty": "easy",
+  "sourceFile": "0795.json"
+}

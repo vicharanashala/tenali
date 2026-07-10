@@ -1,0 +1,14 @@
+{
+  "id": 505,
+  "question": "Which organ in the human body stores urine?",
+  "options": [
+    "Kidney",
+    "Bladder",
+    "Ureter",
+    "Urethra"
+  ],
+  "answerOption": "B",
+  "answerText": "Bladder",
+  "genre": "science",
+  "sourceFile": "0505.json"
+}

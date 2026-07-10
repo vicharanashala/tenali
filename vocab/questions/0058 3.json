@@ -1,0 +1,15 @@
+{
+  "id": 58,
+  "word": "False",
+  "question": "False",
+  "options": [
+    "Being reserved or timid around other people",
+    "Required by law or rule; mandatory",
+    "Of great or more than average height",
+    "Not according to truth or fact"
+  ],
+  "answerOption": "D",
+  "answerText": "Not according to truth or fact",
+  "difficulty": "easy",
+  "sourceFile": "0058.json"
+}

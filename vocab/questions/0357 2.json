@@ -1,0 +1,15 @@
+{
+  "id": 357,
+  "word": "Donate",
+  "question": "Donate",
+  "options": [
+    "To give money or goods to a cause",
+    "Logical and well organized",
+    "Making or given to making a lot of noise",
+    "To cause someone to believe something"
+  ],
+  "answerOption": "A",
+  "answerText": "To give money or goods to a cause",
+  "difficulty": "easy",
+  "sourceFile": "0357.json"
+}

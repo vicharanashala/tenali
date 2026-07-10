@@ -1,0 +1,15 @@
+{
+  "id": 220,
+  "word": "Protect",
+  "question": "Protect",
+  "options": [
+    "To break the connection between things",
+    "Existing in large quantities",
+    "Low in price; not expensive",
+    "To keep safe from harm or injury"
+  ],
+  "answerOption": "D",
+  "answerText": "To keep safe from harm or injury",
+  "difficulty": "easy",
+  "sourceFile": "0220.json"
+}

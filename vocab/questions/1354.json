@@ -1,0 +1,15 @@
+{
+  "id": 1354,
+  "word": "Defrost",
+  "question": "Defrost",
+  "options": [
+    "A disturbed state of mind in illness",
+    "To thaw something that is frozen",
+    "Causing intense distaste or aversion",
+    "Making a loud confused noise; uproarious"
+  ],
+  "answerOption": "B",
+  "answerText": "To thaw something that is frozen",
+  "difficulty": "medium",
+  "sourceFile": "1354.json"
+}

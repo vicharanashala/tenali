@@ -1,0 +1,15 @@
+{
+  "id": 439,
+  "word": "Load",
+  "question": "Load",
+  "options": [
+    "To put goods or cargo onto a vehicle",
+    "Making little or no noise",
+    "To withdraw from a position",
+    "Relating to the region near the equator"
+  ],
+  "answerOption": "A",
+  "answerText": "To put goods or cargo onto a vehicle",
+  "difficulty": "easy",
+  "sourceFile": "0439.json"
+}

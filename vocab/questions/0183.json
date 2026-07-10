@@ -1,0 +1,15 @@
+{
+  "id": 183,
+  "word": "Spend",
+  "question": "Spend",
+  "options": [
+    "To pay out money for goods or services",
+    "Involving or creating good conditions",
+    "To recognize the full worth of something",
+    "Harsh or bitter taste or smell"
+  ],
+  "answerOption": "A",
+  "answerText": "To pay out money for goods or services",
+  "difficulty": "easy",
+  "sourceFile": "0183.json"
+}

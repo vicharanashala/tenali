@@ -1,0 +1,15 @@
+{
+  "id": 1251,
+  "word": "Whim",
+  "question": "Whim",
+  "options": [
+    "A substance reducing body odor",
+    "Of such small amount as to be ridiculous",
+    "Feeling regret for something done",
+    "A sudden desire or change of mind"
+  ],
+  "answerOption": "D",
+  "answerText": "A sudden desire or change of mind",
+  "difficulty": "medium",
+  "sourceFile": "1251.json"
+}

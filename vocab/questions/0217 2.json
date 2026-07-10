@@ -1,0 +1,15 @@
+{
+  "id": 217,
+  "word": "Ignore",
+  "question": "Ignore",
+  "options": [
+    "To refuse to take notice of something",
+    "Free from disturbance; tranquil",
+    "Of very great extent or quantity",
+    "To agree to give something requested"
+  ],
+  "answerOption": "A",
+  "answerText": "To refuse to take notice of something",
+  "difficulty": "easy",
+  "sourceFile": "0217.json"
+}

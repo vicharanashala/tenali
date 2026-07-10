@@ -1,0 +1,15 @@
+{
+  "id": 2647,
+  "word": "Ineludible",
+  "question": "Ineludible",
+  "options": [
+    "Unable to be stopped or prevented",
+    "Unable to be avoided or escaped",
+    "Generation of gas or air",
+    "The process of aerating something"
+  ],
+  "answerOption": "B",
+  "answerText": "Unable to be avoided or escaped",
+  "difficulty": "hard",
+  "sourceFile": "2647.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2432,
+  "word": "Aeracy",
+  "question": "Aeracy",
+  "options": [
+    "The way a word is pronounced",
+    "Exposure to air or atmosphere",
+    "Optimistic in a difficult situation",
+    "A city built in air"
+  ],
+  "answerOption": "B",
+  "answerText": "Exposure to air or atmosphere",
+  "difficulty": "hard",
+  "sourceFile": "2432.json"
+}

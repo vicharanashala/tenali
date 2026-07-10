@@ -1,0 +1,15 @@
+{
+  "id": 1704,
+  "word": "Detestation",
+  "question": "Detestation",
+  "options": [
+    "Intense dislike or disgust",
+    "Extremely cruel or wicked",
+    "The highest point reached by something",
+    "Required to do something"
+  ],
+  "answerOption": "A",
+  "answerText": "Intense dislike or disgust",
+  "difficulty": "medium",
+  "sourceFile": "1704.json"
+}

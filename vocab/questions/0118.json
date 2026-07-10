@@ -1,0 +1,15 @@
+{
+  "id": 118,
+  "word": "Gloomy",
+  "question": "Gloomy",
+  "options": [
+    "To give attention to sound or speech",
+    "A long journey by sea or space",
+    "To cause something to come closer",
+    "Dark or poorly lit; depressing"
+  ],
+  "answerOption": "D",
+  "answerText": "Dark or poorly lit; depressing",
+  "difficulty": "easy",
+  "sourceFile": "0118.json"
+}

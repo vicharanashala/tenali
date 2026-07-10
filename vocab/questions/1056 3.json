@@ -1,0 +1,15 @@
+{
+  "id": 1056,
+  "word": "Entice",
+  "question": "Entice",
+  "options": [
+    "The profession of treating teeth",
+    "A small cup for strong black coffee",
+    "To attract by offering pleasure or advantage",
+    "In a determinate manner"
+  ],
+  "answerOption": "C",
+  "answerText": "To attract by offering pleasure or advantage",
+  "difficulty": "medium",
+  "sourceFile": "1056.json"
+}

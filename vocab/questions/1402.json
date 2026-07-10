@@ -1,0 +1,15 @@
+{
+  "id": 1402,
+  "word": "Demise",
+  "question": "Demise",
+  "options": [
+    "Instructed or commanded to do",
+    "Refusal to change position",
+    "A person or thing announcing what is to come",
+    "A person's death or the end of something"
+  ],
+  "answerOption": "D",
+  "answerText": "A person's death or the end of something",
+  "difficulty": "medium",
+  "sourceFile": "1402.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1982,
+  "word": "Advisability",
+  "question": "Advisability",
+  "options": [
+    "The quality of being advisable",
+    "Proceeding in a harmful way gradually",
+    "Using high-flown or bombastic language",
+    "Kept secret because it would not be approved"
+  ],
+  "answerOption": "A",
+  "answerText": "The quality of being advisable",
+  "difficulty": "hard",
+  "sourceFile": "1982.json"
+}

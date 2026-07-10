@@ -1,0 +1,15 @@
+{
+  "id": 670,
+  "word": "Abundant",
+  "question": "Abundant",
+  "options": [
+    "Very small; much smaller than normal",
+    "To honor a special occasion with festivities",
+    "To discover the presence of something hidden",
+    "Existing in very large quantities"
+  ],
+  "answerOption": "D",
+  "answerText": "Existing in very large quantities",
+  "difficulty": "easy",
+  "sourceFile": "0670.json"
+}

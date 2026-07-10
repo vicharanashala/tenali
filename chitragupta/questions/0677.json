@@ -1,0 +1,14 @@
+{
+  "id": 677,
+  "question": "What is the chemical symbol for fluorine?",
+  "options": [
+    "Fl",
+    "Fr",
+    "F",
+    "Fu"
+  ],
+  "answerOption": "C",
+  "answerText": "F",
+  "genre": "mixed",
+  "sourceFile": "0677.json"
+}

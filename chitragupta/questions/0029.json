@@ -1,0 +1,14 @@
+{
+  "id": 29,
+  "question": "Which Indian scientist is called the Missile Man of India?",
+  "options": [
+    "C. V. Raman",
+    "A. P. J. Abdul Kalam",
+    "Homi Bhabha",
+    "Jagadish Chandra Bose"
+  ],
+  "answerOption": "B",
+  "answerText": "A. P. J. Abdul Kalam",
+  "genre": "india-gk",
+  "sourceFile": "0029.json"
+}

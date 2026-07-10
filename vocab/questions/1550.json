@@ -1,0 +1,15 @@
+{
+  "id": 1550,
+  "word": "Dermatitis",
+  "question": "Dermatitis",
+  "options": [
+    "Unable to be stopped or prevented",
+    "Mysterious or difficult to understand",
+    "Confusing or perplexing",
+    "Inflammation of the skin"
+  ],
+  "answerOption": "D",
+  "answerText": "Inflammation of the skin",
+  "difficulty": "medium",
+  "sourceFile": "1550.json"
+}

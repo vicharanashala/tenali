@@ -1,0 +1,15 @@
+{
+  "id": 2420,
+  "word": "Solivagant",
+  "question": "Solivagant",
+  "options": [
+    "Wandering alone",
+    "A place where one feels safe and at home",
+    "Plural of abit",
+    "The final outcome of a complex sequence of events"
+  ],
+  "answerOption": "A",
+  "answerText": "Wandering alone",
+  "difficulty": "extra-hard",
+  "sourceFile": "2420.json"
+}

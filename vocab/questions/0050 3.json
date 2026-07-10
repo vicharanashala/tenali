@@ -1,0 +1,15 @@
+{
+  "id": 50,
+  "word": "Full",
+  "question": "Full",
+  "options": [
+    "Containing as much as possible; filled completely",
+    "To feel admiration for someone's qualities",
+    "To express warm approval of something",
+    "To combine different things together"
+  ],
+  "answerOption": "A",
+  "answerText": "Containing as much as possible; filled completely",
+  "difficulty": "easy",
+  "sourceFile": "0050.json"
+}

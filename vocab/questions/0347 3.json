@@ -1,0 +1,15 @@
+{
+  "id": 347,
+  "word": "Hesitate",
+  "question": "Hesitate",
+  "options": [
+    "Having a strong desire for success",
+    "To pause before doing something",
+    "Feeling dedication to a cause or activity",
+    "Feeling a need to drink something"
+  ],
+  "answerOption": "B",
+  "answerText": "To pause before doing something",
+  "difficulty": "easy",
+  "sourceFile": "0347.json"
+}

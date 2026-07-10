@@ -1,0 +1,15 @@
+{
+  "id": 210,
+  "word": "Expand",
+  "question": "Expand",
+  "options": [
+    "To move behind someone in the same direction",
+    "To construct something by putting parts together",
+    "To prove more powerful than opposing forces",
+    "To become larger in size or volume"
+  ],
+  "answerOption": "D",
+  "answerText": "To become larger in size or volume",
+  "difficulty": "easy",
+  "sourceFile": "0210.json"
+}

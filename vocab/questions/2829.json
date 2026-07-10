@@ -1,0 +1,15 @@
+{
+  "id": 2829,
+  "word": "Dedication",
+  "question": "Dedication",
+  "options": [
+    "The action of killing a king",
+    "The use of air in sound",
+    "Commitment to someone or something",
+    "Belief in living according to virtue"
+  ],
+  "answerOption": "C",
+  "answerText": "Commitment to someone or something",
+  "difficulty": "hard",
+  "sourceFile": "2829.json"
+}

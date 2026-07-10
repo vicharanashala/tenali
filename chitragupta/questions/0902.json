@@ -1,0 +1,14 @@
+{
+  "id": 902,
+  "question": "What is the SI unit of magnetic moment?",
+  "options": [
+    "A·m²",
+    "Wb",
+    "T",
+    "N·m"
+  ],
+  "answerOption": "A",
+  "answerText": "A·m²",
+  "genre": "mixed",
+  "sourceFile": "0902.json"
+}

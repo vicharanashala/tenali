@@ -1,0 +1,15 @@
+{
+  "id": 2164,
+  "word": "Adversary",
+  "question": "Adversary",
+  "options": [
+    "Full of or giving advice",
+    "Responding to air stimulus",
+    "One treating with air",
+    "One's opponent in a contest"
+  ],
+  "answerOption": "D",
+  "answerText": "One's opponent in a contest",
+  "difficulty": "hard",
+  "sourceFile": "2164.json"
+}

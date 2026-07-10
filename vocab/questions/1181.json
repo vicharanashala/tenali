@@ -1,0 +1,15 @@
+{
+  "id": 1181,
+  "word": "Tenuous",
+  "question": "Tenuous",
+  "options": [
+    "A division of a large organization",
+    "Showing great attention to detail",
+    "Tending to decrease in value",
+    "Very weak or slight; insubstantial"
+  ],
+  "answerOption": "D",
+  "answerText": "Very weak or slight; insubstantial",
+  "difficulty": "medium",
+  "sourceFile": "1181.json"
+}

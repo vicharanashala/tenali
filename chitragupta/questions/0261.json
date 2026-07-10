@@ -1,0 +1,14 @@
+{
+  "id": 261,
+  "question": "What is the capital of Pakistan?",
+  "options": [
+    "Karachi",
+    "Lahore",
+    "Islamabad",
+    "Rawalpindi"
+  ],
+  "answerOption": "C",
+  "answerText": "Islamabad",
+  "genre": "geography",
+  "sourceFile": "0261.json"
+}

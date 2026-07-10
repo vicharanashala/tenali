@@ -1,0 +1,15 @@
+{
+  "id": 1559,
+  "word": "Derrick",
+  "question": "Derrick",
+  "options": [
+    "The complete loss of hope",
+    "Designed to impress or attract notice",
+    "A type of lifting crane",
+    "Having a harmful effect gradually"
+  ],
+  "answerOption": "C",
+  "answerText": "A type of lifting crane",
+  "difficulty": "medium",
+  "sourceFile": "1559.json"
+}

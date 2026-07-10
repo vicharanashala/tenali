@@ -1,0 +1,15 @@
+{
+  "id": 2294,
+  "word": "Advanced",
+  "question": "Advanced",
+  "options": [
+    "Not telling the truth; lying",
+    "Wicked or criminal in nature",
+    "Philosophy based on Plato's ideas",
+    "Far along in development or progress"
+  ],
+  "answerOption": "D",
+  "answerText": "Far along in development or progress",
+  "difficulty": "hard",
+  "sourceFile": "2294.json"
+}

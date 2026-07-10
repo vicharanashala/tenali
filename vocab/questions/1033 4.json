@@ -1,0 +1,15 @@
+{
+  "id": 1033,
+  "word": "Vigilant",
+  "question": "Vigilant",
+  "options": [
+    "Keeping careful watch for possible danger",
+    "So lacking in originality as to be obvious",
+    "A countless or very great number",
+    "Involving violent or noisy disorder"
+  ],
+  "answerOption": "A",
+  "answerText": "Keeping careful watch for possible danger",
+  "difficulty": "medium",
+  "sourceFile": "1033.json"
+}

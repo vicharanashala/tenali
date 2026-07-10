@@ -1,0 +1,15 @@
+{
+  "id": 466,
+  "word": "Demonstrate",
+  "question": "Demonstrate",
+  "options": [
+    "Clearly and directly expressed",
+    "To show how something is done",
+    "Having a great deal to do",
+    "To devote time or effort to a purpose"
+  ],
+  "answerOption": "B",
+  "answerText": "To show how something is done",
+  "difficulty": "easy",
+  "sourceFile": "0466.json"
+}

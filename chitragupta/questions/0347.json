@@ -1,0 +1,14 @@
+{
+  "id": 347,
+  "question": "Which part of a flower becomes the seed after fertilization?",
+  "options": [
+    "Petal",
+    "Ovule",
+    "Sepal",
+    "Anther"
+  ],
+  "answerOption": "B",
+  "answerText": "Ovule",
+  "genre": "mixed",
+  "sourceFile": "0347.json"
+}

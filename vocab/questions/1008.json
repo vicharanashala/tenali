@@ -1,0 +1,15 @@
+{
+  "id": 1008,
+  "word": "Impartial",
+  "question": "Impartial",
+  "options": [
+    "The quality of being resolved",
+    "Famous for something bad",
+    "To delay or prevent by obstructing",
+    "Treating all rivals or disputants equally"
+  ],
+  "answerOption": "D",
+  "answerText": "Treating all rivals or disputants equally",
+  "difficulty": "medium",
+  "sourceFile": "1008.json"
+}

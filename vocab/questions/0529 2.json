@@ -1,0 +1,15 @@
+{
+  "id": 529,
+  "word": "Enable",
+  "question": "Enable",
+  "options": [
+    "Lacking consideration for other people",
+    "To give someone the means to do something",
+    "To say sorry for doing something wrong",
+    "To offer suggestions about the best action"
+  ],
+  "answerOption": "B",
+  "answerText": "To give someone the means to do something",
+  "difficulty": "easy",
+  "sourceFile": "0529.json"
+}

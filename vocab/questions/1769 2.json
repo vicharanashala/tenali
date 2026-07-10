@@ -1,0 +1,15 @@
+{
+  "id": 1769,
+  "word": "Miasma",
+  "question": "Miasma",
+  "options": [
+    "Permission to graduate without examination",
+    "An unpleasant or unhealthy atmosphere",
+    "An organism needing warm air",
+    "An engine powered by air"
+  ],
+  "answerOption": "B",
+  "answerText": "An unpleasant or unhealthy atmosphere",
+  "difficulty": "hard",
+  "sourceFile": "1769.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 228,
+  "word": "Advance",
+  "question": "Advance",
+  "options": [
+    "Dark or poorly lit; depressing",
+    "To give special importance to something",
+    "To move forward in a purposeful way",
+    "Important and well known"
+  ],
+  "answerOption": "C",
+  "answerText": "To move forward in a purposeful way",
+  "difficulty": "easy",
+  "sourceFile": "0228.json"
+}

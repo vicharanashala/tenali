@@ -1,0 +1,15 @@
+{
+  "id": 2177,
+  "word": "Advertising",
+  "question": "Advertising",
+  "options": [
+    "One who studies airborne life",
+    "A balloon or airship",
+    "The activity of promoting products",
+    "Belief contrary to the accepted doctrine"
+  ],
+  "answerOption": "C",
+  "answerText": "The activity of promoting products",
+  "difficulty": "hard",
+  "sourceFile": "2177.json"
+}

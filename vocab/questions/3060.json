@@ -1,0 +1,15 @@
+{
+  "id": 3060,
+  "word": "Waldeinsamkeit",
+  "question": "Waldeinsamkeit",
+  "options": [
+    "Having able wings",
+    "The feeling of solitude in the woods",
+    "A dealer in rare books",
+    "Plural of abjection"
+  ],
+  "answerOption": "B",
+  "answerText": "The feeling of solitude in the woods",
+  "difficulty": "extra-hard",
+  "sourceFile": "3060.json"
+}

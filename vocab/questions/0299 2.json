@@ -1,0 +1,15 @@
+{
+  "id": 299,
+  "word": "Dream",
+  "question": "Dream",
+  "options": [
+    "Lesser in importance or seriousness",
+    "To pull down or destroy a building",
+    "Able to be easily modified or adjusted",
+    "A series of images during sleep"
+  ],
+  "answerOption": "D",
+  "answerText": "A series of images during sleep",
+  "difficulty": "easy",
+  "sourceFile": "0299.json"
+}

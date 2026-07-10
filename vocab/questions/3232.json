@@ -1,0 +1,15 @@
+{
+  "id": 3232,
+  "word": "Abigail",
+  "question": "Abigail",
+  "options": [
+    "The state of being suspended",
+    "A reward or recompense",
+    "Somewhat non-literary",
+    "A female servant or attendant"
+  ],
+  "answerOption": "D",
+  "answerText": "A female servant or attendant",
+  "difficulty": "extra-hard",
+  "sourceFile": "3232.json"
+}

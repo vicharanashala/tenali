@@ -1,0 +1,15 @@
+{
+  "id": 2124,
+  "word": "Paradigm",
+  "question": "Paradigm",
+  "options": [
+    "Involving a great deal of effort or difficulty",
+    "A typical example or pattern of something",
+    "The beginning or start of something",
+    "Something that signals the approach of another"
+  ],
+  "answerOption": "B",
+  "answerText": "A typical example or pattern of something",
+  "difficulty": "hard",
+  "sourceFile": "2124.json"
+}

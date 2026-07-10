@@ -1,0 +1,15 @@
+{
+  "id": 1776,
+  "word": "Infamy",
+  "question": "Infamy",
+  "options": [
+    "The state of being famous for bad things",
+    "To let air out of something inflated",
+    "Easily understood or expressed",
+    "Representing the most perfect example"
+  ],
+  "answerOption": "A",
+  "answerText": "The state of being famous for bad things",
+  "difficulty": "medium",
+  "sourceFile": "1776.json"
+}

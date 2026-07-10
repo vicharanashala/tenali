@@ -1,0 +1,15 @@
+{
+  "id": 975,
+  "word": "Ornery",
+  "question": "Ornery",
+  "options": [
+    "Sad or abandoned in appearance",
+    "Full of life and energy",
+    "To examine and make corrections to something",
+    "Difficult to manage or iritable"
+  ],
+  "answerOption": "D",
+  "answerText": "Difficult to manage or iritable",
+  "difficulty": "easy",
+  "sourceFile": "0975.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1963,
+  "word": "Obstructed",
+  "question": "Obstructed",
+  "options": [
+    "Secreting venom; full of malice",
+    "Reserved, modest, and shy in manner",
+    "Blocked or prevented from passing",
+    "A skill or talent for doing something"
+  ],
+  "answerOption": "C",
+  "answerText": "Blocked or prevented from passing",
+  "difficulty": "medium",
+  "sourceFile": "1963.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 106,
+  "word": "Plain",
+  "question": "Plain",
+  "options": [
+    "Known for sure; established beyond doubt",
+    "Happening with great speed",
+    "Having a sharp or sour taste",
+    "Not decorated or elaborate; simple"
+  ],
+  "answerOption": "D",
+  "answerText": "Not decorated or elaborate; simple",
+  "difficulty": "easy",
+  "sourceFile": "0106.json"
+}

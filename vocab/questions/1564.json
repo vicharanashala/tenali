@@ -1,0 +1,15 @@
+{
+  "id": 1564,
+  "word": "Desalinate",
+  "question": "Desalinate",
+  "options": [
+    "Coming after something in time",
+    "A substance that reduces activity",
+    "Tired and lacking enthusiasm after excess",
+    "To remove salt from seawater"
+  ],
+  "answerOption": "D",
+  "answerText": "To remove salt from seawater",
+  "difficulty": "medium",
+  "sourceFile": "1564.json"
+}

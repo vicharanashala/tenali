@@ -1,0 +1,14 @@
+{
+  "id": 688,
+  "question": "Which country is associated with the city of Sofia?",
+  "options": [
+    "Romania",
+    "Serbia",
+    "Bulgaria",
+    "Albania"
+  ],
+  "answerOption": "C",
+  "answerText": "Bulgaria",
+  "genre": "geography",
+  "sourceFile": "0688.json"
+}

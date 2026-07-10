@@ -1,0 +1,15 @@
+{
+  "id": 2273,
+  "word": "AEROTOMY",
+  "question": "AEROTOMY",
+  "options": [
+    "One who adulterates",
+    "Relating to viewing air",
+    "Surgical exposure to air",
+    "Science of air flow and forces"
+  ],
+  "answerOption": "C",
+  "answerText": "Surgical exposure to air",
+  "difficulty": "hard",
+  "sourceFile": "2273.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 18,
+  "word": "Wet",
+  "question": "Wet",
+  "options": [
+    "To give facts or information to someone",
+    "Covered or saturated with water",
+    "Standing out so as to be clearly visible",
+    "To be the property of someone"
+  ],
+  "answerOption": "B",
+  "answerText": "Covered or saturated with water",
+  "difficulty": "easy",
+  "sourceFile": "0018.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 354,
+  "word": "Claim",
+  "question": "Claim",
+  "options": [
+    "Of great width between opposite sides",
+    "Strong and difficult to break or damage",
+    "To state something is true without proof",
+    "Existing at the beginning"
+  ],
+  "answerOption": "C",
+  "answerText": "To state something is true without proof",
+  "difficulty": "easy",
+  "sourceFile": "0354.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 221,
+  "word": "Endanger",
+  "question": "Endanger",
+  "options": [
+    "To put someone at risk or in danger",
+    "Feeling a need to drink something",
+    "To put things in a neat or attractive order",
+    "Not varying; the same in all cases"
+  ],
+  "answerOption": "A",
+  "answerText": "To put someone at risk or in danger",
+  "difficulty": "easy",
+  "sourceFile": "0221.json"
+}

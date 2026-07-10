@@ -1,0 +1,15 @@
+{
+  "id": 2361,
+  "word": "Adze",
+  "question": "Adze",
+  "options": [
+    "One who writes about air",
+    "A defensive structure at the top of a wall",
+    "Not being what it claims to be; false",
+    "A tool for shaping wood"
+  ],
+  "answerOption": "D",
+  "answerText": "A tool for shaping wood",
+  "difficulty": "hard",
+  "sourceFile": "2361.json"
+}

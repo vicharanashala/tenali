@@ -1,0 +1,15 @@
+{
+  "id": 586,
+  "word": "Flexible",
+  "question": "Flexible",
+  "options": [
+    "Of little depth",
+    "Extremely large or huge",
+    "Able to be easily modified or adjusted",
+    "To move downward from a higher point"
+  ],
+  "answerOption": "C",
+  "answerText": "Able to be easily modified or adjusted",
+  "difficulty": "easy",
+  "sourceFile": "0586.json"
+}

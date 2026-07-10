@@ -1,0 +1,15 @@
+{
+  "id": 2048,
+  "word": "Effervescent",
+  "question": "Effervescent",
+  "options": [
+    "Vivacious and enthusiastic",
+    "A departure from what is normal or expected",
+    "Little known; abstruse and difficult",
+    "Excessive pride or self-confidence"
+  ],
+  "answerOption": "A",
+  "answerText": "Vivacious and enthusiastic",
+  "difficulty": "hard",
+  "sourceFile": "2048.json"
+}

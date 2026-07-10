@@ -1,0 +1,15 @@
+{
+  "id": 831,
+  "word": "Tough",
+  "question": "Tough",
+  "options": [
+    "Of high quality; thin or slender",
+    "Not under control of another",
+    "Strong and difficult to break or damage",
+    "Coming at the end; last"
+  ],
+  "answerOption": "C",
+  "answerText": "Strong and difficult to break or damage",
+  "difficulty": "easy",
+  "sourceFile": "0831.json"
+}

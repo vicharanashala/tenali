@@ -1,0 +1,15 @@
+{
+  "id": 218,
+  "word": "Enjoy",
+  "question": "Enjoy",
+  "options": [
+    "To begin to grow; to produce shoots",
+    "Unable to bend or be changed easily",
+    "To take delight or pleasure in something",
+    "To cook food using an oven"
+  ],
+  "answerOption": "C",
+  "answerText": "To take delight or pleasure in something",
+  "difficulty": "easy",
+  "sourceFile": "0218.json"
+}

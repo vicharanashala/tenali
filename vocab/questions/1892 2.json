@@ -1,0 +1,15 @@
+{
+  "id": 1892,
+  "word": "Specious",
+  "question": "Specious",
+  "options": [
+    "Superficially plausible but actually wrong",
+    "Expressing excessive praise",
+    "In an Aeolian manner",
+    "Treatment with hot air"
+  ],
+  "answerOption": "A",
+  "answerText": "Superficially plausible but actually wrong",
+  "difficulty": "hard",
+  "sourceFile": "1892.json"
+}

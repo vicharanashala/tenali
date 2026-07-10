@@ -1,0 +1,15 @@
+{
+  "id": 2494,
+  "word": "Ineludible",
+  "question": "Ineludible",
+  "options": [
+    "Impossible to pass through or get into",
+    "Medicine relating to aviation",
+    "Unable to be avoided or escaped",
+    "Something that obstructs progress"
+  ],
+  "answerOption": "C",
+  "answerText": "Unable to be avoided or escaped",
+  "difficulty": "hard",
+  "sourceFile": "2494.json"
+}

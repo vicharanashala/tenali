@@ -1,0 +1,14 @@
+{
+  "id": 566,
+  "question": "Which country is associated with the city of Amman?",
+  "options": [
+    "Syria",
+    "Jordan",
+    "Iraq",
+    "Lebanon"
+  ],
+  "answerOption": "B",
+  "answerText": "Jordan",
+  "genre": "geography",
+  "sourceFile": "0566.json"
+}

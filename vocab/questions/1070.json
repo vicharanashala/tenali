@@ -1,0 +1,15 @@
+{
+  "id": 1070,
+  "word": "Witty",
+  "question": "Witty",
+  "options": [
+    "Deserving intense dislike",
+    "Friendly and easy to talk to",
+    "Showing quick and inventive verbal humor",
+    "Relating to rule by a despot"
+  ],
+  "answerOption": "C",
+  "answerText": "Showing quick and inventive verbal humor",
+  "difficulty": "medium",
+  "sourceFile": "1070.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 927,
+  "word": "Meager",
+  "question": "Meager",
+  "options": [
+    "Lacking in quantity or quality",
+    "To shine with a bright shimmering light",
+    "To take delight or pleasure in something",
+    "Not able to cause damage or injury"
+  ],
+  "answerOption": "A",
+  "answerText": "Lacking in quantity or quality",
+  "difficulty": "easy",
+  "sourceFile": "0927.json"
+}

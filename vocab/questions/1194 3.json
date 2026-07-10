@@ -1,0 +1,15 @@
+{
+  "id": 1194,
+  "word": "Abrupt",
+  "question": "Abrupt",
+  "options": [
+    "Sudden and unexpected",
+    "A subtle difference in meaning",
+    "A sudden desire or change of mind",
+    "Worthy of reward or recognition"
+  ],
+  "answerOption": "A",
+  "answerText": "Sudden and unexpected",
+  "difficulty": "medium",
+  "sourceFile": "1194.json"
+}

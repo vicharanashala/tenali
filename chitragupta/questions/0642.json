@@ -1,0 +1,14 @@
+{
+  "id": 642,
+  "question": "Which is the largest species of ray?",
+  "options": [
+    "Stingray",
+    "Electric ray",
+    "Manta ray",
+    "Skate"
+  ],
+  "answerOption": "C",
+  "answerText": "Manta ray",
+  "genre": "mixed",
+  "sourceFile": "0642.json"
+}

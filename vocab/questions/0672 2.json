@@ -1,0 +1,15 @@
+{
+  "id": 672,
+  "word": "Plentiful",
+  "question": "Plentiful",
+  "options": [
+    "Closely and neatly packed together",
+    "Existing in large quantities",
+    "Having an excessively high opinion of oneself",
+    "Introducing new and original ideas"
+  ],
+  "answerOption": "B",
+  "answerText": "Existing in large quantities",
+  "difficulty": "easy",
+  "sourceFile": "0672.json"
+}

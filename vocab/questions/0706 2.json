@@ -1,0 +1,15 @@
+{
+  "id": 706,
+  "word": "Regular",
+  "question": "Regular",
+  "options": [
+    "Characterized by conflict or disorder",
+    "Arranged in a constant pattern",
+    "To get or acquire something",
+    "To examine and record the features of something"
+  ],
+  "answerOption": "B",
+  "answerText": "Arranged in a constant pattern",
+  "difficulty": "easy",
+  "sourceFile": "0706.json"
+}

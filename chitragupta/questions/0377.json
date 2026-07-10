@@ -1,0 +1,14 @@
+{
+  "id": 377,
+  "question": "Which Indian state has Gangtok as its capital?",
+  "options": [
+    "Sikkim",
+    "Arunachal Pradesh",
+    "Nagaland",
+    "Tripura"
+  ],
+  "answerOption": "A",
+  "answerText": "Sikkim",
+  "genre": "geography",
+  "sourceFile": "0377.json"
+}

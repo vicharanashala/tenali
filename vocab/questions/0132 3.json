@@ -1,0 +1,15 @@
+{
+  "id": 132,
+  "word": "Present",
+  "question": "Present",
+  "options": [
+    "In a particular place; existing now",
+    "To state the exact meaning of a word",
+    "To produce a picture using a pencil",
+    "Bad tempered and unwilling to be friendly"
+  ],
+  "answerOption": "A",
+  "answerText": "In a particular place; existing now",
+  "difficulty": "easy",
+  "sourceFile": "0132.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2801,
+  "word": "Perseverance",
+  "question": "Perseverance",
+  "options": [
+    "Steadfast pursuit of something",
+    "One who accepts duration of eons",
+    "The quality of being resolvable",
+    "An extremely confused or complicated situation"
+  ],
+  "answerOption": "A",
+  "answerText": "Steadfast pursuit of something",
+  "difficulty": "hard",
+  "sourceFile": "2801.json"
+}

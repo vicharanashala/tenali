@@ -1,0 +1,15 @@
+{
+  "id": 2855,
+  "word": "Resurgence",
+  "question": "Resurgence",
+  "options": [
+    "In a way that cannot be avoided",
+    "Aggressively greedy or grasping",
+    "A revival or recurrence of something",
+    "The act of freeing someone"
+  ],
+  "answerOption": "C",
+  "answerText": "A revival or recurrence of something",
+  "difficulty": "hard",
+  "sourceFile": "2855.json"
+}

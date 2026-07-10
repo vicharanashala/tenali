@@ -1,0 +1,14 @@
+{
+  "id": 69,
+  "question": "Which is the nearest star to Earth?",
+  "options": [
+    "Polaris",
+    "Sirius",
+    "The Sun",
+    "Alpha Centauri"
+  ],
+  "answerOption": "C",
+  "answerText": "The Sun",
+  "genre": "mixed",
+  "sourceFile": "0069.json"
+}

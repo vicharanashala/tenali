@@ -1,0 +1,15 @@
+{
+  "id": 1294,
+  "word": "Esoteric",
+  "question": "Esoteric",
+  "options": [
+    "Intended for a small group with special knowledge",
+    "A feeling of fear about something",
+    "Tending to talk a great deal",
+    "Excessively complicated and detailed"
+  ],
+  "answerOption": "A",
+  "answerText": "Intended for a small group with special knowledge",
+  "difficulty": "hard",
+  "sourceFile": "1294.json"
+}

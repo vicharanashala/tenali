@@ -1,0 +1,15 @@
+{
+  "id": 304,
+  "word": "Mourn",
+  "question": "Mourn",
+  "options": [
+    "To leave a place",
+    "To feel sadness after someone's death",
+    "Feeling pleasure or happiness",
+    "To believe in the reliability of someone"
+  ],
+  "answerOption": "B",
+  "answerText": "To feel sadness after someone's death",
+  "difficulty": "easy",
+  "sourceFile": "0304.json"
+}

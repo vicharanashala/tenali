@@ -1,0 +1,15 @@
+{
+  "id": 620,
+  "word": "Dedicated",
+  "question": "Dedicated",
+  "options": [
+    "To comply with a command or rule",
+    "Devoted to a task or purpose",
+    "Having a great deal to do",
+    "Made up of exactly similar parts"
+  ],
+  "answerOption": "B",
+  "answerText": "Devoted to a task or purpose",
+  "difficulty": "easy",
+  "sourceFile": "0620.json"
+}

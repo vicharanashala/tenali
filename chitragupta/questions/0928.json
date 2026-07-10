@@ -1,0 +1,14 @@
+{
+  "id": 928,
+  "question": "Which country is associated with the city of Apia?",
+  "options": [
+    "Fiji",
+    "Tonga",
+    "Samoa",
+    "Kiribati"
+  ],
+  "answerOption": "C",
+  "answerText": "Samoa",
+  "genre": "geography",
+  "sourceFile": "0928.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 408,
+  "word": "Owe",
+  "question": "Owe",
+  "options": [
+    "To dislike something very intensely",
+    "Unpleasantly rough or sharp",
+    "To carry out a careful examination",
+    "To be required to pay money to someone"
+  ],
+  "answerOption": "D",
+  "answerText": "To be required to pay money to someone",
+  "difficulty": "easy",
+  "sourceFile": "0408.json"
+}

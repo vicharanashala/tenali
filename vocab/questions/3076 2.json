@@ -1,0 +1,15 @@
+{
+  "id": 3076,
+  "word": "Aburnt",
+  "question": "Aburnt",
+  "options": [
+    "Burned or scorched",
+    "In an abysmal manner",
+    "Cleanses or purges",
+    "Archaic form of abyss"
+  ],
+  "answerOption": "A",
+  "answerText": "Burned or scorched",
+  "difficulty": "extra-hard",
+  "sourceFile": "3076.json"
+}

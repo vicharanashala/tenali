@@ -1,0 +1,15 @@
+{
+  "id": 2135,
+  "word": "Aerodesmis",
+  "question": "Aerodesmis",
+  "options": [
+    "In an aeronautical manner",
+    "Resembling a riddle or puzzle",
+    "Connection by air passages",
+    "A person guilty of adultery"
+  ],
+  "answerOption": "C",
+  "answerText": "Connection by air passages",
+  "difficulty": "hard",
+  "sourceFile": "2135.json"
+}

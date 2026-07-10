@@ -1,0 +1,14 @@
+{
+  "id": 580,
+  "question": "Which country is associated with the city of Algiers?",
+  "options": [
+    "Morocco",
+    "Algeria",
+    "Tunisia",
+    "Egypt"
+  ],
+  "answerOption": "B",
+  "answerText": "Algeria",
+  "genre": "geography",
+  "sourceFile": "0580.json"
+}

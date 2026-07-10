@@ -1,0 +1,15 @@
+{
+  "id": 329,
+  "word": "Announce",
+  "question": "Announce",
+  "options": [
+    "To make a public or formal statement",
+    "To receive money in return for labor",
+    "Before the usual or expected time",
+    "To arrive at a judgment after reasoning"
+  ],
+  "answerOption": "A",
+  "answerText": "To make a public or formal statement",
+  "difficulty": "easy",
+  "sourceFile": "0329.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 290,
+  "question": "What is the national currency of China?",
+  "options": [
+    "Yen",
+    "Won",
+    "Yuan",
+    "Ringgit"
+  ],
+  "answerOption": "C",
+  "answerText": "Yuan",
+  "genre": "india-gk",
+  "sourceFile": "0290.json"
+}

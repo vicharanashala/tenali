@@ -1,0 +1,15 @@
+{
+  "id": 58,
+  "word": "False",
+  "question": "False",
+  "options": [
+    "To rest on the surface of a liquid",
+    "Not according to truth or fact",
+    "Not giving enough attention to avoid harm",
+    "Occurring immediately without delay"
+  ],
+  "answerOption": "B",
+  "answerText": "Not according to truth or fact",
+  "difficulty": "easy",
+  "sourceFile": "0058.json"
+}

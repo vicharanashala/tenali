@@ -1,0 +1,15 @@
+{
+  "id": 213,
+  "word": "Create",
+  "question": "Create",
+  "options": [
+    "To become sound or healthy again",
+    "Feeling uncertain or unsure",
+    "To work together on an activity",
+    "To bring something into existence"
+  ],
+  "answerOption": "D",
+  "answerText": "To bring something into existence",
+  "difficulty": "easy",
+  "sourceFile": "0213.json"
+}

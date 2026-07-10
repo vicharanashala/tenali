@@ -1,0 +1,15 @@
+{
+  "id": 298,
+  "word": "Wish",
+  "question": "Wish",
+  "options": [
+    "More than is necessary or normal",
+    "Relating to or resembling the moon",
+    "To feel a strong desire for something",
+    "Happening or done at once"
+  ],
+  "answerOption": "C",
+  "answerText": "To feel a strong desire for something",
+  "difficulty": "easy",
+  "sourceFile": "0298.json"
+}

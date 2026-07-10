@@ -1,0 +1,15 @@
+{
+  "id": 506,
+  "word": "Occupy",
+  "question": "Occupy",
+  "options": [
+    "Bringing or worthy of honor",
+    "Using more words than needed",
+    "To make something clear and easy to understand",
+    "To fill or take up a space or time"
+  ],
+  "answerOption": "D",
+  "answerText": "To fill or take up a space or time",
+  "difficulty": "easy",
+  "sourceFile": "0506.json"
+}

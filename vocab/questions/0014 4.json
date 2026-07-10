@@ -1,0 +1,15 @@
+{
+  "id": 14,
+  "word": "Bright",
+  "question": "Bright",
+  "options": [
+    "To be defeated in a contest",
+    "Giving out or reflecting much light",
+    "Keeping careful watch for dangers",
+    "Giving information clearly in few words"
+  ],
+  "answerOption": "B",
+  "answerText": "Giving out or reflecting much light",
+  "difficulty": "easy",
+  "sourceFile": "0014.json"
+}

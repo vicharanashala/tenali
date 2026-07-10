@@ -1,0 +1,15 @@
+{
+  "id": 962,
+  "word": "Intricate",
+  "question": "Intricate",
+  "options": [
+    "Showing gentleness and concern",
+    "To move with urgent haste",
+    "To unfasten a knot or bow",
+    "Highly complex with many details"
+  ],
+  "answerOption": "D",
+  "answerText": "Highly complex with many details",
+  "difficulty": "easy",
+  "sourceFile": "0962.json"
+}

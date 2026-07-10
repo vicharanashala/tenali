@@ -1,0 +1,15 @@
+{
+  "id": 2330,
+  "word": "Vellichor",
+  "question": "Vellichor",
+  "options": [
+    "The strange wistfulness of used bookshops",
+    "A reason for being; the thing that gets you up in the morning",
+    "A philosophical question proposed for discussion",
+    "A beginner or one learning basics"
+  ],
+  "answerOption": "A",
+  "answerText": "The strange wistfulness of used bookshops",
+  "difficulty": "extra-hard",
+  "sourceFile": "2330.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1888,
+  "word": "Loathsome",
+  "question": "Loathsome",
+  "options": [
+    "Causing extreme disgust",
+    "Having good judgment; sensible",
+    "Fluent and persuasive in speaking or writing",
+    "Able to exist together"
+  ],
+  "answerOption": "A",
+  "answerText": "Causing extreme disgust",
+  "difficulty": "medium",
+  "sourceFile": "1888.json"
+}

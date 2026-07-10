@@ -1,0 +1,15 @@
+{
+  "id": 1619,
+  "word": "Desperation",
+  "question": "Desperation",
+  "options": [
+    "A state of despair and hopelessness",
+    "The action of drying out",
+    "Proceeding in a subtle manner",
+    "A state of being deserted or lonely"
+  ],
+  "answerOption": "A",
+  "answerText": "A state of despair and hopelessness",
+  "difficulty": "medium",
+  "sourceFile": "1619.json"
+}

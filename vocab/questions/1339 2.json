@@ -1,0 +1,15 @@
+{
+  "id": 1339,
+  "word": "Palimpsest",
+  "question": "Palimpsest",
+  "options": [
+    "To extend known data into an unknown area",
+    "Assuming power without justification",
+    "Something reused but still bearing traces of its earlier form",
+    "To express disapproval of something"
+  ],
+  "answerOption": "C",
+  "answerText": "Something reused but still bearing traces of its earlier form",
+  "difficulty": "hard",
+  "sourceFile": "1339.json"
+}

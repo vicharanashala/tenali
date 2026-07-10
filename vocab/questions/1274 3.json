@@ -1,0 +1,15 @@
+{
+  "id": 1274,
+  "word": "Debrief",
+  "question": "Debrief",
+  "options": [
+    "To question someone about a completed task",
+    "To spend excessive effort on something",
+    "To exclude someone from a group",
+    "One who detracts or disparages"
+  ],
+  "answerOption": "A",
+  "answerText": "To question someone about a completed task",
+  "difficulty": "medium",
+  "sourceFile": "1274.json"
+}

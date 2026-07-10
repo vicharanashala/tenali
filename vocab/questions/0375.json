@@ -1,0 +1,15 @@
+{
+  "id": 375,
+  "word": "Smell",
+  "question": "Smell",
+  "options": [
+    "Refusing to change one's mind",
+    "To attract and hold the attention of someone",
+    "To turn around quickly in a circle",
+    "To perceive the scent of something"
+  ],
+  "answerOption": "D",
+  "answerText": "To perceive the scent of something",
+  "difficulty": "easy",
+  "sourceFile": "0375.json"
+}

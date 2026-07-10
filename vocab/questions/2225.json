@@ -1,0 +1,15 @@
+{
+  "id": 2225,
+  "word": "Tautological",
+  "question": "Tautological",
+  "options": [
+    "The giving of voting rights",
+    "Sponsorship, support, or auspices",
+    "Using different words to say the same thing",
+    "An extensive fire destroying much"
+  ],
+  "answerOption": "C",
+  "answerText": "Using different words to say the same thing",
+  "difficulty": "hard",
+  "sourceFile": "2225.json"
+}

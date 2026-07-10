@@ -1,0 +1,15 @@
+{
+  "id": 2415,
+  "word": "Aeolith",
+  "question": "Aeolith",
+  "options": [
+    "The action of pacifying someone",
+    "The action of confirming something",
+    "A prehistoric stone artifact",
+    "The action of revealing something"
+  ],
+  "answerOption": "C",
+  "answerText": "A prehistoric stone artifact",
+  "difficulty": "hard",
+  "sourceFile": "2415.json"
+}

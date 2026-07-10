@@ -1,0 +1,15 @@
+{
+  "id": 604,
+  "word": "Gleam",
+  "question": "Gleam",
+  "options": [
+    "To shine brightly with reflected light",
+    "To cause someone to feel sudden wonder",
+    "Not decorated or elaborate; simple",
+    "To firmly press something from both sides"
+  ],
+  "answerOption": "A",
+  "answerText": "To shine brightly with reflected light",
+  "difficulty": "easy",
+  "sourceFile": "0604.json"
+}

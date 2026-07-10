@@ -1,0 +1,15 @@
+{
+  "id": 501,
+  "word": "Voyage",
+  "question": "Voyage",
+  "options": [
+    "Far away in space or time",
+    "Having a practical view of what is achievable",
+    "A long journey by sea or space",
+    "To come near or nearer to something"
+  ],
+  "answerOption": "C",
+  "answerText": "A long journey by sea or space",
+  "difficulty": "easy",
+  "sourceFile": "0501.json"
+}

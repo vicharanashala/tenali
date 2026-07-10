@@ -1,0 +1,15 @@
+{
+  "id": 285,
+  "word": "Count",
+  "question": "Count",
+  "options": [
+    "To express the meaning in another language",
+    "Designed to impress or attract",
+    "To determine the total number of items",
+    "In good physical condition; not sick"
+  ],
+  "answerOption": "C",
+  "answerText": "To determine the total number of items",
+  "difficulty": "easy",
+  "sourceFile": "0285.json"
+}

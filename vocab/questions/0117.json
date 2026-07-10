@@ -1,0 +1,15 @@
+{
+  "id": 117,
+  "word": "Cheerful",
+  "question": "Cheerful",
+  "options": [
+    "To stop feeling angry toward someone",
+    "Very dry or thirsty",
+    "To make something look more attractive",
+    "Noticeably happy and optimistic"
+  ],
+  "answerOption": "D",
+  "answerText": "Noticeably happy and optimistic",
+  "difficulty": "easy",
+  "sourceFile": "0117.json"
+}

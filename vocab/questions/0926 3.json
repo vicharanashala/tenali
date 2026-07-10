@@ -1,0 +1,15 @@
+{
+  "id": 926,
+  "word": "Bushy",
+  "question": "Bushy",
+  "options": [
+    "To put an end to the existence of something",
+    "Unable to bend or be changed easily",
+    "Thick and full of foliage",
+    "Extremely gloomy or bleak"
+  ],
+  "answerOption": "C",
+  "answerText": "Thick and full of foliage",
+  "difficulty": "easy",
+  "sourceFile": "0926.json"
+}

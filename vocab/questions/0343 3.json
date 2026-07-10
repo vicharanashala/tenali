@@ -1,0 +1,15 @@
+{
+  "id": 343,
+  "word": "Chase",
+  "question": "Chase",
+  "options": [
+    "Telling or expressing the truth; honest",
+    "Lasting for a limited time only",
+    "To run after someone to catch them",
+    "To watch something carefully"
+  ],
+  "answerOption": "C",
+  "answerText": "To run after someone to catch them",
+  "difficulty": "easy",
+  "sourceFile": "0343.json"
+}

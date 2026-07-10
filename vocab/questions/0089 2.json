@@ -1,0 +1,15 @@
+{
+  "id": 89,
+  "word": "Light",
+  "question": "Light",
+  "options": [
+    "To state the exact meaning of a word",
+    "Of little weight; easy to carry",
+    "Available to be chosen but not required",
+    "To set up an organization on a firm basis"
+  ],
+  "answerOption": "B",
+  "answerText": "Of little weight; easy to carry",
+  "difficulty": "easy",
+  "sourceFile": "0089.json"
+}

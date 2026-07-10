@@ -1,0 +1,15 @@
+{
+  "id": 1920,
+  "word": "Adsorbent",
+  "question": "Adsorbent",
+  "options": [
+    "Of doubtful authenticity; probably untrue",
+    "A substance that adsorbs",
+    "Bowel distension from gas",
+    "Departing from accepted standards"
+  ],
+  "answerOption": "B",
+  "answerText": "A substance that adsorbs",
+  "difficulty": "hard",
+  "sourceFile": "1920.json"
+}

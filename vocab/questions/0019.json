@@ -1,0 +1,15 @@
+{
+  "id": 19,
+  "word": "Dry",
+  "question": "Dry",
+  "options": [
+    "Free from moisture or liquid",
+    "Very dry or thirsty",
+    "Causing excitement and fear",
+    "Having a strong desire for success"
+  ],
+  "answerOption": "A",
+  "answerText": "Free from moisture or liquid",
+  "difficulty": "easy",
+  "sourceFile": "0019.json"
+}

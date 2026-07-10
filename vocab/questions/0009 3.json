@@ -1,0 +1,15 @@
+{
+  "id": 9,
+  "word": "Small",
+  "question": "Small",
+  "options": [
+    "To gradually grow faint and disappear",
+    "Recently made or obtained; not stale",
+    "Of a size that is less than normal",
+    "To attract and hold attention of someone"
+  ],
+  "answerOption": "C",
+  "answerText": "Of a size that is less than normal",
+  "difficulty": "easy",
+  "sourceFile": "0009.json"
+}

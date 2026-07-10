@@ -1,0 +1,15 @@
+{
+  "id": 96,
+  "word": "Noisy",
+  "question": "Noisy",
+  "options": [
+    "Making or given to making a lot of noise",
+    "Causing wonder or surprise",
+    "To have a strong emotional effect on someone",
+    "To get or acquire something"
+  ],
+  "answerOption": "A",
+  "answerText": "Making or given to making a lot of noise",
+  "difficulty": "easy",
+  "sourceFile": "0096.json"
+}

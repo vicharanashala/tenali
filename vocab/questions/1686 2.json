@@ -1,0 +1,15 @@
+{
+  "id": 1686,
+  "word": "Recondite",
+  "question": "Recondite",
+  "options": [
+    "Aggressively greedy or grasping",
+    "Little known; abstruse and difficult",
+    "Lacking ease or grace; unsophisticated",
+    "Essentially different in kind"
+  ],
+  "answerOption": "B",
+  "answerText": "Little known; abstruse and difficult",
+  "difficulty": "hard",
+  "sourceFile": "1686.json"
+}

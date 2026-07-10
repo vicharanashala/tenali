@@ -1,0 +1,15 @@
+{
+  "id": 655,
+  "word": "Permanent",
+  "question": "Permanent",
+  "options": [
+    "Important and well known",
+    "Lasting or intended to last forever",
+    "To withdraw from a position",
+    "To capture or seize something"
+  ],
+  "answerOption": "B",
+  "answerText": "Lasting or intended to last forever",
+  "difficulty": "easy",
+  "sourceFile": "0655.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 119,
+  "word": "Fierce",
+  "question": "Fierce",
+  "options": [
+    "To travel through an unfamiliar area to learn about it",
+    "To develop gradually over time",
+    "Lacking physical strength",
+    "Having a violent or aggressive nature"
+  ],
+  "answerOption": "D",
+  "answerText": "Having a violent or aggressive nature",
+  "difficulty": "easy",
+  "sourceFile": "0119.json"
+}

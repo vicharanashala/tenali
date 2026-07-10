@@ -1,0 +1,15 @@
+{
+  "id": 633,
+  "word": "Reliable",
+  "question": "Reliable",
+  "options": [
+    "To agree to give something requested",
+    "Moving at a low speed",
+    "Able to be trusted to do what is needed",
+    "To fail to remember something"
+  ],
+  "answerOption": "C",
+  "answerText": "Able to be trusted to do what is needed",
+  "difficulty": "easy",
+  "sourceFile": "0633.json"
+}

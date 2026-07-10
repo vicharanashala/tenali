@@ -1,0 +1,15 @@
+{
+  "id": 245,
+  "word": "Argue",
+  "question": "Argue",
+  "options": [
+    "Having no strong flavor or taste",
+    "Graceful and stylish in appearance",
+    "To exchange opposing views heatedly",
+    "To contain as part of a whole"
+  ],
+  "answerOption": "C",
+  "answerText": "To exchange opposing views heatedly",
+  "difficulty": "easy",
+  "sourceFile": "0245.json"
+}

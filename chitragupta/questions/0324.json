@@ -1,0 +1,14 @@
+{
+  "id": 324,
+  "question": "Which Indian city is known as the City of Lakes?",
+  "options": [
+    "Bhopal",
+    "Udaipur",
+    "Nainital",
+    "Srinagar"
+  ],
+  "answerOption": "B",
+  "answerText": "Udaipur",
+  "genre": "india-gk",
+  "sourceFile": "0324.json"
+}

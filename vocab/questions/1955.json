@@ -1,0 +1,15 @@
+{
+  "id": 1955,
+  "word": "Jumbled",
+  "question": "Jumbled",
+  "options": [
+    "Mixed up in a confused manner",
+    "A strong feeling of dislike",
+    "With great speed or force",
+    "An action or performance"
+  ],
+  "answerOption": "A",
+  "answerText": "Mixed up in a confused manner",
+  "difficulty": "medium",
+  "sourceFile": "1955.json"
+}

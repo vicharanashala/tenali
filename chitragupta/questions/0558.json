@@ -1,0 +1,14 @@
+{
+  "id": 558,
+  "question": "Who wrote 'Crime and Punishment'?",
+  "options": [
+    "Tolstoy",
+    "Dostoevsky",
+    "Pushkin",
+    "Turgenev"
+  ],
+  "answerOption": "B",
+  "answerText": "Dostoevsky",
+  "genre": "general-knowledge",
+  "sourceFile": "0558.json"
+}

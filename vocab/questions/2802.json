@@ -1,0 +1,15 @@
+{
+  "id": 2802,
+  "word": "Tenacity",
+  "question": "Tenacity",
+  "options": [
+    "Loyalty owed to a feudal lord",
+    "The quality of lasting forever",
+    "The quality of holding firmly",
+    "Loyalty to a person or country"
+  ],
+  "answerOption": "C",
+  "answerText": "The quality of holding firmly",
+  "difficulty": "hard",
+  "sourceFile": "2802.json"
+}

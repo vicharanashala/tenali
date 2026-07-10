@@ -1,0 +1,15 @@
+{
+  "id": 1074,
+  "word": "Complacent",
+  "question": "Complacent",
+  "options": [
+    "Showing smug satisfaction with oneself",
+    "Intended for a small group",
+    "A sad and depressed state",
+    "Great courage in the face of danger"
+  ],
+  "answerOption": "A",
+  "answerText": "Showing smug satisfaction with oneself",
+  "difficulty": "medium",
+  "sourceFile": "1074.json"
+}

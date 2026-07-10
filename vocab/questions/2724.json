@@ -1,0 +1,15 @@
+{
+  "id": 2724,
+  "word": "Elaboration",
+  "question": "Elaboration",
+  "options": [
+    "A public announcement or declaration",
+    "The action of returning something to original state",
+    "The action of developing in detail",
+    "The quality of being substantial"
+  ],
+  "answerOption": "C",
+  "answerText": "The action of developing in detail",
+  "difficulty": "hard",
+  "sourceFile": "2724.json"
+}

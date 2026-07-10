@@ -1,0 +1,15 @@
+{
+  "id": 1472,
+  "word": "Departure",
+  "question": "Departure",
+  "options": [
+    "The action of leaving a place",
+    "Uncalled for and lacking good reason",
+    "To make morally bad or corrupt",
+    "Tending to decrease in value"
+  ],
+  "answerOption": "A",
+  "answerText": "The action of leaving a place",
+  "difficulty": "medium",
+  "sourceFile": "1472.json"
+}

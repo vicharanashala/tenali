@@ -1,0 +1,15 @@
+{
+  "id": 1802,
+  "word": "Savage",
+  "question": "Savage",
+  "options": [
+    "The quality of being resolved",
+    "To discharge feces from the body",
+    "Fierce wild or untamed",
+    "A feeling of intense excitement and happiness"
+  ],
+  "answerOption": "C",
+  "answerText": "Fierce wild or untamed",
+  "difficulty": "medium",
+  "sourceFile": "1802.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1012,
+  "word": "Amiable",
+  "question": "Amiable",
+  "options": [
+    "To discourage someone from doing something",
+    "The action of damaging someone's reputation",
+    "A god or goddess",
+    "Having a friendly and pleasant manner"
+  ],
+  "answerOption": "D",
+  "answerText": "Having a friendly and pleasant manner",
+  "difficulty": "medium",
+  "sourceFile": "1012.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2224,
+  "word": "Ribald",
+  "question": "Ribald",
+  "options": [
+    "Pompous or extravagant in language",
+    "Referring to sexual matters in a humorous way",
+    "Loving air exposure",
+    "Treatment with hot air"
+  ],
+  "answerOption": "B",
+  "answerText": "Referring to sexual matters in a humorous way",
+  "difficulty": "hard",
+  "sourceFile": "2224.json"
+}

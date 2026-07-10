@@ -1,0 +1,15 @@
+{
+  "id": 489,
+  "word": "Verify",
+  "question": "Verify",
+  "options": [
+    "To successfully reach a desired goal",
+    "To make sure something is true or accurate",
+    "Careful to avoid attracting attention",
+    "Moving with speed or done rapidly"
+  ],
+  "answerOption": "B",
+  "answerText": "To make sure something is true or accurate",
+  "difficulty": "easy",
+  "sourceFile": "0489.json"
+}

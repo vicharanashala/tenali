@@ -1,0 +1,14 @@
+{
+  "id": 442,
+  "question": "What is the common name of NaOH?",
+  "options": [
+    "Baking soda",
+    "Caustic soda",
+    "Washing soda",
+    "Bleaching powder"
+  ],
+  "answerOption": "B",
+  "answerText": "Caustic soda",
+  "genre": "mixed",
+  "sourceFile": "0442.json"
+}

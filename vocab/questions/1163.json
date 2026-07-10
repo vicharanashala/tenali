@@ -1,0 +1,15 @@
+{
+  "id": 1163,
+  "word": "Wrath",
+  "question": "Wrath",
+  "options": [
+    "Able to be shown or proven",
+    "Hard to manage or control",
+    "Calm, peaceful, and untroubled",
+    "Extreme anger"
+  ],
+  "answerOption": "D",
+  "answerText": "Extreme anger",
+  "difficulty": "medium",
+  "sourceFile": "1163.json"
+}

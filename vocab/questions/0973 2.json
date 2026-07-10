@@ -1,0 +1,15 @@
+{
+  "id": 973,
+  "word": "Blight",
+  "question": "Blight",
+  "options": [
+    "Neatly skillful and quick in movement",
+    "To move back and forth at a regular speed",
+    "To make someone feel annoyed or frustrated",
+    "A thing that spoils or damages something"
+  ],
+  "answerOption": "D",
+  "answerText": "A thing that spoils or damages something",
+  "difficulty": "medium",
+  "sourceFile": "0973.json"
+}

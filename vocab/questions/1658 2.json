@@ -1,0 +1,15 @@
+{
+  "id": 1658,
+  "word": "Nefarious",
+  "question": "Nefarious",
+  "options": [
+    "Wicked or criminal in nature",
+    "Lacking advice or counsel",
+    "A young person developing into adulthood",
+    "An award or privilege given as honor"
+  ],
+  "answerOption": "A",
+  "answerText": "Wicked or criminal in nature",
+  "difficulty": "hard",
+  "sourceFile": "1658.json"
+}

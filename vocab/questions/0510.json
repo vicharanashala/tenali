@@ -1,0 +1,15 @@
+{
+  "id": 510,
+  "word": "Distinguish",
+  "question": "Distinguish",
+  "options": [
+    "Moving at a low speed",
+    "To have a commanding influence over something",
+    "Of or at a low temperature",
+    "To notice the differences between things"
+  ],
+  "answerOption": "D",
+  "answerText": "To notice the differences between things",
+  "difficulty": "easy",
+  "sourceFile": "0510.json"
+}

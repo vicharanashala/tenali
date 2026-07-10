@@ -1,0 +1,15 @@
+{
+  "id": 1211,
+  "word": "Denounce",
+  "question": "Denounce",
+  "options": [
+    "To publicly declare to be wrong",
+    "One who deserts a duty or post",
+    "The manner in which someone behaves",
+    "In a despicable manner"
+  ],
+  "answerOption": "A",
+  "answerText": "To publicly declare to be wrong",
+  "difficulty": "medium",
+  "sourceFile": "1211.json"
+}

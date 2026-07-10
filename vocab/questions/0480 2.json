@@ -1,0 +1,15 @@
+{
+  "id": 480,
+  "word": "Specify",
+  "question": "Specify",
+  "options": [
+    "To state something in an exact way",
+    "To need something as necessary",
+    "Having a practical view of what is achievable",
+    "To give a brief statement of main points"
+  ],
+  "answerOption": "A",
+  "answerText": "To state something in an exact way",
+  "difficulty": "easy",
+  "sourceFile": "0480.json"
+}

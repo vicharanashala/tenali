@@ -1,0 +1,15 @@
+{
+  "id": 2242,
+  "word": "Malfeasance",
+  "question": "Malfeasance",
+  "options": [
+    "Wrongdoing by a public official",
+    "Medical condition from altitude",
+    "To describe publicly to promote sales",
+    "The quality of being unavoidable"
+  ],
+  "answerOption": "A",
+  "answerText": "Wrongdoing by a public official",
+  "difficulty": "hard",
+  "sourceFile": "2242.json"
+}

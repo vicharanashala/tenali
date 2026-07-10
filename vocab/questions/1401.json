@@ -1,0 +1,15 @@
+{
+  "id": 1401,
+  "word": "Dementia",
+  "question": "Dementia",
+  "options": [
+    "A serious loss of mental abilities",
+    "The main point or essence of a matter",
+    "To reduce in extent or quantity",
+    "The origin or derivation of something"
+  ],
+  "answerOption": "A",
+  "answerText": "A serious loss of mental abilities",
+  "difficulty": "medium",
+  "sourceFile": "1401.json"
+}

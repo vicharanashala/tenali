@@ -1,0 +1,14 @@
+{
+  "id": 743,
+  "question": "Which organ in the human body helps regulate blood sugar by producing insulin?",
+  "options": [
+    "Liver",
+    "Pancreas",
+    "Kidney",
+    "Spleen"
+  ],
+  "answerOption": "B",
+  "answerText": "Pancreas",
+  "genre": "science",
+  "sourceFile": "0743.json"
+}

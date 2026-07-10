@@ -1,0 +1,15 @@
+{
+  "id": 513,
+  "word": "Sense",
+  "question": "Sense",
+  "options": [
+    "Having lived or existed for only a short time",
+    "Not decorated or elaborate; simple",
+    "To feel or detect something",
+    "Not firmly fixed in place"
+  ],
+  "answerOption": "C",
+  "answerText": "To feel or detect something",
+  "difficulty": "easy",
+  "sourceFile": "0513.json"
+}

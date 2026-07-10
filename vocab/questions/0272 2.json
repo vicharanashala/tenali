@@ -1,0 +1,15 @@
+{
+  "id": 272,
+  "word": "Heal",
+  "question": "Heal",
+  "options": [
+    "Made by human skill; not natural",
+    "To refuse to accept or consider something",
+    "To become sound or healthy again",
+    "Showing strong feelings or beliefs"
+  ],
+  "answerOption": "C",
+  "answerText": "To become sound or healthy again",
+  "difficulty": "easy",
+  "sourceFile": "0272.json"
+}

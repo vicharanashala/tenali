@@ -1,0 +1,15 @@
+{
+  "id": 335,
+  "word": "Cooperate",
+  "question": "Cooperate",
+  "options": [
+    "Relating to or found in the sea",
+    "Soft and light in texture",
+    "To have a strong emotional effect on someone",
+    "To work together toward a common goal"
+  ],
+  "answerOption": "D",
+  "answerText": "To work together toward a common goal",
+  "difficulty": "easy",
+  "sourceFile": "0335.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1231,
+  "word": "Regicide",
+  "question": "Regicide",
+  "options": [
+    "The action of killing a king",
+    "Denoting a period of happiness and prosperity",
+    "To express disapproval of something",
+    "A peculiar behavioral habit"
+  ],
+  "answerOption": "A",
+  "answerText": "The action of killing a king",
+  "difficulty": "hard",
+  "sourceFile": "1231.json"
+}

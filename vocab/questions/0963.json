@@ -1,0 +1,15 @@
+{
+  "id": 963,
+  "word": "Elaborate",
+  "question": "Elaborate",
+  "options": [
+    "In use or inhabited",
+    "To finish making or doing something",
+    "Characterized by constant change and activity",
+    "Complex and detailed in design"
+  ],
+  "answerOption": "D",
+  "answerText": "Complex and detailed in design",
+  "difficulty": "easy",
+  "sourceFile": "0963.json"
+}

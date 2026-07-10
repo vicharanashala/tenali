@@ -1,0 +1,15 @@
+{
+  "id": 295,
+  "word": "Hurry",
+  "question": "Hurry",
+  "options": [
+    "To increase in size or amount",
+    "To move or act with great speed",
+    "Resulting in good; favorable",
+    "Exactly alike in every way"
+  ],
+  "answerOption": "B",
+  "answerText": "To move or act with great speed",
+  "difficulty": "easy",
+  "sourceFile": "0295.json"
+}

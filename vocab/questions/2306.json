@@ -1,0 +1,15 @@
+{
+  "id": 2306,
+  "word": "Adventurer",
+  "question": "Adventurer",
+  "options": [
+    "Relating to the atmosphere",
+    "Leadership or dominance over others",
+    "To reprimand someone firmly",
+    "A person seeking unusual experiences"
+  ],
+  "answerOption": "D",
+  "answerText": "A person seeking unusual experiences",
+  "difficulty": "hard",
+  "sourceFile": "2306.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 286,
+  "word": "Compare",
+  "question": "Compare",
+  "options": [
+    "Very loving or loyal to a person or cause",
+    "Relating to or resembling the moon",
+    "To examine similarities and differences",
+    "More than is necessary or normal"
+  ],
+  "answerOption": "C",
+  "answerText": "To examine similarities and differences",
+  "difficulty": "easy",
+  "sourceFile": "0286.json"
+}

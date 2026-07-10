@@ -1,0 +1,15 @@
+{
+  "id": 189,
+  "word": "Reveal",
+  "question": "Reveal",
+  "options": [
+    "To stop fighting and give up",
+    "To cause someone to believe something",
+    "Absolutely necessary; extremely important",
+    "To make something previously hidden visible"
+  ],
+  "answerOption": "D",
+  "answerText": "To make something previously hidden visible",
+  "difficulty": "easy",
+  "sourceFile": "0189.json"
+}

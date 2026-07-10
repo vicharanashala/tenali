@@ -1,0 +1,15 @@
+{
+  "id": 491,
+  "word": "Investigate",
+  "question": "Investigate",
+  "options": [
+    "To blind temporarily with a bright light",
+    "Important and well known",
+    "To carry out a careful examination",
+    "Made by chemical processes; not natural"
+  ],
+  "answerOption": "C",
+  "answerText": "To carry out a careful examination",
+  "difficulty": "easy",
+  "sourceFile": "0491.json"
+}

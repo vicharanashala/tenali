@@ -1,0 +1,14 @@
+{
+  "id": 16,
+  "question": "What force pulls objects toward Earth?",
+  "options": [
+    "Magnetism",
+    "Friction",
+    "Gravity",
+    "Electricity"
+  ],
+  "answerOption": "C",
+  "answerText": "Gravity",
+  "genre": "mixed",
+  "sourceFile": "0016.json"
+}

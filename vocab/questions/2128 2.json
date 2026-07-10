@@ -1,0 +1,15 @@
+{
+  "id": 2128,
+  "word": "Aeroceracausis",
+  "question": "Aeroceracausis",
+  "options": [
+    "An indicator of a trend",
+    "Relating to air-dependent plants",
+    "Damage from atmospheric electricity",
+    "Relating to divination by air"
+  ],
+  "answerOption": "C",
+  "answerText": "Damage from atmospheric electricity",
+  "difficulty": "hard",
+  "sourceFile": "2128.json"
+}

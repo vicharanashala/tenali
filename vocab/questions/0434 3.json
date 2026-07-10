@@ -1,0 +1,15 @@
+{
+  "id": 434,
+  "word": "Unlock",
+  "question": "Unlock",
+  "options": [
+    "To open something that is locked",
+    "To put goods or cargo onto a vehicle",
+    "Given to unpredictable changes of mood",
+    "To give someone the means to do something"
+  ],
+  "answerOption": "A",
+  "answerText": "To open something that is locked",
+  "difficulty": "easy",
+  "sourceFile": "0434.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 558,
+  "word": "Fulfill",
+  "question": "Fulfill",
+  "options": [
+    "Causing feelings of fear or alarm",
+    "To pledge to carry out a course of action",
+    "To achieve or realize something desired",
+    "Guilty of misleading or tricking others"
+  ],
+  "answerOption": "C",
+  "answerText": "To achieve or realize something desired",
+  "difficulty": "easy",
+  "sourceFile": "0558.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1239,
+  "word": "Jargon",
+  "question": "Jargon",
+  "options": [
+    "The action of forcing someone to leave",
+    "Presenting hidden dangers",
+    "Special words used by a particular profession",
+    "To rely on someone or something"
+  ],
+  "answerOption": "C",
+  "answerText": "Special words used by a particular profession",
+  "difficulty": "medium",
+  "sourceFile": "1239.json"
+}

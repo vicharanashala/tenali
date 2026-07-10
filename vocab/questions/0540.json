@@ -1,0 +1,15 @@
+{
+  "id": 540,
+  "word": "Detest",
+  "question": "Detest",
+  "options": [
+    "To put forward someone or something as good",
+    "To speak very softly using the breath",
+    "Unable to bend or be changed easily",
+    "To dislike something very intensely"
+  ],
+  "answerOption": "D",
+  "answerText": "To dislike something very intensely",
+  "difficulty": "easy",
+  "sourceFile": "0540.json"
+}

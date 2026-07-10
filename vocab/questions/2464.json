@@ -1,0 +1,15 @@
+{
+  "id": 2464,
+  "word": "Aerobe",
+  "question": "Aerobe",
+  "options": [
+    "A prefix meaning other or different",
+    "An organism requiring air to live",
+    "Of an airy nature",
+    "Paying attention or noticing"
+  ],
+  "answerOption": "B",
+  "answerText": "An organism requiring air to live",
+  "difficulty": "hard",
+  "sourceFile": "2464.json"
+}

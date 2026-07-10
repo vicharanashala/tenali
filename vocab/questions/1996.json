@@ -1,0 +1,15 @@
+{
+  "id": 1996,
+  "word": "Traitorous",
+  "question": "Traitorous",
+  "options": [
+    "One who detracts or disparages",
+    "One who deserts a duty or post",
+    "Betraying one's country or allies",
+    "Extremely unpleasant or revolting"
+  ],
+  "answerOption": "C",
+  "answerText": "Betraying one's country or allies",
+  "difficulty": "medium",
+  "sourceFile": "1996.json"
+}

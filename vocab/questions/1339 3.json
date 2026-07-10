@@ -1,0 +1,15 @@
+{
+  "id": 1339,
+  "word": "Demurrer",
+  "question": "Demurrer",
+  "options": [
+    "A legal objection to a claim",
+    "To unfasten or separate something",
+    "Moral corruption or wickedness",
+    "The action of removing from throne"
+  ],
+  "answerOption": "A",
+  "answerText": "A legal objection to a claim",
+  "difficulty": "medium",
+  "sourceFile": "1339.json"
+}

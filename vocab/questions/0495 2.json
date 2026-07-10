@@ -1,0 +1,15 @@
+{
+  "id": 495,
+  "word": "Inspect",
+  "question": "Inspect",
+  "options": [
+    "Tending to cause harm",
+    "To look at something closely",
+    "Of great weight; difficult to lift",
+    "Able to be relied on as honest"
+  ],
+  "answerOption": "B",
+  "answerText": "To look at something closely",
+  "difficulty": "easy",
+  "sourceFile": "0495.json"
+}

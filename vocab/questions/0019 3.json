@@ -1,0 +1,15 @@
+{
+  "id": 19,
+  "word": "Dry",
+  "question": "Dry",
+  "options": [
+    "To give permission for something",
+    "Free from moisture or liquid",
+    "Awkward in movement or handling things",
+    "To do physical harm or damage to someone"
+  ],
+  "answerOption": "B",
+  "answerText": "Free from moisture or liquid",
+  "difficulty": "easy",
+  "sourceFile": "0019.json"
+}

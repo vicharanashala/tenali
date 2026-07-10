@@ -1,0 +1,15 @@
+{
+  "id": 256,
+  "word": "Enter",
+  "question": "Enter",
+  "options": [
+    "To make something clear and easy to understand",
+    "Very great in degree; intense",
+    "To formally put an end to a system",
+    "To come or go into a place"
+  ],
+  "answerOption": "D",
+  "answerText": "To come or go into a place",
+  "difficulty": "easy",
+  "sourceFile": "0256.json"
+}

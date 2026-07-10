@@ -1,0 +1,15 @@
+{
+  "id": 270,
+  "word": "Starve",
+  "question": "Starve",
+  "options": [
+    "Elaborately or highly decorated",
+    "To suffer or die from lack of food",
+    "Keeping careful watch for dangers",
+    "Average in amount or intensity"
+  ],
+  "answerOption": "B",
+  "answerText": "To suffer or die from lack of food",
+  "difficulty": "easy",
+  "sourceFile": "0270.json"
+}

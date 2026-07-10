@@ -1,0 +1,15 @@
+{
+  "id": 174,
+  "word": "Whisper",
+  "question": "Whisper",
+  "options": [
+    "Showing great activity or vitality",
+    "Attractive in a delicate way",
+    "Having a lighthearted excited feeling",
+    "To speak very softly using the breath"
+  ],
+  "answerOption": "D",
+  "answerText": "To speak very softly using the breath",
+  "difficulty": "easy",
+  "sourceFile": "0174.json"
+}

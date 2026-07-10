@@ -1,0 +1,15 @@
+{
+  "id": 2393,
+  "word": "Jamais vu",
+  "question": "Jamais vu",
+  "options": [
+    "The act of renouncing",
+    "Lasting or permanent in nature",
+    "Plural of abjection",
+    "Not recognizing a situation one has experienced before"
+  ],
+  "answerOption": "D",
+  "answerText": "Not recognizing a situation one has experienced before",
+  "difficulty": "extra-hard",
+  "sourceFile": "2393.json"
+}

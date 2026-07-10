@@ -1,0 +1,15 @@
+{
+  "id": 1292,
+  "word": "Cogent",
+  "question": "Cogent",
+  "options": [
+    "Ornamental work of fine twisted wire",
+    "To dispute the truth or honesty of",
+    "Clear, logical, and convincing",
+    "In a state of quietness; inactive"
+  ],
+  "answerOption": "C",
+  "answerText": "Clear, logical, and convincing",
+  "difficulty": "hard",
+  "sourceFile": "1292.json"
+}

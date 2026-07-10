@@ -1,0 +1,15 @@
+{
+  "id": 51,
+  "word": "Open",
+  "question": "Open",
+  "options": [
+    "Allowing access; not closed or blocked",
+    "To feel admiration for someone's qualities",
+    "To express warm approval of something",
+    "To combine different things together"
+  ],
+  "answerOption": "A",
+  "answerText": "Allowing access; not closed or blocked",
+  "difficulty": "easy",
+  "sourceFile": "0051.json"
+}

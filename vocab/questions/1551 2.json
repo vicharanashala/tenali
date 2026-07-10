@@ -1,0 +1,15 @@
+{
+  "id": 1551,
+  "word": "Dessertspoon",
+  "question": "Dessertspoon",
+  "options": [
+    "Causing a physical or emotional shock",
+    "To keep someone from proceeding",
+    "A spoon between teaspoon and tablespoon",
+    "An artificial replacement for teeth"
+  ],
+  "answerOption": "C",
+  "answerText": "A spoon between teaspoon and tablespoon",
+  "difficulty": "medium",
+  "sourceFile": "1551.json"
+}

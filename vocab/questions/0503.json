@@ -1,0 +1,15 @@
+{
+  "id": 503,
+  "word": "Settle",
+  "question": "Settle",
+  "options": [
+    "Having limits or bounds",
+    "Delicious or pleasing to senses",
+    "Relating to or determined by the sun",
+    "To establish a home in a new place"
+  ],
+  "answerOption": "D",
+  "answerText": "To establish a home in a new place",
+  "difficulty": "easy",
+  "sourceFile": "0503.json"
+}

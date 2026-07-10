@@ -1,0 +1,15 @@
+{
+  "id": 863,
+  "word": "Peculiar",
+  "question": "Peculiar",
+  "options": [
+    "To become visible or noticeable",
+    "To be unsuccessful in achieving a goal",
+    "Strange or odd; unusual",
+    "Competent or skilled in doing something"
+  ],
+  "answerOption": "C",
+  "answerText": "Strange or odd; unusual",
+  "difficulty": "easy",
+  "sourceFile": "0863.json"
+}

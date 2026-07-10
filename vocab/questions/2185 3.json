@@ -1,0 +1,15 @@
+{
+  "id": 2185,
+  "word": "Advisal",
+  "question": "Advisal",
+  "options": [
+    "Providing advice or recommendations",
+    "The act of advising someone",
+    "Wary and unwilling to take risks",
+    "A duty or responsibility"
+  ],
+  "answerOption": "B",
+  "answerText": "The act of advising someone",
+  "difficulty": "hard",
+  "sourceFile": "2185.json"
+}

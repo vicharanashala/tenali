@@ -1,0 +1,15 @@
+{
+  "id": 70,
+  "word": "Generous",
+  "question": "Generous",
+  "options": [
+    "Of great or more than average height",
+    "Willing to give more than is expected",
+    "Strongly wanting to do or have something",
+    "Pleased and relieved about something"
+  ],
+  "answerOption": "B",
+  "answerText": "Willing to give more than is expected",
+  "difficulty": "easy",
+  "sourceFile": "0070.json"
+}

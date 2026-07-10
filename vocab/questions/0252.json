@@ -1,0 +1,15 @@
+{
+  "id": 252,
+  "word": "Follow",
+  "question": "Follow",
+  "options": [
+    "To move behind someone in the same direction",
+    "Containing or made of metal",
+    "Logical and well organized",
+    "Domesticated and not dangerous to people"
+  ],
+  "answerOption": "A",
+  "answerText": "To move behind someone in the same direction",
+  "difficulty": "easy",
+  "sourceFile": "0252.json"
+}

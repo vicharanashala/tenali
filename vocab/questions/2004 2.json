@@ -1,0 +1,15 @@
+{
+  "id": 2004,
+  "word": "Advowee",
+  "question": "Advowee",
+  "options": [
+    "Heart condition from altitude",
+    "The right of patronage of church",
+    "A typical example or pattern of something",
+    "A clerk in the church"
+  ],
+  "answerOption": "D",
+  "answerText": "A clerk in the church",
+  "difficulty": "hard",
+  "sourceFile": "2004.json"
+}

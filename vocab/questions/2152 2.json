@@ -1,0 +1,15 @@
+{
+  "id": 2152,
+  "word": "Aerognosy",
+  "question": "Aerognosy",
+  "options": [
+    "Of an airy nature",
+    "A Roman imperial treasury",
+    "Showing excessive vanity about achievements",
+    "Knowledge of air properties"
+  ],
+  "answerOption": "D",
+  "answerText": "Knowledge of air properties",
+  "difficulty": "hard",
+  "sourceFile": "2152.json"
+}

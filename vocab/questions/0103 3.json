@@ -1,0 +1,15 @@
+{
+  "id": 103,
+  "word": "Expensive",
+  "question": "Expensive",
+  "options": [
+    "To connect or link things together",
+    "Of a rough or irregular surface",
+    "Neatly and methodically arranged",
+    "Costing a lot of money"
+  ],
+  "answerOption": "D",
+  "answerText": "Costing a lot of money",
+  "difficulty": "easy",
+  "sourceFile": "0103.json"
+}

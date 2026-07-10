@@ -1,0 +1,15 @@
+{
+  "id": 2264,
+  "word": "Adrenal",
+  "question": "Adrenal",
+  "options": [
+    "A low protective wall",
+    "Relating to glands near the kidneys",
+    "A person who flies in balloon",
+    "An inescapable agent of someone's downfall"
+  ],
+  "answerOption": "B",
+  "answerText": "Relating to glands near the kidneys",
+  "difficulty": "hard",
+  "sourceFile": "2264.json"
+}

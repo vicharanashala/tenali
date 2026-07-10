@@ -1,0 +1,14 @@
+{
+  "id": 423,
+  "question": "Which Indian state has Imphal as its capital?",
+  "options": [
+    "Manipur",
+    "Mizoram",
+    "Meghalaya",
+    "Assam"
+  ],
+  "answerOption": "A",
+  "answerText": "Manipur",
+  "genre": "geography",
+  "sourceFile": "0423.json"
+}

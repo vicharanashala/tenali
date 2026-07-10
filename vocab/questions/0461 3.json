@@ -1,0 +1,15 @@
+{
+  "id": 461,
+  "word": "Achieve",
+  "question": "Achieve",
+  "options": [
+    "To say sorry for doing something wrong",
+    "To successfully reach a desired goal",
+    "To watch something carefully",
+    "To place equipment in position for use"
+  ],
+  "answerOption": "B",
+  "answerText": "To successfully reach a desired goal",
+  "difficulty": "easy",
+  "sourceFile": "0461.json"
+}

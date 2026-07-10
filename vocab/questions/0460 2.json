@@ -1,0 +1,15 @@
+{
+  "id": 460,
+  "word": "Attempt",
+  "question": "Attempt",
+  "options": [
+    "To try to achieve something",
+    "Done consciously and intentionally",
+    "To study something thoroughly",
+    "Done with the hands; requiring human effort"
+  ],
+  "answerOption": "A",
+  "answerText": "To try to achieve something",
+  "difficulty": "easy",
+  "sourceFile": "0460.json"
+}

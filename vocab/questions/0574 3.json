@@ -1,0 +1,15 @@
+{
+  "id": 574,
+  "word": "Content",
+  "question": "Content",
+  "options": [
+    "To try to find something by looking carefully",
+    "Refusing to change one's mind",
+    "In a state of peaceful happiness",
+    "To want something to happen and think it possible"
+  ],
+  "answerOption": "C",
+  "answerText": "In a state of peaceful happiness",
+  "difficulty": "easy",
+  "sourceFile": "0574.json"
+}

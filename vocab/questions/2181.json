@@ -1,0 +1,15 @@
+{
+  "id": 2181,
+  "word": "Panacea",
+  "question": "Panacea",
+  "options": [
+    "Philosophy emphasizing beauty and art",
+    "Relating to the air sphere",
+    "A solution for all difficulties or diseases",
+    "Lack of the necessary capacity"
+  ],
+  "answerOption": "C",
+  "answerText": "A solution for all difficulties or diseases",
+  "difficulty": "hard",
+  "sourceFile": "2181.json"
+}

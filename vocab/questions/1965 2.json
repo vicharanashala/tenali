@@ -1,0 +1,15 @@
+{
+  "id": 1965,
+  "word": "Adversary",
+  "question": "Adversary",
+  "options": [
+    "An air-dependent plant",
+    "One's opponent in a contest",
+    "In the manner of an adverb",
+    "Feeling calm and relaxed; not worried"
+  ],
+  "answerOption": "B",
+  "answerText": "One's opponent in a contest",
+  "difficulty": "hard",
+  "sourceFile": "1965.json"
+}

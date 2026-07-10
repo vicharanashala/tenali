@@ -1,0 +1,14 @@
+{
+  "id": 222,
+  "question": "Which is the largest state in India by area?",
+  "options": [
+    "Madhya Pradesh",
+    "Uttar Pradesh",
+    "Rajasthan",
+    "Maharashtra"
+  ],
+  "answerOption": "C",
+  "answerText": "Rajasthan",
+  "genre": "india-gk",
+  "sourceFile": "0222.json"
+}

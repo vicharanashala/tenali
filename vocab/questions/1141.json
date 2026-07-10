@@ -1,0 +1,15 @@
+{
+  "id": 1141,
+  "word": "Astute",
+  "question": "Astute",
+  "options": [
+    "Having the ability to assess situations quickly",
+    "Unwilling to spend freely",
+    "Strange or odd; unusual",
+    "The process of drying completely"
+  ],
+  "answerOption": "A",
+  "answerText": "Having the ability to assess situations quickly",
+  "difficulty": "medium",
+  "sourceFile": "1141.json"
+}

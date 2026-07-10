@@ -1,0 +1,15 @@
+{
+  "id": 786,
+  "word": "Sterile",
+  "question": "Sterile",
+  "options": [
+    "To convey thoughts or feelings in words",
+    "Free from bacteria; completely clean",
+    "To feel curious about something",
+    "Very impressive; magnificent"
+  ],
+  "answerOption": "B",
+  "answerText": "Free from bacteria; completely clean",
+  "difficulty": "easy",
+  "sourceFile": "0786.json"
+}

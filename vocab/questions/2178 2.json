@@ -1,0 +1,15 @@
+{
+  "id": 2178,
+  "word": "AEROMOTOR",
+  "question": "AEROMOTOR",
+  "options": [
+    "Not telling the truth; lying",
+    "A citrus tree from Asia",
+    "An engine powered by air",
+    "An inescapable agent of someone's downfall"
+  ],
+  "answerOption": "C",
+  "answerText": "An engine powered by air",
+  "difficulty": "hard",
+  "sourceFile": "2178.json"
+}

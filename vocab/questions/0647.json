@@ -1,0 +1,15 @@
+{
+  "id": 647,
+  "word": "Literate",
+  "question": "Literate",
+  "options": [
+    "Able to read and write",
+    "To suffer or die from lack of food",
+    "Offensively impolite or bad-mannered",
+    "To hold something dear; to love deeply"
+  ],
+  "answerOption": "A",
+  "answerText": "Able to read and write",
+  "difficulty": "easy",
+  "sourceFile": "0647.json"
+}

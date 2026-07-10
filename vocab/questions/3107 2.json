@@ -1,0 +1,15 @@
+{
+  "id": 3107,
+  "word": "Abuzz",
+  "question": "Abuzz",
+  "options": [
+    "A commotion or fuss caused by disagreement",
+    "The love of beauty in all things",
+    "Filled with buzzing sound",
+    "The realization that each passerby has a vivid inner life"
+  ],
+  "answerOption": "C",
+  "answerText": "Filled with buzzing sound",
+  "difficulty": "extra-hard",
+  "sourceFile": "3107.json"
+}

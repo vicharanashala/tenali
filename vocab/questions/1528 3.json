@@ -1,0 +1,15 @@
+{
+  "id": 1528,
+  "word": "Desperate",
+  "question": "Desperate",
+  "options": [
+    "One who dethrones",
+    "In grave danger or great need",
+    "The action of purifying",
+    "To make something ineffective; to nullify"
+  ],
+  "answerOption": "B",
+  "answerText": "In grave danger or great need",
+  "difficulty": "medium",
+  "sourceFile": "1528.json"
+}

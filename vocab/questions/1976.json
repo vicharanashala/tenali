@@ -1,0 +1,15 @@
+{
+  "id": 1976,
+  "word": "Coerced",
+  "question": "Coerced",
+  "options": [
+    "Displaying a lack of energy; relaxed",
+    "A feeling of hatred or disgust",
+    "Forced someone to act against their will",
+    "Involving the possibility of loss"
+  ],
+  "answerOption": "C",
+  "answerText": "Forced someone to act against their will",
+  "difficulty": "medium",
+  "sourceFile": "1976.json"
+}

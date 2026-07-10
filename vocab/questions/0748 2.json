@@ -1,0 +1,15 @@
+{
+  "id": 748,
+  "word": "Arctic",
+  "question": "Arctic",
+  "options": [
+    "Relating to regions around the North Pole",
+    "Relating to or found in the sea",
+    "To point out the faults of something",
+    "Producing powerful feelings or strong images"
+  ],
+  "answerOption": "A",
+  "answerText": "Relating to regions around the North Pole",
+  "difficulty": "easy",
+  "sourceFile": "0748.json"
+}

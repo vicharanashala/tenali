@@ -1,0 +1,15 @@
+{
+  "id": 2342,
+  "word": "Aerodromics",
+  "question": "Aerodromics",
+  "options": [
+    "The science of aerodromes",
+    "Leadership or dominance over others",
+    "Of a greenish color",
+    "Skillful use of one's hands; trickery"
+  ],
+  "answerOption": "A",
+  "answerText": "The science of aerodromes",
+  "difficulty": "hard",
+  "sourceFile": "2342.json"
+}

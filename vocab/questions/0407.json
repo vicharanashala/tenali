@@ -1,0 +1,15 @@
+{
+  "id": 407,
+  "word": "Earn",
+  "question": "Earn",
+  "options": [
+    "To make the environment dirty or harmful",
+    "To cause liquid to scatter in drops",
+    "To receive money in return for labor",
+    "Close to the actual but not completely exact"
+  ],
+  "answerOption": "C",
+  "answerText": "To receive money in return for labor",
+  "difficulty": "easy",
+  "sourceFile": "0407.json"
+}

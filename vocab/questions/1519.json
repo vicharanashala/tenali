@@ -1,0 +1,15 @@
+{
+  "id": 1519,
+  "word": "Depressor",
+  "question": "Depressor",
+  "options": [
+    "A muscle that depresses something",
+    "To decrease in value over time",
+    "Having a feeling of vague longing",
+    "Excessively proud of appearance"
+  ],
+  "answerOption": "A",
+  "answerText": "A muscle that depresses something",
+  "difficulty": "medium",
+  "sourceFile": "1519.json"
+}

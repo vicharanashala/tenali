@@ -1,0 +1,15 @@
+{
+  "id": 605,
+  "word": "Glitter",
+  "question": "Glitter",
+  "options": [
+    "Strongly wanting to do or have something",
+    "To dry out and shrivel up",
+    "To ask for something forcefully",
+    "To shine with a bright shimmering light"
+  ],
+  "answerOption": "D",
+  "answerText": "To shine with a bright shimmering light",
+  "difficulty": "easy",
+  "sourceFile": "0605.json"
+}

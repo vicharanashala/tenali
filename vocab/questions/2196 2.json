@@ -1,0 +1,15 @@
+{
+  "id": 2196,
+  "word": "AEROPHOBE",
+  "question": "AEROPHOBE",
+  "options": [
+    "One who fears flying",
+    "Lacking a plan or purpose; random",
+    "Producing or generating gas",
+    "A position requiring little or no work"
+  ],
+  "answerOption": "A",
+  "answerText": "One who fears flying",
+  "difficulty": "hard",
+  "sourceFile": "2196.json"
+}

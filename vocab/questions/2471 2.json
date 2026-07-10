@@ -1,0 +1,15 @@
+{
+  "id": 2471,
+  "word": "Myrmecology",
+  "question": "Myrmecology",
+  "options": [
+    "Acquiring books but letting them pile up unread",
+    "The study of ants",
+    "Something bearing visible traces of an earlier form",
+    "A joke so poorly told that one laughs anyway"
+  ],
+  "answerOption": "B",
+  "answerText": "The study of ants",
+  "difficulty": "extra-hard",
+  "sourceFile": "2471.json"
+}

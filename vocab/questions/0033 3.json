@@ -1,0 +1,15 @@
+{
+  "id": 33,
+  "word": "Hungry",
+  "question": "Hungry",
+  "options": [
+    "To take delight or pleasure in something",
+    "Feeling or showing the need for food",
+    "Relating to computer technology",
+    "To freely offer to do something"
+  ],
+  "answerOption": "B",
+  "answerText": "Feeling or showing the need for food",
+  "difficulty": "easy",
+  "sourceFile": "0033.json"
+}

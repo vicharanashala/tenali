@@ -1,0 +1,15 @@
+{
+  "id": 3049,
+  "word": "Abstractiveness",
+  "question": "Abstractiveness",
+  "options": [
+    "Quality of being abstractive",
+    "A social gathering centered around drinking chocolate",
+    "A small amount or piece",
+    "Not recognizing a situation one has experienced before"
+  ],
+  "answerOption": "A",
+  "answerText": "Quality of being abstractive",
+  "difficulty": "extra-hard",
+  "sourceFile": "3049.json"
+}

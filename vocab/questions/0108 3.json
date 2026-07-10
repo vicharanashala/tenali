@@ -1,0 +1,15 @@
+{
+  "id": 108,
+  "word": "Rare",
+  "question": "Rare",
+  "options": [
+    "Going in a slanting direction",
+    "Offensively impolite or bad-mannered",
+    "To put someone at risk or in danger",
+    "Not found in large numbers; uncommon"
+  ],
+  "answerOption": "D",
+  "answerText": "Not found in large numbers; uncommon",
+  "difficulty": "easy",
+  "sourceFile": "0108.json"
+}

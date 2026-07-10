@@ -1,0 +1,15 @@
+{
+  "id": 3013,
+  "word": "Brontide",
+  "question": "Brontide",
+  "options": [
+    "A low rumbling sound like distant thunder",
+    "In bitter manner",
+    "Creature of abyss feeder",
+    "Ablactation in Latin"
+  ],
+  "answerOption": "A",
+  "answerText": "A low rumbling sound like distant thunder",
+  "difficulty": "extra-hard",
+  "sourceFile": "3013.json"
+}

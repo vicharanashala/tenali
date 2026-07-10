@@ -1,0 +1,15 @@
+{
+  "id": 78,
+  "word": "Clever",
+  "question": "Clever",
+  "options": [
+    "Quick and light in movement or action",
+    "To withdraw from a position",
+    "Quick to understand and learn things",
+    "To examine and make corrections to something"
+  ],
+  "answerOption": "C",
+  "answerText": "Quick to understand and learn things",
+  "difficulty": "easy",
+  "sourceFile": "0078.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1431,
+  "word": "Den",
+  "question": "Den",
+  "options": [
+    "Truly what something is said to be; authentic",
+    "The quality of being frank and truthful",
+    "To assign responsibility to another person",
+    "A small room or animal's lair"
+  ],
+  "answerOption": "D",
+  "answerText": "A small room or animal's lair",
+  "difficulty": "medium",
+  "sourceFile": "1431.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1592,
+  "word": "Detergent",
+  "question": "Detergent",
+  "options": [
+    "To remove from selected status",
+    "In a way that can be shown",
+    "The first appearance in a role or on stage",
+    "A cleansing agent or substance"
+  ],
+  "answerOption": "D",
+  "answerText": "A cleansing agent or substance",
+  "difficulty": "medium",
+  "sourceFile": "1592.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 39,
+  "word": "Funny",
+  "question": "Funny",
+  "options": [
+    "Not easily bent or moved",
+    "Feeling fear or anxiety",
+    "Causing laughter or amusement",
+    "To save someone from a dangerous situation"
+  ],
+  "answerOption": "C",
+  "answerText": "Causing laughter or amusement",
+  "difficulty": "easy",
+  "sourceFile": "0039.json"
+}

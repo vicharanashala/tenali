@@ -1,0 +1,14 @@
+{
+  "id": 52,
+  "question": "What is the freezing point of water in degrees Celsius?",
+  "options": [
+    "0",
+    "32",
+    "100",
+    "-10"
+  ],
+  "answerOption": "A",
+  "answerText": "0",
+  "genre": "science",
+  "sourceFile": "0052.json"
+}

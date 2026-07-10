@@ -1,0 +1,15 @@
+{
+  "id": 272,
+  "word": "Heal",
+  "question": "Heal",
+  "options": [
+    "Moving at a low speed",
+    "To become sound or healthy again",
+    "Arranged or planned in a methodical way",
+    "To increase in size or amount"
+  ],
+  "answerOption": "B",
+  "answerText": "To become sound or healthy again",
+  "difficulty": "easy",
+  "sourceFile": "0272.json"
+}

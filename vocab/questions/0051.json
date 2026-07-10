@@ -1,0 +1,15 @@
+{
+  "id": 51,
+  "word": "Open",
+  "question": "Open",
+  "options": [
+    "To move about freely without a destination",
+    "To make available for someone to use",
+    "To make sounds showing amusement",
+    "Allowing access; not closed or blocked"
+  ],
+  "answerOption": "D",
+  "answerText": "Allowing access; not closed or blocked",
+  "difficulty": "easy",
+  "sourceFile": "0051.json"
+}

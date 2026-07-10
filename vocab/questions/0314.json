@@ -1,0 +1,15 @@
+{
+  "id": 314,
+  "word": "Inspire",
+  "question": "Inspire",
+  "options": [
+    "To make someone feel weary and uninterested",
+    "Difficult to manage or iritable",
+    "To fill someone with the urge to do something",
+    "To set free from confinement"
+  ],
+  "answerOption": "C",
+  "answerText": "To fill someone with the urge to do something",
+  "difficulty": "easy",
+  "sourceFile": "0314.json"
+}

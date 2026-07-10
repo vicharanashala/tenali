@@ -1,0 +1,15 @@
+{
+  "id": 27,
+  "word": "Young",
+  "question": "Young",
+  "options": [
+    "Existing at the beginning",
+    "Too small to be seen by the eye",
+    "Having lived or existed for only a short time",
+    "To work together on an activity"
+  ],
+  "answerOption": "C",
+  "answerText": "Having lived or existed for only a short time",
+  "difficulty": "easy",
+  "sourceFile": "0027.json"
+}

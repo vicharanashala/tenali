@@ -1,0 +1,15 @@
+{
+  "id": 2568,
+  "word": "AEROPORT",
+  "question": "AEROPORT",
+  "options": [
+    "An airport or air terminal",
+    "Lacking advice or counsel",
+    "Lacking ease or grace; unsophisticated",
+    "The action of uncovering something"
+  ],
+  "answerOption": "A",
+  "answerText": "An airport or air terminal",
+  "difficulty": "hard",
+  "sourceFile": "2568.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 755,
+  "question": "What is the chemical symbol for copper?",
+  "options": [
+    "Co",
+    "Cu",
+    "Cp",
+    "Cr"
+  ],
+  "answerOption": "B",
+  "answerText": "Cu",
+  "genre": "mixed",
+  "sourceFile": "0755.json"
+}

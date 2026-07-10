@@ -1,0 +1,15 @@
+{
+  "id": 2101,
+  "word": "Ostentatious",
+  "question": "Ostentatious",
+  "options": [
+    "A space or opening split in something",
+    "Deceit used to achieve one's goal",
+    "Medical use of air",
+    "Designed to impress or attract notice"
+  ],
+  "answerOption": "D",
+  "answerText": "Designed to impress or attract notice",
+  "difficulty": "hard",
+  "sourceFile": "2101.json"
+}

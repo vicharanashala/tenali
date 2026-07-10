@@ -1,0 +1,15 @@
+{
+  "id": 808,
+  "word": "Modest",
+  "question": "Modest",
+  "options": [
+    "Containing as much as possible; filled completely",
+    "Having a violent or aggressive nature",
+    "Not even or balanced in shape",
+    "Unassuming in the estimation of one's abilities"
+  ],
+  "answerOption": "D",
+  "answerText": "Unassuming in the estimation of one's abilities",
+  "difficulty": "easy",
+  "sourceFile": "0808.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2828,
+  "word": "Devotion",
+  "question": "Devotion",
+  "options": [
+    "The action of extending duration",
+    "Strongly reminiscent or suggestive of",
+    "Sponsorship, support, or auspices",
+    "Love or loyalty toward someone"
+  ],
+  "answerOption": "D",
+  "answerText": "Love or loyalty toward someone",
+  "difficulty": "hard",
+  "sourceFile": "2828.json"
+}

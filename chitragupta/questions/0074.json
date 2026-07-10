@@ -1,0 +1,14 @@
+{
+  "id": 74,
+  "question": "Which layer of the Earth lies beneath the crust?",
+  "options": [
+    "Core",
+    "Mantle",
+    "Atmosphere",
+    "Lithosphere"
+  ],
+  "answerOption": "B",
+  "answerText": "Mantle",
+  "genre": "mixed",
+  "sourceFile": "0074.json"
+}

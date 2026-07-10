@@ -1,0 +1,15 @@
+{
+  "id": 803,
+  "word": "Corrupt",
+  "question": "Corrupt",
+  "options": [
+    "In perfect original condition",
+    "Having a strong pleasant taste",
+    "Very cold with visible frost",
+    "Having or showing a willingness to act dishonestly"
+  ],
+  "answerOption": "D",
+  "answerText": "Having or showing a willingness to act dishonestly",
+  "difficulty": "easy",
+  "sourceFile": "0803.json"
+}

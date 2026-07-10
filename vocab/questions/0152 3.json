@@ -1,0 +1,15 @@
+{
+  "id": 152,
+  "word": "Begin",
+  "question": "Begin",
+  "options": [
+    "Having received a good education",
+    "Occurring continuously over time",
+    "To start doing something",
+    "Introducing new and original ideas"
+  ],
+  "answerOption": "C",
+  "answerText": "To start doing something",
+  "difficulty": "easy",
+  "sourceFile": "0152.json"
+}

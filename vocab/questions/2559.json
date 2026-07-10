@@ -1,0 +1,15 @@
+{
+  "id": 2559,
+  "word": "AEROPLANE",
+  "question": "AEROPLANE",
+  "options": [
+    "A state of being ill or sickly",
+    "A genus of spiders in taxonomy",
+    "The action of making larger",
+    "A fixed-wing aircraft"
+  ],
+  "answerOption": "D",
+  "answerText": "A fixed-wing aircraft",
+  "difficulty": "hard",
+  "sourceFile": "2559.json"
+}

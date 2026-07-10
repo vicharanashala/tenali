@@ -1,0 +1,15 @@
+{
+  "id": 98,
+  "word": "Neat",
+  "question": "Neat",
+  "options": [
+    "Arranged in a tidy way",
+    "To recognize what someone or something is",
+    "To break free from confinement",
+    "To have as belonging to one; to own"
+  ],
+  "answerOption": "A",
+  "answerText": "Arranged in a tidy way",
+  "difficulty": "easy",
+  "sourceFile": "0098.json"
+}

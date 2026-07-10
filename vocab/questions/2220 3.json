@@ -1,0 +1,15 @@
+{
+  "id": 2220,
+  "word": "Aegirite",
+  "question": "Aegirite",
+  "options": [
+    "An eagle's nest or high place",
+    "A mature human or animal",
+    "A space or opening split in something",
+    "A type of mineral pyroxene"
+  ],
+  "answerOption": "D",
+  "answerText": "A type of mineral pyroxene",
+  "difficulty": "hard",
+  "sourceFile": "2220.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 3343,
+  "word": "Abstinency",
+  "question": "Abstinency",
+  "options": [
+    "A profound awareness of the universe that triggers emotion",
+    "The quality of being abstinent",
+    "The view that the self is all that can be known",
+    "Below threshold level"
+  ],
+  "answerOption": "B",
+  "answerText": "The quality of being abstinent",
+  "difficulty": "extra-hard",
+  "sourceFile": "3343.json"
+}

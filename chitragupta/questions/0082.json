@@ -1,0 +1,14 @@
+{
+  "id": 82,
+  "question": "Who wrote 'The Discovery of India'?",
+  "options": [
+    "Jawaharlal Nehru",
+    "B. R. Ambedkar",
+    "Mahatma Gandhi",
+    "S. Radhakrishnan"
+  ],
+  "answerOption": "A",
+  "answerText": "Jawaharlal Nehru",
+  "genre": "india-gk",
+  "sourceFile": "0082.json"
+}

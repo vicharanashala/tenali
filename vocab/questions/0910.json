@@ -1,0 +1,15 @@
+{
+  "id": 910,
+  "word": "Minuscule",
+  "question": "Minuscule",
+  "options": [
+    "Extremely small in size",
+    "To find something for the first time",
+    "To cause someone to lose confidence",
+    "Happening by chance; unintentional"
+  ],
+  "answerOption": "A",
+  "answerText": "Extremely small in size",
+  "difficulty": "easy",
+  "sourceFile": "0910.json"
+}

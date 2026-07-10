@@ -1,0 +1,15 @@
+{
+  "id": 1803,
+  "word": "Barbarous",
+  "question": "Barbarous",
+  "options": [
+    "Relating to or resulting from motion",
+    "Cruel or savage",
+    "In a desperate manner",
+    "In a detrimental manner"
+  ],
+  "answerOption": "B",
+  "answerText": "Cruel or savage",
+  "difficulty": "medium",
+  "sourceFile": "1803.json"
+}

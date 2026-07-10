@@ -1,0 +1,15 @@
+{
+  "id": 644,
+  "word": "Intelligent",
+  "question": "Intelligent",
+  "options": [
+    "To become mature and ready to eat",
+    "Feeling pleasure or happiness",
+    "To carefully choose as being the best",
+    "Having the ability to learn and understand"
+  ],
+  "answerOption": "D",
+  "answerText": "Having the ability to learn and understand",
+  "difficulty": "easy",
+  "sourceFile": "0644.json"
+}

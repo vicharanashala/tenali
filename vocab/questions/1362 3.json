@@ -1,0 +1,15 @@
+{
+  "id": 1362,
+  "word": "Dent",
+  "question": "Dent",
+  "options": [
+    "A depression in a surface caused by pressure",
+    "Making marks that cannot be removed",
+    "A loud and confused noise or voices",
+    "Something greatly desired or needed"
+  ],
+  "answerOption": "A",
+  "answerText": "A depression in a surface caused by pressure",
+  "difficulty": "medium",
+  "sourceFile": "1362.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1040,
+  "word": "Bolster",
+  "question": "Bolster",
+  "options": [
+    "Placing things close together for contrast",
+    "Showing resistance to authority",
+    "To support or strengthen something",
+    "To place close together for comparison"
+  ],
+  "answerOption": "C",
+  "answerText": "To support or strengthen something",
+  "difficulty": "medium",
+  "sourceFile": "1040.json"
+}

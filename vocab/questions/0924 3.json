@@ -1,0 +1,15 @@
+{
+  "id": 924,
+  "word": "Notorious",
+  "question": "Notorious",
+  "options": [
+    "Contrary to what is usual or accepted",
+    "The layer of skin beneath the epidermis",
+    "Famous for something bad",
+    "A branching extension of a nerve cell"
+  ],
+  "answerOption": "C",
+  "answerText": "Famous for something bad",
+  "difficulty": "medium",
+  "sourceFile": "0924.json"
+}

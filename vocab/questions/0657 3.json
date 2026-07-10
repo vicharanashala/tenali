@@ -1,0 +1,15 @@
+{
+  "id": 657,
+  "word": "Eternal",
+  "question": "Eternal",
+  "options": [
+    "To begin to grow; to produce shoots",
+    "Having a sharp acidic taste",
+    "To identify someone from previous encounters",
+    "Lasting or existing forever"
+  ],
+  "answerOption": "D",
+  "answerText": "Lasting or existing forever",
+  "difficulty": "easy",
+  "sourceFile": "0657.json"
+}

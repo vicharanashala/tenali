@@ -1,0 +1,15 @@
+{
+  "id": 2166,
+  "word": "AEROLOGY",
+  "question": "AEROLOGY",
+  "options": [
+    "A Roman imperial treasury",
+    "The study of atmosphere",
+    "The minimum number needed for a meeting",
+    "The process of adding air"
+  ],
+  "answerOption": "B",
+  "answerText": "The study of atmosphere",
+  "difficulty": "hard",
+  "sourceFile": "2166.json"
+}

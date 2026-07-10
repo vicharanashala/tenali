@@ -1,0 +1,15 @@
+{
+  "id": 2525,
+  "word": "Abides",
+  "question": "Abides",
+  "options": [
+    "Remains or continues in place",
+    "In a lasting or permanent manner",
+    "A figure of speech with an unexpected ending",
+    "Reduced to abjection"
+  ],
+  "answerOption": "A",
+  "answerText": "Remains or continues in place",
+  "difficulty": "extra-hard",
+  "sourceFile": "2525.json"
+}

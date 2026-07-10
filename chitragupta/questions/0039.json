@@ -1,0 +1,14 @@
+{
+  "id": 39,
+  "question": "Who wrote the play 'Romeo and Juliet'?",
+  "options": [
+    "Charles Dickens",
+    "William Shakespeare",
+    "Jane Austen",
+    "George Orwell"
+  ],
+  "answerOption": "B",
+  "answerText": "William Shakespeare",
+  "genre": "general-knowledge",
+  "sourceFile": "0039.json"
+}

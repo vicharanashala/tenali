@@ -1,0 +1,15 @@
+{
+  "id": 882,
+  "word": "Discreet",
+  "question": "Discreet",
+  "options": [
+    "Careful to avoid social awkwardness",
+    "Not easily upset or excited; calm",
+    "Having passionate and sincere feeling",
+    "Making a situation likely to happen"
+  ],
+  "answerOption": "A",
+  "answerText": "Careful to avoid social awkwardness",
+  "difficulty": "medium",
+  "sourceFile": "0882.json"
+}

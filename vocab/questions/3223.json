@@ -1,0 +1,15 @@
+{
+  "id": 3223,
+  "word": "Abidancy",
+  "question": "Abidancy",
+  "options": [
+    "A tropical plant yielding musk",
+    "In an abysmal manner",
+    "A quality of coziness creating contentment",
+    "The act of abiding somewhere"
+  ],
+  "answerOption": "D",
+  "answerText": "The act of abiding somewhere",
+  "difficulty": "extra-hard",
+  "sourceFile": "3223.json"
+}

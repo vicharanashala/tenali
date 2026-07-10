@@ -1,0 +1,15 @@
+{
+  "id": 139,
+  "word": "Anxious",
+  "question": "Anxious",
+  "options": [
+    "To examine and record the features of something",
+    "Feeling worried or nervous about something",
+    "Having strong winds and usually rain",
+    "To determine the total number of items"
+  ],
+  "answerOption": "B",
+  "answerText": "Feeling worried or nervous about something",
+  "difficulty": "easy",
+  "sourceFile": "0139.json"
+}

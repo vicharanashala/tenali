@@ -1,0 +1,14 @@
+{
+  "id": 217,
+  "question": "Which organ in the plant absorbs water from the soil?",
+  "options": [
+    "Leaf",
+    "Stem",
+    "Root",
+    "Flower"
+  ],
+  "answerOption": "C",
+  "answerText": "Root",
+  "genre": "science",
+  "sourceFile": "0217.json"
+}

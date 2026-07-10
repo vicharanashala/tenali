@@ -1,0 +1,15 @@
+{
+  "id": 503,
+  "word": "Settle",
+  "question": "Settle",
+  "options": [
+    "To shine with flashes of light",
+    "To attract and hold attention of someone",
+    "To gradually grow faint and disappear",
+    "To establish a home in a new place"
+  ],
+  "answerOption": "D",
+  "answerText": "To establish a home in a new place",
+  "difficulty": "easy",
+  "sourceFile": "0503.json"
+}

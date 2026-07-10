@@ -1,0 +1,14 @@
+{
+  "id": 369,
+  "question": "What is the standard unit of electric resistance?",
+  "options": [
+    "Ampere",
+    "Volt",
+    "Ohm",
+    "Watt"
+  ],
+  "answerOption": "C",
+  "answerText": "Ohm",
+  "genre": "mixed",
+  "sourceFile": "0369.json"
+}

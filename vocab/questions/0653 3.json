@@ -1,0 +1,15 @@
+{
+  "id": 653,
+  "word": "Brief",
+  "question": "Brief",
+  "options": [
+    "Of short duration; not lasting long",
+    "To have as belonging to one; to own",
+    "To collide violently with an obstacle",
+    "Causing an urge to scratch"
+  ],
+  "answerOption": "A",
+  "answerText": "Of short duration; not lasting long",
+  "difficulty": "easy",
+  "sourceFile": "0653.json"
+}

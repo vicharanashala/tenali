@@ -1,0 +1,14 @@
+{
+  "id": 152,
+  "question": "Which city is the capital of Italy?",
+  "options": [
+    "Venice",
+    "Milan",
+    "Rome",
+    "Naples"
+  ],
+  "answerOption": "C",
+  "answerText": "Rome",
+  "genre": "geography",
+  "sourceFile": "0152.json"
+}

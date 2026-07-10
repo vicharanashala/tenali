@@ -1,0 +1,15 @@
+{
+  "id": 1030,
+  "word": "Oscillate",
+  "question": "Oscillate",
+  "options": [
+    "To move back and forth at a regular speed",
+    "Famous for something bad",
+    "To clear someone of blame or suspicion",
+    "Not friendly or interested; distant"
+  ],
+  "answerOption": "A",
+  "answerText": "To move back and forth at a regular speed",
+  "difficulty": "medium",
+  "sourceFile": "1030.json"
+}

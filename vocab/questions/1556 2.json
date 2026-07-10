@@ -1,0 +1,15 @@
+{
+  "id": 1556,
+  "word": "Destiny",
+  "question": "Destiny",
+  "options": [
+    "Friendly and easy to talk to",
+    "The events that will happen",
+    "Of only moderate quality; not very good",
+    "To cause someone to lose confidence"
+  ],
+  "answerOption": "B",
+  "answerText": "The events that will happen",
+  "difficulty": "medium",
+  "sourceFile": "1556.json"
+}

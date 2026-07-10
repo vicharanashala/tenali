@@ -1,0 +1,15 @@
+{
+  "id": 871,
+  "word": "Gradual",
+  "question": "Gradual",
+  "options": [
+    "Having no strong flavor or taste",
+    "Happening or changing slowly over time",
+    "To do something repeatedly to improve",
+    "To heat a liquid until it bubbles"
+  ],
+  "answerOption": "B",
+  "answerText": "Happening or changing slowly over time",
+  "difficulty": "easy",
+  "sourceFile": "0871.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 81,
+  "word": "Sick",
+  "question": "Sick",
+  "options": [
+    "Affected by physical illness",
+    "Introducing new and original ideas",
+    "To dry out and shrivel up",
+    "To combine different things together"
+  ],
+  "answerOption": "A",
+  "answerText": "Affected by physical illness",
+  "difficulty": "easy",
+  "sourceFile": "0081.json"
+}

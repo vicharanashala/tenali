@@ -1,0 +1,15 @@
+{
+  "id": 92,
+  "word": "Loose",
+  "question": "Loose",
+  "options": [
+    "Very fine in texture or structure",
+    "Happening with great speed",
+    "Not firmly fixed in place",
+    "No longer living"
+  ],
+  "answerOption": "C",
+  "answerText": "Not firmly fixed in place",
+  "difficulty": "easy",
+  "sourceFile": "0092.json"
+}

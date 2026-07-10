@@ -1,0 +1,15 @@
+{
+  "id": 1296,
+  "word": "Consonant",
+  "question": "Consonant",
+  "options": [
+    "To follow a winding course",
+    "To extract information from various sources",
+    "Abandoned by an owner or crew",
+    "In agreement or harmony with something"
+  ],
+  "answerOption": "D",
+  "answerText": "In agreement or harmony with something",
+  "difficulty": "medium",
+  "sourceFile": "1296.json"
+}

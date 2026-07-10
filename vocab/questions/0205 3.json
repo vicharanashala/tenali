@@ -1,0 +1,15 @@
+{
+  "id": 205,
+  "word": "Scatter",
+  "question": "Scatter",
+  "options": [
+    "To move forward on hands and knees",
+    "Lasting or intended to last forever",
+    "To throw in various random directions",
+    "To express the meaning in another language"
+  ],
+  "answerOption": "C",
+  "answerText": "To throw in various random directions",
+  "difficulty": "easy",
+  "sourceFile": "0205.json"
+}

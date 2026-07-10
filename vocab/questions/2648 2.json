@@ -1,0 +1,15 @@
+{
+  "id": 2648,
+  "word": "Perseverance",
+  "question": "Perseverance",
+  "options": [
+    "Steadfast pursuit of something",
+    "Deliberate and unprovoked cruelty",
+    "Cheerful and lighthearted",
+    "An abnormal change in body tissue"
+  ],
+  "answerOption": "A",
+  "answerText": "Steadfast pursuit of something",
+  "difficulty": "hard",
+  "sourceFile": "2648.json"
+}

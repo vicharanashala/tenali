@@ -1,0 +1,14 @@
+{
+  "id": 983,
+  "question": "Which animal is on the Indian national emblem along with lions?",
+  "options": [
+    "Tiger",
+    "Horse",
+    "Bull",
+    "Elephant"
+  ],
+  "answerOption": "C",
+  "answerText": "Bull",
+  "genre": "india-gk",
+  "sourceFile": "0983.json"
+}

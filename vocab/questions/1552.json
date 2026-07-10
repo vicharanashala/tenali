@@ -1,0 +1,15 @@
+{
+  "id": 1552,
+  "word": "Dermatology",
+  "question": "Dermatology",
+  "options": [
+    "The expression of disapproval",
+    "Strong dislike or hatred",
+    "Wishing to do what is right",
+    "The study of the skin"
+  ],
+  "answerOption": "D",
+  "answerText": "The study of the skin",
+  "difficulty": "medium",
+  "sourceFile": "1552.json"
+}

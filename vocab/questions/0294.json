@@ -1,0 +1,15 @@
+{
+  "id": 294,
+  "word": "Delay",
+  "question": "Delay",
+  "options": [
+    "Made by human skill; not natural",
+    "To refuse to accept or consider something",
+    "To make something happen later than planned",
+    "Showing strong feelings or beliefs"
+  ],
+  "answerOption": "C",
+  "answerText": "To make something happen later than planned",
+  "difficulty": "easy",
+  "sourceFile": "0294.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 232,
+  "word": "Trust",
+  "question": "Trust",
+  "options": [
+    "To successfully reach a desired goal",
+    "To make sure something is true or accurate",
+    "To believe in the reliability of someone",
+    "Treating people equally without favoritism"
+  ],
+  "answerOption": "C",
+  "answerText": "To believe in the reliability of someone",
+  "difficulty": "easy",
+  "sourceFile": "0232.json"
+}

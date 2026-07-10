@@ -1,0 +1,15 @@
+{
+  "id": 184,
+  "word": "Catch",
+  "question": "Catch",
+  "options": [
+    "To observe and check progress over time",
+    "Causing extreme fear or suffering",
+    "To fasten or join one thing to another",
+    "To capture or seize something"
+  ],
+  "answerOption": "D",
+  "answerText": "To capture or seize something",
+  "difficulty": "easy",
+  "sourceFile": "0184.json"
+}

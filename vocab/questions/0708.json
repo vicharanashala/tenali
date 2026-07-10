@@ -1,0 +1,15 @@
+{
+  "id": 708,
+  "word": "Uniform",
+  "question": "Uniform",
+  "options": [
+    "Having the form of a circle",
+    "Not varying; the same in all cases",
+    "To give something to someone temporarily",
+    "Having a sharp taste"
+  ],
+  "answerOption": "B",
+  "answerText": "Not varying; the same in all cases",
+  "difficulty": "easy",
+  "sourceFile": "0708.json"
+}

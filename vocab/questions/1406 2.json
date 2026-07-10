@@ -1,0 +1,15 @@
+{
+  "id": 1406,
+  "word": "Jayus",
+  "question": "Jayus",
+  "options": [
+    "Giving opinions beyond one's knowledge",
+    "Unfamiliar, rare, strange, and yet marvelous",
+    "A joke so poorly told that one laughs anyway",
+    "A place where one feels safe and at home"
+  ],
+  "answerOption": "C",
+  "answerText": "A joke so poorly told that one laughs anyway",
+  "difficulty": "extra-hard",
+  "sourceFile": "1406.json"
+}

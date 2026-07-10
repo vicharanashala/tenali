@@ -1,0 +1,15 @@
+{
+  "id": 732,
+  "word": "Opaque",
+  "question": "Opaque",
+  "options": [
+    "Of chief importance; principal",
+    "Feeling uncertain or unsure",
+    "Not able to be seen through",
+    "Using more words than needed"
+  ],
+  "answerOption": "C",
+  "answerText": "Not able to be seen through",
+  "difficulty": "easy",
+  "sourceFile": "0732.json"
+}

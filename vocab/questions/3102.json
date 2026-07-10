@@ -1,0 +1,15 @@
+{
+  "id": 3102,
+  "word": "Penumbra",
+  "question": "Penumbra",
+  "options": [
+    "Speaking non-literally",
+    "Of ablism nature",
+    "In non-literal manner",
+    "The partially shaded outer region of a shadow"
+  ],
+  "answerOption": "D",
+  "answerText": "The partially shaded outer region of a shadow",
+  "difficulty": "extra-hard",
+  "sourceFile": "3102.json"
+}

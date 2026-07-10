@@ -1,0 +1,15 @@
+{
+  "id": 2415,
+  "word": "Elysian",
+  "question": "Elysian",
+  "options": [
+    "The inability to remember a particular word",
+    "Relating to paradise; blissful",
+    "Showing luminous colors that change with angle",
+    "The feeling of solitude in the woods"
+  ],
+  "answerOption": "B",
+  "answerText": "Relating to paradise; blissful",
+  "difficulty": "extra-hard",
+  "sourceFile": "2415.json"
+}

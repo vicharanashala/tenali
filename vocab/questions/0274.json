@@ -1,0 +1,15 @@
+{
+  "id": 274,
+  "word": "Search",
+  "question": "Search",
+  "options": [
+    "To try to find something by looking carefully",
+    "To fit together the parts of something",
+    "To shine with flashes of light",
+    "To show how something is done"
+  ],
+  "answerOption": "A",
+  "answerText": "To try to find something by looking carefully",
+  "difficulty": "easy",
+  "sourceFile": "0274.json"
+}

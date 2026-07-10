@@ -1,0 +1,14 @@
+{
+  "id": 952,
+  "question": "Which country is associated with the city of Manila?",
+  "options": [
+    "Malaysia",
+    "Philippines",
+    "Indonesia",
+    "Singapore"
+  ],
+  "answerOption": "B",
+  "answerText": "Philippines",
+  "genre": "geography",
+  "sourceFile": "0952.json"
+}

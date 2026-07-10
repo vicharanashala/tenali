@@ -1,0 +1,14 @@
+{
+  "id": 157,
+  "question": "Which layer of the atmosphere contains the ozone layer?",
+  "options": [
+    "Troposphere",
+    "Stratosphere",
+    "Mesosphere",
+    "Thermosphere"
+  ],
+  "answerOption": "B",
+  "answerText": "Stratosphere",
+  "genre": "mixed",
+  "sourceFile": "0157.json"
+}

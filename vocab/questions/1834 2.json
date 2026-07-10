@@ -1,0 +1,15 @@
+{
+  "id": 1834,
+  "word": "Bucolic",
+  "question": "Bucolic",
+  "options": [
+    "Excessive flattery and praise",
+    "Presence of air in thorax",
+    "Relating to pleasant aspects of the countryside",
+    "Surgical use of air"
+  ],
+  "answerOption": "C",
+  "answerText": "Relating to pleasant aspects of the countryside",
+  "difficulty": "hard",
+  "sourceFile": "1834.json"
+}

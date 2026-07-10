@@ -1,0 +1,15 @@
+{
+  "id": 2400,
+  "word": "Aenigmatism",
+  "question": "Aenigmatism",
+  "options": [
+    "A huge and overwhelming force",
+    "A formal written request",
+    "A fondness for riddles",
+    "The legal process of becoming a parent"
+  ],
+  "answerOption": "C",
+  "answerText": "A fondness for riddles",
+  "difficulty": "hard",
+  "sourceFile": "2400.json"
+}

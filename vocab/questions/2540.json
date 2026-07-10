@@ -1,0 +1,15 @@
+{
+  "id": 2540,
+  "word": "AERONOMY",
+  "question": "AERONOMY",
+  "options": [
+    "A genus of terns or seabirds",
+    "Study of upper atmosphere",
+    "Poisoning from atmosphere",
+    "The fact of being born"
+  ],
+  "answerOption": "B",
+  "answerText": "Study of upper atmosphere",
+  "difficulty": "hard",
+  "sourceFile": "2540.json"
+}

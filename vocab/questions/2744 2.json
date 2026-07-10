@@ -1,0 +1,15 @@
+{
+  "id": 2744,
+  "word": "Jayus",
+  "question": "Jayus",
+  "options": [
+    "To drain of blood",
+    "In manner of weaning",
+    "A joke so poorly told that one laughs anyway",
+    "A wish or inclination not strong enough for action"
+  ],
+  "answerOption": "C",
+  "answerText": "A joke so poorly told that one laughs anyway",
+  "difficulty": "extra-hard",
+  "sourceFile": "2744.json"
+}

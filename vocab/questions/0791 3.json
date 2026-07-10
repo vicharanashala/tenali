@@ -1,0 +1,15 @@
+{
+  "id": 791,
+  "word": "Beneficial",
+  "question": "Beneficial",
+  "options": [
+    "Unpleasantly rough or sharp",
+    "Resulting in good; favorable",
+    "Very small; much smaller than normal",
+    "To call out in a very loud voice"
+  ],
+  "answerOption": "B",
+  "answerText": "Resulting in good; favorable",
+  "difficulty": "easy",
+  "sourceFile": "0791.json"
+}

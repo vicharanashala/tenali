@@ -1,0 +1,15 @@
+{
+  "id": 552,
+  "word": "Participate",
+  "question": "Participate",
+  "options": [
+    "To allow something you disagree with",
+    "Lasting for a limited time only",
+    "To cause someone to feel sudden wonder",
+    "To take part in something"
+  ],
+  "answerOption": "D",
+  "answerText": "To take part in something",
+  "difficulty": "easy",
+  "sourceFile": "0552.json"
+}

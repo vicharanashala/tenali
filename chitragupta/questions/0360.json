@@ -1,0 +1,14 @@
+{
+  "id": 360,
+  "question": "Which city is the capital of Indonesia?",
+  "options": [
+    "Bali",
+    "Surabaya",
+    "Jakarta",
+    "Bandung"
+  ],
+  "answerOption": "C",
+  "answerText": "Jakarta",
+  "genre": "geography",
+  "sourceFile": "0360.json"
+}

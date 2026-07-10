@@ -1,0 +1,15 @@
+{
+  "id": 1999,
+  "word": "Advocating",
+  "question": "Advocating",
+  "options": [
+    "The state of being a fully developed adult",
+    "A colorless liquid chemical compound",
+    "Supporting or recommending",
+    "An instrument for measuring air"
+  ],
+  "answerOption": "C",
+  "answerText": "Supporting or recommending",
+  "difficulty": "hard",
+  "sourceFile": "1999.json"
+}

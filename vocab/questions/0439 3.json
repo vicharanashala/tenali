@@ -1,0 +1,15 @@
+{
+  "id": 439,
+  "word": "Load",
+  "question": "Load",
+  "options": [
+    "To state the exact meaning of a word",
+    "To provide someone with a reason for doing something",
+    "To connect or link things together",
+    "To put goods or cargo onto a vehicle"
+  ],
+  "answerOption": "D",
+  "answerText": "To put goods or cargo onto a vehicle",
+  "difficulty": "easy",
+  "sourceFile": "0439.json"
+}

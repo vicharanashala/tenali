@@ -1,0 +1,14 @@
+{
+  "id": 724,
+  "question": "What is the SI unit of electric current?",
+  "options": [
+    "volt",
+    "ampere",
+    "ohm",
+    "watt"
+  ],
+  "answerOption": "B",
+  "answerText": "ampere",
+  "genre": "mixed",
+  "sourceFile": "0724.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1126,
+  "word": "Innate",
+  "question": "Innate",
+  "options": [
+    "The state of being famous for bad things",
+    "Treacherous and disloyal",
+    "Inborn; natural rather than learned",
+    "A feeling of fear about something"
+  ],
+  "answerOption": "C",
+  "answerText": "Inborn; natural rather than learned",
+  "difficulty": "medium",
+  "sourceFile": "1126.json"
+}

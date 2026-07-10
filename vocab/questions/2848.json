@@ -1,0 +1,15 @@
+{
+  "id": 2848,
+  "word": "Restoration",
+  "question": "Restoration",
+  "options": [
+    "The action of returning something to original state",
+    "Involving conflict or opposition",
+    "Relating to air navigation",
+    "An engine powered by air"
+  ],
+  "answerOption": "A",
+  "answerText": "The action of returning something to original state",
+  "difficulty": "hard",
+  "sourceFile": "2848.json"
+}

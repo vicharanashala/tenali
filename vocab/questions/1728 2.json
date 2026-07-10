@@ -1,0 +1,15 @@
+{
+  "id": 1728,
+  "word": "Platitude",
+  "question": "Platitude",
+  "options": [
+    "The lowest point in the fortunes of a person",
+    "A rocket fuel mixture",
+    "A remark used too often to be meaningful",
+    "To reprimand someone firmly"
+  ],
+  "answerOption": "C",
+  "answerText": "A remark used too often to be meaningful",
+  "difficulty": "hard",
+  "sourceFile": "1728.json"
+}

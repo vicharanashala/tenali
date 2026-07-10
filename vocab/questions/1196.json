@@ -1,0 +1,15 @@
+{
+  "id": 1196,
+  "word": "Lament",
+  "question": "Lament",
+  "options": [
+    "Deceiving or confusing someone",
+    "Not easily upset or excited; calm",
+    "A state of low spirits",
+    "To express passionate grief about something"
+  ],
+  "answerOption": "D",
+  "answerText": "To express passionate grief about something",
+  "difficulty": "medium",
+  "sourceFile": "1196.json"
+}

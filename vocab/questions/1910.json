@@ -1,0 +1,15 @@
+{
+  "id": 1910,
+  "word": "Selfish",
+  "question": "Selfish",
+  "options": [
+    "Extremely unpleasant or offensive",
+    "Pulled or twisted out of shape",
+    "A public display of group feeling",
+    "Lacking consideration for others"
+  ],
+  "answerOption": "D",
+  "answerText": "Lacking consideration for others",
+  "difficulty": "medium",
+  "sourceFile": "1910.json"
+}

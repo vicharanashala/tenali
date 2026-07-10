@@ -1,0 +1,15 @@
+{
+  "id": 1293,
+  "word": "Connotation",
+  "question": "Connotation",
+  "options": [
+    "An idea or feeling implied by a word",
+    "To rely on someone or something",
+    "Serving to determine or decide",
+    "Unable to be stopped or prevented"
+  ],
+  "answerOption": "A",
+  "answerText": "An idea or feeling implied by a word",
+  "difficulty": "medium",
+  "sourceFile": "1293.json"
+}

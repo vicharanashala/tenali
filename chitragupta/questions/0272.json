@@ -1,0 +1,14 @@
+{
+  "id": 272,
+  "question": "Who was the first woman President of India?",
+  "options": [
+    "Indira Gandhi",
+    "Pratibha Patil",
+    "Sarojini Naidu",
+    "Droupadi Murmu"
+  ],
+  "answerOption": "B",
+  "answerText": "Pratibha Patil",
+  "genre": "india-gk",
+  "sourceFile": "0272.json"
+}

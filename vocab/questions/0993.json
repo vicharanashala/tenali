@@ -1,0 +1,15 @@
+{
+  "id": 993,
+  "word": "Tangy",
+  "question": "Tangy",
+  "options": [
+    "To provide someone with enjoyment",
+    "Easily perceived or understood",
+    "Having a sharp taste",
+    "To take something away from a position"
+  ],
+  "answerOption": "C",
+  "answerText": "Having a sharp taste",
+  "difficulty": "easy",
+  "sourceFile": "0993.json"
+}

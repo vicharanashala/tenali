@@ -1,0 +1,15 @@
+{
+  "id": 781,
+  "word": "Synthetic",
+  "question": "Synthetic",
+  "options": [
+    "Made by chemical processes; not natural",
+    "To have power over something's behavior",
+    "Habitually or typically so",
+    "To say sorry for doing something wrong"
+  ],
+  "answerOption": "A",
+  "answerText": "Made by chemical processes; not natural",
+  "difficulty": "easy",
+  "sourceFile": "0781.json"
+}

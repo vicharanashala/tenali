@@ -1,0 +1,14 @@
+{
+  "id": 877,
+  "question": "What is the SI unit of electric capacitance?",
+  "options": [
+    "farad",
+    "henry",
+    "weber",
+    "tesla"
+  ],
+  "answerOption": "A",
+  "answerText": "farad",
+  "genre": "mixed",
+  "sourceFile": "0877.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2245,
+  "word": "AEROSTATICAL",
+  "question": "AEROSTATICAL",
+  "options": [
+    "A type of winged figure in art",
+    "A scarcity or lack of something",
+    "Showing excessive vanity about achievements",
+    "Relating to air equilibrium"
+  ],
+  "answerOption": "D",
+  "answerText": "Relating to air equilibrium",
+  "difficulty": "hard",
+  "sourceFile": "2245.json"
+}

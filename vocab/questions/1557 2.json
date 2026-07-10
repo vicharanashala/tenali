@@ -1,0 +1,15 @@
+{
+  "id": 1557,
+  "word": "Destitute",
+  "question": "Destitute",
+  "options": [
+    "Lacking basic necessities or resources",
+    "A person who treats teeth",
+    "Very generous or forgiving",
+    "A person who depones"
+  ],
+  "answerOption": "A",
+  "answerText": "Lacking basic necessities or resources",
+  "difficulty": "medium",
+  "sourceFile": "1557.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2006,
+  "word": "Juxtapose",
+  "question": "Juxtapose",
+  "options": [
+    "The quality of being tangible",
+    "The method and practice of teaching",
+    "To place close together for contrasting effect",
+    "To publicly criticize using ridicule"
+  ],
+  "answerOption": "C",
+  "answerText": "To place close together for contrasting effect",
+  "difficulty": "hard",
+  "sourceFile": "2006.json"
+}

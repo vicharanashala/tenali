@@ -1,0 +1,15 @@
+{
+  "id": 13,
+  "word": "Dirty",
+  "question": "Dirty",
+  "options": [
+    "Covered or marked with an unclean substance",
+    "Giving information clearly in few words",
+    "To show how something is done",
+    "Causing extreme fear or suffering"
+  ],
+  "answerOption": "A",
+  "answerText": "Covered or marked with an unclean substance",
+  "difficulty": "easy",
+  "sourceFile": "0013.json"
+}

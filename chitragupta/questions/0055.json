@@ -1,0 +1,14 @@
+{
+  "id": 55,
+  "question": "Who discovered gravity after observing a falling apple, according to popular legend?",
+  "options": [
+    "Albert Einstein",
+    "Isaac Newton",
+    "Galileo Galilei",
+    "Nikola Tesla"
+  ],
+  "answerOption": "B",
+  "answerText": "Isaac Newton",
+  "genre": "science",
+  "sourceFile": "0055.json"
+}

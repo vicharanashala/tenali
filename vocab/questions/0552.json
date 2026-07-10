@@ -1,0 +1,15 @@
+{
+  "id": 552,
+  "word": "Participate",
+  "question": "Participate",
+  "options": [
+    "To take part in something",
+    "Brief or using few words",
+    "To throw in various random directions",
+    "Expecting the worst possible outcome"
+  ],
+  "answerOption": "A",
+  "answerText": "To take part in something",
+  "difficulty": "easy",
+  "sourceFile": "0552.json"
+}

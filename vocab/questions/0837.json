@@ -1,0 +1,15 @@
+{
+  "id": 837,
+  "word": "Square",
+  "question": "Square",
+  "options": [
+    "Free from dirt or impurities",
+    "Having four equal sides and right angles",
+    "Having a hidden meaning",
+    "Having limits or bounds"
+  ],
+  "answerOption": "B",
+  "answerText": "Having four equal sides and right angles",
+  "difficulty": "easy",
+  "sourceFile": "0837.json"
+}

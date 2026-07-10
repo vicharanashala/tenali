@@ -1,0 +1,15 @@
+{
+  "id": 487,
+  "word": "Estimate",
+  "question": "Estimate",
+  "options": [
+    "To take something away from a position",
+    "Feeling optimistic about a future event",
+    "Having a sharp taste",
+    "To roughly calculate the value of something"
+  ],
+  "answerOption": "D",
+  "answerText": "To roughly calculate the value of something",
+  "difficulty": "easy",
+  "sourceFile": "0487.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 189,
+  "question": "Which gas do humans exhale the most?",
+  "options": [
+    "Nitrogen",
+    "Carbon dioxide",
+    "Oxygen",
+    "Helium"
+  ],
+  "answerOption": "B",
+  "answerText": "Carbon dioxide",
+  "genre": "science",
+  "sourceFile": "0189.json"
+}

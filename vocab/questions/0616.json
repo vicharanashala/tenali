@@ -1,0 +1,15 @@
+{
+  "id": 616,
+  "word": "Spirited",
+  "question": "Spirited",
+  "options": [
+    "Feeling pleasure and contentment",
+    "Going straight up and down",
+    "Full of energy and enthusiasm",
+    "Arranged in a tidy way"
+  ],
+  "answerOption": "C",
+  "answerText": "Full of energy and enthusiasm",
+  "difficulty": "easy",
+  "sourceFile": "0616.json"
+}

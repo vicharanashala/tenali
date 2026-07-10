@@ -1,0 +1,15 @@
+{
+  "id": 2323,
+  "word": "Oneiric",
+  "question": "Oneiric",
+  "options": [
+    "Health-giving; healthy",
+    "A profound awareness of the universe that triggers emotion",
+    "An instrument for measuring blood pressure",
+    "Of or relating to dreams"
+  ],
+  "answerOption": "D",
+  "answerText": "Of or relating to dreams",
+  "difficulty": "extra-hard",
+  "sourceFile": "2323.json"
+}

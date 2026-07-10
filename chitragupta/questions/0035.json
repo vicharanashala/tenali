@@ -1,0 +1,14 @@
+{
+  "id": 35,
+  "question": "What is the capital of Canada?",
+  "options": [
+    "Nairobi",
+    "Rome",
+    "Brasília",
+    "Ottawa"
+  ],
+  "answerOption": "D",
+  "answerText": "Ottawa",
+  "genre": "geography",
+  "sourceFile": "0035.json"
+}

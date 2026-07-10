@@ -1,0 +1,15 @@
+{
+  "id": 1182,
+  "word": "Ubiquitous",
+  "question": "Ubiquitous",
+  "options": [
+    "The expression of disapproval",
+    "Present or found everywhere",
+    "One who despises",
+    "Aggressively self-assured or self-important"
+  ],
+  "answerOption": "B",
+  "answerText": "Present or found everywhere",
+  "difficulty": "medium",
+  "sourceFile": "1182.json"
+}

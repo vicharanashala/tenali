@@ -1,0 +1,15 @@
+{
+  "id": 46,
+  "word": "Gentle",
+  "question": "Gentle",
+  "options": [
+    "To go out of or leave a place",
+    "Mild in temperament or behavior",
+    "To convey thoughts or feelings in words",
+    "To carefully choose as being the best"
+  ],
+  "answerOption": "B",
+  "answerText": "Mild in temperament or behavior",
+  "difficulty": "easy",
+  "sourceFile": "0046.json"
+}

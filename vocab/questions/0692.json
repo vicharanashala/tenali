@@ -1,0 +1,15 @@
+{
+  "id": 692,
+  "word": "Essential",
+  "question": "Essential",
+  "options": [
+    "To set free from confinement",
+    "Absolutely necessary; extremely important",
+    "Something that is difficult to understand",
+    "To grow and develop well"
+  ],
+  "answerOption": "B",
+  "answerText": "Absolutely necessary; extremely important",
+  "difficulty": "easy",
+  "sourceFile": "0692.json"
+}

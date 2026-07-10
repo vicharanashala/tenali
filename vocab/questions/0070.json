@@ -1,0 +1,15 @@
+{
+  "id": 70,
+  "word": "Generous",
+  "question": "Generous",
+  "options": [
+    "Willing to give more than is expected",
+    "To refuse to take notice of something",
+    "Feeling dedication to a cause or activity",
+    "Not allowing water to pass through"
+  ],
+  "answerOption": "A",
+  "answerText": "Willing to give more than is expected",
+  "difficulty": "easy",
+  "sourceFile": "0070.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1985,
+  "word": "Adversarial",
+  "question": "Adversarial",
+  "options": [
+    "To make more democratic or popular",
+    "To remove oxygen from something",
+    "Involving conflict or opposition",
+    "Not discovered or known about; uncertain"
+  ],
+  "answerOption": "C",
+  "answerText": "Involving conflict or opposition",
+  "difficulty": "medium",
+  "sourceFile": "1985.json"
+}

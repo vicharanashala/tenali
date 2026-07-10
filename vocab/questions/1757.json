@@ -1,0 +1,15 @@
+{
+  "id": 1757,
+  "word": "Malicious",
+  "question": "Malicious",
+  "options": [
+    "Barren, empty, or abandoned",
+    "Intending to cause harm",
+    "Relating to reduction of swelling",
+    "Showing great attention to detail"
+  ],
+  "answerOption": "B",
+  "answerText": "Intending to cause harm",
+  "difficulty": "medium",
+  "sourceFile": "1757.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 3228,
+  "word": "Abides",
+  "question": "Abides",
+  "options": [
+    "Relating to washing away",
+    "Family of abyss creatures",
+    "Remains or continues in place",
+    "Made blind or limited"
+  ],
+  "answerOption": "C",
+  "answerText": "Remains or continues in place",
+  "difficulty": "extra-hard",
+  "sourceFile": "3228.json"
+}

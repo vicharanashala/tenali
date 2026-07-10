@@ -1,0 +1,15 @@
+{
+  "id": 2519,
+  "word": "AEROMAD",
+  "question": "AEROMAD",
+  "options": [
+    "A person who dislikes humankind",
+    "Clever or skillful in movement",
+    "At the point of death; in terminal decline",
+    "A person obsessed with flying"
+  ],
+  "answerOption": "D",
+  "answerText": "A person obsessed with flying",
+  "difficulty": "hard",
+  "sourceFile": "2519.json"
+}

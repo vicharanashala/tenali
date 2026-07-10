@@ -1,0 +1,15 @@
+{
+  "id": 568,
+  "word": "Intrigue",
+  "question": "Intrigue",
+  "options": [
+    "To refuse to take notice of something",
+    "To arouse the curiosity of someone",
+    "To have one's permanent home somewhere",
+    "To discover something by searching"
+  ],
+  "answerOption": "B",
+  "answerText": "To arouse the curiosity of someone",
+  "difficulty": "easy",
+  "sourceFile": "0568.json"
+}

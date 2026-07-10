@@ -1,0 +1,15 @@
+{
+  "id": 193,
+  "word": "Sink",
+  "question": "Sink",
+  "options": [
+    "Existing in large quantities",
+    "To go down below the surface of a liquid",
+    "To give and receive things of similar value",
+    "Spread over a wide area"
+  ],
+  "answerOption": "B",
+  "answerText": "To go down below the surface of a liquid",
+  "difficulty": "easy",
+  "sourceFile": "0193.json"
+}

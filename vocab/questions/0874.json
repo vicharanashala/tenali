@@ -1,0 +1,15 @@
+{
+  "id": 874,
+  "word": "Immediate",
+  "question": "Immediate",
+  "options": [
+    "Unassuming in the estimation of one's abilities",
+    "Calm and not easily disturbed",
+    "Happening or done at once",
+    "Occurring or done many times"
+  ],
+  "answerOption": "C",
+  "answerText": "Happening or done at once",
+  "difficulty": "easy",
+  "sourceFile": "0874.json"
+}

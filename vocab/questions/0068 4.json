@@ -1,0 +1,15 @@
+{
+  "id": 68,
+  "word": "Greedy",
+  "question": "Greedy",
+  "options": [
+    "Mild in temperament or behavior",
+    "Having an intense desire for food or wealth",
+    "To determine the total number of items",
+    "In a state of great discomfort or unhappiness"
+  ],
+  "answerOption": "B",
+  "answerText": "Having an intense desire for food or wealth",
+  "difficulty": "easy",
+  "sourceFile": "0068.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2109,
+  "word": "Apocryphal",
+  "question": "Apocryphal",
+  "options": [
+    "Lack of pity or compassion",
+    "Of doubtful authenticity; probably untrue",
+    "Medical treatment using air",
+    "Unable to be prevented or avoided"
+  ],
+  "answerOption": "B",
+  "answerText": "Of doubtful authenticity; probably untrue",
+  "difficulty": "hard",
+  "sourceFile": "2109.json"
+}

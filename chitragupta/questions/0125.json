@@ -1,0 +1,14 @@
+{
+  "id": 125,
+  "question": "Which part of the human eye controls the amount of light entering it?",
+  "options": [
+    "Retina",
+    "Iris",
+    "Cornea",
+    "Lens"
+  ],
+  "answerOption": "B",
+  "answerText": "Iris",
+  "genre": "mixed",
+  "sourceFile": "0125.json"
+}

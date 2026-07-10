@@ -1,0 +1,15 @@
+{
+  "id": 261,
+  "word": "Rush",
+  "question": "Rush",
+  "options": [
+    "To make great efforts under difficulty",
+    "Kind and pleasant to others",
+    "Of considerable size or extent",
+    "To move with urgent haste"
+  ],
+  "answerOption": "D",
+  "answerText": "To move with urgent haste",
+  "difficulty": "easy",
+  "sourceFile": "0261.json"
+}

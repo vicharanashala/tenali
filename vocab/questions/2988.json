@@ -1,0 +1,15 @@
+{
+  "id": 2988,
+  "word": "Phenomenology",
+  "question": "Phenomenology",
+  "options": [
+    "Heart condition from altitude",
+    "Relating to wind instruments",
+    "A turning point or pivotal event",
+    "Study of structures of consciousness"
+  ],
+  "answerOption": "D",
+  "answerText": "Study of structures of consciousness",
+  "difficulty": "hard",
+  "sourceFile": "2988.json"
+}

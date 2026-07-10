@@ -1,0 +1,15 @@
+{
+  "id": 133,
+  "word": "Visible",
+  "question": "Visible",
+  "options": [
+    "Very small; much smaller than normal",
+    "Showing a great deal of variety",
+    "To make sure something is true or accurate",
+    "Able to be seen"
+  ],
+  "answerOption": "D",
+  "answerText": "Able to be seen",
+  "difficulty": "easy",
+  "sourceFile": "0133.json"
+}

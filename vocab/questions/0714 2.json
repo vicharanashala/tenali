@@ -1,0 +1,15 @@
+{
+  "id": 714,
+  "word": "Adjacent",
+  "question": "Adjacent",
+  "options": [
+    "Next to or adjoining something else",
+    "Able to be easily modified or adjusted",
+    "Allowing access; not closed or blocked",
+    "To move downward without control"
+  ],
+  "answerOption": "A",
+  "answerText": "Next to or adjoining something else",
+  "difficulty": "easy",
+  "sourceFile": "0714.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1175,
+  "word": "Nuance",
+  "question": "Nuance",
+  "options": [
+    "A type of hat or horse race",
+    "Relating to fundamental change",
+    "To push down or thrust out",
+    "A subtle difference in meaning"
+  ],
+  "answerOption": "D",
+  "answerText": "A subtle difference in meaning",
+  "difficulty": "medium",
+  "sourceFile": "1175.json"
+}

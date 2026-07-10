@@ -1,0 +1,14 @@
+{
+  "id": 675,
+  "question": "Which organ in the body is responsible for producing thyroxine?",
+  "options": [
+    "Pituitary",
+    "Pancreas",
+    "Thyroid",
+    "Adrenal"
+  ],
+  "answerOption": "C",
+  "answerText": "Thyroid",
+  "genre": "science",
+  "sourceFile": "0675.json"
+}

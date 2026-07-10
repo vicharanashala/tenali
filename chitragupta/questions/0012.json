@@ -1,0 +1,14 @@
+{
+  "id": 12,
+  "question": "How many legs does an insect usually have?",
+  "options": [
+    "4",
+    "6",
+    "8",
+    "10"
+  ],
+  "answerOption": "B",
+  "answerText": "6",
+  "genre": "science",
+  "sourceFile": "0012.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2215,
+  "word": "Surreptitious",
+  "question": "Surreptitious",
+  "options": [
+    "An inescapable agent of someone's downfall",
+    "Technology of air use",
+    "Kept secret because it would not be approved",
+    "The action of authenticating something"
+  ],
+  "answerOption": "C",
+  "answerText": "Kept secret because it would not be approved",
+  "difficulty": "hard",
+  "sourceFile": "2215.json"
+}

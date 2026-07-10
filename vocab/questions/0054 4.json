@@ -1,0 +1,15 @@
+{
+  "id": 54,
+  "word": "Far",
+  "question": "Far",
+  "options": [
+    "To rest on the surface of a liquid",
+    "At a great distance in space or time",
+    "Not giving enough attention to avoid harm",
+    "Occurring immediately without delay"
+  ],
+  "answerOption": "B",
+  "answerText": "At a great distance in space or time",
+  "difficulty": "easy",
+  "sourceFile": "0054.json"
+}

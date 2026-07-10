@@ -1,0 +1,15 @@
+{
+  "id": 356,
+  "word": "Distribute",
+  "question": "Distribute",
+  "options": [
+    "Giving information clearly in few words",
+    "To give shares of something to many people",
+    "To watch something carefully",
+    "To make someone feel admiration"
+  ],
+  "answerOption": "B",
+  "answerText": "To give shares of something to many people",
+  "difficulty": "easy",
+  "sourceFile": "0356.json"
+}

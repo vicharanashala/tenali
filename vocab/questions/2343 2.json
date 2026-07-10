@@ -1,0 +1,15 @@
+{
+  "id": 2343,
+  "word": "Iktsuarpok",
+  "question": "Iktsuarpok",
+  "options": [
+    "Contemplation of one's navel",
+    "Of or resembling twilight",
+    "The feeling of anticipation while waiting for someone",
+    "Divination using a rod or wand"
+  ],
+  "answerOption": "C",
+  "answerText": "The feeling of anticipation while waiting for someone",
+  "difficulty": "extra-hard",
+  "sourceFile": "2343.json"
+}

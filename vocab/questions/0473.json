@@ -1,0 +1,15 @@
+{
+  "id": 473,
+  "word": "Interpret",
+  "question": "Interpret",
+  "options": [
+    "To go or come up a slope or stairs",
+    "Causing an urge to scratch",
+    "To cause someone to believe something",
+    "To explain the meaning of something"
+  ],
+  "answerOption": "D",
+  "answerText": "To explain the meaning of something",
+  "difficulty": "easy",
+  "sourceFile": "0473.json"
+}

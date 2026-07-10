@@ -1,0 +1,15 @@
+{
+  "id": 475,
+  "word": "Express",
+  "question": "Express",
+  "options": [
+    "Free from bacteria; completely clean",
+    "Suggested or understood indirectly",
+    "To convey thoughts or feelings in words",
+    "Logical and well organized"
+  ],
+  "answerOption": "C",
+  "answerText": "To convey thoughts or feelings in words",
+  "difficulty": "easy",
+  "sourceFile": "0475.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 965,
+  "word": "Chunky",
+  "question": "Chunky",
+  "options": [
+    "To point out the faults of something",
+    "Containing thick solid pieces",
+    "To allow liquid to escape through a hole",
+    "Of considerable size or extent"
+  ],
+  "answerOption": "B",
+  "answerText": "Containing thick solid pieces",
+  "difficulty": "easy",
+  "sourceFile": "0965.json"
+}

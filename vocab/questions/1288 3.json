@@ -1,0 +1,15 @@
+{
+  "id": 1288,
+  "word": "Delicious",
+  "question": "Delicious",
+  "options": [
+    "In decline morally or in style",
+    "Able to be determined or found",
+    "Rough or abrupt in speech or manner",
+    "Highly pleasing to the taste"
+  ],
+  "answerOption": "D",
+  "answerText": "Highly pleasing to the taste",
+  "difficulty": "medium",
+  "sourceFile": "1288.json"
+}

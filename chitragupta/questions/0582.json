@@ -1,0 +1,14 @@
+{
+  "id": 582,
+  "question": "Who wrote 'The Picture of Dorian Gray'?",
+  "options": [
+    "Oscar Wilde",
+    "Bernard Shaw",
+    "Virginia Woolf",
+    "T. S. Eliot"
+  ],
+  "answerOption": "A",
+  "answerText": "Oscar Wilde",
+  "genre": "general-knowledge",
+  "sourceFile": "0582.json"
+}

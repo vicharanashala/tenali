@@ -1,0 +1,15 @@
+{
+  "id": 246,
+  "word": "Beg",
+  "question": "Beg",
+  "options": [
+    "Marked by exactness and accuracy",
+    "To ask someone earnestly for something",
+    "Relating to the edge or outer part",
+    "Low in price; not expensive"
+  ],
+  "answerOption": "B",
+  "answerText": "To ask someone earnestly for something",
+  "difficulty": "easy",
+  "sourceFile": "0246.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1644,
+  "word": "Deter",
+  "question": "Deter",
+  "options": [
+    "Feeling cautious about possible dangers",
+    "To wish or want something",
+    "To destroy a building or structure",
+    "To discourage someone from doing something"
+  ],
+  "answerOption": "D",
+  "answerText": "To discourage someone from doing something",
+  "difficulty": "medium",
+  "sourceFile": "1644.json"
+}

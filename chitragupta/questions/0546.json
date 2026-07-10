@@ -1,0 +1,14 @@
+{
+  "id": 546,
+  "question": "Which country is associated with the city of Kabul?",
+  "options": [
+    "Pakistan",
+    "Afghanistan",
+    "Iran",
+    "Uzbekistan"
+  ],
+  "answerOption": "B",
+  "answerText": "Afghanistan",
+  "genre": "geography",
+  "sourceFile": "0546.json"
+}

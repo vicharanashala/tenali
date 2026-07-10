@@ -1,0 +1,15 @@
+{
+  "id": 948,
+  "word": "Zenith",
+  "question": "Zenith",
+  "options": [
+    "The highest point reached by something",
+    "Based on observation rather than theory",
+    "Having passionate and sincere feeling",
+    "Great courage in the face of danger"
+  ],
+  "answerOption": "A",
+  "answerText": "The highest point reached by something",
+  "difficulty": "medium",
+  "sourceFile": "0948.json"
+}

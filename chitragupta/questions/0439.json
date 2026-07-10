@@ -1,0 +1,14 @@
+{
+  "id": 439,
+  "question": "Which Indian state has Chennai as its capital?",
+  "options": [
+    "Karnataka",
+    "Tamil Nadu",
+    "Andhra Pradesh",
+    "Kerala"
+  ],
+  "answerOption": "B",
+  "answerText": "Tamil Nadu",
+  "genre": "geography",
+  "sourceFile": "0439.json"
+}

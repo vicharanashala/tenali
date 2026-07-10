@@ -1,0 +1,15 @@
+{
+  "id": 950,
+  "word": "Frivolous",
+  "question": "Frivolous",
+  "options": [
+    "Without seriousness or importance",
+    "To give up something completely",
+    "Done consciously and intentionally",
+    "To cause someone to believe something"
+  ],
+  "answerOption": "A",
+  "answerText": "Without seriousness or importance",
+  "difficulty": "easy",
+  "sourceFile": "0950.json"
+}

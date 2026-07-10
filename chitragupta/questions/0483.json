@@ -1,0 +1,14 @@
+{
+  "id": 483,
+  "question": "Which organ in the human body is primarily responsible for filtering waste from blood?",
+  "options": [
+    "Liver",
+    "Kidney",
+    "Lung",
+    "Pancreas"
+  ],
+  "answerOption": "B",
+  "answerText": "Kidney",
+  "genre": "science",
+  "sourceFile": "0483.json"
+}

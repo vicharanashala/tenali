@@ -1,0 +1,15 @@
+{
+  "id": 1033,
+  "word": "Reverie",
+  "question": "Reverie",
+  "options": [
+    "A state of being pleasantly lost in thought",
+    "Attractively unusual or old-fashioned",
+    "Making a situation likely to happen",
+    "Based on an imagined situation, not reality"
+  ],
+  "answerOption": "A",
+  "answerText": "A state of being pleasantly lost in thought",
+  "difficulty": "medium",
+  "sourceFile": "1033.json"
+}

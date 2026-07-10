@@ -1,0 +1,15 @@
+{
+  "id": 1595,
+  "word": "Design",
+  "question": "Design",
+  "options": [
+    "To plan and draw something",
+    "A substance that purifies the blood",
+    "Reliable and worthy of trust",
+    "Stripping leaves from a plant"
+  ],
+  "answerOption": "A",
+  "answerText": "To plan and draw something",
+  "difficulty": "medium",
+  "sourceFile": "1595.json"
+}

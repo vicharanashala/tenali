@@ -1,0 +1,15 @@
+{
+  "id": 316,
+  "word": "Frighten",
+  "question": "Frighten",
+  "options": [
+    "To make someone afraid or anxious",
+    "Having an excessively high opinion of oneself",
+    "Belonging to the very distant past",
+    "Conforming to what is standard or expected"
+  ],
+  "answerOption": "A",
+  "answerText": "To make someone afraid or anxious",
+  "difficulty": "easy",
+  "sourceFile": "0316.json"
+}

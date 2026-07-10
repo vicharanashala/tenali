@@ -1,0 +1,15 @@
+{
+  "id": 23,
+  "word": "Mean",
+  "question": "Mean",
+  "options": [
+    "To have one's permanent home somewhere",
+    "Causing great enthusiasm and eagerness",
+    "Unwilling to give or share; unkind",
+    "To conduct the affairs of a state or organization"
+  ],
+  "answerOption": "C",
+  "answerText": "Unwilling to give or share; unkind",
+  "difficulty": "easy",
+  "sourceFile": "0023.json"
+}

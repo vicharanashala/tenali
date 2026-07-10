@@ -1,0 +1,15 @@
+{
+  "id": 2506,
+  "word": "Deprivation",
+  "question": "Deprivation",
+  "options": [
+    "The act of advising someone",
+    "A defensive wall or fortification",
+    "The lack of something needed",
+    "Bitter and abusive in language"
+  ],
+  "answerOption": "C",
+  "answerText": "The lack of something needed",
+  "difficulty": "hard",
+  "sourceFile": "2506.json"
+}

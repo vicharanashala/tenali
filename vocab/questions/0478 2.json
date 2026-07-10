@@ -1,0 +1,15 @@
+{
+  "id": 478,
+  "word": "Define",
+  "question": "Define",
+  "options": [
+    "To bring something to an end",
+    "To state the exact meaning of a word",
+    "Untidy or dirty",
+    "To love and respect deeply"
+  ],
+  "answerOption": "B",
+  "answerText": "To state the exact meaning of a word",
+  "difficulty": "easy",
+  "sourceFile": "0478.json"
+}

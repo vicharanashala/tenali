@@ -1,0 +1,15 @@
+{
+  "id": 865,
+  "word": "Bizarre",
+  "question": "Bizarre",
+  "options": [
+    "To drive or force something away",
+    "Strikingly unusual or different",
+    "Having no limits or restrictions",
+    "To experience something bad or unpleasant"
+  ],
+  "answerOption": "B",
+  "answerText": "Strikingly unusual or different",
+  "difficulty": "easy",
+  "sourceFile": "0865.json"
+}

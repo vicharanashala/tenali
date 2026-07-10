@@ -1,0 +1,15 @@
+{
+  "id": 1735,
+  "word": "Sagacious",
+  "question": "Sagacious",
+  "options": [
+    "The state of being disordered",
+    "Having good judgment or wisdom",
+    "Arrogantly superior and disdainful",
+    "Lacking faith or loyalty"
+  ],
+  "answerOption": "B",
+  "answerText": "Having good judgment or wisdom",
+  "difficulty": "medium",
+  "sourceFile": "1735.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 32,
+  "word": "Bitter",
+  "question": "Bitter",
+  "options": [
+    "Having a strong desire for success",
+    "Large and comfortable with plenty of space",
+    "Having a sharp, unpleasant taste",
+    "To pick out something from alternatives"
+  ],
+  "answerOption": "C",
+  "answerText": "Having a sharp, unpleasant taste",
+  "difficulty": "easy",
+  "sourceFile": "0032.json"
+}

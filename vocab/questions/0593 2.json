@@ -1,0 +1,15 @@
+{
+  "id": 593,
+  "word": "Original",
+  "question": "Original",
+  "options": [
+    "Attractive in a delicate way",
+    "Having a great deal to do",
+    "Free from pretense or deceit",
+    "Created directly and not a copy"
+  ],
+  "answerOption": "D",
+  "answerText": "Created directly and not a copy",
+  "difficulty": "easy",
+  "sourceFile": "0593.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 516,
+  "question": "Which part of the digestive system absorbs most nutrients?",
+  "options": [
+    "Stomach",
+    "Large intestine",
+    "Small intestine",
+    "Esophagus"
+  ],
+  "answerOption": "C",
+  "answerText": "Small intestine",
+  "genre": "mixed",
+  "sourceFile": "0516.json"
+}

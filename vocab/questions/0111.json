@@ -1,0 +1,15 @@
+{
+  "id": 111,
+  "word": "Crooked",
+  "question": "Crooked",
+  "options": [
+    "Bent or twisted out of shape",
+    "To build or put together a structure",
+    "To become aware of something",
+    "In good physical condition; not sick"
+  ],
+  "answerOption": "A",
+  "answerText": "Bent or twisted out of shape",
+  "difficulty": "easy",
+  "sourceFile": "0111.json"
+}

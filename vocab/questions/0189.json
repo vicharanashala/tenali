@@ -1,0 +1,15 @@
+{
+  "id": 189,
+  "word": "Reveal",
+  "question": "Reveal",
+  "options": [
+    "Too long and therefore boring",
+    "Noticeably happy and optimistic",
+    "Strange or odd; unusual",
+    "To make something previously hidden visible"
+  ],
+  "answerOption": "D",
+  "answerText": "To make something previously hidden visible",
+  "difficulty": "easy",
+  "sourceFile": "0189.json"
+}

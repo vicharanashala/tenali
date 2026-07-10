@@ -1,0 +1,15 @@
+{
+  "id": 27,
+  "word": "Young",
+  "question": "Young",
+  "options": [
+    "In use or inhabited",
+    "Relating to or powered by electricity",
+    "Having lived or existed for only a short time",
+    "Able to resume its shape after stretching"
+  ],
+  "answerOption": "C",
+  "answerText": "Having lived or existed for only a short time",
+  "difficulty": "easy",
+  "sourceFile": "0027.json"
+}

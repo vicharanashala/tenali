@@ -1,0 +1,14 @@
+{
+  "id": 579,
+  "question": "Which part of the circulatory system carries deoxygenated blood from the body to the heart?",
+  "options": [
+    "Pulmonary vein",
+    "Aorta",
+    "Vena cava",
+    "Pulmonary artery"
+  ],
+  "answerOption": "C",
+  "answerText": "Vena cava",
+  "genre": "science",
+  "sourceFile": "0579.json"
+}

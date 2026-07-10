@@ -1,0 +1,15 @@
+{
+  "id": 2148,
+  "word": "Advent",
+  "question": "Advent",
+  "options": [
+    "Extremely poor; poverty-stricken",
+    "The arrival of a notable person",
+    "A fondness for riddles",
+    "A balloon or airship"
+  ],
+  "answerOption": "B",
+  "answerText": "The arrival of a notable person",
+  "difficulty": "hard",
+  "sourceFile": "2148.json"
+}

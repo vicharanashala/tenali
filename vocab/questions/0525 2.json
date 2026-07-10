@@ -1,0 +1,15 @@
+{
+  "id": 525,
+  "word": "Restrict",
+  "question": "Restrict",
+  "options": [
+    "To put a limit on something",
+    "To look at something closely",
+    "Having lived for a long time; no longer young",
+    "To state something is true without proof"
+  ],
+  "answerOption": "A",
+  "answerText": "To put a limit on something",
+  "difficulty": "easy",
+  "sourceFile": "0525.json"
+}

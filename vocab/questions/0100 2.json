@@ -1,0 +1,15 @@
+{
+  "id": 100,
+  "word": "Useful",
+  "question": "Useful",
+  "options": [
+    "To determine the total number of items",
+    "Of considerable or unusual duration",
+    "Free from bacteria; completely clean",
+    "Able to be used for a practical purpose"
+  ],
+  "answerOption": "D",
+  "answerText": "Able to be used for a practical purpose",
+  "difficulty": "easy",
+  "sourceFile": "0100.json"
+}

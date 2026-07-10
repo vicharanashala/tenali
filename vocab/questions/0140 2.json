@@ -1,0 +1,15 @@
+{
+  "id": 140,
+  "word": "Relaxed",
+  "question": "Relaxed",
+  "options": [
+    "To cut something into pieces with a tool",
+    "To feel admiration for someone's qualities",
+    "Free from tension and anxiety",
+    "To ease the grief or distress of someone"
+  ],
+  "answerOption": "C",
+  "answerText": "Free from tension and anxiety",
+  "difficulty": "easy",
+  "sourceFile": "0140.json"
+}

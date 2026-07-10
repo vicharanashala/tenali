@@ -1,0 +1,15 @@
+{
+  "id": 1797,
+  "word": "Ungovernable",
+  "question": "Ungovernable",
+  "options": [
+    "Unable to be governed or controlled",
+    "Not enough or satisfactory",
+    "The reduction in value of something",
+    "A reduction in amount or quantity"
+  ],
+  "answerOption": "A",
+  "answerText": "Unable to be governed or controlled",
+  "difficulty": "medium",
+  "sourceFile": "1797.json"
+}

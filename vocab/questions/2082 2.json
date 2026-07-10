@@ -1,0 +1,15 @@
+{
+  "id": 2082,
+  "word": "Aerarium",
+  "question": "Aerarium",
+  "options": [
+    "Having a particular habit that is long-established",
+    "Willing to undertake risky ventures",
+    "A Roman imperial treasury",
+    "An indicator of a trend"
+  ],
+  "answerOption": "C",
+  "answerText": "A Roman imperial treasury",
+  "difficulty": "hard",
+  "sourceFile": "2082.json"
+}

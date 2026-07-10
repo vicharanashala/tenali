@@ -1,0 +1,15 @@
+{
+  "id": 419,
+  "word": "Offer",
+  "question": "Offer",
+  "options": [
+    "To present something for acceptance",
+    "Graceful and stylish in appearance",
+    "Acting in the same way over time",
+    "Characterized by conflict or disorder"
+  ],
+  "answerOption": "A",
+  "answerText": "To present something for acceptance",
+  "difficulty": "easy",
+  "sourceFile": "0419.json"
+}

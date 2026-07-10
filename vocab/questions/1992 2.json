@@ -1,0 +1,15 @@
+{
+  "id": 1992,
+  "word": "Adviser",
+  "question": "Adviser",
+  "options": [
+    "Relating to the air sphere",
+    "Extreme patriotism in aggressive policy",
+    "One who gives advice",
+    "To make airy or light"
+  ],
+  "answerOption": "C",
+  "answerText": "One who gives advice",
+  "difficulty": "hard",
+  "sourceFile": "1992.json"
+}

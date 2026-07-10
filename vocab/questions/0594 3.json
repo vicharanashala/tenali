@@ -1,0 +1,15 @@
+{
+  "id": 594,
+  "word": "Unique",
+  "question": "Unique",
+  "options": [
+    "Low in price; not expensive",
+    "Having exceptional natural ability",
+    "Having an even and regular surface",
+    "Being the only one of its kind"
+  ],
+  "answerOption": "D",
+  "answerText": "Being the only one of its kind",
+  "difficulty": "easy",
+  "sourceFile": "0594.json"
+}

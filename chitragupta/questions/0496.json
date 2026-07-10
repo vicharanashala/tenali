@@ -1,0 +1,14 @@
+{
+  "id": 496,
+  "question": "Which country is associated with the city of Dublin?",
+  "options": [
+    "Iceland",
+    "Scotland",
+    "Ireland",
+    "Wales"
+  ],
+  "answerOption": "C",
+  "answerText": "Ireland",
+  "genre": "geography",
+  "sourceFile": "0496.json"
+}

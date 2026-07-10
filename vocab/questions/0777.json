@@ -1,0 +1,15 @@
+{
+  "id": 777,
+  "word": "Virtual",
+  "question": "Virtual",
+  "options": [
+    "Not physically existing but made to appear so",
+    "Of extreme force or strength",
+    "Of chief importance; principal",
+    "To put forward an idea for consideration"
+  ],
+  "answerOption": "A",
+  "answerText": "Not physically existing but made to appear so",
+  "difficulty": "easy",
+  "sourceFile": "0777.json"
+}

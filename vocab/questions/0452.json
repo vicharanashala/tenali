@@ -1,0 +1,15 @@
+{
+  "id": 452,
+  "word": "Construct",
+  "question": "Construct",
+  "options": [
+    "To build or put together a structure",
+    "To cook food using an oven",
+    "To gather a crop from the fields",
+    "Insufficient for the demand; in short supply"
+  ],
+  "answerOption": "A",
+  "answerText": "To build or put together a structure",
+  "difficulty": "easy",
+  "sourceFile": "0452.json"
+}

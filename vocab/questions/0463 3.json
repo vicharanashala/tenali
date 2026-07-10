@@ -1,0 +1,15 @@
+{
+  "id": 463,
+  "word": "Perform",
+  "question": "Perform",
+  "options": [
+    "Very large in size or quantity",
+    "Having great power or strength",
+    "To carry out an action or task",
+    "To become limp through heat or lack of water"
+  ],
+  "answerOption": "C",
+  "answerText": "To carry out an action or task",
+  "difficulty": "easy",
+  "sourceFile": "0463.json"
+}

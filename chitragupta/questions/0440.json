@@ -1,0 +1,14 @@
+{
+  "id": 440,
+  "question": "Which blood cells are responsible for carrying oxygen using hemoglobin?",
+  "options": [
+    "White blood cells",
+    "Platelets",
+    "Red blood cells",
+    "Plasma"
+  ],
+  "answerOption": "C",
+  "answerText": "Red blood cells",
+  "genre": "science",
+  "sourceFile": "0440.json"
+}

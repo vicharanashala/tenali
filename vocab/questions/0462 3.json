@@ -1,0 +1,15 @@
+{
+  "id": 462,
+  "word": "Accomplish",
+  "question": "Accomplish",
+  "options": [
+    "To remove liquid from something",
+    "Important, serious, or significant",
+    "Having exceptional natural ability",
+    "To succeed in doing something"
+  ],
+  "answerOption": "D",
+  "answerText": "To succeed in doing something",
+  "difficulty": "easy",
+  "sourceFile": "0462.json"
+}

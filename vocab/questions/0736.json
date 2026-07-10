@@ -1,0 +1,15 @@
+{
+  "id": 736,
+  "word": "Waterproof",
+  "question": "Waterproof",
+  "options": [
+    "Strong and healthy; vigorous",
+    "Of great weight; difficult to lift",
+    "To confess something to be true",
+    "Not allowing water to pass through"
+  ],
+  "answerOption": "D",
+  "answerText": "Not allowing water to pass through",
+  "difficulty": "easy",
+  "sourceFile": "0736.json"
+}

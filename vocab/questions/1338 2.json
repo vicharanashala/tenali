@@ -1,0 +1,15 @@
+{
+  "id": 1338,
+  "word": "Meretricious",
+  "question": "Meretricious",
+  "options": [
+    "A confusing and difficult problem",
+    "Harsh criticism or censure",
+    "Apparently attractive but having no real value",
+    "Subject to sudden changes of mood"
+  ],
+  "answerOption": "C",
+  "answerText": "Apparently attractive but having no real value",
+  "difficulty": "hard",
+  "sourceFile": "1338.json"
+}

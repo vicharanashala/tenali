@@ -1,0 +1,15 @@
+{
+  "id": 71,
+  "word": "Careful",
+  "question": "Careful",
+  "options": [
+    "To go from one place to another",
+    "To move from one region to another",
+    "Making sure to avoid danger or mistakes",
+    "To be in charge of running something"
+  ],
+  "answerOption": "C",
+  "answerText": "Making sure to avoid danger or mistakes",
+  "difficulty": "easy",
+  "sourceFile": "0071.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1167,
+  "word": "Substantiate",
+  "question": "Substantiate",
+  "options": [
+    "Incapable of producing any useful result",
+    "Likely to cause resentment",
+    "Full of danger or risk",
+    "To provide evidence to support a claim"
+  ],
+  "answerOption": "D",
+  "answerText": "To provide evidence to support a claim",
+  "difficulty": "medium",
+  "sourceFile": "1167.json"
+}

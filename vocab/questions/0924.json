@@ -1,0 +1,15 @@
+{
+  "id": 924,
+  "word": "Lanky",
+  "question": "Lanky",
+  "options": [
+    "Tall and thin in appearance",
+    "Different from what is normal or expected",
+    "Able to move quickly and easily",
+    "To put things in a neat or attractive order"
+  ],
+  "answerOption": "A",
+  "answerText": "Tall and thin in appearance",
+  "difficulty": "easy",
+  "sourceFile": "0924.json"
+}

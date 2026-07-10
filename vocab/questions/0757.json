@@ -1,0 +1,15 @@
+{
+  "id": 757,
+  "word": "Breezy",
+  "question": "Breezy",
+  "options": [
+    "To refuse to take notice of something",
+    "Causing excitement and fear",
+    "Causing an urge to scratch",
+    "Pleasantly windy"
+  ],
+  "answerOption": "D",
+  "answerText": "Pleasantly windy",
+  "difficulty": "easy",
+  "sourceFile": "0757.json"
+}

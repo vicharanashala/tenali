@@ -1,0 +1,15 @@
+{
+  "id": 643,
+  "word": "Gifted",
+  "question": "Gifted",
+  "options": [
+    "Morally right and justifiable",
+    "Causing death",
+    "Having exceptional natural ability",
+    "Free from tension and anxiety"
+  ],
+  "answerOption": "C",
+  "answerText": "Having exceptional natural ability",
+  "difficulty": "easy",
+  "sourceFile": "0643.json"
+}

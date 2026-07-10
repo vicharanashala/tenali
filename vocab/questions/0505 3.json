@@ -1,0 +1,15 @@
+{
+  "id": 505,
+  "word": "Dwell",
+  "question": "Dwell",
+  "options": [
+    "Following the rules of reason",
+    "Feeling dedication to a cause or activity",
+    "Sufficient to cause death",
+    "To live in a particular place"
+  ],
+  "answerOption": "D",
+  "answerText": "To live in a particular place",
+  "difficulty": "easy",
+  "sourceFile": "0505.json"
+}

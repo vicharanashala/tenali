@@ -1,0 +1,15 @@
+{
+  "id": 1905,
+  "word": "Conceited",
+  "question": "Conceited",
+  "options": [
+    "Intensely enthusiastic or passionate",
+    "To have an intense feeling of longing",
+    "Unable to be stopped or prevented",
+    "Excessively proud of oneself"
+  ],
+  "answerOption": "D",
+  "answerText": "Excessively proud of oneself",
+  "difficulty": "medium",
+  "sourceFile": "1905.json"
+}

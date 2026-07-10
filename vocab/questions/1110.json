@@ -1,0 +1,15 @@
+{
+  "id": 1110,
+  "word": "Quandary",
+  "question": "Quandary",
+  "options": [
+    "Showing great care and persistence",
+    "Thinly sown or distributed",
+    "No longer produced or used; out of date",
+    "A state of uncertainty about what to do"
+  ],
+  "answerOption": "D",
+  "answerText": "A state of uncertainty about what to do",
+  "difficulty": "medium",
+  "sourceFile": "1110.json"
+}

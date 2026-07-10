@@ -1,0 +1,15 @@
+{
+  "id": 232,
+  "word": "Trust",
+  "question": "Trust",
+  "options": [
+    "Characterized by constant change and activity",
+    "Lasting for a limited time only",
+    "To believe in the reliability of someone",
+    "Having limits or bounds"
+  ],
+  "answerOption": "C",
+  "answerText": "To believe in the reliability of someone",
+  "difficulty": "easy",
+  "sourceFile": "0232.json"
+}

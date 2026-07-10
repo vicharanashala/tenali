@@ -1,0 +1,15 @@
+{
+  "id": 2051,
+  "word": "Misanthrope",
+  "question": "Misanthrope",
+  "options": [
+    "Mapping from aircraft",
+    "A person who dislikes humankind",
+    "A state of balance",
+    "Cheerful and lighthearted"
+  ],
+  "answerOption": "B",
+  "answerText": "A person who dislikes humankind",
+  "difficulty": "hard",
+  "sourceFile": "2051.json"
+}

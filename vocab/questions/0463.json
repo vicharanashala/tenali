@@ -1,0 +1,15 @@
+{
+  "id": 463,
+  "word": "Perform",
+  "question": "Perform",
+  "options": [
+    "To tell a story or give an account",
+    "Expecting the worst possible outcome",
+    "Needing much effort or skill to accomplish",
+    "To carry out an action or task"
+  ],
+  "answerOption": "D",
+  "answerText": "To carry out an action or task",
+  "difficulty": "easy",
+  "sourceFile": "0463.json"
+}

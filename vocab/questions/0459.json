@@ -1,0 +1,15 @@
+{
+  "id": 459,
+  "word": "Adopt",
+  "question": "Adopt",
+  "options": [
+    "To take on or start using something new",
+    "Having experience, knowledge, and good judgment",
+    "To perform better than someone else",
+    "Easily annoyed or made angry"
+  ],
+  "answerOption": "A",
+  "answerText": "To take on or start using something new",
+  "difficulty": "easy",
+  "sourceFile": "0459.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 455,
+  "word": "Abolish",
+  "question": "Abolish",
+  "options": [
+    "To formally put an end to a system",
+    "To protect from attack or danger",
+    "To become smaller or fewer in amount",
+    "To move forward on hands and knees"
+  ],
+  "answerOption": "A",
+  "answerText": "To formally put an end to a system",
+  "difficulty": "easy",
+  "sourceFile": "0455.json"
+}

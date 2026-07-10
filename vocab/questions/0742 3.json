@@ -1,0 +1,15 @@
+{
+  "id": 742,
+  "word": "Solar",
+  "question": "Solar",
+  "options": [
+    "To give an account of something in words",
+    "Feeling a need to drink something",
+    "Relating to or determined by the sun",
+    "Not open; shut or fastened"
+  ],
+  "answerOption": "C",
+  "answerText": "Relating to or determined by the sun",
+  "difficulty": "easy",
+  "sourceFile": "0742.json"
+}

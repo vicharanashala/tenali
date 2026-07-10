@@ -1,0 +1,15 @@
+{
+  "id": 249,
+  "word": "Avoid",
+  "question": "Avoid",
+  "options": [
+    "To keep away from something",
+    "Strongly and solidly built",
+    "To cause someone to feel greatly astonished",
+    "To push off the ground using the legs"
+  ],
+  "answerOption": "A",
+  "answerText": "To keep away from something",
+  "difficulty": "easy",
+  "sourceFile": "0249.json"
+}

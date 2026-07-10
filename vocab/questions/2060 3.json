@@ -1,0 +1,15 @@
+{
+  "id": 2060,
+  "word": "Magniloquent",
+  "question": "Magniloquent",
+  "options": [
+    "A citrus tree from Asia",
+    "The quality of being believable",
+    "Proceeding in a harmful way gradually",
+    "Using high-flown or bombastic language"
+  ],
+  "answerOption": "D",
+  "answerText": "Using high-flown or bombastic language",
+  "difficulty": "hard",
+  "sourceFile": "2060.json"
+}

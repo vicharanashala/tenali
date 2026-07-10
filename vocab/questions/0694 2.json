@@ -1,0 +1,15 @@
+{
+  "id": 694,
+  "word": "Vital",
+  "question": "Vital",
+  "options": [
+    "To put forward an idea for consideration",
+    "To move through the air with wings",
+    "Absolutely necessary or important",
+    "Giving off light; bright or shining"
+  ],
+  "answerOption": "C",
+  "answerText": "Absolutely necessary or important",
+  "difficulty": "easy",
+  "sourceFile": "0694.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1019,
+  "word": "Tenacious",
+  "question": "Tenacious",
+  "options": [
+    "Holding firmly to something; persistent",
+    "To reduce the population of",
+    "Failing to take proper care",
+    "Providing good value"
+  ],
+  "answerOption": "A",
+  "answerText": "Holding firmly to something; persistent",
+  "difficulty": "medium",
+  "sourceFile": "1019.json"
+}

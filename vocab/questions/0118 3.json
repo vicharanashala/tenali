@@ -1,0 +1,15 @@
+{
+  "id": 118,
+  "word": "Gloomy",
+  "question": "Gloomy",
+  "options": [
+    "To try to win against other people",
+    "Made by chemical processes; not natural",
+    "To pause before doing something",
+    "Dark or poorly lit; depressing"
+  ],
+  "answerOption": "D",
+  "answerText": "Dark or poorly lit; depressing",
+  "difficulty": "easy",
+  "sourceFile": "0118.json"
+}

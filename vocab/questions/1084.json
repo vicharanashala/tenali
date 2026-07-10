@@ -1,0 +1,15 @@
+{
+  "id": 1084,
+  "word": "Naive",
+  "question": "Naive",
+  "options": [
+    "Showing a lack of experience or wisdom",
+    "Caused to move more slowly",
+    "Difficult to control or discipline",
+    "Made or occurring without plan"
+  ],
+  "answerOption": "A",
+  "answerText": "Showing a lack of experience or wisdom",
+  "difficulty": "medium",
+  "sourceFile": "1084.json"
+}

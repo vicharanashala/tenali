@@ -1,0 +1,15 @@
+{
+  "id": 379,
+  "word": "Spin",
+  "question": "Spin",
+  "options": [
+    "To turn around quickly in a circle",
+    "Of chief importance; principal",
+    "To confess something to be true",
+    "To make something stronger"
+  ],
+  "answerOption": "A",
+  "answerText": "To turn around quickly in a circle",
+  "difficulty": "easy",
+  "sourceFile": "0379.json"
+}

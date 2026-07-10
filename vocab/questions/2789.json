@@ -1,0 +1,15 @@
+{
+  "id": 2789,
+  "word": "Aggrandizement",
+  "question": "Aggrandizement",
+  "options": [
+    "Responsibility for one's actions",
+    "A typical example or pattern of something",
+    "The action of making greater",
+    "The science of ballooning"
+  ],
+  "answerOption": "C",
+  "answerText": "The action of making greater",
+  "difficulty": "hard",
+  "sourceFile": "2789.json"
+}

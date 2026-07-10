@@ -1,0 +1,15 @@
+{
+  "id": 1193,
+  "word": "Infringe",
+  "question": "Infringe",
+  "options": [
+    "To actively break the terms of a law",
+    "Abandoned by an owner or crew",
+    "To remove toxic substances from",
+    "To pay attention to advice or warning"
+  ],
+  "answerOption": "A",
+  "answerText": "To actively break the terms of a law",
+  "difficulty": "medium",
+  "sourceFile": "1193.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 688,
+  "word": "Mighty",
+  "question": "Mighty",
+  "options": [
+    "To take the place of something",
+    "Restricted within limits",
+    "To discover the presence of something hidden",
+    "Possessing great power or strength"
+  ],
+  "answerOption": "D",
+  "answerText": "Possessing great power or strength",
+  "difficulty": "easy",
+  "sourceFile": "0688.json"
+}

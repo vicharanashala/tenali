@@ -1,0 +1,15 @@
+{
+  "id": 206,
+  "word": "Appear",
+  "question": "Appear",
+  "options": [
+    "To become visible or noticeable",
+    "Having the ability to learn and understand",
+    "Able to be used for a practical purpose",
+    "Well informed about many subjects"
+  ],
+  "answerOption": "A",
+  "answerText": "To become visible or noticeable",
+  "difficulty": "easy",
+  "sourceFile": "0206.json"
+}

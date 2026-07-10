@@ -1,0 +1,14 @@
+{
+  "id": 304,
+  "question": "Who is known as the father of geometry?",
+  "options": [
+    "Euclid",
+    "Pythagoras",
+    "Aristotle",
+    "Newton"
+  ],
+  "answerOption": "A",
+  "answerText": "Euclid",
+  "genre": "general-knowledge",
+  "sourceFile": "0304.json"
+}

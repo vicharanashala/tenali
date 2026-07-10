@@ -1,0 +1,15 @@
+{
+  "id": 2688,
+  "word": "Canyon",
+  "question": "Canyon",
+  "options": [
+    "The action of transferring pollen",
+    "Vigorous or incisive in expression",
+    "A deep valley with steep cliff walls",
+    "A condition giving superiority"
+  ],
+  "answerOption": "C",
+  "answerText": "A deep valley with steep cliff walls",
+  "difficulty": "hard",
+  "sourceFile": "2688.json"
+}

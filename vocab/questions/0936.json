@@ -1,0 +1,15 @@
+{
+  "id": 936,
+  "word": "Tedious",
+  "question": "Tedious",
+  "options": [
+    "Not under control of another",
+    "To show how something is done",
+    "Too long and therefore boring",
+    "Having a sharp or sour taste"
+  ],
+  "answerOption": "C",
+  "answerText": "Too long and therefore boring",
+  "difficulty": "easy",
+  "sourceFile": "0936.json"
+}

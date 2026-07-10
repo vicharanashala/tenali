@@ -1,0 +1,15 @@
+{
+  "id": 1005,
+  "word": "Frugal",
+  "question": "Frugal",
+  "options": [
+    "Sparing or economical with money or food",
+    "Blocked or prevented from passing",
+    "The latest fashion or style",
+    "To forcibly remove from a country"
+  ],
+  "answerOption": "A",
+  "answerText": "Sparing or economical with money or food",
+  "difficulty": "medium",
+  "sourceFile": "1005.json"
+}

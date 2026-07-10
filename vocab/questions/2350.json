@@ -1,0 +1,15 @@
+{
+  "id": 2350,
+  "word": "Advocater",
+  "question": "Advocater",
+  "options": [
+    "One who advocates",
+    "Swollen and distended; dull and pompous",
+    "Pain from atmospheric pressure",
+    "A duty or responsibility"
+  ],
+  "answerOption": "A",
+  "answerText": "One who advocates",
+  "difficulty": "hard",
+  "sourceFile": "2350.json"
+}

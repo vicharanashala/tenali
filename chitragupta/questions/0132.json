@@ -1,0 +1,14 @@
+{
+  "id": 132,
+  "question": "What is the name of the line that divides the Earth into the Northern and Southern Hemispheres?",
+  "options": [
+    "Prime Meridian",
+    "Equator",
+    "Tropic of Cancer",
+    "International Date Line"
+  ],
+  "answerOption": "B",
+  "answerText": "Equator",
+  "genre": "general-knowledge",
+  "sourceFile": "0132.json"
+}

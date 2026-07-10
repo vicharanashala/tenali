@@ -1,0 +1,15 @@
+{
+  "id": 2062,
+  "word": "Soliloquy",
+  "question": "Soliloquy",
+  "options": [
+    "A state of physical or mental weariness",
+    "Lack of mercy or compassion",
+    "An estimate of the course of a disease",
+    "An act of speaking thoughts aloud alone"
+  ],
+  "answerOption": "D",
+  "answerText": "An act of speaking thoughts aloud alone",
+  "difficulty": "hard",
+  "sourceFile": "2062.json"
+}

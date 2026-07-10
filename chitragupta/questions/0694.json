@@ -1,0 +1,14 @@
+{
+  "id": 694,
+  "question": "Who wrote 'The Hunchback of Notre-Dame'?",
+  "options": [
+    "Victor Hugo",
+    "Dumas",
+    "Balzac",
+    "Flaubert"
+  ],
+  "answerOption": "A",
+  "answerText": "Victor Hugo",
+  "genre": "general-knowledge",
+  "sourceFile": "0694.json"
+}

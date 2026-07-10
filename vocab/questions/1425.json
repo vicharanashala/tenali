@@ -1,0 +1,15 @@
+{
+  "id": 1425,
+  "word": "Demur",
+  "question": "Demur",
+  "options": [
+    "To express disagreement with something",
+    "Moral corruption or wickedness",
+    "A legal objection to a claim",
+    "To clear someone of blame or suspicion"
+  ],
+  "answerOption": "A",
+  "answerText": "To express disagreement with something",
+  "difficulty": "medium",
+  "sourceFile": "1425.json"
+}

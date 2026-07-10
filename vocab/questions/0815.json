@@ -1,0 +1,15 @@
+{
+  "id": 815,
+  "word": "Approximate",
+  "question": "Approximate",
+  "options": [
+    "The inner part of something",
+    "Close to the actual but not completely exact",
+    "To move a spoon around in a liquid",
+    "To agree to give something requested"
+  ],
+  "answerOption": "B",
+  "answerText": "Close to the actual but not completely exact",
+  "difficulty": "easy",
+  "sourceFile": "0815.json"
+}

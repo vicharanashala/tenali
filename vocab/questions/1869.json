@@ -1,0 +1,15 @@
+{
+  "id": 1869,
+  "word": "Perilous",
+  "question": "Perilous",
+  "options": [
+    "Likely to cause resentment",
+    "A person who expects or accepts defeat",
+    "Full of danger or risk",
+    "Causing something to seem small"
+  ],
+  "answerOption": "C",
+  "answerText": "Full of danger or risk",
+  "difficulty": "medium",
+  "sourceFile": "1869.json"
+}

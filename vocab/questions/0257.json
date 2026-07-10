@@ -1,0 +1,15 @@
+{
+  "id": 257,
+  "word": "Exit",
+  "question": "Exit",
+  "options": [
+    "To be in charge of running something",
+    "Feeling dedication to a cause or activity",
+    "To show how something is done",
+    "To go out of or leave a place"
+  ],
+  "answerOption": "D",
+  "answerText": "To go out of or leave a place",
+  "difficulty": "easy",
+  "sourceFile": "0257.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 905,
+  "word": "Bounded",
+  "question": "Bounded",
+  "options": [
+    "To arrange into a structured whole",
+    "Without seriousness or importance",
+    "Not mixed with anything else",
+    "Restricted within limits"
+  ],
+  "answerOption": "D",
+  "answerText": "Restricted within limits",
+  "difficulty": "easy",
+  "sourceFile": "0905.json"
+}

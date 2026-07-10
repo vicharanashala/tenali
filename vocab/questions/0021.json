@@ -1,0 +1,15 @@
+{
+  "id": 21,
+  "word": "Weak",
+  "question": "Weak",
+  "options": [
+    "Awkward in movement or handling things",
+    "To go or come up a slope or stairs",
+    "Lacking the power to perform demanding tasks",
+    "Done according to a fixed plan"
+  ],
+  "answerOption": "C",
+  "answerText": "Lacking the power to perform demanding tasks",
+  "difficulty": "easy",
+  "sourceFile": "0021.json"
+}

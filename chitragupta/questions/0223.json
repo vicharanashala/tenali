@@ -1,0 +1,14 @@
+{
+  "id": 223,
+  "question": "What is the basic unit of life?",
+  "options": [
+    "Atom",
+    "Tissue",
+    "Organ",
+    "Cell"
+  ],
+  "answerOption": "D",
+  "answerText": "Cell",
+  "genre": "mixed",
+  "sourceFile": "0223.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 147,
+  "question": "Which is the smallest unit of matter according to basic chemistry?",
+  "options": [
+    "Molecule",
+    "Atom",
+    "Cell",
+    "Electron"
+  ],
+  "answerOption": "B",
+  "answerText": "Atom",
+  "genre": "mixed",
+  "sourceFile": "0147.json"
+}

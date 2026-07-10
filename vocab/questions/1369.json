@@ -1,0 +1,15 @@
+{
+  "id": 1369,
+  "word": "Delegate",
+  "question": "Delegate",
+  "options": [
+    "To show or prove something",
+    "To assign responsibility to another person",
+    "A device for causing explosion",
+    "Diligent and careful in work"
+  ],
+  "answerOption": "B",
+  "answerText": "To assign responsibility to another person",
+  "difficulty": "medium",
+  "sourceFile": "1369.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1139,
+  "word": "Wield",
+  "question": "Wield",
+  "options": [
+    "To hold and use a weapon or tool",
+    "To take a position of power illegally",
+    "Bitterness in tone or manner",
+    "A small cup for strong black coffee"
+  ],
+  "answerOption": "A",
+  "answerText": "To hold and use a weapon or tool",
+  "difficulty": "medium",
+  "sourceFile": "1139.json"
+}

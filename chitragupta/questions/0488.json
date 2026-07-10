@@ -1,0 +1,14 @@
+{
+  "id": 488,
+  "question": "Which is the largest rodent in the world?",
+  "options": [
+    "Beaver",
+    "Porcupine",
+    "Capybara",
+    "Marmot"
+  ],
+  "answerOption": "C",
+  "answerText": "Capybara",
+  "genre": "mixed",
+  "sourceFile": "0488.json"
+}

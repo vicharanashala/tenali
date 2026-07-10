@@ -1,0 +1,15 @@
+{
+  "id": 6,
+  "word": "Fast",
+  "question": "Fast",
+  "options": [
+    "To assign responsibility for a fault",
+    "To estimate something without full information",
+    "Moving or capable of moving at high speed",
+    "To examine similarities and differences"
+  ],
+  "answerOption": "C",
+  "answerText": "Moving or capable of moving at high speed",
+  "difficulty": "easy",
+  "sourceFile": "0006.json"
+}

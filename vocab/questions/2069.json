@@ -1,0 +1,15 @@
+{
+  "id": 2069,
+  "word": "Conundrum",
+  "question": "Conundrum",
+  "options": [
+    "One who adulterates",
+    "The action of soliciting something",
+    "A confusing and difficult problem",
+    "The action of beginning something"
+  ],
+  "answerOption": "C",
+  "answerText": "A confusing and difficult problem",
+  "difficulty": "hard",
+  "sourceFile": "2069.json"
+}

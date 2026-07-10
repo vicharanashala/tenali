@@ -1,0 +1,14 @@
+{
+  "id": 682,
+  "question": "Which country is associated with the city of Minsk?",
+  "options": [
+    "Ukraine",
+    "Belarus",
+    "Poland",
+    "Latvia"
+  ],
+  "answerOption": "B",
+  "answerText": "Belarus",
+  "genre": "geography",
+  "sourceFile": "0682.json"
+}

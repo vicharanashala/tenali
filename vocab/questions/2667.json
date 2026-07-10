@@ -1,0 +1,15 @@
+{
+  "id": 2667,
+  "word": "Insolvency",
+  "question": "Insolvency",
+  "options": [
+    "The state of being peaceful",
+    "The state of being unable to pay debts",
+    "Psychological condition from flying",
+    "A plant used as herbal medicine"
+  ],
+  "answerOption": "B",
+  "answerText": "The state of being unable to pay debts",
+  "difficulty": "hard",
+  "sourceFile": "2667.json"
+}

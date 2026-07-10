@@ -1,0 +1,15 @@
+{
+  "id": 1725,
+  "word": "Maudlin",
+  "question": "Maudlin",
+  "options": [
+    "Self-pityingly sentimental",
+    "Science of air flow and forces",
+    "The action of noticing something",
+    "Attractive or appealing in appearance"
+  ],
+  "answerOption": "A",
+  "answerText": "Self-pityingly sentimental",
+  "difficulty": "hard",
+  "sourceFile": "1725.json"
+}

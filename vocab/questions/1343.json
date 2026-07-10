@@ -1,0 +1,15 @@
+{
+  "id": 1343,
+  "word": "Deficit",
+  "question": "Deficit",
+  "options": [
+    "To determine the future of something",
+    "An amount by which spending exceeds income",
+    "Distrusting human motives",
+    "Fierce wild or untamed"
+  ],
+  "answerOption": "B",
+  "answerText": "An amount by which spending exceeds income",
+  "difficulty": "medium",
+  "sourceFile": "1343.json"
+}

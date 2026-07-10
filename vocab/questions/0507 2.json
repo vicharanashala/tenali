@@ -1,0 +1,15 @@
+{
+  "id": 507,
+  "word": "Reside",
+  "question": "Reside",
+  "options": [
+    "Able to be trusted to do what is needed",
+    "To take aggressive action against something",
+    "Giving off light; bright or shining",
+    "To have one's permanent home somewhere"
+  ],
+  "answerOption": "D",
+  "answerText": "To have one's permanent home somewhere",
+  "difficulty": "easy",
+  "sourceFile": "0507.json"
+}

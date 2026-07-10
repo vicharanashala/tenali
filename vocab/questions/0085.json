@@ -1,0 +1,15 @@
+{
+  "id": 85,
+  "word": "Wide",
+  "question": "Wide",
+  "options": [
+    "Tender and juicy in food",
+    "Involving or creating good conditions",
+    "Of great extent from side to side",
+    "To carefully choose as being the best"
+  ],
+  "answerOption": "C",
+  "answerText": "Of great extent from side to side",
+  "difficulty": "easy",
+  "sourceFile": "0085.json"
+}

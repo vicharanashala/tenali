@@ -1,0 +1,15 @@
+{
+  "id": 723,
+  "word": "Vertical",
+  "question": "Vertical",
+  "options": [
+    "Going straight up and down",
+    "Loud and energetic",
+    "Slightly wet or damp",
+    "To go beyond the limit of something"
+  ],
+  "answerOption": "A",
+  "answerText": "Going straight up and down",
+  "difficulty": "easy",
+  "sourceFile": "0723.json"
+}

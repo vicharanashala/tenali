@@ -1,0 +1,15 @@
+{
+  "id": 3236,
+  "word": "Abilene",
+  "question": "Abilene",
+  "options": [
+    "The partially shaded outer region of a shadow",
+    "A city in Texas",
+    "The act of throwing someone out of a window",
+    "Plural of ability"
+  ],
+  "answerOption": "B",
+  "answerText": "A city in Texas",
+  "difficulty": "extra-hard",
+  "sourceFile": "3236.json"
+}

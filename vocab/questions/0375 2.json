@@ -1,0 +1,15 @@
+{
+  "id": 375,
+  "word": "Smell",
+  "question": "Smell",
+  "options": [
+    "Able to recover quickly from difficulties",
+    "Feeling optimistic about a future event",
+    "To perceive the scent of something",
+    "To watch over and protect something"
+  ],
+  "answerOption": "C",
+  "answerText": "To perceive the scent of something",
+  "difficulty": "easy",
+  "sourceFile": "0375.json"
+}

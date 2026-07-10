@@ -1,0 +1,15 @@
+{
+  "id": 243,
+  "word": "Farewell",
+  "question": "Farewell",
+  "options": [
+    "Having limits or bounds",
+    "To take delight or pleasure in something",
+    "An act of saying goodbye",
+    "Unpleasantly rough or sharp"
+  ],
+  "answerOption": "C",
+  "answerText": "An act of saying goodbye",
+  "difficulty": "easy",
+  "sourceFile": "0243.json"
+}

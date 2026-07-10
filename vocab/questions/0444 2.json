@@ -1,0 +1,15 @@
+{
+  "id": 444,
+  "word": "Classify",
+  "question": "Classify",
+  "options": [
+    "Giving off light; bright or shining",
+    "Belonging to the very distant past",
+    "In need of sleep or rest",
+    "To arrange into categories or classes"
+  ],
+  "answerOption": "D",
+  "answerText": "To arrange into categories or classes",
+  "difficulty": "easy",
+  "sourceFile": "0444.json"
+}

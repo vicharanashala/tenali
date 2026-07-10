@@ -1,0 +1,15 @@
+{
+  "id": 1965,
+  "word": "Barred",
+  "question": "Barred",
+  "options": [
+    "Prevented or forbidden from",
+    "Created or done without preparation",
+    "To explode or cause to explode",
+    "Unable to be appeased"
+  ],
+  "answerOption": "A",
+  "answerText": "Prevented or forbidden from",
+  "difficulty": "medium",
+  "sourceFile": "1965.json"
+}

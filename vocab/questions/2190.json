@@ -1,0 +1,15 @@
+{
+  "id": 2190,
+  "word": "Fatuous",
+  "question": "Fatuous",
+  "options": [
+    "The state of being a fully developed adult",
+    "The science of extracting and using metals",
+    "Silly and pointless",
+    "Unable to be avoided or escaped"
+  ],
+  "answerOption": "C",
+  "answerText": "Silly and pointless",
+  "difficulty": "hard",
+  "sourceFile": "2190.json"
+}

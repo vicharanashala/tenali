@@ -1,0 +1,15 @@
+{
+  "id": 570,
+  "word": "Charm",
+  "question": "Charm",
+  "options": [
+    "To make something full or complete",
+    "Feeling thankful for something received",
+    "To protect from attack or danger",
+    "To delight someone greatly"
+  ],
+  "answerOption": "D",
+  "answerText": "To delight someone greatly",
+  "difficulty": "easy",
+  "sourceFile": "0570.json"
+}

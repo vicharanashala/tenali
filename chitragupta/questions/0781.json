@@ -1,0 +1,14 @@
+{
+  "id": 781,
+  "question": "What is the SI unit of luminous flux?",
+  "options": [
+    "lux",
+    "lumen",
+    "candela",
+    "watt"
+  ],
+  "answerOption": "B",
+  "answerText": "lumen",
+  "genre": "mixed",
+  "sourceFile": "0781.json"
+}

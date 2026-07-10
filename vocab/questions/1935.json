@@ -1,0 +1,15 @@
+{
+  "id": 1935,
+  "word": "Melodious",
+  "question": "Melodious",
+  "options": [
+    "Sweet and musical in sound",
+    "With complete sincerity and commitment",
+    "Mixed up in a confused manner",
+    "Extremely unpleasant or offensive"
+  ],
+  "answerOption": "A",
+  "answerText": "Sweet and musical in sound",
+  "difficulty": "medium",
+  "sourceFile": "1935.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1718,
+  "word": "Detrain",
+  "question": "Detrain",
+  "options": [
+    "A feeling of hatred or disgust",
+    "The quality of being destructible",
+    "The state of being tedious",
+    "To get off a train"
+  ],
+  "answerOption": "D",
+  "answerText": "To get off a train",
+  "difficulty": "medium",
+  "sourceFile": "1718.json"
+}

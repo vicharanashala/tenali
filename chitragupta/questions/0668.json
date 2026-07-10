@@ -1,0 +1,14 @@
+{
+  "id": 668,
+  "question": "Which is the largest species of squirrel?",
+  "options": [
+    "Gray squirrel",
+    "Flying squirrel",
+    "Indian giant squirrel",
+    "Ground squirrel"
+  ],
+  "answerOption": "C",
+  "answerText": "Indian giant squirrel",
+  "genre": "mixed",
+  "sourceFile": "0668.json"
+}

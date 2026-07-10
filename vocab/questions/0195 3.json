@@ -1,0 +1,15 @@
+{
+  "id": 195,
+  "word": "Stretch",
+  "question": "Stretch",
+  "options": [
+    "Existing in large quantities",
+    "To extend to full length",
+    "To give and receive things of similar value",
+    "Spread over a wide area"
+  ],
+  "answerOption": "B",
+  "answerText": "To extend to full length",
+  "difficulty": "easy",
+  "sourceFile": "0195.json"
+}

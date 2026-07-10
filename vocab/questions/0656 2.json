@@ -1,0 +1,15 @@
+{
+  "id": 656,
+  "word": "Temporary",
+  "question": "Temporary",
+  "options": [
+    "Based on clear thought and reason",
+    "Lasting for a limited time only",
+    "Not afraid of danger",
+    "To save someone from a dangerous situation"
+  ],
+  "answerOption": "B",
+  "answerText": "Lasting for a limited time only",
+  "difficulty": "easy",
+  "sourceFile": "0656.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 536,
+  "question": "What is the SI unit of angular frequency?",
+  "options": [
+    "Radian per second",
+    "Hertz",
+    "Joule",
+    "Newton"
+  ],
+  "answerOption": "A",
+  "answerText": "Radian per second",
+  "genre": "mixed",
+  "sourceFile": "0536.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 937,
+  "word": "Meander",
+  "question": "Meander",
+  "options": [
+    "To follow a winding course",
+    "Too long, slow, or dull; tiresome",
+    "Never done or known before",
+    "Given to or characterized by quarreling"
+  ],
+  "answerOption": "A",
+  "answerText": "To follow a winding course",
+  "difficulty": "medium",
+  "sourceFile": "0937.json"
+}

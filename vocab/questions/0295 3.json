@@ -1,0 +1,15 @@
+{
+  "id": 295,
+  "word": "Hurry",
+  "question": "Hurry",
+  "options": [
+    "More than is necessary or normal",
+    "Relating to or resembling the moon",
+    "To move or act with great speed",
+    "Happening or done at once"
+  ],
+  "answerOption": "C",
+  "answerText": "To move or act with great speed",
+  "difficulty": "easy",
+  "sourceFile": "0295.json"
+}

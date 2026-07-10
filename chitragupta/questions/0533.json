@@ -1,0 +1,14 @@
+{
+  "id": 533,
+  "question": "Which is the largest owl species by weight among commonly cited species?",
+  "options": [
+    "Barn owl",
+    "Eurasian eagle-owl",
+    "Snowy owl",
+    "Great horned owl"
+  ],
+  "answerOption": "B",
+  "answerText": "Eurasian eagle-owl",
+  "genre": "mixed",
+  "sourceFile": "0533.json"
+}

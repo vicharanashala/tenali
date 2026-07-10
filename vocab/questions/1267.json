@@ -1,0 +1,15 @@
+{
+  "id": 1267,
+  "word": "Tedium",
+  "question": "Tedium",
+  "options": [
+    "A skill or talent for doing something",
+    "No longer produced or used; out of date",
+    "To reduce sensitivity to something",
+    "The state of being tedious"
+  ],
+  "answerOption": "D",
+  "answerText": "The state of being tedious",
+  "difficulty": "medium",
+  "sourceFile": "1267.json"
+}

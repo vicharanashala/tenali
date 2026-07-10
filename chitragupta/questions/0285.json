@@ -1,0 +1,14 @@
+{
+  "id": 285,
+  "question": "Who wrote 'The Odyssey'?",
+  "options": [
+    "Homer",
+    "Virgil",
+    "Plato",
+    "Socrates"
+  ],
+  "answerOption": "A",
+  "answerText": "Homer",
+  "genre": "general-knowledge",
+  "sourceFile": "0285.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 830,
+  "word": "Considerable",
+  "question": "Considerable",
+  "options": [
+    "Careful to avoid potential problems",
+    "To increase in size or amount",
+    "Notably large in size or amount",
+    "To gradually grow faint and disappear"
+  ],
+  "answerOption": "C",
+  "answerText": "Notably large in size or amount",
+  "difficulty": "easy",
+  "sourceFile": "0830.json"
+}

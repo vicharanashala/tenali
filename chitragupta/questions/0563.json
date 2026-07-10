@@ -1,0 +1,14 @@
+{
+  "id": 563,
+  "question": "Who discovered the wave nature of matter?",
+  "options": [
+    "de Broglie",
+    "Bohr",
+    "Planck",
+    "Pauli"
+  ],
+  "answerOption": "A",
+  "answerText": "de Broglie",
+  "genre": "general-knowledge",
+  "sourceFile": "0563.json"
+}

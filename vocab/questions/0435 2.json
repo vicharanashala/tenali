@@ -1,0 +1,15 @@
+{
+  "id": 435,
+  "word": "Tie",
+  "question": "Tie",
+  "options": [
+    "To present something for acceptance",
+    "To fasten with string or rope",
+    "Sufficient to cause death",
+    "To set free from confinement"
+  ],
+  "answerOption": "B",
+  "answerText": "To fasten with string or rope",
+  "difficulty": "easy",
+  "sourceFile": "0435.json"
+}

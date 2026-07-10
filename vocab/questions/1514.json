@@ -1,0 +1,15 @@
+{
+  "id": 1514,
+  "word": "Depress",
+  "question": "Depress",
+  "options": [
+    "To push down or cause sadness",
+    "Dangerously steep or sudden",
+    "A loud and confused noise or voices",
+    "Not working well or wastes effort"
+  ],
+  "answerOption": "A",
+  "answerText": "To push down or cause sadness",
+  "difficulty": "medium",
+  "sourceFile": "1514.json"
+}

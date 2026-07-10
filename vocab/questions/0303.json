@@ -1,0 +1,15 @@
+{
+  "id": 303,
+  "word": "Celebrate",
+  "question": "Celebrate",
+  "options": [
+    "Not truthful or genuine",
+    "Having the taste of salt",
+    "To honor a special occasion with festivities",
+    "Extremely good or of high quality"
+  ],
+  "answerOption": "C",
+  "answerText": "To honor a special occasion with festivities",
+  "difficulty": "easy",
+  "sourceFile": "0303.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2819,
+  "word": "Credence",
+  "question": "Credence",
+  "options": [
+    "The action of showing or displaying",
+    "The state of being calm",
+    "The quality of being sure",
+    "Belief in something as true"
+  ],
+  "answerOption": "D",
+  "answerText": "Belief in something as true",
+  "difficulty": "hard",
+  "sourceFile": "2819.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1218,
+  "word": "Latent",
+  "question": "Latent",
+  "options": [
+    "Existing but not yet developed or visible",
+    "Causing confusion or bewilderment",
+    "To place money in a bank account",
+    "Concerned with small details"
+  ],
+  "answerOption": "A",
+  "answerText": "Existing but not yet developed or visible",
+  "difficulty": "medium",
+  "sourceFile": "1218.json"
+}

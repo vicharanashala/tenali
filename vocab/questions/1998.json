@@ -1,0 +1,15 @@
+{
+  "id": 1998,
+  "word": "Bellicose",
+  "question": "Bellicose",
+  "options": [
+    "Relating to the theology of Calvin",
+    "Resembling a riddle or puzzle",
+    "Demonstrating aggression and willingness to fight",
+    "The state of being dormant"
+  ],
+  "answerOption": "C",
+  "answerText": "Demonstrating aggression and willingness to fight",
+  "difficulty": "hard",
+  "sourceFile": "1998.json"
+}

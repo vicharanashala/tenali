@@ -1,0 +1,15 @@
+{
+  "id": 901,
+  "word": "Witty",
+  "question": "Witty",
+  "options": [
+    "A subtle difference in meaning",
+    "Affected by a lack of energy",
+    "Showing quick and inventive verbal humor",
+    "A strong habitual liking for something"
+  ],
+  "answerOption": "C",
+  "answerText": "Showing quick and inventive verbal humor",
+  "difficulty": "medium",
+  "sourceFile": "0901.json"
+}

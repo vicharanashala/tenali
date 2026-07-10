@@ -1,0 +1,15 @@
+{
+  "id": 1998,
+  "word": "Advocater",
+  "question": "Advocater",
+  "options": [
+    "An easterly wind in the Aegean",
+    "One who advocates",
+    "A city built in air",
+    "Not able to be denied or disputed"
+  ],
+  "answerOption": "B",
+  "answerText": "One who advocates",
+  "difficulty": "hard",
+  "sourceFile": "1998.json"
+}

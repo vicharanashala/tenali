@@ -1,0 +1,15 @@
+{
+  "id": 1810,
+  "word": "Miscreant",
+  "question": "Miscreant",
+  "options": [
+    "A person who behaves badly or unlawfully",
+    "A person obsessed with flying",
+    "Hypocritical and sanctimonious talk",
+    "Relating to air-structure interaction"
+  ],
+  "answerOption": "A",
+  "answerText": "A person who behaves badly or unlawfully",
+  "difficulty": "hard",
+  "sourceFile": "1810.json"
+}

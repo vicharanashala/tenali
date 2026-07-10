@@ -1,0 +1,15 @@
+{
+  "id": 2400,
+  "word": "Quintessence",
+  "question": "Quintessence",
+  "options": [
+    "In an abject manner",
+    "Gradual weaning process",
+    "The study of ants",
+    "The most typical example or representation"
+  ],
+  "answerOption": "D",
+  "answerText": "The most typical example or representation",
+  "difficulty": "extra-hard",
+  "sourceFile": "2400.json"
+}

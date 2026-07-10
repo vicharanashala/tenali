@@ -1,0 +1,15 @@
+{
+  "id": 1194,
+  "word": "Judicious",
+  "question": "Judicious",
+  "options": [
+    "Having good judgment; sensible",
+    "Never tiring or growing weary",
+    "The action of abandoning a person",
+    "To feel deep respect or admiration for"
+  ],
+  "answerOption": "A",
+  "answerText": "Having good judgment; sensible",
+  "difficulty": "medium",
+  "sourceFile": "1194.json"
+}

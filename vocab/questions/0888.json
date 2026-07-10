@@ -1,0 +1,15 @@
+{
+  "id": 888,
+  "word": "Polished",
+  "question": "Polished",
+  "options": [
+    "Required by law or rule; mandatory",
+    "Covered with fine soft hair or fibers",
+    "Smooth and shiny; sophisticated",
+    "Feeling thankful for something received"
+  ],
+  "answerOption": "C",
+  "answerText": "Smooth and shiny; sophisticated",
+  "difficulty": "easy",
+  "sourceFile": "0888.json"
+}

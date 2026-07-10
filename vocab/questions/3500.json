@@ -1,0 +1,15 @@
+{
+  "id": 3500,
+  "word": "Abyssophasic",
+  "question": "Abyssophasic",
+  "options": [
+    "Relating to abyss speech",
+    "With abyss heat source",
+    "Love of the abyss",
+    "Relating to abyssal stones"
+  ],
+  "answerOption": "A",
+  "answerText": "Relating to abyss speech",
+  "difficulty": "extra-hard",
+  "sourceFile": "3500.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 873,
+  "word": "Instant",
+  "question": "Instant",
+  "options": [
+    "Resembling without being identical",
+    "Containing nothing; not filled",
+    "Very fine in texture or structure",
+    "Occurring immediately without delay"
+  ],
+  "answerOption": "D",
+  "answerText": "Occurring immediately without delay",
+  "difficulty": "easy",
+  "sourceFile": "0873.json"
+}

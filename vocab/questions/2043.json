@@ -1,0 +1,15 @@
+{
+  "id": 2043,
+  "word": "Winnow",
+  "question": "Winnow",
+  "options": [
+    "Mental calmness in a difficult situation",
+    "Relevant to a subject under consideration",
+    "The act of freeing someone",
+    "To reduce to remove unwanted elements"
+  ],
+  "answerOption": "D",
+  "answerText": "To reduce to remove unwanted elements",
+  "difficulty": "hard",
+  "sourceFile": "2043.json"
+}

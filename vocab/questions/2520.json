@@ -1,0 +1,15 @@
+{
+  "id": 2520,
+  "word": "AEROMANCY",
+  "question": "AEROMANCY",
+  "options": [
+    "Exposed to or mixed with air",
+    "Producing offspring or vegetation abundantly",
+    "Referring to sexual matters in a humorous way",
+    "Divination by air and weather"
+  ],
+  "answerOption": "D",
+  "answerText": "Divination by air and weather",
+  "difficulty": "hard",
+  "sourceFile": "2520.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2338,
+  "word": "Aerodynamics",
+  "question": "Aerodynamics",
+  "options": [
+    "To publicly criticize using ridicule",
+    "Science of air flow and forces",
+    "A person with a casual interest in an art",
+    "Relating to divination by air"
+  ],
+  "answerOption": "B",
+  "answerText": "Science of air flow and forces",
+  "difficulty": "hard",
+  "sourceFile": "2338.json"
+}

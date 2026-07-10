@@ -1,0 +1,15 @@
+{
+  "id": 2462,
+  "word": "Derecho",
+  "question": "Derecho",
+  "options": [
+    "Relating to or suitable for breakfast",
+    "Relating to heaven or the sky",
+    "A particular philosophy or view of life",
+    "A widespread long-lived windstorm"
+  ],
+  "answerOption": "D",
+  "answerText": "A widespread long-lived windstorm",
+  "difficulty": "extra-hard",
+  "sourceFile": "2462.json"
+}

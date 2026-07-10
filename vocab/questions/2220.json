@@ -1,0 +1,15 @@
+{
+  "id": 2220,
+  "word": "Gossamer",
+  "question": "Gossamer",
+  "options": [
+    "The emergence of a baby from womb",
+    "In an adverse manner",
+    "Permission to graduate without examination",
+    "A fine, filmy substance; something very light"
+  ],
+  "answerOption": "D",
+  "answerText": "A fine, filmy substance; something very light",
+  "difficulty": "hard",
+  "sourceFile": "2220.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 120,
+  "word": "Peaceful",
+  "question": "Peaceful",
+  "options": [
+    "Of great importance; critical",
+    "To cause someone to feel sudden wonder",
+    "Using imagination to create new things",
+    "Free from disturbance; tranquil"
+  ],
+  "answerOption": "D",
+  "answerText": "Free from disturbance; tranquil",
+  "difficulty": "easy",
+  "sourceFile": "0120.json"
+}

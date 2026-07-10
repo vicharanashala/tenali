@@ -1,0 +1,15 @@
+{
+  "id": 2113,
+  "word": "Aerobic",
+  "question": "Aerobic",
+  "options": [
+    "A wild ox of central Asia",
+    "A Roman imperial treasury",
+    "An air-powered projection device",
+    "Requiring air to survive"
+  ],
+  "answerOption": "D",
+  "answerText": "Requiring air to survive",
+  "difficulty": "hard",
+  "sourceFile": "2113.json"
+}

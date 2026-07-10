@@ -1,0 +1,15 @@
+{
+  "id": 178,
+  "word": "Borrow",
+  "question": "Borrow",
+  "options": [
+    "Having a pleasant taste",
+    "To examine similarities and differences",
+    "To become or make smaller in size",
+    "To take and use something temporarily"
+  ],
+  "answerOption": "D",
+  "answerText": "To take and use something temporarily",
+  "difficulty": "easy",
+  "sourceFile": "0178.json"
+}

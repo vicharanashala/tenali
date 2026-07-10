@@ -1,0 +1,15 @@
+{
+  "id": 554,
+  "word": "Volunteer",
+  "question": "Volunteer",
+  "options": [
+    "Required by law or rule; mandatory",
+    "Very cold in temperature",
+    "To freely offer to do something",
+    "Insufficient for the demand; in short supply"
+  ],
+  "answerOption": "C",
+  "answerText": "To freely offer to do something",
+  "difficulty": "easy",
+  "sourceFile": "0554.json"
+}

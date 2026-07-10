@@ -1,0 +1,15 @@
+{
+  "id": 821,
+  "word": "Obscure",
+  "question": "Obscure",
+  "options": [
+    "Not discovered or known about",
+    "To manage or guide the operations of something",
+    "To keep something for future use",
+    "Morally right and justifiable"
+  ],
+  "answerOption": "A",
+  "answerText": "Not discovered or known about",
+  "difficulty": "easy",
+  "sourceFile": "0821.json"
+}

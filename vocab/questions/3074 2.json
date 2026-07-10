@@ -1,0 +1,15 @@
+{
+  "id": 3074,
+  "word": "Abundtest",
+  "question": "Abundtest",
+  "options": [
+    "A variant spelling of abyss",
+    "Foot structure of abyss creature",
+    "The state of physical or mental weariness",
+    "Most abundant or plentiful"
+  ],
+  "answerOption": "D",
+  "answerText": "Most abundant or plentiful",
+  "difficulty": "extra-hard",
+  "sourceFile": "3074.json"
+}

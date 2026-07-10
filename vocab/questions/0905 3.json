@@ -1,0 +1,15 @@
+{
+  "id": 905,
+  "word": "Bounded",
+  "question": "Bounded",
+  "options": [
+    "Absolutely necessary; extremely important",
+    "To carry out a careful examination",
+    "To inspect something in detail",
+    "Restricted within limits"
+  ],
+  "answerOption": "D",
+  "answerText": "Restricted within limits",
+  "difficulty": "easy",
+  "sourceFile": "0905.json"
+}

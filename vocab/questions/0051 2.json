@@ -1,0 +1,15 @@
+{
+  "id": 51,
+  "word": "Perfunctory",
+  "question": "Perfunctory",
+  "options": [
+    "Indicating a good chance of success; favorable",
+    "Proceeding in a harmful way that is hard to notice",
+    "Carried out with minimum effort or care",
+    "Stubbornly resistant to authority or control"
+  ],
+  "answerOption": "C",
+  "answerText": "Carried out with minimum effort or care",
+  "difficulty": "extra-hard",
+  "sourceFile": "0051.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1081,
+  "word": "Jubilation",
+  "question": "Jubilation",
+  "options": [
+    "Given to or characterized by quarreling",
+    "Clear and easy to understand",
+    "To conclude by reasoning",
+    "A feeling of great happiness and triumph"
+  ],
+  "answerOption": "D",
+  "answerText": "A feeling of great happiness and triumph",
+  "difficulty": "medium",
+  "sourceFile": "1081.json"
+}

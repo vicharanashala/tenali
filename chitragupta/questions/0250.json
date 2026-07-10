@@ -1,0 +1,14 @@
+{
+  "id": 250,
+  "question": "What is the process by which plants lose water vapor through leaves called?",
+  "options": [
+    "Photosynthesis",
+    "Respiration",
+    "Transpiration",
+    "Germination"
+  ],
+  "answerOption": "C",
+  "answerText": "Transpiration",
+  "genre": "science",
+  "sourceFile": "0250.json"
+}

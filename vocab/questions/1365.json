@@ -1,0 +1,15 @@
+{
+  "id": 1365,
+  "word": "Deign",
+  "question": "Deign",
+  "options": [
+    "To do something one considers beneath oneself",
+    "Something greatly desired or needed",
+    "Corrupt or able to be bribed",
+    "Never done or known before"
+  ],
+  "answerOption": "A",
+  "answerText": "To do something one considers beneath oneself",
+  "difficulty": "medium",
+  "sourceFile": "1365.json"
+}

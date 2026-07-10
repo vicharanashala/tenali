@@ -1,0 +1,15 @@
+{
+  "id": 235,
+  "word": "Disturb",
+  "question": "Disturb",
+  "options": [
+    "Full of energy and enthusiasm",
+    "To interfere with the peace of someone",
+    "Having an excessively high opinion of oneself",
+    "Feeling strong displeasure or hostility"
+  ],
+  "answerOption": "B",
+  "answerText": "To interfere with the peace of someone",
+  "difficulty": "easy",
+  "sourceFile": "0235.json"
+}

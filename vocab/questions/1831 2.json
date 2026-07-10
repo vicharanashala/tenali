@@ -1,0 +1,15 @@
+{
+  "id": 1831,
+  "word": "Subterfuge",
+  "question": "Subterfuge",
+  "options": [
+    "A substance that adulterates",
+    "Lacking a plan or purpose; random",
+    "Deceit used to achieve one's goal",
+    "A person who tells stories in a skillful way"
+  ],
+  "answerOption": "C",
+  "answerText": "Deceit used to achieve one's goal",
+  "difficulty": "hard",
+  "sourceFile": "1831.json"
+}

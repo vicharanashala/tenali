@@ -1,0 +1,15 @@
+{
+  "id": 3031,
+  "word": "Tsundoku",
+  "question": "Tsundoku",
+  "options": [
+    "Acquiring books but letting them pile up unread",
+    "In non-literal speech",
+    "A quality of coziness creating contentment",
+    "Plural of abetment"
+  ],
+  "answerOption": "A",
+  "answerText": "Acquiring books but letting them pile up unread",
+  "difficulty": "extra-hard",
+  "sourceFile": "3031.json"
+}

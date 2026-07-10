@@ -1,0 +1,14 @@
+{
+  "id": 295,
+  "question": "Which instrument is used to see distant objects in space?",
+  "options": [
+    "Microscope",
+    "Telescope",
+    "Stethoscope",
+    "Periscope"
+  ],
+  "answerOption": "B",
+  "answerText": "Telescope",
+  "genre": "mixed",
+  "sourceFile": "0295.json"
+}

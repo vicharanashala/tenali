@@ -1,0 +1,15 @@
+{
+  "id": 587,
+  "word": "Rigid",
+  "question": "Rigid",
+  "options": [
+    "To present something for acceptance",
+    "Occurring from time to time",
+    "To live in or occupy a place",
+    "Unable to bend or be changed easily"
+  ],
+  "answerOption": "D",
+  "answerText": "Unable to bend or be changed easily",
+  "difficulty": "easy",
+  "sourceFile": "0587.json"
+}

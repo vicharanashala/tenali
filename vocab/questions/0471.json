@@ -1,0 +1,15 @@
+{
+  "id": 471,
+  "word": "Summarize",
+  "question": "Summarize",
+  "options": [
+    "Causing extreme fear or suffering",
+    "To withdraw from a position",
+    "To give a brief statement of main points",
+    "Relating to the region near the equator"
+  ],
+  "answerOption": "C",
+  "answerText": "To give a brief statement of main points",
+  "difficulty": "easy",
+  "sourceFile": "0471.json"
+}

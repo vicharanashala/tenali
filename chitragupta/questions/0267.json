@@ -1,0 +1,14 @@
+{
+  "id": 267,
+  "question": "Which desert is located in India and Pakistan?",
+  "options": [
+    "Sahara",
+    "Thar",
+    "Gobi",
+    "Atacama"
+  ],
+  "answerOption": "B",
+  "answerText": "Thar",
+  "genre": "india-gk",
+  "sourceFile": "0267.json"
+}

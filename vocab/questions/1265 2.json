@@ -1,0 +1,15 @@
+{
+  "id": 1265,
+  "word": "Kindred",
+  "question": "Kindred",
+  "options": [
+    "Intended to gain goodwill or reduce hostility",
+    "Making a loud, confused noise",
+    "Pressing; demanding immediate attention",
+    "Similar in kind; related"
+  ],
+  "answerOption": "D",
+  "answerText": "Similar in kind; related",
+  "difficulty": "hard",
+  "sourceFile": "1265.json"
+}

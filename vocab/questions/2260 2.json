@@ -1,0 +1,15 @@
+{
+  "id": 2260,
+  "word": "AEROTHERAPEUTICS",
+  "question": "AEROTHERAPEUTICS",
+  "options": [
+    "Medical use of air",
+    "To alternate between different opinions",
+    "A prefix meaning other or different",
+    "Intended to gain goodwill or reduce hostility"
+  ],
+  "answerOption": "A",
+  "answerText": "Medical use of air",
+  "difficulty": "hard",
+  "sourceFile": "2260.json"
+}

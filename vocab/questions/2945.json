@@ -1,0 +1,15 @@
+{
+  "id": 2945,
+  "word": "Verification",
+  "question": "Verification",
+  "options": [
+    "The action of corroborating something",
+    "The action of verifying something",
+    "Cheerful and full of energy",
+    "Far along in development or progress"
+  ],
+  "answerOption": "B",
+  "answerText": "The action of verifying something",
+  "difficulty": "hard",
+  "sourceFile": "2945.json"
+}

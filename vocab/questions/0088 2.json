@@ -1,0 +1,15 @@
+{
+  "id": 88,
+  "word": "Heavy",
+  "question": "Heavy",
+  "options": [
+    "To cause someone to lose confidence",
+    "To move or act with great speed",
+    "To refuse to take notice of something",
+    "Of great weight; difficult to lift"
+  ],
+  "answerOption": "D",
+  "answerText": "Of great weight; difficult to lift",
+  "difficulty": "easy",
+  "sourceFile": "0088.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 643,
+  "word": "Gifted",
+  "question": "Gifted",
+  "options": [
+    "To take the place of something",
+    "To greatly surprise someone",
+    "To discover the presence of something hidden",
+    "Having exceptional natural ability"
+  ],
+  "answerOption": "D",
+  "answerText": "Having exceptional natural ability",
+  "difficulty": "easy",
+  "sourceFile": "0643.json"
+}

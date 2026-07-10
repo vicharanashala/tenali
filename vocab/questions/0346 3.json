@@ -1,0 +1,15 @@
+{
+  "id": 346,
+  "word": "Explore",
+  "question": "Explore",
+  "options": [
+    "Lacking consideration for other people",
+    "To travel through an unfamiliar area to learn about it",
+    "To welcome someone with particular words",
+    "Not based on or acting on fairness"
+  ],
+  "answerOption": "B",
+  "answerText": "To travel through an unfamiliar area to learn about it",
+  "difficulty": "easy",
+  "sourceFile": "0346.json"
+}

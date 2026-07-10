@@ -1,0 +1,15 @@
+{
+  "id": 744,
+  "word": "Aquatic",
+  "question": "Aquatic",
+  "options": [
+    "Of great width between opposite sides",
+    "To grow and develop well",
+    "To delight someone greatly",
+    "Relating to or living in water"
+  ],
+  "answerOption": "D",
+  "answerText": "Relating to or living in water",
+  "difficulty": "easy",
+  "sourceFile": "0744.json"
+}

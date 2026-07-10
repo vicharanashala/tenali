@@ -1,0 +1,15 @@
+{
+  "id": 904,
+  "word": "Trapped",
+  "question": "Trapped",
+  "options": [
+    "To cause someone to believe something",
+    "Of extreme force or strength",
+    "Caught in a place unable to escape",
+    "To join or link things together"
+  ],
+  "answerOption": "C",
+  "answerText": "Caught in a place unable to escape",
+  "difficulty": "easy",
+  "sourceFile": "0904.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 147,
+  "word": "Refuse",
+  "question": "Refuse",
+  "options": [
+    "To honor a special occasion with festivities",
+    "To need something as necessary",
+    "To say that you will not do something",
+    "To move forward in a purposeful way"
+  ],
+  "answerOption": "C",
+  "answerText": "To say that you will not do something",
+  "difficulty": "easy",
+  "sourceFile": "0147.json"
+}

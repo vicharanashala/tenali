@@ -1,0 +1,15 @@
+{
+  "id": 389,
+  "word": "Fade",
+  "question": "Fade",
+  "options": [
+    "To tell someone you will definitely do something",
+    "Calm and not easily disturbed",
+    "Having limits or bounds",
+    "To gradually grow faint and disappear"
+  ],
+  "answerOption": "D",
+  "answerText": "To gradually grow faint and disappear",
+  "difficulty": "easy",
+  "sourceFile": "0389.json"
+}

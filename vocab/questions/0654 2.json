@@ -1,0 +1,15 @@
+{
+  "id": 654,
+  "word": "Lengthy",
+  "question": "Lengthy",
+  "options": [
+    "To cause strong feelings of enthusiasm",
+    "To live in a particular place",
+    "Of considerable or unusual duration",
+    "To devote time or effort to a purpose"
+  ],
+  "answerOption": "C",
+  "answerText": "Of considerable or unusual duration",
+  "difficulty": "easy",
+  "sourceFile": "0654.json"
+}

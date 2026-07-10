@@ -1,0 +1,15 @@
+{
+  "id": 498,
+  "word": "Navigate",
+  "question": "Navigate",
+  "options": [
+    "Made by chemical processes; not natural",
+    "To put forward an idea for consideration",
+    "To find the way to a destination",
+    "Typical or ordinary; not remarkable"
+  ],
+  "answerOption": "C",
+  "answerText": "To find the way to a destination",
+  "difficulty": "easy",
+  "sourceFile": "0498.json"
+}

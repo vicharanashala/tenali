@@ -1,0 +1,15 @@
+{
+  "id": 2025,
+  "word": "Ephemeral",
+  "question": "Ephemeral",
+  "options": [
+    "Lasting for a very short time",
+    "The action of making pregnant",
+    "Exposed to or mixed with air",
+    "A false or distorted representation"
+  ],
+  "answerOption": "A",
+  "answerText": "Lasting for a very short time",
+  "difficulty": "hard",
+  "sourceFile": "2025.json"
+}

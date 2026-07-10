@@ -1,0 +1,15 @@
+{
+  "id": 251,
+  "word": "Escape",
+  "question": "Escape",
+  "options": [
+    "To give authorization for something",
+    "To break free from confinement",
+    "To cut into thin flat pieces",
+    "Treating people equally without favoritism"
+  ],
+  "answerOption": "B",
+  "answerText": "To break free from confinement",
+  "difficulty": "easy",
+  "sourceFile": "0251.json"
+}

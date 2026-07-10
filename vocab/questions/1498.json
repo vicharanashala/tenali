@@ -1,0 +1,15 @@
+{
+  "id": 1498,
+  "word": "Depositor",
+  "question": "Depositor",
+  "options": [
+    "Wishing to do what is right",
+    "To do a favor or act of kindness",
+    "A person who deposits money",
+    "Having a friendly and pleasant manner"
+  ],
+  "answerOption": "C",
+  "answerText": "A person who deposits money",
+  "difficulty": "medium",
+  "sourceFile": "1498.json"
+}

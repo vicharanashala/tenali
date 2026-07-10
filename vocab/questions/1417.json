@@ -1,0 +1,15 @@
+{
+  "id": 1417,
+  "word": "Demonstrate",
+  "question": "Demonstrate",
+  "options": [
+    "Made or occurring without plan",
+    "Wanted or wished for",
+    "To show or prove something",
+    "A thing that spoils or damages something"
+  ],
+  "answerOption": "C",
+  "answerText": "To show or prove something",
+  "difficulty": "medium",
+  "sourceFile": "1417.json"
+}

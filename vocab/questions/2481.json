@@ -1,0 +1,15 @@
+{
+  "id": 2481,
+  "word": "Aerochamber",
+  "question": "Aerochamber",
+  "options": [
+    "The quality of being apparent",
+    "A chamber with compressed air",
+    "Guidance or recommendations offered",
+    "Unfortunate and deserving of pity"
+  ],
+  "answerOption": "B",
+  "answerText": "A chamber with compressed air",
+  "difficulty": "hard",
+  "sourceFile": "2481.json"
+}

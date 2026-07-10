@@ -1,0 +1,14 @@
+{
+  "id": 832,
+  "question": "Which organ in the body helps in balance?",
+  "options": [
+    "Ear",
+    "Nose",
+    "Tongue",
+    "Skin"
+  ],
+  "answerOption": "A",
+  "answerText": "Ear",
+  "genre": "science",
+  "sourceFile": "0832.json"
+}

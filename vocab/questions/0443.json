@@ -1,0 +1,15 @@
+{
+  "id": 443,
+  "word": "Sort",
+  "question": "Sort",
+  "options": [
+    "Thin and light in construction",
+    "To run away from a place of danger",
+    "To keep doing something without stopping",
+    "To arrange systematically into groups"
+  ],
+  "answerOption": "D",
+  "answerText": "To arrange systematically into groups",
+  "difficulty": "easy",
+  "sourceFile": "0443.json"
+}

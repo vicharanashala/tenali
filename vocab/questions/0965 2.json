@@ -1,0 +1,15 @@
+{
+  "id": 965,
+  "word": "Robust",
+  "question": "Robust",
+  "options": [
+    "The quality of being thankful",
+    "To clear someone of blame or suspicion",
+    "Strong and healthy; vigorous",
+    "Easily persuaded to believe something"
+  ],
+  "answerOption": "C",
+  "answerText": "Strong and healthy; vigorous",
+  "difficulty": "medium",
+  "sourceFile": "0965.json"
+}

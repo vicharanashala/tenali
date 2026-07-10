@@ -1,0 +1,15 @@
+{
+  "id": 2648,
+  "word": "Inescapable",
+  "question": "Inescapable",
+  "options": [
+    "A poisonous air substance",
+    "Having a strong tendency to seek revenge",
+    "The study of diseases and their classification",
+    "Unable to be avoided or escaped"
+  ],
+  "answerOption": "D",
+  "answerText": "Unable to be avoided or escaped",
+  "difficulty": "hard",
+  "sourceFile": "2648.json"
+}

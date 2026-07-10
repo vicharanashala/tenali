@@ -1,0 +1,15 @@
+{
+  "id": 500,
+  "word": "Trek",
+  "question": "Trek",
+  "options": [
+    "To arouse the curiosity of someone",
+    "Of or at a low temperature",
+    "To gather a crop from the fields",
+    "To make a long and difficult journey"
+  ],
+  "answerOption": "D",
+  "answerText": "To make a long and difficult journey",
+  "difficulty": "easy",
+  "sourceFile": "0500.json"
+}

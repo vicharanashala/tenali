@@ -1,0 +1,15 @@
+{
+  "id": 1736,
+  "word": "Bourgeois",
+  "question": "Bourgeois",
+  "options": [
+    "A feeling of fear about something",
+    "The action of killing a king",
+    "Belonging to the middle class",
+    "Not telling the truth; lying"
+  ],
+  "answerOption": "C",
+  "answerText": "Belonging to the middle class",
+  "difficulty": "hard",
+  "sourceFile": "1736.json"
+}

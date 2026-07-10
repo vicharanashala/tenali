@@ -1,0 +1,15 @@
+{
+  "id": 1242,
+  "word": "Grandeur",
+  "question": "Grandeur",
+  "options": [
+    "The point on which a lever rests",
+    "Having a strong tendency to seek revenge",
+    "Splendor and impressiveness of appearance",
+    "In a state of quietness; inactive"
+  ],
+  "answerOption": "C",
+  "answerText": "Splendor and impressiveness of appearance",
+  "difficulty": "hard",
+  "sourceFile": "1242.json"
+}

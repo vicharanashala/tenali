@@ -1,0 +1,15 @@
+{
+  "id": 2086,
+  "word": "Dissemble",
+  "question": "Dissemble",
+  "options": [
+    "Using different words to say the same thing",
+    "Having or showing great knowledge",
+    "Of the nature of a riddle",
+    "To conceal one's true motives or feelings"
+  ],
+  "answerOption": "D",
+  "answerText": "To conceal one's true motives or feelings",
+  "difficulty": "hard",
+  "sourceFile": "2086.json"
+}

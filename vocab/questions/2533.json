@@ -1,0 +1,15 @@
+{
+  "id": 2533,
+  "word": "AERONAUTIC",
+  "question": "AERONAUTIC",
+  "options": [
+    "Relating to aromatic air",
+    "Science of air flow and forces",
+    "Relating to air navigation",
+    "A statement or explanation"
+  ],
+  "answerOption": "C",
+  "answerText": "Relating to air navigation",
+  "difficulty": "hard",
+  "sourceFile": "2533.json"
+}

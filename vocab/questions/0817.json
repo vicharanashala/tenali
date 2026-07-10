@@ -1,0 +1,15 @@
+{
+  "id": 817,
+  "word": "Vague",
+  "question": "Vague",
+  "options": [
+    "To send someone away or allow them to leave",
+    "Not clearly expressed or understood",
+    "Feeling strong displeasure or hostility",
+    "To protect from attack or danger"
+  ],
+  "answerOption": "B",
+  "answerText": "Not clearly expressed or understood",
+  "difficulty": "easy",
+  "sourceFile": "0817.json"
+}

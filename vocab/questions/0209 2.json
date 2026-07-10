@@ -1,0 +1,15 @@
+{
+  "id": 209,
+  "word": "Decrease",
+  "question": "Decrease",
+  "options": [
+    "To become smaller or fewer in amount",
+    "To freely offer to do something",
+    "Having an exaggerated sense of importance",
+    "To put a hand or finger on something"
+  ],
+  "answerOption": "A",
+  "answerText": "To become smaller or fewer in amount",
+  "difficulty": "easy",
+  "sourceFile": "0209.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 798,
+  "question": "What is the SI unit of plane angle?",
+  "options": [
+    "degree",
+    "radian",
+    "steradian",
+    "metre"
+  ],
+  "answerOption": "B",
+  "answerText": "radian",
+  "genre": "mixed",
+  "sourceFile": "0798.json"
+}

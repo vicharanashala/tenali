@@ -1,0 +1,15 @@
+{
+  "id": 1584,
+  "word": "Desert",
+  "question": "Desert",
+  "options": [
+    "A hot dry area of land with little vegetation",
+    "Diligent and careful in work",
+    "To regard or consider in a specified way",
+    "Instructed or commanded to do"
+  ],
+  "answerOption": "A",
+  "answerText": "A hot dry area of land with little vegetation",
+  "difficulty": "medium",
+  "sourceFile": "1584.json"
+}

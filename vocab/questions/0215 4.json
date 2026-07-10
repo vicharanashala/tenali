@@ -1,0 +1,15 @@
+{
+  "id": 215,
+  "word": "Fail",
+  "question": "Fail",
+  "options": [
+    "To perceive the scent of something",
+    "To be unsuccessful in achieving a goal",
+    "In need of sleep or rest",
+    "Having no special features; normal"
+  ],
+  "answerOption": "B",
+  "answerText": "To be unsuccessful in achieving a goal",
+  "difficulty": "easy",
+  "sourceFile": "0215.json"
+}

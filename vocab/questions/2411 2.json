@@ -1,0 +1,15 @@
+{
+  "id": 2411,
+  "word": "Selcouth",
+  "question": "Selcouth",
+  "options": [
+    "A deviation from normal pattern",
+    "Unfamiliar, rare, strange, and yet marvelous",
+    "In an abject way",
+    "Plural of abjurement"
+  ],
+  "answerOption": "B",
+  "answerText": "Unfamiliar, rare, strange, and yet marvelous",
+  "difficulty": "extra-hard",
+  "sourceFile": "2411.json"
+}

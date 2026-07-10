@@ -1,0 +1,15 @@
+{
+  "id": 670,
+  "word": "Abundant",
+  "question": "Abundant",
+  "options": [
+    "Morally right and justifiable",
+    "Causing death",
+    "Existing in very large quantities",
+    "Free from tension and anxiety"
+  ],
+  "answerOption": "C",
+  "answerText": "Existing in very large quantities",
+  "difficulty": "easy",
+  "sourceFile": "0670.json"
+}

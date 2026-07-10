@@ -1,0 +1,15 @@
+{
+  "id": 204,
+  "word": "Gather",
+  "question": "Gather",
+  "options": [
+    "To move or act with great speed",
+    "To collect things from different places",
+    "Easily perceived or understood",
+    "Not supporting either side in a conflict"
+  ],
+  "answerOption": "B",
+  "answerText": "To collect things from different places",
+  "difficulty": "easy",
+  "sourceFile": "0204.json"
+}

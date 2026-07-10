@@ -1,0 +1,15 @@
+{
+  "id": 121,
+  "word": "Loyal",
+  "question": "Loyal",
+  "options": [
+    "Giving constant support to a person",
+    "To move downward from a higher point",
+    "Done with the hands; requiring human effort",
+    "Having a sharp, unpleasant taste"
+  ],
+  "answerOption": "A",
+  "answerText": "Giving constant support to a person",
+  "difficulty": "easy",
+  "sourceFile": "0121.json"
+}

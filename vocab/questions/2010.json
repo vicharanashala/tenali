@@ -1,0 +1,15 @@
+{
+  "id": 2010,
+  "word": "Nefarious",
+  "question": "Nefarious",
+  "options": [
+    "Wicked or criminal in nature",
+    "A state of physical or mental weariness",
+    "The action of uncovering something",
+    "A poisonous air substance"
+  ],
+  "answerOption": "A",
+  "answerText": "Wicked or criminal in nature",
+  "difficulty": "hard",
+  "sourceFile": "2010.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 3023,
+  "word": "Absconding",
+  "question": "Absconding",
+  "options": [
+    "A student graduating",
+    "The quality of being abject",
+    "To cleanse or purify",
+    "Leaving secretly to avoid detection"
+  ],
+  "answerOption": "D",
+  "answerText": "Leaving secretly to avoid detection",
+  "difficulty": "extra-hard",
+  "sourceFile": "3023.json"
+}

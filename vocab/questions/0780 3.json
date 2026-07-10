@@ -1,0 +1,15 @@
+{
+  "id": 780,
+  "word": "Artificial",
+  "question": "Artificial",
+  "options": [
+    "To make someone feel happy or satisfied",
+    "Able to be seen",
+    "Not decorated or elaborate; simple",
+    "Made by human skill; not natural"
+  ],
+  "answerOption": "D",
+  "answerText": "Made by human skill; not natural",
+  "difficulty": "easy",
+  "sourceFile": "0780.json"
+}

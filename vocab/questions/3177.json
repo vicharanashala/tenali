@@ -1,0 +1,15 @@
+{
+  "id": 3177,
+  "word": "Rhabdomancy",
+  "question": "Rhabdomancy",
+  "options": [
+    "Burned or scorched",
+    "Divination using a rod or wand",
+    "In non-literary manner",
+    "A situation where any move will worsen one's position"
+  ],
+  "answerOption": "B",
+  "answerText": "Divination using a rod or wand",
+  "difficulty": "extra-hard",
+  "sourceFile": "3177.json"
+}

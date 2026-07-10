@@ -1,0 +1,15 @@
+{
+  "id": 174,
+  "word": "Whisper",
+  "question": "Whisper",
+  "options": [
+    "Noticeably happy and optimistic",
+    "Giving constant support to a person",
+    "To speak very softly using the breath",
+    "To share information with others"
+  ],
+  "answerOption": "C",
+  "answerText": "To speak very softly using the breath",
+  "difficulty": "easy",
+  "sourceFile": "0174.json"
+}

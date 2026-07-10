@@ -1,0 +1,15 @@
+{
+  "id": 2103,
+  "word": "Adorably",
+  "question": "Adorably",
+  "options": [
+    "A deep valley with steep cliff walls",
+    "Outstandingly bad; shocking",
+    "Callousness and lack of compassion",
+    "In an adorable manner"
+  ],
+  "answerOption": "D",
+  "answerText": "In an adorable manner",
+  "difficulty": "hard",
+  "sourceFile": "2103.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 112,
+  "word": "Sharp",
+  "question": "Sharp",
+  "options": [
+    "Having a high amount of moisture in the air",
+    "To give something to help achieve a goal",
+    "Having an edge able to cut or pierce",
+    "Happening by chance; unintentional"
+  ],
+  "answerOption": "C",
+  "answerText": "Having an edge able to cut or pierce",
+  "difficulty": "easy",
+  "sourceFile": "0112.json"
+}

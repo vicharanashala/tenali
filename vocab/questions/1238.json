@@ -1,0 +1,15 @@
+{
+  "id": 1238,
+  "word": "Innocuous",
+  "question": "Innocuous",
+  "options": [
+    "Performed without planning or prompting",
+    "Easily persuaded to believe something",
+    "A place for storage of goods",
+    "Not harmful or offensive"
+  ],
+  "answerOption": "D",
+  "answerText": "Not harmful or offensive",
+  "difficulty": "medium",
+  "sourceFile": "1238.json"
+}

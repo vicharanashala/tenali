@@ -1,0 +1,15 @@
+{
+  "id": 309,
+  "word": "Thank",
+  "question": "Thank",
+  "options": [
+    "More than is necessary or normal",
+    "Relating to or resembling the moon",
+    "To express gratitude to someone",
+    "Happening or done at once"
+  ],
+  "answerOption": "C",
+  "answerText": "To express gratitude to someone",
+  "difficulty": "easy",
+  "sourceFile": "0309.json"
+}

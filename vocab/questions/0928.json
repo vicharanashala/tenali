@@ -1,0 +1,15 @@
+{
+  "id": 928,
+  "word": "Lavish",
+  "question": "Lavish",
+  "options": [
+    "Lively and full of spirit",
+    "To pledge to carry out a course of action",
+    "To give something to help achieve a goal",
+    "Luxuriously expensive or rich"
+  ],
+  "answerOption": "D",
+  "answerText": "Luxuriously expensive or rich",
+  "difficulty": "easy",
+  "sourceFile": "0928.json"
+}

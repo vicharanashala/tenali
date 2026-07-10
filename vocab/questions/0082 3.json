@@ -1,0 +1,15 @@
+{
+  "id": 82,
+  "word": "Fresh",
+  "question": "Fresh",
+  "options": [
+    "Recently made or obtained; not stale",
+    "Free from disturbance; tranquil",
+    "Solid, firm, and rigid; not easily broken",
+    "Very full of people or things"
+  ],
+  "answerOption": "A",
+  "answerText": "Recently made or obtained; not stale",
+  "difficulty": "easy",
+  "sourceFile": "0082.json"
+}

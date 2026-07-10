@@ -1,0 +1,15 @@
+{
+  "id": 1037,
+  "word": "Nimble",
+  "question": "Nimble",
+  "options": [
+    "Extremely unpleasant or offensive",
+    "The latest fashion or style",
+    "Quick and light in movement",
+    "Permanently disabled or injured"
+  ],
+  "answerOption": "C",
+  "answerText": "Quick and light in movement",
+  "difficulty": "medium",
+  "sourceFile": "1037.json"
+}

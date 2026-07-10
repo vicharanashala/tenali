@@ -1,0 +1,15 @@
+{
+  "id": 2627,
+  "word": "Mitigation",
+  "question": "Mitigation",
+  "options": [
+    "The action of reducing in size or intensity",
+    "Something reused but still bearing traces of its earlier form",
+    "The action of making less severe",
+    "Kept secret because it would not be approved"
+  ],
+  "answerOption": "C",
+  "answerText": "The action of making less severe",
+  "difficulty": "hard",
+  "sourceFile": "2627.json"
+}

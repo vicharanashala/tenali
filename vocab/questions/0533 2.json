@@ -1,0 +1,15 @@
+{
+  "id": 533,
+  "word": "Criticize",
+  "question": "Criticize",
+  "options": [
+    "To become liquid through heating",
+    "Having received a good education",
+    "To make something previously hidden visible",
+    "To point out the faults of something"
+  ],
+  "answerOption": "D",
+  "answerText": "To point out the faults of something",
+  "difficulty": "easy",
+  "sourceFile": "0533.json"
+}

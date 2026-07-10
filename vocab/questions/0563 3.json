@@ -1,0 +1,15 @@
+{
+  "id": 563,
+  "word": "Overwhelm",
+  "question": "Overwhelm",
+  "options": [
+    "Of great extent from side to side",
+    "To make sounds showing amusement",
+    "To have a strong emotional effect on someone",
+    "A long journey by sea or space"
+  ],
+  "answerOption": "C",
+  "answerText": "To have a strong emotional effect on someone",
+  "difficulty": "easy",
+  "sourceFile": "0563.json"
+}

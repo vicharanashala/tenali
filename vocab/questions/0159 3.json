@@ -1,0 +1,15 @@
+{
+  "id": 159,
+  "word": "Depart",
+  "question": "Depart",
+  "options": [
+    "Giving off light; bright or shining",
+    "To leave a place",
+    "Not even or balanced in shape",
+    "To examine and make corrections to something"
+  ],
+  "answerOption": "B",
+  "answerText": "To leave a place",
+  "difficulty": "easy",
+  "sourceFile": "0159.json"
+}

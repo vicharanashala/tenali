@@ -1,0 +1,15 @@
+{
+  "id": 2403,
+  "word": "Threnody",
+  "question": "Threnody",
+  "options": [
+    "A state of agony caused by sudden awareness of one's misery",
+    "A song of mourning for the dead",
+    "Mystic or entrancing in nature",
+    "In an abject way"
+  ],
+  "answerOption": "B",
+  "answerText": "A song of mourning for the dead",
+  "difficulty": "extra-hard",
+  "sourceFile": "2403.json"
+}

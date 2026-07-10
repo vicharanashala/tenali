@@ -1,0 +1,15 @@
+{
+  "id": 2825,
+  "word": "Loyalty",
+  "question": "Loyalty",
+  "options": [
+    "Faithful adherence to a person",
+    "Things for which one is responsible",
+    "The action of improving",
+    "Relating to aromatic air"
+  ],
+  "answerOption": "A",
+  "answerText": "Faithful adherence to a person",
+  "difficulty": "hard",
+  "sourceFile": "2825.json"
+}

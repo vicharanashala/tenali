@@ -1,0 +1,15 @@
+{
+  "id": 2236,
+  "word": "AEROSPHERE",
+  "question": "AEROSPHERE",
+  "options": [
+    "The action of killing a king",
+    "One who travels in air",
+    "An engine powered by air",
+    "The atmosphere or air layer"
+  ],
+  "answerOption": "D",
+  "answerText": "The atmosphere or air layer",
+  "difficulty": "hard",
+  "sourceFile": "2236.json"
+}

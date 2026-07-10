@@ -1,0 +1,15 @@
+{
+  "id": 376,
+  "word": "Touch",
+  "question": "Touch",
+  "options": [
+    "To observe and check progress over time",
+    "Standing out so as to be clearly visible",
+    "To break free from confinement",
+    "To put a hand or finger on something"
+  ],
+  "answerOption": "D",
+  "answerText": "To put a hand or finger on something",
+  "difficulty": "easy",
+  "sourceFile": "0376.json"
+}

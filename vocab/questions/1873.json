@@ -1,0 +1,15 @@
+{
+  "id": 1873,
+  "word": "Dicey",
+  "question": "Dicey",
+  "options": [
+    "Lacking skill or competence",
+    "Risky or uncertain",
+    "The removal of toxins",
+    "Deserving intense dislike"
+  ],
+  "answerOption": "B",
+  "answerText": "Risky or uncertain",
+  "difficulty": "medium",
+  "sourceFile": "1873.json"
+}

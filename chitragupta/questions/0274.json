@@ -1,0 +1,14 @@
+{
+  "id": 274,
+  "question": "Which branch of mathematics deals with shapes, sizes, and properties of space?",
+  "options": [
+    "Algebra",
+    "Geometry",
+    "Calculus",
+    "Statistics"
+  ],
+  "answerOption": "B",
+  "answerText": "Geometry",
+  "genre": "mixed",
+  "sourceFile": "0274.json"
+}

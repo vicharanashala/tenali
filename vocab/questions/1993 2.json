@@ -1,0 +1,15 @@
+{
+  "id": 1993,
+  "word": "Advisor",
+  "question": "Advisor",
+  "options": [
+    "Grimly mocking or cynical",
+    "Relating to air-dependent plants",
+    "In an equal manner or degree",
+    "One who gives advice or counsel"
+  ],
+  "answerOption": "D",
+  "answerText": "One who gives advice or counsel",
+  "difficulty": "hard",
+  "sourceFile": "1993.json"
+}

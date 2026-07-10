@@ -1,0 +1,14 @@
+{
+  "id": 884,
+  "question": "Which country is associated with the city of Ashgabat?",
+  "options": [
+    "Kazakhstan",
+    "Turkmenistan",
+    "Uzbekistan",
+    "Tajikistan"
+  ],
+  "answerOption": "B",
+  "answerText": "Turkmenistan",
+  "genre": "geography",
+  "sourceFile": "0884.json"
+}

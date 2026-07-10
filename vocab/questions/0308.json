@@ -1,0 +1,15 @@
+{
+  "id": 308,
+  "word": "Apologize",
+  "question": "Apologize",
+  "options": [
+    "Not making or accompanied by any sound",
+    "Lesser in importance or seriousness",
+    "To meet the expectations of someone",
+    "To say sorry for doing something wrong"
+  ],
+  "answerOption": "D",
+  "answerText": "To say sorry for doing something wrong",
+  "difficulty": "easy",
+  "sourceFile": "0308.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1942,
+  "word": "Advanced",
+  "question": "Advanced",
+  "options": [
+    "Science of aircraft and flight",
+    "In an adventitious manner",
+    "Mapping from aircraft",
+    "Far along in development or progress"
+  ],
+  "answerOption": "D",
+  "answerText": "Far along in development or progress",
+  "difficulty": "hard",
+  "sourceFile": "1942.json"
+}

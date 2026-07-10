@@ -1,0 +1,15 @@
+{
+  "id": 1955,
+  "word": "Adventuress",
+  "question": "Adventuress",
+  "options": [
+    "To reduce to remove unwanted elements",
+    "A female adventurer",
+    "Dental pain from altitude",
+    "A meteorite with iron core"
+  ],
+  "answerOption": "B",
+  "answerText": "A female adventurer",
+  "difficulty": "hard",
+  "sourceFile": "1955.json"
+}

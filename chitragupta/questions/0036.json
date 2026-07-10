@@ -1,0 +1,14 @@
+{
+  "id": 36,
+  "question": "What is the capital of Bhutan?",
+  "options": [
+    "Madrid",
+    "Thimphu",
+    "Nairobi",
+    "Canberra"
+  ],
+  "answerOption": "B",
+  "answerText": "Thimphu",
+  "genre": "geography",
+  "sourceFile": "0036.json"
+}

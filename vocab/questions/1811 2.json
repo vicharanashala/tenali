@@ -1,0 +1,15 @@
+{
+  "id": 1811,
+  "word": "Oblivion",
+  "question": "Oblivion",
+  "options": [
+    "A substance that adulterates",
+    "Organism response to air",
+    "The state of being unaware of surroundings",
+    "Lacking ease or grace; unsophisticated"
+  ],
+  "answerOption": "C",
+  "answerText": "The state of being unaware of surroundings",
+  "difficulty": "hard",
+  "sourceFile": "1811.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 37,
+  "word": "Safe",
+  "question": "Safe",
+  "options": [
+    "Protected from danger or risk",
+    "Having a great deal to do",
+    "Having the form of a circle",
+    "Able to express oneself easily in a language"
+  ],
+  "answerOption": "A",
+  "answerText": "Protected from danger or risk",
+  "difficulty": "easy",
+  "sourceFile": "0037.json"
+}

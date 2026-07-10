@@ -1,0 +1,15 @@
+{
+  "id": 2011,
+  "word": "Adzuki",
+  "question": "Adzuki",
+  "options": [
+    "A type of small bean",
+    "An instrument for measuring air",
+    "Unreasonably prone to go to law",
+    "Apparently attractive but having no real value"
+  ],
+  "answerOption": "A",
+  "answerText": "A type of small bean",
+  "difficulty": "hard",
+  "sourceFile": "2011.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2262,
+  "word": "AEROTHERAPY",
+  "question": "AEROTHERAPY",
+  "options": [
+    "To make mysterious or obscure",
+    "Something that signals the approach of another",
+    "Medical treatment using air",
+    "A lover of flying or air"
+  ],
+  "answerOption": "C",
+  "answerText": "Medical treatment using air",
+  "difficulty": "hard",
+  "sourceFile": "2262.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 246,
+  "word": "Beg",
+  "question": "Beg",
+  "options": [
+    "Full of energy and enthusiasm",
+    "To ask someone earnestly for something",
+    "Tall and thin in appearance",
+    "Having an excessively high opinion of oneself"
+  ],
+  "answerOption": "B",
+  "answerText": "To ask someone earnestly for something",
+  "difficulty": "easy",
+  "sourceFile": "0246.json"
+}

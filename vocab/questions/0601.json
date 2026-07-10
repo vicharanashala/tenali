@@ -1,0 +1,15 @@
+{
+  "id": 601,
+  "word": "Gorgeous",
+  "question": "Gorgeous",
+  "options": [
+    "Very beautiful or attractive",
+    "To construct something by putting parts together",
+    "To come or go into a place",
+    "Made up of exactly similar parts"
+  ],
+  "answerOption": "A",
+  "answerText": "Very beautiful or attractive",
+  "difficulty": "easy",
+  "sourceFile": "0601.json"
+}

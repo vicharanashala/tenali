@@ -1,0 +1,15 @@
+{
+  "id": 1533,
+  "word": "Myrmecology",
+  "question": "Myrmecology",
+  "options": [
+    "To drain of blood",
+    "The study of ants",
+    "Amputation of the body below the waist",
+    "The art of repairing with gold to show beauty in damage"
+  ],
+  "answerOption": "B",
+  "answerText": "The study of ants",
+  "difficulty": "extra-hard",
+  "sourceFile": "1533.json"
+}

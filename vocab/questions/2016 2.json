@@ -1,0 +1,15 @@
+{
+  "id": 2016,
+  "word": "Aecium",
+  "question": "Aecium",
+  "options": [
+    "Wrongdoing by a public official",
+    "The fruiting body producing aeciospore",
+    "Slow to act; intended to cause delay",
+    "Referring to sexual matters in a humorous way"
+  ],
+  "answerOption": "B",
+  "answerText": "The fruiting body producing aeciospore",
+  "difficulty": "hard",
+  "sourceFile": "2016.json"
+}

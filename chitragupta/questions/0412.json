@@ -1,0 +1,14 @@
+{
+  "id": 412,
+  "question": "Which hormone regulates blood sugar levels most directly by lowering them?",
+  "options": [
+    "Adrenaline",
+    "Insulin",
+    "Thyroxine",
+    "Estrogen"
+  ],
+  "answerOption": "B",
+  "answerText": "Insulin",
+  "genre": "science",
+  "sourceFile": "0412.json"
+}

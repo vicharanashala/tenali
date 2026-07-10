@@ -1,0 +1,15 @@
+{
+  "id": 1844,
+  "word": "Suspicious",
+  "question": "Suspicious",
+  "options": [
+    "Friendly and relating to sharing food or drink",
+    "Causing a physical or emotional shock",
+    "Very weak or slight; insubstantial",
+    "Feeling distrust or doubt"
+  ],
+  "answerOption": "D",
+  "answerText": "Feeling distrust or doubt",
+  "difficulty": "medium",
+  "sourceFile": "1844.json"
+}

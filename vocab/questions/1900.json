@@ -1,0 +1,15 @@
+{
+  "id": 1900,
+  "word": "Scornful",
+  "question": "Scornful",
+  "options": [
+    "Expressing disapproval or contempt",
+    "Courage in pain or adversity",
+    "To take away or modify the nature",
+    "Feeling or expressing contempt"
+  ],
+  "answerOption": "D",
+  "answerText": "Feeling or expressing contempt",
+  "difficulty": "medium",
+  "sourceFile": "1900.json"
+}

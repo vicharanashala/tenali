@@ -1,0 +1,15 @@
+{
+  "id": 2633,
+  "word": "Promotion",
+  "question": "Promotion",
+  "options": [
+    "In an adventurous manner",
+    "The act of advising someone",
+    "The action of moving up",
+    "The quality of being clear"
+  ],
+  "answerOption": "C",
+  "answerText": "The action of moving up",
+  "difficulty": "hard",
+  "sourceFile": "2633.json"
+}

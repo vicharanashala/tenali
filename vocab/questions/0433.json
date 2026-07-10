@@ -1,0 +1,15 @@
+{
+  "id": 433,
+  "word": "Lock",
+  "question": "Lock",
+  "options": [
+    "To fasten something with a lock",
+    "Graceful and stylish in appearance",
+    "Acting in the same way over time",
+    "Characterized by conflict or disorder"
+  ],
+  "answerOption": "A",
+  "answerText": "To fasten something with a lock",
+  "difficulty": "easy",
+  "sourceFile": "0433.json"
+}

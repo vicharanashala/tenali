@@ -1,0 +1,15 @@
+{
+  "id": 1213,
+  "word": "Futile",
+  "question": "Futile",
+  "options": [
+    "The quality of being frank and truthful",
+    "About to happen very soon",
+    "Tending to detrude",
+    "Incapable of producing any useful result"
+  ],
+  "answerOption": "D",
+  "answerText": "Incapable of producing any useful result",
+  "difficulty": "medium",
+  "sourceFile": "1213.json"
+}

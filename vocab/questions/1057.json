@@ -1,0 +1,15 @@
+{
+  "id": 1057,
+  "word": "Jeopardize",
+  "question": "Jeopardize",
+  "options": [
+    "Done with excessive speed",
+    "To put something in danger of loss or harm",
+    "To diminish or reduce something",
+    "About to happen very soon"
+  ],
+  "answerOption": "B",
+  "answerText": "To put something in danger of loss or harm",
+  "difficulty": "medium",
+  "sourceFile": "1057.json"
+}

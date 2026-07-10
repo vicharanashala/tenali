@@ -1,0 +1,15 @@
+{
+  "id": 1918,
+  "word": "Amoral",
+  "question": "Amoral",
+  "options": [
+    "A cleansing agent or substance",
+    "Prevented from happening or passing",
+    "To assign responsibility to another person",
+    "Lacking moral sense"
+  ],
+  "answerOption": "D",
+  "answerText": "Lacking moral sense",
+  "difficulty": "medium",
+  "sourceFile": "1918.json"
+}

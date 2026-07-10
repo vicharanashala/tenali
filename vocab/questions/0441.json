@@ -1,0 +1,15 @@
+{
+  "id": 441,
+  "word": "Stack",
+  "question": "Stack",
+  "options": [
+    "Unassuming in the estimation of one's abilities",
+    "To receive money in return for labor",
+    "Very bad or disagreeable",
+    "To arrange things in a neat pile"
+  ],
+  "answerOption": "D",
+  "answerText": "To arrange things in a neat pile",
+  "difficulty": "easy",
+  "sourceFile": "0441.json"
+}

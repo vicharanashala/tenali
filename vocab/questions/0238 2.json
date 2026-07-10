@@ -1,0 +1,15 @@
+{
+  "id": 238,
+  "word": "Reward",
+  "question": "Reward",
+  "options": [
+    "To be in charge of running something",
+    "Feeling dedication to a cause or activity",
+    "To show how something is done",
+    "To give something in return for good behavior"
+  ],
+  "answerOption": "D",
+  "answerText": "To give something in return for good behavior",
+  "difficulty": "easy",
+  "sourceFile": "0238.json"
+}

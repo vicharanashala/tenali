@@ -1,0 +1,15 @@
+{
+  "id": 336,
+  "word": "Compete",
+  "question": "Compete",
+  "options": [
+    "A person who lacks courage",
+    "To express gratitude to someone",
+    "To try to win against other people",
+    "To have the same opinion as someone else"
+  ],
+  "answerOption": "C",
+  "answerText": "To try to win against other people",
+  "difficulty": "easy",
+  "sourceFile": "0336.json"
+}

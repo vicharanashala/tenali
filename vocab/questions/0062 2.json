@@ -1,0 +1,15 @@
+{
+  "id": 62,
+  "word": "Defenestration",
+  "question": "Defenestration",
+  "options": [
+    "The state of being infatuated with another person",
+    "Inability to identify and describe one's emotions",
+    "To change one's loyalties; to be evasive",
+    "The act of throwing someone out of a window"
+  ],
+  "answerOption": "D",
+  "answerText": "The act of throwing someone out of a window",
+  "difficulty": "hardest",
+  "sourceFile": "0062.json"
+}

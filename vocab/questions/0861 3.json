@@ -1,0 +1,15 @@
+{
+  "id": 861,
+  "word": "Average",
+  "question": "Average",
+  "options": [
+    "To grow and develop well",
+    "Having received a good education",
+    "To succeed in doing something",
+    "Typical or ordinary; not remarkable"
+  ],
+  "answerOption": "D",
+  "answerText": "Typical or ordinary; not remarkable",
+  "difficulty": "easy",
+  "sourceFile": "0861.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 302,
+  "word": "Wonder",
+  "question": "Wonder",
+  "options": [
+    "To feel curious about something",
+    "Resulting in good; favorable",
+    "To freely offer to do something",
+    "To manage or guide the operations of something"
+  ],
+  "answerOption": "A",
+  "answerText": "To feel curious about something",
+  "difficulty": "easy",
+  "sourceFile": "0302.json"
+}

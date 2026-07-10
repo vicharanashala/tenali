@@ -1,0 +1,15 @@
+{
+  "id": 278,
+  "word": "Answer",
+  "question": "Answer",
+  "options": [
+    "A response to a question",
+    "Not varying; the same in all cases",
+    "Greatly pleased or entertained",
+    "Lacking flavor or interest"
+  ],
+  "answerOption": "A",
+  "answerText": "A response to a question",
+  "difficulty": "easy",
+  "sourceFile": "0278.json"
+}

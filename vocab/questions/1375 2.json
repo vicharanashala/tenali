@@ -1,0 +1,15 @@
+{
+  "id": 1375,
+  "word": "Eigengrau",
+  "question": "Eigengrau",
+  "options": [
+    "The state of being infatuated with someone",
+    "An unfilled space or gap",
+    "Sunlight filtering through tree leaves",
+    "The dark gray color seen when the eyes are closed"
+  ],
+  "answerOption": "D",
+  "answerText": "The dark gray color seen when the eyes are closed",
+  "difficulty": "extra-hard",
+  "sourceFile": "1375.json"
+}

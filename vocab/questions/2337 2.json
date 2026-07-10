@@ -1,0 +1,15 @@
+{
+  "id": 2337,
+  "word": "Chrysalism",
+  "question": "Chrysalism",
+  "options": [
+    "A student graduating",
+    "The amniotic tranquility of being indoors during a storm",
+    "Making or characterized by a hissing sound",
+    "In a non-living manner"
+  ],
+  "answerOption": "B",
+  "answerText": "The amniotic tranquility of being indoors during a storm",
+  "difficulty": "extra-hard",
+  "sourceFile": "2337.json"
+}

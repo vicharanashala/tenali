@@ -1,0 +1,15 @@
+{
+  "id": 442,
+  "word": "Disarrange",
+  "question": "Disarrange",
+  "options": [
+    "Relating to the edge or outer part",
+    "To break the connection between things",
+    "To greatly surprise someone",
+    "To make something untidy or disordered"
+  ],
+  "answerOption": "D",
+  "answerText": "To make something untidy or disordered",
+  "difficulty": "easy",
+  "sourceFile": "0442.json"
+}

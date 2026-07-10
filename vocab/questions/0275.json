@@ -1,0 +1,15 @@
+{
+  "id": 275,
+  "word": "Find",
+  "question": "Find",
+  "options": [
+    "Having the properties of a magnet",
+    "To help someone with a task",
+    "To discover something by searching",
+    "To cause someone to feel sudden wonder"
+  ],
+  "answerOption": "C",
+  "answerText": "To discover something by searching",
+  "difficulty": "easy",
+  "sourceFile": "0275.json"
+}

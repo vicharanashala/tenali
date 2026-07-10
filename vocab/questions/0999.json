@@ -1,0 +1,15 @@
+{
+  "id": 999,
+  "word": "Musty",
+  "question": "Musty",
+  "options": [
+    "Causing wonder or surprise",
+    "Stale smelling or damp",
+    "To become greater in size or amount",
+    "To come or go into a place"
+  ],
+  "answerOption": "B",
+  "answerText": "Stale smelling or damp",
+  "difficulty": "easy",
+  "sourceFile": "0999.json"
+}

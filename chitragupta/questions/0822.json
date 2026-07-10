@@ -1,0 +1,14 @@
+{
+  "id": 822,
+  "question": "What is the SI unit of radioactivity?",
+  "options": [
+    "gray",
+    "becquerel",
+    "sievert",
+    "weber"
+  ],
+  "answerOption": "B",
+  "answerText": "becquerel",
+  "genre": "mixed",
+  "sourceFile": "0822.json"
+}

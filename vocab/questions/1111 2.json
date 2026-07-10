@@ -1,0 +1,15 @@
+{
+  "id": 1111,
+  "word": "Juxtapose",
+  "question": "Juxtapose",
+  "options": [
+    "To place close together for contrasting effect",
+    "Designed to impress or attract notice",
+    "Of doubtful authenticity; probably untrue",
+    "A peculiar behavioral habit"
+  ],
+  "answerOption": "A",
+  "answerText": "To place close together for contrasting effect",
+  "difficulty": "hard",
+  "sourceFile": "1111.json"
+}

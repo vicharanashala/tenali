@@ -1,0 +1,15 @@
+{
+  "id": 1033,
+  "word": "Jovial",
+  "question": "Jovial",
+  "options": [
+    "Relating to fundamental change",
+    "A ruler with absolute power",
+    "A feeling of fear about something",
+    "Cheerful and friendly in manner"
+  ],
+  "answerOption": "D",
+  "answerText": "Cheerful and friendly in manner",
+  "difficulty": "medium",
+  "sourceFile": "1033.json"
+}

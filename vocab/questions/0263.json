@@ -1,0 +1,15 @@
+{
+  "id": 263,
+  "word": "Jump",
+  "question": "Jump",
+  "options": [
+    "Done according to a fixed plan",
+    "To push off the ground using the legs",
+    "Untidy or dirty",
+    "Having strong winds and usually rain"
+  ],
+  "answerOption": "B",
+  "answerText": "To push off the ground using the legs",
+  "difficulty": "easy",
+  "sourceFile": "0263.json"
+}

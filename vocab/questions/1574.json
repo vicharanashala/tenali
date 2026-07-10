@@ -1,0 +1,15 @@
+{
+  "id": 1574,
+  "word": "Description",
+  "question": "Description",
+  "options": [
+    "To place money in a bank account",
+    "Tending to detrude",
+    "Serving to describe or characterize",
+    "A statement describing something"
+  ],
+  "answerOption": "D",
+  "answerText": "A statement describing something",
+  "difficulty": "medium",
+  "sourceFile": "1574.json"
+}

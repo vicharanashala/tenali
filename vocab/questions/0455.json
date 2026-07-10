@@ -1,0 +1,15 @@
+{
+  "id": 455,
+  "word": "Abolish",
+  "question": "Abolish",
+  "options": [
+    "Willfully causing pain to others",
+    "Liable to change rapidly and unpredictably",
+    "To actively resist or be against something",
+    "To formally put an end to a system"
+  ],
+  "answerOption": "D",
+  "answerText": "To formally put an end to a system",
+  "difficulty": "easy",
+  "sourceFile": "0455.json"
+}

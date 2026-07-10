@@ -1,0 +1,15 @@
+{
+  "id": 220,
+  "word": "Protect",
+  "question": "Protect",
+  "options": [
+    "To explain something by using examples",
+    "To turn around quickly in a circle",
+    "To keep safe from harm or injury",
+    "Sufficiently great or important"
+  ],
+  "answerOption": "C",
+  "answerText": "To keep safe from harm or injury",
+  "difficulty": "easy",
+  "sourceFile": "0220.json"
+}

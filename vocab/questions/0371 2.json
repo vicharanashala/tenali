@@ -1,0 +1,15 @@
+{
+  "id": 371,
+  "word": "Chop",
+  "question": "Chop",
+  "options": [
+    "To cut something into pieces with a tool",
+    "Containing as much as possible; filled completely",
+    "To make something look more attractive",
+    "Extremely beautiful or impressive"
+  ],
+  "answerOption": "A",
+  "answerText": "To cut something into pieces with a tool",
+  "difficulty": "easy",
+  "sourceFile": "0371.json"
+}

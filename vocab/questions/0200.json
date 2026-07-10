@@ -1,0 +1,15 @@
+{
+  "id": 200,
+  "word": "Guard",
+  "question": "Guard",
+  "options": [
+    "To identify someone from previous encounters",
+    "To watch over and protect something",
+    "Causing feelings of fear or alarm",
+    "Lacking energy or enthusiasm"
+  ],
+  "answerOption": "B",
+  "answerText": "To watch over and protect something",
+  "difficulty": "easy",
+  "sourceFile": "0200.json"
+}

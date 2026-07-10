@@ -1,0 +1,15 @@
+{
+  "id": 2168,
+  "word": "AEROMANCY",
+  "question": "AEROMANCY",
+  "options": [
+    "Divination by air and weather",
+    "Spoken or done without preparation",
+    "Relating to sandy regions",
+    "Very generous or forgiving"
+  ],
+  "answerOption": "A",
+  "answerText": "Divination by air and weather",
+  "difficulty": "hard",
+  "sourceFile": "2168.json"
+}

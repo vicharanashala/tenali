@@ -1,0 +1,15 @@
+{
+  "id": 2142,
+  "word": "Mendacious",
+  "question": "Mendacious",
+  "options": [
+    "The quality of being unavoidable",
+    "Angry and bitter in tone or manner",
+    "Expert in aerostation",
+    "Not telling the truth; lying"
+  ],
+  "answerOption": "D",
+  "answerText": "Not telling the truth; lying",
+  "difficulty": "hard",
+  "sourceFile": "2142.json"
+}

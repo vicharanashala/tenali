@@ -1,0 +1,15 @@
+{
+  "id": 1377,
+  "word": "Delicious",
+  "question": "Delicious",
+  "options": [
+    "Forbidden or excluded",
+    "Highly pleasing to the taste",
+    "Tending to purify the blood",
+    "Occurring at regular intervals"
+  ],
+  "answerOption": "B",
+  "answerText": "Highly pleasing to the taste",
+  "difficulty": "medium",
+  "sourceFile": "1377.json"
+}

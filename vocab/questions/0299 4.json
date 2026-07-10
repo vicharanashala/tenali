@@ -1,0 +1,15 @@
+{
+  "id": 299,
+  "word": "Dream",
+  "question": "Dream",
+  "options": [
+    "Worthy of attention; striking",
+    "A series of images during sleep",
+    "Very fine in texture or structure",
+    "Having elegance of movement"
+  ],
+  "answerOption": "B",
+  "answerText": "A series of images during sleep",
+  "difficulty": "easy",
+  "sourceFile": "0299.json"
+}

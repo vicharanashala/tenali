@@ -1,0 +1,15 @@
+{
+  "id": 909,
+  "word": "Colossal",
+  "question": "Colossal",
+  "options": [
+    "Not showing or feeling nervousness or anger",
+    "Feeling uncertain or unsure",
+    "Moving or capable of moving at high speed",
+    "Extremely large in scale or degree"
+  ],
+  "answerOption": "D",
+  "answerText": "Extremely large in scale or degree",
+  "difficulty": "easy",
+  "sourceFile": "0909.json"
+}

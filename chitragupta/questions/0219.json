@@ -1,0 +1,14 @@
+{
+  "id": 219,
+  "question": "Which is the largest desert in Asia?",
+  "options": [
+    "Thar Desert",
+    "Gobi Desert",
+    "Arabian Desert",
+    "Karakum Desert"
+  ],
+  "answerOption": "B",
+  "answerText": "Gobi Desert",
+  "genre": "mixed",
+  "sourceFile": "0219.json"
+}

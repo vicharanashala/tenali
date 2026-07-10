@@ -1,0 +1,15 @@
+{
+  "id": 1155,
+  "word": "Ostracize",
+  "question": "Ostracize",
+  "options": [
+    "A system of ranking one above another",
+    "To exclude someone from a group",
+    "Not harmful or offensive",
+    "One who desolates"
+  ],
+  "answerOption": "B",
+  "answerText": "To exclude someone from a group",
+  "difficulty": "medium",
+  "sourceFile": "1155.json"
+}

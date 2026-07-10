@@ -1,0 +1,15 @@
+{
+  "id": 1103,
+  "word": "Jubilance",
+  "question": "Jubilance",
+  "options": [
+    "To question someone about a completed task",
+    "A feeling of great joy and celebration",
+    "Done to benefit oneself",
+    "Fond of the company of others; sociable"
+  ],
+  "answerOption": "B",
+  "answerText": "A feeling of great joy and celebration",
+  "difficulty": "medium",
+  "sourceFile": "1103.json"
+}

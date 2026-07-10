@@ -1,0 +1,15 @@
+{
+  "id": 2562,
+  "word": "Alchemy",
+  "question": "Alchemy",
+  "options": [
+    "A meteorite with iron core",
+    "Resembling verdigris color",
+    "The right of patronage of church",
+    "The medieval chemical philosophy"
+  ],
+  "answerOption": "D",
+  "answerText": "The medieval chemical philosophy",
+  "difficulty": "hard",
+  "sourceFile": "2562.json"
+}

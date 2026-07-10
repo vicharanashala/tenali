@@ -1,0 +1,15 @@
+{
+  "id": 170,
+  "word": "Smile",
+  "question": "Smile",
+  "options": [
+    "Extremely large or great in scale",
+    "To be exceptionally good at something",
+    "To form a pleased expression with the mouth",
+    "To believe in the reliability of someone"
+  ],
+  "answerOption": "C",
+  "answerText": "To form a pleased expression with the mouth",
+  "difficulty": "easy",
+  "sourceFile": "0170.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 925,
+  "word": "Petite",
+  "question": "Petite",
+  "options": [
+    "Growing thickly and strongly; abundant",
+    "Very small or delicate",
+    "Too small to be seen by the eye",
+    "To suffer or die from lack of food"
+  ],
+  "answerOption": "B",
+  "answerText": "Very small or delicate",
+  "difficulty": "easy",
+  "sourceFile": "0925.json"
+}

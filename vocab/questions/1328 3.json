@@ -1,0 +1,15 @@
+{
+  "id": 1328,
+  "word": "Demonstrate",
+  "question": "Demonstrate",
+  "options": [
+    "Showing great attention to detail",
+    "To show or prove something",
+    "Spacious and comfortable",
+    "To provide money to pay a cost"
+  ],
+  "answerOption": "B",
+  "answerText": "To show or prove something",
+  "difficulty": "medium",
+  "sourceFile": "1328.json"
+}

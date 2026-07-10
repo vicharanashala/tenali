@@ -1,0 +1,15 @@
+{
+  "id": 3001,
+  "word": "ABJUREDLY",
+  "question": "ABJUREDLY",
+  "options": [
+    "In an abjured manner",
+    "Pleasure derived from another's misfortune",
+    "Origin of life from non-living matter",
+    "Rod-shaped abyss organism"
+  ],
+  "answerOption": "A",
+  "answerText": "In an abjured manner",
+  "difficulty": "extra-hard",
+  "sourceFile": "3001.json"
+}

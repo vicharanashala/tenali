@@ -1,0 +1,15 @@
+{
+  "id": 63,
+  "word": "Silly",
+  "question": "Silly",
+  "options": [
+    "Suggested or understood indirectly",
+    "Required by law or rule; mandatory",
+    "Having or showing a lack of common sense",
+    "Elaborately or highly decorated"
+  ],
+  "answerOption": "C",
+  "answerText": "Having or showing a lack of common sense",
+  "difficulty": "easy",
+  "sourceFile": "0063.json"
+}

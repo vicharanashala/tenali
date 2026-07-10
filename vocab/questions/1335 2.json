@@ -1,0 +1,15 @@
+{
+  "id": 1335,
+  "word": "Exigent",
+  "question": "Exigent",
+  "options": [
+    "An unpleasant or unhealthy atmosphere",
+    "A state of physical or mental weariness",
+    "Lasting for a very short time",
+    "Pressing; demanding immediate attention"
+  ],
+  "answerOption": "D",
+  "answerText": "Pressing; demanding immediate attention",
+  "difficulty": "hard",
+  "sourceFile": "1335.json"
+}

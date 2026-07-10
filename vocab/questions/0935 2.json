@@ -1,0 +1,15 @@
+{
+  "id": 935,
+  "word": "Kinship",
+  "question": "Kinship",
+  "options": [
+    "Calm, peaceful, and untroubled",
+    "To make someone feel annoyed or frustrated",
+    "A sharing of characteristics or origins",
+    "Changing frequently in loyalties or affections"
+  ],
+  "answerOption": "C",
+  "answerText": "A sharing of characteristics or origins",
+  "difficulty": "medium",
+  "sourceFile": "0935.json"
+}

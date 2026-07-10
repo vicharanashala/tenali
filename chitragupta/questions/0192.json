@@ -1,0 +1,14 @@
+{
+  "id": 192,
+  "question": "Which is the largest cat species in the world?",
+  "options": [
+    "Leopard",
+    "Lion",
+    "Tiger",
+    "Jaguar"
+  ],
+  "answerOption": "C",
+  "answerText": "Tiger",
+  "genre": "mixed",
+  "sourceFile": "0192.json"
+}

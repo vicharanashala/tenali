@@ -1,0 +1,15 @@
+{
+  "id": 560,
+  "word": "Surpass",
+  "question": "Surpass",
+  "options": [
+    "Expecting the best possible outcome",
+    "Of great importance; critical",
+    "Extremely large or huge",
+    "To exceed or be greater than something"
+  ],
+  "answerOption": "D",
+  "answerText": "To exceed or be greater than something",
+  "difficulty": "easy",
+  "sourceFile": "0560.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 173,
+  "word": "Cry",
+  "question": "Cry",
+  "options": [
+    "Possessing great power or strength",
+    "Able to move quickly and easily",
+    "To shed tears of sadness or pain",
+    "Not found in large numbers; uncommon"
+  ],
+  "answerOption": "C",
+  "answerText": "To shed tears of sadness or pain",
+  "difficulty": "easy",
+  "sourceFile": "0173.json"
+}

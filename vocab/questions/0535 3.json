@@ -1,0 +1,15 @@
+{
+  "id": 535,
+  "word": "Caution",
+  "question": "Caution",
+  "options": [
+    "Expecting the best possible outcome",
+    "Of great importance; critical",
+    "Extremely large or huge",
+    "To warn someone about potential danger"
+  ],
+  "answerOption": "D",
+  "answerText": "To warn someone about potential danger",
+  "difficulty": "easy",
+  "sourceFile": "0535.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 764,
+  "question": "What is the chemical symbol for chlorine?",
+  "options": [
+    "Cl",
+    "Ch",
+    "C",
+    "Cr"
+  ],
+  "answerOption": "A",
+  "answerText": "Cl",
+  "genre": "mixed",
+  "sourceFile": "0764.json"
+}

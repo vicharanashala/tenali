@@ -1,0 +1,14 @@
+{
+  "id": 193,
+  "question": "Which ocean lies to the east of Africa?",
+  "options": [
+    "Atlantic Ocean",
+    "Pacific Ocean",
+    "Indian Ocean",
+    "Arctic Ocean"
+  ],
+  "answerOption": "C",
+  "answerText": "Indian Ocean",
+  "genre": "geography",
+  "sourceFile": "0193.json"
+}

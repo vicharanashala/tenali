@@ -1,0 +1,15 @@
+{
+  "id": 1132,
+  "word": "Placid",
+  "question": "Placid",
+  "options": [
+    "Not easily upset or excited; calm",
+    "A subtle difference in meaning",
+    "Designed to impress or attract notice",
+    "Feeling calm and relaxed; not worried"
+  ],
+  "answerOption": "A",
+  "answerText": "Not easily upset or excited; calm",
+  "difficulty": "medium",
+  "sourceFile": "1132.json"
+}

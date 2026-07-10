@@ -1,0 +1,14 @@
+{
+  "id": 282,
+  "question": "Which country has Kathmandu as its capital?",
+  "options": [
+    "Bhutan",
+    "Nepal",
+    "Bangladesh",
+    "Myanmar"
+  ],
+  "answerOption": "B",
+  "answerText": "Nepal",
+  "genre": "geography",
+  "sourceFile": "0282.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 711,
+  "word": "Identical",
+  "question": "Identical",
+  "options": [
+    "Exactly alike in every way",
+    "To become or make smaller in size",
+    "To tell someone about a possible danger",
+    "Having intense enjoyment or interest"
+  ],
+  "answerOption": "A",
+  "answerText": "Exactly alike in every way",
+  "difficulty": "easy",
+  "sourceFile": "0711.json"
+}

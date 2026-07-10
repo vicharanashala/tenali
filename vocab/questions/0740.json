@@ -1,0 +1,15 @@
+{
+  "id": 740,
+  "word": "Magnetic",
+  "question": "Magnetic",
+  "options": [
+    "Tall and thin in appearance",
+    "Having the properties of a magnet",
+    "To accept something as true without proof",
+    "Able to recover quickly from difficulties"
+  ],
+  "answerOption": "B",
+  "answerText": "Having the properties of a magnet",
+  "difficulty": "easy",
+  "sourceFile": "0740.json"
+}

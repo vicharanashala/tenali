@@ -1,0 +1,15 @@
+{
+  "id": 111,
+  "word": "Crooked",
+  "question": "Crooked",
+  "options": [
+    "To establish the truth of something",
+    "Bent or twisted out of shape",
+    "Moving at a low speed",
+    "To make something look more attractive"
+  ],
+  "answerOption": "B",
+  "answerText": "Bent or twisted out of shape",
+  "difficulty": "easy",
+  "sourceFile": "0111.json"
+}

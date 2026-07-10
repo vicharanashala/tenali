@@ -1,0 +1,15 @@
+{
+  "id": 301,
+  "word": "Believe",
+  "question": "Believe",
+  "options": [
+    "To leave a place",
+    "To accept something as true",
+    "Feeling pleasure or happiness",
+    "To believe in the reliability of someone"
+  ],
+  "answerOption": "B",
+  "answerText": "To accept something as true",
+  "difficulty": "easy",
+  "sourceFile": "0301.json"
+}

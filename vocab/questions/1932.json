@@ -1,0 +1,15 @@
+{
+  "id": 1932,
+  "word": "Periodic",
+  "question": "Periodic",
+  "options": [
+    "Damned or cursed",
+    "Occurring at regular intervals",
+    "Possible and practical to do easily",
+    "Showing a willingness to take bold risks"
+  ],
+  "answerOption": "B",
+  "answerText": "Occurring at regular intervals",
+  "difficulty": "medium",
+  "sourceFile": "1932.json"
+}

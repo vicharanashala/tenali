@@ -1,0 +1,15 @@
+{
+  "id": 818,
+  "word": "Ambiguous",
+  "question": "Ambiguous",
+  "options": [
+    "Having a modest opinion of one's importance",
+    "Inspiring a feeling of admiration or amazement",
+    "In perfect original condition",
+    "Open to more than one interpretation"
+  ],
+  "answerOption": "D",
+  "answerText": "Open to more than one interpretation",
+  "difficulty": "easy",
+  "sourceFile": "0818.json"
+}

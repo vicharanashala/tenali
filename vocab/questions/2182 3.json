@@ -1,0 +1,15 @@
+{
+  "id": 2182,
+  "word": "Advisable",
+  "question": "Advisable",
+  "options": [
+    "Worth doing or recommending",
+    "Inner sanctum of a Greek temple",
+    "A loud confused noise from a large crowd",
+    "The action of aeroporting"
+  ],
+  "answerOption": "A",
+  "answerText": "Worth doing or recommending",
+  "difficulty": "hard",
+  "sourceFile": "2182.json"
+}

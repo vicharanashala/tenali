@@ -1,0 +1,15 @@
+{
+  "id": 28,
+  "word": "Soft",
+  "question": "Soft",
+  "options": [
+    "Easy to mold, cut, or fold; not hard",
+    "To reach a destination",
+    "Existing in or caused by nature",
+    "To let liquid fall in small drops"
+  ],
+  "answerOption": "A",
+  "answerText": "Easy to mold, cut, or fold; not hard",
+  "difficulty": "easy",
+  "sourceFile": "0028.json"
+}

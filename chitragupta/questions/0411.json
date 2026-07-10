@@ -1,0 +1,14 @@
+{
+  "id": 411,
+  "question": "Which city is the capital of Uttarakhand in the winter under the seasonal arrangement?",
+  "options": [
+    "Dehradun",
+    "Nainital",
+    "Haridwar",
+    "Almora"
+  ],
+  "answerOption": "A",
+  "answerText": "Dehradun",
+  "genre": "geography",
+  "sourceFile": "0411.json"
+}

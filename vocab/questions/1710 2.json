@@ -1,0 +1,15 @@
+{
+  "id": 1710,
+  "word": "Soliloquy",
+  "question": "Soliloquy",
+  "options": [
+    "Patient self-control; restraint",
+    "Using very few words to express oneself",
+    "A mature human or animal",
+    "An act of speaking thoughts aloud alone"
+  ],
+  "answerOption": "D",
+  "answerText": "An act of speaking thoughts aloud alone",
+  "difficulty": "hard",
+  "sourceFile": "1710.json"
+}

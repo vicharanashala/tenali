@@ -1,0 +1,15 @@
+{
+  "id": 904,
+  "word": "Trapped",
+  "question": "Trapped",
+  "options": [
+    "Having high moral qualities",
+    "To want something to happen and think it possible",
+    "Caught in a place unable to escape",
+    "Occurring from time to time"
+  ],
+  "answerOption": "C",
+  "answerText": "Caught in a place unable to escape",
+  "difficulty": "easy",
+  "sourceFile": "0904.json"
+}

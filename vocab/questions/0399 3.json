@@ -1,0 +1,15 @@
+{
+  "id": 399,
+  "word": "Adapt",
+  "question": "Adapt",
+  "options": [
+    "To test something to discover new facts",
+    "To call out in a very loud voice",
+    "Extremely beautiful or impressive",
+    "To adjust to new conditions"
+  ],
+  "answerOption": "D",
+  "answerText": "To adjust to new conditions",
+  "difficulty": "easy",
+  "sourceFile": "0399.json"
+}

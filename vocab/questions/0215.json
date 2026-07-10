@@ -1,0 +1,15 @@
+{
+  "id": 215,
+  "word": "Fail",
+  "question": "Fail",
+  "options": [
+    "Being reserved or timid around other people",
+    "To set up an organization on a firm basis",
+    "To be unsuccessful in achieving a goal",
+    "Smooth like velvet fabric"
+  ],
+  "answerOption": "C",
+  "answerText": "To be unsuccessful in achieving a goal",
+  "difficulty": "easy",
+  "sourceFile": "0215.json"
+}

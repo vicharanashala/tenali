@@ -1,0 +1,15 @@
+{
+  "id": 2327,
+  "word": "Advertise",
+  "question": "Advertise",
+  "options": [
+    "The action of proceeding with something",
+    "The action of bequeathing something",
+    "Permission to graduate without examination",
+    "To describe publicly to promote sales"
+  ],
+  "answerOption": "D",
+  "answerText": "To describe publicly to promote sales",
+  "difficulty": "hard",
+  "sourceFile": "2327.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1559,
+  "word": "Destroy",
+  "question": "Destroy",
+  "options": [
+    "The action of destroying something",
+    "To take away or modify the nature",
+    "The state of being thick or dense",
+    "To cause something to cease to exist"
+  ],
+  "answerOption": "D",
+  "answerText": "To cause something to cease to exist",
+  "difficulty": "medium",
+  "sourceFile": "1559.json"
+}

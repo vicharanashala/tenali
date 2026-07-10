@@ -1,0 +1,15 @@
+{
+  "id": 674,
+  "word": "Excessive",
+  "question": "Excessive",
+  "options": [
+    "To give support and confidence to someone",
+    "Occurring continuously over time",
+    "More than is necessary or normal",
+    "Easily seen or noticed"
+  ],
+  "answerOption": "C",
+  "answerText": "More than is necessary or normal",
+  "difficulty": "easy",
+  "sourceFile": "0674.json"
+}

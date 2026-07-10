@@ -1,0 +1,15 @@
+{
+  "id": 1414,
+  "word": "Demonic",
+  "question": "Demonic",
+  "options": [
+    "The profession of treating teeth",
+    "The action of deceiving someone",
+    "Relating to demons or evil spirits",
+    "The action of reducing in rank or status"
+  ],
+  "answerOption": "C",
+  "answerText": "Relating to demons or evil spirits",
+  "difficulty": "medium",
+  "sourceFile": "1414.json"
+}

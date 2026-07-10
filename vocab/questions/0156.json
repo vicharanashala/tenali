@@ -1,0 +1,15 @@
+{
+  "id": 156,
+  "word": "Accept",
+  "question": "Accept",
+  "options": [
+    "Not decorated or elaborate; simple",
+    "To agree to receive or do something",
+    "Closely compacted or thick",
+    "Covered or marked with an unclean substance"
+  ],
+  "answerOption": "B",
+  "answerText": "To agree to receive or do something",
+  "difficulty": "easy",
+  "sourceFile": "0156.json"
+}

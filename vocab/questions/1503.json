@@ -1,0 +1,15 @@
+{
+  "id": 1503,
+  "word": "Depraved",
+  "question": "Depraved",
+  "options": [
+    "Making a loud confused noise; uproarious",
+    "Relating to ordinary people",
+    "Morally corrupt or wicked",
+    "To destroy a building or structure"
+  ],
+  "answerOption": "C",
+  "answerText": "Morally corrupt or wicked",
+  "difficulty": "medium",
+  "sourceFile": "1503.json"
+}

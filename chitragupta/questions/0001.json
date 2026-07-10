@@ -1,0 +1,14 @@
+{
+  "id": 1,
+  "question": "What do plants need to make food?",
+  "options": [
+    "Moonlight only",
+    "Sunlight, water, and air",
+    "Sand only",
+    "Rocks only"
+  ],
+  "answerOption": "B",
+  "answerText": "Sunlight, water, and air",
+  "genre": "science",
+  "sourceFile": "0001.json"
+}

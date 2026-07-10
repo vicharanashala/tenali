@@ -1,0 +1,15 @@
+{
+  "id": 284,
+  "word": "Measure",
+  "question": "Measure",
+  "options": [
+    "Of a rough or irregular surface",
+    "To find the size or amount of something",
+    "To be required to pay money to someone",
+    "Feeling fear or anxiety"
+  ],
+  "answerOption": "B",
+  "answerText": "To find the size or amount of something",
+  "difficulty": "easy",
+  "sourceFile": "0284.json"
+}

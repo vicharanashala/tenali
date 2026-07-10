@@ -1,0 +1,14 @@
+{
+  "id": 749,
+  "question": "Which part of the body contains the clavicle?",
+  "options": [
+    "Shoulder",
+    "Knee",
+    "Ankle",
+    "Hip"
+  ],
+  "answerOption": "A",
+  "answerText": "Shoulder",
+  "genre": "science",
+  "sourceFile": "0749.json"
+}

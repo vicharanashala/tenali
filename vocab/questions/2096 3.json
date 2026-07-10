@@ -1,0 +1,15 @@
+{
+  "id": 2096,
+  "word": "Admonitory",
+  "question": "Admonitory",
+  "options": [
+    "Happening by chance or accident",
+    "An ancient heat-driven engine",
+    "A remark used too often to be meaningful",
+    "Giving or serving as a warning"
+  ],
+  "answerOption": "D",
+  "answerText": "Giving or serving as a warning",
+  "difficulty": "hard",
+  "sourceFile": "2096.json"
+}

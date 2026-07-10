@@ -1,0 +1,15 @@
+{
+  "id": 1206,
+  "word": "Venerable",
+  "question": "Venerable",
+  "options": [
+    "Corrupt or able to be bribed",
+    "Accorded great respect due to age or wisdom",
+    "Extremely unpleasant or revolting",
+    "Inflammation of the skin"
+  ],
+  "answerOption": "B",
+  "answerText": "Accorded great respect due to age or wisdom",
+  "difficulty": "medium",
+  "sourceFile": "1206.json"
+}

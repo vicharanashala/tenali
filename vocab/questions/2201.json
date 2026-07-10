@@ -1,0 +1,15 @@
+{
+  "id": 2201,
+  "word": "Contrite",
+  "question": "Contrite",
+  "options": [
+    "Belief in reason as basis of truth",
+    "An indicator of a trend",
+    "Deliberately and knowingly",
+    "Feeling regret and sorrow for wrongdoing"
+  ],
+  "answerOption": "D",
+  "answerText": "Feeling regret and sorrow for wrongdoing",
+  "difficulty": "hard",
+  "sourceFile": "2201.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1315,
+  "word": "Deception",
+  "question": "Deception",
+  "options": [
+    "One who believes in determinism",
+    "To question someone about a completed task",
+    "A lack or shortage of something",
+    "The action of deceiving someone"
+  ],
+  "answerOption": "D",
+  "answerText": "The action of deceiving someone",
+  "difficulty": "medium",
+  "sourceFile": "1315.json"
+}

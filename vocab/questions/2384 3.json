@@ -1,0 +1,15 @@
+{
+  "id": 2384,
+  "word": "AERONAUTICIAN",
+  "question": "AERONAUTICIAN",
+  "options": [
+    "A device that aerates something",
+    "An expert in aeronautics",
+    "Extremely unwilling to spend money",
+    "At the point of death; in terminal decline"
+  ],
+  "answerOption": "B",
+  "answerText": "An expert in aeronautics",
+  "difficulty": "hard",
+  "sourceFile": "2384.json"
+}

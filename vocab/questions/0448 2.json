@@ -1,0 +1,15 @@
+{
+  "id": 448,
+  "word": "Draw",
+  "question": "Draw",
+  "options": [
+    "An act of saying goodbye",
+    "To say that you will not do something",
+    "To produce a picture using a pencil",
+    "To tell someone you will definitely do something"
+  ],
+  "answerOption": "C",
+  "answerText": "To produce a picture using a pencil",
+  "difficulty": "easy",
+  "sourceFile": "0448.json"
+}

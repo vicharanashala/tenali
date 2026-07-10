@@ -1,0 +1,15 @@
+{
+  "id": 496,
+  "word": "Monitor",
+  "question": "Monitor",
+  "options": [
+    "To discover something by searching",
+    "Of great extent from side to side",
+    "To reach a destination",
+    "To observe and check progress over time"
+  ],
+  "answerOption": "D",
+  "answerText": "To observe and check progress over time",
+  "difficulty": "easy",
+  "sourceFile": "0496.json"
+}

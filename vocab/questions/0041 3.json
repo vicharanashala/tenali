@@ -1,0 +1,15 @@
+{
+  "id": 41,
+  "word": "Pretty",
+  "question": "Pretty",
+  "options": [
+    "To fasten with string or rope",
+    "To have something inside",
+    "To take the place of something",
+    "Attractive in a delicate way"
+  ],
+  "answerOption": "D",
+  "answerText": "Attractive in a delicate way",
+  "difficulty": "easy",
+  "sourceFile": "0041.json"
+}

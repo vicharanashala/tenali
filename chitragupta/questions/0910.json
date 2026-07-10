@@ -1,0 +1,14 @@
+{
+  "id": 910,
+  "question": "Who discovered the radioactivity phenomenon first?",
+  "options": [
+    "Becquerel",
+    "Curie",
+    "Rutherford",
+    "Planck"
+  ],
+  "answerOption": "A",
+  "answerText": "Becquerel",
+  "genre": "general-knowledge",
+  "sourceFile": "0910.json"
+}

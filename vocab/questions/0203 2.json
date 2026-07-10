@@ -1,0 +1,15 @@
+{
+  "id": 203,
+  "word": "Break",
+  "question": "Break",
+  "options": [
+    "To separate into pieces suddenly",
+    "Occurring continuously over time",
+    "Treating people equally without favoritism",
+    "Having high principles and expectations"
+  ],
+  "answerOption": "A",
+  "answerText": "To separate into pieces suddenly",
+  "difficulty": "easy",
+  "sourceFile": "0203.json"
+}

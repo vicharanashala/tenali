@@ -1,0 +1,15 @@
+{
+  "id": 66,
+  "word": "Callipygian",
+  "question": "Callipygian",
+  "options": [
+    "A feeling of melancholy about the state of the world",
+    "Having well-shaped or attractive buttocks",
+    "Having a ready insight into things; shrewd",
+    "Pleasure derived from another's misfortune"
+  ],
+  "answerOption": "B",
+  "answerText": "Having well-shaped or attractive buttocks",
+  "difficulty": "hardest",
+  "sourceFile": "0066.json"
+}

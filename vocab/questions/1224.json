@@ -1,0 +1,15 @@
+{
+  "id": 1224,
+  "word": "Rebuke",
+  "question": "Rebuke",
+  "options": [
+    "To express sharp disapproval of",
+    "Wishing to do what is right",
+    "A loud and confused noise or voices",
+    "Able to be derived from something"
+  ],
+  "answerOption": "A",
+  "answerText": "To express sharp disapproval of",
+  "difficulty": "medium",
+  "sourceFile": "1224.json"
+}

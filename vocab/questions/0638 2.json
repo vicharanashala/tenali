@@ -1,0 +1,15 @@
+{
+  "id": 638,
+  "word": "Capable",
+  "question": "Capable",
+  "options": [
+    "In a particular place; existing now",
+    "Having the ability to do something",
+    "Notably large in size or amount",
+    "Causing great enthusiasm and eagerness"
+  ],
+  "answerOption": "B",
+  "answerText": "Having the ability to do something",
+  "difficulty": "easy",
+  "sourceFile": "0638.json"
+}

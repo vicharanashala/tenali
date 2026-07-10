@@ -1,0 +1,15 @@
+{
+  "id": 1350,
+  "word": "Deforestation",
+  "question": "Deforestation",
+  "options": [
+    "Lacking compassion or kindness",
+    "To take a position of power illegally",
+    "Possible and practical to do easily",
+    "Clearing forest to use the land"
+  ],
+  "answerOption": "D",
+  "answerText": "Clearing forest to use the land",
+  "difficulty": "medium",
+  "sourceFile": "1350.json"
+}

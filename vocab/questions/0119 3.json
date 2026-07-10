@@ -1,0 +1,15 @@
+{
+  "id": 119,
+  "word": "Fierce",
+  "question": "Fierce",
+  "options": [
+    "Causing extreme fear or suffering",
+    "Of small width in relation to length",
+    "To stop working or moving to relax",
+    "Having a violent or aggressive nature"
+  ],
+  "answerOption": "D",
+  "answerText": "Having a violent or aggressive nature",
+  "difficulty": "easy",
+  "sourceFile": "0119.json"
+}

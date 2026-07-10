@@ -1,0 +1,15 @@
+{
+  "id": 1040,
+  "word": "Mingle",
+  "question": "Mingle",
+  "options": [
+    "The origin or derivation of something",
+    "To mix or cause to mix together",
+    "An alternative spelling of dispatch",
+    "A paste or powder for cleaning teeth"
+  ],
+  "answerOption": "B",
+  "answerText": "To mix or cause to mix together",
+  "difficulty": "medium",
+  "sourceFile": "1040.json"
+}

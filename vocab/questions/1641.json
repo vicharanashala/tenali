@@ -1,0 +1,15 @@
+{
+  "id": 1641,
+  "word": "Dessication",
+  "question": "Dessication",
+  "options": [
+    "A feeling of fear about something",
+    "Treacherous and disloyal",
+    "Feeling regret for something done",
+    "The process of drying completely"
+  ],
+  "answerOption": "D",
+  "answerText": "The process of drying completely",
+  "difficulty": "medium",
+  "sourceFile": "1641.json"
+}

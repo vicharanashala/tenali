@@ -1,0 +1,15 @@
+{
+  "id": 2622,
+  "word": "AEROTITIS",
+  "question": "AEROTITIS",
+  "options": [
+    "A leader who seeks support by appealing to emotions",
+    "A material transparent to air",
+    "Serving to advocate or plead",
+    "Inflammation from air pressure"
+  ],
+  "answerOption": "D",
+  "answerText": "Inflammation from air pressure",
+  "difficulty": "hard",
+  "sourceFile": "2622.json"
+}

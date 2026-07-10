@@ -1,0 +1,15 @@
+{
+  "id": 680,
+  "word": "Harsh",
+  "question": "Harsh",
+  "options": [
+    "To cook food by prolonged exposure to heat",
+    "Unpleasantly rough or sharp",
+    "After the expected or usual time",
+    "To reach a destination"
+  ],
+  "answerOption": "B",
+  "answerText": "Unpleasantly rough or sharp",
+  "difficulty": "easy",
+  "sourceFile": "0680.json"
+}

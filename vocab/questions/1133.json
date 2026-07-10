@@ -1,0 +1,15 @@
+{
+  "id": 1133,
+  "word": "Quest",
+  "question": "Quest",
+  "options": [
+    "In a detectable manner",
+    "Relying on another for support",
+    "A long search for something",
+    "Truly what something is said to be; authentic"
+  ],
+  "answerOption": "C",
+  "answerText": "A long search for something",
+  "difficulty": "medium",
+  "sourceFile": "1133.json"
+}

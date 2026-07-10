@@ -1,0 +1,15 @@
+{
+  "id": 383,
+  "word": "Splash",
+  "question": "Splash",
+  "options": [
+    "Lasting a considerable time",
+    "To cause liquid to scatter in drops",
+    "To go out of or leave a place",
+    "Affected by physical illness"
+  ],
+  "answerOption": "B",
+  "answerText": "To cause liquid to scatter in drops",
+  "difficulty": "easy",
+  "sourceFile": "0383.json"
+}

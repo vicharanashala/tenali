@@ -1,0 +1,15 @@
+{
+  "id": 735,
+  "word": "Absorbent",
+  "question": "Absorbent",
+  "options": [
+    "Extremely good or of high quality",
+    "To find an answer to a problem",
+    "Able to soak up liquid easily",
+    "To believe in the reliability of someone"
+  ],
+  "answerOption": "C",
+  "answerText": "Able to soak up liquid easily",
+  "difficulty": "easy",
+  "sourceFile": "0735.json"
+}

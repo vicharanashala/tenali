@@ -1,0 +1,15 @@
+{
+  "id": 1413,
+  "word": "Demon",
+  "question": "Demon",
+  "options": [
+    "An evil spirit or devil in supernatural belief",
+    "To describe or portray precisely",
+    "To remove magnetic properties",
+    "Great pleasure and satisfaction"
+  ],
+  "answerOption": "A",
+  "answerText": "An evil spirit or devil in supernatural belief",
+  "difficulty": "medium",
+  "sourceFile": "1413.json"
+}

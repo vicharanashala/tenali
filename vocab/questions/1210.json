@@ -1,0 +1,15 @@
+{
+  "id": 1210,
+  "word": "Conducive",
+  "question": "Conducive",
+  "options": [
+    "Making a situation likely to happen",
+    "The act of holding together firmly",
+    "Not governed by law",
+    "Arrogantly superior and disdainful"
+  ],
+  "answerOption": "A",
+  "answerText": "Making a situation likely to happen",
+  "difficulty": "medium",
+  "sourceFile": "1210.json"
+}

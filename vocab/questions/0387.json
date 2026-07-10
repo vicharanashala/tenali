@@ -1,0 +1,15 @@
+{
+  "id": 387,
+  "word": "Sparkle",
+  "question": "Sparkle",
+  "options": [
+    "Hot and humid weather or manner",
+    "Having an uneven or irregular surface",
+    "To shine with flashes of light",
+    "Without limits or end"
+  ],
+  "answerOption": "C",
+  "answerText": "To shine with flashes of light",
+  "difficulty": "easy",
+  "sourceFile": "0387.json"
+}

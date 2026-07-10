@@ -1,0 +1,15 @@
+{
+  "id": 1687,
+  "word": "Sanguine",
+  "question": "Sanguine",
+  "options": [
+    "Optimistic in a difficult situation",
+    "Feeling regret and sorrow for wrongdoing",
+    "Intended for a small group with special knowledge",
+    "Causing harm or damage"
+  ],
+  "answerOption": "A",
+  "answerText": "Optimistic in a difficult situation",
+  "difficulty": "hard",
+  "sourceFile": "1687.json"
+}

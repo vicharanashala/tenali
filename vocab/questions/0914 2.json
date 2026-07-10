@@ -1,0 +1,15 @@
+{
+  "id": 914,
+  "word": "Mediocre",
+  "question": "Mediocre",
+  "options": [
+    "A state of being pleasantly lost in thought",
+    "Friendly and welcoming to strangers",
+    "Of only moderate quality; not very good",
+    "Representing the most perfect example"
+  ],
+  "answerOption": "C",
+  "answerText": "Of only moderate quality; not very good",
+  "difficulty": "medium",
+  "sourceFile": "0914.json"
+}

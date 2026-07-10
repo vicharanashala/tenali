@@ -1,0 +1,14 @@
+{
+  "id": 893,
+  "question": "What is the SI unit of electric field?",
+  "options": [
+    "N/C",
+    "tesla",
+    "weber",
+    "ampere"
+  ],
+  "answerOption": "A",
+  "answerText": "N/C",
+  "genre": "mixed",
+  "sourceFile": "0893.json"
+}

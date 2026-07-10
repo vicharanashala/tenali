@@ -1,0 +1,15 @@
+{
+  "id": 1913,
+  "word": "Mercenary",
+  "question": "Mercenary",
+  "options": [
+    "Requiring considerable effort and time",
+    "A person who designs things",
+    "The reduction of population",
+    "Primarily motivated by money"
+  ],
+  "answerOption": "D",
+  "answerText": "Primarily motivated by money",
+  "difficulty": "medium",
+  "sourceFile": "1913.json"
+}

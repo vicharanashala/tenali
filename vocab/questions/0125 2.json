@@ -1,0 +1,15 @@
+{
+  "id": 125,
+  "word": "Coward",
+  "question": "Coward",
+  "options": [
+    "Having the form of a circle",
+    "Giving information clearly in few words",
+    "A person who lacks courage",
+    "To express the meaning in another language"
+  ],
+  "answerOption": "C",
+  "answerText": "A person who lacks courage",
+  "difficulty": "easy",
+  "sourceFile": "0125.json"
+}

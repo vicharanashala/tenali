@@ -1,0 +1,15 @@
+{
+  "id": 801,
+  "word": "Wicked",
+  "question": "Wicked",
+  "options": [
+    "To bring or gather things together",
+    "Unpleasantly rough or sharp",
+    "To inspect something in detail",
+    "Evil or morally wrong"
+  ],
+  "answerOption": "D",
+  "answerText": "Evil or morally wrong",
+  "difficulty": "easy",
+  "sourceFile": "0801.json"
+}

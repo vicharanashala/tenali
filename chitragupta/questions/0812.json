@@ -1,0 +1,14 @@
+{
+  "id": 812,
+  "question": "Which country is associated with the city of Santo Domingo?",
+  "options": [
+    "Cuba",
+    "Haiti",
+    "Dominican Republic",
+    "Jamaica"
+  ],
+  "answerOption": "C",
+  "answerText": "Dominican Republic",
+  "genre": "geography",
+  "sourceFile": "0812.json"
+}

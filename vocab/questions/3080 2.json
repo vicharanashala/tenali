@@ -1,0 +1,15 @@
+{
+  "id": 3080,
+  "word": "Abusance",
+  "question": "Abusance",
+  "options": [
+    "The feeling of solitude in the woods",
+    "The action of abusing",
+    "The action of abetting someone",
+    "Showing a lack of courage; timid"
+  ],
+  "answerOption": "B",
+  "answerText": "The action of abusing",
+  "difficulty": "extra-hard",
+  "sourceFile": "3080.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1243,
+  "word": "Obstinate",
+  "question": "Obstinate",
+  "options": [
+    "The action of removing from office",
+    "To regard with great respect",
+    "A tropical plant providing insecticide",
+    "Stubbornly refusing to change opinion"
+  ],
+  "answerOption": "D",
+  "answerText": "Stubbornly refusing to change opinion",
+  "difficulty": "medium",
+  "sourceFile": "1243.json"
+}

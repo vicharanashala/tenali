@@ -1,0 +1,15 @@
+{
+  "id": 2011,
+  "word": "Obfuscate",
+  "question": "Obfuscate",
+  "options": [
+    "A lover of flying or air",
+    "To make something unclear or unintelligible",
+    "Extracting metal from ore by heating",
+    "The quality of being calm"
+  ],
+  "answerOption": "B",
+  "answerText": "To make something unclear or unintelligible",
+  "difficulty": "hard",
+  "sourceFile": "2011.json"
+}

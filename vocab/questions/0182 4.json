@@ -1,0 +1,15 @@
+{
+  "id": 182,
+  "word": "Save",
+  "question": "Save",
+  "options": [
+    "Too long and therefore boring",
+    "Noticeably happy and optimistic",
+    "Strange or odd; unusual",
+    "To keep something for future use"
+  ],
+  "answerOption": "D",
+  "answerText": "To keep something for future use",
+  "difficulty": "easy",
+  "sourceFile": "0182.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1699,
+  "word": "Determinist",
+  "question": "Determinist",
+  "options": [
+    "To show or prove something",
+    "One who believes in determinism",
+    "To reduce speed gradually",
+    "Forced someone to act against their will"
+  ],
+  "answerOption": "B",
+  "answerText": "One who believes in determinism",
+  "difficulty": "medium",
+  "sourceFile": "1699.json"
+}

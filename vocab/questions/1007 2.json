@@ -1,0 +1,15 @@
+{
+  "id": 1007,
+  "word": "Opaque",
+  "question": "Opaque",
+  "options": [
+    "Playfully quaint or fanciful",
+    "Not able to be seen through; not transparent",
+    "Showing smug satisfaction with oneself",
+    "Using few words; devoid of superfluity"
+  ],
+  "answerOption": "B",
+  "answerText": "Not able to be seen through; not transparent",
+  "difficulty": "medium",
+  "sourceFile": "1007.json"
+}

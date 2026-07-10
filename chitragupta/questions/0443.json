@@ -1,0 +1,14 @@
+{
+  "id": 443,
+  "question": "Who proposed the uncertainty principle?",
+  "options": [
+    "Schrödinger",
+    "Heisenberg",
+    "Bohr",
+    "Planck"
+  ],
+  "answerOption": "B",
+  "answerText": "Heisenberg",
+  "genre": "general-knowledge",
+  "sourceFile": "0443.json"
+}

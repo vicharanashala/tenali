@@ -1,0 +1,15 @@
+{
+  "id": 1012,
+  "word": "Meticulous",
+  "question": "Meticulous",
+  "options": [
+    "Showing great attention to detail",
+    "The process of careful consideration",
+    "Requiring careful handling",
+    "To destroy a building or structure"
+  ],
+  "answerOption": "A",
+  "answerText": "Showing great attention to detail",
+  "difficulty": "medium",
+  "sourceFile": "1012.json"
+}

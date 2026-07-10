@@ -1,0 +1,14 @@
+{
+  "id": 280,
+  "question": "Which country is associated with the city of Mecca?",
+  "options": [
+    "Iran",
+    "Iraq",
+    "Saudi Arabia",
+    "UAE"
+  ],
+  "answerOption": "C",
+  "answerText": "Saudi Arabia",
+  "genre": "geography",
+  "sourceFile": "0280.json"
+}

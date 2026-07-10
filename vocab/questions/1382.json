@@ -1,0 +1,15 @@
+{
+  "id": 1382,
+  "word": "Delinquency",
+  "question": "Delinquency",
+  "options": [
+    "To devote time and effort to something",
+    "The amount or extent of something",
+    "The action of committing crime",
+    "Reduced in rank or status"
+  ],
+  "answerOption": "C",
+  "answerText": "The action of committing crime",
+  "difficulty": "medium",
+  "sourceFile": "1382.json"
+}

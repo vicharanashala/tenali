@@ -1,0 +1,15 @@
+{
+  "id": 55,
+  "word": "Early",
+  "question": "Early",
+  "options": [
+    "Of a rough or irregular surface",
+    "To welcome someone with particular words",
+    "Available to be chosen but not required",
+    "Before the usual or expected time"
+  ],
+  "answerOption": "D",
+  "answerText": "Before the usual or expected time",
+  "difficulty": "easy",
+  "sourceFile": "0055.json"
+}

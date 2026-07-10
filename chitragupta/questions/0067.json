@@ -1,0 +1,14 @@
+{
+  "id": 67,
+  "question": "Who composed the Indian national anthem 'Jana Gana Mana'?",
+  "options": [
+    "Bankim Chandra Chattopadhyay",
+    "Rabindranath Tagore",
+    "Sarojini Naidu",
+    "Subramania Bharati"
+  ],
+  "answerOption": "B",
+  "answerText": "Rabindranath Tagore",
+  "genre": "india-gk",
+  "sourceFile": "0067.json"
+}

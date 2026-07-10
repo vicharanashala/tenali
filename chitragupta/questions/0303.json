@@ -1,0 +1,14 @@
+{
+  "id": 303,
+  "question": "Which city is the capital of Gujarat?",
+  "options": [
+    "Ahmedabad",
+    "Surat",
+    "Rajkot",
+    "Gandhinagar"
+  ],
+  "answerOption": "D",
+  "answerText": "Gandhinagar",
+  "genre": "geography",
+  "sourceFile": "0303.json"
+}

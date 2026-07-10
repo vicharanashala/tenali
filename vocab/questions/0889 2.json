@@ -1,0 +1,15 @@
+{
+  "id": 889,
+  "word": "Kindle",
+  "question": "Kindle",
+  "options": [
+    "Failing to take proper care",
+    "Careful to avoid social awkwardness",
+    "A state of uncertainty about what to do",
+    "To light a fire; to arouse an emotion"
+  ],
+  "answerOption": "D",
+  "answerText": "To light a fire; to arouse an emotion",
+  "difficulty": "medium",
+  "sourceFile": "0889.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1070,
+  "word": "Jargon",
+  "question": "Jargon",
+  "options": [
+    "Special words used by a particular profession",
+    "To take a position of power illegally",
+    "Feeling or expressing great happiness",
+    "To follow a winding course"
+  ],
+  "answerOption": "A",
+  "answerText": "Special words used by a particular profession",
+  "difficulty": "medium",
+  "sourceFile": "1070.json"
+}

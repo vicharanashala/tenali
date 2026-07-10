@@ -1,0 +1,15 @@
+{
+  "id": 75,
+  "word": "Proud",
+  "question": "Proud",
+  "options": [
+    "To examine and make corrections to something",
+    "To become visible or noticeable",
+    "To withdraw from a position",
+    "Feeling deep pleasure from achievements"
+  ],
+  "answerOption": "D",
+  "answerText": "Feeling deep pleasure from achievements",
+  "difficulty": "easy",
+  "sourceFile": "0075.json"
+}

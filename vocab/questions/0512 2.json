@@ -1,0 +1,15 @@
+{
+  "id": 512,
+  "word": "Perceive",
+  "question": "Perceive",
+  "options": [
+    "Using imagination to create new things",
+    "To become aware of through the senses",
+    "Having high moral standards",
+    "To keep away from something"
+  ],
+  "answerOption": "B",
+  "answerText": "To become aware of through the senses",
+  "difficulty": "easy",
+  "sourceFile": "0512.json"
+}

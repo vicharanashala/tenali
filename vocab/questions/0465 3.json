@@ -1,0 +1,15 @@
+{
+  "id": 465,
+  "word": "Rehearse",
+  "question": "Rehearse",
+  "options": [
+    "To ask someone to come to an event",
+    "Having four equal sides and right angles",
+    "To practice for a public performance",
+    "Having a pleasant taste"
+  ],
+  "answerOption": "C",
+  "answerText": "To practice for a public performance",
+  "difficulty": "easy",
+  "sourceFile": "0465.json"
+}

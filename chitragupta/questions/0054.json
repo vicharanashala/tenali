@@ -1,0 +1,14 @@
+{
+  "id": 54,
+  "question": "Which metal is liquid at room temperature?",
+  "options": [
+    "Iron",
+    "Copper",
+    "Mercury",
+    "Aluminium"
+  ],
+  "answerOption": "C",
+  "answerText": "Mercury",
+  "genre": "mixed",
+  "sourceFile": "0054.json"
+}

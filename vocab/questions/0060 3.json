@@ -1,0 +1,15 @@
+{
+  "id": 60,
+  "word": "Difficult",
+  "question": "Difficult",
+  "options": [
+    "Needing much effort or skill to accomplish",
+    "To move behind someone in the same direction",
+    "Not giving enough attention to avoid harm",
+    "To move smoothly along a surface"
+  ],
+  "answerOption": "A",
+  "answerText": "Needing much effort or skill to accomplish",
+  "difficulty": "easy",
+  "sourceFile": "0060.json"
+}

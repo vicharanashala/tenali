@@ -1,0 +1,15 @@
+{
+  "id": 3124,
+  "word": "Reverie",
+  "question": "Reverie",
+  "options": [
+    "Philosophy of ablism",
+    "Renounced under oath",
+    "A state of being pleasantly lost in thought",
+    "Desiring or seeking powerful change in one's life"
+  ],
+  "answerOption": "C",
+  "answerText": "A state of being pleasantly lost in thought",
+  "difficulty": "extra-hard",
+  "sourceFile": "3124.json"
+}

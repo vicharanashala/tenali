@@ -1,0 +1,15 @@
+{
+  "id": 1280,
+  "word": "Carte Blanche",
+  "question": "Carte Blanche",
+  "options": [
+    "Causing great pleasure and satisfaction",
+    "A police officer investigating crime",
+    "Complete freedom of action",
+    "The arrangement of teeth"
+  ],
+  "answerOption": "C",
+  "answerText": "Complete freedom of action",
+  "difficulty": "medium",
+  "sourceFile": "1280.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1039,
+  "word": "Pensive",
+  "question": "Pensive",
+  "options": [
+    "A state of being extremely poor",
+    "Active opposition or hostility",
+    "The action of destroying something",
+    "Engaged in deep or serious thought"
+  ],
+  "answerOption": "D",
+  "answerText": "Engaged in deep or serious thought",
+  "difficulty": "medium",
+  "sourceFile": "1039.json"
+}

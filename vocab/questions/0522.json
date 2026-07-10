@@ -1,0 +1,15 @@
+{
+  "id": 522,
+  "word": "Supervise",
+  "question": "Supervise",
+  "options": [
+    "Showing a willingness to take risks",
+    "Darkly colored or gloomy",
+    "To watch over and direct the work of others",
+    "Occurring or done many times"
+  ],
+  "answerOption": "C",
+  "answerText": "To watch over and direct the work of others",
+  "difficulty": "easy",
+  "sourceFile": "0522.json"
+}

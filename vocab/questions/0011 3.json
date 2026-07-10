@@ -1,0 +1,15 @@
+{
+  "id": 11,
+  "word": "Short",
+  "question": "Short",
+  "options": [
+    "No longer fresh; old and dry",
+    "Measuring a small distance from end to end",
+    "Involving or creating good conditions",
+    "To feel a strong desire for something"
+  ],
+  "answerOption": "B",
+  "answerText": "Measuring a small distance from end to end",
+  "difficulty": "easy",
+  "sourceFile": "0011.json"
+}

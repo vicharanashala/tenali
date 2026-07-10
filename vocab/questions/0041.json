@@ -1,0 +1,15 @@
+{
+  "id": 41,
+  "word": "Pretty",
+  "question": "Pretty",
+  "options": [
+    "Attractive in a delicate way",
+    "Having a great deal to do",
+    "Having the form of a circle",
+    "Able to express oneself easily in a language"
+  ],
+  "answerOption": "A",
+  "answerText": "Attractive in a delicate way",
+  "difficulty": "easy",
+  "sourceFile": "0041.json"
+}

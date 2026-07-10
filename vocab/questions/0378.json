@@ -1,0 +1,15 @@
+{
+  "id": 378,
+  "word": "Shake",
+  "question": "Shake",
+  "options": [
+    "To move something quickly back and forth",
+    "To give facts or information to someone",
+    "Stale or rank smelling",
+    "No longer living"
+  ],
+  "answerOption": "A",
+  "answerText": "To move something quickly back and forth",
+  "difficulty": "easy",
+  "sourceFile": "0378.json"
+}

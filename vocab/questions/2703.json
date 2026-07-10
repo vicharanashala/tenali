@@ -1,0 +1,15 @@
+{
+  "id": 2703,
+  "word": "Lesion",
+  "question": "Lesion",
+  "options": [
+    "Severe emotional or physical shock",
+    "One who travels in air",
+    "Worth doing or recommending",
+    "An abnormal change in body tissue"
+  ],
+  "answerOption": "D",
+  "answerText": "An abnormal change in body tissue",
+  "difficulty": "hard",
+  "sourceFile": "2703.json"
+}

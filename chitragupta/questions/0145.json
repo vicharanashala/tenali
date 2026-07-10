@@ -1,0 +1,14 @@
+{
+  "id": 145,
+  "question": "What is the national sport of Japan traditionally associated with the country?",
+  "options": [
+    "Karate",
+    "Sumo wrestling",
+    "Judo",
+    "Baseball"
+  ],
+  "answerOption": "B",
+  "answerText": "Sumo wrestling",
+  "genre": "geography",
+  "sourceFile": "0145.json"
+}

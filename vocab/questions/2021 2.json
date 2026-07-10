@@ -1,0 +1,15 @@
+{
+  "id": 2021,
+  "word": "Aegirite",
+  "question": "Aegirite",
+  "options": [
+    "Condition from air in blood",
+    "A type of mineral pyroxene",
+    "Just beginning to develop",
+    "The quality of being enigmatic"
+  ],
+  "answerOption": "B",
+  "answerText": "A type of mineral pyroxene",
+  "difficulty": "hard",
+  "sourceFile": "2021.json"
+}

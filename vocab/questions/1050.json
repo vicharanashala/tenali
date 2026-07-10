@@ -1,0 +1,15 @@
+{
+  "id": 1050,
+  "word": "Chronic",
+  "question": "Chronic",
+  "options": [
+    "To express severe disapproval of",
+    "Uncertain to succeed",
+    "Persisting for a long time or recurring",
+    "To have an intense feeling of longing"
+  ],
+  "answerOption": "C",
+  "answerText": "Persisting for a long time or recurring",
+  "difficulty": "medium",
+  "sourceFile": "1050.json"
+}

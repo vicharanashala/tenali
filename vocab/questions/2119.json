@@ -1,0 +1,15 @@
+{
+  "id": 2119,
+  "word": "Knavery",
+  "question": "Knavery",
+  "options": [
+    "Something that prevents movement",
+    "The practices of a dishonest person",
+    "Not being what it claims to be; false",
+    "The science of extracting and using metals"
+  ],
+  "answerOption": "B",
+  "answerText": "The practices of a dishonest person",
+  "difficulty": "hard",
+  "sourceFile": "2119.json"
+}

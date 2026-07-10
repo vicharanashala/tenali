@@ -1,0 +1,15 @@
+{
+  "id": 351,
+  "word": "Prove",
+  "question": "Prove",
+  "options": [
+    "Having a strong desire for success",
+    "To show that something is true",
+    "Feeling dedication to a cause or activity",
+    "Feeling a need to drink something"
+  ],
+  "answerOption": "B",
+  "answerText": "To show that something is true",
+  "difficulty": "easy",
+  "sourceFile": "0351.json"
+}

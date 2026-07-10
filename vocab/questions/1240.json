@@ -1,0 +1,15 @@
+{
+  "id": 1240,
+  "word": "Laborious",
+  "question": "Laborious",
+  "options": [
+    "To care for and encourage growth",
+    "Requiring considerable effort and time",
+    "State of being partially clothed",
+    "A state of despair and hopelessness"
+  ],
+  "answerOption": "B",
+  "answerText": "Requiring considerable effort and time",
+  "difficulty": "medium",
+  "sourceFile": "1240.json"
+}

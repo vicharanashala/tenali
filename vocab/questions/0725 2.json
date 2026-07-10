@@ -1,0 +1,15 @@
+{
+  "id": 725,
+  "word": "Diagonal",
+  "question": "Diagonal",
+  "options": [
+    "Going in a slanting direction",
+    "Of extreme force or strength",
+    "Of chief importance; principal",
+    "To put forward an idea for consideration"
+  ],
+  "answerOption": "A",
+  "answerText": "Going in a slanting direction",
+  "difficulty": "easy",
+  "sourceFile": "0725.json"
+}

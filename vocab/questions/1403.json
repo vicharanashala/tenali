@@ -1,0 +1,15 @@
+{
+  "id": 1403,
+  "word": "Demitasse",
+  "question": "Demitasse",
+  "options": [
+    "Fluent and persuasive in speaking or writing",
+    "Involving or inciting rebellion",
+    "A small cup for strong black coffee",
+    "Intending to cause harm"
+  ],
+  "answerOption": "C",
+  "answerText": "A small cup for strong black coffee",
+  "difficulty": "medium",
+  "sourceFile": "1403.json"
+}

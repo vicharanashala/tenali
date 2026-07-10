@@ -1,0 +1,15 @@
+{
+  "id": 248,
+  "word": "Choose",
+  "question": "Choose",
+  "options": [
+    "Well known from long experience",
+    "To pick out something from alternatives",
+    "To heat a liquid until it bubbles",
+    "Of or at a fairly high temperature"
+  ],
+  "answerOption": "B",
+  "answerText": "To pick out something from alternatives",
+  "difficulty": "easy",
+  "sourceFile": "0248.json"
+}

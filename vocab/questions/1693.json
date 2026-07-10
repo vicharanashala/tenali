@@ -1,0 +1,15 @@
+{
+  "id": 1693,
+  "word": "Determine",
+  "question": "Determine",
+  "options": [
+    "Unable to move or function normally",
+    "To establish or decide exactly",
+    "Lasting for a very short time",
+    "The action of discovering something"
+  ],
+  "answerOption": "B",
+  "answerText": "To establish or decide exactly",
+  "difficulty": "medium",
+  "sourceFile": "1693.json"
+}

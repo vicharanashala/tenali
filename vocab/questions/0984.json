@@ -1,0 +1,15 @@
+{
+  "id": 984,
+  "word": "Fervid",
+  "question": "Fervid",
+  "options": [
+    "Having a strong pleasant taste",
+    "Fixed or fastened firmly; not easily moved",
+    "Intensely passionate or devoted",
+    "To have a strong emotional effect on someone"
+  ],
+  "answerOption": "C",
+  "answerText": "Intensely passionate or devoted",
+  "difficulty": "easy",
+  "sourceFile": "0984.json"
+}

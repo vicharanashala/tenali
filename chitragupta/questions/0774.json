@@ -1,0 +1,14 @@
+{
+  "id": 774,
+  "question": "Which organ in the body is responsible for producing red blood cells in adults?",
+  "options": [
+    "Bone marrow",
+    "Liver",
+    "Spleen",
+    "Kidney"
+  ],
+  "answerOption": "A",
+  "answerText": "Bone marrow",
+  "genre": "science",
+  "sourceFile": "0774.json"
+}

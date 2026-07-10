@@ -1,0 +1,15 @@
+{
+  "id": 2288,
+  "word": "Adulthood",
+  "question": "Adulthood",
+  "options": [
+    "The state of being a fully developed adult",
+    "Just beginning to develop",
+    "A person's ability to cope with difficulties",
+    "The quality of being solid"
+  ],
+  "answerOption": "A",
+  "answerText": "The state of being a fully developed adult",
+  "difficulty": "hard",
+  "sourceFile": "2288.json"
+}

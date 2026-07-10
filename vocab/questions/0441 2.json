@@ -1,0 +1,15 @@
+{
+  "id": 441,
+  "word": "Stack",
+  "question": "Stack",
+  "options": [
+    "To arrange things in a neat pile",
+    "To go or come up a slope or stairs",
+    "To cause someone to believe something",
+    "To explain the meaning of something"
+  ],
+  "answerOption": "A",
+  "answerText": "To arrange things in a neat pile",
+  "difficulty": "easy",
+  "sourceFile": "0441.json"
+}

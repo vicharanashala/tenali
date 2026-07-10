@@ -1,0 +1,15 @@
+{
+  "id": 1285,
+  "word": "Clemency",
+  "question": "Clemency",
+  "options": [
+    "Not friendly or interested; distant",
+    "Feeling uncertain or skeptical",
+    "Mercy or leniency shown to a wrongdoer",
+    "General or widespread dislike"
+  ],
+  "answerOption": "C",
+  "answerText": "Mercy or leniency shown to a wrongdoer",
+  "difficulty": "medium",
+  "sourceFile": "1285.json"
+}

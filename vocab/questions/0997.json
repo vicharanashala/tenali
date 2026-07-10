@@ -1,0 +1,15 @@
+{
+  "id": 997,
+  "word": "Rancid",
+  "question": "Rancid",
+  "options": [
+    "Made or done without method or plan",
+    "To put or keep out of sight",
+    "Stale or rank smelling",
+    "Containing or made of metal"
+  ],
+  "answerOption": "C",
+  "answerText": "Stale or rank smelling",
+  "difficulty": "easy",
+  "sourceFile": "0997.json"
+}

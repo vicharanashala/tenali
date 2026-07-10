@@ -1,0 +1,15 @@
+{
+  "id": 483,
+  "word": "Revise",
+  "question": "Revise",
+  "options": [
+    "Slightly wet or damp",
+    "Very large in size or quantity",
+    "Having great power or strength",
+    "To examine and make corrections to something"
+  ],
+  "answerOption": "D",
+  "answerText": "To examine and make corrections to something",
+  "difficulty": "easy",
+  "sourceFile": "0483.json"
+}

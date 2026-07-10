@@ -1,0 +1,15 @@
+{
+  "id": 2303,
+  "word": "Psephology",
+  "question": "Psephology",
+  "options": [
+    "The inability to remember a particular word",
+    "The statistical study of elections and voting",
+    "A reason for being; the thing that gets you up in the morning",
+    "The strange wistfulness of used bookshops"
+  ],
+  "answerOption": "B",
+  "answerText": "The statistical study of elections and voting",
+  "difficulty": "extra-hard",
+  "sourceFile": "2303.json"
+}

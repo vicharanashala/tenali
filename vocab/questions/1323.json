@@ -1,0 +1,15 @@
+{
+  "id": 1323,
+  "word": "Decoy",
+  "question": "Decoy",
+  "options": [
+    "A person or thing used to entice or lure",
+    "Attractively unusual or old-fashioned",
+    "Prone to discord or quarreling",
+    "Quick and light in movement"
+  ],
+  "answerOption": "A",
+  "answerText": "A person or thing used to entice or lure",
+  "difficulty": "medium",
+  "sourceFile": "1323.json"
+}

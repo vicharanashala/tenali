@@ -1,0 +1,15 @@
+{
+  "id": 1274,
+  "word": "Vestige",
+  "question": "Vestige",
+  "options": [
+    "Having or showing great knowledge",
+    "Overly dramatic or emotional",
+    "To extend known data into an unknown area",
+    "A trace of something that once existed"
+  ],
+  "answerOption": "D",
+  "answerText": "A trace of something that once existed",
+  "difficulty": "hard",
+  "sourceFile": "1274.json"
+}

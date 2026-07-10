@@ -1,0 +1,15 @@
+{
+  "id": 693,
+  "word": "Optional",
+  "question": "Optional",
+  "options": [
+    "Available to be chosen but not required",
+    "Economical or thrifty",
+    "Having a sharp acidic taste",
+    "Having the taste of salt"
+  ],
+  "answerOption": "A",
+  "answerText": "Available to be chosen but not required",
+  "difficulty": "easy",
+  "sourceFile": "0693.json"
+}

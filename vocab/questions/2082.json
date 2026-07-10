@@ -1,0 +1,15 @@
+{
+  "id": 2082,
+  "word": "Recrimination",
+  "question": "Recrimination",
+  "options": [
+    "An accusation in response to another",
+    "The quality of being noticeable",
+    "The action of requesting urgently",
+    "Stubborn or unmanageable"
+  ],
+  "answerOption": "A",
+  "answerText": "An accusation in response to another",
+  "difficulty": "hard",
+  "sourceFile": "2082.json"
+}

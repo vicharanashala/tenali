@@ -1,0 +1,15 @@
+{
+  "id": 950,
+  "word": "Frivolous",
+  "question": "Frivolous",
+  "options": [
+    "Without seriousness or importance",
+    "Having a strong unpleasant smell",
+    "Expecting the best possible outcome",
+    "Showing great activity or vitality"
+  ],
+  "answerOption": "A",
+  "answerText": "Without seriousness or importance",
+  "difficulty": "easy",
+  "sourceFile": "0950.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 551,
+  "word": "Collaborate",
+  "question": "Collaborate",
+  "options": [
+    "Having high moral qualities",
+    "To put things in a neat or attractive order",
+    "Shaped like a circle or sphere",
+    "To work together on an activity"
+  ],
+  "answerOption": "D",
+  "answerText": "To work together on an activity",
+  "difficulty": "easy",
+  "sourceFile": "0551.json"
+}

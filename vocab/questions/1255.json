@@ -1,0 +1,15 @@
+{
+  "id": 1255,
+  "word": "Derivative",
+  "question": "Derivative",
+  "options": [
+    "Bent out of the normal shape",
+    "Causing great pleasure and satisfaction",
+    "Not original; based on something else",
+    "Strange or odd; unusual"
+  ],
+  "answerOption": "C",
+  "answerText": "Not original; based on something else",
+  "difficulty": "medium",
+  "sourceFile": "1255.json"
+}

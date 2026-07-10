@@ -1,0 +1,15 @@
+{
+  "id": 575,
+  "word": "Grateful",
+  "question": "Grateful",
+  "options": [
+    "Easily perceived or understood",
+    "To settle a dispute by making concessions",
+    "Feeling thankful for something received",
+    "Gathered together in one place"
+  ],
+  "answerOption": "C",
+  "answerText": "Feeling thankful for something received",
+  "difficulty": "easy",
+  "sourceFile": "0575.json"
+}

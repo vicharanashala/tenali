@@ -1,0 +1,14 @@
+{
+  "id": 881,
+  "question": "Which country is associated with the city of Dushanbe?",
+  "options": [
+    "Uzbekistan",
+    "Kyrgyzstan",
+    "Tajikistan",
+    "Turkmenistan"
+  ],
+  "answerOption": "C",
+  "answerText": "Tajikistan",
+  "genre": "geography",
+  "sourceFile": "0881.json"
+}

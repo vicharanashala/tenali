@@ -1,0 +1,15 @@
+{
+  "id": 250,
+  "word": "Approach",
+  "question": "Approach",
+  "options": [
+    "To come near or nearer to something",
+    "Made or done without method or plan",
+    "Noticeably happy and optimistic",
+    "To dislike something very intensely"
+  ],
+  "answerOption": "A",
+  "answerText": "To come near or nearer to something",
+  "difficulty": "easy",
+  "sourceFile": "0250.json"
+}

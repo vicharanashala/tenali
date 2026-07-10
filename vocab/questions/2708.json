@@ -1,0 +1,15 @@
+{
+  "id": 2708,
+  "word": "Prognosis",
+  "question": "Prognosis",
+  "options": [
+    "One who advances",
+    "The use of clever but false arguments",
+    "Treatment with hot air",
+    "An estimate of the course of a disease"
+  ],
+  "answerOption": "D",
+  "answerText": "An estimate of the course of a disease",
+  "difficulty": "hard",
+  "sourceFile": "2708.json"
+}

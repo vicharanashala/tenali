@@ -1,0 +1,15 @@
+{
+  "id": 2307,
+  "word": "Pronoia",
+  "question": "Pronoia",
+  "options": [
+    "The most typical example or representation",
+    "Renounced under oath",
+    "The opposite of paranoia; belief that the world conspires to help you",
+    "The involuntary repetition of words or phrases"
+  ],
+  "answerOption": "C",
+  "answerText": "The opposite of paranoia; belief that the world conspires to help you",
+  "difficulty": "extra-hard",
+  "sourceFile": "2307.json"
+}

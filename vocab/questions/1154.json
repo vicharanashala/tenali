@@ -1,0 +1,15 @@
+{
+  "id": 1154,
+  "word": "Negate",
+  "question": "Negate",
+  "options": [
+    "Loyalty to a person or country",
+    "Truthful and straightforward; frank",
+    "To make something ineffective; to nullify",
+    "The action of despoiling"
+  ],
+  "answerOption": "C",
+  "answerText": "To make something ineffective; to nullify",
+  "difficulty": "medium",
+  "sourceFile": "1154.json"
+}

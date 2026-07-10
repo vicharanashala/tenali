@@ -1,0 +1,15 @@
+{
+  "id": 367,
+  "word": "Stir",
+  "question": "Stir",
+  "options": [
+    "To move a spoon around in a liquid",
+    "To grow and develop well",
+    "To make something less strong",
+    "To feel or detect something"
+  ],
+  "answerOption": "A",
+  "answerText": "To move a spoon around in a liquid",
+  "difficulty": "easy",
+  "sourceFile": "0367.json"
+}

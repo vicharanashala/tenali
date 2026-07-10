@@ -1,0 +1,15 @@
+{
+  "id": 515,
+  "word": "Assume",
+  "question": "Assume",
+  "options": [
+    "To accept something as true without proof",
+    "Intensely passionate or devoted",
+    "To give a brief statement of main points",
+    "To need something as necessary"
+  ],
+  "answerOption": "A",
+  "answerText": "To accept something as true without proof",
+  "difficulty": "easy",
+  "sourceFile": "0515.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2407,
+  "word": "Xenogenesis",
+  "question": "Xenogenesis",
+  "options": [
+    "The quality of being lasting",
+    "Passionately enthusiastic",
+    "Not involving living organisms",
+    "The supposed generation from a different species"
+  ],
+  "answerOption": "D",
+  "answerText": "The supposed generation from a different species",
+  "difficulty": "extra-hard",
+  "sourceFile": "2407.json"
+}

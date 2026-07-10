@@ -1,0 +1,15 @@
+{
+  "id": 1721,
+  "word": "Detrimental",
+  "question": "Detrimental",
+  "options": [
+    "A person who depones",
+    "Causing harm or damage",
+    "Fluent and persuasive in speaking or writing",
+    "One who despises"
+  ],
+  "answerOption": "B",
+  "answerText": "Causing harm or damage",
+  "difficulty": "medium",
+  "sourceFile": "1721.json"
+}

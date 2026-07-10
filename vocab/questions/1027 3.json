@@ -1,0 +1,15 @@
+{
+  "id": 1027,
+  "word": "Wane",
+  "question": "Wane",
+  "options": [
+    "To subtract an amount from a total",
+    "To decrease gradually in size or intensity",
+    "Free from disturbance; calm",
+    "To remove sulfur from something"
+  ],
+  "answerOption": "B",
+  "answerText": "To decrease gradually in size or intensity",
+  "difficulty": "medium",
+  "sourceFile": "1027.json"
+}

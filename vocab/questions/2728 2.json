@@ -1,0 +1,15 @@
+{
+  "id": 2728,
+  "word": "Tsundoku",
+  "question": "Tsundoku",
+  "options": [
+    "Lack of path or way",
+    "Acquiring books but letting them pile up unread",
+    "A student graduating",
+    "In a non-living manner"
+  ],
+  "answerOption": "B",
+  "answerText": "Acquiring books but letting them pile up unread",
+  "difficulty": "extra-hard",
+  "sourceFile": "2728.json"
+}

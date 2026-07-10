@@ -1,0 +1,14 @@
+{
+  "id": 184,
+  "question": "Which is the largest peninsula in the world?",
+  "options": [
+    "Arabian Peninsula",
+    "Indian Peninsula",
+    "Scandinavian Peninsula",
+    "Malay Peninsula"
+  ],
+  "answerOption": "A",
+  "answerText": "Arabian Peninsula",
+  "genre": "mixed",
+  "sourceFile": "0184.json"
+}

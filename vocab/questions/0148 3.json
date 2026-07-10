@@ -1,0 +1,15 @@
+{
+  "id": 148,
+  "word": "Allow",
+  "question": "Allow",
+  "options": [
+    "To arouse the curiosity of someone",
+    "To give permission for something",
+    "Not far away; close",
+    "To accept something as true"
+  ],
+  "answerOption": "B",
+  "answerText": "To give permission for something",
+  "difficulty": "easy",
+  "sourceFile": "0148.json"
+}

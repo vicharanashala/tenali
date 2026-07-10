@@ -1,0 +1,15 @@
+{
+  "id": 2164,
+  "word": "Precipitous",
+  "question": "Precipitous",
+  "options": [
+    "The quality of lasting long",
+    "Extracting metal from ore by heating",
+    "Kept secret because it would not be approved",
+    "Dangerously high or steep"
+  ],
+  "answerOption": "D",
+  "answerText": "Dangerously high or steep",
+  "difficulty": "hard",
+  "sourceFile": "2164.json"
+}

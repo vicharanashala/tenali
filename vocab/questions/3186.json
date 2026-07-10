@@ -1,0 +1,15 @@
+{
+  "id": 3186,
+  "word": "Abecedarian",
+  "question": "Abecedarian",
+  "options": [
+    "A person learning the alphabet",
+    "A particular philosophy or view of life",
+    "Abyss tide related",
+    "Financially rewarding; lucrative"
+  ],
+  "answerOption": "A",
+  "answerText": "A person learning the alphabet",
+  "difficulty": "extra-hard",
+  "sourceFile": "3186.json"
+}

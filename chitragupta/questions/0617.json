@@ -1,0 +1,14 @@
+{
+  "id": 617,
+  "question": "Who wrote 'The Stranger'?",
+  "options": [
+    "Jean-Paul Sartre",
+    "Albert Camus",
+    "Franz Kafka",
+    "André Gide"
+  ],
+  "answerOption": "B",
+  "answerText": "Albert Camus",
+  "genre": "general-knowledge",
+  "sourceFile": "0617.json"
+}

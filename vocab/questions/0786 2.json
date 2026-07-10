@@ -1,0 +1,15 @@
+{
+  "id": 786,
+  "word": "Sterile",
+  "question": "Sterile",
+  "options": [
+    "To manage or guide the operations of something",
+    "To make or become worse",
+    "Pleased and relieved about something",
+    "Free from bacteria; completely clean"
+  ],
+  "answerOption": "D",
+  "answerText": "Free from bacteria; completely clean",
+  "difficulty": "easy",
+  "sourceFile": "0786.json"
+}

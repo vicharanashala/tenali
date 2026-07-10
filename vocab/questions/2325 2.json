@@ -1,0 +1,15 @@
+{
+  "id": 2325,
+  "word": "Quiddity",
+  "question": "Quiddity",
+  "options": [
+    "The inherent nature or essence of something",
+    "Of a voice: resonant and imposing",
+    "The process of exact thinking or reasoning",
+    "Extremely wretched or miserable"
+  ],
+  "answerOption": "A",
+  "answerText": "The inherent nature or essence of something",
+  "difficulty": "extra-hard",
+  "sourceFile": "2325.json"
+}

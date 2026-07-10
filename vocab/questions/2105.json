@@ -1,0 +1,15 @@
+{
+  "id": 2105,
+  "word": "Spurious",
+  "question": "Spurious",
+  "options": [
+    "Paying attention or noticing",
+    "To blame or insult someone in strong language",
+    "In an enigmatic manner",
+    "Not being what it claims to be; false"
+  ],
+  "answerOption": "D",
+  "answerText": "Not being what it claims to be; false",
+  "difficulty": "hard",
+  "sourceFile": "2105.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 354,
+  "word": "Claim",
+  "question": "Claim",
+  "options": [
+    "To state something is true without proof",
+    "To discover the presence of something hidden",
+    "Resembling without being identical",
+    "To move something quickly back and forth"
+  ],
+  "answerOption": "A",
+  "answerText": "To state something is true without proof",
+  "difficulty": "easy",
+  "sourceFile": "0354.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2087,
+  "word": "Anachronism",
+  "question": "Anachronism",
+  "options": [
+    "A genus of spiders in taxonomy",
+    "To alternate between different opinions",
+    "Something that belongs to a different time",
+    "A genus of weasel-like animals"
+  ],
+  "answerOption": "C",
+  "answerText": "Something that belongs to a different time",
+  "difficulty": "hard",
+  "sourceFile": "2087.json"
+}

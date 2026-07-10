@@ -1,0 +1,15 @@
+{
+  "id": 507,
+  "word": "Reside",
+  "question": "Reside",
+  "options": [
+    "Showing a willingness to take risks",
+    "Darkly colored or gloomy",
+    "To have one's permanent home somewhere",
+    "Occurring or done many times"
+  ],
+  "answerOption": "C",
+  "answerText": "To have one's permanent home somewhere",
+  "difficulty": "easy",
+  "sourceFile": "0507.json"
+}

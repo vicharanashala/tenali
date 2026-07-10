@@ -1,0 +1,15 @@
+{
+  "id": 1452,
+  "word": "Dental",
+  "question": "Dental",
+  "options": [
+    "Feeling uncertain or skeptical",
+    "Of or relating to the teeth",
+    "Expressing desire for something",
+    "A modest view of one's own importance"
+  ],
+  "answerOption": "B",
+  "answerText": "Of or relating to the teeth",
+  "difficulty": "medium",
+  "sourceFile": "1452.json"
+}

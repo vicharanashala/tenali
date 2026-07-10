@@ -1,0 +1,15 @@
+{
+  "id": 1242,
+  "word": "Nostalgia",
+  "question": "Nostalgia",
+  "options": [
+    "A sentimental longing for the past",
+    "To destroy a building or structure",
+    "Relating to ordinary people",
+    "To stop doing something"
+  ],
+  "answerOption": "A",
+  "answerText": "A sentimental longing for the past",
+  "difficulty": "medium",
+  "sourceFile": "1242.json"
+}

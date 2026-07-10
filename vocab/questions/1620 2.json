@@ -1,0 +1,15 @@
+{
+  "id": 1620,
+  "word": "Detonation",
+  "question": "Detonation",
+  "options": [
+    "Of only moderate quality; not very good",
+    "An explosion or violent outburst",
+    "One who deserts a duty or post",
+    "A lack or shortage of something"
+  ],
+  "answerOption": "B",
+  "answerText": "An explosion or violent outburst",
+  "difficulty": "medium",
+  "sourceFile": "1620.json"
+}

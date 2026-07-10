@@ -1,0 +1,15 @@
+{
+  "id": 2654,
+  "word": "Insufficiency",
+  "question": "Insufficiency",
+  "options": [
+    "An estimate of the course of a disease",
+    "Confidence or certainty",
+    "Not having enough of something",
+    "Intended to teach a moral lesson"
+  ],
+  "answerOption": "C",
+  "answerText": "Not having enough of something",
+  "difficulty": "hard",
+  "sourceFile": "2654.json"
+}

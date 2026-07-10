@@ -1,0 +1,15 @@
+{
+  "id": 77,
+  "word": "Bold",
+  "question": "Bold",
+  "options": [
+    "Unassuming in the estimation of one's abilities",
+    "Showing a willingness to take risks",
+    "To cause to move apart",
+    "To discover something by searching"
+  ],
+  "answerOption": "B",
+  "answerText": "Showing a willingness to take risks",
+  "difficulty": "easy",
+  "sourceFile": "0077.json"
+}

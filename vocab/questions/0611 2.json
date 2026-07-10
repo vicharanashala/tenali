@@ -1,0 +1,15 @@
+{
+  "id": 611,
+  "word": "Vivid",
+  "question": "Vivid",
+  "options": [
+    "To collide violently with an obstacle",
+    "Kind and pleasant to others",
+    "Producing powerful feelings or strong images",
+    "Able to be easily modified or adjusted"
+  ],
+  "answerOption": "C",
+  "answerText": "Producing powerful feelings or strong images",
+  "difficulty": "easy",
+  "sourceFile": "0611.json"
+}

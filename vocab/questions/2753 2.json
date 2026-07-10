@@ -1,0 +1,15 @@
+{
+  "id": 2753,
+  "word": "Serendipity",
+  "question": "Serendipity",
+  "options": [
+    "Paying penalty for action",
+    "A hand of cards with no card above a nine",
+    "Abyss-dwelling organisms",
+    "The occurrence of events by chance in a happy way"
+  ],
+  "answerOption": "D",
+  "answerText": "The occurrence of events by chance in a happy way",
+  "difficulty": "extra-hard",
+  "sourceFile": "2753.json"
+}

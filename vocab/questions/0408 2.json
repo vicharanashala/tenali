@@ -1,0 +1,15 @@
+{
+  "id": 408,
+  "word": "Owe",
+  "question": "Owe",
+  "options": [
+    "To be required to pay money to someone",
+    "Sufficient to cause death",
+    "Uncomfortably small or crowded",
+    "Not firmly fixed in place"
+  ],
+  "answerOption": "A",
+  "answerText": "To be required to pay money to someone",
+  "difficulty": "easy",
+  "sourceFile": "0408.json"
+}

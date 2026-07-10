@@ -1,0 +1,15 @@
+{
+  "id": 40,
+  "word": "Sad",
+  "question": "Sad",
+  "options": [
+    "To combine different things together",
+    "To make available for someone to use",
+    "Feeling sorrow or unhappiness",
+    "Easily seen or noticed"
+  ],
+  "answerOption": "C",
+  "answerText": "Feeling sorrow or unhappiness",
+  "difficulty": "easy",
+  "sourceFile": "0040.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 626,
+  "word": "Cautious",
+  "question": "Cautious",
+  "options": [
+    "Diligent and hardworking",
+    "Careful to avoid potential problems",
+    "To cover something in paper or cloth",
+    "To remove goods from a vehicle"
+  ],
+  "answerOption": "B",
+  "answerText": "Careful to avoid potential problems",
+  "difficulty": "easy",
+  "sourceFile": "0626.json"
+}

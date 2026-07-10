@@ -1,0 +1,15 @@
+{
+  "id": 147,
+  "word": "Refuse",
+  "question": "Refuse",
+  "options": [
+    "To cause someone to believe something",
+    "To say that you will not do something",
+    "Shaped like a ball or globe",
+    "In a state of sleep; not awake"
+  ],
+  "answerOption": "B",
+  "answerText": "To say that you will not do something",
+  "difficulty": "easy",
+  "sourceFile": "0147.json"
+}

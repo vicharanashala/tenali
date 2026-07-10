@@ -1,0 +1,14 @@
+{
+  "id": 733,
+  "question": "Which is the longest river in the world in traditional GK?",
+  "options": [
+    "Amazon",
+    "Nile",
+    "Yangtze",
+    "Mississippi"
+  ],
+  "answerOption": "B",
+  "answerText": "Nile",
+  "genre": "geography",
+  "sourceFile": "0733.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2952,
+  "word": "Deposition",
+  "question": "Deposition",
+  "options": [
+    "A formal statement given under oath",
+    "An abnormal change in body tissue",
+    "Saying the same thing twice in different words",
+    "Something that obstructs progress"
+  ],
+  "answerOption": "A",
+  "answerText": "A formal statement given under oath",
+  "difficulty": "hard",
+  "sourceFile": "2952.json"
+}

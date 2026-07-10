@@ -1,0 +1,15 @@
+{
+  "id": 82,
+  "word": "Fresh",
+  "question": "Fresh",
+  "options": [
+    "Quick and light in movement or action",
+    "To withdraw from a position",
+    "Recently made or obtained; not stale",
+    "To examine and make corrections to something"
+  ],
+  "answerOption": "C",
+  "answerText": "Recently made or obtained; not stale",
+  "difficulty": "easy",
+  "sourceFile": "0082.json"
+}

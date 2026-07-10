@@ -1,0 +1,15 @@
+{
+  "id": 376,
+  "word": "Touch",
+  "question": "Touch",
+  "options": [
+    "To put a hand or finger on something",
+    "Of little weight; easy to carry",
+    "Of very great size",
+    "Done with good judgment; practical"
+  ],
+  "answerOption": "A",
+  "answerText": "To put a hand or finger on something",
+  "difficulty": "easy",
+  "sourceFile": "0376.json"
+}

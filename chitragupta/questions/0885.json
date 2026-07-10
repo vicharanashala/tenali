@@ -1,0 +1,14 @@
+{
+  "id": 885,
+  "question": "Which country is associated with the city of Ulaanbaatar?",
+  "options": [
+    "Mongolia",
+    "China",
+    "Kazakhstan",
+    "Russia"
+  ],
+  "answerOption": "A",
+  "answerText": "Mongolia",
+  "genre": "geography",
+  "sourceFile": "0885.json"
+}

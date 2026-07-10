@@ -1,0 +1,15 @@
+{
+  "id": 908,
+  "word": "Falter",
+  "question": "Falter",
+  "options": [
+    "Reserved, modest, and shy in manner",
+    "A feeling of intense excitement and happiness",
+    "To start to lose strength or momentum",
+    "A feeling of great joy and celebration"
+  ],
+  "answerOption": "C",
+  "answerText": "To start to lose strength or momentum",
+  "difficulty": "medium",
+  "sourceFile": "0908.json"
+}

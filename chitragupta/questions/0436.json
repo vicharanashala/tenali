@@ -1,0 +1,14 @@
+{
+  "id": 436,
+  "question": "Which gas is used in welding due to its high flame temperature with oxygen?",
+  "options": [
+    "Nitrogen",
+    "Acetylene",
+    "Helium",
+    "Carbon dioxide"
+  ],
+  "answerOption": "B",
+  "answerText": "Acetylene",
+  "genre": "science",
+  "sourceFile": "0436.json"
+}

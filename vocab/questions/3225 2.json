@@ -1,0 +1,15 @@
+{
+  "id": 3225,
+  "word": "Abyssoscope",
+  "question": "Abyssoscope",
+  "options": [
+    "In abyssal manner",
+    "Device viewing the abyss",
+    "A will-o-the-wisp; something deceptive",
+    "Foot structure of abyss creature"
+  ],
+  "answerOption": "B",
+  "answerText": "Device viewing the abyss",
+  "difficulty": "extra-hard",
+  "sourceFile": "3225.json"
+}

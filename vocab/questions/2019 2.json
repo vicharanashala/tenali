@@ -1,0 +1,15 @@
+{
+  "id": 2019,
+  "word": "Aegis",
+  "question": "Aegis",
+  "options": [
+    "Technology of air use",
+    "Equivalent in seriousness or effect",
+    "Sponsorship, support, or auspices",
+    "An inescapable agent of someone's downfall"
+  ],
+  "answerOption": "C",
+  "answerText": "Sponsorship, support, or auspices",
+  "difficulty": "hard",
+  "sourceFile": "2019.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1831,
+  "word": "Miserly",
+  "question": "Miserly",
+  "options": [
+    "To express disagreement with something",
+    "To clear someone of blame or suspicion",
+    "Not original; based on something else",
+    "Unwilling to spend or give"
+  ],
+  "answerOption": "D",
+  "answerText": "Unwilling to spend or give",
+  "difficulty": "medium",
+  "sourceFile": "1831.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2890,
+  "word": "Abelson",
+  "question": "Abelson",
+  "options": [
+    "One in abyss or submerged",
+    "An old term for a place of learning",
+    "A whispering or rustling sound",
+    "A person or thing that is the center of attention"
+  ],
+  "answerOption": "B",
+  "answerText": "An old term for a place of learning",
+  "difficulty": "extra-hard",
+  "sourceFile": "2890.json"
+}

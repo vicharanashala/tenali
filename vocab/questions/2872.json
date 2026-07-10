@@ -1,0 +1,15 @@
+{
+  "id": 2872,
+  "word": "Masterpiece",
+  "question": "Masterpiece",
+  "options": [
+    "The action of drawing out",
+    "The state of not being active",
+    "An outstanding example of something",
+    "A person who pleads for another"
+  ],
+  "answerOption": "C",
+  "answerText": "An outstanding example of something",
+  "difficulty": "hard",
+  "sourceFile": "2872.json"
+}

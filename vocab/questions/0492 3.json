@@ -1,0 +1,15 @@
+{
+  "id": 492,
+  "word": "Research",
+  "question": "Research",
+  "options": [
+    "Not approximated in any way; precise",
+    "To study something thoroughly",
+    "To receive money in return for labor",
+    "Affected by physical illness"
+  ],
+  "answerOption": "B",
+  "answerText": "To study something thoroughly",
+  "difficulty": "easy",
+  "sourceFile": "0492.json"
+}

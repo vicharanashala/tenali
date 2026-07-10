@@ -1,0 +1,15 @@
+{
+  "id": 2426,
+  "word": "AEROSIS",
+  "question": "AEROSIS",
+  "options": [
+    "Medical condition from altitude",
+    "Organism response to air",
+    "A deep-seated feeling of dislike",
+    "Relating to air-structure interaction"
+  ],
+  "answerOption": "A",
+  "answerText": "Medical condition from altitude",
+  "difficulty": "hard",
+  "sourceFile": "2426.json"
+}

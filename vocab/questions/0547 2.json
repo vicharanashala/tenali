@@ -1,0 +1,15 @@
+{
+  "id": 547,
+  "word": "Influence",
+  "question": "Influence",
+  "options": [
+    "To watch over and protect something",
+    "Feeling optimistic about a future event",
+    "To rot and break down over time",
+    "To have an effect on someone's character"
+  ],
+  "answerOption": "D",
+  "answerText": "To have an effect on someone's character",
+  "difficulty": "easy",
+  "sourceFile": "0547.json"
+}

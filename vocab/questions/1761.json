@@ -1,0 +1,15 @@
+{
+  "id": 1761,
+  "word": "Retaliatory",
+  "question": "Retaliatory",
+  "options": [
+    "Done in return for harm",
+    "Made or planned with clear intent",
+    "The literal meaning of a word",
+    "A substance that purifies the blood"
+  ],
+  "answerOption": "A",
+  "answerText": "Done in return for harm",
+  "difficulty": "medium",
+  "sourceFile": "1761.json"
+}

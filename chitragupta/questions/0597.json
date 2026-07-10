@@ -1,0 +1,14 @@
+{
+  "id": 597,
+  "question": "Which part of the skin contains pigment-producing cells called melanocytes?",
+  "options": [
+    "Dermis only",
+    "Epidermis",
+    "Hypodermis",
+    "Sebaceous glands"
+  ],
+  "answerOption": "B",
+  "answerText": "Epidermis",
+  "genre": "mixed",
+  "sourceFile": "0597.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 614,
+  "question": "Which part of the female reproductive system is the site of fertilization in humans?",
+  "options": [
+    "Uterus",
+    "Ovary",
+    "Fallopian tube",
+    "Cervix"
+  ],
+  "answerOption": "C",
+  "answerText": "Fallopian tube",
+  "genre": "mixed",
+  "sourceFile": "0614.json"
+}

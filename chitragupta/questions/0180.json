@@ -1,0 +1,14 @@
+{
+  "id": 180,
+  "question": "Which famous Indian mathematician was associated with number theory and infinite series?",
+  "options": [
+    "Aryabhata",
+    "Ramanujan",
+    "Bhaskara II",
+    "Brahmagupta"
+  ],
+  "answerOption": "B",
+  "answerText": "Ramanujan",
+  "genre": "india-gk",
+  "sourceFile": "0180.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2440,
+  "word": "Aerator",
+  "question": "Aerator",
+  "options": [
+    "An award or privilege given as honor",
+    "The action of revealing true identity",
+    "A device that aerates something",
+    "The action of bearing witness"
+  ],
+  "answerOption": "C",
+  "answerText": "A device that aerates something",
+  "difficulty": "hard",
+  "sourceFile": "2440.json"
+}

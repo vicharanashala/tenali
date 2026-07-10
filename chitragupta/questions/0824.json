@@ -1,0 +1,14 @@
+{
+  "id": 824,
+  "question": "Which organ in the body is mainly responsible for smell?",
+  "options": [
+    "Ear",
+    "Tongue",
+    "Nose",
+    "Eye"
+  ],
+  "answerOption": "C",
+  "answerText": "Nose",
+  "genre": "science",
+  "sourceFile": "0824.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 524,
+  "question": "Who discovered the modern vaccination principle through the smallpox vaccine?",
+  "options": [
+    "Louis Pasteur",
+    "Edward Jenner",
+    "Fleming",
+    "Koch"
+  ],
+  "answerOption": "B",
+  "answerText": "Edward Jenner",
+  "genre": "general-knowledge",
+  "sourceFile": "0524.json"
+}

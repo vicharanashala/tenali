@@ -1,0 +1,15 @@
+{
+  "id": 817,
+  "word": "Vague",
+  "question": "Vague",
+  "options": [
+    "To tell a story or give an account",
+    "Not clearly expressed or understood",
+    "Evil or morally wrong",
+    "Warm and comfortable"
+  ],
+  "answerOption": "B",
+  "answerText": "Not clearly expressed or understood",
+  "difficulty": "easy",
+  "sourceFile": "0817.json"
+}

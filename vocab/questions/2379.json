@@ -1,0 +1,15 @@
+{
+  "id": 2379,
+  "word": "Aegophony",
+  "question": "Aegophony",
+  "options": [
+    "The sound of the patient's voice",
+    "A lover of flying or air",
+    "Dispersal of seeds by air",
+    "Superficially plausible but actually wrong"
+  ],
+  "answerOption": "A",
+  "answerText": "The sound of the patient's voice",
+  "difficulty": "hard",
+  "sourceFile": "2379.json"
+}

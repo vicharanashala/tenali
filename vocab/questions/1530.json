@@ -1,0 +1,15 @@
+{
+  "id": 1530,
+  "word": "Deputize",
+  "question": "Deputize",
+  "options": [
+    "To appoint as a deputy",
+    "To ask for something forcefully",
+    "Having teeth or tooth-like projections",
+    "Tending to crumble easily"
+  ],
+  "answerOption": "A",
+  "answerText": "To appoint as a deputy",
+  "difficulty": "medium",
+  "sourceFile": "1530.json"
+}

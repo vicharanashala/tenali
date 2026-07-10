@@ -1,0 +1,15 @@
+{
+  "id": 865,
+  "word": "Bizarre",
+  "question": "Bizarre",
+  "options": [
+    "Having the shape of a rectangle",
+    "Having a violent or aggressive nature",
+    "Strikingly unusual or different",
+    "Made by human skill; not natural"
+  ],
+  "answerOption": "C",
+  "answerText": "Strikingly unusual or different",
+  "difficulty": "easy",
+  "sourceFile": "0865.json"
+}

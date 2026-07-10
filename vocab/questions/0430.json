@@ -1,0 +1,15 @@
+{
+  "id": 430,
+  "word": "Unfold",
+  "question": "Unfold",
+  "options": [
+    "To open something that was folded",
+    "Allowing light through but not transparent",
+    "Fickle or frivolous in manner",
+    "To move or act with great speed"
+  ],
+  "answerOption": "A",
+  "answerText": "To open something that was folded",
+  "difficulty": "easy",
+  "sourceFile": "0430.json"
+}

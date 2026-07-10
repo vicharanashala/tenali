@@ -1,0 +1,15 @@
+{
+  "id": 425,
+  "word": "Connect",
+  "question": "Connect",
+  "options": [
+    "To join or link things together",
+    "Awkwardly heavy or bulky",
+    "Not firmly fixed in place",
+    "Sufficient to cause death"
+  ],
+  "answerOption": "A",
+  "answerText": "To join or link things together",
+  "difficulty": "easy",
+  "sourceFile": "0425.json"
+}

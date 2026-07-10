@@ -1,0 +1,15 @@
+{
+  "id": 259,
+  "word": "Travel",
+  "question": "Travel",
+  "options": [
+    "To cause something to come closer",
+    "To use something carelessly or to no purpose",
+    "To go from one place to another",
+    "Having an uneven or irregular surface"
+  ],
+  "answerOption": "C",
+  "answerText": "To go from one place to another",
+  "difficulty": "easy",
+  "sourceFile": "0259.json"
+}

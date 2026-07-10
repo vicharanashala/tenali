@@ -1,0 +1,15 @@
+{
+  "id": 2395,
+  "word": "Labyrinthine",
+  "question": "Labyrinthine",
+  "options": [
+    "A wish or inclination not strong enough for action",
+    "The action of abiding or remaining",
+    "Irregular and winding like a maze",
+    "The restless tossing of the body in illness"
+  ],
+  "answerOption": "C",
+  "answerText": "Irregular and winding like a maze",
+  "difficulty": "extra-hard",
+  "sourceFile": "2395.json"
+}

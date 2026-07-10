@@ -1,0 +1,15 @@
+{
+  "id": 1143,
+  "word": "Coerce",
+  "question": "Coerce",
+  "options": [
+    "A small cup for strong black coffee",
+    "To persuade someone by force or threats",
+    "Clearing forest to use the land",
+    "Reduced in rank or quality"
+  ],
+  "answerOption": "B",
+  "answerText": "To persuade someone by force or threats",
+  "difficulty": "medium",
+  "sourceFile": "1143.json"
+}

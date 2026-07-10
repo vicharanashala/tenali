@@ -1,0 +1,15 @@
+{
+  "id": 341,
+  "word": "Capture",
+  "question": "Capture",
+  "options": [
+    "Feeling optimistic about a future event",
+    "Giving constant support to a person",
+    "To take someone as a prisoner",
+    "To give food to a person or animal"
+  ],
+  "answerOption": "C",
+  "answerText": "To take someone as a prisoner",
+  "difficulty": "easy",
+  "sourceFile": "0341.json"
+}

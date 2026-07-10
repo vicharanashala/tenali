@@ -1,0 +1,15 @@
+{
+  "id": 1391,
+  "word": "Deluge",
+  "question": "Deluge",
+  "options": [
+    "Given to or characterized by quarreling",
+    "A severe flood of water or rain",
+    "Causing disapproval or opposition",
+    "Playfully quaint or fanciful"
+  ],
+  "answerOption": "B",
+  "answerText": "A severe flood of water or rain",
+  "difficulty": "medium",
+  "sourceFile": "1391.json"
+}

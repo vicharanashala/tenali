@@ -1,0 +1,15 @@
+{
+  "id": 2523,
+  "word": "AEROMATIC",
+  "question": "AEROMATIC",
+  "options": [
+    "Relating to the atmosphere",
+    "Relating to aromatic air",
+    "Expressing opinions in a loud forceful way",
+    "Speaking in an airy manner"
+  ],
+  "answerOption": "B",
+  "answerText": "Relating to aromatic air",
+  "difficulty": "hard",
+  "sourceFile": "2523.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 3180,
+  "word": "Abyssophobe",
+  "question": "Abyssophobe",
+  "options": [
+    "Those causing abjection",
+    "People of Abyssinia",
+    "One fearing the abyss",
+    "One viewing the abyss"
+  ],
+  "answerOption": "C",
+  "answerText": "One fearing the abyss",
+  "difficulty": "extra-hard",
+  "sourceFile": "3180.json"
+}

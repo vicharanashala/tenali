@@ -1,0 +1,15 @@
+{
+  "id": 675,
+  "word": "Moderate",
+  "question": "Moderate",
+  "options": [
+    "To start doing something",
+    "Made up of exactly similar parts",
+    "Average in amount or intensity",
+    "Lacking interest or excitement"
+  ],
+  "answerOption": "C",
+  "answerText": "Average in amount or intensity",
+  "difficulty": "easy",
+  "sourceFile": "0675.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 229,
+  "word": "Retreat",
+  "question": "Retreat",
+  "options": [
+    "To withdraw from a position",
+    "An act of saying goodbye",
+    "To fail to care for something properly",
+    "Late or delayed in occurring"
+  ],
+  "answerOption": "A",
+  "answerText": "To withdraw from a position",
+  "difficulty": "easy",
+  "sourceFile": "0229.json"
+}

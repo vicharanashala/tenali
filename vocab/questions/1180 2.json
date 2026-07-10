@@ -1,0 +1,15 @@
+{
+  "id": 1180,
+  "word": "Juggernaut",
+  "question": "Juggernaut",
+  "options": [
+    "Indicating mild puzzlement",
+    "Strong public criticism or verbal abuse",
+    "Cheerful and full of energy",
+    "A huge and overwhelming force"
+  ],
+  "answerOption": "D",
+  "answerText": "A huge and overwhelming force",
+  "difficulty": "hard",
+  "sourceFile": "1180.json"
+}

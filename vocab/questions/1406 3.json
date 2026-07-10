@@ -1,0 +1,15 @@
+{
+  "id": 1406,
+  "word": "Depose",
+  "question": "Depose",
+  "options": [
+    "Not openly acknowledged or displayed",
+    "Worthy of reward or recognition",
+    "Having a friendly and pleasant manner",
+    "To remove from office or position"
+  ],
+  "answerOption": "D",
+  "answerText": "To remove from office or position",
+  "difficulty": "medium",
+  "sourceFile": "1406.json"
+}

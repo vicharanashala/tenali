@@ -1,0 +1,15 @@
+{
+  "id": 92,
+  "word": "Loose",
+  "question": "Loose",
+  "options": [
+    "To state the exact meaning of a word",
+    "Not firmly fixed in place",
+    "Available to be chosen but not required",
+    "To set up an organization on a firm basis"
+  ],
+  "answerOption": "B",
+  "answerText": "Not firmly fixed in place",
+  "difficulty": "easy",
+  "sourceFile": "0092.json"
+}

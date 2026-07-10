@@ -1,0 +1,15 @@
+{
+  "id": 180,
+  "word": "Teach",
+  "question": "Teach",
+  "options": [
+    "To bring something to an end",
+    "To give something to help achieve a goal",
+    "To take on or start using something new",
+    "To impart knowledge or skill to someone"
+  ],
+  "answerOption": "D",
+  "answerText": "To impart knowledge or skill to someone",
+  "difficulty": "easy",
+  "sourceFile": "0180.json"
+}

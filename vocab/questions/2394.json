@@ -1,0 +1,15 @@
+{
+  "id": 2394,
+  "word": "Aenigma",
+  "question": "Aenigma",
+  "options": [
+    "An instrument for measuring air",
+    "An official formal statement",
+    "A riddle or mysterious statement",
+    "To publicly support or recommend"
+  ],
+  "answerOption": "C",
+  "answerText": "A riddle or mysterious statement",
+  "difficulty": "hard",
+  "sourceFile": "2394.json"
+}

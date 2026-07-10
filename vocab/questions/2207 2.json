@@ -1,0 +1,15 @@
+{
+  "id": 2207,
+  "word": "AEROPLANE",
+  "question": "AEROPLANE",
+  "options": [
+    "Naive and simplistic; lacking nourishment",
+    "Equilibrium in air space",
+    "An award or privilege given as honor",
+    "A fixed-wing aircraft"
+  ],
+  "answerOption": "D",
+  "answerText": "A fixed-wing aircraft",
+  "difficulty": "hard",
+  "sourceFile": "2207.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 331,
+  "question": "Which city is the capital of Punjab, shared with Haryana?",
+  "options": [
+    "Amritsar",
+    "Ludhiana",
+    "Chandigarh",
+    "Jalandhar"
+  ],
+  "answerOption": "C",
+  "answerText": "Chandigarh",
+  "genre": "geography",
+  "sourceFile": "0331.json"
+}

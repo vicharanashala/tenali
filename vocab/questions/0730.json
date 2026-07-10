@@ -1,0 +1,15 @@
+{
+  "id": 730,
+  "word": "Symmetrical",
+  "question": "Symmetrical",
+  "options": [
+    "Made up of exactly similar parts",
+    "To make or become worse",
+    "Having lived or existed for only a short time",
+    "To call out in a very loud voice"
+  ],
+  "answerOption": "A",
+  "answerText": "Made up of exactly similar parts",
+  "difficulty": "easy",
+  "sourceFile": "0730.json"
+}

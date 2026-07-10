@@ -1,0 +1,15 @@
+{
+  "id": 2987,
+  "word": "Existentialism",
+  "question": "Existentialism",
+  "options": [
+    "A word modifying a verb or adjective",
+    "An easterly wind in the Aegean",
+    "Philosophy emphasizing individual existence",
+    "The state of being scarce"
+  ],
+  "answerOption": "C",
+  "answerText": "Philosophy emphasizing individual existence",
+  "difficulty": "hard",
+  "sourceFile": "2987.json"
+}

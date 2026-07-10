@@ -1,0 +1,15 @@
+{
+  "id": 2273,
+  "word": "Aeorist",
+  "question": "Aeorist",
+  "options": [
+    "The quality of being manifest",
+    "Aggressively greedy or grasping",
+    "Filled with something undesirable",
+    "One who accepts duration of eons"
+  ],
+  "answerOption": "D",
+  "answerText": "One who accepts duration of eons",
+  "difficulty": "hard",
+  "sourceFile": "2273.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 893,
+  "word": "Scattered",
+  "question": "Scattered",
+  "options": [
+    "To fail to care for something properly",
+    "Spread over a wide area",
+    "To capture or seize something",
+    "To connect or link things together"
+  ],
+  "answerOption": "B",
+  "answerText": "Spread over a wide area",
+  "difficulty": "easy",
+  "sourceFile": "0893.json"
+}

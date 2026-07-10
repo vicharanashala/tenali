@@ -1,0 +1,15 @@
+{
+  "id": 2326,
+  "word": "Redamancy",
+  "question": "Redamancy",
+  "options": [
+    "The quality of being abject",
+    "The warmth of the sun in winter",
+    "A female servant or attendant",
+    "The act of loving someone who loves you in return"
+  ],
+  "answerOption": "D",
+  "answerText": "The act of loving someone who loves you in return",
+  "difficulty": "extra-hard",
+  "sourceFile": "2326.json"
+}

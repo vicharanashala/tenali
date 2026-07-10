@@ -1,0 +1,15 @@
+{
+  "id": 1944,
+  "word": "Cryptic",
+  "question": "Cryptic",
+  "options": [
+    "Careful with money",
+    "An abundant supply of something",
+    "Having a hidden or obscure meaning",
+    "Formally forbidden by authority"
+  ],
+  "answerOption": "C",
+  "answerText": "Having a hidden or obscure meaning",
+  "difficulty": "medium",
+  "sourceFile": "1944.json"
+}

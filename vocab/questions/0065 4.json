@@ -1,0 +1,15 @@
+{
+  "id": 65,
+  "word": "Polite",
+  "question": "Polite",
+  "options": [
+    "To make something clear and easy to understand",
+    "Having good manners and showing respect",
+    "Feeling dedication to a cause or activity",
+    "To make ready for use or consideration"
+  ],
+  "answerOption": "B",
+  "answerText": "Having good manners and showing respect",
+  "difficulty": "easy",
+  "sourceFile": "0065.json"
+}

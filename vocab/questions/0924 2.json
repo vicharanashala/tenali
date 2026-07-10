@@ -1,0 +1,15 @@
+{
+  "id": 924,
+  "word": "Zeal",
+  "question": "Zeal",
+  "options": [
+    "Great energy or enthusiasm for a cause",
+    "Of only moderate quality; not very good",
+    "Easily persuaded to believe something",
+    "To feel deep respect or admiration for"
+  ],
+  "answerOption": "A",
+  "answerText": "Great energy or enthusiasm for a cause",
+  "difficulty": "medium",
+  "sourceFile": "0924.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 202,
+  "question": "Which Mughal emperor was known for religious tolerance and Din-i Ilahi?",
+  "options": [
+    "Babur",
+    "Humayun",
+    "Akbar",
+    "Aurangzeb"
+  ],
+  "answerOption": "C",
+  "answerText": "Akbar",
+  "genre": "mixed",
+  "sourceFile": "0202.json"
+}

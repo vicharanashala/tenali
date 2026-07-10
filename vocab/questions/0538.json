@@ -1,0 +1,15 @@
+{
+  "id": 538,
+  "word": "Adore",
+  "question": "Adore",
+  "options": [
+    "To love and respect deeply",
+    "Characterized by constant change and activity",
+    "Showing great activity or vitality",
+    "Shockingly unacceptable"
+  ],
+  "answerOption": "A",
+  "answerText": "To love and respect deeply",
+  "difficulty": "easy",
+  "sourceFile": "0538.json"
+}

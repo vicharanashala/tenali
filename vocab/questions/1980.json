@@ -1,0 +1,15 @@
+{
+  "id": 1980,
+  "word": "Cantankerous",
+  "question": "Cantankerous",
+  "options": [
+    "Bad-tempered and quarrelsome",
+    "Deserving strong disapproval",
+    "Lacking important necessities",
+    "A doctor specializing in skin"
+  ],
+  "answerOption": "A",
+  "answerText": "Bad-tempered and quarrelsome",
+  "difficulty": "medium",
+  "sourceFile": "1980.json"
+}

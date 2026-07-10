@@ -1,0 +1,15 @@
+{
+  "id": 1829,
+  "word": "Meager",
+  "question": "Meager",
+  "options": [
+    "Lacking in quantity or quality",
+    "Having a harmful effect gradually",
+    "To satisfy thirst by drinking",
+    "State of being partially clothed"
+  ],
+  "answerOption": "A",
+  "answerText": "Lacking in quantity or quality",
+  "difficulty": "medium",
+  "sourceFile": "1829.json"
+}

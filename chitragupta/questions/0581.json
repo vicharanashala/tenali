@@ -1,0 +1,14 @@
+{
+  "id": 581,
+  "question": "What is the SI unit of thermal conductivity?",
+  "options": [
+    "W/(m·K)",
+    "J/(kg·K)",
+    "N/m",
+    "Pa·s"
+  ],
+  "answerOption": "A",
+  "answerText": "W/(m·K)",
+  "genre": "mixed",
+  "sourceFile": "0581.json"
+}

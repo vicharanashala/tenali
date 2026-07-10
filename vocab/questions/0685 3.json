@@ -1,0 +1,15 @@
+{
+  "id": 685,
+  "word": "Robust",
+  "question": "Robust",
+  "options": [
+    "Plain or obvious; clearly seen",
+    "Strong and healthy; vigorous",
+    "Having a strong pleasant taste",
+    "Conforming to what is standard or expected"
+  ],
+  "answerOption": "B",
+  "answerText": "Strong and healthy; vigorous",
+  "difficulty": "easy",
+  "sourceFile": "0685.json"
+}

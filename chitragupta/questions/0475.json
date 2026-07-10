@@ -1,0 +1,14 @@
+{
+  "id": 475,
+  "question": "Which part of the plant is responsible for reproduction?",
+  "options": [
+    "Root",
+    "Stem",
+    "Flower",
+    "Leaf"
+  ],
+  "answerOption": "C",
+  "answerText": "Flower",
+  "genre": "mixed",
+  "sourceFile": "0475.json"
+}

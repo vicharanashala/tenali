@@ -1,0 +1,15 @@
+{
+  "id": 1805,
+  "word": "Dubious",
+  "question": "Dubious",
+  "options": [
+    "The quality of being destructible",
+    "Love, loyalty, or enthusiasm",
+    "Not certain or definite",
+    "Intense dislike or disgust"
+  ],
+  "answerOption": "C",
+  "answerText": "Not certain or definite",
+  "difficulty": "medium",
+  "sourceFile": "1805.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 899,
+  "question": "Which Indian state has Visakhapatnam as a major city though not the capital in standard GK?",
+  "options": [
+    "Odisha",
+    "Andhra Pradesh",
+    "Telangana",
+    "Tamil Nadu"
+  ],
+  "answerOption": "B",
+  "answerText": "Andhra Pradesh",
+  "genre": "geography",
+  "sourceFile": "0899.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 396,
+  "word": "Wither",
+  "question": "Wither",
+  "options": [
+    "To open something that was folded",
+    "To dry out and shrivel up",
+    "In a natural or raw state; not refined",
+    "Acting in the same way over time"
+  ],
+  "answerOption": "B",
+  "answerText": "To dry out and shrivel up",
+  "difficulty": "easy",
+  "sourceFile": "0396.json"
+}

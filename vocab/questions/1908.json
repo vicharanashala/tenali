@@ -1,0 +1,15 @@
+{
+  "id": 1908,
+  "word": "Egotistical",
+  "question": "Egotistical",
+  "options": [
+    "Required to do something",
+    "Excessively self-centered",
+    "To push down or cause sadness",
+    "So lacking in originality as to be obvious"
+  ],
+  "answerOption": "B",
+  "answerText": "Excessively self-centered",
+  "difficulty": "medium",
+  "sourceFile": "1908.json"
+}

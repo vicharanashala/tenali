@@ -1,0 +1,15 @@
+{
+  "id": 855,
+  "word": "Marvelous",
+  "question": "Marvelous",
+  "options": [
+    "Dark or gloomy in appearance",
+    "Resulting in good; favorable",
+    "To succeed in doing something",
+    "Causing wonder or surprise"
+  ],
+  "answerOption": "D",
+  "answerText": "Causing wonder or surprise",
+  "difficulty": "easy",
+  "sourceFile": "0855.json"
+}

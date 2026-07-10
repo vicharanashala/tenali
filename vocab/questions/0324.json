@@ -1,0 +1,15 @@
+{
+  "id": 324,
+  "word": "Entertain",
+  "question": "Entertain",
+  "options": [
+    "To provide someone with enjoyment",
+    "Feeling dedication to a cause or activity",
+    "Clearly visible or understood",
+    "Feeling regret or sadness"
+  ],
+  "answerOption": "A",
+  "answerText": "To provide someone with enjoyment",
+  "difficulty": "easy",
+  "sourceFile": "0324.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2678,
+  "word": "Rampart",
+  "question": "Rampart",
+  "options": [
+    "Not able to be denied or disputed",
+    "The action of substantiating something",
+    "Property or traits passed down",
+    "A defensive wall of a city or fortress"
+  ],
+  "answerOption": "D",
+  "answerText": "A defensive wall of a city or fortress",
+  "difficulty": "hard",
+  "sourceFile": "2678.json"
+}

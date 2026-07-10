@@ -1,0 +1,15 @@
+{
+  "id": 14,
+  "word": "Fierce",
+  "question": "Fierce",
+  "options": [
+    "To pause before doing something",
+    "Showing aggressive or violent force",
+    "Belonging to the very distant past",
+    "Very large in size or quantity"
+  ],
+  "answerOption": "B",
+  "answerText": "Showing aggressive or violent force",
+  "difficulty": "easy",
+  "sourceFile": "0014.json"
+}

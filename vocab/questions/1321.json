@@ -1,0 +1,15 @@
+{
+  "id": 1321,
+  "word": "Decor",
+  "question": "Decor",
+  "options": [
+    "A countless or very great number",
+    "Distorted or inaccurately presented",
+    "The furnishings and decoration of a room",
+    "Extremely happy; full of joy"
+  ],
+  "answerOption": "C",
+  "answerText": "The furnishings and decoration of a room",
+  "difficulty": "medium",
+  "sourceFile": "1321.json"
+}

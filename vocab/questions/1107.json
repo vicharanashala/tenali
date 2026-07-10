@@ -1,0 +1,15 @@
+{
+  "id": 1107,
+  "word": "Novice",
+  "question": "Novice",
+  "options": [
+    "To reduce in extent or quantity",
+    "Unwilling to spend or give",
+    "Friendly and easy to talk to",
+    "A person new to a field or activity"
+  ],
+  "answerOption": "D",
+  "answerText": "A person new to a field or activity",
+  "difficulty": "medium",
+  "sourceFile": "1107.json"
+}

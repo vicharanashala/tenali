@@ -1,0 +1,15 @@
+{
+  "id": 111,
+  "word": "Crooked",
+  "question": "Crooked",
+  "options": [
+    "To remove goods from a vehicle",
+    "Extending far down from the top",
+    "Bent or twisted out of shape",
+    "Very large in size or quantity"
+  ],
+  "answerOption": "C",
+  "answerText": "Bent or twisted out of shape",
+  "difficulty": "easy",
+  "sourceFile": "0111.json"
+}

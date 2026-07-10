@@ -1,0 +1,15 @@
+{
+  "id": 33,
+  "word": "Hungry",
+  "question": "Hungry",
+  "options": [
+    "Made by human skill; not natural",
+    "Feeling or showing the need for food",
+    "Having four equal sides and right angles",
+    "Not giving enough attention to avoid harm"
+  ],
+  "answerOption": "B",
+  "answerText": "Feeling or showing the need for food",
+  "difficulty": "easy",
+  "sourceFile": "0033.json"
+}

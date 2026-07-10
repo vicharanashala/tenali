@@ -1,0 +1,14 @@
+{
+  "id": 638,
+  "question": "Which country is associated with the city of Kuwait City?",
+  "options": [
+    "UAE",
+    "Kuwait",
+    "Bahrain",
+    "Oman"
+  ],
+  "answerOption": "B",
+  "answerText": "Kuwait",
+  "genre": "geography",
+  "sourceFile": "0638.json"
+}

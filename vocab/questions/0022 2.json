@@ -1,0 +1,15 @@
+{
+  "id": 22,
+  "word": "Meticulous",
+  "question": "Meticulous",
+  "options": [
+    "Unwilling and hesitant to act",
+    "Existing in very large quantities",
+    "Able to recover quickly from difficulties",
+    "Showing great attention to detail"
+  ],
+  "answerOption": "D",
+  "answerText": "Showing great attention to detail",
+  "difficulty": "medium",
+  "sourceFile": "0022.json"
+}

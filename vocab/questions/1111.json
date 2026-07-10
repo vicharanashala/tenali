@@ -1,0 +1,15 @@
+{
+  "id": 1111,
+  "word": "Revere",
+  "question": "Revere",
+  "options": [
+    "Having a hidden or obscure meaning",
+    "To feel deep respect or admiration for",
+    "Without regret or compassion",
+    "An amount by which spending exceeds income"
+  ],
+  "answerOption": "B",
+  "answerText": "To feel deep respect or admiration for",
+  "difficulty": "medium",
+  "sourceFile": "1111.json"
+}

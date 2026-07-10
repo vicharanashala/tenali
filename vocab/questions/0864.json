@@ -1,0 +1,15 @@
+{
+  "id": 864,
+  "word": "Weird",
+  "question": "Weird",
+  "options": [
+    "Designed to impress or attract",
+    "Very unusual or strangely surprising",
+    "Unusual or surprising; hard to explain",
+    "Having great power or strength"
+  ],
+  "answerOption": "B",
+  "answerText": "Very unusual or strangely surprising",
+  "difficulty": "easy",
+  "sourceFile": "0864.json"
+}

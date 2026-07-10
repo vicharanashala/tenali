@@ -1,0 +1,15 @@
+{
+  "id": 2373,
+  "word": "AEROMEDICINE",
+  "question": "AEROMEDICINE",
+  "options": [
+    "Departing from accepted standards",
+    "Expressing opinions in a loud forceful way",
+    "Medicine relating to aviation",
+    "Scorched or burned by heat"
+  ],
+  "answerOption": "C",
+  "answerText": "Medicine relating to aviation",
+  "difficulty": "hard",
+  "sourceFile": "2373.json"
+}

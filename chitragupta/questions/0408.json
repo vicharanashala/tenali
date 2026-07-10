@@ -1,0 +1,14 @@
+{
+  "id": 408,
+  "question": "Which gas is produced when zinc reacts with dilute hydrochloric acid?",
+  "options": [
+    "Oxygen",
+    "Hydrogen",
+    "Carbon dioxide",
+    "Nitrogen"
+  ],
+  "answerOption": "B",
+  "answerText": "Hydrogen",
+  "genre": "science",
+  "sourceFile": "0408.json"
+}

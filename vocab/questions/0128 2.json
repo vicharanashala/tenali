@@ -1,0 +1,15 @@
+{
+  "id": 128,
+  "word": "Alive",
+  "question": "Alive",
+  "options": [
+    "Of little weight; easy to carry",
+    "To carry out an action or task",
+    "Living; not dead",
+    "To carefully choose as being the best"
+  ],
+  "answerOption": "C",
+  "answerText": "Living; not dead",
+  "difficulty": "easy",
+  "sourceFile": "0128.json"
+}

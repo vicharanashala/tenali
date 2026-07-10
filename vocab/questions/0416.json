@@ -1,0 +1,15 @@
+{
+  "id": 416,
+  "word": "Require",
+  "question": "Require",
+  "options": [
+    "To test something to discover new facts",
+    "To call out in a very loud voice",
+    "Extremely beautiful or impressive",
+    "To need something as necessary"
+  ],
+  "answerOption": "D",
+  "answerText": "To need something as necessary",
+  "difficulty": "easy",
+  "sourceFile": "0416.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1042,
+  "word": "Serene",
+  "question": "Serene",
+  "options": [
+    "Having a sharp edge or showing eagerness",
+    "Disturbed or insane in mind",
+    "Calm, peaceful, and untroubled",
+    "Open to more than one interpretation"
+  ],
+  "answerOption": "C",
+  "answerText": "Calm, peaceful, and untroubled",
+  "difficulty": "medium",
+  "sourceFile": "1042.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2104,
+  "word": "Aerifier",
+  "question": "Aerifier",
+  "options": [
+    "That which aerifies",
+    "Observation of air conditions",
+    "Patient self-control; restraint",
+    "An instrument like a barometer"
+  ],
+  "answerOption": "A",
+  "answerText": "That which aerifies",
+  "difficulty": "hard",
+  "sourceFile": "2104.json"
+}

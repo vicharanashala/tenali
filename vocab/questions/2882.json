@@ -1,0 +1,15 @@
+{
+  "id": 2882,
+  "word": "Emancipation",
+  "question": "Emancipation",
+  "options": [
+    "The act of freeing someone",
+    "The action of expressing an idea",
+    "One who gives advice or counsel",
+    "Swallowing of air"
+  ],
+  "answerOption": "A",
+  "answerText": "The act of freeing someone",
+  "difficulty": "hard",
+  "sourceFile": "2882.json"
+}

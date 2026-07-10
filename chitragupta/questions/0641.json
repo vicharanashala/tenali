@@ -1,0 +1,14 @@
+{
+  "id": 641,
+  "question": "Which Indian union territory has Port Blair as its capital?",
+  "options": [
+    "Lakshadweep",
+    "Puducherry",
+    "Andaman and Nicobar Islands",
+    "Chandigarh"
+  ],
+  "answerOption": "C",
+  "answerText": "Andaman and Nicobar Islands",
+  "genre": "geography",
+  "sourceFile": "0641.json"
+}

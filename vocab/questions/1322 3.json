@@ -1,0 +1,15 @@
+{
+  "id": 1322,
+  "word": "Demolish",
+  "question": "Demolish",
+  "options": [
+    "To destroy a building or structure",
+    "To examine or inspect closely",
+    "A ruler with absolute power",
+    "The profession of treating teeth"
+  ],
+  "answerOption": "A",
+  "answerText": "To destroy a building or structure",
+  "difficulty": "medium",
+  "sourceFile": "1322.json"
+}

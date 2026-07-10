@@ -1,0 +1,15 @@
+{
+  "id": 1476,
+  "word": "Desalination",
+  "question": "Desalination",
+  "options": [
+    "The removal of salt from water",
+    "Firmly resolved or decided",
+    "Tending to decrease in value",
+    "Showing cruel disregard for others"
+  ],
+  "answerOption": "A",
+  "answerText": "The removal of salt from water",
+  "difficulty": "medium",
+  "sourceFile": "1476.json"
+}

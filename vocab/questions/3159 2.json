@@ -1,0 +1,15 @@
+{
+  "id": 3159,
+  "word": "Abyssinians",
+  "question": "Abyssinians",
+  "options": [
+    "Relating to the ocean at great depths",
+    "In manner of abyss",
+    "People of Abyssinia",
+    "Moderate in eating and drinking"
+  ],
+  "answerOption": "C",
+  "answerText": "People of Abyssinia",
+  "difficulty": "extra-hard",
+  "sourceFile": "3159.json"
+}

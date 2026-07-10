@@ -1,0 +1,15 @@
+{
+  "id": 694,
+  "word": "Vital",
+  "question": "Vital",
+  "options": [
+    "Exceptionally clever or talented",
+    "To pause before doing something",
+    "Based on clear thought and reason",
+    "Absolutely necessary or important"
+  ],
+  "answerOption": "D",
+  "answerText": "Absolutely necessary or important",
+  "difficulty": "easy",
+  "sourceFile": "0694.json"
+}

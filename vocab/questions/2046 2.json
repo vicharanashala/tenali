@@ -1,0 +1,15 @@
+{
+  "id": 2046,
+  "word": "Aenigmaticalness",
+  "question": "Aenigmaticalness",
+  "options": [
+    "A typical example or pattern of something",
+    "In an airy manner",
+    "The quality of being enigmatic",
+    "Sarcastic in a scathing and bitter way"
+  ],
+  "answerOption": "C",
+  "answerText": "The quality of being enigmatic",
+  "difficulty": "hard",
+  "sourceFile": "2046.json"
+}

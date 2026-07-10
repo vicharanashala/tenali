@@ -1,0 +1,15 @@
+{
+  "id": 172,
+  "word": "Laugh",
+  "question": "Laugh",
+  "options": [
+    "To create a plan for making something",
+    "Living; not dead",
+    "To make sounds showing amusement",
+    "To give special importance to something"
+  ],
+  "answerOption": "C",
+  "answerText": "To make sounds showing amusement",
+  "difficulty": "easy",
+  "sourceFile": "0172.json"
+}

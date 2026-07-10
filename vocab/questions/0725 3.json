@@ -1,0 +1,15 @@
+{
+  "id": 725,
+  "word": "Diagonal",
+  "question": "Diagonal",
+  "options": [
+    "Not firmly fixed in place",
+    "Devoted to a task or purpose",
+    "Going in a slanting direction",
+    "Extremely large or huge"
+  ],
+  "answerOption": "C",
+  "answerText": "Going in a slanting direction",
+  "difficulty": "easy",
+  "sourceFile": "0725.json"
+}

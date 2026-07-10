@@ -1,0 +1,14 @@
+{
+  "id": 585,
+  "question": "Which part of the lymphatic system helps filter blood and immune responses?",
+  "options": [
+    "Thyroid",
+    "Spleen",
+    "Pancreas",
+    "Appendix only"
+  ],
+  "answerOption": "B",
+  "answerText": "Spleen",
+  "genre": "science",
+  "sourceFile": "0585.json"
+}

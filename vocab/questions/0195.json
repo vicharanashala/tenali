@@ -1,0 +1,15 @@
+{
+  "id": 195,
+  "word": "Stretch",
+  "question": "Stretch",
+  "options": [
+    "Smooth and shiny; sophisticated",
+    "To take on or start using something new",
+    "To bring something to an end",
+    "To extend to full length"
+  ],
+  "answerOption": "D",
+  "answerText": "To extend to full length",
+  "difficulty": "easy",
+  "sourceFile": "0195.json"
+}

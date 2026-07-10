@@ -1,0 +1,15 @@
+{
+  "id": 2527,
+  "word": "AEROMETER",
+  "question": "AEROMETER",
+  "options": [
+    "Generosity in bestowing money or gifts",
+    "An accusation in response to another",
+    "Relation to wind formation",
+    "Instrument measuring air properties"
+  ],
+  "answerOption": "D",
+  "answerText": "Instrument measuring air properties",
+  "difficulty": "hard",
+  "sourceFile": "2527.json"
+}

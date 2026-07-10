@@ -1,0 +1,15 @@
+{
+  "id": 744,
+  "word": "Aquatic",
+  "question": "Aquatic",
+  "options": [
+    "Relating to or living in water",
+    "Not physically existing but made to appear so",
+    "With little or no light",
+    "To say something in a serious way"
+  ],
+  "answerOption": "A",
+  "answerText": "Relating to or living in water",
+  "difficulty": "easy",
+  "sourceFile": "0744.json"
+}

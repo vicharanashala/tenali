@@ -1,0 +1,15 @@
+{
+  "id": 2333,
+  "word": "Yugen",
+  "question": "Yugen",
+  "options": [
+    "A feeling of listlessness from lack of excitement",
+    "The mysterious power of art to deeply move a person",
+    "A profound awareness of the universe that triggers emotion",
+    "Arising from non-living matter"
+  ],
+  "answerOption": "C",
+  "answerText": "A profound awareness of the universe that triggers emotion",
+  "difficulty": "extra-hard",
+  "sourceFile": "2333.json"
+}

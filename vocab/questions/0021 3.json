@@ -1,0 +1,15 @@
+{
+  "id": 21,
+  "word": "Weak",
+  "question": "Weak",
+  "options": [
+    "To conduct the affairs of a state or organization",
+    "To have one's permanent home somewhere",
+    "Lacking the power to perform demanding tasks",
+    "Having good fortune; fortunate"
+  ],
+  "answerOption": "C",
+  "answerText": "Lacking the power to perform demanding tasks",
+  "difficulty": "easy",
+  "sourceFile": "0021.json"
+}

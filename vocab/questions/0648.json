@@ -1,0 +1,15 @@
+{
+  "id": 648,
+  "word": "Fluent",
+  "question": "Fluent",
+  "options": [
+    "To cook food using an oven",
+    "To control something by means of rules",
+    "In accordance with fact or reality",
+    "Able to express oneself easily in a language"
+  ],
+  "answerOption": "D",
+  "answerText": "Able to express oneself easily in a language",
+  "difficulty": "easy",
+  "sourceFile": "0648.json"
+}

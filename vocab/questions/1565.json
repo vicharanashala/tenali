@@ -1,0 +1,15 @@
+{
+  "id": 1565,
+  "word": "Desalination",
+  "question": "Desalination",
+  "options": [
+    "A reduction in amount or quantity",
+    "Wanting large quantities of food or knowledge",
+    "Having sharp powers of judgment",
+    "The removal of salt from water"
+  ],
+  "answerOption": "D",
+  "answerText": "The removal of salt from water",
+  "difficulty": "medium",
+  "sourceFile": "1565.json"
+}

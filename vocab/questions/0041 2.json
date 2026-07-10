@@ -1,0 +1,15 @@
+{
+  "id": 41,
+  "word": "Anomaly",
+  "question": "Anomaly",
+  "options": [
+    "A person who flatters to gain advantage",
+    "Lacking energy; sluggish and apathetic",
+    "A seemingly contradictory statement that may be true",
+    "Something that deviates from what is standard"
+  ],
+  "answerOption": "D",
+  "answerText": "Something that deviates from what is standard",
+  "difficulty": "hard",
+  "sourceFile": "0041.json"
+}

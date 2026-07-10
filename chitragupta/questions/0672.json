@@ -1,0 +1,14 @@
+{
+  "id": 672,
+  "question": "Who wrote 'The Metamorphosis'?",
+  "options": [
+    "Kafka",
+    "Camus",
+    "Sartre",
+    "Tolstoy"
+  ],
+  "answerOption": "A",
+  "answerText": "Kafka",
+  "genre": "general-knowledge",
+  "sourceFile": "0672.json"
+}

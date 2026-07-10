@@ -1,0 +1,15 @@
+{
+  "id": 1342,
+  "word": "Den",
+  "question": "Den",
+  "options": [
+    "A drying agent or substance",
+    "A small room or animal's lair",
+    "A substance that purifies the blood",
+    "The action of committing crime"
+  ],
+  "answerOption": "B",
+  "answerText": "A small room or animal's lair",
+  "difficulty": "medium",
+  "sourceFile": "1342.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1102,
+  "word": "Garner",
+  "question": "Garner",
+  "options": [
+    "To ask for something forcefully",
+    "The action of moving downward",
+    "To gather or collect something",
+    "To satisfy thirst by drinking"
+  ],
+  "answerOption": "C",
+  "answerText": "To gather or collect something",
+  "difficulty": "medium",
+  "sourceFile": "1102.json"
+}

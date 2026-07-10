@@ -1,0 +1,15 @@
+{
+  "id": 768,
+  "word": "Intentional",
+  "question": "Intentional",
+  "options": [
+    "Having ample space; roomy",
+    "Done on purpose; deliberate",
+    "To agree to give something requested",
+    "To find an answer to a problem"
+  ],
+  "answerOption": "B",
+  "answerText": "Done on purpose; deliberate",
+  "difficulty": "easy",
+  "sourceFile": "0768.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 172,
+  "question": "Which planet is known as the Morning Star or Evening Star?",
+  "options": [
+    "Venus",
+    "Mars",
+    "Jupiter",
+    "Saturn"
+  ],
+  "answerOption": "A",
+  "answerText": "Venus",
+  "genre": "geography",
+  "sourceFile": "0172.json"
+}

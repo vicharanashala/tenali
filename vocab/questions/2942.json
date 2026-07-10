@@ -1,0 +1,15 @@
+{
+  "id": 2942,
+  "word": "Confirmation",
+  "question": "Confirmation",
+  "options": [
+    "Requiring air to survive",
+    "The action of confirming something",
+    "Clear, logical, and convincing",
+    "Belief in God's unity not trinity"
+  ],
+  "answerOption": "B",
+  "answerText": "The action of confirming something",
+  "difficulty": "hard",
+  "sourceFile": "2942.json"
+}

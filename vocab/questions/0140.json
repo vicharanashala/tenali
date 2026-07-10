@@ -1,0 +1,15 @@
+{
+  "id": 140,
+  "word": "Relaxed",
+  "question": "Relaxed",
+  "options": [
+    "Free from tension and anxiety",
+    "Lacking in liveliness or joy",
+    "Clearly and directly expressed",
+    "Of little weight; easy to carry"
+  ],
+  "answerOption": "A",
+  "answerText": "Free from tension and anxiety",
+  "difficulty": "easy",
+  "sourceFile": "0140.json"
+}

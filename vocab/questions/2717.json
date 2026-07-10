@@ -1,0 +1,15 @@
+{
+  "id": 2717,
+  "word": "Smelting",
+  "question": "Smelting",
+  "options": [
+    "Extracting metal from ore by heating",
+    "A return or recurrence of something",
+    "A formal speech delivered publicly",
+    "The state of being calm"
+  ],
+  "answerOption": "A",
+  "answerText": "Extracting metal from ore by heating",
+  "difficulty": "hard",
+  "sourceFile": "2717.json"
+}

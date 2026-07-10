@@ -1,0 +1,15 @@
+{
+  "id": 1300,
+  "word": "Perspicacious",
+  "question": "Perspicacious",
+  "options": [
+    "Using very few words to express oneself",
+    "Having a ready insight into things",
+    "Strongly reminiscent or suggestive of",
+    "Pressing; demanding immediate attention"
+  ],
+  "answerOption": "B",
+  "answerText": "Having a ready insight into things",
+  "difficulty": "hard",
+  "sourceFile": "1300.json"
+}

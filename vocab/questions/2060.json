@@ -1,0 +1,15 @@
+{
+  "id": 2060,
+  "word": "Quagmire",
+  "question": "Quagmire",
+  "options": [
+    "Relating to aircraft operation",
+    "A wild ox of central Asia",
+    "A soft boggy area; a complex situation",
+    "Relating to aircraft equipment"
+  ],
+  "answerOption": "C",
+  "answerText": "A soft boggy area; a complex situation",
+  "difficulty": "hard",
+  "sourceFile": "2060.json"
+}

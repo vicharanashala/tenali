@@ -1,0 +1,14 @@
+{
+  "id": 204,
+  "question": "Which branch of science deals with celestial objects and space?",
+  "options": [
+    "Geology",
+    "Astronomy",
+    "Biology",
+    "Meteorology"
+  ],
+  "answerOption": "B",
+  "answerText": "Astronomy",
+  "genre": "mixed",
+  "sourceFile": "0204.json"
+}

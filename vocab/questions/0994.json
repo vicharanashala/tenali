@@ -1,0 +1,15 @@
+{
+  "id": 994,
+  "word": "Pungent",
+  "question": "Pungent",
+  "options": [
+    "To suffer or die from lack of food",
+    "Far away from other places or people",
+    "Having a strong unpleasant smell",
+    "Greatly pleased or entertained"
+  ],
+  "answerOption": "C",
+  "answerText": "Having a strong unpleasant smell",
+  "difficulty": "easy",
+  "sourceFile": "0994.json"
+}

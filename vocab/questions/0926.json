@@ -1,0 +1,15 @@
+{
+  "id": 926,
+  "word": "Bushy",
+  "question": "Bushy",
+  "options": [
+    "Thick and full of foliage",
+    "Having the power to move heavy things",
+    "Happening with great speed",
+    "Lively and enthusiastic in manner"
+  ],
+  "answerOption": "A",
+  "answerText": "Thick and full of foliage",
+  "difficulty": "easy",
+  "sourceFile": "0926.json"
+}

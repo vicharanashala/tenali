@@ -1,0 +1,15 @@
+{
+  "id": 1196,
+  "word": "Equanimity",
+  "question": "Equanimity",
+  "options": [
+    "An extremely confused or complicated situation",
+    "Mental calmness in a difficult situation",
+    "A deep-seated feeling of dislike",
+    "Expressing a strong opinion controversially"
+  ],
+  "answerOption": "B",
+  "answerText": "Mental calmness in a difficult situation",
+  "difficulty": "hard",
+  "sourceFile": "1196.json"
+}

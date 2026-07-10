@@ -1,0 +1,15 @@
+{
+  "id": 3560,
+  "word": "Abyssothora",
+  "question": "Abyssothora",
+  "options": [
+    "Relating to loss of function",
+    "Heretically non-ablative",
+    "Abyss chest region",
+    "Substances that ablate"
+  ],
+  "answerOption": "C",
+  "answerText": "Abyss chest region",
+  "difficulty": "extra-hard",
+  "sourceFile": "3560.json"
+}

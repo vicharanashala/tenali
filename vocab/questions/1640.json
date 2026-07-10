@@ -1,0 +1,15 @@
+{
+  "id": 1640,
+  "word": "Dessertspoon",
+  "question": "Dessertspoon",
+  "options": [
+    "Of the same kind; alike throughout",
+    "A person new to a field or activity",
+    "A spoon between teaspoon and tablespoon",
+    "A muscle that depresses something"
+  ],
+  "answerOption": "C",
+  "answerText": "A spoon between teaspoon and tablespoon",
+  "difficulty": "medium",
+  "sourceFile": "1640.json"
+}

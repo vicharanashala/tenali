@@ -1,0 +1,15 @@
+{
+  "id": 2308,
+  "word": "Adventurism",
+  "question": "Adventurism",
+  "options": [
+    "A mature human or animal",
+    "Pursuit of pleasure and avoidance of pain",
+    "The action of presenting or bestowing",
+    "Reckless pursuit of adventure"
+  ],
+  "answerOption": "D",
+  "answerText": "Reckless pursuit of adventure",
+  "difficulty": "hard",
+  "sourceFile": "2308.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 811,
+  "word": "Deceitful",
+  "question": "Deceitful",
+  "options": [
+    "Belonging to the very distant past",
+    "Not severe or strong; gentle",
+    "Guilty of misleading or tricking others",
+    "Very great in degree; intense"
+  ],
+  "answerOption": "C",
+  "answerText": "Guilty of misleading or tricking others",
+  "difficulty": "easy",
+  "sourceFile": "0811.json"
+}

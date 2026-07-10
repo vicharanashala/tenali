@@ -1,0 +1,15 @@
+{
+  "id": 176,
+  "word": "Win",
+  "question": "Win",
+  "options": [
+    "Sufficiently great or important",
+    "Made impure by exposure to a harmful substance",
+    "To be successful in a contest",
+    "Difficult to grip or stand on"
+  ],
+  "answerOption": "C",
+  "answerText": "To be successful in a contest",
+  "difficulty": "easy",
+  "sourceFile": "0176.json"
+}

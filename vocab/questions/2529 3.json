@@ -1,0 +1,15 @@
+{
+  "id": 2529,
+  "word": "Parapet",
+  "question": "Parapet",
+  "options": [
+    "Description of air and atmosphere",
+    "A citrus tree from Asia",
+    "The action of extending duration",
+    "A low protective wall"
+  ],
+  "answerOption": "D",
+  "answerText": "A low protective wall",
+  "difficulty": "hard",
+  "sourceFile": "2529.json"
+}

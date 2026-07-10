@@ -1,0 +1,15 @@
+{
+  "id": 718,
+  "word": "Isolated",
+  "question": "Isolated",
+  "options": [
+    "Paying close attention to something",
+    "Far away from other places or people",
+    "Standing out so as to be clearly visible",
+    "To cause someone to lose confidence"
+  ],
+  "answerOption": "B",
+  "answerText": "Far away from other places or people",
+  "difficulty": "easy",
+  "sourceFile": "0718.json"
+}

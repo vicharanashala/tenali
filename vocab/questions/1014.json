@@ -1,0 +1,15 @@
+{
+  "id": 1014,
+  "word": "Ominous",
+  "question": "Ominous",
+  "options": [
+    "To go down or move downward",
+    "Not enough or satisfactory",
+    "A sentimental longing for the past",
+    "Giving the impression that something bad will happen"
+  ],
+  "answerOption": "D",
+  "answerText": "Giving the impression that something bad will happen",
+  "difficulty": "medium",
+  "sourceFile": "1014.json"
+}

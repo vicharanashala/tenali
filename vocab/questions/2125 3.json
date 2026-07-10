@@ -1,0 +1,15 @@
+{
+  "id": 2125,
+  "word": "Adulterant",
+  "question": "Adulterant",
+  "options": [
+    "Saying the same thing twice in different words",
+    "In an enigmatic manner",
+    "A substance that adulterates",
+    "Unable to be prevented or avoided"
+  ],
+  "answerOption": "C",
+  "answerText": "A substance that adulterates",
+  "difficulty": "hard",
+  "sourceFile": "2125.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 508,
+  "word": "Identify",
+  "question": "Identify",
+  "options": [
+    "Tending to cause harm",
+    "To recognize what someone or something is",
+    "Of great weight; difficult to lift",
+    "Able to be relied on as honest"
+  ],
+  "answerOption": "B",
+  "answerText": "To recognize what someone or something is",
+  "difficulty": "easy",
+  "sourceFile": "0508.json"
+}

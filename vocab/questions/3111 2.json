@@ -1,0 +1,15 @@
+{
+  "id": 3111,
+  "word": "Abye",
+  "question": "Abye",
+  "options": [
+    "One who abuses",
+    "In an absurd manner",
+    "To pay the penalty for something",
+    "The process of exact thinking or reasoning"
+  ],
+  "answerOption": "C",
+  "answerText": "To pay the penalty for something",
+  "difficulty": "extra-hard",
+  "sourceFile": "3111.json"
+}

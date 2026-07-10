@@ -1,0 +1,14 @@
+{
+  "id": 598,
+  "question": "Which country is associated with the city of Sana'a?",
+  "options": [
+    "Oman",
+    "Saudi Arabia",
+    "Yemen",
+    "Jordan"
+  ],
+  "answerOption": "C",
+  "answerText": "Yemen",
+  "genre": "geography",
+  "sourceFile": "0598.json"
+}

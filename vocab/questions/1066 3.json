@@ -1,0 +1,15 @@
+{
+  "id": 1066,
+  "word": "Ostracize",
+  "question": "Ostracize",
+  "options": [
+    "Designed to be useful rather than attractive",
+    "To exclude someone from a group",
+    "Requiring considerable effort and time",
+    "To dislike intensely"
+  ],
+  "answerOption": "B",
+  "answerText": "To exclude someone from a group",
+  "difficulty": "medium",
+  "sourceFile": "1066.json"
+}

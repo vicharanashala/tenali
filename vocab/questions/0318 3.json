@@ -1,0 +1,15 @@
+{
+  "id": 318,
+  "word": "Bore",
+  "question": "Bore",
+  "options": [
+    "Parallel to the ground; flat",
+    "Truly what something is said to be",
+    "To say or do something again",
+    "To make someone feel weary and uninterested"
+  ],
+  "answerOption": "D",
+  "answerText": "To make someone feel weary and uninterested",
+  "difficulty": "easy",
+  "sourceFile": "0318.json"
+}

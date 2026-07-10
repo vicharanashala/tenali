@@ -1,0 +1,15 @@
+{
+  "id": 1501,
+  "word": "Galvanize",
+  "question": "Galvanize",
+  "options": [
+    "A hand of cards with no card above a nine",
+    "Something improvised or done on the spur of the moment",
+    "To shock or excite into taking action",
+    "Of or relating to charity"
+  ],
+  "answerOption": "C",
+  "answerText": "To shock or excite into taking action",
+  "difficulty": "extra-hard",
+  "sourceFile": "1501.json"
+}

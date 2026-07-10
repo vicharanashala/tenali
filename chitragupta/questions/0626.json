@@ -1,0 +1,14 @@
+{
+  "id": 626,
+  "question": "Which chamber of the heart pumps oxygenated blood to the body?",
+  "options": [
+    "Right atrium",
+    "Right ventricle",
+    "Left atrium",
+    "Left ventricle"
+  ],
+  "answerOption": "D",
+  "answerText": "Left ventricle",
+  "genre": "science",
+  "sourceFile": "0626.json"
+}

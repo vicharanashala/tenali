@@ -1,0 +1,15 @@
+{
+  "id": 296,
+  "word": "Wait",
+  "question": "Wait",
+  "options": [
+    "To stay where you are until something happens",
+    "Decaying or decomposing",
+    "In a natural or raw state; not refined",
+    "Having the ability to learn and understand"
+  ],
+  "answerOption": "A",
+  "answerText": "To stay where you are until something happens",
+  "difficulty": "easy",
+  "sourceFile": "0296.json"
+}

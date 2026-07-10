@@ -1,0 +1,14 @@
+{
+  "id": 573,
+  "question": "Which organ in the body produces urea?",
+  "options": [
+    "Kidney",
+    "Liver",
+    "Pancreas",
+    "Spleen"
+  ],
+  "answerOption": "B",
+  "answerText": "Liver",
+  "genre": "science",
+  "sourceFile": "0573.json"
+}

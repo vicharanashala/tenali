@@ -1,0 +1,15 @@
+{
+  "id": 4,
+  "word": "Quiet",
+  "question": "Quiet",
+  "options": [
+    "Able to soak up liquid easily",
+    "To throw in various random directions",
+    "Pleased and relieved about something",
+    "Making little or no noise"
+  ],
+  "answerOption": "D",
+  "answerText": "Making little or no noise",
+  "difficulty": "easy",
+  "sourceFile": "0004.json"
+}

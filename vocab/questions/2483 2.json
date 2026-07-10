@@ -1,0 +1,15 @@
+{
+  "id": 2483,
+  "word": "Abecedarian",
+  "question": "Abecedarian",
+  "options": [
+    "A person learning the alphabet",
+    "An ache for distant places; the craving for travel",
+    "Relating to the abyssal depths",
+    "One who believes in abiogenesis"
+  ],
+  "answerOption": "A",
+  "answerText": "A person learning the alphabet",
+  "difficulty": "extra-hard",
+  "sourceFile": "2483.json"
+}

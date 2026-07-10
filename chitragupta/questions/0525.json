@@ -1,0 +1,14 @@
+{
+  "id": 525,
+  "question": "Which Indian state has Naya Raipur/Atal Nagar administrative development associated with its capital region?",
+  "options": [
+    "Odisha",
+    "Jharkhand",
+    "Chhattisgarh",
+    "Bihar"
+  ],
+  "answerOption": "C",
+  "answerText": "Chhattisgarh",
+  "genre": "geography",
+  "sourceFile": "0525.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 332,
+  "question": "What is the common name of calcium carbonate found in seashells and limestone?",
+  "options": [
+    "Quicklime",
+    "Chalk",
+    "Gypsum",
+    "Epsom salt"
+  ],
+  "answerOption": "B",
+  "answerText": "Chalk",
+  "genre": "mixed",
+  "sourceFile": "0332.json"
+}

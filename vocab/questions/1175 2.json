@@ -1,0 +1,15 @@
+{
+  "id": 1175,
+  "word": "Demagogue",
+  "question": "Demagogue",
+  "options": [
+    "Extremely idealistic; unrealistic and impractical",
+    "A leader who seeks support by appealing to emotions",
+    "To combine or unite to form one entity",
+    "Very attentive to accuracy and detail"
+  ],
+  "answerOption": "B",
+  "answerText": "A leader who seeks support by appealing to emotions",
+  "difficulty": "hard",
+  "sourceFile": "1175.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 703,
+  "question": "Which part of the body contains the sternum?",
+  "options": [
+    "Arm",
+    "Chest",
+    "Leg",
+    "Neck"
+  ],
+  "answerOption": "B",
+  "answerText": "Chest",
+  "genre": "science",
+  "sourceFile": "0703.json"
+}

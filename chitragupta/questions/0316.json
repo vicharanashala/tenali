@@ -1,0 +1,14 @@
+{
+  "id": 316,
+  "question": "Which Indian state has Bhopal as its capital?",
+  "options": [
+    "Uttar Pradesh",
+    "Madhya Pradesh",
+    "Chhattisgarh",
+    "Bihar"
+  ],
+  "answerOption": "B",
+  "answerText": "Madhya Pradesh",
+  "genre": "geography",
+  "sourceFile": "0316.json"
+}

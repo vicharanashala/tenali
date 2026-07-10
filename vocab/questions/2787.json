@@ -1,0 +1,15 @@
+{
+  "id": 2787,
+  "word": "Elevation",
+  "question": "Elevation",
+  "options": [
+    "The right to vote in an election",
+    "The use of many words where fewer would do",
+    "The action of raising or moving up",
+    "Relating to air conditions"
+  ],
+  "answerOption": "C",
+  "answerText": "The action of raising or moving up",
+  "difficulty": "hard",
+  "sourceFile": "2787.json"
+}

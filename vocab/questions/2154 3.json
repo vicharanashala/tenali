@@ -1,0 +1,15 @@
+{
+  "id": 2154,
+  "word": "Adventuress",
+  "question": "Adventuress",
+  "options": [
+    "A female adventurer",
+    "Ornamental work of fine twisted wire",
+    "A solution for all difficulties or diseases",
+    "Loyalty to a person or country"
+  ],
+  "answerOption": "A",
+  "answerText": "A female adventurer",
+  "difficulty": "hard",
+  "sourceFile": "2154.json"
+}

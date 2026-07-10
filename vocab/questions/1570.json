@@ -1,0 +1,15 @@
+{
+  "id": 1570,
+  "word": "Descendant",
+  "question": "Descendant",
+  "options": [
+    "Required to do something",
+    "To make something ineffective; to nullify",
+    "The quality of being loyal",
+    "A person descended from an ancestor"
+  ],
+  "answerOption": "D",
+  "answerText": "A person descended from an ancestor",
+  "difficulty": "medium",
+  "sourceFile": "1570.json"
+}

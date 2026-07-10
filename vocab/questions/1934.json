@@ -1,0 +1,15 @@
+{
+  "id": 1934,
+  "word": "Rhythmic",
+  "question": "Rhythmic",
+  "options": [
+    "Difficult or impossible to understand",
+    "To hold and use a weapon or tool",
+    "A cleansing agent or substance",
+    "Having a strong rhythm"
+  ],
+  "answerOption": "D",
+  "answerText": "Having a strong rhythm",
+  "difficulty": "medium",
+  "sourceFile": "1934.json"
+}

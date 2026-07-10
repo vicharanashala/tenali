@@ -1,0 +1,15 @@
+{
+  "id": 880,
+  "word": "Agile",
+  "question": "Agile",
+  "options": [
+    "Able to move quickly and easily",
+    "To cause to move apart",
+    "Kept out of sight; concealed",
+    "Extremely beautiful or impressive"
+  ],
+  "answerOption": "A",
+  "answerText": "Able to move quickly and easily",
+  "difficulty": "easy",
+  "sourceFile": "0880.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 357,
+  "word": "Donate",
+  "question": "Donate",
+  "options": [
+    "Very loving or loyal to a person or cause",
+    "To give up something completely",
+    "To fill someone with the urge to do something",
+    "To give money or goods to a cause"
+  ],
+  "answerOption": "D",
+  "answerText": "To give money or goods to a cause",
+  "difficulty": "easy",
+  "sourceFile": "0357.json"
+}

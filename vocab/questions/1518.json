@@ -1,0 +1,15 @@
+{
+  "id": 1518,
+  "word": "Depression",
+  "question": "Depression",
+  "options": [
+    "A mental state of sadness",
+    "Having an untidy or disheveled appearance",
+    "One who deserts a duty or post",
+    "Dull and lacking in variety"
+  ],
+  "answerOption": "A",
+  "answerText": "A mental state of sadness",
+  "difficulty": "medium",
+  "sourceFile": "1518.json"
+}

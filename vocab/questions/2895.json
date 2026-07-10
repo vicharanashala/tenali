@@ -1,0 +1,15 @@
+{
+  "id": 2895,
+  "word": "Endowment",
+  "question": "Endowment",
+  "options": [
+    "The action of uttering words",
+    "The state of being few in number",
+    "The action of providing with money",
+    "The medieval chemical philosophy"
+  ],
+  "answerOption": "C",
+  "answerText": "The action of providing with money",
+  "difficulty": "hard",
+  "sourceFile": "2895.json"
+}

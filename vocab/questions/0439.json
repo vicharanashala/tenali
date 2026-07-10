@@ -1,0 +1,15 @@
+{
+  "id": 439,
+  "word": "Load",
+  "question": "Load",
+  "options": [
+    "To put goods or cargo onto a vehicle",
+    "Awkwardly heavy or bulky",
+    "Not firmly fixed in place",
+    "Sufficient to cause death"
+  ],
+  "answerOption": "A",
+  "answerText": "To put goods or cargo onto a vehicle",
+  "difficulty": "easy",
+  "sourceFile": "0439.json"
+}

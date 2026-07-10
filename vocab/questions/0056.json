@@ -1,0 +1,15 @@
+{
+  "id": 56,
+  "word": "Late",
+  "question": "Late",
+  "options": [
+    "After the expected or usual time",
+    "To cause someone to find something funny",
+    "Needing much effort or skill to accomplish",
+    "Happening by chance; unintentional"
+  ],
+  "answerOption": "A",
+  "answerText": "After the expected or usual time",
+  "difficulty": "easy",
+  "sourceFile": "0056.json"
+}

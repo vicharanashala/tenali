@@ -1,0 +1,14 @@
+{
+  "id": 95,
+  "question": "Which vitamin is associated with preventing scurvy?",
+  "options": [
+    "Vitamin A",
+    "Vitamin C",
+    "Vitamin D",
+    "Vitamin K"
+  ],
+  "answerOption": "B",
+  "answerText": "Vitamin C",
+  "genre": "mixed",
+  "sourceFile": "0095.json"
+}

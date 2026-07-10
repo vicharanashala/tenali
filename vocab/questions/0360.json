@@ -1,0 +1,15 @@
+{
+  "id": 360,
+  "word": "Wrap",
+  "question": "Wrap",
+  "options": [
+    "To cover something in paper or cloth",
+    "Clearly visible or understood",
+    "To perceive the flavor of something",
+    "To give authorization for something"
+  ],
+  "answerOption": "A",
+  "answerText": "To cover something in paper or cloth",
+  "difficulty": "easy",
+  "sourceFile": "0360.json"
+}

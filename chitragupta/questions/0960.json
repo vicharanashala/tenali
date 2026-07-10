@@ -1,0 +1,14 @@
+{
+  "id": 960,
+  "question": "Who wrote 'The Swiss Family Robinson'?",
+  "options": [
+    "Johann David Wyss",
+    "Daniel Defoe",
+    "Robert Louis Stevenson",
+    "Mark Twain"
+  ],
+  "answerOption": "A",
+  "answerText": "Johann David Wyss",
+  "genre": "general-knowledge",
+  "sourceFile": "0960.json"
+}

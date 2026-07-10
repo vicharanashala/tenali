@@ -1,0 +1,15 @@
+{
+  "id": 2099,
+  "word": "Moribund",
+  "question": "Moribund",
+  "options": [
+    "To offer suggestions about action",
+    "At the point of death; in terminal decline",
+    "A poison from air",
+    "The practices of a dishonest person"
+  ],
+  "answerOption": "B",
+  "answerText": "At the point of death; in terminal decline",
+  "difficulty": "hard",
+  "sourceFile": "2099.json"
+}

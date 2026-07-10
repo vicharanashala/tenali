@@ -1,0 +1,15 @@
+{
+  "id": 232,
+  "word": "Trust",
+  "question": "Trust",
+  "options": [
+    "Lasting or intended to last forever",
+    "To believe in the reliability of someone",
+    "Covered with fine soft hair or fibers",
+    "Soft and light in texture"
+  ],
+  "answerOption": "B",
+  "answerText": "To believe in the reliability of someone",
+  "difficulty": "easy",
+  "sourceFile": "0232.json"
+}

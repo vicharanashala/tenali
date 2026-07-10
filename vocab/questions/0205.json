@@ -1,0 +1,15 @@
+{
+  "id": 205,
+  "word": "Scatter",
+  "question": "Scatter",
+  "options": [
+    "To tell someone about a possible danger",
+    "Firmly loyal or unwavering",
+    "Having exceptional natural ability",
+    "To throw in various random directions"
+  ],
+  "answerOption": "D",
+  "answerText": "To throw in various random directions",
+  "difficulty": "easy",
+  "sourceFile": "0205.json"
+}

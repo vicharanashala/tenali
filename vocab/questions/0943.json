@@ -1,0 +1,15 @@
+{
+  "id": 943,
+  "word": "Insipid",
+  "question": "Insipid",
+  "options": [
+    "Lacking good sense or judgment",
+    "Lacking flavor or interest",
+    "To cause someone to believe something",
+    "To give authorization for something"
+  ],
+  "answerOption": "B",
+  "answerText": "Lacking flavor or interest",
+  "difficulty": "easy",
+  "sourceFile": "0943.json"
+}

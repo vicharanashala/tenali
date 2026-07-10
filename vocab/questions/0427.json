@@ -1,0 +1,15 @@
+{
+  "id": 427,
+  "word": "Attach",
+  "question": "Attach",
+  "options": [
+    "To fasten or join one thing to another",
+    "Feeling thankful for something received",
+    "Having a hidden meaning",
+    "Not approximated in any way; precise"
+  ],
+  "answerOption": "A",
+  "answerText": "To fasten or join one thing to another",
+  "difficulty": "easy",
+  "sourceFile": "0427.json"
+}

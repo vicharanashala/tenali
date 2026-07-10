@@ -1,0 +1,15 @@
+{
+  "id": 188,
+  "word": "Hide",
+  "question": "Hide",
+  "options": [
+    "Competent or skilled in doing something",
+    "To make a choice after thinking about it",
+    "Exactly alike in every way",
+    "To put or keep out of sight"
+  ],
+  "answerOption": "D",
+  "answerText": "To put or keep out of sight",
+  "difficulty": "easy",
+  "sourceFile": "0188.json"
+}

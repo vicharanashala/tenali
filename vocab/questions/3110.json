@@ -1,0 +1,15 @@
+{
+  "id": 3110,
+  "word": "Xenogenesis",
+  "question": "Xenogenesis",
+  "options": [
+    "Causing or relating to vertigo",
+    "The supposed generation from a different species",
+    "A plant adapted to dry conditions",
+    "A deviation from normal pattern"
+  ],
+  "answerOption": "B",
+  "answerText": "The supposed generation from a different species",
+  "difficulty": "extra-hard",
+  "sourceFile": "3110.json"
+}

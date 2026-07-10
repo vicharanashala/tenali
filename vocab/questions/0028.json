@@ -1,0 +1,15 @@
+{
+  "id": 28,
+  "word": "Soft",
+  "question": "Soft",
+  "options": [
+    "To rub out or remove written marks",
+    "Strongly wanting to do or have something",
+    "Easy to mold, cut, or fold; not hard",
+    "To feel curious about something"
+  ],
+  "answerOption": "C",
+  "answerText": "Easy to mold, cut, or fold; not hard",
+  "difficulty": "easy",
+  "sourceFile": "0028.json"
+}

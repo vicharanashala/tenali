@@ -1,0 +1,15 @@
+{
+  "id": 917,
+  "word": "Wimpy",
+  "question": "Wimpy",
+  "options": [
+    "Able to be relied on as honest",
+    "Having full rounded form",
+    "Weak or feeble in character",
+    "Not giving enough attention to avoid harm"
+  ],
+  "answerOption": "C",
+  "answerText": "Weak or feeble in character",
+  "difficulty": "easy",
+  "sourceFile": "0917.json"
+}

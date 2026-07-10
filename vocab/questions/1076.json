@@ -1,0 +1,15 @@
+{
+  "id": 1076,
+  "word": "Eccentric",
+  "question": "Eccentric",
+  "options": [
+    "Relating to or resulting from motion",
+    "Unconventional and slightly strange",
+    "To remove from selected status",
+    "Understanding of a situation after it occurs"
+  ],
+  "answerOption": "B",
+  "answerText": "Unconventional and slightly strange",
+  "difficulty": "medium",
+  "sourceFile": "1076.json"
+}

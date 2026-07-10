@@ -1,0 +1,14 @@
+{
+  "id": 154,
+  "question": "What is the name of the device used to look at very small objects?",
+  "options": [
+    "Telescope",
+    "Periscope",
+    "Microscope",
+    "Kaleidoscope"
+  ],
+  "answerOption": "C",
+  "answerText": "Microscope",
+  "genre": "general-knowledge",
+  "sourceFile": "0154.json"
+}

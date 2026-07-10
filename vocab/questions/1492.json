@@ -1,0 +1,15 @@
+{
+  "id": 1492,
+  "word": "Deportee",
+  "question": "Deportee",
+  "options": [
+    "A Roman silver coin",
+    "The action of discovering something",
+    "Of a very wicked character",
+    "A person forcibly removed from a country"
+  ],
+  "answerOption": "D",
+  "answerText": "A person forcibly removed from a country",
+  "difficulty": "medium",
+  "sourceFile": "1492.json"
+}

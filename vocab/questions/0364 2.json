@@ -1,0 +1,15 @@
+{
+  "id": 364,
+  "word": "Contain",
+  "question": "Contain",
+  "options": [
+    "To have something inside",
+    "To cause someone to feel sudden wonder",
+    "Able to withstand fire or great heat",
+    "To offer suggestions about the best action"
+  ],
+  "answerOption": "A",
+  "answerText": "To have something inside",
+  "difficulty": "easy",
+  "sourceFile": "0364.json"
+}

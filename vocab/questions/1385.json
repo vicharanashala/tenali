@@ -1,0 +1,15 @@
+{
+  "id": 1385,
+  "word": "Delirium",
+  "question": "Delirium",
+  "options": [
+    "Fine in texture, form, or structure",
+    "Rule by a despot or tyrant",
+    "A disturbed state of mind in illness",
+    "To state that something is not true"
+  ],
+  "answerOption": "C",
+  "answerText": "A disturbed state of mind in illness",
+  "difficulty": "medium",
+  "sourceFile": "1385.json"
+}

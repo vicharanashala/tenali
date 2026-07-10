@@ -1,0 +1,15 @@
+{
+  "id": 123,
+  "word": "Friendly",
+  "question": "Friendly",
+  "options": [
+    "Far away from other places or people",
+    "Kind and pleasant to others",
+    "To state the exact meaning of a word",
+    "To move through water using the body"
+  ],
+  "answerOption": "B",
+  "answerText": "Kind and pleasant to others",
+  "difficulty": "easy",
+  "sourceFile": "0123.json"
+}

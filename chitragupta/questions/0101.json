@@ -1,0 +1,14 @@
+{
+  "id": 101,
+  "question": "Which scientist developed the theory of relativity?",
+  "options": [
+    "Isaac Newton",
+    "Albert Einstein",
+    "Niels Bohr",
+    "Stephen Hawking"
+  ],
+  "answerOption": "B",
+  "answerText": "Albert Einstein",
+  "genre": "mixed",
+  "sourceFile": "0101.json"
+}

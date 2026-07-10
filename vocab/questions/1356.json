@@ -1,0 +1,15 @@
+{
+  "id": 1356,
+  "word": "Defuse",
+  "question": "Defuse",
+  "options": [
+    "Confusing or perplexing",
+    "Relating to duty-based ethics",
+    "To remove a fuse from an explosive",
+    "To deprive of possessions by force"
+  ],
+  "answerOption": "C",
+  "answerText": "To remove a fuse from an explosive",
+  "difficulty": "medium",
+  "sourceFile": "1356.json"
+}

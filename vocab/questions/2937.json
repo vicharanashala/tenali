@@ -1,0 +1,15 @@
+{
+  "id": 2937,
+  "word": "Proclamation",
+  "question": "Proclamation",
+  "options": [
+    "Relating to the theology of Calvin",
+    "Intended for a small group with special knowledge",
+    "A public announcement or declaration",
+    "Belonging to the middle class"
+  ],
+  "answerOption": "C",
+  "answerText": "A public announcement or declaration",
+  "difficulty": "hard",
+  "sourceFile": "2937.json"
+}

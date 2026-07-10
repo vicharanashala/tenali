@@ -1,0 +1,15 @@
+{
+  "id": 1645,
+  "word": "Aberration",
+  "question": "Aberration",
+  "options": [
+    "Expressing opinions in a loud forceful way",
+    "Cheerful and full of energy",
+    "Apparently attractive but having no real value",
+    "A departure from what is normal or expected"
+  ],
+  "answerOption": "D",
+  "answerText": "A departure from what is normal or expected",
+  "difficulty": "hard",
+  "sourceFile": "1645.json"
+}

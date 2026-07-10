@@ -1,0 +1,15 @@
+{
+  "id": 787,
+  "word": "Toxic",
+  "question": "Toxic",
+  "options": [
+    "Worthy of attention; striking",
+    "Poisonous; harmful to living things",
+    "Fluent and persuasive in speaking",
+    "Not arranged in a neat way"
+  ],
+  "answerOption": "B",
+  "answerText": "Poisonous; harmful to living things",
+  "difficulty": "easy",
+  "sourceFile": "0787.json"
+}

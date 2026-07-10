@@ -1,0 +1,15 @@
+{
+  "id": 2100,
+  "word": "Adoption",
+  "question": "Adoption",
+  "options": [
+    "The practice of determining the nature of diseases",
+    "The action of dissolving in air",
+    "A tool for shaping wood",
+    "The legal process of becoming a parent"
+  ],
+  "answerOption": "D",
+  "answerText": "The legal process of becoming a parent",
+  "difficulty": "hard",
+  "sourceFile": "2100.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2163,
+  "word": "Aerolite",
+  "question": "Aerolite",
+  "options": [
+    "A meteorite or stone",
+    "One having the right of patronage",
+    "The highest point of development; a perfect example",
+    "A meteorite or stone from space"
+  ],
+  "answerOption": "D",
+  "answerText": "A meteorite or stone from space",
+  "difficulty": "hard",
+  "sourceFile": "2163.json"
+}

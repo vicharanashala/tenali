@@ -1,0 +1,15 @@
+{
+  "id": 224,
+  "word": "Support",
+  "question": "Support",
+  "options": [
+    "To perceive the scent of something",
+    "To give assistance or encouragement to",
+    "In need of sleep or rest",
+    "Having no special features; normal"
+  ],
+  "answerOption": "B",
+  "answerText": "To give assistance or encouragement to",
+  "difficulty": "easy",
+  "sourceFile": "0224.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 159,
+  "word": "Depart",
+  "question": "Depart",
+  "options": [
+    "Having received a good education",
+    "Occurring continuously over time",
+    "To leave a place",
+    "Introducing new and original ideas"
+  ],
+  "answerOption": "C",
+  "answerText": "To leave a place",
+  "difficulty": "easy",
+  "sourceFile": "0159.json"
+}

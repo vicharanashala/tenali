@@ -1,0 +1,15 @@
+{
+  "id": 569,
+  "word": "Captivate",
+  "question": "Captivate",
+  "options": [
+    "Kept out of sight; concealed",
+    "To go beyond the limit of something",
+    "Created directly and not a copy",
+    "To attract and hold the attention of someone"
+  ],
+  "answerOption": "D",
+  "answerText": "To attract and hold the attention of someone",
+  "difficulty": "easy",
+  "sourceFile": "0569.json"
+}

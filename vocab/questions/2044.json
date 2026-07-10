@@ -1,0 +1,15 @@
+{
+  "id": 2044,
+  "word": "Acumen",
+  "question": "Acumen",
+  "options": [
+    "The study of poisons",
+    "Something reused but still bearing traces of its earlier form",
+    "The ability to make good judgments",
+    "Unable to be stopped or prevented"
+  ],
+  "answerOption": "C",
+  "answerText": "The ability to make good judgments",
+  "difficulty": "hard",
+  "sourceFile": "2044.json"
+}

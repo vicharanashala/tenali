@@ -1,0 +1,15 @@
+{
+  "id": 90,
+  "word": "Thick",
+  "question": "Thick",
+  "options": [
+    "Of great width between opposite sides",
+    "Marked by exactness and accuracy",
+    "Very cold in temperature",
+    "Not clearly expressed or understood"
+  ],
+  "answerOption": "A",
+  "answerText": "Of great width between opposite sides",
+  "difficulty": "easy",
+  "sourceFile": "0090.json"
+}

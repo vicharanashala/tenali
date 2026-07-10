@@ -1,0 +1,15 @@
+{
+  "id": 856,
+  "word": "Blissful",
+  "question": "Blissful",
+  "options": [
+    "Extremely happy; full of joy",
+    "To grow or develop in a healthy way",
+    "Not harmful or offensive",
+    "Keeping careful watch for possible danger"
+  ],
+  "answerOption": "A",
+  "answerText": "Extremely happy; full of joy",
+  "difficulty": "medium",
+  "sourceFile": "0856.json"
+}

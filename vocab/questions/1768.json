@@ -1,0 +1,15 @@
+{
+  "id": 1768,
+  "word": "Antipathy",
+  "question": "Antipathy",
+  "options": [
+    "Kept secret or done in a hidden way",
+    "A natural dislike or opposition",
+    "A person who expects or accepts defeat",
+    "A legal objection to a claim"
+  ],
+  "answerOption": "B",
+  "answerText": "A natural dislike or opposition",
+  "difficulty": "medium",
+  "sourceFile": "1768.json"
+}

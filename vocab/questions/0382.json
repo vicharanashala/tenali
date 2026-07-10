@@ -1,0 +1,15 @@
+{
+  "id": 382,
+  "word": "Crash",
+  "question": "Crash",
+  "options": [
+    "To move from a lower to a higher position",
+    "Clearly and directly expressed",
+    "To collide violently with an obstacle",
+    "To express dissatisfaction about something"
+  ],
+  "answerOption": "C",
+  "answerText": "To collide violently with an obstacle",
+  "difficulty": "easy",
+  "sourceFile": "0382.json"
+}

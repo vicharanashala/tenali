@@ -1,0 +1,15 @@
+{
+  "id": 1996,
+  "word": "Advocate",
+  "question": "Advocate",
+  "options": [
+    "An organism requiring air to live",
+    "To publicly support or recommend",
+    "A period of time of great length",
+    "Showing aeolotropy property"
+  ],
+  "answerOption": "B",
+  "answerText": "To publicly support or recommend",
+  "difficulty": "hard",
+  "sourceFile": "1996.json"
+}

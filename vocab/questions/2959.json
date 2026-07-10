@@ -1,0 +1,15 @@
+{
+  "id": 2959,
+  "word": "Appeal",
+  "question": "Appeal",
+  "options": [
+    "A riddle or mysterious statement",
+    "An earnest request or application",
+    "Experienced through the feelings of another",
+    "Gradual recovery of health"
+  ],
+  "answerOption": "B",
+  "answerText": "An earnest request or application",
+  "difficulty": "hard",
+  "sourceFile": "2959.json"
+}

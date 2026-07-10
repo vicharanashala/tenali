@@ -1,0 +1,15 @@
+{
+  "id": 520,
+  "word": "Control",
+  "question": "Control",
+  "options": [
+    "To suffer something unpleasant patiently",
+    "Lacking flavor or interest",
+    "To have power over something's behavior",
+    "Attractively old-fashioned"
+  ],
+  "answerOption": "C",
+  "answerText": "To have power over something's behavior",
+  "difficulty": "easy",
+  "sourceFile": "0520.json"
+}

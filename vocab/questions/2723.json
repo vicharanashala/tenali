@@ -1,0 +1,15 @@
+{
+  "id": 2723,
+  "word": "Exposition",
+  "question": "Exposition",
+  "options": [
+    "The quality of being adroit",
+    "A statement or explanation",
+    "Presence of air in thorax",
+    "Surgical use of air"
+  ],
+  "answerOption": "B",
+  "answerText": "A statement or explanation",
+  "difficulty": "hard",
+  "sourceFile": "2723.json"
+}

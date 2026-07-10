@@ -1,0 +1,15 @@
+{
+  "id": 237,
+  "word": "Confuse",
+  "question": "Confuse",
+  "options": [
+    "To become aware of something",
+    "To make someone feel bewildered",
+    "Having the training needed to do something",
+    "Fluent and persuasive in speaking"
+  ],
+  "answerOption": "B",
+  "answerText": "To make someone feel bewildered",
+  "difficulty": "easy",
+  "sourceFile": "0237.json"
+}

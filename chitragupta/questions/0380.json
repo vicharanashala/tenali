@@ -1,0 +1,14 @@
+{
+  "id": 380,
+  "question": "Which Indian state has Itanagar as its capital?",
+  "options": [
+    "Mizoram",
+    "Nagaland",
+    "Manipur",
+    "Arunachal Pradesh"
+  ],
+  "answerOption": "D",
+  "answerText": "Arunachal Pradesh",
+  "genre": "geography",
+  "sourceFile": "0380.json"
+}

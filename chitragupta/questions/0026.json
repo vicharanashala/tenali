@@ -1,0 +1,14 @@
+{
+  "id": 26,
+  "question": "What is the capital of China?",
+  "options": [
+    "Bangkok",
+    "Canberra",
+    "Beijing",
+    "Thimphu"
+  ],
+  "answerOption": "C",
+  "answerText": "Beijing",
+  "genre": "geography",
+  "sourceFile": "0026.json"
+}

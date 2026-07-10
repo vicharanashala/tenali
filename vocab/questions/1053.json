@@ -1,0 +1,15 @@
+{
+  "id": 1053,
+  "word": "Fickle",
+  "question": "Fickle",
+  "options": [
+    "Changing frequently in loyalties or affections",
+    "To gather or collect something",
+    "Betraying one's country or allies",
+    "Lacking energy or enthusiasm"
+  ],
+  "answerOption": "A",
+  "answerText": "Changing frequently in loyalties or affections",
+  "difficulty": "medium",
+  "sourceFile": "1053.json"
+}

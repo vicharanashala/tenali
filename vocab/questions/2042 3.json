@@ -1,0 +1,15 @@
+{
+  "id": 2042,
+  "word": "Perspicacious",
+  "question": "Perspicacious",
+  "options": [
+    "A person who is fanatical about a cause",
+    "Having a ready insight into things",
+    "Extracting metal from ore by heating",
+    "The making of false statements to damage reputation"
+  ],
+  "answerOption": "B",
+  "answerText": "Having a ready insight into things",
+  "difficulty": "hard",
+  "sourceFile": "2042.json"
+}

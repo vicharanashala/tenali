@@ -1,0 +1,14 @@
+{
+  "id": 286,
+  "question": "Which is the largest state in the United States by area?",
+  "options": [
+    "Texas",
+    "California",
+    "Alaska",
+    "Montana"
+  ],
+  "answerOption": "C",
+  "answerText": "Alaska",
+  "genre": "mixed",
+  "sourceFile": "0286.json"
+}

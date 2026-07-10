@@ -1,0 +1,14 @@
+{
+  "id": 550,
+  "question": "Which part of the digestive system stores food temporarily after swallowing?",
+  "options": [
+    "Liver",
+    "Stomach",
+    "Small intestine",
+    "Colon"
+  ],
+  "answerOption": "B",
+  "answerText": "Stomach",
+  "genre": "mixed",
+  "sourceFile": "0550.json"
+}

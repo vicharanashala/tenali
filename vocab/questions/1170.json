@@ -1,0 +1,15 @@
+{
+  "id": 1170,
+  "word": "Gratify",
+  "question": "Gratify",
+  "options": [
+    "Difficult to understand or analyze",
+    "To attack or plunder",
+    "To give someone pleasure or satisfaction",
+    "Having a feeling of vague longing"
+  ],
+  "answerOption": "C",
+  "answerText": "To give someone pleasure or satisfaction",
+  "difficulty": "medium",
+  "sourceFile": "1170.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 572,
+  "question": "Who wrote 'A Tale of Two Cities'?",
+  "options": [
+    "Charles Dickens",
+    "Thomas Hardy",
+    "George Eliot",
+    "Jane Austen"
+  ],
+  "answerOption": "A",
+  "answerText": "Charles Dickens",
+  "genre": "general-knowledge",
+  "sourceFile": "0572.json"
+}

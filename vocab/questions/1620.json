@@ -1,0 +1,15 @@
+{
+  "id": 1620,
+  "word": "Despicable",
+  "question": "Despicable",
+  "options": [
+    "A person who deposits money",
+    "To purify from impurities",
+    "To make more democratic or popular",
+    "Deserving strong disapproval"
+  ],
+  "answerOption": "D",
+  "answerText": "Deserving strong disapproval",
+  "difficulty": "medium",
+  "sourceFile": "1620.json"
+}

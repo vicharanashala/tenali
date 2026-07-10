@@ -1,0 +1,15 @@
+{
+  "id": 523,
+  "word": "Govern",
+  "question": "Govern",
+  "options": [
+    "Elaborately or highly decorated",
+    "To conduct the affairs of a state or organization",
+    "To capture or seize something",
+    "Happening quickly and unexpectedly"
+  ],
+  "answerOption": "B",
+  "answerText": "To conduct the affairs of a state or organization",
+  "difficulty": "easy",
+  "sourceFile": "0523.json"
+}

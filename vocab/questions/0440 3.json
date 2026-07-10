@@ -1,0 +1,15 @@
+{
+  "id": 440,
+  "word": "Unload",
+  "question": "Unload",
+  "options": [
+    "To try to win against other people",
+    "Happening or doing at the expected time",
+    "To exert force to move something closer",
+    "To remove goods from a vehicle"
+  ],
+  "answerOption": "D",
+  "answerText": "To remove goods from a vehicle",
+  "difficulty": "easy",
+  "sourceFile": "0440.json"
+}

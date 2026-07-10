@@ -1,0 +1,15 @@
+{
+  "id": 2342,
+  "word": "Advisedness",
+  "question": "Advisedness",
+  "options": [
+    "A meteorite or stone from space",
+    "A flattering statement used to persuade",
+    "Gradual recovery of health",
+    "The quality of being advised"
+  ],
+  "answerOption": "D",
+  "answerText": "The quality of being advised",
+  "difficulty": "hard",
+  "sourceFile": "2342.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 65,
+  "question": "Which Indian city is known as the Pink City?",
+  "options": [
+    "Udaipur",
+    "Jaipur",
+    "Jodhpur",
+    "Bikaner"
+  ],
+  "answerOption": "B",
+  "answerText": "Jaipur",
+  "genre": "india-gk",
+  "sourceFile": "0065.json"
+}

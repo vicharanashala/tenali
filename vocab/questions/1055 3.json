@@ -1,0 +1,15 @@
+{
+  "id": 1055,
+  "word": "Voracious",
+  "question": "Voracious",
+  "options": [
+    "The quality of holding firmly",
+    "Wanting large quantities of food or knowledge",
+    "The removal of salt from water",
+    "Flourishing or spreading in an uncontrolled way"
+  ],
+  "answerOption": "B",
+  "answerText": "Wanting large quantities of food or knowledge",
+  "difficulty": "medium",
+  "sourceFile": "1055.json"
+}

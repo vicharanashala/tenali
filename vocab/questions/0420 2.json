@@ -1,0 +1,15 @@
+{
+  "id": 420,
+  "word": "Grant",
+  "question": "Grant",
+  "options": [
+    "To agree to give something requested",
+    "Refusing to change one's mind",
+    "Relating to or determined by the sun",
+    "Worthy of attention; striking"
+  ],
+  "answerOption": "A",
+  "answerText": "To agree to give something requested",
+  "difficulty": "easy",
+  "sourceFile": "0420.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 148,
+  "question": "Which Indian classical dance form originated in Kerala?",
+  "options": [
+    "Bharatanatyam",
+    "Kathak",
+    "Kathakali",
+    "Odissi"
+  ],
+  "answerOption": "C",
+  "answerText": "Kathakali",
+  "genre": "india-gk",
+  "sourceFile": "0148.json"
+}

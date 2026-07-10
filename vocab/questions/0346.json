@@ -1,0 +1,15 @@
+{
+  "id": 346,
+  "word": "Explore",
+  "question": "Explore",
+  "options": [
+    "To travel through an unfamiliar area to learn about it",
+    "Able to express oneself easily in a language",
+    "Next to or adjoining something else",
+    "To study something thoroughly"
+  ],
+  "answerOption": "A",
+  "answerText": "To travel through an unfamiliar area to learn about it",
+  "difficulty": "easy",
+  "sourceFile": "0346.json"
+}

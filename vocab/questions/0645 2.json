@@ -1,0 +1,15 @@
+{
+  "id": 645,
+  "word": "Knowledgeable",
+  "question": "Knowledgeable",
+  "options": [
+    "Well informed about many subjects",
+    "To pledge to carry out a course of action",
+    "Plain or obvious; clearly seen",
+    "Able to read and write"
+  ],
+  "answerOption": "A",
+  "answerText": "Well informed about many subjects",
+  "difficulty": "easy",
+  "sourceFile": "0645.json"
+}

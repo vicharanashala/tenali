@@ -1,0 +1,15 @@
+{
+  "id": 230,
+  "word": "Admire",
+  "question": "Admire",
+  "options": [
+    "To use something carelessly or to no purpose",
+    "To regard with respect and warm approval",
+    "Guilty of misleading or tricking others",
+    "Fixed or fastened firmly; not easily moved"
+  ],
+  "answerOption": "B",
+  "answerText": "To regard with respect and warm approval",
+  "difficulty": "easy",
+  "sourceFile": "0230.json"
+}

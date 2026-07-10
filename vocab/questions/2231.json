@@ -1,0 +1,15 @@
+{
+  "id": 2231,
+  "word": "Hagiography",
+  "question": "Hagiography",
+  "options": [
+    "Lack of pity or compassion",
+    "A biography that idealizes its subject",
+    "A balloon or airship",
+    "The action of improving something"
+  ],
+  "answerOption": "B",
+  "answerText": "A biography that idealizes its subject",
+  "difficulty": "hard",
+  "sourceFile": "2231.json"
+}

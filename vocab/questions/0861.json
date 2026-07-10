@@ -1,0 +1,15 @@
+{
+  "id": 861,
+  "word": "Average",
+  "question": "Average",
+  "options": [
+    "Important and well known",
+    "Willfully causing pain to others",
+    "Feeling regret or sadness",
+    "Typical or ordinary; not remarkable"
+  ],
+  "answerOption": "D",
+  "answerText": "Typical or ordinary; not remarkable",
+  "difficulty": "easy",
+  "sourceFile": "0861.json"
+}

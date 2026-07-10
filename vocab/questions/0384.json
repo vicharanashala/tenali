@@ -1,0 +1,15 @@
+{
+  "id": 384,
+  "word": "Drip",
+  "question": "Drip",
+  "options": [
+    "Having a natural ability to do something well",
+    "To let liquid fall in small drops",
+    "To state an intention to harm someone",
+    "No longer living"
+  ],
+  "answerOption": "B",
+  "answerText": "To let liquid fall in small drops",
+  "difficulty": "easy",
+  "sourceFile": "0384.json"
+}

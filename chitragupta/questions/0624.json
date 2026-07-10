@@ -1,0 +1,14 @@
+{
+  "id": 624,
+  "question": "Which Indian union territory has New Delhi as its capital?",
+  "options": [
+    "Chandigarh",
+    "Delhi (NCT)",
+    "Puducherry",
+    "Jammu and Kashmir"
+  ],
+  "answerOption": "B",
+  "answerText": "Delhi (NCT)",
+  "genre": "geography",
+  "sourceFile": "0624.json"
+}

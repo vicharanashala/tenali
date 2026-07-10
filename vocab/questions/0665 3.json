@@ -1,0 +1,15 @@
+{
+  "id": 665,
+  "word": "Immense",
+  "question": "Immense",
+  "options": [
+    "Extremely large or great in scale",
+    "Having the taste of salt",
+    "Having a sharp acidic taste",
+    "Not based on or acting on fairness"
+  ],
+  "answerOption": "A",
+  "answerText": "Extremely large or great in scale",
+  "difficulty": "easy",
+  "sourceFile": "0665.json"
+}

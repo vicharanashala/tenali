@@ -1,0 +1,15 @@
+{
+  "id": 2946,
+  "word": "Abiosis",
+  "question": "Abiosis",
+  "options": [
+    "The state of being abject",
+    "Extremely wretched or miserable",
+    "A great spiritual anguish without a specific cause",
+    "Absence of life or viability"
+  ],
+  "answerOption": "D",
+  "answerText": "Absence of life or viability",
+  "difficulty": "extra-hard",
+  "sourceFile": "2946.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1512,
+  "word": "Ratiocination",
+  "question": "Ratiocination",
+  "options": [
+    "The art of repairing with gold to show beauty in damage",
+    "A dispute about or argument over words",
+    "The process of exact thinking or reasoning",
+    "Showing spontaneous and undirected playfulness"
+  ],
+  "answerOption": "C",
+  "answerText": "The process of exact thinking or reasoning",
+  "difficulty": "extra-hard",
+  "sourceFile": "1512.json"
+}

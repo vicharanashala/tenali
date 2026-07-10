@@ -1,0 +1,15 @@
+{
+  "id": 2686,
+  "word": "Gorge",
+  "question": "Gorge",
+  "options": [
+    "Something handed down from predecessor",
+    "A deep narrow valley with steep rocky sides",
+    "Lover of Clytemnestra in mythology",
+    "The state of being noticeable"
+  ],
+  "answerOption": "B",
+  "answerText": "A deep narrow valley with steep rocky sides",
+  "difficulty": "hard",
+  "sourceFile": "2686.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 250,
+  "word": "Approach",
+  "question": "Approach",
+  "options": [
+    "Having the pleasant taste of sugar",
+    "To come near or nearer to something",
+    "To set free from confinement",
+    "To give attention to sound or speech"
+  ],
+  "answerOption": "B",
+  "answerText": "To come near or nearer to something",
+  "difficulty": "easy",
+  "sourceFile": "0250.json"
+}

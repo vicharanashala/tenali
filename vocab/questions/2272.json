@@ -1,0 +1,15 @@
+{
+  "id": 2272,
+  "word": "Adsorbent",
+  "question": "Adsorbent",
+  "options": [
+    "Not being what it claims to be; false",
+    "A substance that adsorbs",
+    "A long detailed discussion or treatise",
+    "A jet-powered aircraft"
+  ],
+  "answerOption": "B",
+  "answerText": "A substance that adsorbs",
+  "difficulty": "hard",
+  "sourceFile": "2272.json"
+}

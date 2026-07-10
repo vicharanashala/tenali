@@ -1,0 +1,15 @@
+{
+  "id": 110,
+  "word": "Straight",
+  "question": "Straight",
+  "options": [
+    "Extending in one direction without curves",
+    "Causing death",
+    "Very impressive; magnificent",
+    "To develop gradually over time"
+  ],
+  "answerOption": "A",
+  "answerText": "Extending in one direction without curves",
+  "difficulty": "easy",
+  "sourceFile": "0110.json"
+}

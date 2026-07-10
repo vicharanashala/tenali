@@ -1,0 +1,15 @@
+{
+  "id": 2732,
+  "word": "Xenial",
+  "question": "Xenial",
+  "options": [
+    "A person who has returned from the dead",
+    "Denoting a period that was happy and peaceful",
+    "Relating to hospitality between host and guest",
+    "A situation where any move will worsen one's position"
+  ],
+  "answerOption": "C",
+  "answerText": "Relating to hospitality between host and guest",
+  "difficulty": "extra-hard",
+  "sourceFile": "2732.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 905,
+  "word": "Complacent",
+  "question": "Complacent",
+  "options": [
+    "Having sharp powers of judgment",
+    "To fill something up again",
+    "Showing smug satisfaction with oneself",
+    "Fluent and persuasive in speaking or writing"
+  ],
+  "answerOption": "C",
+  "answerText": "Showing smug satisfaction with oneself",
+  "difficulty": "medium",
+  "sourceFile": "0905.json"
+}

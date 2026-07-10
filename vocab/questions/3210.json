@@ -1,0 +1,15 @@
+{
+  "id": 3210,
+  "word": "Abetter",
+  "question": "Abetter",
+  "options": [
+    "One who abets or encourages",
+    "In a non-living manner",
+    "Slanting or oblique",
+    "A small amount or piece"
+  ],
+  "answerOption": "A",
+  "answerText": "One who abets or encourages",
+  "difficulty": "extra-hard",
+  "sourceFile": "3210.json"
+}

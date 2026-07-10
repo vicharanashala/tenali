@@ -1,0 +1,14 @@
+{
+  "id": 302,
+  "question": "Which branch of science studies weather and climate?",
+  "options": [
+    "Astronomy",
+    "Meteorology",
+    "Ecology",
+    "Seismology"
+  ],
+  "answerOption": "B",
+  "answerText": "Meteorology",
+  "genre": "mixed",
+  "sourceFile": "0302.json"
+}

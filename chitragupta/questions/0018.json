@@ -1,0 +1,14 @@
+{
+  "id": 18,
+  "question": "Which star gives us light in the day?",
+  "options": [
+    "Moon",
+    "Mars",
+    "Sun",
+    "Venus"
+  ],
+  "answerOption": "C",
+  "answerText": "Sun",
+  "genre": "mixed",
+  "sourceFile": "0018.json"
+}

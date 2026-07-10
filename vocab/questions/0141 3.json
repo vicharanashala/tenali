@@ -1,0 +1,15 @@
+{
+  "id": 141,
+  "word": "Glad",
+  "question": "Glad",
+  "options": [
+    "To form an idea of the value of something",
+    "Feeling pleasure or happiness",
+    "To arouse the curiosity of someone",
+    "To prove more powerful than opposing forces"
+  ],
+  "answerOption": "B",
+  "answerText": "Feeling pleasure or happiness",
+  "difficulty": "easy",
+  "sourceFile": "0141.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 713,
+  "word": "Parallel",
+  "question": "Parallel",
+  "options": [
+    "Side by side and having the same distance apart",
+    "To have the same opinion as someone else",
+    "To put forward an idea for consideration",
+    "To give shares of something to many people"
+  ],
+  "answerOption": "A",
+  "answerText": "Side by side and having the same distance apart",
+  "difficulty": "easy",
+  "sourceFile": "0713.json"
+}

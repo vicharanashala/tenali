@@ -1,0 +1,15 @@
+{
+  "id": 1279,
+  "word": "Candor",
+  "question": "Candor",
+  "options": [
+    "The quality of being frank and truthful",
+    "Seeking to take revenge",
+    "A state of despair and hopelessness",
+    "Having an untidy or disheveled appearance"
+  ],
+  "answerOption": "A",
+  "answerText": "The quality of being frank and truthful",
+  "difficulty": "medium",
+  "sourceFile": "1279.json"
+}

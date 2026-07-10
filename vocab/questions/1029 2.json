@@ -1,0 +1,15 @@
+{
+  "id": 1029,
+  "word": "Nomadic",
+  "question": "Nomadic",
+  "options": [
+    "Living the life of a wanderer",
+    "Friendly and easy to talk to",
+    "To prosper or flourish",
+    "Famous for something bad"
+  ],
+  "answerOption": "A",
+  "answerText": "Living the life of a wanderer",
+  "difficulty": "medium",
+  "sourceFile": "1029.json"
+}

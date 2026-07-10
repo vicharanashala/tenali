@@ -1,0 +1,15 @@
+{
+  "id": 1516,
+  "word": "Depressed",
+  "question": "Depressed",
+  "options": [
+    "Feeling sad and without hope",
+    "Disappointed and disheartened",
+    "In grave danger or great need",
+    "The furnishings and decoration of a room"
+  ],
+  "answerOption": "A",
+  "answerText": "Feeling sad and without hope",
+  "difficulty": "medium",
+  "sourceFile": "1516.json"
+}

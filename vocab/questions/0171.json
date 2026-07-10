@@ -1,0 +1,15 @@
+{
+  "id": 171,
+  "word": "Frown",
+  "question": "Frown",
+  "options": [
+    "Feeling fear or anxiety",
+    "Having a great deal to do",
+    "To make a displeased facial expression",
+    "To form a pleased expression with the mouth"
+  ],
+  "answerOption": "C",
+  "answerText": "To make a displeased facial expression",
+  "difficulty": "easy",
+  "sourceFile": "0171.json"
+}

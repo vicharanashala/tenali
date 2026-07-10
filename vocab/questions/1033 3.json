@@ -1,0 +1,15 @@
+{
+  "id": 1033,
+  "word": "Erratic",
+  "question": "Erratic",
+  "options": [
+    "The action of thrusting out",
+    "Great pleasure and satisfaction",
+    "Not even or regular in pattern",
+    "Affected by a lack of energy"
+  ],
+  "answerOption": "C",
+  "answerText": "Not even or regular in pattern",
+  "difficulty": "medium",
+  "sourceFile": "1033.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1812,
+  "word": "Precipitous",
+  "question": "Precipitous",
+  "options": [
+    "Relating to space and air",
+    "Dangerously high or steep",
+    "Tissue with air spaces in plants",
+    "Happening by chance or accident"
+  ],
+  "answerOption": "B",
+  "answerText": "Dangerously high or steep",
+  "difficulty": "hard",
+  "sourceFile": "1812.json"
+}

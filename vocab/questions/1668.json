@@ -1,0 +1,15 @@
+{
+  "id": 1668,
+  "word": "Detainee",
+  "question": "Detainee",
+  "options": [
+    "Unable to be controlled",
+    "To assign responsibility to another person",
+    "Not believing in something",
+    "A person held in custody"
+  ],
+  "answerOption": "D",
+  "answerText": "A person held in custody",
+  "difficulty": "medium",
+  "sourceFile": "1668.json"
+}

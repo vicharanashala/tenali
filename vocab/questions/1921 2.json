@@ -1,0 +1,15 @@
+{
+  "id": 1921,
+  "word": "Adsorption",
+  "question": "Adsorption",
+  "options": [
+    "The gathering of a substance",
+    "A huge and overwhelming force",
+    "A type of small bean",
+    "A poison from air"
+  ],
+  "answerOption": "A",
+  "answerText": "The gathering of a substance",
+  "difficulty": "hard",
+  "sourceFile": "1921.json"
+}

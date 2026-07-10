@@ -1,0 +1,15 @@
+{
+  "id": 413,
+  "word": "Inherit",
+  "question": "Inherit",
+  "options": [
+    "To receive property from someone who has died",
+    "To determine an amount by mathematics",
+    "Having four equal sides and right angles",
+    "Covered or saturated with water"
+  ],
+  "answerOption": "A",
+  "answerText": "To receive property from someone who has died",
+  "difficulty": "easy",
+  "sourceFile": "0413.json"
+}

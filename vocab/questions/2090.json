@@ -1,0 +1,15 @@
+{
+  "id": 2090,
+  "word": "Deprecate",
+  "question": "Deprecate",
+  "options": [
+    "The quality of being stiff",
+    "The use of air in sound",
+    "To express disapproval of something",
+    "The quality of being imputable"
+  ],
+  "answerOption": "C",
+  "answerText": "To express disapproval of something",
+  "difficulty": "hard",
+  "sourceFile": "2090.json"
+}

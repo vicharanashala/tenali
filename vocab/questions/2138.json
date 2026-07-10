@@ -1,0 +1,15 @@
+{
+  "id": 2138,
+  "word": "Heresy",
+  "question": "Heresy",
+  "options": [
+    "The quality of being adverse",
+    "Belief contrary to the accepted doctrine",
+    "The use of trickery to achieve a goal",
+    "To reduce to remove unwanted elements"
+  ],
+  "answerOption": "B",
+  "answerText": "Belief contrary to the accepted doctrine",
+  "difficulty": "hard",
+  "sourceFile": "2138.json"
+}

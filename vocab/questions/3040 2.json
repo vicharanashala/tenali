@@ -1,0 +1,15 @@
+{
+  "id": 3040,
+  "word": "Abstinency",
+  "question": "Abstinency",
+  "options": [
+    "The quality of being abstinent",
+    "Quality of abysmal depth",
+    "Giving opinions beyond one's knowledge",
+    "In manner of abyss"
+  ],
+  "answerOption": "A",
+  "answerText": "The quality of being abstinent",
+  "difficulty": "extra-hard",
+  "sourceFile": "3040.json"
+}

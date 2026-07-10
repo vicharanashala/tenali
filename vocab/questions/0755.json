@@ -1,0 +1,15 @@
+{
+  "id": 755,
+  "word": "Frigid",
+  "question": "Frigid",
+  "options": [
+    "To say sorry for doing something wrong",
+    "Neatly and methodically arranged",
+    "Stale smelling or damp",
+    "Very cold in temperature"
+  ],
+  "answerOption": "D",
+  "answerText": "Very cold in temperature",
+  "difficulty": "easy",
+  "sourceFile": "0755.json"
+}

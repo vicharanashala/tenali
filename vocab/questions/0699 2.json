@@ -1,0 +1,15 @@
+{
+  "id": 699,
+  "word": "Secondary",
+  "question": "Secondary",
+  "options": [
+    "Insufficient for the demand; in short supply",
+    "To find the way to a destination",
+    "To become mature and ready to eat",
+    "Coming after or less important than the first"
+  ],
+  "answerOption": "D",
+  "answerText": "Coming after or less important than the first",
+  "difficulty": "easy",
+  "sourceFile": "0699.json"
+}

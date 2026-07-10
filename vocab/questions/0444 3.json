@@ -1,0 +1,15 @@
+{
+  "id": 444,
+  "word": "Classify",
+  "question": "Classify",
+  "options": [
+    "Unwilling to give or share; unkind",
+    "To arrange into categories or classes",
+    "Relating to or determined by the sun",
+    "To use something carelessly or to no purpose"
+  ],
+  "answerOption": "B",
+  "answerText": "To arrange into categories or classes",
+  "difficulty": "easy",
+  "sourceFile": "0444.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 592,
+  "question": "Which country is associated with the city of Tripoli?",
+  "options": [
+    "Libya",
+    "Lebanon",
+    "Egypt",
+    "Syria"
+  ],
+  "answerOption": "A",
+  "answerText": "Libya",
+  "genre": "geography",
+  "sourceFile": "0592.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 613,
+  "question": "Which is the largest species of bear by average size and mass?",
+  "options": [
+    "Brown bear",
+    "Polar bear",
+    "Black bear",
+    "Sloth bear"
+  ],
+  "answerOption": "B",
+  "answerText": "Polar bear",
+  "genre": "mixed",
+  "sourceFile": "0613.json"
+}

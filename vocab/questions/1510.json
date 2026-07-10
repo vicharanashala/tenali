@@ -1,0 +1,15 @@
+{
+  "id": 1510,
+  "word": "Depreciatory",
+  "question": "Depreciatory",
+  "options": [
+    "A violent criminal or fugitive",
+    "Designed to impress or attract notice",
+    "Tending to decrease in value",
+    "Intense dislike or disgust"
+  ],
+  "answerOption": "C",
+  "answerText": "Tending to decrease in value",
+  "difficulty": "medium",
+  "sourceFile": "1510.json"
+}

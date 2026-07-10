@@ -1,0 +1,15 @@
+{
+  "id": 167,
+  "word": "Fall",
+  "question": "Fall",
+  "options": [
+    "Giving off light; bright or shining",
+    "To move downward without control",
+    "Not even or balanced in shape",
+    "To examine and make corrections to something"
+  ],
+  "answerOption": "B",
+  "answerText": "To move downward without control",
+  "difficulty": "easy",
+  "sourceFile": "0167.json"
+}

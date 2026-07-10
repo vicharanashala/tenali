@@ -1,0 +1,15 @@
+{
+  "id": 1022,
+  "word": "Whimsical",
+  "question": "Whimsical",
+  "options": [
+    "Wild or untamed",
+    "Pleasant and easy to get along with",
+    "Playfully quaint or fanciful",
+    "To regard or treat as a god"
+  ],
+  "answerOption": "C",
+  "answerText": "Playfully quaint or fanciful",
+  "difficulty": "medium",
+  "sourceFile": "1022.json"
+}

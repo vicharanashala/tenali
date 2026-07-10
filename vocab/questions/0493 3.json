@@ -1,0 +1,15 @@
+{
+  "id": 493,
+  "word": "Experiment",
+  "question": "Experiment",
+  "options": [
+    "Far away in space or time",
+    "Having a practical view of what is achievable",
+    "To test something to discover new facts",
+    "To come near or nearer to something"
+  ],
+  "answerOption": "C",
+  "answerText": "To test something to discover new facts",
+  "difficulty": "easy",
+  "sourceFile": "0493.json"
+}

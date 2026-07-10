@@ -1,0 +1,15 @@
+{
+  "id": 989,
+  "word": "Lethargic",
+  "question": "Lethargic",
+  "options": [
+    "Exactly alike in every way",
+    "To set up an organization on a firm basis",
+    "Tender and juicy in food",
+    "Lacking energy or enthusiasm"
+  ],
+  "answerOption": "D",
+  "answerText": "Lacking energy or enthusiasm",
+  "difficulty": "easy",
+  "sourceFile": "0989.json"
+}

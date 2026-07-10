@@ -1,0 +1,15 @@
+{
+  "id": 2500,
+  "word": "Aberration",
+  "question": "Aberration",
+  "options": [
+    "Having a large abdomen or belly",
+    "Reduced to abjection",
+    "A deviation from normal pattern",
+    "Irregular and winding like a maze"
+  ],
+  "answerOption": "C",
+  "answerText": "A deviation from normal pattern",
+  "difficulty": "extra-hard",
+  "sourceFile": "2500.json"
+}

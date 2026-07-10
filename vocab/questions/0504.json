@@ -1,0 +1,15 @@
+{
+  "id": 504,
+  "word": "Inhabit",
+  "question": "Inhabit",
+  "options": [
+    "To remove the wrapping from something",
+    "To live in or occupy a place",
+    "Growing thickly and strongly; abundant",
+    "Not approximated in any way; precise"
+  ],
+  "answerOption": "B",
+  "answerText": "To live in or occupy a place",
+  "difficulty": "easy",
+  "sourceFile": "0504.json"
+}

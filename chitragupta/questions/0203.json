@@ -1,0 +1,14 @@
+{
+  "id": 203,
+  "question": "Which is the national fruit of India?",
+  "options": [
+    "Banana",
+    "Apple",
+    "Mango",
+    "Guava"
+  ],
+  "answerOption": "C",
+  "answerText": "Mango",
+  "genre": "india-gk",
+  "sourceFile": "0203.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1341,
+  "word": "Defiance",
+  "question": "Defiance",
+  "options": [
+    "Open resistance or bold disobedience",
+    "To reduce to a lower rank or position",
+    "Disturbed or insane in mind",
+    "The public declaration of someone"
+  ],
+  "answerOption": "A",
+  "answerText": "Open resistance or bold disobedience",
+  "difficulty": "medium",
+  "sourceFile": "1341.json"
+}

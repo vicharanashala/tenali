@@ -1,0 +1,15 @@
+{
+  "id": 380,
+  "word": "Slide",
+  "question": "Slide",
+  "options": [
+    "Having an uneven or irregular surface",
+    "To move smoothly along a surface",
+    "Feeling sorrow or unhappiness",
+    "Feeling pleasure or happiness"
+  ],
+  "answerOption": "B",
+  "answerText": "To move smoothly along a surface",
+  "difficulty": "easy",
+  "sourceFile": "0380.json"
+}

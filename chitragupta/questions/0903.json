@@ -1,0 +1,14 @@
+{
+  "id": 903,
+  "question": "Who wrote 'A Passage to India'?",
+  "options": [
+    "E. M. Forster",
+    "Rudyard Kipling",
+    "George Orwell",
+    "Somerset Maugham"
+  ],
+  "answerOption": "A",
+  "answerText": "E. M. Forster",
+  "genre": "india-gk",
+  "sourceFile": "0903.json"
+}

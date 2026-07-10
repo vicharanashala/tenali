@@ -1,0 +1,15 @@
+{
+  "id": 1405,
+  "word": "Demobilize",
+  "question": "Demobilize",
+  "options": [
+    "To remove a monarch from the throne",
+    "Using more words than are needed",
+    "Relating to a definition",
+    "To release someone from military service"
+  ],
+  "answerOption": "D",
+  "answerText": "To release someone from military service",
+  "difficulty": "medium",
+  "sourceFile": "1405.json"
+}

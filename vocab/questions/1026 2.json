@@ -1,0 +1,15 @@
+{
+  "id": 1026,
+  "word": "Kinetic",
+  "question": "Kinetic",
+  "options": [
+    "A skill or talent for doing something",
+    "To regard with great respect",
+    "Relating to or resulting from motion",
+    "Acting without forethought"
+  ],
+  "answerOption": "C",
+  "answerText": "Relating to or resulting from motion",
+  "difficulty": "medium",
+  "sourceFile": "1026.json"
+}

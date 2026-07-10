@@ -1,0 +1,14 @@
+{
+  "id": 348,
+  "question": "Which instrument is used to measure blood pressure?",
+  "options": [
+    "Thermometer",
+    "Sphygmomanometer",
+    "Stethoscope",
+    "Barometer"
+  ],
+  "answerOption": "B",
+  "answerText": "Sphygmomanometer",
+  "genre": "science",
+  "sourceFile": "0348.json"
+}

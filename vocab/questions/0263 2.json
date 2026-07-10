@@ -1,0 +1,15 @@
+{
+  "id": 263,
+  "word": "Jump",
+  "question": "Jump",
+  "options": [
+    "Free from disturbance; calm",
+    "To push off the ground using the legs",
+    "To be required to pay money to someone",
+    "Feeling fear or anxiety"
+  ],
+  "answerOption": "B",
+  "answerText": "To push off the ground using the legs",
+  "difficulty": "easy",
+  "sourceFile": "0263.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2183,
+  "word": "Subterfuge",
+  "question": "Subterfuge",
+  "options": [
+    "Deceit used to achieve one's goal",
+    "Native and restricted to a certain place",
+    "Public shame or disgrace",
+    "A person guilty of adultery"
+  ],
+  "answerOption": "A",
+  "answerText": "Deceit used to achieve one's goal",
+  "difficulty": "hard",
+  "sourceFile": "2183.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2600,
+  "word": "AEROSTATICKS",
+  "question": "AEROSTATICKS",
+  "options": [
+    "An air-powered projection device",
+    "Relating to air equilibrium",
+    "Science of air equilibrium",
+    "To describe publicly to promote sales"
+  ],
+  "answerOption": "C",
+  "answerText": "Science of air equilibrium",
+  "difficulty": "hard",
+  "sourceFile": "2600.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 206,
+  "word": "Appear",
+  "question": "Appear",
+  "options": [
+    "Making sure to avoid danger or mistakes",
+    "To become visible or noticeable",
+    "Trustworthy and reliable",
+    "To welcome someone with particular words"
+  ],
+  "answerOption": "B",
+  "answerText": "To become visible or noticeable",
+  "difficulty": "easy",
+  "sourceFile": "0206.json"
+}

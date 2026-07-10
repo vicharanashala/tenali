@@ -1,0 +1,15 @@
+{
+  "id": 726,
+  "word": "Circular",
+  "question": "Circular",
+  "options": [
+    "To agree to give something requested",
+    "Next to or adjoining something else",
+    "Having the form of a circle",
+    "To arouse the curiosity of someone"
+  ],
+  "answerOption": "C",
+  "answerText": "Having the form of a circle",
+  "difficulty": "easy",
+  "sourceFile": "0726.json"
+}

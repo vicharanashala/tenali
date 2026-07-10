@@ -1,0 +1,14 @@
+{
+  "id": 305,
+  "question": "Which gas is used by plants during respiration at night?",
+  "options": [
+    "Carbon dioxide",
+    "Oxygen",
+    "Nitrogen",
+    "Hydrogen"
+  ],
+  "answerOption": "B",
+  "answerText": "Oxygen",
+  "genre": "science",
+  "sourceFile": "0305.json"
+}

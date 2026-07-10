@@ -1,0 +1,15 @@
+{
+  "id": 1543,
+  "word": "Derision",
+  "question": "Derision",
+  "options": [
+    "Contemptuous ridicule or mockery",
+    "Coming after something in time",
+    "To continue in a course of action",
+    "Intense dislike or disgust"
+  ],
+  "answerOption": "A",
+  "answerText": "Contemptuous ridicule or mockery",
+  "difficulty": "medium",
+  "sourceFile": "1543.json"
+}

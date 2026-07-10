@@ -1,0 +1,15 @@
+{
+  "id": 2301,
+  "word": "Syzygy",
+  "question": "Syzygy",
+  "options": [
+    "An alignment of three celestial objects",
+    "Relating to the use of long words",
+    "Mystic or entrancing in nature",
+    "A specified period of five years"
+  ],
+  "answerOption": "A",
+  "answerText": "An alignment of three celestial objects",
+  "difficulty": "extra-hard",
+  "sourceFile": "2301.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1813,
+  "word": "Quizzical",
+  "question": "Quizzical",
+  "options": [
+    "One who fears flying",
+    "An act of speaking thoughts aloud alone",
+    "Clear, logical, and convincing",
+    "Indicating mild puzzlement"
+  ],
+  "answerOption": "D",
+  "answerText": "Indicating mild puzzlement",
+  "difficulty": "hard",
+  "sourceFile": "1813.json"
+}

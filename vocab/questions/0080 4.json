@@ -1,0 +1,15 @@
+{
+  "id": 80,
+  "word": "Healthy",
+  "question": "Healthy",
+  "options": [
+    "In good physical condition; not sick",
+    "Of extreme force or strength",
+    "To take someone's property without permission",
+    "To buy something"
+  ],
+  "answerOption": "A",
+  "answerText": "In good physical condition; not sick",
+  "difficulty": "easy",
+  "sourceFile": "0080.json"
+}

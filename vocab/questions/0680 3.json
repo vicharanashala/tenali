@@ -1,0 +1,15 @@
+{
+  "id": 680,
+  "word": "Harsh",
+  "question": "Harsh",
+  "options": [
+    "To withdraw from a position",
+    "To shine brightly with reflected light",
+    "Unpleasantly rough or sharp",
+    "Strongly and solidly built"
+  ],
+  "answerOption": "C",
+  "answerText": "Unpleasantly rough or sharp",
+  "difficulty": "easy",
+  "sourceFile": "0680.json"
+}

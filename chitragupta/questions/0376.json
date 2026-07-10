@@ -1,0 +1,14 @@
+{
+  "id": 376,
+  "question": "Who developed the periodic table in its early widely accepted form?",
+  "options": [
+    "Dalton",
+    "Mendeleev",
+    "Rutherford",
+    "Bohr"
+  ],
+  "answerOption": "B",
+  "answerText": "Mendeleev",
+  "genre": "general-knowledge",
+  "sourceFile": "0376.json"
+}

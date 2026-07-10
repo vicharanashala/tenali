@@ -1,0 +1,15 @@
+{
+  "id": 1310,
+  "word": "Debrief",
+  "question": "Debrief",
+  "options": [
+    "A cleansing agent or substance",
+    "Torn or crushed out of shape",
+    "No longer produced or used; out of date",
+    "To question someone about a completed task"
+  ],
+  "answerOption": "D",
+  "answerText": "To question someone about a completed task",
+  "difficulty": "medium",
+  "sourceFile": "1310.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2420,
+  "word": "Aeolus",
+  "question": "Aeolus",
+  "options": [
+    "Cheerful friendliness; geniality",
+    "The action of revealing something",
+    "Greek god of the winds",
+    "Having a harmful effect in a gradual way"
+  ],
+  "answerOption": "C",
+  "answerText": "Greek god of the winds",
+  "difficulty": "hard",
+  "sourceFile": "2420.json"
+}

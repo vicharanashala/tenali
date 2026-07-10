@@ -1,0 +1,14 @@
+{
+  "id": 236,
+  "question": "Who was the first Prime Minister of independent India?",
+  "options": [
+    "Mahatma Gandhi",
+    "Jawaharlal Nehru",
+    "Sardar Patel",
+    "Rajendra Prasad"
+  ],
+  "answerOption": "B",
+  "answerText": "Jawaharlal Nehru",
+  "genre": "india-gk",
+  "sourceFile": "0236.json"
+}

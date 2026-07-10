@@ -1,0 +1,15 @@
+{
+  "id": 1047,
+  "word": "Thrive",
+  "question": "Thrive",
+  "options": [
+    "The action of leaving a place",
+    "A feeling of fear about something",
+    "To prosper or flourish",
+    "To do something one considers beneath oneself"
+  ],
+  "answerOption": "C",
+  "answerText": "To prosper or flourish",
+  "difficulty": "medium",
+  "sourceFile": "1047.json"
+}

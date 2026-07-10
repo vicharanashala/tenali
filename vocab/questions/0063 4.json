@@ -1,0 +1,15 @@
+{
+  "id": 63,
+  "word": "Silly",
+  "question": "Silly",
+  "options": [
+    "Shaped like a circle or sphere",
+    "Strong and healthy; vigorous",
+    "Having or showing a lack of common sense",
+    "To attract and hold the attention of someone"
+  ],
+  "answerOption": "C",
+  "answerText": "Having or showing a lack of common sense",
+  "difficulty": "easy",
+  "sourceFile": "0063.json"
+}

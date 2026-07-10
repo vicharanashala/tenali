@@ -1,0 +1,15 @@
+{
+  "id": 458,
+  "word": "Abandon",
+  "question": "Abandon",
+  "options": [
+    "To take on or start using something new",
+    "To give up something completely",
+    "To dislike something very intensely",
+    "To suffer something unpleasant patiently"
+  ],
+  "answerOption": "B",
+  "answerText": "To give up something completely",
+  "difficulty": "easy",
+  "sourceFile": "0458.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 34,
+  "word": "Thirsty",
+  "question": "Thirsty",
+  "options": [
+    "To make a displeased facial expression",
+    "To do physical harm or damage to someone",
+    "To greatly surprise someone",
+    "Feeling a need to drink something"
+  ],
+  "answerOption": "D",
+  "answerText": "Feeling a need to drink something",
+  "difficulty": "easy",
+  "sourceFile": "0034.json"
+}

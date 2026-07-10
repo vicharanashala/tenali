@@ -1,0 +1,15 @@
+{
+  "id": 217,
+  "word": "Ignore",
+  "question": "Ignore",
+  "options": [
+    "Dark or poorly lit; depressing",
+    "To give special importance to something",
+    "To refuse to take notice of something",
+    "Important and well known"
+  ],
+  "answerOption": "C",
+  "answerText": "To refuse to take notice of something",
+  "difficulty": "easy",
+  "sourceFile": "0217.json"
+}

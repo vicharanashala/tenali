@@ -1,0 +1,15 @@
+{
+  "id": 2,
+  "word": "Happy",
+  "question": "Happy",
+  "options": [
+    "Feeling pleasure and contentment",
+    "Very hot; burning",
+    "Not decorated or elaborate; simple",
+    "Awkward in movement or handling things"
+  ],
+  "answerOption": "A",
+  "answerText": "Feeling pleasure and contentment",
+  "difficulty": "easy",
+  "sourceFile": "0002.json"
+}

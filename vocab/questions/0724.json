@@ -1,0 +1,15 @@
+{
+  "id": 724,
+  "word": "Horizontal",
+  "question": "Horizontal",
+  "options": [
+    "The outer surface of something",
+    "Parallel to the ground; flat",
+    "To make something untidy or disordered",
+    "Having a sharp, unpleasant taste"
+  ],
+  "answerOption": "B",
+  "answerText": "Parallel to the ground; flat",
+  "difficulty": "easy",
+  "sourceFile": "0724.json"
+}

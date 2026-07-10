@@ -1,0 +1,15 @@
+{
+  "id": 1605,
+  "word": "Desist",
+  "question": "Desist",
+  "options": [
+    "Thinly sown or distributed",
+    "To stop doing something",
+    "A sweet course at the end of meal",
+    "To do a favor or act of kindness"
+  ],
+  "answerOption": "B",
+  "answerText": "To stop doing something",
+  "difficulty": "medium",
+  "sourceFile": "1605.json"
+}

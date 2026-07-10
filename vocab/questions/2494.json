@@ -1,0 +1,15 @@
+{
+  "id": 2494,
+  "word": "Aerodrome",
+  "question": "Aerodrome",
+  "options": [
+    "To insert something between fixed points",
+    "An airfield or airport",
+    "A person with a casual interest in an art",
+    "Philosophy based on Aristotle"
+  ],
+  "answerOption": "B",
+  "answerText": "An airfield or airport",
+  "difficulty": "hard",
+  "sourceFile": "2494.json"
+}

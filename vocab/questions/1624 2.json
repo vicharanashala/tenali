@@ -1,0 +1,15 @@
+{
+  "id": 1624,
+  "word": "Detoxify",
+  "question": "Detoxify",
+  "options": [
+    "To remove toxic substances from",
+    "To move into position for action",
+    "A state of uncertainty about what to do",
+    "Producing much fruit or many works"
+  ],
+  "answerOption": "A",
+  "answerText": "To remove toxic substances from",
+  "difficulty": "medium",
+  "sourceFile": "1624.json"
+}

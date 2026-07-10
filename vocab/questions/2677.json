@@ -1,0 +1,15 @@
+{
+  "id": 2677,
+  "word": "Bulwark",
+  "question": "Bulwark",
+  "options": [
+    "A defensive wall or fortification",
+    "Producing or generating gas",
+    "Tiredness or exhaustion",
+    "Life dependent on air"
+  ],
+  "answerOption": "A",
+  "answerText": "A defensive wall or fortification",
+  "difficulty": "hard",
+  "sourceFile": "2677.json"
+}

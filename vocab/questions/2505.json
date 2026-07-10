@@ -1,0 +1,15 @@
+{
+  "id": 2505,
+  "word": "Aerogram",
+  "question": "Aerogram",
+  "options": [
+    "To alternate between different opinions",
+    "Special importance given to something",
+    "Belief in the Holy Trinity",
+    "A lightweight airmail letter"
+  ],
+  "answerOption": "D",
+  "answerText": "A lightweight airmail letter",
+  "difficulty": "hard",
+  "sourceFile": "2505.json"
+}

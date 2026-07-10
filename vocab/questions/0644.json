@@ -1,0 +1,15 @@
+{
+  "id": 644,
+  "word": "Intelligent",
+  "question": "Intelligent",
+  "options": [
+    "Having the ability to learn and understand",
+    "To give shares of something to many people",
+    "Quiet and well-behaved",
+    "To care for and encourage growth"
+  ],
+  "answerOption": "A",
+  "answerText": "Having the ability to learn and understand",
+  "difficulty": "easy",
+  "sourceFile": "0644.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2592,
+  "word": "Tangibility",
+  "question": "Tangibility",
+  "options": [
+    "Not having enough of something",
+    "The practice of determining the nature of diseases",
+    "The point on which a lever rests",
+    "The quality of being tangible"
+  ],
+  "answerOption": "D",
+  "answerText": "The quality of being tangible",
+  "difficulty": "hard",
+  "sourceFile": "2592.json"
+}

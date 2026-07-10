@@ -1,0 +1,14 @@
+{
+  "id": 416,
+  "question": "Which scientist proposed the law of gravitation after Newtonian formulation improvements to broader gravity did not replace it in everyday physics?",
+  "options": [
+    "Newton",
+    "Einstein",
+    "Galileo",
+    "Faraday"
+  ],
+  "answerOption": "A",
+  "answerText": "Newton",
+  "genre": "science",
+  "sourceFile": "0416.json"
+}

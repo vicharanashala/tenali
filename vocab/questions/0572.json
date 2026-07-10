@@ -1,0 +1,15 @@
+{
+  "id": 572,
+  "word": "Delight",
+  "question": "Delight",
+  "options": [
+    "Pleasantly windy",
+    "Having no limits or restrictions",
+    "To please someone greatly",
+    "Following the rules of reason"
+  ],
+  "answerOption": "C",
+  "answerText": "To please someone greatly",
+  "difficulty": "easy",
+  "sourceFile": "0572.json"
+}

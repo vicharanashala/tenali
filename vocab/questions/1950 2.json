@@ -1,0 +1,15 @@
+{
+  "id": 1950,
+  "word": "Adventist",
+  "question": "Adventist",
+  "options": [
+    "Exposure to air or atmosphere",
+    "A member of a Christian sect",
+    "A citrus tree from Asia",
+    "Causing laughter; laughable"
+  ],
+  "answerOption": "B",
+  "answerText": "A member of a Christian sect",
+  "difficulty": "hard",
+  "sourceFile": "1950.json"
+}

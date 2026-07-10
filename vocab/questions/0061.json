@@ -1,0 +1,15 @@
+{
+  "id": 61,
+  "word": "Lazy",
+  "question": "Lazy",
+  "options": [
+    "Weak and delicate in health",
+    "To cause someone to find something funny",
+    "Unwilling to work or use energy",
+    "Able to soak up liquid easily"
+  ],
+  "answerOption": "C",
+  "answerText": "Unwilling to work or use energy",
+  "difficulty": "easy",
+  "sourceFile": "0061.json"
+}

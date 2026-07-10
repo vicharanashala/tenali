@@ -1,0 +1,15 @@
+{
+  "id": 1868,
+  "word": "Hazardous",
+  "question": "Hazardous",
+  "options": [
+    "To support or strengthen something",
+    "In a disturbed mental state from fever",
+    "Involving or producing danger",
+    "To exclude someone from a group"
+  ],
+  "answerOption": "C",
+  "answerText": "Involving or producing danger",
+  "difficulty": "medium",
+  "sourceFile": "1868.json"
+}

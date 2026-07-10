@@ -1,0 +1,15 @@
+{
+  "id": 482,
+  "word": "Repeat",
+  "question": "Repeat",
+  "options": [
+    "To remove liquid from something",
+    "Important, serious, or significant",
+    "Having exceptional natural ability",
+    "To say or do something again"
+  ],
+  "answerOption": "D",
+  "answerText": "To say or do something again",
+  "difficulty": "easy",
+  "sourceFile": "0482.json"
+}

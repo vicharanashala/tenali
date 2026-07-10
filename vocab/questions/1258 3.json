@@ -1,0 +1,15 @@
+{
+  "id": 1258,
+  "word": "Conscientious",
+  "question": "Conscientious",
+  "options": [
+    "Firmly resolved or decided",
+    "The action of leaving the track",
+    "Wishing to do what is right",
+    "Relating to a definition"
+  ],
+  "answerOption": "C",
+  "answerText": "Wishing to do what is right",
+  "difficulty": "medium",
+  "sourceFile": "1258.json"
+}

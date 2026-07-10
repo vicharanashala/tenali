@@ -1,0 +1,15 @@
+{
+  "id": 220,
+  "word": "Protect",
+  "question": "Protect",
+  "options": [
+    "To keep safe from harm or injury",
+    "Elegant and cultured in manner",
+    "Occurring continuously over time",
+    "Having high principles and expectations"
+  ],
+  "answerOption": "A",
+  "answerText": "To keep safe from harm or injury",
+  "difficulty": "easy",
+  "sourceFile": "0220.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1865,
+  "word": "Unsteady",
+  "question": "Unsteady",
+  "options": [
+    "Reduced in rank or quality",
+    "Not stable or balanced",
+    "The state of being famous for bad acts",
+    "In low spirits from loss of hope"
+  ],
+  "answerOption": "B",
+  "answerText": "Not stable or balanced",
+  "difficulty": "medium",
+  "sourceFile": "1865.json"
+}

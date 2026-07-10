@@ -1,0 +1,15 @@
+{
+  "id": 1324,
+  "word": "Endemic",
+  "question": "Endemic",
+  "options": [
+    "Outstandingly bad; shocking",
+    "Subject to sudden changes of mood",
+    "Native and restricted to a certain place",
+    "So surprised as to be unsure how to react"
+  ],
+  "answerOption": "C",
+  "answerText": "Native and restricted to a certain place",
+  "difficulty": "hard",
+  "sourceFile": "1324.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 601,
+  "question": "Which is the largest species of eagle?",
+  "options": [
+    "Golden eagle",
+    "Harpy eagle",
+    "Bald eagle",
+    "Steppe eagle"
+  ],
+  "answerOption": "B",
+  "answerText": "Harpy eagle",
+  "genre": "mixed",
+  "sourceFile": "0601.json"
+}

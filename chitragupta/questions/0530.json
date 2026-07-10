@@ -1,0 +1,14 @@
+{
+  "id": 530,
+  "question": "What is the common name of CaO?",
+  "options": [
+    "Slaked lime",
+    "Quicklime",
+    "Bleaching powder",
+    "Gypsum"
+  ],
+  "answerOption": "B",
+  "answerText": "Quicklime",
+  "genre": "mixed",
+  "sourceFile": "0530.json"
+}

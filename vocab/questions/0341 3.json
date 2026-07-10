@@ -1,0 +1,15 @@
+{
+  "id": 341,
+  "word": "Capture",
+  "question": "Capture",
+  "options": [
+    "To rest on the surface of a liquid",
+    "Resembling without being identical",
+    "To notice the differences between things",
+    "To take someone as a prisoner"
+  ],
+  "answerOption": "D",
+  "answerText": "To take someone as a prisoner",
+  "difficulty": "easy",
+  "sourceFile": "0341.json"
+}

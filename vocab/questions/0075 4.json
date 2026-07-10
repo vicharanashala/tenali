@@ -1,0 +1,15 @@
+{
+  "id": 75,
+  "word": "Proud",
+  "question": "Proud",
+  "options": [
+    "To exert force to move something away",
+    "To have the same opinion as someone else",
+    "Feeling deep pleasure from achievements",
+    "Elegant and cultured in manner"
+  ],
+  "answerOption": "C",
+  "answerText": "Feeling deep pleasure from achievements",
+  "difficulty": "easy",
+  "sourceFile": "0075.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2192,
+  "word": "Lassitude",
+  "question": "Lassitude",
+  "options": [
+    "A state of physical or mental weariness",
+    "The state of being dormant",
+    "Resembling verdigris color",
+    "The quality of being calm"
+  ],
+  "answerOption": "A",
+  "answerText": "A state of physical or mental weariness",
+  "difficulty": "hard",
+  "sourceFile": "2192.json"
+}

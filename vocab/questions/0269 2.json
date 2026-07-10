@@ -1,0 +1,15 @@
+{
+  "id": 269,
+  "word": "Feed",
+  "question": "Feed",
+  "options": [
+    "To give food to a person or animal",
+    "Not based on or acting on fairness",
+    "To drive or force something away",
+    "To run after someone to catch them"
+  ],
+  "answerOption": "A",
+  "answerText": "To give food to a person or animal",
+  "difficulty": "easy",
+  "sourceFile": "0269.json"
+}

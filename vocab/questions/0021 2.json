@@ -1,0 +1,15 @@
+{
+  "id": 21,
+  "word": "Contempt",
+  "question": "Contempt",
+  "options": [
+    "Truthful and straightforward; frank",
+    "A feeling that something is worthless",
+    "Existing in very large quantities",
+    "Producing powerful feelings or clear images"
+  ],
+  "answerOption": "B",
+  "answerText": "A feeling that something is worthless",
+  "difficulty": "medium",
+  "sourceFile": "0021.json"
+}

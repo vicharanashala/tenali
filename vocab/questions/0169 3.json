@@ -1,0 +1,15 @@
+{
+  "id": 169,
+  "word": "Pull",
+  "question": "Pull",
+  "options": [
+    "To examine similarities and differences",
+    "To become or make smaller in size",
+    "Very beautiful or attractive",
+    "To exert force to move something closer"
+  ],
+  "answerOption": "D",
+  "answerText": "To exert force to move something closer",
+  "difficulty": "easy",
+  "sourceFile": "0169.json"
+}

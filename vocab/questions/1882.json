@@ -1,0 +1,15 @@
+{
+  "id": 1882,
+  "word": "Heinous",
+  "question": "Heinous",
+  "options": [
+    "Of the same kind; alike throughout",
+    "The reduction of supplies or resources",
+    "A depression in a surface caused by pressure",
+    "Wicked or cruel and barbaric"
+  ],
+  "answerOption": "D",
+  "answerText": "Wicked or cruel and barbaric",
+  "difficulty": "medium",
+  "sourceFile": "1882.json"
+}

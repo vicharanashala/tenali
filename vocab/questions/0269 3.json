@@ -1,0 +1,15 @@
+{
+  "id": 269,
+  "word": "Feed",
+  "question": "Feed",
+  "options": [
+    "Having a modest opinion of one's importance",
+    "To keep doing something without stopping",
+    "Lesser in importance or seriousness",
+    "To give food to a person or animal"
+  ],
+  "answerOption": "D",
+  "answerText": "To give food to a person or animal",
+  "difficulty": "easy",
+  "sourceFile": "0269.json"
+}

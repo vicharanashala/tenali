@@ -1,0 +1,15 @@
+{
+  "id": 2681,
+  "word": "Palisade",
+  "question": "Palisade",
+  "options": [
+    "A substance showing aeolotropy",
+    "A fence made of pointed wooden stakes",
+    "Silly and pointless",
+    "In an eternal manner"
+  ],
+  "answerOption": "B",
+  "answerText": "A fence made of pointed wooden stakes",
+  "difficulty": "hard",
+  "sourceFile": "2681.json"
+}

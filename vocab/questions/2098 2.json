@@ -1,0 +1,15 @@
+{
+  "id": 2098,
+  "word": "Aeriation",
+  "question": "Aeriation",
+  "options": [
+    "Scorched or burned by heat",
+    "Serving to advocate or plead",
+    "Exposure to the air",
+    "A type of meteorite"
+  ],
+  "answerOption": "C",
+  "answerText": "Exposure to the air",
+  "difficulty": "hard",
+  "sourceFile": "2098.json"
+}

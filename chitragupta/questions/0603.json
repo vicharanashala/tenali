@@ -1,0 +1,14 @@
+{
+  "id": 603,
+  "question": "Which country is associated with the city of Khartoum?",
+  "options": [
+    "Sudan",
+    "South Sudan",
+    "Ethiopia",
+    "Eritrea"
+  ],
+  "answerOption": "A",
+  "answerText": "Sudan",
+  "genre": "geography",
+  "sourceFile": "0603.json"
+}

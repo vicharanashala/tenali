@@ -1,0 +1,15 @@
+{
+  "id": 501,
+  "word": "Voyage",
+  "question": "Voyage",
+  "options": [
+    "To stop fighting and give up",
+    "To take aggressive action against something",
+    "To cause someone to believe something",
+    "A long journey by sea or space"
+  ],
+  "answerOption": "D",
+  "answerText": "A long journey by sea or space",
+  "difficulty": "easy",
+  "sourceFile": "0501.json"
+}

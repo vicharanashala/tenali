@@ -1,0 +1,15 @@
+{
+  "id": 93,
+  "word": "Tight",
+  "question": "Tight",
+  "options": [
+    "Fixed or fastened firmly; not easily moved",
+    "Marked by exactness and accuracy",
+    "Very cold in temperature",
+    "Not clearly expressed or understood"
+  ],
+  "answerOption": "A",
+  "answerText": "Fixed or fastened firmly; not easily moved",
+  "difficulty": "easy",
+  "sourceFile": "0093.json"
+}

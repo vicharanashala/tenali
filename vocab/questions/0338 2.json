@@ -1,0 +1,15 @@
+{
+  "id": 338,
+  "word": "Surrender",
+  "question": "Surrender",
+  "options": [
+    "To collide violently with an obstacle",
+    "To stop fighting and give up",
+    "To keep something in good condition",
+    "To spring back after hitting a surface"
+  ],
+  "answerOption": "B",
+  "answerText": "To stop fighting and give up",
+  "difficulty": "easy",
+  "sourceFile": "0338.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1030,
+  "word": "Blunt",
+  "question": "Blunt",
+  "options": [
+    "Uncompromisingly direct in speech",
+    "To make morally bad or corrupt",
+    "The action of discovering something",
+    "Culpable negligence or abandonment"
+  ],
+  "answerOption": "A",
+  "answerText": "Uncompromisingly direct in speech",
+  "difficulty": "medium",
+  "sourceFile": "1030.json"
+}

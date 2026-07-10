@@ -1,0 +1,15 @@
+{
+  "id": 210,
+  "word": "Expand",
+  "question": "Expand",
+  "options": [
+    "To become larger in size or volume",
+    "Unable to be seen",
+    "To look at something closely",
+    "To feel sadness after someone's death"
+  ],
+  "answerOption": "A",
+  "answerText": "To become larger in size or volume",
+  "difficulty": "easy",
+  "sourceFile": "0210.json"
+}

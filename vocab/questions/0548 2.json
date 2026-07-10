@@ -1,0 +1,15 @@
+{
+  "id": 548,
+  "word": "Persuade",
+  "question": "Persuade",
+  "options": [
+    "Made up of exactly similar parts",
+    "To keep something in good condition",
+    "To fasten or join one thing to another",
+    "To cause someone to believe something"
+  ],
+  "answerOption": "D",
+  "answerText": "To cause someone to believe something",
+  "difficulty": "easy",
+  "sourceFile": "0548.json"
+}

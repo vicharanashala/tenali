@@ -1,0 +1,15 @@
+{
+  "id": 470,
+  "word": "Recite",
+  "question": "Recite",
+  "options": [
+    "To remove the wrapping from something",
+    "To repeat aloud from memory",
+    "Growing thickly and strongly; abundant",
+    "Not approximated in any way; precise"
+  ],
+  "answerOption": "B",
+  "answerText": "To repeat aloud from memory",
+  "difficulty": "easy",
+  "sourceFile": "0470.json"
+}

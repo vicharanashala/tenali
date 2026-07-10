@@ -1,0 +1,15 @@
+{
+  "id": 1666,
+  "word": "Detailed",
+  "question": "Detailed",
+  "options": [
+    "Spacious and comfortable",
+    "Containing many details or giving details",
+    "Savage cruel and violent",
+    "The action of becoming worse"
+  ],
+  "answerOption": "B",
+  "answerText": "Containing many details or giving details",
+  "difficulty": "medium",
+  "sourceFile": "1666.json"
+}

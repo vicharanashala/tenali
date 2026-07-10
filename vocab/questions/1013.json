@@ -1,0 +1,15 @@
+{
+  "id": 1013,
+  "word": "Notorious",
+  "question": "Notorious",
+  "options": [
+    "A drying agent or substance",
+    "Famous for something bad",
+    "The action of abandoning a person",
+    "Having sharp powers of judgment"
+  ],
+  "answerOption": "B",
+  "answerText": "Famous for something bad",
+  "difficulty": "medium",
+  "sourceFile": "1013.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 765,
+  "word": "Random",
+  "question": "Random",
+  "options": [
+    "Producing much noise or sound",
+    "Made or done without method or plan",
+    "To have an effect on someone's character",
+    "Causing laughter or amusement"
+  ],
+  "answerOption": "B",
+  "answerText": "Made or done without method or plan",
+  "difficulty": "easy",
+  "sourceFile": "0765.json"
+}

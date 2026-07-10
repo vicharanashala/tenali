@@ -1,0 +1,15 @@
+{
+  "id": 503,
+  "word": "Settle",
+  "question": "Settle",
+  "options": [
+    "To warn someone about potential danger",
+    "To speak very softly using the breath",
+    "Unable to bend or be changed easily",
+    "To establish a home in a new place"
+  ],
+  "answerOption": "D",
+  "answerText": "To establish a home in a new place",
+  "difficulty": "easy",
+  "sourceFile": "0503.json"
+}

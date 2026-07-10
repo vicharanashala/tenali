@@ -1,0 +1,15 @@
+{
+  "id": 76,
+  "word": "Shy",
+  "question": "Shy",
+  "options": [
+    "Being reserved or timid around other people",
+    "To make something untidy or disordered",
+    "In a particular place; existing now",
+    "Not showing or feeling nervousness or anger"
+  ],
+  "answerOption": "A",
+  "answerText": "Being reserved or timid around other people",
+  "difficulty": "easy",
+  "sourceFile": "0076.json"
+}

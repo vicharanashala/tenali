@@ -1,0 +1,14 @@
+{
+  "id": 486,
+  "question": "Who formulated the laws of motion?",
+  "options": [
+    "Galileo",
+    "Newton",
+    "Kepler",
+    "Einstein"
+  ],
+  "answerOption": "B",
+  "answerText": "Newton",
+  "genre": "general-knowledge",
+  "sourceFile": "0486.json"
+}

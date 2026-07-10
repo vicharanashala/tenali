@@ -1,0 +1,15 @@
+{
+  "id": 1429,
+  "word": "Gossamer",
+  "question": "Gossamer",
+  "options": [
+    "The warmth of the sun in winter",
+    "A place where one feels safe and at home",
+    "To walk in the wind for fun to clear one's mind",
+    "A fine filmy substance of cobwebs"
+  ],
+  "answerOption": "D",
+  "answerText": "A fine filmy substance of cobwebs",
+  "difficulty": "extra-hard",
+  "sourceFile": "1429.json"
+}

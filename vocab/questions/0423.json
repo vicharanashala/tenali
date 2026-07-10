@@ -1,0 +1,15 @@
+{
+  "id": 423,
+  "word": "Remove",
+  "question": "Remove",
+  "options": [
+    "Absolutely necessary or important",
+    "Tending to cause harm",
+    "To take something away from a position",
+    "Arranged neatly and in order"
+  ],
+  "answerOption": "C",
+  "answerText": "To take something away from a position",
+  "difficulty": "easy",
+  "sourceFile": "0423.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2451,
+  "word": "Schadenfreude",
+  "question": "Schadenfreude",
+  "options": [
+    "In a manner that abets",
+    "States of wretchedness",
+    "A wordless look between two people who both want to initiate something",
+    "Pleasure derived from another's misfortune"
+  ],
+  "answerOption": "D",
+  "answerText": "Pleasure derived from another's misfortune",
+  "difficulty": "extra-hard",
+  "sourceFile": "2451.json"
+}

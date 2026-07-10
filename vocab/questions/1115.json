@@ -1,0 +1,15 @@
+{
+  "id": 1115,
+  "word": "Verbose",
+  "question": "Verbose",
+  "options": [
+    "In a determinate manner",
+    "To put an end to a rebellion or disturbance",
+    "Careful to avoid social awkwardness",
+    "Using more words than are needed"
+  ],
+  "answerOption": "D",
+  "answerText": "Using more words than are needed",
+  "difficulty": "medium",
+  "sourceFile": "1115.json"
+}

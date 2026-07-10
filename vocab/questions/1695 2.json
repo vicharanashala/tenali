@@ -1,0 +1,15 @@
+{
+  "id": 1695,
+  "word": "Didactic",
+  "question": "Didactic",
+  "options": [
+    "The quality of aeronautical",
+    "A substance sprayed as fine mist",
+    "The quality of being advisable",
+    "Intended to teach a moral lesson"
+  ],
+  "answerOption": "D",
+  "answerText": "Intended to teach a moral lesson",
+  "difficulty": "hard",
+  "sourceFile": "1695.json"
+}

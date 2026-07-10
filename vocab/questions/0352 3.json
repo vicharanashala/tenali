@@ -1,0 +1,15 @@
+{
+  "id": 352,
+  "word": "Deny",
+  "question": "Deny",
+  "options": [
+    "Done with good judgment; practical",
+    "To stop briefly before continuing",
+    "To keep safe from harm or injury",
+    "To state that something is not true"
+  ],
+  "answerOption": "D",
+  "answerText": "To state that something is not true",
+  "difficulty": "easy",
+  "sourceFile": "0352.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 865,
+  "word": "Knack",
+  "question": "Knack",
+  "options": [
+    "To continue in a course of action",
+    "Very weak or slight; insubstantial",
+    "Secreting venom; full of malice",
+    "A skill or talent for doing something"
+  ],
+  "answerOption": "D",
+  "answerText": "A skill or talent for doing something",
+  "difficulty": "medium",
+  "sourceFile": "0865.json"
+}

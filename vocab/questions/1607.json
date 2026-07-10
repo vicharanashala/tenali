@@ -1,0 +1,15 @@
+{
+  "id": 1607,
+  "word": "Deskbound",
+  "question": "Deskbound",
+  "options": [
+    "Not easily convinced; having doubts",
+    "Confined to working at a desk",
+    "The origin or derivation of something",
+    "Relating to a religious sect"
+  ],
+  "answerOption": "B",
+  "answerText": "Confined to working at a desk",
+  "difficulty": "medium",
+  "sourceFile": "1607.json"
+}

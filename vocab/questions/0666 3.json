@@ -1,0 +1,15 @@
+{
+  "id": 666,
+  "word": "Vast",
+  "question": "Vast",
+  "options": [
+    "To explain the meaning of something",
+    "Living in a natural state; not tamed",
+    "Of very great extent or quantity",
+    "Known for sure; established beyond doubt"
+  ],
+  "answerOption": "C",
+  "answerText": "Of very great extent or quantity",
+  "difficulty": "easy",
+  "sourceFile": "0666.json"
+}

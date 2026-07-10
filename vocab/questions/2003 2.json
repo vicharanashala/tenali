@@ -1,0 +1,15 @@
+{
+  "id": 2003,
+  "word": "Advowtee",
+  "question": "Advowtee",
+  "options": [
+    "A prefix relating to air",
+    "Surgical use of air",
+    "Using different words to say the same thing",
+    "One having the right of patronage"
+  ],
+  "answerOption": "D",
+  "answerText": "One having the right of patronage",
+  "difficulty": "hard",
+  "sourceFile": "2003.json"
+}

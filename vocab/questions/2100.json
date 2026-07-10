@@ -1,0 +1,15 @@
+{
+  "id": 2100,
+  "word": "Nascent",
+  "question": "Nascent",
+  "options": [
+    "Relating to heat in air",
+    "Mercy shown toward an offender",
+    "Rejecting all moral and religious principles",
+    "Just beginning to develop"
+  ],
+  "answerOption": "D",
+  "answerText": "Just beginning to develop",
+  "difficulty": "hard",
+  "sourceFile": "2100.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 3100,
+  "word": "Abutter",
+  "question": "Abutter",
+  "options": [
+    "The strange wistfulness of used bookshops",
+    "Elementary instruction or teaching",
+    "One whose property abuts",
+    "Showing a lack of courage; timid"
+  ],
+  "answerOption": "C",
+  "answerText": "One whose property abuts",
+  "difficulty": "extra-hard",
+  "sourceFile": "3100.json"
+}

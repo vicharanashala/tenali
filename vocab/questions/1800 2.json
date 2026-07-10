@@ -1,0 +1,15 @@
+{
+  "id": 1800,
+  "word": "Clemency",
+  "question": "Clemency",
+  "options": [
+    "Tending to induce drowsiness or sleep",
+    "A fixed-wing aircraft",
+    "Voluntary sexual intercourse outside marriage",
+    "Mercy shown toward an offender"
+  ],
+  "answerOption": "D",
+  "answerText": "Mercy shown toward an offender",
+  "difficulty": "hard",
+  "sourceFile": "1800.json"
+}

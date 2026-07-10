@@ -1,0 +1,15 @@
+{
+  "id": 321,
+  "word": "Surprise",
+  "question": "Surprise",
+  "options": [
+    "Notably large in size or amount",
+    "Not aware of surroundings or events",
+    "To cause strong feelings of enthusiasm",
+    "To cause someone to feel sudden wonder"
+  ],
+  "answerOption": "D",
+  "answerText": "To cause someone to feel sudden wonder",
+  "difficulty": "easy",
+  "sourceFile": "0321.json"
+}

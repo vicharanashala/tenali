@@ -1,0 +1,15 @@
+{
+  "id": 113,
+  "word": "Blunt",
+  "question": "Blunt",
+  "options": [
+    "Not having a sharp edge or point",
+    "To give something in return for good behavior",
+    "Completely different in every way",
+    "To rot and break down over time"
+  ],
+  "answerOption": "A",
+  "answerText": "Not having a sharp edge or point",
+  "difficulty": "easy",
+  "sourceFile": "0113.json"
+}

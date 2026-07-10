@@ -1,0 +1,15 @@
+{
+  "id": 22,
+  "word": "Kind",
+  "question": "Kind",
+  "options": [
+    "Relating to computer technology",
+    "Containing as much as possible; filled completely",
+    "Generous and considerate towards others",
+    "Causing great enthusiasm and eagerness"
+  ],
+  "answerOption": "C",
+  "answerText": "Generous and considerate towards others",
+  "difficulty": "easy",
+  "sourceFile": "0022.json"
+}

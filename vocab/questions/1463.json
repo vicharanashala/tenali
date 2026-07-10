@@ -1,0 +1,15 @@
+{
+  "id": 1463,
+  "word": "Deny",
+  "question": "Deny",
+  "options": [
+    "Fine in texture, form, or structure",
+    "To state that something is not true",
+    "Delayed or prevented by obstructing",
+    "The quality of being determined"
+  ],
+  "answerOption": "B",
+  "answerText": "To state that something is not true",
+  "difficulty": "medium",
+  "sourceFile": "1463.json"
+}

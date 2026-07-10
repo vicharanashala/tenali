@@ -1,0 +1,15 @@
+{
+  "id": 2665,
+  "word": "Trust",
+  "question": "Trust",
+  "options": [
+    "A defensive wall of a city or fortress",
+    "Legal state of being unable to pay debts",
+    "Firm belief in reliability",
+    "To criticize someone severely"
+  ],
+  "answerOption": "C",
+  "answerText": "Firm belief in reliability",
+  "difficulty": "hard",
+  "sourceFile": "2665.json"
+}

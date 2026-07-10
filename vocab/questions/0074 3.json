@@ -1,0 +1,15 @@
+{
+  "id": 74,
+  "word": "Afraid",
+  "question": "Afraid",
+  "options": [
+    "Unassuming in the estimation of one's abilities",
+    "Feeling fear or anxiety",
+    "To cause to move apart",
+    "To discover something by searching"
+  ],
+  "answerOption": "B",
+  "answerText": "Feeling fear or anxiety",
+  "difficulty": "easy",
+  "sourceFile": "0074.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1275,
+  "word": "Debut",
+  "question": "Debut",
+  "options": [
+    "Tending to purify the blood",
+    "Without regret or compassion",
+    "To push down or thrust out",
+    "The first appearance in a role or on stage"
+  ],
+  "answerOption": "D",
+  "answerText": "The first appearance in a role or on stage",
+  "difficulty": "medium",
+  "sourceFile": "1275.json"
+}

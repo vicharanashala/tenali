@@ -1,0 +1,14 @@
+{
+  "id": 508,
+  "question": "Who discovered the proton?",
+  "options": [
+    "Bohr",
+    "Rutherford",
+    "Chadwick",
+    "Thomson"
+  ],
+  "answerOption": "B",
+  "answerText": "Rutherford",
+  "genre": "general-knowledge",
+  "sourceFile": "0508.json"
+}

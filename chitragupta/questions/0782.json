@@ -1,0 +1,14 @@
+{
+  "id": 782,
+  "question": "Who wrote 'The Old Curiosity Shop'?",
+  "options": [
+    "Charles Dickens",
+    "Thomas Hardy",
+    "George Eliot",
+    "Jane Austen"
+  ],
+  "answerOption": "A",
+  "answerText": "Charles Dickens",
+  "genre": "general-knowledge",
+  "sourceFile": "0782.json"
+}

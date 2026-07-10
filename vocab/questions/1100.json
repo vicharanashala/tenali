@@ -1,0 +1,15 @@
+{
+  "id": 1100,
+  "word": "Glean",
+  "question": "Glean",
+  "options": [
+    "Without being affected by",
+    "To treat something sacred with disrespect",
+    "To extract information from various sources",
+    "Showing no activity or development"
+  ],
+  "answerOption": "C",
+  "answerText": "To extract information from various sources",
+  "difficulty": "medium",
+  "sourceFile": "1100.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1094,
+  "word": "Affable",
+  "question": "Affable",
+  "options": [
+    "Culpable negligence or abandonment",
+    "Friendly and easy to talk to",
+    "Not original; based on something else",
+    "Able to be detected or found"
+  ],
+  "answerOption": "B",
+  "answerText": "Friendly and easy to talk to",
+  "difficulty": "medium",
+  "sourceFile": "1094.json"
+}

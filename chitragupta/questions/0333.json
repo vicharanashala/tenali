@@ -1,0 +1,14 @@
+{
+  "id": 333,
+  "question": "Which famous scientist proposed the heliocentric model placing the Sun at the center?",
+  "options": [
+    "Galileo Galilei",
+    "Johannes Kepler",
+    "Nicolaus Copernicus",
+    "Tycho Brahe"
+  ],
+  "answerOption": "C",
+  "answerText": "Nicolaus Copernicus",
+  "genre": "mixed",
+  "sourceFile": "0333.json"
+}

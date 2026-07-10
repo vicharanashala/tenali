@@ -1,0 +1,14 @@
+{
+  "id": 90,
+  "question": "What is the currency of the United Kingdom?",
+  "options": [
+    "Euro",
+    "Dollar",
+    "Pound sterling",
+    "Franc"
+  ],
+  "answerOption": "C",
+  "answerText": "Pound sterling",
+  "genre": "mixed",
+  "sourceFile": "0090.json"
+}

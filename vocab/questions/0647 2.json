@@ -1,0 +1,15 @@
+{
+  "id": 647,
+  "word": "Literate",
+  "question": "Literate",
+  "options": [
+    "To set free from confinement",
+    "Able to read and write",
+    "Something that is difficult to understand",
+    "To grow and develop well"
+  ],
+  "answerOption": "B",
+  "answerText": "Able to read and write",
+  "difficulty": "easy",
+  "sourceFile": "0647.json"
+}

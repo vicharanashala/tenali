@@ -1,0 +1,15 @@
+{
+  "id": 866,
+  "word": "Normal",
+  "question": "Normal",
+  "options": [
+    "To give assistance or encouragement to",
+    "To accept something as true",
+    "Required by law or rule; mandatory",
+    "Conforming to what is standard or expected"
+  ],
+  "answerOption": "D",
+  "answerText": "Conforming to what is standard or expected",
+  "difficulty": "easy",
+  "sourceFile": "0866.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 638,
+  "word": "Capable",
+  "question": "Capable",
+  "options": [
+    "To collide violently with an obstacle",
+    "Having the ability to do something",
+    "To repeat aloud from memory",
+    "At the point that is in the middle"
+  ],
+  "answerOption": "B",
+  "answerText": "Having the ability to do something",
+  "difficulty": "easy",
+  "sourceFile": "0638.json"
+}

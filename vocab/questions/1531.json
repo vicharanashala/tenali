@@ -1,0 +1,15 @@
+{
+  "id": 1531,
+  "word": "Deputy",
+  "question": "Deputy",
+  "options": [
+    "Unable to move or function normally",
+    "To reduce in extent or quantity",
+    "A person appointed to act for another",
+    "Having a feeling of vague longing"
+  ],
+  "answerOption": "C",
+  "answerText": "A person appointed to act for another",
+  "difficulty": "medium",
+  "sourceFile": "1531.json"
+}

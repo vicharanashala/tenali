@@ -1,0 +1,15 @@
+{
+  "id": 1861,
+  "word": "Lawless",
+  "question": "Lawless",
+  "options": [
+    "To regard or consider in a specified way",
+    "In a despairing manner",
+    "Lacking basic necessities or resources",
+    "Not governed by law"
+  ],
+  "answerOption": "D",
+  "answerText": "Not governed by law",
+  "difficulty": "medium",
+  "sourceFile": "1861.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1111,
+  "word": "Grapple",
+  "question": "Grapple",
+  "options": [
+    "Not easily convinced; having doubts",
+    "To engage in a close fight or struggle",
+    "To remove a fuse from an explosive",
+    "Serving to cleanse or purify"
+  ],
+  "answerOption": "B",
+  "answerText": "To engage in a close fight or struggle",
+  "difficulty": "medium",
+  "sourceFile": "1111.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 715,
+  "word": "Distant",
+  "question": "Distant",
+  "options": [
+    "To fail to care for something properly",
+    "To suffer or die from lack of food",
+    "Mild in temperament or behavior",
+    "Far away in space or time"
+  ],
+  "answerOption": "D",
+  "answerText": "Far away in space or time",
+  "difficulty": "easy",
+  "sourceFile": "0715.json"
+}

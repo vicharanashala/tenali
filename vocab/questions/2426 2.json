@@ -1,0 +1,15 @@
+{
+  "id": 2426,
+  "word": "Ennui",
+  "question": "Ennui",
+  "options": [
+    "Remains or continues in place",
+    "A feeling of listlessness from lack of excitement",
+    "In an abiogenic manner",
+    "Relating to paradise; blissful"
+  ],
+  "answerOption": "B",
+  "answerText": "A feeling of listlessness from lack of excitement",
+  "difficulty": "extra-hard",
+  "sourceFile": "2426.json"
+}

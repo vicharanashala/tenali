@@ -1,0 +1,15 @@
+{
+  "id": 2340,
+  "word": "Advised",
+  "question": "Advised",
+  "options": [
+    "Done with deliberation or awareness",
+    "Ornamental work of fine twisted wire",
+    "A departure from what is normal or expected",
+    "Showing excessive vanity about achievements"
+  ],
+  "answerOption": "A",
+  "answerText": "Done with deliberation or awareness",
+  "difficulty": "hard",
+  "sourceFile": "2340.json"
+}

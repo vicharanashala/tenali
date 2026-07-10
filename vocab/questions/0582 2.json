@@ -1,0 +1,15 @@
+{
+  "id": 582,
+  "word": "Ambitious",
+  "question": "Ambitious",
+  "options": [
+    "To exert force to move something closer",
+    "Careful to avoid potential problems",
+    "Closely and neatly packed together",
+    "Having a strong desire for success"
+  ],
+  "answerOption": "D",
+  "answerText": "Having a strong desire for success",
+  "difficulty": "easy",
+  "sourceFile": "0582.json"
+}

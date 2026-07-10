@@ -1,0 +1,15 @@
+{
+  "id": 645,
+  "word": "Knowledgeable",
+  "question": "Knowledgeable",
+  "options": [
+    "Performed without planning or prompting",
+    "In a state of sleep; not awake",
+    "Well informed about many subjects",
+    "Evil or morally wrong"
+  ],
+  "answerOption": "C",
+  "answerText": "Well informed about many subjects",
+  "difficulty": "easy",
+  "sourceFile": "0645.json"
+}

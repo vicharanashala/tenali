@@ -1,0 +1,15 @@
+{
+  "id": 2344,
+  "word": "Jayus",
+  "question": "Jayus",
+  "options": [
+    "An alignment of three celestial objects",
+    "The state of being suspended",
+    "Plural of ablactation",
+    "A joke so poorly told that one laughs anyway"
+  ],
+  "answerOption": "D",
+  "answerText": "A joke so poorly told that one laughs anyway",
+  "difficulty": "extra-hard",
+  "sourceFile": "2344.json"
+}

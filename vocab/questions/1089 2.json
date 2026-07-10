@@ -1,0 +1,15 @@
+{
+  "id": 1089,
+  "word": "Hospitable",
+  "question": "Hospitable",
+  "options": [
+    "Friendly and welcoming to strangers",
+    "Wanting large quantities of food or knowledge",
+    "Liable to change rapidly and unpredictably",
+    "Present or found everywhere"
+  ],
+  "answerOption": "A",
+  "answerText": "Friendly and welcoming to strangers",
+  "difficulty": "medium",
+  "sourceFile": "1089.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 94,
+  "word": "Dull",
+  "question": "Dull",
+  "options": [
+    "Having received a good education",
+    "To take aggressive action against something",
+    "Using imagination to create new things",
+    "Lacking interest or excitement"
+  ],
+  "answerOption": "D",
+  "answerText": "Lacking interest or excitement",
+  "difficulty": "easy",
+  "sourceFile": "0094.json"
+}

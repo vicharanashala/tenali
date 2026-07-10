@@ -1,0 +1,14 @@
+{
+  "id": 340,
+  "question": "Which Indian city is known as the Queen of the Arabian Sea?",
+  "options": [
+    "Mumbai",
+    "Kochi",
+    "Goa",
+    "Mangaluru"
+  ],
+  "answerOption": "B",
+  "answerText": "Kochi",
+  "genre": "india-gk",
+  "sourceFile": "0340.json"
+}

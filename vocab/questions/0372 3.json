@@ -1,0 +1,15 @@
+{
+  "id": 372,
+  "word": "Slice",
+  "question": "Slice",
+  "options": [
+    "To observe and check progress over time",
+    "Standing out so as to be clearly visible",
+    "To break free from confinement",
+    "To cut into thin flat pieces"
+  ],
+  "answerOption": "D",
+  "answerText": "To cut into thin flat pieces",
+  "difficulty": "easy",
+  "sourceFile": "0372.json"
+}

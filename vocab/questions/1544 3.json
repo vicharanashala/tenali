@@ -1,0 +1,15 @@
+{
+  "id": 1544,
+  "word": "Despot",
+  "question": "Despot",
+  "options": [
+    "A person who treats teeth",
+    "Lacking consistency or purpose",
+    "Making a situation likely to happen",
+    "A ruler with absolute power"
+  ],
+  "answerOption": "D",
+  "answerText": "A ruler with absolute power",
+  "difficulty": "medium",
+  "sourceFile": "1544.json"
+}

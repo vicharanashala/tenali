@@ -1,0 +1,15 @@
+{
+  "id": 1740,
+  "word": "Abstruse",
+  "question": "Abstruse",
+  "options": [
+    "Having a friendly and pleasant manner",
+    "A loud and confused noise or voices",
+    "Expressing opposition or negation",
+    "Difficult to understand or analyze"
+  ],
+  "answerOption": "D",
+  "answerText": "Difficult to understand or analyze",
+  "difficulty": "medium",
+  "sourceFile": "1740.json"
+}

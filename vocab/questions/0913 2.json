@@ -1,0 +1,15 @@
+{
+  "id": 913,
+  "word": "Lavish",
+  "question": "Lavish",
+  "options": [
+    "Playfully quaint or fanciful behavior",
+    "Unwilling and hesitant to do something",
+    "Showing resistance to authority",
+    "Sumptuously rich or elaborate"
+  ],
+  "answerOption": "D",
+  "answerText": "Sumptuously rich or elaborate",
+  "difficulty": "medium",
+  "sourceFile": "0913.json"
+}

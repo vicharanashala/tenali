@@ -1,0 +1,15 @@
+{
+  "id": 2326,
+  "word": "Advertently",
+  "question": "Advertently",
+  "options": [
+    "A type of meteorite",
+    "The arrival of a notable person",
+    "The action of authenticating something",
+    "In an advertent manner"
+  ],
+  "answerOption": "D",
+  "answerText": "In an advertent manner",
+  "difficulty": "hard",
+  "sourceFile": "2326.json"
+}

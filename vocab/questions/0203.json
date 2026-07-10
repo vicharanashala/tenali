@@ -1,0 +1,15 @@
+{
+  "id": 203,
+  "word": "Break",
+  "question": "Break",
+  "options": [
+    "Showing a willingness to take risks",
+    "To separate into pieces suddenly",
+    "To say or do something again",
+    "Having high moral standards"
+  ],
+  "answerOption": "B",
+  "answerText": "To separate into pieces suddenly",
+  "difficulty": "easy",
+  "sourceFile": "0203.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2172,
+  "word": "Caustic",
+  "question": "Caustic",
+  "options": [
+    "Sarcastic in a scathing and bitter way",
+    "Proceeding in a harmful way gradually",
+    "The action of returning something to original state",
+    "Relating to pleasant aspects of the countryside"
+  ],
+  "answerOption": "A",
+  "answerText": "Sarcastic in a scathing and bitter way",
+  "difficulty": "hard",
+  "sourceFile": "2172.json"
+}

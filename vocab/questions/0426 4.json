@@ -1,0 +1,15 @@
+{
+  "id": 426,
+  "word": "Disconnect",
+  "question": "Disconnect",
+  "options": [
+    "Designed to impress or attract",
+    "To impart knowledge or skill to someone",
+    "Causing excitement and fear",
+    "To break the connection between things"
+  ],
+  "answerOption": "D",
+  "answerText": "To break the connection between things",
+  "difficulty": "easy",
+  "sourceFile": "0426.json"
+}

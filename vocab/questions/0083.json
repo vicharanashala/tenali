@@ -1,0 +1,15 @@
+{
+  "id": 83,
+  "word": "Stale",
+  "question": "Stale",
+  "options": [
+    "No longer fresh; old and dry",
+    "Not approximated in any way; precise",
+    "To fill someone with the urge to do something",
+    "Tending to stick or adhere to things"
+  ],
+  "answerOption": "A",
+  "answerText": "No longer fresh; old and dry",
+  "difficulty": "easy",
+  "sourceFile": "0083.json"
+}

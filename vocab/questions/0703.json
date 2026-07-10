@@ -1,0 +1,15 @@
+{
+  "id": 703,
+  "word": "Occasional",
+  "question": "Occasional",
+  "options": [
+    "Plain or obvious; clearly seen",
+    "Occurring from time to time",
+    "Having a strong pleasant taste",
+    "Conforming to what is standard or expected"
+  ],
+  "answerOption": "B",
+  "answerText": "Occurring from time to time",
+  "difficulty": "easy",
+  "sourceFile": "0703.json"
+}

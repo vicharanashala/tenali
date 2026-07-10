@@ -1,0 +1,15 @@
+{
+  "id": 312,
+  "word": "Encourage",
+  "question": "Encourage",
+  "options": [
+    "To cause to move apart",
+    "Produced without artificial chemicals",
+    "To make something clear and easy to understand",
+    "To give support and confidence to someone"
+  ],
+  "answerOption": "D",
+  "answerText": "To give support and confidence to someone",
+  "difficulty": "easy",
+  "sourceFile": "0312.json"
+}

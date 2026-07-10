@@ -1,0 +1,15 @@
+{
+  "id": 2009,
+  "word": "Adze",
+  "question": "Adze",
+  "options": [
+    "A tool for shaping wood",
+    "A poisonous air substance",
+    "A fondness for riddles",
+    "A person who is new to a subject"
+  ],
+  "answerOption": "A",
+  "answerText": "A tool for shaping wood",
+  "difficulty": "hard",
+  "sourceFile": "2009.json"
+}

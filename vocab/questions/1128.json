@@ -1,0 +1,15 @@
+{
+  "id": 1128,
+  "word": "Lofty",
+  "question": "Lofty",
+  "options": [
+    "Of imposing height; noble in character",
+    "Not enough or satisfactory",
+    "To remove poison from something",
+    "To illegally obtain money by deception"
+  ],
+  "answerOption": "A",
+  "answerText": "Of imposing height; noble in character",
+  "difficulty": "medium",
+  "sourceFile": "1128.json"
+}

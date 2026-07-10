@@ -1,0 +1,15 @@
+{
+  "id": 3130,
+  "word": "Sphygmomanometer",
+  "question": "Sphygmomanometer",
+  "options": [
+    "In manner of opposing ablation",
+    "With abyss-like sounds",
+    "In manner of abyss",
+    "An instrument for measuring blood pressure"
+  ],
+  "answerOption": "D",
+  "answerText": "An instrument for measuring blood pressure",
+  "difficulty": "extra-hard",
+  "sourceFile": "3130.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 828,
+  "word": "Noticeable",
+  "question": "Noticeable",
+  "options": [
+    "Unusual or surprising; hard to explain",
+    "Side by side and having the same distance apart",
+    "Easily seen or noticed",
+    "Strongly wanting to do or have something"
+  ],
+  "answerOption": "C",
+  "answerText": "Easily seen or noticed",
+  "difficulty": "easy",
+  "sourceFile": "0828.json"
+}

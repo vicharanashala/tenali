@@ -1,0 +1,15 @@
+{
+  "id": 65,
+  "word": "Polite",
+  "question": "Polite",
+  "options": [
+    "Making or given to making a lot of noise",
+    "To go from one place to another",
+    "Not far away in distance",
+    "Having good manners and showing respect"
+  ],
+  "answerOption": "D",
+  "answerText": "Having good manners and showing respect",
+  "difficulty": "easy",
+  "sourceFile": "0065.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2445,
+  "word": "Aereometer",
+  "question": "Aereometer",
+  "options": [
+    "Something that blocks or obstructs",
+    "An engine powered by air",
+    "In an aeronautical manner",
+    "An instrument for measuring air"
+  ],
+  "answerOption": "D",
+  "answerText": "An instrument for measuring air",
+  "difficulty": "hard",
+  "sourceFile": "2445.json"
+}

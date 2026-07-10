@@ -1,0 +1,15 @@
+{
+  "id": 286,
+  "word": "Compare",
+  "question": "Compare",
+  "options": [
+    "Easy to understand or do",
+    "To examine similarities and differences",
+    "Causing laughter or amusement",
+    "To turn around quickly in a circle"
+  ],
+  "answerOption": "B",
+  "answerText": "To examine similarities and differences",
+  "difficulty": "easy",
+  "sourceFile": "0286.json"
+}

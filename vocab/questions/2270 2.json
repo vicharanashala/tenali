@@ -1,0 +1,15 @@
+{
+  "id": 2270,
+  "word": "AEROTITIS",
+  "question": "AEROTITIS",
+  "options": [
+    "Inflammation from air pressure",
+    "Relating to divination by air",
+    "Exposure to air or atmosphere",
+    "A public notice promoting something"
+  ],
+  "answerOption": "A",
+  "answerText": "Inflammation from air pressure",
+  "difficulty": "hard",
+  "sourceFile": "2270.json"
+}

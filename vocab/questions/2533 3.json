@@ -1,0 +1,15 @@
+{
+  "id": 2533,
+  "word": "Gorge",
+  "question": "Gorge",
+  "options": [
+    "A deep narrow valley with steep rocky sides",
+    "Complaining in a petulant or whining manner",
+    "Born of an adulterous relationship",
+    "Life dependent on air"
+  ],
+  "answerOption": "A",
+  "answerText": "A deep narrow valley with steep rocky sides",
+  "difficulty": "hard",
+  "sourceFile": "2533.json"
+}

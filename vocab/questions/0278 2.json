@@ -1,0 +1,15 @@
+{
+  "id": 278,
+  "word": "Answer",
+  "question": "Answer",
+  "options": [
+    "To manage or guide the operations of something",
+    "Logical and well organized",
+    "Giving off light; bright or shining",
+    "A response to a question"
+  ],
+  "answerOption": "D",
+  "answerText": "A response to a question",
+  "difficulty": "easy",
+  "sourceFile": "0278.json"
+}

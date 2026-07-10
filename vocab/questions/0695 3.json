@@ -1,0 +1,15 @@
+{
+  "id": 695,
+  "word": "Crucial",
+  "question": "Crucial",
+  "options": [
+    "Existing in very large quantities",
+    "To exert force to move something closer",
+    "To make something untidy or disordered",
+    "Of great importance; critical"
+  ],
+  "answerOption": "D",
+  "answerText": "Of great importance; critical",
+  "difficulty": "easy",
+  "sourceFile": "0695.json"
+}

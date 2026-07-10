@@ -1,0 +1,15 @@
+{
+  "id": 162,
+  "word": "Help",
+  "question": "Help",
+  "options": [
+    "Extremely large or great in scale",
+    "To be exceptionally good at something",
+    "To make it easier for someone to do something",
+    "To believe in the reliability of someone"
+  ],
+  "answerOption": "C",
+  "answerText": "To make it easier for someone to do something",
+  "difficulty": "easy",
+  "sourceFile": "0162.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 595,
+  "word": "Ordinary",
+  "question": "Ordinary",
+  "options": [
+    "Not supporting either side in a conflict",
+    "Having no special features; normal",
+    "An act of saying goodbye",
+    "Having a strong or hot flavor from seasoning"
+  ],
+  "answerOption": "B",
+  "answerText": "Having no special features; normal",
+  "difficulty": "easy",
+  "sourceFile": "0595.json"
+}

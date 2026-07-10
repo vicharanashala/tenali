@@ -1,0 +1,15 @@
+{
+  "id": 2424,
+  "word": "Aeonial",
+  "question": "Aeonial",
+  "options": [
+    "Lasting for ages or eternities",
+    "A thing that creates difficulty",
+    "A substance sprayed as fine mist",
+    "Paying attention or noticing"
+  ],
+  "answerOption": "A",
+  "answerText": "Lasting for ages or eternities",
+  "difficulty": "hard",
+  "sourceFile": "2424.json"
+}

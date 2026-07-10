@@ -1,0 +1,15 @@
+{
+  "id": 163,
+  "word": "Hinder",
+  "question": "Hinder",
+  "options": [
+    "Giving information clearly in few words",
+    "Lacking interest or excitement",
+    "To live in a particular place",
+    "To create difficulties for someone"
+  ],
+  "answerOption": "D",
+  "answerText": "To create difficulties for someone",
+  "difficulty": "easy",
+  "sourceFile": "0163.json"
+}

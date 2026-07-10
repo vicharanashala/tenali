@@ -1,0 +1,15 @@
+{
+  "id": 144,
+  "word": "Clumsy",
+  "question": "Clumsy",
+  "options": [
+    "Awkward in movement or handling things",
+    "To be turned into ice or become very cold",
+    "To estimate something without full information",
+    "To pull down or destroy a building"
+  ],
+  "answerOption": "A",
+  "answerText": "Awkward in movement or handling things",
+  "difficulty": "easy",
+  "sourceFile": "0144.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2308,
+  "word": "Aerily",
+  "question": "Aerily",
+  "options": [
+    "Something that burdens or hinders",
+    "The legal process of becoming a parent",
+    "In an airy manner",
+    "A huge and overwhelming force"
+  ],
+  "answerOption": "C",
+  "answerText": "In an airy manner",
+  "difficulty": "hard",
+  "sourceFile": "2308.json"
+}

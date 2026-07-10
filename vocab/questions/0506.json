@@ -1,0 +1,15 @@
+{
+  "id": 506,
+  "word": "Occupy",
+  "question": "Occupy",
+  "options": [
+    "Showing a willingness to take risks",
+    "Moving with speed or done rapidly",
+    "To fill or take up a space or time",
+    "Typical or ordinary; not remarkable"
+  ],
+  "answerOption": "C",
+  "answerText": "To fill or take up a space or time",
+  "difficulty": "easy",
+  "sourceFile": "0506.json"
+}

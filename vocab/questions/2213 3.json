@@ -1,0 +1,15 @@
+{
+  "id": 2213,
+  "word": "Aecidial",
+  "question": "Aecidial",
+  "options": [
+    "The quality of being hard",
+    "A clerk in the church",
+    "Relating to aecidium fungal stage",
+    "A plant needing air exposure"
+  ],
+  "answerOption": "C",
+  "answerText": "Relating to aecidium fungal stage",
+  "difficulty": "hard",
+  "sourceFile": "2213.json"
+}

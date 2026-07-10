@@ -1,0 +1,15 @@
+{
+  "id": 2806,
+  "word": "Wunderkind",
+  "question": "Wunderkind",
+  "options": [
+    "Financially rewarding; lucrative",
+    "With abyss chest",
+    "Deviating from normal course",
+    "A person who achieves great success when young"
+  ],
+  "answerOption": "D",
+  "answerText": "A person who achieves great success when young",
+  "difficulty": "extra-hard",
+  "sourceFile": "2806.json"
+}

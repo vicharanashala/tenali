@@ -1,0 +1,14 @@
+{
+  "id": 619,
+  "question": "Which Indian union territory has Chandigarh as its capital?",
+  "options": [
+    "Delhi",
+    "Chandigarh",
+    "Puducherry",
+    "Lakshadweep"
+  ],
+  "answerOption": "B",
+  "answerText": "Chandigarh",
+  "genre": "geography",
+  "sourceFile": "0619.json"
+}

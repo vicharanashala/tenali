@@ -1,0 +1,15 @@
+{
+  "id": 742,
+  "word": "Solar",
+  "question": "Solar",
+  "options": [
+    "To open something that is locked",
+    "Affected by physical illness",
+    "Living in a natural state; not tamed",
+    "Relating to or determined by the sun"
+  ],
+  "answerOption": "D",
+  "answerText": "Relating to or determined by the sun",
+  "difficulty": "easy",
+  "sourceFile": "0742.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 743,
+  "word": "Lunar",
+  "question": "Lunar",
+  "options": [
+    "Producing much noise or sound",
+    "Relating to or resembling the moon",
+    "To have an effect on someone's character",
+    "Causing laughter or amusement"
+  ],
+  "answerOption": "B",
+  "answerText": "Relating to or resembling the moon",
+  "difficulty": "easy",
+  "sourceFile": "0743.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1249,
+  "word": "Unscrupulous",
+  "question": "Unscrupulous",
+  "options": [
+    "Expressing disapproval or regret",
+    "To unfasten or separate something",
+    "Having no moral principles; dishonest",
+    "A person who expects or accepts defeat"
+  ],
+  "answerOption": "C",
+  "answerText": "Having no moral principles; dishonest",
+  "difficulty": "medium",
+  "sourceFile": "1249.json"
+}

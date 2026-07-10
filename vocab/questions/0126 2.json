@@ -1,0 +1,15 @@
+{
+  "id": 126,
+  "word": "Certain",
+  "question": "Certain",
+  "options": [
+    "Having little or no rain; very dry",
+    "To care for and encourage growth",
+    "Known for sure; established beyond doubt",
+    "Having ample space; roomy"
+  ],
+  "answerOption": "C",
+  "answerText": "Known for sure; established beyond doubt",
+  "difficulty": "easy",
+  "sourceFile": "0126.json"
+}

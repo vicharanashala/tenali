@@ -1,0 +1,15 @@
+{
+  "id": 570,
+  "word": "Charm",
+  "question": "Charm",
+  "options": [
+    "Not supporting either side in a conflict",
+    "To delight someone greatly",
+    "An act of saying goodbye",
+    "Having a strong or hot flavor from seasoning"
+  ],
+  "answerOption": "B",
+  "answerText": "To delight someone greatly",
+  "difficulty": "easy",
+  "sourceFile": "0570.json"
+}

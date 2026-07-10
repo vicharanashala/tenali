@@ -1,0 +1,15 @@
+{
+  "id": 2512,
+  "word": "Aeroid",
+  "question": "Aeroid",
+  "options": [
+    "Impossible to understand or comprehend",
+    "An instrument like a barometer",
+    "Angry and bitter in tone or manner",
+    "To dispute the truth or honesty of"
+  ],
+  "answerOption": "B",
+  "answerText": "An instrument like a barometer",
+  "difficulty": "hard",
+  "sourceFile": "2512.json"
+}

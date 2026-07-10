@@ -1,0 +1,14 @@
+{
+  "id": 538,
+  "question": "Which Indian state has Hyderabad as its capital?",
+  "options": [
+    "Telangana",
+    "Andhra Pradesh",
+    "Karnataka",
+    "Maharashtra"
+  ],
+  "answerOption": "A",
+  "answerText": "Telangana",
+  "genre": "geography",
+  "sourceFile": "0538.json"
+}

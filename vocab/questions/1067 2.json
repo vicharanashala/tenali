@@ -1,0 +1,15 @@
+{
+  "id": 1067,
+  "word": "Gratuitous",
+  "question": "Gratuitous",
+  "options": [
+    "Clear and definite; able to be touched",
+    "Intensely enthusiastic or passionate",
+    "Uncalled for and lacking good reason",
+    "Courage in pain or adversity"
+  ],
+  "answerOption": "C",
+  "answerText": "Uncalled for and lacking good reason",
+  "difficulty": "medium",
+  "sourceFile": "1067.json"
+}

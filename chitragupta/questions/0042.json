@@ -1,0 +1,14 @@
+{
+  "id": 42,
+  "question": "What is the largest mammal in the world?",
+  "options": [
+    "African Elephant",
+    "Blue Whale",
+    "Giraffe",
+    "Hippopotamus"
+  ],
+  "answerOption": "B",
+  "answerText": "Blue Whale",
+  "genre": "mixed",
+  "sourceFile": "0042.json"
+}

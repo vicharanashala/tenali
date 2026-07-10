@@ -1,0 +1,15 @@
+{
+  "id": 1063,
+  "word": "Peculiar",
+  "question": "Peculiar",
+  "options": [
+    "An action or performance",
+    "Strange or odd; unusual",
+    "Extreme anger",
+    "Unable to move or function normally"
+  ],
+  "answerOption": "B",
+  "answerText": "Strange or odd; unusual",
+  "difficulty": "medium",
+  "sourceFile": "1063.json"
+}

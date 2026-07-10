@@ -1,0 +1,15 @@
+{
+  "id": 3123,
+  "word": "Solivagant",
+  "question": "Solivagant",
+  "options": [
+    "Doctrine of abysses",
+    "Wandering alone",
+    "Lack of path or way",
+    "A fine filmy substance of cobwebs"
+  ],
+  "answerOption": "B",
+  "answerText": "Wandering alone",
+  "difficulty": "extra-hard",
+  "sourceFile": "3123.json"
+}

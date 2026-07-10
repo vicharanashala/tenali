@@ -1,0 +1,15 @@
+{
+  "id": 2123,
+  "word": "Adulatory",
+  "question": "Adulatory",
+  "options": [
+    "Relating to space and air",
+    "An indicator of a trend",
+    "Deliberately and knowingly",
+    "Expressing excessive praise"
+  ],
+  "answerOption": "D",
+  "answerText": "Expressing excessive praise",
+  "difficulty": "hard",
+  "sourceFile": "2123.json"
+}

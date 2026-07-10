@@ -1,0 +1,15 @@
+{
+  "id": 1299,
+  "word": "Default",
+  "question": "Default",
+  "options": [
+    "Having no particular interest or concern",
+    "Done with excessive speed",
+    "To prosper or flourish",
+    "Failure to fulfill an obligation"
+  ],
+  "answerOption": "D",
+  "answerText": "Failure to fulfill an obligation",
+  "difficulty": "medium",
+  "sourceFile": "1299.json"
+}

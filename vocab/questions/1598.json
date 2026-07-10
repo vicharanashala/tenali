@@ -1,0 +1,15 @@
+{
+  "id": 1598,
+  "word": "Designed",
+  "question": "Designed",
+  "options": [
+    "Made or planned with clear intent",
+    "Serving to cleanse or purify",
+    "To care for and encourage growth",
+    "Twisted or bent out of shape"
+  ],
+  "answerOption": "A",
+  "answerText": "Made or planned with clear intent",
+  "difficulty": "medium",
+  "sourceFile": "1598.json"
+}

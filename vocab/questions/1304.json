@@ -1,0 +1,15 @@
+{
+  "id": 1304,
+  "word": "Covert",
+  "question": "Covert",
+  "options": [
+    "Not openly acknowledged or displayed",
+    "Open resistance or bold disobedience",
+    "The action of setting limits",
+    "A false belief or impression"
+  ],
+  "answerOption": "A",
+  "answerText": "Not openly acknowledged or displayed",
+  "difficulty": "medium",
+  "sourceFile": "1304.json"
+}

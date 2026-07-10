@@ -1,0 +1,15 @@
+{
+  "id": 1178,
+  "word": "Tedium",
+  "question": "Tedium",
+  "options": [
+    "Expressing disapproval or regret",
+    "To unfasten or separate something",
+    "The state of being tedious",
+    "A person who expects or accepts defeat"
+  ],
+  "answerOption": "C",
+  "answerText": "The state of being tedious",
+  "difficulty": "medium",
+  "sourceFile": "1178.json"
+}

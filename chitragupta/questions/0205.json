@@ -1,0 +1,14 @@
+{
+  "id": 205,
+  "question": "How many teeth does a normal adult human usually have?",
+  "options": [
+    "28",
+    "30",
+    "32",
+    "34"
+  ],
+  "answerOption": "C",
+  "answerText": "32",
+  "genre": "mixed",
+  "sourceFile": "0205.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2555,
+  "word": "Prognosis",
+  "question": "Prognosis",
+  "options": [
+    "Lacking advice or counsel",
+    "Unable to be avoided or escaped",
+    "Relating to air technology",
+    "An estimate of the course of a disease"
+  ],
+  "answerOption": "D",
+  "answerText": "An estimate of the course of a disease",
+  "difficulty": "hard",
+  "sourceFile": "2555.json"
+}

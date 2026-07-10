@@ -1,0 +1,15 @@
+{
+  "id": 91,
+  "word": "Thin",
+  "question": "Thin",
+  "options": [
+    "To give someone the means to do something",
+    "Having opposite surfaces close together",
+    "To keep doing something without stopping",
+    "Very fine in texture or structure"
+  ],
+  "answerOption": "B",
+  "answerText": "Having opposite surfaces close together",
+  "difficulty": "easy",
+  "sourceFile": "0091.json"
+}

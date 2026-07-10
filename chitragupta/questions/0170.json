@@ -1,0 +1,14 @@
+{
+  "id": 170,
+  "question": "Which famous ship sank in 1912 after hitting an iceberg?",
+  "options": [
+    "Lusitania",
+    "Britannic",
+    "Titanic",
+    "Queen Mary"
+  ],
+  "answerOption": "C",
+  "answerText": "Titanic",
+  "genre": "mixed",
+  "sourceFile": "0170.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2323,
+  "word": "Aerobrandth",
+  "question": "Aerobrandth",
+  "options": [
+    "A type of aircraft design",
+    "Device for collecting airborne organisms",
+    "A lover of flying or air",
+    "Of an airy or ethereal quality"
+  ],
+  "answerOption": "A",
+  "answerText": "A type of aircraft design",
+  "difficulty": "hard",
+  "sourceFile": "2323.json"
+}

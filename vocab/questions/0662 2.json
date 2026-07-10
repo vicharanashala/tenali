@@ -1,0 +1,15 @@
+{
+  "id": 662,
+  "word": "Gigantic",
+  "question": "Gigantic",
+  "options": [
+    "To withdraw from a position",
+    "To shine brightly with reflected light",
+    "Extremely large or huge",
+    "Strongly and solidly built"
+  ],
+  "answerOption": "C",
+  "answerText": "Extremely large or huge",
+  "difficulty": "easy",
+  "sourceFile": "0662.json"
+}

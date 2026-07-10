@@ -1,0 +1,15 @@
+{
+  "id": 1870,
+  "word": "Dangerous",
+  "question": "Dangerous",
+  "options": [
+    "Likely to cause injury",
+    "Lacking compassion or kindness",
+    "Loss of respect or reputation",
+    "The quality of being desultory"
+  ],
+  "answerOption": "A",
+  "answerText": "Likely to cause injury",
+  "difficulty": "medium",
+  "sourceFile": "1870.json"
+}

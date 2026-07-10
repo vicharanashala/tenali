@@ -1,0 +1,15 @@
+{
+  "id": 1930,
+  "word": "Intermittent",
+  "question": "Intermittent",
+  "options": [
+    "Occurring at intervals",
+    "The manner of standing or walking",
+    "Made someone do something against will",
+    "Not friendly or interested; distant"
+  ],
+  "answerOption": "A",
+  "answerText": "Occurring at intervals",
+  "difficulty": "medium",
+  "sourceFile": "1930.json"
+}

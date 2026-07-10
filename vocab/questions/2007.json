@@ -1,0 +1,15 @@
+{
+  "id": 2007,
+  "word": "Kafkaesque",
+  "question": "Kafkaesque",
+  "options": [
+    "The quality of being adustious",
+    "A state of balance",
+    "Relating to lending money at unreasonably high rates",
+    "Having a nightmarishly complex quality"
+  ],
+  "answerOption": "D",
+  "answerText": "Having a nightmarishly complex quality",
+  "difficulty": "hard",
+  "sourceFile": "2007.json"
+}

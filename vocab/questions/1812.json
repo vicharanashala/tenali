@@ -1,0 +1,15 @@
+{
+  "id": 1812,
+  "word": "Impetuous",
+  "question": "Impetuous",
+  "options": [
+    "Acting without thinking",
+    "The action of violent destruction",
+    "Unwilling to spend money",
+    "The action of discovering something"
+  ],
+  "answerOption": "A",
+  "answerText": "Acting without thinking",
+  "difficulty": "medium",
+  "sourceFile": "1812.json"
+}

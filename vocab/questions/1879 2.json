@@ -1,0 +1,15 @@
+{
+  "id": 1879,
+  "word": "Hagiography",
+  "question": "Hagiography",
+  "options": [
+    "Just beginning to develop",
+    "Treatment with hot air",
+    "A woman who commits adultery",
+    "A biography that idealizes its subject"
+  ],
+  "answerOption": "D",
+  "answerText": "A biography that idealizes its subject",
+  "difficulty": "hard",
+  "sourceFile": "1879.json"
+}

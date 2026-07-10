@@ -1,0 +1,15 @@
+{
+  "id": 641,
+  "word": "Skilled",
+  "question": "Skilled",
+  "options": [
+    "Having the training needed to do something",
+    "To keep safe from harm or injury",
+    "To rest on the surface of a liquid",
+    "To watch something carefully"
+  ],
+  "answerOption": "A",
+  "answerText": "Having the training needed to do something",
+  "difficulty": "easy",
+  "sourceFile": "0641.json"
+}

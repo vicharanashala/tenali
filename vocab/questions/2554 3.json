@@ -1,0 +1,15 @@
+{
+  "id": 2554,
+  "word": "Diagnostics",
+  "question": "Diagnostics",
+  "options": [
+    "Tolerance for air exposure",
+    "Burned or scorched by heat",
+    "The quality of being manifest",
+    "The practice of determining the nature of diseases"
+  ],
+  "answerOption": "D",
+  "answerText": "The practice of determining the nature of diseases",
+  "difficulty": "hard",
+  "sourceFile": "2554.json"
+}

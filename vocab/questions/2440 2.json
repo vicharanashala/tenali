@@ -1,0 +1,15 @@
+{
+  "id": 2440,
+  "word": "Hendiadys",
+  "question": "Hendiadys",
+  "options": [
+    "A person who achieves great success when young",
+    "An imaginary island nation",
+    "Expressing an idea with two words joined by and",
+    "Not recognizing a situation one has experienced before"
+  ],
+  "answerOption": "C",
+  "answerText": "Expressing an idea with two words joined by and",
+  "difficulty": "extra-hard",
+  "sourceFile": "2440.json"
+}

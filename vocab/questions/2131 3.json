@@ -1,0 +1,15 @@
+{
+  "id": 2131,
+  "word": "Adulteress",
+  "question": "Adulteress",
+  "options": [
+    "Legal state of being unable to pay debts",
+    "Slow to act; intended to cause delay",
+    "A woman who commits adultery",
+    "Wrongdoing by a public official"
+  ],
+  "answerOption": "C",
+  "answerText": "A woman who commits adultery",
+  "difficulty": "hard",
+  "sourceFile": "2131.json"
+}

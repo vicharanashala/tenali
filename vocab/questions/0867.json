@@ -1,0 +1,15 @@
+{
+  "id": 867,
+  "word": "Usual",
+  "question": "Usual",
+  "options": [
+    "Moving with speed or done rapidly",
+    "Habitually or typically so",
+    "To fasten something with a lock",
+    "Very full of people or things"
+  ],
+  "answerOption": "B",
+  "answerText": "Habitually or typically so",
+  "difficulty": "easy",
+  "sourceFile": "0867.json"
+}

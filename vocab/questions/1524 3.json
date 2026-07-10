@@ -1,0 +1,15 @@
+{
+  "id": 1524,
+  "word": "Despairing",
+  "question": "Despairing",
+  "options": [
+    "A person descended from an ancestor",
+    "Showing loss of all hope",
+    "Having a friendly and pleasant manner",
+    "Not easily convinced; having doubts"
+  ],
+  "answerOption": "B",
+  "answerText": "Showing loss of all hope",
+  "difficulty": "medium",
+  "sourceFile": "1524.json"
+}

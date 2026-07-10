@@ -1,0 +1,15 @@
+{
+  "id": 2143,
+  "word": "Nonchalant",
+  "question": "Nonchalant",
+  "options": [
+    "The state of being unaware of surroundings",
+    "Deceitfulness; double-dealing",
+    "The process of promoting someone",
+    "Feeling calm and relaxed; not worried"
+  ],
+  "answerOption": "D",
+  "answerText": "Feeling calm and relaxed; not worried",
+  "difficulty": "hard",
+  "sourceFile": "2143.json"
+}

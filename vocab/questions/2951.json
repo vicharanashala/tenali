@@ -1,0 +1,15 @@
+{
+  "id": 2951,
+  "word": "Testimony",
+  "question": "Testimony",
+  "options": [
+    "Verdigris or green patina",
+    "Having a nightmarishly complex quality",
+    "Relating to air therapy",
+    "A formal statement under oath"
+  ],
+  "answerOption": "D",
+  "answerText": "A formal statement under oath",
+  "difficulty": "hard",
+  "sourceFile": "2951.json"
+}

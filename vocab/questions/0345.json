@@ -1,0 +1,15 @@
+{
+  "id": 345,
+  "word": "Wander",
+  "question": "Wander",
+  "options": [
+    "To make something look more attractive",
+    "To walk slowly with no clear direction",
+    "To make a choice after thinking about it",
+    "To go beyond the limit of something"
+  ],
+  "answerOption": "B",
+  "answerText": "To walk slowly with no clear direction",
+  "difficulty": "easy",
+  "sourceFile": "0345.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 109,
+  "word": "Common",
+  "question": "Common",
+  "options": [
+    "To fasten or join one thing to another",
+    "To make a statement less confusing",
+    "Occurring or found frequently",
+    "To pledge to carry out a course of action"
+  ],
+  "answerOption": "C",
+  "answerText": "Occurring or found frequently",
+  "difficulty": "easy",
+  "sourceFile": "0109.json"
+}

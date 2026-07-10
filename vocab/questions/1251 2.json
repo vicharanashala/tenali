@@ -1,0 +1,15 @@
+{
+  "id": 1251,
+  "word": "Raconteur",
+  "question": "Raconteur",
+  "options": [
+    "Conspicuously or obviously offensive",
+    "The lowest point in the fortunes of a person",
+    "A person who tells stories in a skillful way",
+    "Having a nightmarishly complex quality"
+  ],
+  "answerOption": "C",
+  "answerText": "A person who tells stories in a skillful way",
+  "difficulty": "hard",
+  "sourceFile": "1251.json"
+}

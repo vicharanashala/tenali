@@ -1,0 +1,14 @@
+{
+  "id": 942,
+  "question": "Which country is associated with the city of Majuro?",
+  "options": [
+    "Palau",
+    "Marshall Islands",
+    "Micronesia",
+    "Nauru"
+  ],
+  "answerOption": "B",
+  "answerText": "Marshall Islands",
+  "genre": "geography",
+  "sourceFile": "0942.json"
+}

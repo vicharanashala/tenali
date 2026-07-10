@@ -1,0 +1,14 @@
+{
+  "id": 939,
+  "question": "Which country is associated with the city of Koror?",
+  "options": [
+    "Palau",
+    "Nauru",
+    "Fiji",
+    "Samoa"
+  ],
+  "answerOption": "A",
+  "answerText": "Palau",
+  "genre": "geography",
+  "sourceFile": "0939.json"
+}

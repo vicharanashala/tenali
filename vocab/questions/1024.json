@@ -1,0 +1,15 @@
+{
+  "id": 1024,
+  "word": "Adequate",
+  "question": "Adequate",
+  "options": [
+    "Bad-tempered and quarrelsome",
+    "Sufficient for a specific need",
+    "The state of relying on something",
+    "A state of being extremely poor"
+  ],
+  "answerOption": "B",
+  "answerText": "Sufficient for a specific need",
+  "difficulty": "medium",
+  "sourceFile": "1024.json"
+}

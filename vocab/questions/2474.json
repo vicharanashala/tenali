@@ -1,0 +1,15 @@
+{
+  "id": 2474,
+  "word": "Aerobium",
+  "question": "Aerobium",
+  "options": [
+    "One with fear of flying",
+    "An aerobic organism",
+    "Belief in reason as basis of truth",
+    "The action of conceiving a child"
+  ],
+  "answerOption": "B",
+  "answerText": "An aerobic organism",
+  "difficulty": "hard",
+  "sourceFile": "2474.json"
+}

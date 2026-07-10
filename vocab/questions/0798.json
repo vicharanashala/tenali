@@ -1,0 +1,15 @@
+{
+  "id": 798,
+  "word": "Fair",
+  "question": "Fair",
+  "options": [
+    "Producing much noise or sound",
+    "Treating people equally without favoritism",
+    "Free from moisture or liquid",
+    "Available to be chosen but not required"
+  ],
+  "answerOption": "B",
+  "answerText": "Treating people equally without favoritism",
+  "difficulty": "easy",
+  "sourceFile": "0798.json"
+}

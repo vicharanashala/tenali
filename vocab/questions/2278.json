@@ -1,0 +1,15 @@
+{
+  "id": 2278,
+  "word": "Adulterant",
+  "question": "Adulterant",
+  "options": [
+    "A substance that adulterates",
+    "Something that obstructs progress",
+    "Feeding on air organisms",
+    "In an airy manner"
+  ],
+  "answerOption": "A",
+  "answerText": "A substance that adulterates",
+  "difficulty": "hard",
+  "sourceFile": "2278.json"
+}

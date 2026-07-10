@@ -1,0 +1,15 @@
+{
+  "id": 981,
+  "word": "Juxtapose",
+  "question": "Juxtapose",
+  "options": [
+    "Engaged in deep or serious thought",
+    "A state of uncertainty about what to do",
+    "To place close together for comparison",
+    "A seemingly contradictory statement"
+  ],
+  "answerOption": "C",
+  "answerText": "To place close together for comparison",
+  "difficulty": "medium",
+  "sourceFile": "0981.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 302,
+  "word": "Wonder",
+  "question": "Wonder",
+  "options": [
+    "To give someone the authority to do something",
+    "To feel curious about something",
+    "Made up of exactly similar parts",
+    "Living; not dead"
+  ],
+  "answerOption": "B",
+  "answerText": "To feel curious about something",
+  "difficulty": "easy",
+  "sourceFile": "0302.json"
+}

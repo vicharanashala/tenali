@@ -1,0 +1,15 @@
+{
+  "id": 450,
+  "word": "Sketch",
+  "question": "Sketch",
+  "options": [
+    "To fill someone with delight",
+    "To identify someone from previous encounters",
+    "To make a rough drawing of something",
+    "Containing nothing; not filled"
+  ],
+  "answerOption": "C",
+  "answerText": "To make a rough drawing of something",
+  "difficulty": "easy",
+  "sourceFile": "0450.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 603,
+  "word": "Dazzle",
+  "question": "Dazzle",
+  "options": [
+    "To run away from a place of danger",
+    "Resulting in good; favorable",
+    "Having a sharp acidic taste",
+    "To blind temporarily with a bright light"
+  ],
+  "answerOption": "D",
+  "answerText": "To blind temporarily with a bright light",
+  "difficulty": "easy",
+  "sourceFile": "0603.json"
+}

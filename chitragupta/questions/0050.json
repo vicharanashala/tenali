@@ -1,0 +1,14 @@
+{
+  "id": 50,
+  "question": "Who painted the Mona Lisa?",
+  "options": [
+    "Pablo Picasso",
+    "Vincent van Gogh",
+    "Leonardo da Vinci",
+    "Claude Monet"
+  ],
+  "answerOption": "C",
+  "answerText": "Leonardo da Vinci",
+  "genre": "general-knowledge",
+  "sourceFile": "0050.json"
+}

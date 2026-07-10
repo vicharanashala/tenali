@@ -1,0 +1,15 @@
+{
+  "id": 2235,
+  "word": "Recidivism",
+  "question": "Recidivism",
+  "options": [
+    "Unable to be avoided or escaped",
+    "The tendency to relapse into a previous behavior",
+    "The action of spreading or promoting",
+    "An easterly wind in the Aegean"
+  ],
+  "answerOption": "B",
+  "answerText": "The tendency to relapse into a previous behavior",
+  "difficulty": "hard",
+  "sourceFile": "2235.json"
+}

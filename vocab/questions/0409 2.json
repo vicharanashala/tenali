@@ -1,0 +1,15 @@
+{
+  "id": 409,
+  "word": "Afford",
+  "question": "Afford",
+  "options": [
+    "To have enough money to pay for something",
+    "To gain knowledge or skill through study",
+    "To bend something over on itself",
+    "To impart knowledge or skill to someone"
+  ],
+  "answerOption": "A",
+  "answerText": "To have enough money to pay for something",
+  "difficulty": "easy",
+  "sourceFile": "0409.json"
+}

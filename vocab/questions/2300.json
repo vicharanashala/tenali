@@ -1,0 +1,15 @@
+{
+  "id": 2300,
+  "word": "Advantageously",
+  "question": "Advantageously",
+  "options": [
+    "The quality of being reliable",
+    "Deliberately and knowingly",
+    "The quality of being stiff",
+    "In a manner that gives advantage"
+  ],
+  "answerOption": "D",
+  "answerText": "In a manner that gives advantage",
+  "difficulty": "hard",
+  "sourceFile": "2300.json"
+}

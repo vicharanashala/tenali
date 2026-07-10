@@ -1,0 +1,15 @@
+{
+  "id": 2005,
+  "word": "Advowson",
+  "question": "Advowson",
+  "options": [
+    "A lengthy and aggressive speech",
+    "The right of patronage of church",
+    "A variety of acmite mineral",
+    "Expressing opinions in a loud forceful way"
+  ],
+  "answerOption": "B",
+  "answerText": "The right of patronage of church",
+  "difficulty": "hard",
+  "sourceFile": "2005.json"
+}

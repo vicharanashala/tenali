@@ -1,0 +1,15 @@
+{
+  "id": 1970,
+  "word": "Interdicted",
+  "question": "Interdicted",
+  "options": [
+    "Of imposing height; noble in character",
+    "Forbidden or prohibited",
+    "One who deserts a duty or post",
+    "Disappointed and disheartened"
+  ],
+  "answerOption": "B",
+  "answerText": "Forbidden or prohibited",
+  "difficulty": "medium",
+  "sourceFile": "1970.json"
+}

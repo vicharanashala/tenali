@@ -1,0 +1,15 @@
+{
+  "id": 3012,
+  "word": "ABLACTATOR",
+  "question": "ABLACTATOR",
+  "options": [
+    "A ring of light produced by pressure on the eyeball",
+    "One who weans",
+    "In an abiogenic manner",
+    "States of wretchedness"
+  ],
+  "answerOption": "B",
+  "answerText": "One who weans",
+  "difficulty": "extra-hard",
+  "sourceFile": "3012.json"
+}

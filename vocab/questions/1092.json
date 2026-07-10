@@ -1,0 +1,15 @@
+{
+  "id": 1092,
+  "word": "Wistful",
+  "question": "Wistful",
+  "options": [
+    "Having a feeling of vague longing",
+    "Done routinely without care",
+    "Free from disagreement or dissent",
+    "In decline morally or in style"
+  ],
+  "answerOption": "A",
+  "answerText": "Having a feeling of vague longing",
+  "difficulty": "medium",
+  "sourceFile": "1092.json"
+}

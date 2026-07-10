@@ -1,0 +1,15 @@
+{
+  "id": 1335,
+  "word": "Default",
+  "question": "Default",
+  "options": [
+    "The feeling that someone is unworthy",
+    "Complete freedom of action",
+    "Lasting for a very short time",
+    "Failure to fulfill an obligation"
+  ],
+  "answerOption": "D",
+  "answerText": "Failure to fulfill an obligation",
+  "difficulty": "medium",
+  "sourceFile": "1335.json"
+}

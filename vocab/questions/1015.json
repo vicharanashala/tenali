@@ -1,0 +1,15 @@
+{
+  "id": 1015,
+  "word": "Pragmatic",
+  "question": "Pragmatic",
+  "options": [
+    "Eager or quick to argue or fight",
+    "To place close together for comparison",
+    "Dealing with things in a practical way",
+    "Lacking skill or competence"
+  ],
+  "answerOption": "C",
+  "answerText": "Dealing with things in a practical way",
+  "difficulty": "medium",
+  "sourceFile": "1015.json"
+}

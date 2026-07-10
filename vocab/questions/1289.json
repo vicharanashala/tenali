@@ -1,0 +1,15 @@
+{
+  "id": 1289,
+  "word": "Colloquial",
+  "question": "Colloquial",
+  "options": [
+    "Deceiving or confusing someone",
+    "Not prepared or equipped",
+    "To deprive of covering or possessions",
+    "Used in or appropriate for informal speech"
+  ],
+  "answerOption": "D",
+  "answerText": "Used in or appropriate for informal speech",
+  "difficulty": "medium",
+  "sourceFile": "1289.json"
+}

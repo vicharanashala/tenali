@@ -1,0 +1,15 @@
+{
+  "id": 1263,
+  "word": "Penchant",
+  "question": "Penchant",
+  "options": [
+    "To remove oxygen from something",
+    "Conspicuously or obviously offensive",
+    "Not morally correct",
+    "A strong habitual liking for something"
+  ],
+  "answerOption": "D",
+  "answerText": "A strong habitual liking for something",
+  "difficulty": "medium",
+  "sourceFile": "1263.json"
+}

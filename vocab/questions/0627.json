@@ -1,0 +1,15 @@
+{
+  "id": 627,
+  "word": "Prudent",
+  "question": "Prudent",
+  "options": [
+    "To find the size or amount of something",
+    "Acting with care and thought for the future",
+    "Of little depth",
+    "Extremely large or huge"
+  ],
+  "answerOption": "B",
+  "answerText": "Acting with care and thought for the future",
+  "difficulty": "easy",
+  "sourceFile": "0627.json"
+}

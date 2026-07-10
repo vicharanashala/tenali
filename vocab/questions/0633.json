@@ -1,0 +1,15 @@
+{
+  "id": 633,
+  "word": "Reliable",
+  "question": "Reliable",
+  "options": [
+    "Coming at the end; last",
+    "To perceive the scent of something",
+    "Able to be trusted to do what is needed",
+    "To exceed or be greater than something"
+  ],
+  "answerOption": "C",
+  "answerText": "Able to be trusted to do what is needed",
+  "difficulty": "easy",
+  "sourceFile": "0633.json"
+}

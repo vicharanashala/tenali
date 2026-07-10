@@ -1,0 +1,15 @@
+{
+  "id": 389,
+  "word": "Fade",
+  "question": "Fade",
+  "options": [
+    "To open something that was folded",
+    "To pull down or destroy a building",
+    "To gradually grow faint and disappear",
+    "To cause someone to feel greatly astonished"
+  ],
+  "answerOption": "C",
+  "answerText": "To gradually grow faint and disappear",
+  "difficulty": "easy",
+  "sourceFile": "0389.json"
+}

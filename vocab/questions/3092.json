@@ -1,0 +1,15 @@
+{
+  "id": 3092,
+  "word": "Fantods",
+  "question": "Fantods",
+  "options": [
+    "A state of extreme nervousness or anxiety",
+    "Something improvised or done on the spur of the moment",
+    "Tending to cause death",
+    "A profound emotional awareness of the universe"
+  ],
+  "answerOption": "A",
+  "answerText": "A state of extreme nervousness or anxiety",
+  "difficulty": "extra-hard",
+  "sourceFile": "3092.json"
+}

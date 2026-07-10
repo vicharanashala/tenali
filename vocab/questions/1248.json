@@ -1,0 +1,15 @@
+{
+  "id": 1248,
+  "word": "Turbulent",
+  "question": "Turbulent",
+  "options": [
+    "Characterized by conflict or disorder",
+    "In a way that can be shown",
+    "To have an intense feeling of longing",
+    "Prone to arguing or lawsuits"
+  ],
+  "answerOption": "A",
+  "answerText": "Characterized by conflict or disorder",
+  "difficulty": "medium",
+  "sourceFile": "1248.json"
+}

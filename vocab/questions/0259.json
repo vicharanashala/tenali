@@ -1,0 +1,15 @@
+{
+  "id": 259,
+  "word": "Travel",
+  "question": "Travel",
+  "options": [
+    "Showing lack of courage or confidence",
+    "To go from one place to another",
+    "To ease the grief or distress of someone",
+    "To join or link things together"
+  ],
+  "answerOption": "B",
+  "answerText": "To go from one place to another",
+  "difficulty": "easy",
+  "sourceFile": "0259.json"
+}

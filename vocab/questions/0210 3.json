@@ -1,0 +1,15 @@
+{
+  "id": 210,
+  "word": "Expand",
+  "question": "Expand",
+  "options": [
+    "Inspiring great fear or worry",
+    "To become larger in size or volume",
+    "Not supporting either side in a conflict",
+    "To move or act with great speed"
+  ],
+  "answerOption": "B",
+  "answerText": "To become larger in size or volume",
+  "difficulty": "easy",
+  "sourceFile": "0210.json"
+}

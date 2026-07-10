@@ -1,0 +1,15 @@
+{
+  "id": 761,
+  "word": "Tranquil",
+  "question": "Tranquil",
+  "options": [
+    "To give an account of something in words",
+    "Feeling a need to drink something",
+    "Free from disturbance; calm",
+    "Not open; shut or fastened"
+  ],
+  "answerOption": "C",
+  "answerText": "Free from disturbance; calm",
+  "difficulty": "easy",
+  "sourceFile": "0761.json"
+}

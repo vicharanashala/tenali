@@ -1,0 +1,14 @@
+{
+  "id": 49,
+  "question": "Which country gifted the Statue of Liberty to the United States?",
+  "options": [
+    "France",
+    "Germany",
+    "Italy",
+    "Spain"
+  ],
+  "answerOption": "A",
+  "answerText": "France",
+  "genre": "geography",
+  "sourceFile": "0049.json"
+}

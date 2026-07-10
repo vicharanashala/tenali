@@ -1,0 +1,15 @@
+{
+  "id": 638,
+  "word": "Capable",
+  "question": "Capable",
+  "options": [
+    "To control something by means of rules",
+    "Having the ability to do something",
+    "To make someone feel weary and uninterested",
+    "Affected by physical illness"
+  ],
+  "answerOption": "B",
+  "answerText": "Having the ability to do something",
+  "difficulty": "easy",
+  "sourceFile": "0638.json"
+}

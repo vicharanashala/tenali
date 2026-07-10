@@ -1,0 +1,15 @@
+{
+  "id": 946,
+  "word": "Discreet",
+  "question": "Discreet",
+  "options": [
+    "To carry out a careful examination",
+    "Careful to avoid attracting attention",
+    "To shine with a bright shimmering light",
+    "To find something for the first time"
+  ],
+  "answerOption": "B",
+  "answerText": "Careful to avoid attracting attention",
+  "difficulty": "easy",
+  "sourceFile": "0946.json"
+}

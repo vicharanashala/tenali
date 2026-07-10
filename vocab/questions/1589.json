@@ -1,0 +1,15 @@
+{
+  "id": 1589,
+  "word": "Deshabille",
+  "question": "Deshabille",
+  "options": [
+    "Made someone do something against will",
+    "State of being partially clothed",
+    "Physically or emotionally separate",
+    "A feeling of hatred or disgust"
+  ],
+  "answerOption": "B",
+  "answerText": "State of being partially clothed",
+  "difficulty": "medium",
+  "sourceFile": "1589.json"
+}

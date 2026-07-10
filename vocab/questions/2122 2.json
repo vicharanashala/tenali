@@ -1,0 +1,15 @@
+{
+  "id": 2122,
+  "word": "Aerobium",
+  "question": "Aerobium",
+  "options": [
+    "Resembling verdigris color",
+    "To criticize someone severely",
+    "An aerobic organism",
+    "An airfield or airport"
+  ],
+  "answerOption": "C",
+  "answerText": "An aerobic organism",
+  "difficulty": "hard",
+  "sourceFile": "2122.json"
+}

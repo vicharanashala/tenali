@@ -1,0 +1,15 @@
+{
+  "id": 2687,
+  "word": "Decidability",
+  "question": "Decidability",
+  "options": [
+    "Pompous or extravagant in language",
+    "The state of being unaware of surroundings",
+    "The quality of holding firmly",
+    "The quality of being decidable"
+  ],
+  "answerOption": "D",
+  "answerText": "The quality of being decidable",
+  "difficulty": "hard",
+  "sourceFile": "2687.json"
+}

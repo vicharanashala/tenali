@@ -1,0 +1,15 @@
+{
+  "id": 2019,
+  "word": "Wanton",
+  "question": "Wanton",
+  "options": [
+    "Very generous or forgiving",
+    "Excessively talkative about trivial things",
+    "Shaped with an adze",
+    "Deliberate and unprovoked cruelty"
+  ],
+  "answerOption": "D",
+  "answerText": "Deliberate and unprovoked cruelty",
+  "difficulty": "hard",
+  "sourceFile": "2019.json"
+}

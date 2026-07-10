@@ -1,0 +1,14 @@
+{
+  "id": 62,
+  "question": "Who was the first person to step on the Moon?",
+  "options": [
+    "Yuri Gagarin",
+    "Buzz Aldrin",
+    "Neil Armstrong",
+    "Michael Collins"
+  ],
+  "answerOption": "C",
+  "answerText": "Neil Armstrong",
+  "genre": "general-knowledge",
+  "sourceFile": "0062.json"
+}

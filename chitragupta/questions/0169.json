@@ -1,0 +1,14 @@
+{
+  "id": 169,
+  "question": "What is the capital of South Korea?",
+  "options": [
+    "Busan",
+    "Seoul",
+    "Incheon",
+    "Daegu"
+  ],
+  "answerOption": "B",
+  "answerText": "Seoul",
+  "genre": "geography",
+  "sourceFile": "0169.json"
+}

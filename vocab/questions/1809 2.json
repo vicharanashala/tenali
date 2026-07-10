@@ -1,0 +1,15 @@
+{
+  "id": 1809,
+  "word": "Legerdemain",
+  "question": "Legerdemain",
+  "options": [
+    "Using very few words to express oneself",
+    "The practices of a dishonest person",
+    "Skillful use of one's hands; trickery",
+    "Lover of Clytemnestra in mythology"
+  ],
+  "answerOption": "C",
+  "answerText": "Skillful use of one's hands; trickery",
+  "difficulty": "hard",
+  "sourceFile": "1809.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 416,
+  "word": "Require",
+  "question": "Require",
+  "options": [
+    "At a great distance in space or time",
+    "Costing a lot of money",
+    "To need something as necessary",
+    "To join or link things together"
+  ],
+  "answerOption": "C",
+  "answerText": "To need something as necessary",
+  "difficulty": "easy",
+  "sourceFile": "0416.json"
+}

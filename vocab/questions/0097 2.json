@@ -1,0 +1,15 @@
+{
+  "id": 97,
+  "word": "Silent",
+  "question": "Silent",
+  "options": [
+    "Known for sure; established beyond doubt",
+    "To tell a story or give an account",
+    "Showing gentleness and concern",
+    "Not making or accompanied by any sound"
+  ],
+  "answerOption": "D",
+  "answerText": "Not making or accompanied by any sound",
+  "difficulty": "easy",
+  "sourceFile": "0097.json"
+}

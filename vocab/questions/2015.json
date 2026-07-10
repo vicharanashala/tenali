@@ -1,0 +1,15 @@
+{
+  "id": 2015,
+  "word": "Sycophant",
+  "question": "Sycophant",
+  "options": [
+    "Philosophy of greatest happiness principle",
+    "An easterly wind in the Aegean",
+    "A person who acts obediently to gain advantage",
+    "Outstandingly bad; shocking"
+  ],
+  "answerOption": "C",
+  "answerText": "A person who acts obediently to gain advantage",
+  "difficulty": "hard",
+  "sourceFile": "2015.json"
+}

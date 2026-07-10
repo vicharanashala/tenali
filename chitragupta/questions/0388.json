@@ -1,0 +1,14 @@
+{
+  "id": 388,
+  "question": "Which blood vessel carries oxygenated blood from the lungs to the heart?",
+  "options": [
+    "Pulmonary artery",
+    "Aorta",
+    "Pulmonary vein",
+    "Vena cava"
+  ],
+  "answerOption": "C",
+  "answerText": "Pulmonary vein",
+  "genre": "science",
+  "sourceFile": "0388.json"
+}

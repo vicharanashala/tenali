@@ -1,0 +1,15 @@
+{
+  "id": 2314,
+  "word": "Fernweh",
+  "question": "Fernweh",
+  "options": [
+    "In an abjured manner",
+    "Something bearing visible traces of an earlier form",
+    "An ache for distant places; the craving for travel",
+    "The opposite of paranoia; belief that the world conspires to help you"
+  ],
+  "answerOption": "C",
+  "answerText": "An ache for distant places; the craving for travel",
+  "difficulty": "extra-hard",
+  "sourceFile": "2314.json"
+}

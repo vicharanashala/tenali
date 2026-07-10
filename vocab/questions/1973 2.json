@@ -1,0 +1,15 @@
+{
+  "id": 1973,
+  "word": "Advertent",
+  "question": "Advertent",
+  "options": [
+    "A person who attacks cherished beliefs",
+    "Paying attention or noticing",
+    "To reprimand someone firmly",
+    "Observation of air conditions"
+  ],
+  "answerOption": "B",
+  "answerText": "Paying attention or noticing",
+  "difficulty": "hard",
+  "sourceFile": "1973.json"
+}

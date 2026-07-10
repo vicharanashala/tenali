@@ -1,0 +1,15 @@
+{
+  "id": 2014,
+  "word": "Recalcitrant",
+  "question": "Recalcitrant",
+  "options": [
+    "The quality of being airy",
+    "Ancient religious belief system",
+    "Relevant to a subject under consideration",
+    "Having an obstinately uncooperative attitude"
+  ],
+  "answerOption": "D",
+  "answerText": "Having an obstinately uncooperative attitude",
+  "difficulty": "hard",
+  "sourceFile": "2014.json"
+}

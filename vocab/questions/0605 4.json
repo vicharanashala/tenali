@@ -1,0 +1,15 @@
+{
+  "id": 605,
+  "word": "Glitter",
+  "question": "Glitter",
+  "options": [
+    "To shine with a bright shimmering light",
+    "Expressing approval or agreement",
+    "Working by itself with little human control",
+    "Having no strong flavor or taste"
+  ],
+  "answerOption": "A",
+  "answerText": "To shine with a bright shimmering light",
+  "difficulty": "easy",
+  "sourceFile": "0605.json"
+}

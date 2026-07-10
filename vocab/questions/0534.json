@@ -1,0 +1,15 @@
+{
+  "id": 534,
+  "word": "Recommend",
+  "question": "Recommend",
+  "options": [
+    "Extending in one direction without curves",
+    "To cook food by prolonged exposure to heat",
+    "To put forward someone or something as good",
+    "To give facts or information to someone"
+  ],
+  "answerOption": "C",
+  "answerText": "To put forward someone or something as good",
+  "difficulty": "easy",
+  "sourceFile": "0534.json"
+}

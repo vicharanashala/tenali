@@ -1,0 +1,15 @@
+{
+  "id": 367,
+  "word": "Stir",
+  "question": "Stir",
+  "options": [
+    "Able to be used for a practical purpose",
+    "Not open; shut or fastened",
+    "To feel a strong desire for something",
+    "To move a spoon around in a liquid"
+  ],
+  "answerOption": "D",
+  "answerText": "To move a spoon around in a liquid",
+  "difficulty": "easy",
+  "sourceFile": "0367.json"
+}

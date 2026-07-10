@@ -1,0 +1,15 @@
+{
+  "id": 2857,
+  "word": "Reappearance",
+  "question": "Reappearance",
+  "options": [
+    "The action of appearing again",
+    "An accusation in response to another",
+    "Wicked or criminal in nature",
+    "Shaped with an adze"
+  ],
+  "answerOption": "A",
+  "answerText": "The action of appearing again",
+  "difficulty": "hard",
+  "sourceFile": "2857.json"
+}

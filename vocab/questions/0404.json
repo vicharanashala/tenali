@@ -1,0 +1,15 @@
+{
+  "id": 404,
+  "word": "Pollute",
+  "question": "Pollute",
+  "options": [
+    "Able to recover quickly from difficulties",
+    "Feeling optimistic about a future event",
+    "To make the environment dirty or harmful",
+    "To watch over and protect something"
+  ],
+  "answerOption": "C",
+  "answerText": "To make the environment dirty or harmful",
+  "difficulty": "easy",
+  "sourceFile": "0404.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1820,
+  "word": "Inept",
+  "question": "Inept",
+  "options": [
+    "Sharing a common border or touching",
+    "Lacking skill or competence",
+    "Not harmful or offensive",
+    "Making a situation likely to happen"
+  ],
+  "answerOption": "B",
+  "answerText": "Lacking skill or competence",
+  "difficulty": "medium",
+  "sourceFile": "1820.json"
+}

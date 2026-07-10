@@ -1,0 +1,15 @@
+{
+  "id": 563,
+  "word": "Overwhelm",
+  "question": "Overwhelm",
+  "options": [
+    "Created directly and not a copy",
+    "To find an answer to a problem",
+    "Having the ability to speak clearly",
+    "To have a strong emotional effect on someone"
+  ],
+  "answerOption": "D",
+  "answerText": "To have a strong emotional effect on someone",
+  "difficulty": "easy",
+  "sourceFile": "0563.json"
+}

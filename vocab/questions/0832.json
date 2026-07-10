@@ -1,0 +1,15 @@
+{
+  "id": 832,
+  "word": "Salty",
+  "question": "Salty",
+  "options": [
+    "Extremely small in size",
+    "To take the place of something",
+    "Strongly wanting to do or have something",
+    "Having the taste of salt"
+  ],
+  "answerOption": "D",
+  "answerText": "Having the taste of salt",
+  "difficulty": "easy",
+  "sourceFile": "0832.json"
+}

@@ -23,7 +23,6 @@
 
 import { useEffect, useState, useRef, useMemo } from 'react'
 import './App.css'
-import EnhancedMathDetectiveApp from "./detective-app"
 
 // API base URL from environment variables (Vite)
 const API = import.meta.env.VITE_API_BASE_URL || '';
@@ -80,34 +79,17 @@ function useAuth() {
     return data.user
   }
   const logout = () => { authClear(); setUser(null) }
-  const signup = async (username, password) => {
-    const r = await fetch(`${API}/api/auth/signup`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password }),
-    })
-    if (!r.ok) {
-      const err = await r.json().catch(() => ({ error: 'signup failed' }))
-      throw new Error(err.error || `signup failed (HTTP ${r.status})`)
-    }
-    const data = await r.json()
-    authSet(data.token, data.user)
-    setUser(data.user)
-    return data.user
-  }
-  return { user, login, signup, logout }
+  return { user, login, logout }
 }
 
 // Hamburger button (top-right) + dropdown + login modal.
 // Renders globally — sits next to the .theme-toggle.
 function AuthMenu() {
-  const { user, login, signup, logout } = useAuth()
+  const { user, login, logout } = useAuth()
   const [open, setOpen] = useState(false)
   const [showLogin, setShowLogin] = useState(false)
-  const [showSignup, setShowSignup] = useState(false)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [passwordConfirm, setPasswordConfirm] = useState('')
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
 
@@ -127,23 +109,6 @@ function AuthMenu() {
       window.location.href = '/tenth'
     } catch (err) {
       setError(err.message || 'login failed')
-    } finally { setBusy(false) }
-  }
-
-  const submitSignup = async (e) => {
-    if (e && e.preventDefault) e.preventDefault()
-    if (password !== passwordConfirm) {
-      setError('Passwords do not match')
-      return
-    }
-    setError(''); setBusy(true)
-    try {
-      await signup(username.trim(), password)
-      setShowSignup(false); setOpen(false)
-      setUsername(''); setPassword(''); setPasswordConfirm('')
-      window.location.href = '/tenth'
-    } catch (err) {
-      setError(err.message || 'signup failed')
     } finally { setBusy(false) }
   }
 
@@ -263,84 +228,6 @@ function AuthMenu() {
                 {busy ? 'Logging in…' : 'Log in'}
               </button>
             </div>
-            <p style={{ textAlign: 'center', margin: '12px 0 0', fontSize: '0.85rem', color: 'var(--clr-text-soft)' }}>
-              Don't have an account?{' '}
-              <button type="button" onClick={() => { setShowLogin(false); setShowSignup(true); setError('') }}
-                style={{ background: 'none', border: 'none', color: 'var(--clr-accent)', cursor: 'pointer', textDecoration: 'underline', padding: 0, fontSize: '0.85rem' }}>
-                Sign up
-              </button>
-            </p>
-          </form>
-        </div>
-      )}
-
-      {showSignup && (
-        <div
-          onClick={() => { setShowSignup(false); setError(''); setPasswordConfirm('') }}
-          style={{ position: 'fixed', inset: 0, zIndex: 1100, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-        >
-          <form
-            onClick={e => e.stopPropagation()}
-            onSubmit={submitSignup}
-            style={{
-              minWidth: 320, maxWidth: 360, padding: 24,
-              background: 'var(--clr-surface, #1c1c1f)',
-              border: '1px solid var(--clr-border, #444)',
-              borderRadius: 12,
-              color: 'var(--clr-text)',
-              boxShadow: '0 10px 40px rgba(0,0,0,0.5)',
-            }}
-          >
-            <h2 style={{ marginTop: 0, marginBottom: 16 }}>Create account</h2>
-            <label style={{ display: 'block', marginBottom: 12, fontSize: '0.9rem' }}>
-              Username
-              <input
-                type="text"
-                value={username}
-                onChange={e => setUsername(e.target.value)}
-                autoFocus
-                autoComplete="username"
-                style={{ display: 'block', width: '100%', marginTop: 4, padding: '10px 12px', borderRadius: 6, border: '1px solid var(--clr-border, #555)', background: 'var(--clr-surface, #1c1c1f)', color: 'var(--clr-text)', boxSizing: 'border-box' }}
-              />
-            </label>
-            <label style={{ display: 'block', marginBottom: 12, fontSize: '0.9rem' }}>
-              Password
-              <input
-                type="password"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                autoComplete="new-password"
-                style={{ display: 'block', width: '100%', marginTop: 4, padding: '10px 12px', borderRadius: 6, border: '1px solid var(--clr-border, #555)', background: 'var(--clr-surface, #1c1c1f)', color: 'var(--clr-text)', boxSizing: 'border-box' }}
-              />
-            </label>
-            <label style={{ display: 'block', marginBottom: 12, fontSize: '0.9rem' }}>
-              Confirm password
-              <input
-                type="password"
-                value={passwordConfirm}
-                onChange={e => setPasswordConfirm(e.target.value)}
-                autoComplete="new-password"
-                style={{ display: 'block', width: '100%', marginTop: 4, padding: '10px 12px', borderRadius: 6, border: '1px solid var(--clr-border, #555)', background: 'var(--clr-surface, #1c1c1f)', color: 'var(--clr-text)', boxSizing: 'border-box' }}
-              />
-            </label>
-            {error && <p style={{ color: '#f85149', margin: '8px 0', fontSize: '0.85rem' }}>{error}</p>}
-            <div style={{ display: 'flex', gap: 8, marginTop: 12, justifyContent: 'flex-end' }}>
-              <button type="button" onClick={() => { setShowSignup(false); setError(''); setPasswordConfirm('') }}
-                style={{ padding: '8px 14px', borderRadius: 6, background: 'transparent', border: '1px solid var(--clr-border, #555)', color: 'var(--clr-text)', cursor: 'pointer' }}>
-                Cancel
-              </button>
-              <button type="submit" disabled={busy}
-                style={{ padding: '8px 18px', borderRadius: 6, background: '#e8864a', color: '#fff', border: 'none', cursor: busy ? 'not-allowed' : 'pointer', fontWeight: 600 }}>
-                {busy ? 'Creating account…' : 'Create account'}
-              </button>
-            </div>
-            <p style={{ textAlign: 'center', margin: '12px 0 0', fontSize: '0.85rem', color: 'var(--clr-text-soft)' }}>
-              Already have an account?{' '}
-              <button type="button" onClick={() => { setShowSignup(false); setShowLogin(true); setError('') }}
-                style={{ background: 'none', border: 'none', color: 'var(--clr-accent)', cursor: 'pointer', textDecoration: 'underline', padding: 0, fontSize: '0.85rem' }}>
-                Log in
-              </button>
-            </p>
           </form>
         </div>
       )}
@@ -5432,7 +5319,7 @@ function SuperTablesApp() {
 
   return (
     <div style={S.page}>
-      <div style={{ maxWidth: 'min(600px, 95vw)', margin: '0 auto' }}>
+      <div style={{ maxWidth: 600, margin: '0 auto' }}>
         {renderLevelProgress()}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
           <button onClick={goHome} style={S.back}>← Quit</button>
@@ -6954,7 +6841,7 @@ function makeBridgeApp({ id, title, subtitle, intro, teach, generator, nextHref,
       return (
         <div style={{ maxWidth: 720, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
           <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-            <button className="back-button" onClick={onBack} aria-label="Go back">← Back</button>
+            <button className="back-button" onClick={onBack}>← Back</button>
           </div>
           <StripComponent current={currentNode} />
           <h1 style={{ marginBottom: 4 }}>{title}</h1>
@@ -6978,7 +6865,7 @@ function makeBridgeApp({ id, title, subtitle, intro, teach, generator, nextHref,
       return (
         <div style={{ maxWidth: 720, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
           <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-            <button className="back-button" onClick={onBack} aria-label="Go back">← Back</button>
+            <button className="back-button" onClick={onBack}>← Back</button>
           </div>
           <StripComponent current={currentNode} />
           <h1 style={{ marginBottom: 4 }}>
@@ -7027,7 +6914,7 @@ function makeBridgeApp({ id, title, subtitle, intro, teach, generator, nextHref,
     return (
       <div style={{ maxWidth: 720, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack} aria-label="Go back">← Back</button>
+          <button className="back-button" onClick={onBack}>← Back</button>
           {teach && (
             <button className="back-button" onClick={() => setShowTeach(s => !s)}>
               {showTeach ? '✕ Hide method' : '📖 Show method'}
@@ -8829,7 +8716,7 @@ function Chapter5App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack} aria-label="Go back">← Home</button>
+          <button className="back-button" onClick={onBack}>← Home</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 5 — Fractions, Percentages & Standard Form</h1>
@@ -9850,7 +9737,7 @@ function Chapter6App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack} aria-label="Go back">← Home</button>
+          <button className="back-button" onClick={onBack}>← Home</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 6 — Equations, Factors and Formulae</h1>
@@ -11202,7 +11089,7 @@ function Chapter7App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack} aria-label="Go back">← Home</button>
+          <button className="back-button" onClick={onBack}>← Home</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 7 — Perimeter, Area & Volume</h1>
@@ -12436,7 +12323,7 @@ function Chapter8App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack} aria-label="Go back">← Home</button>
+          <button className="back-button" onClick={onBack}>← Home</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 8 — Introduction to Probability</h1>
@@ -13802,7 +13689,7 @@ function Chapter9App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack} aria-label="Go back">← Home</button>
+          <button className="back-button" onClick={onBack}>← Home</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 9 — Sequences, Surds & Sets</h1>
@@ -15170,7 +15057,7 @@ function Chapter10App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack} aria-label="Go back">← Home</button>
+          <button className="back-button" onClick={onBack}>← Home</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 10 — Straight Lines Sequences, Surds & Sets Quadratic Equations</h1>
@@ -16437,7 +16324,7 @@ function Chapter11App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack} aria-label="Go back">← Home</button>
+          <button className="back-button" onClick={onBack}>← Home</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 11 — Straight Lines Sequences, Surds & Sets Quadratic Equations</h1>
@@ -17710,7 +17597,7 @@ function Chapter12App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack} aria-label="Go back">← Home</button>
+          <button className="back-button" onClick={onBack}>← Home</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 12 — Straight Lines Sequences, Surds & Sets Quadratic Equations</h1>
@@ -18858,7 +18745,7 @@ function Chapter13App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack} aria-label="Go back">← Home</button>
+          <button className="back-button" onClick={onBack}>← Home</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 13 — Straight Lines Sequences, Surds & Sets Quadratic Equations</h1>
@@ -20115,7 +20002,7 @@ function Chapter14App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack} aria-label="Go back">← Home</button>
+          <button className="back-button" onClick={onBack}>← Home</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 14 — Further Equations & Inequalities</h1>
@@ -21463,7 +21350,7 @@ function Chapter15App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack} aria-label="Go back">← Home</button>
+          <button className="back-button" onClick={onBack}>← Home</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter  — Scale Drawings, Bearings & Trigonometry</h1>
@@ -22443,7 +22330,7 @@ function Chapter16App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack} aria-label="Go back">← Home</button>
+          <button className="back-button" onClick={onBack}>← Home</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter  — Scale Drawings, Bearings & Trigonometry</h1>
@@ -23596,7 +23483,7 @@ function Chapter17App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack} aria-label="Go back">← Home</button>
+          <button className="back-button" onClick={onBack}>← Home</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter  — Scale Drawings, Bearings & Trigonometry</h1>
@@ -24935,7 +24822,7 @@ function Chapter18App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack} aria-label="Go back">← Home</button>
+          <button className="back-button" onClick={onBack}>← Home</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter  — Scale Drawings, Bearings & Trigonometry</h1>
@@ -26092,7 +25979,7 @@ function Chapter19App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack} aria-label="Go back">← Home</button>
+          <button className="back-button" onClick={onBack}>← Home</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter  — Scale Drawings, Bearings & Trigonometry</h1>
@@ -27156,7 +27043,7 @@ function Chapter20App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack} aria-label="Go back">← Home</button>
+          <button className="back-button" onClick={onBack}>← Home</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter  — Scale Drawings, Bearings & Trigonometry</h1>
@@ -28403,7 +28290,7 @@ function Chapter21App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack} aria-label="Go back">← Home</button>
+          <button className="back-button" onClick={onBack}>← Home</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter  — Scale Drawings, Bearings & Trigonometry</h1>
@@ -29519,7 +29406,7 @@ function Chapter22App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack} aria-label="Go back">← Home</button>
+          <button className="back-button" onClick={onBack}>← Home</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 22 — More Equations, Formulae & Functions</h1>
@@ -30733,7 +30620,7 @@ function Chapter23App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack} aria-label="Go back">← Home</button>
+          <button className="back-button" onClick={onBack}>← Home</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 23 — Transformations & Vectors</h1>
@@ -31902,7 +31789,7 @@ function Chapter24App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack} aria-label="Go back">← Home</button>
+          <button className="back-button" onClick={onBack}>← Home</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 24 — Probability with Tree & Venn Diagrams</h1>
@@ -32752,7 +32639,7 @@ function Chapter1App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack} aria-label="Go back">← Home</button>
+          <button className="back-button" onClick={onBack}>← Home</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 1 — Reviewing Number Concepts</h1>
@@ -33573,7 +33460,7 @@ function Chapter2App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack} aria-label="Go back">← Home</button>
+          <button className="back-button" onClick={onBack}>← Home</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 2 — Making Sense of Algebra</h1>
@@ -34369,7 +34256,7 @@ function Chapter3App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack} aria-label="Go back">← Home</button>
+          <button className="back-button" onClick={onBack}>← Home</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 3 — Lines, Angles and Shapes</h1>
@@ -35163,7 +35050,7 @@ function Chapter4App({ onBack }) {
     return (
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack} aria-label="Go back">← Home</button>
+          <button className="back-button" onClick={onBack}>← Home</button>
           <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
         </div>
         <h1 style={{ marginBottom: 4 }}>Chapter 4 — Collecting, Organising and Displaying Data</h1>
@@ -35488,7 +35375,7 @@ function TenthApp({ onBack }) {
   return (
     <div style={{ maxWidth: 980, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
       <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-        <button className="back-button" onClick={onBack} aria-label="Go back">← Home</button>
+        <button className="back-button" onClick={onBack}>← Home</button>
       </div>
       {user && (
         <p style={{ margin: '0 0 12px', fontSize: '1.1rem', opacity: 0.85 }}>
@@ -35518,53 +35405,6 @@ function TenthApp({ onBack }) {
           <strong>Hit the Gym every single day.</strong> Just like your body, your mind needs daily exercise — short, focused reps build the speed and accuracy that make every chapter below feel easy. Skip a day and you slip back; show up daily and the fundamentals become automatic. <em>Consistency beats intensity.</em>
         </p>
       </a>
-
-        {/* Math Detective Agency Card */}
-        <div style={{
-          background: 'linear-gradient(135deg, var(--clr-accent, #e8864a) 0%, #d4733a 50%, #c0652e 100%)',
-          borderRadius: 16, padding: '1.2rem 1.5rem', marginBottom: '1.5rem',
-          color: '#fff', position: 'relative', overflow: 'hidden',
-          boxShadow: '0 4px 16px rgba(232,134,74,0.3)',
-          cursor: 'pointer', transition: 'transform 0.2s, box-shadow 0.2s',
-        }}
-          onClick={() => { window.location.href = '/detective-agency' }}
-          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 24px rgba(232,134,74,0.4)'; }}
-          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(232,134,74,0.3)'; }}
-        >
-          {/* Background pattern */}
-          <div style={{ position: 'absolute', top: -30, right: -20, fontSize: '8rem', opacity: 0.08, pointerEvents: 'none', userSelect: 'none' }}>🔍</div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', position: 'relative', zIndex: 1 }}>
-            {/* Icon */}
-            <div style={{
-              fontSize: '2.2rem', width: 52, height: 52, borderRadius: '50%',
-              background: 'rgba(255,255,255,0.15)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-            }}>
-              🕵️
-            </div>
-
-            {/* Text */}
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.15rem' }}>
-                Math Detective Agency
-              </div>
-              <div style={{ fontSize: '0.82rem', opacity: 0.85, marginBottom: '0.5rem' }}>
-                Solve mysteries using mathematics
-              </div>
-
-              {/* Mini progress preview */}
-              <div style={{ display: 'flex', gap: '1rem', fontSize: '0.72rem', opacity: 0.9 }}>
-                <span>🔍 Cases: 0</span>
-                <span>⭐ Rank: Junior Detective</span>
-                <span>✨ XP: 0</span>
-              </div>
-            </div>
-
-            {/* Arrow */}
-            <div style={{ fontSize: '1.5rem', opacity: 0.7, flexShrink: 0 }}>→</div>
-          </div>
-        </div>
 
       <h1 style={{ marginBottom: 4 }}>Tenth</h1>
       <p className="subtitle" style={{ marginTop: 0 }}>
@@ -35737,34 +35577,6 @@ function App() {
           {theme === 'dark' ? '☀️' : '🌙'}
         </button>
         <AuthGate><TenthApp onBack={() => { window.location.href = '/' }} /></AuthGate>
-      </>
-    )
-  }
-
-  // Route: /detective → Math Detective Agency
-  if (pathname === '/detective') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <div className="app-shell"><div className="card">
-          <EnhancedMathDetectiveApp onBack={() => { window.location.href = '/tenth' }} />
-        </div></div>
-      </>
-    )
-  }
-
-  // Route: /detective-agency → Math Detective Agency (friendly URL)
-  if (pathname === '/detective-agency') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <div className="app-shell"><div className="card">
-          <EnhancedMathDetectiveApp onBack={() => { window.location.href = '/tenth' }} />
-        </div></div>
       </>
     )
   }
@@ -36154,7 +35966,6 @@ function App() {
   // ========== ROUTING: MODE-BASED (HOME MENU + QUIZZES) ==========
   // Map quiz mode keys to their component classes
   const modeMap = {
-    mathdetective: EnhancedMathDetectiveApp, // Math Detective Agency (enhanced with hints & dedup)
     gk: GKApp,                    // General Knowledge
     addition: AdditionApp,         // Basic addition
     quadratic: QuadraticApp,       // Quadratic substitution
@@ -36228,7 +36039,6 @@ function App() {
     randommix: RandomMixApp,       // Random Mix (adaptive)
     custom: CustomApp,             // Custom lesson builder
     gym: GymApp,                   // Unified adaptive Gym — bundles all 7 below
-    // mathdetective: MathDetectiveApp, // moved to enhanced version above
     guess: GuessNumberApp,         // Binary magic — guess a number 0–31
     gymdecimals: GymDecimalsApp,   // Gym Decimals — signed decimal multiplication (MCQ)
     funcgym: FuncGymApp,           // Functions Gym — polynomial evaluation (MCQ)
@@ -36268,1016 +36078,6 @@ function App() {
  * @param {Object} props
  * @param {Function} props.onSelect - Callback when user selects a quiz: receives mode key (e.g., 'gk')
  */
-
-
-/**
- * MathDetectiveApp — Full detective case system with library, investigation stages, and progress tracking.
- *
- * Behaviors:
- *   - No cases started → Case Library (all cases shown with "Solve" CTAs)
- *   - Unfinished case → Opens that case directly at its current stage
- *   - All cases complete → Case Library with all shown as solved (replay available)
- *
- * localStorage key: tenali-detective-progress
- * Schema: { xp, casesSolved, cases: { [caseId]: { status, currentStage, totalStages } } }
- * Ranks: Cadet → Junior Detective → Detective → Senior Detective → Chief Inspector → Commissioner
- */
-
-const DETECTIVE_RANKS = [
-  { title: 'Junior Detective',   xp: 0    },
-  { title: 'Detective',          xp: 100  },
-  { title: 'Senior Detective',   xp: 300  },
-  { title: 'Chief Inspector',    xp: 700  },
-  { title: 'Commissioner',       xp: 1500 },
-  { title: 'Grand Commissioner', xp: 3000 },
-];
-
-const DETECTIVE_STORAGE_KEY = 'tenali-detective-progress';
-
-const DETECTIVE_CASES = [
-  {
-    id: 'case-1',
-    title: 'The Case of the Missing Equation',
-    description: 'A cryptic equation was left at a crime scene. Decode it to find the next clue!',
-    difficulty: 1,
-    xpReward: 30,
-    stages: [
-      {
-        title: 'Briefing',
-        narrative: 'Detective, we need your help! A mysterious note was found at the scene reading: "The sum of two consecutive numbers is 47." The next clue is hidden at the page number equal to the larger number. What is the larger number?',
-        question: 'Two consecutive numbers add up to 47. Find the larger number.',
-        answer: 24,
-      },
-      {
-        title: 'Clue Analysis',
-        narrative: 'Great work! The book led you to a safe. The safe combination is the answer to: "Three times a number, minus 5, equals 28. What is the number?"',
-        question: '3x − 5 = 28. Solve for x.',
-        answer: 11,
-      },
-      {
-        title: 'Final Deduction',
-        narrative: 'The safe contained a final riddle: "Think of a number. Double it, add 10, then divide by 2. The result is 25. What was the original number?" The answer reveals the culprit!',
-        question: 'Work backwards: (2x + 10) ÷ 2 = 25. Find x.',
-        answer: 20,
-      },
-    ],
-  },
-  {
-    id: 'case-2',
-    title: 'The Perimeter Plot',
-    description: 'A suspicious blueprint was found. Use geometry to measure the evidence!',
-    difficulty: 1,
-    xpReward: 40,
-    stages: [
-      {
-        title: 'Scene Analysis',
-        narrative: 'The blueprint shows a rectangular garden. The length is 12 metres and the width is 8 metres. The suspect wrote: "Perimeter = ?" on the edge. Find the perimeter to unlock the first clue.',
-        question: 'A rectangle has length 12m and width 8m. What is its perimeter?',
-        answer: 40,
-      },
-      {
-        title: 'Area Investigation',
-        narrative: 'Inside the garden, there is a square flower bed with side length 3 metres. The suspect planted something there. What is the area of the flower bed?',
-        question: 'A square has side length 3m. Calculate its area.',
-        answer: 9,
-      },
-      {
-        title: 'The Big Reveal',
-        narrative: 'The remaining area of the garden (excluding the flower bed) was dug up. Find the area that was disturbed to discover what was hidden.',
-        question: 'Garden area = 96m². Flower bed area = ? (from previous). How much area is left?',
-        answer: 87,
-      },
-    ],
-  },
-  {
-    id: 'case-3',
-    title: 'The Fraction Fiasco',
-    description: 'A recipe for disaster! Someone tampered with the measurements. Restore the correct quantities.',
-    difficulty: 2,
-    xpReward: 50,
-    stages: [
-      {
-        title: 'Recipe Reconstruction',
-        narrative: 'The chef\'s recipe calls for 2/3 cup of sugar, but the tamperer changed it to 1/4 cup. How much more sugar is needed to fix the recipe?',
-        question: '2/3 − 1/4 = ? (Give answer as an improper fraction a/b)',
-        answer: '5/12',
-      },
-      {
-        title: 'Batch Adjustment',
-        narrative: 'The corrected recipe makes 12 cookies. We need 30 cookies for the party. Multiply all ingredient quantities by the right factor. What number do we multiply by?',
-        question: 'To scale from 12 cookies to 30 cookies, multiply by: ?',
-        answer: '5/2',
-      },
-      {
-        title: 'Final Check',
-        narrative: 'The corrected sugar amount for 30 cookies is now (2/3 × 5/2) cups. Simplify this fraction to catch the error!',
-        question: '2/3 × 5/2 = ? (Simplify your answer)',
-        answer: '5/3',
-      },
-    ],
-  },
-  {
-    id: 'case-4',
-    title: 'The Speed Trap',
-    description: 'A speeding vehicle was caught on camera. Use speed-distance-time calculations to crack the case!',
-    difficulty: 2,
-    xpReward: 60,
-    stages: [
-      {
-        title: 'Speed Calculation',
-        narrative: 'The suspect\'s car travelled 240 kilometres in 3 hours. The speed limit was 60 km/h. Was the suspect speeding? Enter the speed in km/h.',
-        question: 'Speed = Distance ÷ Time. 240km ÷ 3h = ? km/h',
-        answer: 80,
-      },
-      {
-        title: 'Time Alibi',
-        narrative: 'The suspect claims they left the scene at 2:30 PM and drove to a town 150 km away at 50 km/h. What time did they arrive? Enter as a decimal (e.g., 5.5 = 5:30 PM).',
-        question: 'Time = Distance ÷ Speed. 150 ÷ 50 = ? hours. Add to 2:30 PM.',
-        answer: 5.5,
-      },
-      {
-        title: 'Fuel Evidence',
-        narrative: 'The car\'s fuel tank holds 45 litres. It consumes fuel at a rate of 8 km per litre. How far can the suspect travel on a full tank? This proves they could have made it!',
-        question: 'Range = Fuel × Efficiency. 45 × 8 = ? km',
-        answer: 360,
-      },
-    ],
-  },
-  {
-    id: 'case-5',
-    title: 'The Percentage Heist',
-    description: 'A bank statement has been altered. Follow the percentage changes to trace the stolen amount!',
-    difficulty: 3,
-    xpReward: 80,
-    stages: [
-      {
-        title: 'Initial Deposit',
-        narrative: 'The victim deposited ₹2000 into their account. The bank statement shows 15% interest was added. What is the new balance?',
-        question: '2000 + 15% of 2000 = ?',
-        answer: 2300,
-      },
-      {
-        title: 'The Withdrawal',
-        narrative: 'The suspect withdrew 20% of the balance. How much was withdrawn?',
-        question: '20% of 2300 = ?',
-        answer: 460,
-      },
-      {
-        title: 'Money Trail',
-        narrative: 'After the withdrawal, the remaining balance was transferred to another account. But only 80% of that transferred amount could be recovered. How much was recovered?',
-        question: '80% of (2300 − 460) = ?',
-        answer: 1472,
-      },
-    ],
-  },
-  {
-    id: 'case-6',
-    title: 'The Probability Puzzle',
-    description: 'A gambling den was raided. Use probability to identify the rigged game!',
-    difficulty: 3,
-    xpReward: 100,
-    stages: [
-      {
-        title: 'Dice Game',
-        narrative: 'In a fair game, you roll a single six-sided die. What is the probability of rolling a number greater than 4? Give as a simplified fraction.',
-        question: 'P(>4) on a 6-sided die = ?/?(simplified)',
-        answer: '1/3',
-      },
-      {
-        title: 'Card Trick',
-        narrative: 'From a standard 52-card deck, what is the probability of drawing a heart? Simplify your answer.',
-        question: 'P(heart) from 52 cards = ?/?',
-        answer: '1/4',
-      },
-      {
-        title: 'The Rigged Game',
-        narrative: 'The suspect\'s game uses a special 8-sided die. It has 3 sides showing "win" and 5 sides showing "lose". They claimed the chance of winning was 1 in 4. What is the actual probability of winning?',
-        question: 'P(win) with 3 winning sides out of 8 = ?/?',
-        answer: '3/8',
-      },
-    ],
-  },
-{
-    id: 'case-7',
-    title: 'The Trigonometry Triangle',
-    description: 'A mysterious triangle was found drawn at a crime scene. Use trigonometry to decode its secrets!',
-    difficulty: 2,
-    xpReward: 70,
-    stages: [
-      {
-        title: 'Angle Analysis',
-        narrative: 'At the crime scene, detectives found a right-angled triangle drawn on the wall. One angle is 30\u00b0 and the hypotenuse is 10 cm. The culprit left a note: "Find the length of the side opposite the 30\u00b0 angle to unlock my name." Use SOH-CAH-TOA!',
-        question: 'In a right triangle, angle = 30\u00b0, hypotenuse = 10. Find the opposite side (sin 30\u00b0 = 0.5).',
-        answer: 5,
-      },
-      {
-        title: 'Adjacent Clue',
-        narrative: 'The first clue led to a storage locker. The combination is the length of the side adjacent to the 30\u00b0 angle in the same triangle. (cos 30\u00b0 \u2248 0.866)',
-        question: 'Find the adjacent side: cos 30\u00b0 \u00d7 10 = ? (Round to 1 decimal place)',
-        answer: 8.7,
-      },
-      {
-        title: 'Height of the Building',
-        narrative: 'The suspect was seen near a building. From a point 50 metres from its base, the angle of elevation to the top is 45\u00b0. How tall is the building? (tan 45\u00b0 = 1)',
-        question: 'Height = distance \u00d7 tan(45\u00b0). 50 \u00d7 1 = ? metres',
-        answer: 50,
-      },
-      {
-        title: 'The Final Angle',
-        narrative: 'A third triangle has sides of length 3, 4, and 5. The smallest angle in this triangle has a sine of 3/5 = 0.6. Given that sin\u207b\u00b9(0.6) \u2248 37\u00b0, what is the measure of the smallest angle to the nearest degree?',
-        question: 'In a 3-4-5 triangle, the smallest angle = sin\u207b\u00b9(3/5). What is it?',
-        answer: 37,
-      },
-    ],
-  },
-  {
-    id: 'case-8',
-    title: 'The Statistical Suspect',
-    description: 'A data breach at the bank! Analyse the numbers to identify the fraudulent transaction.',
-    difficulty: 2,
-    xpReward: 75,
-    stages: [
-      {
-        title: 'Mean Investigation',
-        narrative: 'A bank teller processed 5 transactions: \u20b9100, \u20b9150, \u20b9200, \u20b9250, and one unknown amount X. The mean (average) of all 5 transactions is \u20b9200. What was the unknown amount X?',
-        question: '(100 + 150 + 200 + 250 + X) \u00f7 5 = 200. Solve for X.',
-        answer: 300,
-      },
-      {
-        title: 'Median Mystery',
-        narrative: 'Another day\'s transactions were: \u20b950, \u20b980, \u20b9120, \u20b9X, \u20b9200, \u20b9250. The median of these 6 numbers is \u20b9130. What is X? (Hint: for an even count, median = average of the two middle values when sorted)',
-        question: 'Sorted: 50, 80, 120, X, 200, 250. Median = (120 + X)/2 = 130. Find X.',
-        answer: 140,
-      },
-      {
-        title: 'Mode Clues',
-        narrative: 'The suspect\'s transaction history for the week: \u20b9100, \u20b9200, \u20b9100, \u20b9300, \u20b9200, \u20b9100, \u20b9X. The mode (most frequent value) is \u20b9100. Which value of X would NOT break the mode being \u20b9100? Give one possible value for X.',
-        question: 'Current values: 100 appears 3 times. Which X keeps 100 as the mode?',
-        answer: 50,
-      },
-      {
-        title: 'Range Revelation',
-        narrative: 'The final piece of evidence: the range of these 7 numbers (from the previous stage) must be exactly \u20b9250. Given the numbers are 50, 100, 100, 100, 200, 200, 300, what is the range? This confirms our suspect!',
-        question: 'Range = highest - lowest. 300 - 50 = ?',
-        answer: 250,
-      },
-    ],
-  },
-  {
-    id: 'case-9',
-    title: 'The Ratio Riddle',
-    description: 'A coded message was found containing mysterious ratios. Crack the proportions to reveal the truth!',
-    difficulty: 1,
-    xpReward: 45,
-    stages: [
-      {
-        title: 'Dividing the Loot',
-        narrative: 'Two suspects split \u20b9300 in the ratio 2:3. The one who got the smaller share left a clue there. How much did the smaller share get?',
-        question: 'Split 300 in ratio 2:3. Total parts = 5. Smaller share = (2/5) \u00d7 300 = ?',
-        answer: 120,
-      },
-      {
-        title: 'Mixing Evidence',
-        narrative: 'A chemist mixed two solutions in the ratio of 3:7. The total mixture is 500 ml. How many ml of the first solution (the 3 part) was used?',
-        question: 'Total parts = 10. One part = 500 \u00f7 10 = 50ml. First solution = 3 \u00d7 50 = ? ml',
-        answer: 150,
-      },
-      {
-        title: 'Scale of the Map',
-        narrative: 'A map found in the suspect\'s hideout has a scale of 1:10,000. Two locations are 8 cm apart on the map. What is the actual distance in metres?',
-        question: 'Actual = 8 \u00d7 10,000 = 80,000 cm. Convert to metres: 80,000 \u00f7 100 = ? m',
-        answer: 800,
-      },
-      {
-        title: 'The Golden Ratio',
-        narrative: 'The final clue involves the golden ratio (approximately 1.618 : 1). A rectangle\'s longer side is 50 cm. If the ratio of longer to shorter is close to the golden ratio, what is the approximate length of the shorter side? (Round to nearest whole number)',
-        question: '50 \u00f7 1.618 \u2248 ? (Round to nearest whole cm)',
-        answer: 31,
-      },
-    ],
-  },
-  {
-    id: 'case-10',
-    title: 'The Algebraic Alibi',
-    description: 'The suspect left a trail of algebraic equations. Solve each one to close the case!',
-    difficulty: 3,
-    xpReward: 90,
-    stages: [
-      {
-        title: 'Linear Trail',
-        narrative: 'The first clue: "Solve for x: 5x - 3 = 2x + 12. The answer is the house number where I was seen."',
-        question: '5x - 3 = 2x + 12. Solve for x.',
-        answer: 5,
-      },
-      {
-        title: 'Simultaneous Sightings',
-        narrative: 'Two witnesses saw the suspect at different times. Solve: 2x + y = 10 and x - y = 2. The value of y is the floor number of the apartment.',
-        question: '2x + y = 10 and x - y = 2. What is y?',
-        answer: 2,
-      },
-      {
-        title: 'Quadratic Questioning',
-        narrative: 'A cryptic message reads: "x\u00b2 - 7x + 12 = 0". The larger root is the page number of the next clue. Find the larger root.',
-        question: 'x\u00b2 - 7x + 12 = 0. Factor and find the larger root.',
-        answer: 4,
-      },
-      {
-        title: 'Exponential Evidence',
-        narrative: 'The final cipher: "2\u1d58 = 64. The value of x is the locker number containing the evidence."',
-        question: '2^x = 64. Find x. (Hint: 64 = 2 \u00d7 2 \u00d7 2 \u00d7 2 \u00d7 2 \u00d7 2)',
-        answer: 6,
-      },
-    ],
-  },
-  {
-    id: 'case-11',
-    title: 'The Number Theory Conspiracy',
-    description: 'A conspiracy involving prime numbers, factors, and multiples. Use number theory to untangle the web!',
-    difficulty: 3,
-    xpReward: 100,
-    stages: [
-      {
-        title: 'Prime Suspect',
-        narrative: 'The first encrypted message reads: "Find the sum of all prime numbers between 10 and 20." That number is the room where the meeting happened.',
-        question: 'Sum of all primes between 10 and 20 (i.e., 11, 13, 17, 19) = ?',
-        answer: 60,
-      },
-      {
-        title: 'Factor Finder',
-        narrative: 'A safe was found. Its combination is the answer to: "Find the prime factorization of 84 and add up all the prime factors (including repeats)."',
-        question: '84 = 2 \u00d7 2 \u00d7 3 \u00d7 7. Sum of factors = 2 + 2 + 3 + 7 = ?',
-        answer: 14,
-      },
-      {
-        title: 'LCM Lock',
-        narrative: 'Another clue: "The least common multiple of 6 and 15 is the next code number."',
-        question: 'LCM(6, 15) = ? (Multiples of 6: 6, 12, 18, 24, 30... Multiples of 15: 15, 30...)',
-        answer: 30,
-      },
-      {
-        title: 'GCD Grand Finale',
-        narrative: 'The final puzzle: "The greatest common divisor of 48 and 72 reveals the number of the final evidence locker."',
-        question: 'GCD(48, 72) = ? (Factors of 48: 1,2,3,4,6,8,12,16,24,48. Factors of 72: 1,2,3,4,6,8,9,12,18,24,36,72. Greatest common?)',
-        answer: 24,
-      },
-    ],
-  },
-];
-
-function loadDetectiveProgress() {
-  try {
-    const raw = localStorage.getItem(DETECTIVE_STORAGE_KEY);
-    if (raw) return JSON.parse(raw);
-  } catch {}
-  return { xp: 0, casesSolved: 0, cases: {} };
-}
-
-function saveDetectiveProgress(data) {
-  try { localStorage.setItem(DETECTIVE_STORAGE_KEY, JSON.stringify(data)); } catch {}
-}
-
-function getDetectiveRank(xp) {
-  let rank = DETECTIVE_RANKS[0];
-  for (const r of DETECTIVE_RANKS) {
-    if (xp >= r.xp) rank = r;
-  }
-  return rank;
-}
-
-function getNextRank(xp) {
-  for (const r of DETECTIVE_RANKS) {
-    if (xp < r.xp) return r;
-  }
-  return null;
-}
-
-function rankColor(title) {
-  const map = {
-    'Cadet': '#9e9e9e',
-    'Junior Detective': '#4caf50',
-    'Detective': '#2196f3',
-    'Senior Detective': '#ff9800',
-    'Chief Inspector': '#f44336',
-    'Commissioner': '#9c27b0',
-  };
-  return map[title] || '#9e9e9e';
-}
-
-function rankEmoji(title) {
-  const map = {
-    'Cadet': '\ud83e\ude96',
-    'Junior Detective': '\ud83d\udd0e',
-    'Detective': '\ud83d\udd0d',
-    'Senior Detective': '\u2b50',
-    'Chief Inspector': '\ud83c\udfc5',
-    'Commissioner': '\ud83d\udc51',
-  };
-  return map[title] || '\ud83d\udd0d';
-}
-
-/**
- * Check if a math answer is correct. Supports both numeric and fraction answers.
- */
-function checkDetectiveAnswer(correctAnswer, userAnswer) {
-  const trimmed = String(userAnswer).trim();
-
-  // Exact string match (for fractions like "5/12")
-  if (trimmed === String(correctAnswer)) return true;
-
-  // Numeric comparison with tolerance
-  const numUser = parseFloat(trimmed);
-  const numCorrect = parseFloat(correctAnswer);
-  if (!isNaN(numUser) && !isNaN(numCorrect)) {
-    return Math.abs(numUser - numCorrect) < 0.01;
-  }
-
-  return false;
-}
-
-// ─────────────────────────────────────────────────────
-// Screen: Case Library
-// Shows all cases with status badges.
-// ─────────────────────────────────────────────────────
-function DetectiveCaseLibrary({ progress, cases, allComplete, onSelectCase, onBack }) {
-  return (
-    <div className="app-shell">
-      <div className="card" style={{ maxWidth: 'min(640px, 95vw)', margin: '0 auto' }}>
-        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem', gap: '0.5rem' }}>
-          <button className="back-button" onClick={onBack} aria-label="Go back">← Back</button>
-          <span style={{ flex: 1 }} />
-          <div style={{ fontSize: '0.8rem', color: 'var(--clr-text-soft)', fontWeight: 600 }}>
-            {progress.casesSolved}/{cases.length} solved
-          </div>
-        </div>
-
-        <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-          <div style={{ fontSize: '2.5rem', marginBottom: '0.3rem' }}>{allComplete ? '\ud83c\udfc6' : '\ud83d\uddd1\ufe0f'}</div>
-          <h1 style={{ fontSize: '1.5rem', fontWeight: 800, margin: '0 0 0.3rem', fontFamily: 'var(--font-display)' }}>
-            {allComplete ? 'All Cases Solved!' : 'Detective Case Library'}
-          </h1>
-          <p style={{ fontSize: '0.85rem', color: 'var(--clr-text-soft)', margin: 0 }}>
-            {allComplete
-              ? 'Congratulations! You\'ve cracked every case. Replay any case below.'
-              : `Choose a case to investigate. ${cases.length - progress.casesSolved} remaining.`}
-          </p>
-        </div>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-          {cases.map((caseItem) => {
-            const caseProgress = progress.cases[caseItem.id];
-            const status = caseProgress ? caseProgress.status : 'not_started';
-
-            return (
-              <button key={caseItem.id} onClick={() => onSelectCase(caseItem.id)}
-                aria-label={'Open case: ' + caseItem.title}
-                style={{
-                  display: 'flex', alignItems: 'center', gap: '1rem', padding: '1rem 1.2rem',
-                  borderRadius: 12, border: status === 'solved'
-                    ? '2px solid var(--clr-correct, #4caf50)'
-                    : status === 'in_progress'
-                      ? '2px solid var(--clr-accent)'
-                      : '1.5px solid var(--clr-border)',
-                  background: status === 'solved'
-                    ? 'var(--clr-correct-bg, rgba(76,175,80,0.08))'
-                    : status === 'in_progress'
-                      ? 'var(--clr-accent-soft)'
-                      : 'var(--clr-surface)',
-                  cursor: 'pointer', textAlign: 'left', width: '100%',
-                  transition: 'transform 0.15s, box-shadow 0.15s', color: 'var(--clr-text)',
-                }}
-                onMouseEnter={e => { e.currentTarget.style.transform = 'translateX(4px)'; }}
-                onMouseLeave={e => { e.currentTarget.style.transform = 'translateX(0)'; }}
-              >
-                {/* Difficulty stars */}
-                <div style={{ textAlign: 'center', minWidth: 40, fontSize: '0.8rem' }}>
-                  <div style={{ fontSize: '1.3rem' }}>
-                    {caseItem.difficulty === 1 ? '\ud83d\udfe2' : caseItem.difficulty === 2 ? '\ud83d\udfe1' : '\ud83d\udd34'}
-                  </div>
-                  <div style={{ fontSize: '0.6rem', color: 'var(--clr-text-soft)' }}>
-                    {'\u2605'.repeat(caseItem.difficulty)}{'\u2606'.repeat(3 - caseItem.difficulty)}
-                  </div>
-                </div>
-
-                {/* Case info */}
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: '0.95rem', fontWeight: 700, marginBottom: '0.15rem' }}>
-                    {caseItem.title}
-                  </div>
-                  <div style={{ fontSize: '0.75rem', color: 'var(--clr-text-soft)', lineHeight: 1.4 }}>
-                    {caseItem.description}
-                  </div>
-                </div>
-
-                {/* Status badge */}
-                <div style={{ textAlign: 'right', flexShrink: 0 }}>
-                  {status === 'solved' && (
-                    <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#4caf50', padding: '2px 10px', borderRadius: 999, background: 'rgba(76,175,80,0.15)' }}>
-                      Solved \u2713
-                    </div>
-                  )}
-                  {status === 'in_progress' && (
-                    <div style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--clr-accent)', padding: '2px 10px', borderRadius: 999, background: 'var(--clr-accent-soft)' }}>
-                      Stage {caseProgress.currentStage + 1}/{caseProgress.totalStages}
-                    </div>
-                  )}
-                  {status === 'not_started' && (
-                    <div style={{ fontSize: '1.2rem', opacity: 0.5 }}>
-                      {'\u2192'}
-                    </div>
-                  )}
-                </div>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ─────────────────────────────────────────────────────
-// Screen: Case Investigation View
-// Shows stages one at a time with narrative, math question, and answer input.
-// ─────────────────────────────────────────────────────
-function DetectiveCaseView({ caseData, initialStage, onComplete, onBack }) {
-  const [stageIndex, setStageIndex] = useState(initialStage);
-  const [answer, setAnswer] = useState('');
-  const [feedback, setFeedback] = useState(null);
-  const [revealed, setRevealed] = useState(false);
-  const [completed, setCompleted] = useState(false);
-  const inputRef = useRef(null);
-
-  useEffect(() => { setTimeout(() => inputRef.current?.focus(), 100); }, [stageIndex]);
-
-  const stage = caseData.stages[stageIndex];
-  if (!stage) return null;
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (revealed || !answer.trim()) return;
-
-    const correct = checkDetectiveAnswer(stage.answer, answer);
-    setRevealed(true);
-    setFeedback({ correct, correctAnswer: stage.answer });
-  };
-
-  const handleNext = () => {
-    if (!feedback) return;
-
-    if (feedback.correct) {
-      // Move to next stage or complete
-      if (stageIndex + 1 >= caseData.stages.length) {
-        setCompleted(true);
-        onComplete(caseData.id, true);
-      } else {
-        const nextIdx = stageIndex + 1;
-        setStageIndex(nextIdx);
-        setAnswer('');
-        setFeedback(null);
-        setRevealed(false);
-      }
-    } else {
-      // Wrong answer - allow retry
-      setAnswer('');
-      setFeedback(null);
-      setRevealed(false);
-    }
-  };
-
-  // Keyboard shortcut: Enter to advance after feedback
-  useEffect(() => {
-    if (!revealed) return;
-    const handleKey = (e) => {
-      if (e.key === 'Enter') { e.preventDefault(); handleNext(); }
-    };
-    window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
-  }, [revealed, feedback, stageIndex]);
-
-  if (completed) {
-    return (
-      <div className="app-shell">
-        <div className="card" style={{ maxWidth: 560, margin: '0 auto', textAlign: 'center', padding: '2.5rem 2rem' }}>
-          <div style={{ fontSize: '4rem', marginBottom: '0.5rem' }}>{'\ud83c\udfc6'}</div>
-          <h1 style={{ fontSize: '1.6rem', fontWeight: 800, fontFamily: 'var(--font-display)', marginBottom: '0.5rem' }}>
-            Case Solved!
-          </h1>
-          <p style={{ fontSize: '1rem', color: 'var(--clr-text-soft)', marginBottom: '1.5rem', lineHeight: 1.6 }}>
-            Excellent detective work! You cracked <strong>{caseData.title}</strong>!
-            <br />+{caseData.xpReward} XP earned!
-          </p>
-          <button onClick={onBack}
-            style={{
-              padding: '0.8rem 2rem', borderRadius: 12, border: 'none',
-              background: 'linear-gradient(135deg, #1a237e, #283593)',
-              color: '#fff', fontWeight: 700, fontSize: '1rem', cursor: 'pointer',
-              boxShadow: '0 4px 16px rgba(232,134,74,0.3)',
-            }}
-          >
-            Back to Case Library
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  const stageLabel = stageIndex === 0 ? 'Briefing' : `Stage ${stageIndex + 1}`;
-
-  return (
-    <div className="app-shell">
-      <div className="card" style={{ maxWidth: 'min(600px, 95vw)', margin: '0 auto' }}>
-        <button className="back-button" onClick={onBack} style={{ marginBottom: '0.8rem' }}>← Cases</button>
-
-        {/* Progress indicator */}
-        <div style={{ display: 'flex', gap: 6, marginBottom: '1rem', justifyContent: 'center' }}>
-          {caseData.stages.map((_, i) => (
-            <div key={i} style={{
-              height: 4, flex: 1, maxWidth: 80, borderRadius: 2,
-              background: i < stageIndex ? '#4caf50' : i === stageIndex ? 'var(--clr-accent)' : 'var(--clr-border)',
-              transition: 'background 0.3s',
-            }} />
-          ))}
-        </div>
-
-        {/* Stage header */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
-          <span style={{
-            padding: '3px 10px', borderRadius: 999, fontSize: '0.72rem', fontWeight: 700,
-            background: 'var(--clr-accent-soft)', color: 'var(--clr-accent)',
-          }}>
-            {stageLabel}
-          </span>
-          <span style={{ fontSize: '0.75rem', color: 'var(--clr-text-soft)', fontWeight: 600 }}>
-            {stageIndex + 1} of {caseData.stages.length}
-          </span>
-        </div>
-
-        {/* Narrative */}
-        <div style={{
-          background: 'var(--clr-surface)', borderRadius: 12, padding: '1rem 1.2rem',
-          marginBottom: '1.2rem', border: '1.5px solid var(--clr-border)',
-          fontSize: '0.92rem', lineHeight: 1.6, color: 'var(--clr-text)',
-        }}>
-          <div style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--clr-text-soft)', marginBottom: '0.4rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-            {'\ud83d\udcdc'} Investigation Notes
-          </div>
-          {stage.narrative}
-        </div>
-
-        {/* Question */}
-        <div style={{
-          textAlign: 'center', padding: '1rem', marginBottom: '1rem',
-          borderRadius: 12, background: 'var(--clr-bg)', border: '1.5px solid var(--clr-accent)',
-        }}>
-          <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--clr-accent)', marginBottom: '0.4rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-            {'\ud83d\udd0d'} Solve This
-          </div>
-          <div style={{ fontSize: '1.1rem', fontWeight: 700, lineHeight: 1.4 }}>
-            {stage.question}
-          </div>
-        </div>
-
-        {/* Answer input */}
-        {!revealed ? (
-          <form onSubmit={handleSubmit} style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
-            <input ref={inputRef} type="text" value={answer} onChange={(e) => setAnswer(e.target.value)}
-              placeholder="Your answer..."
-              style={{
-                flex: 1, maxWidth: 200, padding: '0.7rem 1rem', borderRadius: 10,
-                border: '2px solid var(--clr-border)', background: 'var(--clr-input)',
-                color: 'var(--clr-text)', fontSize: '1.1rem', textAlign: 'center', fontWeight: 600,
-                outline: 'none',
-              }}
-              onFocus={(e) => e.target.style.borderColor = 'var(--clr-accent)'}
-              onBlur={(e) => e.target.style.borderColor = 'var(--clr-border)'}
-            />
-            <button type="submit" disabled={!answer.trim()}
-              style={{
-                padding: '0.7rem 1.5rem', borderRadius: 10, border: 'none',
-                background: 'linear-gradient(135deg, #1a237e, #283593)',
-                color: '#fff', fontWeight: 700, fontSize: '1rem', cursor: answer.trim() ? 'pointer' : 'not-allowed',
-                opacity: answer.trim() ? 1 : 0.5,
-              }}
-            >
-              Submit Evidence
-            </button>
-          </form>
-        ) : (
-          /* Feedback */
-          <div style={{
-            textAlign: 'center', padding: '1rem', borderRadius: 12,
-            background: feedback && feedback.correct ? 'var(--clr-correct-bg, rgba(76,175,80,0.12))' : 'var(--clr-wrong-bg, rgba(224,90,74,0.12))',
-            border: feedback && feedback.correct ? '2px solid var(--clr-correct, #4caf50)' : '2px solid var(--clr-wrong, #e05a4a)',
-          }}>
-            <div style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.3rem',
-              color: feedback && feedback.correct ? 'var(--clr-correct, #4caf50)' : 'var(--clr-wrong, #e05a4a)' }}>
-              {feedback && feedback.correct ? '\u2713 Correct!' : '\u2717 Not quite'}
-            </div>
-            {!feedback.correct && (
-              <div style={{ fontSize: '0.85rem', color: 'var(--clr-text-soft)', marginBottom: '0.5rem' }}>
-                The correct answer was: <strong>{feedback && feedback.correctAnswer}</strong>
-              </div>
-            )}
-            {feedback && feedback.correct && stageIndex < caseData.stages.length - 1 && (
-              <div style={{ fontSize: '0.85rem', color: 'var(--clr-text-soft)', marginBottom: '0.5rem' }}>
-                On to the next stage!
-              </div>
-            )}
-            <button onClick={handleNext}
-              style={{
-                marginTop: '0.5rem', padding: '0.5rem 1.5rem', borderRadius: 8,
-                border: 'none', background: feedback && feedback.correct ? '#4caf50' : '#e05a4a',
-                color: '#fff', fontWeight: 600, cursor: 'pointer', fontSize: '0.9rem',
-              }}
-            >
-              {feedback && feedback.correct
-                ? (stageIndex + 1 >= caseData.stages.length ? 'Complete Case' : 'Next Stage')
-                : 'Try Again'}
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-// ─────────────────────────────────────────────────────
-// Main MathDetectiveApp — Routes between Dashboard, CaseLibrary, and CaseView
-// ─────────────────────────────────────────────────────
-function MathDetectiveApp({ onBack }) {
-  const [progress, setProgress] = useState(loadDetectiveProgress);
-  const [screen, setScreen] = useState('dashboard'); // 'dashboard' | 'library' | 'case'
-  const [activeCaseId, setActiveCaseId] = useState(null);
-
-  const rank = getDetectiveRank(progress.xp);
-  const nextRank = getNextRank(progress.xp);
-  const xpToNext = nextRank ? nextRank.xp - progress.xp : 0;
-  const xpProgressPct = nextRank
-    ? Math.min(100, Math.round(((progress.xp - rank.xp) / (nextRank.xp - rank.xp)) * 100))
-    : 100;
-
-  // Determine the right screen to show based on progress state
-  useEffect(() => {
-    const unfinishedCase = Object.entries(progress.cases).find(([, p]) => p.status === 'in_progress');
-    const hasAnyCaseStarted = Object.keys(progress.cases).length > 0;
-    const allComplete = hasAnyCaseStarted && DETECTIVE_CASES.every(c => progress.cases[c.id]?.status === 'solved');
-
-    if (unfinishedCase) {
-      // Has unfinished case → open it directly
-      setActiveCaseId(unfinishedCase[0]);
-      setScreen('case');
-    } else if (allComplete || !hasAnyCaseStarted) {
-      // All complete OR never started → show library
-      setScreen('library');
-    } else {
-      setScreen('library');
-    }
-  }, []); // Run once on mount
-
-  const handleSelectCase = (caseId) => {
-    setActiveCaseId(caseId);
-    setScreen('case');
-  };
-
-  const handleCaseComplete = (caseId, solved) => {
-    const caseData = DETECTIVE_CASES.find(c => c.id === caseId);
-    if (!caseData) return;
-
-    const updated = { ...progress };
-    if (!updated.cases[caseId]) {
-      updated.cases[caseId] = { status: 'solved', currentStage: caseData.stages.length, totalStages: caseData.stages.length };
-    } else {
-      updated.cases[caseId] = { ...updated.cases[caseId], status: 'solved', currentStage: caseData.stages.length };
-    }
-    updated.xp += caseData.xpReward;
-    updated.casesSolved = Object.values(updated.cases).filter(c => c.status === 'solved').length;
-    saveDetectiveProgress(updated);
-    setProgress(updated);
-    // Stay on case view to show the completion screen
-  };
-
-  const handleBackFromCase = () => {
-    const updated = loadDetectiveProgress();
-    setProgress(updated);
-    setScreen('library');
-    setActiveCaseId(null);
-  };
-
-  const handleBackFromLibrary = () => {
-    setScreen('dashboard');
-  };
-
-  const handleCTA = () => {
-    if (unfinishedCase) {
-      setActiveCaseId(unfinishedCase[0]);
-      setScreen('case');
-    } else {
-      setScreen('library');
-    }
-  };
-
-  const handleReset = () => {
-    if (window.confirm('Reset all detective progress? This cannot be undone and clears all solved cases.')) {
-      const reset = { xp: 0, casesSolved: 0, cases: {} };
-      saveDetectiveProgress(reset);
-      setProgress(reset);
-      setScreen('library');
-      setActiveCaseId(null);
-    }
-  };
-
-  const rankC = rankColor(rank.title);
-  const rankE = rankEmoji(rank.title);
-
-  // ═══════════════════════════════════════
-  // SCREEN: Detective Case View
-  // ═══════════════════════════════════════
-  if (screen === 'case' && activeCaseId) {
-    const caseData = DETECTIVE_CASES.find(c => c.id === activeCaseId);
-    if (!caseData) { setScreen('library'); return null; }
-
-    const caseProgress = progress.cases[activeCaseId];
-    const initialStage = caseProgress && caseProgress.status === 'in_progress'
-      ? Math.min(caseProgress.currentStage || 0, caseData.stages.length - 1)
-      : 0;
-
-    return (
-      <DetectiveCaseView
-        caseData={caseData}
-        initialStage={initialStage}
-        onComplete={handleCaseComplete}
-        onBack={handleBackFromCase}
-      />
-    );
-  }
-
-  // ═══════════════════════════════════════
-  // SCREEN: Case Library
-  // ═══════════════════════════════════════
-  if (screen === 'library') {
-    const hasAnyStarted = Object.keys(progress.cases).length > 0;
-    const allComplete = hasAnyStarted && DETECTIVE_CASES.every(c => progress.cases[c.id]?.status === 'solved');
-    return (
-      <DetectiveCaseLibrary
-        progress={progress}
-        cases={DETECTIVE_CASES}
-        allComplete={allComplete}
-        onSelectCase={handleSelectCase}
-        onBack={handleBackFromLibrary}
-      />
-    );
-  }
-
-  // ═══════════════════════════════════════
-  // SCREEN: Dashboard
-  // ═══════════════════════════════════════
-  const hasAnyStarted = Object.keys(progress.cases).length > 0;
-  const allComplete = hasAnyStarted && DETECTIVE_CASES.every(c => progress.cases[c.id]?.status === 'solved');
-  const unfinishedCase = Object.entries(progress.cases).find(([, p]) => p.status === 'in_progress');
-
-  return (
-    <div className="app-shell">
-      <div className="card" style={{ maxWidth: 'min(600px, 95vw)', margin: '0 auto' }}>
-        <button className="back-button" onClick={onBack} style={{ alignSelf: 'flex-start', marginBottom: '1rem' }}>← Home</button>
-
-        {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-          <div style={{ fontSize: '3.5rem', marginBottom: '0.5rem' }}>{'\ud83d\udd0d'}</div>
-          <h1 style={{ fontSize: '1.8rem', fontWeight: 800, margin: '0 0 0.3rem', fontFamily: 'var(--font-display)' }}>
-            Math Detective Agency
-          </h1>
-          <p style={{ fontSize: '0.95rem', color: 'var(--clr-text-soft)', margin: 0 }}>
-            Solve mysteries using mathematics
-          </p>
-        </div>
-
-        {/* Rank & XP Card */}
-        <div style={{
-          background: 'var(--clr-surface)', borderRadius: 16, padding: '1.2rem 1.5rem',
-          marginBottom: '1.2rem', border: '1.5px solid var(--clr-border)',
-          display: 'flex', alignItems: 'center', gap: '1rem',
-        }}>
-          <div style={{
-            fontSize: '2.5rem', width: 56, height: 56, borderRadius: '50%',
-            background: rankC + '20', border: '3px solid ' + rankC,
-            display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-          }}>
-            {rankE}
-          </div>
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ fontSize: '0.75rem', color: 'var(--clr-text-soft)', fontWeight: 600, marginBottom: 1 }}>
-              DETECTIVE RANK
-            </div>
-            <div style={{ fontSize: '1.15rem', fontWeight: 700, color: rankC, marginBottom: '0.3rem' }}>
-              {rank.title}
-            </div>
-            {nextRank && (
-              <>
-                <div style={{ height: 6, borderRadius: 3, background: 'var(--clr-border)', position: 'relative', overflow: 'hidden', marginBottom: '0.2rem' }}>
-                  <div style={{ height: '100%', borderRadius: 3, width: xpProgressPct + '%', background: 'linear-gradient(90deg, ' + rankC + ', ' + rankColor(nextRank.title) + ')', transition: 'width 0.5s ease' }} />
-                </div>
-                <div style={{ fontSize: '0.72rem', color: 'var(--clr-text-soft)' }}>
-                  {xpToNext} XP to {nextRank.title}
-                </div>
-              </>
-            )}
-            {!nextRank && (
-              <div style={{ fontSize: '0.78rem', color: '#ff9800', fontWeight: 600 }}>
-                Maximum rank achieved! {'\u2605'}
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Stats Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.8rem', marginBottom: '1.5rem' }}>
-          <div style={{ background: 'var(--clr-surface)', borderRadius: 12, padding: '1rem', textAlign: 'center', border: '1.5px solid var(--clr-border)' }}>
-            <div style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--clr-text)', marginBottom: '0.2rem' }}>{progress.casesSolved}</div>
-            <div style={{ fontSize: '0.72rem', color: 'var(--clr-text-soft)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Cases Solved</div>
-          </div>
-          <div style={{ background: 'var(--clr-surface)', borderRadius: 12, padding: '1rem', textAlign: 'center', border: '1.5px solid var(--clr-border)' }}>
-            <div style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--clr-accent)', marginBottom: '0.2rem' }}>{progress.xp}</div>
-            <div style={{ fontSize: '0.72rem', color: 'var(--clr-text-soft)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>XP Earned</div>
-          </div>
-        </div>
-
-        {/* CTA Button — behavior depends on state */}
-        <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-          <button onClick={handleCTA}
-            aria-label={unfinishedCase ? 'Continue current case' : allComplete ? 'View completed cases' : 'Start new case'}
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.6rem',
-              padding: '0.9rem 2rem', borderRadius: 14, border: 'none',
-              background: 'linear-gradient(135deg, #1a237e, #283593)',
-              color: '#fff', fontWeight: 700, fontSize: '1.05rem',
-              cursor: 'pointer', boxShadow: '0 4px 16px rgba(232,134,74,0.3)',
-              transition: 'transform 0.15s, box-shadow 0.15s',
-            }}
-            onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.03)'; e.currentTarget.style.boxShadow = '0 6px 24px rgba(232,134,74,0.4)'; }}
-            onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(232,134,74,0.3)'; }}
-          >
-            <span style={{ fontSize: '1.3rem' }}>
-              {unfinishedCase ? '\ud83d\udd0d' : allComplete ? '\ud83c\udfc6' : '\ud83d\uddd1\ufe0f'}
-            </span>
-            {unfinishedCase ? 'Continue Investigation' : allComplete ? 'View Completed Cases' : 'Start your first case'}
-          </button>
-        </div>
-
-        {/* Case Files preview */}
-        <div style={{
-          background: 'var(--clr-surface)', borderRadius: 12, padding: '1rem 1.2rem',
-          border: '1.5px solid var(--clr-border)',
-        }}>
-          <div style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--clr-text-soft)', marginBottom: '0.6rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-            Case Files — {DETECTIVE_CASES.length} total
-          </div>
-          {!hasAnyStarted ? (
-            <p style={{ fontSize: '0.9rem', color: 'var(--clr-text-soft)', margin: 0, lineHeight: 1.5 }}>
-              No cases yet. Click <strong>Start your first case</strong> to browse the case library and begin your first mystery!
-            </p>
-          ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-              {DETECTIVE_CASES.slice(0, 4).map(c => {
-                const cp = progress.cases[c.id];
-                const status = cp ? cp.status : 'not_started';
-                return (
-                  <div key={c.id} style={{
-                    display: 'flex', alignItems: 'center', gap: '0.5rem',
-                    padding: '0.5rem 0.7rem', borderRadius: 8,
-                    background: status === 'solved' ? 'rgba(76,175,80,0.08)' : status === 'in_progress' ? 'var(--clr-accent-soft)' : 'transparent',
-                    fontSize: '0.85rem',
-                  }}>
-                    <span>{status === 'solved' ? '\u2713' : status === 'in_progress' ? '\u25b6' : '\u25cb'}</span>
-                    <span style={{ flex: 1, fontWeight: 600, color: 'var(--clr-text)' }}>{c.title}</span>
-                    <span style={{ fontSize: '0.7rem', color: 'var(--clr-text-soft)' }}>
-                      {status === 'solved' ? 'Solved' : status === 'in_progress' ? 'In Progress' : 'Open'}
-                    </span>
-                  </div>
-                );
-              })}
-              {DETECTIVE_CASES.length > 4 && (
-                <div style={{ textAlign: 'center', fontSize: '0.8rem', color: 'var(--clr-text-soft)' }}>
-                  +{DETECTIVE_CASES.length - 4} more cases
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-
-        {/* Reset */}
-        <div style={{ textAlign: 'center', marginTop: '1rem' }}>
-          <button onClick={handleReset} style={{
-            background: 'none', border: 'none', color: 'var(--clr-text-soft)',
-            fontSize: '0.72rem', cursor: 'pointer', textDecoration: 'underline', opacity: 0.5,
-          }}>
-            Reset all progress
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function Home({ onSelect }) {
   // Special featured apps (shown in highlighted first row)
   const featuredApps = [
@@ -37288,7 +36088,6 @@ function Home({ onSelect }) {
 
   // All regular quiz apps sorted alphabetically by name
   const regularApps = [
-    { key: 'mathdetective', name: 'Math Detective Agency', subtitle: 'Solve mysteries using mathematics', color: 'featured' },
     { key: 'addition', name: 'Addition', subtitle: '20-question addition practice', color: 'blue' },
     { key: 'angles', name: 'Angles', subtitle: 'Lines, points, parallel lines', color: 'green' },
     { key: 'basicarith', name: 'Arithmetic', subtitle: '+, −, ×, ÷ with positive & negative', color: 'purple' },
@@ -37455,55 +36254,6 @@ function Home({ onSelect }) {
           </div>}
         </div>
       </div>
-
-      {/* Math Detective Agency — featured detective-themed entry point */}
-      <button
-        onClick={() => onSelect('mathdetective')}
-        style={{
-          display: 'flex', alignItems: 'center', gap: '14px', width: '100%',
-          maxWidth: '480px', margin: '0 auto 20px', padding: '12px 18px',
-          borderRadius: '14px', border: '2px solid var(--clr-accent)',
-          background: 'linear-gradient(135deg, rgba(232,134,74,0.12) 0%, rgba(232,134,74,0.04) 100%)',
-          color: 'var(--clr-text)', cursor: 'pointer',
-          boxShadow: '0 2px 12px rgba(232,134,74,0.15)',
-          transition: 'transform 0.2s, box-shadow 0.2s, border-color 0.2s',
-          fontFamily: 'var(--font-body)', fontSize: 'inherit', textAlign: 'left',
-          lineHeight: 'inherit',
-        }}
-        onMouseEnter={e => {
-          e.currentTarget.style.transform = 'translateY(-2px)'
-          e.currentTarget.style.boxShadow = '0 6px 24px rgba(232,134,74,0.25)'
-          e.currentTarget.style.borderColor = '#d4733a'
-        }}
-        onMouseLeave={e => {
-          e.currentTarget.style.transform = 'translateY(0)'
-          e.currentTarget.style.boxShadow = '0 2px 12px rgba(232,134,74,0.15)'
-          e.currentTarget.style.borderColor = 'var(--clr-accent)'
-        }}
-      >
-        <div style={{
-          width: '48px', height: '48px', borderRadius: '12px',
-          background: 'linear-gradient(135deg, var(--clr-accent) 0%, #d4733a 100%)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: '1.6rem', flexShrink: 0,
-          boxShadow: '0 3px 10px rgba(232,134,74,0.3)',
-        }}>
-          🔍
-        </div>
-        <div style={{ flex: 1 }}>
-          <div style={{ fontWeight: 700, fontSize: '0.95rem', marginBottom: '2px', color: 'var(--clr-accent)' }}>
-            Math Detective Agency
-          </div>
-          <div style={{ fontSize: '0.8rem', color: 'var(--clr-text-soft)', lineHeight: 1.4 }}>
-            Solve mysteries using mathematics
-          </div>
-        </div>
-        <div style={{ fontSize: '1.2rem', color: 'var(--clr-accent)', opacity: 0.6, flexShrink: 0 }}>
-          →
-        </div>
-      </button>
-
-
       <div className="search-bar-row">
         <input
           className="search-bar"
@@ -43033,7 +41783,7 @@ function GuessNumberApp({ onBack }) {
   return (
     <>
       <div className="header-row">
-        <button className="back-button" onClick={onBack} aria-label="Go back">← Home</button>
+        <button className="back-button" onClick={onBack}>← Home</button>
       </div>
       <h1>Guess the Number</h1>
       <p className="subtitle">Think of a number from 0 to 31 — I'll find it!</p>
@@ -43450,7 +42200,7 @@ function RandomMixApp({ onBack }) {
   if (phase === 'setup') {
     return (
       <div className="app-card" style={{ maxWidth: 520, margin: '0 auto' }}>
-        <button className="back-button" onClick={onBack} aria-label="Go back">← Back</button>
+        <button className="back-button" onClick={onBack}>← Back</button>
         <h2 style={{ margin: '0.5rem 0' }}>Random Mix</h2>
         <p style={{ color: 'var(--color-text-dim)', margin: '0.3rem 0 1rem' }}>
           Adaptive cross-topic quiz. Questions come from random topics and difficulty adjusts to your level.
@@ -43481,7 +42231,7 @@ function RandomMixApp({ onBack }) {
     const topicEntries = Object.values(topicStats).sort((a, b) => b.total - a.total)
     return (
       <div className="app-card" style={{ maxWidth: 620, margin: '0 auto' }}>
-        <button className="back-button" onClick={onBack} aria-label="Go back">← Back</button>
+        <button className="back-button" onClick={onBack}>← Back</button>
         <h2>Random Mix — Results</h2>
         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', margin: '1rem 0' }}>
           <div className="stat-pill">{score}/{totalQuestions} correct ({pct}%)</div>
@@ -43516,7 +42266,7 @@ function RandomMixApp({ onBack }) {
   const diff = currentDifficulty()
   return (
     <div className="app-card" style={{ maxWidth: 620, margin: '0 auto' }}>
-      <button className="back-button" onClick={onBack} aria-label="Go back">← Back</button>
+      <button className="back-button" onClick={onBack}>← Back</button>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '0.5rem' }}>
         <h2 style={{ margin: 0, fontSize: '1.15rem' }}>Random Mix</h2>
         <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
@@ -50810,7 +49560,7 @@ function QuizLayout({ title, subtitle, onBack, children, timer }) {
   return (
     <>
       <div className="header-row">
-        <button className="back-button" onClick={onBack} aria-label="Go back">← Home</button>
+        <button className="back-button" onClick={onBack}>← Home</button>
         {timer && <div className="timer-pill">{timer.elapsed}s</div>}
       </div>
       <h1>{title}</h1>

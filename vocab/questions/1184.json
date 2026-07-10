@@ -1,0 +1,15 @@
+{
+  "id": 1184,
+  "word": "Whet",
+  "question": "Whet",
+  "options": [
+    "Aggressively self-assured or self-important",
+    "A sudden desire or change of mind",
+    "To sharpen or stimulate interest",
+    "Adventurous or daring action"
+  ],
+  "answerOption": "C",
+  "answerText": "To sharpen or stimulate interest",
+  "difficulty": "medium",
+  "sourceFile": "1184.json"
+}

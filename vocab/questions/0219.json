@@ -1,0 +1,15 @@
+{
+  "id": 219,
+  "word": "Suffer",
+  "question": "Suffer",
+  "options": [
+    "Reaching a high or the highest degree",
+    "Unwilling to give or share; unkind",
+    "In a state of great discomfort or unhappiness",
+    "To experience something bad or unpleasant"
+  ],
+  "answerOption": "D",
+  "answerText": "To experience something bad or unpleasant",
+  "difficulty": "easy",
+  "sourceFile": "0219.json"
+}

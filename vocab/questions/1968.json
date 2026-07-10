@@ -1,0 +1,15 @@
+{
+  "id": 1968,
+  "word": "Outlawed",
+  "question": "Outlawed",
+  "options": [
+    "The action of abandoning a person",
+    "Having great energy or enthusiasm",
+    "Scheming in a manipulative way",
+    "Declared illegal"
+  ],
+  "answerOption": "D",
+  "answerText": "Declared illegal",
+  "difficulty": "medium",
+  "sourceFile": "1968.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 575,
+  "question": "What is the chemical formula of sulfuric acid?",
+  "options": [
+    "HCl",
+    "H2SO4",
+    "HNO3",
+    "H2CO3"
+  ],
+  "answerOption": "B",
+  "answerText": "H2SO4",
+  "genre": "mixed",
+  "sourceFile": "0575.json"
+}

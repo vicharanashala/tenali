@@ -1,0 +1,15 @@
+{
+  "id": 161,
+  "word": "Blame",
+  "question": "Blame",
+  "options": [
+    "To meet the expectations of someone",
+    "Remaining true to a person or belief",
+    "Not mixed with anything else",
+    "To assign responsibility for a fault"
+  ],
+  "answerOption": "D",
+  "answerText": "To assign responsibility for a fault",
+  "difficulty": "easy",
+  "sourceFile": "0161.json"
+}

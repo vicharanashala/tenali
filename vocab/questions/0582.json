@@ -1,0 +1,15 @@
+{
+  "id": 582,
+  "word": "Ambitious",
+  "question": "Ambitious",
+  "options": [
+    "Having elegance of movement",
+    "To cause liquid to scatter in drops",
+    "Completely different in every way",
+    "Having a strong desire for success"
+  ],
+  "answerOption": "D",
+  "answerText": "Having a strong desire for success",
+  "difficulty": "easy",
+  "sourceFile": "0582.json"
+}

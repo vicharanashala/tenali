@@ -1,0 +1,15 @@
+{
+  "id": 2233,
+  "word": "AEROSPATIAL",
+  "question": "AEROSPATIAL",
+  "options": [
+    "One who adulterates",
+    "Generosity in bestowing money or gifts",
+    "Relating to air and space",
+    "Something reused but still bearing traces of its earlier form"
+  ],
+  "answerOption": "C",
+  "answerText": "Relating to air and space",
+  "difficulty": "hard",
+  "sourceFile": "2233.json"
+}

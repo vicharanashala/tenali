@@ -1,0 +1,15 @@
+{
+  "id": 43,
+  "word": "Calm",
+  "question": "Calm",
+  "options": [
+    "To say what will happen in the future",
+    "Not discovered or known about",
+    "Not showing or feeling nervousness or anger",
+    "Relating to the region near the equator"
+  ],
+  "answerOption": "C",
+  "answerText": "Not showing or feeling nervousness or anger",
+  "difficulty": "easy",
+  "sourceFile": "0043.json"
+}

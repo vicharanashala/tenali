@@ -1,0 +1,15 @@
+{
+  "id": 2312,
+  "word": "Aerobic",
+  "question": "Aerobic",
+  "options": [
+    "A female aeromotor operator",
+    "Deceitful and untrustworthy",
+    "Requiring air to survive",
+    "Splendor and impressiveness of appearance"
+  ],
+  "answerOption": "C",
+  "answerText": "Requiring air to survive",
+  "difficulty": "hard",
+  "sourceFile": "2312.json"
+}

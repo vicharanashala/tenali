@@ -1,0 +1,15 @@
+{
+  "id": 1366,
+  "word": "Deity",
+  "question": "Deity",
+  "options": [
+    "Producing powerful feelings or strong images",
+    "A legal objection to a claim",
+    "Without thought or care for consequences",
+    "A god or goddess"
+  ],
+  "answerOption": "D",
+  "answerText": "A god or goddess",
+  "difficulty": "medium",
+  "sourceFile": "1366.json"
+}

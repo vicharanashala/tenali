@@ -1,0 +1,15 @@
+{
+  "id": 2522,
+  "word": "AEROMANTIST",
+  "question": "AEROMANTIST",
+  "options": [
+    "The quality of being manifest",
+    "A lightweight airmail letter",
+    "One who divines by air",
+    "A fondness for riddles"
+  ],
+  "answerOption": "C",
+  "answerText": "One who divines by air",
+  "difficulty": "hard",
+  "sourceFile": "2522.json"
+}

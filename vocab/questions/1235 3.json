@@ -1,0 +1,15 @@
+{
+  "id": 1235,
+  "word": "Oblige",
+  "question": "Oblige",
+  "options": [
+    "One who destroys or a warship",
+    "Serving to cleanse or purify",
+    "To do a favor or act of kindness",
+    "Relating to the skin or dermis"
+  ],
+  "answerOption": "C",
+  "answerText": "To do a favor or act of kindness",
+  "difficulty": "medium",
+  "sourceFile": "1235.json"
+}

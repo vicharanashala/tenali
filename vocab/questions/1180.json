@@ -1,0 +1,15 @@
+{
+  "id": 1180,
+  "word": "Succinct",
+  "question": "Succinct",
+  "options": [
+    "Strong and healthy; vigorous",
+    "Briefly and clearly expressed",
+    "The state of being calm and in control",
+    "Altered from original meaning"
+  ],
+  "answerOption": "B",
+  "answerText": "Briefly and clearly expressed",
+  "difficulty": "medium",
+  "sourceFile": "1180.json"
+}

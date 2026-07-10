@@ -1,0 +1,15 @@
+{
+  "id": 241,
+  "word": "Dismiss",
+  "question": "Dismiss",
+  "options": [
+    "To send someone away or allow them to leave",
+    "Made or done without method or plan",
+    "Noticeably happy and optimistic",
+    "To dislike something very intensely"
+  ],
+  "answerOption": "A",
+  "answerText": "To send someone away or allow them to leave",
+  "difficulty": "easy",
+  "sourceFile": "0241.json"
+}

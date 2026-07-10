@@ -1,0 +1,15 @@
+{
+  "id": 1983,
+  "word": "Advisable",
+  "question": "Advisable",
+  "options": [
+    "Extremely charming or appealing",
+    "The pursuit of pleasure as the highest good",
+    "Worth doing or recommending",
+    "The gathering of a substance"
+  ],
+  "answerOption": "C",
+  "answerText": "Worth doing or recommending",
+  "difficulty": "hard",
+  "sourceFile": "1983.json"
+}

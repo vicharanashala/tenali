@@ -1,0 +1,15 @@
+{
+  "id": 2255,
+  "word": "AEROTECHNICIAN",
+  "question": "AEROTECHNICIAN",
+  "options": [
+    "Relating to glands near the kidneys",
+    "Showing aeolotropy property",
+    "A short public announcement",
+    "Expert in air technology"
+  ],
+  "answerOption": "D",
+  "answerText": "Expert in air technology",
+  "difficulty": "hard",
+  "sourceFile": "2255.json"
+}

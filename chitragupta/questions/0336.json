@@ -1,0 +1,14 @@
+{
+  "id": 336,
+  "question": "Who wrote 'The Divine Comedy'?",
+  "options": [
+    "Dante Alighieri",
+    "Geoffrey Chaucer",
+    "Cervantes",
+    "Goethe"
+  ],
+  "answerOption": "A",
+  "answerText": "Dante Alighieri",
+  "genre": "general-knowledge",
+  "sourceFile": "0336.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 712,
+  "word": "Opposite",
+  "question": "Opposite",
+  "options": [
+    "Affected by physical illness",
+    "Existing at the beginning",
+    "To open something that is locked",
+    "Completely different in every way"
+  ],
+  "answerOption": "D",
+  "answerText": "Completely different in every way",
+  "difficulty": "easy",
+  "sourceFile": "0712.json"
+}

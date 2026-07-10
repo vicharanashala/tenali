@@ -1,0 +1,15 @@
+{
+  "id": 650,
+  "word": "Eloquent",
+  "question": "Eloquent",
+  "options": [
+    "Characterized by conflict or disorder",
+    "To watch over and direct the work of others",
+    "Fluent and persuasive in speaking",
+    "To ease the grief or distress of someone"
+  ],
+  "answerOption": "C",
+  "answerText": "Fluent and persuasive in speaking",
+  "difficulty": "easy",
+  "sourceFile": "0650.json"
+}

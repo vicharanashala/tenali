@@ -1,0 +1,15 @@
+{
+  "id": 2028,
+  "word": "Hegemony",
+  "question": "Hegemony",
+  "options": [
+    "The action of burning or scorching",
+    "A state of physical or mental weariness",
+    "Leadership or dominance over others",
+    "A secret political group or faction"
+  ],
+  "answerOption": "C",
+  "answerText": "Leadership or dominance over others",
+  "difficulty": "hard",
+  "sourceFile": "2028.json"
+}

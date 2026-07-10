@@ -1,0 +1,15 @@
+{
+  "id": 188,
+  "word": "Hide",
+  "question": "Hide",
+  "options": [
+    "Arranged or planned in a methodical way",
+    "To put or keep out of sight",
+    "Not far away; close",
+    "To extend to full length"
+  ],
+  "answerOption": "B",
+  "answerText": "To put or keep out of sight",
+  "difficulty": "easy",
+  "sourceFile": "0188.json"
+}

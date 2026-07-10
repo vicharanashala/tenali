@@ -1,0 +1,15 @@
+{
+  "id": 646,
+  "word": "Educated",
+  "question": "Educated",
+  "options": [
+    "Resulting in good; favorable",
+    "Having received a good education",
+    "Having full rounded form",
+    "Having a sharp acidic taste"
+  ],
+  "answerOption": "B",
+  "answerText": "Having received a good education",
+  "difficulty": "easy",
+  "sourceFile": "0646.json"
+}

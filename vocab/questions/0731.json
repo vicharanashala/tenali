@@ -1,0 +1,15 @@
+{
+  "id": 731,
+  "word": "Transparent",
+  "question": "Transparent",
+  "options": [
+    "Conforming to what is standard or expected",
+    "To make someone afraid or anxious",
+    "Having a violent or aggressive nature",
+    "Allowing light to pass through clearly"
+  ],
+  "answerOption": "D",
+  "answerText": "Allowing light to pass through clearly",
+  "difficulty": "easy",
+  "sourceFile": "0731.json"
+}

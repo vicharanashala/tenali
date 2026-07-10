@@ -1,0 +1,15 @@
+{
+  "id": 1784,
+  "word": "Perseverance",
+  "question": "Perseverance",
+  "options": [
+    "Friendly and relating to sharing food or drink",
+    "Requiring careful handling",
+    "Persistence in effort",
+    "To obtain something from a source"
+  ],
+  "answerOption": "C",
+  "answerText": "Persistence in effort",
+  "difficulty": "medium",
+  "sourceFile": "1784.json"
+}

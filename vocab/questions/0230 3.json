@@ -1,0 +1,15 @@
+{
+  "id": 230,
+  "word": "Admire",
+  "question": "Admire",
+  "options": [
+    "To regard with respect and warm approval",
+    "To cook food using an oven",
+    "Extremely large or huge",
+    "To be exceptionally good at something"
+  ],
+  "answerOption": "A",
+  "answerText": "To regard with respect and warm approval",
+  "difficulty": "easy",
+  "sourceFile": "0230.json"
+}

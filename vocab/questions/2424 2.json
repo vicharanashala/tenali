@@ -1,0 +1,15 @@
+{
+  "id": 2424,
+  "word": "Denouement",
+  "question": "Denouement",
+  "options": [
+    "A part of a newspaper devoted to fiction",
+    "The final outcome of a complex sequence of events",
+    "The practice of burying someone alive",
+    "A type of dark slate rock"
+  ],
+  "answerOption": "B",
+  "answerText": "The final outcome of a complex sequence of events",
+  "difficulty": "extra-hard",
+  "sourceFile": "2424.json"
+}

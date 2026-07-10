@@ -1,0 +1,15 @@
+{
+  "id": 945,
+  "word": "Ostentatious",
+  "question": "Ostentatious",
+  "options": [
+    "Designed to impress or attract",
+    "To protect from attack or danger",
+    "Strong and difficult to break or damage",
+    "To join or link things together"
+  ],
+  "answerOption": "A",
+  "answerText": "Designed to impress or attract",
+  "difficulty": "easy",
+  "sourceFile": "0945.json"
+}

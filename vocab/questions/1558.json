@@ -1,0 +1,15 @@
+{
+  "id": 1558,
+  "word": "Derogatory",
+  "question": "Derogatory",
+  "options": [
+    "Intense dislike or disgust",
+    "Placing things close together for contrast",
+    "A playing card or die with two spots",
+    "Showing disapproval or disrespect"
+  ],
+  "answerOption": "D",
+  "answerText": "Showing disapproval or disrespect",
+  "difficulty": "medium",
+  "sourceFile": "1558.json"
+}

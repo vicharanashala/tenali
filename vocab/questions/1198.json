@@ -1,0 +1,15 @@
+{
+  "id": 1198,
+  "word": "Nomadic",
+  "question": "Nomadic",
+  "options": [
+    "Reserved, modest, and shy in manner",
+    "Living the life of a wanderer",
+    "Well meaning and kindly toward others",
+    "To move back and forth at a regular speed"
+  ],
+  "answerOption": "B",
+  "answerText": "Living the life of a wanderer",
+  "difficulty": "medium",
+  "sourceFile": "1198.json"
+}

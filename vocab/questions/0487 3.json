@@ -1,0 +1,15 @@
+{
+  "id": 487,
+  "word": "Estimate",
+  "question": "Estimate",
+  "options": [
+    "To stop fighting and give up",
+    "To take aggressive action against something",
+    "To cause someone to believe something",
+    "To roughly calculate the value of something"
+  ],
+  "answerOption": "D",
+  "answerText": "To roughly calculate the value of something",
+  "difficulty": "easy",
+  "sourceFile": "0487.json"
+}

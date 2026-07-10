@@ -1,0 +1,15 @@
+{
+  "id": 2873,
+  "word": "Tour de Force",
+  "question": "Tour de Force",
+  "options": [
+    "The act of advising someone",
+    "A poison from air",
+    "A brilliant display of technique",
+    "The right of patronage of church"
+  ],
+  "answerOption": "C",
+  "answerText": "A brilliant display of technique",
+  "difficulty": "hard",
+  "sourceFile": "2873.json"
+}

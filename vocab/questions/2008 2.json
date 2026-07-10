@@ -1,0 +1,15 @@
+{
+  "id": 2008,
+  "word": "Adyton",
+  "question": "Adyton",
+  "options": [
+    "Relating to space and air",
+    "An indicator of a trend",
+    "Done with deliberation or awareness",
+    "Inner sanctum of Greek temple"
+  ],
+  "answerOption": "D",
+  "answerText": "Inner sanctum of Greek temple",
+  "difficulty": "hard",
+  "sourceFile": "2008.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 238,
+  "question": "Which device converts electrical energy into mechanical energy?",
+  "options": [
+    "Generator",
+    "Motor",
+    "Battery",
+    "Transformer"
+  ],
+  "answerOption": "B",
+  "answerText": "Motor",
+  "genre": "mixed",
+  "sourceFile": "0238.json"
+}

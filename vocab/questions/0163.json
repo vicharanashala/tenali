@@ -1,0 +1,15 @@
+{
+  "id": 163,
+  "word": "Hinder",
+  "question": "Hinder",
+  "options": [
+    "To shine brightly with reflected light",
+    "Not easily bent or moved",
+    "To create difficulties for someone",
+    "To arrange things in a neat pile"
+  ],
+  "answerOption": "C",
+  "answerText": "To create difficulties for someone",
+  "difficulty": "easy",
+  "sourceFile": "0163.json"
+}

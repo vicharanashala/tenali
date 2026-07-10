@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tenali — Puzzle Prerequisite Graph</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dagre/0.8.5/dagre.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #0f1117; color: #e0e0e0; overflow: hidden; }
+
+#toolbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+  background: rgba(15,17,23,0.92); backdrop-filter: blur(8px);
+  border-bottom: 1px solid #2a2d3a;
+  padding: 10px 20px; display: flex; align-items: center; gap: 16px;
+  flex-wrap: wrap;
+}
+#toolbar h1 { font-size: 1.1rem; font-weight: 600; color: #fff; white-space: nowrap; }
+#toolbar .subtitle { font-size: 0.78rem; color: #888; }
+.legend { display: flex; gap: 10px; flex-wrap: wrap; margin-left: auto; }
+.legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.75rem; color: #aaa; }
+.legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+.btn { background: #1e2030; border: 1px solid #3a3d4a; color: #ccc; padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 0.78rem; }
+.btn:hover { background: #2a2d40; color: #fff; }
+
+svg { width: 100vw; height: 100vh; }
+
+.node rect {
+  rx: 8; ry: 8;
+  stroke-width: 2;
+  cursor: pointer;
+  transition: filter 0.2s;
+}
+.node:hover rect { filter: brightness(1.25) drop-shadow(0 0 8px rgba(255,255,255,0.15)); }
+.node text { font-family: 'Segoe UI', system-ui, sans-serif; pointer-events: none; }
+.node-label { font-size: 12px; font-weight: 600; fill: #fff; }
+.node-sub { font-size: 9px; fill: rgba(255,255,255,0.65); }
+
+.edge path {
+  fill: none; stroke: #4a4d5a; stroke-width: 1.8;
+  marker-end: url(#arrowhead);
+}
+.edge.highlighted path { stroke: #ffb300; stroke-width: 2.6; }
+.edge.highlighted-reverse path { stroke: #42a5f5; stroke-width: 2.6; }
+
+.node.dimmed rect { opacity: 0.15; }
+.node.dimmed text { opacity: 0.15; }
+.edge.dimmed path { opacity: 0.06; }
+
+#tooltip {
+  position: fixed; display: none; z-index: 20;
+  background: #1e2030; border: 1px solid #3a3d4a; border-radius: 8px;
+  padding: 10px 14px; max-width: 280px;
+  font-size: 0.8rem; line-height: 1.45; color: #ccc;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  pointer-events: none;
+}
+#tooltip .tt-title { font-weight: 600; color: #fff; margin-bottom: 4px; font-size: 0.88rem; }
+#tooltip .tt-prereqs { color: #ffb300; }
+#tooltip .tt-unlocks { color: #42a5f5; }
+</style>
+</head>
+<body>
+
+<div id="toolbar">
+  <div>
+    <h1>Tenali Prerequisite Graph</h1>
+    <div class="subtitle">Directed arrows show "must know before". Click a node to highlight its dependency chain.</div>
+  </div>
+  <button class="btn" onclick="resetView()">Reset View</button>
+  <button class="btn" onclick="fitAll()">Fit All</button>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#ef5350"></div>Arithmetic</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ab47bc"></div>Algebra</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#42a5f5"></div>Geometry</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#66bb6a"></div>Calculus</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ffa726"></div>Statistics &amp; Probability</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#26c6da"></div>Vectors &amp; Matrices</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#8d6e63"></div>Number Theory</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#78909c"></div>Other</div>
+  </div>
+</div>
+
+<div id="tooltip">
+  <div class="tt-title"></div>
+  <div class="tt-body"></div>
+</div>
+
+<svg id="graph"></svg>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// NODE DATA — every puzzle in Tenali
+// ═══════════════════════════════════════════════════════════════
+const nodes = [
+  // ─── Arithmetic foundations ───
+  { id: 'basicarith',   label: 'Basic Arithmetic',   sub: '+, −, ×  single→4-digit',         cat: 'arith' },
+  { id: 'addition',     label: 'Addition',            sub: 'Multi-digit addition drill',       cat: 'arith' },
+  { id: 'multiply',     label: 'Multiplication',      sub: 'Times tables 2-19',                cat: 'arith' },
+  { id: 'rounding',     label: 'Rounding',            sub: 'D.P., sig. figs, estimation',      cat: 'arith' },
+  { id: 'fractionadd',  label: 'Fractions (Add)',     sub: 'LCD, mixed numbers',               cat: 'arith' },
+  { id: 'percent',      label: 'Percentages',         sub: 'Find %, increase, reverse, compound', cat: 'arith' },
+  { id: 'profitloss',   label: 'Profit & Loss',       sub: 'CP, SP, discounts, markup',        cat: 'arith' },
+  { id: 'ratio',        label: 'Ratio',               sub: 'Simplify, divide, proportion',     cat: 'arith' },
+  { id: 'sdt',          label: 'Speed / Dist / Time', sub: 'd=st, average speed, units',       cat: 'arith' },
+  { id: 'squaring',     label: 'Squaring',            sub: '(a+b)² identity drill',            cat: 'arith' },
+
+  // ─── Number theory ───
+  { id: 'hcflcm',       label: 'HCF & LCM',          sub: 'Euclidean algorithm, word probs',  cat: 'numth' },
+  { id: 'primefactor',  label: 'Prime Factors',       sub: 'Prime decomposition',              cat: 'numth' },
+  { id: 'bases',        label: 'Number Bases',        sub: 'Binary, hex, conversions',         cat: 'numth' },
+
+  // ─── Algebra ───
+  { id: 'indices',      label: 'Indices',             sub: 'Laws, negative, fractional exp',   cat: 'alg' },
+  { id: 'surds',        label: 'Surds',               sub: 'Simplify, add, rationalise',       cat: 'alg' },
+  { id: 'stdform',      label: 'Standard Form',       sub: 'Scientific notation ops',          cat: 'alg' },
+  { id: 'log',          label: 'Logarithms',          sub: 'Evaluate, laws, solve equations',  cat: 'alg' },
+  { id: 'sqrt',         label: 'Square Root',         sub: 'Nearest-integer √ drill',          cat: 'alg' },
+  { id: 'quadratic',    label: 'Quadratic (eval)',    sub: 'y = ax²+bx+c  substitution',      cat: 'alg' },
+  { id: 'funceval',     label: 'Functions',           sub: 'Evaluate f(x), f(x,y), f(x,y,z)', cat: 'alg' },
+  { id: 'polymul',      label: 'Poly Multiply',       sub: 'Expand products of polys',         cat: 'alg' },
+  { id: 'polyfactor',   label: 'Poly Factor',         sub: 'Factorise quadratics',             cat: 'alg' },
+  { id: 'qformula',     label: 'Quadratic Formula',   sub: 'Find roots of ax²+bx+c = 0',      cat: 'alg' },
+  { id: 'simul',        label: 'Simultaneous Eq.',    sub: '2×2 and 3×3 linear systems',       cat: 'alg' },
+  { id: 'ineq',         label: 'Inequalities',        sub: 'Linear & quadratic inequalities',  cat: 'alg' },
+  { id: 'sequences',    label: 'Sequences',           sub: 'AP & GP: nth term, sum',           cat: 'alg' },
+  { id: 'variation',    label: 'Variation',            sub: 'Direct & inverse proportion',      cat: 'alg' },
+  { id: 'binomial',     label: 'Binomial Theorem',    sub: 'nCr, expansion, coefficients',     cat: 'alg' },
+  { id: 'complex',      label: 'Complex Numbers',     sub: 'Add, multiply, modulus',           cat: 'alg' },
+  { id: 'bounds',       label: 'Bounds',              sub: 'Error intervals, propagation',     cat: 'alg' },
+
+  // ─── Geometry ───
+  { id: 'angles',       label: 'Angles',              sub: 'Straight line, point, parallel',   cat: 'geom' },
+  { id: 'triangles',    label: 'Triangles',           sub: 'Angle sum, isosceles, exterior',   cat: 'geom' },
+  { id: 'polygons',     label: 'Polygons',            sub: 'Interior / exterior angles',       cat: 'geom' },
+  { id: 'congruence',   label: 'Congruence',          sub: 'SSS, SAS, ASA conditions',         cat: 'geom' },
+  { id: 'similarity',   label: 'Similarity',          sub: 'Scale factor, area/vol ratios',    cat: 'geom' },
+  { id: 'pythag',       label: "Pythagoras' Theorem", sub: 'Hypotenuse, legs, 3D',             cat: 'geom' },
+  { id: 'circleth',     label: 'Circle Theorems',     sub: 'Semicircle, cyclic quad, tangent', cat: 'geom' },
+  { id: 'mensur',       label: 'Mensuration',         sub: 'Area, perimeter, volume, SA',      cat: 'geom' },
+  { id: 'transform',    label: 'Transformations',     sub: 'Reflect, rotate, translate, enlarge', cat: 'geom' },
+  { id: 'bearings',     label: 'Bearings',            sub: '3-figure bearings, back bearing',  cat: 'geom' },
+  { id: 'coordgeom',    label: 'Coord. Geometry',     sub: 'Midpoint, distance, gradient',     cat: 'geom' },
+  { id: 'lineq',        label: 'Line Equation',       sub: 'y = mx + c from two points',       cat: 'geom' },
+  { id: 'trig',         label: 'Trigonometry',        sub: 'SOH-CAH-TOA, sine/cosine rule',   cat: 'geom' },
+
+  // ─── Calculus ───
+  { id: 'diff',         label: 'Differentiation',     sub: 'Power rule, turning points',       cat: 'calc' },
+  { id: 'integ',        label: 'Integration',         sub: 'Antiderivatives, definite ∫',      cat: 'calc' },
+
+  // ─── Stats & Probability ───
+  { id: 'stats',        label: 'Statistics',           sub: 'Mean, median, mode, range',        cat: 'stats' },
+  { id: 'prob',         label: 'Probability',          sub: 'Simple, combined, conditional',    cat: 'stats' },
+  { id: 'sets',         label: 'Sets',                 sub: 'Union, intersection, Venn',        cat: 'stats' },
+
+  // ─── Vectors & Matrices ───
+  { id: 'vectors',      label: 'Vectors',              sub: 'Add, scale, magnitude',            cat: 'vecmat' },
+  { id: 'dotprod',      label: 'Dot Products',         sub: 'Dot product, matrix multiply',     cat: 'vecmat' },
+  { id: 'matrix',       label: 'Matrices',             sub: 'Add, scalar ×, det, multiply',     cat: 'vecmat' },
+
+  // ─── Other / Non-prerequisite ───
+  { id: 'gk',           label: 'General Knowledge',    sub: 'Multiple-choice trivia',           cat: 'other' },
+  { id: 'vocab',        label: 'Vocabulary',            sub: 'Word definitions',                 cat: 'other' },
+  { id: 'spot',         label: 'Twin Hunt',             sub: 'Find the common object',           cat: 'other' },
+
+  // ─── New puzzles ───
+  { id: 'lineareq',     label: 'Linear Equations',     sub: 'Solve ax + b = c',                 cat: 'alg' },
+  { id: 'decimals',     label: 'Decimals',             sub: '+, −, ×, ÷ with decimal places',   cat: 'arith' },
+  { id: 'permcomb',     label: 'Perm. & Comb.',        sub: 'nPr, nCr, counting principles',    cat: 'stats' },
+  { id: 'limits',       label: 'Limits',               sub: 'Limits at a point, infinity',      cat: 'calc' },
+  { id: 'invtrig',      label: 'Inverse Trig',         sub: 'arcsin, arccos, arctan',           cat: 'geom' },
+  { id: 'remfactor',    label: 'Remainder Theorem',    sub: 'Polynomial division, roots',       cat: 'alg' },
+  { id: 'heron',        label: "Heron's Formula",      sub: 'Area from three sides',            cat: 'geom' },
+  { id: 'shares',       label: 'Shares & Dividends',   sub: 'Stock, dividends, returns',        cat: 'arith' },
+  { id: 'banking',      label: 'Banking (RD)',         sub: 'Recurring deposits, interest',     cat: 'arith' },
+  { id: 'gst',          label: 'GST',                  sub: 'Goods and Services Tax',           cat: 'arith' },
+  { id: 'section',      label: 'Section Formula',      sub: 'Internal & external division',     cat: 'geom' },
+  { id: 'linprog',      label: 'Linear Programming',   sub: 'Optimise linear objective',        cat: 'alg' },
+  { id: 'circmeasure',  label: 'Circular Measure',     sub: 'Radians, arc length, area',        cat: 'geom' },
+  { id: 'conics',       label: 'Conic Sections',       sub: 'Circle, parabola, ellipse',        cat: 'geom' },
+  { id: 'diffeq',       label: 'Differential Eq.',     sub: 'Solve dy/dx = f(x)',               cat: 'calc' },
+
+]
+
+// ═══════════════════════════════════════════════════════════════
+// EDGES — directed: [prerequisite, dependent]
+// "You should know A before attempting B"
+// Only DIRECT prerequisites (no transitive edges)
+// ═══════════════════════════════════════════════════════════════
+const edges = [
+  // ─── Arithmetic chain ───
+  ['basicarith', 'addition'],        // addition is multi-digit basic arith
+  ['basicarith', 'multiply'],        // multiplication needs +, −
+  ['basicarith', 'rounding'],        // rounding needs number sense
+  ['multiply',   'squaring'],        // squaring uses (a+b)² which needs ×
+  ['addition',   'squaring'],        // squaring also needs addition
+  ['multiply',   'fractionadd'],     // fractions need × for LCD
+  ['fractionadd','percent'],         // percentages build on fractions
+  ['percent',    'profitloss'],      // profit/loss is applied percentages
+  ['ratio',      'percent'],         // percentages are ratios out of 100
+  ['basicarith', 'ratio'],           // ratios need ÷ and ×
+  ['multiply',   'sdt'],             // speed=dist/time needs × and ÷
+  ['ratio',      'sdt'],             // SDT is proportional reasoning
+
+  // ─── Number theory ───
+  ['multiply',    'hcflcm'],         // HCF/LCM needs multiplication/division
+  ['hcflcm',      'primefactor'],    // prime factoring builds on factor understanding
+  ['basicarith',  'bases'],          // base conversion needs division, mod
+
+  // ─── Algebra: indices → surds → logs ───
+  ['multiply',   'indices'],         // indices generalise repeated multiplication
+  ['indices',    'surds'],           // surds are fractional indices (a^½)
+  ['indices',    'log'],             // logarithms are inverse of exponentiation
+  ['indices',    'stdform'],         // standard form uses powers of 10
+  ['multiply',   'sqrt'],            // square root needs × understanding
+  ['squaring',   'sqrt'],            // sqrt is inverse of squaring
+
+  // ─── Algebra: polynomials & equations ───
+  ['basicarith', 'funceval'],        // function evaluation is substitution + arithmetic
+  ['multiply',   'quadratic'],       // evaluating ax²+bx+c needs ×
+  ['indices',    'quadratic'],       // quadratic eval uses x²
+  ['multiply',   'polymul'],         // polynomial multiplication extends × to expressions
+  ['indices',    'polymul'],         // poly mul uses exponent rules
+  ['polymul',    'polyfactor'],      // factoring is reverse of expansion
+  ['polyfactor', 'qformula'],        // quadratic formula solves what factoring cannot
+  ['sqrt',       'qformula'],        // formula involves √(discriminant)
+  ['basicarith', 'simul'],           // simultaneous eq. needs +, −, ×
+  ['funceval',   'simul'],           // simul eq. evaluates linear expressions
+  ['basicarith', 'ineq'],            // inequalities need arithmetic
+  ['polyfactor', 'ineq'],            // quadratic inequalities need factoring
+  ['basicarith', 'sequences'],       // sequences need +, ×
+  ['multiply',   'sequences'],       // GP needs multiplication
+  ['indices',    'sequences'],       // GP uses aⁿ notation
+  ['ratio',      'variation'],       // variation is generalised proportion
+  ['indices',    'variation'],       // y = kx² etc. use powers
+  ['indices',    'binomial'],        // binomial expansion uses xⁿ
+  ['polymul',    'binomial'],        // binomial expands products
+  ['sqrt',       'complex'],         // complex numbers arise from √(negative)
+  ['qformula',   'complex'],         // complex roots from quadratic formula
+  ['rounding',   'bounds'],          // bounds come from rounding precision
+
+  // ─── Geometry ───
+  ['basicarith', 'angles'],          // angle arithmetic
+  ['angles',     'triangles'],       // triangle angle sum builds on angle rules
+  ['angles',     'polygons'],        // polygon angles generalise triangle angles
+  ['triangles',  'polygons'],        // polygon = sum of triangles
+  ['triangles',  'congruence'],      // congruence is about identical triangles
+  ['triangles',  'similarity'],      // similarity generalises congruence
+  ['ratio',      'similarity'],      // similarity uses scale factors (ratios)
+  ['triangles',  'pythag'],          // Pythagoras applies to right triangles
+  ['squaring',   'pythag'],          // a² + b² = c² uses squaring
+  ['angles',     'circleth'],        // circle theorems are about angles in circles
+  ['triangles',  'circleth'],        // inscribed triangles in circles
+  ['multiply',   'mensur'],          // area/volume use × extensively
+  ['squaring',   'mensur'],          // πr² uses squaring
+  ['polygons',   'mensur'],          // mensuration of regular polygons
+  ['angles',     'transform'],       // rotations use angle knowledge
+  ['coordgeom',  'transform'],       // transformations operate on coordinates
+  ['angles',     'bearings'],        // bearings are angles from north
+  ['basicarith', 'coordgeom'],       // coordinate geometry needs arithmetic
+  ['pythag',     'coordgeom'],       // distance formula is Pythagoras
+  ['coordgeom',  'lineq'],           // line equation uses gradient from coords
+  ['fractionadd','lineq'],           // slope can be a fraction
+  ['pythag',     'trig'],            // trig builds directly on right triangles
+  ['angles',     'trig'],            // trig is about angle relationships
+  ['ratio',      'trig'],            // sin/cos/tan are ratios
+
+  // ─── Calculus ───
+  ['indices',    'diff'],            // power rule: d/dx xⁿ = nxⁿ⁻¹
+  ['polymul',    'diff'],            // differentiating polynomials
+  ['quadratic',  'diff'],            // turning points of quadratics
+  ['diff',       'integ'],           // integration is reverse differentiation
+
+  // ─── Stats & Probability ───
+  ['basicarith', 'stats'],           // mean, median need +, ÷
+  ['fractionadd','prob'],            // probability uses fractions
+  ['basicarith', 'prob'],            // counting outcomes
+  ['basicarith', 'sets'],            // set cardinality is counting
+
+  // ─── Vectors & Matrices ───
+  ['basicarith', 'vectors'],         // vector addition is component-wise +
+  ['vectors',    'dotprod'],         // dot product extends vector operations
+  ['multiply',   'matrix'],          // matrix multiply needs ×
+  ['basicarith', 'matrix'],          // matrix add needs +
+  ['matrix',     'dotprod'],         // matrix multiplication is in dot products
+
+  // ─── New prerequisite edges ───
+  ['basicarith', 'decimals'],        // decimals extend basic arithmetic
+  ['basicarith', 'lineareq'],        // linear equations need basic arithmetic
+  ['lineareq',   'simul'],           // simultaneous equations extend linear equations
+  ['basicarith', 'shares'],          // shares need basic arithmetic
+  ['basicarith', 'banking'],         // banking needs basic arithmetic
+  ['percent',    'gst'],             // GST is a percentage application
+  ['percent',    'shares'],          // dividends are percentage of shares
+  ['percent',    'banking'],         // interest rates are percentages
+  ['basicarith', 'permcomb'],        // permutations/combinations need counting
+  ['sequences',  'limits'],          // sequence limits
+  ['limits',     'diff'],            // limits are fundamental to differentiation
+  ['trig',       'invtrig'],         // inverse trig extends trigonometry
+  ['trig',       'circmeasure'],     // circular measure builds on angle concepts
+  ['coordgeom',  'section'],         // section formula uses coordinates
+  ['coordgeom',  'conics'],          // conic sections use coordinate geometry
+  ['polyfactor', 'remfactor'],       // remainder theorem uses polynomial factors
+  ['polymul',    'remfactor'],       // remainder theorem relates to polynomial multiplication
+  ['pythag',     'heron'],           // Heron's formula uses triangle properties
+  ['triangles',  'heron'],           // Heron's formula applies to triangles
+  ['mensur',     'heron'],           // Heron's formula is a mensuration formula
+  ['lineareq',   'linprog'],         // linear programming uses linear equations
+  ['ineq',       'linprog'],         // linear programming uses inequalities
+  ['diff',       'diffeq'],          // differential equations use differentiation
+  ['integ',      'diffeq'],          // differential equations use integration
+
+]
+
+// ═══════════════════════════════════════════════════════════════
+// CATEGORY COLOURS
+// ═══════════════════════════════════════════════════════════════
+const catColor = {
+  arith:  '#ef5350',
+  alg:    '#ab47bc',
+  geom:   '#42a5f5',
+  calc:   '#66bb6a',
+  stats:  '#ffa726',
+  vecmat: '#26c6da',
+  numth:  '#8d6e63',
+  other:  '#78909c',
+}
+const catColorDark = {
+  arith:  '#7f1d1d',
+  alg:    '#4a148c',
+  geom:   '#0d47a1',
+  calc:   '#1b5e20',
+  stats:  '#e65100',
+  vecmat: '#006064',
+  numth:  '#3e2723',
+  other:  '#37474f',
+}
+
+// ═══════════════════════════════════════════════════════════════
+// BUILD DAGRE LAYOUT
+// ═══════════════════════════════════════════════════════════════
+const g = new dagre.graphlib.Graph()
+g.setGraph({ rankdir: 'TB', nodesep: 30, ranksep: 60, marginx: 40, marginy: 40 })
+g.setDefaultEdgeLabel(() => ({}))
+
+const nodeMap = {}
+nodes.forEach(n => {
+  nodeMap[n.id] = n
+  g.setNode(n.id, { width: 150, height: 52 })
+})
+edges.forEach(([src, tgt]) => g.setEdge(src, tgt))
+dagre.layout(g)
+
+// ═══════════════════════════════════════════════════════════════
+// RENDER WITH D3
+// ═══════════════════════════════════════════════════════════════
+const svg = d3.select('#graph')
+const defs = svg.append('defs')
+
+// Arrowhead marker
+defs.append('marker')
+  .attr('id', 'arrowhead')
+  .attr('viewBox', '0 0 10 10')
+  .attr('refX', 10).attr('refY', 5)
+  .attr('markerWidth', 8).attr('markerHeight', 8)
+  .attr('orient', 'auto-start-reverse')
+  .append('path')
+  .attr('d', 'M 0 0 L 10 5 L 0 10 Z')
+  .attr('fill', '#4a4d5a')
+
+// Highlighted arrowheads
+defs.append('marker')
+  .attr('id', 'arrowhead-gold')
+  .attr('viewBox', '0 0 10 10')
+  .attr('refX', 10).attr('refY', 5)
+  .attr('markerWidth', 8).attr('markerHeight', 8)
+  .attr('orient', 'auto-start-reverse')
+  .append('path')
+  .attr('d', 'M 0 0 L 10 5 L 0 10 Z')
+  .attr('fill', '#ffb300')
+
+defs.append('marker')
+  .attr('id', 'arrowhead-blue')
+  .attr('viewBox', '0 0 10 10')
+  .attr('refX', 10).attr('refY', 5)
+  .attr('markerWidth', 8).attr('markerHeight', 8)
+  .attr('orient', 'auto-start-reverse')
+  .append('path')
+  .attr('d', 'M 0 0 L 10 5 L 0 10 Z')
+  .attr('fill', '#42a5f5')
+
+const container = svg.append('g').attr('class', 'container')
+
+// Zoom & pan
+const zoom = d3.zoom()
+  .scaleExtent([0.15, 3])
+  .on('zoom', (e) => container.attr('transform', e.transform))
+svg.call(zoom)
+
+// Edge path helper
+function edgePath(e) {
+  const pts = g.edge(e).points
+  if (!pts || pts.length < 2) return ''
+  const line = d3.line().x(d => d.x).y(d => d.y).curve(d3.curveBasis)
+  return line(pts)
+}
+
+// Draw edges
+const edgeGroup = container.append('g').attr('class', 'edges')
+const edgeEls = edgeGroup.selectAll('.edge')
+  .data(g.edges())
+  .join('g')
+  .attr('class', 'edge')
+  .attr('data-src', d => d.v)
+  .attr('data-tgt', d => d.w)
+
+edgeEls.append('path').attr('d', d => edgePath(d))
+
+// Draw nodes
+const nodeGroup = container.append('g').attr('class', 'nodes')
+const nodeEls = nodeGroup.selectAll('.node')
+  .data(g.nodes().map(id => ({ id, ...g.node(id), ...nodeMap[id] })))
+  .join('g')
+  .attr('class', 'node')
+  .attr('data-id', d => d.id)
+  .attr('transform', d => `translate(${d.x - d.width/2}, ${d.y - d.height/2})`)
+
+nodeEls.append('rect')
+  .attr('width', d => d.width)
+  .attr('height', d => d.height)
+  .attr('fill', d => catColorDark[d.cat])
+  .attr('stroke', d => catColor[d.cat])
+
+nodeEls.append('text')
+  .attr('class', 'node-label')
+  .attr('x', d => d.width / 2)
+  .attr('y', 22)
+  .attr('text-anchor', 'middle')
+  .text(d => d.label)
+
+nodeEls.append('text')
+  .attr('class', 'node-sub')
+  .attr('x', d => d.width / 2)
+  .attr('y', 38)
+  .attr('text-anchor', 'middle')
+  .text(d => {
+    const s = d.sub || ''
+    return s.length > 28 ? s.slice(0, 26) + '…' : s
+  })
+
+// ═══════════════════════════════════════════════════════════════
+// INTERACTIVITY: click to highlight prereq chain
+// ═══════════════════════════════════════════════════════════════
+// Build adjacency for traversal
+const predecessors = {}  // who do I depend on?
+const successors = {}    // who depends on me?
+nodes.forEach(n => { predecessors[n.id] = new Set(); successors[n.id] = new Set() })
+edges.forEach(([s, t]) => { predecessors[t].add(s); successors[s].add(t) })
+
+function allAncestors(id) {
+  const visited = new Set()
+  const queue = [id]
+  while (queue.length) {
+    const cur = queue.pop()
+    for (const p of predecessors[cur]) {
+      if (!visited.has(p)) { visited.add(p); queue.push(p) }
+    }
+  }
+  return visited
+}
+function allDescendants(id) {
+  const visited = new Set()
+  const queue = [id]
+  while (queue.length) {
+    const cur = queue.pop()
+    for (const s of successors[cur]) {
+      if (!visited.has(s)) { visited.add(s); queue.push(s) }
+    }
+  }
+  return visited
+}
+
+let selectedNode = null
+
+nodeEls.on('click', function(event, d) {
+  event.stopPropagation()
+  if (selectedNode === d.id) { clearHighlight(); return }
+  selectedNode = d.id
+  const anc = allAncestors(d.id)
+  const desc = allDescendants(d.id)
+  const related = new Set([d.id, ...anc, ...desc])
+
+  // Dim everything first
+  nodeEls.classed('dimmed', dd => !related.has(dd.id))
+  edgeEls.classed('dimmed', true)
+    .classed('highlighted', false)
+    .classed('highlighted-reverse', false)
+  edgeEls.select('path')
+    .attr('marker-end', 'url(#arrowhead)')
+
+  // Highlight ancestor edges (gold)
+  edgeEls.filter(e => anc.has(e.v) && (anc.has(e.w) || e.w === d.id))
+    .classed('dimmed', false)
+    .classed('highlighted', true)
+    .select('path')
+    .attr('marker-end', 'url(#arrowhead-gold)')
+
+  // Highlight descendant edges (blue)
+  edgeEls.filter(e => (desc.has(e.w) && (desc.has(e.v) || e.v === d.id)))
+    .classed('dimmed', false)
+    .classed('highlighted-reverse', true)
+    .select('path')
+    .attr('marker-end', 'url(#arrowhead-blue)')
+})
+
+// Tooltip
+const tooltip = d3.select('#tooltip')
+nodeEls.on('mouseenter', function(event, d) {
+  const prereqs = [...predecessors[d.id]].map(id => nodeMap[id]?.label || id)
+  const unlocks = [...successors[d.id]].map(id => nodeMap[id]?.label || id)
+  let html = ''
+  if (prereqs.length) html += `<div class="tt-prereqs">Prerequisites: ${prereqs.join(', ')}</div>`
+  if (unlocks.length) html += `<div class="tt-unlocks">Unlocks: ${unlocks.join(', ')}</div>`
+  if (!prereqs.length && !unlocks.length) html = '<div style="color:#888">No direct prerequisites or dependents</div>'
+
+  tooltip.select('.tt-title').text(d.label)
+  tooltip.select('.tt-body').html(html)
+  tooltip.style('display', 'block')
+})
+nodeEls.on('mousemove', function(event) {
+  tooltip.style('left', (event.clientX + 14) + 'px').style('top', (event.clientY + 14) + 'px')
+})
+nodeEls.on('mouseleave', function() {
+  tooltip.style('display', 'none')
+})
+
+svg.on('click', () => clearHighlight())
+
+function clearHighlight() {
+  selectedNode = null
+  nodeEls.classed('dimmed', false)
+  edgeEls.classed('dimmed', false).classed('highlighted', false).classed('highlighted-reverse', false)
+  edgeEls.select('path').attr('marker-end', 'url(#arrowhead)')
+}
+
+// ═══════════════════════════════════════════════════════════════
+// FIT / RESET helpers
+// ═══════════════════════════════════════════════════════════════
+function fitAll() {
+  const graph = g.graph()
+  const pad = 80
+  const gW = graph.width + pad * 2
+  const gH = graph.height + pad * 2
+  const vW = window.innerWidth
+  const vH = window.innerHeight - 52
+  const scale = Math.min(vW / gW, vH / gH, 1.5)
+  const tx = (vW - graph.width * scale) / 2
+  const ty = (vH - graph.height * scale) / 2 + 52
+  svg.transition().duration(600).call(
+    zoom.transform,
+    d3.zoomIdentity.translate(tx, ty).scale(scale)
+  )
+}
+function resetView() {
+  clearHighlight()
+  fitAll()
+}
+
+// Initial fit
+fitAll()
+
+// ═══════════════════════════════════════════════════════════════
+// CYCLE CHECK (validation — logged to console)
+// ═══════════════════════════════════════════════════════════════
+function hasCycle() {
+  const visited = new Set(), stack = new Set()
+  function dfs(node) {
+    visited.add(node); stack.add(node)
+    for (const next of (successors[node] || [])) {
+      if (stack.has(next)) return true
+      if (!visited.has(next) && dfs(next)) return true
+    }
+    stack.delete(node); return false
+  }
+  for (const n of nodes) { if (!visited.has(n.id) && dfs(n.id)) return true }
+  return false
+}
+console.log(hasCycle() ? '⚠️ CYCLE DETECTED in prerequisite graph!' : '✅ Graph is a valid DAG (no cycles)')
+console.log(`Nodes: ${nodes.length}, Edges: ${edges.length}`)
+</script>
+</body>
+</html>

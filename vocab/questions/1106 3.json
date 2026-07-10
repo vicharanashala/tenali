@@ -1,0 +1,15 @@
+{
+  "id": 1106,
+  "word": "Blight",
+  "question": "Blight",
+  "options": [
+    "Risky or uncertain",
+    "A thing that spoils or damages something",
+    "Relating to or causing detention",
+    "An instrument for finding something"
+  ],
+  "answerOption": "B",
+  "answerText": "A thing that spoils or damages something",
+  "difficulty": "medium",
+  "sourceFile": "1106.json"
+}

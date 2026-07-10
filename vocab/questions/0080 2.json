@@ -1,0 +1,15 @@
+{
+  "id": 80,
+  "word": "Healthy",
+  "question": "Healthy",
+  "options": [
+    "In good physical condition; not sick",
+    "Full of energy and enthusiasm",
+    "To make a visible sign on something",
+    "To bring or gather things together"
+  ],
+  "answerOption": "A",
+  "answerText": "In good physical condition; not sick",
+  "difficulty": "easy",
+  "sourceFile": "0080.json"
+}

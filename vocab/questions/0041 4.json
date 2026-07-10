@@ -1,0 +1,15 @@
+{
+  "id": 41,
+  "word": "Pretty",
+  "question": "Pretty",
+  "options": [
+    "To combine different things together",
+    "To make available for someone to use",
+    "Attractive in a delicate way",
+    "Easily seen or noticed"
+  ],
+  "answerOption": "C",
+  "answerText": "Attractive in a delicate way",
+  "difficulty": "easy",
+  "sourceFile": "0041.json"
+}

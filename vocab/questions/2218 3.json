@@ -1,0 +1,15 @@
+{
+  "id": 2218,
+  "word": "Aegis",
+  "question": "Aegis",
+  "options": [
+    "The quality of lasting forever",
+    "To reprimand someone firmly",
+    "Relating to the atmosphere",
+    "Sponsorship, support, or auspices"
+  ],
+  "answerOption": "D",
+  "answerText": "Sponsorship, support, or auspices",
+  "difficulty": "hard",
+  "sourceFile": "2218.json"
+}

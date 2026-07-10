@@ -1,0 +1,14 @@
+{
+  "id": 887,
+  "question": "Who wrote 'The Good Earth'?",
+  "options": [
+    "Pearl S. Buck",
+    "John Steinbeck",
+    "Sinclair Lewis",
+    "Willa Cather"
+  ],
+  "answerOption": "A",
+  "answerText": "Pearl S. Buck",
+  "genre": "general-knowledge",
+  "sourceFile": "0887.json"
+}

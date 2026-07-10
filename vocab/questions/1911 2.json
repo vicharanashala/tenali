@@ -1,0 +1,15 @@
+{
+  "id": 1911,
+  "word": "Adornment",
+  "question": "Adornment",
+  "options": [
+    "A genus of spiders in taxonomy",
+    "To alternate between different opinions",
+    "A thing added to make more attractive",
+    "A genus of weasel-like animals"
+  ],
+  "answerOption": "C",
+  "answerText": "A thing added to make more attractive",
+  "difficulty": "hard",
+  "sourceFile": "1911.json"
+}

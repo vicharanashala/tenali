@@ -1,0 +1,15 @@
+{
+  "id": 1227,
+  "word": "Nemesis",
+  "question": "Nemesis",
+  "options": [
+    "An inescapable agent of someone's downfall",
+    "A departure from what is normal or expected",
+    "Similar in kind; related",
+    "Not able to be denied or disputed"
+  ],
+  "answerOption": "A",
+  "answerText": "An inescapable agent of someone's downfall",
+  "difficulty": "hard",
+  "sourceFile": "1227.json"
+}

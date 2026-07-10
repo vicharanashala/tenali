@@ -1,0 +1,15 @@
+{
+  "id": 2261,
+  "word": "AEROTHERAPIST",
+  "question": "AEROTHERAPIST",
+  "options": [
+    "Relating to measuring air",
+    "Intended to teach a moral lesson",
+    "One treating with air",
+    "Public shame or disgrace"
+  ],
+  "answerOption": "C",
+  "answerText": "One treating with air",
+  "difficulty": "hard",
+  "sourceFile": "2261.json"
+}

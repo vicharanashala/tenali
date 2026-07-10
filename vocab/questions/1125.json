@@ -1,0 +1,15 @@
+{
+  "id": 1125,
+  "word": "Havoc",
+  "question": "Havoc",
+  "options": [
+    "Causing confusion or bewilderment",
+    "Widespread destruction or confusion",
+    "Of or relating to the teeth",
+    "Producing powerful feelings or strong images"
+  ],
+  "answerOption": "B",
+  "answerText": "Widespread destruction or confusion",
+  "difficulty": "medium",
+  "sourceFile": "1125.json"
+}

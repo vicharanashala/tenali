@@ -1,0 +1,15 @@
+{
+  "id": 1223,
+  "word": "Quagmire",
+  "question": "Quagmire",
+  "options": [
+    "Corrupt or able to be bribed",
+    "A difficult or complicated situation",
+    "The quality of being destructive",
+    "To shock someone into taking action"
+  ],
+  "answerOption": "B",
+  "answerText": "A difficult or complicated situation",
+  "difficulty": "medium",
+  "sourceFile": "1223.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 322,
+  "question": "Which vitamin deficiency causes rickets?",
+  "options": [
+    "Vitamin A",
+    "Vitamin B12",
+    "Vitamin D",
+    "Vitamin C"
+  ],
+  "answerOption": "C",
+  "answerText": "Vitamin D",
+  "genre": "mixed",
+  "sourceFile": "0322.json"
+}

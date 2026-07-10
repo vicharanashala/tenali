@@ -1,0 +1,15 @@
+{
+  "id": 700,
+  "word": "Initial",
+  "question": "Initial",
+  "options": [
+    "To establish a home in a new place",
+    "Causing laughter or amusement",
+    "Existing at the beginning",
+    "To impart knowledge or skill to someone"
+  ],
+  "answerOption": "C",
+  "answerText": "Existing at the beginning",
+  "difficulty": "easy",
+  "sourceFile": "0700.json"
+}

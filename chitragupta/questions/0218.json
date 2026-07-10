@@ -1,0 +1,14 @@
+{
+  "id": 218,
+  "question": "Who was the first woman to go into space?",
+  "options": [
+    "Kalpana Chawla",
+    "Sally Ride",
+    "Valentina Tereshkova",
+    "Sunita Williams"
+  ],
+  "answerOption": "C",
+  "answerText": "Valentina Tereshkova",
+  "genre": "general-knowledge",
+  "sourceFile": "0218.json"
+}

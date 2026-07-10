@@ -1,0 +1,14 @@
+{
+  "id": 772,
+  "question": "What is the SI unit of magnetic flux?",
+  "options": [
+    "tesla",
+    "weber",
+    "henry",
+    "gauss"
+  ],
+  "answerOption": "B",
+  "answerText": "weber",
+  "genre": "mixed",
+  "sourceFile": "0772.json"
+}

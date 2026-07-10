@@ -1,0 +1,15 @@
+{
+  "id": 139,
+  "word": "Anxious",
+  "question": "Anxious",
+  "options": [
+    "Made up of exactly similar parts",
+    "To live in or occupy a place",
+    "Very small; much smaller than normal",
+    "Feeling worried or nervous about something"
+  ],
+  "answerOption": "D",
+  "answerText": "Feeling worried or nervous about something",
+  "difficulty": "easy",
+  "sourceFile": "0139.json"
+}

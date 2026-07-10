@@ -1,0 +1,15 @@
+{
+  "id": 286,
+  "word": "Compare",
+  "question": "Compare",
+  "options": [
+    "Having the shape of a rectangle",
+    "Able to adjust to new conditions",
+    "To need something as necessary",
+    "To examine similarities and differences"
+  ],
+  "answerOption": "D",
+  "answerText": "To examine similarities and differences",
+  "difficulty": "easy",
+  "sourceFile": "0286.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1459,
+  "word": "Denture",
+  "question": "Denture",
+  "options": [
+    "Moving downward or declining",
+    "Important or significant in effect",
+    "An artificial replacement for teeth",
+    "In a detrimental manner"
+  ],
+  "answerOption": "C",
+  "answerText": "An artificial replacement for teeth",
+  "difficulty": "medium",
+  "sourceFile": "1459.json"
+}

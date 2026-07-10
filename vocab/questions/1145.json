@@ -1,0 +1,15 @@
+{
+  "id": 1145,
+  "word": "Entice",
+  "question": "Entice",
+  "options": [
+    "To do something worthy of reward",
+    "To put an end to a rebellion or disturbance",
+    "To attract by offering pleasure or advantage",
+    "A unit of fineness for yarn"
+  ],
+  "answerOption": "C",
+  "answerText": "To attract by offering pleasure or advantage",
+  "difficulty": "medium",
+  "sourceFile": "1145.json"
+}

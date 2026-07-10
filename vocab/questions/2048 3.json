@@ -1,0 +1,15 @@
+{
+  "id": 2048,
+  "word": "Contrite",
+  "question": "Contrite",
+  "options": [
+    "Something that prevents movement",
+    "Feeling regret and sorrow for wrongdoing",
+    "Not being what it claims to be; false",
+    "The science of extracting and using metals"
+  ],
+  "answerOption": "B",
+  "answerText": "Feeling regret and sorrow for wrongdoing",
+  "difficulty": "hard",
+  "sourceFile": "2048.json"
+}

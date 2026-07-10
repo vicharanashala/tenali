@@ -1,0 +1,15 @@
+{
+  "id": 384,
+  "word": "Drip",
+  "question": "Drip",
+  "options": [
+    "Strikingly unusual or different",
+    "Characterized by constant change and activity",
+    "Restricted within limits",
+    "To let liquid fall in small drops"
+  ],
+  "answerOption": "D",
+  "answerText": "To let liquid fall in small drops",
+  "difficulty": "easy",
+  "sourceFile": "0384.json"
+}

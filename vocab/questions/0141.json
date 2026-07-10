@@ -1,0 +1,15 @@
+{
+  "id": 141,
+  "word": "Glad",
+  "question": "Glad",
+  "options": [
+    "Able to recover quickly from difficulties",
+    "Done of one's own free will",
+    "To write or name the letters of a word",
+    "Feeling pleasure or happiness"
+  ],
+  "answerOption": "D",
+  "answerText": "Feeling pleasure or happiness",
+  "difficulty": "easy",
+  "sourceFile": "0141.json"
+}

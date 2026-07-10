@@ -1,0 +1,15 @@
+{
+  "id": 2067,
+  "word": "Abstruse",
+  "question": "Abstruse",
+  "options": [
+    "A statement or explanation",
+    "A substance that adsorbs",
+    "Difficult to understand; obscure",
+    "The arrival of a notable person"
+  ],
+  "answerOption": "C",
+  "answerText": "Difficult to understand; obscure",
+  "difficulty": "hard",
+  "sourceFile": "2067.json"
+}

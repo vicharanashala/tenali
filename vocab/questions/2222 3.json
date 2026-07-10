@@ -1,0 +1,15 @@
+{
+  "id": 2222,
+  "word": "Aegiswine",
+  "question": "Aegiswine",
+  "options": [
+    "A plant used as herbal medicine",
+    "In the manner of an adverb",
+    "A state of physical or mental weariness",
+    "To make worse by adding inferior matter"
+  ],
+  "answerOption": "A",
+  "answerText": "A plant used as herbal medicine",
+  "difficulty": "hard",
+  "sourceFile": "2222.json"
+}

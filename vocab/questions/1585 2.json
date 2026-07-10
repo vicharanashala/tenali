@@ -1,0 +1,15 @@
+{
+  "id": 1585,
+  "word": "Detection",
+  "question": "Detection",
+  "options": [
+    "The action of discovering something",
+    "A playing card or die with two spots",
+    "Showing resistance to authority",
+    "To accumulate or receive over time"
+  ],
+  "answerOption": "A",
+  "answerText": "The action of discovering something",
+  "difficulty": "medium",
+  "sourceFile": "1585.json"
+}

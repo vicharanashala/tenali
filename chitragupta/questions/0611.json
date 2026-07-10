@@ -1,0 +1,14 @@
+{
+  "id": 611,
+  "question": "Who proposed the quantization of energy leading to quantum theory?",
+  "options": [
+    "Einstein",
+    "Planck",
+    "Bohr",
+    "Heisenberg"
+  ],
+  "answerOption": "B",
+  "answerText": "Planck",
+  "genre": "general-knowledge",
+  "sourceFile": "0611.json"
+}

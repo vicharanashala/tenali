@@ -1,0 +1,32 @@
+/**
+ * GLOBAL STYLES - TENALI PLATFORM
+ *
+ * Minimal global CSS that resets default browser styles and establishes
+ * a baseline for the entire application. Component-specific styles are
+ * defined in individual App.css files within each module.
+ *
+ * Reset Strategy:
+ * - Remove all default margins, padding, and borders
+ * - Apply box-sizing: border-box for predictable layout calculations
+ * - Ensure root element spans full viewport for proper centering
+ *
+ * Philosophy: Keep global styles minimal; defer component styling to
+ * module-specific CSS files for maintainability and modularity.
+ */
+
+/* CSS Reset: Remove default margins/padding from all elements and pseudo-elements */
+*, *::before, *::after {
+  box-sizing: border-box;  /* Include padding/border in width/height calculations */
+  margin: 0;               /* Remove default margins */
+  padding: 0;              /* Remove default padding */
+}
+
+/* Body reset: Remove default body margins */
+body {
+  margin: 0;
+}
+
+/* Root element: Ensure full viewport height for proper app layout centering */
+#root {
+  min-height: 100vh;  /* Minimum height is full viewport */
+}

@@ -1,0 +1,15 @@
+{
+  "id": 45,
+  "word": "Tame",
+  "question": "Tame",
+  "options": [
+    "To go out of or leave a place",
+    "Domesticated and not dangerous to people",
+    "To convey thoughts or feelings in words",
+    "To carefully choose as being the best"
+  ],
+  "answerOption": "B",
+  "answerText": "Domesticated and not dangerous to people",
+  "difficulty": "easy",
+  "sourceFile": "0045.json"
+}

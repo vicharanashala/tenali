@@ -1,0 +1,15 @@
+{
+  "id": 2153,
+  "word": "Aerogram",
+  "question": "Aerogram",
+  "options": [
+    "A member of a Christian sect",
+    "Instrument measuring air properties",
+    "A lightweight airmail letter",
+    "A position requiring little or no work"
+  ],
+  "answerOption": "C",
+  "answerText": "A lightweight airmail letter",
+  "difficulty": "hard",
+  "sourceFile": "2153.json"
+}

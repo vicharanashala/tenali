@@ -1,0 +1,15 @@
+{
+  "id": 561,
+  "word": "Exceed",
+  "question": "Exceed",
+  "options": [
+    "To go beyond the limit of something",
+    "In a state of sleep; not awake",
+    "To find the size or amount of something",
+    "Enough to meet the needs"
+  ],
+  "answerOption": "A",
+  "answerText": "To go beyond the limit of something",
+  "difficulty": "easy",
+  "sourceFile": "0561.json"
+}

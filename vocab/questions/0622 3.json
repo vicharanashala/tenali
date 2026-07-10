@@ -1,0 +1,15 @@
+{
+  "id": 622,
+  "word": "Focused",
+  "question": "Focused",
+  "options": [
+    "To make it easier for someone to do something",
+    "Directing attention or effort at something",
+    "To move forward on hands and knees",
+    "To firmly press something from both sides"
+  ],
+  "answerOption": "B",
+  "answerText": "Directing attention or effort at something",
+  "difficulty": "easy",
+  "sourceFile": "0622.json"
+}

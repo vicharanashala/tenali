@@ -1,0 +1,15 @@
+{
+  "id": 2467,
+  "word": "Aerobics",
+  "question": "Aerobics",
+  "options": [
+    "Physical exercise with air",
+    "Loss of energy or vitality",
+    "Relating to the Aelp mountains",
+    "The action of noticing something"
+  ],
+  "answerOption": "A",
+  "answerText": "Physical exercise with air",
+  "difficulty": "hard",
+  "sourceFile": "2467.json"
+}

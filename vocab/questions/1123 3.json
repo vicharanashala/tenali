@@ -1,0 +1,15 @@
+{
+  "id": 1123,
+  "word": "Empirical",
+  "question": "Empirical",
+  "options": [
+    "The action of despoiling",
+    "An explosion or violent outburst",
+    "Based on observation rather than theory",
+    "A easing of tension between rivals"
+  ],
+  "answerOption": "C",
+  "answerText": "Based on observation rather than theory",
+  "difficulty": "medium",
+  "sourceFile": "1123.json"
+}

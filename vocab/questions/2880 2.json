@@ -1,0 +1,15 @@
+{
+  "id": 2880,
+  "word": "Xerophyte",
+  "question": "Xerophyte",
+  "options": [
+    "A dealer in rare books",
+    "Plural of abusement",
+    "The state of being too much or excessive",
+    "A plant adapted to dry conditions"
+  ],
+  "answerOption": "D",
+  "answerText": "A plant adapted to dry conditions",
+  "difficulty": "extra-hard",
+  "sourceFile": "2880.json"
+}

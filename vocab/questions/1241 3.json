@@ -1,0 +1,15 @@
+{
+  "id": 1241,
+  "word": "Deduct",
+  "question": "Deduct",
+  "options": [
+    "To subtract an amount from a total",
+    "Very great or intense; deep",
+    "Lacking basic necessities or resources",
+    "To remove a monarch from the throne"
+  ],
+  "answerOption": "A",
+  "answerText": "To subtract an amount from a total",
+  "difficulty": "medium",
+  "sourceFile": "1241.json"
+}

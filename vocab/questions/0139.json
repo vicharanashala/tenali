@@ -1,0 +1,15 @@
+{
+  "id": 139,
+  "word": "Anxious",
+  "question": "Anxious",
+  "options": [
+    "Feeling worried or nervous about something",
+    "Bad tempered and unwilling to be friendly",
+    "Producing abundant vegetation or crops",
+    "Sending out light; shining brightly"
+  ],
+  "answerOption": "A",
+  "answerText": "Feeling worried or nervous about something",
+  "difficulty": "easy",
+  "sourceFile": "0139.json"
+}

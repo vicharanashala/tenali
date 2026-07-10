@@ -1,0 +1,15 @@
+{
+  "id": 1355,
+  "word": "Defunct",
+  "question": "Defunct",
+  "options": [
+    "A formal statement made under oath",
+    "Full of incessant activity",
+    "Scheming in a manipulative way",
+    "No longer existing or functioning"
+  ],
+  "answerOption": "D",
+  "answerText": "No longer existing or functioning",
+  "difficulty": "medium",
+  "sourceFile": "1355.json"
+}

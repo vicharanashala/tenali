@@ -1,0 +1,15 @@
+{
+  "id": 2173,
+  "word": "AEROMEDICATE",
+  "question": "AEROMEDICATE",
+  "options": [
+    "A huge and overwhelming force",
+    "Carrying or bearing air",
+    "To treat medical conditions",
+    "The legal process of becoming a parent"
+  ],
+  "answerOption": "C",
+  "answerText": "To treat medical conditions",
+  "difficulty": "hard",
+  "sourceFile": "2173.json"
+}

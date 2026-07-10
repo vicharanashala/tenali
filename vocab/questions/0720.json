@@ -1,0 +1,15 @@
+{
+  "id": 720,
+  "word": "Peripheral",
+  "question": "Peripheral",
+  "options": [
+    "Lasting a considerable time",
+    "Relating to the edge or outer part",
+    "Easily perceived or understood",
+    "Being reserved or timid around other people"
+  ],
+  "answerOption": "B",
+  "answerText": "Relating to the edge or outer part",
+  "difficulty": "easy",
+  "sourceFile": "0720.json"
+}

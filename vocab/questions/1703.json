@@ -1,0 +1,15 @@
+{
+  "id": 1703,
+  "word": "Detestable",
+  "question": "Detestable",
+  "options": [
+    "Characterized by peculiar or unexpected traits",
+    "One who desolates",
+    "Deserving intense dislike",
+    "A feeling of hatred or disgust"
+  ],
+  "answerOption": "C",
+  "answerText": "Deserving intense dislike",
+  "difficulty": "medium",
+  "sourceFile": "1703.json"
+}

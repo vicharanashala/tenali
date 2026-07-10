@@ -1,0 +1,15 @@
+{
+  "id": 2771,
+  "word": "Fatigue",
+  "question": "Fatigue",
+  "options": [
+    "Mental calmness in a difficult situation",
+    "Extreme tiredness or exhaustion",
+    "An airport or air terminal",
+    "A meteorite with iron core"
+  ],
+  "answerOption": "B",
+  "answerText": "Extreme tiredness or exhaustion",
+  "difficulty": "hard",
+  "sourceFile": "2771.json"
+}

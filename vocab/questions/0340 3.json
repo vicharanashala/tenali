@@ -1,0 +1,15 @@
+{
+  "id": 340,
+  "word": "Rescue",
+  "question": "Rescue",
+  "options": [
+    "To apply color to a surface with a brush",
+    "To have as belonging to one; to own",
+    "Having a lighthearted excited feeling",
+    "To save someone from a dangerous situation"
+  ],
+  "answerOption": "D",
+  "answerText": "To save someone from a dangerous situation",
+  "difficulty": "easy",
+  "sourceFile": "0340.json"
+}

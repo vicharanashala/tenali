@@ -1,0 +1,15 @@
+{
+  "id": 986,
+  "word": "Distraught",
+  "question": "Distraught",
+  "options": [
+    "Possible and practical to do easily",
+    "Very worried and upset",
+    "Displaying a lack of energy; relaxed",
+    "To discourage someone from doing something"
+  ],
+  "answerOption": "B",
+  "answerText": "Very worried and upset",
+  "difficulty": "medium",
+  "sourceFile": "0986.json"
+}

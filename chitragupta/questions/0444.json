@@ -1,0 +1,14 @@
+{
+  "id": 444,
+  "question": "Which city is the capital of Kerala?",
+  "options": [
+    "Kochi",
+    "Kozhikode",
+    "Thiruvananthapuram",
+    "Kollam"
+  ],
+  "answerOption": "C",
+  "answerText": "Thiruvananthapuram",
+  "genre": "geography",
+  "sourceFile": "0444.json"
+}

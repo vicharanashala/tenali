@@ -1,0 +1,15 @@
+{
+  "id": 190,
+  "word": "Freeze",
+  "question": "Freeze",
+  "options": [
+    "Trustworthy and reliable",
+    "Protected from danger or risk",
+    "To be turned into ice or become very cold",
+    "To devote time or effort to a purpose"
+  ],
+  "answerOption": "C",
+  "answerText": "To be turned into ice or become very cold",
+  "difficulty": "easy",
+  "sourceFile": "0190.json"
+}

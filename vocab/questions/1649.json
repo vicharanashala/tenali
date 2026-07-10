@@ -1,0 +1,15 @@
+{
+  "id": 1649,
+  "word": "Destroyer",
+  "question": "Destroyer",
+  "options": [
+    "One who destroys or a warship",
+    "Having teeth or tooth-like projections",
+    "Officially prohibited",
+    "Easily persuaded to believe something"
+  ],
+  "answerOption": "A",
+  "answerText": "One who destroys or a warship",
+  "difficulty": "medium",
+  "sourceFile": "1649.json"
+}

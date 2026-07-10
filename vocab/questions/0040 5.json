@@ -1,0 +1,15 @@
+{
+  "id": 40,
+  "word": "Sad",
+  "question": "Sad",
+  "options": [
+    "Willfully causing pain to others",
+    "To freely offer to do something",
+    "To put someone at risk or in danger",
+    "Feeling sorrow or unhappiness"
+  ],
+  "answerOption": "D",
+  "answerText": "Feeling sorrow or unhappiness",
+  "difficulty": "easy",
+  "sourceFile": "0040.json"
+}

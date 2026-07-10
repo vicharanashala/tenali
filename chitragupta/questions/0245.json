@@ -1,0 +1,14 @@
+{
+  "id": 245,
+  "question": "Which is the national aquatic animal of India?",
+  "options": [
+    "Crocodile",
+    "Olive Ridley Turtle",
+    "Ganges River Dolphin",
+    "Blue Whale"
+  ],
+  "answerOption": "C",
+  "answerText": "Ganges River Dolphin",
+  "genre": "india-gk",
+  "sourceFile": "0245.json"
+}

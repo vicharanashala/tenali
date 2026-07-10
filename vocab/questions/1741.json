@@ -1,0 +1,15 @@
+{
+  "id": 1741,
+  "word": "Arcane",
+  "question": "Arcane",
+  "options": [
+    "A serious loss of mental abilities",
+    "A person or thing used to entice or lure",
+    "Mysterious or known by few",
+    "Sparing or economical with money or food"
+  ],
+  "answerOption": "C",
+  "answerText": "Mysterious or known by few",
+  "difficulty": "medium",
+  "sourceFile": "1741.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1609,
+  "word": "Desolate",
+  "question": "Desolate",
+  "options": [
+    "Causing a feeling of repulsion",
+    "Given to arguing or prone to argument",
+    "The action of discovering something",
+    "Barren, empty, or abandoned"
+  ],
+  "answerOption": "D",
+  "answerText": "Barren, empty, or abandoned",
+  "difficulty": "medium",
+  "sourceFile": "1609.json"
+}

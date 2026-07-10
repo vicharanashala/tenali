@@ -1,0 +1,15 @@
+{
+  "id": 2141,
+  "word": "Largesse",
+  "question": "Largesse",
+  "options": [
+    "A prehistoric stone artifact",
+    "Generosity in bestowing money or gifts",
+    "Rapid increase or spread",
+    "In an advisable manner"
+  ],
+  "answerOption": "B",
+  "answerText": "Generosity in bestowing money or gifts",
+  "difficulty": "hard",
+  "sourceFile": "2141.json"
+}

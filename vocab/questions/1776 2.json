@@ -1,0 +1,15 @@
+{
+  "id": 1776,
+  "word": "Tautology",
+  "question": "Tautology",
+  "options": [
+    "To reduce to remove unwanted elements",
+    "Saying the same thing twice in different words",
+    "One who travels in air",
+    "Guidance or recommendations offered"
+  ],
+  "answerOption": "B",
+  "answerText": "Saying the same thing twice in different words",
+  "difficulty": "hard",
+  "sourceFile": "1776.json"
+}

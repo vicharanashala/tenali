@@ -1,0 +1,15 @@
+{
+  "id": 3276,
+  "word": "Abiturient",
+  "question": "Abiturient",
+  "options": [
+    "The state of being infatuated with another person",
+    "Multiple non-literary qualities",
+    "The action of encouraging wrongdoing",
+    "A student graduating"
+  ],
+  "answerOption": "D",
+  "answerText": "A student graduating",
+  "difficulty": "extra-hard",
+  "sourceFile": "3276.json"
+}

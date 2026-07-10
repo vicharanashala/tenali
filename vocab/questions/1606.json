@@ -1,0 +1,15 @@
+{
+  "id": 1606,
+  "word": "Desk",
+  "question": "Desk",
+  "options": [
+    "Acting without forethought",
+    "To make something clear; explain",
+    "A piece of furniture for writing",
+    "Strong dislike or hatred"
+  ],
+  "answerOption": "C",
+  "answerText": "A piece of furniture for writing",
+  "difficulty": "medium",
+  "sourceFile": "1606.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1466,
+  "word": "Deontological",
+  "question": "Deontological",
+  "options": [
+    "Corrupt or able to be bribed",
+    "Relating to duty-based ethics",
+    "Seeking to take revenge",
+    "Confusing or perplexing"
+  ],
+  "answerOption": "B",
+  "answerText": "Relating to duty-based ethics",
+  "difficulty": "medium",
+  "sourceFile": "1466.json"
+}

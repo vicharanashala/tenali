@@ -1,0 +1,15 @@
+{
+  "id": 549,
+  "word": "Negotiate",
+  "question": "Negotiate",
+  "options": [
+    "To keep something for future use",
+    "To try to reach an agreement by discussion",
+    "Lacking energy or enthusiasm",
+    "To be required to pay money to someone"
+  ],
+  "answerOption": "B",
+  "answerText": "To try to reach an agreement by discussion",
+  "difficulty": "easy",
+  "sourceFile": "0549.json"
+}

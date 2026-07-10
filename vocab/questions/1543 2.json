@@ -1,0 +1,15 @@
+{
+  "id": 1543,
+  "word": "Yarborough",
+  "question": "Yarborough",
+  "options": [
+    "A hand of cards with no card above a nine",
+    "Having well-shaped buttocks",
+    "Causing or relating to vertigo",
+    "Government by the worst or least qualified"
+  ],
+  "answerOption": "A",
+  "answerText": "A hand of cards with no card above a nine",
+  "difficulty": "extra-hard",
+  "sourceFile": "1543.json"
+}

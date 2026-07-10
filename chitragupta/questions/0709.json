@@ -1,0 +1,14 @@
+{
+  "id": 709,
+  "question": "Who wrote 'Animal Farm'?",
+  "options": [
+    "George Orwell",
+    "Aldous Huxley",
+    "H. G. Wells",
+    "J. B. Priestley"
+  ],
+  "answerOption": "A",
+  "answerText": "George Orwell",
+  "genre": "general-knowledge",
+  "sourceFile": "0709.json"
+}

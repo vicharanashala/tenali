@@ -1,0 +1,14 @@
+{
+  "id": 208,
+  "question": "Which Indian state is known for the backwaters of Alappuzha?",
+  "options": [
+    "Tamil Nadu",
+    "Karnataka",
+    "Kerala",
+    "Goa"
+  ],
+  "answerOption": "C",
+  "answerText": "Kerala",
+  "genre": "india-gk",
+  "sourceFile": "0208.json"
+}

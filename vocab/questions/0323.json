@@ -1,0 +1,15 @@
+{
+  "id": 323,
+  "word": "Amuse",
+  "question": "Amuse",
+  "options": [
+    "To become mature and ready to eat",
+    "To arrive at a judgment after reasoning",
+    "Treating people equally without favoritism",
+    "To cause someone to find something funny"
+  ],
+  "answerOption": "D",
+  "answerText": "To cause someone to find something funny",
+  "difficulty": "easy",
+  "sourceFile": "0323.json"
+}

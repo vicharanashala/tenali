@@ -1,0 +1,14 @@
+{
+  "id": 168,
+  "question": "Which is the national tree of India?",
+  "options": [
+    "Neem",
+    "Banyan",
+    "Mango",
+    "Peepal"
+  ],
+  "answerOption": "B",
+  "answerText": "Banyan",
+  "genre": "india-gk",
+  "sourceFile": "0168.json"
+}

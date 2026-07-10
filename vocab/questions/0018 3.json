@@ -1,0 +1,15 @@
+{
+  "id": 18,
+  "word": "Wet",
+  "question": "Wet",
+  "options": [
+    "To experience something bad or unpleasant",
+    "Enough to meet the needs",
+    "To feel or detect something",
+    "Covered or saturated with water"
+  ],
+  "answerOption": "D",
+  "answerText": "Covered or saturated with water",
+  "difficulty": "easy",
+  "sourceFile": "0018.json"
+}

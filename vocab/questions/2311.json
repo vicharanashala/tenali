@@ -1,0 +1,15 @@
+{
+  "id": 2311,
+  "word": "Adverb",
+  "question": "Adverb",
+  "options": [
+    "In relation to atmosphere",
+    "Optimistic in a difficult situation",
+    "A word modifying a verb or adjective",
+    "An engine powered by air"
+  ],
+  "answerOption": "C",
+  "answerText": "A word modifying a verb or adjective",
+  "difficulty": "hard",
+  "sourceFile": "2311.json"
+}

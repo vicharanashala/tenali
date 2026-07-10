@@ -1,0 +1,15 @@
+{
+  "id": 2531,
+  "word": "Precipice",
+  "question": "Precipice",
+  "options": [
+    "A very steep or overhanging cliff",
+    "An award or privilege given as honor",
+    "The lowest point in the fortunes of a person",
+    "A deep valley with steep cliff walls"
+  ],
+  "answerOption": "A",
+  "answerText": "A very steep or overhanging cliff",
+  "difficulty": "hard",
+  "sourceFile": "2531.json"
+}

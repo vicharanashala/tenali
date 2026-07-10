@@ -1,0 +1,14 @@
+{
+  "id": 880,
+  "question": "Which country is associated with the city of Bishkek?",
+  "options": [
+    "Kazakhstan",
+    "Kyrgyzstan",
+    "Tajikistan",
+    "Turkmenistan"
+  ],
+  "answerOption": "B",
+  "answerText": "Kyrgyzstan",
+  "genre": "geography",
+  "sourceFile": "0880.json"
+}

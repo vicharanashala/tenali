@@ -1,0 +1,15 @@
+{
+  "id": 2002,
+  "word": "Facetious",
+  "question": "Facetious",
+  "options": [
+    "One who accepts duration of eons",
+    "Relating to air exposure",
+    "A long narrow opening or crack",
+    "Treating serious issues with inappropriate humor"
+  ],
+  "answerOption": "D",
+  "answerText": "Treating serious issues with inappropriate humor",
+  "difficulty": "hard",
+  "sourceFile": "2002.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 522,
+  "question": "Which country is associated with the city of Nairobi?",
+  "options": [
+    "Tanzania",
+    "Kenya",
+    "Uganda",
+    "Ethiopia"
+  ],
+  "answerOption": "B",
+  "answerText": "Kenya",
+  "genre": "geography",
+  "sourceFile": "0522.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 400,
+  "word": "Evolve",
+  "question": "Evolve",
+  "options": [
+    "Allowing light through but not transparent",
+    "Affected by physical illness",
+    "To bring or gather things together",
+    "To develop gradually over time"
+  ],
+  "answerOption": "D",
+  "answerText": "To develop gradually over time",
+  "difficulty": "easy",
+  "sourceFile": "0400.json"
+}

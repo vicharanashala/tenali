@@ -1,0 +1,15 @@
+{
+  "id": 2241,
+  "word": "Aenigma",
+  "question": "Aenigma",
+  "options": [
+    "Causing harm or damage",
+    "The action of improving",
+    "An instrument viewing air",
+    "A riddle or mysterious statement"
+  ],
+  "answerOption": "D",
+  "answerText": "A riddle or mysterious statement",
+  "difficulty": "hard",
+  "sourceFile": "2241.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2091,
+  "word": "Equanimity",
+  "question": "Equanimity",
+  "options": [
+    "In an aerodynamic manner",
+    "Cheerful and lighthearted",
+    "Deceitful and untrustworthy",
+    "Mental calmness in a difficult situation"
+  ],
+  "answerOption": "D",
+  "answerText": "Mental calmness in a difficult situation",
+  "difficulty": "hard",
+  "sourceFile": "2091.json"
+}

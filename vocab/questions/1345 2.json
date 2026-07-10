@@ -1,0 +1,15 @@
+{
+  "id": 1345,
+  "word": "Extemporaneous",
+  "question": "Extemporaneous",
+  "options": [
+    "Not being what it claims to be; false",
+    "Indicating mild puzzlement",
+    "An extensive fire destroying much",
+    "Spoken or done without preparation"
+  ],
+  "answerOption": "D",
+  "answerText": "Spoken or done without preparation",
+  "difficulty": "hard",
+  "sourceFile": "1345.json"
+}

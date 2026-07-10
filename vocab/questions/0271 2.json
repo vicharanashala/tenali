@@ -1,0 +1,15 @@
+{
+  "id": 271,
+  "word": "Cure",
+  "question": "Cure",
+  "options": [
+    "Not decorated or elaborate; simple",
+    "To relieve a person of symptoms of disease",
+    "To welcome someone with particular words",
+    "To construct something by putting parts together"
+  ],
+  "answerOption": "B",
+  "answerText": "To relieve a person of symptoms of disease",
+  "difficulty": "easy",
+  "sourceFile": "0271.json"
+}

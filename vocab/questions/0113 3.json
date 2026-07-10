@@ -1,0 +1,15 @@
+{
+  "id": 113,
+  "word": "Blunt",
+  "question": "Blunt",
+  "options": [
+    "Not having a sharp edge or point",
+    "To move about freely without a destination",
+    "To produce a picture using a pencil",
+    "To give attention to sound or speech"
+  ],
+  "answerOption": "A",
+  "answerText": "Not having a sharp edge or point",
+  "difficulty": "easy",
+  "sourceFile": "0113.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 3002,
+  "word": "ABJURING",
+  "question": "ABJURING",
+  "options": [
+    "Doing something with soul or creativity",
+    "The act of renouncing",
+    "Doctrine of abysses",
+    "The abyss or depths"
+  ],
+  "answerOption": "B",
+  "answerText": "The act of renouncing",
+  "difficulty": "extra-hard",
+  "sourceFile": "3002.json"
+}

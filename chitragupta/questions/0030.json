@@ -1,0 +1,14 @@
+{
+  "id": 30,
+  "question": "Which sense organ is used for hearing?",
+  "options": [
+    "Eye",
+    "Ear",
+    "Nose",
+    "Tongue"
+  ],
+  "answerOption": "B",
+  "answerText": "Ear",
+  "genre": "science",
+  "sourceFile": "0030.json"
+}

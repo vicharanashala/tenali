@@ -1,0 +1,15 @@
+{
+  "id": 601,
+  "word": "Gorgeous",
+  "question": "Gorgeous",
+  "options": [
+    "Very beautiful or attractive",
+    "To identify someone from previous encounters",
+    "To exert force to move something away",
+    "To give shares of something to many people"
+  ],
+  "answerOption": "A",
+  "answerText": "Very beautiful or attractive",
+  "difficulty": "easy",
+  "sourceFile": "0601.json"
+}

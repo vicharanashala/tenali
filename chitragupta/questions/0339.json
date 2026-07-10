@@ -1,0 +1,14 @@
+{
+  "id": 339,
+  "question": "What is the SI unit of frequency?",
+  "options": [
+    "Newton",
+    "Pascal",
+    "Hertz",
+    "Joule"
+  ],
+  "answerOption": "C",
+  "answerText": "Hertz",
+  "genre": "mixed",
+  "sourceFile": "0339.json"
+}

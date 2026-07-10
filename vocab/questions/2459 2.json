@@ -1,0 +1,15 @@
+{
+  "id": 2459,
+  "word": "Alexithymia",
+  "question": "Alexithymia",
+  "options": [
+    "Inability to identify and describe emotions",
+    "A tendency to make puns or tell inappropriate jokes",
+    "Ablactation in Latin",
+    "Plural of abit"
+  ],
+  "answerOption": "A",
+  "answerText": "Inability to identify and describe emotions",
+  "difficulty": "extra-hard",
+  "sourceFile": "2459.json"
+}

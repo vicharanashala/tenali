@@ -1,0 +1,15 @@
+{
+  "id": 21,
+  "word": "Weak",
+  "question": "Weak",
+  "options": [
+    "To cut into thin flat pieces",
+    "Lacking the power to perform demanding tasks",
+    "Extremely beautiful or impressive",
+    "To buy something"
+  ],
+  "answerOption": "B",
+  "answerText": "Lacking the power to perform demanding tasks",
+  "difficulty": "easy",
+  "sourceFile": "0021.json"
+}

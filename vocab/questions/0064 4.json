@@ -1,0 +1,15 @@
+{
+  "id": 64,
+  "word": "Wise",
+  "question": "Wise",
+  "options": [
+    "Feeling worried or nervous about something",
+    "To become sound or healthy again",
+    "Having experience, knowledge, and good judgment",
+    "Large and comfortable with plenty of space"
+  ],
+  "answerOption": "C",
+  "answerText": "Having experience, knowledge, and good judgment",
+  "difficulty": "easy",
+  "sourceFile": "0064.json"
+}

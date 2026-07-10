@@ -1,0 +1,15 @@
+{
+  "id": 668,
+  "word": "Spacious",
+  "question": "Spacious",
+  "options": [
+    "Having ample space; roomy",
+    "To come or go into a place",
+    "To be unsuccessful in achieving a goal",
+    "To become sound or healthy again"
+  ],
+  "answerOption": "A",
+  "answerText": "Having ample space; roomy",
+  "difficulty": "easy",
+  "sourceFile": "0668.json"
+}

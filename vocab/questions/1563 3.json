@@ -1,0 +1,15 @@
+{
+  "id": 1563,
+  "word": "Designer",
+  "question": "Designer",
+  "options": [
+    "One who dethrones",
+    "To explode or cause to explode",
+    "In a determinate manner",
+    "A person who designs things"
+  ],
+  "answerOption": "D",
+  "answerText": "A person who designs things",
+  "difficulty": "medium",
+  "sourceFile": "1563.json"
+}

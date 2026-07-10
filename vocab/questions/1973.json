@@ -1,0 +1,15 @@
+{
+  "id": 1973,
+  "word": "Obligated",
+  "question": "Obligated",
+  "options": [
+    "Based on observation rather than theory",
+    "Given to arguing or prone to argument",
+    "Required to do something",
+    "A feeling of hatred or disgust"
+  ],
+  "answerOption": "C",
+  "answerText": "Required to do something",
+  "difficulty": "medium",
+  "sourceFile": "1973.json"
+}

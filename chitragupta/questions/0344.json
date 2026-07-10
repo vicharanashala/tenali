@@ -1,0 +1,14 @@
+{
+  "id": 344,
+  "question": "Who discovered the electron?",
+  "options": [
+    "Ernest Rutherford",
+    "J. J. Thomson",
+    "Niels Bohr",
+    "James Chadwick"
+  ],
+  "answerOption": "B",
+  "answerText": "J. J. Thomson",
+  "genre": "general-knowledge",
+  "sourceFile": "0344.json"
+}

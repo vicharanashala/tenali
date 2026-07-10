@@ -1,0 +1,15 @@
+{
+  "id": 1230,
+  "word": "Abrupt",
+  "question": "Abrupt",
+  "options": [
+    "Careful to avoid social awkwardness",
+    "Sudden and unexpected",
+    "Serving to determine or decide",
+    "Twisted or bent out of shape"
+  ],
+  "answerOption": "B",
+  "answerText": "Sudden and unexpected",
+  "difficulty": "medium",
+  "sourceFile": "1230.json"
+}

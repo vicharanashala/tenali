@@ -1,0 +1,15 @@
+{
+  "id": 307,
+  "word": "Forgive",
+  "question": "Forgive",
+  "options": [
+    "To stop feeling angry toward someone",
+    "Able to express oneself easily in a language",
+    "Free from pretense or deceit",
+    "Large and heavy or solid"
+  ],
+  "answerOption": "A",
+  "answerText": "To stop feeling angry toward someone",
+  "difficulty": "easy",
+  "sourceFile": "0307.json"
+}

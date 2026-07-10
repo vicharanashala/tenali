@@ -1,0 +1,15 @@
+{
+  "id": 1316,
+  "word": "Decimate",
+  "question": "Decimate",
+  "options": [
+    "To kill one in every ten of a group",
+    "To obtain something from a source",
+    "Fineness of texture, form, or structure",
+    "Uncertain to succeed"
+  ],
+  "answerOption": "A",
+  "answerText": "To kill one in every ten of a group",
+  "difficulty": "medium",
+  "sourceFile": "1316.json"
+}

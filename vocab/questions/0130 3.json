@@ -1,0 +1,15 @@
+{
+  "id": 130,
+  "word": "Asleep",
+  "question": "Asleep",
+  "options": [
+    "Giving information clearly in few words",
+    "To cut into thin flat pieces",
+    "Easily annoyed or made angry",
+    "In a state of sleep; not awake"
+  ],
+  "answerOption": "D",
+  "answerText": "In a state of sleep; not awake",
+  "difficulty": "easy",
+  "sourceFile": "0130.json"
+}

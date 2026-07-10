@@ -1,0 +1,15 @@
+{
+  "id": 207,
+  "word": "Vanish",
+  "question": "Vanish",
+  "options": [
+    "Made by human skill; not natural",
+    "To disappear suddenly and completely",
+    "Not fulfilling the intended purpose",
+    "To make a visible sign on something"
+  ],
+  "answerOption": "B",
+  "answerText": "To disappear suddenly and completely",
+  "difficulty": "easy",
+  "sourceFile": "0207.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1461,
+  "word": "Penumbra",
+  "question": "Penumbra",
+  "options": [
+    "The partially shaded outer region of a shadow",
+    "A surgical connection between the liver and intestine",
+    "The nineteenth letter of the Hebrew alphabet",
+    "The ambiguous intensity of looking into someone's eyes"
+  ],
+  "answerOption": "A",
+  "answerText": "The partially shaded outer region of a shadow",
+  "difficulty": "extra-hard",
+  "sourceFile": "1461.json"
+}

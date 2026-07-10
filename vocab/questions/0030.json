@@ -1,0 +1,15 @@
+{
+  "id": 30,
+  "word": "Sweet",
+  "question": "Sweet",
+  "options": [
+    "Too long and therefore boring",
+    "To manage or guide the operations of something",
+    "Having the pleasant taste of sugar",
+    "Extending in one direction without curves"
+  ],
+  "answerOption": "C",
+  "answerText": "Having the pleasant taste of sugar",
+  "difficulty": "easy",
+  "sourceFile": "0030.json"
+}

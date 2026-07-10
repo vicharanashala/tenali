@@ -1,0 +1,15 @@
+{
+  "id": 1102,
+  "word": "Indifferent",
+  "question": "Indifferent",
+  "options": [
+    "Displaying a lack of energy; relaxed",
+    "Having no particular interest or concern",
+    "Pleasant and easy to get along with",
+    "Clearly shown or evident"
+  ],
+  "answerOption": "B",
+  "answerText": "Having no particular interest or concern",
+  "difficulty": "medium",
+  "sourceFile": "1102.json"
+}

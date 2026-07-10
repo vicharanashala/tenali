@@ -1,0 +1,14 @@
+{
+  "id": 574,
+  "question": "Which country is associated with the city of Rabat?",
+  "options": [
+    "Algeria",
+    "Tunisia",
+    "Morocco",
+    "Libya"
+  ],
+  "answerOption": "C",
+  "answerText": "Morocco",
+  "genre": "geography",
+  "sourceFile": "0574.json"
+}

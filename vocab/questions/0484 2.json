@@ -1,0 +1,15 @@
+{
+  "id": 484,
+  "word": "Review",
+  "question": "Review",
+  "options": [
+    "Arranged in a tidy way",
+    "To suffer something unpleasant patiently",
+    "To examine something with the possibility of change",
+    "Having high principles and expectations"
+  ],
+  "answerOption": "C",
+  "answerText": "To examine something with the possibility of change",
+  "difficulty": "easy",
+  "sourceFile": "0484.json"
+}

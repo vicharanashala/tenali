@@ -1,0 +1,15 @@
+{
+  "id": 63,
+  "word": "Silly",
+  "question": "Silly",
+  "options": [
+    "Having or showing a lack of common sense",
+    "In a state of complete confusion",
+    "To arouse the curiosity of someone",
+    "To assign responsibility for a fault"
+  ],
+  "answerOption": "A",
+  "answerText": "Having or showing a lack of common sense",
+  "difficulty": "easy",
+  "sourceFile": "0063.json"
+}

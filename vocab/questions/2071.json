@@ -1,0 +1,15 @@
+{
+  "id": 2071,
+  "word": "Erudite",
+  "question": "Erudite",
+  "options": [
+    "Having or showing great knowledge",
+    "Demonstrating aggression and willingness to fight",
+    "The state of being very poor",
+    "A person who pleads for another"
+  ],
+  "answerOption": "A",
+  "answerText": "Having or showing great knowledge",
+  "difficulty": "hard",
+  "sourceFile": "2071.json"
+}

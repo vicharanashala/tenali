@@ -1,0 +1,15 @@
+{
+  "id": 2468,
+  "word": "Aerobiological",
+  "question": "Aerobiological",
+  "options": [
+    "A duty or responsibility",
+    "The quality of being hard",
+    "Relating to airborne organisms",
+    "Belief that all events are predetermined"
+  ],
+  "answerOption": "C",
+  "answerText": "Relating to airborne organisms",
+  "difficulty": "hard",
+  "sourceFile": "2468.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 417,
+  "word": "Obtain",
+  "question": "Obtain",
+  "options": [
+    "To get or acquire something",
+    "Resulting in good; favorable",
+    "Costing a lot of money",
+    "Coming after or less important than the first"
+  ],
+  "answerOption": "A",
+  "answerText": "To get or acquire something",
+  "difficulty": "easy",
+  "sourceFile": "0417.json"
+}

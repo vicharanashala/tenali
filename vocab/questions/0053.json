@@ -1,0 +1,15 @@
+{
+  "id": 53,
+  "word": "Near",
+  "question": "Near",
+  "options": [
+    "To do physical harm or damage to someone",
+    "Bringing or worthy of honor",
+    "Without seriousness or importance",
+    "Not far away in distance"
+  ],
+  "answerOption": "D",
+  "answerText": "Not far away in distance",
+  "difficulty": "easy",
+  "sourceFile": "0053.json"
+}

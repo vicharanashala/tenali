@@ -1,0 +1,15 @@
+{
+  "id": 1983,
+  "word": "Truculent",
+  "question": "Truculent",
+  "options": [
+    "To stop doing something",
+    "Eager or quick to argue or fight",
+    "A loud and confused noise or voices",
+    "A sad and depressed state"
+  ],
+  "answerOption": "B",
+  "answerText": "Eager or quick to argue or fight",
+  "difficulty": "medium",
+  "sourceFile": "1983.json"
+}

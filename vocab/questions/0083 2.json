@@ -1,0 +1,15 @@
+{
+  "id": 83,
+  "word": "Stale",
+  "question": "Stale",
+  "options": [
+    "Easily broken or damaged",
+    "Not giving enough attention to avoid harm",
+    "No longer fresh; old and dry",
+    "To save someone from a dangerous situation"
+  ],
+  "answerOption": "C",
+  "answerText": "No longer fresh; old and dry",
+  "difficulty": "easy",
+  "sourceFile": "0083.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1148,
+  "word": "Harbinger",
+  "question": "Harbinger",
+  "options": [
+    "Altered from original meaning",
+    "To remove a monarch from the throne",
+    "A person or thing announcing what is to come",
+    "Relating to or composed of detritus"
+  ],
+  "answerOption": "C",
+  "answerText": "A person or thing announcing what is to come",
+  "difficulty": "medium",
+  "sourceFile": "1148.json"
+}

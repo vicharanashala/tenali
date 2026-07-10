@@ -1,0 +1,15 @@
+{
+  "id": 347,
+  "word": "Hesitate",
+  "question": "Hesitate",
+  "options": [
+    "Having small sharp points",
+    "Not supporting either side in a conflict",
+    "Able to soak up liquid easily",
+    "To pause before doing something"
+  ],
+  "answerOption": "D",
+  "answerText": "To pause before doing something",
+  "difficulty": "easy",
+  "sourceFile": "0347.json"
+}

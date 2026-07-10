@@ -1,0 +1,15 @@
+{
+  "id": 1914,
+  "word": "Adrift",
+  "question": "Adrift",
+  "options": [
+    "In an aerodynamic manner",
+    "Not able to be corrected or reformed",
+    "A person who dislikes humankind",
+    "Floating without being propelled"
+  ],
+  "answerOption": "D",
+  "answerText": "Floating without being propelled",
+  "difficulty": "hard",
+  "sourceFile": "1914.json"
+}

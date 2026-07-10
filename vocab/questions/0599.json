@@ -1,0 +1,15 @@
+{
+  "id": 599,
+  "word": "Magnificent",
+  "question": "Magnificent",
+  "options": [
+    "To try to find something by looking carefully",
+    "Unable to bend or be changed easily",
+    "Extremely beautiful or impressive",
+    "To want something to happen and think it possible"
+  ],
+  "answerOption": "C",
+  "answerText": "Extremely beautiful or impressive",
+  "difficulty": "easy",
+  "sourceFile": "0599.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 51,
+  "word": "Open",
+  "question": "Open",
+  "options": [
+    "Allowing access; not closed or blocked",
+    "To cause someone to find something funny",
+    "Needing much effort or skill to accomplish",
+    "Happening by chance; unintentional"
+  ],
+  "answerOption": "A",
+  "answerText": "Allowing access; not closed or blocked",
+  "difficulty": "easy",
+  "sourceFile": "0051.json"
+}

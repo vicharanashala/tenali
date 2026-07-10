@@ -1,0 +1,15 @@
+{
+  "id": 1108,
+  "word": "Opulent",
+  "question": "Opulent",
+  "options": [
+    "Ostentatiously rich and luxurious",
+    "Requiring careful attention to detail",
+    "Free from disagreement or dissent",
+    "Mysterious or known by few"
+  ],
+  "answerOption": "A",
+  "answerText": "Ostentatiously rich and luxurious",
+  "difficulty": "medium",
+  "sourceFile": "1108.json"
+}

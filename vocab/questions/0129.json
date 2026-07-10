@@ -1,0 +1,15 @@
+{
+  "id": 129,
+  "word": "Dead",
+  "question": "Dead",
+  "options": [
+    "Expecting the worst possible outcome",
+    "Very cold with visible frost",
+    "To actively resist or be against something",
+    "No longer living"
+  ],
+  "answerOption": "D",
+  "answerText": "No longer living",
+  "difficulty": "easy",
+  "sourceFile": "0129.json"
+}

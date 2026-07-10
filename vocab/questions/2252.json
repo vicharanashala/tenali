@@ -1,0 +1,15 @@
+{
+  "id": 2252,
+  "word": "Adopt",
+  "question": "Adopt",
+  "options": [
+    "Restoration of friendly relations",
+    "To legally take as one's own child",
+    "Belief in something as true",
+    "Plural of aeon"
+  ],
+  "answerOption": "B",
+  "answerText": "To legally take as one's own child",
+  "difficulty": "hard",
+  "sourceFile": "2252.json"
+}

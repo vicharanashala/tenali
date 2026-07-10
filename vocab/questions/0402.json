@@ -1,0 +1,15 @@
+{
+  "id": 402,
+  "word": "Preserve",
+  "question": "Preserve",
+  "options": [
+    "Moving with speed or done rapidly",
+    "To arrange systematically into groups",
+    "To maintain something in its original state",
+    "Bent or twisted out of shape"
+  ],
+  "answerOption": "C",
+  "answerText": "To maintain something in its original state",
+  "difficulty": "easy",
+  "sourceFile": "0402.json"
+}

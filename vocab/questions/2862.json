@@ -1,0 +1,15 @@
+{
+  "id": 2862,
+  "word": "Recitation",
+  "question": "Recitation",
+  "options": [
+    "Just begun and not fully formed",
+    "The action of reducing in amount",
+    "The action of reciting something",
+    "Philosophy emphasizing individual existence"
+  ],
+  "answerOption": "C",
+  "answerText": "The action of reciting something",
+  "difficulty": "hard",
+  "sourceFile": "2862.json"
+}

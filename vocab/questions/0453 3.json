@@ -1,0 +1,15 @@
+{
+  "id": 453,
+  "word": "Demolish",
+  "question": "Demolish",
+  "options": [
+    "To go or come up a slope or stairs",
+    "Causing an urge to scratch",
+    "To cause someone to believe something",
+    "To pull down or destroy a building"
+  ],
+  "answerOption": "D",
+  "answerText": "To pull down or destroy a building",
+  "difficulty": "easy",
+  "sourceFile": "0453.json"
+}

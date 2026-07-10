@@ -1,0 +1,15 @@
+{
+  "id": 756,
+  "word": "Scorching",
+  "question": "Scorching",
+  "options": [
+    "Devoted to a task or purpose",
+    "To fasten or join one thing to another",
+    "Very hot; burning",
+    "Relating to the region near the equator"
+  ],
+  "answerOption": "C",
+  "answerText": "Very hot; burning",
+  "difficulty": "easy",
+  "sourceFile": "0756.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 651,
+  "word": "Verbose",
+  "question": "Verbose",
+  "options": [
+    "Using more words than needed",
+    "To break free from confinement",
+    "Having an even and regular surface",
+    "To examine something with the possibility of change"
+  ],
+  "answerOption": "A",
+  "answerText": "Using more words than needed",
+  "difficulty": "easy",
+  "sourceFile": "0651.json"
+}

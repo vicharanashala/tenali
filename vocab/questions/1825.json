@@ -1,0 +1,15 @@
+{
+  "id": 1825,
+  "word": "Insufficient",
+  "question": "Insufficient",
+  "options": [
+    "In a desperate manner",
+    "To regard with great respect",
+    "Not enough in quantity",
+    "Worthy of reward or recognition"
+  ],
+  "answerOption": "C",
+  "answerText": "Not enough in quantity",
+  "difficulty": "medium",
+  "sourceFile": "1825.json"
+}

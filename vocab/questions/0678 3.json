@@ -1,0 +1,15 @@
+{
+  "id": 678,
+  "word": "Mild",
+  "question": "Mild",
+  "options": [
+    "To express dissatisfaction about something",
+    "Not severe or strong; gentle",
+    "To walk slowly with no clear direction",
+    "To tell someone you will definitely do something"
+  ],
+  "answerOption": "B",
+  "answerText": "Not severe or strong; gentle",
+  "difficulty": "easy",
+  "sourceFile": "0678.json"
+}

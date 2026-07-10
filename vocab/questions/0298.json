@@ -1,0 +1,15 @@
+{
+  "id": 298,
+  "word": "Wish",
+  "question": "Wish",
+  "options": [
+    "To make something look more attractive",
+    "To feel a strong desire for something",
+    "To manage or guide the operations of something",
+    "Being reserved or timid around other people"
+  ],
+  "answerOption": "B",
+  "answerText": "To feel a strong desire for something",
+  "difficulty": "easy",
+  "sourceFile": "0298.json"
+}

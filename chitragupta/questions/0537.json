@@ -1,0 +1,14 @@
+{
+  "id": 537,
+  "question": "Who wrote 'The Brothers Karamazov'?",
+  "options": [
+    "Leo Tolstoy",
+    "Fyodor Dostoevsky",
+    "Anton Chekhov",
+    "Gogol"
+  ],
+  "answerOption": "B",
+  "answerText": "Fyodor Dostoevsky",
+  "genre": "general-knowledge",
+  "sourceFile": "0537.json"
+}

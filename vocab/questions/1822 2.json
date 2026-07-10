@@ -1,0 +1,15 @@
+{
+  "id": 1822,
+  "word": "Equivocate",
+  "question": "Equivocate",
+  "options": [
+    "So surprised as to be unsure how to react",
+    "To use ambiguous language to deceive",
+    "The appearance of being true or real",
+    "Spoken or done without preparation"
+  ],
+  "answerOption": "B",
+  "answerText": "To use ambiguous language to deceive",
+  "difficulty": "hard",
+  "sourceFile": "1822.json"
+}

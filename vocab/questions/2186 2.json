@@ -1,0 +1,15 @@
+{
+  "id": 2186,
+  "word": "AERONAUTICS",
+  "question": "AERONAUTICS",
+  "options": [
+    "A Roman imperial treasury",
+    "Looking or sounding sad and dismal",
+    "A turning point or pivotal event",
+    "Science of aircraft and flight"
+  ],
+  "answerOption": "D",
+  "answerText": "Science of aircraft and flight",
+  "difficulty": "hard",
+  "sourceFile": "2186.json"
+}

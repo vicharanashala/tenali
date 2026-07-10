@@ -1,0 +1,15 @@
+{
+  "id": 1051,
+  "word": "Yeoman",
+  "question": "Yeoman",
+  "options": [
+    "A man holding a small landed estate",
+    "In a desultory manner",
+    "To reduce in extent or quantity",
+    "A state of being deserted or lonely"
+  ],
+  "answerOption": "A",
+  "answerText": "A man holding a small landed estate",
+  "difficulty": "medium",
+  "sourceFile": "1051.json"
+}

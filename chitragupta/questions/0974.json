@@ -1,0 +1,14 @@
+{
+  "id": 974,
+  "question": "Which animal is known as the King of the Jungle?",
+  "options": [
+    "Tiger",
+    "Elephant",
+    "Lion",
+    "Leopard"
+  ],
+  "answerOption": "C",
+  "answerText": "Lion",
+  "genre": "general-knowledge",
+  "sourceFile": "0974.json"
+}

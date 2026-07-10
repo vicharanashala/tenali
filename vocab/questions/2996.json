@@ -1,0 +1,15 @@
+{
+  "id": 2996,
+  "word": "Defenestration",
+  "question": "Defenestration",
+  "options": [
+    "The feeling of solitude in the woods",
+    "Financially rewarding; lucrative",
+    "The act of throwing someone out of a window",
+    "Opponent of ablation doctrine"
+  ],
+  "answerOption": "C",
+  "answerText": "The act of throwing someone out of a window",
+  "difficulty": "extra-hard",
+  "sourceFile": "2996.json"
+}

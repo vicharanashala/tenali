@@ -1,0 +1,15 @@
+{
+  "id": 1691,
+  "word": "Winnow",
+  "question": "Winnow",
+  "options": [
+    "To reduce to remove unwanted elements",
+    "Resembling a riddle or puzzle",
+    "Connection by air passages",
+    "Affected by nausea; bad-tempered"
+  ],
+  "answerOption": "A",
+  "answerText": "To reduce to remove unwanted elements",
+  "difficulty": "hard",
+  "sourceFile": "1691.json"
+}

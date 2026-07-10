@@ -1,0 +1,15 @@
+{
+  "id": 2212,
+  "word": "AEROPOLIS",
+  "question": "AEROPOLIS",
+  "options": [
+    "A city built in air",
+    "One who travels in air",
+    "The method and practice of teaching",
+    "Relating to prehistoric stone tools"
+  ],
+  "answerOption": "A",
+  "answerText": "A city built in air",
+  "difficulty": "hard",
+  "sourceFile": "2212.json"
+}

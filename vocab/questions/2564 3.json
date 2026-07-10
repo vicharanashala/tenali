@@ -1,0 +1,15 @@
+{
+  "id": 2564,
+  "word": "Smelting",
+  "question": "Smelting",
+  "options": [
+    "A genus of weasel-like animals",
+    "Of or belonging to a time before a great flood",
+    "Extracting metal from ore by heating",
+    "An organism loving air"
+  ],
+  "answerOption": "C",
+  "answerText": "Extracting metal from ore by heating",
+  "difficulty": "hard",
+  "sourceFile": "2564.json"
+}

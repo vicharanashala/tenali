@@ -1,0 +1,15 @@
+{
+  "id": 3190,
+  "word": "Abelian",
+  "question": "Abelian",
+  "options": [
+    "Non-literary character",
+    "A feeling of listlessness from lack of excitement",
+    "One who abjures",
+    "Relating to groups with commutative property"
+  ],
+  "answerOption": "D",
+  "answerText": "Relating to groups with commutative property",
+  "difficulty": "extra-hard",
+  "sourceFile": "3190.json"
+}

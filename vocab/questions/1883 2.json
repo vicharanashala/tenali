@@ -1,0 +1,15 @@
+{
+  "id": 1883,
+  "word": "Recidivism",
+  "question": "Recidivism",
+  "options": [
+    "Relating to air pressure balance",
+    "A genus of spiders in taxonomy",
+    "The tendency to relapse into a previous behavior",
+    "Public shame or disgrace"
+  ],
+  "answerOption": "C",
+  "answerText": "The tendency to relapse into a previous behavior",
+  "difficulty": "hard",
+  "sourceFile": "1883.json"
+}

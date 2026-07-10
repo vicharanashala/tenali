@@ -1,0 +1,15 @@
+{
+  "id": 1294,
+  "word": "Delinquent",
+  "question": "Delinquent",
+  "options": [
+    "Failing in or neglectful of a duty",
+    "Relying on another for support",
+    "The process of careful consideration",
+    "Luxuriously elegant and expensive"
+  ],
+  "answerOption": "A",
+  "answerText": "Failing in or neglectful of a duty",
+  "difficulty": "medium",
+  "sourceFile": "1294.json"
+}

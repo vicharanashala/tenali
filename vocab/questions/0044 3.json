@@ -1,0 +1,15 @@
+{
+  "id": 44,
+  "word": "Wild",
+  "question": "Wild",
+  "options": [
+    "To successfully reach a desired goal",
+    "To combine different things together",
+    "Living in a natural state; not tamed",
+    "To work together on an activity"
+  ],
+  "answerOption": "C",
+  "answerText": "Living in a natural state; not tamed",
+  "difficulty": "easy",
+  "sourceFile": "0044.json"
+}

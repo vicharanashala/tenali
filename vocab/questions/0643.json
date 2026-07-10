@@ -1,0 +1,15 @@
+{
+  "id": 643,
+  "word": "Gifted",
+  "question": "Gifted",
+  "options": [
+    "Relating to the edge or outer part",
+    "Feeling pleasure or happiness",
+    "Having exceptional natural ability",
+    "Having the form of a circle"
+  ],
+  "answerOption": "C",
+  "answerText": "Having exceptional natural ability",
+  "difficulty": "easy",
+  "sourceFile": "0643.json"
+}

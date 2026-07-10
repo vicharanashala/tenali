@@ -1,0 +1,14 @@
+{
+  "id": 353,
+  "question": "Which Indian state is known as the Spice Garden of India?",
+  "options": [
+    "Karnataka",
+    "Tamil Nadu",
+    "Kerala",
+    "Goa"
+  ],
+  "answerOption": "C",
+  "answerText": "Kerala",
+  "genre": "india-gk",
+  "sourceFile": "0353.json"
+}

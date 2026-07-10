@@ -1,0 +1,15 @@
+{
+  "id": 2001,
+  "word": "Ebullient",
+  "question": "Ebullient",
+  "options": [
+    "An official formal statement",
+    "Proceeding in a harmful way gradually",
+    "Cheerful and full of energy",
+    "The quality of being noticeable"
+  ],
+  "answerOption": "C",
+  "answerText": "Cheerful and full of energy",
+  "difficulty": "hard",
+  "sourceFile": "2001.json"
+}

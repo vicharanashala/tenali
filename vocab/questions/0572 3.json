@@ -1,0 +1,15 @@
+{
+  "id": 572,
+  "word": "Delight",
+  "question": "Delight",
+  "options": [
+    "Reflecting light brightly",
+    "To please someone greatly",
+    "Shockingly unacceptable",
+    "To make or become worse"
+  ],
+  "answerOption": "B",
+  "answerText": "To please someone greatly",
+  "difficulty": "easy",
+  "sourceFile": "0572.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1236,
+  "word": "Gratuitous",
+  "question": "Gratuitous",
+  "options": [
+    "Instructed or commanded to do",
+    "Uncalled for and lacking good reason",
+    "With complete sincerity and commitment",
+    "To engage in a close fight or struggle"
+  ],
+  "answerOption": "B",
+  "answerText": "Uncalled for and lacking good reason",
+  "difficulty": "medium",
+  "sourceFile": "1236.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 238,
+  "word": "Reward",
+  "question": "Reward",
+  "options": [
+    "To do physical harm or damage to someone",
+    "To give something to someone temporarily",
+    "To give something in return for good behavior",
+    "Of or at a low temperature"
+  ],
+  "answerOption": "C",
+  "answerText": "To give something in return for good behavior",
+  "difficulty": "easy",
+  "sourceFile": "0238.json"
+}

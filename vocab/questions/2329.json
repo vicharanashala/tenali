@@ -1,0 +1,15 @@
+{
+  "id": 2329,
+  "word": "Advertiser",
+  "question": "Advertiser",
+  "options": [
+    "A camera for aerial photography",
+    "To expose to or mix with air",
+    "Inner sanctum of Greek temple",
+    "One who advertises products"
+  ],
+  "answerOption": "D",
+  "answerText": "One who advertises products",
+  "difficulty": "hard",
+  "sourceFile": "2329.json"
+}

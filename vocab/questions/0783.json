@@ -1,0 +1,15 @@
+{
+  "id": 783,
+  "word": "Organic",
+  "question": "Organic",
+  "options": [
+    "Relating to or resembling the moon",
+    "Produced without artificial chemicals",
+    "To meet the expectations of someone",
+    "So small or unimportant as to be not worth considering"
+  ],
+  "answerOption": "B",
+  "answerText": "Produced without artificial chemicals",
+  "difficulty": "easy",
+  "sourceFile": "0783.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1552,
+  "word": "Dessication",
+  "question": "Dessication",
+  "options": [
+    "A substance reducing body odor",
+    "Dull and lacking in variety",
+    "The process of drying completely",
+    "To let air out of something inflated"
+  ],
+  "answerOption": "C",
+  "answerText": "The process of drying completely",
+  "difficulty": "medium",
+  "sourceFile": "1552.json"
+}

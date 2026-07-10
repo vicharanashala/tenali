@@ -1,0 +1,15 @@
+{
+  "id": 1490,
+  "word": "Deport",
+  "question": "Deport",
+  "options": [
+    "Occurring in cycles",
+    "To forcibly remove from a country",
+    "Having a keen sense of understanding",
+    "Confined to working at a desk"
+  ],
+  "answerOption": "B",
+  "answerText": "To forcibly remove from a country",
+  "difficulty": "medium",
+  "sourceFile": "1490.json"
+}

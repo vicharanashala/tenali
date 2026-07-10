@@ -1,0 +1,15 @@
+{
+  "id": 1164,
+  "word": "Audacious",
+  "question": "Audacious",
+  "options": [
+    "The action of despoiling",
+    "Showing a willingness to take bold risks",
+    "Delayed or prevented by obstructing",
+    "The action of releasing from military"
+  ],
+  "answerOption": "B",
+  "answerText": "Showing a willingness to take bold risks",
+  "difficulty": "medium",
+  "sourceFile": "1164.json"
+}

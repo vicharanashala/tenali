@@ -1,0 +1,14 @@
+{
+  "id": 270,
+  "question": "What is the speed of light approximately in vacuum?",
+  "options": [
+    "3,000 km/s",
+    "30,000 km/s",
+    "300,000 km/s",
+    "3,000,000 km/s"
+  ],
+  "answerOption": "C",
+  "answerText": "300,000 km/s",
+  "genre": "mixed",
+  "sourceFile": "0270.json"
+}

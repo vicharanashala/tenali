@@ -1,0 +1,14 @@
+{
+  "id": 428,
+  "question": "Which is the national animal of Australia?",
+  "options": [
+    "Koala",
+    "Kangaroo",
+    "Emu",
+    "Platypus"
+  ],
+  "answerOption": "B",
+  "answerText": "Kangaroo",
+  "genre": "india-gk",
+  "sourceFile": "0428.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 109,
+  "word": "Common",
+  "question": "Common",
+  "options": [
+    "To succeed in doing something",
+    "Occurring or found frequently",
+    "Required by law or rule; mandatory",
+    "To put a seed in the ground to grow"
+  ],
+  "answerOption": "B",
+  "answerText": "Occurring or found frequently",
+  "difficulty": "easy",
+  "sourceFile": "0109.json"
+}

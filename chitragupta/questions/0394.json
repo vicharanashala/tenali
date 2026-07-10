@@ -1,0 +1,14 @@
+{
+  "id": 394,
+  "question": "Which is the world’s largest peninsula by area?",
+  "options": [
+    "Arabian Peninsula",
+    "Iberian Peninsula",
+    "Balkan Peninsula",
+    "Korean Peninsula"
+  ],
+  "answerOption": "A",
+  "answerText": "Arabian Peninsula",
+  "genre": "mixed",
+  "sourceFile": "0394.json"
+}

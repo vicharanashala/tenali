@@ -1,0 +1,15 @@
+{
+  "id": 1440,
+  "word": "DEPUTE",
+  "question": "DEPUTE",
+  "options": [
+    "The removal of toxins",
+    "To appoint as a deputy or delegate",
+    "The ability to understand another's feelings",
+    "A substance reducing body odor"
+  ],
+  "answerOption": "B",
+  "answerText": "To appoint as a deputy or delegate",
+  "difficulty": "medium",
+  "sourceFile": "1440.json"
+}

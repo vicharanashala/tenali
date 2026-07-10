@@ -1,0 +1,15 @@
+{
+  "id": 2330,
+  "word": "Advertising",
+  "question": "Advertising",
+  "options": [
+    "A revelation of something discreditable",
+    "The activity of promoting products",
+    "Lasting for a very short time",
+    "Study of organisms in air"
+  ],
+  "answerOption": "B",
+  "answerText": "The activity of promoting products",
+  "difficulty": "hard",
+  "sourceFile": "2330.json"
+}

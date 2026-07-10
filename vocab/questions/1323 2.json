@@ -1,0 +1,15 @@
+{
+  "id": 1323,
+  "word": "Conflagration",
+  "question": "Conflagration",
+  "options": [
+    "Grimly mocking or cynical",
+    "Having a particular habit that is long-established",
+    "Put in a very difficult situation",
+    "An extensive fire destroying much"
+  ],
+  "answerOption": "D",
+  "answerText": "An extensive fire destroying much",
+  "difficulty": "hard",
+  "sourceFile": "1323.json"
+}

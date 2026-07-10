@@ -1,0 +1,15 @@
+{
+  "id": 637,
+  "word": "Responsible",
+  "question": "Responsible",
+  "options": [
+    "To settle a dispute by making concessions",
+    "Of great extent from side to side",
+    "Having a duty to deal with something",
+    "Lasting or existing forever"
+  ],
+  "answerOption": "C",
+  "answerText": "Having a duty to deal with something",
+  "difficulty": "easy",
+  "sourceFile": "0637.json"
+}

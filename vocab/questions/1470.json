@@ -1,0 +1,15 @@
+{
+  "id": 1470,
+  "word": "Department",
+  "question": "Department",
+  "options": [
+    "The action of becoming worse",
+    "Required to do something",
+    "In a desperate manner",
+    "A division of a large organization"
+  ],
+  "answerOption": "D",
+  "answerText": "A division of a large organization",
+  "difficulty": "medium",
+  "sourceFile": "1470.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1821,
+  "word": "Incompetent",
+  "question": "Incompetent",
+  "options": [
+    "Highly pleasing to the taste",
+    "Expressed clearly and easy to understand",
+    "Not qualified to do something",
+    "To appoint as a deputy"
+  ],
+  "answerOption": "C",
+  "answerText": "Not qualified to do something",
+  "difficulty": "medium",
+  "sourceFile": "1821.json"
+}

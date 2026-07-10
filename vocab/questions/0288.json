@@ -1,0 +1,15 @@
+{
+  "id": 288,
+  "word": "Arrange",
+  "question": "Arrange",
+  "options": [
+    "To put things in a neat or attractive order",
+    "Not varying; the same in all cases",
+    "Greatly pleased or entertained",
+    "Lacking flavor or interest"
+  ],
+  "answerOption": "A",
+  "answerText": "To put things in a neat or attractive order",
+  "difficulty": "easy",
+  "sourceFile": "0288.json"
+}

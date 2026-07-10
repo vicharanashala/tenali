@@ -1,0 +1,15 @@
+{
+  "id": 1411,
+  "word": "Demolish",
+  "question": "Demolish",
+  "options": [
+    "To move back and forth at a regular speed",
+    "A substance that purifies the blood",
+    "A small cup for strong black coffee",
+    "To destroy a building or structure"
+  ],
+  "answerOption": "D",
+  "answerText": "To destroy a building or structure",
+  "difficulty": "medium",
+  "sourceFile": "1411.json"
+}

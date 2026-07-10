@@ -1,0 +1,15 @@
+{
+  "id": 1326,
+  "word": "Interpolate",
+  "question": "Interpolate",
+  "options": [
+    "A deep-seated feeling of dislike",
+    "To insert something between fixed points",
+    "Wicked or criminal in nature",
+    "Experienced through the feelings of another"
+  ],
+  "answerOption": "B",
+  "answerText": "To insert something between fixed points",
+  "difficulty": "hard",
+  "sourceFile": "1326.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 142,
+  "word": "Sorry",
+  "question": "Sorry",
+  "options": [
+    "To help someone with a task",
+    "To recognize what someone or something is",
+    "Feeling regret or sadness",
+    "Occurring immediately without delay"
+  ],
+  "answerOption": "C",
+  "answerText": "Feeling regret or sadness",
+  "difficulty": "easy",
+  "sourceFile": "0142.json"
+}

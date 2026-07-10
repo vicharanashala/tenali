@@ -1,0 +1,14 @@
+{
+  "id": 449,
+  "question": "Which famous Indian social reformer founded the Brahmo Samaj?",
+  "options": [
+    "Ishwar Chandra Vidyasagar",
+    "Raja Ram Mohan Roy",
+    "Swami Vivekananda",
+    "Dayananda Saraswati"
+  ],
+  "answerOption": "B",
+  "answerText": "Raja Ram Mohan Roy",
+  "genre": "india-gk",
+  "sourceFile": "0449.json"
+}

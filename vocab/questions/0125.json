@@ -1,0 +1,15 @@
+{
+  "id": 125,
+  "word": "Coward",
+  "question": "Coward",
+  "options": [
+    "Of small width in relation to length",
+    "A person who lacks courage",
+    "To examine and make corrections to something",
+    "Causing extreme fear or suffering"
+  ],
+  "answerOption": "B",
+  "answerText": "A person who lacks courage",
+  "difficulty": "easy",
+  "sourceFile": "0125.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 834,
+  "word": "Bland",
+  "question": "Bland",
+  "options": [
+    "Lacking physical strength",
+    "Fickle or frivolous in manner",
+    "Having no strong flavor or taste",
+    "Thinly sown or distributed"
+  ],
+  "answerOption": "C",
+  "answerText": "Having no strong flavor or taste",
+  "difficulty": "easy",
+  "sourceFile": "0834.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 568,
+  "word": "Intrigue",
+  "question": "Intrigue",
+  "options": [
+    "Happening or changing slowly over time",
+    "To arouse the curiosity of someone",
+    "To state that something is not true",
+    "Having a great deal of money or assets"
+  ],
+  "answerOption": "B",
+  "answerText": "To arouse the curiosity of someone",
+  "difficulty": "easy",
+  "sourceFile": "0568.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 277,
+  "question": "What is the unit of electric current?",
+  "options": [
+    "Volt",
+    "Ohm",
+    "Ampere",
+    "Watt"
+  ],
+  "answerOption": "C",
+  "answerText": "Ampere",
+  "genre": "mixed",
+  "sourceFile": "0277.json"
+}

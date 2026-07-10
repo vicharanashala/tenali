@@ -1,0 +1,15 @@
+{
+  "id": 2280,
+  "word": "Adulterated",
+  "question": "Adulterated",
+  "options": [
+    "Put in a very difficult situation",
+    "One who poses riddles",
+    "An instrument like a barometer",
+    "Made worse by adding inferior matter"
+  ],
+  "answerOption": "D",
+  "answerText": "Made worse by adding inferior matter",
+  "difficulty": "hard",
+  "sourceFile": "2280.json"
+}

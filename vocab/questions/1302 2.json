@@ -1,0 +1,15 @@
+{
+  "id": 1302,
+  "word": "Soporific",
+  "question": "Soporific",
+  "options": [
+    "The use of clever but false arguments",
+    "Tending to induce drowsiness or sleep",
+    "Vivacious and enthusiastic",
+    "Hypocritical and sanctimonious talk"
+  ],
+  "answerOption": "B",
+  "answerText": "Tending to induce drowsiness or sleep",
+  "difficulty": "hard",
+  "sourceFile": "1302.json"
+}

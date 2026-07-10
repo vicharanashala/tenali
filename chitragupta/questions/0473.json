@@ -1,0 +1,14 @@
+{
+  "id": 473,
+  "question": "Which Indian state has Patna as its capital?",
+  "options": [
+    "Uttar Pradesh",
+    "Bihar",
+    "Jharkhand",
+    "West Bengal"
+  ],
+  "answerOption": "B",
+  "answerText": "Bihar",
+  "genre": "geography",
+  "sourceFile": "0473.json"
+}

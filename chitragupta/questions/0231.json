@@ -1,0 +1,14 @@
+{
+  "id": 231,
+  "question": "Which is the national river of India?",
+  "options": [
+    "Yamuna",
+    "Brahmaputra",
+    "Ganga",
+    "Godavari"
+  ],
+  "answerOption": "C",
+  "answerText": "Ganga",
+  "genre": "geography",
+  "sourceFile": "0231.json"
+}

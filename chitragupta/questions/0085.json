@@ -1,0 +1,14 @@
+{
+  "id": 85,
+  "question": "Which Indian state has Bengaluru as its capital?",
+  "options": [
+    "Tamil Nadu",
+    "Karnataka",
+    "Kerala",
+    "Telangana"
+  ],
+  "answerOption": "B",
+  "answerText": "Karnataka",
+  "genre": "geography",
+  "sourceFile": "0085.json"
+}

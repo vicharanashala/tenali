@@ -1,0 +1,15 @@
+{
+  "id": 2470,
+  "word": "Lacuna",
+  "question": "Lacuna",
+  "options": [
+    "Lack of path or way",
+    "An unfilled space or gap",
+    "The inability to remember a particular word",
+    "Without way or path"
+  ],
+  "answerOption": "B",
+  "answerText": "An unfilled space or gap",
+  "difficulty": "extra-hard",
+  "sourceFile": "2470.json"
+}

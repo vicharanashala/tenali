@@ -1,0 +1,15 @@
+{
+  "id": 841,
+  "word": "Keen",
+  "question": "Keen",
+  "options": [
+    "Given to or characterized by quarreling",
+    "Puzzled or confused",
+    "Having a sharp edge or showing eagerness",
+    "Sparing or economical with money or food"
+  ],
+  "answerOption": "C",
+  "answerText": "Having a sharp edge or showing eagerness",
+  "difficulty": "medium",
+  "sourceFile": "0841.json"
+}

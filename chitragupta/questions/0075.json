@@ -1,0 +1,14 @@
+{
+  "id": 75,
+  "question": "Which bird is commonly associated with delivering messages in old times?",
+  "options": [
+    "Sparrow",
+    "Pigeon",
+    "Crow",
+    "Eagle"
+  ],
+  "answerOption": "B",
+  "answerText": "Pigeon",
+  "genre": "general-knowledge",
+  "sourceFile": "0075.json"
+}

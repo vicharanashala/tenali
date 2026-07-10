@@ -1,0 +1,15 @@
+{
+  "id": 153,
+  "word": "Finish",
+  "question": "Finish",
+  "options": [
+    "Expecting the best possible outcome",
+    "To cause someone to lose confidence",
+    "To bring something to an end",
+    "Having the taste of salt"
+  ],
+  "answerOption": "C",
+  "answerText": "To bring something to an end",
+  "difficulty": "easy",
+  "sourceFile": "0153.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 169,
+  "word": "Pull",
+  "question": "Pull",
+  "options": [
+    "Unassuming in the estimation of one's abilities",
+    "Darkly colored or gloomy",
+    "To exert force to move something closer",
+    "To become sound or healthy again"
+  ],
+  "answerOption": "C",
+  "answerText": "To exert force to move something closer",
+  "difficulty": "easy",
+  "sourceFile": "0169.json"
+}

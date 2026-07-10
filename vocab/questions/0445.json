@@ -1,0 +1,15 @@
+{
+  "id": 445,
+  "word": "Label",
+  "question": "Label",
+  "options": [
+    "Notably large in size or amount",
+    "To attach a tag showing the contents",
+    "To protect from attack or danger",
+    "Strongly wanting to do or have something"
+  ],
+  "answerOption": "B",
+  "answerText": "To attach a tag showing the contents",
+  "difficulty": "easy",
+  "sourceFile": "0445.json"
+}

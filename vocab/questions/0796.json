@@ -1,0 +1,15 @@
+{
+  "id": 796,
+  "word": "Neutral",
+  "question": "Neutral",
+  "options": [
+    "Producing much noise or sound",
+    "Not supporting either side in a conflict",
+    "To have an effect on someone's character",
+    "Causing laughter or amusement"
+  ],
+  "answerOption": "B",
+  "answerText": "Not supporting either side in a conflict",
+  "difficulty": "easy",
+  "sourceFile": "0796.json"
+}

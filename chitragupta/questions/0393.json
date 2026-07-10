@@ -1,0 +1,14 @@
+{
+  "id": 393,
+  "question": "Which organ helps maintain balance in the human ear?",
+  "options": [
+    "Cochlea",
+    "Semicircular canals",
+    "Eardrum",
+    "Auditory nerve"
+  ],
+  "answerOption": "B",
+  "answerText": "Semicircular canals",
+  "genre": "science",
+  "sourceFile": "0393.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2841,
+  "word": "Ignis fatuus",
+  "question": "Ignis fatuus",
+  "options": [
+    "State of being abyss-like",
+    "Having cleansing properties",
+    "A will-o-the-wisp; something deceptive",
+    "Organism living in abyss"
+  ],
+  "answerOption": "C",
+  "answerText": "A will-o-the-wisp; something deceptive",
+  "difficulty": "extra-hard",
+  "sourceFile": "2841.json"
+}

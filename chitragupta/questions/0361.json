@@ -1,0 +1,14 @@
+{
+  "id": 361,
+  "question": "Which is the national bird of the United States?",
+  "options": [
+    "Bald eagle",
+    "Falcon",
+    "Condor",
+    "Owl"
+  ],
+  "answerOption": "A",
+  "answerText": "Bald eagle",
+  "genre": "india-gk",
+  "sourceFile": "0361.json"
+}

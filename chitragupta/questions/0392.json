@@ -1,0 +1,14 @@
+{
+  "id": 392,
+  "question": "Which is the highest civilian award in India?",
+  "options": [
+    "Padma Shri",
+    "Bharat Ratna",
+    "Padma Bhushan",
+    "Padma Vibhushan"
+  ],
+  "answerOption": "B",
+  "answerText": "Bharat Ratna",
+  "genre": "india-gk",
+  "sourceFile": "0392.json"
+}

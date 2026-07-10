@@ -1,0 +1,15 @@
+{
+  "id": 1226,
+  "word": "Deception",
+  "question": "Deception",
+  "options": [
+    "The action of deceiving someone",
+    "A feeling of embarrassment or disappointment",
+    "To criticize unfairly or harshly",
+    "An explosion or violent outburst"
+  ],
+  "answerOption": "A",
+  "answerText": "The action of deceiving someone",
+  "difficulty": "medium",
+  "sourceFile": "1226.json"
+}

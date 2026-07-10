@@ -1,0 +1,15 @@
+{
+  "id": 2402,
+  "word": "Saudade",
+  "question": "Saudade",
+  "options": [
+    "The occurrence of events by chance in a happy way",
+    "A melancholic longing for something absent",
+    "In an abjured manner",
+    "Having a large abdomen or belly"
+  ],
+  "answerOption": "B",
+  "answerText": "A melancholic longing for something absent",
+  "difficulty": "extra-hard",
+  "sourceFile": "2402.json"
+}

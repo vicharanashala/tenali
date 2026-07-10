@@ -1,0 +1,15 @@
+{
+  "id": 650,
+  "word": "Eloquent",
+  "question": "Eloquent",
+  "options": [
+    "Having a strong desire for success",
+    "Fluent and persuasive in speaking",
+    "To shine with a soft trembling light",
+    "Showing a willingness to take risks"
+  ],
+  "answerOption": "B",
+  "answerText": "Fluent and persuasive in speaking",
+  "difficulty": "easy",
+  "sourceFile": "0650.json"
+}

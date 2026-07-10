@@ -1,0 +1,15 @@
+{
+  "id": 661,
+  "word": "Tiny",
+  "question": "Tiny",
+  "options": [
+    "Giving information clearly in few words",
+    "Very small in size",
+    "To bring or gather things together",
+    "To give up something valued for a greater cause"
+  ],
+  "answerOption": "B",
+  "answerText": "Very small in size",
+  "difficulty": "easy",
+  "sourceFile": "0661.json"
+}

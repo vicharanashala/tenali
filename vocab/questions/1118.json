@@ -1,0 +1,15 @@
+{
+  "id": 1118,
+  "word": "Aloof",
+  "question": "Aloof",
+  "options": [
+    "Relating to fundamental change",
+    "To make someone feel annoyed or frustrated",
+    "To make more democratic or popular",
+    "Not friendly or interested; distant"
+  ],
+  "answerOption": "D",
+  "answerText": "Not friendly or interested; distant",
+  "difficulty": "medium",
+  "sourceFile": "1118.json"
+}

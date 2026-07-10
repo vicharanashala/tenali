@@ -1,0 +1,15 @@
+{
+  "id": 102,
+  "word": "Cheap",
+  "question": "Cheap",
+  "options": [
+    "Extremely large in scale or degree",
+    "Low in price; not expensive",
+    "Using imagination to create new things",
+    "Having received a good education"
+  ],
+  "answerOption": "B",
+  "answerText": "Low in price; not expensive",
+  "difficulty": "easy",
+  "sourceFile": "0102.json"
+}

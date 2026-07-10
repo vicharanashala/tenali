@@ -1,0 +1,15 @@
+{
+  "id": 59,
+  "word": "Simple",
+  "question": "Simple",
+  "options": [
+    "Being reserved or timid around other people",
+    "Required by law or rule; mandatory",
+    "Of great or more than average height",
+    "Easy to understand or do"
+  ],
+  "answerOption": "D",
+  "answerText": "Easy to understand or do",
+  "difficulty": "easy",
+  "sourceFile": "0059.json"
+}

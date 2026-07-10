@@ -1,0 +1,15 @@
+{
+  "id": 3350,
+  "word": "Abstractive",
+  "question": "Abstractive",
+  "options": [
+    "Plural of abyss",
+    "Made to lack literature",
+    "Relating to abstraction",
+    "Physically capable and strong"
+  ],
+  "answerOption": "C",
+  "answerText": "Relating to abstraction",
+  "difficulty": "extra-hard",
+  "sourceFile": "3350.json"
+}

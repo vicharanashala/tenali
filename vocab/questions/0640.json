@@ -1,0 +1,15 @@
+{
+  "id": 640,
+  "word": "Proficient",
+  "question": "Proficient",
+  "options": [
+    "Competent or skilled in doing something",
+    "Lasting a considerable time",
+    "A barren area with very little rainfall",
+    "Given to sudden changes of mood"
+  ],
+  "answerOption": "A",
+  "answerText": "Competent or skilled in doing something",
+  "difficulty": "easy",
+  "sourceFile": "0640.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1381,
+  "word": "Komorebi",
+  "question": "Komorebi",
+  "options": [
+    "The dark gray color seen when the eyes are closed",
+    "The realization of love through separation",
+    "Sunlight filtering through tree leaves",
+    "Amputation of the body below the waist"
+  ],
+  "answerOption": "C",
+  "answerText": "Sunlight filtering through tree leaves",
+  "difficulty": "extra-hard",
+  "sourceFile": "1381.json"
+}

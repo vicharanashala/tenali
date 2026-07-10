@@ -1,0 +1,15 @@
+{
+  "id": 769,
+  "word": "Spontaneous",
+  "question": "Spontaneous",
+  "options": [
+    "Performed without planning or prompting",
+    "Causing an urge to scratch",
+    "Free of deceit; truthful",
+    "To make sounds showing amusement"
+  ],
+  "answerOption": "A",
+  "answerText": "Performed without planning or prompting",
+  "difficulty": "easy",
+  "sourceFile": "0769.json"
+}

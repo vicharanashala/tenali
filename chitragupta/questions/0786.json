@@ -1,0 +1,14 @@
+{
+  "id": 786,
+  "question": "Who discovered electromagnetic waves experimentally?",
+  "options": [
+    "Maxwell",
+    "Hertz",
+    "Faraday",
+    "Ampere"
+  ],
+  "answerOption": "B",
+  "answerText": "Hertz",
+  "genre": "general-knowledge",
+  "sourceFile": "0786.json"
+}

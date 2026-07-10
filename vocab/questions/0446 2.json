@@ -1,0 +1,15 @@
+{
+  "id": 446,
+  "word": "Mark",
+  "question": "Mark",
+  "options": [
+    "Done with the hands; requiring human effort",
+    "To leave out or keep from entering",
+    "To make a visible sign on something",
+    "To freely offer to do something"
+  ],
+  "answerOption": "C",
+  "answerText": "To make a visible sign on something",
+  "difficulty": "easy",
+  "sourceFile": "0446.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1101,
+  "word": "Humility",
+  "question": "Humility",
+  "options": [
+    "A substance reducing body odor",
+    "To assign responsibility to another person",
+    "Involving conflict or opposition",
+    "A modest view of one's own importance"
+  ],
+  "answerOption": "D",
+  "answerText": "A modest view of one's own importance",
+  "difficulty": "medium",
+  "sourceFile": "1101.json"
+}

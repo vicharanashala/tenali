@@ -1,0 +1,15 @@
+{
+  "id": 1988,
+  "word": "Advised",
+  "question": "Advised",
+  "options": [
+    "A tool for shaping wood",
+    "The action of dissolving in air",
+    "An instrument for measuring air",
+    "Done with deliberation or awareness"
+  ],
+  "answerOption": "D",
+  "answerText": "Done with deliberation or awareness",
+  "difficulty": "hard",
+  "sourceFile": "1988.json"
+}

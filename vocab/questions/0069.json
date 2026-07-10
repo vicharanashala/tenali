@@ -1,0 +1,15 @@
+{
+  "id": 69,
+  "word": "Selfish",
+  "question": "Selfish",
+  "options": [
+    "Extremely gloomy or bleak",
+    "In a state of complete confusion",
+    "Lacking consideration for other people",
+    "Bent or twisted out of shape"
+  ],
+  "answerOption": "C",
+  "answerText": "Lacking consideration for other people",
+  "difficulty": "easy",
+  "sourceFile": "0069.json"
+}

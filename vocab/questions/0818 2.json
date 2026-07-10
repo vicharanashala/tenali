@@ -1,0 +1,15 @@
+{
+  "id": 818,
+  "word": "Ambiguous",
+  "question": "Ambiguous",
+  "options": [
+    "To shine with flashes of light",
+    "Unpleasant or repulsive in appearance",
+    "Open to more than one interpretation",
+    "To put goods or cargo onto a vehicle"
+  ],
+  "answerOption": "C",
+  "answerText": "Open to more than one interpretation",
+  "difficulty": "easy",
+  "sourceFile": "0818.json"
+}

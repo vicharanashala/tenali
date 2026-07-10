@@ -1,0 +1,14 @@
+{
+  "id": 230,
+  "question": "Who is known for formulating the laws of inheritance in genetics?",
+  "options": [
+    "Charles Darwin",
+    "Gregor Mendel",
+    "Watson",
+    "Harvey"
+  ],
+  "answerOption": "B",
+  "answerText": "Gregor Mendel",
+  "genre": "general-knowledge",
+  "sourceFile": "0230.json"
+}

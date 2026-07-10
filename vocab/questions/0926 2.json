@@ -1,0 +1,15 @@
+{
+  "id": 926,
+  "word": "Brash",
+  "question": "Brash",
+  "options": [
+    "To publicly declare to be wrong",
+    "Self-assertive in a rude or noisy way",
+    "Having a sharp edge or showing eagerness",
+    "To continue in a course of action"
+  ],
+  "answerOption": "B",
+  "answerText": "Self-assertive in a rude or noisy way",
+  "difficulty": "medium",
+  "sourceFile": "0926.json"
+}

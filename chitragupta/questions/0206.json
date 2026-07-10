@@ -1,0 +1,14 @@
+{
+  "id": 206,
+  "question": "Which is the largest inland body of water in the world?",
+  "options": [
+    "Caspian Sea",
+    "Black Sea",
+    "Lake Superior",
+    "Aral Sea"
+  ],
+  "answerOption": "A",
+  "answerText": "Caspian Sea",
+  "genre": "science",
+  "sourceFile": "0206.json"
+}

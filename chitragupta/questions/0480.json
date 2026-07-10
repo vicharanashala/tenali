@@ -1,0 +1,14 @@
+{
+  "id": 480,
+  "question": "Which Indian state has Raipur as its capital?",
+  "options": [
+    "Odisha",
+    "Chhattisgarh",
+    "Jharkhand",
+    "Bihar"
+  ],
+  "answerOption": "B",
+  "answerText": "Chhattisgarh",
+  "genre": "geography",
+  "sourceFile": "0480.json"
+}

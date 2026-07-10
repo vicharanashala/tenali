@@ -1,0 +1,15 @@
+{
+  "id": 1200,
+  "word": "Palpable",
+  "question": "Palpable",
+  "options": [
+    "So intense as to be almost touched or felt",
+    "A statement describing something",
+    "A lack or shortage of something",
+    "The action of reducing in rank or status"
+  ],
+  "answerOption": "A",
+  "answerText": "So intense as to be almost touched or felt",
+  "difficulty": "medium",
+  "sourceFile": "1200.json"
+}

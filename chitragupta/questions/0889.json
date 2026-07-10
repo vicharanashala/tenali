@@ -1,0 +1,14 @@
+{
+  "id": 889,
+  "question": "Who wrote 'Rebecca'?",
+  "options": [
+    "Daphne du Maurier",
+    "Virginia Woolf",
+    "Agatha Christie",
+    "Emily Brontë"
+  ],
+  "answerOption": "A",
+  "answerText": "Daphne du Maurier",
+  "genre": "general-knowledge",
+  "sourceFile": "0889.json"
+}

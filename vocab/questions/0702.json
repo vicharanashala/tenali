@@ -1,0 +1,15 @@
+{
+  "id": 702,
+  "word": "Frequent",
+  "question": "Frequent",
+  "options": [
+    "To disappear suddenly and completely",
+    "Having a sharp or sour taste",
+    "Occurring or done many times",
+    "Based on clear thought and reason"
+  ],
+  "answerOption": "C",
+  "answerText": "Occurring or done many times",
+  "difficulty": "easy",
+  "sourceFile": "0702.json"
+}

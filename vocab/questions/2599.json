@@ -1,0 +1,15 @@
+{
+  "id": 2599,
+  "word": "AEROSTATICIAN",
+  "question": "AEROSTATICIAN",
+  "options": [
+    "Impossible to understand or comprehend",
+    "Medicine relating to aviation",
+    "Expert in aerostation",
+    "Something that hinders or delays"
+  ],
+  "answerOption": "C",
+  "answerText": "Expert in aerostation",
+  "difficulty": "hard",
+  "sourceFile": "2599.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 81,
+  "word": "Sick",
+  "question": "Sick",
+  "options": [
+    "Involving or creating good conditions",
+    "To carefully choose as being the best",
+    "To remove the wrapping from something",
+    "Affected by physical illness"
+  ],
+  "answerOption": "D",
+  "answerText": "Affected by physical illness",
+  "difficulty": "easy",
+  "sourceFile": "0081.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2004,
+  "word": "Harangue",
+  "question": "Harangue",
+  "options": [
+    "The pattern of rising and falling pitch",
+    "A female aeromotor operator",
+    "A lengthy and aggressive speech",
+    "The action of soliciting something"
+  ],
+  "answerOption": "C",
+  "answerText": "A lengthy and aggressive speech",
+  "difficulty": "hard",
+  "sourceFile": "2004.json"
+}

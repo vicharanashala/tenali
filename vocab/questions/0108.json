@@ -1,0 +1,15 @@
+{
+  "id": 108,
+  "word": "Rare",
+  "question": "Rare",
+  "options": [
+    "To have a strong emotional effect on someone",
+    "In perfect original condition",
+    "Lacking in liveliness or joy",
+    "Not found in large numbers; uncommon"
+  ],
+  "answerOption": "D",
+  "answerText": "Not found in large numbers; uncommon",
+  "difficulty": "easy",
+  "sourceFile": "0108.json"
+}

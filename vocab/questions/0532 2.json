@@ -1,0 +1,15 @@
+{
+  "id": 532,
+  "word": "Weaken",
+  "question": "Weaken",
+  "options": [
+    "To make something full or complete",
+    "Feeling thankful for something received",
+    "To protect from attack or danger",
+    "To make something less strong"
+  ],
+  "answerOption": "D",
+  "answerText": "To make something less strong",
+  "difficulty": "easy",
+  "sourceFile": "0532.json"
+}

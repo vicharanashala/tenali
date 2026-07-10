@@ -1,0 +1,15 @@
+{
+  "id": 363,
+  "word": "Display",
+  "question": "Display",
+  "options": [
+    "Able to be seen",
+    "To attach a tag showing the contents",
+    "To show something for others to see",
+    "Not able to cause damage or injury"
+  ],
+  "answerOption": "C",
+  "answerText": "To show something for others to see",
+  "difficulty": "easy",
+  "sourceFile": "0363.json"
+}

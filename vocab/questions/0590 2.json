@@ -1,0 +1,15 @@
+{
+  "id": 590,
+  "word": "Versatile",
+  "question": "Versatile",
+  "options": [
+    "To cook food by prolonged exposure to heat",
+    "To give facts or information to someone",
+    "Unusual or surprising; hard to explain",
+    "Able to adapt to many different uses"
+  ],
+  "answerOption": "D",
+  "answerText": "Able to adapt to many different uses",
+  "difficulty": "easy",
+  "sourceFile": "0590.json"
+}

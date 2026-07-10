@@ -1,0 +1,15 @@
+{
+  "id": 2241,
+  "word": "AEROSPHYGIA",
+  "question": "AEROSPHYGIA",
+  "options": [
+    "A short public announcement",
+    "Tightness of chest from altitude",
+    "Criticizing cherished beliefs or institutions",
+    "An engine powered by air"
+  ],
+  "answerOption": "B",
+  "answerText": "Tightness of chest from altitude",
+  "difficulty": "hard",
+  "sourceFile": "2241.json"
+}

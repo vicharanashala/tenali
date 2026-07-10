@@ -1,0 +1,14 @@
+{
+  "id": 60,
+  "question": "Mount Everest lies in the Himalayas on the border of Nepal and which other region/country?",
+  "options": [
+    "Bhutan",
+    "Tibet/China",
+    "India",
+    "Pakistan"
+  ],
+  "answerOption": "B",
+  "answerText": "Tibet/China",
+  "genre": "geography",
+  "sourceFile": "0060.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 3034,
+  "word": "Wabi-sabi",
+  "question": "Wabi-sabi",
+  "options": [
+    "A plant adapted to dry conditions",
+    "Organisms floating in abyss",
+    "Finding beauty in imperfection",
+    "Toward the abyss"
+  ],
+  "answerOption": "C",
+  "answerText": "Finding beauty in imperfection",
+  "difficulty": "extra-hard",
+  "sourceFile": "3034.json"
+}

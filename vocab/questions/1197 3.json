@@ -1,0 +1,15 @@
+{
+  "id": 1197,
+  "word": "Cogent",
+  "question": "Cogent",
+  "options": [
+    "Acting without forethought",
+    "To appoint as a deputy",
+    "Clear, logical, and convincing",
+    "Relying on another for support"
+  ],
+  "answerOption": "C",
+  "answerText": "Clear, logical, and convincing",
+  "difficulty": "medium",
+  "sourceFile": "1197.json"
+}

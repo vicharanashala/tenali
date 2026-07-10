@@ -1,0 +1,15 @@
+{
+  "id": 227,
+  "word": "Repel",
+  "question": "Repel",
+  "options": [
+    "Lacking in liveliness or joy",
+    "To move through the air with wings",
+    "To exert force to move something closer",
+    "To drive or force something away"
+  ],
+  "answerOption": "D",
+  "answerText": "To drive or force something away",
+  "difficulty": "easy",
+  "sourceFile": "0227.json"
+}

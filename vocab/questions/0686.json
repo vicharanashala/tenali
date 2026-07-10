@@ -1,0 +1,15 @@
+{
+  "id": 686,
+  "word": "Feeble",
+  "question": "Feeble",
+  "options": [
+    "Lacking physical strength",
+    "Uneven with rough sharp edges",
+    "To rest on the surface of a liquid",
+    "To watch something carefully"
+  ],
+  "answerOption": "A",
+  "answerText": "Lacking physical strength",
+  "difficulty": "easy",
+  "sourceFile": "0686.json"
+}

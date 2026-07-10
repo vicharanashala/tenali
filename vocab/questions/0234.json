@@ -1,0 +1,15 @@
+{
+  "id": 234,
+  "word": "Comfort",
+  "question": "Comfort",
+  "options": [
+    "Extremely large or great in scale",
+    "Having good manners and showing respect",
+    "Giving information clearly in few words",
+    "To ease the grief or distress of someone"
+  ],
+  "answerOption": "D",
+  "answerText": "To ease the grief or distress of someone",
+  "difficulty": "easy",
+  "sourceFile": "0234.json"
+}

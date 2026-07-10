@@ -1,0 +1,15 @@
+{
+  "id": 681,
+  "word": "Delicate",
+  "question": "Delicate",
+  "options": [
+    "Having no strong flavor or taste",
+    "Showing a willingness to take risks",
+    "Very fine in texture or structure",
+    "Having a sharp or sour taste"
+  ],
+  "answerOption": "C",
+  "answerText": "Very fine in texture or structure",
+  "difficulty": "easy",
+  "sourceFile": "0681.json"
+}

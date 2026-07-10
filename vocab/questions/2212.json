@@ -1,0 +1,15 @@
+{
+  "id": 2212,
+  "word": "Ignominy",
+  "question": "Ignominy",
+  "options": [
+    "Giving or serving as a warning",
+    "Loving air exposure",
+    "A return or recurrence of something",
+    "Public shame or disgrace"
+  ],
+  "answerOption": "D",
+  "answerText": "Public shame or disgrace",
+  "difficulty": "hard",
+  "sourceFile": "2212.json"
+}

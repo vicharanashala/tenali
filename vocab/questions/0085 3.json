@@ -1,0 +1,15 @@
+{
+  "id": 85,
+  "word": "Wide",
+  "question": "Wide",
+  "options": [
+    "Mild in temperament or behavior",
+    "Shaped like a ball or globe",
+    "To move forward on hands and knees",
+    "Of great extent from side to side"
+  ],
+  "answerOption": "D",
+  "answerText": "Of great extent from side to side",
+  "difficulty": "easy",
+  "sourceFile": "0085.json"
+}

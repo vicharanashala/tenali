@@ -1,0 +1,15 @@
+{
+  "id": 748,
+  "word": "Arctic",
+  "question": "Arctic",
+  "options": [
+    "Very full of people or things",
+    "To give and receive things of similar value",
+    "To relieve a person of symptoms of disease",
+    "Relating to regions around the North Pole"
+  ],
+  "answerOption": "D",
+  "answerText": "Relating to regions around the North Pole",
+  "difficulty": "easy",
+  "sourceFile": "0748.json"
+}

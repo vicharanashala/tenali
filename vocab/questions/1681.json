@@ -1,0 +1,15 @@
+{
+  "id": 1681,
+  "word": "Detergent",
+  "question": "Detergent",
+  "options": [
+    "A cleansing agent or substance",
+    "Totally confused or puzzled",
+    "Severely hampered or restricted",
+    "Not morally correct"
+  ],
+  "answerOption": "A",
+  "answerText": "A cleansing agent or substance",
+  "difficulty": "medium",
+  "sourceFile": "1681.json"
+}

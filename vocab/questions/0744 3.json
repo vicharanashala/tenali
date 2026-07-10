@@ -1,0 +1,15 @@
+{
+  "id": 744,
+  "word": "Aquatic",
+  "question": "Aquatic",
+  "options": [
+    "To find the size or amount of something",
+    "Relating to or living in water",
+    "Lasting for a limited time only",
+    "To give an authoritative order"
+  ],
+  "answerOption": "B",
+  "answerText": "Relating to or living in water",
+  "difficulty": "easy",
+  "sourceFile": "0744.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 602,
+  "question": "Which part of the tooth contains nerves and blood vessels?",
+  "options": [
+    "Enamel",
+    "Dentin",
+    "Pulp",
+    "Cementum"
+  ],
+  "answerOption": "C",
+  "answerText": "Pulp",
+  "genre": "science",
+  "sourceFile": "0602.json"
+}

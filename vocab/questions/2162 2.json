@@ -1,0 +1,15 @@
+{
+  "id": 2162,
+  "word": "Aerojet",
+  "question": "Aerojet",
+  "options": [
+    "Optimistic in a difficult situation",
+    "A kind of feldspar mineral",
+    "A jet-powered aircraft",
+    "Having excessive fondness for one's wife"
+  ],
+  "answerOption": "C",
+  "answerText": "A jet-powered aircraft",
+  "difficulty": "hard",
+  "sourceFile": "2162.json"
+}

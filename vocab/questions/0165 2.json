@@ -1,0 +1,15 @@
+{
+  "id": 165,
+  "word": "Separate",
+  "question": "Separate",
+  "options": [
+    "To take something away from a position",
+    "Completely different in every way",
+    "To cause to move apart",
+    "To identify someone from previous encounters"
+  ],
+  "answerOption": "C",
+  "answerText": "To cause to move apart",
+  "difficulty": "easy",
+  "sourceFile": "0165.json"
+}

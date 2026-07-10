@@ -1,0 +1,15 @@
+{
+  "id": 761,
+  "word": "Tranquil",
+  "question": "Tranquil",
+  "options": [
+    "Attractive in a delicate way",
+    "To cause to move apart",
+    "To honor a special occasion with festivities",
+    "Free from disturbance; calm"
+  ],
+  "answerOption": "D",
+  "answerText": "Free from disturbance; calm",
+  "difficulty": "easy",
+  "sourceFile": "0761.json"
+}

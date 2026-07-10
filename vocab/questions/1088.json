@@ -1,0 +1,15 @@
+{
+  "id": 1088,
+  "word": "Scrupulous",
+  "question": "Scrupulous",
+  "options": [
+    "In a despicable manner",
+    "Easily understood or expressed",
+    "Careful and thorough; extremely attentive",
+    "Never done or known before"
+  ],
+  "answerOption": "C",
+  "answerText": "Careful and thorough; extremely attentive",
+  "difficulty": "medium",
+  "sourceFile": "1088.json"
+}

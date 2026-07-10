@@ -1,0 +1,15 @@
+{
+  "id": 255,
+  "word": "Descend",
+  "question": "Descend",
+  "options": [
+    "To start doing something",
+    "Quick to notice any unusual activity",
+    "To move downward from a higher point",
+    "To express dissatisfaction about something"
+  ],
+  "answerOption": "C",
+  "answerText": "To move downward from a higher point",
+  "difficulty": "easy",
+  "sourceFile": "0255.json"
+}

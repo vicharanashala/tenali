@@ -1,0 +1,15 @@
+{
+  "id": 318,
+  "word": "Bore",
+  "question": "Bore",
+  "options": [
+    "Exceptionally good; remarkable",
+    "To make someone feel weary and uninterested",
+    "Tending to cause harm",
+    "Having a high amount of moisture in the air"
+  ],
+  "answerOption": "B",
+  "answerText": "To make someone feel weary and uninterested",
+  "difficulty": "easy",
+  "sourceFile": "0318.json"
+}

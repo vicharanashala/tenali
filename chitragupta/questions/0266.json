@@ -1,0 +1,14 @@
+{
+  "id": 266,
+  "question": "Which famous physicist proposed the laws of motion and universal gravitation?",
+  "options": [
+    "Albert Einstein",
+    "Isaac Newton",
+    "James Clerk Maxwell",
+    "Nikola Tesla"
+  ],
+  "answerOption": "B",
+  "answerText": "Isaac Newton",
+  "genre": "mixed",
+  "sourceFile": "0266.json"
+}

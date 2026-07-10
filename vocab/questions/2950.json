@@ -1,0 +1,15 @@
+{
+  "id": 2950,
+  "word": "Vouching",
+  "question": "Vouching",
+  "options": [
+    "The action of adulterating",
+    "The action of distributing something",
+    "The action of bearing witness",
+    "The action of occurring again"
+  ],
+  "answerOption": "C",
+  "answerText": "The action of bearing witness",
+  "difficulty": "hard",
+  "sourceFile": "2950.json"
+}

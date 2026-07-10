@@ -1,0 +1,15 @@
+{
+  "id": 447,
+  "word": "Erase",
+  "question": "Erase",
+  "options": [
+    "Having made a firm decision about something",
+    "To rub out or remove written marks",
+    "Guilty of misleading or tricking others",
+    "To honor a special occasion with festivities"
+  ],
+  "answerOption": "B",
+  "answerText": "To rub out or remove written marks",
+  "difficulty": "easy",
+  "sourceFile": "0447.json"
+}

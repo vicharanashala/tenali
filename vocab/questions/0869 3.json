@@ -1,0 +1,15 @@
+{
+  "id": 869,
+  "word": "Quick",
+  "question": "Quick",
+  "options": [
+    "Moving with speed or done rapidly",
+    "To push off the ground using the legs",
+    "To dry out and shrivel up",
+    "To freely offer to do something"
+  ],
+  "answerOption": "A",
+  "answerText": "Moving with speed or done rapidly",
+  "difficulty": "easy",
+  "sourceFile": "0869.json"
+}

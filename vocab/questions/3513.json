@@ -1,0 +1,15 @@
+{
+  "id": 3513,
+  "word": "Abyssoplancton",
+  "question": "Abyssoplancton",
+  "options": [
+    "To cut the abyss",
+    "One speaking against ablation",
+    "Organisms floating in abyss",
+    "Creature with abyss feet"
+  ],
+  "answerOption": "C",
+  "answerText": "Organisms floating in abyss",
+  "difficulty": "extra-hard",
+  "sourceFile": "3513.json"
+}

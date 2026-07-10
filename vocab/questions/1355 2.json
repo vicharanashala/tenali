@@ -1,0 +1,15 @@
+{
+  "id": 1355,
+  "word": "Defenestration",
+  "question": "Defenestration",
+  "options": [
+    "The act of throwing someone out of a window",
+    "A fine filmy substance of cobwebs",
+    "Wandering alone",
+    "A person who has returned from the dead"
+  ],
+  "answerOption": "A",
+  "answerText": "The act of throwing someone out of a window",
+  "difficulty": "extra-hard",
+  "sourceFile": "1355.json"
+}

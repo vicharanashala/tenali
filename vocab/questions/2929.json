@@ -1,0 +1,15 @@
+{
+  "id": 2929,
+  "word": "Exposure",
+  "question": "Exposure",
+  "options": [
+    "A family of sea slugs",
+    "The state of being exposed",
+    "Lack of pity or compassion",
+    "Intended for a small group with special knowledge"
+  ],
+  "answerOption": "B",
+  "answerText": "The state of being exposed",
+  "difficulty": "hard",
+  "sourceFile": "2929.json"
+}

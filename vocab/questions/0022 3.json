@@ -1,0 +1,15 @@
+{
+  "id": 22,
+  "word": "Kind",
+  "question": "Kind",
+  "options": [
+    "Having the ability to learn and understand",
+    "To reach a destination",
+    "To cause to move apart",
+    "Generous and considerate towards others"
+  ],
+  "answerOption": "D",
+  "answerText": "Generous and considerate towards others",
+  "difficulty": "easy",
+  "sourceFile": "0022.json"
+}

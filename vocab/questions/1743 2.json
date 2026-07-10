@@ -1,0 +1,15 @@
+{
+  "id": 1743,
+  "word": "Idiosyncrasy",
+  "question": "Idiosyncrasy",
+  "options": [
+    "A peculiar behavioral habit",
+    "An exciting and unusual experience",
+    "One who fears flying",
+    "Expert in air technology"
+  ],
+  "answerOption": "A",
+  "answerText": "A peculiar behavioral habit",
+  "difficulty": "hard",
+  "sourceFile": "1743.json"
+}

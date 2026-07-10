@@ -1,0 +1,15 @@
+{
+  "id": 2003,
+  "word": "Garrulous",
+  "question": "Garrulous",
+  "options": [
+    "Inner sanctum of Greek temple",
+    "Excessively talkative about trivial things",
+    "The quality of being sure",
+    "A camera for aerial photography"
+  ],
+  "answerOption": "B",
+  "answerText": "Excessively talkative about trivial things",
+  "difficulty": "hard",
+  "sourceFile": "2003.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 312,
+  "word": "Encourage",
+  "question": "Encourage",
+  "options": [
+    "Characterized by constant change and activity",
+    "To give support and confidence to someone",
+    "To settle a dispute by making concessions",
+    "To feel or detect something"
+  ],
+  "answerOption": "B",
+  "answerText": "To give support and confidence to someone",
+  "difficulty": "easy",
+  "sourceFile": "0312.json"
+}

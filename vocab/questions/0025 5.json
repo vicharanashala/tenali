@@ -1,0 +1,15 @@
+{
+  "id": 25,
+  "word": "Poor",
+  "question": "Poor",
+  "options": [
+    "Lacking sufficient money to live comfortably",
+    "Stretched tight or under strain",
+    "Free from dirt or impurities",
+    "To arouse the curiosity of someone"
+  ],
+  "answerOption": "A",
+  "answerText": "Lacking sufficient money to live comfortably",
+  "difficulty": "easy",
+  "sourceFile": "0025.json"
+}

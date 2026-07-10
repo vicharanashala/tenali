@@ -1,0 +1,15 @@
+{
+  "id": 1793,
+  "word": "Relentless",
+  "question": "Relentless",
+  "options": [
+    "Stormy or turbulent in nature",
+    "Permanently disabled or injured",
+    "Continuing without pause",
+    "Failing in or neglectful of a duty"
+  ],
+  "answerOption": "C",
+  "answerText": "Continuing without pause",
+  "difficulty": "medium",
+  "sourceFile": "1793.json"
+}

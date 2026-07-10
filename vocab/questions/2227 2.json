@@ -1,0 +1,15 @@
+{
+  "id": 2227,
+  "word": "AEROSIS",
+  "question": "AEROSIS",
+  "options": [
+    "The arrival of a notable person",
+    "Extreme patriotism in aggressive policy",
+    "Something reused but still bearing traces of its earlier form",
+    "Medical condition from altitude"
+  ],
+  "answerOption": "D",
+  "answerText": "Medical condition from altitude",
+  "difficulty": "hard",
+  "sourceFile": "2227.json"
+}

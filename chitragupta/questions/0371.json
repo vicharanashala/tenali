@@ -1,0 +1,14 @@
+{
+  "id": 371,
+  "question": "Which famous explorer reached India by sea route in 1498 from Europe?",
+  "options": [
+    "Columbus",
+    "Vasco da Gama",
+    "Magellan",
+    "Marco Polo"
+  ],
+  "answerOption": "B",
+  "answerText": "Vasco da Gama",
+  "genre": "india-gk",
+  "sourceFile": "0371.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1608,
+  "word": "Determiner",
+  "question": "Determiner",
+  "options": [
+    "Fully in agreement with all parties",
+    "A word determining meaning",
+    "Using few words; devoid of superfluity",
+    "Having awareness or knowledge of something"
+  ],
+  "answerOption": "B",
+  "answerText": "A word determining meaning",
+  "difficulty": "medium",
+  "sourceFile": "1608.json"
+}

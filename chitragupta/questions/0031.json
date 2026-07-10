@@ -1,0 +1,14 @@
+{
+  "id": 31,
+  "question": "What is the capital of Portugal?",
+  "options": [
+    "Buenos Aires",
+    "Lisbon",
+    "Bangkok",
+    "Tokyo"
+  ],
+  "answerOption": "B",
+  "answerText": "Lisbon",
+  "genre": "geography",
+  "sourceFile": "0031.json"
+}

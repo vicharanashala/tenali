@@ -1,0 +1,15 @@
+{
+  "id": 1390,
+  "word": "Tsundoku",
+  "question": "Tsundoku",
+  "options": [
+    "Extremely delicate and light; heavenly",
+    "The state of being infatuated with someone",
+    "Acquiring books but letting them pile up unread",
+    "A person who achieves great success when young"
+  ],
+  "answerOption": "C",
+  "answerText": "Acquiring books but letting them pile up unread",
+  "difficulty": "extra-hard",
+  "sourceFile": "1390.json"
+}

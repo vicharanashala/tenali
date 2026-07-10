@@ -1,0 +1,14 @@
+{
+  "id": 706,
+  "question": "Who wrote 'The Red and the Black'?",
+  "options": [
+    "Stendhal",
+    "Balzac",
+    "Hugo",
+    "Zola"
+  ],
+  "answerOption": "A",
+  "answerText": "Stendhal",
+  "genre": "general-knowledge",
+  "sourceFile": "0706.json"
+}

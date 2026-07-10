@@ -1,0 +1,15 @@
+{
+  "id": 120,
+  "word": "Peaceful",
+  "question": "Peaceful",
+  "options": [
+    "Free from disturbance; tranquil",
+    "Different from what is normal or expected",
+    "Lacking flavor or interest",
+    "To state something in an exact way"
+  ],
+  "answerOption": "A",
+  "answerText": "Free from disturbance; tranquil",
+  "difficulty": "easy",
+  "sourceFile": "0120.json"
+}

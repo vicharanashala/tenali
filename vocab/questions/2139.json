@@ -1,0 +1,15 @@
+{
+  "id": 2139,
+  "word": "Incorrigible",
+  "question": "Incorrigible",
+  "options": [
+    "The state of being dormant",
+    "A type of small bean",
+    "Voluntary sexual intercourse outside marriage",
+    "Not able to be corrected or reformed"
+  ],
+  "answerOption": "D",
+  "answerText": "Not able to be corrected or reformed",
+  "difficulty": "hard",
+  "sourceFile": "2139.json"
+}

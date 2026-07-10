@@ -1,0 +1,15 @@
+{
+  "id": 857,
+  "word": "Candid",
+  "question": "Candid",
+  "options": [
+    "Truthful and straightforward; frank",
+    "Friendly and welcoming to strangers",
+    "Lasting for a very short time",
+    "Sparing or economical with money or food"
+  ],
+  "answerOption": "A",
+  "answerText": "Truthful and straightforward; frank",
+  "difficulty": "medium",
+  "sourceFile": "0857.json"
+}

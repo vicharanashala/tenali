@@ -1,0 +1,14 @@
+{
+  "id": 363,
+  "question": "Which Indian state has Shillong as its capital?",
+  "options": [
+    "Nagaland",
+    "Mizoram",
+    "Meghalaya",
+    "Tripura"
+  ],
+  "answerOption": "C",
+  "answerText": "Meghalaya",
+  "genre": "geography",
+  "sourceFile": "0363.json"
+}

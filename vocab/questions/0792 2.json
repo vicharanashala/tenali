@@ -1,0 +1,15 @@
+{
+  "id": 792,
+  "word": "Detrimental",
+  "question": "Detrimental",
+  "options": [
+    "Tending to cause harm",
+    "Careful to avoid potential problems",
+    "Extending in one direction without curves",
+    "To move with urgent haste"
+  ],
+  "answerOption": "A",
+  "answerText": "Tending to cause harm",
+  "difficulty": "easy",
+  "sourceFile": "0792.json"
+}

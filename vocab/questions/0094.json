@@ -1,0 +1,15 @@
+{
+  "id": 94,
+  "word": "Dull",
+  "question": "Dull",
+  "options": [
+    "To attract and hold the attention of someone",
+    "In a particular place; existing now",
+    "To give a portion of something to others",
+    "Lacking interest or excitement"
+  ],
+  "answerOption": "D",
+  "answerText": "Lacking interest or excitement",
+  "difficulty": "easy",
+  "sourceFile": "0094.json"
+}

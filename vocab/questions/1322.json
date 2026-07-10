@@ -1,0 +1,15 @@
+{
+  "id": 1322,
+  "word": "Decorous",
+  "question": "Decorous",
+  "options": [
+    "Given to or characterized by quarreling",
+    "In keeping with good taste and propriety",
+    "Acting without thinking",
+    "The latest fashion or style"
+  ],
+  "answerOption": "B",
+  "answerText": "In keeping with good taste and propriety",
+  "difficulty": "medium",
+  "sourceFile": "1322.json"
+}

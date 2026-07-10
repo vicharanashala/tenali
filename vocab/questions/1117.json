@@ -1,0 +1,15 @@
+{
+  "id": 1117,
+  "word": "Zenith",
+  "question": "Zenith",
+  "options": [
+    "The highest point reached by something",
+    "Showing a lack of experience or wisdom",
+    "To reduce the population of",
+    "Clearly defined or determined"
+  ],
+  "answerOption": "A",
+  "answerText": "The highest point reached by something",
+  "difficulty": "medium",
+  "sourceFile": "1117.json"
+}

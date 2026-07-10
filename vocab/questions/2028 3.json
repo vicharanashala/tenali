@@ -1,0 +1,15 @@
+{
+  "id": 2028,
+  "word": "Panacea",
+  "question": "Panacea",
+  "options": [
+    "A solution for all difficulties or diseases",
+    "A huge and overwhelming force",
+    "A type of small bean",
+    "A poison from air"
+  ],
+  "answerOption": "A",
+  "answerText": "A solution for all difficulties or diseases",
+  "difficulty": "hard",
+  "sourceFile": "2028.json"
+}

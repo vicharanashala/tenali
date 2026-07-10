@@ -1,0 +1,15 @@
+{
+  "id": 1247,
+  "word": "Stagnant",
+  "question": "Stagnant",
+  "options": [
+    "Intensely enthusiastic or passionate",
+    "To go down or move downward",
+    "The action of damaging someone's reputation",
+    "Showing no activity or development"
+  ],
+  "answerOption": "D",
+  "answerText": "Showing no activity or development",
+  "difficulty": "medium",
+  "sourceFile": "1247.json"
+}

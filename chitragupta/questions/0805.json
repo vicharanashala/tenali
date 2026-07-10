@@ -1,0 +1,14 @@
+{
+  "id": 805,
+  "question": "What is the SI unit of solid angle?",
+  "options": [
+    "degree",
+    "radian",
+    "steradian",
+    "lumen"
+  ],
+  "answerOption": "C",
+  "answerText": "steradian",
+  "genre": "mixed",
+  "sourceFile": "0805.json"
+}

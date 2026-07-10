@@ -1,0 +1,15 @@
+{
+  "id": 524,
+  "word": "Regulate",
+  "question": "Regulate",
+  "options": [
+    "Required by law or rules",
+    "To give permission for something",
+    "To blind temporarily with a bright light",
+    "To control something by means of rules"
+  ],
+  "answerOption": "D",
+  "answerText": "To control something by means of rules",
+  "difficulty": "easy",
+  "sourceFile": "0524.json"
+}

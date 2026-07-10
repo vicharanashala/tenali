@@ -1,0 +1,15 @@
+{
+  "id": 1326,
+  "word": "Decrepit",
+  "question": "Decrepit",
+  "options": [
+    "Something greatly desired or needed",
+    "Not harmful or offensive",
+    "In a state of advanced decay",
+    "Seeking to harm in return"
+  ],
+  "answerOption": "C",
+  "answerText": "In a state of advanced decay",
+  "difficulty": "medium",
+  "sourceFile": "1326.json"
+}

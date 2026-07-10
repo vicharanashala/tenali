@@ -1,0 +1,15 @@
+{
+  "id": 2080,
+  "word": "Platitude",
+  "question": "Platitude",
+  "options": [
+    "Lacking ease or grace; unsophisticated",
+    "Relating to air flow around objects",
+    "The action of apportioning something",
+    "A remark used too often to be meaningful"
+  ],
+  "answerOption": "D",
+  "answerText": "A remark used too often to be meaningful",
+  "difficulty": "hard",
+  "sourceFile": "2080.json"
+}

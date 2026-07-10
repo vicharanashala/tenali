@@ -1,0 +1,15 @@
+{
+  "id": 2360,
+  "word": "Zenosyne",
+  "question": "Zenosyne",
+  "options": [
+    "The sense that time keeps going faster",
+    "A reward or recompense",
+    "Not produced by living organisms",
+    "Extreme fear of the number thirteen"
+  ],
+  "answerOption": "A",
+  "answerText": "The sense that time keeps going faster",
+  "difficulty": "extra-hard",
+  "sourceFile": "2360.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2958,
+  "word": "Petition",
+  "question": "Petition",
+  "options": [
+    "Connection by air passages",
+    "A turning point or pivotal event",
+    "A formal written request",
+    "A camera for aerial photography"
+  ],
+  "answerOption": "C",
+  "answerText": "A formal written request",
+  "difficulty": "hard",
+  "sourceFile": "2958.json"
+}

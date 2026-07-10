@@ -1,0 +1,15 @@
+{
+  "id": 2253,
+  "word": "Adoption",
+  "question": "Adoption",
+  "options": [
+    "The legal process of becoming a parent",
+    "Serving to advocate or plead",
+    "Relating to Aeolus wind god",
+    "A state of physical or mental sluggishness"
+  ],
+  "answerOption": "A",
+  "answerText": "The legal process of becoming a parent",
+  "difficulty": "hard",
+  "sourceFile": "2253.json"
+}

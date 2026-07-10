@@ -1,0 +1,15 @@
+{
+  "id": 1050,
+  "word": "Magnanimous",
+  "question": "Magnanimous",
+  "options": [
+    "Hostile and aggressive",
+    "To feel deep respect or admiration for",
+    "Reserved, modest, and shy in manner",
+    "Very generous or forgiving"
+  ],
+  "answerOption": "D",
+  "answerText": "Very generous or forgiving",
+  "difficulty": "medium",
+  "sourceFile": "1050.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 146,
+  "word": "Obey",
+  "question": "Obey",
+  "options": [
+    "To have something come into the mind again",
+    "To comply with a command or rule",
+    "To refuse to accept or consider something",
+    "Expecting the best possible outcome"
+  ],
+  "answerOption": "B",
+  "answerText": "To comply with a command or rule",
+  "difficulty": "easy",
+  "sourceFile": "0146.json"
+}

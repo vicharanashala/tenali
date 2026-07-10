@@ -1,0 +1,15 @@
+{
+  "id": 1471,
+  "word": "Zephyr",
+  "question": "Zephyr",
+  "options": [
+    "The view that the self is all that can be known",
+    "The feeling of anticipation while waiting for someone",
+    "A soft gentle breeze",
+    "The love of beauty in all things"
+  ],
+  "answerOption": "C",
+  "answerText": "A soft gentle breeze",
+  "difficulty": "extra-hard",
+  "sourceFile": "1471.json"
+}

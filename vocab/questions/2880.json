@@ -1,0 +1,15 @@
+{
+  "id": 2880,
+  "word": "Sovereignty",
+  "question": "Sovereignty",
+  "options": [
+    "A gaseous compound",
+    "Treatment to prevent disease",
+    "Supreme power or authority",
+    "One who poses riddles"
+  ],
+  "answerOption": "C",
+  "answerText": "Supreme power or authority",
+  "difficulty": "hard",
+  "sourceFile": "2880.json"
+}

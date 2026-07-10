@@ -1,0 +1,15 @@
+{
+  "id": 492,
+  "word": "Research",
+  "question": "Research",
+  "options": [
+    "Following the rules of reason",
+    "Feeling dedication to a cause or activity",
+    "Sufficient to cause death",
+    "To study something thoroughly"
+  ],
+  "answerOption": "D",
+  "answerText": "To study something thoroughly",
+  "difficulty": "easy",
+  "sourceFile": "0492.json"
+}

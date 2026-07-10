@@ -1,0 +1,14 @@
+{
+  "id": 435,
+  "question": "Which city is the capital of Andhra Pradesh according to many GK sources commonly listing Amaravati?",
+  "options": [
+    "Visakhapatnam",
+    "Amaravati",
+    "Vijayawada",
+    "Tirupati"
+  ],
+  "answerOption": "B",
+  "answerText": "Amaravati",
+  "genre": "geography",
+  "sourceFile": "0435.json"
+}

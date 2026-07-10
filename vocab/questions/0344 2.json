@@ -1,0 +1,15 @@
+{
+  "id": 344,
+  "word": "Flee",
+  "question": "Flee",
+  "options": [
+    "Existing at the beginning",
+    "Of great width between opposite sides",
+    "To run away from a place of danger",
+    "To put forward an idea for consideration"
+  ],
+  "answerOption": "C",
+  "answerText": "To run away from a place of danger",
+  "difficulty": "easy",
+  "sourceFile": "0344.json"
+}

@@ -1,0 +1,18 @@
+{
+  "name": "aryabhata-server",
+  "version": "1.0.0",
+  "description": "Backend for Aryabhata kids addition app",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "http-proxy-middleware": "^3.0.5",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.6.1"
+  }
+}

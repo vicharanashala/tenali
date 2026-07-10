@@ -1,0 +1,15 @@
+{
+  "id": 191,
+  "word": "Melt",
+  "question": "Melt",
+  "options": [
+    "Not supporting either side in a conflict",
+    "Done without delay; quick",
+    "To send someone away or allow them to leave",
+    "To become liquid through heating"
+  ],
+  "answerOption": "D",
+  "answerText": "To become liquid through heating",
+  "difficulty": "easy",
+  "sourceFile": "0191.json"
+}

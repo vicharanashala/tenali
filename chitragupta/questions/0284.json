@@ -1,0 +1,14 @@
+{
+  "id": 284,
+  "question": "Which organ is primarily responsible for pumping oxygenated blood to the body?",
+  "options": [
+    "Left ventricle",
+    "Right ventricle",
+    "Left atrium",
+    "Right atrium"
+  ],
+  "answerOption": "A",
+  "answerText": "Left ventricle",
+  "genre": "science",
+  "sourceFile": "0284.json"
+}

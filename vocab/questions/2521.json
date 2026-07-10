@@ -1,0 +1,15 @@
+{
+  "id": 2521,
+  "word": "AEROMANTIC",
+  "question": "AEROMANTIC",
+  "options": [
+    "The action of revealing something",
+    "Science of air flow and forces",
+    "Relating to divination by air",
+    "The state of being a fully developed adult"
+  ],
+  "answerOption": "C",
+  "answerText": "Relating to divination by air",
+  "difficulty": "hard",
+  "sourceFile": "2521.json"
+}

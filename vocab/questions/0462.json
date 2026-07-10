@@ -1,0 +1,15 @@
+{
+  "id": 462,
+  "word": "Accomplish",
+  "question": "Accomplish",
+  "options": [
+    "Notably large in size or amount",
+    "To succeed in doing something",
+    "To show how something is done",
+    "In accordance with fact or reality"
+  ],
+  "answerOption": "B",
+  "answerText": "To succeed in doing something",
+  "difficulty": "easy",
+  "sourceFile": "0462.json"
+}

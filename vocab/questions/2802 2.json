@@ -1,0 +1,15 @@
+{
+  "id": 2802,
+  "word": "Saudade",
+  "question": "Saudade",
+  "options": [
+    "A melancholic longing for something absent",
+    "A person or thing that is the center of attention",
+    "Relating to hospitality between host and guest",
+    "In an appalling manner"
+  ],
+  "answerOption": "A",
+  "answerText": "A melancholic longing for something absent",
+  "difficulty": "extra-hard",
+  "sourceFile": "2802.json"
+}

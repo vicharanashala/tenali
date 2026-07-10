@@ -1,0 +1,15 @@
+{
+  "id": 1301,
+  "word": "Convivial",
+  "question": "Convivial",
+  "options": [
+    "Friendly and relating to sharing food or drink",
+    "A coil or twist",
+    "A representation or description",
+    "Extremely happy, peaceful, or picturesque"
+  ],
+  "answerOption": "A",
+  "answerText": "Friendly and relating to sharing food or drink",
+  "difficulty": "medium",
+  "sourceFile": "1301.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 398,
+  "question": "Which desert is the driest non-polar desert in the world?",
+  "options": [
+    "Sahara",
+    "Arabian",
+    "Atacama",
+    "Gobi"
+  ],
+  "answerOption": "C",
+  "answerText": "Atacama",
+  "genre": "mixed",
+  "sourceFile": "0398.json"
+}

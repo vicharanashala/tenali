@@ -1,0 +1,15 @@
+{
+  "id": 1947,
+  "word": "Perplexing",
+  "question": "Perplexing",
+  "options": [
+    "Lacking basic necessities or resources",
+    "Casual lack of concern about things",
+    "Tending to expect bad outcomes",
+    "Causing confusion or bewilderment"
+  ],
+  "answerOption": "D",
+  "answerText": "Causing confusion or bewilderment",
+  "difficulty": "medium",
+  "sourceFile": "1947.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 57,
+  "question": "What is the national currency of Japan?",
+  "options": [
+    "Won",
+    "Yuan",
+    "Yen",
+    "Ringgit"
+  ],
+  "answerOption": "C",
+  "answerText": "Yen",
+  "genre": "india-gk",
+  "sourceFile": "0057.json"
+}

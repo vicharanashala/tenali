@@ -1,0 +1,15 @@
+{
+  "id": 755,
+  "word": "Frigid",
+  "question": "Frigid",
+  "options": [
+    "Very cold in temperature",
+    "To form an idea of the value of something",
+    "To refuse to accept or consider something",
+    "At the point that is in the middle"
+  ],
+  "answerOption": "A",
+  "answerText": "Very cold in temperature",
+  "difficulty": "easy",
+  "sourceFile": "0755.json"
+}

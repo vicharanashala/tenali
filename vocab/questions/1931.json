@@ -1,0 +1,15 @@
+{
+  "id": 1931,
+  "word": "Sporadic",
+  "question": "Sporadic",
+  "options": [
+    "Officially prohibited",
+    "A feeling of hatred or disgust",
+    "Occurring at irregular intervals",
+    "To make something less severe or serious"
+  ],
+  "answerOption": "C",
+  "answerText": "Occurring at irregular intervals",
+  "difficulty": "medium",
+  "sourceFile": "1931.json"
+}

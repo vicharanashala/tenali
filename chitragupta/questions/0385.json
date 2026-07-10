@@ -1,0 +1,14 @@
+{
+  "id": 385,
+  "question": "Which vitamin deficiency causes night blindness?",
+  "options": [
+    "Vitamin A",
+    "Vitamin B",
+    "Vitamin C",
+    "Vitamin E"
+  ],
+  "answerOption": "A",
+  "answerText": "Vitamin A",
+  "genre": "mixed",
+  "sourceFile": "0385.json"
+}

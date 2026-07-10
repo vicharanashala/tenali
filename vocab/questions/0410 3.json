@@ -1,0 +1,15 @@
+{
+  "id": 410,
+  "word": "Purchase",
+  "question": "Purchase",
+  "options": [
+    "Absolutely necessary or important",
+    "Tending to cause harm",
+    "To buy something",
+    "Arranged neatly and in order"
+  ],
+  "answerOption": "C",
+  "answerText": "To buy something",
+  "difficulty": "easy",
+  "sourceFile": "0410.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1560,
+  "word": "Destroyer",
+  "question": "Destroyer",
+  "options": [
+    "Kept secret or done in a hidden way",
+    "Causing feelings of sadness",
+    "One who destroys or a warship",
+    "To engage in a close fight or struggle"
+  ],
+  "answerOption": "C",
+  "answerText": "One who destroys or a warship",
+  "difficulty": "medium",
+  "sourceFile": "1560.json"
+}

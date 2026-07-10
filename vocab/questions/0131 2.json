@@ -1,0 +1,15 @@
+{
+  "id": 131,
+  "word": "Absent",
+  "question": "Absent",
+  "options": [
+    "Relating to the edge or outer part",
+    "Not present in a place",
+    "To find the size or amount of something",
+    "Full of energy and enthusiasm"
+  ],
+  "answerOption": "B",
+  "answerText": "Not present in a place",
+  "difficulty": "easy",
+  "sourceFile": "0131.json"
+}

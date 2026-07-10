@@ -1,0 +1,15 @@
+{
+  "id": 2543,
+  "word": "Fracture",
+  "question": "Fracture",
+  "options": [
+    "A crack or break in something",
+    "The quality of being noticeable",
+    "Relating to divination by air",
+    "A colorless liquid chemical compound"
+  ],
+  "answerOption": "A",
+  "answerText": "A crack or break in something",
+  "difficulty": "hard",
+  "sourceFile": "2543.json"
+}

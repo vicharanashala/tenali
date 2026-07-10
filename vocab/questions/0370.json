@@ -1,0 +1,15 @@
+{
+  "id": 370,
+  "word": "Roast",
+  "question": "Roast",
+  "options": [
+    "To cook food by prolonged exposure to heat",
+    "Not able to be seen through",
+    "To fail to care for something properly",
+    "Not truthful or genuine"
+  ],
+  "answerOption": "A",
+  "answerText": "To cook food by prolonged exposure to heat",
+  "difficulty": "easy",
+  "sourceFile": "0370.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 176,
+  "word": "Win",
+  "question": "Win",
+  "options": [
+    "Made by human skill; not natural",
+    "To set up an organization on a firm basis",
+    "To be successful in a contest",
+    "Having a natural ability to do something well"
+  ],
+  "answerOption": "C",
+  "answerText": "To be successful in a contest",
+  "difficulty": "easy",
+  "sourceFile": "0176.json"
+}

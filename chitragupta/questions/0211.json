@@ -1,0 +1,14 @@
+{
+  "id": 211,
+  "question": "Which famous freedom fighter gave the slogan 'Give me blood, and I shall give you freedom'?",
+  "options": [
+    "Bhagat Singh",
+    "Chandrashekhar Azad",
+    "Subhas Chandra Bose",
+    "Bal Gangadhar Tilak"
+  ],
+  "answerOption": "C",
+  "answerText": "Subhas Chandra Bose",
+  "genre": "science",
+  "sourceFile": "0211.json"
+}

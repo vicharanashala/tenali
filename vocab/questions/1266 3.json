@@ -1,0 +1,15 @@
+{
+  "id": 1266,
+  "word": "Defunct",
+  "question": "Defunct",
+  "options": [
+    "Producing a great deal of profit",
+    "Living the life of a wanderer",
+    "Using more words than are needed",
+    "No longer existing or functioning"
+  ],
+  "answerOption": "D",
+  "answerText": "No longer existing or functioning",
+  "difficulty": "medium",
+  "sourceFile": "1266.json"
+}

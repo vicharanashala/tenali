@@ -1,0 +1,15 @@
+{
+  "id": 1731,
+  "word": "DEUCE",
+  "question": "DEUCE",
+  "options": [
+    "A playing card or die with two spots",
+    "The quality of being harmful",
+    "Moral corruption or wickedness",
+    "Occurring in sudden bursts"
+  ],
+  "answerOption": "A",
+  "answerText": "A playing card or die with two spots",
+  "difficulty": "medium",
+  "sourceFile": "1731.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1415,
+  "word": "Demonstrable",
+  "question": "Demonstrable",
+  "options": [
+    "Not working well or wastes effort",
+    "Seeking to take revenge",
+    "One who demurs",
+    "Able to be shown or proven"
+  ],
+  "answerOption": "D",
+  "answerText": "Able to be shown or proven",
+  "difficulty": "medium",
+  "sourceFile": "1415.json"
+}

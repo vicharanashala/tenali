@@ -1,0 +1,15 @@
+{
+  "id": 2449,
+  "word": "Quodlibet",
+  "question": "Quodlibet",
+  "options": [
+    "Relating to abietic acid",
+    "Relating to hospitality between host and guest",
+    "The ambiguous intensity of looking into someone's eyes",
+    "A philosophical question proposed for discussion"
+  ],
+  "answerOption": "D",
+  "answerText": "A philosophical question proposed for discussion",
+  "difficulty": "extra-hard",
+  "sourceFile": "2449.json"
+}

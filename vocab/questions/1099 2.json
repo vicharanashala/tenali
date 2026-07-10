@@ -1,0 +1,15 @@
+{
+  "id": 1099,
+  "word": "Unorthodox",
+  "question": "Unorthodox",
+  "options": [
+    "Engaged in deep or serious thought",
+    "Careful and thorough; extremely attentive",
+    "The state of being calm and in control",
+    "Contrary to what is usual or accepted"
+  ],
+  "answerOption": "D",
+  "answerText": "Contrary to what is usual or accepted",
+  "difficulty": "medium",
+  "sourceFile": "1099.json"
+}

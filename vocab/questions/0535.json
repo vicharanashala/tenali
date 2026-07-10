@@ -1,0 +1,15 @@
+{
+  "id": 535,
+  "word": "Caution",
+  "question": "Caution",
+  "options": [
+    "To cook food using an oven",
+    "To warn someone about potential danger",
+    "To keep something in good condition",
+    "Made by chemical processes; not natural"
+  ],
+  "answerOption": "B",
+  "answerText": "To warn someone about potential danger",
+  "difficulty": "easy",
+  "sourceFile": "0535.json"
+}

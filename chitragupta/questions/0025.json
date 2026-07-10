@@ -1,0 +1,14 @@
+{
+  "id": 25,
+  "question": "What is the capital of Spain?",
+  "options": [
+    "Bangkok",
+    "Thimphu",
+    "Madrid",
+    "New Delhi"
+  ],
+  "answerOption": "C",
+  "answerText": "Madrid",
+  "genre": "geography",
+  "sourceFile": "0025.json"
+}

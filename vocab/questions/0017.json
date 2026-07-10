@@ -1,0 +1,15 @@
+{
+  "id": 17,
+  "word": "Cold",
+  "question": "Cold",
+  "options": [
+    "Not able to cause damage or injury",
+    "Not supporting either side in a conflict",
+    "Of or at a low temperature",
+    "Strikingly unusual or different"
+  ],
+  "answerOption": "C",
+  "answerText": "Of or at a low temperature",
+  "difficulty": "easy",
+  "sourceFile": "0017.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 226,
+  "word": "Attract",
+  "question": "Attract",
+  "options": [
+    "To show how something is done",
+    "To adjust to new conditions",
+    "To spring back after hitting a surface",
+    "To cause something to come closer"
+  ],
+  "answerOption": "D",
+  "answerText": "To cause something to come closer",
+  "difficulty": "easy",
+  "sourceFile": "0226.json"
+}

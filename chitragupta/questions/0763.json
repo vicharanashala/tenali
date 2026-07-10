@@ -1,0 +1,14 @@
+{
+  "id": 763,
+  "question": "Which country is associated with the city of Asuncion?",
+  "options": [
+    "Uruguay",
+    "Paraguay",
+    "Bolivia",
+    "Peru"
+  ],
+  "answerOption": "B",
+  "answerText": "Paraguay",
+  "genre": "geography",
+  "sourceFile": "0763.json"
+}

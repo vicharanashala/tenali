@@ -1,0 +1,15 @@
+{
+  "id": 814,
+  "word": "Precise",
+  "question": "Precise",
+  "options": [
+    "Giving out or reflecting much light",
+    "Marked by exactness and accuracy",
+    "To come or go back to a place",
+    "In a state of complete confusion"
+  ],
+  "answerOption": "B",
+  "answerText": "Marked by exactness and accuracy",
+  "difficulty": "easy",
+  "sourceFile": "0814.json"
+}

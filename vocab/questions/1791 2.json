@@ -1,0 +1,15 @@
+{
+  "id": 1791,
+  "word": "Nonchalant",
+  "question": "Nonchalant",
+  "options": [
+    "An engine powered by air",
+    "Feeling calm and relaxed; not worried",
+    "Sponsorship, support, or auspices",
+    "The action of killing a king"
+  ],
+  "answerOption": "B",
+  "answerText": "Feeling calm and relaxed; not worried",
+  "difficulty": "hard",
+  "sourceFile": "1791.json"
+}

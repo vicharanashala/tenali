@@ -1,0 +1,15 @@
+{
+  "id": 2675,
+  "word": "Obstacle",
+  "question": "Obstacle",
+  "options": [
+    "Something that obstructs progress",
+    "The action of moving up",
+    "The fruiting body producing aeciospore",
+    "Notice or attention"
+  ],
+  "answerOption": "A",
+  "answerText": "Something that obstructs progress",
+  "difficulty": "hard",
+  "sourceFile": "2675.json"
+}

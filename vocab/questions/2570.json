@@ -1,0 +1,15 @@
+{
+  "id": 2570,
+  "word": "AEROSCOPE",
+  "question": "AEROSCOPE",
+  "options": [
+    "An instrument viewing air",
+    "One who poses riddles",
+    "Not right or reasonable",
+    "The healing art of medicine"
+  ],
+  "answerOption": "A",
+  "answerText": "An instrument viewing air",
+  "difficulty": "hard",
+  "sourceFile": "2570.json"
+}

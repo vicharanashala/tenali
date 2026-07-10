@@ -1,0 +1,14 @@
+{
+  "id": 225,
+  "question": "Which famous Indian cricketer is known as the Master Blaster?",
+  "options": [
+    "Virat Kohli",
+    "Sourav Ganguly",
+    "Sachin Tendulkar",
+    "M. S. Dhoni"
+  ],
+  "answerOption": "C",
+  "answerText": "Sachin Tendulkar",
+  "genre": "india-gk",
+  "sourceFile": "0225.json"
+}

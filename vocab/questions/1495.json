@@ -1,0 +1,15 @@
+{
+  "id": 1495,
+  "word": "Depose",
+  "question": "Depose",
+  "options": [
+    "To explode or cause to explode",
+    "To remove from office or position",
+    "Serving to determine or decide",
+    "Making a situation likely to happen"
+  ],
+  "answerOption": "B",
+  "answerText": "To remove from office or position",
+  "difficulty": "medium",
+  "sourceFile": "1495.json"
+}

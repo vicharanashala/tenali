@@ -1,0 +1,15 @@
+{
+  "id": 1395,
+  "word": "Yugen",
+  "question": "Yugen",
+  "options": [
+    "The most typical example or representation",
+    "A profound awareness of the universe that triggers emotion",
+    "A philosophical question proposed for discussion",
+    "A dispute about or argument over words"
+  ],
+  "answerOption": "B",
+  "answerText": "A profound awareness of the universe that triggers emotion",
+  "difficulty": "extra-hard",
+  "sourceFile": "1395.json"
+}

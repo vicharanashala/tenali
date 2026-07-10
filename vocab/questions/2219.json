@@ -1,0 +1,15 @@
+{
+  "id": 2219,
+  "word": "Endemic",
+  "question": "Endemic",
+  "options": [
+    "Belief in reason as basis of truth",
+    "Native and restricted to a certain place",
+    "A huge and overwhelming force",
+    "Verdigris or green patina"
+  ],
+  "answerOption": "B",
+  "answerText": "Native and restricted to a certain place",
+  "difficulty": "hard",
+  "sourceFile": "2219.json"
+}

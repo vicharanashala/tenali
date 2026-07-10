@@ -1,0 +1,15 @@
+{
+  "id": 592,
+  "word": "Innovative",
+  "question": "Innovative",
+  "options": [
+    "To build or put together a structure",
+    "Made by human skill; not natural",
+    "Introducing new and original ideas",
+    "Able to resume its shape after stretching"
+  ],
+  "answerOption": "C",
+  "answerText": "Introducing new and original ideas",
+  "difficulty": "easy",
+  "sourceFile": "0592.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 656,
+  "question": "Who discovered ultraviolet radiation?",
+  "options": [
+    "Ritter",
+    "Herschel",
+    "Roentgen",
+    "Maxwell"
+  ],
+  "answerOption": "A",
+  "answerText": "Ritter",
+  "genre": "general-knowledge",
+  "sourceFile": "0656.json"
+}

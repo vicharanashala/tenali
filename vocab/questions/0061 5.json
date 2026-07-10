@@ -1,0 +1,15 @@
+{
+  "id": 61,
+  "word": "Lazy",
+  "question": "Lazy",
+  "options": [
+    "To do physical harm or damage to someone",
+    "Unwilling to work or use energy",
+    "To have power over something's behavior",
+    "Willfully causing pain to others"
+  ],
+  "answerOption": "B",
+  "answerText": "Unwilling to work or use energy",
+  "difficulty": "easy",
+  "sourceFile": "0061.json"
+}

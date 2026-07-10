@@ -1,0 +1,15 @@
+{
+  "id": 250,
+  "word": "Approach",
+  "question": "Approach",
+  "options": [
+    "Greatly pleased or entertained",
+    "Lacking interest or excitement",
+    "To come near or nearer to something",
+    "Lacking consideration for other people"
+  ],
+  "answerOption": "C",
+  "answerText": "To come near or nearer to something",
+  "difficulty": "easy",
+  "sourceFile": "0250.json"
+}

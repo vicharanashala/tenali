@@ -1,0 +1,15 @@
+{
+  "id": 128,
+  "word": "Alive",
+  "question": "Alive",
+  "options": [
+    "To ask someone earnestly for something",
+    "Having the ability to do something",
+    "Living; not dead",
+    "To reach a destination"
+  ],
+  "answerOption": "C",
+  "answerText": "Living; not dead",
+  "difficulty": "easy",
+  "sourceFile": "0128.json"
+}

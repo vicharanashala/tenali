@@ -1,0 +1,14 @@
+{
+  "id": 452,
+  "question": "Which country is associated with the city of Copenhagen?",
+  "options": [
+    "Sweden",
+    "Norway",
+    "Denmark",
+    "Netherlands"
+  ],
+  "answerOption": "C",
+  "answerText": "Denmark",
+  "genre": "geography",
+  "sourceFile": "0452.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2732,
+  "word": "Pronunciation",
+  "question": "Pronunciation",
+  "options": [
+    "Lacking advice or counsel",
+    "Relating to meteorites from space",
+    "The way a word is pronounced",
+    "Science of air flow and forces"
+  ],
+  "answerOption": "C",
+  "answerText": "The way a word is pronounced",
+  "difficulty": "hard",
+  "sourceFile": "2732.json"
+}

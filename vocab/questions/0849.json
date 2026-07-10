@@ -1,0 +1,15 @@
+{
+  "id": 849,
+  "word": "Cranky",
+  "question": "Cranky",
+  "options": [
+    "In a state of great discomfort or unhappiness",
+    "Having the ability to speak clearly",
+    "Irritable and bad-tempered",
+    "Lacking energy or enthusiasm"
+  ],
+  "answerOption": "C",
+  "answerText": "Irritable and bad-tempered",
+  "difficulty": "easy",
+  "sourceFile": "0849.json"
+}

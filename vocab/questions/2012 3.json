@@ -1,0 +1,15 @@
+{
+  "id": 2012,
+  "word": "Quizzical",
+  "question": "Quizzical",
+  "options": [
+    "Involved in or constituting adultery",
+    "Indicating mild puzzlement",
+    "The state of being extremely poor",
+    "To alternate between different opinions"
+  ],
+  "answerOption": "B",
+  "answerText": "Indicating mild puzzlement",
+  "difficulty": "hard",
+  "sourceFile": "2012.json"
+}

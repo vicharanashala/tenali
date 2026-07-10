@@ -1,0 +1,15 @@
+{
+  "id": 419,
+  "word": "Offer",
+  "question": "Offer",
+  "options": [
+    "To move or act with great speed",
+    "Relating to a continuous physical quantity",
+    "To present something for acceptance",
+    "To make a public or formal statement"
+  ],
+  "answerOption": "C",
+  "answerText": "To present something for acceptance",
+  "difficulty": "easy",
+  "sourceFile": "0419.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2526,
+  "word": "AEROMEDICINE",
+  "question": "AEROMEDICINE",
+  "options": [
+    "The act of freeing someone",
+    "A deep-seated feeling of dislike",
+    "The action of soliciting something",
+    "Medicine relating to aviation"
+  ],
+  "answerOption": "D",
+  "answerText": "Medicine relating to aviation",
+  "difficulty": "hard",
+  "sourceFile": "2526.json"
+}

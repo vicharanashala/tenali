@@ -1,0 +1,15 @@
+{
+  "id": 452,
+  "word": "Construct",
+  "question": "Construct",
+  "options": [
+    "To give out a steady light without flame",
+    "To make something previously hidden visible",
+    "To say sorry for doing something wrong",
+    "To build or put together a structure"
+  ],
+  "answerOption": "D",
+  "answerText": "To build or put together a structure",
+  "difficulty": "easy",
+  "sourceFile": "0452.json"
+}

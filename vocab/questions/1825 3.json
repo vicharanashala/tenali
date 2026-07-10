@@ -1,0 +1,15 @@
+{
+  "id": 1825,
+  "word": "Lawless",
+  "question": "Lawless",
+  "options": [
+    "To rid a person or thing of lice",
+    "Loyalty owed to a feudal lord",
+    "Fully in agreement with all parties",
+    "Not governed by law"
+  ],
+  "answerOption": "D",
+  "answerText": "Not governed by law",
+  "difficulty": "medium",
+  "sourceFile": "1825.json"
+}

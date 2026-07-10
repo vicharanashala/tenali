@@ -1,0 +1,15 @@
+{
+  "id": 3200,
+  "word": "Aberrant",
+  "question": "Aberrant",
+  "options": [
+    "Relating to groups with commutative property",
+    "Deviating from normal course",
+    "Multiple ablism doctrines",
+    "Multiple anti-literature views"
+  ],
+  "answerOption": "B",
+  "answerText": "Deviating from normal course",
+  "difficulty": "extra-hard",
+  "sourceFile": "3200.json"
+}

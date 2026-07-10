@@ -1,0 +1,14 @@
+{
+  "id": 379,
+  "question": "Which blood cells help defend the body against infection?",
+  "options": [
+    "Red blood cells",
+    "White blood cells",
+    "Platelets",
+    "Plasma cells"
+  ],
+  "answerOption": "B",
+  "answerText": "White blood cells",
+  "genre": "science",
+  "sourceFile": "0379.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 173,
+  "question": "Who founded Microsoft along with Paul Allen?",
+  "options": [
+    "Steve Jobs",
+    "Bill Gates",
+    "Larry Page",
+    "Mark Zuckerberg"
+  ],
+  "answerOption": "B",
+  "answerText": "Bill Gates",
+  "genre": "general-knowledge",
+  "sourceFile": "0173.json"
+}

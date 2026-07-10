@@ -1,0 +1,15 @@
+{
+  "id": 1425,
+  "word": "Compunction",
+  "question": "Compunction",
+  "options": [
+    "A social gathering centered around drinking chocolate",
+    "A feeling of guilt that follows wrongdoing",
+    "Pleasure derived from another's misfortune",
+    "The supposed generation from a different species"
+  ],
+  "answerOption": "B",
+  "answerText": "A feeling of guilt that follows wrongdoing",
+  "difficulty": "extra-hard",
+  "sourceFile": "1425.json"
+}

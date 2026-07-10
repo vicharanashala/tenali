@@ -1,0 +1,15 @@
+{
+  "id": 519,
+  "word": "Manage",
+  "question": "Manage",
+  "options": [
+    "To attach a tag showing the contents",
+    "Habitually or typically so",
+    "To be in charge of running something",
+    "Extremely large or huge"
+  ],
+  "answerOption": "C",
+  "answerText": "To be in charge of running something",
+  "difficulty": "easy",
+  "sourceFile": "0519.json"
+}

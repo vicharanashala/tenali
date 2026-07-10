@@ -1,0 +1,15 @@
+{
+  "id": 2498,
+  "word": "Aeroelastic",
+  "question": "Aeroelastic",
+  "options": [
+    "Relating to air-structure interaction",
+    "Brain injury from violent shaking",
+    "Directly opposed or contrasted",
+    "Conspicuously or obviously offensive"
+  ],
+  "answerOption": "A",
+  "answerText": "Relating to air-structure interaction",
+  "difficulty": "hard",
+  "sourceFile": "2498.json"
+}

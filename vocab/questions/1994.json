@@ -1,0 +1,15 @@
+{
+  "id": 1994,
+  "word": "Mutinous",
+  "question": "Mutinous",
+  "options": [
+    "Fierce or violent in nature",
+    "Involving or inciting rebellion",
+    "Inborn; natural rather than learned",
+    "Causing confusion or bewilderment"
+  ],
+  "answerOption": "B",
+  "answerText": "Involving or inciting rebellion",
+  "difficulty": "medium",
+  "sourceFile": "1994.json"
+}

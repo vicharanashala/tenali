@@ -1,0 +1,15 @@
+{
+  "id": 1221,
+  "word": "Overt",
+  "question": "Overt",
+  "options": [
+    "Done openly without concealment",
+    "Intense dislike or disgust",
+    "Producing powerful feelings or strong images",
+    "Mixed up in a confused manner"
+  ],
+  "answerOption": "A",
+  "answerText": "Done openly without concealment",
+  "difficulty": "medium",
+  "sourceFile": "1221.json"
+}

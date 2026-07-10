@@ -1,0 +1,15 @@
+{
+  "id": 2348,
+  "word": "Aeroenteritis",
+  "question": "Aeroenteritis",
+  "options": [
+    "Bowel distension from gas",
+    "A substance that adsorbs",
+    "A difficult or unfortunate situation",
+    "Causing laughter; laughable"
+  ],
+  "answerOption": "A",
+  "answerText": "Bowel distension from gas",
+  "difficulty": "hard",
+  "sourceFile": "2348.json"
+}

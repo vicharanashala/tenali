@@ -1,0 +1,15 @@
+{
+  "id": 3035,
+  "word": "Xenial",
+  "question": "Xenial",
+  "options": [
+    "Relating to hospitality between host and guest",
+    "A tropical plant yielding musk",
+    "Of or relating to charity",
+    "A language group in Ethiopia"
+  ],
+  "answerOption": "A",
+  "answerText": "Relating to hospitality between host and guest",
+  "difficulty": "extra-hard",
+  "sourceFile": "3035.json"
+}

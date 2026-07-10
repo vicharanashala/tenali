@@ -1,0 +1,15 @@
+{
+  "id": 176,
+  "word": "Win",
+  "question": "Win",
+  "options": [
+    "To make someone feel admiration",
+    "To break free from confinement",
+    "To be successful in a contest",
+    "To tell a story or give an account"
+  ],
+  "answerOption": "C",
+  "answerText": "To be successful in a contest",
+  "difficulty": "easy",
+  "sourceFile": "0176.json"
+}

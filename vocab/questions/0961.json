@@ -1,0 +1,15 @@
+{
+  "id": 961,
+  "word": "Lucid",
+  "question": "Lucid",
+  "options": [
+    "Not able to cause damage or injury",
+    "Having an excessively high opinion of oneself",
+    "Clear and easy to understand",
+    "To become limp through heat or lack of water"
+  ],
+  "answerOption": "C",
+  "answerText": "Clear and easy to understand",
+  "difficulty": "easy",
+  "sourceFile": "0961.json"
+}

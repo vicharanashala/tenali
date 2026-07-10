@@ -1,0 +1,15 @@
+{
+  "id": 62,
+  "word": "Busy",
+  "question": "Busy",
+  "options": [
+    "Unusual or surprising; hard to explain",
+    "Having a great deal to do",
+    "Having great power or strength",
+    "Extremely large or huge"
+  ],
+  "answerOption": "B",
+  "answerText": "Having a great deal to do",
+  "difficulty": "easy",
+  "sourceFile": "0062.json"
+}

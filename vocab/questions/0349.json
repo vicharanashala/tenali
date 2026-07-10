@@ -1,0 +1,15 @@
+{
+  "id": 349,
+  "word": "Predict",
+  "question": "Predict",
+  "options": [
+    "Containing or using many words",
+    "To make someone feel weary and uninterested",
+    "To give someone the means to do something",
+    "To say what will happen in the future"
+  ],
+  "answerOption": "D",
+  "answerText": "To say what will happen in the future",
+  "difficulty": "easy",
+  "sourceFile": "0349.json"
+}

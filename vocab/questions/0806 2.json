@@ -1,0 +1,15 @@
+{
+  "id": 806,
+  "word": "Noble",
+  "question": "Noble",
+  "options": [
+    "Having high moral qualities",
+    "Of very little importance",
+    "Done consciously and intentionally",
+    "To have an effect on someone's character"
+  ],
+  "answerOption": "A",
+  "answerText": "Having high moral qualities",
+  "difficulty": "easy",
+  "sourceFile": "0806.json"
+}

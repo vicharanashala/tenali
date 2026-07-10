@@ -1,0 +1,14 @@
+{
+  "id": 761,
+  "question": "Who wrote 'The Call of the Wild'?",
+  "options": [
+    "Jack London",
+    "Mark Twain",
+    "Ernest Hemingway",
+    "John Steinbeck"
+  ],
+  "answerOption": "A",
+  "answerText": "Jack London",
+  "genre": "general-knowledge",
+  "sourceFile": "0761.json"
+}

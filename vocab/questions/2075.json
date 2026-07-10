@@ -1,0 +1,15 @@
+{
+  "id": 2075,
+  "word": "Juggernaut",
+  "question": "Juggernaut",
+  "options": [
+    "Showing deep love and affection",
+    "A huge and overwhelming force",
+    "Philosophy based on duty and rules",
+    "Not able to be denied or disputed"
+  ],
+  "answerOption": "B",
+  "answerText": "A huge and overwhelming force",
+  "difficulty": "hard",
+  "sourceFile": "2075.json"
+}

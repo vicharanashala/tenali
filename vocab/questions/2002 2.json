@@ -1,0 +1,15 @@
+{
+  "id": 2002,
+  "word": "Advoutrer",
+  "question": "Advoutrer",
+  "options": [
+    "A person guilty of adultery",
+    "Description of air conditions",
+    "Tightness of chest from altitude",
+    "Naive and simplistic; lacking nourishment"
+  ],
+  "answerOption": "A",
+  "answerText": "A person guilty of adultery",
+  "difficulty": "hard",
+  "sourceFile": "2002.json"
+}

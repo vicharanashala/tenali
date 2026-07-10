@@ -1,0 +1,15 @@
+{
+  "id": 1011,
+  "word": "Lucid",
+  "question": "Lucid",
+  "options": [
+    "The action of violent destruction",
+    "Able to be denied or refuted",
+    "To delay or prevent by obstructing",
+    "Expressed clearly and easy to understand"
+  ],
+  "answerOption": "D",
+  "answerText": "Expressed clearly and easy to understand",
+  "difficulty": "medium",
+  "sourceFile": "1011.json"
+}

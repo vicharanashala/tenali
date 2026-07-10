@@ -1,0 +1,15 @@
+{
+  "id": 953,
+  "word": "Erratic",
+  "question": "Erratic",
+  "options": [
+    "Based on an imagined situation, not reality",
+    "Not even or regular in pattern",
+    "Hostile and aggressive",
+    "To feel deep respect or admiration for"
+  ],
+  "answerOption": "B",
+  "answerText": "Not even or regular in pattern",
+  "difficulty": "medium",
+  "sourceFile": "0953.json"
+}

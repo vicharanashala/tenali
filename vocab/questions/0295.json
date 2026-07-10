@@ -1,0 +1,15 @@
+{
+  "id": 295,
+  "word": "Hurry",
+  "question": "Hurry",
+  "options": [
+    "To write or name the letters of a word",
+    "Done with the hands; requiring human effort",
+    "Expecting the worst possible outcome",
+    "To move or act with great speed"
+  ],
+  "answerOption": "D",
+  "answerText": "To move or act with great speed",
+  "difficulty": "easy",
+  "sourceFile": "0295.json"
+}

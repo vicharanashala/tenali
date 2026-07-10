@@ -1,0 +1,14 @@
+{
+  "id": 650,
+  "question": "Which country is associated with the city of Abu Dhabi?",
+  "options": [
+    "Saudi Arabia",
+    "Oman",
+    "UAE",
+    "Qatar"
+  ],
+  "answerOption": "C",
+  "answerText": "UAE",
+  "genre": "geography",
+  "sourceFile": "0650.json"
+}

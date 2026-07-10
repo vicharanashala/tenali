@@ -1,0 +1,15 @@
+{
+  "id": 1457,
+  "word": "Dentistry",
+  "question": "Dentistry",
+  "options": [
+    "To show or prove something",
+    "The profession of treating teeth",
+    "To perceive or recognize something",
+    "The action of purifying"
+  ],
+  "answerOption": "B",
+  "answerText": "The profession of treating teeth",
+  "difficulty": "medium",
+  "sourceFile": "1457.json"
+}

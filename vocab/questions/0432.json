@@ -1,0 +1,15 @@
+{
+  "id": 432,
+  "word": "Disassemble",
+  "question": "Disassemble",
+  "options": [
+    "To give something to help achieve a goal",
+    "To take apart the pieces of something",
+    "Irritable and bad-tempered",
+    "A response to a question"
+  ],
+  "answerOption": "B",
+  "answerText": "To take apart the pieces of something",
+  "difficulty": "easy",
+  "sourceFile": "0432.json"
+}

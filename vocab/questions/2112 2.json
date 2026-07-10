@@ -1,0 +1,15 @@
+{
+  "id": 2112,
+  "word": "Aerobe",
+  "question": "Aerobe",
+  "options": [
+    "An expert in aeronautics",
+    "An organism requiring air to live",
+    "To expose to air",
+    "One's opponent in a contest"
+  ],
+  "answerOption": "B",
+  "answerText": "An organism requiring air to live",
+  "difficulty": "hard",
+  "sourceFile": "2112.json"
+}

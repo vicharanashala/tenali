@@ -1,0 +1,15 @@
+{
+  "id": 2187,
+  "word": "Advised",
+  "question": "Advised",
+  "options": [
+    "In an airy manner",
+    "Norse god of the sea",
+    "Done with deliberation or awareness",
+    "An outgrowth on a stem or leaf"
+  ],
+  "answerOption": "C",
+  "answerText": "Done with deliberation or awareness",
+  "difficulty": "hard",
+  "sourceFile": "2187.json"
+}

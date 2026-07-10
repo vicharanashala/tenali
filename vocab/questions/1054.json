@@ -1,0 +1,15 @@
+{
+  "id": 1054,
+  "word": "Genuine",
+  "question": "Genuine",
+  "options": [
+    "Closely compacted or thick in texture",
+    "Done secretly and carefully",
+    "Truly what something is said to be; authentic",
+    "Extremely or damnably"
+  ],
+  "answerOption": "C",
+  "answerText": "Truly what something is said to be; authentic",
+  "difficulty": "medium",
+  "sourceFile": "1054.json"
+}

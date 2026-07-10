@@ -1,0 +1,14 @@
+{
+  "id": 773,
+  "question": "Who wrote 'The Scarlet Letter'?",
+  "options": [
+    "Herman Melville",
+    "Nathaniel Hawthorne",
+    "Mark Twain",
+    "Edgar Allan Poe"
+  ],
+  "answerOption": "B",
+  "answerText": "Nathaniel Hawthorne",
+  "genre": "general-knowledge",
+  "sourceFile": "0773.json"
+}

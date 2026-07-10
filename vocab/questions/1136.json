@@ -1,0 +1,15 @@
+{
+  "id": 1136,
+  "word": "Thrive",
+  "question": "Thrive",
+  "options": [
+    "To prosper or flourish",
+    "To prevent someone from having something",
+    "Tending to detrude",
+    "A modest view of one's own importance"
+  ],
+  "answerOption": "A",
+  "answerText": "To prosper or flourish",
+  "difficulty": "medium",
+  "sourceFile": "1136.json"
+}

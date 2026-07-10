@@ -1,0 +1,15 @@
+{
+  "id": 3250,
+  "word": "Abiotic",
+  "question": "Abiotic",
+  "options": [
+    "Not produced by living organisms",
+    "Fear of the abyss",
+    "Quality of being distant",
+    "Not causing irritation"
+  ],
+  "answerOption": "A",
+  "answerText": "Not produced by living organisms",
+  "difficulty": "extra-hard",
+  "sourceFile": "3250.json"
+}

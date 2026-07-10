@@ -1,0 +1,15 @@
+{
+  "id": 64,
+  "word": "Wise",
+  "question": "Wise",
+  "options": [
+    "Not allowing water to pass through",
+    "To confess something to be true",
+    "Having experience, knowledge, and good judgment",
+    "To become larger in size or volume"
+  ],
+  "answerOption": "C",
+  "answerText": "Having experience, knowledge, and good judgment",
+  "difficulty": "easy",
+  "sourceFile": "0064.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 998,
+  "word": "Fetid",
+  "question": "Fetid",
+  "options": [
+    "Having a high amount of moisture in the air",
+    "Smelling extremely unpleasant",
+    "To send someone away or allow them to leave",
+    "To pick out something from alternatives"
+  ],
+  "answerOption": "B",
+  "answerText": "Smelling extremely unpleasant",
+  "difficulty": "easy",
+  "sourceFile": "0998.json"
+}

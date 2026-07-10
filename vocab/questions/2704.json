@@ -1,0 +1,15 @@
+{
+  "id": 2704,
+  "word": "Pathology",
+  "question": "Pathology",
+  "options": [
+    "A substance that adulterates",
+    "Organism response to air",
+    "The study of diseases",
+    "A type of meteorite"
+  ],
+  "answerOption": "C",
+  "answerText": "The study of diseases",
+  "difficulty": "hard",
+  "sourceFile": "2704.json"
+}

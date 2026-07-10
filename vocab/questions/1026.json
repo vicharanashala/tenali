@@ -1,0 +1,15 @@
+{
+  "id": 1026,
+  "word": "Candid",
+  "question": "Candid",
+  "options": [
+    "Kept secret or done in a hidden way",
+    "Truthful and straightforward; frank",
+    "To illegally obtain money by deception",
+    "Filled with lively energy and excitement"
+  ],
+  "answerOption": "B",
+  "answerText": "Truthful and straightforward; frank",
+  "difficulty": "medium",
+  "sourceFile": "1026.json"
+}

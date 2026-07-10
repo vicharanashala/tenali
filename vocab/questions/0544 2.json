@@ -1,0 +1,15 @@
+{
+  "id": 544,
+  "word": "Persist",
+  "question": "Persist",
+  "options": [
+    "To continue in spite of difficulty",
+    "To open something that is locked",
+    "To move about freely without a destination",
+    "To become liquid through heating"
+  ],
+  "answerOption": "A",
+  "answerText": "To continue in spite of difficulty",
+  "difficulty": "easy",
+  "sourceFile": "0544.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 541,
+  "word": "Tolerate",
+  "question": "Tolerate",
+  "options": [
+    "To express gratitude to someone",
+    "To discover something by searching",
+    "To find an answer to a problem",
+    "To allow something you disagree with"
+  ],
+  "answerOption": "D",
+  "answerText": "To allow something you disagree with",
+  "difficulty": "easy",
+  "sourceFile": "0541.json"
+}

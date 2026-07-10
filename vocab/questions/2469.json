@@ -1,0 +1,15 @@
+{
+  "id": 2469,
+  "word": "Aerobiologist",
+  "question": "Aerobiologist",
+  "options": [
+    "One who studies airborne life",
+    "The action of installing in office",
+    "A seed dispersed by air",
+    "A poison from air"
+  ],
+  "answerOption": "A",
+  "answerText": "One who studies airborne life",
+  "difficulty": "hard",
+  "sourceFile": "2469.json"
+}

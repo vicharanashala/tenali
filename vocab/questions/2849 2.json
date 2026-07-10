@@ -1,0 +1,15 @@
+{
+  "id": 2849,
+  "word": "Quodlibet",
+  "question": "Quodlibet",
+  "options": [
+    "Plural of abusment",
+    "A philosophical question proposed for discussion",
+    "A song of mourning for the dead",
+    "Conspicuous; easily recognizable"
+  ],
+  "answerOption": "B",
+  "answerText": "A philosophical question proposed for discussion",
+  "difficulty": "extra-hard",
+  "sourceFile": "2849.json"
+}

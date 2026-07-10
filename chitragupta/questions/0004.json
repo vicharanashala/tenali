@@ -1,0 +1,14 @@
+{
+  "id": 4,
+  "question": "Which festival is known as the festival of lights?",
+  "options": [
+    "Holi",
+    "Diwali",
+    "Eid",
+    "Pongal"
+  ],
+  "answerOption": "B",
+  "answerText": "Diwali",
+  "genre": "india-gk",
+  "sourceFile": "0004.json"
+}

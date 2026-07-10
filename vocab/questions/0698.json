@@ -1,0 +1,15 @@
+{
+  "id": 698,
+  "word": "Primary",
+  "question": "Primary",
+  "options": [
+    "To shine with a flickering light",
+    "Causing excitement and fear",
+    "Of chief importance; principal",
+    "Solid, firm, and rigid; not easily broken"
+  ],
+  "answerOption": "C",
+  "answerText": "Of chief importance; principal",
+  "difficulty": "easy",
+  "sourceFile": "0698.json"
+}

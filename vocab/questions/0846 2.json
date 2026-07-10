@@ -1,0 +1,15 @@
+{
+  "id": 846,
+  "word": "Pragmatic",
+  "question": "Pragmatic",
+  "options": [
+    "Dealing with things in a practical way",
+    "Secreting venom; full of malice",
+    "To clear someone of blame or suspicion",
+    "To give someone pleasure or satisfaction"
+  ],
+  "answerOption": "A",
+  "answerText": "Dealing with things in a practical way",
+  "difficulty": "medium",
+  "sourceFile": "0846.json"
+}

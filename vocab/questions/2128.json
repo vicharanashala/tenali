@@ -1,0 +1,15 @@
+{
+  "id": 2128,
+  "word": "Tautology",
+  "question": "Tautology",
+  "options": [
+    "Saying the same thing twice in different words",
+    "A person who flies in balloon",
+    "Belief in the Holy Trinity",
+    "A genus of weasel-like animals"
+  ],
+  "answerOption": "A",
+  "answerText": "Saying the same thing twice in different words",
+  "difficulty": "hard",
+  "sourceFile": "2128.json"
+}

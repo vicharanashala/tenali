@@ -1,0 +1,15 @@
+{
+  "id": 1964,
+  "word": "Blocked",
+  "question": "Blocked",
+  "options": [
+    "A sudden and disastrous collapse",
+    "Prevented from happening or passing",
+    "A state of being deserted or lonely",
+    "Intense dislike or disgust"
+  ],
+  "answerOption": "B",
+  "answerText": "Prevented from happening or passing",
+  "difficulty": "medium",
+  "sourceFile": "1964.json"
+}

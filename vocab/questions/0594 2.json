@@ -1,0 +1,15 @@
+{
+  "id": 594,
+  "word": "Unique",
+  "question": "Unique",
+  "options": [
+    "Well informed about many subjects",
+    "To have an idea that something is possible",
+    "Allowing light to pass through clearly",
+    "Being the only one of its kind"
+  ],
+  "answerOption": "D",
+  "answerText": "Being the only one of its kind",
+  "difficulty": "easy",
+  "sourceFile": "0594.json"
+}

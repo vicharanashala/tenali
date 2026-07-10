@@ -1,0 +1,15 @@
+{
+  "id": 1286,
+  "word": "Panacea",
+  "question": "Panacea",
+  "options": [
+    "Something that signals the approach of another",
+    "A solution for all difficulties or diseases",
+    "To reduce to remove unwanted elements",
+    "A person who is new to a subject"
+  ],
+  "answerOption": "B",
+  "answerText": "A solution for all difficulties or diseases",
+  "difficulty": "hard",
+  "sourceFile": "1286.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 848,
+  "word": "Resilient",
+  "question": "Resilient",
+  "options": [
+    "Gentle and kindly; not harmful",
+    "Able to recover quickly from difficulties",
+    "To put an end to a rebellion or disturbance",
+    "Courage in pain or adversity"
+  ],
+  "answerOption": "B",
+  "answerText": "Able to recover quickly from difficulties",
+  "difficulty": "medium",
+  "sourceFile": "0848.json"
+}

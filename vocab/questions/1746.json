@@ -1,0 +1,15 @@
+{
+  "id": 1746,
+  "word": "Perfidious",
+  "question": "Perfidious",
+  "options": [
+    "Hostile and aggressive",
+    "Treacherous and disloyal",
+    "A feeling of intense excitement and happiness",
+    "Not governed by law"
+  ],
+  "answerOption": "B",
+  "answerText": "Treacherous and disloyal",
+  "difficulty": "medium",
+  "sourceFile": "1746.json"
+}

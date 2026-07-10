@@ -1,0 +1,14 @@
+{
+  "id": 717,
+  "question": "Who wrote 'Macbeth'?",
+  "options": [
+    "Charles Dickens",
+    "William Shakespeare",
+    "Jane Austen",
+    "John Milton"
+  ],
+  "answerOption": "B",
+  "answerText": "William Shakespeare",
+  "genre": "general-knowledge",
+  "sourceFile": "0717.json"
+}

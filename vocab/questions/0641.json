@@ -1,0 +1,15 @@
+{
+  "id": 641,
+  "word": "Skilled",
+  "question": "Skilled",
+  "options": [
+    "To attach a tag showing the contents",
+    "Having the training needed to do something",
+    "Darkly colored or gloomy",
+    "Of little weight; easy to carry"
+  ],
+  "answerOption": "B",
+  "answerText": "Having the training needed to do something",
+  "difficulty": "easy",
+  "sourceFile": "0641.json"
+}

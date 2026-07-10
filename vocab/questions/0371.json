@@ -1,0 +1,15 @@
+{
+  "id": 371,
+  "word": "Chop",
+  "question": "Chop",
+  "options": [
+    "To cut something into pieces with a tool",
+    "To give shares of something to many people",
+    "Having the shape of a rectangle",
+    "Strong and healthy; vigorous"
+  ],
+  "answerOption": "A",
+  "answerText": "To cut something into pieces with a tool",
+  "difficulty": "easy",
+  "sourceFile": "0371.json"
+}

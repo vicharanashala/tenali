@@ -1,0 +1,15 @@
+{
+  "id": 697,
+  "word": "Major",
+  "question": "Major",
+  "options": [
+    "To gain knowledge or skill through study",
+    "An act of saying goodbye",
+    "Important, serious, or significant",
+    "To shine with a soft trembling light"
+  ],
+  "answerOption": "C",
+  "answerText": "Important, serious, or significant",
+  "difficulty": "easy",
+  "sourceFile": "0697.json"
+}

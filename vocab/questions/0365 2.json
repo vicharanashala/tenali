@@ -1,0 +1,15 @@
+{
+  "id": 365,
+  "word": "Spill",
+  "question": "Spill",
+  "options": [
+    "To give someone the means to do something",
+    "To cause a liquid to flow over the edge",
+    "To spring back after hitting a surface",
+    "Made by human skill; not natural"
+  ],
+  "answerOption": "B",
+  "answerText": "To cause a liquid to flow over the edge",
+  "difficulty": "easy",
+  "sourceFile": "0365.json"
+}

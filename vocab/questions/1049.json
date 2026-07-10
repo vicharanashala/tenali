@@ -1,0 +1,15 @@
+{
+  "id": 1049,
+  "word": "Baffled",
+  "question": "Baffled",
+  "options": [
+    "Totally confused or puzzled",
+    "Pleasant and easy to get along with",
+    "A small individual part or feature",
+    "Done in return for harm"
+  ],
+  "answerOption": "A",
+  "answerText": "Totally confused or puzzled",
+  "difficulty": "medium",
+  "sourceFile": "1049.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 714,
+  "question": "Which part of the plant conducts photosynthesis?",
+  "options": [
+    "Root",
+    "Stem",
+    "Leaf",
+    "Seed"
+  ],
+  "answerOption": "C",
+  "answerText": "Leaf",
+  "genre": "mixed",
+  "sourceFile": "0714.json"
+}

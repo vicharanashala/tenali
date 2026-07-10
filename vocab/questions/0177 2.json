@@ -1,0 +1,15 @@
+{
+  "id": 177,
+  "word": "Lose",
+  "question": "Lose",
+  "options": [
+    "Done consciously and intentionally",
+    "To be defeated in a contest",
+    "Full of life and energy",
+    "To watch over and direct the work of others"
+  ],
+  "answerOption": "B",
+  "answerText": "To be defeated in a contest",
+  "difficulty": "easy",
+  "sourceFile": "0177.json"
+}

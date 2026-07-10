@@ -1,0 +1,15 @@
+{
+  "id": 91,
+  "word": "Thin",
+  "question": "Thin",
+  "options": [
+    "To cause someone to lose confidence",
+    "To move or act with great speed",
+    "To refuse to take notice of something",
+    "Having opposite surfaces close together"
+  ],
+  "answerOption": "D",
+  "answerText": "Having opposite surfaces close together",
+  "difficulty": "easy",
+  "sourceFile": "0091.json"
+}

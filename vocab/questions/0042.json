@@ -1,0 +1,15 @@
+{
+  "id": 42,
+  "word": "Ugly",
+  "question": "Ugly",
+  "options": [
+    "Not easily bent or moved",
+    "Feeling fear or anxiety",
+    "Unpleasant or repulsive in appearance",
+    "To save someone from a dangerous situation"
+  ],
+  "answerOption": "C",
+  "answerText": "Unpleasant or repulsive in appearance",
+  "difficulty": "easy",
+  "sourceFile": "0042.json"
+}

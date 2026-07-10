@@ -1,0 +1,15 @@
+{
+  "id": 2100,
+  "word": "Aerider",
+  "question": "Aerider",
+  "options": [
+    "Scorched or burned by heat",
+    "One who travels in air",
+    "In an aeronautical manner",
+    "A female adventurer"
+  ],
+  "answerOption": "B",
+  "answerText": "One who travels in air",
+  "difficulty": "hard",
+  "sourceFile": "2100.json"
+}

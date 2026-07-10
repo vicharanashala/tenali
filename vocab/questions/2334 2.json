@@ -1,0 +1,15 @@
+{
+  "id": 2334,
+  "word": "Zugzwang",
+  "question": "Zugzwang",
+  "options": [
+    "Things promoting weaning",
+    "To complain habitually",
+    "A Roman numeral symbol",
+    "A situation where any move will worsen one's position"
+  ],
+  "answerOption": "D",
+  "answerText": "A situation where any move will worsen one's position",
+  "difficulty": "extra-hard",
+  "sourceFile": "2334.json"
+}

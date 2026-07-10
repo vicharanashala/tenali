@@ -1,0 +1,15 @@
+{
+  "id": 1216,
+  "word": "Cabal",
+  "question": "Cabal",
+  "options": [
+    "A secret political group or faction",
+    "Denoting a period of happiness and prosperity",
+    "Affected by nausea; bad-tempered",
+    "Public shame or disgrace"
+  ],
+  "answerOption": "A",
+  "answerText": "A secret political group or faction",
+  "difficulty": "hard",
+  "sourceFile": "1216.json"
+}

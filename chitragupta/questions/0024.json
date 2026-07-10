@@ -1,0 +1,14 @@
+{
+  "id": 24,
+  "question": "Which animal is India's national animal?",
+  "options": [
+    "Elephant",
+    "Tiger",
+    "Lion",
+    "Leopard"
+  ],
+  "answerOption": "B",
+  "answerText": "Tiger",
+  "genre": "india-gk",
+  "sourceFile": "0024.json"
+}

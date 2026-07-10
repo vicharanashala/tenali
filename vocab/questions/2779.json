@@ -1,0 +1,15 @@
+{
+  "id": 2779,
+  "word": "Abatement",
+  "question": "Abatement",
+  "options": [
+    "A balloon or airship",
+    "A deep narrow valley with steep sides",
+    "The action of reducing in amount",
+    "The action of making better"
+  ],
+  "answerOption": "C",
+  "answerText": "The action of reducing in amount",
+  "difficulty": "hard",
+  "sourceFile": "2779.json"
+}

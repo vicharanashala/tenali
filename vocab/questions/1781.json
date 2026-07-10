@@ -1,0 +1,15 @@
+{
+  "id": 1781,
+  "word": "Allegiance",
+  "question": "Allegiance",
+  "options": [
+    "To reduce in swelling",
+    "Performed without planning or prompting",
+    "Loyalty to a person or country",
+    "Feeling or expressing contempt"
+  ],
+  "answerOption": "C",
+  "answerText": "Loyalty to a person or country",
+  "difficulty": "medium",
+  "sourceFile": "1781.json"
+}

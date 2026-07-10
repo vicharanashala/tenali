@@ -1,0 +1,15 @@
+{
+  "id": 1387,
+  "word": "Quiddity",
+  "question": "Quiddity",
+  "options": [
+    "A particular philosophy or view of life",
+    "The inherent nature or essence of something",
+    "The making of evasive statements",
+    "Having an excessive fondness for one's wife"
+  ],
+  "answerOption": "B",
+  "answerText": "The inherent nature or essence of something",
+  "difficulty": "extra-hard",
+  "sourceFile": "1387.json"
+}

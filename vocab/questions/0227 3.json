@@ -1,0 +1,15 @@
+{
+  "id": 227,
+  "word": "Repel",
+  "question": "Repel",
+  "options": [
+    "To drive or force something away",
+    "Existing in large quantities",
+    "To break the connection between things",
+    "Too small to be seen by the eye"
+  ],
+  "answerOption": "A",
+  "answerText": "To drive or force something away",
+  "difficulty": "easy",
+  "sourceFile": "0227.json"
+}

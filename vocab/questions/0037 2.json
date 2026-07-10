@@ -1,0 +1,15 @@
+{
+  "id": 37,
+  "word": "Lethargic",
+  "question": "Lethargic",
+  "options": [
+    "A seemingly contradictory statement that may be true",
+    "Lacking energy; sluggish and apathetic",
+    "Something that deviates from what is standard",
+    "A person who flatters to gain advantage"
+  ],
+  "answerOption": "B",
+  "answerText": "Lacking energy; sluggish and apathetic",
+  "difficulty": "hard",
+  "sourceFile": "0037.json"
+}

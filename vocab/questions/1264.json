@@ -1,0 +1,15 @@
+{
+  "id": 1264,
+  "word": "Quintessence",
+  "question": "Quintessence",
+  "options": [
+    "Relating to duty-based ethics",
+    "Able to be denied or refuted",
+    "Lacking important necessities",
+    "The most perfect example of a quality"
+  ],
+  "answerOption": "D",
+  "answerText": "The most perfect example of a quality",
+  "difficulty": "medium",
+  "sourceFile": "1264.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1858,
+  "word": "Disorderly",
+  "question": "Disorderly",
+  "options": [
+    "Providing good value",
+    "Lacking order or organization",
+    "Able to be detected or found",
+    "Mercy or leniency shown to a wrongdoer"
+  ],
+  "answerOption": "B",
+  "answerText": "Lacking order or organization",
+  "difficulty": "medium",
+  "sourceFile": "1858.json"
+}

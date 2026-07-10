@@ -1,0 +1,15 @@
+{
+  "id": 1689,
+  "word": "Determinate",
+  "question": "Determinate",
+  "options": [
+    "A loud and confused noise or voices",
+    "To unfasten or separate something",
+    "Having fixed or defined limits",
+    "Having a harmful effect gradually"
+  ],
+  "answerOption": "C",
+  "answerText": "Having fixed or defined limits",
+  "difficulty": "medium",
+  "sourceFile": "1689.json"
+}

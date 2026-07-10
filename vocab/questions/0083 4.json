@@ -1,0 +1,15 @@
+{
+  "id": 83,
+  "word": "Stale",
+  "question": "Stale",
+  "options": [
+    "Feeling sorrow or unhappiness",
+    "Full of energy and enthusiasm",
+    "Not having a sharp edge or point",
+    "No longer fresh; old and dry"
+  ],
+  "answerOption": "D",
+  "answerText": "No longer fresh; old and dry",
+  "difficulty": "easy",
+  "sourceFile": "0083.json"
+}

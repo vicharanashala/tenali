@@ -1,0 +1,15 @@
+{
+  "id": 986,
+  "word": "Zealous",
+  "question": "Zealous",
+  "options": [
+    "To consider something to be important",
+    "Having great energy or enthusiasm",
+    "Elaborately or highly decorated",
+    "To show how something is done"
+  ],
+  "answerOption": "B",
+  "answerText": "Having great energy or enthusiasm",
+  "difficulty": "easy",
+  "sourceFile": "0986.json"
+}

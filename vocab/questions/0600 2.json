@@ -1,0 +1,15 @@
+{
+  "id": 600,
+  "word": "Splendid",
+  "question": "Splendid",
+  "options": [
+    "Very impressive; magnificent",
+    "Kind and pleasant to others",
+    "Having the form of a circle",
+    "Covered or marked with an unclean substance"
+  ],
+  "answerOption": "A",
+  "answerText": "Very impressive; magnificent",
+  "difficulty": "easy",
+  "sourceFile": "0600.json"
+}

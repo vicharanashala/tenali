@@ -1,0 +1,14 @@
+{
+  "id": 793,
+  "question": "What is the chemical symbol for silicon?",
+  "options": [
+    "Sc",
+    "Si",
+    "S",
+    "Sn"
+  ],
+  "answerOption": "B",
+  "answerText": "Si",
+  "genre": "mixed",
+  "sourceFile": "0793.json"
+}

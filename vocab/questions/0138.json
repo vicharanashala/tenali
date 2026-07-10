@@ -1,0 +1,15 @@
+{
+  "id": 138,
+  "word": "Tender",
+  "question": "Tender",
+  "options": [
+    "Acting in the same way over time",
+    "Lacking flavor or interest",
+    "So small or unimportant as to be not worth considering",
+    "Showing gentleness and concern"
+  ],
+  "answerOption": "D",
+  "answerText": "Showing gentleness and concern",
+  "difficulty": "easy",
+  "sourceFile": "0138.json"
+}

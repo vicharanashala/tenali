@@ -1,0 +1,15 @@
+{
+  "id": 632,
+  "word": "Consistent",
+  "question": "Consistent",
+  "options": [
+    "To cook food by prolonged exposure to heat",
+    "To give facts or information to someone",
+    "Acting in the same way over time",
+    "Having a hidden meaning"
+  ],
+  "answerOption": "C",
+  "answerText": "Acting in the same way over time",
+  "difficulty": "easy",
+  "sourceFile": "0632.json"
+}

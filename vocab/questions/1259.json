@@ -1,0 +1,15 @@
+{
+  "id": 1259,
+  "word": "Idyllic",
+  "question": "Idyllic",
+  "options": [
+    "A person who depones",
+    "Understanding of a situation after it occurs",
+    "A thing that spoils or damages something",
+    "Extremely happy, peaceful, or picturesque"
+  ],
+  "answerOption": "D",
+  "answerText": "Extremely happy, peaceful, or picturesque",
+  "difficulty": "medium",
+  "sourceFile": "1259.json"
+}

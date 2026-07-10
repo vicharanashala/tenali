@@ -1,0 +1,15 @@
+{
+  "id": 2738,
+  "word": "Duende",
+  "question": "Duende",
+  "options": [
+    "In manner resembling abyss",
+    "A contented state of being happy and prosperous",
+    "Leaving secretly to avoid detection",
+    "The mysterious power of art to deeply move a person"
+  ],
+  "answerOption": "D",
+  "answerText": "The mysterious power of art to deeply move a person",
+  "difficulty": "extra-hard",
+  "sourceFile": "2738.json"
+}

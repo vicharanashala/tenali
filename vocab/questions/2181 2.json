@@ -1,0 +1,15 @@
+{
+  "id": 2181,
+  "word": "AERONAUTIC",
+  "question": "AERONAUTIC",
+  "options": [
+    "Relating to the Aelp mountains",
+    "Inflammation from air pressure",
+    "One who adulterates",
+    "Relating to air navigation"
+  ],
+  "answerOption": "D",
+  "answerText": "Relating to air navigation",
+  "difficulty": "hard",
+  "sourceFile": "2181.json"
+}

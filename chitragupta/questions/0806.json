@@ -1,0 +1,14 @@
+{
+  "id": 806,
+  "question": "Who wrote 'Gulliver's Travels'?",
+  "options": [
+    "Jonathan Swift",
+    "Daniel Defoe",
+    "Henry Fielding",
+    "Samuel Richardson"
+  ],
+  "answerOption": "A",
+  "answerText": "Jonathan Swift",
+  "genre": "general-knowledge",
+  "sourceFile": "0806.json"
+}

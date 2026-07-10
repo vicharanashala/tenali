@@ -1,0 +1,15 @@
+{
+  "id": 1235,
+  "word": "Frivolous",
+  "question": "Frivolous",
+  "options": [
+    "Lacking consistency or purpose",
+    "A polite refusal of an invitation",
+    "Serving to cleanse or purify",
+    "Not having any serious purpose or value"
+  ],
+  "answerOption": "D",
+  "answerText": "Not having any serious purpose or value",
+  "difficulty": "medium",
+  "sourceFile": "1235.json"
+}

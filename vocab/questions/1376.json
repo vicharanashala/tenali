@@ -1,0 +1,15 @@
+{
+  "id": 1376,
+  "word": "Delicate",
+  "question": "Delicate",
+  "options": [
+    "To dislike intensely",
+    "Not aware or conscious",
+    "Fine in texture, form, or structure",
+    "Sumptuously rich or elaborate"
+  ],
+  "answerOption": "C",
+  "answerText": "Fine in texture, form, or structure",
+  "difficulty": "medium",
+  "sourceFile": "1376.json"
+}

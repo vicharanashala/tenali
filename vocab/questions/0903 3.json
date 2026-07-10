@@ -1,0 +1,15 @@
+{
+  "id": 903,
+  "word": "Free",
+  "question": "Free",
+  "options": [
+    "To rest on the surface of a liquid",
+    "To refuse to take notice of something",
+    "Not under control of another",
+    "To have something come into the mind again"
+  ],
+  "answerOption": "C",
+  "answerText": "Not under control of another",
+  "difficulty": "easy",
+  "sourceFile": "0903.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 683,
+  "word": "Sturdy",
+  "question": "Sturdy",
+  "options": [
+    "Living in a natural state; not tamed",
+    "Slightly wet or damp",
+    "Known for sure; established beyond doubt",
+    "Strongly and solidly built"
+  ],
+  "answerOption": "D",
+  "answerText": "Strongly and solidly built",
+  "difficulty": "easy",
+  "sourceFile": "0683.json"
+}

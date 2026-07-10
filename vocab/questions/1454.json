@@ -1,0 +1,15 @@
+{
+  "id": 1454,
+  "word": "Dentifrice",
+  "question": "Dentifrice",
+  "options": [
+    "Appearing as true on the surface",
+    "A paste or powder for cleaning teeth",
+    "Causing confusion or bewilderment",
+    "A modest view of one's own importance"
+  ],
+  "answerOption": "B",
+  "answerText": "A paste or powder for cleaning teeth",
+  "difficulty": "medium",
+  "sourceFile": "1454.json"
+}

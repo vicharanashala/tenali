@@ -1,0 +1,14 @@
+{
+  "id": 242,
+  "question": "What is the formula for methane?",
+  "options": [
+    "CH3",
+    "CH4",
+    "C2H6",
+    "CO2"
+  ],
+  "answerOption": "B",
+  "answerText": "CH4",
+  "genre": "mixed",
+  "sourceFile": "0242.json"
+}

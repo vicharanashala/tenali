@@ -1,0 +1,15 @@
+{
+  "id": 1611,
+  "word": "Deterministic",
+  "question": "Deterministic",
+  "options": [
+    "Causing great damage or ruin",
+    "So intense as to be almost touched or felt",
+    "Based on an imagined situation, not reality",
+    "Relating to or based on determinism"
+  ],
+  "answerOption": "D",
+  "answerText": "Relating to or based on determinism",
+  "difficulty": "medium",
+  "sourceFile": "1611.json"
+}

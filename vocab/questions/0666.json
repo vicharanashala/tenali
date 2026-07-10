@@ -1,0 +1,15 @@
+{
+  "id": 666,
+  "word": "Vast",
+  "question": "Vast",
+  "options": [
+    "Having no special features; normal",
+    "Of very great extent or quantity",
+    "To settle or find a solution to a problem",
+    "Arranged in a tidy way"
+  ],
+  "answerOption": "B",
+  "answerText": "Of very great extent or quantity",
+  "difficulty": "easy",
+  "sourceFile": "0666.json"
+}

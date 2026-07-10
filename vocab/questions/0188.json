@@ -1,0 +1,15 @@
+{
+  "id": 188,
+  "word": "Hide",
+  "question": "Hide",
+  "options": [
+    "To make someone feel admiration",
+    "With little or no light",
+    "To make someone feel happy or satisfied",
+    "To put or keep out of sight"
+  ],
+  "answerOption": "D",
+  "answerText": "To put or keep out of sight",
+  "difficulty": "easy",
+  "sourceFile": "0188.json"
+}

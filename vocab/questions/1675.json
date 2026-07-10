@@ -1,0 +1,15 @@
+{
+  "id": 1675,
+  "word": "Detective",
+  "question": "Detective",
+  "options": [
+    "Noisy and disorderly",
+    "A police officer investigating crime",
+    "In a detrimental manner",
+    "Not easily upset or excited; calm"
+  ],
+  "answerOption": "B",
+  "answerText": "A police officer investigating crime",
+  "difficulty": "medium",
+  "sourceFile": "1675.json"
+}

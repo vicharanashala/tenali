@@ -1,0 +1,15 @@
+{
+  "id": 1325,
+  "word": "Decree",
+  "question": "Decree",
+  "options": [
+    "Able to be discovered or noticed",
+    "Lacking in quantity",
+    "Tending to cause deterioration",
+    "An official order issued by a legal authority"
+  ],
+  "answerOption": "D",
+  "answerText": "An official order issued by a legal authority",
+  "difficulty": "medium",
+  "sourceFile": "1325.json"
+}

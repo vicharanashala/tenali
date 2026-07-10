@@ -1,0 +1,15 @@
+{
+  "id": 578,
+  "word": "Optimistic",
+  "question": "Optimistic",
+  "options": [
+    "To state that something is not true",
+    "Next to or adjoining something else",
+    "Unfriendly and opposed to something",
+    "Expecting the best possible outcome"
+  ],
+  "answerOption": "D",
+  "answerText": "Expecting the best possible outcome",
+  "difficulty": "easy",
+  "sourceFile": "0578.json"
+}

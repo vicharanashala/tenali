@@ -1,0 +1,15 @@
+{
+  "id": 335,
+  "word": "Cooperate",
+  "question": "Cooperate",
+  "options": [
+    "To work together toward a common goal",
+    "Enough to meet the needs",
+    "Smooth and shiny; sophisticated",
+    "To take someone as a prisoner"
+  ],
+  "answerOption": "A",
+  "answerText": "To work together toward a common goal",
+  "difficulty": "easy",
+  "sourceFile": "0335.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 833,
+  "word": "Spicy",
+  "question": "Spicy",
+  "options": [
+    "Insufficient for the demand; in short supply",
+    "Having a strong or hot flavor from seasoning",
+    "To cause someone to feel greatly astonished",
+    "To gather a crop from the fields"
+  ],
+  "answerOption": "B",
+  "answerText": "Having a strong or hot flavor from seasoning",
+  "difficulty": "easy",
+  "sourceFile": "0833.json"
+}

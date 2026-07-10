@@ -1,0 +1,15 @@
+{
+  "id": 110,
+  "word": "Straight",
+  "question": "Straight",
+  "options": [
+    "Treating people equally without favoritism",
+    "Free from bacteria; completely clean",
+    "To warn someone about potential danger",
+    "Extending in one direction without curves"
+  ],
+  "answerOption": "D",
+  "answerText": "Extending in one direction without curves",
+  "difficulty": "easy",
+  "sourceFile": "0110.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 3099,
+  "word": "Mnemonic",
+  "question": "Mnemonic",
+  "options": [
+    "A system to assist the memory",
+    "The state of being suspended",
+    "Fear of the abyss",
+    "A profound awareness of the universe that triggers emotion"
+  ],
+  "answerOption": "A",
+  "answerText": "A system to assist the memory",
+  "difficulty": "extra-hard",
+  "sourceFile": "3099.json"
+}

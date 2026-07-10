@@ -1,0 +1,15 @@
+{
+  "id": 563,
+  "word": "Overwhelm",
+  "question": "Overwhelm",
+  "options": [
+    "Of very little importance",
+    "Reflecting light brightly",
+    "To have a strong emotional effect on someone",
+    "Parallel to the ground; flat"
+  ],
+  "answerOption": "C",
+  "answerText": "To have a strong emotional effect on someone",
+  "difficulty": "easy",
+  "sourceFile": "0563.json"
+}

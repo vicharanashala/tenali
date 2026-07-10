@@ -1,0 +1,15 @@
+{
+  "id": 1967,
+  "word": "Adversely",
+  "question": "Adversely",
+  "options": [
+    "The atmosphere or air layer",
+    "In an adverse manner",
+    "A person who commits adultery",
+    "Norse god of the sea"
+  ],
+  "answerOption": "B",
+  "answerText": "In an adverse manner",
+  "difficulty": "hard",
+  "sourceFile": "1967.json"
+}

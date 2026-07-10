@@ -1,0 +1,15 @@
+{
+  "id": 212,
+  "word": "Worsen",
+  "question": "Worsen",
+  "options": [
+    "Extremely beautiful or impressive",
+    "To make or become worse",
+    "To discover the presence of something hidden",
+    "Too long and therefore boring"
+  ],
+  "answerOption": "B",
+  "answerText": "To make or become worse",
+  "difficulty": "easy",
+  "sourceFile": "0212.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 3173,
+  "word": "Abyssologist",
+  "question": "Abyssologist",
+  "options": [
+    "To change one's loyalties; be evasive",
+    "Expert in deep ocean zones",
+    "The action of abetting someone",
+    "One who cuts abyss"
+  ],
+  "answerOption": "B",
+  "answerText": "Expert in deep ocean zones",
+  "difficulty": "extra-hard",
+  "sourceFile": "3173.json"
+}

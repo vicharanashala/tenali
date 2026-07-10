@@ -1,0 +1,15 @@
+{
+  "id": 49,
+  "word": "Empty",
+  "question": "Empty",
+  "options": [
+    "Bringing or worthy of honor",
+    "Containing nothing; not filled",
+    "Shockingly unacceptable",
+    "To explain something by using examples"
+  ],
+  "answerOption": "B",
+  "answerText": "Containing nothing; not filled",
+  "difficulty": "easy",
+  "sourceFile": "0049.json"
+}

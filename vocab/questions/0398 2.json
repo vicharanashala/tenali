@@ -1,0 +1,15 @@
+{
+  "id": 398,
+  "word": "Thrive",
+  "question": "Thrive",
+  "options": [
+    "Able to adjust to new conditions",
+    "To achieve or realize something desired",
+    "Absolutely necessary or important",
+    "To grow and develop well"
+  ],
+  "answerOption": "D",
+  "answerText": "To grow and develop well",
+  "difficulty": "easy",
+  "sourceFile": "0398.json"
+}

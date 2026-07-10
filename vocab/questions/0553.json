@@ -1,0 +1,15 @@
+{
+  "id": 553,
+  "word": "Contribute",
+  "question": "Contribute",
+  "options": [
+    "Quiet and well-behaved",
+    "To explain the meaning of something",
+    "To give something to help achieve a goal",
+    "Relating to or found in the sea"
+  ],
+  "answerOption": "C",
+  "answerText": "To give something to help achieve a goal",
+  "difficulty": "easy",
+  "sourceFile": "0553.json"
+}

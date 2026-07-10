@@ -1,0 +1,15 @@
+{
+  "id": 1122,
+  "word": "Erratic",
+  "question": "Erratic",
+  "options": [
+    "Using more words than are needed",
+    "Relating to ordinary people",
+    "A factor that determines something",
+    "Not even or regular in pattern"
+  ],
+  "answerOption": "D",
+  "answerText": "Not even or regular in pattern",
+  "difficulty": "medium",
+  "sourceFile": "1122.json"
+}

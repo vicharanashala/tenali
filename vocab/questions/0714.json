@@ -1,0 +1,15 @@
+{
+  "id": 714,
+  "word": "Adjacent",
+  "question": "Adjacent",
+  "options": [
+    "Next to or adjoining something else",
+    "Difficult to grip or stand on",
+    "Shaped like a ball or globe",
+    "Weak and delicate in health"
+  ],
+  "answerOption": "A",
+  "answerText": "Next to or adjoining something else",
+  "difficulty": "easy",
+  "sourceFile": "0714.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1879,
+  "word": "Crumbly",
+  "question": "Crumbly",
+  "options": [
+    "Secreting venom; full of malice",
+    "Briefly and clearly expressed",
+    "Tending to crumble easily",
+    "A branching extension of a nerve cell"
+  ],
+  "answerOption": "C",
+  "answerText": "Tending to crumble easily",
+  "difficulty": "medium",
+  "sourceFile": "1879.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 663,
+  "question": "Who wrote 'The Trial'?",
+  "options": [
+    "Franz Kafka",
+    "Albert Camus",
+    "Thomas Mann",
+    "Hermann Hesse"
+  ],
+  "answerOption": "A",
+  "answerText": "Franz Kafka",
+  "genre": "general-knowledge",
+  "sourceFile": "0663.json"
+}

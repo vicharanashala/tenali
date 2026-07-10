@@ -1,0 +1,15 @@
+{
+  "id": 809,
+  "word": "Vain",
+  "question": "Vain",
+  "options": [
+    "To go beyond the limit of something",
+    "Feeling uncertain or unsure",
+    "To go from one place to another",
+    "Having an excessively high opinion of oneself"
+  ],
+  "answerOption": "D",
+  "answerText": "Having an excessively high opinion of oneself",
+  "difficulty": "easy",
+  "sourceFile": "0809.json"
+}

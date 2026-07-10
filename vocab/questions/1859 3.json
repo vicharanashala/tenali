@@ -1,0 +1,15 @@
+{
+  "id": 1859,
+  "word": "Pernicious",
+  "question": "Pernicious",
+  "options": [
+    "The quality of being loyal",
+    "The quality of being advisable",
+    "Having a harmful effect in a gradual way",
+    "Shaped with an adze"
+  ],
+  "answerOption": "C",
+  "answerText": "Having a harmful effect in a gradual way",
+  "difficulty": "hard",
+  "sourceFile": "1859.json"
+}

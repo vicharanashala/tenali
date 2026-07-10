@@ -1,0 +1,15 @@
+{
+  "id": 434,
+  "word": "Unlock",
+  "question": "Unlock",
+  "options": [
+    "To open something that is locked",
+    "Weak and delicate in health",
+    "To prove more powerful than opposing forces",
+    "Luxuriously expensive or rich"
+  ],
+  "answerOption": "A",
+  "answerText": "To open something that is locked",
+  "difficulty": "easy",
+  "sourceFile": "0434.json"
+}

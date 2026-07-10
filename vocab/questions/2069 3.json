@@ -1,0 +1,15 @@
+{
+  "id": 2069,
+  "word": "Mettle",
+  "question": "Mettle",
+  "options": [
+    "A prehistoric stone artifact",
+    "A person's ability to cope with difficulties",
+    "The quality of lasting long",
+    "In an advisable manner"
+  ],
+  "answerOption": "B",
+  "answerText": "A person's ability to cope with difficulties",
+  "difficulty": "hard",
+  "sourceFile": "2069.json"
+}

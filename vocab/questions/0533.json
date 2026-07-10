@@ -1,0 +1,15 @@
+{
+  "id": 533,
+  "word": "Criticize",
+  "question": "Criticize",
+  "options": [
+    "To reach a destination",
+    "To point out the faults of something",
+    "Made up of exactly similar parts",
+    "To produce flowers; to flourish"
+  ],
+  "answerOption": "B",
+  "answerText": "To point out the faults of something",
+  "difficulty": "easy",
+  "sourceFile": "0533.json"
+}

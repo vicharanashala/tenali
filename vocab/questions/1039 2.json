@@ -1,0 +1,15 @@
+{
+  "id": 1039,
+  "word": "Abate",
+  "question": "Abate",
+  "options": [
+    "To become less intense or widespread",
+    "Using few words; devoid of superfluity",
+    "To provide evidence to support a claim",
+    "To exclude someone from a group"
+  ],
+  "answerOption": "A",
+  "answerText": "To become less intense or widespread",
+  "difficulty": "medium",
+  "sourceFile": "1039.json"
+}

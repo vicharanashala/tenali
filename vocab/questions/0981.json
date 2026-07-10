@@ -1,0 +1,15 @@
+{
+  "id": 981,
+  "word": "Stolid",
+  "question": "Stolid",
+  "options": [
+    "Calm and not easily disturbed",
+    "Of very little importance",
+    "To cook food using an oven",
+    "Protected from danger or risk"
+  ],
+  "answerOption": "A",
+  "answerText": "Calm and not easily disturbed",
+  "difficulty": "easy",
+  "sourceFile": "0981.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 72,
+  "word": "Careless",
+  "question": "Careless",
+  "options": [
+    "Not giving enough attention to avoid harm",
+    "To make something untidy or disordered",
+    "In a particular place; existing now",
+    "Not showing or feeling nervousness or anger"
+  ],
+  "answerOption": "A",
+  "answerText": "Not giving enough attention to avoid harm",
+  "difficulty": "easy",
+  "sourceFile": "0072.json"
+}

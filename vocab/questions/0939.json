@@ -1,0 +1,15 @@
+{
+  "id": 939,
+  "word": "Exotic",
+  "question": "Exotic",
+  "options": [
+    "Originating from another place",
+    "Graceful and stylish in appearance",
+    "Existing in very large quantities",
+    "To perceive the scent of something"
+  ],
+  "answerOption": "A",
+  "answerText": "Originating from another place",
+  "difficulty": "easy",
+  "sourceFile": "0939.json"
+}

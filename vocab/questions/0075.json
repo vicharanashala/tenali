@@ -1,0 +1,15 @@
+{
+  "id": 75,
+  "word": "Proud",
+  "question": "Proud",
+  "options": [
+    "Protected from danger or risk",
+    "To exceed or be greater than something",
+    "Feeling deep pleasure from achievements",
+    "Causing extreme fear or suffering"
+  ],
+  "answerOption": "C",
+  "answerText": "Feeling deep pleasure from achievements",
+  "difficulty": "easy",
+  "sourceFile": "0075.json"
+}

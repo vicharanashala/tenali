@@ -1,0 +1,15 @@
+{
+  "id": 1265,
+  "word": "Replenish",
+  "question": "Replenish",
+  "options": [
+    "To fill something up again",
+    "Inspiring fear or respect through size",
+    "Able to be denied or refuted",
+    "Gentle and kindly; not harmful"
+  ],
+  "answerOption": "A",
+  "answerText": "To fill something up again",
+  "difficulty": "medium",
+  "sourceFile": "1265.json"
+}

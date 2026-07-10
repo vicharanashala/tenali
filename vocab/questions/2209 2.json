@@ -1,0 +1,15 @@
+{
+  "id": 2209,
+  "word": "AEROPLANKTON",
+  "question": "AEROPLANKTON",
+  "options": [
+    "An expert in aeronautics",
+    "Attempting to avoid notice or attention",
+    "Treatment with hot air",
+    "Organisms floating in air"
+  ],
+  "answerOption": "D",
+  "answerText": "Organisms floating in air",
+  "difficulty": "hard",
+  "sourceFile": "2209.json"
+}

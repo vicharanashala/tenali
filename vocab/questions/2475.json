@@ -1,0 +1,15 @@
+{
+  "id": 2475,
+  "word": "Aeroblast",
+  "question": "Aeroblast",
+  "options": [
+    "An air-powered projection device",
+    "The quality of being decidable",
+    "Gradual recovery of health",
+    "The use of many words where fewer would do"
+  ],
+  "answerOption": "A",
+  "answerText": "An air-powered projection device",
+  "difficulty": "hard",
+  "sourceFile": "2475.json"
+}

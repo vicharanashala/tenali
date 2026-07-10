@@ -1,0 +1,15 @@
+{
+  "id": 1048,
+  "word": "Amiable",
+  "question": "Amiable",
+  "options": [
+    "Playfully quaint or fanciful behavior",
+    "Having a friendly and pleasant manner",
+    "To take away or modify the nature",
+    "Sumptuously rich or elaborate"
+  ],
+  "answerOption": "B",
+  "answerText": "Having a friendly and pleasant manner",
+  "difficulty": "medium",
+  "sourceFile": "1048.json"
+}

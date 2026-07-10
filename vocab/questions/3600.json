@@ -1,0 +1,15 @@
+{
+  "id": 3600,
+  "word": "Ablegate",
+  "question": "Ablegate",
+  "options": [
+    "Relating to approaching",
+    "To send away on a mission",
+    "Those who adjoin property",
+    "Relating to abyss viewing"
+  ],
+  "answerOption": "B",
+  "answerText": "To send away on a mission",
+  "difficulty": "extra-hard",
+  "sourceFile": "3600.json"
+}

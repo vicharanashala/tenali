@@ -1,0 +1,15 @@
+{
+  "id": 321,
+  "word": "Surprise",
+  "question": "Surprise",
+  "options": [
+    "To repeat aloud from memory",
+    "To cause someone to feel sudden wonder",
+    "Not supporting either side in a conflict",
+    "Able to soak up liquid easily"
+  ],
+  "answerOption": "B",
+  "answerText": "To cause someone to feel sudden wonder",
+  "difficulty": "easy",
+  "sourceFile": "0321.json"
+}

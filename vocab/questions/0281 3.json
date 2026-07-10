@@ -1,0 +1,15 @@
+{
+  "id": 281,
+  "word": "Listen",
+  "question": "Listen",
+  "options": [
+    "Enough to meet the needs",
+    "Truly what something is said to be",
+    "To give attention to sound or speech",
+    "Made by human skill; not natural"
+  ],
+  "answerOption": "C",
+  "answerText": "To give attention to sound or speech",
+  "difficulty": "easy",
+  "sourceFile": "0281.json"
+}

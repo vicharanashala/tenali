@@ -1,0 +1,14 @@
+{
+  "id": 634,
+  "question": "Who discovered the gamma rays?",
+  "options": [
+    "Roentgen",
+    "Rutherford",
+    "Paul Villard",
+    "Becquerel"
+  ],
+  "answerOption": "C",
+  "answerText": "Paul Villard",
+  "genre": "general-knowledge",
+  "sourceFile": "0634.json"
+}

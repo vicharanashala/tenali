@@ -1,0 +1,15 @@
+{
+  "id": 800,
+  "word": "Righteous",
+  "question": "Righteous",
+  "options": [
+    "To do something repeatedly to improve",
+    "Morally right and justifiable",
+    "To state that something is not true",
+    "To feel curious about something"
+  ],
+  "answerOption": "B",
+  "answerText": "Morally right and justifiable",
+  "difficulty": "easy",
+  "sourceFile": "0800.json"
+}

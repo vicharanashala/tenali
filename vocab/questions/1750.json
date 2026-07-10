@@ -1,0 +1,15 @@
+{
+  "id": 1750,
+  "word": "Sedulous",
+  "question": "Sedulous",
+  "options": [
+    "Done to benefit oneself",
+    "Full of danger or risk",
+    "Diligent and careful in work",
+    "To relieve congestion or overcrowding"
+  ],
+  "answerOption": "C",
+  "answerText": "Diligent and careful in work",
+  "difficulty": "medium",
+  "sourceFile": "1750.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 231,
+  "word": "Despise",
+  "question": "Despise",
+  "options": [
+    "Free from disturbance; calm",
+    "To feel contempt or deep dislike for",
+    "To fasten something with a lock",
+    "In a state of sleep; not awake"
+  ],
+  "answerOption": "B",
+  "answerText": "To feel contempt or deep dislike for",
+  "difficulty": "easy",
+  "sourceFile": "0231.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 197,
+  "question": "What is the main component of the Sun?",
+  "options": [
+    "Oxygen",
+    "Hydrogen",
+    "Nitrogen",
+    "Carbon dioxide"
+  ],
+  "answerOption": "B",
+  "answerText": "Hydrogen",
+  "genre": "mixed",
+  "sourceFile": "0197.json"
+}

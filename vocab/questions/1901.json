@@ -1,0 +1,15 @@
+{
+  "id": 1901,
+  "word": "Contemptuous",
+  "question": "Contemptuous",
+  "options": [
+    "One who commits depredation",
+    "Stubborn or obstinate in nature",
+    "Of such small amount as to be ridiculous",
+    "Showing no respect or esteem"
+  ],
+  "answerOption": "D",
+  "answerText": "Showing no respect or esteem",
+  "difficulty": "medium",
+  "sourceFile": "1901.json"
+}

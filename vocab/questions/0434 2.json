@@ -1,0 +1,15 @@
+{
+  "id": 434,
+  "word": "Unlock",
+  "question": "Unlock",
+  "options": [
+    "Making sure to avoid danger or mistakes",
+    "Having a great deal to do",
+    "To devote time or effort to a purpose",
+    "To open something that is locked"
+  ],
+  "answerOption": "D",
+  "answerText": "To open something that is locked",
+  "difficulty": "easy",
+  "sourceFile": "0434.json"
+}

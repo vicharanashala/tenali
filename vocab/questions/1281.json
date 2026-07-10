@@ -1,0 +1,15 @@
+{
+  "id": 1281,
+  "word": "Catalyst",
+  "question": "Catalyst",
+  "options": [
+    "Not competent or skilled",
+    "A person or thing that precipitates change",
+    "To accumulate or receive over time",
+    "A formal statement made under oath"
+  ],
+  "answerOption": "B",
+  "answerText": "A person or thing that precipitates change",
+  "difficulty": "medium",
+  "sourceFile": "1281.json"
+}

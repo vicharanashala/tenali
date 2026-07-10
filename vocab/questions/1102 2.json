@@ -1,0 +1,15 @@
+{
+  "id": 1102,
+  "word": "Aberration",
+  "question": "Aberration",
+  "options": [
+    "A departure from what is normal or expected",
+    "Angry and bitter in tone or manner",
+    "A feeling of fear about something",
+    "The theory or philosophy of law"
+  ],
+  "answerOption": "A",
+  "answerText": "A departure from what is normal or expected",
+  "difficulty": "hard",
+  "sourceFile": "1102.json"
+}

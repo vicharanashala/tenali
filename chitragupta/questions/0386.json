@@ -1,0 +1,14 @@
+{
+  "id": 386,
+  "question": "Which is the smallest planet in the solar system?",
+  "options": [
+    "Mars",
+    "Mercury",
+    "Venus",
+    "Pluto"
+  ],
+  "answerOption": "B",
+  "answerText": "Mercury",
+  "genre": "geography",
+  "sourceFile": "0386.json"
+}

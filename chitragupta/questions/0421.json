@@ -1,0 +1,14 @@
+{
+  "id": 421,
+  "question": "Which is the SI unit of work?",
+  "options": [
+    "Watt",
+    "Joule",
+    "Newton",
+    "Pascal"
+  ],
+  "answerOption": "B",
+  "answerText": "Joule",
+  "genre": "mixed",
+  "sourceFile": "0421.json"
+}

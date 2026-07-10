@@ -1,0 +1,15 @@
+{
+  "id": 1105,
+  "word": "Listless",
+  "question": "Listless",
+  "options": [
+    "No longer produced or used; out of date",
+    "Lacking energy or enthusiasm",
+    "Showing cruel disregard for others",
+    "The action of leaving a place"
+  ],
+  "answerOption": "B",
+  "answerText": "Lacking energy or enthusiasm",
+  "difficulty": "medium",
+  "sourceFile": "1105.json"
+}

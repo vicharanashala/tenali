@@ -1,0 +1,15 @@
+{
+  "id": 79,
+  "word": "Foolish",
+  "question": "Foolish",
+  "options": [
+    "Lacking good sense or judgment",
+    "Not approximated in any way; precise",
+    "To fill someone with the urge to do something",
+    "Tending to stick or adhere to things"
+  ],
+  "answerOption": "A",
+  "answerText": "Lacking good sense or judgment",
+  "difficulty": "easy",
+  "sourceFile": "0079.json"
+}

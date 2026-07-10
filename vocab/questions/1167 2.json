@@ -1,0 +1,15 @@
+{
+  "id": 1167,
+  "word": "Soliloquy",
+  "question": "Soliloquy",
+  "options": [
+    "Wrongdoing by a public official",
+    "Extreme patriotism in aggressive policy",
+    "A departure from what is normal or expected",
+    "An act of speaking thoughts aloud alone"
+  ],
+  "answerOption": "D",
+  "answerText": "An act of speaking thoughts aloud alone",
+  "difficulty": "hard",
+  "sourceFile": "1167.json"
+}

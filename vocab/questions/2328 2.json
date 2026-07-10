@@ -1,0 +1,15 @@
+{
+  "id": 2328,
+  "word": "Tsundoku",
+  "question": "Tsundoku",
+  "options": [
+    "Acquiring books but letting them pile up unread",
+    "A specified period of five years",
+    "Having keen mental perception and understanding",
+    "A melancholic longing for something absent"
+  ],
+  "answerOption": "A",
+  "answerText": "Acquiring books but letting them pile up unread",
+  "difficulty": "extra-hard",
+  "sourceFile": "2328.json"
+}

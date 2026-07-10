@@ -1,0 +1,15 @@
+{
+  "id": 918,
+  "word": "Quaint",
+  "question": "Quaint",
+  "options": [
+    "To make great efforts under difficulty",
+    "To succeed in doing something",
+    "Attractively old-fashioned",
+    "Acting in the same way over time"
+  ],
+  "answerOption": "C",
+  "answerText": "Attractively old-fashioned",
+  "difficulty": "easy",
+  "sourceFile": "0918.json"
+}

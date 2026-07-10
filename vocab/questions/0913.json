@@ -1,0 +1,15 @@
+{
+  "id": 913,
+  "word": "Dismal",
+  "question": "Dismal",
+  "options": [
+    "Extremely gloomy or bleak",
+    "Possessing great power or strength",
+    "Easy to perceive and understand",
+    "To increase in size or amount"
+  ],
+  "answerOption": "A",
+  "answerText": "Extremely gloomy or bleak",
+  "difficulty": "easy",
+  "sourceFile": "0913.json"
+}

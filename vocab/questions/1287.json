@@ -1,0 +1,15 @@
+{
+  "id": 1287,
+  "word": "Cognizant",
+  "question": "Cognizant",
+  "options": [
+    "A small valley, usually among trees",
+    "Relating to or composed of detritus",
+    "Relating to or based on determinism",
+    "Having awareness or knowledge of something"
+  ],
+  "answerOption": "D",
+  "answerText": "Having awareness or knowledge of something",
+  "difficulty": "medium",
+  "sourceFile": "1287.json"
+}

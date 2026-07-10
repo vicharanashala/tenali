@@ -1,0 +1,14 @@
+{
+  "id": 419,
+  "question": "Which blood component transports oxygen?",
+  "options": [
+    "Platelets",
+    "Plasma",
+    "Red blood cells",
+    "White blood cells"
+  ],
+  "answerOption": "C",
+  "answerText": "Red blood cells",
+  "genre": "science",
+  "sourceFile": "0419.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 628,
+  "question": "What is the SI unit of potential difference?",
+  "options": [
+    "Ampere",
+    "Volt",
+    "Ohm",
+    "Coulomb"
+  ],
+  "answerOption": "B",
+  "answerText": "Volt",
+  "genre": "mixed",
+  "sourceFile": "0628.json"
+}

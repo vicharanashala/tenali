@@ -1,0 +1,14 @@
+{
+  "id": 649,
+  "question": "Which part of the nervous system controls voluntary actions?",
+  "options": [
+    "Autonomic nervous system",
+    "Somatic nervous system",
+    "Central nervous system only",
+    "Enteric nervous system"
+  ],
+  "answerOption": "B",
+  "answerText": "Somatic nervous system",
+  "genre": "mixed",
+  "sourceFile": "0649.json"
+}

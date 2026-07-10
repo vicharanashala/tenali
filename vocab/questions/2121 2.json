@@ -1,0 +1,15 @@
+{
+  "id": 2121,
+  "word": "Aerobiotic",
+  "question": "Aerobiotic",
+  "options": [
+    "An exciting and unusual experience",
+    "Patient self-control; restraint",
+    "Relating to life in air",
+    "In the manner of building aerial nests"
+  ],
+  "answerOption": "C",
+  "answerText": "Relating to life in air",
+  "difficulty": "hard",
+  "sourceFile": "2121.json"
+}

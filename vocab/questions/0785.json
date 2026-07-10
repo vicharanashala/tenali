@@ -1,0 +1,15 @@
+{
+  "id": 785,
+  "word": "Contaminated",
+  "question": "Contaminated",
+  "options": [
+    "To fit together the parts of something",
+    "Made impure by exposure to a harmful substance",
+    "Having an excessively high opinion of oneself",
+    "Extremely small in size"
+  ],
+  "answerOption": "B",
+  "answerText": "Made impure by exposure to a harmful substance",
+  "difficulty": "easy",
+  "sourceFile": "0785.json"
+}

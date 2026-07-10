@@ -1,0 +1,15 @@
+{
+  "id": 2441,
+  "word": "Ignis fatuus",
+  "question": "Ignis fatuus",
+  "options": [
+    "Relating to weaning",
+    "The state of deviating or straying",
+    "A will-o-the-wisp; something deceptive",
+    "Genuine happiness at another person's accomplishment"
+  ],
+  "answerOption": "C",
+  "answerText": "A will-o-the-wisp; something deceptive",
+  "difficulty": "extra-hard",
+  "sourceFile": "2441.json"
+}

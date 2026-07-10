@@ -1,0 +1,15 @@
+{
+  "id": 112,
+  "word": "Sharp",
+  "question": "Sharp",
+  "options": [
+    "Having an edge able to cut or pierce",
+    "To gather a crop from the fields",
+    "Not open; shut or fastened",
+    "To produce flowers; to flourish"
+  ],
+  "answerOption": "A",
+  "answerText": "Having an edge able to cut or pierce",
+  "difficulty": "easy",
+  "sourceFile": "0112.json"
+}

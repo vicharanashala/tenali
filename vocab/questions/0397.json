@@ -1,0 +1,15 @@
+{
+  "id": 397,
+  "word": "Survive",
+  "question": "Survive",
+  "options": [
+    "Created directly and not a copy",
+    "To continue to live despite difficulties",
+    "Having a hidden meaning",
+    "Having the properties of a magnet"
+  ],
+  "answerOption": "B",
+  "answerText": "To continue to live despite difficulties",
+  "difficulty": "easy",
+  "sourceFile": "0397.json"
+}

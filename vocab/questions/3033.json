@@ -1,0 +1,15 @@
+{
+  "id": 3033,
+  "word": "Vellichor",
+  "question": "Vellichor",
+  "options": [
+    "A hand of cards with no card above a nine",
+    "Most able or capable",
+    "Multiple non-literal qualities",
+    "The strange wistfulness of used bookshops"
+  ],
+  "answerOption": "D",
+  "answerText": "The strange wistfulness of used bookshops",
+  "difficulty": "extra-hard",
+  "sourceFile": "3033.json"
+}

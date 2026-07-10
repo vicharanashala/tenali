@@ -1,0 +1,15 @@
+{
+  "id": 2979,
+  "word": "ABJECTION",
+  "question": "ABJECTION",
+  "options": [
+    "A journey on foot; travels",
+    "A melancholic longing for something absent",
+    "The state of being abject",
+    "Relating to ocean depths"
+  ],
+  "answerOption": "C",
+  "answerText": "The state of being abject",
+  "difficulty": "extra-hard",
+  "sourceFile": "2979.json"
+}

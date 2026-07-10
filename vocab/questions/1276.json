@@ -1,0 +1,15 @@
+{
+  "id": 1276,
+  "word": "Brevity",
+  "question": "Brevity",
+  "options": [
+    "The quality of lasting a short time",
+    "Lacking in quantity or quality",
+    "Feeling regret for something done",
+    "Able to be detected or found"
+  ],
+  "answerOption": "A",
+  "answerText": "The quality of lasting a short time",
+  "difficulty": "medium",
+  "sourceFile": "1276.json"
+}

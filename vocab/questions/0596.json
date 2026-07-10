@@ -1,0 +1,15 @@
+{
+  "id": 596,
+  "word": "Exceptional",
+  "question": "Exceptional",
+  "options": [
+    "Shaped like a triangle",
+    "Careful to avoid potential problems",
+    "Stretched tight or under strain",
+    "Unusually good; outstanding"
+  ],
+  "answerOption": "D",
+  "answerText": "Unusually good; outstanding",
+  "difficulty": "easy",
+  "sourceFile": "0596.json"
+}

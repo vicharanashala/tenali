@@ -1,0 +1,15 @@
+{
+  "id": 2446,
+  "word": "Nimiety",
+  "question": "Nimiety",
+  "options": [
+    "A Roman numeral symbol",
+    "A timid or submissive person",
+    "The state of being too much or excessive",
+    "The feeling of solitude in the woods"
+  ],
+  "answerOption": "C",
+  "answerText": "The state of being too much or excessive",
+  "difficulty": "extra-hard",
+  "sourceFile": "2446.json"
+}

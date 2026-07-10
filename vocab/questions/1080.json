@@ -1,0 +1,15 @@
+{
+  "id": 1080,
+  "word": "Impulsive",
+  "question": "Impulsive",
+  "options": [
+    "Holding firmly to something; persistent",
+    "Excessively proud of oneself",
+    "Acting without forethought",
+    "In a despotic manner"
+  ],
+  "answerOption": "C",
+  "answerText": "Acting without forethought",
+  "difficulty": "medium",
+  "sourceFile": "1080.json"
+}

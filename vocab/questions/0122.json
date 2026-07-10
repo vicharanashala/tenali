@@ -1,0 +1,15 @@
+{
+  "id": 122,
+  "word": "Faithful",
+  "question": "Faithful",
+  "options": [
+    "To share information with others",
+    "Remaining true to a person or belief",
+    "Free from tension and anxiety",
+    "Not arranged in a neat way"
+  ],
+  "answerOption": "B",
+  "answerText": "Remaining true to a person or belief",
+  "difficulty": "easy",
+  "sourceFile": "0122.json"
+}

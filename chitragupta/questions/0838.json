@@ -1,0 +1,14 @@
+{
+  "id": 838,
+  "question": "Who wrote 'The Mayor of Casterbridge'?",
+  "options": [
+    "Thomas Hardy",
+    "Charles Dickens",
+    "George Eliot",
+    "Jane Austen"
+  ],
+  "answerOption": "A",
+  "answerText": "Thomas Hardy",
+  "genre": "general-knowledge",
+  "sourceFile": "0838.json"
+}

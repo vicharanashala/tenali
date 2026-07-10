@@ -1,0 +1,15 @@
+{
+  "id": 2006,
+  "word": "Advulatress",
+  "question": "Advulatress",
+  "options": [
+    "Superficially plausible but actually wrong",
+    "An adulterous woman",
+    "Lasting for eons or ages",
+    "A word modifying a verb or adjective"
+  ],
+  "answerOption": "B",
+  "answerText": "An adulterous woman",
+  "difficulty": "hard",
+  "sourceFile": "2006.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1709,
+  "word": "Surreptitious",
+  "question": "Surreptitious",
+  "options": [
+    "Done secretly and carefully",
+    "Made or occurring without plan",
+    "Wary or suspicious",
+    "A muscle that depresses something"
+  ],
+  "answerOption": "A",
+  "answerText": "Done secretly and carefully",
+  "difficulty": "medium",
+  "sourceFile": "1709.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1028,
+  "word": "Empathy",
+  "question": "Empathy",
+  "options": [
+    "Wild or untamed",
+    "Grossly unjust or wicked",
+    "The ability to understand another's feelings",
+    "Delayed or prevented by obstructing"
+  ],
+  "answerOption": "C",
+  "answerText": "The ability to understand another's feelings",
+  "difficulty": "medium",
+  "sourceFile": "1028.json"
+}

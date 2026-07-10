@@ -1,0 +1,15 @@
+{
+  "id": 1722,
+  "word": "Ignominious",
+  "question": "Ignominious",
+  "options": [
+    "Not right or reasonable",
+    "To insert something between fixed points",
+    "Showing excessive vanity about achievements",
+    "Deserving or causing public disgrace"
+  ],
+  "answerOption": "D",
+  "answerText": "Deserving or causing public disgrace",
+  "difficulty": "hard",
+  "sourceFile": "1722.json"
+}

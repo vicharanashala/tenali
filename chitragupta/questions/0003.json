@@ -1,0 +1,14 @@
+{
+  "id": 3,
+  "question": "What is the capital of France?",
+  "options": [
+    "Paris",
+    "Cairo",
+    "Canberra",
+    "Moscow"
+  ],
+  "answerOption": "A",
+  "answerText": "Paris",
+  "genre": "geography",
+  "sourceFile": "0003.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 772,
+  "word": "Mandatory",
+  "question": "Mandatory",
+  "options": [
+    "To state the exact meaning of a word",
+    "To give assistance or encouragement to",
+    "To tell someone you will definitely do something",
+    "Required by law or rules"
+  ],
+  "answerOption": "D",
+  "answerText": "Required by law or rules",
+  "difficulty": "easy",
+  "sourceFile": "0772.json"
+}

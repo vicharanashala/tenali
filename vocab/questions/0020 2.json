@@ -1,0 +1,15 @@
+{
+  "id": 20,
+  "word": "Abundant",
+  "question": "Abundant",
+  "options": [
+    "Existing in very large quantities",
+    "Producing powerful feelings or clear images",
+    "Calm, peaceful, and untroubled",
+    "A feeling that something is worthless"
+  ],
+  "answerOption": "A",
+  "answerText": "Existing in very large quantities",
+  "difficulty": "medium",
+  "sourceFile": "0020.json"
+}

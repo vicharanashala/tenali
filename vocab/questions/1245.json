@@ -1,0 +1,15 @@
+{
+  "id": 1245,
+  "word": "Quirky",
+  "question": "Quirky",
+  "options": [
+    "Characterized by peculiar or unexpected traits",
+    "Showing disapproval or disrespect",
+    "Dull and lacking in variety",
+    "To remove poison from something"
+  ],
+  "answerOption": "A",
+  "answerText": "Characterized by peculiar or unexpected traits",
+  "difficulty": "medium",
+  "sourceFile": "1245.json"
+}

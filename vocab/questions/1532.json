@@ -1,0 +1,15 @@
+{
+  "id": 1532,
+  "word": "Derail",
+  "question": "Derail",
+  "options": [
+    "Conspicuously or obviously offensive",
+    "Done to benefit oneself",
+    "Showing a willingness to take bold risks",
+    "To cause a train to leave the track"
+  ],
+  "answerOption": "D",
+  "answerText": "To cause a train to leave the track",
+  "difficulty": "medium",
+  "sourceFile": "1532.json"
+}

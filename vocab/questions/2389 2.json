@@ -1,0 +1,15 @@
+{
+  "id": 2389,
+  "word": "Fantods",
+  "question": "Fantods",
+  "options": [
+    "Something bearing visible traces of an earlier form",
+    "A state of extreme nervousness or anxiety",
+    "A noisy mock serenade; cacophonous celebration",
+    "Truthful; corresponding to facts"
+  ],
+  "answerOption": "B",
+  "answerText": "A state of extreme nervousness or anxiety",
+  "difficulty": "extra-hard",
+  "sourceFile": "2389.json"
+}

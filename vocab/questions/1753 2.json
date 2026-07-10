@@ -1,0 +1,15 @@
+{
+  "id": 1753,
+  "word": "Spurious",
+  "question": "Spurious",
+  "options": [
+    "A hormone that increases heart rate",
+    "To blame or insult someone in strong language",
+    "Relating to heat in air",
+    "Not being what it claims to be; false"
+  ],
+  "answerOption": "D",
+  "answerText": "Not being what it claims to be; false",
+  "difficulty": "hard",
+  "sourceFile": "1753.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2672,
+  "word": "Loyalty",
+  "question": "Loyalty",
+  "options": [
+    "The action of aerifying",
+    "Relating to Aelian the Roman author",
+    "Intended to teach a moral lesson",
+    "Faithful adherence to a person"
+  ],
+  "answerOption": "D",
+  "answerText": "Faithful adherence to a person",
+  "difficulty": "hard",
+  "sourceFile": "2672.json"
+}

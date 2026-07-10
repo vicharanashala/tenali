@@ -1,0 +1,15 @@
+{
+  "id": 1401,
+  "word": "Eudaimonia",
+  "question": "Eudaimonia",
+  "options": [
+    "A philosophical question proposed for discussion",
+    "A place where one feels safe and at home",
+    "A social gathering centered around drinking chocolate",
+    "A contented state of being happy and prosperous"
+  ],
+  "answerOption": "D",
+  "answerText": "A contented state of being happy and prosperous",
+  "difficulty": "extra-hard",
+  "sourceFile": "1401.json"
+}

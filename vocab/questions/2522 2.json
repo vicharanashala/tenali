@@ -1,0 +1,15 @@
+{
+  "id": 2522,
+  "word": "Abide",
+  "question": "Abide",
+  "options": [
+    "To remain in a place or condition",
+    "In relation to function loss",
+    "A great spiritual anguish without a specific cause",
+    "A melancholic longing for something absent"
+  ],
+  "answerOption": "A",
+  "answerText": "To remain in a place or condition",
+  "difficulty": "extra-hard",
+  "sourceFile": "2522.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2005,
+  "word": "Iconoclast",
+  "question": "Iconoclast",
+  "options": [
+    "In an adventurous manner",
+    "A person who attacks cherished beliefs",
+    "Protestant Christian denomination",
+    "Relating to Aeolus philosophy"
+  ],
+  "answerOption": "B",
+  "answerText": "A person who attacks cherished beliefs",
+  "difficulty": "hard",
+  "sourceFile": "2005.json"
+}

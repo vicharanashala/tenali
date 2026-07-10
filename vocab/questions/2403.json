@@ -1,0 +1,15 @@
+{
+  "id": 2403,
+  "word": "Aenigmatous",
+  "question": "Aenigmatous",
+  "options": [
+    "The action of fertilizing an egg",
+    "An expert in aeronautics",
+    "Obscure or puzzling in meaning",
+    "Derived from an external source"
+  ],
+  "answerOption": "C",
+  "answerText": "Obscure or puzzling in meaning",
+  "difficulty": "hard",
+  "sourceFile": "2403.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2700,
+  "word": "Contusion",
+  "question": "Contusion",
+  "options": [
+    "A loud confused noise from a large crowd",
+    "A revelation of something discreditable",
+    "Not telling the truth; lying",
+    "A bruise from a blow or impact"
+  ],
+  "answerOption": "D",
+  "answerText": "A bruise from a blow or impact",
+  "difficulty": "hard",
+  "sourceFile": "2700.json"
+}

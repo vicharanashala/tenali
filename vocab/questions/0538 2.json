@@ -1,0 +1,15 @@
+{
+  "id": 538,
+  "word": "Adore",
+  "question": "Adore",
+  "options": [
+    "To tell a story or give an account",
+    "Noticeably happy and optimistic",
+    "To give food to a person or animal",
+    "To love and respect deeply"
+  ],
+  "answerOption": "D",
+  "answerText": "To love and respect deeply",
+  "difficulty": "easy",
+  "sourceFile": "0538.json"
+}

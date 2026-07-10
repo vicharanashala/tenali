@@ -1,0 +1,14 @@
+{
+  "id": 384,
+  "question": "Which Indian state has Aizawl as its capital?",
+  "options": [
+    "Mizoram",
+    "Manipur",
+    "Meghalaya",
+    "Nagaland"
+  ],
+  "answerOption": "A",
+  "answerText": "Mizoram",
+  "genre": "geography",
+  "sourceFile": "0384.json"
+}

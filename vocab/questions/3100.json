@@ -1,0 +1,15 @@
+{
+  "id": 3100,
+  "word": "Nepenthe",
+  "question": "Nepenthe",
+  "options": [
+    "Plural of abyssophiliac",
+    "Plural of ablactatione",
+    "In manner of weaning",
+    "A drug described as banishing grief or trouble"
+  ],
+  "answerOption": "D",
+  "answerText": "A drug described as banishing grief or trouble",
+  "difficulty": "extra-hard",
+  "sourceFile": "3100.json"
+}

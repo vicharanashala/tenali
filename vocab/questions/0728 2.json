@@ -1,0 +1,15 @@
+{
+  "id": 728,
+  "word": "Rectangular",
+  "question": "Rectangular",
+  "options": [
+    "Occurring from time to time",
+    "To cause someone to believe something",
+    "Of considerable or unusual duration",
+    "Having the shape of a rectangle"
+  ],
+  "answerOption": "D",
+  "answerText": "Having the shape of a rectangle",
+  "difficulty": "easy",
+  "sourceFile": "0728.json"
+}

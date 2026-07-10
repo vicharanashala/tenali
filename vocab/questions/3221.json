@@ -1,0 +1,15 @@
+{
+  "id": 3221,
+  "word": "Abidance",
+  "question": "Abidance",
+  "options": [
+    "The act of throwing someone out of a window",
+    "The action of abiding or remaining",
+    "A social gathering centered around drinking chocolate",
+    "A person learning the alphabet"
+  ],
+  "answerOption": "B",
+  "answerText": "The action of abiding or remaining",
+  "difficulty": "extra-hard",
+  "sourceFile": "3221.json"
+}

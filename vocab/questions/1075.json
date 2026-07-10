@@ -1,0 +1,15 @@
+{
+  "id": 1075,
+  "word": "Distraught",
+  "question": "Distraught",
+  "options": [
+    "Waste matter or debris",
+    "Closely compacted or thick in texture",
+    "Very worried and upset",
+    "To give a written account of something"
+  ],
+  "answerOption": "C",
+  "answerText": "Very worried and upset",
+  "difficulty": "medium",
+  "sourceFile": "1075.json"
+}

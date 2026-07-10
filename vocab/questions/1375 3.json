@@ -1,0 +1,15 @@
+{
+  "id": 1375,
+  "word": "Deodorant",
+  "question": "Deodorant",
+  "options": [
+    "A police officer investigating crime",
+    "To establish or decide exactly",
+    "A substance reducing body odor",
+    "Disturbed or insane in mind"
+  ],
+  "answerOption": "C",
+  "answerText": "A substance reducing body odor",
+  "difficulty": "medium",
+  "sourceFile": "1375.json"
+}

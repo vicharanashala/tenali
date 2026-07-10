@@ -1,0 +1,15 @@
+{
+  "id": 333,
+  "word": "Command",
+  "question": "Command",
+  "options": [
+    "Parallel to the ground; flat",
+    "Truly what something is said to be",
+    "To say or do something again",
+    "To give an authoritative order"
+  ],
+  "answerOption": "D",
+  "answerText": "To give an authoritative order",
+  "difficulty": "easy",
+  "sourceFile": "0333.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 335,
+  "word": "Cooperate",
+  "question": "Cooperate",
+  "options": [
+    "Lesser in importance or seriousness",
+    "Having high moral standards",
+    "Quick to notice any unusual activity",
+    "To work together toward a common goal"
+  ],
+  "answerOption": "D",
+  "answerText": "To work together toward a common goal",
+  "difficulty": "easy",
+  "sourceFile": "0335.json"
+}

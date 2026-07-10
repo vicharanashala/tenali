@@ -1,0 +1,15 @@
+{
+  "id": 646,
+  "word": "Educated",
+  "question": "Educated",
+  "options": [
+    "To become sound or healthy again",
+    "Happening or done at once",
+    "Having received a good education",
+    "To convey thoughts or feelings in words"
+  ],
+  "answerOption": "C",
+  "answerText": "Having received a good education",
+  "difficulty": "easy",
+  "sourceFile": "0646.json"
+}

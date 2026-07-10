@@ -1,0 +1,15 @@
+{
+  "id": 2096,
+  "word": "Aerials",
+  "question": "Aerials",
+  "options": [
+    "Lasting for ages or eternities",
+    "Antennas for broadcasting",
+    "The science of ballooning",
+    "To make worse by adding inferior matter"
+  ],
+  "answerOption": "B",
+  "answerText": "Antennas for broadcasting",
+  "difficulty": "hard",
+  "sourceFile": "2096.json"
+}

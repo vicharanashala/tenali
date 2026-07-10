@@ -1,0 +1,15 @@
+{
+  "id": 428,
+  "word": "Detach",
+  "question": "Detach",
+  "options": [
+    "To impart knowledge or skill to someone",
+    "Done without delay; quick",
+    "Acting with care and thought for the future",
+    "To separate something from something else"
+  ],
+  "answerOption": "D",
+  "answerText": "To separate something from something else",
+  "difficulty": "easy",
+  "sourceFile": "0428.json"
+}

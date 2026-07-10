@@ -1,0 +1,15 @@
+{
+  "id": 476,
+  "word": "Pronounce",
+  "question": "Pronounce",
+  "options": [
+    "To say a word in a particular way",
+    "Relating to or powered by electricity",
+    "So delicate as to be difficult to notice",
+    "To say or do something again"
+  ],
+  "answerOption": "A",
+  "answerText": "To say a word in a particular way",
+  "difficulty": "easy",
+  "sourceFile": "0476.json"
+}

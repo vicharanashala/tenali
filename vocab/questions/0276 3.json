@@ -1,0 +1,15 @@
+{
+  "id": 276,
+  "word": "Solve",
+  "question": "Solve",
+  "options": [
+    "To produce a picture using a pencil",
+    "To come near or nearer to something",
+    "To shine with a bright shimmering light",
+    "To find an answer to a problem"
+  ],
+  "answerOption": "D",
+  "answerText": "To find an answer to a problem",
+  "difficulty": "easy",
+  "sourceFile": "0276.json"
+}

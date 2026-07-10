@@ -1,0 +1,15 @@
+{
+  "id": 964,
+  "word": "Fluffy",
+  "question": "Fluffy",
+  "options": [
+    "Shaped like a ball or globe",
+    "Soft and light in texture",
+    "In a state of complete confusion",
+    "Moving or capable of moving at high speed"
+  ],
+  "answerOption": "B",
+  "answerText": "Soft and light in texture",
+  "difficulty": "easy",
+  "sourceFile": "0964.json"
+}

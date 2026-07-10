@@ -1,0 +1,14 @@
+{
+  "id": 463,
+  "question": "Which gland is known as the master gland in the human endocrine system?",
+  "options": [
+    "Thyroid",
+    "Adrenal",
+    "Pituitary",
+    "Pancreas"
+  ],
+  "answerOption": "C",
+  "answerText": "Pituitary",
+  "genre": "mixed",
+  "sourceFile": "0463.json"
+}

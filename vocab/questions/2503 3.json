@@ -1,0 +1,15 @@
+{
+  "id": 2503,
+  "word": "Scarcity",
+  "question": "Scarcity",
+  "options": [
+    "The action of reducing in amount",
+    "Using or expressed in more words than needed",
+    "Relating to meteorites from space",
+    "The state of being scarce"
+  ],
+  "answerOption": "D",
+  "answerText": "The state of being scarce",
+  "difficulty": "hard",
+  "sourceFile": "2503.json"
+}

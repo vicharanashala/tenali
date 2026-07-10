@@ -1,0 +1,15 @@
+{
+  "id": 853,
+  "word": "Delightful",
+  "question": "Delightful",
+  "options": [
+    "To tell a story or give an account",
+    "Greatly pleased or entertained",
+    "Evil or morally wrong",
+    "Causing an urge to scratch"
+  ],
+  "answerOption": "B",
+  "answerText": "Greatly pleased or entertained",
+  "difficulty": "easy",
+  "sourceFile": "0853.json"
+}

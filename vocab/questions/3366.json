@@ -1,0 +1,15 @@
+{
+  "id": 3366,
+  "word": "Absurdness",
+  "question": "Absurdness",
+  "options": [
+    "A philosophical question proposed for discussion",
+    "Obligingly or willingly",
+    "The state of being absurd",
+    "Amputation of the body below the waist"
+  ],
+  "answerOption": "C",
+  "answerText": "The state of being absurd",
+  "difficulty": "extra-hard",
+  "sourceFile": "3366.json"
+}

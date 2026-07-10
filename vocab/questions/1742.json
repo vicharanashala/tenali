@@ -1,0 +1,15 @@
+{
+  "id": 1742,
+  "word": "Esoteric",
+  "question": "Esoteric",
+  "options": [
+    "One who deserts a duty or post",
+    "Intended for a small group",
+    "Thinly sown or distributed",
+    "Feeling or showing arrogant disrespect"
+  ],
+  "answerOption": "B",
+  "answerText": "Intended for a small group",
+  "difficulty": "medium",
+  "sourceFile": "1742.json"
+}

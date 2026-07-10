@@ -1,0 +1,15 @@
+{
+  "id": 373,
+  "word": "Peel",
+  "question": "Peel",
+  "options": [
+    "To remove the skin of a fruit or vegetable",
+    "To watch over and direct the work of others",
+    "Marked by exactness and accuracy",
+    "To cut something into pieces with a tool"
+  ],
+  "answerOption": "A",
+  "answerText": "To remove the skin of a fruit or vegetable",
+  "difficulty": "easy",
+  "sourceFile": "0373.json"
+}

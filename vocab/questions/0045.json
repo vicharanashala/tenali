@@ -1,0 +1,15 @@
+{
+  "id": 45,
+  "word": "Tame",
+  "question": "Tame",
+  "options": [
+    "To fasten with string or rope",
+    "To have something inside",
+    "To take the place of something",
+    "Domesticated and not dangerous to people"
+  ],
+  "answerOption": "D",
+  "answerText": "Domesticated and not dangerous to people",
+  "difficulty": "easy",
+  "sourceFile": "0045.json"
+}

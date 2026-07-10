@@ -1,0 +1,15 @@
+{
+  "id": 194,
+  "word": "Bend",
+  "question": "Bend",
+  "options": [
+    "To dislike something very intensely",
+    "Lacking firmness or strength",
+    "Costing a lot of money",
+    "To shape into a curve"
+  ],
+  "answerOption": "D",
+  "answerText": "To shape into a curve",
+  "difficulty": "easy",
+  "sourceFile": "0194.json"
+}

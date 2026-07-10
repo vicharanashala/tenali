@@ -1,0 +1,14 @@
+{
+  "id": 766,
+  "question": "Which organ in the human body is the main site of gas exchange?",
+  "options": [
+    "Trachea",
+    "Bronchi",
+    "Alveoli in lungs",
+    "Diaphragm"
+  ],
+  "answerOption": "C",
+  "answerText": "Alveoli in lungs",
+  "genre": "science",
+  "sourceFile": "0766.json"
+}

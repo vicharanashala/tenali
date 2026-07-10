@@ -1,0 +1,15 @@
+{
+  "id": 1105,
+  "word": "Judicious",
+  "question": "Judicious",
+  "options": [
+    "Able to be detached or separated",
+    "Having good judgment; sensible",
+    "To state that something is not true",
+    "The state of relying on something"
+  ],
+  "answerOption": "B",
+  "answerText": "Having good judgment; sensible",
+  "difficulty": "medium",
+  "sourceFile": "1105.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 9,
+  "question": "What is the capital of Nepal?",
+  "options": [
+    "Brasília",
+    "Kathmandu",
+    "Sri Jayawardenepura Kotte",
+    "Paris"
+  ],
+  "answerOption": "B",
+  "answerText": "Kathmandu",
+  "genre": "geography",
+  "sourceFile": "0009.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2374,
+  "word": "AEROMETER",
+  "question": "AEROMETER",
+  "options": [
+    "Instrument measuring air properties",
+    "One who adulterates",
+    "Something reused but still bearing traces of its earlier form",
+    "A defensive barrier made of wooden posts"
+  ],
+  "answerOption": "A",
+  "answerText": "Instrument measuring air properties",
+  "difficulty": "hard",
+  "sourceFile": "2374.json"
+}

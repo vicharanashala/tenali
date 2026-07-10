@@ -1,0 +1,14 @@
+{
+  "id": 479,
+  "question": "Which Indian state has Dehradun as its capital?",
+  "options": [
+    "Himachal Pradesh",
+    "Uttarakhand",
+    "Haryana",
+    "Punjab"
+  ],
+  "answerOption": "B",
+  "answerText": "Uttarakhand",
+  "genre": "geography",
+  "sourceFile": "0479.json"
+}

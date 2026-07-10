@@ -1,0 +1,14 @@
+{
+  "id": 13,
+  "question": "What is the capital of Kenya?",
+  "options": [
+    "Sri Jayawardenepura Kotte",
+    "Madrid",
+    "Canberra",
+    "Nairobi"
+  ],
+  "answerOption": "D",
+  "answerText": "Nairobi",
+  "genre": "geography",
+  "sourceFile": "0013.json"
+}

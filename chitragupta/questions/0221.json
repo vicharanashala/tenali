@@ -1,0 +1,14 @@
+{
+  "id": 221,
+  "question": "Which body in the solar system is classified as a dwarf planet?",
+  "options": [
+    "Europa",
+    "Titan",
+    "Pluto",
+    "Io"
+  ],
+  "answerOption": "C",
+  "answerText": "Pluto",
+  "genre": "geography",
+  "sourceFile": "0221.json"
+}

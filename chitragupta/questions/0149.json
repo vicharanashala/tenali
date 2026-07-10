@@ -1,0 +1,14 @@
+{
+  "id": 149,
+  "question": "Who was the first man in space?",
+  "options": [
+    "Neil Armstrong",
+    "Yuri Gagarin",
+    "Alan Shepard",
+    "Valentina Tereshkova"
+  ],
+  "answerOption": "B",
+  "answerText": "Yuri Gagarin",
+  "genre": "general-knowledge",
+  "sourceFile": "0149.json"
+}

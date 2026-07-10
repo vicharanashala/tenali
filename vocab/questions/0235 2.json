@@ -1,0 +1,15 @@
+{
+  "id": 235,
+  "word": "Disturb",
+  "question": "Disturb",
+  "options": [
+    "To remove liquid from something",
+    "Occurring continuously over time",
+    "Bent or twisted out of shape",
+    "To interfere with the peace of someone"
+  ],
+  "answerOption": "D",
+  "answerText": "To interfere with the peace of someone",
+  "difficulty": "easy",
+  "sourceFile": "0235.json"
+}

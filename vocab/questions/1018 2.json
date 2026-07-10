@@ -1,0 +1,15 @@
+{
+  "id": 1018,
+  "word": "Censure",
+  "question": "Censure",
+  "options": [
+    "Fully in agreement with all parties",
+    "To express severe disapproval of",
+    "Inborn; natural rather than learned",
+    "A seemingly contradictory statement"
+  ],
+  "answerOption": "B",
+  "answerText": "To express severe disapproval of",
+  "difficulty": "medium",
+  "sourceFile": "1018.json"
+}

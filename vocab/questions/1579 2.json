@@ -1,0 +1,15 @@
+{
+  "id": 1579,
+  "word": "Detainee",
+  "question": "Detainee",
+  "options": [
+    "Relating to or composed of detritus",
+    "A sudden desire or change of mind",
+    "Making a situation likely to happen",
+    "A person held in custody"
+  ],
+  "answerOption": "D",
+  "answerText": "A person held in custody",
+  "difficulty": "medium",
+  "sourceFile": "1579.json"
+}

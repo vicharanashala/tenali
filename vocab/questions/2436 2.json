@@ -1,0 +1,15 @@
+{
+  "id": 2436,
+  "word": "Charivari",
+  "question": "Charivari",
+  "options": [
+    "The involuntary repetition of words or phrases",
+    "In an abiogenetic manner",
+    "Having a large abdomen or belly",
+    "A noisy mock serenade; cacophonous celebration"
+  ],
+  "answerOption": "D",
+  "answerText": "A noisy mock serenade; cacophonous celebration",
+  "difficulty": "extra-hard",
+  "sourceFile": "2436.json"
+}

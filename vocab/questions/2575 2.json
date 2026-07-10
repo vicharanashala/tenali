@@ -1,0 +1,15 @@
+{
+  "id": 2575,
+  "word": "Abivious",
+  "question": "Abivious",
+  "options": [
+    "Without path or way",
+    "Acquiring books but letting them pile up unread",
+    "A tropical plant yielding musk",
+    "To wean from mother"
+  ],
+  "answerOption": "A",
+  "answerText": "Without path or way",
+  "difficulty": "extra-hard",
+  "sourceFile": "2575.json"
+}

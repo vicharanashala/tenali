@@ -1,0 +1,15 @@
+{
+  "id": 247,
+  "word": "Demand",
+  "question": "Demand",
+  "options": [
+    "To make something untidy or disordered",
+    "To ease the grief or distress of someone",
+    "To do something repeatedly to improve",
+    "To ask for something forcefully"
+  ],
+  "answerOption": "D",
+  "answerText": "To ask for something forcefully",
+  "difficulty": "easy",
+  "sourceFile": "0247.json"
+}

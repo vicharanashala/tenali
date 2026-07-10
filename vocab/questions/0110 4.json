@@ -1,0 +1,15 @@
+{
+  "id": 110,
+  "word": "Straight",
+  "question": "Straight",
+  "options": [
+    "To bring something into existence",
+    "To fasten or join one thing to another",
+    "Having experience, knowledge, and good judgment",
+    "Extending in one direction without curves"
+  ],
+  "answerOption": "D",
+  "answerText": "Extending in one direction without curves",
+  "difficulty": "easy",
+  "sourceFile": "0110.json"
+}

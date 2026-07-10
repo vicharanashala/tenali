@@ -1,0 +1,15 @@
+{
+  "id": 593,
+  "word": "Original",
+  "question": "Original",
+  "options": [
+    "Shaped like a circle or sphere",
+    "Created directly and not a copy",
+    "To state that something is not true",
+    "Next to or adjoining something else"
+  ],
+  "answerOption": "B",
+  "answerText": "Created directly and not a copy",
+  "difficulty": "easy",
+  "sourceFile": "0593.json"
+}

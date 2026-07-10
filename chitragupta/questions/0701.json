@@ -1,0 +1,14 @@
+{
+  "id": 701,
+  "question": "Which Indian union territory has Puducherry as its capital city?",
+  "options": [
+    "Chandigarh",
+    "Puducherry",
+    "Lakshadweep",
+    "Delhi"
+  ],
+  "answerOption": "B",
+  "answerText": "Puducherry",
+  "genre": "geography",
+  "sourceFile": "0701.json"
+}

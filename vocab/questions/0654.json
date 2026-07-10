@@ -1,0 +1,15 @@
+{
+  "id": 654,
+  "word": "Lengthy",
+  "question": "Lengthy",
+  "options": [
+    "Bad tempered and unwilling to be friendly",
+    "Of considerable or unusual duration",
+    "A response to a question",
+    "In good physical condition; not sick"
+  ],
+  "answerOption": "B",
+  "answerText": "Of considerable or unusual duration",
+  "difficulty": "easy",
+  "sourceFile": "0654.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 211,
+  "word": "Improve",
+  "question": "Improve",
+  "options": [
+    "Quick to understand and learn things",
+    "To make or become better",
+    "Done with the hands; requiring human effort",
+    "Having elegance of movement"
+  ],
+  "answerOption": "B",
+  "answerText": "To make or become better",
+  "difficulty": "easy",
+  "sourceFile": "0211.json"
+}

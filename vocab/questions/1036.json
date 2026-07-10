@@ -1,0 +1,15 @@
+{
+  "id": 1036,
+  "word": "Mundane",
+  "question": "Mundane",
+  "options": [
+    "To discourage someone from doing something",
+    "Lacking interest or excitement; dull",
+    "A god or goddess",
+    "Wicked or cruel and barbaric"
+  ],
+  "answerOption": "B",
+  "answerText": "Lacking interest or excitement; dull",
+  "difficulty": "medium",
+  "sourceFile": "1036.json"
+}

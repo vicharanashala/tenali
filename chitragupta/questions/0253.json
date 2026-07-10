@@ -1,0 +1,14 @@
+{
+  "id": 253,
+  "question": "What is 12 multiplied by 12?",
+  "options": [
+    "124",
+    "132",
+    "144",
+    "154"
+  ],
+  "answerOption": "C",
+  "answerText": "144",
+  "genre": "mixed",
+  "sourceFile": "0253.json"
+}

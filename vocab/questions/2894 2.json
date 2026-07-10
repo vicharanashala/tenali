@@ -1,0 +1,15 @@
+{
+  "id": 2894,
+  "word": "Aberdevine",
+  "question": "Aberdevine",
+  "options": [
+    "A plant yielding musk-scented seeds",
+    "Restraint from indulging in something",
+    "A small songbird of the finch family",
+    "Wandering alone"
+  ],
+  "answerOption": "C",
+  "answerText": "A small songbird of the finch family",
+  "difficulty": "extra-hard",
+  "sourceFile": "2894.json"
+}

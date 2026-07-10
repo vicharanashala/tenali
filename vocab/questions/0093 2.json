@@ -1,0 +1,15 @@
+{
+  "id": 93,
+  "word": "Tight",
+  "question": "Tight",
+  "options": [
+    "Fixed or fastened firmly; not easily moved",
+    "To determine an amount by mathematics",
+    "To move behind someone in the same direction",
+    "Having an even and regular surface"
+  ],
+  "answerOption": "A",
+  "answerText": "Fixed or fastened firmly; not easily moved",
+  "difficulty": "easy",
+  "sourceFile": "0093.json"
+}

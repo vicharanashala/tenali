@@ -1,0 +1,15 @@
+{
+  "id": 372,
+  "word": "Slice",
+  "question": "Slice",
+  "options": [
+    "To cut into thin flat pieces",
+    "Lively and enthusiastic in manner",
+    "Occurring immediately without delay",
+    "To say sorry for doing something wrong"
+  ],
+  "answerOption": "A",
+  "answerText": "To cut into thin flat pieces",
+  "difficulty": "easy",
+  "sourceFile": "0372.json"
+}

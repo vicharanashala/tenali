@@ -1,0 +1,14 @@
+{
+  "id": 792,
+  "question": "Which country is associated with the city of Kingston?",
+  "options": [
+    "Jamaica",
+    "Cuba",
+    "Haiti",
+    "Dominican Republic"
+  ],
+  "answerOption": "A",
+  "answerText": "Jamaica",
+  "genre": "geography",
+  "sourceFile": "0792.json"
+}

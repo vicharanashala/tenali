@@ -1,0 +1,15 @@
+{
+  "id": 1523,
+  "word": "Chiaroscuro",
+  "question": "Chiaroscuro",
+  "options": [
+    "The impossibility of comprehending something",
+    "A particular philosophy or view of life",
+    "The treatment of light and shade in drawing",
+    "The price set on a person's life in Anglo-Saxon law"
+  ],
+  "answerOption": "C",
+  "answerText": "The treatment of light and shade in drawing",
+  "difficulty": "extra-hard",
+  "sourceFile": "1523.json"
+}

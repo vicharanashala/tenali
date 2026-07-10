@@ -1,0 +1,14 @@
+{
+  "id": 609,
+  "question": "Which country is associated with the city of Addis Ababa?",
+  "options": [
+    "Kenya",
+    "Ethiopia",
+    "Eritrea",
+    "Somalia"
+  ],
+  "answerOption": "B",
+  "answerText": "Ethiopia",
+  "genre": "geography",
+  "sourceFile": "0609.json"
+}

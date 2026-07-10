@@ -1,0 +1,15 @@
+{
+  "id": 2340,
+  "word": "Firgun",
+  "question": "Firgun",
+  "options": [
+    "The inability to remember a particular word",
+    "Plural of abjectness",
+    "A hand of cards with no card above a nine",
+    "Genuine happiness at another person's accomplishment"
+  ],
+  "answerOption": "D",
+  "answerText": "Genuine happiness at another person's accomplishment",
+  "difficulty": "extra-hard",
+  "sourceFile": "2340.json"
+}

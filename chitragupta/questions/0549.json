@@ -1,0 +1,14 @@
+{
+  "id": 549,
+  "question": "Which is the largest catfish species in many GK references?",
+  "options": [
+    "Mekong giant catfish",
+    "Walking catfish",
+    "Channel catfish",
+    "Pictus catfish"
+  ],
+  "answerOption": "A",
+  "answerText": "Mekong giant catfish",
+  "genre": "mixed",
+  "sourceFile": "0549.json"
+}

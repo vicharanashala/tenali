@@ -1,0 +1,15 @@
+{
+  "id": 601,
+  "word": "Gorgeous",
+  "question": "Gorgeous",
+  "options": [
+    "To cause someone to find something funny",
+    "Very beautiful or attractive",
+    "To cover something in paper or cloth",
+    "To remove goods from a vehicle"
+  ],
+  "answerOption": "B",
+  "answerText": "Very beautiful or attractive",
+  "difficulty": "easy",
+  "sourceFile": "0601.json"
+}

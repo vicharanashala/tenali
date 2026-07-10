@@ -1,0 +1,15 @@
+{
+  "id": 77,
+  "word": "Bold",
+  "question": "Bold",
+  "options": [
+    "Showing a willingness to take risks",
+    "Not truthful or genuine",
+    "To refuse to take notice of something",
+    "To heat a liquid until it bubbles"
+  ],
+  "answerOption": "A",
+  "answerText": "Showing a willingness to take risks",
+  "difficulty": "easy",
+  "sourceFile": "0077.json"
+}

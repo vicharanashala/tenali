@@ -1,0 +1,15 @@
+{
+  "id": 409,
+  "word": "Afford",
+  "question": "Afford",
+  "options": [
+    "To express the meaning in another language",
+    "Too long and therefore boring",
+    "To have enough money to pay for something",
+    "To have an effect on someone's character"
+  ],
+  "answerOption": "C",
+  "answerText": "To have enough money to pay for something",
+  "difficulty": "easy",
+  "sourceFile": "0409.json"
+}

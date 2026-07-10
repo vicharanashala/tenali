@@ -1,0 +1,15 @@
+{
+  "id": 38,
+  "word": "Scary",
+  "question": "Scary",
+  "options": [
+    "To save someone from a dangerous situation",
+    "To give official permission for something",
+    "Causing feelings of fear or alarm",
+    "Feeling fear or anxiety"
+  ],
+  "answerOption": "C",
+  "answerText": "Causing feelings of fear or alarm",
+  "difficulty": "easy",
+  "sourceFile": "0038.json"
+}

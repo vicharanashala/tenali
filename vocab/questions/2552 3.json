@@ -1,0 +1,15 @@
+{
+  "id": 2552,
+  "word": "Etiology",
+  "question": "Etiology",
+  "options": [
+    "Derived from an external source",
+    "The study of the causes of diseases",
+    "A substance that adulterates",
+    "Study of organisms in air"
+  ],
+  "answerOption": "B",
+  "answerText": "The study of the causes of diseases",
+  "difficulty": "hard",
+  "sourceFile": "2552.json"
+}

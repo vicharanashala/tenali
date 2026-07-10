@@ -1,0 +1,15 @@
+{
+  "id": 1550,
+  "word": "Desertion",
+  "question": "Desertion",
+  "options": [
+    "The action of abandoning a person",
+    "To be a sign or indication of",
+    "A representation or description",
+    "To complete an arrangement or transaction"
+  ],
+  "answerOption": "A",
+  "answerText": "The action of abandoning a person",
+  "difficulty": "medium",
+  "sourceFile": "1550.json"
+}

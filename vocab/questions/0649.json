@@ -1,0 +1,15 @@
+{
+  "id": 649,
+  "word": "Articulate",
+  "question": "Articulate",
+  "options": [
+    "To make it easier for someone to do something",
+    "Having the ability to speak clearly",
+    "To move forward on hands and knees",
+    "To firmly press something from both sides"
+  ],
+  "answerOption": "B",
+  "answerText": "Having the ability to speak clearly",
+  "difficulty": "easy",
+  "sourceFile": "0649.json"
+}

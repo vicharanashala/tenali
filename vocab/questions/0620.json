@@ -1,0 +1,15 @@
+{
+  "id": 620,
+  "word": "Dedicated",
+  "question": "Dedicated",
+  "options": [
+    "Devoted to a task or purpose",
+    "To cause someone to feel sudden wonder",
+    "Not decorated or elaborate; simple",
+    "To firmly press something from both sides"
+  ],
+  "answerOption": "A",
+  "answerText": "Devoted to a task or purpose",
+  "difficulty": "easy",
+  "sourceFile": "0620.json"
+}

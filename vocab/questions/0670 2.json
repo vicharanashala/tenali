@@ -1,0 +1,15 @@
+{
+  "id": 670,
+  "word": "Abundant",
+  "question": "Abundant",
+  "options": [
+    "To apply color to a surface with a brush",
+    "To open something that was folded",
+    "Existing in very large quantities",
+    "Growing thickly and strongly; abundant"
+  ],
+  "answerOption": "C",
+  "answerText": "Existing in very large quantities",
+  "difficulty": "easy",
+  "sourceFile": "0670.json"
+}

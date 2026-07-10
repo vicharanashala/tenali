@@ -1,0 +1,15 @@
+{
+  "id": 3143,
+  "word": "Hendiadys",
+  "question": "Hendiadys",
+  "options": [
+    "An oblique eclipse",
+    "One causing loss of life",
+    "The state of being absurd",
+    "Expressing an idea with two words joined by and"
+  ],
+  "answerOption": "D",
+  "answerText": "Expressing an idea with two words joined by and",
+  "difficulty": "extra-hard",
+  "sourceFile": "3143.json"
+}

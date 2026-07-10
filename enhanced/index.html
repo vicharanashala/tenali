@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tenali — Enhanced Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+/* ── Greyscale palette (dark default) ────────────────── */
+:root {
+  --font-display: 'Source Serif 4', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
+
+  --bg: #141416;
+  --card: #1e1e22;
+  --surface: #26262b;
+  --input: #2c2c32;
+  --text: #e8e8ec;
+  --text-soft: #9898a0;
+  --border: rgba(255,255,255,0.08);
+  --hover: rgba(255,255,255,0.04);
+  --hover-strong: rgba(255,255,255,0.08);
+  --accent: #e8864a;
+  --accent-soft: rgba(232,134,74,0.12);
+  --shadow-card: 0 4px 32px rgba(0,0,0,0.35);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.20);
+  --radius: 20px;
+  --radius-sm: 12px;
+  --t: 200ms ease;
+
+  /* category accent colours (used for left-strip + hover glow) */
+  --cat-arith: #4dd0c8;   /* teal */
+  --cat-alg:   #a78bfa;   /* violet */
+  --cat-geom:  #f87171;   /* coral */
+  --cat-calc:  #fbbf24;   /* amber */
+  --cat-stats: #60a5fa;   /* sky */
+  --cat-vecmat:#34d399;   /* emerald */
+  --cat-numth: #f9a8d4;   /* pink */
+  --cat-other: #94a3b8;   /* slate */
+}
+
+/* ── Light theme ─────────────────────────────────────── */
+[data-theme="light"] {
+  --bg: #f3f3f5;
+  --card: #ffffff;
+  --surface: #f0f0f4;
+  --input: #ffffff;
+  --text: #1a1a1e;
+  --text-soft: #6b6b74;
+  --border: rgba(0,0,0,0.08);
+  --hover: rgba(0,0,0,0.03);
+  --hover-strong: rgba(0,0,0,0.06);
+  --accent: #d97532;
+  --accent-soft: rgba(217,117,50,0.10);
+  --shadow-card: 0 4px 24px rgba(0,0,0,0.06);
+  --shadow-sm: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; }
+
+body {
+  min-height: 100vh;
+  background: var(--bg);
+  font-family: var(--font-body);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  transition: background var(--t), color var(--t);
+}
+
+/* ── Shell ────────────────────────────────────────────── */
+.shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 36px 20px 60px;
+}
+.main-card {
+  width: 100%;
+  max-width: 960px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 44px 40px 40px;
+  box-shadow: var(--shadow-card);
+  transition: background var(--t), border-color var(--t);
+}
+
+/* ── Header ───────────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 6px;
+}
+.header img {
+  width: 72px;
+  height: auto;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+}
+.header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--text);
+}
+.tagline {
+  text-align: center;
+  font-size: 0.92rem;
+  color: var(--text-soft);
+  margin-bottom: 28px;
+  letter-spacing: 0.01em;
+}
+
+/* ── Theme toggle ─────────────────────────────────────── */
+.theme-toggle {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 100;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--t), border-color var(--t);
+  box-shadow: var(--shadow-sm);
+}
+.theme-toggle:hover {
+  background: var(--hover-strong);
+}
+
+/* ── Search ───────────────────────────────────────────── */
+.search-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+.search-input {
+  width: 100%;
+  max-width: 360px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  padding: 10px 18px 10px 40px;
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  background: var(--input);
+  color: var(--text);
+  outline: none;
+  transition: border-color var(--t), box-shadow var(--t);
+}
+.search-input::placeholder { color: var(--text-soft); opacity: 0.6; }
+.search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.search-wrap {
+  position: relative;
+}
+.search-wrap::before {
+  content: '\1F50D';
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.85rem;
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* ── Category filter pills ────────────────────────────── */
+.cat-pills {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.cat-pill {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--text-soft);
+  cursor: pointer;
+  transition: all var(--t);
+}
+.cat-pill:hover {
+  background: var(--hover-strong);
+  color: var(--text);
+}
+.cat-pill.active {
+  border-color: var(--pill-clr, var(--accent));
+  color: var(--pill-clr, var(--accent));
+  background: color-mix(in srgb, var(--pill-clr, var(--accent)) 10%, transparent);
+}
+
+/* ── Featured cards ───────────────────────────────────── */
+.featured-row {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.featured-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 220px;
+  padding: 20px 16px;
+  border-radius: var(--radius);
+  border: 2px solid transparent;
+  background: linear-gradient(var(--surface), var(--surface)) padding-box,
+              linear-gradient(135deg, var(--accent), #c060d8, #60a5fa) border-box;
+  cursor: pointer;
+  transition: transform var(--t), box-shadow var(--t);
+  box-shadow: var(--shadow-sm);
+}
+.featured-card:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 28px rgba(232,134,74,0.18);
+}
+.featured-card .f-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.featured-card .f-sub {
+  font-size: 0.8rem;
+  color: var(--text-soft);
+}
+
+/* ── Puzzle grid ──────────────────────────────────────── */
+.puzzle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 170px);
+  gap: 12px;
+  justify-content: center;
+}
+
+.puzzle-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  padding: 16px 16px 14px 20px;
+  width: 170px;
+  height: 100px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform var(--t), box-shadow var(--t), border-color var(--t);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+
+  /* reset button defaults */
+  font-family: var(--font-body);
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Category left strip */
+.puzzle-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 12px;
+  bottom: 12px;
+  width: 4px;
+  border-radius: 0 4px 4px 0;
+  background: var(--cat-clr, var(--cat-other));
+  opacity: 0.6;
+  transition: opacity var(--t), width var(--t);
+}
+
+.puzzle-card:hover {
+  transform: translateY(-2px) scale(1.03);
+  border-color: color-mix(in srgb, var(--cat-clr, var(--cat-other)) 40%, transparent);
+  box-shadow: 0 6px 24px color-mix(in srgb, var(--cat-clr, var(--cat-other)) 12%, transparent),
+              0 2px 8px rgba(0,0,0,0.12);
+}
+.puzzle-card:hover::before {
+  opacity: 1;
+  width: 5px;
+}
+
+.puzzle-card .p-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.puzzle-card .p-sub {
+  font-size: 0.75rem;
+  color: var(--text-soft);
+  line-height: 1.35;
+}
+
+/* ── Puzzle count badge ───────────────────────────────── */
+.count-badge {
+  text-align: center;
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--text-soft);
+  opacity: 0.5;
+  margin-top: 20px;
+  letter-spacing: 0.04em;
+}
+
+/* ── Empty state ──────────────────────────────────────── */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-soft);
+  font-size: 0.92rem;
+}
+
+/* ── Back link ────────────────────────────────────────── */
+.back-link {
+  display: block;
+  text-align: center;
+  margin-top: 24px;
+  font-size: 0.82rem;
+  color: var(--text-soft);
+  opacity: 0.6;
+}
+.back-link a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.back-link a:hover { text-decoration: underline; }
+
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 700px) {
+  .main-card { padding: 28px 18px 28px; border-radius: 20px; }
+  .puzzle-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+  .puzzle-card { width: auto; }
+  .featured-row { flex-direction: column; align-items: center; }
+}
+@media (max-width: 480px) {
+  .shell { padding: 16px 10px 40px; }
+  .main-card { padding: 20px 12px 20px; }
+  .puzzle-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" id="themeToggle" title="Toggle theme"></button>
+
+<div class="shell">
+<div class="main-card">
+
+  <div class="header">
+    <img src="/tenali.png" alt="Tenali Raman">
+    <div>
+      <h1>Tenali</h1>
+    </div>
+  </div>
+  <p class="tagline">Pick a puzzle and start practising</p>
+
+  <div class="search-row">
+    <div class="search-wrap">
+      <input class="search-input" id="searchInput" type="text" placeholder="Search puzzles...">
+    </div>
+  </div>
+
+  <div class="cat-pills" id="catPills"></div>
+
+  <div class="featured-row" id="featuredRow"></div>
+
+  <div class="puzzle-grid" id="puzzleGrid"></div>
+  <div class="count-badge" id="countBadge"></div>
+
+  <p class="back-link"><a href="/">Back to main Tenali</a></p>
+</div>
+</div>
+
+<script>
+// ── Data ──────────────────────────────────────────────
+const CATS = {
+  arith:  { label: 'Arithmetic', clr: 'var(--cat-arith)' },
+  alg:    { label: 'Algebra',    clr: 'var(--cat-alg)' },
+  geom:   { label: 'Geometry',   clr: 'var(--cat-geom)' },
+  calc:   { label: 'Calculus',   clr: 'var(--cat-calc)' },
+  stats:  { label: 'Statistics', clr: 'var(--cat-stats)' },
+  vecmat: { label: 'Vectors',    clr: 'var(--cat-vecmat)' },
+  numth:  { label: 'Number Theory', clr: 'var(--cat-numth)' },
+  other:  { label: 'Other',      clr: 'var(--cat-other)' },
+};
+
+const featured = [
+  { key: 'randommix', name: 'Random Mix', sub: 'Adaptive cross-topic quiz' },
+  { key: 'custom',    name: 'Custom Lesson', sub: 'Build your own mixed quiz' },
+  { key: 'tatsavit',  name: 'Tatsavit', sub: 'Progressive 9-level drill' },
+];
+
+const puzzles = [
+  { key:'addition',    name:'Addition',         sub:'+, −, carry, borrow',               cat:'arith' },
+  { key:'angles',      name:'Angles',           sub:'Lines, points, parallel lines',      cat:'geom' },
+  { key:'basicarith',  name:'Arithmetic',        sub:'+, −, × with negatives',            cat:'arith' },
+  { key:'banking',     name:'Banking (RD)',      sub:'Interest & recurring deposits',      cat:'arith' },
+  { key:'bearings',    name:'Bearings',          sub:'Three-figure bearings',              cat:'geom' },
+  { key:'binomial',    name:'Binomial Theorem',  sub:'Expansions & coefficients',          cat:'alg' },
+  { key:'bounds',      name:'Bounds',            sub:'Upper & lower bounds',               cat:'arith' },
+  { key:'circmeasure', name:'Circular Measure',  sub:'Radians, arc length, sectors',       cat:'geom' },
+  { key:'circleth',    name:'Circle Theorems',   sub:'Angles, tangents, cyclic quads',     cat:'geom' },
+  { key:'complex',     name:'Complex Numbers',   sub:'Add, multiply, modulus',             cat:'alg' },
+  { key:'congruence',  name:'Congruence',        sub:'SSS, SAS, ASA, RHS',                cat:'geom' },
+  { key:'conics',      name:'Conic Sections',    sub:'Circle, parabola, ellipse',          cat:'geom' },
+  { key:'coordgeom',   name:'Coord. Geometry',   sub:'Midpoint, distance, gradient',       cat:'geom' },
+  { key:'decimals',    name:'Decimals',          sub:'Add, subtract, multiply, divide',    cat:'arith' },
+  { key:'diff',        name:'Differentiation',   sub:'Power rule, turning points',         cat:'calc' },
+  { key:'diffeq',      name:'Differential Eq.',  sub:'Order, degree, solve DEs',           cat:'calc' },
+  { key:'dotprod',     name:'Dot Products',      sub:'Vectors & matrices',                 cat:'vecmat' },
+  { key:'fractionadd', name:'Fractions (Add)',    sub:'Add fractions & simplify',           cat:'arith' },
+  { key:'funceval',    name:'Functions',          sub:'Evaluate f(x), f(x,y)',             cat:'alg' },
+  { key:'gk',          name:'GK',                sub:'General Knowledge',                  cat:'other' },
+  { key:'gst',         name:'GST',               sub:'Goods & Services Tax',               cat:'arith' },
+  { key:'hcflcm',      name:'HCF & LCM',         sub:'Factor & multiple',                  cat:'numth' },
+  { key:'heron',       name:"Heron's Formula",   sub:'Triangle area from sides',           cat:'geom' },
+  { key:'indices',     name:'Indices',           sub:'Laws of exponents',                  cat:'alg' },
+  { key:'ineq',        name:'Inequalities',      sub:'Linear & quadratic',                 cat:'alg' },
+  { key:'integ',       name:'Integration',       sub:'Reverse differentiation',            cat:'calc' },
+  { key:'invtrig',     name:'Inverse Trig',      sub:'arcsin, arccos, arctan',             cat:'geom' },
+  { key:'limits',      name:'Limits',            sub:'Evaluate limits',                    cat:'calc' },
+  { key:'lineareq',    name:'Linear Equations',  sub:'Solve for x',                        cat:'alg' },
+  { key:'lineq',       name:'Line Equation',     sub:'Find m and c',                       cat:'geom' },
+  { key:'linprog',     name:'Linear Programming',sub:'Optimize objective functions',        cat:'alg' },
+  { key:'log',         name:'Logarithms',        sub:'Evaluate, simplify, solve',           cat:'alg' },
+  { key:'matrix',      name:'Matrices',          sub:'Add, multiply, determinant',          cat:'vecmat' },
+  { key:'mensur',      name:'Mensuration',       sub:'Area, volume, surface area',          cat:'geom' },
+  { key:'multiply',    name:'Multiplication',    sub:'Times tables (2-19)',                 cat:'arith' },
+  { key:'bases',       name:'Number Bases',      sub:'Binary, decimal, hex',                cat:'numth' },
+  { key:'percent',     name:'Percentages',       sub:'Find, increase, reverse',             cat:'arith' },
+  { key:'permcomb',    name:'Perm. & Comb.',     sub:'Permutations & combinations',         cat:'stats' },
+  { key:'polyfactor',  name:'Poly Factor',       sub:'Factor a quadratic',                  cat:'alg' },
+  { key:'polymul',     name:'Poly Multiply',     sub:'Multiply polynomials',                cat:'alg' },
+  { key:'polygons',    name:'Polygons',          sub:'Interior & exterior angles',          cat:'geom' },
+  { key:'primefactor', name:'Prime Factors',     sub:'Break into primes',                   cat:'numth' },
+  { key:'prob',        name:'Probability',       sub:'Single & combined events',            cat:'stats' },
+  { key:'profitloss',  name:'Profit & Loss',     sub:'Cost, discounts, markup',             cat:'arith' },
+  { key:'pythag',      name:"Pythagoras'",       sub:'Hypotenuse, legs, 3D',               cat:'geom' },
+  { key:'quadratic',   name:'Quadratic',         sub:'y = ax\u00B2 + bx + c',              cat:'alg' },
+  { key:'qformula',    name:'Quadratics (Roots)',sub:'ax\u00B2 + bx + c = 0',              cat:'alg' },
+  { key:'ratio',       name:'Ratio',             sub:'Ratio & proportion',                  cat:'arith' },
+  { key:'remfactor',   name:'Remainder Theorem', sub:'Remainder & factor theorem',          cat:'alg' },
+  { key:'rounding',    name:'Rounding',          sub:'D.P., sig figs, estimation',          cat:'arith' },
+  { key:'section',     name:'Section Formula',   sub:'Midpoint, section, centroid',         cat:'geom' },
+  { key:'sequences',   name:'Sequences',         sub:'Arithmetic & geometric',              cat:'alg' },
+  { key:'shares',      name:'Shares & Dividends',sub:'Shares, dividends, returns',          cat:'arith' },
+  { key:'sets',        name:'Sets',              sub:'Union, intersection, Venn',            cat:'stats' },
+  { key:'similarity',  name:'Similarity',        sub:'Scale factor, area ratios',           cat:'geom' },
+  { key:'squaring',    name:'Squaring',          sub:'(a+b)\u00B2 identity',               cat:'arith' },
+  { key:'simul',       name:'Sim. Equations',    sub:'2\u00D72 (easy) or 3\u00D73 (hard)', cat:'alg' },
+  { key:'sdt',         name:'Speed, Dist, Time', sub:'Rate problems',                       cat:'arith' },
+  { key:'sqrt',        name:'Square Root',       sub:'Nearest-integer drill',               cat:'arith' },
+  { key:'stdform',     name:'Standard Form',     sub:'Scientific notation',                 cat:'alg' },
+  { key:'stats',       name:'Statistics',        sub:'Mean, median, mode, range',           cat:'stats' },
+  { key:'surds',       name:'Surds',             sub:'Simplify, add, rationalise',          cat:'alg' },
+  { key:'transform',   name:'Transformations',   sub:'Reflect, rotate, translate',          cat:'geom' },
+  { key:'triangles',   name:'Triangles',         sub:'Angle sum, isosceles',                cat:'geom' },
+  { key:'trig',        name:'Trigonometry',      sub:'SOH-CAH-TOA, sine rule',             cat:'geom' },
+  { key:'variation',   name:'Variation',         sub:'Direct & inverse proportion',         cat:'alg' },
+  { key:'vectors',     name:'Vectors',           sub:'Add, scale, magnitude',               cat:'vecmat' },
+  { key:'vocab',       name:'Vocabulary',        sub:'Words & definitions',                 cat:'other' },
+  { key:'spot',        name:'Twin Hunt',         sub:'Find the common object',              cat:'other' },
+];
+
+// ── Theme ────────────────────────────────────────────
+const html = document.documentElement;
+let theme = localStorage.getItem('tenali-theme') || 'dark';
+html.setAttribute('data-theme', theme);
+const toggleBtn = document.getElementById('themeToggle');
+function updateToggle() { toggleBtn.textContent = theme === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19'; }
+updateToggle();
+toggleBtn.onclick = () => {
+  theme = theme === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', theme);
+  localStorage.setItem('tenali-theme', theme);
+  updateToggle();
+};
+
+// ── State ────────────────────────────────────────────
+let activeCat = null;
+let searchTerm = '';
+
+// ── Render ───────────────────────────────────────────
+function render() {
+  const q = searchTerm.toLowerCase();
+  let filtered = puzzles;
+  if (activeCat) filtered = filtered.filter(p => p.cat === activeCat);
+  if (q) filtered = filtered.filter(p => p.name.toLowerCase().includes(q) || p.sub.toLowerCase().includes(q));
+
+  // Featured
+  const fRow = document.getElementById('featuredRow');
+  fRow.innerHTML = '';
+  if (!activeCat && !q) {
+    featured.forEach(f => {
+      const d = document.createElement('button');
+      d.className = 'featured-card';
+      d.innerHTML = `<span class="f-name">${f.name}</span><span class="f-sub">${f.sub}</span>`;
+      d.onclick = () => window.location.href = '/?mode=' + f.key;
+      fRow.appendChild(d);
+    });
+  }
+
+  // Grid
+  const grid = document.getElementById('puzzleGrid');
+  grid.innerHTML = '';
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div class="empty-state">No puzzles match your search.</div>';
+  } else {
+    filtered.forEach(p => {
+      const btn = document.createElement('button');
+      btn.className = 'puzzle-card';
+      btn.style.setProperty('--cat-clr', `var(--cat-${p.cat})`);
+      btn.innerHTML = `<span class="p-name">${p.name}</span><span class="p-sub">${p.sub}</span>`;
+      btn.onclick = () => window.location.href = '/?mode=' + p.key;
+      grid.appendChild(btn);
+    });
+  }
+
+  // Count
+  document.getElementById('countBadge').textContent = `${filtered.length} puzzle${filtered.length !== 1 ? 's' : ''}`;
+}
+
+// ── Category pills ───────────────────────────────────
+function renderPills() {
+  const container = document.getElementById('catPills');
+  container.innerHTML = '';
+  // "All" pill
+  const allP = document.createElement('button');
+  allP.className = 'cat-pill' + (!activeCat ? ' active' : '');
+  allP.textContent = 'All';
+  allP.style.setProperty('--pill-clr', 'var(--accent)');
+  allP.onclick = () => { activeCat = null; renderPills(); render(); };
+  container.appendChild(allP);
+  // Category pills
+  Object.entries(CATS).forEach(([k, v]) => {
+    const count = puzzles.filter(p => p.cat === k).length;
+    if (count === 0) return;
+    const pill = document.createElement('button');
+    pill.className = 'cat-pill' + (activeCat === k ? ' active' : '');
+    pill.textContent = `${v.label} (${count})`;
+    pill.style.setProperty('--pill-clr', v.clr);
+    pill.onclick = () => { activeCat = activeCat === k ? null : k; renderPills(); render(); };
+    container.appendChild(pill);
+  });
+}
+
+// ── Search ───────────────────────────────────────────
+document.getElementById('searchInput').addEventListener('input', e => {
+  searchTerm = e.target.value;
+  render();
+});
+
+// ── Init ─────────────────────────────────────────────
+renderPills();
+render();
+</script>
+</body>
+</html>

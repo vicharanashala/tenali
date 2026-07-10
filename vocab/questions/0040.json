@@ -1,0 +1,15 @@
+{
+  "id": 40,
+  "word": "Sad",
+  "question": "Sad",
+  "options": [
+    "Feeling sorrow or unhappiness",
+    "To make someone feel bewildered",
+    "To shine brightly with reflected light",
+    "To attract and hold the attention of someone"
+  ],
+  "answerOption": "A",
+  "answerText": "Feeling sorrow or unhappiness",
+  "difficulty": "easy",
+  "sourceFile": "0040.json"
+}

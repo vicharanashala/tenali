@@ -1,0 +1,15 @@
+{
+  "id": 583,
+  "word": "Determined",
+  "question": "Determined",
+  "options": [
+    "To open something that is locked",
+    "Able to adapt to many different uses",
+    "Having made a firm decision about something",
+    "To become mature and ready to eat"
+  ],
+  "answerOption": "C",
+  "answerText": "Having made a firm decision about something",
+  "difficulty": "easy",
+  "sourceFile": "0583.json"
+}

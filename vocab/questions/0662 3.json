@@ -1,0 +1,15 @@
+{
+  "id": 662,
+  "word": "Gigantic",
+  "question": "Gigantic",
+  "options": [
+    "Extremely large or huge",
+    "Evil or morally wrong",
+    "Having experience, knowledge, and good judgment",
+    "Lacking in liveliness or joy"
+  ],
+  "answerOption": "A",
+  "answerText": "Extremely large or huge",
+  "difficulty": "easy",
+  "sourceFile": "0662.json"
+}

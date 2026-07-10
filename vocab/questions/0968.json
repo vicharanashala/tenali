@@ -1,0 +1,15 @@
+{
+  "id": 968,
+  "word": "Prickly",
+  "question": "Prickly",
+  "options": [
+    "Important, serious, or significant",
+    "To become aware of something",
+    "Acting with care and thought for the future",
+    "Having small sharp points"
+  ],
+  "answerOption": "D",
+  "answerText": "Having small sharp points",
+  "difficulty": "easy",
+  "sourceFile": "0968.json"
+}

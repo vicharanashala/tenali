@@ -1,0 +1,15 @@
+{
+  "id": 2941,
+  "word": "Affirmation",
+  "question": "Affirmation",
+  "options": [
+    "A genus of long-tailed birds",
+    "A crack opening or break",
+    "The action of affirming something",
+    "A meteorite or stone"
+  ],
+  "answerOption": "C",
+  "answerText": "The action of affirming something",
+  "difficulty": "hard",
+  "sourceFile": "2941.json"
+}

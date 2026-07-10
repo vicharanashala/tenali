@@ -1,0 +1,15 @@
+{
+  "id": 10,
+  "word": "Sincere",
+  "question": "Sincere",
+  "options": [
+    "Eager to know or learn something",
+    "Free from pretence or deceit",
+    "Shiny and smooth on the surface",
+    "Belonging to the very distant past"
+  ],
+  "answerOption": "B",
+  "answerText": "Free from pretence or deceit",
+  "difficulty": "easy",
+  "sourceFile": "0010.json"
+}

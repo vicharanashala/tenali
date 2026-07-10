@@ -1,0 +1,15 @@
+{
+  "id": 1205,
+  "word": "Nascent",
+  "question": "Nascent",
+  "options": [
+    "Intended to teach a moral lesson",
+    "Just beginning to develop",
+    "Not being what it claims to be; false",
+    "Intended for a small group with special knowledge"
+  ],
+  "answerOption": "B",
+  "answerText": "Just beginning to develop",
+  "difficulty": "hard",
+  "sourceFile": "1205.json"
+}

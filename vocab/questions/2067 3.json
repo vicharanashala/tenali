@@ -1,0 +1,15 @@
+{
+  "id": 2067,
+  "word": "Gossamer",
+  "question": "Gossamer",
+  "options": [
+    "The state of being dormant",
+    "A type of small bean",
+    "Voluntary sexual intercourse outside marriage",
+    "A fine, filmy substance; something very light"
+  ],
+  "answerOption": "D",
+  "answerText": "A fine, filmy substance; something very light",
+  "difficulty": "hard",
+  "sourceFile": "2067.json"
+}

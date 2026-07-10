@@ -1,0 +1,15 @@
+{
+  "id": 417,
+  "word": "Obtain",
+  "question": "Obtain",
+  "options": [
+    "Refusing to change one's mind",
+    "Very cold with visible frost",
+    "To get or acquire something",
+    "Feeling or showing the need for food"
+  ],
+  "answerOption": "C",
+  "answerText": "To get or acquire something",
+  "difficulty": "easy",
+  "sourceFile": "0417.json"
+}

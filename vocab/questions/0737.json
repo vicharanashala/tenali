@@ -1,0 +1,15 @@
+{
+  "id": 737,
+  "word": "Fireproof",
+  "question": "Fireproof",
+  "options": [
+    "To attract and hold attention of someone",
+    "Having or showing a lack of common sense",
+    "Different from what is normal or expected",
+    "Able to withstand fire or great heat"
+  ],
+  "answerOption": "D",
+  "answerText": "Able to withstand fire or great heat",
+  "difficulty": "easy",
+  "sourceFile": "0737.json"
+}

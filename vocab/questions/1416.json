@@ -1,0 +1,15 @@
+{
+  "id": 1416,
+  "word": "Demonstrably",
+  "question": "Demonstrably",
+  "options": [
+    "Small or meager in amount",
+    "Treacherous and disloyal",
+    "Involving or inciting rebellion",
+    "In a way that can be shown"
+  ],
+  "answerOption": "D",
+  "answerText": "In a way that can be shown",
+  "difficulty": "medium",
+  "sourceFile": "1416.json"
+}

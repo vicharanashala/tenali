@@ -1,0 +1,15 @@
+{
+  "id": 2780,
+  "word": "Mitigation",
+  "question": "Mitigation",
+  "options": [
+    "A defensive wall of a city or fortress",
+    "Legal state of being unable to pay debts",
+    "The action of making less severe",
+    "To criticize someone severely"
+  ],
+  "answerOption": "C",
+  "answerText": "The action of making less severe",
+  "difficulty": "hard",
+  "sourceFile": "2780.json"
+}

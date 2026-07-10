@@ -1,0 +1,15 @@
+{
+  "id": 2068,
+  "word": "Aeolus",
+  "question": "Aeolus",
+  "options": [
+    "Designed to impress or attract notice",
+    "The use of clever but false arguments",
+    "Relating to the atmosphere",
+    "Greek god of the winds"
+  ],
+  "answerOption": "D",
+  "answerText": "Greek god of the winds",
+  "difficulty": "hard",
+  "sourceFile": "2068.json"
+}

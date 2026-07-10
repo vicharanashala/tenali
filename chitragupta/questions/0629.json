@@ -1,0 +1,14 @@
+{
+  "id": 629,
+  "question": "Who wrote 'The Grapes of Wrath'?",
+  "options": [
+    "Hemingway",
+    "Steinbeck",
+    "Orwell",
+    "Huxley"
+  ],
+  "answerOption": "B",
+  "answerText": "Steinbeck",
+  "genre": "general-knowledge",
+  "sourceFile": "0629.json"
+}

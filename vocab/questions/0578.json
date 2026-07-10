@@ -1,0 +1,15 @@
+{
+  "id": 578,
+  "word": "Optimistic",
+  "question": "Optimistic",
+  "options": [
+    "Expecting the best possible outcome",
+    "To blind temporarily with a bright light",
+    "To maintain something in its original state",
+    "Acting with care and thought for the future"
+  ],
+  "answerOption": "A",
+  "answerText": "Expecting the best possible outcome",
+  "difficulty": "easy",
+  "sourceFile": "0578.json"
+}

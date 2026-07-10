@@ -1,0 +1,14 @@
+{
+  "id": 984,
+  "question": "Which festival throws colors?",
+  "options": [
+    "Diwali",
+    "Holi",
+    "Onam",
+    "Bihu"
+  ],
+  "answerOption": "B",
+  "answerText": "Holi",
+  "genre": "india-gk",
+  "sourceFile": "0984.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 848,
+  "word": "Moody",
+  "question": "Moody",
+  "options": [
+    "Given to unpredictable changes of mood",
+    "To move forward in a purposeful way",
+    "Average in amount or intensity",
+    "Existing in fact; real"
+  ],
+  "answerOption": "A",
+  "answerText": "Given to unpredictable changes of mood",
+  "difficulty": "easy",
+  "sourceFile": "0848.json"
+}

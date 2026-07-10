@@ -1,0 +1,15 @@
+{
+  "id": 1863,
+  "word": "Tempestuous",
+  "question": "Tempestuous",
+  "options": [
+    "Not easily convinced; having doubts",
+    "Keeping careful watch for possible danger",
+    "An amount by which spending exceeds income",
+    "Stormy or turbulent in nature"
+  ],
+  "answerOption": "D",
+  "answerText": "Stormy or turbulent in nature",
+  "difficulty": "medium",
+  "sourceFile": "1863.json"
+}

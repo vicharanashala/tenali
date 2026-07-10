@@ -1,0 +1,15 @@
+{
+  "id": 25,
+  "word": "Poor",
+  "question": "Poor",
+  "options": [
+    "Lacking sufficient money to live comfortably",
+    "To estimate something without full information",
+    "Without limits or end",
+    "Sufficient to cause death"
+  ],
+  "answerOption": "A",
+  "answerText": "Lacking sufficient money to live comfortably",
+  "difficulty": "easy",
+  "sourceFile": "0025.json"
+}

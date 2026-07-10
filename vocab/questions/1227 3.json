@@ -1,0 +1,15 @@
+{
+  "id": 1227,
+  "word": "Decimate",
+  "question": "Decimate",
+  "options": [
+    "Very worried and upset",
+    "Strange or odd; unusual",
+    "A feeling of embarrassment or disappointment",
+    "To kill one in every ten of a group"
+  ],
+  "answerOption": "D",
+  "answerText": "To kill one in every ten of a group",
+  "difficulty": "medium",
+  "sourceFile": "1227.json"
+}

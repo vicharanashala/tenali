@@ -1,0 +1,15 @@
+{
+  "id": 1066,
+  "word": "Frivolous",
+  "question": "Frivolous",
+  "options": [
+    "Not having any serious purpose or value",
+    "Having careful and persistent effort",
+    "To light a fire; to arouse an emotion",
+    "To give someone pleasure or satisfaction"
+  ],
+  "answerOption": "A",
+  "answerText": "Not having any serious purpose or value",
+  "difficulty": "medium",
+  "sourceFile": "1066.json"
+}

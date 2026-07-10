@@ -1,0 +1,15 @@
+{
+  "id": 1954,
+  "word": "Adventurer",
+  "question": "Adventurer",
+  "options": [
+    "The method and practice of teaching",
+    "A person seeking unusual experiences",
+    "A substance that adsorbs",
+    "Naive and simplistic; lacking nourishment"
+  ],
+  "answerOption": "B",
+  "answerText": "A person seeking unusual experiences",
+  "difficulty": "hard",
+  "sourceFile": "1954.json"
+}

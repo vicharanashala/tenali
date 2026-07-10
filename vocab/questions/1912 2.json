@@ -1,0 +1,15 @@
+{
+  "id": 1912,
+  "word": "Adrenal",
+  "question": "Adrenal",
+  "options": [
+    "A young person developing into adulthood",
+    "Relating to glands near the kidneys",
+    "Cheerful friendliness; geniality",
+    "An accusation in response to another"
+  ],
+  "answerOption": "B",
+  "answerText": "Relating to glands near the kidneys",
+  "difficulty": "hard",
+  "sourceFile": "1912.json"
+}

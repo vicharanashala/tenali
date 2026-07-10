@@ -1,0 +1,15 @@
+{
+  "id": 12,
+  "word": "Clean",
+  "question": "Clean",
+  "options": [
+    "Free from dirt or impurities",
+    "To show how something is done",
+    "To examine similarities and differences",
+    "Giving information clearly in few words"
+  ],
+  "answerOption": "A",
+  "answerText": "Free from dirt or impurities",
+  "difficulty": "easy",
+  "sourceFile": "0012.json"
+}

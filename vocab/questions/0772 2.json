@@ -1,0 +1,15 @@
+{
+  "id": 772,
+  "word": "Mandatory",
+  "question": "Mandatory",
+  "options": [
+    "Unusual or surprising; hard to explain",
+    "Side by side and having the same distance apart",
+    "Required by law or rules",
+    "Strongly wanting to do or have something"
+  ],
+  "answerOption": "C",
+  "answerText": "Required by law or rules",
+  "difficulty": "easy",
+  "sourceFile": "0772.json"
+}

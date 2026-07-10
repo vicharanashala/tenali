@@ -1,0 +1,15 @@
+{
+  "id": 282,
+  "word": "Observe",
+  "question": "Observe",
+  "options": [
+    "To write or name the letters of a word",
+    "Done with the hands; requiring human effort",
+    "Expecting the worst possible outcome",
+    "To watch something carefully"
+  ],
+  "answerOption": "D",
+  "answerText": "To watch something carefully",
+  "difficulty": "easy",
+  "sourceFile": "0282.json"
+}

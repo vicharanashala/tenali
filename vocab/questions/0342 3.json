@@ -1,0 +1,15 @@
+{
+  "id": 342,
+  "word": "Trap",
+  "question": "Trap",
+  "options": [
+    "To remove the wrapping from something",
+    "To take on or start using something new",
+    "To catch an animal in a device",
+    "Living in a natural state; not tamed"
+  ],
+  "answerOption": "C",
+  "answerText": "To catch an animal in a device",
+  "difficulty": "easy",
+  "sourceFile": "0342.json"
+}

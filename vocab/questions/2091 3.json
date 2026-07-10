@@ -1,0 +1,15 @@
+{
+  "id": 2091,
+  "word": "Specious",
+  "question": "Specious",
+  "options": [
+    "A plant needing air exposure",
+    "A prefix relating to air",
+    "Superficially plausible but actually wrong",
+    "Extremely unwilling to spend money"
+  ],
+  "answerOption": "C",
+  "answerText": "Superficially plausible but actually wrong",
+  "difficulty": "hard",
+  "sourceFile": "2091.json"
+}

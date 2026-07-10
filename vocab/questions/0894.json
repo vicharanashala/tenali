@@ -1,0 +1,15 @@
+{
+  "id": 894,
+  "word": "Concentrated",
+  "question": "Concentrated",
+  "options": [
+    "Untidy or dirty",
+    "Gathered together in one place",
+    "To make sounds showing amusement",
+    "Very cold with visible frost"
+  ],
+  "answerOption": "B",
+  "answerText": "Gathered together in one place",
+  "difficulty": "easy",
+  "sourceFile": "0894.json"
+}

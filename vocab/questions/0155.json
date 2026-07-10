@@ -1,0 +1,15 @@
+{
+  "id": 155,
+  "word": "Forget",
+  "question": "Forget",
+  "options": [
+    "To arouse the curiosity of someone",
+    "To fail to remember something",
+    "Not far away; close",
+    "To accept something as true"
+  ],
+  "answerOption": "B",
+  "answerText": "To fail to remember something",
+  "difficulty": "easy",
+  "sourceFile": "0155.json"
+}

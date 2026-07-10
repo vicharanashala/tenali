@@ -1,0 +1,15 @@
+{
+  "id": 659,
+  "word": "Finite",
+  "question": "Finite",
+  "options": [
+    "Having limits or bounds",
+    "To formally forbid something by law or rule",
+    "Allowing access; not closed or blocked",
+    "Of great importance; critical"
+  ],
+  "answerOption": "A",
+  "answerText": "Having limits or bounds",
+  "difficulty": "easy",
+  "sourceFile": "0659.json"
+}

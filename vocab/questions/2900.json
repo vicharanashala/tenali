@@ -1,0 +1,15 @@
+{
+  "id": 2900,
+  "word": "Commencement",
+  "question": "Commencement",
+  "options": [
+    "Vigorous or incisive in expression",
+    "Ancient Persian religious philosophy",
+    "The beginning or start of something",
+    "The pattern of rising and falling pitch"
+  ],
+  "answerOption": "C",
+  "answerText": "The beginning or start of something",
+  "difficulty": "hard",
+  "sourceFile": "2900.json"
+}

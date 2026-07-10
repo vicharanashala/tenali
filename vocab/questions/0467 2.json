@@ -1,0 +1,15 @@
+{
+  "id": 467,
+  "word": "Illustrate",
+  "question": "Illustrate",
+  "options": [
+    "To stop fighting and give up",
+    "To take aggressive action against something",
+    "To cause someone to believe something",
+    "To explain something by using examples"
+  ],
+  "answerOption": "D",
+  "answerText": "To explain something by using examples",
+  "difficulty": "easy",
+  "sourceFile": "0467.json"
+}

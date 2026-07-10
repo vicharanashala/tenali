@@ -1,0 +1,15 @@
+{
+  "id": 653,
+  "word": "Brief",
+  "question": "Brief",
+  "options": [
+    "Of short duration; not lasting long",
+    "The outer surface of something",
+    "To remove the wrapping from something",
+    "At the point that is in the middle"
+  ],
+  "answerOption": "A",
+  "answerText": "Of short duration; not lasting long",
+  "difficulty": "easy",
+  "sourceFile": "0653.json"
+}

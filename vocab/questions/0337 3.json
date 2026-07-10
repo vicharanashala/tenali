@@ -1,0 +1,15 @@
+{
+  "id": 337,
+  "word": "Struggle",
+  "question": "Struggle",
+  "options": [
+    "To rest on the surface of a liquid",
+    "Resembling without being identical",
+    "To notice the differences between things",
+    "To make great efforts under difficulty"
+  ],
+  "answerOption": "D",
+  "answerText": "To make great efforts under difficulty",
+  "difficulty": "easy",
+  "sourceFile": "0337.json"
+}

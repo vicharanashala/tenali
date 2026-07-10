@@ -1,0 +1,15 @@
+{
+  "id": 2046,
+  "word": "Chicanery",
+  "question": "Chicanery",
+  "options": [
+    "Willing to undertake risky ventures",
+    "The use of trickery to achieve a goal",
+    "Excessively complicated and detailed",
+    "The gathering of a substance"
+  ],
+  "answerOption": "B",
+  "answerText": "The use of trickery to achieve a goal",
+  "difficulty": "hard",
+  "sourceFile": "2046.json"
+}

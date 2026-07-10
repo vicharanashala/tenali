@@ -1,0 +1,15 @@
+{
+  "id": 671,
+  "word": "Scarce",
+  "question": "Scarce",
+  "options": [
+    "Insufficient for the demand; in short supply",
+    "To exert force to move something closer",
+    "To successfully reach a desired goal",
+    "To state the exact meaning of a word"
+  ],
+  "answerOption": "A",
+  "answerText": "Insufficient for the demand; in short supply",
+  "difficulty": "easy",
+  "sourceFile": "0671.json"
+}

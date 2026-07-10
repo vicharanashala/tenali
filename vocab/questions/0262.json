@@ -1,0 +1,15 @@
+{
+  "id": 262,
+  "word": "Crawl",
+  "question": "Crawl",
+  "options": [
+    "Greatly pleased or entertained",
+    "Lacking interest or excitement",
+    "To move forward on hands and knees",
+    "Lacking consideration for other people"
+  ],
+  "answerOption": "C",
+  "answerText": "To move forward on hands and knees",
+  "difficulty": "easy",
+  "sourceFile": "0262.json"
+}
