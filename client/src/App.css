@@ -2518,3 +2518,63 @@ button:disabled {
     margin: 0 3px;
   }
 }
+
+/* ── Feature P v0.2.5: Warmup Overlay Polish & Animations ──────────────── */
+.warmup-overlay-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.78);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+  animation: warmup-fade-in 0.25s ease-out forwards;
+}
+
+.warmup-overlay-card {
+  background: var(--clr-card, #1e2030);
+  border-radius: 16px;
+  padding: 32px 28px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 12px 50px rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--clr-border, #3a3d4a);
+  animation: warmup-scale-up 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.warmup-skip-btn {
+  background: transparent !important;
+  color: var(--clr-dim, #888) !important;
+  border: 1px dashed var(--clr-border, #3a3d4a) !important;
+  margin-top: 10px;
+  width: 100%;
+  font-size: 0.85rem;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.warmup-skip-btn:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: var(--clr-text, #fff) !important;
+  border-color: var(--clr-dim, #888) !important;
+}
+
+@keyframes warmup-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes warmup-scale-up {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+

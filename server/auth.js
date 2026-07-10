@@ -39,14 +39,14 @@ let connected = false;
 
 async function connectMongo(uri = MONGO_URI) {
   if (connected) return;
-  await mongoose.connect(uri, { serverSelectionTimeoutMS: 4000 });
+  await mongoose.connect(uri, { serverSelectionTimeoutMS: 10000 });
   connected = true;
   console.log(`[auth] Mongo connected: ${uri.replace(/\/\/.*@/, '//***@')}`);
 }
 
 const SEED_USERS = [
   { username: 'sudarshan', password: 'sherlockholmes' },
-  { username: 'tatsavit',  password: 'taittiriya' },
+  { username: 'tatsavit', password: 'taittiriya' },
 ];
 
 // In-memory fallback used when MongoDB is unavailable.

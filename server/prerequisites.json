@@ -1,0 +1,246 @@
+{
+  "_meta": {
+    "comment": "Prerequisite map for feature P, derived from deployed /graph page (snapshot at PR time). Direct parents only — no transitive traversal.",
+    "source": "https://tenali.fun/graph",
+    "generated": "2026-07-08T12:53:31.868Z",
+    "schema": "Map of topic key (string) → array of prerequisite topic keys (strings). Direct parents only. Root topics have empty arrays. Server trims to first 3 entries at runtime via the picker cap."
+  },
+  "addition": [
+    "basicarith"
+  ],
+  "angles": [
+    "basicarith"
+  ],
+  "banking": [
+    "basicarith",
+    "percent"
+  ],
+  "bases": [
+    "basicarith"
+  ],
+  "basicarith": [],
+  "bearings": [
+    "angles"
+  ],
+  "binomial": [
+    "indices",
+    "polymul"
+  ],
+  "bounds": [
+    "rounding"
+  ],
+  "circleth": [
+    "angles",
+    "triangles"
+  ],
+  "circmeasure": [
+    "trig"
+  ],
+  "complex": [
+    "sqrt",
+    "qformula"
+  ],
+  "congruence": [
+    "triangles"
+  ],
+  "conics": [
+    "coordgeom"
+  ],
+  "coordgeom": [
+    "basicarith",
+    "pythag"
+  ],
+  "decimals": [
+    "basicarith"
+  ],
+  "diff": [
+    "indices",
+    "polymul",
+    "quadratic",
+    "limits"
+  ],
+  "diffeq": [
+    "diff",
+    "integ"
+  ],
+  "dotprod": [
+    "vectors",
+    "matrix"
+  ],
+  "fractionadd": [
+    "multiply"
+  ],
+  "funceval": [
+    "basicarith"
+  ],
+  "gk": [],
+  "gst": [
+    "percent"
+  ],
+  "hcflcm": [
+    "multiply"
+  ],
+  "heron": [
+    "pythag",
+    "triangles",
+    "mensur"
+  ],
+  "indices": [
+    "multiply"
+  ],
+  "ineq": [
+    "basicarith",
+    "polyfactor"
+  ],
+  "integ": [
+    "diff"
+  ],
+  "invtrig": [
+    "trig"
+  ],
+  "limits": [
+    "sequences"
+  ],
+  "lineareq": [
+    "basicarith"
+  ],
+  "lineq": [
+    "coordgeom",
+    "fractionadd"
+  ],
+  "linprog": [
+    "lineareq",
+    "ineq"
+  ],
+  "log": [
+    "indices"
+  ],
+  "matrix": [
+    "multiply",
+    "basicarith"
+  ],
+  "mensur": [
+    "multiply",
+    "squaring",
+    "polygons"
+  ],
+  "multiply": [
+    "basicarith"
+  ],
+  "percent": [
+    "fractionadd",
+    "ratio"
+  ],
+  "permcomb": [
+    "basicarith"
+  ],
+  "polyfactor": [
+    "polymul"
+  ],
+  "polygons": [
+    "angles",
+    "triangles"
+  ],
+  "polymul": [
+    "multiply",
+    "indices"
+  ],
+  "primefactor": [
+    "hcflcm"
+  ],
+  "prob": [
+    "fractionadd",
+    "basicarith"
+  ],
+  "profitloss": [
+    "percent"
+  ],
+  "pythag": [
+    "triangles",
+    "squaring"
+  ],
+  "qformula": [
+    "polyfactor",
+    "sqrt"
+  ],
+  "quadratic": [
+    "multiply",
+    "indices"
+  ],
+  "ratio": [
+    "basicarith"
+  ],
+  "remfactor": [
+    "polyfactor",
+    "polymul"
+  ],
+  "rounding": [
+    "basicarith"
+  ],
+  "sdt": [
+    "multiply",
+    "ratio"
+  ],
+  "section": [
+    "coordgeom"
+  ],
+  "sequences": [
+    "basicarith",
+    "multiply",
+    "indices"
+  ],
+  "sets": [
+    "basicarith"
+  ],
+  "shares": [
+    "basicarith",
+    "percent"
+  ],
+  "similarity": [
+    "triangles",
+    "ratio"
+  ],
+  "simul": [
+    "basicarith",
+    "funceval",
+    "lineareq"
+  ],
+  "spot": [],
+  "sqrt": [
+    "multiply",
+    "squaring"
+  ],
+  "squaring": [
+    "multiply",
+    "addition"
+  ],
+  "stats": [
+    "basicarith"
+  ],
+  "stdform": [
+    "indices"
+  ],
+  "surds": [
+    "indices"
+  ],
+  "transform": [
+    "angles",
+    "coordgeom"
+  ],
+  "triangles": [
+    "angles"
+  ],
+  "trig": [
+    "pythag",
+    "angles",
+    "ratio"
+  ],
+  "variation": [
+    "ratio",
+    "indices"
+  ],
+  "vectors": [
+    "basicarith"
+  ],
+  "vocab": []
+}

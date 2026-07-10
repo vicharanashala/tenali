@@ -65,6 +65,9 @@ export default defineConfig({
       '/funceval-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
       // Linear equations quiz API
       '/lineq-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      '/lineareq-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      '/decimals-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      '/permcomb-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
       // Basic arithmetic quiz API
       '/basicarith-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
       // Fraction addition quiz API
@@ -111,6 +114,21 @@ export default defineConfig({
       '/pythag-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
       '/polygons-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
       '/similarity-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      // Feature P missing proxies
+      '/limits-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      '/invtrig-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      '/remfactor-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      '/heron-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      '/shares-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      '/banking-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      '/gst-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      '/section-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      '/linprog-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      '/circmeasure-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      '/conics-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      '/diffeq-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      '/dotprod-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      '/squaring-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
     },
   },
 })
