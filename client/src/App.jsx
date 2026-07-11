@@ -37186,8 +37186,8 @@ function Home({ onSelect }) {
                 <div style={{ fontSize: '0.65rem', color: 'var(--clr-text-soft)' }}>to go</div>
               </div>
               <button
-                onClick={() => { setPmGoalIds([]); setPmKnown(new Set()) }}
-                title="Clear this path"
+                onClick={() => { setPmGoalIds([]) }}
+                title="Clear current goal (known nodes kept)"
                 style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text-soft)', fontSize: '0.78rem' }}
               >
                 ✕ Clear
@@ -37318,7 +37318,7 @@ function Home({ onSelect }) {
             <PmGoalPicker
               goalIds={pmGoalIds}
               onSetGoal={ids => setPmGoalIds(ids)}
-              onClear={() => { setPmGoalIds([]); setPmKnown(new Set()) }}
+              onClear={() => { setPmGoalIds([]) }}
             />
 
             {pmPath.length > 0 && (
@@ -37372,6 +37372,26 @@ function Home({ onSelect }) {
                 >
                   Show my path →
                 </button>
+                                {pmKnown.size > 0 && (
+                  <button
+                    onClick={() => {
+                      if (window.confirm('Reset all progress? This will clear all nodes you marked as known.')) {
+                        setPmKnown(new Set())
+                      }
+                    }}
+                    style={{
+                      width: '100%', marginTop: 8, padding: '8px',
+                      background: 'none',
+                      border: '1px solid var(--clr-border)',
+                      borderRadius: 10,
+                      color: 'var(--clr-text-soft)',
+                      fontSize: '0.78rem', cursor: 'pointer',
+                      fontFamily: 'var(--font-body)',
+                    }}
+                  >
+                    🔄 Reset all progress ({pmKnown.size} known nodes)
+                  </button>
+                )}
               </>
             )}
           </div>
@@ -37388,10 +37408,10 @@ function Home({ onSelect }) {
             setPmShowCongrats(false)
             setPmOpen(true)           // re-open goal picker
           }}
-          onSetGoal={(ids) => {
-            setPmGoalIds(ids)
-            setPmKnown(new Set())     // fresh start for the new goal
-            setPmShowCongrats(false)
+        onSetGoal={(ids) => {
+          setPmGoalIds(ids)
+          // known nodes carry over to the new goal
+          setPmShowCongrats(false)
           }}
         />
       )}
