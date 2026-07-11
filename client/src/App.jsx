@@ -23,6 +23,8 @@
 
 import { useEffect, useState, useRef, useMemo } from 'react'
 import { io } from 'socket.io-client'
+import { playCorrectSound, playWrongSound, playWinSound, playLoseSound } from './utils/audio'
+import { triggerWinConfetti } from './utils/confetti'
 import './App.css'
 
 // API base URL from environment variables (Vite)
@@ -418,7 +420,15 @@ function ResultsTable({ results }) {
  * structured card with highlighted answer and formatted explanation.
  * For normal correct/wrong feedback, renders inline text.
  */
-function renderFeedback(feedback, isCorrect) {
+function FeedbackComponent({ feedback, isCorrect }) {
+  useEffect(() => {
+    if (isCorrect === true) {
+      playCorrectSound();
+    } else if (isCorrect === false && (!feedback || !feedback.startsWith('Solution:'))) {
+      playWrongSound();
+    }
+  }, [isCorrect, feedback]);
+
   if (!feedback) return null
   const isSolve = isCorrect === false && feedback.startsWith('Solution:')
   if (!isSolve) {
@@ -460,6 +470,18 @@ function renderFeedback(feedback, isCorrect) {
       )}
     </div>
   )
+}
+
+function renderFeedback(feedback, isCorrect) {
+  return <FeedbackComponent feedback={feedback} isCorrect={isCorrect} />;
+}
+
+function QuizCompleteEffect() {
+  useEffect(() => {
+    playWinSound();
+    triggerWinConfetti();
+  }, []);
+  return null;
 }
 
 /**
@@ -35473,6 +35495,17 @@ function BattleApp({ onBack, topic }) {
   const [selectedTopic, setSelectedTopic] = useState('tatsavit');
 
   useEffect(() => {
+    if (status === 'finished') {
+      if (winner === socket?.id) {
+        playWinSound();
+        triggerWinConfetti();
+      } else {
+        playLoseSound();
+      }
+    }
+  }, [status, winner, socket]);
+
+  useEffect(() => {
     const backendUrl = API || window.location.origin;
     const s = io(backendUrl);
     setSocket(s);
@@ -36711,7 +36744,7 @@ function GKApp({ onBack }) {
         {results.length > 0 && <ResultsTable results={results} />}
       </>}
       {finished && <div className="welcome-box">
-        <p className="welcome-text">Quiz complete!</p>
+        <><QuizCompleteEffect /><p className="welcome-text">Quiz complete!</p></>
         <p className="final-score">Final score: {score}/{totalQ}</p>
         <ResultsTable results={results} />
         <button onClick={() => { setStarted(false); setFinished(false) }}>Play Again</button>
@@ -36774,16 +36807,22 @@ function AdditionApp({ onBack }) {
    * Generates random a + b = ? with specified digit count
    */
   const fetchQuestion = async (selectedDifficulty = difficulty) => {
-    setLoading(true)
-    setFeedback('')
-    setAnswer('')
-    setRevealed(false)
-    setIsCorrect(null)
-    const res = await fetch(`${API}/addition-api/question?digits=${digitMap[effectiveDiff()]}`)
-    const data = await res.json()
-    setQuestion(data)
-    setLoading(false)
-    timer.start()
+    try {
+      setLoading(true)
+      setFeedback('')
+      setAnswer('')
+      setRevealed(false)
+      setIsCorrect(null)
+      const res = await fetch(`${API}/addition-api/question?digits=${digitMap[effectiveDiff()]}`)
+      if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`)
+      const data = await res.json()
+      setQuestion(data)
+      setLoading(false)
+      timer.start()
+    } catch (e) {
+      setLoading(false)
+      setFeedback('Error fetching question: ' + e.message)
+    }
   }
 
   /**
@@ -36956,7 +36995,7 @@ function AdditionApp({ onBack }) {
         {results.length > 0 && <ResultsTable results={results} />}
       </>}
       {finished && <div className="welcome-box">
-        <p className="welcome-text">Quiz complete.</p>
+        <><QuizCompleteEffect /><p className="welcome-text">Quiz complete.</p></>
         <p className="final-score">Final score: {score}/{totalQ}</p>
         {isAdaptive && <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)' }}>Reached level: <strong style={{ color: ADAPT_COLORS[curAdaptLevel] }}>{ADAPT_LABELS[curAdaptLevel]}</strong></p>}
         <ResultsTable results={results} />
@@ -38089,7 +38128,7 @@ function BasicArithApp({ onBack }) {
         {results.length > 0 && <ResultsTable results={results} />}
       </>}
       {finished && <div className="welcome-box">
-        <p className="welcome-text">Quiz complete.</p>
+        <><QuizCompleteEffect /><p className="welcome-text">Quiz complete.</p></>
         <p className="final-score">Final score: {score}/{totalQ}</p>
         {isAdaptive && <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)' }}>Reached level: <strong style={{ color: ADAPT_COLORS[curAdaptLevel] }}>{ADAPT_LABELS[curAdaptLevel]}</strong></p>}
         <ResultsTable results={results} />
@@ -38351,7 +38390,7 @@ function QuadraticApp({ onBack }) {
         {results.length > 0 && <ResultsTable results={results} />}
       </>}
       {finished && <div className="welcome-box">
-        <p className="welcome-text">Quiz complete.</p>
+        <><QuizCompleteEffect /><p className="welcome-text">Quiz complete.</p></>
         <p className="final-score">Final score: {score}/{totalQ}</p>
         {isAdaptive && <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)' }}>Reached level: <strong style={{ color: ADAPT_COLORS[curAdaptLevel] }}>{ADAPT_LABELS[curAdaptLevel]}</strong></p>}
         <ResultsTable results={results} />
@@ -39181,7 +39220,7 @@ function VocabApp({ onBack }) {
         {results.length > 0 && <ResultsTable results={results} />}
       </>}
       {finished && <div className="welcome-box">
-        <p className="welcome-text">Quiz complete!</p>
+        <><QuizCompleteEffect /><p className="welcome-text">Quiz complete!</p></>
         <p className="final-score">Final score: {score}/{totalQ}</p>
         {isAdaptive && <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)' }}>Reached level: <strong style={{ color: ADAPT_COLORS[curAdaptLevel] }}>{ADAPT_LABELS[curAdaptLevel]}</strong></p>}
         <ResultsTable results={results} />
@@ -39488,7 +39527,7 @@ function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly
           {results.length > 0 && <ResultsTable results={results} />}
         </>}
         {finished && <div className="welcome-box">
-          <p className="welcome-text">Quiz complete!</p>
+          <><QuizCompleteEffect /><p className="welcome-text">Quiz complete!</p></>
           <p className="final-score">Final score: {score}/{totalQ}</p>
           <ResultsTable results={results} />
           <button onClick={() => { setStarted(false); setFinished(false) }}>Play Again</button>
@@ -39721,7 +39760,7 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
           {results.length > 0 && <ResultsTable results={results} />}
         </>}
         {finished && <div className="welcome-box">
-          <p className="welcome-text">Quiz complete!</p>
+          <><QuizCompleteEffect /><p className="welcome-text">Quiz complete!</p></>
           <p className="final-score">Final score: {score}/{totalQ}</p>
           {isAdaptive && <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)' }}>Reached level: <strong style={{ color: ADAPT_COLORS[curAdaptLevel] }}>{ADAPT_LABELS[curAdaptLevel]}</strong></p>}
           <ResultsTable results={results} />
@@ -40104,7 +40143,7 @@ function DotProdApp({ onBack }) {
         {results.length > 0 && <ResultsTable results={results} />}
       </>}
       {finished && <div className="welcome-box">
-        <p className="welcome-text">Quiz complete!</p>
+        <><QuizCompleteEffect /><p className="welcome-text">Quiz complete!</p></>
         <p className="final-score">Final score: {score}/{totalQ}</p>
         {isAdaptive && <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)' }}>Reached level: <strong style={{ color: ADAPT_COLORS[curAdaptLevel] }}>{ADAPT_LABELS[curAdaptLevel]}</strong></p>}
         <ResultsTable results={results} />
@@ -41920,7 +41959,7 @@ function SquaringApp({ onBack }) {
         {results.length > 0 && <ResultsTable results={results} />}
       </>}
       {finished && <div className="welcome-box">
-        <p className="welcome-text">Quiz complete!</p>
+        <><QuizCompleteEffect /><p className="welcome-text">Quiz complete!</p></>
         <p className="final-score">Final score: {score}/{totalQ}</p>
         {isAdaptive && <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)' }}>Reached level: <strong style={{ color: ADAPT_COLORS[curAdaptLevel] }}>{ADAPT_LABELS[curAdaptLevel]}</strong></p>}
         <ResultsTable results={results} />
@@ -42723,7 +42762,7 @@ function SetsApp({ onBack }) {
         {results.length > 0 && <ResultsTable results={results} />}
       </>}
       {finished && <div className="welcome-box">
-        <p className="welcome-text">Quiz complete!</p>
+        <><QuizCompleteEffect /><p className="welcome-text">Quiz complete!</p></>
         <p className="final-score">Final score: {score}/{totalQ}</p>
         {isAdaptive && <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)' }}>Reached level: <strong style={{ color: ADAPT_COLORS[curAdaptLevel] }}>{ADAPT_LABELS[curAdaptLevel]}</strong></p>}
         <ResultsTable results={results} />
@@ -42876,7 +42915,7 @@ function SequencesApp({ onBack }) {
         {results.length > 0 && <ResultsTable results={results} />}
       </>}
       {finished && <div className="welcome-box">
-        <p className="welcome-text">Quiz complete!</p>
+        <><QuizCompleteEffect /><p className="welcome-text">Quiz complete!</p></>
         <p className="final-score">Final score: {score}/{totalQ}</p>
         {isAdaptive && <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)' }}>Reached level: <strong style={{ color: ADAPT_COLORS[curAdaptLevel] }}>{ADAPT_LABELS[curAdaptLevel]}</strong></p>}
         <ResultsTable results={results} />
@@ -43045,7 +43084,7 @@ function RatioApp({ onBack }) {
         {results.length > 0 && <ResultsTable results={results} />}
       </>}
       {finished && <div className="welcome-box">
-        <p className="welcome-text">Quiz complete!</p>
+        <><QuizCompleteEffect /><p className="welcome-text">Quiz complete!</p></>
         <p className="final-score">Final score: {score}/{totalQ}</p>
         {isAdaptive && <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)' }}>Reached level: <strong style={{ color: ADAPT_COLORS[curAdaptLevel] }}>{ADAPT_LABELS[curAdaptLevel]}</strong></p>}
         <ResultsTable results={results} />
@@ -43213,7 +43252,7 @@ function PercentApp({ onBack }) {
         {results.length > 0 && <ResultsTable results={results} />}
       </>}
       {finished && <div className="welcome-box">
-        <p className="welcome-text">Quiz complete!</p>
+        <><QuizCompleteEffect /><p className="welcome-text">Quiz complete!</p></>
         <p className="final-score">Final score: {score}/{totalQ}</p>
         {isAdaptive && <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)' }}>Reached level: <strong style={{ color: ADAPT_COLORS[curAdaptLevel] }}>{ADAPT_LABELS[curAdaptLevel]}</strong></p>}
         <ResultsTable results={results} />
@@ -43433,7 +43472,7 @@ function IndicesApp({ onBack }) {
 
       {finished && (
         <div className="welcome-box">
-          <p className="welcome-text">Quiz complete!</p>
+          <><QuizCompleteEffect /><p className="welcome-text">Quiz complete!</p></>
           <p className="final-score">Final score: {score}/{totalQ}</p>
           {isAdaptive && <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)' }}>Reached level: <strong style={{ color: ADAPT_COLORS[curAdaptLevel] }}>{ADAPT_LABELS[curAdaptLevel]}</strong></p>}
           <ResultsTable results={results} />
@@ -43688,7 +43727,7 @@ function SurdsApp({ onBack }) {
 
       {finished && (
         <div className="welcome-box">
-          <p className="welcome-text">Quiz complete!</p>
+          <><QuizCompleteEffect /><p className="welcome-text">Quiz complete!</p></>
           <p className="final-score">Final score: {score}/{totalQ}</p>
           {isAdaptive && <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)' }}>Reached level: <strong style={{ color: ADAPT_COLORS[curAdaptLevel] }}>{ADAPT_LABELS[curAdaptLevel]}</strong></p>}
           <ResultsTable results={results} />
@@ -44033,7 +44072,7 @@ function FractionAddApp({ onBack }) {
       {/* ── Finished Phase ── */}
       {finished && (
         <div className="welcome-box">
-          <p className="welcome-text">Quiz complete!</p>
+          <><QuizCompleteEffect /><p className="welcome-text">Quiz complete!</p></>
           <p className="final-score">Final score: {score}/{totalQ}</p>
           {isAdaptive && <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)' }}>Reached level: <strong style={{ color: ADAPT_COLORS[curAdaptLevel] }}>{ADAPT_LABELS[curAdaptLevel]}</strong></p>}
           <ResultsTable results={results} />
@@ -44540,7 +44579,7 @@ function SqrtApp({ onBack }) {
         {results.length > 0 && <ResultsTable results={results} />}
       </>}
       {finished && <div className="welcome-box">
-        <p className="welcome-text">Quiz complete.</p>
+        <><QuizCompleteEffect /><p className="welcome-text">Quiz complete.</p></>
         <p className="final-score">Final score: {score}/{totalQ}</p>
         {isAdaptive && <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)' }}>Reached level: <strong style={{ color: ADAPT_COLORS[curAdaptLevel] }}>{ADAPT_LABELS[curAdaptLevel]}</strong></p>}
         <ResultsTable results={results} />
@@ -44780,7 +44819,7 @@ function PolyMulApp({ onBack }) {
         {results.length > 0 && <ResultsTable results={results} />}
       </>}
       {finished && <div className="welcome-box">
-        <p className="welcome-text">Quiz complete!</p>
+        <><QuizCompleteEffect /><p className="welcome-text">Quiz complete!</p></>
         <p className="final-score">Final score: {score}/{totalQ}</p>
         {isAdaptive && <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)' }}>Reached level: <strong style={{ color: ADAPT_COLORS[curAdaptLevel] }}>{ADAPT_LABELS[curAdaptLevel]}</strong></p>}
         <ResultsTable results={results} />
@@ -45017,7 +45056,7 @@ function PolyFactorApp({ onBack }) {
         {results.length > 0 && <ResultsTable results={results} />}
       </>}
       {finished && <div className="welcome-box">
-        <p className="welcome-text">Quiz complete!</p>
+        <><QuizCompleteEffect /><p className="welcome-text">Quiz complete!</p></>
         <p className="final-score">Final score: {score}/{totalQ}</p>
         {isAdaptive && <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)' }}>Reached level: <strong style={{ color: ADAPT_COLORS[curAdaptLevel] }}>{ADAPT_LABELS[curAdaptLevel]}</strong></p>}
         <ResultsTable results={results} />
@@ -45288,7 +45327,7 @@ function PrimeFactorApp({ onBack }) {
         {results.length > 0 && <ResultsTable results={results} />}
       </>}
       {finished && <div className="welcome-box">
-        <p className="welcome-text">Quiz complete!</p>
+        <><QuizCompleteEffect /><p className="welcome-text">Quiz complete!</p></>
         <p className="final-score">Final score: {score}/{totalQ}</p>
         {isAdaptive && <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)' }}>Reached level: <strong style={{ color: ADAPT_COLORS[curAdaptLevel] }}>{ADAPT_LABELS[curAdaptLevel]}</strong></p>}
         <ResultsTable results={results} />
@@ -45533,7 +45572,7 @@ function QFormulaApp({ onBack }) {
         {results.length > 0 && <ResultsTable results={results} />}
       </>}
       {finished && <div className="welcome-box">
-        <p className="welcome-text">Quiz complete!</p>
+        <><QuizCompleteEffect /><p className="welcome-text">Quiz complete!</p></>
         <p className="final-score">Final score: {score}/{totalQ}</p>
         {isAdaptive && <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)' }}>Reached level: <strong style={{ color: ADAPT_COLORS[curAdaptLevel] }}>{ADAPT_LABELS[curAdaptLevel]}</strong></p>}
         <ResultsTable results={results} />
@@ -45781,7 +45820,7 @@ function SimulApp({ onBack }) {
         {results.length > 0 && <ResultsTable results={results} />}
       </>}
       {finished && <div className="welcome-box">
-        <p className="welcome-text">Quiz complete!</p>
+        <><QuizCompleteEffect /><p className="welcome-text">Quiz complete!</p></>
         <p className="final-score">Final score: {score}/{totalQ}</p>
         {isAdaptive && <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)' }}>Reached level: <strong style={{ color: ADAPT_COLORS[curAdaptLevel] }}>{ADAPT_LABELS[curAdaptLevel]}</strong></p>}
         <ResultsTable results={results} />
@@ -45994,7 +46033,7 @@ function FuncEvalApp({ onBack }) {
         {results.length > 0 && <ResultsTable results={results} />}
       </>}
       {finished && <div className="welcome-box">
-        <p className="welcome-text">Quiz complete!</p>
+        <><QuizCompleteEffect /><p className="welcome-text">Quiz complete!</p></>
         <p className="final-score">Final score: {score}/{totalQ}</p>
         {isAdaptive && <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)' }}>Reached level: <strong style={{ color: ADAPT_COLORS[curAdaptLevel] }}>{ADAPT_LABELS[curAdaptLevel]}</strong></p>}
         <ResultsTable results={results} />
@@ -46213,7 +46252,7 @@ function LineEqApp({ onBack }) {
         {results.length > 0 && <ResultsTable results={results} />}
       </>}
       {finished && <div className="welcome-box">
-        <p className="welcome-text">Quiz complete!</p>
+        <><QuizCompleteEffect /><p className="welcome-text">Quiz complete!</p></>
         <p className="final-score">Final score: {score}/{totalQ}</p>
         {isAdaptive && <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)' }}>Reached level: <strong style={{ color: ADAPT_COLORS[curAdaptLevel] }}>{ADAPT_LABELS[curAdaptLevel]}</strong></p>}
         <ResultsTable results={results} />
