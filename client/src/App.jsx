@@ -27,7 +27,7 @@ const MascotDisplay = ({ themeName }) => {
   const mascots = {
     'Fantasy World': '🧙 Make math feel like magic',
     'Superhero City': '🦸 Every problem is a mission',
-    'Jurassic Jungle': '🦖 Roar through tricky puzzles',
+    'Jurassic Chaos': '🦖 Roar through tricky puzzles',
     'Space Explorer': '🤖 Think smart. Solve smarter'
   };
 
@@ -60,7 +60,7 @@ export const ThemeContext = createContext();
 const ThemeSelector = ({ onComplete }) => {
   const themes = [
     { name: 'Superhero City', mascot: 'Mini-Sidekick' },
-    { name: 'Jurassic Jungle', mascot: 'Baby T-Rex' },
+    { name: 'Jurassic Chaos', mascot: 'Baby T-Rex' },
     { name: 'Fantasy World', mascot: 'Wizard' },
     { name: 'Space Explorer', mascot: 'Robot' }
   ];
@@ -36108,72 +36108,110 @@ const [mode, setMode] = useState(null);
 
 
 return (
-    <ThemeContext.Provider value={{ selectedTheme, setSelectedTheme }}>
-      {step === 'welcome' ? (
-        <div className="welcome-screen">
-          <h1>Welcome to Tenali</h1>
-          <button onClick={() => setStep('chooseTheme')}>Start Adventure</button>
-        </div>
-      ) : step === 'chooseTheme' ? (
-        <ThemeSelector onComplete={(theme) => {
-          setSelectedTheme(theme);
-          setStep('dashboard');
-        }} />
-      ) : (
-        <div className={`app-shell theme-${selectedTheme?.name?.toLowerCase() || 'default'}`}>
-          
-          {/* Dashboard Header Area */}
-          <MascotDisplay themeName={selectedTheme?.name} />
-          
-          {/* Floating Elements for Fantasy World */}
-          {selectedTheme?.name === 'Fantasy World' && (
-            <div className="floating-container">
-              <span className="float-item castle">🏰</span>
-              <span className="float-item moon">🌙</span>
-              <span className="float-item broom-flying">🧹</span>
-              <span className="float-item crystal">🔮</span>
+  <ThemeContext.Provider value={{ selectedTheme, setSelectedTheme }}>
+    {step === 'welcome' ? (
+      <div className="welcome-screen">
+        <h1>Welcome to Tenali</h1>
+        <button onClick={() => setStep('chooseTheme')}>Start Adventure</button>
+      </div>
+    ) : step === 'chooseTheme' ? (
+      <ThemeSelector onComplete={(theme) => {
+        setSelectedTheme(theme);
+        setStep('dashboard');
+      }} />
+    ) : (
+      <div className={`app-shell theme-${selectedTheme?.name?.toLowerCase() || 'default'}`}>
+        
+        {/* Dashboard Header Area */}
+        <MascotDisplay themeName={selectedTheme?.name} />
+        <div className="superhero-skyline"></div>
+
+        {/* Floating Elements for Fantasy World */}
+        {selectedTheme?.name === 'Fantasy World' && (
+          <div className="floating-container">
+            <span className="float-item castle">🏰</span>
+            <span className="float-item moon">🌙</span>
+            <span className="float-item broom-flying">🧹</span>
+            <span className="float-item crystal">🔮</span>
+          </div>
+        )}
+
+        {/* Floating Elements for Space Theme */}
+        {(selectedTheme?.name?.toLowerCase().includes('space') || selectedTheme?.id?.toLowerCase().includes('space')) && (
+          <div className="floating-container">
+            {/* 1. Rocket Wrapper */}
+            <div className="rocket-path-wrapper">
+              <span className="float-item rocket">🚀</span>
             </div>
-          )}
 
-         {/* Floating Elements for Space Theme (Robust Catch-All Matching) */}
-{(selectedTheme?.name?.toLowerCase().includes('space') || selectedTheme?.id?.toLowerCase().includes('space')) && (
-  <div className="floating-container">
-    
-    {/* 1. Rocket Wrapper (Uses the separated horizontal/vertical curve) */}
-    <div className="rocket-path-wrapper">
-      <span className="float-item rocket">🚀</span>
+            {/* 2. UFO Wrapper */}
+            <div className="ufo-path-wrapper">
+              <span className="float-item ufo">🛸</span>
+            </div>
+            <div className="vibrating-planet-wrapper">
+              <span className="float-item planet">🌑</span>
+            </div>
+          </div>
+        )}
+
+        {/* Floating Container for Superhero Theme (Emoji Skyline) */}
+{/* Floating Container for Superhero Theme */}
+{(selectedTheme?.name?.toLowerCase().includes('superhero') || selectedTheme?.id?.toLowerCase().includes('superhero')) && (
+  <div className="superhero-container">
+    {/* 1. Energy Portal & Beams */}
+    <div className="sky-portal">
+      <div className="power-beam beam-left"></div>
+      <div className="power-beam beam-right"></div>
     </div>
 
-    {/* 2. UFO Wrapper (Uses the standalone ufoFlight animation) */}
-    <div className="ufo-path-wrapper">
-      <span className="float-item ufo">🛸</span>
+    {/* 2. Flying Superhero Elements */}
+    <div className="hero-flyer-path">
+      <span className="hero-cape">🛩️</span>
     </div>
-    <div className="vibrating-planet-wrapper">
-      <span className="float-item planet">🌑</span>
-    </div>
+
+    {/* 3. Solid City Skyline Layer */}
+    <div className="vector-skyline-silhouette"></div>
   </div>
 )}
-          
-          {/* Glassmorphism Content Card */}
-          <div className="card" style={{
-            backgroundColor: 'rgba(0, 0, 0, 0.3)',
-            backdropFilter: 'blur(8px)',
-            WebkitBackdropFilter: 'blur(8px)',
-            borderRadius: '16px',
-            boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.1)',
-            position: 'relative',
-            zIndex: 2 /* Sits firmly between background and floating emojis */
-          }}>
-            {!mode ? (
-              <Home onComplete={setMode} />
-            ) : (
-              <ActiveApp onBack={() => setMode(null)} />
-            )}
-          </div>
+{/* Floating Container for Jurassic Theme */}
+{(selectedTheme?.name?.toLowerCase().includes('jurassic') || selectedTheme?.id?.toLowerCase().includes('jurassic')) && (
+  <div className="jurassic-container">
+    {/* 1. Corrected Falling Meteors Layer */}
+    <div className="meteor-shower">
+      <span className="meteor m1">☄️</span>
+      <span className="meteor m2">☄️</span>
+      <span className="meteor m3">☄️</span>
+      <span className="meteor m4">☄️</span>
+    </div>
+
+    {/* 2. Centered Erupting Volcano Silhouette */}
+<div className="volcano-silhouette">
+  <div className="lava-glow"></div>
+  
+</div>
+  </div>
+)}
+        
+        {/* Glassmorphism Content Card */}
+        <div className="card" style={{
+          backgroundColor: 'rgba(0, 0, 0, 0.3)',
+          backdropFilter: 'blur(8px)',
+          WebkitBackdropFilter: 'blur(8px)',
+          borderRadius: '16px',
+          boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.1)',
+          position: 'relative',
+          zIndex: 2 /* Keeps content card structurally above the skyline background */
+        }}>
+          {!mode ? (
+            <Home onComplete={setMode} />
+          ) : (
+            <ActiveApp onBack={() => setMode(null)} />
+          )}
         </div>
-      )}
-    </ThemeContext.Provider>
-  );
+      </div>
+    )}
+  </ThemeContext.Provider>
+);
 }/**
  * Home Component
  * Main menu screen showing all available quizzes in a searchable grid.
