@@ -36128,14 +36128,29 @@ return (
 
         {/* Floating Elements for Fantasy World */}
         {selectedTheme?.name === 'Fantasy World' && (
-          <div className="floating-container">
-            <span className="float-item castle">🏰</span>
-            <span className="float-item moon">🌙</span>
-            <span className="float-item broom-flying">🧹</span>
-            <span className="float-item crystal">🔮</span>
+        <div className="fantasy-theme floating-container">
+          {/* Background layer */}
+          <div className="float-item moon-glow">🌙</div>
+          
+          {/* Element 1: Background Mist (Placed BEFORE the castle) */}
+          <div className="mist-container">
+            <div className="mist-layer back"></div>
           </div>
-        )}
 
+          <div className="float-item castle-bg">🏰</div> 
+          {/* Element 1: Foreground Mist (Placed AFTER the castle) */}
+          <div className="mist-container">
+            <div className="mist-layer front"></div>
+          </div>
+          {/* Element 2: Floating Magical Wisps (Floats over everything) */}
+          <div className="wisp-container">
+            <div className="wisp wisp-1"></div>
+            <div className="wisp wisp-2"></div>
+            <div className="wisp wisp-3"></div>
+            <div className="wisp wisp-4"></div>
+          </div>
+        </div>
+      )}
         {/* Floating Elements for Space Theme */}
         {(selectedTheme?.name?.toLowerCase().includes('space') || selectedTheme?.id?.toLowerCase().includes('space')) && (
           <div className="floating-container">
@@ -36154,43 +36169,44 @@ return (
           </div>
         )}
 
-        {/* Floating Container for Superhero Theme (Emoji Skyline) */}
-{/* Floating Container for Superhero Theme */}
-{(selectedTheme?.name?.toLowerCase().includes('superhero') || selectedTheme?.id?.toLowerCase().includes('superhero')) && (
-  <div className="superhero-container">
-    {/* 1. Energy Portal & Beams */}
-    <div className="sky-portal">
-      <div className="power-beam beam-left"></div>
-      <div className="power-beam beam-right"></div>
-    </div>
+        {/* Floating Container for Superhero Theme */}
+        {(selectedTheme?.name?.toLowerCase().includes('superhero') || selectedTheme?.id?.toLowerCase().includes('superhero')) && (
+          <div className="superhero-container">
+            {/* 1. Energy Portal & Beams */}
+            <div className="sky-portal">
+              <div className="power-beam beam-1"></div>
+              <div className="power-beam beam-2"></div>
+              <div className="power-beam beam-3"></div>
+              <div className="power-beam beam-4"></div>
+            </div>
 
-    {/* 2. Flying Superhero Elements */}
-    <div className="hero-flyer-path">
-      <span className="hero-cape">🛩️</span>
-    </div>
+            {/* 2. Flying Superhero Elements */}
+            <div className="hero-flyer-path">
+              <span className="plane">🛩️</span>
+            </div>
 
-    {/* 3. Solid City Skyline Layer */}
-    <div className="vector-skyline-silhouette"></div>
-  </div>
-)}
-{/* Floating Container for Jurassic Theme */}
-{(selectedTheme?.name?.toLowerCase().includes('jurassic') || selectedTheme?.id?.toLowerCase().includes('jurassic')) && (
-  <div className="jurassic-container">
-    {/* 1. Corrected Falling Meteors Layer */}
-    <div className="meteor-shower">
-      <span className="meteor m1">☄️</span>
-      <span className="meteor m2">☄️</span>
-      <span className="meteor m3">☄️</span>
-      <span className="meteor m4">☄️</span>
-    </div>
+            {/* 3. Solid City Skyline Layer */}
+            <div className="vector-skyline-silhouette"></div>
+          </div>
+        )}
+    {/* Floating Container for Jurassic Theme */}
+    {(selectedTheme?.name?.toLowerCase().includes('jurassic') || selectedTheme?.id?.toLowerCase().includes('jurassic')) && (
+      <div className="jurassic-container">
+        {/* 1. Corrected Falling Meteors Layer */}
+        <div className="meteor-shower">
+          <span className="meteor m1">☄️</span>
+          <span className="meteor m2">☄️</span>
+          <span className="meteor m3">☄️</span>
+          <span className="meteor m4">☄️</span>
+        </div>
 
-    {/* 2. Centered Erupting Volcano Silhouette */}
-<div className="volcano-silhouette">
-  <div className="lava-glow"></div>
-  
-</div>
-  </div>
-)}
+        {/* 2. Centered Erupting Volcano Silhouette */}
+    <div className="volcano-silhouette">
+      <div className="lava-glow"></div>
+      
+    </div>
+      </div>
+    )}
         
         {/* Glassmorphism Content Card */}
         <div className="card" style={{

@@ -2613,64 +2613,7 @@ atmosphere-overlay {
 .theme-fantasy { background: linear-gradient(135deg, #2c3e50, #8e44ad); }
 .theme-superhero { background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); }
 .theme-jurassic { background: linear-gradient(135deg, #134e5e, #71b280); }
-/* Container remains the same */
-.floating-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  overflow:visible;
-  z-index:0;
-}
 
-/* Individual Styles */
-.castle {
-  position: absolute;
-  top: 50;
-  right:20px;
-  font-size: 20rem; /* Big size */
-}
-
-.moon {
-  position: absolute;
-  top: 10%;
-  left: 15%;
-  font-size: 2.5rem;
-  animation: pulse 3s infinite; /* Different animation */
-}
-
-
-/* Add this to your existing animations */
-@keyframes flyDiagonal {
-  0% { transform: translate(5vw, 80vh); } /* Start off-screen left */
-  100% { transform: translate(80vh,5vw); } /* End off-screen right */
-}
-
-/* Add this class to your broom element */
-.broom-flying {
-  animation: flyDiagonal 10s linear infinite;
-  position: fixed;
-  top: 50%; /* Adjust height as needed */
-  font-size: 3rem;
-  overflow:visible;
-  z-index:-1;
-}
-
-.crystal {
-  position: absolute;
-  bottom: 15%;
-  right: 10%;
-  font-size: 10rem;
-  animation: pulse 3s infinite;
-}
-
-/* Define different animations */
-@keyframes pulse {
-  0%, 100% { opacity: 0.5; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.1); }
-}
 
 @keyframes drift {
   0%, 100% { transform: translateY(0); }
@@ -2725,23 +2668,7 @@ atmosphere-overlay {
 }
 
 /* Creating the stars layer + adding twinkle animation */
-.app-shell.theme-space::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 2px;
-  height: 2px;
-  background: transparent;
-  box-shadow: 
-    15vw 10vh #fff, 35vw 25vh rgba(255,255,255,0.7), 75vw 15vh #fff, 
-    90vw 40vh rgba(255,255,255,0.8), 20vw 60vh #fff, 50vw 50vh rgba(255,255,255,0.5), 
-    85vw 70vh #fff, 10vw 85vh rgba(255,255,255,0.9), 60vw 80vh #fff,
-    40vw 90vh #fff, 65vw 30vh rgba(255,255,255,0.6), 80vw 95vh #fff;
-  
-  /* UPDATED: Runs the twinkle animation indefinitely */
-  animation: twinkle 3s infinite ease-in-out;
-}
+
 
 /* NEW: Twinkle Keyframes */
 @keyframes twinkle {
@@ -2752,9 +2679,6 @@ atmosphere-overlay {
     opacity: 1; /* Stars shine bright */
   }
 }
-/* ==========================================
-   SPACE THEME STYLING & ANIMATIONS
-   ========================================== */
 
 /* Active Space Layout Wrapper */
 .app-shell.theme-space,
@@ -2837,23 +2761,14 @@ atmosphere-overlay {
     opacity: 0;
   }
 }
-/* Clean standalone engine matching your App.jsx layout */
-.floating-container .ufo-path-wrapper {
-  position: absolute;
-  bottom: 0;
-  right: 10%; 
-  font-size: 2.2rem;
-  z-index: 100;
-  animation: ufoFlight 12s infinite linear;
-}
 
 .floating-container .ufo-path-wrapper {
   position: absolute;
   bottom: 0;
   right: 10%; 
   font-size: 2.2rem;
-  z-index: 100;
-  animation: ufoFlight 14s infinite linear; /* Slightly increased total duration for three clean maneuvers */
+  z-index: -1;
+  animation: ufoFlight 14s infinite linear; 
 }
 
 @keyframes ufoFlight {
@@ -2963,9 +2878,9 @@ atmosphere-overlay {
   transform: translateX(-50%);
   width: 160px;
   height: 160px;
-  background: radial-gradient(circle, #fff 0%, #fef08a 30%, #f59e0b 70%, transparent 100%);
+  background: radial-gradient(circle, #f7ef06 0%, #f28705 30%, #ddc80b 70%, transparent 100%);
   border-radius: 50%;
-  filter: drop-shadow(0 0 30px #f59e0b);
+  filter: drop-shadow(0 0 30px #ffa807);
   animation: portalPulse 3s infinite ease-in-out alternate;
 }
 
@@ -2987,14 +2902,23 @@ atmosphere-overlay {
   transform-origin: top center;
 }
 
-.app-shell.theme-superhero .beam-left {
+.app-shell.theme-superhero .beam-1 {
   left: 30%;
   transform: rotate(25deg);
 }
 
-.app-shell.theme-superhero .beam-right {
+.app-shell.theme-superhero .beam-2 {
   right: 30%;
   transform: rotate(-25deg);
+}
+.app-shell.theme-superhero .beam-3 {
+  left: 50%;
+  transform: rotate(50deg);
+}
+
+.app-shell.theme-superhero .beam-4 {
+  right: 70%;
+  transform: rotate(-50deg);
 }
 
 /* ===================================================
@@ -3024,15 +2948,11 @@ atmosphere-overlay {
 }
 
 /* ===================================================
-   4. Flying Hero Path
+   4. Flying  Path
    =================================================== */
-.app-shell.theme-superhero .hero-flyer-path {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
 
-.app-shell.theme-superhero .hero-cape {
+
+.app-shell.theme-superhero .plane {
   position: absolute;
   font-size: 3.5rem;
   animation: heroFlight 12s infinite linear;
@@ -3144,4 +3064,173 @@ atmosphere-overlay {
     transform: translate(-45vw, 75vh) scale(1.2);
     opacity: 0;
   }
+}
+
+/* ===================================================
+   Fantasy Theme
+   =================================================== */
+/* Container setup for the purple environment (Kept exactly as requested) */
+.fantasy-theme.floating-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; 
+  z-index: 1;
+  overflow: hidden;
+  background: radial-gradient(circle at 80% 20%, #2d124d 0%, #10061e 70%);
+}
+
+/* Base style for floating items */
+.fantasy-theme .float-item {
+  position: absolute;
+  user-select: none;
+}
+
+/* 1. Pure CSS Castle Silhouette */
+.fantasy-theme .castle-bg {
+  position: fixed; 
+  bottom: 0;
+  left: 0;
+  width: 100vw; 
+  height: 80vh;
+  opacity: 1; 
+  background: #10061e;
+  z-index: 2;
+  
+  /* Left side features a stepped outer curtain wall; 
+     the main slim towers are tightly clustered on the right side */
+  clip-path: polygon(
+    0% 100%, 0% 70%, 10% 70%, 10% 65%, 13% 65%, 13% 70%, 25% 70%, 25% 65%, 28% 65%, 28% 70%, 45% 70%,
+    
+    /* Main Tower 1 Begins (at 45% mark) */
+    45% 40%, 47% 15%, 49% 40%, 51% 40%, 51% 65%, 
+    /* Tight Battlements 1 */
+    53% 65%, 53% 60%, 55% 60%, 55% 65%, 57% 65%, 57% 60%, 59% 60%, 59% 65%, 
+    /* Main Tower 2 */
+    62% 65%, 62% 30%, 64% 0%, 66% 30%, 69% 30%, 69% 50%, 
+    /* Mid Junction Wall */
+    72% 50%, 72% 35%, 74% 20%, 76% 35%, 79% 35%, 79% 70%, 
+    /* Main Tower 3 */
+    82% 70%, 82% 40%, 84% 15%, 86% 40%, 88% 40%, 88% 65%, 
+    /* Tight Battlements 2 */
+    90% 65%, 90% 60%, 92% 60%, 92% 65%, 94% 65%, 94% 60%, 96% 60%, 96% 65%, 
+    /* Main Tower 4 */
+    97% 65%, 97% 30%, 99% 0%, 100% 30%,
+    
+    /* Edge Closing */
+    100% 100%
+  );
+}
+/* 2. Moon (Adjusted position to glow right behind the main castle spires) */
+.fantasy-theme .moon-glow {
+  top: 15%;
+  right: 12%;
+  font-size: 5rem;
+  text-shadow: 0 0 30px #ffd269, 0 0 60px #b64fc8;
+  z-index: 1;
+}
+
+/* 3. Witch's Broom (Position shifted slightly down for better visual composition) */
+
+/* Ensure your existing castle has this z-index to manage the layering */
+.fantasy-theme .castle-bg {
+  z-index: 5;
+}
+
+/* ==========================================================================
+   Mist and Clouds Layouts
+   ========================================================================== */
+.mist-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 40vh; 
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.mist-layer {
+  position: absolute;
+  width: 300vw; 
+  height: 100%;
+  background: repeat-x linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(147, 112, 219, 0.08) 40%,
+    rgba(16, 6, 30, 0.4) 80%,
+    rgba(16, 6, 30, 0.9) 100%
+  );
+}
+
+.mist-container:has(.front) {
+  z-index: 6; /* Sits directly on top of the castle base */
+}
+
+.mist-layer.front {
+  animation: driftRight 25s linear infinite;
+  filter: blur(8px);
+}
+
+.mist-layer.back {
+  z-index: 4; /* Sits completely behind the castle profile */
+  height: 50vh;
+  opacity: 0.6;
+  animation: driftLeft 40s linear infinite;
+  filter: blur(12px);
+}
+
+@keyframes driftRight {
+  0% { transform: translateX(-100vw); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes driftLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100vw); }
+}
+
+/* ==========================================================================
+   Rising Wisps
+   ========================================================================== */
+.wisp-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 7; /* Top layer */
+}
+
+.wisp {
+  position: absolute;
+  bottom: -20px;
+  background: radial-gradient(circle, rgba(224, 180, 255, 1) 0%, rgba(138, 43, 226, 0) 70%);
+  border-radius: 50%;
+  opacity: 0;
+  box-shadow: 0 0 10px rgba(147, 112, 219, 0.6);
+}
+
+.wisp-1 { left: 15%; width: 6px; height: 6px; animation: floatUp1 9s ease-in-out infinite; }
+.wisp-2 { left: 45%; width: 4px; height: 4px; animation: floatUp2 12s ease-in-out infinite; animation-delay: 2s; }
+.wisp-3 { left: 70%; width: 8px; height: 8px; animation: floatUp1 10s ease-in-out infinite; animation-delay: 4s; }
+.wisp-4 { left: 88%; width: 5px; height: 5px; animation: floatUp2 11s ease-in-out infinite; animation-delay: 1s; }
+
+@keyframes floatUp1 {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 0.7; }
+  50% { transform: translateY(-40vh) translateX(-30px); }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(-85vh) translateX(10px); opacity: 0; }
+}
+
+@keyframes floatUp2 {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  15% { opacity: 0.8; }
+  50% { transform: translateY(-45vh) translateX(40px); }
+  85% { opacity: 0.4; }
+  100% { transform: translateY(-90vh) translateX(-15px); opacity: 0; }
 }
