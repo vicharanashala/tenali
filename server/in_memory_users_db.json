@@ -1,0 +1,449 @@
+{
+  "sudarshan": {
+    "username": "sudarshan",
+    "completedTopics": [
+      "addition-started",
+      "addition-easy",
+      "multiply-started",
+      "basicarith-started",
+      "basicarith-easy",
+      "percent-started",
+      "percent-medium"
+    ],
+    "goldMastery": [],
+    "coins": 15,
+    "achievements": {
+      "completedCollections": []
+    },
+    "pinnedBadges": [
+      "",
+      "",
+      ""
+    ],
+    "totalSolved": 29,
+    "streak": 1,
+    "lastActiveDate": "2026-07-13",
+    "createdAt": "2026-07-13T08:29:36.763Z",
+    "milestones": [
+      {
+        "event": "Joined Tenali",
+        "date": "2026-07-13T08:29:36.763Z",
+        "type": "system"
+      },
+      {
+        "event": "Started Addition",
+        "date": "2026-07-13T08:29:36.763Z",
+        "type": "topic",
+        "badgeType": "topic"
+      },
+      {
+        "event": "Unlocked Bronze in Addition",
+        "date": "2026-07-13T08:29:36.763Z",
+        "type": "topic",
+        "badgeType": "topic"
+      },
+      {
+        "event": "Started Multiply",
+        "date": "2026-07-13T08:29:36.763Z",
+        "type": "topic",
+        "badgeType": "topic"
+      },
+      {
+        "event": "Started Basicarith",
+        "date": "2026-07-13T08:29:36.763Z",
+        "type": "topic",
+        "badgeType": "topic"
+      },
+      {
+        "event": "Started Decimals",
+        "date": "2026-07-13T08:29:36.763Z",
+        "type": "topic",
+        "badgeType": "topic"
+      },
+      {
+        "event": "Unlocked Bronze in Decimals",
+        "date": "2026-07-13T08:29:36.763Z",
+        "type": "topic",
+        "badgeType": "topic"
+      },
+      {
+        "event": "Unlocked Bronze in Basicarith",
+        "date": "2026-07-13T08:29:36.763Z",
+        "type": "topic",
+        "badgeType": "topic"
+      },
+      {
+        "event": "Started Percent",
+        "date": "2026-07-13T08:29:36.763Z",
+        "type": "topic",
+        "badgeType": "topic"
+      },
+      {
+        "event": "Unlocked Bronze in Percent",
+        "date": "2026-07-13T08:29:36.763Z",
+        "type": "topic",
+        "badgeType": "topic"
+      },
+      {
+        "event": "Unlocked Silver in Percent",
+        "date": "2026-07-13T08:29:36.763Z",
+        "type": "topic",
+        "badgeType": "topic"
+      }
+    ],
+    "attemptLogs": [
+      {
+        "topicKey": "addition",
+        "questionPrompt": "Addition: 5 + 7",
+        "userInput": "12",
+        "correct": true,
+        "timestamp": "2026-07-13T08:29:36.791Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "basicarith",
+        "questionPrompt": "Arithmetic: 7 − 4",
+        "userInput": "3",
+        "correct": true,
+        "timestamp": "2026-07-13T08:31:57.299Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "basicarith",
+        "questionPrompt": "Arithmetic: 8 + -5",
+        "userInput": "3",
+        "correct": true,
+        "timestamp": "2026-07-13T08:32:05.100Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "addition",
+        "questionPrompt": "Addition: 5 + 7",
+        "userInput": "12",
+        "correct": true,
+        "timestamp": "2026-07-13T08:37:33.738Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "decimals",
+        "questionPrompt": "10.1 + 7.0 = ?",
+        "userInput": "17.1",
+        "correct": true,
+        "timestamp": "2026-07-13T09:05:00.320Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "decimals",
+        "questionPrompt": "7.6 + 8.2 = ?",
+        "userInput": "15.8",
+        "correct": true,
+        "timestamp": "2026-07-13T09:05:20.297Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "basicarith",
+        "questionPrompt": "Arithmetic: 16 ÷ -8",
+        "userInput": "-2",
+        "correct": true,
+        "timestamp": "2026-07-13T09:05:39.813Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "basicarith",
+        "questionPrompt": "Arithmetic: -3 + -2",
+        "userInput": "-5",
+        "correct": true,
+        "timestamp": "2026-07-13T09:05:51.502Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "addition",
+        "questionPrompt": "Addition: 5 + 7",
+        "userInput": "12",
+        "correct": true,
+        "timestamp": "2026-07-13T09:16:43.458Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "basicarith",
+        "questionPrompt": "Arithmetic: -42 ÷ -7",
+        "userInput": "6",
+        "correct": true,
+        "timestamp": "2026-07-13T09:21:31.255Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "basicarith",
+        "questionPrompt": "Arithmetic: -1 + 5",
+        "userInput": "4",
+        "correct": true,
+        "timestamp": "2026-07-13T09:22:43.183Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "basicarith",
+        "questionPrompt": "Arithmetic: -4 × -9",
+        "userInput": "36",
+        "correct": true,
+        "timestamp": "2026-07-13T09:23:38.606Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "basicarith",
+        "questionPrompt": "Arithmetic: 63 ÷ -9",
+        "userInput": "-7",
+        "correct": true,
+        "timestamp": "2026-07-13T09:24:34.074Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "basicarith",
+        "questionPrompt": "Arithmetic: 5 − 6",
+        "userInput": "-1",
+        "correct": true,
+        "timestamp": "2026-07-13T09:26:04.689Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "basicarith",
+        "questionPrompt": "Arithmetic: 24 ÷ 3",
+        "userInput": "8",
+        "correct": true,
+        "timestamp": "2026-07-13T09:27:24.945Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "basicarith",
+        "questionPrompt": "Arithmetic: 2 × 3",
+        "userInput": "66",
+        "correct": false,
+        "timestamp": "2026-07-13T09:28:44.011Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "basicarith",
+        "questionPrompt": "Arithmetic: 6 ÷ 6",
+        "userInput": "1",
+        "correct": true,
+        "timestamp": "2026-07-13T10:21:24.131Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "basicarith",
+        "questionPrompt": "Arithmetic: 6 × 9",
+        "userInput": "54",
+        "correct": true,
+        "timestamp": "2026-07-13T10:22:45.420Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "basicarith",
+        "questionPrompt": "Arithmetic: -1 × -7",
+        "userInput": "7",
+        "correct": true,
+        "timestamp": "2026-07-13T10:23:36.319Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "basicarith",
+        "questionPrompt": "Arithmetic: 4 + -6",
+        "userInput": "-2",
+        "correct": true,
+        "timestamp": "2026-07-13T10:24:09.419Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "basicarith",
+        "questionPrompt": "Arithmetic: -45 ÷ -5",
+        "userInput": "9",
+        "correct": true,
+        "timestamp": "2026-07-13T10:24:42.424Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "basicarith",
+        "questionPrompt": "Arithmetic: 8 + 3",
+        "userInput": "11",
+        "correct": true,
+        "timestamp": "2026-07-13T10:25:18.697Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "basicarith",
+        "questionPrompt": "Arithmetic: 7 − 9",
+        "userInput": "-2",
+        "correct": true,
+        "timestamp": "2026-07-13T10:35:37.799Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "basicarith",
+        "questionPrompt": "Arithmetic: 2 × -9",
+        "userInput": "-18",
+        "correct": true,
+        "timestamp": "2026-07-13T10:36:27.389Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "basicarith",
+        "questionPrompt": "Arithmetic: 4 × 7",
+        "userInput": "28",
+        "correct": true,
+        "timestamp": "2026-07-13T10:37:01.471Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "percent",
+        "questionPrompt": "What is 100% of 50?",
+        "userInput": "50",
+        "correct": true,
+        "timestamp": "2026-07-13T10:40:56.444Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "percent",
+        "questionPrompt": "What is 25% of 40?",
+        "userInput": "10",
+        "correct": true,
+        "timestamp": "2026-07-13T10:41:05.186Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "basicarith",
+        "questionPrompt": "Arithmetic: 7 × 2",
+        "userInput": "14",
+        "correct": true,
+        "timestamp": "2026-07-13T10:59:22.490Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "basicarith",
+        "questionPrompt": "Arithmetic: 5 − 5",
+        "userInput": "0",
+        "correct": true,
+        "timestamp": "2026-07-13T10:59:57.014Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "basicarith",
+        "questionPrompt": "Arithmetic: 9 + 3",
+        "userInput": "12",
+        "correct": true,
+        "timestamp": "2026-07-13T11:00:24.884Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "percent",
+        "questionPrompt": "What is 30% of 100?",
+        "userInput": "30",
+        "correct": true,
+        "timestamp": "2026-07-13T11:39:14.838Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      },
+      {
+        "topicKey": "percent",
+        "questionPrompt": "What is 75% of 300?",
+        "userInput": "225",
+        "correct": true,
+        "timestamp": "2026-07-13T11:39:32.984Z",
+        "hintsClickedCount": 0,
+        "timeSpentSeconds": 0,
+        "stageNumber": 3,
+        "challengeType": "standard"
+      }
+    ]
+  }
+}
