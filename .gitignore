@@ -5,3 +5,6 @@ server.log
 docs/
 docs/feature_walkthrough/
 docs/implementation_plans/
+server/dictionaryCache
+ISSUE_DRAFT.md
+PR_DRAFT.md

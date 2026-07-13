@@ -899,6 +899,19 @@ button:disabled {
   letter-spacing: 0.02em;
   /* tabular-nums: monospace numerals for consistent digit widths (MM:SS) */
   font-variant-numeric: tabular-nums;
+  transition: all 0.3s ease;
+}
+
+.timer-pill.speed {
+  background: rgba(255, 71, 87, 0.15);
+  color: #ff4757;
+  border: 1px solid rgba(255, 71, 87, 0.3);
+  animation: timer-pulse 1s infinite alternate;
+}
+
+@keyframes timer-pulse {
+  from { transform: scale(1); box-shadow: 0 0 0 rgba(255, 71, 87, 0); }
+  to { transform: scale(1.05); box-shadow: 0 0 8px rgba(255, 71, 87, 0.3); }
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -2733,3 +2746,158 @@ button:disabled {
   50% { filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.9)); }
   100% { filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.4)); }
 }
+/* Speed run timer pulse animation */
+@keyframes timerPulse {
+  from { transform: scale(1);   box-shadow: 0 0 0 0 rgba(244,67,54,0.4); }
+  to   { transform: scale(1.08); box-shadow: 0 0 0 6px rgba(244,67,54,0); }
+}
+.timer-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 12px;
+  border-radius: 20px;
+  border: 1.5px solid var(--clr-border, #444);
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  min-width: 48px;
+  justify-content: center;
+}
+
+/* ── Goal Based Practice Success Scorecard & Confetti ── */
+
+.goal-success-card {
+  padding: 2.5rem 2rem;
+  border-radius: 24px;
+  background: linear-gradient(135deg, var(--clr-card) 0%, var(--clr-surface) 100%);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  max-width: 600px;
+  margin: 2rem auto;
+  box-sizing: border-box;
+  animation: cardAppear 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Confetti particles */
+.confetti-particle {
+  position: absolute;
+  top: -10px;
+  animation: confetti-fall var(--confetti-duration) linear forwards;
+  pointer-events: none;
+  z-index: 999;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(600px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Success Checkmark */
+.success-checkmark-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+@keyframes checkmarkStroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes checkmarkScale {
+  0%, 100% {
+    transform: none;
+  }
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+
+@keyframes checkmarkFill {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px rgba(255,255,255,0.05);
+  }
+}
+
+/* Button overrides in scorecard */
+.goal-success-card button {
+  padding: 12px 24px !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  border-radius: 30px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  text-transform: none !important;
+  margin-top: 10px !important;
+}
+
+.goal-success-card button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.15);
+}
+
+/* Scrollbar styling for results inside scorecard */
+.goal-success-card ::-webkit-scrollbar {
+  width: 6px;
+}
+.goal-success-card ::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 10px;
+}
+.goal-success-card ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+}
+.goal-success-card ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Goal Practice Mode selection pills style overrides */
+.checkbox-pill.active[style*="#ffb300"],
+.checkbox-pill.active[style*="255,179,0"] {
+  background: rgba(232, 134, 74, 0.14) !important;
+  border-color: var(--clr-accent) !important;
+  color: var(--clr-accent) !important;
+}
+
+.checkbox-pill.active[style*="#f44336"],
+.checkbox-pill.active[style*="244,67,54"] {
+  background: rgba(255, 179, 0, 0.14) !important;
+  border-color: #ffb300 !important;
+  color: #ffb300 !important;
+}
+
+.checkbox-pill.active[style*="#2196f3"],
+.checkbox-pill.active[style*="33,150,243"] {
+  background: rgba(210, 124, 60, 0.14) !important;
+  border-color: #d27c3c !important;
+  color: #d27c3c !important;
+}
+
+/* Adaptive Mode rainbow pill override */
+.checkbox-pill.active[style*="linear-gradient"] {
+  background: linear-gradient(135deg, var(--clr-accent), #ffb300, #d27c3c) !important;
+  color: #fff !important;
+  border: none !important;
+}
+

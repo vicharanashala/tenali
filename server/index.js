@@ -47,6 +47,7 @@ const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
+const wordCreator = require('./wordCreator');
 
 // Initialize Express app and configure middleware
 const app = express();
@@ -125,6 +126,187 @@ app.use((req, res, next) => {
 
   next();
 });
+
+// ─── LIL INTERCEPTOR MIDDLEWARE ──────────────────────────────────────────────
+const jwt = require('jsonwebtoken');
+const lilProcess = require('./lil/processAttempt');
+const { User } = require('./auth');
+
+app.use(async (req, res, next) => {
+  // Only intercept POST requests to check endpoints
+  if (req.method !== 'POST' || !req.path.includes('-api/check')) {
+    return next();
+  }
+
+  // Skip if it is a solve request (since we only log standard attempts)
+  if (req.body && req.body.solve === true) {
+    return next();
+  }
+
+  // Resolve User ID from Bearer token
+  let userId = null;
+  const authHeader = req.get('authorization') || '';
+  const m = /^Bearer\s+(.+)$/i.exec(authHeader);
+  if (m) {
+    try {
+      const JWT_SECRET = process.env.JWT_SECRET || 'tenali-dev-secret-change-me';
+      const payload = jwt.verify(m[1], JWT_SECRET);
+      userId = payload.sub;
+    } catch (e) {
+      console.warn('[LIL] JWT verify failed:', e.message);
+    }
+  }
+
+  // Fallback: Resolve to seeded 'tatsavit' user if no token or invalid token
+  if (!userId) {
+    try {
+      const tatsavitUser = await User.findOne({ username: 'tatsavit' });
+      if (tatsavitUser) {
+        userId = tatsavitUser._id.toString();
+      }
+    } catch (e) {
+      console.error('[LIL] Fallback user lookup failed:', e.message);
+    }
+  }
+
+  // Extract topicId (e.g. "/addition-api/check" -> "addition")
+  const pathParts = req.path.split('/');
+  const apiName = pathParts[1] || '';
+  const topicId = apiName.replace('-api', '');
+
+  // Intercept response JSON
+  const originalJson = res.json.bind(res);
+  res.json = function (data) {
+    // Restore res.json to avoid recursion
+    res.json = originalJson;
+
+    // Async LIL execution wrapper
+    if (userId && topicId) {
+      const payloadInput = {
+        userId,
+        topicId,
+        difficulty: req.query.difficulty || req.body.difficulty || 'easy',
+        userAnswer: req.body.userAnswer ?? req.body.answer ?? '',
+        isCorrect: !!data.correct,
+        sessionGoal: req.body.sessionGoal || 'standard',
+        telemetry: req.body.telemetry || {},
+        prompt: req.body.prompt || '',
+        correctAnswer: req.body.correctAnswer ?? req.body.answer ?? data.correctAnswer ?? data.display ?? '',
+        display: req.body.display ?? data.display ?? '',
+        options: req.body.options || null,
+        questionData: req.body
+      };
+
+      lilProcess.processAttempt(payloadInput)
+        .then(lilResult => {
+          // Append LIL outcomes to the client response payload
+          data.lil = lilResult;
+          originalJson(data);
+        })
+        .catch(err => {
+          console.error('[LIL] processAttempt failed:', err);
+          originalJson(data);
+        });
+    } else {
+      originalJson(data);
+    }
+  };
+
+  next();
+});
+
+// ─── LIL GET QUESTION REVISION INTERCEPTOR ───────────────────────────────────
+app.use(async (req, res, next) => {
+  // Only intercept GET requests to question endpoints when goal is revision
+  if (req.method !== 'GET' || !req.path.includes('-api/question') || req.query.goal !== 'revision') {
+    return next();
+  }
+
+  // Resolve User ID from Bearer token
+  let userId = null;
+  const authHeader = req.get('authorization') || '';
+  const m = /^Bearer\s+(.+)$/i.exec(authHeader);
+  if (m) {
+    try {
+      const JWT_SECRET = process.env.JWT_SECRET || 'tenali-dev-secret-change-me';
+      const payload = jwt.verify(m[1], JWT_SECRET);
+      userId = payload.sub;
+    } catch (e) {
+      console.warn('[LIL GET] JWT verify failed:', e.message);
+    }
+  }
+
+  // Fallback: Resolve to seeded 'tatsavit' user if no token or invalid token
+  if (!userId) {
+    try {
+      const tatsavitUser = await User.findOne({ username: 'tatsavit' });
+      if (tatsavitUser) {
+        userId = tatsavitUser._id.toString();
+      }
+    } catch (e) {
+      console.error('[LIL GET] Fallback user lookup failed:', e.message);
+    }
+  }
+
+  // Extract topicId (e.g. "/addition-api/question" -> "addition")
+  const pathParts = req.path.split('/');
+  const apiName = pathParts[1] || '';
+  const topicId = apiName.replace('-api', '');
+
+  if (userId && topicId) {
+    try {
+      const mongoose = require('mongoose');
+      const { Attempt } = require('./lil/models');
+      
+      const unresolved = await Attempt.aggregate([
+        { $match: { 
+            userId: new mongoose.Types.ObjectId(userId), 
+            topicId, 
+            prompt: { $exists: true, $ne: null } 
+          } 
+        },
+        { $sort: { createdAt: -1 } },
+        { $group: {
+            _id: "$prompt",
+            latestAttempt: { $first: "$$ROOT" }
+        } },
+        { $match: { "latestAttempt.isCorrect": false } },
+        { $sort: { "latestAttempt.createdAt": -1 } }
+      ]);
+
+      const lastFailed = unresolved.length > 0 ? unresolved[0].latestAttempt : null;
+
+      if (lastFailed && lastFailed.prompt) {
+        console.log(`[LIL GET] Serving revision question from unresolved failed attempt: ${lastFailed._id}`);
+        if (lastFailed.questionData) {
+          // Exclude _id if there is any to prevent conflict, but copy everything else
+          const qData = { ...lastFailed.questionData };
+          delete qData._id;
+          return res.json({
+            ...qData,
+            isRevision: true
+          });
+        }
+        return res.json({
+          id: `rev-${lastFailed._id}-${Date.now()}`,
+          difficulty: lastFailed.difficulty || 'easy',
+          prompt: lastFailed.prompt,
+          answer: lastFailed.correctAnswer,
+          display: lastFailed.display || String(lastFailed.correctAnswer),
+          options: lastFailed.options || undefined,
+          isRevision: true
+        });
+      }
+    } catch (err) {
+      console.error('[LIL GET] Failed to fetch revision question:', err);
+    }
+  }
+
+  // If no failed attempts are found, proceed to normal question generation!
+  next();
+});
+
+
 
 /**
  * Generate a detailed, educational step-by-step explanation for how to solve the problem.
@@ -895,6 +1077,89 @@ function generateExplanation(req, data) {
       s += `Identify which angle relationship applies (line, point, or parallel lines), then apply the matching rule.\n\nAnswer: ${rDeg}.\n\n`;
     }
     s += `Tip: a quick sketch with the right shape (line, point, Z, F, C) makes it obvious which rule fits.`;
+    return s;
+  }
+
+  // ── HCF & LCM ─────────────────────────────────────────────────
+  if (p.includes('hcflcm-api')) {
+    const promptStr = b.prompt || '';
+    const diff = b.difficulty || 'easy';
+    let s = `Problem: ${promptStr}\n\n`;
+    s += `Let's solve this step-by-step:\n\n`;
+
+    const matches = promptStr.match(/\d+/g) || [];
+    
+    if (diff === 'easy') {
+      const n1 = parseInt(matches[0]);
+      const n2 = parseInt(matches[1]);
+      if (!isNaN(n1) && !isNaN(n2)) {
+        const getFactors = (n) => {
+          const f = [];
+          for (let i = 1; i <= n; i++) {
+            if (n % i === 0) f.push(i);
+          }
+          return f;
+        };
+        const f1 = getFactors(n1);
+        const f2 = getFactors(n2);
+        const common = f1.filter(x => f2.includes(x));
+        s += `Step 1: List all factors for each number:\n`;
+        s += `  • Factors of ${n1}: ${f1.join(', ')}\n`;
+        s += `  • Factors of ${n2}: ${f2.join(', ')}\n\n`;
+        s += `Step 2: Identify the common factors shared by both:\n`;
+        s += `  • Common factors: ${common.join(', ')}\n\n`;
+        s += `Step 3: Choose the Highest Common Factor (HCF):\n`;
+        s += `  • The largest number in the common factors list is ${ans}.\n\n`;
+      } else {
+        s += `• Find the Highest Common Factor (HCF) of the two numbers.\n`;
+        s += `• HCF is the largest number that divides both numbers perfectly.\n\n`;
+      }
+    } else if (diff === 'medium') {
+      const n1 = parseInt(matches[0]);
+      const n2 = parseInt(matches[1]);
+      if (!isNaN(n1) && !isNaN(n2)) {
+        s += `Step 1: List the first few multiples for each number:\n`;
+        s += `  • Multiples of ${n1}: ${[n1, n1 * 2, n1 * 3, n1 * 4, n1 * 5].join(', ')}...\n`;
+        s += `  • Multiples of ${n2}: ${[n2, n2 * 2, n2 * 3, n2 * 4, n2 * 5].join(', ')}...\n\n`;
+        s += `Step 2: Find the first (smallest) multiple they both share:\n`;
+        s += `  • The Lowest Common Multiple (LCM) is ${ans}.\n\n`;
+      } else {
+        s += `• Find the Lowest Common Multiple (LCM) of the two numbers.\n`;
+        s += `• LCM is the smallest number that is a multiple of both.\n\n`;
+      }
+    } else if (diff === 'hard') {
+      const n1 = parseInt(matches[0]);
+      const n2 = parseInt(matches[1]);
+      const n3 = parseInt(matches[2]);
+      if (!isNaN(n1) && !isNaN(n2) && !isNaN(n3)) {
+        const gcdVal = (a, b) => b === 0 ? a : gcdVal(b, a % b);
+        const lcmVal = (a, b) => Math.abs(a * b) / gcdVal(a, b);
+        const lcm12 = lcmVal(n1, n2);
+        s += `Step 1: Find the LCM of the first two numbers, ${n1} and ${n2}:\n`;
+        s += `  • LCM(${n1}, ${n2}) = ${lcm12}\n\n`;
+        s += `Step 2: Now, find the LCM of that result (${lcm12}) and the third number (${n3}):\n`;
+        s += `  • LCM(${lcm12}, ${n3}) = ${ans}\n\n`;
+        s += `The final LCM is ${ans}.\n\n`;
+      } else {
+        s += `• Find the LCM of the three numbers by finding the LCM of the first two, and then finding the LCM of the result and the third number.\n\n`;
+      }
+    } else {
+      const timeMatches = matches.filter(x => x !== '9' && x !== '00' && x !== '12');
+      const n1 = parseInt(timeMatches[0]);
+      const n2 = parseInt(timeMatches[1]);
+      if (!isNaN(n1) && !isNaN(n2)) {
+        s += `This word problem asks when two repeating events line up next, which means finding their Lowest Common Multiple (LCM).\n\n`;
+        s += `Step 1: List the multiples of the time intervals:\n`;
+        s += `  • Intervals for A (${n1} mins): ${[n1, n1 * 2, n1 * 3, n1 * 4, n1 * 5].join(', ')}...\n`;
+        s += `  • Intervals for B (${n2} mins): ${[n2, n2 * 2, n2 * 3, n2 * 4, n2 * 5].join(', ')}...\n\n`;
+        s += `Step 2: Find the LCM of ${n1} and ${n2}:\n`;
+        s += `  • LCM(${n1}, ${n2}) = ${ans.replace(/[^\d]/g, '')}\n\n`;
+        s += `The events align at the LCM. So they next happen together after ${ans}.\n\n`;
+      } else {
+        s += `• Analyze the recurring intervals to find their Lowest Common Multiple (LCM).\n\n`;
+      }
+    }
+    s += `Answer: ${ans}`;
     return s;
   }
 
@@ -6093,36 +6358,157 @@ app.get('/hcflcm-api/question', (req, res) => {
   const diff = req.query.difficulty || 'easy';
   let prompt, answer, display;
 
+  const type = randInt(1, 4);
+
   if (diff === 'easy') {
-    // HCF of two numbers
-    const g = randInt(2, 12);
-    const a = g * randInt(2, 7);
-    const b = g * randInt(2, 7);
-    answer = gcd(a, b);
-    display = String(answer);
-    prompt = `Find the HCF of ${a} and ${b}.`;
+    if (type === 1) {
+      // HCF of two numbers
+      const g = randInt(2, 8);
+      const a = g * randInt(2, 5);
+      const b = g * randInt(2, 5);
+      answer = gcd(a, b);
+      display = String(answer);
+      prompt = `Find the HCF (Highest Common Factor) of ${a} and ${b}.`;
+    } else if (type === 2) {
+      // HCF of two coprime numbers
+      const a = [9, 14, 15, 21, 25, 27][randInt(0, 5)];
+      const b = [8, 11, 16, 22, 26, 29][randInt(0, 5)];
+      answer = gcd(a, b);
+      display = String(answer);
+      prompt = `What is the Highest Common Factor (HCF) of ${a} and ${b}?`;
+    } else if (type === 3) {
+      // Simple word problem
+      const factors = [
+        { a: 12, b: 18, g: 6, fruit1: 'apples', fruit2: 'oranges' },
+        { a: 16, b: 24, g: 8, fruit1: 'stickers', fruit2: 'stamps' },
+        { a: 15, b: 20, g: 5, fruit1: 'pens', fruit2: 'pencils' },
+        { a: 8, b: 12, g: 4, fruit1: 'blue beads', fruit2: 'red beads' }
+      ][randInt(0, 3)];
+      answer = factors.g;
+      display = String(answer);
+      prompt = `A teacher has ${factors.a} ${factors.fruit1} and ${factors.b} ${factors.fruit2}. She wants to divide them equally among her students without leftovers. What is the maximum number of students who can get an equal share?`;
+    } else {
+      // HCF of a and b where a divides b
+      const a = randInt(3, 9);
+      const b = a * randInt(2, 4);
+      answer = a;
+      display = String(answer);
+      prompt = `Find the HCF of ${a} and ${b}.`;
+    }
   } else if (diff === 'medium') {
-    // LCM of two numbers
-    const a = randInt(4, 20);
-    const b = randInt(4, 20);
-    answer = lcm(a, b);
-    display = String(answer);
-    prompt = `Find the LCM of ${a} and ${b}.`;
+    if (type === 1) {
+      // LCM of two numbers
+      const a = randInt(4, 12);
+      const b = randInt(4, 12);
+      answer = lcm(a, b);
+      display = String(answer);
+      prompt = `Find the LCM (Lowest Common Multiple) of ${a} and ${b}.`;
+    } else if (type === 2) {
+      // LCM of prime numbers
+      const primes = [3, 5, 7, 11];
+      const a = primes[randInt(0, 3)];
+      let b = primes[randInt(0, 3)];
+      while (a === b) { b = primes[randInt(0, 3)]; }
+      answer = lcm(a, b);
+      display = String(answer);
+      prompt = `What is the Lowest Common Multiple (LCM) of ${a} and ${b}?`;
+    } else if (type === 3) {
+      // Simple LCM word problem
+      const p = [
+        { a: 6, b: 8, l: 24, thing: 'neon signs blink', unit: 'seconds' },
+        { a: 10, b: 15, l: 30, thing: 'bus schedules align', unit: 'minutes' },
+        { a: 4, b: 6, l: 12, thing: 'alarms beep', unit: 'minutes' }
+      ][randInt(0, 2)];
+      answer = p.l;
+      display = String(answer);
+      prompt = `Two ${p.thing} at intervals of ${p.a} and ${p.b} ${p.unit}. If they align now, after how many ${p.unit} will they next align?`;
+    } else {
+      // LCM of a and b where a divides b
+      const a = randInt(3, 8);
+      const b = a * randInt(2, 4);
+      answer = b;
+      display = String(answer);
+      prompt = `Find the LCM of ${a} and ${b}.`;
+    }
   } else if (diff === 'hard') {
-    // HCF and LCM of three numbers — ask for LCM
-    const a = randInt(4, 15);
-    const b = randInt(4, 15);
-    const c = randInt(4, 15);
-    answer = lcm(lcm(a, b), c);
-    display = String(answer);
-    prompt = `Find the LCM of ${a}, ${b}, and ${c}.`;
+    if (type === 1) {
+      // LCM of three numbers
+      const a = randInt(3, 8);
+      const b = randInt(3, 8);
+      const c = randInt(3, 8);
+      answer = lcm(lcm(a, b), c);
+      display = String(answer);
+      prompt = `Find the LCM of ${a}, ${b}, and ${c}.`;
+    } else if (type === 2) {
+      // HCF of three numbers
+      const g = randInt(2, 6);
+      const a = g * randInt(2, 4);
+      const b = g * randInt(2, 4);
+      const c = g * randInt(2, 4);
+      answer = gcd(gcd(a, b), c);
+      display = String(answer);
+      prompt = `Find the Highest Common Factor (HCF) of ${a}, ${b}, and ${c}.`;
+    } else if (type === 3) {
+      // Product formula problem
+      const base = [
+        { h: 4, l: 24, a: 8, b: 12 },
+        { h: 6, l: 36, a: 12, b: 18 },
+        { h: 5, l: 30, a: 10, b: 15 },
+        { h: 3, l: 18, a: 6, b: 9 }
+      ][randInt(0, 3)];
+      answer = base.b;
+      display = String(answer);
+      prompt = `The HCF of two numbers is ${base.h} and their LCM is ${base.l}. If one of the numbers is ${base.a}, what is the other number?`;
+    } else {
+      // Word problem with three runners
+      const a = [3, 4, 6][randInt(0, 2)];
+      const b = [4, 5, 8][randInt(0, 2)];
+      const c = [6, 8, 12][randInt(0, 2)];
+      answer = lcm(lcm(a, b), c);
+      display = String(answer);
+      prompt = `Three runners start running a lap together. Runner A completes a lap in ${a} minutes, Runner B in ${b} minutes, and Runner C in ${c} minutes. After how many minutes will they next meet at the starting point?`;
+    }
   } else {
-    // Word problem: Two buses leave at same time, intervals A and B min, when next together?
-    const a = randInt(8, 20);
-    const b = randInt(10, 25);
-    answer = lcm(a, b);
-    display = answer + ' minutes';
-    prompt = `Bus A departs every ${a} minutes and Bus B every ${b} minutes. They both leave at 9:00. After how many minutes will they next depart together?`;
+    // extrahard
+    if (type === 1) {
+      // HCF with remainder: largest number dividing a and b with remainder r
+      const r = randInt(2, 5);
+      const g = randInt(4, 10);
+      const f1 = randInt(2, 4);
+      const f2 = randInt(2, 4);
+      const a = g * f1 + r;
+      const b = g * f2 + r;
+      // answer is g
+      answer = gcd(a - r, b - r);
+      display = String(answer);
+      prompt = `Find the largest number that divides ${a} and ${b} leaving a remainder of ${r} in each case.`;
+    } else if (type === 2) {
+      // LCM with remainder: smallest number divided by a and b leaving remainder r
+      const r = randInt(2, 5);
+      const a = randInt(5, 10);
+      const b = randInt(5, 10);
+      answer = lcm(a, b) + r;
+      display = String(answer);
+      prompt = `What is the smallest positive integer which when divided by ${a} and ${b} leaves a remainder of ${r} in each case?`;
+    } else if (type === 3) {
+      // Merchant ribbon piece division
+      const lengths = [
+        { a: 48, b: 72, c: 96, g: 24 },
+        { a: 30, b: 45, c: 75, g: 15 },
+        { a: 36, b: 54, c: 90, g: 18 },
+        { a: 40, b: 60, c: 80, g: 20 }
+      ][randInt(0, 3)];
+      answer = lengths.g;
+      display = String(answer);
+      prompt = `A merchant has three pieces of ribbon of lengths ${lengths.a} cm, ${lengths.b} cm, and ${lengths.c} cm. He wants to cut them into equal pieces of the maximum possible length. What should be the length of each piece (in cm)?`;
+    } else {
+      // Neon lights word problem
+      const a = randInt(6, 12);
+      const b = randInt(8, 15);
+      answer = lcm(a, b);
+      display = String(answer);
+      prompt = `Two neon signs blink at different rates. Sign A blinks every ${a} seconds, and Sign B blinks every ${b} seconds. If they both blink together now, after how many seconds will they next blink together?`;
+    }
   }
 
   res.json({ prompt, answer, display, difficulty: diff });
@@ -8910,6 +9296,12 @@ app.post('/diffeq-api/check', express.json(), (req, res) => {
     : !isNaN(parseInt(userStr, 10)) && parseInt(userStr, 10) === answer;
   res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
 });
+
+// ═══════════════════════════════════════════════════════════════════════════
+// WORD CREATOR PUZZLE ROUTER (wordcreator-api)
+// ═══════════════════════════════════════════════════════════════════════════
+const wordCreatorRouter = require('./routes/wordCreator');
+app.use('/wordcreator-api', wordCreatorRouter);
 
 // ═══════════════════════════════════════════════════════════════════════════
 // /graph — Prerequisite DAG visualisation
