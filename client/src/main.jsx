@@ -21,7 +21,7 @@
 
 import React from 'react'; window.React = React;
 import ReactDOM from 'react-dom/client'
-import App, { AuthMenu } from './App.jsx?v=2'
+import App, { AuthMenu } from './App.jsx'
 import './index.css';
 import './kid-zone.css';
 
