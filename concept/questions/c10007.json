@@ -1,0 +1,15 @@
+{
+  "id": 10007,
+  "word": "Thermodynamics (Second Law)",
+  "question": "Thermodynamics (Second Law)",
+  "options": [
+    "Energy cannot be created or destroyed, only transformed",
+    "The total entropy of an isolated system can never decrease over time",
+    "For every action, there is an equal and opposite reaction",
+    "The acceleration of an object depends on its mass and the force applied"
+  ],
+  "answerOption": "B",
+  "answerText": "The total entropy of an isolated system can never decrease over time",
+  "difficulty": "medium",
+  "sourceFile": "c10007.json"
+}

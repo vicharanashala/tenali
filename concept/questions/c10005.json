@@ -1,0 +1,15 @@
+{
+  "id": 10005,
+  "word": "Variable",
+  "question": "Variable",
+  "options": [
+    "A fixed value that never changes during program execution",
+    "A named storage location in memory that holds a value",
+    "A function that returns a boolean value",
+    "A type of computer hardware component"
+  ],
+  "answerOption": "B",
+  "answerText": "A named storage location in memory that holds a value",
+  "difficulty": "easy",
+  "sourceFile": "c10005.json"
+}

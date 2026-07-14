@@ -1,0 +1,15 @@
+{
+  "id": 10015,
+  "word": "Nash Equilibrium",
+  "question": "Nash Equilibrium",
+  "options": [
+    "A state in economics where supply exactly matches demand",
+    "A solution concept in game theory where no player can benefit by changing strategies while others keep theirs unchanged",
+    "A biological state where an ecosystem's population remains constant over time",
+    "The point at which a chemical reaction runs equally fast in both directions"
+  ],
+  "answerOption": "B",
+  "answerText": "A solution concept in game theory where no player can benefit by changing strategies while others keep theirs unchanged",
+  "difficulty": "hard",
+  "sourceFile": "c10015.json"
+}

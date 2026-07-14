@@ -68,7 +68,9 @@ app.use(express.static(clientDistPath));
 // serves; only the auth endpoints will return 503.
 const auth = require('./auth');
 const transferScenarios = require('./transferScenarios');
+const progress = require('./progress');
 app.use('/api/auth', auth.router);
+app.use('/api/progress', progress.router);
 auth.seedUsers().catch(() => { });  // always populate in-memory fallback
 auth.connectMongo()
   .then(() => auth.seedUsers())
@@ -307,973 +309,7 @@ app.use(async (req, res, next) => {
 
   // If no failed attempts are found, proceed to normal question generation!
   next();
-});
-
-
-
-/**
- * Generate a detailed, educational step-by-step explanation for how to solve the problem.
- * Covers all ~60 puzzle types with contextual teaching.
- *
- * @param {object} req - Express request object (contains path and body)
- * @param {object} data - Response data object from the check endpoint
- * @returns {string|null} Explanation text or null if unable to generate
- */
-function generateExplanation(req, data) {
-  const p = req.path;
-  const b = req.body || {};
-  const d = data || {};
-  const ans = d.correctAnswer ?? d.display ?? d.answer ?? '';
-
-  try {
-
-    // ── Basic Arithmetic ──────────────────────────────────────────
-    if (p.includes('basicarith-api')) {
-      const { a, b: num2, op } = b;
-      const r = d.correctAnswer;
-      let s = `Problem: ${a} ${op} ${num2}\n\n`;
-      if (op === '+') {
-        if (Number(a) < 0 || Number(num2) < 0) {
-          s += `When adding negative numbers, think of a number line.\n`;
-          s += `Move right for positive, left for negative.\n`;
-        }
-        s += `${a} + ${num2} = ${r}\n\n`;
-        s += `Tip: Addition means combining quantities together.`;
-      } else if (op === '−' || op === '-') {
-        s += `Subtraction means finding the difference.\n`;
-        if (Number(num2) < 0) s += `Subtracting a negative is the same as adding: ${a} − (${num2}) = ${a} + ${Math.abs(num2)} = ${r}\n`;
-        else s += `${a} − ${num2} = ${r}\n`;
-        s += `\nTip: Think "how far apart are these numbers on the number line?"`;
-      } else if (op === '×') {
-        s += `Multiplication means repeated addition.\n`;
-        const absA = Math.abs(Number(a)), absB = Math.abs(Number(num2));
-        s += `${absA} × ${absB} = ${absA * absB}\n`;
-        const neg = (Number(a) < 0) !== (Number(num2) < 0);
-        if (neg) s += `One number is negative → result is negative: ${r}\n`;
-        else if (Number(a) < 0 && Number(num2) < 0) s += `Both negative → result is positive: ${r}\n`;
-        s += `\nRule: positive × positive = positive\nnegative × positive = negative\nnegative × negative = positive`;
-      } else if (op === '÷') {
-        // Division explanation
-        s += `Division asks: "How many times does ${num2} fit into ${a}?"\n`;
-        const absA = Math.abs(Number(a)), absB = Math.abs(Number(num2));
-        s += `\nStep 1: Divide the absolute values.\n`;
-        s += `  ${absA} ÷ ${absB} = ${absB === 0 ? 'undefined' : absA / absB}\n\n`;
-        s += `Step 2: Apply the sign rule (same as multiplication):\n`;
-        const neg = (Number(a) < 0) !== (Number(num2) < 0);
-        if (neg) s += `  One operand negative → quotient is negative.\n`;
-        else if (Number(a) < 0 && Number(num2) < 0) s += `  Both operands negative → quotient is positive.\n`;
-        else s += `  Both operands positive → quotient is positive.\n`;
-        s += `\nAnswer: ${a} ÷ ${num2} = ${r}\n\n`;
-        s += `Rule: positive ÷ positive = positive\nnegative ÷ positive = negative\nnegative ÷ negative = positive\nNote: division by 0 is undefined.`;
-      }
-      return s;
-    }
-
-    // ── Addition ──────────────────────────────────────────────────
-    if (p.includes('addition-api')) {
-      const { a, b: num2 } = b;
-      return `Problem: ${a} + ${num2}\n\nAdd the two numbers together:\n${a} + ${num2} = ${d.correctAnswer}\n\nTip: For large additions, break numbers into place values.\nExample: ${a} = ${Math.floor(a / 10) * 10} + ${a % 10}, then add.`;
-    }
-
-    // ── Multiplication Tables ─────────────────────────────────────
-    if (p.includes('multiply-api')) {
-      const { table, multiplier } = b;
-      const r = d.correctAnswer;
-      return `Problem: ${table} × ${multiplier}\n\nThis is the ${table}-times table:\n${table} × ${multiplier} = ${r}\n\nTip: Multiplication is repeated addition.\n${table} × ${multiplier} means adding ${table} to itself ${multiplier} times.\n${Array.from({ length: Math.min(multiplier, 5) }, (_, i) => table).join(' + ')}${multiplier > 5 ? ' + ...' : ''} = ${r}`;
-    }
-
-    // ── Quadratic Evaluation ──────────────────────────────────────
-    if (p.includes('quadratic-api') && !p.includes('qformula')) {
-      const { a, b: bCoeff, c, x } = b;
-      const r = d.correctAnswer;
-      let s = `Problem: Evaluate y = ${a}x² + ${bCoeff}x + ${c} at x = ${x}\n\n`;
-      s += `Step 1: Substitute x = ${x} into each term:\n`;
-      const t1 = a * x * x, t2 = bCoeff * x;
-      s += `  ${a}(${x})² = ${a} × ${x * x} = ${t1}\n`;
-      s += `  ${bCoeff}(${x}) = ${t2}\n`;
-      s += `  constant = ${c}\n\n`;
-      s += `Step 2: Add all terms:\n`;
-      s += `  ${t1} + ${t2} + ${c} = ${r}\n\n`;
-      s += `Tip: Always compute x² first, then multiply by the coefficient.`;
-      return s;
-    }
-
-    // ── Square Roots ──────────────────────────────────────────────
-    if (p.includes('sqrt-api')) {
-      const { q } = b;
-      const fl = d.floorAnswer, ce = d.ceilAnswer;
-      let s = `Problem: Approximate √${q}\n\n`;
-      s += `Step 1: Find perfect squares around ${q}:\n`;
-      s += `  ${fl}² = ${fl * fl}\n  ${ce}² = ${ce * ce}\n\n`;
-      s += `Step 2: Since ${fl * fl} ≤ ${q} ≤ ${ce * ce}:\n`;
-      s += `  ${fl} ≤ √${q} ≤ ${ce}\n\n`;
-      s += `√${q} ≈ ${d.sqrtRounded}\n\n`;
-      s += `Tip: Memorise perfect squares (1, 4, 9, 16, 25, 36, 49, 64, 81, 100...) to estimate roots quickly.`;
-      return s;
-    }
-
-    // ── Fraction Addition / Subtraction / Multiplication / Division ──
-    if (p.includes('fractionadd-api')) {
-      const { n1, d1, n2, d2, mixed, w1, w2 } = b;
-      const op = b.op || '+';
-      const opWord = op === '+' ? 'Add' : (op === '−' || op === '-') ? 'Subtract' : (op === '×' || op === '*') ? 'Multiply' : 'Divide';
-      let s = '';
-      if (mixed) {
-        s += `Problem: ${w1} ${n1}/${d1} ${op} ${w2} ${n2}/${d2}\n\n`;
-        s += `Step 1: Convert mixed numbers to improper fractions:\n`;
-        const imp1 = w1 * d1 + n1, imp2 = w2 * d2 + n2;
-        s += `  ${w1} ${n1}/${d1} = ${imp1}/${d1}\n`;
-        s += `  ${w2} ${n2}/${d2} = ${imp2}/${d2}\n\n`;
-        if (op === '+' || op === '−' || op === '-') {
-          s += `Step 2: Use a common denominator and ${opWord.toLowerCase()} numerators.\n`;
-        } else if (op === '×' || op === '*') {
-          s += `Step 2: Multiply numerators together and denominators together: (${imp1} × ${imp2}) / (${d1} × ${d2}).\n`;
-        } else {
-          s += `Step 2: Invert the second fraction and multiply: (${imp1}/${d1}) × (${d2}/${imp2}).\n`;
-        }
-      } else {
-        s += `Problem: ${n1}/${d1} ${op} ${n2}/${d2}\n\n`;
-        if (op === '+' || op === '−' || op === '-') {
-          if (d1 === d2) {
-            s += `Step 1: Same denominators! ${opWord} numerators directly:\n`;
-            const combined = (op === '+') ? (n1 + n2) : (n1 - n2);
-            s += `  ${n1}/${d1} ${op} ${n2}/${d2} = ${combined}/${d1}\n\n`;
-          } else {
-            const lcd = (d1 * d2) / gcd(d1, d2);
-            s += `Step 1: Find LCD of ${d1} and ${d2}: LCD = ${lcd}\n`;
-            s += `Step 2: Convert fractions:\n`;
-            s += `  ${n1}/${d1} = ${n1 * (lcd / d1)}/${lcd}\n`;
-            s += `  ${n2}/${d2} = ${n2 * (lcd / d2)}/${lcd}\n\n`;
-            const combined = (op === '+') ? (n1 * (lcd / d1) + n2 * (lcd / d2)) : (n1 * (lcd / d1) - n2 * (lcd / d2));
-            s += `Step 3: ${opWord} numerators: ${n1 * (lcd / d1)} ${op} ${n2 * (lcd / d2)} = ${combined}\n\n`;
-          }
-        } else if (op === '×' || op === '*') {
-          s += `Step 1: Multiply numerators and denominators:\n`;
-          s += `  (${n1} × ${n2}) / (${d1} × ${d2}) = ${n1 * n2}/${d1 * d2}\n\n`;
-        } else {
-          s += `Step 1: Invert the divisor and multiply:\n`;
-          s += `  ${n1}/${d1} ÷ ${n2}/${d2} = ${n1}/${d1} × ${d2}/${n2} = ${n1 * d2}/${d1 * n2}\n\n`;
-        }
-      }
-      s += `Step: Simplify to lowest terms.\n`;
-      s += `Answer: ${d.display}\n\n`;
-      s += `Tip: Always simplify by dividing numerator and denominator by their GCD.`;
-      return s;
-    }
-
-    // ── Polynomial Multiplication ─────────────────────────────────
-    if (p.includes('polymul-api')) {
-      const { p1, p2, p1Display, p2Display } = b;
-      let s = `Problem: Multiply ${p1Display || 'P₁'} × ${p2Display || 'P₂'}\n\n`;
-      s += `Method: Multiply each term of the first polynomial by each term of the second.\n\n`;
-      if (p1 && p2) {
-        s += `Step 1: Distribute each term:\n`;
-        for (let i = 0; i < p1.length; i++) {
-          if (p1[i] === 0) continue;
-          const terms = p2.map((c, j) => c === 0 ? null : `${p1[i] * c}x^${(p1.length - 1 - i) + (p2.length - 1 - j)}`).filter(Boolean);
-          s += `  ${p1[i]}x^${p1.length - 1 - i} × each term → ${terms.join(', ')}\n`;
-        }
-        s += `\nStep 2: Combine like terms (same power of x)\n`;
-      }
-      s += `\nAnswer: ${d.correctDisplay || d.display}\n\n`;
-      s += `Tip: Use the FOIL method for binomials, or grid method for longer polynomials.`;
-      return s;
-    }
-
-    // ── Polynomial Factorization ──────────────────────────────────
-    if (p.includes('polyfactor-api')) {
-      const { a, b: bCoeff, c } = b;
-      let s = `Problem: Factorise ${a}x² + ${bCoeff}x + ${c}\n\n`;
-      s += `Method: Find two numbers that multiply to give a×c = ${a * c}\nand add to give b = ${bCoeff}.\n\n`;
-      s += `Step 1: List factor pairs of ${a * c}.\n`;
-      s += `Step 2: Find the pair that sums to ${bCoeff}.\n`;
-      s += `Step 3: Rewrite the middle term using those factors.\n`;
-      s += `Step 4: Factor by grouping.\n\n`;
-      s += `Answer: ${d.display || '(check factored form)'}\n\n`;
-      s += `Tip: If a=1, just find two numbers that multiply to c and add to b.`;
-      return s;
-    }
-
-    // ── Prime Factorization ───────────────────────────────────────
-    if (p.includes('primefactor-api')) {
-      const num = b.number;
-      const factors = d.correctFactors;
-      let s = `Problem: Find the prime factors of ${num}\n\n`;
-      s += `Method: Divide by the smallest prime repeatedly.\n\n`;
-      if (factors) {
-        let remaining = num;
-        let step = 1;
-        for (const f of factors) {
-          s += `Step ${step}: ${remaining} ÷ ${f} = ${remaining / f}\n`;
-          remaining = remaining / f;
-          step++;
-        }
-        s += `\nPrime factorisation: ${num} = ${factors.join(' × ')}\n\n`;
-      }
-      s += `Tip: Always start dividing by the smallest prime (2, then 3, then 5, 7, 11...)`;
-      return s;
-    }
-
-    // ── Quadratic Formula ─────────────────────────────────────────
-    if (p.includes('qformula-api')) {
-      const { a, b: bCoeff, c } = b;
-      let s = `Problem: Solve ${a}x² + ${bCoeff}x + ${c} = 0\n\n`;
-      s += `Formula: x = (-b ± √(b²-4ac)) / 2a\n\n`;
-      const disc = bCoeff * bCoeff - 4 * a * c;
-      s += `Step 1: Calculate discriminant: b²-4ac = ${bCoeff}²-4(${a})(${c}) = ${bCoeff * bCoeff} - ${4 * a * c} = ${disc}\n\n`;
-      if (disc > 0) {
-        s += `Discriminant > 0 → Two distinct real roots\n`;
-        s += `Step 2: x = (${-bCoeff} ± √${disc}) / ${2 * a}\n`;
-        const sqrtD = Math.sqrt(disc);
-        s += `  √${disc} ≈ ${sqrtD.toFixed(2)}\n`;
-        s += `  x₁ = (${-bCoeff} + ${sqrtD.toFixed(2)}) / ${2 * a} = ${((-bCoeff + sqrtD) / (2 * a)).toFixed(2)}\n`;
-        s += `  x₂ = (${-bCoeff} - ${sqrtD.toFixed(2)}) / ${2 * a} = ${((-bCoeff - sqrtD) / (2 * a)).toFixed(2)}\n`;
-      } else if (disc === 0) {
-        s += `Discriminant = 0 → One repeated root\n`;
-        s += `x = ${-bCoeff} / ${2 * a} = ${(-bCoeff / (2 * a)).toFixed(2)}\n`;
-      } else {
-        s += `Discriminant < 0 → Complex roots\n`;
-        s += `Real part = ${-bCoeff}/${2 * a} = ${(-bCoeff / (2 * a)).toFixed(2)}\n`;
-        s += `Imaginary part = √${Math.abs(disc)}/${2 * a} ≈ ${(Math.sqrt(Math.abs(disc)) / (2 * a)).toFixed(2)}i\n`;
-      }
-      s += `\nTip: The discriminant tells you how many roots to expect.`;
-      return s;
-    }
-
-    // ── Simultaneous Equations ────────────────────────────────────
-    if (p.includes('simul-api')) {
-      const sol = d.solution || b.solution;
-      let s = `Problem: Solve the system of equations\n\n`;
-      s += `Method: Use elimination or substitution.\n\n`;
-      s += `Step 1: Choose a variable to eliminate.\n`;
-      s += `Step 2: Multiply equations to make coefficients equal.\n`;
-      s += `Step 3: Subtract equations to eliminate one variable.\n`;
-      s += `Step 4: Solve for the remaining variable(s).\n`;
-      s += `Step 5: Substitute back to find other variables.\n\n`;
-      if (sol) s += `Solution: x = ${sol.x}${sol.y !== undefined ? ', y = ' + sol.y : ''}${sol.z !== undefined ? ', z = ' + sol.z : ''}\n\n`;
-      s += `Tip: Check your answer by substituting back into ALL original equations.`;
-      return s;
-    }
-
-    // ── Function Evaluation ───────────────────────────────────────
-    if (p.includes('funceval-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Evaluate the function'}\n\n`;
-      s += `Step 1: Identify the function and the input value.\n`;
-      s += `Step 2: Substitute the input value for x in the function.\n`;
-      s += `Step 3: Simplify the expression.\n\n`;
-      s += `Answer: ${d.correctAnswer}\n\n`;
-      s += `Tip: Always substitute carefully, using brackets around negative values.`;
-      return s;
-    }
-
-    // ── Line Equations ────────────────────────────────────────────
-    if (p.includes('lineq-api') && !p.includes('lineareq')) {
-      const { x1, y1, x2, y2 } = b;
-      let s = `Problem: Find y = mx + c passing through (${x1}, ${y1}) and (${x2}, ${y2})\n\n`;
-      const m = ((y2 - y1) / (x2 - x1));
-      s += `Step 1: Calculate slope m = (y₂-y₁)/(x₂-x₁)\n`;
-      s += `  m = (${y2}-${y1})/(${x2}-${x1}) = ${y2 - y1}/${x2 - x1} = ${m.toFixed(2)}\n\n`;
-      const c = y1 - m * x1;
-      s += `Step 2: Find y-intercept using y = mx + c with one point:\n`;
-      s += `  ${y1} = ${m.toFixed(2)} × ${x1} + c\n`;
-      s += `  c = ${y1} - ${(m * x1).toFixed(2)} = ${c.toFixed(2)}\n\n`;
-      s += `Answer: y = ${m.toFixed(2)}x + ${c.toFixed(2)}\n\n`;
-      s += `Tip: The slope tells you the steepness. Positive = rising, negative = falling.`;
-      return s;
-    }
-
-    // ── Surds ─────────────────────────────────────────────────────
-    if (p.includes('surds-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Simplify the surd expression'}\n\n`;
-      if (b.type === 'simplify') {
-        s += `Method: Find the largest perfect square factor.\n`;
-        s += `Step 1: Factor the number under the root.\n`;
-        s += `Step 2: √(a×b) = √a × √b where a is a perfect square.\n`;
-        s += `Step 3: Simplify √a to get the coefficient.\n\n`;
-      } else if (b.type === 'multiply') {
-        s += `Rule: √a × √b = √(a×b)\n`;
-        s += `Step 1: Multiply the numbers under the roots.\n`;
-        s += `Step 2: Simplify the result if possible.\n\n`;
-      } else if (b.type === 'rationalise') {
-        s += `Method: Multiply top and bottom by the conjugate of the denominator.\n`;
-        s += `Step 1: If denominator is √a, multiply by √a/√a.\n`;
-        s += `Step 2: If denominator is a + √b, multiply by (a - √b)/(a - √b).\n`;
-        s += `Step 3: Simplify the result.\n\n`;
-      }
-      s += `Answer: ${ans}\n\n`;
-      s += `Tip: Memorise perfect squares up to 225 (15²) for quick simplification.`;
-      return s;
-    }
-
-    // ── Indices (Exponents) ───────────────────────────────────────
-    if (p.includes('indices-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Simplify the expression'}\n\n`;
-      s += `Key Laws of Indices:\n`;
-      s += `• aᵐ × aⁿ = aᵐ⁺ⁿ (same base, multiply → add powers)\n`;
-      s += `• aᵐ ÷ aⁿ = aᵐ⁻ⁿ (same base, divide → subtract powers)\n`;
-      s += `• (aᵐ)ⁿ = aᵐⁿ (power of a power → multiply)\n`;
-      s += `• a⁰ = 1 (anything to the power 0 is 1)\n`;
-      s += `• a⁻ⁿ = 1/aⁿ (negative power → reciprocal)\n`;
-      s += `• a^(1/n) = ⁿ√a (fractional power → root)\n\n`;
-      s += `Apply the relevant rule to simplify.\n\n`;
-      s += `Answer: ${ans}\n\n`;
-      s += `Tip: Always simplify step by step. Identify which law applies first.`;
-      return s;
-    }
-
-    // ── Sequences ─────────────────────────────────────────────────
-    if (p.includes('sequences-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Find the term or sum'}\n\n`;
-      if (b.type && b.type.startsWith('arith')) {
-        s += `This is an arithmetic sequence (constant difference).\n\n`;
-        s += `Formulas:\n`;
-        s += `• nth term: aₙ = a₁ + (n-1)d\n`;
-        s += `• Sum of n terms: Sₙ = n/2 × (2a₁ + (n-1)d)  or  Sₙ = n/2 × (first + last)\n\n`;
-      } else {
-        s += `This is a geometric sequence (constant ratio).\n\n`;
-        s += `Formulas:\n`;
-        s += `• nth term: aₙ = a₁ × rⁿ⁻¹\n`;
-        s += `• Sum of n terms: Sₙ = a₁(rⁿ - 1)/(r - 1)\n\n`;
-      }
-      s += `Step 1: Identify a₁ (first term) and d or r (common difference/ratio).\n`;
-      s += `Step 2: Substitute into the appropriate formula.\n`;
-      s += `Step 3: Calculate.\n\n`;
-      s += `Answer: ${ans}`;
-      return s;
-    }
-
-    // ── Ratios ────────────────────────────────────────────────────
-    if (p.includes('ratio-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Solve the ratio problem'}\n\n`;
-      if (b.type === 'simplify') {
-        s += `To simplify a ratio, divide both parts by their GCD.\n\n`;
-      } else if (b.type === 'divide2' || b.type === 'divide3') {
-        s += `To divide in a given ratio:\n`;
-        s += `Step 1: Add the parts of the ratio.\n`;
-        s += `Step 2: Divide the total by this sum to get one "share".\n`;
-        s += `Step 3: Multiply each ratio part by the share value.\n\n`;
-      } else if (b.type === 'direct') {
-        s += `Direct proportion: if a:b = c:d, then a×d = b×c (cross-multiply).\n\n`;
-      }
-      s += `Answer: ${ans}`;
-      return s;
-    }
-
-    // ── Percentages ───────────────────────────────────────────────
-    if (p.includes('percent-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Solve the percentage problem'}\n\n`;
-      if (b.type === 'simple') {
-        s += `To find x% of a number: multiply by x/100.\n`;
-      } else if (b.type === 'find_pct') {
-        s += `To find what percentage a is of b: (a/b) × 100.\n`;
-      } else if (b.type === 'inc_dec') {
-        s += `Percentage increase/decrease:\n`;
-        s += `New value = original × (1 + rate/100) for increase\n`;
-        s += `New value = original × (1 - rate/100) for decrease\n`;
-      } else if (b.type === 'reverse') {
-        s += `Reverse percentage: to find the original before x% change:\n`;
-        s += `Original = new value ÷ (1 ± x/100)\n`;
-      } else if (b.type === 'compound') {
-        s += `Compound interest/growth: A = P(1 + r/100)ⁿ\n`;
-        s += `where P = principal, r = rate, n = periods.\n`;
-      }
-      s += `\nAnswer: ${ans}\n\n`;
-      s += `Tip: "Percent" means "per hundred". Always think in terms of hundredths.`;
-      return s;
-    }
-
-    // ── Sets ──────────────────────────────────────────────────────
-    if (p.includes('sets-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Solve the set problem'}\n\n`;
-      s += `Key Set Operations:\n`;
-      s += `• A ∪ B (union) = all elements in A or B or both\n`;
-      s += `• A ∩ B (intersection) = elements in both A and B\n`;
-      s += `• A - B (difference) = elements in A but not in B\n`;
-      s += `• |A| = number of elements in A\n\n`;
-      s += `Answer: ${ans}`;
-      return s;
-    }
-
-    // ── Trigonometry ──────────────────────────────────────────────
-    if (p.includes('trig-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Solve the trigonometry problem'}\n\n`;
-      s += `Key Formulae:\n`;
-      s += `• SOH: sin(θ) = Opposite / Hypotenuse\n`;
-      s += `• CAH: cos(θ) = Adjacent / Hypotenuse\n`;
-      s += `• TOA: tan(θ) = Opposite / Adjacent\n`;
-      s += `• Pythagoras: a² + b² = c²\n`;
-      s += `• Sine rule: a/sinA = b/sinB = c/sinC\n`;
-      s += `• Cosine rule: a² = b² + c² - 2bc·cos(A)\n\n`;
-      s += `Step 1: Identify what you know (sides/angles).\n`;
-      s += `Step 2: Choose the appropriate formula.\n`;
-      s += `Step 3: Substitute and solve.\n\n`;
-      s += `Answer: ${ans}`;
-      return s;
-    }
-
-    // ── Coordinate Geometry ───────────────────────────────────────
-    if (p.includes('coordgeom-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Solve the coordinate geometry problem'}\n\n`;
-      if (b.type === 'midpoint') {
-        s += `Midpoint formula: M = ((x₁+x₂)/2, (y₁+y₂)/2)\n`;
-      } else if (b.type === 'distance') {
-        s += `Distance formula: d = √((x₂-x₁)² + (y₂-y₁)²)\n`;
-      } else if (b.type === 'gradient') {
-        s += `Gradient formula: m = (y₂-y₁)/(x₂-x₁)\n`;
-      } else if (b.type === 'perp_bisector') {
-        s += `Perpendicular bisector:\n`;
-        s += `Step 1: Find midpoint of the two points.\n`;
-        s += `Step 2: Find gradient of the line joining them.\n`;
-        s += `Step 3: Negative reciprocal gives perpendicular gradient.\n`;
-        s += `Step 4: Use y - y₁ = m(x - x₁) with the midpoint.\n`;
-      }
-      s += `\nAnswer: ${ans}`;
-      return s;
-    }
-
-    // ── Probability ───────────────────────────────────────────────
-    if (p.includes('prob-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Calculate the probability'}\n\n`;
-      s += `P(event) = favourable outcomes / total outcomes\n\n`;
-      s += `Key Rules:\n`;
-      s += `• P(A and B) = P(A) × P(B) [if independent]\n`;
-      s += `• P(A or B) = P(A) + P(B) - P(A and B)\n`;
-      s += `• P(not A) = 1 - P(A)\n\n`;
-      s += `Answer: ${ans}\n\n`;
-      s += `Tip: Always express probability as a simplified fraction.`;
-      return s;
-    }
-
-    // ── Statistics ────────────────────────────────────────────────
-    if (p.includes('stats-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Calculate the statistic'}\n\n`;
-      if (b.type === 'mean' || b.type === 'freq_mean') {
-        s += `Mean = sum of all values ÷ number of values\n`;
-        s += `For frequency tables: mean = Σ(f × x) ÷ Σf\n`;
-      } else if (b.type === 'median') {
-        s += `Median = middle value when data is sorted.\n`;
-        s += `If n is even: median = average of the two middle values.\n`;
-      } else if (b.type === 'mode') {
-        s += `Mode = the most frequently occurring value(s).\n`;
-      } else if (b.type === 'range') {
-        s += `Range = highest value - lowest value.\n`;
-      }
-      s += `\nAnswer: ${ans}`;
-      return s;
-    }
-
-    // ── Matrices ──────────────────────────────────────────────────
-    if (p.includes('matrix-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Solve the matrix problem'}\n\n`;
-      if (b.type === 'determinant') {
-        s += `For a 2×2 matrix [[a,b],[c,d]]:\ndet = ad - bc\n\n`;
-      } else if (b.type === 'scalar') {
-        s += `Scalar multiplication: multiply every element by the scalar.\n\n`;
-      } else {
-        s += `Matrix addition: add corresponding elements.\n\n`;
-      }
-      s += `Answer: ${ans}`;
-      return s;
-    }
-
-    // ── Vectors ───────────────────────────────────────────────────
-    if (p.includes('vectors-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Solve the vector problem'}\n\n`;
-      if (b.type === 'add') s += `Vector addition: add corresponding components (x₁+x₂, y₁+y₂).\n\n`;
-      else if (b.type === 'scalar') s += `Scalar multiplication: multiply each component by the scalar.\n\n`;
-      else if (b.type === 'magnitude') s += `Magnitude: |v| = √(x² + y²)\n\n`;
-      s += `Answer: ${ans}`;
-      return s;
-    }
-
-    // ── Dot Product ───────────────────────────────────────────────
-    if (p.includes('dotprod-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Calculate the dot product'}\n\n`;
-      s += `Dot product: a·b = a₁b₁ + a₂b₂ (+ a₃b₃ for 3D)\n`;
-      s += `Multiply corresponding components, then sum.\n\n`;
-      s += `Answer: ${ans}`;
-      return s;
-    }
-
-    // ── Logarithms ────────────────────────────────────────────────
-    if (p.includes('log-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Evaluate the logarithm'}\n\n`;
-      s += `Key Laws of Logarithms:\n`;
-      s += `• log(a×b) = log(a) + log(b)\n`;
-      s += `• log(a/b) = log(a) - log(b)\n`;
-      s += `• log(aⁿ) = n·log(a)\n`;
-      s += `• logₐ(a) = 1, logₐ(1) = 0\n`;
-      s += `• logₐ(b) = c means aᶜ = b\n\n`;
-      s += `Answer: ${ans}\n\n`;
-      s += `Tip: "log base a of b" asks "what power of a gives b?"`;
-      return s;
-    }
-
-    // ── Inequalities ──────────────────────────────────────────────
-    if (p.includes('ineq-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Solve the inequality'}\n\n`;
-      s += `Method: Solve like an equation, but remember:\n`;
-      s += `• When multiplying/dividing by a negative, FLIP the sign.\n`;
-      s += `• For quadratic inequalities, find roots then test intervals.\n\n`;
-      s += `Answer: ${ans}`;
-      return s;
-    }
-
-    // ── Differentiation ───────────────────────────────────────────
-    if (p.includes('diff-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Differentiate'}\n\n`;
-      s += `Key Rules:\n`;
-      s += `• Power rule: d/dx(xⁿ) = nxⁿ⁻¹\n`;
-      s += `• Constant rule: d/dx(c) = 0\n`;
-      s += `• Sum rule: differentiate term by term\n`;
-      s += `• Chain rule: d/dx(f(g(x))) = f'(g(x)) × g'(x)\n`;
-      s += `• Product rule: d/dx(fg) = f'g + fg'\n\n`;
-      s += `Apply the power rule to each term: bring the exponent down as a coefficient,\nthen reduce the exponent by 1.\n\n`;
-      s += `Answer: ${ans}`;
-      return s;
-    }
-
-    // ── Integration ───────────────────────────────────────────────
-    if (p.includes('integ-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Integrate'}\n\n`;
-      s += `Key Rules:\n`;
-      s += `• Power rule: ∫xⁿ dx = xⁿ⁺¹/(n+1) + C  (n ≠ -1)\n`;
-      s += `• Constant: ∫k dx = kx + C\n`;
-      s += `• Sum rule: integrate term by term\n`;
-      s += `• ∫1/x dx = ln|x| + C\n\n`;
-      s += `Reverse the power rule: increase the exponent by 1,\nthen divide by the new exponent. Don't forget +C!\n\n`;
-      s += `Answer: ${ans}`;
-      return s;
-    }
-
-    // ── Limits ────────────────────────────────────────────────────
-    if (p.includes('limits-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Evaluate the limit'}\n\n`;
-      s += `Methods for evaluating limits:\n`;
-      s += `1. Direct substitution — try plugging in the value.\n`;
-      s += `2. If 0/0, factorise and cancel common factors.\n`;
-      s += `3. For limits at infinity, divide by highest power of x.\n`;
-      s += `4. L'Hôpital's rule: if 0/0 or ∞/∞, take derivative of top and bottom.\n\n`;
-      s += `Answer: ${ans}`;
-      return s;
-    }
-
-    // ── Mensuration (Area/Volume) ─────────────────────────────────
-    if (p.includes('mensur-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Calculate the measurement'}\n\n`;
-      s += `Common Formulae:\n`;
-      s += `• Circle: area = πr², circumference = 2πr\n`;
-      s += `• Triangle: area = ½ × base × height\n`;
-      s += `• Rectangle: area = length × width\n`;
-      s += `• Cylinder: volume = πr²h, surface = 2πr(r+h)\n`;
-      s += `• Sphere: volume = 4/3πr³, surface = 4πr²\n`;
-      s += `• Cone: volume = 1/3πr²h\n\n`;
-      s += `Answer: ${ans}`;
-      return s;
-    }
-
-    // ── Bearings ──────────────────────────────────────────────────
-    if (p.includes('bearings-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Calculate the bearing'}\n\n`;
-      s += `Bearings are measured clockwise from North (000° to 360°).\n\n`;
-      s += `Key rules:\n`;
-      s += `• Always give 3 digits (e.g., 045° not 45°).\n`;
-      s += `• Back bearing = bearing ± 180°.\n`;
-      s += `• Use trigonometry to find angles in the triangle.\n\n`;
-      s += `Answer: ${ans}`;
-      return s;
-    }
-
-    // ── Number Bases ──────────────────────────────────────────────
-    if (p.includes('bases-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Convert between number bases'}\n\n`;
-      if (b.type === 'dec_to_bin') {
-        s += `Decimal → Binary: Divide by 2 repeatedly, read remainders bottom to top.\n\n`;
-      } else if (b.type === 'bin_to_dec') {
-        s += `Binary → Decimal: Each digit × its place value (powers of 2), then sum.\n`;
-        s += `Place values from right: 1, 2, 4, 8, 16, 32, 64, 128...\n\n`;
-      } else if (b.type === 'dec_to_hex') {
-        s += `Decimal → Hex: Divide by 16 repeatedly. Remainders 10-15 = A-F.\n\n`;
-      } else if (b.type === 'hex_to_bin') {
-        s += `Hex → Binary: Convert each hex digit to 4-bit binary.\n`;
-        s += `0=0000, 1=0001, ..., 9=1001, A=1010, B=1011, C=1100, D=1101, E=1110, F=1111\n\n`;
-      } else if (b.type === 'bin_add') {
-        s += `Binary addition: 0+0=0, 0+1=1, 1+0=1, 1+1=10 (carry 1)\n\n`;
-      }
-      s += `Answer: ${ans}`;
-      return s;
-    }
-
-    // ── Circle Theorems ───────────────────────────────────────────
-    if (p.includes('circle-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Find the angle'}\n\n`;
-      s += `Circle Theorems:\n`;
-      s += `• Angle at centre = 2 × angle at circumference\n`;
-      s += `• Angles in the same segment are equal\n`;
-      s += `• Angle in a semicircle = 90°\n`;
-      s += `• Opposite angles of a cyclic quadrilateral sum to 180°\n`;
-      s += `• Tangent meets radius at 90°\n`;
-      s += `• Alternate segment theorem\n\n`;
-      s += `Answer: ${ans}`;
-      return s;
-    }
-
-    // ── Transformations ───────────────────────────────────────────
-    if (p.includes('transform-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Apply the transformation'}\n\n`;
-      s += `Types of Transformations:\n`;
-      s += `• Translation: move by vector (a, b) → (x+a, y+b)\n`;
-      s += `• Reflection: flip across a line (x-axis, y-axis, y=x, etc.)\n`;
-      s += `• Rotation: turn around a point by an angle\n`;
-      s += `• Enlargement: scale from a centre by a factor\n\n`;
-      s += `Answer: ${ans}`;
-      return s;
-    }
-
-    // ── Tatsavit (9-level drill) ──────────────────────────────────
-    if (p.includes('tatsavit-api')) {
-      const type = b.type;
-      const prompt = b.prompt || b.display || '';
-      let s = `Problem: ${prompt}\n\n`;
-      if (type === 0 || type === 1) {
-        s += `This is a multiplication tables question.\n`;
-        s += `Tip: If unsure, use repeated addition or break into smaller products.\n`;
-      } else if (type === 2) {
-        s += `This is a squares question (n²).\n`;
-        s += `Tip: Use the identity (a+b)² = a² + 2ab + b² to compute squares of larger numbers.\n`;
-      } else if (type === 3) {
-        s += `This is a square root question.\n`;
-        s += `Tip: Know your perfect squares: 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144...\n`;
-      } else if (type === 4) {
-        s += `This is a monomial multiplication question.\n`;
-        s += `Rule: Multiply coefficients, add exponents of same base.\n`;
-        s += `Example: 3x² × 5x³ = 15x⁵\n`;
-      } else if (type === 5) {
-        s += `This is a percentage question.\n`;
-        s += `To find x% of n: multiply n by x/100.\n`;
-      } else if (type === 6) {
-        s += `This is an addition problem.\nTip: Break into place values for mental math.\n`;
-      } else if (type === 7) {
-        s += `This is a subtraction problem.\nTip: Use complementary addition (count up from smaller to larger).\n`;
-      } else if (type === 8) {
-        s += `This is a negative arithmetic problem.\n`;
-        s += `Rules: neg × neg = pos, neg × pos = neg\nneg + neg = more negative, neg - neg = check signs.\n`;
-      }
-      s += `\nAnswer: ${ans}`;
-      return s;
-    }
-
-    // ── GK / Vocab (Multiple Choice) ──────────────────────────────
-    if (p.includes('gk-api') || p.includes('vocab-api')) {
-      const correctText = d.correctAnswerText || d.correctAnswer || ans;
-      return `The correct answer is: ${correctText}\n\nTip: Read all options carefully before choosing.`;
-    }
-
-    // ── Linear Equations (solve ax + b = c) ───────────────────────
-    if (p.includes('lineareq-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Solve the linear equation'}\n\n`;
-      s += `Method: Isolate x on one side.\n`;
-      s += `Step 1: Move constant terms to the right.\n`;
-      s += `Step 2: Move x terms to the left.\n`;
-      s += `Step 3: Divide both sides by the coefficient of x.\n\n`;
-      s += `Answer: ${ans}`;
-      return s;
-    }
-
-    // ── Permutations & Combinations ───────────────────────────────
-    if (p.includes('permcomb-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Calculate'}\n\n`;
-      s += `Permutation (order matters): nPr = n! / (n-r)!\n`;
-      s += `Combination (order doesn't matter): nCr = n! / (r!(n-r)!)\n\n`;
-      s += `Tip: Ask yourself "does the order matter?" to decide which to use.\n\n`;
-      s += `Answer: ${ans}`;
-      return s;
-    }
-
-    // ── Inverse Trig ──────────────────────────────────────────────
-    if (p.includes('invtrig-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Evaluate'}\n\n`;
-      s += `Inverse trig functions find the angle given a ratio.\n`;
-      s += `• sin⁻¹(x) gives the angle whose sine is x\n`;
-      s += `• cos⁻¹(x) gives the angle whose cosine is x\n`;
-      s += `• tan⁻¹(x) gives the angle whose tangent is x\n\n`;
-      s += `Answer: ${ans}`;
-      return s;
-    }
-
-    // ── Remainder / Factor Theorem ────────────────────────────────
-    if (p.includes('remfactor-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Apply the theorem'}\n\n`;
-      s += `Remainder Theorem: When f(x) is divided by (x-a), remainder = f(a).\n`;
-      s += `Factor Theorem: If f(a) = 0, then (x-a) is a factor of f(x).\n\n`;
-      s += `Step 1: Substitute the value into the polynomial.\n`;
-      s += `Step 2: Calculate f(a).\n\n`;
-      s += `Answer: ${ans}`;
-      return s;
-    }
-
-    // ── Heron's Formula ───────────────────────────────────────────
-    if (p.includes('heron-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Calculate the area'}\n\n`;
-      s += `Heron's Formula: Area = √(s(s-a)(s-b)(s-c))\n`;
-      s += `where s = (a+b+c)/2 is the semi-perimeter.\n\n`;
-      s += `Step 1: Calculate s = (a+b+c)/2\n`;
-      s += `Step 2: Calculate each factor: s-a, s-b, s-c\n`;
-      s += `Step 3: Multiply and take the square root.\n\n`;
-      s += `Answer: ${ans}`;
-      return s;
-    }
-
-    // ── Conics ────────────────────────────────────────────────────
-    if (p.includes('conics-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Identify or work with the conic'}\n\n`;
-      s += `Standard forms:\n`;
-      s += `• Circle: (x-h)² + (y-k)² = r²\n`;
-      s += `• Ellipse: (x-h)²/a² + (y-k)²/b² = 1\n`;
-      s += `• Parabola: y = ax² + bx + c\n`;
-      s += `• Hyperbola: (x-h)²/a² - (y-k)²/b² = 1\n\n`;
-      s += `Answer: ${ans}`;
-      return s;
-    }
-
-    // ── Differential Equations ────────────────────────────────────
-    if (p.includes('diffeq-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Solve the differential equation'}\n\n`;
-      s += `Method (Separable DE):\n`;
-      s += `Step 1: Separate variables: put all y terms with dy, all x terms with dx.\n`;
-      s += `Step 2: Integrate both sides.\n`;
-      s += `Step 3: Solve for y if possible. Don't forget +C!\n\n`;
-      s += `Answer: ${ans}`;
-      return s;
-    }
-
-    // ── Angles ────────────────────────────────────────────────────
-    if (p.includes('angles-api')) {
-      const promptStr = b.prompt || '';
-      // Use the numeric answer (no degree symbol) so we can format consistently.
-      // Fall back to whatever 'ans' contains if 'b.answer' is unavailable.
-      const rNum = (b.answer !== undefined && b.answer !== null) ? b.answer : String(ans).replace(/°/g, '');
-      const rDeg = `${rNum}°`;
-      let s = `Problem: ${promptStr}\n\n`;
-      // Pick the right rule based on keywords in the prompt.
-      if (/straight line/i.test(promptStr) && !/cross/i.test(promptStr)) {
-        s += `Rule: angles on a straight line add up to 180°.\n`;
-        // Try to extract the given angle for an explicit subtraction.
-        const m = promptStr.match(/(\d+)\s*°/);
-        if (m) s += `  ${m[1]}° + x = 180°  →  x = 180° − ${m[1]}° = ${rDeg}\n\n`;
-        else s += `  Sum the known angles and subtract from 180°.\n\n`;
-      } else if (/at a point|meet at a point/i.test(promptStr)) {
-        s += `Rule: angles around a point add up to 360°.\n`;
-        const nums = (promptStr.match(/(\d+)\s*°/g) || []).map(x => parseInt(x));
-        if (nums.length) s += `  Sum of given angles = ${nums.reduce((a, n) => a + n, 0)}°.\n  x = 360° − sum = ${rDeg}\n\n`;
-      } else if (/vertically opposite/i.test(promptStr)) {
-        s += `Rule: vertically opposite angles are equal.\n  Answer: ${rDeg}.\n\n`;
-      } else if (/cross/i.test(promptStr) && /adjacent/i.test(promptStr)) {
-        s += `Rule: adjacent angles on a straight line add up to 180°.\n  x = 180° − given = ${rDeg}.\n\n`;
-      } else if (/alternate/i.test(promptStr)) {
-        s += `Rule: alternate angles between parallel lines are equal (Z-shape).\n  Answer: ${rDeg}.\n\n`;
-      } else if (/corresponding/i.test(promptStr)) {
-        s += `Rule: corresponding angles between parallel lines are equal (F-shape).\n  Answer: ${rDeg}.\n\n`;
-      } else if (/co-interior|cointerior|allied/i.test(promptStr)) {
-        s += `Rule: co-interior (allied) angles between parallel lines add up to 180° (C-shape).\n  Answer: 180° − given = ${rDeg}.\n\n`;
-      } else {
-        s += `Identify which angle relationship applies (line, point, or parallel lines), then apply the matching rule.\n\nAnswer: ${rDeg}.\n\n`;
-      }
-      s += `Tip: a quick sketch with the right shape (line, point, Z, F, C) makes it obvious which rule fits.`;
-      return s;
-    }
-
-    // ── HCF & LCM ─────────────────────────────────────────────────
-    if (p.includes('hcflcm-api')) {
-      const promptStr = b.prompt || '';
-      const diff = b.difficulty || 'easy';
-      let s = `Problem: ${promptStr}\n\n`;
-      s += `Let's solve this step-by-step:\n\n`;
-
-      const matches = promptStr.match(/\d+/g) || [];
-
-      if (diff === 'easy') {
-        const n1 = parseInt(matches[0]);
-        const n2 = parseInt(matches[1]);
-        if (!isNaN(n1) && !isNaN(n2)) {
-          const getFactors = (n) => {
-            const f = [];
-            for (let i = 1; i <= n; i++) {
-              if (n % i === 0) f.push(i);
-            }
-            return f;
-          };
-          const f1 = getFactors(n1);
-          const f2 = getFactors(n2);
-          const common = f1.filter(x => f2.includes(x));
-          s += `Step 1: List all factors for each number:\n`;
-          s += `  • Factors of ${n1}: ${f1.join(', ')}\n`;
-          s += `  • Factors of ${n2}: ${f2.join(', ')}\n\n`;
-          s += `Step 2: Identify the common factors shared by both:\n`;
-          s += `  • Common factors: ${common.join(', ')}\n\n`;
-          s += `Step 3: Choose the Highest Common Factor (HCF):\n`;
-          s += `  • The largest number in the common factors list is ${ans}.\n\n`;
-        } else {
-          s += `• Find the Highest Common Factor (HCF) of the two numbers.\n`;
-          s += `• HCF is the largest number that divides both numbers perfectly.\n\n`;
-        }
-      } else if (diff === 'medium') {
-        const n1 = parseInt(matches[0]);
-        const n2 = parseInt(matches[1]);
-        if (!isNaN(n1) && !isNaN(n2)) {
-          s += `Step 1: List the first few multiples for each number:\n`;
-          s += `  • Multiples of ${n1}: ${[n1, n1 * 2, n1 * 3, n1 * 4, n1 * 5].join(', ')}...\n`;
-          s += `  • Multiples of ${n2}: ${[n2, n2 * 2, n2 * 3, n2 * 4, n2 * 5].join(', ')}...\n\n`;
-          s += `Step 2: Find the first (smallest) multiple they both share:\n`;
-          s += `  • The Lowest Common Multiple (LCM) is ${ans}.\n\n`;
-        } else {
-          s += `• Find the Lowest Common Multiple (LCM) of the two numbers.\n`;
-          s += `• LCM is the smallest number that is a multiple of both.\n\n`;
-        }
-      } else if (diff === 'hard') {
-        const n1 = parseInt(matches[0]);
-        const n2 = parseInt(matches[1]);
-        const n3 = parseInt(matches[2]);
-        if (!isNaN(n1) && !isNaN(n2) && !isNaN(n3)) {
-          const gcdVal = (a, b) => b === 0 ? a : gcdVal(b, a % b);
-          const lcmVal = (a, b) => Math.abs(a * b) / gcdVal(a, b);
-          const lcm12 = lcmVal(n1, n2);
-          s += `Step 1: Find the LCM of the first two numbers, ${n1} and ${n2}:\n`;
-          s += `  • LCM(${n1}, ${n2}) = ${lcm12}\n\n`;
-          s += `Step 2: Now, find the LCM of that result (${lcm12}) and the third number (${n3}):\n`;
-          s += `  • LCM(${lcm12}, ${n3}) = ${ans}\n\n`;
-          s += `The final LCM is ${ans}.\n\n`;
-        } else {
-          s += `• Find the LCM of the three numbers by finding the LCM of the first two, and then finding the LCM of the result and the third number.\n\n`;
-        }
-      } else {
-        const timeMatches = matches.filter(x => x !== '9' && x !== '00' && x !== '12');
-        const n1 = parseInt(timeMatches[0]);
-        const n2 = parseInt(timeMatches[1]);
-        if (!isNaN(n1) && !isNaN(n2)) {
-          s += `This word problem asks when two repeating events line up next, which means finding their Lowest Common Multiple (LCM).\n\n`;
-          s += `Step 1: List the multiples of the time intervals:\n`;
-          s += `  • Intervals for A (${n1} mins): ${[n1, n1 * 2, n1 * 3, n1 * 4, n1 * 5].join(', ')}...\n`;
-          s += `  • Intervals for B (${n2} mins): ${[n2, n2 * 2, n2 * 3, n2 * 4, n2 * 5].join(', ')}...\n\n`;
-          s += `Step 2: Find the LCM of ${n1} and ${n2}:\n`;
-          s += `  • LCM(${n1}, ${n2}) = ${ans.replace(/[^\d]/g, '')}\n\n`;
-          s += `The events align at the LCM. So they next happen together after ${ans}.\n\n`;
-        } else {
-          s += `• Analyze the recurring intervals to find their Lowest Common Multiple (LCM).\n\n`;
-        }
-      }
-      s += `Answer: ${ans}`;
-      return s;
-    }
-
-    // ── Binomial Theorem ──────────────────────────────────────────
-    if (p.includes('binomial-api')) {
-      const promptStr = b.prompt || '';
-      const r = ans;
-      let s = `Problem: ${promptStr}\n\n`;
-      s += `General formula: (a + b)^n = Σ C(n,r) · a^(n−r) · b^r  for r = 0 … n.\n`;
-      s += `Where C(n,r) = n! / (r!·(n−r)!).\n\n`;
-      // Extract n and r from common shapes like "nCr" or "x^r in (...)^n"
-      const nCrMatch = promptStr.match(/(\d+)C(\d+)/);
-      const expandMatch = promptStr.match(/x\^(\d+).*\(([^)]+)\)\^(\d+)/);
-      const termMatch = promptStr.match(/(\d+)(?:nd|rd|th).*\(1\s*\+\s*x\)\^(\d+)/);
-      if (nCrMatch) {
-        const n = +nCrMatch[1], rr = +nCrMatch[2];
-        s += `Step 1: Plug in n = ${n}, r = ${rr}.\n`;
-        s += `Step 2: ${n}C${rr} = ${n}! / (${rr}!·${n - rr}!) = ${r}.\n\n`;
-      } else if (expandMatch) {
-        const power = expandMatch[1];
-        const inside = expandMatch[2];
-        const n = expandMatch[3];
-        s += `Step 1: Identify the term containing x^${power}: choose r = ${power} in (${inside})^${n}.\n`;
-        s += `Step 2: That term is C(${n}, ${power}) · (1st term)^(${n}−${power}) · (2nd term)^${power}.\n`;
-        s += `Step 3: Evaluate to get coefficient = ${r}.\n\n`;
-      } else if (termMatch) {
-        const k = +termMatch[1];
-        const n = +termMatch[2];
-        s += `Step 1: The k-th term uses r = k − 1, so r = ${k - 1}.\n`;
-        s += `Step 2: Coefficient = C(${n}, ${k - 1}) = ${r}.\n\n`;
-      } else {
-        s += `Step 1: Identify n and the desired power r.\n`;
-        s += `Step 2: Apply C(n,r)·a^(n−r)·b^r and evaluate.\n\n`;
-      }
-      s += `Answer: ${r}\n\n`;
-      s += `Tip: Pascal's triangle gives C(n,r) for small n quickly — each entry is the sum of the two above it.`;
-      return s;
-    }
-
-    // ── Bounds ────────────────────────────────────────────────────
-    if (p.includes('bounds-api')) {
-      const promptStr = b.prompt || '';
-      const r = ans;
-      let s = `Problem: ${promptStr}\n\n`;
-      s += `Key idea: when a value is rounded to a step h, the true value lies in the interval\n`;
-      s += `  [reported − h/2, reported + h/2).\n`;
-      s += `The lower bound is reported − h/2; the upper bound is reported + h/2.\n\n`;
-      if (/lower bound/i.test(promptStr)) {
-        s += `Step 1: Identify the rounding step h from the question (e.g., 1 d.p. → h = 0.1).\n`;
-        s += `Step 2: Lower bound = reported − h/2.\n\n`;
-      } else if (/upper bound/i.test(promptStr) && /a\s*[+÷×−-]\s*b/i.test(promptStr)) {
-        s += `Step 1: For combinations of bounded quantities, push each toward the extreme that\n  makes the calculation as large (upper) or as small (lower) as required.\n`;
-        s += `  • a + b: upper = a_upper + b_upper.\n`;
-        s += `  • a × b (positives): upper = a_upper × b_upper.\n`;
-        s += `  • a ÷ b (positives): upper = a_upper ÷ b_lower (smaller divisor → larger quotient).\n\n`;
-      } else if (/upper bound/i.test(promptStr)) {
-        s += `Step 1: Identify the rounding step h.\n`;
-        s += `Step 2: Upper bound = reported + h/2.\n\n`;
-      }
-      s += `Answer: ${r}\n\n`;
-      s += `Tip: write out the inequality reported − h/2 ≤ true < reported + h/2 before plugging numbers in — it stops sign mistakes.`;
-      return s;
-    }
-
-    // ── Gym Decimals ──────────────────────────────────────────────
-    if (p.includes('gymdecimals-api')) {
-      const { a, b: bStr, d1, d2, e1, e2, prodMantissa, prodExp } = b;
-      let s = `Problem: ${a} × ${bStr}\n\n`;
-      s += `Strategy: separate each number into a single digit and a power of 10.\n`;
-      s += `  ${a} = ${d1} × 10^${e1}\n`;
-      s += `  ${bStr} = ${d2} × 10^${e2}\n\n`;
-      s += `Step 1: Multiply the digits.\n`;
-      s += `  ${d1} × ${d2} = ${prodMantissa}\n\n`;
-      s += `Step 2: Add the exponents (combine the powers of 10).\n`;
-      s += `  10^${e1} × 10^${e2} = 10^${e1 + e2}\n\n`;
-      s += `Step 3: Reassemble.\n`;
-      s += `  ${prodMantissa} × 10^${prodExp} = ${d.display}\n\n`;
-      s += `Tip: count decimal places — every position the point moves left in the inputs adds one place to the answer.`;
-      return s;
-    }
-
-    // ── Linear Programming ────────────────────────────────────────
-    if (p.includes('linprog-api')) {
-      let s = `Problem: ${b.prompt || b.display || 'Solve the LP problem'}\n\n`;
-      s += `Method:\n`;
-      s += `Step 1: Identify constraints and objective function.\n`;
-      s += `Step 2: Graph the feasible region.\n`;
-      s += `Step 3: Find corner points (vertices).\n`;
-      s += `Step 4: Evaluate objective function at each corner.\n`;
-      s += `Step 5: The optimal solution is at the best corner point.\n\n`;
-      s += `Answer: ${ans}`;
-      return s;
-    }
-
-    // ── Generic fallback with prompt ──────────────────────────────
-    if (b.prompt || b.display) {
-      let s = `Problem: ${b.prompt || b.display}\n\n`;
-      s += `Answer: ${ans}\n\n`;
-      s += `Read the problem carefully, identify what is being asked,\napply the relevant formula or method, and simplify your answer.`;
-      return s;
-    }
-
-    // ── Bare fallback ─────────────────────────────────────────────
-    if (ans) return `The correct answer is: ${ans}`;
-    return null;
-
-  } catch (e) {
-    // If anything goes wrong in explanation generation, return a basic answer
-    return ans ? `The correct answer is: ${ans}` : null;
-  }
-}
+const { generateExplanation } = require('./explanations');
 
 /**
  * Generate a random integer between min and max (inclusive)
@@ -1328,6 +364,36 @@ function loadQuestions() {
 
 // Load all GK questions at server startup
 const questions = loadQuestions();
+
+const WordProblemGenerator = {
+  addition: (a, b) => {
+    const templates = [
+      `Alice has ${a} apples and Bob gives her ${b} more. How many apples does Alice have in total?`,
+      `A store sold ${a} books in the morning and ${b} books in the afternoon. What is the total number of books sold?`,
+      `You have $${a} in your savings account and you deposit $${b}. What is your new balance?`,
+      `A farmer planted ${a} trees in the first week and ${b} trees in the second week. How many trees were planted in total?`,
+      `${a} + ${b} = ?`
+    ];
+    return templates[Math.floor(Math.random() * templates.length)];
+  },
+  percentType1: (pct, base) => {
+    const templates = [
+      `A new smartphone costs $${base}. It is currently on sale for ${pct}% off. What is the discount amount?`,
+      `Your dinner bill is $${base} and you want to leave a ${pct}% tip. How much is the tip?`,
+      `In a town of ${base} people, ${pct}% of them voted in the last election. How many people voted?`,
+      `What is ${pct}% of ${base}?`
+    ];
+    return templates[Math.floor(Math.random() * templates.length)];
+  },
+  quadratic: (expression, x) => {
+    const templates = [
+      `A toy rocket is launched, and its height is modeled by the function h(x) = ${expression}. What is its height at x = ${x}?`,
+      `The daily profit of a bakery is modeled by the function P(x) = ${expression}. Calculate the profit when x = ${x}.`,
+      `Evaluate the quadratic expression ${expression} when x = ${x}.`
+    ];
+    return templates[Math.floor(Math.random() * templates.length)];
+  }
+};
 
 /**
  * HEALTH CHECK ENDPOINT
@@ -1444,9 +510,16 @@ app.get('/addition-api/question', (req, res) => {
   // Sanitize digits to valid options; default to 1 if invalid
   const safeDigits = [1, 2, 3, 4].includes(digits) ? digits : 1;
   const range = digitRange(safeDigits);
-  const a = randomInt(range.min, range.max);
-  const b = randomInt(range.min, range.max);
-  res.json({ id: `${safeDigits}-${Date.now()}-${Math.random()}`, digits: safeDigits, a, b, prompt: `${a} + ${b}`, answer: a + b });
+
+  // Optional sumMax: when set, cap each operand so a + b <= sumMax
+  const sumMax = req.query.sumMax ? Number(req.query.sumMax) : null;
+  const effectiveMax = sumMax ? Math.min(range.max, Math.floor(sumMax / 2)) : range.max;
+  const effectiveMin = Math.min(range.min, effectiveMax);
+
+  const a = randomInt(effectiveMin, effectiveMax);
+  const b = randomInt(effectiveMin, effectiveMax);
+  const prompt = WordProblemGenerator.addition(a, b);
+  res.json({ id: `${safeDigits}-${Date.now()}-${Math.random()}`, digits: safeDigits, a, b, prompt, answer: a + b });
 });
 
 /**
@@ -1552,7 +625,7 @@ function formatSignedTerm(value, variablePart, isFirst = false) {
  */
 function buildQuadraticPrompt(a, b, c, x) {
   const expression = `${formatSignedTerm(a, 'x²', true)} ${formatSignedTerm(b, 'x')} ${formatSignedTerm(c, '')}`;
-  return `If x = ${x}, find y for y = ${expression}`;
+  return WordProblemGenerator.quadratic(expression, x);
 }
 
 /**
@@ -1732,6 +805,7 @@ app.post('/sqrt-api/check', (req, res) => {
 
 // Directory containing vocabulary question JSON files
 const vocabDir = path.join(__dirname, '..', 'vocab', 'questions');
+const conceptDir = path.join(__dirname, '..', 'concept', 'questions');
 
 /**
  * Load all vocabulary questions from JSON files
@@ -1749,8 +823,18 @@ function loadVocab() {
   }
 }
 
+function loadConcepts() {
+  try {
+    const files = fs.readdirSync(conceptDir).filter((f) => f.endsWith('.json'));
+    return files.map((f) => JSON.parse(fs.readFileSync(path.join(conceptDir, f), 'utf8')));
+  } catch (e) {
+    return [];
+  }
+}
+
 // Load all vocabulary questions at server startup
 const vocabQuestions = loadVocab();
+const conceptQuestions = loadConcepts();
 
 /**
  * GET /vocab-api/question
@@ -1825,6 +909,47 @@ app.post('/vocab-api/check', (req, res) => {
 });
 
 /**
+ * GET /concept-api/question
+ */
+app.get('/concept-api/question', (req, res) => {
+  let difficulty = req.query.difficulty || 'easy';
+  if (difficulty === 'extrahard') difficulty = 'extra-hard';
+
+  const exclude = req.query.exclude ? req.query.exclude.split(',').map(Number) : [];
+  let pool = conceptQuestions.filter((q) => q.difficulty === difficulty);
+  if (!pool.length) {
+    return res.status(404).json({ error: `No concept questions for difficulty: ${difficulty}` });
+  }
+  const unseen = pool.filter((q) => !exclude.includes(q.id));
+  if (unseen.length > 0) pool = unseen;
+  const q = pool[Math.floor(Math.random() * pool.length)];
+  res.json({
+    id: q.id,
+    question: q.question,
+    options: q.options,
+    difficulty: q.difficulty,
+  });
+});
+
+/**
+ * POST /concept-api/check
+ */
+app.post('/concept-api/check', (req, res) => {
+  const { id, answerOption } = req.body || {};
+  const q = conceptQuestions.find((item) => Number(item.id) === Number(id));
+  if (!q) {
+    return res.status(404).json({ error: 'Question not found' });
+  }
+  const correct = String(answerOption || '').toUpperCase() === String(q.answerOption || '').toUpperCase();
+  res.json({
+    correct,
+    correctAnswer: q.answerOption,
+    correctAnswerText: q.answerText,
+    message: correct ? 'Correct!' : 'Incorrect',
+  });
+});
+
+/**
  * MULTIPLICATION TABLES API
  * ═══════════════════════════════════════════════════════════════════════════
  */
@@ -1882,6 +1007,151 @@ app.post('/multiply-api/check', (req, res) => {
   const correctAnswer = Number(table) * Number(multiplier);
   const correct = Number(answer) === correctAnswer;
   res.json({ correct, correctAnswer, message: correct ? 'Correct' : 'Incorrect' });
+});
+
+/**
+ * VISUAL MATH LAB API
+ * ═══════════════════════════════════════════════════════════════════════════
+ * Generates rich visual question data for multiplication & division:
+ * modes: array | groups | skip | share | grouping | product | mystery | quotient | remainder
+ */
+
+function vmRandInt(lo, hi) { return Math.floor(Math.random() * (hi - lo + 1)) + lo; }
+
+function vmPick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+const VM_EMOJIS = ['🍎','🍊','🍋','🍇','🍓','⭐','🌸','🦋','🐣','🍭','🧁','🎈','🦄','🐬','🍕'];
+
+function vmEmoji() { return vmPick(VM_EMOJIS); }
+
+// Tables by difficulty
+function vmTables(difficulty) {
+  if (difficulty === 'easy')   return [2,3,4,5];
+  if (difficulty === 'medium') return [2,3,4,5,6,7,8,9];
+  return [2,3,4,5,6,7,8,9,10,11,12];
+}
+
+app.get('/visual-math-api/question', (req, res) => {
+  const type  = req.query.type  || 'multiply'; // multiply | divide
+  const mode  = req.query.mode  || 'array';
+  const diff  = req.query.difficulty || 'easy';
+  const tables = vmTables(diff);
+  const emoji  = vmEmoji();
+  const id = `vm-${Date.now()}-${Math.random()}`;
+
+  try {
+    /* ── MULTIPLICATION MODES ── */
+
+    if (type === 'multiply' && mode === 'array') {
+      // "Build rows × cols by tapping empty cells"
+      const rows = vmRandInt(2, diff === 'easy' ? 4 : diff === 'medium' ? 6 : 8);
+      const maxCols = diff === 'easy' ? 4 : Math.max(2, Math.floor(30 / rows));
+      const cols = vmRandInt(2, Math.min(diff === 'easy' ? 4 : diff === 'medium' ? 6 : 8, maxCols));
+      return res.json({ id, type, mode, emoji, rows, cols,
+        prompt: `Fill ${rows} rows of ${cols} ${emoji} each. Total = ?`,
+        answer: rows * cols, a: rows, b: cols });
+    }
+
+    if (type === 'multiply' && mode === 'groups') {
+      // "Put M items into each of N buckets"
+      const numGroups = vmRandInt(2, diff === 'easy' ? 4 : diff === 'medium' ? 6 : 8);
+      const maxPerGroup = diff === 'easy' ? 5 : Math.max(2, Math.floor(30 / numGroups));
+      const perGroup  = vmRandInt(2, Math.min(diff === 'easy' ? 5 : diff === 'medium' ? 8 : 10, maxPerGroup));
+      return res.json({ id, type, mode, emoji, numGroups, perGroup,
+        prompt: `Put ${perGroup} ${emoji} into each of ${numGroups} buckets. Total?`,
+        answer: numGroups * perGroup, a: numGroups, b: perGroup });
+    }
+
+    if (type === 'multiply' && mode === 'skip') {
+      // "Hop by step to reach target"
+      const step   = vmPick(tables.filter(t => t <= 10));
+      const hops   = vmRandInt(2, diff === 'easy' ? 5 : diff === 'medium' ? 8 : 10);
+      const target = step * hops;
+      return res.json({ id, type, mode, emoji: '🐸', step, hops, target,
+        prompt: `Jump by ${step}s. How many jumps to reach ${target}?`,
+        answer: hops, a: step, b: hops });
+    }
+
+    if (type === 'multiply' && mode === 'product') {
+      // Balance scale: left = label "A × B", right = drag weights to match
+      const a = vmPick(tables);
+      const b = vmRandInt(2, diff === 'easy' ? 5 : diff === 'medium' ? 9 : 12);
+      return res.json({ id, type, mode, emoji, a, b,
+        prompt: `${a} × ${b} = ?  Drag weight blocks to balance the right pan!`,
+        answer: a * b });
+    }
+
+    if (type === 'multiply' && mode === 'mystery') {
+      // Balance scale: "? × B = total" — drag mystery number weight
+      const b     = vmPick(tables.filter(t => t >= 2 && t <= (diff === 'easy' ? 5 : 10)));
+      const a     = vmRandInt(2, diff === 'easy' ? 5 : diff === 'medium' ? 9 : 12);
+      const total = a * b;
+      return res.json({ id, type, mode, emoji, a, b, total,
+        prompt: `? × ${b} = ${total}. What is the mystery factor?`,
+        answer: a });
+    }
+
+    /* ── DIVISION MODES ── */
+
+    if (type === 'divide' && mode === 'share') {
+      // "Share total items equally among N plates"
+      const divisor  = vmRandInt(2, diff === 'easy' ? 4 : diff === 'medium' ? 6 : 8);
+      const maxQuotient = diff === 'easy' ? 5 : Math.max(2, Math.floor(30 / divisor));
+      const quotient = vmRandInt(2, Math.min(diff === 'easy' ? 5 : diff === 'medium' ? 8 : 10, maxQuotient));
+      const total    = divisor * quotient;
+      return res.json({ id, type, mode, emoji, total, divisor, quotient,
+        prompt: `Share ${total} ${emoji} equally among ${divisor} plates. How many on each?`,
+        answer: quotient, a: total, b: divisor });
+    }
+
+    if (type === 'divide' && mode === 'grouping') {
+      // "Put items into groups of size B — how many groups?"
+      const groupSize = vmRandInt(2, diff === 'easy' ? 4 : diff === 'medium' ? 6 : 8);
+      const maxGroups = diff === 'easy' ? 5 : Math.max(2, Math.floor(30 / groupSize));
+      const numGroups = vmRandInt(2, Math.min(diff === 'easy' ? 5 : diff === 'medium' ? 7 : 10, maxGroups));
+      const total     = groupSize * numGroups;
+      return res.json({ id, type, mode, emoji, total, groupSize, numGroups,
+        prompt: `Put ${total} ${emoji} into groups of ${groupSize}. How many groups?`,
+        answer: numGroups, a: total, b: groupSize });
+    }
+
+    if (type === 'divide' && mode === 'quotient') {
+      // Balance scale: left = total weight shown, right = drag quotient
+      const divisor  = vmRandInt(2, diff === 'easy' ? 4 : diff === 'medium' ? 6 : 9);
+      const quotient = vmRandInt(2, diff === 'easy' ? 5 : diff === 'medium' ? 9 : 12);
+      const total    = divisor * quotient;
+      return res.json({ id, type, mode, emoji, total, divisor, quotient,
+        prompt: `${total} ÷ ${divisor} = ?  Drag weight blocks to show the answer!`,
+        answer: quotient, a: total, b: divisor });
+    }
+
+    if (type === 'divide' && mode === 'remainder') {
+      // "A ÷ B = Q remainder R" — drag quotient; remainder is shown
+      const divisor  = vmRandInt(2, diff === 'easy' ? 4 : diff === 'medium' ? 6 : 9);
+      const quotient = vmRandInt(1, diff === 'easy' ? 4 : diff === 'medium' ? 8 : 10);
+      const remainder= vmRandInt(1, divisor - 1);
+      const total    = divisor * quotient + remainder;
+      return res.json({ id, type, mode, emoji, total, divisor, quotient, remainder,
+        prompt: `${total} ÷ ${divisor} = ? remainder ${remainder}. What is the quotient?`,
+        answer: quotient, a: total, b: divisor });
+    }
+
+    // Fallback: simple product
+    const a2 = vmPick(tables);
+    const b2 = vmRandInt(1, 10);
+    res.json({ id, type: 'multiply', mode: 'product', emoji, a: a2, b: b2,
+      prompt: `${a2} × ${b2} = ?`, answer: a2 * b2 });
+
+  } catch(e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+app.post('/visual-math-api/check', (req, res) => {
+  const { answer, correctAnswer } = req.body || {};
+  const correct = Number(answer) === Number(correctAnswer);
+  res.json({ correct, correctAnswer: Number(correctAnswer),
+    message: correct ? 'Correct!' : 'Incorrect' });
 });
 
 /**
@@ -4218,7 +3488,7 @@ function generatePercentQuestion(tier, type, cfg, isFirstOfType) {
     case 1: {
       // What is X% of N?
       answer = round2((pct * base) / 100);
-      prompt = `What is ${pct}% of ${base}?`;
+      prompt = WordProblemGenerator.percentType1(pct, base);
       if (isFirstOfType && tier === 1 && pct !== 100) {
         // Visual scaffold for the very first Type-1 questions: 100% → base, 10% → base/10, X% → ___
         // When pct itself is 10, the "10% step" row IS the question — skip the duplicate.
@@ -4745,56 +4015,118 @@ app.post('/ineq-api/check', express.json(), (req, res) => {
 app.get('/coordgeom-api/question', (req, res) => {
   const difficulty = req.query.difficulty || 'easy';
   const id = Date.now();
-
+  
   if (difficulty === 'easy') {
-    // Midpoint of two points
-    // Use even sums for clean midpoints
-    const x1 = triRand(-10, 10); const y1 = triRand(-10, 10);
-    const x2 = x1 + 2 * triRand(-5, 5); const y2 = y1 + 2 * triRand(-5, 5);
-    const mx = (x1 + x2) / 2; const my = (y1 + y2) / 2;
-    const prompt = `Find the midpoint of (${x1}, ${y1}) and (${x2}, ${y2})`;
-    res.json({ id, difficulty, type: 'midpoint', prompt, ansX: mx, ansY: my, display: `(${mx}, ${my})` });
+    // Foundations: midpoint, reflection, translation
+    const subType = triPick(['midpoint', 'reflection', 'translation']);
+    
+    if (subType === 'midpoint') {
+      const x1 = triRand(-8, 8); const y1 = triRand(-8, 8);
+      const x2 = x1 + 2 * triRand(-4, 4); const y2 = y1 + 2 * triRand(-4, 4);
+      const mx = (x1 + x2) / 2; const my = (y1 + y2) / 2;
+      const prompt = `Find the midpoint of (${x1}, ${y1}) and (${x2}, ${y2})`;
+      res.json({ id, difficulty, type: 'coord', prompt, ansX: mx, ansY: my, display: `(${mx}, ${my})`, points: [{x:x1, y:y1}, {x:x2, y:y2}] });
+    }
+    else if (subType === 'reflection') {
+      const axis = triPick(['x-axis', 'y-axis']);
+      const x1 = triRand(-8, 8); const y1 = triRand(-8, 8);
+      let ansX = x1, ansY = y1;
+      if (axis === 'x-axis') ansY = -y1;
+      else ansX = -x1;
+      const prompt = `Reflect (${x1}, ${y1}) across the ${axis}`;
+      res.json({ id, difficulty, type: 'coord', prompt, ansX, ansY, display: `(${ansX}, ${ansY})`, points: [{x:x1, y:y1}] });
+    }
+    else { // translation
+      const x1 = triRand(-6, 6); const y1 = triRand(-6, 6);
+      const dx = triRand(-4, 4); const dy = triRand(-4, 4);
+      const ansX = x1 + dx; const ansY = y1 + dy;
+      const vector = `<${dx}, ${dy}>`;
+      const prompt = `Translate (${x1}, ${y1}) by the vector ${vector}`;
+      res.json({ id, difficulty, type: 'coord', prompt, ansX, ansY, display: `(${ansX}, ${ansY})`, points: [{x:x1, y:y1}] });
+    }
   }
   else if (difficulty === 'medium') {
-    // Distance between two points (use Pythagorean triples for clean answers)
-    const triples = [[3, 4, 5], [5, 12, 13], [8, 15, 17], [6, 8, 10], [9, 12, 15]];
-    const [dx, dy, dist] = triPick(triples);
-    const x1 = triRand(-5, 5); const y1 = triRand(-5, 5);
-    const sx = triPick([1, -1]); const sy = triPick([1, -1]);
-    const x2 = x1 + sx * dx; const y2 = y1 + sy * dy;
-    const prompt = `Find the distance between (${x1}, ${y1}) and (${x2}, ${y2})`;
-    res.json({ id, difficulty, type: 'distance', prompt, answer: dist, display: String(dist) });
+    // Lengths: distance, distance to origin
+    const subType = triPick(['distance', 'distance_origin']);
+    const triples = [[3,4,5],[5,12,13],[8,15,17],[6,8,10],[9,12,15]];
+    
+    if (subType === 'distance_origin') {
+      const [dx, dy, dist] = triPick(triples);
+      const sx = triPick([1, -1]); const sy = triPick([1, -1]);
+      const x1 = sx * dx; const y1 = sy * dy;
+      const prompt = `Find the distance from (${x1}, ${y1}) to the origin`;
+      res.json({ id, difficulty, type: 'scalar', prompt, answer: dist, display: String(dist), points: [{x:x1, y:y1}, {x:0, y:0}] });
+    }
+    else { // distance
+      const [dx, dy, dist] = triPick(triples);
+      const x1 = triRand(-5, 5); const y1 = triRand(-5, 5);
+      const sx = triPick([1, -1]); const sy = triPick([1, -1]);
+      const x2 = x1 + sx * dx; const y2 = y1 + sy * dy;
+      const prompt = `Find the distance between (${x1}, ${y1}) and (${x2}, ${y2})`;
+      res.json({ id, difficulty, type: 'scalar', prompt, answer: dist, display: String(dist), points: [{x:x1, y:y1}, {x:x2, y:y2}] });
+    }
   }
   else if (difficulty === 'hard') {
-    // Gradient of line through two points
-    const x1 = triRand(-8, 8); const y1 = triRand(-8, 8);
+    // Slopes & Eqs: gradient, equation_line
+    const subType = triPick(['gradient', 'equation_line']);
+    
+    const x1 = triRand(-6, 6); const y1 = triRand(-6, 6);
     const dx = triRand(1, 6) * triPick([1, -1]);
-    const dy = triRand(-8, 8);
+    const dy = triRand(-6, 6);
     const x2 = x1 + dx; const y2 = y1 + dy;
     const g = gcd(Math.abs(dy), Math.abs(dx));
-    const ansNum = dy / g * (dx < 0 ? -1 : 1);
-    const ansDen = Math.abs(dx) / g;
-    const display = ansDen === 1 ? String(ansNum) : `${ansNum}/${ansDen}`;
-    const prompt = `Find the gradient of the line through (${x1}, ${y1}) and (${x2}, ${y2})`;
-    res.json({ id, difficulty, type: 'gradient', prompt, ansNum, ansDen, display });
+    const mNum = dy / g * (dx < 0 ? -1 : 1);
+    const mDen = Math.abs(dx) / g;
+    
+    if (subType === 'gradient') {
+      const display = mDen === 1 ? String(mNum) : `${mNum}/${mDen}`;
+      const prompt = `Find the gradient (slope) of the line through (${x1}, ${y1}) and (${x2}, ${y2})`;
+      res.json({ id, difficulty, type: 'fraction', prompt, ansNum: mNum, ansDen: mDen, display, points: [{x:x1, y:y1}, {x:x2, y:y2}] });
+    }
+    else { // equation_line
+      const cNum = y1 * mDen - mNum * x1;
+      const cDen = mDen; 
+      const cG = gcd(Math.abs(cNum), Math.abs(cDen));
+      const cN = cNum / cG * (cDen < 0 ? -1 : 1);
+      const cD = Math.abs(cDen) / cG;
+      
+      const mStr = mDen === 1 ? String(mNum) : (mNum < 0 ? `-${Math.abs(mNum)}/${mDen}` : `${mNum}/${mDen}`);
+      const cStr = cD === 1 ? String(cN) : (cN < 0 ? `-${Math.abs(cN)}/${cD}` : `${cN}/${cD}`);
+      let eqStr = `y=${mStr}x`;
+      if (cN > 0) eqStr += `+${cStr}`;
+      else if (cN < 0) eqStr += cStr;
+
+      const prompt = `Find the equation of the line through (${x1}, ${y1}) and (${x2}, ${y2}). Format: y=mx+c`;
+      res.json({ id, difficulty, type: 'equation', prompt, ansMNum: mNum, ansMDen: mDen, ansCNum: cN, ansCDen: cD, display: eqStr, points: [{x:x1, y:y1}, {x:x2, y:y2}] });
+    }
   }
   else {
-    // Equation of perpendicular bisector
-    const x1 = triRand(-6, 6); const y1 = triRand(-6, 6);
-    const dx = triRand(1, 4) * triPick([1, -1]);
-    const dy = triRand(1, 4) * triPick([1, -1]);
-    const x2 = x1 + 2 * dx; const y2 = y1 + 2 * dy;
-    const mx = (x1 + x2) / 2; const my = (y1 + y2) / 2;
-    // Original gradient: dy/dx, perpendicular: -dx/dy
-    const perpNum = -dx;
-    const perpDen = dy;
-    const g = gcd(Math.abs(perpNum), Math.abs(perpDen));
-    const mNum = perpNum / g * (perpDen < 0 ? -1 : 1);
-    const mDen = Math.abs(perpDen) / g;
-    // y - my = m(x - mx) → y = mx/mDen - m*mx/mDen + my
-    const prompt = `Find the gradient of the perpendicular bisector of (${x1}, ${y1}) and (${x2}, ${y2})`;
-    const display = mDen === 1 ? String(mNum) : `${mNum}/${mDen}`;
-    res.json({ id, difficulty, type: 'perp_bisector', prompt, ansNum: mNum, ansDen: mDen, display });
+    // Advanced: perp_bisector, area_triangle
+    const subType = triPick(['perp_bisector', 'area_triangle']);
+    
+    if (subType === 'area_triangle') {
+      const x1 = triRand(-8, 8); const y1 = triRand(-8, 8);
+      const x2 = triRand(-8, 8); const y2 = triRand(-8, 8);
+      const x3 = triRand(-8, 8); const y3 = triRand(-8, 8);
+      const area = Math.abs((x1*(y2-y3) + x2*(y3-y1) + x3*(y1-y2)) / 2);
+      const prompt = `Find the area of the triangle with vertices (${x1}, ${y1}), (${x2}, ${y2}), (${x3}, ${y3})`;
+      res.json({ id, difficulty, type: 'scalar', prompt, answer: area, display: String(area), points: [{x:x1, y:y1}, {x:x2, y:y2}, {x:x3, y:y3}] });
+    }
+    else { // perp_bisector
+      const x1 = triRand(-6, 6); const y1 = triRand(-6, 6);
+      const dx = triRand(1, 4) * triPick([1, -1]);
+      const dy = triRand(1, 4) * triPick([1, -1]);
+      const x2 = x1 + 2 * dx; const y2 = y1 + 2 * dy;
+      
+      const perpNum = -dx;
+      const perpDen = dy;
+      const g = gcd(Math.abs(perpNum), Math.abs(perpDen));
+      const mNum = perpNum / g * (perpDen < 0 ? -1 : 1);
+      const mDen = Math.abs(perpDen) / g;
+      const prompt = `Find the gradient of the perpendicular bisector of (${x1}, ${y1}) and (${x2}, ${y2})`;
+      const display = mDen === 1 ? String(mNum) : `${mNum}/${mDen}`;
+      res.json({ id, difficulty, type: 'fraction', prompt, ansNum: mNum, ansDen: mDen, display, points: [{x:x1, y:y1}, {x:x2, y:y2}] });
+    }
   }
 });
 
@@ -4803,17 +4135,17 @@ app.post('/coordgeom-api/check', express.json(), (req, res) => {
   const userStr = (req.body.userAnswer || '').replace(/\s+/g, '').replace(/−/g, '-');
   let correct = false;
 
-  if (type === 'midpoint') {
+  if (type === 'coord') {
     const m = userStr.replace(/[()]/g, '').split(',');
     if (m.length === 2) {
       correct = parseFloat(m[0]) === req.body.ansX && parseFloat(m[1]) === req.body.ansY;
     }
   }
-  else if (type === 'distance') {
+  else if (type === 'scalar') {
     const userNum = parseFloat(userStr);
-    correct = !isNaN(userNum) && Math.abs(userNum - req.body.answer) < 0.5;
+    correct = !isNaN(userNum) && Math.abs(userNum - req.body.answer) < 0.01;
   }
-  else if (type === 'gradient' || type === 'perp_bisector') {
+  else if (type === 'fraction') {
     const { ansNum, ansDen } = req.body;
     const fracMatch = userStr.match(/^(-?\d+)\/(-?\d+)$/);
     let uNum, uDen;
@@ -4823,6 +4155,27 @@ app.post('/coordgeom-api/check', express.json(), (req, res) => {
       const us = simplifyFraction(uNum, uDen);
       const es = simplifyFraction(ansNum, ansDen);
       correct = us.num === es.num && us.den === es.den;
+    }
+  }
+  else if (type === 'equation') {
+    const { ansMNum, ansMDen, ansCNum, ansCDen } = req.body;
+    const eqMatch = userStr.match(/^y=(-?\d+(?:\/-?\d+)?)x([+-]\d+(?:\/\d+)?)?$/);
+    if (eqMatch) {
+      let mStr = eqMatch[1];
+      let cStr = eqMatch[2] || "+0";
+      
+      const parseFrac = (str) => {
+        const parts = str.replace('+','').split('/');
+        if (parts.length === 1) return { num: parseInt(parts[0]), den: 1 };
+        return simplifyFraction(parseInt(parts[0]), parseInt(parts[1]));
+      };
+      
+      const uM = parseFrac(mStr);
+      const uC = parseFrac(cStr);
+      const eM = simplifyFraction(ansMNum, ansMDen);
+      const eC = simplifyFraction(ansCNum, ansCDen);
+      
+      correct = uM.num === eM.num && uM.den === eM.den && uC.num === eC.num && uC.den === eC.den;
     }
   }
 
@@ -5573,59 +4926,66 @@ app.get('/mensur-api/question', (req, res) => {
     // Area of rectangle, triangle, or parallelogram
     const shape = triPick(['rectangle', 'triangle', 'parallelogram']);
     const a = triRand(3, 15); const b = triRand(3, 15);
-    let answer, prompt;
-    if (shape === 'rectangle') { answer = a * b; prompt = `Area of rectangle: length = ${a}, width = ${b}`; }
-    else if (shape === 'triangle') { answer = a * b / 2; prompt = `Area of triangle: base = ${a}, height = ${b}`; }
-    else { answer = a * b; prompt = `Area of parallelogram: base = ${a}, height = ${b}`; }
-    res.json({ id, difficulty, type: 'area_2d', prompt, answer, display: String(answer) });
+    let displayEq;
+    if (shape === 'rectangle') { answer = a * b; prompt = `Area of rectangle: length = ${a}, width = ${b}`; displayEq = `${a} × ${b} = ${answer}`; }
+    else if (shape === 'triangle') { answer = a * b / 2; prompt = `Area of triangle: base = ${a}, height = ${b}`; displayEq = `½ × ${a} × ${b} = ${answer}`; }
+    else { answer = a * b; prompt = `Area of parallelogram: base = ${a}, height = ${b}`; displayEq = `${a} × ${b} = ${answer}`; }
+    res.json({ id, difficulty, type: 'area_2d', prompt, answer, display: displayEq });
   }
   else if (difficulty === 'medium') {
     // Area & circumference of circle
     const r = triRand(2, 12);
     const subtype = triPick(['area', 'circumference']);
-    let answer, prompt;
+    let displayEq;
     if (subtype === 'area') {
       answer = Math.round(Math.PI * r * r * 100) / 100;
       prompt = `Area of circle with radius ${r} (to 2 d.p., use π = 3.14159...)`;
+      displayEq = `π × ${r}² = ${answer}`;
     } else {
       answer = Math.round(2 * Math.PI * r * 100) / 100;
       prompt = `Circumference of circle with radius ${r} (to 2 d.p.)`;
+      displayEq = `2 × π × ${r} = ${answer}`;
     }
-    res.json({ id, difficulty, type: 'circle', prompt, answer, display: String(answer) });
+    res.json({ id, difficulty, type: 'circle', prompt, answer, display: displayEq });
   }
   else if (difficulty === 'hard') {
     // Volume of cylinder, cone, or sphere
     const shape = triPick(['cylinder', 'cone', 'sphere']);
     const r = triRand(2, 8);
-    let answer, prompt;
+    let displayEq;
     if (shape === 'cylinder') {
       const h = triRand(3, 12);
       answer = Math.round(Math.PI * r * r * h * 100) / 100;
       prompt = `Volume of cylinder: radius = ${r}, height = ${h} (2 d.p.)`;
+      displayEq = `π × ${r}² × ${h} = ${answer}`;
     } else if (shape === 'cone') {
       const h = triRand(3, 12);
       answer = Math.round(Math.PI * r * r * h / 3 * 100) / 100;
       prompt = `Volume of cone: radius = ${r}, height = ${h} (2 d.p.)`;
+      displayEq = `⅓ × π × ${r}² × ${h} = ${answer}`;
     } else {
       answer = Math.round(4 / 3 * Math.PI * r * r * r * 100) / 100;
       prompt = `Volume of sphere with radius ${r} (2 d.p.)`;
+      displayEq = `⁴⁄₃ × π × ${r}³ = ${answer}`;
     }
-    res.json({ id, difficulty, type: 'volume', prompt, answer, display: String(answer) });
+    res.json({ id, difficulty, type: 'volume', prompt, answer, display: displayEq });
   }
   else {
     // Surface area of cylinder, cone, or sphere
     const shape = triPick(['cylinder', 'sphere']);
     const r = triRand(2, 8);
-    let answer, prompt;
+    let displayEq;
     if (shape === 'cylinder') {
       const h = triRand(3, 12);
       answer = Math.round(2 * Math.PI * r * (r + h) * 100) / 100;
       prompt = `Total surface area of cylinder: radius = ${r}, height = ${h} (2 d.p.)`;
+      displayEq = `2 × π × ${r} × (${r} + ${h}) = ${answer}`;
     } else {
       answer = Math.round(4 * Math.PI * r * r * 100) / 100;
       prompt = `Surface area of sphere with radius ${r} (2 d.p.)`;
+      displayEq = `4 × π × ${r}² = ${answer}`;
     }
-    res.json({ id, difficulty, type: 'surface_area', prompt, answer, display: String(answer) });
+    res.json({ id, difficulty, type: 'surface_area', prompt, answer, display: displayEq });
   }
 });
 
@@ -9303,7 +8663,57 @@ app.post('/diffeq-api/check', express.json(), (req, res) => {
   res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
 });
 
+// /darts-api — Visual Coordinate Geometry (Dart Board)
 // ═══════════════════════════════════════════════════════════════════════════
+app.get('/darts-api/question', (req, res) => {
+  const level = req.query.level || 'easy';
+  let x, y;
+
+  const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+  const randHalf = (min, max) => randInt(min * 2, max * 2) / 2;
+
+  if (level === 'easy') {
+    // 1st quadrant only
+    x = randInt(1, 5);
+    y = randInt(1, 5);
+  } else if (level === 'medium') {
+    // Any quadrant, integer
+    do {
+      x = randInt(-5, 5);
+      y = randInt(-5, 5);
+    } while (x === 0 && y === 0);
+  } else if (level === 'hard') {
+    // Any quadrant, half steps allowed
+    do {
+      x = randHalf(-5, 5);
+      y = randHalf(-5, 5);
+    } while (Number.isInteger(x) && Number.isInteger(y));
+  } else {
+    // extrahard
+    const startX = randInt(-4, 4) || 1;
+    const startY = randInt(-4, 4) || 1;
+    const axis = Math.random() < 0.5 ? 'x' : 'y';
+    x = axis === 'y' ? -startX : startX;
+    y = axis === 'x' ? -startY : startY;
+    
+    return res.json({
+      prompt: `Plot the reflection of (${startX}, ${startY}) across the ${axis.toUpperCase()}-axis.`,
+      x, y, level, startX, startY, axis, type: 'reflection'
+    });
+  }
+
+  res.json({
+    prompt: `Throw the dart at coordinate (${x}, ${y}).`,
+    x, y, level, type: 'standard'
+  });
+});
+
+app.post('/darts-api/check', express.json(), (req, res) => {
+  const { userX, userY, x, y } = req.body;
+  const correct = userX === x && userY === y;
+  res.json({ correct, message: correct ? 'Bullseye!' : 'Missed!' });
+});
+
 // WORD CREATOR PUZZLE ROUTER (wordcreator-api)
 // ═══════════════════════════════════════════════════════════════════════════
 const wordCreatorRouter = require('./routes/wordCreator');
@@ -9710,6 +9120,12 @@ app.post('/transfer-api/check', express.json(), async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+/**
+ * NEW LAB ROUTES (Basic Arithmetic, Mensuration, Visual Math Redux)
+ */
+const labRoutes = require('./labRoutes');
+app.use('/api', labRoutes);
 
 /**
  * CATCH-ALL ROUTE
