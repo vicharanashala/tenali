@@ -36176,8 +36176,8 @@ return (
             <div className="sky-portal">
               <div className="power-beam beam-1"></div>
               <div className="power-beam beam-2"></div>
-              <div className="power-beam beam-3"></div>
               <div className="power-beam beam-4"></div>
+              <div className="power-beam beam-right"></div>
             </div>
 
             {/* 2. Flying Superhero Elements */}
