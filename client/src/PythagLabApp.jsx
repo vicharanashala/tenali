@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
+import AudioManager from './audio/AudioManager';
 
 const FONT = "'Plus Jakarta Sans', 'Poppins', system-ui, sans-serif";
 
@@ -85,6 +86,12 @@ export default function PythagLabApp({ onBack }) {
     }
   }, [phase, currentLevel, difficulty]);
 
+  useEffect(() => {
+    if (phase === 'results') {
+      AudioManager.playCelebrate();
+    }
+  }, [phase]);
+
   const loadLevelHint = (lvl) => {
     if (difficulty === 'easy') {
       if (lvl === 1) setHintText("Leg A has 3² = 9 blocks. Leg B has 4² = 16 blocks. Click 'Merge Blocks' to see how 9 + 16 combines to fill the hypotenuse C² (25 blocks)!");
@@ -155,12 +162,14 @@ export default function PythagLabApp({ onBack }) {
 
   const handleEvaluation = (isCorrect) => {
     if (isCorrect) {
+      AudioManager.playCorrect();
       setXp(x => x + 50);
       triggerConfetti();
       setLogs(prev => [...new Set([...prev, `Completed ${difficulty.toUpperCase()} Level ${currentLevel}`])]);
       setRibbonPopup(true);
       setTimeout(nextLevel, 2500);
     } else {
+      AudioManager.playWrong();
       setLives(l => Math.max(0, l - 1));
       setHintText("Oops! That wasn't correct. Try checking your math or use a hint!");
     }

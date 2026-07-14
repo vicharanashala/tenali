@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import AudioManager from './audio/AudioManager';
 // Helper to get random even numbers
 const randEven = (min, max) => {
   let r = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -82,6 +83,7 @@ export default function CoordGeomDiscoveryApp({ onBack }) {
 
     // Check if it's the midpoint
     if (snappedX === midpoint.x && snappedY === midpoint.y) {
+      AudioManager.playCorrect();
       setDiscovered(true);
     }
   };

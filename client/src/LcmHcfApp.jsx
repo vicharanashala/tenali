@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './LcmHcfApp.css';
+import AudioManager from './audio/AudioManager';
 
 // ==========================================================================
 // CONFIGURATION & REWARDS DEFINITION
@@ -109,6 +110,46 @@ export default function InteractiveLcmHcfApp({ onBack }) {
     setWhyFeedback(null);
     setActivityPopup(null);
     
+    // Audio SFX trigger hooks
+  }, [currentStep, level]);
+
+  useEffect(() => {
+    if (activityPopup) {
+      if (activityPopup.type === 'error' || activityPopup.title?.toLowerCase().includes('incorrect')) {
+        AudioManager.playWrong();
+      } else if (activityPopup.type === 'success' || activityPopup.title?.toLowerCase().includes('correct') || activityPopup.title?.toLowerCase().includes('success')) {
+        AudioManager.playCorrect();
+      }
+    }
+  }, [activityPopup]);
+
+  useEffect(() => {
+    if (whyFeedback) {
+      if (whyFeedback.correct) {
+        AudioManager.playCorrect();
+      } else {
+        AudioManager.playWrong();
+      }
+    }
+  }, [whyFeedback]);
+
+  useEffect(() => {
+    if (quizFeedback) {
+      if (quizFeedback.correct) {
+        AudioManager.playCorrect();
+      } else {
+        AudioManager.playWrong();
+      }
+    }
+  }, [quizFeedback]);
+
+  useEffect(() => {
+    if (quizFinished) {
+      AudioManager.playCelebrate();
+    }
+  }, [quizFinished]);
+
+  useEffect(() => {
     // Initialize activity parameters dynamically based on currentStep and level
     const initialActivityState = {};
     if (currentStep === 1) {

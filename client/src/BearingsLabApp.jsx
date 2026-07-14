@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
+import AudioManager from './audio/AudioManager';
 
 const FONT = "'Plus Jakarta Sans', 'Poppins', system-ui, sans-serif";
 
@@ -173,6 +174,12 @@ export default function BearingsLabApp({ onBack }) {
     }
   }, [phase]);
 
+  useEffect(() => {
+    if (phase === 'results') {
+      AudioManager.playCelebrate();
+    }
+  }, [phase]);
+
   const initMission = (mId) => {
     const missionsList = getMissions();
     const current = missionsList[mId - 1];
@@ -279,6 +286,7 @@ export default function BearingsLabApp({ onBack }) {
     const current = activeMissions[currentMission - 1];
 
     if (isCorrect) {
+      AudioManager.playCorrect();
       setRecentXp(30);
       setXp(x => x + 30);
       setXpPopup(true);
@@ -298,6 +306,7 @@ export default function BearingsLabApp({ onBack }) {
         }
       }, 2500);
     } else {
+      AudioManager.playWrong();
       setLives(l => Math.max(0, l - 1));
       if (current.wind) {
         setTutorText("We drifted into reefs! To compensate for the +15° East wind drift, point your engine 15° to the left (075°).");

@@ -13,6 +13,7 @@
 import React, {
   useState, useEffect, useRef, useCallback, useMemo, memo,
 } from 'react';
+import AudioManager from './audio/AudioManager';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 
@@ -570,6 +571,20 @@ export default function VisualMathLabRedux({ onBack, initialDifficulty, initialN
   const fetchingRef  = useRef(false);  // guard against concurrent fetches
   const difficultyRef = useRef(difficulty);
   useEffect(() => { difficultyRef.current = difficulty; }, [difficulty]);
+
+  useEffect(() => {
+    if (isCorrect === true) {
+      AudioManager.playCorrect();
+    } else if (isCorrect === false) {
+      AudioManager.playWrong();
+    }
+  }, [isCorrect]);
+
+  useEffect(() => {
+    if (finished) {
+      AudioManager.playCelebrate();
+    }
+  }, [finished]);
 
   const fetchFromServer = useCallback(async (diff, lastTemplate) => {
     const res = await fetch(
