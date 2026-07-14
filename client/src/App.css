@@ -2760,7 +2760,6 @@ button:disabled {
   gap: 20px;
   width: 100%;
 }
-}
 
 .dnd-source, .dnd-target {
   display: flex;

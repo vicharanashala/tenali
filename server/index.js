@@ -309,6 +309,8 @@ app.use(async (req, res, next) => {
 
   // If no failed attempts are found, proceed to normal question generation!
   next();
+});
+
 const { generateExplanation } = require('./explanations');
 
 /**

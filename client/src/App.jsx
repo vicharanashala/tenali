@@ -43059,7 +43059,6 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
           }}>
             Start Quiz
           </button>
-        </div>
           {isStage3Completed('addition', completedTopics) && (
             <div className="transfer-cta-box" style={{ marginTop: '20px', padding: '16px', background: 'rgba(255,255,255,0.03)', borderRadius: '10px', border: '1px solid #4A4038', textAlign: 'center' }}>
               <p style={{ margin: '0 0 12px', fontSize: '0.9rem', color: '#A89C93', lineHeight: '1.4', fontFamily: 'Inter, sans-serif' }}>
@@ -47446,7 +47445,6 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
             }}>
               Start Quiz
             </button>
-          </div>
           {isStage3Completed(topicKey, completedTopics) && (
             <div className="transfer-cta-box" style={{ marginTop: '20px', padding: '16px', background: 'rgba(255,255,255,0.03)', borderRadius: '10px', border: '1px solid #4A4038', textAlign: 'center' }}>
               <p style={{ margin: '0 0 12px', fontSize: '0.9rem', color: '#A89C93', lineHeight: '1.4', fontFamily: 'Inter, sans-serif' }}>
