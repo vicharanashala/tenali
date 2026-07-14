@@ -161,13 +161,18 @@ app.use(async (req, res, next) => {
 
   // Fallback: Resolve to seeded 'tatsavit' user if no token or invalid token
   if (!userId) {
-    try {
-      const tatsavitUser = await User.findOne({ username: 'tatsavit' });
-      if (tatsavitUser) {
-        userId = tatsavitUser._id.toString();
+    const mongoose = require('mongoose');
+    if (mongoose.connection.readyState === 1) {
+      try {
+        const tatsavitUser = await User.findOne({ username: 'tatsavit' });
+        if (tatsavitUser) {
+          userId = tatsavitUser._id.toString();
+        }
+      } catch (e) {
+        console.error('[LIL] Fallback user lookup failed:', e.message);
       }
-    } catch (e) {
-      console.error('[LIL] Fallback user lookup failed:', e.message);
+    } else {
+      userId = 'offline-tatsavit-id';
     }
   }
 
@@ -183,7 +188,8 @@ app.use(async (req, res, next) => {
     res.json = originalJson;
 
     // Async LIL execution wrapper
-    if (userId && topicId) {
+    const mongoose = require('mongoose');
+    if (userId && topicId && mongoose.connection.readyState === 1) {
       const payloadInput = {
         userId,
         topicId,
@@ -240,13 +246,18 @@ app.use(async (req, res, next) => {
 
   // Fallback: Resolve to seeded 'tatsavit' user if no token or invalid token
   if (!userId) {
-    try {
-      const tatsavitUser = await User.findOne({ username: 'tatsavit' });
-      if (tatsavitUser) {
-        userId = tatsavitUser._id.toString();
+    const mongoose = require('mongoose');
+    if (mongoose.connection.readyState === 1) {
+      try {
+        const tatsavitUser = await User.findOne({ username: 'tatsavit' });
+        if (tatsavitUser) {
+          userId = tatsavitUser._id.toString();
+        }
+      } catch (e) {
+        console.error('[LIL GET] Fallback user lookup failed:', e.message);
       }
-    } catch (e) {
-      console.error('[LIL GET] Fallback user lookup failed:', e.message);
+    } else {
+      userId = 'offline-tatsavit-id';
     }
   }
 
@@ -255,9 +266,9 @@ app.use(async (req, res, next) => {
   const apiName = pathParts[1] || '';
   const topicId = apiName.replace('-api', '');
 
-  if (userId && topicId) {
+  const mongoose = require('mongoose');
+  if (userId && topicId && mongoose.connection.readyState === 1) {
     try {
-      const mongoose = require('mongoose');
       const { Attempt } = require('./lil/models');
 
       const unresolved = await Attempt.aggregate([
