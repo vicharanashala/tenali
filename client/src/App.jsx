@@ -27,6 +27,7 @@ import VoiceAssistant from './components/VoiceAssistant'
 import { motion } from 'framer-motion';
 import OnboardingTour from './components/OnboardingTour'
 import AudioManager from './audio/AudioManager';
+import LinearAlgebraApp from './LinearAlgebraApp';
 
 
 /**
@@ -56,6 +57,7 @@ function useProgressSubmit(revealed, isCorrect, topic, questionId) {
 }
 import './App.css'
 import InteractiveLcmHcfApp from './LcmHcfApp';
+import IdliVadaSambharApp from './IdliVadaSambharApp';
 import VisualMathLabRedux, {
   FrogJumpTemplate,
   MathMachineTemplate,
@@ -40099,6 +40101,20 @@ function App() {
   if (pathname === '/bridge26') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge26App onBack={() => { window.location.href = '/chapter5' }} /></AuthGate></div></div></>)
   if (pathname === '/bridge27') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge27App onBack={() => { window.location.href = '/chapter5' }} /></AuthGate></div></div></>)
 
+  // Route: /linearalgebra → Linear Algebra Module 1 (Interactive Learning)
+  if (pathname === '/linearalgebra' || pathname === '/la') {
+    return (
+      <>
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <div className="app-shell"><div className="card">
+          <LinearAlgebraApp onBack={() => { window.location.href = '/' }} />
+        </div></div>
+      </>
+    )
+  }
+
   // Route: /chapter1 → Cambridge IGCSE Chapter 1 (Reviewing Number Concepts)
   if (pathname === '/chapter1') {
     return (
@@ -40445,9 +40461,688 @@ function App() {
     )
   }
 
+  // ========== LINEAR ALGEBRA QUIZ ==========
+  function LinearAlgebraQuizApp({ onBack }) {
+    const diffs = ['easy', 'medium', 'hard']
+    const diffLabels = { easy: 'Easy — Vectors & Basics', medium: 'Medium — Matrices & Systems', hard: 'Hard — Advanced' }
+    const [difficulty, setDifficulty] = useState('easy')
+    const [isAdaptive, setIsAdaptive] = useState(false)
+    const [adaptScore, setAdaptScore] = useState(0)
+    const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
+    const [started, setStarted] = useState(false)
+    const [finished, setFinished] = useState(false)
+    const [question, setQuestion] = useState(null)
+    const [answer, setAnswer] = useState('')
+    const [score, setScore] = useState(0)
+    const [questionNumber, setQuestionNumber] = useState(0)
+    const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
+    const [feedback, setFeedback] = useState('')
+    const [isCorrect, setIsCorrect] = useState(null)
+    const [loading, setLoading] = useState(false)
+    const [loadError, setLoadError] = useState('')
+    const [revealed, setRevealed] = useState(false)
+    const [results, setResults] = useState([])
+    const [explanation, setExplanation] = useState('')
+    const timer = useTimer()
+    const advanceFnRef = useRef(null)
+    const adaptScoreRef = useRef(0)
+    const submittedRef = useRef(false)
+    const advancedRef = useRef(false)
+
+    const effectiveDifficulty = () => isAdaptive ? adaptiveLevel(adaptScoreRef.current) : difficulty
+
+    const loadQuestion = async () => {
+      setLoading(true); setLoadError(''); setExplanation('')
+      try {
+        const diff = effectiveDifficulty()
+        const r = await fetch(`${API}/linearalgebra-api/question?difficulty=${diff}`)
+        if (!r.ok) throw new Error(`Server returned ${r.status}`)
+        const data = await r.json()
+        if (!data || !data.prompt) throw new Error('Question payload is missing a prompt')
+        setQuestion(data); setAnswer(''); setFeedback(''); setIsCorrect(null); setRevealed(false)
+        submittedRef.current = false; advancedRef.current = false
+        timer.start()
+      } catch (e) {
+        console.error('Failed to load Linear Algebra question:', e)
+        setQuestion(null); setLoadError(`Couldn't load a question (${e.message}). Tap Retry.`)
+      }
+      setLoading(false)
+    }
+    const startQuiz = () => {
+      const t = Math.max(1, Math.min(100, Number(numQuestions) || DEFAULT_TOTAL))
+      setTotalQ(t); setScore(0); setQuestionNumber(1); setResults([]); setStarted(true); setFinished(false)
+      setAdaptScore(0); adaptScoreRef.current = 0
+      submittedRef.current = false; advancedRef.current = false
+    }
+    useEffect(() => { if (started && !finished && questionNumber > 0) loadQuestion() }, [started, questionNumber])
+    const advance = () => {
+      if (advancedRef.current) return
+      advancedRef.current = true
+      if (questionNumber >= totalQ) setFinished(true); else setQuestionNumber(n => n + 1)
+    }
+    advanceFnRef.current = advance
+    useAutoAdvance(revealed, advanceFnRef, isCorrect)
+    useEffect(() => {
+      if (!revealed || isCorrect) return
+      const h = (e) => { if (e.key === 'Enter') { e.preventDefault(); advance() } }
+      window.addEventListener('keydown', h)
+      return () => window.removeEventListener('keydown', h)
+    }, [revealed, isCorrect, questionNumber])
+
+    const handleSubmit = async () => {
+      if (!question || revealed || !answer.trim()) return
+      if (submittedRef.current) return
+      submittedRef.current = true
+      const timeTaken = timer.stop()
+      const payload = { ...question, userAnswer: answer.trim() }
+      try {
+        const r = await fetch(`${API}/linearalgebra-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+        const data = await r.json()
+        setIsCorrect(data.correct); setRevealed(true)
+        if (data.correct) setScore(s => s + 1)
+        setFeedback(data.correct ? `Correct! ${data.display}` : `Incorrect. Answer: ${data.display}`)
+        setResults(prev => [...prev, { prompt: question.prompt, userAnswer: answer.trim(), correctAnswer: data.display, correct: data.correct, time: timeTaken }])
+        if (isAdaptive) {
+          setAdaptScore(prev => { const next = data.correct ? Math.min(3, prev + 0.25) : Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next })
+        }
+        if (!data.correct) {
+          try {
+            const sr = await fetch(`${API}/linearalgebra-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...question, userAnswer: '', solve: true }) })
+            const sd = await sr.json()
+            if (sd.explanation) setExplanation(sd.explanation)
+          } catch (_) { /* explanation fetch failed silently */ }
+        }
+      } catch (e) { submittedRef.current = false; console.error('Failed to check answer:', e) }
+    }
+
+    const handleSolve = async () => {
+      if (!question || revealed) return
+      submittedRef.current = true; timer.stop()
+      try {
+        const r = await fetch(`${API}/linearalgebra-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...question, userAnswer: '', solve: true }) })
+        const data = await r.json()
+        setIsCorrect(false); setRevealed(true)
+        const display = data.display || data.correctAnswer || data.answer || ''
+        setFeedback(`Solution: ${display}`)
+        if (data.explanation) setExplanation(data.explanation)
+        setResults(prev => [...prev, { prompt: question.prompt, userAnswer: '(solved)', correctAnswer: display, correct: false, time: 0 }])
+      } catch (e) { submittedRef.current = false; console.error('Failed to solve:', e) }
+    }
+
+    const handleSkip = () => {
+      if (!question || revealed) return
+      submittedRef.current = true; timer.stop()
+      setIsCorrect(false); setRevealed(true)
+      setFeedback('Skipped — counted as incorrect.')
+      setResults(prev => [...prev, { prompt: question.prompt, userAnswer: '(skipped)', correctAnswer: '—', correct: false, time: 0 }])
+      if (isAdaptive) { setAdaptScore(prev => { const next = Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next }) }
+    }
+
+    const handleKeyDown = (e) => { if (e.key === 'Enter') { e.preventDefault(); if (!revealed) handleSubmit() } }
+    const getPlaceholder = () => {
+      if (!question) return 'Type your answer'
+      const at = question.answerType
+      if (at === 'vector') return 'e.g. (3, 5)'
+      if (at === 'matrix') return 'e.g. [1,2;3,4]'
+      return 'e.g. 42 or -3.5'
+    }
+    const curAdaptLevel = adaptiveLevel(adaptScore)
+
+    return (
+      <QuizLayout title="Linear Algebra Quiz" subtitle="Vectors, matrices, systems & more" onBack={onBack} timer={started && !finished ? timer : null}>
+        {!started && !finished && <div className="welcome-box">
+          <p className="welcome-text">Practice linear algebra!</p>
+          <p style={{ fontSize: '0.85rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Easy: vectors, magnitude, dot product. Medium: matrices, systems, projections. Hard: eigenvalues, Cramer's rule, 3×3.</p>
+          <div className="checkbox-group" style={{ marginBottom: '12px' }}>
+            {diffs.map(d => (
+              <label key={d} className={`checkbox-pill${!isAdaptive && difficulty === d ? ' active' : ''}`}>
+                <input type="radio" name="laq-diff" checked={!isAdaptive && difficulty === d} onChange={() => { setDifficulty(d); setIsAdaptive(false) }} />
+                {diffLabels[d]}
+              </label>
+            ))}
+            <label className={`checkbox-pill${isAdaptive ? ' active' : ''}`} style={isAdaptive ? { background: 'linear-gradient(135deg, #4caf50, #ff9800, #f44336, #9c27b0)', color: '#fff', border: 'none' } : {}}>
+              <input type="radio" name="laq-diff" checked={isAdaptive} onChange={() => setIsAdaptive(true)} />
+              Adaptive
+            </label>
+          </div>
+          {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level.</p>}
+          <div className="question-count-row">
+            <label className="question-count-label">How many questions? (max 100)</label>
+            <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={e => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} />
+          </div>
+          <div className="button-row"><button onClick={startQuiz}>Start Quiz</button></div>
+        </div>}
+        {started && !finished && <>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.3rem' }}>
+            <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
+            {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
+          </div>
+          {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
+          {question && <div style={{ textAlign: 'center' }}>
+            <div className="question-prompt" style={{ fontSize: '1.3rem', margin: '20px 0', lineHeight: '1.6' }}>{question.prompt}</div>
+            <input className="answer-input" type="text" value={answer} onChange={e => { if (!revealed) setAnswer(e.target.value) }} disabled={revealed} placeholder={getPlaceholder()} onKeyDown={handleKeyDown} autoFocus />
+          </div>}
+          {!question && loading && <div style={{ textAlign: 'center', padding: '24px', color: 'var(--clr-text-soft)' }}>Loading question…</div>}
+          {!question && !loading && loadError && (
+            <div style={{ textAlign: 'center', padding: '20px', color: 'var(--clr-wrong)', fontSize: '0.95rem' }}>
+              <div style={{ marginBottom: '10px' }}>{loadError}</div>
+              <button onClick={loadQuestion}>Retry</button>
+            </div>
+          )}
+          {renderFeedback(feedback, isCorrect)}
+          {explanation && <div style={{ margin: '16px auto', maxWidth: 600, padding: '16px 20px', borderRadius: 'var(--radius)', background: 'var(--clr-surface)', border: '1px solid var(--clr-accent)', textAlign: 'left', whiteSpace: 'pre-wrap', fontSize: '0.92rem', lineHeight: '1.6', color: 'var(--clr-text)' }}>
+            <strong style={{ color: 'var(--clr-accent)', display: 'block', marginBottom: '8px', fontSize: '1rem' }}>Step-by-Step Explanation</strong>
+            {explanation}
+          </div>}
+          <div className="button-row">
+            {!revealed ? <>
+              <button onClick={handleSubmit} disabled={loading || !answer.trim()}>Submit</button>
+              <button onClick={handleSolve} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>
+              {isAdaptive && <button onClick={handleSkip} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-text-soft)', color: 'var(--clr-text-soft)' }}>Skip</button>}
+            </> : <button onClick={advance}>{questionNumber >= totalQ ? 'Finish Quiz' : 'Next Question'}</button>}
+          </div>
+          {isAdaptive && <div style={{ textAlign: 'center', margin: '10px 0 4px' }}>
+            <span style={{ fontSize: '0.75rem', color: 'var(--clr-text-soft)', marginRight: '8px' }}>How are you feeling?</span>
+            <button onClick={() => { setAdaptScore(prev => { const next = Math.min(3, prev + 0.3); adaptScoreRef.current = next; return next }); if (!revealed) handleSkip(); else advance() }} style={{ fontSize: '0.78rem', padding: '5px 14px', borderRadius: '8px', marginRight: '6px', background: 'transparent', border: '1px solid var(--clr-correct)', color: 'var(--clr-correct)', cursor: 'pointer' }}>Too Easy</button>
+            <button onClick={() => { setAdaptScore(prev => { const next = Math.max(0, prev - 0.5); adaptScoreRef.current = next; return next }); if (!revealed) handleSkip(); else advance() }} style={{ fontSize: '0.78rem', padding: '5px 14px', borderRadius: '8px', background: 'transparent', border: '1px solid var(--clr-wrong)', color: 'var(--clr-wrong)', cursor: 'pointer' }}>Too Hard</button>
+          </div>}
+          {results.length > 0 && <ResultsTable results={results} />}
+        </>}
+        {finished && <div className="welcome-box">
+          <p className="welcome-text">Quiz complete!</p>
+          <p className="final-score">Final score: {score}/{totalQ}</p>
+          {isAdaptive && <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)' }}>Reached level: <strong style={{ color: ADAPT_COLORS[curAdaptLevel] }}>{ADAPT_LABELS[curAdaptLevel]}</strong></p>}
+          <ResultsTable results={results} />
+          <button onClick={() => { setStarted(false); setFinished(false) }}>Play Again</button>
+        </div>}
+      </QuizLayout>
+    )
+  }
+
+  function generateMqExplanation(q) {
+    if (!q) return 'No question to explain.'
+    const t = q.type || ''
+    const d = q.data || {}
+    const p = q.prompt || ''
+    const ans = q.answer || q.display || ''
+    const missionNum = parseInt(t.replace(/^m(\d+).*/, '$1')) || 0
+
+    const showFormula = (formula) => `Formula: ${formula}`
+    const showSub = (expr, val) => `Substituting values: ${expr} = ${val}`
+    const showStep = (n, text) => `Step ${n}: ${text}`
+    const showResult = (val) => `Answer: ${val}`
+
+    if (t.startsWith('m1_')) {
+      if (t === 'm1_yval') return [showStep(1, `We have the proportionality y = ${d.m}x`), showStep(2, `When x = ${d.x}, substitute into the formula`), showStep(3, `y = ${d.m} × ${d.x} = ${d.m * d.x}`), showResult(ans)].join('\n\n')
+      if (t === 'm1_ratio') return [showStep(1, `We have y = ${d.m}x`), showStep(2, `The ratio y:x means dividing y by x`), showStep(3, `y/x = ${d.m}x/x = ${d.m}`), showStep(4, `So the ratio is ${d.m}:1`), showResult(ans)].join('\n\n')
+      if (t === 'm1_findk') return [showStep(1, `We know A = ${d.c} when B = ${d.b}`), showStep(2, `Since A = kB, substitute: ${d.c} = k × ${d.b}`), showStep(3, `k = ${d.c} ÷ ${d.b} = ${d.k}`), showResult(ans)].join('\n\n')
+      if (t === 'm1_eval') return [showStep(1, `Ram saves ${d.m} times what Lakshman saves`), showStep(2, `Lakshman saves ${d.x}`), showStep(3, `Ram saves ${d.m} × ${d.x} = ${d.m * d.x}`), showResult(ans)].join('\n\n')
+      if (t === 'm1_compare') return [showStep(1, `First relationship: slope = ${d.m1}`), showStep(2, `Second relationship: slope = ${d.m2}`), showStep(3, `Ratio of slopes = ${d.m2} ÷ ${d.m1} = ${d.m2/d.m1}`), showResult(ans)].join('\n\n')
+      if (t === 'm1_origin') return [showStep(1, `For y = ${d.m}x, substitute x = 0`), showStep(2, `y = ${d.m} × 0 = 0`), showStep(3, `The point (0, 0) is the origin`), showResult(ans)].join('\n\n')
+      if (t === 'm1_slope') return [showStep(1, `Points: (${d.x1},${d.y1}) and (${d.x2},${d.y2})`), showStep(2, `Slope = (y₂ - y₁) / (x₂ - x₁) = (${d.y2} - ${d.y1}) / (${d.x2} - ${d.x1})`), showStep(3, `= ${d.y2 - d.y1} / ${d.x2 - d.x1} = ${d.m}`), showResult(ans)].join('\n\n')
+      if (t === 'm1_notprop') return [showStep(1, `y = ${d.m}x + ${d.b} has a y-intercept of ${d.b}`), showStep(2, `For proportionality, the line must pass through the origin (0,0)`), showStep(3, `This requires b = 0`), showResult(ans)].join('\n\n')
+      if (t === 'm1_inverse') return [showStep(1, `y = ${d.a}x and y = ${d.y}`), showStep(2, `Substitute: ${d.y} = ${d.a} × x`), showStep(3, `x = ${d.y} ÷ ${d.a} = ${d.x}`), showResult(ans)].join('\n\n')
+    }
+
+    if (t.startsWith('m2_')) {
+      if (t === 'm2_slope') return [showStep(1, `Points: (1, 0) and (${d.x1}, ${d.y1})`), showStep(2, `Slope = (${d.y1} - 0) / (${d.x1} - 1) = ${d.y1} / ${d.x1 - 1}`), showResult(ans)].join('\n\n')
+      if (t === 'm2_collinear' || t === 'm2_check') return [showStep(1, `Check if all points satisfy the same line equation`), showStep(2, `Points (2,1), (3,2), (4,3) all satisfy y = x - 1`), showStep(3, `Slope between consecutive points is constant (= 1)`), showStep(4, `Therefore they are collinear`), showResult(ans)].join('\n\n')
+      if (t === 'm2_next') return [showStep(1, `Pattern: (2,1), (3,2), (4,3)...`), showStep(2, `Each point increases x by 1 and y by 1`), showStep(3, `Next point: (4+1, 3+1) = (5, 4)`), showResult(ans)].join('\n\n')
+      if (t === 'm2_equation') return [showStep(1, `Line through (2,1) and (3,2)`), showStep(2, `Slope = (2-1)/(3-2) = 1`), showStep(3, `Equation: y - 1 = 1(x - 2), so y = x - 1`), showResult(ans)].join('\n\n')
+      if (t === 'm2_slope2') return [showStep(1, `Points: (${d.x1},${d.y1}) and (${d.x1+1},${d.y1+d.m})`), showStep(2, `Slope = (${d.y1+d.m} - ${d.y1}) / (${d.x1+1} - ${d.x1}) = ${d.m} / 1 = ${d.m}`), showResult(ans)].join('\n\n')
+      if (t === 'm2_area') return [showStep(1, `Area = ½|x₁(y₂-y₃) + x₂(y₃-y₁) + x₃(y₁-y₂)|`), showStep(2, `= ½|${d.x1}(${d.y2}-${d.y3}) + ${d.x2}(${d.y3}-${d.y1}) + ${d.x3}(${d.y1}-${d.y2})|`), showStep(3, `= ½ × |${2 * (Number(ans))}| = ${ans}`), showResult(ans)].join('\n\n')
+      if (t === 'm2_extend') return [showStep(1, `Points lie on line with slope m = ${d.m}`), showStep(2, `Slope = (y₂ - y₁) / (x₂ - x₁)`), showStep(3, `Slope = ${d.m}`), showResult(ans)].join('\n\n')
+      if (t === 'm2_perpslope') return [showStep(1, `Perpendicular slopes multiply to -1`), showStep(2, `m₁ × m₂ = -1`), showStep(3, `m₂ = -1 / ${d.m} = ${(-1/d.m).toFixed(2)}`), showResult(ans)].join('\n\n')
+    }
+
+    if (t.startsWith('m3_')) {
+      if (t === 'm3_through' || t === 'm3_neg') return [showStep(1, `For y = ${d.a !== undefined ? d.a : d.m}x, substitute x = 0`), showStep(2, `y = ${d.a !== undefined ? d.a : d.m} × 0 = 0`), showStep(3, `The line passes through (0, 0), the origin`), showResult(ans)].join('\n\n')
+      if (t === 'm3_yval') return [showStep(1, `y = ${d.a}x`), showStep(2, `Substitute x = ${d.x}`), showStep(3, `y = ${d.a} × ${d.x} = ${d.a * d.x}`), showResult(ans)].join('\n\n')
+      if (t === 'm3_not') return [showStep(1, `y = 2x + 1`), showStep(2, `At x = 0: y = 2(0) + 1 = 1`), showStep(3, `The line passes through (0, 1), not the origin (0, 0)`), showResult(ans)].join('\n\n')
+      if (t === 'm3_intercept') return [showStep(1, `y = ${d.a}x + ${d.b}`), showStep(2, `For the line to pass through origin, y must equal 0 when x = 0`), showStep(3, `At x = 0: y = ${d.b}. For origin: ${d.b} must be 0`), showResult(ans)].join('\n\n')
+      if (t === 'm3_scalar') return [showStep(1, `Point (3, ${3*d.a}) and direction (1, ${d.a})`), showStep(2, `(3, ${3*d.a}) = 3 × (1, ${d.a})`), showStep(3, `Yes, it's a scalar multiple (scalar = 3)`), showResult(ans)].join('\n\n')
+      if (t === 'm3_intersect') return [showStep(1, `y = ${d.a1}x and y = ${d.a2}x`), showStep(2, `Set equal: ${d.a1}x = ${d.a2}x`), showStep(3, `(${d.a1} - ${d.a2})x = 0, so x = 0`), showStep(4, `y = ${d.a1}(0) = 0`), showResult(ans)].join('\n\n')
+      if (t === 'm3_proportional') return [showStep(1, `y = ${d.a}x is in the form y = kx`), showStep(2, `The constant of proportionality is the coefficient of x`), showStep(3, `k = ${d.a}`), showResult(ans)].join('\n\n')
+      if (t === 'm3_findx') return [showStep(1, `y = ${d.a}x and y = ${d.a * d.x}`), showStep(2, `${d.a * d.x} = ${d.a} × x`), showStep(3, `x = ${d.a * d.x} ÷ ${d.a} = ${d.x}`), showResult(ans)].join('\n\n')
+    }
+
+    if (t.startsWith('m4_')) {
+      if (t === 'm4_yint' || t === 'm4_atzero') return [showStep(1, `y = ${d.m}x + ${d.b}`), showStep(2, `At x = 0: y = ${d.m}(0) + ${d.b} = ${d.b}`), showStep(3, `The y-intercept is ${d.b}`), showResult(ans)].join('\n\n')
+      if (t === 'm4_shift') return [showStep(1, `y = ${d.m}x + 3`), showStep(2, `Compared to y = ${d.m}x (which passes through origin)`), showStep(3, `The +3 shifts the line up by 3 units`), showResult(ans)].join('\n\n')
+      if (t === 'm4_eval') return [showStep(1, `y = ${d.m}x + ${d.b}`), showStep(2, `Substitute x = ${d.x}: y = ${d.m}(${d.x}) + ${d.b}`), showStep(3, `= ${d.m * d.x} + ${d.b} = ${d.m * d.x + d.b}`), showResult(ans)].join('\n\n')
+      if (t === 'm4_cross') return [showStep(1, `y = 3x + ${d.b}`), showStep(2, `The y-axis crossing is where x = 0`), showStep(3, `At x = 0: y = 3(0) + ${d.b} = ${d.b}`), showStep(4, `Crosses at (0, ${d.b})`), showResult(ans)].join('\n\n')
+      if (t === 'm4_noshift') return [showStep(1, `y = ${d.m}x + 0 = ${d.m}x`), showStep(2, `No constant term means the line passes through (0, 0)`), showResult(ans)].join('\n\n')
+      if (t === 'm4_parallel') return [showStep(1, `y = ${d.m}x + ${d.b1} and y = ${d.m}x + ${d.b2}`), showStep(2, `Same slope (${d.m}) means parallel lines`), showStep(3, `Distance between intercepts = ${d.b2} - ${d.b1} = ${d.b2 - d.b1}`), showResult(ans)].join('\n\n')
+      if (t === 'm4_frompts') return [showStep(1, `Line through (0, 3) and (${d.x}, ${d.m*d.x+3})`), showStep(2, `Slope = (${d.m*d.x+3} - 3) / (${d.x} - 0) = ${d.m*d.x} / ${d.x} = ${d.m}`), showResult(ans)].join('\n\n')
+      if (t === 'm4_compare') return [showStep(1, `y = ${d.m1}x + ${d.b} and y = ${d.m1}x + ${d.b+1}`), showStep(2, `Same slope, different intercepts`), showStep(3, `Difference in y at any x = ${d.b+1} - ${d.b} = 1`), showResult(ans)].join('\n\n')
+    }
+
+    if (t.startsWith('m5_')) {
+      if (t === 'm5_steep') return [showStep(1, `Steepness depends on the absolute value of the slope`), showStep(2, `|${d.m+2}| > |${d.m}|`), showStep(3, `y = ${d.m+2}x is steeper`), showResult(ans)].join('\n\n')
+      if (t === 'm5_intercept' || t === 'm5_zero') return [showStep(1, `Setting a = 0 makes the slope zero`), showStep(2, `y = 0·x + b = ${d.b !== undefined ? d.b : 0}`), showStep(3, `This is a horizontal line at y = ${d.b !== undefined ? d.b : 0}`), showResult(ans)].join('\n\n')
+      if (t === 'm5_both') return [showStep(1, `y = ${d.m}x + ${d.b}`), showStep(2, `Substitute x = ${d.x}`), showStep(3, `y = ${d.m}(${d.x}) + ${d.b} = ${d.m*d.x + d.b}`), showResult(ans)].join('\n\n')
+      if (t === 'm5_negative') return [showStep(1, `A negative slope means as x increases...`), showStep(2, `...y decreases`), showStep(3, `The line goes downward from left to right`), showResult(ans)].join('\n\n')
+      if (t === 'm5_perp') return [showStep(1, `Perpendicular lines have slopes that multiply to -1`), showStep(2, `m₁ × m₂ = -1`), showStep(3, `Product = -1`), showResult(ans)].join('\n\n')
+      if (t === 'm5_model') return [showStep(1, `Taxi fare = base + rate × distance`), showStep(2, `= ${d.b} + ${d.m} × ${d.x}`), showStep(3, `= ${d.b} + ${d.m * d.x} = ${d.m * d.x + d.b}`), showResult(ans)].join('\n\n')
+      if (t === 'm5_intersect') return [showStep(1, `Two lines with different slopes always intersect`), showStep(2, `Different slopes (${d.m1} ≠ ${d.m2}) → exactly 1 intersection`), showResult(ans)].join('\n\n')
+      if (t === 'm5_angle') return [showStep(1, `Larger slope → steeper → larger angle with x-axis`), showStep(2, `${d.m2} > ${d.m1}`), showStep(3, `Slope ${d.m2} makes a larger angle`), showResult(ans)].join('\n\n')
+    }
+
+    if (t.startsWith('m6_')) {
+      if (t === 'm6_verify' || t === 'm6_easy' || t === 'm6_easy2' || t === 'm6_easy3' || t === 'm6_zero') return [showStep(1, `Substitute x = ${d.x}${d.y !== undefined ? ', y = ' + d.y : ''} into the equation`), showStep(2, `Check: both sides should be equal`), showStep(3, `The solution is correct`), showResult(ans)].join('\n\n')
+      if (t === 'm6_count') return [showStep(1, `Look at the system of equations`), showStep(2, `Count the unknowns: x and y`), showStep(3, `There are 2 unknowns`), showResult(ans)].join('\n\n')
+      if (t === 'm6_matrix') return [showStep(1, `Coefficient matrix: [[2,3],[1,2]]`), showStep(2, `det = (2)(2) - (3)(1) = 4 - 3 = 1`), showResult(ans)].join('\n\n')
+      if (t === 'm6_unique') return [showStep(1, `For a unique solution, the coefficient matrix must be invertible`), showStep(2, `Invertibility requires det(A) ≠ 0`), showStep(3, `So the determinant must be non-zero`), showResult(ans)].join('\n\n')
+      if (t === 'm6_solve' || t === 'm6_2x2' || t === 'm6_2x2y') return [showStep(1, `System: ${d.a1}x + ${d.b1}y = ${d.c1} and ${d.a2}x + ${d.b2}y = ${d.c2}`), showStep(2, `Using elimination or substitution...`), showStep(3, `The solution is x = ${d.x}, y = ${d.y}`), showResult(ans)].join('\n\n')
+      if (t === 'm6_infinite') return [showStep(1, `When det(A) = 0, the matrix is singular`), showStep(2, `A singular matrix cannot be inverted`), showStep(3, `This means 0 or infinitely many solutions`), showResult(ans)].join('\n\n')
+    }
+
+    if (t.startsWith('m7_')) {
+      if (t === 'm7_invert' || t === 'm7_formula') return [showStep(1, `f(x) = ${d.a}x, so y = ${d.a}x`), showStep(2, `To find f⁻¹, swap x and y: x = ${d.a}y`), showStep(3, `Solve for y: y = x/${d.a}`), showStep(4, `f⁻¹(${d.a * d.x}) = ${d.a * d.x}/${d.a} = ${d.x}`), showResult(ans)].join('\n\n')
+      if (t === 'm7_oneone' || t === 'm7_injective') return [showStep(1, `f(x) = ${d.a}x + 2 is a linear function with non-zero slope`), showStep(2, `Every different x gives a different y`), showStep(3, `Therefore it is one-to-one (injective)`), showResult(ans)].join('\n\n')
+      if (t === 'm7_eval') return [showStep(1, `f(x) = ${d.a}x + ${d.b}`), showStep(2, `f(${d.x}) = ${d.a}(${d.x}) + ${d.b} = ${d.a*d.x + d.b}`), showResult(ans)].join('\n\n')
+      if (t === 'm7_inveq') return [showStep(1, `f(x) = ${d.a}x + ${d.b}`), showStep(2, `f⁻¹(y) = (y - ${d.b})/${d.a}`), showStep(3, `f⁻¹(${d.a*3+d.b}) = (${d.a*3+d.b} - ${d.b})/${d.a} = ${d.a*3}/${d.a} = 3`), showResult(ans)].join('\n\n')
+      if (t === 'm7_invformula') return [showStep(1, `f(x) = ${d.a}x + ${d.b}`), showStep(2, `Set y = ${d.a}x + ${d.b}`), showStep(3, `Solve for x: x = (y - ${d.b})/${d.a}`), showStep(4, `f⁻¹(y) = (y - ${d.b})/${d.a}`), showResult(ans)].join('\n\n')
+      if (t === 'm7_identity') return [showStep(1, `By definition, f(f⁻¹(x)) = x for any invertible function`), showStep(2, `Applying f then f⁻¹ returns to the original value`), showResult(ans)].join('\n\n')
+      if (t === 'm7_comp') return [showStep(1, `f(x) = ${d.a}x, g(x) = x/${d.a}`), showStep(2, `f(g(${d.x})) = f(${d.x}/${d.a}) = ${d.a} × (${d.x}/${d.a}) = ${d.x}`), showResult(ans)].join('\n\n')
+    }
+
+    if (t.startsWith('m8_')) {
+      if (t === 'm8_square') return [showStep(1, `f(x) = x²`), showStep(2, `f(${d.x}) = ${d.x}² = ${d.x * d.x}`), showResult(ans)].join('\n\n')
+      if (t === 'm8_quad') return [showStep(1, `f(x) = x² - ${d.a}`), showStep(2, `f(${d.x}) = ${d.x}² - ${d.a} = ${d.x*d.x} - ${d.a} = ${d.x*d.x - d.a}`), showResult(ans)].join('\n\n')
+      if (t === 'm8_fzero') return [showStep(1, `f(x) = x² - 9`), showStep(2, `f(3) = 3² - 9 = 9 - 9 = 0`), showResult(ans)].join('\n\n')
+      if (t === 'm8_invert' || t === 'm8_two') return [showStep(1, `f(x) = x² - ${d.a}`), showStep(2, `f(${d.x}) = f(${-d.x}) = ${d.x*d.x - d.a}`), showStep(3, `Two different inputs give the same output`), showStep(4, `Therefore not invertible over all reals`), showResult(ans)].join('\n\n')
+      if (t === 'm8_vertex') return [showStep(1, `f(x) = x² - ${d.a}`), showStep(2, `This is a parabola opening upward`), showStep(3, `Vertex is at x = 0 (the minimum point)`), showResult(ans)].join('\n\n')
+      if (t === 'm8_factored') return [showStep(1, `Discriminant = b² - 4ac = ${d.a}² - 4(1)(${d.b}) = ${d.a*d.a - 4*d.b}`), showStep(2, `If discriminant > 0: 2 roots, = 0: 1 root, < 0: 0 roots`), showStep(3, `Result: ${d.a*d.a - 4*d.b >= 0 ? (d.a*d.a - 4*d.b > 0 ? '2' : '1') : '0'} real roots`), showResult(ans)].join('\n\n')
+      if (t === 'm8_symmetry') return [showStep(1, `f(x) = x²`), showStep(2, `f(a) = a² and f(-a) = (-a) = a²`), showStep(3, `f(a) = f(-a) for all a → symmetric about the y-axis`), showResult(ans)].join('\n\n')
+      if (t === 'm8_restrict') return [showStep(1, `f(x) = x² - ${d.a}, restricted to x ≥ 0`), showStep(2, `On this domain, every y-value has exactly one x-value`), showStep(3, `So it is invertible (on the restricted domain)`), showResult(ans)].join('\n\n')
+    }
+
+    if (t.startsWith('m9_')) {
+      if (t === 'm9_quad' || t === 'm9_posneg') return [showStep(1, `x² = ${d.x * d.x}`), showStep(2, `Taking square root: x = ±${d.x}`), showStep(3, `There are two solutions: ${d.x} and ${-d.x}`), showResult(ans)].join('\n\n')
+      if (t === 'm9_intersects') return [showStep(1, `y = x² and y = ${d.a * d.a}`), showStep(2, `Set equal: x² = ${d.a * d.a}`), showStep(3, `x = ±${d.a} → two intersection points`), showResult(ans)].join('\n\n')
+      if (t === 'm9_both') return [showStep(1, `x² = ${d.x * d.x}`), showStep(2, `x = +${d.x} or x = -${d.x}`), showResult(ans)].join('\n\n')
+      if (t === 'm9_fail') return [showStep(1, `A horizontal line at y = k intersects x² at two points`), showStep(2, `Both x and -x give the same y-value`), showStep(3, `This fails the horizontal line test → not invertible`), showResult(ans)].join('\n\n')
+      if (t === 'm9_real') return [showStep(1, `x² + ${d.a} = 0`), showStep(2, `x² = -${d.a}`), showStep(3, `A negative number has no real square root`), showStep(4, `No real solutions`), showResult(ans)].join('\n\n')
+      if (t === 'm9_formula') return [showStep(1, `x² = ${d.a}`), showStep(2, `x = ±√${d.a} = ±${Math.round(Math.sqrt(d.a)*100)/100}`), showResult(ans)].join('\n\n')
+      if (t === 'm9_discrim') return [showStep(1, `x² + ${d.a}x + ${d.b} = 0`), showStep(2, `Discriminant = ${d.a}² - 4(1)(${d.b}) = ${d.a*d.a - 4*d.b}`), showStep(3, `${d.a*d.a - 4*d.b >= 0 ? 'Non-negative → real roots exist' : 'Negative → no real roots'}`), showResult(ans)].join('\n\n')
+    }
+
+    if (t.startsWith('m10_')) {
+      if (t === 'm10_cubic' || t === 'm10_cube_root') return [showStep(1, `x³ = ${d.x * d.x * d.x}`), showStep(2, `Taking cube root: x = ∛${d.x * d.x * d.x} = ${d.x}`), showResult(ans)].join('\n\n')
+      if (t === 'm10_degree') return [showStep(1, `A cubic polynomial has degree 3`), showStep(2, `By the Fundamental Theorem of Algebra, it has 3 roots (real or complex)`), showStep(3, `Maximum number of real roots is 3`), showResult(ans)].join('\n\n')
+      if (t === 'm10_onesol') return [showStep(1, `x³ = 27`), showStep(2, `x = ∛27 = 3`), showStep(3, `Cubic equations have exactly one real root when there's no sign change`), showResult(ans)].join('\n\n')
+      if (t === 'm10_odd') return [showStep(1, `Odd-degree polynomials go to +∞ on one side and -∞ on the other`), showStep(2, `By the Intermediate Value Theorem, they must cross zero`), showStep(3, `Therefore at least one real root exists`), showResult(ans)].join('\n\n')
+      if (t === 'm10_factor') return [showStep(1, `x³ - ${d.x}x = x(x² - ${d.x}) = x(x-1)(x+1) for x=1`), showStep(2, `Setting each factor to 0: x = 0, x = 1, x = -1`), showStep(3, `Three real roots`), showResult(ans)].join('\n\n')
+      if (t === 'm10_complex') return [showStep(1, `x³ = 1 has one real root (x = 1)`), showStep(2, `By the Fundamental Theorem, a degree-3 polynomial has 3 roots total`), showStep(3, `So there are 3 roots (1 real + 2 complex)`), showResult(ans)].join('\n\n')
+      if (t === 'm10_compare') return [showStep(1, `x³ = ${d.x*d.x*d.x} has 1 real solution`), showStep(2, `x² = ${d.x*d.x} has 2 real solutions (±${d.x})`), showResult(ans)].join('\n\n')
+    }
+
+    if (t.startsWith('m11_')) {
+      if (t === 'm11_r3' || t === 'm11_r2' || t === 'm11_r1') return [showStep(1, `A point in R^n needs n coordinates`), showStep(2, `${p.match(/R\^(\d)/) ? 'R^' + p.match(/R\^(\d)/)[1] : 'This space'} requires the matching number of coordinates`), showResult(ans)].join('\n\n')
+      if (t === 'm11_vecdim') return [showStep(1, `Vector ${JSON.stringify(d.v)} has ${d.v.length} components`), showStep(2, `A vector with n components lives in R^n`), showStep(3, `This vector lives in R^${d.v.length}`), showResult(ans)].join('\n\n')
+      if (t === 'm11_notation') return [showStep(1, `The 2D real coordinate plane is written as R²`), showStep(2, `R stands for real numbers, ² for two dimensions`), showResult(ans)].join('\n\n')
+      if (t === 'm11_nd') return [showStep(1, `A vector in R^n has n components`), showStep(2, `Each component represents one dimension`), showResult(ans)].join('\n\n')
+      if (t === 'm11_origin') return [showStep(1, `The origin is a single point`), showStep(2, `A single point has 0 dimensions`), showResult(ans)].join('\n\n')
+      if (t === 'm11_span') return [showStep(1, `One vector defines a direction`), showStep(2, `All scalar multiples form a line through the origin`), showStep(3, `A line is 1-dimensional`), showResult(ans)].join('\n\n')
+    }
+
+    if (t.startsWith('m12_')) {
+      if (t === 'm12_col1' || t === 'm12_col2') return [showStep(1, `The matrix columns are the images of the standard basis vectors`), showStep(2, `phi(${t === 'm12_col1' ? '(1,0)' : '(0,1)'}) gives the ${t === 'm12_col1' ? 'first' : 'second'} column`), showResult(ans)].join('\n\n')
+      if (t === 'm12_linear') return [showStep(1, `Matrix transformations satisfy: A(ax + by) = aA(x) + bA(y)`), showStep(2, `This is the definition of linearity`), showResult(ans)].join('\n\n')
+      if (t === 'm12_apply') return [showStep(1, `Matrix ${JSON.stringify(d.A)} applied to (1,0)`), showStep(2, `Result = first column of the matrix`), showStep(3, `= (${d.A[0][0]}, ${d.A[1][0]})`), showResult(ans)].join('\n\n')
+      if (t === 'm12_det') return [showStep(1, `det = ad - bc for 2×2 matrix`), showStep(2, `det = (${d.A[0][0]})(${d.A[1][1]}) - (${d.A[0][1]})(${d.A[1][0]}) = ${d.det}`), showStep(3, `det ≠ 0 means invertible (one-to-one mapping)`), showResult(ans)].join('\n\n')
+      if (t === 'm12_cols') return [showStep(1, `Standard basis: e₁ = (1,0), e₂ = (0,1)`), showStep(2, `Matrix columns = A(e₁) and A(e₂)`), showStep(3, `These are the images of the basis vectors`), showResult(ans)].join('\n\n')
+      if (t === 'm12_matvec') return [showStep(1, `Multiply matrix by vector: each row · vector`), showStep(2, `Row 1: ${d.A[0][0]}×${d.v[0]} + ${d.A[0][1]}×${d.v[1]} = ${d.r[0]}`), showStep(3, `Row 2: ${d.A[1][0]}×${d.v[0]} + ${d.A[1][1]}×${d.v[1]} = ${d.r[1]}`), showResult(ans)].join('\n\n')
+      if (t === 'm12_invertible') return [showStep(1, `det(${JSON.stringify(d.A)}) = ${d.det}`), showStep(2, `det ${d.det !== 0 ? '≠' : '='} 0, so the matrix is ${d.det !== 0 ? 'invertible' : 'not invertible'}`), showResult(ans)].join('\n\n')
+    }
+
+    if (t.startsWith('m13_')) {
+      if (t === 'm13_detdiag') return [showStep(1, `For a diagonal matrix, det = product of diagonal entries`), showStep(2, `det = ${d.a} × ${d.d} = ${d.a * d.d}`), showResult(ans)].join('\n\n')
+      if (t === 'm13_zero') return [showStep(1, `A = [[1,2],[2,4]]`), showStep(2, `det = (1)(4) - (2)(2) = 4 - 4 = 0`), showStep(3, `Zero determinant → not invertible`), showResult(ans)].join('\n\n')
+      if (t === 'm13_prod') return [showStep(1, `For a diagonal matrix, all off-diagonal entries are 0`), showStep(2, `det = product of diagonal entries = ${d.a} × ${d.d} = ${d.a*d.d}`), showResult(ans)].join('\n\n')
+      if (t === 'm13_det' || t === 'm13_invert') return [showStep(1, `A = ${JSON.stringify(d.A)}`), showStep(2, `det = (${d.A[0][0]})(${d.A[1][1]}) - (${d.A[0][1]})(${d.A[1][0]})`), showStep(3, `= ${d.A[0][0]*d.A[1][1]} - ${d.A[0][1]*d.A[1][0]} = ${d.det}`), showStep(4, d.det !== 0 ? 'det ≠ 0 → invertible' : 'det = 0 → not invertible'), showResult(ans)].join('\n\n')
+      if (t === 'm13_formula') return [showStep(1, `For A = [[a,b],[c,d]]`), showStep(2, `det(A) = ad - bc`), showResult(ans)].join('\n\n')
+      if (t === 'm13_singular') return [showStep(1, `det = 0 means the matrix is singular`), showStep(2, `Singular matrices cannot be inverted`), showStep(3, `Ax = b has no solution for most b`), showResult(ans)].join('\n\n')
+      if (t === 'm13_inverse_det') return [showStep(1, `det(A) = ${d.det}`), showStep(2, `det(A⁻¹) = 1/det(A) = 1/${d.det}`), showStep(3, `= ${d.det !== 0 ? (1/d.det).toFixed(2) : 'undefined'}`), showResult(ans)].join('\n\n')
+      if (t === 'm13_connection') return [showStep(1, `det ≠ 0 ⟺ A is invertible ⟺ Ax = b has a unique solution`), showStep(2, `These three conditions are equivalent`), showResult(ans)].join('\n\n')
+    }
+
+    if (t.startsWith('m14_')) {
+      if (t === 'm14_det0') return [showStep(1, `det(A) = 0 means the matrix is singular`), showStep(2, `Singular → not invertible → some information is lost`), showResult(ans)].join('\n\n')
+      if (t === 'm14_kernel') return [showStep(1, `The kernel = null space = {x : Ax = 0}`), showStep(2, `It's the set of all vectors that map to the zero vector`), showResult(ans)].join('\n\n')
+      if (t === 'm14_zero') return [showStep(1, `A × 0 = 0 always (by linearity)`), showStep(2, `So the zero vector is always in the null space`), showResult(ans)].join('\n\n')
+      if (t === 'm14_sing') return [showStep(1, `A singular matrix collapses some directions to zero`), showStep(2, `Non-zero vectors in those directions map to (0,0)`), showResult(ans)].join('\n\n')
+      if (t === 'm14_ns_dir') return [showStep(1, `A = [[1,2],[2,4]], solve Ax = 0`), showStep(2, `x + 2y = 0 → x = -2y`), showStep(3, `Null space direction: (-2, 1)`), showResult(ans)].join('\n\n')
+      if (t === 'm14_many') return [showStep(1, `If one non-zero vector maps to 0, so does every scalar multiple`), showStep(2, `This gives infinitely many vectors in the null space`), showResult(ans)].join('\n\n')
+      if (t === 'm14_ns_calc') return [showStep(1, `A = ${JSON.stringify(d.A)}, solve Ax = 0`), showStep(2, `Row 1: ${d.A[0][0]}x + ${d.A[0][1]}y = 0`), showStep(3, `x = -(${d.A[0][1]}/${d.A[0][0]})y → 1 free variable`), showStep(4, `Null space is 1-dimensional`), showResult(ans)].join('\n\n')
+      if (t === 'm14_nsr') return [showStep(1, `Rank-Nullity Theorem: rank + nullity = n (columns)`), showStep(2, `For 2×2 matrix: rank + nullity = 2`), showResult(ans)].join('\n\n')
+      if (t === 'm14_verify') return [showStep(1, `A = [[1,2],[2,4]], null vector = (-2,1)`), showStep(2, `Row 1 · (-2,1) = 1(-2) + 2(1) = -2 + 2 = 0 ✓`), showStep(3, `Row 2 · (-2,1) = 2(-2) + 4(1) = -4 + 4 = 0 ✓`), showResult(ans)].join('\n\n')
+    }
+
+    if (t.startsWith('m15_')) {
+      if (t === 'm15_mult') return [showStep(1, `Hill cipher: encrypt by multiplying the key matrix with the letter vector`), showStep(2, `C = K × P (matrix × vector)`), showResult(ans)].join('\n\n')
+      if (t === 'm15_mod') return [showStep(1, `Letters map to numbers 0-25 (A=0, B=1, ..., Z=25)`), showStep(2, `After matrix multiplication, take result mod 26`), showStep(3, `This keeps all values in the 0-25 range`), showResult(ans)].join('\n\n')
+      if (t === 'm15_decrypt') return [showStep(1, `Encryption: C = K × P`), showStep(2, `Decryption: P = K⁻¹ × C`), showStep(3, `We multiply by the inverse matrix`), showResult(ans)].join('\n\n')
+      if (t === 'm15_apply') return [showStep(1, `Key K = ${JSON.stringify(d.A)}, message P = ${JSON.stringify(d.v)}`), showStep(2, `C = K × P`), showStep(3, `First component = ${d.A[0][0]}×${d.v[0]} + ${d.A[0][1]}×${d.v[1]} = ${d.r[0]}`), showResult(ans)].join('\n\n')
+      if (t === 'm15_det' || t === 'm15_invexist') return [showStep(1, `det(K) = ${d.det}`), showStep(2, `det ${d.det !== 0 ? '≠' : '='} 0 → K⁻¹ ${d.det !== 0 ? 'exists' : 'does not exist'}`), showStep(3, `Can ${d.det !== 0 ? 'decrypt' : 'NOT decrypt'}`), showResult(ans)].join('\n\n')
+      if (t === 'm15_identity') return [showStep(1, `Identity matrix × P = P`), showStep(2, `The message is unchanged`), showResult(ans)].join('\n\n')
+      if (t === 'm15_s_u') return [showStep(1, `K = [[2,3],[3,4]], P = (18, 20)`), showStep(2, `C₁ = 2×18 + 3×20 = 36 + 60 = 96`), showStep(3, `In mod 26: 96 mod 26 = 18`), showResult(ans)].join('\n\n')
+      if (t === 'm15_2x2') return [showStep(1, `Basic Hill cipher uses 2×2 key matrices`), showStep(2, `It encrypts pairs of letters`), showResult(ans)].join('\n\n')
+      if (t === 'm15_reason') return [showStep(1, `To decrypt, we need K⁻¹`), showStep(2, `K⁻¹ exists only if det(K) ≠ 0`), showStep(3, `So det ≠ 0 is required for decryption`), showResult(ans)].join('\n\n')
+    }
+
+    if (t.startsWith('m16_')) {
+      if (t === 'm16_count') return [showStep(1, `Count the equations in the system`), showStep(2, `There are 2 equations`), showResult(ans)].join('\n\n')
+      if (t === 'm16_over') return [showStep(1, `More equations than unknowns = overdetermined`), showStep(2, `This typically means no exact solution`), showResult(ans)].join('\n\n')
+      if (t === 'm16_easy') return [showStep(1, `2A = ${2*d.x}`), showStep(2, `A = ${2*d.x} / 2 = ${d.x}`), showResult(ans)].join('\n\n')
+      if (t === 'm16_solve' || t === 'm16_verify') return [showStep(1, `System: 3A + C = ${3*d.x+d.y} and A + 2C = ${d.x+2*d.y}`), showStep(2, `From equation 1: C = ${3*d.x+d.y} - 3A`), showStep(3, `Substitute into equation 2 and solve`), showStep(4, `A = ${d.x}, C = ${d.y}`), showResult(ans)].join('\n\n')
+      if (t === 'm16_leastsq') return [showStep(1, `When no exact solution exists for Ax = b`), showStep(2, `We find x̂ that minimizes ||Ax̂ - b||²`), showStep(3, `This is called the least squares method`), showResult(ans)].join('\n\n')
+      if (t === 'm16_residual') return [showStep(1, `r = b - Ax̂ is the residual vector`), showStep(2, `It measures how far Ax̂ is from b`), showStep(3, `This is the error of the approximate solution`), showResult(ans)].join('\n\n')
+      if (t === 'm16_normal') return [showStep(1, `To minimize ||Ax - b||², take derivative and set to 0`), showStep(2, `This gives: Aᵀ(Ax) = Aᵀb`), showStep(3, `AᵀAx = Aᵀb (the normal equation)`), showResult(ans)].join('\n\n')
+      if (t === 'm16_rows') return [showStep(1, `A 3×2 matrix maps R² → R³`), showStep(2, `3 equations, 2 unknowns → overdetermined`), showResult(ans)].join('\n\n')
+    }
+
+    if (t.startsWith('m17_') || t.startsWith('m20_') || t.startsWith('m21_')) {
+      if (t.includes('steady') || t.includes('calc') || t.includes('step')) {
+        return [showStep(1, `The transition matrix describes state-to-state probabilities`), showStep(2, `Steady state π satisfies πP = π and Σπᵢ = 1`), showStep(3, `Solve the system of linear equations`), showStep(4, `The answer is ${ans}`), showResult(ans)].join('\n\n')
+      }
+      if (t.includes('rows') || t.includes('sum')) return [showStep(1, `Each row of a Markov transition matrix represents probabilities from one state`), showStep(2, `Probabilities from any state must sum to 1`), showResult(ans)].join('\n\n')
+      if (t.includes('indep') || t.includes('multi')) return [showStep(1, `The steady state is determined by the transition matrix alone`), showStep(2, `Different starting states converge to the same steady state`), showStep(3, `This is a fundamental property of regular Markov chains`), showResult(ans)].join('\n\n')
+      if (t.includes('eigen')) return [showStep(1, `The steady state is an eigenvector of P`), showStep(2, `Eigenvalue = 1 (since πP = π)`), showStep(3, `This is the dominant eigenvalue of any Markov matrix`), showResult(ans)].join('\n\n')
+      if (t.includes('converge')) return [showStep(1, `Every regular Markov chain converges to a unique steady state`), showStep(2, `This happens because the dominant eigenvalue is 1 and all others are < 1`), showResult(ans)].join('\n\n')
+      if (t.includes('equations')) return [showStep(1, `πP = π gives n equations (one per state)`), showStep(2, `Plus the normalization constraint Σπᵢ = 1`), showStep(3, `Total: n equations for n unknowns`), showResult(ans)].join('\n\n')
+    }
+
+    if (t.startsWith('m18_') || t.startsWith('m19_')) {
+      if (t.includes('rows') || t.includes('cols')) return [showStep(1, `Count the rows/columns of the matrix`), showStep(2, `More rows than columns → overdetermined system`), showResult(ans)].join('\n\n')
+      if (t.includes('intersect') || t.includes('three') || t.includes('unlike')) return [showStep(1, `Two non-parallel lines intersect at exactly one point`), showStep(2, `A third random line is unlikely to pass through that same point`), showStep(3, `This is why overdetermined systems usually have no exact solution`), showResult(ans)].join('\n\n')
+      if (t.includes('exact')) return [showStep(1, `3 equations with 2 unknowns: each equation is a line`), showStep(2, `All three lines must intersect at one point for an exact solution`), showStep(3, `This is possible but rare for random coefficients`), showResult(ans)].join('\n\n')
+      if (t.includes('least') || t.includes('best') || t.includes('projection')) return [showStep(1, `When no exact solution exists, project b onto col(A)`), showStep(2, `The projection gives the closest point in the column space`), showStep(3, `This minimizes the squared error ||Ax - b||²`), showResult(ans)].join('\n\n')
+      if (t.includes('geometric') || t.includes('residual') || t.includes('unlikely')) return [showStep(1, `Geometrically: overdetermined = too many constraints`), showStep(2, `The residual r = b - Ax̂ measures the approximation error`), showResult(ans)].join('\n\n')
+    }
+
+    if (t.startsWith('m22_') || t.startsWith('m23_')) {
+      if (t.includes('dot') || t.includes('self')) return [showStep(1, `Dot product: a·b = a₁b₁ + a₂b₂`), showStep(2, `Compute the sum of products of corresponding components`), showStep(3, `Result: ${ans}`), showResult(ans)].join('\n\n')
+      if (t.includes('perp') || t.includes('check')) return [showStep(1, `Two vectors are perpendicular iff their dot product = 0`), showStep(2, `Compute the dot product`), showStep(3, `If 0, they are perpendicular`), showResult(ans)].join('\n\n')
+      if (t.includes('eq') || t.includes('normal')) return [showStep(1, `For (a,b)·(x,y) = 0: ax + by = 0`), showStep(2, `This is the equation of all perpendicular vectors`), showResult(ans)].join('\n\n')
+      if (t.includes('zero')) return [showStep(1, `The zero vector · any vector = 0`), showStep(2, `So technically it is perpendicular to everything`), showResult(ans)].join('\n\n')
+      if (t.includes('plane') || t.includes('3d') || t.includes('23d')) return [showStep(1, `An equation ax + by + cz = 0 defines a plane in R³`), showStep(2, `The normal to the plane is (a, b, c)`), showResult(ans)].join('\n\n')
+      if (t.includes('line') || t.includes('equations')) return [showStep(1, `A line in R³ is the intersection of 2 planes`), showStep(2, `So you need 2 independent equations`), showResult(ans)].join('\n\n')
+      if (t.includes('check2') || t.includes('dot1')) return [showStep(1, `Compute the dot product component by component`), showStep(2, `Sum the products: ${ans}`), showResult(ans)].join('\n\n')
+      if (t.includes('dim')) return [showStep(1, `In R², the perpendicular complement of a line is another line`), showStep(2, `So there is 1 linearly independent perpendicular vector`), showResult(ans)].join('\n\n')
+      if (t.includes('angle')) return [showStep(1, `Compute the dot product first`), showStep(2, `If dot product = 0, angle = 90° (perpendicular)`), showResult(ans)].join('\n\n')
+    }
+
+    if (t.startsWith('m24_') || t.startsWith('m25_') || t.startsWith('m29_') || t.startsWith('m30_')) {
+      if (t.includes('free') || t.includes('nullity') || t.includes('nsr') || t.includes('dim_null')) return [showStep(1, `Free variables = columns - rank`), showStep(2, `For this system: ${ans} free variable(s)`), showStep(3, `Each free variable gives one dimension to the null space`), showResult(ans)].join('\n\n')
+      if (t.includes('null') || t.includes('kernel') || t.includes('ns_dir') || t.includes('direction')) return [showStep(1, `Solve Ax = 0 by row reduction`), showStep(2, `Find the free variables`), showStep(3, `Express the solution in terms of free variables`), showStep(4, `The null space direction is ${ans}`), showResult(ans)].join('\n\n')
+      if (t.includes('perp') || t.includes('verify')) return [showStep(1, `Null space is always perpendicular to the row space`), showStep(2, `This follows from Ax = 0: each row·x = 0`), showResult(ans)].join('\n\n')
+      if (t.includes('rank') || t.includes('det')) return [showStep(1, `Compute the determinant or row reduce`), showStep(2, `The rank is the number of independent rows/columns`), showStep(3, `Answer: ${ans}`), showResult(ans)].join('\n\n')
+      if (t.includes('span')) return [showStep(1, `The span is the set of all linear combinations`), showStep(2, `For independent vectors, span is a line, plane, etc.`), showResult(ans)].join('\n\n')
+      if (t.includes('ftoc') || t.includes('theorem')) return [showStep(1, `Rank-Nullity Theorem:`), showStep(2, `rank(A) + nullity(A) = number of columns`), showResult(ans)].join('\n\n')
+    }
+
+    if (t.startsWith('m26_') || t.startsWith('m31_') || t.startsWith('m37_') || t.startsWith('m38_') || t.startsWith('m39_') || t.startsWith('m40_')) {
+      if (t.includes('rank') || t.includes('dim')) return [showStep(1, `Rank = dimension of row space = dimension of column space`), showStep(2, `Row reduce to find the rank`), showStep(3, `Answer: ${ans}`), showResult(ans)].join('\n\n')
+      if (t.includes('perp') || t.includes('orthogonal') || t.includes('dot') || t.includes('verify') || t.includes('confirm') || t.includes('pairs')) return [showStep(1, `The Fundamental Theorem of Linear Algebra:`), showStep(2, `Row Space ⊥ Null Space, and Column Space ⊥ Left Null Space`), showStep(3, `These are the two orthogonal pairs`), showResult(ans)].join('\n\n')
+      if (t.includes('span') || t.includes('sum') || t.includes('direct')) return [showStep(1, `R(A) ⊕ N(A) = R^n (input space)`), showStep(2, `C(A) ⊕ N(A^T) = R^m (output space)`), showStep(3, `The ⊕ means direct sum (orthogonal and complementary)`), showResult(ans)].join('\n\n')
+      if (t.includes('dim_sum') || t.includes('same')) return [showStep(1, `dim(Row Space) + dim(Null Space) = n (columns)`), showStep(2, `dim(Column Space) = dim(Row Space) = rank`), showResult(ans)].join('\n\n')
+      if (t.includes('nmt') || t.includes('left_null')) return [showStep(1, `N(A^T) is the left null space`), showStep(2, `It's perpendicular to the column space C(A)`), showStep(3, `Find by solving A^T y = 0`), showResult(ans)].join('\n\n')
+      if (t.includes('input') || t.includes('output') || t.includes('rn') || t.includes('cm')) return [showStep(1, `R(A) and N(A) live in the input space R^n`), showStep(2, `C(A) and N(A^T) live in the output space R^m`), showResult(ans)].join('\n\n')
+      if (t.includes('zero')) return [showStep(1, `The zero vector is in every subspace`), showStep(2, `Subspaces must contain the zero vector by definition`), showResult(ans)].join('\n\n')
+    }
+
+    if (t.startsWith('m27_') || t.startsWith('m33_') || t.startsWith('m34_') || t.startsWith('m35_') || t.startsWith('m36_')) {
+      if (t.includes('det') || t.includes('rank') || t.includes('nullity')) return [showStep(1, `Compute det or row reduce the matrix`), showStep(2, `det = ${d.det !== undefined ? d.det : '0'}, rank = ${ans}`), showResult(ans)].join('\n\n')
+      if (t.includes('apply') || t.includes('line') || t.includes('k10') || t.includes('k62') || t.includes('general') || t.includes('formula') || t.includes('pattern')) return [showStep(1, `Multiply the matrix by the vector`), showStep(2, `Each output component is a dot product of a row with the input`), showStep(3, `Result: ${ans}`), showResult(ans)].join('\n\n')
+      if (t.includes('diff') || t.includes('collapse') || t.includes('dim')) return [showStep(1, `A rank-1 matrix collapses dimensions`), showStep(2, `Input space has more dimensions than output`), showStep(3, `Some information is lost in the collapse`), showResult(ans)].join('\n\n')
+      if (t.includes('null') || t.includes('ns')) return [showStep(1, `The null space direction is the direction of collapse`), showStep(2, `Vectors along this direction map to zero`), showStep(3, `Direction: ${ans}`), showResult(ans)].join('\n\n')
+      if (t.includes('range')) return [showStep(1, `The range = column space = set of all possible outputs`), showStep(2, `For a rank-1 matrix, the range is a line`), showResult(ans)].join('\n\n')
+      if (t.includes('perp_line') || t.includes('perp')) return [showStep(1, `Null space and range are always perpendicular`), showStep(2, `This is part of the Fundamental Theorem`), showResult(ans)].join('\n\n')
+      if (t.includes('all_output') || t.includes('surjective') || t.includes('parallel')) return [showStep(1, `Each parallel line maps to a different point on the range line`), showStep(2, `The mapping covers the entire range line`), showResult(ans)].join('\n\n')
+      if (t.includes('verify_all') || t.includes('perp2') || t.includes('perp3')) return [showStep(1, `Check: row · null vector = 0`), showStep(2, `This confirms the orthogonality`), showResult(ans)].join('\n\n')
+      if (t.includes('projection') || t.includes('subspace') || t.includes('close') || t.includes('linear')) return [showStep(1, `The mapping projects onto the range and collapses along the null space`), showStep(2, `This is the geometric interpretation of rank-1 matrices`), showResult(ans)].join('\n\n')
+    }
+
+    if (t.startsWith('m41_') || t.startsWith('m42_') || t.startsWith('m43_') || t.startsWith('m44_') || t.startsWith('m45_')) {
+      if (t.includes('rank') || t.includes('dim') || t.includes('maxrank') || t.includes('zero') || t.includes('i4')) return [showStep(1, `Rank = number of independent rows (or columns)`), showStep(2, `Row reduce to find the rank`), showStep(3, `Answer: ${ans}`), showResult(ans)].join('\n\n')
+      if (t.includes('subspace') || t.includes('closed') || t.includes('line') || t.includes('span') || t.includes('add')) return [showStep(1, `A subspace is closed under addition and scalar multiplication`), showStep(2, `The range of a linear map satisfies both properties`), showStep(3, `Therefore the range is always a subspace`), showResult(ans)].join('\n\n')
+      if (t.includes('prop') || t.includes('additive') || t.includes('closure')) return [showStep(1, `Linearity: A(ax + by) = aA(x) + bA(y)`), showStep(2, `This guarantees closure under addition and scaling`), showResult(ans)].join('\n\n')
+      if (t.includes('dep') || t.includes('indep')) return [showStep(1, `Check if one vector is a scalar multiple of the other`), showStep(2, `(2,4,6) = 2 × (1,2,3) → linearly dependent`), showResult(ans)].join('\n\n')
+      if (t.includes('types')) return [showStep(1, `For 3×3 rank-2: R=2D, N=1D, C=2D, N^T=1D`), showStep(2, `All are either 1D lines or 2D planes`), showResult(ans)].join('\n\n')
+      if (t.includes('nullity') || t.includes('null') || t.includes('ftoc') || t.includes('rank0') || t.includes('rank2')) return [showStep(1, `Rank-Nullity: rank + nullity = n`), showStep(2, `${ans}`), showResult(ans)].join('\n\n')
+      if (t.includes('basis') || t.includes('range') || t.includes('factor')) return [showStep(1, `The range is spanned by ${ans} independent columns`), showStep(2, `These form a basis for the column space`), showResult(ans)].join('\n\n')
+      if (t.includes('variance') || t.includes('compressed') || t.includes('missing') || t.includes('entries')) return [showStep(1, `Low-rank approximation captures the main patterns`), showStep(2, `Missing entries can be predicted from the low-rank structure`), showResult(ans)].join('\n\n')
+    }
+
+    if (t.startsWith('m46_') || t.startsWith('m47_') || t.startsWith('m48_') || t.startsWith('m49_') || t.startsWith('m50_')) {
+      if (t.includes('four') || t.includes('complete') || t.includes('picture')) return [showStep(1, `The four fundamental subspaces:`), showStep(2, `Row Space R(A), Null Space N(A), Column Space C(A), Left Null Space N(A^T)`), showStep(3, `R(A) ⊥ N(A) and C(A) ⊥ N(A^T)`), showResult(ans)].join('\n\n')
+      if (t.includes('rn') || t.includes('input') || t.includes('spaces')) return [showStep(1, `R(A) and N(A) live in R^n (input space)`), showStep(2, `They are orthogonal complements`), showStep(3, `Together they span all of R^n`), showResult(ans)].join('\n\n')
+      if (t.includes('cm') || t.includes('output') || t.includes('m')) return [showStep(1, `C(A) and N(A^T) live in R^m (output space)`), showStep(2, `They are orthogonal complements`), showStep(3, `Together they span all of R^m`), showResult(ans)].join('\n\n')
+      if (t.includes('dot') || t.includes('check') || t.includes('verify') || t.includes('always')) return [showStep(1, `Compute the dot product of the given vectors`), showStep(2, `If result = 0, they are perpendicular`), showStep(3, `This confirms the orthogonal complement relationship`), showResult(ans)].join('\n\n')
+      if (t.includes('check') || t.includes('fn') || t.includes('rank') || t.includes('b')) return [showStep(1, `Rank-Nullity Theorem: rank + nullity = n`), showStep(2, `This holds for every matrix`), showResult(ans)].join('\n\n')
+      if (t.includes('done') || t.includes('wisdom')) return [showStep(1, `Congratulations on completing the Linear Algebra journey!`), showStep(2, `You've learned the four fundamental subspaces and their relationships`), showResult(ans)].join('\n\n')
+    }
+
+    if (t.startsWith('m51_') || t.startsWith('m52_') || t.startsWith('m53_') || t.startsWith('m54_') || t.startsWith('m55_') || t.startsWith('m56_')) {
+      if (t.includes('rank') || t.includes('maxrank')) return [showStep(1, `The rank of a matrix is at most min(rows, cols)`), showStep(2, `For a ${d.A ? d.A.length + '×' + d.A[0].length : 'm×n'} matrix: rank ≤ min(m, n)`), showResult(ans)].join('\n\n')
+      if (t.includes('dot') || t.includes('similarity') || t.includes('cosine') || t.includes('cos')) return [showStep(1, `Dot product / cosine similarity measures how aligned two vectors are`), showStep(2, `Higher value = more similar preferences`), showStep(3, `Result: ${ans}`), showResult(ans)].join('\n\n')
+      if (t.includes('users') || t.includes('similar') || t.includes('collab') || t.includes('method') || t.includes('knn')) return [showStep(1, `Collaborative filtering finds users with similar rating patterns`), showStep(2, `Similarity is measured by dot product or cosine similarity`), showStep(3, `Recommendations are based on what similar users liked`), showResult(ans)].join('\n\n')
+      if (t.includes('sparse') || t.includes('links') || t.includes('markov') || t.includes('damping') || t.includes('steady') || t.includes('page') || t.includes('graph')) return [showStep(1, `The web graph is modeled as a Markov chain`), showStep(2, `PageRank is the steady-state distribution`), showStep(3, `Most pages link to very few others → sparse matrix`), showResult(ans)].join('\n\n')
+      if (t.includes('converge') || t.includes('power') || t.includes('iterate') || t.includes('norm') || t.includes('speed') || t.includes('teleport') || t.includes('eigen')) return [showStep(1, `The Power Method: repeatedly multiply by A and normalize`), showStep(2, `v_{k+1} = A·v_k / ||A·v_k||`), showStep(3, `Converges to the dominant eigenvector`), showResult(ans)].join('\n\n')
+      if (t.includes('pca') || t.includes('reduce') || t.includes('variance') || t.includes('eigen') || t.includes('components') || t.includes('explained') || t.includes('percent') || t.includes('k_choice') || t.includes('pca_svd') || t.includes('covariance')) return [showStep(1, `PCA finds directions of maximum variance`), showStep(2, `These directions are eigenvectors of the covariance matrix`), showStep(3, `Keep the top-k eigenvectors for dimensionality reduction`), showResult(ans)].join('\n\n')
+      if (t.includes('svd') || t.includes('nz') || t.includes('zero_sv') || t.includes('sigma') || t.includes('decomp') || t.includes('v') || t.includes('rank1') || t.includes('approx') || t.includes('complete')) return [showStep(1, `SVD: A = UΣV^T`), showStep(2, `U reveals column space, V reveals row space`), showStep(3, `Non-zero singular values = rank`), showStep(4, `SVD reveals all four fundamental subspaces`), showResult(ans)].join('\n\n')
+      if (t.includes('factor') || t.includes('lowrank') || t.includes('compress') || t.includes('missing') || t.includes('matrix')) return [showStep(1, `Low-rank approximation captures the main patterns in data`), showStep(2, `Matrix factorization predicts missing entries`), showStep(3, `SVD is used to find the best low-rank approximation`), showResult(ans)].join('\n\n')
+      if (t.includes('teleport') || t.includes('sinks') || t.includes('damping') || t.includes('sum') || t.includes('google')) return [showStep(1, `Teleportation prevents getting stuck in dead ends`), showStep(2, `With probability d, follow a link; with 1-d, jump to random page`), showStep(3, `All PageRank values sum to 1`), showResult(ans)].join('\n\n')
+      if (t.includes('zero') || t.includes('kernel')) return [showStep(1, `Zero singular values correspond to the null space`), showStep(2, `The null space is spanned by the right singular vectors for zero singular values`), showResult(ans)].join('\n\n')
+      if (t.includes('percent') || t.includes('explained')) return [showStep(1, `Explained variance ratio = eigenvalue / sum of all eigenvalues`), showStep(2, `Choose k so cumulative explained variance > 90%`), showResult(ans)].join('\n\n')
+    }
+
+    // Fallback: generic step-by-step
+    return [showStep(1, `Look at the question: ${p}`), showStep(2, `The answer is derived from the given information`), showStep(3, `Answer: ${ans}`)].join('\n\n')
+  }
+
+  function MissionQuizApp({ missionId, onBack }) {
+    const diffs = ['easy', 'medium', 'hard']
+    const diffLabels = { easy: 'Easy', medium: 'Medium', hard: 'Hard' }
+    const [difficulty, setDifficulty] = useState('easy')
+    const [isAdaptive, setIsAdaptive] = useState(false)
+    const [adaptScore, setAdaptScore] = useState(0)
+    const [numQuestions, setNumQuestions] = useState('10')
+    const [started, setStarted] = useState(false)
+    const [finished, setFinished] = useState(false)
+    const [question, setQuestion] = useState(null)
+    const [answer, setAnswer] = useState('')
+    const [score, setScore] = useState(0)
+    const [questionNumber, setQuestionNumber] = useState(0)
+    const [totalQ, setTotalQ] = useState(10)
+    const [feedback, setFeedback] = useState('')
+    const [isCorrect, setIsCorrect] = useState(null)
+    const [loading, setLoading] = useState(false)
+    const [loadError, setLoadError] = useState('')
+    const [revealed, setRevealed] = useState(false)
+    const [results, setResults] = useState([])
+    const [explanation, setExplanation] = useState('')
+    const timer = useTimer()
+    const advanceFnRef = useRef(null)
+    const adaptScoreRef = useRef(0)
+    const submittedRef = useRef(false)
+    const advancedRef = useRef(false)
+
+    const effectiveDifficulty = () => isAdaptive ? adaptiveLevel(adaptScoreRef.current) : difficulty
+
+    const loadQuestion = async () => {
+      setLoading(true); setLoadError(''); setExplanation('')
+      try {
+        const diff = effectiveDifficulty()
+        const r = await fetch(`${API}/la-mission-quiz-api/question?missionId=${missionId}&difficulty=${diff}`)
+        if (!r.ok) throw new Error(`Server returned ${r.status}`)
+        const data = await r.json()
+        if (!data || !data.prompt) throw new Error('Question payload is missing a prompt')
+        setQuestion(data); setAnswer(''); setFeedback(''); setIsCorrect(null); setRevealed(false)
+        submittedRef.current = false; advancedRef.current = false
+        timer.start()
+      } catch (e) {
+        console.error('Failed to load mission quiz question:', e)
+        setQuestion(null); setLoadError(`Couldn't load a question (${e.message}). Tap Retry.`)
+      }
+      setLoading(false)
+    }
+    const startQuiz = () => {
+      const t = Math.max(1, Math.min(100, Number(numQuestions) || 10))
+      setTotalQ(t); setScore(0); setQuestionNumber(1); setResults([]); setStarted(true); setFinished(false)
+      setAdaptScore(0); adaptScoreRef.current = 0
+      submittedRef.current = false; advancedRef.current = false
+    }
+    useEffect(() => { if (started && !finished && questionNumber > 0) loadQuestion() }, [started, questionNumber])
+    const advance = () => {
+      if (advancedRef.current) return
+      advancedRef.current = true
+      if (questionNumber >= totalQ) setFinished(true); else setQuestionNumber(n => n + 1)
+    }
+    advanceFnRef.current = advance
+    useAutoAdvance(revealed, advanceFnRef, isCorrect)
+    useEffect(() => {
+      if (!revealed || isCorrect) return
+      const h = (e) => { if (e.key === 'Enter') { e.preventDefault(); advance() } }
+      window.addEventListener('keydown', h)
+      return () => window.removeEventListener('keydown', h)
+    }, [revealed, isCorrect, questionNumber])
+
+    const handleSubmit = async () => {
+      if (!question || revealed || !answer.trim()) return
+      if (submittedRef.current) return
+      submittedRef.current = true
+      const timeTaken = timer.stop()
+      const payload = { ...question, userAnswer: answer.trim() }
+      try {
+        const r = await fetch(`${API}/la-mission-quiz-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+        const data = await r.json()
+        setIsCorrect(data.correct); setRevealed(true)
+        if (data.correct) setScore(s => s + 1)
+        setFeedback(data.correct ? `Correct! ${data.display}` : `Incorrect. Answer: ${data.display}`)
+        setResults(prev => [...prev, { prompt: question.prompt, userAnswer: answer.trim(), correctAnswer: data.display, correct: data.correct, time: timeTaken }])
+        if (isAdaptive) {
+          setAdaptScore(prev => { const next = data.correct ? Math.min(3, prev + 0.25) : Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next })
+        }
+        if (!data.correct) {
+          setExplanation(generateMqExplanation(question))
+        }
+      } catch (e) { submittedRef.current = false; console.error('Failed to check answer:', e) }
+    }
+
+    const handleSolve = async () => {
+      if (!question || revealed) return
+      submittedRef.current = true; timer.stop()
+      setIsCorrect(false); setRevealed(true)
+      const display = question.display || question.answer || ''
+      setFeedback(`Solution: ${display}`)
+      setExplanation(generateMqExplanation(question))
+      setResults(prev => [...prev, { prompt: question.prompt, userAnswer: '(solved)', correctAnswer: display, correct: false, time: 0 }])
+    }
+
+    const handleSkip = () => {
+      if (!question || revealed) return
+      submittedRef.current = true; timer.stop()
+      setIsCorrect(false); setRevealed(true)
+      setFeedback('Skipped — counted as incorrect.')
+      setResults(prev => [...prev, { prompt: question.prompt, userAnswer: '(skipped)', correctAnswer: '—', correct: false, time: 0 }])
+      if (isAdaptive) { setAdaptScore(prev => { const next = Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next }) }
+    }
+
+    const handleKeyDown = (e) => { if (e.key === 'Enter') { e.preventDefault(); if (!revealed) handleSubmit() } }
+    const getPlaceholder = () => {
+      if (!question) return 'Type your answer'
+      const at = question.answerType
+      if (at === 'vector') return 'e.g. (3, 5)'
+      if (at === 'matrix') return 'e.g. [1,2;3,4]'
+      return 'e.g. 42 or -3.5'
+    }
+    const curAdaptLevel = adaptiveLevel(adaptScore)
+
+    return (
+      <QuizLayout title={`Mission ${missionId} Quiz`} subtitle="Test your understanding" onBack={onBack} timer={started && !finished ? timer : null}>
+        {!started && !finished && <div className="welcome-box">
+          <p className="welcome-text">Mission {missionId} Quiz</p>
+          <p style={{ fontSize: '0.85rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Answer questions related to this mission's topic. Difficulty adjusts based on your performance.</p>
+          <div className="checkbox-group" style={{ marginBottom: '12px' }}>
+            {diffs.map(d => (
+              <label key={d} className={`checkbox-pill${!isAdaptive && difficulty === d ? ' active' : ''}`}>
+                <input type="radio" name="mq-diff" checked={!isAdaptive && difficulty === d} onChange={() => { setDifficulty(d); setIsAdaptive(false) }} />
+                {diffLabels[d]}
+              </label>
+            ))}
+            <label className={`checkbox-pill${isAdaptive ? ' active' : ''}`} style={isAdaptive ? { background: 'linear-gradient(135deg, #4caf50, #ff9800, #f44336, #9c27b0)', color: '#fff', border: 'none' } : {}}>
+              <input type="radio" name="mq-diff" checked={isAdaptive} onChange={() => setIsAdaptive(true)} />
+              Adaptive
+            </label>
+          </div>
+          {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level.</p>}
+          <div className="question-count-row">
+            <label className="question-count-label">How many questions? (max 100)</label>
+            <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={e => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} />
+          </div>
+          <div className="button-row"><button onClick={startQuiz}>Start Quiz</button></div>
+        </div>}
+        {started && !finished && <>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.3rem' }}>
+            <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
+            {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
+          </div>
+          {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
+          {question && <div style={{ textAlign: 'center' }}>
+            <div className="question-prompt" style={{ fontSize: '1.3rem', margin: '20px 0', lineHeight: '1.6' }}>{question.prompt}</div>
+            <input className="answer-input" type="text" value={answer} onChange={e => { if (!revealed) setAnswer(e.target.value) }} disabled={revealed} placeholder={getPlaceholder()} onKeyDown={handleKeyDown} autoFocus />
+          </div>}
+          {!question && loading && <div style={{ textAlign: 'center', padding: '24px', color: 'var(--clr-text-soft)' }}>Loading question…</div>}
+          {!question && !loading && loadError && (
+            <div style={{ textAlign: 'center', padding: '20px', color: 'var(--clr-wrong)', fontSize: '0.95rem' }}>
+              <div style={{ marginBottom: '10px' }}>{loadError}</div>
+              <button onClick={loadQuestion}>Retry</button>
+            </div>
+          )}
+          {renderFeedback(feedback, isCorrect)}
+          {explanation && <div style={{ margin: '16px auto', maxWidth: 600, padding: '16px 20px', borderRadius: 'var(--radius)', background: 'var(--clr-surface)', border: '1px solid var(--clr-accent)', textAlign: 'left', whiteSpace: 'pre-wrap', fontSize: '0.92rem', lineHeight: '1.6', color: 'var(--clr-text)' }}>
+            <strong style={{ color: 'var(--clr-accent)', display: 'block', marginBottom: '8px', fontSize: '1rem' }}>Explanation</strong>
+            {explanation}
+          </div>}
+          <div className="button-row">
+            {!revealed ? <>
+              <button onClick={handleSubmit} disabled={loading || !answer.trim()}>Submit</button>
+              <button onClick={handleSolve} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>
+              {isAdaptive && <button onClick={handleSkip} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-text-soft)', color: 'var(--clr-text-soft)' }}>Skip</button>}
+            </> : <button onClick={advance}>{questionNumber >= totalQ ? 'Finish Quiz' : 'Next Question'}</button>}
+          </div>
+          {isAdaptive && <div style={{ textAlign: 'center', margin: '10px 0 4px' }}>
+            <span style={{ fontSize: '0.75rem', color: 'var(--clr-text-soft)', marginRight: '8px' }}>How are you feeling?</span>
+            <button onClick={() => { setAdaptScore(prev => { const next = Math.min(3, prev + 0.3); adaptScoreRef.current = next; return next }); if (!revealed) handleSkip(); else advance() }} style={{ fontSize: '0.78rem', padding: '5px 14px', borderRadius: '8px', marginRight: '6px', background: 'transparent', border: '1px solid var(--clr-correct)', color: 'var(--clr-correct)', cursor: 'pointer' }}>Too Easy</button>
+            <button onClick={() => { setAdaptScore(prev => { const next = Math.max(0, prev - 0.5); adaptScoreRef.current = next; return next }); if (!revealed) handleSkip(); else advance() }} style={{ fontSize: '0.78rem', padding: '5px 14px', borderRadius: '8px', background: 'transparent', border: '1px solid var(--clr-wrong)', color: 'var(--clr-wrong)', cursor: 'pointer' }}>Too Hard</button>
+          </div>}
+          {results.length > 0 && <ResultsTable results={results} />}
+        </>}
+        {finished && <div className="welcome-box">
+          <p className="welcome-text">Quiz complete!</p>
+          {(() => { const pct = totalQ > 0 ? Math.round((score / totalQ) * 100) : 0; return (<>
+          <p className="final-score">Final score: {score}/{totalQ} ({pct}%)</p>
+          {pct >= 80 && <p style={{ fontSize: '0.95rem', color: 'var(--clr-correct)', fontWeight: 600 }}>Great job! You scored above 80%!</p>}
+          {isAdaptive && <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)' }}>Reached level: <strong style={{ color: ADAPT_COLORS[curAdaptLevel] }}>{ADAPT_LABELS[curAdaptLevel]}</strong></p>}
+          </>); })()}
+          <ResultsTable results={results} />
+          <div className="button-row">
+            <button onClick={() => { setStarted(false); setFinished(false) }}>Play Again</button>
+            <button onClick={onBack} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Back to Mission</button>
+          </div>
+        </div>}
+      </QuizLayout>
+    )
+  }
+
   // ========== ROUTING: MODE-BASED (HOME MENU + QUIZZES) ==========
   // Map quiz mode keys to their component classes
   const modeMap = {
+    linearalgebra: LinearAlgebraApp, // Linear Algebra Module 1
+    missionquiz: MissionQuizApp, // Mission-specific Linear Algebra Quiz
     'math-lab': MathLabHubApp,
     'visual-math-lab-redux': VisualMathLabRedux,
     'mensuration-lab': MensurationLabApp,
@@ -40498,6 +41193,7 @@ function App() {
     sdt: SDTApp,                   // Speed, Distance, Time
     variation: VariationApp,       // Variation
     hcflcm: InteractiveLcmHcfApp,  // HCF & LCM
+    idlivada: IdliVadaSambharApp,  // Idli–Vada–Sambhar (Multiples, Common Multiples & LCM)
     profitloss: ProfitLossApp,     // Profit & Loss
     rounding: RoundingApp,         // Rounding
     binomial: BinomialApp,         // Binomial Theorem
@@ -40613,11 +41309,11 @@ function Home({ onSelect, isGoalSelection = false, onBack }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [search, setSearch] = useState('')
 
-  // Special featured apps (shown in first row — Visual Learning Universe removed to hamburger menu only)
+  // Special featured apps (shown in hamburger menu)
   const featuredApps = [
-    { key: 'addition', name: 'Addition', subtitle: '20-question addition practice', color: 'blue' },
-    { key: 'mensuration-lab', name: 'Mensuration', subtitle: 'Geometry & Shape Puzzles', color: 'green' },
-    { key: 'coordgeom', name: 'Coordinate Geometry', subtitle: 'Discovery Sandbox Mode', color: 'blue' },
+    { key: 'randommix', name: 'Random Mix', subtitle: 'Adaptive cross-topic quiz', color: 'featured' },
+    { key: 'custom', name: 'Custom Lesson', subtitle: 'Build your own mixed quiz', color: 'featured' },
+    { key: 'gym', name: 'Gym', subtitle: 'Adaptive workout across all 7 gym puzzles', color: 'featured' },
   ]
   // Visual Learning Universe lives only in the hamburger menu
   const mathLabEntry = { key: 'math-lab', name: '🔬 Visual Learning Universe', subtitle: 'Visual, Mensuration & Addition labs', color: 'orange' }
@@ -40625,9 +41321,6 @@ function Home({ onSelect, isGoalSelection = false, onBack }) {
   // All regular quiz apps sorted alphabetically by name
   const regularApps = [
     { key: 'comic-addition', name: 'Comic Addition', subtitle: 'Story Mode', color: 'purple' },
-    { key: 'custom', name: 'Custom Lesson', subtitle: 'Build your own mixed quiz', color: 'blue' },
-    { key: 'gym', name: 'Gym', subtitle: 'Adaptive workout across all 7 gym puzzles', color: 'green' },
-    { key: 'randommix', name: 'Random Mix', subtitle: 'Adaptive cross-topic quiz', color: 'purple' },
     { key: 'angles', name: 'Angles', subtitle: 'Lines, points, parallel lines', color: 'green' },
     { key: 'banking', name: 'Banking (RD)', subtitle: 'Interest & recurring deposits', color: 'blue' },
     { key: 'bearings', name: 'Bearings', subtitle: 'Three-figure bearings', color: 'green' },
@@ -40647,6 +41340,7 @@ function Home({ onSelect, isGoalSelection = false, onBack }) {
     { key: 'gk', name: 'GK', subtitle: 'General Knowledge questions', color: 'purple' },
     { key: 'gst', name: 'GST', subtitle: 'Goods & Services Tax', color: 'purple' },
     { key: 'hcflcm', name: 'HCF & LCM', subtitle: 'Highest common factor & LCM', color: 'blue' },
+    { key: 'idlivada', name: 'Idli Vada Sambhar', subtitle: 'Multiples, common multiples & LCM game', color: 'orange' },
     { key: 'heron', name: "Heron's Formula", subtitle: 'Triangle area from sides', color: 'blue' },
     { key: 'indices', name: 'Indices', subtitle: 'Laws of exponents', color: 'purple' },
     { key: 'ineq', name: 'Inequalities', subtitle: 'Linear & quadratic inequalities', color: 'green' },
@@ -40654,6 +41348,7 @@ function Home({ onSelect, isGoalSelection = false, onBack }) {
     { key: 'invtrig', name: 'Inverse Trig', subtitle: 'arcsin, arccos, arctan', color: 'green' },
     { key: 'language', name: 'Language Puzzles', subtitle: 'Fill in the blanks to create new words', color: 'green' },
     { key: 'limits', name: 'Limits', subtitle: 'Evaluate limits', color: 'purple' },
+    { key: 'linearalgebra', name: 'Linear Algebra', subtitle: '56 missions across 6 modules', color: 'orange' },
     { key: 'lineareq', name: 'Linear Equations', subtitle: 'Solve for x in one variable', color: 'blue' },
     { key: 'lineq', name: 'Line Equation', subtitle: 'Find m and c from two points', color: 'green' },
     { key: 'linprog', name: 'Linear Programming', subtitle: 'Optimize objective functions', color: 'green' },
@@ -40737,7 +41432,7 @@ function Home({ onSelect, isGoalSelection = false, onBack }) {
   const filteredRegular = isSearching ? regularApps.filter(matchFilter) : regularApps
   
   // Decide which items to show on the main grid list
-  const displayGridApps = isGoalSelection ? filteredRegular : [...filteredFeatured, ...filteredRegular]
+  const displayGridApps = isGoalSelection ? filteredRegular : [...filteredRegular]
 
   // Grid layout tracking (for responsive display)
   const gridRef = useRef(null)
@@ -40822,6 +41517,29 @@ function Home({ onSelect, isGoalSelection = false, onBack }) {
             ))}
             <div style={{ height: '1px', background: 'var(--clr-border)', margin: '4px 0' }} />
 
+            <button onClick={() => { setMenuOpen(false); onSelect('goalpractice') }} style={{
+              display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
+              background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
+              fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)'
+            }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
+               onMouseLeave={e => e.target.style.background = 'none'}>
+              <strong style={{ color: 'var(--clr-accent)' }}>🎯 Goal Practice</strong>
+              <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>Practice with targets & limits</span>
+            </button>
+
+            {featuredApps.map(app => (
+              <button key={app.key} onClick={() => { setMenuOpen(false); onSelect(app.key) }} style={{
+                display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
+                background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
+                fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)'
+              }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
+                 onMouseLeave={e => e.target.style.background = 'none'}>
+                <strong style={{ color: 'var(--clr-accent)' }}>{app.name}</strong>
+                <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>{app.subtitle}</span>
+              </button>
+            ))}
+
+            <div style={{ height: '1px', background: 'var(--clr-border)', margin: '4px 0' }} />
 
             <button onClick={() => { setMenuOpen(false); window.location.href = '/language'; }} style={{
               display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
@@ -46694,7 +47412,7 @@ function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly
 }
 
 function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, answerField }) {
-  return function GeneratedQuizApp({ onBack, initialDifficulty, initialNumQuestions, initialStarted }) {
+  return function GeneratedQuizApp({ onBack, initialDifficulty, initialNumQuestions, initialStarted, isGoalMode = false }) {
     const diffs = Object.keys(diffLabels)
     const [difficulty, setDifficulty] = useState(initialDifficulty || diffs[0])
     const [isAdaptive, setIsAdaptive] = useState(false)

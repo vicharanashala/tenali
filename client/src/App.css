@@ -320,10 +320,12 @@ h1 {
 .menu-card.purple { --dot: #9b6dca; }
 .menu-card.blue   { --dot: #5a8fc2; }
 .menu-card.green  { --dot: #5aab7a; }
+.menu-card.orange { --dot: #e8864a; }
 .menu-card.featured { --dot: var(--clr-accent); }
 .menu-card.purple::before { background: var(--dot); }
 .menu-card.blue::before   { background: var(--dot); }
 .menu-card.green::before  { background: var(--dot); }
+.menu-card.orange::before { background: var(--dot); }
 .menu-card.featured::before { background: var(--dot); }
 
 /* Placeholder state for disabled/unavailable quiz options */
