@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './LcmHcfApp.css';
+import AudioManager from './audio/AudioManager';
 
 // ==========================================================================
 // CONFIGURATION & REWARDS DEFINITION
@@ -75,12 +76,32 @@ export default function InteractiveLcmHcfApp({ onBack }) {
   // --- Progression Locking ---
   const [maxStepReached, setMaxStepReached] = useState(1);
   const [revealedExamples, setRevealedExamples] = useState({}); // { [stepIndex]: boolean }
-  const [activityPopup, setActivityPopup] = useState(null); // { title: string, text: string, type: 'success' | 'error' }
+  const [activityPopup, _setActivityPopup] = useState(null); // { title: string, text: string, type: 'success' | 'error' }
+  const setActivityPopup = (val) => {
+    if (val) {
+      if (val.type === 'error' || val.title?.toLowerCase().includes('incorrect')) {
+        AudioManager.playWrong();
+      } else if (val.type === 'success' || val.title?.toLowerCase().includes('correct') || val.title?.toLowerCase().includes('success')) {
+        AudioManager.playCorrect();
+      }
+    }
+    _setActivityPopup(val);
+  };
 
   // --- Left Drawer (Why Panel) State ---
   const [whyOpen, setWhyOpen] = useState(false);
   const [whyAnswer, setWhyAnswer] = useState('');
-  const [whyFeedback, setWhyFeedback] = useState(null); // { correct: bool, text: string }
+  const [whyFeedback, _setWhyFeedback] = useState(null); // { correct: bool, text: string }
+  const setWhyFeedback = (val) => {
+    if (val) {
+      if (val.correct) {
+        AudioManager.playCorrect();
+      } else {
+        AudioManager.playWrong();
+      }
+    }
+    _setWhyFeedback(val);
+  };
   const [unlockedCollectibles, setUnlockedCollectibles] = useState({}); // { level_stepIndex: bool }
 
   // --- Confidence State & Gamified Learning Levels ---
@@ -92,9 +113,25 @@ export default function InteractiveLcmHcfApp({ onBack }) {
   const [quizQuestions, setQuizQuestions] = useState([]);
   const [quizIndex, setQuizIndex] = useState(0);
   const [quizAnswer, setQuizAnswer] = useState('');
-  const [quizFeedback, setQuizFeedback] = useState(null); // { correct: bool, display: string }
+  const [quizFeedback, _setQuizFeedback] = useState(null); // { correct: bool, display: string }
+  const setQuizFeedback = (val) => {
+    if (val) {
+      if (val.correct) {
+        AudioManager.playCorrect();
+      } else {
+        AudioManager.playWrong();
+      }
+    }
+    _setQuizFeedback(val);
+  };
   const [quizScore, setQuizScore] = useState(0);
-  const [quizFinished, setQuizFinished] = useState(false);
+  const [quizFinished, _setQuizFinished] = useState(false);
+  const setQuizFinished = (val) => {
+    if (val) {
+      AudioManager.playCelebrate();
+    }
+    _setQuizFinished(val);
+  };
   const [quizHistory, setQuizHistory] = useState([]);
 
 
@@ -109,6 +146,10 @@ export default function InteractiveLcmHcfApp({ onBack }) {
     setWhyFeedback(null);
     setActivityPopup(null);
     
+    // Audio SFX trigger hooks
+  }, [currentStep, level]);
+
+  useEffect(() => {
     // Initialize activity parameters dynamically based on currentStep and level
     const initialActivityState = {};
     if (currentStep === 1) {

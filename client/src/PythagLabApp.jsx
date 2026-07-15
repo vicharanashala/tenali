@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
+import AudioManager from './audio/AudioManager';
 
 const FONT = "'Plus Jakarta Sans', 'Poppins', system-ui, sans-serif";
 
@@ -36,8 +37,13 @@ function triggerConfetti() {
 }
 
 export default function PythagLabApp({ onBack }) {
-  // Flow states: 'setup' | 'game' | 'results'
-  const [phase, setPhase] = useState('setup');
+  const [phase, _setPhase] = useState('setup');
+  const setPhase = (val) => {
+    if (val === 'results') {
+      AudioManager.playCelebrate();
+    }
+    _setPhase(val);
+  };
   const [difficulty, setDifficulty] = useState('easy'); // easy | medium | hard
   
   // Game states
@@ -155,12 +161,14 @@ export default function PythagLabApp({ onBack }) {
 
   const handleEvaluation = (isCorrect) => {
     if (isCorrect) {
+      AudioManager.playCorrect();
       setXp(x => x + 50);
       triggerConfetti();
       setLogs(prev => [...new Set([...prev, `Completed ${difficulty.toUpperCase()} Level ${currentLevel}`])]);
       setRibbonPopup(true);
       setTimeout(nextLevel, 2500);
     } else {
+      AudioManager.playWrong();
       setLives(l => Math.max(0, l - 1));
       setHintText("Oops! That wasn't correct. Try checking your math or use a hint!");
     }

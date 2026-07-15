@@ -25,10 +25,11 @@ import React, { useEffect, useState, useRef, useMemo, useCallback } from 'react'
 import VoiceAssistant from './components/VoiceAssistant';
 import { motion } from 'framer-motion';
 import OnboardingTour from './components/OnboardingTour';
+import AudioManager from './audio/AudioManager';
 
 window.React = React;
 console.log("React version:", React.version);
-import LinearAlgebraApp from './LinearAlgebraApp'
+import LinearAlgebraApp from './LinearAlgebraApp';
 
 
 /**
@@ -73,6 +74,23 @@ import LanguageDashboard from './language/LanguageDashboard'
 
 // API base URL from environment variables (Vite)
 const API = import.meta.env.VITE_API_BASE_URL || '';
+
+const SOUND_PREF_KEY = 'tenali-sound-effects'
+function playQuizSound(kind) {
+  try {
+    if (kind === 'correct') {
+      AudioManager.playCorrect();
+    } else if (kind === 'wrong') {
+      AudioManager.playWrong();
+    } else if (kind === 'submit' || kind === 'click') {
+      AudioManager.playClick();
+    } else {
+      AudioManager.playSound(kind);
+    }
+  } catch (err) {
+    console.warn('Unable to play quiz sound', err);
+  }
+}
 
 // App version — increment with each commit
 const TENALI_VERSION = '1.0.86'
@@ -447,6 +465,9 @@ export function useTimer() {
  * @returns {ReactElement|null} Table element or null if no results
  */
 function ResultsTable({ results }) {
+  useEffect(() => {
+    AudioManager.playCelebrate();
+  }, []);
   // Hide table if empty or null
   if (!results || results.length === 0) return null
   // Calculate summary stats
@@ -856,27 +877,49 @@ const enhanceFinishedScreen = (node, sessionGoal) => {
  * structured card with highlighted answer and formatted explanation.
  * For normal correct/wrong feedback, renders inline text.
  */
-function renderFeedback(feedback, isCorrect) {
-  if (!feedback) return null
-  const isSolve = isCorrect === false && feedback.startsWith('Solution:')
-  if (!isSolve) {
-    return <div className={`feedback ${isCorrect ? 'correct' : 'wrong'}`}>{feedback}</div>
+function FeedbackComponent({ feedback, isCorrect }) {
+  const lastPlayedRef = useRef(null);
+
+  if (feedback && lastPlayedRef.current !== feedback) {
+    lastPlayedRef.current = feedback;
+    if (isCorrect === true) {
+      if (feedback.toLowerCase().includes('streak') || feedback.includes('🔥')) {
+        AudioManager.playStreak();
+      } else if (feedback.toLowerCase().includes('coin') || feedback.includes('🪙')) {
+        AudioManager.playCoin();
+      } else {
+        AudioManager.playCorrect();
+      }
+    } else if (isCorrect === false) {
+      const isSolve = feedback.startsWith('Solution:');
+      if (!isSolve) {
+        AudioManager.playWrong();
+      }
+    }
   }
+
+  if (!feedback) return null;
+
+  const isSolve = isCorrect === false && feedback.startsWith('Solution:');
+  if (!isSolve) {
+    return <div className={`feedback ${isCorrect ? 'correct' : 'wrong'}`}>{feedback}</div>;
+  }
+
   // Parse solve feedback: "Solution: ANSWER\nExplanation..."
-  const lines = feedback.split('\n')
-  const answerLine = lines[0].replace('Solution: ', '').trim()
-  const rawExplanation = lines.slice(1).filter(l => l.trim()).map(l => l.trim())
+  const lines = feedback.split('\n');
+  const answerLine = lines[0].replace('Solution: ', '').trim();
+  const rawExplanation = lines.slice(1).filter(l => l.trim()).map(l => l.trim());
 
   // Group lines into steps: lines starting with a keyword or number are step headers
-  const steps = []
+  const steps = [];
   for (const line of rawExplanation) {
     // Detect step boundaries: numbered lines, "Step N:", "Answer:", "So,", "Therefore", etc.
-    const isStepStart = /^(\d+[\.\):]|Step\s|Answer:|So[, ]|Therefore|Result:|Formula:|First|Next|Then|Finally|Multiply|Divide|Add|Subtract|Convert|Simplify|Calculate|Apply|Using|Problem:)/i.test(line)
+    const isStepStart = /^(\d+[\.\):]|Step\s|Answer:|So[, ]|Therefore|Result:|Formula:|First|Next|Then|Finally|Multiply|Divide|Add|Subtract|Convert|Simplify|Calculate|Apply|Using|Problem:)/i.test(line);
     if (isStepStart || steps.length === 0) {
-      steps.push(line)
+      steps.push(line);
     } else {
       // Append to previous step
-      steps[steps.length - 1] += '\n' + line
+      steps[steps.length - 1] += '\n' + line;
     }
   }
 
@@ -897,7 +940,11 @@ function renderFeedback(feedback, isCorrect) {
         </div>
       )}
     </div>
-  )
+  );
+}
+
+function renderFeedback(feedback, isCorrect) {
+  return <FeedbackComponent feedback={feedback} isCorrect={isCorrect} />;
 }
 
 /**
@@ -1821,6 +1868,7 @@ function ScaffoldedTablesApp({ studentName, defaultTable = 2 }) {
       setAppPhase('finished')
     } else {
       setLevel(promo.to)
+      AudioManager.playLevelUp()
       setFastStreak(0)
       setHasTyped(false)
       setAnswerOpacity(1)
@@ -2640,6 +2688,7 @@ function YazdanTablesApp({ studentName }) {
       setAppPhase('finished')
     } else {
       setLevel(promo.to)
+      AudioManager.playLevelUp()
       setRound(1)
       setStatusMsg(`Level ${promo.to}: ${levelDescriptions[promo.to]}`)
       setupRound(currentTable, promo.to, 1)
@@ -3250,6 +3299,7 @@ function JatinTablesApp({ studentName }) {
       setAppPhase('finished')
     } else {
       setLevel(promo.to)
+      AudioManager.playLevelUp()
       setRound(1)
       setStatusMsg(`Level ${promo.to}: ${levelDescriptions[promo.to]}`)
       setupRound(currentTable, promo.to, 1)
@@ -3915,6 +3965,7 @@ function LakshyaTablesApp({ studentName }) {
       setAppPhase('finished')
     } else {
       setLevel(promo.to)
+      AudioManager.playLevelUp()
       setRound(1)
       setStatusMsg(`${phaseForLevel(promo.to)}Level ${promo.to}: ${levelDescriptions[promo.to]}`)
       setupRound(currentTable, promo.to, 1)
@@ -39842,6 +39893,17 @@ function App() {
   const [showTour, setShowTour] = useState(() => localStorage.getItem('tenali_tour_seen') !== 'true')
 
   useEffect(() => {
+    const handleGlobalClick = (e) => {
+      const target = e.target.closest('button, [role="button"], .numpad-key, .option-card, .menu-card, input[type="submit"], input[type="button"]');
+      if (target) {
+        AudioManager.playClick();
+      }
+    };
+    document.addEventListener('click', handleGlobalClick, { capture: true });
+    return () => document.removeEventListener('click', handleGlobalClick, { capture: true });
+  }, []);
+
+  useEffect(() => {
     const fetchProgress = async () => {
       const API = import.meta.env.VITE_API_BASE_URL || '';
       try {
@@ -43092,6 +43154,7 @@ function GKApp({ onBack, isGoalMode = false }) {
   const submitGK = async (option) => {
     if (!question || revealed) return
     const timeTaken = timer.stop()
+    playQuizSound('submit')
     setSelected(option)
     // POST to backend API to check the answer
     const res = await fetch(`${API}/gk-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  id: question.id, answerOption: option, sessionGoal }) })
@@ -43533,12 +43596,14 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
       }
 
       const timeTaken = timer.stop()
+      playQuizSound('submit')
       const res = await fetch(`${API}/addition-api/check`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ a: question.a, b: question.b, answer: Number(submittedAnswer) }),
       })
       const data = await res.json()
+      playQuizSound(data.correct ? 'correct' : 'wrong')
       setIsCorrect(data.correct)
       const newScore = score + (data.correct ? 1 : 0)
       setScore(newScore)
@@ -46839,6 +46904,7 @@ const loadQuestion = async (excludeIds) => {
   const submitVocab = async (option) => {
     if (!question || revealed) return
     const timeTaken = timer.stop()
+    playQuizSound('submit')
     setSelected(option)
     // POST to backend to validate the selected definition
     const res = await fetch(`${API}/vocab-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  id: question.id, answerOption: option, sessionGoal }) })
@@ -47237,6 +47303,7 @@ function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly
       if (!question || revealed) return
       if (submittedRef.current) return
       submittedRef.current = true
+      playQuizSound('submit')
       setSelectedOption(letter)
       const timeTaken = timer.stop()
       const payload = { ...question, selectedOption: letter }
@@ -47247,6 +47314,7 @@ function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly
           body: JSON.stringify({ ...payload, sessionGoal }),
         })
         const data = await r.json()
+        playQuizSound(data.correct ? 'correct' : 'wrong')
         setIsCorrect(data.correct); setRevealed(true)
         setCorrectOption(data.correctOption || '')
         if (data.correct) setScore(s => s + 1)
@@ -47555,6 +47623,7 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
       if (!question || revealed || !answer.trim()) return
       if (submittedRef.current) return  // prevent double-submit (rapid Enter presses)
       submittedRef.current = true
+      playQuizSound('submit')
       const timeTaken = timer.stop()
       const payload = { ...question, [answerField || 'userAnswer']: answer.trim() }
       try {
@@ -47564,6 +47633,7 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
           body: JSON.stringify({ ...payload, sessionGoal })
         })
         const data = await r.json()
+        playQuizSound(data.correct ? 'correct' : 'wrong')
         setIsCorrect(data.correct); setRevealed(true)
         if (data.correct) setScore(s => s + 1)
         const coinMsg = (data.lil?.coinsEarned ?? 0) > 0 ? ` (+${data.lil.coinsEarned}🪙)` : ''
@@ -47613,6 +47683,7 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
     const handleSkip = () => {
       if (!question || revealed) return
       submittedRef.current = true
+      playQuizSound('wrong')
       timer.stop()
       setIsCorrect(false); setRevealed(true)
       setFeedback('Skipped — counted as incorrect.')
@@ -47956,6 +48027,7 @@ const loadQuestion = async () => {
     if (!isGridComplete()) return
     if (submittedRef.current) return  // prevent double-submit
     submittedRef.current = true
+    playQuizSound('submit')
     // Build userAnswer string from grid
     let userAnswer
     if (question.type === 'dot2d' || question.type === 'dot3d') {

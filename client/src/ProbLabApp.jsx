@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
+import AudioManager from './audio/AudioManager';
 
 const FONT_SERIF = "'Georgia', 'Times New Roman', serif";
 const FONT_SANS = "'Plus Jakarta Sans', 'Inter', sans-serif";
@@ -39,8 +40,13 @@ function triggerConfetti() {
 }
 
 export default function ProbLabApp({ onBack }) {
-  // Flow: 'setup' | 'game' | 'results'
-  const [phase, setPhase] = useState('setup');
+  const [phase, _setPhase] = useState('setup');
+  const setPhase = (val) => {
+    if (val === 'results') {
+      AudioManager.playCelebrate();
+    }
+    _setPhase(val);
+  };
   const [difficulty, setDifficulty] = useState('easy'); // easy | medium | hard | extra
   const [targetMissions, setTargetMissions] = useState(5); // 5 | 10 | 15
 
@@ -183,12 +189,14 @@ export default function ProbLabApp({ onBack }) {
 
   const handleEvaluation = (isCorrect) => {
     if (isCorrect) {
+      AudioManager.playCorrect();
       setXp(x => x + 60);
       triggerConfetti();
       setLogs(prev => [...new Set([...prev, `Completed Level ${currentLevel} (${difficulty.toUpperCase()})`])]);
       setRibbonPopup(true);
       setTimeout(nextLevel, 2500);
     } else {
+      AudioManager.playWrong();
       setLives(l => Math.max(0, l - 1));
       setHintText("Hmm, that composition doesn't match the target probability. Click 'Reveal Hint' for a breakdown!");
     }
