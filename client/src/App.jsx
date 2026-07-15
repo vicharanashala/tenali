@@ -21,12 +21,14 @@
  * Progress persistence: Adaptive tables app saves current table progress in localStorage
  */
 
-import React, { useEffect, useState, useRef, useMemo, useCallback } from 'react'; window.React = React; console.log("React version:", React.version);
-
-import VoiceAssistant from './components/VoiceAssistant'
+import React, { useEffect, useState, useRef, useMemo, useCallback } from 'react';
+import VoiceAssistant from './components/VoiceAssistant';
 import { motion } from 'framer-motion';
-import OnboardingTour from './components/OnboardingTour'
+import OnboardingTour from './components/OnboardingTour';
 import AudioManager from './audio/AudioManager';
+
+window.React = React;
+console.log("React version:", React.version);
 import LinearAlgebraApp from './LinearAlgebraApp';
 
 
@@ -39881,8 +39883,12 @@ function BalanceScaleApp({ onBack }) {
 }
 
 function App() {
-  const [mode, setMode] = useState(() => window.location.hash.slice(1) || null)
+  // Currently selected quiz mode (null = home menu, or key like 'gk', 'addition', etc.)
+  const [mode, setMode] = useState(null)
+  // Tracks if the active practice session should show the Goal Selector UI
   const [isGoalMode, setIsGoalMode] = useState(false)
+  const [journeyContext, setJourneyContext] = useState(null)
+  const [activeTopicId, setActiveTopicId] = useState('arithmetic_basics')
   const [progressData, setProgressData] = useState(null)
   const [showTour, setShowTour] = useState(() => localStorage.getItem('tenali_tour_seen') !== 'true')
 
@@ -40046,8 +40052,8 @@ function App() {
     )
   }
 
-  // Route: /language → Language Puzzles dashboard and modules
-  if (pathname === '/language') {
+  // Route: */language → Language Puzzles dashboard and modules (matches any path ending with /language)
+  if (/\/language$/.test(pathname)) {
     return (
       <div className="app-shell">
         <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
@@ -41245,59 +41251,120 @@ function App() {
   // Get the component to render (or null if mode not set)
   const ActiveApp = mode && mode !== 'goalpractice' ? modeMap[mode] : null
 
+  const renderContent = () => {
+    if (mode === 'learning_journey') {
+      return (
+        <AuthGate>
+          <LearningJourneyHome
+            onSelectTopic={(topicId) => {
+              setActiveTopicId(topicId);
+              setMode('learning_journey_topic');
+            }}
+            onBack={() => setMode(null)}
+          />
+        </AuthGate>
+      );
+    }
+
+    if (mode === 'learning_journey_topic') {
+      return (
+        <AuthGate>
+          <LearningJourneyTopicView
+            topicId={activeTopicId}
+            onPlayConcept={(conceptKey) => {
+              setJourneyContext({ topicId: activeTopicId, conceptKey });
+              setMode(conceptKey);
+            }}
+            onStartCheckpoint={() => {
+              setMode('learning_journey_checkpoint');
+            }}
+            onBack={() => setMode('learning_journey')}
+          />
+        </AuthGate>
+      );
+    }
+
+    if (mode === 'learning_journey_checkpoint') {
+      return (
+        <AuthGate>
+          <LearningJourneyCheckpointQuizView
+            topicId={activeTopicId}
+            onBack={() => setMode('learning_journey_topic')}
+          />
+        </AuthGate>
+      );
+    }
+
+    if (mode === 'goalpractice') {
+      return (
+        <Home
+          isGoalSelection={true}
+          onBack={() => {
+            setMode(null);
+            setIsGoalMode(false);
+          }}
+          onSelect={(key) => {
+            setMode(key);
+            setIsGoalMode(true);
+          }}
+        />
+      );
+    }
+
+    if (ActiveApp) {
+      const element = (
+        <ActiveApp
+          onBack={journeyContext ? async () => {
+            const isCompleted = !!document.querySelector('.final-score');
+            if (isCompleted) {
+              try {
+                await journeyFetch('/api/learning-journey/complete-concept', {
+                  method: 'POST',
+                  body: JSON.stringify({
+                    topicId: journeyContext.topicId,
+                    conceptKey: journeyContext.conceptKey
+                  })
+                });
+              } catch (e) {
+                console.error('Failed to save concept progress:', e);
+              }
+            }
+            setJourneyContext(null);
+            setMode('learning_journey_topic');
+          } : () => {
+            if (isGoalMode) {
+              setMode('goalpractice');
+            } else {
+              setMode(null);
+            }
+          }}
+          isGoalMode={isGoalMode}
+        />
+      );
+      return journeyContext ? <AuthGate>{element}</AuthGate> : element;
+    }
+
+    return (
+      <Home
+        onSelect={(key) => {
+          if (key === 'goalpractice') {
+            setMode('goalpractice');
+          } else {
+            setMode(key);
+            setIsGoalMode(false);
+          }
+        }}
+      />
+    );
+  };
+
   return (
     <div className="app-shell">
-      {showTour && <OnboardingTour onFinish={() => { localStorage.setItem('tenali_tour_seen', 'true'); setShowTour(false); }} mode={mode} />}
-      <button className="guide-toggle" onClick={() => setShowTour(true)} title="Take a Tour">
-        🧭 Guide
-      </button>
-
       <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
         {theme === 'dark' ? '☀️' : '🌙'}
       </button>
       <div className="card">
-        {!mode ? (
-          <Home onSelect={(key) => {
-            if (key === 'goalpractice') {
-              setMode('goalpractice');
-            } else {
-              setMode(key);
-              setIsGoalMode(false);
-            }
-          }} />
-        ) : mode === 'goalpractice' ? (
-          <Home
-            isGoalSelection={true}
-            onBack={() => {
-              setMode(null);
-              setIsGoalMode(false);
-            }}
-            onSelect={(key) => {
-              setMode(key);
-              setIsGoalMode(true);
-            }}
-          />
-        ) : ActiveApp ? (
-          <ActiveApp
-            onBack={() => {
-              if (isGoalMode) {
-                setMode('goalpractice');
-              } else {
-                setMode(null);
-              }
-            }}
-            isGoalMode={isGoalMode}
-          />
-        ) : (
-          <Home onSelect={(key) => {
-            if (key === 'goalpractice') {
-              setMode('goalpractice');
-            } else {
-              setMode(key);
-              setIsGoalMode(false);
-            }
-          }} />
-        )}
+        {renderContent()}
       </div>
     </div>
   )
@@ -41328,7 +41395,9 @@ function Home({ onSelect, isGoalSelection = false, onBack }) {
   // All regular quiz apps sorted alphabetically by name
   const regularApps = [
     { key: 'comic-addition', name: 'Comic Addition', subtitle: 'Story Mode', color: 'purple' },
+    { key: 'addition', name: 'Addition', subtitle: '20-question addition practice', color: 'blue' },
     { key: 'angles', name: 'Angles', subtitle: 'Lines, points, parallel lines', color: 'green' },
+    { key: 'basicarith', name: 'Arithmetic', subtitle: '+, −, ×, ÷ with positive & negative', color: 'purple' },
     { key: 'banking', name: 'Banking (RD)', subtitle: 'Interest & recurring deposits', color: 'blue' },
     { key: 'bearings', name: 'Bearings', subtitle: 'Three-figure bearings', color: 'green' },
     { key: 'binomial', name: 'Binomial Theorem', subtitle: 'Expansions & coefficients', color: 'purple' },
@@ -41338,6 +41407,7 @@ function Home({ onSelect, isGoalSelection = false, onBack }) {
     { key: 'complex', name: 'Complex Numbers', subtitle: 'Add, multiply, modulus', color: 'blue' },
     { key: 'congruence', name: 'Congruence', subtitle: 'SSS, SAS, ASA, RHS', color: 'green' },
     { key: 'conics', name: 'Conic Sections', subtitle: 'Circle, parabola, ellipse, hyperbola', color: 'purple' },
+    { key: 'coordgeom', name: 'Coord. Geometry', subtitle: 'Midpoint, distance, gradient', color: 'blue' },
     { key: 'decimals', name: 'Decimals', subtitle: 'Add, subtract, multiply, divide', color: 'blue' },
     { key: 'diff', name: 'Differentiation', subtitle: 'Power rule, turning points', color: 'purple' },
     { key: 'diffeq', name: 'Differential Eq.', subtitle: 'Order, degree, solve DEs', color: 'green' },
@@ -41353,7 +41423,6 @@ function Home({ onSelect, isGoalSelection = false, onBack }) {
     { key: 'ineq', name: 'Inequalities', subtitle: 'Linear & quadratic inequalities', color: 'green' },
     { key: 'integ', name: 'Integration', subtitle: 'Reverse differentiation & areas', color: 'blue' },
     { key: 'invtrig', name: 'Inverse Trig', subtitle: 'arcsin, arccos, arctan', color: 'green' },
-    { key: 'language', name: 'Language Puzzles', subtitle: 'Fill in the blanks to create new words', color: 'green' },
     { key: 'limits', name: 'Limits', subtitle: 'Evaluate limits', color: 'purple' },
     { key: 'linearalgebra', name: 'Linear Algebra', subtitle: '56 missions across 6 modules', color: 'orange' },
     { key: 'lineareq', name: 'Linear Equations', subtitle: 'Solve for x in one variable', color: 'blue' },
@@ -41361,6 +41430,7 @@ function Home({ onSelect, isGoalSelection = false, onBack }) {
     { key: 'linprog', name: 'Linear Programming', subtitle: 'Optimize objective functions', color: 'green' },
     { key: 'log', name: 'Logarithms', subtitle: 'Evaluate, simplify, solve', color: 'purple' },
     { key: 'matrix', name: 'Matrices', subtitle: 'Add, multiply, determinant', color: 'blue' },
+    { key: 'mensur', name: 'Mensuration', subtitle: 'Area, volume, surface area', color: 'green' },
     { key: 'multiply', name: 'Multiplication', subtitle: 'Practice any times table (2–19)', color: 'purple' },
     { key: 'bases', name: 'Number Bases', subtitle: 'Binary, decimal, hexadecimal', color: 'green' },
     { key: 'basic-arith-lab', name: 'Origin', subtitle: 'Practice +, -, ×, ÷ with varied templates', color: 'blue' },
@@ -41548,7 +41618,7 @@ function Home({ onSelect, isGoalSelection = false, onBack }) {
 
             <div style={{ height: '1px', background: 'var(--clr-border)', margin: '4px 0' }} />
 
-            <button onClick={() => { setMenuOpen(false); window.location.href = '/language'; }} style={{
+            <button onClick={() => { setMenuOpen(false); window.location.href = window.location.pathname.replace(/\/$/, '') + '/language'; }} style={{
               display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
               background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
               fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)'
@@ -41578,6 +41648,22 @@ function Home({ onSelect, isGoalSelection = false, onBack }) {
           </div>
         </>
       )}
+      {!search && !isGoalSelection && (
+        <div className="journey-banner-row">
+          <button className="journey-banner-btn" onClick={() => onSelect('learning_journey')}>
+            <div className="journey-banner-content">
+              <div className="journey-banner-header">
+                <span>⭐</span>
+                <h3 className="journey-banner-title">Guided Learning Journey</h3>
+              </div>
+              <p className="journey-banner-subtitle">
+                Embark on a structured, sequential math learning path with checkpoints.
+              </p>
+            </div>
+            <div className="journey-banner-arrow">➔</div>
+          </button>
+        </div>
+      )}
       <div className="search-bar-row">
         <input
           id="tour-search-bar"
@@ -41588,7 +41674,7 @@ function Home({ onSelect, isGoalSelection = false, onBack }) {
           onChange={e => setSearch(e.target.value)}
         />
       </div>
-      <div id="tour-home-grid" className="menu-grid" ref={gridRef}>
+      <div className="menu-grid" ref={gridRef}>
         {displayGridApps.map((app) => (
           <button key={app.key} className={`menu-card ${app.color}`} onClick={() => onSelect(app.key)}>
             <span className="menu-title">{app.name}</span>
@@ -42029,10 +42115,13 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
   // Prefetch cache: holds the next question already fetched in background
   const prefetchRef = useRef(null)
 
+  // Relative paths only — the `${API}` base is applied once at each fetch site
+  // (below). Including it here too caused a double `/summership` prefix under
+  // subpath deploys, so requests 404'd to index.html and broke question loading.
   const endpoints = {
-    'visual-math-lab-redux': `${API || ''}/api/visual-math-lab-redux`,
-    'mensuration-lab': `${API || ''}/api/mensuration-lab`,
-    addition: `${API || ''}/addition-api`,
+    'visual-math-lab-redux': `/api/visual-math-lab-redux`,
+    'mensuration-lab': `/api/mensuration-lab`,
+    addition: `/addition-api`,
   }
 
   const chooseActivityKey = () => {
@@ -47806,7 +47895,7 @@ function MatrixBox({ matrix, label }) {
   )
 }
 
-function DotProdApp({ onBack }) {
+function DotProdApp({ onBack, isGoalMode = false }) {
   const DIFFS = ['easy', 'medium', 'hard', 'extrahard']
   const DIFF_LABELS_DP = { easy: 'Easy — 2D Dot', medium: 'Medium — 2D / 3D', hard: 'Hard — Matrix ×', extrahard: 'Extra Hard — Fill Blanks' }
 
@@ -58374,7 +58463,7 @@ const TATSAVIT1_QUESTIONS = [
  * One MCQ at a time: Submit checks the answer, Explanation reveals a stepped
  * timeline via renderFeedback, Next advances. Finishes with a results summary.
  */
-function Tatsavit1App({ onBack }) {
+function Tatsavit1App({ onBack, isGoalMode = false }) {
   const [idx, setIdx] = useState(0)
   const [selected, setSelected] = useState(null)
   const [revealed, setRevealed] = useState(false)
@@ -59020,7 +59109,7 @@ const RIYA_UNITS = [
  * Pass threshold: 4 of 5 correct. Passing advances to the next unit;
  * failing replays the lesson with a "let's review" banner.
  */
-function RiyaApp({ onBack }) {
+function RiyaApp({ onBack, isGoalMode = false }) {
   const [unitIdx, setUnitIdx] = useState(0)
   const [phase, setPhase] = useState('lesson')           // 'lesson' | 'quiz' | 'complete'
   const [quizIdx, setQuizIdx] = useState(0)
@@ -60036,6 +60125,633 @@ export function QuizLayout({ title, subtitle, onBack, children, timer, sessionGo
   )
 }
 
+// ─── Learning Journey Core Components ───────────────────────────────────────
+
+const journeyFetch = async (path, options = {}) => {
+  const token = authGetToken();
+  const headers = {
+    'Content-Type': 'application/json',
+    ...options.headers,
+  };
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+  const res = await fetch(`${API}${path}`, {
+    ...options,
+    headers,
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ error: 'Request failed' }));
+    throw new Error(err.error || `Request failed (HTTP ${res.status})`);
+  }
+  return res.json();
+};
+
+function LearningJourneyHome({ onSelectTopic, onBack }) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  const loadProgress = async () => {
+    try {
+      setLoading(true);
+      const res = await journeyFetch('/api/learning-journey/progress');
+      setData(res);
+      setError('');
+    } catch (err) {
+      setError(err.message || 'Failed to load progress');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadProgress();
+  }, []);
+
+  if (loading) return <div style={{ textAlign: 'center', padding: '40px' }}><p>Loading your journey...</p></div>;
+  if (error) return <div style={{ textAlign: 'center', padding: '40px', color: 'red' }}><p>{error}</p><button onClick={loadProgress} className="submit-btn" style={{ width: 'auto' }}>Retry</button></div>;
+  if (!data) return null;
+
+  return (
+    <div style={{ padding: '16px' }}>
+      <div className="header-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+        <button className="back-button" onClick={onBack}>← Main Menu</button>
+        <span style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--clr-accent)' }}>⭐ Learning Journey</span>
+      </div>
+
+      <div style={{ background: 'var(--clr-hover-strong, rgba(255,255,255,0.03))', padding: '20px', borderRadius: '12px', border: '1px solid var(--clr-border)', marginBottom: '24px' }}>
+        <h3 style={{ marginTop: 0, marginBottom: '8px' }}>Overall Progress</h3>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <div style={{ flex: 1, height: '12px', background: 'var(--clr-border, #444)', borderRadius: '6px', overflow: 'hidden' }}>
+            <div style={{ width: `${data.overallProgressPercent}%`, height: '100%', background: 'linear-gradient(90deg, #ff7e5f, #feb47b)', borderRadius: '6px', transition: 'width 0.5s ease-in-out' }} />
+          </div>
+          <span style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{data.overallProgressPercent}% Completed</span>
+        </div>
+        <p style={{ margin: '8px 0 0 0', fontSize: '0.85rem', color: 'var(--clr-text-soft)' }}>
+          Completed {data.completedConcepts.length} concepts across {data.completedTopics.length} topics.
+        </p>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '20px' }}>
+        {data.topics.map((t, idx) => {
+          if (!t) return null;
+          const completedCount = t.concepts.filter(c => c.state === 'completed').length;
+          const totalConcepts = t.concepts.length;
+
+          return (
+            <div
+              key={t.topicId}
+              style={{
+                position: 'relative',
+                background: 'var(--clr-surface, #1c1c1f)',
+                border: t.completed
+                  ? '1.5px solid var(--clr-correct, #26de81)'
+                  : (t.unlocked ? '1.5px solid var(--clr-accent, #feb47b)' : '1px solid var(--clr-border, #444)'),
+                borderRadius: '12px',
+                padding: '20px',
+                opacity: t.unlocked ? 1 : 0.5,
+                cursor: t.unlocked ? 'pointer' : 'not-allowed',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                transition: 'transform 0.2s, box-shadow 0.2s'
+              }}
+              onClick={() => {
+                if (t.unlocked) onSelectTopic(t.topicId);
+              }}
+              onMouseEnter={e => {
+                if (t.unlocked) {
+                  e.currentTarget.style.transform = 'translateY(-3px)';
+                  e.currentTarget.style.boxShadow = '0 6px 16px rgba(0,0,0,0.25)';
+                }
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.transform = 'none';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+              }}
+            >
+              {!t.unlocked && (
+                <div style={{ position: 'absolute', top: '16px', right: '16px', fontSize: '1.2rem' }}>🔒</div>
+              )}
+              {t.completed && (
+                <div style={{ position: 'absolute', top: '16px', right: '16px', color: 'var(--clr-correct, #26de81)', fontSize: '1.25rem', fontWeight: 'bold' }}>✓</div>
+              )}
+              <span style={{ fontSize: '0.8rem', color: 'var(--clr-accent)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold' }}>
+                Topic {idx + 1}
+              </span>
+              <h3 style={{ marginTop: '4px', marginBottom: '8px' }}>{t.topicId.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}</h3>
+              
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: 'var(--clr-text-soft)', marginBottom: '12px' }}>
+                <span>Concepts</span>
+                <span>{completedCount} / {totalConcepts}</span>
+              </div>
+
+              {t.unlocked && (
+                <div style={{ marginTop: '16px', fontSize: '0.85rem' }}>
+                  {t.completed ? (
+                    <span style={{ color: 'var(--clr-correct, #26de81)', fontWeight: 'bold' }}>Checkpoint Cleared ({t.latestScore}%)</span>
+                  ) : t.checkpointEligible ? (
+                    <span style={{ color: 'orange', fontWeight: 'bold' }}>Checkpoint Ready</span>
+                  ) : (
+                    <span style={{ color: 'var(--clr-text-soft)' }}>Progressing ({Math.round((completedCount/totalConcepts)*100)}%)</span>
+                  )}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function LearningJourneyTopicView({ topicId, onPlayConcept, onStartCheckpoint, onBack }) {
+  const [progression, setProgression] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  const loadProgression = async () => {
+    try {
+      setLoading(true);
+      const res = await journeyFetch('/api/learning-journey/progress');
+      const topicProg = res.topics.find(t => t && t.topicId === topicId);
+      if (!topicProg) throw new Error('Topic progression not found');
+      setProgression(topicProg);
+      setError('');
+    } catch (err) {
+      setError(err.message || 'Failed to load progression');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadProgression();
+  }, [topicId]);
+
+  if (loading) return <div style={{ textAlign: 'center', padding: '40px' }}><p>Loading topic concepts...</p></div>;
+  if (error) return <div style={{ textAlign: 'center', padding: '40px', color: 'red' }}><p>{error}</p><button onClick={loadProgression} className="submit-btn" style={{ width: 'auto' }}>Retry</button></div>;
+  if (!progression) return null;
+
+  const displayName = topicId.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+
+  return (
+    <div style={{ padding: '16px' }}>
+      <div className="header-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+        <button className="back-button" onClick={onBack}>← Back to Journey</button>
+        <span style={{ fontWeight: 'bold', color: 'var(--clr-accent)' }}>Topic Path</span>
+      </div>
+
+      <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+        <h2 style={{ margin: 0 }}>{displayName}</h2>
+        <p className="subtitle">Complete each concept sequentially to unlock the Checkpoint gate.</p>
+      </div>
+
+      {/* Timeline Layout */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', maxWidth: '500px', margin: '0 auto', position: 'relative' }}>
+        {progression.concepts.map((concept, index) => {
+          const isCompleted = concept.state === 'completed';
+          const isNeedsRevision = concept.state === 'needs_revision';
+          const isPlayable = concept.state === 'playable' || isNeedsRevision;
+          const isLocked = concept.state === 'locked';
+
+          return (
+            <div key={concept.key} style={{ display: 'flex', gap: '16px', alignItems: 'center', position: 'relative' }}>
+              {/* Connector line */}
+              {index < progression.concepts.length - 1 && (
+                <div style={{
+                  position: 'absolute',
+                  left: '20px',
+                  top: '40px',
+                  width: '2px',
+                  height: 'calc(100% - 20px)',
+                  background: isCompleted || isNeedsRevision ? 'var(--clr-correct, #26de81)' : 'var(--clr-border, #444)',
+                  zIndex: 1
+                }} />
+              )}
+              {/* Circle Icon */}
+              <div style={{
+                width: '42px',
+                height: '42px',
+                borderRadius: '50%',
+                background: isCompleted
+                  ? 'var(--clr-correct, #26de81)'
+                  : (isNeedsRevision ? '#ff9f43' : (isPlayable ? 'var(--clr-accent, #feb47b)' : 'var(--clr-surface, #2c2c2f)')),
+                border: '2px solid ' + (isPlayable || isNeedsRevision ? '#fff' : 'var(--clr-border)'),
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontWeight: 'bold',
+                color: isCompleted || isNeedsRevision || isPlayable ? '#000' : 'var(--clr-text-soft)',
+                zIndex: 2,
+                fontSize: '1.1rem'
+              }}>
+                {isCompleted ? '✓' : (isNeedsRevision ? '↻' : (isLocked ? '🔒' : index + 1))}
+              </div>
+
+              {/* Card content */}
+              <div
+                style={{
+                  flex: 1,
+                  background: isNeedsRevision
+                    ? 'rgba(255, 159, 67, 0.08)'
+                    : (isPlayable ? 'var(--clr-hover-strong, rgba(255,255,255,0.06))' : 'var(--clr-surface, #1c1c1f)'),
+                  border: isNeedsRevision
+                    ? '1.5px dashed #ff9f43'
+                    : (isPlayable ? '1.5px solid var(--clr-accent)' : '1px solid var(--clr-border)'),
+                  borderRadius: '10px',
+                  padding: '12px 18px',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  opacity: isLocked ? 0.6 : 1,
+                  cursor: isLocked ? 'not-allowed' : 'pointer',
+                  transition: 'background var(--transition)'
+                }}
+                onClick={() => {
+                  if (!isLocked) onPlayConcept(concept.key);
+                }}
+              >
+                <div>
+                  <h4 style={{ margin: 0, fontSize: '1.05rem' }}>{concept.name}</h4>
+                  <span style={{ fontSize: '0.78rem', color: isNeedsRevision ? '#ff9f43' : 'var(--clr-text-soft)' }}>
+                    {isNeedsRevision
+                      ? '⚠️ Revision Required'
+                      : (isCompleted ? 'Completed (Click to revise)' : (isPlayable ? 'Playable Now' : 'Locked'))}
+                  </span>
+                </div>
+                {!isLocked && (
+                  <span style={{ fontSize: '1.1rem', color: isNeedsRevision ? '#ff9f43' : (isPlayable ? 'var(--clr-accent)' : 'var(--clr-text-soft)') }}>▶</span>
+                )}
+              </div>
+            </div>
+          );
+        })}
+
+        {/* Checkpoint Gate node */}
+        <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginTop: '20px' }}>
+          <div style={{
+            width: '42px',
+            height: '42px',
+            borderRadius: '50%',
+            background: progression.completed
+              ? 'var(--clr-correct, #26de81)'
+              : (progression.checkpointEligible ? 'orange' : 'var(--clr-surface, #2c2c2f)'),
+            border: '2px solid var(--clr-border)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: progression.completed || progression.checkpointEligible ? '#000' : 'var(--clr-text-soft)',
+            zIndex: 2,
+            fontSize: '1.2rem',
+            fontWeight: 'bold'
+          }}>
+            🏁
+          </div>
+
+          <div
+            style={{
+              flex: 1,
+              background: 'var(--clr-surface, #1d1d20)',
+              border: progression.completed
+                ? '2px solid var(--clr-correct, #26de81)'
+                : (progression.checkpointEligible ? '2px solid orange' : '1px solid var(--clr-border)'),
+              borderRadius: '12px',
+              padding: '20px',
+              textAlign: 'center',
+              boxShadow: '0 4px 14px rgba(0,0,0,0.1)'
+            }}
+          >
+            <h4 style={{ margin: '0 0 8px 0', fontSize: '1.1rem' }}>Topic Checkpoint Quiz</h4>
+            <p style={{ margin: '0 0 16px 0', fontSize: '0.85rem', color: 'var(--clr-text-soft)' }}>
+              15 cumulative questions. Score 80%+ to clear the topic and unlock successor topics.
+            </p>
+
+            {progression.completed ? (
+              <div style={{ color: 'var(--clr-correct, #26de81)', fontWeight: 'bold', fontSize: '1.05rem' }}>
+                ✓ Cleared (Score: {progression.latestScore}%)
+              </div>
+            ) : progression.checkpointEligible ? (
+              <div>
+                {progression.latestScore !== null && (
+                  <div style={{ color: 'red', fontSize: '0.85rem', fontWeight: 'bold', marginBottom: '8px' }}>
+                    Failed Previous Attempt: {progression.latestScore}% (Required: 80%)
+                  </div>
+                )}
+                <button
+                  className="submit-btn"
+                  onClick={onStartCheckpoint}
+                  style={{ width: 'auto', padding: '10px 24px', background: 'orange', borderColor: 'orange', color: '#000', fontWeight: 'bold' }}
+                >
+                  Start Checkpoint Quiz
+                </button>
+              </div>
+            ) : (
+              <div style={{ fontSize: '0.85rem', color: 'var(--clr-text-soft)', fontStyle: 'italic' }}>
+                🔒 Locked (Complete all concepts above to unlock)
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function LearningJourneyCheckpointQuizView({ topicId, onBack }) {
+  const [quiz, setQuiz] = useState(null);
+  const [currentIdx, setCurrentIdx] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
+  const celebrationRef = useRef(null);
+
+  const loadQuiz = async () => {
+    try {
+      setLoading(true);
+      const res = await journeyFetch(`/api/learning-journey/checkpoint/quiz?topicId=${topicId}`);
+      setQuiz(res);
+      setError('');
+      setAnswers({});
+      setResult(null);
+      setCurrentIdx(0);
+    } catch (err) {
+      setError(err.message || 'Failed to load quiz');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadQuiz();
+  }, [topicId]);
+
+  useEffect(() => {
+    if (!result || !result.passed || !celebrationRef.current) return;
+    const canvas = celebrationRef.current;
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const colors = ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff', '#5f27cd', '#01a3a4', '#f368e0', '#ff9f43', '#00d2d3'];
+    const confetti = Array.from({ length: 150 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height - canvas.height,
+      w: Math.random() * 12 + 6,
+      h: Math.random() * 8 + 4,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      vx: (Math.random() - 0.5) * 4,
+      vy: Math.random() * 3 + 2,
+      rot: Math.random() * 360,
+      rotSpeed: (Math.random() - 0.5) * 10
+    }));
+    let frame;
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      let allDone = true;
+      confetti.forEach(c => {
+        c.x += c.vx;
+        c.y += c.vy;
+        c.rot += c.rotSpeed;
+        c.vy += 0.05;
+        if (c.y < canvas.height + 50) allDone = false;
+        ctx.save();
+        ctx.translate(c.x, c.y);
+        ctx.rotate((c.rot * Math.PI) / 180);
+        ctx.fillStyle = c.color;
+        ctx.fillRect(-c.w / 2, -c.h / 2, c.w, c.h);
+        ctx.restore();
+      });
+      if (!allDone) frame = requestAnimationFrame(animate);
+    };
+    animate();
+    return () => { if (frame) cancelAnimationFrame(frame); };
+  }, [result]);
+
+  const handleSelectAnswer = (ansVal) => {
+    const qId = quiz.questions[currentIdx].id;
+    setAnswers(prev => ({ ...prev, [qId]: ansVal }));
+  };
+
+  const handleSubmit = async () => {
+    try {
+      setSubmitting(true);
+      const res = await journeyFetch('/api/learning-journey/checkpoint/verify', {
+        method: 'POST',
+        body: JSON.stringify({ topicId, answers })
+      });
+      setResult(res);
+    } catch (err) {
+      alert(err.message || 'Verification failed');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  if (loading) return <div style={{ textAlign: 'center', padding: '40px' }}><p>Generating your checkpoint questions...</p></div>;
+  if (error) return <div style={{ textAlign: 'center', padding: '40px', color: 'red' }}><p>{error}</p><button onClick={loadQuiz} className="submit-btn" style={{ width: 'auto' }}>Retry</button></div>;
+  if (!quiz) return null;
+
+  const displayName = topicId.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+
+  // Show grading results screen
+  if (result) {
+    return (
+      <div style={{ padding: '16px' }}>
+        {result.passed && (
+          <canvas
+            ref={celebrationRef}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              pointerEvents: 'none',
+              zIndex: 9999
+            }}
+          />
+        )}
+        <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+          <h2 style={{ color: result.passed ? 'var(--clr-correct, #26de81)' : 'var(--clr-wrong, #eb5e55)' }}>
+            {result.passed ? '🎉 Checkpoint Passed!' : "Oh no, it's okay"}
+          </h2>
+          <h1 style={{ margin: '8px 0', fontSize: '3rem' }}>{result.scorePercent}%</h1>
+          <p className="subtitle">
+            Answered {result.correctCount} of {result.totalQuestions} questions correctly.
+          </p>
+          {!result.passed && (
+            <div style={{
+              marginTop: '16px',
+              padding: '12px 20px',
+              borderRadius: '8px',
+              background: 'var(--clr-wrong-light, rgba(235, 94, 85, 0.1))',
+              border: '1px solid var(--clr-wrong, #eb5e55)',
+              color: 'var(--clr-text)',
+              display: 'inline-block',
+              fontSize: '0.95rem',
+              maxWidth: '450px',
+              lineHeight: '1.5'
+            }}>
+              💡 <strong>Revise back old concepts and try again.</strong> You need 80% (12/15) to pass.
+            </div>
+          )}
+          {result.passed && (
+            <p className="subtitle" style={{ color: 'var(--clr-correct, #26de81)', marginTop: '8px' }}>
+              The next topic has been unlocked.
+            </p>
+          )}
+        </div>
+
+        <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', marginBottom: '32px' }}>
+          {result.passed ? (
+            <button onClick={onBack} className="submit-btn" style={{ width: 'auto', padding: '10px 24px' }}>
+              Continue Journey
+            </button>
+          ) : (
+            <>
+              <button onClick={loadQuiz} className="submit-btn" style={{ width: 'auto', padding: '10px 24px' }}>
+                Retry Checkpoint
+              </button>
+              <button onClick={onBack} className="submit-btn" style={{ width: 'auto', padding: '10px 24px', background: 'transparent', color: 'var(--clr-text)', border: '1px solid var(--clr-border)' }}>
+                Back to Concepts
+              </button>
+            </>
+          )}
+        </div>
+
+        <h3 style={{ borderBottom: '1px solid var(--clr-border)', paddingBottom: '8px', marginBottom: '16px' }}>Review Questions</h3>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          {result.results.map((q, idx) => (
+            <div
+              key={q.id}
+              style={{
+                background: 'var(--clr-surface, #1c1c1f)',
+                border: '1px solid ' + (q.isCorrect ? 'var(--clr-correct, #26de81)' : 'red'),
+                borderRadius: '8px',
+                padding: '16px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center'
+              }}
+            >
+              <div>
+                <span style={{ fontSize: '0.85rem', color: 'var(--clr-accent)', fontWeight: 'bold' }}>Q{idx + 1}</span>
+                <p style={{ margin: '4px 0 0 0', fontWeight: 'bold' }}>{q.prompt}</p>
+                <div style={{ marginTop: '8px', fontSize: '0.9rem', display: 'flex', gap: '20px' }}>
+                  <span>Your answer: <strong style={{ color: q.isCorrect ? 'var(--clr-correct)' : 'red' }}>{q.userAnswer || '(blank)'}</strong></span>
+                  {!q.isCorrect && <span>Correct answer: <strong style={{ color: 'var(--clr-correct)' }}>{q.correctAnswer}</strong></span>}
+                </div>
+              </div>
+              <div style={{ fontSize: '1.5rem', color: q.isCorrect ? 'var(--clr-correct)' : 'red' }}>
+                {q.isCorrect ? '✓' : '✗'}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  const currentQ = quiz.questions[currentIdx];
+  const currentAnswerVal = answers[currentQ.id] || '';
+
+  return (
+    <div style={{ padding: '16px' }}>
+      <div className="header-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+        <button className="back-button" onClick={onBack}>← Quit Checkpoint</button>
+        <span style={{ fontSize: '0.95rem', color: 'orange', fontWeight: 'bold' }}>🏁 {displayName} Checkpoint</span>
+      </div>
+
+      {/* Progress display */}
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '6px', marginBottom: '20px' }}>
+        {quiz.questions.map((_, idx) => {
+          let dotColor = 'var(--clr-border, #444)';
+          if (idx === currentIdx) dotColor = 'orange';
+          else if (answers[quiz.questions[idx].id] !== undefined) dotColor = 'var(--clr-accent, #feb47b)';
+
+          return (
+            <div
+              key={idx}
+              style={{
+                width: '10px',
+                height: '10px',
+                borderRadius: '50%',
+                background: dotColor,
+                transition: 'background 0.2s'
+              }}
+            />
+          );
+        })}
+      </div>
+
+      <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+        <span style={{ fontSize: '0.85rem', color: 'var(--clr-text-soft)', textTransform: 'uppercase', fontWeight: 'bold' }}>
+          Question {currentIdx + 1} of 15
+        </span>
+        <h2 style={{ marginTop: '8px', minHeight: '60px' }}>{currentQ.prompt}</h2>
+      </div>
+
+      <div style={{ maxWidth: '360px', margin: '0 auto 32px auto' }}>
+        <input
+          type="text"
+          value={currentAnswerVal}
+          onChange={(e) => handleSelectAnswer(e.target.value)}
+          placeholder="Type your answer here..."
+          autoFocus
+          style={{
+            width: '100%',
+            padding: '12px 16px',
+            fontSize: '1.2rem',
+            textAlign: 'center',
+            background: 'var(--clr-surface, #1c1c1f)',
+            border: '1.5px solid var(--clr-border)',
+            borderRadius: '8px',
+            color: 'var(--clr-text)',
+            outline: 'none',
+            fontFamily: 'monospace'
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              if (currentIdx < 14) setCurrentIdx(currentIdx + 1);
+              else handleSubmit();
+            }
+          }}
+        />
+      </div>
+
+      <div style={{ display: 'flex', justifyContent: 'space-between', maxWidth: '360px', margin: '0 auto' }}>
+        <button
+          onClick={() => setCurrentIdx(prev => Math.max(0, prev - 1))}
+          disabled={currentIdx === 0}
+          className="back-button"
+          style={{ padding: '10px 20px', border: '1px solid var(--clr-border)', borderRadius: '6px', cursor: currentIdx === 0 ? 'not-allowed' : 'pointer' }}
+        >
+          ← Prev
+        </button>
+
+        {currentIdx < 14 ? (
+          <button
+            onClick={() => setCurrentIdx(prev => prev + 1)}
+            className="submit-btn"
+            style={{ width: 'auto', padding: '10px 24px' }}
+          >
+            Next →
+          </button>
+        ) : (
+          <button
+            onClick={handleSubmit}
+            disabled={submitting}
+            className="submit-btn"
+            style={{ width: 'auto', padding: '10px 24px', background: 'orange', borderColor: 'orange', color: '#000', fontWeight: 'bold' }}
+          >
+            {submitting ? 'Submitting...' : 'Finish Checkpoint'}
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
 
 // Export main App component (entry point)
 
@@ -60731,3 +61447,4 @@ function MensurationLabApp({ onBack, initialDifficulty, initialNumQuestions, ini
 
 export default App
 export { AuthMenu }
+

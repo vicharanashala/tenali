@@ -73,7 +73,7 @@ app.use('/api/progress', progress.router);
 auth.seedUsers().catch(() => {});  // always populate in-memory fallback
 auth.connectMongo()
   .then(() => auth.seedUsers())
-  .catch(err => console.error('[auth] Mongo connect failed — using in-memory auth:', err.message));
+  .catch(err => console.error('[auth] Mongo connect failed — using in-memory auth:', err));
 
 /**
  * EXPLANATION SUPPORT MIDDLEWARE
@@ -133,6 +133,15 @@ const jwt = require('jsonwebtoken');
 const lilProcess = require('./lil/processAttempt');
 const { User } = require('./auth');
 
+// Cache the fallback 'tatsavit' user ID so we don't query MongoDB on every anonymous request
+let cachedTatsavitUserId = null;
+setTimeout(async () => {
+  try {
+    const u = await User.findOne({ username: 'tatsavit' });
+    if (u) cachedTatsavitUserId = u._id.toString();
+  } catch {}
+}, 3000);
+
 app.use(async (req, res, next) => {
   // Only intercept POST requests to check endpoints
   if (req.method !== 'POST' || !req.path.includes('-api/check')) {
@@ -158,16 +167,9 @@ app.use(async (req, res, next) => {
     }
   }
 
-  // Fallback: Resolve to seeded 'tatsavit' user if no token or invalid token
+  // Fallback: Use cached tatsavit user ID (no DB query per request)
   if (!userId) {
-    try {
-      const tatsavitUser = await User.findOne({ username: 'tatsavit' });
-      if (tatsavitUser) {
-        userId = tatsavitUser._id.toString();
-      }
-    } catch (e) {
-      console.error('[LIL] Fallback user lookup failed:', e.message);
-    }
+    userId = cachedTatsavitUserId;
   }
 
   // Extract topicId (e.g. "/addition-api/check" -> "addition")
@@ -198,16 +200,13 @@ app.use(async (req, res, next) => {
         questionData: req.body
       };
 
+      // Send response immediately — don't block on DB writes
+      originalJson(data);
+
+      // Fire-and-forget: try to save attempt in background
       lilProcess.processAttempt(payloadInput)
-        .then(lilResult => {
-          // Append LIL outcomes to the client response payload
-          data.lil = lilResult;
-          originalJson(data);
-        })
-        .catch(err => {
-          console.error('[LIL] processAttempt failed:', err);
-          originalJson(data);
-        });
+        .then(() => {})
+        .catch(err => console.error('[LIL] processAttempt failed:', err.message));
     } else {
       originalJson(data);
     }
@@ -237,16 +236,9 @@ app.use(async (req, res, next) => {
     }
   }
 
-  // Fallback: Resolve to seeded 'tatsavit' user if no token or invalid token
+  // Fallback: Use cached tatsavit user ID (no DB query per request)
   if (!userId) {
-    try {
-      const tatsavitUser = await User.findOne({ username: 'tatsavit' });
-      if (tatsavitUser) {
-        userId = tatsavitUser._id.toString();
-      }
-    } catch (e) {
-      console.error('[LIL GET] Fallback user lookup failed:', e.message);
-    }
+    userId = cachedTatsavitUserId;
   }
 
   // Extract topicId (e.g. "/addition-api/question" -> "addition")
@@ -8657,6 +8649,95 @@ app.post('/diffeq-api/check', express.json(), (req, res) => {
     ? userStr === answer.toLowerCase() || userStr === answer.toLowerCase().replace(/\s+/g, '')
     : !isNaN(parseInt(userStr, 10)) && parseInt(userStr, 10) === answer;
   res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+});
+
+// ═══════════════════════════════════════════════════════════════════════════
+// LEARNING JOURNEY ENDPOINTS
+// ═══════════════════════════════════════════════════════════════════════════
+const { JOURNEY_CURRICULUM } = require('./lil/learning_journey/journeyData');
+const {
+  getUserProgress,
+  getTopicProgression,
+  completeConcept,
+  getCheckpointQuiz,
+  verifyCheckpointQuiz
+} = require('./lil/learning_journey/controllers');
+
+app.get('/api/learning-journey/progress', auth.requireAuth, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const progress = await getUserProgress(userId);
+    
+    // Map all topics to their progression state for the client
+    const topicsProgress = JOURNEY_CURRICULUM.map(topic => 
+      getTopicProgression(progress, topic.id)
+    );
+
+    // Calculate overall journey progress percent
+    const totalConcepts = JOURNEY_CURRICULUM.reduce((sum, t) => sum + t.concepts.length, 0);
+    const completedConceptsCount = progress.completedConcepts.length;
+    const overallProgressPercent = totalConcepts > 0 
+      ? Math.round((completedConceptsCount / totalConcepts) * 100) 
+      : 0;
+
+    res.json({
+      topics: topicsProgress,
+      completedConcepts: progress.completedConcepts,
+      completedTopics: progress.completedTopics,
+      overallProgressPercent
+    });
+  } catch (err) {
+    console.error('[learning-journey] GET /progress error:', err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.post('/api/learning-journey/complete-concept', auth.requireAuth, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { topicId, conceptKey } = req.body || {};
+    if (!topicId || !conceptKey) {
+      return res.status(400).json({ error: 'Missing topicId or conceptKey' });
+    }
+
+    const progress = await completeConcept(userId, topicId, conceptKey);
+    res.json({ success: true, completedConcepts: progress.completedConcepts });
+  } catch (err) {
+    console.error('[learning-journey] POST /complete-concept error:', err.message);
+    res.status(400).json({ error: err.message });
+  }
+});
+
+app.get('/api/learning-journey/checkpoint/quiz', auth.requireAuth, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { topicId } = req.query || {};
+    if (!topicId) {
+      return res.status(400).json({ error: 'Missing topicId' });
+    }
+
+    const quiz = await getCheckpointQuiz(userId, topicId);
+    res.json(quiz);
+  } catch (err) {
+    console.error('[learning-journey] GET /checkpoint/quiz error:', err.message);
+    res.status(400).json({ error: err.message });
+  }
+});
+
+app.post('/api/learning-journey/checkpoint/verify', auth.requireAuth, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { topicId, answers } = req.body || {};
+    if (!topicId || !answers) {
+      return res.status(400).json({ error: 'Missing topicId or answers' });
+    }
+
+    const result = await verifyCheckpointQuiz(userId, topicId, answers);
+    res.json(result);
+  } catch (err) {
+    console.error('[learning-journey] POST /checkpoint/verify error:', err.message);
+    res.status(400).json({ error: err.message });
+  }
 });
 
 // /darts-api — Visual Coordinate Geometry (Dart Board)

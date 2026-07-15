@@ -1992,6 +1992,7 @@ function MiniGraph({ story, equation }) {
 }
 
 function generateMqExplanation(q) {
+  try {
   const d = q.data || {};
   const s = [];
   const t = q.type || '';
@@ -2205,6 +2206,9 @@ function generateMqExplanation(q) {
   else if (t === 'm23_3planes') { step('Concept', `Each equation removes 1 dimension.`); step('Answer', `${ans}`); }
   else { _genericExplanation(t, d, s, step, ans); }
   return s;
+  } catch {
+    return [{ label: 'Answer', text: q.display || q.answer || 'See answer above' }];
+  }
 }
 
 function _genericExplanation(t, d, s, step, ans) {
@@ -3265,7 +3269,7 @@ function LinearAlgebraApp({ onBack }) {
                         else if (showResult && selected && !isCorrectChoice) { bg = 'rgba(244,67,54,0.2)'; border = '2px solid #f44336'; color = '#f44336'; }
                         else if (selected) { bg = 'rgba(33,150,243,0.15)'; border = '2px solid var(--clr-accent)'; }
                         return (
-                          <button key={ci} disabled={mqRevealed} onClick={() => { if (!mqRevealed) { setMqAnswer(String(c)); mqSubmit(String(c)); } }}
+                          <button key={ci} disabled={mqRevealed} onClick={() => { if (!mqRevealed) setMqAnswer(String(c)); }}
                             style={{ padding: '10px 20px', borderRadius: 8, background: bg, border, color, cursor: mqRevealed ? 'default' : 'pointer', fontSize: '1rem', fontWeight: 600, minWidth: 80, transition: 'all 0.15s' }}>
                             {c}
                           </button>
