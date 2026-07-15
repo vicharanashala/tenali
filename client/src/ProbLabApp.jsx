@@ -40,8 +40,13 @@ function triggerConfetti() {
 }
 
 export default function ProbLabApp({ onBack }) {
-  // Flow: 'setup' | 'game' | 'results'
-  const [phase, setPhase] = useState('setup');
+  const [phase, _setPhase] = useState('setup');
+  const setPhase = (val) => {
+    if (val === 'results') {
+      AudioManager.playCelebrate();
+    }
+    _setPhase(val);
+  };
   const [difficulty, setDifficulty] = useState('easy'); // easy | medium | hard | extra
   const [targetMissions, setTargetMissions] = useState(5); // 5 | 10 | 15
 
@@ -103,12 +108,6 @@ export default function ProbLabApp({ onBack }) {
       loadLevelConfig(currentLevel);
     }
   }, [phase, currentLevel, difficulty]);
-
-  useEffect(() => {
-    if (phase === 'results') {
-      AudioManager.playCelebrate();
-    }
-  }, [phase]);
 
   const loadLevelConfig = (lvl) => {
     setShowHint(false);

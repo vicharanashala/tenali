@@ -875,15 +875,11 @@ const enhanceFinishedScreen = (node, sessionGoal) => {
  * structured card with highlighted answer and formatted explanation.
  * For normal correct/wrong feedback, renders inline text.
  */
-let lastPlayedFeedback = null;
-function renderFeedback(feedback, isCorrect) {
-  if (!feedback) {
-    lastPlayedFeedback = null;
-    return null;
-  }
+function FeedbackComponent({ feedback, isCorrect }) {
+  const lastPlayedRef = useRef(null);
 
-  if (feedback !== lastPlayedFeedback) {
-    lastPlayedFeedback = feedback;
+  if (feedback && lastPlayedRef.current !== feedback) {
+    lastPlayedRef.current = feedback;
     if (isCorrect === true) {
       if (feedback.toLowerCase().includes('streak') || feedback.includes('🔥')) {
         AudioManager.playStreak();
@@ -900,25 +896,28 @@ function renderFeedback(feedback, isCorrect) {
     }
   }
 
-  const isSolve = isCorrect === false && feedback.startsWith('Solution:')
+  if (!feedback) return null;
+
+  const isSolve = isCorrect === false && feedback.startsWith('Solution:');
   if (!isSolve) {
-    return <div className={`feedback ${isCorrect ? 'correct' : 'wrong'}`}>{feedback}</div>
+    return <div className={`feedback ${isCorrect ? 'correct' : 'wrong'}`}>{feedback}</div>;
   }
+
   // Parse solve feedback: "Solution: ANSWER\nExplanation..."
-  const lines = feedback.split('\n')
-  const answerLine = lines[0].replace('Solution: ', '').trim()
-  const rawExplanation = lines.slice(1).filter(l => l.trim()).map(l => l.trim())
+  const lines = feedback.split('\n');
+  const answerLine = lines[0].replace('Solution: ', '').trim();
+  const rawExplanation = lines.slice(1).filter(l => l.trim()).map(l => l.trim());
 
   // Group lines into steps: lines starting with a keyword or number are step headers
-  const steps = []
+  const steps = [];
   for (const line of rawExplanation) {
     // Detect step boundaries: numbered lines, "Step N:", "Answer:", "So,", "Therefore", etc.
-    const isStepStart = /^(\d+[\.\):]|Step\s|Answer:|So[, ]|Therefore|Result:|Formula:|First|Next|Then|Finally|Multiply|Divide|Add|Subtract|Convert|Simplify|Calculate|Apply|Using|Problem:)/i.test(line)
+    const isStepStart = /^(\d+[\.\):]|Step\s|Answer:|So[, ]|Therefore|Result:|Formula:|First|Next|Then|Finally|Multiply|Divide|Add|Subtract|Convert|Simplify|Calculate|Apply|Using|Problem:)/i.test(line);
     if (isStepStart || steps.length === 0) {
-      steps.push(line)
+      steps.push(line);
     } else {
       // Append to previous step
-      steps[steps.length - 1] += '\n' + line
+      steps[steps.length - 1] += '\n' + line;
     }
   }
 
@@ -939,7 +938,11 @@ function renderFeedback(feedback, isCorrect) {
         </div>
       )}
     </div>
-  )
+  );
+}
+
+function renderFeedback(feedback, isCorrect) {
+  return <FeedbackComponent feedback={feedback} isCorrect={isCorrect} />;
 }
 
 /**
@@ -1863,6 +1866,7 @@ function ScaffoldedTablesApp({ studentName, defaultTable = 2 }) {
       setAppPhase('finished')
     } else {
       setLevel(promo.to)
+      AudioManager.playLevelUp()
       setFastStreak(0)
       setHasTyped(false)
       setAnswerOpacity(1)
@@ -2682,6 +2686,7 @@ function YazdanTablesApp({ studentName }) {
       setAppPhase('finished')
     } else {
       setLevel(promo.to)
+      AudioManager.playLevelUp()
       setRound(1)
       setStatusMsg(`Level ${promo.to}: ${levelDescriptions[promo.to]}`)
       setupRound(currentTable, promo.to, 1)
@@ -3292,6 +3297,7 @@ function JatinTablesApp({ studentName }) {
       setAppPhase('finished')
     } else {
       setLevel(promo.to)
+      AudioManager.playLevelUp()
       setRound(1)
       setStatusMsg(`Level ${promo.to}: ${levelDescriptions[promo.to]}`)
       setupRound(currentTable, promo.to, 1)
@@ -3957,6 +3963,7 @@ function LakshyaTablesApp({ studentName }) {
       setAppPhase('finished')
     } else {
       setLevel(promo.to)
+      AudioManager.playLevelUp()
       setRound(1)
       setStatusMsg(`${phaseForLevel(promo.to)}Level ${promo.to}: ${levelDescriptions[promo.to]}`)
       setupRound(currentTable, promo.to, 1)
@@ -43507,8 +43514,8 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
         body: JSON.stringify({ a: question.a, b: question.b, answer: Number(submittedAnswer) }),
       })
       const data = await res.json()
-      setIsCorrect(data.correct)
       playQuizSound(data.correct ? 'correct' : 'wrong')
+      setIsCorrect(data.correct)
       const newScore = score + (data.correct ? 1 : 0)
       setScore(newScore)
 
@@ -47218,8 +47225,8 @@ function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly
           body: JSON.stringify({ ...payload, sessionGoal }),
         })
         const data = await r.json()
-        setIsCorrect(data.correct); setRevealed(true)
         playQuizSound(data.correct ? 'correct' : 'wrong')
+        setIsCorrect(data.correct); setRevealed(true)
         setCorrectOption(data.correctOption || '')
         if (data.correct) setScore(s => s + 1)
         const correctText = data.correctDisplay || (question.options.find(o => o.option === data.correctOption)?.text) || ''
@@ -47537,8 +47544,8 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
           body: JSON.stringify({ ...payload, sessionGoal })
         })
         const data = await r.json()
-        setIsCorrect(data.correct); setRevealed(true)
         playQuizSound(data.correct ? 'correct' : 'wrong')
+        setIsCorrect(data.correct); setRevealed(true)
         if (data.correct) setScore(s => s + 1)
         const coinMsg = (data.lil?.coinsEarned ?? 0) > 0 ? ` (+${data.lil.coinsEarned}🪙)` : ''
         if (!data.correct && sessionGoal === 'perfect') {

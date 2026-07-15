@@ -551,14 +551,28 @@ export default function VisualMathLabRedux({ onBack, initialDifficulty, initialN
   const [difficulty,     setDifficulty]     = useState(initialDifficulty || 'easy');
   const [numQuestions,   setNumQuestions]   = useState(initialNumQuestions || '5');
   const [started,        setStarted]        = useState(initialStarted || false);
-  const [finished,       setFinished]       = useState(false);
+  const [finished,       _setFinished]       = useState(false);
+  const setFinished = (val) => {
+    if (val) {
+      AudioManager.playCelebrate();
+    }
+    _setFinished(val);
+  };
   const [question,       setQuestion]       = useState(null);
   const [answer,         setAnswer]         = useState('');
   const [score,          setScore]          = useState(0);
   const [questionNumber, setQuestionNumber] = useState(0);
   const [totalQ,         setTotalQ]         = useState(5);
   const [feedback,       setFeedback]       = useState('');
-  const [isCorrect,      setIsCorrect]      = useState(null);
+  const [isCorrect,      _setIsCorrect]      = useState(null);
+  const setIsCorrect = (val) => {
+    if (val === true) {
+      AudioManager.playCorrect();
+    } else if (val === false) {
+      AudioManager.playWrong();
+    }
+    _setIsCorrect(val);
+  };
   const [loading,        setLoading]        = useState(false);
   const [revealed,       setRevealed]       = useState(false);
   const [results,        setResults]        = useState([]);
@@ -571,20 +585,6 @@ export default function VisualMathLabRedux({ onBack, initialDifficulty, initialN
   const fetchingRef  = useRef(false);  // guard against concurrent fetches
   const difficultyRef = useRef(difficulty);
   useEffect(() => { difficultyRef.current = difficulty; }, [difficulty]);
-
-  useEffect(() => {
-    if (isCorrect === true) {
-      AudioManager.playCorrect();
-    } else if (isCorrect === false) {
-      AudioManager.playWrong();
-    }
-  }, [isCorrect]);
-
-  useEffect(() => {
-    if (finished) {
-      AudioManager.playCelebrate();
-    }
-  }, [finished]);
 
   const fetchFromServer = useCallback(async (diff, lastTemplate) => {
     const res = await fetch(

@@ -37,8 +37,13 @@ function triggerConfetti() {
 }
 
 export default function PythagLabApp({ onBack }) {
-  // Flow states: 'setup' | 'game' | 'results'
-  const [phase, setPhase] = useState('setup');
+  const [phase, _setPhase] = useState('setup');
+  const setPhase = (val) => {
+    if (val === 'results') {
+      AudioManager.playCelebrate();
+    }
+    _setPhase(val);
+  };
   const [difficulty, setDifficulty] = useState('easy'); // easy | medium | hard
   
   // Game states
@@ -85,12 +90,6 @@ export default function PythagLabApp({ onBack }) {
       setShowHint(false);
     }
   }, [phase, currentLevel, difficulty]);
-
-  useEffect(() => {
-    if (phase === 'results') {
-      AudioManager.playCelebrate();
-    }
-  }, [phase]);
 
   const loadLevelHint = (lvl) => {
     if (difficulty === 'easy') {

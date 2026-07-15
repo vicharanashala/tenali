@@ -40,7 +40,13 @@ function triggerConfetti() {
 
 export default function BearingsLabApp({ onBack }) {
   // Flow states: 'setup' | 'game' | 'results'
-  const [phase, setPhase] = useState('setup');
+  const [phase, _setPhase] = useState('setup');
+  const setPhase = (val) => {
+    if (val === 'results') {
+      AudioManager.playCelebrate();
+    }
+    _setPhase(val);
+  };
   
   // Setup Modal Configurations
   const [difficulty, setDifficulty] = useState('easy'); // easy | medium | hard
@@ -66,27 +72,27 @@ export default function BearingsLabApp({ onBack }) {
   const [logs, setLogs] = useState([]);
 
   // Tutor Dialogue / Feedback
-  const [tutorText, setTutorText] = useState('');
+  const [tutorText, setTutorText] = useState("Steer your ship safely to proceed! Note your target direction.");
 
   // Helm dragging ref
   const helmRef = useRef(null);
   const isDraggingHelm = useRef(false);
 
+  // Pad numbers with leading zeroes to match 3 digits
   const padZero = (val) => {
-    const num = parseInt(val) || 0;
-    if (num < 10) return `00${num}`;
-    if (num < 100) return `0${num}`;
-    return `${num % 360}`;
+    let str = String(val);
+    while (str.length < 3) str = '0' + str;
+    return str;
   };
 
   // ── Mission Generator based on selected difficulty & count
   const getMissions = () => {
     const list = [];
     if (difficulty === 'easy') {
-      // Easy: Cardinal, semi-cardinal directions, basic concepts
-      list.push({ id: 1, title: 'Mission 1: Point to North', target: 0, label: 'STEER TO NORTH (000°)', type: 'helm' });
-      list.push({ id: 2, title: 'Mission 2: Turn East', target: 90, label: 'STEER TO EAST (090°)', type: 'helm' });
-      list.push({ id: 3, title: 'Mission 3: Discover Clockwise', target: 180, label: 'STEER TO SOUTH (180°)', type: 'helm' });
+      // Easy: Cardinals & Intercardinals (000, 090, 180, 270, 045)
+      list.push({ id: 1, title: 'Mission 1: Head North', target: 0, label: 'STEER TO NORTH (000°)', type: 'helm' });
+      list.push({ id: 2, title: 'Mission 2: Route East', target: 90, label: 'STEER TO EAST (090°)', type: 'helm' });
+      list.push({ id: 3, title: 'Mission 3: Sail South', target: 180, label: 'STEER TO SOUTH (180°)', type: 'helm' });
       list.push({ id: 4, title: 'Mission 4: Turn West', target: 270, label: 'STEER TO WEST (270°)', type: 'helm' });
       list.push({ id: 5, title: 'Mission 5: Reach Coral Island', target: 45, label: 'STEER TO NORTH-EAST (045°)', type: 'helm' });
       
@@ -174,11 +180,7 @@ export default function BearingsLabApp({ onBack }) {
     }
   }, [phase]);
 
-  useEffect(() => {
-    if (phase === 'results') {
-      AudioManager.playCelebrate();
-    }
-  }, [phase]);
+
 
   const initMission = (mId) => {
     const missionsList = getMissions();
