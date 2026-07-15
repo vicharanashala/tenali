@@ -63,6 +63,7 @@ import GlossaryText from './components/GlossaryText'
 import KeyTerms from './components/KeyTerms'
 import InteractiveLcmHcfApp from './LcmHcfApp';
 import IdliVadaSambharApp from './IdliVadaSambharApp';
+import CarJourneyApp from './CarJourneyApp';
 import VisualMathLabRedux, {
   FrogJumpTemplate,
   MathMachineTemplate,
@@ -43945,6 +43946,7 @@ function App() {
     variation: VariationApp,       // Variation
     hcflcm: InteractiveLcmHcfApp,  // HCF & LCM
     idlivada: IdliVadaSambharApp,  // Idli–Vada–Sambhar (Multiples, Common Multiples & LCM)
+    carjourney: CarJourneyApp,     // The Car Journey (Feature CR — 16-stop math road trip)
     profitloss: ProfitLossApp,     // Profit & Loss
     rounding: RoundingApp,         // Rounding
     binomial: BinomialApp,         // Binomial Theorem
@@ -44232,6 +44234,7 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
     { key: 'stats', name: 'Statistics', subtitle: 'Mean, median, mode, range', color: 'blue' },
     { key: 'surds', name: 'Surds', subtitle: 'Simplify, add, multiply, rationalise', color: 'green' },
     { key: 'tatsavit', name: 'Tatsavit', subtitle: 'Algebra simplification drill', color: 'blue' },
+    { key: 'carjourney', name: 'The Car Journey', subtitle: '16-stop math road trip — counting to calculus', color: 'orange' },
     { key: 'transform', name: 'Transformations', subtitle: 'Reflect, rotate, translate, enlarge', color: 'purple' },
     { key: 'triangles', name: 'Triangles', subtitle: 'Angle sum, isosceles, exterior', color: 'blue' },
     { key: 'trig', name: 'Trigonometry', subtitle: 'SOH-CAH-TOA, sine/cosine rule', color: 'green' },
