@@ -1,0 +1,3107 @@
+[
+    {
+        "term":  "perimeter",
+        "definition":  "The total distance around the outside edge of a shape.",
+        "aliases":  [
+                        "perimeters"
+                    ],
+        "simpleMeaning":  "The distance all the way around the outside.",
+        "visualId":  "perimeter",
+        "realLifeExample":  "Imagine walking around your school playground fence - that total walk is the perimeter.",
+        "memoryTip":  "Perimeter = around."
+    },
+    {
+        "term":  "area",
+        "definition":  "The amount of flat space inside a shape.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "How much flat space a shape covers.",
+        "visualId":  "area",
+        "realLifeExample":  "The rug on your bedroom floor - its size is the area.",
+        "memoryTip":  "Area = inside space."
+    },
+    {
+        "term":  "numerator",
+        "definition":  "The top number in a fraction - it shows how many parts you have.",
+        "aliases":  [
+                        "numerators"
+                    ],
+        "simpleMeaning":  "The top number in a fraction.",
+        "visualId":  "numerator",
+        "realLifeExample":  "If a pizza is cut into 8 slices and you take 3, the 3 is the numerator.",
+        "memoryTip":  "Top number = numerator."
+    },
+    {
+        "term":  "denominator",
+        "definition":  "The bottom number in a fraction - it shows how many equal parts the whole is split into.",
+        "aliases":  [
+                        "denominators"
+                    ],
+        "simpleMeaning":  "The bottom number in a fraction.",
+        "visualId":  "denominator",
+        "realLifeExample":  "If a cake is split into 6 equal pieces, the 6 is the denominator.",
+        "memoryTip":  "Bottom = parts total."
+    },
+    {
+        "term":  "vertex",
+        "definition":  "A corner point where two or more lines or edges meet.",
+        "aliases":  [
+                        "vertices"
+                    ],
+        "simpleMeaning":  "A corner point where lines or edges meet.",
+        "visualId":  "vertex",
+        "realLifeExample":  "The pointy top of a triangle is a vertex.",
+        "memoryTip":  "Vertex = sharp corner."
+    },
+    {
+        "term":  "hypotenuse",
+        "definition":  "The longest side of a right-angled triangle, opposite the right angle.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "The longest side of a right-angled triangle.",
+        "visualId":  "hypotenuse",
+        "realLifeExample":  "On a ladder leaning against a wall, the ladder itself is the hypotenuse.",
+        "memoryTip":  "Longest side = hypotenuse."
+    },
+    {
+        "term":  "coefficient",
+        "definition":  "The number placed in front of a variable, showing how many of that variable you have (e.g. the 3 in 3x).",
+        "aliases":  [
+                        "coefficients"
+                    ],
+        "simpleMeaning":  "The number in front of a variable.",
+        "visualId":  "coefficient",
+        "realLifeExample":  "In 3x, the 3 is the coefficient - it means three copies of x.",
+        "memoryTip":  "Coefficient counts the copies."
+    },
+    {
+        "term":  "variable",
+        "definition":  "A letter (like x or y) that stands in for a number we don\u0027t know yet.",
+        "aliases":  [
+                        "variables"
+                    ],
+        "simpleMeaning":  "A letter that stands in for an unknown number.",
+        "visualId":  "variable",
+        "realLifeExample":  "In x + 5 = 10, the x is the variable we are trying to find.",
+        "memoryTip":  "Variable = unknown letter."
+    },
+    {
+        "term":  "factor",
+        "definition":  "A whole number that divides exactly into another number with no remainder.",
+        "aliases":  [
+                        "factors"
+                    ],
+        "simpleMeaning":  "A whole number that divides another number with nothing left over.",
+        "visualId":  "factor",
+        "realLifeExample":  "4 is a factor of 12 because 12 split into 4 groups is exactly 3.",
+        "memoryTip":  "Factor fits exactly."
+    },
+    {
+        "term":  "multiple",
+        "definition":  "A number you get by multiplying a given number by a whole number (e.g. 6, 12, 18 are multiples of 6).",
+        "aliases":  [
+                        "multiples"
+                    ],
+        "simpleMeaning":  "A number you get by multiplying a given number by a whole number.",
+        "visualId":  "multiple",
+        "realLifeExample":  "6, 12, 18 are all multiples of 6.",
+        "memoryTip":  "Multiple = skip-counting."
+    },
+    {
+        "term":  "prime number",
+        "definition":  "A whole number greater than 1 that can only be divided evenly by 1 and itself.",
+        "aliases":  [
+                        "prime",
+                        "prime numbers"
+                    ],
+        "simpleMeaning":  "A whole number bigger than 1 with only two factors: 1 and itself.",
+        "visualId":  "prime number",
+        "realLifeExample":  "7 is prime because only 1 times 7 makes it.",
+        "memoryTip":  "Prime has just two factors."
+    },
+    {
+        "term":  "ratio",
+        "definition":  "A way of comparing two quantities, showing how many times one value contains another.",
+        "aliases":  [
+                        "ratios"
+                    ],
+        "simpleMeaning":  "A way to compare two quantities.",
+        "visualId":  "ratio",
+        "realLifeExample":  "If there are 3 boys and 2 girls, the ratio is 3 to 2.",
+        "memoryTip":  "Ratio compares two things."
+    },
+    {
+        "term":  "percentage",
+        "definition":  "A number expressed as a fraction of 100.",
+        "aliases":  [
+                        "percentages"
+                    ],
+        "simpleMeaning":  "A number written out of 100, shown with the % sign.",
+        "visualId":  "percentage",
+        "realLifeExample":  "If you scored 50 out of 100 on a test, that is 50 percent.",
+        "memoryTip":  "Percent = per hundred."
+    },
+    {
+        "term":  "mean",
+        "definition":  "The average of a set of numbers - add them all up and divide by how many there are.",
+        "aliases":  [
+                        "average",
+                        "means"
+                    ],
+        "simpleMeaning":  "The average of a set of numbers.",
+        "visualId":  "mean",
+        "realLifeExample":  "If your last 4 test scores were 70, 80, 90, 100, the mean is 85.",
+        "memoryTip":  "Mean = average.",
+        "differentiates":  {
+                               "average":  "The mean is the precise statistical term. Average is the everyday word for the same idea, but mean is the one used in maths and data."
+                           }
+    },
+    {
+        "term":  "median",
+        "definition":  "The middle value in a list of numbers when they are arranged in order.",
+        "aliases":  [
+                        "medians"
+                    ],
+        "simpleMeaning":  "The middle value when numbers are put in order.",
+        "visualId":  "median",
+        "realLifeExample":  "In 3, 5, 7 the median is 5 because it sits in the middle.",
+        "memoryTip":  "Median = middle one."
+    },
+    {
+        "term":  "mode",
+        "definition":  "The value that appears most often in a set of numbers.",
+        "aliases":  [
+                        "modes"
+                    ],
+        "simpleMeaning":  "The number that appears most often in a set.",
+        "visualId":  "mode",
+        "realLifeExample":  "In 2, 3, 3, 5, 7, the mode is 3 because 3 appears twice.",
+        "memoryTip":  "Mode = most often."
+    },
+    {
+        "term":  "range",
+        "definition":  "The difference between the largest and smallest values in a set of numbers.",
+        "aliases":  [
+                        "ranges"
+                    ],
+        "simpleMeaning":  "The biggest number minus the smallest number in a set.",
+        "visualId":  "range",
+        "realLifeExample":  "If scores go from 40 to 90, the range is 50.",
+        "memoryTip":  "Range = highest minus lowest."
+    },
+    {
+        "term":  "probability",
+        "definition":  "A measure of how likely something is to happen, usually shown as a fraction, decimal, or percentage.",
+        "aliases":  [
+                        "probabilities"
+                    ],
+        "simpleMeaning":  "How likely something is to happen.",
+        "visualId":  "probability",
+        "realLifeExample":  "When flipping a coin, the probability of heads is 1 out of 2.",
+        "memoryTip":  "Probability = chance."
+    },
+    {
+        "term":  "quadrant",
+        "definition":  "One of the four sections formed when a graph is divided by its horizontal and vertical axes.",
+        "aliases":  [
+                        "quadrants"
+                    ],
+        "simpleMeaning":  "One of the four sections a graph is split into by its axes.",
+        "visualId":  null,
+        "realLifeExample":  "The top-right section of a graph is Quadrant I.",
+        "memoryTip":  "Quadrant = quarter of a graph."
+    },
+    {
+        "term":  "congruent",
+        "definition":  "Having exactly the same size and shape.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "Exactly the same shape and same size.",
+        "visualId":  "congruent",
+        "realLifeExample":  "Two identical cookie-cutter stars are congruent.",
+        "memoryTip":  "Congruent = clone twins."
+    },
+    {
+        "term":  "similar",
+        "definition":  "Having the same shape but not necessarily the same size - one is an enlarged or shrunk copy of the other.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "Same shape but possibly different sizes.",
+        "visualId":  "similar",
+        "realLifeExample":  "A small photo and the same photo blown up big are similar.",
+        "memoryTip":  "Similar = same look, different size."
+    },
+    {
+        "term":  "bearing",
+        "definition":  "A direction measured clockwise from north, given as a 3-digit angle.",
+        "aliases":  [
+                        "bearings"
+                    ],
+        "simpleMeaning":  "A direction measured as a clockwise angle from north.",
+        "visualId":  "bearing",
+        "realLifeExample":  "A bearing of 090 means due east, like the sunrise.",
+        "memoryTip":  "Bearing starts at north."
+    },
+    {
+        "term":  "exponent",
+        "definition":  "A small number showing how many times to multiply a number by itself.",
+        "aliases":  [
+                        "exponents",
+                        "index",
+                        "indices"
+                    ],
+        "simpleMeaning":  "A small number showing how many times to multiply a base by itself.",
+        "visualId":  "exponent",
+        "realLifeExample":  "In 2 to the power 3, the 3 says multiply 2 by itself three times.",
+        "memoryTip":  "Exponent counts the copies."
+    },
+    {
+        "term":  "surd",
+        "definition":  "A square root (or other root) that cannot be simplified into a whole number.",
+        "aliases":  [
+                        "surds"
+                    ],
+        "simpleMeaning":  "A square root that cannot be turned into a neat whole number.",
+        "visualId":  "surd",
+        "realLifeExample":  "Square root of 2 is a surd - about 1.414 but never exact.",
+        "memoryTip":  "Surd = messy root."
+    },
+    {
+        "term":  "polynomial",
+        "definition":  "An expression made of variables and numbers combined using addition, subtraction, and multiplication.",
+        "aliases":  [
+                        "polynomials"
+                    ],
+        "simpleMeaning":  "An expression made of variables and numbers combined with addition, subtraction, and multiplication.",
+        "visualId":  "polynomial",
+        "realLifeExample":  "2x squared + 3x - 1 is a polynomial.",
+        "memoryTip":  "Poly means many terms."
+    },
+    {
+        "term":  "remainder",
+        "definition":  "The amount left over when one number doesn\u0027t divide exactly into another.",
+        "aliases":  [
+                        "remainders"
+                    ],
+        "simpleMeaning":  "What is left over when a number does not divide evenly.",
+        "visualId":  "remainder",
+        "realLifeExample":  "17 divided by 5 gives 3 remainder 2.",
+        "memoryTip":  "Remainder = leftover."
+    },
+    {
+        "term":  "integer",
+        "definition":  "A whole number that can be positive, negative, or zero - never a fraction or decimal.",
+        "aliases":  [
+                        "integers"
+                    ],
+        "simpleMeaning":  "A whole number that can be positive, negative, or zero.",
+        "visualId":  "integer",
+        "realLifeExample":  "Negative 3, 0, and 5 are all integers.",
+        "memoryTip":  "Integer = whole number."
+    },
+    {
+        "term":  "circumference",
+        "definition":  "The distance all the way around a circle.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "The distance all the way around a circle.",
+        "visualId":  "circumference",
+        "realLifeExample":  "A race around a circular track - one lap is the circumference.",
+        "memoryTip":  "Circumference = circle perimeter."
+    },
+    {
+        "term":  "radius",
+        "definition":  "The distance from the center of a circle to its edge.",
+        "aliases":  [
+                        "radii"
+                    ],
+        "simpleMeaning":  "The distance from the center of a circle to its edge.",
+        "visualId":  "radius",
+        "realLifeExample":  "Half the width of a pizza is its radius.",
+        "memoryTip":  "Radius = from center out.",
+        "differentiates":  {
+                               "diameter":  "The radius is HALF the diameter. It goes from the center to the edge, while the diameter goes all the way across the circle."
+                           }
+    },
+    {
+        "term":  "diameter",
+        "definition":  "The distance across a circle through its center - exactly twice the radius.",
+        "aliases":  [
+                        "diameters"
+                    ],
+        "simpleMeaning":  "The distance straight across a circle through the middle.",
+        "visualId":  "diameter",
+        "realLifeExample":  "If a pizza is 30 cm across, the diameter is 30 cm.",
+        "memoryTip":  "Diameter = across.",
+        "differentiates":  {
+                               "radius":  "The diameter is TWICE the radius. It goes all the way across the circle, while the radius only goes from the center to the edge."
+                           }
+    },
+    {
+        "term":  "tangent",
+        "definition":  "A straight line that touches a curve or circle at exactly one point without crossing it.",
+        "aliases":  [
+                        "tangents"
+                    ],
+        "simpleMeaning":  "A straight line that just touches a curve at one point.",
+        "visualId":  "tangent",
+        "realLifeExample":  "A wall just touching a round ball is a tangent line.",
+        "memoryTip":  "Tangent = light touch."
+    },
+    {
+        "term":  "sequence",
+        "definition":  "A list of numbers arranged in a specific order, following a pattern or rule.",
+        "aliases":  [
+                        "sequences"
+                    ],
+        "simpleMeaning":  "A list of numbers that follows a rule.",
+        "visualId":  "sequence",
+        "realLifeExample":  "2, 4, 6, 8 is a sequence - each step adds 2.",
+        "memoryTip":  "Sequence = pattern."
+    },
+    {
+        "term":  "matrix",
+        "definition":  "A rectangular grid of numbers arranged in rows and columns.",
+        "aliases":  [
+                        "matrices"
+                    ],
+        "simpleMeaning":  "A grid of numbers arranged in rows and columns.",
+        "visualId":  "matrix",
+        "realLifeExample":  "A spreadsheet with rows of grades is like a matrix.",
+        "memoryTip":  "Matrix = number grid."
+    },
+    {
+        "term":  "determinant",
+        "definition":  "A single number calculated from a matrix that tells you certain properties about it.",
+        "aliases":  [
+                        "determinants"
+                    ],
+        "simpleMeaning":  "A single number computed from a square matrix.",
+        "visualId":  "determinant",
+        "realLifeExample":  "It is like a fingerprint that tells you special things about the matrix.",
+        "memoryTip":  "Determinant = matrix signature."
+    },
+    {
+        "term":  "vector",
+        "definition":  "A quantity that has both size (magnitude) and direction.",
+        "aliases":  [
+                        "vectors"
+                    ],
+        "simpleMeaning":  "A quantity with both size and direction.",
+        "visualId":  "vector",
+        "realLifeExample":  "An arrow showing 5 km east is a vector.",
+        "memoryTip":  "Vector = arrow with length."
+    },
+    {
+        "term":  "magnitude",
+        "definition":  "The size or length of a vector, ignoring its direction.",
+        "aliases":  [
+                        "magnitudes"
+                    ],
+        "simpleMeaning":  "The size or length of a vector.",
+        "visualId":  "magnitude",
+        "realLifeExample":  "In 5 km east, the magnitude is 5 km.",
+        "memoryTip":  "Magnitude = just the size."
+    },
+    {
+        "term":  "gradient",
+        "definition":  "A measure of how steep a line is - how much it goes up or down for every step across.",
+        "aliases":  [
+                        "gradients"
+                    ],
+        "simpleMeaning":  "How steep a line is, measured as rise over run.",
+        "visualId":  "gradient",
+        "realLifeExample":  "A steep hill has a bigger gradient than a gentle slope.",
+        "memoryTip":  "Gradient = steepness."
+    },
+    {
+        "term":  "discriminant",
+        "definition":  "A value calculated from a quadratic equation that tells you how many solutions it has.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "A number from a quadratic that tells how many solutions it has.",
+        "visualId":  "discriminant",
+        "realLifeExample":  "If positive, the quadratic has two real solutions.",
+        "memoryTip":  "Discriminant decides the roots."
+    },
+    {
+        "term":  "triangle",
+        "definition":  "A shape with three straight sides and three angles.",
+        "aliases":  [
+                        "triangles"
+                    ],
+        "simpleMeaning":  "A flat shape with 3 straight sides.",
+        "visualId":  "triangle",
+        "realLifeExample":  "A slice of sandwich is a triangle.",
+        "memoryTip":  "Tri = three sides."
+    },
+    {
+        "term":  "quadrilateral",
+        "definition":  "Any closed shape with four straight sides.",
+        "aliases":  [
+                        "quadrilaterals"
+                    ],
+        "simpleMeaning":  "A flat shape with 4 straight sides.",
+        "visualId":  "quadrilateral",
+        "realLifeExample":  "A window pane is usually a quadrilateral.",
+        "memoryTip":  "Quad = four sides."
+    },
+    {
+        "term":  "pentagon",
+        "definition":  "A polygon with five sides.",
+        "aliases":  [
+                        "pentagons"
+                    ],
+        "simpleMeaning":  "A flat shape with 5 straight sides.",
+        "visualId":  "pentagon",
+        "realLifeExample":  "The home plate in baseball looks like a pentagon.",
+        "memoryTip":  "Penta = five."
+    },
+    {
+        "term":  "hexagon",
+        "definition":  "A polygon with six sides.",
+        "aliases":  [
+                        "hexagons"
+                    ],
+        "simpleMeaning":  "A flat shape with 6 straight sides.",
+        "visualId":  "hexagon",
+        "realLifeExample":  "A snowflake is often a hexagon.",
+        "memoryTip":  "Hexa = six."
+    },
+    {
+        "term":  "heptagon",
+        "definition":  "A polygon with seven sides.",
+        "aliases":  [
+                        "heptagons"
+                    ],
+        "simpleMeaning":  "A flat shape with 7 straight sides.",
+        "visualId":  "heptagon",
+        "realLifeExample":  "A heptagon has 7 sides - it is rare in everyday life.",
+        "memoryTip":  "Hepta = seven."
+    },
+    {
+        "term":  "octagon",
+        "definition":  "A polygon with eight sides.",
+        "aliases":  [
+                        "octagons"
+                    ],
+        "simpleMeaning":  "A flat shape with 8 straight sides.",
+        "visualId":  "octagon",
+        "realLifeExample":  "A stop sign is an octagon.",
+        "memoryTip":  "Octa = eight."
+    },
+    {
+        "term":  "polygon",
+        "definition":  "A closed flat shape made entirely of straight sides.",
+        "aliases":  [
+                        "polygons"
+                    ],
+        "simpleMeaning":  "A closed flat shape made of straight sides.",
+        "visualId":  "polygon",
+        "realLifeExample":  "Squares, triangles, and pentagons are all polygons.",
+        "memoryTip":  "Polygon = many straight sides."
+    },
+    {
+        "term":  "parallelogram",
+        "definition":  "A four-sided shape where opposite sides are parallel and equal in length.",
+        "aliases":  [
+                        "parallelograms"
+                    ],
+        "simpleMeaning":  "A four-sided shape where opposite sides run parallel.",
+        "visualId":  "parallelogram",
+        "realLifeExample":  "A pushed-over square becomes a parallelogram.",
+        "memoryTip":  "Parallel sides, four corners."
+    },
+    {
+        "term":  "trapezium",
+        "definition":  "A four-sided shape with exactly one pair of parallel sides.",
+        "aliases":  [
+                        "trapeziums"
+                    ],
+        "simpleMeaning":  "A four-sided shape with one pair of parallel sides.",
+        "visualId":  "trapezium",
+        "realLifeExample":  "A table with slanted legs is shaped like a trapezium.",
+        "memoryTip":  "Trapezium = one pair parallel."
+    },
+    {
+        "term":  "rhombus",
+        "definition":  "A four-sided shape with all four sides equal in length and opposite sides parallel.",
+        "aliases":  [
+                        "rhombuses"
+                    ],
+        "simpleMeaning":  "A four-sided shape with all sides the same length.",
+        "visualId":  null,
+        "realLifeExample":  "A diamond shape on a playing card is a rhombus.",
+        "memoryTip":  "Rhombus = tilted square."
+    },
+    {
+        "term":  "kite",
+        "definition":  "A four-sided shape with two pairs of equal-length sides next to each other.",
+        "aliases":  [
+                        "kites"
+                    ],
+        "simpleMeaning":  "A four-sided shape with two pairs of equal sides next to each other.",
+        "visualId":  null,
+        "realLifeExample":  "The toy kite flying in the sky has this shape.",
+        "memoryTip":  "Kite = two pairs of equal sides."
+    },
+    {
+        "term":  "circle",
+        "definition":  "A perfectly round shape where every point on the edge is the same distance from the center.",
+        "aliases":  [
+                        "circles"
+                    ],
+        "simpleMeaning":  "A perfectly round flat shape.",
+        "visualId":  "circle",
+        "realLifeExample":  "A clock face is a circle.",
+        "memoryTip":  "Circle = one round curve."
+    },
+    {
+        "term":  "square",
+        "definition":  "A four-sided shape with all sides equal and all angles 90Ã‚Â°.",
+        "aliases":  [
+                        "squares"
+                    ],
+        "simpleMeaning":  "A four-sided shape with all sides equal and all corners square.",
+        "visualId":  "square",
+        "realLifeExample":  "A chessboard square is a square.",
+        "memoryTip":  "Square = equal sides, right corners."
+    },
+    {
+        "term":  "rectangle",
+        "definition":  "A four-sided shape with opposite sides equal and all angles 90Ã‚Â°.",
+        "aliases":  [
+                        "rectangles"
+                    ],
+        "simpleMeaning":  "A four-sided shape with opposite sides equal and right-angle corners.",
+        "visualId":  "rectangle",
+        "realLifeExample":  "A book cover is a rectangle.",
+        "memoryTip":  "Rectangle = right-angled and stretched."
+    },
+    {
+        "term":  "cube",
+        "definition":  "A 3D shape with six identical square faces.",
+        "aliases":  [
+                        "cubes"
+                    ],
+        "simpleMeaning":  "A 3D shape with six identical square faces.",
+        "visualId":  "cube",
+        "realLifeExample":  "A dice is a cube.",
+        "memoryTip":  "Cube = six square faces."
+    },
+    {
+        "term":  "sphere",
+        "definition":  "A perfectly round 3D shape, like a ball, where every point on the surface is the same distance from the center.",
+        "aliases":  [
+                        "spheres"
+                    ],
+        "simpleMeaning":  "A perfectly round 3D shape, like a ball.",
+        "visualId":  "sphere",
+        "realLifeExample":  "A basketball is a sphere.",
+        "memoryTip":  "Sphere = round 3D."
+    },
+    {
+        "term":  "cylinder",
+        "definition":  "A 3D shape with two identical circular ends and one curved surface joining them.",
+        "aliases":  [
+                        "cylinders"
+                    ],
+        "simpleMeaning":  "A 3D shape with two flat circles and a curved side.",
+        "visualId":  "cylinder",
+        "realLifeExample":  "A soup can is a cylinder.",
+        "memoryTip":  "Cylinder = tube shape."
+    },
+    {
+        "term":  "cone",
+        "definition":  "A 3D shape with a circular base that narrows smoothly to a single point at the top.",
+        "aliases":  [
+                        "cones"
+                    ],
+        "simpleMeaning":  "A 3D shape with a round base and a pointy top.",
+        "visualId":  "cone",
+        "realLifeExample":  "An ice cream cone is a cone.",
+        "memoryTip":  "Cone = pointy on top."
+    },
+    {
+        "term":  "pyramid",
+        "definition":  "A 3D shape with a polygon base and triangular faces that meet at a single point at the top.",
+        "aliases":  [
+                        "pyramids"
+                    ],
+        "simpleMeaning":  "A 3D shape with a polygon base and pointy top.",
+        "visualId":  "pyramid",
+        "realLifeExample":  "The pyramids of Egypt are shaped like this.",
+        "memoryTip":  "Pyramid = pointy 3D shape."
+    },
+    {
+        "term":  "prism",
+        "definition":  "A 3D shape with two identical polygon ends and rectangular sides connecting them.",
+        "aliases":  [
+                        "prisms"
+                    ],
+        "simpleMeaning":  "A 3D shape with two matching polygon ends and flat sides.",
+        "visualId":  "prism",
+        "realLifeExample":  "A bar of chocolate is like a prism.",
+        "memoryTip":  "Prism = stretched polygon."
+    },
+    {
+        "term":  "angle",
+        "definition":  "The amount of turn between two lines that meet at a point, measured in degrees.",
+        "aliases":  [
+                        "angles"
+                    ],
+        "simpleMeaning":  "The amount of turn between two lines that meet at a point.",
+        "visualId":  "angle",
+        "realLifeExample":  "The corner of an open book makes an angle.",
+        "memoryTip":  "Angle = corner opening."
+    },
+    {
+        "term":  "right angle",
+        "definition":  "An angle of exactly 90 degrees, like the corner of a square.",
+        "aliases":  [
+                        "right angles"
+                    ],
+        "simpleMeaning":  "An angle of exactly 90 degrees.",
+        "visualId":  "right angle",
+        "realLifeExample":  "The corner of a piece of paper is a right angle.",
+        "memoryTip":  "Right angle = square corner."
+    },
+    {
+        "term":  "acute angle",
+        "definition":  "An angle smaller than a right angle (less than 90Ã‚Â°).",
+        "aliases":  [
+                        "acute angles"
+                    ],
+        "simpleMeaning":  "An angle smaller than 90 degrees.",
+        "visualId":  "acute angle",
+        "realLifeExample":  "The tip of a sharp pencil makes an acute angle.",
+        "memoryTip":  "Acute = tiny cute angle."
+    },
+    {
+        "term":  "obtuse angle",
+        "definition":  "An angle bigger than a right angle but smaller than a straight line (between 90Ã‚Â° and 180Ã‚Â°).",
+        "aliases":  [
+                        "obtuse angles"
+                    ],
+        "simpleMeaning":  "An angle bigger than 90 but less than 180 degrees.",
+        "visualId":  "obtuse angle",
+        "realLifeExample":  "The angle between clock hands at 10 and 2 is obtuse.",
+        "memoryTip":  "Obtuse = wide open."
+    },
+    {
+        "term":  "reflex angle",
+        "definition":  "An angle bigger than a straight line but smaller than a full turn (between 180Ã‚Â° and 360Ã‚Â°).",
+        "aliases":  [
+                        "reflex angles"
+                    ],
+        "simpleMeaning":  "An angle bigger than 180 but less than 360 degrees.",
+        "visualId":  "reflex angle",
+        "realLifeExample":  "The outside of a star point can make a reflex angle.",
+        "memoryTip":  "Reflex = flipped-over angle."
+    },
+    {
+        "term":  "interior angle",
+        "definition":  "An angle inside a shape, between two of its sides.",
+        "aliases":  [
+                        "interior angles"
+                    ],
+        "simpleMeaning":  "An angle found inside a shape.",
+        "visualId":  "interior angle",
+        "realLifeExample":  "The corners inside a triangle are its interior angles.",
+        "memoryTip":  "Interior = inside angle."
+    },
+    {
+        "term":  "exterior angle",
+        "definition":  "An angle outside a shape, formed by one side and an extension of an adjacent side.",
+        "aliases":  [
+                        "exterior angles"
+                    ],
+        "simpleMeaning":  "An angle outside a shape, made by extending one side.",
+        "visualId":  "exterior angle",
+        "realLifeExample":  "When you extend a fence line, the bend outside is an exterior angle.",
+        "memoryTip":  "Exterior = outside angle."
+    },
+    {
+        "term":  "parallel",
+        "definition":  "Lines that stay the same distance apart and never meet, no matter how far they go.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "Lines that stay the same distance apart forever.",
+        "visualId":  "parallel",
+        "realLifeExample":  "Railway tracks are parallel - they never meet.",
+        "memoryTip":  "Parallel = never meeting."
+    },
+    {
+        "term":  "perpendicular",
+        "definition":  "Two lines that meet or cross at a right angle (90Ã‚Â°).",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "Two lines that cross at exactly a right angle.",
+        "visualId":  "perpendicular",
+        "realLifeExample":  "The corner where two walls meet is perpendicular.",
+        "memoryTip":  "Perpendicular = perfect cross."
+    },
+    {
+        "term":  "bisector",
+        "definition":  "A line that divides something into two equal parts.",
+        "aliases":  [
+                        "bisectors"
+                    ],
+        "simpleMeaning":  "A line that splits something into two equal parts.",
+        "visualId":  null,
+        "realLifeExample":  "A median of a triangle is a kind of bisector.",
+        "memoryTip":  "Bisector cuts in half."
+    },
+    {
+        "term":  "perpendicular bisector",
+        "definition":  "A line that cuts a line segment into two equal parts at a right angle.",
+        "aliases":  [
+                        "perpendicular bisectors"
+                    ],
+        "simpleMeaning":  "A line that cuts another line in half at 90 degrees.",
+        "visualId":  "perpendicular bisector",
+        "realLifeExample":  "The line down the middle of a square is a perpendicular bisector.",
+        "memoryTip":  "Perpendicular + bisector combo."
+    },
+    {
+        "term":  "midpoint",
+        "definition":  "The exact point halfway between the two ends of a line segment.",
+        "aliases":  [
+                        "midpoints"
+                    ],
+        "simpleMeaning":  "The point exactly halfway along a line.",
+        "visualId":  "midpoint",
+        "realLifeExample":  "The center mark on a ruler shows the midpoint of a line.",
+        "memoryTip":  "Midpoint = middle point."
+    },
+    {
+        "term":  "diagonal",
+        "definition":  "A line segment that connects two corners of a shape which are not next to each other.",
+        "aliases":  [
+                        "diagonals"
+                    ],
+        "simpleMeaning":  "A line that joins two corners that are not next to each other.",
+        "visualId":  null,
+        "realLifeExample":  "The line from top-left to bottom-right of a square is a diagonal.",
+        "memoryTip":  "Diagonal = across the corners."
+    },
+    {
+        "term":  "horizontal",
+        "definition":  "Going side to side, parallel to the ground.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "Going side to side, parallel to the ground.",
+        "visualId":  "horizontal",
+        "realLifeExample":  "The line of the horizon when you look out at sea is horizontal.",
+        "memoryTip":  "Horizontal = like the horizon."
+    },
+    {
+        "term":  "vertical",
+        "definition":  "Going up and down, at a right angle to the ground.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "Going straight up and down.",
+        "visualId":  "vertical",
+        "realLifeExample":  "A flagpole is vertical.",
+        "memoryTip":  "Vertical = up and down."
+    },
+    {
+        "term":  "edge",
+        "definition":  "A line segment where two faces of a 3D shape meet.",
+        "aliases":  [
+                        "edges"
+                    ],
+        "simpleMeaning":  "The line where two faces of a 3D shape meet.",
+        "visualId":  null,
+        "realLifeExample":  "The 12 edges of a dice are its lines where faces meet.",
+        "memoryTip":  "Edge = where faces meet."
+    },
+    {
+        "term":  "face",
+        "definition":  "A flat surface on the outside of a 3D shape.",
+        "aliases":  [
+                        "faces"
+                    ],
+        "simpleMeaning":  "A flat surface on the outside of a 3D shape.",
+        "visualId":  null,
+        "realLifeExample":  "A dice has 6 square faces.",
+        "memoryTip":  "Face = flat side."
+    },
+    {
+        "term":  "arc",
+        "definition":  "A curved section of the edge of a circle.",
+        "aliases":  [
+                        "arcs"
+                    ],
+        "simpleMeaning":  "A curved piece of the edge of a circle.",
+        "visualId":  "arc",
+        "realLifeExample":  "The slice of crust on a pizza is a circular arc.",
+        "memoryTip":  "Arc = curved piece."
+    },
+    {
+        "term":  "chord",
+        "definition":  "A line segment with both ends on the edge of a circle.",
+        "aliases":  [
+                        "chords"
+                    ],
+        "simpleMeaning":  "A straight line with both ends on a circle.",
+        "visualId":  "chord",
+        "realLifeExample":  "A straight cut across a pizza is a chord.",
+        "memoryTip":  "Chord = across the circle."
+    },
+    {
+        "term":  "secant",
+        "definition":  "A line that cuts through a circle, passing through two points on its edge.",
+        "aliases":  [
+                        "secants"
+                    ],
+        "simpleMeaning":  "A line that cuts through a circle at two points.",
+        "visualId":  null,
+        "realLifeExample":  "A long stick passed straight through a hula hoop is a secant.",
+        "memoryTip":  "Secant = slicing line."
+    },
+    {
+        "term":  "sector",
+        "definition":  "The region inside a circle, between two radii and the arc they enclose.",
+        "aliases":  [
+                        "sectors"
+                    ],
+        "simpleMeaning":  "The region inside a circle between two radii.",
+        "visualId":  "sector",
+        "realLifeExample":  "A pizza slice is a sector of the pizza.",
+        "memoryTip":  "Sector = pizza-slice shape."
+    },
+    {
+        "term":  "segment",
+        "definition":  "The region inside a circle between a chord and the arc it cuts off.",
+        "aliases":  [
+                        "segments"
+                    ],
+        "simpleMeaning":  "The region inside a circle between a chord and the arc.",
+        "visualId":  "segment",
+        "realLifeExample":  "If you cut a circle with a straight line, you get two segments.",
+        "memoryTip":  "Segment = chord and arc."
+    },
+    {
+        "term":  "semicircle",
+        "definition":  "Exactly half a circle, cut in two by a diameter.",
+        "aliases":  [
+                        "semicircles"
+                    ],
+        "simpleMeaning":  "Exactly half of a circle.",
+        "visualId":  "semicircle",
+        "realLifeExample":  "A full moon in the sky looks like a semicircle.",
+        "memoryTip":  "Semi = half."
+    },
+    {
+        "term":  "centre",
+        "definition":  "The middle point of a circle, equidistant from every point on the edge.",
+        "aliases":  [
+                        "center",
+                        "centers"
+                    ],
+        "simpleMeaning":  "The middle point of a circle, the same distance from every edge.",
+        "visualId":  "centre",
+        "realLifeExample":  "The dot in the middle of a dartboard is the centre.",
+        "memoryTip":  "Centre = middle point."
+    },
+    {
+        "term":  "equilateral triangle",
+        "definition":  "A triangle where all three sides are the same length.",
+        "aliases":  [
+                        "equilateral triangles"
+                    ],
+        "simpleMeaning":  "A triangle with all three sides equal.",
+        "visualId":  "equilateral triangle",
+        "realLifeExample":  "A road sign for warning is often an equilateral triangle.",
+        "memoryTip":  "Equilateral = equal sides."
+    },
+    {
+        "term":  "isosceles triangle",
+        "definition":  "A triangle where two sides are the same length.",
+        "aliases":  [
+                        "isosceles triangles"
+                    ],
+        "simpleMeaning":  "A triangle with two sides of the same length.",
+        "visualId":  "isosceles triangle",
+        "realLifeExample":  "A slice of sandwich cut straight down is often isosceles.",
+        "memoryTip":  "Isosceles = two equal legs."
+    },
+    {
+        "term":  "scalene triangle",
+        "definition":  "A triangle where all three sides have different lengths.",
+        "aliases":  [
+                        "scalene triangles"
+                    ],
+        "simpleMeaning":  "A triangle where all three sides are different lengths.",
+        "visualId":  "scalene triangle",
+        "realLifeExample":  "A random triangle drawn freehand is usually scalene.",
+        "memoryTip":  "Scalene = all sides different."
+    },
+    {
+        "term":  "right-angled triangle",
+        "definition":  "A triangle that has one right angle (90Ã‚Â°).",
+        "aliases":  [
+                        "right-angled triangles",
+                        "right angled triangle",
+                        "right angled triangles"
+                    ],
+        "simpleMeaning":  "A triangle with one corner that is exactly 90 degrees.",
+        "visualId":  "right-angled triangle",
+        "realLifeExample":  "The triangle made by a ladder, a wall, and the ground is right-angled.",
+        "memoryTip":  "Right angle inside."
+    },
+    {
+        "term":  "reflection",
+        "definition":  "Flipping a shape over a line so it becomes a mirror image.",
+        "aliases":  [
+                        "reflections"
+                    ],
+        "simpleMeaning":  "Flipping a shape so it becomes a mirror image.",
+        "visualId":  "reflection",
+        "realLifeExample":  "Your left hand and right hand are reflections of each other.",
+        "memoryTip":  "Reflection = mirror flip."
+    },
+    {
+        "term":  "rotation",
+        "definition":  "Turning a shape around a fixed point by a certain angle.",
+        "aliases":  [
+                        "rotations"
+                    ],
+        "simpleMeaning":  "Turning a shape around a fixed point.",
+        "visualId":  "rotation",
+        "realLifeExample":  "Spinning a clock hand is a rotation.",
+        "memoryTip":  "Rotation = turning around."
+    },
+    {
+        "term":  "translation",
+        "definition":  "Sliding a shape in a straight line without rotating or flipping it.",
+        "aliases":  [
+                        "translations"
+                    ],
+        "simpleMeaning":  "Sliding a shape without turning or flipping it.",
+        "visualId":  "translation",
+        "realLifeExample":  "Moving a chess piece straight across is a translation.",
+        "memoryTip":  "Translation = slide."
+    },
+    {
+        "term":  "enlargement",
+        "definition":  "Making a shape bigger or smaller by multiplying all lengths by a scale factor.",
+        "aliases":  [
+                        "enlargements"
+                    ],
+        "simpleMeaning":  "Making a shape bigger or smaller using a scale factor.",
+        "visualId":  "enlargement",
+        "realLifeExample":  "Photocopying a picture bigger is an enlargement.",
+        "memoryTip":  "Enlargement = resize."
+    },
+    {
+        "term":  "transformation",
+        "definition":  "Any way of moving or resizing a shape, like a reflection, rotation, translation, or enlargement.",
+        "aliases":  [
+                        "transformations"
+                    ],
+        "simpleMeaning":  "Any way of moving or resizing a shape.",
+        "visualId":  "transformation",
+        "realLifeExample":  "Flipping, turning, or sliding a shape is a transformation.",
+        "memoryTip":  "Transformation = change of position."
+    },
+    {
+        "term":  "scale factor",
+        "definition":  "The number you multiply each length by to make a shape bigger or smaller.",
+        "aliases":  [
+                        "scale factors"
+                    ],
+        "simpleMeaning":  "The number you multiply lengths by to make a shape bigger or smaller.",
+        "visualId":  "scale factor",
+        "realLifeExample":  "If the scale factor is 2, every length doubles.",
+        "memoryTip":  "Scale factor = resize number."
+    },
+    {
+        "term":  "symmetry",
+        "definition":  "When a shape can be folded or rotated so that its parts match up exactly.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "When a shape can be folded so both halves match exactly.",
+        "visualId":  "symmetry",
+        "realLifeExample":  "A butterfly has symmetry - both wings match.",
+        "memoryTip":  "Symmetry = mirror match."
+    },
+    {
+        "term":  "line of symmetry",
+        "definition":  "A line that divides a shape into two mirror-image halves.",
+        "aliases":  [
+                        "lines of symmetry"
+                    ],
+        "simpleMeaning":  "A line that splits a shape into two mirror halves.",
+        "visualId":  null,
+        "realLifeExample":  "The line down the middle of a heart is a line of symmetry.",
+        "memoryTip":  "Symmetry line = mirror line."
+    },
+    {
+        "term":  "rotational symmetry",
+        "definition":  "When a shape looks exactly the same after being rotated by less than a full turn.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "When a shape looks the same after being rotated.",
+        "visualId":  null,
+        "realLifeExample":  "A starfish looks the same after turning a bit - that is rotational symmetry.",
+        "memoryTip":  "Rotational symmetry = spin-match."
+    },
+    {
+        "term":  "tessellation",
+        "definition":  "A pattern made by repeating shapes with no gaps and no overlaps.",
+        "aliases":  [
+                        "tessellations"
+                    ],
+        "simpleMeaning":  "A pattern of shapes fitted together with no gaps.",
+        "visualId":  "tessellation",
+        "realLifeExample":  "Honeycomb in a beehive is a tessellation of hexagons.",
+        "memoryTip":  "Tessellation = tiled pattern."
+    },
+    {
+        "term":  "net",
+        "definition":  "A flat shape that can be folded up to make a 3D solid.",
+        "aliases":  [
+                        "nets"
+                    ],
+        "simpleMeaning":  "A flat layout that folds up into a 3D shape.",
+        "visualId":  "net",
+        "realLifeExample":  "The unfolded cardboard of a cereal box is its net.",
+        "memoryTip":  "Net = unfolded shape."
+    },
+    {
+        "term":  "cross-section",
+        "definition":  "The shape you see when you slice straight through a 3D object.",
+        "aliases":  [
+                        "cross sections",
+                        "cross section"
+                    ],
+        "simpleMeaning":  "The shape you see when you slice through a 3D object.",
+        "visualId":  "cross-section",
+        "realLifeExample":  "Cutting a carrot gives a circle cross-section.",
+        "memoryTip":  "Cross-section = slice shape."
+    },
+    {
+        "term":  "volume",
+        "definition":  "The amount of 3D space inside a solid shape.",
+        "aliases":  [
+                        "volumes"
+                    ],
+        "simpleMeaning":  "The amount of 3D space inside a solid.",
+        "visualId":  "volume",
+        "realLifeExample":  "The volume of a fish tank tells you how much water fits inside.",
+        "memoryTip":  "Volume = inside 3D space."
+    },
+    {
+        "term":  "surface area",
+        "definition":  "The total area of all the faces of a 3D shape added together.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "The total area of all the faces of a 3D shape added together.",
+        "visualId":  "surface area",
+        "realLifeExample":  "Wrapping paper for a box - you need surface area worth of paper.",
+        "memoryTip":  "Surface area = outside covering."
+    },
+    {
+        "term":  "expression",
+        "definition":  "A collection of numbers, variables, and operation signs with no equals sign.",
+        "aliases":  [
+                        "expressions"
+                    ],
+        "simpleMeaning":  "A sum of numbers and variables with no equals sign.",
+        "visualId":  "expression",
+        "realLifeExample":  "3x + 2 is an expression - it does not give an answer yet.",
+        "memoryTip":  "Expression = no equals."
+    },
+    {
+        "term":  "term",
+        "definition":  "A single part of an expression, separated from other parts by + or - signs.",
+        "aliases":  [
+                        "terms"
+                    ],
+        "simpleMeaning":  "A single part of an expression, separated by plus or minus.",
+        "visualId":  "term",
+        "realLifeExample":  "In 3x + 5, the 3x and the 5 are two separate terms.",
+        "memoryTip":  "Term = single piece."
+    },
+    {
+        "term":  "like terms",
+        "definition":  "Terms in an expression that have exactly the same variables raised to the same powers.",
+        "aliases":  [
+                        "like term"
+                    ],
+        "simpleMeaning":  "Terms that have the same variables to the same powers.",
+        "visualId":  "like terms",
+        "realLifeExample":  "3x and 5x are like terms - both have just x.",
+        "memoryTip":  "Like terms match."
+    },
+    {
+        "term":  "equation",
+        "definition":  "A mathematical statement with an equals sign showing that two things have the same value.",
+        "aliases":  [
+                        "equations"
+                    ],
+        "simpleMeaning":  "A math sentence with an equals sign.",
+        "visualId":  "equation",
+        "realLifeExample":  "2 + 3 = 5 is an equation.",
+        "memoryTip":  "Equation = equal statement."
+    },
+    {
+        "term":  "identity",
+        "definition":  "An equation that is true for every allowed value of the variables in it.",
+        "aliases":  [
+                        "identities"
+                    ],
+        "simpleMeaning":  "An equation that is true for every value of the variable.",
+        "visualId":  null,
+        "realLifeExample":  "x + x = 2x is an identity - it always works.",
+        "memoryTip":  "Identity = always true."
+    },
+    {
+        "term":  "inequality",
+        "definition":  "A statement that one value is greater than, less than, or equal to another (using \u003c, \u003e, \u0026le;, \u0026ge;).",
+        "aliases":  [
+                        "inequalities"
+                    ],
+        "simpleMeaning":  "A statement saying one value is bigger or smaller than another.",
+        "visualId":  "inequality",
+        "realLifeExample":  "x \u003e 5 means x is greater than 5.",
+        "memoryTip":  "Inequality = not-equal signs."
+    },
+    {
+        "term":  "formula",
+        "definition":  "A rule written with variables and numbers that shows how to find a particular answer.",
+        "aliases":  [
+                        "formulas",
+                        "formulae"
+                    ],
+        "simpleMeaning":  "A rule written with variables to find an answer.",
+        "visualId":  "formula",
+        "realLifeExample":  "A equals pi times r squared is the formula for the area of a circle.",
+        "memoryTip":  "Formula = rule recipe."
+    },
+    {
+        "term":  "function",
+        "definition":  "A rule that takes an input and gives exactly one output.",
+        "aliases":  [
+                        "functions"
+                    ],
+        "simpleMeaning":  "A rule that takes one input and gives one output.",
+        "visualId":  "function",
+        "realLifeExample":  "A vending machine is a function - same input gives same snack.",
+        "memoryTip":  "Function = input to output."
+    },
+    {
+        "term":  "linear",
+        "definition":  "Describing a relationship or graph where the variables appear only to the first power - its graph is a straight line.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "Describes a relationship whose graph is a straight line.",
+        "visualId":  "linear",
+        "realLifeExample":  "The line y = 2x + 1 is linear.",
+        "memoryTip":  "Linear = straight line."
+    },
+    {
+        "term":  "quadratic",
+        "definition":  "An expression or equation where the highest power of the variable is 2 (e.g. xÃ‚Â² + 3x = 4).",
+        "aliases":  [
+                        "quadratics"
+                    ],
+        "simpleMeaning":  "An expression where the highest power of x is 2.",
+        "visualId":  "quadratic",
+        "realLifeExample":  "x squared + 3x - 4 is a quadratic.",
+        "memoryTip":  "Quadratic = squared."
+    },
+    {
+        "term":  "cubic",
+        "definition":  "An expression or equation where the highest power of the variable is 3 (e.g. xÃ‚Â³ + 2x).",
+        "aliases":  [
+                        "cubics"
+                    ],
+        "simpleMeaning":  "An expression where the highest power of x is 3.",
+        "visualId":  null,
+        "realLifeExample":  "x cubed + 2x is a cubic.",
+        "memoryTip":  "Cubic = cubed."
+    },
+    {
+        "term":  "expand",
+        "definition":  "To multiply out the brackets in an expression to remove them.",
+        "aliases":  [
+                        "expands",
+                        "expanding"
+                    ],
+        "simpleMeaning":  "To multiply out the brackets in an expression.",
+        "visualId":  "expand",
+        "realLifeExample":  "Expanding 2 times x+3 gives 2x + 6.",
+        "memoryTip":  "Expand = open the brackets."
+    },
+    {
+        "term":  "factorise",
+        "definition":  "To write an expression as a product of its factors.",
+        "aliases":  [
+                        "factorises",
+                        "factorising"
+                    ],
+        "simpleMeaning":  "To write an expression as a product of its factors.",
+        "visualId":  "factorise",
+        "realLifeExample":  "Factorising 2x + 6 gives 2 times x+3.",
+        "memoryTip":  "Factorise = factor out."
+    },
+    {
+        "term":  "simplify",
+        "definition":  "To make an expression shorter or easier by combining like terms or cancelling common factors.",
+        "aliases":  [
+                        "simplifies",
+                        "simplifying"
+                    ],
+        "simpleMeaning":  "To make an expression shorter by combining like parts.",
+        "visualId":  "simplify",
+        "realLifeExample":  "Simplifying 2x + 3x gives 5x.",
+        "memoryTip":  "Simplify = make shorter."
+    },
+    {
+        "term":  "solve",
+        "definition":  "To find the value of a variable that makes an equation or inequality true.",
+        "aliases":  [
+                        "solves",
+                        "solving"
+                    ],
+        "simpleMeaning":  "To find the value of a variable that makes an equation true.",
+        "visualId":  "solve",
+        "realLifeExample":  "Solving x + 2 = 7 gives x = 5.",
+        "memoryTip":  "Solve = find the answer."
+    },
+    {
+        "term":  "root",
+        "definition":  "A value of a variable that makes an equation equal zero.",
+        "aliases":  [
+                        "roots"
+                    ],
+        "simpleMeaning":  "A value of the variable that makes an equation equal zero.",
+        "visualId":  "root",
+        "realLifeExample":  "For x squared - 4, the roots are 2 and -2.",
+        "memoryTip":  "Root = makes zero."
+    },
+    {
+        "term":  "solution",
+        "definition":  "A value (or values) of a variable that satisfies an equation or inequality.",
+        "aliases":  [
+                        "solutions"
+                    ],
+        "simpleMeaning":  "A value that satisfies an equation.",
+        "visualId":  "solution",
+        "realLifeExample":  "In x + 1 = 4, the solution is x = 3.",
+        "memoryTip":  "Solution = answer that works."
+    },
+    {
+        "term":  "y-intercept",
+        "definition":  "The point where a line crosses the y-axis.",
+        "aliases":  [
+                        "y intercepts",
+                        "y-intercepts"
+                    ],
+        "simpleMeaning":  "The point where a line crosses the y-axis.",
+        "visualId":  "y-intercept",
+        "realLifeExample":  "The starting height of a rocket graph is the y-intercept.",
+        "memoryTip":  "Y-intercept = y-axis crossing."
+    },
+    {
+        "term":  "x-intercept",
+        "definition":  "The point where a line crosses the x-axis.",
+        "aliases":  [
+                        "x intercepts",
+                        "x-intercepts"
+                    ],
+        "simpleMeaning":  "The point where a line crosses the x-axis.",
+        "visualId":  "x-intercept",
+        "realLifeExample":  "The moment something reaches the ground in a graph is the x-intercept.",
+        "memoryTip":  "X-intercept = x-axis crossing."
+    },
+    {
+        "term":  "asymptote",
+        "definition":  "A straight line that a curve gets closer and closer to but never quite touches.",
+        "aliases":  [
+                        "asymptotes"
+                    ],
+        "simpleMeaning":  "A line that a curve gets closer to but never touches.",
+        "visualId":  null,
+        "realLifeExample":  "A car driving toward the horizon but never reaching it is like an asymptote.",
+        "memoryTip":  "Asymptote = almost-touching line."
+    },
+    {
+        "term":  "turning point",
+        "definition":  "A point on a curve where it changes from going up to going down, or the other way around.",
+        "aliases":  [
+                        "turning points"
+                    ],
+        "simpleMeaning":  "A point on a curve where it changes direction.",
+        "visualId":  null,
+        "realLifeExample":  "The top of a hill in a roller-coaster graph is a turning point.",
+        "memoryTip":  "Turning point = direction change."
+    },
+    {
+        "term":  "stationary point",
+        "definition":  "A point on a curve where the gradient is zero, so the curve is briefly flat.",
+        "aliases":  [
+                        "stationary points"
+                    ],
+        "simpleMeaning":  "A point on a curve where the gradient is zero - briefly flat.",
+        "visualId":  "stationary point",
+        "realLifeExample":  "The very top of a smooth hill is a stationary point.",
+        "memoryTip":  "Stationary = briefly still."
+    },
+    {
+        "term":  "natural number",
+        "definition":  "A positive whole number used for counting (1, 2, 3, 4, ...).",
+        "aliases":  [
+                        "natural numbers"
+                    ],
+        "simpleMeaning":  "A counting number: 1, 2, 3, and so on.",
+        "visualId":  null,
+        "realLifeExample":  "Counting fingers: 1, 2, 3 - these are natural numbers.",
+        "memoryTip":  "Natural = for counting."
+    },
+    {
+        "term":  "whole number",
+        "definition":  "A number with no fractions or decimal parts (0, 1, 2, 3, 4, ...).",
+        "aliases":  [
+                        "whole numbers"
+                    ],
+        "simpleMeaning":  "A number with no fractions, including zero.",
+        "visualId":  null,
+        "realLifeExample":  "0, 1, 2, 3 are whole numbers.",
+        "memoryTip":  "Whole = no bits missing."
+    },
+    {
+        "term":  "rational number",
+        "definition":  "A number that can be written as a fraction of two whole numbers.",
+        "aliases":  [
+                        "rational numbers"
+                    ],
+        "simpleMeaning":  "A number that can be written as a fraction of two integers.",
+        "visualId":  "rational number",
+        "realLifeExample":  "1/2 and 0.75 are both rational.",
+        "memoryTip":  "Rational = fraction-able."
+    },
+    {
+        "term":  "irrational number",
+        "definition":  "A number that cannot be written as a simple fraction.",
+        "aliases":  [
+                        "irrational numbers"
+                    ],
+        "simpleMeaning":  "A number that cannot be written as a simple fraction.",
+        "visualId":  "irrational number",
+        "realLifeExample":  "Pi is irrational - it never ends or repeats.",
+        "memoryTip":  "Irrational = no fraction form."
+    },
+    {
+        "term":  "real number",
+        "definition":  "Any number that can be found on the number line - positive, negative, zero, fractions, and decimals.",
+        "aliases":  [
+                        "real numbers"
+                    ],
+        "simpleMeaning":  "Any number you can find on a number line.",
+        "visualId":  "real number",
+        "realLifeExample":  "Every number from negative 100 to 3.14 is a real number.",
+        "memoryTip":  "Real = on the line."
+    },
+    {
+        "term":  "reciprocal",
+        "definition":  "The number you multiply by to get 1 (for example, the reciprocal of 4 is 1/4).",
+        "aliases":  [
+                        "reciprocals"
+                    ],
+        "simpleMeaning":  "The number you multiply by to get 1.",
+        "visualId":  null,
+        "realLifeExample":  "The reciprocal of 4 is 1/4 because 4 times 1/4 = 1.",
+        "memoryTip":  "Reciprocal = flip the fraction."
+    },
+    {
+        "term":  "consecutive",
+        "definition":  "Numbers or events that follow each other in order with no gaps (e.g. 5, 6, 7 are consecutive).",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "Numbers that follow each other with no gaps.",
+        "visualId":  null,
+        "realLifeExample":  "5, 6, 7 are three consecutive numbers.",
+        "memoryTip":  "Consecutive = one after another."
+    },
+    {
+        "term":  "digit",
+        "definition":  "Any single symbol used to write numbers (0, 1, 2, 3, 4, 5, 6, 7, 8, 9).",
+        "aliases":  [
+                        "digits"
+                    ],
+        "simpleMeaning":  "One of the single symbols used to write numbers.",
+        "visualId":  "digit",
+        "realLifeExample":  "0, 1, 2 up to 9 are digits.",
+        "memoryTip":  "Digit = single symbol."
+    },
+    {
+        "term":  "prime",
+        "definition":  "A whole number greater than 1 that has exactly two factors: 1 and itself.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "A whole number bigger than 1 with only two factors: 1 and itself.",
+        "visualId":  null,
+        "realLifeExample":  "5 is prime - only 1 times 5 makes it.",
+        "memoryTip":  "Prime = only itself and 1."
+    },
+    {
+        "term":  "composite",
+        "definition":  "A whole number greater than 1 that has factors other than just 1 and itself.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "A whole number that has more than two factors.",
+        "visualId":  "composite",
+        "realLifeExample":  "6 is composite because 1, 2, 3, and 6 all divide it.",
+        "memoryTip":  "Composite = more factors."
+    },
+    {
+        "term":  "divisor",
+        "definition":  "A number you divide by.",
+        "aliases":  [
+                        "divisors"
+                    ],
+        "simpleMeaning":  "A number you divide by.",
+        "visualId":  "divisor",
+        "realLifeExample":  "In 12 divided by 3, the 3 is the divisor.",
+        "memoryTip":  "Divisor = dividing number."
+    },
+    {
+        "term":  "square root",
+        "definition":  "The number which, when multiplied by itself, gives the original number.",
+        "aliases":  [
+                        "square roots",
+                        "square root of"
+                    ],
+        "simpleMeaning":  "The number that, multiplied by itself, gives the original.",
+        "visualId":  "square root",
+        "realLifeExample":  "The square root of 9 is 3 because 3 times 3 = 9.",
+        "memoryTip":  "Root = undo the square."
+    },
+    {
+        "term":  "cube root",
+        "definition":  "The number which, when multiplied by itself three times, gives the original number.",
+        "aliases":  [
+                        "cube roots"
+                    ],
+        "simpleMeaning":  "The number that, times itself three times, gives the original.",
+        "visualId":  "cube root",
+        "realLifeExample":  "The cube root of 27 is 3 because 3 times 3 times 3 = 27.",
+        "memoryTip":  "Cube root = undo the cube."
+    },
+    {
+        "term":  "power",
+        "definition":  "A small raised number showing how many times to multiply a number by itself (e.g. the 3 in 2Ã‚Â³).",
+        "aliases":  [
+                        "powers"
+                    ],
+        "simpleMeaning":  "A small raised number showing repeated multiplication.",
+        "visualId":  "power",
+        "realLifeExample":  "In 2 cubed, the 3 is the power.",
+        "memoryTip":  "Power = times count."
+    },
+    {
+        "term":  "base",
+        "definition":  "The number being multiplied by itself in a power (e.g. the 2 in 2Ã‚Â³).",
+        "aliases":  [
+                        "bases"
+                    ],
+        "simpleMeaning":  "The number being multiplied by itself in a power.",
+        "visualId":  "base",
+        "realLifeExample":  "In 2 cubed, the 2 is the base.",
+        "memoryTip":  "Base = bottom number."
+    },
+    {
+        "term":  "standard form",
+        "definition":  "A way to write very big or very small numbers as a number between 1 and 10 times a power of 10.",
+        "aliases":  [
+                        "standard forms"
+                    ],
+        "simpleMeaning":  "A way to write very big or small numbers cleanly.",
+        "visualId":  "standard form",
+        "realLifeExample":  "3000 written in standard form is 3 times 10 cubed.",
+        "memoryTip":  "Standard form = tidy big number."
+    },
+    {
+        "term":  "scientific notation",
+        "definition":  "Another name for standard form - writing numbers as a value between 1 and 10 times a power of 10.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "Another name for standard form.",
+        "visualId":  "scientific notation",
+        "realLifeExample":  "6,020,000 in scientific notation is 6.02 times 10 to the 6.",
+        "memoryTip":  "Scientific = same as standard form."
+    },
+    {
+        "term":  "fraction",
+        "definition":  "A number written as one number divided by another, like Ã‚Â¾.",
+        "aliases":  [
+                        "fractions"
+                    ],
+        "simpleMeaning":  "A number written as one number over another.",
+        "visualId":  "fraction",
+        "realLifeExample":  "3/4 means 3 parts out of 4 equal parts.",
+        "memoryTip":  "Fraction = parts of a whole."
+    },
+    {
+        "term":  "proper fraction",
+        "definition":  "A fraction where the top number is smaller than the bottom number (e.g. 3/4).",
+        "aliases":  [
+                        "proper fractions"
+                    ],
+        "simpleMeaning":  "A fraction where the top is smaller than the bottom.",
+        "visualId":  "proper fraction",
+        "realLifeExample":  "2/5 is a proper fraction.",
+        "memoryTip":  "Proper = small over big."
+    },
+    {
+        "term":  "improper fraction",
+        "definition":  "A fraction where the top number is bigger than or equal to the bottom number (e.g. 5/3).",
+        "aliases":  [
+                        "improper fractions"
+                    ],
+        "simpleMeaning":  "A fraction where the top is bigger than the bottom.",
+        "visualId":  "improper fraction",
+        "realLifeExample":  "7/3 is an improper fraction.",
+        "memoryTip":  "Improper = big over small."
+    },
+    {
+        "term":  "mixed number",
+        "definition":  "A whole number written together with a fraction, like 2*(3/4).",
+        "aliases":  [
+                        "mixed numbers"
+                    ],
+        "simpleMeaning":  "A whole number written next to a fraction.",
+        "visualId":  "mixed number",
+        "realLifeExample":  "2 and 3/4 is a mixed number - two and three-quarters.",
+        "memoryTip":  "Mixed = whole + fraction."
+    },
+    {
+        "term":  "equivalent fraction",
+        "definition":  "A different fraction that means exactly the same thing (e.g. 1/2 = 2/4).",
+        "aliases":  [
+                        "equivalent fractions"
+                    ],
+        "simpleMeaning":  "A different fraction with the same value.",
+        "visualId":  "equivalent fraction",
+        "realLifeExample":  "1/2 and 2/4 are equivalent fractions.",
+        "memoryTip":  "Equivalent = same value."
+    },
+    {
+        "term":  "decimal",
+        "definition":  "A number with a decimal point, where digits after the point show parts of a whole.",
+        "aliases":  [
+                        "decimals"
+                    ],
+        "simpleMeaning":  "A number with a dot showing parts of a whole.",
+        "visualId":  "decimal",
+        "realLifeExample":  "0.75 is a decimal meaning 75 hundredths.",
+        "memoryTip":  "Decimal = dot number."
+    },
+    {
+        "term":  "recurring decimal",
+        "definition":  "A decimal that repeats forever, often shown with dots over the repeating digits (e.g. 0.333...).",
+        "aliases":  [
+                        "recurring decimals",
+                        "recurring"
+                    ],
+        "simpleMeaning":  "A decimal where the digits repeat forever.",
+        "visualId":  "recurring decimal",
+        "realLifeExample":  "1/3 = 0.333... - the 3 keeps repeating.",
+        "memoryTip":  "Recurring = repeats forever."
+    },
+    {
+        "term":  "terminating decimal",
+        "definition":  "A decimal that stops after a finite number of digits (e.g. 0.5 or 0.125).",
+        "aliases":  [
+                        "terminating decimals"
+                    ],
+        "simpleMeaning":  "A decimal that stops after a few digits.",
+        "visualId":  "terminating decimal",
+        "realLifeExample":  "1/4 = 0.25 - it stops cleanly.",
+        "memoryTip":  "Terminating = ends neatly."
+    },
+    {
+        "term":  "percent",
+        "definition":  "A number expressed as parts per hundred, shown with the % sign.",
+        "aliases":  [
+                        "percents"
+                    ],
+        "simpleMeaning":  "A number written as parts per hundred, with a percent sign.",
+        "visualId":  null,
+        "realLifeExample":  "50 percent means 50 out of every 100.",
+        "memoryTip":  "Percent = per 100."
+    },
+    {
+        "term":  "proportion",
+        "definition":  "A statement that two ratios or rates are equal.",
+        "aliases":  [
+                        "proportions"
+                    ],
+        "simpleMeaning":  "A statement that two ratios are equal.",
+        "visualId":  "proportion",
+        "realLifeExample":  "If 2 oranges cost 50p, 4 oranges cost 100p - same proportion.",
+        "memoryTip":  "Proportion = equal ratios."
+    },
+    {
+        "term":  "BODMAS",
+        "definition":  "The order to follow when working out a calculation: Brackets, Orders, Division, Multiplication, Addition, Subtraction.",
+        "aliases":  [
+                        "BIDMAS",
+                        "PEMDAS"
+                    ],
+        "simpleMeaning":  "The order to follow in a calculation: Brackets, Orders, Divide, Multiply, Add, Subtract.",
+        "visualId":  "bodmas",
+        "realLifeExample":  "For 2 + 3 times 4, BODMAS says multiply first: 2 + 12 = 14.",
+        "memoryTip":  "BODMAS = order of operations."
+    },
+    {
+        "term":  "approximation",
+        "definition":  "A number that is close to the exact value but is faster or easier to use.",
+        "aliases":  [
+                        "approximations",
+                        "approximate"
+                    ],
+        "simpleMeaning":  "A number close to the exact value but easier to use.",
+        "visualId":  "approximation",
+        "realLifeExample":  "Pi is about 3.14 is an approximation.",
+        "memoryTip":  "Approximation = close enough."
+    },
+    {
+        "term":  "round",
+        "definition":  "To make a number simpler by replacing it with the nearest ten, hundred, or other place value.",
+        "aliases":  [
+                        "rounding",
+                        "rounded",
+                        "rounds"
+                    ],
+        "simpleMeaning":  "To replace a number with a nearby simpler one.",
+        "visualId":  "round",
+        "realLifeExample":  "Rounding 4.7 to the nearest whole gives 5.",
+        "memoryTip":  "Round = snap to nearest."
+    },
+    {
+        "term":  "significant figures",
+        "definition":  "The digits in a number that carry meaning, starting from the first non-zero digit.",
+        "aliases":  [
+                        "significant figure"
+                    ],
+        "simpleMeaning":  "The meaningful digits in a number, starting from the first non-zero one.",
+        "visualId":  "significant figures",
+        "realLifeExample":  "In 0.00452, the significant figures are 4, 5, 2.",
+        "memoryTip":  "Significant figures = real digits."
+    },
+    {
+        "term":  "decimal place",
+        "definition":  "The position of a digit to the right of the decimal point - e.g. the first decimal place is the tenths.",
+        "aliases":  [
+                        "decimal places"
+                    ],
+        "simpleMeaning":  "The position of a digit to the right of a decimal point.",
+        "visualId":  "decimal place",
+        "realLifeExample":  "In 3.14, the 1 is the first decimal place.",
+        "memoryTip":  "Decimal place = position past the dot."
+    },
+    {
+        "term":  "sum",
+        "definition":  "The result you get when you add numbers together.",
+        "aliases":  [
+                        "sums"
+                    ],
+        "simpleMeaning":  "The answer you get when you add numbers.",
+        "visualId":  null,
+        "realLifeExample":  "The sum of 4 and 5 is 9.",
+        "memoryTip":  "Sum = add result."
+    },
+    {
+        "term":  "product",
+        "definition":  "The result you get when you multiply numbers together.",
+        "aliases":  [
+                        "products"
+                    ],
+        "simpleMeaning":  "The answer you get when you multiply numbers.",
+        "visualId":  null,
+        "realLifeExample":  "The product of 3 and 4 is 12.",
+        "memoryTip":  "Product = times result."
+    },
+    {
+        "term":  "quotient",
+        "definition":  "The result you get when you divide one number by another.",
+        "aliases":  [
+                        "quotients"
+                    ],
+        "simpleMeaning":  "The answer you get when you divide one number by another.",
+        "visualId":  null,
+        "realLifeExample":  "The quotient of 20 divided by 4 is 5.",
+        "memoryTip":  "Quotient = divide result."
+    },
+    {
+        "term":  "difference",
+        "definition":  "The result you get when you subtract one number from another.",
+        "aliases":  [
+                        "differences"
+                    ],
+        "simpleMeaning":  "The answer when you subtract one number from another.",
+        "visualId":  null,
+        "realLifeExample":  "The difference between 10 and 4 is 6.",
+        "memoryTip":  "Difference = subtract result."
+    },
+    {
+        "term":  "inverse",
+        "definition":  "The operation that undoes another - subtraction is the inverse of addition, and division is the inverse of multiplication.",
+        "aliases":  [
+                        "inverses"
+                    ],
+        "simpleMeaning":  "The operation that undoes another.",
+        "visualId":  "inverse",
+        "realLifeExample":  "Subtraction is the inverse of addition.",
+        "memoryTip":  "Inverse = undo."
+    },
+    {
+        "term":  "frequency",
+        "definition":  "How many times a value or event occurs.",
+        "aliases":  [
+                        "frequencies"
+                    ],
+        "simpleMeaning":  "How many times something happens.",
+        "visualId":  "frequency",
+        "realLifeExample":  "The frequency of getting tails in 10 flips might be 6.",
+        "memoryTip":  "Frequency = count."
+    },
+    {
+        "term":  "average",
+        "definition":  "A typical value for a set of numbers, usually calculated as the mean.",
+        "aliases":  [
+                        "averages"
+                    ],
+        "simpleMeaning":  "A typical value for a set of numbers, usually the mean.",
+        "visualId":  "average",
+        "realLifeExample":  "The average of 4, 6, 8 is 6.",
+        "memoryTip":  "Average = typical value."
+    },
+    {
+        "term":  "outlier",
+        "definition":  "A value in a data set that is much bigger or much smaller than the rest.",
+        "aliases":  [
+                        "outliers"
+                    ],
+        "simpleMeaning":  "A value much bigger or smaller than the rest.",
+        "visualId":  "outlier",
+        "realLifeExample":  "If most test scores are 60 to 80 and one is 5, that one is an outlier.",
+        "memoryTip":  "Outlier = weird one out."
+    },
+    {
+        "term":  "sample",
+        "definition":  "A small group chosen from a larger group, used to make estimates about the whole.",
+        "aliases":  [
+                        "samples"
+                    ],
+        "simpleMeaning":  "A small group chosen from a bigger group.",
+        "visualId":  "sample",
+        "realLifeExample":  "A poll of 100 voters is a sample of all voters.",
+        "memoryTip":  "Sample = small pick."
+    },
+    {
+        "term":  "population",
+        "definition":  "The entire group of people or items being studied in a survey or experiment.",
+        "aliases":  [
+                        "populations"
+                    ],
+        "simpleMeaning":  "The whole group being studied in a survey.",
+        "visualId":  "population",
+        "realLifeExample":  "If you survey 100 voters, the population is all the voters.",
+        "memoryTip":  "Population = entire group."
+    },
+    {
+        "term":  "correlation",
+        "definition":  "A relationship between two variables where one tends to change as the other does.",
+        "aliases":  [
+                        "correlations"
+                    ],
+        "simpleMeaning":  "When two variables tend to change together.",
+        "visualId":  "correlation",
+        "realLifeExample":  "Ice cream sales and temperature have a correlation.",
+        "memoryTip":  "Correlation = changes together."
+    },
+    {
+        "term":  "line of best fit",
+        "definition":  "A straight line drawn on a scatter graph that comes closest to most of the points.",
+        "aliases":  [
+                        "lines of best fit"
+                    ],
+        "simpleMeaning":  "A straight line that passes closest to most points on a scatter graph.",
+        "visualId":  null,
+        "realLifeExample":  "Drawing a ruler through cloud of points gives a line of best fit.",
+        "memoryTip":  "Best fit = closest line."
+    },
+    {
+        "term":  "histogram",
+        "definition":  "A bar chart with no gaps between the bars, used for grouped continuous data.",
+        "aliases":  [
+                        "histograms"
+                    ],
+        "simpleMeaning":  "A bar chart with no gaps, for grouped data.",
+        "visualId":  "histogram",
+        "realLifeExample":  "A histogram of heights shows how many people are in each height range.",
+        "memoryTip":  "Histogram = gapless bars."
+    },
+    {
+        "term":  "scatter graph",
+        "definition":  "A graph of paired data points used to spot a relationship between two variables.",
+        "aliases":  [
+                        "scatter graphs",
+                        "scatter plot",
+                        "scatter plots"
+                    ],
+        "simpleMeaning":  "A graph of dots showing pairs of values.",
+        "visualId":  "scatter graph",
+        "realLifeExample":  "A scatter graph of height vs weight shows how they relate.",
+        "memoryTip":  "Scatter graph = dot cloud."
+    },
+    {
+        "term":  "bar chart",
+        "definition":  "A chart using rectangles of different heights to compare values in different categories.",
+        "aliases":  [
+                        "bar charts"
+                    ],
+        "simpleMeaning":  "A chart with rectangles of different heights to compare categories.",
+        "visualId":  "bar chart",
+        "realLifeExample":  "A bar chart shows how many sales each shop made.",
+        "memoryTip":  "Bar chart = tall bars."
+    },
+    {
+        "term":  "pie chart",
+        "definition":  "A circle divided into slices showing how a total is split between categories.",
+        "aliases":  [
+                        "pie charts"
+                    ],
+        "simpleMeaning":  "A circle cut into slices to show how a total is split.",
+        "visualId":  "pie chart",
+        "realLifeExample":  "A pie chart of pocket money by category is round.",
+        "memoryTip":  "Pie chart = sliced circle."
+    },
+    {
+        "term":  "line graph",
+        "definition":  "A graph using lines to show how something changes over time.",
+        "aliases":  [
+                        "line graphs"
+                    ],
+        "simpleMeaning":  "A graph using lines to show how something changes over time.",
+        "visualId":  "line graph",
+        "realLifeExample":  "A line graph of temperature through the day.",
+        "memoryTip":  "Line graph = tracking changes."
+    },
+    {
+        "term":  "stem and leaf",
+        "definition":  "A way to organise data where each number is split into a \u0027stem\u0027 and a \u0027leaf\u0027.",
+        "aliases":  [
+                        "stem-and-leaf",
+                        "stem and leaf plot"
+                    ],
+        "simpleMeaning":  "A way to sort data by splitting each number into a stem and leaf.",
+        "visualId":  "stem and leaf",
+        "realLifeExample":  "32 in a stem-and-leaf has stem 3 and leaf 2.",
+        "memoryTip":  "Stem-and-leaf = split the digits."
+    },
+    {
+        "term":  "outcome",
+        "definition":  "One possible result of an event or experiment.",
+        "aliases":  [
+                        "outcomes"
+                    ],
+        "simpleMeaning":  "One possible result of an experiment.",
+        "visualId":  "outcome",
+        "realLifeExample":  "Heads or tails are outcomes of flipping a coin.",
+        "memoryTip":  "Outcome = single result."
+    },
+    {
+        "term":  "event",
+        "definition":  "Something that happens, especially in a probability experiment.",
+        "aliases":  [
+                        "events"
+                    ],
+        "simpleMeaning":  "Something that can happen, often in a probability experiment.",
+        "visualId":  "event",
+        "realLifeExample":  "Rolling a 6 on a die is an event.",
+        "memoryTip":  "Event = what happens."
+    },
+    {
+        "term":  "biased",
+        "definition":  "Describing a test or experiment where not every outcome is equally likely, so the results favour one side.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "When a test favours one result more than others.",
+        "visualId":  "biased",
+        "realLifeExample":  "A weighted coin is biased toward one side.",
+        "memoryTip":  "Biased = unfair lean."
+    },
+    {
+        "term":  "fair",
+        "definition":  "Describing an experiment where every outcome has an equal chance of happening.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "When every outcome is equally likely.",
+        "visualId":  "fair",
+        "realLifeExample":  "A normal coin is fair - heads and tails are equally likely.",
+        "memoryTip":  "Fair = equal chance."
+    },
+    {
+        "term":  "tree diagram",
+        "definition":  "A branching diagram showing all possible outcomes of a series of events.",
+        "aliases":  [
+                        "tree diagrams"
+                    ],
+        "simpleMeaning":  "A branching diagram showing all possible outcomes.",
+        "visualId":  "tree diagram",
+        "realLifeExample":  "A tree diagram for two coin flips shows 4 outcomes.",
+        "memoryTip":  "Tree diagram = branching chart."
+    },
+    {
+        "term":  "Venn diagram",
+        "definition":  "A diagram using overlapping circles to show relationships between sets.",
+        "aliases":  [
+                        "Venn diagrams"
+                    ],
+        "simpleMeaning":  "A diagram of overlapping circles that show relationships between sets.",
+        "visualId":  "venn diagram",
+        "realLifeExample":  "A Venn diagram can show who likes cats and who likes dogs.",
+        "memoryTip":  "Venn = overlapping circles."
+    },
+    {
+        "term":  "mutually exclusive",
+        "definition":  "Two events that cannot happen at the same time, like rolling a 1 and a 6 on one die.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "Two events that cannot both happen.",
+        "visualId":  "mutually exclusive",
+        "realLifeExample":  "Rolling a 1 and a 6 on one die are mutually exclusive.",
+        "memoryTip":  "Mutually exclusive = no overlap."
+    },
+    {
+        "term":  "independent",
+        "definition":  "Two events where one happening does not change the chance of the other happening.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "When one event does not change the chance of another.",
+        "visualId":  "independent",
+        "realLifeExample":  "Flipping a coin twice - the events are independent.",
+        "memoryTip":  "Independent = no effect."
+    },
+    {
+        "term":  "relative frequency",
+        "definition":  "The number of times something happens divided by the total number of trials, written as a fraction.",
+        "aliases":  [
+                        "relative frequencies"
+                    ],
+        "simpleMeaning":  "How often something happens compared to total trials.",
+        "visualId":  "relative frequency",
+        "realLifeExample":  "If you flip tails 30 times in 100 flips, the relative frequency is 30/100.",
+        "memoryTip":  "Relative frequency = share of times."
+    },
+    {
+        "term":  "trial",
+        "definition":  "One run of a probability experiment.",
+        "aliases":  [
+                        "trials"
+                    ],
+        "simpleMeaning":  "One run of a probability experiment.",
+        "visualId":  "trial",
+        "realLifeExample":  "Each coin flip is one trial.",
+        "memoryTip":  "Trial = single run."
+    },
+    {
+        "term":  "trigonometry",
+        "definition":  "The branch of maths about the relationships between the sides and angles of triangles.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "The maths of the sides and angles of triangles.",
+        "visualId":  "trigonometry",
+        "realLifeExample":  "Trig helps you find a tree height using its shadow.",
+        "memoryTip":  "Trig = triangle maths."
+    },
+    {
+        "term":  "sine",
+        "definition":  "A ratio of sides in a right-angled triangle: opposite side divided by the hypotenuse.",
+        "aliases":  [
+                        "sin"
+                    ],
+        "simpleMeaning":  "A ratio of sides in a right-angled triangle: opposite over hypotenuse.",
+        "visualId":  "sine",
+        "realLifeExample":  "In a triangle, sin of the angle = opposite divided by hypotenuse.",
+        "memoryTip":  "Sine = opposite over long side."
+    },
+    {
+        "term":  "cosine",
+        "definition":  "A ratio of sides in a right-angled triangle: adjacent side divided by the hypotenuse.",
+        "aliases":  [
+                        "cos"
+                    ],
+        "simpleMeaning":  "A ratio in a right-angled triangle: adjacent over hypotenuse.",
+        "visualId":  "cosine",
+        "realLifeExample":  "cos of an angle = side next to angle divided by hypotenuse.",
+        "memoryTip":  "Cosine = adjacent over long side."
+    },
+    {
+        "term":  "tangent ratio",
+        "definition":  "A ratio of sides in a right-angled triangle: opposite side divided by the adjacent side.",
+        "aliases":  [
+                        "tan"
+                    ],
+        "simpleMeaning":  "A ratio of sides in a right-angled triangle: opposite side divided by the adjacent side.",
+        "visualId":  "tangent ratio",
+        "realLifeExample":  null,
+        "memoryTip":  null
+    },
+    {
+        "term":  "opposite",
+        "definition":  "The side of a right-angled triangle directly across from a named angle (not the hypotenuse).",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "The side of a right-angled triangle across from a chosen angle.",
+        "visualId":  "opposite",
+        "realLifeExample":  "The side far from a chosen corner is the opposite side.",
+        "memoryTip":  "Opposite = across from."
+    },
+    {
+        "term":  "adjacent",
+        "definition":  "The side of a right-angled triangle next to a named angle (not the hypotenuse).",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "The side of a right-angled triangle next to a chosen angle (not the hypotenuse).",
+        "visualId":  "adjacent",
+        "realLifeExample":  "The side next to a chosen corner is the adjacent side.",
+        "memoryTip":  "Adjacent = right beside."
+    },
+    {
+        "term":  "angle of elevation",
+        "definition":  "The angle you look up from the horizontal to see something higher up.",
+        "aliases":  [
+                        "angles of elevation"
+                    ],
+        "simpleMeaning":  "The angle you look up from horizontal to see something higher.",
+        "visualId":  "angle of elevation",
+        "realLifeExample":  "Looking up at a kite in the sky uses an angle of elevation.",
+        "memoryTip":  "Elevation = looking up."
+    },
+    {
+        "term":  "angle of depression",
+        "definition":  "The angle you look down from the horizontal to see something lower down.",
+        "aliases":  [
+                        "angles of depression"
+                    ],
+        "simpleMeaning":  "The angle you look down from a higher spot.",
+        "visualId":  "angle of depression",
+        "realLifeExample":  "Looking down from a balcony at someone below uses an angle of depression.",
+        "memoryTip":  "Depression = looking down."
+    },
+    {
+        "term":  "sine rule",
+        "definition":  "A rule that connects sides and angles in any triangle.",
+        "aliases":  [
+                        "sine rules"
+                    ],
+        "simpleMeaning":  "A rule connecting sides and angles in any triangle.",
+        "visualId":  "sine rule",
+        "realLifeExample":  "Use the sine rule to find a missing side of any triangle.",
+        "memoryTip":  "Sine rule = sides match sines."
+    },
+    {
+        "term":  "cosine rule",
+        "definition":  "A rule used to find a side or angle of any triangle when you know the other two sides and the angle between them.",
+        "aliases":  [
+                        "cosine rules"
+                    ],
+        "simpleMeaning":  "A rule connecting sides and angles in any triangle.",
+        "visualId":  "cosine rule",
+        "realLifeExample":  "Use the cosine rule when the sine rule cannot solve a triangle.",
+        "memoryTip":  "Cosine rule = c squared = a squared + b squared - 2ab cos C."
+    },
+    {
+        "term":  "inverse sine",
+        "definition":  "The angle whose sine is a given number, also called arcsin.",
+        "aliases":  [
+                        "arcsin",
+                        "inverse sin"
+                    ],
+        "simpleMeaning":  "The angle whose sine is a given number, also called arcsin.",
+        "visualId":  "inverse sine",
+        "realLifeExample":  "If sin(x) = 0.5, the inverse sine gives x = 30 degrees.",
+        "memoryTip":  "Inverse sine = arcsin."
+    },
+    {
+        "term":  "inverse cosine",
+        "definition":  "The angle whose cosine is a given number, also called arccos.",
+        "aliases":  [
+                        "arccos",
+                        "inverse cos"
+                    ],
+        "simpleMeaning":  "The angle whose cosine is a given number, also called arccos.",
+        "visualId":  "inverse cosine",
+        "realLifeExample":  "If cos(x) = 0.5, the inverse cosine gives x = 60 degrees.",
+        "memoryTip":  "Inverse cosine = arccos."
+    },
+    {
+        "term":  "inverse tangent",
+        "definition":  "The angle whose tangent is a given number, also called arctan.",
+        "aliases":  [
+                        "arctan",
+                        "inverse tan"
+                    ],
+        "simpleMeaning":  "The angle whose tangent is a given number, also called arctan.",
+        "visualId":  "inverse tangent",
+        "realLifeExample":  "If tan(x) = 1, the inverse tangent gives x = 45 degrees.",
+        "memoryTip":  "Inverse tangent = arctan."
+    },
+    {
+        "term":  "calculus",
+        "definition":  "The branch of maths that studies how things change and areas under curves.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "The maths of change and areas under curves.",
+        "visualId":  "calculus",
+        "realLifeExample":  "Calculus can tell how fast a car is speeding up.",
+        "memoryTip":  "Calculus = maths of change."
+    },
+    {
+        "term":  "limit",
+        "definition":  "The value a function or sequence approaches as its input gets closer and closer to something.",
+        "aliases":  [
+                        "limits"
+                    ],
+        "simpleMeaning":  "The value a function approaches as its input gets closer to something.",
+        "visualId":  "limit",
+        "realLifeExample":  "As x gets near 0, 1 divided by x grows without limit.",
+        "memoryTip":  "Limit = getting closer."
+    },
+    {
+        "term":  "differentiation",
+        "definition":  "Finding the rate at which a function changes at every point.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "Finding the rate of change of a function at every point.",
+        "visualId":  "differentiation",
+        "realLifeExample":  "Differentiation can tell how fast a ball drops each second.",
+        "memoryTip":  "Differentiation = finding the slope."
+    },
+    {
+        "term":  "derivative",
+        "definition":  "A function that gives the rate of change of another function at every point.",
+        "aliases":  [
+                        "derivatives"
+                    ],
+        "simpleMeaning":  "A function that gives the rate of change of another function.",
+        "visualId":  "derivative",
+        "realLifeExample":  "The derivative of x squared is 2x - it gives the slope.",
+        "memoryTip":  "Derivative = slope function."
+    },
+    {
+        "term":  "differentiate",
+        "definition":  "To find the derivative of a function.",
+        "aliases":  [
+                        "differentiates",
+                        "differentiating"
+                    ],
+        "simpleMeaning":  "To find the derivative of a function.",
+        "visualId":  "differentiate",
+        "realLifeExample":  "You differentiate x squared to get 2x.",
+        "memoryTip":  "Differentiate = find derivative."
+    },
+    {
+        "term":  "gradient function",
+        "definition":  "Another name for the derivative - it gives the slope of a curve at every point.",
+        "aliases":  [
+                        "gradient functions"
+                    ],
+        "simpleMeaning":  "Another name for the derivative - it gives the slope of a curve.",
+        "visualId":  "gradient function",
+        "realLifeExample":  "The gradient function of x squared is 2x.",
+        "memoryTip":  "Gradient function = slope curve."
+    },
+    {
+        "term":  "maximum",
+        "definition":  "The largest value of a function in a given range.",
+        "aliases":  [
+                        "maxima"
+                    ],
+        "simpleMeaning":  "The largest value of a function in a given range.",
+        "visualId":  "maximum",
+        "realLifeExample":  "The peak of a hill is its maximum height.",
+        "memoryTip":  "Maximum = the most."
+    },
+    {
+        "term":  "minimum",
+        "definition":  "The smallest value of a function in a given range.",
+        "aliases":  [
+                        "minima"
+                    ],
+        "simpleMeaning":  "The smallest value of a function in a given range.",
+        "visualId":  "minimum",
+        "realLifeExample":  "The bottom of a valley is the minimum.",
+        "memoryTip":  "Minimum = the least."
+    },
+    {
+        "term":  "point of inflection",
+        "definition":  "A point on a curve where the curve changes from bending one way to bending the other.",
+        "aliases":  [
+                        "points of inflection"
+                    ],
+        "simpleMeaning":  "A point on a curve where it changes how it bends.",
+        "visualId":  "point of inflection",
+        "realLifeExample":  "A roller coaster track may have a point of inflection between dips.",
+        "memoryTip":  "Inflection = bend switch."
+    },
+    {
+        "term":  "integration",
+        "definition":  "The reverse of differentiation; used to find areas under curves.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "The reverse of differentiation, used to find areas.",
+        "visualId":  "integration",
+        "realLifeExample":  "Integration can find the area under a curve.",
+        "memoryTip":  "Integration = area finder."
+    },
+    {
+        "term":  "integral",
+        "definition":  "The result of integration - it represents the area under a curve.",
+        "aliases":  [
+                        "integrals"
+                    ],
+        "simpleMeaning":  "The result of integration, representing area under a curve.",
+        "visualId":  "integral",
+        "realLifeExample":  "The integral of 2x is x squared.",
+        "memoryTip":  "Integral = area result."
+    },
+    {
+        "term":  "integrate",
+        "definition":  "To find the integral of a function.",
+        "aliases":  [
+                        "integrates",
+                        "integrating"
+                    ],
+        "simpleMeaning":  "To find the integral of a function.",
+        "visualId":  "integrate",
+        "realLifeExample":  "You integrate 2x to get x squared.",
+        "memoryTip":  "Integrate = find the area."
+    },
+    {
+        "term":  "definite integral",
+        "definition":  "An integral with specific start and end values, used to find the exact area under a curve between them.",
+        "aliases":  [
+                        "definite integrals"
+                    ],
+        "simpleMeaning":  "An integral with start and end values, giving exact area.",
+        "visualId":  "definite integral",
+        "realLifeExample":  "The integral from 0 to 2 of x dx = 2 - a definite area.",
+        "memoryTip":  "Definite integral = exact area."
+    },
+    {
+        "term":  "indefinite integral",
+        "definition":  "An integral without specific limits, giving a family of antiderivatives.",
+        "aliases":  [
+                        "indefinite integrals"
+                    ],
+        "simpleMeaning":  "An integral with no limits, giving a family of answers.",
+        "visualId":  null,
+        "realLifeExample":  "The integral of x dx = x squared over 2 plus C is an indefinite integral.",
+        "memoryTip":  "Indefinite integral = general area."
+    },
+    {
+        "term":  "antiderivative",
+        "definition":  "A function whose derivative is the given function.",
+        "aliases":  [
+                        "antiderivatives"
+                    ],
+        "simpleMeaning":  "A function whose derivative is the original function.",
+        "visualId":  "antiderivative",
+        "realLifeExample":  "x squared is the antiderivative of 2x.",
+        "memoryTip":  "Antiderivative = reverse derivative."
+    },
+    {
+        "term":  "scalar",
+        "definition":  "A quantity that has only size (magnitude), no direction.",
+        "aliases":  [
+                        "scalars"
+                    ],
+        "simpleMeaning":  "A quantity with only size, no direction.",
+        "visualId":  "scalar",
+        "realLifeExample":  "Mass and temperature are scalars.",
+        "memoryTip":  "Scalar = just a number."
+    },
+    {
+        "term":  "displacement",
+        "definition":  "The change in position of an object from a starting point to an ending point.",
+        "aliases":  [
+                        "displacements"
+                    ],
+        "simpleMeaning":  "The change in position from start to end.",
+        "visualId":  "displacement",
+        "realLifeExample":  "If you walk 3 km north, your displacement is 3 km north.",
+        "memoryTip":  "Displacement = final position change."
+    },
+    {
+        "term":  "row",
+        "definition":  "A horizontal line of numbers in a matrix.",
+        "aliases":  [
+                        "rows"
+                    ],
+        "simpleMeaning":  "A horizontal line of entries in a matrix.",
+        "visualId":  "row",
+        "realLifeExample":  "In a grid of numbers, a row goes left to right.",
+        "memoryTip":  "Row = horizontal line."
+    },
+    {
+        "term":  "column",
+        "definition":  "A vertical line of numbers in a matrix.",
+        "aliases":  [
+                        "columns"
+                    ],
+        "simpleMeaning":  "A vertical line of entries in a matrix.",
+        "visualId":  "column",
+        "realLifeExample":  "In a grid of numbers, a column goes up and down.",
+        "memoryTip":  "Column = vertical line."
+    },
+    {
+        "term":  "order",
+        "definition":  "The size of a matrix, given as the number of rows by the number of columns.",
+        "aliases":  [
+                        "orders"
+                    ],
+        "simpleMeaning":  "The size of a matrix, written as rows by columns.",
+        "visualId":  "order",
+        "realLifeExample":  "A 3 by 2 matrix has 3 rows and 2 columns.",
+        "memoryTip":  "Order = rows times columns."
+    },
+    {
+        "term":  "inverse matrix",
+        "definition":  "A matrix that, when multiplied by the original matrix, gives the identity matrix.",
+        "aliases":  [
+                        "inverse matrices"
+                    ],
+        "simpleMeaning":  "A matrix that undoes the effect of another matrix.",
+        "visualId":  "inverse matrix",
+        "realLifeExample":  "Multiplying a matrix by its inverse gives the identity.",
+        "memoryTip":  "Inverse matrix = undoing matrix."
+    },
+    {
+        "term":  "identity matrix",
+        "definition":  "A square matrix with 1s on the main diagonal and 0s everywhere else.",
+        "aliases":  [
+                        "identity matrices"
+                    ],
+        "simpleMeaning":  "A square matrix with 1s on the diagonal and 0s elsewhere.",
+        "visualId":  "identity matrix",
+        "realLifeExample":  "It is the matrix version of the number 1.",
+        "memoryTip":  "Identity matrix = matrix one."
+    },
+    {
+        "term":  "transpose",
+        "definition":  "A new matrix formed by swapping the rows and columns of the original matrix.",
+        "aliases":  [
+                        "transposes"
+                    ],
+        "simpleMeaning":  "A new matrix made by swapping rows and columns.",
+        "visualId":  "transpose",
+        "realLifeExample":  "Transposing flips a matrix along its diagonal.",
+        "memoryTip":  "Transpose = swap rows and columns."
+    },
+    {
+        "term":  "dot product",
+        "definition":  "A way to multiply two vectors that produces a single number.",
+        "aliases":  [
+                        "dot products"
+                    ],
+        "simpleMeaning":  "A way to multiply two vectors, giving one number.",
+        "visualId":  "dot product",
+        "realLifeExample":  "The dot product of (2,3) and (4,5) is 23.",
+        "memoryTip":  "Dot product = vector times vector."
+    },
+    {
+        "term":  "scalar product",
+        "definition":  "Another name for the dot product because it gives a scalar (single number).",
+        "aliases":  [
+                        "scalar products"
+                    ],
+        "simpleMeaning":  "Another name for the dot product because the answer is a scalar.",
+        "visualId":  "scalar product",
+        "realLifeExample":  "Scalar product = dot product.",
+        "memoryTip":  "Scalar product = same as dot product."
+    },
+    {
+        "term":  "set",
+        "definition":  "A collection of distinct items, considered as one object.",
+        "aliases":  [
+                        "sets"
+                    ],
+        "simpleMeaning":  "A collection of distinct items, considered as one object.",
+        "visualId":  "set",
+        "realLifeExample":  "The set of red things could be {apple, fire truck, heart}.",
+        "memoryTip":  "Set = a group."
+    },
+    {
+        "term":  "element",
+        "definition":  "One of the items in a set.",
+        "aliases":  [
+                        "elements"
+                    ],
+        "simpleMeaning":  "One of the items in a set.",
+        "visualId":  "element",
+        "realLifeExample":  "In the set {1,2,3}, each number is an element.",
+        "memoryTip":  "Element = a member."
+    },
+    {
+        "term":  "subset",
+        "definition":  "A set whose every element also belongs to another set.",
+        "aliases":  [
+                        "subsets"
+                    ],
+        "simpleMeaning":  "A set whose every element also belongs to another set.",
+        "visualId":  "subset",
+        "realLifeExample":  "The set of even numbers is a subset of all integers.",
+        "memoryTip":  "Subset = inside another set."
+    },
+    {
+        "term":  "empty set",
+        "definition":  "The set that contains no elements at all, written {}.",
+        "aliases":  [
+                        "empty sets"
+                    ],
+        "simpleMeaning":  "The set that contains no elements at all.",
+        "visualId":  "empty set",
+        "realLifeExample":  "A box with nothing inside is like an empty set.",
+        "memoryTip":  "Empty set = nothing inside."
+    },
+    {
+        "term":  "universal set",
+        "definition":  "The set of all items under consideration in a particular problem.",
+        "aliases":  [
+                        "universal sets"
+                    ],
+        "simpleMeaning":  "The set of all items under consideration.",
+        "visualId":  "universal set",
+        "realLifeExample":  "When studying classroom pets, the universal set is every possible pet.",
+        "memoryTip":  "Universal set = everything in scope."
+    },
+    {
+        "term":  "union",
+        "definition":  "A set that contains every element that is in either of two or more sets.",
+        "aliases":  [
+                        "unions"
+                    ],
+        "simpleMeaning":  "A set that contains every element in either of two or more sets.",
+        "visualId":  "union",
+        "realLifeExample":  "The union of {1,2} and {2,3} is {1,2,3}.",
+        "memoryTip":  "Union = combine everything."
+    },
+    {
+        "term":  "intersection",
+        "definition":  "The set of elements that are in all of two or more sets at the same time.",
+        "aliases":  [
+                        "intersections"
+                    ],
+        "simpleMeaning":  "The set of elements that are in all of two or more sets.",
+        "visualId":  "intersection",
+        "realLifeExample":  "The intersection of {1,2} and {2,3} is {2}.",
+        "memoryTip":  "Intersection = shared parts."
+    },
+    {
+        "term":  "complement",
+        "definition":  "Everything in the universal set that is NOT in a given set.",
+        "aliases":  [
+                        "complements"
+                    ],
+        "simpleMeaning":  "Everything in the universal set that is NOT in a given set.",
+        "visualId":  "complement",
+        "realLifeExample":  "If the universal set is {1,2,3,4} and A is {1,2}, the complement of A is {3,4}.",
+        "memoryTip":  "Complement = everything else."
+    },
+    {
+        "term":  "logarithm",
+        "definition":  "The power a base must be raised to in order to give a particular number.",
+        "aliases":  [
+                        "logarithms"
+                    ],
+        "simpleMeaning":  "The power a base must be raised to give a particular number.",
+        "visualId":  "logarithm",
+        "realLifeExample":  "Log base 2 of 8 is 3 because 2 cubed = 8.",
+        "memoryTip":  "Logarithm = reverse of power."
+    },
+    {
+        "term":  "log",
+        "definition":  "Short for logarithm - the power a base must be raised to in order to give a number.",
+        "aliases":  [
+                        "logs"
+                    ],
+        "simpleMeaning":  "Short for logarithm - the power a base must be raised to give a number.",
+        "visualId":  "log",
+        "realLifeExample":  "Log base 10 of 100 is 2 because 10 squared = 100.",
+        "memoryTip":  "Log = log shorthand."
+    },
+    {
+        "term":  "exponential",
+        "definition":  "Describing growth or a function where a number is raised to a power that contains the variable.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "Describing growth or a function where a number is raised to a power with a variable.",
+        "visualId":  "exponential",
+        "realLifeExample":  "Population growth can be exponential - doubling every few years.",
+        "memoryTip":  "Exponential = fast growth."
+    },
+    {
+        "term":  "exponential growth",
+        "definition":  "Growth that gets faster and faster over time, like population growth or money doubling.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "Growth that gets faster and faster over time.",
+        "visualId":  "exponential growth",
+        "realLifeExample":  "A bacteria colony under exponential growth can double every hour.",
+        "memoryTip":  "Growth = faster and faster."
+    },
+    {
+        "term":  "exponential decay",
+        "definition":  "A decrease that gets faster and faster over time, like radioactive decay.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "A decrease that gets faster and faster over time.",
+        "visualId":  "exponential decay",
+        "realLifeExample":  "A hot cup of tea cooling down follows exponential decay.",
+        "memoryTip":  "Decay = faster and faster shrink."
+    },
+    {
+        "term":  "profit",
+        "definition":  "The money left over when revenue is greater than the cost of making something.",
+        "aliases":  [
+                        "profits"
+                    ],
+        "simpleMeaning":  "The money left over when you earn more than you spend.",
+        "visualId":  "profit",
+        "realLifeExample":  "If you buy a toy for 5 pounds and sell it for 8 pounds, you made a profit of 3 pounds.",
+        "memoryTip":  "Profit = earnings minus cost."
+    },
+    {
+        "term":  "loss",
+        "definition":  "What happens when the cost of something is more than the revenue from selling it.",
+        "aliases":  [
+                        "losses"
+                    ],
+        "simpleMeaning":  "What happens when you spend more than you earn.",
+        "visualId":  "loss",
+        "realLifeExample":  "If a shop pays 100 pounds for stock and sells it for only 80 pounds, that is a loss.",
+        "memoryTip":  "Loss = spending more than earned."
+    },
+    {
+        "term":  "revenue",
+        "definition":  "The total amount of money received from sales before any costs are taken out.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "The total amount of money received from sales before any costs are taken out.",
+        "visualId":  "revenue",
+        "realLifeExample":  "A coffee shop that takes 500 pounds in a day has 500 pounds of revenue.",
+        "memoryTip":  "Revenue = total income."
+    },
+    {
+        "term":  "discount",
+        "definition":  "An amount taken off the original price of something.",
+        "aliases":  [
+                        "discounts"
+                    ],
+        "simpleMeaning":  "An amount taken off the original price of something.",
+        "visualId":  "discount",
+        "realLifeExample":  "A 20 percent discount on a 10 pound toy means you pay only 8 pounds.",
+        "memoryTip":  "Discount = price reduction."
+    },
+    {
+        "term":  "interest",
+        "definition":  "Money paid for borrowing money, or money earned for saving money.",
+        "aliases":  [
+                        "interests"
+                    ],
+        "simpleMeaning":  "Money paid for borrowing money, or money earned for saving money.",
+        "visualId":  "interest",
+        "realLifeExample":  "A bank pays you interest on the money you keep in your savings account.",
+        "memoryTip":  "Interest = money on money."
+    },
+    {
+        "term":  "simple interest",
+        "definition":  "Interest calculated only on the original amount borrowed or invested.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "Interest calculated only on the original amount borrowed or invested.",
+        "visualId":  "simple interest",
+        "realLifeExample":  "Simple interest on 100 pounds at 5 percent for 3 years is just 100 times 5 percent times 3.",
+        "memoryTip":  "Simple = on the original only."
+    },
+    {
+        "term":  "compound interest",
+        "definition":  "Interest calculated on the original amount plus any interest already earned.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "Interest calculated on the original amount plus any interest already earned.",
+        "visualId":  "compound interest",
+        "realLifeExample":  "Compound interest makes savings grow faster because each year earns interest on top of last year.",
+        "memoryTip":  "Compound = on top of interest.",
+        "differentiates":  {
+                               "simple interest":  "Compound interest earns interest on top of interest. So the total grows faster the longer the money is saved, while simple interest stays the same each year."
+                           }
+    },
+    {
+        "term":  "principal",
+        "definition":  "The original amount of money borrowed, invested, or saved, before any interest.",
+        "aliases":  [
+                        "principals"
+                    ],
+        "simpleMeaning":  "The original amount of money borrowed, invested, or saved, before any interest.",
+        "visualId":  "principal",
+        "realLifeExample":  "If you invest 1000 pounds, the principal is 1000 pounds.",
+        "memoryTip":  "Principal = starting money."
+    },
+    {
+        "term":  "depreciation",
+        "definition":  "The decrease in the value of something over time, like a car getting older.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "The decrease in the value of something over time.",
+        "visualId":  null,
+        "realLifeExample":  "A new car loses value every year - that is depreciation.",
+        "memoryTip":  "Depreciation = losing value."
+    },
+    {
+        "term":  "speed",
+        "definition":  "How fast something is moving, measured as distance travelled per unit of time.",
+        "aliases":  [
+                        "speeds"
+                    ],
+        "simpleMeaning":  "How fast something is moving, measured as distance travelled per unit of time.",
+        "visualId":  "speed",
+        "realLifeExample":  "A car going 60 km per hour has a speed of 60 km/h.",
+        "memoryTip":  "Speed = distance over time."
+    },
+    {
+        "term":  "distance",
+        "definition":  "How far apart two points are, or how far something has travelled.",
+        "aliases":  [
+                        "distances"
+                    ],
+        "simpleMeaning":  "How far apart two points are, or how far something has travelled.",
+        "visualId":  "distance",
+        "realLifeExample":  "The distance from your home to school might be 2 km.",
+        "memoryTip":  "Distance = how far."
+    },
+    {
+        "term":  "time",
+        "definition":  "A measure of how long something takes, measured in seconds, minutes, hours, etc.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "A measure of how long something takes, in seconds, minutes, hours, or days.",
+        "visualId":  "time",
+        "realLifeExample":  "A 100 metre race takes about 10 seconds - that is the time.",
+        "memoryTip":  "Time = how long."
+    },
+    {
+        "term":  "rate",
+        "definition":  "A comparison of two quantities measured in different units, like miles per hour.",
+        "aliases":  [
+                        "rates"
+                    ],
+        "simpleMeaning":  "A comparison of two quantities measured in different units.",
+        "visualId":  "rate",
+        "realLifeExample":  "Miles per hour is a rate - miles compared to hours.",
+        "memoryTip":  "Rate = per something."
+    },
+    {
+        "term":  "unit",
+        "definition":  "A standard way of measuring something, like metres for length or seconds for time.",
+        "aliases":  [
+                        "units"
+                    ],
+        "simpleMeaning":  "A standard way of measuring something, like metres for length or seconds for time.",
+        "visualId":  "unit",
+        "realLifeExample":  "Centimetres, kilograms, and degrees are all units.",
+        "memoryTip":  "Unit = standard measure."
+    },
+    {
+        "term":  "positive",
+        "definition":  "A number greater than zero, written with no sign or with a + sign.",
+        "aliases":  [
+                        "positives"
+                    ],
+        "simpleMeaning":  "A number greater than zero.",
+        "visualId":  null,
+        "realLifeExample":  "5 and 100 are both positive numbers.",
+        "memoryTip":  "Positive = bigger than zero."
+    },
+    {
+        "term":  "negative",
+        "definition":  "A number less than zero, written with a minus sign in front.",
+        "aliases":  [
+                        "negatives"
+                    ],
+        "simpleMeaning":  "A number less than zero.",
+        "visualId":  null,
+        "realLifeExample":  "Negative 5 and negative 100 are both below zero.",
+        "memoryTip":  "Negative = smaller than zero."
+    },
+    {
+        "term":  "absolute value",
+        "definition":  "The size of a number ignoring whether it is positive or negative - e.g. the absolute value of -7 is 7.",
+        "aliases":  [
+                        "absolute values",
+                        "absolute"
+                    ],
+        "simpleMeaning":  "The size of a number ignoring whether it is positive or negative.",
+        "visualId":  null,
+        "realLifeExample":  "The absolute value of negative 5 is 5 - we drop the sign.",
+        "memoryTip":  "Absolute value = distance from zero."
+    },
+    {
+        "term":  "ellipse",
+        "definition":  "An oval shape traced by points whose sum of distances from two fixed points (foci) is constant.",
+        "aliases":  [
+                        "ellipses"
+                    ],
+        "simpleMeaning":  "A stretched-out circle - an oval shape.",
+        "visualId":  "ellipse",
+        "realLifeExample":  "A racetrack or a flattened circle is shaped like an ellipse.",
+        "memoryTip":  "Ellipse = stretched circle."
+    },
+    {
+        "term":  "parabola",
+        "definition":  "A U-shaped curve where every point is the same distance from a focus and a directrix.",
+        "aliases":  [
+                        "parabolas"
+                    ],
+        "simpleMeaning":  "A U-shaped curve, like a smile or a bowl.",
+        "visualId":  "parabola",
+        "realLifeExample":  "The path a ball makes when you throw it is a parabola - up then down.",
+        "memoryTip":  "Parabola = U-shaped curve."
+    },
+    {
+        "term":  "hyperbola",
+        "definition":  "A curve with two separate branches where the difference of distances from two foci is constant.",
+        "aliases":  [
+                        "hyperbolas"
+                    ],
+        "simpleMeaning":  "Two U-shapes facing away from each other.",
+        "visualId":  "hyperbola",
+        "realLifeExample":  "The shadow of a lampshade at an angle can make a hyperbolic curve.",
+        "memoryTip":  "Hyperbola = two opposite Us."
+    },
+    {
+        "term":  "focus",
+        "definition":  "A fixed point inside a conic section such as an ellipse or parabola.",
+        "aliases":  [
+                        "foci"
+                    ],
+        "simpleMeaning":  "A special point inside a curve like an ellipse.",
+        "visualId":  "focus",
+        "realLifeExample":  "In a satellite dish, the focus is where the signals collect to one spot.",
+        "memoryTip":  "Focus = special point inside a curve."
+    },
+    {
+        "term":  "directrix",
+        "definition":  "A fixed straight line used to define a conic section such as a parabola.",
+        "aliases":  [
+                        "directrices"
+                    ],
+        "simpleMeaning":  "A straight line that helps define a curve like a parabola.",
+        "visualId":  "directrix",
+        "realLifeExample":  "The directrix is like a guide line that the curve never crosses.",
+        "memoryTip":  "Directrix = guide line for a curve."
+    },
+    {
+        "term":  "complex number",
+        "definition":  "A number written as a + bi, where a and b are real numbers and i is the imaginary unit.",
+        "aliases":  [
+                        "complex numbers"
+                    ],
+        "simpleMeaning":  "A number with a real part and an imaginary part.",
+        "visualId":  "complex number",
+        "realLifeExample":  "Engineers use complex numbers to design electrical circuits.",
+        "memoryTip":  "Complex = real + imaginary."
+    },
+    {
+        "term":  "binomial",
+        "definition":  "An algebraic expression with exactly two terms, like x + 5 or (a + b).",
+        "aliases":  [
+                        "binomials"
+                    ],
+        "simpleMeaning":  "A math expression with exactly two parts.",
+        "visualId":  "binomial",
+        "realLifeExample":  "x + 5 is a binomial because it has exactly two parts.",
+        "memoryTip":  "Binomial = bi (two) + nomial (terms)."
+    },
+    {
+        "term":  "share",
+        "definition":  "One of the equal parts into which a company is divided, giving the holder part ownership.",
+        "aliases":  [
+                        "shares"
+                    ],
+        "simpleMeaning":  "A small piece of a company that you can buy.",
+        "visualId":  "share",
+        "realLifeExample":  "If a company has 100 shares, each share means 1% ownership.",
+        "memoryTip":  "Share = a piece of a company."
+    },
+    {
+        "term":  "dividend",
+        "definition":  "A share of profits paid by a company to its shareholders.",
+        "aliases":  [
+                        "dividends"
+                    ],
+        "simpleMeaning":  "Money a company pays you for owning its shares.",
+        "visualId":  "dividend",
+        "realLifeExample":  "Apple pays shareholders a dividend every three months.",
+        "memoryTip":  "Dividend = money from shares."
+    },
+    {
+        "term":  "variation",
+        "definition":  "A relationship between two variables where one changes in a predictable way as the other changes.",
+        "aliases":  [
+                        "variations"
+                    ],
+        "simpleMeaning":  "When one number changes, another changes too in a pattern.",
+        "visualId":  "variation",
+        "realLifeExample":  "The more hours you work, the more money you earn - that is variation.",
+        "memoryTip":  "Variation = one thing changing affects another."
+    },
+    {
+        "term":  "domain",
+        "definition":  "The set of all allowed input values for a function.",
+        "aliases":  [
+                        "domains"
+                    ],
+        "simpleMeaning":  "All the numbers you are allowed to put into a function.",
+        "visualId":  "domain",
+        "realLifeExample":  "In y = 1/x, the domain is all numbers except 0 - you cannot divide by zero.",
+        "memoryTip":  "Domain = inputs allowed."
+    },
+    {
+        "term":  "input",
+        "definition":  "A value that goes into a function or formula.",
+        "aliases":  [
+                        "inputs"
+                    ],
+        "simpleMeaning":  "A number you put into a function.",
+        "visualId":  "input",
+        "realLifeExample":  "In f(x) = 2x, the input is x and the output is the answer.",
+        "memoryTip":  "Input = what goes in."
+    },
+    {
+        "term":  "output",
+        "definition":  "A value that comes out of a function or formula.",
+        "aliases":  [
+                        "outputs"
+                    ],
+        "simpleMeaning":  "The number that comes out of a function.",
+        "visualId":  "output",
+        "realLifeExample":  "In f(x) = 2x, when you put in x = 3, the output is 6.",
+        "memoryTip":  "Output = what comes out."
+    },
+    {
+        "term":  "subtraction",
+        "definition":  "The operation of finding the difference between two numbers. a - b tells you how much is left when b is taken away from a.",
+        "aliases":  [
+                        "difference",
+                        "minus"
+                    ],
+        "simpleMeaning":  "Taking one number away from another.",
+        "visualId":  "subtraction",
+        "realLifeExample":  "If you have 5 apples and give 2 away, you have 5 - 2 = 3 apples left.",
+        "memoryTip":  "Subtraction = take away."
+    },
+    {
+        "term":  "multiplication",
+        "definition":  "The operation of repeated addition. a times b means adding a to itself b times, giving the product.",
+        "aliases":  [
+                        "product",
+                        "times"
+                    ],
+        "simpleMeaning":  "Adding a number to itself many times.",
+        "visualId":  "multiplication",
+        "realLifeExample":  "3 times 4 means 3 groups of 4 dots = 4 + 4 + 4 = 12.",
+        "memoryTip":  "Multiplication = repeated adding."
+    },
+    {
+        "term":  "division",
+        "definition":  "The operation of splitting a number into equal parts. a divided by b asks how many b\u0027s fit into a.",
+        "aliases":  [
+                        "divide",
+                        "quotient"
+                    ],
+        "simpleMeaning":  "Sharing or splitting into equal groups.",
+        "visualId":  "division",
+        "realLifeExample":  "12 divided by 3 means split 12 cookies into 3 equal groups = 4 each.",
+        "memoryTip":  "Division = fair sharing."
+    },
+    {
+        "term":  "addition",
+        "definition":  "The operation of combining two or more numbers to find their total. a plus b gives the sum.",
+        "aliases":  [
+                        "sum",
+                        "add",
+                        "plus"
+                    ],
+        "simpleMeaning":  "Putting numbers together to make a bigger number.",
+        "visualId":  "addition",
+        "realLifeExample":  "3 plus 2 means 3 dots and 2 dots together = 5 dots. If you have 3 apples and someone gives you 2 more, you now have 5.",
+        "memoryTip":  "Addition = putting together."
+    },
+    {
+        "term":  "bearing angle",
+        "definition":  "A direction expressed as a clockwise angle from North, always written as a 3-digit number (e.g. 045, 180, 270).",
+        "aliases":  [
+                        "bearing angles"
+                    ],
+        "simpleMeaning":  "How far around the compass from North, measured clockwise.",
+        "visualId":  "bearing angle",
+        "realLifeExample":  "A bearing of 090 means due East. A bearing of 225 is South-West (halfway between South and West).",
+        "memoryTip":  "Bearing = turn from North, clockwise."
+    },
+    {
+        "term":  "compass",
+        "definition":  "An instrument with a magnetic needle that always points North, used to find direction.",
+        "aliases":  [
+                        "compasses"
+                    ],
+        "simpleMeaning":  "A tool that shows you which way is North.",
+        "visualId":  "compass",
+        "realLifeExample":  "A hiker uses a compass to find their way through a forest. The needle always points to magnetic North.",
+        "memoryTip":  "Compass needle points North."
+    },
+    {
+        "term":  "north",
+        "definition":  "The direction at the top of a map. The Earth\u0027s North Pole is the reference for bearings.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "The direction shown at the top of a map.",
+        "visualId":  "north",
+        "realLifeExample":  "On a map, North is at the top. A bearing of 000 means due North.",
+        "memoryTip":  "North = top of the map = 000 bearing."
+    },
+    {
+        "term":  "south",
+        "definition":  "The direction at the bottom of a map. The opposite of North.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "The direction shown at the bottom of a map.",
+        "visualId":  "south",
+        "realLifeExample":  "A bearing of 180 means due South - the opposite of North.",
+        "memoryTip":  "South = bottom of the map = 180 bearing."
+    },
+    {
+        "term":  "east",
+        "definition":  "The direction to your right when facing North. The bearing is 090.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "The direction to your right when facing North.",
+        "visualId":  "east",
+        "realLifeExample":  "The sun rises in the East. A bearing of 090 means due East.",
+        "memoryTip":  "East = right of North = 090 bearing."
+    },
+    {
+        "term":  "west",
+        "definition":  "The direction to your left when facing North. The bearing is 270.",
+        "aliases":  [
+
+                    ],
+        "simpleMeaning":  "The direction to your left when facing North.",
+        "visualId":  "west",
+        "realLifeExample":  "The sun sets in the West. A bearing of 270 means due West.",
+        "memoryTip":  "West = left of North = 270 bearing."
+    },
+    {
+        "term":  "compass rose",
+        "definition":  "A diagram showing the cardinal and intercardinal directions (N, NE, E, SE, S, SW, W, NW) on a compass or map.",
+        "aliases":  [
+                        "compass roses"
+                    ],
+        "simpleMeaning":  "A star-shaped diagram of the directions on a map.",
+        "visualId":  "compass rose",
+        "realLifeExample":  "The compass rose on a map shows North, South, East, West and the four diagonal directions.",
+        "memoryTip":  "Compass rose = the directions star on a map."
+    },
+    {
+        "term":  "SSS",
+        "definition":  "Side-Side-Side: two triangles are congruent if all three pairs of corresponding sides are equal in length.",
+        "aliases":  [
+                        "side-side-side"
+                    ],
+        "simpleMeaning":  "Three matching sides = the triangles are exactly the same.",
+        "visualId":  "sss",
+        "realLifeExample":  "If you measure three sides of one triangle and three sides of another and they all match, the two triangles are identical copies.",
+        "memoryTip":  "SSS = Side-Side-Side."
+    },
+    {
+        "term":  "SAS",
+        "definition":  "Side-Angle-Side: two triangles are congruent if two pairs of sides and the angle between them are equal.",
+        "aliases":  [
+                        "side-angle-side"
+                    ],
+        "simpleMeaning":  "Two sides and the angle between them = the triangles match.",
+        "visualId":  "sas",
+        "realLifeExample":  "If two sides and the angle between them are the same, the two triangles are identical - it is the most common way to prove congruence.",
+        "memoryTip":  "SAS = Side-Angle-Side."
+    },
+    {
+        "term":  "ASA",
+        "definition":  "Angle-Side-Angle: two triangles are congruent if two pairs of angles and the side between them are equal.",
+        "aliases":  [
+                        "angle-side-angle"
+                    ],
+        "simpleMeaning":  "Two angles and the side between them = the triangles match.",
+        "visualId":  "asa",
+        "realLifeExample":  "If you know two angles and the side they share, you can reconstruct the triangle exactly.",
+        "memoryTip":  "ASA = Angle-Side-Angle."
+    },
+    {
+        "term":  "RHS",
+        "definition":  "Right-angle-Hypotenuse-Side: two right-angled triangles are congruent if their hypotenuses and one other side are equal.",
+        "aliases":  [
+                        "right angle-hypotenuse-side"
+                    ],
+        "simpleMeaning":  "Two right triangles with same hypotenuse + one side = the triangles match.",
+        "visualId":  "rhs",
+        "realLifeExample":  "Used to prove two right-angled triangles are congruent when you know the hypotenuse and one leg of each.",
+        "memoryTip":  "RHS = Right angle, Hypotenuse, Side."
+    }
+]

@@ -67,9 +67,18 @@ app.use(express.static(clientDistPath));
 // MongoDB on startup. If Mongo is unreachable the rest of the server still
 // serves; only the auth endpoints will return 503.
 const auth = require('./auth');
+const transferScenarios = require('./transferScenarios');
 const progress = require('./progress');
 const conceptSession = require('./conceptSession');
 
+// Load static collections definitions
+let collections = [];
+try {
+  collections = JSON.parse(fs.readFileSync(path.join(__dirname, 'collections.json'), 'utf8'));
+  console.log(`[collections] loaded ${collections.length} collections`);
+} catch (e) {
+  console.error('[collections] failed to load collections.json:', e.message);
+}
 app.use('/api/auth', auth.router);
 app.use('/api/progress', progress.router);
 app.use('/api/concept-session', conceptSession);
@@ -98,6 +107,140 @@ auth.connectMongo()
  * { correct: true, correctAnswer: 8, message: '...', solved: true,
  *   explanation: 'Step 1: Write the problem: 5 + 3\nStep 2: Calculate: 5 + 3 = 8\n...' }
  */
+// Student Attempt Logger Helper
+function extractAttemptDetails(req) {
+  const path = req.path;
+  const body = req.body || {};
+  const match = /^\/([a-z0-9]+)-api\/check/i.exec(path);
+  if (!match) return null;
+  const topicKey = match[1];
+
+  let questionPrompt = '';
+  let userInput = '';
+
+  // Extract user answer
+  if (body.answer !== undefined) userInput = String(body.answer);
+  else if (body.answerOption !== undefined) userInput = String(body.answerOption);
+  else if (body.userAnswer !== undefined) userInput = String(body.userAnswer);
+  else if (body.val !== undefined) userInput = String(body.val);
+  else userInput = JSON.stringify(body);
+
+  // Extract prompt based on topic
+  switch (topicKey) {
+    case 'gk': {
+      const gkQuestions = typeof questions !== 'undefined' ? questions : [];
+      const q = gkQuestions.find((item) => Number(item.id) === Number(body.id));
+      questionPrompt = q ? q.question : `GK Question ID: ${body.id}`;
+      break;
+    }
+    case 'addition':
+      questionPrompt = `Addition: ${body.a} + ${body.b}`;
+      break;
+    case 'basicarith':
+      questionPrompt = `Arithmetic: ${body.a} ${body.op} ${body.b}`;
+      break;
+    case 'multiply':
+      questionPrompt = `Multiplication: ${body.table} x ${body.multiplier}`;
+      break;
+    case 'quadratic':
+      questionPrompt = `Evaluate y = ${body.a}x^2 + ${body.b}x + ${body.c} at x = ${body.x}`;
+      break;
+    case 'sqrt':
+      questionPrompt = `Approximate square root of ${body.q}`;
+      break;
+    case 'vocab': {
+      const vQuestions = typeof vocabQuestions !== 'undefined' ? vocabQuestions : [];
+      const q = vQuestions.find((item) => Number(item.id) === Number(body.id));
+      questionPrompt = q ? `Vocabulary: what is the meaning of "${q.word}"?` : `Vocabulary Question ID: ${body.id}`;
+      break;
+    }
+    default:
+      if (body.prompt) {
+        questionPrompt = body.prompt;
+      } else if (body.question) {
+        questionPrompt = body.question;
+      } else {
+        const params = { ...body };
+        delete params.answer;
+        delete params.answerOption;
+        delete params.userAnswer;
+        delete params.val;
+        delete params.solve;
+        questionPrompt = `${topicKey.toUpperCase()} Problem: ` + JSON.stringify(params);
+      }
+  }
+
+  return { topicKey, questionPrompt, userInput };
+}
+
+// Global middleware to log student attempts for all quiz/check APIs
+app.use((req, res, next) => {
+  if (req.method !== 'POST' || !req.path.includes('-api/check')) {
+    return next();
+  }
+
+  const isSolveOnly = req.body && req.body.solve === true;
+  const originalJson = res.json.bind(res);
+
+  res.json = function (data) {
+    const jsonResult = originalJson(data);
+
+    if (isSolveOnly) return jsonResult;
+
+    // Run async logging in the background
+    (async () => {
+      try {
+        const user = await getUserFromReq(req);
+        if (user) {
+          const details = extractAttemptDetails(req);
+          if (details) {
+            const { topicKey, questionPrompt, userInput } = details;
+            
+            const isMongo = typeof user._id !== 'undefined';
+            if (isMongo) {
+              if (auth.StudentAttemptLog) {
+                await auth.StudentAttemptLog.create({
+                  studentId: user._id,
+                  topicKey,
+                  questionPrompt,
+                  userInput,
+                  correct: !!data.correct,
+                  hintsClickedCount: req.body.hintsUsed || 0,
+                  timeSpentSeconds: req.body.timeSpentSeconds || 0,
+                  stageNumber: 3,
+                  challengeType: 'standard'
+                });
+              }
+            } else {
+              if (!user.attemptLogs) {
+                user.attemptLogs = [];
+              }
+              user.attemptLogs.push({
+                topicKey,
+                questionPrompt,
+                userInput,
+                correct: !!data.correct,
+                timestamp: new Date(),
+                hintsClickedCount: req.body.hintsUsed || 0,
+                timeSpentSeconds: req.body.timeSpentSeconds || 0,
+                stageNumber: 3,
+                challengeType: 'standard'
+              });
+              await user.save();
+            }
+          }
+        }
+      } catch (err) {
+        console.error('[attempt-logger] Failed to log student attempt:', err.message);
+      }
+    })();
+
+    return jsonResult;
+  };
+
+  next();
+});
+
 app.use((req, res, next) => {
   // Only intercept POST requests to check endpoints
   if (req.method !== 'POST' || !req.path.includes('-api/check')) {
@@ -539,6 +682,342 @@ app.post('/addition-api/check', (req, res) => {
   const correctAnswer = Number(a) + Number(b);
   const correct = Number(answer) === correctAnswer;
   res.json({ correct, correctAnswer, message: correct ? 'Correct' : 'Incorrect' });
+});
+
+/**
+ * COLUMN ADDITION API
+ * ═══════════════════════════════════════════════════════════════════════════
+ * Vertical column addition with carry boxes.
+ * GET  returns two numbers + precomputed carries
+ * POST validates answer digits and carry digits
+ */
+
+function computeColumnData(a, b) {
+  const sum = a + b;
+  const aStr = String(a);
+  const bStr = String(b);
+  const sStr = String(sum);
+  const opLen = Math.max(aStr.length, bStr.length);
+  const ansLen = sStr.length;
+  // Pad operands to ansLen so they align with answer columns
+  const aPad = aStr.padStart(ansLen, ' ');
+  const bPad = bStr.padStart(ansLen, ' ');
+  // carries[i] = carry INTO position i of the answer
+  // carries[0] is always 0 (ones column has no carry in)
+  const carries = new Array(ansLen).fill(0);
+  let carry = 0;
+  for (let i = ansLen - 1; i >= 0; i--) {
+    const da = parseInt(aPad[i]) || 0;
+    const db = parseInt(bPad[i]) || 0;
+    const colSum = da + db + carry;
+    carry = colSum >= 10 ? 1 : 0;
+    if (i > 0) carries[i - 1] = carry;
+  }
+  const answerDigits = sStr.split('').map(Number);
+  const aDigits = aPad.split('').map(d => d === ' ' ? null : Number(d));
+  const bDigits = bPad.split('').map(d => d === ' ' ? null : Number(d));
+  return { answerDigits, aDigits, bDigits, carries, digits: opLen };
+}
+
+app.get('/column-addition-api/question', (req, res) => {
+  const difficulty = req.query.difficulty || 'easy';
+  const digitMap = { easy: 1, medium: 2, hard: 3, extrahard: 4 };
+  const numDigits = digitMap[difficulty] || 1;
+  const range = digitRange(numDigits);
+  let a, b, data;
+  let attempts = 0;
+  do {
+    a = randomInt(Math.max(range.min, 1), range.max);
+    b = randomInt(Math.max(range.min, 1), range.max);
+    data = computeColumnData(a, b);
+    attempts++;
+  } while (data.carries.slice(1).every(c => c === 0) && attempts < 20);
+  res.json({
+    id: `ca-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+    a, b,
+    answer: a + b,
+    ...data,
+  });
+});
+
+app.post('/column-addition-api/check', (req, res) => {
+  const { a, b, userAnswer, userCarries } = req.body || {};
+  const numA = Number(a), numB = Number(b);
+  const correctAnswer = numA + numB;
+  const data = computeColumnData(numA, numB);
+  const answerCorrect = Array.isArray(userAnswer) &&
+    userAnswer.map(Number).join('') === data.answerDigits.join('');
+  const carriesCorrect = Array.isArray(userCarries) &&
+    userCarries.map(Number).join('') === data.carries.join('');
+  const correct = answerCorrect && carriesCorrect;
+  res.json({
+    correct,
+    correctAnswer,
+    answerDigits: data.answerDigits,
+    correctCarries: data.carries,
+    message: correct ? 'Correct!' : carriesCorrect ? 'Answer digits wrong' : answerCorrect ? 'Carries wrong' : 'Try again',
+  });
+});
+
+/**
+ * COLUMN MULTIPLICATION API
+ * ═══════════════════════════════════════════════════════════════════════════
+ * Vertical column multiplication: single-digit multiplier × N-digit multiplicand.
+ * Mirrors the column-addition UI: user fills carries above + product digits below.
+ * GET  returns numbers + precomputed carries/digits
+ * POST validates answer digits and carry digits
+ */
+
+function computeMulData(multiplicand, multiplier) {
+  const aStr = String(multiplicand);
+  const bStr = String(multiplier);
+  const aLen = aStr.length;
+  const bLen = bStr.length;
+  const product = multiplicand * multiplier;
+  const pStr = String(product);
+  const ansLen = pStr.length;
+  const aDigits = aStr.split('').map(Number);
+  const bDigits = bStr.split('').map(Number);
+
+  if (bLen === 1) {
+    const m = bDigits[0];
+    const aPad = aStr.padStart(ansLen, ' ');
+    const carries = new Array(ansLen).fill(0);
+    let carry = 0;
+    for (let i = ansLen - 1; i >= 0; i--) {
+      const da = parseInt(aPad[i]) || 0;
+      const colProd = da * m + carry;
+      carry = Math.floor(colProd / 10);
+      if (i > 0) carries[i - 1] = carry;
+    }
+    const answerDigits = pStr.split('').map(Number);
+    const aDigitsPadded = aPad.split('').map(d => d === ' ' ? null : Number(d));
+    return { answerDigits, aDigits: aDigitsPadded, carries, digits: aLen, multiDigitMultiplier: false };
+  }
+
+  const partialProducts = [];
+  for (let bi = bLen - 1; bi >= 0; bi--) {
+    const bDigit = bDigits[bi];
+    const shift = bLen - 1 - bi;
+    const pp = multiplicand * bDigit;
+    const ppStr = String(pp);
+    const ppLen = ppStr.length;
+    const carries = new Array(ppLen).fill(null);
+    let carry = 0;
+    for (let i = ppLen - 1; i >= 0; i--) {
+      const ai = aLen - 1 - (ppLen - 1 - i);
+      const da = ai >= 0 ? aDigits[ai] : 0;
+      const total = da * bDigit + carry;
+      carry = Math.floor(total / 10);
+      if (i > 0) carries[i - 1] = carry;
+    }
+    const paddedDigits = new Array(ansLen).fill(null);
+    const paddedCarries = new Array(ansLen).fill(null);
+    const startCol = ansLen - ppLen - shift;
+    for (let j = 0; j < ppLen; j++) {
+      const col = startCol + j;
+      if (col >= 0 && col < ansLen) {
+        paddedDigits[col] = Number(ppStr[j]);
+        paddedCarries[col] = carries[j];
+      }
+    }
+    partialProducts.push({ multiplierDigit: bDigit, digits: paddedDigits, carries: paddedCarries });
+  }
+
+  return {
+    answerDigits: pStr.split('').map(Number),
+    aDigits, bDigits, digits: aLen,
+    multiDigitMultiplier: true, partialProducts, ansLen
+  };
+}
+
+app.get('/column-multiplication-api/question', (req, res) => {
+  const difficulty = req.query.difficulty || 'easy';
+  let a, m, data;
+  let attempts = 0;
+  if (difficulty === 'hard') {
+    const aRange = digitRange(2), bRange = digitRange(2);
+    do {
+      a = randomInt(Math.max(aRange.min, 10), aRange.max);
+      m = randomInt(Math.max(bRange.min, 10), bRange.max);
+      data = computeMulData(a, m);
+      attempts++;
+    } while (attempts < 30 && data.partialProducts.every(pp => pp.carries.every(c => c === null || c === 0)));
+  } else if (difficulty === 'extrahard') {
+    const coin = Math.random() < 0.5;
+    const aDig = coin ? 3 : 4, bDig = 3;
+    const aRange = digitRange(aDig), bRange = digitRange(bDig);
+    do {
+      a = randomInt(Math.max(aRange.min, Math.pow(10, aDig - 1)), aRange.max);
+      m = randomInt(Math.max(bRange.min, Math.pow(10, bDig - 1)), bRange.max);
+      data = computeMulData(a, m);
+      attempts++;
+    } while (attempts < 30 && data.partialProducts.every(pp => pp.carries.every(c => c === null || c === 0)));
+  } else {
+    const digitMap = { easy: 1, medium: 2 };
+    const numDigits = digitMap[difficulty] || 1;
+    const range = digitRange(numDigits);
+    do {
+      a = randomInt(Math.max(range.min, 1), range.max);
+      m = randomInt(2, 9);
+      data = computeMulData(a, m);
+      attempts++;
+    } while (data.carries.slice(1).every(c => c === 0) && attempts < 20);
+  }
+  res.json({
+    id: `cm-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+    a, b: m,
+    multiplier: m,
+    answer: a * m,
+    ...data,
+  });
+});
+
+app.post('/column-multiplication-api/check', (req, res) => {
+  const { a, b, userAnswer, userCarries, userPartialProducts } = req.body || {};
+  const numA = Number(a), numB = Number(b);
+  const correctAnswer = numA * numB;
+  const data = computeMulData(numA, numB);
+
+  if (data.multiDigitMultiplier && Array.isArray(userPartialProducts)) {
+    let answerCorrect = Array.isArray(userAnswer) &&
+      userAnswer.map(Number).join('') === data.answerDigits.join('');
+    let ppCorrect = true;
+    let carriesCorrect = true;
+    for (let pi = 0; pi < data.partialProducts.length; pi++) {
+      const up = Array.isArray(userPartialProducts[pi]) ? userPartialProducts[pi] : [];
+      const uc = Array.isArray(userCarries) && Array.isArray(userCarries[pi]) ? userCarries[pi] : [];
+      const cp = data.partialProducts[pi].digits;
+      const cc = data.partialProducts[pi].carries;
+      const userPpJoined = up.map(v => v === null || v === undefined || v === '' ? '_' : v).join('');
+      const correctPpJoined = cp.map(v => v === null ? '_' : v).join('');
+      const userCarrJoined = uc.map(v => v === null || v === undefined || v === '' ? '_' : v).join('');
+      const correctCarrJoined = cc.map(v => v === null ? '_' : v).join('');
+      if (userPpJoined !== correctPpJoined) ppCorrect = false;
+      if (userCarrJoined !== correctCarrJoined) carriesCorrect = false;
+    }
+    const correct = answerCorrect && ppCorrect && carriesCorrect;
+    return res.json({
+      correct,
+      correctAnswer,
+      answerDigits: data.answerDigits,
+      partialProducts: data.partialProducts,
+      multiDigitMultiplier: true,
+      message: correct ? 'Correct!'
+        : !ppCorrect ? 'Partial product digits wrong'
+        : !carriesCorrect ? 'Carries wrong'
+        : 'Answer wrong',
+    });
+  }
+
+  const answerCorrect = Array.isArray(userAnswer) &&
+    userAnswer.map(Number).join('') === data.answerDigits.join('');
+  const carriesCorrect = Array.isArray(userCarries) &&
+    userCarries.map(Number).join('') === data.carries.join('');
+  const correct = answerCorrect && carriesCorrect;
+  res.json({
+    correct,
+    correctAnswer,
+    answerDigits: data.answerDigits,
+    correctCarries: data.carries,
+    message: correct ? 'Correct!' : carriesCorrect ? 'Product digits wrong' : answerCorrect ? 'Carries wrong' : 'Try again',
+  });
+});
+
+/**
+ * COLUMN SUBTRACTION API
+ * ═══════════════════════════════════════════════════════════════════════════
+ * Vertical column subtraction: minuend − subtrahend (minuend >= subtrahend).
+ * Mirrors the column-addition UI: user fills borrows above + difference digits below.
+ * GET  returns numbers + precomputed borrows/digits
+ * POST validates difference digits and borrow digits
+ */
+
+function computeSubData(minuend, subtrahend) {
+  const diff = minuend - subtrahend;
+  const aStr = String(minuend);
+  const bStr = String(subtrahend);
+  const dStr = String(diff);
+  const len = Math.max(aStr.length, bStr.length, dStr.length);
+  // Pad ALL THREE rows (minuend, subtrahend, difference) to the SAME length
+  // so column i in every row aligns vertically above the answer digit at column i.
+  const aPad = aStr.padStart(len, ' ');
+  const bPad = bStr.padStart(len, ' ');
+  const dPad = dStr.padStart(len, ' ');
+  // convertedTop[i] = the top digit in column i AFTER all borrows have been worked through.
+  // Paper-style: child strikes out the original digit and writes the converted value above.
+  // e.g. for 23−18, convertedTop = [1, 13]  (tens "2" becomes "1" after lending; ones "3" becomes "13")
+  // String values like "13", "12", "11", "9" mean "this column now holds a 2-digit-or-cascaded value".
+  const workTop = aPad.split('').map(d => d === ' ' ? 0 : Number(d));
+  const convertedTop = new Array(len).fill(0);
+  for (let i = len - 1; i >= 0; i--) {
+    const db = parseInt(bPad[i]) || 0;
+    let top = workTop[i];
+    if (top < db) {
+      let k = i - 1;
+      while (k >= 0 && workTop[k] === 0) k--;
+      if (k >= 0) {
+        workTop[k] -= 1;
+        for (let j = k + 1; j < i; j++) workTop[j] = 9;
+        top += 10;
+      }
+    }
+    convertedTop[i] = top;
+  }
+  const answerDigits = dPad.split('').map(Number);
+  const aDigits = aPad.split('').map(d => d === ' ' ? null : Number(d));
+  const bDigits = bPad.split('').map(d => d === ' ' ? null : Number(d));
+  return { answerDigits, aDigits, bDigits, borrows: convertedTop, digits: len };
+}
+
+app.get('/column-subtraction-api/question', (req, res) => {
+  const difficulty = req.query.difficulty || 'easy';
+  // Subtraction needs at least 2 digits to have any borrows; bump easy to 2
+  const digitMap = { easy: 2, medium: 2, hard: 3, extrahard: 4 };
+  const numDigits = digitMap[difficulty] || 2;
+  const range = digitRange(numDigits);
+  let a, b, data;
+  let attempts = 0;
+  do {
+    a = randomInt(Math.max(range.min, 10), range.max);
+    b = randomInt(Math.max(range.min, 1), Math.max(a - 1, Math.max(range.min, 1)));
+    data = computeSubData(a, b);
+    attempts++;
+  } while (data.borrows.slice(0, -1).every(x => x === 0) && attempts < 20);
+  res.json({
+    id: `cs-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+    a, b,
+    answer: a - b,
+    ...data,
+  });
+});
+
+app.post('/column-subtraction-api/check', (req, res) => {
+  const { a, b, userAnswer, userBorrows } = req.body || {};
+  const numA = Number(a), numB = Number(b);
+  const correctAnswer = numA - numB;
+  const data = computeSubData(numA, numB);
+  const aPad = String(numA).padStart(data.answerDigits.length, ' ');
+  const answerCorrect = Array.isArray(userAnswer) &&
+    userAnswer.map(v => v === '' || v == null ? -1 : Number(v)).join('') === data.answerDigits.join('');
+  // For borrows: blank is OK when the converted top equals the original digit (no borrow happened)
+  const borrowsCorrect = Array.isArray(userBorrows) &&
+    userBorrows.every((raw, i) => {
+      const v = (raw === '' || raw == null) ? '' : String(raw).trim();
+      const expected = String(data.borrows[i]);
+      const originalDigit = data.aDigits[i];
+      const isOptional = originalDigit != null && expected === String(originalDigit);
+      if (isOptional) return v === '' || v === expected;
+      return v !== '' && v === expected;
+    });
+  const correct = answerCorrect && borrowsCorrect;
+  res.json({
+    correct,
+    correctAnswer,
+    answerDigits: data.answerDigits,
+    correctBorrows: data.borrows,
+    message: correct ? 'Correct!' : borrowsCorrect ? 'Difference digits wrong' : answerCorrect ? 'Borrow marks wrong' : 'Try again',
+  });
 });
 
 /**
@@ -2492,7 +2971,10 @@ app.post('/fractionadd-api/check', (req, res) => {
     // Hard: expect answer as mixed number {ansWhole, ansNum, ansDen}
     const mixed = toMixed(simplified.num, simplified.den);
     // User answer: convert to improper fraction for comparison
-    const userTotal = (Number(body.ansWhole) || 0) * (Number(body.ansDen) || 1) + (Number(body.ansNum) || 0);
+    const whole = Number(body.ansWhole) || 0;
+    const den = Number(body.ansDen) || 1;
+    const num = Number(body.ansNum) || 0;
+    const userTotal = whole < 0 ? (whole * den - num) : (whole * den + num);
     const userDen = Number(body.ansDen) || 1;
     const userSimp = simplifyFraction(userTotal, userDen);
     correct = userSimp.num === simplified.num && userSimp.den === simplified.den;
@@ -2876,7 +3358,7 @@ app.post('/surds-api/check', express.json(), (req, res) => {
   } else if (userParsed && cDen !== 1) {
     // User might type e.g. "2√3/3" — parse fraction form
     // Try parsing as "X/Y" where X is a surd expression
-    const fracMatch = (body.answer || '').replace(/\s+/g, '').match(/^\(?(.+?)\)?\/?(\d+)$/);
+    const fracMatch = (body.answer || '').replace(/\s+/g, '').match(/^\(?(.+?)\)?\/(\d+)$/);
     if (fracMatch) {
       const numParsed = parseSurd(fracMatch[1]);
       const userDen = parseInt(fracMatch[2]);
@@ -3166,7 +3648,7 @@ app.get('/sequences-api/question', (req, res) => {
   if (difficulty === 'easy') {
     // Arithmetic: a, a+d, a+2d, ... Find the nth term
     const a = seqRand(-10, 20);
-    const d = seqRand(-8, 8);
+    let d = seqRand(-8, 8);
     if (d === 0) d = seqPick([1, -1, 2, -2, 3, 5]);
     const n = seqRand(5, 20);
     const terms = [a, a + d, a + 2 * d, a + 3 * d];
@@ -3941,7 +4423,7 @@ app.get('/ineq-api/question', (req, res) => {
   }
   else {
     // Represent on number line: find integer solutions to compound inequality
-    const a = triRand(-3, 3); if (a === 0) a = 1;
+    let a = triRand(-3, 3); if (a === 0) a = 1;
     const b = triRand(-5, 5);
     const lo = triRand(-10, 0);
     const hi = triRand(1, 10);
@@ -4522,7 +5004,7 @@ app.get('/stats-api/question', (req, res) => {
       data = [modeVal, modeVal, modeVal];
       while (data.length < n) {
         const v = triRand(1, 25);
-        if (v !== modeVal || data.filter(x => x === v).length < 2) data.push(v);
+        if (v !== modeVal && data.filter(x => x === v).length < 2) data.push(v);
       }
       // Shuffle
       for (let i = data.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [data[i], data[j]] = [data[j], data[i]]; }
@@ -4604,7 +5086,7 @@ app.get('/matrix-api/question', (req, res) => {
   }
   else if (difficulty === 'medium') {
     // Scalar multiplication
-    const k = triRand(-3, 5); if (k === 0) k = 2;
+    let k = triRand(-3, 5); if (k === 0) k = 2;
     const A = [[triRand(-5,9), triRand(-5,9)], [triRand(-5,9), triRand(-5,9)]];
     const R = [[k*A[0][0], k*A[0][1]], [k*A[1][0], k*A[1][1]]];
     const fmtM = (m) => `[${m[0][0]},${m[0][1]};${m[1][0]},${m[1][1]}]`;
@@ -4675,7 +5157,7 @@ app.get('/vectors-api/question', (req, res) => {
   }
   else if (difficulty === 'medium') {
     // Scalar multiplication
-    const k = triRand(-3, 5); if (k === 0) k = 2;
+    let k = triRand(-3, 5); if (k === 0) k = 2;
     const a = [triRand(-6,6), triRand(-6,6)];
     const ans = [k*a[0], k*a[1]];
     const prompt = `a = (${a[0]}, ${a[1]}). Find ${k}a.`;
@@ -5039,7 +5521,7 @@ app.get('/bearings-api/question', (req, res) => {
   }
   else if (difficulty === 'hard') {
     // Find bearing given coordinates
-    const dx = triRand(-10, 10); const dy = triRand(-10, 10);
+    let dx = triRand(-10, 10); const dy = triRand(-10, 10);
     if (dx === 0 && dy === 0) dx = 1;
     // Bearing = angle measured clockwise from North
     let angle = Math.atan2(dx, dy) * 180 / Math.PI;
@@ -5181,6 +5663,7 @@ app.get('/diff-api/question', (req, res) => {
     res.json({ id, difficulty, type: 'power_rule', prompt, answer: deriv, display: String(deriv) });
   }
   else if (difficulty === 'medium') {
+<<<<<<< HEAD
     // Chain Rule: f(x) = (ax + b)^2
     const a = triRand(2, 4);
     const b = triRand(1, 5);
@@ -5189,6 +5672,17 @@ app.get('/diff-api/question', (req, res) => {
     const deriv = 2 * (a * x + b) * a;
     const prompt = `f(x) = (${a}x + ${b})². Find f'(${x}).`;
     res.json({ id, difficulty, type: 'chain_rule', prompt, answer: deriv, display: String(deriv) });
+=======
+    // Differentiate polynomial: ax² + bx + c
+    let a = triRand(-5, 5); const b = triRand(-8, 8); const c = triRand(-10, 10);
+    if (a === 0) a = 2;
+    const x = triRand(-3, 3);
+    const deriv = 2 * a * x + b;
+    const bStr = b >= 0 ? `+ ${b}` : `− ${Math.abs(b)}`;
+    const cStr = c >= 0 ? `+ ${c}` : `− ${Math.abs(c)}`;
+    const prompt = `f(x) = ${a}x² ${bStr}x ${cStr}. Find f'(${x}).`;
+    res.json({ id, difficulty, type: 'polynomial', prompt, answer: deriv, display: String(deriv) });
+>>>>>>> origin/main
   }
   else if (difficulty === 'hard') {
     // Product Rule: f(x) = (ax + b)(cx^2 + d)
@@ -8841,6 +9335,895 @@ app.get('/enhanced', (_req, res) => {
   res.sendFile(path.join(__dirname, '..', 'enhanced', 'index.html'));
 });
 
+// ═══════════════════════════════════════════════════════════════════════════
+// LEARNING TRANSFER CHALLENGES & PROGRESS SYNC API
+// ═══════════════════════════════════════════════════════════════════════════
+
+const DB_FILE = path.join(__dirname, 'in_memory_users_db.json');
+const inMemoryUserProfiles = {};
+
+function loadInMemoryProfiles() {
+  try {
+    if (fs.existsSync(DB_FILE)) {
+      const data = JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
+      for (const [username, profile] of Object.entries(data)) {
+        inMemoryUserProfiles[username] = {
+          ...profile,
+          save: async function() {
+            saveInMemoryProfiles();
+            return this;
+          }
+        };
+      }
+      console.log(`[auth] Loaded ${Object.keys(inMemoryUserProfiles).length} in-memory user profiles from persistent file fallback`);
+    }
+  } catch (err) {
+    console.error('[auth] Failed to load in-memory profiles:', err.message);
+  }
+}
+
+function saveInMemoryProfiles() {
+  try {
+    const cleaned = {};
+    for (const [username, profile] of Object.entries(inMemoryUserProfiles)) {
+      const clone = { ...profile };
+      delete clone.save;
+      cleaned[username] = clone;
+    }
+    fs.writeFileSync(DB_FILE, JSON.stringify(cleaned, null, 2), 'utf8');
+  } catch (err) {
+    console.error('[auth] Failed to save in-memory profiles:', err.message);
+  }
+}
+
+// Initialize on server start
+loadInMemoryProfiles();
+
+function getInMemoryUser(username) {
+  const lowercaseUsername = username.toLowerCase();
+  if (!inMemoryUserProfiles[lowercaseUsername]) {
+    inMemoryUserProfiles[lowercaseUsername] = {
+      username: lowercaseUsername,
+      completedTopics: [],
+      goldMastery: [],
+      coins: 0,
+      achievements: { completedCollections: [] },
+      pinnedBadges: ["", "", ""],
+      totalSolved: 0,
+      streak: 0,
+      lastActiveDate: "",
+      createdAt: new Date(),
+      milestones: [],
+      save: async function() {
+        saveInMemoryProfiles();
+        return this;
+      }
+    };
+    saveInMemoryProfiles();
+  }
+  return inMemoryUserProfiles[lowercaseUsername];
+}
+
+async function getUserFromReq(req) {
+  const authHeader = req.get('authorization') || '';
+  const m = /^Bearer\s+(.+)$/i.exec(authHeader);
+  if (!m) return null;
+  try {
+    const jwt = require('jsonwebtoken');
+    const JWT_SECRET = process.env.JWT_SECRET || 'tenali-dev-secret-change-me';
+    const payload = jwt.verify(m[1], JWT_SECRET);
+    if (payload && payload.username) {
+      const mongoose = require('mongoose');
+      if (mongoose.connection.readyState === 1) {
+        try {
+          const dbUser = await auth.User.findById(payload.sub || payload.username);
+          if (dbUser) return dbUser;
+        } catch (dbErr) {
+          console.error('[auth] Database query failed, falling back to in-memory profile:', dbErr.message);
+        }
+      }
+      return getInMemoryUser(payload.username);
+    }
+  } catch (e) {
+    console.error('[auth] getUserFromReq error:', e.message);
+  }
+  return null;
+}
+
+function compareAnswers(userStr, expected) {
+  if (expected === undefined || expected === null) return false;
+  
+  const cleanUser = String(userStr || '').replace(/\s+/g, '').replace(/[%₹$,]/g, '').replace(/−/g, '-');
+  
+  // If expected is a fraction string like "5/12"
+  if (typeof expected === 'string' && expected.includes('/')) {
+    const [eNum, eDen] = expected.split('/').map(Number);
+    const expectedVal = eNum / eDen;
+    
+    let userVal;
+    if (cleanUser.includes('/')) {
+      const [uNum, uDen] = cleanUser.split('/').map(Number);
+      userVal = uNum / uDen;
+    } else {
+      userVal = parseFloat(cleanUser);
+    }
+    
+    return !isNaN(userVal) && Math.abs(userVal - expectedVal) <= 0.01;
+  }
+  
+  // Standard numerical comparison
+  const expectedNum = parseFloat(expected);
+  const userNum = parseFloat(cleanUser);
+  if (isNaN(expectedNum) || isNaN(userNum)) {
+    // String fallback
+    return String(userStr).trim().toLowerCase() === String(expected).trim().toLowerCase();
+  }
+  
+  return Math.abs(userNum - expectedNum) <= 0.01;
+}
+
+// Helper to determine if a topic is completed
+function isStage3CompletedServer(topicKey, completedTopics) {
+  if (!completedTopics || !Array.isArray(completedTopics)) return false;
+  if (completedTopics.includes(topicKey)) return true;
+  return completedTopics.includes(`${topicKey}-easy`) &&
+         completedTopics.includes(`${topicKey}-medium`) &&
+         completedTopics.includes(`${topicKey}-hard`);
+}
+
+function getTopicBadgeLevelServer(topicKey, completedTopics) {
+  if (!completedTopics || !Array.isArray(completedTopics)) return 'locked';
+  const easy = completedTopics.includes(`${topicKey}-easy`);
+  const medium = completedTopics.includes(`${topicKey}-medium`);
+  const hard = completedTopics.includes(`${topicKey}-hard`);
+  const started = completedTopics.includes(`${topicKey}-started`);
+
+  if (easy && medium && hard) return 'gold';
+  if (easy && medium) return 'silver';
+  if (easy) return 'bronze';
+  if (started) return 'blue';
+  return 'locked';
+}
+
+// Compute daily active active practice streak
+function checkDailyStreak(user) {
+  const now = new Date();
+  const istTime = new Date(now.getTime() + (5.5 * 60 * 60 * 1000));
+  const todayStr = istTime.toISOString().split('T')[0];
+
+  if (!user.streak || user.streak < 1) {
+    user.streak = 1;
+  }
+
+  if (!user.lastActiveDate) {
+    user.streak = 1;
+  } else if (user.lastActiveDate !== todayStr) {
+    const lastDate = new Date(user.lastActiveDate);
+    const diffTime = Math.abs(new Date(todayStr) - new Date(user.lastActiveDate));
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    if (diffDays === 1) {
+      user.streak += 1;
+    } else if (diffDays > 1) {
+      user.streak = 1;
+    }
+  }
+  user.lastActiveDate = todayStr;
+}
+
+// Evaluate collections completion and award rewards
+function evaluateCollections(user) {
+  const newlyCompleted = [];
+  for (const col of collections) {
+    const isCompleted = col.topics.every(topicKey => isStage3CompletedServer(topicKey, user.completedTopics));
+    if (isCompleted) {
+      if (!user.achievements) {
+        user.achievements = { completedCollections: [] };
+      }
+      if (!user.achievements.completedCollections) {
+        user.achievements.completedCollections = [];
+      }
+      const alreadySaved = user.achievements.completedCollections.some(c => c.collectionId === col.collectionId);
+      if (!alreadySaved) {
+        user.achievements.completedCollections.push({
+          collectionId: col.collectionId,
+          completedAt: new Date()
+        });
+        user.coins = (user.coins || 0) + col.coinReward;
+        newlyCompleted.push(col.collectionId);
+      }
+    }
+  }
+  return newlyCompleted;
+}
+
+// Progress sync endpoints
+app.get('/api/progress', async (req, res) => {
+  try {
+    const user = await getUserFromReq(req);
+    if (!user) {
+      return res.json({ completedTopics: [], goldMastery: [], coins: 0, streak: 0, totalSolved: 0 });
+    }
+    // Do not check daily streak on GET (which runs automatically on page load).
+    // We only update/compute active practice streak on POST progress (active solving).
+    res.json({
+      completedTopics: user.completedTopics || [],
+      goldMastery: user.goldMastery || [],
+      coins: user.coins || 0,
+      streak: user.streak || 0,
+      totalSolved: user.totalSolved || 0
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Helper to populate and synchronize user milestones retroactively
+function ensureUserMilestones(user) {
+  if (!user.milestones) {
+    user.milestones = [];
+  }
+  
+  const hasJoined = user.milestones.some(m => m.event === 'Joined Tenali');
+  if (!hasJoined) {
+    user.milestones.push({
+      event: 'Joined Tenali',
+      date: user.createdAt || new Date(),
+      type: 'system'
+    });
+  }
+
+  if (user.achievements && user.achievements.completedCollections) {
+    user.achievements.completedCollections.forEach(c => {
+      const col = collections.find(colVal => colVal.collectionId === c.collectionId);
+      const eventName = `Mastered ${col ? col.name : c.collectionId}`;
+      const hasCol = user.milestones.some(m => m.event === eventName);
+      if (!hasCol) {
+        user.milestones.push({
+          event: eventName,
+          date: c.completedAt || new Date(),
+          type: 'collection',
+          badgeType: col ? col.badgeType : 'trophy'
+        });
+      }
+    });
+  }
+
+  if (user.completedTopics) {
+    user.completedTopics.forEach(topicKey => {
+      let suffix = '';
+      let displaySuffix = '';
+      if (topicKey.endsWith('-started')) {
+        suffix = '-started';
+        displaySuffix = 'Started';
+      } else if (topicKey.endsWith('-easy')) {
+        suffix = '-easy';
+        displaySuffix = 'Unlocked Bronze in';
+      } else if (topicKey.endsWith('-medium')) {
+        suffix = '-medium';
+        displaySuffix = 'Unlocked Silver in';
+      } else if (topicKey.endsWith('-hard') || topicKey.endsWith('-gold')) {
+        suffix = topicKey.endsWith('-hard') ? '-hard' : '-gold';
+        displaySuffix = 'Unlocked Gold in';
+      }
+      
+      if (suffix) {
+        const baseTopic = topicKey.slice(0, -suffix.length);
+        const displayName = baseTopic.charAt(0).toUpperCase() + baseTopic.slice(1);
+        const eventName = `${displaySuffix} ${displayName}`;
+        const hasTopic = user.milestones.some(m => m.event === eventName);
+        if (!hasTopic) {
+          user.milestones.push({
+            event: eventName,
+            date: user.createdAt || new Date(),
+            type: 'topic',
+            badgeType: 'topic'
+          });
+        }
+      }
+    });
+  }
+
+  const streakMilestones = [3, 7, 15, 30];
+  streakMilestones.forEach(days => {
+    if ((user.streak || 0) >= days) {
+      const eventName = `Reached a ${days}-Day Streak!`;
+      const hasStreak = user.milestones.some(m => m.event === eventName);
+      if (!hasStreak) {
+        user.milestones.push({
+          event: eventName,
+          date: user.createdAt || new Date(),
+          type: 'streak',
+          badgeType: `streak_${days}`
+        });
+      }
+    }
+  });
+}
+
+app.post('/api/progress', express.json(), async (req, res) => {
+  try {
+    const user = await getUserFromReq(req);
+    if (!user) {
+      return res.json({ success: true, guest: true });
+    }
+    const { completedTopics, goldMastery, coins, totalSolved } = req.body;
+    
+    const oldCompleted = user.completedTopics || [];
+    const oldStreak = user.streak || 0;
+    
+    if (completedTopics) user.completedTopics = completedTopics;
+    if (goldMastery) user.goldMastery = goldMastery;
+    if (coins !== undefined) user.coins = coins;
+    if (totalSolved !== undefined) user.totalSolved = totalSolved;
+    
+    checkDailyStreak(user);
+    const newlyCompleted = evaluateCollections(user);
+    
+    // Manage journey milestones
+    ensureUserMilestones(user);
+    
+    const newlyAddedTopics = (user.completedTopics || []).filter(t => !oldCompleted.includes(t));
+    newlyAddedTopics.forEach(topicKey => {
+      let suffix = '';
+      let displaySuffix = '';
+      if (topicKey.endsWith('-started')) {
+        suffix = '-started';
+        displaySuffix = 'Started';
+      } else if (topicKey.endsWith('-easy')) {
+        suffix = '-easy';
+        displaySuffix = 'Unlocked Bronze in';
+      } else if (topicKey.endsWith('-medium')) {
+        suffix = '-medium';
+        displaySuffix = 'Unlocked Silver in';
+      } else if (topicKey.endsWith('-hard') || topicKey.endsWith('-gold')) {
+        suffix = topicKey.endsWith('-hard') ? '-hard' : '-gold';
+        displaySuffix = 'Unlocked Gold in';
+      }
+      
+      if (suffix) {
+        const baseTopic = topicKey.slice(0, -suffix.length);
+        const displayName = baseTopic.charAt(0).toUpperCase() + baseTopic.slice(1);
+        const eventName = `${displaySuffix} ${displayName}`;
+        const hasTopic = user.milestones.some(m => m.event === eventName);
+        if (!hasTopic) {
+          user.milestones.push({
+            event: eventName,
+            date: new Date(),
+            type: 'topic',
+            badgeType: 'topic'
+          });
+        }
+      }
+    });
+
+    newlyCompleted.forEach(colId => {
+      const col = collections.find(colVal => colVal.collectionId === colId);
+      const eventName = `Mastered ${col ? col.name : colId}`;
+      const hasCol = user.milestones.some(m => m.event === eventName);
+      if (!hasCol) {
+        user.milestones.push({
+          event: eventName,
+          date: new Date(),
+          type: 'collection',
+          badgeType: col ? col.badgeType : 'trophy'
+        });
+      }
+    });
+
+    const streakMilestones = [3, 7, 15, 30];
+    streakMilestones.forEach(days => {
+      if (oldStreak < days && (user.streak || 0) >= days) {
+        const eventName = `Reached a ${days}-Day Streak!`;
+        const hasStreak = user.milestones.some(m => m.event === eventName);
+        if (!hasStreak) {
+          user.milestones.push({
+            event: eventName,
+            date: new Date(),
+            type: 'streak',
+            badgeType: `streak_${days}`
+          });
+        }
+      }
+    });
+
+    await user.save();
+    
+    res.json({
+      success: true,
+      completedTopics: user.completedTopics,
+      goldMastery: user.goldMastery,
+      coins: user.coins,
+      streak: user.streak || 0,
+      totalSolved: user.totalSolved || 0,
+      newlyCompleted
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET Collections progress
+app.get('/api/collections/progress', async (req, res) => {
+  try {
+    const user = await getUserFromReq(req);
+    if (!user) {
+      return res.status(401).json({ error: 'unauthorized' });
+    }
+    const completedTopics = user.completedTopics || [];
+    const progress = collections.map(col => {
+      const topicsProgress = col.topics.map(topicKey => {
+        return {
+          topicKey,
+          completed: isStage3CompletedServer(topicKey, completedTopics)
+        };
+      });
+      
+      let totalWeight = 0;
+      col.topics.forEach(topicKey => {
+        const level = getTopicBadgeLevelServer(topicKey, completedTopics);
+        if (level === 'gold') totalWeight += 1.0;
+        else if (level === 'silver') totalWeight += 0.6;
+        else if (level === 'bronze') totalWeight += 0.3;
+        else if (level === 'blue') totalWeight += 0.1;
+      });
+
+      const rawCompletedCount = Math.round(totalWeight * 10) / 10;
+      const completedCount = Number(rawCompletedCount.toFixed(1));
+      const percentage = Math.min(100, Math.round((totalWeight / col.topics.length) * 100));
+      
+      const completedLog = user.achievements && user.achievements.completedCollections
+        ? user.achievements.completedCollections.find(c => c.collectionId === col.collectionId)
+        : null;
+      
+      const nextIncomplete = topicsProgress.find(t => !t.completed);
+      
+      return {
+        collectionId: col.collectionId,
+        name: col.name,
+        description: col.description,
+        totalTopics: col.topics.length,
+        completedCount,
+        percentage,
+        completed: rawCompletedCount === col.topics.length,
+        topics: topicsProgress,
+        nextTopic: nextIncomplete ? nextIncomplete.topicKey : null,
+        coinReward: col.coinReward,
+        badgeType: col.badgeType,
+        completedAt: completedLog ? completedLog.completedAt : null
+      };
+    });
+    res.json({ collections: progress });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// POST pin achievement badge
+app.post('/api/profile/pin', express.json(), async (req, res) => {
+  try {
+    const user = await getUserFromReq(req);
+    if (!user) {
+      return res.status(401).json({ error: 'unauthorized' });
+    }
+    const { badgeId, slotIndex } = req.body;
+    if (slotIndex === undefined || slotIndex < 0 || slotIndex > 2) {
+      return res.status(400).json({ error: 'Invalid slot index' });
+    }
+    
+    let isUnlocked = false;
+    if (badgeId === "") {
+      isUnlocked = true;
+    } else {
+      const isCollection = collections.some(c => c.collectionId === badgeId);
+      if (isCollection) {
+        isUnlocked = user.achievements && user.achievements.completedCollections
+          ? user.achievements.completedCollections.some(c => c.collectionId === badgeId)
+          : false;
+      } else if (badgeId.startsWith('streak_')) {
+        const days = parseInt(badgeId.split('_')[1], 10);
+        isUnlocked = (user.streak || 0) >= days;
+      } else {
+        isUnlocked = getTopicBadgeLevelServer(badgeId, user.completedTopics) !== 'locked';
+      }
+    }
+    
+    if (!isUnlocked) {
+      return res.status(403).json({ error: 'Badge is locked' });
+    }
+    
+    let pins = user.pinnedBadges || [];
+    while (pins.length < 3) pins.push("");
+    
+    if (badgeId !== "") {
+      pins = pins.map((p, i) => (p === badgeId && i !== slotIndex) ? "" : p);
+    }
+    
+    pins[slotIndex] = badgeId;
+    user.pinnedBadges = pins;
+    await user.save();
+    
+    res.json({ success: true, pinnedBadges: user.pinnedBadges });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET profile showcase details
+app.get('/api/profile/showcase', async (req, res) => {
+  try {
+    const user = await getUserFromReq(req);
+    if (!user) {
+      return res.status(401).json({ error: 'unauthorized' });
+    }
+    
+    const completedTopics = user.completedTopics || [];
+    const uniqueMastered = new Set();
+    completedTopics.forEach(t => {
+      const base = t.replace(/-(easy|medium|hard|started|adaptive|extrahard)$/, '');
+      if (getTopicBadgeLevelServer(base, completedTopics) !== 'locked') {
+        uniqueMastered.add(base);
+      }
+    });
+    
+    let pins = user.pinnedBadges || ["", "", ""];
+    while (pins.length < 3) pins.push("");
+    
+    const pinnedDetails = pins.map(badgeId => {
+      if (!badgeId) return null;
+      
+      const col = collections.find(c => c.collectionId === badgeId);
+      if (col) {
+        return {
+          badgeId,
+          name: col.name,
+          type: 'collection',
+          badgeType: col.badgeType,
+          description: col.description
+        };
+      }
+      
+      if (badgeId.startsWith('streak_')) {
+        const days = badgeId.split('_')[1];
+        return {
+          badgeId,
+          name: `${days}-Day Streak`,
+          type: 'streak',
+          badgeType: badgeId,
+          description: `Practiced for ${days} consecutive days!`
+        };
+      }
+      
+      return {
+        badgeId,
+        name: badgeId.charAt(0).toUpperCase() + badgeId.slice(1),
+        type: 'topic',
+        badgeType: 'topic'
+      };
+    });
+    
+    // Ensure all milestones are retroactively populated/synchronized
+    ensureUserMilestones(user);
+    
+    const timeline = (user.milestones || []).map(m => ({
+      event: m.event,
+      date: m.date,
+      type: m.type || 'topic',
+      badgeType: m.badgeType || 'topic'
+    }));
+    
+    timeline.sort((a, b) => new Date(b.date) - new Date(a.date));
+    
+    res.json({
+      username: user.username,
+      streak: user.streak || 0,
+      totalSolved: user.totalSolved || 0,
+      masteryCount: uniqueMastered.size,
+      pinnedBadges: pinnedDetails,
+      unlockedBadgesCount: uniqueMastered.size + (user.achievements && user.achievements.completedCollections ? user.achievements.completedCollections.length : 0),
+      timeline
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Transfer challenge API endpoints
+function generateGenericTransfer(topic, originalQuestion) {
+  const cleanPrompt = String(originalQuestion.prompt || '')
+    .trim()
+    .replace(/^(Calculate|Evaluate|Solve|Find|What is|Compute|Value of)\s*:?/i, '')
+    .trim();
+
+  const mathExpr = cleanPrompt || 'the given calculation';
+
+  const contexts = [
+    {
+      key: 'shopping',
+      name: 'Shopping',
+      icon: '🛒',
+      templates: [
+        `Arjun is shopping at a local store. The cashier's terminal displays the transaction balance: '${mathExpr}'. What is the computed total?`,
+        `Ananya is checking out items from her online shopping cart. The payment gateway requires verifying the transaction key: '${mathExpr}'. Solve it to complete the purchase.`,
+        `Ravi gets a discount coupon at a store. The cashier tells him the final bill amount depends on solving: '${mathExpr}'. Find the final price.`
+      ]
+    },
+    {
+      key: 'sports',
+      name: 'Sports',
+      icon: '🏏',
+      templates: [
+        `During a cricket match, the run-rate analyzer software evaluates the team's projection equation: '${mathExpr}'. What is the correct value?`,
+        `A coach is comparing running times and performance metrics. The comparison formula evaluates to: '${mathExpr}'. Compute the final value.`
+      ]
+    },
+    {
+      key: 'cooking',
+      name: 'Cooking',
+      icon: '🍕',
+      templates: [
+        `A pastry chef is scaling up recipe measurements for a large banquet. The ratio equation is written as: '${mathExpr}'. Find the scaled value.`,
+        `Priya is adjusting spice levels for a pizza recipe. She needs to solve the following proportion calculation: '${mathExpr}'. What is the resulting quantity?`
+      ]
+    },
+    {
+      key: 'travel',
+      name: 'Travel',
+      icon: '🚂',
+      templates: [
+        `Priya is traveling on an express train. The digital route information system displays the estimated speed calculation: '${mathExpr}'. Calculate the speed value.`,
+        `An outdoor guide maps the route distances using a dynamic scale. The trekking formula reduces to: '${mathExpr}'. Find the distance.`
+      ]
+    },
+    {
+      key: 'pocketmoney',
+      name: 'Pocket Money',
+      icon: '🪙',
+      templates: [
+        `Meena is planning her savings and weekly pocket money budget. She writes down the budget expression: '${mathExpr}'. What is the final amount?`,
+        `Rohan is counting coins to purchase a science book. The price formula evaluates to: '${mathExpr}'. What is the final cost of the book?`
+      ]
+    }
+  ];
+
+  const selectedContext = contexts[Math.floor(Math.random() * contexts.length)];
+  const selectedTemplate = selectedContext.templates[Math.floor(Math.random() * selectedContext.templates.length)];
+
+  return {
+    scenarioId: `generic-transfer-${topic}-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+    context: selectedContext.key,
+    prompt: selectedTemplate,
+    hints: [
+      `This challenge requires you to solve the underlying math problem: '${mathExpr}'.`,
+      `Apply the same algebraic or arithmetic methods you used in Stage 3 Practice.`,
+      `Solve the calculation step-by-step to find the correct value.`
+    ],
+    variables: {
+      originalQuestion,
+      topic
+    },
+    icon: selectedContext.icon,
+    transferLevel: 2,
+    topic: topic
+  };
+}
+
+function buildSubCheckBody(topic, originalQuestion, userAnswer) {
+  const userStr = String(userAnswer || '').trim();
+  if (['addition', 'basicarith', 'quadratic', 'sqrt', 'multiply'].includes(topic)) {
+    return {
+      ...originalQuestion,
+      answer: userStr,
+      userAnswer: userStr
+    };
+  }
+  if (topic === 'vocab') {
+    return {
+      ...originalQuestion,
+      answerOption: userStr,
+      userAnswer: userStr
+    };
+  }
+  return {
+    ...originalQuestion,
+    userAnswer: userStr
+  };
+}
+
+// Transfer challenge API endpoints
+function generateGenericExplanation(topic, originalQuestion, expectedAnswer) {
+  const prompt = originalQuestion.prompt || '';
+  switch (topic) {
+    case 'addition': {
+      const a = originalQuestion.a !== undefined ? originalQuestion.a : '';
+      const b = originalQuestion.b !== undefined ? originalQuestion.b : '';
+      return `Step 1: Identify the numbers to add → ${a} and ${b}\n` +
+             `Step 2: Align and compute the sum → ${a} + ${b} = ${expectedAnswer}`;
+    }
+    case 'basicarith': {
+      return `Step 1: Parse the arithmetic expression → ${prompt}\n` +
+             `Step 2: Solve the calculation step-by-step → ${expectedAnswer}`;
+    }
+    case 'decimals': {
+      return `Step 1: Align the decimal numbers → ${prompt}\n` +
+             `Step 2: Perform the arithmetic operation → ${expectedAnswer}`;
+    }
+    case 'sqrt': {
+      const q = originalQuestion.q !== undefined ? originalQuestion.q : '';
+      return `Step 1: Find the square root approximation → √${q}\n` +
+             `Step 2: Round to the nearest integer → ${expectedAnswer}`;
+    }
+    case 'quadratic': {
+      const a = originalQuestion.a !== undefined ? originalQuestion.a : '';
+      const b = originalQuestion.b !== undefined ? originalQuestion.b : '';
+      const c = originalQuestion.c !== undefined ? originalQuestion.c : '';
+      const x = originalQuestion.x !== undefined ? originalQuestion.x : '';
+      return `Step 1: Identify the quadratic expression → y = ${a}x² + (${b})x + (${c})\n` +
+             `Step 2: Substitute x = ${x} → ${a}(${x})² + (${b})(${x}) + (${c})\n` +
+             `Step 3: Evaluate → ${expectedAnswer}`;
+    }
+    default: {
+      return `Step 1: Parse the problem statement → ${prompt}\n` +
+             `Step 2: Solve step-by-step using standard rules → ${expectedAnswer}`;
+    }
+  }
+}
+
+// Transfer challenge API endpoints
+app.get('/transfer-api/question', async (req, res) => {
+  try {
+    const topic = String(req.query.topic || '').trim().toLowerCase();
+    if (!topic) {
+      return res.status(400).json({ error: 'Topic parameter is required' });
+    }
+
+    const scenarios = transferScenarios[topic];
+    if (!scenarios || !scenarios.length) {
+      // Dynamic fallback
+      try {
+        const response = await fetch(`http://localhost:${PORT}/${topic}-api/question?difficulty=medium`);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch standard question for topic: ${topic}. Status: ${response.status}`);
+        }
+        const originalQuestion = await response.json();
+        if (!originalQuestion || !originalQuestion.prompt) {
+          throw new Error(`Standard question endpoint for ${topic} returned malformed data.`);
+        }
+
+        const generated = generateGenericTransfer(topic, originalQuestion);
+        return res.json(generated);
+      } catch (fetchErr) {
+        console.error(`Generic transfer fallback failed to fetch for topic '${topic}':`, fetchErr);
+        return res.status(404).json({ error: `No transfer scenarios available for topic: ${topic}. Fallback failed: ${fetchErr.message}` });
+      }
+    }
+
+    // Pick a random scenario
+    const scenario = scenarios[Math.floor(Math.random() * scenarios.length)];
+    const generated = scenario.generate();
+    
+    res.json({
+      scenarioId: generated.scenarioId,
+      context: generated.context,
+      prompt: generated.prompt,
+      hints: generated.hints,
+      variables: generated.variables,
+      icon: scenario.icon,
+      transferLevel: scenario.transferLevel,
+      topic: topic
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.post('/transfer-api/check', express.json(), async (req, res) => {
+  try {
+    const { topic, scenarioId, variables, userAnswer, hintsUsed, timeSpentSeconds } = req.body;
+    if (!topic || !scenarioId || !variables) {
+      return res.status(400).json({ error: 'Missing required parameters (topic, scenarioId, variables)' });
+    }
+
+    let correct = false;
+    let expectedAnswer = '';
+    let explanation = '';
+    let transferMapping = '';
+    let context = 'generic';
+
+    if (scenarioId.startsWith('generic-transfer-')) {
+      const { originalQuestion, topic: varTopic } = variables;
+      if (!originalQuestion || !varTopic) {
+        return res.status(400).json({ error: 'Malformed generic transfer variables' });
+      }
+
+      expectedAnswer = originalQuestion.answer !== undefined ? originalQuestion.answer : '';
+      explanation = generateGenericExplanation(varTopic, originalQuestion, expectedAnswer);
+      transferMapping = `This real-world challenge tests the concept of ${varTopic.toUpperCase()} applied to a practical scenario.`;
+      context = 'generic';
+
+      try {
+        const checkHeaders = { 'Content-Type': 'application/json' };
+        if (req.headers.authorization) {
+          checkHeaders['Authorization'] = req.headers.authorization;
+        }
+
+        const checkResponse = await fetch(`http://localhost:${PORT}/${varTopic}-api/check`, {
+          method: 'POST',
+          headers: checkHeaders,
+          body: JSON.stringify(buildSubCheckBody(varTopic, originalQuestion, userAnswer))
+        });
+
+        if (checkResponse.ok) {
+          const checkResult = await checkResponse.json();
+          correct = checkResult.correct;
+          expectedAnswer = checkResult.display || checkResult.correctAnswer || checkResult.answer || expectedAnswer;
+          
+          const hasRealExplanation = checkResult.explanation && checkResult.explanation.includes('Step');
+          explanation = hasRealExplanation ? checkResult.explanation : generateGenericExplanation(varTopic, originalQuestion, expectedAnswer);
+        } else {
+          correct = compareAnswers(userAnswer, expectedAnswer);
+          explanation = generateGenericExplanation(varTopic, originalQuestion, expectedAnswer);
+        }
+      } catch (checkErr) {
+        console.error(`Generic check call failed for topic ${varTopic}, falling back to compareAnswers:`, checkErr);
+        correct = compareAnswers(userAnswer, expectedAnswer);
+        explanation = generateGenericExplanation(varTopic, originalQuestion, expectedAnswer);
+      }
+    } else {
+      const scenarios = transferScenarios[topic];
+      if (!scenarios) {
+        return res.status(404).json({ error: `Topic not found: ${topic}` });
+      }
+
+      const scenario = scenarios.find(s => s.scenarioId === scenarioId);
+      if (!scenario) {
+        return res.status(404).json({ error: `Scenario not found: ${scenarioId}` });
+      }
+
+      expectedAnswer = scenario.evaluate(variables);
+      correct = compareAnswers(userAnswer, expectedAnswer);
+      explanation = scenario.explanation(variables);
+      transferMapping = scenario.transferMapping;
+      context = scenario.context;
+    }
+
+    let goldMasteryEarned = false;
+    const user = await getUserFromReq(req);
+    
+    // Log attempt if user is authenticated and DB is connected
+    if (user && auth.StudentAttemptLog) {
+      const promptText = scenarioId.startsWith('generic-transfer-') 
+        ? `Generic transfer challenge prompt for ${topic}`
+        : (transferScenarios[topic]?.find(s => s.scenarioId === scenarioId)?.generate()?.prompt || 'Transfer Challenge');
+
+      await auth.StudentAttemptLog.create({
+        studentId: user._id,
+        topicKey: topic,
+        questionPrompt: promptText,
+        userInput: String(userAnswer || ''),
+        correct,
+        hintsClickedCount: hintsUsed || 0,
+        timeSpentSeconds: timeSpentSeconds || 0,
+        stageNumber: 3,
+        challengeType: 'transfer',
+        transferScenarioId: scenarioId,
+        transferContext: context
+      });
+
+
+    }
+
+    res.json({
+      correct,
+      answer: expectedAnswer,
+      explanation,
+      transferMapping,
+      goldMasteryEarned
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 /**
  * LINEAR ALGEBRA QUIZ - Question/Check endpoints
  * ═══════════════════════════════════════════════════════════════════════════
@@ -10235,6 +11618,10 @@ app.get(/.*/, (_req, res) => {
  * Listen on all interfaces (0.0.0.0) at the configured port
  * 0.0.0.0 makes the server accessible from any network interface/IP address
  */
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Tenali app running on http://0.0.0.0:${PORT}`);
-});
+if (require.main === module) {
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Tenali app running on http://0.0.0.0:${PORT}`);
+  });
+}
+
+module.exports = app;
