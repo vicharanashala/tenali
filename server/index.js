@@ -68,8 +68,11 @@ app.use(express.static(clientDistPath));
 // serves; only the auth endpoints will return 503.
 const auth = require('./auth');
 const progress = require('./progress');
+const conceptSession = require('./conceptSession');
+
 app.use('/api/auth', auth.router);
 app.use('/api/progress', progress.router);
+app.use('/api/concept-session', conceptSession);
 auth.seedUsers().catch(() => {});  // always populate in-memory fallback
 auth.connectMongo()
   .then(() => auth.seedUsers())
@@ -5170,26 +5173,53 @@ app.get('/diff-api/question', (req, res) => {
   const id = Date.now();
 
   if (difficulty === 'easy') {
-    // Differentiate ax^n → anx^(n-1), evaluate at a point
-    const a = triRand(1, 6); const n = triRand(2, 5);
-    const x = triRand(1, 5);
+    // Power Rule: f(x) = ax^n
+    const a = triRand(2, 6); const n = triRand(2, 5);
+    const x = triRand(1, 3);
     const deriv = a * n * Math.pow(x, n - 1);
     const prompt = `f(x) = ${a}x${sup(n)}. Find f'(${x}).`;
     res.json({ id, difficulty, type: 'power_rule', prompt, answer: deriv, display: String(deriv) });
   }
   else if (difficulty === 'medium') {
-    // Differentiate polynomial: ax² + bx + c
-    const a = triRand(-5, 5); const b = triRand(-8, 8); const c = triRand(-10, 10);
-    if (a === 0) a = 2;
-    const x = triRand(-3, 3);
-    const deriv = 2 * a * x + b;
-    const bStr = b >= 0 ? `+ ${b}` : `− ${Math.abs(b)}`;
-    const cStr = c >= 0 ? `+ ${c}` : `− ${Math.abs(c)}`;
-    const prompt = `f(x) = ${a}x² ${bStr}x ${cStr}. Find f'(${x}).`;
-    res.json({ id, difficulty, type: 'polynomial', prompt, answer: deriv, display: String(deriv) });
+    // Chain Rule: f(x) = (ax + b)^2
+    const a = triRand(2, 4);
+    const b = triRand(1, 5);
+    const x = triRand(1, 2);
+    // f'(x) = 2 * (ax + b) * a
+    const deriv = 2 * (a * x + b) * a;
+    const prompt = `f(x) = (${a}x + ${b})². Find f'(${x}).`;
+    res.json({ id, difficulty, type: 'chain_rule', prompt, answer: deriv, display: String(deriv) });
   }
   else if (difficulty === 'hard') {
-    // Find gradient at a point, or find x where gradient = 0 (turning point)
+    // Product Rule: f(x) = (ax + b)(cx^2 + d)
+    const a = triRand(2, 4);
+    const b = triRand(1, 4);
+    const c = triRand(2, 4);
+    const d = triRand(1, 4);
+    const x = 1;
+    // u = ax + b   -> u' = a
+    // v = cx^2 + d -> v' = 2cx
+    // f'(x) = u'v + uv' = a*(cx^2 + d) + (ax + b)*(2cx)
+    const deriv = a * (c * Math.pow(x, 2) + d) + (a * x + b) * (2 * c * x);
+    const prompt = `f(x) = (${a}x + ${b})(${c}x² + ${d}). Find f'(1).`;
+    res.json({ id, difficulty, type: 'product_rule', prompt, answer: deriv, display: String(deriv) });
+  }
+  else if (difficulty === 'hardest') {
+    // Mixed: Chain + Product. f(x) = (ax + b)^2 (cx + d)
+    const a = triRand(1, 3);
+    const b = triRand(1, 3);
+    const c = triRand(1, 3);
+    const d = triRand(1, 3);
+    const x = 1;
+    // u = (ax+b)^2 -> u' = 2a(ax+b)
+    // v = cx+d     -> v' = c
+    // f'(x) = u'v + uv' = 2a(ax+b)(cx+d) + (ax+b)^2 * c
+    const deriv = 2 * a * (a * x + b) * (c * x + d) + Math.pow(a * x + b, 2) * c;
+    const prompt = `f(x) = (${a}x + ${b})²(${c}x + ${d}). Find f'(1).`;
+    res.json({ id, difficulty, type: 'mixed_rules', prompt, answer: deriv, display: String(deriv) });
+  }
+  else if (difficulty === 'master') {
+    // Turning points
     const a = triRand(1, 4); const b = triRand(-10, 10);
     const c = triRand(-10, 10);
     // f(x) = ax² + bx + c, f'(x) = 2ax + b = 0 → x = -b/(2a)
@@ -5203,7 +5233,7 @@ app.get('/diff-api/question', (req, res) => {
     res.json({ id, difficulty, type: 'turning_point', prompt, ansNum, ansDen, display });
   }
   else {
-    // Find whether turning point is max or min, and its y-value
+    // Grandmaster: Min/max values
     const a = triPick([1, -1, 2, -2, 3]);
     const b = triRand(-8, 8);
     const c = triRand(-10, 10);

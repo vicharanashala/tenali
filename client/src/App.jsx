@@ -72,6 +72,7 @@ import VisualMathLabRedux, {
 import CoordinateGrid from './components/CoordinateGrid';
 import LanguageDashboard from './language/LanguageDashboard'
 import { VOCAB_CORPUS } from './vocabCorpus'
+import DiffConceptApp from './lib/diff-concept/DiffConceptApp.jsx';
 
 // API base URL from environment variables (Vite)
 const API = import.meta.env.VITE_API_BASE_URL || '';
@@ -41129,6 +41130,7 @@ function App() {
     polyfactor: PolyFactorApp,     // Polynomial factoring
     primefactor: PrimeFactorApp,   // Prime factorization
     qformula: QFormulaApp,         // Quadratic formula
+    diffconcept: DiffConceptApp,   // Differentiation Concept Playground
     simul: SimulApp,               // Simultaneous equations
     funceval: FuncEvalApp,         // Function evaluation
     lineq: LineEqApp,              // Line equation
@@ -41369,6 +41371,7 @@ function Home({ onSelect, isGoalSelection = false, onBack }) {
     { key: 'conics', name: 'Conic Sections', subtitle: 'Circle, parabola, ellipse, hyperbola', color: 'purple' },
     { key: 'coordgeom', name: 'Coord. Geometry', subtitle: 'Midpoint, distance, gradient', color: 'blue' },
     { key: 'decimals', name: 'Decimals', subtitle: 'Add, subtract, multiply, divide', color: 'blue' },
+    { key: 'diffconcept', name: 'Differentiation Concept', subtitle: 'Concept Playground (First Principles)', color: 'blue' },
     { key: 'diff', name: 'Differentiation', subtitle: 'Power rule, turning points', color: 'purple' },
     { key: 'diffeq', name: 'Differential Eq.', subtitle: 'Order, degree, solve DEs', color: 'green' },
     { key: 'dotprod', name: 'Dot Products', subtitle: 'Vectors, matrices, fill blanks', color: 'blue' },
