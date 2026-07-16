@@ -102,42 +102,48 @@ const CJ_STOPS = [
         return { prompt: `${a} cars are parked outside the school. ${b} more cars arrive. How many cars are there now?`,
           parts: [{ unit: 'cars', type: 'int', answer: ans, display: String(ans) }],
           hint: `Start at ${a} and count up ${b} more, one at a time.`,
-          explanation: `${a} + ${b} = ${ans} cars. The car park just got busier!` };
+          explanation: `${a} + ${b} = ${ans} cars. The car park just got busier!`,
+          vis: { kind: 'count', op: '+', groups: [{ n: a, emoji: '🚗' }, { n: b, emoji: '🚗' }] } };
       } },
       { id: 'add-02', band: 1, gen() {
         const a = cjRand(1, 4), b = cjRand(1, 3), ans = a + b;
         return { prompt: `${a} people are sitting in the big car. ${b} more get in. How many people are in the car?`,
           parts: [{ unit: 'people', type: 'int', answer: ans, display: String(ans) }],
           hint: 'Count the people already inside, then add the ones getting in.',
-          explanation: `${a} + ${b} = ${ans} people. Everyone buckle up!` };
+          explanation: `${a} + ${b} = ${ans} people. Everyone buckle up!`,
+          vis: { kind: 'count', op: '+', groups: [{ n: a, emoji: '🧍' }, { n: b, emoji: '🧍' }] } };
       } },
       { id: 'add-03', band: 2, gen() {
         const a = cjRand(12, 48), b = cjRand(11, 39), ans = a + b;
         return { prompt: `Level 1 of the car park has ${a} cars. Level 2 has ${b} cars. How many cars in the whole car park?`,
           parts: [{ unit: 'cars', type: 'int', answer: ans, display: String(ans) }],
           hint: 'Add the tens first, then the ones.',
-          explanation: `${a} + ${b} = ${ans} cars. That's why the car park has so many floors!` };
+          explanation: `${a} + ${b} = ${ans} cars. That's why the car park has so many floors!`,
+          vis: { kind: 'blocks', op: '+', items: [{ label: 'Level 1', value: a }, { label: 'Level 2', value: b }] } };
       } },
       { id: 'add-04', band: 2, gen() {
         const a = cjRand(25, 75, 5), b = cjRand(20, 60, 5), ans = a + b;
         return { prompt: `The family drives ${a} km before lunch and ${b} km after lunch. How many km did they drive in all?`,
           parts: [{ unit: 'km', type: 'int', answer: ans, display: String(ans) }],
           hint: 'The whole trip = the part before lunch + the part after lunch.',
-          explanation: `${a} + ${b} = ${ans} km for the whole day's drive. Long trip — good thing they stopped for lunch!` };
+          explanation: `${a} + ${b} = ${ans} km for the whole day's drive. Long trip — good thing they stopped for lunch!`,
+          vis: { kind: 'blocks', op: '+', items: [{ label: 'Before lunch', value: a }, { label: 'After lunch', value: b }] } };
       } },
       { id: 'add-05', band: 3, gen() {
         const a = cjRand(45, 95, 5), b = cjRand(40, 90, 5), c = cjRand(35, 85, 5), ans = a + b + c;
         return { prompt: `A road trip takes three days. Day 1: ${a} km. Day 2: ${b} km. Day 3: ${c} km. How many km was the whole trip?`,
           parts: [{ unit: 'km', type: 'int', answer: ans, display: String(ans) }],
           hint: 'Add the first two days, then add the third day to that.',
-          explanation: `${a} + ${b} + ${c} = ${ans} km over three days. Adding works the same no matter how many numbers line up.` };
+          explanation: `${a} + ${b} + ${c} = ${ans} km over three days. Adding works the same no matter how many numbers line up.`,
+          vis: { kind: 'blocks', op: '+', items: [{ label: 'Day 1', value: a }, { label: 'Day 2', value: b }, { label: 'Day 3', value: c }] } };
       } },
       { id: 'add-06', band: 3, gen() {
         const a = cjRand(120, 880, 10), b = cjRand(25, 95, 5), ans = a + b;
         return { prompt: `The odometer counts every km the car has ever driven. It shows ${a} km. Today's trip adds ${b} km. What will it show after the trip?`,
           parts: [{ unit: 'km', type: 'int', answer: ans, display: String(ans) }],
           hint: 'The odometer never starts over — it just adds the new km on top.',
-          explanation: `${a} + ${b} = ${ans} km. Remember the odometer — it comes back much later in the journey with a big secret.` };
+          explanation: `${a} + ${b} = ${ans} km. Remember the odometer — it comes back much later in the journey with a big secret.`,
+          vis: { kind: 'blocks', op: '+', items: [{ label: 'Odometer now', value: a }, { label: "Today's trip", value: b }] } };
       } },
     ],
   },
@@ -157,42 +163,48 @@ const CJ_STOPS = [
         return { prompt: `The big car has ${a} seats. ${b} people are sitting in it. How many seats are empty?`,
           parts: [{ unit: 'seats', type: 'int', answer: ans, display: String(ans) }],
           hint: "Take the people away from the seats. What's left over?",
-          explanation: `${a} − ${b} = ${ans} empty seats. Room for more friends.` };
+          explanation: `${a} − ${b} = ${ans} empty seats. Room for more friends.`,
+          vis: { kind: 'count', caption: `${a} seats — ${b} taken`, groups: [{ n: b, emoji: '🧍', label: 'taken' }, { n: a - b, emoji: '💺', label: 'empty' }] } };
       } },
       { id: 'bar-02', band: 1, gen() {
         const b = cjRand(2, 4), q = cjRand(2, 6), total = b * q;
         return { prompt: `${total} toy cars are shared equally between ${b} friends. How many cars does each friend get?`,
           parts: [{ unit: 'toy cars', type: 'int', answer: q, display: String(q) }],
           hint: 'Deal them out one at a time, like cards, until the pile is gone.',
-          explanation: `${total} ÷ ${b} = ${q} each. Fair is fair.` };
+          explanation: `${total} ÷ ${b} = ${q} each. Fair is fair.`,
+          vis: { kind: 'share', total, people: b, emoji: '🚗', personEmoji: '🧑' } };
       } },
       { id: 'bar-03', band: 2, gen() {
         const a = cjRand(45, 99), b = cjRand(12, 40), ans = a - b;
         return { prompt: `The beach is ${a} km away. The car has already driven ${b} km. How many km are left?`,
           parts: [{ unit: 'km', type: 'int', answer: ans, display: String(ans) }],
           hint: 'Whole trip take away the part already done.',
-          explanation: `${a} − ${b} = ${ans} km to go. The classic back-seat question, answered.` };
+          explanation: `${a} − ${b} = ${ans} km to go. The classic back-seat question, answered.`,
+          vis: { kind: 'bars', unit: 'km', items: [{ label: 'Whole trip', value: a }, { label: 'Already driven', value: b }] } };
       } },
       { id: 'bar-04', band: 2, gen() {
         const a = cjRand(30, 90), b = cjRand(11, 29), ans = a - b;
         return { prompt: `The car park has ${a} cars in the morning. By lunch, ${b} cars have left. How many cars are still parked?`,
           parts: [{ unit: 'cars', type: 'int', answer: ans, display: String(ans) }],
           hint: 'Start from the morning number and take away the leavers.',
-          explanation: `${a} − ${b} = ${ans} cars still parked. The car park breathes in and out all day.` };
+          explanation: `${a} − ${b} = ${ans} cars still parked. The car park breathes in and out all day.`,
+          vis: { kind: 'blocks', op: '−', items: [{ label: 'Morning', value: a }, { label: 'Left by lunch', value: b }] } };
       } },
       { id: 'bar-05', band: 3, gen() {
         const a = cjRand(40, 80), b = cjRand(15, 35), c = cjRand(10, 30), ans = a - b + c;
         return { prompt: `The car park had ${a} cars. Then ${b} cars left and ${c} new cars arrived. How many cars are there now?`,
           parts: [{ unit: 'cars', type: 'int', answer: ans, display: String(ans) }],
           hint: 'Do it in two moves: first the leavers, then the arrivals.',
-          explanation: `${a} − ${b} = ${a - b}, then ${a - b} + ${c} = ${ans} cars. Two small moves beat one big muddle.` };
+          explanation: `${a} − ${b} = ${a - b}, then ${a - b} + ${c} = ${ans} cars. Two small moves beat one big muddle.`,
+          vis: { kind: 'blocks', caption: 'take away the leavers, then add the arrivals', items: [{ label: 'Start', value: a }, { label: '− left', value: b }, { label: '+ arrived', value: c }] } };
       } },
       { id: 'bar-06', band: 3, gen() {
         const b = cjRand(2, 5), q = cjRand(20, 90, 5), total = b * q;
         return { prompt: `A ${total} km trip is split equally over ${b} days. How many km does the car drive each day?`,
           parts: [{ unit: 'km', type: 'int', answer: q, display: String(q) }],
           hint: 'Share the whole trip fairly between the days.',
-          explanation: `${total} ÷ ${b} = ${q} km a day. Long trips feel shorter when you cut them up.` };
+          explanation: `${total} ÷ ${b} = ${q} km a day. Long trips feel shorter when you cut them up.`,
+          vis: { kind: 'sharebar', total, unit: 'km', shares: Array.from({ length: b }).map(() => 1) } };
       } },
     ],
   },
@@ -212,42 +224,48 @@ const CJ_STOPS = [
         return { prompt: `Every car has 4 wheels. There are ${n} cars in the driveway. How many wheels is that?`,
           parts: [{ unit: 'wheels', type: 'int', answer: ans, display: String(ans) }],
           hint: 'Count in fours: 4, 8, 12… one jump per car.',
-          explanation: `4 × ${n} = ${ans} wheels. Four at a time is faster than one at a time.` };
+          explanation: `4 × ${n} = ${ans} wheels. Four at a time is faster than one at a time.`,
+          vis: { kind: 'array', rows: n, rowLabel: '🚗', pattern: ['🛞', '🛞', '🛞', '🛞'], caption: 'one row of wheels per car' } };
       } },
       { id: 'mul-02', band: 1, gen() {
         const n = cjRand(2, 5), ans = 3 * n;
         return { prompt: `An auto-rickshaw has 3 wheels. ${n} autos are waiting at the stand. How many wheels in all?`,
           parts: [{ unit: 'wheels', type: 'int', answer: ans, display: String(ans) }],
           hint: 'Count in threes, one jump per auto.',
-          explanation: `3 × ${n} = ${ans} wheels. Different vehicle, same trick.` };
+          explanation: `3 × ${n} = ${ans} wheels. Different vehicle, same trick.`,
+          vis: { kind: 'array', rows: n, rowLabel: '🛺', pattern: ['🛞', '🛞', '🛞'], caption: 'one row of wheels per auto' } };
       } },
       { id: 'mul-03', band: 2, gen() {
         const a = cjRand(6, 9), b = cjRand(4, 9), ans = a * b;
         return { prompt: `Each row of the car park holds ${a} cars. The car park has ${b} full rows. How many cars are parked?`,
           parts: [{ unit: 'cars', type: 'int', answer: ans, display: String(ans) }],
           hint: `One row has ${a}. Now count that ${b} times.`,
-          explanation: `${a} × ${b} = ${ans} cars. Rows × row-size — the car park is a times table drawn on the ground.` };
+          explanation: `${a} × ${b} = ${ans} cars. Rows × row-size — the car park is a times table drawn on the ground.`,
+          vis: { kind: 'array', rows: b, pattern: Array.from({ length: a }).map(() => '🚗'), caption: `${b} rows × ${a} cars per row` } };
       } },
       { id: 'mul-04', band: 2, gen() {
         const a = cjRand(6, 9), b = cjRand(3, 8), ans = a * b;
         return { prompt: `Every toll booth on the highway charges ₹${a}. The trip passes ${b} toll booths. How much toll money is that?`,
           parts: [{ unit: '₹', type: 'int', answer: ans, display: String(ans) }],
           hint: `Same charge, ${b} times over.`,
-          explanation: `₹${a} × ${b} = ₹${ans}. Same-thing-again-and-again is exactly what × was invented for.` };
+          explanation: `₹${a} × ${b} = ₹${ans}. Same-thing-again-and-again is exactly what × was invented for.`,
+          vis: { kind: 'array', rows: b, pattern: ['🚧', `₹${a}`], caption: 'the same charge at every booth' } };
       } },
       { id: 'mul-05', band: 3, gen() {
         const a = cjRand(6, 12), b = cjRand(7, 10), ans = a * b;
         return { prompt: `A delivery van makes ${a} trips a day. Each trip is ${b} km. How many km does the van drive in a day?`,
           parts: [{ unit: 'km', type: 'int', answer: ans, display: String(ans) }],
           hint: `One trip is ${b} km — the day is ${a} of those trips.`,
-          explanation: `${a} × ${b} = ${ans} km a day. That van's odometer is climbing fast.` };
+          explanation: `${a} × ${b} = ${ans} km a day. That van's odometer is climbing fast.`,
+          vis: { kind: 'bars', unit: 'km', items: Array.from({ length: a }).map((_, i) => ({ label: `Trip ${i + 1}`, value: b })), caption: 'every trip is the same length' } };
       } },
       { id: 'mul-06', band: 3, gen() {
         const n = cjRand(6, 12), ans = n * 5;
         return { prompt: `${n} cars are going on a rally. Each car has 4 wheels on the road and 1 spare in the boot. How many wheels are going on the rally?`,
           parts: [{ unit: 'wheels', type: 'int', answer: ans, display: String(ans) }],
           hint: 'First work out how many wheels one car brings — road wheels and the spare together.',
-          explanation: `Each car brings 4 + 1 = 5 wheels, so ${n} × 5 = ${ans} wheels. Group first, then multiply.` };
+          explanation: `Each car brings 4 + 1 = 5 wheels, so ${n} × 5 = ${ans} wheels. Group first, then multiply.`,
+          vis: { kind: 'array', rows: n, rowLabel: '🚗', pattern: ['🛞', '🛞', '🛞', '🛞', '➕', '🔘'], caption: '4 road wheels + 1 spare per car' } };
       } },
     ],
   },
@@ -267,42 +285,48 @@ const CJ_STOPS = [
         return { prompt: `The car took ${a.toFixed(1)} litres of petrol in the morning and ${b.toFixed(1)} litres in the evening. How many litres in total?`,
           parts: [{ unit: 'litres', type: 'num', tol: 0.01, answer: ans, display: ans.toFixed(1) }],
           hint: 'Line up the decimal points, then add like normal.',
-          explanation: `${a.toFixed(1)} + ${b.toFixed(1)} = ${ans.toFixed(1)} litres. The pump counts in halves and tenths — so do we.` };
+          explanation: `${a.toFixed(1)} + ${b.toFixed(1)} = ${ans.toFixed(1)} litres. The pump counts in halves and tenths — so do we.`,
+          vis: { kind: 'bars', unit: 'L', items: [{ label: 'Morning', value: a }, { label: 'Evening', value: b }] } };
       } },
       { id: 'dec-02', band: 1, gen() {
         const a = cjRand(12, 48, 2) / 10, b = cjRand(4, 26, 2) / 10, ans = cjR2(a + b);
         return { prompt: `The engine oil bottle had ${a.toFixed(1)} litres. The mechanic poured in ${b.toFixed(1)} litres more. How much oil is that altogether?`,
           parts: [{ unit: 'litres', type: 'num', tol: 0.01, answer: ans, display: ans.toFixed(1) }],
           hint: 'Decimal points under each other, then add column by column.',
-          explanation: `${a.toFixed(1)} + ${b.toFixed(1)} = ${ans.toFixed(1)} litres of oil. Small numbers matter to an engine.` };
+          explanation: `${a.toFixed(1)} + ${b.toFixed(1)} = ${ans.toFixed(1)} litres of oil. Small numbers matter to an engine.`,
+          vis: { kind: 'bars', unit: 'L', items: [{ label: 'In the bottle', value: a }, { label: 'Poured in', value: b }] } };
       } },
       { id: 'dec-03', band: 2, gen() {
         const a = cjRand(32025, 48975, 25) / 100, ans = cjR2(500 - a);
         return { prompt: `The petrol bill is ₹${a.toFixed(2)}. You hand over a ₹500 note. How much change should you get?`,
           parts: [{ unit: '₹', type: 'num', tol: 0.01, answer: ans, display: ans.toFixed(2) }],
           hint: 'Change = what you paid with, minus the bill.',
-          explanation: `500 − ${a.toFixed(2)} = ₹${ans.toFixed(2)}. Count your change before the car pulls away.` };
+          explanation: `500 − ${a.toFixed(2)} = ₹${ans.toFixed(2)}. Count your change before the car pulls away.`,
+          vis: { kind: 'bars', unit: '₹', items: [{ label: 'You paid', value: 500 }, { label: 'The bill', value: a }], caption: 'the gap between the bars is your change' } };
       } },
       { id: 'dec-04', band: 2, gen() {
         const b = cjRand(10250, 11290, 10) / 100, a = cjRand(9610, 10190, 10) / 100, ans = cjR2(b - a);
         return { prompt: `Petrol costs ₹${a.toFixed(2)} per litre in the city and ₹${b.toFixed(2)} per litre on the highway. How much more does the highway pump charge per litre?`,
           parts: [{ unit: '₹ per litre', type: 'num', tol: 0.01, answer: ans, display: ans.toFixed(2) }],
           hint: 'Bigger price minus smaller price gives the gap.',
-          explanation: `${b.toFixed(2)} − ${a.toFixed(2)} = ₹${ans.toFixed(2)} more per litre. That's why drivers fill up in the city.` };
+          explanation: `${b.toFixed(2)} − ${a.toFixed(2)} = ₹${ans.toFixed(2)} more per litre. That's why drivers fill up in the city.`,
+          vis: { kind: 'bars', unit: '₹/L', max: Math.max(a, b), items: [{ label: 'City pump', value: a }, { label: 'Highway pump', value: b }], caption: 'look closely — the bars are nearly the same' } };
       } },
       { id: 'dec-05', band: 3, gen() {
         const p = cjRand(985, 1105, 5) / 10, n = cjRand(4, 12), ans = cjR2(p * n);
         return { prompt: `Petrol costs ₹${p.toFixed(1)} per litre. The car takes exactly ${n} litres. What is the bill?`,
           parts: [{ unit: '₹', type: 'num', tol: 0.01, answer: ans, display: ans.toFixed(2) }],
           hint: `Same price, ${n} times — multiply, then place the decimal point.`,
-          explanation: `${p.toFixed(1)} × ${n} = ₹${ans}. One litre's price, scaled up to the whole tank — that's the pump's own arithmetic.` };
+          explanation: `${p.toFixed(1)} × ${n} = ₹${ans}. One litre's price, scaled up to the whole tank — that's the pump's own arithmetic.`,
+          vis: { kind: 'chips', n, emoji: '⛽', caption: `${n} litres — each one costs ₹${p.toFixed(1)}` } };
       } },
       { id: 'dec-06', band: 3, gen() {
         const a = cjRand(55, 95, 5) / 10, b = cjRand(45, 85, 5) / 10, p = cjRand(100, 110), ans = cjR2((a + b) * p);
         return { prompt: `On the trip the car fills up twice: ${a.toFixed(1)} litres, then ${b.toFixed(1)} litres. Petrol costs ₹${p} per litre. What did the fuel for the trip cost?`,
           parts: [{ unit: '₹', type: 'num', tol: 0.01, answer: ans, display: ans.toFixed(1) }],
           hint: 'First find the total litres, then multiply by the price of one litre.',
-          explanation: `(${a.toFixed(1)} + ${b.toFixed(1)}) = ${(a + b).toFixed(1)} litres, × ₹${p} = ₹${ans}. Two small steps — add first, multiply second.` };
+          explanation: `(${a.toFixed(1)} + ${b.toFixed(1)}) = ${(a + b).toFixed(1)} litres, × ₹${p} = ₹${ans}. Two small steps — add first, multiply second.`,
+          vis: { kind: 'bars', unit: 'L', items: [{ label: 'Fill 1', value: a }, { label: 'Fill 2', value: b }], caption: `every litre costs ₹${p}` } };
       } },
     ],
   },
@@ -323,7 +347,8 @@ const CJ_STOPS = [
         return { prompt: `The tank was ${n1}/${d} full. At the pump you add another ${n2}/${d} of a tank. How full is the tank now? (Give a simplified fraction.)`,
           parts: [{ unit: 'of a tank', type: 'frac', tol: 0.001, answer: (n1 + n2) / d, display: disp }],
           hint: 'Same-size pieces — just add how many pieces you have. Then simplify if you can.',
-          explanation: `${n1}/${d} + ${n2}/${d} = ${n1 + n2}/${d} = ${disp}. The gauge needle swings up by ${n2} marks.` };
+          explanation: `${n1}/${d} + ${n2}/${d} = ${n1 + n2}/${d} = ${disp}. The gauge needle swings up by ${n2} marks.`,
+          vis: { kind: 'tanks', tanks: [{ den: d, fills: [{ n: n1, cls: 'a' }, { n: n2, cls: 'b' }], label: `${n1}/${d} + ${n2}/${d}` }], caption: 'orange = already in the tank, blue = what you add' } };
       } },
       { id: 'fra-02', band: 1, gen() {
         const d = cjPick([4, 8]), n1 = cjRand(3, d - 1), n2 = cjRand(1, n1 - 1);
@@ -331,7 +356,8 @@ const CJ_STOPS = [
         return { prompt: `The tank was ${n1}/${d} full when the trip began. Now the gauge shows ${n2}/${d}. What fraction of a tank has the car used?`,
           parts: [{ unit: 'of a tank', type: 'frac', tol: 0.001, answer: (n1 - n2) / d, display: disp }],
           hint: 'Start reading minus end reading — same-size pieces again.',
-          explanation: `${n1}/${d} − ${n2}/${d} = ${disp} of a tank burned on the road.` };
+          explanation: `${n1}/${d} − ${n2}/${d} = ${disp} of a tank burned on the road.`,
+          vis: { kind: 'tanks', tanks: [{ den: d, fills: [{ n: n2, cls: 'a' }, { n: n1 - n2, cls: 'dim' }], label: `was ${n1}/${d}, now ${n2}/${d}` }], caption: 'orange = still in the tank, faded = burned on the road' } };
       } },
       { id: 'fra-03', band: 2, gen() {
         const [d1, d2] = cjPick([[2, 3], [3, 4], [4, 6], [2, 8], [4, 8]]);
@@ -339,7 +365,8 @@ const CJ_STOPS = [
         return { prompt: `The morning drive used 1/${d1} of a tank. The afternoon drive used 1/${d2}. What fraction of a tank did the whole day use?`,
           parts: [{ unit: 'of a tank', type: 'frac', tol: 0.001, answer: num / den, display: disp }],
           hint: 'The pieces are different sizes. Find a size both fit into first (the LCD), then add.',
-          explanation: `1/${d1} + 1/${d2} = ${disp} of a tank. Different marks on the gauge only add up after you make the pieces match.` };
+          explanation: `1/${d1} + 1/${d2} = ${disp} of a tank. Different marks on the gauge only add up after you make the pieces match.`,
+          vis: { kind: 'tanks', tanks: [{ den: d1, fills: [{ n: 1, cls: 'a' }], label: `morning 1/${d1}` }, { den: d2, fills: [{ n: 1, cls: 'b' }], label: `afternoon 1/${d2}` }], caption: 'same tank, cut into different-sized pieces — that is the whole difficulty' } };
       } },
       { id: 'fra-04', band: 2, gen() {
         const [d1, d2] = cjPick([[3, 4], [4, 6], [2, 8], [3, 6]]);
@@ -348,7 +375,8 @@ const CJ_STOPS = [
         return { prompt: `Reaching the hill station needs ${n1}/${d1} of a tank. Coming back needs 1/${d2}. What fraction of a tank does the whole trip need?`,
           parts: [{ unit: 'of a tank', type: 'frac', tol: 0.001, answer: num / den, display: disp }],
           hint: 'Make the pieces the same size before adding — then you can compare it to a full tank.',
-          explanation: `${n1}/${d1} + 1/${d2} = ${disp}. Less than 1 means one tank gets you there and back.` };
+          explanation: `${n1}/${d1} + 1/${d2} = ${disp}. Less than 1 means one tank gets you there and back.`,
+          vis: { kind: 'tanks', tanks: [{ den: d1, fills: [{ n: n1, cls: 'a' }], label: `there: ${n1}/${d1}` }, { den: d2, fills: [{ n: 1, cls: 'b' }], label: `back: 1/${d2}` }], caption: 'will both trips fit inside one full tank?' } };
       } },
       { id: 'fra-05', band: 3, gen() {
         const d1 = cjPick([2, 4, 8]);
@@ -360,7 +388,8 @@ const CJ_STOPS = [
         return { prompt: `For the desert rally, the crew packs ${w1} ${n1}/${d1} cans of fuel in the truck and ${w2} ${n2}/${d2} cans in the car. How many cans of fuel are they carrying in total? (Mixed number, e.g. "3 1/2".)`,
           parts: [{ unit: 'cans', type: 'frac', tol: 0.001, answer: num / den, display: disp }],
           hint: 'Add the whole cans first, then the part-cans — carry over if the parts make more than one can.',
-          explanation: `Wholes: ${w1} + ${w2}; parts: ${n1}/${d1} + ${n2}/${d2}. Together: ${disp} cans strapped down for the rally.` };
+          explanation: `Wholes: ${w1} + ${w2}; parts: ${n1}/${d1} + ${n2}/${d2}. Together: ${disp} cans strapped down for the rally.`,
+          vis: { kind: 'cans', groups: [{ whole: w1, num: n1, den: d1, label: 'truck' }, { whole: w2, num: n2, den: d2, label: 'car' }] } };
       } },
       { id: 'fra-06', band: 3, gen() {
         const d1 = cjPick([2, 4]);
@@ -372,7 +401,8 @@ const CJ_STOPS = [
         return { prompt: `The crew started with ${w1} ${n1}/${d1} cans of fuel. The first rally leg used ${w2} ${n2}/${d2} cans. How much fuel is left? (Mixed number or fraction.)`,
           parts: [{ unit: 'cans', type: 'frac', tol: 0.001, answer: num / den, display: disp }],
           hint: 'Turn both into improper fractions over the LCD, subtract, then bring back the wholes.',
-          explanation: `${w1} ${n1}/${d1} − ${w2} ${n2}/${d2} = ${disp} cans left. Enough for the next leg? That's tomorrow's question.` };
+          explanation: `${w1} ${n1}/${d1} − ${w2} ${n2}/${d2} = ${disp} cans left. Enough for the next leg? That's tomorrow's question.`,
+          vis: { kind: 'cans', groups: [{ whole: w1, num: n1, den: d1, label: 'started with' }, { whole: w2, num: n2, den: d2, label: 'used' }] } };
       } },
     ],
   },
@@ -395,14 +425,16 @@ const CJ_STOPS = [
         return { prompt: `The engine gear has ${a} teeth. The wheel gear has ${b} teeth. Write the gear ratio ${a} : ${b} in its simplest form (like "3:2").`,
           parts: [{ type: 'ratio', a: m, b: n, display: `${m}:${n}` }],
           hint: 'Find the biggest number that divides into both teeth-counts.',
-          explanation: `${a} : ${b} = ${m} : ${n} (divide both by ${g}). The engine turns ${m} times for every ${n} turns of the wheel.` };
+          explanation: `${a} : ${b} = ${m} : ${n} (divide both by ${g}). The engine turns ${m} times for every ${n} turns of the wheel.`,
+          vis: { kind: 'gears', a, b } };
       } },
       { id: 'rat-02', band: 1, gen() {
         const g = cjRand(2, 6), m = cjRand(3, 10), a = g * m, b = g;
         return { prompt: `Grandpa's two-stroke scooter needs petrol and oil mixed ${a} : ${b}. Simplify this mixing ratio.`,
           parts: [{ type: 'ratio', a: m, b: 1, display: `${m}:1` }],
           hint: "Divide both sides by the same number until you can't any more.",
-          explanation: `${a} : ${b} = ${m} : 1. For every ${m} cups of petrol, exactly one cup of oil — the engine's recipe.` };
+          explanation: `${a} : ${b} = ${m} : 1. For every ${m} cups of petrol, exactly one cup of oil — the engine's recipe.`,
+          vis: { kind: 'bars', items: [{ label: 'Petrol', value: a }, { label: 'Oil', value: b }], caption: 'how many times does the oil bar fit into the petrol bar?' } };
       } },
       { id: 'rat-03', band: 2, gen() {
         const ra = cjRand(1, 7);
@@ -415,7 +447,8 @@ const CJ_STOPS = [
             { label: `Family B (${rb} shares)`, unit: '₹', type: 'int', answer: rb * u, display: String(rb * u) },
           ],
           hint: 'First find what one share is worth: divide the bill by the total number of shares.',
-          explanation: `${ra} + ${rb} = ${ra + rb} shares; ₹${total} ÷ ${ra + rb} = ₹${u} a share. So ₹${ra * u} and ₹${rb * u}. Fair by the kilometre.` };
+          explanation: `${ra} + ${rb} = ${ra + rb} shares; ₹${total} ÷ ${ra + rb} = ₹${u} a share. So ₹${ra * u} and ₹${rb * u}. Fair by the kilometre.`,
+          vis: { kind: 'sharebar', total, unit: '₹', shares: [ra, rb] } };
       } },
       { id: 'rat-04', band: 2, gen() {
         const ra = cjRand(1, 5), rb = cjRand(1, 5), rc = cjRand(1, 5);
@@ -427,7 +460,8 @@ const CJ_STOPS = [
             { label: `Friend 3 (${rc} shares)`, unit: 'km', type: 'int', answer: rc * u, display: String(rc * u) },
           ],
           hint: 'Count the total shares first, then work out one share, then hand the shares out.',
-          explanation: `${ra + rb + rc} shares → ${u} km each share → ${ra * u} / ${rb * u} / ${rc * u} km. Everyone drove their share.` };
+          explanation: `${ra + rb + rc} shares → ${u} km each share → ${ra * u} / ${rb * u} / ${rc * u} km. Everyone drove their share.`,
+          vis: { kind: 'sharebar', total, unit: 'km', shares: [ra, rb, rc] } };
       } },
       { id: 'rat-05', band: 3, gen() {
         const u = cjRand(1, 2), q1 = cjRand(40, 120, 20);
@@ -437,7 +471,8 @@ const CJ_STOPS = [
         return { prompt: `The car uses ${v} litres of petrol for ${q1} km. At the same rate, how many litres does it need for ${q2} km?`,
           parts: [{ unit: 'litres', type: 'num', tol: 0.01, answer: ans, display: String(ans) }],
           hint: `First find the litres for 10 km (or for 1 km) — then scale up to ${q2}.`,
-          explanation: `${v} L ÷ ${q1} km = ${u / 10} L per km → × ${q2} = ${ans} litres. This is the sum every driver does before a long trip.` };
+          explanation: `${v} L ÷ ${q1} km = ${u / 10} L per km → × ${q2} = ${ans} litres. This is the sum every driver does before a long trip.`,
+          vis: { kind: 'bars', unit: 'km', items: [{ label: `${v} L gets you`, value: q1 }, { label: '? L gets you', value: q2 }], caption: 'same car, same rate — scale the litres the way the km scale' } };
       } },
       { id: 'rat-06', band: 3, gen() {
         const u = cjRand(10, 20, 2), v = cjRand(3, 8);
@@ -447,7 +482,8 @@ const CJ_STOPS = [
         return { prompt: `The trip meter shows the car has done ${q1} km using ${v} litres. The dashboard also shows the engine at ${temp}°C. How far can the car go on ${v2} litres at the same rate?`,
           parts: [{ unit: 'km', type: 'int', answer: ans, display: String(ans) }],
           hint: 'Find the km one litre gives. The engine temperature is on the dashboard — but is it in the question?',
-          explanation: `${q1} ÷ ${v} = ${u} km per litre → × ${v2} = ${ans} km. The temperature gauge was watching you, not helping you.` };
+          explanation: `${q1} ÷ ${v} = ${u} km per litre → × ${v2} = ${ans} km. The temperature gauge was watching you, not helping you.`,
+          vis: { kind: 'bars', unit: '', items: [{ label: 'km driven', value: q1 }, { label: 'litres used', value: v }], caption: 'notice: the engine temperature is not in this picture — it was never part of the math' } };
       } },
     ],
   },
@@ -1132,6 +1168,11 @@ function cjStopDone(progress, i) {
 const CJ_TIER3_DRILLS = true;
 const CJ_DRILL_COUNT = 3;
 
+/* Tester unlock: `npm run dev:remy` loads .env.remy.local (gitignored) which sets
+ * VITE_CJ_UNLOCK — all stops open on that machine only. Plain `npm run dev`,
+ * production builds, and fresh clones never have the flag: stops stay locked. */
+const CJ_ALL_OPEN = import.meta.env.VITE_CJ_UNLOCK === 'open-roads';
+
 const cjBandDiff = (b) => (b === 1 ? 'easy' : b === 2 ? 'medium' : 'hard');
 
 async function cjFetchDrill(url, normalize) {
@@ -1192,6 +1233,183 @@ const CJ_DRILL_ADAPTERS = {
     (j) => ({ prompt: j.prompt, parts: cjIntPart(j.answer) })),
 };
 
+/* ── Visuals (v1: Stops 1–6) ───────────────────────────────────────────────
+ * Each template's gen() may attach a `vis` spec; CjVisual renders it. The
+ * representation adapts to the quantity: literal emoji rows for small counts,
+ * place-value blocks for big numbers, proportional bars for measures, segment
+ * bars for fractions, tick-mark gears for ratios. Pure client-side rendering.
+ * ─────────────────────────────────────────────────────────────────────── */
+
+function cjEmojiRow(n, emoji) {
+  return Array.from({ length: n }).fill(emoji).join(' ');
+}
+
+function cjBlocksStr(v) {
+  const h = Math.floor(v / 100), t = Math.floor((v % 100) / 10), o = v % 10;
+  return `${'💯 '.repeat(h)}${'🔟 '.repeat(t)}${'▪️'.repeat(o)}`.trim() || '0';
+}
+
+function CjGear({ teeth }) {
+  const ticks = Array.from({ length: teeth }).map((_, i) => {
+    const ang = (i / teeth) * 2 * Math.PI;
+    return <line key={i} x1={34 * Math.cos(ang)} y1={34 * Math.sin(ang)} x2={44 * Math.cos(ang)} y2={44 * Math.sin(ang)} stroke="currentColor" strokeWidth="2.5" />;
+  });
+  return (
+    <svg viewBox="-50 -50 100 100" className="cj-vis-gear" aria-hidden="true">
+      <circle r="34" fill="none" stroke="currentColor" strokeWidth="2" />
+      {ticks}
+      <text textAnchor="middle" dy="5" fontSize="16" fill="currentColor">{teeth}</text>
+    </svg>
+  );
+}
+
+function CjVisual({ spec }) {
+  if (!spec) return null;
+  if (spec.kind === 'count') {
+    return (
+      <div className="cj-visual">
+        <div className="cj-vis-row">
+          {spec.groups.map((g, i) => (
+            <span key={i} className={`cj-vis-group ${g.dim ? 'dim' : ''}`}>
+              {i > 0 && spec.op && <span className="cj-vis-op">{spec.op}</span>}
+              <span className="cj-vis-emojis">{cjEmojiRow(g.n, g.emoji)}</span>
+              {g.label && <span className="cj-vis-glabel">{g.label}</span>}
+            </span>
+          ))}
+        </div>
+        {spec.caption && <p className="cj-vis-caption">{spec.caption}</p>}
+      </div>
+    );
+  }
+  if (spec.kind === 'blocks') {
+    return (
+      <div className="cj-visual">
+        {spec.items.map((it, i) => (
+          <div key={i} className="cj-vis-blockrow">
+            <span className="cj-vis-barlabel">{i > 0 && spec.op ? `${spec.op} ` : ''}{it.label}</span>
+            <span className="cj-vis-emojis">{cjBlocksStr(it.value)}</span>
+            <span className="cj-vis-barval">{it.value}</span>
+          </div>
+        ))}
+        <p className="cj-vis-caption">💯 = 100 · 🔟 = 10 · ▪️ = 1{spec.caption ? ` — ${spec.caption}` : ''}</p>
+      </div>
+    );
+  }
+  if (spec.kind === 'share') {
+    const each = spec.total / spec.people;
+    return (
+      <div className="cj-visual">
+        <div className="cj-vis-row"><span className="cj-vis-emojis">{cjEmojiRow(spec.total, spec.emoji)}</span></div>
+        <div className="cj-vis-op">↓ shared between {spec.people}</div>
+        {Array.from({ length: spec.people }).map((_, i) => (
+          <div key={i} className="cj-vis-row">{spec.personEmoji} <span className="cj-vis-emojis">{cjEmojiRow(each, spec.emoji)}</span></div>
+        ))}
+      </div>
+    );
+  }
+  if (spec.kind === 'array') {
+    return (
+      <div className="cj-visual">
+        {Array.from({ length: spec.rows }).map((_, r) => (
+          <div key={r} className="cj-vis-row">
+            {spec.rowLabel && <span className="cj-vis-glabel">{spec.rowLabel}</span>}
+            <span className="cj-vis-emojis">{spec.pattern.join(' ')}</span>
+          </div>
+        ))}
+        {spec.caption && <p className="cj-vis-caption">{spec.caption}</p>}
+      </div>
+    );
+  }
+  if (spec.kind === 'bars') {
+    const max = spec.max ?? Math.max(...spec.items.map((it) => it.value));
+    return (
+      <div className="cj-visual">
+        {spec.items.map((it, i) => (
+          <div key={i} className="cj-vis-barrow">
+            <span className="cj-vis-barlabel">{it.label}</span>
+            <span className="cj-vis-bartrack"><span className={`cj-vis-barfill f${i % 3}`} style={{ width: `${(it.value / max) * 100}%` }} /></span>
+            <span className="cj-vis-barval">{it.value}{spec.unit ? ` ${spec.unit}` : ''}</span>
+          </div>
+        ))}
+        {spec.caption && <p className="cj-vis-caption">{spec.caption}</p>}
+      </div>
+    );
+  }
+  if (spec.kind === 'chips') {
+    return (
+      <div className="cj-visual">
+        <div className="cj-vis-row"><span className="cj-vis-emojis">{cjEmojiRow(spec.n, spec.emoji)}</span></div>
+        {spec.caption && <p className="cj-vis-caption">{spec.caption}</p>}
+      </div>
+    );
+  }
+  if (spec.kind === 'tanks') {
+    return (
+      <div className="cj-visual">
+        {spec.tanks.map((t, ti) => {
+          const cells = [];
+          t.fills.forEach((f) => { for (let k = 0; k < f.n; k++) cells.push(f.cls); });
+          while (cells.length < t.den) cells.push('');
+          return (
+            <div key={ti} className="cj-vis-barrow">
+              <span className="cj-vis-barlabel">{t.label}</span>
+              <span className="cj-vis-tank">
+                {cells.map((c, i) => <span key={i} className={`cj-vis-cell ${c}`} />)}
+              </span>
+            </div>
+          );
+        })}
+        {spec.caption && <p className="cj-vis-caption">{spec.caption}</p>}
+      </div>
+    );
+  }
+  if (spec.kind === 'cans') {
+    return (
+      <div className="cj-visual">
+        {spec.groups.map((g, i) => (
+          <div key={i} className="cj-vis-barrow">
+            <span className="cj-vis-barlabel">{g.label}</span>
+            <span className="cj-vis-emojis">{cjEmojiRow(g.whole, '🛢️')}</span>
+            <span className="cj-vis-tank small">
+              {Array.from({ length: g.den }).map((_, k) => <span key={k} className={`cj-vis-cell ${k < g.num ? 'a' : ''}`} />)}
+            </span>
+            <span className="cj-vis-barval">{g.whole} {g.num}/{g.den}</span>
+          </div>
+        ))}
+        <p className="cj-vis-caption">🛢️ = one full can · the small bar is the part-can</p>
+      </div>
+    );
+  }
+  if (spec.kind === 'sharebar') {
+    const sum = spec.shares.reduce((a, b) => a + b, 0);
+    return (
+      <div className="cj-visual">
+        <span className="cj-vis-bartrack tall">
+          {spec.shares.map((sh, i) => (
+            <span key={i} className={`cj-vis-barfill f${i % 3}`} style={{ width: `${(sh / sum) * 100}%` }}>{sh} {sh === 1 ? 'share' : 'shares'}</span>
+          ))}
+        </span>
+        <p className="cj-vis-caption">the whole bar = {spec.total} {spec.unit || ''} = {sum} equal shares</p>
+      </div>
+    );
+  }
+  if (spec.kind === 'gears') {
+    return (
+      <div className="cj-visual">
+        <div className="cj-vis-row gears">
+          <span className="cj-vis-glabel">engine</span>
+          <CjGear teeth={spec.a} />
+          <span className="cj-vis-op">:</span>
+          <CjGear teeth={spec.b} />
+          <span className="cj-vis-glabel">wheel</span>
+        </div>
+        <p className="cj-vis-caption">count the teeth marks on each gear</p>
+      </div>
+    );
+  }
+  return null;
+}
+
 /* ── Question sourcing ─────────────────────────────────────────────────── */
 
 const CJ_PRACTICE_BANDS = [1, 1, 2, 2, 3, 3]; // the 6 scored practice questions
@@ -1222,8 +1440,14 @@ export default function CarJourneyApp({ onBack }) {
   const [checkResults, setCheckResults] = useState([]);
   const [pit, setPit] = useState(null); // { idx, band } while Tier-3 pit-stop drills run
 
+  // Roadmap: one stop card at a time (maintainer feedback: 16 at once overwhelms).
+  const [cardIdx, setCardIdx] = useState(null); // null → first uncompleted stop
+  const [journeyOpen, setJourneyOpen] = useState(false); // read-only list of all 16 mysteries
+  const [showVis, setShowVis] = useState(false); // Visualize panel toggle (persists across questions)
+
   const stop = CJ_STOPS[stopIdx];
   const doneCount = CJ_STOPS.reduce((n, _, i) => n + (cjStopDone(progress, i) ? 1 : 0), 0);
+  const pitAvailable = CJ_TIER3_DRILLS && !!CJ_DRILL_ADAPTERS[stop.key];
 
   const persist = (next) => { setProgress(next); cjSaveProgress(next); };
 
@@ -1264,7 +1488,12 @@ export default function CarJourneyApp({ onBack }) {
     const allRight = question.parts.every((p, i) => cjCheckPart(p, inputs[i]));
     if (allRight) {
       setFeedback({ correct: true, final: true });
-      persist(cjRecord(progress, stop, true));
+      if (!question.retry) persist(cjRecord(progress, stop, true)); // retry was already recorded as the original miss
+    } else if (question.retry) {
+      // Post-pit-stop retry: never reveals, never re-triggers a pit stop —
+      // the same question simply repeats until it's answered correctly.
+      setMisses(misses + 1);
+      setFeedback({ correct: false, final: false });
     } else {
       const m = misses + 1;
       setMisses(m);
@@ -1300,9 +1529,9 @@ export default function CarJourneyApp({ onBack }) {
   /* ── Tier-3 pit stop: fetch raw drills from the topic's real server generator.
      Drills never count toward the gate; any failure falls back to normal flow. ── */
 
-  function serveDrill(band, idx) {
+  function serveDrill(band, idx, returnQ) {
     const adapter = CJ_DRILL_ADAPTERS[stop.key];
-    setPit({ idx, band });
+    setPit({ idx, band, returnQ }); // returnQ: the exact question instance that sent us here
     adapter(band)
       .then((q) => {
         setQuestion({ ...q, drill: true, band });
@@ -1313,8 +1542,8 @@ export default function CarJourneyApp({ onBack }) {
   }
 
   function startPitStop(band) {
-    if (!CJ_TIER3_DRILLS || !CJ_DRILL_ADAPTERS[stop.key]) { nextPracticeQuestion(false); return; }
-    serveDrill(band, 0);
+    if (!pitAvailable) { nextPracticeQuestion(false); return; }
+    serveDrill(band, 0, question);
   }
 
   function submitDrill() {
@@ -1322,15 +1551,39 @@ export default function CarJourneyApp({ onBack }) {
     setFeedback({ correct: allRight, final: true });
   }
 
+  /** Wrong drill → the same drill again, until it's right. */
+  function retryDrill() {
+    setInputs(question.parts.map(() => ''));
+    setFeedback(null);
+  }
+
   function nextDrill() {
     const nextIdx = pit.idx + 1;
-    if (nextIdx >= CJ_DRILL_COUNT) { setPit(null); nextPracticeQuestion(false); return; }
-    serveDrill(pit.band, nextIdx);
+    if (nextIdx >= CJ_DRILL_COUNT) {
+      // Pit stop complete → back to the exact question that caused it,
+      // same numbers, repeating until answered correctly.
+      const rq = { ...pit.returnQ, retry: true };
+      setPit(null);
+      setQuestion(rq); setInputs(rq.parts.map(() => ''));
+      setMisses(2); // a wrong answer surfaces the hint immediately
+      setFeedback(null);
+      return;
+    }
+    serveDrill(pit.band, nextIdx, pit.returnQ);
   }
 
   /* ── Screens ── */
 
+  // A stop is open when the one before it is completed (or it's the first) —
+  // CJ_ALL_OPEN (tester build) opens everything.
+  const isUnlocked = (i) => CJ_ALL_OPEN || i === 0 || cjStopDone(progress, i - 1);
+
   if (screen === 'roadmap') {
+    const firstOpen = CJ_STOPS.findIndex((_, i) => !cjStopDone(progress, i));
+    const shownIdx = cardIdx ?? (firstOpen === -1 ? CJ_STOPS.length - 1 : firstOpen);
+    const s = CJ_STOPS[shownIdx];
+    const done = cjStopDone(progress, shownIdx);
+    const unlocked = isUnlocked(shownIdx);
     return (
       <div className="cj-app">
         <button className="cj-back" onClick={onBack}>← Back to menu</button>
@@ -1343,29 +1596,60 @@ export default function CarJourneyApp({ onBack }) {
         {doneCount === CJ_STOPS.length && (
           <button className="cj-primary cj-finale-btn" onClick={() => setScreen('finale')}>🏁 See your completed journey</button>
         )}
-        <ol className="cj-roadmap">
-          {CJ_STOPS.map((s, i) => {
-            const done = cjStopDone(progress, i);
-            const unlocked = true; // all stops open — pick any mystery (SDT autonomy: choice is the entry point)
-            return (
-              <li key={s.key} className={`cj-stop ${done ? 'done' : unlocked ? 'open' : 'locked'}`}>
-                <span className="cj-stop-emoji" aria-hidden="true">{s.emoji}</span>
-                <span className="cj-stop-body">
-                  <span className="cj-stop-name">{i + 1}. {s.title}</span>
-                  <span className="cj-stop-q">{s.carQuestion}</span>
-                  <span className="cj-stop-meta">Ages {s.age} · {s.skill}</span>
-                </span>
-                {done ? (
-                  <button className="cj-stop-action done" onClick={() => startStop(i)}>✓ Replay</button>
-                ) : unlocked ? (
-                  <button className="cj-stop-action" onClick={() => startStop(i)}>Drive ▶</button>
-                ) : (
-                  <span className="cj-stop-action locked" title="Finish the previous stop first">🔒</span>
-                )}
-              </li>
-            );
-          })}
-        </ol>
+        <div className="cj-carousel">
+          <button className="cj-card-nav" disabled={shownIdx === 0} onClick={() => setCardIdx(shownIdx - 1)} aria-label="Previous stop">◀</button>
+          {unlocked || done ? (
+            <div className={`cj-stop cj-stop-card ${done ? 'done' : 'open'}`}>
+              <span className="cj-stop-emoji" aria-hidden="true">{s.emoji}</span>
+              <span className="cj-stop-body">
+                <span className="cj-stop-name">{shownIdx + 1}. {s.title}</span>
+                <span className="cj-stop-q">{s.carQuestion}</span>
+                <span className="cj-stop-meta">Ages {s.age} · {s.skill}</span>
+              </span>
+              {done ? (
+                <button className="cj-stop-action done" onClick={() => startStop(shownIdx)}>✓ Replay</button>
+              ) : (
+                <button className="cj-stop-action" onClick={() => startStop(shownIdx)}>Drive ▶</button>
+              )}
+            </div>
+          ) : (
+            <div className="cj-stop cj-stop-card locked">
+              <span className="cj-stop-emoji" aria-hidden="true">{s.emoji}</span>
+              <span className="cj-stop-body">
+                <span className="cj-stop-name">Stop {shownIdx + 1} · 🔒</span>
+                <span className="cj-stop-q">{s.carQuestion}</span>
+                <span className="cj-stop-meta">Finish the previous stop to unlock this mystery.</span>
+              </span>
+            </div>
+          )}
+          <button className="cj-card-nav" disabled={shownIdx === CJ_STOPS.length - 1} onClick={() => setCardIdx(shownIdx + 1)} aria-label="Next stop">▶</button>
+        </div>
+        <div className="cj-actions">
+          <button className="cj-secondary" onClick={() => setJourneyOpen(true)}>🗺️ The journey — all 16 mysteries</button>
+        </div>
+        {journeyOpen && (
+          <div className="cj-journey-overlay" onClick={() => setJourneyOpen(false)}>
+            <div className="cj-journey-panel" onClick={(e) => e.stopPropagation()}>
+              <div className="cj-journey-head">
+                <h3 className="cj-journey-title">🗺️ The journey ahead</h3>
+                <button className="cj-journey-close" onClick={() => setJourneyOpen(false)}>✕</button>
+              </div>
+              <p className="cj-journey-sub">Sixteen questions the car will teach you to answer.</p>
+              <ol className="cj-journey-list">
+                {CJ_STOPS.map((st, i) => {
+                  const d = cjStopDone(progress, i);
+                  const u = isUnlocked(i);
+                  return (
+                    <li key={st.key} className={`cj-journey-item ${d ? 'done' : u ? 'open' : 'locked'}`}>
+                      <span className="cj-journey-status">{d ? '✓' : u ? st.emoji : '🔒'}</span>
+                      <span>{st.carQuestion}</span>
+                    </li>
+                  );
+                })}
+              </ol>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -1424,14 +1708,24 @@ export default function CarJourneyApp({ onBack }) {
             </label>
           ))}
 
+          {question.vis && showVis && (
+            <div className="cj-visual-panel"><CjVisual spec={question.vis} /></div>
+          )}
+
           {!isCheck && feedback && !feedback.correct && !feedback.final && (
             <div className="cj-feedback wrong">Not yet — try again. {misses >= 2 && <span className="cj-hint">💡 {question.hint}</span>}</div>
           )}
           {!isCheck && feedback && !feedback.correct && feedback.final && (
-            <div className="cj-feedback wrong">
-              The answer was <strong>{question.parts.map((p) => p.display).join(' , ')}</strong>.
-              {question.explanation && <div className="cj-expl">{question.explanation}</div>}
-            </div>
+            pit ? (
+              <div className="cj-feedback wrong">Not this time — the same drill comes again. You've got this.</div>
+            ) : pitAvailable && !question.drill ? (
+              <div className="cj-feedback wrong">Three tries — the car needs a pit stop! Fix the basics with 3 quick drills; this exact question will be waiting for you after.</div>
+            ) : (
+              <div className="cj-feedback wrong">
+                The answer was <strong>{question.parts.map((p) => p.display).join(' , ')}</strong>.
+                {question.explanation && <div className="cj-expl">{question.explanation}</div>}
+              </div>
+            )
           )}
           {!isCheck && feedback?.correct && (
             <div className="cj-feedback right">
@@ -1441,15 +1735,22 @@ export default function CarJourneyApp({ onBack }) {
           )}
 
           <div className="cj-actions">
+            {question.vis && (
+              <button className="cj-secondary" onClick={() => setShowVis(!showVis)}>{showVis ? '🙈 Hide visual' : '👁 Visualize'}</button>
+            )}
             {feedback?.correct || feedback?.final ? (!isCheck && (
               pit ? (
-                <button className="cj-primary" onClick={nextDrill}>
-                  {pit.idx + 1 >= CJ_DRILL_COUNT ? '🚗 Back on the road →' : 'Next drill →'}
-                </button>
-              ) : !feedback.correct && CJ_TIER3_DRILLS && CJ_DRILL_ADAPTERS[stop.key] ? (
+                feedback.correct ? (
+                  <button className="cj-primary" onClick={nextDrill}>
+                    {pit.idx + 1 >= CJ_DRILL_COUNT ? '🚗 Back to your question →' : 'Next drill →'}
+                  </button>
+                ) : (
+                  <button className="cj-primary" onClick={retryDrill}>Try again</button>
+                )
+              ) : !feedback.correct && pitAvailable && !question.drill ? (
                 <button className="cj-primary" onClick={() => startPitStop(question.band)}>🔧 Pit stop: {CJ_DRILL_COUNT} quick drills</button>
               ) : (
-                <button className="cj-primary" onClick={() => nextPracticeQuestion(feedback.correct)}>Next →</button>
+                <button className="cj-primary" onClick={() => nextPracticeQuestion(feedback.correct && !question.retry)}>Next →</button>
               )
             )) : (
               <button className="cj-primary" onClick={pit ? submitDrill : isCheck ? submitCheck : submitPractice}>Submit</button>
@@ -1457,6 +1758,7 @@ export default function CarJourneyApp({ onBack }) {
           </div>
           {isCheck && <p className="cj-check-note">One try per question. Results at the end — drive carefully.</p>}
           {pit && <p className="cj-check-note">Plain numbers, no story — pit stops fix the mechanics. Drills don't count toward the gate.</p>}
+          {!pit && question.retry && <p className="cj-check-note">🔧 Pit stop done. This is the question that sent you there — same numbers. Take it again.</p>}
         </div>
       </div>
     );
