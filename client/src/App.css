@@ -461,8 +461,34 @@ button:disabled {
 .header-row {
   /* Flex container for back button and navigation */
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
+}
+
+.wwm-corner-btn {
+  background: rgba(232, 134, 74, 0.1);
+  border: 1px solid rgba(232, 134, 74, 0.3);
+  color: var(--clr-accent, #e8864a);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.wwm-corner-btn:hover {
+  background: rgba(232, 134, 74, 0.25);
+  border-color: var(--clr-accent, #e8864a);
+  transform: translateY(-1px);
+}
+
+.wwm-corner-btn:active {
+  transform: translateY(0);
 }
 
 .top-mini-row {
@@ -2516,5 +2542,747 @@ button:disabled {
   .matrix-op {
     font-size: 1.15rem;
     margin: 0 3px;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * "A WORLD WITHOUT ME" — Concept Relevance Opener Modal
+ * Feature: Shows once per topic per student, before the quiz setup screen.
+ * Dismissed via "Start Learning →" button.
+ * ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Keyframe animations ──────────────────────────────────────────────── */
+
+@keyframes wwm-backdrop-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes wwm-card-in {
+  from { opacity: 0; transform: translateY(40px) scale(0.94); }
+  to   { opacity: 1; transform: translateY(0)   scale(1);    }
+}
+
+@keyframes wwm-emoji-bounce {
+  0%   { transform: scale(0.4) rotate(-12deg); opacity: 0; }
+  60%  { transform: scale(1.18) rotate(4deg);  opacity: 1; }
+  80%  { transform: scale(0.94) rotate(-2deg); }
+  100% { transform: scale(1)    rotate(0deg);  opacity: 1; }
+}
+
+@keyframes wwm-headline-in {
+  0%   { opacity: 0; transform: translateY(12px); letter-spacing: 0.12em; }
+  100% { opacity: 1; transform: translateY(0);    letter-spacing: normal; }
+}
+
+@keyframes wwm-body-in {
+  0%   { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0);   }
+}
+
+@keyframes wwm-btn-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232,134,74,0.6), 0 4px 20px rgba(232,134,74,0.3); }
+  50%       { box-shadow: 0 0 0 10px rgba(232,134,74,0), 0 4px 28px rgba(232,134,74,0.5); }
+}
+
+@keyframes wwm-particle-drift {
+  0%   { transform: translateY(0)   translateX(0)    rotate(0deg);   opacity: 0.6; }
+  33%  { transform: translateY(-30px) translateX(12px)  rotate(120deg); opacity: 0.4; }
+  66%  { transform: translateY(-55px) translateX(-8px)  rotate(240deg); opacity: 0.3; }
+  100% { transform: translateY(-80px) translateX(5px)   rotate(360deg); opacity: 0;   }
+}
+
+/* Animation types — applied as classes on .wwm-scenario-box */
+
+/* collapse: slowly tilts the element as if a structure is leaning */
+@keyframes wwm-anim-collapse {
+  0%   { transform: rotate(0deg)  scaleY(1); }
+  40%  { transform: rotate(-3deg) scaleY(0.98); }
+  70%  { transform: rotate(-7deg) scaleY(0.93); }
+  100% { transform: rotate(-11deg) scaleY(0.88) translateY(6px); }
+}
+.wwm-anim-collapse .wwm-scenario-icon { animation: wwm-anim-collapse 3s ease-in 0.8s forwards; }
+
+/* wave: gentle oscillation — signals, ripples, uncertainty */
+@keyframes wwm-anim-wave {
+  0%, 100% { transform: skewX(0deg)   translateY(0);   }
+  25%       { transform: skewX(-3deg)  translateY(-3px); }
+  75%       { transform: skewX(3deg)   translateY(3px);  }
+}
+.wwm-anim-wave .wwm-scenario-icon { animation: wwm-anim-wave 2.2s ease-in-out 0.6s infinite; }
+
+/* chaos: random jitter — things flying apart, unpredictability */
+@keyframes wwm-anim-chaos {
+  0%   { transform: translate(0, 0)     rotate(0deg); }
+  15%  { transform: translate(-4px, 2px) rotate(-5deg); }
+  30%  { transform: translate(5px, -3px) rotate(6deg); }
+  45%  { transform: translate(-3px, -4px) rotate(-3deg); }
+  60%  { transform: translate(4px, 3px)  rotate(7deg); }
+  75%  { transform: translate(-2px, 5px) rotate(-6deg); }
+  100% { transform: translate(0, 0)     rotate(0deg); }
+}
+.wwm-anim-chaos .wwm-scenario-icon { animation: wwm-anim-chaos 1.4s ease-in-out 0.6s infinite; }
+
+/* blind: flicker in and out — things going dark, loss of information */
+@keyframes wwm-anim-blind {
+  0%, 100%    { opacity: 1;    filter: brightness(1); }
+  10%, 30%    { opacity: 0.1;  filter: brightness(0.1); }
+  20%, 50%    { opacity: 0.9;  filter: brightness(0.8); }
+  40%         { opacity: 0.05; filter: brightness(0.0); }
+  60%, 90%    { opacity: 1;    filter: brightness(1); }
+  70%         { opacity: 0.3;  filter: brightness(0.3); }
+}
+.wwm-anim-blind .wwm-scenario-icon { animation: wwm-anim-blind 2.5s steps(1, end) 0.8s infinite; }
+
+/* float: gentle levitation — abstract concepts, space, infinite ideas */
+@keyframes wwm-anim-float {
+  0%, 100% { transform: translateY(0)    scale(1); }
+  50%      { transform: translateY(-10px) scale(1.03); }
+}
+.wwm-anim-float .wwm-scenario-icon { animation: wwm-anim-float 3s ease-in-out 0.5s infinite; }
+
+/* shake: structural vibration — resonance, instability, limits exceeded */
+@keyframes wwm-anim-shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px) rotate(-1deg); }
+  20%, 40%, 60%, 80%      { transform: translateX(5px)  rotate(1deg);  }
+}
+.wwm-anim-shake .wwm-scenario-icon { animation: wwm-anim-shake 0.6s ease-in-out 0.8s infinite; }
+
+/* spin: rotation — gears, computation, circular motion */
+@keyframes wwm-anim-spin {
+  from { transform: rotate(0deg);   }
+  to   { transform: rotate(360deg); }
+}
+.wwm-anim-spin .wwm-scenario-icon { animation: wwm-anim-spin 4s linear 0.5s infinite; }
+
+/* ── Floating background particles ───────────────────────────────────── */
+.wwm-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.wwm-particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(232, 134, 74, 0.5);
+  animation: wwm-particle-drift 4s ease-in infinite;
+}
+.wwm-particle:nth-child(1)  { left: 12%;  bottom: 15%; animation-delay: 0s;    width: 5px; height: 5px; }
+.wwm-particle:nth-child(2)  { left: 28%;  bottom: 8%;  animation-delay: 0.7s;  width: 7px; height: 7px; background: rgba(92,184,122,0.4); }
+.wwm-particle:nth-child(3)  { left: 45%;  bottom: 20%; animation-delay: 1.4s;  width: 4px; height: 4px; }
+.wwm-particle:nth-child(4)  { left: 62%;  bottom: 5%;  animation-delay: 0.3s;  width: 8px; height: 8px; background: rgba(100,149,237,0.4); }
+.wwm-particle:nth-child(5)  { left: 78%;  bottom: 18%; animation-delay: 1.1s;  width: 5px; height: 5px; }
+.wwm-particle:nth-child(6)  { left: 90%;  bottom: 12%; animation-delay: 1.9s;  width: 6px; height: 6px; background: rgba(232,134,74,0.3); }
+.wwm-particle:nth-child(7)  { left: 6%;   bottom: 30%; animation-delay: 2.5s;  width: 4px; height: 4px; }
+.wwm-particle:nth-child(8)  { left: 55%;  bottom: 35%; animation-delay: 0.5s;  width: 5px; height: 5px; background: rgba(224,90,74,0.35); }
+
+/* ── Overlay backdrop ─────────────────────────────────────────────────── */
+.wwm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: radial-gradient(ellipse at 50% 30%, rgba(42,26,14,0.95) 0%, rgba(10,8,6,0.98) 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: wwm-backdrop-in 0.4s ease both;
+}
+
+/* ── Main card ────────────────────────────────────────────────────────── */
+.wwm-card {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  max-height: 90dvh;
+  overflow-y: auto;
+  background: linear-gradient(145deg, var(--clr-card, #2c2622) 0%, rgba(30,22,14,0.98) 100%);
+  border: 1px solid rgba(232,134,74,0.25);
+  border-radius: 24px;
+  padding: 36px 32px 32px;
+  box-shadow:
+    0 0 0 1px rgba(232,134,74,0.08),
+    0 8px 40px rgba(0,0,0,0.6),
+    0 2px 8px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(255,245,230,0.08);
+  animation: wwm-card-in 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both;
+  text-align: center;
+  scrollbar-width: thin;
+}
+
+/* Subtle orange gradient top glow */
+.wwm-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(232,134,74,0.8), transparent);
+  border-radius: 0 0 4px 4px;
+}
+
+/* ── Emoji display ────────────────────────────────────────────────────── */
+.wwm-emoji-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.wwm-emoji {
+  font-size: clamp(3rem, 8vw, 5rem);
+  line-height: 1;
+  display: block;
+  animation: wwm-emoji-bounce 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both;
+  filter: drop-shadow(0 4px 16px rgba(232,134,74,0.35));
+}
+
+/* ── Label strip ──────────────────────────────────────────────────────── */
+.wwm-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--clr-accent, #e8864a);
+  margin-bottom: 8px;
+  opacity: 0.85;
+  animation: wwm-body-in 0.5s ease 0.5s both;
+}
+
+/* ── Headline ─────────────────────────────────────────────────────────── */
+.wwm-headline {
+  font-family: var(--font-display, 'Source Serif 4', serif);
+  font-size: clamp(1.3rem, 4vw, 1.85rem);
+  font-weight: 700;
+  color: var(--clr-text, #ede8e3);
+  line-height: 1.3;
+  margin: 0 0 20px;
+  animation: wwm-headline-in 0.7s ease 0.55s both;
+}
+
+/* ── Animated scenario box ────────────────────────────────────────────── */
+.wwm-scenario-box {
+  background: rgba(255,245,230,0.04);
+  border: 1px solid rgba(255,245,230,0.1);
+  border-radius: 16px;
+  padding: 20px 20px 16px;
+  margin-bottom: 20px;
+  animation: wwm-body-in 0.6s ease 0.75s both;
+}
+
+.wwm-scenario-icon {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  margin-bottom: 12px;
+  display: block;
+  /* animation-type class overrides this */
+}
+
+.wwm-body {
+  font-size: clamp(0.92rem, 2.5vw, 1.05rem);
+  color: var(--clr-text-soft, #a89e94);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ── Impact level badge ───────────────────────────────────────────────── */
+.wwm-impact-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  animation: wwm-body-in 0.5s ease 0.9s both;
+}
+
+.wwm-impact-badge.funny {
+  background: rgba(92,184,122,0.12);
+  border: 1px solid rgba(92,184,122,0.35);
+  color: #6cd68a;
+}
+.wwm-impact-badge.serious {
+  background: rgba(232,134,74,0.12);
+  border: 1px solid rgba(232,134,74,0.35);
+  color: var(--clr-accent, #e8864a);
+}
+.wwm-impact-badge.catastrophic {
+  background: rgba(224,90,74,0.12);
+  border: 1px solid rgba(224,90,74,0.35);
+  color: #e86a5a;
+}
+
+.wwm-btn-wrap {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  animation: wwm-body-in 0.5s ease 1s both;
+}
+
+.wwm-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #e8864a 0%, #d4622a 100%);
+  color: #fff;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  animation: wwm-btn-pulse 2.4s ease-in-out 1.5s infinite;
+  width: 100%;
+  justify-content: center;
+  max-width: 260px;
+}
+
+.wwm-btn:hover,
+.wwm-btn:focus-visible {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(232,134,74,0.5);
+  background: linear-gradient(135deg, #f09060 0%, #e07030 100%);
+  animation: none;  /* pause pulse on hover for cleaner feel */
+}
+
+.wwm-btn:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 10px rgba(232,134,74,0.3);
+}
+
+.wwm-btn-arrow {
+  font-size: 1.2em;
+  transition: transform 0.18s ease;
+}
+.wwm-btn:hover .wwm-btn-arrow {
+  transform: translateX(4px);
+}
+
+/* ── "Skip" link below the button ─────────────────────────────────────── */
+.wwm-skip {
+  display: block;
+  margin-top: 14px;
+  font-size: 0.8rem;
+  color: var(--clr-text-soft, #a89e94);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  opacity: 0.7;
+  transition: opacity 0.15s;
+  animation: wwm-body-in 0.4s ease 1.2s both;
+  padding: 4px 8px;
+}
+.wwm-skip:hover,
+.wwm-skip:focus-visible {
+  opacity: 1;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+.wwm-skip:active {
+  transform: none;
+}
+
+/* ── Responsive adjustments ───────────────────────────────────────────── */
+@media (max-width: 500px) {
+  .wwm-card {
+    padding: 28px 20px 24px;
+    border-radius: 20px;
+  }
+  .wwm-scenario-box {
+    padding: 16px 14px 12px;
+  }
+  .wwm-btn {
+    max-width: 100%;
+    padding: 13px 24px;
+    font-size: 1rem;
+  }
+}
+
+/* ── Light theme overrides ────────────────────────────────────────────── */
+[data-theme="light"] .wwm-overlay {
+  background: radial-gradient(ellipse at 50% 30%, rgba(250,240,225,0.97) 0%, rgba(235,220,200,0.99) 100%);
+}
+[data-theme="light"] .wwm-card {
+  background: linear-gradient(145deg, #fdf8f3 0%, #f5ece0 100%);
+  border-color: rgba(232,134,74,0.3);
+  box-shadow:
+    0 0 0 1px rgba(232,134,74,0.12),
+    0 8px 40px rgba(0,0,0,0.12),
+    0 2px 8px rgba(0,0,0,0.08);
+}
+[data-theme="light"] .wwm-headline {
+  color: #2c1a0e;
+}
+[data-theme="light"] .wwm-body {
+  color: #5a4a3a;
+}
+[data-theme="light"] .wwm-scenario-box {
+  background: rgba(0,0,0,0.03);
+  border-color: rgba(0,0,0,0.1);
+}
+[data-theme="light"] .wwm-particle {
+  background: rgba(232,134,74,0.4);
+}
+
+/* ── Comic Modals and Panels ────────────────────────────────────────── */
+.comic-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+  backdrop-filter: blur(8px);
+}
+
+.comic-modal {
+  background: var(--clr-card);
+  border: 2px solid var(--clr-border);
+  border-radius: 20px;
+  padding: 24px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  animation: wwm-body-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+.comic-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--clr-border);
+}
+
+.comic-avatar {
+  font-size: 3rem;
+  background: var(--clr-bg-alt);
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.comic-title-block h3 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: var(--clr-text);
+  font-family: var(--font-display);
+}
+
+.comic-title-block p {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  color: var(--clr-text-soft);
+  font-style: italic;
+}
+
+.comic-panel-content {
+  background: var(--clr-bg-alt);
+  border-radius: 12px;
+  padding: 20px;
+  position: relative;
+}
+
+.comic-action {
+  font-size: 0.95rem;
+  color: var(--clr-text-soft);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.comic-dialogue {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: var(--clr-text);
+  font-style: italic;
+  font-family: var(--font-display);
+  position: relative;
+}
+
+/* Speech bubble pointer */
+.comic-panel-content::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 30px;
+  border-width: 0 10px 10px 10px;
+  border-style: solid;
+  border-color: transparent transparent var(--clr-bg-alt) transparent;
+}
+
+.cliffhanger-panel {
+  background: var(--clr-card);
+  border: 2px solid var(--clr-accent);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 15px rgba(232, 134, 74, 0.15);
+}
+
+.cliffhanger-panel .comic-header {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 16px;
+}
+
+.cliffhanger-panel .comic-avatar {
+  font-size: 2rem;
+  width: 50px;
+  height: 50px;
+}
+
+.cliffhanger-panel .comic-name {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--clr-accent);
+}
+
+/* ── Cliffhanger Banner in Home ─────────────────────────────────────── */
+.cliffhanger-banner {
+  background: linear-gradient(135deg, rgba(232, 134, 74, 0.15), rgba(212, 98, 42, 0.2));
+  border: 1px solid rgba(232, 134, 74, 0.4);
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.cliffhanger-banner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(232, 134, 74, 0.2);
+  background: linear-gradient(135deg, rgba(232, 134, 74, 0.2), rgba(212, 98, 42, 0.25));
+}
+
+.cliffhanger-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--clr-text);
+}
+
+.cliffhanger-arrow {
+  color: var(--clr-accent);
+  font-size: 1.5rem;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+
+.cliffhanger-banner:hover .cliffhanger-arrow {
+  transform: translateX(4px);
+}
+
+/* ── Addition Comic Modal (Side Tips Layout) ──────────────────────────── */
+.addition-comic-card {
+  background: var(--clr-card);
+  border: 1px solid var(--clr-border);
+  border-radius: 24px;
+  padding: 32px;
+  max-width: 1300px;
+  width: 96%;
+  max-height: 92vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.addition-comic-card h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--clr-text);
+  text-align: center;
+}
+
+/* ── Wrapper for Left Column, Center Comic, Right Column ── */
+.comic-layout-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+}
+
+/* ── Columns for Tips ── */
+.comic-tips-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+
+.comic-tip-card {
+  background: var(--clr-surface);
+  border: 2px solid transparent;
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  opacity: 0.7;
+}
+
+.comic-tip-card.active,
+.comic-tip-card:hover {
+  opacity: 1;
+  border-color: var(--clr-accent, #e8864a);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(232,134,74,0.15);
+}
+
+.tip-number {
+  background: var(--clr-accent, #e8864a);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.1rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tip-content h4 {
+  margin: 0 0 8px 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--clr-text);
+}
+
+.tip-content p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--clr-text-muted, #aaa);
+}
+
+/* ── Center Image Container ── */
+.comic-image-container {
+  flex: 2;
+  position: relative;
+  border-radius: 16px;
+  border: 2px solid var(--clr-border);
+  background: #000;
+}
+
+.comic-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  border-radius: 14px;
+}
+
+/* ── Hotspots on the Image ── */
+.comic-image-hotspot {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(232, 134, 74, 0.7);
+  border: none;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.comic-image-hotspot.active,
+.comic-image-hotspot:hover {
+  background: var(--clr-accent, #e8864a);
+  transform: translate(-50%, -50%) scale(1.15);
+  box-shadow: 0 6px 20px rgba(232,134,74,0.6);
+  z-index: 11;
+}
+
+/* ── Close Button ── */
+.comic-close-btn {
+  background: linear-gradient(135deg, #e8864a 0%, #d4622a 100%);
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  padding: 16px 32px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  align-self: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 18px rgba(232,134,74,0.35);
+  margin-top: 8px;
+}
+
+.comic-close-btn:hover {
+  background: linear-gradient(135deg, #f09060 0%, #e07030 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(232,134,74,0.5);
+}
+
+.comic-close-btn:active {
+  transform: translateY(0);
+}
+
+/* ── Light Theme Overrides ── */
+[data-theme="light"] .addition-comic-card {
+  background: #fff;
+  border-color: rgba(0,0,0,0.1);
+}
+
+[data-theme="light"] .comic-tip-card {
+  background: #f8f4f0;
+  border-color: rgba(0,0,0,0.05);
+}
+
+[data-theme="light"] .tip-content p {
+  color: #555;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .comic-layout-wrapper {
+    flex-direction: column;
+  }
+  .comic-tips-column {
+    width: 100%;
   }
 }
