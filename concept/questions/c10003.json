@@ -1,0 +1,15 @@
+{
+  "id": 10003,
+  "word": "Prime Number",
+  "question": "Prime Number",
+  "options": [
+    "A number that can be divided evenly by 2",
+    "A number that has exactly two distinct positive divisors: 1 and itself",
+    "A number that is the square of another integer",
+    "Any number greater than zero"
+  ],
+  "answerOption": "B",
+  "answerText": "A number that has exactly two distinct positive divisors: 1 and itself",
+  "difficulty": "easy",
+  "sourceFile": "c10003.json"
+}

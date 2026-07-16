@@ -1,0 +1,15 @@
+{
+  "id": 10010,
+  "word": "Mitosis",
+  "question": "Mitosis",
+  "options": [
+    "A type of cell division that results in two genetically identical daughter cells",
+    "A cell division process that produces four genetically diverse reproductive cells",
+    "The process of a cell consuming a smaller cell or particle",
+    "The spontaneous death of a cell due to damage"
+  ],
+  "answerOption": "A",
+  "answerText": "A type of cell division that results in two genetically identical daughter cells",
+  "difficulty": "medium",
+  "sourceFile": "c10010.json"
+}

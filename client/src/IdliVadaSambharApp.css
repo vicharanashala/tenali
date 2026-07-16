@@ -1,0 +1,243 @@
+/* Idli–Vada–Sambhar game — scoped under .ivs-app to avoid clashing with global styles */
+.ivs-app {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 16px 18px 40px;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #1f2a44;
+  position: relative;
+}
+
+.ivs-back {
+  background: transparent;
+  border: none;
+  color: #4a5a7a;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 6px 0;
+}
+.ivs-back:hover { color: #1f2a44; }
+
+.ivs-title {
+  text-align: center;
+  font-size: 2rem;
+  margin: 6px 0 2px;
+  color: #1a2540;
+  letter-spacing: 0.5px;
+}
+.ivs-tagline { text-align: center; color: #6b7794; margin: 0 0 18px; }
+
+/* Food word chips */
+.ivs-word {
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 999px;
+  display: inline-block;
+}
+.ivs-word.idli { background: #fff7e6; color: #b5892b; border: 1px solid #f0d79a; }
+.ivs-word.vada { background: #f6e2c8; color: #9a5a1e; border: 1px solid #e2b483; }
+.ivs-word.sambhar { background: #ffe3d6; color: #c0432a; border: 1px solid #f4b39c; }
+
+/* ---- Setup ---- */
+.ivs-setup-card {
+  background: #fbfcff;
+  border: 1px solid #e4e9f2;
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 6px 18px rgba(30, 42, 68, 0.06);
+}
+.ivs-setup-row { display: flex; flex-direction: column; gap: 14px; }
+.ivs-setup-row label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  flex-wrap: wrap;
+}
+.ivs-setup-row input {
+  width: 90px;
+  padding: 8px 10px;
+  border: 1px solid #cdd6e6;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+.ivs-hint { color: #7b869e; font-size: 0.85rem; margin: 14px 0 6px; }
+.ivs-error { color: #c0392b; font-weight: 600; margin: 6px 0; }
+
+.ivs-start, .ivs-submit, .ivs-continue, .ivs-again {
+  background: #1f6feb;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 22px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.08s ease, background 0.15s ease;
+}
+.ivs-start { width: 100%; margin-top: 10px; }
+.ivs-start:hover, .ivs-submit:hover:not(:disabled) { background: #1a5fd0; }
+.ivs-submit:active { transform: scale(0.98); }
+.ivs-submit:disabled { background: #b9c4d8; cursor: not-allowed; }
+
+/* ---- Legend / goal ---- */
+.ivs-legend {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.ivs-goal {
+  background: #eef3ff;
+  color: #34509a;
+  border-radius: 999px;
+  padding: 2px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* ---- Player circle ---- */
+.ivs-circle {
+  display: flex;
+  justify-content: center;
+  gap: 26px;
+  margin: 8px 0 18px;
+}
+.ivs-player {
+  text-align: center;
+  padding: 10px 14px;
+  border-radius: 16px;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+  min-width: 84px;
+}
+.ivs-player.active {
+  border-color: #1f6feb;
+  background: #eef3ff;
+  box-shadow: 0 4px 14px rgba(31, 111, 235, 0.18);
+  transform: translateY(-3px);
+}
+.ivs-avatar { font-size: 2.4rem; line-height: 1; }
+.ivs-pname { font-weight: 700; margin-top: 4px; }
+.ivs-turn-badge {
+  margin-top: 4px;
+  font-size: 0.72rem;
+  color: #1f6feb;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* ---- Current turn ---- */
+.ivs-current { text-align: center; margin-bottom: 14px; }
+.ivs-count { font-size: 1.1rem; color: #4a5a7a; }
+.ivs-count strong { font-size: 2rem; color: #1a2540; display: inline-block; margin-left: 6px; }
+.ivs-who { font-weight: 600; color: #1f6feb; margin-top: 2px; }
+
+/* ---- Answer controls ---- */
+.ivs-controls {
+  background: #fbfcff;
+  border: 1px solid #e4e9f2;
+  border-radius: 16px;
+  padding: 18px;
+  text-align: center;
+}
+.ivs-btn-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.ivs-choice {
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: 2px solid #cdd6e6;
+  background: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+.ivs-choice:hover { border-color: #9db0d4; }
+.ivs-choice.on { background: #1f6feb; color: #fff; border-color: #1f6feb; }
+.ivs-choice.idli.on { background: #d99b2b; border-color: #d99b2b; }
+.ivs-choice.vada.on { background: #9a5a1e; border-color: #9a5a1e; }
+.ivs-choice.sambhar.on { background: #c0432a; border-color: #c0432a; }
+
+.ivs-number-input {
+  margin-top: 14px;
+  padding: 10px 12px;
+  border: 1px solid #cdd6e6;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  width: 200px;
+  text-align: center;
+}
+.ivs-preview { margin-top: 12px; color: #4a5a7a; }
+.ivs-submit { margin-top: 14px; }
+
+.ivs-feedback { margin-top: 12px; font-weight: 600; border-radius: 10px; padding: 8px 12px; }
+.ivs-feedback.retry { background: #fff4e5; color: #b5691a; }
+.ivs-feedback.reveal { background: #fdecea; color: #c0392b; }
+
+/* ---- Stats ---- */
+.ivs-stats {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 18px 0;
+  font-size: 0.9rem;
+  color: #4a5a7a;
+  font-weight: 600;
+}
+
+/* ---- History ---- */
+.ivs-history { margin-top: 10px; }
+.ivs-history h3 { text-align: center; color: #6b7794; font-size: 0.9rem; margin: 0 0 8px; }
+.ivs-history ul { list-style: none; padding: 0; margin: 0; max-width: 420px; margin: 0 auto; }
+.ivs-history li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  margin-bottom: 4px;
+  background: #f6f8fc;
+}
+.ivs-history li.ok { border-left: 3px solid #2aa876; }
+.ivs-history li.bad { border-left: 3px solid #c0392b; }
+.ivs-h-num { font-weight: 700; min-width: 28px; }
+.ivs-h-arrow { color: #9db0d4; }
+.ivs-h-ans { font-weight: 600; }
+.ivs-h-player { color: #7b869e; font-size: 0.85rem; margin-left: auto; }
+.ivs-h-mark { font-weight: 700; }
+.ivs-history li.ok .ivs-h-mark { color: #2aa876; }
+.ivs-history li.bad .ivs-h-mark { color: #c0392b; }
+.ivs-empty { justify-content: center; color: #9db0d4; }
+
+/* ---- Win overlay ---- */
+.ivs-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 28, 46, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+.ivs-overlay-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px 34px;
+  text-align: center;
+  max-width: 420px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+.ivs-confetti { font-size: 3rem; }
+.ivs-overlay-card h2 { margin: 8px 0; color: #1a2540; }
+.ivs-lcm { font-size: 1.15rem; color: #34509a; margin-top: 10px; }
+.ivs-overlay-actions { display: flex; gap: 12px; justify-content: center; margin-top: 22px; flex-wrap: wrap; }
+.ivs-again { background: #2aa876; }
+.ivs-again:hover { background: #239265; }
+
+@media (max-width: 520px) {
+  .ivs-circle { gap: 12px; }
+  .ivs-player { min-width: 70px; padding: 8px; }
+  .ivs-avatar { font-size: 2rem; }
+}

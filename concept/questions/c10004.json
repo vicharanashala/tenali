@@ -1,0 +1,15 @@
+{
+  "id": 10004,
+  "word": "Gravity",
+  "question": "Gravity",
+  "options": [
+    "A force that repels objects with mass",
+    "An invisible force that pulls objects toward each other",
+    "A type of electromagnetic radiation",
+    "The friction caused by moving through air"
+  ],
+  "answerOption": "B",
+  "answerText": "An invisible force that pulls objects toward each other",
+  "difficulty": "easy",
+  "sourceFile": "c10004.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 10001,
+  "word": "Object-Oriented Programming (OOP)",
+  "question": "Object-Oriented Programming (OOP)",
+  "options": [
+    "A paradigm based on functions calling other functions",
+    "A programming paradigm based on the concept of 'objects', which can contain data and code",
+    "A hardware architecture for parallel processing",
+    "A type of database design for unstructured data"
+  ],
+  "answerOption": "B",
+  "answerText": "A programming paradigm based on the concept of 'objects', which can contain data and code",
+  "difficulty": "easy",
+  "sourceFile": "c10001.json"
+}

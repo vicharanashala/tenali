@@ -19,10 +19,11 @@
  * - Development-only, stripped in production build
  */
 
-import React from 'react'
+import React from 'react'; window.React = React;
 import ReactDOM from 'react-dom/client'
-import App, { AuthMenu } from './App'
-import './index.css'
+import App, { AuthMenu } from './App.jsx?v=2'
+import './index.css';
+import './kid-zone.css';
 
 // Create React root and render the App component
 ReactDOM.createRoot(document.getElementById('root')).render(

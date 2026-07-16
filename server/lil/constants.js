@@ -1,0 +1,95 @@
+const DOMAINS = {
+  ARITHMETIC: 'arithmetic',
+  NUMBER_THEORY: 'numth',
+  ALGEBRA: 'algebra',
+  GEOMETRY: 'geometry',
+  CALCULUS: 'calculus',
+  STATS_PROB: 'stats',
+  VECTORS_MATRICES: 'vecmat',
+  OTHER: 'other'
+};
+
+const TOPIC_DOMAINS = {
+  addition: DOMAINS.ARITHMETIC,
+  basicarith: DOMAINS.ARITHMETIC,
+  multiply: DOMAINS.ARITHMETIC,
+  decimals: DOMAINS.ARITHMETIC,
+  fractionadd: DOMAINS.ARITHMETIC,
+  percent: DOMAINS.ARITHMETIC,
+  ratio: DOMAINS.ARITHMETIC,
+  rounding: DOMAINS.ARITHMETIC,
+  sqrt: DOMAINS.ARITHMETIC,
+  squaring: DOMAINS.ARITHMETIC,
+  shares: DOMAINS.ARITHMETIC,
+  banking: DOMAINS.ARITHMETIC,
+  gst: DOMAINS.ARITHMETIC,
+
+  hcflcm: DOMAINS.NUMBER_THEORY,
+  primefactor: DOMAINS.NUMBER_THEORY,
+  bases: DOMAINS.NUMBER_THEORY,
+
+  indices: DOMAINS.ALGEBRA,
+  surds: DOMAINS.ALGEBRA,
+  lineareq: DOMAINS.ALGEBRA,
+  quadratic: DOMAINS.ALGEBRA,
+  qformula: DOMAINS.ALGEBRA,
+  simul: DOMAINS.ALGEBRA,
+  funceval: DOMAINS.ALGEBRA,
+  lineq: DOMAINS.ALGEBRA,
+  polymul: DOMAINS.ALGEBRA,
+  polyfactor: DOMAINS.ALGEBRA,
+  sequences: DOMAINS.ALGEBRA,
+  ineq: DOMAINS.ALGEBRA,
+  binomial: DOMAINS.ALGEBRA,
+  remfactor: DOMAINS.ALGEBRA,
+  variation: DOMAINS.ALGEBRA,
+  stdform: DOMAINS.ALGEBRA,
+  bounds: DOMAINS.ALGEBRA,
+  log: DOMAINS.ALGEBRA,
+  complex: DOMAINS.ALGEBRA,
+  linprog: DOMAINS.ALGEBRA,
+
+  trig: DOMAINS.GEOMETRY,
+  invtrig: DOMAINS.GEOMETRY,
+  coordgeom: DOMAINS.GEOMETRY,
+  angles: DOMAINS.GEOMETRY,
+  triangles: DOMAINS.GEOMETRY,
+  congruence: DOMAINS.GEOMETRY,
+  pythag: DOMAINS.GEOMETRY,
+  polygons: DOMAINS.GEOMETRY,
+  similarity: DOMAINS.GEOMETRY,
+  circleth: DOMAINS.GEOMETRY,
+  bearings: DOMAINS.GEOMETRY,
+  mensur: DOMAINS.GEOMETRY,
+  heron: DOMAINS.GEOMETRY,
+  circmeasure: DOMAINS.GEOMETRY,
+  conics: DOMAINS.GEOMETRY,
+  transform: DOMAINS.GEOMETRY,
+  section: DOMAINS.GEOMETRY,
+
+  diff: DOMAINS.CALCULUS,
+  integ: DOMAINS.CALCULUS,
+  limits: DOMAINS.CALCULUS,
+  diffeq: DOMAINS.CALCULUS,
+
+  stats: DOMAINS.STATS_PROB,
+  prob: DOMAINS.STATS_PROB,
+  permcomb: DOMAINS.STATS_PROB,
+  sets: DOMAINS.STATS_PROB,
+
+  vectors: DOMAINS.VECTORS_MATRICES,
+  dotprod: DOMAINS.VECTORS_MATRICES,
+  matrix: DOMAINS.VECTORS_MATRICES,
+
+  gk: DOMAINS.OTHER,
+  vocab: DOMAINS.OTHER,
+  spot: DOMAINS.OTHER,
+  tatsavit: DOMAINS.OTHER,
+  randommix: DOMAINS.OTHER,
+  custom: DOMAINS.OTHER
+};
+
+module.exports = {
+  DOMAINS,
+  TOPIC_DOMAINS
+};
