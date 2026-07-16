@@ -49,6 +49,7 @@ const fs = require('fs');
 const path = require('path');
 const http = require('http');
 const { Server } = require('socket.io');
+const wordCreator = require('./wordCreator');
 
 // Initialize Express app and configure middleware
 const app = express();
@@ -68,11 +69,13 @@ app.use(express.static(clientDistPath));
 // MongoDB on startup. If Mongo is unreachable the rest of the server still
 // serves; only the auth endpoints will return 503.
 const auth = require('./auth');
+const progress = require('./progress');
 app.use('/api/auth', auth.router);
+app.use('/api/progress', progress.router);
 auth.seedUsers().catch(() => {});  // always populate in-memory fallback
 auth.connectMongo()
   .then(() => auth.seedUsers())
-  .catch(err => console.error('[auth] Mongo connect failed — using in-memory auth:', err.message));
+  .catch(err => console.error('[auth] Mongo connect failed — using in-memory auth:', err));
 
 /**
  * EXPLANATION SUPPORT MIDDLEWARE
@@ -127,886 +130,179 @@ app.use((req, res, next) => {
   next();
 });
 
-/**
- * Generate a detailed, educational step-by-step explanation for how to solve the problem.
- * Covers all ~60 puzzle types with contextual teaching.
- *
- * @param {object} req - Express request object (contains path and body)
- * @param {object} data - Response data object from the check endpoint
- * @returns {string|null} Explanation text or null if unable to generate
- */
-function generateExplanation(req, data) {
-  const p = req.path;
-  const b = req.body || {};
-  const d = data || {};
-  const ans = d.correctAnswer ?? d.display ?? d.answer ?? '';
+// ─── LIL INTERCEPTOR MIDDLEWARE ──────────────────────────────────────────────
+const jwt = require('jsonwebtoken');
+const lilProcess = require('./lil/processAttempt');
+const { User } = require('./auth');
 
+// Cache the fallback 'tatsavit' user ID so we don't query MongoDB on every anonymous request
+let cachedTatsavitUserId = null;
+setTimeout(async () => {
   try {
+    const u = await User.findOne({ username: 'tatsavit' });
+    if (u) cachedTatsavitUserId = u._id.toString();
+  } catch {}
+}, 3000);
 
-  // ── Basic Arithmetic ──────────────────────────────────────────
-  if (p.includes('basicarith-api')) {
-    const { a, b: num2, op } = b;
-    const r = d.correctAnswer;
-    let s = `Problem: ${a} ${op} ${num2}\n\n`;
-    if (op === '+') {
-      if (Number(a) < 0 || Number(num2) < 0) {
-        s += `When adding negative numbers, think of a number line.\n`;
-        s += `Move right for positive, left for negative.\n`;
-      }
-      s += `${a} + ${num2} = ${r}\n\n`;
-      s += `Tip: Addition means combining quantities together.`;
-    } else if (op === '−' || op === '-') {
-      s += `Subtraction means finding the difference.\n`;
-      if (Number(num2) < 0) s += `Subtracting a negative is the same as adding: ${a} − (${num2}) = ${a} + ${Math.abs(num2)} = ${r}\n`;
-      else s += `${a} − ${num2} = ${r}\n`;
-      s += `\nTip: Think "how far apart are these numbers on the number line?"`;
-    } else if (op === '×') {
-      s += `Multiplication means repeated addition.\n`;
-      const absA = Math.abs(Number(a)), absB = Math.abs(Number(num2));
-      s += `${absA} × ${absB} = ${absA * absB}\n`;
-      const neg = (Number(a) < 0) !== (Number(num2) < 0);
-      if (neg) s += `One number is negative → result is negative: ${r}\n`;
-      else if (Number(a) < 0 && Number(num2) < 0) s += `Both negative → result is positive: ${r}\n`;
-      s += `\nRule: positive × positive = positive\nnegative × positive = negative\nnegative × negative = positive`;
-    } else if (op === '÷') {
-      // Division explanation
-      s += `Division asks: "How many times does ${num2} fit into ${a}?"\n`;
-      const absA = Math.abs(Number(a)), absB = Math.abs(Number(num2));
-      s += `\nStep 1: Divide the absolute values.\n`;
-      s += `  ${absA} ÷ ${absB} = ${absB === 0 ? 'undefined' : absA / absB}\n\n`;
-      s += `Step 2: Apply the sign rule (same as multiplication):\n`;
-      const neg = (Number(a) < 0) !== (Number(num2) < 0);
-      if (neg) s += `  One operand negative → quotient is negative.\n`;
-      else if (Number(a) < 0 && Number(num2) < 0) s += `  Both operands negative → quotient is positive.\n`;
-      else s += `  Both operands positive → quotient is positive.\n`;
-      s += `\nAnswer: ${a} ÷ ${num2} = ${r}\n\n`;
-      s += `Rule: positive ÷ positive = positive\nnegative ÷ positive = negative\nnegative ÷ negative = positive\nNote: division by 0 is undefined.`;
+app.use(async (req, res, next) => {
+  // Only intercept POST requests to check endpoints
+  if (req.method !== 'POST' || !req.path.includes('-api/check')) {
+    return next();
+  }
+
+  // Skip if it is a solve request (since we only log standard attempts)
+  if (req.body && req.body.solve === true) {
+    return next();
+  }
+
+  // Resolve User ID from Bearer token
+  let userId = null;
+  const authHeader = req.get('authorization') || '';
+  const m = /^Bearer\s+(.+)$/i.exec(authHeader);
+  if (m) {
+    try {
+      const JWT_SECRET = process.env.JWT_SECRET || 'tenali-dev-secret-change-me';
+      const payload = jwt.verify(m[1], JWT_SECRET);
+      userId = payload.sub;
+    } catch (e) {
+      console.warn('[LIL] JWT verify failed:', e.message);
     }
-    return s;
   }
 
-  // ── Addition ──────────────────────────────────────────────────
-  if (p.includes('addition-api')) {
-    const { a, b: num2 } = b;
-    return `Problem: ${a} + ${num2}\n\nAdd the two numbers together:\n${a} + ${num2} = ${d.correctAnswer}\n\nTip: For large additions, break numbers into place values.\nExample: ${a} = ${Math.floor(a/10)*10} + ${a%10}, then add.`;
+  // Fallback: Use cached tatsavit user ID (no DB query per request)
+  if (!userId) {
+    userId = cachedTatsavitUserId;
   }
 
-  // ── Multiplication Tables ─────────────────────────────────────
-  if (p.includes('multiply-api')) {
-    const { table, multiplier } = b;
-    const r = d.correctAnswer;
-    return `Problem: ${table} × ${multiplier}\n\nThis is the ${table}-times table:\n${table} × ${multiplier} = ${r}\n\nTip: Multiplication is repeated addition.\n${table} × ${multiplier} means adding ${table} to itself ${multiplier} times.\n${Array.from({length: Math.min(multiplier, 5)}, (_, i) => table).join(' + ')}${multiplier > 5 ? ' + ...' : ''} = ${r}`;
-  }
+  // Extract topicId (e.g. "/addition-api/check" -> "addition")
+  const pathParts = req.path.split('/');
+  const apiName = pathParts[1] || '';
+  const topicId = apiName.replace('-api', '');
 
-  // ── Quadratic Evaluation ──────────────────────────────────────
-  if (p.includes('quadratic-api') && !p.includes('qformula')) {
-    const { a, b: bCoeff, c, x } = b;
-    const r = d.correctAnswer;
-    let s = `Problem: Evaluate y = ${a}x² + ${bCoeff}x + ${c} at x = ${x}\n\n`;
-    s += `Step 1: Substitute x = ${x} into each term:\n`;
-    const t1 = a * x * x, t2 = bCoeff * x;
-    s += `  ${a}(${x})² = ${a} × ${x*x} = ${t1}\n`;
-    s += `  ${bCoeff}(${x}) = ${t2}\n`;
-    s += `  constant = ${c}\n\n`;
-    s += `Step 2: Add all terms:\n`;
-    s += `  ${t1} + ${t2} + ${c} = ${r}\n\n`;
-    s += `Tip: Always compute x² first, then multiply by the coefficient.`;
-    return s;
-  }
+  // Intercept response JSON
+  const originalJson = res.json.bind(res);
+  res.json = function (data) {
+    // Restore res.json to avoid recursion
+    res.json = originalJson;
 
-  // ── Square Roots ──────────────────────────────────────────────
-  if (p.includes('sqrt-api')) {
-    const { q } = b;
-    const fl = d.floorAnswer, ce = d.ceilAnswer;
-    let s = `Problem: Approximate √${q}\n\n`;
-    s += `Step 1: Find perfect squares around ${q}:\n`;
-    s += `  ${fl}² = ${fl*fl}\n  ${ce}² = ${ce*ce}\n\n`;
-    s += `Step 2: Since ${fl*fl} ≤ ${q} ≤ ${ce*ce}:\n`;
-    s += `  ${fl} ≤ √${q} ≤ ${ce}\n\n`;
-    s += `√${q} ≈ ${d.sqrtRounded}\n\n`;
-    s += `Tip: Memorise perfect squares (1, 4, 9, 16, 25, 36, 49, 64, 81, 100...) to estimate roots quickly.`;
-    return s;
-  }
+    // Async LIL execution wrapper
+    if (userId && topicId) {
+      const payloadInput = {
+        userId,
+        topicId,
+        difficulty: req.query.difficulty || req.body.difficulty || 'easy',
+        userAnswer: req.body.userAnswer ?? req.body.answer ?? '',
+        isCorrect: !!data.correct,
+        sessionGoal: req.body.sessionGoal || 'standard',
+        telemetry: req.body.telemetry || {},
+        prompt: req.body.prompt || '',
+        correctAnswer: req.body.correctAnswer ?? req.body.answer ?? data.correctAnswer ?? data.display ?? '',
+        display: req.body.display ?? data.display ?? '',
+        options: req.body.options || null,
+        questionData: req.body
+      };
 
-  // ── Fraction Addition / Subtraction / Multiplication / Division ──
-  if (p.includes('fractionadd-api')) {
-    const { n1, d1, n2, d2, mixed, w1, w2 } = b;
-    const op = b.op || '+';
-    const opWord = op === '+' ? 'Add' : (op === '−' || op === '-') ? 'Subtract' : (op === '×' || op === '*') ? 'Multiply' : 'Divide';
-    let s = '';
-    if (mixed) {
-      s += `Problem: ${w1} ${n1}/${d1} ${op} ${w2} ${n2}/${d2}\n\n`;
-      s += `Step 1: Convert mixed numbers to improper fractions:\n`;
-      const imp1 = w1 * d1 + n1, imp2 = w2 * d2 + n2;
-      s += `  ${w1} ${n1}/${d1} = ${imp1}/${d1}\n`;
-      s += `  ${w2} ${n2}/${d2} = ${imp2}/${d2}\n\n`;
-      if (op === '+' || op === '−' || op === '-') {
-        s += `Step 2: Use a common denominator and ${opWord.toLowerCase()} numerators.\n`;
-      } else if (op === '×' || op === '*') {
-        s += `Step 2: Multiply numerators together and denominators together: (${imp1} × ${imp2}) / (${d1} × ${d2}).\n`;
-      } else {
-        s += `Step 2: Invert the second fraction and multiply: (${imp1}/${d1}) × (${d2}/${imp2}).\n`;
-      }
+      // Send response immediately — don't block on DB writes
+      originalJson(data);
+
+      // Fire-and-forget: try to save attempt in background
+      lilProcess.processAttempt(payloadInput)
+        .then(() => {})
+        .catch(err => console.error('[LIL] processAttempt failed:', err.message));
     } else {
-      s += `Problem: ${n1}/${d1} ${op} ${n2}/${d2}\n\n`;
-      if (op === '+' || op === '−' || op === '-') {
-        if (d1 === d2) {
-          s += `Step 1: Same denominators! ${opWord} numerators directly:\n`;
-          const combined = (op === '+') ? (n1 + n2) : (n1 - n2);
-          s += `  ${n1}/${d1} ${op} ${n2}/${d2} = ${combined}/${d1}\n\n`;
-        } else {
-          const lcd = (d1 * d2) / gcd(d1, d2);
-          s += `Step 1: Find LCD of ${d1} and ${d2}: LCD = ${lcd}\n`;
-          s += `Step 2: Convert fractions:\n`;
-          s += `  ${n1}/${d1} = ${n1 * (lcd/d1)}/${lcd}\n`;
-          s += `  ${n2}/${d2} = ${n2 * (lcd/d2)}/${lcd}\n\n`;
-          const combined = (op === '+') ? (n1*(lcd/d1) + n2*(lcd/d2)) : (n1*(lcd/d1) - n2*(lcd/d2));
-          s += `Step 3: ${opWord} numerators: ${n1*(lcd/d1)} ${op} ${n2*(lcd/d2)} = ${combined}\n\n`;
+      originalJson(data);
+    }
+  };
+
+  next();
+});
+
+// ─── LIL GET QUESTION REVISION INTERCEPTOR ───────────────────────────────────
+app.use(async (req, res, next) => {
+  // Only intercept GET requests to question endpoints when goal is revision
+  if (req.method !== 'GET' || !req.path.includes('-api/question') || req.query.goal !== 'revision') {
+    return next();
+  }
+
+  // Resolve User ID from Bearer token
+  let userId = null;
+  const authHeader = req.get('authorization') || '';
+  const m = /^Bearer\s+(.+)$/i.exec(authHeader);
+  if (m) {
+    try {
+      const JWT_SECRET = process.env.JWT_SECRET || 'tenali-dev-secret-change-me';
+      const payload = jwt.verify(m[1], JWT_SECRET);
+      userId = payload.sub;
+    } catch (e) {
+      console.warn('[LIL GET] JWT verify failed:', e.message);
+    }
+  }
+
+  // Fallback: Use cached tatsavit user ID (no DB query per request)
+  if (!userId) {
+    userId = cachedTatsavitUserId;
+  }
+
+  // Extract topicId (e.g. "/addition-api/question" -> "addition")
+  const pathParts = req.path.split('/');
+  const apiName = pathParts[1] || '';
+  const topicId = apiName.replace('-api', '');
+
+  if (userId && topicId) {
+    try {
+      const mongoose = require('mongoose');
+      const { Attempt } = require('./lil/models');
+      
+      const unresolved = await Attempt.aggregate([
+        { $match: { 
+            userId: new mongoose.Types.ObjectId(userId), 
+            topicId, 
+            prompt: { $exists: true, $ne: null } 
+          } 
+        },
+        { $sort: { createdAt: -1 } },
+        { $group: {
+            _id: "$prompt",
+            latestAttempt: { $first: "$$ROOT" }
+        } },
+        { $match: { "latestAttempt.isCorrect": false } },
+        { $sort: { "latestAttempt.createdAt": -1 } }
+      ]);
+
+      const lastFailed = unresolved.length > 0 ? unresolved[0].latestAttempt : null;
+
+      if (lastFailed && lastFailed.prompt) {
+        console.log(`[LIL GET] Serving revision question from unresolved failed attempt: ${lastFailed._id}`);
+        if (lastFailed.questionData) {
+          // Exclude _id if there is any to prevent conflict, but copy everything else
+          const qData = { ...lastFailed.questionData };
+          delete qData._id;
+          return res.json({
+            ...qData,
+            isRevision: true
+          });
         }
-      } else if (op === '×' || op === '*') {
-        s += `Step 1: Multiply numerators and denominators:\n`;
-        s += `  (${n1} × ${n2}) / (${d1} × ${d2}) = ${n1*n2}/${d1*d2}\n\n`;
-      } else {
-        s += `Step 1: Invert the divisor and multiply:\n`;
-        s += `  ${n1}/${d1} ÷ ${n2}/${d2} = ${n1}/${d1} × ${d2}/${n2} = ${n1*d2}/${d1*n2}\n\n`;
+        return res.json({
+          id: `rev-${lastFailed._id}-${Date.now()}`,
+          difficulty: lastFailed.difficulty || 'easy',
+          prompt: lastFailed.prompt,
+          answer: lastFailed.correctAnswer,
+          display: lastFailed.display || String(lastFailed.correctAnswer),
+          options: lastFailed.options || undefined,
+          isRevision: true
+        });
       }
+    } catch (err) {
+      console.error('[LIL GET] Failed to fetch revision question:', err);
     }
-    s += `Step: Simplify to lowest terms.\n`;
-    s += `Answer: ${d.display}\n\n`;
-    s += `Tip: Always simplify by dividing numerator and denominator by their GCD.`;
-    return s;
   }
 
-  // ── Polynomial Multiplication ─────────────────────────────────
-  if (p.includes('polymul-api')) {
-    const { p1, p2, p1Display, p2Display } = b;
-    let s = `Problem: Multiply ${p1Display || 'P₁'} × ${p2Display || 'P₂'}\n\n`;
-    s += `Method: Multiply each term of the first polynomial by each term of the second.\n\n`;
-    if (p1 && p2) {
-      s += `Step 1: Distribute each term:\n`;
-      for (let i = 0; i < p1.length; i++) {
-        if (p1[i] === 0) continue;
-        const terms = p2.map((c, j) => c === 0 ? null : `${p1[i]*c}x^${(p1.length-1-i)+(p2.length-1-j)}`).filter(Boolean);
-        s += `  ${p1[i]}x^${p1.length-1-i} × each term → ${terms.join(', ')}\n`;
-      }
-      s += `\nStep 2: Combine like terms (same power of x)\n`;
-    }
-    s += `\nAnswer: ${d.correctDisplay || d.display}\n\n`;
-    s += `Tip: Use the FOIL method for binomials, or grid method for longer polynomials.`;
-    return s;
-  }
+  // If no failed attempts are found, proceed to normal question generation!
+  next();
+});
 
-  // ── Polynomial Factorization ──────────────────────────────────
-  if (p.includes('polyfactor-api')) {
-    const { a, b: bCoeff, c } = b;
-    let s = `Problem: Factorise ${a}x² + ${bCoeff}x + ${c}\n\n`;
-    s += `Method: Find two numbers that multiply to give a×c = ${a*c}\nand add to give b = ${bCoeff}.\n\n`;
-    s += `Step 1: List factor pairs of ${a*c}.\n`;
-    s += `Step 2: Find the pair that sums to ${bCoeff}.\n`;
-    s += `Step 3: Rewrite the middle term using those factors.\n`;
-    s += `Step 4: Factor by grouping.\n\n`;
-    s += `Answer: ${d.display || '(check factored form)'}\n\n`;
-    s += `Tip: If a=1, just find two numbers that multiply to c and add to b.`;
-    return s;
-  }
 
-  // ── Prime Factorization ───────────────────────────────────────
-  if (p.includes('primefactor-api')) {
-    const num = b.number;
-    const factors = d.correctFactors;
-    let s = `Problem: Find the prime factors of ${num}\n\n`;
-    s += `Method: Divide by the smallest prime repeatedly.\n\n`;
-    if (factors) {
-      let remaining = num;
-      let step = 1;
-      for (const f of factors) {
-        s += `Step ${step}: ${remaining} ÷ ${f} = ${remaining / f}\n`;
-        remaining = remaining / f;
-        step++;
-      }
-      s += `\nPrime factorisation: ${num} = ${factors.join(' × ')}\n\n`;
-    }
-    s += `Tip: Always start dividing by the smallest prime (2, then 3, then 5, 7, 11...)`;
-    return s;
-  }
-
-  // ── Quadratic Formula ─────────────────────────────────────────
-  if (p.includes('qformula-api')) {
-    const { a, b: bCoeff, c } = b;
-    let s = `Problem: Solve ${a}x² + ${bCoeff}x + ${c} = 0\n\n`;
-    s += `Formula: x = (-b ± √(b²-4ac)) / 2a\n\n`;
-    const disc = bCoeff * bCoeff - 4 * a * c;
-    s += `Step 1: Calculate discriminant: b²-4ac = ${bCoeff}²-4(${a})(${c}) = ${bCoeff*bCoeff} - ${4*a*c} = ${disc}\n\n`;
-    if (disc > 0) {
-      s += `Discriminant > 0 → Two distinct real roots\n`;
-      s += `Step 2: x = (${-bCoeff} ± √${disc}) / ${2*a}\n`;
-      const sqrtD = Math.sqrt(disc);
-      s += `  √${disc} ≈ ${sqrtD.toFixed(2)}\n`;
-      s += `  x₁ = (${-bCoeff} + ${sqrtD.toFixed(2)}) / ${2*a} = ${((-bCoeff + sqrtD) / (2*a)).toFixed(2)}\n`;
-      s += `  x₂ = (${-bCoeff} - ${sqrtD.toFixed(2)}) / ${2*a} = ${((-bCoeff - sqrtD) / (2*a)).toFixed(2)}\n`;
-    } else if (disc === 0) {
-      s += `Discriminant = 0 → One repeated root\n`;
-      s += `x = ${-bCoeff} / ${2*a} = ${(-bCoeff / (2*a)).toFixed(2)}\n`;
-    } else {
-      s += `Discriminant < 0 → Complex roots\n`;
-      s += `Real part = ${-bCoeff}/${2*a} = ${(-bCoeff/(2*a)).toFixed(2)}\n`;
-      s += `Imaginary part = √${Math.abs(disc)}/${2*a} ≈ ${(Math.sqrt(Math.abs(disc))/(2*a)).toFixed(2)}i\n`;
-    }
-    s += `\nTip: The discriminant tells you how many roots to expect.`;
-    return s;
-  }
-
-  // ── Simultaneous Equations ────────────────────────────────────
-  if (p.includes('simul-api')) {
-    const sol = d.solution || b.solution;
-    let s = `Problem: Solve the system of equations\n\n`;
-    s += `Method: Use elimination or substitution.\n\n`;
-    s += `Step 1: Choose a variable to eliminate.\n`;
-    s += `Step 2: Multiply equations to make coefficients equal.\n`;
-    s += `Step 3: Subtract equations to eliminate one variable.\n`;
-    s += `Step 4: Solve for the remaining variable(s).\n`;
-    s += `Step 5: Substitute back to find other variables.\n\n`;
-    if (sol) s += `Solution: x = ${sol.x}${sol.y !== undefined ? ', y = ' + sol.y : ''}${sol.z !== undefined ? ', z = ' + sol.z : ''}\n\n`;
-    s += `Tip: Check your answer by substituting back into ALL original equations.`;
-    return s;
-  }
-
-  // ── Function Evaluation ───────────────────────────────────────
-  if (p.includes('funceval-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Evaluate the function'}\n\n`;
-    s += `Step 1: Identify the function and the input value.\n`;
-    s += `Step 2: Substitute the input value for x in the function.\n`;
-    s += `Step 3: Simplify the expression.\n\n`;
-    s += `Answer: ${d.correctAnswer}\n\n`;
-    s += `Tip: Always substitute carefully, using brackets around negative values.`;
-    return s;
-  }
-
-  // ── Line Equations ────────────────────────────────────────────
-  if (p.includes('lineq-api') && !p.includes('lineareq')) {
-    const { x1, y1, x2, y2 } = b;
-    let s = `Problem: Find y = mx + c passing through (${x1}, ${y1}) and (${x2}, ${y2})\n\n`;
-    const m = ((y2 - y1) / (x2 - x1));
-    s += `Step 1: Calculate slope m = (y₂-y₁)/(x₂-x₁)\n`;
-    s += `  m = (${y2}-${y1})/(${x2}-${x1}) = ${y2-y1}/${x2-x1} = ${m.toFixed(2)}\n\n`;
-    const c = y1 - m * x1;
-    s += `Step 2: Find y-intercept using y = mx + c with one point:\n`;
-    s += `  ${y1} = ${m.toFixed(2)} × ${x1} + c\n`;
-    s += `  c = ${y1} - ${(m * x1).toFixed(2)} = ${c.toFixed(2)}\n\n`;
-    s += `Answer: y = ${m.toFixed(2)}x + ${c.toFixed(2)}\n\n`;
-    s += `Tip: The slope tells you the steepness. Positive = rising, negative = falling.`;
-    return s;
-  }
-
-  // ── Surds ─────────────────────────────────────────────────────
-  if (p.includes('surds-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Simplify the surd expression'}\n\n`;
-    if (b.type === 'simplify') {
-      s += `Method: Find the largest perfect square factor.\n`;
-      s += `Step 1: Factor the number under the root.\n`;
-      s += `Step 2: √(a×b) = √a × √b where a is a perfect square.\n`;
-      s += `Step 3: Simplify √a to get the coefficient.\n\n`;
-    } else if (b.type === 'multiply') {
-      s += `Rule: √a × √b = √(a×b)\n`;
-      s += `Step 1: Multiply the numbers under the roots.\n`;
-      s += `Step 2: Simplify the result if possible.\n\n`;
-    } else if (b.type === 'rationalise') {
-      s += `Method: Multiply top and bottom by the conjugate of the denominator.\n`;
-      s += `Step 1: If denominator is √a, multiply by √a/√a.\n`;
-      s += `Step 2: If denominator is a + √b, multiply by (a - √b)/(a - √b).\n`;
-      s += `Step 3: Simplify the result.\n\n`;
-    }
-    s += `Answer: ${ans}\n\n`;
-    s += `Tip: Memorise perfect squares up to 225 (15²) for quick simplification.`;
-    return s;
-  }
-
-  // ── Indices (Exponents) ───────────────────────────────────────
-  if (p.includes('indices-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Simplify the expression'}\n\n`;
-    s += `Key Laws of Indices:\n`;
-    s += `• aᵐ × aⁿ = aᵐ⁺ⁿ (same base, multiply → add powers)\n`;
-    s += `• aᵐ ÷ aⁿ = aᵐ⁻ⁿ (same base, divide → subtract powers)\n`;
-    s += `• (aᵐ)ⁿ = aᵐⁿ (power of a power → multiply)\n`;
-    s += `• a⁰ = 1 (anything to the power 0 is 1)\n`;
-    s += `• a⁻ⁿ = 1/aⁿ (negative power → reciprocal)\n`;
-    s += `• a^(1/n) = ⁿ√a (fractional power → root)\n\n`;
-    s += `Apply the relevant rule to simplify.\n\n`;
-    s += `Answer: ${ans}\n\n`;
-    s += `Tip: Always simplify step by step. Identify which law applies first.`;
-    return s;
-  }
-
-  // ── Sequences ─────────────────────────────────────────────────
-  if (p.includes('sequences-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Find the term or sum'}\n\n`;
-    if (b.type && b.type.startsWith('arith')) {
-      s += `This is an arithmetic sequence (constant difference).\n\n`;
-      s += `Formulas:\n`;
-      s += `• nth term: aₙ = a₁ + (n-1)d\n`;
-      s += `• Sum of n terms: Sₙ = n/2 × (2a₁ + (n-1)d)  or  Sₙ = n/2 × (first + last)\n\n`;
-    } else {
-      s += `This is a geometric sequence (constant ratio).\n\n`;
-      s += `Formulas:\n`;
-      s += `• nth term: aₙ = a₁ × rⁿ⁻¹\n`;
-      s += `• Sum of n terms: Sₙ = a₁(rⁿ - 1)/(r - 1)\n\n`;
-    }
-    s += `Step 1: Identify a₁ (first term) and d or r (common difference/ratio).\n`;
-    s += `Step 2: Substitute into the appropriate formula.\n`;
-    s += `Step 3: Calculate.\n\n`;
-    s += `Answer: ${ans}`;
-    return s;
-  }
-
-  // ── Ratios ────────────────────────────────────────────────────
-  if (p.includes('ratio-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Solve the ratio problem'}\n\n`;
-    if (b.type === 'simplify') {
-      s += `To simplify a ratio, divide both parts by their GCD.\n\n`;
-    } else if (b.type === 'divide2' || b.type === 'divide3') {
-      s += `To divide in a given ratio:\n`;
-      s += `Step 1: Add the parts of the ratio.\n`;
-      s += `Step 2: Divide the total by this sum to get one "share".\n`;
-      s += `Step 3: Multiply each ratio part by the share value.\n\n`;
-    } else if (b.type === 'direct') {
-      s += `Direct proportion: if a:b = c:d, then a×d = b×c (cross-multiply).\n\n`;
-    }
-    s += `Answer: ${ans}`;
-    return s;
-  }
-
-  // ── Percentages ───────────────────────────────────────────────
-  if (p.includes('percent-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Solve the percentage problem'}\n\n`;
-    if (b.type === 'simple') {
-      s += `To find x% of a number: multiply by x/100.\n`;
-    } else if (b.type === 'find_pct') {
-      s += `To find what percentage a is of b: (a/b) × 100.\n`;
-    } else if (b.type === 'inc_dec') {
-      s += `Percentage increase/decrease:\n`;
-      s += `New value = original × (1 + rate/100) for increase\n`;
-      s += `New value = original × (1 - rate/100) for decrease\n`;
-    } else if (b.type === 'reverse') {
-      s += `Reverse percentage: to find the original before x% change:\n`;
-      s += `Original = new value ÷ (1 ± x/100)\n`;
-    } else if (b.type === 'compound') {
-      s += `Compound interest/growth: A = P(1 + r/100)ⁿ\n`;
-      s += `where P = principal, r = rate, n = periods.\n`;
-    }
-    s += `\nAnswer: ${ans}\n\n`;
-    s += `Tip: "Percent" means "per hundred". Always think in terms of hundredths.`;
-    return s;
-  }
-
-  // ── Sets ──────────────────────────────────────────────────────
-  if (p.includes('sets-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Solve the set problem'}\n\n`;
-    s += `Key Set Operations:\n`;
-    s += `• A ∪ B (union) = all elements in A or B or both\n`;
-    s += `• A ∩ B (intersection) = elements in both A and B\n`;
-    s += `• A - B (difference) = elements in A but not in B\n`;
-    s += `• |A| = number of elements in A\n\n`;
-    s += `Answer: ${ans}`;
-    return s;
-  }
-
-  // ── Trigonometry ──────────────────────────────────────────────
-  if (p.includes('trig-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Solve the trigonometry problem'}\n\n`;
-    s += `Key Formulae:\n`;
-    s += `• SOH: sin(θ) = Opposite / Hypotenuse\n`;
-    s += `• CAH: cos(θ) = Adjacent / Hypotenuse\n`;
-    s += `• TOA: tan(θ) = Opposite / Adjacent\n`;
-    s += `• Pythagoras: a² + b² = c²\n`;
-    s += `• Sine rule: a/sinA = b/sinB = c/sinC\n`;
-    s += `• Cosine rule: a² = b² + c² - 2bc·cos(A)\n\n`;
-    s += `Step 1: Identify what you know (sides/angles).\n`;
-    s += `Step 2: Choose the appropriate formula.\n`;
-    s += `Step 3: Substitute and solve.\n\n`;
-    s += `Answer: ${ans}`;
-    return s;
-  }
-
-  // ── Coordinate Geometry ───────────────────────────────────────
-  if (p.includes('coordgeom-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Solve the coordinate geometry problem'}\n\n`;
-    if (b.type === 'midpoint') {
-      s += `Midpoint formula: M = ((x₁+x₂)/2, (y₁+y₂)/2)\n`;
-    } else if (b.type === 'distance') {
-      s += `Distance formula: d = √((x₂-x₁)² + (y₂-y₁)²)\n`;
-    } else if (b.type === 'gradient') {
-      s += `Gradient formula: m = (y₂-y₁)/(x₂-x₁)\n`;
-    } else if (b.type === 'perp_bisector') {
-      s += `Perpendicular bisector:\n`;
-      s += `Step 1: Find midpoint of the two points.\n`;
-      s += `Step 2: Find gradient of the line joining them.\n`;
-      s += `Step 3: Negative reciprocal gives perpendicular gradient.\n`;
-      s += `Step 4: Use y - y₁ = m(x - x₁) with the midpoint.\n`;
-    }
-    s += `\nAnswer: ${ans}`;
-    return s;
-  }
-
-  // ── Probability ───────────────────────────────────────────────
-  if (p.includes('prob-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Calculate the probability'}\n\n`;
-    s += `P(event) = favourable outcomes / total outcomes\n\n`;
-    s += `Key Rules:\n`;
-    s += `• P(A and B) = P(A) × P(B) [if independent]\n`;
-    s += `• P(A or B) = P(A) + P(B) - P(A and B)\n`;
-    s += `• P(not A) = 1 - P(A)\n\n`;
-    s += `Answer: ${ans}\n\n`;
-    s += `Tip: Always express probability as a simplified fraction.`;
-    return s;
-  }
-
-  // ── Statistics ────────────────────────────────────────────────
-  if (p.includes('stats-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Calculate the statistic'}\n\n`;
-    if (b.type === 'mean' || b.type === 'freq_mean') {
-      s += `Mean = sum of all values ÷ number of values\n`;
-      s += `For frequency tables: mean = Σ(f × x) ÷ Σf\n`;
-    } else if (b.type === 'median') {
-      s += `Median = middle value when data is sorted.\n`;
-      s += `If n is even: median = average of the two middle values.\n`;
-    } else if (b.type === 'mode') {
-      s += `Mode = the most frequently occurring value(s).\n`;
-    } else if (b.type === 'range') {
-      s += `Range = highest value - lowest value.\n`;
-    }
-    s += `\nAnswer: ${ans}`;
-    return s;
-  }
-
-  // ── Matrices ──────────────────────────────────────────────────
-  if (p.includes('matrix-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Solve the matrix problem'}\n\n`;
-    if (b.type === 'determinant') {
-      s += `For a 2×2 matrix [[a,b],[c,d]]:\ndet = ad - bc\n\n`;
-    } else if (b.type === 'scalar') {
-      s += `Scalar multiplication: multiply every element by the scalar.\n\n`;
-    } else {
-      s += `Matrix addition: add corresponding elements.\n\n`;
-    }
-    s += `Answer: ${ans}`;
-    return s;
-  }
-
-  // ── Vectors ───────────────────────────────────────────────────
-  if (p.includes('vectors-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Solve the vector problem'}\n\n`;
-    if (b.type === 'add') s += `Vector addition: add corresponding components (x₁+x₂, y₁+y₂).\n\n`;
-    else if (b.type === 'scalar') s += `Scalar multiplication: multiply each component by the scalar.\n\n`;
-    else if (b.type === 'magnitude') s += `Magnitude: |v| = √(x² + y²)\n\n`;
-    s += `Answer: ${ans}`;
-    return s;
-  }
-
-  // ── Dot Product ───────────────────────────────────────────────
-  if (p.includes('dotprod-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Calculate the dot product'}\n\n`;
-    s += `Dot product: a·b = a₁b₁ + a₂b₂ (+ a₃b₃ for 3D)\n`;
-    s += `Multiply corresponding components, then sum.\n\n`;
-    s += `Answer: ${ans}`;
-    return s;
-  }
-
-  // ── Logarithms ────────────────────────────────────────────────
-  if (p.includes('log-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Evaluate the logarithm'}\n\n`;
-    s += `Key Laws of Logarithms:\n`;
-    s += `• log(a×b) = log(a) + log(b)\n`;
-    s += `• log(a/b) = log(a) - log(b)\n`;
-    s += `• log(aⁿ) = n·log(a)\n`;
-    s += `• logₐ(a) = 1, logₐ(1) = 0\n`;
-    s += `• logₐ(b) = c means aᶜ = b\n\n`;
-    s += `Answer: ${ans}\n\n`;
-    s += `Tip: "log base a of b" asks "what power of a gives b?"`;
-    return s;
-  }
-
-  // ── Inequalities ──────────────────────────────────────────────
-  if (p.includes('ineq-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Solve the inequality'}\n\n`;
-    s += `Method: Solve like an equation, but remember:\n`;
-    s += `• When multiplying/dividing by a negative, FLIP the sign.\n`;
-    s += `• For quadratic inequalities, find roots then test intervals.\n\n`;
-    s += `Answer: ${ans}`;
-    return s;
-  }
-
-  // ── Differentiation ───────────────────────────────────────────
-  if (p.includes('diff-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Differentiate'}\n\n`;
-    s += `Key Rules:\n`;
-    s += `• Power rule: d/dx(xⁿ) = nxⁿ⁻¹\n`;
-    s += `• Constant rule: d/dx(c) = 0\n`;
-    s += `• Sum rule: differentiate term by term\n`;
-    s += `• Chain rule: d/dx(f(g(x))) = f'(g(x)) × g'(x)\n`;
-    s += `• Product rule: d/dx(fg) = f'g + fg'\n\n`;
-    s += `Apply the power rule to each term: bring the exponent down as a coefficient,\nthen reduce the exponent by 1.\n\n`;
-    s += `Answer: ${ans}`;
-    return s;
-  }
-
-  // ── Integration ───────────────────────────────────────────────
-  if (p.includes('integ-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Integrate'}\n\n`;
-    s += `Key Rules:\n`;
-    s += `• Power rule: ∫xⁿ dx = xⁿ⁺¹/(n+1) + C  (n ≠ -1)\n`;
-    s += `• Constant: ∫k dx = kx + C\n`;
-    s += `• Sum rule: integrate term by term\n`;
-    s += `• ∫1/x dx = ln|x| + C\n\n`;
-    s += `Reverse the power rule: increase the exponent by 1,\nthen divide by the new exponent. Don't forget +C!\n\n`;
-    s += `Answer: ${ans}`;
-    return s;
-  }
-
-  // ── Limits ────────────────────────────────────────────────────
-  if (p.includes('limits-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Evaluate the limit'}\n\n`;
-    s += `Methods for evaluating limits:\n`;
-    s += `1. Direct substitution — try plugging in the value.\n`;
-    s += `2. If 0/0, factorise and cancel common factors.\n`;
-    s += `3. For limits at infinity, divide by highest power of x.\n`;
-    s += `4. L'Hôpital's rule: if 0/0 or ∞/∞, take derivative of top and bottom.\n\n`;
-    s += `Answer: ${ans}`;
-    return s;
-  }
-
-  // ── Mensuration (Area/Volume) ─────────────────────────────────
-  if (p.includes('mensur-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Calculate the measurement'}\n\n`;
-    s += `Common Formulae:\n`;
-    s += `• Circle: area = πr², circumference = 2πr\n`;
-    s += `• Triangle: area = ½ × base × height\n`;
-    s += `• Rectangle: area = length × width\n`;
-    s += `• Cylinder: volume = πr²h, surface = 2πr(r+h)\n`;
-    s += `• Sphere: volume = 4/3πr³, surface = 4πr²\n`;
-    s += `• Cone: volume = 1/3πr²h\n\n`;
-    s += `Answer: ${ans}`;
-    return s;
-  }
-
-  // ── Bearings ──────────────────────────────────────────────────
-  if (p.includes('bearings-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Calculate the bearing'}\n\n`;
-    s += `Bearings are measured clockwise from North (000° to 360°).\n\n`;
-    s += `Key rules:\n`;
-    s += `• Always give 3 digits (e.g., 045° not 45°).\n`;
-    s += `• Back bearing = bearing ± 180°.\n`;
-    s += `• Use trigonometry to find angles in the triangle.\n\n`;
-    s += `Answer: ${ans}`;
-    return s;
-  }
-
-  // ── Number Bases ──────────────────────────────────────────────
-  if (p.includes('bases-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Convert between number bases'}\n\n`;
-    if (b.type === 'dec_to_bin') {
-      s += `Decimal → Binary: Divide by 2 repeatedly, read remainders bottom to top.\n\n`;
-    } else if (b.type === 'bin_to_dec') {
-      s += `Binary → Decimal: Each digit × its place value (powers of 2), then sum.\n`;
-      s += `Place values from right: 1, 2, 4, 8, 16, 32, 64, 128...\n\n`;
-    } else if (b.type === 'dec_to_hex') {
-      s += `Decimal → Hex: Divide by 16 repeatedly. Remainders 10-15 = A-F.\n\n`;
-    } else if (b.type === 'hex_to_bin') {
-      s += `Hex → Binary: Convert each hex digit to 4-bit binary.\n`;
-      s += `0=0000, 1=0001, ..., 9=1001, A=1010, B=1011, C=1100, D=1101, E=1110, F=1111\n\n`;
-    } else if (b.type === 'bin_add') {
-      s += `Binary addition: 0+0=0, 0+1=1, 1+0=1, 1+1=10 (carry 1)\n\n`;
-    }
-    s += `Answer: ${ans}`;
-    return s;
-  }
-
-  // ── Circle Theorems ───────────────────────────────────────────
-  if (p.includes('circle-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Find the angle'}\n\n`;
-    s += `Circle Theorems:\n`;
-    s += `• Angle at centre = 2 × angle at circumference\n`;
-    s += `• Angles in the same segment are equal\n`;
-    s += `• Angle in a semicircle = 90°\n`;
-    s += `• Opposite angles of a cyclic quadrilateral sum to 180°\n`;
-    s += `• Tangent meets radius at 90°\n`;
-    s += `• Alternate segment theorem\n\n`;
-    s += `Answer: ${ans}`;
-    return s;
-  }
-
-  // ── Transformations ───────────────────────────────────────────
-  if (p.includes('transform-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Apply the transformation'}\n\n`;
-    s += `Types of Transformations:\n`;
-    s += `• Translation: move by vector (a, b) → (x+a, y+b)\n`;
-    s += `• Reflection: flip across a line (x-axis, y-axis, y=x, etc.)\n`;
-    s += `• Rotation: turn around a point by an angle\n`;
-    s += `• Enlargement: scale from a centre by a factor\n\n`;
-    s += `Answer: ${ans}`;
-    return s;
-  }
-
-  // ── Tatsavit (9-level drill) ──────────────────────────────────
-  if (p.includes('tatsavit-api')) {
-    const type = b.type;
-    const prompt = b.prompt || b.display || '';
-    let s = `Problem: ${prompt}\n\n`;
-    if (type === 0 || type === 1) {
-      s += `This is a multiplication tables question.\n`;
-      s += `Tip: If unsure, use repeated addition or break into smaller products.\n`;
-    } else if (type === 2) {
-      s += `This is a squares question (n²).\n`;
-      s += `Tip: Use the identity (a+b)² = a² + 2ab + b² to compute squares of larger numbers.\n`;
-    } else if (type === 3) {
-      s += `This is a square root question.\n`;
-      s += `Tip: Know your perfect squares: 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144...\n`;
-    } else if (type === 4) {
-      s += `This is a monomial multiplication question.\n`;
-      s += `Rule: Multiply coefficients, add exponents of same base.\n`;
-      s += `Example: 3x² × 5x³ = 15x⁵\n`;
-    } else if (type === 5) {
-      s += `This is a percentage question.\n`;
-      s += `To find x% of n: multiply n by x/100.\n`;
-    } else if (type === 6) {
-      s += `This is an addition problem.\nTip: Break into place values for mental math.\n`;
-    } else if (type === 7) {
-      s += `This is a subtraction problem.\nTip: Use complementary addition (count up from smaller to larger).\n`;
-    } else if (type === 8) {
-      s += `This is a negative arithmetic problem.\n`;
-      s += `Rules: neg × neg = pos, neg × pos = neg\nneg + neg = more negative, neg - neg = check signs.\n`;
-    }
-    s += `\nAnswer: ${ans}`;
-    return s;
-  }
-
-  // ── GK / Vocab (Multiple Choice) ──────────────────────────────
-  if (p.includes('gk-api') || p.includes('vocab-api')) {
-    const correctText = d.correctAnswerText || d.correctAnswer || ans;
-    return `The correct answer is: ${correctText}\n\nTip: Read all options carefully before choosing.`;
-  }
-
-  // ── Linear Equations (solve ax + b = c) ───────────────────────
-  if (p.includes('lineareq-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Solve the linear equation'}\n\n`;
-    s += `Method: Isolate x on one side.\n`;
-    s += `Step 1: Move constant terms to the right.\n`;
-    s += `Step 2: Move x terms to the left.\n`;
-    s += `Step 3: Divide both sides by the coefficient of x.\n\n`;
-    s += `Answer: ${ans}`;
-    return s;
-  }
-
-  // ── Permutations & Combinations ───────────────────────────────
-  if (p.includes('permcomb-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Calculate'}\n\n`;
-    s += `Permutation (order matters): nPr = n! / (n-r)!\n`;
-    s += `Combination (order doesn't matter): nCr = n! / (r!(n-r)!)\n\n`;
-    s += `Tip: Ask yourself "does the order matter?" to decide which to use.\n\n`;
-    s += `Answer: ${ans}`;
-    return s;
-  }
-
-  // ── Inverse Trig ──────────────────────────────────────────────
-  if (p.includes('invtrig-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Evaluate'}\n\n`;
-    s += `Inverse trig functions find the angle given a ratio.\n`;
-    s += `• sin⁻¹(x) gives the angle whose sine is x\n`;
-    s += `• cos⁻¹(x) gives the angle whose cosine is x\n`;
-    s += `• tan⁻¹(x) gives the angle whose tangent is x\n\n`;
-    s += `Answer: ${ans}`;
-    return s;
-  }
-
-  // ── Remainder / Factor Theorem ────────────────────────────────
-  if (p.includes('remfactor-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Apply the theorem'}\n\n`;
-    s += `Remainder Theorem: When f(x) is divided by (x-a), remainder = f(a).\n`;
-    s += `Factor Theorem: If f(a) = 0, then (x-a) is a factor of f(x).\n\n`;
-    s += `Step 1: Substitute the value into the polynomial.\n`;
-    s += `Step 2: Calculate f(a).\n\n`;
-    s += `Answer: ${ans}`;
-    return s;
-  }
-
-  // ── Heron's Formula ───────────────────────────────────────────
-  if (p.includes('heron-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Calculate the area'}\n\n`;
-    s += `Heron's Formula: Area = √(s(s-a)(s-b)(s-c))\n`;
-    s += `where s = (a+b+c)/2 is the semi-perimeter.\n\n`;
-    s += `Step 1: Calculate s = (a+b+c)/2\n`;
-    s += `Step 2: Calculate each factor: s-a, s-b, s-c\n`;
-    s += `Step 3: Multiply and take the square root.\n\n`;
-    s += `Answer: ${ans}`;
-    return s;
-  }
-
-  // ── Conics ────────────────────────────────────────────────────
-  if (p.includes('conics-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Identify or work with the conic'}\n\n`;
-    s += `Standard forms:\n`;
-    s += `• Circle: (x-h)² + (y-k)² = r²\n`;
-    s += `• Ellipse: (x-h)²/a² + (y-k)²/b² = 1\n`;
-    s += `• Parabola: y = ax² + bx + c\n`;
-    s += `• Hyperbola: (x-h)²/a² - (y-k)²/b² = 1\n\n`;
-    s += `Answer: ${ans}`;
-    return s;
-  }
-
-  // ── Differential Equations ────────────────────────────────────
-  if (p.includes('diffeq-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Solve the differential equation'}\n\n`;
-    s += `Method (Separable DE):\n`;
-    s += `Step 1: Separate variables: put all y terms with dy, all x terms with dx.\n`;
-    s += `Step 2: Integrate both sides.\n`;
-    s += `Step 3: Solve for y if possible. Don't forget +C!\n\n`;
-    s += `Answer: ${ans}`;
-    return s;
-  }
-
-  // ── Angles ────────────────────────────────────────────────────
-  if (p.includes('angles-api')) {
-    const promptStr = b.prompt || '';
-    // Use the numeric answer (no degree symbol) so we can format consistently.
-    // Fall back to whatever 'ans' contains if 'b.answer' is unavailable.
-    const rNum = (b.answer !== undefined && b.answer !== null) ? b.answer : String(ans).replace(/°/g, '');
-    const rDeg = `${rNum}°`;
-    let s = `Problem: ${promptStr}\n\n`;
-    // Pick the right rule based on keywords in the prompt.
-    if (/straight line/i.test(promptStr) && !/cross/i.test(promptStr)) {
-      s += `Rule: angles on a straight line add up to 180°.\n`;
-      // Try to extract the given angle for an explicit subtraction.
-      const m = promptStr.match(/(\d+)\s*°/);
-      if (m) s += `  ${m[1]}° + x = 180°  →  x = 180° − ${m[1]}° = ${rDeg}\n\n`;
-      else s += `  Sum the known angles and subtract from 180°.\n\n`;
-    } else if (/at a point|meet at a point/i.test(promptStr)) {
-      s += `Rule: angles around a point add up to 360°.\n`;
-      const nums = (promptStr.match(/(\d+)\s*°/g) || []).map(x => parseInt(x));
-      if (nums.length) s += `  Sum of given angles = ${nums.reduce((a,n)=>a+n,0)}°.\n  x = 360° − sum = ${rDeg}\n\n`;
-    } else if (/vertically opposite/i.test(promptStr)) {
-      s += `Rule: vertically opposite angles are equal.\n  Answer: ${rDeg}.\n\n`;
-    } else if (/cross/i.test(promptStr) && /adjacent/i.test(promptStr)) {
-      s += `Rule: adjacent angles on a straight line add up to 180°.\n  x = 180° − given = ${rDeg}.\n\n`;
-    } else if (/alternate/i.test(promptStr)) {
-      s += `Rule: alternate angles between parallel lines are equal (Z-shape).\n  Answer: ${rDeg}.\n\n`;
-    } else if (/corresponding/i.test(promptStr)) {
-      s += `Rule: corresponding angles between parallel lines are equal (F-shape).\n  Answer: ${rDeg}.\n\n`;
-    } else if (/co-interior|cointerior|allied/i.test(promptStr)) {
-      s += `Rule: co-interior (allied) angles between parallel lines add up to 180° (C-shape).\n  Answer: 180° − given = ${rDeg}.\n\n`;
-    } else {
-      s += `Identify which angle relationship applies (line, point, or parallel lines), then apply the matching rule.\n\nAnswer: ${rDeg}.\n\n`;
-    }
-    s += `Tip: a quick sketch with the right shape (line, point, Z, F, C) makes it obvious which rule fits.`;
-    return s;
-  }
-
-  // ── Binomial Theorem ──────────────────────────────────────────
-  if (p.includes('binomial-api')) {
-    const promptStr = b.prompt || '';
-    const r = ans;
-    let s = `Problem: ${promptStr}\n\n`;
-    s += `General formula: (a + b)^n = Σ C(n,r) · a^(n−r) · b^r  for r = 0 … n.\n`;
-    s += `Where C(n,r) = n! / (r!·(n−r)!).\n\n`;
-    // Extract n and r from common shapes like "nCr" or "x^r in (...)^n"
-    const nCrMatch = promptStr.match(/(\d+)C(\d+)/);
-    const expandMatch = promptStr.match(/x\^(\d+).*\(([^)]+)\)\^(\d+)/);
-    const termMatch = promptStr.match(/(\d+)(?:nd|rd|th).*\(1\s*\+\s*x\)\^(\d+)/);
-    if (nCrMatch) {
-      const n = +nCrMatch[1], rr = +nCrMatch[2];
-      s += `Step 1: Plug in n = ${n}, r = ${rr}.\n`;
-      s += `Step 2: ${n}C${rr} = ${n}! / (${rr}!·${n-rr}!) = ${r}.\n\n`;
-    } else if (expandMatch) {
-      const power = expandMatch[1];
-      const inside = expandMatch[2];
-      const n = expandMatch[3];
-      s += `Step 1: Identify the term containing x^${power}: choose r = ${power} in (${inside})^${n}.\n`;
-      s += `Step 2: That term is C(${n}, ${power}) · (1st term)^(${n}−${power}) · (2nd term)^${power}.\n`;
-      s += `Step 3: Evaluate to get coefficient = ${r}.\n\n`;
-    } else if (termMatch) {
-      const k = +termMatch[1];
-      const n = +termMatch[2];
-      s += `Step 1: The k-th term uses r = k − 1, so r = ${k - 1}.\n`;
-      s += `Step 2: Coefficient = C(${n}, ${k - 1}) = ${r}.\n\n`;
-    } else {
-      s += `Step 1: Identify n and the desired power r.\n`;
-      s += `Step 2: Apply C(n,r)·a^(n−r)·b^r and evaluate.\n\n`;
-    }
-    s += `Answer: ${r}\n\n`;
-    s += `Tip: Pascal's triangle gives C(n,r) for small n quickly — each entry is the sum of the two above it.`;
-    return s;
-  }
-
-  // ── Bounds ────────────────────────────────────────────────────
-  if (p.includes('bounds-api')) {
-    const promptStr = b.prompt || '';
-    const r = ans;
-    let s = `Problem: ${promptStr}\n\n`;
-    s += `Key idea: when a value is rounded to a step h, the true value lies in the interval\n`;
-    s += `  [reported − h/2, reported + h/2).\n`;
-    s += `The lower bound is reported − h/2; the upper bound is reported + h/2.\n\n`;
-    if (/lower bound/i.test(promptStr)) {
-      s += `Step 1: Identify the rounding step h from the question (e.g., 1 d.p. → h = 0.1).\n`;
-      s += `Step 2: Lower bound = reported − h/2.\n\n`;
-    } else if (/upper bound/i.test(promptStr) && /a\s*[+÷×−-]\s*b/i.test(promptStr)) {
-      s += `Step 1: For combinations of bounded quantities, push each toward the extreme that\n  makes the calculation as large (upper) or as small (lower) as required.\n`;
-      s += `  • a + b: upper = a_upper + b_upper.\n`;
-      s += `  • a × b (positives): upper = a_upper × b_upper.\n`;
-      s += `  • a ÷ b (positives): upper = a_upper ÷ b_lower (smaller divisor → larger quotient).\n\n`;
-    } else if (/upper bound/i.test(promptStr)) {
-      s += `Step 1: Identify the rounding step h.\n`;
-      s += `Step 2: Upper bound = reported + h/2.\n\n`;
-    }
-    s += `Answer: ${r}\n\n`;
-    s += `Tip: write out the inequality reported − h/2 ≤ true < reported + h/2 before plugging numbers in — it stops sign mistakes.`;
-    return s;
-  }
-
-  // ── Gym Decimals ──────────────────────────────────────────────
-  if (p.includes('gymdecimals-api')) {
-    const { a, b: bStr, d1, d2, e1, e2, prodMantissa, prodExp } = b;
-    let s = `Problem: ${a} × ${bStr}\n\n`;
-    s += `Strategy: separate each number into a single digit and a power of 10.\n`;
-    s += `  ${a} = ${d1} × 10^${e1}\n`;
-    s += `  ${bStr} = ${d2} × 10^${e2}\n\n`;
-    s += `Step 1: Multiply the digits.\n`;
-    s += `  ${d1} × ${d2} = ${prodMantissa}\n\n`;
-    s += `Step 2: Add the exponents (combine the powers of 10).\n`;
-    s += `  10^${e1} × 10^${e2} = 10^${e1 + e2}\n\n`;
-    s += `Step 3: Reassemble.\n`;
-    s += `  ${prodMantissa} × 10^${prodExp} = ${d.display}\n\n`;
-    s += `Tip: count decimal places — every position the point moves left in the inputs adds one place to the answer.`;
-    return s;
-  }
-
-  // ── Linear Programming ────────────────────────────────────────
-  if (p.includes('linprog-api')) {
-    let s = `Problem: ${b.prompt || b.display || 'Solve the LP problem'}\n\n`;
-    s += `Method:\n`;
-    s += `Step 1: Identify constraints and objective function.\n`;
-    s += `Step 2: Graph the feasible region.\n`;
-    s += `Step 3: Find corner points (vertices).\n`;
-    s += `Step 4: Evaluate objective function at each corner.\n`;
-    s += `Step 5: The optimal solution is at the best corner point.\n\n`;
-    s += `Answer: ${ans}`;
-    return s;
-  }
-
-  // ── Generic fallback with prompt ──────────────────────────────
-  if (b.prompt || b.display) {
-    let s = `Problem: ${b.prompt || b.display}\n\n`;
-    s += `Answer: ${ans}\n\n`;
-    s += `Read the problem carefully, identify what is being asked,\napply the relevant formula or method, and simplify your answer.`;
-    return s;
-  }
-
-  // ── Bare fallback ─────────────────────────────────────────────
-  if (ans) return `The correct answer is: ${ans}`;
-  return null;
-
-  } catch (e) {
-    // If anything goes wrong in explanation generation, return a basic answer
-    return ans ? `The correct answer is: ${ans}` : null;
-  }
-}
+const { generateExplanation } = require('./explanations');
 
 /**
  * Generate a random integer between min and max (inclusive)
@@ -1061,6 +357,36 @@ function loadQuestions() {
 
 // Load all GK questions at server startup
 const questions = loadQuestions();
+
+const WordProblemGenerator = {
+  addition: (a, b) => {
+    const templates = [
+      `Alice has ${a} apples and Bob gives her ${b} more. How many apples does Alice have in total?`,
+      `A store sold ${a} books in the morning and ${b} books in the afternoon. What is the total number of books sold?`,
+      `You have $${a} in your savings account and you deposit $${b}. What is your new balance?`,
+      `A farmer planted ${a} trees in the first week and ${b} trees in the second week. How many trees were planted in total?`,
+      `${a} + ${b} = ?`
+    ];
+    return templates[Math.floor(Math.random() * templates.length)];
+  },
+  percentType1: (pct, base) => {
+    const templates = [
+      `A new smartphone costs $${base}. It is currently on sale for ${pct}% off. What is the discount amount?`,
+      `Your dinner bill is $${base} and you want to leave a ${pct}% tip. How much is the tip?`,
+      `In a town of ${base} people, ${pct}% of them voted in the last election. How many people voted?`,
+      `What is ${pct}% of ${base}?`
+    ];
+    return templates[Math.floor(Math.random() * templates.length)];
+  },
+  quadratic: (expression, x) => {
+    const templates = [
+      `A toy rocket is launched, and its height is modeled by the function h(x) = ${expression}. What is its height at x = ${x}?`,
+      `The daily profit of a bakery is modeled by the function P(x) = ${expression}. Calculate the profit when x = ${x}.`,
+      `Evaluate the quadratic expression ${expression} when x = ${x}.`
+    ];
+    return templates[Math.floor(Math.random() * templates.length)];
+  }
+};
 
 /**
  * HEALTH CHECK ENDPOINT
@@ -1177,9 +503,16 @@ app.get('/addition-api/question', (req, res) => {
   // Sanitize digits to valid options; default to 1 if invalid
   const safeDigits = [1, 2, 3, 4].includes(digits) ? digits : 1;
   const range = digitRange(safeDigits);
-  const a = randomInt(range.min, range.max);
-  const b = randomInt(range.min, range.max);
-  res.json({ id: `${safeDigits}-${Date.now()}-${Math.random()}`, digits: safeDigits, a, b, prompt: `${a} + ${b}`, answer: a + b });
+
+  // Optional sumMax: when set, cap each operand so a + b <= sumMax
+  const sumMax = req.query.sumMax ? Number(req.query.sumMax) : null;
+  const effectiveMax = sumMax ? Math.min(range.max, Math.floor(sumMax / 2)) : range.max;
+  const effectiveMin = Math.min(range.min, effectiveMax);
+
+  const a = randomInt(effectiveMin, effectiveMax);
+  const b = randomInt(effectiveMin, effectiveMax);
+  const prompt = WordProblemGenerator.addition(a, b);
+  res.json({ id: `${safeDigits}-${Date.now()}-${Math.random()}`, digits: safeDigits, a, b, prompt, answer: a + b });
 });
 
 /**
@@ -1285,7 +618,7 @@ function formatSignedTerm(value, variablePart, isFirst = false) {
  */
 function buildQuadraticPrompt(a, b, c, x) {
   const expression = `${formatSignedTerm(a, 'x²', true)} ${formatSignedTerm(b, 'x')} ${formatSignedTerm(c, '')}`;
-  return `If x = ${x}, find y for y = ${expression}`;
+  return WordProblemGenerator.quadratic(expression, x);
 }
 
 /**
@@ -1465,6 +798,7 @@ app.post('/sqrt-api/check', (req, res) => {
 
 // Directory containing vocabulary question JSON files
 const vocabDir = path.join(__dirname, '..', 'vocab', 'questions');
+const conceptDir = path.join(__dirname, '..', 'concept', 'questions');
 
 /**
  * Load all vocabulary questions from JSON files
@@ -1482,8 +816,18 @@ function loadVocab() {
   }
 }
 
+function loadConcepts() {
+  try {
+    const files = fs.readdirSync(conceptDir).filter((f) => f.endsWith('.json'));
+    return files.map((f) => JSON.parse(fs.readFileSync(path.join(conceptDir, f), 'utf8')));
+  } catch (e) {
+    return [];
+  }
+}
+
 // Load all vocabulary questions at server startup
 const vocabQuestions = loadVocab();
+const conceptQuestions = loadConcepts();
 
 /**
  * GET /vocab-api/question
@@ -1558,6 +902,47 @@ app.post('/vocab-api/check', (req, res) => {
 });
 
 /**
+ * GET /concept-api/question
+ */
+app.get('/concept-api/question', (req, res) => {
+  let difficulty = req.query.difficulty || 'easy';
+  if (difficulty === 'extrahard') difficulty = 'extra-hard';
+
+  const exclude = req.query.exclude ? req.query.exclude.split(',').map(Number) : [];
+  let pool = conceptQuestions.filter((q) => q.difficulty === difficulty);
+  if (!pool.length) {
+    return res.status(404).json({ error: `No concept questions for difficulty: ${difficulty}` });
+  }
+  const unseen = pool.filter((q) => !exclude.includes(q.id));
+  if (unseen.length > 0) pool = unseen;
+  const q = pool[Math.floor(Math.random() * pool.length)];
+  res.json({
+    id: q.id,
+    question: q.question,
+    options: q.options,
+    difficulty: q.difficulty,
+  });
+});
+
+/**
+ * POST /concept-api/check
+ */
+app.post('/concept-api/check', (req, res) => {
+  const { id, answerOption } = req.body || {};
+  const q = conceptQuestions.find((item) => Number(item.id) === Number(id));
+  if (!q) {
+    return res.status(404).json({ error: 'Question not found' });
+  }
+  const correct = String(answerOption || '').toUpperCase() === String(q.answerOption || '').toUpperCase();
+  res.json({
+    correct,
+    correctAnswer: q.answerOption,
+    correctAnswerText: q.answerText,
+    message: correct ? 'Correct!' : 'Incorrect',
+  });
+});
+
+/**
  * MULTIPLICATION TABLES API
  * ═══════════════════════════════════════════════════════════════════════════
  */
@@ -1615,6 +1000,151 @@ app.post('/multiply-api/check', (req, res) => {
   const correctAnswer = Number(table) * Number(multiplier);
   const correct = Number(answer) === correctAnswer;
   res.json({ correct, correctAnswer, message: correct ? 'Correct' : 'Incorrect' });
+});
+
+/**
+ * VISUAL MATH LAB API
+ * ═══════════════════════════════════════════════════════════════════════════
+ * Generates rich visual question data for multiplication & division:
+ * modes: array | groups | skip | share | grouping | product | mystery | quotient | remainder
+ */
+
+function vmRandInt(lo, hi) { return Math.floor(Math.random() * (hi - lo + 1)) + lo; }
+
+function vmPick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+const VM_EMOJIS = ['🍎','🍊','🍋','🍇','🍓','⭐','🌸','🦋','🐣','🍭','🧁','🎈','🦄','🐬','🍕'];
+
+function vmEmoji() { return vmPick(VM_EMOJIS); }
+
+// Tables by difficulty
+function vmTables(difficulty) {
+  if (difficulty === 'easy')   return [2,3,4,5];
+  if (difficulty === 'medium') return [2,3,4,5,6,7,8,9];
+  return [2,3,4,5,6,7,8,9,10,11,12];
+}
+
+app.get('/visual-math-api/question', (req, res) => {
+  const type  = req.query.type  || 'multiply'; // multiply | divide
+  const mode  = req.query.mode  || 'array';
+  const diff  = req.query.difficulty || 'easy';
+  const tables = vmTables(diff);
+  const emoji  = vmEmoji();
+  const id = `vm-${Date.now()}-${Math.random()}`;
+
+  try {
+    /* ── MULTIPLICATION MODES ── */
+
+    if (type === 'multiply' && mode === 'array') {
+      // "Build rows × cols by tapping empty cells"
+      const rows = vmRandInt(2, diff === 'easy' ? 4 : diff === 'medium' ? 6 : 8);
+      const maxCols = diff === 'easy' ? 4 : Math.max(2, Math.floor(30 / rows));
+      const cols = vmRandInt(2, Math.min(diff === 'easy' ? 4 : diff === 'medium' ? 6 : 8, maxCols));
+      return res.json({ id, type, mode, emoji, rows, cols,
+        prompt: `Fill ${rows} rows of ${cols} ${emoji} each. Total = ?`,
+        answer: rows * cols, a: rows, b: cols });
+    }
+
+    if (type === 'multiply' && mode === 'groups') {
+      // "Put M items into each of N buckets"
+      const numGroups = vmRandInt(2, diff === 'easy' ? 4 : diff === 'medium' ? 6 : 8);
+      const maxPerGroup = diff === 'easy' ? 5 : Math.max(2, Math.floor(30 / numGroups));
+      const perGroup  = vmRandInt(2, Math.min(diff === 'easy' ? 5 : diff === 'medium' ? 8 : 10, maxPerGroup));
+      return res.json({ id, type, mode, emoji, numGroups, perGroup,
+        prompt: `Put ${perGroup} ${emoji} into each of ${numGroups} buckets. Total?`,
+        answer: numGroups * perGroup, a: numGroups, b: perGroup });
+    }
+
+    if (type === 'multiply' && mode === 'skip') {
+      // "Hop by step to reach target"
+      const step   = vmPick(tables.filter(t => t <= 10));
+      const hops   = vmRandInt(2, diff === 'easy' ? 5 : diff === 'medium' ? 8 : 10);
+      const target = step * hops;
+      return res.json({ id, type, mode, emoji: '🐸', step, hops, target,
+        prompt: `Jump by ${step}s. How many jumps to reach ${target}?`,
+        answer: hops, a: step, b: hops });
+    }
+
+    if (type === 'multiply' && mode === 'product') {
+      // Balance scale: left = label "A × B", right = drag weights to match
+      const a = vmPick(tables);
+      const b = vmRandInt(2, diff === 'easy' ? 5 : diff === 'medium' ? 9 : 12);
+      return res.json({ id, type, mode, emoji, a, b,
+        prompt: `${a} × ${b} = ?  Drag weight blocks to balance the right pan!`,
+        answer: a * b });
+    }
+
+    if (type === 'multiply' && mode === 'mystery') {
+      // Balance scale: "? × B = total" — drag mystery number weight
+      const b     = vmPick(tables.filter(t => t >= 2 && t <= (diff === 'easy' ? 5 : 10)));
+      const a     = vmRandInt(2, diff === 'easy' ? 5 : diff === 'medium' ? 9 : 12);
+      const total = a * b;
+      return res.json({ id, type, mode, emoji, a, b, total,
+        prompt: `? × ${b} = ${total}. What is the mystery factor?`,
+        answer: a });
+    }
+
+    /* ── DIVISION MODES ── */
+
+    if (type === 'divide' && mode === 'share') {
+      // "Share total items equally among N plates"
+      const divisor  = vmRandInt(2, diff === 'easy' ? 4 : diff === 'medium' ? 6 : 8);
+      const maxQuotient = diff === 'easy' ? 5 : Math.max(2, Math.floor(30 / divisor));
+      const quotient = vmRandInt(2, Math.min(diff === 'easy' ? 5 : diff === 'medium' ? 8 : 10, maxQuotient));
+      const total    = divisor * quotient;
+      return res.json({ id, type, mode, emoji, total, divisor, quotient,
+        prompt: `Share ${total} ${emoji} equally among ${divisor} plates. How many on each?`,
+        answer: quotient, a: total, b: divisor });
+    }
+
+    if (type === 'divide' && mode === 'grouping') {
+      // "Put items into groups of size B — how many groups?"
+      const groupSize = vmRandInt(2, diff === 'easy' ? 4 : diff === 'medium' ? 6 : 8);
+      const maxGroups = diff === 'easy' ? 5 : Math.max(2, Math.floor(30 / groupSize));
+      const numGroups = vmRandInt(2, Math.min(diff === 'easy' ? 5 : diff === 'medium' ? 7 : 10, maxGroups));
+      const total     = groupSize * numGroups;
+      return res.json({ id, type, mode, emoji, total, groupSize, numGroups,
+        prompt: `Put ${total} ${emoji} into groups of ${groupSize}. How many groups?`,
+        answer: numGroups, a: total, b: groupSize });
+    }
+
+    if (type === 'divide' && mode === 'quotient') {
+      // Balance scale: left = total weight shown, right = drag quotient
+      const divisor  = vmRandInt(2, diff === 'easy' ? 4 : diff === 'medium' ? 6 : 9);
+      const quotient = vmRandInt(2, diff === 'easy' ? 5 : diff === 'medium' ? 9 : 12);
+      const total    = divisor * quotient;
+      return res.json({ id, type, mode, emoji, total, divisor, quotient,
+        prompt: `${total} ÷ ${divisor} = ?  Drag weight blocks to show the answer!`,
+        answer: quotient, a: total, b: divisor });
+    }
+
+    if (type === 'divide' && mode === 'remainder') {
+      // "A ÷ B = Q remainder R" — drag quotient; remainder is shown
+      const divisor  = vmRandInt(2, diff === 'easy' ? 4 : diff === 'medium' ? 6 : 9);
+      const quotient = vmRandInt(1, diff === 'easy' ? 4 : diff === 'medium' ? 8 : 10);
+      const remainder= vmRandInt(1, divisor - 1);
+      const total    = divisor * quotient + remainder;
+      return res.json({ id, type, mode, emoji, total, divisor, quotient, remainder,
+        prompt: `${total} ÷ ${divisor} = ? remainder ${remainder}. What is the quotient?`,
+        answer: quotient, a: total, b: divisor });
+    }
+
+    // Fallback: simple product
+    const a2 = vmPick(tables);
+    const b2 = vmRandInt(1, 10);
+    res.json({ id, type: 'multiply', mode: 'product', emoji, a: a2, b: b2,
+      prompt: `${a2} × ${b2} = ?`, answer: a2 * b2 });
+
+  } catch(e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+app.post('/visual-math-api/check', (req, res) => {
+  const { answer, correctAnswer } = req.body || {};
+  const correct = Number(answer) === Number(correctAnswer);
+  res.json({ correct, correctAnswer: Number(correctAnswer),
+    message: correct ? 'Correct!' : 'Incorrect' });
 });
 
 /**
@@ -3951,7 +3481,7 @@ function generatePercentQuestion(tier, type, cfg, isFirstOfType) {
     case 1: {
       // What is X% of N?
       answer = round2((pct * base) / 100);
-      prompt = `What is ${pct}% of ${base}?`;
+      prompt = WordProblemGenerator.percentType1(pct, base);
       if (isFirstOfType && tier === 1 && pct !== 100) {
         // Visual scaffold for the very first Type-1 questions: 100% → base, 10% → base/10, X% → ___
         // When pct itself is 10, the "10% step" row IS the question — skip the duplicate.
@@ -4478,56 +4008,118 @@ app.post('/ineq-api/check', express.json(), (req, res) => {
 app.get('/coordgeom-api/question', (req, res) => {
   const difficulty = req.query.difficulty || 'easy';
   const id = Date.now();
-
+  
   if (difficulty === 'easy') {
-    // Midpoint of two points
-    // Use even sums for clean midpoints
-    const x1 = triRand(-10, 10); const y1 = triRand(-10, 10);
-    const x2 = x1 + 2 * triRand(-5, 5); const y2 = y1 + 2 * triRand(-5, 5);
-    const mx = (x1 + x2) / 2; const my = (y1 + y2) / 2;
-    const prompt = `Find the midpoint of (${x1}, ${y1}) and (${x2}, ${y2})`;
-    res.json({ id, difficulty, type: 'midpoint', prompt, ansX: mx, ansY: my, display: `(${mx}, ${my})` });
+    // Foundations: midpoint, reflection, translation
+    const subType = triPick(['midpoint', 'reflection', 'translation']);
+    
+    if (subType === 'midpoint') {
+      const x1 = triRand(-8, 8); const y1 = triRand(-8, 8);
+      const x2 = x1 + 2 * triRand(-4, 4); const y2 = y1 + 2 * triRand(-4, 4);
+      const mx = (x1 + x2) / 2; const my = (y1 + y2) / 2;
+      const prompt = `Find the midpoint of (${x1}, ${y1}) and (${x2}, ${y2})`;
+      res.json({ id, difficulty, type: 'coord', prompt, ansX: mx, ansY: my, display: `(${mx}, ${my})`, points: [{x:x1, y:y1}, {x:x2, y:y2}] });
+    }
+    else if (subType === 'reflection') {
+      const axis = triPick(['x-axis', 'y-axis']);
+      const x1 = triRand(-8, 8); const y1 = triRand(-8, 8);
+      let ansX = x1, ansY = y1;
+      if (axis === 'x-axis') ansY = -y1;
+      else ansX = -x1;
+      const prompt = `Reflect (${x1}, ${y1}) across the ${axis}`;
+      res.json({ id, difficulty, type: 'coord', prompt, ansX, ansY, display: `(${ansX}, ${ansY})`, points: [{x:x1, y:y1}] });
+    }
+    else { // translation
+      const x1 = triRand(-6, 6); const y1 = triRand(-6, 6);
+      const dx = triRand(-4, 4); const dy = triRand(-4, 4);
+      const ansX = x1 + dx; const ansY = y1 + dy;
+      const vector = `<${dx}, ${dy}>`;
+      const prompt = `Translate (${x1}, ${y1}) by the vector ${vector}`;
+      res.json({ id, difficulty, type: 'coord', prompt, ansX, ansY, display: `(${ansX}, ${ansY})`, points: [{x:x1, y:y1}] });
+    }
   }
   else if (difficulty === 'medium') {
-    // Distance between two points (use Pythagorean triples for clean answers)
+    // Lengths: distance, distance to origin
+    const subType = triPick(['distance', 'distance_origin']);
     const triples = [[3,4,5],[5,12,13],[8,15,17],[6,8,10],[9,12,15]];
-    const [dx, dy, dist] = triPick(triples);
-    const x1 = triRand(-5, 5); const y1 = triRand(-5, 5);
-    const sx = triPick([1, -1]); const sy = triPick([1, -1]);
-    const x2 = x1 + sx * dx; const y2 = y1 + sy * dy;
-    const prompt = `Find the distance between (${x1}, ${y1}) and (${x2}, ${y2})`;
-    res.json({ id, difficulty, type: 'distance', prompt, answer: dist, display: String(dist) });
+    
+    if (subType === 'distance_origin') {
+      const [dx, dy, dist] = triPick(triples);
+      const sx = triPick([1, -1]); const sy = triPick([1, -1]);
+      const x1 = sx * dx; const y1 = sy * dy;
+      const prompt = `Find the distance from (${x1}, ${y1}) to the origin`;
+      res.json({ id, difficulty, type: 'scalar', prompt, answer: dist, display: String(dist), points: [{x:x1, y:y1}, {x:0, y:0}] });
+    }
+    else { // distance
+      const [dx, dy, dist] = triPick(triples);
+      const x1 = triRand(-5, 5); const y1 = triRand(-5, 5);
+      const sx = triPick([1, -1]); const sy = triPick([1, -1]);
+      const x2 = x1 + sx * dx; const y2 = y1 + sy * dy;
+      const prompt = `Find the distance between (${x1}, ${y1}) and (${x2}, ${y2})`;
+      res.json({ id, difficulty, type: 'scalar', prompt, answer: dist, display: String(dist), points: [{x:x1, y:y1}, {x:x2, y:y2}] });
+    }
   }
   else if (difficulty === 'hard') {
-    // Gradient of line through two points
-    const x1 = triRand(-8, 8); const y1 = triRand(-8, 8);
+    // Slopes & Eqs: gradient, equation_line
+    const subType = triPick(['gradient', 'equation_line']);
+    
+    const x1 = triRand(-6, 6); const y1 = triRand(-6, 6);
     const dx = triRand(1, 6) * triPick([1, -1]);
-    const dy = triRand(-8, 8);
+    const dy = triRand(-6, 6);
     const x2 = x1 + dx; const y2 = y1 + dy;
     const g = gcd(Math.abs(dy), Math.abs(dx));
-    const ansNum = dy / g * (dx < 0 ? -1 : 1);
-    const ansDen = Math.abs(dx) / g;
-    const display = ansDen === 1 ? String(ansNum) : `${ansNum}/${ansDen}`;
-    const prompt = `Find the gradient of the line through (${x1}, ${y1}) and (${x2}, ${y2})`;
-    res.json({ id, difficulty, type: 'gradient', prompt, ansNum, ansDen, display });
+    const mNum = dy / g * (dx < 0 ? -1 : 1);
+    const mDen = Math.abs(dx) / g;
+    
+    if (subType === 'gradient') {
+      const display = mDen === 1 ? String(mNum) : `${mNum}/${mDen}`;
+      const prompt = `Find the gradient (slope) of the line through (${x1}, ${y1}) and (${x2}, ${y2})`;
+      res.json({ id, difficulty, type: 'fraction', prompt, ansNum: mNum, ansDen: mDen, display, points: [{x:x1, y:y1}, {x:x2, y:y2}] });
+    }
+    else { // equation_line
+      const cNum = y1 * mDen - mNum * x1;
+      const cDen = mDen; 
+      const cG = gcd(Math.abs(cNum), Math.abs(cDen));
+      const cN = cNum / cG * (cDen < 0 ? -1 : 1);
+      const cD = Math.abs(cDen) / cG;
+      
+      const mStr = mDen === 1 ? String(mNum) : (mNum < 0 ? `-${Math.abs(mNum)}/${mDen}` : `${mNum}/${mDen}`);
+      const cStr = cD === 1 ? String(cN) : (cN < 0 ? `-${Math.abs(cN)}/${cD}` : `${cN}/${cD}`);
+      let eqStr = `y=${mStr}x`;
+      if (cN > 0) eqStr += `+${cStr}`;
+      else if (cN < 0) eqStr += cStr;
+
+      const prompt = `Find the equation of the line through (${x1}, ${y1}) and (${x2}, ${y2}). Format: y=mx+c`;
+      res.json({ id, difficulty, type: 'equation', prompt, ansMNum: mNum, ansMDen: mDen, ansCNum: cN, ansCDen: cD, display: eqStr, points: [{x:x1, y:y1}, {x:x2, y:y2}] });
+    }
   }
   else {
-    // Equation of perpendicular bisector
-    const x1 = triRand(-6, 6); const y1 = triRand(-6, 6);
-    const dx = triRand(1, 4) * triPick([1, -1]);
-    const dy = triRand(1, 4) * triPick([1, -1]);
-    const x2 = x1 + 2 * dx; const y2 = y1 + 2 * dy;
-    const mx = (x1 + x2) / 2; const my = (y1 + y2) / 2;
-    // Original gradient: dy/dx, perpendicular: -dx/dy
-    const perpNum = -dx;
-    const perpDen = dy;
-    const g = gcd(Math.abs(perpNum), Math.abs(perpDen));
-    const mNum = perpNum / g * (perpDen < 0 ? -1 : 1);
-    const mDen = Math.abs(perpDen) / g;
-    // y - my = m(x - mx) → y = mx/mDen - m*mx/mDen + my
-    const prompt = `Find the gradient of the perpendicular bisector of (${x1}, ${y1}) and (${x2}, ${y2})`;
-    const display = mDen === 1 ? String(mNum) : `${mNum}/${mDen}`;
-    res.json({ id, difficulty, type: 'perp_bisector', prompt, ansNum: mNum, ansDen: mDen, display });
+    // Advanced: perp_bisector, area_triangle
+    const subType = triPick(['perp_bisector', 'area_triangle']);
+    
+    if (subType === 'area_triangle') {
+      const x1 = triRand(-8, 8); const y1 = triRand(-8, 8);
+      const x2 = triRand(-8, 8); const y2 = triRand(-8, 8);
+      const x3 = triRand(-8, 8); const y3 = triRand(-8, 8);
+      const area = Math.abs((x1*(y2-y3) + x2*(y3-y1) + x3*(y1-y2)) / 2);
+      const prompt = `Find the area of the triangle with vertices (${x1}, ${y1}), (${x2}, ${y2}), (${x3}, ${y3})`;
+      res.json({ id, difficulty, type: 'scalar', prompt, answer: area, display: String(area), points: [{x:x1, y:y1}, {x:x2, y:y2}, {x:x3, y:y3}] });
+    }
+    else { // perp_bisector
+      const x1 = triRand(-6, 6); const y1 = triRand(-6, 6);
+      const dx = triRand(1, 4) * triPick([1, -1]);
+      const dy = triRand(1, 4) * triPick([1, -1]);
+      const x2 = x1 + 2 * dx; const y2 = y1 + 2 * dy;
+      
+      const perpNum = -dx;
+      const perpDen = dy;
+      const g = gcd(Math.abs(perpNum), Math.abs(perpDen));
+      const mNum = perpNum / g * (perpDen < 0 ? -1 : 1);
+      const mDen = Math.abs(perpDen) / g;
+      const prompt = `Find the gradient of the perpendicular bisector of (${x1}, ${y1}) and (${x2}, ${y2})`;
+      const display = mDen === 1 ? String(mNum) : `${mNum}/${mDen}`;
+      res.json({ id, difficulty, type: 'fraction', prompt, ansNum: mNum, ansDen: mDen, display, points: [{x:x1, y:y1}, {x:x2, y:y2}] });
+    }
   }
 });
 
@@ -4536,17 +4128,17 @@ app.post('/coordgeom-api/check', express.json(), (req, res) => {
   const userStr = (req.body.userAnswer || '').replace(/\s+/g, '').replace(/−/g, '-');
   let correct = false;
 
-  if (type === 'midpoint') {
+  if (type === 'coord') {
     const m = userStr.replace(/[()]/g, '').split(',');
     if (m.length === 2) {
       correct = parseFloat(m[0]) === req.body.ansX && parseFloat(m[1]) === req.body.ansY;
     }
   }
-  else if (type === 'distance') {
+  else if (type === 'scalar') {
     const userNum = parseFloat(userStr);
-    correct = !isNaN(userNum) && Math.abs(userNum - req.body.answer) < 0.5;
+    correct = !isNaN(userNum) && Math.abs(userNum - req.body.answer) < 0.01;
   }
-  else if (type === 'gradient' || type === 'perp_bisector') {
+  else if (type === 'fraction') {
     const { ansNum, ansDen } = req.body;
     const fracMatch = userStr.match(/^(-?\d+)\/(-?\d+)$/);
     let uNum, uDen;
@@ -4556,6 +4148,27 @@ app.post('/coordgeom-api/check', express.json(), (req, res) => {
       const us = simplifyFraction(uNum, uDen);
       const es = simplifyFraction(ansNum, ansDen);
       correct = us.num === es.num && us.den === es.den;
+    }
+  }
+  else if (type === 'equation') {
+    const { ansMNum, ansMDen, ansCNum, ansCDen } = req.body;
+    const eqMatch = userStr.match(/^y=(-?\d+(?:\/-?\d+)?)x([+-]\d+(?:\/\d+)?)?$/);
+    if (eqMatch) {
+      let mStr = eqMatch[1];
+      let cStr = eqMatch[2] || "+0";
+      
+      const parseFrac = (str) => {
+        const parts = str.replace('+','').split('/');
+        if (parts.length === 1) return { num: parseInt(parts[0]), den: 1 };
+        return simplifyFraction(parseInt(parts[0]), parseInt(parts[1]));
+      };
+      
+      const uM = parseFrac(mStr);
+      const uC = parseFrac(cStr);
+      const eM = simplifyFraction(ansMNum, ansMDen);
+      const eC = simplifyFraction(ansCNum, ansCDen);
+      
+      correct = uM.num === eM.num && uM.den === eM.den && uC.num === eC.num && uC.den === eC.den;
     }
   }
 
@@ -5305,59 +4918,66 @@ app.get('/mensur-api/question', (req, res) => {
     // Area of rectangle, triangle, or parallelogram
     const shape = triPick(['rectangle', 'triangle', 'parallelogram']);
     const a = triRand(3, 15); const b = triRand(3, 15);
-    let answer, prompt;
-    if (shape === 'rectangle') { answer = a * b; prompt = `Area of rectangle: length = ${a}, width = ${b}`; }
-    else if (shape === 'triangle') { answer = a * b / 2; prompt = `Area of triangle: base = ${a}, height = ${b}`; }
-    else { answer = a * b; prompt = `Area of parallelogram: base = ${a}, height = ${b}`; }
-    res.json({ id, difficulty, type: 'area_2d', prompt, answer, display: String(answer) });
+    let displayEq;
+    if (shape === 'rectangle') { answer = a * b; prompt = `Area of rectangle: length = ${a}, width = ${b}`; displayEq = `${a} × ${b} = ${answer}`; }
+    else if (shape === 'triangle') { answer = a * b / 2; prompt = `Area of triangle: base = ${a}, height = ${b}`; displayEq = `½ × ${a} × ${b} = ${answer}`; }
+    else { answer = a * b; prompt = `Area of parallelogram: base = ${a}, height = ${b}`; displayEq = `${a} × ${b} = ${answer}`; }
+    res.json({ id, difficulty, type: 'area_2d', prompt, answer, display: displayEq });
   }
   else if (difficulty === 'medium') {
     // Area & circumference of circle
     const r = triRand(2, 12);
     const subtype = triPick(['area', 'circumference']);
-    let answer, prompt;
+    let displayEq;
     if (subtype === 'area') {
       answer = Math.round(Math.PI * r * r * 100) / 100;
       prompt = `Area of circle with radius ${r} (to 2 d.p., use π = 3.14159...)`;
+      displayEq = `π × ${r}² = ${answer}`;
     } else {
       answer = Math.round(2 * Math.PI * r * 100) / 100;
       prompt = `Circumference of circle with radius ${r} (to 2 d.p.)`;
+      displayEq = `2 × π × ${r} = ${answer}`;
     }
-    res.json({ id, difficulty, type: 'circle', prompt, answer, display: String(answer) });
+    res.json({ id, difficulty, type: 'circle', prompt, answer, display: displayEq });
   }
   else if (difficulty === 'hard') {
     // Volume of cylinder, cone, or sphere
     const shape = triPick(['cylinder', 'cone', 'sphere']);
     const r = triRand(2, 8);
-    let answer, prompt;
+    let displayEq;
     if (shape === 'cylinder') {
       const h = triRand(3, 12);
       answer = Math.round(Math.PI * r * r * h * 100) / 100;
       prompt = `Volume of cylinder: radius = ${r}, height = ${h} (2 d.p.)`;
+      displayEq = `π × ${r}² × ${h} = ${answer}`;
     } else if (shape === 'cone') {
       const h = triRand(3, 12);
       answer = Math.round(Math.PI * r * r * h / 3 * 100) / 100;
       prompt = `Volume of cone: radius = ${r}, height = ${h} (2 d.p.)`;
+      displayEq = `⅓ × π × ${r}² × ${h} = ${answer}`;
     } else {
       answer = Math.round(4/3 * Math.PI * r * r * r * 100) / 100;
       prompt = `Volume of sphere with radius ${r} (2 d.p.)`;
+      displayEq = `⁴⁄₃ × π × ${r}³ = ${answer}`;
     }
-    res.json({ id, difficulty, type: 'volume', prompt, answer, display: String(answer) });
+    res.json({ id, difficulty, type: 'volume', prompt, answer, display: displayEq });
   }
   else {
     // Surface area of cylinder, cone, or sphere
     const shape = triPick(['cylinder', 'sphere']);
     const r = triRand(2, 8);
-    let answer, prompt;
+    let displayEq;
     if (shape === 'cylinder') {
       const h = triRand(3, 12);
       answer = Math.round(2 * Math.PI * r * (r + h) * 100) / 100;
       prompt = `Total surface area of cylinder: radius = ${r}, height = ${h} (2 d.p.)`;
+      displayEq = `2 × π × ${r} × (${r} + ${h}) = ${answer}`;
     } else {
       answer = Math.round(4 * Math.PI * r * r * 100) / 100;
       prompt = `Surface area of sphere with radius ${r} (2 d.p.)`;
+      displayEq = `4 × π × ${r}² = ${answer}`;
     }
-    res.json({ id, difficulty, type: 'surface_area', prompt, answer, display: String(answer) });
+    res.json({ id, difficulty, type: 'surface_area', prompt, answer, display: displayEq });
   }
 });
 
@@ -6094,36 +5714,157 @@ app.get('/hcflcm-api/question', (req, res) => {
   const diff = req.query.difficulty || 'easy';
   let prompt, answer, display;
 
+  const type = randInt(1, 4);
+
   if (diff === 'easy') {
-    // HCF of two numbers
-    const g = randInt(2, 12);
-    const a = g * randInt(2, 7);
-    const b = g * randInt(2, 7);
-    answer = gcd(a, b);
-    display = String(answer);
-    prompt = `Find the HCF of ${a} and ${b}.`;
+    if (type === 1) {
+      // HCF of two numbers
+      const g = randInt(2, 8);
+      const a = g * randInt(2, 5);
+      const b = g * randInt(2, 5);
+      answer = gcd(a, b);
+      display = String(answer);
+      prompt = `Find the HCF (Highest Common Factor) of ${a} and ${b}.`;
+    } else if (type === 2) {
+      // HCF of two coprime numbers
+      const a = [9, 14, 15, 21, 25, 27][randInt(0, 5)];
+      const b = [8, 11, 16, 22, 26, 29][randInt(0, 5)];
+      answer = gcd(a, b);
+      display = String(answer);
+      prompt = `What is the Highest Common Factor (HCF) of ${a} and ${b}?`;
+    } else if (type === 3) {
+      // Simple word problem
+      const factors = [
+        { a: 12, b: 18, g: 6, fruit1: 'apples', fruit2: 'oranges' },
+        { a: 16, b: 24, g: 8, fruit1: 'stickers', fruit2: 'stamps' },
+        { a: 15, b: 20, g: 5, fruit1: 'pens', fruit2: 'pencils' },
+        { a: 8, b: 12, g: 4, fruit1: 'blue beads', fruit2: 'red beads' }
+      ][randInt(0, 3)];
+      answer = factors.g;
+      display = String(answer);
+      prompt = `A teacher has ${factors.a} ${factors.fruit1} and ${factors.b} ${factors.fruit2}. She wants to divide them equally among her students without leftovers. What is the maximum number of students who can get an equal share?`;
+    } else {
+      // HCF of a and b where a divides b
+      const a = randInt(3, 9);
+      const b = a * randInt(2, 4);
+      answer = a;
+      display = String(answer);
+      prompt = `Find the HCF of ${a} and ${b}.`;
+    }
   } else if (diff === 'medium') {
-    // LCM of two numbers
-    const a = randInt(4, 20);
-    const b = randInt(4, 20);
-    answer = lcm(a, b);
-    display = String(answer);
-    prompt = `Find the LCM of ${a} and ${b}.`;
+    if (type === 1) {
+      // LCM of two numbers
+      const a = randInt(4, 12);
+      const b = randInt(4, 12);
+      answer = lcm(a, b);
+      display = String(answer);
+      prompt = `Find the LCM (Lowest Common Multiple) of ${a} and ${b}.`;
+    } else if (type === 2) {
+      // LCM of prime numbers
+      const primes = [3, 5, 7, 11];
+      const a = primes[randInt(0, 3)];
+      let b = primes[randInt(0, 3)];
+      while (a === b) { b = primes[randInt(0, 3)]; }
+      answer = lcm(a, b);
+      display = String(answer);
+      prompt = `What is the Lowest Common Multiple (LCM) of ${a} and ${b}?`;
+    } else if (type === 3) {
+      // Simple LCM word problem
+      const p = [
+        { a: 6, b: 8, l: 24, thing: 'neon signs blink', unit: 'seconds' },
+        { a: 10, b: 15, l: 30, thing: 'bus schedules align', unit: 'minutes' },
+        { a: 4, b: 6, l: 12, thing: 'alarms beep', unit: 'minutes' }
+      ][randInt(0, 2)];
+      answer = p.l;
+      display = String(answer);
+      prompt = `Two ${p.thing} at intervals of ${p.a} and ${p.b} ${p.unit}. If they align now, after how many ${p.unit} will they next align?`;
+    } else {
+      // LCM of a and b where a divides b
+      const a = randInt(3, 8);
+      const b = a * randInt(2, 4);
+      answer = b;
+      display = String(answer);
+      prompt = `Find the LCM of ${a} and ${b}.`;
+    }
   } else if (diff === 'hard') {
-    // HCF and LCM of three numbers — ask for LCM
-    const a = randInt(4, 15);
-    const b = randInt(4, 15);
-    const c = randInt(4, 15);
-    answer = lcm(lcm(a, b), c);
-    display = String(answer);
-    prompt = `Find the LCM of ${a}, ${b}, and ${c}.`;
+    if (type === 1) {
+      // LCM of three numbers
+      const a = randInt(3, 8);
+      const b = randInt(3, 8);
+      const c = randInt(3, 8);
+      answer = lcm(lcm(a, b), c);
+      display = String(answer);
+      prompt = `Find the LCM of ${a}, ${b}, and ${c}.`;
+    } else if (type === 2) {
+      // HCF of three numbers
+      const g = randInt(2, 6);
+      const a = g * randInt(2, 4);
+      const b = g * randInt(2, 4);
+      const c = g * randInt(2, 4);
+      answer = gcd(gcd(a, b), c);
+      display = String(answer);
+      prompt = `Find the Highest Common Factor (HCF) of ${a}, ${b}, and ${c}.`;
+    } else if (type === 3) {
+      // Product formula problem
+      const base = [
+        { h: 4, l: 24, a: 8, b: 12 },
+        { h: 6, l: 36, a: 12, b: 18 },
+        { h: 5, l: 30, a: 10, b: 15 },
+        { h: 3, l: 18, a: 6, b: 9 }
+      ][randInt(0, 3)];
+      answer = base.b;
+      display = String(answer);
+      prompt = `The HCF of two numbers is ${base.h} and their LCM is ${base.l}. If one of the numbers is ${base.a}, what is the other number?`;
+    } else {
+      // Word problem with three runners
+      const a = [3, 4, 6][randInt(0, 2)];
+      const b = [4, 5, 8][randInt(0, 2)];
+      const c = [6, 8, 12][randInt(0, 2)];
+      answer = lcm(lcm(a, b), c);
+      display = String(answer);
+      prompt = `Three runners start running a lap together. Runner A completes a lap in ${a} minutes, Runner B in ${b} minutes, and Runner C in ${c} minutes. After how many minutes will they next meet at the starting point?`;
+    }
   } else {
-    // Word problem: Two buses leave at same time, intervals A and B min, when next together?
-    const a = randInt(8, 20);
-    const b = randInt(10, 25);
-    answer = lcm(a, b);
-    display = answer + ' minutes';
-    prompt = `Bus A departs every ${a} minutes and Bus B every ${b} minutes. They both leave at 9:00. After how many minutes will they next depart together?`;
+    // extrahard
+    if (type === 1) {
+      // HCF with remainder: largest number dividing a and b with remainder r
+      const r = randInt(2, 5);
+      const g = randInt(4, 10);
+      const f1 = randInt(2, 4);
+      const f2 = randInt(2, 4);
+      const a = g * f1 + r;
+      const b = g * f2 + r;
+      // answer is g
+      answer = gcd(a - r, b - r);
+      display = String(answer);
+      prompt = `Find the largest number that divides ${a} and ${b} leaving a remainder of ${r} in each case.`;
+    } else if (type === 2) {
+      // LCM with remainder: smallest number divided by a and b leaving remainder r
+      const r = randInt(2, 5);
+      const a = randInt(5, 10);
+      const b = randInt(5, 10);
+      answer = lcm(a, b) + r;
+      display = String(answer);
+      prompt = `What is the smallest positive integer which when divided by ${a} and ${b} leaves a remainder of ${r} in each case?`;
+    } else if (type === 3) {
+      // Merchant ribbon piece division
+      const lengths = [
+        { a: 48, b: 72, c: 96, g: 24 },
+        { a: 30, b: 45, c: 75, g: 15 },
+        { a: 36, b: 54, c: 90, g: 18 },
+        { a: 40, b: 60, c: 80, g: 20 }
+      ][randInt(0, 3)];
+      answer = lengths.g;
+      display = String(answer);
+      prompt = `A merchant has three pieces of ribbon of lengths ${lengths.a} cm, ${lengths.b} cm, and ${lengths.c} cm. He wants to cut them into equal pieces of the maximum possible length. What should be the length of each piece (in cm)?`;
+    } else {
+      // Neon lights word problem
+      const a = randInt(6, 12);
+      const b = randInt(8, 15);
+      answer = lcm(a, b);
+      display = String(answer);
+      prompt = `Two neon signs blink at different rates. Sign A blinks every ${a} seconds, and Sign B blinks every ${b} seconds. If they both blink together now, after how many seconds will they next blink together?`;
+    }
   }
 
   res.json({ prompt, answer, display, difficulty: diff });
@@ -8913,6 +8654,151 @@ app.post('/diffeq-api/check', express.json(), (req, res) => {
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
+// LEARNING JOURNEY ENDPOINTS
+// ═══════════════════════════════════════════════════════════════════════════
+const { JOURNEY_CURRICULUM } = require('./lil/learning_journey/journeyData');
+const {
+  getUserProgress,
+  getTopicProgression,
+  completeConcept,
+  getCheckpointQuiz,
+  verifyCheckpointQuiz
+} = require('./lil/learning_journey/controllers');
+
+app.get('/api/learning-journey/progress', auth.requireAuth, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const progress = await getUserProgress(userId);
+    
+    // Map all topics to their progression state for the client
+    const topicsProgress = JOURNEY_CURRICULUM.map(topic => 
+      getTopicProgression(progress, topic.id)
+    );
+
+    // Calculate overall journey progress percent
+    const totalConcepts = JOURNEY_CURRICULUM.reduce((sum, t) => sum + t.concepts.length, 0);
+    const completedConceptsCount = progress.completedConcepts.length;
+    const overallProgressPercent = totalConcepts > 0 
+      ? Math.round((completedConceptsCount / totalConcepts) * 100) 
+      : 0;
+
+    res.json({
+      topics: topicsProgress,
+      completedConcepts: progress.completedConcepts,
+      completedTopics: progress.completedTopics,
+      overallProgressPercent
+    });
+  } catch (err) {
+    console.error('[learning-journey] GET /progress error:', err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.post('/api/learning-journey/complete-concept', auth.requireAuth, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { topicId, conceptKey } = req.body || {};
+    if (!topicId || !conceptKey) {
+      return res.status(400).json({ error: 'Missing topicId or conceptKey' });
+    }
+
+    const progress = await completeConcept(userId, topicId, conceptKey);
+    res.json({ success: true, completedConcepts: progress.completedConcepts });
+  } catch (err) {
+    console.error('[learning-journey] POST /complete-concept error:', err.message);
+    res.status(400).json({ error: err.message });
+  }
+});
+
+app.get('/api/learning-journey/checkpoint/quiz', auth.requireAuth, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { topicId } = req.query || {};
+    if (!topicId) {
+      return res.status(400).json({ error: 'Missing topicId' });
+    }
+
+    const quiz = await getCheckpointQuiz(userId, topicId);
+    res.json(quiz);
+  } catch (err) {
+    console.error('[learning-journey] GET /checkpoint/quiz error:', err.message);
+    res.status(400).json({ error: err.message });
+  }
+});
+
+app.post('/api/learning-journey/checkpoint/verify', auth.requireAuth, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { topicId, answers } = req.body || {};
+    if (!topicId || !answers) {
+      return res.status(400).json({ error: 'Missing topicId or answers' });
+    }
+
+    const result = await verifyCheckpointQuiz(userId, topicId, answers);
+    res.json(result);
+  } catch (err) {
+    console.error('[learning-journey] POST /checkpoint/verify error:', err.message);
+    res.status(400).json({ error: err.message });
+  }
+});
+
+// /darts-api — Visual Coordinate Geometry (Dart Board)
+// ═══════════════════════════════════════════════════════════════════════════
+app.get('/darts-api/question', (req, res) => {
+  const level = req.query.level || 'easy';
+  let x, y;
+
+  const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+  const randHalf = (min, max) => randInt(min * 2, max * 2) / 2;
+
+  if (level === 'easy') {
+    // 1st quadrant only
+    x = randInt(1, 5);
+    y = randInt(1, 5);
+  } else if (level === 'medium') {
+    // Any quadrant, integer
+    do {
+      x = randInt(-5, 5);
+      y = randInt(-5, 5);
+    } while (x === 0 && y === 0);
+  } else if (level === 'hard') {
+    // Any quadrant, half steps allowed
+    do {
+      x = randHalf(-5, 5);
+      y = randHalf(-5, 5);
+    } while (Number.isInteger(x) && Number.isInteger(y));
+  } else {
+    // extrahard
+    const startX = randInt(-4, 4) || 1;
+    const startY = randInt(-4, 4) || 1;
+    const axis = Math.random() < 0.5 ? 'x' : 'y';
+    x = axis === 'y' ? -startX : startX;
+    y = axis === 'x' ? -startY : startY;
+    
+    return res.json({
+      prompt: `Plot the reflection of (${startX}, ${startY}) across the ${axis.toUpperCase()}-axis.`,
+      x, y, level, startX, startY, axis, type: 'reflection'
+    });
+  }
+
+  res.json({
+    prompt: `Throw the dart at coordinate (${x}, ${y}).`,
+    x, y, level, type: 'standard'
+  });
+});
+
+app.post('/darts-api/check', express.json(), (req, res) => {
+  const { userX, userY, x, y } = req.body;
+  const correct = userX === x && userY === y;
+  res.json({ correct, message: correct ? 'Bullseye!' : 'Missed!' });
+});
+
+// WORD CREATOR PUZZLE ROUTER (wordcreator-api)
+// ═══════════════════════════════════════════════════════════════════════════
+const wordCreatorRouter = require('./routes/wordCreator');
+app.use('/wordcreator-api', wordCreatorRouter);
+
+// ═══════════════════════════════════════════════════════════════════════════
 // /graph — Prerequisite DAG visualisation
 // ═══════════════════════════════════════════════════════════════════════════
 app.get('/graph', (_req, res) => {
@@ -8926,6 +8812,1384 @@ app.get('/path', (_req, res) => {
 app.get('/enhanced', (_req, res) => {
   res.sendFile(path.join(__dirname, '..', 'enhanced', 'index.html'));
 });
+
+/**
+ * LINEAR ALGEBRA QUIZ - Question/Check endpoints
+ * ═══════════════════════════════════════════════════════════════════════════
+ * 10+ question types per difficulty level (easy / medium / hard).
+ * Topics: vectors, matrices, systems, determinants, eigenvalues, projections.
+ */
+app.get('/linearalgebra-api/question', (req, res) => {
+  const difficulty = req.query.difficulty || 'easy';
+  const id = Date.now();
+  const ri = (lo, hi) => randomInt(lo, hi);
+  const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+  const fv = (...c) => `(${c.join(', ')})`;
+  const fm = (m) => `[${m[0][0]},${m[0][1]};${m[1][0]},${m[1][1]}]`;
+  const rnd2 = (x) => Math.round(x * 100) / 100;
+  let q;
+
+  const easyGens = [
+    () => { const u=[ri(-9,9),ri(-9,9)],v=[ri(-9,9),ri(-9,9)],r=[u[0]+v[0],u[1]+v[1]]; return {type:'vec_add',answerType:'vector',prompt:`Find u + v where u = ${fv(...u)} and v = ${fv(...v)}`,answer:fv(...r),display:fv(...r),data:{u,v}}; },
+    () => { const u=[ri(-9,9),ri(-9,9)],v=[ri(-9,9),ri(-9,9)],r=[u[0]-v[0],u[1]-v[1]]; return {type:'vec_sub',answerType:'vector',prompt:`Find u − v where u = ${fv(...u)} and v = ${fv(...v)}`,answer:fv(...r),display:fv(...r),data:{u,v}}; },
+    () => { let k=ri(-5,5); if(k===0)k=2; const v=[ri(-9,9),ri(-9,9)],r=[k*v[0],k*v[1]]; return {type:'vec_scale',answerType:'vector',prompt:`Find ${k}v where v = ${fv(...v)}`,answer:fv(...r),display:fv(...r),data:{k,v}}; },
+    () => { const v=[ri(-9,9),ri(-9,9)],r=[-v[0],-v[1]]; return {type:'vec_neg',answerType:'vector',prompt:`Find −v where v = ${fv(...v)}`,answer:fv(...r),display:fv(...r),data:{v}}; },
+    () => { const v=[ri(1,9),ri(1,9)],m=rnd2(Math.sqrt(v[0]*v[0]+v[1]*v[1])); return {type:'vec_mag',answerType:'scalar',prompt:`Find |v| where v = ${fv(...v)} (round to 2 d.p.)`,answer:String(m),display:String(m),data:{v}}; },
+    () => { const u=[ri(-9,9),ri(-9,9)],v=[ri(-9,9),ri(-9,9)],d=u[0]*v[0]+u[1]*v[1]; return {type:'vec_dot',answerType:'scalar',prompt:`Find u · v where u = ${fv(...u)} and v = ${fv(...v)}`,answer:String(d),display:String(d),data:{u,v}}; },
+    () => { const A=[[ri(-9,9),ri(-9,9)],[ri(-9,9),ri(-9,9)]],B=[[ri(-9,9),ri(-9,9)],[ri(-9,9),ri(-9,9)]],R=[[A[0][0]+B[0][0],A[0][1]+B[0][1]],[A[1][0]+B[1][0],A[1][1]+B[1][1]]]; return {type:'mat_add',answerType:'matrix',prompt:`Find A + B where A = ${fm(A)} and B = ${fm(B)}`,answer:fm(R),display:fm(R),data:{A,B}}; },
+    () => { let k=ri(-5,5); if(k===0)k=2; const A=[[ri(-9,9),ri(-9,9)],[ri(-9,9),ri(-9,9)]],R=[[k*A[0][0],k*A[0][1]],[k*A[1][0],k*A[1][1]]]; return {type:'mat_scale',answerType:'matrix',prompt:`Find ${k}A where A = ${fm(A)}`,answer:fm(R),display:fm(R),data:{k,A}}; },
+    () => { const A=[[ri(-9,9),ri(-9,9)],[ri(-9,9),ri(-9,9)]],det=A[0][0]*A[1][1]-A[0][1]*A[1][0]; return {type:'mat_det2',answerType:'scalar',prompt:`Find det(A) where A = ${fm(A)}`,answer:String(det),display:String(det),data:{A}}; },
+    () => { const A=[[ri(-9,9),ri(-9,9)],[ri(-9,9),ri(-9,9)]],R=[[A[0][0],A[1][0]],[A[0][1],A[1][1]]]; return {type:'mat_transpose',answerType:'matrix',prompt:`Find Aᵀ where A = ${fm(A)}`,answer:fm(R),display:fm(R),data:{A}}; },
+    () => { const A=[ri(-9,9),ri(-9,9)],B=[ri(-9,9),ri(-9,9)],r=[B[0]-A[0],B[1]-A[1]]; return {type:'vec_points',answerType:'vector',prompt:`Find vector AB where A = ${fv(...A)} and B = ${fv(...B)}`,answer:fv(...r),display:fv(...r),data:{A,B}}; },
+  ];
+
+  const mediumGens = [
+    () => { const A=[[ri(-5,5),ri(-5,5)],[ri(-5,5),ri(-5,5)]],B=[[ri(-5,5),ri(-5,5)],[ri(-5,5),ri(-5,5)]],R=[[A[0][0]*B[0][0]+A[0][1]*B[1][0],A[0][0]*B[0][1]+A[0][1]*B[1][1]],[A[1][0]*B[0][0]+A[1][1]*B[1][0],A[1][0]*B[0][1]+A[1][1]*B[1][1]]]; return {type:'mat_mul2',answerType:'matrix',prompt:`Find AB where A = ${fm(A)} and B = ${fm(B)}`,answer:fm(R),display:fm(R),data:{A,B}}; },
+    () => { const x=ri(-5,5),y=ri(-5,5); const a1=ri(1,5),b1=ri(1,5),c1=a1*x+b1*y; let a2,b2,c2; do { a2=ri(1,5); b2=ri(1,5); } while(a1*b2===a2*b1); c2=a2*x+b2*y; return {type:'solve_2x2',answerType:'scalar',prompt:`Solve: ${a1}x + ${b1}y = ${c1} and ${a2}x + ${b2}y = ${c2}. Find x.`,answer:String(x),display:String(x),data:{a1,b1,c1,a2,b2,c2,x,y}}; },
+    () => { const x=ri(-5,5),y=ri(-5,5); const a1=ri(1,5),b1=ri(1,5),c1=a1*x+b1*y; let a2,b2,c2; do { a2=ri(1,5); b2=ri(1,5); } while(a1*b2===a2*b1); c2=a2*x+b2*y; return {type:'solve_2x2_y',answerType:'scalar',prompt:`Solve: ${a1}x + ${b1}y = ${c1} and ${a2}x + ${b2}y = ${c2}. Find y.`,answer:String(y),display:String(y),data:{a1,b1,c1,a2,b2,c2,x,y}}; },
+    () => { const A=[[ri(-9,9),ri(-9,9)],[ri(-9,9),ri(-9,9)]],t=A[0][0]+A[1][1]; return {type:'mat_trace',answerType:'scalar',prompt:`Find tr(A) where A = ${fm(A)}`,answer:String(t),display:String(t),data:{A}}; },
+    () => { const u=[ri(-9,9),ri(-9,9)],v=[ri(-9,9),ri(-9,9)],c=u[0]*v[1]-u[1]*v[0]; return {type:'vec_cross',answerType:'scalar',prompt:`Find u × v where u = ${fv(...u)} and v = ${fv(...v)} (2D cross product: u₁v₂ − u₂v₁)`,answer:String(c),display:String(c),data:{u,v}}; },
+    () => { const A=[[ri(-5,5),ri(-5,5)],[ri(-5,5),ri(-5,5)]],v=[ri(-5,5),ri(-5,5)],r=[A[0][0]*v[0]+A[0][1]*v[1],A[1][0]*v[0]+A[1][1]*v[1]]; return {type:'mat_vec',answerType:'vector',prompt:`Find Av where A = ${fm(A)} and v = ${fv(...v)}`,answer:fv(...r),display:fv(...r),data:{A,v}}; },
+    () => { const u=[ri(1,9),ri(1,9)],v=[ri(1,9),ri(1,9)]; const dot=u[0]*v[0]+u[1]*v[1]; const magU=Math.sqrt(u[0]*u[0]+u[1]*u[1]),magV=Math.sqrt(v[0]*v[0]+v[1]*v[1]); const cosA=Math.max(-1,Math.min(1,dot/(magU*magV))); const angle=Math.round(Math.acos(cosA)*180/Math.PI); return {type:'vec_angle',answerType:'scalar',prompt:`Find the angle (nearest degree) between u = ${fv(...u)} and v = ${fv(...v)}`,answer:String(angle),display:String(angle)+'°',data:{u,v}}; },
+    () => { const A=[[ri(-5,5),ri(-5,5)],[ri(-5,5),ri(-5,5)]]; const det=A[0][0]*A[1][1]-A[0][1]*A[1][0]; const rank=(det!==0)?2:((A[0][0]!==0||A[0][1]!==0||A[1][0]!==0||A[1][1]!==0)?1:0); return {type:'mat_rank',answerType:'scalar',prompt:`Find rank(A) where A = ${fm(A)}`,answer:String(rank),display:String(rank),data:{A}}; },
+    () => { const u=[ri(1,9),ri(1,9)],v=[ri(1,9),ri(1,9)]; const dot=u[0]*v[0]+u[1]*v[1]; const magV=Math.sqrt(v[0]*v[0]+v[1]*v[1]); const proj=rnd2(dot/magV); return {type:'vec_proj',answerType:'scalar',prompt:`Find the scalar projection of u onto v where u = ${fv(...u)} and v = ${fv(...v)} (round to 2 d.p.)`,answer:String(proj),display:String(proj),data:{u,v}}; },
+    () => { let v=[ri(1,9),ri(1,9)]; if(Math.random()<0.5)v[0]=-v[0]; if(Math.random()<0.5)v[1]=-v[1]; const mag=Math.sqrt(v[0]*v[0]+v[1]*v[1]); const u1=rnd2(v[0]/mag); return {type:'vec_unit',answerType:'scalar',prompt:`Find the x-component of the unit vector in the direction of v = ${fv(...v)} (round to 2 d.p.)`,answer:String(u1),display:String(u1),data:{v}}; },
+  ];
+
+  const hardGens = [
+    () => { const M=Array.from({length:3},()=>[ri(-5,5),ri(-5,5),ri(-5,5)]); const det=M[0][0]*(M[1][1]*M[2][2]-M[1][2]*M[2][1])-M[0][1]*(M[1][0]*M[2][2]-M[1][2]*M[2][0])+M[0][2]*(M[1][0]*M[2][1]-M[1][1]*M[2][0]); const fmt=(m)=>`[${m[0].join(',')};${m[1].join(',')};${m[2].join(',')}]`; return {type:'det_3x3',answerType:'scalar',prompt:`Find det(A) where A = ${fmt(M)}`,answer:String(det),display:String(det),data:{M}}; },
+    () => { const A=[[ri(-5,5),ri(-5,5)],[ri(-5,5),ri(-5,5)]]; const t=A[0][0]+A[1][1]; return {type:'eigen_sum',answerType:'scalar',prompt:`Find the sum of eigenvalues of A = ${fm(A)} (hint: sum = trace)`,answer:String(t),display:String(t),data:{A}}; },
+    () => { const A=[[ri(-5,5),ri(-5,5)],[ri(-5,5),ri(-5,5)]]; const det=A[0][0]*A[1][1]-A[0][1]*A[1][0]; return {type:'eigen_prod',answerType:'scalar',prompt:`Find the product of eigenvalues of A = ${fm(A)} (hint: product = det)`,answer:String(det),display:String(det),data:{A}}; },
+    () => { const x=ri(-3,3),y=ri(-3,3),z=ri(-3,3); const a1=ri(1,3),b1=ri(1,3),c1=ri(1,3),d1=a1*x+b1*y+c1*z; const a2=ri(1,3),b2=ri(1,3),c2=ri(1,3),d2=a2*x+b2*y+c2*z; const a3=ri(1,3),b3=ri(1,3),c3=ri(1,3),d3=a3*x+b3*y+c3*z; return {type:'solve_3x3',answerType:'scalar',prompt:`Solve: ${a1}x+${b1}y+${c1}z=${d1}, ${a2}x+${b2}y+${c2}z=${d2}, ${a3}x+${b3}y+${c3}z=${d3}. Find x.`,answer:String(x),display:String(x),data:{a1,b1,c1,d1,a2,b2,c2,d2,a3,b3,c3,d3,x,y,z}}; },
+    () => { const A=[[ri(-5,5),ri(-5,5)],[ri(-5,5),ri(-5,5)]]; const det=A[0][0]*A[1][1]-A[0][1]*A[1][0]; return {type:'char_const',answerType:'scalar',prompt:`Find the constant term of the characteristic polynomial of A = ${fm(A)} (hint: = det(A))`,answer:String(det),display:String(det),data:{A}}; },
+    () => { const A=[[ri(-5,5),ri(-5,5)],[ri(-5,5),ri(-5,5)]]; const A2=[[A[0][0]*A[0][0]+A[0][1]*A[1][0],A[0][0]*A[0][1]+A[0][1]*A[1][1]],[A[1][0]*A[0][0]+A[1][1]*A[1][0],A[1][0]*A[0][1]+A[1][1]*A[1][1]]]; const t=A2[0][0]+A2[1][1]; return {type:'mat_sq_trace',answerType:'scalar',prompt:`Find tr(A²) where A = ${fm(A)}`,answer:String(t),display:String(t),data:{A}}; },
+    () => { const A=[[ri(-5,5),ri(-5,5)],[ri(-5,5),ri(-5,5)]]; const det=A[0][0]*A[1][1]-A[0][1]*A[1][0]; return {type:'adj_det',answerType:'scalar',prompt:`Find det(adj(A)) where A = ${fm(A)} (hint: for 2x2, det(adj(A)) = det(A))`,answer:String(det),display:String(det),data:{A}}; },
+    () => { const A=[[ri(-5,5),ri(-5,5)],[ri(-5,5),ri(-5,5)]]; const det=A[0][0]*A[1][1]-A[0][1]*A[1][0]; const rank=(det!==0)?2:((A[0][0]!==0||A[0][1]!==0||A[1][0]!==0||A[1][1]!==0)?1:0); const nullity=2-rank; return {type:'nullity',answerType:'scalar',prompt:`Find the nullity of A = ${fm(A)}`,answer:String(nullity),display:String(nullity),data:{A}}; },
+    () => { const x=ri(-5,5),y=ri(-5,5); const a1=ri(1,5),b1=ri(1,5),c1=a1*x+b1*y; let a2,b2,c2; do{a2=ri(1,5);b2=ri(1,5);}while(a1*b2===a2*b1); c2=a2*x+b2*y; const detD=a1*b2-a2*b1; const detDx=c1*b2-c2*b1; const xC=rnd2(detDx/detD); return {type:'cramer_x',answerType:'scalar',prompt:`Use Cramer's rule to find x: ${a1}x+${b1}y=${c1}, ${a2}x+${b2}y=${c2}`,answer:String(xC),display:String(xC),data:{a1,b1,c1,a2,b2,c2}}; },
+    () => { const A=[[ri(-3,3),ri(-3,3)],[ri(-3,3),ri(-3,3)]]; const A2=[[A[0][0]*A[0][0]+A[0][1]*A[1][0],A[0][0]*A[0][1]+A[0][1]*A[1][1]],[A[1][0]*A[0][0]+A[1][1]*A[1][0],A[1][0]*A[0][1]+A[1][1]*A[1][1]]]; const A3=[[A2[0][0]*A[0][0]+A2[0][1]*A[1][0],A2[0][0]*A[0][1]+A2[0][1]*A[1][1]],[A2[1][0]*A[0][0]+A2[1][1]*A[1][0],A2[1][0]*A[0][1]+A2[1][1]*A[1][1]]]; const t=A3[0][0]+A3[1][1]; return {type:'mat_cube_trace',answerType:'scalar',prompt:`Find tr(A3) where A = ${fm(A)}`,answer:String(t),display:String(t),data:{A}}; },
+  ];
+
+  if (difficulty === 'easy') {
+    q = pick(easyGens)();
+  } else if (difficulty === 'medium') {
+    q = pick(mediumGens)();
+  } else {
+    q = pick(hardGens)();
+  }
+  res.json({ id, difficulty, ...q });
+});
+
+app.post('/linearalgebra-api/check', (req, res) => {
+  const { answer: expected, answerType, type, data } = req.body;
+  const raw = (req.body.userAnswer || '').trim();
+  const norm = (s) => s.replace(/\s+/g, '').replace(/−/g, '-').replace(/\u2212/g, '-');
+  const n = norm(raw);
+  let correct = false;
+
+  if (answerType === 'scalar') {
+    const userVal = parseFloat(n);
+    const expVal = parseFloat(expected);
+    correct = !isNaN(userVal) && Math.abs(userVal - expVal) < 0.5;
+  } else if (answerType === 'vector') {
+    const m = n.match(/\(?([-\d.]+),([-\d.]+)\)?/);
+    const e = norm(expected).match(/\(?([-\d.]+),([-\d.]+)\)?/);
+    correct = m && e && Math.abs(parseFloat(m[1])-parseFloat(e[1])) < 0.01 && Math.abs(parseFloat(m[2])-parseFloat(e[2])) < 0.01;
+  } else if (answerType === 'matrix') {
+    const parseMat = (s) => {
+      const cleaned = s.replace(/[\[\]]/g, '');
+      const rows = cleaned.split(';');
+      if (rows.length !== 2) return null;
+      const r0 = rows[0].split(',').map(Number);
+      const r1 = rows[1].split(',').map(Number);
+      if (r0.length !== 2 || r1.length !== 2 || r0.some(isNaN) || r1.some(isNaN)) return null;
+      return [r0, r1];
+    };
+    const um = parseMat(n);
+    const em = parseMat(norm(expected));
+    correct = um && em && um[0][0]===em[0][0] && um[0][1]===em[0][1] && um[1][0]===em[1][0] && um[1][1]===em[1][1];
+  }
+  res.json({ correct, display: expected, message: correct ? 'Correct!' : 'Incorrect' });
+});
+
+
+const MQ = (() => {
+  const ri = (lo, hi) => Math.floor(Math.random() * (hi - lo + 1)) + lo;
+  const pick = (a) => a[Math.floor(Math.random() * a.length)];
+  const fv = (...c) => '(' + c.join(', ') + ')';
+  const fm2 = (m) => '[' + m[0][0] + ',' + m[0][1] + ';' + m[1][0] + ',' + m[1][1] + ']';
+  const rnd2 = (x) => Math.round(x * 100) / 100;
+
+  const missionGens = {
+    // ═══ Module 1: Linear Relations ═══
+    // Mission 1: Piggy Bank Detectives (direct proportion)
+    1: {
+      easy: [
+        () => { const m=ri(2,5),x=ri(1,8); return {type:'m1_yval',answerType:'scalar',prompt:'If y = '+m+'x, what is y when x = '+x+'?',answer:String(m*x),display:String(m*x),data:{m,x}}; },
+        () => { const m=ri(2,6); return {type:'m1_ratio',answerType:'scalar',prompt:'If y = '+m+'x, what is the ratio y:x?',answer:m+':1',display:m+':1',data:{m}}; },
+        () => { const k=ri(2,5),b=ri(1,8),c=k*b; return {type:'m1_findk',answerType:'scalar',prompt:'A = '+c+' when B = '+b+'. If A = kB, find k.',answer:String(k),display:String(k),data:{k,b,c}}; },
+      ],
+      medium: [
+        () => { const m=ri(2,5),x=ri(1,6); return {type:'m1_eval',answerType:'scalar',prompt:'Ram saves '+m+'x what Lakshman saves. If Lakshman saves '+x+', what does Ram save?',answer:String(m*x),display:String(m*x),data:{m,x}}; },
+        () => { const m1=ri(2,4),m2=m1*ri(2,3); return {type:'m1_compare',answerType:'scalar',prompt:'Two proportional relationships: y='+m1+'x and y='+m2+'x. What is the ratio of their slopes?',answer:String(m2/m1),display:String(m2/m1),data:{m1,m2}}; },
+        () => { const m=ri(2,5),x=ri(1,10); return {type:'m1_origin',answerType:'scalar',prompt:'For y = '+m+'x, what is y when x = 0? Does it pass through origin?',answer:'0',display:'0 (yes, origin)',data:{m,x}}; },
+      ],
+      hard: [
+        () => { const m=ri(2,4),x1=ri(1,5),x2=x1+ri(1,3); const y1=m*x1,y2=m*x2; return {type:'m1_slope',answerType:'scalar',prompt:'Points ('+x1+','+y1+') and ('+x2+','+y2+') are from y='+m+'x. What is the slope?',answer:String(m),display:String(m),data:{m,x1,x2,y1,y2}}; },
+        () => { const m=ri(2,5),b=ri(1,5); return {type:'m1_notprop',answerType:'scalar',prompt:'y = '+m+'x + '+b+' is NOT proportional. What value of b makes it proportional?',answer:'0',display:'0',data:{m,b}}; },
+        () => { const a=ri(1,5),x=ri(1,5),y=a*x; return {type:'m1_inverse',answerType:'scalar',prompt:'If y = '+a+'x and y = '+y+', find x.',answer:String(x),display:String(x),data:{a,x,y}}; },
+      ],
+    },
+    // Mission 2: Treasure Map (collinearity)
+    2: {
+      easy: [
+        () => { const y1=ri(1,5); return {type:'m2_slope',answerType:'scalar',prompt:'Slope between (1,0) and (2,'+y1+')?',answer:String(y1),display:String(y1),data:{x1:2,y1}}; },
+        () => { return {type:'m2_collinear',answerType:'scalar',prompt:'Are (2,1), (3,2), (4,3) collinear? (1=yes,0=no)',answer:'1',display:'Yes',data:{}}; },
+        () => { return {type:'m2_next',answerType:'scalar',prompt:'Next point in pattern (2,1), (3,2), (4,3)?',answer:'(5,4)',display:'(5,4)',data:{}}; },
+      ],
+      medium: [
+        () => { const a=ri(1,3),b=ri(1,5); return {type:'m2_equation',answerType:'scalar',prompt:'Line through (2,1) and (3,2): what is y when x='+(a+5)+'?',answer:String(a+4),display:String(a+4),data:{a,b}}; },
+        () => { const m=ri(1,4),x1=ri(1,3),y1=m*x1-1; return {type:'m2_slope2',answerType:'scalar',prompt:'Slope through ('+x1+','+y1+') and ('+(x1+1)+','+(y1+m)+')?',answer:String(m),display:String(m),data:{m,x1,y1}}; },
+        () => { const x=ri(2,6); return {type:'m2_check',answerType:'scalar',prompt:'Is point ('+x+','+(x-1)+') on line y = x - 1? (1=yes,0=no)',answer:'1',display:'Yes',data:{x}}; },
+      ],
+      hard: [
+        () => { const x1=ri(1,3),y1=ri(1,3),x2=x1+ri(1,3),y2=y1+ri(1,3); const x3=x2+ri(1,3),y3=y2+ri(1,3); const collinear=((y2-y1)*(x3-x2)===(y3-y2)*(x2-x1)); return {type:'m2_area',answerType:'scalar',prompt:'Area of triangle with vertices ('+x1+','+y1+'), ('+x2+','+y2+'), ('+x3+','+y3+')? (if collinear, 0)',answer:String(Math.abs((x1*(y2-y3)+x2*(y3-y1)+x3*(y1-y2))/2)),display:String(Math.abs((x1*(y2-y3)+x2*(y3-y1)+x3*(y1-y2))/2)),data:{x1,y1,x2,y2,x3,y3}}; },
+        () => { const m=ri(1,4),x0=ri(2,4); const y0=m*(x0-1); const x3=x0+1,y3=m*x0; return {type:'m2_extend',answerType:'scalar',prompt:'Points (1,0), ('+x0+','+y0+'), ('+x3+','+y3+'). Slope?',answer:String(m),display:String(m),data:{m,x0,y0,x3,y3}}; },
+        () => { const m=ri(2,5); return {type:'m2_perpslope',answerType:'scalar',prompt:'Line perpendicular to y = '+m+'x - 1 has slope?',answer:String(rnd2(-1/m)),display:String(rnd2(-1/m)),data:{m}}; },
+      ],
+    },
+    // Mission 3: Darts at the Origin (y=ax through origin)
+    3: {
+      easy: [
+        () => { const a=ri(1,8); return {type:'m3_through',answerType:'scalar',prompt:'Does y = '+a+'x pass through origin? (1=yes,0=no)',answer:'1',display:'Yes',data:{a}}; },
+        () => { const a=ri(1,5),x=ri(1,5); return {type:'m3_yval',answerType:'scalar',prompt:'y = '+a+'x. When x = '+x+', y = ?',answer:String(a*x),display:String(a*x),data:{a,x}}; },
+        () => { return {type:'m3_not',answerType:'scalar',prompt:'Does y = 2x + 1 pass through origin? (1=yes,0=no)',answer:'0',display:'No',data:{}}; },
+      ],
+      medium: [
+        () => { const a=ri(1,6); return {type:'m3_neg',answerType:'scalar',prompt:'Does y = -'+a+'x pass through origin? (1=yes,0=no)',answer:'1',display:'Yes',data:{a}}; },
+        () => { const a=ri(1,5),b=ri(-3,3); return {type:'m3_intercept',answerType:'scalar',prompt:'y = '+a+'x + '+b+' passes through origin only if b = ?',answer:'0',display:'0',data:{a,b}}; },
+        () => { const a=ri(2,5); return {type:'m3_scalar',answerType:'scalar',prompt:'For y='+a+'x, is (3,'+(3*a)+') a scalar multiple of (1,'+a+')? (1=yes,0=no)',answer:'1',display:'Yes',data:{a}}; },
+      ],
+      hard: [
+        () => { const a1=ri(1,5),a2=ri(1,5); return {type:'m3_intersect',answerType:'scalar',prompt:'y='+a1+'x and y='+a2+'x intersect at which point?',answer:'(0,0)',display:'(0,0)',data:{a1,a2}}; },
+        () => { const a=ri(1,5); return {type:'m3_proportional',answerType:'scalar',prompt:'y='+a+'x is proportional. What is the constant of proportionality?',answer:String(a),display:String(a),data:{a}}; },
+        () => { const x=ri(1,5),a=ri(2,5); return {type:'m3_findx',answerType:'scalar',prompt:'On y='+a+'x, a point has y='+(a*x)+'. What is x?',answer:String(x),display:String(x),data:{a,x}}; },
+      ],
+    },
+    // Mission 4: The Brick Wall (y=mx+b intercept)
+    4: {
+      easy: [
+        () => { const m=ri(2,5),b=ri(1,8); return {type:'m4_yint',answerType:'scalar',prompt:'What is the y-intercept of y = '+m+'x + '+b+'?',answer:String(b),display:String(b),data:{m,b}}; },
+        () => { const m=ri(2,4),b=ri(1,5); return {type:'m4_atzero',answerType:'scalar',prompt:'y = '+m+'x + '+b+'. What is y when x = 0?',answer:String(b),display:String(b),data:{m,b}}; },
+        () => { const m=ri(1,5); return {type:'m4_shift',answerType:'scalar',prompt:'y = '+m+'x + 3 shifts the line y = '+m+'x up by how many units?',answer:'3',display:'3',data:{m}}; },
+      ],
+      medium: [
+        () => { const m=ri(2,5),b=ri(1,5),x=ri(1,5); return {type:'m4_eval',answerType:'scalar',prompt:'y = '+m+'x + '+b+'. What is y when x = '+x+'?',answer:String(m*x+b),display:String(m*x+b),data:{m,b,x}}; },
+        () => { const b=ri(1,6); return {type:'m4_cross',answerType:'scalar',prompt:'Where does y = 3x + '+b+' cross the y-axis?',answer:'(0,'+b+')',display:'(0,'+b+')',data:{b}}; },
+        () => { const m=ri(2,5); return {type:'m4_noshift',answerType:'scalar',prompt:'y = '+m+'x + 0 passes through which special point?',answer:'(0,0)',display:'(0,0) - origin',data:{m}}; },
+      ],
+      hard: [
+        () => { const m=ri(2,4),b1=ri(1,5),b2=b1+ri(1,4); return {type:'m4_parallel',answerType:'scalar',prompt:'y='+m+'x+'+b1+' and y='+m+'x+'+b2+' are parallel. Distance between intercepts?',answer:String(b2-b1),display:String(b2-b1),data:{m,b1,b2}}; },
+        () => { const m=ri(1,4),x=ri(1,5); return {type:'m4_frompts',answerType:'scalar',prompt:'Line through (0,3) and ('+x+','+(m*x+3)+'). What is the slope?',answer:String(m),display:String(m),data:{m,x}}; },
+        () => { const m1=ri(2,5),b=ri(1,5); return {type:'m4_compare',answerType:'scalar',prompt:'y='+m1+'x+'+b+' vs y='+m1+'x+'+(b+1)+'. How many units higher is the second line at any x?',answer:'1',display:'1',data:{m1,b}}; },
+      ],
+    },
+    // Mission 5: Game Controller (slope & intercept sliders)
+    5: {
+      easy: [
+        () => { const m=ri(1,6); return {type:'m5_steep',answerType:'scalar',prompt:'Which is steeper: y='+m+'x or y='+(m+2)+'x?',answer:String(m+2),display:'y='+(m+2)+'x',data:{m}}; },
+        () => { const b=ri(-5,5); return {type:'m5_intercept',answerType:'scalar',prompt:'Setting a=0, b='+b+' gives horizontal line at y = ?',answer:String(b),display:String(b),data:{b}}; },
+        () => { return {type:'m5_zero',answerType:'scalar',prompt:'a=0, b=0 gives y = ? What kind of line?',answer:'0',display:'0 (x-axis)',data:{}}; },
+      ],
+      medium: [
+        () => { const m=ri(1,5),b=ri(-3,3),x=ri(1,5); return {type:'m5_both',answerType:'scalar',prompt:'Line: slope='+m+', intercept='+b+'. What is y at x='+x+'?',answer:String(m*x+b),display:String(m*x+b),data:{m,b,x}}; },
+        () => { const m1=ri(1,5),m2=m1+2; return {type:'m5_angle',answerType:'scalar',prompt:'Slope '+m1+' vs slope '+m2+': which makes a larger angle with x-axis?',answer:String(m2),display:'slope '+m2,data:{m1,m2}}; },
+        () => { const m=ri(1,5); return {type:'m5_negative',answerType:'scalar',prompt:'Negative slope means the line goes _____ as x increases.',answer:'down',display:'Down',data:{m}}; },
+      ],
+      hard: [
+        () => { const m1=ri(1,4),m2=-1/m1; return {type:'m5_perp',answerType:'scalar',prompt:'Slope perpendicular to '+rnd2(m1)+' is '+rnd2(m2)+'? Product = ?',answer:'-1',display:'-1',data:{m1,m2}}; },
+        () => { const m=ri(2,5),b=ri(1,5),x=ri(1,8); return {type:'m5_model',answerType:'scalar',prompt:'Taxi: base fare = '+b+', per km = '+m+'. Total for '+x+' km?',answer:String(m*x+b),display:String(m*x+b),data:{m,b,x}}; },
+        () => { const m1=ri(1,4),b1=ri(-3,3),m2=ri(1,4),b2=ri(-3,3); return {type:'m5_intersect',answerType:'scalar',prompt:'y='+m1+'x+'+b1+' and y='+m2+'x+'+b2+' have different slopes. How many intersection points?',answer:'1',display:'1',data:{m1,b1,m2,b2}}; },
+      ],
+    },
+    // ═══ Module 1: Systems & Functions ═══
+    // Mission 6: Meeting Point (systems → matrix form)
+    6: {
+      easy: [
+        () => { const x=ri(1,5),y=ri(1,5); return {type:'m6_verify',answerType:'scalar',prompt:'Is x='+x+', y='+y+' a solution to x+y='+(x+y)+'? (1=yes,0=no)',answer:'1',display:'Yes',data:{x,y}}; },
+        () => { return {type:'m6_count',answerType:'scalar',prompt:'How many unknowns in: 2x + 3y = 7?',answer:'2',display:'2',data:{}}; },
+        () => { const x=ri(1,5); return {type:'m6_easy',answerType:'scalar',prompt:'2x = '+(2*x)+'. Find x.',answer:String(x),display:String(x),data:{x}}; },
+      ],
+      medium: [
+        () => { const x=ri(-3,3),y=ri(-3,3); const a=ri(1,4),b=ri(1,4),c=a*x+b*y; return {type:'m6_solve',answerType:'scalar',prompt:'Solve: '+a+'x+'+b+'y='+c+' and x+y='+(x+y)+'. Find x.',answer:String(x),display:String(x),data:{a,b,c,x,y}}; },
+        () => { const x=ri(1,5),y=ri(1,5); return {type:'m6_matrix',answerType:'scalar',prompt:'For 2x+3y=7 and x+2y=5, the coefficient matrix is [[2,3],[1,2]]. What is its determinant?',answer:'1',display:'1',data:{x,y}}; },
+        () => { return {type:'m6_unique',answerType:'scalar',prompt:'For a unique solution, the determinant of the coefficient matrix must be _____.',answer:'non-zero',display:'Non-zero',data:{}}; },
+      ],
+      hard: [
+        () => { const x=ri(-3,3),y=ri(-3,3); const a1=ri(1,3),b1=ri(1,3),c1=a1*x+b1*y; let a2,b2,c2; do{a2=ri(1,3);b2=ri(1,3);}while(a1*b2===a2*b1); c2=a2*x+b2*y; return {type:'m6_2x2',answerType:'scalar',prompt:'Solve: '+a1+'x+'+b1+'y='+c1+', '+a2+'x+'+b2+'y='+c2+'. Find x.',answer:String(x),display:String(x),data:{a1,b1,c1,a2,b2,c2,x,y}}; },
+        () => { const x=ri(-3,3),y=ri(-3,3); const a1=ri(1,3),b1=ri(1,3),c1=a1*x+b1*y; let a2,b2,c2; do{a2=ri(1,3);b2=ri(1,3);}while(a1*b2===a2*b1); c2=a2*x+b2*y; return {type:'m6_2x2y',answerType:'scalar',prompt:'Solve: '+a1+'x+'+b1+'y='+c1+', '+a2+'x+'+b2+'y='+c2+'. Find y.',answer:String(y),display:String(y),data:{a1,b1,c1,a2,b2,c2,x,y}}; },
+        () => { const A=[[ri(1,3),ri(0,2)],[ri(0,2),ri(1,3)]]; const det=A[0][0]*A[1][1]-A[0][1]*A[1][0]; return {type:'m6_det',answerType:'scalar',prompt:'det('+fm2(A)+') = '+det+'. Is det≠0?',answer:det!==0?'1':'0',display:det!==0?'Yes':'No',data:{A,det}}; },
+      ],
+    },
+    // Mission 7: Time Machine (invertible functions)
+    7: {
+      easy: [
+        () => { const a=ri(2,5),x=ri(1,5); return {type:'m7_invert',answerType:'scalar',prompt:'f(x)='+a+'x. What is f^-1('+(a*x)+')?',answer:String(x),display:String(x),data:{a,x}}; },
+        () => { const a=ri(1,5); return {type:'m7_oneone',answerType:'scalar',prompt:'f(x)='+a+'x+2. Is it one-to-one? (1=yes,0=no)',answer:'1',display:'Yes',data:{a}}; },
+        () => { const a=ri(2,5); return {type:'m7_formula',answerType:'scalar',prompt:'f(x)='+a+'x. f^-1(y) = y/',answer:String(a),display:'y/'+a,data:{a}}; },
+      ],
+      medium: [
+        () => { const a=ri(1,5),b=ri(-5,5),x=ri(1,5); return {type:'m7_eval',answerType:'scalar',prompt:'f(x)='+a+'x+'+b+'. f('+x+')?',answer:String(a*x+b),display:String(a*x+b),data:{a,b,x}}; },
+        () => { const a=ri(2,5),b=ri(1,5); return {type:'m7_inveq',answerType:'scalar',prompt:'f(x)='+a+'x+'+b+'. f^-1('+(a*3+b)+') = ?',answer:'3',display:'3',data:{a,b}}; },
+        () => { const a=ri(1,5); return {type:'m7_injective',answerType:'scalar',prompt:'f(x)='+a+'x. Injective means every y-value maps to exactly ___ x-value(s).',answer:'1',display:'1',data:{a}}; },
+      ],
+      hard: [
+        () => { const a=ri(1,4),b=ri(-3,3); return {type:'m7_invformula',answerType:'scalar',prompt:'f(x)='+a+'x+'+b+'. f^-1(y) = (y-'+b+')/',answer:String(a),display:'(y-'+b+')/'+a,data:{a,b}}; },
+        () => { const a=ri(1,5); return {type:'m7_identity',answerType:'scalar',prompt:'f(f^-1(x)) = ? for invertible function f.',answer:'x',display:'x',data:{a}}; },
+        () => { const a=ri(2,5),x=ri(1,5); return {type:'m7_comp',answerType:'scalar',prompt:'f(x)='+a+'x, g(x)=x/'+a+'. f(g('+x+'))?',answer:String(x),display:String(x),data:{a,x}}; },
+      ],
+    },
+    // Mission 8: Parabola Slide (evaluate by tracing)
+    8: {
+      easy: [
+        () => { const x=ri(1,5); return {type:'m8_square',answerType:'scalar',prompt:'f(x) = x^2. What is f('+x+')?',answer:String(x*x),display:String(x*x),data:{x}}; },
+        () => { const a=ri(1,4),x=ri(1,4); return {type:'m8_quad',answerType:'scalar',prompt:'f(x) = x^2 - '+a+'. f('+x+')?',answer:String(x*x-a),display:String(x*x-a),data:{a,x}}; },
+        () => { return {type:'m8_fzero',answerType:'scalar',prompt:'f(x) = x^2 - 9. What is f(3)?',answer:'0',display:'0',data:{}}; },
+      ],
+      medium: [
+        () => { const a=ri(1,5); return {type:'m8_invert',answerType:'scalar',prompt:'f(x)=x^2-'+a+'. Is it invertible over all reals? (1=yes,0=no)',answer:'0',display:'No',data:{a}}; },
+        () => { const x=ri(1,5); return {type:'m8_two',answerType:'scalar',prompt:'f(x)=x^2. f('+x+') = f('+(-x)+'). Two inputs give same output. Invertible? (1=yes,0=no)',answer:'0',display:'No',data:{x}}; },
+        () => { const a=ri(1,4); return {type:'m8_vertex',answerType:'scalar',prompt:'f(x)=x^2-'+a+'. Where is the vertex? x = ?',answer:'0',display:'0',data:{a}}; },
+      ],
+      hard: [
+        () => { const a=ri(1,3),b=ri(1,5); return {type:'m8_factored',answerType:'scalar',prompt:'f(x)=x^2-'+a+'x+'+b+'. How many real roots does x^2-'+a+'x+'+b+'=0 have?',answer:String((a*a-4*b>=0)?((a*a-4*b>0)?2:1):0),display:String((a*a-4*b>=0)?((a*a-4*b>0)?2:1):0),data:{a,b}}; },
+        () => { const x=ri(1,5); return {type:'m8_symmetry',answerType:'scalar',prompt:'f(x)=x^2. f(a)=f(-a) means f is symmetric about which axis?',answer:'y-axis',display:'y-axis',data:{x}}; },
+        () => { const a=ri(1,4); return {type:'m8_restrict',answerType:'scalar',prompt:'f(x)=x^2-'+a+'. If restricted to x>=0, is it invertible? (1=yes,0=no)',answer:'1',display:'Yes',data:{a}}; },
+      ],
+    },
+    // Mission 9: Hit the Target (inverse not a function)
+    9: {
+      easy: [
+        () => { const x=ri(1,5); return {type:'m9_quad',answerType:'scalar',prompt:'Can x^2 = '+(x*x)+' have two solutions? (1=yes,0=no)',answer:'1',display:'Yes',data:{x}}; },
+        () => { const a=ri(1,5); return {type:'m9_intersects',answerType:'scalar',prompt:'y=x^2 and y='+(a*a)+' intersect at how many points?',answer:'2',display:'2',data:{a}}; },
+        () => { const x=ri(1,5); return {type:'m9_posneg',answerType:'scalar',prompt:'x^2='+(x*x)+'. Name one positive solution.',answer:String(x),display:String(x),data:{x}}; },
+      ],
+      medium: [
+        () => { const x=ri(1,5); return {type:'m9_both',answerType:'scalar',prompt:'x^2='+(x*x)+'. What are the two solutions?',answer:x+' and '+(-x),display:x+' and '+(-x),data:{x}}; },
+        () => { return {type:'m9_fail',answerType:'scalar',prompt:'Why does f(x)=x^2 fail the horizontal line test?',answer:'multiple x for same y',display:'Same y for +x and -x',data:{}}; },
+        () => { const a=ri(1,4); return {type:'m9_real',answerType:'scalar',prompt:'x^2+'+a+'=0. How many real solutions?',answer:'0',display:'0',data:{a}}; },
+      ],
+      hard: [
+        () => { const a=ri(2,4); return {type:'m9_formula',answerType:'scalar',prompt:'x^2-'+(a*a)+'=0. Positive solution x = ?',answer:String(a),display:String(a),data:{a}}; },
+        () => { const a=ri(1,4); return {type:'m9_shifted',answerType:'scalar',prompt:'f(x)=(x-'+a+')^2. f('+(a+3)+') = ?',answer:String(9),display:'9',data:{a}}; },
+        () => { const a=ri(1,3),b=ri(1,3); const d=a*a-4*b; return {type:'m9_discrim',answerType:'scalar',prompt:'x^2-'+a+'x+'+b+'=0. Discriminant = '+d+'. Roots?',answer:d>0?'2':d===0?'1':'0',display:d>0?'2 real':d===0?'1 repeated':'0 real',data:{a,b,d}}; },
+      ],
+    },
+    // Mission 10: Roller Coaster (cubic equations)
+    10: {
+      easy: [
+        () => { const x=ri(1,3); return {type:'m10_cubic',answerType:'scalar',prompt:'f(x) = x^3. What is f('+x+')?',answer:String(x*x*x),display:String(x*x*x),data:{x}}; },
+        () => { return {type:'m10_degree',answerType:'scalar',prompt:'A cubic polynomial has maximum how many real roots?',answer:'3',display:'3',data:{}}; },
+        () => { const x=ri(1,3); return {type:'m10_cube_root',answerType:'scalar',prompt:'x^3 = '+(x*x*x)+'. What is x?',answer:String(x),display:String(x),data:{x}}; },
+      ],
+      medium: [
+        () => { return {type:'m10_onesol',answerType:'scalar',prompt:'How many real solutions does x^3 = 27 have?',answer:'1',display:'1',data:{}}; },
+        () => { const a=ri(1,3); return {type:'m10_positive',answerType:'scalar',prompt:'x^3 = '+(a*a*a)+'. How many positive real solutions?',answer:'1',display:'1',data:{a}}; },
+        () => { return {type:'m10_odd',answerType:'scalar',prompt:'Why does every odd-degree polynomial have at least one real root?',answer:'endpoints go opposite directions',display:'Opposite signs at ±∞',data:{}}; },
+      ],
+      hard: [
+        () => { const x=ri(1,3); return {type:'m10_factor',answerType:'scalar',prompt:'x^3-'+x+'=0. Factor: x(x-1)(x+1)=0. How many real roots?',answer:'3',display:'3',data:{x}}; },
+        () => { const a=ri(1,3); return {type:'m10_complex',answerType:'scalar',prompt:'x^3=1 has 1 real root. How many complex roots total?',answer:'3',display:'3',data:{a}}; },
+        () => { const x=ri(1,3); return {type:'m10_sum',answerType:'scalar',prompt:'x^3=27. x^3-27=0. Factor: (x-3)(x^2+3x+9)=0. Number of real roots?',answer:'1',display:'1',data:{x}}; },
+      ],
+    },
+    // ═══ Module 1: Dimensions ═══
+    // Mission 11: Dimensional Portal (1D, 2D, 3D)
+    11: {
+      easy: [
+        () => { return {type:'m11_r3',answerType:'scalar',prompt:'How many coordinates does a point in R^3 need?',answer:'3',display:'3',data:{}}; },
+        () => { return {type:'m11_r2',answerType:'scalar',prompt:'Point on a plane needs how many coordinates?',answer:'2',display:'2',data:{}}; },
+        () => { return {type:'m11_r1',answerType:'scalar',prompt:'Point on a line needs how many coordinates?',answer:'1',display:'1',data:{}}; },
+      ],
+      medium: [
+        () => { const v=[ri(1,5),ri(1,5),ri(1,5)]; return {type:'m11_vecdim',answerType:'scalar',prompt:'Vector '+fv(...v)+' lives in which space?',answer:'R^3',display:'R^3',data:{v}}; },
+        () => { return {type:'m11_notation',answerType:'scalar',prompt:'What is the notation for 2D real coordinate plane?',answer:'R^2',display:'R^2',data:{}}; },
+        () => { return {type:'m11_5d',answerType:'scalar',prompt:'A data point with 5 measurements lives in R^?',answer:'5',display:'R^5',data:{}}; },
+      ],
+      hard: [
+        () => { const n=ri(2,6); return {type:'m11_nd',answerType:'scalar',prompt:'A vector in R^n has ___ components.',answer:String(n),display:String(n),data:{n}}; },
+        () => { return {type:'m11_origin',answerType:'scalar',prompt:'The origin (0,0,0) is a _-dimensional object.',answer:'0',display:'0',data:{}}; },
+        () => { const d=ri(1,5); return {type:'m11_span',answerType:'scalar',prompt:'Span of one vector in R^'+(d+1)+' is _-dimensional.',answer:'1',display:'1 (a line)',data:{d}}; },
+      ],
+    },
+    // Mission 12: Transformation Machine (matrix as function)
+    12: {
+      easy: [
+        () => { const a=ri(1,5),b=ri(1,5); return {type:'m12_col1',answerType:'scalar',prompt:'If phi(1,0) = ('+a+','+b+'), what is the first column of the matrix?',answer:'('+a+','+b+')',display:'('+a+','+b+')',data:{a,b}}; },
+        () => { const c=ri(1,5),d=ri(1,5); return {type:'m12_col2',answerType:'scalar',prompt:'If phi(0,1) = ('+c+','+d+'), what is the second column?',answer:'('+c+','+d+')',display:'('+c+','+d+')',data:{c,d}}; },
+        () => { return {type:'m12_linear',answerType:'scalar',prompt:'A matrix transformation is always _____.',answer:'linear',display:'Linear',data:{}}; },
+      ],
+      medium: [
+        () => { const A=[[ri(1,4),ri(0,3)],[ri(0,3),ri(1,4)]]; return {type:'m12_apply',answerType:'scalar',prompt:'Matrix '+fm2(A)+' applied to (1,0) gives?',answer:'('+A[0][0]+','+A[1][0]+')',display:'('+A[0][0]+','+A[1][0]+')',data:{A}}; },
+        () => { const A=[[ri(1,4),ri(0,3)],[ri(0,3),ri(1,4)]]; const det=A[0][0]*A[1][1]-A[0][1]*A[1][0]; return {type:'m12_det',answerType:'scalar',prompt:'det('+fm2(A)+') = ? If non-zero, transformation is _____.',answer:String(det),display:String(det),data:{A,det}}; },
+        () => { return {type:'m12_cols',answerType:'scalar',prompt:'The columns of a transformation matrix are the images of _____.',answer:'basis vectors',display:'Basis vectors (1,0) and (0,1)',data:{}}; },
+      ],
+      hard: [
+        () => { const A=[[ri(1,3),ri(0,2)],[ri(0,2),ri(1,3)]]; const x=ri(1,3),y=ri(1,3); const r=[A[0][0]*x+A[0][1]*y,A[1][0]*x+A[1][1]*y]; return {type:'m12_comp',answerType:'scalar',prompt:'A='+fm2(A)+', v=('+x+','+y+'). Av = ?',answer:fv(...r),display:fv(...r),data:{A,x,y,r}}; },
+        () => { return {type:'m12_2x2',answerType:'scalar',prompt:'A 2×2 matrix transforms how many dimensions?',answer:'2',display:'2',data:{}}; },
+        () => { const A=[[1,0],[0,1]]; return {type:'m12_identity',answerType:'scalar',prompt:'Identity matrix I×v = ?',answer:'v',display:'v (unchanged)',data:{A}}; },
+      ],
+    },
+    // Mission 13: Jigsaw Puzzle (determinant & invertibility)
+    13: {
+      easy: [
+        () => { const a=ri(1,4),d=ri(1,4); const A=[[a,0],[0,d]]; return {type:'m13_detdiag',answerType:'scalar',prompt:'det([['+a+',0],[0,'+d+']])?',answer:String(a*d),display:String(a*d),data:{a,d}}; },
+        () => { return {type:'m13_zero',answerType:'scalar',prompt:'det([[1,2],[2,4]]) = ? Is it invertible?',answer:'0',display:'0 (not invertible)',data:{}}; },
+        () => { const a=ri(1,5),d=ri(1,5); return {type:'m13_prod',answerType:'scalar',prompt:'For diagonal matrix, det = product of ___?',answer:'diagonal entries',display:'Diagonal entries '+a+'×'+d+'='+String(a*d),data:{a,d}}; },
+      ],
+      medium: [
+        () => { const A=[[ri(1,4),ri(0,3)],[ri(0,3),ri(1,4)]]; const det=A[0][0]*A[1][1]-A[0][1]*A[1][0]; return {type:'m13_det',answerType:'scalar',prompt:'det('+fm2(A)+')?',answer:String(det),display:String(det),data:{A,det}}; },
+        () => { const A=[[ri(1,4),ri(0,3)],[ri(0,3),ri(1,4)]]; const det=A[0][0]*A[1][1]-A[0][1]*A[1][0]; return {type:'m13_invert',answerType:'scalar',prompt:'det(A)='+det+'. Invertible? (1=yes,0=no)',answer:det!==0?'1':'0',display:det!==0?'Yes':'No',data:{A,det}}; },
+        () => { return {type:'m13_formula',answerType:'scalar',prompt:'For [[a,b],[c,d]], det = ?',answer:'ad-bc',display:'ad - bc',data:{}}; },
+      ],
+      hard: [
+        () => { const A=[[ri(1,3),ri(1,3)],[ri(1,3),ri(1,3)]]; return {type:'m13_singular',answerType:'scalar',prompt:'det('+fm2(A)+')=0. Rank of A?',answer:'1',display:'1',data:{A}}; },
+        () => { const A=[[ri(1,4),ri(0,3)],[ri(0,3),ri(1,4)]]; const det=A[0][0]*A[1][1]-A[0][1]*A[1][0]; return {type:'m13_inverse_det',answerType:'scalar',prompt:'det(A)='+det+'. det(A^-1) = ?',answer:det!==0?String(rnd2(1/det)):'0',display:det!==0?String(rnd2(1/det)):'undefined',data:{A,det}}; },
+        () => { const A=[[ri(1,4),ri(0,3)],[ri(0,3),ri(1,4)]]; const det=A[0][0]*A[1][1]-A[0][1]*A[1][0]; return {type:'m13_connection',answerType:'scalar',prompt:'det(A)='+det+'. A is invertible?',answer:det!==0?'1':'0',display:det!==0?'Yes':'No',data:{A,det}}; },
+      ],
+    },
+    // Mission 14: The Vanishing Act (null space / kernel)
+    14: {
+      easy: [
+        () => { return {type:'m14_det0',answerType:'scalar',prompt:'If det(A) = 0, what does that mean?',answer:'not invertible',display:'Not invertible',data:{}}; },
+        () => { return {type:'m14_kernel',answerType:'scalar',prompt:'The set of vectors mapping to origin is called the _____.',answer:'null space',display:'Null space / Kernel',data:{}}; },
+        () => { return {type:'m14_zero',answerType:'scalar',prompt:'Does the zero vector always belong to the null space? (1=yes,0=no)',answer:'1',display:'Yes',data:{}}; },
+      ],
+      medium: [
+        () => { return {type:'m14_sing',answerType:'scalar',prompt:'A singular matrix maps some non-zero vectors to _____.',answer:'zero vector',display:'(0,0)',data:{}}; },
+        () => { const A=[[1,2],[2,4]]; return {type:'m14_ns_dir',answerType:'scalar',prompt:'Null space direction of [[1,2],[2,4]]?',answer:'(-2,1)',display:'(-2,1)',data:{A}}; },
+        () => { return {type:'m14_many',answerType:'scalar',prompt:'How many vectors map to origin for a singular matrix?',answer:'infinite',display:'Infinitely many',data:{}}; },
+      ],
+      hard: [
+        () => { const a=ri(1,3); const A=[[a,a*2],[a*2,a*4]]; return {type:'m14_ns_calc',answerType:'scalar',prompt:'Null space of '+fm2(A)+' has dimension?',answer:'1',display:'1',data:{A}}; },
+        () => { return {type:'m14_nsr',answerType:'scalar',prompt:'nullity + rank = ? (number of columns)',answer:String(2),display:String(2),data:{}}; },
+        () => { const A=[[1,2],[2,4]]; return {type:'m14_verify',answerType:'scalar',prompt:'A=(-2,1) is in null space of [[1,2],[2,4]]. Check: first row dot A = ?',answer:'0',display:'0',data:{A}}; },
+      ],
+    },
+    // ═══ Module 2: Matrix Applications ═══
+    // Mission 15: Hill Cipher (encryption via matrices)
+    15: {
+      easy: [
+        () => { return {type:'m15_mult',answerType:'scalar',prompt:'Hill cipher encrypts using matrix _____.',answer:'multiplication',display:'Multiplication',data:{}}; },
+        () => { return {type:'m15_mod',answerType:'scalar',prompt:'Hill cipher uses arithmetic mod ___',answer:'26',display:'26',data:{}}; },
+        () => { return {type:'m15_decrypt',answerType:'scalar',prompt:'To decrypt Hill cipher, multiply by matrix _____.',answer:'inverse',display:'Inverse',data:{}}; },
+      ],
+      medium: [
+        () => { const A=[[1,2],[0,1]]; const v=[ri(1,5),ri(1,5)]; const r=[A[0][0]*v[0]+A[0][1]*v[1],A[1][0]*v[0]+A[1][1]*v[1]]; return {type:'m15_apply',answerType:'scalar',prompt:'Encrypt '+fv(...v)+' with '+fm2(A)+'. First component?',answer:String(r[0]),display:String(r[0]),data:{A,v,r}}; },
+        () => { const A=[[ri(1,3),ri(0,2)],[ri(0,2),ri(1,3)]]; const det=A[0][0]*A[1][1]-A[0][1]*A[1][0]; return {type:'m15_det',answerType:'scalar',prompt:'det('+fm2(A)+')='+det+'. Can we decrypt? (1=yes,0=no)',answer:det!==0?'1':'0',display:det!==0?'Yes':'No',data:{A,det}}; },
+        () => { return {type:'m15_identity',answerType:'scalar',prompt:'Hill cipher with identity matrix changes the message? (1=yes,0=no)',answer:'0',display:'No change',data:{}}; },
+      ],
+      hard: [
+        () => { const A=[[ri(1,4),ri(0,3)],[ri(0,3),ri(1,4)]]; const det=A[0][0]*A[1][1]-A[0][1]*A[1][0]; return {type:'m15_hill_det',answerType:'scalar',prompt:'Hill cipher matrix '+fm2(A)+'. det='+det+'. Can decrypt?',answer:det!==0?'1':'0',display:det!==0?'Yes':'No',data:{A,det}}; },
+        () => { return {type:'m15_2x2',answerType:'scalar',prompt:'Basic Hill cipher uses ___x___ matrices.',answer:'2x2',display:'2×2',data:{}}; },
+        () => { const A=[[2,3],[3,4]]; const v=[18,20]; const r=[A[0][0]*v[0]+A[0][1]*v[1],A[1][0]*v[0]+A[1][1]*v[1]]; return {type:'m15_encrypt',answerType:'scalar',prompt:'Encrypt (18,20) with [[2,3],[3,4]]. Second component?',answer:String(r[1]),display:String(r[1]),data:{A,v,r}}; },
+      ],
+    },
+    // Mission 16: Baker's Cafe (overdetermined systems)
+    16: {
+      easy: [
+        () => { const a=ri(1,4),b=ri(1,4); return {type:'m16_count',answerType:'scalar',prompt:'How many equations: '+a+'A + '+b+'C = 100, 2A + C = 50?',answer:'2',display:'2',data:{a,b}}; },
+        () => { return {type:'m16_over',answerType:'scalar',prompt:'More equations than unknowns is called _____.',answer:'overdetermined',display:'Overdetermined',data:{}}; },
+        () => { const x=ri(1,5); return {type:'m16_easy',answerType:'scalar',prompt:'2A = '+(2*x)+'. Find A.',answer:String(x),display:String(x),data:{x}}; },
+      ],
+      medium: [
+        () => { const x=ri(1,5),y=ri(1,5); return {type:'m16_solve',answerType:'scalar',prompt:'3A+1C='+(3*x+y)+' and 1A+2C='+(x+2*y)+'. Find A.',answer:String(x),display:String(x),data:{x,y}}; },
+        () => { return {type:'m16_leastsq',answerType:'scalar',prompt:'Best approximation for overdetermined systems uses _____ method.',answer:'least squares',display:'Least squares',data:{}}; },
+        () => { const x=ri(1,5),y=ri(1,5); return {type:'m16_verify',answerType:'scalar',prompt:'Is A='+x+', C='+y+' a solution to A+C='+(x+y)+' and 2A-C='+(2*x-y)+'? (1=yes,0=no)',answer:'1',display:'Yes',data:{x,y}}; },
+      ],
+      hard: [
+        () => { const A=[[3,1],[1,2],[1,1]]; return {type:'m16_atb',answerType:'scalar',prompt:'A=[[3,1],[1,2],[1,1]]. A^T is ___x___.',answer:'2x3',display:'2×3',data:{A}}; },
+        () => { const A=[[3,1],[1,2],[1,1]]; const AT=[[A[0][0],A[1][0],A[2][0]],[A[0][1],A[1][1],A[2][1]]]; const ATA=[[0,0],[0,0]]; for(let i=0;i<2;i++) for(let j=0;j<2;j++) for(let k=0;k<3;k++) ATA[i][j]+=AT[i][k]*A[k][j]; return {type:'m16_ata',answerType:'scalar',prompt:'A^TA for A=[[3,1],[1,2],[1,1]]. Entry (1,1)?',answer:String(ATA[0][0]),display:String(ATA[0][0]),data:{A,ATA}}; },
+        () => { const x=ri(1,3),y=ri(1,3); return {type:'m16_overdet',answerType:'scalar',prompt:'System: A+C='+(x+y)+', 2A-C='+(2*x-y)+', 3A+2C='+(3*x+2*y)+'. 3 equations, 2 unknowns. Overdetermined?',answer:'1',display:'Yes',data:{x,y}}; },
+      ],
+    },
+    // Mission 17: Markov Chain (state transitions)
+    17: {
+      easy: [
+        () => { return {type:'m17_steady',answerType:'scalar',prompt:'Steady state means probabilities stop _____ after many steps.',answer:'changing',display:'Changing',data:{}}; },
+        () => { return {type:'m17_matrix',answerType:'scalar',prompt:'A transition matrix maps current state to _____ state.',answer:'next',display:'Next',data:{}}; },
+        () => { return {type:'m17_sum',answerType:'scalar',prompt:'Each row of a transition matrix must sum to _____.',answer:'1',display:'1',data:{}}; },
+      ],
+      medium: [
+        () => { const P=[[0.7,0.3],[0.4,0.6]]; return {type:'m17_step',answerType:'scalar',prompt:'P=[[0.7,0.3],[0.4,0.6]], start=[1,0]. State after 1 step, component 1?',answer:'0.7',display:'0.7',data:{P}}; },
+        () => { return {type:'m17_steady_eq',answerType:'scalar',prompt:'Steady state π satisfies which equation?',answer:'πP=π',display:'πP = π',data:{}}; },
+        () => { const P=[[0.8,0.2],[0.1,0.9]]; return {type:'m17_rows',answerType:'scalar',prompt:'P=[[0.8,0.2],[0.1,0.9]]. Row 1 sums to?',answer:'1',display:'1',data:{P}}; },
+      ],
+      hard: [
+        () => { const P=[[0.7,0.3],[0.4,0.6]]; return {type:'m17_calc',answerType:'scalar',prompt:'P=[[0.7,0.3],[0.4,0.6]]. π₁+π₂ = ?',answer:'1',display:'1',data:{P}}; },
+        () => { return {type:'m17_eigen',answerType:'scalar',prompt:'Dominant eigenvalue of any Markov matrix?',answer:'1',display:'1',data:{}}; },
+        () => { const P=[[0.7,0.3],[0.4,0.6]]; return {type:'m17_det',answerType:'scalar',prompt:'P=[[0.7,0.3],[0.4,0.6]]. det(P) = ?',answer:String(rnd2(0.7*0.6-0.3*0.4)),display:String(rnd2(0.7*0.6-0.3*0.4)),data:{P}}; },
+      ],
+    },
+    // Mission 18: Guess the Solution (overdetermined geometry)
+    18: {
+      easy: [
+        () => { return {type:'m18_rows',answerType:'scalar',prompt:'Matrix [[3,1],[1,2],[1,1]] has how many rows?',answer:'3',display:'3',data:{}}; },
+        () => { return {type:'m18_cols',answerType:'scalar',prompt:'Matrix [[3,1],[1,2],[1,1]] has how many columns?',answer:'2',display:'2',data:{}}; },
+        () => { return {type:'m18_type',answerType:'scalar',prompt:'3 equations, 2 unknowns is _____determined.',answer:'over',display:'Over',data:{}}; },
+      ],
+      medium: [
+        () => { return {type:'m18_exact',answerType:'scalar',prompt:'Can 3 equations with 2 unknowns have an exact solution? (1=yes,0=no)',answer:'1',display:'Yes (sometimes)',data:{}}; },
+        () => { return {type:'m18_intersect',answerType:'scalar',prompt:'Two lines in a plane typically intersect at ___ point(s).',answer:'1',display:'1',data:{}}; },
+        () => { return {type:'m18_3lines',answerType:'scalar',prompt:'Three random lines in a plane usually meet at ___ point(s).',answer:'0',display:'0',data:{}}; },
+      ],
+      hard: [
+        () => { return {type:'m18_least',answerType:'scalar',prompt:'Minimize ||b-Ax||^2. This is called _____ squares.',answer:'least',display:'Least squares',data:{}}; },
+        () => { const A=[[3,1],[1,2],[1,1]]; return {type:'m18_transpose',answerType:'scalar',prompt:'For A=[[3,1],[1,2],[1,1]], A^T is ___x___.',answer:'2x3',display:'2×3',data:{A}}; },
+        () => { const A=[[3,1],[1,2],[1,1]]; const det=A[0][0]*A[1][1]-A[0][1]*A[1][0]; return {type:'m18_ata_det',answerType:'scalar',prompt:'A=[[3,1],[1,2],[1,1]]. A^T A = [[11,6],[6,6]]. det(A^TA)?',answer:String(11*6-6*6),display:String(11*6-6*6),data:{A}}; },
+      ],
+    },
+    // ═══ Module 2 (cont): Why No Solution? ═══
+    // Mission 19: Why No Solution? (geometric view)
+    19: {
+      easy: [
+        () => { return {type:'m19_intersect',answerType:'scalar',prompt:'Two non-parallel lines in a plane intersect at ___ point(s).',answer:'1',display:'1',data:{}}; },
+        () => { return {type:'m19_parallel',answerType:'scalar',prompt:'Two parallel lines intersect at ___ point(s).',answer:'0',display:'0',data:{}}; },
+        () => { return {type:'m19_three',answerType:'scalar',prompt:'Three lines through the same point are called _____.',answer:'concurrent',display:'Concurrent',data:{}}; },
+      ],
+      medium: [
+        () => { return {type:'m19_unlikely',answerType:'scalar',prompt:'A 3rd random line is ___ likely to pass through the intersection of 2 lines.',answer:'unlikely',display:'Unlikely',data:{}}; },
+        () => { return {type:'m19_geometric',answerType:'scalar',prompt:'An overdetermined system with no solution: the lines do not all _____.',answer:'intersect',display:'Intersect at one point',data:{}}; },
+        () => { return {type:'m19_residual',answerType:'scalar',prompt:'The closest point to b in col(A) gives the minimum _____.',answer:'residual',display:'Residual',data:{}}; },
+      ],
+      hard: [
+        () => { const A=[[3,1],[1,2],[1,1]]; return {type:'m19_atb',answerType:'scalar',prompt:'A=[[3,1],[1,2],[1,1]]. A^T A is ___x___ matrix.',answer:'2x2',display:'2×2',data:{A}}; },
+        () => { const A=[[3,1],[1,2],[1,1]]; const ATA=[[11,6],[6,6]]; const det=ATA[0][0]*ATA[1][1]-ATA[0][1]*ATA[1][0]; return {type:'m19_ata_det',answerType:'scalar',prompt:'A^T A = [[11,6],[6,6]]. det(A^T A) = ?',answer:String(det),display:String(det),data:{A,ATA,det}}; },
+        () => { const A=[[3,1],[1,2],[1,1]]; return {type:'m19_rows',answerType:'scalar',prompt:'A=[[3,1],[1,2],[1,1]]. Rows of A^T = columns of A. How many rows in A^T?',answer:'2',display:'2',data:{A}}; },
+      ],
+    },
+    // ═══ Module 2: Markov Chains ═══
+    // Mission 20: Mood Markov Chain (2-state)
+    20: {
+      easy: [
+        () => { return {type:'m20_prob',answerType:'scalar',prompt:'Transition probabilities must be between 0 and _____.',answer:'1',display:'1',data:{}}; },
+        () => { return {type:'m20_rows',answerType:'scalar',prompt:'Each row of a transition matrix sums to _____.',answer:'1',display:'1',data:{}}; },
+        () => { return {type:'m20_state',answerType:'scalar',prompt:'A 2-state Markov chain has a ___x___ transition matrix.',answer:'2x2',display:'2x2',data:{}}; },
+      ],
+      medium: [
+        () => { const P=[[0.6,0.4],[0.3,0.7]]; return {type:'m20_step',answerType:'scalar',prompt:'P=[[0.6,0.4],[0.3,0.7]], start=[1,0]. Happy after 1 step?',answer:'0.6',display:'0.6',data:{P}}; },
+        () => { return {type:'m20_steady',answerType:'scalar',prompt:'Steady state means πP = _____.',answer:'π',display:'π',data:{}}; },
+        () => { return {type:'m20_indep',answerType:'scalar',prompt:'Does steady state depend on initial state? (1=yes,0=no)',answer:'0',display:'No',data:{}}; },
+      ],
+      hard: [
+        () => { const P=[[0.6,0.4],[0.3,0.7]]; return {type:'m20_det',answerType:'scalar',prompt:'P=[[0.6,0.4],[0.3,0.7]]. det(P) = ?',answer:String(rnd2(0.6*0.7-0.4*0.3)),display:String(rnd2(0.6*0.7-0.4*0.3)),data:{P}}; },
+        () => { return {type:'m20_multi',answerType:'scalar',prompt:'Can a Markov chain have multiple steady states? (1=yes,0=no)',answer:'0',display:'No (if irreducible)',data:{}}; },
+        () => { return {type:'m20_eigen',answerType:'scalar',prompt:'Steady state is the eigenvector of P with eigenvalue _____.',answer:'1',display:'1',data:{}}; },
+      ],
+    },
+    // Mission 21: 3-State Location Chain
+    21: {
+      easy: [
+        () => { return {type:'m21_states',answerType:'scalar',prompt:'A 3-state chain has a ___x___ transition matrix.',answer:'3x3',display:'3x3',data:{}}; },
+        () => { return {type:'m21_equations',answerType:'scalar',prompt:'How many equations to find steady state of 3-state chain?',answer:'3',display:'3 (plus normalization)',data:{}}; },
+        () => { return {type:'m21_norm',answerType:'scalar',prompt:'π₁ + π₂ + π₃ = ?',answer:'1',display:'1',data:{}}; },
+      ],
+      medium: [
+        () => { return {type:'m21_power',answerType:'scalar',prompt:'Can repeated matrix multiplication find steady state? (1=yes,0=no)',answer:'1',display:'Yes',data:{}}; },
+        () => { return {type:'m21_indep2',answerType:'scalar',prompt:'Does steady state of 3-state chain depend on starting state? (1=yes,0=no)',answer:'0',display:'No',data:{}}; },
+        () => { const P=[[0.5,0.3,0.2],[0.1,0.6,0.3],[0.2,0.2,0.6]]; return {type:'m21_sum',answerType:'scalar',prompt:'P=[[0.5,0.3,0.2],[0.1,0.6,0.3],[0.2,0.2,0.6]]. Row 1 sums to?',answer:'1',display:'1',data:{P}}; },
+      ],
+      hard: [
+        () => { return {type:'m21_equations',answerType:'scalar',prompt:'πP=π gives ___ independent equations for a 3-state chain.',answer:'3',display:'3',data:{}}; },
+        () => { const P=[[0.5,0.3,0.2],[0.1,0.6,0.3],[0.2,0.2,0.6]]; return {type:'m21_row_sum',answerType:'scalar',prompt:'P 3×3 Markov. Row 2 sums to?',answer:'1',display:'1',data:{P}}; },
+        () => { return {type:'m21_converge',answerType:'scalar',prompt:'Regular Markov chain reaches _____ state after many steps.',answer:'steady',display:'Steady',data:{}}; },
+      ],
+    },
+    // ═══ Module 3: Spaces & Transformations ═══
+    // Mission 22: Perpendicular Vectors 2D (dot product)
+    22: {
+      easy: [
+        () => { const a=ri(1,5),b=ri(1,5); return {type:'m22_dot',answerType:'scalar',prompt:'Dot product of ('+a+',0) and (0,'+b+')?',answer:'0',display:'0',data:{a,b}}; },
+        () => { return {type:'m22_perp',answerType:'scalar',prompt:'Dot product of perpendicular vectors = ?',answer:'0',display:'0',data:{}}; },
+        () => { const a=ri(1,5); return {type:'m22_self',answerType:'scalar',prompt:'Dot product of ('+a+','+a+') with itself?',answer:String(2*a*a),display:String(2*a*a),data:{a}}; },
+      ],
+      medium: [
+        () => { const a=ri(1,5),b=ri(1,5); return {type:'m22_eq',answerType:'scalar',prompt:'For ('+a+','+b+')·(x,y)=0, what equation describes perpendicular vectors?',answer:a+'x+'+b+'y=0',display:a+'x+'+b+'y=0',data:{a,b}}; },
+        () => { const u=[ri(1,4),ri(1,4)],v=[-u[1],u[0]]; return {type:'m22_perpvec',answerType:'scalar',prompt:'A vector perpendicular to '+fv(...u)+' is '+fv(...v)+'? Check dot product.',answer:'0',display:'0 (perpendicular)',data:{u,v}}; },
+        () => { return {type:'m22_zero',answerType:'scalar',prompt:'Is the zero vector perpendicular to every vector? (1=yes,0=no)',answer:'1',display:'Yes (trivially)',data:{}}; },
+      ],
+      hard: [
+        () => { const a=ri(1,4),b=ri(1,4),c=ri(1,4),d=ri(1,4); return {type:'m22_check',answerType:'scalar',prompt:'('+a+','+b+')·('+c+','+d+') = ? Are they perpendicular?',answer:String(a*c+b*d),display:String(a*c+b*d),data:{a,b,c,d}}; },
+        () => { const a=ri(1,5),b=ri(1,5); return {type:'m22_dim',answerType:'scalar',prompt:'In R^2, how many linearly independent vectors are perp to ('+a+','+b+')?',answer:'1',display:'1',data:{a,b}}; },
+        () => { const u=[ri(1,3),ri(1,3)],v=[ri(1,3),ri(1,3)]; return {type:'m22_angle',answerType:'scalar',prompt:'('+u[0]+','+u[1]+')·('+v[0]+','+v[1]+') = '+String(u[0]*v[0]+u[1]*v[1])+'. Perpendicular? (1=yes,0=no)',answer:(u[0]*v[0]+u[1]*v[1]===0)?'1':'0',display:(u[0]*v[0]+u[1]*v[1]===0)?'Yes':'No',data:{u,v}}; },
+      ],
+    },
+    // Mission 23: 3D Perpendicular & Lines
+    23: {
+      easy: [
+        () => { return {type:'m23_plane',answerType:'scalar',prompt:'x+2y+3z=0 defines a _____ through origin in R^3.',answer:'plane',display:'Plane',data:{}}; },
+        () => { return {type:'m23_3d',answerType:'scalar',prompt:'Point in R^3 needs ___ coordinates.',answer:'3',display:'3',data:{}}; },
+        () => { return {type:'m23_check',answerType:'scalar',prompt:'Does (2,7,3) satisfy x+2y+3z=0? 2+14+9=25. (1=yes,0=no)',answer:'0',display:'No',data:{}}; },
+      ],
+      medium: [
+        () => { return {type:'m23_line',answerType:'scalar',prompt:'How many equations to define a line (not plane) in R^3?',answer:'2',display:'2',data:{}}; },
+        () => { const a=ri(1,3),b=ri(1,3),c=ri(1,3); return {type:'m23_normal',answerType:'scalar',prompt:'Plane x+'+a+'y+'+b+'z=0 has normal vector?',answer:'(1,'+a+','+b+')',display:'(1,'+a+','+b+')',data:{a,b,c}}; },
+        () => { return {type:'m23_perp2',answerType:'scalar',prompt:'A plane in R^3 is _____-dimensional.',answer:'2',display:'2',data:{}}; },
+      ],
+      hard: [
+        () => { const a=ri(1,3),b=ri(1,3),c=ri(1,3),d=ri(1,3),e=ri(1,3),f=ri(1,3); return {type:'m23_3dot',answerType:'scalar',prompt:'('+a+','+b+','+c+')·('+d+','+e+','+f+') = ?',answer:String(a*d+b*e+c*f),display:String(a*d+b*e+c*f),data:{a,b,c,d,e,f}}; },
+        () => { const x=ri(1,3),y=ri(1,3),z=ri(1,3); return {type:'m23_check2',answerType:'scalar',prompt:'Does ('+x+','+y+','+z+') satisfy x+2y+3z='+(x+2*y+3*z)+'? (1=yes,0=no)',answer:'1',display:'Yes',data:{x,y,z}}; },
+        () => { return {type:'m23_3planes',answerType:'scalar',prompt:'3 planes in R^3: each equation removes ___ dimension.',answer:'1',display:'1',data:{}}; },
+      ],
+    },
+    // Mission 24: Span & Null Space (perp set of plane in 3D)
+    24: {
+      easy: [
+        () => { return {type:'m24_free',answerType:'scalar',prompt:'2 equations, 3 unknowns: how many free variables?',answer:'1',display:'1',data:{}}; },
+        () => { return {type:'m24_null',answerType:'scalar',prompt:'The null space is also called the _____.',answer:'kernel',display:'Kernel',data:{}}; },
+        () => { return {type:'m24_perp',answerType:'scalar',prompt:'Null space is perpendicular to which space?',answer:'row space',display:'Row space',data:{}}; },
+      ],
+      medium: [
+        () => { return {type:'m24_direction',answerType:'scalar',prompt:'Null space of a 2-equation system in R^3 is a _____-dimensional object.',answer:'1',display:'1 (a line)',data:{}}; },
+        () => { const v=[ri(1,3),ri(1,3),ri(1,3)]; return {type:'m24_span',answerType:'scalar',prompt:'Span of '+fv(...v)+' in R^3 is a _____.',answer:'line',display:'Line',data:{v}}; },
+        () => { return {type:'m24_plane',answerType:'scalar',prompt:'Span of 2 independent vectors in R^3 is a _____.',answer:'plane',display:'Plane',data:{}}; },
+      ],
+      hard: [
+        () => { return {type:'m24_rn',answerType:'scalar',prompt:'rank + nullity = number of _____.',answer:'columns',display:'Columns',data:{}}; },
+        () => { const r=ri(1,3); return {type:'m24_null_check',answerType:'scalar',prompt:'3 columns, rank '+r+'. Nullity = ?',answer:String(3-r),display:String(3-r),data:{r}}; },
+        () => { const r=ri(1,3); return {type:'m24_dim',answerType:'scalar',prompt:'rank '+r+' in R^3. Null space is ___-dimensional.',answer:String(3-r),display:String(3-r)+'D',data:{r}}; },
+      ],
+    },
+    // Mission 25: Matrix Null Space (3x3 singular)
+    25: {
+      easy: [
+        () => { return {type:'m25_rank',answerType:'scalar',prompt:'Rank of [[1,2,3],[4,5,6],[7,8,9]]?',answer:'2',display:'2',data:{}}; },
+        () => { return {type:'m25_sing',answerType:'scalar',prompt:'A 3x3 matrix with rank < 3 is _____.',answer:'singular',display:'Singular',data:{}}; },
+        () => { return {type:'m25_det',answerType:'scalar',prompt:'det([[1,2,3],[4,5,6],[7,8,9]]) = ?',answer:'0',display:'0',data:{}}; },
+      ],
+      medium: [
+        () => { return {type:'m25_ns_dir',answerType:'scalar',prompt:'Null space direction of [[1,2,3],[4,5,6],[7,8,9]]?',answer:'(1,-2,1)',display:'(1,-2,1)',data:{}}; },
+        () => { return {type:'m25_nullity',answerType:'scalar',prompt:'Rank=2, n=3. Nullity = ?',answer:'1',display:'1',data:{}}; },
+        () => { return {type:'m25_perp',answerType:'scalar',prompt:'Null space is perpendicular to every row of the matrix? (1=yes,0=no)',answer:'1',display:'Yes',data:{}}; },
+      ],
+      hard: [
+        () => { return {type:'m25_check',answerType:'scalar',prompt:'(1,2,3)·(1,-2,1) = 1-4+3 = ?',answer:'0',display:'0',data:{}}; },
+        () => { return {type:'m25_rank_null',answerType:'scalar',prompt:'3x3 rank-2: nullity = ?',answer:'1',display:'1',data:{}}; },
+        () => { const r=ri(1,3); return {type:'m25_null_dim',answerType:'scalar',prompt:'3 columns, rank '+r+'. Null space dim = ?',answer:String(3-r),display:String(3-r),data:{r}}; },
+      ],
+    },
+    // Mission 26: Three Subspaces (row, column, null)
+    26: {
+      easy: [
+        () => { const A=[[1,2,3],[4,5,6],[7,8,9]]; return {type:'m26_rank',answerType:'scalar',prompt:'Rank of '+fm2(A)+'... actually this is 3x3. Rank of [[1,2,3],[4,5,6],[7,8,9]]?',answer:'2',display:'2',data:{A}}; },
+        () => { return {type:'m26_dim_row',answerType:'scalar',prompt:'Dimension of row space = _____.',answer:'rank',display:'Rank',data:{}}; },
+        () => { return {type:'m26_dim_col',answerType:'scalar',prompt:'Dimension of column space = _____.',answer:'rank',display:'Rank',data:{}}; },
+      ],
+      medium: [
+        () => { return {type:'m26_span',answerType:'scalar',prompt:'Row space and null space together span the entire _____.',answer:'input space',display:'Input space (R^n)',data:{}}; },
+        () => { return {type:'m26_orthogonal',answerType:'scalar',prompt:'Row space is _____ to null space.',answer:'perpendicular',display:'Perpendicular (orthogonal)',data:{}}; },
+        () => { return {type:'m26_dim_sum',answerType:'scalar',prompt:'dim(row space) + dim(null space) = number of _____.',answer:'columns',display:'Columns',data:{}}; },
+      ],
+      hard: [
+        () => { const A=[[ri(1,4),ri(0,3)],[ri(0,3),ri(1,4)]]; const det=A[0][0]*A[1][1]-A[0][1]*A[1][0]; return {type:'m26_det',answerType:'scalar',prompt:'det('+fm2(A)+') = '+det+'. Rank?',answer:det!==0?'2':'1',display:det!==0?'2':'1',data:{A,det}}; },
+        () => { const r=ri(1,3),n=ri(1,3); return {type:'m26_sum',answerType:'scalar',prompt:'rank='+r+', nullity='+n+'. Number of columns = ?',answer:String(r+n),display:String(r+n),data:{r,n}}; },
+        () => { return {type:'m26_dim',answerType:'scalar',prompt:'For 2×3 matrix rank 2: row space is ___D, null space is ___D.',answer:'2 and 1',display:'2D and 1D',data:{}}; },
+      ],
+    },
+    // Mission 27: Collapsing Dimension (singular matrix effect)
+    27: {
+      easy: [
+        () => { return {type:'m27_det',answerType:'scalar',prompt:'det([[1,2],[2,4]]) = ?',answer:'0',display:'0',data:{}}; },
+        () => { return {type:'m27_rank',answerType:'scalar',prompt:'Rank of [[1,2],[2,4]]?',answer:'1',display:'1',data:{}}; },
+        () => { return {type:'m27_collapse',answerType:'scalar',prompt:'A rank-1 matrix collapses 2D to ___D.',answer:'1',display:'1',data:{}}; },
+      ],
+      medium: [
+        () => { const B=[[1,2],[2,4]]; const x=ri(1,5),y=ri(1,5); const r=[B[0][0]*x+B[0][1]*y,B[1][0]*x+B[1][1]*y]; return {type:'m27_apply',answerType:'scalar',prompt:'Apply B=[[1,2],[2,4]] to ('+x+','+y+'). Result?',answer:fv(...r),display:fv(...r),data:{B,x,y,r}}; },
+        () => { return {type:'m27_parallel',answerType:'scalar',prompt:'Does B=[[1,2],[2,4]] map distinct parallel lines to distinct points? (1=yes,0=no)',answer:'0',display:'No - they collapse to same point',data:{}}; },
+        () => { return {type:'m27_null_dir',answerType:'scalar',prompt:'Null space direction of [[1,2],[2,4]]?',answer:'(-2,1)',display:'(-2,1)',data:{}}; },
+      ],
+      hard: [
+        () => { const k=ri(1,6); return {type:'m27_line_k',answerType:'scalar',prompt:'All points on 2y+x='+k+' map to a single point under B=[[1,2],[2,4]]. What is that point?',answer:'('+k+','+(2*k)+')',display:'('+k+','+(2*k)+')',data:{k}}; },
+        () => { const B=[[1,2],[2,4]]; const v=[ri(1,3),ri(1,3)]; const r=[B[0][0]*v[0]+B[0][1]*v[1],B[1][0]*v[0]+B[1][1]*v[1]]; return {type:'m27_result',answerType:'scalar',prompt:'B·('+v[0]+','+v[1]+') = ? where B=[[1,2],[2,4]]',answer:fv(...r),display:fv(...r),data:{B,v,r}}; },
+        () => { return {type:'m27_dim_in_out',answerType:'scalar',prompt:'Rank-1 in 2D: 1D input line → ___D output point.',answer:'0',display:'0D (a point)',data:{}}; },
+      ],
+    },
+    // Mission 28: Span Plot 3D (visualize span)
+    28: {
+      easy: [
+        () => { return {type:'m28_plane',answerType:'scalar',prompt:'How many independent vectors span a plane in R^3?',answer:'2',display:'2',data:{}}; },
+        () => { return {type:'m28_origin',answerType:'scalar',prompt:'Does the origin always belong to any span? (1=yes,0=no)',answer:'1',display:'Yes',data:{}}; },
+        () => { const v=[ri(1,3),ri(1,3),ri(1,3)]; return {type:'m28_one',answerType:'scalar',prompt:'Span of '+fv(...v)+' in R^3 is a _____.',answer:'line',display:'Line',data:{v}}; },
+      ],
+      medium: [
+        () => { return {type:'m28_scalar',answerType:'scalar',prompt:'If two vectors in R^3 are scalar multiples, their span is a _____.',answer:'line',display:'Line',data:{}}; },
+        () => { return {type:'m28_indep',answerType:'scalar',prompt:'2 independent vectors in R^3 span a _____.',answer:'plane',display:'Plane',data:{}}; },
+        () => { return {type:'m28_r3',answerType:'scalar',prompt:'To span all of R^3, you need at least ___ independent vectors.',answer:'3',display:'3',data:{}}; },
+      ],
+      hard: [
+        () => { const a=ri(1,3),b=ri(1,3); return {type:'m28_dim_check',answerType:'scalar',prompt:'Span of '+a+' vectors in R^'+b+'. Max possible dim?',answer:String(Math.min(a,b)),display:String(Math.min(a,b)),data:{a,b}}; },
+        () => { return {type:'m28_3vec',answerType:'scalar',prompt:'3 linearly independent vectors in R^3 span a ___-D object.',answer:'3',display:'3',data:{}}; },
+        () => { return {type:'m28_dim_dep',answerType:'scalar',prompt:'If 3 vectors in R^3 are dependent, span dim < ?',answer:'3',display:'3',data:{}}; },
+      ],
+    },
+    // Mission 29: Perpendicular to Plane (null space in 3D)
+    29: {
+      easy: [
+        () => { return {type:'m29_intersect',answerType:'scalar',prompt:'Two planes in R^3 typically intersect in a _____.',answer:'line',display:'Line',data:{}}; },
+        () => { return {type:'m29_null',answerType:'scalar',prompt:'The null space is _____ to the plane it derives from.',answer:'perpendicular',display:'Perpendicular',data:{}}; },
+        () => { return {type:'m29_3d',answerType:'scalar',prompt:'A plane in R^3 is defined by how many linear equations?',answer:'1',display:'1',data:{}}; },
+      ],
+      medium: [
+        () => { const a=ri(1,3),b=ri(1,3),c=ri(1,3); return {type:'m29_normal',answerType:'scalar',prompt:'Plane: '+a+'x+'+b+'y+'+c+'z=0. Normal direction?',answer:'('+a+','+b+','+c+')',display:'('+a+','+b+','+c+')',data:{a,b,c}}; },
+        () => { return {type:'m29_ns_line',answerType:'scalar',prompt:'Null space of a 2-equation system in R^3 is a _____.',answer:'line',display:'Line',data:{}}; },
+        () => { return {type:'m29_perp',answerType:'scalar',prompt:'Is null space perpendicular to every vector in the plane? (1=yes,0=no)',answer:'1',display:'Yes',data:{}}; },
+      ],
+      hard: [
+        () => { return {type:'m29_dim',answerType:'scalar',prompt:'2 equations, 3 unknowns, rank 2. Null space dim = ?',answer:'1',display:'1',data:{}}; },
+        () => { return {type:'m29_rank_null',answerType:'scalar',prompt:'3 unknowns, nullity 1. Rank = ?',answer:'2',display:'2',data:{}}; },
+        () => { const u=[ri(1,3),ri(1,3),ri(1,3)],v=[ri(1,3),ri(1,3),ri(1,3)]; const cp=[u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]]; return {type:'m29_cross',answerType:'scalar',prompt:'('+u.join(',')+')×('+v.join(',')+') first component?',answer:String(cp[0]),display:String(cp[0]),data:{u,v,cp}}; },
+      ],
+    },
+    // Mission 30: Null Space Again (different 3x3 singular)
+    30: {
+      easy: [
+        () => { return {type:'m30_det',answerType:'scalar',prompt:'det([[1,4,7],[2,5,8],[3,6,9]]) = ?',answer:'0',display:'0',data:{}}; },
+        () => { return {type:'m30_rank',answerType:'scalar',prompt:'Rank of [[1,4,7],[2,5,8],[3,6,9]]?',answer:'2',display:'2',data:{}}; },
+        () => { return {type:'m30_ns',answerType:'scalar',prompt:'Null space direction of [[1,4,7],[2,5,8],[3,6,9]]?',answer:'(1,-2,1)',display:'(1,-2,1)',data:{}}; },
+      ],
+      medium: [
+        () => { return {type:'m30_nullity',answerType:'scalar',prompt:'3×3 matrix rank 2. Nullity = ?',answer:'1',display:'1',data:{}}; },
+        () => { return {type:'m30_dep',answerType:'scalar',prompt:'Row3 - 2×Row2 + Row1 = 0 means rows are _____.',answer:'linearly dependent',display:'Linearly dependent',data:{}}; },
+        () => { return {type:'m30_check',answerType:'scalar',prompt:'Check: (1,4,7)·(1,-2,1) = 1-8+7 = ?',answer:'0',display:'0',data:{}}; },
+      ],
+      hard: [
+        () => { const A=[[1,4,7],[2,5,8],[3,6,9]]; return {type:'m30_perp',answerType:'scalar',prompt:'Row (1,4,7)·null (1,-2,1) = 1-8+7 = ?',answer:'0',display:'0',data:{A}}; },
+        () => { return {type:'m30_indep',answerType:'scalar',prompt:'Row space of [[1,4,7],[2,5,8],[3,6,9]] is spanned by how many vectors?',answer:'2',display:'2',data:{}}; },
+        () => { return {type:'m30_sum',answerType:'scalar',prompt:'rank + nullity = 2 + 1 = 3 = number of _____.',answer:'columns',display:'Columns',data:{}}; },
+      ],
+    },
+    // Mission 31: Three Spaces Again (Row, Column, Null of A)
+    31: {
+      easy: [
+        () => { return {type:'m31_rank',answerType:'scalar',prompt:'Rank of [[1,4,7],[2,5,8],[3,6,9]]?',answer:'2',display:'2',data:{}}; },
+        () => { return {type:'m31_nullity',answerType:'scalar',prompt:'Nullity of [[1,4,7],[2,5,8],[3,6,9]]?',answer:'1',display:'1',data:{}}; },
+        () => { return {type:'m31_same',answerType:'scalar',prompt:'dim(row space) = dim(column space) = ?',answer:'rank',display:'Rank = 2',data:{}}; },
+      ],
+      medium: [
+        () => { return {type:'m31_dim_row',answerType:'scalar',prompt:'Row space of a 3×3 rank-2 matrix is a ___-dimensional subspace of R^3.',answer:'2',display:'2',data:{}}; },
+        () => { return {type:'m31_dim_null',answerType:'scalar',prompt:'Null space is ___-dimensional for 3×3 rank-2.',answer:'1',display:'1',data:{}}; },
+        () => { return {type:'m31_col',answerType:'scalar',prompt:'Column space of a 3×3 rank-2 matrix is a ___-dimensional subspace of R^3.',answer:'2',display:'2',data:{}}; },
+      ],
+      hard: [
+        () => { const r=ri(1,3),n=ri(1,3); return {type:'m31_rank_null',answerType:'scalar',prompt:'dim(R)='+r+', dim(N)='+n+'. Number of columns = ?',answer:String(r+n),display:String(r+n),data:{r,n}}; },
+        () => { return {type:'m31_count',answerType:'scalar',prompt:'How many fundamental subspaces does every matrix have?',answer:'4',display:'4',data:{}}; },
+        () => { const A=[[ri(1,3),ri(1,3)],[ri(1,3),ri(1,3)]]; return {type:'m31_dim_check',answerType:'scalar',prompt:'A 2×2 rank-1 matrix: dim(R)=1, dim(C)=1, dim(N)=1, dim(N^T)=1. Sum input?',answer:'2',display:'2 (R+N)',data:{A}}; },
+      ],
+    },
+    // Mission 32: Check Orthogonality (Fundamental Theorem)
+    32: {
+      easy: [
+        () => { return {type:'m32_dot1',answerType:'scalar',prompt:'(1,4,7)·(1,-2,1) = 1-8+7 = ?',answer:'0',display:'0',data:{}}; },
+        () => { return {type:'m32_perp',answerType:'scalar',prompt:'If dot(r,n) = 0, then r and n are _____.',answer:'perpendicular',display:'Perpendicular',data:{}}; },
+        () => { return {type:'m32_theorem',answerType:'scalar',prompt:'The Fundamental Theorem says row space is _____ to null space.',answer:'perpendicular',display:'Perpendicular',data:{}}; },
+      ],
+      medium: [
+        () => { return {type:'m32_check2',answerType:'scalar',prompt:'(4,5,6)·(1,-2,1) = 4-10+6 = ?',answer:'0',display:'0',data:{}}; },
+        () => { return {type:'m32_all',answerType:'scalar',prompt:'Every row of A has dot product 0 with every null space vector? (1=yes,0=no)',answer:'1',display:'Yes',data:{}}; },
+        () => { return {type:'m32_why',answerType:'scalar',prompt:'Why? Because Ax=0 means each row·x = _____.',answer:'0',display:'0',data:{}}; },
+      ],
+      hard: [
+        () => { return {type:'m32_dot',answerType:'scalar',prompt:'(7,8,9)·(1,-2,1) = 7-16+9 = ?',answer:'0',display:'0',data:{}}; },
+        () => { const n=ri(3,5),r=ri(1,n); return {type:'m32_sum',answerType:'scalar',prompt:n+'×'+n+' rank '+r+'. dim(R)+dim(N) = '+r+'+'+(n-r)+' = ?',answer:String(n),display:String(n),data:{n,r}}; },
+        () => { const m=ri(3,5),n=ri(3,5),r=ri(1,Math.min(m,n)); return {type:'m32_sum2',answerType:'scalar',prompt:m+'×'+n+' rank '+r+'. dim(C)+dim(N^T) = '+(m-r)+'+'+r+' = ?',answer:String(m),display:String(m),data:{m,n,r}}; },
+      ],
+    },
+    // ═══ Module 3 (cont): Collapse series ═══
+    // Mission 33: Line to Point (collapse)
+    33: {
+      easy: [
+        () => { return {type:'m33_det',answerType:'scalar',prompt:'det([[1,2],[2,4]]) = ?',answer:'0',display:'0',data:{}}; },
+        () => { return {type:'m33_line',answerType:'scalar',prompt:'All points on 2y+x=4 map to one point under B=[[1,2],[2,4]]. What point?',answer:'(4,8)',display:'(4,8)',data:{}}; },
+        () => { return {type:'m33_nonsing',answerType:'scalar',prompt:'Does a non-singular matrix collapse lines? (1=yes,0=no)',answer:'0',display:'No',data:{}}; },
+      ],
+      medium: [
+        () => { const B=[[1,2],[2,4]]; return {type:'m33_apply',answerType:'scalar',prompt:'B·(0,2) = ? (point on line 2y+x=4)',answer:'(4,8)',display:'(4,8)',data:{B}}; },
+        () => { return {type:'m33_all_same',answerType:'scalar',prompt:'Why do ALL points on 2y+x=4 map to (4,8)?',answer:'null space direction is on the line',display:'Line is parallel to null space',data:{}}; },
+        () => { return {type:'m33_range',answerType:'scalar',prompt:'The output (4,8) lies in the _____ of B.',answer:'range',display:'Range',data:{}}; },
+      ],
+      hard: [
+        () => { const k=ri(1,5); const pts=[[k,0],[0,k/2]]; return {type:'m33_intercept',answerType:'scalar',prompt:'Line 2y+x='+k+'. x-intercept + y-intercept = ?',answer:String(k+Math.round(k/2*100)/100),display:String(k+k/2),data:{k}}; },
+        () => { const B=[[1,2],[2,4]]; const x=ri(1,3),y=ri(1,3); const r=[B[0][0]*x+B[0][1]*y,B[1][0]*x+B[1][1]*y]; return {type:'m33_apply',answerType:'scalar',prompt:'B=[[1,2],[2,4]], ('+x+','+y+'). Bv = ?',answer:fv(...r),display:fv(...r),data:{B,x,y,r}}; },
+        () => { const B=[[1,2],[2,4]]; return {type:'m33_rank',answerType:'scalar',prompt:'B=[[1,2],[2,4]]. Rank = ?',answer:'1',display:'1',data:{B}}; },
+      ],
+    },
+    // Mission 34: Many Lines Collapse
+    34: {
+      easy: [
+        () => { return {type:'m34_k10',answerType:'scalar',prompt:'B=[[1,2],[2,4]]. Line 2y+x=10 maps to which point?',answer:'(10,20)',display:'(10,20)',data:{}}; },
+        () => { return {type:'m34_k62',answerType:'scalar',prompt:'Line 2y+x=62 maps to which point under B=[[1,2],[2,4]]?',answer:'(62,124)',display:'(62,124)',data:{}}; },
+        () => { return {type:'m34_diff',answerType:'scalar',prompt:'Do different k values give different output points? (1=yes,0=no)',answer:'1',display:'Yes',data:{}}; },
+      ],
+      medium: [
+        () => { const k=ri(1,10); return {type:'m34_formula',answerType:'scalar',prompt:'Line 2y+x='+k+' maps to point?',answer:'('+k+','+(2*k)+')',display:'('+k+','+(2*k)+')',data:{k}}; },
+        () => { return {type:'m34_pattern',answerType:'scalar',prompt:'Pattern: k maps to (k, 2k). What is the range direction?',answer:'(1,2)',display:'(1,2)',data:{}}; },
+        () => { return {type:'m34_parallel',answerType:'scalar',prompt:'Each parallel line maps to a _____ output point.',answer:'different',display:'Different',data:{}}; },
+      ],
+      hard: [
+        () => { const B=[[1,2],[2,4]]; const x=ri(1,3),y=ri(1,3); const r=[B[0][0]*x+B[0][1]*y,B[1][0]*x+B[1][1]*y]; return {type:'m34_apply',answerType:'scalar',prompt:'B=[[1,2],[2,4]], v=('+x+','+y+'). Bv = ?',answer:fv(...r),display:fv(...r),data:{B,x,y,r}}; },
+        () => { const B=[[1,2],[2,4]]; return {type:'m34_rank',answerType:'scalar',prompt:'Range of B=[[1,2],[2,4]]: dim = ?',answer:'1',display:'1',data:{B}}; },
+        () => { const x=ri(1,3),y=ri(1,3); return {type:'m34_check',answerType:'scalar',prompt:'(1,2)·('+x+','+y+') = '+(x+2*y)+'. Is this in range? (1=yes,0=no)',answer:'1',display:'Yes',data:{x,y}}; },
+      ],
+    },
+    // Mission 35: General Collapse Formula
+    35: {
+      easy: [
+        () => { return {type:'m35_ns',answerType:'scalar',prompt:'Null space direction of [[1,2],[2,4]]?',answer:'(-2,1)',display:'(-2,1)',data:{}}; },
+        () => { return {type:'m35_range',answerType:'scalar',prompt:'Range direction of [[1,2],[2,4]]?',answer:'(1,2)',display:'(1,2)',data:{}}; },
+        () => { return {type:'m35_perp',answerType:'scalar',prompt:'Are null space and range perpendicular? (1=yes,0=no)',answer:'1',display:'Yes',data:{}}; },
+      ],
+      medium: [
+        () => { const k=ri(1,8); return {type:'m35_formula',answerType:'scalar',prompt:'B maps 2y+x='+k+' to which point?',answer:'('+k+','+(2*k)+')',display:'('+k+','+(2*k)+')',data:{k}}; },
+        () => { return {type:'m35_ns_range',answerType:'scalar',prompt:'(-2,1)·(1,2) = -2+2 = ? Confirms perpendicularity.',answer:'0',display:'0',data:{}}; },
+        () => { return {type:'m35_collapse',answerType:'scalar',prompt:'General formula: B maps 2y+x=k to (k, ___).',answer:String(2),display:'2k',data:{}}; },
+      ],
+      hard: [
+        () => { const B=[[1,2],[2,4]]; const x=ri(1,5),y=ri(1,5); const r=[B[0][0]*x+B[0][1]*y,B[1][0]*x+B[1][1]*y]; return {type:'m35_output',answerType:'scalar',prompt:'B=[[1,2],[2,4]], v=('+x+','+y+'). Second component of Bv?',answer:String(r[1]),display:String(r[1]),data:{B,x,y,r}}; },
+        () => { const B=[[1,2],[2,4]]; return {type:'m35_rank1',answerType:'scalar',prompt:'B=[[1,2],[2,4]] has rank = ?',answer:'1',display:'1',data:{B}}; },
+        () => { const B=[[1,2],[2,4]]; return {type:'m35_det',answerType:'scalar',prompt:'B=[[1,2],[2,4]]. det(B) = ?',answer:'0',display:'0',data:{B}}; },
+      ],
+    },
+    // Mission 36: Dimension Collapse (2D → 1D)
+    36: {
+      easy: [
+        () => { return {type:'m36_rank',answerType:'scalar',prompt:'Rank of [[1,2],[2,4]]?',answer:'1',display:'1',data:{}}; },
+        () => { return {type:'m36_nullity',answerType:'scalar',prompt:'Nullity of [[1,2],[2,4]]?',answer:'1',display:'1',data:{}}; },
+        () => { return {type:'m36_sum',answerType:'scalar',prompt:'rank + nullity = 1 + 1 = ?',answer:'2',display:'2 (number of columns)',data:{}}; },
+      ],
+      medium: [
+        () => { return {type:'m36_ftoc',answerType:'scalar',prompt:'rank + nullity always equals number of _____.',answer:'columns',display:'Columns',data:{}}; },
+        () => { return {type:'m36_dim_in',answerType:'scalar',prompt:'2D input, rank 1. How many dimensions lost?',answer:'1',display:'1',data:{}}; },
+        () => { return {type:'m36_dim_out',answerType:'scalar',prompt:'2D input, rank 1. Output is ___-dimensional.',answer:'1',display:'1',data:{}}; },
+      ],
+      hard: [
+        () => { const n=ri(2,5),r=ri(1,n-1); return {type:'m36_general',answerType:'scalar',prompt:n+'×'+n+' matrix, rank '+r+'. Nullity = ?',answer:String(n-r),display:String(n-r),data:{n,r}}; },
+        () => { return {type:'m36_identity',answerType:'scalar',prompt:'Identity 2×2: rank=2, nullity=0. Dimensions lost?',answer:'0',display:'0',data:{}}; },
+        () => { return {type:'m36_zero',answerType:'scalar',prompt:'Zero 2×2 matrix: rank=0, nullity=2. Dimensions lost?',answer:'2',display:'2 (all collapsed)',data:{}}; },
+      ],
+    },
+    // ═══ Module 4: Fundamental Theorem ═══
+    // Mission 37: Four Subspaces Intro (rank-1 visual)
+    37: {
+      easy: [
+        () => { return {type:'m37_rank',answerType:'scalar',prompt:'Rank of [[1,2],[3,6]]?',answer:'1',display:'1',data:{}}; },
+        () => { return {type:'m37_row_dir',answerType:'scalar',prompt:'Row space direction of [[1,2],[3,6]]?',answer:'(1,2)',display:'(1,2)',data:{}}; },
+        () => { return {type:'m37_col_dir',answerType:'scalar',prompt:'Column space direction of [[1,2],[3,6]]?',answer:'(1,3)',display:'(1,3)',data:{}}; },
+      ],
+      medium: [
+        () => { return {type:'m37_null_dir',answerType:'scalar',prompt:'Null space direction of [[1,2],[3,6]]?',answer:'(-2,1)',display:'(-2,1)',data:{}}; },
+        () => { return {type:'m37_all_1d',answerType:'scalar',prompt:'For rank-1 2×2 matrix, are all 3 subspaces 1D lines? (1=yes,0=no)',answer:'1',display:'Yes',data:{}}; },
+        () => { return {type:'m37_dim_sum',answerType:'scalar',prompt:'dim(row) + dim(null) = 1 + 1 = ?',answer:'2',display:'2 (columns)',data:{}}; },
+      ],
+      hard: [
+        () => { return {type:'m37_verify',answerType:'scalar',prompt:'(1,2)·(-2,1) = -2+2 = ?. Row ⊥ null confirmed.',answer:'0',display:'0',data:{}}; },
+        () => { const A=[[ri(1,4),ri(0,3)],[ri(0,3),ri(1,4)]]; const det=A[0][0]*A[1][1]-A[0][1]*A[1][0]; return {type:'m37_det_check',answerType:'scalar',prompt:'det('+fm2(A)+')='+det+'. Is this matrix rank-2?',answer:det!==0?'1':'0',display:det!==0?'Yes':'No',data:{A,det}}; },
+        () => { return {type:'m37_dim_check',answerType:'scalar',prompt:'For [[1,2],[3,6]]: rank=1, nullity=1. Sum = ?',answer:'2',display:'2 (number of columns)',data:{}}; },
+      ],
+    },
+    // Mission 38: Row Space perp Null Space (verify)
+    38: {
+      easy: [
+        () => { return {type:'m38_dot',answerType:'scalar',prompt:'(1,3)·(-3,1) = -3+3 = ?',answer:'0',display:'0',data:{}}; },
+        () => { return {type:'m38_perp',answerType:'scalar',prompt:'R(M) and N(M) are always _____ subspaces.',answer:'perpendicular',display:'Perpendicular',data:{}}; },
+        () => { return {type:'m38_zero',answerType:'scalar',prompt:'Is zero vector in both R(M) and N(M)? (1=yes,0=no)',answer:'1',display:'Yes',data:{}}; },
+      ],
+      medium: [
+        () => { const M=[[1,2],[3,6]]; return {type:'m38_row',answerType:'scalar',prompt:'Row space of M=[[1,2],[3,6]] is span of?',answer:'(1,2)',display:'(1,2)',data:{M}}; },
+        () => { return {type:'m38_null',answerType:'scalar',prompt:'Null space of M=[[1,2],[3,6]] is span of?',answer:'(-2,1)',display:'(-2,1)',data:{}}; },
+        () => { return {type:'m38_sum',answerType:'scalar',prompt:'dim(R) + dim(N) = 1 + 1 = number of _____',answer:'columns',display:'Columns = 2',data:{}}; },
+      ],
+      hard: [
+        () => { const M=[[1,2],[3,6]]; const x=ri(1,3),y=ri(1,3); const row=M[0]; return {type:'m38_verify_any',answerType:'scalar',prompt:'Row (1,2)·('+x+',-'+(2*x)+') = '+x+'+'+(-2*x)+' = ?',answer:'0',display:'0',data:{x,M}}; },
+        () => { const n=ri(2,5),r=ri(1,n); return {type:'m38_sum_check',answerType:'scalar',prompt:n+'×'+n+' matrix rank '+r+'. dim(R)+dim(N) = '+r+'+'+(n-r)+' = ?',answer:String(n),display:String(n),data:{n,r}}; },
+        () => { return {type:'m38_which',answerType:'scalar',prompt:'Row space ⊥ null space lives in R^___ for 3×3 matrix.',answer:'3',display:'3 (input space)',data:{}}; },
+      ],
+    },
+    // Mission 39: Null Space of M and M^T
+    39: {
+      easy: [
+        () => { return {type:'m39_nm',answerType:'scalar',prompt:'N(M) for M=[[1,2],[3,6]] is span of?',answer:'(-2,1)',display:'(-2,1)',data:{}}; },
+        () => { return {type:'m39_nmt',answerType:'scalar',prompt:'N(M^T) for M=[[1,2],[3,6]] is span of?',answer:'(-3,1)',display:'(-3,1)',data:{}}; },
+        () => { return {type:'m39_diff',answerType:'scalar',prompt:'N(M) and N(M^T) live in _____ spaces.',answer:'different',display:'Different (R^n vs R^m)',data:{}}; },
+      ],
+      medium: [
+        () => { return {type:'m39_perp_cm',answerType:'scalar',prompt:'N(M^T) is perpendicular to which space?',answer:'column space',display:'Column space C(M)',data:{}}; },
+        () => { return {type:'m39_dim_nm',answerType:'scalar',prompt:'dim(N(M)) for 2×2 rank-1 matrix?',answer:'1',display:'1',data:{}}; },
+        () => { return {type:'m39_dim_nmt',answerType:'scalar',prompt:'dim(N(M^T)) for 2×2 rank-1 matrix?',answer:'1',display:'1',data:{}}; },
+      ],
+      hard: [
+        () => { const M=[[1,2],[3,6]]; const c=[M[0][0],M[1][0]]; const n=[-3,1]; return {type:'m39_verify',answerType:'scalar',prompt:'Column (1,3)·(-3,1) = '+(-3)+'+'+3+' = ?',answer:'0',display:'0 (column ⊥ left null)',data:{M,c,n}}; },
+        () => { const n=ri(2,5),r=ri(1,n); const m=ri(2,5); return {type:'m39_dim_check',answerType:'scalar',prompt:n+'×'+m+' matrix rank '+r+'. dim(N^T)+dim(C) = '+(m-r)+'+'+r+' = ?',answer:String(m),display:String(m),data:{n,m,r}}; },
+        () => { return {type:'m39_dim_nm',answerType:'scalar',prompt:'dim(N(M)) for 3×3 rank-1 matrix?',answer:'2',display:'2',data:{}}; },
+      ],
+    },
+    // Mission 40: Orthogonal Subspaces (verify all pairs)
+    40: {
+      easy: [
+        () => { return {type:'m40_c_perp',answerType:'scalar',prompt:'C(M) is perpendicular to _____.',answer:'N(M^T)',display:'N(M^T)',data:{}}; },
+        () => { return {type:'m40_r_perp',answerType:'scalar',prompt:'R(M) is perpendicular to _____.',answer:'N(M)',display:'N(M)',data:{}}; },
+        () => { return {type:'m40_pairs',answerType:'scalar',prompt:'How many orthogonal pairs do the 4 subspaces form?',answer:'2',display:'2',data:{}}; },
+      ],
+      medium: [
+        () => { return {type:'m40_input',answerType:'scalar',prompt:'R(A) and N(A) both live in the _____ space.',answer:'input',display:'Input space R^n',data:{}}; },
+        () => { return {type:'m40_output',answerType:'scalar',prompt:'C(A) and N(A^T) both live in the _____ space.',answer:'output',display:'Output space R^m',data:{}}; },
+        () => { return {type:'m40_four',answerType:'scalar',prompt:'Name all 4 fundamental subspaces.',answer:'R(A),N(A),C(A),N(A^T)',display:'Row, Null, Col, Left Null',data:{}}; },
+      ],
+      hard: [
+        () => { const m=ri(2,4),n=ri(2,4),r=ri(1,Math.min(m,n)); return {type:'m40_dim_check',answerType:'scalar',prompt:m+'×'+n+' matrix rank '+r+'. dim(R)+dim(N) = '+(n-r)+'+'+r+' = ?',answer:String(n),display:String(n),data:{m,n,r}}; },
+        () => { const m=ri(2,4),n=ri(2,4),r=ri(1,Math.min(m,n)); return {type:'m40_dim_check2',answerType:'scalar',prompt:m+'×'+n+' matrix rank '+r+'. dim(C)+dim(N^T) = '+(m-r)+'+'+r+' = ?',answer:String(m),display:String(m),data:{m,n,r}}; },
+        () => { const A=[[ri(1,3),ri(0,2)],[ri(0,2),ri(1,3)]]; const det=A[0][0]*A[1][1]-A[0][1]*A[1][0]; const r=det!==0?2:1; return {type:'m40_dim_sum',answerType:'scalar',prompt:'Rank-'+r+' 2×2 matrix: dim(R)+dim(N) = '+r+'+'+(2-r)+' = ?',answer:'2',display:'2',data:{A,r}}; },
+      ],
+    },
+    // Mission 41: All Four of A (3×3 rank-2)
+    41: {
+      easy: [
+        () => { return {type:'m41_rank',answerType:'scalar',prompt:'Rank of [[1,4,7],[2,5,8],[3,6,9]]?',answer:'2',display:'2',data:{}}; },
+        () => { return {type:'m41_ns',answerType:'scalar',prompt:'N(A) direction of [[1,4,7],[2,5,8],[3,6,9]]?',answer:'(1,-2,1)',display:'(1,-2,1)',data:{}}; },
+        () => { return {type:'m41_dim_r',answerType:'scalar',prompt:'dim(R(A)) for rank-2 3×3 matrix?',answer:'2',display:'2',data:{}}; },
+      ],
+      medium: [
+        () => { return {type:'m41_subspaces',answerType:'scalar',prompt:'For 3×3 rank-2: R(A) is ___D, N(A) is ___D.',answer:'2 and 1',display:'2D and 1D',data:{}}; },
+        () => { return {type:'m41_col',answerType:'scalar',prompt:'C(A) for rank-2 3×3 is a ___-dimensional plane in R^3.',answer:'2',display:'2',data:{}}; },
+        () => { return {type:'m41_lns',answerType:'scalar',prompt:'N(A^T) for rank-2 3×3 is ___-dimensional.',answer:'1',display:'1',data:{}}; },
+      ],
+      hard: [
+        () => { return {type:'m41_types',answerType:'scalar',prompt:'3×3 rank-2: R=2D, N=1D. C=2D, N^T=1D. dim(R)+dim(N)=?',answer:'3',display:'3',data:{}}; },
+        () => { const n=ri(3,5),r=ri(1,n); return {type:'m41_sum',answerType:'scalar',prompt:n+'×'+n+' rank '+r+'. dim(R)+dim(N) = '+r+'+'+(n-r)+' = ?',answer:String(n),display:String(n),data:{n,r}}; },
+        () => { return {type:'m41_verify',answerType:'scalar',prompt:'(1,4,7)·(1,-2,1) = 1-8+7 = ?',answer:'0',display:'0',data:{}}; },
+      ],
+    },
+    // Mission 42: Rank by Example (4×4 matrices)
+    42: {
+      easy: [
+        () => { return {type:'m42_i4',answerType:'scalar',prompt:'Rank of 4×4 identity matrix?',answer:'4',display:'4',data:{}}; },
+        () => { return {type:'m42_zero',answerType:'scalar',prompt:'Rank of 4×4 zero matrix?',answer:'0',display:'0',data:{}}; },
+        () => { return {type:'m42_max',answerType:'scalar',prompt:'Maximum rank of 4×4 matrix?',answer:'4',display:'4',data:{}}; },
+      ],
+      medium: [
+        () => { const r=ri(0,4); return {type:'m42_range',answerType:'scalar',prompt:'Rank of a matrix equals the dimension of its _____.',answer:'range',display:'Range (column space)',data:{r}}; },
+        () => { return {type:'m42_rank1',answerType:'scalar',prompt:'Rank-1 4×4 matrix: column space is ___-dimensional.',answer:'1',display:'1',data:{}}; },
+        () => { return {type:'m42_rank2',answerType:'scalar',prompt:'Rank-2 4×4 matrix: nullity = ?',answer:'2',display:'2',data:{}}; },
+      ],
+      hard: [
+        () => { const r=ri(1,4); return {type:'m42_nullity',answerType:'scalar',prompt:'4×4 matrix rank '+r+'. Nullity = ?',answer:String(4-r),display:String(4-r),data:{r}}; },
+        () => { return {type:'m42_rank3',answerType:'scalar',prompt:'Rank-3 4×4: R(A) is ___D, N(A) is ___D.',answer:'3 and 1',display:'3D and 1D',data:{}}; },
+        () => { return {type:'m42_equiv',answerType:'scalar',prompt:'rank(A) = rank(A^T)? (1=yes,0=no)',answer:'1',display:'Yes',data:{}}; },
+      ],
+    },
+    // Mission 43: Range Contains Line
+    43: {
+      easy: [
+        () => { return {type:'m43_line',answerType:'scalar',prompt:'If v is in range of A, is 5v also in range? (1=yes,0=no)',answer:'1',display:'Yes',data:{}}; },
+        () => { return {type:'m43_subspace',answerType:'scalar',prompt:'The range of a linear map is always a _____.',answer:'subspace',display:'Subspace',data:{}}; },
+        () => { return {type:'m43_closed',answerType:'scalar',prompt:'A subspace must be closed under addition and _____.',answer:'scaling',display:'Scaling',data:{}}; },
+      ],
+      medium: [
+        () => { return {type:'m43_prop',answerType:'scalar',prompt:'Which property guarantees A(ax) = aA(x)?',answer:'linearity',display:'Linearity (homogeneity)',data:{}}; },
+        () => { return {type:'m43_line_in',answerType:'scalar',prompt:'If v is in range, the entire line tv (for all t) is in _____.',answer:'range',display:'Range',data:{}}; },
+        () => { return {type:'m43_zero',answerType:'scalar',prompt:'Zero vector is always in the range of a linear map? (1=yes,0=no)',answer:'1',display:'Yes',data:{}}; },
+      ],
+      hard: [
+        () => { const A=[[1,0],[0,1]]; return {type:'m43_rank',answerType:'scalar',prompt:'Rank of identity I_2 = ?. dim(range)?',answer:'2',display:'2',data:{A}}; },
+        () => { const A=[[1,2],[2,4]]; return {type:'m43_rank_check',answerType:'scalar',prompt:'Range of [[1,2],[2,4]]: dimension = ?',answer:'1',display:'1',data:{A}}; },
+        () => { return {type:'m43_prop',answerType:'scalar',prompt:'Which property: A(x+y) = A(x)+A(y)?',answer:'additivity',display:'Additivity',data:{}}; },
+      ],
+    },
+    // Mission 44: Range Contains Span
+    44: {
+      easy: [
+        () => { return {type:'m44_add',answerType:'scalar',prompt:'If v,w are in range of A, is v+w in range? (1=yes,0=no)',answer:'1',display:'Yes',data:{}}; },
+        () => { return {type:'m44_span2',answerType:'scalar',prompt:'Span of 2 linearly independent vectors in R^3 is a _____.',answer:'plane',display:'Plane',data:{}}; },
+        () => { return {type:'m44_closure',answerType:'scalar',prompt:'Range is closed under both addition and _____.',answer:'scaling',display:'Scaling',data:{}}; },
+      ],
+      medium: [
+        () => { return {type:'m44_prop',answerType:'scalar',prompt:'Which property: A(x+y) = A(x)+A(y)?',answer:'additivity',display:'Additivity',data:{}}; },
+        () => { return {type:'m44_span_range',answerType:'scalar',prompt:'The span of vectors in the range is also in the _____.',answer:'range',display:'Range',data:{}}; },
+        () => { return {type:'m44_col',answerType:'scalar',prompt:'The range equals the _____ space of A.',answer:'column',display:'Column space',data:{}}; },
+      ],
+      hard: [
+        () => { const A=[[1,2],[3,4]]; return {type:'m44_dim',answerType:'scalar',prompt:'Rank of '+fm2(A)+' = ?. dim(range)?',answer:'2',display:'2',data:{A}}; },
+        () => { const A=[[1,2],[2,4]]; return {type:'m44_dim_range',answerType:'scalar',prompt:'Range of [[1,2],[2,4]] is a ___-dimensional object.',answer:'1',display:'1 (a line)',data:{A}}; },
+        () => { return {type:'m44_sub',answerType:'scalar',prompt:'The range of a 3×2 matrix is a subspace of R^___',answer:'3',display:'3 (output space)',data:{}}; },
+      ],
+    },
+    // Mission 45: Dimension Observation
+    45: {
+      easy: [
+        () => { return {type:'m45_dep',answerType:'scalar',prompt:'Are (1,2,3) and (2,4,6) linearly independent? (1=yes,0=no)',answer:'0',display:'No (scalar multiples)',data:{}}; },
+        () => { return {type:'m45_indep',answerType:'scalar',prompt:'Are (1,0,0) and (0,1,0) linearly independent? (1=yes,0=no)',answer:'1',display:'Yes',data:{}}; },
+        () => { return {type:'m45_dim_dep',answerType:'scalar',prompt:'Span of 2 dependent vectors has dimension = ?',answer:'1',display:'1',data:{}}; },
+      ],
+      medium: [
+        () => { return {type:'m45_span',answerType:'scalar',prompt:'(1,2,3) and (2,4,6) span a ___-dimensional object.',answer:'1',display:'1 (a line)',data:{}}; },
+        () => { return {type:'m45_indep2',answerType:'scalar',prompt:'(1,0,0) and (0,1,0) span a ___-dimensional object.',answer:'2',display:'2 (a plane)',data:{}}; },
+        () => { return {type:'m45_dim',answerType:'scalar',prompt:'Dimension of span = number of _____ vectors.',answer:'linearly independent',display:'Linearly independent',data:{}}; },
+      ],
+      hard: [
+        () => { const n=ri(3,5),r=ri(1,n); return {type:'m45_rank',answerType:'scalar',prompt:n+' vectors in R^'+n+', '+r+' independent. dim(span) = ?',answer:String(r),display:String(r),data:{n,r}}; },
+        () => { return {type:'m45_three',answerType:'scalar',prompt:'(1,0,0),(0,1,0),(0,0,1) span R^3. dim = ?',answer:'3',display:'3',data:{}}; },
+        () => { const n=ri(3,5),r=ri(1,n-1); return {type:'m45_nullity',answerType:'scalar',prompt:n+' vectors in R^'+n+', dim(span)='+r+'. Nullity = ?',answer:String(n-r),display:String(n-r),data:{n,r}}; },
+      ],
+    },
+    // ═══ Module 5: Capstone Review ═══
+    // Mission 46: The Big Picture (complete map)
+    46: {
+      easy: [
+        () => { return {type:'m46_rn',answerType:'scalar',prompt:'R(A) and N(A) live in R^___',answer:'n',display:'n (input space)',data:{}}; },
+        () => { return {type:'m46_cm',answerType:'scalar',prompt:'C(A) and N(A^T) live in R^___',answer:'m',display:'m (output space)',data:{}}; },
+        () => { return {type:'m46_four',answerType:'scalar',prompt:'A matrix defines how many fundamental subspaces?',answer:'4',display:'4',data:{}}; },
+      ],
+      medium: [
+        () => { return {type:'m46_rn_span',answerType:'scalar',prompt:'Do R(A) and N(A) together span all of R^n? (1=yes,0=no)',answer:'1',display:'Yes (direct sum)',data:{}}; },
+        () => { return {type:'m46_perp_pairs',answerType:'scalar',prompt:'Name the two orthogonal pairs.',answer:'R⊥N and C⊥N^T',display:'R(A)⊥N(A) and C(A)⊥N(A^T)',data:{}}; },
+        () => { return {type:'m46_dims',answerType:'scalar',prompt:'dim(R)+dim(N) = n. dim(C)+dim(N^T) = ___',answer:'m',display:'m',data:{}}; },
+      ],
+      hard: [
+        () => { const n=ri(3,5),r=ri(1,n); return {type:'m46_calc',answerType:'scalar',prompt:n+'×'+n+' matrix rank '+r+'. dim(R)= '+r+', dim(N)= '+(n-r)+'. Sum?',answer:String(n),display:String(n),data:{n,r}}; },
+        () => { const m=ri(2,4),n=ri(2,4),r=ri(1,Math.min(m,n)); return {type:'m46_calc2',answerType:'scalar',prompt:m+'×'+n+' matrix rank '+r+'. dim(C)+dim(N^T) = '+(m-r)+'+'+r+' = ?',answer:String(m),display:String(m),data:{m,n,r}}; },
+        () => { return {type:'m46_zero',answerType:'scalar',prompt:'If rank=n (full rank), nullity = ?',answer:'0',display:'0',data:{}}; },
+      ],
+    },
+    // Mission 47: Orthogonality Checkup
+    47: {
+      easy: [
+        () => { return {type:'m47_dot1',answerType:'scalar',prompt:'(1,4,7)·(1,-2,1) = 1-8+7 = ?',answer:'0',display:'0',data:{}}; },
+        () => { return {type:'m47_dot2',answerType:'scalar',prompt:'(4,5,6)·(1,-2,1) = 4-10+6 = ?',answer:'0',display:'0',data:{}}; },
+        () => { return {type:'m47_confirm',answerType:'scalar',prompt:'Both dot products = 0 confirms row space ⊥ _____.',answer:'null space',display:'Null space',data:{}}; },
+      ],
+      medium: [
+        () => { return {type:'m47_always',answerType:'scalar',prompt:'Are these two orthogonal pairs always true for any matrix? (1=yes,0=no)',answer:'1',display:'Yes',data:{}}; },
+        () => { return {type:'m47_rows',answerType:'scalar',prompt:'The rows of A are vectors in R^___',answer:'n',display:'n',data:{}}; },
+        () => { return {type:'m47_null',answerType:'scalar',prompt:'The null space vectors satisfy Ax=0, meaning each row·x = _____.',answer:'0',display:'0',data:{}}; },
+      ],
+      hard: [
+        () => { return {type:'m47_dim_check',answerType:'scalar',prompt:'3×3 rank-2: dim(R)=2, dim(N)=1. Sum = ?',answer:'3',display:'3 (columns)',data:{}}; },
+        () => { return {type:'m47_dim_check2',answerType:'scalar',prompt:'3×3 rank-2: dim(C)=2, dim(N^T)=1. Sum = ?',answer:'3',display:'3 (rows)',data:{}}; },
+        () => { const n=ri(3,5),r=ri(1,n); return {type:'m47_check',answerType:'scalar',prompt:n+'×'+n+' rank '+r+'. Verify: dim(R)+dim(N) = '+(n-r)+'+'+r+' = ?',answer:String(n),display:String(n),data:{n,r}}; },
+      ],
+    },
+    // Mission 48: Rank-Nullity Review
+    48: {
+      easy: [
+        () => { return {type:'m48_fn',answerType:'scalar',prompt:'rank + nullity = number of _____',answer:'columns',display:'Columns (n)',data:{}}; },
+        () => { return {type:'m48_b',answerType:'scalar',prompt:'B=[[1,2],[2,4]]. rank=1, nullity=1. rank+nullity=?',answer:'2',display:'2',data:{}}; },
+        () => { return {type:'m48_check',answerType:'scalar',prompt:'Does rank+nullity always equal number of columns? (1=yes,0=no)',answer:'1',display:'Yes',data:{}}; },
+      ],
+      medium: [
+        () => { const n=ri(2,5),r=ri(1,n); return {type:'m48_calc',answerType:'scalar',prompt:n+'×'+n+' matrix, rank='+r+'. Nullity = ?',answer:String(n-r),display:String(n-r),data:{n,r}}; },
+        () => { return {type:'m48_rank2',answerType:'scalar',prompt:'4×4 matrix, rank=2. nullity=___',answer:'2',display:'2',data:{}}; },
+        () => { return {type:'m48_rank0',answerType:'scalar',prompt:'n×n zero matrix: rank=0, nullity=___',answer:String(ri(2,5)),display:'n',data:{}}; },
+      ],
+      hard: [
+        () => { const n=ri(3,5),r=ri(1,n); return {type:'m48_calc',answerType:'scalar',prompt:n+'×'+n+' matrix rank '+r+'. nullity = ?',answer:String(n-r),display:String(n-r),data:{n,r}}; },
+        () => { const n=ri(3,5); return {type:'m48_full',answerType:'scalar',prompt:n+'×'+n+' full rank. nullity = ?',answer:'0',display:'0',data:{n}}; },
+        () => { return {type:'m48_zero',answerType:'scalar',prompt:'3×3 zero matrix: rank=0, nullity = ?',answer:'3',display:'3',data:{}}; },
+      ],
+    },
+    // Mission 49: Capstone Challenge
+    49: {
+      easy: [
+        () => { return {type:'m49_rank',answerType:'scalar',prompt:'Rank of a 3×2 matrix with all rows collinear?',answer:'1',display:'1',data:{}}; },
+        () => { return {type:'m49_rm',answerType:'scalar',prompt:'R(M) for 3×2 rank-1 lives in R^___',answer:'2',display:'2',data:{}}; },
+        () => { return {type:'m49_cm',answerType:'scalar',prompt:'C(M) for 3×2 rank-1 is a line in R^___',answer:'3',display:'3',data:{}}; },
+      ],
+      medium: [
+        () => { return {type:'m49_dim_r',answerType:'scalar',prompt:'dim(R(M)) + dim(N(M)) = number of columns = ?',answer:'2',display:'2',data:{}}; },
+        () => { return {type:'m49_dim_c',answerType:'scalar',prompt:'dim(C(M)) + dim(N(M^T)) = number of rows = ?',answer:'3',display:'3',data:{}}; },
+        () => { return {type:'m49_subspaces',answerType:'scalar',prompt:'For 3×2 rank-1: R is 1D, N is 1D, C is 1D, N^T is ___D.',answer:'2',display:'2',data:{}}; },
+      ],
+      hard: [
+        () => { return {type:'m49_perp1',answerType:'scalar',prompt:'R(M) ⊥ N(M): 1D line ⊥ 1D line in R^2. They fill R^2? (1=yes,0=no)',answer:'1',display:'Yes (direct sum)',data:{}}; },
+        () => { return {type:'m49_perp2',answerType:'scalar',prompt:'C(M) ⊥ N(M^T): 1D ⊥ 2D in R^3. They fill R^3? (1=yes,0=no)',answer:'1',display:'Yes',data:{}}; },
+        () => { return {type:'m49_summary',answerType:'scalar',prompt:'All 4 subspaces are either 1D lines or ___-dimensional.',answer:'2',display:'2',data:{}}; },
+      ],
+    },
+    // Mission 50: Wisdom Achieved (summary)
+    50: {
+      easy: [
+        () => { return {type:'m50_four',answerType:'scalar',prompt:'How many fundamental subspaces does a matrix define?',answer:'4',display:'4',data:{}}; },
+        () => { return {type:'m50_rank',answerType:'scalar',prompt:'dim(C(A)) = _____.',answer:'rank',display:'Rank',data:{}}; },
+        () => { return {type:'m50_done',answerType:'scalar',prompt:'Have you achieved Linear Algebra wisdom? (1=yes,0=no)',answer:'1',display:'Yes!',data:{}}; },
+      ],
+      medium: [
+        () => { return {type:'m50_pairs',answerType:'scalar',prompt:'Name the two orthogonal complement pairs.',answer:'R⊥N, C⊥N^T',display:'R(A)⊥N(A) and C(A)⊥N(A^T)',data:{}}; },
+        () => { return {type:'m50_ftn',answerType:'scalar',prompt:'rank + nullity = n is the _____ Theorem.',answer:'Rank-Nullity',display:'Rank-Nullity',data:{}}; },
+        () => { return {type:'m50_direct',answerType:'scalar',prompt:'R ⊕ N = R^n means they form a _____ sum.',answer:'direct',display:'Direct sum',data:{}}; },
+      ],
+      hard: [
+        () => { return {type:'m50_rank_nullity',answerType:'scalar',prompt:'3×3 matrix rank 2. nullity = ?',answer:'1',display:'1',data:{}}; },
+        () => { return {type:'m50_dim_check',answerType:'scalar',prompt:'4×4 matrix rank 3. dim(N) = ?',answer:'1',display:'1',data:{}}; },
+        () => { const n=ri(3,5),r=ri(1,n); return {type:'m50_all_dims',answerType:'scalar',prompt:n+'×'+n+' rank '+r+': dim(R)='+r+', dim(N)='+(n-r)+', dim(C)='+r+', dim(N^T)='+(n-r)+'. Input dims?',answer:String(n),display:String(n),data:{n,r}}; },
+      ],
+    },
+    // ═══ Module 6: Real-World Applications ═══
+    // Mission 51: User-Item Matrix (recommendations)
+    51: {
+      easy: [
+        () => { return {type:'m51_maxrank',answerType:'scalar',prompt:'Max rank of a 3×4 matrix?',answer:'3',display:'3',data:{}}; },
+        () => { return {type:'m51_rank',answerType:'scalar',prompt:'Rank measures how many _____ patterns exist in data.',answer:'independent',display:'Independent',data:{}}; },
+        () => { return {type:'m51_lowrank',answerType:'scalar',prompt:'Low rank means many users have _____ preferences.',answer:'similar',display:'Similar',data:{}}; },
+      ],
+      medium: [
+        () => { return {type:'m51_users',answerType:'scalar',prompt:'If rank < num users, what does that mean about user preferences?',answer:'correlated',display:'Correlated / similar patterns',data:{}}; },
+        () => { return {type:'m51_factor',answerType:'scalar',prompt:'Low-rank approximation is the basis of matrix _____.',answer:'factorization',display:'Factorization',data:{}}; },
+        () => { return {type:'m51_compress',answerType:'scalar',prompt:'A 1000×5000 rating matrix with rank 10 can be compressed significantly? (1=yes,0=no)',answer:'1',display:'Yes',data:{}}; },
+      ],
+      hard: [
+        () => { const m=ri(2,5),n=ri(2,5); return {type:'m51_maxrank',answerType:'scalar',prompt:m+'×'+n+' rating matrix. Max rank?',answer:String(Math.min(m,n)),display:String(Math.min(m,n)),data:{m,n}}; },
+        () => { const r=ri(1,3),m=ri(r+1,r+3),n=ri(r+1,r+3); const full=m*n; const low=r*(m+n); return {type:'m51_compress',answerType:'scalar',prompt:m+'×'+n+' rank-'+r+'. Full storage='+full+', low-rank='+low+'. Saved?',answer:String(full-low),display:String(full-low)+' entries',data:{m,n,r,full,low}}; },
+        () => { return {type:'m51_rank_low',answerType:'scalar',prompt:'100×500 matrix rank 5. Elements = 50000. Low-rank needs ___ params.',answer:String(5*(100+500)),display:String(5*(100+500)),data:{}}; },
+      ],
+    },
+    // Mission 52: Collaborative Filtering
+    52: {
+      easy: [
+        () => { return {type:'m52_dot',answerType:'scalar',prompt:'Dot product measures _____ between two vectors.',answer:'similarity',display:'Similarity',data:{}}; },
+        () => { return {type:'m52_zero',answerType:'scalar',prompt:'If dot(u,v)=0, are users similar? (1=yes,0=no)',answer:'0',display:'No',data:{}}; },
+        () => { return {type:'m52_method',answerType:'scalar',prompt:'Collaborative filtering recommends based on similar _____.',answer:'users',display:'Users',data:{}}; },
+      ],
+      medium: [
+        () => { const u=[ri(1,5),ri(1,5)],v=[ri(1,5),ri(1,5)]; return {type:'m52_calc',answerType:'scalar',prompt:'Dot product of '+fv(...u)+' and '+fv(...v)+'?',answer:String(u[0]*v[0]+u[1]*v[1]),display:String(u[0]*v[0]+u[1]*v[1]),data:{u,v}}; },
+        () => { return {type:'m52_cosine',answerType:'scalar',prompt:'Cosine similarity normalizes the dot product by the product of _____.',answer:'magnitudes',display:'Magnitudes (lengths)',data:{}}; },
+        () => { return {type:'m52_predict',answerType:'scalar',prompt:'To predict a missing rating, use dot product with similar _____.',answer:'users',display:'Users',data:{}}; },
+      ],
+      hard: [
+        () => { const u=[ri(1,5),ri(1,5)],v=[ri(1,5),ri(1,5)]; const dot=u[0]*v[0]+u[1]*v[1]; const mU=Math.sqrt(u[0]*u[0]+u[1]*u[1]),mV=Math.sqrt(v[0]*v[0]+v[1]*v[1]); return {type:'m52_cos',answerType:'scalar',prompt:'Cosine sim of '+fv(...u)+' and '+fv(...v)+'?',answer:String(rnd2(dot/(mU*mV))),display:String(rnd2(dot/(mU*mV))),data:{u,v}}; },
+        () => { const u=[ri(1,5),ri(1,5)],v=[ri(1,5),ri(1,5)]; const dot=u[0]*v[0]+u[1]*v[1]; return {type:'m52_dot_calc',answerType:'scalar',prompt:'Dot product of '+fv(...u)+' and '+fv(...v)+'?',answer:String(dot),display:String(dot),data:{u,v}}; },
+        () => { const users=ri(3,6),items=ri(3,6); return {type:'m52_matrix',answerType:'scalar',prompt:users+' users, '+items+' items. Rating matrix size?',answer:users+'x'+items,display:users+'×'+items,data:{users,items}}; },
+      ],
+    },
+    // Mission 53: Web as a Graph (PageRank)
+    53: {
+      easy: [
+        () => { return {type:'m53_links',answerType:'scalar',prompt:'In PageRank, incoming links from important pages give more _____.',answer:'rank',display:'Rank / importance',data:{}}; },
+        () => { return {type:'m53_eigen',answerType:'scalar',prompt:'PageRank solves the _____ eigenvector problem.',answer:'dominant',display:'Dominant',data:{}}; },
+        () => { return {type:'m53_sparse',answerType:'scalar',prompt:'Web graph adjacency matrix is usually _____.',answer:'sparse',display:'Sparse',data:{}}; },
+      ],
+      medium: [
+        () => { return {type:'m53_markov',answerType:'scalar',prompt:'PageRank models the web as a _____ chain.',answer:'Markov',display:'Markov chain',data:{}}; },
+        () => { return {type:'m53_damping',answerType:'scalar',prompt:'The damping factor d represents probability of following a _____',answer:'link',display:'Link (vs random jump)',data:{}}; },
+        () => { return {type:'m53_steady',answerType:'scalar',prompt:'PageRank is the steady-state _____ of the web transition matrix.',answer:'distribution',display:'Distribution',data:{}}; },
+      ],
+      hard: [
+        () => { return {type:'m53_two_step',answerType:'scalar',prompt:'If damping factor d=0.85, probability of random jump = ?',answer:'0.15',display:'0.15',data:{}}; },
+        () => { return {type:'m53_markov',answerType:'scalar',prompt:'A 4-page web: transition matrix is ___×___.',answer:'4×4',display:'4×4',data:{}}; },
+        () => { return {type:'m53_eigenvalue',answerType:'scalar',prompt:'PageRank steady state: the dominant eigenvalue of P is _____.',answer:'1',display:'1',data:{}}; },
+      ],
+    },
+    // Mission 54: Power Method
+    54: {
+      easy: [
+        () => { return {type:'m54_converge',answerType:'scalar',prompt:'Power method converges to the _____ eigenvector.',answer:'dominant',display:'Dominant (largest eigenvalue)',data:{}}; },
+        () => { return {type:'m54_iterate',answerType:'scalar',prompt:'Power method computes v_{k+1} = A·v_k, then _____.',answer:'normalize',display:'Normalize',data:{}}; },
+        () => { return {type:'m54_eigen1',answerType:'scalar',prompt:'The dominant eigenvalue of a Markov matrix is _____.',answer:'1',display:'1',data:{}}; },
+      ],
+      medium: [
+        () => { const P=[[0.8,0.2],[0.1,0.9]]; return {type:'m54_step',answerType:'scalar',prompt:'P=[[0.8,0.2],[0.1,0.9]], v=[1,0]. Pv = ?',answer:'(0.8,0.1)',display:'(0.8,0.1)',data:{P}}; },
+        () => { return {type:'m54_speed',answerType:'scalar',prompt:'Convergence speed depends on the gap between top two _____.',answer:'eigenvalues',display:'Eigenvalues',data:{}}; },
+        () => { return {type:'m54_norm',answerType:'scalar',prompt:'After each multiplication, we normalize to keep the vector\'s _____ at 1.',answer:'magnitude',display:'Magnitude',data:{}}; },
+      ],
+      hard: [
+        () => { const P=[[0.7,0.3],[0.4,0.6]]; const det=P[0][0]*P[1][1]-P[0][1]*P[1][0]; return {type:'m54_det',answerType:'scalar',prompt:'P=[[0.7,0.3],[0.4,0.6]]. det(P) = '+det.toFixed(2)+'. Dominant eigenvalue?',answer:'1',display:'1',data:{P,det}}; },
+        () => { return {type:'m54_markov',answerType:'scalar',prompt:'Row sums of any Markov transition matrix equal _____.',answer:'1',display:'1',data:{}}; },
+        () => { return {type:'m54_converge_check',answerType:'scalar',prompt:'P=[[0.8,0.2],[0.1,0.9]]. v₂=0.9>0.8=v₁ → converges. Gap = ?',answer:'0.1',display:'0.1',data:{}}; },
+      ],
+    },
+    // Mission 55: Dimensionality Reduction (PCA)
+    55: {
+      easy: [
+        () => { return {type:'m55_pca',answerType:'scalar',prompt:'PCA finds directions of maximum _____.',answer:'variance',display:'Variance',data:{}}; },
+        () => { return {type:'m55_eigen',answerType:'scalar',prompt:'Largest eigenvalue = direction of most _____.',answer:'variance',display:'Variance',data:{}}; },
+        () => { return {type:'m55_reduce',answerType:'scalar',prompt:'Reducing dimensions always loses some information? (1=yes,0=no)',answer:'1',display:'Yes',data:{}}; },
+      ],
+      medium: [
+        () => { return {type:'m55_components',answerType:'scalar',prompt:'Principal components are eigenvectors of the _____ matrix.',answer:'covariance',display:'Covariance',data:{}}; },
+        () => { return {type:'m55_k',answerType:'scalar',prompt:'To reduce from p dims to k dims, keep top k _____.',answer:'eigenvectors',display:'Eigenvectors',data:{}}; },
+        () => { return {type:'m55_explained',answerType:'scalar',prompt:'The first PC explains the most _____.',answer:'variance',display:'Variance',data:{}}; },
+      ],
+      hard: [
+        () => { const vals=[ri(3,10),ri(1,5),ri(1,3)]; const sum=vals.reduce((a,b)=>a+b,0); return {type:'m55_ratio',answerType:'scalar',prompt:'Eigenvalues: '+vals.join(', ')+'. Explained variance of PC1?',answer:String(rnd2(vals[0]/sum*100))+'%',display:rnd2(vals[0]/sum*100)+'%',data:{vals,sum}}; },
+        () => { return {type:'m55_components',answerType:'scalar',prompt:'5D data, keep 2 PCs. Remaining dimensions lost = ?',answer:'3',display:'3',data:{}}; },
+        () => { return {type:'m55_eigen_rank',answerType:'scalar',prompt:'A 4×4 matrix rank 3 has ___ non-zero eigenvalues.',answer:'3',display:'3',data:{}}; },
+      ],
+    },
+    // Mission 56: SVD & The Big Picture
+    56: {
+      easy: [
+        () => { return {type:'m56_nz',answerType:'scalar',prompt:'Number of non-zero singular values = _____.',answer:'rank',display:'Rank',data:{}}; },
+        () => { return {type:'m56_zero_sv',answerType:'scalar',prompt:'Zero singular values correspond to which subspace?',answer:'null space',display:'Null space',data:{}}; },
+        () => { return {type:'m56_four',answerType:'scalar',prompt:'SVD reveals all _____ fundamental subspaces.',answer:'4',display:'4',data:{}}; },
+      ],
+      medium: [
+        () => { return {type:'m56_decomp',answerType:'scalar',prompt:'SVD: A = U Σ V^T. U reveals which subspace?',answer:'column space',display:'Column space C(A)',data:{}}; },
+        () => { return {type:'m56_v',answerType:'scalar',prompt:'In SVD, V reveals which subspace?',answer:'row space',display:'Row space R(A)',data:{}}; },
+        () => { return {type:'m56_sigma',answerType:'scalar',prompt:'Σ contains the _____ values on its diagonal.',answer:'singular',display:'Singular values',data:{}}; },
+      ],
+      hard: [
+        () => { return {type:'m56_rank1',answerType:'scalar',prompt:'Rank-1 matrix: how many non-zero singular values?',answer:'1',display:'1',data:{}}; },
+        () => { const A=[[1,0],[0,1]]; return {type:'m56_identity',answerType:'scalar',prompt:'SVD of identity I_2: what are the singular values?',answer:'1,1',display:'1, 1',data:{A}}; },
+        () => { return {type:'m56_sigma_count',answerType:'scalar',prompt:'A 3×3 matrix rank 2 has ___ non-zero singular values.',answer:'2',display:'2',data:{}}; },
+      ],
+    },
+  };
+
+  function generateChoices(correctAnswer, prompt) {
+    const correct = String(correctAnswer).trim();
+    const isNum = !isNaN(parseFloat(correct)) && isFinite(correct);
+    const choices = [correct];
+    const seen = new Set([correct]);
+    let attempts = 0;
+
+    while (choices.length < 4 && attempts < 80) {
+      attempts++;
+      let wrong;
+      if (isNum) {
+        const v = parseFloat(correct);
+        const offsets = [-3,-2,-1,1,2,3,-5,5];
+        wrong = String(v + pick(offsets));
+      } else if (correct.match(/^\(.*\)$/)) {
+        const inner = correct.replace(/^\(/, '').replace(/\)$/, '').split(',').map(Number);
+        if (inner.every(n => !isNaN(n))) {
+          const variants = inner.map((n,i) => { const v=[...inner]; v[i]=n+(Math.random()>0.5?1:-1); return '('+v.join(',')+')'; });
+          variants.push('(0,0)');
+          wrong = pick(variants);
+        } else { continue; }
+      } else if (correct.includes(':')) {
+        const parts = correct.split(':');
+        const a = parseInt(parts[0]) || 1, b = parseInt(parts[1]) || 1;
+        wrong = pick([a+1+':'+b, a+':'+(b+1), (a>1?a-1:1)+':'+b, b+':'+a]);
+      } else if (correct.includes('x')) {
+        const m = correct.match(/(\d+)x(\d+)/);
+        if (m) { const a=parseInt(m[1]),b=parseInt(m[2]); wrong = pick([a+'x'+(b+1), (a+1)+'x'+b, a+'x'+(b>1?b-1:1)]); }
+        else { continue; }
+      } else {
+        const textPool = {
+          'columns':['rows','diagonals','entries'], 'rows':['columns','diagonals','entries'],
+          'rank':['nullity','dimension','determinant'], 'nullity':['rank','dimension','determinant'],
+          '1':['2','3','0'], '2':['1','3','4'], '3':['2','4','1'], '0':['1','2','3'],
+          '4':['3','5','2'], '5':['4','6','3'], '6':['5','7','4'],
+          'yes':['no','sometimes','never'], 'no':['yes','sometimes','always'],
+          'true':['false','sometimes','never'], 'false':['true','sometimes','always'],
+          'plane':['line','point','space'], 'line':['plane','point','space'],
+          'point':['line','plane','space'], 'space':['line','plane','point'],
+          'perpendicular':['parallel','equal','skew'], 'parallel':['perpendicular','equal','skew'],
+          'subspace':['matrix','vector','scalar'], 'projection':['rotation','reflection','scaling'],
+          'addition':['multiplication','subtraction','division'], 'scaling':['addition','subtraction','rotation'],
+          'overdetermined':['underdetermined','square','consistent'],
+          'underdetermined':['overdetermined','square','inconsistent'],
+          'basis':['matrix','vector','scalar'], 'invertible':['singular','diagonal','symmetric'],
+          'sparse':['dense','full','empty'], 'dominant':['smallest','average','median'],
+          'eigenvalues':['singular values','determinants','rank'],
+          'variance':['mean','median','standard deviation'],
+          'covariance':['correlation','variance','mean'],
+          'transition':['adjacency','identity','diagonal'], 'steady':['random','initial','uniform'],
+          'input':['output','column','row'], 'output':['input','column','row'],
+          'kernel':['range','image','domain'], 'range':['kernel','image','domain'],
+          'column space':['row space','null space','left null space'],
+          'row space':['column space','null space','left null space'],
+          'null space':['column space','row space','left null space'],
+          'left null space':['column space','row space','null space'],
+          'multiplication':['addition','subtraction','division'],
+          'concurrent':['parallel','skew','perpendicular'],
+          'intersect':['parallel','diverge','collapse'],
+          'infinite':['zero','one','finite'],
+          'least squares':['maximum likelihood','least absolute','regularization'],
+          'least':['most','average','median'],
+          'best':['worst','average','random'],
+          'error':['correct','result','output'],
+          'linearly dependent':['linearly independent','orthogonal','parallel'],
+          'linearly independent':['linearly dependent','orthogonal','parallel'],
+          'magnitude':['direction','angle','phase'],
+          'Markov':['Euclidean','Gaussian','Bayesian'],
+          'eigenvectors':['eigenvalues','determinants','singular values'],
+          'users':['items','ratings','features'],
+          'entries':['rows','columns','matrices'],
+          'vectors':['scalars','matrices','tensors'],
+          'singular':['invertible','diagonal','symmetric'],
+          'inverse':['transpose','adjugate','cofactor'],
+          'input space':['output space','column space','row space'],
+          'output space':['input space','column space','row space'],
+          'domain':['codomain','range','image'],
+          'codomain':['domain','range','image'],
+          'image':['domain','codomain','kernel'],
+          'adjacency':['transition','incidence','identity'],
+          'euclidean':['manhattan','cosine','hamming'],
+          'cosine':['euclidean','manhattan','hamming'],
+          'best':['worst','random','average'],
+          'worst':['best','average','random'],
+          'similar':['different','opposite','orthogonal'],
+          'independent':['dependent','parallel','collinear'],
+          'dependent':['independent','parallel','collinear'],
+          'consistent':['inconsistent','singular','overdetermined'],
+          'invertible':['singular','nilpotent','idempotent'],
+          'normal':['tangent','secant','parallel'],
+          'null space direction is on the line':['parallel to range','orthogonal to range','perpendicular to range'],
+          'πP=π':['Pπ=π','πP=0','det(P)=1'],
+          'π':['σ','λ','μ'],
+          '(1,2)':['(2,1)','(1,-2)','(-1,2)'],
+          '(1,3)':['(3,1)','(1,-3)','(-1,3)'],
+          '(2,1)':['(1,2)','(2,-1)','(-2,1)'],
+          '(3,1)':['(1,3)','(3,-1)','(-3,1)'],
+          '(1,-2,1)': ['(1,2,1)','(-1,2,1)','(1,-2,-1)'],
+          '(-3,1)': ['(3,1)','(-1,3)','(3,-1)'],
+          '(-2,1)': ['(2,1)','(-1,2)','(2,-1)'],
+          '(1,1,1)': ['(1,1,2)','(1,2,1)','(2,1,1)'],
+          '(1,-2,1)': ['(1,2,-1)','(-1,2,1)','(2,1,-1)'],
+          '2x2': ['3x3','2x3','3x2'],
+          '3x3': ['2x2','3x2','2x3'],
+          '3': ['2','4','5'],
+          '2': ['1','3','4'],
+          '1': ['2','3','0'],
+          '0': ['1','2','3'],
+          '4': ['3','5','6'],
+          '5': ['4','6','7'],
+          '7': ['5','6','8'],
+          'R^3': ['R^2','R^4','R^1'],
+          'R^2': ['R^3','R^4','R^1'],
+          'R⊥N, C⊥N^T': ['R⊥C, N⊥N^T','R⊥N^T, C⊥N','R⊥N, C⊥N'],
+          'least squares': ['least absolute','maximum likelihood','least cubes'],
+        };
+        const lower = correct.toLowerCase();
+        if (textPool[lower]) {
+          wrong = pick(textPool[lower]);
+        } else { continue; }
+      }
+      if (!seen.has(wrong)) { seen.add(wrong); choices.push(wrong); }
+    }
+    while (choices.length < 4) {
+      choices.push('—');
+    }
+    for (let i = choices.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [choices[i], choices[j]] = [choices[j], choices[i]];
+    }
+    return choices;
+  }
+
+  return function generateMissionQuestion(missionId, difficulty, seen) {
+    const mg = missionGens[missionId];
+    if (!mg) return missionGens[1].easy[0]();
+    const pool = mg[difficulty] || mg.easy;
+    let q;
+    if (seen && seen.size > 0 && pool.length > 1) {
+      const unseen = pool.filter((_, i) => {
+        const test = pool[i]();
+        return !seen.has(test.type);
+      });
+      if (unseen.length > 0) {
+        q = unseen[Math.floor(Math.random() * unseen.length)]();
+      } else {
+        q = pick(pool)();
+        q.type = q.type + '_' + ri(1, 10000);
+      }
+    } else {
+      q = pick(pool)();
+    }
+    if (difficulty === 'easy' || difficulty === 'medium') {
+      const isYesNo = q.type && q.type.startsWith('yesno') || (q.prompt && q.prompt.includes('(1=yes,0=no)'));
+      if (isYesNo) {
+        q.choices = ['Yes', 'No'];
+        q.prompt = q.prompt.replace(/\(1=yes,0=no\)/g, '').replace(/\s+/g, ' ').trim();
+        q._yesno = true;
+      } else {
+        q.choices = generateChoices(q.answer, q.prompt);
+      }
+    }
+    return q;
+  };
+})();
+
+app.get('/la-mission-quiz-api/question', (req, res) => {
+  const missionId = parseInt(req.query.missionId) || 1;
+  const difficulty = req.query.difficulty || 'easy';
+  const seenStr = req.query.seen || '';
+  const seen = new Set(seenStr.split(',').filter(Boolean));
+  const id = Date.now();
+  try {
+    const q = MQ(missionId, difficulty, seen);
+    res.json({ id, missionId, difficulty, ...q });
+  } catch (e) {
+    console.error('Mission quiz question error:', e);
+    res.status(500).json({ error: 'Failed to generate question' });
+  }
+});
+
+app.post('/la-mission-quiz-api/check', (req, res) => {
+  const { answer: expected, answerType, type, data, prompt } = req.body;
+  const raw = (req.body.userAnswer || '').trim();
+  const norm = (s) => s.replace(/\s+/g, '').replace(/\u2212/g, '-').toLowerCase();
+  const n = norm(raw);
+  let correct = false;
+
+  if (answerType === 'scalar') {
+    const parseNum = (s) => {
+      s = s.replace(/\s+/g, '').replace(/\u2212/g, '-');
+      if (s.includes('/')) {
+        const parts = s.split('/');
+        if (parts.length === 2) {
+          const num = parseFloat(parts[0]);
+          const den = parseFloat(parts[1]);
+          if (!isNaN(num) && !isNaN(den) && den !== 0) return num / den;
+        }
+      }
+      return parseFloat(s);
+    };
+    const userVal = parseNum(n);
+    const expVal = parseNum(norm(expected));
+    if (!isNaN(userVal) && !isNaN(expVal)) {
+      correct = Math.abs(userVal - expVal) < 0.5;
+    } else {
+      correct = n === norm(expected);
+    }
+  } else if (answerType === 'vector') {
+    const m = n.match(/\(?([-\d.]+),([-\d.]+)\)?/);
+    const e = norm(expected).match(/\(?([-\d.]+),([-\d.]+)\)?/);
+    correct = m && e && Math.abs(parseFloat(m[1])-parseFloat(e[1])) < 0.01 && Math.abs(parseFloat(m[2])-parseFloat(e[2])) < 0.01;
+  } else if (answerType === 'matrix') {
+    const parseMat = (s) => {
+      const cleaned = s.replace(/[\[\]]/g, '');
+      const rows = cleaned.split(';');
+      if (rows.length !== 2) return null;
+      const r0 = rows[0].split(',').map(Number);
+      const r1 = rows[1].split(',').map(Number);
+      if (r0.length !== 2 || r1.length !== 2 || r0.some(isNaN) || r1.some(isNaN)) return null;
+      return [r0, r1];
+    };
+    const um = parseMat(n);
+    const em = parseMat(norm(expected));
+    correct = um && em && um[0][0]===em[0][0] && um[0][1]===em[0][1] && um[1][0]===em[1][0] && um[1][1]===em[1][1];
+  } else {
+    const expLower = norm(expected);
+    const textNorm = (s) => s.replace(/\s+/g, '').replace(/\u2212/g, '-').toLowerCase();
+    correct = textNorm(raw) === expLower || textNorm(raw).includes(expLower) || expLower.includes(textNorm(raw));
+  }
+
+  if (!correct && !isNaN(parseFloat(expected)) && (n === 'yes' || n === 'no')) {
+    const expNum = parseFloat(expected);
+    if ((expNum === 1 && n === 'yes') || (expNum === 0 && n === 'no')) {
+      correct = true;
+    }
+  }
+  let display = expected;
+  if (!isNaN(parseFloat(expected)) && req.body._yesno) {
+    display = expected === '1' ? 'Yes' : 'No';
+  }
+  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
+});
+
+/**
+ * NEW LAB ROUTES (Basic Arithmetic, Mensuration, Visual Math Redux)
+ */
+const labRoutes = require('./labRoutes');
+app.use('/api', labRoutes);
 
 /**
  * CATCH-ALL ROUTE

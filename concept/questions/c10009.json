@@ -1,0 +1,15 @@
+{
+  "id": 10009,
+  "word": "API (Application Programming Interface)",
+  "question": "API (Application Programming Interface)",
+  "options": [
+    "A physical cable used to connect servers",
+    "A set of rules and protocols that allows different software applications to communicate",
+    "A type of malware that steals personal data",
+    "A graphical user interface for non-technical users"
+  ],
+  "answerOption": "B",
+  "answerText": "A set of rules and protocols that allows different software applications to communicate",
+  "difficulty": "medium",
+  "sourceFile": "c10009.json"
+}

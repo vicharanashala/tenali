@@ -1,0 +1,15 @@
+{
+  "id": 10008,
+  "word": "Derivative (Calculus)",
+  "question": "Derivative (Calculus)",
+  "options": [
+    "The area under a given curve",
+    "The instantaneous rate of change of a function with respect to a variable",
+    "A sequence of numbers where each term is the sum of the previous two",
+    "The geometric center of a two-dimensional shape"
+  ],
+  "answerOption": "B",
+  "answerText": "The instantaneous rate of change of a function with respect to a variable",
+  "difficulty": "medium",
+  "sourceFile": "c10008.json"
+}
