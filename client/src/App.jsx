@@ -19,6 +19,14 @@
  *
  * Theme persistence: Dark/light mode preference stored in localStorage[tenali-theme]
  * Progress persistence: Adaptive tables app saves current table progress in localStorage
+ *
+ * ─── Shared Device Learning Profiles ("Who's Studying?") ───────────────────
+ * Profile picker gate lives at the App root: on every page load the user
+ * must tap a profile (or create one) before any quiz is rendered. Each
+ * profile owns its own adaptScore per topic, persisted to localStorage
+ * under `tenali-profiles-<scope>`. See `lib/profileStore.js`,
+ * `hooks/useProfiles.jsx`, `hooks/useAdaptiveScore.js`,
+ * `components/ProfilePicker.jsx`, `components/ProfileSwitcher.jsx`.
  */
 
 import React, { useEffect, useState, useRef, useMemo, useCallback } from 'react';
@@ -58,6 +66,11 @@ function useProgressSubmit(revealed, isCorrect, topic, questionId) {
 }
 import Vachana from './vachana'
 import './App.css'
+import { ProfilesProvider, useProfiles } from './hooks/useProfiles.jsx'
+import { useAdaptiveScore } from './hooks/useAdaptiveScore.js'
+import AppGate from './components/AppGate.jsx'
+import ProfileSwitcher from './components/ProfileSwitcher.jsx'
+import ProfileAvatar from './components/ProfileAvatar.jsx'
 import GlossaryText from './components/GlossaryText'
 import KeyTerms from './components/KeyTerms'
 import InteractiveLcmHcfApp from './LcmHcfApp';
@@ -160,18 +173,22 @@ function useAuth() {
 }
 
 // Hamburger button (top-right) + dropdown + login modal.
-// Renders globally — sits next to the .theme-toggle.
+// Renders globally — sits next to the .theme-toggle. Mounted from
+// main.jsx as a sibling of <App />, inside the same <ProfilesProvider>,
+// so useProfiles() is always in scope here.
 function AuthMenu() {
   const { user, login, logout } = useAuth()
+  const { activeProfile } = useProfiles()
   const [open, setOpen] = useState(false)
   const [showLogin, setShowLogin] = useState(false)
+  const [showSwitcher, setShowSwitcher] = useState(false)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
 
   useEffect(() => {
-    const onKey = e => { if (e.key === 'Escape') { setOpen(false); setShowLogin(false); setError('') } }
+    const onKey = e => { if (e.key === 'Escape') { setOpen(false); setShowLogin(false); setShowSwitcher(false); setError('') } }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [])
@@ -219,12 +236,29 @@ function AuthMenu() {
           <div onClick={() => setOpen(false)} style={{ position: 'fixed', inset: 0, zIndex: 100, background: 'transparent' }} />
           <div style={{
             position: 'fixed', top: 64, right: 16, zIndex: 102,
-            minWidth: 200, padding: 6,
+            minWidth: 220, padding: 6,
             background: 'var(--clr-surface, #1c1c1f)',
             border: '1px solid var(--clr-border, #444)',
             borderRadius: 10, boxShadow: '0 6px 18px rgba(0,0,0,0.35)',
             color: 'var(--clr-text)',
           }}>
+            {activeProfile && (
+              <>
+                <div style={{ padding: '8px 12px', fontSize: '0.85rem', opacity: 0.75, display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <ProfileAvatar profile={activeProfile} size={28} />
+                  <span>Studying as <strong>{activeProfile.name}</strong></span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => { setShowSwitcher(true); setOpen(false) }}
+                  style={{ width: '100%', textAlign: 'left', padding: '8px 12px', borderRadius: 6, background: 'transparent', border: 'none', color: 'var(--clr-text)', cursor: 'pointer', fontSize: '0.95rem' }}
+                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)' }}
+                  onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
+                >
+                  Switch profile
+                </button>
+              </>
+            )}
             {user ? (
               <>
                 <div style={{ padding: '8px 12px', fontSize: '0.85rem', opacity: 0.75 }}>
@@ -328,6 +362,10 @@ function AuthMenu() {
             </div>
           </form>
         </div>
+      )}
+
+      {showSwitcher && (
+        <ProfileSwitcher onClose={() => setShowSwitcher(false)} />
       )}
     </>
   )
@@ -42210,6 +42248,7 @@ function BalanceScaleApp({ onBack }) {
 
 
 function App() {
+  const { activeProfileId } = useProfiles()
   // Currently selected quiz mode (null = home menu, or key like 'gk', 'addition', etc.)
   const [mode, setMode] = useState(() => {
     try {
@@ -44045,6 +44084,7 @@ function App() {
     if (ActiveApp) {
       const element = (
         <ActiveApp
+          key={`${activeProfileId}-${mode}`}
           completedTopics={completedTopics}
           goldMastery={goldMastery}
           markTopicCompleted={markTopicCompleted}
@@ -44096,24 +44136,27 @@ function App() {
     );
   };
 
+  // The picker gate wraps the app content and intercepts rendering if there is no active profile.
   return (
-    <div className="app-shell">
-      {showTour && <OnboardingTour onFinish={() => { localStorage.setItem('tenali_tour_seen', 'true'); setShowTour(false) }} mode={mode} />}
-      <button className="guide-toggle" onClick={() => setShowTour(true)} title="Take a Tour">
-        🧭 Guide
-      </button>
-      <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-        {theme === 'dark' ? '☀️' : '🌙'}
-      </button>
-      {mode === 'vachana' ? (
-        <Vachana onBack={() => setMode(null)} />
-      ) : (
-        <div className="card">
-          {renderContent()}
-        </div>
-      )}
-      {renderCelebrationModal()}
-    </div>
+    <AppGate>
+      <div className="app-shell">
+        {showTour && <OnboardingTour onFinish={() => { localStorage.setItem('tenali_tour_seen', 'true'); setShowTour(false) }} mode={mode} />}
+        <button className="guide-toggle" onClick={() => setShowTour(true)} title="Take a Tour">
+          🧭 Guide
+        </button>
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        {mode === 'vachana' ? (
+          <Vachana onBack={() => setMode(null)} />
+        ) : (
+          <div className="card">
+            {renderContent()}
+          </div>
+        )}
+        {renderCelebrationModal()}
+      </div>
+    </AppGate>
   )
 }
 
@@ -67106,5 +67149,4 @@ function MensurationLabApp({ onBack, initialDifficulty, initialNumQuestions, ini
 }
 
 export default App
-export { AuthMenu }
-
+export { AuthMenu, useAuth }

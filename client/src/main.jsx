@@ -17,20 +17,41 @@
  * - Warns about legacy string ref API usage
  * - Identifies components with missing keys in lists
  * - Development-only, stripped in production build
+ *
+ * ─── Profile Provider ─────────────────────────────────────────────────────
+ * <ProfilesProvider> wraps both <App /> and <AuthMenu /> because:
+ *   - <App /> -> <AppGate /> calls useProfiles() for the picker gate.
+ *   - <AuthMenu /> shows the active learner name + switch-profile item.
+ * Mounting the provider here (instead of inside <App />) lets all global
+ * UI consume useProfiles(), including AuthMenu which is a sibling of App.
  */
+
+/* eslint-disable react-refresh/only-export-components */
+// main.jsx is the entry point — Fast Refresh's "exports" rule doesn't
+// apply here because there's nothing to refresh.
 
 import React from 'react'; window.React = React;
 import ReactDOM from 'react-dom/client'
-import App, { AuthMenu } from './App.jsx?v=2'
-import './index.css';
-import './kid-zone.css';
+import App, { AuthMenu, useAuth } from './App.jsx?v=2'
+import { ProfilesProvider } from './hooks/useProfiles.jsx'
+import './index.css'
+import './kid-zone.css'
+
+function Root() {
+  const { user } = useAuth()
+  return (
+    <ProfilesProvider authUser={user}>
+      <App />
+      {/* Hamburger menu (login/logout/profile) — fixed top-right, on every page */}
+      <AuthMenu />
+    </ProfilesProvider>
+  )
+}
 
 // Create React root and render the App component
 ReactDOM.createRoot(document.getElementById('root')).render(
   // StrictMode: Enables additional development checks and warnings
   <React.StrictMode>
-    <App />
-    {/* Hamburger menu (login/logout) — fixed top-right, visible on every page */}
-    <AuthMenu />
+    <Root />
   </React.StrictMode>,
 )
