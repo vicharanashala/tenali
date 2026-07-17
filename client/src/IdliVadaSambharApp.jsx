@@ -19,6 +19,7 @@
  */
 import { useState, useEffect, useRef, useCallback } from 'react';
 import './IdliVadaSambharApp.css';
+import { useI18n } from './lib/i18n.jsx';
 
 const PLAYERS = ['User', 'Tenali', 'Birbal'];
 const PLAYER_EMOJI = { User: '🧒', Tenali: '👦', Birbal: '👳' };
@@ -27,6 +28,7 @@ const gcd = (x, y) => (y === 0 ? x : gcd(y, x % y));
 const lcm2 = (x, y) => (x / gcd(x, y)) * y;
 
 export default function IdliVadaSambharApp({ onBack }) {
+  const { t } = useI18n();
   // ---- Setup / inputs ----
   const [phase, setPhase] = useState('setup'); // 'setup' | 'playing'
   const [inputA, setInputA] = useState('');
@@ -244,7 +246,7 @@ export default function IdliVadaSambharApp({ onBack }) {
   if (phase === 'setup') {
     return (
       <div className="ivs-app">
-        <button className="ivs-back" onClick={onBack}>← Back</button>
+        <button className="ivs-back" onClick={onBack}>{t('back_short', {}, '← Back')}</button>
         <h1 className="ivs-title">Idli · Vada · Sambhar</h1>
         <p className="ivs-tagline">Count in a circle and discover the LCM! 🍚 🍩 🍲</p>
 
@@ -279,7 +281,7 @@ export default function IdliVadaSambharApp({ onBack }) {
 
   return (
     <div className="ivs-app">
-      <button className="ivs-back" onClick={onBack}>← Back</button>
+      <button className="ivs-back" onClick={onBack}>{t('back_short', {}, '← Back')}</button>
       <h1 className="ivs-title">Idli · Vada · Sambhar</h1>
 
       <div className="ivs-legend">

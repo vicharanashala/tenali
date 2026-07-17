@@ -76,6 +76,7 @@ import CoordinateGrid from './components/CoordinateGrid';
 import LanguageDashboard from './language/LanguageDashboard'
 import { VOCAB_CORPUS } from './vocabCorpus'
 import DiagnosticQuiz from './lib/DiagnosticQuiz.jsx';
+import { useI18n } from './lib/i18n.jsx';
 import PercentExplanationApp from './PercentExplanationApp'
 import { playSound } from './audioContext'
 
@@ -165,7 +166,7 @@ function useAuth() {
 
 // Hamburger button (top-right) + dropdown + login modal.
 // Renders globally — sits next to the .theme-toggle.
-function AuthMenu() {
+function AuthMenu({ t = (s) => s }) {
   const { user, login, logout } = useAuth()
   const [open, setOpen] = useState(false)
   const [showLogin, setShowLogin] = useState(false)
@@ -42232,6 +42233,7 @@ function PercentPage(props) {
 
 function App() {
   const [diagnosticState, setDiagnosticState] = useState({});
+  const { t } = useI18n();
 
   // Currently selected quiz mode (null = home menu, or key like 'gk', 'addition', etc.)
   const [mode, setMode] = useState(() => {

@@ -25,15 +25,18 @@ import App, { AuthMenu } from './App.jsx?v=2'
 import './index.css';
 import './kid-zone.css';
 import { AccessibilityProvider } from './lib/AccessibilityProvider.jsx'
+import { I18nProvider } from './lib/i18n.jsx';
 
 // Create React root and render the App component
 ReactDOM.createRoot(document.getElementById('root')).render(
   // StrictMode: Enables additional development checks and warnings
   <React.StrictMode>
-    <AccessibilityProvider>
-      <App />
-    </AccessibilityProvider>
-    {/* Hamburger menu (login/logout) — fixed top-right, visible on every page */}
-    <AuthMenu />
+    <I18nProvider>
+      <AccessibilityProvider>
+        <App />
+      </AccessibilityProvider>
+      {/* Hamburger menu (login/logout) — fixed top-right, visible on every page */}
+      <AuthMenu />
+    </I18nProvider>
   </React.StrictMode>,
 )
