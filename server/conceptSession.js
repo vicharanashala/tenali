@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const QformulaConceptSession = require('./models/QformulaConceptSession');
 const SimulConceptSession = require('./models/SimulConceptSession');
+const DiffConceptSession = require('./models/DiffConceptSession');
 const SkillMasteryState = require('./models/SkillMasteryState');
 const { nextInterval, INTERVAL_DAYS } = require('./lib/spacingLadder');
 
@@ -74,7 +75,7 @@ router.post('/:skillId/session', async (req, res) => {
     }
 
     // Save the session
-    const SessionModel = skillId === 'simul' ? SimulConceptSession : QformulaConceptSession;
+    const SessionModel = skillId === 'simul' ? SimulConceptSession : (skillId === 'diff' ? DiffConceptSession : QformulaConceptSession);
     const session = new SessionModel({
       learnerId,
       completedStages,
@@ -88,7 +89,14 @@ router.post('/:skillId/session', async (req, res) => {
       stage2Predictions,
       stage3PrecisionGap,
       stage4StepperCompleted,
-      stage5Explanation
+      stage5Explanation,
+      
+      // Diff specific fields
+      stage1Intuition: req.body.stage1Intuition,
+      stage2PowerRule: req.body.stage2PowerRule,
+      stage3ChainRule: req.body.stage3ChainRule,
+      stage4ProductQuotient: req.body.stage4ProductQuotient,
+      stage5MixedSolver: req.body.stage5MixedSolver
     });
     await session.save();
 
@@ -104,11 +112,25 @@ router.post('/:skillId/session', async (req, res) => {
     }
 
     // Handle spaced replay logic
-    if (isSpacedReplay && completedStages.includes(5)) {
+    let completedFinalStage = false;
+    let completedSpacedReplay = false;
+    
+    if (skillId === 'simul') {
+      completedFinalStage = completedStages.includes(5); // simul has 5 stages
+      completedSpacedReplay = isSpacedReplay && completedStages.includes(5);
+    } else if (skillId === 'diff') {
+      completedFinalStage = completedStages.includes(10);
+      completedSpacedReplay = isSpacedReplay && completedStages.includes(10);
+    } else {
+      completedFinalStage = completedStages.includes(4); // qformula has 4 stages
+      completedSpacedReplay = isSpacedReplay && completedStages.includes(4);
+    }
+
+    if (completedSpacedReplay) {
       // Calculate accuracy of this replay
       const correctCount = (stage1Predictions || []).filter(p => p.correct).length;
       const totalCount = (stage1Predictions || []).length;
-      const accuracy = totalCount > 0 ? correctCount / totalCount : 0;
+      const accuracy = totalCount > 0 ? correctCount / totalCount : 1; // Default to 1 if no predictions logged
       
       const wentWell = accuracy >= 0.7; // arbitrary threshold for "held up"
       
@@ -122,7 +144,7 @@ router.post('/:skillId/session', async (req, res) => {
       const nextDue = new Date();
       nextDue.setDate(nextDue.getDate() + daysToAdd);
       state.nextConceptReviewDue = nextDue;
-    } else if (completedStages.includes(4)) {
+    } else if (completedFinalStage) {
       // First time completing the concept playground
       if (!state.lastConceptReviewAt) {
         state.lastConceptReviewAt = new Date();

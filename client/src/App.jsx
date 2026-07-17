@@ -80,6 +80,7 @@ import QFormulaConceptApp from './lib/concept/QFormulaConceptApp.jsx';
 import SimulConceptApp from './lib/simul-concept/SimulConceptApp.jsx';
 import DiagnosticQuiz from './lib/DiagnosticQuiz.jsx';
 import { useI18n } from './lib/i18n.jsx';
+import DiffConceptApp from './lib/diff-concept/DiffConceptApp.jsx';
 import PercentExplanationApp from './PercentExplanationApp';
 import { playSound } from './audioContext';
 
@@ -43920,6 +43921,7 @@ function App() {
     polyfactor: PolyFactorApp,     // Polynomial factoring
     primefactor: PrimeFactorApp,   // Prime factorization
     qformula: QFormulaApp,         // Quadratic formula
+    diffconcept: DiffConceptApp,   // Differentiation Concept Playground
     simul: SimulApp,               // Simultaneous equations
     funceval: FuncEvalApp,         // Function evaluation
     lineq: LineEqApp,              // Line equation
@@ -44188,6 +44190,7 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
     { key: 'conics', name: 'Conic Sections', subtitle: 'Circle, parabola, ellipse, hyperbola', color: 'purple' },
     { key: 'coordgeom', name: 'Coord. Geometry', subtitle: 'Midpoint, distance, gradient', color: 'blue' },
     { key: 'decimals', name: 'Decimals', subtitle: 'Add, subtract, multiply, divide', color: 'blue' },
+    { key: 'diffconcept', name: 'Differentiation Concept', subtitle: 'Concept Playground (First Principles)', color: 'blue' },
     { key: 'diff', name: 'Differentiation', subtitle: 'Power rule, turning points', color: 'purple' },
     { key: 'diffeq', name: 'Differential Eq.', subtitle: 'Order, degree, solve DEs', color: 'green' },
     { key: 'dotprod', name: 'Dot Products', subtitle: 'Vectors, matrices, fill blanks', color: 'blue' },
