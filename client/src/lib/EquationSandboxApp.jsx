@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import EquationSandbox from '../components/concept/EquationSandbox';
-import { updateBKT } from '../App';
+import { updateBKT } from '../bkt.js';
 import confetti from 'canvas-confetti';
 
 const LEVELS = [

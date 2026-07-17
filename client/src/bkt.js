@@ -39,4 +39,14 @@ function bktUpdate(pMastery, isCorrect, params = DEFAULT_PARAMS) {
   return { posterior, pMasteryNext };
 }
 
-export { bktUpdate, DEFAULT_PARAMS, clamp };
+/**
+ * Wrapper around bktUpdate for use in concept playground apps.
+ * Adapts the (score, isCorrect, _unused, { proximityScore, attempts }) call
+ * signature to the underlying BKT engine and returns a scalar mastery score.
+ */
+function updateBKT(currentScore, isCorrect, _params, _meta) {
+  const result = bktUpdate(currentScore, isCorrect);
+  return result.pMasteryNext;
+}
+
+export { bktUpdate, updateBKT, DEFAULT_PARAMS, clamp };
