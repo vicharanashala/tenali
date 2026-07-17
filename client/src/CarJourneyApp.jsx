@@ -503,28 +503,32 @@ const CJ_STOPS = [
         return { prompt: `The electric car's battery holds ${base} km of driving when full. It is at 50%. How many km can it drive right now?`,
           parts: [{ unit: 'km', type: 'int', answer: ans, display: String(ans) }],
           hint: '50% is exactly half.',
-          explanation: `50% of ${base} = ${ans} km. Half the battery, half the range.` };
+          explanation: `50% of ${base} = ${ans} km. Half the battery, half the range.`,
+          vis: { kind: 'battery', segs: [{ pct: 50, cls: 'a' }], caption: `the full battery = ${base} km of driving` } };
       } },
       { id: 'pct-02', band: 1, gen() {
         const base = cjRand(32, 60, 4), ans = base / 4;
         return { prompt: `The tank holds ${base} litres when full. The gauge shows 25%. How many litres are in the tank?`,
           parts: [{ unit: 'litres', type: 'int', answer: ans, display: String(ans) }],
           hint: '25% is a quarter — the same quarter the old gauge showed as ¼.',
-          explanation: `25% of ${base} = ${ans} litres. 25% and ¼ are the same needle position, two languages.` };
+          explanation: `25% of ${base} = ${ans} litres. 25% and ¼ are the same needle position, two languages.`,
+          vis: { kind: 'tanks', tanks: [{ den: 4, fills: [{ n: 1, cls: 'a' }], label: '25% = 1/4' }], caption: `the full tank = ${base} litres — 25% is Stop 5's ¼ in new clothes` } };
       } },
       { id: 'pct-03', band: 2, gen() {
         const p = cjPick([20, 30]), base = cjRand(1200, 4800, 100), ans = (base * (100 - p)) / 100;
         return { prompt: `A tyre costs ₹${base}. The shop announces a ${p}% discount. What is the new price of the tyre?`,
           parts: [{ unit: '₹', type: 'int', answer: ans, display: String(ans) }],
           hint: 'Work out the discount amount first, then take it off the price.',
-          explanation: `${p}% of ${base} = ${(base * p) / 100} off → ₹${ans}. Always do the pump-side math before the shop does it for you.` };
+          explanation: `${p}% of ${base} = ${(base * p) / 100} off → ₹${ans}. Always do the pump-side math before the shop does it for you.`,
+          vis: { kind: 'bars', unit: '₹', items: [{ label: 'Full price', value: base }, { label: `${p}% discount`, value: (base * p) / 100 }], caption: 'take the small bar off the big one' } };
       } },
       { id: 'pct-04', band: 2, gen() {
         const p = cjPick([5, 10]), base = cjRand(100, 110, 2), ans = cjR2((base * (100 + p)) / 100);
         return { prompt: `Petrol costs ₹${base} per litre. The price rises by ${p}%. What is the new price per litre?`,
           parts: [{ unit: '₹ per litre', type: 'num', tol: 0.01, answer: ans, display: ans.toFixed(2) }],
           hint: 'Find the rise, then add it on top of the old price.',
-          explanation: `${base} + ${p}% = ₹${ans}. A few percent per litre becomes real money over a year of driving.` };
+          explanation: `${base} + ${p}% = ₹${ans}. A few percent per litre becomes real money over a year of driving.`,
+          vis: { kind: 'bars', unit: '₹', items: [{ label: 'Old price', value: base }, { label: `The rise (${p}%)`, value: cjR2((base * p) / 100) }], caption: 'the rise goes ON TOP of the old price' } };
       } },
       { id: 'pct-05', band: 3, gen() {
         const p1 = cjPick([90, 100]), p2 = cjRand(15, 35, 5), p3 = cjRand(10, 30, 5), base = cjRand(200, 400, 20);
@@ -532,14 +536,16 @@ const CJ_STOPS = [
         return { prompt: `The battery was at ${p1}%. The morning drive used ${p2} percentage points, and the afternoon used ${p3} more. The full battery gives ${base} km. How many km of range are left?`,
           parts: [{ unit: 'km', type: 'int', answer: ans, display: String(ans) }],
           hint: 'First find what % is left, then take that % of the full range.',
-          explanation: `${p1} − ${p2} − ${p3} = ${left}% left → of ${base} km = ${ans} km. Every EV driver runs this exact sum at 4 pm.` };
+          explanation: `${p1} − ${p2} − ${p3} = ${left}% left → of ${base} km = ${ans} km. Every EV driver runs this exact sum at 4 pm.`,
+          vis: { kind: 'battery', segs: [{ pct: left, cls: 'a' }, { pct: p2, cls: 'dim' }, { pct: p3, cls: 'dim' }], caption: `orange = still charged, faded = used · full battery = ${base} km` } };
       } },
       { id: 'pct-06', band: 3, gen() {
         const orig = cjRand(1500, 4500, 250), sale = (orig * 80) / 100;
         return { prompt: `After a 20% discount, a tyre costs ₹${sale}. What was the price before the discount?`,
           parts: [{ unit: '₹', type: 'int', answer: orig, display: String(orig) }],
           hint: 'The sale price is 80% of the original — so one percent is sale ÷ 80.',
-          explanation: `₹${sale} is 80% → 1% = ₹${sale / 80} → 100% = ₹${orig}. Reverse percentage: walking the discount backwards.` };
+          explanation: `₹${sale} is 80% → 1% = ₹${sale / 80} → 100% = ₹${orig}. Reverse percentage: walking the discount backwards.`,
+          vis: { kind: 'battery', segs: [{ pct: 80, cls: 'a' }, { pct: 20, cls: 'q' }], caption: `the orange 80% = ₹${sale} · the WHOLE bar (100%) is the price you want` } };
       } },
     ],
   },
@@ -559,28 +565,32 @@ const CJ_STOPS = [
         return { prompt: `The car cruises at ${s} km/h for ${t} hours on the highway. How far does it travel?`,
           parts: [{ unit: 'km', type: 'int', answer: ans, display: String(ans) }],
           hint: 'Distance = speed × time.',
-          explanation: `${s} × ${t} = ${ans} km. Every hour adds another ${s} km — that's all "speed" means.` };
+          explanation: `${s} × ${t} = ${ans} km. Every hour adds another ${s} km — that's all "speed" means.`,
+          vis: { kind: 'dst', s: `${s} km/h`, t: `${t} h`, unknown: 'd' } };
       } },
       { id: 'sdt-02', band: 1, gen() {
         const s = cjRand(40, 70, 10), t = cjRand(2, 5), d = s * t;
         return { prompt: `Grandma's house is ${d} km away. The car holds a steady ${s} km/h. How many hours will the trip take?`,
           parts: [{ unit: 'hours', type: 'int', answer: t, display: String(t) }],
           hint: 'Time = distance ÷ speed.',
-          explanation: `${d} ÷ ${s} = ${t} hours. Now you can answer from the back seat before the driver does.` };
+          explanation: `${d} ÷ ${s} = ${t} hours. Now you can answer from the back seat before the driver does.`,
+          vis: { kind: 'dst', d: `${d} km`, s: `${s} km/h`, unknown: 't' } };
       } },
       { id: 'sdt-03', band: 2, gen() {
         const s = cjRand(35, 85, 5), t = cjRand(2, 6), d = s * t;
         return { prompt: `The car covers ${d} km in ${t} hours. What was its average speed?`,
           parts: [{ unit: 'km/h', type: 'int', answer: s, display: String(s) }],
           hint: 'Speed = distance ÷ time.',
-          explanation: `${d} ÷ ${t} = ${s} km/h. The third corner of the triangle — you now own all three.` };
+          explanation: `${d} ÷ ${t} = ${s} km/h. The third corner of the triangle — you now own all three.`,
+          vis: { kind: 'dst', d: `${d} km`, t: `${t} h`, unknown: 's' } };
       } },
       { id: 'sdt-04', band: 2, gen() {
         const s = cjPick([24, 36, 48, 60]), m = cjPick([10, 15, 20, 30]), ans = (s * m) / 60;
         return { prompt: `The school run takes ${m} minutes at a steady ${s} km/h. How far away is the school?`,
           parts: [{ unit: 'km', type: 'int', answer: ans, display: String(ans) }],
           hint: `Minutes must become hours first: ${m} minutes = ${m}/60 of an hour.`,
-          explanation: `${s} × ${m}/60 = ${ans} km. Real trips are in minutes — the formula still works once the units agree.` };
+          explanation: `${s} × ${m}/60 = ${ans} km. Real trips are in minutes — the formula still works once the units agree.`,
+          vis: { kind: 'dst', s: `${s} km/h`, t: `${m} min`, unknown: 'd', caption: 'trap: the units disagree — minutes must become hours first' } };
       } },
       { id: 'sdt-05', band: 3, gen() {
         const s1 = cjRand(60, 80, 10), t1 = cjRand(1, 3), s2 = cjRand(20, 40, 10), t2 = cjRand(1, 3);
@@ -588,14 +598,16 @@ const CJ_STOPS = [
         return { prompt: `The car does ${d1} km in ${t1} hour${t1 > 1 ? 's' : ''} on the highway, then ${d2} km in ${t2} hour${t2 > 1 ? 's' : ''} through town. What was its average speed for the whole trip? (2 d.p. if needed.)`,
           parts: [{ unit: 'km/h', type: 'num', tol: 0.05, answer: ans, display: String(ans) }],
           hint: 'Average speed = total distance ÷ total time — NOT the average of the two speeds.',
-          explanation: `(${d1} + ${d2}) ÷ (${t1} + ${t2}) = ${ans} km/h. Notice it's closer to the slower leg — the town leg ate more of the clock per km.` };
+          explanation: `(${d1} + ${d2}) ÷ (${t1} + ${t2}) = ${ans} km/h. Notice it's closer to the slower leg — the town leg ate more of the clock per km.`,
+          vis: { kind: 'bars', unit: 'km', items: [{ label: `Highway (${t1} h)`, value: d1 }, { label: `Town (${t2} h)`, value: d2 }], caption: 'average speed = ALL the km ÷ ALL the hours — never the average of the two speeds' } };
       } },
       { id: 'sdt-06', band: 3, gen() {
         const s1 = cjPick([40, 50, 60]), s2 = 2 * s1, g = cjRand(1, 3);
         return { prompt: `A truck passes the milestone at ${s1} km/h. A car passes the same milestone at ${s2} km/h, ${g} hour${g > 1 ? 's' : ''} later. How many hours after passing the milestone does the car catch the truck? (The truck's speed stays steady.)`,
           parts: [{ unit: 'hours', type: 'int', answer: g, display: String(g) }],
           hint: `When the car starts, the truck is already ${g} × ${s1} km ahead. The car closes the gap at (car speed − truck speed) km every hour.`,
-          explanation: `Head start: ${g * s1} km. Closing speed: ${s2} − ${s1} = ${s1} km/h. Catch-up time: ${g} hours. Chasing is just division.` };
+          explanation: `Head start: ${g * s1} km. Closing speed: ${s2} − ${s1} = ${s1} km/h. Catch-up time: ${g} hours. Chasing is just division.`,
+          vis: { kind: 'meet', mode: 'chase', aLabel: `car ${s2} km/h`, bLabel: `truck ${s1} km/h`, gapLabel: `head start: ${g * s1} km`, caption: `the gap closes at ${s2} − ${s1} = ${s1} km every hour` } };
       } },
     ],
   },
@@ -615,28 +627,32 @@ const CJ_STOPS = [
         return { prompt: `A car wheel has a radius of ${r} cm. How far does the car move in ONE full turn of the wheel? (2 d.p., π ≈ 3.14159)`,
           parts: [{ unit: 'cm', type: 'num', tol: 0.5, answer: ans, display: ans.toFixed(2) }],
           hint: 'One full turn lays one circumference on the road: C = 2πr.',
-          explanation: `2π × ${r} = ${ans.toFixed(2)} cm per turn. The wheel prints its own circumference onto the road, turn after turn.` };
+          explanation: `2π × ${r} = ${ans.toFixed(2)} cm per turn. The wheel prints its own circumference onto the road, turn after turn.`,
+          vis: { kind: 'circle', label: `r = ${r} cm`, caption: 'C = 2πr — the dashed line is one full turn laid on the road' } };
       } },
       { id: 'cir-02', band: 1, gen() {
         const d = cjRand(80, 110, 5), ans = cjR2(Math.PI * d);
         return { prompt: `A lorry wheel is ${d} cm across (its diameter). What is its circumference? (2 d.p.)`,
           parts: [{ unit: 'cm', type: 'num', tol: 0.5, answer: ans, display: ans.toFixed(2) }],
           hint: "With the diameter, it's even shorter: C = πd.",
-          explanation: `π × ${d} = ${ans.toFixed(2)} cm. Lorry wheels are taller than most students — one turn is over 2½ metres.` };
+          explanation: `π × ${d} = ${ans.toFixed(2)} cm. Lorry wheels are taller than most students — one turn is over 2½ metres.`,
+          vis: { kind: 'circle', d: true, label: `d = ${d} cm`, caption: 'the line runs all the way across — that is the diameter: C = πd' } };
       } },
       { id: 'cir-03', band: 2, gen() {
         const c = cjPick([1.8, 2.0, 2.2]), n = cjRand(500, 2000, 100), ans = cjR2(c * n);
         return { prompt: `A wheel's circumference is ${c} metres. On the way to school it turns ${n} times. How far is the school?`,
           parts: [{ unit: 'm', type: 'num', tol: 0.5, answer: ans, display: String(ans) }],
           hint: `Each turn = ${c} m of road. Multiply by the number of turns.`,
-          explanation: `${c} × ${n} = ${ans} m. This multiplication IS the odometer — it does this sum all day long.` };
+          explanation: `${c} × ${n} = ${ans} m. This multiplication IS the odometer — it does this sum all day long.`,
+          vis: { kind: 'circle', label: `C = ${c} m`, caption: `every turn prints ${c} m of road — and the wheel turns ${n} times` } };
       } },
       { id: 'cir-04', band: 2, gen() {
         const c = cjPick([1.8, 2.0, 2.2]), n = cjRand(400, 1500, 100), d = cjR2(c * n);
         return { prompt: `A wheel's circumference is ${c} metres. The trip meter shows the car moved ${d} metres. How many times did the wheel turn?`,
           parts: [{ unit: 'turns', type: 'int', answer: n, display: String(n) }],
           hint: "Turns = distance ÷ one turn's worth of road.",
-          explanation: `${d} ÷ ${c} = ${n} turns. Reading the odometer backwards — division undoes the wheel's multiplication.` };
+          explanation: `${d} ÷ ${c} = ${n} turns. Reading the odometer backwards — division undoes the wheel's multiplication.`,
+          vis: { kind: 'circle', label: `C = ${c} m`, caption: `${d} m of road ÷ ${c} m per turn = ? turns` } };
       } },
       { id: 'cir-05', band: 3, gen() {
         const r = cjRand(40, 60, 5), deg = cjPick([90, 120, 150, 180]);
@@ -644,7 +660,8 @@ const CJ_STOPS = [
         return { prompt: `A windscreen wiper blade reaches ${r} cm from its pivot and sweeps through ${deg}°. What area of windscreen does it wipe? (2 d.p. — remember θ must be in radians for A = ½r²θ)`,
           parts: [{ unit: 'cm²', type: 'num', tol: 0.5, answer: ans, display: ans.toFixed(2) }],
           hint: `Two steps: turn ${deg}° into radians first, then use A = ½r²θ.`,
-          explanation: `θ = ${deg}π/180 rad → ½ × ${r}² × θ = ${ans.toFixed(2)} cm². Every rainy day, the wiper draws this sector for you.` };
+          explanation: `θ = ${deg}π/180 rad → ½ × ${r}² × θ = ${ans.toFixed(2)} cm². Every rainy day, the wiper draws this sector for you.`,
+          vis: { kind: 'sector', r, deg, caption: 'the wiper sweeps the shaded sector: A = ½r²θ (θ in radians!)' } };
       } },
       { id: 'cir-06', band: 3, gen() {
         const r = cjRand(18, 22), deg = cjPick([90, 180, 270]);
@@ -652,7 +669,8 @@ const CJ_STOPS = [
         return { prompt: `A steering wheel has radius ${r} cm. For a sharp turn the driver's hand rotates it through ${deg}°. How far does the hand travel along the wheel's rim? (2 d.p.)`,
           parts: [{ unit: 'cm', type: 'num', tol: 0.5, answer: ans, display: ans.toFixed(2) }],
           hint: 'Arc length = rθ, with θ in radians. Convert the degrees first.',
-          explanation: `${r} × ${deg}π/180 = ${ans.toFixed(2)} cm of rim under the hand. A "quarter turn" of the wheel is a real, measurable arc.` };
+          explanation: `${r} × ${deg}π/180 = ${ans.toFixed(2)} cm of rim under the hand. A "quarter turn" of the wheel is a real, measurable arc.`,
+          vis: { kind: 'sector', r, deg, arcOnly: true, caption: 'the hand travels along the thick arc: length = rθ (θ in radians)' } };
       } },
     ],
   },
@@ -673,7 +691,8 @@ const CJ_STOPS = [
         return { prompt: `A car-park ramp climbs ${b} m while crossing ${a} m of floor. How long is the ramp itself?`,
           parts: [{ unit: 'm', type: 'num', tol: 0.5, answer: ans, display: String(ans) }],
           hint: 'Ramp² = floor² + climb². Square, add, square-root.',
-          explanation: `√(${a}² + ${b}²) = ${ans} m. The ramp is always the longest side — you drive the hypotenuse.` };
+          explanation: `√(${a}² + ${b}²) = ${ans} m. The ramp is always the longest side — you drive the hypotenuse.`,
+          vis: { kind: 'rtri', base: a, rise: b, baseLabel: `floor ${a} m`, riseLabel: `climb ${b} m`, hypLabel: 'ramp = ?' } };
       } },
       { id: 'pyt-02', band: 1, gen() {
         const t = cjPick(CJ_TRIPLES_BIG), k = cjRand(1, 2);
@@ -681,7 +700,8 @@ const CJ_STOPS = [
         return { prompt: `The car park is a rectangle, ${a} m by ${b} m. You walk from one corner straight to the opposite corner. How far do you walk?`,
           parts: [{ unit: 'm', type: 'num', tol: 0.5, answer: ans, display: String(ans) }],
           hint: "The diagonal is the hypotenuse of the rectangle's triangle.",
-          explanation: `√(${a}² + ${b}²) = ${ans} m. Corner-to-corner beats walking two sides.` };
+          explanation: `√(${a}² + ${b}²) = ${ans} m. Corner-to-corner beats walking two sides.`,
+          vis: { kind: 'rtri', base: a, rise: b, baseLabel: `${a} m`, riseLabel: `${b} m`, hypLabel: 'diagonal = ?', caption: 'the rectangle cut corner-to-corner is a right triangle' } };
       } },
       { id: 'pyt-03', band: 2, gen() {
         const t = cjPick(CJ_TRIPLES);
@@ -689,7 +709,8 @@ const CJ_STOPS = [
         return { prompt: `A loading ramp is ${c} m long and its foot is ${a} m from the truck. How high is the truck's deck?`,
           parts: [{ unit: 'm', type: 'num', tol: 0.5, answer: ans, display: String(ans) }],
           hint: 'Rearrange: climb² = ramp² − floor². Subtract before you square-root.',
-          explanation: `√(${c}² − ${a}²) = ${ans} m up to the deck. Same rule, run backwards.` };
+          explanation: `√(${c}² − ${a}²) = ${ans} m up to the deck. Same rule, run backwards.`,
+          vis: { kind: 'rtri', base: a, rise: ans, baseLabel: `floor ${a} m`, riseLabel: 'deck = ?', hypLabel: `ramp ${c} m`, caption: 'this time the hypotenuse is KNOWN — subtract before you square-root' } };
       } },
       { id: 'pyt-04', band: 2, gen() {
         const t = cjPick([CJ_TRIPLES[0], CJ_TRIPLES[1], CJ_TRIPLES[2]]);
@@ -697,14 +718,19 @@ const CJ_STOPS = [
         return { prompt: `A ${c} m tow rope runs from a breakdown truck's crane top down to a car's tow hook. The car sits ${b} m behind the truck. How high is the crane top above the hook?`,
           parts: [{ unit: 'm', type: 'num', tol: 0.5, answer: ans, display: String(ans) }],
           hint: 'The rope is the hypotenuse. You have it and one leg — find the other.',
-          explanation: `√(${c}² − ${b}²) = ${ans} m. Every taut rope over a distance is a hypotenuse in disguise.` };
+          explanation: `√(${c}² − ${b}²) = ${ans} m. Every taut rope over a distance is a hypotenuse in disguise.`,
+          vis: { kind: 'rtri', base: b, rise: ans, baseLabel: `${b} m behind`, riseLabel: 'height = ?', hypLabel: `rope ${c} m` } };
       } },
       { id: 'pyt-05', band: 3, gen() {
         const n = cjPick([{ a: 3, b: 4, c: 12, space: 13 }, { a: 6, b: 8, c: 24, space: 26 }, { a: 2, b: 3, c: 6, space: 7 }]);
         return { prompt: `A car park floor is ${n.a} m × ${n.b} m, and the next level is ${n.c} m above it. A cable runs from a ground-floor corner to the opposite corner of the level above. How long is the cable?`,
           parts: [{ unit: 'm', type: 'num', tol: 0.5, answer: n.space, display: String(n.space) }],
           hint: 'Two triangles, one after the other: floor diagonal first, then diagonal + height.',
-          explanation: `Floor: √(${n.a}² + ${n.b}²); then √(diag² + ${n.c}²) = ${n.space} m. Pythagoras stacked on Pythagoras — 3D is just 2D twice.` };
+          explanation: `Floor: √(${n.a}² + ${n.b}²); then √(diag² + ${n.c}²) = ${n.space} m. Pythagoras stacked on Pythagoras — 3D is just 2D twice.`,
+          vis: { kind: 'rtri', tris: [
+            { base: n.a, rise: n.b, baseLabel: `${n.a} m`, riseLabel: `${n.b} m`, hypLabel: 'floor diag = ?' },
+            { base: Math.hypot(n.a, n.b), rise: n.c, baseLabel: 'floor diag', riseLabel: `up ${n.c} m`, hypLabel: 'cable = ?' },
+          ], caption: '3D is 2D twice: triangle 1 finds the floor diagonal, triangle 2 stands on it' } };
       } },
       { id: 'pyt-06', band: 3, gen() {
         const t = cjPick(CJ_TRIPLES_BIG), k = cjRand(1, 2);
@@ -712,7 +738,8 @@ const CJ_STOPS = [
         return { prompt: `The car park is ${a} m × ${b} m. Dad walks two sides to the exit; you cut across the diagonal. How many metres shorter is your path?`,
           parts: [{ unit: 'm', type: 'int', answer: ans, display: String(ans) }],
           hint: 'Find the diagonal first, then compare it with the two sides added together.',
-          explanation: `(${a} + ${b}) − ${c} = ${ans} m saved. The triangle inequality, measured in footsteps.` };
+          explanation: `(${a} + ${b}) − ${c} = ${ans} m saved. The triangle inequality, measured in footsteps.`,
+          vis: { kind: 'rtri', base: a, rise: b, baseLabel: `${a} m`, riseLabel: `${b} m`, hypLabel: 'your shortcut', caption: `Dad walks the two sides (${a} + ${b} m); you cut the diagonal — how much shorter?` } };
       } },
     ],
   },
@@ -732,35 +759,40 @@ const CJ_STOPS = [
         return { prompt: `On a dry road, braking distance in metres is given by d = v²/100, where v is speed in km/h. Find d for a car doing ${v} km/h.`,
           parts: [{ unit: 'm', type: 'num', tol: 0.05, answer: ans, display: String(ans) }],
           hint: 'Square the speed first, then divide by 100.',
-          explanation: `${v}²/100 = ${ans} m of road just to stop. Keep this number in mind next time you're doing ${v} km/h.` };
+          explanation: `${v}²/100 = ${ans} m of road just to stop. Keep this number in mind next time you're doing ${v} km/h.`,
+          vis: { kind: 'plot', series: [{ pts: cjPts((x) => (x * x) / 100, 0, 110) }], marks: [{ x: v, y: ans, label: `${v} km/h` }], xLabel: 'v (km/h)', yLabel: 'd (m)', caption: 'the curve bends UP — that is the ² at work' } };
       } },
       { id: 'qua-02', band: 1, gen() {
         const v = cjRand(30, 100, 10), ans = v / 5 + (v * v) / 100;
         return { prompt: `Total stopping distance is d = v/5 + v²/100 (thinking distance + braking distance), v in km/h. Find d at ${v} km/h.`,
           parts: [{ unit: 'm', type: 'num', tol: 0.05, answer: ans, display: String(ans) }],
           hint: 'Two terms, two steps: the linear part v/5, then the squared part v²/100. Add them.',
-          explanation: `${v}/5 + ${v}²/100 = ${v / 5} + ${(v * v) / 100} = ${ans} m. The first term is your reaction; the second is your brakes. Only one of them grows with the square.` };
+          explanation: `${v}/5 + ${v}²/100 = ${v / 5} + ${(v * v) / 100} = ${ans} m. The first term is your reaction; the second is your brakes. Only one of them grows with the square.`,
+          vis: { kind: 'plot', series: [{ pts: cjPts((x) => x / 5 + (x * x) / 100, 0, 100), label: 'total' }, { pts: cjPts((x) => x / 5, 0, 100), label: 'thinking' }], marks: [{ x: v, y: ans, label: `${v} km/h` }], xLabel: 'v (km/h)', yLabel: 'd (m)', caption: 'the straight line is your reaction; the gap above it is your brakes' } };
       } },
       { id: 'qua-03', band: 2, gen() {
         const v = cjRand(40, 90, 10), ref = (v * v) / 100, ans = (v * v) / 50;
         return { prompt: `Rain doubles braking distance: on a wet road d = v²/50. A car is doing ${v} km/h (its dry-road braking distance would be ${ref} m). How many metres does it need on the wet road?`,
           parts: [{ unit: 'm', type: 'num', tol: 0.05, answer: ans, display: String(ans) }],
           hint: 'Same recipe as the dry road, but divide by 50 instead of 100.',
-          explanation: `${v}²/50 = ${ans} m — double the dry-road ${ref} m. Same car, same brakes; the road changed the equation.` };
+          explanation: `${v}²/50 = ${ans} m — double the dry-road ${ref} m. Same car, same brakes; the road changed the equation.`,
+          vis: { kind: 'plot', series: [{ pts: cjPts((x) => (x * x) / 50, 0, 90), label: 'wet' }, { pts: cjPts((x) => (x * x) / 100, 0, 90), label: 'dry' }], marks: [{ x: v, y: ref, label: 'dry' }], xLabel: 'v (km/h)', yLabel: 'd (m)', caption: 'same speed, twice the road when it rains' } };
       } },
       { id: 'qua-04', band: 2, gen() {
         const u = cjRand(15, 30, 5), t = cjRand(1, 2), ans = u * t - 5 * t * t;
         return { prompt: `A stunt car leaves a ramp going straight up at ${u} m/s. Its height after t seconds is h = ${u}t − 5t². Find its height at t = ${t} s.`,
           parts: [{ unit: 'm', type: 'int', answer: ans, display: String(ans) }],
           hint: 'Substitute t into both terms. Watch the minus sign on the 5t².',
-          explanation: `${u} × ${t} − 5 × ${t}² = ${ans} m up. The −5t² term is gravity's signature — it always wins in the end.` };
+          explanation: `${u} × ${t} − 5 × ${t}² = ${ans} m up. The −5t² term is gravity's signature — it always wins in the end.`,
+          vis: { kind: 'plot', series: [{ pts: cjPts((x) => u * x - 5 * x * x, 0, u / 5) }], marks: [{ x: t, y: ans, label: `t = ${t}` }], xLabel: 't (s)', yLabel: 'h (m)', caption: 'up, over, down — the −5t² term always wins in the end' } };
       } },
       { id: 'qua-05', band: 3, gen() {
         const v = cjRand(30, 60, 10), k = cjPick([2, 3]), ans = k * k;
         return { prompt: `Braking distance is d = v²/100. Car A brakes from ${v} km/h. Car B brakes from ${k} times that speed. How many times longer is Car B's braking distance?`,
           parts: [{ unit: 'times', type: 'int', answer: ans, display: String(ans) }],
           hint: 'Write both distances, then divide. Watch what happens to the k when it goes through the square.',
-          explanation: `(${k}v)²/v² = ${k}² = ${ans}×. Double the speed = 4× the road; triple = 9×. This one line is why speed limits exist.` };
+          explanation: `(${k}v)²/v² = ${k}² = ${ans}×. Double the speed = 4× the road; triple = 9×. This one line is why speed limits exist.`,
+          vis: { kind: 'plot', series: [{ pts: cjPts((x) => (x * x) / 100, 0, k * v) }], marks: [{ x: v, y: (v * v) / 100, label: 'A' }, { x: k * v, y: (k * v * k * v) / 100, label: 'B' }], xLabel: 'v (km/h)', yLabel: 'd (m)', caption: `B goes ${k}× as fast — compare the heights of the two dots on the curve` } };
       } },
       { id: 'qua-06', band: 3, gen() {
         const v = cjRand(40, 80, 10), d = v / 5 + (v * v) / 100;
@@ -768,7 +800,8 @@ const CJ_STOPS = [
         return { prompt: `A dog walks onto the road ${gap} m ahead of a car doing ${v} km/h. Stopping distance is d = v/5 + v²/100. By how many metres does the car stop clear of the dog? (Negative if it can't stop in time.)`,
           parts: [{ unit: 'm', type: 'int', answer: off, display: String(off) }],
           hint: 'First find the stopping distance, then compare it with the gap. The sign of the difference is the whole story.',
-          explanation: `Needs ${d} m, has ${gap} m → ${off} m ${off >= 0 ? 'to spare' : 'short'}. A quadratic, a comparison, and a dog — all in one glance at the road.` };
+          explanation: `Needs ${d} m, has ${gap} m → ${off} m ${off >= 0 ? 'to spare' : 'short'}. A quadratic, a comparison, and a dog — all in one glance at the road.`,
+          vis: { kind: 'plot', series: [{ pts: cjPts((x) => x / 5 + (x * x) / 100, 0, v + 15) }], marks: [{ x: v, y: gap, label: `🐕 at ${gap} m` }], xLabel: 'v (km/h)', yLabel: 'd (m)', caption: 'the dot is the dog; the curve is what the car needs — is the dot above or below the curve?' } };
       } },
     ],
   },
@@ -788,7 +821,8 @@ const CJ_STOPS = [
         return { prompt: `A ramp rises ${rise} m over a horizontal run of 100 m. Find tan θ for the ramp's angle θ (as a decimal).`,
           parts: [{ type: 'num', tol: 0.005, answer: ans, display: String(ans) }],
           hint: 'tan θ = opposite ÷ adjacent = rise ÷ run.',
-          explanation: `tan θ = ${rise}/100 = ${ans}. You've already met this number — it's just a ratio (Stop 6) wearing an angle's name.` };
+          explanation: `tan θ = ${rise}/100 = ${ans}. You've already met this number — it's just a ratio (Stop 6) wearing an angle's name.`,
+          vis: { kind: 'rtri', base: 100, rise, angle: 'θ = ?', baseLabel: 'run 100 m', riseLabel: `rise ${rise} m`, caption: 'tan θ = rise ÷ run (opposite ÷ adjacent)' } };
       } },
       { id: 'trg-02', band: 1, gen() {
         const th = cjRand(5, 20);
@@ -796,7 +830,8 @@ const CJ_STOPS = [
         return { prompt: `A hill road rises ${opp} m for every 100 m of horizontal distance. Find the angle of the hill (nearest degree).`,
           parts: [{ unit: '°', type: 'num', tol: 0.5, answer: th, display: String(th) }],
           hint: "You have opposite and adjacent — that's tan. Use inverse tan to get back to the angle.",
-          explanation: `tan θ = ${opp}/100 → θ = tan⁻¹(${opp / 100}) = ${th}°. Real hills feel steep at angles that sound tiny.` };
+          explanation: `tan θ = ${opp}/100 → θ = tan⁻¹(${opp / 100}) = ${th}°. Real hills feel steep at angles that sound tiny.`,
+          vis: { kind: 'rtri', base: 100, rise: opp, angle: 'θ = ?', baseLabel: '100 m across', riseLabel: `${opp} m up`, caption: 'opposite and adjacent known — tan, then invert to reach the angle' } };
       } },
       { id: 'trg-03', band: 2, gen() {
         const [th, sv] = cjPick([[10, 0.17], [15, 0.26], [20, 0.34], [30, 0.5]]);
@@ -804,7 +839,8 @@ const CJ_STOPS = [
         return { prompt: `A mountain road is ${L} m long and climbs at ${th}° (sin ${th}° ≈ ${sv}). How much height does the car gain over the whole road?`,
           parts: [{ unit: 'm', type: 'num', tol: 0.5, answer: ans, display: String(ans) }],
           hint: 'The road is the hypotenuse; height is opposite. Opposite = hypotenuse × sin θ.',
-          explanation: `${L} × sin ${th}° = ${ans} m gained. The road odometer reads ${L}, but the mountain only counts ${ans}.` };
+          explanation: `${L} × sin ${th}° = ${ans} m gained. The road odometer reads ${L}, but the mountain only counts ${ans}.`,
+          vis: { kind: 'rtri', base: Math.sqrt(Math.max(L * L - ans * ans, 1)), rise: ans, angle: `${th}°`, riseLabel: 'height = ?', hypLabel: `road ${L} m`, caption: 'the road is the hypotenuse; height = road × sin θ' } };
       } },
       { id: 'trg-04', band: 2, gen() {
         const [th, cv] = cjPick([[10, 0.98], [20, 0.94], [30, 0.87]]);
@@ -812,7 +848,8 @@ const CJ_STOPS = [
         return { prompt: `The car drives ${L} m up a road angled at ${th}° (cos ${th}° ≈ ${cv}). How far does the car move on the MAP (the horizontal distance)?`,
           parts: [{ unit: 'm', type: 'num', tol: 0.5, answer: ans, display: String(ans) }],
           hint: 'Map distance is the adjacent side: adjacent = hypotenuse × cos θ.',
-          explanation: `${L} × cos ${th}° = ${ans} m on the map. GPS apps do this sum constantly — maps are flat, roads are not.` };
+          explanation: `${L} × cos ${th}° = ${ans} m on the map. GPS apps do this sum constantly — maps are flat, roads are not.`,
+          vis: { kind: 'rtri', base: ans, rise: Math.sqrt(Math.max(L * L - ans * ans, 1)), angle: `${th}°`, baseLabel: 'map distance = ?', hypLabel: `road ${L} m`, caption: 'map distance is the adjacent side: road × cos θ' } };
       } },
       { id: 'trg-05', band: 3, gen() {
         const th = cjRand(3, 17);
@@ -820,7 +857,8 @@ const CJ_STOPS = [
         return { prompt: `A yellow road sign warns of a ${grade}% grade — the road rises ${grade} m for every 100 m of horizontal distance. What angle is that? (nearest degree)`,
           parts: [{ unit: '°', type: 'num', tol: 0.5, answer: th, display: String(th) }],
           hint: 'The grade is 100 × tan θ. Turn the percentage back into a ratio, then invert the tan.',
-          explanation: `${grade}% → tan θ = ${grade}/100 → θ = ${th}°. Percent (Stop 7), ratio (Stop 6) and trig — one road sign, three stops of the journey.` };
+          explanation: `${grade}% → tan θ = ${grade}/100 → θ = ${th}°. Percent (Stop 7), ratio (Stop 6) and trig — one road sign, three stops of the journey.`,
+          vis: { kind: 'rtri', base: 100, rise: grade, angle: 'θ = ?', baseLabel: '100 across', riseLabel: `${grade} up`, caption: `the yellow sign compressed this whole triangle into one number: ${grade}%` } };
       } },
       { id: 'trg-06', band: 3, gen() {
         const [t1, s1] = cjPick([[10, 0.17], [15, 0.26]]);
@@ -830,7 +868,11 @@ const CJ_STOPS = [
         return { prompt: `The climb to the pass has two parts: ${L1} m of road at ${t1}° (sin ≈ ${s1}), then ${L2} m at ${t2}° (sin ≈ ${s2}). What is the total height gained?`,
           parts: [{ unit: 'm', type: 'num', tol: 0.5, answer: ans, display: String(ans) }],
           hint: 'Each part is its own triangle. Find each height, then add.',
-          explanation: `${L1} × ${s1} + ${L2} × ${s2} = ${ans} m to the top. Big problems are just small triangles added up.` };
+          explanation: `${L1} × ${s1} + ${L2} × ${s2} = ${ans} m to the top. Big problems are just small triangles added up.`,
+          vis: { kind: 'rtri', tris: [
+            { base: Math.sqrt(Math.max(L1 * L1 - L1 * s1 * L1 * s1, 1)), rise: L1 * s1, angle: `${t1}°`, riseLabel: '? m', hypLabel: `${L1} m` },
+            { base: Math.sqrt(Math.max(L2 * L2 - L2 * s2 * L2 * s2, 1)), rise: L2 * s2, angle: `${t2}°`, riseLabel: '? m', hypLabel: `${L2} m` },
+          ], caption: 'two triangles, one climb — find each height, then add' } };
       } },
     ],
   },
@@ -850,28 +892,32 @@ const CJ_STOPS = [
         return { prompt: `A taxi charges ₹${b} to start, plus ₹${a} per km. The final bill is ₹${c}. How many km was the ride?`,
           parts: [{ unit: 'km', type: 'int', answer: x, display: String(x) }],
           hint: "Take the starting charge off the bill first — what's left is all per-km money.",
-          explanation: `(${c} − ${b}) ÷ ${a} = ${x} km. The meter is a linear equation running in real time.` };
+          explanation: `(${c} − ${b}) ÷ ${a} = ${x} km. The meter is a linear equation running in real time.`,
+          vis: { kind: 'bars', unit: '₹', items: [{ label: 'Final bill', value: c }, { label: 'Start charge', value: b }], caption: `the difference between the bars is pure per-km money at ₹${a}/km` } };
       } },
       { id: 'equ-02', band: 1, gen() {
         const a = cjRand(2, 6), x = cjRand(2, 8), c = cjRand(3, 10), b = a * x + c;
         return { prompt: `The tank holds ${b} litres. The engine burns ${a} litres every hour. After how many hours will exactly ${c} litres remain?`,
           parts: [{ unit: 'hours', type: 'int', answer: x, display: String(x) }],
           hint: 'Fuel used so far = start − now. Divide by the burn rate.',
-          explanation: `(${b} − ${c}) ÷ ${a} = ${x} hours. Same equation as the taxi — money out, fuel down, x is always "how long."` };
+          explanation: `(${b} − ${c}) ÷ ${a} = ${x} hours. Same equation as the taxi — money out, fuel down, x is always "how long."`,
+          vis: { kind: 'bars', unit: 'L', items: [{ label: 'Tank now', value: b }, { label: 'Must remain', value: c }], caption: `the engine burns the gap between the bars at ${a} L every hour` } };
       } },
       { id: 'equ-03', band: 2, gen() {
         const s2 = cjRand(40, 60, 10), dv = cjPick([10, 20, 30]), s1 = s2 + dv, t = cjRand(2, 5), g = dv * t;
         return { prompt: `A truck is ${g} km ahead of a car on the highway. The truck does ${s2} km/h; the car does ${s1} km/h. After how many hours does the car catch the truck?`,
           parts: [{ unit: 'hours', type: 'int', answer: t, display: String(t) }],
           hint: `Set the two positions equal: ${s1}t = ${s2}t + ${g}. The speeds' difference does all the work.`,
-          explanation: `${s1}t = ${s2}t + ${g} → t = ${g}/${dv} = ${t} h. Stop 8 solved this with arithmetic; now you own the equation behind it.` };
+          explanation: `${s1}t = ${s2}t + ${g} → t = ${g}/${dv} = ${t} h. Stop 8 solved this with arithmetic; now you own the equation behind it.`,
+          vis: { kind: 'meet', mode: 'chase', aLabel: `car ${s1} km/h`, bLabel: `truck ${s2} km/h`, gapLabel: `gap: ${g} km`, caption: `set the positions equal: ${s1}t = ${s2}t + ${g}` } };
       } },
       { id: 'equ-04', band: 2, gen() {
         const a = cjRand(400, 700, 50), dc = cjPick([50, 100]), c = a + dc, x = cjRand(2, 6), d = cjRand(200, 500, 50), b = d + dc * x;
         return { prompt: `CarRent A: ₹${a} per day plus ₹${b} fixed fee. CarRent B: ₹${c} per day plus ₹${d} fixed fee. For how many days do the two deals cost exactly the same?`,
           parts: [{ unit: 'days', type: 'int', answer: x, display: String(x) }],
           hint: 'Set the two total costs equal and let the fixed fees fight the daily rates.',
-          explanation: `${a}x + ${b} = ${c}x + ${d} → x = ${x} days. Shorter trip: pick the low fixed fee. Longer: the low daily rate. The equation finds the crossover.` };
+          explanation: `${a}x + ${b} = ${c}x + ${d} → x = ${x} days. Shorter trip: pick the low fixed fee. Longer: the low daily rate. The equation finds the crossover.`,
+          vis: { kind: 'plot', series: [{ pts: cjPts((z) => a * z + b, 0, x + 3, 2), label: 'A' }, { pts: cjPts((z) => c * z + d, 0, x + 3, 2), label: 'B' }], marks: [{ x, y: a * x + b, label: '?' }], xLabel: 'days', yLabel: '₹', caption: 'two cost lines — the crossover day is where they meet' } };
       } },
       { id: 'equ-05', band: 3, gen() {
         const s1 = cjRand(40, 70, 10), s2 = cjRand(30, 60, 10), t = cjRand(2, 4), D = (s1 + s2) * t;
@@ -881,7 +927,8 @@ const CJ_STOPS = [
             { label: "Distance from first car's town", unit: 'km', type: 'int', answer: s1 * t, display: String(s1 * t) },
           ],
           hint: `Two unknowns, two facts: their distances add to ${D}, and their times are equal. That's a system.`,
-          explanation: `(${s1} + ${s2})t = ${D} → t = ${t} h; the first car covers ${s1} × ${t} = ${s1 * t} km. Two equations shook hands — right where the cars do.` };
+          explanation: `(${s1} + ${s2})t = ${D} → t = ${t} h; the first car covers ${s1} × ${t} = ${s1 * t} km. Two equations shook hands — right where the cars do.`,
+          vis: { kind: 'meet', mode: 'toward', aLabel: `${s1} km/h`, bLabel: `${s2} km/h`, gapLabel: `${D} km apart`, caption: `together they close ${s1} + ${s2} km every hour` } };
       } },
       { id: 'equ-06', band: 3, gen() {
         const p = cjRand(30, 80, 10), q = cjRand(20, 60, 10);
@@ -894,7 +941,8 @@ const CJ_STOPS = [
             { label: 'Parking rate', unit: '₹/hour', type: 'int', answer: q, display: String(q) },
           ],
           hint: 'Two days, two equations. Scale one so the tolls match, subtract, and parking stands alone.',
-          explanation: `Solving the pair gives toll = ₹${p}, parking = ₹${q}/h. Two receipts were enough to reveal both prices — that's the power of a system.` };
+          explanation: `Solving the pair gives toll = ₹${p}, parking = ₹${q}/h. Two receipts were enough to reveal both prices — that's the power of a system.`,
+          vis: { kind: 'bars', unit: '₹', items: [{ label: `Mon: ${a1} toll + ${b1} h parking`, value: m }, { label: `Tue: ${a2} toll + ${b2} h parking`, value: n }], caption: 'two receipts, two hidden prices — a system of two equations' } };
       } },
     ],
   },
@@ -914,42 +962,48 @@ const CJ_STOPS = [
         return { prompt: `A car accelerating from rest has position s(t) = ${a}t² metres after t seconds. Its speedometer reads s′(t). Find the speed at t = ${t} s.`,
           parts: [{ unit: 'm/s', type: 'num', tol: 0.5, answer: ans, display: String(ans) }],
           hint: 'Power rule: bring the 2 down, drop the power by one. Then substitute t.',
-          explanation: `s′(t) = 2 × ${a}t → at t = ${t}: ${ans} m/s. You just computed what the needle shows.` };
+          explanation: `s′(t) = 2 × ${a}t → at t = ${t}: ${ans} m/s. You just computed what the needle shows.`,
+          vis: { kind: 'plot', series: [{ pts: cjPts((x) => a * x * x, 0, t + 2) }], marks: [{ x: t, y: a * t * t, label: `t = ${t}` }], xLabel: 't (s)', yLabel: 's (m)', caption: 'the speed is how STEEPLY the curve climbs at the red dot' } };
       } },
       { id: 'dif-02', band: 1, gen() {
         const a = cjRand(1, 3), t = cjRand(1, 3), ans = 3 * a * t * t;
         return { prompt: `A drag racer's position is s(t) = ${a}t³ metres. Find its speed s′(t) at t = ${t} s.`,
           parts: [{ unit: 'm/s', type: 'num', tol: 0.5, answer: ans, display: String(ans) }],
           hint: 'Same rule, bigger power: 3 comes down, t³ becomes t².',
-          explanation: `s′(t) = 3 × ${a}t² → ${ans} m/s at t = ${t}. A cubic position means speed grows with t² — that's why drag racing is short.` };
+          explanation: `s′(t) = 3 × ${a}t² → ${ans} m/s at t = ${t}. A cubic position means speed grows with t² — that's why drag racing is short.`,
+          vis: { kind: 'plot', series: [{ pts: cjPts((x) => a * x * x * x, 0, t + 1) }], marks: [{ x: t, y: a * t * t * t, label: `t = ${t}` }], xLabel: 't (s)', yLabel: 's (m)', caption: 'a cubic climbs even harder — its slope grows with t²' } };
       } },
       { id: 'dif-03', band: 2, gen() {
         const a = cjRand(1, 4), b = cjRand(5, 15), t = cjRand(1, 4), ans = 2 * a * t + b;
         return { prompt: `A car joins the highway with position s(t) = ${a}t² + ${b}t metres (it entered already moving at ${b} m/s). Find its speed at t = ${t} s.`,
           parts: [{ unit: 'm/s', type: 'num', tol: 0.5, answer: ans, display: String(ans) }],
           hint: 'Differentiate each term on its own: t² by the power rule, and the bt term becomes just b.',
-          explanation: `s′(t) = 2 × ${a}t + ${b} → ${ans} m/s. The +${b} never dies in the derivative — the rolling start is with the car forever.` };
+          explanation: `s′(t) = 2 × ${a}t + ${b} → ${ans} m/s. The +${b} never dies in the derivative — the rolling start is with the car forever.`,
+          vis: { kind: 'plot', series: [{ pts: cjPts((x) => a * x * x + b * x, 0, t + 2) }], marks: [{ x: t, y: a * t * t + b * t, label: `t = ${t}` }], xLabel: 't (s)', yLabel: 's (m)', caption: `even at t = 0 the curve is already climbing — that is the rolling start (${b} m/s)` } };
       } },
       { id: 'dif-04', band: 2, gen() {
         const a = cjRand(1, 3), b = cjRand(2, 8), t = cjRand(1, 3), ans = 2 * a * t + b;
         return { prompt: `A car's speed is v(t) = ${a}t² + ${b}t m/s during an overtake. Acceleration is v′(t). Find the acceleration at t = ${t} s.`,
           parts: [{ unit: 'm/s²', type: 'num', tol: 0.5, answer: ans, display: String(ans) }],
           hint: "Same power rule — you're just one storey higher: speed's derivative is acceleration.",
-          explanation: `v′(t) = 2 × ${a}t + ${b} → ${ans} m/s². Position → speed → acceleration: the same staircase, climbed twice.` };
+          explanation: `v′(t) = 2 × ${a}t + ${b} → ${ans} m/s². Position → speed → acceleration: the same staircase, climbed twice.`,
+          vis: { kind: 'plot', series: [{ pts: cjPts((x) => a * x * x + b * x, 0, t + 2) }], marks: [{ x: t, y: a * t * t + b * t, label: `t = ${t}` }], xLabel: 't (s)', yLabel: 'v (m/s)', caption: 'careful: this curve is already SPEED — its slope is acceleration' } };
       } },
       { id: 'dif-05', band: 3, gen() {
         const b = cjRand(40, 80, 4), c = cjRand(100, 300, 50), ans = b / 2;
         return { prompt: `A car's fuel economy (km per litre) at speed v is E(v) = −v² + ${b}v + ${c} (in test units). At what speed v is the economy at its best?`,
           parts: [{ unit: 'km/h', type: 'int', answer: ans, display: String(ans) }],
           hint: "Best = top of the curve = where E′(v) = 0. Differentiate, set to zero, solve.",
-          explanation: `E′(v) = −2v + ${b} = 0 → v = ${ans} km/h. There really is a sweet-spot speed — your fuel bill knows calculus even if the driver doesn't.` };
+          explanation: `E′(v) = −2v + ${b} = 0 → v = ${ans} km/h. There really is a sweet-spot speed — your fuel bill knows calculus even if the driver doesn't.`,
+          vis: { kind: 'plot', series: [{ pts: cjPts((x) => -x * x + b * x + c, 0, b) }], marks: [{ x: ans, y: -ans * ans + b * ans + c, label: 'v = ?' }], xLabel: 'v (km/h)', yLabel: 'economy', caption: 'best economy = the very top of the curve, where the slope is exactly zero' } };
       } },
       { id: 'dif-06', band: 3, gen() {
         const u = cjRand(20, 60, 10), ans = (u * u) / 20;
         return { prompt: `The stunt car from Stop 11 is back: height h(t) = ${u}t − 5t². Find the maximum height it reaches.`,
           parts: [{ unit: 'm', type: 'num', tol: 0.5, answer: ans, display: String(ans) }],
           hint: 'Peak = where h′(t) = 0. Find that t first, then put it back into h.',
-          explanation: `h′ = ${u} − 10t = 0 → t = ${u / 10} s → h = ${ans} m. In Stop 11 you could only evaluate this curve; now you command its peak.` };
+          explanation: `h′ = ${u} − 10t = 0 → t = ${u / 10} s → h = ${ans} m. In Stop 11 you could only evaluate this curve; now you command its peak.`,
+          vis: { kind: 'plot', series: [{ pts: cjPts((x) => u * x - 5 * x * x, 0, u / 5) }], marks: [{ x: u / 10, y: ans, label: 'peak = ?' }], xLabel: 't (s)', yLabel: 'h (m)', caption: 'the peak is exactly where h′(t) = 0 — the curve stops climbing for one instant' } };
       } },
     ],
   },
@@ -969,14 +1023,16 @@ const CJ_STOPS = [
         return { prompt: `A car's speed is v(t) = ${c}t m/s. Its distance function has the form s(t) = A·t². Find A (the coefficient).`,
           parts: [{ type: 'int', answer: ans, display: String(ans) }],
           hint: 'Integrate: raise the power to t², divide by the new power 2.',
-          explanation: `∫${c}t dt = (${c}/2)t² → A = ${ans}. Check it by differentiating back — you get ${c}t again. The two gauges agree.` };
+          explanation: `∫${c}t dt = (${c}/2)t² → A = ${ans}. Check it by differentiating back — you get ${c}t again. The two gauges agree.`,
+          vis: { kind: 'plot', area: true, series: [{ pts: cjPts((x) => c * x, 0, 4, 2) }], xLabel: 't (s)', yLabel: 'v (m/s)', caption: 'distance = the shaded area under the speed line — that is what integrating means' } };
       } },
       { id: 'int-02', band: 1, gen() {
         const a = cjPick([3, 6, 9, 12]), ans = a / 3;
         return { prompt: `A rocket-sled test car has speed v(t) = ${a}t². Its distance is s(t) = B·t³. Find B.`,
           parts: [{ type: 'int', answer: ans, display: String(ans) }],
           hint: 'Power up to t³, divide by 3.',
-          explanation: `∫${a}t² dt = (${a}/3)t³ → B = ${ans}. Speed with a square in it means distance with a cube — growth stacked on growth.` };
+          explanation: `∫${a}t² dt = (${a}/3)t³ → B = ${ans}. Speed with a square in it means distance with a cube — growth stacked on growth.`,
+          vis: { kind: 'plot', area: true, series: [{ pts: cjPts((x) => a * x * x, 0, 3) }], xLabel: 't (s)', yLabel: 'v (m/s)', caption: 'the area under a curving speed graph — integration adds up every sliver' } };
       } },
       { id: 'int-03', band: 2, gen() {
         const a = cjPick([2, 4, 6]), b = cjRand(5, 15), k = cjRand(2, 4);
@@ -984,7 +1040,8 @@ const CJ_STOPS = [
         return { prompt: `Pulling away from the lights, a car's speed is v(t) = ${a}t + ${b} m/s. How far does it travel in the first ${k} seconds?`,
           parts: [{ unit: 'm', type: 'int', answer: ans, display: String(ans) }],
           hint: `Distance = ∫₀^${k} v dt. Integrate each term, then evaluate at ${k} (the 0 end vanishes).`,
-          explanation: `(${a}/2) × ${k}² + ${b} × ${k} = ${ans} m. The odometer just did this integral without telling you.` };
+          explanation: `(${a}/2) × ${k}² + ${b} × ${k} = ${ans} m. The odometer just did this integral without telling you.`,
+          vis: { kind: 'plot', area: true, series: [{ pts: cjPts((x) => a * x + b, 0, k, 2) }], xLabel: 't (s)', yLabel: 'v (m/s)', caption: `distance for the first ${k} s = the shaded area (a rectangle + a triangle, if you look closely)` } };
       } },
       { id: 'int-04', band: 2, gen() {
         const a = cjPick([3, 6]), b = cjRand(10, 20, 2), k = cjRand(2, 3);
@@ -992,14 +1049,16 @@ const CJ_STOPS = [
         return { prompt: `During a hard overtake the car's speed is v(t) = ${a}t² + ${b} m/s. How far does it cover between t = 0 and t = ${k} s?`,
           parts: [{ unit: 'm', type: 'int', answer: ans, display: String(ans) }],
           hint: `Two terms, two integrals: at³/3 and bt. Evaluate both at ${k}.`,
-          explanation: `(${a}/3) × ${k}³ + ${b} × ${k} = ${ans} m of road used. Overtakes cost distance — the integral is the bill.` };
+          explanation: `(${a}/3) × ${k}³ + ${b} × ${k} = ${ans} m of road used. Overtakes cost distance — the integral is the bill.`,
+          vis: { kind: 'plot', area: true, series: [{ pts: cjPts((x) => a * x * x + b, 0, k) }], xLabel: 't (s)', yLabel: 'v (m/s)', caption: 'the overtake, drawn: its area is the road it used' } };
       } },
       { id: 'int-05', band: 3, gen() {
         const k = cjRand(2, 6), num = k * k * k, disp = cjFracStr(num, 6), ans = num / 6;
         return { prompt: `During an overtake lasting ${k} seconds, the car's EXTRA speed (above cruise) is v(t) = t(${k} − t) m/s — zero at the start, zero at the end, biggest in the middle. How much extra distance does the overtake add? (Fraction allowed.)`,
           parts: [{ unit: 'm', type: 'frac', tol: 0.001, answer: ans, display: disp }],
           hint: `Extra distance = area under the extra-speed curve = ∫₀^${k} (${k}t − t²) dt.`,
-          explanation: `${k}³/2 − ${k}³/3 = ${disp} m extra. The area under a speed hump IS the distance it buys you — geometry and motion in one picture.` };
+          explanation: `${k}³/2 − ${k}³/3 = ${disp} m extra. The area under a speed hump IS the distance it buys you — geometry and motion in one picture.`,
+          vis: { kind: 'plot', area: true, series: [{ pts: cjPts((x) => x * (k - x), 0, k) }], xLabel: 't (s)', yLabel: 'extra v (m/s)', caption: 'the speed hump: zero at both ends, biggest in the middle — its area is the extra distance' } };
       } },
       { id: 'int-06', band: 3, gen() {
         const a = cjRand(1, 3), b = cjRand(4, 10, 2), t = cjRand(2, 4);
@@ -1010,7 +1069,8 @@ const CJ_STOPS = [
             { label: 'Distance from the integral (part 2)', unit: 'm', type: 'int', answer: s, display: String(s) },
           ],
           hint: 'Part 2 should look familiar — you started there.',
-          explanation: `v(${t}) = ${v} m/s; ∫₀^${t} v dt = ${s} m = s(${t}). Differentiate then integrate and you come home. The odometer and speedometer were the same function all along — Stop 1's secret, kept.` };
+          explanation: `v(${t}) = ${v} m/s; ∫₀^${t} v dt = ${s} m = s(${t}). Differentiate then integrate and you come home. The odometer and speedometer were the same function all along — Stop 1's secret, kept.`,
+          vis: { kind: 'plot', area: true, series: [{ pts: cjPts((x) => 2 * a * x + b, 0, t, 2) }], xLabel: 't (s)', yLabel: 'v (m/s)', caption: 'this line is the speedometer (the derivative you found) — its shaded area walks you back to the odometer' } };
       } },
     ],
   },
@@ -1035,7 +1095,8 @@ const CJ_STOPS = [
         return { prompt: `The equation ${v.eq} describes part of the car. What is the ORDER of this differential equation (the highest derivative present)?`,
           parts: [{ type: 'int', answer: v.ans, display: String(v.ans) }],
           hint: 'Order = the tallest derivative in the room. A squared FIRST derivative is still first-order.',
-          explanation: `Highest derivative: order ${v.ans}. The suspension needs order 2 — position AND how fast it's bouncing both matter.` };
+          explanation: `Highest derivative: order ${v.ans}. The suspension needs order 2 — position AND how fast it's bouncing both matter.`,
+          vis: { kind: 'eqmap', eq: v.eq, note: 'find the TALLEST derivative in the equation — its height is the order (a squared FIRST derivative is still first-order)' } };
       } },
       { id: 'deq-02', band: 1, gen() {
         const k = cjRand(1, 3), vs = cjPick([60, 80, 100]);
@@ -1045,7 +1106,8 @@ const CJ_STOPS = [
             { label: 'dv/dt approaches (part 2)', type: 'int', answer: 0, display: '0' },
           ],
           hint: `Look at the gap (${vs} − v). What is it worth when v is nearly ${vs}?`,
-          explanation: `Order 1; as v → ${vs}, the gap → 0, so dv/dt → 0 — the car stops accelerating exactly when it arrives. That's the whole design, in one equation.` };
+          explanation: `Order 1; as v → ${vs}, the gap → 0, so dv/dt → 0 — the car stops accelerating exactly when it arrives. That's the whole design, in one equation.`,
+          vis: { kind: 'plot', series: [{ pts: cjPts((x) => vs - (vs - 20) * Math.exp(-k * x), 0, 5) }], xLabel: 't', yLabel: 'v (km/h)', caption: `the speed glides up to ${vs} and levels off — the closer it gets, the smaller dv/dt becomes` } };
       } },
       { id: 'deq-03', band: 2, gen() {
         const v = cjPick([
@@ -1057,7 +1119,8 @@ const CJ_STOPS = [
         return { prompt: `For the equation ${v.eq}, state its DEGREE (the power of the highest-order derivative).`,
           parts: [{ type: 'int', answer: v.ans, display: String(v.ans) }],
           hint: 'First find the highest-order derivative — the degree is ITS power, nobody else\'s.',
-          explanation: `Degree = ${v.ans}. Order asks "how tall"; degree asks "how strong is the tallest one."` };
+          explanation: `Degree = ${v.ans}. Order asks "how tall"; degree asks "how strong is the tallest one."`,
+          vis: { kind: 'eqmap', eq: v.eq, note: "step 1: find the highest-order derivative · step 2: the degree is ITS power — nobody else's" } };
       } },
       { id: 'deq-04', band: 2, gen() {
         const v = cjPick([
@@ -1070,7 +1133,8 @@ const CJ_STOPS = [
         return { prompt: `A coasting car slows by ${v.de}. A student claims ${v.sol} is a solution. Are they right? (yes/no)`,
           parts: [{ type: 'text', answers: ['yes', 'no'].filter((x) => x === ansTxt), answer: 0, display: ansTxt }],
           hint: "Don't solve — CHECK. Differentiate the claim and see if both sides agree.",
-          explanation: `Substituting: ${ansTxt}. Verifying is the engineer's move — you rarely solve the suspension's equation, but you always check the proposed answer.` };
+          explanation: `Substituting: ${ansTxt}. Verifying is the engineer's move — you rarely solve the suspension's equation, but you always check the proposed answer.`,
+          vis: { kind: 'eqmap', eq: `${v.de}   |   claim: ${v.sol}`, note: "don't solve — CHECK: differentiate the claim, substitute it into the left side, and see if both sides agree" } };
       } },
       { id: 'deq-05', band: 3, gen() {
         const a = cjRand(1, 4), b = cjRand(1, 4);
@@ -1081,14 +1145,16 @@ const CJ_STOPS = [
             { label: 'Coefficient of t', type: 'int', answer: b, display: String(b) },
           ],
           hint: "Integrate the right side term by term — and never forget the +C: it's the speed you started with.",
-          explanation: `v(t) = ${coefDisp}t² + ${b}t + C. The +C is not decoration — it's Stop 15's lesson wearing initial-condition clothes.` };
+          explanation: `v(t) = ${coefDisp}t² + ${b}t + C. The +C is not decoration — it's Stop 15's lesson wearing initial-condition clothes.`,
+          vis: { kind: 'plot', area: true, series: [{ pts: cjPts((x) => a * x + b, 0, 4, 2) }], xLabel: 't (s)', yLabel: 'dv/dt (m/s²)', caption: 'this line is the ACCELERATION — integrating it (the area) builds the speed function, plus the +C you started with' } };
       } },
       { id: 'deq-06', band: 3, gen() {
         const u = cjRand(20, 50, 10);
         return { prompt: `The ramp-jump height h(t) = ${u}t − 5t² (from Stops 11 and 14) satisfies a differential equation: d²h/dt² = ?  Differentiate h twice and state the constant the stunt car has obeyed all along.`,
           parts: [{ unit: 'm/s²', type: 'int', answer: -10, display: '−10' }],
           hint: `h′ = ${u} − 10t. Now differentiate once more — what's left?`,
-          explanation: `h″ = −10, every time, for every launch speed. One differential equation stood behind every stunt-jump question since Stop 11 — you've been solving it all journey without knowing its name.` };
+          explanation: `h″ = −10, every time, for every launch speed. One differential equation stood behind every stunt-jump question since Stop 11 — you've been solving it all journey without knowing its name.`,
+          vis: { kind: 'plot', series: [{ pts: cjPts((x) => u * x - 5 * x * x, 0, u / 5) }], xLabel: 't (s)', yLabel: 'h (m)', caption: 'the stunt-jump curve one last time — differentiate it twice and every point gives the same constant' } };
       } },
     ],
   },
@@ -1243,6 +1309,10 @@ const CJ_DRILL_ADAPTERS = {
 function cjEmojiRow(n, emoji) {
   return Array.from({ length: n }).fill(emoji).join(' ');
 }
+
+/** Sample a function into [x, f(x)] points for the 'plot' visual. */
+const cjPts = (f, x0, x1, n = 24) =>
+  Array.from({ length: n + 1 }, (_, i) => { const x = x0 + ((x1 - x0) * i) / n; return [x, f(x)]; });
 
 function cjBlocksStr(v) {
   const h = Math.floor(v / 100), t = Math.floor((v % 100) / 10), o = v % 10;
@@ -1404,6 +1474,165 @@ function CjVisual({ spec }) {
           <span className="cj-vis-glabel">wheel</span>
         </div>
         <p className="cj-vis-caption">count the teeth marks on each gear</p>
+      </div>
+    );
+  }
+  if (spec.kind === 'battery') {
+    // Battery/percent bar: segments fill left→right; anything unfilled stays empty.
+    return (
+      <div className="cj-visual">
+        <div className="cj-vis-row">
+          <span className="cj-vis-batt">
+            {spec.segs.map((s, i) => (
+              <span key={i} className={`cj-vis-battfill ${s.cls}`} style={{ width: `${s.pct}%` }}>{s.pct >= 12 ? `${s.pct}%` : ''}</span>
+            ))}
+          </span>
+          <span className="cj-vis-battcap" />
+        </div>
+        {spec.caption && <p className="cj-vis-caption">{spec.caption}</p>}
+      </div>
+    );
+  }
+  if (spec.kind === 'dst') {
+    // The classic D / S×T dashboard triangle; the unknown corner shows "?".
+    const txt = (key, val) => (spec.unknown === key ? '= ?' : `= ${val}`);
+    return (
+      <div className="cj-visual">
+        <div className="cj-vis-row gears">
+          <svg viewBox="0 0 200 122" className="cj-vis-dst" aria-hidden="true">
+            <polygon points="100,8 12,112 188,112" fill="none" stroke="currentColor" strokeWidth="2" />
+            <line x1="47" y1="72" x2="153" y2="72" stroke="currentColor" strokeWidth="1.5" />
+            <line x1="100" y1="72" x2="100" y2="112" stroke="currentColor" strokeWidth="1.5" />
+            <text x="100" y="56" textAnchor="middle" fontSize="14" fill="currentColor" fontWeight={spec.unknown === 'd' ? 700 : 400}>D {txt('d', spec.d)}</text>
+            <text x="70" y="98" textAnchor="middle" fontSize="12" fill="currentColor" fontWeight={spec.unknown === 's' ? 700 : 400}>S {txt('s', spec.s)}</text>
+            <text x="132" y="98" textAnchor="middle" fontSize="12" fill="currentColor" fontWeight={spec.unknown === 't' ? 700 : 400}>T {txt('t', spec.t)}</text>
+          </svg>
+        </div>
+        <p className="cj-vis-caption">D = S × T · S = D ÷ T · T = D ÷ S{spec.caption ? ` — ${spec.caption}` : ''}</p>
+      </div>
+    );
+  }
+  if (spec.kind === 'circle') {
+    return (
+      <div className="cj-visual">
+        <div className="cj-vis-row gears">
+          <svg viewBox="0 0 120 122" className="cj-vis-circle" aria-hidden="true">
+            <circle cx="60" cy="52" r="40" fill="none" stroke="currentColor" strokeWidth="2" />
+            {spec.d
+              ? <line x1="20" y1="52" x2="100" y2="52" stroke="var(--clr-accent)" strokeWidth="2" />
+              : <line x1="60" y1="52" x2="100" y2="52" stroke="var(--clr-accent)" strokeWidth="2" />}
+            <text x="60" y="44" textAnchor="middle" fontSize="11" fill="currentColor">{spec.label}</text>
+            <line x1="8" y1="112" x2="112" y2="112" stroke="currentColor" strokeWidth="2" strokeDasharray="5 3" />
+            <text x="60" y="106" textAnchor="middle" fontSize="9" fill="currentColor">one turn = one circumference</text>
+          </svg>
+        </div>
+        {spec.caption && <p className="cj-vis-caption">{spec.caption}</p>}
+      </div>
+    );
+  }
+  if (spec.kind === 'sector') {
+    const rad = (spec.deg * Math.PI) / 180;
+    const x = 60 + 44 * Math.sin(rad), y = 60 - 44 * Math.cos(rad);
+    const large = spec.deg > 180 ? 1 : 0;
+    return (
+      <div className="cj-visual">
+        <div className="cj-vis-row gears">
+          <svg viewBox="0 0 120 132" className="cj-vis-circle" aria-hidden="true">
+            <circle cx="60" cy="60" r="44" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.35" />
+            <path d={`M 60 60 L 60 16 A 44 44 0 ${large} 1 ${x} ${y} Z`}
+              fill={spec.arcOnly ? 'none' : 'var(--clr-accent)'} fillOpacity="0.45"
+              stroke="var(--clr-accent)" strokeWidth={spec.arcOnly ? 3 : 1.5} />
+            <text x="60" y="128" textAnchor="middle" fontSize="11" fill="currentColor">r = {spec.r} cm · {spec.deg}°</text>
+          </svg>
+        </div>
+        {spec.caption && <p className="cj-vis-caption">{spec.caption}</p>}
+      </div>
+    );
+  }
+  if (spec.kind === 'rtri') {
+    const tris = spec.tris || [spec];
+    return (
+      <div className="cj-visual">
+        <div className="cj-vis-row gears">
+          {tris.map((t, i) => {
+            const b = Math.max(Number(t.base) || 100, 0.001), r = Math.max(Number(t.rise) || 55, 0.001);
+            const W = 240, H = 118, pad = 14;
+            const sc = Math.min(150 / b, (H - 2 * pad) / r);
+            const bw = Math.max(70, b * sc), rh = Math.max(36, r * sc);
+            const x0 = pad, y0 = H - pad;
+            const ang = Math.atan2(rh, bw);
+            return (
+              <svg key={i} viewBox={`0 0 ${W} ${H + 16}`} className="cj-vis-rtri" aria-hidden="true">
+                <polygon points={`${x0},${y0} ${x0 + bw},${y0} ${x0 + bw},${y0 - rh}`} fill="var(--clr-accent)" opacity="0.18" />
+                <polyline points={`${x0},${y0} ${x0 + bw},${y0} ${x0 + bw},${y0 - rh} ${x0},${y0}`} fill="none" stroke="currentColor" strokeWidth="2" />
+                <rect x={x0 + bw - 11} y={y0 - 11} width="11" height="11" fill="none" stroke="currentColor" strokeWidth="1" />
+                {t.angle != null && <path d={`M ${x0 + 30} ${y0} A 30 30 0 0 0 ${x0 + 30 * Math.cos(ang)} ${y0 - 30 * Math.sin(ang)}`} fill="none" stroke="var(--clr-accent)" strokeWidth="2" />}
+                {t.angle != null && <text x={x0 + 36} y={y0 - 6} fontSize="11" fill="currentColor">{t.angle}</text>}
+                {t.baseLabel && <text x={x0 + bw / 2} y={y0 + 14} textAnchor="middle" fontSize="11" fill="currentColor">{t.baseLabel}</text>}
+                {t.riseLabel && <text x={x0 + bw + 5} y={y0 - rh / 2} fontSize="11" fill="currentColor">{t.riseLabel}</text>}
+                {t.hypLabel && <text x={x0 + bw / 2 - 8} y={y0 - rh / 2 - 10} textAnchor="end" fontSize="11" fill="currentColor">{t.hypLabel}</text>}
+              </svg>
+            );
+          })}
+        </div>
+        {spec.caption && <p className="cj-vis-caption">{spec.caption}</p>}
+      </div>
+    );
+  }
+  if (spec.kind === 'plot') {
+    const W = 260, H = 150, pad = 26;
+    const all = spec.series.flatMap((s) => s.pts).concat((spec.marks || []).map((m) => [m.x, m.y]));
+    const xMin = Math.min(0, ...all.map((p) => p[0])), xMax = Math.max(...all.map((p) => p[0]));
+    const yMin = Math.min(0, ...all.map((p) => p[1])), yMax = Math.max(...all.map((p) => p[1]));
+    const px = (x) => pad + ((x - xMin) / (xMax - xMin || 1)) * (W - 2 * pad);
+    const py = (y) => H - pad - ((y - yMin) / (yMax - yMin || 1)) * (H - 2 * pad);
+    return (
+      <div className="cj-visual">
+        <svg viewBox={`0 0 ${W} ${H}`} className="cj-vis-plot" aria-hidden="true">
+          <line x1={pad} y1={py(0)} x2={W - pad + 8} y2={py(0)} stroke="currentColor" strokeWidth="1" opacity="0.6" />
+          <line x1={px(0)} y1={pad - 8} x2={px(0)} y2={H - pad} stroke="currentColor" strokeWidth="1" opacity="0.6" />
+          {spec.series.map((s, i) => (
+            <g key={i}>
+              {spec.area && (
+                <polygon
+                  points={`${px(s.pts[0][0])},${py(0)} ${s.pts.map((p) => `${px(p[0])},${py(p[1])}`).join(' ')} ${px(s.pts[s.pts.length - 1][0])},${py(0)}`}
+                  fill="var(--clr-accent)" opacity="0.3"
+                />
+              )}
+              <polyline points={s.pts.map((p) => `${px(p[0])},${py(p[1])}`).join(' ')} fill="none" stroke={i === 0 ? 'var(--clr-accent)' : '#3b82c4'} strokeWidth="2.5" />
+              {s.label && <text x={px(s.pts[s.pts.length - 1][0]) - 4} y={py(s.pts[s.pts.length - 1][1]) - 6} textAnchor="end" fontSize="11" fill="currentColor">{s.label}</text>}
+            </g>
+          ))}
+          {(spec.marks || []).map((m, i) => (
+            <g key={i}>
+              <circle cx={px(m.x)} cy={py(m.y)} r="4" fill="var(--clr-wrong, #c0392b)" />
+              <text x={px(m.x) + 6} y={py(m.y) - 7} fontSize="11" fill="currentColor">{m.label}</text>
+            </g>
+          ))}
+          <text x={W - pad + 6} y={H - 8} textAnchor="end" fontSize="10" fill="currentColor">{spec.xLabel}</text>
+          <text x={4} y={pad - 12} fontSize="10" fill="currentColor">{spec.yLabel}</text>
+        </svg>
+        {spec.caption && <p className="cj-vis-caption">{spec.caption}</p>}
+      </div>
+    );
+  }
+  if (spec.kind === 'meet') {
+    return (
+      <div className="cj-visual">
+        <div className="cj-vis-meet">
+          <span className="cj-vis-meetcar">{spec.mode === 'toward' ? '🚗' : '🚗'}<br /><small>{spec.aLabel}</small></span>
+          <span className="cj-vis-road">{spec.mode === 'toward' ? '⟶' : '⟶'} {spec.gapLabel} {spec.mode === 'toward' ? '⟵' : '⟶'}</span>
+          <span className="cj-vis-meetcar">{spec.mode === 'toward' ? '🚙' : '🚚'}<br /><small>{spec.bLabel}</small></span>
+        </div>
+        {spec.caption && <p className="cj-vis-caption">{spec.caption}</p>}
+      </div>
+    );
+  }
+  if (spec.kind === 'eqmap') {
+    return (
+      <div className="cj-visual">
+        <div className="cj-vis-eq">{spec.eq}</div>
+        {spec.note && <p className="cj-vis-caption">{spec.note}</p>}
       </div>
     );
   }

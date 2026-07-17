@@ -357,6 +357,51 @@
 .cj-vis-cell.dim { background: var(--clr-accent); border-color: var(--clr-accent); opacity: 0.3; }
 .cj-vis-gear { width: 84px; height: 84px; color: var(--clr-text); }
 
+/* Stops 7–16 visual kinds */
+.cj-vis-batt {
+  flex: 1;
+  min-width: 160px;
+  max-width: 340px;
+  height: 30px;
+  border: 2px solid var(--clr-text-soft);
+  border-radius: 6px;
+  display: flex;
+  overflow: hidden;
+  background: var(--clr-surface);
+}
+.cj-vis-battfill { height: 100%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; }
+.cj-vis-battfill.a { background: var(--clr-accent); }
+.cj-vis-battfill.q { background: #3b82c4; }
+.cj-vis-battfill.dim { background: var(--clr-accent); opacity: 0.3; }
+.cj-vis-battcap { width: 6px; height: 14px; background: var(--clr-text-soft); border-radius: 0 3px 3px 0; margin-left: 2px; align-self: center; }
+.cj-vis-dst { width: 190px; height: auto; color: var(--clr-text); }
+.cj-vis-circle { width: 130px; height: auto; color: var(--clr-text); }
+.cj-vis-rtri { width: 250px; max-width: 100%; height: auto; color: var(--clr-text); }
+.cj-vis-plot { width: 100%; max-width: 320px; height: auto; display: block; margin: 0 auto; color: var(--clr-text); }
+.cj-vis-meet { display: flex; align-items: center; gap: 10px; justify-content: center; text-align: center; }
+.cj-vis-meetcar { font-size: 1.5rem; line-height: 1.2; }
+.cj-vis-meetcar small { font-size: 0.72rem; color: var(--clr-text-soft); }
+.cj-vis-road {
+  flex: 1;
+  max-width: 260px;
+  border-bottom: 3px dashed var(--clr-border);
+  padding-bottom: 4px;
+  font-size: 0.8rem;
+  color: var(--clr-text-soft);
+  text-align: center;
+  white-space: nowrap;
+}
+.cj-vis-eq {
+  font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+  font-size: 1.02rem;
+  text-align: center;
+  padding: 10px 12px;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  background: var(--clr-surface);
+  overflow-x: auto;
+}
+
 @media (max-width: 520px) {
   .cj-stop { flex-wrap: wrap; }
   .cj-stop-action { margin-left: auto; }
