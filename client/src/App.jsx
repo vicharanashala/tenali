@@ -75,10 +75,13 @@ import VisualMathLabRedux, {
 import CoordinateGrid from './components/CoordinateGrid';
 import LanguageDashboard from './language/LanguageDashboard'
 import { VOCAB_CORPUS } from './vocabCorpus'
+import EquationSandboxApp from './lib/EquationSandboxApp.jsx';
+import QFormulaConceptApp from './lib/concept/QFormulaConceptApp.jsx';
+import SimulConceptApp from './lib/simul-concept/SimulConceptApp.jsx';
 import DiagnosticQuiz from './lib/DiagnosticQuiz.jsx';
 import { useI18n } from './lib/i18n.jsx';
-import PercentExplanationApp from './PercentExplanationApp'
-import { playSound } from './audioContext'
+import PercentExplanationApp from './PercentExplanationApp';
+import { playSound } from './audioContext';
 
 // API base URL from environment variables (Vite)
 const API = import.meta.env.VITE_API_BASE_URL || '';
@@ -67861,3 +67864,6 @@ function MensurationLabApp({ onBack, initialDifficulty, initialNumQuestions, ini
 export default App
 export { AuthMenu }
 
+
+import { updateBKT } from './bkt.js';
+export { updateBKT };
