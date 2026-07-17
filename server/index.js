@@ -5663,26 +5663,26 @@ app.get('/diff-api/question', (req, res) => {
     res.json({ id, difficulty, type: 'power_rule', prompt, answer: deriv, display: String(deriv) });
   }
   else if (difficulty === 'medium') {
-<<<<<<< HEAD
-    // Chain Rule: f(x) = (ax + b)^2
-    const a = triRand(2, 4);
-    const b = triRand(1, 5);
-    const x = triRand(1, 2);
-    // f'(x) = 2 * (ax + b) * a
-    const deriv = 2 * (a * x + b) * a;
-    const prompt = `f(x) = (${a}x + ${b})². Find f'(${x}).`;
-    res.json({ id, difficulty, type: 'chain_rule', prompt, answer: deriv, display: String(deriv) });
-=======
-    // Differentiate polynomial: ax² + bx + c
-    let a = triRand(-5, 5); const b = triRand(-8, 8); const c = triRand(-10, 10);
-    if (a === 0) a = 2;
-    const x = triRand(-3, 3);
-    const deriv = 2 * a * x + b;
-    const bStr = b >= 0 ? `+ ${b}` : `− ${Math.abs(b)}`;
-    const cStr = c >= 0 ? `+ ${c}` : `− ${Math.abs(c)}`;
-    const prompt = `f(x) = ${a}x² ${bStr}x ${cStr}. Find f'(${x}).`;
-    res.json({ id, difficulty, type: 'polynomial', prompt, answer: deriv, display: String(deriv) });
->>>>>>> origin/main
+    if (Math.random() < 0.5) {
+      // Chain Rule: f(x) = (ax + b)^2
+      const a = triRand(2, 4);
+      const b = triRand(1, 5);
+      const x = triRand(1, 2);
+      // f'(x) = 2 * (ax + b) * a
+      const deriv = 2 * (a * x + b) * a;
+      const prompt = `f(x) = (${a}x + ${b})². Find f'(${x}).`;
+      res.json({ id, difficulty, type: 'chain_rule', prompt, answer: deriv, display: String(deriv) });
+    } else {
+      // Differentiate polynomial: ax² + bx + c
+      let a = triRand(-5, 5); const b = triRand(-8, 8); const c = triRand(-10, 10);
+      if (a === 0) a = 2;
+      const x = triRand(-3, 3);
+      const deriv = 2 * a * x + b;
+      const bStr = b >= 0 ? `+ ${b}` : `− ${Math.abs(b)}`;
+      const cStr = c >= 0 ? `+ ${c}` : `− ${Math.abs(c)}`;
+      const prompt = `f(x) = ${a}x² ${bStr}x ${cStr}. Find f'(${x}).`;
+      res.json({ id, difficulty, type: 'polynomial', prompt, answer: deriv, display: String(deriv) });
+    }
   }
   else if (difficulty === 'hard') {
     // Product Rule: f(x) = (ax + b)(cx^2 + d)
