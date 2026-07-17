@@ -1,0 +1,92 @@
+[
+  {
+    "collectionId": "counting-critters",
+    "name": "Decimal Dino & Friends",
+    "difficulty": "beginner",
+    "description": "Learn to count, scale, and round numbers with the helpful Decimal Dino!",
+    "topics": ["decimals", "rounding"],
+    "coinReward": 100,
+    "badgeType": "dino"
+  },
+  {
+    "collectionId": "arithmetic-basics",
+    "name": "Arithmetic Champion",
+    "difficulty": "beginner",
+    "description": "Solve addition and arithmetic equations to hoist the Arithmetic Trophy!",
+    "topics": ["addition", "basicarith"],
+    "coinReward": 100,
+    "badgeType": "trophy"
+  },
+  {
+    "collectionId": "fraction-explorer",
+    "name": "Fraction Feast Master",
+    "difficulty": "beginner",
+    "description": "Slice up the conceptual pies and ratios to master fraction additions!",
+    "topics": ["fractionadd", "ratio"],
+    "coinReward": 100,
+    "badgeType": "feast"
+  },
+  {
+    "collectionId": "geometry-master",
+    "name": "Geometry Wizard",
+    "difficulty": "intermediate",
+    "description": "Wave your math wand to master lines, angles, and triangles!",
+    "topics": ["angles", "triangles"],
+    "coinReward": 120,
+    "badgeType": "wizard"
+  },
+  {
+    "collectionId": "division-detective",
+    "name": "Division Detective",
+    "difficulty": "beginner",
+    "description": "Investigate times-tables, prime factors, and detective division cases!",
+    "topics": ["multiply", "hcflcm"],
+    "coinReward": 100,
+    "badgeType": "detective"
+  },
+  {
+    "collectionId": "time-traveler",
+    "name": "Speed Star Racer",
+    "difficulty": "intermediate",
+    "description": "Hop in a rocket ship and speed through rate, time, and distance problems!",
+    "topics": ["sdt", "variation"],
+    "coinReward": 150,
+    "badgeType": "rocket"
+  },
+  {
+    "collectionId": "data-detective",
+    "name": "Data Treasure Hunter",
+    "difficulty": "intermediate",
+    "description": "Chart your path across statistical maps to find the hidden probability chest!",
+    "topics": ["stats", "prob"],
+    "coinReward": 150,
+    "badgeType": "chest"
+  },
+  {
+    "collectionId": "algebra-alchemist",
+    "name": "Algebra Alchemist",
+    "difficulty": "intermediate",
+    "description": "Mix formulas in your equations beaker to perform math alchemy!",
+    "topics": ["lineareq", "lineq"],
+    "coinReward": 150,
+    "badgeType": "flask"
+  },
+  {
+    "collectionId": "pythagoras-path",
+    "name": "Right-Angle Knight",
+    "difficulty": "intermediate",
+    "description": "Forge the pythagorean shield to defend the angles of your math fortress!",
+    "topics": ["pythag", "polygons"],
+    "coinReward": 150,
+    "badgeType": "shield"
+  },
+  {
+    "collectionId": "trig-treasure",
+    "name": "Trigonometry King",
+    "difficulty": "advanced",
+    "description": "Ascend the throne by charting coordinates and scaling standard trigonometric peaks!",
+    "topics": ["trig", "coordgeom"],
+    "coinReward": 200,
+    "badgeType": "crown"
+  }
+]
