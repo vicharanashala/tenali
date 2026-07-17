@@ -44350,7 +44350,7 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
             </button>
             {/* Visual Learning Universe pinned at top of hamburger menu */}
             {[mathLabEntry].map(app => (
-              <button key={app.key} onClick={() => { setMenuOpen(false); onSelect(app.key) }} style={{
+              <button key={app.key} onClick={() => { setMenuOpen(false); setSelectedApp(app) }} style={{
                 display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
                 background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
                 fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)'
@@ -44373,7 +44373,7 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
             </button>
 
             {featuredApps.map(app => (
-              <button key={app.key} onClick={() => { setMenuOpen(false); onSelect(app.key) }} style={{
+              <button key={app.key} onClick={() => { setMenuOpen(false); setSelectedApp(app) }} style={{
                 display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
                 background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
                 fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)'
@@ -44447,7 +44447,7 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
           const isGold = goldMastery && goldMastery.includes(app.key)
           const isCompleted = isStage3Completed(app.key, completedTopics)
           return (
-            <button key={app.key} className={`menu-card ${isGold ? 'gold-card' : app.color}`} onClick={() => onSelect(app.key)}>
+            <button key={app.key} className={`menu-card ${isGold ? 'gold-card' : app.color}`} onClick={() => setSelectedApp(app)}>
               <span className="menu-title">
                 {app.name}
                 {isGold && <span className="badge-indicator">🥇</span>}
@@ -44459,6 +44459,19 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
         })}
       </div>
       <div className="grid-dimension">{rows} × {cols}</div>
+
+      {selectedApp && (
+        <div className="modal-overlay" onClick={() => setSelectedApp(null)} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
+          <div className="modal-content" onClick={e => e.stopPropagation()} style={{ background: 'var(--bg-primary)', padding: '2rem', borderRadius: '12px', textAlign: 'center', minWidth: '300px' }}>
+            <h2>{selectedApp.name}</h2>
+            <p style={{ margin: '1rem 0' }}>How would you like to play?</p>
+            <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem', justifyContent: 'center' }}>
+              <button className="btn-primary" onClick={() => onSelect(selectedApp.key)}>Single Player</button>
+              <button className="btn-secondary" style={{ background: 'var(--danger)', color: '#fff' }} onClick={() => onSelectBattle(selectedApp.key)}>Live Battle</button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   )
 }
