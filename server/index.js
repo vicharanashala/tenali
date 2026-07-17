@@ -47,6 +47,8 @@ const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
+const http = require('http');
+const { Server } = require('socket.io');
 const wordCreator = require('./wordCreator');
 
 // Initialize Express app and configure middleware
@@ -11577,10 +11579,229 @@ app.get(/.*/, (_req, res) => {
  * Listen on all interfaces (0.0.0.0) at the configured port
  * 0.0.0.0 makes the server accessible from any network interface/IP address
  */
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: { origin: '*' }
+});
+
+let waitingPlayers = {};
+let waitingTimeouts = {};
+const activeRooms = {};
+
+async function generateBattleQuestion(topic) {
+  if (topic === 'tatsavit' || !topic) {
+    const qLevel = Math.floor(Math.random() * 9);
+    return tatsavitQuestion(1, qLevel);
+  }
+  
+  try {
+    const res = await fetch(`http://127.0.0.1:${process.env.PORT || 4000}/${topic}-api/question`);
+    if (!res.ok) throw new Error('API Error');
+    const q = await res.json();
+    
+    let prompt = q.prompt || q.display || q.question;
+    let answer = q.answer;
+
+    if (topic === 'simul' && q.eqs && q.solution) {
+      prompt = q.eqs.map(eq => `${eq.a}x ${eq.b >= 0 ? '+' : '-'} ${Math.abs(eq.b)}y = ${eq.d}`).join('<br/>');
+      answer = `x=${q.solution.x},y=${q.solution.y}`;
+    }
+
+    if (!prompt) prompt = "Solve: " + JSON.stringify(q);
+
+    if (q.options && q.options.length > 0) {
+      try {
+        const checkRes = await fetch(`http://127.0.0.1:${process.env.PORT || 4000}/${topic}-api/check`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: q.id, answerOption: '', solve: true }),
+        });
+        if (checkRes.ok) {
+          const checkData = await checkRes.json();
+          answer = checkData.correctAnswer || checkData.solution || checkData.correctAnswerText || answer;
+        }
+      } catch (err) {
+        console.error('Error fetching check data', err);
+      }
+    }
+
+    if (answer === undefined) answer = q.correctAnswer || q.solution || 0;
+
+    return { prompt, answer, display: q.display || prompt, options: q.options };
+  } catch (err) {
+    console.error(`Error generating battle question for topic ${topic}:`, err);
+    const qLevel = Math.floor(Math.random() * 9);
+    return tatsavitQuestion(1, qLevel);
+  }
+}
+
+// Helper function to handle bot logic
+async function handleBotAnswer(roomId) {
+  const room = activeRooms[roomId];
+  if (!room || !room.isBotGame) return;
+
+  // Bot simulates correct answer
+  room.players['BOT'].score += 1;
+  io.to(roomId).emit('score_update', room.players);
+
+  if (room.players['BOT'].score >= 10) {
+    io.to(roomId).emit('game_over', { winner: 'BOT', players: room.players });
+    delete activeRooms[roomId];
+  } else {
+    const nextQ = await generateBattleQuestion(room.topic);
+    if (!activeRooms[roomId]) return;
+    room.currentQuestion = nextQ;
+    io.to(roomId).emit('new_question', nextQ);
+    
+    // Schedule next bot answer (4 to 8 seconds)
+    const delay = Math.floor(Math.random() * 4000) + 4000;
+    room.botTimer = setTimeout(() => handleBotAnswer(roomId), delay);
+  }
+}
+
+io.on('connection', (socket) => {
+  console.log('Player connected for battle:', socket.id);
+
+  socket.on('join_match', async (data) => {
+    const topic = (data && data.topic) || 'tatsavit';
+
+    if (waitingPlayers[topic] && waitingPlayers[topic].id !== socket.id) {
+      if (waitingTimeouts[topic]) {
+        clearTimeout(waitingTimeouts[topic]);
+        waitingTimeouts[topic] = null;
+      }
+      const waitingPlayer = waitingPlayers[topic];
+      // Match found
+      const roomId = `room_${waitingPlayer.id}_${socket.id}`;
+      socket.join(roomId);
+      waitingPlayer.join(roomId);
+
+      const p1 = waitingPlayer.id;
+      const p2 = socket.id;
+
+      activeRooms[roomId] = {
+        topic: topic,
+        isBotGame: false,
+        players: {
+          [p1]: { id: p1, score: 0 },
+          [p2]: { id: p2, score: 0 }
+        },
+        currentQuestion: null
+      };
+
+      const wpId = waitingPlayer.id;
+      waitingPlayers[topic] = null;
+      io.to(roomId).emit('match_found', { roomId, p1: wpId, p2: socket.id });
+
+      const q = await generateBattleQuestion(topic);
+      if (!activeRooms[roomId]) return;
+      activeRooms[roomId].currentQuestion = q;
+      io.to(roomId).emit('new_question', q);
+
+    } else {
+      waitingPlayers[topic] = socket;
+      if (waitingTimeouts[topic]) clearTimeout(waitingTimeouts[topic]);
+      waitingTimeouts[topic] = setTimeout(async () => {
+        if (waitingPlayers[topic] && waitingPlayers[topic].id === socket.id) {
+          // Start a bot match
+          const roomId = `room_${socket.id}_BOT`;
+          socket.join(roomId);
+          
+          activeRooms[roomId] = {
+            topic: topic,
+            isBotGame: true,
+            players: {
+              [socket.id]: { id: socket.id, score: 0 },
+              ['BOT']: { id: 'BOT', score: 0 }
+            },
+            currentQuestion: null,
+            botTimer: null
+          };
+
+          const wpId = waitingPlayers[topic].id;
+          waitingPlayers[topic] = null;
+          io.to(roomId).emit('match_found', { roomId, p1: wpId, p2: 'BOT' });
+
+          const q = await generateBattleQuestion(topic);
+          if (!activeRooms[roomId]) return;
+          activeRooms[roomId].currentQuestion = q;
+          io.to(roomId).emit('new_question', q);
+
+          const delay = Math.floor(Math.random() * 4000) + 4000;
+          activeRooms[roomId].botTimer = setTimeout(() => handleBotAnswer(roomId), delay);
+        }
+      }, 3000);
+    }
+  });
+
+  socket.on('submit_answer', async ({ roomId, answer }) => {
+    const room = activeRooms[roomId];
+    if (!room || !room.currentQuestion) return;
+
+    const q = room.currentQuestion;
+    
+    // Safety handling for empty answer
+    if (answer === undefined || answer === null) return;
+    const ansStr = String(answer).trim().toLowerCase();
+    
+    const isCorrect = (typeof q.answer === 'string') 
+      ? ansStr === q.answer.toLowerCase() || ansStr.replace(/\s+/g, '') === q.answer.toLowerCase()
+      : !isNaN(parseInt(ansStr, 10)) && parseInt(ansStr, 10) === q.answer;
+
+    if (isCorrect) {
+      room.players[socket.id].score += 1;
+      
+      io.to(roomId).emit('score_update', room.players);
+
+      if (room.isBotGame && room.botTimer) {
+        clearTimeout(room.botTimer);
+      }
+
+      if (room.players[socket.id].score >= 10) {
+        io.to(roomId).emit('game_over', { winner: socket.id, players: room.players });
+        delete activeRooms[roomId];
+      } else {
+        const nextQ = await generateBattleQuestion(room.topic);
+        if (!activeRooms[roomId]) return;
+        room.currentQuestion = nextQ;
+        io.to(roomId).emit('new_question', nextQ);
+        
+        if (room.isBotGame) {
+          const delay = Math.floor(Math.random() * 4000) + 4000;
+          room.botTimer = setTimeout(() => handleBotAnswer(roomId), delay);
+        }
+      }
+    } else {
+      socket.emit('answer_incorrect');
+    }
+  });
+
+  socket.on('disconnect', () => {
+    for (const topic in waitingPlayers) {
+      if (waitingPlayers[topic] && waitingPlayers[topic].id === socket.id) {
+        waitingPlayers[topic] = null;
+        if (waitingTimeouts[topic]) {
+          clearTimeout(waitingTimeouts[topic]);
+          waitingTimeouts[topic] = null;
+        }
+      }
+    }
+    for (const roomId in activeRooms) {
+      if (activeRooms[roomId].players[socket.id]) {
+        if (activeRooms[roomId].botTimer) {
+          clearTimeout(activeRooms[roomId].botTimer);
+        }
+        io.to(roomId).emit('opponent_disconnected');
+        delete activeRooms[roomId];
+      }
+    }
+  });
+});
+
 if (require.main === module) {
-  app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Tenali app running on http://0.0.0.0:${PORT}`);
+  server.listen(PORT, '0.0.0.0', () => {
+    console.log(`Tenali app running on http://0.0.0.0:${PORT} with Socket.IO`);
   });
 }
 
-module.exports = app;
+module.exports = { app, server };
