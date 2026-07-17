@@ -30,3 +30,9 @@ body {
 #root {
   min-height: 100vh;  /* Minimum height is full viewport */
 }
+
+/* Accessibility: Dyslexia-friendly font support */
+html[data-a11y-dyslexia="true"],
+html[data-a11y-dyslexia="true"] * {
+  font-family: 'Lexend', 'OpenDyslexic', sans-serif !important;
+}
