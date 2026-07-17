@@ -23,7 +23,7 @@
 
 import React, { useEffect, useState, useRef, useMemo, useCallback } from 'react';
 import VoiceAssistant from './components/VoiceAssistant';
-import { motion } from 'framer-motion';
+
 import OnboardingTour from './components/OnboardingTour';
 
 window.React = React;
@@ -39177,9 +39177,6 @@ function CoordGeomInteractiveApp({ onBack }) {
           </p>
 
           <div style={{ marginBottom: '24px' }}>
-            <h3 style={{ color: '#F4F1ED', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>
-              Select Difficulty:
-            </h3>
             <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '12px' }}>
               {['easy', 'medium', 'hard', 'extrahard'].map(d => (
                 <button key={d} onClick={() => setDifficulty(d)} style={{
@@ -43683,9 +43680,6 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
 
 
           <div style={{ marginBottom: '24px' }}>
-            <h3 style={{ color: '#F4F1ED', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>
-              Select Difficulty:
-            </h3>
             <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '12px' }}>
               {['easy', 'medium', 'hard', ...(additionMode === 'standard' ? ['extrahard'] : [])].map(d => (
                 <button key={d} onClick={() => { setDifficulty(d); setIsAdaptive(false); }} style={{
@@ -47679,9 +47673,6 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
             {tip && <p style={{ fontSize: '0.85rem', color: '#A89C93', marginBottom: '16px' }}>{tip}</p>}
 
             <div style={{ marginBottom: '24px' }}>
-              <h3 style={{ color: '#F4F1ED', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>
-                Select Difficulty:
-              </h3>
               <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '12px' }}>
                 {diffs.map(d => (
                   <button key={d} onClick={() => { setDifficulty(d); setIsAdaptive(false); }} style={{
