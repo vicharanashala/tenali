@@ -65,6 +65,130 @@ function generateExplanation(req, data) {
     return s;
   }
 
+  // ── Column Addition (must check before plain addition-api) ────
+  if (p.includes('column-addition-api')) {
+    const { a, b: num2 } = b;
+    const sum = (d.correctAnswer != null) ? d.correctAnswer : a + num2;
+    const aStr = String(a), bStr = String(num2), sStr = String(sum);
+    const maxLen = Math.max(aStr.length, bStr.length);
+    const aPad = aStr.padStart(maxLen, ' '), bPad = bStr.padStart(maxLen, ' ');
+    let s = `Problem: Column addition of ${a} + ${num2}\n\n`;
+    s += `Working right to left, column by column:\n`;
+    let carry = 0;
+    for (let i = maxLen - 1; i >= 0; i--) {
+      const da = parseInt(aPad[i]) || 0, db = parseInt(bPad[i]) || 0;
+      const total = da + db + carry;
+      const outDigit = total % 10;
+      const newCarry = total >= 10 ? 1 : 0;
+      s += `  ${da} + ${db}${carry ? ' + carry ' + carry : ''} = ${total} → write ${outDigit}${newCarry ? ', carry 1' : ''}\n`;
+      carry = newCarry;
+    }
+    s += `\nAnswer: ${a} + ${num2} = ${sum}`;
+    return s;
+  }
+
+  // ── Column Multiplication ────────────────────────────────────
+  if (p.includes('column-multiplication-api')) {
+    const { a, b: num2 } = b;
+    const product = (d.correctAnswer != null) ? d.correctAnswer : a * num2;
+    const aStr = String(a);
+    const bStr = String(num2);
+    const bLen = bStr.length;
+    let s = `Problem: Column multiplication of ${a} × ${num2}\n\n`;
+
+    if (bLen > 1) {
+      s += `Multiplier ${num2} has ${bLen} digits. We compute one partial product per multiplier digit (right to left), then add them:\n\n`;
+      let partials = [];
+      let pow = 1;
+      for (let bi = bStr.length - 1; bi >= 0; bi--) {
+        const bd = parseInt(bStr[bi]);
+        const partial = a * bd;
+        partials.push(partial);
+        s += `Partial product ${partials.length} (${a} × ${bd}):\n`;
+        let carry = 0;
+        for (let i = aStr.length - 1; i >= 0; i--) {
+          const da = parseInt(aStr[i]) || 0;
+          const total = da * bd + carry;
+          const outDigit = total % 10;
+          const newCarry = Math.floor(total / 10);
+          s += `  ${da} × ${bd}${carry ? ' + carry ' + carry : ''} = ${total} → write ${outDigit}${newCarry ? ', carry ' + newCarry : ''}\n`;
+          carry = newCarry;
+        }
+        if (pow > 1) s += `  (shift left ${Math.log10(pow)} place${Math.log10(pow) > 1 ? 's' : ''})\n`;
+        s += `  = ${partial}${pow > 1 ? ' × ' + pow : ''}\n\n`;
+        pow *= 10;
+      }
+      s += `Add all partial products: ${partials.map((p, i) => p * Math.pow(10, bLen - 1 - i)).join(' + ')} = ${product}`;
+    } else {
+      s += `Multiply each digit of ${a} by ${num2}, right to left, carrying as needed:\n`;
+      let carry = 0;
+      for (let i = aStr.length - 1; i >= 0; i--) {
+        const da = parseInt(aStr[i]) || 0;
+        const total = da * num2 + carry;
+        const outDigit = total % 10;
+        const newCarry = Math.floor(total / 10);
+        s += `  ${da} × ${num2}${carry ? ' + carry ' + carry : ''} = ${total} → write ${outDigit}${newCarry ? ', carry ' + newCarry : ''}\n`;
+        carry = newCarry;
+      }
+      s += `\nAnswer: ${a} × ${num2} = ${product}`;
+    }
+    return s;
+  }
+
+  // ── Column Subtraction (must check before plain subtraction-api) ──
+  // Grade-school narration: right to left. Whenever the top digit is smaller
+  // than the bottom digit, the child "converts" that top digit by crossing it
+  // out, writing the next-left larger digit's −1 above, and the column's +10.
+  // Example for 23 − 18:
+  //   Step 1: 3 < 8, convert 3 → 13, then 13 − 8 = 5
+  //   Step 2: 2 was borrowed from, so top is now 1, then 1 − 1 = 0
+  if (p.includes('column-subtraction-api')) {
+    const { a, b: num2 } = b;
+    const diff = (d.correctAnswer != null) ? d.correctAnswer : a - num2;
+    const aStr = String(a), bStr = String(num2);
+    const len = Math.max(aStr.length, bStr.length, String(diff).length);
+
+    // workMinuend[i] = the top digit currently in column i after any earlier borrows.
+    // workMinuend[i] may be 9 (because a column passed through as part of a cascade),
+    // or it may be the digit minus the borrow-out that already left it.
+    const workMinuend = aStr.padStart(len, ' ').split('').map(d => d === ' ' ? 0 : Number(d));
+    const workSubtrahend = bStr.padStart(len, ' ').split('').map(d => d === ' ' ? 0 : Number(d));
+
+    let s = `Problem: Column subtraction of ${a} − ${num2}\n\n`;
+    const lines = [];
+
+    for (let i = len - 1; i >= 0; i--) {
+      const top = workMinuend[i];
+      const bot = workSubtrahend[i];
+      if (top < bot) {
+        // Find the nearest non-zero column to the left, reduce it by 1, and
+        // fill the columns between with 9s. That gives the new "top" digit
+        // for column i: top + 10.
+        let k = i - 1;
+        while (k >= 0 && workMinuend[k] === 0) k--;
+        if (k < 0) {
+          // Nothing to borrow from (shouldn't happen with a >= b).
+          lines.push(`Step: convert top ${top} → ${top + 10}, then ${top + 10} − ${bot} = ${top + 10 - bot}`);
+        } else {
+          workMinuend[k] -= 1;
+          for (let j = k + 1; j < i; j++) workMinuend[j] = 9;
+          const newTop = top + 10;
+          const shownOldTop = (top === 0 && i > k + 1)
+            ? `0 (became 9 after the borrow passed through)`
+            : `${top}`;
+          lines.push(`Step: ${top} < ${bot}, convert top ${shownOldTop} → ${newTop}, then ${newTop} − ${bot} = ${newTop - bot}`);
+          workMinuend[i] = newTop - bot; // updated remaining top isn't needed further, just records result
+        }
+      } else {
+        lines.push(`Step: ${top} − ${bot} = ${top - bot}`);
+      }
+    }
+
+    lines.forEach((ln, i) => s += `${ln}\n`);
+    s += `\nAnswer: ${a} − ${num2} = ${diff}`;
+    return s;
+  }
+
   // ── Addition ──────────────────────────────────────────────────
   if (p.includes('addition-api')) {
     const { a, b: num2 } = b;

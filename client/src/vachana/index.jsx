@@ -46,6 +46,7 @@ import EquationToStory from './exercises/EquationToStory';
 import VisualToNarrative from './exercises/VisualToNarrative';
 import RootDecoder from './exercises/RootDecoder';
 import ConceptSimplification from './exercises/ConceptSimplification';
+import NotationLiteracy from './exercises/NotationLiteracy';
 
 // ─── Tab registry ─────────────────────────────────────────────────────────────
 // To add a new exercise: append an entry here + create the component file.
@@ -71,6 +72,7 @@ const TABS = [
   { id: 'graphstory', label: 'Visual-to-Narrative',      icon: VachanaIcons.graphstory, desc: 'Translate visual function graphs into descriptive stories' },
   { id: 'etymology',  label: 'Root Decoder',             icon: VachanaIcons.etymology,  desc: 'Break down mathematical terms into Greek/Latin roots' },
   { id: 'simplify',   label: 'Concept Simplification',   icon: VachanaIcons.simplify,   desc: 'Explain complex math definitions simply to beginners' },
+  { id: 'notation',   label: 'Notation Literacy',        icon: VachanaIcons.notation,   desc: 'Teach mathematical notations from basic to advanced' },
 ];
 
 // Map tab id → component
@@ -96,6 +98,7 @@ const EXERCISE_COMPONENTS = {
   graphstory: VisualToNarrative,
   etymology:  RootDecoder,
   simplify:   ConceptSimplification,
+  notation:   NotationLiteracy,
 };
 
 // ─── URL helpers ──────────────────────────────────────────────────────────────

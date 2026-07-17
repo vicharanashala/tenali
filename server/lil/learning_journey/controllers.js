@@ -1,7 +1,72 @@
+const fs = require('fs');
+const path = require('path');
+const mongoose = require('mongoose');
 const { LearningJourneyProgress } = require('./models');
 const { JOURNEY_CURRICULUM } = require('./journeyData');
 
 const PORT = process.env.PORT || 4000;
+
+// ─── In-Memory Journey Progress Fallback ────────────────────────────────────
+const JOURNEY_DB_FILE = path.join(__dirname, 'in_memory_journey_progress.json');
+const inMemoryJourneyProgress = {};
+
+function createInMemoryProgressObject(userId, existing = {}) {
+  const latestCheckpointScoreObj = existing.latestCheckpointScore || {};
+  return {
+    userId,
+    completedConcepts: existing.completedConcepts || [],
+    completedTopics: existing.completedTopics || [],
+    conceptsNeedingRevision: existing.conceptsNeedingRevision || [],
+    checkpointAttempts: existing.checkpointAttempts || [],
+    latestCheckpointScore: {
+      get: (key) => latestCheckpointScoreObj[key] || null,
+      set: (key, val) => { latestCheckpointScoreObj[key] = val; },
+      keys: () => Object.keys(latestCheckpointScoreObj)
+    },
+    activeCheckpoint: existing.activeCheckpoint || null,
+    save: async function() {
+      inMemoryJourneyProgress[userId] = this;
+      saveInMemoryJourney();
+      return this;
+    }
+  };
+}
+
+function loadInMemoryJourney() {
+  try {
+    if (fs.existsSync(JOURNEY_DB_FILE)) {
+      const data = JSON.parse(fs.readFileSync(JOURNEY_DB_FILE, 'utf8'));
+      for (const [userId, prog] of Object.entries(data)) {
+        inMemoryJourneyProgress[userId] = createInMemoryProgressObject(userId, prog);
+      }
+    }
+  } catch (err) {
+    console.error('[learning-journey] Failed to load in-memory progress:', err.message);
+  }
+}
+
+function saveInMemoryJourney() {
+  try {
+    const cleaned = {};
+    for (const [userId, prog] of Object.entries(inMemoryJourneyProgress)) {
+      const clone = { ...prog };
+      delete clone.save;
+      const scores = {};
+      if (prog.latestCheckpointScore && typeof prog.latestCheckpointScore.keys === 'function') {
+        for (const k of prog.latestCheckpointScore.keys()) {
+          scores[k] = prog.latestCheckpointScore.get(k);
+        }
+      }
+      clone.latestCheckpointScore = scores;
+      cleaned[userId] = clone;
+    }
+    fs.writeFileSync(JOURNEY_DB_FILE, JSON.stringify(cleaned, null, 2), 'utf8');
+  } catch (err) {
+    console.error('[learning-journey] Failed to save in-memory progress:', err.message);
+  }
+}
+
+loadInMemoryJourney();
 
 // Helper to get topic index and data by ID
 function getTopicData(topicId) {
@@ -93,6 +158,14 @@ async function getQuestionForConcept(conceptKey) {
 
 // Get user progress, initializing if not present
 async function getUserProgress(userId) {
+  if (mongoose.connection.readyState !== 1) {
+    if (!inMemoryJourneyProgress[userId]) {
+      inMemoryJourneyProgress[userId] = createInMemoryProgressObject(userId);
+      saveInMemoryJourney();
+    }
+    return inMemoryJourneyProgress[userId];
+  }
+
   let progress = await LearningJourneyProgress.findOne({ userId });
   if (!progress) {
     progress = new LearningJourneyProgress({
