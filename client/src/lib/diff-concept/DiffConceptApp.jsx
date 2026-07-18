@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Stage1Intuition from './Stage1Intuition';
-import Stage1bKinematics from './Stage1bKinematics';
-import Stage1cFirstPrinciple from './Stage1cFirstPrinciple';
-import Stage2PowerRule from './Stage2PowerRule';
-import Stage3ChainRule from './Stage3ChainRule';
-import Stage4ProductQuotient from './Stage4ProductQuotient';
+import Stage1Mountain from './Stage1Mountain';
+import Stage2Zoom from './Stage2Zoom';
+import Stage3Tangent from './Stage3Tangent';
+import Stage4Guess from './Stage4Guess';
+import Stage5SyncdGraph from './Stage5SyncdGraph';
+import Stage6PowerRuleAnim from './Stage6PowerRuleAnim';
 import Stage5MixedSolver from './Stage5MixedSolver';
 import Stage6TurningPoints from './Stage6TurningPoints';
 import Stage7Optimization from './Stage7Optimization';
@@ -120,19 +120,19 @@ export default function DiffConceptApp({ onBack, DiffApp }) {
       </div>
 
       <div className="concept-container">
-        {currentStage === 0 && <Stage1Intuition onComplete={(data) => handleStageComplete(1, data)} />}
-        {currentStage === 1 && <Stage1bKinematics onComplete={(data) => handleStageComplete(2, data)} />}
-        {currentStage === 2 && <Stage1cFirstPrinciple onComplete={(data) => handleStageComplete(3, data)} />}
-        {currentStage === 3 && <Stage2PowerRule onComplete={(data) => handleStageComplete(4, data)} />}
-        {currentStage === 4 && <Stage3ChainRule onComplete={(data) => handleStageComplete(5, data)} />}
-        {currentStage === 5 && <Stage4ProductQuotient onComplete={(data) => handleStageComplete(6, data)} />}
+        {currentStage === 0 && <Stage1Mountain onComplete={(data) => handleStageComplete(1, data)} />}
+        {currentStage === 1 && <Stage2Zoom onComplete={(data) => handleStageComplete(2, data)} />}
+        {currentStage === 2 && <Stage3Tangent onComplete={(data) => handleStageComplete(3, data)} />}
+        {currentStage === 3 && <Stage4Guess onComplete={(data) => handleStageComplete(4, data)} />}
+        {currentStage === 4 && <Stage5SyncdGraph onComplete={(data) => handleStageComplete(5, data)} />}
+        {currentStage === 5 && <Stage6PowerRuleAnim onComplete={(data) => handleStageComplete(6, data)} />}
         {currentStage === 6 && <Stage5MixedSolver onComplete={(data) => handleStageComplete(7, data)} />}
         {currentStage === 7 && <Stage6TurningPoints onComplete={(data) => handleStageComplete(8, data)} />}
         {currentStage === 8 && <Stage7Optimization onComplete={(data) => handleStageComplete(9, data)} />}
         {currentStage === 9 && <Stage8Bridge onBack={onBack} nextReviewDue={serverState?.nextConceptReviewDue} DiffApp={DiffApp} />}
 
         {/* Spaced Replay Sequence */}
-        {currentStage === 100 && <Stage1Intuition onComplete={(data) => handleStageComplete(101, data)} isSpacedReplay={true} />}
+        {currentStage === 100 && <Stage1Mountain onComplete={(data) => handleStageComplete(101, data)} isSpacedReplay={true} />}
         {currentStage === 101 && <Stage5MixedSolver onComplete={(data) => handleStageComplete(102, data)} isSpacedReplay={true} />}
         {currentStage === 102 && <Stage8Bridge onBack={onBack} nextReviewDue={serverState?.nextConceptReviewDue} DiffApp={DiffApp} />}
       </div>
