@@ -39,6 +39,12 @@ function useProgressSubmit(revealed, isCorrect, topic, questionId) {
   useEffect(() => {
     if (!revealed) return;
     const token = localStorage.getItem('tenali-token');
+    
+    // Dispatch local BKT update event for immediate UI feedback
+    if (topic) {
+      window.dispatchEvent(new CustomEvent('bkt-update', { detail: { isCorrect, topic } }));
+    }
+    
     if (!token || !topic) return;
 
     const API = import.meta.env.VITE_API_BASE_URL || '';
@@ -66478,43 +66484,60 @@ export function QuizLayout({ title, subtitle, onBack, children, timer, sessionGo
   const isSpeed   = timer && (timer.mode === 'speed'   || sessionGoal === 'speed')
   const isPerfect = sessionGoal === 'perfect'
 
+  const [liveMastery, setLiveMastery] = useState(undefined);
+
   // If bktMastery is not explicitly provided, try to guess from local storage
-  let finalMastery = bktMastery;
-  if (finalMastery === undefined && title) {
-    try {
-      const gMastery = JSON.parse(localStorage.getItem('tenali-gold-mastery') || '[]');
-      const cTopics = JSON.parse(localStorage.getItem('tenali-completed-topics') || '[]');
-      
-      const t = title.toLowerCase();
-      const tMap = {
-        'addition': 'addition',
-        'column addition': 'addition',
-        'column subtraction': 'subtraction',
-        'multiplication & division': 'multiplication',
-        'column multiplication': 'multiplication',
-        'visual counting': 'counting',
-        'dart board': 'coordinate_geometry',
-        'coordinate geometry': 'coordinate_geometry',
-        'balance scale math': 'equations',
-        'quadratic': 'quadratic',
-        'origin': 'origin',
-        'general knowledge': 'gk',
-        'comic addition': 'addition'
-      };
-      
-      const topicKey = Object.keys(tMap).find(k => t.includes(k)) ? tMap[Object.keys(tMap).find(k => t.includes(k))] : t.replace(/\s+/g, '_');
-      
-      if (gMastery.includes(topicKey)) {
-        finalMastery = 1.0;
-      } else if (cTopics.includes(topicKey)) {
-        finalMastery = 0.8;
-      } else {
-        finalMastery = 0.15; // default unmastered
+  useEffect(() => {
+    let finalMastery = bktMastery;
+    if (finalMastery === undefined && title) {
+      try {
+        const gMastery = JSON.parse(localStorage.getItem('tenali-gold-mastery') || '[]');
+        const cTopics = JSON.parse(localStorage.getItem('tenali-completed-topics') || '[]');
+        
+        const t = title.toLowerCase();
+        const tMap = {
+          'addition': 'addition',
+          'column addition': 'addition',
+          'column subtraction': 'subtraction',
+          'multiplication & division': 'multiplication',
+          'column multiplication': 'multiplication',
+          'visual counting': 'counting',
+          'dart board': 'coordinate_geometry',
+          'coordinate geometry': 'coordinate_geometry',
+          'balance scale math': 'equations',
+          'quadratic': 'quadratic',
+          'origin': 'origin',
+          'general knowledge': 'gk',
+          'comic addition': 'addition'
+        };
+        
+        const topicKey = Object.keys(tMap).find(k => t.includes(k)) ? tMap[Object.keys(tMap).find(k => t.includes(k))] : t.replace(/\s+/g, '_');
+        
+        if (gMastery.includes(topicKey)) {
+          finalMastery = 1.0;
+        } else if (cTopics.includes(topicKey)) {
+          finalMastery = 0.8;
+        } else {
+          finalMastery = 0.0; // default unmastered, changed from 0.15
+        }
+      } catch(e) {
+        finalMastery = 0.0;
       }
-    } catch(e) {
-      finalMastery = 0.15;
     }
-  }
+    setLiveMastery(finalMastery);
+  }, [title, bktMastery]);
+
+  useEffect(() => {
+    const handleUpdate = (e) => {
+       if (e.detail?.isCorrect) {
+          setLiveMastery(prev => Math.min(1.0, (prev || 0) + 0.05));
+       } else {
+          setLiveMastery(prev => Math.max(0.0, (prev || 0) - 0.02));
+       }
+    };
+    window.addEventListener('bkt-update', handleUpdate);
+    return () => window.removeEventListener('bkt-update', handleUpdate);
+  }, []);
 
   // For speed mode: show remaining seconds with urgency colouring
   const timerDisplay = (() => {
@@ -66577,10 +66600,12 @@ export function QuizLayout({ title, subtitle, onBack, children, timer, sessionGo
     <>
       <div className="header-row">
         <button className="back-button" onClick={onBack}>← Home</button>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          {finalMastery !== undefined && (
-            <MasteryBadge mastery={finalMastery} label="BKT" size={48} />
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexGrow: 1, paddingLeft: 16 }}>
+          {liveMastery !== undefined && (
+            <MasteryBadge mastery={liveMastery} label="BKT" />
           )}
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           {goalBadge}
           {timerDisplay}
         </div>

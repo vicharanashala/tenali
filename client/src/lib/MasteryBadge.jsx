@@ -9,72 +9,67 @@ import React from 'react';
  */
 export default function MasteryBadge({ mastery = 0, label = 'Mastery', size = 72 }) {
   const pct = Math.round(mastery * 100);
-  const radius = (size - 8) / 2;
-  const circumference = 2 * Math.PI * radius;
-  const offset = circumference - (mastery * circumference);
 
   // Color ramp: red → amber → green
   const hue = mastery * 120; // 0 = red, 60 = yellow, 120 = green
-  const strokeColor = `hsl(${hue}, 80%, 50%)`;
-  const bgStroke = 'var(--clr-border, #ddd)';
+  const barColor = `hsl(${hue}, 80%, 50%)`;
+  const bgBar = 'var(--clr-border, #444)';
 
   return (
     <div style={{
-      display: 'inline-flex',
-      flexDirection: 'column',
+      display: 'flex',
       alignItems: 'center',
-      gap: '4px',
+      gap: '12px',
+      width: '100%',
+      maxWidth: '300px',
     }}>
-      <div style={{ position: 'relative', width: size, height: size }}>
-        <svg width={size} height={size} style={{ transform: 'rotate(-90deg)' }}>
-          {/* Background ring */}
-          <circle
-            cx={size / 2}
-            cy={size / 2}
-            r={radius}
-            fill="none"
-            stroke={bgStroke}
-            strokeWidth="5"
-          />
-          {/* Progress ring */}
-          <circle
-            cx={size / 2}
-            cy={size / 2}
-            r={radius}
-            fill="none"
-            stroke={strokeColor}
-            strokeWidth="5"
-            strokeLinecap="round"
-            strokeDasharray={circumference}
-            strokeDashoffset={offset}
-            style={{ transition: 'stroke-dashoffset 0.6s ease, stroke 0.6s ease' }}
-          />
-        </svg>
-        {/* Percentage text centred over the SVG */}
+      <div style={{
+        flexGrow: 1,
+        height: '8px',
+        background: bgBar,
+        borderRadius: '4px',
+        overflow: 'hidden',
+        position: 'relative'
+      }}>
         <div style={{
           position: 'absolute',
-          inset: 0,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          top: 0,
+          left: 0,
+          height: '100%',
+          width: `${pct}%`,
+          background: barColor,
+          transition: 'width 0.6s ease, background 0.6s ease',
+          borderRadius: '4px',
+        }} />
+      </div>
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        minWidth: '50px'
+      }}>
+        <span style={{
           fontWeight: 700,
-          fontSize: size * 0.26,
-          color: 'var(--clr-text, #333)',
+          fontSize: '0.9rem',
+          color: 'var(--clr-text, #eee)',
+          lineHeight: '1.2'
         }}>
           {pct}%
-        </div>
-      </div>
-      {label && (
-        <span style={{
-          fontSize: '0.72rem',
-          fontWeight: 600,
-          color: 'var(--clr-text-soft, #888)',
-          textTransform: 'uppercase',
-          letterSpacing: '0.5px',
-        }}>
-          {label}
         </span>
-      )}
+        {label && (
+          <span style={{
+            fontSize: '0.65rem',
+            fontWeight: 600,
+            color: 'var(--clr-text-soft, #888)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.5px',
+            lineHeight: '1.2'
+          }}>
+            {label}
+          </span>
+        )}
+      </div>
     </div>
   );
 }
+
