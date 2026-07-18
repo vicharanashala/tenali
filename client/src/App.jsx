@@ -4740,7 +4740,7 @@ function AdaptiveMixedApp({ studentName }) {
           {question && (
             <>
               <div className="question-box" style={{ fontSize: '1.4rem' }}>
-                {question.prompt} = ?
+                {question.prompt}
               </div>
               <p style={{ fontSize: '0.75rem', opacity: 0.5, textAlign: 'center', margin: '0.25rem 0' }}>
                 {question.type === 'fraction-add' || question.type === 'fraction-mul' ? 'Answer as simplified fraction (e.g., 3/4)' :
@@ -48993,7 +48993,7 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
         {/* Standard Mode View */}
         {additionMode === 'standard' && question && (
           <>
-            <div className="question-box">{loading || !question ? 'Loading question…' : `${question.prompt} = ?`}</div>
+            <div className="question-box">{loading || !question ? 'Loading question…' : `${question.prompt}`}</div>
             <input className="answer-input" type="text" value={answer} onChange={(e) => { if (!revealed) { const v = e.target.value; if (v === '' || v === '-' || /^-?\d+$/.test(v)) setAnswer(v) } }} disabled={revealed} placeholder="Type your answer" />
             <NumPad value={answer} onChange={(v) => !revealed && setAnswer(v)} disabled={revealed} />
           </>
@@ -50401,7 +50401,7 @@ const fetchQuestion = async () => {
           {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
         </div>
         {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
-        <div className="question-box">{loading || !question ? 'Loading question…' : `${question.prompt} = ?`}</div>
+        <div className="question-box">{loading || !question ? 'Loading question…' : `${question.prompt}`}</div>
         <input className="answer-input" type="text" value={answer} onChange={e => { if (!revealed) { const v = e.target.value; if (v === '' || v === '-' || /^-?\d+$/.test(v)) setAnswer(v) } }} disabled={revealed} placeholder="Type your answer" />
         <NumPad value={answer} onChange={v => !revealed && setAnswer(v)} disabled={revealed} />
         {renderFeedback(feedback, isCorrect)}
@@ -51940,7 +51940,7 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
           {level === 3 ? `Rapid Fire · Q${qIndex + 1}` : `Question ${qIndex + 1}/${totalQuestionsThisSession}`}
           {level !== 3 && extensionCount > 0 && ` · +${extensionCount} extension`}
         </div>
-        <div className="question-box">{`${question.prompt} = ?`}</div>
+        <div className="question-box">{`${question.prompt}`}</div>
         <input className="answer-input" type="text" value={answer}
           onChange={(e) => { if (!revealed) { const v = e.target.value; if (v === '' || v === '-' || /^-?\d+$/.test(v)) setAnswer(v) } }}
           disabled={revealed} placeholder="Type your answer" autoFocus />
@@ -58532,7 +58532,7 @@ const loadQuestion = async () => {
         {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
         {question && (
           <div style={{ textAlign: 'center' }}>
-            <div className="question-prompt" style={{ fontSize: '1.6rem', margin: '20px 0' }}>{question.prompt} = ?</div>
+            <div className="question-prompt" style={{ fontSize: '1.6rem', margin: '20px 0' }}>{question.prompt}</div>
             {question.type === 'simplify' && <p style={{ fontSize: '0.85rem', color: 'var(--clr-dim)', margin: '0 0 8px' }}>Enter the exponent only (e.g. type 7 for {question.base}{'\u2077'})</p>}
             <input
               className="answer-input"
@@ -59986,7 +59986,7 @@ const fetchQuestion = async (step) => {
           {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
         </div>
         {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
-        <div className="question-box">{loading || !question ? 'Loading question…' : `${question.prompt} = ?`}</div>
+        <div className="question-box">{loading || !question ? 'Loading question…' : `${question.prompt}`}</div>
         <input className="answer-input" type="text" value={answer} onChange={(e) => { if (!revealed) { const v = e.target.value; if (v === '' || v === '-' || /^-?\d+$/.test(v)) setAnswer(v) } }} disabled={revealed} placeholder="Type your answer" />
         <NumPad value={answer} onChange={(v) => !revealed && setAnswer(v)} disabled={revealed} />
         {renderFeedback(feedback, isCorrect)}
@@ -62400,10 +62400,10 @@ function getPromptForType(type, q) {
   if (!q) return 'Loading…'
   const sup = (n) => String(n).split('').map(d => '⁰¹²³⁴⁵⁶⁷⁸⁹'[d]).join('')
   switch (type) {
-    case 'basicarith': case 'addition': return `${q.prompt} = ?`
+    case 'basicarith': case 'addition': return `${q.prompt}`
     case 'quadratic': return `${q.prompt}`
-    case 'multiply': return `${q.prompt} = ?`
-    case 'sqrt': return `${q.prompt} = ?`
+    case 'multiply': return `${q.prompt}`
+    case 'sqrt': return `${q.prompt}`
     case 'funceval': return `${q.formula}, evaluate at ${Object.entries(q.vars).map(([k, v]) => `${k} = ${v}`).join(', ')}`
     case 'polymul': return q.p1Display && q.p2Display ? `Expand: (${q.p1Display})(${q.p2Display})` : null
     case 'polyfactor': return q.display ? `Factorise: ${q.display}` : null
@@ -62432,7 +62432,7 @@ function getPromptForType(type, q) {
       if (q.type === 'rationalise' && q.subtype === 'conjugate') { const sg = q.q > 0 ? '+' : ''; const qS = Math.abs(q.q) === 1 ? (q.q > 0 ? '' : '-') : String(q.q); return `Rationalise: ${q.a} / (${q.p}${sg}${qS}√${q.r})` }
       return ''
     }
-    case 'indices': return q.prompt ? `${q.prompt} = ?` : ''
+    case 'indices': return q.prompt ? `${q.prompt}` : ''
     case 'sequences': return q.prompt || ''
     case 'ratio': return q.prompt || ''
     case 'percent': return q.prompt || ''

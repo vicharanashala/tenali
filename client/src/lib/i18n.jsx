@@ -133,7 +133,7 @@ export function I18nProvider({ children }) {
 
   // Change language
   const setLocale = useCallback((code) => {
-    if (LOCALE_LOADERS[code] && code !== locale) {
+    if (LOCALE_DATA[code] && code !== locale) {
       try {
         localStorage.setItem(STORAGE_KEY, code);
       } catch {}
