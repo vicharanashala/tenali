@@ -29,6 +29,13 @@ import OnboardingTour from './components/OnboardingTour';
 window.React = React;
 console.log("React version:", React.version);
 import LinearAlgebraApp from './LinearAlgebraApp'
+import ChooseModeScreen from './components/ChooseModeScreen'
+import LearningContainer from './components/LearningContainer'
+import MissionCard from './components/MissionCard'
+import TryItAssessment from './components/TryItAssessment'
+import PreSymbolAddition from './components/PreSymbolAddition'
+import NumeralDiscovery from './components/NumeralDiscovery'
+import LearningLevelSelection from './components/LearningLevelSelection'
 
 
 /**
@@ -48475,6 +48482,28 @@ function AdditionApp({ onBack, completedTopics = [], goldMastery = [], markTopic
   const [started, setStarted] = useState(initialStarted || false)
   // Has quiz finished (all questions answered)?
   const [finished, setFinished] = useState(false)
+  const [phase, setPhase] = useState('choose-mode')
+  const [missionCompleted, setMissionCompleted] = useState([false, false, false])
+  const [lastCharacterType, setLastCharacterType] = useState('apple')
+  const [failedCharacterType, setFailedCharacterType] = useState(null)
+  const [learningCompleted, setLearningCompleted] = useState(() => {
+    try { return localStorage.getItem('addition-learning-completed') === 'true' } catch { return false }
+  })
+  const [preSymbolStartStageB, setPreSymbolStartStageB] = useState(false)
+  const [isRemediationFlow, setIsRemediationFlow] = useState(false)
+  const [returnMission, setReturnMission] = useState(null)
+
+  useEffect(() => {
+    if (finished) {
+      setPhase('finished')
+    }
+  }, [finished])
+
+  useEffect(() => {
+    if (!started && !finished && phase === 'finished') {
+      setPhase('choose-mode')
+    }
+  }, [started, finished, phase])
   // Current question object: {a, b, prompt}
   const [question, setQuestion] = useState(null)
   // User's text input (numeric answer)
@@ -48823,116 +48852,325 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
   const diffLabels = { easy: 'Easy — 1 digit', medium: 'Medium — 2 digits', hard: 'Hard — 3 digits', extrahard: 'Extra Hard — 4 digits' }
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
-  if (!started && !finished) {
-    return (
-      <div style={{ minHeight: '100vh', background: '#181512', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
-        <div style={{
-          background: '#2D2520', border: '1.5px solid #4A4038', borderRadius: '28px',
-          boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '48px 40px', maxWidth: '720px', width: '100%',
-          textAlign: 'center', position: 'relative'
-        }}>
-          <button onClick={onBack} style={{
-            position: 'absolute', top: '24px', left: '24px', background: 'transparent',
-            border: '1px solid #5B5048', borderRadius: '6px', padding: '6px 14px',
-            color: '#A89C93', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
-          }}>← Home</button>
+  const storyConfig = {
+    'story-1': {
+      art: '🤔 🧒',
+      label: 'Gopu holding ladoos',
+      caption: 'Gopu had 2 ladoos.',
+      next: 'story-2',
+      prev: 'choose-mode'
+    },
+    'story-2': {
+      art: '👀 🧺',
+      label: 'Gopu wants more ladoos',
+      caption: 'But Gopu was greedy... he wanted more!',
+      next: 'story-3',
+      prev: 'story-1'
+    },
+    'story-3': {
+      art: '🧺',
+      label: 'Basket overflowing',
+      caption: 'So he grabbed more, and more, and more!',
+      next: 'story-4',
+      prev: 'story-2'
+    },
+    'story-4': {
+      art: '🤔 🧺',
+      label: 'Meena walks by',
+      caption: 'Just then, his friend Meena walked by.',
+      next: 'story-5',
+      prev: 'story-3'
+    },
+    'story-5': {
+      art: '🧒 🤔 🧺',
+      label: 'Meena points and asks Gopu',
+      caption: 'Meena: "Hey Gopu! How many ladoos do you have?"',
+      next: 'story-6',
+      prev: 'story-4'
+    },
+    'story-6': {
+      art: '😅 🤔 🧺',
+      label: 'Gopu scratch head',
+      caption: "Gopu: \"Umm... I don't know!\"",
+      next: 'mission',
+      prev: 'story-5'
+    }
+  }
+  const currentStory = storyConfig[phase]
 
-          <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '48px', color: '#F4F1ED', margin: '0 0 12px', lineHeight: 1.1 }}>
-            Addition
-          </h1>
-          <p style={{ color: '#988D84', fontSize: '0.9rem', margin: '0 0 24px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
-            Practice addition!
-          </p>
-          <KeyTerms topicKey="addition" />
-
-          <div style={{ marginBottom: '24px' }}>
-            <h3 style={{ color: '#F4F1ED', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>
-              Select Difficulty:
-            </h3>
-            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '12px' }}>
-              {['easy', 'medium', 'hard', ...(additionMode === 'standard' ? ['extrahard'] : [])].map(d => (
-                <button key={d} onClick={() => { setDifficulty(d); setIsAdaptive(false); }} style={{
-                  background: (!isAdaptive && difficulty === d) ? '#F08C46' : 'transparent',
-                  border: (!isAdaptive && difficulty === d) ? '1px solid #F08C46' : '1px solid #5B5048',
-                  borderRadius: '50px', padding: '8px 16px',
-                  color: (!isAdaptive && difficulty === d) ? '#FFF' : '#988D84', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
-                }}>
-                  {diffLabels[d]}
-                </button>
-              ))}
-            </div>
-            {additionMode === 'standard' && (
-              <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <button onClick={() => setIsAdaptive(true)} style={{
-                  background: isAdaptive ? '#F08C46' : 'transparent',
-                  border: isAdaptive ? '1px solid #F08C46' : '1px solid #5B5048',
-                  borderRadius: '50px', padding: '8px 16px',
-                  color: isAdaptive ? '#FFF' : '#988D84', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
-                }}>
-                  Adaptive
-                </button>
-              </div>
-            )}
-          </div>
-
-          <div style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <label style={{ color: '#988D84', fontSize: '0.85rem', margin: '0 0 12px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
-              How many questions? (max 100)
-            </label>
-            <input type="text" value={numQuestions} onChange={(e) => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} style={{
-              background: '#463B34', border: '1px solid #5B5048', borderRadius: '6px',
-              padding: '10px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem',
-              width: '100px', textAlign: 'center', outline: 'none'
-            }} placeholder={String(DEFAULT_TOTAL)} />
-          </div>
-
-          <button onClick={startQuiz} style={{
-            background: '#F08C46', border: 'none', borderRadius: '6px',
-            padding: '10px 24px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer'
-          }}>
-            Start Quiz
-          </button>
-        </div>
-        {isStage3Completed('addition', completedTopics) && (
-          <div className="transfer-cta-box" style={{ marginTop: '20px', padding: '16px', background: 'var(--clr-hover, rgba(255,255,255,0.03))', borderRadius: '10px', border: '1px solid var(--clr-border)', textAlign: 'center' }}>
-            <p style={{ margin: '0 0 12px', fontSize: '0.9rem', color: 'var(--clr-text-soft)', lineHeight: '1.4' }}>
-              {goldMastery.includes('addition') ? (
-                <>🥇 You have achieved Gold Mastery for this topic!</>
-              ) : (
-                <>🎉 You have completed Stage 3 Practice for this topic!</>
-              )}
-            </p>
-            <button
-              className="btn-transfer-cta"
-              onClick={() => {
-                if (setTransferTopic) setTransferTopic('addition')
-                if (setMode) setMode('transfer')
-              }}
-              style={{ width: '100%', padding: '10px', background: 'linear-gradient(135deg, #FFD700, #FFA500)', color: '#000', fontWeight: 'bold', border: 'none', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
-            >
-              {goldMastery.includes('addition') ? (
-                <>🔄 Revisit Transfer Challenge (Stage 4) 🥇</>
-              ) : (
-                <>🚀 Start Transfer Challenge (Stage 4) 🥇</>
-              )}
-            </button>
-          </div>
-        )}
-      </div>
-    )
+  // Adaptive Remediation: determine redirect target from misconception list
+  const resolveAdaptiveRedirect = (misconceptions, currentPhase) => {
+    if (!misconceptions || misconceptions.length === 0) return null
+    const counts = {}
+    misconceptions.forEach(m => { counts[m] = (counts[m] || 0) + 1 })
+    let majorityType = null
+    let majorityCount = 0
+    for (const [type, count] of Object.entries(counts)) {
+      if (count > majorityCount) { majorityType = type; majorityCount = count }
+    }
+    if (majorityCount < 2) return null // no majority — fallback
+    const redirectMap = {
+      'counting-error':           'try-it',
+      'concatenation':            'pre-symbol-addition',
+      'symbol-misunderstanding':  'numeral-discovery',
+    }
+    const target = redirectMap[majorityType]
+    if (!target || target === currentPhase) return null // avoid redirecting to self
+    return target
   }
 
   return (
-    <QuizLayout title="Addition" onBack={onBack} timer={timer}>
-      {started && !finished && <>
-        {/* Progress Display */}
+    <QuizLayout title="Addition" subtitle="Choose a level and solve addition questions" onBack={onBack} timer={phase === 'playing' ? timer : null}>
+      {phase === 'welcome' && <div className="welcome-box">
+        <p className="welcome-text">Practice addition!</p>
+        <div className="diff-card-grid">
+          {[
+            { key: 'easy', name: 'Easy', sub: '1-digit addition' },
+            { key: 'medium', name: 'Medium', sub: '2-digit addition' },
+            { key: 'hard', name: 'Hard', sub: '3-digit addition' },
+            { key: 'extrahard', name: 'Extra Hard', sub: '4-digit addition' },
+            { key: 'adaptive', name: 'Adaptive', sub: 'Dynamic difficulty' },
+          ].map((d) => {
+            const selected = d.key === 'adaptive' ? isAdaptive : (!isAdaptive && difficulty === d.key)
+            return (
+              <div
+                key={d.key}
+                className={`diff-card${selected ? ' selected' : ''}`}
+                onClick={() => {
+                  if (d.key === 'adaptive') {
+                    setIsAdaptive(true)
+                  } else {
+                    setDifficulty(d.key)
+                    setIsAdaptive(false)
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    if (d.key === 'adaptive') {
+                      setIsAdaptive(true)
+                    } else {
+                      setDifficulty(d.key)
+                      setIsAdaptive(false)
+                    }
+                  }
+                }}
+              >
+                <span className="diff-card-name">{d.name}</span>
+                <span className="diff-card-sub">{d.sub}</span>
+              </div>
+            )
+          })}
+        </div>
+        <div style={{ marginTop: '12px' }}>
+          <label className="question-count-label">How many questions?</label>
+          <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={(e) => { const v = e.target.value; if (v === '' || /^\d+$/.test(v)) setNumQuestions(v) }} placeholder={String(DEFAULT_TOTAL)} />
+        </div>
+        <div className="button-row" style={{ marginTop: '12px' }}>
+          <button
+            onClick={() => {
+              startQuiz()
+              setPhase('playing')
+            }}
+          >
+            Start Quiz
+          </button>
+        </div>
+      </div>}
+
+      {phase === 'choose-mode' && (
+        <ChooseModeScreen
+          learningCompleted={learningCompleted}
+          onChooseLearning={() => {
+            setPhase('learning-level-selection')
+          }}
+          onChooseAssessment={() => {
+            setPhase('welcome')
+          }}
+        />
+      )}
+
+      {phase === 'learning-level-selection' && (
+        <LearningLevelSelection
+          onChooseLevel={(levelKey) => {
+            if (levelKey === 'single-digit') {
+              setMissionCompleted([false, false, false])
+              setPhase('mission-card')
+            }
+          }}
+          onBack={() => setPhase('choose-mode')}
+        />
+      )}
+
+      {phase === 'mission-card' && (
+        <MissionCard
+          title="Today's Mission"
+          items={[
+            "Let's count",
+            "Put two groups together",
+            "Discover + and ="
+          ]}
+          completedStates={missionCompleted}
+          onContinue={() => {
+            if (missionCompleted.every(Boolean)) {
+              setPhase('choose-mode')
+            } else if (missionCompleted.every(v => !v)) {
+              setPhase('try-it')
+            } else if (missionCompleted[1]) {
+              setPhase('numeral-discovery')
+            } else {
+              setPhase('pre-symbol-addition')
+            }
+          }}
+          buttonText={missionCompleted.every(v => !v) ? "Start Mission" : "Continue"}
+        />
+      )}
+
+      {phase === 'try-it' && (
+        <TryItAssessment
+          initialCharacter={failedCharacterType}
+          onFinished={(charType) => {
+            setLastCharacterType(charType)
+            setFailedCharacterType(null)
+            setMissionCompleted(prev => { const n = [...prev]; n[0] = true; return n; })
+            if (isRemediationFlow && returnMission) {
+              const target = returnMission
+              setIsRemediationFlow(false)
+              setReturnMission(null)
+              setPhase(target)
+            } else {
+              setPhase('mission-card')
+            }
+          }}
+        />
+      )}
+
+      {phase === 'pre-symbol-addition' && (
+        <PreSymbolAddition
+          initialCharacter={lastCharacterType}
+          startAtStageB={preSymbolStartStageB}
+          onFinished={() => {
+            setPreSymbolStartStageB(false);
+            setMissionCompleted(prev => { const n = [...prev]; n[1] = true; return n; })
+            if (isRemediationFlow && returnMission) {
+              const target = returnMission
+              setIsRemediationFlow(false)
+              setReturnMission(null)
+              setPhase(target)
+            } else {
+              setPhase('mission-card')
+            }
+          }}
+          onFailed={(failedChar, misclass) => {
+            setPreSymbolStartStageB(false);
+            setFailedCharacterType(failedChar)
+            if (!isRemediationFlow) {
+              setIsRemediationFlow(true)
+              setReturnMission('pre-symbol-addition')
+            }
+            const adaptiveTarget = resolveAdaptiveRedirect(misclass, 'pre-symbol-addition')
+            setPhase(adaptiveTarget || 'try-it')
+          }}
+        />
+      )}
+
+      {phase === 'numeral-discovery' && (
+        <NumeralDiscovery
+          initialCharacter={lastCharacterType}
+          onFinished={() => {
+            setMissionCompleted(prev => { const n = [...prev]; n[2] = true; return n; })
+            setLearningCompleted(true)
+            try { localStorage.setItem('addition-learning-completed', 'true') } catch {}
+            if (isRemediationFlow) {
+              setIsRemediationFlow(false)
+              setReturnMission(null)
+            }
+            setPhase('mission-card')
+          }}
+          onFailed={(failedChar, misclass) => {
+            setPreSymbolStartStageB(true);
+            if (!isRemediationFlow) {
+              setIsRemediationFlow(true)
+              setReturnMission('numeral-discovery')
+            }
+            const adaptiveTarget = resolveAdaptiveRedirect(misclass, 'numeral-discovery')
+            if (adaptiveTarget === 'try-it') {
+              setFailedCharacterType(failedChar)
+            }
+            setPhase(adaptiveTarget || 'pre-symbol-addition');
+          }}
+        />
+      )}
+
+      {phase === 'prediction-placeholder' && (
+        <LearningContainer>
+          <div className="tlf-story-card" style={{ padding: '2.5rem 2rem', maxWidth: '580px', margin: '0 auto' }}>
+            <div className="tlf-mission-badge" style={{ backgroundColor: 'rgba(92, 184, 122, 0.12)', color: 'var(--clr-correct)', borderColor: 'rgba(92, 184, 122, 0.2)' }}>PART 2 PREVIEW</div>
+            <h2 className="tlf-mission-title" style={{ color: 'var(--clr-correct)', fontSize: '1.8rem', marginBottom: '1rem' }}>Coming Soon</h2>
+            <p className="tlf-mission-desc" style={{ maxWidth: '460px', marginBottom: '2rem' }}>
+              Prediction screen will be implemented in Part 2.
+            </p>
+            {window.location.search.includes('debug') && (
+              <div style={{
+                width: '100%',
+                backgroundColor: 'rgba(0, 0, 0, 0.15)',
+                border: '1px dashed var(--clr-border)',
+                borderRadius: '16px',
+                padding: '1.5rem',
+                marginBottom: '2rem',
+                boxSizing: 'border-box',
+                textAlign: 'left'
+              }}>
+                <h4 style={{ margin: '0 0 1rem 0', fontFamily: 'Fredoka, sans-serif', color: 'var(--clr-text)', fontSize: '1.1rem' }}>Milestone Simulator</h4>
+                <p style={{ margin: '0 0 1.25rem 0', color: 'var(--clr-text-soft)', fontSize: '0.88rem', lineHeight: '1.4' }}>
+                  Simulate completing activity blocks to verify that checkmarks animate correctly upon returning to the Mission Card milestone:
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                  <button
+                    onClick={() => { setMissionCompleted([false, false, false]); setPhase('mission-card'); }}
+                    style={{ width: '100%', padding: '0.65rem', borderRadius: '8px', fontSize: '0.9rem', cursor: 'pointer', border: '1px solid var(--clr-border)', background: 'transparent', color: 'var(--clr-text)', textAlign: 'left' }}
+                  >
+                    Reset Lesson (All Unchecked)
+                  </button>
+                  <button
+                    onClick={() => { setMissionCompleted([true, false, false]); setPhase('mission-card'); }}
+                    style={{ width: '100%', padding: '0.65rem', borderRadius: '8px', fontSize: '0.9rem', cursor: 'pointer', border: '1px solid var(--clr-accent-soft)', background: 'rgba(232, 134, 74, 0.05)', color: 'var(--clr-text)', textAlign: 'left' }}
+                  >
+                    Completed Block 1: "Let's count"
+                  </button>
+                  <button
+                    onClick={() => { setMissionCompleted([true, true, false]); setPhase('mission-card'); }}
+                    style={{ width: '100%', padding: '0.65rem', borderRadius: '8px', fontSize: '0.9rem', cursor: 'pointer', border: '1px solid var(--clr-accent-soft)', background: 'rgba(232, 134, 74, 0.05)', color: 'var(--clr-text)', textAlign: 'left' }}
+                  >
+                    Completed Block 2: "Put two groups together"
+                  </button>
+                  <button
+                    onClick={() => { setMissionCompleted([true, true, true]); setPhase('mission-card'); }}
+                    style={{ width: '100%', padding: '0.65rem', borderRadius: '8px', fontSize: '0.9rem', cursor: 'pointer', border: '1px solid var(--clr-correct)', background: 'rgba(92, 184, 122, 0.05)', color: 'var(--clr-text)', textAlign: 'left' }}
+                  >
+                    Completed Block 3: "Discover + and =" (All Done)
+                  </button>
+                </div>
+              </div>
+            )}
+            <div className="tlf-story-navigation" style={{ maxWidth: '200px', margin: '0 auto' }}>
+              <button className="tlf-story-btn tlf-story-btn-back" onClick={() => setPhase('mission-card')}>
+                ← Back
+              </button>
+            </div>
+          </div>
+        </LearningContainer>
+      )}
+
+      {phase === 'playing' && <>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.3rem' }}>
           <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
           {isAdaptive && additionMode === 'standard' && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
         </div>
         {isAdaptive && additionMode === 'standard' && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
 
-        {/* Standard Mode View */}
         {additionMode === 'standard' && question && (
           <>
             <div className="question-box">{loading || !question ? 'Loading question…' : `${question.prompt} = ?`}</div>
@@ -48941,13 +49179,11 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
           </>
         )}
 
-        {/* Visual Counting Mode View */}
         {additionMode === 'counting' && question && (
           <div className="dnd-container" style={{ margin: '15px 0' }}>
             <h3 style={{ textAlign: 'center', margin: '0 0 10px 0' }}>
               Put {question.a} + {question.b} apples in the basket!
             </h3>
-
             <div
               className="dnd-source"
               onDragOver={handleDragOver}
@@ -48967,7 +49203,6 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
                 </div>
               ))}
             </div>
-
             <div
               className="dnd-target"
               onDragOver={handleDragOver}
@@ -48975,7 +49210,7 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
               style={{ minHeight: '120px', padding: '20px', borderRadius: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
             >
               <div style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--clr-accent)', marginBottom: '8px' }}>
-                🍎 Basket (Total: {targetItems.length})
+                Basket (Total: {targetItems.length})
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'center' }}>
                 {targetItems.map(item => (
@@ -48995,7 +49230,6 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
           </div>
         )}
 
-        {/* Balance Scale Mode View */}
         {additionMode === 'scale' && question && (() => {
           const targetTotal = Number(question.a) + Number(question.b)
           const rTotal = rightBlocks.reduce((acc, b) => acc + b.val, 0)
@@ -49103,8 +49337,6 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
           )
         })()}
 
-        {renderFeedback(feedback, isCorrect)}
-
         {/* Action Controls */}
         <div className="button-row">
           {!revealed ? (
@@ -49122,18 +49354,25 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
           )}
         </div>
         {results.length > 0 && <ResultsTable results={results} />}
+
+        {results.length > 0 && <ResultsTable results={results} />}
       </>}
 
-      {finished && <div className="welcome-box">
+      {phase === 'finished' && <div className="welcome-box">
         <p className="welcome-text">Quiz complete.</p>
         <p className="final-score">Final score: {score}/{totalQ}</p>
         {isAdaptive && additionMode === 'standard' && <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)' }}>Reached level: <strong style={{ color: ADAPT_COLORS[curAdaptLevel] }}>{ADAPT_LABELS[curAdaptLevel]}</strong></p>}
         <ResultsTable results={results} />
-        <button onClick={() => { setStarted(false); setFinished(false) }}>Play Again</button>
+        <button onClick={() => {
+          setStarted(false)
+          setFinished(false)
+          setPhase('welcome')
+        }}>Play Again</button>
       </div>}
     </QuizLayout>
   )
 }
+
 
 /* ─── Gym puzzle infrastructure (shared by GymArithmetic, GymAlgebra, BasicGym) ─── */
 

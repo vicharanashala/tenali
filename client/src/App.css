@@ -3907,6 +3907,663 @@ button:disabled {
   animation: percentages-card-fade-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
+.card {
+  margin: auto;        /* Safe flex centering (won't clip top on tall content) */
+  width: 100%;
+  max-width: 900px;    /* Prevent content from stretching too wide */
+  background: var(--clr-card);
+  border: 1px solid var(--clr-border);
+  border-radius: 24px;
+  padding: 48px 40px;
+  box-shadow: var(--shadow-card);  /* Elevated appearance with shadow */
+  /* Smooth color transitions when theme changes */
+  transition: background var(--transition), border-color var(--transition);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* TYPOGRAPHY - Text hierarchy and heading styles */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+h1 {
+  margin: 0 0 6px;
+  text-align: center;
+  font-family: var(--font-display);  /* Serif display font for emphasis */
+  /* clamp(min, preferred, max) creates fluid sizing: scales between 2.4rem and 3.2rem based on 5vw viewport width */
+  font-size: clamp(2.4rem, 5vw, 3.2rem);
+  font-weight: 700;
+  color: var(--clr-text);
+  letter-spacing: -0.02em;  /* Slight negative spacing for sophisticated look */
+  line-height: 1.15;        /* Compact line height for headings */
+}
+
+.subtitle {
+  margin: 0 0 36px;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--clr-text-soft);  /* Softer color for secondary text */
+  font-weight: 400;
+  line-height: 1.6;  /* Generous line height for readability */
+  letter-spacing: 0.01em;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* SEARCH BAR - Quiz topic filtering */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.search-bar-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.search-bar {
+  width: 100%;
+  max-width: 340px;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 400;
+  padding: 10px 18px;
+  border: 1.5px solid var(--clr-border);
+  border-radius: 999px;  /* Pill-shaped input */
+  background: var(--clr-input);
+  color: var(--clr-text);
+  outline: none;
+  /* Transition multiple properties for focus state animation */
+  transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+.search-bar::placeholder {
+  color: var(--clr-placeholder);
+}
+
+.search-bar:focus {
+  border-color: var(--clr-accent);
+  /* Box-shadow creates glowing effect around focused input (accent color + 3px spread) */
+  box-shadow: 0 0 0 3px var(--clr-accent-soft);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* MENU GRID - Home page quiz topic selection */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.menu-grid {
+  display: grid;
+  /* auto-fill fills grid with as many 180px columns as fit, wrapping as needed */
+  grid-template-columns: repeat(auto-fill, 180px);
+  gap: 14px;
+  justify-content: center;
+}
+
+.grid-dimension {
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--clr-text-soft);
+  opacity: 0.45;  /* Very subtle text describing grid size */
+  margin-top: 16px;
+  letter-spacing: 0.06em;
+}
+
+.menu-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px 16px 16px;
+  gap: 10px;
+  width: 180px;
+  height: 160px;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+  background: var(--clr-surface);
+  color: var(--clr-text);
+  cursor: pointer;
+  /* Multiple transitions: lift on hover (transform), glow effect (shadow), highlight border */
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), background var(--transition);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+
+  /* Reset browser button defaults since menu-card is a <button> element */
+  font-family: var(--font-body);
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0;
+  line-height: inherit;
+  -webkit-appearance: none;  /* iOS button styling */
+  appearance: none;
+  box-sizing: border-box;
+}
+
+.menu-card:hover {
+  /* Lift card up 3px on hover */
+  transform: translateY(-3px);
+  /* Enhanced shadow creates depth effect */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  /* Accent color highlight on border */
+  border-color: var(--clr-accent);
+}
+
+.menu-card::before {
+  /* Decorative dot indicator that appears on hover */
+  content: '';
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--clr-accent);
+  opacity: 0;  /* Hidden by default */
+  transition: opacity var(--transition);
+}
+
+.menu-card:hover::before {
+  opacity: 1;  /* Fade in dot on hover */
+}
+
+/* Category-specific dot colors using CSS custom properties */
+.menu-card.purple { --dot: #9b6dca; }
+.menu-card.blue   { --dot: #5a8fc2; }
+.menu-card.green  { --dot: #5aab7a; }
+.menu-card.orange { --dot: #e8864a; }
+.menu-card.featured { --dot: var(--clr-accent); }
+.menu-card.purple::before { background: var(--dot); }
+.menu-card.blue::before   { background: var(--dot); }
+.menu-card.green::before  { background: var(--dot); }
+.menu-card.orange::before { background: var(--dot); }
+.menu-card.featured::before { background: var(--dot); }
+
+/* Placeholder state for disabled/unavailable quiz options */
+.menu-card.placeholder {
+  border-style: dashed;  /* Dashed border indicates disabled state */
+  border-color: var(--clr-border);
+  background: var(--clr-hover);
+  cursor: default;  /* Not clickable */
+  box-shadow: none;
+}
+
+.menu-card.placeholder:hover {
+  transform: none;  /* No lift on hover */
+  box-shadow: none;
+  border-color: var(--clr-border);
+}
+
+.menu-card.placeholder::before {
+  display: none;  /* Hide indicator dot for disabled cards */
+}
+
+.placeholder-text {
+  color: var(--clr-text-soft);
+  opacity: 0.35;  /* Very faint text for disabled state */
+  font-weight: 500;
+  font-size: 0.88rem;
+  background: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+.menu-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--clr-text);
+  line-height: 1;
+  background: var(--clr-badge);  /* Subtle background badge */
+  width: 140px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 8px;
+  flex-shrink: 0;  /* Don't shrink below content size */
+}
+
+.menu-subtitle {
+  font-size: 0.82rem;
+  color: var(--clr-text-soft);
+  line-height: 1.4;
+  min-height: 1.3em;  /* Prevent layout shift with variable-height subtitles */
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* BUTTONS - Primary, secondary, and utility buttons */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+button {
+  /* PRIMARY BUTTON STYLE - High visibility call-to-action */
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 12px 28px;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  background: var(--clr-accent);  /* Warm orange accent color */
+  color: #fff;  /* White text for contrast */
+  box-shadow: var(--shadow-btn);
+  /* Animate position lift and shadow on interaction */
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+  line-height: 1.4;
+}
+
+button:hover {
+  /* Subtle lift with enhanced glow on hover */
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(232, 134, 74, 0.3);
+  background: #cc6a2e;  /* Slightly darker accent on hover */
+}
+
+button:active {
+  /* Return to normal position when clicked */
+  transform: translateY(0);
+}
+
+button.secondary {
+  /* SECONDARY BUTTON STYLE - Subtle, low-emphasis actions */
+  background: transparent;
+  color: var(--clr-text);
+  border: 1px solid var(--clr-border);
+  box-shadow: none;
+}
+
+button.secondary:hover {
+  background: var(--clr-hover);  /* Subtle background tint on hover */
+  box-shadow: none;
+}
+
+button:disabled {
+  /* Disabled state for unavailable actions */
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.back-button {
+  /* UTILITY BUTTON STYLE - Minimal navigation button */
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 500;
+  padding: 8px 16px;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--clr-text-soft);  /* Subtle text color for navigation */
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+  box-shadow: none;
+}
+
+.back-button:hover {
+  background: var(--clr-hover);
+  color: var(--clr-text);  /* Brighten text on hover */
+  transform: none;
+  box-shadow: none;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* HEADER & STATUS INDICATORS - Quiz progress tracking */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.header-row {
+  /* Flex container for back button and navigation */
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.top-mini-row {
+  /* Row of status pills (score, progress, timer) positioned at top-right */
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.score-pill,
+.progress-pill {
+  /* PILL BADGES - Small status indicators with rounded edges */
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--clr-text-soft);
+  background: var(--clr-surface);
+  border-radius: 999px;  /* Maximum border-radius for pill shape */
+  border: none;
+  letter-spacing: 0.02em;
+}
+
+.progress-pill.center {
+  /* Variant: center-aligned progress indicator */
+  display: table;
+  margin: 0 auto 20px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* RADIO GROUP - Difficulty or option selection (single choice) */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.radio-group {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;  /* Allow options to wrap on small screens */
+  margin-bottom: 28px;
+}
+
+.radio-pill {
+  /* PILL-STYLE RADIO BUTTON - Accessible radio input styled as button */
+  position: relative;
+  padding: 10px 20px;
+  border-radius: 999px;  /* Pill shape */
+  background: transparent;
+  border: 1px solid var(--clr-border);
+  color: var(--clr-text-soft);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;  /* Prevent text selection on click */
+  transition: all var(--transition);  /* Animate all properties on state change */
+}
+
+.radio-pill input {
+  /* Hidden native radio button (we style the label instead) */
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.radio-pill:hover {
+  /* Hover highlight shows interactive nature */
+  border-color: var(--clr-accent);
+  color: var(--clr-accent);
+}
+
+.radio-pill.active {
+  /* Selected state: filled with accent color */
+  background: var(--clr-accent);
+  border-color: var(--clr-accent);
+  color: #fff;  /* White text on colored background */
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* WELCOME & RESULTS SCREENS - Quiz completion states */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.welcome-box {
+  /* Container for welcome/results content */
+  text-align: center;
+  padding: 32px 8px;
+}
+
+.welcome-box > button {
+  margin-top: 8px;  /* Spacing between welcome text and action button */
+}
+
+.welcome-text {
+  /* Descriptive text on welcome/results screens */
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--clr-text-soft);
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* DIFFICULTY CARD SELECTOR - Addition quiz configuration */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.diff-card-grid {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.diff-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--clr-card, #2C2118);
+  border: 2px solid var(--clr-border);
+  cursor: pointer;
+  user-select: none;
+  min-width: 120px;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.diff-card:hover {
+  border-color: var(--clr-accent);
+}
+
+.diff-card.selected {
+  border-color: var(--clr-accent);
+  background: rgba(232, 134, 74, 0.12);
+  box-shadow: 0 0 12px rgba(232, 134, 74, 0.18);
+}
+
+.diff-card-name {
+  font-family: var(--font-display, 'Baloo 2', sans-serif);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--clr-text);
+}
+
+.diff-card.selected .diff-card-name {
+  color: var(--clr-accent);
+}
+
+.diff-card-sub {
+  font-family: var(--font-body, 'Baloo 2', sans-serif);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--clr-text-soft);
+}
+
+@media (max-width: 560px) {
+  .diff-card-grid {
+    gap: 8px;
+  }
+  .diff-card {
+    min-width: 0;
+    flex: 1 1 calc(50% - 8px);
+    padding: 12px 10px;
+  }
+}
+
+.final-score {
+  /* Large score display at end of quiz */
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--clr-text);
+  margin-bottom: 32px;
+  font-family: var(--font-display);  /* Use serif font for emphasis */
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* QUESTION DISPLAY - Question text, equations, vocabulary */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.question-box {
+  /* Main question text container — matches Bearings question size */
+  font-family: var(--font-body);
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin: 16px 0 28px;
+  color: var(--clr-text);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.question-box .equation {
+  /* Mathematical equations within questions (larger than base question) */
+  display: block;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);  /* Scales larger than parent */
+  font-weight: 600;
+  margin-top: 12px;
+  letter-spacing: 0.01em;  /* Subtle spacing for mathematical readability */
+}
+
+.question-box .given {
+  /* "Given" context text in problem statements */
+  font-size: inherit;
+  font-weight: 600;
+  color: var(--clr-text);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.vocab-word {
+  /* Vocabulary words being defined (for vocab quizzes) */
+  font-family: var(--font-display);  /* Use serif for emphasis */
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--clr-text);
+  letter-spacing: 0.01em;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ANSWER INPUT - Text entry field for short answers */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.answer-input {
+  /* Main input for student answers (numbers, short text) */
+  width: 100%;
+  max-width: 320px;
+  display: block;
+  margin: 0 auto;
+  font-family: var(--font-body);
+  font-size: 1.3rem;  /* Large for easy reading */
+  font-weight: 500;
+  padding: 14px 20px;
+  border: 1.5px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  text-align: center;  /* Center student input */
+  outline: none;
+  color: var(--clr-text);
+  background: var(--clr-input);
+  /* Smooth transitions on focus and state changes */
+  transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+.answer-input::placeholder {
+  color: var(--clr-placeholder);
+  font-weight: 400;
+}
+
+.answer-input:focus {
+  /* Highlighted focus state with accent color */
+  border-color: var(--clr-accent);
+  /* 3px glow box-shadow (outline-like effect but inside the browser's default outline) */
+  box-shadow: 0 0 0 3px var(--clr-accent-soft);
+}
+.answer-input.input-error {
+  border-color: #f44336;
+  box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.18);
+  animation: shake 0.35s ease;
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* MULTIPLE CHOICE OPTIONS - Answer option cards for GK quizzes */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.options-list {
+  /* Container for multiple choice options */
+  display: grid;
+  gap: 10px;  /* Space between option cards */
+  margin-bottom: 8px;
+}
+
+.option-card {
+  /* Individual answer option (styled radio button) */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--clr-border);
+  background: var(--clr-input);
+  cursor: pointer;
+  color: var(--clr-text);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.option-card:hover {
+  /* Highlight on hover to show clickable state */
+  border-color: var(--clr-text-soft);
+  background: var(--clr-hover);
+}
+
+.option-card.selected {
+  /* Selected option gets accent color highlight */
+  border-color: var(--clr-accent);
+  background: var(--clr-accent-soft);
+}
+
+.option-card input[type="radio"] {
+  /* Hide native radio button (we use custom styling instead) */
+  display: none;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* FEEDBACK & RESULTS - Answer feedback with color-coded states */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.feedback {
+  /* Feedback message shown after answer submission */
+  margin-top: 20px;
+  padding: 16px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.75;
+  white-space: pre-line;  /* Preserve line breaks in feedback text */
+}
+
+.feedback.correct {
+  /* Success state: green background with green text */
+  background: var(--clr-correct-bg);
+  color: var(--clr-correct);
+}
+
+.feedback.wrong {
+  /* Error state: red background with red text */
+  background: var(--clr-wrong-bg);
+  color: var(--clr-wrong);
+}
+
+.feedback.solve {
+  background: var(--clr-surface);
+  color: var(--clr-text);
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 400;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0;
+  max-width: 440px;
+  margin: 24px auto 0;
+  box-shadow: none;
+}
+
 .percentages-num-bounce {
   display: inline-block;
 }

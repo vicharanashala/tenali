@@ -1,0 +1,366 @@
+.tlf-boxes-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  margin-bottom: 2rem;
+  position: relative;
+  transition: padding-right 0.45s ease-out;
+}
+
+/* Individual box styling */
+.tlf-box {
+  width: 170px;
+  height: 140px;
+  background-color: var(--clr-surface);
+  border: 2px solid var(--clr-border);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.45s cubic-bezier(0.25, 0.8, 0.25, 1),
+              width 0.45s cubic-bezier(0.25, 0.8, 0.25, 1),
+              border-color 0.2s ease-in-out;
+}
+
+/* Shrunk/compact boxes size (height remains unchanged) */
+.tlf-box.shrunk {
+  width: 130px;
+  height: 140px;
+}
+
+/* Objects wrapper with opacity transitions */
+.tlf-box-objects-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  transition: opacity 0.3s ease-out;
+}
+
+.tlf-box-objects-wrapper.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Character sprite positioned inside card box */
+.tlf-box-item {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  transition: transform 0.18s ease-out, filter 0.18s ease-out, opacity 0.18s ease-out;
+  animation: tlf-pop-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.tlf-box-item:hover {
+  transform: translateY(-4px) scale(1.05);
+  filter: drop-shadow(0 0 6px rgba(240, 162, 107, 0.4));
+}
+
+.tlf-box-item.marked {
+  opacity: 0.78;
+}
+
+/* Numeral content centered flex layout */
+.tlf-numeral-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px; /* Increased gap spacing for visual clarity */
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.tlf-numeral-content.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.tlf-box-numeral {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 52px;
+  font-weight: 800;
+  color: var(--clr-text);
+  line-height: 1;
+  transition: transform 0.3s ease-out;
+}
+
+.tlf-numeral-icon {
+  display: block;
+  opacity: 1;
+  width: 32px;
+  height: 32px;
+  transition: opacity 0.3s ease-out, width 0.3s ease-out, transform 0.3s ease-out, margin 0.3s ease-out;
+}
+
+.tlf-numeral-icon.fade-out {
+  opacity: 0;
+  width: 0px;
+  transform: scale(0);
+  margin-left: -18px; /* removes gap spacing */
+}
+
+/* Plus symbol styling */
+.tlf-plus-symbol {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 54px;
+  font-weight: 800;
+  color: #F0A26B;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+/* Equal symbol styling */
+.tlf-equal-symbol {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 54px;
+  font-weight: 800;
+  color: #F0A26B;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+/* Result box card */
+.tlf-box.result-box {
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 0.3s ease-out 0.1s, transform 0.3s ease-out 0.1s;
+  width: 130px;
+  height: 140px;
+}
+
+.tlf-box.result-box input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--clr-text);
+  text-align: center;
+  outline: none;
+}
+
+.tlf-box.result-box input::placeholder {
+  color: var(--clr-border);
+  font-size: 18px;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+.tlf-box.result-box.incorrect {
+  border-color: var(--clr-incorrect);
+  animation: shake 0.3s ease-in-out;
+}
+
+/* Active Stage B transitions */
+.tlf-stage-b-active .tlf-box.left {
+  transform: translateX(-15px);
+}
+
+.tlf-stage-b-active .tlf-box.right {
+  transform: translateX(15px);
+}
+
+.tlf-stage-b-active .tlf-plus-symbol {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease-out 0.15s, transform 0.3s ease-out 0.15s;
+}
+
+/* Equation building stage transition */
+.tlf-equation-active .tlf-box.left {
+  transform: translateX(-20px);
+}
+
+.tlf-equation-active .tlf-box.right {
+  transform: translateX(-5px);
+}
+
+.tlf-equation-active .tlf-plus-symbol {
+  transform: translateX(-12px);
+  transition: transform 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.tlf-equation-active .tlf-equal-symbol {
+  opacity: 1;
+  transform: translateY(0) translateX(5px);
+  transition: opacity 0.3s ease-out 0.1s, transform 0.3s ease-out 0.1s;
+}
+
+.tlf-equation-active .tlf-box.result-box {
+  opacity: 1;
+  transform: scale(1) translateX(15px);
+}
+
+/* Checkmark overlay style for individual box characters */
+.tlf-box-item-checkmark-badge {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #5cb87a;
+  color: white;
+  font-size: 10px;
+  font-weight: 800;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  animation: tlf-pop-in 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  pointer-events: none;
+}
+
+/* shake animation for mistakes */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+/* Ensure centering on very small screens */
+@media (max-width: 480px) {
+  .tlf-boxes-row {
+    gap: 0.5rem;
+  }
+  
+  .tlf-box {
+    width: 140px;
+    height: 120px;
+  }
+  
+  .tlf-plus-symbol, .tlf-equal-symbol {
+    font-size: 42px;
+    width: 36px;
+  }
+
+  .tlf-box.result-box {
+    width: 110px;
+    height: 120px;
+  }
+  
+  .tlf-equation-active .tlf-box.left {
+    transform: translateX(-10px);
+  }
+  .tlf-equation-active .tlf-box.right {
+    transform: translateX(-2px);
+  }
+  .tlf-equation-active .tlf-plus-symbol {
+    transform: translateX(-6px);
+  }
+  .tlf-equation-active .tlf-equal-symbol {
+    transform: translateY(0) translateX(2px);
+  }
+  .tlf-equation-active .tlf-box.result-box {
+    transform: scale(1) translateX(8px);
+  }
+}
+
+/* Staggered objects fade out inside container during Beat 1 */
+.tlf-box-item.fading {
+  opacity: 0;
+  transition: opacity 0.4s ease-out;
+}
+
+.tlf-box-item.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Numeral Discovery (Mission 3) Specific Override Styles */
+.tlf-num-disc .tlf-box {
+  width: 170px;
+  height: 115px; /* footprint height reduced */
+  transition: transform 0.45s cubic-bezier(0.25, 0.8, 0.25, 1),
+              width 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.tlf-num-disc .tlf-box.shrunk {
+  width: 135px; /* footprint width reduced */
+  height: 115px;
+}
+.tlf-num-disc .tlf-box.result-box {
+  width: 135px;
+  height: 115px;
+}
+.tlf-num-disc .tlf-box.result-box input {
+  font-size: 42px; /* matches operand numeral size */
+  font-weight: 600; /* weight 600 */
+  line-height: 111px; /* center vertically inside 115px box */
+  height: 100%;
+  width: 100%;
+  text-align: center; /* center horizontally */
+  color: var(--clr-text);
+}
+.tlf-num-disc .tlf-box-numeral {
+  font-size: 42px; /* reduced numeral font size */
+  font-weight: 700; /* reduced font weight (800 -> 700) */
+}
+.tlf-num-disc .tlf-numeral-content {
+  gap: 8px; /* horizontal gap between numeral and icon */
+}
+
+/* Progressive Reveal Animation Utilities */
+.opacity-hide {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+.opacity-show {
+  opacity: 1 !important;
+  transition: opacity 0.3s ease-out;
+}
+.reveal-equal {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+.reveal-result-box {
+  animation: tlf-result-box-reveal 0.35s cubic-bezier(0.215, 0.61, 0.355, 1) forwards; /* easeOutCubic */
+}
+.reveal-submit-btn {
+  animation: tlf-submit-btn-reveal 0.25s ease-out forwards;
+}
+
+@keyframes tlf-result-box-reveal {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateX(15px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateX(15px);
+  }
+}
+
+@keyframes tlf-submit-btn-reveal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

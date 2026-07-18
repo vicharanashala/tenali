@@ -1,0 +1,380 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
+
+/* Entry animations */
+@keyframes tlf-pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes tlf-simple-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.tlf-assessment-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 1.5rem 1rem;
+  box-sizing: border-box;
+}
+
+.tlf-assessment-card {
+  background-color: var(--clr-card);
+  border: 1px solid var(--clr-border);
+  border-radius: 28px;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  animation: tlf-pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.1) forwards;
+}
+
+.tlf-assessment-title {
+  font-family: 'Baloo 2', 'Nunito', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: #F0A26B;
+  margin: 0 0 0.5rem 0;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+.tlf-assessment-helper {
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #A89D8F;
+  margin: 0 0 1.75rem 0;
+  text-align: center;
+}
+
+/* Scattered character canvas */
+.tlf-scatter-canvas {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  height: 280px;
+  background-color: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 20px;
+  margin-bottom: 2rem;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.tlf-scatter-item {
+  position: absolute;
+  cursor: pointer;
+  transition: transform 0.18s ease-out, filter 0.18s ease-out, opacity 0.18s ease-out;
+  animation: tlf-pop-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  width: 56px;
+  height: 56px;
+}
+
+.tlf-scatter-item:hover {
+  transform: translateY(-5px) scale(1.05);
+  filter: drop-shadow(0 0 8px rgba(240, 162, 107, 0.45));
+}
+
+.tlf-scatter-item.marked {
+  opacity: 0.78;
+}
+
+/* Checkmark overlay style */
+.tlf-item-checkmark-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #5cb87a;
+  color: white;
+  font-size: 11px;
+  font-weight: 800;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  animation: tlf-pop-in 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  pointer-events: none;
+}
+
+/* Horizontal multiple choice options */
+.tlf-options-row {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.tlf-option-btn {
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
+  border: 2px solid var(--clr-border);
+  background-color: var(--clr-surface);
+  color: #F4EDE4;
+  font-family: 'Baloo 2', 'Nunito', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.tlf-option-btn:hover:not(:disabled) {
+  border-color: #E8935B;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.tlf-option-btn.selected {
+  background-color: #4A3020 !important;
+  border: 1.5px solid #E8935B !important;
+  color: #F0A26B !important;
+  transform: scale(1.08);
+  box-shadow: 0 4px 12px rgba(232, 134, 74, 0.15);
+}
+
+/* Option feedback colors */
+.tlf-option-btn.correct {
+  background-color: #e2f5e9 !important;
+  border-color: #5cb87a !important;
+  color: #2d6640 !important;
+  transform: scale(1.08);
+}
+
+.tlf-option-btn.incorrect {
+  background-color: #fcecee !important;
+  border-color: #d9534f !important;
+  color: #8c2e29 !important;
+}
+
+/* Q3 numeric input */
+.tlf-input-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.tlf-numeric-input {
+  width: 120px;
+  height: 72px;
+  border-radius: 18px;
+  border: 2px solid var(--clr-border);
+  background-color: var(--clr-surface);
+  color: var(--clr-text);
+  font-family: 'Baloo 2', 'Nunito', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.tlf-numeric-input:focus {
+  border-color: #E8935B;
+  box-shadow: 0 0 10px rgba(232, 134, 74, 0.2);
+}
+
+.tlf-numeric-input.incorrect {
+  background-color: #fcecee;
+  border-color: #d9534f;
+  color: #8c2e29;
+}
+
+/* Submit CTA button */
+.tlf-submit-btn {
+  padding: 0.9rem 3.5rem;
+  font-family: 'Baloo 2', 'Nunito', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1A1511;
+  background-color: #E8935B;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(232, 134, 74, 0.3);
+  transition: all 0.2s ease;
+  width: 180px;
+}
+
+.tlf-submit-btn:hover:not(:disabled) {
+  background-color: #f0a26b;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(232, 134, 74, 0.4);
+}
+
+.tlf-submit-btn:active:not(:disabled) {
+  transform: translateY(0px) scale(0.98);
+}
+
+.tlf-submit-btn:disabled {
+  background-color: var(--clr-border);
+  color: var(--clr-text-soft);
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.6;
+}
+
+/* Feedback messages */
+.tlf-feedback-area {
+  margin-top: 1.5rem;
+  min-height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.tlf-feedback-message {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-align: center;
+  animation: tlf-simple-fade 0.2s ease-in-out forwards;
+}
+
+.tlf-feedback-message.correct {
+  color: #5cb87a;
+}
+
+.tlf-feedback-message.incorrect {
+  color: #d9534f;
+}
+
+.tlf-assessment-wrapper,
+.tlf-assessment-wrapper button,
+.tlf-assessment-wrapper input,
+.tlf-assessment-wrapper p,
+.tlf-assessment-wrapper h2 {
+  font-family: 'Nunito', sans-serif;
+}
+
+/* ===== Guided Counting Scaffold ===== */
+
+/* Counting glow on active item */
+.tlf-scatter-item.counting-glow {
+  filter: drop-shadow(0 0 14px rgba(240, 162, 107, 0.85)) brightness(1.15);
+  transform: scale(1.14);
+  z-index: 10;
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+/* Counting label badge */
+.tlf-counting-label {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  min-width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #E8935B, #F0A26B);
+  color: #1A1511;
+  font-family: 'Baloo 2', 'Nunito', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(232, 147, 91, 0.45);
+  animation: tlf-pop-in 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  pointer-events: none;
+  z-index: 11;
+}
+
+/* Hide options/input/submit during animation */
+.tlf-options-row.scaffold-hidden,
+.tlf-input-container.scaffold-hidden,
+.tlf-submit-btn.scaffold-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* Reveal options/input/submit after animation */
+.tlf-options-row.scaffold-revealed,
+.tlf-input-container.scaffold-revealed,
+.tlf-submit-btn.scaffold-revealed {
+  animation: tlf-scaffold-fade-in 0.4s ease forwards;
+}
+
+@keyframes tlf-scaffold-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Assisted mode: correct answer pulses */
+.tlf-option-btn.assisted-highlight {
+  animation: tlf-assisted-pulse 1.2s ease-in-out infinite;
+  border-color: #E8935B !important;
+  background-color: rgba(232, 147, 91, 0.12) !important;
+  color: #F4EDE4 !important;
+  box-shadow: 0 0 12px rgba(232, 147, 91, 0.35);
+}
+
+@keyframes tlf-assisted-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 8px rgba(232, 147, 91, 0.3);
+  }
+  50% {
+    transform: scale(1.07);
+    box-shadow: 0 0 18px rgba(232, 147, 91, 0.55);
+  }
+}
+
+/* Scaffold info banner */
+.tlf-scaffold-banner {
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 0.45rem 1.2rem;
+  margin-bottom: 0.75rem;
+  text-align: center;
+  animation: tlf-simple-fade 0.3s ease forwards;
+}
+
+.tlf-scaffold-banner.animating {
+  color: #E8935B;
+  background: rgba(232, 147, 91, 0.12);
+  border: 1px solid rgba(232, 147, 91, 0.25);
+}
+
+.tlf-scaffold-banner.revealed {
+  color: #E8935B;
+  background: rgba(232, 147, 91, 0.1);
+  border: 1px solid rgba(232, 147, 91, 0.2);
+}

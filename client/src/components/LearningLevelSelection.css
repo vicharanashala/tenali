@@ -1,0 +1,144 @@
+/**
+ * LearningLevelSelection Stylesheet
+ * Matches the warm, child-friendly design system of ChooseModeScreen.
+ */
+
+.lls-wrapper {
+  text-align: center;
+  padding: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  box-sizing: border-box;
+}
+
+.lls-heading {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: clamp(1.8rem, 5vw, 2.4rem);
+  font-weight: 800;
+  color: var(--clr-text);
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.lls-options {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+  width: 100%;
+  max-width: 300px;
+  flex-wrap: wrap;
+}
+
+.lls-card {
+  border-radius: 24px;
+  padding: 24px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  box-sizing: border-box;
+  width: 220px;
+  position: relative;
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              box-shadow 0.25s ease-out,
+              border-color 0.25s ease-out;
+}
+
+.lls-card:active {
+  transform: scale(0.96) translateY(2px);
+}
+
+/* Available level card */
+.lls-card.available {
+  background: #2C2118;
+  border: 3.5px solid #FF9D42;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+
+.lls-card.available:hover {
+  transform: scale(1.05) translateY(-6px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.45);
+  border-color: #FFAE5D;
+}
+
+/* Locked level card */
+.lls-card.locked {
+  background: #241F1C;
+  border: 2px solid rgba(255, 245, 230, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.lls-card-icon {
+  font-size: 2.8rem;
+  margin-bottom: 0.2rem;
+}
+
+.lls-card-title {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin: 0;
+  color: #FF9D42;
+}
+
+.lls-card.locked .lls-card-title {
+  color: #8A9BB5;
+}
+
+.lls-card-desc {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.35;
+  margin: 0;
+  color: #C9BEB2;
+}
+
+.lls-lock-overlay {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 1.1rem;
+}
+
+.lls-back-btn {
+  margin-top: 0.5rem;
+  padding: 10px 28px;
+  border-radius: 30px;
+  border: 1px solid var(--clr-border);
+  background: transparent;
+  color: var(--clr-text-soft);
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.lls-back-btn:hover {
+  background: var(--clr-hover);
+  color: var(--clr-text);
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .lls-options {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+  .lls-card {
+    width: 90%;
+    max-width: 260px;
+  }
+}

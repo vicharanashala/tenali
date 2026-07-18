@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
+
+/* Entrance animation for the card */
+@keyframes tlf-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tlf-mission-card-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 1.5rem 1rem;
+  box-sizing: border-box;
+}
+
+.tlf-mission-card {
+  background-color: var(--clr-card);
+  border: 1px solid var(--clr-border);
+  border-radius: 24px;
+  padding: 3rem 2.5rem;
+  width: 100%;
+  max-width: 580px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: tlf-fade-up 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.tlf-mission-card-title {
+  font-family: 'Fredoka', var(--font-display), sans-serif;
+  font-size: 2.25rem;
+  font-weight: 600;
+  color: var(--clr-accent);
+  margin: 0 0 2rem 0;
+  letter-spacing: -0.01em;
+}
+
+.tlf-mission-items-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+  text-align: left;
+}
+
+.tlf-mission-item-row {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.85rem 1.25rem;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  transition: all 0.25s ease;
+}
+
+.tlf-mission-item-row.completed {
+  background-color: rgba(92, 184, 122, 0.04);
+  border-color: rgba(92, 184, 122, 0.1);
+}
+
+/* Custom Checkbox styles */
+.tlf-mission-checkbox-outer {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--clr-border);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+  background-color: var(--clr-surface);
+}
+
+.tlf-mission-item-row.completed .tlf-mission-checkbox-outer {
+  border-color: var(--clr-correct);
+  background-color: var(--clr-correct-bg);
+}
+
+/* SVG Checkmark drawing animation */
+.tlf-checkmark-svg {
+  width: 16px;
+  height: 16px;
+}
+
+.tlf-checkmark-path {
+  fill: none;
+  stroke: var(--clr-correct);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.tlf-checkmark-path.animate {
+  stroke-dasharray: 20;
+  stroke-dashoffset: 20;
+  animation: tlf-draw-checkmark 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: 0.2s; /* Give a slight pleasant delay after the card fades in */
+}
+
+@keyframes tlf-draw-checkmark {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.tlf-mission-item-text {
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--clr-text);
+  transition: all 0.25s ease;
+}
+
+.tlf-mission-item-row.completed .tlf-mission-item-text {
+  color: var(--clr-text-soft);
+  text-decoration: none; /* Keep text clean, no strike-through for soft premium look */
+}
+
+/* Button styles */
+.tlf-mission-btn-continue {
+  padding: 0.9rem 3.5rem;
+  font-family: 'Fredoka', var(--font-body), sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: var(--clr-accent);
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(232, 134, 74, 0.35);
+  transition: all 0.2s ease;
+}
+
+.tlf-mission-btn-continue:hover {
+  background-color: #f0955e;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(232, 134, 74, 0.45);
+}
+
+.tlf-mission-btn-continue:active {
+  transform: translateY(0);
+}
+
+/* Reusable lightweight confetti styles */
+.tlf-confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.tlf-confetti-particle {
+  position: absolute;
+  top: -20px;
+  border-radius: 2px;
+  opacity: 0.85;
+  animation: tlf-confetti-fall linear forwards;
+}
+
+@keyframes tlf-confetti-fall {
+  0% {
+    top: -20px;
+    transform: translateX(0) rotate(0deg);
+  }
+  50% {
+    transform: translateX(20px) rotate(180deg);
+  }
+  100% {
+    top: 105vh;
+    transform: translateX(-20px) rotate(360deg);
+  }
+}

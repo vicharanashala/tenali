@@ -1,0 +1,169 @@
+/**
+ * LearningContainer Stylesheet
+ * Responsive, centered layout for future Tenali Learning Framework (TLF) components.
+ */
+
+.tlf-learning-container-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 1.5rem 1rem;
+  box-sizing: border-box;
+}
+
+.tlf-learning-container-inner {
+  width: 100%;
+  max-width: 760px; /* Readable maximum width matching other IGCSE lesson modules */
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* Story and Mission layout styling */
+.tlf-story-card {
+  background-color: var(--clr-card);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  margin-top: 0.5rem;
+}
+
+.tlf-illustration-area {
+  width: 100%;
+  max-width: 400px;
+  height: 240px;
+  background: linear-gradient(135deg, var(--clr-surface) 0%, rgba(232, 134, 74, 0.04) 100%);
+  border: 1px solid var(--clr-border);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.tlf-illustration-art {
+  font-size: 4.5rem;
+  margin-bottom: 0.5rem;
+  user-select: none;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+}
+
+.tlf-illustration-label {
+  font-size: 0.85rem;
+  color: var(--clr-text-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 8px;
+}
+
+.tlf-story-caption {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  line-height: 1.6;
+  color: var(--clr-text);
+  margin-bottom: 1.5rem;
+  min-height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 500px;
+}
+
+.tlf-story-navigation {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 400px;
+  gap: 1rem;
+}
+
+.tlf-story-btn {
+  flex: 1;
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  font-family: var(--font-body);
+}
+
+.tlf-story-btn-next {
+  background-color: var(--clr-accent);
+  color: #fff;
+}
+
+.tlf-story-btn-next:hover {
+  background-color: #f0955e;
+  transform: translateY(-2px);
+}
+
+.tlf-story-btn-back {
+  background-color: transparent;
+  border: 1px solid var(--clr-border);
+  color: var(--clr-text-soft);
+}
+
+.tlf-story-btn-back:hover {
+  background-color: var(--clr-hover);
+  color: var(--clr-text);
+  transform: translateY(-2px);
+}
+
+.tlf-progress-dots {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.tlf-progress-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--clr-border);
+  transition: all 0.2s ease;
+}
+
+.tlf-progress-dot.active {
+  background-color: var(--clr-accent);
+  transform: scale(1.2);
+}
+
+/* Mission styles */
+.tlf-mission-badge {
+  background-color: rgba(232, 134, 74, 0.12);
+  color: var(--clr-accent);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 1.2rem;
+  border: 1px solid var(--clr-accent-soft);
+}
+
+.tlf-mission-title {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  color: var(--clr-text);
+  margin-bottom: 0.8rem;
+}
+
+.tlf-mission-desc {
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  color: var(--clr-text-soft);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
