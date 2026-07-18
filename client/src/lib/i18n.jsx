@@ -159,7 +159,7 @@ export function I18nProvider({ children }) {
   }, [translations]);
 
   return (
-    <I18nContext.Provider value={{ locale, setLocale, t, hasTranslation, loading, LANGUAGES }}>
+    <I18nContext.Provider value={{ locale, setLocale, t, hasTranslation, loading, LANGUAGES, translations }}>
       <AutoTranslator />
       {children}
     </I18nContext.Provider>

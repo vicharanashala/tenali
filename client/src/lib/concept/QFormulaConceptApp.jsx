@@ -5,6 +5,7 @@ import Stage3Guided from './Stage3Guided';
 import Stage4Independent from './Stage4Independent';
 import Stage5Review from './Stage5Review';
 import CompletionScreen from './CompletionScreen';
+import MasteryBadge from '../MasteryBadge';
 
 // Get or create anonymous learner ID
 const getLearnerId = () => {
@@ -83,11 +84,18 @@ export default function QFormulaConceptApp({ onBack, QFormulaApp }) {
   const currentStage = state.conceptReviewRung || 0;
   const isDue = state.nextConceptReviewDue ? new Date() >= new Date(state.nextConceptReviewDue) : true;
 
+  // BKT mastery derived from stage progress (5 stages total: 0-4)
+  const totalStages = 5;
+  const mastery = Math.min(1, (currentStage / totalStages) + 0.04); // +0.04 so stage 0 shows ~4% rather than 0%
+
   return (
     <div className="quiz-layout qformula-concept">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
         <button className="back-btn" onClick={onBack}>← Back</button>
-        <div style={{ fontWeight: 'bold' }}>Quadratic Formula: Concept Mastery</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div style={{ fontWeight: 'bold' }}>Quadratic Formula: Concept Mastery</div>
+          <MasteryBadge mastery={mastery} label="BKT" size={52} />
+        </div>
         <div style={{ width: '60px' }}></div>
       </div>
 

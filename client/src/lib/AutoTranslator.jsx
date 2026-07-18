@@ -1,15 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useI18n } from './i18n';
 import { translateDynamic } from './QuestionTranslator';
 import en from '../locales/en.json';
-import hi from '../locales/hi.json';
-
-const enToHi = {};
-for (const key in en) {
-  if (typeof en[key] === 'string' && typeof hi[key] === 'string') {
-    enToHi[en[key].trim().toLowerCase()] = hi[key];
-  }
-}
 
 const extraDict = {
   "addition": "जोड़",
@@ -74,28 +66,47 @@ const extraDict = {
   "skip & learn": "छोड़ें और सीखें"
 };
 
-function translateText(text) {
-  if (!text || !text.trim()) return text;
-  const lower = text.trim().toLowerCase();
-  
-  // Exact match from en.json
-  if (enToHi[lower]) return text.replace(text.trim(), enToHi[lower]);
-  
-  // Exact match from extraDict
-  if (extraDict[lower]) return text.replace(text.trim(), extraDict[lower]);
-  
-  // Regex dynamic match
-  const dyn = translateDynamic(text, 'hi');
-  if (dyn !== text) return dyn;
-  
-  return text;
-}
-
 export function AutoTranslator() {
-  const { locale } = useI18n();
+  const { locale, translations } = useI18n();
+  const [enToCurrent, setEnToCurrent] = useState({});
+  const enToCurrentRef = useRef({});
 
   useEffect(() => {
-    if (locale !== 'hi') return;
+    if (locale === 'en' || !translations) {
+      setEnToCurrent({});
+      enToCurrentRef.current = {};
+      return;
+    }
+    const map = {};
+    for (const key in en) {
+      if (typeof en[key] === 'string' && typeof translations[key] === 'string') {
+        map[en[key].trim().toLowerCase()] = translations[key];
+      }
+    }
+    setEnToCurrent(map);
+    enToCurrentRef.current = map;
+  }, [locale, translations]);
+
+  useEffect(() => {
+    if (locale === 'en') return;
+
+    function translateText(text) {
+      if (!text || !text.trim()) return text;
+      const lower = text.trim().toLowerCase();
+      
+      const dict = enToCurrentRef.current;
+      // Exact match from dynamic translations
+      if (dict[lower]) return text.replace(text.trim(), dict[lower]);
+      
+      // Exact match from extraDict
+      if (extraDict[lower]) return text.replace(text.trim(), extraDict[lower]);
+      
+      // Regex dynamic match
+      const dyn = translateDynamic(text, locale);
+      if (dyn !== text) return dyn;
+      
+      return text;
+    }
 
     const translateNode = (node) => {
       if (node.nodeType === Node.TEXT_NODE) {

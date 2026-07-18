@@ -5,6 +5,7 @@ import Stage3Precision from './Stage3Precision';
 import Stage4Elimination from './Stage4Elimination';
 import Stage5Cases from './Stage5Cases';
 import CompletionScreen from '../concept/CompletionScreen';
+import MasteryBadge from '../MasteryBadge';
 
 // Get or create anonymous learner ID
 const getLearnerId = () => {
@@ -81,11 +82,18 @@ export default function SimulConceptApp({ onBack, SimulQuizApp }) {
 
   const currentStage = state?.conceptReviewRung || 0;
 
+  // BKT mastery derived from stage progress (6 stages total: 0-5)
+  const totalStages = 6;
+  const mastery = Math.min(1, (currentStage / totalStages) + 0.03);
+
   return (
     <div className="quiz-layout simul-concept">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
         <button className="back-btn" onClick={onBack}>← Back</button>
-        <div style={{ fontWeight: 'bold' }}>Simultaneous Equations: Concept Mastery</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div style={{ fontWeight: 'bold' }}>Simultaneous Equations: Concept Mastery</div>
+          <MasteryBadge mastery={mastery} label="BKT" size={52} />
+        </div>
         <div style={{ width: '60px' }}></div>
       </div>
 

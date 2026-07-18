@@ -9,6 +9,7 @@ import Stage5MixedSolver from './Stage5MixedSolver';
 import Stage6TurningPoints from './Stage6TurningPoints';
 import Stage7Optimization from './Stage7Optimization';
 import Stage8Bridge from './Stage6Bridge';
+import MasteryBadge from '../MasteryBadge';
 
 // Get or create anonymous learner ID
 const getLearnerId = () => {
@@ -102,11 +103,19 @@ export default function DiffConceptApp({ onBack, DiffApp }) {
   if (loading) return <div className="quiz-layout"><div className="welcome-box">Loading...</div></div>;
   if (error) return <div className="quiz-layout"><div className="welcome-box">Error: {error}</div></div>;
 
+  // BKT mastery derived from stage progress (10 stages: 0-9)
+  const totalStages = 10;
+  const effectiveStage = currentStage >= 100 ? 9 : currentStage; // spaced replay stages count as completed
+  const mastery = Math.min(1, (effectiveStage / totalStages) + 0.02);
+
   return (
     <div className="quiz-layout diff-concept">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
         <button className="back-btn" onClick={handleBack}>← Back</button>
-        <div style={{ fontWeight: 'bold' }}>Differentiation: Concept Mastery</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div style={{ fontWeight: 'bold' }}>Differentiation: Concept Mastery</div>
+          <MasteryBadge mastery={mastery} label="BKT" size={52} />
+        </div>
         <div style={{ width: '60px' }}></div>
       </div>
 

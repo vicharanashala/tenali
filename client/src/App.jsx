@@ -83,6 +83,7 @@ import { useI18n } from './lib/i18n.jsx';
 import DiffConceptApp from './lib/diff-concept/DiffConceptApp.jsx';
 import PercentExplanationApp from './PercentExplanationApp';
 import { playSound } from './audioContext';
+import MasteryBadge from './lib/MasteryBadge.jsx';
 
 // API base URL from environment variables (Vite)
 const API = import.meta.env.VITE_API_BASE_URL || '';
@@ -43921,6 +43922,8 @@ function App() {
     polyfactor: PolyFactorApp,     // Polynomial factoring
     primefactor: PrimeFactorApp,   // Prime factorization
     qformula: QFormulaApp,         // Quadratic formula
+    'qformula-concept': QFormulaConceptApp,
+    'simul-concept': SimulConceptApp,
     diffconcept: DiffConceptApp,   // Differentiation Concept Playground
     simul: SimulApp,               // Simultaneous equations
     funceval: FuncEvalApp,         // Function evaluation
@@ -44190,6 +44193,8 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
     { key: 'conics', name: 'Conic Sections', subtitle: 'Circle, parabola, ellipse, hyperbola', color: 'purple' },
     { key: 'coordgeom', name: 'Coord. Geometry', subtitle: 'Midpoint, distance, gradient', color: 'blue' },
     { key: 'decimals', name: 'Decimals', subtitle: 'Add, subtract, multiply, divide', color: 'blue' },
+    { key: 'qformula-concept', name: 'Quadratic Concept', subtitle: 'Concept Playground for Quadratics', color: 'purple' },
+    { key: 'simul-concept', name: 'Simultaneous Eq Concept', subtitle: 'Concept Playground for Simultaneous Eq.', color: 'purple' },
     { key: 'diffconcept', name: 'Differentiation Concept', subtitle: 'Concept Playground (First Principles)', color: 'blue' },
     { key: 'diff', name: 'Differentiation', subtitle: 'Power rule, turning points', color: 'purple' },
     { key: 'diffeq', name: 'Differential Eq.', subtitle: 'Order, degree, solve DEs', color: 'green' },
@@ -66466,11 +66471,50 @@ function TatsavitLineApp({ onBack }) {
  * @param {string} props.subtitle - Subtitle/description
  * @param {Function} props.onBack - Callback when back button is clicked
  * @param {React.ReactNode} props.children - Quiz content to display
+ * @param {number} props.bktMastery - BKT mastery percentage to display (optional)
  */
-export function QuizLayout({ title, subtitle, onBack, children, timer, sessionGoal }) {
+export function QuizLayout({ title, subtitle, onBack, children, timer, sessionGoal, bktMastery }) {
   // Derive display values from the timer object
   const isSpeed   = timer && (timer.mode === 'speed'   || sessionGoal === 'speed')
   const isPerfect = sessionGoal === 'perfect'
+
+  // If bktMastery is not explicitly provided, try to guess from local storage
+  let finalMastery = bktMastery;
+  if (finalMastery === undefined && title) {
+    try {
+      const gMastery = JSON.parse(localStorage.getItem('tenali-gold-mastery') || '[]');
+      const cTopics = JSON.parse(localStorage.getItem('tenali-completed-topics') || '[]');
+      
+      const t = title.toLowerCase();
+      const tMap = {
+        'addition': 'addition',
+        'column addition': 'addition',
+        'column subtraction': 'subtraction',
+        'multiplication & division': 'multiplication',
+        'column multiplication': 'multiplication',
+        'visual counting': 'counting',
+        'dart board': 'coordinate_geometry',
+        'coordinate geometry': 'coordinate_geometry',
+        'balance scale math': 'equations',
+        'quadratic': 'quadratic',
+        'origin': 'origin',
+        'general knowledge': 'gk',
+        'comic addition': 'addition'
+      };
+      
+      const topicKey = Object.keys(tMap).find(k => t.includes(k)) ? tMap[Object.keys(tMap).find(k => t.includes(k))] : t.replace(/\s+/g, '_');
+      
+      if (gMastery.includes(topicKey)) {
+        finalMastery = 1.0;
+      } else if (cTopics.includes(topicKey)) {
+        finalMastery = 0.8;
+      } else {
+        finalMastery = 0.15; // default unmastered
+      }
+    } catch(e) {
+      finalMastery = 0.15;
+    }
+  }
 
   // For speed mode: show remaining seconds with urgency colouring
   const timerDisplay = (() => {
@@ -66534,6 +66578,9 @@ export function QuizLayout({ title, subtitle, onBack, children, timer, sessionGo
       <div className="header-row">
         <button className="back-button" onClick={onBack}>← Home</button>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          {finalMastery !== undefined && (
+            <MasteryBadge mastery={finalMastery} label="BKT" size={48} />
+          )}
           {goalBadge}
           {timerDisplay}
         </div>
