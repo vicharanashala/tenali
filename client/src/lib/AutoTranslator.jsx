@@ -384,10 +384,38 @@ export function AutoTranslator() {
       if (node.nodeType === Node.TEXT_NODE) {
         if (node.parentElement && node.parentElement.closest('.no-translate, script, style')) return;
         const original = node.nodeValue;
-        if (original && original.trim()) {
+        if (original && original.trim() && /[a-zA-Z]/.test(original)) {
           const translated = translateText(original);
           if (translated !== original) {
             node.nodeValue = translated;
+          } else {
+            // Async fallback for unknown English text
+            const trimmed = original.trim();
+            const cacheKey = `gtx_trans_${locale}_${trimmed}`;
+            const cached = localStorage.getItem(cacheKey);
+            
+            if (cached) {
+              node.nodeValue = original.replace(trimmed, cached);
+            } else {
+              if (!window.pendingTrans) window.pendingTrans = {};
+              if (!window.pendingTrans[cacheKey]) {
+                window.pendingTrans[cacheKey] = fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=${locale}&dt=t&q=${encodeURIComponent(trimmed)}`)
+                  .then(r => r.json())
+                  .then(data => {
+                    const resText = data[0].map(item => item[0]).join('');
+                    localStorage.setItem(cacheKey, resText);
+                    return resText;
+                  }).catch(e => trimmed);
+              }
+              window.pendingTrans[cacheKey].then(resText => {
+                // Ensure the node hasn't been modified by React while we were fetching
+                if (resText && resText !== trimmed && node.nodeValue === original) {
+                  if (observerRef.current) observerRef.current.disconnect();
+                  node.nodeValue = original.replace(trimmed, resText);
+                  if (observerRef.current) observerRef.current.observe(document.body, { childList: true, subtree: true, characterData: true });
+                }
+              });
+            }
           }
         }
       } else if (node.nodeType === Node.ELEMENT_NODE) {
@@ -395,20 +423,46 @@ export function AutoTranslator() {
         // Translate placeholders
         if (node.tagName === 'INPUT' || node.tagName === 'TEXTAREA') {
           const ph = node.getAttribute('placeholder');
-          if (ph) {
+          if (ph && /[a-zA-Z]/.test(ph)) {
             const tph = translateText(ph);
-            if (tph !== ph) node.setAttribute('placeholder', tph);
+            if (tph !== ph) {
+              node.setAttribute('placeholder', tph);
+            } else {
+              const cacheKey = `gtx_trans_${locale}_${ph}`;
+              const cached = localStorage.getItem(cacheKey);
+              if (cached) {
+                node.setAttribute('placeholder', cached);
+              } else {
+                if (!window.pendingTrans) window.pendingTrans = {};
+                if (!window.pendingTrans[cacheKey]) {
+                  window.pendingTrans[cacheKey] = fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=${locale}&dt=t&q=${encodeURIComponent(ph)}`)
+                    .then(r => r.json())
+                    .then(data => {
+                      const resText = data[0].map(item => item[0]).join('');
+                      localStorage.setItem(cacheKey, resText);
+                      return resText;
+                    }).catch(e => ph);
+                }
+                window.pendingTrans[cacheKey].then(resText => {
+                  if (resText && resText !== ph && node.getAttribute('placeholder') === ph) {
+                    node.setAttribute('placeholder', resText);
+                  }
+                });
+              }
+            }
           }
         }
         node.childNodes.forEach(translateNode);
       }
     };
 
+    const observerRef = { current: null };
+
     // Initial translation
     translateNode(document.body);
 
     // Watch for dynamic updates
-    const observer = new MutationObserver((mutations) => {
+    observerRef.current = new MutationObserver((mutations) => {
       mutations.forEach(m => {
         if (m.type === 'childList') {
           m.addedNodes.forEach(node => translateNode(node));
@@ -417,13 +471,40 @@ export function AutoTranslator() {
           const node = m.target;
           if (node.nodeType === Node.TEXT_NODE) {
              const original = node.nodeValue;
-             if (original && original.trim()) {
+             if (original && original.trim() && /[a-zA-Z]/.test(original)) {
                const translated = translateText(original);
                if (translated !== original) {
-                 // Disconnect temporarily to avoid infinite loop
-                 observer.disconnect();
+                 observerRef.current.disconnect();
                  node.nodeValue = translated;
-                 observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+                 observerRef.current.observe(document.body, { childList: true, subtree: true, characterData: true });
+               } else {
+                 // Trigger async fallback for dynamic text updates
+                 const trimmed = original.trim();
+                 const cacheKey = `gtx_trans_${locale}_${trimmed}`;
+                 const cached = localStorage.getItem(cacheKey);
+                 if (cached) {
+                   observerRef.current.disconnect();
+                   node.nodeValue = original.replace(trimmed, cached);
+                   observerRef.current.observe(document.body, { childList: true, subtree: true, characterData: true });
+                 } else {
+                   if (!window.pendingTrans) window.pendingTrans = {};
+                   if (!window.pendingTrans[cacheKey]) {
+                     window.pendingTrans[cacheKey] = fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=${locale}&dt=t&q=${encodeURIComponent(trimmed)}`)
+                       .then(r => r.json())
+                       .then(data => {
+                         const resText = data[0].map(item => item[0]).join('');
+                         localStorage.setItem(cacheKey, resText);
+                         return resText;
+                       }).catch(e => trimmed);
+                   }
+                   window.pendingTrans[cacheKey].then(resText => {
+                     if (resText && resText !== trimmed && node.nodeValue === original) {
+                       observerRef.current.disconnect();
+                       node.nodeValue = original.replace(trimmed, resText);
+                       observerRef.current.observe(document.body, { childList: true, subtree: true, characterData: true });
+                     }
+                   });
+                 }
                }
              }
           }
@@ -431,13 +512,13 @@ export function AutoTranslator() {
       });
     });
 
-    observer.observe(document.body, {
+    observerRef.current.observe(document.body, {
       childList: true,
       subtree: true,
       characterData: true
     });
 
-    return () => observer.disconnect();
+    return () => observerRef.current && observerRef.current.disconnect();
   }, [locale]);
 
   return null;
