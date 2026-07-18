@@ -1147,7 +1147,8 @@ function AdaptiveTablesApp({ studentName }) {
   const [isCorrect, setIsCorrect] = useState(null)
   // Boolean: has the answer been revealed? (locks input, shows feedback)
   const [revealed, setRevealed] = useState(false)
-  // Question counter (1, 2, 3, ...)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));// Question counter (1, 2, 3, ...)
   const [questionNum, setQuestionNum] = useState(0)
   // Score: number of correct answers in this session
   const [score, setScore] = useState(0)
@@ -1243,8 +1244,6 @@ function AdaptiveTablesApp({ studentName }) {
 
   // Auto-advance after correct answer (after AUTO_ADVANCE_MS delay)
   useAutoAdvance(revealed, advanceFnRef, isCorrect)
-  useProgressSubmit(revealed, isCorrect, 'addition', question?.id)
-  useProgressSubmit(revealed, isCorrect, 'balance-scale', question?.id)
 
   // Keyboard shortcut: Enter key advances to next question after wrong answer
   // (Auto-advance via useAutoAdvance handles correct answers)
@@ -1600,7 +1599,8 @@ function ScaffoldedTablesApp({ studentName, defaultTable = 2 }) {
   const [feedback, setFeedback] = useState('')
   const [isCorrect, setIsCorrect] = useState(null)
   const [revealed, setRevealed] = useState(false)
-  const [questionNum, setQuestionNum] = useState(0)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [questionNum, setQuestionNum] = useState(0)
   const [score, setScore] = useState(0)
   const [startTime, setStartTime] = useState(null)
   const [results, setResults] = useState([])
@@ -2370,7 +2370,8 @@ function YazdanTablesApp({ studentName }) {
   const [feedback, setFeedback] = useState('')
   const [isCorrect, setIsCorrect] = useState(null)
   const [revealed, setRevealed] = useState(false)
-  const [startTime, setStartTime] = useState(null)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [startTime, setStartTime] = useState(null)
   const [statusMsg, setStatusMsg] = useState('')
   const [answerOpacity, setAnswerOpacity] = useState(1)
 
@@ -3053,7 +3054,8 @@ function JatinTablesApp({ studentName }) {
   const [feedback, setFeedback] = useState('')
   const [isCorrect, setIsCorrect] = useState(null)
   const [revealed, setRevealed] = useState(false)
-  const [startTime, setStartTime] = useState(null)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [startTime, setStartTime] = useState(null)
   const [statusMsg, setStatusMsg] = useState('')
   const [answerOpacity, setAnswerOpacity] = useState(1)
 
@@ -3695,7 +3697,8 @@ function LakshyaTablesApp({ studentName }) {
   const [feedback, setFeedback] = useState('')
   const [isCorrect, setIsCorrect] = useState(null)
   const [revealed, setRevealed] = useState(false)
-  const [startTime, setStartTime] = useState(null)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [startTime, setStartTime] = useState(null)
   const [statusMsg, setStatusMsg] = useState('')
   const [answerOpacity, setAnswerOpacity] = useState(1)
 
@@ -4314,7 +4317,8 @@ function AdaptiveMixedApp({ studentName }) {
   const [feedback, setFeedback] = useState('')
   const [isCorrect, setIsCorrect] = useState(null)
   const [revealed, setRevealed] = useState(false)
-  const [questionNum, setQuestionNum] = useState(0)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [questionNum, setQuestionNum] = useState(0)
   const [score, setScore] = useState(0)
   const [startTime, setStartTime] = useState(null)
   const [results, setResults] = useState([])
@@ -7440,7 +7444,8 @@ function makeBridgeApp({ id, title, subtitle, intro, teach, generator, nextHref,
     const [qIdx, setQIdx] = useState(0)
     const [selected, setSelected] = useState(null)
     const [revealed, setRevealed] = useState(false)
-    const [isCorrect, setIsCorrect] = useState(false)
+    
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [isCorrect, setIsCorrect] = useState(false)
     const [score, setScore] = useState(0)
     const [results, setResults] = useState([])
     const [showTeach, setShowTeach] = useState(false)
@@ -9270,7 +9275,8 @@ function Chapter5App({ onBack }) {
   const [selectedIdx, setSelectedIdx] = useState(null)  // chosen MCQ option (display index)
   const [fillInput, setFillInput] = useState('')
   const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [isCorrect, setIsCorrect] = useState(false)
   const [autoCountdown, setAutoCountdown] = useState(0)  // seconds remaining before auto-advance
   const inputRef = useRef(null)
   const autoTimerRef = useRef(null)
@@ -10364,7 +10370,8 @@ function Chapter6App({ onBack }) {
   const [selectedIdx, setSelectedIdx] = useState(null)
   const [fillInput, setFillInput] = useState('')
   const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [isCorrect, setIsCorrect] = useState(false)
   const [autoCountdown, setAutoCountdown] = useState(0)
   const inputRef = useRef(null)
   const autoTimerRef = useRef(null)
@@ -12040,7 +12047,8 @@ function Chapter7App({ onBack }) {
   const [selectedIdx, setSelectedIdx] = useState(null)
   const [fillInput, setFillInput] = useState('')
   const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [isCorrect, setIsCorrect] = useState(false)
   const [autoCountdown, setAutoCountdown] = useState(0)
   const inputRef = useRef(null)
   const autoTimerRef = useRef(null)
@@ -13542,7 +13550,8 @@ function Chapter8App({ onBack }) {
   const [selectedIdx, setSelectedIdx] = useState(null)
   const [fillInput, setFillInput] = useState('')
   const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [isCorrect, setIsCorrect] = useState(false)
   const [autoCountdown, setAutoCountdown] = useState(0)
   const inputRef = useRef(null)
   const autoTimerRef = useRef(null)
@@ -15228,7 +15237,8 @@ function Chapter9App({ onBack }) {
   const [selectedIdx, setSelectedIdx] = useState(null)
   const [fillInput, setFillInput] = useState('')
   const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [isCorrect, setIsCorrect] = useState(false)
   const [autoCountdown, setAutoCountdown] = useState(0)
   const inputRef = useRef(null)
   const autoTimerRef = useRef(null)
@@ -16916,7 +16926,8 @@ function Chapter10App({ onBack }) {
   const [selectedIdx, setSelectedIdx] = useState(null)
   const [fillInput, setFillInput] = useState('')
   const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [isCorrect, setIsCorrect] = useState(false)
   const [autoCountdown, setAutoCountdown] = useState(0)
   const inputRef = useRef(null)
   const autoTimerRef = useRef(null)
@@ -18463,7 +18474,8 @@ function Chapter11App({ onBack }) {
   const [selectedIdx, setSelectedIdx] = useState(null)
   const [fillInput, setFillInput] = useState('')
   const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [isCorrect, setIsCorrect] = useState(false)
   const [autoCountdown, setAutoCountdown] = useState(0)
   const inputRef = useRef(null)
   const autoTimerRef = useRef(null)
@@ -20016,7 +20028,8 @@ function Chapter12App({ onBack }) {
   const [selectedIdx, setSelectedIdx] = useState(null)
   const [fillInput, setFillInput] = useState('')
   const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [isCorrect, setIsCorrect] = useState(false)
   const [autoCountdown, setAutoCountdown] = useState(0)
   const inputRef = useRef(null)
   const autoTimerRef = useRef(null)
@@ -21404,7 +21417,8 @@ function Chapter13App({ onBack }) {
   const [selectedIdx, setSelectedIdx] = useState(null)
   const [fillInput, setFillInput] = useState('')
   const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [isCorrect, setIsCorrect] = useState(false)
   const [autoCountdown, setAutoCountdown] = useState(0)
   const inputRef = useRef(null)
   const autoTimerRef = useRef(null)
@@ -22941,7 +22955,8 @@ function Chapter14App({ onBack }) {
   const [selectedIdx, setSelectedIdx] = useState(null)
   const [fillInput, setFillInput] = useState('')
   const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [isCorrect, setIsCorrect] = useState(false)
   const [autoCountdown, setAutoCountdown] = useState(0)
   const inputRef = useRef(null)
   const autoTimerRef = useRef(null)
@@ -24609,7 +24624,8 @@ function Chapter15App({ onBack }) {
   const [selectedIdx, setSelectedIdx] = useState(null)
   const [fillInput, setFillInput] = useState('')
   const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [isCorrect, setIsCorrect] = useState(false)
   const [autoCountdown, setAutoCountdown] = useState(0)
   const inputRef = useRef(null)
   const autoTimerRef = useRef(null)
@@ -25749,7 +25765,8 @@ function Chapter16App({ onBack }) {
   const [selectedIdx, setSelectedIdx] = useState(null)
   const [fillInput, setFillInput] = useState('')
   const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [isCorrect, setIsCorrect] = useState(false)
   const [autoCountdown, setAutoCountdown] = useState(0)
   const inputRef = useRef(null)
   const autoTimerRef = useRef(null)
@@ -27142,7 +27159,8 @@ function Chapter17App({ onBack }) {
   const [selectedIdx, setSelectedIdx] = useState(null)
   const [fillInput, setFillInput] = useState('')
   const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [isCorrect, setIsCorrect] = useState(false)
   const [autoCountdown, setAutoCountdown] = useState(0)
   const inputRef = useRef(null)
   const autoTimerRef = useRef(null)
@@ -28801,7 +28819,8 @@ function Chapter18App({ onBack }) {
   const [selectedIdx, setSelectedIdx] = useState(null)
   const [fillInput, setFillInput] = useState('')
   const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [isCorrect, setIsCorrect] = useState(false)
   const [autoCountdown, setAutoCountdown] = useState(0)
   const inputRef = useRef(null)
   const autoTimerRef = useRef(null)
@@ -30198,7 +30217,8 @@ function Chapter19App({ onBack }) {
   const [selectedIdx, setSelectedIdx] = useState(null)
   const [fillInput, setFillInput] = useState('')
   const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [isCorrect, setIsCorrect] = useState(false)
   const [autoCountdown, setAutoCountdown] = useState(0)
   const inputRef = useRef(null)
   const autoTimerRef = useRef(null)
@@ -31462,7 +31482,8 @@ function Chapter20App({ onBack }) {
   const [selectedIdx, setSelectedIdx] = useState(null)
   const [fillInput, setFillInput] = useState('')
   const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [isCorrect, setIsCorrect] = useState(false)
   const [autoCountdown, setAutoCountdown] = useState(0)
   const inputRef = useRef(null)
   const autoTimerRef = useRef(null)
@@ -32989,7 +33010,8 @@ function Chapter21App({ onBack }) {
   const [selectedIdx, setSelectedIdx] = useState(null)
   const [fillInput, setFillInput] = useState('')
   const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [isCorrect, setIsCorrect] = useState(false)
   const [autoCountdown, setAutoCountdown] = useState(0)
   const inputRef = useRef(null)
   const autoTimerRef = useRef(null)
@@ -34347,7 +34369,8 @@ function Chapter22App({ onBack }) {
   const [selectedIdx, setSelectedIdx] = useState(null)
   const [fillInput, setFillInput] = useState('')
   const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [isCorrect, setIsCorrect] = useState(false)
   const [autoCountdown, setAutoCountdown] = useState(0)
   const inputRef = useRef(null)
   const autoTimerRef = useRef(null)
@@ -35825,7 +35848,8 @@ function Chapter23App({ onBack }) {
   const [selectedIdx, setSelectedIdx] = useState(null)
   const [fillInput, setFillInput] = useState('')
   const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [isCorrect, setIsCorrect] = useState(false)
   const [autoCountdown, setAutoCountdown] = useState(0)
   const inputRef = useRef(null)
   const autoTimerRef = useRef(null)
@@ -37258,7 +37282,8 @@ function Chapter24App({ onBack }) {
   const [selectedIdx, setSelectedIdx] = useState(null)
   const [fillInput, setFillInput] = useState('')
   const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [isCorrect, setIsCorrect] = useState(false)
   const [autoCountdown, setAutoCountdown] = useState(0)
   const inputRef = useRef(null)
   const autoTimerRef = useRef(null)
@@ -38109,7 +38134,8 @@ function Chapter1App({ onBack }) {
   const [selectedIdx, setSelectedIdx] = useState(null)
   const [fillInput, setFillInput] = useState('')
   const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [isCorrect, setIsCorrect] = useState(false)
   const [autoCountdown, setAutoCountdown] = useState(0)
   const inputRef = useRef(null)
   const autoTimerRef = useRef(null)
@@ -38930,7 +38956,8 @@ function Chapter2App({ onBack }) {
   const [selectedIdx, setSelectedIdx] = useState(null)
   const [fillInput, setFillInput] = useState('')
   const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [isCorrect, setIsCorrect] = useState(false)
   const [autoCountdown, setAutoCountdown] = useState(0)
   const inputRef = useRef(null)
   const autoTimerRef = useRef(null)
@@ -39726,7 +39753,8 @@ function Chapter3App({ onBack }) {
   const [selectedIdx, setSelectedIdx] = useState(null)
   const [fillInput, setFillInput] = useState('')
   const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [isCorrect, setIsCorrect] = useState(false)
   const [autoCountdown, setAutoCountdown] = useState(0)
   const inputRef = useRef(null)
   const autoTimerRef = useRef(null)
@@ -40520,7 +40548,8 @@ function Chapter4App({ onBack }) {
   const [selectedIdx, setSelectedIdx] = useState(null)
   const [fillInput, setFillInput] = useState('')
   const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [isCorrect, setIsCorrect] = useState(false)
   const [autoCountdown, setAutoCountdown] = useState(0)
   const inputRef = useRef(null)
   const autoTimerRef = useRef(null)
@@ -41120,7 +41149,8 @@ function ComicAdditionApp({ onBack }) {
   const [isCorrect, setIsCorrect] = useState(null)
   const [revealed, setRevealed] = useState(false)
 
-  const advanceFnRef = useRef(null)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const advanceFnRef = useRef(null)
 
   const fetchQuestion = async () => {
     setLoading(true)
@@ -41273,7 +41303,8 @@ function DragDropCountingApp({ onBack }) {
   const [isCorrect, setIsCorrect] = useState(null)
   const [revealed, setRevealed] = useState(false)
 
-  const [sourceItems, setSourceItems] = useState([])
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [sourceItems, setSourceItems] = useState([])
   const [targetItems, setTargetItems] = useState([])
 
   const advanceFnRef = useRef(null)
@@ -41443,11 +41474,10 @@ function CoordGeomInteractiveApp({ onBack }) {
   const [dartPos, setDartPos] = useState(null); // {x, y}
   const [textAnswer, setTextAnswer] = useState(''); // for distance, gradient, etc.
   const [revealed, setRevealed] = useState(false);
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));
   const [isCorrect, setIsCorrect] = useState(null);
   const [feedback, setFeedback] = useState('');
   const [results, setResults] = useState([]);
-
-  useProgressSubmit(revealed, isCorrect, 'coordgeom', currentQ?.id);
   const timer = useTimer();
 
   const loadQuestion = async () => {
@@ -41700,11 +41730,10 @@ function DartBoardApp({ onBack }) {
   const [currentQ, setCurrentQ] = useState(null);
   const [dartPos, setDartPos] = useState(null); // {x, y}
   const [revealed, setRevealed] = useState(false);
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));
   const [isCorrect, setIsCorrect] = useState(null);
   const [feedback, setFeedback] = useState('');
   const [results, setResults] = useState([]);
-
-  useProgressSubmit(revealed, isCorrect, 'darts', currentQ?.id);
   const timer = useTimer();
 
   const handleDifficultyChange = (e) => {
@@ -41963,7 +41992,8 @@ function BalanceScaleApp({ onBack }) {
   const [isCorrect, setIsCorrect] = useState(null)
   const [revealed, setRevealed] = useState(false)
 
-  // Timer state
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));// Timer state
   const [timeLeft, setTimeLeft] = useState(60)
 
   // Weight blocks
@@ -43244,7 +43274,8 @@ function App() {
     const [loading, setLoading] = useState(false)
     const [loadError, setLoadError] = useState('')
     const [revealed, setRevealed] = useState(false)
-    const [results, setResults] = useState([])
+    
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [results, setResults] = useState([])
     const [explanation, setExplanation] = useState('')
     const timer = useTimer()
     const advanceFnRef = useRef(null)
@@ -43725,7 +43756,8 @@ function App() {
     const [loading, setLoading] = useState(false)
     const [loadError, setLoadError] = useState('')
     const [revealed, setRevealed] = useState(false)
-    const [results, setResults] = useState([])
+    
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [results, setResults] = useState([])
     const [explanation, setExplanation] = useState('')
     const timer = useTimer()
     const advanceFnRef = useRef(null)
@@ -45554,7 +45586,8 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
   const [isCorrect, setIsCorrect] = useState(null)
   const [loading, setLoading] = useState(false)
   const [revealed, setRevealed] = useState(false)
-  const [results, setResults] = useState([])
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [results, setResults] = useState([])
   const timer = useTimer()
 
   const [additionMode, setAdditionMode] = useState('counting') // 'counting' or 'scale'
@@ -45949,7 +45982,6 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
   const advanceRef = useRef(() => { })
   advanceRef.current = () => fetchQuestion()
   useAutoAdvance(revealed, advanceRef, isCorrect)
-  useProgressSubmit(revealed, isCorrect, 'mixed-math-lab', question?.id)
 
   const renderMensurationCustom = (q, ans, setAns, submitAns, revealed) => {
     // ── COUNT SIDES / SHAPE NAME ──────────────────────────────────────────
@@ -46564,7 +46596,8 @@ function GKApp({ onBack, markTopicCompleted, isGoalMode = false }) {
   const [score, setScore] = useState(0)
   // Has the answer been revealed (showing feedback)?
   const [revealed, setRevealed] = useState(false)
-  // Question counter (1, 2, 3, ...)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));// Question counter (1, 2, 3, ...)
   const [questionNumber, setQuestionNumber] = useState(0)
   // All result objects from this session
   const [results, setResults] = useState([])
@@ -46730,7 +46763,6 @@ function GKApp({ onBack, markTopicCompleted, isGoalMode = false }) {
   const advanceRef = useRef(() => { })
   advanceRef.current = () => loadQuestion()
   useAutoAdvance(revealed, advanceRef, isCorrect)
-  useProgressSubmit(revealed, isCorrect, 'gk', question?.id)
 
   // Keyboard shortcuts: 1-4 or a-d instantly select and submit answer; Enter for submit/next
   const submitGKRef = useRef(submitGK)
@@ -46861,7 +46893,8 @@ function ColumnAdditionApp({ onBack, initialDifficulty, initialNumQuestions, ini
   const [isCorrect, setIsCorrect] = useState(null)
   const [loading, setLoading] = useState(false)
   const [revealed, setRevealed] = useState(false)
-  const [results, setResults] = useState([])
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [results, setResults] = useState([])
   const timer = useTimer()
   const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
 
@@ -47195,7 +47228,8 @@ function ColumnMultiplicationApp({ onBack, initialDifficulty, initialNumQuestion
   const [isCorrect, setIsCorrect] = useState(null)
   const [loading, setLoading] = useState(false)
   const [revealed, setRevealed] = useState(false)
-  const [results, setResults] = useState([])
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [results, setResults] = useState([])
   const timer = useTimer()
   const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
   const [showHelp, setShowHelp] = useState(false)
@@ -48057,7 +48091,8 @@ function ColumnSubtractionApp({ onBack, initialDifficulty, initialNumQuestions, 
   const [isCorrect, setIsCorrect] = useState(null)
   const [loading, setLoading] = useState(false)
   const [revealed, setRevealed] = useState(false)
-  const [results, setResults] = useState([])
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [results, setResults] = useState([])
   const timer = useTimer()
   const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
   const [showHelp, setShowHelp] = useState(false)
@@ -48515,7 +48550,8 @@ function AdditionApp({ onBack, completedTopics = [], goldMastery = [], markTopic
   const [loading, setLoading] = useState(false)
   // Has answer been revealed?
   const [revealed, setRevealed] = useState(false)
-  // Results array for display
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));// Results array for display
   const [results, setResults] = useState([])
   const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
   useEffect(() => {
@@ -49732,7 +49768,8 @@ function GymQuiz({ title, subtitle, typeKeys, welcomeText, algebraInput, onBack 
   const [feedback, setFeedback] = useState('')
   const [isCorrect, setIsCorrect] = useState(null)
   const [revealed, setRevealed] = useState(false)
-  const [results, setResults] = useState([])
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [results, setResults] = useState([])
   const timer = useTimer()
 
   // Adaptive difficulty: 0 (easy) → 1 (hard). Updated after each answer.
@@ -50100,7 +50137,8 @@ function BasicArithApp({ onBack, completedTopics = [], goldMastery = [], markTop
   const [loading, setLoading] = useState(false)
   // Answer revealed?
   const [revealed, setRevealed] = useState(false)
-  // Results array
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));// Results array
   const [results, setResults] = useState([])
   const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
   useEffect(() => {
@@ -50428,7 +50466,8 @@ function QuadraticApp({ onBack, isGoalMode = false }) {
   const [loading, setLoading] = useState(false)
   // Answer revealed (transition from submit mode to next mode)?
   const [revealed, setRevealed] = useState(false)
-  // Array of {question, userAnswer, correctAnswer, correct, time} objects
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));// Array of {question, userAnswer, correctAnswer, correct, time} objects
   const [results, setResults] = useState([])
   const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
   useEffect(() => {
@@ -51525,7 +51564,8 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
   const [feedback, setFeedback] = useState('')
   const [isCorrect, setIsCorrect] = useState(null)
   const [revealed, setRevealed] = useState(false)
-  const [results, setResults] = useState([])
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [results, setResults] = useState([])
   // --- Adaptive extension tracking (Levels 1 & 2) ---
   const [extensionCount, setExtensionCount] = useState(0)  // total extra Qs added so far
   const [allCorrectInRound, setAllCorrectInRound] = useState(true)
@@ -51999,7 +52039,8 @@ function VocabApp({ onBack, isGoalMode = false }) {
   const [score, setScore] = useState(0)
   // Answer revealed flag (transition from selection mode to next mode)
   const [revealed, setRevealed] = useState(false)
-  // Current question number (1-indexed)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));// Current question number (1-indexed)
   const [questionNumber, setQuestionNumber] = useState(0)
   // Total questions in this quiz session
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
@@ -52398,7 +52439,8 @@ function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly
     const [loading, setLoading] = useState(false)
     const [loadError, setLoadError] = useState('')
     const [revealed, setRevealed] = useState(false)
-  const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
   useEffect(() => {
     if (!isGoalMode) {
       setSessionGoal('standard');
@@ -52466,7 +52508,6 @@ function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly
     }
     advanceFnRef.current = advance
     useAutoAdvance(revealed, advanceFnRef, isCorrect)
-    useProgressSubmit(revealed, isCorrect, 'vocab', question?.id)
 
     // Enter-to-advance after wrong answer
     useEffect(() => {
@@ -52715,7 +52756,8 @@ function TransferChallengeApp({ topicKey, onBack, completedTopics, goldMastery, 
   const [feedback, setFeedback] = useState('')
   const [isCorrect, setIsCorrect] = useState(null)
   const [revealed, setRevealed] = useState(false)
-  const [hintsUsed, setHintsUsed] = useState(0)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [hintsUsed, setHintsUsed] = useState(0)
   const [showHintLevel, setShowHintLevel] = useState(0)
   const [explanation, setExplanation] = useState('')
   const [transferMapping, setTransferMapping] = useState('')
@@ -53064,7 +53106,8 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
     const [loading, setLoading] = useState(false)
     const [loadError, setLoadError] = useState('')
     const [revealed, setRevealed] = useState(false)
-  const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
   useEffect(() => {
     if (!isGoalMode) {
       setSessionGoal('standard');
@@ -53487,7 +53530,8 @@ function DotProdApp({ onBack, isGoalMode = false }) {
   const [isCorrect, setIsCorrect] = useState(null)
   const [loading, setLoading] = useState(false)
   const [revealed, setRevealed] = useState(false)
-  const [results, setResults] = useState([])
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [results, setResults] = useState([])
   const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
   useEffect(() => {
     if (!isGoalMode) {
@@ -54336,7 +54380,8 @@ function GymApp({ onBack }) {
   const [feedback, setFeedback] = useState('')
   const [isCorrect, setIsCorrect] = useState(null)
   const [revealed, setRevealed] = useState(false)
-  const [loading, setLoading] = useState(false)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [loading, setLoading] = useState(false)
   const [loadError, setLoadError] = useState('')
   const timer = useTimer()
   const sessionGoal = 'standard'
@@ -55150,7 +55195,8 @@ function TatsavitApp({ onBack }) {
   const [score, setScore] = useState(0)
   const [currentQuestion, setCurrentQuestion] = useState(null)
   const [revealed, setRevealed] = useState(false)
-  const [selectedChoice, setSelectedChoice] = useState(null)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [selectedChoice, setSelectedChoice] = useState(null)
   const [questionsAnswered, setQuestionsAnswered] = useState([])
   const [feedback, setFeedback] = useState('')
 
@@ -55485,7 +55531,8 @@ function SquaringApp({ onBack, isGoalMode = false }) {
   const [isCorrect, setIsCorrect] = useState(null)
   const [loading, setLoading] = useState(false)
   const [revealed, setRevealed] = useState(false)
-  const [results, setResults] = useState([])
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [results, setResults] = useState([])
   const timer = useTimer()
   const advanceFnRef = useRef(null)
   const submittedRef = useRef(false)
@@ -56001,7 +56048,8 @@ function RandomMixApp({ onBack, isGoalMode = false }) {
   const [feedback, setFeedback] = useState('')
   const [isCorrect, setIsCorrect] = useState(null)
   const [revealed, setRevealed] = useState(false)
-  const [loading, setLoading] = useState(false)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [loading, setLoading] = useState(false)
   const [score, setScore] = useState(0)
   const [questionNumber, setQuestionNumber] = useState(0)
   const [results, setResults] = useState([])
@@ -56507,7 +56555,8 @@ function SetsApp({ onBack, isGoalMode = false }) {
   const [isCorrect, setIsCorrect] = useState(null)
   const [loading, setLoading] = useState(false)
   const [revealed, setRevealed] = useState(false)
-  const [results, setResults] = useState([])
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [results, setResults] = useState([])
   const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
   useEffect(() => {
     if (!isGoalMode) {
@@ -56742,7 +56791,8 @@ function SequencesApp({ onBack, isGoalMode = false }) {
   const [isCorrect, setIsCorrect] = useState(null)
   const [loading, setLoading] = useState(false)
   const [revealed, setRevealed] = useState(false)
-  const [results, setResults] = useState([])
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [results, setResults] = useState([])
   const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
   useEffect(() => {
     if (!isGoalMode) {
@@ -56979,7 +57029,8 @@ function RatioApp({ onBack, completedTopics = [], goldMastery = [], markTopicCom
   const [isCorrect, setIsCorrect] = useState(null)
   const [loading, setLoading] = useState(false)
   const [revealed, setRevealed] = useState(false)
-  const [results, setResults] = useState([])
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [results, setResults] = useState([])
   const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
   useEffect(() => {
     if (!isGoalMode) {
@@ -58261,7 +58312,8 @@ function IndicesApp({ onBack, isGoalMode = false }) {
   const [isCorrect, setIsCorrect] = useState(null)
   const [loading, setLoading] = useState(false)
   const [revealed, setRevealed] = useState(false)
-  const [results, setResults] = useState([])
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [results, setResults] = useState([])
   const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
   useEffect(() => {
     if (!isGoalMode) {
@@ -58551,7 +58603,8 @@ function SurdsApp({ onBack, isGoalMode = false }) {
   const [isCorrect, setIsCorrect] = useState(null)
   const [loading, setLoading] = useState(false)
   const [revealed, setRevealed] = useState(false)
-  const [results, setResults] = useState([])
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [results, setResults] = useState([])
   const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
   useEffect(() => {
     if (!isGoalMode) {
@@ -58882,7 +58935,8 @@ function FractionAddApp({ onBack, completedTopics = [], goldMastery = [], markTo
   const [loading, setLoading] = useState(false)
   // Whether answer has been revealed (submitted)
   const [revealed, setRevealed] = useState(false)
-  // Results log for ResultsTable
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));// Results log for ResultsTable
   const [results, setResults] = useState([])
   const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
   useEffect(() => {
@@ -59339,7 +59393,8 @@ function TwinHuntApp({ onBack, isGoalMode = false }) {
   const [isCorrect, setIsCorrect] = useState(null)
   // Round revealed/answered flag (disables further picks)
   const [revealed, setRevealed] = useState(false)
-  // Array of {question, userAnswer, correctAnswer, correct, time} result objects
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));// Array of {question, userAnswer, correctAnswer, correct, time} result objects
   const [results, setResults] = useState([])
   // Timer instance for tracking time per round
   const timer = useTimer()
@@ -59694,7 +59749,8 @@ function SqrtApp({ onBack, isGoalMode = false }) {
   const [loading, setLoading] = useState(false)
   // Answer revealed flag
   const [revealed, setRevealed] = useState(false)
-  // Array of {question, userAnswer, correctAnswer, correct, time} result objects
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));// Array of {question, userAnswer, correctAnswer, correct, time} result objects
   const [results, setResults] = useState([])
   const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
   useEffect(() => {
@@ -59992,7 +60048,8 @@ function PolyMulApp({ onBack, isGoalMode = false }) {
   const [score, setScore] = useState(0)
   // Answer revealed flag
   const [revealed, setRevealed] = useState(false)
-  // Current question number (1-indexed)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));// Current question number (1-indexed)
   const [questionNumber, setQuestionNumber] = useState(0)
   // Total questions
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
@@ -60310,7 +60367,8 @@ function PolyFactorApp({ onBack, isGoalMode = false }) {
   const [score, setScore] = useState(0)
   // Answer revealed flag (prevents further input after submission)
   const [revealed, setRevealed] = useState(false)
-  // Current question number (1-indexed)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));// Current question number (1-indexed)
   const [questionNumber, setQuestionNumber] = useState(0)
   // Total questions to answer
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
@@ -60618,7 +60676,8 @@ function PrimeFactorApp({ onBack, isGoalMode = false }) {
   const [score, setScore] = useState(0)
   // Factorization revealed/completed flag (prevents further input)
   const [revealed, setRevealed] = useState(false)
-  // Current question number (1-indexed)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));// Current question number (1-indexed)
   const [questionNumber, setQuestionNumber] = useState(0)
   // Total questions to answer
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
@@ -60957,7 +61016,8 @@ function QFormulaApp({ onBack, isGoalMode = false }) {
   const [score, setScore] = useState(0)
   // Answer revealed flag (prevents further input after submission)
   const [revealed, setRevealed] = useState(false)
-  // Current question number (1-indexed)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));// Current question number (1-indexed)
   const [questionNumber, setQuestionNumber] = useState(0)
   // Total questions to answer
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
@@ -61278,7 +61338,8 @@ function SimulApp({ onBack, isGoalMode = false }) {
   const [score, setScore] = useState(0)
   // Answer revealed flag (prevents further input after submission)
   const [revealed, setRevealed] = useState(false)
-  // Current question number (1-indexed)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));// Current question number (1-indexed)
   const [questionNumber, setQuestionNumber] = useState(0)
   // Total questions to answer
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
@@ -61607,7 +61668,8 @@ function FuncEvalApp({ onBack, isGoalMode = false }) {
   const [score, setScore] = useState(0)
   // Answer revealed flag (prevents further input after submission)
   const [revealed, setRevealed] = useState(false)
-  // Current question number (1-indexed)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));// Current question number (1-indexed)
   const [questionNumber, setQuestionNumber] = useState(0)
   // Total questions to answer
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
@@ -61896,7 +61958,8 @@ function LineEqApp({ onBack, isGoalMode = false }) {
   const [score, setScore] = useState(0)
   // Answer revealed flag (prevents further input after submission)
   const [revealed, setRevealed] = useState(false)
-  // Current question number (1-indexed)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));// Current question number (1-indexed)
   const [questionNumber, setQuestionNumber] = useState(0)
   // Total questions to answer
   const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
@@ -62434,7 +62497,8 @@ function CustomApp({ onBack, isGoalMode = false }) {
   const [isCorrect, setIsCorrect] = useState(null)
   // Answer revealed flag (prevents further input after submission)
   const [revealed, setRevealed] = useState(false)
-  // API call in progress flag
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));// API call in progress flag
   const [loading, setLoading] = useState(false)
   // Timer instance for tracking elapsed time per question
   const timer = useTimer()
@@ -64894,7 +64958,8 @@ function Tatsavit1App({ onBack, isGoalMode = false }) {
   const [idx, setIdx] = useState(0)
   const [selected, setSelected] = useState(null)
   const [revealed, setRevealed] = useState(false)
-  const [showSolve, setShowSolve] = useState(false)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [showSolve, setShowSolve] = useState(false)
   const [score, setScore] = useState(0)
   const [results, setResults] = useState([])
   const [finished, setFinished] = useState(false)
@@ -65542,7 +65607,8 @@ function RiyaApp({ onBack, isGoalMode = false }) {
   const [quizIdx, setQuizIdx] = useState(0)
   const [selected, setSelected] = useState(null)
   const [revealed, setRevealed] = useState(false)
-  const [showSolve, setShowSolve] = useState(false)
+  
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));const [showSolve, setShowSolve] = useState(false)
   const [totalCorrect, setTotalCorrect] = useState(0)
   const [totalAttempted, setTotalAttempted] = useState(0)
   const [reviewMode, setReviewMode] = useState(false)    // shows "let's review" banner on replay
@@ -67263,6 +67329,7 @@ function GenericLabApp({ title, subtitle, endpoint, onBack, renderQuestionCustom
   const [isCorrect, setIsCorrect] = useState(null);
   const [loading, setLoading] = useState(false);
   const [revealed, setRevealed] = useState(false);
+  useProgressSubmit(revealed, typeof isCorrect !== "undefined" ? isCorrect : false, "practice", typeof question !== "undefined" ? question?.id : (typeof currentQ !== "undefined" ? currentQ?.id : undefined));
   const [results, setResults] = useState([]);
   const timer = useTimer();
   // Guard ref: prevents double-fetch from React StrictMode concurrent effect invocations
@@ -67388,7 +67455,6 @@ function GenericLabApp({ title, subtitle, endpoint, onBack, renderQuestionCustom
   const advanceRef = useRef(() => { });
   advanceRef.current = () => fetchQuestion();
   useAutoAdvance(revealed, advanceRef, isCorrect);
-  useProgressSubmit(revealed, isCorrect, endpoint.split('/')[1], question?.id);
 
   const C = {
     bg: '#1A1A1A',

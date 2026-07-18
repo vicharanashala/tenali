@@ -13,16 +13,20 @@ import React, { createContext, useContext, useState, useEffect, useCallback } fr
 // Static imports — bundled at build time, zero runtime network cost
 import en from '../locales/en.json';
 import hi from '../locales/hi.json';
+import bn from '../locales/bn.json';
+import mr from '../locales/mr.json';
+import te from '../locales/te.json';
+import ta from '../locales/ta.json';
 import { translateDynamic } from './QuestionTranslator';
 import { AutoTranslator } from './AutoTranslator';
 
-const LOCALE_LOADERS = {
-  en: () => en,
-  hi: () => hi,
-  bn: () => import('../locales/bn.json').then(m => m.default || m),
-  mr: () => import('../locales/mr.json').then(m => m.default || m),
-  te: () => import('../locales/te.json').then(m => m.default || m),
-  ta: () => import('../locales/ta.json').then(m => m.default || m),
+const LOCALE_DATA = {
+  en: en,
+  hi: hi,
+  bn: bn,
+  mr: mr,
+  te: te,
+  ta: ta,
 };
 
 // Language metadata (displayed in the language selector)
@@ -53,28 +57,12 @@ export function I18nProvider({ children }) {
     }
   });
 
-  const [translations, setTranslations] = useState(locale === 'hi' ? hi : en);
+  const [translations, setTranslations] = useState(LOCALE_DATA[locale] || en);
   const [loading, setLoading] = useState(false);
 
   // Load translations when locale changes
   useEffect(() => {
-    const loader = LOCALE_LOADERS[locale];
-    if (!loader) return;
-
-    const result = loader();
-    if (result instanceof Promise) {
-      setLoading(true);
-      result.then(data => {
-        setTranslations(data);
-        setLoading(false);
-      }).catch(() => {
-        // Fallback to English if loading fails
-        setTranslations(en);
-        setLoading(false);
-      });
-    } else {
-      setTranslations(result);
-    }
+    setTranslations(LOCALE_DATA[locale] || en);
 
     // Set lang attribute on <html> for CSS script-aware styling
     document.documentElement.setAttribute('lang', locale);
