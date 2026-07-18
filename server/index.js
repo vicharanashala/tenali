@@ -8921,6 +8921,23 @@ app.get('/path', (_req, res) => {
   res.sendFile(path.join(__dirname, '..', 'graph', 'path.html'));
 });
 
+app.get('/graph', (_req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'graph', 'index.html'));
+});
+
+app.get('/path', (_req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'graph', 'path.html'));
+});
+
+// NEW — serves the shared node/edge data
+app.get('/graph-data.json', (_req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'graph', 'graph-data.json'));
+});
+
+app.get('/enhanced', (_req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'enhanced', 'index.html'));
+});
+
 app.get('/enhanced', (_req, res) => {
   res.sendFile(path.join(__dirname, '..', 'enhanced', 'index.html'));
 });

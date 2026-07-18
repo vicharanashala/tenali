@@ -36079,137 +36079,58 @@ function App() {
  * @param {Function} props.onSelect - Callback when user selects a quiz: receives mode key (e.g., 'gk')
  */
 // ─── PathMap data & algorithms (unchanged) ───────────────────
-const pmNodes = [
-  { id: 'basicarith',   label: 'Basic Arithmetic',   sub: '+, −, ×  single→4-digit',              cat: 'arith' },
-  { id: 'addition',     label: 'Addition',            sub: 'Multi-digit addition drill',            cat: 'arith' },
-  { id: 'multiply',     label: 'Multiplication',      sub: 'Times tables 2-19',                     cat: 'arith' },
-  { id: 'rounding',     label: 'Rounding',            sub: 'D.P., sig. figs, estimation',           cat: 'arith' },
-  { id: 'fractionadd',  label: 'Fractions (Add)',     sub: 'LCD, mixed numbers',                    cat: 'arith' },
-  { id: 'percent',      label: 'Percentages',         sub: 'Find %, increase, reverse, compound',   cat: 'arith' },
-  { id: 'profitloss',   label: 'Profit & Loss',       sub: 'CP, SP, discounts, markup',             cat: 'arith' },
-  { id: 'ratio',        label: 'Ratio',               sub: 'Simplify, divide, proportion',          cat: 'arith' },
-  { id: 'sdt',          label: 'Speed / Dist / Time', sub: 'd=st, average speed, units',            cat: 'arith' },
-  { id: 'squaring',     label: 'Squaring',            sub: '(a+b)² identity drill',                 cat: 'arith' },
-  { id: 'hcflcm',       label: 'HCF & LCM',          sub: 'Euclidean algorithm, word probs',        cat: 'numth' },
-  { id: 'primefactor',  label: 'Prime Factors',       sub: 'Prime decomposition',                   cat: 'numth' },
-  { id: 'bases',        label: 'Number Bases',        sub: 'Binary, hex, conversions',              cat: 'numth' },
-  { id: 'indices',      label: 'Indices',             sub: 'Laws, negative, fractional exp',        cat: 'alg' },
-  { id: 'surds',        label: 'Surds',               sub: 'Simplify, add, rationalise',            cat: 'alg' },
-  { id: 'stdform',      label: 'Standard Form',       sub: 'Scientific notation ops',               cat: 'alg' },
-  { id: 'log',          label: 'Logarithms',          sub: 'Evaluate, laws, solve equations',       cat: 'alg' },
-  { id: 'sqrt',         label: 'Square Root',         sub: 'Nearest-integer √ drill',               cat: 'alg' },
-  { id: 'quadratic',    label: 'Quadratic (eval)',    sub: 'y = ax²+bx+c  substitution',            cat: 'alg' },
-  { id: 'funceval',     label: 'Functions',           sub: 'Evaluate f(x), f(x,y), f(x,y,z)',      cat: 'alg' },
-  { id: 'polymul',      label: 'Poly Multiply',       sub: 'Expand products of polys',              cat: 'alg' },
-  { id: 'polyfactor',   label: 'Poly Factor',         sub: 'Factorise quadratics',                  cat: 'alg' },
-  { id: 'qformula',     label: 'Quadratic Formula',   sub: 'Find roots of ax²+bx+c = 0',           cat: 'alg' },
-  { id: 'simul',        label: 'Simultaneous Eq.',    sub: '2×2 and 3×3 linear systems',            cat: 'alg' },
-  { id: 'ineq',         label: 'Inequalities',        sub: 'Linear & quadratic inequalities',       cat: 'alg' },
-  { id: 'sequences',    label: 'Sequences',           sub: 'AP & GP: nth term, sum',                cat: 'alg' },
-  { id: 'variation',    label: 'Variation',           sub: 'Direct & inverse proportion',           cat: 'alg' },
-  { id: 'binomial',     label: 'Binomial Theorem',    sub: 'nCr, expansion, coefficients',          cat: 'alg' },
-  { id: 'complex',      label: 'Complex Numbers',     sub: 'Add, multiply, modulus',                cat: 'alg' },
-  { id: 'bounds',       label: 'Bounds',              sub: 'Error intervals, propagation',          cat: 'alg' },
-  { id: 'angles',       label: 'Angles',              sub: 'Straight line, point, parallel',        cat: 'geom' },
-  { id: 'triangles',    label: 'Triangles',           sub: 'Angle sum, isosceles, exterior',        cat: 'geom' },
-  { id: 'polygons',     label: 'Polygons',            sub: 'Interior / exterior angles',            cat: 'geom' },
-  { id: 'congruence',   label: 'Congruence',          sub: 'SSS, SAS, ASA conditions',              cat: 'geom' },
-  { id: 'similarity',   label: 'Similarity',          sub: 'Scale factor, area/vol ratios',         cat: 'geom' },
-  { id: 'pythag',       label: "Pythagoras' Theorem", sub: 'Hypotenuse, legs, 3D',                  cat: 'geom' },
-  { id: 'circleth',     label: 'Circle Theorems',     sub: 'Semicircle, cyclic quad, tangent',      cat: 'geom' },
-  { id: 'mensur',       label: 'Mensuration',         sub: 'Area, perimeter, volume, SA',           cat: 'geom' },
-  { id: 'transform',    label: 'Transformations',     sub: 'Reflect, rotate, translate, enlarge',   cat: 'geom' },
-  { id: 'bearings',     label: 'Bearings',            sub: '3-figure bearings, back bearing',       cat: 'geom' },
-  { id: 'coordgeom',    label: 'Coord. Geometry',     sub: 'Midpoint, distance, gradient',          cat: 'geom' },
-  { id: 'lineq',        label: 'Line Equation',       sub: 'y = mx + c from two points',            cat: 'geom' },
-  { id: 'trig',         label: 'Trigonometry',        sub: 'SOH-CAH-TOA, sine/cosine rule',         cat: 'geom' },
-  { id: 'diff',         label: 'Differentiation',     sub: 'Power rule, turning points',            cat: 'calc' },
-  { id: 'integ',        label: 'Integration',         sub: 'Antiderivatives, definite ∫',           cat: 'calc' },
-  { id: 'stats',        label: 'Statistics',          sub: 'Mean, median, mode, range',             cat: 'stats' },
-  { id: 'prob',         label: 'Probability',         sub: 'Simple, combined, conditional',         cat: 'stats' },
-  { id: 'sets',         label: 'Sets',                sub: 'Union, intersection, Venn',             cat: 'stats' },
-  { id: 'vectors',      label: 'Vectors',             sub: 'Add, scale, magnitude',                 cat: 'vecmat' },
-  { id: 'dotprod',      label: 'Dot Products',        sub: 'Dot product, matrix multiply',          cat: 'vecmat' },
-  { id: 'matrix',       label: 'Matrices',            sub: 'Add, scalar ×, det, multiply',          cat: 'vecmat' },
-  { id: 'gk',           label: 'General Knowledge',   sub: 'Multiple-choice trivia',                cat: 'other' },
-  { id: 'vocab',        label: 'Vocabulary',          sub: 'Word definitions',                      cat: 'other' },
-  { id: 'spot',         label: 'Twin Hunt',           sub: 'Find the common object',                cat: 'other' },
-  { id: 'lineareq',     label: 'Linear Equations',    sub: 'Solve ax + b = c',                     cat: 'alg' },
-  { id: 'decimals',     label: 'Decimals',            sub: '+, −, ×, ÷ with decimal places',        cat: 'arith' },
-  { id: 'permcomb',     label: 'Perm. & Comb.',       sub: 'nPr, nCr, counting principles',         cat: 'stats' },
-  { id: 'limits',       label: 'Limits',              sub: 'Limits at a point, infinity',           cat: 'calc' },
-  { id: 'invtrig',      label: 'Inverse Trig',        sub: 'arcsin, arccos, arctan',                cat: 'geom' },
-  { id: 'remfactor',    label: 'Remainder Theorem',   sub: 'Polynomial division, roots',            cat: 'alg' },
-  { id: 'heron',        label: "Heron's Formula",     sub: 'Area from three sides',                 cat: 'geom' },
-  { id: 'shares',       label: 'Shares & Dividends',  sub: 'Stock, dividends, returns',             cat: 'arith' },
-  { id: 'banking',      label: 'Banking (RD)',        sub: 'Recurring deposits, interest',          cat: 'arith' },
-  { id: 'gst',          label: 'GST',                 sub: 'Goods and Services Tax',                cat: 'arith' },
-  { id: 'section',      label: 'Section Formula',     sub: 'Internal & external division',          cat: 'geom' },
-  { id: 'linprog',      label: 'Linear Programming',  sub: 'Optimise linear objective',             cat: 'alg' },
-  { id: 'circmeasure',  label: 'Circular Measure',    sub: 'Radians, arc length, area',             cat: 'geom' },
-  { id: 'conics',       label: 'Conic Sections',      sub: 'Circle, parabola, ellipse',             cat: 'geom' },
-  { id: 'diffeq',       label: 'Differential Eq.',    sub: 'Solve dy/dx = f(x)',                    cat: 'calc' },
-]
+// ─── PathMap graph data (fetched from graph-data.json, same file index.html/path.html use) ───
+let pmNodes = []
+let pmEdges = []
+let pmCatColor = {}
+let pmNodeById = {}
+let pmPrereqMap = {}
+let pmSuccessorMap = {}
 
-const pmEdges = [
-  ['basicarith', 'addition'], ['basicarith', 'multiply'], ['basicarith', 'rounding'],
-  ['multiply',   'squaring'], ['addition',   'squaring'], ['multiply',   'fractionadd'],
-  ['fractionadd','percent'],  ['percent',    'profitloss'], ['ratio',      'percent'],
-  ['basicarith', 'ratio'],    ['multiply',   'sdt'],       ['ratio',      'sdt'],
-  ['multiply',    'hcflcm'], ['hcflcm',      'primefactor'], ['basicarith',  'bases'],
-  ['multiply',   'indices'], ['indices',    'surds'], ['indices',    'log'],
-  ['indices',    'stdform'], ['multiply',   'sqrt'],  ['squaring',   'sqrt'],
-  ['basicarith', 'funceval'], ['multiply',   'quadratic'], ['indices',    'quadratic'],
-  ['multiply',   'polymul'],  ['indices',    'polymul'],   ['polymul',    'polyfactor'],
-  ['polyfactor', 'qformula'], ['sqrt',       'qformula'],  ['basicarith', 'simul'],
-  ['funceval',   'simul'],    ['basicarith', 'ineq'],      ['polyfactor', 'ineq'],
-  ['basicarith', 'sequences'],['multiply',   'sequences'], ['indices',    'sequences'],
-  ['ratio',      'variation'],['indices',    'variation'], ['indices',    'binomial'],
-  ['polymul',    'binomial'], ['sqrt',       'complex'],   ['qformula',   'complex'],
-  ['rounding',   'bounds'],
-  ['basicarith', 'angles'],   ['angles',     'triangles'], ['angles',     'polygons'],
-  ['triangles',  'polygons'], ['triangles',  'congruence'],['triangles',  'similarity'],
-  ['ratio',      'similarity'],['triangles', 'pythag'],    ['squaring',   'pythag'],
-  ['angles',     'circleth'], ['triangles',  'circleth'],  ['multiply',   'mensur'],
-  ['squaring',   'mensur'],   ['polygons',   'mensur'],    ['angles',     'transform'],
-  ['coordgeom',  'transform'],['angles',     'bearings'],  ['basicarith', 'coordgeom'],
-  ['pythag',     'coordgeom'],['coordgeom',  'lineq'],     ['fractionadd','lineq'],
-  ['pythag',     'trig'],     ['angles',     'trig'],       ['ratio',      'trig'],
-  ['indices',    'diff'],     ['polymul',    'diff'],       ['quadratic',  'diff'],
-  ['diff',       'integ'],
-  ['basicarith', 'stats'],    ['fractionadd','prob'],       ['basicarith', 'prob'],
-  ['basicarith', 'sets'],
-  ['basicarith', 'vectors'],  ['vectors',    'dotprod'],    ['multiply',   'matrix'],
-  ['basicarith', 'matrix'],   ['matrix',     'dotprod'],
-  ['basicarith', 'decimals'], ['basicarith', 'lineareq'],   ['lineareq',   'simul'],
-  ['basicarith', 'shares'],   ['basicarith', 'banking'],    ['percent',    'gst'],
-  ['percent',    'shares'],   ['percent',    'banking'],    ['basicarith', 'permcomb'],
-  ['sequences',  'limits'],   ['limits',     'diff'],       ['trig',       'invtrig'],
-  ['trig',       'circmeasure'],['coordgeom','section'],    ['coordgeom',  'conics'],
-  ['polyfactor', 'remfactor'],['polymul',    'remfactor'],  ['pythag',     'heron'],
-  ['triangles',  'heron'],    ['mensur',     'heron'],      ['lineareq',   'linprog'],
-  ['ineq',       'linprog'],  ['diff',       'diffeq'],     ['integ',      'diffeq'],
-]
+let pmGraphDataPromise = null
 
-const pmCatColor = {
-  arith:  '#ef5350',
-  alg:    '#ab47bc',
-  geom:   '#42a5f5',
-  calc:   '#66bb6a',
-  stats:  '#ffa726',
-  vecmat: '#26c6da',
-  numth:  '#8d6e63',
-  other:  '#78909c',
+function pmBuildDerivedMaps() {
+  pmNodeById = Object.fromEntries(pmNodes.map((n) => [n.id, n]))
+  pmPrereqMap = {}
+  pmSuccessorMap = {}
+  pmEdges.forEach(([a, b]) => {
+    ;(pmPrereqMap[b] = pmPrereqMap[b] || []).push(a)
+    ;(pmSuccessorMap[a] = pmSuccessorMap[a] || []).push(b)
+  })
 }
 
-const pmNodeById = Object.fromEntries(pmNodes.map((n) => [n.id, n]))
+function pmFetchGraphData() {
+  if (!pmGraphDataPromise) {
+    pmGraphDataPromise = fetch('./graph-data.json')
+      .then((res) => {
+        if (!res.ok) throw new Error(`Failed to load graph-data.json (${res.status})`)
+        return res.json()
+      })
+      .then(({ categories, nodes, edges }) => {
+        pmNodes = nodes
+        pmEdges = edges
+        pmCatColor = Object.fromEntries(Object.entries(categories).map(([id, c]) => [id, c.color]))
+        pmBuildDerivedMaps()
+      })
+  }
+  return pmGraphDataPromise
+}
 
-const pmPrereqMap = {}
-const pmSuccessorMap = {}
-pmEdges.forEach(([a, b]) => {
-  ;(pmPrereqMap[b] = pmPrereqMap[b] || []).push(a)
-  ;(pmSuccessorMap[a] = pmSuccessorMap[a] || []).push(b)
-})
+// React hook — loads the graph data once, reports 'loading' | 'ready' | 'error'
+function usePmGraphData() {
+  const [status, setStatus] = useState(() => (pmNodes.length ? 'ready' : 'loading'))
+
+  useEffect(() => {
+    if (status === 'ready') return
+    let cancelled = false
+    pmFetchGraphData()
+      .then(() => { if (!cancelled) setStatus('ready') })
+      .catch((err) => { if (!cancelled) { console.error(err); setStatus('error') } })
+    return () => { cancelled = true }
+  }, [status])
+
+  return status
+}
 
 function pmGetSubgraphNodes(goalIdList) {
   const visited = new Set()
@@ -36259,6 +36180,7 @@ function pmStarPoints(cx, cy, r) {
 
 // ─── PathMap hooks ────────────────────────────────────────────
 function usePathmapState() {
+  const pmStatus = usePmGraphData()
   const [goalIds, setGoalIds] = useState(() => {
     try { const r = localStorage.getItem('tenali_pathmap_goal'); return r ? JSON.parse(r) : [] }
     catch { return [] }
@@ -36271,14 +36193,14 @@ function usePathmapState() {
   useEffect(() => { localStorage.setItem('tenali_pathmap_goal', JSON.stringify(goalIds)) }, [goalIds])
   useEffect(() => { localStorage.setItem('tenali_pathmap_known', JSON.stringify([...known])) }, [known])
 
-  const path = useMemo(() => pmComputePath(goalIds), [goalIds])
+  const path = useMemo(() => (pmStatus === 'ready' ? pmComputePath(goalIds) : []), [goalIds, pmStatus])
   const setGoal    = useCallback((ids) => setGoalIds(ids), [])
   const clearGoal  = useCallback(() => setGoalIds([]), [])
   const toggleKnown = useCallback((id) => {
     setKnown((prev) => { const next = new Set(prev); next.has(id) ? next.delete(id) : next.add(id); return next })
   }, [])
 
-  return { goalIds, known, path, setGoal, clearGoal, toggleKnown }
+  return { goalIds, known, path, setGoal, clearGoal, toggleKnown, pmStatus }
 }
 
 // ─── PathMap StatsBar ─────────────────────────────────────────
@@ -36522,7 +36444,40 @@ function PmModuleGrid({ path, known, goalIds, onToggleKnown, onSetGoal }) {
 
 // ─── PathMap main component ───────────────────────────────────
 function PathMap({ onBack }) {
-  const { goalIds, known, path, setGoal, clearGoal, toggleKnown } = usePathmapState()
+  const { goalIds, known, path, setGoal, clearGoal, toggleKnown, pmStatus } = usePathmapState()
+
+  if (pmStatus === 'loading') {
+    return (
+      <div className="pm-shell">
+        <div className="pm-topbar">
+          <div className="pm-brand">
+            {onBack && (
+              <button className="pm-icon-btn" onClick={onBack} title="Back" aria-label="Back">←</button>
+            )}
+            <h1>Your Learning Path</h1>
+          </div>
+        </div>
+        <div className="pm-empty">Loading topics…</div>
+      </div>
+    )
+  }
+
+  if (pmStatus === 'error') {
+    return (
+      <div className="pm-shell">
+        <div className="pm-topbar">
+          <div className="pm-brand">
+            {onBack && (
+              <button className="pm-icon-btn" onClick={onBack} title="Back" aria-label="Back">←</button>
+            )}
+            <h1>Your Learning Path</h1>
+          </div>
+        </div>
+        <div className="pm-empty">Couldn't load topic data. Please refresh and try again.</div>
+      </div>
+    )
+  }
+
   return (
     <div className="pm-shell">
       <div className="pm-topbar">
@@ -37040,6 +36995,7 @@ function Home({ onSelect }) {
   const rows = Math.ceil(filteredRegular.length / (cols || 1))
 
   // ── PathMap state ──────────────────────────────────────────
+  const pmStatus = usePmGraphData()
   const [pmOpen, setPmOpen] = useState(false)
   const [pmGoalIds, setPmGoalIds] = useState(() => {
     try { const r = localStorage.getItem('tenali_pathmap_goal'); return r ? JSON.parse(r) : [] } catch { return [] }
@@ -37050,7 +37006,7 @@ function Home({ onSelect }) {
   useEffect(() => { localStorage.setItem('tenali_pathmap_goal', JSON.stringify(pmGoalIds)) }, [pmGoalIds])
   useEffect(() => { localStorage.setItem('tenali_pathmap_known', JSON.stringify([...pmKnown])) }, [pmKnown])
 
-  const pmPath      = useMemo(() => pmComputePath(pmGoalIds), [pmGoalIds])
+  const pmPath      = useMemo(() => (pmStatus === 'ready' ? pmComputePath(pmGoalIds) : []), [pmGoalIds, pmStatus])
   const pmPathIndex = useMemo(() => Object.fromEntries(pmPath.map((id, i) => [id, i + 1])), [pmPath])
 
   const pmToggleKnown = useCallback((id) => {
@@ -37087,13 +37043,15 @@ function Home({ onSelect }) {
         <div style={{ position: 'absolute', top: '8px', right: '0', display: 'flex', alignItems: 'center', gap: '8px' }}>
           <button
             onClick={() => setPmOpen(true)}
-            title="Learn by prerequisite path"
+            disabled={pmStatus !== 'ready'}
+            title={pmStatus === 'ready' ? 'Learn by prerequisite path' : 'Loading topic data…'}
             style={{
               background: pmGoalIds.length > 0 ? 'var(--clr-accent, #e8864a)' : 'var(--clr-card)',
               border: '1.5px solid var(--clr-border)',
               borderRadius: '20px',
               color: pmGoalIds.length > 0 ? '#fff' : 'var(--clr-text)',
-              cursor: 'pointer',
+              cursor: pmStatus === 'ready' ? 'pointer' : 'not-allowed',
+              opacity: pmStatus === 'ready' ? 1 : 0.6,
               fontSize: '0.75rem',
               fontFamily: 'var(--font-body)',
               fontWeight: 600,
@@ -37102,7 +37060,9 @@ function Home({ onSelect }) {
               transition: 'background 0.2s',
             }}
           >
-            {pmGoalIds.length > 0 ? `📍 Path (${pmStepsLeft} left)` : '📍 Level Map'}
+            {pmStatus !== 'ready'
+              ? '📍 Loading…'
+              : pmGoalIds.length > 0 ? `📍 Path (${pmStepsLeft} left)` : '📍 Level Map'}
           </button>
 
           <div ref={menuRef}>
@@ -37151,7 +37111,7 @@ function Home({ onSelect }) {
       </div>
 
       {/* ── Gamified path panel ─────────────────────────────── */}
-      {pmPath.length > 0 && (
+      {pmStatus === 'ready' && pmPath.length > 0 && (
         <div className="pmh-panel" style={{
           margin: '22px 0 30px',
           padding: '20px 18px 10px',
@@ -37315,13 +37275,19 @@ function Home({ onSelect }) {
               Pick a goal topic — we'll build your path below the search bar on the home screen.
             </p>
 
-            <PmGoalPicker
-              goalIds={pmGoalIds}
-              onSetGoal={ids => setPmGoalIds(ids)}
-              onClear={() => { setPmGoalIds([]) }}
-            />
+            {pmStatus !== 'ready' ? (
+              <div style={{ padding: '20px 0', color: 'var(--clr-text-soft)', fontFamily: 'var(--font-body)', fontSize: '0.9rem' }}>
+                {pmStatus === 'error' ? "Couldn't load topic data. Please refresh and try again." : 'Loading topics…'}
+              </div>
+            ) : (
+              <PmGoalPicker
+                goalIds={pmGoalIds}
+                onSetGoal={ids => setPmGoalIds(ids)}
+                onClear={() => { setPmGoalIds([]) }}
+              />
+            )}
 
-            {pmPath.length > 0 && (
+            {pmStatus === 'ready' && pmPath.length > 0 && (
               <>
                 <PmStatsBar path={pmPath} known={pmKnown} />
 
