@@ -472,9 +472,9 @@ export default function JumbledWords() {
               const isMastered = lvl < currentMaxLevel || (lvl === 8 && jumbledMastery.state.mastered);
               const isActive = lvl === currentMaxLevel;
 
-              let statusText = 'Unlocked 🔓';
-              let badgeBg = 'rgba(255, 255, 255, 0.08)';
-              let badgeColor = 'rgba(255, 255, 255, 0.8)';
+              let statusText = '';
+              let badgeBg = 'transparent';
+              let badgeColor = 'transparent';
               let borderStyle = '1px solid var(--clr-border, #2c2c2e)';
               let cardBg = 'rgba(255, 255, 255, 0.02)';
 
@@ -525,16 +525,18 @@ export default function JumbledWords() {
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span style={{ fontSize: '0.95rem', fontWeight: 700 }}>Level {lvl}</span>
-                    <span style={{
-                      fontSize: '0.75rem',
-                      fontWeight: 600,
-                      padding: '2px 8px',
-                      borderRadius: '10px',
-                      background: badgeBg,
-                      color: badgeColor
-                    }}>
-                      {statusText}
-                    </span>
+                    {statusText && (
+                      <span style={{
+                        fontSize: '0.75rem',
+                        fontWeight: 600,
+                        padding: '2px 8px',
+                        borderRadius: '10px',
+                        background: badgeBg,
+                        color: badgeColor
+                      }}>
+                        {statusText}
+                      </span>
+                    )}
                   </div>
                   <div style={{ fontSize: '0.8rem', color: 'var(--clr-text-soft, #a1a1a6)', lineHeight: 1.4 }}>
                     {levelDescriptions[lvl]}
