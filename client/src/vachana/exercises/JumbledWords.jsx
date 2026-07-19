@@ -163,8 +163,8 @@ export default function JumbledWords() {
   const [hasAttempted, setHasAttempted] = useState(false);
   const [solveCountdown, setSolveCountdown] = useState(0);
 
-  // Track recently seen question IDs at the current level to avoid repetitions
-  const [seenIds, setSeenIds] = useState([]);
+  // Track correctly answered question IDs at the current level to avoid repeating them
+  const [correctlyAnsweredIds, setCorrectlyAnsweredIds] = useState([]);
   const [levelCompletionData, setLevelCompletionData] = useState(null);
   const [hasValidated, setHasValidated] = useState(false);
 
@@ -176,29 +176,24 @@ export default function JumbledWords() {
     return () => clearTimeout(timer);
   }, [solveCountdown]);
 
-  // Select a question avoiding immediate repetitions
-  const selectQuestionNoRepeat = (level, lastId) => {
+  // Select a question avoiding repetitions of correctly answered questions
+  const selectQuestionNoRepeat = (level, lastId, activeCorrectList = correctlyAnsweredIds) => {
     const levelKey = String(level);
     const questions = QUESTION_BANK[levelKey];
     if (!questions || questions.length === 0) return null;
 
-    // If seenIds is empty (first load or progress reset), always start with the first question of that level
-    if (seenIds.length === 0) {
-      const selected = questions[0];
-      if (selected) {
-        setSeenIds([selected.id]);
-      }
-      return selected;
+    // If activeCorrectList is empty, start with the first question of that level
+    if (activeCorrectList.length === 0) {
+      return questions[0];
     }
 
-    // Filter out questions already seen in this cycle
-    let candidates = questions.filter(q => !seenIds.includes(q.id));
+    // Filter out questions that have been correctly answered
+    let candidates = questions.filter(q => !activeCorrectList.includes(q.id));
 
-    // If all questions at this level have been seen, reset the tracking list
+    // If all questions at this level have been correctly answered, reset
     if (candidates.length === 0) {
+      setCorrectlyAnsweredIds([]);
       candidates = questions;
-      // Reset seenIds to just the last seen question to prevent immediate double-repeats
-      setSeenIds(lastId ? [lastId] : []);
     }
 
     // Filter out the last question specifically if we have multiple choices left
@@ -206,16 +201,12 @@ export default function JumbledWords() {
       candidates = candidates.filter(q => q.id !== lastId);
     }
 
-    const selected = candidates[Math.floor(Math.random() * candidates.length)];
-    if (selected) {
-      setSeenIds(prev => [...prev, selected.id]);
-    }
-    return selected;
+    return candidates[Math.floor(Math.random() * candidates.length)];
   };
 
   // Initialize or load next question
-  const loadQuestion = (level) => {
-    const nextQ = selectQuestionNoRepeat(level, currentQuestion?.id || null);
+  const loadQuestion = (level, customCorrectList = correctlyAnsweredIds) => {
+    const nextQ = selectQuestionNoRepeat(level, currentQuestion?.id || null, customCorrectList);
     setCurrentQuestion(nextQ);
     if (nextQ) {
       let shuffled = [];
@@ -309,6 +300,9 @@ export default function JumbledWords() {
     if (isCorrect) {
       setMsg(currentQuestion.explanation);
       jumbledMastery.handleAnswer(true);
+      const updatedCorrectList = [...correctlyAnsweredIds, currentQuestion.id];
+      setCorrectlyAnsweredIds(updatedCorrectList);
+
       setTimeout(() => {
         const updatedProgress = loadMasteryProgress();
         const nextLevel = updatedProgress['jumbled']?.currentLevel || jumbledMastery.state.currentLevel;
@@ -317,7 +311,7 @@ export default function JumbledWords() {
           // Finished the level! Show appreciation and motivation popup
           setLevelCompletionData({ level: playingLevel, nextLevel });
         } else {
-          loadQuestion(playingLevel);
+          loadQuestion(playingLevel, updatedCorrectList);
         }
       }, 2500);
     } else {
@@ -360,7 +354,7 @@ export default function JumbledWords() {
 
   const handleReset = () => {
     jumbledMastery.resetExercise();
-    setSeenIds([]);
+    setCorrectlyAnsweredIds([]);
     setHasAttempted(false);
     setSolveCountdown(0);
     setPlayingLevel(1);
@@ -370,7 +364,7 @@ export default function JumbledWords() {
   const handleStartLevel = (level) => {
     setPlayingLevel(level);
     setViewMode('play');
-    setSeenIds([]);
+    setCorrectlyAnsweredIds([]);
     // Load question for that level
     const questions = QUESTION_BANK[String(level)];
     const question = questions && questions.length > 0 ? questions[0] : null;
