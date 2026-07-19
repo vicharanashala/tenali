@@ -129,6 +129,20 @@ const shuffleWithMisplacedCount = (arr, targetMisplaced) => {
   return shuffled; // fallback
 };
 
+const getMotivationalMessage = (level) => {
+  const messages = {
+    1: "Incredible start! You've mastered matching expressions chronologically. Your path to math literacy has officially begun! 🚀",
+    2: "Awesome! Shuffled variables didn't slow you down one bit. Keep up the high energy! ⚡",
+    3: "Fantastic job! Balancing three-part expressions is tricky, but you handled it like a pro. 💪",
+    4: "Superb! Fully jumbled triplets are no match for your decoding skills. Let's keep this momentum! 🎓",
+    5: "Wonderful work! You just conquered multi-step operations like a champion. Your logic is solid! 🌟",
+    6: "Brilliant! You spotted the subtraction inversion trap perfectly. That's a huge milestone! 🧠",
+    7: "Outstanding translation! Combining coefficients with inversion traps is advanced math, and you nailed it! 🏆",
+    8: "Ultimate Mastery! You have conquered the complex parenthetical grouping sentences. You are a true Mathematical Literacy Wizard! 🧙‍♂️✨"
+  };
+  return messages[level] || "Great job mastering this level! Let's continue the journey.";
+};
+
 export default function JumbledWords() {
   const jumbledMastery = useMastery('jumbled', 8);
 
@@ -151,6 +165,7 @@ export default function JumbledWords() {
 
   // Track recently seen question IDs at the current level to avoid repetitions
   const [seenIds, setSeenIds] = useState([]);
+  const [levelCompletionData, setLevelCompletionData] = useState(null);
 
   useEffect(() => {
     if (solveCountdown <= 0) return;
@@ -292,9 +307,8 @@ export default function JumbledWords() {
         const nextLevel = updatedProgress['jumbled']?.currentLevel || jumbledMastery.state.currentLevel;
         
         if (nextLevel > playingLevel) {
-          // Unlocked a new level! Return to dashboard to celebrate and show unlock
-          setPlayingLevel(nextLevel);
-          setViewMode('dashboard');
+          // Finished the level! Show appreciation and motivation popup
+          setLevelCompletionData({ level: playingLevel, nextLevel });
         } else {
           loadQuestion(playingLevel);
         }
@@ -454,13 +468,13 @@ export default function JumbledWords() {
           }}>
             {Object.keys(QUESTION_BANK).map(lvlStr => {
               const lvl = Number(lvlStr);
-              const isLocked = lvl > currentMaxLevel;
+              const isLocked = false; // All levels unlocked
               const isMastered = lvl < currentMaxLevel || (lvl === 8 && jumbledMastery.state.mastered);
               const isActive = lvl === currentMaxLevel;
 
-              let statusText = 'Locked 🔒';
-              let badgeBg = 'rgba(255, 255, 255, 0.05)';
-              let badgeColor = 'var(--clr-text-soft, #a1a1a6)';
+              let statusText = 'Unlocked 🔓';
+              let badgeBg = 'rgba(255, 255, 255, 0.08)';
+              let badgeColor = 'rgba(255, 255, 255, 0.8)';
               let borderStyle = '1px solid var(--clr-border, #2c2c2e)';
               let cardBg = 'rgba(255, 255, 255, 0.02)';
 
@@ -866,6 +880,112 @@ export default function JumbledWords() {
           </div>
         )}
       </div>
+
+      {/* Level Completion Appreciation Modal */}
+      {levelCompletionData && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          background: 'rgba(0, 0, 0, 0.8)',
+          backdropFilter: 'blur(8px)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 9999,
+          padding: '16px',
+          boxSizing: 'border-box'
+        }}>
+          <div style={{
+            background: 'var(--clr-card, #1c1c1e)',
+            border: '2px solid var(--clr-accent, #6cceff)',
+            borderRadius: '20px',
+            padding: '32px',
+            maxWidth: '480px',
+            width: '100%',
+            textAlign: 'center',
+            boxShadow: '0 10px 40px rgba(0, 0, 0, 0.6)',
+            boxSizing: 'border-box',
+            color: '#ffffff'
+          }}>
+            <div style={{ fontSize: '4.5rem', marginBottom: '16px' }}>🎉</div>
+            <h2 style={{
+              margin: '0 0 12px 0',
+              fontSize: '1.8rem',
+              fontWeight: 800,
+              color: 'var(--clr-accent, #6cceff)',
+              fontFamily: 'var(--font-display, "DM Sans", sans-serif)'
+            }}>
+              Level {levelCompletionData.level} Mastered!
+            </h2>
+            <p style={{
+              fontSize: '1.05rem',
+              lineHeight: '1.6',
+              color: '#e5e5ea',
+              margin: '0 0 28px 0',
+              fontFamily: 'var(--font-display, "DM Sans", sans-serif)'
+            }}>
+              {getMotivationalMessage(levelCompletionData.level)}
+            </p>
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '12px'
+            }}>
+              <button
+                onClick={() => {
+                  const nextLvl = levelCompletionData.nextLevel;
+                  setLevelCompletionData(null);
+                  if (nextLvl <= 8) {
+                    handleStartLevel(nextLvl);
+                  } else {
+                    setViewMode('dashboard');
+                  }
+                }}
+                style={{
+                  background: 'linear-gradient(135deg, #6cceff, #3a9ad9)',
+                  border: 'none',
+                  color: '#ffffff',
+                  padding: '14px 24px',
+                  borderRadius: '10px',
+                  fontSize: '1rem',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 12px rgba(108, 206, 255, 0.3)',
+                  transition: 'all 0.2s',
+                  fontFamily: 'var(--font-display, "DM Sans", sans-serif)'
+                }}
+              >
+                {levelCompletionData.nextLevel <= 8 
+                  ? `Continue to Level ${levelCompletionData.nextLevel} 🚀`
+                  : 'Return to Dashboard 🏆'}
+              </button>
+              <button
+                onClick={() => {
+                  setLevelCompletionData(null);
+                  setViewMode('dashboard');
+                }}
+                style={{
+                  background: 'transparent',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  color: '#a1a1a6',
+                  padding: '12px 20px',
+                  borderRadius: '10px',
+                  fontSize: '0.9rem',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                  fontFamily: 'var(--font-display, "DM Sans", sans-serif)'
+                }}
+              >
+                View Dashboard
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
