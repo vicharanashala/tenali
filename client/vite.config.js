@@ -24,12 +24,19 @@
 
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import path from 'path'
 
 export default defineConfig({
   // Serves from root path (no /sub/path)
   base: '/',
   // Enable React support for JSX compilation
   plugins: [react()],
+  resolve: {
+    alias: {
+      'react': path.resolve(__dirname, 'node_modules/react'),
+      'react-dom': path.resolve(__dirname, 'node_modules/react-dom')
+    }
+  },
   server: {
     // Listen on all network interfaces (0.0.0.0) for development
     host: '0.0.0.0',
