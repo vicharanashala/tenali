@@ -251,10 +251,12 @@ export default function JumbledWords() {
         // We have mistaken questions to review! Move them to the active queue.
         setActiveQueue(newMistaken);
         setMistakenIds([]); // Clear the mistaken queue for the new pass
+        setIsReviewPass(true); // Enter review pass
         loadQuestionById(newMistaken[0], playingLevel);
       } else {
         // All questions correctly answered! Level Mastered.
         jumbledMastery.handleAnswer(true);
+        setIsReviewPass(false);
         setTimeout(() => {
           const updatedProgress = loadMasteryProgress();
           const nextLevel = updatedProgress['jumbled']?.currentLevel || jumbledMastery.state.currentLevel;
@@ -366,6 +368,7 @@ export default function JumbledWords() {
     jumbledMastery.resetExercise();
     setActiveQueue([]);
     setMistakenIds([]);
+    setIsReviewPass(false);
     setHasAttempted(false);
     setSolveCountdown(0);
     setPlayingLevel(1);
@@ -380,6 +383,7 @@ export default function JumbledWords() {
     const questionIds = questions.map(q => q.id);
     setActiveQueue(questionIds);
     setMistakenIds([]);
+    setIsReviewPass(false);
 
     const firstQ = questions[0];
     setCurrentQuestion(firstQ);
@@ -583,53 +587,57 @@ export default function JumbledWords() {
       padding: '20px'
     }}>
       <div style={{
-        display: 'flex',
-        flexDirection: 'row',
-        gap: '24px',
         width: '100%',
-        maxWidth: '1000px',
-        alignItems: 'flex-start',
+        maxWidth: '720px',
+        background: 'var(--clr-card, #1c1c1e)',
+        border: '1px solid var(--clr-border, #2c2c2e)',
+        borderRadius: '16px',
+        padding: '20px',
+        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '16px',
         boxSizing: 'border-box'
       }}>
-        {/* Main Play Card */}
-        <div style={{
-          flex: 1,
-          background: 'var(--clr-card, #1c1c1e)',
-          border: '1px solid var(--clr-border, #2c2c2e)',
-          borderRadius: '16px',
-          padding: '20px',
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '16px',
-          boxSizing: 'border-box'
-        }}>
-          {/* Play Header */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <button
-              onClick={() => setViewMode('dashboard')}
-              style={{
-                background: 'rgba(255,255,255,0.05)',
-                border: '1px solid var(--clr-border, #2c2c2e)',
-                color: 'var(--clr-text, #ffffff)',
-                cursor: 'pointer',
-                padding: '6px 12px',
-                borderRadius: '8px',
-                fontSize: '0.8rem',
-                fontWeight: 600,
-                transition: 'all 0.2s'
-              }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; }}
-              onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; }}
-            >
-              ← Levels Dashboard
-            </button>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ fontSize: '0.85rem', color: 'var(--clr-text-soft, #a1a1a6)', fontWeight: 600 }}>
-                Level {playingLevel} / 8
+        {/* Play Header */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <button
+            onClick={() => setViewMode('dashboard')}
+            style={{
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid var(--clr-border, #2c2c2e)',
+              color: 'var(--clr-text, #ffffff)',
+              cursor: 'pointer',
+              padding: '6px 12px',
+              borderRadius: '8px',
+              fontSize: '0.8rem',
+              fontWeight: 600,
+              transition: 'all 0.2s'
+            }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; }}
+          >
+            ← Levels Dashboard
+          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            {isReviewPass && (
+              <span style={{
+                fontSize: '0.82rem',
+                fontWeight: 700,
+                color: '#ff6961',
+                background: 'rgba(255, 105, 97, 0.1)',
+                padding: '3px 8px',
+                borderRadius: '6px',
+                border: '1px solid rgba(255, 105, 97, 0.2)'
+              }}>
+                practice again
               </span>
-            </div>
+            )}
+            <span style={{ fontSize: '0.85rem', color: 'var(--clr-text-soft, #a1a1a6)', fontWeight: 600 }}>
+              Level {playingLevel} / 8
+            </span>
           </div>
+        </div>
 
           {/* Exercise Area */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', flex: 1 }}>
@@ -910,87 +918,6 @@ export default function JumbledWords() {
             )}
           </div>
         </div>
-
-        {/* Right Sidebar: Previously Mistaken */}
-        <div style={{
-          width: '260px',
-          flexShrink: 0,
-          background: 'var(--clr-card, #1c1c1e)',
-          border: '1px solid var(--clr-border, #2c2c2e)',
-          borderRadius: '16px',
-          padding: '20px',
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '16px',
-          boxSizing: 'border-box',
-          alignSelf: 'stretch'
-        }}>
-          <h3 style={{
-            margin: 0,
-            fontSize: '0.9rem',
-            fontWeight: 800,
-            color: '#ff6961',
-            textTransform: 'uppercase',
-            letterSpacing: '0.5px',
-            fontFamily: 'var(--font-display, "DM Sans", sans-serif)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px'
-          }}>
-            ⚠️ Mistaken Queue
-          </h3>
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '8px',
-            overflowY: 'auto',
-            maxHeight: '400px'
-          }}>
-            {mistakenIds.length === 0 ? (
-              <div style={{
-                fontSize: '0.82rem',
-                color: 'var(--clr-text-soft, #a1a1a6)',
-                fontStyle: 'italic',
-                textAlign: 'center',
-                padding: '20px 0'
-              }}>
-                No mistakes yet! Keep it up! 🌟
-              </div>
-            ) : (
-              mistakenIds.map(id => {
-                const question = findQuestionById(id);
-                return (
-                  <div key={id} style={{
-                    fontSize: '0.85rem',
-                    padding: '10px 12px',
-                    borderRadius: '8px',
-                    background: 'rgba(217, 63, 63, 0.08)',
-                    border: '1px solid rgba(217, 63, 63, 0.2)',
-                    color: '#ff8c8c',
-                    fontFamily: 'monospace',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center'
-                  }}>
-                    <span>{question ? question.expression : ''}</span>
-                    <span style={{
-                      fontSize: '0.7rem',
-                      padding: '2px 6px',
-                      borderRadius: '4px',
-                      background: 'rgba(217, 63, 63, 0.2)',
-                      color: '#ff6961',
-                      fontWeight: 700
-                    }}>
-                      Review
-                    </span>
-                  </div>
-                );
-              })
-            )}
-          </div>
-        </div>
-      </div>
 
       {/* Level Completion Appreciation Modal */}
       {levelCompletionData && (
