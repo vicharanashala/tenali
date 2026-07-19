@@ -647,9 +647,6 @@ export default function JumbledWords() {
               <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: 800 }}>
                 Arrange blocks for: <span style={{ color: 'var(--clr-accent, #6cceff)', fontFamily: 'monospace' }}>{currentQuestion.expression}</span>
               </h3>
-              <p style={{ margin: '4px 0 0 0', fontSize: '0.85rem', color: 'var(--clr-text-soft, #a1a1a6)' }}>
-                Drag or click tiles to form the correct English phrasing structure.
-              </p>
             </div>
 
             {/* Answer Construction Workspace */}
@@ -668,8 +665,8 @@ export default function JumbledWords() {
               boxSizing: 'border-box'
             }}>
               {selectedIndices.length === 0 ? (
-                <div style={{ color: 'var(--clr-text-soft, #a1a1a6)', fontSize: '0.85rem', fontStyle: 'italic' }}>
-                  Select tiles from the bank below to construct your phrase
+                <div style={{ color: 'var(--clr-text-soft, #a1a1a6)', fontSize: '0.88rem', fontStyle: 'italic', textAlign: 'center' }}>
+                  Drag or click tiles to form the correct English phrasing structure.
                 </div>
               ) : (
                 selectedIndices.map((tileIdx, pos) => {
