@@ -179,6 +179,7 @@ export default function JumbledWords() {
   // Track queue of questions in the active pass and previously mistaken ones
   const [activeQueue, setActiveQueue] = useState([]);
   const [mistakenIds, setMistakenIds] = useState([]);
+  const [isReviewPass, setIsReviewPass] = useState(false);
   const [levelCompletionData, setLevelCompletionData] = useState(null);
   const [hasValidated, setHasValidated] = useState(false);
 
