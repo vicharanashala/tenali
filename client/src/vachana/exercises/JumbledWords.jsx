@@ -166,6 +166,7 @@ export default function JumbledWords() {
   // Track recently seen question IDs at the current level to avoid repetitions
   const [seenIds, setSeenIds] = useState([]);
   const [levelCompletionData, setLevelCompletionData] = useState(null);
+  const [hasValidated, setHasValidated] = useState(false);
 
   useEffect(() => {
     if (solveCountdown <= 0) return;
@@ -248,6 +249,7 @@ export default function JumbledWords() {
     setIsSolved(false);
     setHasAttempted(false);
     setSolveCountdown(0);
+    setHasValidated(false);
   };
 
   const handleTileClick = (index) => {
@@ -258,12 +260,14 @@ export default function JumbledWords() {
       setSelectedIndices(prev => [...prev, index]);
     }
     setMsg('');
+    setHasValidated(false);
   };
 
   const handleActiveTileClick = (pos) => {
     if (isSolved) return;
     setSelectedIndices(prev => prev.filter((_, idx) => idx !== pos));
     setMsg('');
+    setHasValidated(false);
   };
 
   const shiftActiveTile = (pos, direction) => {
@@ -279,12 +283,14 @@ export default function JumbledWords() {
       return copy;
     });
     setMsg('');
+    setHasValidated(false);
   };
 
   const clearSelection = () => {
     if (isSolved) return;
     setSelectedIndices([]);
     setMsg('');
+    setHasValidated(false);
   };
 
   const checkAnswer = () => {
@@ -298,6 +304,7 @@ export default function JumbledWords() {
     const isCorrect = assembledPhrase.toLowerCase() === currentQuestion.answer.toLowerCase();
 
     setHasAttempted(true);
+    setHasValidated(true);
 
     if (isCorrect) {
       setMsg(currentQuestion.explanation);
@@ -395,6 +402,7 @@ export default function JumbledWords() {
     setIsSolved(false);
     setHasAttempted(false);
     setSolveCountdown(0);
+    setHasValidated(false);
   };
 
   // Render Level Select Dashboard
@@ -552,6 +560,8 @@ export default function JumbledWords() {
 
   // Render Play Workspace
   if (!currentQuestion) return <div style={{ color: 'var(--clr-text-soft)' }}>Loading...</div>;
+
+  const isValidateDisabled = selectedIndices.length === 0 || hasValidated;
 
   return (
     <div style={{
@@ -825,7 +835,15 @@ export default function JumbledWords() {
                 <button
                   className="submit-btn"
                   onClick={checkAnswer}
-                  style={{ padding: '10px 18px', fontSize: '0.88rem', fontWeight: 700 }}
+                  disabled={isValidateDisabled}
+                  style={{
+                    padding: '10px 18px',
+                    fontSize: '0.88rem',
+                    fontWeight: 700,
+                    opacity: isValidateDisabled ? 0.5 : 1,
+                    cursor: isValidateDisabled ? 'not-allowed' : 'pointer',
+                    transition: 'all 0.2s'
+                  }}
                 >
                   Validate Order
                 </button>
