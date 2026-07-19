@@ -434,7 +434,7 @@ export default function JumbledWords() {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
               <h2 style={{ margin: 0, fontSize: '1.4rem', fontWeight: 700, color: 'var(--clr-accent, #6cceff)' }}>
-                🧩 Jumbled Words Dashboard
+                🧩 Jumbled Words
               </h2>
               <p style={{ margin: '4px 0 0 0', fontSize: '0.85rem', color: 'var(--clr-text-soft, #a1a1a6)' }}>
                 Progress: {totalMastered} / 8 Levels Mastered
