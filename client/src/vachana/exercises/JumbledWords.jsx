@@ -74,28 +74,27 @@ const QUESTION_BANK = {
     { id: 'jumb_6_06', expression: 'a - 15', blocks: ['fifteen', 'fewer than', 'a'], answer: 'fifteen fewer than a', explanation: '✅ "fifteen fewer than a" means we start with a and subtract 15.', hint: 'Use the inversion phrase "fewer than" to reverse the order.' },
     { id: 'jumb_6_07', expression: 'k - 3', blocks: ['three', 'less than', 'k'], answer: 'three less than k', explanation: '✅ "three less than k" means k - 3.', hint: 'Use the inversion phrase "less than".' },
     { id: 'jumb_6_08', expression: 'b - 8', blocks: ['eight', 'subtracted from', 'b'], answer: 'eight subtracted from b', explanation: '✅ "eight subtracted from b" means b - 8.', hint: 'Use the inversion phrase "subtracted from".' },
-    { id: 'jumb_6_09', expression: 'c - 1', blocks: ['one', 'fewer than', 'c'], answer: 'one fewer than c', explanation: '✅ "one fewer than c" means c - 1.', hint: 'Use the inversion phrase "fewer than".' },
-    { id: 'jumb_6_10', expression: 'n - 30', blocks: ['thirty', 'less than', 'n'], answer: 'thirty less than n', explanation: '✅ "thirty less than n" means n - 30.', hint: 'Use the inversion phrase "less than".' }
+    { id: 'jumb_6_09', expression: 'c - 1', blocks: ['one', 'fewer than', 'c'], answer: 'one fewer than c', explanation: '✅ "one fewer than c" means c - 1.', hint: 'Use the inversion phrase "fewer than".' }
   ],
   '7': [ // Level 7: Subtraction Inversion (4 blocks, jumbled)
-    { id: 'jumb_7_01', expression: '3b - 2', blocks: ['two', 'less than', 'three times', 'b'], answer: 'two less than three times b', explanation: '✅ "two less than three times b" inverts the subtraction: three times b is evaluated first, then 2 is subtracted.', hint: 'Combine the multiplication (3b) and subtraction (minus 2) with the inversion phrase "less than".' },
-    { id: 'jumb_7_02', expression: '2y - 5', blocks: ['five', 'subtracted from', 'twice', 'y'], answer: 'five subtracted from twice y', explanation: '✅ "five subtracted from twice y" inverts the subtraction: twice y is evaluated first, then 5 is subtracted.', hint: 'Combine the multiplication (2y) and subtraction (minus 5) with the inversion phrase "subtracted from".' },
-    { id: 'jumb_7_03', expression: '5x - 4', blocks: ['four', 'fewer than', 'five times', 'x'], answer: 'four fewer than five times x', explanation: '✅ "four fewer than five times x" inverts the subtraction: five times x is evaluated first, then 4 is subtracted.', hint: 'Combine the multiplication (5x) and subtraction (minus 4) with the inversion phrase "fewer than".' },
-    { id: 'jumb_7_04', expression: '4p - 9', blocks: ['nine', 'less than', 'four times', 'p'], answer: 'nine less than four times p', explanation: '✅ "nine less than four times p" inverts the subtraction: four times p is evaluated first, then 9 is subtracted.', hint: 'Use the inversion phrase "less than" at the end of the terms.' },
-    { id: 'jumb_7_05', expression: '6a - 1', blocks: ['one', 'subtracted from', 'six times', 'a'], answer: 'one subtracted from six times a', explanation: '✅ "one subtracted from six times a" inverts the subtraction: six times a is evaluated first, then 1 is subtracted.', hint: 'Use the inversion phrase "subtracted from" at the end of the terms.' },
-    { id: 'jumb_7_06', expression: '3m - 8', blocks: ['eight', 'fewer than', 'three times', 'm'], answer: 'eight fewer than three times m', explanation: '✅ "eight fewer than three times m" inverts the subtraction: three times m is evaluated first, then 8 is subtracted.', hint: 'Use the inversion phrase "fewer than" at the end of the terms.' },
+    { id: 'jumb_7_01', expression: '3b - 2', blocks: ['two', 'less than', 'three times', 'b'], answer: 'two less than three times b', explanation: '✅ "two less than three times b" inverts the subtraction: three times b is evaluated first, then 2 is subtracted.', hint: 'Combine the multiplication (3b) and subtraction (minus 2) with the inversion phrase "less than".', distractors: ['minus'] },
+    { id: 'jumb_7_02', expression: '2y - 5', blocks: ['five', 'subtracted from', 'twice', 'y'], answer: 'five subtracted from twice y', explanation: '✅ "five subtracted from twice y" inverts the subtraction: twice y is evaluated first, then 5 is subtracted.', hint: 'Combine the multiplication (2y) and subtraction (minus 5) with the inversion phrase "subtracted from".', distractors: ['minus'] },
+    { id: 'jumb_7_03', expression: '5x - 4', blocks: ['four', 'fewer than', 'five times', 'x'], answer: 'four fewer than five times x', explanation: '✅ "four fewer than five times x" inverts the subtraction: five times x is evaluated first, then 4 is subtracted.', hint: 'Combine the multiplication (5x) and subtraction (minus 4) with the inversion phrase "fewer than".', distractors: ['minus'] },
+    { id: 'jumb_7_04', expression: '4p - 9', blocks: ['nine', 'less than', 'four times', 'p'], answer: 'nine less than four times p', explanation: '✅ "nine less than four times p" inverts the subtraction: four times p is evaluated first, then 9 is subtracted.', hint: 'Use the inversion phrase "less than" at the end of the terms.', distractors: ['minus'] },
+    { id: 'jumb_7_05', expression: '6a - 1', blocks: ['one', 'subtracted from', 'six times', 'a'], answer: 'one subtracted from six times a', explanation: '✅ "one subtracted from six times a" inverts the subtraction: six times a is evaluated first, then 1 is subtracted.', hint: 'Use the inversion phrase "subtracted from" at the end of the terms.', distractors: ['minus'] },
+    { id: 'jumb_7_06', expression: '3m - 8', blocks: ['eight', 'fewer than', 'three times', 'm'], answer: 'eight fewer than three times m', explanation: '✅ "eight fewer than three times m" inverts the subtraction: three times m is evaluated first, then 8 is subtracted.', hint: 'Use the inversion phrase "fewer than" at the end of the terms.', distractors: ['minus'] },
     { id: 'jumb_7_07', expression: '2z - 11', blocks: ['eleven', 'less than', 'twice', 'z'], answer: 'eleven less than twice z', explanation: '✅ "eleven less than twice z" inverts the subtraction: twice z is evaluated first, then 11 is subtracted.', hint: 'Use the inversion phrase "less than".' },
     { id: 'jumb_7_08', expression: '7k - 3', blocks: ['three', 'subtracted from', 'seven times', 'k'], answer: 'three subtracted from seven times k', explanation: '✅ "three subtracted from seven times k" inverts the subtraction: seven times k is evaluated first, then 3 is subtracted.', hint: 'Use the inversion phrase "subtracted from".' },
     { id: 'jumb_7_09', expression: '5n - 12', blocks: ['twelve', 'fewer than', 'five times', 'n'], answer: 'twelve fewer than five times n', explanation: '✅ "twelve fewer than five times n" inverts the subtraction: five times n is evaluated first, then 12 is subtracted.', hint: 'Use the inversion phrase "fewer than".' },
     { id: 'jumb_7_10', expression: '4c - 6', blocks: ['six', 'less than', 'four times', 'c'], answer: 'six less than four times c', explanation: '✅ "six less than four times c" inverts the subtraction: four times c is evaluated first, then 6 is subtracted.', hint: 'Use the inversion phrase "less than".' }
   ],
   '8': [ // Level 8: Parentheses & Grouping (4-5 blocks, jumbled)
-    { id: 'jumb_8_01', expression: '3(y + 4)', blocks: ['three times', 'the sum of', 'y', 'and four'], answer: 'three times the sum of y and four', explanation: '✅ "3(y + 4)" requires parentheses. We express this by stating "three times" followed by "the sum of" to group y and 4.', hint: 'Use "the sum of" to indicate that the addition should happen inside parentheses before multiplying.' },
-    { id: 'jumb_8_02', expression: '2(x - 5)', blocks: ['twice', 'the difference of', 'x', 'and five'], answer: 'twice the difference of x and five', explanation: '✅ "2(x - 5)" uses "twice" followed by "the difference of" to show that subtraction happens first inside parentheses.', hint: '"The difference of" grouping indicates parentheses around the subtraction.' },
-    { id: 'jumb_8_03', expression: '(a + 8) / 2', blocks: ['half of', 'the sum of', 'a', 'and eight'], answer: 'half of the sum of a and eight', explanation: '✅ "(a + 8) / 2" is represented by taking "half of" the grouped expression "the sum of a and eight".', hint: 'The division by 2 applies to the entire addition, so we state "half of" before "the sum".' },
-    { id: 'jumb_8_04', expression: '5(2x - 3)', blocks: ['five times', 'the quantity', 'three less than', 'twice x'], answer: 'five times the quantity three less than twice x', explanation: '✅ "5(2x - 3)" uses "the quantity" to set off parentheses, enclosing the inverted subtraction "three less than twice x".', hint: 'Use "the quantity" to group the terms inside the parentheses.' },
-    { id: 'jumb_8_05', expression: '(3n - 1) / 4', blocks: ['one-fourth of', 'the quantity', 'one less than', 'three times n'], answer: 'one-fourth of the quantity one less than three times n', explanation: '✅ The division by 4 applies to the entire numerator. We write "one-fourth of" followed by "the quantity" for parentheses.', hint: 'Start with the division multiplier ("one-fourth of") and use "the quantity" to group the numerator terms.' },
-    { id: 'jumb_8_06', expression: '4(x + 3)', blocks: ['four times', 'the sum of', 'x', 'and three'], answer: 'four times the sum of x and three', explanation: '✅ "4(x + 3)" groups the addition in parentheses. We write "four times" followed by "the sum of".', hint: 'Group the addition using "the sum of" inside parentheses.' },
+    { id: 'jumb_8_01', expression: '3(y + 4)', blocks: ['three times', 'the sum of', 'y', 'and four'], answer: 'three times the sum of y and four', explanation: '✅ "3(y + 4)" requires parentheses. We express this by stating "three times" followed by "the sum of" to group y and 4.', hint: 'Use "the sum of" to indicate that the addition should happen inside parentheses before multiplying.', distractors: ['plus'] },
+    { id: 'jumb_8_02', expression: '2(x - 5)', blocks: ['twice', 'the difference of', 'x', 'and five'], answer: 'twice the difference of x and five', explanation: '✅ "2(x - 5)" uses "twice" followed by "the difference of" to show that subtraction happens first inside parentheses.', hint: '"The difference of" grouping indicates parentheses around the subtraction.', distractors: ['minus'] },
+    { id: 'jumb_8_03', expression: '(a + 8) / 2', blocks: ['half of', 'the sum of', 'a', 'and eight'], answer: 'half of the sum of a and eight', explanation: '✅ "(a + 8) / 2" is represented by taking "half of" the grouped expression "the sum of a and eight".', hint: 'The division by 2 applies to the entire addition, so we state "half of" before "the sum".', distractors: ['divided by'] },
+    { id: 'jumb_8_04', expression: '5(2x - 3)', blocks: ['five times', 'the quantity', 'three less than', 'twice x'], answer: 'five times the quantity three less than twice x', explanation: '✅ "5(2x - 3)" uses "the quantity" to set off parentheses, enclosing the inverted subtraction "three less than twice x".', hint: 'Use "the quantity" to group the terms inside the parentheses.', distractors: ['minus'] },
+    { id: 'jumb_8_05', expression: '(3n - 1) / 4', blocks: ['one-fourth of', 'the quantity', 'one less than', 'three times n'], answer: 'one-fourth of the quantity one less than three times n', explanation: '✅ The division by 4 applies to the entire numerator. We write "one-fourth of" followed by "the quantity" for parentheses.', hint: 'Start with the division multiplier ("one-fourth of") and use "the quantity" to group the numerator terms.', distractors: ['minus'] },
+    { id: 'jumb_8_06', expression: '4(x + 3)', blocks: ['four times', 'the sum of', 'x', 'and three'], answer: 'four times the sum of x and three', explanation: '✅ "4(x + 3)" groups the addition in parentheses. We write "four times" followed by "the sum of".', hint: 'Group the addition using "the sum of" inside parentheses.', distractors: ['plus'] },
     { id: 'jumb_8_07', expression: '(y - 2) / 5', blocks: ['one-fifth of', 'the difference of', 'y', 'and two'], answer: 'one-fifth of the difference of y and two', explanation: '✅ The division by 5 covers the entire subtraction. We write "one-fifth of" followed by "the difference of".', hint: 'Start with the division fractional multiplier and use "the difference of" to group the subtraction.' },
     { id: 'jumb_8_08', expression: '3(2a + 1)', blocks: ['three times', 'the quantity', 'twice a', 'plus one'], answer: 'three times the quantity twice a plus one', explanation: '✅ "3(2a + 1)" uses "the quantity" to open parentheses enclosing the two-step expression "twice a plus one".', hint: 'Use "the quantity" to show parentheses around the terms inside.' },
     { id: 'jumb_8_09', expression: '6(p - 7)', blocks: ['six times', 'the difference of', 'p', 'and seven'], answer: 'six times the difference of p and seven', explanation: '✅ "6(p - 7)" uses "six times" followed by "the difference of" to show subtraction inside parentheses.', hint: 'Use "the difference of" grouping to open parentheses around the subtraction.' },
@@ -212,11 +211,15 @@ export default function JumbledWords() {
         shuffled = shuffleWithMisplacedCount(nextQ.blocks, 3);
       } else {
         // Level 5+: standard shuffle with duplicate checking
-        shuffled = shuffleArray(nextQ.blocks);
+        let blocksToShuffle = [...nextQ.blocks];
+        if ((level === 7 || level === 8) && nextQ.distractors) {
+          blocksToShuffle = [...blocksToShuffle, ...nextQ.distractors];
+        }
+        shuffled = shuffleArray(blocksToShuffle);
         let attempts = 0;
         const correctAns = nextQ.answer;
         while (shuffled.join(' ').toLowerCase() === correctAns.toLowerCase() && attempts < 10) {
-          shuffled = shuffleArray(nextQ.blocks);
+          shuffled = shuffleArray(blocksToShuffle);
           attempts++;
         }
       }
@@ -403,11 +406,15 @@ export default function JumbledWords() {
       } else if (level === 4) {
         shuffled = shuffleWithMisplacedCount(firstQ.blocks, 3);
       } else {
-        shuffled = shuffleArray(firstQ.blocks);
+        let blocksToShuffle = [...firstQ.blocks];
+        if ((level === 7 || level === 8) && firstQ.distractors) {
+          blocksToShuffle = [...blocksToShuffle, ...firstQ.distractors];
+        }
+        shuffled = shuffleArray(blocksToShuffle);
         let attempts = 0;
         const correctAns = firstQ.answer;
         while (shuffled.join(' ').toLowerCase() === correctAns.toLowerCase() && attempts < 10) {
-          shuffled = shuffleArray(firstQ.blocks);
+          shuffled = shuffleArray(blocksToShuffle);
           attempts++;
         }
       }
