@@ -103,6 +103,19 @@ const QUESTION_BANK = {
   ]
 };
 
+// Slice QUESTION_BANK to exactly 6 questions per level at load time
+Object.keys(QUESTION_BANK).forEach(lvl => {
+  QUESTION_BANK[lvl] = QUESTION_BANK[lvl].slice(0, 6);
+});
+
+const findQuestionById = (id) => {
+  for (const lvl in QUESTION_BANK) {
+    const found = QUESTION_BANK[lvl].find(q => q.id === id);
+    if (found) return found;
+  }
+  return null;
+};
+
 // Helper to shuffle array (Fisher-Yates)
 const shuffleArray = (arr) => {
   const shuffled = [...arr];
@@ -163,8 +176,9 @@ export default function JumbledWords() {
   const [hasAttempted, setHasAttempted] = useState(false);
   const [solveCountdown, setSolveCountdown] = useState(0);
 
-  // Track correctly answered question IDs at the current level to avoid repeating them
-  const [correctlyAnsweredIds, setCorrectlyAnsweredIds] = useState([]);
+  // Track queue of questions in the active pass and previously mistaken ones
+  const [activeQueue, setActiveQueue] = useState([]);
+  const [mistakenIds, setMistakenIds] = useState([]);
   const [levelCompletionData, setLevelCompletionData] = useState(null);
   const [hasValidated, setHasValidated] = useState(false);
 
@@ -176,37 +190,9 @@ export default function JumbledWords() {
     return () => clearTimeout(timer);
   }, [solveCountdown]);
 
-  // Select a question avoiding repetitions of correctly answered questions
-  const selectQuestionNoRepeat = (level, lastId, activeCorrectList = correctlyAnsweredIds) => {
-    const levelKey = String(level);
-    const questions = QUESTION_BANK[levelKey];
-    if (!questions || questions.length === 0) return null;
-
-    // If activeCorrectList is empty, start with the first question of that level
-    if (activeCorrectList.length === 0) {
-      return questions[0];
-    }
-
-    // Filter out questions that have been correctly answered
-    let candidates = questions.filter(q => !activeCorrectList.includes(q.id));
-
-    // If all questions at this level have been correctly answered, reset
-    if (candidates.length === 0) {
-      setCorrectlyAnsweredIds([]);
-      candidates = questions;
-    }
-
-    // Filter out the last question specifically if we have multiple choices left
-    if (lastId && candidates.length > 1) {
-      candidates = candidates.filter(q => q.id !== lastId);
-    }
-
-    return candidates[Math.floor(Math.random() * candidates.length)];
-  };
-
-  // Initialize or load next question
-  const loadQuestion = (level, customCorrectList = correctlyAnsweredIds) => {
-    const nextQ = selectQuestionNoRepeat(level, currentQuestion?.id || null, customCorrectList);
+  // Initialize or load question by ID
+  const loadQuestionById = (id, level) => {
+    const nextQ = QUESTION_BANK[String(level)].find(q => q.id === id);
     setCurrentQuestion(nextQ);
     if (nextQ) {
       let shuffled = [];
@@ -241,6 +227,41 @@ export default function JumbledWords() {
     setHasAttempted(false);
     setSolveCountdown(0);
     setHasValidated(false);
+  };
+
+  // ZPD Mistake Review Transition Logic
+  const transitionToNext = (completedId, wasCorrect) => {
+    let newMistaken = [...mistakenIds];
+    if (!wasCorrect) {
+      if (!newMistaken.includes(completedId)) {
+        newMistaken.push(completedId);
+      }
+    }
+
+    const nextQueue = activeQueue.filter(id => id !== completedId);
+
+    if (nextQueue.length > 0) {
+      // Still have items in the active queue
+      setActiveQueue(nextQueue);
+      setMistakenIds(newMistaken);
+      loadQuestionById(nextQueue[0], playingLevel);
+    } else {
+      // Finished the current queue pass
+      if (newMistaken.length > 0) {
+        // We have mistaken questions to review! Move them to the active queue.
+        setActiveQueue(newMistaken);
+        setMistakenIds([]); // Clear the mistaken queue for the new pass
+        loadQuestionById(newMistaken[0], playingLevel);
+      } else {
+        // All questions correctly answered! Level Mastered.
+        jumbledMastery.handleAnswer(true);
+        setTimeout(() => {
+          const updatedProgress = loadMasteryProgress();
+          const nextLevel = updatedProgress['jumbled']?.currentLevel || jumbledMastery.state.currentLevel;
+          setLevelCompletionData({ level: playingLevel, nextLevel: playingLevel + 1 });
+        }, 500);
+      }
+    }
   };
 
   const handleTileClick = (index) => {
@@ -299,20 +320,8 @@ export default function JumbledWords() {
 
     if (isCorrect) {
       setMsg(currentQuestion.explanation);
-      jumbledMastery.handleAnswer(true);
-      const updatedCorrectList = [...correctlyAnsweredIds, currentQuestion.id];
-      setCorrectlyAnsweredIds(updatedCorrectList);
-
       setTimeout(() => {
-        const updatedProgress = loadMasteryProgress();
-        const nextLevel = updatedProgress['jumbled']?.currentLevel || jumbledMastery.state.currentLevel;
-        
-        if (nextLevel > playingLevel) {
-          // Finished the level! Show appreciation and motivation popup
-          setLevelCompletionData({ level: playingLevel, nextLevel });
-        } else {
-          loadQuestion(playingLevel, updatedCorrectList);
-        }
+        transitionToNext(currentQuestion.id, true);
       }, 2500);
     } else {
       let errorHelp = '';
@@ -345,16 +354,18 @@ export default function JumbledWords() {
     setSelectedIndices(newIndices);
     setMsg(currentQuestion.explanation);
     jumbledMastery.handleAnswer(false);
+    // Add to mistaken list if not already there
+    setMistakenIds(prev => prev.includes(currentQuestion.id) ? prev : [...prev, currentQuestion.id]);
   };
 
   const handleNext = () => {
-    const nextLevel = loadMasteryProgress()['jumbled']?.currentLevel || jumbledMastery.state.currentLevel;
-    loadQuestion(nextLevel);
+    transitionToNext(currentQuestion.id, false);
   };
 
   const handleReset = () => {
     jumbledMastery.resetExercise();
-    setCorrectlyAnsweredIds([]);
+    setActiveQueue([]);
+    setMistakenIds([]);
     setHasAttempted(false);
     setSolveCountdown(0);
     setPlayingLevel(1);
@@ -364,27 +375,30 @@ export default function JumbledWords() {
   const handleStartLevel = (level) => {
     setPlayingLevel(level);
     setViewMode('play');
-    setCorrectlyAnsweredIds([]);
-    // Load question for that level
-    const questions = QUESTION_BANK[String(level)];
-    const question = questions && questions.length > 0 ? questions[0] : null;
-    setCurrentQuestion(question);
-    if (question) {
+    
+    const questions = QUESTION_BANK[String(level)].slice(0, 6);
+    const questionIds = questions.map(q => q.id);
+    setActiveQueue(questionIds);
+    setMistakenIds([]);
+
+    const firstQ = questions[0];
+    setCurrentQuestion(firstQ);
+    if (firstQ) {
       let shuffled = [];
       if (level === 1) {
-        shuffled = [...question.blocks];
+        shuffled = [...firstQ.blocks];
       } else if (level === 2) {
-        shuffled = shuffleWithMisplacedCount(question.blocks, 2);
+        shuffled = shuffleWithMisplacedCount(firstQ.blocks, 2);
       } else if (level === 3) {
-        shuffled = shuffleWithMisplacedCount(question.blocks, 2);
+        shuffled = shuffleWithMisplacedCount(firstQ.blocks, 2);
       } else if (level === 4) {
-        shuffled = shuffleWithMisplacedCount(question.blocks, 3);
+        shuffled = shuffleWithMisplacedCount(firstQ.blocks, 3);
       } else {
-        shuffled = shuffleArray(question.blocks);
+        shuffled = shuffleArray(firstQ.blocks);
         let attempts = 0;
-        const correctAns = question.answer;
+        const correctAns = firstQ.answer;
         while (shuffled.join(' ').toLowerCase() === correctAns.toLowerCase() && attempts < 10) {
-          shuffled = shuffleArray(question.blocks);
+          shuffled = shuffleArray(firstQ.blocks);
           attempts++;
         }
       }
@@ -565,334 +579,417 @@ export default function JumbledWords() {
       minHeight: '75vh',
       boxSizing: 'border-box',
       fontFamily: 'var(--font-display, "DM Sans", sans-serif)',
-      color: 'var(--clr-text, #ffffff)'
+      color: 'var(--clr-text, #ffffff)',
+      padding: '20px'
     }}>
       <div style={{
-        width: '100%',
-        maxWidth: '720px',
-        background: 'var(--clr-card, #1c1c1e)',
-        border: '1px solid var(--clr-border, #2c2c2e)',
-        borderRadius: '16px',
-        padding: '20px',
-        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
         display: 'flex',
-        flexDirection: 'column',
-        gap: '16px',
+        flexDirection: 'row',
+        gap: '24px',
+        width: '100%',
+        maxWidth: '1000px',
+        alignItems: 'flex-start',
         boxSizing: 'border-box'
       }}>
-        {/* Play Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <button
-            onClick={() => setViewMode('dashboard')}
-            style={{
-              background: 'rgba(255,255,255,0.05)',
-              border: '1px solid var(--clr-border, #2c2c2e)',
-              color: 'var(--clr-text, #ffffff)',
-              cursor: 'pointer',
-              padding: '6px 12px',
-              borderRadius: '8px',
-              fontSize: '0.8rem',
-              fontWeight: 600,
-              transition: 'all 0.2s'
-            }}
-            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; }}
-            onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; }}
-          >
-            ← Levels Dashboard
-          </button>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{ fontSize: '0.85rem', color: 'var(--clr-text-soft, #a1a1a6)', fontWeight: 600 }}>
-              Level {playingLevel} / 8
-            </span>
-          </div>
-        </div>
-
-        {/* Progress Bar inside Header */}
+        {/* Main Play Card */}
         <div style={{
-          width: '100%',
-          height: '6px',
-          background: 'rgba(255, 255, 255, 0.1)',
-          borderRadius: '3px',
-          overflow: 'hidden'
-        }}>
-          <div style={{
-            width: `${(jumbledMastery.state.correctStreak / 5) * 100}%`,
-            height: '100%',
-            background: 'var(--clr-accent, #6cceff)',
-            transition: 'width 0.3s ease'
-          }} />
-        </div>
-
-        {/* Single-line prompt question */}
-        <div style={{
-          background: 'var(--clr-surface, #2c2c2e)',
-          padding: '16px',
-          borderRadius: '12px',
+          flex: 1,
+          background: 'var(--clr-card, #1c1c1e)',
           border: '1px solid var(--clr-border, #2c2c2e)',
-          textAlign: 'center',
-          boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.2)'
+          borderRadius: '16px',
+          padding: '20px',
+          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '16px',
+          boxSizing: 'border-box'
         }}>
-          <div style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--clr-text-soft, #a1a1a6)', marginBottom: '6px' }}>
-            Translate <span style={{ color: 'var(--clr-accent, #6cceff)', fontWeight: 700, fontFamily: 'var(--font-mono, monospace)', fontSize: '1.2rem' }}>{currentQuestion.expression}</span> into words:
-          </div>
-        </div>
-
-        {/* Assembled Area (Dotted Box) */}
-        <div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-            <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--clr-text-soft, #a1a1a6)' }}>Your Phrase:</span>
-            {selectedIndices.length > 0 && !isSolved && (
-              <button
-                onClick={clearSelection}
-                style={{
-                  background: 'transparent', border: 'none', color: 'var(--clr-text-soft, #a1a1a6)',
-                  cursor: 'pointer', fontSize: '0.78rem', textDecoration: 'underline'
-                }}
-              >
-                Clear
-              </button>
-            )}
-          </div>
-          <div style={{
-            minHeight: '64px',
-            background: 'rgba(255, 255, 255, 0.01)',
-            border: '2px dashed var(--clr-border, #2c2c2e)',
-            borderRadius: '12px',
-            padding: '10px',
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '8px',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxSizing: 'border-box'
-          }}>
-            {selectedIndices.length === 0 ? (
-              <span style={{ color: 'var(--clr-text-soft, #a1a1a6)', fontSize: '0.88rem', fontStyle: 'italic' }}>
-                Click tiles below to build the sentence
+          {/* Play Header */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <button
+              onClick={() => setViewMode('dashboard')}
+              style={{
+                background: 'rgba(255,255,255,0.05)',
+                border: '1px solid var(--clr-border, #2c2c2e)',
+                color: 'var(--clr-text, #ffffff)',
+                cursor: 'pointer',
+                padding: '6px 12px',
+                borderRadius: '8px',
+                fontSize: '0.8rem',
+                fontWeight: 600,
+                transition: 'all 0.2s'
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; }}
+            >
+              ← Levels Dashboard
+            </button>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontSize: '0.85rem', color: 'var(--clr-text-soft, #a1a1a6)', fontWeight: 600 }}>
+                Level {playingLevel} / 8
               </span>
-            ) : (
-              selectedIndices.map((poolIndex, pos) => (
-                <div
-                  key={pos}
-                  style={{
-                    padding: '6px 10px',
-                    background: 'var(--clr-surface, #2c2c2e)',
-                    border: '1px solid var(--clr-border, #2c2c2e)',
-                    borderRadius: '8px',
-                    color: 'var(--clr-accent, #6cceff)',
-                    fontSize: '0.88rem',
-                    fontWeight: 600,
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-                  }}
-                >
-                  {/* Left Shift Arrow */}
-                  {!isSolved && (
-                    <button
-                      onClick={() => shiftActiveTile(pos, -1)}
-                      disabled={pos === 0}
-                      style={{
-                        background: 'transparent', border: 'none', color: 'var(--clr-text-soft, #a1a1a6)',
-                        cursor: pos === 0 ? 'default' : 'pointer', padding: 0, fontSize: '0.75rem',
-                        opacity: pos === 0 ? 0.2 : 0.7
-                      }}
-                    >
-                      ◀
-                    </button>
-                  )}
+            </div>
+          </div>
 
-                  <span>{shuffledPool[poolIndex]}</span>
+          {/* Exercise Area */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', flex: 1 }}>
+            {/* Header info */}
+            <div>
+              <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: 800 }}>
+                Arrange blocks for: <span style={{ color: 'var(--clr-accent, #6cceff)', fontFamily: 'monospace' }}>{currentQuestion.expression}</span>
+              </h3>
+              <p style={{ margin: '4px 0 0 0', fontSize: '0.85rem', color: 'var(--clr-text-soft, #a1a1a6)' }}>
+                Drag or click tiles to form the correct English phrasing structure.
+              </p>
+            </div>
 
-                  {/* Right Shift Arrow */}
-                  {!isSolved && (
-                    <button
-                      onClick={() => shiftActiveTile(pos, 1)}
-                      disabled={pos === selectedIndices.length - 1}
-                      style={{
-                        background: 'transparent', border: 'none', color: 'var(--clr-text-soft, #a1a1a6)',
-                        cursor: pos === selectedIndices.length - 1 ? 'default' : 'pointer', padding: 0, fontSize: '0.75rem',
-                        opacity: pos === selectedIndices.length - 1 ? 0.2 : 0.7
-                      }}
-                    >
-                      ▶
-                    </button>
-                  )}
-
-                  {/* Remove cross */}
-                  {!isSolved && (
-                    <button
-                      onClick={() => handleActiveTileClick(pos)}
-                      style={{
-                        background: 'transparent', border: 'none', color: '#ff6666',
-                        cursor: 'pointer', padding: 0, fontSize: '0.85rem', marginLeft: '4px',
-                        fontWeight: 700
-                      }}
-                    >
-                      ×
-                    </button>
-                  )}
+            {/* Answer Construction Workspace */}
+            <div style={{
+              background: 'rgba(255, 255, 255, 0.02)',
+              border: '1px dashed var(--clr-border, #2c2c2e)',
+              borderRadius: '12px',
+              minHeight: '80px',
+              padding: '12px',
+              display: 'flex',
+              flexWrap: 'wrap',
+              alignContent: 'center',
+              justifyContent: 'center',
+              gap: '10px',
+              position: 'relative',
+              boxSizing: 'border-box'
+            }}>
+              {selectedIndices.length === 0 ? (
+                <div style={{ color: 'var(--clr-text-soft, #a1a1a6)', fontSize: '0.85rem', fontStyle: 'italic' }}>
+                  Select tiles from the bank below to construct your phrase
                 </div>
-              ))
+              ) : (
+                selectedIndices.map((tileIdx, pos) => {
+                  const blockText = shuffledPool[tileIdx];
+                  return (
+                    <div
+                      key={`selected-${tileIdx}`}
+                      style={{
+                        padding: '6px 12px',
+                        background: 'linear-gradient(180deg, rgba(108, 206, 255, 0.15) 0%, rgba(108, 206, 255, 0.05) 100%)',
+                        border: '1px solid rgba(108, 206, 255, 0.3)',
+                        borderRadius: '8px',
+                        fontSize: '0.9rem',
+                        fontWeight: 600,
+                        color: 'var(--clr-accent, #6cceff)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        cursor: 'default',
+                        userSelect: 'none',
+                        boxShadow: '0 2px 6px rgba(0,0,0,0.1)'
+                      }}
+                    >
+                      {/* Left Arrow */}
+                      {!isSolved && pos > 0 && (
+                        <span
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            shiftActiveTile(pos, -1);
+                          }}
+                          style={{
+                            cursor: 'pointer',
+                            color: 'var(--clr-accent, #6cceff)',
+                            padding: '0 2px',
+                            fontWeight: 800,
+                            userSelect: 'none',
+                            fontSize: '0.8rem'
+                          }}
+                        >
+                          ◀
+                        </span>
+                      )}
+
+                      <span
+                        onClick={() => handleActiveTileClick(pos)}
+                        style={{ cursor: !isSolved ? 'pointer' : 'default' }}
+                      >
+                        {blockText}
+                      </span>
+
+                      {/* Right Arrow */}
+                      {!isSolved && pos < selectedIndices.length - 1 && (
+                        <span
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            shiftActiveTile(pos, 1);
+                          }}
+                          style={{
+                            cursor: 'pointer',
+                            color: 'var(--clr-accent, #6cceff)',
+                            padding: '0 2px',
+                            fontWeight: 800,
+                            userSelect: 'none',
+                            fontSize: '0.8rem'
+                          }}
+                        >
+                          ▶
+                        </span>
+                      )}
+                    </div>
+                  );
+                })
+              )}
+            </div>
+
+            {/* Tile Selection Pool */}
+            {!isSolved && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <span style={{ fontSize: '0.8rem', color: 'var(--clr-text-soft, #a1a1a6)', fontWeight: 600 }}>Word Bank:</span>
+                <div style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: '8px',
+                  justifyContent: 'center',
+                  background: 'rgba(255,255,255,0.01)',
+                  padding: '10px',
+                  borderRadius: '10px',
+                  border: '1px solid rgba(255,255,255,0.03)'
+                }}>
+                  {shuffledPool.map((block, index) => {
+                    const isUsed = selectedIndices.includes(index);
+                    return (
+                      <button
+                        key={`pool-${index}`}
+                        onClick={() => handleTileClick(index)}
+                        disabled={isUsed}
+                        style={{
+                          padding: '8px 14px',
+                          background: isUsed ? 'rgba(255,255,255,0.02)' : 'var(--clr-bg, #09090b)',
+                          border: isUsed ? '1px dashed rgba(255,255,255,0.1)' : '1px solid var(--clr-border, #2c2c2e)',
+                          color: isUsed ? 'rgba(255,255,255,0.2)' : 'var(--clr-text, #ffffff)',
+                          borderRadius: '8px',
+                          cursor: isUsed ? 'not-allowed' : 'pointer',
+                          fontSize: '0.88rem',
+                          fontWeight: 600,
+                          transition: 'all 0.2s',
+                          boxShadow: isUsed ? 'none' : '0 2px 4px rgba(0,0,0,0.15)'
+                        }}
+                        onMouseEnter={e => { if (!isUsed) { e.currentTarget.style.borderColor = 'var(--clr-accent, #6cceff)'; e.currentTarget.style.transform = 'translateY(-1px)'; } }}
+                        onMouseLeave={e => { if (!isUsed) { e.currentTarget.style.borderColor = 'var(--clr-border, #2c2c2e)'; e.currentTarget.style.transform = 'none'; } }}
+                      >
+                        {block}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* Play Footer / Controls */}
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              borderTop: '1px solid var(--clr-border, #2c2c2e)',
+              paddingTop: '14px',
+              marginTop: '8px'
+            }}>
+              {!isSolved ? (
+                <>
+                  {/* Left actions */}
+                  <button
+                    onClick={clearSelection}
+                    disabled={selectedIndices.length === 0}
+                    style={{
+                      background: 'transparent',
+                      border: 'none',
+                      color: selectedIndices.length === 0 ? 'rgba(255,255,255,0.2)' : 'var(--clr-text-soft, #a1a1a6)',
+                      cursor: selectedIndices.length === 0 ? 'not-allowed' : 'pointer',
+                      fontSize: '0.85rem',
+                      fontWeight: 600
+                    }}
+                  >
+                    Clear All
+                  </button>
+
+                  <button
+                    onClick={() => setShowHint(prev => !prev)}
+                    style={{
+                      background: 'transparent',
+                      border: 'none',
+                      color: 'var(--clr-accent, #6cceff)',
+                      cursor: 'pointer',
+                      fontSize: '0.85rem',
+                      fontWeight: 600,
+                      marginLeft: '16px'
+                    }}
+                  >
+                    {showHint ? 'Hide Hint' : 'Show Hint'}
+                  </button>
+
+                  {/* Right actions */}
+                  <div style={{ marginLeft: 'auto', display: 'flex', gap: '12px' }}>
+                    <button
+                      onClick={solveQuestion}
+                      disabled={!hasAttempted}
+                      style={{
+                        background: 'transparent',
+                        border: !hasAttempted ? '1px solid rgba(108, 206, 255, 0.15)' : '1px solid rgba(108, 206, 255, 0.4)',
+                        color: !hasAttempted ? 'rgba(108, 206, 255, 0.3)' : 'var(--clr-accent, #6cceff)',
+                        padding: '8px 14px',
+                        borderRadius: '8px',
+                        cursor: !hasAttempted ? 'not-allowed' : 'pointer',
+                        fontSize: '0.85rem',
+                        fontWeight: 600,
+                        transition: 'all 0.2s'
+                      }}
+                      title={!hasAttempted ? "Please try validating an answer first before viewing the solution!" : "Reveal the correct phrase"}
+                    >
+                      Solve
+                    </button>
+                    <button
+                      className="submit-btn"
+                      onClick={checkAnswer}
+                      disabled={isValidateDisabled}
+                      style={{
+                        padding: '10px 18px',
+                        fontSize: '0.88rem',
+                        fontWeight: 700,
+                        opacity: isValidateDisabled ? 0.5 : 1,
+                        cursor: isValidateDisabled ? 'not-allowed' : 'pointer',
+                        transition: 'all 0.2s'
+                      }}
+                    >
+                      Validate Order
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <div style={{ marginLeft: 'auto' }}>
+                  <button
+                    className="submit-btn"
+                    onClick={handleNext}
+                    disabled={solveCountdown > 0}
+                    style={{
+                      padding: '10px 18px',
+                      fontSize: '0.88rem',
+                      fontWeight: 700,
+                      background: solveCountdown > 0 ? 'var(--clr-border, #2c2c2e)' : 'var(--clr-accent, #6cceff)',
+                      color: solveCountdown > 0 ? 'var(--clr-text-soft, #a1a1a6)' : 'var(--clr-bg, #000000)',
+                      cursor: solveCountdown > 0 ? 'not-allowed' : 'pointer',
+                      transition: 'all 0.2s'
+                    }}
+                  >
+                    {solveCountdown > 0 ? `Next Question (Wait ${solveCountdown}s)` : 'Next Question →'}
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Hint Box */}
+            {showHint && !isSolved && (
+              <div style={{
+                padding: '10px 14px',
+                background: 'rgba(108, 206, 255, 0.05)',
+                border: '1px solid rgba(108, 206, 255, 0.2)',
+                borderRadius: '10px',
+                fontSize: '0.85rem',
+                lineHeight: '1.4'
+              }}>
+                💡 <strong>Hint:</strong> {currentQuestion.hint}
+              </div>
+            )}
+
+            {/* Validation Message / Explanation */}
+            {msg && (
+              <div style={{
+                fontSize: '0.88rem',
+                padding: '12px 14px',
+                borderRadius: '10px',
+                background: msg.startsWith('✅') ? 'rgba(46,160,67,0.1)' : 'rgba(255,100,100,0.08)',
+                border: msg.startsWith('✅') ? '1px solid var(--clr-correct, #2ea043)' : '1px solid rgba(255,100,100,0.3)',
+                color: 'var(--clr-text)',
+                lineHeight: '1.4'
+              }}>
+                {msg}
+              </div>
             )}
           </div>
         </div>
 
-        {/* Word Pool Area */}
-        <div>
-          <p style={{ fontSize: '0.8rem', color: 'var(--clr-text-soft, #a1a1a6)', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '6px', fontWeight: 600 }}>
-            Word Bank
-          </p>
+        {/* Right Sidebar: Previously Mistaken */}
+        <div style={{
+          width: '260px',
+          flexShrink: 0,
+          background: 'var(--clr-card, #1c1c1e)',
+          border: '1px solid var(--clr-border, #2c2c2e)',
+          borderRadius: '16px',
+          padding: '20px',
+          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '16px',
+          boxSizing: 'border-box',
+          alignSelf: 'stretch'
+        }}>
+          <h3 style={{
+            margin: 0,
+            fontSize: '0.9rem',
+            fontWeight: 800,
+            color: '#ff6961',
+            textTransform: 'uppercase',
+            letterSpacing: '0.5px',
+            fontFamily: 'var(--font-display, "DM Sans", sans-serif)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px'
+          }}>
+            ⚠️ Mistaken Queue
+          </h3>
           <div style={{
             display: 'flex',
-            flexWrap: 'wrap',
+            flexDirection: 'column',
             gap: '8px',
-            justifyContent: 'center',
-            padding: '12px',
-            background: 'rgba(255, 255, 255, 0.01)',
-            borderRadius: '12px',
-            border: '1px solid var(--clr-border, #2c2c2e)',
-            boxSizing: 'border-box'
+            overflowY: 'auto',
+            maxHeight: '400px'
           }}>
-            {shuffledPool.map((word, idx) => {
-              const isSelected = selectedIndices.includes(idx);
-              return (
-                <button
-                  key={idx}
-                  onClick={() => handleTileClick(idx)}
-                  disabled={isSelected || isSolved}
-                  style={{
-                    padding: '8px 14px',
-                    borderRadius: '8px',
-                    fontSize: '0.88rem',
-                    fontWeight: 500,
-                    transition: 'all 0.2s ease',
-                    border: isSelected ? '1px dashed var(--clr-border, #2c2c2e)' : '1px solid var(--clr-border, #2c2c2e)',
-                    background: isSelected ? 'transparent' : 'var(--clr-surface, #2c2c2e)',
-                    color: isSelected ? 'transparent' : 'var(--clr-text, #ffffff)',
-                    cursor: isSelected ? 'default' : 'pointer',
-                    boxShadow: isSelected ? 'none' : '0 2px 4px rgba(0,0,0,0.1)',
-                    pointerEvents: isSelected ? 'none' : 'auto'
-                  }}
-                  onMouseEnter={e => { if (!isSelected && !isSolved) { e.currentTarget.style.borderColor = 'var(--clr-accent)'; e.currentTarget.style.transform = 'translateY(-1px)'; } }}
-                  onMouseLeave={e => { if (!isSelected && !isSolved) { e.currentTarget.style.borderColor = 'var(--clr-border)'; e.currentTarget.style.transform = 'none'; } }}
-                >
-                  {word}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Action Buttons (Validation Option onto Right) */}
-        <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-          {!isSolved ? (
-            <>
-              {/* Left actions */}
-              <button
-                onClick={() => setShowHint(prev => !prev)}
-                style={{
-                  background: 'transparent',
-                  border: '1px solid var(--clr-border, #2c2c2e)',
-                  color: 'var(--clr-text, #ffffff)',
-                  padding: '8px 14px',
-                  borderRadius: '8px',
-                  cursor: 'pointer',
-                  fontSize: '0.85rem',
-                  fontWeight: 600
-                }}
-              >
-                {showHint ? 'Hide Hint' : 'Show Hint'}
-              </button>
-
-              {/* Right actions */}
-              <div style={{ marginLeft: 'auto', display: 'flex', gap: '12px' }}>
-                <button
-                  onClick={solveQuestion}
-                  disabled={!hasAttempted}
-                  style={{
-                    background: 'transparent',
-                    border: !hasAttempted ? '1px solid rgba(108, 206, 255, 0.15)' : '1px solid rgba(108, 206, 255, 0.4)',
-                    color: !hasAttempted ? 'rgba(108, 206, 255, 0.3)' : 'var(--clr-accent, #6cceff)',
-                    padding: '8px 14px',
-                    borderRadius: '8px',
-                    cursor: !hasAttempted ? 'not-allowed' : 'pointer',
-                    fontSize: '0.85rem',
-                    fontWeight: 600,
-                    transition: 'all 0.2s'
-                  }}
-                  title={!hasAttempted ? "Please try validating an answer first before viewing the solution!" : "Reveal the correct phrase"}
-                >
-                  Solve
-                </button>
-                <button
-                  className="submit-btn"
-                  onClick={checkAnswer}
-                  disabled={isValidateDisabled}
-                  style={{
-                    padding: '10px 18px',
-                    fontSize: '0.88rem',
-                    fontWeight: 700,
-                    opacity: isValidateDisabled ? 0.5 : 1,
-                    cursor: isValidateDisabled ? 'not-allowed' : 'pointer',
-                    transition: 'all 0.2s'
-                  }}
-                >
-                  Validate Order
-                </button>
+            {mistakenIds.length === 0 ? (
+              <div style={{
+                fontSize: '0.82rem',
+                color: 'var(--clr-text-soft, #a1a1a6)',
+                fontStyle: 'italic',
+                textAlign: 'center',
+                padding: '20px 0'
+              }}>
+                No mistakes yet! Keep it up! 🌟
               </div>
-            </>
-          ) : (
-            <div style={{ marginLeft: 'auto' }}>
-              <button
-                className="submit-btn"
-                onClick={handleNext}
-                disabled={solveCountdown > 0}
-                style={{
-                  padding: '10px 18px',
-                  fontSize: '0.88rem',
-                  fontWeight: 700,
-                  background: solveCountdown > 0 ? 'var(--clr-border, #2c2c2e)' : 'var(--clr-accent, #6cceff)',
-                  color: solveCountdown > 0 ? 'var(--clr-text-soft, #a1a1a6)' : 'var(--clr-bg, #000000)',
-                  cursor: solveCountdown > 0 ? 'not-allowed' : 'pointer',
-                  transition: 'all 0.2s'
-                }}
-              >
-                {solveCountdown > 0 ? `Next Question (Wait ${solveCountdown}s)` : 'Next Question →'}
-              </button>
-            </div>
-          )}
+            ) : (
+              mistakenIds.map(id => {
+                const question = findQuestionById(id);
+                return (
+                  <div key={id} style={{
+                    fontSize: '0.85rem',
+                    padding: '10px 12px',
+                    borderRadius: '8px',
+                    background: 'rgba(217, 63, 63, 0.08)',
+                    border: '1px solid rgba(217, 63, 63, 0.2)',
+                    color: '#ff8c8c',
+                    fontFamily: 'monospace',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
+                  }}>
+                    <span>{question ? question.expression : ''}</span>
+                    <span style={{
+                      fontSize: '0.7rem',
+                      padding: '2px 6px',
+                      borderRadius: '4px',
+                      background: 'rgba(217, 63, 63, 0.2)',
+                      color: '#ff6961',
+                      fontWeight: 700
+                    }}>
+                      Review
+                    </span>
+                  </div>
+                );
+              })
+            )}
+          </div>
         </div>
-
-        {/* Hint Box */}
-        {showHint && !isSolved && (
-          <div style={{
-            padding: '10px 14px',
-            background: 'rgba(108, 206, 255, 0.05)',
-            border: '1px solid rgba(108, 206, 255, 0.2)',
-            borderRadius: '10px',
-            fontSize: '0.85rem',
-            lineHeight: '1.4'
-          }}>
-            💡 <strong>Hint:</strong> {currentQuestion.hint}
-          </div>
-        )}
-
-        {/* Validation Message / Explanation */}
-        {msg && (
-          <div style={{
-            fontSize: '0.88rem',
-            padding: '12px 14px',
-            borderRadius: '10px',
-            background: msg.startsWith('✅') ? 'rgba(46,160,67,0.1)' : 'rgba(255,100,100,0.08)',
-            border: msg.startsWith('✅') ? '1px solid var(--clr-correct, #2ea043)' : '1px solid rgba(255,100,100,0.3)',
-            color: 'var(--clr-text)',
-            lineHeight: '1.4'
-          }}>
-            {msg}
-          </div>
-        )}
       </div>
 
       {/* Level Completion Appreciation Modal */}
