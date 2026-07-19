@@ -648,6 +648,27 @@ export default function JumbledWords() {
                 Arrange blocks for: <span style={{ color: 'var(--clr-accent, #6cceff)', fontFamily: 'monospace' }}>{currentQuestion.expression}</span>
               </h3>
             </div>
+            {/* Label & Clear Option */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '-4px' }}>
+              <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--clr-text-soft, #a1a1a6)' }}>Your Phrase:</span>
+              {selectedIndices.length > 0 && !isSolved && (
+                <button
+                  onClick={clearSelection}
+                  style={{
+                    background: 'transparent',
+                    border: 'none',
+                    color: '#ff6961',
+                    cursor: 'pointer',
+                    fontSize: '0.82rem',
+                    fontWeight: 600,
+                    textDecoration: 'underline',
+                    padding: 0
+                  }}
+                >
+                  Clear
+                </button>
+              )}
+            </div>
 
             {/* Answer Construction Workspace */}
             <div style={{
@@ -798,21 +819,6 @@ export default function JumbledWords() {
                 <>
                   {/* Left actions */}
                   <button
-                    onClick={clearSelection}
-                    disabled={selectedIndices.length === 0}
-                    style={{
-                      background: 'transparent',
-                      border: 'none',
-                      color: selectedIndices.length === 0 ? 'rgba(255,255,255,0.2)' : 'var(--clr-text-soft, #a1a1a6)',
-                      cursor: selectedIndices.length === 0 ? 'not-allowed' : 'pointer',
-                      fontSize: '0.85rem',
-                      fontWeight: 600
-                    }}
-                  >
-                    Clear All
-                  </button>
-
-                  <button
                     onClick={() => setShowHint(prev => !prev)}
                     style={{
                       background: 'transparent',
@@ -820,8 +826,7 @@ export default function JumbledWords() {
                       color: 'var(--clr-accent, #6cceff)',
                       cursor: 'pointer',
                       fontSize: '0.85rem',
-                      fontWeight: 600,
-                      marginLeft: '16px'
+                      fontWeight: 600
                     }}
                   >
                     {showHint ? 'Hide Hint' : 'Show Hint'}
