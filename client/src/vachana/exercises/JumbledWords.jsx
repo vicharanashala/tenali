@@ -174,6 +174,7 @@ export default function JumbledWords() {
   const [showHint, setShowHint] = useState(false);
   const [isSolved, setIsSolved] = useState(false);
   const [hasAttempted, setHasAttempted] = useState(false);
+  const [hasIncorrectAttempt, setHasIncorrectAttempt] = useState(false);
   const [solveCountdown, setSolveCountdown] = useState(0);
 
   // Track queue of questions in the active pass and previously mistaken ones
@@ -226,6 +227,7 @@ export default function JumbledWords() {
     setShowHint(false);
     setIsSolved(false);
     setHasAttempted(false);
+    setHasIncorrectAttempt(false);
     setSolveCountdown(0);
     setHasValidated(false);
   };
@@ -337,6 +339,7 @@ export default function JumbledWords() {
       }
       setMsg(`❌ Incorrect phrasing order.${errorHelp} Try again or click 'Solve' to see the correct structure.`);
       jumbledMastery.handleAnswer(false);
+      setHasIncorrectAttempt(true);
     }
   };
 
@@ -371,6 +374,7 @@ export default function JumbledWords() {
     setMistakenIds([]);
     setIsReviewPass(false);
     setHasAttempted(false);
+    setHasIncorrectAttempt(false);
     setSolveCountdown(0);
     setPlayingLevel(1);
     setViewMode('dashboard');
@@ -414,6 +418,7 @@ export default function JumbledWords() {
     setShowHint(false);
     setIsSolved(false);
     setHasAttempted(false);
+    setHasIncorrectAttempt(false);
     setSolveCountdown(0);
     setHasValidated(false);
   };
@@ -836,19 +841,19 @@ export default function JumbledWords() {
                   <div style={{ marginLeft: 'auto', display: 'flex', gap: '12px' }}>
                     <button
                       onClick={solveQuestion}
-                      disabled={!hasAttempted}
+                      disabled={!hasIncorrectAttempt}
                       style={{
                         background: 'transparent',
-                        border: !hasAttempted ? '1px solid rgba(108, 206, 255, 0.15)' : '1px solid rgba(108, 206, 255, 0.4)',
-                        color: !hasAttempted ? 'rgba(108, 206, 255, 0.3)' : 'var(--clr-accent, #6cceff)',
+                        border: !hasIncorrectAttempt ? '1px solid rgba(108, 206, 255, 0.15)' : '1px solid rgba(108, 206, 255, 0.4)',
+                        color: !hasIncorrectAttempt ? 'rgba(108, 206, 255, 0.3)' : 'var(--clr-accent, #6cceff)',
                         padding: '8px 14px',
                         borderRadius: '8px',
-                        cursor: !hasAttempted ? 'not-allowed' : 'pointer',
+                        cursor: !hasIncorrectAttempt ? 'not-allowed' : 'pointer',
                         fontSize: '0.85rem',
                         fontWeight: 600,
                         transition: 'all 0.2s'
                       }}
-                      title={!hasAttempted ? "Please try validating an answer first before viewing the solution!" : "Reveal the correct phrase"}
+                      title={!hasIncorrectAttempt ? "Please try validating an answer first and get it incorrect before viewing the solution!" : "Reveal the correct phrase"}
                     >
                       Solve
                     </button>
