@@ -153,6 +153,8 @@ export default defineConfig({
       '/linearalgebra-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
       '/la-mission-quiz-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
       '/darts-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      '/graph': { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      '/path':  { target: 'http://127.0.0.1:4000', changeOrigin: true },
     },
   },
 })

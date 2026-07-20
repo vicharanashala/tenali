@@ -44138,6 +44138,798 @@ function App() {
   )
 }
 
+// ─── PathMap data & algorithms (unchanged) ───────────────────
+// ─── PathMap graph data (fetched from graph-data.json, same file index.html/path.html use) ───
+let pmNodes = []
+let pmEdges = []
+let pmCatColor = {}
+let pmNodeById = {}
+let pmPrereqMap = {}
+let pmSuccessorMap = {}
+
+let pmGraphDataPromise = null
+
+function pmBuildDerivedMaps() {
+  pmNodeById = Object.fromEntries(pmNodes.map((n) => [n.id, n]))
+  pmPrereqMap = {}
+  pmSuccessorMap = {}
+  pmEdges.forEach(([a, b]) => {
+    ;(pmPrereqMap[b] = pmPrereqMap[b] || []).push(a)
+    ;(pmSuccessorMap[a] = pmSuccessorMap[a] || []).push(b)
+  })
+}
+
+function pmFetchGraphData() {
+  if (!pmGraphDataPromise) {
+    pmGraphDataPromise = fetch('./graph-data.json')
+      .then((res) => {
+        if (!res.ok) throw new Error(`Failed to load graph-data.json (${res.status})`)
+        return res.json()
+      })
+      .then(({ categories, nodes, edges }) => {
+        pmNodes = nodes
+        pmEdges = edges
+        pmCatColor = Object.fromEntries(Object.entries(categories).map(([id, c]) => [id, c.color]))
+        pmBuildDerivedMaps()
+      })
+  }
+  return pmGraphDataPromise
+}
+
+// React hook — loads the graph data once, reports 'loading' | 'ready' | 'error'
+function usePmGraphData() {
+  const [status, setStatus] = useState(() => (pmNodes.length ? 'ready' : 'loading'))
+
+  useEffect(() => {
+    if (status === 'ready') return
+    let cancelled = false
+    pmFetchGraphData()
+      .then(() => { if (!cancelled) setStatus('ready') })
+      .catch((err) => { if (!cancelled) { console.error(err); setStatus('error') } })
+    return () => { cancelled = true }
+  }, [status])
+
+  return status
+}
+
+function pmGetSubgraphNodes(goalIdList) {
+  const visited = new Set()
+  const stack = [...goalIdList]
+  while (stack.length) {
+    const cur = stack.pop()
+    if (visited.has(cur)) continue
+    visited.add(cur)
+    ;(pmPrereqMap[cur] || []).forEach((p) => { if (!visited.has(p)) stack.push(p) })
+  }
+  return visited
+}
+
+function pmTopoSort(nodeSet) {
+  const inDeg = {}
+  const adj = {}
+  nodeSet.forEach((n) => { inDeg[n] = 0; adj[n] = [] })
+  pmEdges.forEach(([a, b]) => {
+    if (nodeSet.has(a) && nodeSet.has(b)) { adj[a].push(b); inDeg[b]++ }
+  })
+  const queue = [...nodeSet].filter((n) => inDeg[n] === 0).sort()
+  const order = []
+  while (queue.length) {
+    queue.sort()
+    const n = queue.shift()
+    order.push(n)
+    ;(adj[n] || []).forEach((m) => { inDeg[m]--; if (inDeg[m] === 0) queue.push(m) })
+  }
+  return order
+}
+
+function pmComputePath(goalIds) {
+  if (!goalIds || !goalIds.length) return []
+  return pmTopoSort(pmGetSubgraphNodes(goalIds))
+}
+
+// ─── PathMap svg utils ────────────────────────────────────────
+function pmStarPoints(cx, cy, r) {
+  const points = []
+  for (let i = 0; i < 10; i++) {
+    const rad = i % 2 === 0 ? r : r * 0.45
+    const ang = (Math.PI / 5) * i - Math.PI / 2
+    points.push(`${cx + rad * Math.cos(ang)},${cy + rad * Math.sin(ang)}`)
+  }
+  return points.join(' ')
+}
+
+// ─── PathMap hooks ────────────────────────────────────────────
+function usePathmapState() {
+  const pmStatus = usePmGraphData()
+  const [goalIds, setGoalIds] = useState(() => {
+    try { const r = localStorage.getItem('tenali_pathmap_goal'); return r ? JSON.parse(r) : [] }
+    catch { return [] }
+  })
+  const [known, setKnown] = useState(() => {
+    try { const r = localStorage.getItem('tenali_pathmap_known'); return new Set(r ? JSON.parse(r) : []) }
+    catch { return new Set() }
+  })
+
+  useEffect(() => { localStorage.setItem('tenali_pathmap_goal', JSON.stringify(goalIds)) }, [goalIds])
+  useEffect(() => { localStorage.setItem('tenali_pathmap_known', JSON.stringify([...known])) }, [known])
+
+  const path = useMemo(() => (pmStatus === 'ready' ? pmComputePath(goalIds) : []), [goalIds, pmStatus])
+  const setGoal    = useCallback((ids) => setGoalIds(ids), [])
+  const clearGoal  = useCallback(() => setGoalIds([]), [])
+  const toggleKnown = useCallback((id) => {
+    setKnown((prev) => { const next = new Set(prev); next.has(id) ? next.delete(id) : next.add(id); return next })
+  }, [])
+
+  return { goalIds, known, path, setGoal, clearGoal, toggleKnown, pmStatus }
+}
+
+// ─── PathMap StatsBar ─────────────────────────────────────────
+function PmStatsBar({ path, known }) {
+  if (!path.length) return null
+  const doneCount = path.filter((id) => known.has(id)).length
+  const remaining = path.length - doneCount
+  return (
+    <div className="pm-stats-bar">
+      <div className="pm-stat">
+        <div className="pm-stat-num">{path.length}</div>
+        <div className="pm-stat-label">Total steps</div>
+      </div>
+      <div className="pm-stat">
+        <div className="pm-stat-num" style={{ color: 'var(--clr-correct, #5cb87a)' }}>{doneCount}</div>
+        <div className="pm-stat-label">Already known</div>
+      </div>
+      <div className="pm-stat">
+        <div className="pm-stat-num" style={{ color: 'var(--clr-accent, #e8864a)' }}>{remaining}</div>
+        <div className="pm-stat-label">Steps to go</div>
+      </div>
+    </div>
+  )
+}
+
+// ─── PathMap GoalPicker ───────────────────────────────────────
+function PmGoalPicker({ goalIds, onSetGoal, onClear }) {
+  const [query, setQuery] = useState('')
+  const wrapRef = useRef(null)
+
+  const matches = query.trim().length > 0
+    ? pmNodes.filter((n) => n.label.toLowerCase().includes(query.trim().toLowerCase())).slice(0, 8)
+    : []
+
+  useEffect(() => {
+    function handleOutsideClick(e) {
+      if (wrapRef.current && !wrapRef.current.contains(e.target)) setQuery('')
+    }
+    document.addEventListener('mousedown', handleOutsideClick)
+    return () => document.removeEventListener('mousedown', handleOutsideClick)
+  }, [])
+
+  const currentGoal = goalIds.length > 0 ? pmNodes.find(n => n.id === goalIds[0]) : null
+
+  return (
+    <div className="pm-goal-card">
+      <div className="pm-goal-label">What do you want to learn?</div>
+      <div className="pm-goal-search-wrap" ref={wrapRef}>
+        <div style={{ position: 'relative' }}>
+          <input
+            type="text"
+            placeholder="Search a topic, e.g. Differentiation, Trigonometry..."
+            autoComplete="off"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            style={{
+              width: '100%',
+              boxSizing: 'border-box',
+              padding: '11px 14px',
+              borderRadius: 'var(--radius-sm)',
+              border: '1.5px solid var(--clr-border)',
+              background: 'var(--clr-card)',
+              color: 'var(--clr-text)',
+              fontFamily: 'var(--font-body)',
+              fontSize: '0.9rem',
+              outline: 'none',
+            }}
+          />
+        </div>
+        {matches.length > 0 && (
+          <div style={{ borderRadius: 'var(--radius-sm)', overflow: 'hidden' }}>
+            {matches.map((n, i) => (
+              <div
+                key={n.id}
+                onClick={() => { onSetGoal([n.id]); setQuery('') }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  padding: '10px 14px',
+                  cursor: 'pointer',
+                  borderBottom: i !== matches.length - 1 ? '1px solid var(--clr-border)' : 'none',
+                  color: 'var(--clr-text)',
+                  fontFamily: 'var(--font-body)',
+                  fontSize: '0.9rem',
+                }}
+              >
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', flexShrink: 0, background: pmCatColor[n.cat] }} />
+                <span>{n.label}</span>
+                <span style={{ marginLeft: 'auto', fontSize: '0.78rem', color: 'var(--clr-text-soft)' }}>{n.sub}</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+      {currentGoal && (
+        <div style={{ marginTop: 10, display: 'flex', alignItems: 'center', gap: 10 }}>
+          <span style={{ fontSize: '0.85rem', color: 'var(--clr-text-soft)' }}>Goal:</span>
+          <span style={{ fontWeight: 700, color: 'var(--clr-accent, #e8864a)' }}>{currentGoal.label}</span>
+          <button onClick={onClear} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text-soft)', fontSize: '0.85rem' }}>✕ Clear</button>
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ─── PathMap SnakePath ────────────────────────────────────────
+const PM_GAP_Y = 108
+const PM_AMP   = 150
+const PM_WIDTH = 520
+const PM_PAD_TOP = 50
+
+function PmSnakePath({ path, known, goalIds, onToggleNode }) {
+  const centerX = PM_WIDTH / 2
+
+  const pts = path.map((id, i) => ({
+    id,
+    x: centerX + PM_AMP * Math.sin(i * 0.9),
+    y: PM_PAD_TOP + i * PM_GAP_Y,
+  }))
+  const height = PM_PAD_TOP * 2 + PM_GAP_Y * Math.max(path.length - 1, 0)
+  const currentIdx = path.findIndex((id) => !known.has(id))
+
+  if (!path.length) return null
+
+  return (
+    <div style={{ width: '100%', overflowX: 'auto' }}>
+      <svg
+        viewBox={`0 0 ${PM_WIDTH} ${height}`}
+        width="100%"
+        height={height}
+        style={{ display: 'block' }}
+      >
+        <defs>
+          <filter id="pmGlow" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur stdDeviation="4" result="blur" />
+            <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+          </filter>
+        </defs>
+
+        {pts.slice(0, -1).map((p, i) => {
+          const next = pts[i + 1]
+          const bothDone = known.has(p.id) && known.has(next.id)
+          const dx = next.x - p.x, dy = next.y - p.y
+          const len = Math.hypot(dx, dy)
+          const ux = dx / len, uy = dy / len
+          const x1 = p.x + ux * 26, y1 = p.y + uy * 26
+          const x2 = next.x - ux * 26, y2 = next.y - uy * 26
+          return (
+            <line key={i}
+              x1={x1} y1={y1} x2={x2} y2={y2}
+              stroke={bothDone ? '#5cb87a' : 'rgba(255,255,255,0.22)'}
+              strokeWidth={bothDone ? 4 : 3}
+              strokeLinecap="round"
+              strokeDasharray={bothDone ? undefined : '5 10'}
+            />
+          )
+        })}
+
+        {pts.map((p, i) => {
+          const node = pmNodeById[p.id]
+          const isGoal = goalIds.includes(p.id)
+          const isDone = known.has(p.id)
+          const isCurrent = i === currentIdx
+          const color = pmCatColor[node.cat] || pmCatColor.other
+          const fill = isDone ? '#5cb87a' : color
+          const labelSide = p.x >= PM_WIDTH / 2 ? 1 : -1
+          return (
+            <g key={p.id}
+              transform={`translate(${p.x},${p.y})`}
+              style={{ cursor: 'pointer' }}
+              onClick={() => onToggleNode(p.id)}
+            >
+              {isCurrent && (
+                <circle r={27} fill="none" stroke="var(--clr-accent, #e8864a)" strokeWidth={2.5} opacity={0.8} />
+              )}
+              <circle r={22} fill={fill} stroke={isDone ? '#fff' : 'rgba(255,255,255,0.2)'} strokeWidth={1.5} />
+              {isDone ? (
+                <path d="M -8,0 L -2,7 L 9,-8" stroke="#fff" strokeWidth={3} fill="none"
+                  strokeLinecap="round" strokeLinejoin="round" />
+              ) : isGoal ? (
+                <polygon points={pmStarPoints(0, 0, 10)} fill="#fff" />
+              ) : (
+                <text textAnchor="middle" dy="0.35em" fontSize={13} fontWeight={700} fill="#fff"
+                  fontFamily="var(--font-body)">{i + 1}</text>
+              )}
+              <text x={30 * labelSide} y={5} fontSize={12} fontWeight={600}
+                fill="var(--clr-text, #ede8e3)" textAnchor={labelSide > 0 ? 'start' : 'end'}
+                fontFamily="var(--font-body)">{node.label}</text>
+            </g>
+          )
+        })}
+      </svg>
+    </div>
+  )
+}
+
+// ─── PathMap ModuleGrid ───────────────────────────────────────
+function PmModuleGrid({ path, known, goalIds, onToggleKnown, onSetGoal }) {
+  const [filter, setFilter] = useState('')
+  const pathIndex = useMemo(() => Object.fromEntries(path.map((id, i) => [id, i + 1])), [path])
+  const sorted = useMemo(() => [...pmNodes].sort((a, b) => a.label.localeCompare(b.label)), [])
+  const filtered = filter.trim()
+    ? sorted.filter((n) => n.label.toLowerCase().includes(filter.trim().toLowerCase()))
+    : sorted
+
+  function handleCardClick(e, id) {
+    if (e.shiftKey || e.metaKey || e.ctrlKey) onSetGoal([id])
+  }
+
+  return (
+    <div>
+      <div className="pm-grid-heading">
+        <div className="pm-section-heading">All topics</div>
+        <input className="pm-grid-filter" type="text" placeholder="Filter topics…"
+          value={filter} onChange={(e) => setFilter(e.target.value)} />
+      </div>
+      <p className="pm-hint">Click any card to mark it known / not known. Shift-click to set as goal.</p>
+      <div className="pm-module-grid">
+        {filtered.map((n) => {
+          const onPath = pathIndex[n.id] !== undefined
+          const isKnown = known.has(n.id)
+          const isGoal = goalIds.includes(n.id)
+          const dimmed = goalIds.length > 0 && !onPath
+          let badge = null
+          if (isGoal) badge = <span className="pm-card-badge goal">GOAL</span>
+          else if (onPath) badge = <span className="pm-card-badge step">{pathIndex[n.id]}</span>
+          return (
+            <button key={n.id} className={`pm-card${dimmed ? ' dimmed' : ''}`}
+              style={{ '--dot': pmCatColor[n.cat] }} onClick={(e) => handleCardClick(e, n.id)}>
+              {badge}
+              <div className="pm-card-label">{n.label}</div>
+              <div className="pm-card-sub">{n.sub}</div>
+            </button>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+// ─── PathMap main component ───────────────────────────────────
+function PathMap({ onBack }) {
+  const { goalIds, known, path, setGoal, clearGoal, toggleKnown, pmStatus } = usePathmapState()
+
+  if (pmStatus === 'loading') {
+    return (
+      <div className="pm-shell">
+        <div className="pm-topbar">
+          <div className="pm-brand">
+            {onBack && (
+              <button className="pm-icon-btn" onClick={onBack} title="Back" aria-label="Back">←</button>
+            )}
+            <h1>Your Learning Path</h1>
+          </div>
+        </div>
+        <div className="pm-empty">Loading topics…</div>
+      </div>
+    )
+  }
+
+  if (pmStatus === 'error') {
+    return (
+      <div className="pm-shell">
+        <div className="pm-topbar">
+          <div className="pm-brand">
+            {onBack && (
+              <button className="pm-icon-btn" onClick={onBack} title="Back" aria-label="Back">←</button>
+            )}
+            <h1>Your Learning Path</h1>
+          </div>
+        </div>
+        <div className="pm-empty">Couldn't load topic data. Please refresh and try again.</div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="pm-shell">
+      <div className="pm-topbar">
+        <div className="pm-brand">
+          {onBack && (
+            <button className="pm-icon-btn" onClick={onBack} title="Back" aria-label="Back">←</button>
+          )}
+          <h1>Your Learning Path</h1>
+        </div>
+      </div>
+      <div className="pm-intro">
+        <p>
+          Pick a goal topic and we&rsquo;ll lay out every prerequisite in order. Mark what you
+          already know to skip it — the path updates instantly, and stays saved on this device.
+        </p>
+      </div>
+      <PmGoalPicker goalIds={goalIds} onSetGoal={setGoal} onClear={clearGoal} />
+      <PmStatsBar path={path} known={known} />
+      {path.length === 0 ? (
+        <div className="pm-empty">Set a goal above to see your personalised prerequisite path.</div>
+      ) : (
+        <div className="pm-path-section">
+          <div className="pm-section-heading">Your path</div>
+          <PmSnakePath path={path} known={known} goalIds={goalIds} onToggleNode={toggleKnown} />
+        </div>
+      )}
+      <PmModuleGrid path={path} known={known} goalIds={goalIds} onToggleKnown={toggleKnown} onSetGoal={setGoal} />
+    </div>
+  )
+}
+
+// ─── END PATHMAP ─────────────────────────────────────────────
+
+// ═══════════════════════════════════════════════════════════════
+// PmCongratsModal — shown when every node in the path is marked known.
+// Uses only app-native CSS variables so it blends with the rest of the UI.
+// ═══════════════════════════════════════════════════════════════
+function PmCongratsModal({ goalIds, path, onClose, onNewGoal, onSetGoal }) {
+  const goalNode = goalIds.length > 0 ? pmNodeById[goalIds[0]] : null
+  if (!goalNode) return null
+
+  // Topics that succeed the goal in the graph but are NOT already in the path
+  const pathSet = new Set(path)
+  const furtherNodes = (pmSuccessorMap[goalIds[0]] || [])
+    .filter((id) => !pathSet.has(id))
+    .slice(0, 4)
+    .map((id) => pmNodeById[id])
+    .filter(Boolean)
+
+  return (
+    <div
+      onClick={(e) => { if (e.target === e.currentTarget) onClose() }}
+      style={{
+        position: 'fixed', inset: 0, zIndex: 300,
+        background: 'rgba(0,0,0,0.78)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        padding: '24px 16px',
+      }}
+    >
+      <div style={{
+        background: 'var(--clr-bg)',
+        border: '1.5px solid var(--clr-border)',
+        borderRadius: 18,
+        width: '100%',
+        maxWidth: 400,
+        padding: '32px 26px 26px',
+        textAlign: 'center',
+        position: 'relative',
+        boxShadow: '0 8px 40px rgba(0,0,0,0.55)',
+      }}>
+        {/* close button — same pattern as every other modal in the app */}
+        <button
+          onClick={onClose}
+          style={{
+            position: 'absolute', top: 14, right: 16,
+            background: 'none', border: 'none',
+            fontSize: '1.3rem', lineHeight: 1,
+            cursor: 'pointer',
+            color: 'var(--clr-text-soft)',
+          }}
+        >✕</button>
+
+        {/* Trophy row */}
+        <div style={{ fontSize: 38, marginBottom: 16, letterSpacing: 4 }}>🎉 🏆 🎉</div>
+
+        {/* Headline */}
+        <div style={{
+          fontSize: '1.25rem',
+          fontWeight: 800,
+          color: 'var(--clr-text)',
+          fontFamily: 'var(--font-body)',
+          marginBottom: 6,
+        }}>
+          Path complete!
+        </div>
+
+        {/* Goal name — accent colour, same as used elsewhere in the path panel */}
+        <div style={{
+          fontSize: '1rem',
+          fontWeight: 700,
+          color: 'var(--clr-accent, #e8864a)',
+          fontFamily: 'var(--font-body)',
+          marginBottom: 10,
+        }}>
+          {goalNode.label}
+        </div>
+
+        <p style={{
+          fontSize: '0.85rem',
+          color: 'var(--clr-text-soft)',
+          fontFamily: 'var(--font-body)',
+          lineHeight: 1.6,
+          marginBottom: 22,
+        }}>
+          You've mastered all {path.length} steps on your path. Brilliant work!
+        </p>
+
+        {/* Divider — same border colour as the rest of the UI */}
+        <div style={{ borderTop: '1px solid var(--clr-border)', marginBottom: 18 }} />
+
+        {furtherNodes.length > 0 ? (
+          <>
+            {/* Section label — same micro-label style used in the path panel header */}
+            <div style={{
+              fontSize: '0.68rem',
+              fontWeight: 700,
+              letterSpacing: '0.55px',
+              textTransform: 'uppercase',
+              color: 'var(--clr-text-soft)',
+              fontFamily: 'var(--font-body)',
+              marginBottom: 12,
+            }}>
+              What to study next
+            </div>
+
+            {/* Suggestion cards — same card background / border as pm-card */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: furtherNodes.length === 1 ? '1fr' : '1fr 1fr',
+              gap: 8,
+              marginBottom: 24,
+            }}>
+              {furtherNodes.map((n) => (
+                <button
+                  key={n.id}
+                  onClick={() => { onSetGoal([n.id]); onClose() }}
+                  style={{
+                    background: 'var(--clr-card)',
+                    border: '1.5px solid var(--clr-border)',
+                    borderRadius: 'var(--radius-sm, 10px)',
+                    padding: '10px 12px',
+                    textAlign: 'left',
+                    cursor: 'pointer',
+                    fontFamily: 'var(--font-body)',
+                    transition: 'border-color 0.15s, background 0.15s',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = pmCatColor[n.cat]
+                    e.currentTarget.style.background = 'var(--clr-hover-strong, rgba(255,255,255,0.06))'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--clr-border)'
+                    e.currentTarget.style.background = 'var(--clr-card)'
+                  }}
+                >
+                  {/* category dot — same dot used on pm-cards */}
+                  <div style={{
+                    width: 7, height: 7,
+                    borderRadius: '50%',
+                    background: pmCatColor[n.cat],
+                    marginBottom: 7,
+                  }} />
+                  <div style={{
+                    fontSize: '0.82rem',
+                    fontWeight: 700,
+                    color: 'var(--clr-text)',
+                    marginBottom: 3,
+                  }}>
+                    {n.label}
+                  </div>
+                  <div style={{
+                    fontSize: '0.72rem',
+                    color: 'var(--clr-text-soft)',
+                    lineHeight: 1.4,
+                  }}>
+                    {n.sub}
+                  </div>
+                </button>
+              ))}
+            </div>
+          </>
+        ) : (
+          /* No successors — just a warm wrap-up line */
+          <p style={{
+            fontSize: '0.85rem',
+            color: 'var(--clr-text-soft)',
+            fontFamily: 'var(--font-body)',
+            lineHeight: 1.6,
+            marginBottom: 24,
+          }}>
+            You've reached the top of this topic's tree. Pick a new goal to keep building!
+          </p>
+        )}
+
+        {/* Action row — ghost + accent, same pattern as modal "Show my path" button */}
+        <div style={{ display: 'flex', gap: 8 }}>
+          <button
+            onClick={onClose}
+            style={{
+              flex: 1,
+              padding: '10px',
+              background: 'none',
+              border: '1.5px solid var(--clr-border)',
+              borderRadius: 10,
+              color: 'var(--clr-text-soft)',
+              fontFamily: 'var(--font-body)',
+              fontSize: '0.88rem',
+              fontWeight: 600,
+              cursor: 'pointer',
+            }}
+          >
+            Close
+          </button>
+          <button
+            onClick={onNewGoal}
+            style={{
+              flex: 2,
+              padding: '10px',
+              background: 'var(--clr-accent, #e8864a)',
+              border: 'none',
+              borderRadius: 10,
+              color: '#fff',
+              fontFamily: 'var(--font-body)',
+              fontSize: '0.88rem',
+              fontWeight: 700,
+              cursor: 'pointer',
+            }}
+          >
+            Pick a new goal →
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PmHomePath — gamified winding trail shown on the Home screen
+// ═══════════════════════════════════════════════════════════════
+const PMH_WIDTH   = 620
+const PMH_AMP     = 190
+const PMH_GAP_Y   = 152
+const PMH_PAD_TOP = 64
+const PMH_R       = 34
+
+function PmHomePath({ path, known, goalIds, onToggleKnown, onSelect }) {
+  const centerX = PMH_WIDTH / 2
+
+  const pts = path.map((id, i) => ({
+    id,
+    x: centerX + PMH_AMP * Math.sin(i * 0.85),
+    y: PMH_PAD_TOP + i * PMH_GAP_Y,
+  }))
+  const height = PMH_PAD_TOP * 2 + PMH_GAP_Y * Math.max(path.length - 1, 0)
+  const currentIdx = path.findIndex((id) => !known.has(id))
+
+  if (!path.length) return null
+
+  return (
+    <div className="pmh-wrap" style={{ width: '100%', overflowX: 'auto' }}>
+      <style>{`
+        @keyframes pmhPulseRing {
+          0%   { r: ${PMH_R + 6}px; opacity: 0.65; }
+          70%  { r: ${PMH_R + 20}px; opacity: 0; }
+          100% { r: ${PMH_R + 20}px; opacity: 0; }
+        }
+        .pmh-pulse { animation: pmhPulseRing 1.8s ease-out infinite; transform-origin: center; }
+        .pmh-node { transition: opacity 0.2s; }
+        .pmh-node:hover { opacity: 0.85; }
+      `}</style>
+      <svg
+        viewBox={`0 0 ${PMH_WIDTH} ${height}`}
+        width="100%"
+        height={height}
+        style={{ display: 'block' }}
+      >
+        <defs>
+          <filter id="pmhGlow" x="-80%" y="-80%" width="260%" height="260%">
+            <feGaussianBlur stdDeviation="5" result="blur" />
+            <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+          </filter>
+        </defs>
+
+        {pts.slice(0, -1).map((p, i) => {
+          const next = pts[i + 1]
+          const bothDone = known.has(p.id) && known.has(next.id)
+          const midY = (p.y + next.y) / 2
+          const d = `M ${p.x} ${p.y} C ${p.x} ${midY}, ${next.x} ${midY}, ${next.x} ${next.y}`
+          return (
+            <path key={i} d={d} fill="none"
+              stroke={bothDone ? '#5cb87a' : 'rgba(255,255,255,0.18)'}
+              strokeWidth={bothDone ? 8 : 7}
+              strokeLinecap="round"
+              strokeDasharray={bothDone ? undefined : '2 16'}
+            />
+          )
+        })}
+
+        {pts.map((p, i) => {
+          const node = pmNodeById[p.id]
+          const isDone = known.has(p.id)
+          const isGoal = goalIds.includes(p.id)
+          const isCurrent = i === currentIdx
+          const isFuture = !isDone && !isCurrent && i > currentIdx
+          const color = pmCatColor[node.cat] || pmCatColor.other
+          const fill = isDone ? '#5cb87a' : color
+          const labelSide = p.x >= centerX ? 1 : -1
+          const nodeOpacity = isFuture ? 0.4 : 1
+
+          return (
+            <g key={p.id} transform={`translate(${p.x},${p.y})`}>
+              {isCurrent && (
+                <circle className="pmh-pulse" r={PMH_R + 6} fill="none"
+                  stroke={color} strokeWidth={3} />
+              )}
+
+              <g
+                className="pmh-node"
+                style={{ cursor: 'pointer' }}
+                opacity={nodeOpacity}
+                onClick={() => onSelect(p.id)}
+              >
+                <circle r={PMH_R} fill={fill}
+                  stroke={isDone ? '#fff' : 'rgba(255,255,255,0.3)'}
+                  strokeWidth={2}
+                  filter={isCurrent ? 'url(#pmhGlow)' : undefined}
+                />
+                {isDone ? (
+                  <path d="M -12,0 L -3,10 L 13,-11" stroke="#fff" strokeWidth={4.5}
+                    fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                ) : isGoal ? (
+                  <polygon points={pmStarPoints(0, 0, 16)} fill="#fff" />
+                ) : (
+                  <text textAnchor="middle" dy="0.35em" fontSize={17} fontWeight={800}
+                    fill="#fff" fontFamily="var(--font-body)">{i + 1}</text>
+                )}
+              </g>
+
+              {/* small "mark as known" toggle badge */}
+              <g
+                transform={`translate(${PMH_R - 8},${-PMH_R + 8})`}
+                style={{ cursor: 'pointer' }}
+                onClick={(e) => { e.stopPropagation(); onToggleKnown(p.id) }}
+              >
+                <circle r={12} fill={isDone ? '#5cb87a' : 'var(--clr-card, #2a2420)'}
+                  stroke="rgba(255,255,255,0.35)" strokeWidth={1.5} />
+                <path d="M -4.5,0 L -1,3.5 L 4.5,-4.5" stroke="#fff" strokeWidth={2.2}
+                  fill="none" strokeLinecap="round" strokeLinejoin="round"
+                  opacity={isDone ? 1 : 0.55} />
+              </g>
+
+              {isCurrent && (
+                <text x={0} y={-PMH_R - 18} textAnchor="middle" fontSize={11.5} fontWeight={800}
+                  fill={color} fontFamily="var(--font-body)" letterSpacing="0.6">
+                  ▶ START HERE
+                </text>
+              )}
+              {isGoal && !isCurrent && (
+                <text x={0} y={-PMH_R - 18} textAnchor="middle" fontSize={11} fontWeight={800}
+                  fill="var(--clr-accent, #e8864a)" fontFamily="var(--font-body)" letterSpacing="0.6">
+                  🏁 GOAL
+                </text>
+              )}
+
+              <text x={(PMH_R + 18) * labelSide} y={-6} fontSize={14.5} fontWeight={700}
+                fill="var(--clr-text, #ede8e3)" textAnchor={labelSide > 0 ? 'start' : 'end'}
+                fontFamily="var(--font-body)" opacity={nodeOpacity}>
+                {node.label}
+              </text>
+              <text x={(PMH_R + 18) * labelSide} y={13} fontSize={11.5}
+                fill="var(--clr-text-soft, #a89e94)" textAnchor={labelSide > 0 ? 'start' : 'end'}
+                fontFamily="var(--font-body)" opacity={nodeOpacity}>
+                {node.sub}
+              </text>
+            </g>
+          )
+        })}
+      </svg>
+    </div>
+  )
+}
+
 /**
  * Home Component
  * Main menu screen showing all available quizzes in a searchable grid.
@@ -44150,6 +44942,7 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
   const [showAbout, setShowAbout] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [search, setSearch] = useState('')
+ 
   const featuredApps = [
     { key: 'randommix', name: 'Random Mix', subtitle: 'Adaptive cross-topic quiz', color: 'featured' },
     { key: 'custom', name: 'Custom Lesson', subtitle: 'Build your own mixed quiz', color: 'featured' },
@@ -44158,7 +44951,7 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
   ]
   // Visual Learning Universe lives only in the hamburger menu
   const mathLabEntry = { key: 'math-lab', name: '🔬 Visual Learning Universe', subtitle: 'Visual, Mensuration & Addition labs', color: 'orange' }
-
+ 
   // All regular quiz apps sorted alphabetically by name
   const regularApps = [
     { key: 'detective', name: '🔍 Detective Agency', subtitle: 'Solve math mysteries and crack cases!', color: 'indigo' },
@@ -44248,46 +45041,34 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
     { key: 'indicesgym', name: 'Indices-Gym', subtitle: 'Index laws (MCQ)', color: 'green' },
     { key: 'polygym', name: 'Polynomials Gym', subtitle: 'Arithmetic → monomial algebra (MCQ)', color: 'blue' },
   ]
-
+ 
   // Combined list for search filtering
   const allApps = [...featuredApps, ...regularApps]
-
-  // Hamburger menu open state
+ 
   const menuRef = useRef(null)
-
-  // Close menu when clicking outside
   useEffect(() => {
     if (!menuOpen) return
     const handleClick = (e) => { if (menuRef.current && !menuRef.current.contains(e.target)) setMenuOpen(false) }
     document.addEventListener('mousedown', handleClick)
     return () => document.removeEventListener('mousedown', handleClick)
   }, [menuOpen])
-
-  // Search term for filtering apps
-
-  // Filtered lists
+ 
   const isSearching = search.trim() !== ''
   const matchFilter = (a) => a.name.toLowerCase().includes(search.toLowerCase()) || a.subtitle.toLowerCase().includes(search.toLowerCase())
-  
-  // Under Goal Practice mode, we include Random Mix & Custom Lesson at the top of the grid list (omitting Gym since it does not support goals)
+ 
   const goalFeatured = [
     { key: 'randommix', name: 'Random Mix', subtitle: 'Adaptive cross-topic quiz', color: 'featured' },
     { key: 'custom', name: 'Custom Lesson', subtitle: 'Build your own mixed quiz', color: 'featured' },
   ]
-  
+ 
   const filteredGoalFeatured = isSearching ? goalFeatured.filter(matchFilter) : goalFeatured
   const filteredFeatured = isSearching ? featuredApps.filter(matchFilter) : featuredApps
   const filteredRegular = isSearching ? regularApps.filter(matchFilter) : regularApps
-  
-  // Decide which items to show on the main grid list
+ 
   const displayGridApps = isGoalSelection ? filteredRegular : [...filteredRegular]
-
-  // Grid layout tracking (for responsive display)
+ 
   const gridRef = useRef(null)
-  // Number of columns currently displayed (responsive)
   const [cols, setCols] = useState(4)
-
-  // Update grid dimensions on resize (for responsive grid calculation)
   useEffect(() => {
     const updateCols = () => {
       if (!gridRef.current) return
@@ -44299,10 +45080,40 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
     window.addEventListener('resize', updateCols)
     return () => window.removeEventListener('resize', updateCols)
   }, [])
-
-  // Calculate number of rows for display (for grid dimension label at bottom)
+ 
   const rows = Math.ceil(displayGridApps.length / (cols || 1))
-
+ 
+  // ── PathMap state (re-integrated from the previous version) ────────────
+  const pmStatus = usePmGraphData()
+  const [pmOpen, setPmOpen] = useState(false)
+  const [pmGoalIds, setPmGoalIds] = useState(() => {
+    try { const r = localStorage.getItem('tenali_pathmap_goal'); return r ? JSON.parse(r) : [] } catch { return [] }
+  })
+  const [pmKnown, setPmKnown] = useState(() => {
+    try { const r = localStorage.getItem('tenali_pathmap_known'); return new Set(r ? JSON.parse(r) : []) } catch { return new Set() }
+  })
+  useEffect(() => { localStorage.setItem('tenali_pathmap_goal', JSON.stringify(pmGoalIds)) }, [pmGoalIds])
+  useEffect(() => { localStorage.setItem('tenali_pathmap_known', JSON.stringify([...pmKnown])) }, [pmKnown])
+ 
+  const pmPath = useMemo(() => (pmStatus === 'ready' ? pmComputePath(pmGoalIds) : []), [pmGoalIds, pmStatus])
+  const pmPathIndex = useMemo(() => Object.fromEntries(pmPath.map((id, i) => [id, i + 1])), [pmPath])
+ 
+  const pmToggleKnown = useCallback((id) => {
+    setPmKnown(prev => { const n = new Set(prev); n.has(id) ? n.delete(id) : n.add(id); return n })
+  }, [])
+ 
+  const pmStepsLeft = pmPath.filter(id => !pmKnown.has(id) && !pmGoalIds.includes(id)).length
+  const pmGoalNode = pmGoalIds.length > 0 ? pmNodeById[pmGoalIds[0]] : null
+ 
+  const [pmShowCongrats, setPmShowCongrats] = useState(false)
+  const pmAllDone = pmPath.length > 0 && pmPath.every(id => pmKnown.has(id))
+  const prevAllDone = useRef(false)
+  useEffect(() => {
+    if (pmAllDone && !prevAllDone.current) setPmShowCongrats(true)
+    prevAllDone.current = pmAllDone
+  }, [pmAllDone])
+  // ─────────────────────────────────────────────────────────────────────
+ 
   return (
     <>
       <div style={{ position: 'relative' }}>
@@ -44326,82 +45137,110 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
             </p>
           </div>
         </div>
-        {/* Hamburger menu — top right */}
-        <div ref={menuRef} style={{ position: 'absolute', top: '8px', right: '0' }}>
-          <button onClick={() => setMenuOpen(o => !o)} style={{
-            background: 'none', border: 'none', cursor: 'pointer', padding: '8px',
-            display: 'flex', flexDirection: 'column', gap: '4px', alignItems: 'center'
-          }} aria-label="Menu">
-            <span style={{ display: 'block', width: '22px', height: '2.5px', background: 'var(--clr-text)', borderRadius: '2px', transition: 'transform 0.2s, opacity 0.2s', transform: menuOpen ? 'rotate(45deg) translate(4.5px, 4.5px)' : 'none' }} />
-            <span style={{ display: 'block', width: '22px', height: '2.5px', background: 'var(--clr-text)', borderRadius: '2px', transition: 'opacity 0.2s', opacity: menuOpen ? 0 : 1 }} />
-            <span style={{ display: 'block', width: '22px', height: '2.5px', background: 'var(--clr-text)', borderRadius: '2px', transition: 'transform 0.2s, opacity 0.2s', transform: menuOpen ? 'rotate(-45deg) translate(4.5px, -4.5px)' : 'none' }} />
-          </button>
-          {menuOpen && <div style={{
-            position: 'absolute', top: '100%', right: 0, zIndex: 50,
-            background: 'var(--clr-card)', border: '1.5px solid var(--clr-border)',
-            borderRadius: 'var(--radius-sm)', boxShadow: 'var(--shadow-card)',
-            padding: '6px 0', minWidth: '200px', overflow: 'hidden'
-          }}>
-            <button onClick={() => { setMenuOpen(false); setShowAbout(true) }} style={{
-              display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
-              background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
-              fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)',
-              borderBottom: '1px solid var(--clr-border)'
-            }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
-              onMouseLeave={e => e.target.style.background = 'none'}>
-              <strong style={{ color: 'var(--clr-accent)' }}>ℹ️ About Tenali</strong>
+ 
+        {/* Top-right cluster: PathMap quick-access button (dashboard only) + hamburger menu */}
+        <div style={{ position: 'absolute', top: '8px', right: '0', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          {!isGoalSelection && (
+            <button
+              onClick={() => setPmOpen(true)}
+              disabled={pmStatus !== 'ready'}
+              title={pmStatus === 'ready' ? 'Learn by prerequisite path' : 'Loading topic data…'}
+              style={{
+                background: pmGoalIds.length > 0 ? 'var(--clr-accent, #e8864a)' : 'var(--clr-card)',
+                border: '1.5px solid var(--clr-border)',
+                borderRadius: '20px',
+                color: pmGoalIds.length > 0 ? '#fff' : 'var(--clr-text)',
+                cursor: pmStatus === 'ready' ? 'pointer' : 'not-allowed',
+                opacity: pmStatus === 'ready' ? 1 : 0.6,
+                fontSize: '0.75rem',
+                fontFamily: 'var(--font-body)',
+                fontWeight: 600,
+                padding: '5px 12px',
+                whiteSpace: 'nowrap',
+                transition: 'background 0.2s',
+              }}
+            >
+              {pmStatus !== 'ready'
+                ? '📍 Loading…'
+                : pmGoalIds.length > 0 ? `📍 Path (${pmStepsLeft} left)` : '📍 Level Map'}
             </button>
-            {/* Visual Learning Universe pinned at top of hamburger menu */}
-            {[mathLabEntry].map(app => (
-              <button key={app.key} onClick={() => { setMenuOpen(false); onSelect(app.key) }} style={{
+          )}
+ 
+          <div ref={menuRef} style={{ position: 'relative' }}>
+            <button onClick={() => setMenuOpen(o => !o)} style={{
+              background: 'none', border: 'none', cursor: 'pointer', padding: '8px',
+              display: 'flex', flexDirection: 'column', gap: '4px', alignItems: 'center'
+            }} aria-label="Menu">
+              <span style={{ display: 'block', width: '22px', height: '2.5px', background: 'var(--clr-text)', borderRadius: '2px', transition: 'transform 0.2s, opacity 0.2s', transform: menuOpen ? 'rotate(45deg) translate(4.5px, 4.5px)' : 'none' }} />
+              <span style={{ display: 'block', width: '22px', height: '2.5px', background: 'var(--clr-text)', borderRadius: '2px', transition: 'opacity 0.2s', opacity: menuOpen ? 0 : 1 }} />
+              <span style={{ display: 'block', width: '22px', height: '2.5px', background: 'var(--clr-text)', borderRadius: '2px', transition: 'transform 0.2s, opacity 0.2s', transform: menuOpen ? 'rotate(-45deg) translate(4.5px, -4.5px)' : 'none' }} />
+            </button>
+            {menuOpen && <div style={{
+              position: 'absolute', top: '100%', right: 0, zIndex: 50,
+              background: 'var(--clr-card)', border: '1.5px solid var(--clr-border)',
+              borderRadius: 'var(--radius-sm)', boxShadow: 'var(--shadow-card)',
+              padding: '6px 0', minWidth: '200px', overflow: 'hidden'
+            }}>
+              <button onClick={() => { setMenuOpen(false); setShowAbout(true) }} style={{
+                display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
+                background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
+                fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)',
+                borderBottom: '1px solid var(--clr-border)'
+              }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
+                onMouseLeave={e => e.target.style.background = 'none'}>
+                <strong style={{ color: 'var(--clr-accent)' }}>ℹ️ About Tenali</strong>
+              </button>
+              {[mathLabEntry].map(app => (
+                <button key={app.key} onClick={() => { setMenuOpen(false); onSelect(app.key) }} style={{
+                  display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
+                  background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
+                  fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)'
+                }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
+                  onMouseLeave={e => e.target.style.background = 'none'}>
+                  <strong style={{ color: 'var(--clr-accent)' }}>{app.name}</strong>
+                  <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>{app.subtitle}</span>
+                </button>
+              ))}
+              <div style={{ height: '1px', background: 'var(--clr-border)', margin: '4px 0' }} />
+ 
+              <button onClick={() => { setMenuOpen(false); onSelect('goalpractice') }} style={{
                 display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
                 background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
                 fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)'
               }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
-                onMouseLeave={e => e.target.style.background = 'none'}>
-                <strong style={{ color: 'var(--clr-accent)' }}>{app.name}</strong>
-                <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>{app.subtitle}</span>
+                 onMouseLeave={e => e.target.style.background = 'none'}>
+                <strong style={{ color: 'var(--clr-accent)' }}>🎯 Goal Practice</strong>
+                <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>Practice with targets & limits</span>
               </button>
-            ))}
-            <div style={{ height: '1px', background: 'var(--clr-border)', margin: '4px 0' }} />
-
-            <button onClick={() => { setMenuOpen(false); onSelect('goalpractice') }} style={{
-              display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
-              background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
-              fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)'
-            }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
-               onMouseLeave={e => e.target.style.background = 'none'}>
-              <strong style={{ color: 'var(--clr-accent)' }}>🎯 Goal Practice</strong>
-              <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>Practice with targets & limits</span>
-            </button>
-
-            {featuredApps.map(app => (
-              <button key={app.key} onClick={() => { setMenuOpen(false); onSelect(app.key) }} style={{
+ 
+              {featuredApps.map(app => (
+                <button key={app.key} onClick={() => { setMenuOpen(false); onSelect(app.key) }} style={{
+                  display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
+                  background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
+                  fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)'
+                }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
+                  onMouseLeave={e => e.target.style.background = 'none'}>
+                  <strong style={{ color: 'var(--clr-accent)' }}>{app.name}</strong>
+                  <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>{app.subtitle}</span>
+                </button>
+              ))}
+ 
+              <div style={{ height: '1px', background: 'var(--clr-border)', margin: '4px 0' }} />
+ 
+              <button onClick={() => { setMenuOpen(false); window.location.href = window.location.pathname.replace(/\/$/, '') + '/language'; }} style={{
                 display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
                 background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
                 fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)'
               }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
-                onMouseLeave={e => e.target.style.background = 'none'}>
-                <strong style={{ color: 'var(--clr-accent)' }}>{app.name}</strong>
-                <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>{app.subtitle}</span>
+                 onMouseLeave={e => e.target.style.background = 'none'}>
+                <strong style={{ color: 'var(--clr-accent)' }}>Language Puzzles</strong>
+                <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>Fill in the blanks to create new words</span>
               </button>
-            ))}
-
-            <div style={{ height: '1px', background: 'var(--clr-border)', margin: '4px 0' }} />
-
-            <button onClick={() => { setMenuOpen(false); window.location.href = window.location.pathname.replace(/\/$/, '') + '/language'; }} style={{
-              display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
-              background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
-              fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)'
-            }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
-               onMouseLeave={e => e.target.style.background = 'none'}>
-              <strong style={{ color: 'var(--clr-accent)' }}>Language Puzzles</strong>
-              <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>Fill in the blanks to create new words</span>
-            </button>
             </div>}
           </div>
+        </div>
       </div>
-
+ 
       {showAbout && (
         <>
           <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', zIndex: 99999 }} onClick={() => setShowAbout(false)} />
@@ -44419,6 +45258,7 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
           </div>
         </>
       )}
+ 
       {!search && !isGoalSelection && (
         <div className="journey-banner-row">
           <button className="journey-banner-btn" onClick={() => onSelect('learning_journey')}>
@@ -44435,6 +45275,7 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
           </button>
         </div>
       )}
+ 
       <div className="search-bar-row">
         <input
           id="tour-search-bar"
@@ -44445,12 +45286,141 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
           onChange={e => setSearch(e.target.value)}
         />
       </div>
+ 
+      {/* ── Gamified PathMap panel — dashboard view only, hidden while searching ── */}
+      {!isGoalSelection && !isSearching && pmStatus === 'ready' && pmPath.length > 0 && (
+        <div className="pmh-panel" style={{
+          margin: '22px 0 30px',
+          padding: '20px 18px 10px',
+          background: 'var(--clr-card)',
+          border: '1.5px solid var(--clr-border)',
+          borderRadius: 18,
+        }}>
+          <div style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            flexWrap: 'wrap', gap: 12, marginBottom: 6, paddingBottom: 14,
+            borderBottom: '1px solid var(--clr-border)',
+          }}>
+            <div>
+              <div style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.6px', color: 'var(--clr-text-soft)', textTransform: 'uppercase' }}>
+                Your path to
+              </div>
+              <div style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--clr-accent, #e8864a)' }}>
+                {pmGoalNode?.label}
+              </div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '1.15rem', fontWeight: 800 }}>{pmPath.length}</div>
+                <div style={{ fontSize: '0.65rem', color: 'var(--clr-text-soft)' }}>steps</div>
+              </div>
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#5cb87a' }}>{pmPath.length - pmStepsLeft}</div>
+                <div style={{ fontSize: '0.65rem', color: 'var(--clr-text-soft)' }}>done</div>
+              </div>
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--clr-accent, #e8864a)' }}>{pmStepsLeft}</div>
+                <div style={{ fontSize: '0.65rem', color: 'var(--clr-text-soft)' }}>to go</div>
+              </div>
+              <button
+                onClick={() => { setPmGoalIds([]) }}
+                title="Clear current goal (known nodes kept)"
+                style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text-soft)', fontSize: '0.78rem' }}
+              >
+                ✕ Clear
+              </button>
+            </div>
+          </div>
+ 
+          {pmAllDone ? (
+            <div style={{
+              margin: '14px 0 8px',
+              padding: '14px 16px',
+              background: 'rgba(92, 184, 122, 0.12)',
+              border: '1.5px solid rgba(92, 184, 122, 0.35)',
+              borderRadius: 12,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: 12,
+              flexWrap: 'wrap',
+            }}>
+              <div>
+                <div style={{ fontSize: '0.92rem', fontWeight: 800, color: '#5cb87a', fontFamily: 'var(--font-body)' }}>
+                  🎉 All done — path complete!
+                </div>
+                <div style={{ fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: 3, fontFamily: 'var(--font-body)' }}>
+                  Every step mastered. Tap below to see what's next.
+                </div>
+              </div>
+              <button
+                onClick={() => setPmShowCongrats(true)}
+                style={{
+                  background: 'var(--clr-accent, #e8864a)',
+                  border: 'none',
+                  borderRadius: 20,
+                  color: '#fff',
+                  fontFamily: 'var(--font-body)',
+                  fontSize: '0.78rem',
+                  fontWeight: 700,
+                  padding: '6px 14px',
+                  cursor: 'pointer',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                What's next? →
+              </button>
+            </div>
+          ) : (
+            <p style={{ fontSize: '0.78rem', color: 'var(--clr-text-soft)', margin: '10px 0 4px' }}>
+              Tap a stop to practice it. Tap the small check to mark it as already known.
+            </p>
+          )}
+ 
+          <PmHomePath
+            path={pmPath}
+            known={pmKnown}
+            goalIds={pmGoalIds}
+            onToggleKnown={pmToggleKnown}
+            onSelect={onSelect}
+          />
+        </div>
+      )}
+ 
+      {/* ── Browse grid — badges from both features layered without collision:
+           PM step/goal badge = absolute top-right pill; gold/completed badge =
+           inline icon next to the title (unchanged doc2 behavior) ── */}
       <div id="tour-home-grid" className="menu-grid" ref={gridRef}>
         {displayGridApps.map((app) => {
           const isGold = goldMastery && goldMastery.includes(app.key)
           const isCompleted = isStage3Completed(app.key, completedTopics)
+ 
+          const stepNum = pmPathIndex[app.key]
+          const isKnownPm = pmKnown.has(app.key)
+          const isGoalPm = pmGoalIds.includes(app.key)
+          const onPmPath = stepNum !== undefined
+          const dimmed = !isGoalSelection && pmGoalIds.length > 0 && !onPmPath
+ 
           return (
-            <button key={app.key} className={`menu-card ${isGold ? 'gold-card' : app.color}`} onClick={() => onSelect(app.key)}>
+            <button
+              key={app.key}
+              className={`menu-card ${isGold ? 'gold-card' : app.color}`}
+              onClick={() => onSelect(app.key)}
+              style={{ position: 'relative', opacity: dimmed ? 0.45 : 1, transition: 'opacity 0.2s' }}
+            >
+              {!isGoalSelection && isGoalPm && (
+                <span style={{ position: 'absolute', top: 6, right: 8, fontSize: '0.62rem', fontWeight: 700, background: 'var(--clr-accent, #e8864a)', color: '#fff', borderRadius: 10, padding: '2px 7px' }}>GOAL</span>
+              )}
+              {!isGoalSelection && !isGoalPm && onPmPath && (
+                <span style={{
+                  position: 'absolute', top: 6, right: 8, fontSize: '0.62rem', fontWeight: 700,
+                  background: isKnownPm ? '#5cb87a' : 'rgba(255,255,255,0.15)',
+                  color: isKnownPm ? '#fff' : 'var(--clr-text)',
+                  borderRadius: 10, padding: '2px 7px',
+                }}>
+                  {isKnownPm ? '✓' : `#${stepNum}`}
+                </span>
+              )}
               <span className="menu-title">
                 {app.name}
                 {isGold && <span className="badge-indicator">🥇</span>}
@@ -44461,7 +45431,139 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
           )
         })}
       </div>
+ 
       <div className="grid-dimension">{rows} × {cols}</div>
+ 
+      {/* ── PathMap goal-picker modal ── */}
+      {pmOpen && (
+        <div
+          onClick={e => { if (e.target === e.currentTarget) setPmOpen(false) }}
+          style={{
+            position: 'fixed', inset: 0, zIndex: 200,
+            background: 'rgba(0,0,0,0.75)',
+            display: 'flex', alignItems: 'flex-start', justifyContent: 'center',
+            padding: '24px 16px', overflowY: 'auto',
+          }}
+        >
+          <div style={{
+            background: 'var(--clr-bg)', borderRadius: 16, width: '100%', maxWidth: 660,
+            padding: '28px 24px', position: 'relative', boxShadow: '0 8px 40px rgba(0,0,0,0.5)',
+          }}>
+            <button onClick={() => setPmOpen(false)} style={{
+              position: 'absolute', top: 14, right: 16, background: 'none', border: 'none',
+              fontSize: '1.4rem', cursor: 'pointer', color: 'var(--clr-text-soft)', lineHeight: 1,
+            }}>✕</button>
+ 
+            <h2 style={{ margin: '0 0 4px', fontSize: '1.2rem' }}>🗺 Learn by Path</h2>
+            <p style={{ margin: '0 0 20px', fontSize: '0.83rem', color: 'var(--clr-text-soft)' }}>
+              Pick a goal topic — we'll build your path below the search bar on the home screen.
+            </p>
+ 
+            {pmStatus !== 'ready' ? (
+              <div style={{ padding: '20px 0', color: 'var(--clr-text-soft)', fontFamily: 'var(--font-body)', fontSize: '0.9rem' }}>
+                {pmStatus === 'error' ? "Couldn't load topic data. Please refresh and try again." : 'Loading topics…'}
+              </div>
+            ) : (
+              <PmGoalPicker
+                goalIds={pmGoalIds}
+                onSetGoal={ids => setPmGoalIds(ids)}
+                onClear={() => { setPmGoalIds([]) }}
+              />
+            )}
+ 
+            {pmStatus === 'ready' && pmPath.length > 0 && (
+              <>
+                <PmStatsBar path={pmPath} known={pmKnown} />
+ 
+                <p style={{ fontSize: '0.78rem', color: 'var(--clr-text-soft)', margin: '16px 0 10px' }}>
+                  Click a chip to mark it as already known — it'll skip ahead on your path.
+                </p>
+                <PmSnakePath path={pmPath} known={pmKnown} goalIds={pmGoalIds} onToggleNode={pmToggleKnown} />
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 20 }}>
+                  {pmPath.map((id, i) => {
+                    const node = pmNodeById[id]
+                    const isDone = pmKnown.has(id)
+                    const isGoal = pmGoalIds.includes(id)
+                    return (
+                      <button
+                        key={id}
+                        onClick={() => pmToggleKnown(id)}
+                        title={isDone ? 'Click to unmark' : 'Click to mark as already known'}
+                        style={{
+                          background: isDone ? '#5cb87a' : isGoal ? 'var(--clr-accent, #e8864a)' : 'var(--clr-card)',
+                          border: '1.5px solid var(--clr-border)',
+                          borderRadius: 20,
+                          color: isDone || isGoal ? '#fff' : 'var(--clr-text)',
+                          cursor: 'pointer',
+                          fontSize: '0.78rem',
+                          fontFamily: 'var(--font-body)',
+                          fontWeight: 600,
+                          padding: '4px 12px',
+                          display: 'flex', alignItems: 'center', gap: 5,
+                          transition: 'background 0.15s',
+                        }}
+                      >
+                        <span style={{ opacity: 0.6, fontSize: '0.7rem' }}>{i + 1}.</span>
+                        {isDone ? '✓ ' : ''}{node.label}
+                        {isGoal ? ' ★' : ''}
+                      </button>
+                    )
+                  })}
+                </div>
+ 
+                <button
+                  onClick={() => setPmOpen(false)}
+                  style={{
+                    width: '100%', padding: '11px',
+                    background: 'var(--clr-accent, #e8864a)', border: 'none', borderRadius: 10,
+                    color: '#fff', fontWeight: 700, fontSize: '0.95rem', cursor: 'pointer',
+                    fontFamily: 'var(--font-body)',
+                  }}
+                >
+                  Show my path →
+                </button>
+                {pmKnown.size > 0 && (
+                  <button
+                    onClick={() => {
+                      if (window.confirm('Reset all progress? This will clear all nodes you marked as known.')) {
+                        setPmKnown(new Set())
+                      }
+                    }}
+                    style={{
+                      width: '100%', marginTop: 8, padding: '8px',
+                      background: 'none',
+                      border: '1px solid var(--clr-border)',
+                      borderRadius: 10,
+                      color: 'var(--clr-text-soft)',
+                      fontSize: '0.78rem', cursor: 'pointer',
+                      fontFamily: 'var(--font-body)',
+                    }}
+                  >
+                    🔄 Reset all progress ({pmKnown.size} known nodes)
+                  </button>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+      )}
+ 
+      {/* ── Congrats modal ── */}
+      {pmShowCongrats && (
+        <PmCongratsModal
+          goalIds={pmGoalIds}
+          path={pmPath}
+          onClose={() => setPmShowCongrats(false)}
+          onNewGoal={() => {
+            setPmShowCongrats(false)
+            setPmOpen(true)
+          }}
+          onSetGoal={(ids) => {
+            setPmGoalIds(ids)
+            setPmShowCongrats(false)
+          }}
+        />
+      )}
     </>
   )
 }
