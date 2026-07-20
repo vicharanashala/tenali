@@ -114,6 +114,8 @@ export default defineConfig({
       '/bounds-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
       '/sdt-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
       '/variation-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      // Curiosity Mode API (experimentation / what-if)
+      '/curiosity-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
       '/hcflcm-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
       '/profitloss-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
       '/rounding-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
