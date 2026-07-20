@@ -402,9 +402,87 @@
   overflow-x: auto;
 }
 
+/* ── Road License (earned Tenali start level) ── */
+.cj-stop-done-actions { display: flex; flex-direction: column; gap: 6px; }
+.cj-stop-action.license { background: var(--clr-surface); color: var(--clr-text); border: 1px solid var(--clr-border); }
+.cj-stop-action.license:hover { border-color: var(--clr-accent); filter: none; }
+
+.cj-license {
+  margin: 14px auto;
+  max-width: 560px;
+  text-align: left;
+  border: 1px solid var(--clr-accent);
+  border-radius: var(--radius-sm);
+  background: var(--clr-accent-soft);
+  padding: 12px 16px;
+}
+.cj-license-head { font-weight: 700; margin-bottom: 8px; }
+.cj-license-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 4px 0;
+}
+.cj-license-text { line-height: 1.4; }
+.cj-license-go {
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--clr-accent);
+  color: var(--clr-on-accent, #fff);
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.cj-license-go:hover { filter: brightness(1.08); }
+.cj-license-note { margin: 8px 0 0; font-size: 0.82rem; color: var(--clr-text-soft); font-style: italic; }
+
+/* ── "Now can you solve…" challenge set ── */
+.cj-challenge { margin: 0 auto 14px; max-width: 560px; text-align: left; }
+.cj-challenge-toggle {
+  width: 100%;
+  border: 1px dashed var(--clr-border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--clr-text);
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+}
+.cj-challenge-toggle:hover { border-color: var(--clr-accent); }
+.cj-challenge-sub { font-size: 0.85rem; color: var(--clr-text-soft); margin: 10px 2px 6px; line-height: 1.45; }
+.cj-challenge-list { margin: 0; padding-left: 22px; }
+.cj-challenge-item { margin-bottom: 14px; }
+.cj-challenge-prompt { margin: 0 0 6px; line-height: 1.5; }
+.cj-challenge-reveal {
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  background: var(--clr-surface);
+  color: var(--clr-text-soft);
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.cj-challenge-reveal:hover { color: var(--clr-text); border-color: var(--clr-accent); }
+.cj-challenge-solution {
+  margin: 6px 0 0;
+  padding: 8px 12px;
+  border-left: 3px solid var(--clr-accent);
+  background: var(--clr-accent-soft);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
 @media (max-width: 520px) {
   .cj-stop { flex-wrap: wrap; }
   .cj-stop-action { margin-left: auto; }
+  .cj-stop-done-actions { margin-left: auto; }
   .cj-input-label { min-width: 100%; }
   .cj-vis-barlabel { flex-basis: 100%; text-align: left; }
+  .cj-license-row { flex-direction: column; align-items: flex-start; }
 }

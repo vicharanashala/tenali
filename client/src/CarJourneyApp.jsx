@@ -14,10 +14,12 @@
  * with fresh values every time; answers are computed and checked locally.
  * No server changes. Progress persists in localStorage.
  *
- * Rendered as a Tenali module via the modeMap registry; receives `onBack`.
+ * Rendered as a Tenali module via the modeMap registry; receives `onBack`
+ * (and `setMode`, used by the Road License to open a Tenali card).
  */
 import { useState } from 'react';
 import './CarJourneyApp.css';
+import { CjLicense, CjChallengeSet } from './CjChallenge';
 
 /* ── Small helpers (cj-prefixed to stay collision-free) ────────────────── */
 
@@ -1654,7 +1656,7 @@ function cjNewQuestion(stop, band) {
 
 /* ── Component ─────────────────────────────────────────────────────────── */
 
-export default function CarJourneyApp({ onBack }) {
+export default function CarJourneyApp({ onBack, setMode }) {
   const [screen, setScreen] = useState('roadmap'); // roadmap | bridge | practice | check | review | stagedone | finale
   const [stopIdx, setStopIdx] = useState(0);
   const [progress, setProgress] = useState(cjLoadProgress);
@@ -1673,6 +1675,7 @@ export default function CarJourneyApp({ onBack }) {
   const [cardIdx, setCardIdx] = useState(null); // null → first uncompleted stop
   const [journeyOpen, setJourneyOpen] = useState(false); // read-only list of all 16 mysteries
   const [showVis, setShowVis] = useState(false); // Visualize panel toggle (persists across questions)
+  const [challengeIdx, setChallengeIdx] = useState(null); // stop index whose license+challenges overlay is open (from a done card)
 
   const stop = CJ_STOPS[stopIdx];
   const doneCount = CJ_STOPS.reduce((n, _, i) => n + (cjStopDone(progress, i) ? 1 : 0), 0);
@@ -1836,7 +1839,10 @@ export default function CarJourneyApp({ onBack }) {
                 <span className="cj-stop-meta">Ages {s.age} · {s.skill}</span>
               </span>
               {done ? (
-                <button className="cj-stop-action done" onClick={() => startStop(shownIdx)}>✓ Replay</button>
+                <span className="cj-stop-done-actions">
+                  <button className="cj-stop-action done" onClick={() => startStop(shownIdx)}>✓ Replay</button>
+                  <button className="cj-stop-action license" onClick={() => setChallengeIdx(shownIdx)}>🪪 License</button>
+                </span>
               ) : (
                 <button className="cj-stop-action" onClick={() => startStop(shownIdx)}>Drive ▶</button>
               )}
@@ -1856,6 +1862,18 @@ export default function CarJourneyApp({ onBack }) {
         <div className="cj-actions">
           <button className="cj-secondary" onClick={() => setJourneyOpen(true)}>🗺️ The journey — all 16 mysteries</button>
         </div>
+        {challengeIdx !== null && (
+          <div className="cj-journey-overlay" onClick={() => setChallengeIdx(null)}>
+            <div className="cj-journey-panel" onClick={(e) => e.stopPropagation()}>
+              <div className="cj-journey-head">
+                <h3 className="cj-journey-title">{CJ_STOPS[challengeIdx].emoji} Stop {challengeIdx + 1}: {CJ_STOPS[challengeIdx].title}</h3>
+                <button className="cj-journey-close" onClick={() => setChallengeIdx(null)}>✕</button>
+              </div>
+              <CjLicense stopKey={CJ_STOPS[challengeIdx].key} onGo={setMode ? (m) => setMode(m) : null} />
+              <CjChallengeSet stopKey={CJ_STOPS[challengeIdx].key} />
+            </div>
+          </div>
+        )}
         {journeyOpen && (
           <div className="cj-journey-overlay" onClick={() => setJourneyOpen(false)}>
             <div className="cj-journey-panel" onClick={(e) => e.stopPropagation()}>
@@ -2024,6 +2042,8 @@ export default function CarJourneyApp({ onBack }) {
           <p className="cj-stagedone-q">{stop.carQuestion}</p>
           <p className="cj-finale-text">{stop.finale}</p>
           <p className="cj-role">🏆 {stop.role}</p>
+          <CjLicense stopKey={stop.key} onGo={setMode ? (m) => setMode(m) : null} />
+          <CjChallengeSet stopKey={stop.key} />
           <div className="cj-actions">
             {isLast ? (
               <button className="cj-primary" onClick={() => setScreen('finale')}>🏁 Finish the journey</button>
