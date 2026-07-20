@@ -45140,31 +45140,6 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
  
         {/* Top-right cluster: PathMap quick-access button (dashboard only) + hamburger menu */}
         <div style={{ position: 'absolute', top: '8px', right: '0', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          {!isGoalSelection && (
-            <button
-              onClick={() => setPmOpen(true)}
-              disabled={pmStatus !== 'ready'}
-              title={pmStatus === 'ready' ? 'Learn by prerequisite path' : 'Loading topic data…'}
-              style={{
-                background: pmGoalIds.length > 0 ? 'var(--clr-accent, #e8864a)' : 'var(--clr-card)',
-                border: '1.5px solid var(--clr-border)',
-                borderRadius: '20px',
-                color: pmGoalIds.length > 0 ? '#fff' : 'var(--clr-text)',
-                cursor: pmStatus === 'ready' ? 'pointer' : 'not-allowed',
-                opacity: pmStatus === 'ready' ? 1 : 0.6,
-                fontSize: '0.75rem',
-                fontFamily: 'var(--font-body)',
-                fontWeight: 600,
-                padding: '5px 12px',
-                whiteSpace: 'nowrap',
-                transition: 'background 0.2s',
-              }}
-            >
-              {pmStatus !== 'ready'
-                ? '📍 Loading…'
-                : pmGoalIds.length > 0 ? `📍 Path (${pmStepsLeft} left)` : '📍 Level Map'}
-            </button>
-          )}
  
           <div ref={menuRef} style={{ position: 'relative' }}>
             <button onClick={() => setMenuOpen(o => !o)} style={{
@@ -45190,6 +45165,21 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
                 onMouseLeave={e => e.target.style.background = 'none'}>
                 <strong style={{ color: 'var(--clr-accent)' }}>ℹ️ About Tenali</strong>
               </button>
+                <button onClick={() => { setMenuOpen(false); setPmOpen(true) }} disabled={pmStatus !== 'ready'} style={{
+                  display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
+                  background: 'none', border: 'none', cursor: pmStatus === 'ready' ? 'pointer' : 'not-allowed',
+                  opacity: pmStatus === 'ready' ? 1 : 0.6,
+                  color: 'var(--clr-text)', fontFamily: 'var(--font-body)', fontSize: '0.95rem',
+                  transition: 'background var(--transition)', borderBottom: '1px solid var(--clr-border)'
+                }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
+                  onMouseLeave={e => e.target.style.background = 'none'}>
+                  <strong style={{ color: 'var(--clr-accent)' }}>
+                    {pmStatus !== 'ready' ? '📍 Loading…' : pmGoalIds.length > 0 ? `📍 Path (${pmStepsLeft} left)` : '📍 Level Map'}
+                  </strong>
+                  <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>
+                    Learn by prerequisite path
+                  </span>
+  </button>
               {[mathLabEntry].map(app => (
                 <button key={app.key} onClick={() => { setMenuOpen(false); onSelect(app.key) }} style={{
                   display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
