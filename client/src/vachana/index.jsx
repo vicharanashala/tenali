@@ -322,7 +322,7 @@ export default function Vachana({ onBack }) {
         /* ── Active Exercise Workspace ── */
         <div style={{ background: 'var(--clr-card, #1e1e24)', border: '1px solid var(--clr-border)', borderRadius: '16px', padding: '24px', boxShadow: 'var(--shadow-card)', width: '100%', boxSizing: 'border-box' }}>
           {/* Active Tab Header (Minimalist) */}
-          <div style={{ marginBottom: '20px', display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
+          <div style={{ marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <button
               onClick={goBack}
               style={{
@@ -333,6 +333,7 @@ export default function Vachana({ onBack }) {
             >
               ← All Modules
             </button>
+            <div id="vachana-header-right" />
           </div>
 
           {/* Render the active exercise */}

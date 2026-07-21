@@ -75,8 +75,15 @@ import VisualMathLabRedux, {
 import CoordinateGrid from './components/CoordinateGrid';
 import LanguageDashboard from './language/LanguageDashboard'
 import { VOCAB_CORPUS } from './vocabCorpus'
-import PercentExplanationApp from './PercentExplanationApp'
-import { playSound } from './audioContext'
+import EquationSandboxApp from './lib/EquationSandboxApp.jsx';
+import QFormulaConceptApp from './lib/concept/QFormulaConceptApp.jsx';
+import SimulConceptApp from './lib/simul-concept/SimulConceptApp.jsx';
+import DiagnosticQuiz from './lib/DiagnosticQuiz.jsx';
+import { useI18n } from './lib/i18n.jsx';
+import CuriosityApp from './Curiosity.jsx';
+import PercentExplanationApp from './PercentExplanationApp';
+import { playSound } from './audioContext';
+import GeometryApp from './GeometryApp';
 
 // API base URL from environment variables (Vite)
 const API = import.meta.env.VITE_API_BASE_URL || '';
@@ -164,7 +171,7 @@ function useAuth() {
 
 // Hamburger button (top-right) + dropdown + login modal.
 // Renders globally — sits next to the .theme-toggle.
-function AuthMenu() {
+function AuthMenu({ t = (s) => s }) {
   const { user, login, logout } = useAuth()
   const [open, setOpen] = useState(false)
   const [showLogin, setShowLogin] = useState(false)
@@ -172,6 +179,21 @@ function AuthMenu() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
+
+  // Hide hamburger menu in visual learning to prevent navigation away
+  const params = new URLSearchParams(window.location.search)
+  const mode = params.get('mode')
+  const pathname = window.location.pathname.replace(/\/$/, '').toLowerCase()
+  const isVisualLearning =
+    pathname === '/geocraft' ||
+    pathname === '/visual-math-lab-redux' ||
+    pathname === '/mensuration-lab' ||
+    pathname === '/math-lab' ||
+    mode === 'math-lab' ||
+    mode === 'visual-math-lab-redux' ||
+    mode === 'mensuration-lab' ||
+    mode === 'addition' ||
+    mode === 'geocraft'
 
   useEffect(() => {
     const onKey = e => { if (e.key === 'Escape') { setOpen(false); setShowLogin(false); setError('') } }
@@ -186,10 +208,18 @@ function AuthMenu() {
       await login(username.trim(), password)
       setShowLogin(false); setOpen(false)
       setUsername(''); setPassword('')
-      window.location.href = '/tenth'
+      if (isVisualLearning) {
+        window.location.reload()
+      } else {
+        window.location.href = '/tenth'
+      }
     } catch (err) {
       setError(err.message || 'login failed')
     } finally { setBusy(false) }
+  }
+
+  if (isVisualLearning) {
+    return null
   }
 
   return (
@@ -234,26 +264,30 @@ function AuthMenu() {
                   Signed in as <strong>{user.username}</strong>
                 </div>
                 <hr style={{ border: 'none', borderTop: '1px solid var(--clr-border, #444)', margin: '4px 0' }} />
-                <button
-                  type="button"
-                  onClick={() => { window.location.href = '/'; setOpen(false) }}
-                  style={{ width: '100%', textAlign: 'left', padding: '8px 12px', borderRadius: 6, background: 'transparent', border: 'none', color: 'var(--clr-text)', cursor: 'pointer', fontSize: '0.95rem' }}
-                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)' }}
-                  onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
-                >
-                  Puzzles
-                </button>
+                {!isVisualLearning && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => { window.location.href = '/'; setOpen(false) }}
+                      style={{ width: '100%', textAlign: 'left', padding: '8px 12px', borderRadius: 6, background: 'transparent', border: 'none', color: 'var(--clr-text)', cursor: 'pointer', fontSize: '0.95rem' }}
+                      onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)' }}
+                      onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
+                    >
+                      Puzzles
+                    </button>
 
-                <button
-                  type="button"
-                  onClick={() => { window.location.href = '/profile'; setOpen(false) }}
-                  style={{ width: '100%', textAlign: 'left', padding: '8px 12px', borderRadius: 6, background: 'transparent', border: 'none', color: 'var(--clr-text)', cursor: 'pointer', fontSize: '0.95rem' }}
-                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)' }}
-                  onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
-                >
-                  Profile
-                </button>
-                <hr style={{ border: 'none', borderTop: '1px solid var(--clr-border, #444)', margin: '4px 0' }} />
+                    <button
+                      type="button"
+                      onClick={() => { window.location.href = '/profile'; setOpen(false) }}
+                      style={{ width: '100%', textAlign: 'left', padding: '8px 12px', borderRadius: 6, background: 'transparent', border: 'none', color: 'var(--clr-text)', cursor: 'pointer', fontSize: '0.95rem' }}
+                      onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)' }}
+                      onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
+                    >
+                      Profile
+                    </button>
+                    <hr style={{ border: 'none', borderTop: '1px solid var(--clr-border, #444)', margin: '4px 0' }} />
+                  </>
+                )}
                 <button
                   type="button"
                   onClick={() => { logout(); setOpen(false) }}
@@ -915,7 +949,11 @@ function renderFeedback(feedback, isCorrect) {
   if (!feedback) return null
   const isSolve = isCorrect === false && feedback.startsWith('Solution:')
   if (!isSolve) {
-    return <div className={`feedback ${isCorrect ? 'correct' : 'wrong'}`}>{feedback}</div>
+    return (
+      <div className={`feedback ${isCorrect ? 'correct' : 'wrong'}`} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+        <span>{feedback}</span>
+      </div>
+    )
   }
   // Parse solve feedback: "Solution: ANSWER\nExplanation..."
   const lines = feedback.split('\n')
@@ -937,7 +975,9 @@ function renderFeedback(feedback, isCorrect) {
 
   return (
     <div className="feedback solve">
-      <div className="solve-answer-badge">{answerLine}</div>
+      <div className="solve-answer-badge" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+        <span>{answerLine}</span>
+      </div>
       {steps.length > 0 && (
         <div className="solve-timeline">
           {steps.map((step, i) => (
@@ -946,7 +986,9 @@ function renderFeedback(feedback, isCorrect) {
                 <div className="solve-step-dot" />
                 {i < steps.length - 1 && <div className="solve-step-line" />}
               </div>
-              <div className="solve-step-content">{step}</div>
+              <div className="solve-step-content" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px', width: '100%' }}>
+                <span>{step}</span>
+              </div>
             </div>
           ))}
         </div>
@@ -42230,6 +42272,9 @@ function PercentPage(props) {
 }
 
 function App() {
+  const [diagnosticState, setDiagnosticState] = useState({});
+  const { t } = useI18n();
+
   // Currently selected quiz mode (null = home menu, or key like 'gk', 'addition', etc.)
   const [mode, setMode] = useState(() => {
     try {
@@ -42794,6 +42839,22 @@ function App() {
           {theme === 'dark' ? '☀️' : '🌙'}
         </button>
         <AuthGate><TenthApp onBack={() => { window.location.href = '/' }} /></AuthGate>
+      </>
+    )
+  }
+
+  // Route: /geocraft → Kids Geometry Workspace
+  if (pathname === '/geocraft') {
+    return (
+      <>
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <div className="app-shell">
+          <div className="card">
+            <GeometryApp onBack={() => { window.location.href = '/' }} />
+          </div>
+        </div>
       </>
     )
   }
@@ -43895,6 +43956,7 @@ function App() {
     'visual-math-lab-redux': VisualMathLabRedux,
     'mensuration-lab': MensurationLabApp,
     'basic-arith-lab': BasicArithmeticLabApp,
+    geocraft: GeometryApp,
 
     'comic-addition': ComicAdditionApp,
     gk: GKApp,                    // General Knowledge
@@ -43976,6 +44038,7 @@ function App() {
     randommix: RandomMixApp,       // Random Mix (adaptive)
     custom: CustomApp,             // Custom lesson builder
     gym: GymApp,                   // Unified adaptive Gym — bundles all 7 below
+    curiosity: CuriosityApp,       // Curiosity Mode — experiment with "what if" variations
     guess: GuessNumberApp,         // Binary magic — guess a number 0–31
     detective: EnhancedMathDetectiveApp, // Math Detective Agency — story-based mystery cases
     gymdecimals: GymDecimalsApp,   // Gym Decimals — signed decimal multiplication (MCQ)
@@ -44127,7 +44190,7 @@ function App() {
         {theme === 'dark' ? '☀️' : '🌙'}
       </button>
       {mode === 'vachana' ? (
-        <Vachana onBack={() => setMode(null)} />
+        <Vachana onBack={() => setMode(null)} initialAdaptScore={diagnosticState[mode] || 0} />
       ) : (
         <div className="card">
           {renderContent()}
@@ -44951,7 +45014,13 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
   ]
   // Visual Learning Universe lives only in the hamburger menu
   const mathLabEntry = { key: 'math-lab', name: '🔬 Visual Learning Universe', subtitle: 'Visual, Mensuration & Addition labs', color: 'orange' }
- 
+  const geocraftEntry = { key: 'geocraft', name: '📐 GeoCraft', subtitle: 'Interactive Geometry Lab', color: 'featured', isRedirect: true, path: '/geocraft' }
+
+  const hamburgerApps = [
+    ...featuredApps,
+    { key: 'curiosity', name: 'Curiosity Mode', subtitle: 'Explore "What if" variations', color: 'pink' },
+  ]
+
   // All regular quiz apps sorted alphabetically by name
   const regularApps = [
     { key: 'detective', name: '🔍 Detective Agency', subtitle: 'Solve math mysteries and crack cases!', color: 'indigo' },
@@ -45043,8 +45112,9 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
   ]
  
   // Combined list for search filtering
-  const allApps = [...featuredApps, ...regularApps]
- 
+  const allApps = [...hamburgerApps, ...regularApps]
+
+  // Hamburger menu open state
   const menuRef = useRef(null)
   useEffect(() => {
     if (!menuOpen) return
@@ -45066,7 +45136,9 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
   const filteredRegular = isSearching ? regularApps.filter(matchFilter) : regularApps
  
   const displayGridApps = isGoalSelection ? filteredRegular : [...filteredRegular]
- 
+  const filteredHamburgerApps = isSearching ? hamburgerApps.filter(matchFilter) : hamburgerApps
+
+  // Grid layout tracking (for responsive display)
   const gridRef = useRef(null)
   const [cols, setCols] = useState(4)
   useEffect(() => {
@@ -45137,99 +45209,103 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
             </p>
           </div>
         </div>
- 
-        {/* Top-right cluster: PathMap quick-access button (dashboard only) + hamburger menu */}
-        <div style={{ position: 'absolute', top: '8px', right: '0', display: 'flex', alignItems: 'center', gap: '8px' }}>
- 
-          <div ref={menuRef} style={{ position: 'relative' }}>
-            <button onClick={() => setMenuOpen(o => !o)} style={{
-              background: 'none', border: 'none', cursor: 'pointer', padding: '8px',
-              display: 'flex', flexDirection: 'column', gap: '4px', alignItems: 'center'
-            }} aria-label="Menu">
-              <span style={{ display: 'block', width: '22px', height: '2.5px', background: 'var(--clr-text)', borderRadius: '2px', transition: 'transform 0.2s, opacity 0.2s', transform: menuOpen ? 'rotate(45deg) translate(4.5px, 4.5px)' : 'none' }} />
-              <span style={{ display: 'block', width: '22px', height: '2.5px', background: 'var(--clr-text)', borderRadius: '2px', transition: 'opacity 0.2s', opacity: menuOpen ? 0 : 1 }} />
-              <span style={{ display: 'block', width: '22px', height: '2.5px', background: 'var(--clr-text)', borderRadius: '2px', transition: 'transform 0.2s, opacity 0.2s', transform: menuOpen ? 'rotate(-45deg) translate(4.5px, -4.5px)' : 'none' }} />
+        {/* Hamburger menu — top right */}
+        <div ref={menuRef} style={{ position: 'absolute', top: '8px', right: '0' }}>
+          <button onClick={() => setMenuOpen(o => !o)} style={{
+            background: 'none', border: 'none', cursor: 'pointer', padding: '8px',
+            display: 'flex', flexDirection: 'column', gap: '4px', alignItems: 'center'
+          }} aria-label="Menu">
+            <span style={{ display: 'block', width: '22px', height: '2.5px', background: 'var(--clr-text)', borderRadius: '2px', transition: 'transform 0.2s, opacity 0.2s', transform: menuOpen ? 'rotate(45deg) translate(4.5px, 4.5px)' : 'none' }} />
+            <span style={{ display: 'block', width: '22px', height: '2.5px', background: 'var(--clr-text)', borderRadius: '2px', transition: 'opacity 0.2s', opacity: menuOpen ? 0 : 1 }} />
+            <span style={{ display: 'block', width: '22px', height: '2.5px', background: 'var(--clr-text)', borderRadius: '2px', transition: 'transform 0.2s, opacity 0.2s', transform: menuOpen ? 'rotate(-45deg) translate(4.5px, -4.5px)' : 'none' }} />
+          </button>
+          {menuOpen && <div style={{
+            position: 'absolute', top: '100%', right: 0, zIndex: 50,
+            background: 'var(--clr-card)', border: '1.5px solid var(--clr-border)',
+            borderRadius: 'var(--radius-sm)', boxShadow: 'var(--shadow-card)',
+            padding: '6px 0', minWidth: '200px', overflow: 'hidden'
+          }}>
+            <button onClick={() => { setMenuOpen(false); setShowAbout(true) }} style={{
+              display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
+              background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
+              fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)',
+              borderBottom: '1px solid var(--clr-border)'
+            }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
+              onMouseLeave={e => e.target.style.background = 'none'}>
+              <strong style={{ color: 'var(--clr-accent)' }}>ℹ️ About Tenali</strong>
             </button>
-            {menuOpen && <div style={{
-              position: 'absolute', top: '100%', right: 0, zIndex: 50,
-              background: 'var(--clr-card)', border: '1.5px solid var(--clr-border)',
-              borderRadius: 'var(--radius-sm)', boxShadow: 'var(--shadow-card)',
-              padding: '6px 0', minWidth: '200px', overflow: 'hidden'
-            }}>
-              <button onClick={() => { setMenuOpen(false); setShowAbout(true) }} style={{
+                  <button onClick={() => { setMenuOpen(false); setPmOpen(true) }} disabled={pmStatus !== 'ready'} style={{
+                        display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
+                        background: 'none', border: 'none', cursor: pmStatus === 'ready' ? 'pointer' : 'not-allowed',
+                        opacity: pmStatus === 'ready' ? 1 : 0.6,
+                        color: 'var(--clr-text)', fontFamily: 'var(--font-body)', fontSize: '0.95rem',
+                        transition: 'background var(--transition)', borderBottom: '1px solid var(--clr-border)'
+                      }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
+                        onMouseLeave={e => e.target.style.background = 'none'}>
+                        <strong style={{ color: 'var(--clr-accent)' }}>
+                          {pmStatus !== 'ready' ? '📍 Loading…' : pmGoalIds.length > 0 ? `📍 Path (${pmStepsLeft} left)` : '📍 Level Map'}
+                        </strong>
+                        <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>
+                          Learn by prerequisite path
+                        </span>
+        </button>
+            {/* Visual Learning Universe & GeoCraft pinned at top of hamburger menu */}
+            {[mathLabEntry, geocraftEntry].map(app => (
+              <button key={app.key} onClick={() => {
+                setMenuOpen(false);
+                if (app.isRedirect) {
+                  window.location.href = app.path;
+                } else {
+                  onSelect(app.key);
+                }
+              }} style={{
                 display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
                 background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
-                fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)',
-                borderBottom: '1px solid var(--clr-border)'
+                fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)'
               }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
                 onMouseLeave={e => e.target.style.background = 'none'}>
-                <strong style={{ color: 'var(--clr-accent)' }}>ℹ️ About Tenali</strong>
+                <strong style={{ color: 'var(--clr-accent)' }}>{app.name}</strong>
+                <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>{app.subtitle}</span>
               </button>
-                <button onClick={() => { setMenuOpen(false); setPmOpen(true) }} disabled={pmStatus !== 'ready'} style={{
-                  display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
-                  background: 'none', border: 'none', cursor: pmStatus === 'ready' ? 'pointer' : 'not-allowed',
-                  opacity: pmStatus === 'ready' ? 1 : 0.6,
-                  color: 'var(--clr-text)', fontFamily: 'var(--font-body)', fontSize: '0.95rem',
-                  transition: 'background var(--transition)', borderBottom: '1px solid var(--clr-border)'
-                }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
-                  onMouseLeave={e => e.target.style.background = 'none'}>
-                  <strong style={{ color: 'var(--clr-accent)' }}>
-                    {pmStatus !== 'ready' ? '📍 Loading…' : pmGoalIds.length > 0 ? `📍 Path (${pmStepsLeft} left)` : '📍 Level Map'}
-                  </strong>
-                  <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>
-                    Learn by prerequisite path
-                  </span>
-  </button>
-              {[mathLabEntry].map(app => (
-                <button key={app.key} onClick={() => { setMenuOpen(false); onSelect(app.key) }} style={{
-                  display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
-                  background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
-                  fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)'
-                }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
-                  onMouseLeave={e => e.target.style.background = 'none'}>
-                  <strong style={{ color: 'var(--clr-accent)' }}>{app.name}</strong>
-                  <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>{app.subtitle}</span>
-                </button>
-              ))}
-              <div style={{ height: '1px', background: 'var(--clr-border)', margin: '4px 0' }} />
- 
-              <button onClick={() => { setMenuOpen(false); onSelect('goalpractice') }} style={{
+            ))}
+            <div style={{ height: '1px', background: 'var(--clr-border)', margin: '4px 0' }} />
+
+            <button onClick={() => { setMenuOpen(false); onSelect('goalpractice') }} style={{
+              display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
+              background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
+              fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)'
+            }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
+               onMouseLeave={e => e.target.style.background = 'none'}>
+              <strong style={{ color: 'var(--clr-accent)' }}>🎯 Goal Practice</strong>
+              <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>Practice with targets & limits</span>
+            </button>
+
+            {filteredHamburgerApps.map(app => (
+              <button key={app.key} onClick={() => { setMenuOpen(false); onSelect(app.key) }} style={{
                 display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
                 background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
                 fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)'
               }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
-                 onMouseLeave={e => e.target.style.background = 'none'}>
-                <strong style={{ color: 'var(--clr-accent)' }}>🎯 Goal Practice</strong>
-                <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>Practice with targets & limits</span>
+                onMouseLeave={e => e.target.style.background = 'none'}>
+                <strong style={{ color: 'var(--clr-accent)' }}>{app.name}</strong>
+                <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>{app.subtitle}</span>
               </button>
- 
-              {featuredApps.map(app => (
-                <button key={app.key} onClick={() => { setMenuOpen(false); onSelect(app.key) }} style={{
-                  display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
-                  background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
-                  fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)'
-                }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
-                  onMouseLeave={e => e.target.style.background = 'none'}>
-                  <strong style={{ color: 'var(--clr-accent)' }}>{app.name}</strong>
-                  <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>{app.subtitle}</span>
-                </button>
-              ))}
- 
-              <div style={{ height: '1px', background: 'var(--clr-border)', margin: '4px 0' }} />
- 
-              <button onClick={() => { setMenuOpen(false); window.location.href = window.location.pathname.replace(/\/$/, '') + '/language'; }} style={{
-                display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
-                background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
-                fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)'
-              }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
-                 onMouseLeave={e => e.target.style.background = 'none'}>
-                <strong style={{ color: 'var(--clr-accent)' }}>Language Puzzles</strong>
-                <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>Fill in the blanks to create new words</span>
-              </button>
+            ))}
+
+            <div style={{ height: '1px', background: 'var(--clr-border)', margin: '4px 0' }} />
+
+            <button onClick={() => { setMenuOpen(false); window.location.href = window.location.pathname.replace(/\/$/, '') + '/language'; }} style={{
+              display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
+              background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
+              fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)'
+            }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
+               onMouseLeave={e => e.target.style.background = 'none'}>
+              <strong style={{ color: 'var(--clr-accent)' }}>Language Puzzles</strong>
+              <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>Fill in the blanks to create new words</span>
+            </button>
             </div>}
           </div>
         </div>
-      </div>
  
       {showAbout && (
         <>
@@ -49905,6 +49981,9 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
     setRevealed(true)
   }
 
+  advanceFnRef.current = handleSubmitOrNext
+  useAutoAdvance(revealed, advanceFnRef, isCorrect)
+
   useEffect(() => {
     if (!revealed || isCorrect) return
     const h = (e) => { if (e.key === 'Enter') { e.preventDefault(); handleSubmitOrNext() } }
@@ -49932,8 +50011,8 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
           <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '48px', color: '#F4F1ED', margin: '0 0 12px', lineHeight: 1.1 }}>
             Addition
           </h1>
-          <p style={{ color: '#988D84', fontSize: '0.9rem', margin: '0 0 24px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
-            Practice addition!
+          <p style={{ color: '#988D84', fontSize: '0.9rem', margin: '0 0 24px', fontFamily: 'Inter, sans-serif', fontWeight: 400, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+            <span>Practice addition!</span>
           </p>
           <KeyTerms topicKey="addition" />
 
@@ -50027,9 +50106,11 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
         {/* Standard Mode View */}
         {additionMode === 'standard' && question && (
           <>
-            <div className="question-box">{loading || !question ? 'Loading question…' : `${question.prompt} = ?`}</div>
+            <div className="question-box" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+              <span>{loading || !question ? 'Loading question…' : `${question.prompt} = ?`}</span>
+            </div>
             <input className="answer-input" type="text" value={answer} onChange={(e) => { if (!revealed) { const v = e.target.value; if (v === '' || v === '-' || /^-?\d+$/.test(v)) setAnswer(v) } }} disabled={revealed} placeholder="Type your answer" />
-            <NumPad value={answer} onChange={(v) => !revealed && setAnswer(v)} disabled={revealed} />
+            {!revealed && <NumPad value={answer} onChange={(v) => !revealed && setAnswer(v)} disabled={revealed} />}
           </>
         )}
 
@@ -50194,7 +50275,6 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
             </div>
           )
         })()}
-
         {renderFeedback(feedback, isCorrect)}
 
         {/* Action Controls */}
@@ -51352,6 +51432,9 @@ const fetchQuestion = async () => {
     setRevealed(true)
   }
 
+  advanceFnRef.current = handleSubmitOrNext
+  useAutoAdvance(revealed, advanceFnRef, isCorrect)
+
   useEffect(() => {
     if (!revealed || isCorrect) return
     const h = (e) => { if (e.key === 'Enter') { e.preventDefault(); handleSubmitOrNext() } }
@@ -51365,7 +51448,9 @@ const fetchQuestion = async () => {
   return (
     <QuizLayout title="Origin" subtitle="Add, subtract, multiply & divide positive & negative numbers" onBack={onBack} timer={started && !finished ? timer : null}>
       {!started && !finished && <div className="welcome-box">
-        <p className="welcome-text">Practice basic arithmetic!</p>
+        <p className="welcome-text" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+          <span>Practice basic arithmetic!</span>
+        </p>
         <KeyTerms topicKey="basic-arithmetic" />
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
           {['easy', 'medium', 'hard', 'extrahard'].map(d => (
@@ -51433,7 +51518,9 @@ const fetchQuestion = async () => {
           {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
         </div>
         {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
-        <div className="question-box">{loading || !question ? 'Loading question…' : `${question.prompt} = ?`}</div>
+        <div className="question-box" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+          <span>{loading || !question ? 'Loading question…' : `${question.prompt} = ?`}</span>
+        </div>
         <input className="answer-input" type="text" value={answer} onChange={e => { if (!revealed) { const v = e.target.value; if (v === '' || v === '-' || /^-?\d+$/.test(v)) setAnswer(v) } }} disabled={revealed} placeholder="Type your answer" />
         <NumPad value={answer} onChange={v => !revealed && setAnswer(v)} disabled={revealed} />
         {renderFeedback(feedback, isCorrect)}
@@ -53649,7 +53736,9 @@ function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly
     return (
       <QuizLayout title={title} subtitle={subtitle} onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
         {!started && !finished && <div className="welcome-box">
-          <p className="welcome-text">Practice {title.toLowerCase()}!</p>
+          <p className="welcome-text" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+            <span>Practice {title.toLowerCase()}!</span>
+          </p>
           {tip && <p style={{ fontSize: '0.85rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>{tip}</p>}
           {topicKey && <KeyTerms topicKey={topicKey} />}
           {/* Difficulty selector — hidden entirely for adaptive-only puzzles
@@ -53724,7 +53813,9 @@ function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly
             {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
           </div>
           {question && <div style={{ textAlign: 'center' }}>
-            <div className="question-prompt" style={{ fontSize: '1.3rem', margin: '8px 0 4px', lineHeight: '1.4' }}><GlossaryText text={question.prompt} /></div>
+            <div className="question-prompt" style={{ fontSize: '1.3rem', margin: '8px 0 4px', lineHeight: '1.4', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+              <GlossaryText text={question.prompt} />
+            </div>
             <div className="options-grid" style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: '12px', marginTop: '40px' }}>
               {question.options.map(opt => {
                 const isSelected = selectedOption === opt.option
@@ -54211,6 +54302,7 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
     }
     advanceFnRef.current = advance
     useAutoAdvance(revealed, advanceFnRef, isCorrect)
+
     useEffect(() => {
       if (!revealed || isCorrect) return
       const h = (e) => { if (e.key === 'Enter') { e.preventDefault(); advance() } }
@@ -54335,8 +54427,8 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
             <p style={{ color: '#988D84', fontSize: '0.9rem', margin: '0 0 40px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
               {subtitle}
             </p>
-            <p style={{ color: '#988D84', fontSize: '0.9rem', margin: '0 0 24px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
-              Practice {title.toLowerCase()}!
+            <p style={{ color: '#988D84', fontSize: '0.9rem', margin: '0 0 24px', fontFamily: 'Inter, sans-serif', fontWeight: 400, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+              <span>Practice {title.toLowerCase()}!</span>
             </p>
             {tip && <p style={{ fontSize: '0.85rem', color: '#A89C93', marginBottom: '16px' }}>{tip}</p>}
             {topicKey && <KeyTerms topicKey={topicKey} />}
@@ -54427,7 +54519,9 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
             <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />
           )}
           {question && <div style={{ textAlign: 'center' }}>
-            <div className="question-prompt" style={{ fontSize: '1.3rem', margin: '20px 0', lineHeight: '1.6' }}><GlossaryText text={question.prompt} /></div>
+            <div className="question-prompt" style={{ fontSize: '1.3rem', margin: '20px 0', lineHeight: '1.6', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+              <GlossaryText text={question.prompt} />
+            </div>
             <input className="answer-input" type="text" value={answer} onChange={e => { if (!revealed) setAnswer(e.target.value) }} disabled={revealed} placeholder={getPlaceholder()} onKeyDown={handleKeyDown} autoFocus />
           </div>}
           {!question && loading && <div style={{ textAlign: 'center', padding: '24px', color: 'var(--clr-text-soft)' }}>Loading question…</div>}
@@ -68947,4 +69041,3 @@ function MensurationLabApp({ onBack, initialDifficulty, initialNumQuestions, ini
 
 export default App
 export { AuthMenu }
-

@@ -30,3 +30,180 @@ body {
 #root {
   min-height: 100vh;  /* Minimum height is full viewport */
 }
+
+/* Accessibility: Dyslexia-friendly font support */
+html[data-a11y-dyslexia="true"],
+html[data-a11y-dyslexia="true"] * {
+  font-family: 'Lexend', 'OpenDyslexic', sans-serif !important;
+}
+
+/* Accessibility settings toggle button (global gear icon) */
+.a11y-toggle-btn {
+  position: fixed;
+  top: 16px;
+  right: 112px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--clr-card, #ffffff);
+  border: 2px solid var(--clr-border, #e0e0e0);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 9999;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.a11y-toggle-btn:hover {
+  transform: scale(1.1);
+  background: var(--clr-accent-soft, #f0f7ff);
+}
+
+/* ── Accessibility Settings Panel ── */
+.a11y-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: a11yFadeIn 0.2s ease;
+}
+
+@keyframes a11yFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.a11y-panel {
+  background: var(--clr-card, #fff);
+  border: 1px solid var(--clr-border, #ddd);
+  border-radius: 16px;
+  width: 90%;
+  max-width: 420px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.35);
+  color: var(--clr-text, #222);
+  animation: a11ySlideUp 0.25s ease;
+}
+
+@keyframes a11ySlideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.a11y-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--clr-border, #ddd);
+}
+
+.a11y-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.a11y-header button {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: var(--clr-text-soft, #888);
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+
+.a11y-header button:hover {
+  background: var(--clr-hover, rgba(0,0,0,0.06));
+}
+
+.a11y-scroll-content {
+  padding: 16px 20px 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.a11y-section {
+  margin-bottom: 20px;
+}
+
+.a11y-section h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--clr-text, #222);
+}
+
+.a11y-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  cursor: pointer;
+  font-size: 0.92rem;
+  color: var(--clr-text, #333);
+}
+
+.a11y-toggle input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--clr-accent, #e8864a);
+  cursor: pointer;
+}
+
+.a11y-button-group {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.a11y-button-group button {
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--clr-border, #ccc);
+  background: var(--clr-card, #fff);
+  color: var(--clr-text, #333);
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.15s;
+}
+
+.a11y-button-group button:hover {
+  border-color: var(--clr-accent, #e8864a);
+}
+
+.a11y-button-group button.active {
+  background: var(--clr-accent, #e8864a);
+  color: #fff;
+  border-color: var(--clr-accent, #e8864a);
+  font-weight: 600;
+}
+
+/* ── Accessibility text size overrides ── */
+html[data-a11y-size="large"],
+html[data-a11y-size="large"] * {
+  font-size-adjust: from-font;
+}
+html[data-a11y-size="large"] { font-size: 18px; }
+html[data-a11y-size="xl"] { font-size: 22px; }
+
+/* ── Accessibility letter spacing ── */
+html[data-a11y-spacing="true"],
+html[data-a11y-spacing="true"] * {
+  letter-spacing: 0.06em !important;
+  word-spacing: 0.12em !important;
+}
+
+/* ── Accessibility high contrast ── */
+html[data-a11y-contrast="high"] {
+  filter: contrast(1.3);
+}
