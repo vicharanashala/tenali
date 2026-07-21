@@ -41534,6 +41534,7 @@ function CoordGeomInteractiveApp({ onBack }) {
       setIsCorrect(correct);
       setFeedback(data.message + (correct ? ` ${data.display} is correct!` : ` The answer was ${data.display}.`));
       if (correct) setScore(s => s + 1);
+      pmTrackAnswer('coordgeom', difficulty || 'easy', correct)
 
       setResults(prev => [...prev, {
         question: currentQ.prompt,
@@ -41646,7 +41647,7 @@ function CoordGeomInteractiveApp({ onBack }) {
   }
 
   return (
-    <QuizLayout title="Coordinate Geometry" onBack={onBack}>
+    <QuizLayout title="Coordinate Geometry" onBack={onBack} moduleId="coordgeom">
       <div style={{ textAlign: 'center' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, padding: '0 4px' }}>
           <span style={{ color: 'var(--clr-muted)', fontSize: '0.85rem' }}>Round {round} / {numQuestions}</span>
@@ -42303,6 +42304,13 @@ function App() {
       console.error('Failed to sync URL mode:', e);
     }
   }, [mode]);
+
+  // Let any nested quiz component navigate straight to a module (used by
+  // the PmSuggestIcon "next module" button) via setMode, without prop-drilling.
+  useEffect(() => {
+    pmNavigateFn = (moduleId) => setMode(moduleId)
+    return () => { pmNavigateFn = null }
+  }, [])
 
   const { user } = useAuth()
   const [completedTopics, setCompletedTopics] = useState(() => {
@@ -44253,6 +44261,133 @@ function usePmGraphData() {
   }, [status])
 
   return status
+}
+
+// ─── Module Progress Tracker (localStorage-based, easy/medium/hard per module) ───
+// Simple design:
+//  - Every answered question is recorded per moduleId + difficulty (correct/total).
+//  - A module is "complete enough" once PM_TRACK_THRESHOLD correct answers have
+//    been logged for it (any difficulty mix).
+//  - Once complete, we look up the module's successors in the prereq graph
+//    (graph-data.json edges) and suggest the first one not yet started.
+const PM_TRACK_KEY = 'tenali_module_tracking'
+const PM_TRACK_THRESHOLD = 5 // correct answers needed before we suggest the next module
+
+function pmTrackLoad() {
+  try { return JSON.parse(localStorage.getItem(PM_TRACK_KEY)) || {} } catch { return {} }
+}
+function pmTrackSave(data) {
+  try { localStorage.setItem(PM_TRACK_KEY, JSON.stringify(data)) } catch { /* ignore quota errors */ }
+}
+function pmEmptyModuleStat() {
+  return { easy: { correct: 0, total: 0 }, medium: { correct: 0, total: 0 }, hard: { correct: 0, total: 0 } }
+}
+// Listeners let any mounted <PmSuggestIcon/> re-render the instant a new answer is recorded
+const pmTrackListeners = new Set()
+function pmTrackNotify() { pmTrackListeners.forEach((fn) => { try { fn() } catch { } }) }
+
+function pmTrackAnswer(moduleId, difficulty, isCorrect) {
+  if (!moduleId) return
+  const diff = ['easy', 'medium', 'hard'].includes(difficulty) ? difficulty : 'medium'
+  const data = pmTrackLoad()
+  const stat = data[moduleId] || pmEmptyModuleStat()
+  stat[diff].total += 1
+  if (isCorrect) stat[diff].correct += 1
+  data[moduleId] = stat
+  pmTrackSave(data)
+  pmTrackNotify()
+}
+function pmTrackGetStats(moduleId) {
+  const data = pmTrackLoad()
+  return data[moduleId] || pmEmptyModuleStat()
+}
+function pmTrackCorrectTotal(moduleId) {
+  const s = pmTrackGetStats(moduleId)
+  return s.easy.correct + s.medium.correct + s.hard.correct
+}
+function pmTrackThresholdMet(moduleId) {
+  return pmTrackCorrectTotal(moduleId) >= PM_TRACK_THRESHOLD
+}
+// Picks the next module to suggest: first successor (per graph-data.json edges)
+// that hasn't been started yet, falling back to the first successor overall.
+// AFTER
+function pmTrackNextModule(moduleId) {
+  const successors = pmSuccessorMap[moduleId] || []
+  if (!successors.length) return []
+  return successors.map((id) => pmNodeById[id]).filter(Boolean)
+}
+
+// Registered by the top-level App component so any nested quiz can navigate
+// to a suggested module without prop-drilling.
+let pmNavigateFn = null
+
+// Hook: call from any quiz component with its moduleId (graph-data.json node id).
+// Returns { record(difficulty, isCorrect), thresholdMet, nextModule }.
+function usePmModuleTracking(moduleId) {
+  const graphStatus = usePmGraphData()
+  const [, bump] = useState(0)
+  useEffect(() => {
+    const fn = () => bump((n) => n + 1)
+    pmTrackListeners.add(fn)
+    return () => pmTrackListeners.delete(fn)
+  }, [])
+  const record = useCallback((difficulty, isCorrect) => {
+    pmTrackAnswer(moduleId, difficulty, isCorrect)
+  }, [moduleId])
+  const thresholdMet = moduleId ? pmTrackThresholdMet(moduleId) : false
+   const nextModules = (graphStatus === 'ready' && moduleId && thresholdMet) ? pmTrackNextModule(moduleId) : []
+  return { record, thresholdMet, nextModules }
+}
+
+// ─── PmSuggestIcon: floating bottom-right "next module" button ───────────────
+// Grayed out / inert until the threshold is reached for the current module,
+// then lights up and, on click, navigates straight to the suggested module.
+
+function PmSuggestIcon({ moduleId }) {
+  const { thresholdMet, nextModules } = usePmModuleTracking(moduleId)
+  if (!moduleId) return null
+
+  const active = thresholdMet && nextModules.length > 0
+  return (
+    <div style={{
+      position: 'fixed', right: 20, bottom: 20, zIndex: 9999,
+      display: 'flex', flexDirection: 'column', gap: 5, alignItems: 'flex-end'
+    }}>
+      {active ? nextModules.map((mod) => (
+        <button
+          key={mod.id}
+          onClick={() => pmNavigateFn && pmNavigateFn(mod.id)}
+          title={`Next up: ${mod.label}`}
+          style={{
+            display: 'flex', alignItems: 'center', gap: 5,
+            padding: '6px 12px 6px 10px', borderRadius: 999,
+            border: '1.5px solid #F08C46', background: '#F08C46',
+            color: '#FFF', fontFamily: 'Inter, sans-serif',
+            fontWeight: 700, fontSize: '0.75rem',
+            boxShadow: '0 4px 12px rgba(240,140,70,0.3)',
+            cursor: 'pointer', transition: 'all 0.2s ease',
+          }}
+          onMouseEnter={e => e.currentTarget.style.background = '#e07c36'}
+          onMouseLeave={e => e.currentTarget.style.background = '#F08C46'}
+        >
+          <span style={{ fontSize: '0.8rem' }}>🚀</span>
+          {mod.label}
+        </button>
+      )) : (
+        <button disabled style={{
+          display: 'flex', alignItems: 'center', gap: 5,
+          padding: '6px 10px', borderRadius: 999,
+          border: '1.5px solid #5B5048', background: 'rgba(60,56,52,0.6)',
+          color: '#8a8078', fontFamily: 'Inter, sans-serif',
+          fontWeight: 700, fontSize: '0.75rem',
+          cursor: 'not-allowed', opacity: 0.45,
+        }}>
+          <span style={{ fontSize: '0.8rem' }}>🔒</span>
+          Next module
+        </button>
+      )}
+    </div>
+  )
 }
 
 function pmGetSubgraphNodes(goalIdList) {
@@ -47813,6 +47948,7 @@ function GKApp({ onBack, markTopicCompleted, isGoalMode = false }) {
     const data = await res.json()
     setIsCorrect(data.correct)
     if (data.correct) setScore((s) => s + 1)
+    pmTrackAnswer('gk', 'easy', data.correct)
     // Show feedback with explanation
     (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
@@ -47904,7 +48040,7 @@ function GKApp({ onBack, markTopicCompleted, isGoalMode = false }) {
   }, [revealed, loading, question])
 
   return (
-    <QuizLayout title="General Knowledge" subtitle="Random question picker" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="General Knowledge" subtitle="Random question picker" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="gk">
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Test your general knowledge with random questions!</p>
 
@@ -49894,6 +50030,7 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
       const data = await res.json()
       setIsCorrect(data.correct)
       const newScore = score + (data.correct ? 1 : 0)
+      pmTrackAnswer('addition', difficulty, data.correct)
       setScore(newScore)
 
       const reasoning = `${question.a} + ${question.b} = ${data.correctAnswer}`
@@ -50094,7 +50231,7 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
   }
 
   return (
-    <QuizLayout title="Addition" onBack={onBack} timer={timer}>
+    <QuizLayout title="Addition" onBack={onBack} timer={timer} moduleId="addition">
       {started && !finished && <>
         {/* Progress Display */}
         <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.3rem' }}>
@@ -51379,6 +51516,7 @@ const fetchQuestion = async () => {
       const data = await res.json()
       setIsCorrect(data.correct)
       if (data.correct) setScore(s => s + 1)
+      pmTrackAnswer('basicarith', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct)
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
@@ -51446,7 +51584,7 @@ const fetchQuestion = async () => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Origin" subtitle="Add, subtract, multiply & divide positive & negative numbers" onBack={onBack} timer={started && !finished ? timer : null}>
+    <QuizLayout title="Origin" subtitle="Add, subtract, multiply & divide positive & negative numbers" onBack={onBack} timer={started && !finished ? timer : null} moduleId="basicarith">
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
           <span>Practice basic arithmetic!</span>
@@ -51688,6 +51826,7 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
       const data = await res.json()
       setIsCorrect(data.correct)
       if (data.correct) setScore((s) => s + 1)
+      pmTrackAnswer('quadratic', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct)
 
       // Generate step-by-step working for feedback
       const { a, b, c, x } = question
@@ -51773,7 +51912,7 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Quadratic" subtitle="Given x, find y = ax² + bx + c" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Quadratic" subtitle="Given x, find y = ax² + bx + c" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="quadratic">
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice quadratic substitution!</p>
         <KeyTerms topicKey="quadratics" />
@@ -52831,7 +52970,7 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
     const correct = Number(answer) === correctAnswer
     if (correct) setScore(s => s + 1)
     else setAllCorrectInRound(false)
-    setRoundTotalTime(t => t + timeTaken)
+    pmTrackAnswer('multiply', 'easy', correct)
     setRoundQuestionsCount(c => c + 1)
     setIsCorrect(correct); setRevealed(true)
     setFeedback(correct ? `Correct! ${question.table} × ${question.multiplier} = ${correctAnswer}`
@@ -52964,7 +53103,7 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
   )
 
   return (
-    <QuizLayout title="Multiplication" subtitle="Three-level progressive trainer" onBack={onBack}>
+    <QuizLayout title="Multiplication" subtitle="Three-level progressive trainer" onBack={onBack} moduleId="multiply">
       <div className="top-mini-row">
         {phase === 'quiz' && level !== 3 && !revealed && <div className="timer-pill">{timer.elapsed}s</div>}
         {phase === 'quiz' && level === 3 && <div className="timer-pill" style={l3TimeRemaining <= 3 ? { background: 'var(--clr-wrong)', color: '#fff' } : {}}>⏱ {l3TimeRemaining}s</div>}
@@ -53261,6 +53400,7 @@ const loadQuestion = async (excludeIds) => {
     const data = await res.json()
     setIsCorrect(data.correct)
     if (data.correct) setScore((s) => s + 1)
+    pmTrackAnswer('vocab', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct)
     // Show feedback with correct answer text
     (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
@@ -53376,7 +53516,7 @@ const loadQuestion = async (excludeIds) => {
   }, [started, finished, revealed, loading, question])
 
   return (
-    <QuizLayout title="Concept Matching" subtitle="Pick the correct definition for the concept" onBack={onBack} timer={started && !finished ? timer : null}>
+    <QuizLayout title="Concept Matching" subtitle="Pick the correct definition for the concept" onBack={onBack} timer={started && !finished ? timer : null} moduleId="vocab">
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Match concepts to their definitions!</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
@@ -54209,6 +54349,9 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
     const diffs = Object.keys(diffLabels)
     const [difficulty, setDifficulty] = useState(initialDifficulty || diffs[0])
     const topicKey = customTopicKey || apiPath.replace('-api', '')
+    // graph-data.json node id for this app — apiPath minus '-api' matches it
+    // in every case except circle theorems, which uses 'circle-api' → 'circleth'
+    const pmModuleId = ({ circle: 'circleth' })[apiPath.replace('-api', '')] || apiPath.replace('-api', '')
     const [isAdaptive, setIsAdaptive] = useState(false)
     const [adaptScore, setAdaptScore] = useState(0) // 0.0 (easy) → 3.0 (extrahard)
     const [reportAck, setReportAck] = useState('')
@@ -54341,6 +54484,7 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
         })
         const data = await r.json()
         setIsCorrect(data.correct); setRevealed(true)
+        pmTrackAnswer(pmModuleId, isAdaptive ? effectiveDifficulty() : difficulty, data.correct)
         if (data.correct) setScore(s => s + 1)
         const coinMsg = (data.lil?.coinsEarned ?? 0) > 0 ? ` (+${data.lil.coinsEarned}🪙)` : ''
         if (!data.correct && sessionGoal === 'perfect') {
@@ -54509,7 +54653,7 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
     }
 
     return (
-      <QuizLayout title={title} subtitle={subtitle} onBack={onBack} timer={timer}>
+      <QuizLayout title={title} subtitle={subtitle} onBack={onBack} timer={timer} moduleId={pmModuleId}>
         {started && !finished && <>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.3rem' }}>
             <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
@@ -54778,6 +54922,7 @@ const loadQuestion = async () => {
       const data = await r.json()
       setIsCorrect(data.correct); setRevealed(true)
       if (data.correct) setScore(s => s + 1)
+      pmTrackAnswer('dotprod', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct)
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
@@ -54920,7 +55065,7 @@ const loadQuestion = async () => {
   }
 
   return (
-    <QuizLayout title="Dot Products" subtitle="Vectors, matrix multiply, fill blanks" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Dot Products" subtitle="Vectors, matrix multiply, fill blanks" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="dotprod">
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice dot products & matrix multiplication!</p>
         <KeyTerms topicKey="dot-products" />
@@ -56743,6 +56888,7 @@ const loadQuestion = async () => {
       const data = await r.json()
       setIsCorrect(data.correct); setRevealed(true)
       if (data.correct) setScore(s => s + 1)
+      pmTrackAnswer('squaring', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct)
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
@@ -56808,7 +56954,7 @@ const loadQuestion = async () => {
   )
 
   return (
-    <QuizLayout title="Squaring" subtitle="(a + b)² = a² + 2ab + b²" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Squaring" subtitle="(a + b)² = a² + 2ab + b²" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="squaring">
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Square numbers quickly using the identity (a + b)² = a² + 2ab + b²</p>
         <KeyTerms topicKey="squaring" />
@@ -57752,6 +57898,7 @@ const loadQuestion = async () => {
       const data = await r.json()
       setIsCorrect(data.correct); setRevealed(true)
       if (data.correct) setScore(s => s + 1)
+      pmTrackAnswer('sets', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct)
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
@@ -57793,7 +57940,7 @@ const loadQuestion = async () => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Sets" subtitle="Union, intersection, Venn diagrams" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Sets" subtitle="Union, intersection, Venn diagrams" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="sets">
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice sets and Venn diagrams!</p>
         <KeyTerms topicKey="sets" />
@@ -57980,6 +58127,7 @@ const loadQuestion = async () => {
       const data = await r.json()
       setIsCorrect(data.correct); setRevealed(true)
       if (data.correct) setScore(s => s + 1)
+      pmTrackAnswer('sequences', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct)
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
@@ -58021,7 +58169,7 @@ const loadQuestion = async () => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Sequences & Series" subtitle="Arithmetic & geometric" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Sequences & Series" subtitle="Arithmetic & geometric" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="sequences">
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice sequences and series!</p>
         <KeyTerms topicKey="sequences" />
@@ -58231,6 +58379,7 @@ const loadQuestion = async () => {
       setIsCorrect(data.correct)
       setRevealed(true)
       if (data.correct) setScore(s => s + 1)
+      pmTrackAnswer('ratio', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct)
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
@@ -58274,7 +58423,7 @@ const loadQuestion = async () => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Ratio & Proportion" subtitle="Simplify, divide, direct & inverse" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Ratio & Proportion" subtitle="Simplify, divide, direct & inverse" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="ratio">
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice ratio and proportion!</p>
         <KeyTerms topicKey="ratios" />
@@ -59513,6 +59662,7 @@ const loadQuestion = async () => {
       setIsCorrect(data.correct)
       setRevealed(true)
       if (data.correct) setScore(s => s + 1)
+      pmTrackAnswer('indices', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct)
 
       const prompt = question.prompt
       (() => {
@@ -59571,7 +59721,7 @@ const loadQuestion = async () => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Indices" subtitle="Laws of exponents" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Indices" subtitle="Laws of exponents" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="indices">
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice laws of indices!</p>
         <KeyTerms topicKey="indices" />
@@ -59836,6 +59986,7 @@ const loadQuestion = async () => {
       setIsCorrect(data.correct)
       setRevealed(true)
       if (data.correct) setScore(s => s + 1)
+      pmTrackAnswer('surds', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct)
 
       const prompt = getPrompt(question)
       (() => {
@@ -59894,7 +60045,7 @@ const loadQuestion = async () => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Surds" subtitle="Simplify, add, multiply, rationalise" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Surds" subtitle="Simplify, add, multiply, rationalise" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="surds">
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice working with surds!</p>
         <KeyTerms topicKey="surds" />
@@ -60205,6 +60356,7 @@ const loadQuestion = async () => {
       setIsCorrect(data.correct)
       setRevealed(true)
       if (data.correct) setScore(s => s + 1)
+      pmTrackAnswer('fractionadd', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct)
 
       const prompt = question.mixed
         ? `${question.w1} ${question.n1}/${question.d1} ${op} ${question.w2} ${question.n2}/${question.d2}`
@@ -60293,7 +60445,7 @@ const loadQuestion = async () => {
 
   // ── Render ─────────────────────────────────────────────────────────────
   return (
-    <QuizLayout title="Fractions" subtitle="Add, subtract, multiply & divide fractions" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Fractions" subtitle="Add, subtract, multiply & divide fractions" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="fractionadd">
       {/* ── Setup Phase ── */}
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice adding fractions!</p>
@@ -60656,6 +60808,7 @@ const generateRound = (n) => {
     const timeTaken = timer.stop()
     const correct = symbol === commonSymbol
     if (correct) setScore((s) => s + 1)
+    pmTrackAnswer('spot', 'easy', correct)
     setIsCorrect(correct)
     setFeedback(correct
       ? `Correct! ${commonSymbol} was the match.`
@@ -60690,7 +60843,7 @@ const generateRound = (n) => {
   useAutoAdvance(revealed, advanceRef, isCorrect)
 
   return (
-    <QuizLayout title="Twin Hunt" subtitle="Find the common object in both panels" onBack={onBack} sessionGoal={sessionGoal}>
+    <QuizLayout title="Twin Hunt" subtitle="Find the common object in both panels" onBack={onBack} sessionGoal={sessionGoal} moduleId="spot">
       <div className="top-mini-row">
         {started && !finished && !revealed && <div className="timer-pill">{timer.elapsed}s</div>}
         <div className="score-pill">Score: {score}</div>
@@ -60964,6 +61117,7 @@ const fetchQuestion = async (step) => {
       const data = await res.json()
       setIsCorrect(data.correct)
       if (data.correct) setScore((s) => s + 1)
+      pmTrackAnswer('sqrt', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct)
       // Show floor and ceiling values for reference
       const reasoning = `√${question.q} = ${data.sqrtRounded}\n⌊${data.sqrtRounded}⌋ = ${data.floorAnswer}, ⌈${data.sqrtRounded}⌉ = ${data.ceilAnswer}`
       (() => {
@@ -61024,7 +61178,7 @@ const fetchQuestion = async (step) => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Square Root" subtitle="Floor or ceiling is accepted" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Square Root" subtitle="Floor or ceiling is accepted" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="sqrt">
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice square roots!</p>
         <KeyTerms topicKey="square-roots" />
@@ -61245,6 +61399,7 @@ const loadQuestion = async () => {
     const data = await res.json()
     setIsCorrect(data.correct)
     if (data.correct) setScore(s => s + 1)
+    pmTrackAnswer('polymul', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct)
     (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
@@ -61321,7 +61476,7 @@ const loadQuestion = async () => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Poly Multiply" subtitle="Multiply two polynomials and enter the coefficients" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Poly Multiply" subtitle="Multiply two polynomials and enter the coefficients" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="polymul">
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice polynomial multiplication!</p>
         <KeyTerms topicKey="polynomial-multiplication" />
@@ -61566,6 +61721,7 @@ const loadQuestion = async () => {
     setIsCorrect(data.correct)
     // Increment score if correct
     if (data.correct) setScore(s => s + 1)
+    pmTrackAnswer('polyfactor', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct)
     // Format feedback message using correct factors (p, q, r, s from question.factors)
     const { p, q, r, s } = question.factors
     (() => {
@@ -61634,7 +61790,7 @@ const loadQuestion = async () => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Poly Factor" subtitle="Factor the quadratic into (px + q)(rx + s)" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Poly Factor" subtitle="Factor the quadratic into (px + q)(rx + s)" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="polyfactor">
       {!started && !finished && <div className="welcome-box">
           <p className="welcome-text">Factor ax² + bx + c into (px + q)(rx + s).</p>
           <KeyTerms topicKey="polynomial-factorisation" />
@@ -61900,6 +62056,7 @@ const loadQuestion = async () => {
       const correct = question.factors.length === sorted.length && question.factors.every((v, i) => v === sorted[i])
       setIsCorrect(correct)
       if (correct) setScore(s => s + 1)
+      pmTrackAnswer('primefactor', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct)
       setFeedback(correct ? `Correct! ${question.number} = ${question.factors.join(' × ')}` : `Incorrect. ${question.number} = ${question.factors.join(' × ')}`)
       // Add result to history for results table
       setResults(prev => [...prev, {
@@ -61978,7 +62135,7 @@ const loadQuestion = async () => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Prime Factors" subtitle="Break the number into its prime factors" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Prime Factors" subtitle="Break the number into its prime factors" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="primefactor">
       {!started && !finished && <div className="welcome-box">
           <p className="welcome-text">Enter prime factors one at a time. Watch the remaining number shrink!</p>
           <KeyTerms topicKey="prime-factors" />
@@ -62214,6 +62371,7 @@ const loadQuestion = async () => {
     const data = await res.json()
     setIsCorrect(data.correct)
     if (data.correct) setScore(s => s + 1)
+    pmTrackAnswer('qformula', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct)
     // Format correct answer display based on root type
     let correctStr = ''
     if (data.roots.type === 'real_distinct') correctStr = `Roots: ${data.roots.r1} and ${data.roots.r2}`
@@ -62288,7 +62446,7 @@ const loadQuestion = async () => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Quadratic Formula" subtitle="Find the roots of ax² + bx + c = 0" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Quadratic Formula" subtitle="Find the roots of ax² + bx + c = 0" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="qformula">
       {!started && !finished && <div className="welcome-box">
           <p className="welcome-text">Use the quadratic formula to find roots of ax² + bx + c = 0</p>
           <KeyTerms topicKey="quadratic-formula" />
@@ -62539,6 +62697,7 @@ const loadQuestion = async () => {
     const data = await res.json()
     setIsCorrect(data.correct)
     if (data.correct) setScore(s => s + 1)
+    pmTrackAnswer('simul', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct)
     // Format feedback message and result based on system size
     const s = question.solution
     if (is3x3) {
@@ -62627,7 +62786,7 @@ const loadQuestion = async () => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Simultaneous Eq." subtitle={`Solve ${isAdaptive ? 'adaptive' : (effectiveDiff() === 'easy' ? '2×2' : '3×3')} systems`} onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Simultaneous Eq." subtitle={`Solve ${isAdaptive ? 'adaptive' : (effectiveDiff() === 'easy' ? '2×2' : '3×3')} systems`} onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="simul">
       {!started && !finished && <div className="welcome-box">
           <p className="welcome-text">Solve systems of linear equations</p>
           <KeyTerms topicKey="simultaneous-equations" />
@@ -62853,6 +63012,7 @@ const loadQuestion = async () => {
     const data = await res.json()
     setIsCorrect(data.correct)
     if (data.correct) setScore(s => s + 1)
+    pmTrackAnswer('funceval', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct)
     // Format variable string for feedback (e.g., "x=2, y=3")
     const varStr = Object.entries(question.vars).map(([k, v]) => `${k}=${v}`).join(', ')
     (() => {
@@ -62915,7 +63075,7 @@ const loadQuestion = async () => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Functions" subtitle="Evaluate the function at the given values" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Functions" subtitle="Evaluate the function at the given values" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="funceval">
       {!started && !finished && <div className="welcome-box">
           <p className="welcome-text">Evaluate linear functions</p>
           <KeyTerms topicKey="functions" />
@@ -63143,6 +63303,7 @@ const loadQuestion = async () => {
     const data = await res.json()
     setIsCorrect(data.correct)
     if (data.correct) setScore(s => s + 1)
+    pmTrackAnswer('lineq', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct)
     // Format feedback message with correct m and c values
     (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
@@ -63208,7 +63369,7 @@ const loadQuestion = async () => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Line Equation" subtitle="Find m and c in y = mx + c from two points" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Line Equation" subtitle="Find m and c in y = mx + c from two points" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="lineq">
       {!started && !finished && <div className="welcome-box">
           <p className="welcome-text">Given two points, find the slope m and intercept c.</p>
           <KeyTerms topicKey="line-equation" />
@@ -64223,6 +64384,7 @@ const startQuiz = async () => {
 
     // Update score, feedback, and results (common for all puzzle types)
     setIsCorrect(correct)
+    pmTrackAnswer(curType, difficulty, correct)
     if (correct) setScore(s => s + 1)
     // Get puzzle type name for results display
     const typeName = CUSTOM_PUZZLES.find(p => p.key === curType)?.name || curType
@@ -64580,7 +64742,7 @@ const startQuiz = async () => {
   // ─── Quiz Phase ──────────────────────────────────────
   if (phase === 'quiz') {
     return (
-      <QuizLayout title="Custom Lesson" subtitle={`${selected.length} puzzle types · ${difficulty}`} onBack={onBack} timer={sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+      <QuizLayout title="Custom Lesson" subtitle={`${selected.length} puzzle types · ${difficulty}`} onBack={onBack} timer={sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId={curType}>
         <div className="top-mini-row">
           {!revealed && sessionGoal !== 'perfect' && <div className="timer-pill">{timer.elapsed}s</div>}
           <div className="score-pill">Score: {score}</div>
@@ -67642,7 +67804,7 @@ function TatsavitLineApp({ onBack }) {
  * @param {Function} props.onBack - Callback when back button is clicked
  * @param {React.ReactNode} props.children - Quiz content to display
  */
-export function QuizLayout({ title, subtitle, onBack, children, timer, sessionGoal }) {
+export function QuizLayout({ title, subtitle, onBack, children, timer, sessionGoal, moduleId }) {
   // Derive display values from the timer object
   const isSpeed   = timer && (timer.mode === 'speed'   || sessionGoal === 'speed')
   const isPerfect = sessionGoal === 'perfect'
@@ -67715,6 +67877,7 @@ export function QuizLayout({ title, subtitle, onBack, children, timer, sessionGo
       </div>
       <h1 style={{ fontSize: 'clamp(1.8rem, 3.8vw, 2.4rem)' }}>{title}</h1>
       {processedChildren}
+      {moduleId && <PmSuggestIcon moduleId={moduleId} />}
     </>
   )
 }
@@ -68352,7 +68515,7 @@ function LearningJourneyCheckpointQuizView({ topicId, onBack }) {
 
 // Named export so main.jsx can render the global hamburger menu next to <App />
 
-function GenericLabApp({ title, subtitle, endpoint, onBack, renderQuestionCustom, customGenerate, initialDifficulty, initialNumQuestions, initialStarted }) {
+function GenericLabApp({ title, subtitle, endpoint, onBack, renderQuestionCustom, customGenerate, initialDifficulty, initialNumQuestions, initialStarted, moduleId }) {
   const [difficulty, setDifficulty] = useState(initialDifficulty || 'easy');
   const [numQuestions, setNumQuestions] = useState(initialNumQuestions || '5');
   const [started, setStarted] = useState(initialStarted || false);
@@ -68440,6 +68603,7 @@ function GenericLabApp({ title, subtitle, endpoint, onBack, renderQuestionCustom
     const data = await res.json();
 
     setIsCorrect(data.correct);
+    pmTrackAnswer(moduleId, difficulty, data.correct);
     if (data.correct) setScore(s => s + 1);
 
     const explanationText = question.hint ? ` (${question.hint})` : '';
@@ -68578,6 +68742,7 @@ function GenericLabApp({ title, subtitle, endpoint, onBack, renderQuestionCustom
 
   return (
     <div className="kid-zone">
+      {moduleId && <PmSuggestIcon moduleId={moduleId} />}
       {started && !finished && (
         <div className="kid-card">
           <div className="kid-status-row">
@@ -68698,7 +68863,7 @@ function BasicArithmeticLabApp({ onBack }) {
       </div>
     );
   };
-  return <GenericLabApp title="Origin" subtitle="Mixed multiplication & division templates" endpoint="/api/basic-arithmetic-lab" onBack={onBack} renderQuestionCustom={renderCustom} />;
+  return <GenericLabApp title="Origin" subtitle="Mixed multiplication & division templates" endpoint="/api/basic-arithmetic-lab" onBack={onBack} renderQuestionCustom={renderCustom} moduleId="basicarith" />;
 }
 
 
@@ -69036,7 +69201,7 @@ function MensurationLabApp({ onBack, initialDifficulty, initialNumQuestions, ini
     return null;
   };
 
-  return <GenericLabApp title="Mensuration" subtitle="Geometry & Shape Puzzles" endpoint="/api/mensuration-lab" onBack={onBack} renderQuestionCustom={renderCustom} initialDifficulty={initialDifficulty} initialNumQuestions={initialNumQuestions} initialStarted={initialStarted} />;
+  return <GenericLabApp title="Mensuration" subtitle="Geometry & Shape Puzzles" endpoint="/api/mensuration-lab" onBack={onBack} renderQuestionCustom={renderCustom} initialDifficulty={initialDifficulty} initialNumQuestions={initialNumQuestions} initialStarted={initialStarted} moduleId="mensur" />;
 }
 
 export default App
