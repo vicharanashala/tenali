@@ -1,0 +1,91 @@
+.voice-assistant {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.va-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.va-avatar:hover {
+  transform: scale(1.1);
+}
+
+.va-icon {
+  font-size: 30px;
+  z-index: 2;
+}
+
+.speaking .va-pulse {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 50%;
+  border: 3px solid #a777e3;
+  animation: pulse 1s infinite;
+  z-index: 1;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.9); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+.va-menu {
+  background: var(--clr-surface, #2c3e50);
+  border: 1px solid var(--clr-border, #34495e);
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 200px;
+  color: white;
+}
+
+.va-menu h4 {
+  margin: 0 0 5px 0;
+  text-align: center;
+  font-family: inherit;
+  color: #a777e3;
+}
+
+.va-btn {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s;
+  font-size: 0.9rem;
+}
+
+.va-btn:hover:not(:disabled) {
+  background: rgba(255,255,255,0.2);
+}
+
+.va-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

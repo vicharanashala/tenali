@@ -1,0 +1,15 @@
+{
+  "id": 10012,
+  "word": "Heisenberg's Uncertainty Principle",
+  "question": "Heisenberg's Uncertainty Principle",
+  "options": [
+    "The universe is constantly expanding at an accelerating rate",
+    "It is impossible to simultaneously know both the exact position and momentum of a particle",
+    "Time passes slower for an observer moving at high speeds relative to a stationary observer",
+    "Energy is emitted in discrete packets called quanta"
+  ],
+  "answerOption": "B",
+  "answerText": "It is impossible to simultaneously know both the exact position and momentum of a particle",
+  "difficulty": "hard",
+  "sourceFile": "c10012.json"
+}

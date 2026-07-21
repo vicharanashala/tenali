@@ -1,0 +1,422 @@
+{
+  "chapters": [
+    {
+      "chapter_id": 1,
+      "chapter_name": "Points — \"The First Mark\"",
+      "definition": "A point is a tiny dot on your screen. It does not have any size, width, or length—it simply shows us an exact location.",
+      "examples": [
+        {
+          "example_id": "ex_1_correct",
+          "type": "correct",
+          "title": "A Clean Point",
+          "description": "A single, sharp dot indicating one exact spot on the map.",
+          "image_path": "/assets/geometry/ch1_correct.png"
+        },
+        {
+          "example_id": "ex_1_incorrect",
+          "type": "incorrect",
+          "title": "Not a Point",
+          "description": "A thick, messy smudge or a large circle is not a point because it covers a broad area instead of a single location.",
+          "image_path": "/assets/geometry/ch1_incorrect.png"
+        }
+      ],
+      "activities": [
+        {
+          "activity_id": "act_1_1",
+          "prompt": "Can you mark the center of the target by placing a single point?",
+          "allowed_tools": ["point", "eraser"],
+          "validation_criteria": {
+            "expected_vertices": 1,
+            "assert_closed_loop": false
+          },
+          "error_hints": {
+            "count_error": "You placed more or fewer than 1 point. Please place exactly one point on the target.",
+            "property_error": "Make sure your point is close to the center of the target screen."
+          }
+        },
+        {
+          "activity_id": "act_1_2",
+          "prompt": "Place three points on the screen so they form the corners of a triangle. Make sure they are not in a straight line!",
+          "allowed_tools": ["point", "eraser"],
+          "validation_criteria": {
+            "expected_vertices": 3,
+            "assert_collinear": false
+          },
+          "error_hints": {
+            "count_error": "We need exactly three points on the screen to form corners.",
+            "collinear_error": "Your points are in a straight line. Move them around so they form a triangle shape."
+          }
+        }
+      ]
+    },
+    {
+      "chapter_id": 2,
+      "chapter_name": "Lines — \"Infinite Roads\"",
+      "definition": "A line is a straight path that goes on forever in both directions. In drawing, we put arrows on both ends to show it never stops!",
+      "examples": [
+        {
+          "example_id": "ex_2_correct",
+          "type": "correct",
+          "title": "An Endless Line",
+          "description": "A straight path with arrows on both ends showing it goes on forever.",
+          "image_path": "/assets/geometry/ch2_correct.png"
+        },
+        {
+          "example_id": "ex_2_incorrect",
+          "type": "incorrect",
+          "title": "Not a Line",
+          "description": "A wavy path or a stick with flat ends is not a line because lines must be perfectly straight and never stop.",
+          "image_path": "/assets/geometry/ch2_incorrect.png"
+        }
+      ],
+      "activities": [
+        {
+          "activity_id": "act_2_1",
+          "prompt": "Let's build a straight road! Place two points, then draw a line that passes straight through both points and extends to the edges with arrows.",
+          "allowed_tools": ["point", "line", "eraser"],
+          "validation_criteria": {
+            "expected_lines": 1,
+            "min_vertices": 2
+          },
+          "error_hints": {
+            "count_error": "We need exactly one line drawn through two points.",
+            "property_error": "Make sure your line goes straight through both points."
+          }
+        },
+        {
+          "activity_id": "act_2_2",
+          "prompt": "Can you draw two lines next to each other that run in the same direction and will never touch (parallel lines)?",
+          "allowed_tools": ["point", "line", "eraser"],
+          "validation_criteria": {
+            "expected_lines": 2,
+            "assert_parallel": true
+          },
+          "error_hints": {
+            "count_error": "Please draw exactly two lines on the canvas.",
+            "parallel_error": "The two lines must run in the exact same direction and have the same slope so they never intersect."
+          }
+        }
+      ]
+    },
+    {
+      "chapter_id": 3,
+      "chapter_name": "Line Segments — \"Building with Sticks\"",
+      "definition": "A line segment is a straight path that connects two endpoints. Unlike a line, it has a start and an end, so it has a fixed length.",
+      "examples": [
+        {
+          "example_id": "ex_3_correct",
+          "type": "correct",
+          "title": "A Line Segment",
+          "description": "A straight connection that begins at one point and ends at another.",
+          "image_path": "/assets/geometry/ch3_correct.png"
+        },
+        {
+          "example_id": "ex_3_incorrect",
+          "type": "incorrect",
+          "title": "Not a Segment",
+          "description": "A path that has an arrow on one or both ends is not a segment because segments must stop at both ends.",
+          "image_path": "/assets/geometry/ch3_incorrect.png"
+        }
+      ],
+      "activities": [
+        {
+          "activity_id": "act_3_1",
+          "prompt": "Let's connect our two islands! Draw a straight line segment from the green point to the red point to make a bridge.",
+          "allowed_tools": ["point", "segment", "eraser"],
+          "validation_criteria": {
+            "expected_segments": 1,
+            "connect_specified_points": true
+          },
+          "error_hints": {
+            "count_error": "Draw exactly one segment directly between the green and red points.",
+            "property_error": "Your bridge segment missed the endpoint. Make sure it snaps to both points."
+          }
+        },
+        {
+          "activity_id": "act_3_2",
+          "prompt": "Now, draw a horizontal line segment that is exactly 4 grid units long. You can use our ruler tool to measure it!",
+          "allowed_tools": ["point", "segment", "eraser", "measure-length"],
+          "validation_criteria": {
+            "expected_segments": 1,
+            "target_length": 4.0,
+            "length_tolerance": 0.2,
+            "assert_horizontal": true
+          },
+          "error_hints": {
+            "count_error": "Draw exactly one line segment.",
+            "length_error": "Your segment length is incorrect. Measure it with the ruler to make it exactly 4 units.",
+            "alignment_error": "Your segment must be perfectly horizontal (flat)."
+          }
+        }
+      ]
+    },
+    {
+      "chapter_id": 4,
+      "chapter_name": "Rays — \"The Direction Finder\"",
+      "definition": "A ray starts at one fixed point and goes on forever in one direction. Think of a beam of light shooting from a laser pointer!",
+      "examples": [
+        {
+          "example_id": "ex_4_correct",
+          "type": "correct",
+          "title": "A Light Ray",
+          "description": "A path starting at a dot and ending with an arrow in the direction it travels.",
+          "image_path": "/assets/geometry/ch4_correct.png"
+        },
+        {
+          "example_id": "ex_4_incorrect",
+          "type": "incorrect",
+          "title": "Not a Ray",
+          "description": "A segment with no arrows, or a line with arrows on both ends, is not a ray.",
+          "image_path": "/assets/geometry/ch4_incorrect.png"
+        }
+      ],
+      "activities": [
+        {
+          "activity_id": "act_4_1",
+          "prompt": "Aim your flashlight! Draw a ray that starts at the green point and goes straight through the orange point.",
+          "allowed_tools": ["point", "ray", "eraser"],
+          "validation_criteria": {
+            "expected_rays": 1,
+            "ray_start_vertex": "green",
+            "passes_through": "orange"
+          },
+          "error_hints": {
+            "count_error": "Draw exactly one ray.",
+            "direction_error": "Make sure the ray starts at the green point and points directly through the orange point."
+          }
+        },
+        {
+          "activity_id": "act_4_2",
+          "prompt": "Draw two rays starting from the exact same central point but going in opposite directions to form a flat line.",
+          "allowed_tools": ["point", "ray", "eraser"],
+          "validation_criteria": {
+            "expected_rays": 2,
+            "assert_shared_start": true,
+            "assert_collinear": true,
+            "assert_opposite_direction": true
+          },
+          "error_hints": {
+            "count_error": "We need exactly two rays on the screen.",
+            "start_error": "Both rays must start from the exact same point in the middle.",
+            "direction_error": "The rays must point in opposite directions to form a straight line."
+          }
+        }
+      ]
+    },
+    {
+      "chapter_id": 5,
+      "chapter_name": "Angles — \"The Turning Machine\"",
+      "definition": "An angle is the space between two rays or line segments that meet at a shared point (called the vertex). It measures how much you turn!",
+      "examples": [
+        {
+          "example_id": "ex_5_correct",
+          "type": "correct",
+          "title": "An Angle",
+          "description": "Two segments joining at a single corner, forming a clean angle.",
+          "image_path": "/assets/geometry/ch5_correct.png"
+        },
+        {
+          "example_id": "ex_5_incorrect",
+          "type": "incorrect",
+          "title": "Not an Angle",
+          "description": "Two lines that cross each other or do not touch do not form a single angle vertex.",
+          "image_path": "/assets/geometry/ch5_incorrect.png"
+        }
+      ],
+      "activities": [
+        {
+          "activity_id": "act_5_1",
+          "prompt": "Draw a right angle, which looks like the perfect corner of a square or a capital letter L. It must measure exactly 90 degrees.",
+          "allowed_tools": ["point", "segment", "eraser", "measure-angle"],
+          "validation_criteria": {
+            "expected_segments": 2,
+            "expected_vertices": 3,
+            "angle_deg": 90.0,
+            "angle_tolerance": 3.0
+          },
+          "error_hints": {
+            "count_error": "An angle needs exactly two segments meeting at a vertex point.",
+            "angle_error": "Your angle is not 90 degrees. Adjust the segments to make a perfect corner."
+          }
+        },
+        {
+          "activity_id": "act_5_2",
+          "prompt": "Now draw an acute angle, which is sharp, narrow, and smaller than a right angle (less than 90 degrees).",
+          "allowed_tools": ["point", "segment", "eraser", "measure-angle"],
+          "validation_criteria": {
+            "expected_segments": 2,
+            "expected_vertices": 3,
+            "angle_max_deg": 89.0,
+            "angle_min_deg": 10.0
+          },
+          "error_hints": {
+            "count_error": "Please draw two connected segments to form an angle.",
+            "angle_error": "This angle is too wide! An acute angle must be sharp and less than 90 degrees."
+          }
+        }
+      ]
+    },
+    {
+      "chapter_id": 6,
+      "chapter_name": "Polygons — \"Shape Builders\"",
+      "definition": "A polygon is a flat, closed shape with straight sides. It must not have any curved lines, and there cannot be any open gaps!",
+      "examples": [
+        {
+          "example_id": "ex_6_correct",
+          "type": "correct",
+          "title": "A Polygon",
+          "description": "A closed, flat shape made of straight segments with no curves.",
+          "image_path": "/assets/geometry/ch6_correct.png"
+        },
+        {
+          "example_id": "ex_6_incorrect",
+          "type": "incorrect",
+          "title": "Not a Polygon",
+          "description": "An open shape, a shape with a curved side (like a circle), or crossing lines.",
+          "image_path": "/assets/geometry/ch6_incorrect.png"
+        }
+      ],
+      "activities": [
+        {
+          "activity_id": "act_6_1",
+          "prompt": "Use our segments tool to build a closed polygon with exactly 4 straight sides. Make sure there are no gaps!",
+          "allowed_tools": ["point", "segment", "eraser"],
+          "validation_criteria": {
+            "matching_side_count": 4,
+            "assert_closed_loop": true
+          },
+          "error_hints": {
+            "closure_error": "The shape is open. Connect the last point to the first point to seal it.",
+            "side_count_error": "We need a shape with exactly 4 straight sides."
+          }
+        },
+        {
+          "activity_id": "act_6_2",
+          "prompt": "Can you build a house roof shape? Draw a closed polygon with exactly 5 straight sides (called a pentagon).",
+          "allowed_tools": ["point", "segment", "eraser"],
+          "validation_criteria": {
+            "matching_side_count": 5,
+            "assert_closed_loop": true
+          },
+          "error_hints": {
+            "closure_error": "Connect all the points in a loop so no space escapes.",
+            "side_count_error": "A pentagon must have exactly 5 sides. Count your segments!"
+          }
+        }
+      ]
+    },
+    {
+      "chapter_id": 7,
+      "chapter_name": "Triangles — \"The Three-Sided World\"",
+      "definition": "A triangle is a polygon with exactly three straight sides and three corners. It is the strongest shape used to construct bridges!",
+      "examples": [
+        {
+          "example_id": "ex_7_correct",
+          "type": "correct",
+          "title": "A Triangle",
+          "description": "A closed polygon with exactly three connected sides.",
+          "image_path": "/assets/geometry/ch7_correct.png"
+        },
+        {
+          "example_id": "ex_7_incorrect",
+          "type": "incorrect",
+          "title": "Not a Triangle",
+          "description": "An open three-segment shape, or a shape with four corners.",
+          "image_path": "/assets/geometry/ch7_incorrect.png"
+        }
+      ],
+      "activities": [
+        {
+          "activity_id": "act_7_1",
+          "prompt": "Draw an isosceles triangle. This is a special triangle where at least two of the sides are the exact same length.",
+          "allowed_tools": ["point", "segment", "eraser", "measure-length"],
+          "validation_criteria": {
+            "matching_side_count": 3,
+            "assert_closed_loop": true,
+            "equal_sides_count": 2,
+            "length_tolerance": 5.0
+          },
+          "error_hints": {
+            "closure_error": "Make sure all 3 points are connected to form a closed triangle loop.",
+            "side_count_error": "A triangle must have exactly 3 sides.",
+            "property_error": "Two of the sides must be equal. Use the ruler tool to match their lengths."
+          }
+        },
+        {
+          "activity_id": "act_7_2",
+          "prompt": "Draw a right-angled triangle. This is a triangle where one of the corners is a perfect 90-degree angle.",
+          "allowed_tools": ["point", "segment", "eraser", "measure-angle"],
+          "validation_criteria": {
+            "matching_side_count": 3,
+            "assert_closed_loop": true,
+            "has_angle_deg": 90.0,
+            "angle_tolerance": 3.0
+          },
+          "error_hints": {
+            "closure_error": "Draw 3 connected segments to close the triangle.",
+            "side_count_error": "A triangle must have exactly 3 sides.",
+            "property_error": "Your triangle needs exactly one 90-degree corner. Use the angle tool to check."
+          }
+        }
+      ]
+    },
+    {
+      "chapter_id": 8,
+      "chapter_name": "Quadrilaterals — \"Four-Sided City\"",
+      "definition": "A quadrilateral is any flat shape with exactly four straight sides. Squares, rectangles, and diamonds are all part of this shape family!",
+      "examples": [
+        {
+          "example_id": "ex_8_correct",
+          "type": "correct",
+          "title": "A Quadrilateral",
+          "description": "Any flat shape enclosed by four straight sides.",
+          "image_path": "/assets/geometry/ch8_correct.png"
+        },
+        {
+          "example_id": "ex_8_incorrect",
+          "type": "incorrect",
+          "title": "Not a Quadrilateral",
+          "description": "A 3-sided shape, a shape with curved sides, or an open 4-sided path.",
+          "image_path": "/assets/geometry/ch8_incorrect.png"
+        }
+      ],
+      "activities": [
+        {
+          "activity_id": "act_8_1",
+          "prompt": "Draw a rectangle! Its opposite sides must be equal in length, and all four corners must be perfect 90-degree right angles.",
+          "allowed_tools": ["point", "segment", "eraser", "measure-angle", "measure-length"],
+          "validation_criteria": {
+            "matching_side_count": 4,
+            "assert_closed_loop": true,
+            "all_angles_deg": 90.0,
+            "angle_tolerance": 3.0,
+            "opposite_sides_equal": true
+          },
+          "error_hints": {
+            "closure_error": "Make sure all 4 sides are fully connected in a loop.",
+            "side_count_error": "A rectangle must have exactly 4 sides.",
+            "property_error": "All 4 corners must be 90-degree right angles and opposite sides must be equal."
+          }
+        },
+        {
+          "activity_id": "act_8_2",
+          "prompt": "Draw a perfect square! All four sides must be the exact same length, and all four corners must be 90 degrees.",
+          "allowed_tools": ["point", "segment", "eraser", "measure-angle", "measure-length"],
+          "validation_criteria": {
+            "matching_side_count": 4,
+            "assert_closed_loop": true,
+            "all_angles_deg": 90.0,
+            "angle_tolerance": 3.0,
+            "all_sides_equal": true,
+            "length_tolerance": 5.0
+          },
+          "error_hints": {
+            "closure_error": "Connect the sides to make a closed square.",
+            "side_count_error": "A square must have exactly 4 sides.",
+            "property_error": "All 4 sides of a square must be the exact same length, and all corners must be 90 degrees."
+          }
+        }
+      ]
+    }
+  ]
+}

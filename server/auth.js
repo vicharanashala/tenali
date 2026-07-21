@@ -29,9 +29,117 @@ const UserSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true, index: true, lowercase: true, trim: true },
   passwordHash: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
+  completedTopics: { type: [String], default: [] },
+  goldMastery: { type: [String], default: [] },
+  coins: { type: Number, default: 0 },
+  achievements: {
+    completedCollections: [
+      {
+        collectionId: { type: String, required: true },
+        completedAt: { type: Date, default: Date.now }
+      }
+    ]
+  },
+  pinnedBadges: { type: [String], default: [] },
+  totalSolved: { type: Number, default: 0 },
+  streak: { type: Number, default: 0 },
+  lastActiveDate: { type: String, default: "" },
+  milestones: [
+    {
+      event: { type: String, required: true },
+      date: { type: Date, default: Date.now },
+      type: { type: String },
+      badgeType: { type: String }
+    }
+  ],
+  gradeLevel: { type: String, default: 'Grade 3' },
+  coinBalance: { type: Number, default: 0 },
+  xpScore: { type: Number, default: 0 }
 });
 
+const ProgressSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, index: true },
+  topic: { type: String, required: true }, // e.g., 'addition', 'basicarith'
+  difficulty: { type: String, default: 'easy' }, // current adaptive level
+  score: { type: Number, default: 0 }, // a metric of performance
+  seenQuestions: { type: [String], default: [] }, // history of unique question strings or prompts
+  updatedAt: { type: Date, default: Date.now }
+});
+
+// Ensure a user has only one progress document per topic
+ProgressSchema.index({ userId: 1, topic: 1 }, { unique: true });
+
 const User = mongoose.model('User', UserSchema);
+const Progress = mongoose.model('Progress', ProgressSchema);
+
+const StudentAttemptLogSchema = new mongoose.Schema({
+  studentId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, index: true },
+  topicKey: { type: String, required: true, index: true },
+  timestamp: { type: Date, default: Date.now },
+  questionPrompt: { type: String, required: true },
+  userInput: { type: String, required: true },
+  correct: { type: Boolean, required: true },
+  hintsClickedCount: { type: Number, default: 0 },
+  timeSpentSeconds: { type: Number, default: 0 },
+  stageNumber: { type: Number, default: 3 },
+  challengeType: { type: String, enum: ['standard', 'transfer'], default: 'standard', index: true },
+  transferScenarioId: { type: String },
+  transferContext: { type: String },
+});
+
+// Compound index for querying transfer-specific results per student per topic
+StudentAttemptLogSchema.index({ studentId: 1, challengeType: 1, topicKey: 1 });
+
+const StudentAttemptLog = mongoose.model('StudentAttemptLog', StudentAttemptLogSchema);
+
+// ─── Scalable Models for High Volume Production ─────────────────────────────
+
+// 1. UserStatsSchema: Separating frequently-updated stats from core user profiles
+const UserStatsSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, unique: true, index: true },
+  streak: { type: Number, default: 0 },
+  lastActiveDate: { type: String, default: "" },
+  totalSolved: { type: Number, default: 0 },
+  coins: { type: Number, default: 0 },
+  xpScore: { type: Number, default: 0 },
+  updatedAt: { type: Date, default: Date.now }
+});
+const UserStats = mongoose.model('UserStats', UserStatsSchema);
+
+// 2. UserMilestoneSchema: Storing journey milestones as isolated documents
+const UserMilestoneSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, index: true },
+  event: { type: String, required: true },
+  date: { type: Date, default: Date.now },
+  type: { type: String, enum: ['system', 'topic', 'collection', 'streak'], required: true },
+  badgeType: { type: String, default: 'topic' }
+});
+// Compound index for sorted timeline queries per user
+UserMilestoneSchema.index({ userId: 1, date: -1 });
+const UserMilestone = mongoose.model('UserMilestone', UserMilestoneSchema);
+
+// 3. UserTopicProgressSchema: Tracks badge status and level upgrades per quiz topic
+const UserTopicProgressSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  topicKey: { type: String, required: true },
+  level: { type: String, enum: ['blue', 'bronze', 'silver', 'gold', 'locked'], default: 'locked' },
+  startedAt: { type: Date, default: Date.now },
+  unlockedAt: { type: Date }
+});
+// Unique index to prevent duplicate progress rows per user/topic pair
+UserTopicProgressSchema.index({ userId: 1, topicKey: 1 }, { unique: true });
+const UserTopicProgress = mongoose.model('UserTopicProgress', UserTopicProgressSchema);
+
+// 4. UserCollectionProgressSchema: Track completed collector collections / album badges
+const UserCollectionProgressSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  collectionId: { type: String, required: true },
+  completed: { type: Boolean, default: false },
+  completedAt: { type: Date }
+});
+// Unique index for collection progress lookup
+UserCollectionProgressSchema.index({ userId: 1, collectionId: 1 }, { unique: true });
+const UserCollectionProgress = mongoose.model('UserCollectionProgress', UserCollectionProgressSchema);
 
 // ─── Connection + seeding ────────────────────────────────────────────────────
 
@@ -39,7 +147,7 @@ let connected = false;
 
 async function connectMongo(uri = MONGO_URI) {
   if (connected) return;
-  await mongoose.connect(uri, { serverSelectionTimeoutMS: 4000 });
+  await mongoose.connect(uri, { serverSelectionTimeoutMS: 8000, family: 4 });
   connected = true;
   console.log(`[auth] Mongo connected: ${uri.replace(/\/\/.*@/, '//***@')}`);
 }
@@ -120,4 +228,4 @@ router.get('/me', requireAuth, (req, res) => {
   res.json({ user: req.user });
 });
 
-module.exports = { connectMongo, seedUsers, router, requireAuth, User };
+module.exports = { connectMongo, seedUsers, router, requireAuth, User, Progress, StudentAttemptLog, UserStats, UserMilestone, UserTopicProgress, UserCollectionProgress };
