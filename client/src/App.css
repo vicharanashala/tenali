@@ -470,6 +470,21 @@ button:disabled {
   margin-bottom: 20px;
 }
 
+/* Wrapper positions the WWM button top-right, above the Word Explorer button */
+.wwm-corner-btn-wrap {
+  position: absolute;
+  top: 4px;
+  right: 40px;
+  z-index: 100;
+}
+
+@media (max-width: 600px) {
+  .wwm-corner-btn-wrap {
+    top: -4px;
+    right: 24px;
+  }
+}
+
 .wwm-corner-btn {
   background: rgba(232, 134, 74, 0.1);
   border: 1px solid rgba(232, 134, 74, 0.3);
@@ -483,12 +498,14 @@ button:disabled {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  white-space: nowrap;
 }
 
 .wwm-corner-btn:hover {
   background: rgba(232, 134, 74, 0.25);
   border-color: var(--clr-accent, #e8864a);
   transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(232, 134, 74, 0.2);
 }
 
 .wwm-corner-btn:active {
@@ -6860,4 +6877,115 @@ button:disabled {
     grid-template-columns: 1fr;
     gap: 4px;
   }
+}
+
+/* World Without Me Button & Modal */
+.wwm-toggle-wrap {
+  position: absolute;
+  top: 24px;
+  right: 32px;
+  z-index: 105;
+}
+
+.wwm-toggle {
+  background: linear-gradient(135deg, #e8864a, #d4703a);
+  color: #fff;
+  border: 2px solid #b35622;
+  border-radius: 20px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+  white-space: nowrap;
+  box-shadow: 0 4px 10px rgba(232, 134, 74, 0.4);
+}
+.wwm-toggle:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 15px rgba(232, 134, 74, 0.6);
+  filter: brightness(1.1);
+}
+@media (max-width: 700px) {
+  .wwm-toggle-wrap {
+    top: 16px;
+    right: 20px;
+  }
+  .wwm-toggle {
+    font-size: 0.82rem;
+    padding: 6px 12px;
+  }
+}
+
+.wwm-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(45, 25, 10, 0.7);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+}
+
+.wwm-modal-content {
+  background: linear-gradient(145deg, #fff3e0, #ffe0b2);
+  border: none;
+  border-radius: 32px;
+  max-width: 500px;
+  width: 100%;
+  padding: 40px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 16px 40px rgba(232, 134, 74, 0.4);
+  animation: modalPopIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  color: #5d4037;
+}
+
+[data-theme="dark"] .wwm-modal-content {
+  background: linear-gradient(145deg, #3e2723, #4e342e);
+  border: none;
+  color: #fff3e0;
+}
+
+.wwm-modal-emoji {
+  font-size: 5rem;
+  margin-bottom: 20px;
+  animation: wwmFloat 3s ease-in-out infinite, wwmPulse 2s infinite alternate;
+}
+
+@keyframes wwmFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(5deg); }
+}
+
+@keyframes wwmPulse {
+  0% { filter: drop-shadow(0 0 10px rgba(232, 134, 74, 0.4)); }
+  100% { filter: drop-shadow(0 0 25px rgba(255, 152, 0, 0.8)); }
+}
+
+@keyframes modalPopIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.wwm-modal-button {
+  margin-top: 2rem;
+  padding: 12px 32px;
+  border-radius: 30px;
+  border: none;
+  background: linear-gradient(135deg, #e8864a, #d4703a);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(232, 134, 74, 0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.wwm-modal-button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(232, 134, 74, 0.6);
 }
