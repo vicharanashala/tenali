@@ -17,7 +17,7 @@
  * Rendered as a Tenali module via the modeMap registry; receives `onBack`
  * (and `setMode`, used by the Road License to open a Tenali card).
  */
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import './CarJourneyApp.css';
 import { CjLicense, CjChallengeSet } from './CjChallenge';
 
@@ -1196,7 +1196,7 @@ function cjSaveProgress(p) {
 
 /** Record one resolved practice/check question under the stop's canonical topic key(s). */
 function cjRecord(progress, stop, correct) {
-  const next = { topicOutcomes: { ...progress.topicOutcomes } };
+  const next = { ...progress, topicOutcomes: { ...progress.topicOutcomes } };
   [stop.key, ...(stop.alsoTopics || [])].forEach((k) => {
     const o = { ...(next.topicOutcomes[k] || cjEmptyOutcome()) };
     o.attempts += 1;
@@ -1209,7 +1209,7 @@ function cjRecord(progress, stop, correct) {
 
 /** Mark the stop's mastery check as passed (does not add an attempt). */
 function cjMarkPassed(progress, stop) {
-  const next = { topicOutcomes: { ...progress.topicOutcomes } };
+  const next = { ...progress, topicOutcomes: { ...progress.topicOutcomes } };
   [stop.key, ...(stop.alsoTopics || [])].forEach((k) => {
     const o = { ...(next.topicOutcomes[k] || cjEmptyOutcome()) };
     o.checkPassed = true;
@@ -1217,6 +1217,26 @@ function cjMarkPassed(progress, stop) {
     next.topicOutcomes[k] = o;
   });
   return next;
+}
+
+/* ── Band-level resume (per stop) ────────────────────────────────────────
+ * Question order is random, so we never save question-level state. Instead a
+ * checkpoint { served, correct, remedial, checkReady } is written at every
+ * BAND boundary (and when the check unlocks). Leaving mid-band rewinds only
+ * to the start of that band; the checkpoint is cleared when the stop passes. */
+
+function cjGetResume(progress, stop) {
+  return (progress.stopResume || {})[stop.key] || null;
+}
+
+function cjSaveResumePoint(progress, stop, resume) {
+  return { ...progress, stopResume: { ...(progress.stopResume || {}), [stop.key]: resume } };
+}
+
+function cjClearResume(progress, stop) {
+  const stopResume = { ...(progress.stopResume || {}) };
+  delete stopResume[stop.key];
+  return { ...progress, stopResume };
 }
 
 function cjStopDone(progress, i) {
@@ -1648,9 +1668,21 @@ const CJ_PRACTICE_NEED = 4;                   // correct needed to unlock the ch
 const CJ_CHECK_TOTAL = 4;                     // mastery check length (band 3 only)
 const CJ_CHECK_NEED = 3;                      // correct needed to pass
 
-function cjNewQuestion(stop, band) {
+/* After a FAILED mastery check the student shouldn't redo the full 6-question
+ * ladder: the remedial run is shorter (1 × band 1, 2 × band 2, 2 × band 3)
+ * with a proportional gate, and overflow practice serves band 3 only. */
+const CJ_REMEDIAL_BANDS = [1, 2, 2, 3, 3];
+const CJ_REMEDIAL_NEED = 3;
+
+/** Pick a template of the given band, avoiding templates this session has
+ *  already served (`seen` = tplIds) as far as the pool allows: unseen first,
+ *  then least-served. Numbers are fresh on every gen() regardless. */
+function cjNewQuestion(stop, band, seen = []) {
   const pool = stop.templates.filter((t) => t.band === band);
-  const tpl = cjPick(pool);
+  const timesSeen = (id) => seen.filter((s) => s === id).length;
+  const min = Math.min(...pool.map((t) => timesSeen(t.id)));
+  const freshest = pool.filter((t) => timesSeen(t.id) === min);
+  const tpl = cjPick(freshest);
   return { tplId: tpl.id, band, ...tpl.gen() };
 }
 
@@ -1670,6 +1702,8 @@ export default function CarJourneyApp({ onBack, setMode }) {
   const [feedback, setFeedback] = useState(null); // { correct: bool, final: bool }
   const [checkResults, setCheckResults] = useState([]);
   const [pit, setPit] = useState(null); // { idx, band } while Tier-3 pit-stop drills run
+  const [remedial, setRemedial] = useState(false); // true after a failed check → shorter band ladder
+  const seenRef = useRef([]); // tplIds served this visit (practice + check) — template-repeat avoidance
 
   // Roadmap: one stop card at a time (maintainer feedback: 16 at once overwhelms).
   const [cardIdx, setCardIdx] = useState(null); // null → first uncompleted stop
@@ -1685,20 +1719,43 @@ export default function CarJourneyApp({ onBack, setMode }) {
 
   function startStop(i) {
     setStopIdx(i);
+    seenRef.current = []; // fresh visit: template-repeat avoidance starts over
+    setRemedial(cjGetResume(progress, CJ_STOPS[i])?.remedial ?? false);
     setScreen('bridge');
   }
 
-  function beginPractice() {
-    setQNum(0); setNCorrect(0); setCheckResults([]); setPit(null);
-    const q = cjNewQuestion(stop, CJ_PRACTICE_BANDS[0]);
+  /* The band ladder in force: the full 6 normally, the shorter remedial run
+   * after a failed mastery check. Overflow practice past the ladder cycles
+   * 1→2→3 normally, but stays on band 3 in remedial mode. */
+  const ladder = (rem) => (rem ? CJ_REMEDIAL_BANDS : CJ_PRACTICE_BANDS);
+  const ladderNeed = (rem) => (rem ? CJ_REMEDIAL_NEED : CJ_PRACTICE_NEED);
+  const bandAt = (served, rem) => {
+    const L = ladder(rem);
+    if (served < L.length) return L[served];
+    return rem ? 3 : [1, 2, 3][(served - L.length) % 3];
+  };
+
+  function serveQuestion(band) {
+    const q = cjNewQuestion(stop, band, seenRef.current);
+    seenRef.current = [...seenRef.current, q.tplId];
     setQuestion(q); setInputs(q.parts.map(() => '')); setMisses(0); setFeedback(null);
+  }
+
+  /** Start (or resume) practice. A band-boundary checkpoint restores the
+   *  served/correct counts, so only the current band's progress is ever lost. */
+  function beginPractice(resume = null) {
+    setCheckResults([]); setPit(null);
+    const rem = resume?.remedial ?? false;
+    setRemedial(rem);
+    const served = resume?.served ?? 0;
+    setQNum(served); setNCorrect(resume?.correct ?? 0);
+    serveQuestion(bandAt(served, rem));
     setScreen('practice');
   }
 
   function beginCheck() {
     setQNum(0); setNCorrect(0); setCheckResults([]); setPit(null);
-    const q = cjNewQuestion(stop, 3);
-    setQuestion(q); setInputs(q.parts.map(() => '')); setMisses(0); setFeedback(null);
+    serveQuestion(3);
     setScreen('check');
   }
 
@@ -1706,14 +1763,17 @@ export default function CarJourneyApp({ onBack, setMode }) {
     const served = qNum + 1;
     const correct = nCorrect + (justCorrect ? 1 : 0);
     setQNum(served); setNCorrect(correct);
-    if (served >= CJ_PRACTICE_BANDS.length && correct >= CJ_PRACTICE_NEED) {
+    const L = ladder(remedial);
+    if (served >= L.length && correct >= ladderNeed(remedial)) {
+      persist(cjSaveResumePoint(progress, stop, { served, correct, remedial, checkReady: true }));
       beginCheck();
       return;
     }
-    // Keep practising: bands cycle 1→2→3 past the scored six
-    const band = served < CJ_PRACTICE_BANDS.length ? CJ_PRACTICE_BANDS[served] : [1, 2, 3][(served - CJ_PRACTICE_BANDS.length) % 3];
-    const q = cjNewQuestion(stop, band);
-    setQuestion(q); setInputs(q.parts.map(() => '')); setMisses(0); setFeedback(null);
+    // Band-level checkpoint: save whenever the next question starts a new band.
+    if (served < L.length && L[served] !== L[served - 1]) {
+      persist(cjSaveResumePoint(progress, stop, { served, correct, remedial, checkReady: false }));
+    }
+    serveQuestion(bandAt(served, remedial));
   }
 
   function submitPractice() {
@@ -1744,18 +1804,20 @@ export default function CarJourneyApp({ onBack, setMode }) {
     let next = cjRecord(progress, stop, allRight);
     if (served >= CJ_CHECK_TOTAL) {
       if (correct >= CJ_CHECK_NEED) {
-        next = cjMarkPassed(next, stop);
+        next = cjClearResume(cjMarkPassed(next, stop), stop); // stop is done — no checkpoint to keep
         persist(next);
         setScreen('stagedone');
       } else {
+        // Failed: the re-run is the SHORTER remedial ladder, from the start.
+        setRemedial(true);
+        next = cjSaveResumePoint(next, stop, { served: 0, correct: 0, remedial: true, checkReady: false });
         persist(next);
         setScreen('review');
       }
       return;
     }
     persist(next);
-    const q = cjNewQuestion(stop, 3);
-    setQuestion(q); setInputs(q.parts.map(() => '')); setMisses(0); setFeedback(null);
+    serveQuestion(3);
   }
 
   /* ── Tier-3 pit stop: fetch raw drills from the topic's real server generator.
@@ -1820,7 +1882,6 @@ export default function CarJourneyApp({ onBack, setMode }) {
       <div className="cj-app">
         <button className="cj-back" onClick={onBack}>← Back to menu</button>
         <h1 className="cj-title">🚗 The Car Journey</h1>
-        <p className="cj-tagline">One car. Sixteen stops. All of mathematics from counting wheels to the equations of the suspension.</p>
         <div className="cj-progressbar" aria-label={`${doneCount} of ${CJ_STOPS.length} stops complete`}>
           <div className="cj-progressbar-fill" style={{ width: `${(doneCount / CJ_STOPS.length) * 100}%` }} />
           <span className="cj-progressbar-label">{doneCount} / {CJ_STOPS.length} stops</span>
@@ -1836,7 +1897,6 @@ export default function CarJourneyApp({ onBack, setMode }) {
               <span className="cj-stop-body">
                 <span className="cj-stop-name">{shownIdx + 1}. {s.title}</span>
                 <span className="cj-stop-q">{s.carQuestion}</span>
-                <span className="cj-stop-meta">Ages {s.age} · {s.skill}</span>
               </span>
               {done ? (
                 <span className="cj-stop-done-actions">
@@ -1902,6 +1962,8 @@ export default function CarJourneyApp({ onBack, setMode }) {
   }
 
   if (screen === 'bridge') {
+    const resume = cjGetResume(progress, stop);
+    const resumeLadder = ladder(resume?.remedial ?? false);
     return (
       <div className="cj-app">
         <button className="cj-back" onClick={() => setScreen('roadmap')}>← Roadmap</button>
@@ -1909,9 +1971,23 @@ export default function CarJourneyApp({ onBack, setMode }) {
           <div className="cj-bridge-emoji" aria-hidden="true">{stop.emoji}</div>
           <div className="cj-bridge-stopno">Stop {stopIdx + 1} of {CJ_STOPS.length}</div>
           <h2 className="cj-bridge-q">{stop.carQuestion}</h2>
-          <p className="cj-bridge-text">{stop.bridge}</p>
-          <p className="cj-bridge-skill">Math you'll earn: <strong>{stop.skill}</strong></p>
-          <button className="cj-primary" onClick={beginPractice}>I'm ready — let's drive</button>
+          {resume && (resume.served > 0 || resume.checkReady) ? (
+            <>
+              <p className="cj-resume-note">
+                {resume.checkReady
+                  ? '🚩 You already cleared the practice here — the mastery check is waiting.'
+                  : `🚩 Picking up where you parked: ${resume.correct} correct from ${resume.served} of ${resumeLadder.length} questions.`}
+              </p>
+              <button className="cj-primary" onClick={() => (resume.checkReady ? beginCheck() : beginPractice(resume))}>
+                {resume.checkReady ? 'Take the mastery check' : 'Resume the drive'}
+              </button>
+              <button className="cj-secondary" onClick={() => { persist(cjClearResume(progress, stop)); beginPractice(); }}>
+                Start this stop over
+              </button>
+            </>
+          ) : (
+            <button className="cj-primary" onClick={() => beginPractice(resume)}>I'm ready — let's drive</button>
+          )}
         </div>
       </div>
     );
@@ -1919,10 +1995,12 @@ export default function CarJourneyApp({ onBack, setMode }) {
 
   if (screen === 'practice' || screen === 'check') {
     const isCheck = screen === 'check';
-    const total = isCheck ? CJ_CHECK_TOTAL : CJ_PRACTICE_BANDS.length;
+    const total = isCheck ? CJ_CHECK_TOTAL : ladder(remedial).length;
     return (
       <div className="cj-app">
-        <button className="cj-back" onClick={() => setScreen('roadmap')}>← Roadmap (progress on this stop is lost)</button>
+        <button className="cj-back" onClick={() => setScreen('roadmap')}>
+          {isCheck ? '← Roadmap (this check is lost)' : '← Roadmap (only this band\'s progress is lost)'}
+        </button>
         <div className="cj-quiz-header">
           <span>{stop.emoji} Stop {stopIdx + 1}: {stop.title}</span>
           <span className={`cj-phase-tag ${isCheck ? 'check' : ''}`}>
@@ -1934,7 +2012,7 @@ export default function CarJourneyApp({ onBack, setMode }) {
             {Array.from({ length: total }).map((_, i) => (
               <span key={i} className={`cj-pip ${i < qNum ? 'seen' : ''} ${i === Math.min(qNum, total - 1) && qNum < total ? 'now' : ''}`} />
             ))}
-            <span className="cj-pip-label">{nCorrect} correct{isCheck ? ` (need ${CJ_CHECK_NEED})` : ` (need ${CJ_PRACTICE_NEED})`}</span>
+            <span className="cj-pip-label">{nCorrect} correct{isCheck ? ` (need ${CJ_CHECK_NEED})` : ` (need ${ladderNeed(remedial)})`}</span>
           </div>
         )}
 
@@ -2016,7 +2094,11 @@ export default function CarJourneyApp({ onBack, setMode }) {
     return (
       <div className="cj-app">
         <h2 className="cj-title">Almost — {nCorrect} of {CJ_CHECK_TOTAL}</h2>
-        <p className="cj-tagline">You need {CJ_CHECK_NEED}. Study the ones that got away, then take a fresh check — new numbers, same ideas.</p>
+        <p className="cj-tagline">
+          You need {CJ_CHECK_NEED}. Study the ones that got away, then take a fresh check — new numbers, same ideas.
+          If you'd rather warm up first, the practice run is a short one now ({CJ_REMEDIAL_BANDS.length} questions, not {CJ_PRACTICE_BANDS.length}) —
+          you've already proved the easy end.
+        </p>
         {missed.map((r, i) => (
           <div key={i} className="cj-review-card">
             <p className="cj-prompt">{r.q.prompt}</p>
@@ -2025,8 +2107,13 @@ export default function CarJourneyApp({ onBack, setMode }) {
           </div>
         ))}
         <div className="cj-actions">
-          <button className="cj-primary" onClick={beginCheck}>Take a fresh check</button>
-          <button className="cj-secondary" onClick={beginPractice}>More practice first</button>
+          <button className="cj-primary" onClick={() => beginCheck()}>Take a fresh check</button>
+          <button
+            className="cj-secondary"
+            onClick={() => beginPractice({ served: 0, correct: 0, remedial: true, checkReady: false })}
+          >
+            More practice first ({CJ_REMEDIAL_BANDS.length} questions)
+          </button>
         </div>
       </div>
     );
@@ -2039,8 +2126,6 @@ export default function CarJourneyApp({ onBack, setMode }) {
         <div className="cj-stagedone">
           <div className="cj-bridge-emoji" aria-hidden="true">{stop.emoji}</div>
           <h2 className="cj-title">Stop {stopIdx + 1} complete!</h2>
-          <p className="cj-stagedone-q">{stop.carQuestion}</p>
-          <p className="cj-finale-text">{stop.finale}</p>
           <p className="cj-role">🏆 {stop.role}</p>
           <CjLicense stopKey={stop.key} onGo={setMode ? (m) => setMode(m) : null} />
           <CjChallengeSet stopKey={stop.key} />

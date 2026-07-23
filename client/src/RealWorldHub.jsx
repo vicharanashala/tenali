@@ -10,12 +10,13 @@
  * App.jsx is needed for new pathways — this file owns the whole hub.
  *
  * Self-contained module: rendered via App.jsx's modeMap under key 'realworld';
- * receives `onBack` (returns to the home grid).
+ * receives `onBack` (returns to the home grid) and `setMode`, which it forwards
+ * to the active pathway so a Road License can open the matching Tenali card.
  */
 import { useState } from 'react';
 import CarJourneyApp from './CarJourneyApp';
 
-export default function RealWorldHubApp({ onBack }) {
+export default function RealWorldHubApp({ onBack, setMode }) {
   const [pathway, setPathway] = useState(null);
 
   const pathways = [
@@ -35,7 +36,7 @@ export default function RealWorldHubApp({ onBack }) {
   const active = pathways.find((p) => p.key === pathway);
   if (active) {
     const Pathway = active.component;
-    return <Pathway onBack={() => setPathway(null)} />;
+    return <Pathway onBack={() => setPathway(null)} setMode={setMode} />;
   }
 
   return (
@@ -80,12 +81,11 @@ export default function RealWorldHubApp({ onBack }) {
             key={p.key}
             onClick={() => setPathway(p.key)}
             className="menu-card featured"
-            style={{ width: '100%', height: 'auto', minHeight: '170px', padding: '18px 14px', gap: '6px' }}
+            style={{ width: '100%', height: 'auto', minHeight: '128px', padding: '18px 14px', gap: '6px' }}
           >
             <span style={{ fontSize: '2rem' }} aria-hidden="true">{p.icon}</span>
             <span className="menu-title" style={{ fontSize: '1rem' }}>{p.name}</span>
             <span className="menu-subtitle" style={{ color: 'var(--clr-accent)', fontSize: '0.75rem', fontWeight: 600 }}>{p.subtitle}</span>
-            <span className="menu-subtitle" style={{ fontSize: '0.72rem', marginTop: '2px', lineHeight: 1.4 }}>{p.desc}</span>
           </button>
         ))}
       </div>

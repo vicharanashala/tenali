@@ -22,6 +22,7 @@
  * Styles live in CarJourneyApp.css under .cj-license / .cj-challenge.
  */
 import { useMemo, useState } from 'react';
+import { cjSetReco } from './cjReco';
 
 /* ── tiny local helpers (answer-first generation, house style) ── */
 const czRand = (lo, hi, step = 1) => lo + step * Math.floor(Math.random() * ((hi - lo) / step + 1));
@@ -32,24 +33,24 @@ const czPick = (arr) => arr[Math.floor(Math.random() * arr.length)];
  * `mode` is the Tenali modeMap key (used for one-tap navigation).
  * ──────────────────────────────────────────────────────────────────────────── */
 const CJ_HANDOFF = {
-  addition:    [{ mode: 'addition',    name: 'Addition',             level: '3-digit numbers' }],
-  basicarith:  [{ mode: 'basicarith',  name: 'Arithmetic',           level: 'Medium' }],
-  multiply:    [{ mode: 'multiply',    name: 'Multiplication',       level: 'Hard — tables up to 12' }],
-  decimals:    [{ mode: 'decimals',    name: 'Decimals',             level: 'Hard' }],
-  fractionadd: [{ mode: 'fractionadd', name: 'Fractions',            level: 'Medium' }],
-  ratio:       [{ mode: 'ratio',       name: 'Ratio',                level: 'Hard' }],
-  percent:     [{ mode: 'percent',     name: 'Percentages',          level: 'Hard' }],
-  sdt:         [{ mode: 'sdt',         name: 'Speed, Distance, Time', level: 'Hard' }],
-  mensur:      [{ mode: 'mensur',      name: 'Mensuration',          level: 'Easy' },
-                { mode: 'circmeasure', name: 'Circular Measure',     level: 'Hard' }],
-  pythag:      [{ mode: 'pythag',      name: "Pythagoras' Theorem",  level: 'Hard' }],
-  quadratic:   [{ mode: 'quadratic',   name: 'Quadratic',            level: 'Medium' }],
-  trig:        [{ mode: 'trig',        name: 'Trigonometry',         level: 'Medium' }],
-  lineareq:    [{ mode: 'lineareq',    name: 'Linear Equations',     level: 'Medium' },
-                { mode: 'simul',       name: 'Sim. Equations',       level: 'Easy' }],
-  diff:        [{ mode: 'diff',        name: 'Differentiation',      level: 'Hard' }],
-  integ:       [{ mode: 'integ',       name: 'Integration',          level: 'Hard' }],
-  diffeq:      [{ mode: 'diffeq',      name: 'Differential Eq.',     level: 'Hard' }],
+  addition:    [{ mode: 'addition',    name: 'Addition',             level: '3-digit numbers', diff: 'hard' }],
+  basicarith:  [{ mode: 'basicarith',  name: 'Arithmetic',           level: 'Medium',  diff: 'medium' }],
+  multiply:    [{ mode: 'multiply',    name: 'Multiplication',       level: 'Hard — tables up to 12', diff: 'hard' }],
+  decimals:    [{ mode: 'decimals',    name: 'Decimals',             level: 'Hard',    diff: 'hard' }],
+  fractionadd: [{ mode: 'fractionadd', name: 'Fractions',            level: 'Medium',  diff: 'medium' }],
+  ratio:       [{ mode: 'ratio',       name: 'Ratio',                level: 'Hard',    diff: 'hard' }],
+  percent:     [{ mode: 'percent',     name: 'Percentages',          level: 'Hard',    diff: 'hard' }],
+  sdt:         [{ mode: 'sdt',         name: 'Speed, Distance, Time', level: 'Hard',   diff: 'hard' }],
+  mensur:      [{ mode: 'mensur',      name: 'Mensuration',          level: 'Easy',    diff: 'easy' },
+                { mode: 'circmeasure', name: 'Circular Measure',     level: 'Hard',    diff: 'hard' }],
+  pythag:      [{ mode: 'pythag',      name: "Pythagoras' Theorem",  level: 'Hard',    diff: 'hard' }],
+  quadratic:   [{ mode: 'quadratic',   name: 'Quadratic',            level: 'Medium',  diff: 'medium' }],
+  trig:        [{ mode: 'trig',        name: 'Trigonometry',         level: 'Medium',  diff: 'medium' }],
+  lineareq:    [{ mode: 'lineareq',    name: 'Linear Equations',     level: 'Medium',  diff: 'medium' },
+                { mode: 'simul',       name: 'Sim. Equations',       level: 'Easy',    diff: 'easy' }],
+  diff:        [{ mode: 'diff',        name: 'Differentiation',      level: 'Hard',    diff: 'hard' }],
+  integ:       [{ mode: 'integ',       name: 'Integration',          level: 'Hard',    diff: 'hard' }],
+  diffeq:      [{ mode: 'diffeq',      name: 'Differential Eq.',     level: 'Hard',    diff: 'hard' }],
 };
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -450,7 +451,12 @@ export function CjLicense({ stopKey, onGo }) {
             {g.name} — you're cleared to start at <strong>{g.level}</strong> in Tenali
           </span>
           {onGo && (
-            <button className="cj-license-go" onClick={() => onGo(g.mode)}>Open {g.name} →</button>
+            <button
+              className="cj-license-go"
+              onClick={() => { cjSetReco(g.mode, g.diff); onGo(g.mode); }}
+            >
+              Open {g.name} →
+            </button>
           )}
         </div>
       ))}
@@ -477,10 +483,6 @@ export function CjChallengeSet({ stopKey }) {
       </button>
       {openSet && (
         <div className="cj-challenge-body">
-          <p className="cj-challenge-sub">
-            Six harder questions — no timer, no score, nothing to submit. They climb: each one asks a
-            little more than the last, and only uses math from the stops you've already driven.
-          </p>
           <ol className="cj-challenge-list">
             {items.map((q, i) => (
               <li key={i} className="cj-challenge-item">

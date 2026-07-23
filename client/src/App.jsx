@@ -65,6 +65,8 @@ import InteractiveLcmHcfApp from './LcmHcfApp';
 import IdliVadaSambharApp from './IdliVadaSambharApp';
 import CarJourneyApp from './CarJourneyApp';
 import RealWorldHubApp from './RealWorldHub';
+import { cjTakeReco } from './cjReco'; // Feature CR — Road License difficulty hand-off
+const CJ_RECO_DIFFS = ['easy', 'medium', 'hard', 'extrahard'];
 import VisualMathLabRedux, {
   FrogJumpTemplate,
   MathMachineTemplate,
@@ -48482,7 +48484,7 @@ function AdditionApp({ onBack, completedTopics = [], goldMastery = [], markTopic
   // Mode selection: 'standard' (default), 'counting' (Visual Counting), 'scale' (Balance Scale)
   const [additionMode, setAdditionMode] = useState(initialMode || 'standard')
   // Difficulty level: 'easy' (1-digit), 'medium' (2-digit), 'hard' (3-digit), 'extrahard' (4-digit)
-  const [difficulty, setDifficulty] = useState(initialDifficulty || 'easy')
+  const [difficulty, setDifficulty] = useState(() => initialDifficulty || cjTakeReco('addition', CJ_RECO_DIFFS) || 'easy')
   // Adaptive mode enabled?
   const [isAdaptive, setIsAdaptive] = useState(false)
   // Adaptive score (0-3)
@@ -50068,7 +50070,7 @@ function GymQuiz({ title, subtitle, typeKeys, welcomeText, algebraInput, onBack 
  */
 function BasicArithApp({ onBack, completedTopics = [], goldMastery = [], markTopicCompleted, setTransferTopic, setMode, isGoalMode = false }) {
   // Difficulty level: 'easy', 'medium', 'hard', 'extrahard'
-  const [difficulty, setDifficulty] = useState('easy')
+  const [difficulty, setDifficulty] = useState(() => cjTakeReco('basicarith', CJ_RECO_DIFFS) || 'easy')
   // Adaptive mode enabled?
   const [isAdaptive, setIsAdaptive] = useState(false)
   // Adaptive score (0-3)
@@ -50396,7 +50398,7 @@ const fetchQuestion = async () => {
  */
 function QuadraticApp({ onBack, isGoalMode = false }) {
   // Difficulty level: 'easy', 'medium', 'hard', 'extrahard'
-  const [difficulty, setDifficulty] = useState('easy')
+  const [difficulty, setDifficulty] = useState(() => cjTakeReco('quadratic', CJ_RECO_DIFFS) || 'easy')
   // Adaptive mode enabled?
   const [isAdaptive, setIsAdaptive] = useState(false)
   // Adaptive score (0-3)
@@ -53044,7 +53046,8 @@ function TransferChallengeApp({ topicKey, onBack, completedTopics, goldMastery, 
 function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, answerField, topicKey: customTopicKey }) {
   return function GeneratedQuizApp({ onBack, completedTopics = [], goldMastery = [], markTopicCompleted, markGoldMastery, updateCoins, setMode, setTransferTopic, initialDifficulty, initialNumQuestions, initialStarted, isGoalMode = false }) {
     const diffs = Object.keys(diffLabels)
-    const [difficulty, setDifficulty] = useState(initialDifficulty || diffs[0])
+    // Feature CR: a just-earned Road License pre-selects the earned difficulty (one-shot; student can change it)
+    const [difficulty, setDifficulty] = useState(() => initialDifficulty || cjTakeReco(customTopicKey || apiPath.replace('-api', ''), diffs) || diffs[0])
     const topicKey = customTopicKey || apiPath.replace('-api', '')
     const [isAdaptive, setIsAdaptive] = useState(false)
     const [adaptScore, setAdaptScore] = useState(0) // 0.0 (easy) → 3.0 (extrahard)
@@ -56951,7 +56954,7 @@ const loadQuestion = async () => {
 
 /* ── Ratio & Proportion App ────────────────────────── */
 function RatioApp({ onBack, completedTopics = [], goldMastery = [], markTopicCompleted, markGoldMastery, updateCoins, setMode, setTransferTopic, isGoalMode = false }) {
-  const [difficulty, setDifficulty] = useState('easy')
+  const [difficulty, setDifficulty] = useState(() => cjTakeReco('ratio', CJ_RECO_DIFFS) || 'easy')
   const [isAdaptive, setIsAdaptive] = useState(false)
   const [adaptScore, setAdaptScore] = useState(0)
   const adaptScoreRef = useRef(0)
@@ -58845,7 +58848,7 @@ const loadQuestion = async () => {
 function FractionAddApp({ onBack, completedTopics = [], goldMastery = [], markTopicCompleted, markGoldMastery, updateCoins, setMode, setTransferTopic, isGoalMode = false }) {
   // ── State variables ──────────────────────────────────────────────────
   // Difficulty: 'easy' | 'medium' | 'hard' | 'extrahard'
-  const [difficulty, setDifficulty] = useState('easy')
+  const [difficulty, setDifficulty] = useState(() => cjTakeReco('fractionadd', CJ_RECO_DIFFS) || 'easy')
   // Adaptive mode enabled?
   const [isAdaptive, setIsAdaptive] = useState(false)
   // Adaptive score (0-3)
@@ -61246,7 +61249,7 @@ const loadQuestion = async () => {
 function SimulApp({ onBack, isGoalMode = false }) {
   // ─────── Quiz State Management ──────────────────────────────────
   // Difficulty level: 'easy' (2×2) | 'hard' (3×3)
-  const [difficulty, setDifficulty] = useState('easy')
+  const [difficulty, setDifficulty] = useState(() => cjTakeReco('simul', CJ_RECO_DIFFS) || 'easy')
   // Adaptive mode enabled?
   const [isAdaptive, setIsAdaptive] = useState(false)
   // Adaptive score (0-3)
