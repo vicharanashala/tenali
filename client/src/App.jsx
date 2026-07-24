@@ -67,6 +67,7 @@ function useProgressSubmit(revealed, isCorrect, topic, questionId) {
 
 
 import Vachana from './vachana'
+import ReflectionJournal from './ReflectionJournal'  // Feature CT — platform-wide reflection journal
 import 'chart.js/auto'
 import { Line } from 'react-chartjs-2'
 
@@ -44886,6 +44887,7 @@ function App() {
         )}
       </div>
       {renderCelebrationModal()}
+      <ReflectionJournal />
     </div>
   )
 }
