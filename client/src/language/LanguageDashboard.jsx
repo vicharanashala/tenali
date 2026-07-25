@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useTimer, QuizLayout } from '../App';
 import WordCreatorApp from './WordCreatorApp';
-import CrosswordApp from './CrosswordApp';
-import WordSearchApp from './WordSearchApp';
+
+// API base URL from environment variables (Vite)
+const API = import.meta.env.VITE_API_BASE_URL || '';
 
 /**
  * LanguageDashboard Component
@@ -15,38 +17,18 @@ export default function LanguageDashboard({ onBack }) {
     {
       key: 'wordcreator',
       name: 'Word Creator',
-      subtitle: 'Fill in the blanks to create valid words from patterns.',
+      subtitle: 'Fill in the blanks to create new words.',
       color: 'green'
-    },
-    {
-      key: 'crossword',
-      name: 'Crossword Puzzles',
-      subtitle: 'Solve thematic crosswords and build your vocabulary.',
-      color: 'orange'
-    },
-    {
-      key: 'wordsearch',
-      name: 'Word Search',
-      subtitle: 'Find hidden words in the grid to challenge your observation.',
-      color: 'orange'
     }
   ];
 
-  const filtered = activities.filter(a =>
-    a.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  const filtered = activities.filter(a => 
+    a.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
     a.subtitle.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   if (selectedGame === 'wordcreator') {
     return <WordCreatorApp onBack={() => setSelectedGame(null)} />;
-  }
-
-  if (selectedGame === 'crossword') {
-    return <CrosswordApp onBack={() => setSelectedGame(null)} />;
-  }
-
-  if (selectedGame === 'wordsearch') {
-    return <WordSearchApp onBack={() => setSelectedGame(null)} />;
   }
 
   return (
@@ -56,12 +38,12 @@ export default function LanguageDashboard({ onBack }) {
       </div>
       <h1>Language Puzzles</h1>
       <p className="subtitle">Enhance your vocabulary, spelling, and grammar skills</p>
-
+      
       <div className="search-bar-row">
-        <input
-          className="search-bar"
-          type="text"
-          placeholder="Search language games..."
+        <input 
+          className="search-bar" 
+          type="text" 
+          placeholder="Search language games..." 
           value={searchQuery}
           onChange={e => setSearchQuery(e.target.value)}
         />
@@ -69,7 +51,7 @@ export default function LanguageDashboard({ onBack }) {
 
       <div className="menu-grid" style={{ marginTop: 20 }}>
         {filtered.map(act => (
-          <button
+          <button 
             key={act.key}
             className={`menu-card ${act.color}`}
             onClick={() => setSelectedGame(act.key)}
@@ -82,3 +64,5 @@ export default function LanguageDashboard({ onBack }) {
     </>
   );
 }
+
+

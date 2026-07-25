@@ -25,6 +25,10 @@ import React, { useEffect, useState, useRef, useMemo, useCallback } from 'react'
 import VoiceAssistant from './components/VoiceAssistant';
 import { motion } from 'framer-motion';
 import OnboardingTour from './components/OnboardingTour';
+import DashboardWidget from './components/DashboardWidget';
+import MistakeNotebook from './components/MistakeNotebook';
+import ReviewMode from './components/ReviewMode';
+import { recordAttempt } from './services/srsService';
 
 window.React = React;
 console.log("React version:", React.version);
@@ -56,11 +60,7 @@ function useProgressSubmit(revealed, isCorrect, topic, questionId) {
     }).catch(err => console.error('Failed to update progress', err));
   }, [revealed, isCorrect, topic, questionId]);
 }
-import Vachana from './vachana'
 import './App.css'
-import EnhancedMathDetectiveApp from './detective-app'
-import GlossaryText from './components/GlossaryText'
-import KeyTerms from './components/KeyTerms'
 import InteractiveLcmHcfApp from './LcmHcfApp';
 import IdliVadaSambharApp from './IdliVadaSambharApp';
 import VisualMathLabRedux, {
@@ -74,43 +74,15 @@ import VisualMathLabRedux, {
 } from './VisualMathLabRedux';
 import CoordinateGrid from './components/CoordinateGrid';
 import LanguageDashboard from './language/LanguageDashboard'
-import { VOCAB_CORPUS } from './vocabCorpus'
-import PercentExplanationApp from './PercentExplanationApp'
-import { playSound } from './audioContext'
+import InteractiveLearningOverlay, { hasInteractiveLab } from './InteractiveLearningOverlay'
 
 // API base URL from environment variables (Vite)
 const API = import.meta.env.VITE_API_BASE_URL || '';
 
-// Global fetch interceptor to automatically attach authorization header
-const originalFetch = window.fetch;
-window.fetch = function (url, options) {
-  try {
-    const token = localStorage.getItem('tenali-auth-token');
-    const urlStr = typeof url === 'string' ? url : (url && url.url ? url.url : '');
-    if (token && urlStr && (urlStr.includes('/api/') || urlStr.includes('-api/') || urlStr.includes('/gk-api/'))) {
-      options = options || {};
-      if (!options.headers) {
-        options.headers = {};
-      }
-      if (typeof Headers !== 'undefined' && options.headers instanceof Headers) {
-        if (!options.headers.has('Authorization')) {
-          options.headers.append('Authorization', `Bearer ${token}`);
-        }
-      } else {
-        if (!options.headers['Authorization'] && !options.headers['authorization']) {
-          options.headers['Authorization'] = `Bearer ${token}`;
-        }
-      }
-    }
-  } catch (e) {
-    console.error('Fetch interceptor error:', e);
-  }
-  return originalFetch(url, options);
-};
-
 // App version — increment with each commit
 const TENALI_VERSION = '1.0.86'
 const TENALI_BUILD_DATE = '2026-05-03 18:28 IST'
+
 // ─── Auth helpers ───────────────────────────────────────────────────────────
 // Tiny pub/sub on top of localStorage so AuthMenu and AuthGate stay in sync.
 const AUTH_TOKEN_KEY = 'tenali-auth-token'
@@ -233,27 +205,6 @@ function AuthMenu() {
                 <div style={{ padding: '8px 12px', fontSize: '0.85rem', opacity: 0.75 }}>
                   Signed in as <strong>{user.username}</strong>
                 </div>
-                <hr style={{ border: 'none', borderTop: '1px solid var(--clr-border, #444)', margin: '4px 0' }} />
-                <button
-                  type="button"
-                  onClick={() => { window.location.href = '/'; setOpen(false) }}
-                  style={{ width: '100%', textAlign: 'left', padding: '8px 12px', borderRadius: 6, background: 'transparent', border: 'none', color: 'var(--clr-text)', cursor: 'pointer', fontSize: '0.95rem' }}
-                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)' }}
-                  onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
-                >
-                  Puzzles
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => { window.location.href = '/profile'; setOpen(false) }}
-                  style={{ width: '100%', textAlign: 'left', padding: '8px 12px', borderRadius: 6, background: 'transparent', border: 'none', color: 'var(--clr-text)', cursor: 'pointer', fontSize: '0.95rem' }}
-                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)' }}
-                  onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
-                >
-                  Profile
-                </button>
-                <hr style={{ border: 'none', borderTop: '1px solid var(--clr-border, #444)', margin: '4px 0' }} />
                 <button
                   type="button"
                   onClick={() => { logout(); setOpen(false) }}
@@ -342,13 +293,29 @@ function AuthGate({ children }) {
   if (user) return children
   return (
     <div style={{ maxWidth: 520, margin: '4rem auto', padding: '2rem', textAlign: 'center', color: 'var(--clr-text)' }}>
-      <h1 style={{ marginBottom: 8 }}>Login required</h1>
+      <h1 style={{ marginBottom: 8 }}>🔒 Login required</h1>
       <p style={{ opacity: 0.85, lineHeight: 1.6 }}>
         This page is only available to signed-in users. Open the <strong>menu</strong> in the top-right corner and choose <strong>Log in</strong>.
       </p>
     </div>
   )
 }
+
+// Inject version badge into DOM once (appears on all routes)
+; (() => {
+  if (typeof document !== 'undefined' && !document.getElementById('tenali-version')) {
+    const el = document.createElement('div')
+    el.id = 'tenali-version'
+    Object.assign(el.style, {
+      position: 'fixed', top: '8px', right: '12px', zIndex: '9999',
+      fontSize: '0.65rem', opacity: '0.55', pointerEvents: 'none',
+      textAlign: 'right', lineHeight: '1.4', fontFamily: 'system-ui, sans-serif',
+      color: 'var(--clr-text-soft)',
+    })
+    el.innerHTML = `<div>v${TENALI_VERSION}</div><div>${TENALI_BUILD_DATE}</div>`
+    document.body.appendChild(el)
+  }
+})()
 
 // Default number of questions for quizzes
 const DEFAULT_TOTAL = 20
@@ -485,23 +452,11 @@ export function useTimer() {
  * @returns {ReactElement|null} Table element or null if no results
  */
 function ResultsTable({ results }) {
-  const processedRef = useRef(false);
-  useEffect(() => {
-    if (processedRef.current) return;
-    if (results && results.length > 0) {
-      processedRef.current = true;
-      const correctCount = results.filter(r => r.correct).length;
-      if (correctCount > 0 && typeof window.tenaliIncrementSolved === 'function') {
-        window.tenaliIncrementSolved(correctCount);
-      }
-    }
-  }, [results]);
-
   // Hide table if empty or null
   if (!results || results.length === 0) return null
+  // Calculate summary stats
   const totalTime = results.reduce((sum, r) => sum + r.time, 0)
   const avgTime = (totalTime / results.length).toFixed(1)
-  const hasCarries = results.some(r => r.userCarries || r.correctCarries)
   return (
     <div className="results-table-wrapper">
       <table className="results-table">
@@ -511,29 +466,24 @@ function ResultsTable({ results }) {
             <th>Question</th>
             <th>Your Answer</th>
             <th>Result</th>
-            {hasCarries && <th>Carries</th>}
             <th>Time</th>
           </tr>
         </thead>
         <tbody>
           {results.map((r, i) => (
+            // Row is highlighted green if correct, red if wrong
             <tr key={i} className={r.correct ? 'row-correct' : 'row-wrong'}>
               <td>{i + 1}</td>
               <td>{r.question}</td>
               <td>{r.userAnswer}</td>
-              <td>{r.correct ? `✓ (${r.correctAnswer})` : `✗ (${r.correctAnswer})`}</td>
-              {hasCarries && (
-                <td style={{ fontSize: '0.8rem', whiteSpace: 'pre-line' }}>
-                  {r.userCarries && <span>Yours: {r.userCarries}</span>}
-                  {r.userCarries && r.correctCarries && <br />}
-                  {r.correctCarries && <span style={{ color: 'var(--clr-correct)' }}>Ans: {r.correctCarries}</span>}
-                </td>
-              )}
+              {/* Show checkmark for correct, X with correct answer for wrong */}
+              <td>{r.correct ? '✓' : `✗ (${r.correctAnswer})`}</td>
               <td>{r.time}s</td>
             </tr>
           ))}
         </tbody>
       </table>
+      {/* Summary stats at bottom */}
       <div className="results-summary">
         Total time: {totalTime}s &middot; Average: {avgTime}s per question
       </div>
@@ -2048,7 +1998,7 @@ function ScaffoldedTablesApp({ studentName, defaultTable = 2 }) {
               {['🎉', '🏆', '⭐', '🌟', '🎊'][Math.floor(Math.random() * 5)]}
             </p>
             <p className="welcome-text" style={{ fontSize: '1.3rem', color: 'var(--clr-accent)' }}>
-              Fantastic work! You nailed {MASTERY_STREAK} in a row!
+              Fantastic work! You nailed {PHASE3_MASTERY_STREAK} in a row!
             </p>
             <p className="final-score">Score: {score}/{questionNum}</p>
             <p style={{ fontSize: '1.1rem', margin: '0.5rem 0', color: 'var(--clr-accent)' }}>
@@ -9243,514 +9193,7 @@ const Bridge27App = makeBridgeApp({
   nextHref: '/chapter5', nextLabel: 'On to Lesson 17',
 })
 
-function Chapter5App({ onBack }) {
-  const [progress, setProgress] = useState(ch5_loadProgress)
-  const [activeId, setActiveId] = useState(null)
-  const [phase, setPhase] = useState('teach')
-  const [qIdx, setQIdx] = useState(0)
-  // playList is the dynamic sequence of source-question indices the student
-  // is walking through. Initially [0..N-1]; grows when wrong answers re-queue.
-  const [playList, setPlayList] = useState([])
-  // Source idx of the most recent wrong answer (or null) — drives the retry
-  // splice that happens at advance() time.
-  const [lastWrongSrc, setLastWrongSrc] = useState(null)
-  const [selectedIdx, setSelectedIdx] = useState(null)  // chosen MCQ option (display index)
-  const [fillInput, setFillInput] = useState('')
-  const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
-  const [autoCountdown, setAutoCountdown] = useState(0)  // seconds remaining before auto-advance
-  const inputRef = useRef(null)
-  const autoTimerRef = useRef(null)
-  const advanceRef = useRef(() => { })
-
-  const lesson = activeId ? CH5_LESSONS.find(l => l.id === activeId) : null
-  const currentSourceIdx = playList[qIdx]
-  const currentQ = lesson && currentSourceIdx != null ? lesson.questions[currentSourceIdx] : null
-  // True if this question has appeared earlier in the play sequence — i.e.
-  // it's a re-attempt after a previous wrong answer. Drives the retry badge.
-  const isRetry = useMemo(() => {
-    if (currentSourceIdx == null) return false
-    return playList.slice(0, qIdx).includes(currentSourceIdx)
-  }, [playList, qIdx, currentSourceIdx])
-
-  // Compute display order for MCQ options (stable per question; different on
-  // a retry so the student can't memorise positions).
-  const optionOrder = useMemo(() => {
-    if (!currentQ || currentQ.kind !== 'mcq') return []
-    return ch5_seededShuffle(currentQ.options.length, `${activeId}-${qIdx}-${currentSourceIdx}-${currentQ.prompt}`)
-  }, [activeId, qIdx, currentSourceIdx, currentQ])
-  const correctDisplayIdx = useMemo(() => optionOrder.indexOf(currentQ?.correct ?? -1), [optionOrder, currentQ])
-
-  useEffect(() => { ch5_saveProgress(progress) }, [progress])
-
-  useEffect(() => {
-    if (phase !== 'practice' || revealed) return
-    if (currentQ?.kind?.startsWith('fill') && inputRef.current) inputRef.current.focus()
-  }, [phase, qIdx, revealed, currentQ])
-
-  const startLesson = (id) => {
-    setActiveId(id)
-    const lessonRef = CH5_LESSONS.find(l => l.id === id)
-    const initial = Array.from({ length: lessonRef.questions.length }, (_, i) => i)
-    setPlayList(initial)
-    setLastWrongSrc(null)
-    const p = progress[id] || {}
-    if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
-    else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
-  }
-
-  const acknowledgeTeach = () => {
-    setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
-    setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
-    setLastWrongSrc(null)
-  }
-
-  const submitFill = () => {
-    if (!currentQ) return
-    if (revealed) { advance(); return }
-    const ok = ch5_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
-    setLastWrongSrc(ok ? null : currentSourceIdx)
-  }
-
-  const pickMcq = (displayIdx) => {
-    if (!currentQ || revealed || currentQ.kind !== 'mcq') return
-    const optSourceIdx = optionOrder[displayIdx]
-    const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
-    setLastWrongSrc(ok ? null : currentSourceIdx)
-  }
-
-  // Cancel any pending auto-advance timer (called whenever we leave the
-  // current revealed state for any reason — manual advance, navigation, etc.)
-  const cancelAutoAdvance = () => {
-    if (autoTimerRef.current) { clearInterval(autoTimerRef.current); autoTimerRef.current = null }
-    setAutoCountdown(0)
-  }
-
-  const advance = () => {
-    cancelAutoAdvance()
-    if (!lesson) return
-    // If the just-finished question was wrong, append it to the end of
-    // the play list so the student must come back to it before finishing.
-    let workingList = playList
-    if (lastWrongSrc != null) {
-      // Wrong answers go to the END of the lesson — student finishes all
-      // fresh questions first, then meets the retry cluster at the tail.
-      workingList = [...playList, lastWrongSrc]
-      setPlayList(workingList)
-      setLastWrongSrc(null)
-    }
-    const next = qIdx + 1
-    if (next >= workingList.length) {
-      setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: lesson.questions.length, completed: true } }))
-      setPhase('done')
-    } else {
-      setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
-      setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
-    }
-  }
-  advanceRef.current = advance
-
-  // Jump straight to position `i` (0-indexed) in the current playList. Used
-  // by the slider so the student can skip ahead or revisit an earlier item.
-  const jumpToQuestion = (i) => {
-    cancelAutoAdvance()
-    if (!lesson) return
-    const clamped = Math.max(0, Math.min(playList.length - 1, i))
-    setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
-    setProgress(p => {
-      const cur = p[activeId] || {}
-      const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
-      return { ...p, [activeId]: { ...cur, teachSeen: true, qIdx: saved } }
-    })
-  }
-
-  const backToOverview = () => {
-    cancelAutoAdvance()
-    setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
-  }
-
-  const resetAll = () => {
-    if (!confirm('Reset all Chapter 5 progress?')) return
-    setProgress({}); ch5_saveProgress({})
-    backToOverview()
-  }
-
-  // Auto-advance: once the answer is revealed, count down from 5s and call
-  // advance() if the user does nothing. Any keystroke or click cancels.
-  useEffect(() => {
-    if (phase !== 'practice' || !revealed) { cancelAutoAdvance(); return }
-    const total = Math.round(CH5_AUTO_ADVANCE_MS / 1000)
-    setAutoCountdown(total)
-    autoTimerRef.current = setInterval(() => {
-      setAutoCountdown(prev => {
-        if (prev <= 1) {
-          clearInterval(autoTimerRef.current); autoTimerRef.current = null
-          advanceRef.current()
-          return 0
-        }
-        return prev - 1
-      })
-    }, 1000)
-    return () => { if (autoTimerRef.current) { clearInterval(autoTimerRef.current); autoTimerRef.current = null } }
-  }, [phase, revealed, qIdx, activeId])
-
-  // Keyboard: 1..9 picks an MCQ option; Enter submits a fill or advances on reveal
-  useEffect(() => {
-    if (phase !== 'practice' || !currentQ) return
-    const onKey = (e) => {
-      if (revealed) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); advance() }
-        return
-      }
-      if (currentQ.kind === 'mcq') {
-        const k = e.key
-        if (/^[1-9]$/.test(k)) {
-          const i = parseInt(k, 10) - 1
-          if (i < currentQ.options.length) { e.preventDefault(); pickMcq(i) }
-        }
-      } else if (currentQ.kind?.startsWith('fill')) {
-        if (e.key === 'Enter') { e.preventDefault(); submitFill() }
-      }
-    }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [phase, qIdx, revealed, currentQ, fillInput, optionOrder])
-
-  // ────────── Overview ──────────
-  if (!activeId) {
-    const total = CH5_LESSONS.length
-    const done = CH5_LESSONS.filter(l => progress[l.id]?.completed).length
-    return (
-      <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
-        <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
-          <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
-        </div>
-        <h1 style={{ marginBottom: 4 }}>Chapter 5 — Fractions, Percentages & Standard Form</h1>
-        <p className="subtitle" style={{ marginTop: 0 }}>
-          Cambridge IGCSE Mathematics · {done}/{total} lessons complete
-        </p>
-        <p style={{ opacity: 0.85, marginTop: 8 }}>
-          Pick the next lesson. Each one starts with a short explanation, then a stream of multiple-choice and fill-in-the-blank
-          questions — easy warm-ups first, then the actual chapter exercise problems.
-        </p>
-        <ol style={{ listStyle: 'none', padding: 0, marginTop: 16 }}>
-          {CH5_LESSONS.map((l) => {
-            const p = progress[l.id] || {}
-            const completed = p.completed
-            const inProg = !completed && (p.teachSeen || (p.qIdx || 0) > 0)
-            return (
-              <li key={l.id} style={{ marginBottom: 8 }}>
-                <button
-                  onClick={() => startLesson(l.id)}
-                  style={{
-                    width: '100%', textAlign: 'left', padding: '12px 14px',
-                    borderRadius: 10,
-                    borderLeft: completed ? '4px solid #2ea043' : inProg ? '4px solid #388bfd' : '1px solid var(--clr-border, #444)',
-                    borderTop: '1px solid ' + (completed ? '#2ea043' : 'var(--clr-border, #444)'),
-                    borderRight: '1px solid ' + (completed ? '#2ea043' : 'var(--clr-border, #444)'),
-                    borderBottom: '1px solid ' + (completed ? '#2ea043' : 'var(--clr-border, #444)'),
-                    background: completed
-                      ? 'linear-gradient(90deg, rgba(46,160,67,0.32) 0%, rgba(46,160,67,0.18) 100%)'
-                      : inProg ? 'rgba(56,139,253,0.10)' : 'var(--clr-surface, #1c1c1f)',
-                    color: 'var(--clr-text)',
-                    fontWeight: completed ? 600 : 400,
-                    cursor: 'pointer', fontSize: '0.95rem',
-                    boxShadow: completed ? '0 0 0 1px rgba(46,160,67,0.35) inset' : 'none',
-                  }}
-                >
-                  <span style={{ marginRight: 8 }}>{completed ? '✅' : inProg ? '▶' : '○'}</span>
-                  {ch5RenderMath(l.title)}
-                  {completed && (
-                    <span style={{
-                      float: 'right', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.5px',
-                      color: '#fff', background: '#2ea043', padding: '2px 8px', borderRadius: 10,
-                    }}>DONE</span>
-                  )}
-                  {p.qIdx > 0 && !completed && (
-                    <span style={{ float: 'right', fontSize: '0.8rem', opacity: 0.7 }}>{p.qIdx}/{l.questions.length}</span>
-                  )}
-                </button>
-              </li>
-            )
-          })}
-        </ol>
-      </div>
-    )
-  }
-
-  // ────────── Teach ──────────
-  if (phase === 'teach') {
-    return (
-      <div style={{ maxWidth: 720, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
-        <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
-          <button className="back-button" onClick={backToOverview}>← Lessons</button>
-        </div>
-        {activeId === 'L1' && <Lesson1ProgressionStrip current="lesson1" />}
-        {activeId === 'L2' && <Lesson2ProgressionStrip current="lesson2" />}
-        {activeId === 'L3' && <Lesson3ProgressionStrip current="lesson3" />}
-        {activeId === 'L4' && <Lesson4ProgressionStrip current="lesson4" />}
-        {activeId === 'L5' && <Lesson5ProgressionStrip current="lesson5" />}
-        {activeId === 'L6' && <Lesson6ProgressionStrip current="lesson6" />}
-        {activeId === 'L7' && <Lesson7ProgressionStrip current="lesson7" />}
-        {activeId === 'L8' && <Lesson8ProgressionStrip current="lesson8" />}
-        {activeId === 'L9' && <Lesson9ProgressionStrip current="lesson9" />}
-        {activeId === 'L10' && <Lesson10ProgressionStrip current="lesson10" />}
-        {activeId === 'L11' && <Lesson11ProgressionStrip current="lesson11" />}
-        {activeId === 'L12' && <Lesson12ProgressionStrip current="lesson12" />}
-        {activeId === 'L13' && <Lesson13ProgressionStrip current="lesson13" />}
-        {activeId === 'L14' && <Lesson14ProgressionStrip current="lesson14" />}
-        {activeId === 'L15' && <Lesson15ProgressionStrip current="lesson15" />}
-        {activeId === 'L16' && <Lesson16ProgressionStrip current="lesson16" />}
-        {activeId === 'L17' && <Lesson17ProgressionStrip current="lesson17" />}
-        <h2 style={{ marginBottom: 4 }}>{ch5RenderMath(lesson.title)}</h2>
-        <h3 style={{ color: 'var(--clr-accent, #6cf)', marginTop: 16 }}>{lesson.teach.heading}</h3>
-        {lesson.teach.body.map((para, i) => (
-          <p key={i} style={{ lineHeight: 1.7, marginBottom: 10, fontSize: '1rem' }}>{ch5RenderMath(para)}</p>
-        ))}
-        <div style={{
-          marginTop: 14, padding: 14, borderRadius: 8,
-          background: 'rgba(108,206,255,0.08)', border: '1px solid rgba(108,206,255,0.25)',
-          fontSize: '1rem', lineHeight: 1.7,
-        }}>
-          <strong>Worked example: </strong>{ch5RenderMath(lesson.teach.example)}
-        </div>
-        {lesson.qFormat && <p style={{ marginTop: 14, fontSize: '0.9rem', opacity: 0.8 }}><em>Note:</em> {lesson.qFormat}</p>}
-        <button onClick={acknowledgeTeach} style={{
-          marginTop: 18, padding: '10px 18px', borderRadius: 8, fontSize: '1rem',
-          background: 'var(--clr-accent, #2ea043)', color: 'white', border: 'none', cursor: 'pointer',
-        }}>I've got it — start questions →</button>
-      </div>
-    )
-  }
-
-  // ────────── Done ──────────
-  if (phase === 'done') {
-    const idx = CH5_LESSONS.findIndex(l => l.id === activeId)
-    const next = CH5_LESSONS[idx + 1]
-    return (
-      <div style={{ maxWidth: 720, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
-        <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
-          <button className="back-button" onClick={backToOverview}>← Lessons</button>
-        </div>
-        {activeId === 'L1' && <Lesson1ProgressionStrip current="lesson1" />}
-        {activeId === 'L2' && <Lesson2ProgressionStrip current="lesson2" />}
-        {activeId === 'L3' && <Lesson3ProgressionStrip current="lesson3" />}
-        {activeId === 'L4' && <Lesson4ProgressionStrip current="lesson4" />}
-        {activeId === 'L5' && <Lesson5ProgressionStrip current="lesson5" />}
-        {activeId === 'L6' && <Lesson6ProgressionStrip current="lesson6" />}
-        {activeId === 'L7' && <Lesson7ProgressionStrip current="lesson7" />}
-        {activeId === 'L8' && <Lesson8ProgressionStrip current="lesson8" />}
-        {activeId === 'L9' && <Lesson9ProgressionStrip current="lesson9" />}
-        {activeId === 'L10' && <Lesson10ProgressionStrip current="lesson10" />}
-        {activeId === 'L11' && <Lesson11ProgressionStrip current="lesson11" />}
-        {activeId === 'L12' && <Lesson12ProgressionStrip current="lesson12" />}
-        {activeId === 'L13' && <Lesson13ProgressionStrip current="lesson13" />}
-        {activeId === 'L14' && <Lesson14ProgressionStrip current="lesson14" />}
-        {activeId === 'L15' && <Lesson15ProgressionStrip current="lesson15" />}
-        {activeId === 'L16' && <Lesson16ProgressionStrip current="lesson16" />}
-        {activeId === 'L17' && <Lesson17ProgressionStrip current="lesson17" />}
-        <h2>🎉 Lesson complete</h2>
-        <p>You finished <strong>{ch5RenderMath(lesson.title)}</strong>.</p>
-        {next ? (
-          <button onClick={() => startLesson(next.id)} style={{
-            marginTop: 12, padding: '10px 18px', borderRadius: 8, fontSize: '1rem',
-            background: 'var(--clr-accent, #2ea043)', color: 'white', border: 'none', cursor: 'pointer',
-          }}>Next: {ch5RenderMath(next.title)} →</button>
-        ) : (
-          <p style={{ marginTop: 16, fontSize: '1.05rem' }}>🎓 You've completed every lesson in Chapter 5.</p>
-        )}
-        <button onClick={backToOverview} style={{
-          marginTop: 12, marginLeft: 8, padding: '10px 18px', borderRadius: 8,
-          background: 'transparent', color: 'var(--clr-text)', border: '1px solid var(--clr-border, #555)', cursor: 'pointer',
-        }}>Back to lessons</button>
-      </div>
-    )
-  }
-
-  // ────────── Practice ──────────
-  const sliderMax = Math.max(1, playList.length)
-  return (
-    <div style={{ maxWidth: 720, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
-      <div style={{ display: 'flex', gap: 8, marginBottom: 12, alignItems: 'center' }}>
-        <button className="back-button" onClick={backToOverview}>← Lessons</button>
-        <button className="back-button" onClick={() => setPhase('teach')}>📖 Re-read teach</button>
-        <span style={{ marginLeft: 'auto', fontSize: '0.85rem', opacity: 0.75 }}>
-          Question {qIdx + 1} / {sliderMax}
-          {sliderMax > lesson.questions.length && (
-            <span style={{ marginLeft: 6, color: '#f0a020' }}>· {sliderMax - lesson.questions.length} retry queued</span>
-          )}
-        </span>
-      </div>
-      {activeId === 'L1' && <Lesson1ProgressionStrip current="lesson1" />}
-      {activeId === 'L2' && <Lesson2ProgressionStrip current="lesson2" />}
-      {activeId === 'L3' && <Lesson3ProgressionStrip current="lesson3" />}
-      {activeId === 'L4' && <Lesson4ProgressionStrip current="lesson4" />}
-      {activeId === 'L5' && <Lesson5ProgressionStrip current="lesson5" />}
-      {activeId === 'L6' && <Lesson6ProgressionStrip current="lesson6" />}
-      {activeId === 'L7' && <Lesson7ProgressionStrip current="lesson7" />}
-      {activeId === 'L8' && <Lesson8ProgressionStrip current="lesson8" />}
-      {activeId === 'L9' && <Lesson9ProgressionStrip current="lesson9" />}
-      {activeId === 'L10' && <Lesson10ProgressionStrip current="lesson10" />}
-      {activeId === 'L11' && <Lesson11ProgressionStrip current="lesson11" />}
-      {activeId === 'L12' && <Lesson12ProgressionStrip current="lesson12" />}
-      {activeId === 'L13' && <Lesson13ProgressionStrip current="lesson13" />}
-      {activeId === 'L14' && <Lesson14ProgressionStrip current="lesson14" />}
-      {activeId === 'L15' && <Lesson15ProgressionStrip current="lesson15" />}
-      {activeId === 'L16' && <Lesson16ProgressionStrip current="lesson16" />}
-      {activeId === 'L17' && <Lesson17ProgressionStrip current="lesson17" />}
-      <h3 style={{ marginBottom: 8 }}>{ch5RenderMath(lesson.title)}</h3>
-      {/* Question slider — drag to jump to any question in the play sequence */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 18 }}>
-        <span style={{ fontSize: '0.78rem', opacity: 0.65, minWidth: 18, textAlign: 'right' }}>1</span>
-        <input
-          type="range"
-          min={1}
-          max={sliderMax}
-          value={qIdx + 1}
-          onChange={e => jumpToQuestion(parseInt(e.target.value, 10) - 1)}
-          aria-label="Jump to question"
-          style={{
-            flex: 1, accentColor: 'var(--clr-accent, #2ea043)',
-            cursor: 'pointer', height: 22,
-          }}
-        />
-        <span style={{ fontSize: '0.78rem', opacity: 0.65, minWidth: 22 }}>{sliderMax}</span>
-      </div>
-
-      <div style={{
-        padding: '22px 24px', borderRadius: 10, background: 'var(--clr-surface, #1c1c1f)',
-        border: '1px solid var(--clr-border, #333)', marginBottom: 16,
-        fontSize: '1.25rem', lineHeight: 2.1, textAlign: 'center',
-        display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 80,
-        position: 'relative',
-      }}>
-        {isRetry && (
-          <span style={{
-            position: 'absolute', top: 8, right: 12, fontSize: '0.7rem', fontWeight: 700,
-            letterSpacing: '0.5px', color: '#f0a020', background: 'rgba(240,160,32,0.15)',
-            border: '1px solid rgba(240,160,32,0.45)', padding: '2px 8px', borderRadius: 10,
-          }}>↻ RETRY</span>
-        )}
-        <span>{ch5RenderMath(currentQ.prompt)}</span>
-      </div>
-
-      {currentQ.kind === 'mcq' ? (
-        <div className="options-list">
-          {optionOrder.map((srcIdx, displayIdx) => {
-            const opt = currentQ.options[srcIdx]
-            const isSelected = selectedIdx === displayIdx
-            const isCorrectOpt = revealed && correctDisplayIdx === displayIdx
-            const isWrongPick = revealed && isSelected && !isCorrect
-            return (
-              <button
-                key={displayIdx}
-                className={`option-card ${isSelected ? 'selected' : ''} ${isCorrectOpt ? 'correct-option' : ''} ${isWrongPick ? 'wrong-option' : ''}`}
-                onClick={() => pickMcq(displayIdx)}
-                disabled={revealed}
-                style={{
-                  borderColor: isCorrectOpt ? 'var(--clr-correct, #2ea043)' : isWrongPick ? 'var(--clr-wrong, #f85149)' : undefined,
-                  background: isCorrectOpt ? 'rgba(46,160,67,0.15)' : isWrongPick ? 'rgba(248,81,73,0.15)' : undefined,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  position: 'relative', padding: '18px 24px', minHeight: 64,
-                  fontSize: '1.1rem', lineHeight: 1.9,
-                }}
-              >
-                <span style={{
-                  position: 'absolute', left: 18, top: '50%', transform: 'translateY(-50%)',
-                  fontWeight: 700, opacity: 0.6, fontSize: '0.95rem',
-                }}>{CH5_OPTION_LABEL[displayIdx]}.</span>
-                <span style={{ display: 'inline-flex', alignItems: 'center' }}>{ch5RenderMath(opt)}</span>
-              </button>
-            )
-          })}
-        </div>
-      ) : (
-        <>
-          <input
-            ref={inputRef}
-            type="text"
-            value={fillInput}
-            onChange={e => setFillInput(e.target.value)}
-            disabled={revealed}
-            placeholder="Your answer…"
-            autoComplete="off"
-            style={{
-              width: '100%', padding: '14px 16px', fontSize: '1.15rem', borderRadius: 8,
-              border: '1px solid var(--clr-border, #555)', textAlign: 'center',
-              background: revealed ? 'rgba(255,255,255,0.04)' : 'var(--clr-surface, #1c1c1f)',
-              color: 'var(--clr-text)', boxSizing: 'border-box',
-            }}
-          />
-          {!revealed && (
-            <div style={{ display: 'flex', gap: 8, marginTop: 12, justifyContent: 'center' }}>
-              <button onClick={submitFill} disabled={!fillInput.trim()} style={{
-                padding: '10px 22px', borderRadius: 6, background: 'var(--clr-accent, #2ea043)',
-                color: 'white', border: 'none', cursor: 'pointer', fontSize: '0.95rem',
-                opacity: fillInput.trim() ? 1 : 0.5,
-              }}>Check</button>
-            </div>
-          )}
-        </>
-      )}
-
-      {revealed && (
-        <>
-          <div style={{
-            marginTop: 16, padding: 16, borderRadius: 8,
-            background: isCorrect ? 'rgba(46,160,67,0.15)' : 'rgba(248,81,73,0.15)',
-            border: `1px solid ${isCorrect ? 'rgba(46,160,67,0.45)' : 'rgba(248,81,73,0.45)'}`,
-            fontSize: '1rem', lineHeight: 1.9,
-          }}>
-            <strong>{isCorrect ? '✅ Correct!' : '❌ Not quite.'}</strong>
-            <div style={{ marginTop: 8, display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 6 }}>
-              <strong>Answer:</strong>
-              <span>{currentQ.kind === 'mcq'
-                ? ch5RenderMath(currentQ.options[currentQ.correct])
-                : ch5RenderMath(String(currentQ.answer))}</span>
-            </div>
-            {currentQ.solution && (
-              <div style={{ marginTop: 8, opacity: 0.9, display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 6 }}>
-                <strong>Working:</strong>
-                <span>{ch5RenderMath(currentQ.solution)}</span>
-              </div>
-            )}
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 14, justifyContent: 'center' }}>
-            <button onClick={advance} style={{
-              padding: '12px 28px', borderRadius: 8, background: 'var(--clr-accent, #2ea043)',
-              color: 'white', border: 'none', cursor: 'pointer', fontSize: '1rem', fontWeight: 600,
-            }}>
-              {qIdx + 1 === lesson.questions.length ? 'Finish lesson →' : 'Next →'}
-            </button>
-            <span style={{ fontSize: '0.85rem', opacity: 0.65 }}>
-              auto-advance in {autoCountdown}s · or press <kbd style={{ padding: '1px 6px', border: '1px solid var(--clr-border, #555)', borderRadius: 4, fontSize: '0.78rem' }}>Enter</kbd>
-            </span>
-          </div>
-        </>
-      )}
-    </div>
-  )
-}
-
-/* =====================================================================
- *  Chapter6App — Cambridge IGCSE Chapter 6 (Equations, Factors and Formulae)
- *
- *  Mounted at /chapter6. Same UX as Chapter5App: ordered chain of lessons,
- *  every one unlocked from the start, slider to jump questions, MCQ with
- *  1-9 keys + fill-in fallbacks, 5s auto-advance, completed lessons go
- *  green. See Tenali/skills/igcse-chapter/SKILL.md for the full pattern.
- * ===================================================================== */
-
-const CH6_OPTION_LABEL = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
-
+function Chapter5App({ onBack }) { return null; }
 function ch6_seededShuffle(n, key) {
   let h = 2166136261
   for (let i = 0; i < key.length; i++) { h ^= key.charCodeAt(i); h = Math.imul(h, 16777619) }
@@ -38086,443 +37529,7 @@ function ch1RenderMath(text) {
 
 const CH1_AUTO_ADVANCE_MS = 5000
 
-function Chapter1App({ onBack }) {
-  const [progress, setProgress] = useState(ch1_loadProgress)
-  const [activeId, setActiveId] = useState(null)
-  const [phase, setPhase] = useState('teach')
-  const [qIdx, setQIdx] = useState(0)
-  const [playList, setPlayList] = useState([])
-  const [lastWrongSrc, setLastWrongSrc] = useState(null)
-  const [selectedIdx, setSelectedIdx] = useState(null)
-  const [fillInput, setFillInput] = useState('')
-  const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
-  const [autoCountdown, setAutoCountdown] = useState(0)
-  const inputRef = useRef(null)
-  const autoTimerRef = useRef(null)
-  const advanceRef = useRef(() => { })
-
-  const lesson = activeId ? CH1_LESSONS.find(l => l.id === activeId) : null
-  const currentSourceIdx = playList[qIdx]
-  const currentQ = lesson && currentSourceIdx != null ? lesson.questions[currentSourceIdx] : null
-  const isRetry = useMemo(() => {
-    if (currentSourceIdx == null) return false
-    return playList.slice(0, qIdx).includes(currentSourceIdx)
-  }, [playList, qIdx, currentSourceIdx])
-
-  const optionOrder = useMemo(() => {
-    if (!currentQ || currentQ.kind !== 'mcq') return []
-    return ch1_seededShuffle(currentQ.options.length, `${activeId}-${qIdx}-${currentSourceIdx}-${currentQ.prompt}`)
-  }, [activeId, qIdx, currentSourceIdx, currentQ])
-  const correctDisplayIdx = useMemo(() => optionOrder.indexOf(currentQ?.correct ?? -1), [optionOrder, currentQ])
-
-  useEffect(() => { ch1_saveProgress(progress) }, [progress])
-
-  useEffect(() => {
-    if (phase !== 'practice' || revealed) return
-    if (currentQ?.kind?.startsWith('fill') && inputRef.current) inputRef.current.focus()
-  }, [phase, qIdx, revealed, currentQ])
-
-  const startLesson = (id) => {
-    setActiveId(id)
-    const lessonRef = CH1_LESSONS.find(l => l.id === id)
-    const initial = Array.from({ length: lessonRef.questions.length }, (_, i) => i)
-    setPlayList(initial)
-    setLastWrongSrc(null)
-    const p = progress[id] || {}
-    if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
-    else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
-  }
-
-  const acknowledgeTeach = () => {
-    setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
-    setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
-    setLastWrongSrc(null)
-  }
-
-  const submitFill = () => {
-    if (!currentQ) return
-    if (revealed) { advance(); return }
-    const ok = ch1_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
-    setLastWrongSrc(ok ? null : currentSourceIdx)
-  }
-
-  const pickMcq = (displayIdx) => {
-    if (!currentQ || revealed || currentQ.kind !== 'mcq') return
-    const optSourceIdx = optionOrder[displayIdx]
-    const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
-    setLastWrongSrc(ok ? null : currentSourceIdx)
-  }
-
-  const cancelAutoAdvance = () => {
-    if (autoTimerRef.current) { clearInterval(autoTimerRef.current); autoTimerRef.current = null }
-    setAutoCountdown(0)
-  }
-
-  const advance = () => {
-    cancelAutoAdvance()
-    if (!lesson) return
-    let workingList = playList
-    if (lastWrongSrc != null) {
-      workingList = [...playList, lastWrongSrc]
-      setPlayList(workingList)
-      setLastWrongSrc(null)
-    }
-    const next = qIdx + 1
-    if (next >= workingList.length) {
-      setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: lesson.questions.length, completed: true } }))
-      setPhase('done')
-    } else {
-      setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
-      setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
-    }
-  }
-  advanceRef.current = advance
-
-  const jumpToQuestion = (i) => {
-    cancelAutoAdvance()
-    if (!lesson) return
-    const clamped = Math.max(0, Math.min(playList.length - 1, i))
-    setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
-    setProgress(p => {
-      const cur = p[activeId] || {}
-      const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
-      return { ...p, [activeId]: { ...cur, teachSeen: true, qIdx: saved } }
-    })
-  }
-
-  const backToOverview = () => {
-    cancelAutoAdvance()
-    setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
-  }
-
-  const resetAll = () => {
-    if (!confirm('Reset all Chapter 1 progress?')) return
-    setProgress({}); ch1_saveProgress({})
-    backToOverview()
-  }
-
-  useEffect(() => {
-    if (phase !== 'practice' || !revealed) { cancelAutoAdvance(); return }
-    const total = Math.round(CH1_AUTO_ADVANCE_MS / 1000)
-    setAutoCountdown(total)
-    autoTimerRef.current = setInterval(() => {
-      setAutoCountdown(prev => {
-        if (prev <= 1) {
-          clearInterval(autoTimerRef.current); autoTimerRef.current = null
-          advanceRef.current()
-          return 0
-        }
-        return prev - 1
-      })
-    }, 1000)
-    return () => { if (autoTimerRef.current) { clearInterval(autoTimerRef.current); autoTimerRef.current = null } }
-  }, [phase, revealed, qIdx, activeId])
-
-  useEffect(() => {
-    if (phase !== 'practice' || !currentQ) return
-    const onKey = (e) => {
-      if (revealed) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); advance() }
-        return
-      }
-      if (currentQ.kind === 'mcq') {
-        const k = e.key
-        if (/^[1-9]$/.test(k)) {
-          const i = parseInt(k, 10) - 1
-          if (i < currentQ.options.length) { e.preventDefault(); pickMcq(i) }
-        }
-      } else if (currentQ.kind?.startsWith('fill')) {
-        if (e.key === 'Enter') { e.preventDefault(); submitFill() }
-      }
-    }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [phase, qIdx, revealed, currentQ, fillInput, optionOrder])
-
-  if (!activeId) {
-    const total = CH1_LESSONS.length
-    const done = CH1_LESSONS.filter(l => progress[l.id]?.completed).length
-    return (
-      <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
-        <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
-          <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
-        </div>
-        <h1 style={{ marginBottom: 4 }}>Chapter 1 — Reviewing Number Concepts</h1>
-        <p className="subtitle" style={{ marginTop: 0 }}>
-          Cambridge IGCSE Mathematics · {done}/{total} lessons complete
-        </p>
-        <p style={{ opacity: 0.85, marginTop: 8 }}>
-          Pick the next lesson. Each one starts with a short explanation, then a stream of multiple-choice and fill-in-the-blank
-          questions — easy warm-ups first, then the actual chapter exercise problems.
-        </p>
-        <ol style={{ listStyle: 'none', padding: 0, marginTop: 16 }}>
-          {CH1_LESSONS.map((l) => {
-            const p = progress[l.id] || {}
-            const completed = p.completed
-            const inProg = !completed && (p.teachSeen || (p.qIdx || 0) > 0)
-            return (
-              <li key={l.id} style={{ marginBottom: 8 }}>
-                <button
-                  onClick={() => startLesson(l.id)}
-                  style={{
-                    width: '100%', textAlign: 'left', padding: '12px 14px',
-                    borderRadius: 10,
-                    borderLeft: completed ? '4px solid #2ea043' : inProg ? '4px solid #388bfd' : '1px solid var(--clr-border, #444)',
-                    borderTop: '1px solid ' + (completed ? '#2ea043' : 'var(--clr-border, #444)'),
-                    borderRight: '1px solid ' + (completed ? '#2ea043' : 'var(--clr-border, #444)'),
-                    borderBottom: '1px solid ' + (completed ? '#2ea043' : 'var(--clr-border, #444)'),
-                    background: completed
-                      ? 'linear-gradient(90deg, rgba(46,160,67,0.32) 0%, rgba(46,160,67,0.18) 100%)'
-                      : inProg ? 'rgba(56,139,253,0.10)' : 'var(--clr-surface, #1c1c1f)',
-                    color: 'var(--clr-text)',
-                    fontWeight: completed ? 600 : 400,
-                    cursor: 'pointer', fontSize: '0.95rem',
-                    boxShadow: completed ? '0 0 0 1px rgba(46,160,67,0.35) inset' : 'none',
-                  }}
-                >
-                  <span style={{ marginRight: 8 }}>{completed ? '✅' : inProg ? '▶' : '○'}</span>
-                  {ch1RenderMath(l.title)}
-                  {completed && (
-                    <span style={{
-                      float: 'right', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.5px',
-                      color: '#fff', background: '#2ea043', padding: '2px 8px', borderRadius: 10,
-                    }}>DONE</span>
-                  )}
-                  {p.qIdx > 0 && !completed && (
-                    <span style={{ float: 'right', fontSize: '0.8rem', opacity: 0.7 }}>{p.qIdx}/{l.questions.length}</span>
-                  )}
-                </button>
-              </li>
-            )
-          })}
-        </ol>
-      </div>
-    )
-  }
-
-  if (phase === 'teach') {
-    return (
-      <div style={{ maxWidth: 720, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
-        <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
-          <button className="back-button" onClick={backToOverview}>← Lessons</button>
-        </div>
-        <h2 style={{ marginBottom: 4 }}>{ch1RenderMath(lesson.title)}</h2>
-        <h3 style={{ color: 'var(--clr-accent, #6cf)', marginTop: 16 }}>{ch1RenderMath(lesson.teach.heading)}</h3>
-        {lesson.teach.body.map((para, i) => (
-          <p key={i} style={{ lineHeight: 1.7, marginBottom: 10, fontSize: '1rem' }}>{ch1RenderMath(para)}</p>
-        ))}
-        <div style={{
-          marginTop: 14, padding: 14, borderRadius: 8,
-          background: 'rgba(108,206,255,0.08)', border: '1px solid rgba(108,206,255,0.25)',
-          fontSize: '1rem', lineHeight: 1.7,
-        }}>
-          <strong>Worked example: </strong>{ch1RenderMath(lesson.teach.example)}
-        </div>
-        {lesson.qFormat && <p style={{ marginTop: 14, fontSize: '0.9rem', opacity: 0.8 }}><em>Note:</em> {lesson.qFormat}</p>}
-        <button onClick={acknowledgeTeach} style={{
-          marginTop: 18, padding: '10px 18px', borderRadius: 8, fontSize: '1rem',
-          background: 'var(--clr-accent, #2ea043)', color: 'white', border: 'none', cursor: 'pointer',
-        }}>I've got it — start questions →</button>
-      </div>
-    )
-  }
-
-  if (phase === 'done') {
-    const idx = CH1_LESSONS.findIndex(l => l.id === activeId)
-    const next = CH1_LESSONS[idx + 1]
-    return (
-      <div style={{ maxWidth: 720, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
-        <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
-          <button className="back-button" onClick={backToOverview}>← Lessons</button>
-        </div>
-        <h2>🎉 Lesson complete</h2>
-        <p>You finished <strong>{ch1RenderMath(lesson.title)}</strong>.</p>
-        {next ? (
-          <button onClick={() => startLesson(next.id)} style={{
-            marginTop: 12, padding: '10px 18px', borderRadius: 8, fontSize: '1rem',
-            background: 'var(--clr-accent, #2ea043)', color: 'white', border: 'none', cursor: 'pointer',
-          }}>Next: {ch1RenderMath(next.title)} →</button>
-        ) : (
-          <p style={{ marginTop: 16, fontSize: '1.05rem' }}>🎓 You've completed every lesson in Chapter 1.</p>
-        )}
-        <button onClick={backToOverview} style={{
-          marginTop: 12, marginLeft: 8, padding: '10px 18px', borderRadius: 8,
-          background: 'transparent', color: 'var(--clr-text)', border: '1px solid var(--clr-border, #555)', cursor: 'pointer',
-        }}>Back to lessons</button>
-      </div>
-    )
-  }
-
-  const sliderMax = Math.max(1, playList.length)
-  return (
-    <div style={{ maxWidth: 720, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
-      <div style={{ display: 'flex', gap: 8, marginBottom: 12, alignItems: 'center' }}>
-        <button className="back-button" onClick={backToOverview}>← Lessons</button>
-        <button className="back-button" onClick={() => setPhase('teach')}>📖 Re-read teach</button>
-        <span style={{ marginLeft: 'auto', fontSize: '0.85rem', opacity: 0.75 }}>
-          Question {qIdx + 1} / {sliderMax}
-          {sliderMax > lesson.questions.length && (
-            <span style={{ marginLeft: 6, color: '#f0a020' }}>· {sliderMax - lesson.questions.length} retry queued</span>
-          )}
-        </span>
-      </div>
-      <h3 style={{ marginBottom: 8 }}>{ch1RenderMath(lesson.title)}</h3>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 18 }}>
-        <span style={{ fontSize: '0.78rem', opacity: 0.65, minWidth: 18, textAlign: 'right' }}>1</span>
-        <input
-          type="range"
-          min={1}
-          max={sliderMax}
-          value={qIdx + 1}
-          onChange={e => jumpToQuestion(parseInt(e.target.value, 10) - 1)}
-          aria-label="Jump to question"
-          style={{
-            flex: 1, accentColor: 'var(--clr-accent, #2ea043)',
-            cursor: 'pointer', height: 22,
-          }}
-        />
-        <span style={{ fontSize: '0.78rem', opacity: 0.65, minWidth: 22 }}>{sliderMax}</span>
-      </div>
-
-      <div style={{
-        padding: '22px 24px', borderRadius: 10, background: 'var(--clr-surface, #1c1c1f)',
-        border: '1px solid var(--clr-border, #333)', marginBottom: 16,
-        fontSize: '1.25rem', lineHeight: 2.1, textAlign: 'center',
-        display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 80,
-        position: 'relative',
-      }}>
-        {isRetry && (
-          <span style={{
-            position: 'absolute', top: 8, right: 12, fontSize: '0.7rem', fontWeight: 700,
-            letterSpacing: '0.5px', color: '#f0a020', background: 'rgba(240,160,32,0.15)',
-            border: '1px solid rgba(240,160,32,0.45)', padding: '2px 8px', borderRadius: 10,
-          }}>↻ RETRY</span>
-        )}
-        <span>{ch1RenderMath(currentQ.prompt)}</span>
-      </div>
-
-      {currentQ.kind === 'mcq' ? (
-        <div className="options-list">
-          {optionOrder.map((srcIdx, displayIdx) => {
-            const opt = currentQ.options[srcIdx]
-            const isSelected = selectedIdx === displayIdx
-            const isCorrectOpt = revealed && correctDisplayIdx === displayIdx
-            const isWrongPick = revealed && isSelected && !isCorrect
-            return (
-              <button
-                key={displayIdx}
-                className={`option-card ${isSelected ? 'selected' : ''} ${isCorrectOpt ? 'correct-option' : ''} ${isWrongPick ? 'wrong-option' : ''}`}
-                onClick={() => pickMcq(displayIdx)}
-                disabled={revealed}
-                style={{
-                  borderColor: isCorrectOpt ? 'var(--clr-correct, #2ea043)' : isWrongPick ? 'var(--clr-wrong, #f85149)' : undefined,
-                  background: isCorrectOpt ? 'rgba(46,160,67,0.15)' : isWrongPick ? 'rgba(248,81,73,0.15)' : undefined,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  position: 'relative', padding: '18px 24px', minHeight: 64,
-                  fontSize: '1.1rem', lineHeight: 1.9,
-                }}
-              >
-                <span style={{
-                  position: 'absolute', left: 18, top: '50%', transform: 'translateY(-50%)',
-                  fontWeight: 700, opacity: 0.6, fontSize: '0.95rem',
-                }}>{CH1_OPTION_LABEL[displayIdx]}.</span>
-                <span style={{ display: 'inline-flex', alignItems: 'center' }}>{ch1RenderMath(opt)}</span>
-              </button>
-            )
-          })}
-        </div>
-      ) : (
-        <>
-          <input
-            ref={inputRef}
-            type="text"
-            value={fillInput}
-            onChange={e => setFillInput(e.target.value)}
-            disabled={revealed}
-            placeholder="Your answer…"
-            autoComplete="off"
-            style={{
-              width: '100%', padding: '14px 16px', fontSize: '1.15rem', borderRadius: 8,
-              border: '1px solid var(--clr-border, #555)', textAlign: 'center',
-              background: revealed ? 'rgba(255,255,255,0.04)' : 'var(--clr-surface, #1c1c1f)',
-              color: 'var(--clr-text)', boxSizing: 'border-box',
-            }}
-          />
-          {!revealed && (
-            <div style={{ display: 'flex', gap: 8, marginTop: 12, justifyContent: 'center' }}>
-              <button onClick={submitFill} disabled={!fillInput.trim()} style={{
-                padding: '10px 22px', borderRadius: 6, background: 'var(--clr-accent, #2ea043)',
-                color: 'white', border: 'none', cursor: 'pointer', fontSize: '0.95rem',
-                opacity: fillInput.trim() ? 1 : 0.5,
-              }}>Check</button>
-            </div>
-          )}
-        </>
-      )}
-
-      {revealed && (
-        <>
-          <div style={{
-            marginTop: 16, padding: 16, borderRadius: 8,
-            background: isCorrect ? 'rgba(46,160,67,0.15)' : 'rgba(248,81,73,0.15)',
-            border: `1px solid ${isCorrect ? 'rgba(46,160,67,0.45)' : 'rgba(248,81,73,0.45)'}`,
-            fontSize: '1rem', lineHeight: 1.9,
-          }}>
-            <strong>{isCorrect ? '✅ Correct!' : '❌ Not quite.'}</strong>
-            <div style={{ marginTop: 8, display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 6 }}>
-              <strong>Answer:</strong>
-              <span>{currentQ.kind === 'mcq'
-                ? ch1RenderMath(currentQ.options[currentQ.correct])
-                : ch1RenderMath(String(currentQ.answer))}</span>
-            </div>
-            {currentQ.solution && (
-              <div style={{ marginTop: 8, opacity: 0.9, display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 6 }}>
-                <strong>Working:</strong>
-                <span>{ch1RenderMath(currentQ.solution)}</span>
-              </div>
-            )}
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 14, justifyContent: 'center' }}>
-            <button onClick={advance} style={{
-              padding: '12px 28px', borderRadius: 8, background: 'var(--clr-accent, #2ea043)',
-              color: 'white', border: 'none', cursor: 'pointer', fontSize: '1rem', fontWeight: 600,
-            }}>
-              {qIdx + 1 === lesson.questions.length ? 'Finish lesson →' : 'Next →'}
-            </button>
-            <span style={{ fontSize: '0.85rem', opacity: 0.65 }}>
-              auto-advance in {autoCountdown}s · or press <kbd style={{ padding: '1px 6px', border: '1px solid var(--clr-border, #555)', borderRadius: 4, fontSize: '0.78rem' }}>Enter</kbd>
-            </span>
-          </div>
-        </>
-      )}
-    </div>
-  )
-}
-
-
-/* =====================================================================
- *  Chapter2App — Cambridge IGCSE Chapter 2 (Making Sense of Algebra)
- *
- *  Mounted at /chapter2. Same UX as Chapter5App+: ordered chain of
- *  lessons, every one unlocked from the start, slider to jump questions,
- *  MCQ with 1-9 keys + fill-in fallbacks, 5s auto-advance, completed
- *  lessons go green, wrong answers appended to END of playList.
- *  See Tenali/skills/igcse-chapter/SKILL.md for the full pattern.
- *
- *  Letters as numbers, substitution, simplifying expressions, multiplying terms, expanding brackets, index notation, laws of indices (multiplication, division, power-of-a-power, zero/negative indices). See uploads PDF p. 48-82 (book ch. 2).
- * ===================================================================== */
-
-const CH2_OPTION_LABEL = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
-
+function Chapter1App({ onBack }) { return null; }
 function ch2_seededShuffle(n, key) {
   let h = 2166136261
   for (let i = 0; i < key.length; i++) { h ^= key.charCodeAt(i); h = Math.imul(h, 16777619) }
@@ -38907,443 +37914,7 @@ function ch2RenderMath(text) {
 
 const CH2_AUTO_ADVANCE_MS = 5000
 
-function Chapter2App({ onBack }) {
-  const [progress, setProgress] = useState(ch2_loadProgress)
-  const [activeId, setActiveId] = useState(null)
-  const [phase, setPhase] = useState('teach')
-  const [qIdx, setQIdx] = useState(0)
-  const [playList, setPlayList] = useState([])
-  const [lastWrongSrc, setLastWrongSrc] = useState(null)
-  const [selectedIdx, setSelectedIdx] = useState(null)
-  const [fillInput, setFillInput] = useState('')
-  const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
-  const [autoCountdown, setAutoCountdown] = useState(0)
-  const inputRef = useRef(null)
-  const autoTimerRef = useRef(null)
-  const advanceRef = useRef(() => { })
-
-  const lesson = activeId ? CH2_LESSONS.find(l => l.id === activeId) : null
-  const currentSourceIdx = playList[qIdx]
-  const currentQ = lesson && currentSourceIdx != null ? lesson.questions[currentSourceIdx] : null
-  const isRetry = useMemo(() => {
-    if (currentSourceIdx == null) return false
-    return playList.slice(0, qIdx).includes(currentSourceIdx)
-  }, [playList, qIdx, currentSourceIdx])
-
-  const optionOrder = useMemo(() => {
-    if (!currentQ || currentQ.kind !== 'mcq') return []
-    return ch2_seededShuffle(currentQ.options.length, `${activeId}-${qIdx}-${currentSourceIdx}-${currentQ.prompt}`)
-  }, [activeId, qIdx, currentSourceIdx, currentQ])
-  const correctDisplayIdx = useMemo(() => optionOrder.indexOf(currentQ?.correct ?? -1), [optionOrder, currentQ])
-
-  useEffect(() => { ch2_saveProgress(progress) }, [progress])
-
-  useEffect(() => {
-    if (phase !== 'practice' || revealed) return
-    if (currentQ?.kind?.startsWith('fill') && inputRef.current) inputRef.current.focus()
-  }, [phase, qIdx, revealed, currentQ])
-
-  const startLesson = (id) => {
-    setActiveId(id)
-    const lessonRef = CH2_LESSONS.find(l => l.id === id)
-    const initial = Array.from({ length: lessonRef.questions.length }, (_, i) => i)
-    setPlayList(initial)
-    setLastWrongSrc(null)
-    const p = progress[id] || {}
-    if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
-    else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
-  }
-
-  const acknowledgeTeach = () => {
-    setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
-    setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
-    setLastWrongSrc(null)
-  }
-
-  const submitFill = () => {
-    if (!currentQ) return
-    if (revealed) { advance(); return }
-    const ok = ch2_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
-    setLastWrongSrc(ok ? null : currentSourceIdx)
-  }
-
-  const pickMcq = (displayIdx) => {
-    if (!currentQ || revealed || currentQ.kind !== 'mcq') return
-    const optSourceIdx = optionOrder[displayIdx]
-    const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
-    setLastWrongSrc(ok ? null : currentSourceIdx)
-  }
-
-  const cancelAutoAdvance = () => {
-    if (autoTimerRef.current) { clearInterval(autoTimerRef.current); autoTimerRef.current = null }
-    setAutoCountdown(0)
-  }
-
-  const advance = () => {
-    cancelAutoAdvance()
-    if (!lesson) return
-    let workingList = playList
-    if (lastWrongSrc != null) {
-      workingList = [...playList, lastWrongSrc]
-      setPlayList(workingList)
-      setLastWrongSrc(null)
-    }
-    const next = qIdx + 1
-    if (next >= workingList.length) {
-      setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: lesson.questions.length, completed: true } }))
-      setPhase('done')
-    } else {
-      setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
-      setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
-    }
-  }
-  advanceRef.current = advance
-
-  const jumpToQuestion = (i) => {
-    cancelAutoAdvance()
-    if (!lesson) return
-    const clamped = Math.max(0, Math.min(playList.length - 1, i))
-    setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
-    setProgress(p => {
-      const cur = p[activeId] || {}
-      const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
-      return { ...p, [activeId]: { ...cur, teachSeen: true, qIdx: saved } }
-    })
-  }
-
-  const backToOverview = () => {
-    cancelAutoAdvance()
-    setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
-  }
-
-  const resetAll = () => {
-    if (!confirm('Reset all Chapter 2 progress?')) return
-    setProgress({}); ch2_saveProgress({})
-    backToOverview()
-  }
-
-  useEffect(() => {
-    if (phase !== 'practice' || !revealed) { cancelAutoAdvance(); return }
-    const total = Math.round(CH2_AUTO_ADVANCE_MS / 1000)
-    setAutoCountdown(total)
-    autoTimerRef.current = setInterval(() => {
-      setAutoCountdown(prev => {
-        if (prev <= 1) {
-          clearInterval(autoTimerRef.current); autoTimerRef.current = null
-          advanceRef.current()
-          return 0
-        }
-        return prev - 1
-      })
-    }, 1000)
-    return () => { if (autoTimerRef.current) { clearInterval(autoTimerRef.current); autoTimerRef.current = null } }
-  }, [phase, revealed, qIdx, activeId])
-
-  useEffect(() => {
-    if (phase !== 'practice' || !currentQ) return
-    const onKey = (e) => {
-      if (revealed) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); advance() }
-        return
-      }
-      if (currentQ.kind === 'mcq') {
-        const k = e.key
-        if (/^[1-9]$/.test(k)) {
-          const i = parseInt(k, 10) - 1
-          if (i < currentQ.options.length) { e.preventDefault(); pickMcq(i) }
-        }
-      } else if (currentQ.kind?.startsWith('fill')) {
-        if (e.key === 'Enter') { e.preventDefault(); submitFill() }
-      }
-    }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [phase, qIdx, revealed, currentQ, fillInput, optionOrder])
-
-  if (!activeId) {
-    const total = CH2_LESSONS.length
-    const done = CH2_LESSONS.filter(l => progress[l.id]?.completed).length
-    return (
-      <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
-        <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
-          <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
-        </div>
-        <h1 style={{ marginBottom: 4 }}>Chapter 2 — Making Sense of Algebra</h1>
-        <p className="subtitle" style={{ marginTop: 0 }}>
-          Cambridge IGCSE Mathematics · {done}/{total} lessons complete
-        </p>
-        <p style={{ opacity: 0.85, marginTop: 8 }}>
-          Pick the next lesson. Each one starts with a short explanation, then a stream of multiple-choice and fill-in-the-blank
-          questions — easy warm-ups first, then the actual chapter exercise problems.
-        </p>
-        <ol style={{ listStyle: 'none', padding: 0, marginTop: 16 }}>
-          {CH2_LESSONS.map((l) => {
-            const p = progress[l.id] || {}
-            const completed = p.completed
-            const inProg = !completed && (p.teachSeen || (p.qIdx || 0) > 0)
-            return (
-              <li key={l.id} style={{ marginBottom: 8 }}>
-                <button
-                  onClick={() => startLesson(l.id)}
-                  style={{
-                    width: '100%', textAlign: 'left', padding: '12px 14px',
-                    borderRadius: 10,
-                    borderLeft: completed ? '4px solid #2ea043' : inProg ? '4px solid #388bfd' : '1px solid var(--clr-border, #444)',
-                    borderTop: '1px solid ' + (completed ? '#2ea043' : 'var(--clr-border, #444)'),
-                    borderRight: '1px solid ' + (completed ? '#2ea043' : 'var(--clr-border, #444)'),
-                    borderBottom: '1px solid ' + (completed ? '#2ea043' : 'var(--clr-border, #444)'),
-                    background: completed
-                      ? 'linear-gradient(90deg, rgba(46,160,67,0.32) 0%, rgba(46,160,67,0.18) 100%)'
-                      : inProg ? 'rgba(56,139,253,0.10)' : 'var(--clr-surface, #1c1c1f)',
-                    color: 'var(--clr-text)',
-                    fontWeight: completed ? 600 : 400,
-                    cursor: 'pointer', fontSize: '0.95rem',
-                    boxShadow: completed ? '0 0 0 1px rgba(46,160,67,0.35) inset' : 'none',
-                  }}
-                >
-                  <span style={{ marginRight: 8 }}>{completed ? '✅' : inProg ? '▶' : '○'}</span>
-                  {ch2RenderMath(l.title)}
-                  {completed && (
-                    <span style={{
-                      float: 'right', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.5px',
-                      color: '#fff', background: '#2ea043', padding: '2px 8px', borderRadius: 10,
-                    }}>DONE</span>
-                  )}
-                  {p.qIdx > 0 && !completed && (
-                    <span style={{ float: 'right', fontSize: '0.8rem', opacity: 0.7 }}>{p.qIdx}/{l.questions.length}</span>
-                  )}
-                </button>
-              </li>
-            )
-          })}
-        </ol>
-      </div>
-    )
-  }
-
-  if (phase === 'teach') {
-    return (
-      <div style={{ maxWidth: 720, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
-        <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
-          <button className="back-button" onClick={backToOverview}>← Lessons</button>
-        </div>
-        <h2 style={{ marginBottom: 4 }}>{ch2RenderMath(lesson.title)}</h2>
-        <h3 style={{ color: 'var(--clr-accent, #6cf)', marginTop: 16 }}>{ch2RenderMath(lesson.teach.heading)}</h3>
-        {lesson.teach.body.map((para, i) => (
-          <p key={i} style={{ lineHeight: 1.7, marginBottom: 10, fontSize: '1rem' }}>{ch2RenderMath(para)}</p>
-        ))}
-        <div style={{
-          marginTop: 14, padding: 14, borderRadius: 8,
-          background: 'rgba(108,206,255,0.08)', border: '1px solid rgba(108,206,255,0.25)',
-          fontSize: '1rem', lineHeight: 1.7,
-        }}>
-          <strong>Worked example: </strong>{ch2RenderMath(lesson.teach.example)}
-        </div>
-        {lesson.qFormat && <p style={{ marginTop: 14, fontSize: '0.9rem', opacity: 0.8 }}><em>Note:</em> {lesson.qFormat}</p>}
-        <button onClick={acknowledgeTeach} style={{
-          marginTop: 18, padding: '10px 18px', borderRadius: 8, fontSize: '1rem',
-          background: 'var(--clr-accent, #2ea043)', color: 'white', border: 'none', cursor: 'pointer',
-        }}>I've got it — start questions →</button>
-      </div>
-    )
-  }
-
-  if (phase === 'done') {
-    const idx = CH2_LESSONS.findIndex(l => l.id === activeId)
-    const next = CH2_LESSONS[idx + 1]
-    return (
-      <div style={{ maxWidth: 720, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
-        <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
-          <button className="back-button" onClick={backToOverview}>← Lessons</button>
-        </div>
-        <h2>🎉 Lesson complete</h2>
-        <p>You finished <strong>{ch2RenderMath(lesson.title)}</strong>.</p>
-        {next ? (
-          <button onClick={() => startLesson(next.id)} style={{
-            marginTop: 12, padding: '10px 18px', borderRadius: 8, fontSize: '1rem',
-            background: 'var(--clr-accent, #2ea043)', color: 'white', border: 'none', cursor: 'pointer',
-          }}>Next: {ch2RenderMath(next.title)} →</button>
-        ) : (
-          <p style={{ marginTop: 16, fontSize: '1.05rem' }}>🎓 You've completed every lesson in Chapter 2.</p>
-        )}
-        <button onClick={backToOverview} style={{
-          marginTop: 12, marginLeft: 8, padding: '10px 18px', borderRadius: 8,
-          background: 'transparent', color: 'var(--clr-text)', border: '1px solid var(--clr-border, #555)', cursor: 'pointer',
-        }}>Back to lessons</button>
-      </div>
-    )
-  }
-
-  const sliderMax = Math.max(1, playList.length)
-  return (
-    <div style={{ maxWidth: 720, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
-      <div style={{ display: 'flex', gap: 8, marginBottom: 12, alignItems: 'center' }}>
-        <button className="back-button" onClick={backToOverview}>← Lessons</button>
-        <button className="back-button" onClick={() => setPhase('teach')}>📖 Re-read teach</button>
-        <span style={{ marginLeft: 'auto', fontSize: '0.85rem', opacity: 0.75 }}>
-          Question {qIdx + 1} / {sliderMax}
-          {sliderMax > lesson.questions.length && (
-            <span style={{ marginLeft: 6, color: '#f0a020' }}>· {sliderMax - lesson.questions.length} retry queued</span>
-          )}
-        </span>
-      </div>
-      <h3 style={{ marginBottom: 8 }}>{ch2RenderMath(lesson.title)}</h3>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 18 }}>
-        <span style={{ fontSize: '0.78rem', opacity: 0.65, minWidth: 18, textAlign: 'right' }}>1</span>
-        <input
-          type="range"
-          min={1}
-          max={sliderMax}
-          value={qIdx + 1}
-          onChange={e => jumpToQuestion(parseInt(e.target.value, 10) - 1)}
-          aria-label="Jump to question"
-          style={{
-            flex: 1, accentColor: 'var(--clr-accent, #2ea043)',
-            cursor: 'pointer', height: 22,
-          }}
-        />
-        <span style={{ fontSize: '0.78rem', opacity: 0.65, minWidth: 22 }}>{sliderMax}</span>
-      </div>
-
-      <div style={{
-        padding: '22px 24px', borderRadius: 10, background: 'var(--clr-surface, #1c1c1f)',
-        border: '1px solid var(--clr-border, #333)', marginBottom: 16,
-        fontSize: '1.25rem', lineHeight: 2.1, textAlign: 'center',
-        display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 80,
-        position: 'relative',
-      }}>
-        {isRetry && (
-          <span style={{
-            position: 'absolute', top: 8, right: 12, fontSize: '0.7rem', fontWeight: 700,
-            letterSpacing: '0.5px', color: '#f0a020', background: 'rgba(240,160,32,0.15)',
-            border: '1px solid rgba(240,160,32,0.45)', padding: '2px 8px', borderRadius: 10,
-          }}>↻ RETRY</span>
-        )}
-        <span>{ch2RenderMath(currentQ.prompt)}</span>
-      </div>
-
-      {currentQ.kind === 'mcq' ? (
-        <div className="options-list">
-          {optionOrder.map((srcIdx, displayIdx) => {
-            const opt = currentQ.options[srcIdx]
-            const isSelected = selectedIdx === displayIdx
-            const isCorrectOpt = revealed && correctDisplayIdx === displayIdx
-            const isWrongPick = revealed && isSelected && !isCorrect
-            return (
-              <button
-                key={displayIdx}
-                className={`option-card ${isSelected ? 'selected' : ''} ${isCorrectOpt ? 'correct-option' : ''} ${isWrongPick ? 'wrong-option' : ''}`}
-                onClick={() => pickMcq(displayIdx)}
-                disabled={revealed}
-                style={{
-                  borderColor: isCorrectOpt ? 'var(--clr-correct, #2ea043)' : isWrongPick ? 'var(--clr-wrong, #f85149)' : undefined,
-                  background: isCorrectOpt ? 'rgba(46,160,67,0.15)' : isWrongPick ? 'rgba(248,81,73,0.15)' : undefined,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  position: 'relative', padding: '18px 24px', minHeight: 64,
-                  fontSize: '1.1rem', lineHeight: 1.9,
-                }}
-              >
-                <span style={{
-                  position: 'absolute', left: 18, top: '50%', transform: 'translateY(-50%)',
-                  fontWeight: 700, opacity: 0.6, fontSize: '0.95rem',
-                }}>{CH2_OPTION_LABEL[displayIdx]}.</span>
-                <span style={{ display: 'inline-flex', alignItems: 'center' }}>{ch2RenderMath(opt)}</span>
-              </button>
-            )
-          })}
-        </div>
-      ) : (
-        <>
-          <input
-            ref={inputRef}
-            type="text"
-            value={fillInput}
-            onChange={e => setFillInput(e.target.value)}
-            disabled={revealed}
-            placeholder="Your answer…"
-            autoComplete="off"
-            style={{
-              width: '100%', padding: '14px 16px', fontSize: '1.15rem', borderRadius: 8,
-              border: '1px solid var(--clr-border, #555)', textAlign: 'center',
-              background: revealed ? 'rgba(255,255,255,0.04)' : 'var(--clr-surface, #1c1c1f)',
-              color: 'var(--clr-text)', boxSizing: 'border-box',
-            }}
-          />
-          {!revealed && (
-            <div style={{ display: 'flex', gap: 8, marginTop: 12, justifyContent: 'center' }}>
-              <button onClick={submitFill} disabled={!fillInput.trim()} style={{
-                padding: '10px 22px', borderRadius: 6, background: 'var(--clr-accent, #2ea043)',
-                color: 'white', border: 'none', cursor: 'pointer', fontSize: '0.95rem',
-                opacity: fillInput.trim() ? 1 : 0.5,
-              }}>Check</button>
-            </div>
-          )}
-        </>
-      )}
-
-      {revealed && (
-        <>
-          <div style={{
-            marginTop: 16, padding: 16, borderRadius: 8,
-            background: isCorrect ? 'rgba(46,160,67,0.15)' : 'rgba(248,81,73,0.15)',
-            border: `1px solid ${isCorrect ? 'rgba(46,160,67,0.45)' : 'rgba(248,81,73,0.45)'}`,
-            fontSize: '1rem', lineHeight: 1.9,
-          }}>
-            <strong>{isCorrect ? '✅ Correct!' : '❌ Not quite.'}</strong>
-            <div style={{ marginTop: 8, display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 6 }}>
-              <strong>Answer:</strong>
-              <span>{currentQ.kind === 'mcq'
-                ? ch2RenderMath(currentQ.options[currentQ.correct])
-                : ch2RenderMath(String(currentQ.answer))}</span>
-            </div>
-            {currentQ.solution && (
-              <div style={{ marginTop: 8, opacity: 0.9, display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 6 }}>
-                <strong>Working:</strong>
-                <span>{ch2RenderMath(currentQ.solution)}</span>
-              </div>
-            )}
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 14, justifyContent: 'center' }}>
-            <button onClick={advance} style={{
-              padding: '12px 28px', borderRadius: 8, background: 'var(--clr-accent, #2ea043)',
-              color: 'white', border: 'none', cursor: 'pointer', fontSize: '1rem', fontWeight: 600,
-            }}>
-              {qIdx + 1 === lesson.questions.length ? 'Finish lesson →' : 'Next →'}
-            </button>
-            <span style={{ fontSize: '0.85rem', opacity: 0.65 }}>
-              auto-advance in {autoCountdown}s · or press <kbd style={{ padding: '1px 6px', border: '1px solid var(--clr-border, #555)', borderRadius: 4, fontSize: '0.78rem' }}>Enter</kbd>
-            </span>
-          </div>
-        </>
-      )}
-    </div>
-  )
-}
-
-
-/* =====================================================================
- *  Chapter3App — Cambridge IGCSE Chapter 3 (Lines, Angles and Shapes)
- *
- *  Mounted at /chapter3. Same UX as Chapter5App+: ordered chain of
- *  lessons, every one unlocked from the start, slider to jump questions,
- *  MCQ with 1-9 keys + fill-in fallbacks, 5s auto-advance, completed
- *  lessons go green, wrong answers appended to END of playList.
- *  See Tenali/skills/igcse-chapter/SKILL.md for the full pattern.
- *
- *  Naming and measuring angles; angles on a line, around a point, vertically opposite; parallel lines and transversal angle pairs; triangles (types and angle sum); quadrilaterals; polygon interior/exterior angle sums; circle parts. See uploads PDF p. 83-116 (book ch. 3).
- * ===================================================================== */
-
-const CH3_OPTION_LABEL = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
-
+function Chapter2App({ onBack }) { return null; }
 function ch3_seededShuffle(n, key) {
   let h = 2166136261
   for (let i = 0; i < key.length; i++) { h ^= key.charCodeAt(i); h = Math.imul(h, 16777619) }
@@ -39703,443 +38274,7 @@ function ch3RenderMath(text) {
 
 const CH3_AUTO_ADVANCE_MS = 5000
 
-function Chapter3App({ onBack }) {
-  const [progress, setProgress] = useState(ch3_loadProgress)
-  const [activeId, setActiveId] = useState(null)
-  const [phase, setPhase] = useState('teach')
-  const [qIdx, setQIdx] = useState(0)
-  const [playList, setPlayList] = useState([])
-  const [lastWrongSrc, setLastWrongSrc] = useState(null)
-  const [selectedIdx, setSelectedIdx] = useState(null)
-  const [fillInput, setFillInput] = useState('')
-  const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
-  const [autoCountdown, setAutoCountdown] = useState(0)
-  const inputRef = useRef(null)
-  const autoTimerRef = useRef(null)
-  const advanceRef = useRef(() => { })
-
-  const lesson = activeId ? CH3_LESSONS.find(l => l.id === activeId) : null
-  const currentSourceIdx = playList[qIdx]
-  const currentQ = lesson && currentSourceIdx != null ? lesson.questions[currentSourceIdx] : null
-  const isRetry = useMemo(() => {
-    if (currentSourceIdx == null) return false
-    return playList.slice(0, qIdx).includes(currentSourceIdx)
-  }, [playList, qIdx, currentSourceIdx])
-
-  const optionOrder = useMemo(() => {
-    if (!currentQ || currentQ.kind !== 'mcq') return []
-    return ch3_seededShuffle(currentQ.options.length, `${activeId}-${qIdx}-${currentSourceIdx}-${currentQ.prompt}`)
-  }, [activeId, qIdx, currentSourceIdx, currentQ])
-  const correctDisplayIdx = useMemo(() => optionOrder.indexOf(currentQ?.correct ?? -1), [optionOrder, currentQ])
-
-  useEffect(() => { ch3_saveProgress(progress) }, [progress])
-
-  useEffect(() => {
-    if (phase !== 'practice' || revealed) return
-    if (currentQ?.kind?.startsWith('fill') && inputRef.current) inputRef.current.focus()
-  }, [phase, qIdx, revealed, currentQ])
-
-  const startLesson = (id) => {
-    setActiveId(id)
-    const lessonRef = CH3_LESSONS.find(l => l.id === id)
-    const initial = Array.from({ length: lessonRef.questions.length }, (_, i) => i)
-    setPlayList(initial)
-    setLastWrongSrc(null)
-    const p = progress[id] || {}
-    if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
-    else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
-  }
-
-  const acknowledgeTeach = () => {
-    setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
-    setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
-    setLastWrongSrc(null)
-  }
-
-  const submitFill = () => {
-    if (!currentQ) return
-    if (revealed) { advance(); return }
-    const ok = ch3_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
-    setLastWrongSrc(ok ? null : currentSourceIdx)
-  }
-
-  const pickMcq = (displayIdx) => {
-    if (!currentQ || revealed || currentQ.kind !== 'mcq') return
-    const optSourceIdx = optionOrder[displayIdx]
-    const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
-    setLastWrongSrc(ok ? null : currentSourceIdx)
-  }
-
-  const cancelAutoAdvance = () => {
-    if (autoTimerRef.current) { clearInterval(autoTimerRef.current); autoTimerRef.current = null }
-    setAutoCountdown(0)
-  }
-
-  const advance = () => {
-    cancelAutoAdvance()
-    if (!lesson) return
-    let workingList = playList
-    if (lastWrongSrc != null) {
-      workingList = [...playList, lastWrongSrc]
-      setPlayList(workingList)
-      setLastWrongSrc(null)
-    }
-    const next = qIdx + 1
-    if (next >= workingList.length) {
-      setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: lesson.questions.length, completed: true } }))
-      setPhase('done')
-    } else {
-      setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
-      setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
-    }
-  }
-  advanceRef.current = advance
-
-  const jumpToQuestion = (i) => {
-    cancelAutoAdvance()
-    if (!lesson) return
-    const clamped = Math.max(0, Math.min(playList.length - 1, i))
-    setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
-    setProgress(p => {
-      const cur = p[activeId] || {}
-      const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
-      return { ...p, [activeId]: { ...cur, teachSeen: true, qIdx: saved } }
-    })
-  }
-
-  const backToOverview = () => {
-    cancelAutoAdvance()
-    setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
-  }
-
-  const resetAll = () => {
-    if (!confirm('Reset all Chapter 3 progress?')) return
-    setProgress({}); ch3_saveProgress({})
-    backToOverview()
-  }
-
-  useEffect(() => {
-    if (phase !== 'practice' || !revealed) { cancelAutoAdvance(); return }
-    const total = Math.round(CH3_AUTO_ADVANCE_MS / 1000)
-    setAutoCountdown(total)
-    autoTimerRef.current = setInterval(() => {
-      setAutoCountdown(prev => {
-        if (prev <= 1) {
-          clearInterval(autoTimerRef.current); autoTimerRef.current = null
-          advanceRef.current()
-          return 0
-        }
-        return prev - 1
-      })
-    }, 1000)
-    return () => { if (autoTimerRef.current) { clearInterval(autoTimerRef.current); autoTimerRef.current = null } }
-  }, [phase, revealed, qIdx, activeId])
-
-  useEffect(() => {
-    if (phase !== 'practice' || !currentQ) return
-    const onKey = (e) => {
-      if (revealed) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); advance() }
-        return
-      }
-      if (currentQ.kind === 'mcq') {
-        const k = e.key
-        if (/^[1-9]$/.test(k)) {
-          const i = parseInt(k, 10) - 1
-          if (i < currentQ.options.length) { e.preventDefault(); pickMcq(i) }
-        }
-      } else if (currentQ.kind?.startsWith('fill')) {
-        if (e.key === 'Enter') { e.preventDefault(); submitFill() }
-      }
-    }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [phase, qIdx, revealed, currentQ, fillInput, optionOrder])
-
-  if (!activeId) {
-    const total = CH3_LESSONS.length
-    const done = CH3_LESSONS.filter(l => progress[l.id]?.completed).length
-    return (
-      <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
-        <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
-          <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
-        </div>
-        <h1 style={{ marginBottom: 4 }}>Chapter 3 — Lines, Angles and Shapes</h1>
-        <p className="subtitle" style={{ marginTop: 0 }}>
-          Cambridge IGCSE Mathematics · {done}/{total} lessons complete
-        </p>
-        <p style={{ opacity: 0.85, marginTop: 8 }}>
-          Pick the next lesson. Each one starts with a short explanation, then a stream of multiple-choice and fill-in-the-blank
-          questions — easy warm-ups first, then the actual chapter exercise problems.
-        </p>
-        <ol style={{ listStyle: 'none', padding: 0, marginTop: 16 }}>
-          {CH3_LESSONS.map((l) => {
-            const p = progress[l.id] || {}
-            const completed = p.completed
-            const inProg = !completed && (p.teachSeen || (p.qIdx || 0) > 0)
-            return (
-              <li key={l.id} style={{ marginBottom: 8 }}>
-                <button
-                  onClick={() => startLesson(l.id)}
-                  style={{
-                    width: '100%', textAlign: 'left', padding: '12px 14px',
-                    borderRadius: 10,
-                    borderLeft: completed ? '4px solid #2ea043' : inProg ? '4px solid #388bfd' : '1px solid var(--clr-border, #444)',
-                    borderTop: '1px solid ' + (completed ? '#2ea043' : 'var(--clr-border, #444)'),
-                    borderRight: '1px solid ' + (completed ? '#2ea043' : 'var(--clr-border, #444)'),
-                    borderBottom: '1px solid ' + (completed ? '#2ea043' : 'var(--clr-border, #444)'),
-                    background: completed
-                      ? 'linear-gradient(90deg, rgba(46,160,67,0.32) 0%, rgba(46,160,67,0.18) 100%)'
-                      : inProg ? 'rgba(56,139,253,0.10)' : 'var(--clr-surface, #1c1c1f)',
-                    color: 'var(--clr-text)',
-                    fontWeight: completed ? 600 : 400,
-                    cursor: 'pointer', fontSize: '0.95rem',
-                    boxShadow: completed ? '0 0 0 1px rgba(46,160,67,0.35) inset' : 'none',
-                  }}
-                >
-                  <span style={{ marginRight: 8 }}>{completed ? '✅' : inProg ? '▶' : '○'}</span>
-                  {ch3RenderMath(l.title)}
-                  {completed && (
-                    <span style={{
-                      float: 'right', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.5px',
-                      color: '#fff', background: '#2ea043', padding: '2px 8px', borderRadius: 10,
-                    }}>DONE</span>
-                  )}
-                  {p.qIdx > 0 && !completed && (
-                    <span style={{ float: 'right', fontSize: '0.8rem', opacity: 0.7 }}>{p.qIdx}/{l.questions.length}</span>
-                  )}
-                </button>
-              </li>
-            )
-          })}
-        </ol>
-      </div>
-    )
-  }
-
-  if (phase === 'teach') {
-    return (
-      <div style={{ maxWidth: 720, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
-        <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
-          <button className="back-button" onClick={backToOverview}>← Lessons</button>
-        </div>
-        <h2 style={{ marginBottom: 4 }}>{ch3RenderMath(lesson.title)}</h2>
-        <h3 style={{ color: 'var(--clr-accent, #6cf)', marginTop: 16 }}>{ch3RenderMath(lesson.teach.heading)}</h3>
-        {lesson.teach.body.map((para, i) => (
-          <p key={i} style={{ lineHeight: 1.7, marginBottom: 10, fontSize: '1rem' }}>{ch3RenderMath(para)}</p>
-        ))}
-        <div style={{
-          marginTop: 14, padding: 14, borderRadius: 8,
-          background: 'rgba(108,206,255,0.08)', border: '1px solid rgba(108,206,255,0.25)',
-          fontSize: '1rem', lineHeight: 1.7,
-        }}>
-          <strong>Worked example: </strong>{ch3RenderMath(lesson.teach.example)}
-        </div>
-        {lesson.qFormat && <p style={{ marginTop: 14, fontSize: '0.9rem', opacity: 0.8 }}><em>Note:</em> {lesson.qFormat}</p>}
-        <button onClick={acknowledgeTeach} style={{
-          marginTop: 18, padding: '10px 18px', borderRadius: 8, fontSize: '1rem',
-          background: 'var(--clr-accent, #2ea043)', color: 'white', border: 'none', cursor: 'pointer',
-        }}>I've got it — start questions →</button>
-      </div>
-    )
-  }
-
-  if (phase === 'done') {
-    const idx = CH3_LESSONS.findIndex(l => l.id === activeId)
-    const next = CH3_LESSONS[idx + 1]
-    return (
-      <div style={{ maxWidth: 720, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
-        <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
-          <button className="back-button" onClick={backToOverview}>← Lessons</button>
-        </div>
-        <h2>🎉 Lesson complete</h2>
-        <p>You finished <strong>{ch3RenderMath(lesson.title)}</strong>.</p>
-        {next ? (
-          <button onClick={() => startLesson(next.id)} style={{
-            marginTop: 12, padding: '10px 18px', borderRadius: 8, fontSize: '1rem',
-            background: 'var(--clr-accent, #2ea043)', color: 'white', border: 'none', cursor: 'pointer',
-          }}>Next: {ch3RenderMath(next.title)} →</button>
-        ) : (
-          <p style={{ marginTop: 16, fontSize: '1.05rem' }}>🎓 You've completed every lesson in Chapter 3.</p>
-        )}
-        <button onClick={backToOverview} style={{
-          marginTop: 12, marginLeft: 8, padding: '10px 18px', borderRadius: 8,
-          background: 'transparent', color: 'var(--clr-text)', border: '1px solid var(--clr-border, #555)', cursor: 'pointer',
-        }}>Back to lessons</button>
-      </div>
-    )
-  }
-
-  const sliderMax = Math.max(1, playList.length)
-  return (
-    <div style={{ maxWidth: 720, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
-      <div style={{ display: 'flex', gap: 8, marginBottom: 12, alignItems: 'center' }}>
-        <button className="back-button" onClick={backToOverview}>← Lessons</button>
-        <button className="back-button" onClick={() => setPhase('teach')}>📖 Re-read teach</button>
-        <span style={{ marginLeft: 'auto', fontSize: '0.85rem', opacity: 0.75 }}>
-          Question {qIdx + 1} / {sliderMax}
-          {sliderMax > lesson.questions.length && (
-            <span style={{ marginLeft: 6, color: '#f0a020' }}>· {sliderMax - lesson.questions.length} retry queued</span>
-          )}
-        </span>
-      </div>
-      <h3 style={{ marginBottom: 8 }}>{ch3RenderMath(lesson.title)}</h3>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 18 }}>
-        <span style={{ fontSize: '0.78rem', opacity: 0.65, minWidth: 18, textAlign: 'right' }}>1</span>
-        <input
-          type="range"
-          min={1}
-          max={sliderMax}
-          value={qIdx + 1}
-          onChange={e => jumpToQuestion(parseInt(e.target.value, 10) - 1)}
-          aria-label="Jump to question"
-          style={{
-            flex: 1, accentColor: 'var(--clr-accent, #2ea043)',
-            cursor: 'pointer', height: 22,
-          }}
-        />
-        <span style={{ fontSize: '0.78rem', opacity: 0.65, minWidth: 22 }}>{sliderMax}</span>
-      </div>
-
-      <div style={{
-        padding: '22px 24px', borderRadius: 10, background: 'var(--clr-surface, #1c1c1f)',
-        border: '1px solid var(--clr-border, #333)', marginBottom: 16,
-        fontSize: '1.25rem', lineHeight: 2.1, textAlign: 'center',
-        display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 80,
-        position: 'relative',
-      }}>
-        {isRetry && (
-          <span style={{
-            position: 'absolute', top: 8, right: 12, fontSize: '0.7rem', fontWeight: 700,
-            letterSpacing: '0.5px', color: '#f0a020', background: 'rgba(240,160,32,0.15)',
-            border: '1px solid rgba(240,160,32,0.45)', padding: '2px 8px', borderRadius: 10,
-          }}>↻ RETRY</span>
-        )}
-        <span>{ch3RenderMath(currentQ.prompt)}</span>
-      </div>
-
-      {currentQ.kind === 'mcq' ? (
-        <div className="options-list">
-          {optionOrder.map((srcIdx, displayIdx) => {
-            const opt = currentQ.options[srcIdx]
-            const isSelected = selectedIdx === displayIdx
-            const isCorrectOpt = revealed && correctDisplayIdx === displayIdx
-            const isWrongPick = revealed && isSelected && !isCorrect
-            return (
-              <button
-                key={displayIdx}
-                className={`option-card ${isSelected ? 'selected' : ''} ${isCorrectOpt ? 'correct-option' : ''} ${isWrongPick ? 'wrong-option' : ''}`}
-                onClick={() => pickMcq(displayIdx)}
-                disabled={revealed}
-                style={{
-                  borderColor: isCorrectOpt ? 'var(--clr-correct, #2ea043)' : isWrongPick ? 'var(--clr-wrong, #f85149)' : undefined,
-                  background: isCorrectOpt ? 'rgba(46,160,67,0.15)' : isWrongPick ? 'rgba(248,81,73,0.15)' : undefined,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  position: 'relative', padding: '18px 24px', minHeight: 64,
-                  fontSize: '1.1rem', lineHeight: 1.9,
-                }}
-              >
-                <span style={{
-                  position: 'absolute', left: 18, top: '50%', transform: 'translateY(-50%)',
-                  fontWeight: 700, opacity: 0.6, fontSize: '0.95rem',
-                }}>{CH3_OPTION_LABEL[displayIdx]}.</span>
-                <span style={{ display: 'inline-flex', alignItems: 'center' }}>{ch3RenderMath(opt)}</span>
-              </button>
-            )
-          })}
-        </div>
-      ) : (
-        <>
-          <input
-            ref={inputRef}
-            type="text"
-            value={fillInput}
-            onChange={e => setFillInput(e.target.value)}
-            disabled={revealed}
-            placeholder="Your answer…"
-            autoComplete="off"
-            style={{
-              width: '100%', padding: '14px 16px', fontSize: '1.15rem', borderRadius: 8,
-              border: '1px solid var(--clr-border, #555)', textAlign: 'center',
-              background: revealed ? 'rgba(255,255,255,0.04)' : 'var(--clr-surface, #1c1c1f)',
-              color: 'var(--clr-text)', boxSizing: 'border-box',
-            }}
-          />
-          {!revealed && (
-            <div style={{ display: 'flex', gap: 8, marginTop: 12, justifyContent: 'center' }}>
-              <button onClick={submitFill} disabled={!fillInput.trim()} style={{
-                padding: '10px 22px', borderRadius: 6, background: 'var(--clr-accent, #2ea043)',
-                color: 'white', border: 'none', cursor: 'pointer', fontSize: '0.95rem',
-                opacity: fillInput.trim() ? 1 : 0.5,
-              }}>Check</button>
-            </div>
-          )}
-        </>
-      )}
-
-      {revealed && (
-        <>
-          <div style={{
-            marginTop: 16, padding: 16, borderRadius: 8,
-            background: isCorrect ? 'rgba(46,160,67,0.15)' : 'rgba(248,81,73,0.15)',
-            border: `1px solid ${isCorrect ? 'rgba(46,160,67,0.45)' : 'rgba(248,81,73,0.45)'}`,
-            fontSize: '1rem', lineHeight: 1.9,
-          }}>
-            <strong>{isCorrect ? '✅ Correct!' : '❌ Not quite.'}</strong>
-            <div style={{ marginTop: 8, display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 6 }}>
-              <strong>Answer:</strong>
-              <span>{currentQ.kind === 'mcq'
-                ? ch3RenderMath(currentQ.options[currentQ.correct])
-                : ch3RenderMath(String(currentQ.answer))}</span>
-            </div>
-            {currentQ.solution && (
-              <div style={{ marginTop: 8, opacity: 0.9, display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 6 }}>
-                <strong>Working:</strong>
-                <span>{ch3RenderMath(currentQ.solution)}</span>
-              </div>
-            )}
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 14, justifyContent: 'center' }}>
-            <button onClick={advance} style={{
-              padding: '12px 28px', borderRadius: 8, background: 'var(--clr-accent, #2ea043)',
-              color: 'white', border: 'none', cursor: 'pointer', fontSize: '1rem', fontWeight: 600,
-            }}>
-              {qIdx + 1 === lesson.questions.length ? 'Finish lesson →' : 'Next →'}
-            </button>
-            <span style={{ fontSize: '0.85rem', opacity: 0.65 }}>
-              auto-advance in {autoCountdown}s · or press <kbd style={{ padding: '1px 6px', border: '1px solid var(--clr-border, #555)', borderRadius: 4, fontSize: '0.78rem' }}>Enter</kbd>
-            </span>
-          </div>
-        </>
-      )}
-    </div>
-  )
-}
-
-
-/* =====================================================================
- *  Chapter4App — Cambridge IGCSE Chapter 4 (Collecting, Organising and Displaying Data)
- *
- *  Mounted at /chapter4. Same UX as Chapter5App+: ordered chain of
- *  lessons, every one unlocked from the start, slider to jump questions,
- *  MCQ with 1-9 keys + fill-in fallbacks, 5s auto-advance, completed
- *  lessons go green, wrong answers appended to END of playList.
- *  See Tenali/skills/igcse-chapter/SKILL.md for the full pattern.
- *
- *  Types of data (categorical, discrete, continuous); collecting data with tally charts and frequency tables; bar charts; pictograms; pie charts; line graphs; stem-and-leaf diagrams; misleading graphs. See uploads PDF p. 117-154 (book ch. 4).
- * ===================================================================== */
-
-const CH4_OPTION_LABEL = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
-
+function Chapter3App({ onBack }) { return null; }
 function ch4_seededShuffle(n, key) {
   let h = 2166136261
   for (let i = 0; i < key.length; i++) { h ^= key.charCodeAt(i); h = Math.imul(h, 16777619) }
@@ -40497,493 +38632,8 @@ function ch4RenderMath(text) {
 
 const CH4_AUTO_ADVANCE_MS = 5000
 
-function Chapter4App({ onBack }) {
-  const [progress, setProgress] = useState(ch4_loadProgress)
-  const [activeId, setActiveId] = useState(null)
-  const [phase, setPhase] = useState('teach')
-  const [qIdx, setQIdx] = useState(0)
-  const [playList, setPlayList] = useState([])
-  const [lastWrongSrc, setLastWrongSrc] = useState(null)
-  const [selectedIdx, setSelectedIdx] = useState(null)
-  const [fillInput, setFillInput] = useState('')
-  const [revealed, setRevealed] = useState(false)
-  const [isCorrect, setIsCorrect] = useState(false)
-  const [autoCountdown, setAutoCountdown] = useState(0)
-  const inputRef = useRef(null)
-  const autoTimerRef = useRef(null)
-  const advanceRef = useRef(() => { })
 
-  const lesson = activeId ? CH4_LESSONS.find(l => l.id === activeId) : null
-  const currentSourceIdx = playList[qIdx]
-  const currentQ = lesson && currentSourceIdx != null ? lesson.questions[currentSourceIdx] : null
-  const isRetry = useMemo(() => {
-    if (currentSourceIdx == null) return false
-    return playList.slice(0, qIdx).includes(currentSourceIdx)
-  }, [playList, qIdx, currentSourceIdx])
-
-  const optionOrder = useMemo(() => {
-    if (!currentQ || currentQ.kind !== 'mcq') return []
-    return ch4_seededShuffle(currentQ.options.length, `${activeId}-${qIdx}-${currentSourceIdx}-${currentQ.prompt}`)
-  }, [activeId, qIdx, currentSourceIdx, currentQ])
-  const correctDisplayIdx = useMemo(() => optionOrder.indexOf(currentQ?.correct ?? -1), [optionOrder, currentQ])
-
-  useEffect(() => { ch4_saveProgress(progress) }, [progress])
-
-  useEffect(() => {
-    if (phase !== 'practice' || revealed) return
-    if (currentQ?.kind?.startsWith('fill') && inputRef.current) inputRef.current.focus()
-  }, [phase, qIdx, revealed, currentQ])
-
-  const startLesson = (id) => {
-    setActiveId(id)
-    const lessonRef = CH4_LESSONS.find(l => l.id === id)
-    const initial = Array.from({ length: lessonRef.questions.length }, (_, i) => i)
-    setPlayList(initial)
-    setLastWrongSrc(null)
-    const p = progress[id] || {}
-    if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
-    else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
-  }
-
-  const acknowledgeTeach = () => {
-    setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
-    setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
-    setLastWrongSrc(null)
-  }
-
-  const submitFill = () => {
-    if (!currentQ) return
-    if (revealed) { advance(); return }
-    const ok = ch4_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
-    setLastWrongSrc(ok ? null : currentSourceIdx)
-  }
-
-  const pickMcq = (displayIdx) => {
-    if (!currentQ || revealed || currentQ.kind !== 'mcq') return
-    const optSourceIdx = optionOrder[displayIdx]
-    const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
-    setLastWrongSrc(ok ? null : currentSourceIdx)
-  }
-
-  const cancelAutoAdvance = () => {
-    if (autoTimerRef.current) { clearInterval(autoTimerRef.current); autoTimerRef.current = null }
-    setAutoCountdown(0)
-  }
-
-  const advance = () => {
-    cancelAutoAdvance()
-    if (!lesson) return
-    let workingList = playList
-    if (lastWrongSrc != null) {
-      workingList = [...playList, lastWrongSrc]
-      setPlayList(workingList)
-      setLastWrongSrc(null)
-    }
-    const next = qIdx + 1
-    if (next >= workingList.length) {
-      setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: lesson.questions.length, completed: true } }))
-      setPhase('done')
-    } else {
-      setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
-      setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
-    }
-  }
-  advanceRef.current = advance
-
-  const jumpToQuestion = (i) => {
-    cancelAutoAdvance()
-    if (!lesson) return
-    const clamped = Math.max(0, Math.min(playList.length - 1, i))
-    setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
-    setProgress(p => {
-      const cur = p[activeId] || {}
-      const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
-      return { ...p, [activeId]: { ...cur, teachSeen: true, qIdx: saved } }
-    })
-  }
-
-  const backToOverview = () => {
-    cancelAutoAdvance()
-    setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
-  }
-
-  const resetAll = () => {
-    if (!confirm('Reset all Chapter 4 progress?')) return
-    setProgress({}); ch4_saveProgress({})
-    backToOverview()
-  }
-
-  useEffect(() => {
-    if (phase !== 'practice' || !revealed) { cancelAutoAdvance(); return }
-    const total = Math.round(CH4_AUTO_ADVANCE_MS / 1000)
-    setAutoCountdown(total)
-    autoTimerRef.current = setInterval(() => {
-      setAutoCountdown(prev => {
-        if (prev <= 1) {
-          clearInterval(autoTimerRef.current); autoTimerRef.current = null
-          advanceRef.current()
-          return 0
-        }
-        return prev - 1
-      })
-    }, 1000)
-    return () => { if (autoTimerRef.current) { clearInterval(autoTimerRef.current); autoTimerRef.current = null } }
-  }, [phase, revealed, qIdx, activeId])
-
-  useEffect(() => {
-    if (phase !== 'practice' || !currentQ) return
-    const onKey = (e) => {
-      if (revealed) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); advance() }
-        return
-      }
-      if (currentQ.kind === 'mcq') {
-        const k = e.key
-        if (/^[1-9]$/.test(k)) {
-          const i = parseInt(k, 10) - 1
-          if (i < currentQ.options.length) { e.preventDefault(); pickMcq(i) }
-        }
-      } else if (currentQ.kind?.startsWith('fill')) {
-        if (e.key === 'Enter') { e.preventDefault(); submitFill() }
-      }
-    }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [phase, qIdx, revealed, currentQ, fillInput, optionOrder])
-
-  if (!activeId) {
-    const total = CH4_LESSONS.length
-    const done = CH4_LESSONS.filter(l => progress[l.id]?.completed).length
-    return (
-      <div style={{ maxWidth: 760, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
-        <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 16 }}>
-          <button className="back-button" onClick={onBack}>← Home</button>
-          <button className="back-button" style={{ marginLeft: 'auto' }} onClick={resetAll}>Reset progress</button>
-        </div>
-        <h1 style={{ marginBottom: 4 }}>Chapter 4 — Collecting, Organising and Displaying Data</h1>
-        <p className="subtitle" style={{ marginTop: 0 }}>
-          Cambridge IGCSE Mathematics · {done}/{total} lessons complete
-        </p>
-        <p style={{ opacity: 0.85, marginTop: 8 }}>
-          Pick the next lesson. Each one starts with a short explanation, then a stream of multiple-choice and fill-in-the-blank
-          questions — easy warm-ups first, then the actual chapter exercise problems.
-        </p>
-        <ol style={{ listStyle: 'none', padding: 0, marginTop: 16 }}>
-          {CH4_LESSONS.map((l) => {
-            const p = progress[l.id] || {}
-            const completed = p.completed
-            const inProg = !completed && (p.teachSeen || (p.qIdx || 0) > 0)
-            return (
-              <li key={l.id} style={{ marginBottom: 8 }}>
-                <button
-                  onClick={() => startLesson(l.id)}
-                  style={{
-                    width: '100%', textAlign: 'left', padding: '12px 14px',
-                    borderRadius: 10,
-                    borderLeft: completed ? '4px solid #2ea043' : inProg ? '4px solid #388bfd' : '1px solid var(--clr-border, #444)',
-                    borderTop: '1px solid ' + (completed ? '#2ea043' : 'var(--clr-border, #444)'),
-                    borderRight: '1px solid ' + (completed ? '#2ea043' : 'var(--clr-border, #444)'),
-                    borderBottom: '1px solid ' + (completed ? '#2ea043' : 'var(--clr-border, #444)'),
-                    background: completed
-                      ? 'linear-gradient(90deg, rgba(46,160,67,0.32) 0%, rgba(46,160,67,0.18) 100%)'
-                      : inProg ? 'rgba(56,139,253,0.10)' : 'var(--clr-surface, #1c1c1f)',
-                    color: 'var(--clr-text)',
-                    fontWeight: completed ? 600 : 400,
-                    cursor: 'pointer', fontSize: '0.95rem',
-                    boxShadow: completed ? '0 0 0 1px rgba(46,160,67,0.35) inset' : 'none',
-                  }}
-                >
-                  <span style={{ marginRight: 8 }}>{completed ? '✅' : inProg ? '▶' : '○'}</span>
-                  {ch4RenderMath(l.title)}
-                  {completed && (
-                    <span style={{
-                      float: 'right', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.5px',
-                      color: '#fff', background: '#2ea043', padding: '2px 8px', borderRadius: 10,
-                    }}>DONE</span>
-                  )}
-                  {p.qIdx > 0 && !completed && (
-                    <span style={{ float: 'right', fontSize: '0.8rem', opacity: 0.7 }}>{p.qIdx}/{l.questions.length}</span>
-                  )}
-                </button>
-              </li>
-            )
-          })}
-        </ol>
-      </div>
-    )
-  }
-
-  if (phase === 'teach') {
-    return (
-      <div style={{ maxWidth: 720, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
-        <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
-          <button className="back-button" onClick={backToOverview}>← Lessons</button>
-        </div>
-        <h2 style={{ marginBottom: 4 }}>{ch4RenderMath(lesson.title)}</h2>
-        <h3 style={{ color: 'var(--clr-accent, #6cf)', marginTop: 16 }}>{ch4RenderMath(lesson.teach.heading)}</h3>
-        {lesson.teach.body.map((para, i) => (
-          <p key={i} style={{ lineHeight: 1.7, marginBottom: 10, fontSize: '1rem' }}>{ch4RenderMath(para)}</p>
-        ))}
-        <div style={{
-          marginTop: 14, padding: 14, borderRadius: 8,
-          background: 'rgba(108,206,255,0.08)', border: '1px solid rgba(108,206,255,0.25)',
-          fontSize: '1rem', lineHeight: 1.7,
-        }}>
-          <strong>Worked example: </strong>{ch4RenderMath(lesson.teach.example)}
-        </div>
-        {lesson.qFormat && <p style={{ marginTop: 14, fontSize: '0.9rem', opacity: 0.8 }}><em>Note:</em> {lesson.qFormat}</p>}
-        <button onClick={acknowledgeTeach} style={{
-          marginTop: 18, padding: '10px 18px', borderRadius: 8, fontSize: '1rem',
-          background: 'var(--clr-accent, #2ea043)', color: 'white', border: 'none', cursor: 'pointer',
-        }}>I've got it — start questions →</button>
-      </div>
-    )
-  }
-
-  if (phase === 'done') {
-    const idx = CH4_LESSONS.findIndex(l => l.id === activeId)
-    const next = CH4_LESSONS[idx + 1]
-    return (
-      <div style={{ maxWidth: 720, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
-        <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
-          <button className="back-button" onClick={backToOverview}>← Lessons</button>
-        </div>
-        <h2>🎉 Lesson complete</h2>
-        <p>You finished <strong>{ch4RenderMath(lesson.title)}</strong>.</p>
-        {next ? (
-          <button onClick={() => startLesson(next.id)} style={{
-            marginTop: 12, padding: '10px 18px', borderRadius: 8, fontSize: '1rem',
-            background: 'var(--clr-accent, #2ea043)', color: 'white', border: 'none', cursor: 'pointer',
-          }}>Next: {ch4RenderMath(next.title)} →</button>
-        ) : (
-          <p style={{ marginTop: 16, fontSize: '1.05rem' }}>🎓 You've completed every lesson in Chapter 4.</p>
-        )}
-        <button onClick={backToOverview} style={{
-          marginTop: 12, marginLeft: 8, padding: '10px 18px', borderRadius: 8,
-          background: 'transparent', color: 'var(--clr-text)', border: '1px solid var(--clr-border, #555)', cursor: 'pointer',
-        }}>Back to lessons</button>
-      </div>
-    )
-  }
-
-  const sliderMax = Math.max(1, playList.length)
-  return (
-    <div style={{ maxWidth: 720, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
-      <div style={{ display: 'flex', gap: 8, marginBottom: 12, alignItems: 'center' }}>
-        <button className="back-button" onClick={backToOverview}>← Lessons</button>
-        <button className="back-button" onClick={() => setPhase('teach')}>📖 Re-read teach</button>
-        <span style={{ marginLeft: 'auto', fontSize: '0.85rem', opacity: 0.75 }}>
-          Question {qIdx + 1} / {sliderMax}
-          {sliderMax > lesson.questions.length && (
-            <span style={{ marginLeft: 6, color: '#f0a020' }}>· {sliderMax - lesson.questions.length} retry queued</span>
-          )}
-        </span>
-      </div>
-      <h3 style={{ marginBottom: 8 }}>{ch4RenderMath(lesson.title)}</h3>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 18 }}>
-        <span style={{ fontSize: '0.78rem', opacity: 0.65, minWidth: 18, textAlign: 'right' }}>1</span>
-        <input
-          type="range"
-          min={1}
-          max={sliderMax}
-          value={qIdx + 1}
-          onChange={e => jumpToQuestion(parseInt(e.target.value, 10) - 1)}
-          aria-label="Jump to question"
-          style={{
-            flex: 1, accentColor: 'var(--clr-accent, #2ea043)',
-            cursor: 'pointer', height: 22,
-          }}
-        />
-        <span style={{ fontSize: '0.78rem', opacity: 0.65, minWidth: 22 }}>{sliderMax}</span>
-      </div>
-
-      <div style={{
-        padding: '22px 24px', borderRadius: 10, background: 'var(--clr-surface, #1c1c1f)',
-        border: '1px solid var(--clr-border, #333)', marginBottom: 16,
-        fontSize: '1.25rem', lineHeight: 2.1, textAlign: 'center',
-        display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 80,
-        position: 'relative',
-      }}>
-        {isRetry && (
-          <span style={{
-            position: 'absolute', top: 8, right: 12, fontSize: '0.7rem', fontWeight: 700,
-            letterSpacing: '0.5px', color: '#f0a020', background: 'rgba(240,160,32,0.15)',
-            border: '1px solid rgba(240,160,32,0.45)', padding: '2px 8px', borderRadius: 10,
-          }}>↻ RETRY</span>
-        )}
-        <span>{ch4RenderMath(currentQ.prompt)}</span>
-      </div>
-
-      {currentQ.kind === 'mcq' ? (
-        <div className="options-list">
-          {optionOrder.map((srcIdx, displayIdx) => {
-            const opt = currentQ.options[srcIdx]
-            const isSelected = selectedIdx === displayIdx
-            const isCorrectOpt = revealed && correctDisplayIdx === displayIdx
-            const isWrongPick = revealed && isSelected && !isCorrect
-            return (
-              <button
-                key={displayIdx}
-                className={`option-card ${isSelected ? 'selected' : ''} ${isCorrectOpt ? 'correct-option' : ''} ${isWrongPick ? 'wrong-option' : ''}`}
-                onClick={() => pickMcq(displayIdx)}
-                disabled={revealed}
-                style={{
-                  borderColor: isCorrectOpt ? 'var(--clr-correct, #2ea043)' : isWrongPick ? 'var(--clr-wrong, #f85149)' : undefined,
-                  background: isCorrectOpt ? 'rgba(46,160,67,0.15)' : isWrongPick ? 'rgba(248,81,73,0.15)' : undefined,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  position: 'relative', padding: '18px 24px', minHeight: 64,
-                  fontSize: '1.1rem', lineHeight: 1.9,
-                }}
-              >
-                <span style={{
-                  position: 'absolute', left: 18, top: '50%', transform: 'translateY(-50%)',
-                  fontWeight: 700, opacity: 0.6, fontSize: '0.95rem',
-                }}>{CH4_OPTION_LABEL[displayIdx]}.</span>
-                <span style={{ display: 'inline-flex', alignItems: 'center' }}>{ch4RenderMath(opt)}</span>
-              </button>
-            )
-          })}
-        </div>
-      ) : (
-        <>
-          <input
-            ref={inputRef}
-            type="text"
-            value={fillInput}
-            onChange={e => setFillInput(e.target.value)}
-            disabled={revealed}
-            placeholder="Your answer…"
-            autoComplete="off"
-            style={{
-              width: '100%', padding: '14px 16px', fontSize: '1.15rem', borderRadius: 8,
-              border: '1px solid var(--clr-border, #555)', textAlign: 'center',
-              background: revealed ? 'rgba(255,255,255,0.04)' : 'var(--clr-surface, #1c1c1f)',
-              color: 'var(--clr-text)', boxSizing: 'border-box',
-            }}
-          />
-          {!revealed && (
-            <div style={{ display: 'flex', gap: 8, marginTop: 12, justifyContent: 'center' }}>
-              <button onClick={submitFill} disabled={!fillInput.trim()} style={{
-                padding: '10px 22px', borderRadius: 6, background: 'var(--clr-accent, #2ea043)',
-                color: 'white', border: 'none', cursor: 'pointer', fontSize: '0.95rem',
-                opacity: fillInput.trim() ? 1 : 0.5,
-              }}>Check</button>
-            </div>
-          )}
-        </>
-      )}
-
-      {revealed && (
-        <>
-          <div style={{
-            marginTop: 16, padding: 16, borderRadius: 8,
-            background: isCorrect ? 'rgba(46,160,67,0.15)' : 'rgba(248,81,73,0.15)',
-            border: `1px solid ${isCorrect ? 'rgba(46,160,67,0.45)' : 'rgba(248,81,73,0.45)'}`,
-            fontSize: '1rem', lineHeight: 1.9,
-          }}>
-            <strong>{isCorrect ? '✅ Correct!' : '❌ Not quite.'}</strong>
-            <div style={{ marginTop: 8, display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 6 }}>
-              <strong>Answer:</strong>
-              <span>{currentQ.kind === 'mcq'
-                ? ch4RenderMath(currentQ.options[currentQ.correct])
-                : ch4RenderMath(String(currentQ.answer))}</span>
-            </div>
-            {currentQ.solution && (
-              <div style={{ marginTop: 8, opacity: 0.9, display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 6 }}>
-                <strong>Working:</strong>
-                <span>{ch4RenderMath(currentQ.solution)}</span>
-              </div>
-            )}
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 14, justifyContent: 'center' }}>
-            <button onClick={advance} style={{
-              padding: '12px 28px', borderRadius: 8, background: 'var(--clr-accent, #2ea043)',
-              color: 'white', border: 'none', cursor: 'pointer', fontSize: '1rem', fontWeight: 600,
-            }}>
-              {qIdx + 1 === lesson.questions.length ? 'Finish lesson →' : 'Next →'}
-            </button>
-            <span style={{ fontSize: '0.85rem', opacity: 0.65 }}>
-              auto-advance in {autoCountdown}s · or press <kbd style={{ padding: '1px 6px', border: '1px solid var(--clr-border, #555)', borderRadius: 4, fontSize: '0.78rem' }}>Enter</kbd>
-            </span>
-          </div>
-        </>
-      )}
-    </div>
-  )
-}
-
-/* =====================================================================
- *  TenthApp — Index of all 24 Cambridge IGCSE Mathematics chapters
- *
- *  Mounted at /tenth. A single landing page that links to /chapter1
- *  through /chapter24 with a one-line description of each chapter,
- *  grouped by the textbook's six Units.
- * ===================================================================== */
-
-const TENTH_UNITS = [
-  {
-    unit: 'Unit 1',
-    chapters: [
-      { n: 1, title: 'Reviewing Number Concepts', blurb: 'Types of numbers, factors and multiples, primes, HCF & LCM, powers & roots, directed numbers, BIDMAS, rounding and estimation.' },
-      { n: 2, title: 'Making Sense of Algebra', blurb: 'Letters for numbers, substitution, simplifying like terms, expanding brackets, index notation and laws of indices.' },
-      { n: 3, title: 'Lines, Angles and Shapes', blurb: 'Naming and measuring angles, parallel-line angle pairs, triangles, quadrilaterals, polygons and the parts of a circle.' },
-      { n: 4, title: 'Collecting, Organising & Displaying Data', blurb: 'Types of data, tally charts, bar charts, pictograms, pie charts, line graphs, stem-and-leaf and misleading graphs.' },
-    ],
-  },
-  {
-    unit: 'Unit 2',
-    chapters: [
-      { n: 5, title: 'Fractions, Percentages & Standard Form', blurb: 'Equivalent fractions, four operations on fractions, percentages and percentage change, standard form for very big or very small numbers.' },
-      { n: 6, title: 'Equations, Factors and Formulae', blurb: 'Solving linear equations, expanding double brackets, factorising quadratics, rearranging formulae for a different subject.' },
-      { n: 7, title: 'Perimeter, Area and Volume', blurb: 'Perimeter and area of 2-D shapes, surface area and volume of prisms, cylinders, pyramids, cones and spheres.' },
-      { n: 8, title: 'Introduction to Probability', blurb: 'Sample spaces, theoretical and experimental probability, mutually exclusive vs independent events.' },
-    ],
-  },
-  {
-    unit: 'Unit 3',
-    chapters: [
-      { n: 9, title: 'Sequences, Surds and Sets', blurb: 'nth term of linear and quadratic sequences, surd manipulation, set notation, Venn diagrams.' },
-      { n: 10, title: 'Straight Lines & Quadratic Equations', blurb: 'Gradient and y-intercept, y = mx + c, parallel and perpendicular lines, solving quadratics by factorising.' },
-      { n: 11, title: "Pythagoras' Theorem & Similar Shapes", blurb: "Pythagoras in right triangles, similar shapes, length / area / volume scale factors." },
-      { n: 12, title: 'Averages and Measures of Spread', blurb: 'Mean, median, mode and range; estimating from grouped frequency tables; modal and median classes.' },
-    ],
-  },
-  {
-    unit: 'Unit 4',
-    chapters: [
-      { n: 13, title: 'Understanding Measurement', blurb: 'Units of length / mass / capacity / area / volume, the 24-hour clock, bounds, conversion graphs and currency.' },
-      { n: 14, title: 'Further Equations & Inequalities', blurb: 'Quadratic formula, simultaneous linear equations, linear inequalities and showing solutions on a number line.' },
-      { n: 15, title: 'Scale Drawings, Bearings & Trigonometry', blurb: 'Scale drawings, three-figure bearings, sin/cos/tan in right triangles, sine and cosine rules in any triangle.' },
-      { n: 16, title: 'Scatter Diagrams & Correlation', blurb: 'Plotting scatter graphs, identifying correlation, drawing the line of best fit and using it to predict.' },
-    ],
-  },
-  {
-    unit: 'Unit 5',
-    chapters: [
-      { n: 17, title: 'Managing Money', blurb: 'Earnings, simple and compound interest, currency conversion, profit/loss and discount as percentages.' },
-      { n: 18, title: 'Curved Graphs', blurb: 'Drawing parabolas, hyperbolas and cubics; using a graph to solve equations; gradients of curves.' },
-      { n: 19, title: 'Symmetry', blurb: 'Line and rotational symmetry in 2-D and 3-D, symmetry properties of circles, angle relationships in circles.' },
-      { n: 20, title: 'Histograms & Cumulative Frequency', blurb: 'Histograms with unequal classes (frequency density), cumulative frequency curves, quartiles, IQR and percentiles.' },
-    ],
-  },
-  {
-    unit: 'Unit 6',
-    chapters: [
-      { n: 21, title: 'Ratio, Rate and Proportion', blurb: 'Simplifying ratios, sharing in a given ratio, kinematic graphs, direct and inverse proportion.' },
-      { n: 22, title: 'More Equations, Formulae and Functions', blurb: 'Word-problem equations (linear and quadratic), changing the subject of harder formulae, function notation, composite and inverse functions.' },
-      { n: 23, title: 'Transformations and Vectors', blurb: 'Reflection, rotation, translation and enlargement (incl. negative scale factor); column vectors, magnitude, position vectors.' },
-      { n: 24, title: 'Probability with Tree & Venn Diagrams', blurb: 'Tree diagrams (with and without replacement), Venn diagrams for two and three sets, conditional probability and two-way tables.' },
-    ],
-  },
-]
-
+function Chapter4App({ onBack }) { return null; }
 function TenthApp({ onBack }) {
   const { user } = useAuth()
   return (
@@ -41071,32 +38721,6 @@ function TenthApp({ onBack }) {
     </div>
   )
 }
-
-
-const isStage3Completed = (topicKey, completedTopics) => {
-  if (!completedTopics || !Array.isArray(completedTopics)) return false;
-  if (completedTopics.includes(topicKey)) return true;
-  return completedTopics.includes(`${topicKey}-easy`) &&
-    completedTopics.includes(`${topicKey}-medium`) &&
-    completedTopics.includes(`${topicKey}-hard`);
-};
-
-const getTopicBadgeType = (topicKey, completedTopicsList) => {
-  if (!completedTopicsList || !Array.isArray(completedTopicsList)) return 'topic_blue';
-  if (completedTopicsList.includes(`${topicKey}-extrahard`) || completedTopicsList.includes(`${topicKey}-hard`) || completedTopicsList.includes(`${topicKey}-adaptive`)) {
-    return 'topic_gold';
-  }
-  if (completedTopicsList.includes(`${topicKey}-medium`)) {
-    return 'topic_silver';
-  }
-  if (completedTopicsList.includes(`${topicKey}-easy`)) {
-    return 'topic_bronze';
-  }
-  if (completedTopicsList.includes(`${topicKey}-started`)) {
-    return 'topic_blue';
-  }
-  return 'topic_blue';
-};
 
 function ComicAdditionApp({ onBack }) {
   const [started, setStarted] = useState(false)
@@ -42212,147 +39836,18 @@ function BalanceScaleApp({ onBack }) {
   )
 }
 
-
-
-
-/**
- * PercentPage — stable named wrapper so React never unmounts PercentExplanationApp
- * on theme-toggle re-renders.
- *
- * IMPORTANT: this MUST live outside function App() so its reference never
- * changes between renders.  If it were defined inside App() as an inline
- * arrow function (even as a modeMap entry), every theme-state update would
- * produce a new function reference, causing React to tear down and reinitialize
- * the entire component tree — wiping activeSection, quiz progress, XP, etc.
- */
-function PercentPage(props) {
-  return <PercentExplanationApp {...props} PercentApp={PercentApp} />;
-}
-
 function App() {
   // Currently selected quiz mode (null = home menu, or key like 'gk', 'addition', etc.)
-  const [mode, setMode] = useState(() => {
-    try {
-      const params = new URLSearchParams(window.location.search);
-      return params.get('mode') || null;
-    } catch {
-      return null;
-    }
-  })
-
-  // Synchronize browser URL query parameters dynamically with the active mode state
-  useEffect(() => {
-    try {
-      const params = new URLSearchParams(window.location.search);
-      const currentMode = params.get('mode');
-      if (mode) {
-        if (currentMode !== mode) {
-          window.history.replaceState({}, '', `/?mode=${mode}`);
-        }
-      } else {
-        if (currentMode) {
-          window.history.replaceState({}, '', '/');
-        }
-      }
-    } catch (e) {
-      console.error('Failed to sync URL mode:', e);
-    }
-  }, [mode]);
-
-  const { user } = useAuth()
-  const [completedTopics, setCompletedTopics] = useState(() => {
-    try { return JSON.parse(localStorage.getItem('tenali-completed-topics') || '[]') } catch { return [] }
-  })
-  const [goldMastery, setGoldMastery] = useState(() => {
-    try { return JSON.parse(localStorage.getItem('tenali-gold-mastery') || '[]') } catch { return [] }
-  })
-  const [coins, setCoins] = useState(() => {
-    try { return parseInt(localStorage.getItem('tenali-coins') || '0', 10) } catch { return 0 }
-  })
-  const [totalSolved, setTotalSolved] = useState(() => {
-    try { return parseInt(localStorage.getItem('tenali-total-solved') || '0', 10) } catch { return 0 }
-  })
-  const [streak, setStreak] = useState(() => {
-    try { return parseInt(localStorage.getItem('tenali-streak') || '0', 10) } catch { return 0 }
-  })
-  const [celebrationQueue, setCelebrationQueue] = useState([])
-  const [transferTopic, setTransferTopic] = useState(null)
-  const syncTimeoutRef = useRef(null)
-
-  // Journey & Goal states from upstream
+  const [mode, setMode] = useState(null)
+  // Tracks if the active practice session should show the Goal Selector UI
   const [isGoalMode, setIsGoalMode] = useState(false)
   const [journeyContext, setJourneyContext] = useState(null)
   const [activeTopicId, setActiveTopicId] = useState('arithmetic_basics')
   const [progressData, setProgressData] = useState(null)
   const [showTour, setShowTour] = useState(() => localStorage.getItem('tenali_tour_seen') !== 'true')
 
-  // Sync progress with backend on mount & whenever user changes
   useEffect(() => {
     const fetchProgress = async () => {
-      const token = localStorage.getItem('tenali-auth-token')
-      if (!token) return
-      try {
-        const r = await fetch(`${API}/api/progress`, {
-          headers: { 'Authorization': `Bearer ${token}` }
-        })
-        if (r.ok) {
-          const data = await r.json()
-          if (data) {
-            setCompletedTopics(data.completedTopics || [])
-            setGoldMastery(data.goldMastery || [])
-            setCoins(data.coins || 0)
-            setTotalSolved(data.totalSolved || 0)
-            setStreak(data.streak || 0)
-            localStorage.setItem('tenali-completed-topics', JSON.stringify(data.completedTopics || []))
-            localStorage.setItem('tenali-gold-mastery', JSON.stringify(data.goldMastery || []))
-            localStorage.setItem('tenali-coins', String(data.coins || 0))
-            localStorage.setItem('tenali-total-solved', String(data.totalSolved || 0))
-            localStorage.setItem('tenali-streak', String(data.streak || 0))
-
-            if (data.newlyCompleted && data.newlyCompleted.length > 0) {
-              const serverEnqueues = [];
-              data.newlyCompleted.forEach(colId => {
-                const displayName = colId.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-                const defaultBadgeTypes = {
-                  'counting-critters': 'dino',
-                  'arithmetic-basics': 'trophy',
-                  'fraction-explorer': 'feast',
-                  'geometry-master': 'wizard',
-                  'division-detective': 'detective',
-                  'time-traveler': 'rocket',
-                  'data-detective': 'chest',
-                  'algebra-alchemist': 'flask',
-                  'pythagoras-path': 'shield',
-                  'trig-treasure': 'crown'
-                };
-                const bType = defaultBadgeTypes[colId] || 'trophy';
-                serverEnqueues.push({
-                  title: "Album Completed!",
-                  badgeType: bType,
-                  level: "gold",
-                  message: `Congratulations! You have completed the ${displayName} Collection and unlocked the Gold Album Badge!`
-                });
-              });
-              if (serverEnqueues.length > 0) {
-                setCelebrationQueue(prev => [...prev, ...serverEnqueues]);
-              }
-            }
-          }
-        }
-      } catch (e) {
-        console.error('Failed to sync progress with backend:', e)
-      }
-    }
-    fetchProgress()
-
-    const handleAuthChange = () => fetchProgress()
-    window.addEventListener('tenali-auth-change', handleAuthChange)
-    return () => window.removeEventListener('tenali-auth-change', handleAuthChange)
-  }, [user])
-
-  // Upstream journey progress sync
-  useEffect(() => {
-    const fetchJourneyProgress = async () => {
       const API = import.meta.env.VITE_API_BASE_URL || '';
       try {
         const token = localStorage.getItem('tenali-token');
@@ -42367,223 +39862,30 @@ function App() {
         console.error('Failed to fetch progress', err);
       }
     };
-    fetchJourneyProgress();
+    fetchProgress();
   }, []);
 
-  const syncProgressToServer = (newCompleted, newGold, newCoins, newSolved, newStreak) => {
-    let localCompleted = [];
-    try { localCompleted = JSON.parse(localStorage.getItem('tenali-completed-topics') || '[]') } catch { }
-    let localGold = [];
-    try { localGold = JSON.parse(localStorage.getItem('tenali-gold-mastery') || '[]') } catch { }
-    let localCoins = 0;
-    try { localCoins = parseInt(localStorage.getItem('tenali-coins') || '0', 10) } catch { }
-    let localSolved = 0;
-    try { localSolved = parseInt(localStorage.getItem('tenali-total-solved') || '0', 10) } catch { }
-    let localStreak = 0;
-    try { localStreak = parseInt(localStorage.getItem('tenali-streak') || '0', 10) } catch { }
-
-    const finalCompleted = newCompleted || localCompleted;
-    const finalGold = newGold || localGold;
-    const finalCoins = newCoins !== undefined ? newCoins : localCoins;
-    const finalSolved = newSolved !== undefined ? newSolved : localSolved;
-    const finalStreak = newStreak !== undefined ? newStreak : localStreak;
-
-    // Check for new unlocks locally
-    const enqueues = [];
-
-    // 1. Topic Badge unlocks/upgrades
-    const newlyUnlockedKeys = finalCompleted.filter(k => !completedTopics.includes(k));
-    newlyUnlockedKeys.forEach(k => {
-      if (k.endsWith('-started')) {
-        const topicKey = k.replace('-started', '');
-        const displayName = topicKey.charAt(0).toUpperCase() + topicKey.slice(1);
-        enqueues.push({
-          title: "Badge Unlocked!",
-          badgeType: "topic",
-          level: "blue",
-          message: `Congratulations! You have unlocked the ${displayName} Blue badge for starting the ${displayName} learning module.`
-        });
-      } else if (k.endsWith('-easy')) {
-        const topicKey = k.replace('-easy', '');
-        const displayName = topicKey.charAt(0).toUpperCase() + topicKey.slice(1);
-        enqueues.push({
-          title: "Badge Upgraded!",
-          badgeType: "topic",
-          level: "bronze",
-          message: `Congratulations! You have unlocked the ${displayName} Bronze badge for completing the Easy difficulty in the ${displayName} quiz.`
-        });
-      } else if (k.endsWith('-medium')) {
-        const topicKey = k.replace('-medium', '');
-        const displayName = topicKey.charAt(0).toUpperCase() + topicKey.slice(1);
-        enqueues.push({
-          title: "Badge Upgraded!",
-          badgeType: "topic",
-          level: "silver",
-          message: `Congratulations! You have unlocked the ${displayName} Silver badge for completing the Medium difficulty in the ${displayName} quiz.`
-        });
-      } else if (k.endsWith('-hard') || k.endsWith('-gold')) {
-        const topicKey = k.replace(/-hard|-gold/, '');
-        const displayName = topicKey.charAt(0).toUpperCase() + topicKey.slice(1);
-        enqueues.push({
-          title: "Badge Upgraded!",
-          badgeType: "topic",
-          level: "gold",
-          message: `Congratulations! You have unlocked the ${displayName} Gold badge for completing the Hard difficulty in the ${displayName} quiz.`
-        });
-      }
-    });
-
-    // 2. Streak milestones
-    if (streak < 3 && finalStreak >= 3) {
-      enqueues.push({
-        title: "Streak Milestone!",
-        badgeType: "streak_3",
-        level: "",
-        message: "Congratulations! You have unlocked the 3-Day Streak badge for maintaining an active learning streak for 3 consecutive days."
-      });
+  useEffect(() => {
+    const handlePopState = () => {
+      const hashMode = window.location.hash.slice(1)
+      setMode(hashMode || null)
     }
-    if (streak < 7 && finalStreak >= 7) {
-      enqueues.push({
-        title: "Streak Milestone!",
-        badgeType: "streak_7",
-        level: "",
-        message: "Congratulations! You have unlocked the 7-Day Streak badge for maintaining an active learning streak for 7 consecutive days."
-      });
-    }
-    if (streak < 15 && finalStreak >= 15) {
-      enqueues.push({
-        title: "Streak Milestone!",
-        badgeType: "streak_15",
-        level: "",
-        message: "Congratulations! You have unlocked the 15-Day Streak badge for maintaining an active learning streak for 15 consecutive days."
-      });
-    }
-    if (streak < 30 && finalStreak >= 30) {
-      enqueues.push({
-        title: "Streak Milestone!",
-        badgeType: "streak_30",
-        level: "",
-        message: "Congratulations! You have unlocked the 30-Day Streak badge for maintaining an active learning streak for 30 consecutive days."
-      });
-    }
-
-    if (enqueues.length > 0) {
-      setCelebrationQueue(prev => [...prev, ...enqueues]);
-    }
-
-    if (syncTimeoutRef.current) clearTimeout(syncTimeoutRef.current);
-    syncTimeoutRef.current = setTimeout(async () => {
-      const token = localStorage.getItem('tenali-auth-token');
-      if (!token) return;
-      try {
-        const response = await fetch(`${API}/api/progress`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify({
-            completedTopics: finalCompleted,
-            goldMastery: finalGold,
-            coins: finalCoins,
-            totalSolved: finalSolved,
-            streak: finalStreak
-          })
-        });
-        if (response.ok) {
-          const data = await response.json();
-          // Update coins/streak if the server returned updated values
-          if (data.coins !== undefined) {
-            setCoins(data.coins);
-            localStorage.setItem('tenali-coins', String(data.coins));
-          }
-          if (data.streak !== undefined) {
-            setStreak(data.streak);
-            localStorage.setItem('tenali-streak', String(data.streak));
-          }
-          if (data.newlyCompleted && data.newlyCompleted.length > 0) {
-            const serverEnqueues = [];
-            data.newlyCompleted.forEach(colId => {
-              const displayName = colId.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-              const defaultBadgeTypes = {
-                'counting-critters': 'dino',
-                'arithmetic-basics': 'trophy',
-                'fraction-explorer': 'feast',
-                'geometry-master': 'wizard',
-                'division-detective': 'detective',
-                'time-traveler': 'rocket',
-                'data-detective': 'chest',
-                'algebra-alchemist': 'flask',
-                'pythagoras-path': 'shield',
-                'trig-treasure': 'crown'
-              };
-              const bType = defaultBadgeTypes[colId] || 'trophy';
-              serverEnqueues.push({
-                title: "Album Completed!",
-                badgeType: bType,
-                level: "gold",
-                message: `Congratulations! You have completed the ${displayName} Collection and unlocked the Gold Album Badge!`
-              });
-            });
-            if (serverEnqueues.length > 0) {
-              setCelebrationQueue(prev => [...prev, ...serverEnqueues]);
-            }
-          }
-        }
-      } catch (e) {
-        console.error('Sync to server failed:', e);
-      }
-    }, 1000);
-  };
-
-  const markTopicCompleted = (topicKey, difficulty = '') => {
-    const targetKey = difficulty ? `${topicKey}-${difficulty}` : topicKey;
-    if (completedTopics.includes(targetKey)) return;
-    let next = [...completedTopics, targetKey];
-    const startedKey = `${topicKey}-started`;
-    if (!next.includes(startedKey)) {
-      next.push(startedKey);
-    }
-    setCompletedTopics(next);
-    syncProgressToServer(next, goldMastery, coins);
-  };
-
-  const markGoldMastery = (topicKey) => {
-    if (goldMastery.includes(topicKey)) return;
-    const next = [...goldMastery, topicKey];
-    setGoldMastery(next);
-    syncProgressToServer(completedTopics, next, coins);
-  };
-
-  const updateCoins = (amount) => {
-    const next = Math.max(0, coins + amount);
-    setCoins(next);
-    syncProgressToServer(completedTopics, goldMastery, next);
-  };
+    window.addEventListener('popstate', handlePopState)
+    return () => window.removeEventListener('popstate', handlePopState)
+  }, [])
 
   useEffect(() => {
-    window.tenaliIncrementSolved = (amount) => {
-      setTotalSolved(prev => {
-        const next = prev + amount;
-        localStorage.setItem('tenali-total-solved', String(next));
-
-        let nextCompleted = completedTopics;
-        if (amount > 0 && mode && mode !== 'gk' && mode !== 'vocab' && mode !== 'randommix' && mode !== 'custom' && mode !== 'gym') {
-          const startedKey = `${mode}-started`;
-          if (!completedTopics.includes(startedKey)) {
-            nextCompleted = [...completedTopics, startedKey];
-            setCompletedTopics(nextCompleted);
-          }
-        }
-
-        syncProgressToServer(nextCompleted, goldMastery, coins, next);
-        return next;
-      });
-    };
-    return () => {
-      delete window.tenaliIncrementSolved;
-    };
-  }, [completedTopics, goldMastery, coins, totalSolved, mode]);
+    const currentHash = window.location.hash.slice(1)
+    if (mode === null) {
+      if (currentHash !== '') {
+        window.history.pushState(null, '', window.location.pathname)
+      }
+    } else {
+      if (currentHash !== mode) {
+        window.history.pushState(null, '', `#${mode}`)
+      }
+    }
+  }, [mode])
 
 
   // Current theme: 'dark' or 'light'
@@ -42605,88 +39907,9 @@ function App() {
    */
   const toggleTheme = () => setTheme(t => t === 'dark' ? 'light' : 'dark')
 
-  // Helper to render celebration modal
-  const renderCelebrationModal = () => {
-    if (!celebrationQueue || celebrationQueue.length === 0) return null;
-    const active = celebrationQueue[0];
-
-    const dismissCelebration = () => {
-      setCelebrationQueue(prev => prev.slice(1));
-    };
-
-    // Confetti particles generator (40 random floating pieces)
-    const renderConfetti = () => {
-      return Array.from({ length: 40 }).map((_, idx) => {
-        const left = Math.random() * 100;
-        const delay = Math.random() * 2;
-        const duration = Math.random() * 2 + 1.5;
-        const size = Math.random() * 10 + 6;
-        const colors = ['#f59e0b', '#10b981', '#3b82f6', '#ec4899', '#8b5cf6', '#ef4444'];
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        return (
-          <div
-            key={idx}
-            className="confetti-piece"
-            style={{
-              left: `${left}%`,
-              animationDelay: `${delay}s`,
-              animationDuration: `${duration}s`,
-              backgroundColor: color,
-              width: `${size}px`,
-              height: `${size}px`,
-              transform: `rotate(${Math.random() * 360}deg)`
-            }}
-          />
-        );
-      });
-    };
-
-    return (
-      <div className="celebration-overlay" onClick={dismissCelebration}>
-        {renderConfetti()}
-        <div className="celebration-card" onClick={e => e.stopPropagation()}>
-          <h2 className="celebration-title">{active.title}</h2>
-          <div className="celebration-badge-container">
-            <BadgeIcon type={active.badgeType} size={150} level={active.level} />
-          </div>
-          <p className="celebration-text">
-            {active.message}
-          </p>
-          <p className="celebration-subtext" style={{ fontSize: '0.85rem', opacity: 0.72, marginTop: '8px', color: 'var(--clr-text-soft)', fontWeight: '500', lineHeight: '1.4' }}>
-            Go to profile to see your achievements and keep learning to earn more badges
-          </p>
-          <button className="celebration-btn" onClick={dismissCelebration} style={{ marginTop: '16px' }}>
-            Awesome!
-          </button>
-        </div>
-      </div>
-    );
-  };
-
   // ========== ROUTING: URL-BASED (STUDENT PAGES) ==========
   // Check if current URL matches a specific student page
   const pathname = window.location.pathname.replace(/\/$/, '').toLowerCase()
-
-
-
-  // Route: /profile
-  if (pathname === '/profile') {
-    return (
-      <div className="app-shell">
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <div className="card">
-          <AuthGate>
-            <div style={{ position: 'relative' }}>
-              <ProfileShowcase completedTopics={completedTopics} onSelectTopic={(topicKey) => { window.location.href = `/?mode=${topicKey}` }} />
-            </div>
-          </AuthGate>
-        </div>
-        {renderCelebrationModal()}
-      </div>
-    )
-  }
 
   // Route: /tables → Generic 5-level scaffolded tables app
   if (pathname === '/tables') {
@@ -43182,20 +40405,6 @@ function App() {
     )
   }
 
-  // Route: /vachana → Vachana Mathematical Literacy Lab
-  if (pathname === '/vachana' || pathname.startsWith('/vachana/')) {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <div className="app-shell">
-          <Vachana onBack={() => { window.location.href = '/' }} />
-        </div>
-      </>
-    )
-  }
-
   // Route: /supertables → 10-level progressive multiplication mastery
   if (pathname === '/supertables') {
     return (
@@ -43277,6 +40486,7 @@ function App() {
     }, [revealed, isCorrect, questionNumber])
 
     const handleSubmit = async () => {
+      console.log('🔥🔥🔥 makeQuizApp handleSubmit called!'); // 👈 ADD THIS
       if (!question || revealed || !answer.trim()) return
       if (submittedRef.current) return
       submittedRef.current = true
@@ -43766,6 +40976,23 @@ function App() {
       try {
         const r = await fetch(`${API}/la-mission-quiz-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
         const data = await r.json()
+        // ===== SRS Integration (Mistake Notebook) =====
+        try {
+          const isCorrect = data.correct;
+          const attemptData = {
+            prompt: question.prompt || question.question || 'Question',
+            correctAnswer: data.answer || question.answer || '',
+            userAnswer: answer,
+            explanation: data.explanation || null,
+            topic: config.topicId || 'general',
+            difficulty: currentDifficulty ?? 1
+          };
+          // This saves the attempt to localStorage and schedules it
+          recordAttempt(attemptData, isCorrect);
+        }  catch (e) {
+         console.warn('SRS record failed:', e);
+        }
+        // =============================================
         setIsCorrect(data.correct); setRevealed(true)
         if (data.correct) setScore(s => s + 1)
         setFeedback(data.correct ? `Correct! ${data.display}` : `Incorrect. Answer: ${data.display}`)
@@ -43888,7 +41115,6 @@ function App() {
   // ========== ROUTING: MODE-BASED (HOME MENU + QUIZZES) ==========
   // Map quiz mode keys to their component classes
   const modeMap = {
-    vachana: Vachana,          // Vachana Mathematical Literacy Lab
     linearalgebra: LinearAlgebraApp, // Linear Algebra Module 1
     missionquiz: MissionQuizApp, // Mission-specific Linear Algebra Quiz
     'math-lab': MathLabHubApp,
@@ -43899,9 +41125,6 @@ function App() {
     'comic-addition': ComicAdditionApp,
     gk: GKApp,                    // General Knowledge
     addition: AdditionApp,         // Basic addition
-    'column-addition': ColumnAdditionApp, // Column Addition with carries
-    'column-multiplication': ColumnMultiplicationApp, // Column Multiplication with carries
-    'column-subtraction': ColumnSubtractionApp, // Column Subtraction with borrows
     quadratic: QuadraticApp,       // Quadratic substitution
     multiply: MultiplyApp,         // Multiplication tables
     'visual-math': VisualMathApp,  // Visual Math Lab (mult/div visual)
@@ -43921,7 +41144,7 @@ function App() {
     indices: IndicesApp,           // Indices (laws of exponents)
     sequences: SequencesApp,       // Sequences & Series
     ratio: RatioApp,               // Ratio & Proportion
-    percent: PercentPage,                                                      // Percentages
+    percent: PercentApp,           // Percentages
     sets: SetsApp,                 // Sets & Venn diagrams
     trig: TrigApp,                 // Trigonometry
     ineq: IneqApp,                 // Inequalities
@@ -43977,33 +41200,21 @@ function App() {
     custom: CustomApp,             // Custom lesson builder
     gym: GymApp,                   // Unified adaptive Gym — bundles all 7 below
     guess: GuessNumberApp,         // Binary magic — guess a number 0–31
-    detective: EnhancedMathDetectiveApp, // Math Detective Agency — story-based mystery cases
     gymdecimals: GymDecimalsApp,   // Gym Decimals — signed decimal multiplication (MCQ)
     funcgym: FuncGymApp,           // Functions Gym — polynomial evaluation (MCQ)
     dotprodgym: DotProdGymApp,     // DotProducts Gym — 2D/3D dot products (MCQ)
     fracaddgym: FracAddGymApp,     // Fractions-add-gym — add fractions (MCQ)
     lineqgym: LinEqGymApp,         // LinearEquations-Gym — solve linear equations (MCQ)
     indicesgym: IndicesGymApp,     // Indices-Gym — index laws (MCQ)
-    polygym: PolyGymApp,           // Polynomials Gym — arithmetic → monomial algebra (MCQ)
+    polygym: PolyGymApp,     
+    notebook: MistakeNotebook,
+    review: ReviewMode,      // Polynomials Gym — arithmetic → monomial algebra (MCQ)
   }
 
   // Get the component to render (or null if mode not set)
   const ActiveApp = mode && mode !== 'goalpractice' ? modeMap[mode] : null
 
   const renderContent = () => {
-    if (mode === 'transfer') {
-      return (
-        <TransferChallengeApp
-          topicKey={transferTopic}
-          onBack={() => { setMode(null); setTransferTopic(null); }}
-          completedTopics={completedTopics}
-          goldMastery={goldMastery}
-          markGoldMastery={markGoldMastery}
-          updateCoins={updateCoins}
-        />
-      );
-    }
-
     if (mode === 'learning_journey') {
       return (
         <AuthGate>
@@ -44066,13 +41277,6 @@ function App() {
     if (ActiveApp) {
       const element = (
         <ActiveApp
-          completedTopics={completedTopics}
-          goldMastery={goldMastery}
-          markTopicCompleted={markTopicCompleted}
-          markGoldMastery={markGoldMastery}
-          updateCoins={updateCoins}
-          setMode={setMode}
-          setTransferTopic={setTransferTopic}
           onBack={journeyContext ? async () => {
             const isCompleted = !!document.querySelector('.final-score');
             if (isCompleted) {
@@ -44119,21 +41323,12 @@ function App() {
 
   return (
     <div className="app-shell">
-      {showTour && <OnboardingTour onFinish={() => { localStorage.setItem('tenali_tour_seen', 'true'); setShowTour(false) }} mode={mode} />}
-      <button className="guide-toggle" onClick={() => setShowTour(true)} title="Take a Tour">
-        🧭 Guide
-      </button>
       <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
         {theme === 'dark' ? '☀️' : '🌙'}
       </button>
-      {mode === 'vachana' ? (
-        <Vachana onBack={() => setMode(null)} />
-      ) : (
-        <div className="card">
-          {renderContent()}
-        </div>
-      )}
-      {renderCelebrationModal()}
+      <div className="card">
+        {renderContent()}
+      </div>
     </div>
   )
 }
@@ -44146,27 +41341,24 @@ function App() {
  * @param {Object} props
  * @param {Function} props.onSelect - Callback when user selects a quiz: receives mode key (e.g., 'gk')
  */
-function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isGoalSelection = false, onBack }) {
+function Home({ onSelect, isGoalSelection = false, onBack }) {
   const [showAbout, setShowAbout] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [search, setSearch] = useState('')
+
+  // Special featured apps (shown in hamburger menu)
   const featuredApps = [
     { key: 'randommix', name: 'Random Mix', subtitle: 'Adaptive cross-topic quiz', color: 'featured' },
     { key: 'custom', name: 'Custom Lesson', subtitle: 'Build your own mixed quiz', color: 'featured' },
     { key: 'gym', name: 'Gym', subtitle: 'Adaptive workout across all 7 gym puzzles', color: 'featured' },
-    { key: 'vachana', name: 'Vachana', subtitle: 'Mathematical Literacy Lab', color: 'featured' },
   ]
   // Visual Learning Universe lives only in the hamburger menu
   const mathLabEntry = { key: 'math-lab', name: '🔬 Visual Learning Universe', subtitle: 'Visual, Mensuration & Addition labs', color: 'orange' }
 
   // All regular quiz apps sorted alphabetically by name
   const regularApps = [
-    { key: 'detective', name: '🔍 Detective Agency', subtitle: 'Solve math mysteries and crack cases!', color: 'indigo' },
     { key: 'comic-addition', name: 'Comic Addition', subtitle: 'Story Mode', color: 'purple' },
     { key: 'addition', name: 'Addition', subtitle: '20-question addition practice', color: 'blue' },
-    { key: 'column-addition', name: 'Column Addition', subtitle: 'Vertical addition with carrying', color: 'blue' },
-    { key: 'column-multiplication', name: 'Column Multiplication', subtitle: 'Vertical multiplication with carrying', color: 'blue' },
-    { key: 'column-subtraction', name: 'Column Subtraction', subtitle: 'Vertical subtraction with borrowing', color: 'blue' },
     { key: 'angles', name: 'Angles', subtitle: 'Lines, points, parallel lines', color: 'green' },
     { key: 'basicarith', name: 'Arithmetic', subtitle: '+, −, ×, ÷ with positive & negative', color: 'purple' },
     { key: 'banking', name: 'Banking (RD)', subtitle: 'Interest & recurring deposits', color: 'blue' },
@@ -44247,6 +41439,8 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
     { key: 'lineqgym', name: 'LinearEquations-Gym', subtitle: 'Solve linear equations (MCQ)', color: 'blue' },
     { key: 'indicesgym', name: 'Indices-Gym', subtitle: 'Index laws (MCQ)', color: 'green' },
     { key: 'polygym', name: 'Polynomials Gym', subtitle: 'Arithmetic → monomial algebra (MCQ)', color: 'blue' },
+    {key: 'notebook', name: '📒 Mistake Notebook', subtitle: 'Review your past errors', color: 'blue' },
+    { key: 'review', name: '📅 Review Mode', subtitle: 'Revise questions due today', color: 'green' },
   ]
 
   // Combined list for search filtering
@@ -44381,7 +41575,7 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
                 background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
                 fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)'
               }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
-                onMouseLeave={e => e.target.style.background = 'none'}>
+                 onMouseLeave={e => e.target.style.background = 'none'}>
                 <strong style={{ color: 'var(--clr-accent)' }}>{app.name}</strong>
                 <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>{app.subtitle}</span>
               </button>
@@ -44445,726 +41639,19 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
           onChange={e => setSearch(e.target.value)}
         />
       </div>
-      <div id="tour-home-grid" className="menu-grid" ref={gridRef}>
-        {displayGridApps.map((app) => {
-          const isGold = goldMastery && goldMastery.includes(app.key)
-          const isCompleted = isStage3Completed(app.key, completedTopics)
-          return (
-            <button key={app.key} className={`menu-card ${isGold ? 'gold-card' : app.color}`} onClick={() => onSelect(app.key)}>
-              <span className="menu-title">
-                {app.name}
-                {isGold && <span className="badge-indicator">🥇</span>}
-                {!isGold && isCompleted && <span className="badge-indicator">✅</span>}
-              </span>
-              <span className="menu-subtitle">{app.subtitle}</span>
-            </button>
-          )
-        })}
+
+      <DashboardWidget />
+      
+      <div className="menu-grid" ref={gridRef}>
+        {displayGridApps.map((app) => (
+          <button key={app.key} className={`menu-card ${app.color}`} onClick={() => onSelect(app.key)}>
+            <span className="menu-title">{app.name}</span>
+            <span className="menu-subtitle">{app.subtitle}</span>
+          </button>
+        ))}
       </div>
       <div className="grid-dimension">{rows} × {cols}</div>
     </>
-  )
-}
-
-export function getTopicBadgeLevel(topicKey, completedTopics = []) {
-  if (!completedTopics || !Array.isArray(completedTopics)) return 'locked';
-  if (completedTopics.includes(`${topicKey}-hard`) || completedTopics.includes(`${topicKey}-gold`)) {
-    return 'gold';
-  }
-  if (completedTopics.includes(`${topicKey}-medium`)) {
-    return 'silver';
-  }
-  if (completedTopics.includes(`${topicKey}-easy`)) {
-    return 'bronze';
-  }
-  if (completedTopics.includes(`${topicKey}-started`)) {
-    return 'blue';
-  }
-  return 'locked';
-}
-
-function BadgeIcon({ type, size = 64, locked = false, level = '' }) {
-  const colorFilter = locked ? 'grayscale(1) opacity(0.55)' : 'none';
-
-  const badgeMap = {
-    'counting-critters': 'dino',
-    'arithmetic-basics': 'trophy',
-    'fraction-explorer': 'feast',
-    'geometry-master': 'wizard',
-    'division-detective': 'detective',
-    'time-traveler': 'rocket',
-    'data-detective': 'chest',
-    'algebra-alchemist': 'flask',
-    'pythagoras-path': 'shield',
-    'trig-treasure': 'crown'
-  };
-
-  const mappedType = badgeMap[type] || type;
-  const imagePath = mappedType === 'topic'
-    ? `/badges/topic_${(level && level !== 'locked') ? level : 'blue'}.png`
-    : `/badges/${mappedType}.png`;
-  const levelClass = level ? `badge-level-${level}` : '';
-
-  return (
-    <div
-      className={`badge-icon-container ${locked ? 'badge-locked' : 'badge-unlocked'} ${levelClass}`}
-      style={{
-        width: size,
-        height: size,
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        filter: colorFilter,
-        position: 'relative'
-      }}
-    >
-      <img
-        src={imagePath}
-        alt={type}
-        style={{
-          width: '85%',
-          height: '85%',
-          objectFit: 'contain',
-          display: 'block'
-        }}
-        onError={(e) => {
-          e.target.src = '/badges/trophy.png';
-        }}
-      />
-    </div>
-  );
-}
-
-const TOPIC_DISPLAY_NAMES = {
-  'decimals': 'Decimals',
-  'rounding': 'Rounding',
-  'addition': 'Addition',
-  'basicarith': 'Basic Arithmetic',
-  'fractionadd': 'Fraction Addition',
-  'ratio': 'Ratios & Proportions',
-  'angles': 'Angles',
-  'triangles': 'Triangles',
-  'multiply': 'Multiplication',
-  'hcflcm': 'HCF & LCM',
-  'sdt': 'Speed, Distance & Time',
-  'variation': 'Variation & Rates',
-  'stats': 'Statistics',
-  'prob': 'Probability',
-  'lineareq': 'Linear Equations',
-  'lineq': 'Line Equation',
-  'pythag': "Pythagoras' Theorem",
-  'polygons': 'Polygons',
-  'trig': 'Trigonometry',
-  'coordgeom': 'Coordinate Geometry',
-  'percent': 'Percentages'
-};
-
-const getTopicDisplayName = (key) => {
-  if (!key) return '';
-  return TOPIC_DISPLAY_NAMES[key] || (key.charAt(0).toUpperCase() + key.slice(1));
-};
-
-function AchievementCollections({ completedTopics = [], onSelectTopic }) {
-  const [data, setData] = useState(null)
-  const [selectedBook, setSelectedBook] = useState(null)
-  const [loading, setLoading] = useState(true)
-
-  const fetchCollections = async () => {
-    const token = localStorage.getItem('tenali-auth-token')
-    if (!token) return
-    try {
-      const r = await fetch(`${API}/api/collections/progress`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      })
-      if (r.ok) {
-        const res = await r.json()
-        setData(res.collections)
-      }
-    } catch (e) {
-      console.error(e)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    fetchCollections()
-  }, [])
-
-  if (loading) {
-    return <div className="loading-screen">Opening the Collector Bookshelf...</div>
-  }
-
-  return (
-    <div className="bookshelf-container">
-      <h2 className="bookshelf-title">My Collector Bookshelf</h2>
-      <p className="bookshelf-subtitle">Complete all topics in a book to earn a shiny Gold Album Badge!</p>
-
-      <div className="bookshelf-grid">
-        {data && data.map(book => {
-          const isDone = book.completed;
-          return (
-            <div key={book.collectionId} className={`book-card ${book.badgeType}-theme ${!isDone ? 'book-locked' : 'book-unlocked'}`} onClick={() => setSelectedBook(book)}>
-              {/* Central Large Badge Hero Section */}
-              <div className="book-badge-hero">
-                <div className="book-badge-aura" />
-                <div className="book-badge-icon">
-                  <BadgeIcon type={book.badgeType} size={180} locked={!isDone} level={isDone ? 'gold' : ''} />
-                </div>
-              </div>
-
-              {/* Card Details Section */}
-              <div className="book-details-body">
-                <h3 className="book-title">{book.name}</h3>
-                <div style={{ display: 'flex', justifyContent: 'center', margin: '6px 0 12px 0' }}>
-                  <span className="book-badge-difficulty">{book.difficulty}</span>
-                </div>
-                <p className="book-desc">
-                  {book.description}
-                  <span className="book-desc-modules">
-                    <br />
-                    <strong>Learning Modules:</strong> {book.topics.map(t => TOPIC_DISPLAY_NAMES[t.topicKey] || t.topicKey).join(', ')}
-                  </span>
-                </p>
-
-                <div className="book-progress-wrapper">
-                  <div className="book-progress-text">
-                    <span>Progress</span>
-                    <strong>{book.completedCount} / {book.totalTopics} ({book.percentage}%)</strong>
-                  </div>
-                  <div className="book-progress-bar-bg">
-                    <div className="book-progress-bar-fill" style={{ width: `${book.percentage}%` }}></div>
-                  </div>
-                </div>
-
-                {!isDone && book.nextTopic && (
-                  <button className="book-next-btn" onClick={(e) => {
-                    e.stopPropagation();
-                    if (typeof onSelectTopic === 'function') {
-                      onSelectTopic(book.nextTopic);
-                    }
-                  }}>
-                    Play Next: {getTopicDisplayName(book.nextTopic)}
-                  </button>
-                )}
-                {isDone && <div className="book-complete-tag">Completed</div>}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {selectedBook && (
-        <div className="book-modal-overlay" onClick={() => setSelectedBook(null)}>
-          <div className="book-modal-content" onClick={e => e.stopPropagation()}>
-            <button className="book-modal-close" onClick={() => setSelectedBook(null)}>✕</button>
-            <h2 className="book-modal-title">{selectedBook.name}</h2>
-            <p className="book-modal-desc">{selectedBook.description}</p>
-
-            <div className="book-pages">
-              <div className="book-page left-page">
-                <h3>Topics Checklist</h3>
-                <div className="topics-list-detailed">
-                  {selectedBook.topics.map(topic => {
-                    const level = getTopicBadgeLevel(topic.topicKey, completedTopics);
-                    const isStartedOrCompleted = level !== 'locked';
-                    return (
-                      <div key={topic.topicKey} className={`topic-row-check ${topic.completed ? 'completed' : isStartedOrCompleted ? 'completed' : 'locked'}`} onClick={() => {
-                        setSelectedBook(null);
-                        onSelectTopic(topic.topicKey);
-                      }}>
-                        <div style={{ display: 'flex', alignItems: 'center', marginRight: '4px' }}>
-                          <BadgeIcon type="trophy" level={level} size={32} locked={level === 'locked'} />
-                        </div>
-                        <div className="topic-text-info">
-                          <span className="topic-check-name">{getTopicDisplayName(topic.topicKey)}</span>
-                          <span className="topic-check-status">
-                            {level === 'gold' ? 'Gold Mastery!' : level === 'silver' ? 'Silver Complete!' : level === 'bronze' ? 'Bronze Complete!' : level === 'blue' ? 'Practice Started!' : 'Click to start practice'}
-                          </span>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <div className="book-page right-page">
-                <h3>Collection Badge</h3>
-                <div className="badge-showcase-large">
-                  <BadgeIcon type={selectedBook.badgeType} size={150} locked={!selectedBook.completed} level={selectedBook.completed ? 'gold' : ''} />
-                  <h4>{selectedBook.completed ? 'Unlocked' : 'Locked'}</h4>
-                  <p>{selectedBook.completed ? 'You earned the Gold Album Badge!' : 'Master all topics on the left to unlock!'}</p>
-                  {selectedBook.completed && (
-                    <div className="gold-ribbon-tag">ALBUM COMPLETED</div>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-function ProfileShowcase({ completedTopics = [], onSelectTopic }) {
-  const [profile, setProfile] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [collectionsProgress, setCollectionsProgress] = useState([])
-  const [selectedSection, setSelectedSection] = useState('bookshelf')
-  const [activeBadgeDetail, setActiveBadgeDetail] = useState(null)
-  const [dropdownOpen, setDropdownOpen] = useState(false)
-  const [sectionExpanded, setSectionExpanded] = useState(false)
-  const [showcaseExpanded, setShowcaseExpanded] = useState(true)
-
-  const dropdownRef = useRef(null)
-
-  // Dynamically compute the badges in the inventory based on collections progress and completed topics
-  const inventory = useMemo(() => {
-    const allBadges = [];
-    if (!collectionsProgress || collectionsProgress.length === 0) return [];
-
-    // A. Album Badges
-    collectionsProgress.forEach(col => {
-      allBadges.push({
-        badgeId: col.collectionId,
-        name: col.name,
-        badgeType: col.badgeType,
-        type: 'collection',
-        locked: !col.completed,
-        requirement: `Complete all topics in the "${col.name}" album.`,
-        description: col.description
-      })
-    })
-
-    // B. Topic Badges
-    const addedTopics = new Set()
-    collectionsProgress.forEach(col => {
-      col.topics.forEach(topic => {
-        if (!addedTopics.has(topic.topicKey)) {
-          addedTopics.add(topic.topicKey)
-          const level = getTopicBadgeLevel(topic.topicKey, completedTopics)
-          const topicName = getTopicDisplayName(topic.topicKey)
-          allBadges.push({
-            badgeId: topic.topicKey,
-            name: topicName,
-            badgeType: 'topic',
-            type: 'topic',
-            locked: level === 'locked',
-            requirement: `Complete Easy difficulty or start practice in the "${topicName}" quiz.`,
-            description: `Practice and master the "${topicName}" quiz to upgrade this badge from Blue to Gold!`
-          })
-        }
-      })
-    })
-
-    // C. Dynamically add custom topics not part of collections.json (e.g. Percentages)
-    if (completedTopics && Array.isArray(completedTopics)) {
-      completedTopics.forEach(tKey => {
-        const baseTopicKey = tKey.replace(/-(easy|medium|hard|gold|started|adaptive|extrahard)$/, '');
-        if (baseTopicKey && !addedTopics.has(baseTopicKey)) {
-          addedTopics.add(baseTopicKey);
-          const level = getTopicBadgeLevel(baseTopicKey, completedTopics);
-          if (level !== 'locked') {
-            const topicName = getTopicDisplayName(baseTopicKey);
-            allBadges.push({
-              badgeId: baseTopicKey,
-              name: topicName,
-              badgeType: 'topic',
-              type: 'topic',
-              locked: false,
-              requirement: `Complete Easy difficulty or start practice in the "${topicName}" quiz.`,
-              description: `Practice and master the "${topicName}" quiz to upgrade this badge from Blue to Gold!`
-            });
-          }
-        }
-      });
-    }
-
-    // D. Streak Badges
-    const userStreak = profile ? profile.streak : 0
-    const streaksConfig = [
-      { days: 3, id: 'streak_3', name: '3-Day Streak' },
-      { days: 7, id: 'streak_7', name: '7-Day Streak' },
-      { days: 15, id: 'streak_15', name: '15-Day Streak' },
-      { days: 30, id: 'streak_30', name: '30-Day Streak' }
-    ]
-    streaksConfig.forEach(s => {
-      allBadges.push({
-        badgeId: s.id,
-        name: s.name,
-        badgeType: s.id,
-        type: 'streak',
-        locked: userStreak < s.days,
-        requirement: `Maintain a consecutive active practice streak of at least ${s.days} days.`,
-        description: `Awarded for logging in and solving quizzes for ${s.days} consecutive days!`
-      })
-    })
-
-    return allBadges;
-  }, [collectionsProgress, completedTopics, profile]);
-
-  // Close dropdown on click outside
-  useEffect(() => {
-    if (!dropdownOpen) return
-    const handleOutsideClick = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setDropdownOpen(false)
-      }
-    }
-    document.addEventListener('mousedown', handleOutsideClick)
-    return () => document.removeEventListener('mousedown', handleOutsideClick)
-  }, [dropdownOpen])
-
-  const fetchProfileAndBadges = async () => {
-    const token = localStorage.getItem('tenali-auth-token')
-    if (!token) return
-    try {
-      // 1. Fetch Profile Info
-      const profileRes = await fetch(`${API}/api/profile/showcase`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      })
-      let profileData = null
-      if (profileRes.ok) {
-        profileData = await profileRes.json()
-        setProfile(profileData)
-      }
-
-      // 2. Fetch Collections Progress to build the full badge inventory
-      const progressRes = await fetch(`${API}/api/collections/progress`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      })
-      if (progressRes.ok) {
-        const progressData = await progressRes.json()
-        setCollectionsProgress(progressData.collections || [])
-      }
-    } catch (e) {
-      console.error('Failed to load profile details & badges:', e)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    fetchProfileAndBadges()
-  }, [])
-
-  const unlockedBadges = useMemo(() => {
-    const rawUnlocked = inventory.filter(b => !b.locked);
-    const getSortScore = (badge) => {
-      if (badge.type === 'collection') return 1;
-      if (badge.type === 'topic') {
-        const lvl = getTopicBadgeLevel(badge.badgeId, completedTopics);
-        if (lvl === 'gold')   return 2;
-        if (lvl === 'silver') return 4;
-        if (lvl === 'bronze') return 5;
-        if (lvl === 'blue')   return 6;
-      }
-      if (badge.type === 'streak') return 3;
-      return 7;
-    };
-    return [...rawUnlocked].sort((a, b) => {
-      const diff = getSortScore(a) - getSortScore(b);
-      if (diff !== 0) return diff;
-      return a.name.localeCompare(b.name);
-    });
-  }, [inventory, completedTopics]);
-
-  if (loading) {
-    return <div className="loading-screen">Opening Profile Showcase...</div>
-  }
-
-  const lockedTopics = inventory.filter(b => b.type === 'topic' && (b.locked || getTopicBadgeLevel(b.badgeId, completedTopics) !== 'gold'))
-  const lockedStreaks = inventory.filter(b => b.type === 'streak' && b.locked)
-
-  return (
-    <div className="profile-container">
-      <h2 className="profile-title">{profile ? profile.username.toUpperCase() : 'STUDENT'}'S CORNER</h2>
-
-      {/* Gamified Stats Section */}
-      <div className="gamified-stats-section" style={{ marginBottom: '32px' }}>
-        {/* Streak Pod */}
-        <div className="dashboard-stat-pod streak-pod">
-          <div className="fire-flame-wrapper">🔥</div>
-          <span className="dashboard-stat-val">{profile ? profile.streak : 0}</span>
-          <span className="dashboard-stat-lbl">Day Streak</span>
-        </div>
-
-        {/* Topics Mastered Pod */}
-        <div className="dashboard-stat-pod mastery-pod">
-          <div className="stat-icon-wrapper">👑</div>
-          <span className="dashboard-stat-val">{profile ? profile.masteryCount : 0}</span>
-          <span className="dashboard-stat-lbl">Topics Mastered</span>
-        </div>
-
-        {/* Questions Solved Pod */}
-        <div className="dashboard-stat-pod solved-pod">
-          <div className="stat-icon-wrapper">⭐</div>
-          <span className="dashboard-stat-val">{profile ? profile.totalSolved : 0}</span>
-          <span className="dashboard-stat-lbl">Solved Questions</span>
-        </div>
-      </div>
-
-      {/* My Badges Cabinet Section */}
-      <div className="my-badges-section">
-        <button
-          className={`collapsible-header-btn ${!showcaseExpanded ? 'collapsed' : ''}`}
-          onClick={() => setShowcaseExpanded(!showcaseExpanded)}
-          type="button"
-        >
-          <span style={{ fontSize: '1.3rem', fontWeight: 800, fontFamily: 'var(--font-display)' }}>My Badges Showcase</span>
-          <span className="collapsible-chevron" style={{ transform: showcaseExpanded ? 'rotate(180deg)' : 'rotate(0deg)', display: 'inline-block' }}>▼</span>
-        </button>
-
-        {showcaseExpanded && (
-          <div style={{ marginTop: '20px' }}>
-            {unlockedBadges.length === 0 ? (
-              <div className="empty-badges-card">
-                <span style={{ fontSize: '2.5rem' }}>🏆</span>
-                <p>You haven't unlocked any badges yet. Start solving quizzes to earn your first badge!</p>
-              </div>
-            ) : (
-              <div className="unlocked-badges-grid">
-                {unlockedBadges.map(badge => {
-                  const itemLevel = badge.type === 'collection'
-                    ? 'gold'
-                    : badge.type === 'topic'
-                      ? getTopicBadgeLevel(badge.badgeId, completedTopics)
-                      : '';
-                  return (
-                    <div
-                      key={badge.badgeId}
-                      className={`unlocked-badge-card level-${itemLevel}`}
-                      title={`${badge.name}: ${badge.description}`}
-                      onClick={() => setActiveBadgeDetail({ ...badge, level: itemLevel, isLocked: false })}
-                    >
-                      <div className="unlocked-badge-aura" />
-                      <BadgeIcon
-                        type={badge.badgeType}
-                        size={64}
-                        level={itemLevel}
-                      />
-                      <span className="unlocked-badge-name">{badge.name}</span>
-                      <span className="unlocked-badge-type-tag">{badge.type}</span>
-                    </div>
-                  )
-                })}
-              </div>
-            )}
-          </div>
-        )}
-      </div>
-
-      {/* Badges Yet to Receive Collapsible Section */}
-      <div className="yet-to-receive-section" style={{ marginTop: '32px' }}>
-        <button
-          className={`collapsible-header-btn ${!sectionExpanded ? 'collapsed' : ''}`}
-          onClick={() => setSectionExpanded(!sectionExpanded)}
-          type="button"
-        >
-          <span style={{ fontSize: '1.3rem', fontWeight: 800, fontFamily: 'var(--font-display)' }}>Badges Yet to Receive</span>
-          <span className="collapsible-chevron" style={{ transform: sectionExpanded ? 'rotate(180deg)' : 'rotate(0deg)', display: 'inline-block' }}>▼</span>
-        </button>
-
-        {sectionExpanded && (
-          <div className="collapsible-content-wrapper" style={{ marginTop: '20px' }}>
-            {/* Custom Interactive Dropdown Menu */}
-            <div className="yet-to-receive-dropdown-container" ref={dropdownRef}>
-              <button
-                className={`yet-to-receive-trigger ${dropdownOpen ? 'open' : ''}`}
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-                type="button"
-              >
-                <div className="trigger-content">
-                  <div className="trigger-text-wrapper">
-                    <span className="trigger-lbl">Show Category</span>
-                    <span className="trigger-val">
-                      {selectedSection === 'bookshelf' && '📚 Collector Bookshelf'}
-                      {selectedSection === 'mastery' && '👑 Topic Mastery'}
-                      {selectedSection === 'streaks' && '🔥 Daily Check-in'}
-                    </span>
-                  </div>
-                </div>
-                <span className="trigger-chevron">{dropdownOpen ? '▲' : '▼'}</span>
-              </button>
-
-              {dropdownOpen && (
-                <div className="yet-to-receive-dropdown-menu">
-                  <button
-                    className={`menu-item ${selectedSection === 'bookshelf' ? 'active' : ''}`}
-                    onClick={() => { setSelectedSection('bookshelf'); setDropdownOpen(false); }}
-                    type="button"
-                  >
-                    <span className="item-icon">📚</span>
-                    <div className="item-text">
-                      <strong>Collector Bookshelf</strong>
-                      <span>Progress through albums and unlock custom visual books</span>
-                    </div>
-                  </button>
-                  <button
-                    className={`menu-item ${selectedSection === 'mastery' ? 'active' : ''}`}
-                    onClick={() => { setSelectedSection('mastery'); setDropdownOpen(false); }}
-                    type="button"
-                  >
-                    <span className="item-icon">👑</span>
-                    <div className="item-text">
-                      <strong>Topic Mastery</strong>
-                      <span>Master math topics to upgrade your badges from blue to gold</span>
-                    </div>
-                  </button>
-                  <button
-                    className={`menu-item ${selectedSection === 'streaks' ? 'active' : ''}`}
-                    onClick={() => { setSelectedSection('streaks'); setDropdownOpen(false); }}
-                    type="button"
-                  >
-                    <span className="item-icon">🔥</span>
-                    <div className="item-text">
-                      <strong>Daily Check-in</strong>
-                      <span>Solve quizzes consecutively to earn streak milestones</span>
-                    </div>
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* Display Active Shelf Section */}
-            {selectedSection === 'bookshelf' ? (
-              <AchievementCollections completedTopics={completedTopics} onSelectTopic={onSelectTopic} />
-            ) : (
-              <div className="unlocked-badges-grid">
-                {selectedSection === 'mastery' && (
-                  <>
-                    {lockedTopics.length === 0 ? (
-                      <div className="empty-section-card" style={{ gridColumn: '1 / -1', width: '100%', textAlign: 'center', padding: '32px' }}>
-                        🎉 Awesome! You have unlocked Gold Mastery on all topics!
-                      </div>
-                    ) : (
-                      lockedTopics.map(item => {
-                        const itemLevel = getTopicBadgeLevel(item.badgeId, completedTopics);
-                        return (
-                          <div
-                            key={item.badgeId}
-                            className={`unlocked-badge-card locked-badge-card level-${itemLevel}`}
-                            title={`${item.name}: ${item.requirement}`}
-                            onClick={() => setActiveBadgeDetail({ ...item, level: itemLevel, isLocked: true })}
-                          >
-                            <div className="badge-lock-overlay-icon">🔒</div>
-                            <BadgeIcon type={item.badgeType} size={64} level={itemLevel} locked={true} />
-                            <span className="unlocked-badge-name">{item.name}</span>
-                            <span className="unlocked-badge-type-tag">{item.type}</span>
-                          </div>
-                        );
-                      })
-                    )}
-                  </>
-                )}
-
-                {selectedSection === 'streaks' && (
-                  <>
-                    {lockedStreaks.length === 0 ? (
-                      <div className="empty-section-card" style={{ gridColumn: '1 / -1', width: '100%', textAlign: 'center', padding: '32px' }}>
-                        🎉 Outstanding! You have unlocked all streak milestone badges!
-                      </div>
-                    ) : (
-                      lockedStreaks.map(item => (
-                        <div
-                          key={item.badgeId}
-                          className="unlocked-badge-card locked-badge-card"
-                          title={`${item.name}: ${item.requirement}`}
-                          onClick={() => setActiveBadgeDetail({ ...item, level: '', isLocked: true })}
-                        >
-                          <div className="badge-lock-overlay-icon">🔒</div>
-                          <BadgeIcon type={item.badgeType} size={64} locked={true} />
-                          <span className="unlocked-badge-name">{item.name}</span>
-                          <span className="unlocked-badge-type-tag">{item.type}</span>
-                        </div>
-                      ))
-                    )}
-                  </>
-                )}
-              </div>
-            )}
-          </div>
-        )}
-      </div>
-
-      <div className="profile-timeline-section" style={{ marginTop: '32px' }}>
-        <h3>Journey Milestones</h3>
-        <div className="timeline-trail">
-          {profile && profile.timeline && profile.timeline.map((item, idx) => {
-            const dateStr = new Date(item.date).toLocaleDateString('en-IN', {
-              day: 'numeric',
-              month: 'short',
-              year: 'numeric'
-            });
-            return (
-              <div key={idx} className="timeline-node">
-                <div className="timeline-marker">
-                  {item.type === 'system' ? '●' : '★'}
-                </div>
-                <div className="timeline-info">
-                  <span className="timeline-date">{dateStr}</span>
-                  <strong className="timeline-event">{item.event}</strong>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Interactive Badge Detail Overlay */}
-      {activeBadgeDetail && (
-        <div className="badge-detail-overlay" onClick={() => setActiveBadgeDetail(null)}>
-          <div className="badge-detail-modal" onClick={e => e.stopPropagation()}>
-            <button className="badge-detail-close" onClick={() => setActiveBadgeDetail(null)}>✕</button>
-
-            <div className="badge-detail-hero">
-              <div className={`badge-detail-aura level-${activeBadgeDetail.level}`} style={{ background: activeBadgeDetail.isLocked ? '#e11d48' : '' }} />
-              <BadgeIcon
-                type={activeBadgeDetail.badgeType}
-                size={110}
-                level={activeBadgeDetail.level}
-                locked={activeBadgeDetail.isLocked}
-              />
-              {activeBadgeDetail.isLocked && (
-                <div style={{ position: 'absolute', fontSize: '2.5rem', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textShadow: '0 4px 8px rgba(0,0,0,0.5)' }}>🔒</div>
-              )}
-            </div>
-
-            <h2 className="badge-detail-title">{activeBadgeDetail.name}</h2>
-            <span className="badge-detail-tag" style={{ background: activeBadgeDetail.isLocked ? 'rgba(225, 29, 72, 0.15)' : '', borderColor: activeBadgeDetail.isLocked ? '#e11d48' : '', color: activeBadgeDetail.isLocked ? '#f43f5e' : '' }}>
-              {activeBadgeDetail.isLocked ? 'Locked ' : ''}{activeBadgeDetail.type} Badge
-            </span>
-
-            <p className="badge-detail-desc">{activeBadgeDetail.description}</p>
-
-            {activeBadgeDetail.isLocked ? (
-              <div className="badge-detail-requirement">
-                <strong>How to Unlock:</strong>
-                <p style={{ marginBottom: activeBadgeDetail.type === 'topic' ? '14px' : '0' }}>{activeBadgeDetail.requirement}</p>
-                {activeBadgeDetail.type === 'topic' && (
-                  <button
-                    className="book-next-btn"
-                    style={{ width: '100%', display: 'block' }}
-                    onClick={() => {
-                      setActiveBadgeDetail(null);
-                      onSelectTopic(activeBadgeDetail.badgeId);
-                    }}
-                  >
-                    Go Practice: {activeBadgeDetail.name}
-                  </button>
-                )}
-              </div>
-            ) : (
-              <div className="badge-detail-requirement">
-                <strong>Achievement Requirement:</strong>
-                <p>{activeBadgeDetail.requirement}</p>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-    </div>
   )
 }
 
@@ -46527,7 +43014,7 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
  * @param {Object} props
  * @param {Function} props.onBack - Callback to return to home menu
  */
-function GKApp({ onBack, markTopicCompleted, isGoalMode = false }) {
+function GKApp({ onBack, isGoalMode = false }) {
   // Current question object: {id, question, options: [A, B, C, D], ...}
   const [question, setQuestion] = useState(null)
   // User's selected option: 'A', 'B', 'C', or 'D'
@@ -46581,12 +43068,6 @@ function GKApp({ onBack, markTopicCompleted, isGoalMode = false }) {
     if (questionNumber >= totalQ) {
       fetchingRef.current = false
       setFinished(true)
-      {
-        const pass = score / totalQ >= 0.8
-        if (pass && typeof markTopicCompleted === 'function') {
-          markTopicCompleted('gk', 'easy')
-        }
-      }
       timer.reset()
       return
     }
@@ -46623,12 +43104,14 @@ function GKApp({ onBack, markTopicCompleted, isGoalMode = false }) {
     setQuestionNumber(0)
     setResults([])
     fetchingRef.current = false
+    // Don't clear seenIds — keep the localStorage history for no-repeat
+    loadQuestion(seenIds)
   }
 
   // Load first question only if started
   useEffect(() => {
     if (started && !finished && questionNumber === 0) {
-      loadQuestion(seenIds)
+      loadQuestion([])
     }
   }, [started, finished, questionNumber])
 
@@ -46788,7 +43271,7 @@ function GKApp({ onBack, markTopicCompleted, isGoalMode = false }) {
       </div>}
       {started && !finished && <>
         <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
-        <div className="question-box">{loading || !question ? 'Loading question…' : <GlossaryText text={question.question} />}</div>
+        <div className="question-box">{loading || !question ? 'Loading question…' : question.question}</div>
         {question && (
           <div className="options-list">
             {question.options.map((option, idx) => {
@@ -46822,1635 +43305,6 @@ function GKApp({ onBack, markTopicCompleted, isGoalMode = false }) {
 }
 
 /**
- * ColumnAdditionApp Component
- * Vertical column addition with manual carry input.
- * Numbers are stacked like on paper; user fills answer digits + carry digits.
- */
-function ColumnAdditionApp({ onBack, initialDifficulty, initialNumQuestions, initialStarted, isGoalMode = false }) {
-  const [difficulty, setDifficulty] = useState(initialDifficulty || 'easy')
-  const [numQuestions, setNumQuestions] = useState(initialNumQuestions || String(DEFAULT_TOTAL))
-  const [started, setStarted] = useState(initialStarted || false)
-  const [finished, setFinished] = useState(false)
-  const [question, setQuestion] = useState(null)
-  const [score, setScore] = useState(0)
-  const [questionNumber, setQuestionNumber] = useState(0)
-  const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
-  const [feedback, setFeedback] = useState('')
-  const [isCorrect, setIsCorrect] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [revealed, setRevealed] = useState(false)
-  const [results, setResults] = useState([])
-  const timer = useTimer()
-  const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
-
-  const [answerInputs, setAnswerInputs] = useState([])
-  const [carryInputs, setCarryInputs] = useState([])
-  const [correctAnswerDigits, setCorrectAnswerDigits] = useState(null)
-  const [correctCarryDigits, setCorrectCarryDigits] = useState(null)
-  const answerRefs = useRef([])
-  const carryRefs = useRef([])
-  const advanceTimerRef = useRef(null)
-
-  useEffect(() => { if (!isGoalMode) setSessionGoal('standard') }, [isGoalMode])
-
-  const startQuiz = async () => {
-    const q = Number(numQuestions) || DEFAULT_TOTAL
-    setTotalQ(q); setScore(0); setQuestionNumber(1); setResults([])
-    setFinished(false); setStarted(true); setFeedback(''); setIsCorrect(null); setRevealed(false)
-    setCorrectAnswerDigits(null); setCorrectCarryDigits(null)
-    timer.reset(); timer.start()
-    await fetchQuestion()
-  }
-
-  const fetchQuestion = async (diff) => {
-    setLoading(true)
-    try {
-      const r = await fetch(`${API}/column-addition-api/question?difficulty=${diff || difficulty}`)
-      const data = await r.json()
-      setQuestion(data)
-      setAnswerInputs(new Array(data.answerDigits.length).fill(''))
-      setCarryInputs(new Array(data.carries.length).fill(''))
-      setCorrectAnswerDigits(null); setCorrectCarryDigits(null)
-      setTimeout(() => { if (answerRefs.current[data.answerDigits.length - 1]) answerRefs.current[data.answerDigits.length - 1].focus() }, 100)
-    } catch (e) { console.error('Fetch column addition question failed:', e) }
-    setLoading(false)
-  }
-
-  const handleInput = (idx, val, isCarry) => {
-    if (revealed) return
-    if (val !== '' && !/^\d$/.test(val)) return
-    const setter = isCarry ? setCarryInputs : setAnswerInputs
-    const arr = isCarry ? carryInputs : answerInputs
-    const next = [...arr]; next[idx] = val; setter(next)
-
-    // Paper-addition focus flow on digit entry:
-    // answer[ansLen-1] -> carry[ansLen-2] -> answer[ansLen-2] -> carry[ansLen-3] -> ...
-    if (!val) return
-    if (!isCarry && idx > 0 && carryRefs.current[idx - 1]) {
-      carryRefs.current[idx - 1].focus()
-    } else if (!isCarry && idx === 0) {
-      // Leftmost answer: nothing more to fill, stay
-    } else if (isCarry && answerRefs.current[idx]) {
-      answerRefs.current[idx].focus()
-    }
-  }
-
-  const focusAnswer = (i) => { if (answerRefs.current[i]) answerRefs.current[i].focus() }
-  const focusCarry = (i) => { if (carryRefs.current[i]) carryRefs.current[i].focus() }
-
-  const handleKeyDown = (idx, e, isCarry) => {
-
-    if (e.key === 'Backspace') {
-      if (e.currentTarget.value) return
-      e.preventDefault()
-      // Paper-flow reverse navigation:
-      //   answer[i] previous = carry[i]        (the box above, if visible)
-      //   carry[i]  previous = answer[i+1]     (next-right answer digit)
-      if (!isCarry) {
-        if (idx < carryInputs.length - 1 && carryRefs.current[idx]) {
-          carryRefs.current[idx].focus()
-        }
-      } else {
-        if (idx < answerInputs.length - 1 && answerRefs.current[idx + 1]) {
-          answerRefs.current[idx + 1].focus()
-        }
-      }
-      return
-    }
-
-    if (e.key === 'ArrowUp') {
-      e.preventDefault()
-      if (!isCarry && idx < carryInputs.length - 1) focusCarry(idx)
-      else if (isCarry) focusAnswer(idx)
-      return
-    }
-
-    if (e.key === 'ArrowDown') {
-      e.preventDefault()
-      if (isCarry) focusAnswer(idx)
-      else if (idx < carryInputs.length - 1) focusCarry(idx)
-      return
-    }
-
-    if (e.key === 'ArrowLeft') {
-      e.preventDefault()
-      if (!isCarry) {
-        if (idx > 0) focusAnswer(idx - 1)
-      } else {
-        if (idx > 0) focusCarry(idx - 1)
-        else if (idx === 0) focusAnswer(0)
-      }
-      return
-    }
-
-    if (e.key === 'ArrowRight') {
-      e.preventDefault()
-      if (!isCarry) {
-        if (idx < answerInputs.length - 1) focusAnswer(idx + 1)
-      } else {
-        if (idx < carryInputs.length - 2) focusCarry(idx + 1)
-        else if (idx === carryInputs.length - 2) focusAnswer(idx + 1)
-      }
-      return
-    }
-  }
-
-  const handleSubmit = async () => {
-    if (revealed || loading || !question) return
-    timer.stop()
-    const userAnswer = answerInputs.map(v => v === '' ? null : Number(v))
-    const userCarries = carryInputs.map(v => v === '' ? 0 : Number(v))
-    try {
-      const r = await fetch(`${API}/column-addition-api/check`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-        body: JSON.stringify({ a: question.a, b: question.b, userAnswer, userCarries, sessionGoal })
-      })
-      const data = await r.json()
-      setCorrectAnswerDigits(data.answerDigits)
-      setCorrectCarryDigits(data.correctCarries)
-      setIsCorrect(data.correct); setRevealed(true)
-
-      let explanation = ''
-      try {
-        const sr = await fetch(`${API}/column-addition-api/check`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-          body: JSON.stringify({ a: question.a, b: question.b, userAnswer: [], userCarries: [], solve: true })
-        })
-        const sd = await sr.json()
-        explanation = sd.explanation || ''
-      } catch (_) {}
-
-      const resultLine = data.correct ? '✓ Correct!' : `✗ ${data.message || 'Incorrect'}`
-      setFeedback(explanation ? `${resultLine}\n\n— Step-by-step solution —\n${explanation}` : resultLine)
-      const userCarriesStr = carryInputs.filter(v => v !== '').join(', ') || '—'
-      const correctCarriesStr = (data.correctCarries || []).filter(v => v !== 0 && v !== null && v !== '').join(', ') || '—'
-      setResults(prev => [...prev, { question: `${question.a} + ${question.b}`, userAnswer: Number(userAnswer.filter(v => v !== null).join('')) || '', correct: data.correct, correctAnswer: data.correctAnswer, time: timer.elapsed, userCarries: userCarriesStr, correctCarries: correctCarriesStr }])
-      if (data.correct) setScore(s => s + 1)
-    } catch (e) { console.error('Check failed:', e); setFeedback('Error checking answer') }
-  }
-
-  const handleSolve = async () => {
-    if (revealed || loading || !question) return
-    timer.stop()
-    try {
-      const r = await fetch(`${API}/column-addition-api/check`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-        body: JSON.stringify({ a: question.a, b: question.b, userAnswer: [], userCarries: [], solve: true })
-      })
-      const data = await r.json()
-      setCorrectAnswerDigits(data.answerDigits)
-      setCorrectCarryDigits(data.correctCarries)
-      setIsCorrect(false); setRevealed(true)
-      setAnswerInputs(data.answerDigits ? data.answerDigits.map(String) : question.answerDigits.map(String))
-      setCarryInputs(data.correctCarries ? data.correctCarries.map(String) : question.carries.map(String))
-      setFeedback(data.explanation || 'Solved — study the carries above each column.')
-      const correctCarriesStr = (data.correctCarries || []).filter(v => v !== 0 && v !== null && v !== '').join(', ') || '—'
-      setResults(prev => [...prev, { question: `${question.a} + ${question.b}`, userAnswer: data.correctAnswer, correct: false, correctAnswer: data.correctAnswer, time: timer.elapsed, userCarries: '—', correctCarries: correctCarriesStr }])
-    } catch (e) {
-      console.error('Solve failed:', e)
-      setCorrectAnswerDigits(question.answerDigits)
-      setCorrectCarryDigits(question.carries)
-      setRevealed(true); setIsCorrect(false)
-      setAnswerInputs(question.answerDigits.map(String))
-      setCarryInputs(question.carries.map(String))
-      setFeedback('Solved — study the carries above each column.')
-      setResults(prev => [...prev, { question: `${question.a} + ${question.b}`, userAnswer: question.answer, correct: false, correctAnswer: question.answer, time: timer.elapsed }])
-    }
-  }
-
-  const advanceQuestion = () => {
-    if (advanceTimerRef.current) { clearTimeout(advanceTimerRef.current); advanceTimerRef.current = null }
-    setRevealed(false); setIsCorrect(null); setFeedback(''); setAnswerInputs([]); setCarryInputs([])
-    setCorrectAnswerDigits(null); setCorrectCarryDigits(null)
-    if (questionNumber >= totalQ) { setFinished(true); timer.stop() }
-    else { setQuestionNumber(qn => qn + 1); timer.reset(); timer.start(); fetchQuestion() }
-  }
-
-  const diffLabels = { easy: 'Easy — 1 digit', medium: 'Medium — 2 digits', hard: 'Hard — 3 digits', extrahard: 'Extra Hard — 4 digits' }
-
-  if (!started && !finished) {
-    return (
-      <div style={{ minHeight: '100vh', background: 'var(--clr-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
-        <div style={{ background: 'var(--clr-card)', border: '1.5px solid var(--clr-border)', borderRadius: '28px', boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '48px 40px', maxWidth: '720px', width: '100%', textAlign: 'center', position: 'relative' }}>
-          <button onClick={onBack} style={{ position: 'absolute', top: '24px', left: '24px', background: 'transparent', border: '1px solid var(--clr-border)', borderRadius: '6px', padding: '6px 14px', color: 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}>← Home</button>
-          <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '48px', color: 'var(--clr-text)', margin: '0 0 12px', lineHeight: 1.1 }}>Column Addition</h1>
-          <p style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem', margin: '0 0 24px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>Add numbers vertically with carrying</p>
-          <div style={{ marginBottom: '24px' }}>
-            <h3 style={{ color: 'var(--clr-text)', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>Select Difficulty:</h3>
-            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-              {['easy', 'medium', 'hard', 'extrahard'].map(d => (
-                <button key={d} onClick={() => setDifficulty(d)} style={{ background: difficulty === d ? 'var(--clr-accent)' : 'transparent', border: difficulty === d ? '1px solid var(--clr-accent)' : '1px solid var(--clr-border)', borderRadius: '50px', padding: '8px 16px', color: difficulty === d ? '#FFF' : 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}>{diffLabels[d]}</button>
-              ))}
-            </div>
-          </div>
-          <div style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <label style={{ color: 'var(--clr-text-soft)', fontSize: '0.85rem', margin: '0 0 12px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>How many questions? (max 100)</label>
-            <input type="text" value={numQuestions} onChange={(e) => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} style={{ background: 'var(--clr-input)', border: '1px solid var(--clr-border)', borderRadius: '6px', padding: '10px', color: 'var(--clr-text)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', width: '100px', textAlign: 'center', outline: 'none' }} placeholder={String(DEFAULT_TOTAL)} />
-          </div>
-          <button onClick={startQuiz} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '6px', padding: '10px 24px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Start Quiz</button>
-        </div>
-      </div>
-    )
-  }
-
-  const ansLen = question ? question.answerDigits.length : 1
-  const opLen = question ? question.digits : 1
-
-  return (
-    <QuizLayout title="Column Addition" onBack={onBack} timer={timer}>
-      {started && !finished && <>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.3rem' }}>
-          <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
-        </div>
-        {loading || !question ? <div className="question-box">Loading question…</div> : (
-          <>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '16px 0', fontFamily: '"Courier New", monospace', fontSize: '1.8rem', fontWeight: 700 }}>
-              {/* Carry row: ansLen columns, skip last (ones=always 0), show boxes at [0..ansLen-2] */}
-              <div style={{ display: 'flex', gap: '4px', marginBottom: '4px' }}>
-                <span style={{ width: '44px' }} />
-                {question.carries.map((c, i) => {
-                  if (i === question.carries.length - 1) return <span key={i} style={{ width: '40px' }} />
-                  const correct = revealed && correctCarryDigits ? String(correctCarryDigits[i]) : '';
-                  const isRight = revealed && correct !== '' && String(carryInputs[i] || '') === correct;
-                  const isWrong = revealed && correct !== '' && !isRight;
-                  const shown = revealed ? correct : carryInputs[i] || '';
-                  return (
-                    <input key={i} ref={el => carryRefs.current[i] = el} type="text" maxLength={1}
-                      value={shown}
-                      onChange={e => handleInput(i, e.target.value, true)}
-                      onKeyDown={e => handleKeyDown(i, e, true)}
-                      disabled={revealed}
-                      style={{ width: '40px', height: '36px', textAlign: 'center', fontSize: '1rem', fontWeight: 700, background: isRight ? 'var(--clr-correct-bg)' : isWrong ? 'var(--clr-wrong-bg)' : 'var(--clr-input)', border: `2px solid ${isRight ? 'var(--clr-correct)' : isWrong ? 'var(--clr-wrong)' : 'var(--clr-border)'}`, borderRadius: '8px', color: isRight ? 'var(--clr-correct)' : isWrong ? 'var(--clr-wrong)' : 'var(--clr-text)', fontFamily: '"Courier New", monospace', outline: 'none' }}
-                    />
-                  )
-                })}
-              </div>
-              {/* First number: right-aligned in ansLen columns */}
-              <div style={{ display: 'flex', gap: '4px', marginBottom: '2px' }}>
-                <span style={{ width: '44px' }} />
-                {question.aDigits.map((d, i) => (
-                  <span key={i} style={{ width: '40px', height: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--clr-text)' }}>{d !== null ? d : ''}</span>
-                ))}
-              </div>
-              {/* Second number: right-aligned in ansLen columns */}
-              <div style={{ display: 'flex', gap: '4px', marginBottom: '4px' }}>
-                <span style={{ width: '44px', textAlign: 'center', color: 'var(--clr-text-soft)', fontSize: '1.4rem' }}>+</span>
-                {question.bDigits.map((d, i) => (
-                  <span key={i} style={{ width: '40px', height: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--clr-text)' }}>{d !== null ? d : ''}</span>
-                ))}
-              </div>
-              {/* Line separator: full width of answer */}
-              <div style={{ display: 'flex', gap: '4px' }}>
-                <span style={{ width: '44px' }} />
-                <div style={{ width: `${ansLen * 44}px`, height: '3px', background: 'var(--clr-border)', borderRadius: '2px' }} />
-              </div>
-              {/* Answer row: ansLen input boxes */}
-              <div style={{ display: 'flex', gap: '4px', marginTop: '8px' }}>
-                <span style={{ width: '44px' }} />
-                {question.answerDigits.map((d, i) => {
-                  const correctDigit = revealed && correctAnswerDigits ? String(correctAnswerDigits[i]) : '';
-                  const isRight = revealed && correctDigit !== '' && String(answerInputs[i] || '') === correctDigit;
-                  const isWrong = revealed && correctDigit !== '' && !isRight;
-                  const shown = revealed ? correctDigit : answerInputs[i] || '';
-                  return (
-                    <input key={i} ref={el => answerRefs.current[i] = el} type="text" maxLength={1}
-                      value={shown}
-                      onChange={e => handleInput(i, e.target.value, false)}
-                      onKeyDown={e => handleKeyDown(i, e, false)}
-                      disabled={revealed}
-                      style={{ width: '40px', height: '48px', textAlign: 'center', fontSize: '1.4rem', fontWeight: 700, background: isRight ? 'var(--clr-correct-bg)' : isWrong ? 'var(--clr-wrong-bg)' : 'var(--clr-input)', border: `2px solid ${isRight ? 'var(--clr-correct)' : isWrong ? 'var(--clr-wrong)' : 'var(--clr-border)'}`, borderRadius: '8px', color: isRight ? 'var(--clr-correct)' : isWrong ? 'var(--clr-wrong)' : 'var(--clr-text)', fontFamily: '"Courier New", monospace', outline: 'none' }}
-                    />
-                  )
-                })}
-              </div>
-            </div>
-            {feedback && (
-              <div style={{
-                textAlign: 'left', padding: '12px 16px', borderRadius: '8px', margin: '8px 0',
-                background: isCorrect ? 'rgba(92, 184, 122, 0.25)' : 'rgba(224, 90, 74, 0.25)',
-                color: isCorrect ? 'var(--clr-correct)' : 'var(--clr-wrong)',
-                fontWeight: 600, fontSize: '0.9rem',
-                whiteSpace: 'pre-line', lineHeight: '1.6',
-                maxHeight: '300px', overflowY: 'auto',
-                border: isCorrect ? '2px solid var(--clr-correct)' : '2px solid var(--clr-wrong)'
-              }}>{feedback}</div>
-            )}
-            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', margin: '12px 0', flexWrap: 'wrap' }}>
-              {!revealed && <button onClick={handleSubmit} disabled={loading} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '8px', padding: '10px 24px', color: '#FFF', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Submit</button>}
-              {!revealed && <button onClick={handleSolve} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-border)', borderRadius: '8px', padding: '10px 24px', color: 'var(--clr-text-soft)', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Solve</button>}
-              {revealed && <button onClick={advanceQuestion} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '8px', padding: '10px 24px', color: '#FFF', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Next Question →</button>}
-            </div>
-          </>
-        )}
-        {results.length > 0 && <ResultsTable results={results} />}
-      </>}
-      {finished && (
-        <div style={{ textAlign: 'center', padding: '24px' }}>
-          <h2 style={{ color: 'var(--clr-text)', marginBottom: '16px' }}>Score: {score}/{totalQ}</h2>
-          <ResultsTable results={results} />
-          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', marginTop: '24px' }}>
-            <button onClick={() => { setStarted(false); setFinished(false) }} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '8px', padding: '10px 24px', color: '#FFF', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Play Again</button>
-          </div>
-        </div>
-      )}
-    </QuizLayout>
-  )
-}
-
-function ColumnMultiplicationApp({ onBack, initialDifficulty, initialNumQuestions, initialStarted, isGoalMode = false }) {
-  const [difficulty, setDifficulty] = useState(initialDifficulty || 'easy')
-  const [numQuestions, setNumQuestions] = useState(initialNumQuestions || String(DEFAULT_TOTAL))
-  const [started, setStarted] = useState(initialStarted || false)
-  const [finished, setFinished] = useState(false)
-  const [question, setQuestion] = useState(null)
-  const [score, setScore] = useState(0)
-  const [questionNumber, setQuestionNumber] = useState(0)
-  const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
-  const [feedback, setFeedback] = useState('')
-  const [isCorrect, setIsCorrect] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [revealed, setRevealed] = useState(false)
-  const [results, setResults] = useState([])
-  const timer = useTimer()
-  const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
-  const [showHelp, setShowHelp] = useState(false)
-
-  const [answerInputs, setAnswerInputs] = useState([])
-  const [carryInputs, setCarryInputs] = useState([])
-  const [correctAnswerDigits, setCorrectAnswerDigits] = useState(null)
-  const [correctCarryDigits, setCorrectCarryDigits] = useState(null)
-  const answerRefs = useRef([])
-  const carryRefs = useRef([])
-  const advanceTimerRef = useRef(null)
-
-  const [isMulti, setIsMulti] = useState(false)
-  const [currentPP, setCurrentPP] = useState(0)
-  const [ppInputs, setPpInputs] = useState([])
-  const [ppCarryInputs, setPpCarryInputs] = useState([])
-  const ppRefs = useRef([])
-  const ppCarryRefs = useRef([])
-  const [correctPPDigits, setCorrectPPDigits] = useState(null)
-  const [correctPPCarries, setCorrectPPCarries] = useState(null)
-
-  const COL = 36
-  const GAP = 3
-  const LEFT_MARGIN = 40
-
-  useEffect(() => { if (!isGoalMode) setSessionGoal('standard') }, [isGoalMode])
-
-  const startQuiz = async () => {
-    const q = Number(numQuestions) || DEFAULT_TOTAL
-    setTotalQ(q); setScore(0); setQuestionNumber(1); setResults([])
-    setFinished(false); setStarted(true); setFeedback(''); setIsCorrect(null); setRevealed(false)
-    setCorrectAnswerDigits(null); setCorrectCarryDigits(null)
-    setCorrectPPDigits(null); setCorrectPPCarries(null)
-    setIsMulti(false); setCurrentPP(0); setPpInputs([]); setPpCarryInputs([])
-    timer.reset(); timer.start()
-    await fetchQuestion()
-  }
-
-  const fetchQuestion = async (diff) => {
-    setLoading(true)
-    try {
-      const r = await fetch(`${API}/column-multiplication-api/question?difficulty=${diff || difficulty}`)
-      const data = await r.json()
-      setQuestion(data)
-      const multi = !!data.multiDigitMultiplier
-      setIsMulti(multi)
-
-      setAnswerInputs(new Array(data.answerDigits.length).fill(''))
-      setCorrectAnswerDigits(null); setCorrectCarryDigits(null)
-      setCorrectPPDigits(null); setCorrectPPCarries(null)
-
-      if (multi) {
-        setCarryInputs([])
-        setCurrentPP(0)
-        setPpInputs(data.partialProducts.map(pp => pp.digits.map(d => d === null ? null : '')))
-        setPpCarryInputs(data.partialProducts.map(pp => pp.carries.map(c => c === null ? null : '')))
-        setTimeout(() => {
-          for (let j = data.answerDigits.length - 1; j >= 0; j--) {
-            if (ppCarryRefs.current[0]?.[j]) { ppCarryRefs.current[0][j].focus(); return }
-          }
-        }, 100)
-      } else {
-        setCarryInputs(new Array(data.carries.length).fill(''))
-        setPpInputs([]); setPpCarryInputs([])
-        setTimeout(() => {
-          const lastIdx = data.answerDigits.length - 1
-          if (answerRefs.current[lastIdx]) answerRefs.current[lastIdx].focus()
-        }, 100)
-      }
-    } catch (e) { console.error('Fetch column multiplication question failed:', e) }
-    setLoading(false)
-  }
-
-  const handleSingleInput = (idx, val, isCarry) => {
-    if (revealed) return
-    if (val !== '' && !/^\d{1,2}$/.test(val)) return
-    const setter = isCarry ? setCarryInputs : setAnswerInputs
-    const arr = isCarry ? carryInputs : answerInputs
-    const next = [...arr]; next[idx] = val; setter(next)
-    if (!val) return
-    if (!isCarry && idx > 0 && carryRefs.current[idx - 1]) {
-      carryRefs.current[idx - 1].focus()
-    } else if (isCarry && answerRefs.current[idx]) {
-      answerRefs.current[idx].focus()
-    }
-  }
-
-  const handleMultiPpInput = (ppIdx, colIdx, val) => {
-    if (revealed || ppIdx !== currentPP) return
-    if (val !== '' && !/^\d{1,2}$/.test(val)) return
-    const next = ppInputs.map(row => [...row])
-    if (next[ppIdx][colIdx] === null) return
-    next[ppIdx][colIdx] = val
-    setPpInputs(next)
-    if (!val) return
-    const carries = question.partialProducts[ppIdx].carries
-    const shift = question.bDigits.length - 1 - ppIdx
-    const trailingCol = question.answerDigits.length - 1 - shift
-    for (let j = colIdx - 1; j >= 0; j--) {
-      if (carries[j] !== null && j !== trailingCol && ppCarryRefs.current[ppIdx]?.[j]) {
-        ppCarryRefs.current[ppIdx][j].focus()
-        return
-      }
-    }
-    checkAndAdvancePP(next)
-  }
-
-  const checkAndAdvancePP = (updatedPPInputs) => {
-    const pp = question.partialProducts
-    const idx = currentPP
-    const digits = pp[idx].digits
-    const allFilled = digits.every((d, j) => d === null || (updatedPPInputs[idx][j] !== '' && updatedPPInputs[idx][j] !== null && updatedPPInputs[idx][j] !== undefined))
-    if (!allFilled) return
-    if (idx < pp.length - 1) {
-      setTimeout(() => {
-        setCurrentPP(idx + 1)
-        setTimeout(() => {
-          const ansLen = question.answerDigits.length
-          for (let j = ansLen - 1; j >= 0; j--) {
-            if (ppCarryRefs.current[idx + 1]?.[j]) { ppCarryRefs.current[idx + 1][j].focus(); return }
-          }
-        }, 50)
-      }, 400)
-    } else {
-      setCurrentPP(pp.length)
-      setTimeout(() => {
-        const lastIdx = question.answerDigits.length - 1
-        if (answerRefs.current[lastIdx]) answerRefs.current[lastIdx].focus()
-      }, 100)
-    }
-  }
-
-  const handleMultiPpCarryInput = (ppIdx, colIdx, val) => {
-    if (revealed) return
-    if (val !== '' && !/^\d{1,2}$/.test(val)) return
-    const next = ppCarryInputs.map(row => [...row])
-    if (next[ppIdx][colIdx] === null) return
-    next[ppIdx][colIdx] = val
-    setPpCarryInputs(next)
-    if (!val) return
-    const digits = question.partialProducts[ppIdx].digits
-    if (digits[colIdx] !== null && ppRefs.current[ppIdx]?.[colIdx]) {
-      ppRefs.current[ppIdx][colIdx].focus()
-      return
-    }
-    const carries = question.partialProducts[ppIdx].carries
-    const shift = question.bDigits.length - 1 - ppIdx
-    const trailingCol = question.answerDigits.length - 1 - shift
-    for (let j = colIdx - 1; j >= 0; j--) {
-      if (carries[j] !== null && j !== trailingCol && ppCarryRefs.current[ppIdx]?.[j]) {
-        ppCarryRefs.current[ppIdx][j].focus()
-        return
-      }
-    }
-  }
-
-  const focusAnswer = (i) => { if (answerRefs.current[i]) answerRefs.current[i].focus() }
-  const focusCarry = (i) => { if (carryRefs.current[i]) carryRefs.current[i].focus() }
-  const focusPp = (ppIdx, colIdx) => { if (ppRefs.current[ppIdx] && ppRefs.current[ppIdx][colIdx]) ppRefs.current[ppIdx][colIdx].focus() }
-  const focusPpCarry = (ppIdx, colIdx) => { if (ppCarryRefs.current[ppIdx] && ppCarryRefs.current[ppIdx][colIdx]) ppCarryRefs.current[ppIdx][colIdx].focus() }
-
-  const handleSingleKeyDown = (idx, e, isCarry) => {
-    if (e.key === 'Backspace') {
-      if (e.currentTarget.value) return
-      e.preventDefault()
-      if (!isCarry) {
-        if (idx < carryInputs.length - 1 && carryRefs.current[idx]) carryRefs.current[idx].focus()
-      } else {
-        if (idx < answerInputs.length - 1 && answerRefs.current[idx + 1]) answerRefs.current[idx + 1].focus()
-      }
-      return
-    }
-    if (e.key === 'ArrowUp') {
-      e.preventDefault()
-      if (!isCarry && idx < carryInputs.length - 1 && carryRefs.current[idx]) focusCarry(idx)
-      else if (isCarry) focusAnswer(idx)
-      return
-    }
-    if (e.key === 'ArrowDown') {
-      e.preventDefault()
-      if (isCarry) focusAnswer(idx)
-      else if (idx < carryInputs.length - 1 && carryRefs.current[idx]) focusCarry(idx)
-      return
-    }
-    if (e.key === 'ArrowLeft') {
-      e.preventDefault()
-      if (!isCarry) { if (idx > 0) focusAnswer(idx - 1) }
-      else { if (idx > 0) focusCarry(idx - 1); else if (idx === 0) focusAnswer(0) }
-      return
-    }
-    if (e.key === 'ArrowRight') {
-      e.preventDefault()
-      if (!isCarry) { if (idx < answerInputs.length - 1) focusAnswer(idx + 1) }
-      else { if (idx < answerInputs.length - 1) focusAnswer(idx + 1) }
-      return
-    }
-  }
-
-  const handleMultiKeyDown = (e, { isCarry, isAnswer, isPp, ppIdx, colIdx }) => {
-    if (revealed) return
-
-    if (e.key === 'Backspace') {
-      if (e.currentTarget.value) return
-      e.preventDefault()
-      if (isCarry) {
-        for (let j = colIdx - 1; j >= 0; j--) {
-          if (ppCarryRefs.current[ppIdx]?.[j]) { ppCarryRefs.current[ppIdx][j].focus(); return }
-        }
-      } else if (isPp) {
-        for (let j = colIdx - 1; j >= 0; j--) {
-          if (ppRefs.current[ppIdx]?.[j]) { ppRefs.current[ppIdx][j].focus(); return }
-        }
-        for (let j = question.answerDigits.length - 1; j >= 0; j--) {
-          if (ppCarryRefs.current[ppIdx]?.[j]) { ppCarryRefs.current[ppIdx][j].focus(); return }
-        }
-      }
-      return
-    }
-    if (e.key === 'ArrowLeft') {
-      e.preventDefault()
-      if (isCarry) {
-        for (let j = colIdx - 1; j >= 0; j--) { if (ppCarryRefs.current[ppIdx]?.[j]) { ppCarryRefs.current[ppIdx][j].focus(); return } }
-      } else if (isPp) {
-        for (let j = colIdx - 1; j >= 0; j--) { if (ppRefs.current[ppIdx]?.[j]) { ppRefs.current[ppIdx][j].focus(); return } }
-      }
-      return
-    }
-    if (e.key === 'ArrowRight') {
-      e.preventDefault()
-      const max = question.answerDigits.length
-      if (isCarry) {
-        for (let j = colIdx + 1; j < max; j++) { if (ppCarryRefs.current[ppIdx]?.[j]) { ppCarryRefs.current[ppIdx][j].focus(); return } }
-      } else if (isPp) {
-        for (let j = colIdx + 1; j < max; j++) { if (ppRefs.current[ppIdx]?.[j]) { ppRefs.current[ppIdx][j].focus(); return } }
-      }
-      return
-    }
-    if (e.key === 'ArrowDown') {
-      e.preventDefault()
-      if (isCarry) {
-        if (ppRefs.current[ppIdx]?.[colIdx]) { ppRefs.current[ppIdx][colIdx].focus(); return }
-      } else if (isPp) {
-        if (currentPP >= question.partialProducts.length) {
-          const lastIdx = question.answerDigits.length - 1
-          if (answerRefs.current[lastIdx]) answerRefs.current[lastIdx].focus()
-        }
-      }
-      return
-    }
-    if (e.key === 'ArrowUp') {
-      e.preventDefault()
-      if (isPp) {
-        if (ppCarryRefs.current[ppIdx]?.[colIdx]) { ppCarryRefs.current[ppIdx][colIdx].focus(); return }
-      }
-      return
-    }
-    if (e.key === 'Tab') {
-      e.preventDefault()
-      if (currentPP < question.partialProducts.length - 1) {
-        const nextPP = currentPP + 1
-        for (let j = question.answerDigits.length - 1; j >= 0; j--) {
-          if (ppCarryRefs.current[nextPP]?.[j]) { ppCarryRefs.current[nextPP][j].focus(); return }
-        }
-      } else {
-        const lastIdx = question.answerDigits.length - 1
-        if (answerRefs.current[lastIdx]) answerRefs.current[lastIdx].focus()
-      }
-    }
-  }
-
-  const handleAnswerKeyDown = (idx, e) => {
-    const ansLen = question.answerDigits.length
-    if (e.key === 'Backspace') {
-      if (e.currentTarget.value) return
-      e.preventDefault()
-      if (idx > 0) { focusAnswer(idx - 1); return }
-      if (isMulti && question.partialProducts.length > 0) {
-        const lastPp = question.partialProducts.length - 1
-        for (let j = question.partialProducts[lastPp].digits.length - 1; j >= 0; j--) {
-          if (ppRefs.current[lastPp] && ppRefs.current[lastPp][j]) { ppRefs.current[lastPp][j].focus(); return }
-        }
-      }
-      return
-    }
-    if (e.key === 'ArrowLeft') {
-      e.preventDefault()
-      if (idx > 0) focusAnswer(idx - 1)
-      return
-    }
-    if (e.key === 'ArrowRight') {
-      e.preventDefault()
-      if (idx < ansLen - 1) focusAnswer(idx + 1)
-      return
-    }
-    if (e.key === 'ArrowUp') {
-      e.preventDefault()
-      if (isMulti && question.partialProducts.length > 0) {
-        const lastPp = question.partialProducts.length - 1
-        for (let j = question.partialProducts[lastPp].digits.length - 1; j >= 0; j--) {
-          if (ppRefs.current[lastPp] && ppRefs.current[lastPp][j]) { ppRefs.current[lastPp][j].focus(); return }
-        }
-      }
-      return
-    }
-    if (e.key === 'ArrowDown') {
-      e.preventDefault()
-      return
-    }
-  }
-
-  const handleAnswerInput = (idx, val) => {
-    if (revealed) return
-    if (val !== '' && !/^\d{1,2}$/.test(val)) return
-    const next = [...answerInputs]; next[idx] = val; setAnswerInputs(next)
-    if (!val) return
-    if (idx > 0) focusAnswer(idx - 1)
-  }
-
-  const handleSubmit = async () => {
-    if (revealed || loading || !question) return
-    if (isMulti && currentPP < (question.partialProducts?.length || 0)) {
-      setFeedback('Complete all partial products before submitting.')
-      return
-    }
-    timer.stop()
-    try {
-      let body
-      if (isMulti) {
-        const userAnswer = answerInputs.map(v => v === '' ? null : Number(v))
-        const userPartialProducts = ppInputs.map(row => row.map(v => v === '' || v === null ? null : Number(v)))
-        const userCarries = ppCarryInputs.map(row => row.map(v => v === '' || v === null ? null : Number(v)))
-        body = JSON.stringify({ a: question.a, b: question.b, userAnswer, userPartialProducts, userCarries, sessionGoal })
-      } else {
-        const userAnswer = answerInputs.map(v => v === '' ? null : Number(v))
-        const userCarries = carryInputs.map(v => v === '' ? '' : v)
-        body = JSON.stringify({ a: question.a, b: question.b, userAnswer, userCarries, sessionGoal })
-      }
-      const r = await fetch(`${API}/column-multiplication-api/check`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-        body
-      })
-      const data = await r.json()
-      setCorrectAnswerDigits(data.answerDigits)
-      if (isMulti) {
-        setCorrectCarryDigits(null)
-        setCorrectPPDigits(data.partialProducts ? data.partialProducts.map(pp => pp.digits) : null)
-        setCorrectPPCarries(data.partialProducts ? data.partialProducts.map(pp => pp.carries) : null)
-      } else {
-        setCorrectCarryDigits(data.correctCarries)
-        setCorrectPPDigits(null); setCorrectPPCarries(null)
-      }
-      setIsCorrect(data.correct); setRevealed(true)
-      let explanation = ''
-      try {
-        const sr = await fetch(`${API}/column-multiplication-api/check`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-          body: JSON.stringify({ a: question.a, b: question.b, userAnswer: [], userCarries: [], userPartialProducts: [], solve: true })
-        })
-        const sd = await sr.json()
-        explanation = sd.explanation || ''
-      } catch (_) {}
-      const resultLine = data.correct ? '✓ Correct!' : `✗ ${data.message || 'Incorrect'}`
-      setFeedback(explanation ? `${resultLine}\n\n— Step-by-step solution —\n${explanation}` : resultLine)
-      const ansVal = isMulti ? Number(answerInputs.filter(v => v !== '' && v !== null).join('') || '') : Number(answerInputs.filter(v => v !== null).join('')) || ''
-      let userCarriesStr = '—', correctCarriesStr = '—'
-      if (isMulti) {
-        const uc = ppCarryInputs.flat().filter(v => v !== '' && v !== null)
-        const cc = data.partialProducts ? data.partialProducts.flatMap(pp => (pp.carries || []).filter(v => v !== null && v !== 0)) : []
-        userCarriesStr = uc.length ? uc.join(', ') : '—'
-        correctCarriesStr = cc.length ? cc.join(', ') : '—'
-      } else {
-        userCarriesStr = carryInputs.filter(v => v !== '').join(', ') || '—'
-        correctCarriesStr = (data.correctCarries || []).filter(v => v !== 0 && v !== null && v !== '').join(', ') || '—'
-      }
-      setResults(prev => [...prev, { question: `${question.a} × ${question.b}`, userAnswer: ansVal, correct: data.correct, correctAnswer: data.correctAnswer, time: timer.elapsed, userCarries: userCarriesStr, correctCarries: correctCarriesStr }])
-      if (data.correct) setScore(s => s + 1)
-    } catch (e) { console.error('Check failed:', e); setFeedback('Error checking answer') }
-  }
-
-  const handleSolve = async () => {
-    if (revealed || loading || !question) return
-    timer.stop()
-    try {
-      const r = await fetch(`${API}/column-multiplication-api/check`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-        body: JSON.stringify({ a: question.a, b: question.b, userAnswer: [], userCarries: [], userPartialProducts: [], solve: true })
-      })
-      const data = await r.json()
-      setCorrectAnswerDigits(data.answerDigits)
-      setIsCorrect(false); setRevealed(true)
-      setAnswerInputs(data.answerDigits ? data.answerDigits.map(String) : question.answerDigits.map(String))
-      if (isMulti) {
-        setCorrectCarryDigits(null)
-        const correctPP = data.partialProducts ? data.partialProducts.map(pp => pp.digits) : (question.partialProducts || []).map(pp => pp.digits)
-        const correctPC = data.partialProducts ? data.partialProducts.map(pp => pp.carries) : (question.partialProducts || []).map(pp => pp.carries)
-        setCorrectPPDigits(correctPP)
-        setCorrectPPCarries(correctPC)
-        const filledPP = correctPP.map(row => row.map(d => d === null ? null : String(d)))
-        const filledPC = correctPC.map(row => row.map(c => c === null ? null : String(c)))
-        setPpInputs(filledPP)
-        setPpCarryInputs(filledPC)
-        setCarryInputs([])
-      } else {
-        setCorrectCarryDigits(data.correctCarries || question.carries)
-        setCorrectPPDigits(null); setCorrectPPCarries(null)
-        setCarryInputs((data.correctCarries || question.carries).map(String))
-        setPpInputs([]); setPpCarryInputs([])
-      }
-      setFeedback(data.explanation || (isMulti ? 'Solved — study the partial products and carries.' : 'Solved — study the carries above each column.'))
-      const solveCC = isMulti
-        ? (data.partialProducts ? data.partialProducts.flatMap(pp => (pp.carries || []).filter(v => v !== null && v !== 0)) : []).join(', ') || '—'
-        : (data.correctCarries || []).filter(v => v !== 0 && v !== null && v !== '').join(', ') || '—'
-      setResults(prev => [...prev, { question: `${question.a} × ${question.b}`, userAnswer: data.correctAnswer, correct: false, correctAnswer: data.correctAnswer, time: timer.elapsed, userCarries: '—', correctCarries: solveCC }])
-    } catch (e) {
-      console.error('Solve failed:', e)
-      setCorrectAnswerDigits(question.answerDigits)
-      setIsCorrect(false); setRevealed(true)
-      setAnswerInputs(question.answerDigits.map(String))
-      if (isMulti && question.partialProducts) {
-        setCorrectPPDigits(question.partialProducts.map(pp => pp.digits))
-        setCorrectPPCarries(question.partialProducts.map(pp => pp.carries))
-        setPpInputs(question.partialProducts.map(pp => pp.digits.map(d => d === null ? null : String(d))))
-        setPpCarryInputs(question.partialProducts.map(pp => pp.carries.map(c => c === null ? null : String(c))))
-      } else {
-        setCorrectCarryDigits(question.carries)
-        setCarryInputs(question.carries.map(String))
-      }
-      setFeedback(isMulti ? 'Solved — study the partial products and carries.' : 'Solved — study the carries above each column.')
-      const fallbackCC = isMulti
-        ? (question.partialProducts || []).flatMap(pp => (pp.carries || []).filter(v => v !== null && v !== 0)).join(', ') || '—'
-        : (question.carries || []).filter(v => v !== 0 && v !== null && v !== '').join(', ') || '—'
-      setResults(prev => [...prev, { question: `${question.a} × ${question.b}`, userAnswer: question.answer, correct: false, correctAnswer: question.answer, time: timer.elapsed, userCarries: '—', correctCarries: fallbackCC }])
-    }
-  }
-
-  const advanceQuestion = () => {
-    if (advanceTimerRef.current) { clearTimeout(advanceTimerRef.current); advanceTimerRef.current = null }
-    setRevealed(false); setIsCorrect(null); setFeedback(''); setAnswerInputs([]); setCarryInputs([])
-    setCorrectAnswerDigits(null); setCorrectCarryDigits(null)
-    setCorrectPPDigits(null); setCorrectPPCarries(null)
-    setIsMulti(false); setCurrentPP(0); setPpInputs([]); setPpCarryInputs([])
-    if (questionNumber >= totalQ) { setFinished(true); timer.stop() }
-    else { setQuestionNumber(qn => qn + 1); timer.reset(); timer.start(); fetchQuestion() }
-  }
-
-  const diffLabels = {
-    easy: 'Easy — 1 × 1 digit',
-    medium: 'Medium — 1 × 2 digits',
-    hard: 'Hard — 2 × 2 digits',
-    extrahard: 'Extra Hard — 3×3 / 4×3 digits'
-  }
-
-  const inputStyle = (isRight, isWrong) => ({
-    width: `${COL}px`, height: '38px', textAlign: 'center', fontSize: '1rem', fontWeight: 700,
-    background: isRight ? 'var(--clr-correct-bg)' : isWrong ? 'var(--clr-wrong-bg)' : 'var(--clr-input)',
-    border: `2px solid ${isRight ? 'var(--clr-correct)' : isWrong ? 'var(--clr-wrong)' : 'var(--clr-border)'}`,
-    borderRadius: '8px', color: isRight ? 'var(--clr-correct)' : isWrong ? 'var(--clr-wrong)' : 'var(--clr-text)',
-    fontFamily: '"Courier New", monospace', outline: 'none'
-  })
-
-  if (!started && !finished) {
-    return (
-      <div style={{ minHeight: '100vh', background: 'var(--clr-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
-        <div style={{ background: 'var(--clr-card)', border: '1.5px solid var(--clr-border)', borderRadius: '28px', boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '48px 40px', maxWidth: '720px', width: '100%', textAlign: 'center', position: 'relative' }}>
-          <button onClick={onBack} style={{ position: 'absolute', top: '24px', left: '24px', background: 'transparent', border: '1px solid var(--clr-border)', borderRadius: '6px', padding: '6px 14px', color: 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}>← Home</button>
-          <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '48px', color: 'var(--clr-text)', margin: '0 0 12px', lineHeight: 1.1 }}>Column Multiplication</h1>
-          <p style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem', margin: '0 0 24px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>Multiply vertically with carrying</p>
-
-          {/* Help toggle */}
-          <div style={{ marginBottom: '20px' }}>
-            <button onClick={() => setShowHelp(h => !h)} style={{ background: showHelp ? 'var(--clr-input)' : 'transparent', border: '1px solid var(--clr-border)', borderRadius: '50px', padding: '6px 16px', color: 'var(--clr-accent)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.8rem', cursor: 'pointer' }}>{showHelp ? '✕ Close' : '? How to play'}</button>
-          </div>
-
-          {showHelp && (
-            <div style={{ textAlign: 'left', background: 'var(--clr-surface)', border: '1px solid var(--clr-border)', borderRadius: '16px', padding: '28px 28px', marginBottom: '24px', maxWidth: '580px', margin: '0 auto 24px' }}>
-              <h3 style={{ color: 'var(--clr-accent)', fontSize: '1.05rem', margin: '0 0 20px', fontFamily: 'Inter, sans-serif', fontWeight: 700, textAlign: 'center' }}>How Column Multiplication Works</h3>
-
-              {/* Step 1 */}
-              <div style={{ display: 'flex', gap: '14px', marginBottom: '18px', alignItems: 'flex-start' }}>
-                <div style={{ minWidth: '28px', height: '28px', borderRadius: '50%', background: 'var(--clr-accent)', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}>1</div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '6px' }}>Multiply by the rightmost digit first</div>
-                  <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5', marginBottom: '10px' }}>Take the <strong style={{ color: 'var(--clr-accent)' }}>rightmost digit</strong> of the multiplier and multiply it by each digit of the top number. Write carries above and products below the line.</div>
-                  <div style={{ background: 'var(--clr-card)', borderRadius: '10px', padding: '14px 16px', fontFamily: '"Courier New", monospace', fontSize: '1.1rem', fontWeight: 700, lineHeight: '1.6', textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.7rem', color: 'var(--clr-accent)', fontFamily: 'Inter, sans-serif', marginBottom: '2px' }}>Step 1: multiply by 9</div>
-                    <div>31</div>
-                    <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem' }}>× <span style={{ color: 'var(--clr-accent)', border: '1.5px solid var(--clr-accent)', borderRadius: '4px', padding: '0 3px' }}>4</span>9</div>
-                    <div style={{ width: '60px', height: '2px', background: 'var(--clr-border)', margin: '4px auto' }} />
-                    <div style={{ color: 'var(--clr-accent)' }}>_ _</div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 2 */}
-              <div style={{ display: 'flex', gap: '14px', marginBottom: '18px', alignItems: 'flex-start' }}>
-                <div style={{ minWidth: '28px', height: '28px', borderRadius: '50%', background: 'var(--clr-accent)', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}>2</div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '6px' }}>Move to the next digit (shift left)</div>
-                  <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5', marginBottom: '10px' }}>Multiply by the <strong style={{ color: 'var(--clr-text)' }}>next digit</strong> to the left. The result shifts one place to the left. The app highlights which digit you're working on.</div>
-                  <div style={{ background: 'var(--clr-card)', borderRadius: '10px', padding: '14px 16px', fontFamily: '"Courier New", monospace', fontSize: '1.1rem', fontWeight: 700, lineHeight: '1.6', textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.7rem', color: 'var(--clr-text)', fontFamily: 'Inter, sans-serif', marginBottom: '2px' }}>Step 2: multiply by 4</div>
-                    <div>31</div>
-                    <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem' }}>× <span style={{ color: 'var(--clr-text)', border: '1.5px solid var(--clr-text)', borderRadius: '4px', padding: '0 3px' }}>4</span>9</div>
-                    <div style={{ width: '60px', height: '2px', background: 'var(--clr-border)', margin: '4px auto' }} />
-                    <div>2 7 9</div>
-                    <div style={{ color: 'var(--clr-accent)' }}>1 2 4 _</div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 3 */}
-              <div style={{ display: 'flex', gap: '14px', marginBottom: '18px', alignItems: 'flex-start' }}>
-                <div style={{ minWidth: '28px', height: '28px', borderRadius: '50%', background: 'var(--clr-accent)', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}>3</div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '6px' }}>Add all partial products for the final answer</div>
-                  <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5' }}>After all partial products are entered, add them up to get the final answer. Work right to left, carrying as needed.</div>
-                </div>
-              </div>
-
-              {/* Keyboard shortcuts */}
-              <div style={{ borderTop: '1px solid var(--clr-border)', paddingTop: '14px', marginTop: '14px' }}>
-                <div style={{ color: 'var(--clr-text)', fontSize: '0.82rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '8px' }}>Keyboard shortcuts:</div>
-                <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.78rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.7' }}>
-                  <strong>↑ / ↓</strong> — move between carry and digit rows &nbsp;&nbsp;
-                  <strong>← / →</strong> — move between columns &nbsp;&nbsp;
-                  <strong>Tab</strong> — jump to next partial product<br />
-                  <strong>Backspace</strong> — clear and move back
-                </div>
-              </div>
-            </div>
-          )}
-
-          <div style={{ marginBottom: '24px' }}>
-            <h3 style={{ color: 'var(--clr-text)', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>Select Difficulty:</h3>
-            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-              {['easy', 'medium', 'hard', 'extrahard'].map(d => (
-                <button key={d} onClick={() => setDifficulty(d)} style={{ background: difficulty === d ? 'var(--clr-accent)' : 'transparent', border: difficulty === d ? '1px solid var(--clr-accent)' : '1px solid var(--clr-border)', borderRadius: '50px', padding: '8px 16px', color: difficulty === d ? '#FFF' : 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}>{diffLabels[d]}</button>
-              ))}
-            </div>
-          </div>
-          <div style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <label style={{ color: 'var(--clr-text-soft)', fontSize: '0.85rem', margin: '0 0 12px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>How many questions? (max 100)</label>
-            <input type="text" value={numQuestions} onChange={(e) => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} style={{ background: 'var(--clr-input)', border: '1px solid var(--clr-border)', borderRadius: '6px', padding: '10px', color: 'var(--clr-text)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', width: '100px', textAlign: 'center', outline: 'none' }} placeholder={String(DEFAULT_TOTAL)} />
-          </div>
-          <button onClick={startQuiz} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '6px', padding: '10px 24px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Start Quiz</button>
-        </div>
-      </div>
-    )
-  }
-
-  const ansLen = question ? question.answerDigits.length : 1
-
-  const renderSingleDigit = () => (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '16px 0', fontFamily: '"Courier New", monospace', fontSize: '1.8rem', fontWeight: 700 }}>
-      <div style={{ display: 'flex', gap: `${GAP}px`, marginBottom: '4px' }}>
-        <span style={{ width: `${LEFT_MARGIN}px` }} />
-        {question.carries.map((c, i) => {
-          if (i === question.carries.length - 1) return <span key={i} style={{ width: `${COL}px` }} />
-          const correct = revealed && correctCarryDigits ? String(correctCarryDigits[i]) : ''
-          const isRight = revealed && correct !== '' && String(carryInputs[i] || '') === correct
-          const isWrong = revealed && correct !== '' && !isRight
-          const shown = revealed ? correct : carryInputs[i] || ''
-          return (
-            <input key={i} ref={el => carryRefs.current[i] = el} type="text" maxLength={1}
-              value={shown}
-              onChange={e => handleSingleInput(i, e.target.value, true)}
-              onKeyDown={e => handleSingleKeyDown(i, e, true)}
-              disabled={revealed}
-              style={inputStyle(isRight, isWrong)}
-            />
-          )
-        })}
-      </div>
-      <div style={{ display: 'flex', gap: `${GAP}px`, marginBottom: '2px' }}>
-        <span style={{ width: `${LEFT_MARGIN}px` }} />
-        {question.aDigits.map((d, i) => (
-          <span key={i} style={{ width: `${COL}px`, height: '42px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--clr-text)', fontSize: '1.4rem' }}>{d !== null ? d : ''}</span>
-        ))}
-      </div>
-      <div style={{ display: 'flex', gap: `${GAP}px`, marginBottom: '4px' }}>
-        <span style={{ width: `${LEFT_MARGIN}px`, textAlign: 'center', color: 'var(--clr-text-soft)', fontSize: '1.4rem' }}>×</span>
-        {question.aDigits.map((_, i) => (
-          <span key={i} style={{ width: `${COL}px`, height: '42px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: i === question.aDigits.length - 1 ? 'var(--clr-text)' : 'transparent', fontSize: '1.4rem' }}>{i === question.aDigits.length - 1 ? question.b : ''}</span>
-        ))}
-      </div>
-      <div style={{ display: 'flex', gap: `${GAP}px` }}>
-        <span style={{ width: `${LEFT_MARGIN}px` }} />
-        <div style={{ width: `${ansLen * (COL + GAP) - GAP}px`, height: '3px', background: 'var(--clr-border)', borderRadius: '2px' }} />
-      </div>
-      <div style={{ display: 'flex', gap: `${GAP}px`, marginTop: '8px' }}>
-        <span style={{ width: `${LEFT_MARGIN}px` }} />
-        {question.answerDigits.map((d, i) => {
-          const correctDigit = revealed && correctAnswerDigits ? String(correctAnswerDigits[i]) : ''
-          const isRight = revealed && correctDigit !== '' && String(answerInputs[i] || '') === correctDigit
-          const isWrong = revealed && correctDigit !== '' && !isRight
-          const shown = revealed ? correctDigit : answerInputs[i] || ''
-          return (
-            <input key={i} ref={el => answerRefs.current[i] = el} type="text" maxLength={1}
-              value={shown}
-              onChange={e => handleAnswerInput(i, e.target.value)}
-              onKeyDown={e => handleAnswerKeyDown(i, e)}
-              disabled={revealed}
-              style={{ ...inputStyle(isRight, isWrong), width: `${COL}px`, height: '42px', fontSize: '1.4rem' }}
-            />
-          )
-        })}
-      </div>
-    </div>
-  )
-
-  const renderMultiDigit = () => {
-    const pp = question.partialProducts
-    const allDone = currentPP >= pp.length
-    const ansLen = question.answerDigits.length
-    const padCount = ansLen - question.aDigits.length
-    const paddedADigits = [...Array(padCount).fill(null), ...question.aDigits]
-    const bPadCount = ansLen - (question.bDigits ? question.bDigits.length : 0)
-    const paddedBDigits = [...Array(Math.max(0, bPadCount)).fill(null), ...(question.bDigits || [])]
-    const shift = allDone ? 0 : currentPP
-    const trailingCol = allDone ? -1 : ansLen - 1 - shift
-
-    const isPpRight = (ppIdx, j) => {
-      if (!revealed || !correctPPDigits) return false
-      const correct = correctPPDigits[ppIdx][j]
-      if (correct === null || correct === undefined) return false
-      const user = ppInputs[ppIdx] && ppInputs[ppIdx][j]
-      return user !== null && user !== undefined && String(user) === String(correct)
-    }
-    const isPpWrong = (ppIdx, j) => {
-      if (!revealed || !correctPPDigits) return false
-      const correct = correctPPDigits[ppIdx][j]
-      if (correct === null || correct === undefined) return false
-      const user = ppInputs[ppIdx] && ppInputs[ppIdx][j]
-      return (user !== null && user !== undefined && user !== '' && String(user) !== String(correct))
-    }
-    const ppCorrectVal = (ppIdx, j) => {
-      if (!revealed || !correctPPDigits) return ''
-      const v = correctPPDigits[ppIdx][j]
-      return v !== null && v !== undefined ? String(v) : ''
-    }
-
-    const emptyCell = (key) => <div key={key} style={{ width: `${COL}px` }} />
-    const rowGap = { display: 'flex', gap: `${GAP}px` }
-    const labelSpan = <span style={{ width: `${LEFT_MARGIN}px` }} />
-    const labelX = <span style={{ width: `${LEFT_MARGIN}px`, textAlign: 'center', color: 'var(--clr-text-soft)', fontSize: '1.4rem' }}>×</span>
-    const digitDisplay = (d, i, extra) => (
-      <div key={i} style={{ width: `${COL}px`, height: '42px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--clr-text)', fontSize: '1.4rem', ...extra }}>
-        {d !== null ? d : ''}
-      </div>
-    )
-
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '12px 0', fontFamily: '"Courier New", monospace', fontWeight: 700 }}>
-
-        {/* Carry row above multiplicand (currentPP only) */}
-        {!allDone && (
-          <div style={{ ...rowGap, marginBottom: '2px' }}>
-            {labelSpan}
-            {paddedADigits.map((_, m) => {
-              const carryCol = m - shift
-              const carries = pp[currentPP].carries
-              if (carryCol < 0 || carryCol >= carries.length || carries[carryCol] === null || carryCol === trailingCol) {
-                return emptyCell(m)
-              }
-              const val = revealed
-                ? (correctPPCarries && correctPPCarries[currentPP] && correctPPCarries[currentPP][carryCol] != null ? String(correctPPCarries[currentPP][carryCol]) : '')
-                : (ppCarryInputs[currentPP] && ppCarryInputs[currentPP][carryCol]) || ''
-              return (
-                <div key={m} style={{ width: `${COL}px` }}>
-                  <input
-                    ref={el => { if (!ppCarryRefs.current[currentPP]) ppCarryRefs.current[currentPP] = []; ppCarryRefs.current[currentPP][carryCol] = el }}
-                    type="text" inputMode="numeric" maxLength={2}
-                    value={val}
-                    onChange={e => handleMultiPpCarryInput(currentPP, carryCol, e.target.value)}
-                    onKeyDown={e => handleMultiKeyDown(e, { isCarry: true, ppIdx: currentPP, colIdx: carryCol })}
-                    disabled={revealed}
-                    style={{ width: `${COL}px`, height: '38px', textAlign: 'center', fontSize: '1rem', fontWeight: 700,
-                      background: 'var(--clr-input)', border: '2px solid var(--clr-border)', borderRadius: '8px',
-                      color: 'var(--clr-text)', fontFamily: '"Courier New", monospace', outline: 'none' }}
-                  />
-                </div>
-              )
-            })}
-          </div>
-        )}
-
-        {/* Multiplicand row */}
-        <div style={{ ...rowGap, marginBottom: '2px' }}>
-          {labelSpan}
-          {paddedADigits.map((d, i) => digitDisplay(d, i))}
-        </div>
-
-        {/* Multiplier row */}
-        <div style={{ ...rowGap, marginBottom: '4px' }}>
-          {labelX}
-          {paddedBDigits.map((d, i) => {
-            const activeMIdx = !allDone && d !== null && (paddedBDigits.length - 1 - i) === currentPP
-            return (
-              <div key={i} style={{ width: `${COL}px`, height: '42px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: activeMIdx ? 'var(--clr-accent)' : 'var(--clr-text)', fontSize: '1.4rem', fontWeight: activeMIdx ? 900 : 700, background: activeMIdx ? 'var(--clr-accent-bg, rgba(79,140,255,0.12))' : 'transparent', borderRadius: activeMIdx ? '6px' : '0', border: activeMIdx ? '1.5px solid var(--clr-accent)' : 'none' }}>
-                {d !== null ? d : ''}
-              </div>
-            )
-          })}
-        </div>
-
-        {/* Step progress + operation hint */}
-        {!allDone && (
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '4px 0 6px' }}>
-            <div style={{ display: 'flex', gap: '6px', alignItems: 'center', marginBottom: '4px' }}>
-              {pp.map((_, i) => (
-                <div key={i} style={{ width: '10px', height: '10px', borderRadius: '50%', background: i < currentPP ? 'var(--clr-correct)' : i === currentPP ? 'var(--clr-accent)' : 'var(--clr-border)', transition: 'background 0.3s' }} />
-              ))}
-              <span style={{ fontSize: '0.72rem', color: 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, marginLeft: '4px' }}>Step {currentPP + 1} of {pp.length}</span>
-            </div>
-            <div style={{ fontSize: '0.78rem', color: 'var(--clr-accent)', fontFamily: '"Courier New", monospace', fontWeight: 700, background: 'var(--clr-accent-bg, rgba(79,140,255,0.08))', padding: '4px 14px', borderRadius: '8px', border: '1px solid var(--clr-accent)', opacity: 0.9 }}>
-              Now: {pp[currentPP].multiplierDigit} × {question.a} = ?
-            </div>
-          </div>
-        )}
-
-        {/* Separator line */}
-        <div style={rowGap}>
-          {labelSpan}
-          <div style={{ width: `${ansLen * (COL + GAP) - GAP}px`, height: '3px', background: 'var(--clr-border)', borderRadius: '2px' }} />
-        </div>
-
-        {/* Partial products */}
-        {pp.map((ppRow, idx) => {
-          if (idx > currentPP && !allDone) return null
-          const isActive = idx === currentPP && !allDone
-          const isDone = idx < currentPP
-
-          return (
-            <div key={idx} style={{ ...rowGap, marginTop: '6px', padding: isDone ? '2px 4px' : isActive ? '2px 4px' : '0', borderRadius: '8px', background: isDone ? 'var(--clr-correct-bg)' : 'transparent', borderLeft: isActive ? '3px solid var(--clr-accent)' : 'none' }}>
-              <span style={{ width: `${LEFT_MARGIN}px`, textAlign: 'center', color: 'var(--clr-text-soft)', fontSize: '1.4rem' }}>+</span>
-              {ppRow.digits.map((d, j) => {
-                if (d === null) return emptyCell(j)
-                if (isDone) {
-                  const val = ppInputs[idx]?.[j] ?? ''
-                  return <div key={j} style={{ width: `${COL}px`, height: '38px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1rem', fontWeight: 700, color: 'var(--clr-correct)' }}>{val}</div>
-                }
-                const isRight = isPpRight(idx, j)
-                const isWrong = isPpWrong(idx, j)
-                const shown = revealed ? ppCorrectVal(idx, j) : (ppInputs[idx] && ppInputs[idx][j]) || ''
-                return (
-                  <div key={j} style={{ width: `${COL}px` }}>
-                    <input
-                      ref={el => { if (!ppRefs.current[idx]) ppRefs.current[idx] = []; ppRefs.current[idx][j] = el }}
-                      type="text" inputMode="numeric" maxLength={1}
-                      value={shown}
-                      onChange={e => handleMultiPpInput(idx, j, e.target.value)}
-                      onKeyDown={e => handleMultiKeyDown(e, { isPp: true, ppIdx: idx, colIdx: j })}
-                      disabled={revealed}
-                      style={{ width: `${COL}px`, height: '38px', textAlign: 'center', fontSize: '1rem', fontWeight: 700,
-                        background: isRight ? 'var(--clr-correct-bg)' : isWrong ? 'var(--clr-wrong-bg)' : 'var(--clr-input)',
-                        border: `2px solid ${isRight ? 'var(--clr-correct)' : isWrong ? 'var(--clr-wrong)' : 'var(--clr-border)'}`,
-                        borderRadius: '8px', color: isRight ? 'var(--clr-correct)' : isWrong ? 'var(--clr-wrong)' : 'var(--clr-text)',
-                        fontFamily: '"Courier New", monospace', outline: 'none' }}
-                    />
-                  </div>
-                )
-              })}
-            </div>
-          )
-        })}
-
-        {/* Separator line before answer — always visible */}
-        <div style={{ ...rowGap, marginTop: '6px' }}>
-          {labelSpan}
-          <div style={{ width: `${ansLen * (COL + GAP) - GAP}px`, height: '3px', background: 'var(--clr-border)', borderRadius: '2px' }} />
-        </div>
-
-        {/* Answer row */}
-        <div style={{ ...rowGap, marginTop: '8px' }}>
-          {labelSpan}
-          {question.answerDigits.map((d, i) => {
-            const correctDigit = revealed && correctAnswerDigits ? String(correctAnswerDigits[i]) : ''
-            const isRight = revealed && correctDigit !== '' && String(answerInputs[i] || '') === correctDigit
-            const isWrong = revealed && correctDigit !== '' && !isRight
-            const shown = revealed ? correctDigit : answerInputs[i] || ''
-            return (
-              <input key={i} ref={el => answerRefs.current[i] = el} type="text" maxLength={1} value={shown}
-                onChange={e => handleAnswerInput(i, e.target.value)}
-                onKeyDown={e => handleAnswerKeyDown(i, e)}
-                disabled={revealed || !allDone}
-                style={Object.assign({ width: COL + 'px', height: '42px', textAlign: 'center', fontSize: '1.4rem', fontWeight: 700,
-                  background: isRight ? 'var(--clr-correct-bg)' : isWrong ? 'var(--clr-wrong-bg)' : 'var(--clr-input)',
-                  borderRadius: '8px', color: isRight ? 'var(--clr-correct)' : isWrong ? 'var(--clr-wrong)' : 'var(--clr-text)',
-                  fontFamily: '"Courier New", monospace', outline: 'none', opacity: allDone ? 1 : 0.5 },
-                  isRight ? { border: '2px solid var(--clr-correct)' } : isWrong ? { border: '2px solid var(--clr-wrong)' } : { border: '2px solid var(--clr-border)' })}
-              />
-            )
-          })}
-        </div>
-      </div>
-    )
-  }
-
-  return (
-    <QuizLayout title="Column Multiplication" onBack={onBack} timer={timer}>
-      {started && !finished && <>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.3rem' }}>
-          <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
-        </div>
-        {loading || !question ? <div className="question-box">Loading question…</div> : (
-          <>
-            {isMulti ? renderMultiDigit() : renderSingleDigit()}
-            {feedback && (
-              <div style={{
-                textAlign: 'left', padding: '12px 16px', borderRadius: '8px', margin: '8px 0',
-                background: isCorrect ? 'rgba(92, 184, 122, 0.25)' : 'rgba(224, 90, 74, 0.25)',
-                color: isCorrect ? 'var(--clr-correct)' : 'var(--clr-wrong)',
-                fontWeight: 600, fontSize: '0.9rem',
-                whiteSpace: 'pre-line', lineHeight: '1.6',
-                maxHeight: '300px', overflowY: 'auto',
-                border: isCorrect ? '2px solid var(--clr-correct)' : '2px solid var(--clr-wrong)'
-              }}>{feedback}</div>
-            )}
-            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', margin: '12px 0', flexWrap: 'wrap' }}>
-              {!revealed && <button onClick={handleSubmit} disabled={loading} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '8px', padding: '10px 24px', color: '#FFF', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Submit</button>}
-              {!revealed && <button onClick={handleSolve} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-border)', borderRadius: '8px', padding: '10px 24px', color: 'var(--clr-text-soft)', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Solve</button>}
-              {revealed && <button onClick={advanceQuestion} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '8px', padding: '10px 24px', color: '#FFF', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Next Question →</button>}
-            </div>
-          </>
-        )}
-        {results.length > 0 && <ResultsTable results={results} />}
-      </>}
-      {finished && (
-        <div style={{ textAlign: 'center', padding: '24px' }}>
-          <h2 style={{ color: 'var(--clr-text)', marginBottom: '16px' }}>Score: {score}/{totalQ}</h2>
-          <ResultsTable results={results} />
-          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', marginTop: '24px' }}>
-            <button onClick={() => { setStarted(false); setFinished(false) }} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '8px', padding: '10px 24px', color: '#FFF', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Play Again</button>
-          </div>
-        </div>
-      )}
-    </QuizLayout>
-  )
-}
-
-/**
- * ColumnSubtractionApp Component
- * Vertical column subtraction: minuend − subtrahend.
- * User fills borrow boxes above each column + the difference digits below.
- */
-function ColumnSubtractionApp({ onBack, initialDifficulty, initialNumQuestions, initialStarted, isGoalMode = false }) {
-  const [difficulty, setDifficulty] = useState(initialDifficulty || 'easy')
-  const [numQuestions, setNumQuestions] = useState(initialNumQuestions || String(DEFAULT_TOTAL))
-  const [started, setStarted] = useState(initialStarted || false)
-  const [finished, setFinished] = useState(false)
-  const [question, setQuestion] = useState(null)
-  const [score, setScore] = useState(0)
-  const [questionNumber, setQuestionNumber] = useState(0)
-  const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
-  const [feedback, setFeedback] = useState('')
-  const [isCorrect, setIsCorrect] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [revealed, setRevealed] = useState(false)
-  const [results, setResults] = useState([])
-  const timer = useTimer()
-  const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
-  const [showHelp, setShowHelp] = useState(false)
-
-  const [answerInputs, setAnswerInputs] = useState([])
-  const [borrowInputs, setBorrowInputs] = useState([])
-  const [correctAnswerDigits, setCorrectAnswerDigits] = useState(null)
-  const [correctBorrowDigits, setCorrectBorrowDigits] = useState(null)
-  const [activeBorrows, setActiveBorrows] = useState(new Set())
-  const answerRefs = useRef([])
-  const borrowRefs = useRef([])
-  const advanceTimerRef = useRef(null)
-
-  useEffect(() => { if (!isGoalMode) setSessionGoal('standard') }, [isGoalMode])
-
-  const startQuiz = async () => {
-    const q = Number(numQuestions) || DEFAULT_TOTAL
-    setTotalQ(q); setScore(0); setQuestionNumber(1); setResults([])
-    setFinished(false); setStarted(true); setFeedback(''); setIsCorrect(null); setRevealed(false)
-    setCorrectAnswerDigits(null); setCorrectBorrowDigits(null); setActiveBorrows(new Set())
-    timer.reset(); timer.start();
-    await fetchQuestion()
-  }
-
-  const fetchQuestion = async (diff) => {
-    setLoading(true)
-    try {
-      const r = await fetch(`${API}/column-subtraction-api/question?difficulty=${diff || difficulty}`)
-      const data = await r.json()
-      setQuestion(data)
-      setAnswerInputs(new Array(data.answerDigits.length).fill(''))
-      setBorrowInputs(new Array(data.borrows.length).fill(''))
-      setCorrectAnswerDigits(null); setCorrectBorrowDigits(null); setActiveBorrows(new Set())
-      setTimeout(() => {
-        const lastIdx = data.answerDigits.length - 1
-        if (answerRefs.current[lastIdx]) answerRefs.current[lastIdx].focus()
-      }, 100)
-    } catch (e) { console.error('Fetch column subtraction question failed:', e) }
-    setLoading(false)
-  }
-
-  const activateBorrow = (idx, isCurrentlyActive) => {
-    if (isCurrentlyActive) {
-      setActiveBorrows(prev => { const next = new Set(prev); next.delete(idx); return next })
-      setBorrowInputs(prev => { const a = [...prev]; a[idx] = ''; return a })
-    } else {
-      setActiveBorrows(prev => { const next = new Set(prev); next.add(idx); return next })
-      setTimeout(() => { if (borrowRefs.current[idx]) borrowRefs.current[idx].focus() }, 50)
-    }
-  }
-
-  const handleInput = (idx, val, isBorrow) => {
-    if (revealed) return
-    if (val !== '' && !(isBorrow ? /^\d{1,2}$/.test(val) : /^\d$/.test(val))) return
-    const setter = isBorrow ? setBorrowInputs : setAnswerInputs
-    const arr = isBorrow ? borrowInputs : answerInputs
-    const next = [...arr]; next[idx] = val; setter(next)
-  }
-
-  const focusAnswer = (i) => { if (answerRefs.current[i]) answerRefs.current[i].focus() }
-  const focusBorrow = (i) => { if (borrowRefs.current[i]) borrowRefs.current[i].focus() }
-
-  const handleKeyDown = (idx, e, isBorrow) => {
-
-    if (e.key === 'Backspace') {
-      if (e.currentTarget.value) return
-      e.preventDefault()
-      if (isBorrow) {
-        focusAnswer(idx)
-      } else if (idx < answerInputs.length - 1) {
-        focusAnswer(idx + 1)
-      }
-      return
-    }
-
-    if (e.key === 'ArrowUp') {
-      e.preventDefault()
-      if (!isBorrow && activeBorrows.has(idx) && borrowRefs.current[idx]) focusBorrow(idx)
-      return
-    }
-    if (e.key === 'ArrowDown') {
-      e.preventDefault()
-      if (isBorrow) focusAnswer(idx)
-      return
-    }
-    if (e.key === 'ArrowLeft') {
-      e.preventDefault()
-      if (!isBorrow) { if (idx > 0) focusAnswer(idx - 1) }
-      else { focusAnswer(idx) }
-      return
-    }
-    if (e.key === 'ArrowRight') {
-      e.preventDefault()
-      if (!isBorrow) { if (idx < answerInputs.length - 1) focusAnswer(idx + 1) }
-      else { focusAnswer(idx) }
-      return
-    }
-  }
-
-  const handleSubmit = async () => {
-    if (revealed || loading || !question) return
-    timer.stop()
-    const userAnswer = answerInputs.map(v => v === '' ? null : Number(v))
-    const userBorrows = borrowInputs.map(v => v === '' ? '' : v)
-    try {
-      const r = await fetch(`${API}/column-subtraction-api/check`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-        body: JSON.stringify({ a: question.a, b: question.b, userAnswer, userBorrows, sessionGoal })
-      })
-      const data = await r.json()
-      const allBorrows = new Set(activeBorrows)
-      if (data.correctBorrows && question.aDigits) {
-        data.correctBorrows.forEach((v, i) => { if (question.aDigits[i] != null && String(v) !== String(question.aDigits[i])) allBorrows.add(i) })
-      }
-      setCorrectAnswerDigits(data.answerDigits)
-      setCorrectBorrowDigits(data.correctBorrows)
-      setIsCorrect(data.correct); setRevealed(true); setActiveBorrows(allBorrows)
-      let explanation = ''
-      try {
-        const sr = await fetch(`${API}/column-subtraction-api/check`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-          body: JSON.stringify({ a: question.a, b: question.b, userAnswer: [], userBorrows: [], solve: true })
-        })
-        const sd = await sr.json()
-        explanation = sd.explanation || ''
-      } catch (_) {}
-      const resultLine = data.correct ? '✓ Correct!' : `✗ ${data.message || 'Incorrect'}`
-      setFeedback(explanation ? `${resultLine}\n\n— Step-by-step solution —\n${explanation}` : resultLine)
-      const userBorrowsStr = borrowInputs.filter(v => v !== '').join(', ') || '—'
-      const correctBorrowsStr = (data.correctBorrows || []).filter(v => v !== null && v !== '').join(', ') || '—'
-      setResults(prev => [...prev, { question: `${question.a} − ${question.b}`, userAnswer: Number(userAnswer.filter(v => v !== null).join('')) || '', correct: data.correct, correctAnswer: data.correctAnswer, time: timer.elapsed, userCarries: userBorrowsStr, correctCarries: correctBorrowsStr }])
-      if (data.correct) setScore(s => s + 1)
-    } catch (e) { console.error('Check failed:', e); setFeedback('Error checking answer') }
-  }
-
-  const handleSolve = async () => {
-    if (revealed || loading || !question) return
-    timer.stop()
-    const allBorrows = new Set()
-    try {
-      const r = await fetch(`${API}/column-subtraction-api/check`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-        body: JSON.stringify({ a: question.a, b: question.b, userAnswer: [], userBorrows: [], solve: true })
-      })
-      const data = await r.json()
-      if (data.correctBorrows && question.aDigits) {
-        data.correctBorrows.forEach((v, i) => { if (question.aDigits[i] != null && String(v) !== String(question.aDigits[i])) allBorrows.add(i) })
-      }
-      setCorrectAnswerDigits(data.answerDigits)
-      setCorrectBorrowDigits(data.correctBorrows)
-      setIsCorrect(false); setRevealed(true); setActiveBorrows(allBorrows)
-      setAnswerInputs(data.answerDigits ? data.answerDigits.map(String) : question.answerDigits.map(String))
-      setBorrowInputs(data.correctBorrows ? data.correctBorrows.map(String) : question.borrows.map(String))
-      setFeedback(data.explanation || 'Solved — study the borrows above each column.')
-      const solveBorrowStr = (data.correctBorrows || []).filter(v => v !== null && v !== '').join(', ') || '—'
-      setResults(prev => [...prev, { question: `${question.a} − ${question.b}`, userAnswer: data.correctAnswer, correct: false, correctAnswer: data.correctAnswer, time: timer.elapsed, userCarries: '—', correctCarries: solveBorrowStr }])
-    } catch (e) {
-      console.error('Solve failed:', e)
-      if (question.borrows && question.aDigits) {
-        question.borrows.forEach((v, i) => { if (question.aDigits[i] != null && String(v) !== String(question.aDigits[i])) allBorrows.add(i) })
-      }
-      setCorrectAnswerDigits(question.answerDigits)
-      setCorrectBorrowDigits(question.borrows)
-      setRevealed(true); setIsCorrect(false); setActiveBorrows(allBorrows)
-      setAnswerInputs(question.answerDigits.map(String))
-      setBorrowInputs(question.borrows.map(String))
-      setFeedback('Solved — study the borrows above each column.')
-      const fallbackBorrowStr = (question.borrows || []).filter(v => v !== null && v !== '').join(', ') || '—'
-      setResults(prev => [...prev, { question: `${question.a} − ${question.b}`, userAnswer: question.answer, correct: false, correctAnswer: question.answer, time: timer.elapsed, userCarries: '—', correctCarries: fallbackBorrowStr }])
-    }
-  }
-
-  const advanceQuestion = () => {
-    if (advanceTimerRef.current) { clearTimeout(advanceTimerRef.current); advanceTimerRef.current = null }
-    setRevealed(false); setIsCorrect(null); setFeedback(''); setCorrectAnswerDigits(null); setCorrectBorrowDigits(null); setActiveBorrows(new Set())
-    if (questionNumber >= totalQ) { setFinished(true); timer.stop() }
-    else { setQuestionNumber(qn => qn + 1); setAnswerInputs([]); setBorrowInputs([]); timer.reset(); timer.start(); fetchQuestion() }
-  }
-
-  const diffLabels = { easy: 'Easy — 2 digit', medium: 'Medium — 2 digit', hard: 'Hard — 3 digit', extrahard: 'Extra Hard — 4 digit' }
-
-  if (!started && !finished) {
-    return (
-      <div style={{ minHeight: '100vh', background: 'var(--clr-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
-        <div style={{ background: 'var(--clr-card)', border: '1.5px solid var(--clr-border)', borderRadius: '28px', boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '48px 40px', maxWidth: '720px', width: '100%', textAlign: 'center', position: 'relative' }}>
-          <button onClick={onBack} style={{ position: 'absolute', top: '24px', left: '24px', background: 'transparent', border: '1px solid var(--clr-border)', borderRadius: '6px', padding: '6px 14px', color: 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}>← Home</button>
-          <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '48px', color: 'var(--clr-text)', margin: '0 0 12px', lineHeight: 1.1 }}>Column Subtraction</h1>
-          <p style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem', margin: '0 0 24px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>Subtract vertically with borrowing</p>
-
-          {/* Help toggle */}
-          <div style={{ marginBottom: '20px' }}>
-            <button onClick={() => setShowHelp(h => !h)} style={{ background: showHelp ? 'var(--clr-input)' : 'transparent', border: '1px solid var(--clr-border)', borderRadius: '50px', padding: '6px 16px', color: 'var(--clr-accent)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.8rem', cursor: 'pointer' }}>{showHelp ? '✕ Close' : '? How to play'}</button>
-          </div>
-
-          {showHelp && (
-            <div style={{ textAlign: 'left', background: 'var(--clr-surface)', border: '1px solid var(--clr-border)', borderRadius: '16px', padding: '28px 28px', marginBottom: '24px', maxWidth: '580px', margin: '0 auto 24px' }}>
-              <h3 style={{ color: 'var(--clr-accent)', fontSize: '1.05rem', margin: '0 0 20px', fontFamily: 'Inter, sans-serif', fontWeight: 700, textAlign: 'center' }}>How Column Subtraction Works</h3>
-
-              {/* Step 1 */}
-              <div style={{ display: 'flex', gap: '14px', marginBottom: '18px', alignItems: 'flex-start' }}>
-                <div style={{ minWidth: '28px', height: '28px', borderRadius: '50%', background: 'var(--clr-accent)', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}>1</div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '6px' }}>See the problem</div>
-                  <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5', marginBottom: '10px' }}>The problem appears vertically. Start from the <strong style={{ color: 'var(--clr-text)' }}>rightmost column</strong> and work left.</div>
-                  <div style={{ background: 'var(--clr-card)', borderRadius: '10px', padding: '14px 16px', fontFamily: '"Courier New", monospace', fontSize: '1.2rem', fontWeight: 700, lineHeight: '1.5', textAlign: 'center' }}>
-                    <div><span style={{ color: 'var(--clr-text)' }}>2</span><span style={{ color: 'var(--clr-text)' }}>3</span></div>
-                    <div><span style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem' }}>− </span><span style={{ color: 'var(--clr-text)' }}>1</span><span style={{ color: 'var(--clr-text)' }}>8</span></div>
-                    <div style={{ width: '80px', height: '2px', background: 'var(--clr-border)', margin: '4px auto' }} />
-                    <div><span style={{ color: 'var(--clr-text)' }}>_</span><span style={{ color: 'var(--clr-text)' }}>_</span></div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 2 */}
-              <div style={{ display: 'flex', gap: '14px', marginBottom: '18px', alignItems: 'flex-start' }}>
-                <div style={{ minWidth: '28px', height: '28px', borderRadius: '50%', background: 'var(--clr-accent)', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}>2</div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '6px' }}>Can't subtract? Click the top digit to borrow</div>
-                  <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5', marginBottom: '10px' }}>3 − 8 is not possible, so click the <strong style={{ color: 'var(--clr-accent)' }}>3</strong> above. It gets a <span style={{ textDecoration: 'line-through', color: 'var(--clr-accent)' }}>strikethrough</span> and a box appears above it.</div>
-                  <div style={{ background: 'var(--clr-card)', borderRadius: '10px', padding: '14px 16px', fontFamily: '"Courier New", monospace', fontSize: '1.2rem', fontWeight: 700, lineHeight: '1.5', textAlign: 'center' }}>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--clr-accent)', marginBottom: '2px', fontFamily: 'Inter, sans-serif', fontWeight: 600 }}>↑ box appears here</div>
-                    <div><span style={{ color: 'var(--clr-text-soft)', opacity: 0.5, textDecoration: 'line-through' }}>2</span><span style={{ color: 'var(--clr-accent)', border: '1.5px solid var(--clr-accent)', borderRadius: '4px', padding: '0 4px' }}>3</span></div>
-                    <div><span style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem' }}>− </span><span style={{ color: 'var(--clr-text)' }}>1</span><span style={{ color: 'var(--clr-text)' }}>8</span></div>
-                    <div style={{ width: '80px', height: '2px', background: 'var(--clr-border)', margin: '4px auto' }} />
-                    <div><span style={{ color: 'var(--clr-text)' }}>_</span><span style={{ color: 'var(--clr-text)' }}>_</span></div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 3 */}
-              <div style={{ display: 'flex', gap: '14px', marginBottom: '18px', alignItems: 'flex-start' }}>
-                <div style={{ minWidth: '28px', height: '28px', borderRadius: '50%', background: 'var(--clr-accent)', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}>3</div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '6px' }}>Type the converted value</div>
-                  <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5', marginBottom: '10px' }}>3 becomes <strong style={{ color: 'var(--clr-text)' }}>13</strong> after borrowing. Type <strong style={{ color: 'var(--clr-text)' }}>13</strong> in the box. Now 13 − 8 = <strong style={{ color: 'var(--clr-text)' }}>5</strong>.</div>
-                  <div style={{ background: 'var(--clr-card)', borderRadius: '10px', padding: '14px 16px', fontFamily: '"Courier New", monospace', fontSize: '1.2rem', fontWeight: 700, lineHeight: '1.5', textAlign: 'center' }}>
-                    <div style={{ marginBottom: '2px' }}><span style={{ fontSize: '1.1rem', color: 'var(--clr-accent)', border: '1.5px solid var(--clr-accent)', borderRadius: '4px', padding: '2px 6px' }}>13</span></div>
-                    <div><span style={{ color: 'var(--clr-text-soft)', textDecoration: 'line-through', opacity: 0.5 }}>2</span><span style={{ color: 'var(--clr-text-soft)' }}>3</span></div>
-                    <div><span style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem' }}>− </span><span style={{ color: 'var(--clr-text)' }}>1</span><span style={{ color: 'var(--clr-text)' }}>8</span></div>
-                    <div style={{ width: '80px', height: '2px', background: 'var(--clr-border)', margin: '4px auto' }} />
-                    <div><span style={{ color: 'var(--clr-text)' }}>_</span><span style={{ color: 'var(--clr-correct)' }}>5</span></div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 4 */}
-              <div style={{ display: 'flex', gap: '14px', marginBottom: '18px', alignItems: 'flex-start' }}>
-                <div style={{ minWidth: '28px', height: '28px', borderRadius: '50%', background: 'var(--clr-accent)', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, fontFamily: 'Inter, sans-serif' }}>4</div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ color: 'var(--clr-text)', fontSize: '0.85rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '6px' }}>Move left, subtract next column</div>
-                  <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.82rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.5', marginBottom: '10px' }}>The 2 became <strong style={{ color: 'var(--clr-text)' }}>1</strong> after lending. Now 1 − 1 = <strong style={{ color: 'var(--clr-text)' }}>0</strong>. Answer is <strong style={{ color: 'var(--clr-correct)' }}>05</strong> = 5. Correct!</div>
-                  <div style={{ background: 'var(--clr-card)', borderRadius: '10px', padding: '14px 16px', fontFamily: '"Courier New", monospace', fontSize: '1.2rem', fontWeight: 700, lineHeight: '1.5', textAlign: 'center' }}>
-                    <div style={{ marginBottom: '2px' }}><span style={{ fontSize: '1.1rem', color: 'var(--clr-text-soft)' }}>  </span></div>
-                    <div><span style={{ color: 'var(--clr-text-soft)', textDecoration: 'line-through', opacity: 0.5 }}>2</span><span style={{ color: 'var(--clr-text-soft)', textDecoration: 'line-through', opacity: 0.5 }}>3</span></div>
-                    <div><span style={{ color: 'var(--clr-text-soft)', fontSize: '0.9rem' }}>− </span><span style={{ color: 'var(--clr-text)' }}>1</span><span style={{ color: 'var(--clr-text)' }}>8</span></div>
-                    <div style={{ width: '80px', height: '2px', background: 'var(--clr-border)', margin: '4px auto' }} />
-                    <div><span style={{ color: 'var(--clr-correct)' }}>0</span><span style={{ color: 'var(--clr-correct)' }}>5</span></div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Navigation tips */}
-              <div style={{ background: 'var(--clr-card)', borderRadius: '10px', padding: '14px 18px', marginTop: '4px' }}>
-                <div style={{ color: 'var(--clr-text)', fontSize: '0.82rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', marginBottom: '8px' }}>Keyboard shortcuts</div>
-                <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.78rem', fontFamily: 'Inter, sans-serif', lineHeight: '1.8' }}>
-                  <div><span style={{ color: 'var(--clr-accent)', fontFamily: '"Courier New", monospace', background: 'var(--clr-input)', padding: '1px 6px', borderRadius: '3px', fontSize: '0.75rem' }}>← →</span> Move between answer digits</div>
-                  <div><span style={{ color: 'var(--clr-accent)', fontFamily: '"Courier New", monospace', background: 'var(--clr-input)', padding: '1px 6px', borderRadius: '3px', fontSize: '0.75rem' }}>↑ ↓</span> Jump between answer and borrow box</div>
-                  <div><span style={{ color: 'var(--clr-accent)', fontFamily: '"Courier New", monospace', background: 'var(--clr-input)', padding: '1px 6px', borderRadius: '3px', fontSize: '0.75rem' }}>Backspace</span> Clear and move right</div>
-                </div>
-                <div style={{ color: 'var(--clr-text-soft)', fontSize: '0.78rem', fontFamily: 'Inter, sans-serif', marginTop: '8px', lineHeight: '1.5' }}>Click a top digit again to <strong>cancel</strong> the borrow. If a column doesn't need borrowing, just fill the answer directly.</div>
-              </div>
-            </div>
-          )}
-          <div style={{ marginBottom: '24px' }}>
-            <h3 style={{ color: 'var(--clr-text)', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>Select Difficulty:</h3>
-            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-              {['easy', 'medium', 'hard', 'extrahard'].map(d => (
-                <button key={d} onClick={() => setDifficulty(d)} style={{ background: difficulty === d ? 'var(--clr-accent)' : 'transparent', border: difficulty === d ? '1px solid var(--clr-accent)' : '1px solid var(--clr-border)', borderRadius: '50px', padding: '8px 16px', color: difficulty === d ? '#FFF' : 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}>{diffLabels[d]}</button>
-              ))}
-            </div>
-          </div>
-          <div style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <label style={{ color: 'var(--clr-text-soft)', fontSize: '0.85rem', margin: '0 0 12px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>How many questions? (max 100)</label>
-            <input type="text" value={numQuestions} onChange={(e) => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} style={{ background: 'var(--clr-input)', border: '1px solid var(--clr-border)', borderRadius: '6px', padding: '10px', color: 'var(--clr-text)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', width: '100px', textAlign: 'center', outline: 'none' }} placeholder={String(DEFAULT_TOTAL)} />
-          </div>
-          <button onClick={startQuiz} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '6px', padding: '10px 24px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Start Quiz</button>
-        </div>
-      </div>
-    )
-  }
-
-  const ansLen = question ? question.answerDigits.length : 1
-
-  return (
-    <QuizLayout title="Column Subtraction" onBack={onBack} timer={timer}>
-      {started && !finished && <>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.3rem' }}>
-          <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
-        </div>
-        {loading || !question ? <div className="question-box">Loading question…</div> : (
-          <>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '16px 0', fontFamily: '"Courier New", monospace', fontSize: '1.8rem', fontWeight: 700 }}>
-              {/* Borrow row: only visible for activated columns */}
-              <div style={{ display: 'flex', gap: '4px', marginBottom: '4px' }}>
-                <span style={{ width: '44px' }} />
-                {question.borrows.map((_, i) => {
-                  if (!activeBorrows.has(i) && !revealed) {
-                    return <span key={i} style={{ width: '40px', height: '36px' }} />
-                  }
-                  const correct = revealed && correctBorrowDigits ? String(correctBorrowDigits[i]) : '';
-                  const isOptional = question.aDigits && question.aDigits[i] != null && correct === String(question.aDigits[i]);
-                  const isRight = revealed && correct !== '' && (String(borrowInputs[i] || '') === correct || (isOptional && (!borrowInputs[i] || borrowInputs[i] === '')));
-                  const isWrong = revealed && correct !== '' && !isRight;
-                  const shown = revealed ? (isOptional && (!borrowInputs[i] || borrowInputs[i] === '') ? '' : correct) : (borrowInputs[i] || '');
-                  return (
-                    <input key={i} ref={el => borrowRefs.current[i] = el} type="text" maxLength={2}
-                      value={shown}
-                      onChange={e => handleInput(i, e.target.value, true)}
-                      onKeyDown={e => handleKeyDown(i, e, true)}
-                      disabled={revealed}
-                      style={{ width: '40px', height: '36px', textAlign: 'center', fontSize: '1rem', fontWeight: 700, background: revealed ? (isRight ? 'var(--clr-correct-bg)' : (isWrong ? 'var(--clr-wrong-bg)' : 'var(--clr-input)')) : 'var(--clr-input)', border: `2px solid ${revealed && isRight ? 'var(--clr-correct)' : (revealed && isWrong ? 'var(--clr-wrong)' : 'var(--clr-border)')}`, borderRadius: '8px', color: revealed && isRight ? 'var(--clr-correct)' : (revealed && isWrong ? 'var(--clr-wrong)' : 'var(--clr-text)'), fontFamily: '"Courier New", monospace', outline: 'none' }}
-                    />
-                  );
-                })}
-              </div>
-              {/* Minuend (top number) — click a digit to strikethrough and reveal borrow box */}
-              <div style={{ display: 'flex', gap: '4px', marginBottom: '2px' }}>
-                <span style={{ width: '44px' }} />
-                {question.aDigits.map((d, i) => {
-                  const struck = activeBorrows.has(i) || (revealed && correctBorrowDigits && question.aDigits[i] != null && String(correctBorrowDigits[i]) !== String(question.aDigits[i]));
-                  return (
-                    <span key={i}
-                      onClick={() => { if (!revealed && d != null) activateBorrow(i, activeBorrows.has(i)) }}
-                      style={{
-                        width: '40px', height: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        color: struck ? 'var(--clr-text-soft)' : 'var(--clr-text)',
-                        textDecoration: struck ? 'line-through' : 'none',
-                        cursor: revealed || d == null ? 'default' : 'pointer',
-                        opacity: struck ? 0.5 : 1,
-                        transition: 'all 0.15s ease',
-                      }}>
-                      {d !== null ? d : ''}
-                    </span>
-                  );
-                })}
-              </div>
-              {/* Subtrahend */}
-              <div style={{ display: 'flex', gap: '4px', marginBottom: '4px' }}>
-                <span style={{ width: '44px', textAlign: 'center', color: 'var(--clr-text-soft)', fontSize: '1.4rem' }}>−</span>
-                {question.bDigits.map((d, i) => (
-                  <span key={i} style={{ width: '40px', height: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--clr-text)' }}>{d !== null ? d : ''}</span>
-                ))}
-              </div>
-              {/* Line */}
-              <div style={{ display: 'flex', gap: '4px' }}>
-                <span style={{ width: '44px' }} />
-                <div style={{ width: `${ansLen * 44}px`, height: '3px', background: 'var(--clr-border)', borderRadius: '2px' }} />
-              </div>
-              {/* Difference row */}
-              <div style={{ display: 'flex', gap: '4px', marginTop: '8px' }}>
-                <span style={{ width: '44px' }} />
-                {question.answerDigits.map((d, i) => {
-                  const correctDigit = revealed && correctAnswerDigits ? String(correctAnswerDigits[i]) : '';
-                  const isRight = revealed && correctDigit !== '' && String(answerInputs[i] || '') === correctDigit;
-                  const isWrong = revealed && correctDigit !== '' && !isRight;
-                  const shown = revealed ? correctDigit : answerInputs[i] || '';
-                  return (
-                    <input key={i} ref={el => answerRefs.current[i] = el} type="text" maxLength={1}
-                      value={shown}
-                      onChange={e => handleInput(i, e.target.value, false)}
-                      onKeyDown={e => handleKeyDown(i, e, false)}
-                      disabled={revealed}
-                      style={{ width: '40px', height: '48px', textAlign: 'center', fontSize: '1.4rem', fontWeight: 700, background: isRight ? 'var(--clr-correct-bg)' : isWrong ? 'var(--clr-wrong-bg)' : 'var(--clr-input)', border: `2px solid ${isRight ? 'var(--clr-correct)' : isWrong ? 'var(--clr-wrong)' : 'var(--clr-border)'}`, borderRadius: '8px', color: isRight ? 'var(--clr-correct)' : isWrong ? 'var(--clr-wrong)' : 'var(--clr-text)', fontFamily: '"Courier New", monospace', outline: 'none' }}
-                    />
-                  )
-                })}
-              </div>
-            </div>
-            {feedback && (
-              <div style={{
-                textAlign: 'left', padding: '12px 16px', borderRadius: '8px', margin: '8px 0',
-                background: isCorrect ? 'rgba(92, 184, 122, 0.25)' : 'rgba(224, 90, 74, 0.25)',
-                color: isCorrect ? 'var(--clr-correct)' : 'var(--clr-wrong)',
-                fontWeight: 600, fontSize: '0.9rem',
-                whiteSpace: 'pre-line', lineHeight: '1.6',
-                maxHeight: '300px', overflowY: 'auto',
-                border: isCorrect ? '2px solid var(--clr-correct)' : '2px solid var(--clr-wrong)'
-              }}>{feedback}</div>
-            )}
-            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', margin: '12px 0', flexWrap: 'wrap' }}>
-              {!revealed && <button onClick={handleSubmit} disabled={loading} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '8px', padding: '10px 24px', color: '#FFF', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Submit</button>}
-              {!revealed && <button onClick={handleSolve} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-border)', borderRadius: '8px', padding: '10px 24px', color: 'var(--clr-text-soft)', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Solve</button>}
-              {revealed && <button onClick={advanceQuestion} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '8px', padding: '10px 24px', color: '#FFF', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Next Question →</button>}
-            </div>
-          </>
-        )}
-        {results.length > 0 && <ResultsTable results={results} />}
-      </>}
-      {finished && (
-        <div style={{ textAlign: 'center', padding: '24px' }}>
-          <h2 style={{ color: 'var(--clr-text)', marginBottom: '16px' }}>Score: {score}/{totalQ}</h2>
-          <ResultsTable results={results} />
-          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', marginTop: '24px' }}>
-            <button onClick={() => { setStarted(false); setFinished(false) }} style={{ background: 'var(--clr-accent)', border: 'none', borderRadius: '8px', padding: '10px 24px', color: '#FFF', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer' }}>Play Again</button>
-          </div>
-        </div>
-      )}
-    </QuizLayout>
-  )
-}
-
-/**
  * AdditionApp Component
  * Addition practice quiz with configurable difficulty (1-3 digits) and question count.
  * Phases: setup (choose difficulty) → playing (answer questions) → finished (results)
@@ -48458,16 +43312,16 @@ function ColumnSubtractionApp({ onBack, initialDifficulty, initialNumQuestions, 
  * @param {Object} props
  * @param {Function} props.onBack - Callback to return to home menu
  */
-function AdditionApp({ onBack, completedTopics = [], goldMastery = [], markTopicCompleted, setTransferTopic, setMode, initialMode, initialDifficulty, initialNumQuestions, initialStarted, isGoalMode = false }) {
+function AdditionApp({ onBack, initialMode, initialDifficulty, initialNumQuestions, initialStarted, isGoalMode = false }) {
   // Mode selection: 'standard' (default), 'counting' (Visual Counting), 'scale' (Balance Scale)
   const [additionMode, setAdditionMode] = useState(initialMode || 'standard')
+
   // Difficulty level: 'easy' (1-digit), 'medium' (2-digit), 'hard' (3-digit), 'extrahard' (4-digit)
   const [difficulty, setDifficulty] = useState(initialDifficulty || 'easy')
   // Adaptive mode enabled?
   const [isAdaptive, setIsAdaptive] = useState(false)
   // Adaptive score (0-3)
   const [adaptScore, setAdaptScore] = useState(0)
-
   const adaptScoreRef = useRef(0)
   // User-entered number of questions to attempt
   const [numQuestions, setNumQuestions] = useState(initialNumQuestions || String(DEFAULT_TOTAL))
@@ -48504,15 +43358,6 @@ function AdditionApp({ onBack, completedTopics = [], goldMastery = [], markTopic
   // Timer for response timing
   const timer = useTimer()
   const advanceFnRef = useRef(null)
-
-  useEffect(() => {
-    if (finished) {
-      const pass = score / totalQ >= 0.8
-      if (pass && markTopicCompleted) {
-        markTopicCompleted('addition', isAdaptive ? 'adaptive' : difficulty)
-      }
-    }
-  }, [finished, score, totalQ, markTopicCompleted])
 
   // Drag & Drop Visual Counting state
   const [sourceItems, setSourceItems] = useState([])
@@ -48703,12 +43548,13 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
   }
 
   const handleSubmitOrNext = async () => {
-    if (!question) return
+    console.log('%c🔵 handleSubmitOrNext called, revealed=' + revealed + ' question=' + !!question, 'background:blue;color:white;padding:4px');
+    if (!question) { console.log('🔴 EXIT: no question'); return }
 
     if (!revealed) {
       let submittedAnswer = ''
       if (additionMode === 'standard') {
-        if (answer === '') return
+        if (answer === '') { console.log('🔴 EXIT: empty answer'); return }
         submittedAnswer = answer
       } else if (additionMode === 'counting') {
         submittedAnswer = String(targetItems.length)
@@ -48725,8 +43571,40 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
       })
       const data = await res.json()
       setIsCorrect(data.correct)
+      setRevealed(true)
       const newScore = score + (data.correct ? 1 : 0)
       setScore(newScore)
+
+      // ===== SRS Integration (Mistake Notebook) =====
+      try {
+        const attemptData = {
+          prompt: `${question.a} + ${question.b}`,
+          correctAnswer: data.correctAnswer,
+          userAnswer: submittedAnswer,
+          explanation: null,
+          topic: 'addition',
+          difficulty: isAdaptive ? adaptiveLevel(adaptScoreRef.current) : difficulty
+        };
+        recordAttempt(attemptData, data.correct);
+        // TEMP DEBUG — remove after confirming this works
+        console.log('%c✅ SRS SAVED', 'background:green;color:white;font-size:20px;padding:6px', attemptData);
+        document.title = '✅ SRS SAVED ' + Date.now();
+        const banner = document.createElement('div');
+        banner.textContent = '✅ SRS SAVED: ' + attemptData.prompt + ' correct=' + data.correct;
+        banner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:999999;background:lime;color:black;font-size:20px;font-weight:bold;padding:16px;text-align:center;';
+        document.body.appendChild(banner);
+        setTimeout(() => banner.remove(), 6000);
+      } catch (srsError) {
+        console.error('SRS record failed:', srsError);
+        // TEMP DEBUG — remove after confirming this works
+        document.title = '❌ SRS FAILED ' + Date.now();
+        const banner = document.createElement('div');
+        banner.textContent = '❌ SRS FAILED: ' + (srsError && srsError.message ? srsError.message : srsError);
+        banner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:999999;background:red;color:white;font-size:20px;font-weight:bold;padding:16px;text-align:center;';
+        document.body.appendChild(banner);
+        setTimeout(() => banner.remove(), 10000);
+      }
+      // =============================================
 
       const reasoning = `${question.a} + ${question.b} = ${data.correctAnswer}`
       let feedbackText = ''
@@ -48749,7 +43627,6 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
       if (isAdaptive) {
         setAdaptScore(prev => { const next = data.correct ? Math.min(3, prev + 0.25) : Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next })
       }
-      setRevealed(true)
       return
     }
 
@@ -48843,7 +43720,8 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
           <p style={{ color: '#988D84', fontSize: '0.9rem', margin: '0 0 24px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>
             Practice addition!
           </p>
-          <KeyTerms topicKey="addition" />
+
+
 
           <div style={{ marginBottom: '24px' }}>
             <h3 style={{ color: '#F4F1ED', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>
@@ -48893,31 +43771,6 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
             Start Quiz
           </button>
         </div>
-        {isStage3Completed('addition', completedTopics) && (
-          <div className="transfer-cta-box" style={{ marginTop: '20px', padding: '16px', background: 'var(--clr-hover, rgba(255,255,255,0.03))', borderRadius: '10px', border: '1px solid var(--clr-border)', textAlign: 'center' }}>
-            <p style={{ margin: '0 0 12px', fontSize: '0.9rem', color: 'var(--clr-text-soft)', lineHeight: '1.4' }}>
-              {goldMastery.includes('addition') ? (
-                <>🥇 You have achieved Gold Mastery for this topic!</>
-              ) : (
-                <>🎉 You have completed Stage 3 Practice for this topic!</>
-              )}
-            </p>
-            <button
-              className="btn-transfer-cta"
-              onClick={() => {
-                if (setTransferTopic) setTransferTopic('addition')
-                if (setMode) setMode('transfer')
-              }}
-              style={{ width: '100%', padding: '10px', background: 'linear-gradient(135deg, #FFD700, #FFA500)', color: '#000', fontWeight: 'bold', border: 'none', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
-            >
-              {goldMastery.includes('addition') ? (
-                <>🔄 Revisit Transfer Challenge (Stage 4) 🥇</>
-              ) : (
-                <>🚀 Start Transfer Challenge (Stage 4) 🥇</>
-              )}
-            </button>
-          </div>
-        )}
       </div>
     )
   }
@@ -50046,7 +44899,7 @@ function GymQuiz({ title, subtitle, typeKeys, welcomeText, algebraInput, onBack 
  * @param {Object} props
  * @param {Function} props.onBack - Callback to return to home menu
  */
-function BasicArithApp({ onBack, completedTopics = [], goldMastery = [], markTopicCompleted, setTransferTopic, setMode, isGoalMode = false }) {
+function BasicArithApp({ onBack, isGoalMode = false }) {
   // Difficulty level: 'easy', 'medium', 'hard', 'extrahard'
   const [difficulty, setDifficulty] = useState('easy')
   // Adaptive mode enabled?
@@ -50089,15 +44942,6 @@ function BasicArithApp({ onBack, completedTopics = [], goldMastery = [], markTop
   // Timer
   const timer = useTimer()
   const advanceFnRef = useRef(null)
-
-  useEffect(() => {
-    if (finished) {
-      const pass = score / totalQ >= 0.8
-      if (pass && markTopicCompleted) {
-        markTopicCompleted('basicarith', isAdaptive ? 'adaptive' : difficulty)
-      }
-    }
-  }, [finished, score, totalQ, markTopicCompleted, isAdaptive, difficulty])
 
   const effectiveDiff = () => (isAdaptive) ? adaptiveLevel(adaptScoreRef.current) : difficulty
 
@@ -50274,7 +45118,6 @@ const fetchQuestion = async () => {
     <QuizLayout title="Origin" subtitle="Add, subtract, multiply & divide positive & negative numbers" onBack={onBack} timer={started && !finished ? timer : null}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice basic arithmetic!</p>
-        <KeyTerms topicKey="basic-arithmetic" />
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
           {['easy', 'medium', 'hard', 'extrahard'].map(d => (
             <label key={d} className={`checkbox-pill${!isAdaptive && difficulty === d ? ' active' : ''}`}>
@@ -50597,7 +45440,6 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
     <QuizLayout title="Quadratic" subtitle="Given x, find y = ax² + bx + c" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice quadratic substitution!</p>
-        <KeyTerms topicKey="quadratics" />
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
           {['easy', 'medium', 'hard', 'extrahard'].map(d => (
             <label key={d} className={`checkbox-pill${!isAdaptive && difficulty === d ? ' active' : ''}`}>
@@ -51484,7 +46326,7 @@ function VisualMathApp({ onBack }) {
   )
 }
 
-function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopicCompleted, setTransferTopic, setMode, isGoalMode = false }) {
+function MultiplyApp({ onBack }) {
   // --- Persistent state ---
   const [stats, setStats] = useState(() => loadMultStats())
   // --- Phase: 'picker' (level chooser) | 'level2-setup' (weak-table picker) |
@@ -51504,6 +46346,8 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
   const [isCorrect, setIsCorrect] = useState(null)
   const [revealed, setRevealed] = useState(false)
   const [results, setResults] = useState([])
+  // Shows the "Learn Interactively" (Bird Haven) overlay after a wrong answer.
+  const [showInteractiveLearning, setShowInteractiveLearning] = useState(false)
   // --- Adaptive extension tracking (Levels 1 & 2) ---
   const [extensionCount, setExtensionCount] = useState(0)  // total extra Qs added so far
   const [allCorrectInRound, setAllCorrectInRound] = useState(true)
@@ -51516,30 +46360,10 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
   const [longestStreak, setLongestStreak] = useState(0)
   const [fastestTime, setFastestTime] = useState(null)
   const [l3TimeRemaining, setL3TimeRemaining] = useState(MULT_LEVEL3_TIMEOUT_SECONDS)
-  const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
-  useEffect(() => {
-    if (!isGoalMode) {
-      setSessionGoal('standard');
-    }
-  }, [isGoalMode]);
+  const [sessionGoal] = useState('standard')
   const l3TimerRef = useRef(null)
   const l3DeadlineRef = useRef(0)
   const timer = useTimer()
-
-  useEffect(() => {
-    if (phase === 'finished') {
-      const pass = results.length > 0 && (score / results.length >= 0.8)
-      if (pass && markTopicCompleted) {
-        if (level === 1) {
-          markTopicCompleted('multiply', 'easy')
-        } else if (level === 2) {
-          markTopicCompleted('multiply', 'medium')
-        } else if (level === 3) {
-          markTopicCompleted('multiply', 'hard')
-        }
-      }
-    }
-  }, [phase, score, results.length, level, markTopicCompleted])
 
   // ─── Helpers ──────────────────────────────────────────────────────────
   const nextQuestion = (planArr, index) => {
@@ -51549,7 +46373,8 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
     setFeedback('')
     setRevealed(false)
     setIsCorrect(null)
-    timer.start(sessionGoal, handleTimeout, getSpeedRunLimit(difficulty ?? 'easy', isAdaptive ?? false))
+    setShowInteractiveLearning(false)
+    timer.start(sessionGoal, handleTimeout, getSpeedRunLimit('easy', false))
     if (level === 3) startLevel3Countdown()
   }
 
@@ -51796,33 +46621,7 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
       {phase === 'picker' && (
         <div className="welcome-box">
           <p className="welcome-text">Choose your level</p>
-          <KeyTerms topicKey="multiplication" />
 
-        {isGoalMode && (
-        <>
-          <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
-                  <div className="checkbox-group" style={{ marginBottom: '12px' }}>
-                    {[
-                                            { key: 'speed', label: '⚡ Speed Run' },
-                      { key: 'perfect', label: '🎯 Perfect Solve' },
-                      { key: 'revision', label: '🔄 Revision' }
-                    ].map(g => (
-                      <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
-                        style={sessionGoal === g.key ? (
-                          g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
-                          g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
-                          g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
-                        ) : {}}>
-                        <input type="radio" name="multiplyapp-goal" checked={sessionGoal === g.key} onChange={() => {
-                          setSessionGoal(g.key)
-                          
-                        }} />
-                        {g.label}
-                      </label>
-                    ))}
-                  </div>
-        </>
-      )}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', margin: '12px 0' }}>
             <button onClick={startLevel1}>
               Level 1 — Guided Random Practice
@@ -51889,13 +46688,32 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
             <button onClick={() => level === 3 ? submitLevel3(answer) : handleSubmit()} disabled={answer === ''}>Submit</button>
             {level !== 3 && <button onClick={handleSolve} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>}
             {level === 3 && <button onClick={exitLevel3} style={{ background: 'transparent', border: '1px solid var(--clr-text-soft)', color: 'var(--clr-text-soft)' }}>End</button>}
-          </> : (level !== 3 && <button onClick={advanceLevel12}>{qIndex + 1 >= plan.length ? 'Finish round' : 'Next Question'}</button>)}
+          </> : <>
+            {level !== 3 && !isCorrect && hasInteractiveLab('multiply') && (
+              <button onClick={() => setShowInteractiveLearning(true)} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>
+                🎓 Learn Interactively
+              </button>
+            )}
+            {level !== 3 && <button onClick={advanceLevel12}>{qIndex + 1 >= plan.length ? 'Finish round' : 'Next Question'}</button>}
+          </>}
         </div>
         {level !== 3 && <div style={{ fontSize: '0.78rem', color: 'var(--clr-text-soft)', textAlign: 'center', margin: '6px 0' }}>
           Round avg time: {roundQuestionsCount ? (roundTotalTime / roundQuestionsCount).toFixed(1) : '—'}s
           · Stay under {MULT_FAST_AVG_SECONDS}s for an extension round.
         </div>}
         {results.length > 0 && <ResultsTable results={results} />}
+        {showInteractiveLearning && question && (
+          <InteractiveLearningOverlay
+            topicKey="multiply"
+            labProps={{
+              // Mirrors the question exactly as shown ("table × multiplier"):
+              // table -> number of birds, multiplier -> seed grams per bird.
+              numberOfBirds: question.table,
+              seedPerBird: question.multiplier,
+            }}
+            onClose={() => setShowInteractiveLearning(false)}
+          />
+        )}
       </>}
 
       {/* ── Finished ── */}
@@ -52266,7 +47084,7 @@ const loadQuestion = async (excludeIds) => {
           {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
         </div>
         {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
-        <div className="question-box vocab-word">{loading || !question ? 'Loading question…' : <GlossaryText text={question.question} />}</div>
+        <div className="question-box vocab-word">{loading || !question ? 'Loading question…' : question.question}</div>
         {question && (
           <div className="options-list">
             {question.options.map((option, idx) => {
@@ -52355,7 +47173,7 @@ const GYM_OPTION_LABEL = { A: '1', B: '2', C: '3', D: '4' }
  * difficulty, results table, auto-advance, "Solve" button) but renders each
  * question as a 4-button options grid instead of a free-form text input.
  */
-function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly, topicKey }) {
+function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly }) {
   return function GeneratedMCQuizApp({ onBack, isGoalMode = false }) {
     const diffs = Object.keys(diffLabels)
     const [difficulty, setDifficulty] = useState(diffs[0])
@@ -52559,7 +47377,6 @@ function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly
         {!started && !finished && <div className="welcome-box">
           <p className="welcome-text">Practice {title.toLowerCase()}!</p>
           {tip && <p style={{ fontSize: '0.85rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>{tip}</p>}
-          {topicKey && <KeyTerms topicKey={topicKey} />}
           {/* Difficulty selector — hidden entirely for adaptive-only puzzles
               (the gym puzzles), which always run in adaptive mode. */}
           {!adaptiveOnly && isGoalMode && (
@@ -52632,7 +47449,7 @@ function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly
             {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
           </div>
           {question && <div style={{ textAlign: 'center' }}>
-            <div className="question-prompt" style={{ fontSize: '1.3rem', margin: '8px 0 4px', lineHeight: '1.4' }}><GlossaryText text={question.prompt} /></div>
+            <div className="question-prompt" style={{ fontSize: '1.3rem', margin: '8px 0 4px', lineHeight: '1.4' }}>{question.prompt}</div>
             <div className="options-grid" style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: '12px', marginTop: '40px' }}>
               {question.options.map(opt => {
                 const isSelected = selectedOption === opt.option
@@ -52677,355 +47494,10 @@ function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly
   }
 }
 
-/**
- * TransferChallengeApp Component (Feature AC: Learning Transfer Challenges)
- * Presents untimed, contextual word problems to students who have achieved Stage 3 mastery.
- * Complete 2 challenges to earn Gold Mastery badge and +75 Sun Coins.
- */
-function TransferChallengeApp({ topicKey, onBack, completedTopics, goldMastery, updateCoins, markGoldMastery }) {
-  const [started, setStarted] = useState(false)
-  const [finished, setFinished] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [question, setQuestion] = useState(null)
-  const [answer, setAnswer] = useState('')
-  const [questionNumber, setQuestionNumber] = useState(0)
-  const [totalQ] = useState(2)
-  const [feedback, setFeedback] = useState('')
-  const [isCorrect, setIsCorrect] = useState(null)
-  const [revealed, setRevealed] = useState(false)
-  const [hintsUsed, setHintsUsed] = useState(0)
-  const [showHintLevel, setShowHintLevel] = useState(0)
-  const [explanation, setExplanation] = useState('')
-  const [transferMapping, setTransferMapping] = useState('')
-  const [results, setResults] = useState([])
-  const [goldMasteryEarned, setGoldMasteryEarned] = useState(false)
-
-  const timer = useTimer()
-  const submittedRef = useRef(false)
-  const advancedRef = useRef(false)
-
-  const topicTitles = {
-    percent: 'Percentages',
-    ratio: 'Ratio & Proportion',
-    fractionadd: 'Fraction Addition'
-  }
-
-  const loadQuestion = async () => {
-    setLoading(true)
-    try {
-      const headers = {}
-      const token = localStorage.getItem('tenali-auth-token')
-      if (token) {
-        headers['Authorization'] = `Bearer ${token}`
-      }
-
-      const res = await fetch(`${API}/transfer-api/question?topic=${topicKey}`, { headers })
-      const data = await res.json()
-
-      setQuestion(data)
-      setAnswer('')
-      setFeedback('')
-      setIsCorrect(null)
-      setRevealed(false)
-      setShowHintLevel(0)
-      setHintsUsed(0)
-      setExplanation('')
-      setTransferMapping('')
-      submittedRef.current = false
-      advancedRef.current = false
-      timer.start()
-    } catch (e) {
-      console.error('Failed to load transfer challenge question:', e)
-    }
-    setLoading(false)
-  }
-
-  const startChallenge = () => {
-    setQuestionNumber(1)
-    setResults([])
-    setStarted(true)
-    setFinished(false)
-    setGoldMasteryEarned(false)
-    submittedRef.current = false
-    advancedRef.current = false
-  }
-
-  useEffect(() => {
-    if (started && !finished && questionNumber > 0) {
-      loadQuestion()
-    }
-  }, [started, questionNumber])
-
-  const handleSubmit = async () => {
-    if (!question || revealed || !answer.trim()) return
-    if (submittedRef.current) return
-    submittedRef.current = true
-    const timeTaken = timer.stop()
-
-    const payload = {
-      topic: topicKey,
-      scenarioId: question.scenarioId,
-      variables: question.variables,
-      userAnswer: answer.trim(),
-      hintsUsed,
-      timeSpentSeconds: timeTaken
-    }
-
-    try {
-      const headers = { 'Content-Type': 'application/json' }
-      const token = localStorage.getItem('tenali-auth-token')
-      if (token) {
-        headers['Authorization'] = `Bearer ${token}`
-      }
-
-      const res = await fetch(`${API}/transfer-api/check`, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify(payload)
-      })
-      const data = await res.json()
-
-      setIsCorrect(data.correct)
-      setRevealed(true)
-      setExplanation(data.explanation || '')
-      setTransferMapping(data.transferMapping || '')
-
-      const isAllCorrect = (questionNumber === totalQ) && results.every(r => r.correct) && data.correct
-
-      if (data.correct) {
-        setFeedback(`Correct! Expected: ${data.answer}`)
-      } else {
-        setFeedback(`Incorrect. Expected: ${data.answer}`)
-      }
-
-      setResults(prev => [...prev, {
-        prompt: question.prompt,
-        userAnswer: answer.trim(),
-        correctAnswer: data.answer,
-        correct: data.correct,
-        time: timeTaken
-      }])
-
-      if (isAllCorrect) {
-        markGoldMastery(topicKey)
-        updateCoins(150)
-        setGoldMasteryEarned(true)
-      }
-    } catch (e) {
-      submittedRef.current = false
-      console.error('Failed to submit transfer challenge answer:', e)
-    }
-  }
-
-  const advance = () => {
-    if (advancedRef.current) return
-    advancedRef.current = true
-    if (questionNumber >= totalQ) {
-      setFinished(true)
-    } else {
-      setQuestionNumber(n => n + 1)
-    }
-  }
-
-  const getHint = () => {
-    if (showHintLevel >= 3) return
-    const nextLevel = showHintLevel + 1
-    setShowHintLevel(nextLevel)
-
-    if (nextLevel > 1) {
-      setHintsUsed(prev => prev + 1)
-    }
-  }
-
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault()
-      if (!revealed) {
-        handleSubmit()
-      } else {
-        advance()
-      }
-    }
-  }
-
-  const contextIcons = {
-    shopping: '🛒',
-    sports: '🏏',
-    cooking: '🍕',
-    travel: '🚂',
-    pocketmoney: '🪙'
-  }
-
-  const getTopicTitle = () => {
-    if (topicTitles[topicKey]) return topicTitles[topicKey]
-    // Clean and capitalize key (e.g. hcf_lcm -> Hcf lcm, trig -> Trig)
-    return topicKey.charAt(0).toUpperCase() + topicKey.slice(1).replace(/_/g, ' ')
-  }
-
-  return (
-    <QuizLayout
-      title={`Transfer Challenge: ${getTopicTitle()}`}
-      subtitle="Apply your knowledge to real-world problems!"
-      onBack={onBack}
-      timer={started && !finished ? timer : null}
-    >
-      {!started && !finished && (
-        <div className="welcome-box">
-          <p className="welcome-text">
-            Test whether you can apply your math skills to real-world scenarios.
-            Earn your <strong>Gold Mastery Badge 🥇</strong>!
-          </p>
-          <div className="transfer-header" style={{ maxWidth: '400px', margin: '0 auto 20px' }}>
-            <h2>Ready to transfer?</h2>
-            <p>Complete {totalQ} challenges with no time limit.</p>
-          </div>
-          <button className="btn-transfer-cta" onClick={startChallenge}>
-            Start Challenge 🥇
-          </button>
-        </div>
-      )}
-
-      {started && !finished && (
-        <>
-          <div className="transfer-header">
-            <h2>Challenge {questionNumber} of {totalQ}</h2>
-            <div className="transfer-progress-bar-container">
-              <div
-                className="transfer-progress-bar"
-                style={{ width: `${(questionNumber - 1) * 50}%` }}
-              />
-            </div>
-          </div>
-
-          {question && (
-            <div className="transfer-card">
-              <div className="transfer-context-badge">
-                <span>{contextIcons[question.context] || '💡'}</span>
-                <span>{question.context}</span>
-              </div>
-              <div className="transfer-prompt">{question.prompt}</div>
-
-              {!revealed && (
-                <div style={{ margin: '15px 0', display: 'flex', justifyContent: 'center', gap: '8px' }}>
-                  <button
-                    onClick={getHint}
-                    disabled={showHintLevel >= 3}
-                    style={{
-                      background: 'transparent',
-                      border: '1.5px solid var(--clr-accent)',
-                      color: 'var(--clr-accent)',
-                      padding: '6px 14px',
-                      borderRadius: '8px',
-                      cursor: 'pointer',
-                      fontSize: '0.85rem'
-                    }}
-                  >
-                    💡 Hint Level {showHintLevel + 1}
-                  </button>
-                </div>
-              )}
-
-              {showHintLevel > 0 && question.hints && (
-                <div style={{
-                  background: 'var(--clr-hover, rgba(255,255,255,0.03))',
-                  border: '1px solid var(--clr-border)',
-                  padding: '12px 16px',
-                  borderRadius: '8px',
-                  margin: '12px 0',
-                  textAlign: 'left',
-                  fontSize: '0.9rem'
-                }}>
-                  <strong style={{ color: 'var(--clr-accent)' }}>Hint Level {showHintLevel}:</strong>
-                  <p style={{ margin: '6px 0 0' }}>
-                    {showHintLevel === 1 && (question.hints[0] || question.hints.level1)}
-                    {showHintLevel === 2 && (question.hints[1] || question.hints.level2)}
-                    {showHintLevel === 3 && (question.hints[2] || question.hints.level3)}
-                  </p>
-                </div>
-              )}
-
-              <input
-                className="answer-input"
-                type="text"
-                value={answer}
-                onChange={e => { if (!revealed) setAnswer(e.target.value) }}
-                disabled={revealed}
-                placeholder="Type your answer (e.g. 1500, 3/4)"
-                onKeyDown={handleKeyDown}
-                autoFocus
-              />
-            </div>
-          )}
-
-          {!question && loading && (
-            <div style={{ textAlign: 'center', padding: '24px', color: 'var(--clr-text-soft)' }}>
-              Loading scenario…
-            </div>
-          )}
-
-          {revealed && (
-            <div className="transfer-feedback-panel" style={{ borderLeftColor: isCorrect ? 'var(--clr-correct, #4caf50)' : 'var(--clr-wrong, #f44336)' }}>
-              <div style={{ fontWeight: 700, fontSize: '1.1rem', color: isCorrect ? 'var(--clr-correct)' : 'var(--clr-wrong)' }}>
-                {isCorrect ? '✅ Well done!' : "❌ Let's review this:"}
-              </div>
-              <div className="transfer-feedback-explanation">{explanation}</div>
-              <div className="transfer-mapping-panel">
-                <strong>Conceptual Link:</strong> {transferMapping}
-              </div>
-            </div>
-          )}
-
-          <div className="button-row">
-            {!revealed ? (
-              <button onClick={handleSubmit} disabled={loading || !answer.trim()}>
-                Submit Answer
-              </button>
-            ) : (
-              <button onClick={advance}>
-                {questionNumber >= totalQ ? 'Complete Challenge' : 'Next Challenge'}
-              </button>
-            )}
-          </div>
-        </>
-      )}
-
-      {finished && (
-        <div className="welcome-box">
-          {goldMasteryEarned ? (
-            <div className="gold-badge-container">
-              <div className="gold-badge-shimmer">🥇</div>
-              <h2 style={{ marginTop: '16px', color: '#F5A623' }}>Gold Mastery Achieved!</h2>
-              <p className="welcome-text" style={{ margin: '12px 0 24px' }}>
-                Awesome transfer! You successfully solved the real-world word problems and earned your Gold Mastery Badge!
-              </p>
-            </div>
-          ) : (
-            <>
-              <p className="welcome-text" style={{ fontSize: '1.2rem', fontWeight: 600 }}>
-                You are close, try again!
-              </p>
-              <p className="welcome-text">
-                Keep practicing to unlock your Gold Mastery Badge! Review your results below.
-              </p>
-            </>
-          )}
-
-          <ResultsTable results={results} />
-
-          <button className="btn-transfer-cta" onClick={onBack}>
-            Back to Dashboard
-          </button>
-        </div>
-      )}
-    </QuizLayout>
-  )
-}
-
-function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, answerField, topicKey: customTopicKey }) {
-  return function GeneratedQuizApp({ onBack, completedTopics = [], goldMastery = [], markTopicCompleted, markGoldMastery, updateCoins, setMode, setTransferTopic, initialDifficulty, initialNumQuestions, initialStarted, isGoalMode = false }) {
+function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, answerField }) {
+  return function GeneratedQuizApp({ onBack, initialDifficulty, initialNumQuestions, initialStarted, isGoalMode = false }) {
     const diffs = Object.keys(diffLabels)
     const [difficulty, setDifficulty] = useState(initialDifficulty || diffs[0])
-    const topicKey = customTopicKey || apiPath.replace('-api', '')
     const [isAdaptive, setIsAdaptive] = useState(false)
     const [adaptScore, setAdaptScore] = useState(0) // 0.0 (easy) → 3.0 (extrahard)
     const [reportAck, setReportAck] = useState('')
@@ -53056,15 +47528,6 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
     // Guards against double-submit and double-advance race conditions
     const submittedRef = useRef(false)
     const advancedRef = useRef(false)
-
-    useEffect(() => {
-      if (finished) {
-        const pass = score / totalQ >= 0.8
-        if (pass && markTopicCompleted) {
-          markTopicCompleted(topicKey, isAdaptive ? 'adaptive' : difficulty)
-        }
-      }
-    }, [finished])
 
     const effectiveDifficulty = () => isAdaptive ? adaptiveLevel(adaptScoreRef.current) : difficulty
 
@@ -53156,6 +47619,25 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
           body: JSON.stringify({ ...payload, sessionGoal })
         })
         const data = await r.json()
+        // ===== SRS Integration (Mistake Notebook) =====
+        try {
+          console.log('📝 SRS: Entering makeQuizApp block');
+          const isCorrect = data.correct === true || data.correct === 'true' || (data.display && data.display.includes('Correct'));
+          const attemptData = {
+            prompt: question.prompt || question.question || 'Unknown',
+            correctAnswer: data.answer || data.display || question.answer || 'N/A',
+            userAnswer: answer.trim(),
+            explanation: data.explanation || null,
+            topic: config?.topicId || 'general',
+            difficulty: typeof difficulty === 'number' ? difficulty : 1  // use the correct difficulty variable
+          };
+          console.log('📝 attemptData:', attemptData);
+          recordAttempt(attemptData, isCorrect);
+          console.log('✅ SRS record saved!');
+        } catch (srsError) {
+          console.error('❌ SRS failed:', srsError);
+        }
+        // =============================================
         setIsCorrect(data.correct); setRevealed(true)
         if (data.correct) setScore(s => s + 1)
         const coinMsg = (data.lil?.coinsEarned ?? 0) > 0 ? ` (+${data.lil.coinsEarned}🪙)` : ''
@@ -53225,7 +47707,7 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
 
     if (!started && !finished) {
       return (
-      <div style={{ minHeight: '100vh', background: 'var(--clr-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
+        <div style={{ minHeight: '100vh', background: '#181512', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
           <div style={{
             background: '#2D2520', border: '1.5px solid #4A4038', borderRadius: '28px',
             boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '48px 40px', maxWidth: '720px', width: '100%',
@@ -53247,7 +47729,6 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
               Practice {title.toLowerCase()}!
             </p>
             {tip && <p style={{ fontSize: '0.85rem', color: '#A89C93', marginBottom: '16px' }}>{tip}</p>}
-            {topicKey && <KeyTerms topicKey={topicKey} />}
 
             <div style={{ marginBottom: '24px' }}>
               <h3 style={{ color: '#F4F1ED', fontSize: '0.9rem', margin: '0 0 16px', fontFamily: 'Inter, sans-serif', fontWeight: 700 }}>
@@ -53295,31 +47776,6 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
               Start Quiz
             </button>
           </div>
-        {isStage3Completed(topicKey, completedTopics) && (
-          <div className="transfer-cta-box" style={{ marginTop: '20px', padding: '16px', background: 'var(--clr-hover, rgba(255,255,255,0.03))', borderRadius: '10px', border: '1px solid var(--clr-border)', textAlign: 'center' }}>
-            <p style={{ margin: '0 0 12px', fontSize: '0.9rem', color: 'var(--clr-text-soft)', lineHeight: '1.4' }}>
-              {goldMastery.includes(topicKey) ? (
-                <>🥇 You have achieved Gold Mastery for this topic!</>
-              ) : (
-                <>🎉 You have completed Stage 3 Practice for this topic!</>
-              )}
-            </p>
-            <button
-              className="btn-transfer-cta"
-              onClick={() => {
-                if (setTransferTopic) setTransferTopic(topicKey)
-                if (setMode) setMode('transfer')
-              }}
-              style={{ width: '100%', padding: '10px', background: 'linear-gradient(135deg, #FFD700, #FFA500)', color: '#000', fontWeight: 'bold', border: 'none', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
-            >
-              {goldMastery.includes(topicKey) ? (
-                <>🔄 Revisit Transfer Challenge (Stage 4) 🥇</>
-              ) : (
-                <>🚀 Start Transfer Challenge (Stage 4) 🥇</>
-              )}
-            </button>
-          </div>
-        )}
         </div>
       )
     }
@@ -53335,7 +47791,7 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
             <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />
           )}
           {question && <div style={{ textAlign: 'center' }}>
-            <div className="question-prompt" style={{ fontSize: '1.3rem', margin: '20px 0', lineHeight: '1.6' }}><GlossaryText text={question.prompt} /></div>
+            <div className="question-prompt" style={{ fontSize: '1.3rem', margin: '20px 0', lineHeight: '1.6' }}>{question.prompt}</div>
             <input className="answer-input" type="text" value={answer} onChange={e => { if (!revealed) setAnswer(e.target.value) }} disabled={revealed} placeholder={getPlaceholder()} onKeyDown={handleKeyDown} autoFocus />
           </div>}
           {!question && loading && <div style={{ textAlign: 'center', padding: '24px', color: 'var(--clr-text-soft)' }}>Loading question…</div>}
@@ -53375,45 +47831,45 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
 
 // ── Generate all 14 new quiz apps ──────────────────────
 const TrigApp = makeQuizApp({
-  title: 'Trigonometry', subtitle: 'SOH-CAH-TOA, sine/cosine rule', apiPath: 'trig-api', topicKey: 'trigonometry',
+  title: 'Trigonometry', subtitle: 'SOH-CAH-TOA, sine/cosine rule', apiPath: 'trig-api',
   diffLabels: { easy: 'Easy — Pythagoras', medium: 'Medium — Find Angle', hard: 'Hard — Sine Rule', extrahard: 'Extra Hard — Cosine/Area' },
   placeholders: 'e.g. 13 or 45.5',
 })
 
 const IneqApp = makeQuizApp({
-  title: 'Inequalities', subtitle: 'Linear & quadratic inequalities', apiPath: 'ineq-api', topicKey: 'inequalities',
+  title: 'Inequalities', subtitle: 'Linear & quadratic inequalities', apiPath: 'ineq-api',
   diffLabels: { easy: 'Easy — Linear', medium: 'Medium — List integers', hard: 'Hard — Quadratic', extrahard: 'Extra Hard — Count' },
   placeholders: (q, d) => d === 'easy' ? 'e.g. x > 3' : d === 'medium' ? 'e.g. -1, 0, 1, 2' : d === 'hard' ? 'e.g. 1<=x<=5' : 'e.g. 7',
   tip: 'Use >= for ≥ and <= for ≤',
 })
 
 const CoordGeomApp = makeQuizApp({
-  title: 'Coordinate Geometry', subtitle: 'Midpoint, distance, gradient', apiPath: 'coordgeom-api', topicKey: 'coordinate-geometry',
+  title: 'Coordinate Geometry', subtitle: 'Midpoint, distance, gradient', apiPath: 'coordgeom-api',
   diffLabels: { easy: 'Easy — Midpoint', medium: 'Medium — Distance', hard: 'Hard — Gradient', extrahard: 'Extra Hard — Perp. Bisector' },
   placeholders: (q, d) => d === 'easy' ? 'e.g. (3, 4)' : d === 'hard' || d === 'extrahard' ? 'e.g. 3/4 or 2' : 'e.g. 13',
 })
 
 const ProbApp = makeQuizApp({
-  title: 'Probability', subtitle: 'Single & combined events', apiPath: 'prob-api', topicKey: 'probability',
+  title: 'Probability', subtitle: 'Single & combined events', apiPath: 'prob-api',
   diffLabels: { easy: 'Easy — Simple', medium: 'Medium — Independent', hard: 'Hard — Or events', extrahard: 'Extra Hard — No replacement' },
   placeholders: 'e.g. 3/10',
 })
 
 const StatsApp = makeQuizApp({
-  title: 'Statistics', subtitle: 'Mean, median, mode, range', apiPath: 'stats-api', topicKey: 'statistics',
+  title: 'Statistics', subtitle: 'Mean, median, mode, range', apiPath: 'stats-api',
   diffLabels: { easy: 'Easy — Mean', medium: 'Medium — Median', hard: 'Hard — Mode/Range', extrahard: 'Extra Hard — Frequency' },
   placeholders: 'e.g. 12 or 7/3',
 })
 
 const MatrixApp = makeQuizApp({
-  title: 'Matrices', subtitle: 'Add, multiply, determinant', apiPath: 'matrix-api', topicKey: 'matrices',
+  title: 'Matrices', subtitle: 'Add, multiply, determinant', apiPath: 'matrix-api',
   diffLabels: { easy: 'Easy — Addition', medium: 'Medium — Scalar ×', hard: 'Hard — Determinant', extrahard: 'Extra Hard — Multiply' },
   placeholders: (q, d) => d === 'hard' ? 'e.g. 7' : 'e.g. [1,2;3,4]',
   tip: 'Enter matrices as [a,b;c,d] — semicolon separates rows',
 })
 
 const VectorsApp = makeQuizApp({
-  title: 'Vectors', subtitle: 'Add, scale, magnitude', apiPath: 'vectors-api', topicKey: 'vectors',
+  title: 'Vectors', subtitle: 'Add, scale, magnitude', apiPath: 'vectors-api',
   diffLabels: { easy: 'Easy — Addition', medium: 'Medium — Scalar ×', hard: 'Hard — Magnitude', extrahard: 'Extra Hard — Position' },
   placeholders: (q, d) => d === 'hard' ? 'e.g. 13' : 'e.g. (3, -2)',
 })
@@ -53730,14 +48186,13 @@ const loadQuestion = async () => {
     }
 
     // Fallback
-    return <div className="question-prompt" style={{ fontSize: '1.3rem', margin: '20px 0', lineHeight: '1.6' }}><GlossaryText text={question.prompt} /></div>
+    return <div className="question-prompt" style={{ fontSize: '1.3rem', margin: '20px 0', lineHeight: '1.6' }}>{question.prompt}</div>
   }
 
   return (
     <QuizLayout title="Dot Products" subtitle="Vectors, matrix multiply, fill blanks" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice dot products & matrix multiplication!</p>
-        <KeyTerms topicKey="dot-products" />
         <p style={{ fontSize: '0.85rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Easy/Medium: dot product of vectors. Hard: matrix multiply. Extra Hard: fill missing values.</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
           {DIFFS.map(d => (
@@ -53830,194 +48285,194 @@ const loadQuestion = async () => {
 }
 
 const TransformApp = makeQuizApp({
-  title: 'Transformations', subtitle: 'Reflect, translate, rotate, enlarge', apiPath: 'transform-api', topicKey: 'transformations',
+  title: 'Transformations', subtitle: 'Reflect, translate, rotate, enlarge', apiPath: 'transform-api',
   diffLabels: { easy: 'Easy — Reflect', medium: 'Medium — Translate', hard: 'Hard — Rotate', extrahard: 'Extra Hard — Enlarge' },
   placeholders: 'e.g. (-3, 4)',
 })
 
 const MensurApp = makeQuizApp({
-  title: 'Mensuration', subtitle: 'Area, volume, surface area', apiPath: 'mensur-api', topicKey: 'mensuration',
+  title: 'Mensuration', subtitle: 'Area, volume, surface area', apiPath: 'mensur-api',
   diffLabels: { easy: 'Easy — 2D Area', medium: 'Medium — Circle', hard: 'Hard — Volume', extrahard: 'Extra Hard — Surface Area' },
   placeholders: 'e.g. 150.72',
 })
 
 const BearingsApp = makeQuizApp({
-  title: 'Bearings', subtitle: 'Three-figure bearings', apiPath: 'bearings-api', topicKey: 'bearings',
+  title: 'Bearings', subtitle: 'Three-figure bearings', apiPath: 'bearings-api',
   diffLabels: { easy: 'Easy — Compass', medium: 'Medium — Back bearing', hard: 'Hard — From coords', extrahard: 'Extra Hard — Components' },
   placeholders: 'e.g. 045 or 270',
 })
 
 const LogApp = makeQuizApp({
-  title: 'Logarithms', subtitle: 'Evaluate, simplify, solve', apiPath: 'log-api', topicKey: 'logarithms',
+  title: 'Logarithms', subtitle: 'Evaluate, simplify, solve', apiPath: 'log-api',
   diffLabels: { easy: 'Easy — Evaluate', medium: 'Medium — Laws of logs', hard: 'Hard — Solve bˣ = n', extrahard: 'Extra Hard — Log equations' },
   placeholders: (q, d) => d === 'medium' ? 'e.g. 40 (the argument)' : 'e.g. 3',
 })
 
 const DiffApp = makeQuizApp({
-  title: 'Differentiation', subtitle: 'Power rule, turning points', apiPath: 'diff-api', topicKey: 'differentiation',
+  title: 'Differentiation', subtitle: 'Power rule, turning points', apiPath: 'diff-api',
   diffLabels: { easy: 'Easy — Power rule', medium: 'Medium — Polynomial', hard: 'Hard — Turning point x', extrahard: 'Extra Hard — Min/Max value' },
   placeholders: 'e.g. 12 or -3/2',
 })
 
 const BasesApp = makeQuizApp({
-  title: 'Number Bases', subtitle: 'Binary, decimal, hexadecimal', apiPath: 'bases-api', topicKey: 'number-bases',
+  title: 'Number Bases', subtitle: 'Binary, decimal, hexadecimal', apiPath: 'bases-api',
   diffLabels: { easy: 'Easy — Dec→Bin', medium: 'Medium — Bin→Dec', hard: 'Hard — Dec→Hex', extrahard: 'Extra Hard — Bin add / Hex→Bin' },
   placeholders: (q, d) => d === 'medium' ? 'e.g. 42' : d === 'hard' ? 'e.g. FF' : 'e.g. 101010',
 })
 
 const CircleThApp = makeQuizApp({
-  title: 'Circle Theorems', subtitle: 'Angles, tangents, cyclic quads', apiPath: 'circle-api', topicKey: 'circle-theorems',
+  title: 'Circle Theorems', subtitle: 'Angles, tangents, cyclic quads', apiPath: 'circle-api',
   diffLabels: { easy: 'Easy — Semicircle', medium: 'Medium — Centre/Circum', hard: 'Hard — Cyclic quad', extrahard: 'Extra Hard — Tangent' },
   placeholders: 'e.g. 45',
 })
 
 const IntegApp = makeQuizApp({
-  title: 'Integration', subtitle: 'Reverse differentiation & areas', apiPath: 'integ-api', topicKey: 'integration',
+  title: 'Integration', subtitle: 'Reverse differentiation & areas', apiPath: 'integ-api',
   diffLabels: { easy: 'Easy — Power rule', medium: 'Medium — Definite integral', hard: 'Hard — Substitution', extrahard: 'Extra Hard — Area under curve' },
   placeholders: 'e.g. 3/4', tip: 'Use fractions like 3/4 if needed',
 })
 
 const StdFormApp = makeQuizApp({
-  title: 'Standard Form', subtitle: 'Scientific notation operations', apiPath: 'stdform-api', topicKey: 'standard-form',
+  title: 'Standard Form', subtitle: 'Scientific notation operations', apiPath: 'stdform-api',
   diffLabels: { easy: 'Easy — Convert', medium: 'Medium — Multiply', hard: 'Hard — Divide', extrahard: 'Extra Hard — Add' },
   placeholders: 'e.g. 3.5 × 10^4', tip: 'Format: a × 10^n',
 })
 
 const BoundsApp = makeQuizApp({
-  title: 'Bounds', subtitle: 'Upper & lower bounds, error intervals', apiPath: 'bounds-api', topicKey: 'bounds',
+  title: 'Bounds', subtitle: 'Upper & lower bounds, error intervals', apiPath: 'bounds-api',
   diffLabels: { easy: 'Easy — Lower bound', medium: 'Medium — Nearest 10', hard: 'Hard — Sum bounds', extrahard: 'Extra Hard — Division bounds' },
   placeholders: 'e.g. 4.25',
 })
 
 const SDTApp = makeQuizApp({
-  title: 'Speed, Distance, Time', subtitle: 'Rate problems & conversions', apiPath: 'sdt-api', topicKey: 'speed-distance-time',
+  title: 'Speed, Distance, Time', subtitle: 'Rate problems & conversions', apiPath: 'sdt-api',
   diffLabels: { easy: 'Easy — Distance', medium: 'Medium — Time', hard: 'Hard — Average speed', extrahard: 'Extra Hard — Convert' },
   placeholders: 'e.g. 120',
 })
 
 const VariationApp = makeQuizApp({
-  title: 'Variation', subtitle: 'Direct & inverse proportion equations', apiPath: 'variation-api', topicKey: 'variation',
+  title: 'Variation', subtitle: 'Direct & inverse proportion equations', apiPath: 'variation-api',
   diffLabels: { easy: 'Easy — Direct (y∝x)', medium: 'Medium — Inverse (y∝1/x)', hard: 'Hard — y∝x²', extrahard: 'Extra Hard — y∝1/√x' },
   placeholders: 'e.g. 24',
 })
 
 const HcfLcmApp = makeQuizApp({
-  title: 'HCF & LCM', subtitle: 'Highest common factor & lowest common multiple', apiPath: 'hcflcm-api', topicKey: 'hcf-and-lcm',
+  title: 'HCF & LCM', subtitle: 'Highest common factor & lowest common multiple', apiPath: 'hcflcm-api',
   diffLabels: { easy: 'Easy — HCF', medium: 'Medium — LCM', hard: 'Hard — Three numbers', extrahard: 'Extra Hard — Word problem' },
   placeholders: 'e.g. 60',
 })
 
 const ProfitLossApp = makeQuizApp({
-  title: 'Profit & Loss', subtitle: 'Cost price, selling price, discounts', apiPath: 'profitloss-api', topicKey: 'profit-and-loss',
+  title: 'Profit & Loss', subtitle: 'Cost price, selling price, discounts', apiPath: 'profitloss-api',
   diffLabels: { easy: 'Easy — Find profit', medium: 'Medium — Profit %', hard: 'Hard — Discount', extrahard: 'Extra Hard — Successive discounts' },
   placeholders: 'e.g. 150',
 })
 
 const RoundingApp = makeQuizApp({
-  title: 'Rounding', subtitle: 'Decimal places, significant figures, estimation', apiPath: 'rounding-api', topicKey: 'rounding',
+  title: 'Rounding', subtitle: 'Decimal places, significant figures, estimation', apiPath: 'rounding-api',
   diffLabels: { easy: 'Easy — Decimal places', medium: 'Medium — Sig. figures', hard: 'Hard — Truncation', extrahard: 'Extra Hard — Estimation' },
   placeholders: 'e.g. 3.14',
 })
 
 const BinomialApp = makeQuizApp({
-  title: 'Binomial Theorem', subtitle: 'Expansions, coefficients, nCr', apiPath: 'binomial-api', topicKey: 'binomial-theorem',
+  title: 'Binomial Theorem', subtitle: 'Expansions, coefficients, nCr', apiPath: 'binomial-api',
   diffLabels: { easy: 'Easy — nCr', medium: 'Medium — (1+x)^n', hard: 'Hard — (a+bx)^n', extrahard: 'Extra Hard — Specific term' },
   placeholders: 'e.g. 210',
 })
 
 const ComplexApp = makeQuizApp({
-  title: 'Complex Numbers', subtitle: 'Add, multiply, modulus of complex numbers', apiPath: 'complex-api', topicKey: 'complex-numbers',
+  title: 'Complex Numbers', subtitle: 'Add, multiply, modulus of complex numbers', apiPath: 'complex-api',
   diffLabels: { easy: 'Easy — Addition', medium: 'Medium — Multiplication', hard: 'Hard — Modulus', extrahard: 'Extra Hard — z²' },
   placeholders: (q, d) => d === 'hard' ? 'e.g. 13' : 'e.g. 3,-2 for 3-2i',
   tip: 'For complex answers give a,b where z = a + bi',
 })
 
 const AnglesApp = makeQuizApp({
-  title: 'Angles', subtitle: 'Lines, points, parallel line angles', apiPath: 'angles-api', topicKey: 'angles',
+  title: 'Angles', subtitle: 'Lines, points, parallel line angles', apiPath: 'angles-api',
   diffLabels: { easy: 'Easy — Straight line', medium: 'Medium — At a point', hard: 'Hard — Vertically opposite', extrahard: 'Extra Hard — Parallel lines' },
   placeholders: 'e.g. 65',
 })
 
 const TrianglesApp = makeQuizApp({
-  title: 'Triangles', subtitle: 'Angle sum, isosceles, exterior angle', apiPath: 'triangles-api', topicKey: 'triangles',
+  title: 'Triangles', subtitle: 'Angle sum, isosceles, exterior angle', apiPath: 'triangles-api',
   diffLabels: { easy: 'Easy — Angle sum', medium: 'Medium — Isosceles', hard: 'Hard — Exterior angle', extrahard: 'Extra Hard — Multi-step' },
   placeholders: 'e.g. 72',
 })
 
 const CongruenceApp = makeQuizApp({
-  title: 'Congruence', subtitle: 'SSS, SAS, ASA, RHS', apiPath: 'congruence-api', topicKey: 'congruence',
+  title: 'Congruence', subtitle: 'SSS, SAS, ASA, RHS', apiPath: 'congruence-api',
   diffLabels: { easy: 'Easy — Find side', medium: 'Medium — Find angle', hard: 'Hard — Name the rule', extrahard: 'Extra Hard — In a figure' },
   placeholders: (q, d) => d === 'hard' ? 'e.g. SAS' : 'e.g. 7',
 })
 
 const PythagApp = makeQuizApp({
-  title: "Pythagoras' Theorem", subtitle: 'Hypotenuse, legs, 3D diagonal', apiPath: 'pythag-api', topicKey: 'pythagoras-theorem',
+  title: "Pythagoras' Theorem", subtitle: 'Hypotenuse, legs, 3D diagonal', apiPath: 'pythag-api',
   diffLabels: { easy: 'Easy — Hypotenuse', medium: 'Medium — Shorter side', hard: 'Hard — Word problem', extrahard: 'Extra Hard — 3D diagonal' },
   placeholders: 'e.g. 13',
 })
 
 const PolygonsApp = makeQuizApp({
-  title: 'Polygons', subtitle: 'Interior & exterior angles, diagonals', apiPath: 'polygons-api', topicKey: 'polygons',
+  title: 'Polygons', subtitle: 'Interior & exterior angles, diagonals', apiPath: 'polygons-api',
   diffLabels: { easy: 'Easy — Angle sum', medium: 'Medium — Each angle', hard: 'Hard — Find sides', extrahard: 'Extra Hard — Diagonals' },
   placeholders: 'e.g. 540',
 })
 
 const SimilarityApp = makeQuizApp({
-  title: 'Similarity', subtitle: 'Scale factor, area & volume ratios', apiPath: 'similarity-api', topicKey: 'similarity',
+  title: 'Similarity', subtitle: 'Scale factor, area & volume ratios', apiPath: 'similarity-api',
   diffLabels: { easy: 'Easy — Missing side', medium: 'Medium — Scale factor', hard: 'Hard — Area ratio', extrahard: 'Extra Hard — Volume ratio' },
   placeholders: 'e.g. 24',
 })
 
 const LinearEqApp = makeQuizApp({
-  title: 'Linear Equations', subtitle: 'Solve for x', apiPath: 'lineareq-api', topicKey: 'linear-equations',
+  title: 'Linear Equations', subtitle: 'Solve for x', apiPath: 'lineareq-api',
   diffLabels: { easy: 'Easy — ax+b=c', medium: 'Medium — ax+b=cx+d', hard: 'Hard — a(bx+c)=d', extrahard: 'Extra Hard — (ax+b)/c=d' },
   placeholders: 'e.g. 3 or -2.5',
 })
 
 const DecimalsApp = makeQuizApp({
-  title: 'Decimals', subtitle: 'Add, subtract, multiply, divide', apiPath: 'decimals-api', topicKey: 'decimals',
+  title: 'Decimals', subtitle: 'Add, subtract, multiply, divide', apiPath: 'decimals-api',
   diffLabels: { easy: 'Easy — Add', medium: 'Medium — Subtract', hard: 'Hard — Multiply', extrahard: 'Extra Hard — Divide' },
   placeholders: 'e.g. 6.1',
 })
 
 const PermCombApp = makeQuizApp({
-  title: 'Perm. & Comb.', subtitle: 'Permutations & combinations', apiPath: 'permcomb-api', topicKey: 'permutations-and-combinations',
+  title: 'Perm. & Comb.', subtitle: 'Permutations & combinations', apiPath: 'permcomb-api',
   diffLabels: { easy: 'Easy — nPr', medium: 'Medium — nCr', hard: 'Hard — Word problems', extrahard: 'Extra Hard — With/without repetition' },
   placeholders: 'e.g. 120',
 })
 
 const LimitsApp = makeQuizApp({
-  title: 'Limits', subtitle: 'Evaluate limits', apiPath: 'limits-api', topicKey: 'limits',
+  title: 'Limits', subtitle: 'Evaluate limits', apiPath: 'limits-api',
   diffLabels: { easy: 'Easy — Direct sub', medium: 'Medium — Factorable', hard: 'Hard — Trig limits', extrahard: 'Extra Hard — Limits at infinity' },
   placeholders: 'e.g. 4 or 0.5',
 })
 
 const InvTrigApp = makeQuizApp({
-  title: 'Inverse Trig', subtitle: 'arcsin, arccos, arctan', apiPath: 'invtrig-api', topicKey: 'inverse-trigonometry',
+  title: 'Inverse Trig', subtitle: 'arcsin, arccos, arctan', apiPath: 'invtrig-api',
   diffLabels: { easy: 'Easy — Basic values', medium: 'Medium — √ values', hard: 'Hard — Compositions', extrahard: 'Extra Hard — Principal values' },
   placeholders: 'e.g. 30 or 45',
 })
 
 const RemFactorApp = makeQuizApp({
-  title: 'Remainder Theorem', subtitle: 'Remainder & factor theorem', apiPath: 'remfactor-api', topicKey: 'remainder-theorem',
+  title: 'Remainder Theorem', subtitle: 'Remainder & factor theorem', apiPath: 'remfactor-api',
   diffLabels: { easy: 'Easy — Remainder (deg 2)', medium: 'Medium — Factor check', hard: 'Hard — Remainder (deg 3)', extrahard: 'Extra Hard — Find k' },
   placeholders: 'e.g. 7 or yes/no',
 })
 
 const HeronApp = makeQuizApp({
-  title: "Heron's Formula", subtitle: 'Triangle area from sides', apiPath: 'heron-api', topicKey: 'herons-formula',
+  title: "Heron's Formula", subtitle: 'Triangle area from sides', apiPath: 'heron-api',
   diffLabels: { easy: 'Easy — Semi-perimeter', medium: 'Medium — Integer area', hard: 'Hard — Decimal area', extrahard: 'Extra Hard — Find side' },
   placeholders: 'e.g. 24',
 })
 
 const SharesApp = makeQuizApp({
-  title: 'Shares & Dividends', subtitle: 'Shares, dividends, returns', apiPath: 'shares-api', topicKey: 'shares-and-dividends',
+  title: 'Shares & Dividends', subtitle: 'Shares, dividends, returns', apiPath: 'shares-api',
   diffLabels: { easy: 'Easy — Find dividend', medium: 'Medium — Income', hard: 'Hard — Return %', extrahard: 'Extra Hard — Buy for target' },
   placeholders: 'e.g. 500',
 })
 
 const BankingApp = makeQuizApp({
-  title: 'Banking (RD)', subtitle: 'Interest & recurring deposits', apiPath: 'banking-api', topicKey: 'banking',
+  title: 'Banking (RD)', subtitle: 'Interest & recurring deposits', apiPath: 'banking-api',
   diffLabels: { easy: 'Easy — Simple interest', medium: 'Medium — Compound interest', hard: 'Hard — RD maturity', extrahard: 'Extra Hard — Find installment' },
   placeholders: 'e.g. 12600',
 })
@@ -54317,19 +48772,6 @@ function GymApp({ onBack }) {
   const [loading, setLoading] = useState(false)
   const [loadError, setLoadError] = useState('')
   const timer = useTimer()
-  const sessionGoal = 'standard'
-  const isAdaptive = true
-  const handleTimeout = async () => {
-    if (revealed) return
-    setIsCorrect(false); setRevealed(true)
-    setFeedback('⏰ Time\'s up!')
-    setResults(prev => [...prev, {
-      question: `[${currentGym?.name || ''} · ${currentDifficulty}] ${question?.prompt || ''}`,
-      userAnswer: '—', correctAnswer: '', correct: false, time: 0,
-    }])
-    lastCorrectRef.current = false
-    consecCorrectRef.current = 0
-  }
   const advanceFnRef = useRef(null)
   const submittedRef = useRef(false)
   const advancedRef = useRef(false)
@@ -54398,7 +48840,7 @@ function GymApp({ onBack }) {
       setSelectedOption(''); setCorrectOption('')
       setFeedback(''); setIsCorrect(null); setRevealed(false)
       submittedRef.current = false; advancedRef.current = false
-      timer.start(sessionGoal, handleTimeout, getSpeedRunLimit(currentDifficulty ?? 'easy', isAdaptive ?? false))
+      timer.start(sessionGoal, handleTimeout, getSpeedRunLimit(difficulty ?? 'easy', isAdaptive ?? false))
     } catch (e) {
       console.error('Failed to load Gym question:', e)
       setQuestion(null)
@@ -54725,7 +49167,7 @@ function GymApp({ onBack }) {
           {GYM_PUZZLE_TYPES.map(renderMasteryRow)}
         </div>
         {question && <div style={{ textAlign: 'center' }}>
-          <div className="question-prompt" style={{ fontSize: '1.3rem', margin: '8px 0 4px', lineHeight: '1.4' }}><GlossaryText text={question.prompt} /></div>
+          <div className="question-prompt" style={{ fontSize: '1.3rem', margin: '8px 0 4px', lineHeight: '1.4' }}>{question.prompt}</div>
           <div className="options-grid" style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: '12px', marginTop: '40px' }}>
             {question.options.map(opt => {
               const isSelected = selectedOption === opt.option
@@ -54778,37 +49220,37 @@ function GymApp({ onBack }) {
 // ──────────────────────────── /Gym ─────────────────────────────
 
 const GSTApp = makeQuizApp({
-  title: 'GST', subtitle: 'Goods & Services Tax', apiPath: 'gst-api', topicKey: 'gst',
+  title: 'GST', subtitle: 'Goods & Services Tax', apiPath: 'gst-api',
   diffLabels: { easy: 'Easy — GST amount', medium: 'Medium — Total with GST', hard: 'Hard — CGST+SGST', extrahard: 'Extra Hard — Input tax credit' },
   placeholders: 'e.g. 180',
 })
 
 const SectionApp = makeQuizApp({
-  title: 'Section Formula', subtitle: 'Midpoint, section, centroid', apiPath: 'section-api', topicKey: 'section-formula',
+  title: 'Section Formula', subtitle: 'Midpoint, section, centroid', apiPath: 'section-api',
   diffLabels: { easy: 'Easy — Midpoint', medium: 'Medium — Internal division', hard: 'Hard — Find ratio', extrahard: 'Extra Hard — Centroid' },
   placeholders: 'e.g. 3,5',
 })
 
 const LinProgApp = makeQuizApp({
-  title: 'Linear Programming', subtitle: 'Optimize objective functions', apiPath: 'linprog-api', topicKey: 'linear-programming',
+  title: 'Linear Programming', subtitle: 'Optimize objective functions', apiPath: 'linprog-api',
   diffLabels: { easy: 'Easy — Evaluate at vertex', medium: 'Medium — Max from vertices', hard: 'Hard — 2-constraint LP', extrahard: 'Extra Hard — 3-constraint LP' },
   placeholders: 'e.g. 42',
 })
 
 const CircMeasureApp = makeQuizApp({
-  title: 'Circular Measure', subtitle: 'Radians, arc length, sectors', apiPath: 'circmeasure-api', topicKey: 'circular-measure',
+  title: 'Circular Measure', subtitle: 'Radians, arc length, sectors', apiPath: 'circmeasure-api',
   diffLabels: { easy: 'Easy — Deg→Rad', medium: 'Medium — Rad→Deg', hard: 'Hard — Arc length', extrahard: 'Extra Hard — Sector area' },
   placeholders: 'e.g. 1.57',
 })
 
 const ConicsApp = makeQuizApp({
-  title: 'Conic Sections', subtitle: 'Circle, parabola, ellipse, hyperbola', apiPath: 'conics-api', topicKey: 'conic-sections',
+  title: 'Conic Sections', subtitle: 'Circle, parabola, ellipse, hyperbola', apiPath: 'conics-api',
   diffLabels: { easy: 'Easy — Identify conic', medium: 'Medium — Circle radius', hard: 'Hard — Eccentricity', extrahard: 'Extra Hard — Focus of parabola' },
   placeholders: (q, d) => d === 'easy' ? 'e.g. circle' : 'e.g. 5',
 })
 
 const DiffEqApp = makeQuizApp({
-  title: 'Differential Equations', subtitle: 'Order, degree, solve DEs', apiPath: 'diffeq-api', topicKey: 'differential-equations',
+  title: 'Differential Equations', subtitle: 'Order, degree, solve DEs', apiPath: 'diffeq-api',
   diffLabels: { easy: 'Easy — Find order', medium: 'Medium — Find degree', hard: 'Hard — Verify solution', extrahard: 'Extra Hard — Solve separable' },
   placeholders: (q, d) => d === 'hard' ? 'yes or no' : 'e.g. 2',
 })
@@ -55625,7 +50067,6 @@ const loadQuestion = async () => {
     <QuizLayout title="Squaring" subtitle="(a + b)² = a² + 2ab + b²" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Square numbers quickly using the identity (a + b)² = a² + 2ab + b²</p>
-        <KeyTerms topicKey="squaring" />
         <p style={{ fontSize: '0.85rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Split any number into a round part (a) and remainder (b), then fill in all four boxes.</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
           {DIFFS.map(d => (
@@ -56407,7 +50848,7 @@ function RandomMixApp({ onBack, isGoalMode = false }) {
       {!loading && question && (
         <>
           <div className="question-box">
-            <GlossaryText text={getPromptForType(currentTopic.key, question) || question.prompt || ''} />
+            {getPromptForType(currentTopic.key, question) || question.prompt || ''}
           </div>
 
           <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
@@ -56610,7 +51051,6 @@ const loadQuestion = async () => {
     <QuizLayout title="Sets" subtitle="Union, intersection, Venn diagrams" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice sets and Venn diagrams!</p>
-        <KeyTerms topicKey="sets" />
         <p style={{ fontSize: '0.85rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>For listing elements, type like: 1, 3, 5 or {'{'}1, 3, 5{'}'}</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
           {['easy', 'medium', 'hard', 'extrahard'].map(d => (
@@ -56679,7 +51119,7 @@ const loadQuestion = async () => {
         </div>
         {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
         {question && <div style={{ textAlign: 'center' }}>
-          <div className="question-prompt" style={{ fontSize: '1.3rem', margin: '20px 0', lineHeight: '1.6' }}><GlossaryText text={question.prompt} /></div>
+          <div className="question-prompt" style={{ fontSize: '1.3rem', margin: '20px 0', lineHeight: '1.6' }}>{question.prompt}</div>
           <input className="answer-input" type="text" value={answer} onChange={e => { if (!revealed) setAnswer(e.target.value) }} disabled={revealed} placeholder={question.type === 'list' ? 'e.g. {1, 3, 5} or empty' : 'e.g. 12'} onKeyDown={handleKeyDown} autoFocus />
         </div>}
         {renderFeedback(feedback, isCorrect)}
@@ -56838,7 +51278,6 @@ const loadQuestion = async () => {
     <QuizLayout title="Sequences & Series" subtitle="Arithmetic & geometric" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice sequences and series!</p>
-        <KeyTerms topicKey="sequences" />
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
           {['easy', 'medium', 'hard', 'extrahard'].map(d => (
             <label key={d} className={`checkbox-pill${!isAdaptive && difficulty === d ? ' active' : ''}`}>
@@ -56906,7 +51345,7 @@ const loadQuestion = async () => {
         </div>
         {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
         {question && <div style={{ textAlign: 'center' }}>
-          <div className="question-prompt" style={{ fontSize: '1.4rem', margin: '20px 0' }}><GlossaryText text={question.prompt} /></div>
+          <div className="question-prompt" style={{ fontSize: '1.4rem', margin: '20px 0' }}>{question.prompt}</div>
           <input className="answer-input" type="text" value={answer} onChange={e => { if (!revealed) setAnswer(e.target.value) }} disabled={revealed} placeholder="e.g. 42 or 3/4" onKeyDown={handleKeyDown} autoFocus />
         </div>}
         {renderFeedback(feedback, isCorrect)}
@@ -56930,7 +51369,7 @@ const loadQuestion = async () => {
 }
 
 /* ── Ratio & Proportion App ────────────────────────── */
-function RatioApp({ onBack, completedTopics = [], goldMastery = [], markTopicCompleted, markGoldMastery, updateCoins, setMode, setTransferTopic, isGoalMode = false }) {
+function RatioApp({ onBack, isGoalMode = false }) {
   const [difficulty, setDifficulty] = useState('easy')
   const [isAdaptive, setIsAdaptive] = useState(false)
   const [adaptScore, setAdaptScore] = useState(0)
@@ -56938,16 +51377,6 @@ function RatioApp({ onBack, completedTopics = [], goldMastery = [], markTopicCom
   const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
   const [started, setStarted] = useState(false)
   const [finished, setFinished] = useState(false)
-
-  useEffect(() => {
-    if (finished) {
-      const pass = score / totalQ >= 0.8
-      if (pass && markTopicCompleted) {
-        markTopicCompleted('ratio', isAdaptive ? 'adaptive' : difficulty)
-      }
-    }
-  }, [finished])
-
   const [question, setQuestion] = useState(null)
   const [answer, setAnswer] = useState('')
   const [score, setScore] = useState(0)
@@ -57091,7 +51520,6 @@ const loadQuestion = async () => {
     <QuizLayout title="Ratio & Proportion" subtitle="Simplify, divide, direct & inverse" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice ratio and proportion!</p>
-        <KeyTerms topicKey="ratios" />
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
           {['easy', 'medium', 'hard', 'extrahard'].map(d => (
             <label key={d} className={`checkbox-pill${!isAdaptive && difficulty === d ? ' active' : ''}`}>
@@ -57151,31 +51579,6 @@ const loadQuestion = async () => {
           <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={e => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} />
         </div>
         <div className="button-row"><button onClick={startQuiz}>Start Quiz</button></div>
-        {isStage3Completed('ratio', completedTopics) && (
-          <div className="transfer-cta-box" style={{ marginTop: '20px', padding: '16px', background: 'var(--clr-hover, rgba(255,255,255,0.03))', borderRadius: '10px', border: '1px solid var(--clr-border)', textAlign: 'center' }}>
-            <p style={{ margin: '0 0 12px', fontSize: '0.9rem', color: 'var(--clr-text-soft)', lineHeight: '1.4' }}>
-              {goldMastery.includes('ratio') ? (
-                <>🥇 You have achieved Gold Mastery for this topic!</>
-              ) : (
-                <>🎉 You have completed Stage 3 Practice for this topic!</>
-              )}
-            </p>
-            <button
-              className="btn-transfer-cta"
-              onClick={() => {
-                if (setTransferTopic) setTransferTopic('ratio')
-                if (setMode) setMode('transfer')
-              }}
-              style={{ width: '100%', padding: '10px', background: 'linear-gradient(135deg, #FFD700, #FFA500)', color: '#000', fontWeight: 'bold', border: 'none', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
-            >
-              {goldMastery.includes('ratio') ? (
-                <>🔄 Revisit Transfer Challenge (Stage 4) 🥇</>
-              ) : (
-                <>🚀 Start Transfer Challenge (Stage 4) 🥇</>
-              )}
-            </button>
-          </div>
-        )}
       </div>}
       {started && !finished && <>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.3rem' }}>
@@ -57184,7 +51587,7 @@ const loadQuestion = async () => {
         </div>
         {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
         {question && <div style={{ textAlign: 'center' }}>
-          <div className="question-prompt" style={{ fontSize: '1.4rem', margin: '20px 0' }}><GlossaryText text={question.prompt} /></div>
+          <div className="question-prompt" style={{ fontSize: '1.4rem', margin: '20px 0' }}>{question.prompt}</div>
           <input className="answer-input" type="text" value={answer} onChange={e => { if (!revealed) setAnswer(e.target.value) }} disabled={revealed} placeholder={placeholders[isAdaptive ? adaptiveLevel(adaptScore) : difficulty] || 'Type your answer'} onKeyDown={handleKeyDown} autoFocus />
         </div>}
         {renderFeedback(feedback, isCorrect)}
@@ -57208,1008 +51611,246 @@ const loadQuestion = async () => {
 }
 
 /* ── Percentages App ────────────────────────────────── */
-
-/* ── Percentages App Helpers ─────────────────────────── */
-const cleanAndParseNum = (str) => {
-  if (!str) return NaN;
-  const cleaned = str.trim().replace(/\s+/g, '').replace(/[%₹$,]/g, '').replace(/−/g, '-');
-  if (cleaned.includes('/')) {
-    const parts = cleaned.split('/');
-    if (parts.length === 2) {
-      const num = parseFloat(parts[0]);
-      const den = parseFloat(parts[1]);
-      if (!isNaN(num) && !isNaN(den) && den !== 0) {
-        return num / den;
-      }
-    }
-    return NaN;
-  }
-  return parseFloat(cleaned);
-};
-
-
-
-const triggerConfetti = () => {
-  const container = document.createElement('div');
-  container.style.position = 'fixed';
-  container.style.top = '0';
-  container.style.left = '0';
-  container.style.width = '100vw';
-  container.style.height = '100vh';
-  container.style.pointerEvents = 'none';
-  container.style.zIndex = '99999';
-  document.body.appendChild(container);
-
-  const colors = ['#FFC107', '#FF5722', '#E91E63', '#9C27B0', '#3F51B5', '#00BCD4', '#4CAF50', '#8BC34A', '#FF4081'];
-  for (let i = 0; i < 40; i++) { // More confetti particles!
-    const p = document.createElement('div');
-    p.className = 'quiz-confetti-particle';
-    p.style.left = `${10 + Math.random() * 80}vw`;
-    p.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-    p.style.width = `${8 + Math.random() * 10}px`;
-    p.style.height = `${12 + Math.random() * 10}px`;
-    p.style.animationDelay = `${Math.random() * 0.5}s`;
-    container.appendChild(p);
-  }
-
-  setTimeout(() => {
-    document.body.removeChild(container);
-  }, 3000);
-};
-
-const generateFindQuestion = () => {
-  const pcts = [5, 10, 15, 20, 25, 30, 40, 50, 60, 75, 80, 90];
-  const wholes = [40, 50, 60, 80, 100, 120, 150, 200, 250, 300, 400, 500, 600, 800, 1000];
-  let pct, whole, answer;
-  let attempts = 0;
-  do {
-    pct = pcts[Math.floor(Math.random() * pcts.length)];
-    whole = wholes[Math.floor(Math.random() * wholes.length)];
-    answer = (pct * whole) / 100;
-    attempts++;
-  } while (!Number.isInteger(answer) && attempts < 100);
-
-  if (!Number.isInteger(answer)) {
-    pct = 20;
-    whole = 150;
-    answer = 30;
-  }
-
-  const decimal = pct / 100;
-  const gcd = (a, b) => b ? gcd(b, a % b) : a;
-  const d = gcd(pct, 100);
-  const simplifiedFrac = `${pct / d}/${100 / d}`;
-
-  const acceptedStep1 = [
-    String(decimal),
-    decimal.toFixed(2),
-    `${pct}/100`,
-    simplifiedFrac
-  ];
-  if (String(decimal).length === 3) {
-    acceptedStep1.push(decimal.toFixed(2));
-
-  }
-
-  return {
-    id: `find-${Date.now()}-${Math.random()}`,
-    level: 'find',
-    pct,
-    whole,
-    prompt: `What is ${pct}% of ${whole}?`,
-    answer: String(answer),
-    steps: [
-      {
-        id: 'step1',
-        skill: 'convert_percent_to_decimal',
-        prompt: `Turn ${pct}% into a decimal! 📝`,
-        placeholder: 'e.g., 0.4 or 40/100',
-        acceptedAnswers: acceptedStep1,
-        method: `${pct}% means ${pct} out of 100.\n\nSo we write it as ${pct} ÷ 100.\n\nThat gives us ✅ ${decimal}!`
-      },
-      {
-        id: 'step2',
-        skill: 'multiply_by_whole',
-        prompt: `Now multiply that decimal by the whole number: ${decimal} × ${whole} 🚀`,
-        placeholder: 'Type the answer',
-        acceptedAnswers: [String(answer)],
-        method: `We take our decimal ${decimal} and multiply it by ${whole}.\n\nSo ${decimal} × ${whole} = ✅ ${answer}!`
-      }
-    ],
-    explanation: `Let's see how we solved it:\n\n1. Turn the percent into a decimal:\n${pct}% = ${decimal}\n\n2. Multiply the decimal by our whole number:\n${decimal} × ${whole} = ${answer}!`
-  };
-};
-
-const PERCENT_SKILL_LABELS = {
-  convert_percent_to_decimal: 'turning a percent into a decimal',
-  multiply_by_whole: 'multiplying by the whole',
-};
-
-const PERCENT_SKILL_EXPLANATION_TARGETS = {
-  convert_percent_to_decimal: 'convert',
-  multiply_by_whole: 'multiply',
-};
-
-const PERCENT_COLLECTIBLES = ['Moon Badge', 'Jungle Leaf', 'Rocket Chip', 'Rainbow Tile', 'Treasure Key'];
-
-const makeMistakeRecord = () => ({ questionIds: [], escalatedQuestionIds: [] });
-
-const makePercentMistakeHistory = () => ({
-  convert_percent_to_decimal: makeMistakeRecord(),
-  multiply_by_whole: makeMistakeRecord(),
-});
-
-const makeStepwiseState = (question) => ({
-  questionId: question?.id || null,
-  currentStepIndex: 0,
-  answers: ['', ''],
-  checked: [false, false],
-  correct: [null, null],
-  showRecap: false
-});
-
-const generateFindDiagnosticQuestion = (skill) => {
-  const base = generateFindQuestion();
-  const step = base.steps.find(s => s.skill === skill) || base.steps[0];
-
-  if (skill === 'convert_percent_to_decimal') {
-    return {
-      ...base,
-      id: `diagnostic-${skill}-${base.id}`,
-      diagnosticSkill: skill,
-      prompt: `Turn ${base.pct}% into a decimal! 📝`,
-      answer: String(base.pct / 100),
-      acceptedAnswers: step.acceptedAnswers,
-      explanation: step.method,
-    };
-  }
-
-  return {
-    ...base,
-    id: `diagnostic-${skill}-${base.id}`,
-    diagnosticSkill: skill,
-    prompt: `Multiply ${base.pct / 100} by ${base.whole}. 🚀`,
-    answer: base.answer,
-    acceptedAnswers: step.acceptedAnswers,
-    explanation: step.method,
-  };
-};
-
-function PercentApp({
-  onBack,
-  onRedirectToExplanation,
-  quizSession,
-  setQuizSession,
-  mistakeHistory = makePercentMistakeHistory(),
-  setMistakeHistory,
-  pendingEscalationSkill,
-  setPendingEscalationSkill,
-}) {
-  const restored = quizSession || {};
-  const [currentQuestion, setCurrentQuestion] = useState(() => restored.currentQuestion || generateFindQuestion());
-  const [diagnosticQuestion, setDiagnosticQuestion] = useState(() => (
-    restored.diagnosticQuestion || (pendingEscalationSkill ? generateFindDiagnosticQuestion(pendingEscalationSkill) : null)
-  ));
-  const [userAnswer, setUserAnswer] = useState(restored.userAnswer || '');
-  const [mode, setMode] = useState(() => pendingEscalationSkill ? 'escalated_check' : (restored.mode || 'normal'));
-  const [correctCount, setCorrectCount] = useState(restored.correctCount || 0);
-
-  const [stepwiseState, setStepwiseState] = useState(() => restored.stepwiseState || makeStepwiseState(restored.currentQuestion));
-  const [escalatedStepType, setEscalatedStepType] = useState(null);
-
-  const [soundEnabled, setSoundEnabled] = useState(restored.soundEnabled ?? true);
-  const [showSolutionAccordion, setShowSolutionAccordion] = useState(restored.showSolutionAccordion || false);
-  const [shake, setShake] = useState(false);
-  const [isCorrectFirstTry, setIsCorrectFirstTry] = useState(restored.isCorrectFirstTry ?? null);
-  const [submitted, setSubmitted] = useState(restored.submitted || false);
-  const [isCheckSuccess, setIsCheckSuccess] = useState(null);
-  const [xp, setXp] = useState(restored.xp || 0);
-  const [gems, setGems] = useState(restored.gems || 0);
-  const [streak, setStreak] = useState(restored.streak || 0);
-  const [collection, setCollection] = useState(restored.collection || []);
-  const [rewardToast, setRewardToast] = useState(null);
-
-  // New kid-friendly feedback states
-  const [starAnimating, setStarAnimating] = useState(null);
-  const [mascotExpression, setMascotExpression] = useState('idle');
-
-  const activeQuestion = mode === 'escalated_check' ? diagnosticQuestion : currentQuestion;
-
-  const buildSession = (overrides = {}) => ({
-    currentQuestion,
-    diagnosticQuestion,
-    userAnswer,
-    mode,
-    correctCount,
-    stepwiseState,
-    soundEnabled,
-    showSolutionAccordion,
-    isCorrectFirstTry,
-    submitted,
-    xp,
-    gems,
-    streak,
-    collection,
-    ...overrides,
-  });
-
+function PercentApp({ onBack, isGoalMode = false }) {
+  const [difficulty, setDifficulty] = useState('easy')
+  const [isAdaptive, setIsAdaptive] = useState(false)
+  const [adaptScore, setAdaptScore] = useState(0)
+  const adaptScoreRef = useRef(0)
+  const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
+  const [started, setStarted] = useState(false)
+  const [finished, setFinished] = useState(false)
+  const [question, setQuestion] = useState(null)
+  const [answer, setAnswer] = useState('')
+  const [score, setScore] = useState(0)
+  const [questionNumber, setQuestionNumber] = useState(0)
+  const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)
+  const [feedback, setFeedback] = useState('')
+  const [isCorrect, setIsCorrect] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [revealed, setRevealed] = useState(false)
+  const [results, setResults] = useState([])
+  const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
   useEffect(() => {
-    if (!setQuizSession) return;
-    setQuizSession(buildSession());
-  }, [
-    currentQuestion,
-    diagnosticQuestion,
-    userAnswer,
-    mode,
-    correctCount,
-    stepwiseState,
-    soundEnabled,
-    showSolutionAccordion,
-    isCorrectFirstTry,
-    submitted,
-    xp,
-    gems,
-    streak,
-    collection,
-    setQuizSession,
-  ]);
-
-
-  useEffect(() => {
-    if (!pendingEscalationSkill) return;
-    setMode('escalated_check');
-    setDiagnosticQuestion(generateFindDiagnosticQuestion(pendingEscalationSkill));
-    setUserAnswer('');
-    setSubmitted(false);
-    setIsCheckSuccess(null);
-    setShowSolutionAccordion(false);
-  }, [pendingEscalationSkill]);
-
-  useEffect(() => {
-    if (mode !== 'stepwise' || !currentQuestion) return;
-    if (stepwiseState.questionId !== currentQuestion.id) {
-      setStepwiseState(makeStepwiseState(currentQuestion));
+    if (!isGoalMode) {
+      setSessionGoal('standard');
     }
-  }, [mode, currentQuestion, stepwiseState.questionId]);
+  }, [isGoalMode]);
+  const timer = useTimer()
+  const advanceFnRef = useRef(null)
+  const advancedRef = useRef(false)
+  const submittedRef = useRef(false)
 
-  const awardReward = (label, amount = 5, collectible = null) => {
-    setXp(prev => prev + amount);
-    setGems(prev => prev + 1);
-    if (collectible) {
-      setCollection(prev => prev.includes(collectible) ? prev : [...prev, collectible]);
-    }
-    setRewardToast({ label, amount, collectible });
-    setTimeout(() => setRewardToast(null), 2200);
-  };
+  const effectiveDiff = () => (isAdaptive) ? adaptiveLevel(adaptScoreRef.current) : difficulty
 
-  const maybeCollectible = (nextCorrectCount) => (
-    PERCENT_COLLECTIBLES[(nextCorrectCount - 1) % PERCENT_COLLECTIBLES.length]
-  );
-
-  const handleSubmit = () => {
-    if (!currentQuestion || submitted) return;
-    const userParsed = cleanAndParseNum(userAnswer);
-    const expected = parseFloat(currentQuestion.answer);
-    if (isNaN(userParsed)) return;
-
-    setSubmitted(true);
-    const correct = Math.abs(userParsed - expected) <= 0.01;
-
-    if (correct) {
-      setIsCorrectFirstTry(true);
-      playSound('correct', soundEnabled);
-      triggerConfetti();
-      
-      setMascotExpression('cheering');
-      setStarAnimating(correctCount);
-      setTimeout(() => {
-        setMascotExpression('idle');
-        setStarAnimating(null);
-      }, 2000);
-
-      setCorrectCount(prev => prev + 1);
-      setStreak(prev => prev + 1);
-      awardReward('Quest star earned!', 12, maybeCollectible(correctCount + 1));
-    } else {
-      setIsCorrectFirstTry(false);
-      playSound('wrong', soundEnabled);
-      setShake(true);
-      
-      setMascotExpression('sad');
-      setTimeout(() => setMascotExpression('idle'), 2000);
-
-      setTimeout(() => setShake(false), 500);
-      awardReward('Clue path unlocked!', 4);
-
-      setTimeout(() => {
-        setMode('stepwise');
-        setStepwiseState(makeStepwiseState(currentQuestion));
-      }, 800);
-    }
-  };
-
-  const recordSkillMistake = (skill, questionId) => {
-    const existing = mistakeHistory?.[skill] || makeMistakeRecord();
-    const questionIds = existing.questionIds || [];
-    const escalatedQuestionIds = existing.escalatedQuestionIds || [];
-    const alreadyTrackedForQuestion = questionIds.includes(questionId);
-    const alreadyEscalatedForQuestion = escalatedQuestionIds.includes(questionId);
-    const nextQuestionIds = alreadyTrackedForQuestion ? questionIds : [...questionIds, questionId];
-    const shouldEscalate = !alreadyTrackedForQuestion && nextQuestionIds.length >= 2 && !alreadyEscalatedForQuestion;
-
-    if (setMistakeHistory) {
-      setMistakeHistory(prev => {
-        const prevRecord = prev?.[skill] || makeMistakeRecord();
-        const prevQuestionIds = prevRecord.questionIds || [];
-        const prevEscalatedIds = prevRecord.escalatedQuestionIds || [];
-        const mergedQuestionIds = prevQuestionIds.includes(questionId)
-          ? prevQuestionIds
-          : [...prevQuestionIds, questionId];
-        const mergedEscalatedIds = shouldEscalate && !prevEscalatedIds.includes(questionId)
-          ? [...prevEscalatedIds, questionId]
-          : prevEscalatedIds;
-
-        return {
-          ...makePercentMistakeHistory(),
-          ...prev,
-          [skill]: {
-            questionIds: mergedQuestionIds,
-            escalatedQuestionIds: mergedEscalatedIds,
-          },
-        };
-      });
-    }
-
-    return shouldEscalate;
-  };
-
-  const handleStepSubmit = (stepIndex) => {
-    if (!currentQuestion || stepwiseState.questionId !== currentQuestion.id) return;
-    const step = currentQuestion.steps[stepIndex];
-    const userVal = stepwiseState.answers[stepIndex];
-    const userParsed = cleanAndParseNum(userVal);
-
-    if (isNaN(userParsed)) return;
-
-    const isStepCorrect = step.acceptedAnswers.some(acc => {
-      const accParsed = cleanAndParseNum(acc);
-      return Math.abs(userParsed - accParsed) <= 0.001;
-    });
-
-    const nextCorrect = [...stepwiseState.correct];
-    nextCorrect[stepIndex] = isStepCorrect;
-
-    const nextChecked = [...stepwiseState.checked];
-    nextChecked[stepIndex] = true;
-
-    if (isStepCorrect) {
-      playSound('correct', soundEnabled);
-      setStreak(prev => prev + 1);
-      
-      setMascotExpression('cheering');
-      setTimeout(() => setMascotExpression('idle'), 2000);
-
-      awardReward(stepIndex === 0 ? 'Decoded!' : 'Super Math Power!', 6);
-      setStepwiseState(prev => ({
-        ...prev,
-        correct: nextCorrect,
-        checked: nextChecked,
-        currentStepIndex: stepIndex === 0 ? 1 : prev.currentStepIndex,
-        showRecap: stepIndex === 1 ? true : prev.showRecap
-      }));
-    } else {
-      playSound('wrong', soundEnabled);
-      
-      setMascotExpression('sad');
-      setTimeout(() => setMascotExpression('idle'), 2000);
-
-      const shouldEscalate = recordSkillMistake(step.skill, currentQuestion.id);
-      awardReward(shouldEscalate ? 'Training map opened!' : 'Hint spark found!', shouldEscalate ? 3 : 2);
-
-      if (shouldEscalate) {
-        setEscalatedStepType(step.skill);
-        setStepwiseState(prev => ({ ...prev, correct: nextCorrect, checked: nextChecked }));
-      } else {
-        setStepwiseState(prev => ({
-          ...prev,
-          correct: nextCorrect,
-          checked: nextChecked,
-          showRecap: stepIndex === 1 ? true : prev.showRecap
-        }));
-
+  
+  const handleTimeout = async () => {
+    if (typeof revealed !== 'undefined' && revealed) return
+    if (typeof finished !== 'undefined' && finished) return
+    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
+    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
+    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
+    try {
+      const r = await fetch(`${API}/percent-api/check`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
+        body: JSON.stringify({ ...(typeof question !== 'undefined' ? question : {}), userAnswer: '', answer: '', sessionGoal })
+      })
+      const d = await r.json()
+      if (sessionGoal === 'perfect') {
+        try { setFinished(true); timer.reset() } catch(_) {}
       }
-    }
-  };
-
-
-  const handleStepwiseContinue = (stepIndex) => {
-    if (stepIndex === 0) {
-      setStepwiseState(prev => ({ ...prev, currentStepIndex: 1 }));
-    } else {
-      setStepwiseState(prev => ({ ...prev, showRecap: true }));
-    }
-  };
-
-  const handleCheckSubmit = () => {
-    if (!diagnosticQuestion || submitted) return;
-    const userParsed = cleanAndParseNum(userAnswer);
-    if (isNaN(userParsed)) return;
-
-    setSubmitted(true);
-    const acceptedAnswers = diagnosticQuestion.acceptedAnswers || [diagnosticQuestion.answer];
-    const correct = acceptedAnswers.some(acc => {
-      const expected = cleanAndParseNum(acc);
-      return Math.abs(userParsed - expected) <= 0.01;
-    });
-
-    if (correct) {
-      setIsCheckSuccess(true);
-      playSound('correct', soundEnabled);
-      triggerConfetti();
-
-      setMascotExpression('cheering');
-      setTimeout(() => setMascotExpression('idle'), 2000);
-
-      setStreak(prev => prev + 1);
-      awardReward('Training badge powered up!', 8);
-    } else {
-      setIsCheckSuccess(false);
-      playSound('wrong', soundEnabled);
-      setShake(true);
-
-      setMascotExpression('sad');
-      setTimeout(() => setMascotExpression('idle'), 2000);
-
-      setTimeout(() => setShake(false), 500);
-      awardReward('Practice clue saved!', 2);
-    }
-  };
-
-  const handleNextCheckQuestion = () => {
-    const clearedSkill = pendingEscalationSkill || diagnosticQuestion?.diagnosticSkill;
-    if (clearedSkill && setMistakeHistory) {
-      setMistakeHistory(prev => ({
-        ...makePercentMistakeHistory(),
-        ...prev,
-        [clearedSkill]: makeMistakeRecord(),
-      }));
-    }
-    if (setPendingEscalationSkill) setPendingEscalationSkill(null);
-    setMode('normal');
-    setIsCheckSuccess(null);
-    setSubmitted(false);
-    setUserAnswer('');
-    setIsCorrectFirstTry(null);
-    setDiagnosticQuestion(null);
-    const nextQuestion = generateFindQuestion();
-    setCurrentQuestion(nextQuestion);
-    setStepwiseState(makeStepwiseState(nextQuestion));
-  };
-
-  const handleReviewCheck = () => {
-    const skill = pendingEscalationSkill || diagnosticQuestion?.diagnosticSkill || 'convert_percent_to_decimal';
-    if (setPendingEscalationSkill) setPendingEscalationSkill(skill);
-    if (setQuizSession) {
-      setQuizSession(buildSession({
-        diagnosticQuestion: null,
-        userAnswer: '',
-        submitted: false,
-        mode: 'normal',
-      }));
-    }
-    onRedirectToExplanation(PERCENT_SKILL_EXPLANATION_TARGETS[skill] || 'convert');
-  };
-
-  const handleNextQuestion = () => {
-    const nextQuestion = generateFindQuestion();
-    setUserAnswer('');
-    setSubmitted(false);
-    setIsCorrectFirstTry(null);
-    setShowSolutionAccordion(false);
-    setDiagnosticQuestion(null);
-    setCurrentQuestion(nextQuestion);
-    setStepwiseState(makeStepwiseState(nextQuestion));
-  };
-
-  const handleNextQuestionStepwise = () => {
-    const nextQuestion = generateFindQuestion();
-    setMode('normal');
-    setSubmitted(false);
-    setUserAnswer('');
-    setIsCorrectFirstTry(null);
-    setDiagnosticQuestion(null);
-    setCurrentQuestion(nextQuestion);
-    setStepwiseState(makeStepwiseState(nextQuestion));
-  };
-
-  const getQuestMascotMessage = () => {
-    if (escalatedStepType) {
-      return 'Let us take a quick break to practice this concept together!';
-    }
-    if (mode === 'escalated_check') {
-      if (submitted) {
-        return isCheckSuccess
-          ? 'Fantastic job! You solved it!'
-          : 'Let us try a quick practice question to get comfortable.';
-
-      }
-      return 'Let us do a fun training game to power up your skills!';
-    }
-    if (mode === 'stepwise') {
-      if (stepwiseState.showRecap) {
-        return 'Awesome step-by-step solving! Let us review the recap.';
-      }
-      const activeStepIdx = stepwiseState.currentStepIndex;
-      const stepChecked = stepwiseState.checked[activeStepIdx];
-      const stepCorrect = stepwiseState.correct[activeStepIdx];
-
-      if (stepChecked) {
-        return stepCorrect
-          ? 'Perfect! You nailed this step!'
-          : 'Let us check the method below to see how it is done!';
-      }
-      return activeStepIdx === 0
-        ? 'First, let us turn the percentage into a decimal!'
-        : 'Awesome! Now multiply that decimal by the whole number!';
-    }
-    if (submitted) {
-      return isCorrectFirstTry
-        ? 'Amazing! You got it right on the first try!'
-        : 'No worries, let us solve it together using clues!';
-    }
-    return 'Welcome to Percent Island! Find the parts, collect gems, and earn badges!';
-  };
-
-  const renderBadge = (item, idx) => {
-    const isUnlocked = collection.includes(item);
-    const isNext = !isUnlocked && idx === correctCount;
-
-    let emoji = '❓';
-    if (item === 'Moon Badge') emoji = '🌙';
-    else if (item === 'Jungle Leaf') emoji = '🌿';
-    else if (item === 'Rocket Chip') emoji = '🚀';
-    else if (item === 'Rainbow Tile') emoji = '🌈';
-    else if (item === 'Treasure Key') emoji = '🔑';
-
-    let cardClass = 'percentages-collection-item locked';
-    if (isUnlocked) {
-      cardClass = 'percentages-collection-item unlocked';
-    } else if (isNext) {
-      cardClass = 'percentages-collection-item glowing-next';
-    }
-
-    return (
-      <div key={item} className={cardClass} title={isUnlocked ? item : 'Mystery Badge'}>
-        <span className="badge-emoji">{isUnlocked ? emoji : isNext ? '❓✨' : '❓'}</span>
-        <span className="badge-name">{isUnlocked ? item : 'Mystery'}</span>
-      </div>
-    );
-  };
-
-  const mascotEmoji = mascotExpression === 'cheering' ? '🦉🎉' : mascotExpression === 'sad' ? '🦉📖' : '🦉';
-
-  if (correctCount >= 3) {
-    return (
-      <div className="percentages-app-theme">
-        <QuizLayout title="Percentages" subtitle="Find a Percentage" onBack={onBack}>
-          <div className="percentages-success-view percentages-pop-in">
-            <div className="percentages-success-icon">🏆</div>
-            <h2 style={{ fontSize: '2.2rem', marginBottom: '10px' }}>Level 1 Completed!</h2>
-            <p style={{ fontSize: '1.25rem', color: 'var(--clr-text-soft)', marginBottom: '30px' }}>
-              Fantastic! You earned 3 stars and mastered finding percentages!
-            </p>
-            <div className="percentages-finale-panel">
-              <div>
-                <strong>{xp}</strong>
-                <span>Total XP</span>
-              </div>
-              <div>
-                <strong>{gems}</strong>
-                <span>Gems Earned</span>
-              </div>
-              <div>
-                <strong>{collection.length}</strong>
-                <span>Badges Won</span>
-              </div>
-            </div>
-            <div className="percentages-collection-shelf finale" aria-label="Final collection shelf">
-              {PERCENT_COLLECTIBLES.map((item, idx) => renderBadge(item, idx))}
-            </div>
-            <div className="button-row" style={{ justifyContent: 'center', gap: '20px' }}>
-              <button
-                className="percentages-btn"
-                onClick={() => {
-                  const nextQuestion = generateFindQuestion();
-                  setCorrectCount(0);
-                  setMode('normal');
-                  setSubmitted(false);
-                  setUserAnswer('');
-                  setIsCorrectFirstTry(null);
-                  setDiagnosticQuestion(null);
-                  setIsCheckSuccess(null);
-                  setEscalatedStepType(null);
-                  setShowSolutionAccordion(false);
-                  setCurrentQuestion(nextQuestion);
-                  setStepwiseState(makeStepwiseState(nextQuestion));
-                  setXp(0);
-                  setGems(0);
-                  setStreak(0);
-                  setCollection([]);
-                  setRewardToast(null);
-                  if (setPendingEscalationSkill) setPendingEscalationSkill(null);
-                  if (setMistakeHistory) setMistakeHistory(makePercentMistakeHistory());
-                }}
-              >
-                Play Again 🔄
-              </button>
-              <button
-                className="percentages-btn percentages-btn-secondary"
-                onClick={onBack}
-              >
-                Back to Map 🗺️
-              </button>
-            </div>
-          </div>
-        </QuizLayout>
-      </div>
-    );
+    } catch(e) { console.error('handleTimeout error:', e) }
   }
+
+const loadQuestion = async () => {
+    setLoading(true)
+    try {
+      const r = await fetch(`${API}/percent-api/question?difficulty=${effectiveDiff()}&goal=${sessionGoal}`, { headers: { 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' } })
+      const data = await r.json()
+      setQuestion(data)
+      setAnswer('')
+      setFeedback('')
+      setIsCorrect(null)
+      setRevealed(false)
+      submittedRef.current = false
+      advancedRef.current = false
+      timer.start(sessionGoal, handleTimeout, getSpeedRunLimit(difficulty ?? 'easy', isAdaptive ?? false))
+    } catch (e) { console.error('Failed to load percent question:', e) }
+    setLoading(false)
+  }
+
+  const startQuiz = () => {
+    const t = Math.max(1, Math.min(100, Number(numQuestions) || DEFAULT_TOTAL))
+    setTotalQ(t)
+    setScore(0)
+    setQuestionNumber(1)
+    setResults([])
+    setStarted(true)
+    setFinished(false)
+    setAdaptScore(0)
+    adaptScoreRef.current = 0
+    submittedRef.current = false
+    advancedRef.current = false
+  }
+
+  useEffect(() => { if (started && !finished && questionNumber > 0) loadQuestion() }, [started, questionNumber])
+  const advance = () => { if (advancedRef.current) return; advancedRef.current = true; if (questionNumber >= totalQ) setFinished(true); else setQuestionNumber(n => n + 1) }
+  advanceFnRef.current = advance
+  useAutoAdvance(revealed, advanceFnRef, isCorrect)
+  useEffect(() => {
+    if (!revealed || isCorrect) return
+    const h = (e) => { if (e.key === 'Enter') { e.preventDefault(); advance() } }
+    window.addEventListener('keydown', h)
+    return () => window.removeEventListener('keydown', h)
+  }, [revealed, isCorrect, questionNumber])
+
+  const handleSubmit = async () => {
+    if (!question || revealed || !answer.trim()) return
+    if (submittedRef.current) return
+    submittedRef.current = true
+    const timeTaken = timer.stop()
+    const payload = { ...question, userAnswer: answer.trim().replace(/[$,]/g, '') }
+    try {
+      const r = await fetch(`${API}/percent-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ ...payload, sessionGoal }) })
+      const data = await r.json()
+      setIsCorrect(data.correct)
+      setRevealed(true)
+      if (data.correct) setScore(s => s + 1)
+      (() => {
+        const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
+        if (data.correct) {
+          setFeedback(`Correct! ${data.display}`.slice(0,-1) + _ci + `Correct! ${data.display}`.slice(-1))
+        } else if (sessionGoal === 'perfect') {
+          setFeedback(`Incorrect. Answer: ${data.display}` + ' ❌ Perfect Solve ended.')
+          setFinished(true); timer.reset()
+        } else {
+          setFeedback(`Incorrect. Answer: ${data.display}`)
+        }
+      })()
+      setResults(prev => [...prev, { prompt: question.prompt, userAnswer: answer.trim(), correctAnswer: data.display, correct: data.correct, time: timeTaken }])
+      if (isAdaptive) {
+        setAdaptScore(prev => { const next = data.correct ? Math.min(3, prev + 0.25) : Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next })
+      }
+    } catch (e) { console.error('Failed to check percent answer:', e) }
+  }
+
+  const handleSolve = async () => {
+    if (!question || revealed) return
+    submittedRef.current = true
+    timer.stop()
+    try {
+      const r = await fetch(`${API}/percent-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  ...question, userAnswer: '', solve: true, sessionGoal }) })
+      const data = await r.json()
+      setIsCorrect(false); setRevealed(true)
+      const display = data.display || data.correctAnswer || data.answer || ''
+      const explanation = data.explanation || ''
+      setFeedback(`Solution: ${display}${explanation ? '\n' + explanation : ''}`)
+      setResults(prev => [...prev, { prompt: question.prompt, userAnswer: '(solved)', correctAnswer: display, correct: false, time: 0 }])
+      if (isAdaptive) {
+        setAdaptScore(prev => Math.max(0, prev - 0.35))
+      }
+    } catch (e) { submittedRef.current = false; console.error('Failed to solve percent:', e) }
+  }
+
+  const handleKeyDown = (e) => { if (e.key === 'Enter') { e.preventDefault(); if (!revealed) handleSubmit() } }
+  const diffLabels = { easy: 'Easy — Find %', medium: 'Medium — Increase/Decrease', hard: 'Hard — Reverse %', extrahard: 'Extra Hard — Compound' }
+
+  const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-
-    <div className="percentages-app-theme">
-      <QuizLayout title="Percentages" subtitle="Find a Percentage" onBack={onBack}>
-        <div style={{ position: 'relative' }}>
-          <button
-            onClick={() => setSoundEnabled(!soundEnabled)}
-            className="percentages-mute-btn"
-            aria-label={soundEnabled ? 'Mute sounds' : 'Unmute sounds'}
-            title={soundEnabled ? 'Mute sounds' : 'Unmute sounds'}
-          >
-            {soundEnabled ? '🔊' : '🔇'}
-          </button>
-
-          {rewardToast && (
-            <div className="percentages-reward-toast">
-              <strong>+{rewardToast.amount} XP</strong>
-              <span>{rewardToast.label}</span>
-              {rewardToast.collectible && <em>New Badge: {rewardToast.collectible}</em>}
-            </div>
-          )}
-
-          <div className="percentages-quest-shell">
-            <div className="percentages-quest-title">
-              <span>Percent Island</span>
-              <strong>Level 1</strong>
-            </div>
-            <div className="percentages-quest-path" aria-label="Quest progress">
-              {[0, 1, 2].map(i => (
-                <div key={i} className={`percentages-path-node ${i < correctCount ? 'complete' : i === correctCount ? 'current' : ''}`}>
-                  <span>{i < correctCount ? '✓' : i + 1}</span>
-                </div>
-              ))}
-            </div>
-            <div className="percentages-reward-row">
-              <span key={`xp-${xp}`} className="percentages-num-bounce">⚡ XP {xp}</span>
-              <span key={`gems-${gems}`} className="percentages-num-bounce">💎 Gems {gems}</span>
-              <span key={`combo-${streak}`} className="percentages-num-bounce">🔥 Combo {streak}</span>
-            </div>
-          </div>
-
-          <div className="percentages-collection-shelf" aria-label="Collection shelf">
-            {PERCENT_COLLECTIBLES.map((item, idx) => renderBadge(item, idx))}
-          </div>
-
-          <div className="percentages-stars-row">
-            {[0, 1, 2].map(i => (
-              <span
-                key={i}
-                className={`percentages-star ${i < correctCount ? 'active' : ''} ${starAnimating === i ? 'percentages-star-earn' : ''}`}
-              >
-                ★
-              </span>
-            ))}
-          </div>
-
-          <div key={getQuestMascotMessage()} className="percentages-mascot-container percentages-pop-in">
-            <span className={`percentages-mascot-emoji ${mascotExpression === 'cheering' ? 'cheering' : mascotExpression === 'sad' ? 'sad' : ''}`}>
-              {mascotEmoji}
-            </span>
-            <div className="percentages-mascot-bubble">
-              {getQuestMascotMessage()}
-            </div>
-          </div>
-
-          {escalatedStepType ? (
-            <div className="percentages-success-view percentages-pop-in" style={{ textAlign: 'center', padding: '30px' }}>
-              <div className="percentages-check-badge">Training Stop</div>
-              <p style={{ margin: '15px 0', fontSize: '1.25rem', fontWeight: 'bold' }}>
-                Let us stop and check how to do this concept together!
-              </p>
-              <button
-                className="percentages-btn"
-                onClick={() => {
-                  const skill = escalatedStepType;
-                  const target = PERCENT_SKILL_EXPLANATION_TARGETS[skill] || 'convert';
-                  if (setQuizSession) {
-                    setQuizSession(buildSession({
-                      mode: 'normal',
-                      diagnosticQuestion: null,
-                      userAnswer: '',
-                      submitted: false,
-                      isCorrectFirstTry: null,
-                      showSolutionAccordion: false,
-                    }));
-                  }
-                  if (setPendingEscalationSkill) setPendingEscalationSkill(skill);
-                  setEscalatedStepType(null);
-                  onRedirectToExplanation(target);
-                }}
-              >
-                Enter Training Room 📖
-              </button>
-            </div>
-          ) : mode === 'escalated_check' ? (
-            <div className={shake ? 'shake-animation' : ''}>
-              <div style={{ textAlign: 'center' }} className="percentages-step-card active">
-                <div className="percentages-check-badge">Training Gate</div>
-                {activeQuestion && (
-                  <div className="question-prompt" style={{ fontSize: '1.6rem', margin: '20px 0', fontWeight: '800' }}>
-                    {activeQuestion.prompt}
-                  </div>
-                )}
-
-                <input
-                  className="answer-input"
-                  type="text"
-                  value={userAnswer}
-                  onChange={e => { if (!submitted) setUserAnswer(e.target.value); }}
-                  disabled={submitted}
-                  placeholder="Type your answer"
-                  onKeyDown={e => { if (e.key === 'Enter' && !submitted && userAnswer.trim()) handleCheckSubmit(); }}
-                  autoFocus
-                  style={{ fontSize: '1.3rem', padding: '12px', borderRadius: '12px', textAlign: 'center' }}
-                />
-              </div>
-
-              {submitted && (
-                <div className={`percentages-celebration-popup percentages-pop-in ${isCheckSuccess ? 'correct' : 'wrong'}`} style={{ borderColor: isCheckSuccess ? 'var(--clr-correct)' : 'var(--clr-wrong)', background: isCheckSuccess ? '#E8F5E9' : '#FBE9E7', marginTop: '20px' }}>
-                  <div className="celebration-emoji-burst">{isCheckSuccess ? '🎉 🦉 ⭐' : '🦉 📖'}</div>
-                  <h2 style={{ color: isCheckSuccess ? '#2E7D32' : '#C2185B' }}>
-                    {isCheckSuccess ? 'Gate Cleared! 🌟' : 'Not Quite Yet!'}
-                  </h2>
-                  <p style={{ fontSize: '1.2rem' }}>
-                    {isCheckSuccess ? 'Super job! You opened the training gate!' : 'Let us check the explanation to practice!'}
-                  </p>
-                  <div className="button-row" style={{ justifyContent: 'center', marginTop: '15px' }}>
-                    {isCheckSuccess ? (
-                      <button onClick={handleNextCheckQuestion} className="percentages-btn">
-                        Back to the Island ➡️
-                      </button>
-                    ) : (
-                      <button onClick={handleReviewCheck} className="percentages-btn percentages-btn-secondary">
-                        Go to Training Room 📖
-                      </button>
-                    )}
-                  </div>
-                </div>
-              )}
-
-              {!submitted && (
-                <div className="button-row" style={{ justifyContent: 'center', marginTop: '20px' }}>
-                  <button
-                    onClick={handleCheckSubmit}
-                    disabled={!userAnswer.trim()}
-                    className="percentages-btn"
-                  >
-                    Check Gate 🔍
-                  </button>
-                </div>
-              )}
-            </div>
-          ) : mode === 'stepwise' ? (
-            <div>
-              <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', flexWrap: 'wrap', marginBottom: '10px' }}>
-                  <span className="percentages-check-badge" style={{ backgroundColor: '#0288D1', boxShadow: '0 3px 0 #01579B' }}>
-                    Clue Path 🗺️
-                  </span>
-                  <span className="percentages-check-badge" style={{ backgroundColor: '#FF9800', boxShadow: '0 3px 0 #F57C00' }}>
-                    {stepwiseState.showRecap ? 'Recap 🌟' : `Step ${stepwiseState.currentStepIndex + 1} of 2`}
-                  </span>
-                </div>
-                {currentQuestion && (
-                  <p style={{ fontSize: '1.3rem', margin: '5px 0', fontWeight: '800', color: 'var(--clr-text)' }}>
-                    Let's solve: {currentQuestion.prompt}
-                  </p>
-                )}
-              </div>
-
-              <div key={stepwiseState.showRecap ? 'recap' : stepwiseState.currentStepIndex} className="percentages-card-transition-wrapper">
-                {stepwiseState.showRecap ? (
-                  currentQuestion && (
-                    <div className="percentages-celebration-popup percentages-pop-in" style={{ marginTop: '25px', background: '#FFF8E1', borderColor: '#FFD54F' }}>
-                      <div className="celebration-emoji-burst">🌟 🦉 🌟</div>
-                      <h2>Let's see how we solved it!</h2>
-                      <div className="percentages-step-formula" style={{ whiteSpace: 'pre-line', textAlign: 'left', marginBottom: '20px' }}>
-                        {currentQuestion.explanation}
-                      </div>
-                      <div className="button-row" style={{ justifyContent: 'center' }}>
-                        <button onClick={handleNextQuestionStepwise} className="percentages-btn">
-                          Next Question ➡️
-                        </button>
-                      </div>
-                    </div>
-                  )
-                ) : (
-                  currentQuestion && stepwiseState.questionId === currentQuestion.id && (
-                    (() => {
-                      const idx = stepwiseState.currentStepIndex;
-                      const step = currentQuestion.steps[idx];
-                      if (!step) return null;
-                      const isActive = true;
-                      const isChecked = stepwiseState.checked[idx];
-                      const isCorrect = stepwiseState.correct[idx];
-                      const displayClass = isChecked
-                        ? (isCorrect ? 'correct' : 'wrong')
-                        : 'active';
-
-                      return (
-                        <div
-                          key={`${currentQuestion.id}-step-${idx}`}
-                          className={`percentages-step-card ${displayClass} percentages-pop-in`}
-                        >
-                          <div className="percentages-step-title">
-                            <span>{idx === 0 ? '🎯 Clue 1:' : '🚀 Clue 2:'}</span>
-                            <span>{step.prompt}</span>
-                            {isChecked && (
-                              <span style={{ marginLeft: 'auto', fontWeight: '900', color: isCorrect ? 'var(--clr-correct)' : 'var(--clr-wrong)' }}>
-                                {isCorrect ? '✓ Correct' : '✗ Try this way'}
-                              </span>
-                            )}
-                          </div>
-
-                          {!isChecked && isActive && (
-                            <div style={{ display: 'flex', gap: '15px', marginTop: '15px', flexWrap: 'wrap' }}>
-                              <input
-                                className="answer-input"
-                                type="text"
-                                value={stepwiseState.answers[idx]}
-                                onChange={e => {
-                                  const val = e.target.value;
-                                  setStepwiseState(prev => {
-                                    if (prev.questionId !== currentQuestion.id) return prev;
-                                    const nextAnsw = [...prev.answers];
-                                    nextAnsw[idx] = val;
-                                    return { ...prev, answers: nextAnsw };
-                                  });
-                                }}
-                                placeholder={step.placeholder}
-                                onKeyDown={e => {
-                                  if (e.key === 'Enter' && stepwiseState.answers[idx].trim()) {
-                                    handleStepSubmit(idx);
-                                  }
-                                }}
-                                autoFocus
-                                style={{ flex: 1, minWidth: '150px' }}
-                              />
-                              <button
-                                onClick={() => handleStepSubmit(idx)}
-                                disabled={!stepwiseState.answers[idx].trim()}
-                                className="percentages-btn"
-                                style={{ fontSize: '1.05rem', padding: '10px 24px' }}
-                              >
-                                Check Clue 🔍
-                              </button>
-                            </div>
-                          )}
-
-                          {isChecked && !isCorrect && (
-                            <div className="percentages-step-formula">
-                              <p style={{ fontWeight: '800', margin: '0 0 6px 0' }}>💡 Let us see how:</p>
-                              {step.method.split('\n\n').map((line, i) => (
-                                <div key={i} style={{ marginBottom: '8px' }}>{line}</div>
-                              ))}
-                            </div>
-                          )}
-
-                          {isChecked && !isCorrect && isActive && (
-                            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '15px' }}>
-                              <button
-                                onClick={() => handleStepwiseContinue(idx)}
-                                className="percentages-btn"
-                                style={{ fontSize: '1.05rem', padding: '10px 24px' }}
-                              >
-                                {idx === 0 ? 'Go to Step 2 ➡️' : 'Show Full Answer 🌟'}
-                              </button>
-                            </div>
-                          )}
-                        </div>
-                      );
-                    })()
-                  )
-                )}
-              </div>
-            </div>
-          ) : (
-            <div className={shake ? 'shake-animation' : ''}>
-              {currentQuestion && (
-                <div style={{ textAlign: 'center' }} className="percentages-step-card active">
-                  <div className="question-prompt" style={{ fontSize: '1.7rem', margin: '20px 0', fontWeight: '900' }}>
-                    {currentQuestion.prompt}
-                  </div>
-
-                  <input
-                    className="answer-input"
-                    type="text"
-                    value={userAnswer}
-                    onChange={e => { if (!submitted) setUserAnswer(e.target.value); }}
-                    disabled={submitted}
-                    placeholder="Type your answer"
-                    onKeyDown={e => { if (e.key === 'Enter' && !submitted && userAnswer.trim()) handleSubmit(); }}
-                    autoFocus
-                    style={{ fontSize: '1.4rem', padding: '14px', borderRadius: '16px', textAlign: 'center' }}
-                  />
-                </div>
-              )}
-
-              {submitted && currentQuestion && (
-                <div style={{ marginTop: '20px' }}>
-                  {isCorrectFirstTry ? (
-                    <div className="percentages-celebration-popup percentages-pop-in">
-                      <div className="celebration-emoji-burst">🎉 🦉 🌟 🦉 🎉</div>
-                      <h2>Super Solver!</h2>
-                      <p>Awesome! That is correct!</p>
-
-                      <div className="percentages-accordion">
-                        <div
-                          className="percentages-accordion-header"
-                          onClick={() => setShowSolutionAccordion(!showSolutionAccordion)}
-                        >
-                          <span>💡 Let's see how we solved it</span>
-                          <span>{showSolutionAccordion ? '▲' : '▼'}</span>
-                        </div>
-                        {showSolutionAccordion && (
-                          <div className="percentages-accordion-content" style={{ whiteSpace: 'pre-line' }}>
-                            {currentQuestion.explanation}
-                          </div>
-                        )}
-                      </div>
-
-                      <div className="button-row" style={{ justifyContent: 'center', marginTop: '20px' }}>
-                        <button onClick={handleNextQuestion} className="percentages-btn">
-                          Next Question ➡️
-                        </button>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="percentages-step-card wrong percentages-pop-in" style={{ textAlign: 'center', padding: '20px' }}>
-                      <h3 style={{ color: 'var(--clr-wrong)', margin: '10px 0', fontSize: '1.4rem' }}>❌ Not quite right!</h3>
-                      <p style={{ fontSize: '1.15rem' }}>Let's solve this together using clues!</p>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {!submitted && (
-                <div className="button-row" style={{ justifyContent: 'center', marginTop: '20px' }}>
-                  <button
-                    onClick={handleSubmit}
-                    disabled={!userAnswer.trim()}
-                    className="percentages-btn"
-                  >
-                    Check Answer 🔍
-                  </button>
-                </div>
-              )}
-            </div>
-          )}
-
+    <QuizLayout title="Percentages" subtitle="Find, increase, reverse, compound" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+      {!started && !finished && <div className="welcome-box">
+        <p className="welcome-text">Practice percentages!</p>
+        <div className="checkbox-group" style={{ marginBottom: '12px' }}>
+          {['easy', 'medium', 'hard', 'extrahard'].map(d => (
+            <label key={d} className={`checkbox-pill${!isAdaptive && difficulty === d ? ' active' : ''}`}>
+              <input type="radio" name="pct-diff" checked={!isAdaptive && difficulty === d} onChange={() => { setDifficulty(d); setIsAdaptive(false) }} />
+              {diffLabels[d]}
+            </label>
+          ))}
+          <label className={`checkbox-pill${isAdaptive ? ' active' : ''}`} style={isAdaptive ? { background: 'linear-gradient(135deg, #4caf50, #ff9800, #f44336, #9c27b0)', color: '#fff', border: 'none' } : {}}>
+            <input type="radio" name="pct-diff" checked={isAdaptive} onChange={() => setIsAdaptive(true)} />
+            Adaptive
+          </label>
         </div>
-      </QuizLayout>
-    </div>
-  );
+
+        {isGoalMode && (
+        <>
+          <p className="welcome-text" style={{ marginTop: '14px', fontSize: '0.92rem', fontWeight: 700, marginBottom: '6px' }}>Practice Goal:</p>
+                  <div className="checkbox-group" style={{ marginBottom: '12px' }}>
+                    {[
+                                            { key: 'speed', label: '⚡ Speed Run' },
+                      { key: 'perfect', label: '🎯 Perfect Solve' },
+                      { key: 'revision', label: '🔄 Revision' }
+                    ].map(g => (
+                      <label key={g.key} className={`checkbox-pill${sessionGoal === g.key ? ' active' : ''}`}
+                        style={sessionGoal === g.key ? (
+                          g.key === 'speed' ? { background: 'rgba(255,179,0,0.18)', borderColor: '#ffb300', color: '#ffb300' } :
+                          g.key === 'perfect' ? { background: 'rgba(244,67,54,0.18)', borderColor: '#f44336', color: '#f44336' } :
+                          g.key === 'revision' ? { background: 'rgba(33,150,243,0.18)', borderColor: '#2196f3', color: '#2196f3' } : {}
+                        ) : {}}>
+                        <input type="radio" name="percentapp-goal" checked={sessionGoal === g.key} onChange={() => {
+                          setSessionGoal(g.key)
+                          
+                        }} />
+                        {g.label}
+                      </label>
+                    ))}
+                  </div>
+                  {isAdaptive && <p style={{ fontSize: '0.82rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Starts easy and smoothly adjusts to your level as you answer.</p>}
+                  {sessionGoal === 'speed' && (
+                    <p style={{ fontSize: '0.82rem', color: '#ffb300', marginBottom: '8px' }}>
+                      ⚡ Easy 5s · Medium 10s · Hard 15s · Extra Hard 20s · Adaptive 10s. Double coins for correct!
+                    </p>
+                  )}
+                  {sessionGoal === 'perfect' && (
+                    <p style={{ fontSize: '0.82rem', color: '#f44336', marginBottom: '8px' }}>
+                      🎯 One wrong answer ends the quiz. No timer shown. Can you go flawless?
+                    </p>
+                  )}
+                  {sessionGoal === 'revision' && (
+                    <p style={{ fontSize: '0.82rem', color: '#2196f3', marginBottom: '8px' }}>
+                      🔄 Focuses on topics you previously answered incorrectly.
+                    </p>
+                  )}
+        </>
+      )}
+        <div className="question-count-row">
+          <label className="question-count-label">How many questions? (max 100)</label>
+          <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={e => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} />
+        </div>
+        <div className="button-row"><button onClick={startQuiz}>Start Quiz</button></div>
+      </div>}
+      {started && !finished && <>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.3rem' }}>
+          <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
+          {isAdaptive && <div className="progress-pill" style={{ background: ADAPT_COLORS[curAdaptLevel], color: '#fff' }}>{ADAPT_LABELS[curAdaptLevel]}</div>}
+        </div>
+        {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
+        {question && <div style={{ textAlign: 'center' }}>
+          <div className="question-prompt" style={{ fontSize: '1.4rem', margin: '20px 0' }}>{question.prompt}</div>
+          <input className="answer-input" type="text" value={answer} onChange={e => { if (!revealed) setAnswer(e.target.value) }} disabled={revealed} placeholder="Type your answer" onKeyDown={handleKeyDown} autoFocus />
+        </div>}
+        {renderFeedback(feedback, isCorrect)}
+        <div className="button-row">
+          {!revealed ? <>
+            <button onClick={handleSubmit} disabled={loading || !answer.trim()}>Submit</button>
+            <button onClick={handleSolve} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>
+          </> : <button onClick={advance}>{questionNumber >= totalQ ? 'Finish Quiz' : 'Next Question'}</button>}
+        </div>
+        {results.length > 0 && <ResultsTable results={results} />}
+      </>}
+      {finished && <div className="welcome-box">
+        <p className="welcome-text">Quiz complete!</p>
+        <p className="final-score">Final score: {score}/{totalQ}</p>
+        {isAdaptive && <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)' }}>Reached level: <strong style={{ color: ADAPT_COLORS[curAdaptLevel] }}>{ADAPT_LABELS[curAdaptLevel]}</strong></p>}
+        <ResultsTable results={results} />
+        <button onClick={() => { setStarted(false); setFinished(false) }}>Play Again</button>
+      </div>}
+    </QuizLayout>
+  )
 }
+
 /* ── Indices App ─────────────────────────────────────── */
 /**
  * IndicesApp Component
@@ -58388,7 +52029,6 @@ const loadQuestion = async () => {
     <QuizLayout title="Indices" subtitle="Laws of exponents" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice laws of indices!</p>
-        <KeyTerms topicKey="indices" />
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
           {['easy', 'medium', 'hard', 'extrahard'].map(d => (
             <label key={d} className={`checkbox-pill${!isAdaptive && difficulty === d ? ' active' : ''}`}>
@@ -58711,7 +52351,6 @@ const loadQuestion = async () => {
     <QuizLayout title="Surds" subtitle="Simplify, add, multiply, rationalise" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice working with surds!</p>
-        <KeyTerms topicKey="surds" />
         <p style={{ fontSize: '0.85rem', color: 'var(--clr-dim)', marginBottom: '8px' }}>Tip: type √ using "sqrt" or copy-paste √</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
           {['easy', 'medium', 'hard', 'extrahard'].map(d => (
@@ -58822,7 +52461,7 @@ const loadQuestion = async () => {
   )
 }
 
-function FractionAddApp({ onBack, completedTopics = [], goldMastery = [], markTopicCompleted, markGoldMastery, updateCoins, setMode, setTransferTopic, isGoalMode = false }) {
+function FractionAddApp({ onBack, isGoalMode = false }) {
   // ── State variables ──────────────────────────────────────────────────
   // Difficulty: 'easy' | 'medium' | 'hard' | 'extrahard'
   const [difficulty, setDifficulty] = useState('easy')
@@ -58836,15 +52475,6 @@ function FractionAddApp({ onBack, completedTopics = [], goldMastery = [], markTo
   // Quiz phase flags
   const [started, setStarted] = useState(false)
   const [finished, setFinished] = useState(false)
-
-  useEffect(() => {
-    if (finished) {
-      const pass = score / totalQ >= 0.8
-      if (pass && markTopicCompleted) {
-        markTopicCompleted('fractionadd', isAdaptive ? 'adaptive' : difficulty)
-      }
-    }
-  }, [finished])
   // Current question object from API
   const [question, setQuestion] = useState(null)
   // User's answer as a string: "3/4" or "2 3/4" for mixed numbers
@@ -59111,7 +52741,6 @@ const loadQuestion = async () => {
       {/* ── Setup Phase ── */}
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice adding fractions!</p>
-        <KeyTerms topicKey="fractions" />
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
           {['easy', 'medium', 'hard', 'extrahard'].map(d => (
             <label key={d} className={`checkbox-pill${!isAdaptive && difficulty === d ? ' active' : ''}`}>
@@ -59171,31 +52800,6 @@ const loadQuestion = async () => {
           <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={e => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} />
         </div>
         <div className="button-row"><button onClick={startQuiz}>Start Quiz</button></div>
-        {isStage3Completed('fractionadd', completedTopics) && (
-          <div className="transfer-cta-box" style={{ marginTop: '20px', padding: '16px', background: 'var(--clr-hover, rgba(255,255,255,0.03))', borderRadius: '10px', border: '1px solid var(--clr-border)', textAlign: 'center' }}>
-            <p style={{ margin: '0 0 12px', fontSize: '0.9rem', color: 'var(--clr-text-soft)', lineHeight: '1.4' }}>
-              {goldMastery.includes('fractionadd') ? (
-                <>🥇 You have achieved Gold Mastery for this topic!</>
-              ) : (
-                <>🎉 You have completed Stage 3 Practice for this topic!</>
-              )}
-            </p>
-            <button
-              className="btn-transfer-cta"
-              onClick={() => {
-                if (setTransferTopic) setTransferTopic('fractionadd')
-                if (setMode) setMode('transfer')
-              }}
-              style={{ width: '100%', padding: '10px', background: 'linear-gradient(135deg, #FFD700, #FFA500)', color: '#000', fontWeight: 'bold', border: 'none', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
-            >
-              {goldMastery.includes('fractionadd') ? (
-                <>🔄 Revisit Transfer Challenge (Stage 4) 🥇</>
-              ) : (
-                <>🚀 Start Transfer Challenge (Stage 4) 🥇</>
-              )}
-            </button>
-          </div>
-        )}
       </div>}
 
       {/* ── Playing Phase ── */}
@@ -59841,7 +53445,6 @@ const fetchQuestion = async (step) => {
     <QuizLayout title="Square Root" subtitle="Floor or ceiling is accepted" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice square roots!</p>
-        <KeyTerms topicKey="square-roots" />
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
           {['easy', 'medium', 'hard', 'extrahard'].map(d => (
             <label key={d} className={`checkbox-pill${!isAdaptive && difficulty === d ? ' active' : ''}`}>
@@ -60138,7 +53741,6 @@ const loadQuestion = async () => {
     <QuizLayout title="Poly Multiply" subtitle="Multiply two polynomials and enter the coefficients" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice polynomial multiplication!</p>
-        <KeyTerms topicKey="polynomial-multiplication" />
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
           {['easy', 'medium', 'hard', 'extrahard'].map(d => (
             <label key={d} className={`checkbox-pill${!isAdaptive && difficulty === d ? ' active' : ''}`}>
@@ -60450,8 +54052,7 @@ const loadQuestion = async () => {
   return (
     <QuizLayout title="Poly Factor" subtitle="Factor the quadratic into (px + q)(rx + s)" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
       {!started && !finished && <div className="welcome-box">
-          <p className="welcome-text">Factor ax² + bx + c into (px + q)(rx + s).</p>
-          <KeyTerms topicKey="polynomial-factorisation" />
+        <p className="welcome-text">Factor ax² + bx + c into (px + q)(rx + s).</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
           {['easy', 'medium', 'hard', 'extrahard'].map(d => (
             <label key={d} className={`checkbox-pill${!isAdaptive && difficulty === d ? ' active' : ''}`}>
@@ -60535,7 +54136,7 @@ const loadQuestion = async () => {
         {renderFeedback(feedback, isCorrect)}
         <div className="button-row">
           {!revealed && <button onClick={handleSolve} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>}
-          <button onClick={revealed ? () => advanceFnRef.current() : handleSubmit} disabled={loading || (!revealed && (!userP || !userQ || !userR || !userS))}>
+          <button onClick={revealed ? () => advanceRef.current() : handleSubmit} disabled={loading || (!revealed && (!userP || !userQ || !userR || !userS))}>
             {revealed ? (questionNumber >= totalQ ? 'Finish' : 'Next') : 'Submit'}
           </button>
         </div>
@@ -60794,8 +54395,7 @@ const loadQuestion = async () => {
   return (
     <QuizLayout title="Prime Factors" subtitle="Break the number into its prime factors" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
       {!started && !finished && <div className="welcome-box">
-          <p className="welcome-text">Enter prime factors one at a time. Watch the remaining number shrink!</p>
-          <KeyTerms topicKey="prime-factors" />
+        <p className="welcome-text">Enter prime factors one at a time. Watch the remaining number shrink!</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
           {['easy', 'medium', 'hard', 'extrahard'].map(d => (
             <label key={d} className={`checkbox-pill${!isAdaptive && difficulty === d ? ' active' : ''}`}>
@@ -61104,8 +54704,7 @@ const loadQuestion = async () => {
   return (
     <QuizLayout title="Quadratic Formula" subtitle="Find the roots of ax² + bx + c = 0" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
       {!started && !finished && <div className="welcome-box">
-          <p className="welcome-text">Use the quadratic formula to find roots of ax² + bx + c = 0</p>
-          <KeyTerms topicKey="quadratic-formula" />
+        <p className="welcome-text">Use the quadratic formula to find roots of ax² + bx + c = 0</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
           {['easy', 'medium', 'hard', 'extrahard'].map(d => (
             <label key={d} className={`checkbox-pill${!isAdaptive && difficulty === d ? ' active' : ''}`}>
@@ -61443,8 +55042,7 @@ const loadQuestion = async () => {
   return (
     <QuizLayout title="Simultaneous Eq." subtitle={`Solve ${isAdaptive ? 'adaptive' : (effectiveDiff() === 'easy' ? '2×2' : '3×3')} systems`} onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
       {!started && !finished && <div className="welcome-box">
-          <p className="welcome-text">Solve systems of linear equations</p>
-          <KeyTerms topicKey="simultaneous-equations" />
+        <p className="welcome-text">Solve systems of linear equations</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
           {['easy', 'medium', 'hard', 'extrahard'].map(d => (
             <label key={d} className={`checkbox-pill${!isAdaptive && difficulty === d ? ' active' : ''}`}>
@@ -61731,8 +55329,7 @@ const loadQuestion = async () => {
   return (
     <QuizLayout title="Functions" subtitle="Evaluate the function at the given values" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
       {!started && !finished && <div className="welcome-box">
-          <p className="welcome-text">Evaluate linear functions</p>
-          <KeyTerms topicKey="functions" />
+        <p className="welcome-text">Evaluate linear functions</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
           {['easy', 'medium', 'hard', 'extrahard'].map(d => (
             <label key={d} className={`checkbox-pill${!isAdaptive && difficulty === d ? ' active' : ''}`}>
@@ -61805,6 +55402,7 @@ const loadQuestion = async () => {
             <div className="given">Given: {varStr}</div>
           </div>
           <div className="single-input-row">
+            <label className="coeff-label">f = </label>
             <input className="answer-input" type="text" value={answer} disabled={revealed}
               onChange={e => { const v = e.target.value; if (v === '' || v === '-' || v === '.' || /^-?\d*\.?\d*$/.test(v)) setAnswer(v) }}
               onKeyDown={e => { if (e.key === 'Enter') handleSubmit() }} autoFocus />
@@ -62024,8 +55622,7 @@ const loadQuestion = async () => {
   return (
     <QuizLayout title="Line Equation" subtitle="Find m and c in y = mx + c from two points" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
       {!started && !finished && <div className="welcome-box">
-          <p className="welcome-text">Given two points, find the slope m and intercept c.</p>
-          <KeyTerms topicKey="line-equation" />
+        <p className="welcome-text">Given two points, find the slope m and intercept c.</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
           {['easy', 'medium', 'hard', 'extrahard'].map(d => (
             <label key={d} className={`checkbox-pill${!isAdaptive && difficulty === d ? ' active' : ''}`}>
@@ -63287,7 +56884,7 @@ const startQuiz = async () => {
     // Default: use generic prompt from getPromptForType()
     return <>
       <div className="custom-type-badge">{typeName}</div>
-      <div className="question-box"><GlossaryText text={getPromptForType(curType, question) || ''} /></div>
+      <div className="question-box">{getPromptForType(curType, question)}</div>
     </>
   }
 
@@ -64936,7 +58533,7 @@ function Tatsavit1App({ onBack, isGoalMode = false }) {
         Score: {score} · Answered: {results.length}
       </div>
       <div className="question-box" style={{ whiteSpace: 'pre-wrap', textAlign: 'center', marginBottom: 16 }}>
-        <GlossaryText text={q.prompt || ''} />
+        {q.prompt}
       </div>
       <div className="options-list">
         {q.options.map((opt, i) => {
@@ -65911,7 +59508,7 @@ const startQuiz = () => {
         keyboard: ↑ ↓ to move · A–D or 1–4 to pick · Backspace back · Enter to {revealed ? 'continue' : 'submit'}
       </div>
       <div className="question-box" style={{ whiteSpace: 'pre-wrap', textAlign: 'center', marginBottom: 16 }}>
-        <GlossaryText text={q.prompt || ''} />
+        {q.prompt}
       </div>
       <div className="options-list">
         {optionOrder.map((origIdx, displayIdx) => {
@@ -66442,8 +60039,6 @@ function TatsavitLineApp({ onBack }) {
   )
 }
 
-// The Vachana Literary Lab is now imported from its own directory to avoid bloating App.jsx.
-
 /**
  * QuizLayout Component
  * Wrapper layout for quiz apps (PolyFactorApp, PrimeFactorApp, QFormulaApp, etc.)
@@ -66517,7 +60112,6 @@ export function QuizLayout({ title, subtitle, onBack, children, timer, sessionGo
     }
     return child;
   });
-
   return (
     <>
       <div className="header-row">
@@ -66528,7 +60122,7 @@ export function QuizLayout({ title, subtitle, onBack, children, timer, sessionGo
         </div>
       </div>
       <h1 style={{ fontSize: 'clamp(1.8rem, 3.8vw, 2.4rem)' }}>{title}</h1>
-      {processedChildren}
+      {children}
     </>
   )
 }
@@ -67855,4 +61449,3 @@ function MensurationLabApp({ onBack, initialDifficulty, initialNumQuestions, ini
 
 export default App
 export { AuthMenu }
-
