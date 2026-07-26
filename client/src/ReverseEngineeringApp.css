@@ -1,0 +1,508 @@
+/* Reverse Engineering Mode Component Styles */
+
+.reverse-app-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+  min-height: 80vh;
+  font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+}
+
+.reverse-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.reverse-back-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: inherit;
+  padding: 8px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.reverse-back-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.reverse-title-section {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.reverse-title-section h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.reverse-subtitle {
+  opacity: 0.85;
+  font-size: 1.05rem;
+}
+
+/* Setup Grid */
+.reverse-topics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.reverse-topic-card {
+  background: var(--card-bg, #1e293b);
+  border: 2px solid transparent;
+  border-radius: 16px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.reverse-topic-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+}
+
+.reverse-topic-card.selected {
+  border-color: #ff7e5f;
+  background: var(--selected-bg, #2d3748);
+}
+
+.reverse-topic-icon {
+  font-size: 2.2rem;
+  margin-bottom: 12px;
+}
+
+.reverse-topic-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.reverse-topic-desc {
+  font-size: 0.88rem;
+  opacity: 0.75;
+}
+
+/* Difficulty Selector */
+.reverse-diff-selector {
+  background: var(--card-bg, #1e293b);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.reverse-diff-label {
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.reverse-diff-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.reverse-diff-btn {
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: transparent;
+  color: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.reverse-diff-btn.active {
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  border-color: transparent;
+  color: #1a202c;
+  box-shadow: 0 4px 12px rgba(255, 126, 95, 0.35);
+}
+
+.reverse-start-btn {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  padding: 16px 32px;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #1a202c;
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(255, 126, 95, 0.4);
+  transition: all 0.25s ease;
+}
+
+.reverse-start-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 25px rgba(255, 126, 95, 0.55);
+}
+
+/* Challenge Workspace */
+.reverse-challenge-card {
+  background: var(--card-bg, #1e293b);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.reverse-target-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  color: #1a202c;
+  padding: 12px 28px;
+  border-radius: 50px;
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 15px rgba(255, 126, 95, 0.35);
+}
+
+.reverse-rules-section {
+  margin-bottom: 32px;
+}
+
+.reverse-rules-title {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.7;
+  margin-bottom: 12px;
+}
+
+.reverse-rules-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.reverse-rule-pill {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Inputs Builder */
+.reverse-builder-box {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  padding: 28px;
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.reverse-input-num {
+  width: 90px;
+  height: 56px;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  color: inherit;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  transition: border-color 0.2s;
+}
+
+.reverse-input-num:focus {
+  outline: none;
+  border-color: #ff7e5f;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.reverse-operator-select {
+  height: 56px;
+  padding: 0 16px;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  color: inherit;
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.reverse-operator-select option {
+  background-color: #1e293b;
+  color: #ffffff;
+}
+
+.reverse-op-toggle-group {
+  display: inline-flex;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 4px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  align-items: center;
+}
+
+.reverse-op-toggle-btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.5rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reverse-op-toggle-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.reverse-op-toggle-btn.active {
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  color: #1a202c;
+  box-shadow: 0 2px 8px rgba(255, 126, 95, 0.4);
+}
+
+.reverse-equals-sign {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #ff7e5f;
+}
+
+.reverse-action-group {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.reverse-check-btn {
+  padding: 14px 36px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #48bb78, #38a169);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(72, 187, 120, 0.35);
+  transition: all 0.2s ease;
+}
+
+.reverse-check-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(72, 187, 120, 0.5);
+}
+
+.reverse-next-btn {
+  padding: 14px 28px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  color: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.reverse-next-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Feedback & Stars Result */
+.reverse-result-modal {
+  margin-top: 28px;
+  padding: 24px;
+  border-radius: 16px;
+  animation: fadeIn 0.3s ease;
+}
+
+.reverse-result-modal.correct {
+  background: rgba(72, 187, 120, 0.15);
+  border: 2px solid #48bb78;
+}
+
+.reverse-result-modal.incorrect {
+  background: rgba(245, 101, 101, 0.15);
+  border: 2px solid #f56565;
+}
+
+.reverse-stars {
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+
+.reverse-feedback-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.reverse-suggestion-text {
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+.reverse-hint-trigger-btn {
+  padding: 14px 24px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #ed8936, #dd6b20);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(237, 137, 54, 0.35);
+  transition: all 0.2s ease;
+}
+
+.reverse-hint-trigger-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(237, 137, 54, 0.5);
+}
+
+.reverse-congrats-banner {
+  background: linear-gradient(135deg, #48bb78, #38a169);
+  color: #fff;
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 15px rgba(72, 187, 120, 0.4);
+  animation: fadeIn 0.4s ease;
+}
+
+.reverse-hint-popup {
+  margin-top: 16px;
+  background: rgba(237, 137, 54, 0.18);
+  border: 2px dashed #ed8936;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: left;
+  animation: fadeIn 0.3s ease;
+}
+
+.reverse-hint-title {
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: #fbd38d;
+  margin-bottom: 6px;
+}
+
+.reverse-hint-body {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Recommendation Modal Popup */
+.reverse-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.25s ease;
+  padding: 16px;
+}
+
+.reverse-modal-content {
+  background: var(--card-bg, #1e293b);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  max-width: 480px;
+  width: 100%;
+  padding: 28px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+
+.reverse-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.reverse-modal-icon {
+  font-size: 2.2rem;
+}
+
+.reverse-modal-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin: 0;
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.reverse-modal-body {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.reverse-modal-footer {
+  display: flex;
+  justify-content: center;
+}
+
+.reverse-modal-close-btn {
+  padding: 12px 32px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #1a202c;
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 126, 95, 0.35);
+  transition: all 0.2s ease;
+}
+
+.reverse-modal-close-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(255, 126, 95, 0.5);
+}

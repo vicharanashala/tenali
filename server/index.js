@@ -9529,6 +9529,11 @@ app.post('/darts-api/check', express.json(), (req, res) => {
 const wordCreatorRouter = require('./routes/wordCreator');
 app.use('/wordcreator-api', wordCreatorRouter);
 
+// REVERSE ENGINEERING MODE ROUTER (reverse-api)
+// ═══════════════════════════════════════════════════════════════════════════
+const reverseRouter = require('./routes/reverse');
+app.use('/reverse-api', reverseRouter);
+
 // PROCTOR API — Session management, anomaly logging, emotion tracking
 // ═══════════════════════════════════════════════════════════════════════════
 const { ProctorSession, ProctorEvent, Emotion } = require('./proctorSchema');

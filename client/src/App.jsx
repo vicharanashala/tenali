@@ -37,6 +37,7 @@ import CrossSectionApp from './CrossSectionApp';
 window.React = React;
 console.log("React version:", React.version);
 import LinearAlgebraApp from './LinearAlgebraApp'
+import ReverseEngineeringApp from './ReverseEngineeringApp'
 
 
 /**
@@ -44739,6 +44740,7 @@ function App() {
     indicesgym: IndicesGymApp,     // Indices-Gym — index laws (MCQ)
     polygym: PolyGymApp,           // Polynomials Gym — arithmetic → monomial algebra (MCQ)
     riddle: RiddleApp,              // Math Riddles
+    'reverse-engineering': ReverseEngineeringApp, // Reverse Engineering Mode
     trackProgress: null,
   }
 
@@ -44931,6 +44933,7 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
   // All regular quiz apps sorted alphabetically by name
   const regularApps = [
     { key: 'battle', name: '⚔️ Battle Arena', subtitle: 'Live fastest-finger duels', color: 'red' },
+    { key: 'reverse-engineering', name: '🔄 Reverse Engineering', subtitle: 'Given the answer, build the question', color: 'orange' },
     { key: 'detective', name: '🔍 Detective Agency', subtitle: 'Solve math mysteries and crack cases!', color: 'indigo' },
     { key: 'comic-addition', name: 'Comic Addition', subtitle: 'Story Mode', color: 'purple' },
     { key: 'addition', name: 'Addition', subtitle: '20-question addition practice', color: 'blue' },
