@@ -1,0 +1,277 @@
+/* -------------------- */
+/* Space Game */
+/* -------------------- */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.space-game {
+  position: relative;
+
+  width: 100%;
+  max-width: 1100px;
+  height: 700px;
+
+  margin: 30px auto;
+
+  overflow: hidden;
+
+  border-radius: 20px;
+  border: 1.5px solid var(--clr-border);
+  box-shadow: var(--shadow-card);
+
+  background:
+    radial-gradient(circle at 20% 30%, white 1px, transparent 2px),
+    radial-gradient(circle at 70% 20%, white 1px, transparent 2px),
+    radial-gradient(circle at 80% 80%, white 2px, transparent 3px),
+    radial-gradient(circle at 30% 70%, white 2px, transparent 3px),
+    linear-gradient(#01010f, #02133b, #000);
+}
+.space-game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100%;
+}
+
+/* ADD THIS BELOW .space-game */
+.game-frame {
+  position: relative;
+
+  width: 90%;
+  max-width: 1100px;
+  height: 700px;
+
+  margin: 30px auto;
+
+  overflow: hidden;
+
+  border-radius: 20px;
+
+  border: 2px solid rgba(255, 255, 255, 0.15);
+
+  background:
+    radial-gradient(circle at 20% 30%, white 1px, transparent 2px),
+    radial-gradient(circle at 70% 20%, white 1px, transparent 2px),
+    radial-gradient(circle at 80% 80%, white 2px, transparent 3px),
+    radial-gradient(circle at 30% 70%, white 2px, transparent 3px),
+    linear-gradient(#01010f, #02133b, #000);
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* -------------------- */
+/* Rocket */
+/* -------------------- */
+
+.player-rocket{
+    position:absolute;
+    bottom:40px;
+
+    transform:translateX(-50%);
+
+    font-size:70px;
+
+    transition:left .04s linear;
+
+    filter:
+      drop-shadow(0 0 8px cyan)
+      drop-shadow(0 0 20px cyan);
+
+    user-select:none;
+
+    z-index:20;
+}
+
+/* -------------------- */
+/* Twinkling Stars */
+/* -------------------- */
+
+.space-game::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background-image:
+
+    radial-gradient(white 1px,transparent 1px),
+    radial-gradient(white 1px,transparent 1px),
+    radial-gradient(white 2px,transparent 2px);
+
+    background-size:
+      120px 120px,
+      180px 180px,
+      250px 250px;
+
+    opacity:.35;
+
+    animation:
+      starsMove 25s linear infinite;
+}
+
+@keyframes starsMove{
+
+    from{
+        transform:translateY(0);
+    }
+
+    to{
+        transform:translateY(250px);
+    }
+
+}
+
+/* -------------------- */
+/* Enemy Animation */
+/* -------------------- */
+
+.enemy{
+
+    position:absolute;
+
+    text-align:center;
+
+    animation:
+      enemyFloat 2s ease-in-out infinite;
+
+}
+
+@keyframes enemyFloat{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(8px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+
+}
+
+/* -------------------- */
+/* Bullet */
+/* -------------------- */
+
+.bullet{
+
+    position:absolute;
+
+    font-size:28px;
+
+    transform:translateX(-50%);
+
+    filter:
+      drop-shadow(0 0 8px orange);
+
+}
+
+/* -------------------- */
+/* HUD */
+/* -------------------- */
+
+.hud{
+
+    position:absolute;
+
+    top:15px;
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    padding:0 30px;
+
+    color:white;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    z-index:50;
+
+}
+
+/* -------------------- */
+/* Question */
+/* -------------------- */
+
+.question{
+
+    position:absolute;
+
+    top:70px;
+
+    width:100%;
+
+    text-align:center;
+
+    font-size:42px;
+
+    color:white;
+
+    font-weight:bold;
+
+    text-shadow:
+      0 0 15px cyan;
+
+}
+
+/* -------------------- */
+/* Message */
+/* -------------------- */
+
+.message{
+
+    position:absolute;
+
+    bottom:110px;
+
+    width:100%;
+
+    text-align:center;
+
+    font-size:28px;
+
+    color:yellow;
+
+    font-weight:bold;
+
+}
+
+/* -------------------- */
+/* Instructions */
+/* -------------------- */
+
+.controls{
+
+    position:absolute;
+
+    bottom:15px;
+
+    width:100%;
+
+    text-align:center;
+
+    color:white;
+
+    opacity:.85;
+
+}

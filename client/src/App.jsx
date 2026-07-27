@@ -27,6 +27,7 @@ import React, { useEffect, useState, useRef, useMemo, useCallback } from 'react'
 import VoiceAssistant from './components/VoiceAssistant';
 import { motion } from 'framer-motion';
 import OnboardingTour from './components/OnboardingTour';
+import SpaceMathGame from './game/SpaceMathGame';
 import SpatialReasoningMCQ from './SpatialReasoningMCQ';
 import ScribbleGuessApp from './ScribbleGuessApp';
 import ShapeSlicer3D from './ShapeSlicer3D';
@@ -44646,6 +44647,7 @@ function App() {
     battle: BattleApp,          // Live fastest-finger duels
     sudoku: SudokuApp,          // 9x9 Sudoku puzzle
     geocraft: GeometryApp,
+    "space-math": SpaceMathGame,
 
     'comic-addition': ComicAdditionApp,
     gk: GKApp,                    // General Knowledge
