@@ -22,7 +22,6 @@ The core philosophy is to keep high-level brainstorming and design discussions i
 2. If the idea is rejected or deferred, the issue is closed, saving the intern from writing wasted code.
 
 ### Step 3: The Implementation (Single PR for RFC + Code)
-Thanks to AI-assisted coding tools, the cost of implementing a Minimum Viable Product (MVP) is lower than ever. Therefore, we do not require separate PRs for the RFC and the code.
 1. The intern creates a branch and writes the **RFC Document** (`docs/rfcs/<module>/000X-feature-name.md`) detailing the data schema, UI mockups, and technical decisions.
 2. The intern implements the MVP code.
 3. The intern opens **ONE dedicated Pull Request** containing both the RFC document and the MVP code implementation.
