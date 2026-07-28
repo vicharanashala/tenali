@@ -31,9 +31,4 @@ The core philosophy is to keep high-level brainstorming and design discussions i
 2. The intern iterates on the code and RFC based on feedback within the PR until it is merge-ready.
 3. Once approved, the PR is merged, adding both the code to the app and the finalized RFC to the `docs/rfcs/` archive.
 
----
 
-## Key Benefits
-1. **Zero PR Bloat**: Brainstorming stays in Issues. Only approved features make it to the PR tab.
-2. **Speed & Autonomy**: Consolidating the RFC and the Code into a single PR removes bureaucratic delays and plays to the strengths of modern, AI-assisted "vibe coding".
-3. **Traceability**: The implementation PR references the original Issue, and the final merged code is permanently accompanied by its technical blueprint in the `rfcs/` folder.
