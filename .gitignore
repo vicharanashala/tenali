@@ -2,6 +2,14 @@ node_modules
 *.log
 client/dist
 server.log
+feature.md
+implementation_plan.md
+implementationplan.md
+implementationplan2.md
+implementationplan
+feature
+feature2
+feature2.md
 docs/
 server/in_memory_users_db.json
 server/lil/learning_journey/in_memory_journey_progress.json

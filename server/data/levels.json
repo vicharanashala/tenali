@@ -1,0 +1,807 @@
+[
+  {
+    "id": "lvl_1_1",
+    "levelNum": 1,
+    "levelNumber": 1,
+    "worldId": "number_kingdom",
+    "levelName": "The Number Village (Number Sets)",
+    "conceptId": "whole_numbers",
+    "options": [
+      "Whole Numbers",
+      "Integers",
+      "Fractions",
+      "Decimal Numbers"
+    ],
+    "conceptPool": [
+      "whole_numbers",
+      "integers",
+      "fractions",
+      "decimal_numbers"
+    ],
+    "isBoss": false
+  },
+  {
+    "id": "lvl_1_2",
+    "levelNum": 2,
+    "levelNumber": 2,
+    "worldId": "number_kingdom",
+    "levelName": "The Hall of Hidden Properties (Even, Odd, Prime, Composite)",
+    "conceptId": "even_numbers",
+    "options": [
+      "Even Numbers",
+      "Odd Numbers",
+      "Prime Numbers",
+      "Composite Numbers"
+    ],
+    "conceptPool": [
+      "even_numbers",
+      "odd_numbers",
+      "prime_numbers",
+      "composite_numbers"
+    ],
+    "isBoss": false
+  },
+  {
+    "id": "lvl_1_3",
+    "levelNum": 3,
+    "levelNumber": 3,
+    "worldId": "number_kingdom",
+    "levelName": "The Factor Forge (Factors, Multiples, HCF, LCM)",
+    "conceptId": "factor",
+    "options": [
+      "Factor",
+      "Multiple",
+      "HCF (GCD)",
+      "LCM"
+    ],
+    "conceptPool": [
+      "factor",
+      "multiple",
+      "hcf",
+      "lcm"
+    ],
+    "isBoss": false
+  },
+  {
+    "id": "lvl_1_4",
+    "levelNum": 4,
+    "levelNumber": 4,
+    "worldId": "number_kingdom",
+    "levelName": "The Divisibility Temple (Divisibility Rules)",
+    "conceptId": "divisible_by_2",
+    "options": [
+      "Divisible by 2",
+      "Divisible by 3",
+      "Divisible by 5",
+      "Divisible by 9"
+    ],
+    "conceptPool": [
+      "divisible_by_2",
+      "divisible_by_3",
+      "divisible_by_5",
+      "divisible_by_9"
+    ],
+    "isBoss": false
+  },
+  {
+    "id": "lvl_1_5",
+    "levelNum": 5,
+    "levelNumber": 5,
+    "worldId": "number_kingdom",
+    "levelName": "The Place Value Palace (Place Values)",
+    "conceptId": "ones_place",
+    "options": [
+      "Ones",
+      "Tens",
+      "Hundreds",
+      "Thousands"
+    ],
+    "conceptPool": [
+      "ones_place",
+      "tens_place",
+      "hundreds_place",
+      "thousands_place"
+    ],
+    "isBoss": false
+  },
+  {
+    "id": "lvl_1_6",
+    "levelNum": 6,
+    "levelNumber": 6,
+    "worldId": "number_kingdom",
+    "levelName": "The Comparison Bridge (Number Comparison)",
+    "conceptId": "greater_than",
+    "options": [
+      "Greater Than (>)",
+      "Less Than (<)",
+      "Equal To (=)",
+      "Ascending Order"
+    ],
+    "conceptPool": [
+      "greater_than",
+      "less_than",
+      "equal_to",
+      "ascending_order"
+    ],
+    "isBoss": false
+  },
+  {
+    "id": "lvl_1_7",
+    "levelNum": 7,
+    "levelNumber": 7,
+    "worldId": "number_kingdom",
+    "levelName": "The Fraction Forest (Fraction Types)",
+    "conceptId": "proper_fraction",
+    "options": [
+      "Proper Fraction",
+      "Improper Fraction",
+      "Mixed Fraction",
+      "Equivalent Fraction"
+    ],
+    "conceptPool": [
+      "proper_fraction",
+      "improper_fraction",
+      "mixed_fraction",
+      "equivalent_fraction"
+    ],
+    "isBoss": false
+  },
+  {
+    "id": "lvl_1_8",
+    "levelNum": 8,
+    "levelNumber": 8,
+    "worldId": "number_kingdom",
+    "levelName": "The Decimal Dock (Decimal Places)",
+    "conceptId": "tenths",
+    "options": [
+      "Tenths",
+      "Hundredths",
+      "Thousandths",
+      "Decimal Number"
+    ],
+    "conceptPool": [
+      "tenths",
+      "hundredths",
+      "thousandths",
+      "decimal_number_concept"
+    ],
+    "isBoss": false
+  },
+  {
+    "id": "lvl_1_9",
+    "levelNum": 9,
+    "levelNumber": 9,
+    "worldId": "number_kingdom",
+    "levelName": "The Ratio Market (Representations)",
+    "conceptId": "fraction_form",
+    "options": [
+      "Fraction",
+      "Decimal",
+      "Percentage",
+      "Ratio"
+    ],
+    "conceptPool": [
+      "fraction_form",
+      "decimal_form",
+      "percentage_form",
+      "ratio_form"
+    ],
+    "isBoss": false
+  },
+  {
+    "id": "lvl_1_10",
+    "levelNum": 10,
+    "levelNumber": 10,
+    "worldId": "number_kingdom",
+    "levelName": "The Roman Ruins (Roman & Ancient Numerals)",
+    "conceptId": "roman_numerals",
+    "options": [
+      "Roman Numerals",
+      "Hindu-Arabic Numerals",
+      "Expanded Form",
+      "Standard Form"
+    ],
+    "conceptPool": [
+      "roman_numerals",
+      "hindu_arabic_numerals",
+      "expanded_form",
+      "standard_form"
+    ],
+    "isBoss": false
+  },
+  {
+    "id": "lvl_1_11",
+    "levelNum": 11,
+    "levelNumber": 11,
+    "worldId": "number_kingdom",
+    "levelName": "The Pattern Peaks (Sequences & Patterns)",
+    "conceptId": "arithmetic_pattern",
+    "options": [
+      "Arithmetic Pattern",
+      "Geometric Pattern",
+      "Square Numbers",
+      "Cube Numbers"
+    ],
+    "conceptPool": [
+      "arithmetic_pattern",
+      "geometric_pattern",
+      "square_numbers",
+      "cube_numbers"
+    ],
+    "isBoss": false
+  },
+  {
+    "id": "lvl_1_12",
+    "levelNum": 12,
+    "levelNumber": 12,
+    "worldId": "number_kingdom",
+    "levelName": "The Operation Oasis (Arithmetic Operations)",
+    "conceptId": "addition_op",
+    "options": [
+      "Addition",
+      "Subtraction",
+      "Multiplication",
+      "Division"
+    ],
+    "conceptPool": [
+      "addition_op",
+      "subtraction_op",
+      "multiplication_op",
+      "division_op"
+    ],
+    "isBoss": false
+  },
+  {
+    "id": "lvl_1_13",
+    "levelNum": 13,
+    "levelNumber": 13,
+    "worldId": "number_kingdom",
+    "levelName": "The Estimation Enclave (Rounding & Estimation)",
+    "conceptId": "round_to_nearest_10",
+    "options": [
+      "Round to Nearest 10",
+      "Round to Nearest 100",
+      "Estimate Sum",
+      "Estimate Difference"
+    ],
+    "conceptPool": [
+      "round_to_nearest_10",
+      "round_to_nearest_100",
+      "estimate_sum",
+      "estimate_difference"
+    ],
+    "isBoss": false
+  },
+  {
+    "id": "lvl_1_14",
+    "levelNum": 14,
+    "levelNumber": 14,
+    "worldId": "number_kingdom",
+    "levelName": "The Power Peak (Powers & Roots)",
+    "conceptId": "square_power",
+    "options": [
+      "Square",
+      "Cube",
+      "Square Root",
+      "Cube Root"
+    ],
+    "conceptPool": [
+      "square_power",
+      "cube_power",
+      "square_root",
+      "cube_root"
+    ],
+    "isBoss": false
+  },
+  {
+    "id": "lvl_1_15",
+    "levelNum": 15,
+    "levelNumber": 15,
+    "worldId": "number_kingdom",
+    "levelName": "The King's Trial (Number Kingdom Boss)",
+    "conceptId": "prime_numbers",
+    "options": [
+      "Prime Number",
+      "HCF",
+      "Equivalent Fraction",
+      "Decimal Number"
+    ],
+    "conceptPool": [
+      "prime_numbers",
+      "hcf",
+      "equivalent_fraction",
+      "decimal_numbers"
+    ],
+    "isBoss": true
+  },
+  {
+    "id": "lvl_2_1",
+    "levelNum": 11,
+    "levelNumber": 11,
+    "worldId": "arithmetic_kingdom",
+    "conceptId": "arithmetic",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_2_2",
+    "levelNum": 12,
+    "levelNumber": 12,
+    "worldId": "arithmetic_kingdom",
+    "conceptId": "percentage",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_2_3",
+    "levelNum": 13,
+    "levelNumber": 13,
+    "worldId": "arithmetic_kingdom",
+    "conceptId": "ratio",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_2_4",
+    "levelNum": 14,
+    "levelNumber": 14,
+    "worldId": "arithmetic_kingdom",
+    "conceptId": "profit_loss",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_2_5",
+    "levelNum": 15,
+    "levelNumber": 15,
+    "worldId": "arithmetic_kingdom",
+    "conceptId": "gst",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_2_6",
+    "levelNum": 16,
+    "levelNumber": 16,
+    "worldId": "arithmetic_kingdom",
+    "conceptId": "banking",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_2_7",
+    "levelNum": 17,
+    "levelNumber": 17,
+    "worldId": "arithmetic_kingdom",
+    "conceptId": "shares_dividends",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_2_8",
+    "levelNum": 18,
+    "levelNumber": 18,
+    "worldId": "arithmetic_kingdom",
+    "conceptId": "speed_distance_time",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_2_9",
+    "levelNum": 19,
+    "levelNumber": 19,
+    "worldId": "arithmetic_kingdom",
+    "conceptId": "standard_form",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_2_10",
+    "levelNum": 20,
+    "levelNumber": 20,
+    "worldId": "arithmetic_kingdom",
+    "conceptId": "number_bases",
+    "isBoss": true,
+    "bossConcepts": [
+      "arithmetic",
+      "percentage",
+      "ratio",
+      "profit_loss",
+      "speed_distance_time"
+    ]
+  },
+  {
+    "id": "lvl_3_1",
+    "levelNum": 1,
+    "levelNumber": 1,
+    "worldId": "geometry_kingdom",
+    "conceptId": "angles",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_3_2",
+    "levelNum": 2,
+    "levelNumber": 2,
+    "worldId": "geometry_kingdom",
+    "conceptId": "triangles",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_3_3",
+    "levelNum": 3,
+    "levelNumber": 3,
+    "worldId": "geometry_kingdom",
+    "conceptId": "congruence",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_3_4",
+    "levelNum": 4,
+    "levelNumber": 4,
+    "worldId": "geometry_kingdom",
+    "conceptId": "similarity",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_3_5",
+    "levelNum": 5,
+    "levelNumber": 5,
+    "worldId": "geometry_kingdom",
+    "conceptId": "polygons",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_3_6",
+    "levelNum": 6,
+    "levelNumber": 6,
+    "worldId": "geometry_kingdom",
+    "conceptId": "circle_theorems",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_3_7",
+    "levelNum": 7,
+    "levelNumber": 7,
+    "worldId": "geometry_kingdom",
+    "conceptId": "herons_formula",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_3_8",
+    "levelNum": 8,
+    "levelNumber": 8,
+    "worldId": "geometry_kingdom",
+    "conceptId": "pythagoras_theorem",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_3_9",
+    "levelNum": 9,
+    "levelNumber": 9,
+    "worldId": "geometry_kingdom",
+    "conceptId": "circular_measure",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_3_10",
+    "levelNum": 10,
+    "levelNumber": 10,
+    "worldId": "geometry_kingdom",
+    "conceptId": "transformations",
+    "isBoss": true,
+    "bossConcepts": [
+      "angles",
+      "triangles",
+      "similarity",
+      "circle_theorems",
+      "pythagoras_theorem"
+    ]
+  },
+  {
+    "id": "lvl_4_1",
+    "levelNum": 1,
+    "levelNumber": 1,
+    "worldId": "algebra_kingdom",
+    "conceptId": "linear_equation",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_4_2",
+    "levelNum": 2,
+    "levelNumber": 2,
+    "worldId": "algebra_kingdom",
+    "conceptId": "simultaneous_equations",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_4_3",
+    "levelNum": 3,
+    "levelNumber": 3,
+    "worldId": "algebra_kingdom",
+    "conceptId": "inequality",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_4_4",
+    "levelNum": 4,
+    "levelNumber": 4,
+    "worldId": "algebra_kingdom",
+    "conceptId": "function",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_4_5",
+    "levelNum": 5,
+    "levelNumber": 5,
+    "worldId": "algebra_kingdom",
+    "conceptId": "indices",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_4_6",
+    "levelNum": 6,
+    "levelNumber": 6,
+    "worldId": "algebra_kingdom",
+    "conceptId": "surds",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_4_7",
+    "levelNum": 7,
+    "levelNumber": 7,
+    "worldId": "algebra_kingdom",
+    "conceptId": "quadratic_equation",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_4_8",
+    "levelNum": 8,
+    "levelNumber": 8,
+    "worldId": "algebra_kingdom",
+    "conceptId": "quadratic_formula",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_4_9",
+    "levelNum": 9,
+    "levelNumber": 9,
+    "worldId": "algebra_kingdom",
+    "conceptId": "polynomial_factorization",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_4_10",
+    "levelNum": 10,
+    "levelNumber": 10,
+    "worldId": "algebra_kingdom",
+    "conceptId": "polynomial_multiplication",
+    "isBoss": true,
+    "bossConcepts": [
+      "linear_equation",
+      "inequality",
+      "function",
+      "indices",
+      "surds"
+    ]
+  },
+  {
+    "id": "lvl_5_1",
+    "levelNum": 1,
+    "levelNumber": 1,
+    "worldId": "advanced_mathematics",
+    "conceptId": "matrix",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_5_2",
+    "levelNum": 2,
+    "levelNumber": 2,
+    "worldId": "advanced_mathematics",
+    "conceptId": "vector",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_5_3",
+    "levelNum": 3,
+    "levelNumber": 3,
+    "worldId": "advanced_mathematics",
+    "conceptId": "dot_products",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_5_4",
+    "levelNum": 4,
+    "levelNumber": 4,
+    "worldId": "advanced_mathematics",
+    "conceptId": "linear_algebra",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_5_5",
+    "levelNum": 5,
+    "levelNumber": 5,
+    "worldId": "advanced_mathematics",
+    "conceptId": "logarithms",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_5_6",
+    "levelNum": 6,
+    "levelNumber": 6,
+    "worldId": "advanced_mathematics",
+    "conceptId": "sequence",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_5_7",
+    "levelNum": 7,
+    "levelNumber": 7,
+    "worldId": "advanced_mathematics",
+    "conceptId": "binomial_theorem",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_5_8",
+    "levelNum": 8,
+    "levelNumber": 8,
+    "worldId": "advanced_mathematics",
+    "conceptId": "complex_numbers",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_5_9",
+    "levelNum": 9,
+    "levelNumber": 9,
+    "worldId": "advanced_mathematics",
+    "conceptId": "permutations_combinations",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_5_10",
+    "levelNum": 10,
+    "levelNumber": 10,
+    "worldId": "advanced_mathematics",
+    "conceptId": "probability",
+    "isBoss": true,
+    "bossConcepts": [
+      "matrix",
+      "vector",
+      "logarithms",
+      "sequence",
+      "binomial_theorem"
+    ]
+  },
+  {
+    "id": "lvl_6_1",
+    "levelNum": 1,
+    "levelNumber": 1,
+    "worldId": "coordinate_calculus",
+    "conceptId": "coordinate_geometry",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_6_2",
+    "levelNum": 2,
+    "levelNumber": 2,
+    "worldId": "coordinate_calculus",
+    "conceptId": "line_equation",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_6_3",
+    "levelNum": 3,
+    "levelNumber": 3,
+    "worldId": "coordinate_calculus",
+    "conceptId": "section_formula",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_6_4",
+    "levelNum": 4,
+    "levelNumber": 4,
+    "worldId": "coordinate_calculus",
+    "conceptId": "conic_sections",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_6_5",
+    "levelNum": 5,
+    "levelNumber": 5,
+    "worldId": "coordinate_calculus",
+    "conceptId": "limits",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_6_6",
+    "levelNum": 6,
+    "levelNumber": 6,
+    "worldId": "coordinate_calculus",
+    "conceptId": "differentiation",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_6_7",
+    "levelNum": 7,
+    "levelNumber": 7,
+    "worldId": "coordinate_calculus",
+    "conceptId": "integration",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_6_8",
+    "levelNum": 8,
+    "levelNumber": 8,
+    "worldId": "coordinate_calculus",
+    "conceptId": "differential_equations",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_6_9",
+    "levelNum": 9,
+    "levelNumber": 9,
+    "worldId": "coordinate_calculus",
+    "conceptId": "inverse_trigonometry",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_6_10",
+    "levelNum": 10,
+    "levelNumber": 10,
+    "worldId": "coordinate_calculus",
+    "conceptId": "trigonometry",
+    "isBoss": true,
+    "bossConcepts": [
+      "coordinate_geometry",
+      "line_equation",
+      "differentiation",
+      "integration",
+      "limits"
+    ]
+  },
+  {
+    "id": "lvl_7_1",
+    "levelNum": 1,
+    "levelNumber": 1,
+    "worldId": "data_logic",
+    "conceptId": "statistics",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_7_2",
+    "levelNum": 2,
+    "levelNumber": 2,
+    "worldId": "data_logic",
+    "conceptId": "mean",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_7_3",
+    "levelNum": 3,
+    "levelNumber": 3,
+    "worldId": "data_logic",
+    "conceptId": "set",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_7_4",
+    "levelNum": 4,
+    "levelNumber": 4,
+    "worldId": "data_logic",
+    "conceptId": "venn_diagram",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_7_5",
+    "levelNum": 5,
+    "levelNumber": 5,
+    "worldId": "data_logic",
+    "conceptId": "variation",
+    "isBoss": false
+  },
+  {
+    "id": "lvl_7_6",
+    "levelNum": 6,
+    "levelNumber": 6,
+    "worldId": "data_logic",
+    "conceptId": "vocabulary",
+    "isBoss": true,
+    "bossConcepts": [
+      "statistics",
+      "mean",
+      "set",
+      "venn_diagram",
+      "variation"
+    ]
+  }
+]

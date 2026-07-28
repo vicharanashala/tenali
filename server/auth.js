@@ -42,6 +42,25 @@ if (JWT_SECRET === DEFAULT_DEV_SECRET) {
 const UserSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true, index: true, lowercase: true, trim: true },
   passwordHash: { type: String, required: true },
+  mrr: { type: Number, default: 1000 },
+  mindReaderGamesToday: { type: Number, default: 0 },
+  lastMindReaderGameDate: { type: String, default: "" },
+  unlockedSkins: [{ type: String, default: ["Classic Tenali"] }],
+  equippedSkin: { type: String, default: 'classic' },
+  equippedTitle: { type: String, default: 'Novice Reader' },
+  reverseMindReaderWinStreak: { type: Number, default: 0 },
+  guessMindWinStreak: { type: Number, default: 0 },
+  xp: { type: Number, default: 0 },
+  worldProgress: [{
+    worldId: { type: String, required: true },
+    unlocked: { type: Boolean, default: false }
+  }],
+  levelProgress: [{
+    levelNum: { type: Number, required: true },
+    conceptId: { type: String, required: true },
+    starsEarned: { type: Number, default: 0 }, // 0 to 3 stars
+    completedAt: { type: Date, default: Date.now }
+  }],
   createdAt: { type: Date, default: Date.now },
   completedTopics: { type: [String], default: [] },
   goldMastery: { type: [String], default: [] },
@@ -156,6 +175,21 @@ const UserCollectionProgressSchema = new mongoose.Schema({
 UserCollectionProgressSchema.index({ userId: 1, collectionId: 1 }, { unique: true });
 const UserCollectionProgress = mongoose.model('UserCollectionProgress', UserCollectionProgressSchema);
 
+const MindReaderAnalyticSchema = new mongoose.Schema({
+  outcome: { type: String, enum: ['win', 'loss'], required: true },
+  concept: { type: String, required: true },
+  questionsCount: { type: Number, required: true },
+  scope: { type: String, required: true },
+  predictionsMade: [{ type: String }],
+  questionsAsked: [{ type: String }],
+  hintsRequested: { type: Number, default: 0 },
+  completionTime: { type: Number }, // in seconds
+  incorrectGuessesCount: { type: Number, default: 0 },
+  createdAt: { type: Date, default: Date.now }
+});
+
+const MindReaderAnalytic = mongoose.model('MindReaderAnalytic', MindReaderAnalyticSchema);
+
 // ─── Connection + seeding ────────────────────────────────────────────────────
 
 let connected = false;
@@ -184,6 +218,8 @@ const ENV_SEED_USERS = (process.env.TENALI_SEED_USERS || '')
 
 // Always include the admin account for proctor dashboard access
 const SEED_USERS = [
+  { username: 'sudarshan', password: 'sherlockholmes' },
+  { username: 'tatsavit', password: 'taittiriya' },
   ...ENV_SEED_USERS,
   { username: 'admin', password: 'tenaliadmin', role: 'admin' },
 ];
@@ -276,4 +312,4 @@ router.get('/me', requireAuth, (req, res) => {
   res.json({ user: req.user });
 });
 
-module.exports = { connectMongo, seedUsers, router, requireAuth, requireAdmin, JWT_SECRET, User, Progress, StudentAttemptLog, UserStats, UserMilestone, UserTopicProgress, UserCollectionProgress };
+module.exports = { connectMongo, seedUsers, router, requireAuth, requireAdmin, JWT_SECRET, User, Progress, StudentAttemptLog, UserStats, UserMilestone, UserTopicProgress, UserCollectionProgress, MindReaderAnalytic };
