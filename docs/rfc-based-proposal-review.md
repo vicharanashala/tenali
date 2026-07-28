@@ -1,44 +1,40 @@
-# Feature Proposal Review Process for Tenali (RFC-Based)
+# Feature Proposal Process for Tenali Interns
 
-As interns and parallel feature work scale up, we need a structured way to discuss and review feature ideas before implementation, ensuring proposals are well documented and visible to everyone working on related modules.
+As we scale development with multiple interns building parallel features, we need a structured way to review feature ideas before they clutter the codebase, while keeping the actual implementation process as lightweight as possible.
 
-This proposal outlines a **Git-tracked RFC workflow inside the Tenali repository**.
+This document outlines the **Issue-to-PR Funnel**, designed specifically for interns proposing new features. 
 
----
-
-## Proposed Workflow
-
-1. Proposals live in the main Tenali repository under `docs/rfcs/`, with one folder per module to mirror the existing codebase structure:
-   ```
-   docs/rfcs/
-     hcf/
-     lcm/
-     fractions/
-     decimals/
-     indices/
-     ...
-   ```
-2. Before implementation, an intern adds an RFC (`docs/rfcs/<module>/000X-feature-name.md`) covering the feature, motivation, design, affected components, and open questions using a shared template for consistency.
-3. The intern opens a **PR containing only the RFC** without code, keeping the initial review focused strictly on design.
-4. Discussion happens in the PR comments where anyone working on the same module can discover, review, and contribute.
-5. Once agreed upon, the RFC PR is merged. Implementation begins only after approval.
-6. The implementation PR references the approved RFC (e.g., `Implements docs/rfcs/hcf/0003-visual-gcd-explainer.md`), creating a clear link in the project history.
-7. If implementation details evolve during development, the intern updates the RFC in the same PR or a follow-up PR to maintain an accurate design record.
+*(Note: Other types of contributions, such as bug fixes, documentation updates, or minor UI tweaks, can bypass the Issue/RFC requirement and follow the conventional GitHub PR process).*
 
 ---
 
-## Tracking
+## The Workflow
 
-- A **GitHub Project board** (or labels like `type:rfc` and `module:hcf`) on the repository tracks status.
-- Workflow columns: **Draft → Needs Review → Changes Requested → Approved → Implementing → Completed**.
-- Filtering by the `type:rfc` label provides a live view of active proposals alongside code reviews.
+The core philosophy is to keep high-level brainstorming and design discussions in GitHub Issues, and reserve Pull Requests for fully-baked, approved implementations.
+
+### Step 1: The Feature Proposal (GitHub Issue)
+1. Before writing any code or technical design documents, the intern opens a **GitHub Issue** using the `Feature Proposal` template (`docs/templates/feat-issue-temp.md`).
+2. This issue focuses entirely on the "What" and the "Why" (User story, learner pain point, and high-level solution). It does *not* include deep technical implementation details.
+3. Maintainers, mentors, and reviewers discuss the idea with the intern directly in the Issue thread.
+
+### Step 2: Approval & Assignment
+1. Once the idea is validated, a maintainer labels the issue as `approved` and assigns it to the intern.
+2. If the idea is rejected or deferred, the issue is closed, saving the intern from writing wasted code.
+
+### Step 3: The Implementation (Single PR for RFC + Code)
+Thanks to AI-assisted coding tools, the cost of implementing a Minimum Viable Product (MVP) is lower than ever. Therefore, we do not require separate PRs for the RFC and the code.
+1. The intern creates a branch and writes the **RFC Document** (`docs/rfcs/<module>/000X-feature-name.md`) detailing the data schema, UI mockups, and technical decisions.
+2. The intern implements the MVP code.
+3. The intern opens **ONE dedicated Pull Request** containing both the RFC document and the MVP code implementation.
+
+### Step 4: Iteration and Merge
+1. Reviewers evaluate the PR. Because the core idea was already approved in the Issue, this review focuses on code quality, architecture (via the RFC), and UI alignment.
+2. The intern iterates on the code and RFC based on feedback within the PR until it is merge-ready.
+3. Once approved, the PR is merged, adding both the code to the app and the finalized RFC to the `docs/rfcs/` archive.
 
 ---
 
 ## Key Benefits
-
-1. **Structured Documentation**: Every feature starts with an RFC in the repository, making design rationale easy to find and reference.
-2. **Improved Visibility**: Interns can review related proposals early, reducing duplicate work and encouraging early feedback.
-3. **Integrated Workflow**: Keeps documentation and code in one place, making it easier for new contributors to get oriented.
-4. **Traceability**: The RFC and its implementation share the git history, ensuring design context stays connected to the code.
-5. **Familiar Process**: Reuses standard PR creation and review habits that contributors already use.
+1. **Zero PR Bloat**: Brainstorming stays in Issues. Only approved features make it to the PR tab.
+2. **Speed & Autonomy**: Consolidating the RFC and the Code into a single PR removes bureaucratic delays and plays to the strengths of modern, AI-assisted "vibe coding".
+3. **Traceability**: The implementation PR references the original Issue, and the final merged code is permanently accompanied by its technical blueprint in the `rfcs/` folder.
