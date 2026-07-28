@@ -2,7 +2,7 @@ node_modules
 *.log
 client/dist
 server.log
-docs/
+
 server/in_memory_users_db.json
 server/lil/learning_journey/in_memory_journey_progress.json
 server/dictionaryCache
