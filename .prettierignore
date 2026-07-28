@@ -1,0 +1,31 @@
+# Node and build outputs
+node_modules
+**/node_modules/**
+dist
+**/dist/**
+build
+.git
+.github
+
+# Exclude large educational data/JSON directories
+chitragupta/
+vocab/
+
+# Exclude generated/lock files
+package-lock.json
+**/package-lock.json
+*.png
+*.jpg
+*.jpeg
+*.svg
+*.webp
+
+# Ignore individual large files or static assets
+server/wordCreatorPuzzles.json
+vachana_extract.txt
+vachana_conflicts.txt
+todo.txt
+
+# Legacy unformatted monolith files (ignored to prevent massive merge conflicts in PRs)
+client/src/App.jsx
+server/index.js
