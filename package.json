@@ -1,6 +1,14 @@
 {
+  "name": "tenali-root",
+  "private": true,
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "npm run lint --prefix client"
+  },
   "devDependencies": {
     "acorn": "^8.16.0",
-    "acorn-jsx": "^5.3.2"
+    "acorn-jsx": "^5.3.2",
+    "prettier": "^3.2.5"
   }
 }

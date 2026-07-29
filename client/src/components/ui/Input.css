@@ -1,0 +1,68 @@
+.tenali-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.tenali-input-label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--clr-text-soft, #a89e94);
+}
+
+.tenali-input {
+  width: 100%;
+  font-family: var(--font-body);
+  background-color: var(--clr-input, #3e3631);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm, 10px);
+  padding: 10px 14px;
+  color: var(--clr-text, #ede8e3);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color var(--transition, 180ms ease),
+              box-shadow var(--transition, 180ms ease);
+}
+
+.tenali-input::placeholder {
+  color: var(--clr-placeholder, #6b6058);
+}
+
+/* INTERACTIVE & STATE FOCUS */
+.tenali-input:focus:not(.tenali-input--disabled) {
+  border-color: var(--clr-accent, #e8864a);
+  box-shadow: 0 0 0 3px var(--clr-accent-soft);
+}
+
+/* ERROR STATE */
+.tenali-input--error {
+  border-color: var(--clr-wrong, #e05a4a);
+}
+
+.tenali-input--error:focus {
+  box-shadow: 0 0 0 3px var(--clr-wrong-bg);
+}
+
+.tenali-input-error-msg {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--clr-wrong, #e05a4a);
+  margin-top: 2px;
+}
+
+/* SUCCESS STATE */
+.tenali-input--success {
+  border-color: var(--clr-correct, #5cb87a);
+}
+
+.tenali-input--success:focus {
+  box-shadow: 0 0 0 3px var(--clr-correct-bg);
+}
+
+/* DISABLED STATE */
+.tenali-input--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

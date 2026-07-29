@@ -50,10 +50,13 @@ export default function KeyTerms({ topicKey }) {
   // Data resolution - fail-safe try/catch around the entire read.
   // -------------------------------------------------------------------
   let validEntries = []
+  let hasError = false
   try {
     if (
-      topicKey && typeof topicKey === 'string' &&
-      topicGlossaryMap && typeof topicGlossaryMap === 'object' &&
+      topicKey &&
+      typeof topicKey === 'string' &&
+      topicGlossaryMap &&
+      typeof topicGlossaryMap === 'object' &&
       Array.isArray(glossaryTerms)
     ) {
       const termKeys = topicGlossaryMap[topicKey] || []
@@ -79,12 +82,16 @@ export default function KeyTerms({ topicKey }) {
     if (typeof console !== 'undefined' && console.warn) {
       console.warn('Word Explorer: failed to read data, hiding.', err)
     }
+    hasError = true
   }
 
   // -------------------------------------------------------------------
-  // State (hooks must be called unconditionally, before any early return)
+  // State
   // -------------------------------------------------------------------
   const [isOpen, setIsOpen] = useState(false)
+  // selectedKey stores the canonical term name (e.g. "Midpoint") of the
+  // currently selected word. null means "nothing selected yet" (only briefly,
+  // before the auto-select effect runs on first open).
   const [selectedKey, setSelectedKey] = useState(null)
   const wrapperRef = useRef(null)
 
@@ -96,6 +103,8 @@ export default function KeyTerms({ topicKey }) {
     } else {
       setSelectedKey(null)
     }
+    // We intentionally depend only on isOpen - switching word is the
+    // user's action via the dedicated handler below.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen])
 
@@ -121,19 +130,18 @@ export default function KeyTerms({ topicKey }) {
   // Escape closes the panel.
   useEffect(() => {
     if (!isOpen) return
-    const handleKey = (e) => { if (e.key === 'Escape') setIsOpen(false) }
+    const handleKey = (e) => {
+      if (e.key === 'Escape') setIsOpen(false)
+    }
     window.addEventListener('keydown', handleKey)
     return () => window.removeEventListener('keydown', handleKey)
   }, [isOpen])
 
-  // Early return after all hooks are declared
-  if (validEntries.length === 0) return null
-
-  const handleToggle = () => setIsOpen(o => !o)
+  const handleToggle = () => setIsOpen((o) => !o)
 
   const handleSelectWord = (term) => {
     // Idempotent: clicking the already-selected word is a no-op.
-    setSelectedKey(prev => (prev === term ? prev : term))
+    setSelectedKey((prev) => (prev === term ? prev : term))
   }
 
   // Resolves the selected entry by canonical term name. Falls back to the
@@ -141,13 +149,15 @@ export default function KeyTerms({ topicKey }) {
   // is open (the auto-select effect guarantees this on every open, but
   // the fallback is defensive in case of unexpected state).
   const selectedEntry =
-    validEntries.find(e => e.term === selectedKey) || validEntries[0]
+    validEntries.find((e) => e.term === selectedKey) || validEntries[0]
 
   const panelId = `word-explorer-panel-${topicKey}`
 
   // -------------------------------------------------------------------
   // Render
   // -------------------------------------------------------------------
+  if (hasError || validEntries.length === 0) return null
+
   return (
     <div className="word-explorer" ref={wrapperRef}>
       <button
@@ -158,7 +168,9 @@ export default function KeyTerms({ topicKey }) {
         aria-controls={panelId}
       >
         Word Explorer ({validEntries.length})
-        <span className="word-explorer-caret" aria-hidden="true">&#9662;</span>
+        <span className="word-explorer-caret" aria-hidden="true">
+          &#9662;
+        </span>
       </button>
       {isOpen && (
         <div
@@ -167,8 +179,12 @@ export default function KeyTerms({ topicKey }) {
           role="region"
           aria-label={`Word explorer for ${validEntries.length} glossary words`}
         >
-          <div className="word-explorer-list" role="listbox" aria-label="Glossary words">
-            {validEntries.map(entry => {
+          <div
+            className="word-explorer-list"
+            role="listbox"
+            aria-label="Glossary words"
+          >
+            {validEntries.map((entry) => {
               const isSelected = entry.term === selectedEntry.term
               return (
                 <button
@@ -190,7 +206,9 @@ export default function KeyTerms({ topicKey }) {
             <h4 className="word-explorer-reader-term">{selectedEntry.term}</h4>
 
             <p className="word-explorer-reader-simple">
-              {selectedEntry.simpleMeaning || selectedEntry.definition || 'Definition unavailable.'}
+              {selectedEntry.simpleMeaning ||
+                selectedEntry.definition ||
+                'Definition unavailable.'}
             </p>
 
             {selectedEntry.visualId ? (
@@ -201,27 +219,44 @@ export default function KeyTerms({ topicKey }) {
 
             {selectedEntry.realLifeExample ? (
               <div className="word-explorer-reader-example">
-                <span className="word-explorer-reader-icon" aria-hidden="true">Eg.</span>
-                <span className="word-explorer-reader-body">{selectedEntry.realLifeExample}</span>
+                <span className="word-explorer-reader-icon" aria-hidden="true">
+                  Eg.
+                </span>
+                <span className="word-explorer-reader-body">
+                  {selectedEntry.realLifeExample}
+                </span>
               </div>
             ) : null}
 
             {selectedEntry.memoryTip ? (
               <div className="word-explorer-reader-tip">
-                <span className="word-explorer-reader-icon" aria-hidden="true">Tip.</span>
-                <span className="word-explorer-reader-body">{selectedEntry.memoryTip}</span>
+                <span className="word-explorer-reader-icon" aria-hidden="true">
+                  Tip.
+                </span>
+                <span className="word-explorer-reader-body">
+                  {selectedEntry.memoryTip}
+                </span>
               </div>
             ) : null}
 
-            {selectedEntry.differentiates && Object.keys(selectedEntry.differentiates).length > 0 ? (
+            {selectedEntry.differentiates &&
+            Object.keys(selectedEntry.differentiates).length > 0 ? (
               <div className="word-explorer-reader-difference">
-                <div className="word-explorer-reader-section-label">Differs from</div>
-                {Object.entries(selectedEntry.differentiates).map(([otherTerm, explanation]) => (
-                  <div key={otherTerm} className="word-explorer-diff-row">
-                    <span className="word-explorer-diff-term">{otherTerm}</span>
-                    <span className="word-explorer-diff-body">{explanation}</span>
-                  </div>
-                ))}
+                <div className="word-explorer-reader-section-label">
+                  Differs from
+                </div>
+                {Object.entries(selectedEntry.differentiates).map(
+                  ([otherTerm, explanation]) => (
+                    <div key={otherTerm} className="word-explorer-diff-row">
+                      <span className="word-explorer-diff-term">
+                        {otherTerm}
+                      </span>
+                      <span className="word-explorer-diff-body">
+                        {explanation}
+                      </span>
+                    </div>
+                  )
+                )}
               </div>
             ) : null}
           </div>

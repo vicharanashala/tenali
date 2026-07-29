@@ -1,0 +1,26 @@
+.tenali-card {
+  background-color: var(--clr-card, #2c2622);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius, 16px);
+  padding: 24px;
+  box-shadow: var(--shadow-card);
+  color: var(--clr-text, #ede8e3);
+  transition: border-color var(--transition, 180ms ease),
+              box-shadow var(--transition, 180ms ease),
+              transform var(--transition, 180ms ease);
+}
+
+/* INTERACTIVE STATE */
+.tenali-card--interactive {
+  cursor: pointer;
+}
+
+.tenali-card--interactive:hover {
+  border-color: var(--clr-accent-soft);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  transform: translateY(-2px);
+}
+
+.tenali-card--interactive:active {
+  transform: translateY(0);
+}
