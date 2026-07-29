@@ -1,7 +1,8 @@
 ## 1. Problem Statement
+<!-- Describe the specific problem or pain point this feature aims to solve. -->
 
 ## 2. Feature Description
-<!-- What exactly are you proposing? Why is it necessary? What specific learner pain point does it solve? -->
+<!-- What exactly are you proposing? Why is it necessary? -->
 
 ## 3. High-Level Solution
 <!-- Briefly describe how you envision this working. Keep it high-level; detailed technical design belongs in the RFC. -->
@@ -11,6 +12,3 @@
 
 ## 5. Research Reference
 <!-- Mention any research, case studies, or reference material that inspired or supports this idea. -->
-
----
-*Note: Once this issue is discussed and approved by a maintainer, you will be cleared to open a single Pull Request containing both your technical RFC document and the feature implementation code.*
