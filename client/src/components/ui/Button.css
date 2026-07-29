@@ -1,0 +1,100 @@
+.tenali-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-weight: 600;
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm, 10px);
+  cursor: pointer;
+  outline: none;
+  transition: all var(--transition, 180ms ease);
+  user-select: none;
+  text-decoration: none;
+  box-shadow: var(--shadow-btn);
+}
+
+/* SIZES */
+.tenali-btn--sm {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+}
+
+.tenali-btn--md {
+  padding: 10px 20px;
+  font-size: 0.95rem;
+}
+
+.tenali-btn--lg {
+  padding: 14px 28px;
+  font-size: 1.1rem;
+  border-radius: var(--radius, 16px);
+}
+
+/* VARIANTS */
+
+/* Primary Button: Brand Highlight */
+.tenali-btn--primary {
+  background-color: var(--clr-accent, #e8864a);
+  color: #ffffff;
+}
+
+.tenali-btn--primary:hover:not(.tenali-btn--disabled) {
+  background-color: transparent;
+  border-color: var(--clr-accent, #e8864a);
+  color: var(--clr-accent, #e8864a);
+  transform: translateY(-1px);
+}
+
+.tenali-btn--primary:active:not(.tenali-btn--disabled) {
+  transform: translateY(0);
+}
+
+/* Secondary Button: Muted Actions */
+.tenali-btn--secondary {
+  background-color: var(--clr-surface, #362f2a);
+  color: var(--clr-text, #ede8e3);
+  border-color: var(--clr-border);
+}
+
+.tenali-btn--secondary:hover:not(.tenali-btn--disabled) {
+  background-color: var(--clr-input, #3e3631);
+  color: var(--clr-text, #ede8e3);
+  border-color: var(--clr-text-soft);
+  transform: translateY(-1px);
+}
+
+/* Danger Button: Destructive/Cancel Actions */
+.tenali-btn--danger {
+  background-color: var(--clr-wrong, #e05a4a);
+  color: #ffffff;
+}
+
+.tenali-btn--danger:hover:not(.tenali-btn--disabled) {
+  background-color: transparent;
+  border-color: var(--clr-wrong, #e05a4a);
+  color: var(--clr-wrong, #e05a4a);
+  transform: translateY(-1px);
+}
+
+/* Outline Button: Subtle, minimal border button */
+.tenali-btn--outline {
+  background-color: transparent;
+  color: var(--clr-text, #ede8e3);
+  border-color: var(--clr-border);
+}
+
+.tenali-btn--outline:hover:not(.tenali-btn--disabled) {
+  background-color: var(--clr-hover-strong);
+  border-color: var(--clr-text-soft);
+  color: var(--clr-text, #ede8e3);
+  transform: translateY(-1px);
+}
+
+/* DISABLED STATE */
+.tenali-btn--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+  pointer-events: none;
+}
