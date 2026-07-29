@@ -21,6 +21,7 @@ Everything in your workflow traces back to one of these. Bookmark all four now.
 | **`Tenali-core-problem-statements.md`** | The 3 priority problem statements (Engagement; Adaptive Progression & Level Continuity; Minimalistic, Cognitive-Load-Aware UI) - what Tenali is trying to solve right now, and why, with research grounding for each. | **Before picking what to work on.** Every feature should trace back to one of these. |
 | **Case Study Library** (starting with `duolingo.md`) | Deep-dives on existing platforms (Duolingo, and more to come - Khan Academy, Brilliant, SuperMemo/Anki) covering their mechanics, the research behind them, and what does/doesn't transfer to Tenali. | **While researching your idea**, before writing a proposal - mine these for precedent instead of designing from a blank page. |
 | **`rfc-based-proposal-review.md`** | The proposal/design-review process: RFCs live in `docs/rfcs/<module>/`, get reviewed as a docs-only PR, and are approved *before* implementation begins. | **Before you write any code.** This is how you propose a feature and get design feedback early. |
+| **`ui-guidelines.md`** | The UI Guidelines and Design System — standard colors, fonts, sizing, layout rules, and component libraries. | **While designing and coding your feature.** Refer here to ensure your UI matches Tenali's look. |
 
 ---
 
@@ -49,7 +50,7 @@ Follow **`rfc-based-proposal-review.md`**:
 This is a hard gate, not a suggestion - implementation should start only after the RFC is approved, so design misalignment gets caught early instead of after code is written.
 
 ### Step 4 - Build It
-- Use shared UI components and follow the **Minimalistic UI** principles from Problem Statement C - one primary focus per screen, minimal text, standardized components.
+- Read **`ui-guidelines.md`** and use standard UI variables and components under `client/src/components/ui/` to build your feature. Follow the **Minimalistic UI** principles from Problem Statement C — one primary focus per screen, minimal text, and standardized styles.
 - If your feature touches learner progress or mastery, it should integrate with the shared mastery data model referenced in Problem Statement B, not maintain its own isolated state.
 - Make sure your environment is set up correctly (correct Node/npm version - check for a `.nvmrc` or `engines` field) before you start, to avoid unrelated lockfile diffs later.
 - Confirm CI checks (Prettier, ESLint, Vitest) pass locally before opening a PR.
@@ -88,7 +89,7 @@ Beyond the RFC-then-implementation flow above:
 - [ ] Checked the Case Study Library for relevant precedent (and can cite it)
 - [ ] Drafted an RFC in `docs/rfcs/<module>/` per `rfc-based-proposal-review.md` and got it approved
 - [ ] Set up local environment with the correct Node/npm version
-- [ ] Built the feature using shared UI components and Minimalistic UI principles
+- [ ] Built the feature using standard UI variables and components per `ui-guidelines.md`
 - [ ] CI checks (Prettier, ESLint, Vitest) passing locally
 - [ ] PR description includes what/why, RFC link, screenshots, and test steps
 - [ ] Prepared for a live demo and feedback discussion at the 4:00 PM standup
