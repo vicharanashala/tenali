@@ -7,7 +7,7 @@ assignees: ''
 ---
 
 ## 1. Problem Statement
-<!-- Which of the 8 core Tenali Problem Statements does this address? (e.g., Learner Motivation, Granular Level Design, etc.) -->
+<!-- Which of the 3 core Tenali Problem Statements does this address? (e.g., Learner Motivation, Granular Level Design, etc.) -->
 
 ## 2. The Pitch (The "What" and "Why")
 <!-- What exactly are you proposing? Why is it necessary? What specific learner pain point does it solve? -->

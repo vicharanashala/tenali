@@ -3,8 +3,8 @@
 - **Author(s):** [Contributor Name] (@github-username)
 - **Status:** Draft | Under Review | Approved | Implemented
 - **Created Date:** YYYY-MM-DD
-- **Target Module/Vertical:** [Vachana | What-If | Engagement | Language | Inclusivity | Core]
-- **Related Issue / Problem Statement:** [Link to PS document, e.g., `PS/vachana-problem-statement.md`]
+- **Target Module/Vertical:** [Fractions | LCM | Engagement | Progression | Core UI]
+- **Related Issue / Problem Statement:** [Link to problem statement, e.g., `docs/problem-statements.md#learner-motivation`]
 
 ---
 
@@ -27,7 +27,7 @@ Provide a 2-3 sentence high-level summary of the proposed feature, the problem i
 Detailed walk-through of how a student or teacher interacts with the feature.
 
 ### 3.1 User Flow & Screenshots / Wireframes
-1. **Entry Point:** Where does the user navigate from? (e.g., `/vachana`, `/what-if/quadratic`)
+1. **Entry Point:** Where does the user navigate from? (e.g., `/fractions`, `/dashboard`)
 2. **Interactive Steps:** Step-by-step breakdown of user interactions (drag-and-drop, sliders, text input, multiple choice).
 3. **Feedback Mechanics:** What happens on correct/incorrect attempts? (e.g., celebratory micro-animations, instant diagnostic hint, error correction modal).
 
