@@ -21,7 +21,6 @@ Everything in your workflow traces back to one of these. Bookmark all four now.
 | **`Tenali-core-problem-statements.md`** | The 3 priority problem statements (Engagement; Adaptive Progression & Level Continuity; Minimalistic, Cognitive-Load-Aware UI) - what Tenali is trying to solve right now, and why, with research grounding for each. | **Before picking what to work on.** Every feature should trace back to one of these. |
 | **Case Study Library** (starting with `duolingo.md`) | Deep-dives on existing platforms (Duolingo, and more to come - Khan Academy, Brilliant, SuperMemo/Anki) covering their mechanics, the research behind them, and what does/doesn't transfer to Tenali. | **While researching your idea**, before writing a proposal - mine these for precedent instead of designing from a blank page. |
 | **`rfc-based-proposal-review.md`** | The proposal/design-review process: RFCs live in `docs/rfcs/<module>/`, get reviewed as a docs-only PR, and are approved *before* implementation begins. | **Before you write any code.** This is how you propose a feature and get design feedback early. |
-| **`feature-presentation-guide.md`** | How to present your feature at the 4:00 PM standup - pre-presentation checklist, what to cover in the demo, what happens after. | **Before every standup presentation**, first one and every iteration after. |
 
 ---
 
@@ -56,7 +55,10 @@ This is a hard gate, not a suggestion - implementation should start only after t
 - Confirm CI checks (Prettier, ESLint, Vitest) pass locally before opening a PR.
 
 ### Step 5 - Present at Standup
-Follow **`feature-presentation-guide.md`** in full before every presentation - the pre-presentation checklist, the three-part demo structure (Problem & Approach -> Live Demo -> Feedback & Discussion), and the post-presentation follow-up (implement feedback, update the PR, update `CHANGELOG.md`).
+The goal of a presentation is not to get your feature merged ASAP, but to gather feedback and iterate. 
+- **Pre-Presentation:** Ensure UI aligns with Tenali's minimalistic themes and your end-to-end flow works. Be ready to cite your research.
+- **During Presentation:** Briefly explain the problem you are solving, do a 2-5 minute live demo, and openly ask for mentor feedback on specific technical or design decisions.
+- **After Presentation:** Implement the feedback, push changes, and iterate.
 
 Remember: your first few presentations are *not* expected to be the final version - the goal is fast, honest feedback, not a polished reveal.
 
@@ -77,7 +79,6 @@ Beyond the RFC-then-implementation flow above:
 
 - Don't stay blocked for more than a day without flagging it.
 - Standups (4:00 PM) are for both demoing progress and raising blockers - come with something to show or something to ask.
-- _(Fill in: primary channel - Discourse/Slack/Discord - and who to tag for architecture vs. design vs. blocked-PR questions.)_
 
 ---
 
@@ -90,7 +91,7 @@ Beyond the RFC-then-implementation flow above:
 - [ ] Built the feature using shared UI components and Minimalistic UI principles
 - [ ] CI checks (Prettier, ESLint, Vitest) passing locally
 - [ ] PR description includes what/why, RFC link, screenshots, and test steps
-- [ ] Reviewed `feature-presentation-guide.md` and ready to present at standup
+- [ ] Prepared for a live demo and feedback discussion at the 4:00 PM standup
 
 ---
 
