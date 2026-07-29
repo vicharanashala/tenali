@@ -1,15 +1,6 @@
----
-name: Feature Proposal
-about: Propose a new feature or enhancement for Tenali
-title: 'feat: [Brief description of the feature]'
-labels: 'enhancement, discussion'
-assignees: ''
----
-
 ## 1. Problem Statement
-<!-- Which of the 3 core Tenali Problem Statements does this address? (e.g., Learner Motivation, Granular Level Design, etc.) -->
 
-## 2. The Pitch (The "What" and "Why")
+## 2. Feature Description
 <!-- What exactly are you proposing? Why is it necessary? What specific learner pain point does it solve? -->
 
 ## 3. High-Level Solution
