@@ -1,0 +1,416 @@
+/* ─────────────────────────────────────────────────────────────────────────
+   BoxedLettersApp.css — Scoped styles for the Boxed Letters game
+   Uses the app's CSS custom properties throughout for theme compatibility.
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* ── Game container ── */
+.bl-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding-bottom: 32px;
+}
+
+/* ── Progress bar ── */
+.bl-progress-meta {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.82rem;
+  color: var(--clr-text-soft);
+}
+
+.bl-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: var(--clr-surface);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.bl-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--clr-accent), #f0c040);
+  border-radius: 99px;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Board wrapper ── */
+.bl-board-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+/* ── Chain hint ── */
+.bl-chain-hint {
+  font-size: 0.88rem;
+  color: var(--clr-text-soft);
+  text-align: center;
+  padding: 4px 12px;
+  background: var(--clr-accent-soft);
+  border: 1px solid var(--clr-accent);
+  border-radius: 20px;
+  opacity: 0.9;
+}
+
+/* ── Letter tiles display ── */
+.bl-tiles-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-height: 52px;
+  width: 100%;
+  max-width: 380px;
+  padding: 10px 16px;
+  background: var(--clr-card);
+  border: 1.5px solid var(--clr-border);
+  border-radius: 14px;
+  cursor: text;
+  transition: border-color 0.2s;
+}
+
+.bl-tiles-wrap:focus-within {
+  border-color: var(--clr-accent);
+  box-shadow: 0 0 0 3px var(--clr-accent-soft);
+}
+
+/* Shake animation when a blocked letter is typed */
+.bl-tiles-shake {
+  animation: tilesShake 0.4s ease-out;
+  border-color: var(--clr-wrong) !important;
+  box-shadow: 0 0 0 3px var(--clr-wrong-bg) !important;
+}
+
+@keyframes tilesShake {
+  0%   { transform: translateX(0); }
+  15%  { transform: translateX(-6px); }
+  30%  { transform: translateX(6px); }
+  45%  { transform: translateX(-5px); }
+  60%  { transform: translateX(5px); }
+  75%  { transform: translateX(-3px); }
+  90%  { transform: translateX(3px); }
+  100% { transform: translateX(0); }
+}
+
+.bl-tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 38px;
+  background: var(--clr-surface);
+  border: 1.5px solid var(--clr-accent);
+  border-radius: 8px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--clr-text);
+  text-transform: uppercase;
+  animation: tilePop 0.15s ease-out both;
+}
+
+@keyframes tilePop {
+  from { transform: scale(0.7); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.bl-tiles-placeholder {
+  color: var(--clr-placeholder);
+  font-size: 0.95rem;
+  font-style: italic;
+}
+
+/* Hidden real input (captures keyboard) */
+.bl-hidden-input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
+/* ── Feedback ── */
+.bl-feedback {
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 20px;
+  text-align: center;
+  animation: feedbackIn 0.2s ease-out;
+}
+
+@keyframes feedbackIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.bl-feedback--error {
+  background: var(--clr-wrong-bg);
+  color: var(--clr-wrong);
+  border: 1px solid var(--clr-wrong);
+}
+
+.bl-feedback--success {
+  background: var(--clr-correct-bg);
+  color: var(--clr-correct);
+  border: 1px solid var(--clr-correct);
+}
+
+/* ── Action buttons ── */
+.bl-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.bl-btn {
+  padding: 9px 20px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  font-family: inherit;
+}
+
+.bl-btn:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+
+.bl-btn--primary {
+  background: var(--clr-accent);
+  color: #fff;
+  border: none;
+  box-shadow: 0 3px 10px rgba(232, 134, 74, 0.32);
+}
+
+.bl-btn--primary:not(:disabled):hover {
+  background: #f09050;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(232, 134, 74, 0.42);
+}
+
+.bl-btn--secondary {
+  background: var(--clr-surface);
+  color: var(--clr-text);
+  border: 1.5px solid var(--clr-border);
+}
+
+.bl-btn--secondary:not(:disabled):hover {
+  background: var(--clr-hover-strong);
+}
+
+.bl-btn--ghost {
+  background: transparent;
+  color: var(--clr-text-soft);
+  border: 1px solid var(--clr-border);
+}
+
+.bl-btn--ghost:not(:disabled):hover {
+  background: var(--clr-hover);
+  color: var(--clr-text);
+}
+
+/* ── Words section ── */
+.bl-words-section {
+  width: 100%;
+}
+
+.bl-words-label {
+  font-size: 0.82rem;
+  color: var(--clr-text-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+
+.bl-words-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.bl-word-chip {
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* ── Custom Tooltips ── */
+.bl-tooltip-wrap {
+  position: relative;
+}
+
+.bl-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%) translateY(5px);
+  width: max-content;
+  max-width: 250px;
+  background: var(--clr-card);
+  color: var(--clr-text);
+  text-align: center;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--clr-border);
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: normal;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  transition: all 0.2s ease;
+  pointer-events: none;
+}
+
+.bl-tooltip-wrap:hover .bl-tooltip {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── Remaining letters ── */
+.bl-remaining {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.bl-remaining-label {
+  font-size: 0.82rem;
+  color: var(--clr-text-soft);
+  margin-right: 4px;
+}
+
+.bl-remaining-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.bl-remaining-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--clr-text-soft);
+}
+
+/* ── Hint area ── */
+.bl-hint-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.bl-hint-text {
+  font-size: 0.88rem;
+  color: var(--clr-text-soft);
+  font-style: italic;
+  animation: feedbackIn 0.2s ease-out;
+}
+
+/* ── Rules card (puzzle select) ── */
+.bl-rules-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--clr-card);
+  border: 1px solid var(--clr-border);
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin: 16px 0 8px;
+  max-width: 480px;
+  width: 100%;
+}
+
+.bl-rule {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.92rem;
+  color: var(--clr-text-soft);
+  line-height: 1.4;
+}
+
+.bl-rule-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── Completion screen ── */
+.bl-complete {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  padding: 24px 0 32px;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.bl-complete__emoji {
+  font-size: 4rem;
+  animation: completePop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+@keyframes completePop {
+  from { transform: scale(0.4); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.bl-complete__title {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--clr-accent);
+  margin: 0;
+}
+
+.bl-complete__subtitle {
+  font-size: 1rem;
+  color: var(--clr-text-soft);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.bl-complete__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin: 8px 0;
+}
+
+.bl-complete__actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}

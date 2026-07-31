@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import WordCreatorApp from './WordCreatorApp';
 import CrosswordApp from './CrosswordApp';
 import WordSearchApp from './WordSearchApp';
+import BoxedLettersApp from './BoxedLettersApp';
 
 /**
  * LanguageDashboard Component
@@ -29,6 +30,12 @@ export default function LanguageDashboard({ onBack }) {
       name: 'Word Search',
       subtitle: 'Find hidden words in the grid to challenge your observation.',
       color: 'orange'
+    },
+    {
+      key: 'boxedletters',
+      name: 'Boxed Letters',
+      subtitle: 'Connect all 12 letters by forming words across the sides of a square.',
+      color: 'orange'
     }
   ];
 
@@ -47,6 +54,10 @@ export default function LanguageDashboard({ onBack }) {
 
   if (selectedGame === 'wordsearch') {
     return <WordSearchApp onBack={() => setSelectedGame(null)} />;
+  }
+
+  if (selectedGame === 'boxedletters') {
+    return <BoxedLettersApp onBack={() => setSelectedGame(null)} />;
   }
 
   return (
