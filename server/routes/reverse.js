@@ -12,8 +12,9 @@ const { validateConstruction } = require('../lib/reverseValidator');
 router.get('/question', (req, res) => {
   const topic = (req.query.topic || 'addition').trim().toLowerCase();
   const difficulty = parseInt(req.query.difficulty, 10) || 0;
+  const questionNumber = parseInt(req.query.questionNumber, 10) || 1;
 
-  const problem = generateTarget(topic, difficulty);
+  const problem = generateTarget(topic, difficulty, questionNumber);
   res.json(problem);
 });
 
@@ -24,16 +25,18 @@ router.get('/question', (req, res) => {
  *   topic: string,
  *   target: number | string | object,
  *   difficulty: number,
+ *   questionNumber: number,
  *   construction: object
  * }
  */
 router.post('/check', express.json(), (req, res) => {
-  const { topic, target, difficulty, construction } = req.body || {};
+  const { topic, target, difficulty, questionNumber, construction } = req.body || {};
 
   const cleanTopic = (topic || 'addition').trim().toLowerCase();
   const safeDiff = parseInt(difficulty, 10) || 0;
+  const safeQNum = parseInt(questionNumber, 10) || 1;
 
-  const result = validateConstruction(cleanTopic, target, construction, safeDiff);
+  const result = validateConstruction(cleanTopic, target, construction, safeDiff, safeQNum);
   res.json(result);
 });
 
