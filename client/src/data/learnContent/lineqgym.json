@@ -1,0 +1,30 @@
+{
+  "title": "Linear Equations Gym: Speed Solving",
+  "blocks": [
+    {
+      "icon": "??????",
+      "title": "1. The Core Concept: The Flow State",
+      "content": "In the Linear Equations Gym, knowing the theory isn't enough; you must execute the steps flawlessly without pausing to think. It's about building a 'flow state' where moving numbers across the equals sign and flipping their operations becomes pure muscle memory."
+    },
+    {
+      "icon": "?",
+      "title": "2. The Strategy: The Mental Hop",
+      "content": "Instead of writing '- 4' under both sides of the equation (which takes time), train yourself to visually 'hop' the number across the equals sign. When a number hops the fence, its sign magically flips. A +4 on the left instantly lands as a -4 on the right. This mental hop saves massive amounts of time during high-speed tests."
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: The Two-Step Rhythm",
+      "content": "Almost all basic linear equations (like 4x + 7 = 31) follow a perfect two-step rhythm: \n1. **Hop and Flip:** Hop the +7 over. It becomes -7. Calculate (31 - 7 = 24).\n2. **The Drop:** Drop the 4 underneath the 24 to divide. Calculate (24 � 4 = 6).\nHop, Drop, Done."
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: Mental Execution",
+      "content": "Quickly solve **6x - 5 = 19** in your head.\n\n� **Mental Step 1 (The Hop):** Hop the -5 to the right. It flips to +5.\n� **Mental Step 2 (Calculate):** 19 + 5 = 24.\n� **Mental Step 3 (The Drop):** Drop the 6 underneath the 24.\n� **Mental Step 4 (Calculate):** 24 � 6 = 4.\n\n**Final Answer: x = 4.**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "Under pressure, students often mess up the 'Drop' step if the answer is going to be a fraction or a decimal. If they get to 5x = 2, they panic, because 2 doesn't divide nicely by 5. In their panic, they reverse the division and do 5 � 2 to get 2.5. **FATAL ERROR!** The number attached to the x ALWAYS drops to the BOTTOM of the fraction. The answer is 2 � 5 (or just the fraction 2/5). Never flip the division just because the math looks ugly!"
+    }
+  ]
+}

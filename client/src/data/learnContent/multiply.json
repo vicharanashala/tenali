@@ -1,0 +1,30 @@
+{
+  "title": "Multiplication: The Shortcut to Addition",
+  "blocks": [
+    {
+      "icon": "?",
+      "title": "1. The Core Concept: The Ultimate Speed Boost",
+      "content": "If you want to count 8 bags of marbles, and each bag has 45 marbles in it, you *could* write out 45 + 45 + 45 + 45 + 45 + 45 + 45 + 45 and spend five minutes adding them up. But mathematicians are lazy�in a good way! **Multiplication** is just a super-fast, turbo-charged shortcut for doing repeated addition. It allows you to process massive quantities of items in seconds."
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: The Commutative Property",
+      "content": "Multiplication has a magical property called Commutativity. This is a fancy word that simply means **the order does not matter**.\n\n� If you have 3 rows of 5 chairs (3 � 5), you have 15 chairs.\n� If you rotate the room and look at it as 5 rows of 3 chairs (5 � 3), you still have 15 chairs!\n� 3 � 5 = 5 � 3. This means if you ever forget a difficult times table like 8 � 7, you can just calculate 7 � 8 instead!"
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: Long Multiplication (Column Method)",
+      "content": "When multiplying big numbers (like 42 � 35), you must use the Column Method:\n\n1. **Stack them:** Write the big number on top, the smaller on the bottom, lined up on the right.\n2. **The First Wave:** Multiply the top number by the ONES digit of the bottom number. Write the answer down.\n3. **The Golden Zero:** Move down to the next row. Because you are now going to multiply by the TENS digit, you MUST put a magic '0' in the ones column before you do any math!\n4. **The Second Wave:** Multiply the top number by the TENS digit. Write it down next to the zero.\n5. **The Grand Finale:** Add the two rows together."
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: 42 � 35",
+      "content": "Calculate: **42 � 35**\n\n� **Step 1 (First Wave):** Multiply 42 by the 5. (5 � 2 = 10, write 0 carry 1. 5 � 4 = 20, plus 1 is 21). First row is **210**.\n� **Step 2 (The Golden Zero):** Drop down to the next line. Put a **0** at the end.\n� **Step 3 (Second Wave):** Multiply 42 by the 3. (3 � 2 = 6. 3 � 4 = 12). Write 126 next to the zero. Second row is **1260**.\n� **Step 4 (Add them up):** 210 + 1260.\n\n**Final Answer: 1470.**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "The absolute most common way to fail long multiplication is forgetting **The Golden Zero** on the second line. If you are multiplying by '35', that '3' isn't really a 3... it's a 30! By putting the magic zero down first, you shift all your answers over by one place value, making sure you are actually multiplying by thirty instead of three. Forget the zero, and your answer will be completely ruined."
+    }
+  ]
+}

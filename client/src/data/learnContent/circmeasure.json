@@ -1,0 +1,30 @@
+{
+  "title": "Circular Measure: Radians and Arcs",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: The Natural Angle",
+      "content": "Why are there 360 degrees in a circle? Because ancient Babylonians loved the number 60. It's completely made up! In advanced mathematics and physics, using 360� breaks down. We need a 'natural' way to measure angles based on the circle itself. Enter the **Radian**. One Radian is the exact angle created when you take a piece of the circle's edge (the arc) that is exactly the same length as the circle's radius. It is the purest way to measure a spin."
+    },
+    {
+      "icon": "p",
+      "title": "2. The Rules: The Pi Connection",
+      "content": "� A full circle is 360�. In radians, a full circle is exactly **2p**.\n� A half-circle is 180�. In radians, a half-circle is exactly **p**.\n� **Conversion Rule:** To turn Degrees into Radians, multiply by (p / 180). \n� **Conversion Rule:** To turn Radians into Degrees, multiply by (180 / p).\nCalculus only works if you use Radians. If you try to integrate Sine or Cosine using degrees, the math literally explodes."
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: Arc Length and Sector Area",
+      "content": "The beautiful thing about radians is that it makes formulas incredibly simple and clean. (No more messy 'angle / 360' fractions!).\n\n1. **Arc Length (The Crust):** If the angle ? is in radians, the formula for the length of the crust is simply **s = r?** (Radius � Angle).\n2. **Sector Area (The Pizza Slice):** If ? is in radians, the formula for the area of the slice is simply **Area = �r�?**.\n3. **Warning:** If your angle is in degrees, you CANNOT use these clean formulas. You must convert to radians first!"
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: The Perfect Slice",
+      "content": "A pizza has a radius of 10cm. A slice has an angle of 1.5 radians. Find the area of the slice, and the length of its crust.\n\n� **Step 1 (The Crust):** Use s = r?. \n� **Step 2:** s = 10 � 1.5 = **15cm**. The crust is 15cm long.\n� **Step 3 (The Area):** Use Area = �r�?.\n� **Step 4:** Area = 0.5 � (10)� � 1.5\n� **Step 5:** Area = 0.5 � 100 � 1.5 = 50 � 1.5 = **75cm�**.\n\n**Final Answer: Crust is 15cm, Area is 75cm�.**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "The calculator trap claims thousands of victims every year. If you are solving a trig equation like Sin(1.2) = x, and 1.2 is an angle in RADIANS, you must physically change your calculator mode from 'D' (Degrees) to 'R' (Radians). If you leave it in Degrees, your calculator will assume you mean a tiny 1.2 degrees, and give you a wildly incorrect answer. **Always check the tiny letter at the top of your calculator screen!**"
+    }
+  ]
+}

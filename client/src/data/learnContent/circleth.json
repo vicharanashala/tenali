@@ -1,0 +1,30 @@
+{
+  "title": "Circle Theorems: Geometry's Hidden Rules",
+  "blocks": [
+    {
+      "icon": "?",
+      "title": "1. The Core Concept: The Perfect Loop",
+      "content": "A circle isn't just a round shape; it is a perfectly symmetrical mathematical object where every point on the edge is the exact same distance from the center. Because of this absolute perfection, whenever you draw lines and triangles inside a circle, they follow strict, hidden, magical rules. These rules are called **Circle Theorems**, and they allow you to instantly find missing angles just by recognizing a specific pattern."
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: The Big Three Theorems",
+      "content": "There are many theorems, but these three are the most famous:\n\n� **The Arrowhead (Angle at the Center):** The angle at the center of the circle is always exactly DOUBLE the angle at the edge (circumference), as long as they start from the same two points.\n� **The Bowtie (Angles in the same segment):** If you draw a 'bowtie' shape starting from two bottom points, the two 'ears' at the top of the bowtie are always EQUAL.\n� **The Semi-Circle:** Any triangle drawn inside a half-circle, where the longest side goes directly through the center point, will ALWAYS have a perfect 90� right angle at the top edge!"
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: Cracking the Code",
+      "content": "When faced with a terrifying circle geometry puzzle with a dozen crossing lines:\n\n1. **Find the Center:** Is the center point marked? If yes, look immediately for the 'Arrowhead' theorem or a 'Semi-Circle' triangle.\n2. **Look for Radii:** Any line going from the center to the edge is a radius. They are all equal length! Two radii make an Isosceles triangle (two equal angles). This is the secret to solving 50% of puzzles.\n3. **Hunt for Bowties:** Trace from two points on the edge and see if they make a bowtie shape touching the top edge."
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: The Isosceles Trap",
+      "content": "A triangle is drawn inside a circle. The center of the circle 'O' is the top point of the triangle. The two bottom points A and B are on the edge. The angle at 'O' is 100�. Find the angle at A.\n\n� **Step 1:** The lines OA and OB both go from the center to the edge. That means they are both Radii.\n� **Step 2:** Because they are both Radii, they are the exact same length. Therefore, triangle OAB is Isosceles!\n� **Step 3:** In an Isosceles triangle, the two bottom angles must be equal.\n� **Step 4:** A triangle has 180�. 180� - 100� = 80� left for the bottom two angles.\n� **Step 5:** Split the 80� equally between A and B. 80 / 2 = 40�.\n\n**Final Answer: Angle A is 40�.**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "The deadliest trap in Circle Theorems is assuming a line goes exactly through the center just because it looks like it does. **If there is no dot labeled 'O' or 'Center', DO NOT assume it's the diameter!** If it's not the diameter, you cannot use the Semi-Circle 90� rule. Geometry diagrams are designed to trick your eyes. Only trust the written facts, never the drawing!"
+    }
+  ]
+}

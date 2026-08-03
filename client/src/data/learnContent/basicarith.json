@@ -1,0 +1,30 @@
+{
+  "title": "Basic Arithmetic: The Foundation of Math",
+  "blocks": [
+    {
+      "icon": "???",
+      "title": "1. The Core Concept: The Bedrock",
+      "content": "Everything in mathematics, from simple fractions to the advanced calculus used to launch rockets, is built on four fundamental pillars: Addition, Subtraction, Multiplication, and Division. **Basic Arithmetic** isn't just about doing calculations in your head; it's about understanding the deep, unbreakable rules of how numbers interact. If your foundation is strong, the entire skyscraper of advanced math will be easy to build."
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: The Order of Operations (BODMAS)",
+      "content": "If I ask you to solve '2 + 3 � 4', is the answer 20 or 14? If we didn't have rules, math would be chaos! We use **BODMAS** (or PEMDAS) as the universal traffic light system to tell us what to calculate first:\n\n� **B (Brackets):** Always solve the inside of brackets first.\n� **O (Orders/Powers):** Next, solve any squared numbers or square roots.\n� **D & M (Divide & Multiply):** Next, do all division and multiplication, reading from left to right.\n� **A & S (Add & Subtract):** Finally, do all addition and subtraction, reading from left to right. \n*(So, 2 + 3 � 4 = 14, because multiplication comes before addition!)*"
+    },
+    {
+      "icon": "?",
+      "title": "3. Step-by-Step: Surviving Negative Numbers",
+      "content": "Negative numbers act like a battle between a Hot Army (+) and a Cold Army (-):\n\n1. **Adding/Subtracting:** If you have -5 + 8, think of 5 Cold soldiers fighting 8 Hot soldiers. They cancel each other out one-by-one. You are left with 3 Hot soldiers (+3). \n2. **Clashing Signs:** If two signs are touching each other (like 5 - - 3), they react! Two of the SAME signs (+ + or - -) merge to form a PLUS. Two DIFFERENT signs (+ - or - +) merge to form a MINUS. So, 5 - - 3 becomes 5 + 3 = 8.\n3. **Multiplying/Dividing:** Just do the normal math first (5 � 3 = 15). Then look at the signs. Same rules: two negatives make a positive. One positive and one negative make a negative!"
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: The BODMAS Gauntlet",
+      "content": "Solve: **10 - 2 � (5 - 8)�**\n\n� **Step 1 (Brackets):** Solve (5 - 8). That's 5 hot vs 8 cold. Result is -3.\n   *Equation is now: 10 - 2 � (-3)�*\n� **Step 2 (Orders):** Solve the squared part. (-3)�. A negative times a negative is positive. -3 � -3 = +9.\n   *Equation is now: 10 - 2 � 9*\n� **Step 3 (Multiply):** Solve 2 � 9. That is 18.\n   *Equation is now: 10 - 18*\n� **Step 4 (Subtract):** Solve 10 - 18. That's 10 hot vs 18 cold. Result is -8.\n\n**Final Answer: -8.**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "A catastrophic mistake with BODMAS is thinking that Addition MUST come before Subtraction just because 'A' comes before 'S' in the acronym. **Addition and Subtraction have the EXACT SAME priority level.** When you reach them, you must just read the equation like a book, from left to right. \nExample: 10 - 4 + 2. If you do Addition first (4+2=6), you get 10 - 6 = 4. WRONG! Read left to right: 10 - 4 = 6. Then 6 + 2 = 8. The real answer is 8!"
+    }
+  ]
+}

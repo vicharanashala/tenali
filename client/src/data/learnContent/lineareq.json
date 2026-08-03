@@ -1,0 +1,30 @@
+{
+  "title": "Linear Equations: Solving the Mystery",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: The Balance Scale",
+      "content": "A linear equation is a puzzle where an unknown number (called 'x') is hiding behind a bunch of arithmetic operations. Your job is to strip away those operations one by one until 'x' stands completely naked and alone. Think of the equals sign (=) as the pivot point of a perfectly balanced scale. Whatever you do to one side of the scale, you MUST do to the exact same thing to the other side to keep it from crashing down."
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: Inverse Operations",
+      "content": "To strip away the operations, you must use their magical opposites (Inverse Operations):\n\n� To destroy an Addition (+), you must Subtract (-).\n� To destroy a Subtraction (-), you must Add (+).\n� To destroy a Multiplication (�), you must Divide (�).\n� To destroy a Division (�), you must Multiply (�)."
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: Peeling the Onion",
+      "content": "Always peel an equation from the outside in!\n\n1. **Expand Brackets:** If there are any brackets, multiply the outside number by everything inside to destroy them.\n2. **Gather the x's:** If there are 'x's on both sides of the equals sign, move the smaller pile of 'x's over to the larger pile by subtracting them.\n3. **Remove loose numbers:** Add or subtract away any normal numbers sitting next to your 'x' pile.\n4. **The Final Strike:** Divide by the number directly attached to 'x' to find your answer."
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: The Two-Sided Battle",
+      "content": "Solve: **5x - 4 = 2x + 11**\n\n� **Step 1 (Gather x's):** We have 5x on the left and 2x on the right. 2x is smaller. Subtract 2x from BOTH sides.\n   *(5x - 2x) = 3x. The equation is now 3x - 4 = 11.*\n� **Step 2 (Loose numbers):** The -4 is annoying. Add 4 to BOTH sides.\n   *(11 + 4) = 15. The equation is now 3x = 15.*\n� **Step 3 (Final Strike):** Divide both sides by 3.\n   *(15 � 3) = 5.*\n\n**Final Answer: x = 5.**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "The most common and frustrating mistake is dealing with a fraction like **(x + 5) / 3 = 7**. Students will immediately try to subtract 5. **WRONG!** The divide-by-3 is acting like a giant prison bar trapping the entire (x + 5) together. You cannot touch the 5 until you break the prison! You must multiply BOTH sides by 3 first (getting x + 5 = 21), and THEN you can safely subtract the 5."
+    }
+  ]
+}

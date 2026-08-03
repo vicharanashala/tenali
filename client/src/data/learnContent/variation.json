@@ -1,0 +1,30 @@
+{
+  "title": "Variation & Proportion: The Dance of Variables",
+  "blocks": [
+    {
+      "icon": "🔗",
+      "title": "1. The Core Concept: The Invisible Strings",
+      "content": "In physics and economics, variables are tied together by invisible strings. If you push the gas pedal harder (more fuel), the car goes faster (more speed). This is **Direct Variation**; they grow together. But if you increase the speed of the car, the time it takes to get to the destination drops! This is **Inverse Variation**; as one goes up, the other is forced down. Variation is the math of figuring out exactly how tightly these strings are pulled."
+    },
+    {
+      "icon": "k",
+      "title": "2. The Rules: The Constant 'k'",
+      "content": "The tightness of the string is represented by the Constant of Proportionality, called **'k'**.\n\n• **Direct Proportion (y ∝ x):** The formula is **y = kx**. (If x doubles, y doubles).\n• **Inverse Proportion (y ∝ 1/x):** The formula is **y = k/x**. (If x doubles, y gets cut in half!).\n• Your ONLY mission in a variation problem is to hunt down the value of 'k'. Once you have 'k', you unlock the master equation."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Finding the Master Equation",
+      "content": "Every variation problem follows the exact same 4-step rhythm:\n\n1. **Write the Template:** Read the words. If it's direct, write y = kx. If it's inverse, write y = k/x. (Careful: If it says 'proportional to the SQUARE of x', write y = kx²).\n2. **Plug in the pair:** The question will always give you one perfect matching pair of numbers (e.g., y=20 when x=4). Plug them in!\n3. **Solve for k:** Use algebra to find what 'k' is. (e.g., 20 = k × 4, so k = 5).\n4. **Write the Master:** Rewrite your template using the real 'k' (y = 5x). Now you can solve any future question they throw at you!"
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Inverse Gravity",
+      "content": "Variable 'y' is inversely proportional to 'x'. When x = 2, y = 10. Find 'y' when x = 5.\n\n• **Step 1 (Template):** It says inverse! So the template is **y = k / x**.\n• **Step 2 (Plug in pair):** We know y=10 when x=2. Plug them in: 10 = k / 2.\n• **Step 3 (Solve for k):** Multiply both sides by 2 to get k alone. 10 × 2 = 20. **k = 20**.\n• **Step 4 (Master Equation):** Our master code is **y = 20 / x**.\n• **Step 5 (Answer the question):** Find y when x=5. y = 20 / 5.\n\n**Final Answer: y = 4.**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The absolute most devastating trap is failing to read the word **SQUARE** or **ROOT** in the first sentence. A question will say 'y is directly proportional to the square of x'. Students will robotically write down y = kx, solve for k, and fail the entire question. If it says 'square', you MUST write y = kx²! If it says 'cube', you MUST write y = kx³! Read the first sentence like your life depends on it."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "title": "Integration: The Art of Accumulation",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: Slicing the Universe",
+      "content": "Imagine trying to find the area of an awkwardly shaped pond. You can't use length � width because the edges are curvy! **Integration** solves this by slicing the pond into millions of infinitely thin, perfectly straight rectangles. It calculates the area of each microscopic rectangle, and then adds them all up to give you the perfect, exact area of the curvy shape. It is the mathematical art of accumulation�adding up an infinite amount of tiny things to find the whole."
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: The Anti-Derivative",
+      "content": "Integration is the exact opposite of Differentiation. If differentiation breaks a function apart to find its speed (gradient), integration glues it back together to find its distance (area).\n\n� **The Power Rule for Integration:** Instead of multiplying and subtracting from the power, you do the reverse! **Add 1 to the power, then divide by that new power.**\n� Example: To integrate x�, the power becomes 3, and you divide by 3. The answer is (x�)/3."
+    },
+    {
+      "icon": " boundaries",
+      "title": "3. Step-by-Step: Definite Integrals (Finding Area)",
+      "content": "To find the exact physical area under a curve between two specific points on the x-axis (called the upper limit 'b' and lower limit 'a'):\n\n1. **Integrate:** Perform the integration rule on the function. Put the result in square brackets [ ].\n2. **Plug in Upper (b):** Take the top boundary number and substitute it into your new integrated equation. Get a value.\n3. **Plug in Lower (a):** Take the bottom boundary number and substitute it into the same integrated equation. Get a second value.\n4. **Subtract:** Subtract the lower value from the upper value (Upper - Lower). That's your exact area!"
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: Indefinite Integration",
+      "content": "Integrate the expression: **? (6x� + 4x - 5) dx**\n\n� **Step 1 (First term):** For 6x�, add 1 to the power (becomes 3). Divide the big 6 by 3 to get 2. Result: **2x�**.\n� **Step 2 (Second term):** For 4x (which is 4x�), add 1 to the power (becomes 2). Divide the 4 by 2 to get 2. Result: **2x�**.\n� **Step 3 (Third term):** For -5 (a constant), just slap an 'x' onto it. Result: **-5x**.\n� **Step 4 (The Plus C):** Because there are no boundaries, we MUST add a constant of integration at the end.\n\n**Final Answer: 2x� + 2x� - 5x + C**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "The absolute most common way to lose marks in a calculus exam is **forgetting the '+ C'** on an indefinite integral. When you differentiate a constant number (like +7), it vanishes to zero. So when you integrate back in reverse, you have no idea if there was originally a +7, a -40, or nothing there at all! You MUST write + C to represent that unknown vanished number. Without boundaries to anchor it, the +C is mandatory."
+    }
+  ]
+}

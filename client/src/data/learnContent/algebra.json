@@ -1,0 +1,30 @@
+{
+  "title": "Algebra: The Language of the Unknown",
+  "blocks": [
+    {
+      "icon": "???",
+      "title": "1. The Core Concept: The Mathematical Detective",
+      "content": "Imagine finding a locked treasure chest with a sticky note that says 'Gold Coins + 5 = 12'. Even without opening the chest, you instantly know there are 7 coins inside! **Algebra** is simply the art of finding unknown numbers. Instead of writing 'Gold Coins', mathematicians use letters like 'x' or 'y' as placeholders for the mystery number. It's not a scary new language; it's just a way to solve puzzles without guessing."
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: The Golden Rule of Balance",
+      "content": "An algebraic equation is exactly like a perfectly balanced set of scales. If you have 'x + 5 = 12', the two sides weigh exactly the same. The golden rule is: **Whatever you do to one side, you MUST do to the exact same thing to the other side.** If you add 10 to the left, you must add 10 to the right. If you chop the left side in half, you must chop the right side in half. If you break this rule, the scales tip over and the equation is destroyed!"
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: Isolating the Variable",
+      "content": "Your mission is always to get the letter 'x' completely alone on one side of the equals sign. We do this using **Inverse Operations** (doing the opposite):\n\n1. **Identify the 'enemy':** Look at what is attached to the 'x' (e.g., in 3x + 4, the enemies are the '�3' and the '+4').\n2. **Attack the weakest link first:** Always get rid of loose addition or subtraction before dealing with multiplication or division. (Get rid of the +4 first).\n3. **Do the opposite:** To get rid of a +4, you must subtract 4. (Do it to BOTH sides!).\n4. **Finish it:** To get rid of '�3', you must divide by 3. (Do it to BOTH sides!)."
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: Cracking the Code",
+      "content": "Solve for x: **2x - 7 = 11**\n\n� **Step 1 (The loose end):** The weakest link is the '- 7'. The opposite of subtracting 7 is adding 7.\n� **Step 2 (Balance):** Add 7 to BOTH sides. (2x - 7 + 7) = (11 + 7).\n   *The equation is now: 2x = 18*\n� **Step 3 (The tight end):** The '2' is attached to the 'x' by multiplication. The opposite is dividing by 2.\n� **Step 4 (Balance):** Divide BOTH sides by 2. (2x � 2) = (18 � 2).\n\n**Final Answer: x = 9.**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "The biggest trap in Algebra is the **'Invisible 1'**. When you see a letter 'x' completely by itself, there is actually an invisible '1' hiding in front of it! So, x + x is 2x. A catastrophic mistake is when students see 'x - x' and write '1'. No! If you have one 'x' and you subtract one 'x', you have ZERO 'x's left. Also, x times x is x�, not 2x. Never forget the invisible numbers!"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "title": "Mastering Angles: The Measure of a Turn",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: It's All About the Spin",
+      "content": "An angle isn't a measurement of length or distance; it's a measurement of a **turn** or a **spin**. Imagine standing still and turning your body to look in a new direction. The amount you rotated is an angle! We measure this spin in **degrees (�)**, where a complete, full-circle spin (like a skateboarder doing a 360) is exactly 360�."
+    },
+    {
+      "icon": "???",
+      "title": "2. The Rules: Naming the Angles",
+      "content": "Just like people, angles have different names depending on their size:\n\n� **Acute Angle (0� to 89�):** Small, sharp, and narrow. (Think 'a-cute' little angle).\n� **Right Angle (Exactly 90�):** A perfect 'L' shape, like the corner of a book or a room.\n� **Obtuse Angle (91� to 179�):** Wide, open, and blunt.\n� **Straight Angle (Exactly 180�):** A perfectly straight line (a half-turn).\n� **Reflex Angle (181� to 359�):** Bent so far backward it looks like Pac-Man's mouth opening."
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: The Three Golden Rules of Geometry",
+      "content": "When solving geometry puzzles to find missing angles, you only need to remember three golden rules:\n\n1. **Angles on a Straight Line:** Any angles that sit side-by-side on a flat, straight line will ALWAYS add up to exactly **180�**.\n2. **Angles Around a Point:** All the angles circling a single central dot will ALWAYS add up to a full circle, which is **360�**.\n3. **Vertically Opposite Angles:** When two straight lines cross like an 'X', the angles directly across from each other are identical mirror images. They are ALWAYS **equal**."
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: The Straight Line Puzzle",
+      "content": "You are given a straight horizontal line. Two angles are sitting on it side-by-side. One angle is 115�. The other angle is unknown, labeled 'x'. Find x.\n\n� **Step 1 (Identify the rule):** They sit on a straight line, so we know they must add up to 180�.\n� **Step 2 (Set up the math):** x + 115� = 180�\n� **Step 3 (Solve):** To find x, subtract 115 from 180.\n� **Step 4 (Calculate):** 180 - 115 = 65.\n\n**Final Answer: x = 65�**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "A major trap in exams is assuming an angle is 90� just because it *looks* like a perfect 'L' shape in the drawing. Geometry diagrams are often drawn 'not to scale' on purpose to trick you! **Never assume an angle is a right angle unless you see the little square symbol in the corner**, or unless the math proves it is exactly 90�."
+    }
+  ]
+}

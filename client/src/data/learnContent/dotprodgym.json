@@ -1,0 +1,30 @@
+{
+  "title": "Dot Product Gym: Mental Vectors",
+  "blocks": [
+    {
+      "icon": "??????",
+      "title": "1. The Core Concept: The Calculation Sprint",
+      "content": "You already know how the Dot Product works (multiplying the x's, multiplying the y's, and adding them). But knowing the theory isn't enough in a high-pressure exam; you need speed and flawless execution. The **Dot Product Gym** is designed to build your mental arithmetic muscles specifically for vector calculations until it becomes an automatic reflex."
+    },
+    {
+      "icon": "?",
+      "title": "2. The Rules: Speed vs Accuracy",
+      "content": "In the Gym, speed is important, but accuracy is king. A single dropped negative sign will destroy your entire scalar product. When you multiply a positive by a negative, the result is negative! When adding the final products together, treat them like a bank account (deposits and withdrawals) to ensure you don't mess up the final number."
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: The Mental Check",
+      "content": "When doing dot products in your head:\n\n1. Look at the x-components. Multiply them. Hold that number in your short-term memory (or quickly jot it down).\n2. Look at the y-components. Multiply them. Hold that number.\n3. Add them together. \n4. **Pro-tip:** If the two original vectors have opposite signs in the x-position but same signs in the y-position, you will be doing a subtraction in the final step! Prepare your brain for it."
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: Mental Execution",
+      "content": "Quickly calculate the dot product of [-4, 3] and [2, -5].\n\n� **Mental Step 1:** -4 � 2 = -8. (Store -8 in your head).\n� **Mental Step 2:** 3 � -5 = -15. (Store -15 in your head).\n� **Mental Step 3:** Add them: -8 + -15.\n� **Execution:** Two negatives combining means we go deeper into the negative! 8 + 15 = 23, so the answer is **-23**."
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "Under pressure in the Gym, students will accidentally 'cross-multiply' (multiplying the x of the first vector by the y of the second vector). This is a completely different mathematical operation (related to the Cross Product)! Always remember: Top goes with Top, Bottom goes with Bottom. Never cross the streams!"
+    }
+  ]
+}

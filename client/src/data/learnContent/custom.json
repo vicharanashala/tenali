@@ -1,0 +1,30 @@
+{
+  "title": "Custom Mode: Forging Your Own Path",
+  "blocks": [
+    {
+      "icon": "???",
+      "title": "1. The Core Concept: The Architect",
+      "content": "Learning math isn't always a straight line created by a teacher. Sometimes, you know exactly what your weaknesses are! **Custom Mode** is your personal training ground. It allows you to become the architect of your own education by mixing and matching specific topics that you know you need to practice, completely ignoring the things you've already mastered."
+    },
+    {
+      "icon": "??",
+      "title": "2. The Strategy: Targeted Weaknesses",
+      "content": "Don't just pick the topics you are good at! It feels nice to get 100%, but it doesn't make you stronger. The best way to use Custom Mode is to select the 2 or 3 topics that absolutely terrify you in an exam. Force yourself into the uncomfortable zone. That is where real, rapid improvement happens."
+    },
+    {
+      "icon": "??",
+      "title": "3. The Method: Spaced Repetition",
+      "content": "When building a custom quiz, use the scientific principle of 'Spaced Repetition'. Don't just cram one topic for 3 hours. Mix a topic you learned today with a topic you learned last week, and one you learned a month ago. Forcing your brain to switch gears and dig up old memories makes those memories permanent."
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: The Ultimate Exam Prep",
+      "content": "If you have a test on Algebra and Geometry on Friday, don't just study Algebra on Wednesday and Geometry on Thursday. \n\n� Go into Custom Mode.\n� Select 'Simultaneous Equations' (Algebra) and 'Circle Theorems' (Geometry).\n� By forcing your brain to rapidly switch between algebra logic and geometric visual rules on the same quiz, you are training exactly how you will have to perform in the real exam!"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "The biggest mistake students make in Custom Mode is setting the difficulty too high, too fast, and picking 15 different topics at once. It becomes overwhelming, your brain panics, and you learn nothing. Start small: pick exactly 2 related topics on a medium difficulty. Build your confidence, and then scale up."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "title": "Remainder & Factor Theorem: The Polynomial Hacker",
+  "blocks": [
+    {
+      "icon": "💻",
+      "title": "1. The Core Concept: Skipping the Hard Work",
+      "content": "If I ask you to divide a massive polynomial like (x³ + 4x² - 5x + 7) by (x - 2), you could use grueling Algebraic Long Division, which takes forever and is full of traps. But what if you only care about the *remainder*? The **Remainder Theorem** is a hacker's shortcut. It lets you find the exact remainder in 10 seconds flat, without doing any actual division at all!"
+    },
+    {
+      "icon": "🗝️",
+      "title": "2. The Rules: The Magic Number",
+      "content": "The trick relies on finding the 'magic root' of the bracket you are dividing by.\n\n• If you are dividing by **(x - 2)**, the magic number is **+2**.\n• If you are dividing by **(x + 5)**, the magic number is **-5**.\n• Whatever makes that bracket equal zero is your magic number! Take that number, plug it into the massive polynomial as 'x', and whatever number spits out the end is your Remainder!"
+    },
+    {
+      "icon": "🧩",
+      "title": "3. Step-by-Step: The Factor Theorem",
+      "content": "The **Factor Theorem** is just the Remainder Theorem's cooler brother. \n\n1. Use the Remainder Theorem (plug in the magic number).\n2. If the answer that spits out is exactly **ZERO**, congratulations! You just proved that the bracket is a perfect factor! (It divides cleanly with no leftover pieces).\n3. If it spits out anything other than zero, it is NOT a factor."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Hacking the Polynomial",
+      "content": "Find the remainder when **f(x) = x³ - 2x² + 4** is divided by **(x - 3)**.\n\n• **Step 1 (Find the magic number):** We are dividing by (x - 3). The magic number is **+3**.\n• **Step 2 (The Substitution):** Evaluate f(3). Plug 3 into the polynomial.\n• **Step 3 (Calculate):** f(3) = (3)³ - 2(3)² + 4\n• **Step 4:** 27 - 2(9) + 4 = 27 - 18 + 4 = 13.\n\n**Final Answer: The remainder is 13.** *(No long division required!)*"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The classic trap is forgetting to FLIP THE SIGN when finding the magic number! If the question says 'Divide by (x + 4)', students will often plug in positive 4. **WRONG!** You must solve x + 4 = 0 to find the root. The magic number is -4. If you plug in the wrong sign, your entire calculation will explode."
+    }
+  ]
+}

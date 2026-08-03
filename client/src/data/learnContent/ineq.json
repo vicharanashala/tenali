@@ -1,0 +1,30 @@
+{
+  "title": "Inequalities: The Boundaries of Math",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: More Than One Answer",
+      "content": "An equation like x = 5 is a sniper rifle; it has exactly one perfect target. An **Inequality** like x > 5 is a shotgun; it covers a massive, infinite area! It means x can be 6, 7, 100, or a million. Inequalities are used when we have limits, like a rollercoaster sign saying 'You must be taller than 120cm to ride' (Height > 120)."
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: The Crocodile Mouth",
+      "content": "� **> (Greater Than):** The mouth is open to the left. The left side is bigger. (e.g., 10 > 5).\n� **< (Less Than):** The mouth points to the left. The left side is smaller. (e.g., 2 < 8).\n� **= or =:** If there is a line underneath, it means 'or equal to'. You are allowed to be exactly that number.\n*(Trick: The crocodile always eats the bigger number!)*"
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: Solving like Equations",
+      "content": "You solve inequalities almost exactly the same way you solve normal algebra equations. You use inverse operations to get 'x' by itself.\n\n1. Move the loose numbers first by adding or subtracting to both sides.\n2. Move the attached numbers by multiplying or dividing both sides.\n3. Keep the inequality symbol exactly where it is... **UNLESS you trigger the Golden Trap!**"
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: The Golden Trap",
+      "content": "Solve: **-3x > 12**\n\n� **Step 1:** The -3 is attached to the x by multiplication. To get x alone, we must divide both sides by -3.\n� **Step 2 (The Trap):** We are dividing by a NEGATIVE number. The Golden Rule of Inequalities states that whenever you multiply or divide by a negative number, the entire universe flips upside down! You MUST flip the symbol to face the other way!\n� **Step 3:** 12 � -3 = -4. \n� **Step 4 (Flip):** The > becomes a <.\n\n**Final Answer: x < -4**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "Forgetting to flip the symbol when dividing by a negative is the number one reason students fail this topic. Let's prove why it's necessary: We know that 10 > 5. If we divide both sides by -1, we get -10 and -5. If we don't flip the symbol, it says -10 > -5. That is completely false! -10 is colder and smaller than -5. We MUST flip the symbol to make it true: -10 < -5. Always flip the mouth when crossing over to the negative side!"
+    }
+  ]
+}

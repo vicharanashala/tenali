@@ -1,0 +1,30 @@
+{
+  "title": "Upper and Lower Bounds: The Limits of Accuracy",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: The Illusion of Perfection",
+      "content": "In the real world, absolute perfection doesn't exist. If you weigh a bag of flour and the scale says '500g', it isn't exactly 500.000000g. It might actually be 500.4g, but the scale rounded it down! **Bounds** is the study of the 'hidden wiggle room' behind every rounded measurement. It helps engineers and scientists calculate the absolute maximum or absolute minimum a measurement could truly be before the rounding happened."
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: The Halfway Rule",
+      "content": "To find the Upper and Lower limits (bounds) of any rounded number, follow the Golden Halfway Rule:\n\n� Look at what the number was rounded to (e.g., 'nearest 10', 'nearest whole number', '1 decimal place').\n� **Halve that degree of accuracy.** (e.g., half of 10 is 5. Half of 1 is 0.5).\n� **Lower Bound:** SUBTRACT that half-value from your number. (This is the absolute smallest the real number could be).\n� **Upper Bound:** ADD that half-value to your number. (This is the absolute biggest the real number could be)."
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: Max and Min Calculations",
+      "content": "Things get tricky when you have to calculate an Area or Speed using rounded numbers.\n\n1. **Find all bounds first:** Before doing any math, find the Upper and Lower bounds for every single number in the question.\n2. **To find the Maximum Answer (Upper Bound):** Use logic! To get the biggest Area (A = length � width), you must multiply the biggest Upper length by the biggest Upper width.\n3. **The Division Trap:** To get the Maximum Answer when dividing (like Speed = Distance � Time), you must divide the BIGGEST Upper Distance by the SMALLEST Lower Time! (Dividing by a tiny number makes the answer huge)."
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: Finding the Bounds",
+      "content": "A wooden plank is measured as 40cm, rounded to the nearest 10cm. What is the absolute shortest and longest this plank could truly be?\n\n� **Step 1 (The Accuracy):** The question says it was rounded to the 'nearest 10cm'.\n� **Step 2 (The Halfway Rule):** Half of 10cm is **5cm**.\n� **Step 3 (Lower Bound):** Subtract 5 from 40. 40 - 5 = **35cm**.\n� **Step 4 (Upper Bound):** Add 5 to 40. 40 + 5 = **45cm**.\n\n**Final Answer: The plank's true length is trapped between 35cm and 45cm (35 = Length < 45).**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "The most dangerous trap is calculating the **Lower Bound of a Division** (like finding minimum speed). Students naturally think 'Minimum means I must use all the small Lower Bounds'. So they divide Lower Distance by Lower Time. **WRONG!** Think about sharing a pizza. To get the smallest slice possible, you want a small pizza (Lower Distance) divided by a MASSIVE amount of friends (Upper Time). The rule for Minimum Division is ALWAYS: **Lower � Upper!**"
+    }
+  ]
+}

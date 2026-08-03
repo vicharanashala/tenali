@@ -1,0 +1,30 @@
+{
+  "title": "Transformations: Moving the World",
+  "blocks": [
+    {
+      "icon": "???",
+      "title": "1. The Core Concept: The Geometry Video Game",
+      "content": "Every time you move a character in a video game, rotate your phone screen, or look in a mirror, you are experiencing mathematical **Transformations**. A transformation is simply taking a shape on a graph and moving it, spinning it, flipping it, or stretching it. The original shape is called the 'Object', and the new, transformed shape is called the 'Image'."
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: The Four Movements",
+      "content": "There are four main ways to transform a shape:\n\n� **Translation (Slide):** Sliding the shape left, right, up, or down. It doesn't turn or flip; it just moves to a new postcode.\n� **Reflection (Flip):** Flipping the shape perfectly across a mirror line. It will look exactly the same, but backwards.\n� **Rotation (Spin):** Pinning the graph with a needle at a specific 'center' point, and spinning the shape around it like a clock hand.\n� **Enlargement (Stretch/Shrink):** Making the shape bigger or smaller from a specific 'center' point using a 'Scale Factor'."
+    },
+    {
+      "icon": "???",
+      "title": "3. Step-by-Step: Executing a Translation",
+      "content": "Translations are usually described using a **Column Vector**, like [3, -5].\n\n1. **Read the Vector:** The top number is Left/Right (positive=Right, negative=Left). The bottom number is Up/Down (positive=Up, negative=Down).\n2. **Pick a Corner:** Don't try to move the whole shape at once! Pick just ONE corner (vertex) of the shape.\n3. **Walk the Path:** From that corner, count the steps right/left, and then up/down as instructed by the vector. Draw a dot at the final destination.\n4. **Repeat:** Do this for every single corner of the shape.\n5. **Connect the Dots:** Use a ruler to connect your new dots. You have just slid the entire shape!"
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: Sliding a Triangle",
+      "content": "A triangle has a corner at the coordinate (2, 4). You must translate the triangle using the vector [-3, 1]. Where does that corner end up?\n\n� **Step 1 (Read the vector):** The top is -3, meaning go LEFT 3 spaces. The bottom is +1, meaning go UP 1 space.\n� **Step 2 (The X movement):** The corner starts at x=2. We go left 3. (2 - 3 = -1).\n� **Step 3 (The Y movement):** The corner starts at y=4. We go up 1. (4 + 1 = 5).\n� **Step 4 (The new dot):** Our new corner coordinate is (-1, 5).\n\n**Final Answer: The corner moves to (-1, 5).**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "The most brutal mistake in Transformations happens during **Rotations**. Students will happily spin the shape 90� clockwise, but they forget to use the specified **Center of Rotation**. If the question says 'Rotate 90� around the point (1,1)', you cannot just spin the shape around the middle of the graph (0,0)! You must place your tracing paper needle exactly on (1,1) before you spin. If your center is wrong, the shape will end up miles away from where it should be!"
+    }
+  ]
+}

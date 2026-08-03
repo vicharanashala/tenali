@@ -1,0 +1,30 @@
+{
+  "title": "Binomial Expansion: Exploding the Brackets",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: The Mathematical Explosion",
+      "content": "Expanding (x+2)� is easy using FOIL. But what happens if you have to expand (x+2)��? Writing out ten brackets and multiplying them all together would take you three hours and fill an entire notebook. **The Binomial Theorem** is a magical shortcut discovered centuries ago. It acts like a controlled explosion, instantly unpacking a massive bracket into a perfect polynomial in a matter of seconds."
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: Pascal's Triangle",
+      "content": "The secret code to the Binomial explosion is hidden in a famous number pyramid called **Pascal's Triangle**.\n\n� Row 0: 1\n� Row 1: 1, 1\n� Row 2: 1, 2, 1\n� Row 3: 1, 3, 3, 1\n� Row 4: 1, 4, 6, 4, 1\nThese numbers give you the exact 'coefficients' (the multipliers at the front) for every term when you expand a bracket. If you are doing (a+b)�, you use Row 3: 1, 3, 3, 1."
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: The Power Slide",
+      "content": "How to use Pascal's Triangle to expand (a+b)�:\n\n1. **Write the coefficients:** From Row 3, write out 1, 3, 3, 1 with lots of space between them.\n2. **The First Term (a):** Start at the left with a�. As you move right, 'slide' the power down: a�, a�, a�, and then 'a' vanishes entirely at the end.\n3. **The Second Term (b):** Start at the right with b�. As you move left, 'slide' the power down: b�, b�, b�, and it vanishes at the front.\n4. **Combine:** Multiply them all together. (1a�) + (3a�b) + (3ab�) + (1b�)."
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: Expanding (x+2)�",
+      "content": "Expand **(x+2)�** using the rules.\n\n� **Step 1 (Coefficients):** The power is 3, so use 1, 3, 3, 1.\n� **Step 2 (The 'x'):** Slide x down: 1(x�) ... 3(x�) ... 3(x�) ... 1(gone)\n� **Step 3 (The '2'):** Slide 2 up from the right: 1(x�)(2�) ... 3(x�)(2�) ... 3(x�)(2�) ... 1(gone)(2�)\n� **Step 4 (Calculate):** \n   Term 1: 1 � x� � 1 = **x�**\n   Term 2: 3 � x� � 2 = **6x�**\n   Term 3: 3 � x � 4 = **12x**\n   Term 4: 1 � 1 � 8 = **8**\n\n**Final Answer: x� + 6x� + 12x + 8**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "The absolute biggest trap happens when the second term in the bracket is NEGATIVE, like (x - 3)4. When you slide the powers for the (-3), you must put the -3 in brackets! (-3)� is -3, so the term becomes negative. But (-3)� is POSITIVE 9! So the next term becomes positive. **The signs will always alternate: +, -, +, -, +.** If you forget to bracket your negatives, your entire expansion will be completely ruined."
+    }
+  ]
+}

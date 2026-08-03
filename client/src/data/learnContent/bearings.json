@@ -1,0 +1,30 @@
+{
+  "title": "Bearings: Navigating the Seas",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: The Pirate's Map",
+      "content": "If you are flying a plane or sailing a ship in the middle of a blank ocean, you can't just say 'turn left at the traffic light'. You need a universal system that everyone understands. **Bearings** are the exact mathematical angles used by pilots and sailors to navigate the globe. They tell you precisely what direction you are facing, based entirely on a compass pointing strictly to True North."
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: The Three Golden Rules of Bearings",
+      "content": "A bearing is not a normal geometry angle. It MUST obey three strict rules:\n\n� **Rule 1 (North):** You must ALWAYS measure starting from the North line (000�).\n� **Rule 2 (Clockwise):** You must ALWAYS measure the angle turning clockwise (to the right).\n� **Rule 3 (Three Digits):** You must ALWAYS write the answer using exactly 3 digits. An angle of 45� is completely wrong. It must be written as **045�**."
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: The Reverse Bearing",
+      "content": "If a ship sails from Island A to Island B on a bearing of 100�, what bearing must it sail to get BACK home? This is the most common exam question.\n\n1. **The 180� Trick:** A reverse bearing is just turning completely around, which is a half-circle (180�).\n2. **If the original bearing is LESS than 180�:** Add 180 to it. (e.g., 100� + 180� = 280�).\n3. **If the original bearing is MORE than 180�:** Subtract 180 from it. (e.g., if you sailed out at 300�, you sail back at 300 - 180 = 120�).\n*(Why? Because you can't have an angle bigger than 360!)*"
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: Finding the Home Path",
+      "content": "You walk from the Camp to the Lake on a bearing of **065�**. What is the bearing of the Camp FROM the Lake?\n\n� **Step 1:** The word 'FROM' is critical. We are now standing at the Lake, looking backwards at the Camp.\n� **Step 2:** We need a reverse bearing. Look at the original number (065�).\n� **Step 3:** Since 65 is less than 180, we must ADD 180 to it to turn completely around.\n� **Step 4:** 65 + 180 = 245.\n\n**Final Answer: The bearing is 245�.**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "The deadliest trap in Bearings is failing to read the word **'FROM'**. The question will say: 'Find the bearing of Town A FROM Town B.' Students will instantly draw a North line at Town A, measure the angle to B, and write it down. **WRONG!** The word 'FROM' tells you exactly where you are standing. You are standing at Town B! You must draw the North line at Town B and measure the angle looking toward Town A. Always stand at 'FROM'!"
+    }
+  ]
+}

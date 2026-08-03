@@ -1,0 +1,30 @@
+{
+  "title": "Differential Equations: Modeling Change",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: The Math of Motion",
+      "content": "Most algebraic equations (like x + 5 = 10) are like taking a single photograph�they capture a static, frozen moment in time. But the real world is constantly moving, flowing, and changing! **Differential Equations** are the mathematics of video cameras. They are equations that describe how things *change* over time. From a cup of coffee cooling down, to a rocket accelerating into space, to a virus spreading through a population�if it changes, a differential equation can model it."
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: Derivatives as Rates",
+      "content": "The defining feature of a differential equation is that it contains a **Derivative** (like dy/dx or y').\n\n� **dy/dx** simply means 'the rate of change of y, with respect to x'. \n� If y is distance and x is time, then dy/dx is exactly equal to your Speed!\n� Unlike normal algebra where the answer is a single number (x = 3), the answer to a differential equation is an entire **Function** (a curve on a graph, like y = 3x� + 2) that describes the entire journey."
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: Separation of Variables",
+      "content": "The easiest way to solve basic differential equations is a trick called 'Separation of Variables':\n\n1. **Quarantine the variables:** Use algebra to push all the 'y' terms (and dy) to the left side of the equals sign, and all the 'x' terms (and dx) to the right side.\n2. **Integrate both sides:** Once separated, put a giant Integration symbol (?) in front of both sides.\n3. **Perform the integration:** Solve both integrals normally.\n4. **Don't forget the +C:** You only need to add one Constant of Integration (+C) to the right side.\n5. **Isolate y:** Rearrange the final equation to get 'y =' by itself."
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: Solving a Model",
+      "content": "Solve the differential equation: **dy/dx = 2x / y**\n\n� **Step 1 (Separate):** Multiply both sides by y, and multiply both sides by dx. We get: **y dy = 2x dx**.\n� **Step 2 (Integrate):** Add the symbols: **? y dy = ? 2x dx**\n� **Step 3 (Solve integrals):** The integral of y is **�y�**. The integral of 2x is **x�**.\n� **Step 4 (Add C):** �y� = x� + C\n� **Step 5 (Isolate y):** Multiply everything by 2. We get y� = 2x� + 2C. (Since 2C is still just an unknown constant, we can just call it K). Then take the square root.\n\n**Final Answer: y = �v(2x� + K)**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "A lethal mistake during 'Separation of Variables' is trying to move terms using addition or subtraction. **You can ONLY separate variables using multiplication or division!** If your equation is dy/dx = x + y, you CANNOT just subtract y to the other side to get dy/dx - y = x. That ruins the integration step. If you can't separate them using pure multiplication/division, you have to use a much more advanced technique!"
+    }
+  ]
+}

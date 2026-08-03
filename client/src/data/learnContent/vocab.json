@@ -1,0 +1,30 @@
+{
+  "title": "Math Vocabulary: Speaking the Language",
+  "blocks": [
+    {
+      "icon": "???",
+      "title": "1. The Core Concept: The Secret Code of Math",
+      "content": "Mathematics is quite literally a foreign language. When a question asks you for the 'product' of two numbers, it's not asking you to build something in a factory! It's a secret code asking you to multiply them. If you don't know the vocabulary, you can't even begin to solve the puzzle, no matter how good you are at calculating. Mastering math vocab is like being handed the translation dictionary for the entire universe."
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: The Big Four",
+      "content": "You must memorize the special names for the answers to the four basic operations:\n\n� **Sum:** The answer when you ADD things together. (The sum of 4 and 2 is 6).\n� **Difference:** The answer when you SUBTRACT. (The difference between 10 and 3 is 7).\n� **Product:** The answer when you MULTIPLY. (The product of 5 and 4 is 20).\n� **Quotient:** The answer when you DIVIDE. (The quotient of 20 and 5 is 4)."
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: Translating Word Problems",
+      "content": "When faced with a massive, terrifying paragraph of text, follow these steps to translate it into simple math:\n\n1. **Highlight the numbers:** Circle every number you see.\n2. **Hunt for trigger words:** Look for words like 'more than' (+), 'less than' (-), 'of' (usually multiply), or 'per' (usually divide).\n3. **Identify the unknown:** Find the word 'what' or 'find' to figure out what your variable 'x' should represent.\n4. **Write the equation:** Translate the English sentence directly into a math equation before doing any calculating."
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: The Translation",
+      "content": "Translate this sentence into math: 'Five less than the product of a number and three is exactly sixteen.'\n\n� **Step 1:** Let 'a number' be represented by the letter **x**.\n� **Step 2:** 'The product of a number and three' means multiply them: **3x**.\n� **Step 3:** 'Five less than' that product means we must subtract 5 from it: **3x - 5**.\n� **Step 4:** 'Is exactly sixteen' means equals 16.\n\n**Final Translation: 3x - 5 = 16.** (Now it's easy to solve!)"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "The phrase **'less than'** is the deadliest trap in word problems. If I say 'What is 2 less than 10?', the answer is obviously 8. You did 10 - 2. Notice that the order FLIPPED! The 2 was mentioned first in English, but went SECOND in the math. When translating '5 less than x', students often write '5 - x'. This is completely wrong! It must be **x - 5**. Always flip the order when you see 'less than'."
+    }
+  ]
+}

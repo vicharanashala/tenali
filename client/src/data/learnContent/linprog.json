@@ -1,0 +1,30 @@
+{
+  "title": "Linear Programming: Finding the Perfect Solution",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: The CEO's Dilemma",
+      "content": "Imagine you are the CEO of a shoe factory. You want to make as much profit as possible, but you are trapped by real-world limits: you only have a certain amount of leather, a certain number of workers, and limited warehouse space. **Linear Programming** is a visual mathematical technique used by massive corporations to navigate these limits (inequalities) and find the absolute perfect sweet spot that maximizes profit without breaking any rules!"
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: Shading the Danger Zone",
+      "content": "In Linear Programming, the rules of the factory are written as 'Inequalities' (like x + y = 10).\n\n� You draw these inequalities as straight lines on a graph.\n� A solid line means the rule includes 'equal to' (= or =).\n� A dashed line means it strictly cannot equal the line (< or >).\n� **The Golden Shading Rule:** Always lightly shade or cross out the region that is WRONG (the area you are not allowed to be in). The completely un-shaded, empty white space left over in the middle is your safe 'Feasible Region'."
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: Finding the Maximum Profit",
+      "content": "Once you have your blank 'Feasible Region' polygon mapped out on the graph, how do you find the best solution?\n\n1. **The Corner Trick:** Mathematical law states that the absolute maximum (and absolute minimum) profit will ALWAYS occur exactly on one of the sharp corners (vertices) of your safe region polygon.\n2. **Find the Coordinates:** Read the (x, y) coordinates for every corner of your polygon.\n3. **Test them all:** Take the 'Profit Formula' given in the question (e.g., Profit = 5x + 10y) and plug the coordinates of every corner into it.\n4. **The Winner:** Whichever corner gives you the highest number is your perfect manufacturing sweet spot!"
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: Testing the Corners",
+      "content": "You've drawn the graph and found the safe region. The three corners of your polygon are A(0, 10), B(4, 6), and C(8, 0). Your Profit formula is **P = 20x + 15y**. Which corner gives the most profit?\n\n� **Test Corner A (0, 10):** P = 20(0) + 15(10) = 0 + 150 = ****.\n� **Test Corner B (4, 6):** P = 20(4) + 15(6) = 80 + 90 = ****.\n� **Test Corner C (8, 0):** P = 20(8) + 15(0) = 160 + 0 = ****.\n\n**Final Answer: Corner B is the winner! You should make 4 of item x and 6 of item y to get a maximum profit of .**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "The biggest disaster in Linear Programming is shading the wrong side of a line. If the rule is y = x + 2, how do you know which side is less than? **Use a Test Point!** Pick a really easy coordinate, like (0,0). Plug x=0 and y=0 into the rule. 0 = 0 + 2. Is 0 less than 2? Yes! That means the point (0,0) is in the SAFE zone. Shade the completely opposite side of the line to block off the danger zone. If you guess the shading, your safe region will be completely wrong."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "title": "Simultaneous Equations: The Intersection",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: Crossing Paths",
+      "content": "If you draw a straight line on a graph, it represents an equation with infinite possible answers (every point on the line). If you draw a second line, it also has infinite answers. But where do the two lines cross? That single point of intersection is the ONE magical coordinate (x, y) that works perfectly for BOTH equations at the same time. Solving **Simultaneous Equations** is the mathematical art of finding that exact intersection point without needing to draw the graph."
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: Two Paths to Victory",
+      "content": "There are two main ways to solve these puzzles algebraically:\n\n� **Substitution Method:** Best used when one equation already has x or y completely alone (like y = 2x + 1). You take that expression and 'substitute' it into the other equation, trapping it down to just one variable.\n� **Elimination Method:** Best used when the equations are stacked neatly (like 3x + 2y = 10). You manipulate the equations so that when you add or subtract them vertically, one of the variables gets completely destroyed (eliminated)!"
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: The Elimination Method",
+      "content": "1. **Stack 'em up:** Write the equations one above the other, aligning the x's, y's, and numbers.\n2. **Match the coefficients:** Multiply one (or both) equations by a number so that the x's OR the y's have the exact same number in front of them (ignoring the sign).\n3. **Eliminate:** If the matched signs are the SAME (both +, or both -), SUBTRACT the equations. If the signs are DIFFERENT (+ and -), ADD the equations. The variable will vanish!\n4. **Solve:** Solve the simple equation left behind for the remaining variable.\n5. **Tag Team:** Take your answer and plug it back into EITHER original equation to find the other variable."
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: Elimination in Action",
+      "content": "Solve: \n1) 3x + y = 11\n2) 2x - y = 4\n\n� **Step 1:** Look at the y's. We have a +y and a -y. The coefficients already match (they are both 1), and the signs are different.\n� **Step 2:** Because the signs are different, we ADD the two equations vertically.\n� **Step 3:** (3x + 2x) = 5x. (+y + -y) = 0. (11 + 4) = 15. We are left with **5x = 15**.\n� **Step 4:** Divide by 5. **x = 3**.\n� **Step 5 (Tag Team):** Plug x=3 into the first equation: 3(3) + y = 11. Which means 9 + y = 11. So, **y = 2**.\n\n**Final Answer: x = 3, y = 2 (Coordinate: 3,2)**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "When using the Elimination method and deciding to SUBTRACT the equations, students often make a fatal error: they subtract the first term, but forget to distribute the minus sign to the rest of the bottom equation. If you are subtracting an equation like (2x - 3y = 4), that minus sign changes the -3y into a +3y. Pro tip: Put big brackets around the entire bottom equation with a minus sign outside to remind your brain to flip EVERY sign!"
+    }
+  ]
+}

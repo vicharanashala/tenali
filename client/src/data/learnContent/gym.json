@@ -1,0 +1,30 @@
+{
+  "title": "Math Gym: The Training Ground",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: Repetition is Mastery",
+      "content": "You can read a hundred books about how to ride a bicycle, but until you actually get on one and pedal, you will fall over. Mathematics is exactly the same. Reading the theory (this Learn section) is only 20% of the battle. The other 80% is pure, relentless practice. The **Math Gym** is where you build the muscle memory required to survive high-pressure exams without panicking."
+    },
+    {
+      "icon": "??",
+      "title": "2. The Strategy: Time vs Perfection",
+      "content": "In the Gym, you have a timer. This mimics the stress of an exam room. Your goal is not just to get the answer right, but to get it right *efficiently*.\n\n� Don't guess just to be fast. A wrong answer wastes more time than a slow, correct answer.\n� Write down your working! Trying to hold 4 different numbers in your head is a guaranteed way to drop a negative sign and fail."
+    },
+    {
+      "icon": "??",
+      "title": "3. The Method: Analyzing Mistakes",
+      "content": "When you get an answer wrong in the Gym, DO NOT instantly skip to the next question! That is a wasted opportunity.\n\n1. Look at the correct answer provided.\n2. Look at your scribbled working.\n3. Find the exact line where your math went wrong (e.g., 'Ah, I added 3 instead of subtracting 3!').\n4. If you don't know why you got it wrong, come back to this Learn section immediately!"
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: Building Stamina",
+      "content": "Just like lifting weights, don't start with the 100kg bar. \n\n� **Session 1:** Start with the topics you are confident in, just to get used to the timer and the interface.\n� **Session 2:** Pick one 'safe' topic, and one 'scary' topic.\n� **Session 3:** Full random mode. This forces your brain to instantly switch contexts, which is the exact skill required for a final exam."
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "The biggest danger in the Gym is 'Tilt' (a gaming term for getting angry and making worse mistakes). If you get 3 questions wrong in a row, your brain releases stress hormones that literally block your logical thinking pathways. If you are frustrated, **stop**. Close the gym. Breathe. Go do a different topic, or walk away for 5 minutes. You cannot learn math when you are angry."
+    }
+  ]
+}

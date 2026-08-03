@@ -1,0 +1,30 @@
+{
+  "title": "Decimals: The Details Between the Lines",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: Breaking the Whole",
+      "content": "Whole numbers are great for counting big things like cars or people. But what if you are measuring the time of a 100-meter sprint? The difference between 1st and 2nd place might be tinier than a single second! A **Decimal** is simply a way of cutting a whole number into 10, 100, or 1,000 tiny equal pieces so we can measure things with extreme, laser-like precision."
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: The Decimal Point's Power",
+      "content": "The decimal point is the anchor of the entire number system.\n\n� Numbers to the LEFT of the point are Whole numbers (Ones, Tens, Hundreds). They are big and powerful.\n� Numbers to the RIGHT of the point are Fragments (Tenths, Hundredths, Thousandths). The further right you go, the tinier the piece gets.\n� **The Golden Rule:** You can add as many invisible zeros to the FAR RIGHT end of a decimal as you want, and the value never changes! (0.5 is exactly the same as 0.500)."
+    },
+    {
+      "icon": "?",
+      "title": "3. Step-by-Step: Adding & Subtracting Decimals",
+      "content": "The only trick to adding or subtracting decimals is lining them up perfectly:\n\n1. **Line up the dots:** Write the numbers vertically, ensuring the decimal points are stacked exactly on top of each other in a perfect vertical line.\n2. **Fill the gaps:** If one number is 'shorter' than the other (like 3.4 and 2.15), add a zero to the end of the short one (3.40) so they match in length.\n3. **Drop the dot:** Before you even start adding, put a decimal point in the answer space, directly under the others.\n4. **Calculate:** Add or subtract exactly like you would with normal whole numbers."
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: The Precision Math",
+      "content": "Calculate: **12.4 - 3.85**\n\n� **Step 1 (Line up & Fill):** Write 12.40 on top, and 3.85 underneath. The dots must align!\n� **Step 2 (The setup):** \n   12.40\n -  3.85\n   -----\n� **Step 3 (Calculate):** Starting from the right, you can't do 0 - 5. You must 'borrow' from the 4. The 4 becomes a 3, and the 0 becomes 10.\n� **Step 4:** 10 - 5 = 5. Next column: You can't do 3 - 8. Borrow from the 2. The 2 becomes 1, the 3 becomes 13.\n� **Step 5:** 13 - 8 = 5. Next: 11 - 3 = 8. Drop the dot down!\n\n**Final Answer: 8.55**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "A devastating mistake happens when MULTIPLYING decimals. Students try to 'line up the decimal points' like they do for addition. **Do NOT line up the dots when multiplying!** Instead, ignore the decimals completely. Multiply the numbers as if they were whole numbers (e.g., for 0.3 � 0.4, just do 3 � 4 = 12). Then, count how many digits were behind the decimal points in the original question (1 for the 3, 1 for the 4 = 2 total). Hop the decimal point in your answer 2 spaces to the left. Answer: 0.12!"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "title": "Surds: The Untamable Roots",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: The Raw Numbers",
+      "content": "When you type the square root of 9 into a calculator, you get a beautiful, clean '3'. But if you type the square root of 2, the calculator spits out '1.41421356...'. It's a chaotic decimal that goes on forever with no pattern. This chaotic number is called a **Surd**. In advanced mathematics, we don't want messy, rounded-off decimals. We want absolute purity and perfection! So, instead of converting it to a decimal, we leave it in its 'raw' form inside the root symbol: **v2**. That is the exact, perfect answer."
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: Simplifying Surds",
+      "content": "Just like you wouldn't leave a fraction as 10/20 (you'd simplify it to 1/2), you shouldn't leave a surd as v20. You must simplify it!\n\n� **The Multiplication Rule:** va � vb = v(ab). (e.g., v2 � v3 = v6).\n� **The Prison Break:** The goal of simplifying is to find a 'perfect square' hiding inside the surd, and break it out of the square root prison."
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: The Prison Break Method",
+      "content": "How to simplify a big, ugly surd like v50:\n\n1. **Hunt for Squares:** Think of the perfect square numbers (4, 9, 16, 25, 36, 49...). Does one of these divide perfectly into 50?\n2. **Split the Cell:** Yes! 25 divides into 50 exactly 2 times. Rewrite v50 as v(25 � 2).\n3. **Separate them:** Using the multiplication rule, split them into two separate roots: v25 � v2.\n4. **The Breakout:** The v25 is a perfect square! It easily breaks out of the root symbol and transforms into a clean, normal **5**.\n5. **The Remainder:** The v2 cannot escape. It stays behind. We write the final answer with the free number glued to the trapped number: **5v2**."
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: Adding Surds",
+      "content": "Simplify: **v12 + v27**\n*(Warning: You CANNOT just add them to make v39! Surds act like algebra letters. You can't add an 'x' to a 'y'. You must simplify them first!)*\n\n� **Step 1 (Simplify v12):** 4 is a perfect square that fits into 12. So v12 = v(4 � 3) = v4 � v3 = **2v3**.\n� **Step 2 (Simplify v27):** 9 is a perfect square that fits into 27. So v27 = v(9 � 3) = v9 � v3 = **3v3**.\n� **Step 3 (Add them up):** We now have 2v3 + 3v3.\n� **Step 4:** Treat the v3 like an 'x'. If you have 2x + 3x, you have 5x!\n\n**Final Answer: 5v3**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "The deadliest, most unforgivable sin in surds is thinking that you can ADD numbers while they are trapped inside separate roots. **v16 + v9 does NOT equal v25!** Let's prove it: v16 is 4. v9 is 3. And 4 + 3 = 7. But v25 is 5! And 7 does not equal 5! You can multiply surds together (v2 � v3 = v6), but you can NEVER add them together unless the number inside the root is exactly the same (like 2v3 + 4v3 = 6v3)."
+    }
+  ]
+}

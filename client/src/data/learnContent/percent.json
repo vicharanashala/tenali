@@ -1,0 +1,30 @@
+{
+  "title": "Percentages: The Hundredth Rule",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: The Universal Standard",
+      "content": "If one student gets 14/20 on a test, and another gets 38/50, who did better? It's hard to compare them because the total marks are different! **Percentages** fix this by forcing every single test in the world to be graded out of 100. 'Percent' translates to 'per 100'. By translating fractions into a standard out of 100, we can instantly compare any two things fairly."
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: The Decimal Conversion",
+      "content": "Percentages are useless for actual calculations; they must be transformed into Decimals first.\n\n� **Percentage to Decimal:** Divide by 100. (Move the decimal point two spots to the left). 45% becomes 0.45. \n� **The Danger Zone:** Single-digit percentages! 7% does NOT become 0.7. It becomes **0.07**. (0.7 is 70%!).\n� The word 'OF' in math means MULTIPLY. To find 20% OF 80, you calculate 0.20 � 80."
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: Percentage Increase / Decrease",
+      "content": "If a  shirt increases in price by 15%, use the Multiplier Method:\n\n1. Start at 100%.\n2. If it's an INCREASE, add the percentage. (100 + 15 = 115%).\n3. If it's a DECREASE, subtract the percentage. (e.g., 20% off sale: 100 - 20 = 80%).\n4. Turn your new total into a decimal multiplier. (115% = 1.15).\n5. Multiply the original price by the multiplier! ( � 1.15)."
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: Finding the Change",
+      "content": "A town's population was 8,000. It grew to 9,600. What was the percentage increase?\n\n� **Step 1 (Find the Change):** How much did it grow? 9,600 - 8,000 = 1,600 people.\n� **Step 2 (The Fraction):** Create a fraction: (Change � ORIGINAL Amount).\n� **Step 3 (Plug in):** 1600 � 8000.\n� **Step 4 (Calculate Decimal):** 1600 � 8000 = 0.20.\n� **Step 5 (Convert to %):** Multiply by 100. 0.20 � 100 = 20.\n\n**Final Answer: The population increased by 20%.**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "When calculating percentage change (like the town population above), the absolute most common mistake is putting the NEW number on the bottom of the fraction (1600 � 9600). This will give you 16.6%, which is completely wrong! **The bottom of the fraction MUST always be the ORIGINAL starting number.** Percentages are always a measure of how much the *original* thing changed."
+    }
+  ]
+}

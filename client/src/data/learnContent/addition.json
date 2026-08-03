@@ -1,0 +1,30 @@
+{
+  "title": "Mastering Addition",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: Bringing Things Together",
+      "content": "Imagine you're organizing a massive school festival. You have 450 tickets sold by Class A, and 325 tickets sold by Class B. To find out the total number of people coming, you need to combine them. **Addition** is exactly that�the mathematical superpower of bringing separate groups together to find the grand total. The numbers you are adding are called **addends**, and your final grand total is called the **sum**."
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules of the Game",
+      "content": "Addition is incredibly flexible thanks to three powerful rules:\n\n� **The Commutative Property (Order doesn't matter):** If you eat 3 apples and then 2 oranges, you ate 5 fruits. If you eat 2 oranges then 3 apples, it's still 5! So, **5 + 3 = 3 + 5**.\n\n� **The Associative Property (Grouping doesn't matter):** When adding three numbers, you can group them however you like. **(2 + 3) + 4** gives 9, and **2 + (3 + 4)** also gives 9.\n\n� **The Identity Property:** Adding zero is like adding nothing at all. **7 + 0 = 7**. It keeps the number's 'identity' exactly the same."
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: Column Addition",
+      "content": "When numbers get too big to add in your head, we use the **Column Method**:\n\n1. **Stack them up:** Write the numbers vertically, making sure the ones digits line up, the tens line up, and so on.\n2. **Start on the right:** Always begin adding from the ones column (the far right) and move left.\n3. **The 'Carry Over' secret:** If a column adds up to 10 or more, you can't fit two digits in one space! Write down the ones digit of your answer, and **carry over** the tens digit to the top of the next column to the left."
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: A Real Problem",
+      "content": "Let's find the total of **487 + 256**.\n\n� **Step 1 (Stack):** Put 487 on top of 256, lined up perfectly.\n� **Step 2 (Ones):** Add 7 + 6. That's 13. Write down **3** and carry over the **1** to the tens column.\n� **Step 3 (Tens):** Add 8 + 5. That's 13. But wait! Add the carried **1** to get 14. Write down **4** and carry over the **1** to the hundreds column.\n� **Step 4 (Hundreds):** Add 4 + 2. That's 6. Add the carried **1** to get **7**.\n\n**Final Answer: 743.**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls to Avoid",
+      "content": "The number one mistake students make is **forgetting to add the carried-over number**. You might do all the hard work correctly, but if you ignore that tiny '1' sitting at the top of your column, your whole answer will be wrong. Always write your carried numbers clearly, and cross them out once you've added them so you don't forget!"
+    }
+  ]
+}

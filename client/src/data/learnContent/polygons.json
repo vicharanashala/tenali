@@ -1,0 +1,30 @@
+{
+  "title": "Polygons: The World of Many Sides",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: Shapes with Rules",
+      "content": "A polygon is any flat, 2D shape that is completely closed and made entirely of straight lines. A circle is not a polygon (it has curves). A shape with an open door is not a polygon (it's not closed). The word comes from Greek: 'poly' means 'many' and 'gon' means 'angles'. Triangles, squares, pentagons, and octagons are all members of the polygon family!"
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: Regular vs. Irregular",
+      "content": "� **Regular Polygons:** The perfectionists. Every single side is the exact same length, and every single interior angle is the exact same size. (e.g., a perfect Stop sign).\n� **Irregular Polygons:** The rebels. The sides are different lengths and the angles are all over the place. They might look squished or stretched out.\n� **The Exterior Angle Rule:** No matter how many sides a polygon has�whether it's 3 sides or 3,000 sides�all of its outer 'exterior' angles will ALWAYS add up to exactly **360�**."
+    },
+    {
+      "icon": "?",
+      "title": "3. Step-by-Step: The Interior Angle Formula",
+      "content": "How do you find what all the inside angles of a polygon add up to? You split it into triangles!\n\n1. **The Formula:** Sum of Interior Angles = **(n - 2) � 180�**\n2. **What is 'n'?** 'n' is simply the number of sides the shape has.\n3. **Why (n-2)?** Because any polygon can be split into exactly 2 fewer triangles than it has sides. (A 5-sided pentagon can be split into 3 triangles).\n4. **Regular Polygons only:** If you want to find just ONE interior angle of a perfectly regular shape, take your total sum and divide it by 'n'."
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: Inside an Octagon",
+      "content": "Find the sum of the interior angles of an Octagon, and then find the size of just ONE angle if the Octagon is regular.\n\n� **Step 1:** An Octagon has 8 sides. So, n = 8.\n� **Step 2:** Use the formula: (8 - 2) � 180�\n� **Step 3 (Calculate sum):** 6 � 180� = **1080�**.\n� **Step 4 (Find one angle):** Since it's a regular shape, all 8 angles share that 1080� equally. Divide 1080 by 8.\n\n**Final Answer: The total sum is 1080�. One interior angle is 135�.**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "Students often confuse the **Interior sum formula** with the **Exterior sum rule**. Remember: Exterior angles ALWAYS add up to 360�, no formulas needed! Only use the (n-2)�180 formula for the INSIDE angles. Also, if a question asks for the sum of the interior angles of a 12-sided shape, do NOT multiply 12 by 180. You must subtract 2 first! It's 10 � 180."
+    }
+  ]
+}

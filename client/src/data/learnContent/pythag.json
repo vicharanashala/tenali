@@ -1,0 +1,30 @@
+{
+  "title": "Pythagoras' Theorem: The Right-Angled Secret",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: The Square Geometry",
+      "content": "Over 2,500 years ago, a Greek mathematician named Pythagoras discovered a magical relationship hiding inside every single right-angled triangle in the universe. He realized that if you built a square on the two shorter sides of the triangle, the total area of those two small squares perfectly matched the area of a massive square built on the longest side. This theorem allows us to find the exact length of a missing side, as long as we know the other two!"
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: a� + b� = c�",
+      "content": "The famous formula is **a� + b� = c�**.\n\n� **'c' is the Hypotenuse:** This is the absolute most important rule. 'c' MUST be the longest side of the triangle. It is always located directly opposite the 90� right angle. It never touches the right angle.\n� **'a' and 'b' are the Legs:** These are the two shorter sides that touch the 90� corner. It doesn't matter which one you call 'a' and which one you call 'b'."
+    },
+    {
+      "icon": "???",
+      "title": "3. Step-by-Step: Solving the Puzzle",
+      "content": "1. **Identify the Hypotenuse ('c'):** Find the longest side across from the right angle. Label it 'c'. Label the other two 'a' and 'b'.\n2. **Write the formula:** a� + b� = c�\n3. **Plug in your numbers:** Square the numbers you know.\n4. **Add or Subtract:** If you are finding the longest side ('c'), ADD the two squares together. If you are finding a shorter side ('a' or 'b'), SUBTRACT the smaller square from the bigger square.\n5. **The Final Key (Square Root):** Your answer right now is just a massive square. To find the actual length of the side, you MUST take the square root of your final number!"
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: Finding the Hypotenuse",
+      "content": "You have a right-angled triangle. One short side is 6cm, the other short side is 8cm. Find the longest side.\n\n� **Step 1:** The missing side is the hypotenuse ('c'). We know a = 6 and b = 8.\n� **Step 2:** Write it out: 6� + 8� = c�\n� **Step 3 (Square them):** 36 + 64 = c�\n� **Step 4 (Add):** 100 = c�\n� **Step 5 (Square Root):** If c� is 100, then 'c' is the square root of 100.\n\n**Final Answer: The longest side is 10cm.**"
+    },
+    {
+      "icon": "??",
+      "title": "5. The Ultimate Pitfall",
+      "content": "The most disastrous mistake students make is stopping at Step 4. They add 36 and 64, get 100, and say 'The longest side is 100cm!' Stop and use common sense: if the two short sides are 6cm and 8cm, how could the long side be 100cm? That would be a freakishly long, broken triangle! **ALWAYS remember to take the Square Root at the very end.**"
+    }
+  ]
+}

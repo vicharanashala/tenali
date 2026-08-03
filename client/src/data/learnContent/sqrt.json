@@ -1,0 +1,30 @@
+{
+  "title": "Square Roots: Un-baking the Cake",
+  "blocks": [
+    {
+      "icon": "?",
+      "title": "1. The Core Concept: The Mathematical Reverse Gear",
+      "content": "If you take a number and multiply it by itself (like 5 � 5), you 'square' it, creating a much bigger number (25). But what if you are given the 25 and told to find the original starting number? That's what a **Square Root (v)** does! It is the mathematical reverse gear. It 'un-bakes' the cake. Taking the square root of a number asks the question: 'What identical twin numbers multiplied together to create this?'"
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: Perfect Squares vs. Surds",
+      "content": "� **Perfect Squares:** These are the nice, friendly numbers that have clean, whole-number roots. (e.g., v9 = 3, v16 = 4, v100 = 10). You MUST memorize the perfect squares up to 12 � 12 = 144.\n� **Surds (Irrational Roots):** Most numbers are not perfect squares! If you try to find v10, the answer is a never-ending, chaotic decimal (3.16227...). We call these messy, unbreakable roots 'Surds'. Often, it's better to just leave them written as v10 rather than writing a messy decimal."
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: Estimating Ugly Roots",
+      "content": "If you are in an exam without a calculator, how do you find the square root of 50?\n\n1. **Find the Neighbors:** Think of the perfect squares that trap the number 50. The perfect square below it is 49 (which is 7�7). The perfect square above it is 64 (which is 8�8).\n2. **Establish the Bracket:** Because 50 is trapped between 49 and 64, the square root of 50 MUST be trapped between 7 and 8.\n3. **Estimate the Decimal:** Look at the gaps. 50 is incredibly close to 49, and very far from 64. Therefore, the answer must be very close to 7, like 7.1!"
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: Finding v85 without a calculator",
+      "content": "Estimate the value of **v85** to one decimal place.\n\n� **Step 1 (Neighbors):** What perfect squares are near 85? We know 9 � 9 = 81. And 10 � 10 = 100.\n� **Step 2 (The Bracket):** Since 85 is between 81 and 100, the answer MUST be 'Nine point something'.\n� **Step 3 (The Gaps):** 85 is only 4 steps away from 81. But it is 15 steps away from 100. It is much closer to the 9 than the 10.\n� **Step 4 (Estimate):** Because it's a little bit past the 9, a highly educated guess would be 9.2.\n\n*(Checking with a calculator, v85 is actually 9.219! Our logic was perfect!)*"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "The most embarrassing trap in all of mathematics is thinking that a square root means 'divide by 2'. **v100 is NOT 50!** 50 � 50 is 2,500, not 100! A square root is asking what number multiplied by ITSELF makes the target. The square root of 100 is 10 (because 10 � 10 = 100). Never, ever divide by 2 when you see a square root symbol!"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "title": "Permutations & Combinations: The Math of Choice",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: Counting the Possibilities",
+      "content": "If you have 10 friends, but you can only invite 3 to your party, how many different groups of friends could you possibly make? What if you are choosing a President, Vice President, and Secretary out of 10 people? This is Combinatorics! It is the mathematics of counting massive numbers of possibilities without actually having to write them all down and count them one by one."
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: Order vs. Chaos",
+      "content": "The entire topic rests on one massive question: **Does the order matter?**\n\n� **Permutations (The Lock):** ORDER MATTERS! Think of a combination lock. The code '1-2-3' is completely different from '3-2-1'. They are two separate permutations. (President, VP, Secretary roles mean order matters).\n� **Combinations (The Salad):** ORDER DOES NOT MATTER! If you make a salad with lettuce, tomatoes, and carrots, it's the exact same salad as carrots, tomatoes, and lettuce. The order is irrelevant. (Just picking 3 friends for a party is a combination)."
+    },
+    {
+      "icon": "?",
+      "title": "3. Step-by-Step: The Factorial Trick (!)",
+      "content": "To solve these, we use **Factorials**, written as an exclamation mark (!). \n5! means 5 � 4 � 3 � 2 � 1 = 120.\n\n� **Permutation Formula (nPr):** n! / (n-r)!\n� **Combination Formula (nCr):** n! / [ r! � (n-r)! ]\n� 'n' is the TOTAL number of items you have to choose from.\n� 'r' is how many items you are actually choosing.\n*(The nCr formula divides by an extra r! to 'delete' all the duplicate mixed-up orders!)*"
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: The Committee",
+      "content": "You have 6 students. You must select a random committee of 2 students to organize a dance. How many possible committees are there?\n\n� **Step 1 (Order test):** Does order matter? No. John & Sarah is the same committee as Sarah & John. We must use Combinations (nCr).\n� **Step 2 (Identify n and r):** n = 6 (total students). r = 2 (students chosen).\n� **Step 3 (The Formula):** 6! / [ 2! � (6-2)! ]\n� **Step 4 (Simplify):** 6! / [ 2! � 4! ].\n� **Step 5 (Cancel out):** The 6! (6�5�4�3�2�1) divided by 4! (4�3�2�1) perfectly cancels out everything from 4 downwards! We are left with just (6 � 5) on top, and 2! (2 � 1) on the bottom.\n� **Step 6 (Calculate):** 30 � 2 = 15.\n\n**Final Answer: There are 15 possible committees.**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "The name 'Combination Lock' is a total lie! It is mathematically wrong! A padlock requires a very specific ORDER (1-2-3 won't open a lock set to 3-2-1). Therefore, it should be called a **Permutation Lock**! Remembering this fun fact is the best way to ensure you never mix up the definitions of Permutations (Order matters) and Combinations (Order doesn't matter) on a test."
+    }
+  ]
+}

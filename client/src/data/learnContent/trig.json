@@ -1,0 +1,30 @@
+{
+  "title": "Mastering Trigonometry: The Triangle Magic",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: The Skyscraper Secret",
+      "content": "Imagine you're standing on the ground looking up at the top of a massive skyscraper. How tall is it? You can't use a measuring tape! But if you know how far you are from the building, and the *angle* you're looking up, **Trigonometry** acts like a mathematical superpower that lets you calculate the exact height without ever leaving the ground. It is the study of how the angles and sides of right-angled triangles are forever linked together."
+    },
+    {
+      "icon": "???",
+      "title": "2. The Rules: Naming the Sides",
+      "content": "Before doing any math, you must label the triangle based on your target angle (we'll call it ?, pronounced 'theta'):\n\n� **Hypotenuse (H):** The longest side of the triangle. It is ALWAYS directly opposite the 90� right angle.\n� **Opposite (O):** The side that is completely opposite your target angle ?. If ? was an eye, it would be looking directly at the Opposite side.\n� **Adjacent (A):** The side that is right next to your target angle ? (but isn't the hypotenuse). It 'touches' the angle."
+    },
+    {
+      "icon": "???",
+      "title": "3. Step-by-Step: SOH CAH TOA",
+      "content": "To solve any basic trig problem, follow these steps and use the magic word **SOH-CAH-TOA**:\n\n1. Label your triangle: H, O, and A.\n2. Look at what you *know* and what you *want to find*. (e.g., I know the Hypotenuse, I want the Opposite).\n3. Choose your weapon based on those two letters:\n   � **SOH:** Sine(?) = Opposite � Hypotenuse\n   � **CAH:** Cosine(?) = Adjacent � Hypotenuse\n   � **TOA:** Tangent(?) = Opposite � Adjacent\n4. Write the equation, plug in your numbers, and solve for the unknown."
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: Finding a Missing Side",
+      "content": "A ladder leans against a wall. The ladder is 10m long (Hypotenuse). The angle it makes with the ground is 30�. How high up the wall does it reach (Opposite)?\n\n� **Step 1:** We have H = 10, and we want O. Angle ? = 30�.\n� **Step 2:** We have O and H. Looking at SOH CAH TOA, we must use **Sine (SOH)**.\n� **Step 3:** Write it out: Sin(30�) = O / H\n� **Step 4:** Plug in numbers: Sin(30�) = O / 10\n� **Step 5:** Multiply both sides by 10 to get O by itself: 10 � Sin(30�) = O\n� **Step 6:** Since Sin(30�) is 0.5, 10 � 0.5 = 5.\n\n**Final Answer: The ladder reaches 5m high.**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "There are two massive traps in Trigonometry. First, **labeling the sides wrong**. If you mix up Opposite and Adjacent, your whole calculation is doomed. Always double-check your labels! Second, **calculator modes**. If your calculator is set to Radians (RAD) instead of Degrees (DEG), it will give you completely wild answers. Always look for the tiny 'D' or 'DEG' at the top of your calculator screen before an exam!"
+    }
+  ]
+}

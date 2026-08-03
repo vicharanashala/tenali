@@ -1,0 +1,30 @@
+{
+  "title": "Functions Gym: Mental Substitution",
+  "blocks": [
+    {
+      "icon": "???",
+      "title": "1. The Core Concept: The Speed Calculator",
+      "content": "In advanced calculus and graph plotting, you will need to evaluate functions dozens of times to find coordinates. You don't have time to write every step down. The **Functions Gym** trains your working memory to hold numbers, apply BEDMAS/BODMAS mentally, and spit out the correct coordinate instantly."
+    },
+    {
+      "icon": "?",
+      "title": "2. The Strategy: Chunking",
+      "content": "When evaluating a long function like f(x) = 2x� - 5x + 10 in your head, use a psychological trick called 'Chunking'. Break the equation into separate 'chunks' separated by plus/minus signs. Calculate chunk 1, memorize it. Calculate chunk 2, combine it with chunk 1. Then add the +10 at the very end."
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: The Mental Flow",
+      "content": "For a mental calculation of f(x) = x� - 3x:\n1. If evaluating f(4): First, find x� (16). Hold it.\n2. Find 3x (12). Hold it.\n3. Perform the subtraction: 16 - 12.\n4. Spit out 4."
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: Mental Gymnastics",
+      "content": "Mentally evaluate **f(-2)** for the function **f(x) = 5x - x�**.\n\n� **Chunk 1:** 5(-2) = -10. (Hold -10 in memory).\n� **Chunk 2:** (-2)�. That's +4. But there is a minus sign in front of it in the formula! So the chunk is actually -4.\n� **Combine:** -10 - 4.\n\n**Final Answer: -14.**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "Under the time pressure of the Gym, your brain will try to skip the Order of Operations. If evaluating f(x) = 3x� for x=2, your stressed brain might do 3�2 = 6, and then square the 6 to get 36. This is fatally wrong! Powers ALWAYS come before multiplication. Square the 2 first (4), then multiply by 3 (12)."
+    }
+  ]
+}

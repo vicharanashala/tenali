@@ -1,0 +1,30 @@
+{
+  "title": "Limits: The Edge of Infinity",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: Approaching the Void",
+      "content": "What happens if you try to calculate the speed of a car at an exact freeze-frame of 0 seconds? You end up doing 0 divided by 0, and the math literally breaks down into a black hole. **Limits** are a clever trick to peek into that black hole. Instead of asking 'What is the answer EXACTLY at zero?', a Limit asks 'What answer are we getting closer and closer to as we *approach* zero?' It is the foundation of all advanced Calculus."
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: The Danger Zone",
+      "content": "When evaluating a limit (written as 'lim x?a'), your first instinct should always be to just plug the number 'a' directly into the 'x'.\n\n� If you get a normal number (like 5), you're done! That's the answer.\n� If you get **0 / 0** (called an Indeterminate Form), you have hit the danger zone! The math is broken. You cannot stop here; you must use algebra to fix the equation before trying again."
+    },
+    {
+      "icon": "???",
+      "title": "3. Step-by-Step: The Factoring Rescue",
+      "content": "If direct substitution gives you 0/0, the most common rescue method is Factoring:\n\n1. Look at the top and bottom of the fraction.\n2. Factorise the quadratics or pull out common terms. (Usually, the top is a 'Difference of Two Squares' like x� - 9, which becomes (x+3)(x-3)).\n3. Look for matching brackets on the top and bottom, and brutally cancel them out!\n4. Now that the problematic chunk is destroyed, try plugging your limit number in again."
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: Fixing the Black Hole",
+      "content": "Evaluate: **lim (x?3) [ (x� - 9) / (x - 3) ]**\n\n� **Step 1 (The Trap):** If we plug in 3 right now, we get (9-9)/(3-3) = 0/0. Broken!\n� **Step 2 (Factor the top):** x� - 9 is a Difference of Two Squares. It factors perfectly into (x + 3)(x - 3).\n� **Step 3 (Cancel):** The equation is now [ (x+3)(x-3) / (x-3) ]. The (x-3) on top cancels out the (x-3) on the bottom!\n� **Step 4 (The Survivor):** We are left with just **(x + 3)**.\n� **Step 5 (Retry):** Now plug the limit (x=3) into the survivor. 3 + 3 = 6.\n\n**Final Answer: The limit is 6.**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "The biggest mistake in limits is assuming that getting '0/0' means the answer is 0. Or assuming it means the answer is 'Undefined' or 'Infinity'. **0/0 means absolutely nothing!** It is a mathematical error sign telling you 'Try harder, use algebra'. Never write 0/0 as your final answer on a test. You must factor, cancel, or rationalize to reveal the true hidden number."
+    }
+  ]
+}

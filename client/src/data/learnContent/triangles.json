@@ -1,0 +1,30 @@
+{
+  "title": "Triangles: The Strongest Shape",
+  "blocks": [
+    {
+      "icon": "📐",
+      "title": "1. The Core Concept: The Unbreakable Foundation",
+      "content": "Why are bridges and cranes built using thousands of steel triangles? Because a triangle is the only polygon in the universe that cannot be deformed without breaking its sides! If you push on a square, it collapses into a slanted rhombus. But a triangle's rigid geometry makes it mathematically unbreakable. Mastering the rules of the triangle unlocks the secrets of architecture, engineering, and trigonometry."
+    },
+    {
+      "icon": "🏷️",
+      "title": "2. The Rules: The Family Tree",
+      "content": "You must know the three brothers of the triangle family:\n\n• **Equilateral (The Perfect One):** All 3 sides are equal. All 3 angles are exactly 60°.\n• **Isosceles (The Twins):** 2 sides are equal. The 2 angles at the bottom of those equal sides are also perfectly equal! (This is the most heavily tested triangle in exams).\n• **Scalene (The Rebel):** No sides are equal. No angles are equal. Pure chaos."
+    },
+    {
+      "icon": "➕",
+      "title": "3. Step-by-Step: The 180° Law",
+      "content": "The absolute unbreakable law of Euclidean geometry: **The three interior angles of ANY flat triangle will always add up to exactly 180°.**\n\n1. If you know two angles, simply add them together and subtract the total from 180 to find the missing third angle.\n2. **The Exterior Angle Trick:** If you extend one side of a triangle out to make a straight line, the 'exterior' angle on the outside is EXACTLY EQUAL to the sum of the two interior angles on the opposite side! (This saves huge amounts of time on tests)."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: The Isosceles Puzzle",
+      "content": "You have an Isosceles triangle. The single 'top' angle is 40°. Find the size of the two bottom angles.\n\n• **Step 1 (The Total):** We know the whole triangle must hold 180°.\n• **Step 2 (Remove the top):** Subtract the 40° top angle from the total. 180 - 40 = 140°.\n• **Step 3 (The Twin Rule):** The remaining 140° belongs to the two bottom angles. Because it's Isosceles, we know those two angles must be identical twins!\n• **Step 4 (Split it):** Divide 140 by 2. 140 ÷ 2 = 70.\n\n**Final Answer: The bottom angles are both 70°.**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "In an exam drawing, an Isosceles triangle isn't always sitting perfectly upright. It might be rotated on its side, making it incredibly hard to spot the 'bottom' twin angles. **The Trick:** Look for the two little dash marks on the sides (which mean they are equal length). The 'twin' angles are ALWAYS the two angles that are sitting directly opposite those dashed sides! Never trust orientation; trust the dash marks."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "title": "General Knowledge: The Big Picture",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: Connecting the Dots",
+      "content": "Math isn't just floating in a vacuum; it is the underlying code of the entire universe! General Knowledge (GK) in math means understanding *why* these formulas exist, who discovered them, and how they apply to physics, engineering, and everyday life. Knowing the history and context of math makes it 100x easier to remember the formulas."
+    },
+    {
+      "icon": "???",
+      "title": "2. The Rules: The Giants of Math",
+      "content": "You should know the names of the giants whose shoulders we stand on:\n� **Pythagoras:** Ancient Greek who linked the sides of right triangles.\n� **Isaac Newton & Gottfried Leibniz:** The bitter rivals who both invented Calculus independently.\n� **Al-Khwarizmi:** The Persian scholar who literally invented Algebra (the word algebra comes from his book 'Al-Jabr')."
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: Real World Application",
+      "content": "Whenever you learn a new math topic, ask yourself: 'Where is this used?'\n\n1. **Trigonometry:** Used in video game graphics (rendering 3D worlds on a 2D screen) and architecture.\n2. **Calculus:** Used in aerospace engineering to calculate rocket trajectories and fuel burn rates.\n3. **Matrices:** The absolute foundation of AI, Machine Learning, and Google's search algorithms!"
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: The Golden Ratio",
+      "content": "You've likely heard of the Fibonacci sequence (1, 1, 2, 3, 5, 8...), where you add the previous two numbers. But did you know if you divide a Fibonacci number by the one before it (e.g., 8/5 = 1.6), it gets closer and closer to a magical number called the **Golden Ratio (1.618...)**? This ratio appears in sunflower seeds, hurricane spirals, the Mona Lisa, and galaxy formations! Math is nature's DNA."
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "The biggest pitfall in math education is believing 'I'm never going to use this in real life.' While you might not use the Quadratic Formula to buy groceries, the *process* of learning it rewires your brain. Math teaches you how to break massive, impossible problems down into small, logical steps. It teaches resilience. You are literally upgrading your brain's processing power!"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "title": "Heron's Formula: The Triangle Master",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: Area without Height",
+      "content": "Since primary school, you've been taught the golden rule of triangles: Area = � � Base � Height. But what if you are standing in a massive field shaped like a triangle, and you can only measure the lengths of the three fences? You don't know the perpendicular height, and you have no way to measure it! Over 2000 years ago, a genius named Hero of Alexandria created **Heron's Formula**�a magical equation that lets you calculate the exact area of ANY triangle using nothing but the lengths of its three sides!"
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: The Magic 's'",
+      "content": "The formula is incredibly powerful, but it requires a secret ingredient called **'s' (the semi-perimeter)**.\n\n� The perimeter is the total distance around the outside of the triangle (a + b + c).\n� The 'semi-perimeter' (s) is simply exactly HALF of the perimeter.\n� So, **s = (a + b + c) � 2**.\n� You CANNOT use Heron's formula until you have calculated 's' first!"
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: Executing the Formula",
+      "content": "Once you have your three sides (a, b, c) and your semi-perimeter (s), here is the master formula: **Area = v( s(s-a)(s-b)(s-c) )**\n\n1. Calculate 's' by adding all three sides and halving the total.\n2. Calculate the three 'differences' in brackets: (s minus side a), (s minus side b), and (s minus side c).\n3. Multiply all four numbers together: 's' multiplied by all three of the differences you just calculated.\n4. Take the massive number you just created, and hit the Square Root button on your calculator. Boom! You have the area."
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: The Farmer's Field",
+      "content": "A triangular field has sides of 13m, 14m, and 15m. Find its exact area.\n\n� **Step 1 (Find 's'):** Add the sides: 13 + 14 + 15 = 42. Divide by 2. **s = 21**.\n� **Step 2 (The differences):** \n   (s - a) = 21 - 13 = 8\n   (s - b) = 21 - 14 = 7\n   (s - c) = 21 - 15 = 6\n� **Step 3 (Multiply them all):** Area = v( 21 � 8 � 7 � 6 )\n� **Step 4 (Calculate inside):** 21 � 8 � 7 � 6 = 7056.\n� **Step 5 (Square Root):** Area = v7056 = 84.\n\n**Final Answer: The area is exactly 84 m�!**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "The two biggest mistakes students make are: 1) Forgetting to divide the perimeter by 2 when calculating 's'. If you use the full perimeter, the formula will completely self-destruct. 2) Forgetting to multiply by 's' right at the front of the square root! The formula is v(s � ...), not just the differences multiplied together. Make sure that lonely 's' at the front of the brackets gets multiplied with everything else before you hit the square root button!"
+    }
+  ]
+}

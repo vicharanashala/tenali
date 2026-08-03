@@ -1,0 +1,30 @@
+{
+  "title": "Polynomials Gym: Rapid Factoring",
+  "blocks": [
+    {
+      "icon": "??????",
+      "title": "1. The Core Concept: The Number Ninja",
+      "content": "In advanced exams, factoring quadratics isn't the main question; it's just step 1 of a massive 5-step calculus problem. You cannot afford to spend 3 minutes thinking about what numbers multiply to 24 and add to 10. The **Polynomials Gym** forces your brain to memorize these common number pairs so you can factorise instantly."
+    },
+    {
+      "icon": "?",
+      "title": "2. The Strategy: Sign Recognition",
+      "content": "Before you even think about the numbers, look at the SIGNS (+ and -). They tell you everything you need to know about the brackets!\n\n� If the last number is POSITIVE (e.g., x� + 5x **+ 6**), the two brackets MUST have the exact SAME sign. (Look at the middle term to see if they are both + or both -).\n� If the last number is NEGATIVE (e.g., x� + x **- 12**), the two brackets MUST have DIFFERENT signs (one +, one -). No exceptions!"
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: The Mental Scan",
+      "content": "1. Scan the last sign: is it + or -?\n2. Mentally load up the bracket templates: (x + )(x + ) or (x + )(x - ).\n3. Look at the last number and rapidly cycle its factors in your head (24 is 12&2, 8&3, 6&4).\n4. Pick the pair that hits the middle target number.\n5. Slap them into the brackets."
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: High Speed Factoring",
+      "content": "Mentally factorise **x� - 8x + 15** in 3 seconds.\n\n� **Mental Step 1 (Signs):** Last sign is +, so they match. Middle sign is -, so they are BOTH negative. Template: (x - )(x - ).\n� **Mental Step 2 (Factors):** Factors of 15 are 1&15 or 3&5.\n� **Mental Step 3 (Target):** We need to make -8. -3 and -5 makes -8!\n� **Mental Step 4 (Execute):** Write down (x - 3)(x - 5)."
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "The trap of the number 12! When students see **x� - x - 12**, they panic and pick 6 & 2. (6 - 2 = 4, not 1!). Then they try 12 & 1. They forget about 4 & 3! When dealing with numbers like 12, 24, and 36, students often forget the factors sitting right in the middle of the times tables. Always check the 'middle' factors first!"
+    }
+  ]
+}

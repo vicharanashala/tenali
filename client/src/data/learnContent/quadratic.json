@@ -1,0 +1,30 @@
+{
+  "title": "Quadratics: The U-Turn Curve",
+  "blocks": [
+    {
+      "icon": "🎢",
+      "title": "1. The Core Concept: What Goes Up Must Come Down",
+      "content": "Linear equations (y = 2x) make perfectly straight lines that shoot off into space forever. But if you throw a baseball, it doesn't fly straight forever; gravity pulls it back down in a perfect, symmetrical arc. That curving path is a **Quadratic Equation**! Any equation where the highest power of 'x' is 2 (like y = x²) creates this beautiful 'U-shaped' curve called a Parabola."
+    },
+    {
+      "icon": "🎯",
+      "title": "2. The Rules: The Magic Roots",
+      "content": "The most important parts of a parabola are the places where it crashes through the flat ground (the x-axis). These impact points are called the **Roots** or **Solutions**.\n\n• Because the curve is U-shaped, it usually hits the ground TWICE (2 solutions).\n• To find these roots algebraically, you MUST force the 'y' to equal ZERO. (e.g., x² + 5x + 6 = 0). Why? Because on the flat ground, the height (y) is exactly zero!"
+    },
+    {
+      "icon": "🗝️",
+      "title": "3. Step-by-Step: Solving by Factoring",
+      "content": "How to find the impact points without graphing:\n\n1. Ensure the equation equals 0. (If it equals 5, subtract 5 to bring it over to the left side!).\n2. Factorise the quadratic into double brackets (e.g., (x + 2)(x + 3) = 0).\n3. **The Zero Trick:** If two brackets multiply to make ZERO, one of the brackets MUST be zero! \n4. Split them up: Either (x + 2) = 0, or (x + 3) = 0.\n5. Solve the mini-equations to find your two roots: x = -2, or x = -3."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Finding the Roots",
+      "content": "Solve: **x² - 8x + 12 = 0**\n\n• **Step 1:** It already equals zero. Ready to go.\n• **Step 2 (Factorise):** We need two numbers that multiply to +12 and add to -8. Those numbers are -6 and -2.\n• **Step 3 (Brackets):** Rewrite as (x - 6)(x - 2) = 0.\n• **Step 4 (Split):** Either (x - 6) = 0, OR (x - 2) = 0.\n• **Step 5 (Solve):** Move the numbers over.\n\n**Final Answer: The curve hits the ground at x = 6 and x = 2.**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The deadliest mistake is trying to factorise a quadratic BEFORE setting it equal to zero. If you have x² + 5x = 6, students will often factorise the left side to get x(x + 5) = 6. They then say 'x = 6' or 'x+5 = 6'. **THIS IS MATHEMATICALLY ILLEGAL!** The 'split' trick only works for ZERO. If A × B = 6, A could be 2, 3, 1, 6, 12, 0.5... it's infinite! You MUST move the 6 over to make it x² + 5x - 6 = 0 before building any brackets."
+    }
+  ]
+}

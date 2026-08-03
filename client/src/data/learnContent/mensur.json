@@ -1,0 +1,30 @@
+{
+  "title": "Mensuration: Measuring 2D & 3D Space",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: The World Builders",
+      "content": "If you want to paint your bedroom walls, fill a swimming pool with water, or wrap a birthday present, you are doing **Mensuration**. It is the mathematical measurement of 2D shapes (finding their Perimeter and Area) and 3D solids (finding their Surface Area and Volume). It's the ultimate bridge between abstract math and physical reality!"
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: The Big Three Concepts",
+      "content": "You must clearly separate these three concepts in your mind:\n\n� **Perimeter (1D):** The total distance walking around the outside edge of a shape. Measured in flat units (cm, m).\n� **Area (2D):** The amount of flat space a shape takes up (like a carpet on the floor). Measured in square units (cm�, m�).\n� **Volume (3D):** The amount of 3D space inside a solid object (how much water it can hold). Measured in cubic units (cm�, m�)."
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: The Prism Secret",
+      "content": "A 'Prism' is a 3D shape that looks exactly the same all the way through, like a Toblerone box (triangular prism) or a soda can (cylinder). There is a master cheat-code formula to find the volume of ANY prism in the universe:\n\n1. **Find the Face (Cross-Section):** Identify the front face of the shape (the part that stays exactly the same if you sliced it like a loaf of bread).\n2. **Calculate the 2D Area:** Use normal 2D formulas (Area of a triangle, Area of a circle) to find the area of just that front face.\n3. **Multiply by the Length:** Take that 2D area, and multiply it by how 'deep' or 'long' the 3D shape goes.\n\n**Master Formula:** Volume = Area of Cross-Section � Length"
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: Volume of a Cylinder",
+      "content": "Find the volume of a cylinder (a soda can). The circle on top has a radius of 3cm. The can is 10cm tall.\n\n� **Step 1 (Find the Face):** The face of a cylinder is a Circle.\n� **Step 2 (Area of the Face):** The formula for a circle is Area = pr�. So, Area = p � 3� = 9p. (Which is roughly 28.27 cm�).\n� **Step 3 (Multiply by Length):** The can goes 10cm deep (tall). So multiply the face area by 10.\n� **Step 4:** 28.27 � 10 = 282.7.\n\n**Final Answer: The volume is 282.7 cm�.**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "The absolute classic trap in Mensuration is the **Units Trap**. The question will say 'A rectangular room is 4 meters long and 300 centimeters wide. Find the area.' Students immediately do 4 � 300 = 1200. **WRONG!** You cannot multiply meters by centimeters! You must convert them to the exact SAME unit before you do any math. Change the 300cm into 3m. Then do 4m � 3m = 12m�."
+    }
+  ]
+}

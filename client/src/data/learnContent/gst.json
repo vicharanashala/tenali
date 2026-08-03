@@ -1,0 +1,30 @@
+{
+  "title": "GST and Taxes: Real World Finance",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: The Government's Cut",
+      "content": "Nothing in life is certain except death and taxes! GST (Goods and Services Tax) or VAT (Value Added Tax) is a percentage fee added by the government to almost everything you buy. If you want to run a business, or just not get ripped off when buying a laptop, you must master how to add taxes to a price, and more importantly, how to strip a tax OUT of a final price."
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: The 100% Base",
+      "content": "The absolute unbreakable rule of taxes is that **the original price of the item BEFORE tax is always exactly 100%**.\n\n� If GST is 15%, the final price you pay at the register is 115% of the original cost.\n� Never, ever calculate the tax based on the final price! The tax is only calculated on the original base price."
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: Extracting the Tax",
+      "content": "If a store receipt says 'Total:  (Includes 15% GST)', how much was the tax?\n\n1. Recognize that  represents **115%** of the original price.\n2. **Find 1%:** Divide the total price by 115. ( � 115 = ). This means 1% of the original cost is exactly .\n3. **Find the Tax:** The tax was 15%. So multiply that 1% value by 15! ( � 15 = ).\n4. **Find the Original:** The original was 100%. So multiply the 1% value by 100. ( � 100 = )."
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: Adding GST",
+      "content": "You are a plumber. You charge  for your labor, plus 10% GST. What is the total bill for the customer?\n\n� **Step 1:** The base price is 100%. We are adding 10%.\n� **Step 2:** The total bill will be 110% of the base price.\n� **Step 3:** Use a decimal multiplier! 110% as a decimal is 1.10.\n� **Step 4:** Multiply the base price by the multiplier:  � 1.10 = ****.\n\n**Final Answer: The customer pays .**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "The most common and devastating error in finance math is trying to 'subtract the tax'. If an item costs  including a 10% tax, students will calculate 10% of 110 (), and subtract it to say the original price was . **WRONG!** If the original was , a 10% tax is .90, making the final price .90! You CANNOT take a percentage of the final price. You must use the 'divide by 110 to find 1%' method!"
+    }
+  ]
+}

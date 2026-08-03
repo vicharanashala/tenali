@@ -1,0 +1,30 @@
+{
+  "title": "Conic Sections: Slicing the Cone",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: The 3D Slices",
+      "content": "Imagine holding a solid 3D cone (like an ice cream cone) and a massive, perfectly flat samurai sword. Depending on the exact angle you swing the sword through the cone, the flat surface of the slice will reveal a completely different 2D shape. These shapes�Circles, Ellipses, Parabolas, and Hyperbolas�are called **Conic Sections**. They aren't just cool shapes; they dictate the orbits of planets, the curve of satellite dishes, and the path of comets through space!"
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: The Four Cuts",
+      "content": "The angle of your sword changes everything:\n\n� **The Circle:** Slice perfectly horizontally, parallel to the base of the cone.\n� **The Ellipse (Oval):** Slice at a slight, shallow angle. The shape is closed but stretched out.\n� **The Parabola:** Slice at an angle perfectly parallel to the sloped edge of the cone itself. The shape blasts out the bottom and never closes.\n� **The Hyperbola:** Slice straight down vertically. This actually cuts through two cones stacked point-to-point, creating two mirrored curves facing away from each other."
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: Identifying from the Equation",
+      "content": "You don't need a sword; you can identify the shape just by looking at its algebra equation!\n\n1. **Get it in form:** Look at the x� and y� terms.\n2. **Circle:** x� and y� both exist, both are positive, and they have the exact SAME number in front of them (e.g., 3x� + 3y� = 9).\n3. **Ellipse:** x� and y� both exist, both are positive, but they have DIFFERENT numbers in front of them (e.g., 2x� + 5y� = 10).\n4. **Parabola:** Only ONE of the variables is squared! (e.g., y = x� + 2, or x = y� - 4).\n5. **Hyperbola:** x� and y� both exist, but one of them has a NEGATIVE sign (they are subtracting). (e.g., x� - y� = 1)."
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: Detective Work",
+      "content": "Identify the shape created by this equation: **4x� - 9y� = 36**\n\n� **Step 1:** Look at the squared terms. We have both an x� and a y�. This means it is NOT a parabola.\n� **Step 2:** Look at the signs. The x� is positive, but the y� has a massive minus sign in front of it!\n� **Step 3:** Because one is positive and one is negative (they are subtracting), the slice must be vertical.\n\n**Final Answer: This is a Hyperbola.**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "A common mistake when graphing Ellipses is mixing up the 'Major Axis' (the long way across) and the 'Minor Axis' (the short way across). The major axis ALWAYS corresponds to the variable sitting on top of the LARGER denominator in the standard equation. Just because x comes first in the alphabet doesn't mean the oval is stretched horizontally! If the number under y� is bigger, the oval stands up tall like an egg!"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "title": "Polynomial Multiplication: Expanding Horizons",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: Meeting Everyone at the Party",
+      "content": "Imagine a party where two families arrive. Every member of the first family MUST shake hands with every member of the second family. No one can be left out! **Multiplying polynomials** is exactly the same. A polynomial is an expression with multiple terms (like x + 3). When you multiply two of them together, every single term in the first bracket must be multiplied by every single term in the second bracket."
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: FOIL for Binomials",
+      "content": "When you have two binomials (brackets with exactly two terms each, like (a+b)(c+d)), there is a famous acronym to ensure no handshakes are missed: **FOIL**.\n\n� **F (First):** Multiply the FIRST terms in each bracket (a � c)\n� **O (Outer):** Multiply the OUTER terms on the far ends (a � d)\n� **I (Inner):** Multiply the two INNER terms in the middle (b � c)\n� **L (Last):** Multiply the LAST terms in each bracket (b � d)\n\nOnce you have your four pieces, you add them all together!"
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: The Box Method (For Larger Parties)",
+      "content": "If you have larger polynomials (like 3 terms � 3 terms), FOIL gets too messy. Use the **Box Method** instead:\n\n1. Draw a grid (like a tic-tac-toe board).\n2. Write the terms of the first polynomial along the top, one per column.\n3. Write the terms of the second polynomial down the left side, one per row.\n4. Multiply the row term by the column term to fill in each inner box.\n5. Write out all the terms inside the boxes, and combine the 'like terms' (terms that have the exact same letters and powers, like 3x and 5x)."
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: Using FOIL",
+      "content": "Expand and simplify: **(2x + 3)(x - 5)**\n\n� **First:** 2x � x = **2x�**\n� **Outer:** 2x � -5 = **-10x**\n� **Inner:** 3 � x = **3x**\n� **Last:** 3 � -5 = **-15**\n\nNow, write it out: 2x� - 10x + 3x - 15\nFinally, combine the middle 'x' terms (-10x + 3x = -7x).\n\n**Final Answer: 2x� - 7x - 15**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "There are two major traps here. First, **forgetting the laws of indices**. When you multiply an 'x' by an 'x', it becomes **x�**, not 2x! (x + x is 2x, x * x is x�). \nSecond, **messing up the signs**. When you multiply a positive number by a negative number, the result is negative. Always take the plus or minus sign immediately to the left of the term with you into the multiplication!"
+    }
+  ]
+}

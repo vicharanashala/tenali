@@ -1,0 +1,30 @@
+{
+  "title": "Congruence: Perfect Clones",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: The Exact Twin",
+      "content": "In normal English, we say things are 'the same'. In geometry, 'the same' isn't precise enough. **Congruence** is the mathematical term for an absolute, perfect, 100% identical clone. If two shapes are congruent, they have the exact same side lengths, exact same angles, and exact same area. You could pick one up, rotate it, flip it over, and drop it perfectly on top of the other one without a single millimeter sticking out."
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: The Four Triangle Proofs",
+      "content": "You can't just look at two triangles and say 'Yeah, they look identical.' You must PROVE it using one of the four golden codes:\n\n� **SSS (Side, Side, Side):** All three side lengths perfectly match.\n� **SAS (Side, Angle, Side):** Two sides match, AND the 'trapped' angle right between them matches.\n� **ASA (Angle, Side, Angle):** Two angles match, AND the side directly between them matches.\n� **RHS (Right-angle, Hypotenuse, Side):** They are both 90� triangles, the longest sides match, and one other short side matches."
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: Writing a Formal Proof",
+      "content": "To prove congruence in an exam, you must argue like a lawyer in a courtroom:\n\n1. **State a Fact:** Write down one matching feature (e.g., Line AB = Line XY).\n2. **Give the Reason:** Why? (e.g., 'Given in the question', or 'They are both radii of the circle', or 'Vertically opposite angles').\n3. **Repeat:** Do this three times until you have three solid facts with reasons.\n4. **The Verdict:** Write your final conclusion using the three-line congruence symbol (?) and state which code you used (e.g., 'Therefore, ?ABC ? ?XYZ by SAS')."
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: The Shared Wall",
+      "content": "Two triangles share a central wall (Line BD). Triangle ABD is on the left, CBD is on the right. Side AB = Side CB. Angle ABD = Angle CBD. Prove they are congruent.\n\n� **Fact 1 (Side):** AB = CB (Given in the question).\n� **Fact 2 (Angle):** Angle ABD = Angle CBD (Given in the question).\n� **Fact 3 (Side):** Line BD = Line BD (It is a **Common Side** shared by both triangles!).\n� **Verdict:** We have a side, an angle trapped in the middle, and a side.\n\n**Final Answer: Therefore, ?ABD ? ?CBD by the SAS rule.**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "The most dangerous trap is the **ASS (Angle, Side, Side) trap**. If you have two matching sides, and a matching angle that is NOT trapped between them, it does NOT prove the triangles are clones! The loose angle allows the third side to swing like a hinge and create two completely different triangles. (There is a reason the acronym spells a bad word�don't use it!). The angle must be trapped in the middle (SAS)."
+    }
+  ]
+}

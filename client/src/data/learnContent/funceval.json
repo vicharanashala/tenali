@@ -1,0 +1,30 @@
+{
+  "title": "Function Evaluation: The Math Machine",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: The Vending Machine",
+      "content": "Think of a mathematical function (like **f(x) = 2x + 3**) as a vending machine. The 'x' is the coin slot. You drop a number into the machine, the gears turn, it does the math, and it spits out a completely new number at the bottom. **Function Evaluation** is simply the process of dropping different numbers into the machine and seeing what comes out!"
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: Exact Substitution",
+      "content": "When a question asks you to find **f(5)**, it is giving you a strict command: 'Erase every single letter 'x' in the equation, and replace it with the number 5 in brackets.'\n\n� If f(x) = x�, then f(5) = (5)� = 25.\n� The brackets are CRITICAL! If you are substituting a negative number, failing to use brackets will completely destroy the calculation."
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: Evaluating Complex Functions",
+      "content": "1. Write the original function out on paper.\n2. Wherever you see an 'x', draw empty brackets ( ).\n3. Write the requested number inside EVERY set of brackets.\n4. Use BODMAS (Order of Operations) to calculate the final result. Remember to do powers and brackets before multiplication!"
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: The Negative Drop",
+      "content": "Given the function **f(x) = x� - 4x + 1**, calculate the value of **f(-3)**.\n\n� **Step 1 (The Brackets):** f(-3) = (-3)� - 4(-3) + 1\n� **Step 2 (The Square):** What is (-3)�? A negative times a negative is positive! It becomes +9.\n� **Step 3 (The Multiply):** What is -4 multiplied by -3? Again, double negative! It becomes +12.\n� **Step 4 (Combine):** We now have 9 + 12 + 1.\n\n**Final Answer: 22.**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "The most brutal trap is evaluating a function like **f(x) = -x�**. What is f(4)? Students often say 'Well, -4 squared is positive 16!' **WRONG!** The minus sign is NOT attached to the x, it is outside! The correct substitution is -(4)�. You square the 4 first (getting 16), and THEN apply the minus sign. The true answer is -16. This is why using brackets when substituting is mandatory."
+    }
+  ]
+}

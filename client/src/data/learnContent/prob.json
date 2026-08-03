@@ -1,0 +1,30 @@
+{
+  "title": "Probability: The Math of Chance",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: Predicting the Unpredictable",
+      "content": "If you flip a coin, you can't guarantee it will land on Heads. But if you flip it a million times, you know exactly how many times it *should* land on Heads (about half). **Probability** is the mathematical way of predicting the future when things are random. It tells you exactly how likely an event is to happen. From predicting the weather to winning the lottery to calculating insurance rates, probability runs our chaotic world!"
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: The 0 to 1 Scale",
+      "content": "Probability is always measured on a strict scale from 0 to 1 (or 0% to 100%).\n\n� **0 (Impossible):** It can never happen. (e.g., rolling a 7 on a standard 6-sided die).\n� **0.5 or � (Even Chance):** It is a 50/50 toss-up. (e.g., flipping Heads on a coin).\n� **1 (Certain):** It is absolutely guaranteed to happen. (e.g., the sun rising tomorrow).\n� A probability can NEVER be a negative number, and it can NEVER be bigger than 1."
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: The Golden Formula",
+      "content": "To calculate the probability of any event happening, you only need one simple fraction:\n\n**Probability = (Number of Winning Outcomes) � (Total Possible Outcomes)**\n\n1. Count how many ways you can 'win' or get what you want.\n2. Count the absolute total number of things that could possibly happen.\n3. Put the winning number on top, the total on the bottom, and simplify the fraction!"
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: The Marble Bag",
+      "content": "A bag contains 3 Red marbles, 2 Blue marbles, and 5 Green marbles. You close your eyes and pick one. What is the probability of picking a Red marble?\n\n� **Step 1 (Winning Outcomes):** How many Red marbles are there? There are 3. So the top of our fraction is 3.\n� **Step 2 (Total Outcomes):** How many marbles are in the bag altogether? 3 + 2 + 5 = 10. The bottom of our fraction is 10.\n� **Step 3 (The Fraction):** The probability is 3/10 (or 0.3, or 30%).\n\n**Final Answer: The probability is 3/10.**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "The biggest trap in probability happens when doing two things in a row (like picking a marble, keeping it, and then picking another). This is called 'Without Replacement'. Students often forget that if you keep a marble, the **Total Number of marbles in the bag decreases by 1** for the second pick! If there were 10 marbles, the next fraction MUST have a 9 on the bottom. Always ask yourself: 'Did the total amount change?'"
+    }
+  ]
+}

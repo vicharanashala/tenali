@@ -1,0 +1,30 @@
+{
+  "title": "Statistics: Making Sense of Data",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: The Story in the Numbers",
+      "content": "Imagine trying to understand the test scores of an entire country�millions of numbers staring back at you. It's impossible for a human brain to process. **Statistics** is the science of crushing mountains of raw data down into a few, powerful summary numbers that tell a clear story. It helps us find the 'average' experience, spot wild anomalies (outliers), and predict future trends. It is the math of reality."
+    },
+    {
+      "icon": "??",
+      "title": "2. The Rules: The Three Averages",
+      "content": "When people say 'average', they usually mean the Mean. But there are actually three distinct types of averages, and choosing the right one is crucial:\n\n� **The Mean:** Add all numbers together and divide by how many there are. (Best for normal data, easily ruined by extreme outliers).\n� **The Median:** Line all the numbers up in order from smallest to largest, and pick the one exactly in the middle. (Best when dealing with wildly unfair data, like house prices).\n� **The Mode:** The number that appears the MOST often. (Best for non-numerical data, like finding the most popular shoe size in a store)."
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: Measuring the Spread (Range & IQR)",
+      "content": "Knowing the 'average' isn't enough. You need to know how scattered the data is! If the average temperature is 20�C, is it 20�C every day, or is it 40�C in summer and 0�C in winter? \n\n1. **The Range:** Simply subtract the lowest value from the highest value. This gives the total spread, but it's easily skewed by one crazy outlier.\n2. **The Interquartile Range (IQR):** This is much better. It measures the spread of the middle 50% of the data, ignoring the extreme highs and lows. \n3. **Find IQR:** Find the Median (Q2). Find the median of the lower half (Q1). Find the median of the upper half (Q3). Then do Q3 - Q1!"
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: Finding the Median",
+      "content": "Find the Median of this dataset: **12, 5, 20, 8, 15**\n\n� **Step 1 (The Trap):** Do NOT pick the middle number yet! You MUST put them in order first.\n� **Step 2 (Sort):** 5, 8, 12, 15, 20.\n� **Step 3 (Find the middle):** Cross one off each end until you hit the center. The number left perfectly in the middle is 12.\n*(Note: If there are TWO numbers left in the middle, you must add them together and divide by 2 to find the halfway point between them).*\n\n**Final Answer: The Median is 12.**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "When calculating the Mean from a **Frequency Table** (a table that says, for example, a score of 5 happened 4 times), students always make a massive error. They just add up the score column (1+2+3+4+5) and divide it. **WRONG!** You have to multiply the score by its frequency first! If a score of 5 happened 4 times, that's worth 20 points in total. You must create an 'f � x' column, add that up, and divide by the total frequency."
+    }
+  ]
+}

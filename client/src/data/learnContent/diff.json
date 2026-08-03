@@ -1,0 +1,30 @@
+{
+  "title": "Differentiation: The Calculus of Change",
+  "blocks": [
+    {
+      "icon": "??",
+      "title": "1. The Core Concept: Capturing the Freeze-Frame",
+      "content": "If you drive a car for 100 miles in 2 hours, your *average* speed is 50 mph. But were you doing exactly 50 mph when you passed the school? Probably not! To find your exact, instantaneous speed at a specific millisecond in time, you need a mathematical freeze-frame. **Differentiation (Calculus)** was invented by Isaac Newton to do exactly this. It finds the exact steepness (gradient/speed) of a curving line at one single microscopic point."
+    },
+    {
+      "icon": "?",
+      "title": "2. The Rules: The Power Rule",
+      "content": "To 'differentiate' a formula, you apply a magical shortcut called the Power Rule. If your formula is y = xn, the derivative (written as **dy/dx**) is found in two steps:\n\n1. **Multiply to the front:** Take the floating power 'n' and pull it down to multiply whatever number is at the front.\n2. **Subtract from the power:** Subtract exactly 1 from the floating power.\nExample: For y = x�, pull the 3 down (3x), then subtract 1 from the power (2). The derivative is 3x�!"
+    },
+    {
+      "icon": "??",
+      "title": "3. Step-by-Step: Finding Maximums and Minimums",
+      "content": "Calculus is the ultimate tool for finding the peak of a mountain or the bottom of a valley on a graph (called Stationary Points or Turning Points).\n\n1. **Differentiate:** Find the dy/dx formula.\n2. **Set to Zero:** At the exact top of a mountain, the ground is perfectly flat for a millisecond. A flat line has zero steepness. So, force your dy/dx equation to equal 0.\n3. **Solve for x:** Solve the equation to find the x-coordinate of the peak.\n4. **Find y:** Plug that x-coordinate back into the ORIGINAL 'y=' equation to find the actual height (y-coordinate) of the peak."
+    },
+    {
+      "icon": "??",
+      "title": "4. Worked Example: Finding the Valley",
+      "content": "Find the turning point of the curve: **y = 2x� - 12x + 5**\n\n� **Step 1 (Differentiate):** For 2x�, pull the 2 down (4x), subtract 1 from power (1). For -12x, the x disappears (-12). Constants like +5 vanish entirely. \n   Result: **dy/dx = 4x - 12**\n� **Step 2 (Set to Zero):** 4x - 12 = 0\n� **Step 3 (Solve for x):** 4x = 12, so **x = 3**.\n� **Step 4 (Find y):** Plug x=3 back into the original curve: y = 2(3)� - 12(3) + 5. \n   y = 2(9) - 36 + 5 = 18 - 36 + 5 = -13.\n\n**Final Answer: The turning point is at (3, -13).**"
+    },
+    {
+      "icon": "??",
+      "title": "5. Common Pitfalls",
+      "content": "When differentiating, students often panic when they see a loose number at the end, like the '+ 5' in the example above. They try to keep it, writing dy/dx = 4x - 12 + 5. **WRONG!** A constant number has no 'x' attached, which means it doesn't change! Calculus measures *change*. If a number doesn't change, its rate of change is ZERO. It completely vanishes into thin air when you differentiate. Never keep loose numbers in your dy/dx!"
+    }
+  ]
+}
