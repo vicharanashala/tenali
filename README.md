@@ -30,6 +30,23 @@
 
 </div>
 
+### 🧠 Pedagogical Features: Progressive Disclosure & Time-Bounded Learning
+
+**The Problem**: In digital learning environments, students often develop habits of rapidly skipping through theoretical material just to reach the interactive quizzes, completely bypassing the essential conceptual understanding.
+
+**Our Contribution & Solution**: To enforce true conceptual mastery, we engineered a state-driven **Time-Bounded Progressive Disclosure** system. 
+
+#### 1. Progressive Disclosure (Step-by-Step Unlocking)
+- **Feature**: Instead of presenting a wall of text, the 5 learning blocks are hidden by default and progressively disclosed one at a time.
+- **Merits**: Reduces cognitive overload. It breaks down complex mathematical concepts into digestible, bite-sized chunks, keeping the student focused entirely on the current step without feeling overwhelmed.
+- **Mechanism**: A dynamic *"Got it, next step ↓"* button controls the flow. The final assessment entry point is strictly hidden until the user has successfully revealed the entire sequence, making skipping physically impossible.
+
+#### 2. Soft Time-Bounded Gating (The 60-Second Rule)
+- **Feature**: An active time-tracking mechanism measures exactly how long a student spends on a specific conceptual block.
+- **Merits**: Prevents students from simply rapid-clicking the "Next Step" button to bypass the progressive disclosure. It forces them to slow down and actually *read* the material.
+- **Mechanism**: When a student attempts to proceed to the next block or start the quiz, the system calculates the time elapsed since the block was revealed. If it has been less than 1 minute, progression is halted. 
+- **User Experience**: Rather than rigidly disabling buttons (which can feel broken), the UI allows the click but instantly renders a custom warning modal (*"Hold on! Please take your time..."*). The student must dismiss the popup and wait out the remainder of the minute, striking a balance between strict pedagogical enforcement and interactive UX.
+
 ---
 
 ## 📑 Table of Contents
