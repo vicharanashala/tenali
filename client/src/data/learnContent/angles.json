@@ -3,28 +3,33 @@
   "blocks": [
     {
       "icon": "📐",
-      "title": "1. The Core Concept: What Is an Angle?",
-      "content": "An angle is simply the measure of a **turn** or **rotation** between two lines that meet at a point. Think of opening a book: the wider you open it, the bigger the angle. Angles are measured in **degrees**, where a full circle is 360 degrees. Understanding angles is the gateway to geometry, trigonometry, and even architecture."
+      "title": "1. What Is an Angle?",
+      "visual": "angle-concept",
+      "content": "An angle measures a **turn** between two lines that meet.\n\n• Measured in **degrees (°)**\n• A full circle is **360°**"
     },
     {
-      "icon": "📚",
-      "title": "2. The Rules: The Angle Family",
-      "content": "Memorize these angle types:\n\n• **Acute:** Less than 90 degrees (sharp and small, like a pizza slice).\n• **Right Angle:** Exactly 90 degrees (a perfect L-shape, marked with a tiny square).\n• **Obtuse:** Between 90 and 180 degrees (wide and lazy).\n• **Straight:** Exactly 180 degrees (a flat line).\n• **Reflex:** Between 180 and 360 degrees (more than a half turn)."
+      "icon": "📏",
+      "title": "2. The Angle Family",
+      "visual": "angle-types",
+      "content": "• **Acute (< 90°):** Small and sharp.\n• **Right (90°):** Perfect L-shape [ ∟ ].\n• **Obtuse (> 90°):** Wide and open.\n• **Straight (180°):** A flat line."
     },
     {
-      "icon": "🛠️",
-      "title": "3. Step-by-Step: Angles on Lines and at Points",
-      "content": "Two critical rules you must never forget:\n\n1. **Angles on a straight line add up to 180 degrees.** If one angle is 110, the other is 180 - 110 = 70.\n2. **Angles around a point add up to 360 degrees.** If three angles at a point are 90, 120, and 80, the missing one is 360 - 290 = 70.\n3. **Vertically opposite angles are always equal.** When two lines cross, the angles across from each other are identical twins."
+      "icon": "🧩",
+      "title": "3. Angle Rules",
+      "visual": "straight-line",
+      "content": "**1. Angles on a straight line = 180°**\n*(If one is 110°, the other is 70°)*\n\n**2. Vertically opposite angles are equal**\n*(When lines cross, opposite angles match)*"
     },
     {
-      "icon": "📝",
-      "title": "4. Worked Example: Find the Missing Angle",
-      "content": "Two angles sit on a straight line. One angle is 135 degrees. Find the other.\n\n**Step 1:** Angles on a straight line = 180 degrees.\n**Step 2:** Missing angle = 180 - 135 = 45 degrees.\n\n**Final Answer: 45 degrees.**"
+      "icon": "💡",
+      "title": "4. Example",
+      "visual": "worked-example",
+      "content": "Two angles sit on a straight line. One is **135°**.\n\n**Step 1:** Straight line = 180°\n**Step 2:** 180° - 135° = 45°\n\n**Answer:** **45°**"
     },
     {
       "icon": "⚠️",
-      "title": "5. Common Pitfalls",
-      "content": "The most common mistake is confusing 'angles on a straight line' (180) with 'angles around a point' (360). Read the question carefully: does it say the angles are on a LINE or at a POINT? Using 360 when you should use 180 (or vice versa) will give you a completely wrong answer every single time."
+      "title": "5. Pitfalls",
+      "visual": "pitfall",
+      "content": "Don't confuse a **straight line (180°)** with a **full circle (360°)**!\n\nCheck if the angles sit on a line or go all the way around a point."
     }
   ]
 }
