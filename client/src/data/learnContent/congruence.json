@@ -1,30 +1,30 @@
 {
-  "title": "Congruence: Perfect Clones",
+  "title": "Congruence: The Perfect Clone",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: The Exact Twin",
-      "content": "In normal English, we say things are 'the same'. In geometry, 'the same' isn't precise enough. **Congruence** is the mathematical term for an absolute, perfect, 100% identical clone. If two shapes are congruent, they have the exact same side lengths, exact same angles, and exact same area. You could pick one up, rotate it, flip it over, and drop it perfectly on top of the other one without a single millimeter sticking out."
+      "icon": "🧩",
+      "title": "1. The Core Concept: Identical Twins in Geometry",
+      "content": "Two shapes are **Congruent** if they are exactly the same shape AND size. If you could cut one out and place it perfectly on top of the other (maybe after flipping or rotating it), with no gaps and no overlaps, they are congruent. Unlike similarity (same shape, different size), congruence means they are perfect clones."
     },
     {
-      "icon": "??",
-      "title": "2. The Rules: The Four Triangle Proofs",
-      "content": "You can't just look at two triangles and say 'Yeah, they look identical.' You must PROVE it using one of the four golden codes:\n\n� **SSS (Side, Side, Side):** All three side lengths perfectly match.\n� **SAS (Side, Angle, Side):** Two sides match, AND the 'trapped' angle right between them matches.\n� **ASA (Angle, Side, Angle):** Two angles match, AND the side directly between them matches.\n� **RHS (Right-angle, Hypotenuse, Side):** They are both 90� triangles, the longest sides match, and one other short side matches."
+      "icon": "📚",
+      "title": "2. The Rules: The Four Proofs (SSS, SAS, ASA, RHS)",
+      "content": "To PROVE two triangles are congruent, you need one of these four sets of evidence:\n\n• **SSS:** All 3 sides of one triangle match all 3 sides of the other.\n• **SAS:** 2 sides and the INCLUDED angle (the angle between them) match.\n• **ASA:** 2 angles and the INCLUDED side (the side between them) match.\n• **RHS:** Both triangles are right-angled, and they share the same Hypotenuse and one other Side."
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: Writing a Formal Proof",
-      "content": "To prove congruence in an exam, you must argue like a lawyer in a courtroom:\n\n1. **State a Fact:** Write down one matching feature (e.g., Line AB = Line XY).\n2. **Give the Reason:** Why? (e.g., 'Given in the question', or 'They are both radii of the circle', or 'Vertically opposite angles').\n3. **Repeat:** Do this three times until you have three solid facts with reasons.\n4. **The Verdict:** Write your final conclusion using the three-line congruence symbol (?) and state which code you used (e.g., 'Therefore, ?ABC ? ?XYZ by SAS')."
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Writing a Congruence Proof",
+      "content": "1. List the matching parts from both triangles (e.g., AB = PQ, angle B = angle Q, BC = QR).\n2. Identify which rule applies (SSS, SAS, ASA, or RHS).\n3. State the conclusion: 'Triangle ABC is congruent to Triangle PQR by SAS.'\n4. **Critical:** The order of the letters matters! If A matches P, B matches Q, and C matches R, write ABC = PQR, NOT ACB = PQR."
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: The Shared Wall",
-      "content": "Two triangles share a central wall (Line BD). Triangle ABD is on the left, CBD is on the right. Side AB = Side CB. Angle ABD = Angle CBD. Prove they are congruent.\n\n� **Fact 1 (Side):** AB = CB (Given in the question).\n� **Fact 2 (Angle):** Angle ABD = Angle CBD (Given in the question).\n� **Fact 3 (Side):** Line BD = Line BD (It is a **Common Side** shared by both triangles!).\n� **Verdict:** We have a side, an angle trapped in the middle, and a side.\n\n**Final Answer: Therefore, ?ABD ? ?CBD by the SAS rule.**"
+      "icon": "📝",
+      "title": "4. Worked Example: SAS Proof",
+      "content": "In triangles ABC and DEF: AB = DE = 5cm, BC = EF = 8cm, and angle B = angle E = 60 degrees.\n\n**Step 1:** AB = DE (Side)\n**Step 2:** Angle B = Angle E (Angle) -- this angle is BETWEEN the two sides.\n**Step 3:** BC = EF (Side)\n**Step 4:** The angle is included between the two sides.\n\n**Final Answer: Triangle ABC is congruent to Triangle DEF by SAS.**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "The most dangerous trap is the **ASS (Angle, Side, Side) trap**. If you have two matching sides, and a matching angle that is NOT trapped between them, it does NOT prove the triangles are clones! The loose angle allows the third side to swing like a hinge and create two completely different triangles. (There is a reason the acronym spells a bad word�don't use it!). The angle must be trapped in the middle (SAS)."
+      "content": "The most dangerous trap is **SSA (or ASS)**. Having two sides and a NON-included angle does NOT prove congruence! This is called the Ambiguous Case because two different triangles can have the same SSA measurements. Only the INCLUDED angle (between the two sides) counts for SAS. If the angle is at the wrong vertex, your proof is invalid."
     }
   ]
 }

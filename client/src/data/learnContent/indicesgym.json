@@ -1,30 +1,30 @@
 {
-  "title": "Indices Gym: The Power Workout",
+  "title": "Indices Gym: Index Laws Workout",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: The Exponent Reflex",
-      "content": "The Indices Gym forces you to recognize the three laws of exponents (Multiply=Add, Divide=Subtract, Bracket=Multiply) instantly. In higher-level math, you won't have time to stop and think about these rules; they need to be as natural to you as breathing."
+      "icon": "💪",
+      "title": "1. The Core Concept: Mastering the Laws",
+      "content": "The Indices Gym drills you on applying the six laws of indices quickly and accurately. You'll face expressions that require you to add, subtract, and multiply powers under time pressure. The goal is to make the laws so automatic that you apply them without thinking."
     },
     {
-      "icon": "??",
-      "title": "2. The Strategy: Separate the Numbers and Letters",
-      "content": "When faced with an ugly expression like (4x�y)�, the best strategy is segregation. \n\nDeal with the normal big numbers first! 4� = 16. \nThen deal with the x's. (x�)� = x6. \nThen deal with the y's. (y�)� = y�.\nIf you try to do it all at once, your brain will crash."
+      "icon": "📚",
+      "title": "2. The Rules: Quick Reference",
+      "content": "• Same base, multiplying: ADD powers.\n• Same base, dividing: SUBTRACT powers.\n• Power of a power: MULTIPLY powers.\n• Anything^0 = 1.\n• Negative power = reciprocal.\n• Fractional power = root."
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: The Negative Flip",
-      "content": "When dealing with negative powers in a fraction, use the 'Elevator Trick'.\n\n1. If a term has a negative power on the TOP of a fraction, send it down the elevator to the BOTTOM, and its power becomes positive!\n2. If a term has a negative power on the BOTTOM, send it up the elevator to the TOP, and it becomes positive!\n3. Once everything is positive, use the normal division rule (subtract) to clean it up."
+      "icon": "🛠️",
+      "title": "3. The Method: Pattern Recognition",
+      "content": "Speed tips for the gym:\n\n1. Always identify the base first. Can you combine the terms?\n2. If bases are different but related (like 4 and 2), rewrite: 4 = 2^2.\n3. For negative indices, immediately think 'flip'.\n4. For fractional indices, immediately think 'root'.\n5. Check: does your answer have the simplest form?"
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: The Mixed Division",
-      "content": "Simplify: **(15x5) � (3x?�)**\n\n� **Step 1 (The Numbers):** Normal math! 15 � 3 = **5**.\n� **Step 2 (The Letters):** We have x5 � x?�.\n� **Step 3 (The Rule):** Division means we SUBTRACT the powers. We have 5 minus -2.\n� **Step 4 (The Trap):** 5 - (-2) creates a double negative! It becomes 5 + 2 = 7.\n\n**Final Answer: 5x7.**"
+      "icon": "📝",
+      "title": "4. Worked Example: Simplify 3^5 x 3^(-2) / 3^2",
+      "content": "**Step 1:** 3^5 x 3^(-2) = 3^(5 + (-2)) = 3^3.\n**Step 2:** 3^3 / 3^2 = 3^(3-2) = 3^1 = 3.\n\n**Final Answer: 3.**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "The most frequent error in the Gym is applying the index laws to the BIG normal numbers. If a question asks to simplify **2x� � 4x�**, students will correctly add the powers (3+2=5) to get x5, but they will ALSO add the big numbers (2+4=6) and write 6x5! **NO!** The big numbers are normal numbers; they are multiplying! 2 � 4 = 8. The correct answer is 8x5. Never use index laws on big numbers!"
+      "content": "In the gym, speed causes careless sign errors. When subtracting powers like 3^5 / 3^(-2), students write 3^(5-(-2)) = 3^3. WRONG! Subtracting a negative means adding: 5 - (-2) = 5 + 2 = 7. So the answer is 3^7, not 3^3. Always be extra careful with double negatives in index operations."
     }
   ]
 }

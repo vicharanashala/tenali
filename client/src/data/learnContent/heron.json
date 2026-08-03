@@ -1,30 +1,30 @@
 {
-  "title": "Heron's Formula: The Triangle Master",
+  "title": "Heron's Formula: Area Without Height",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: Area without Height",
-      "content": "Since primary school, you've been taught the golden rule of triangles: Area = � � Base � Height. But what if you are standing in a massive field shaped like a triangle, and you can only measure the lengths of the three fences? You don't know the perpendicular height, and you have no way to measure it! Over 2000 years ago, a genius named Hero of Alexandria created **Heron's Formula**�a magical equation that lets you calculate the exact area of ANY triangle using nothing but the lengths of its three sides!"
+      "icon": "📐",
+      "title": "1. The Core Concept: When You Don't Know the Height",
+      "content": "The standard triangle area formula (1/2 x base x height) is great, but what if you don't know the height? **Heron's Formula** is an incredible tool that calculates the area of ANY triangle using only the three side lengths. No height, no angles, no problem. Just three sides and you're done."
     },
     {
-      "icon": "??",
-      "title": "2. The Rules: The Magic 's'",
-      "content": "The formula is incredibly powerful, but it requires a secret ingredient called **'s' (the semi-perimeter)**.\n\n� The perimeter is the total distance around the outside of the triangle (a + b + c).\n� The 'semi-perimeter' (s) is simply exactly HALF of the perimeter.\n� So, **s = (a + b + c) � 2**.\n� You CANNOT use Heron's formula until you have calculated 's' first!"
+      "icon": "📚",
+      "title": "2. The Rules: The Semi-Perimeter",
+      "content": "Heron's Formula uses a helper value called the **Semi-Perimeter (s)**:\n\n• First, find s = (a + b + c) / 2 where a, b, c are the three sides.\n• Then: **Area = sqrt[s(s-a)(s-b)(s-c)]**\n• That's it! Just plug in the three sides, compute s, and evaluate."
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: Executing the Formula",
-      "content": "Once you have your three sides (a, b, c) and your semi-perimeter (s), here is the master formula: **Area = v( s(s-a)(s-b)(s-c) )**\n\n1. Calculate 's' by adding all three sides and halving the total.\n2. Calculate the three 'differences' in brackets: (s minus side a), (s minus side b), and (s minus side c).\n3. Multiply all four numbers together: 's' multiplied by all three of the differences you just calculated.\n4. Take the massive number you just created, and hit the Square Root button on your calculator. Boom! You have the area."
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Using Heron's Formula",
+      "content": "1. Write down the three side lengths: a, b, c.\n2. Calculate s = (a + b + c) / 2.\n3. Calculate each bracket: (s-a), (s-b), (s-c).\n4. Multiply them all: s x (s-a) x (s-b) x (s-c).\n5. Take the square root of the result.\n6. That's your area!"
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: The Farmer's Field",
-      "content": "A triangular field has sides of 13m, 14m, and 15m. Find its exact area.\n\n� **Step 1 (Find 's'):** Add the sides: 13 + 14 + 15 = 42. Divide by 2. **s = 21**.\n� **Step 2 (The differences):** \n   (s - a) = 21 - 13 = 8\n   (s - b) = 21 - 14 = 7\n   (s - c) = 21 - 15 = 6\n� **Step 3 (Multiply them all):** Area = v( 21 � 8 � 7 � 6 )\n� **Step 4 (Calculate inside):** 21 � 8 � 7 � 6 = 7056.\n� **Step 5 (Square Root):** Area = v7056 = 84.\n\n**Final Answer: The area is exactly 84 m�!**"
+      "icon": "📝",
+      "title": "4. Worked Example: Triangle with sides 7, 8, 9",
+      "content": "Find the area of a triangle with sides 7cm, 8cm, 9cm.\n\n**Step 1:** s = (7 + 8 + 9) / 2 = 24 / 2 = 12.\n**Step 2:** (s-a) = 12-7 = 5, (s-b) = 12-8 = 4, (s-c) = 12-9 = 3.\n**Step 3:** Product = 12 x 5 x 4 x 3 = 720.\n**Step 4:** Area = sqrt(720) = 26.83 cm^2.\n\n**Final Answer: Area = 26.83 cm^2 (2 d.p.)**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "The two biggest mistakes students make are: 1) Forgetting to divide the perimeter by 2 when calculating 's'. If you use the full perimeter, the formula will completely self-destruct. 2) Forgetting to multiply by 's' right at the front of the square root! The formula is v(s � ...), not just the differences multiplied together. Make sure that lonely 's' at the front of the brackets gets multiplied with everything else before you hit the square root button!"
+      "content": "The most common mistake is forgetting to divide the perimeter by 2! Students add a+b+c and use the full perimeter instead of the SEMI-perimeter. If s is wrong, every subsequent calculation is wrong. Also, don't forget the final square root! The product s(s-a)(s-b)(s-c) gives you the area SQUARED, not the area itself."
     }
   ]
 }

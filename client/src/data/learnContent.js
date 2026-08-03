@@ -1,9 +1,10 @@
 export const getLearnContent = async (modeKey, topicName) => {
   try {
     const data = await import(`./learnContent/${modeKey}.json`);
+    const content = data.default || data;
     return {
-      title: data.default.title,
-      blocks: data.default.blocks
+      title: content.title,
+      blocks: content.blocks
     };
   } catch (error) {
     console.error(`Failed to load learn content for ${modeKey}:`, error);

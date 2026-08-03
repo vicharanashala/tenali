@@ -1,30 +1,30 @@
 {
-  "title": "Polynomials Gym: Rapid Factoring",
+  "title": "Polynomials Gym: Algebra Workout",
   "blocks": [
     {
-      "icon": "??????",
-      "title": "1. The Core Concept: The Number Ninja",
-      "content": "In advanced exams, factoring quadratics isn't the main question; it's just step 1 of a massive 5-step calculus problem. You cannot afford to spend 3 minutes thinking about what numbers multiply to 24 and add to 10. The **Polynomials Gym** forces your brain to memorize these common number pairs so you can factorise instantly."
+      "icon": "🏋️",
+      "title": "1. The Core Concept: Algebraic Fitness",
+      "content": "The Polynomials Gym tests your ability to perform basic algebraic operations with monomials and polynomials under time pressure. You'll practice adding, subtracting, and multiplying terms with variables. This builds the fundamental algebra muscle needed for every advanced topic."
     },
     {
-      "icon": "?",
-      "title": "2. The Strategy: Sign Recognition",
-      "content": "Before you even think about the numbers, look at the SIGNS (+ and -). They tell you everything you need to know about the brackets!\n\n� If the last number is POSITIVE (e.g., x� + 5x **+ 6**), the two brackets MUST have the exact SAME sign. (Look at the middle term to see if they are both + or both -).\n� If the last number is NEGATIVE (e.g., x� + x **- 12**), the two brackets MUST have DIFFERENT signs (one +, one -). No exceptions!"
+      "icon": "📚",
+      "title": "2. The Rules: Like Terms",
+      "content": "• You can only add/subtract **like terms** (same variable, same power).\n• 3x^2 + 5x^2 = 8x^2 (like terms, add coefficients).\n• 3x^2 + 5x = cannot be simplified (different powers).\n• When multiplying: multiply coefficients AND add powers. 2x^3 * 3x^2 = 6x^5."
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: The Mental Scan",
-      "content": "1. Scan the last sign: is it + or -?\n2. Mentally load up the bracket templates: (x + )(x + ) or (x + )(x - ).\n3. Look at the last number and rapidly cycle its factors in your head (24 is 12&2, 8&3, 6&4).\n4. Pick the pair that hits the middle target number.\n5. Slap them into the brackets."
+      "icon": "🛠️",
+      "title": "3. The Method: Speed Tips",
+      "content": "For fast polynomial arithmetic:\n\n1. Group like terms together first.\n2. Add coefficients of like terms.\n3. When multiplying, use the law of indices: x^a * x^b = x^(a+b).\n4. Keep terms in order of descending power for neatness.\n5. Double-check signs, especially with subtraction."
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: High Speed Factoring",
-      "content": "Mentally factorise **x� - 8x + 15** in 3 seconds.\n\n� **Mental Step 1 (Signs):** Last sign is +, so they match. Middle sign is -, so they are BOTH negative. Template: (x - )(x - ).\n� **Mental Step 2 (Factors):** Factors of 15 are 1&15 or 3&5.\n� **Mental Step 3 (Target):** We need to make -8. -3 and -5 makes -8!\n� **Mental Step 4 (Execute):** Write down (x - 3)(x - 5)."
+      "icon": "📝",
+      "title": "4. Worked Example: Simplify 3x^2 + 5x - 2x^2 + 7",
+      "content": "**Step 1:** Group like terms: (3x^2 - 2x^2) + 5x + 7.\n**Step 2:** Combine: x^2 + 5x + 7.\n\n**Final Answer: x^2 + 5x + 7.**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "The trap of the number 12! When students see **x� - x - 12**, they panic and pick 6 & 2. (6 - 2 = 4, not 1!). Then they try 12 & 1. They forget about 4 & 3! When dealing with numbers like 12, 24, and 36, students often forget the factors sitting right in the middle of the times tables. Always check the 'middle' factors first!"
+      "content": "The most common gym mistake: treating 2x and 2x^2 as like terms. They are NOT! 2x is degree 1, 2x^2 is degree 2. You can only combine terms with the exact same variable AND the exact same power. Also, don't confuse adding coefficients (for addition) with multiplying coefficients (for multiplication). 2x + 3x = 5x, but 2x * 3x = 6x^2."
     }
   ]
 }

@@ -1,30 +1,30 @@
 {
-  "title": "Linear Equations: Solving the Mystery",
+  "title": "Linear Equations: The Straight Line Solver",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: The Balance Scale",
-      "content": "A linear equation is a puzzle where an unknown number (called 'x') is hiding behind a bunch of arithmetic operations. Your job is to strip away those operations one by one until 'x' stands completely naked and alone. Think of the equals sign (=) as the pivot point of a perfectly balanced scale. Whatever you do to one side of the scale, you MUST do to the exact same thing to the other side to keep it from crashing down."
+      "icon": "📏",
+      "title": "1. The Core Concept: One Unknown, One Answer",
+      "content": "A **linear equation** has just one variable (like x) raised to the first power. No x^2, no x^3, no square roots of x. Just simple, clean, first-power equations like **3x + 7 = 22**. Because the variable is to the first power, the equation always has exactly ONE solution. Your job is to isolate x by undoing all the operations around it."
     },
     {
-      "icon": "??",
-      "title": "2. The Rules: Inverse Operations",
-      "content": "To strip away the operations, you must use their magical opposites (Inverse Operations):\n\n� To destroy an Addition (+), you must Subtract (-).\n� To destroy a Subtraction (-), you must Add (+).\n� To destroy a Multiplication (�), you must Divide (�).\n� To destroy a Division (�), you must Multiply (�)."
+      "icon": "📚",
+      "title": "2. The Rules: The Unwinding Process",
+      "content": "Think of a linear equation as a wrapped present. To get to x, you 'unwrap' the operations in reverse order:\n\n• If x was added to, you subtract.\n• If x was multiplied by, you divide.\n• If x was subtracted from, you add.\n• If x was divided by, you multiply.\n\nAlways do the SAME operation to BOTH sides of the equation."
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: Peeling the Onion",
-      "content": "Always peel an equation from the outside in!\n\n1. **Expand Brackets:** If there are any brackets, multiply the outside number by everything inside to destroy them.\n2. **Gather the x's:** If there are 'x's on both sides of the equals sign, move the smaller pile of 'x's over to the larger pile by subtracting them.\n3. **Remove loose numbers:** Add or subtract away any normal numbers sitting next to your 'x' pile.\n4. **The Final Strike:** Divide by the number directly attached to 'x' to find your answer."
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Solving Multi-Step Equations",
+      "content": "To solve 5(x - 3) + 2 = 22:\n\n1. Expand brackets first: 5x - 15 + 2 = 22.\n2. Simplify: 5x - 13 = 22.\n3. Add 13 to both sides: 5x = 35.\n4. Divide both sides by 5: x = 7.\n5. Check: 5(7-3) + 2 = 5(4) + 2 = 22. Correct!"
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: The Two-Sided Battle",
-      "content": "Solve: **5x - 4 = 2x + 11**\n\n� **Step 1 (Gather x's):** We have 5x on the left and 2x on the right. 2x is smaller. Subtract 2x from BOTH sides.\n   *(5x - 2x) = 3x. The equation is now 3x - 4 = 11.*\n� **Step 2 (Loose numbers):** The -4 is annoying. Add 4 to BOTH sides.\n   *(11 + 4) = 15. The equation is now 3x = 15.*\n� **Step 3 (Final Strike):** Divide both sides by 3.\n   *(15 � 3) = 5.*\n\n**Final Answer: x = 5.**"
+      "icon": "📝",
+      "title": "4. Worked Example: Variables on Both Sides",
+      "content": "Solve: **7x - 4 = 3x + 12**.\n\n**Step 1:** Get all x terms on one side. Subtract 3x from both sides: 4x - 4 = 12.\n**Step 2:** Add 4 to both sides: 4x = 16.\n**Step 3:** Divide by 4: x = 4.\n**Step 4 (Check):** Left: 7(4) - 4 = 24. Right: 3(4) + 12 = 24. Both equal!\n\n**Final Answer: x = 4.**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "The most common and frustrating mistake is dealing with a fraction like **(x + 5) / 3 = 7**. Students will immediately try to subtract 5. **WRONG!** The divide-by-3 is acting like a giant prison bar trapping the entire (x + 5) together. You cannot touch the 5 until you break the prison! You must multiply BOTH sides by 3 first (getting x + 5 = 21), and THEN you can safely subtract the 5."
+      "content": "When there are variables on BOTH sides, students often subtract from the wrong side and end up with a negative coefficient. This isn't wrong, but it leads to messy arithmetic. Pro tip: always move the SMALLER x-term to the other side. In 7x = 3x + 16, move the 3x (smaller) to the left side. This keeps the coefficient positive and reduces sign errors."
     }
   ]
 }

@@ -1,30 +1,30 @@
 {
-  "title": "Mastering Fractions: Adding the Pieces",
+  "title": "Fractions: The Art of Parts",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: Pieces of a Puzzle",
-      "content": "Think of a fraction as a slice of a pizza. The bottom number (**denominator**) tells you how many slices the whole pizza was cut into. The top number (**numerator**) tells you how many of those slices you actually have on your plate. Fractions are just a way of talking about things that are smaller than one whole item, but bigger than zero."
+      "icon": "🍕",
+      "title": "1. The Core Concept: Slicing the Pizza",
+      "content": "A fraction represents a **part of a whole**. When you cut a pizza into 8 equal slices and eat 3, you've eaten 3/8 of the pizza. The top number (numerator) counts how many pieces you have. The bottom number (denominator) tells you how many equal pieces the whole was cut into. Fractions are everywhere: time (quarter past), money (half price), and cooking (3/4 cup)."
     },
     {
-      "icon": "??",
-      "title": "2. The Golden Rule of Fractions",
-      "content": "Here is the most important rule you will ever learn about adding fractions: **You CANNOT add them unless the denominators (the bottom numbers) are exactly the same!**\n\nWhy? Imagine adding 1 slice of a pizza cut into 4 pieces (1/4) to 1 slice of a pizza cut into 8 pieces (1/8). The slices are different sizes! You can't just say you have '2 slices' because the sizes don't match. You must make the slices the same size first."
+      "icon": "📚",
+      "title": "2. The Rules: Adding and Subtracting",
+      "content": "The golden rule: you can ONLY add fractions when the denominators are the same!\n\n• **Same denominator:** Just add/subtract the tops. 3/8 + 2/8 = 5/8.\n• **Different denominators:** Find the LCM, convert both fractions, then add.\n• **Mixed numbers:** Convert to improper fractions first (e.g., 2 1/3 = 7/3), then add.\n• Always simplify your final answer!"
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step Method",
-      "content": "1. **Find a Common Denominator:** You need to make the bottom numbers match. The easiest way is to multiply the two denominators together.\n2. **Adjust the Numerators:** Whatever you multiplied the bottom by, you MUST multiply the top by the exact same number. (This keeps the fraction fair and balanced).\n3. **Add the Tops:** Once the bottoms match, simply add the top numbers together.\n4. **Keep the Bottom:** Do NOT add the bottom numbers! Just slide the common denominator over to your final answer.\n5. **Simplify:** If both top and bottom can be divided by the same number, shrink them down to their simplest form."
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Multiplying and Dividing",
+      "content": "Multiplication is actually easier than addition!\n\n1. **To multiply:** Multiply the tops together, multiply the bottoms together. (2/3) * (4/5) = 8/15.\n2. **To divide:** FLIP the second fraction and multiply! (2/3) / (4/5) = (2/3) * (5/4) = 10/12 = 5/6.\n3. Always simplify by dividing top and bottom by their GCD."
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: 1/4 + 2/3",
-      "content": "Let's solve **1/4 + 2/3**.\n\n� **Step 1 (Common Denominator):** The bottoms are 4 and 3. Multiply them: 4 � 3 = **12**.\n� **Step 2 (Adjust 1/4):** To turn the 4 into a 12, we multiplied by 3. So, multiply the top by 3 as well. 1 � 3 = 3. Our new fraction is **3/12**.\n� **Step 3 (Adjust 2/3):** To turn the 3 into a 12, we multiplied by 4. So, multiply the top by 4. 2 � 4 = 8. Our new fraction is **8/12**.\n� **Step 4 (Add):** Now we have 3/12 + 8/12. Add the tops: 3 + 8 = **11**. Keep the bottom: **12**.\n\n**Final Answer: 11/12.**"
+      "icon": "📝",
+      "title": "4. Worked Example: Mixed Number Subtraction",
+      "content": "Calculate 3 1/4 - 1 2/3.\n\n**Step 1:** Convert to improper: 13/4 - 5/3.\n**Step 2:** Find LCM of 4 and 3 = 12.\n**Step 3:** Convert: 39/12 - 20/12.\n**Step 4:** Subtract numerators: 19/12.\n**Step 5:** Convert back: 1 7/12.\n\n**Final Answer: 1 7/12.**"
     },
     {
-      "icon": "??",
-      "title": "5. The Ultimate Pitfall",
-      "content": "The most disastrous mistake you can make is adding the numerators AND adding the denominators. **1/2 + 1/2 does NOT equal 2/4!** Think about it: if you eat half a pizza, and then eat another half, you've eaten ONE WHOLE pizza (2/2 = 1). You haven't eaten 2/4 (which is just another half). Never, ever add the bottom numbers!"
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The most devastating fraction mistake: adding the denominators! When students see 1/3 + 1/4, they write 2/7. **COMPLETELY WRONG!** The denominators must be made the same (LCM = 12), giving 4/12 + 3/12 = 7/12. Also, when dividing fractions, students forget to flip the SECOND fraction. You flip the one you're dividing BY, not the first one!"
     }
   ]
 }

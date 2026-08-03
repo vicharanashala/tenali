@@ -1,30 +1,30 @@
 {
-  "title": "Fraction Addition Gym: Common Denominators Fast",
+  "title": "Fractions Gym: Adding Fractions Workout",
   "blocks": [
     {
-      "icon": "??????",
-      "title": "1. The Core Concept: The Fraction Reflex",
-      "content": "Adding fractions is slow and painful if you have to write out every single step. The **Fraction Addition Gym** trains your brain to instantly spot common denominators and execute the numerators in your head. It's about turning a 5-step process into a 2-step mental reflex."
+      "icon": "🏋️",
+      "title": "1. The Core Concept: Fraction Fitness",
+      "content": "Adding fractions is one of the most fundamental skills in math, yet it trips up students at every level. This gym drills you on rapid-fire fraction addition until finding common denominators becomes second nature."
     },
     {
-      "icon": "??",
-      "title": "2. The Strategy: The Lowest Common Multiple (LCM)",
-      "content": "Don't just blindly multiply the two bottom numbers together! If you are adding 1/6 and 1/8, multiplying them gives a denominator of 48, forcing you to deal with massive numbers. Instead, train your brain to spot the **LCM**. Both 6 and 8 fit perfectly into 24! Using 24 makes the mental math infinitely easier and faster."
+      "icon": "📚",
+      "title": "2. The Rules: Same Denominator Required",
+      "content": "You can ONLY add fractions when they have the same denominator.\n\n• If denominators match: just add the numerators. 3/7 + 2/7 = 5/7.\n• If denominators differ: find the LCM of both denominators first.\n• Convert both fractions to equivalent fractions with that LCM.\n• Then add the numerators."
     },
     {
-      "icon": "?",
-      "title": "3. Step-by-Step: The Cross-Multiply Hack",
-      "content": "If the denominators are small prime numbers (like 3 and 5), use the rapid Cross-Multiply hack:\n\n1. Multiply the bottoms to get the new bottom (3 � 5 = 15).\n2. Cross-multiply the bottom-right by the top-left to get the first numerator.\n3. Cross-multiply the bottom-left by the top-right to get the second numerator.\n4. Add those two new numerators together!"
+      "icon": "🛠️",
+      "title": "3. The Method: Quick LCM Trick",
+      "content": "For two fractions a/b + c/d where b and d are different:\n\n1. Cross multiply: new numerator 1 = a * d, new numerator 2 = c * b.\n2. New denominator = b * d.\n3. Add: (ad + cb) / (bd).\n4. Simplify the result by dividing top and bottom by their GCD."
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: The Rapid Hack",
-      "content": "Quickly calculate **2/3 + 4/5**.\n\n� **Step 1 (Bottom):** 3 � 5 = 15. The denominator is 15.\n� **Step 2 (Top Left):** 5 � 2 = 10.\n� **Step 3 (Top Right):** 3 � 4 = 12.\n� **Step 4 (Add Tops):** 10 + 12 = 22.\n\n**Final Answer: 22/15.** (Done in 5 seconds flat!)"
+      "icon": "📝",
+      "title": "4. Worked Example: Adding Unlike Fractions",
+      "content": "Calculate 2/3 + 3/4.\n\n**Step 1:** Cross multiply: 2*4 = 8, 3*3 = 9.\n**Step 2:** Common denominator: 3*4 = 12.\n**Step 3:** 8/12 + 9/12 = 17/12.\n**Step 4:** Convert: 17/12 = 1 and 5/12.\n\n**Final Answer: 1 5/12.**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "The biggest mistake in the Gym is forgetting to **Simplify** at the very end. The system will often mark 10/20 as wrong because it's not in its simplest form (1/2). Always take a one-second pause before hitting submit to ask yourself: 'Are both of these numbers even? Can I divide them by 2, 3, or 5?'"
+      "content": "NEVER add the denominators! 2/3 + 3/4 is NOT 5/7. This is the most common fraction mistake in all of mathematics. You need a COMMON denominator first, then only the numerators get added. The denominator stays the same after addition."
     }
   ]
 }

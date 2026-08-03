@@ -2,29 +2,29 @@
   "title": "Conic Sections: Slicing the Cone",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: The 3D Slices",
-      "content": "Imagine holding a solid 3D cone (like an ice cream cone) and a massive, perfectly flat samurai sword. Depending on the exact angle you swing the sword through the cone, the flat surface of the slice will reveal a completely different 2D shape. These shapes�Circles, Ellipses, Parabolas, and Hyperbolas�are called **Conic Sections**. They aren't just cool shapes; they dictate the orbits of planets, the curve of satellite dishes, and the path of comets through space!"
+      "icon": "🍦",
+      "title": "1. The Core Concept: Four Shapes from One Cone",
+      "content": "Take an ice cream cone and slice through it with a flat knife at different angles. Depending on the angle of your cut, you'll get four different shapes: a **Circle** (horizontal cut), an **Ellipse** (tilted cut), a **Parabola** (cut parallel to the cone's side), or a **Hyperbola** (vertical cut through both cones). These are the **Conic Sections**, and they describe everything from planetary orbits to satellite dishes."
     },
     {
-      "icon": "??",
-      "title": "2. The Rules: The Four Cuts",
-      "content": "The angle of your sword changes everything:\n\n� **The Circle:** Slice perfectly horizontally, parallel to the base of the cone.\n� **The Ellipse (Oval):** Slice at a slight, shallow angle. The shape is closed but stretched out.\n� **The Parabola:** Slice at an angle perfectly parallel to the sloped edge of the cone itself. The shape blasts out the bottom and never closes.\n� **The Hyperbola:** Slice straight down vertically. This actually cuts through two cones stacked point-to-point, creating two mirrored curves facing away from each other."
+      "icon": "📚",
+      "title": "2. The Rules: Standard Equations",
+      "content": "• **Circle:** x^2 + y^2 = r^2 (centered at origin, radius r).\n• **Ellipse:** x^2/a^2 + y^2/b^2 = 1 (a and b are the semi-axes).\n• **Parabola:** y = ax^2 (or x = ay^2 for sideways opening).\n• **Hyperbola:** x^2/a^2 - y^2/b^2 = 1 (note the MINUS sign!).\n\nThe key identifier: if both x^2 and y^2 have the SAME sign, it's an ellipse/circle. If they have OPPOSITE signs, it's a hyperbola."
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: Identifying from the Equation",
-      "content": "You don't need a sword; you can identify the shape just by looking at its algebra equation!\n\n1. **Get it in form:** Look at the x� and y� terms.\n2. **Circle:** x� and y� both exist, both are positive, and they have the exact SAME number in front of them (e.g., 3x� + 3y� = 9).\n3. **Ellipse:** x� and y� both exist, both are positive, but they have DIFFERENT numbers in front of them (e.g., 2x� + 5y� = 10).\n4. **Parabola:** Only ONE of the variables is squared! (e.g., y = x� + 2, or x = y� - 4).\n5. **Hyperbola:** x� and y� both exist, but one of them has a NEGATIVE sign (they are subtracting). (e.g., x� - y� = 1)."
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Identifying a Conic",
+      "content": "Given a general equation Ax^2 + By^2 + Cx + Dy + E = 0:\n\n1. If A = B (same coefficient): It's a **Circle**.\n2. If A and B are different but same sign: It's an **Ellipse**.\n3. If A and B have opposite signs: It's a **Hyperbola**.\n4. If only one of A or B exists (the other is 0): It's a **Parabola**."
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: Detective Work",
-      "content": "Identify the shape created by this equation: **4x� - 9y� = 36**\n\n� **Step 1:** Look at the squared terms. We have both an x� and a y�. This means it is NOT a parabola.\n� **Step 2:** Look at the signs. The x� is positive, but the y� has a massive minus sign in front of it!\n� **Step 3:** Because one is positive and one is negative (they are subtracting), the slice must be vertical.\n\n**Final Answer: This is a Hyperbola.**"
+      "icon": "📝",
+      "title": "4. Worked Example: Identify the Conic",
+      "content": "Identify: **4x^2 + 9y^2 = 36**\n\n**Step 1:** Divide everything by 36: x^2/9 + y^2/4 = 1.\n**Step 2:** Both x^2 and y^2 are present with + sign.\n**Step 3:** The denominators are different (9 and 4).\n**Step 4:** Same sign but different denominators = Ellipse.\n\n**Final Answer: This is an Ellipse with a = 3 and b = 2.**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "A common mistake when graphing Ellipses is mixing up the 'Major Axis' (the long way across) and the 'Minor Axis' (the short way across). The major axis ALWAYS corresponds to the variable sitting on top of the LARGER denominator in the standard equation. Just because x comes first in the alphabet doesn't mean the oval is stretched horizontally! If the number under y� is bigger, the oval stands up tall like an egg!"
+      "content": "The classic mistake is confusing an ellipse with a circle. If both squared terms have the SAME coefficient (like 4x^2 + 4y^2 = 16), it's a circle, not an ellipse. But if the coefficients are different (4x^2 + 9y^2 = 36), it's an ellipse. Students also frequently forget that a parabola only has ONE squared variable, not two."
     }
   ]
 }

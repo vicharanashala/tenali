@@ -1,30 +1,30 @@
 {
-  "title": "Standard Form: Taming the Giants",
+  "title": "Standard Form: The Number Telescope",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: The Scientist's Shortcut",
-      "content": "The universe is filled with numbers that are too massive or too microscopic to write out normally. The distance to the nearest star is roughly 40,000,000,000,000 km. The width of an atom is 0.0000000001 meters. Writing all those zeros takes too long, and it's incredibly easy to make a mistake. **Standard Form** (also called Scientific Notation) is a clever shorthand that packs all those zeros up into a neat little box using the power of 10."
+      "icon": "🔭",
+      "title": "1. The Core Concept: Taming Giants and Microbes",
+      "content": "The mass of the Sun is 1,989,000,000,000,000,000,000,000,000,000 kg. Writing those zeros is a waste of time. **Standard Form** (or Scientific Notation) is a mathematical telescope. It compresses massive astronomical numbers and microscopic atomic numbers into a neat, readable format using powers of 10."
     },
     {
-      "icon": "??",
-      "title": "2. The Rules: The Strict Format",
-      "content": "A number is ONLY written in Standard Form if it perfectly matches this exact format: **A � 10n**\n\n� **The 'A' Number:** This front number MUST be between 1 and 10. (It can be exactly 1, but it must be strictly less than 10. So 3.5 is allowed, but 12.4 is NOT allowed).\n� **The 'n' Power:** This little floating number tells you how many times to hop the decimal point. \n� If 'n' is **Positive**, the true number is HUGE (hop right).\n� If 'n' is **Negative**, the true number is MICROSCOPIC (hop left)."
+      "icon": "📚",
+      "title": "2. The Rules: The A x 10^n Format",
+      "content": "A number is in Standard Form if it looks like **A * 10^n**, where:\n\n• **A** is a number between 1 and 10 (can be 1, but must be less than 10).\n• **n** is an integer (whole number).\n• Positive powers of 10 mean huge numbers (e.g., 10^6 is a million).\n• Negative powers of 10 mean tiny numbers (e.g., 10^-3 is a thousandth)."
     },
     {
-      "icon": "??",
+      "icon": "🛠️",
       "title": "3. Step-by-Step: Converting to Standard Form",
-      "content": "How to pack a giant number (like 8,400,000) into the box:\n\n1. **Find the dot:** Every whole number has a hidden decimal point at the very end (8400000.0).\n2. **Hop the dot:** Jump the decimal point to the left until you create a number between 1 and 10. (Jump it between the 8 and 4 to make 8.4).\n3. **Count the hops:** Count exactly how many 'jumps' the decimal point had to make. (It made 6 jumps).\n4. **Write the formula:** Write your new number (8.4), write '� 10', and make the number of jumps your power!\n*(Result: 8.4 � 106)*"
+      "content": "To convert 45,000 to standard form:\n\n1. Place a decimal point after the first non-zero digit to create 'A'. (4.5)\n2. Count how many places the decimal point had to move from the end of 45000 to become 4.5. It moved 4 places.\n3. The power of 10 is 4.\n4. Answer: 4.5 * 10^4."
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: The Microscopic Bug",
-      "content": "Convert the tiny number **0.000037** into Standard Form.\n\n� **Step 1:** We need to jump the decimal point to create a number between 1 and 10.\n� **Step 2:** We must jump it to the RIGHT, placing it right between the 3 and the 7 to create **3.7**.\n� **Step 3 (Count hops):** We hopped the point exactly 5 spaces to the right.\n� **Step 4 (The Power):** Because the original number was microscopic (a decimal starting with 0), the power must be NEGATIVE. So the power is -5.\n\n**Final Answer: 3.7 � 10?5**"
+      "icon": "📝",
+      "title": "4. Worked Example: Tiny Numbers",
+      "content": "Convert **0.00073** into standard form.\n\n**Step 1:** Create 'A' by putting the decimal after the 7: 7.3.\n**Step 2:** Count how many places the decimal moved from 0.00073 to 7.3. It moved 4 places to the RIGHT.\n**Step 3:** Moving right means it's a tiny number, so the power is negative (-4).\n\n**Final Answer: 7.3 * 10^-4.**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "A classic exam trick is to give you a number like **45 � 104** and ask you if it's in Standard Form. Students see the '� 104' and confidently say YES. **WRONG!** Look at the front number: 45. The Golden Rule states the front number MUST be between 1 and 10. Since 45 is too big, this is fake standard form! To fix it, you must shrink the 45 down to 4.5 (make it ten times smaller), and to balance it out, increase the power by one! True answer: 4.5 � 105."
+      "content": "The biggest trap in calculations: adding numbers in standard form without matching their powers. If you try to add 3 * 10^4 and 5 * 10^3, you CANNOT just say 8 * 10^something! You must convert them to the same power first. 30 * 10^3 + 5 * 10^3 = 35 * 10^3, which then converts back to 3.5 * 10^4."
     }
   ]
 }

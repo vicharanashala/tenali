@@ -1,30 +1,30 @@
 {
-  "title": "Trial and Improvement: Closing the Gap",
+  "title": "Guess the Number: Binary Magic",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: The Mathematical Sniper",
-      "content": "Some equations are so incredibly complicated (like x� + 5x = 42) that normal algebraic rules like factoring or using formulas completely break down. There is no magic key to solve them! Instead, we use a brute-force method called **Trial and Improvement**. You act like an artillery sniper: you fire a mathematical 'guess' at the target, see if your shot lands too high or too low, adjust your aim, and fire again until you hit the bullseye with absolute precision."
+      "icon": "🎲",
+      "title": "1. The Core Concept: The Power of Halving",
+      "content": "In this game, the computer thinks of a number between 0 and 31, and you must guess it. The secret is that this game is actually teaching you **Binary Search** - the most important algorithm in computer science. By asking yes/no questions that eliminate HALF the possibilities each time, you can find any number in just 5 guesses."
     },
     {
-      "icon": "??",
-      "title": "2. The Rules: The Bracket System",
-      "content": "Trial and improvement isn't just randomly guessing numbers in your head; it is a highly structured, organized process.\n\n� You must ALWAYS set up a clear table with three columns: **'x' (Your Guess)**, **'Calculation'**, and **'Comment (Too Big/Too Small)'**.\n� Once you find one number that is 'Too Big' and one that is 'Too Small', you know your answer is trapped somewhere in the middle! You have bracketed your target."
+      "icon": "📚",
+      "title": "2. The Rules: Binary Card Trick",
+      "content": "The game uses magic cards based on powers of 2:\n\n• Card 1 contains all numbers with a 1 in the ones place (binary).\n• Card 2 contains all numbers with a 1 in the twos place.\n• Card 3 contains numbers with a 1 in the fours place.\n• And so on for 8s and 16s.\n\nBy checking which cards contain your number, you're actually reading its binary representation!"
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: Zeroing In",
-      "content": "Let's say we know the answer is trapped between x=3 (too small) and x=4 (too big).\n\n1. **Go down the middle:** Your next guess MUST be exactly halfway between them. Guess x = 3.5.\n2. **Assess the shot:** If 3.5 is 'Too Small', the answer is trapped between 3.5 and 4. If 3.5 is 'Too Big', it's trapped between 3.0 and 3.5.\n3. **Increase precision:** Go halfway again. (e.g., 3.6, 3.7...). Keep narrowing the bracket.\n4. **The Final Check:** If a question asks for '1 decimal place', you MUST do one final calculation at the 2-decimal-place halfway mark (like 3.65) to prove whether the true answer rounds up or rounds down."
+      "icon": "🛠️",
+      "title": "3. The Method: Systematic Elimination",
+      "content": "Instead of random guessing:\n\n1. Start with the middle of the range.\n2. Is the number higher or lower? This eliminates half the possibilities.\n3. Go to the middle of the remaining range.\n4. Repeat until you find it.\n5. With 32 numbers (0-31), you need at most 5 guesses: 32 > 16 > 8 > 4 > 2 > 1."
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: Finding the Root",
-      "content": "Solve **x� - x = 20** to 1 decimal place. We know the answer is between 2 and 3.\n\n� **Guess 2:** (2)� - 2 = 6. (Target is 20). **Too Small.**\n� **Guess 3:** (3)� - 3 = 24. **Too Big.**\n� *(We are bracketed! Go halfway)*\n� **Guess 2.5:** (2.5)� - 2.5 = 13.125. **Too Small.**\n� **Guess 2.8:** (2.8)� - 2.8 = 19.152. **Too Small.**\n� **Guess 2.9:** (2.9)� - 2.9 = 21.489. **Too Big.**\n� *(Answer is between 2.8 and 2.9. We must test 2.85 to see which one it's closer to!)*\n� **Guess 2.85:** (2.85)� - 2.85 = 20.29. **Too Big.**\nSince 2.85 is too big, the true answer must be lower than 2.85. Therefore, it rounds DOWN to 2.8.\n\n**Final Answer: x = 2.8 (to 1 d.p.)**"
+      "icon": "📝",
+      "title": "4. Worked Example: Finding 19",
+      "content": "Range: 0 to 31.\n\n**Guess 1:** Is it >= 16? Yes. (Range: 16-31)\n**Guess 2:** Is it >= 24? No. (Range: 16-23)\n**Guess 3:** Is it >= 20? No. (Range: 16-19)\n**Guess 4:** Is it >= 18? Yes. (Range: 18-19)\n**Guess 5:** Is it >= 19? Yes. Found it!\n\nIn binary: 19 = **10011**. Just 5 guesses!"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "The classic examiner's trap is skipping that final halfway check (like the 2.85 in the example above). Students often just look at 2.8 (which gave 19.1) and 2.9 (which gave 21.4), say to themselves '19.1 is closer to 20', and confidently write down 2.8. While that might work sometimes, you will score ZERO marks for your final answer without explicitly showing the calculation for that 5-digit halfway marker (2.85). Prove it rounds down!"
+      "content": "The biggest mistake is random guessing instead of systematic halving. If you guess 1, then 2, then 3... it could take up to 32 guesses! But with binary search (always guessing the middle), you'll NEVER need more than 5. This is the difference between linear search (slow) and binary search (fast)."
     }
   ]
 }

@@ -1,30 +1,30 @@
 {
-  "title": "Linear Programming: Finding the Perfect Solution",
+  "title": "Linear Programming: Optimizing Life",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: The CEO's Dilemma",
-      "content": "Imagine you are the CEO of a shoe factory. You want to make as much profit as possible, but you are trapped by real-world limits: you only have a certain amount of leather, a certain number of workers, and limited warehouse space. **Linear Programming** is a visual mathematical technique used by massive corporations to navigate these limits (inequalities) and find the absolute perfect sweet spot that maximizes profit without breaking any rules!"
+      "icon": "📈",
+      "title": "1. The Core Concept: Making the Best Decision",
+      "content": "You own a factory that makes chairs and tables. Each uses different amounts of wood and labor. You want to maximize profit. But you have limited wood and workers! **Linear Programming** is the mathematical tool that finds the BEST possible answer (maximum profit or minimum cost) when you have constraints (limitations). It's used by airlines, armies, and Amazon every single day."
     },
     {
-      "icon": "??",
-      "title": "2. The Rules: Shading the Danger Zone",
-      "content": "In Linear Programming, the rules of the factory are written as 'Inequalities' (like x + y = 10).\n\n� You draw these inequalities as straight lines on a graph.\n� A solid line means the rule includes 'equal to' (= or =).\n� A dashed line means it strictly cannot equal the line (< or >).\n� **The Golden Shading Rule:** Always lightly shade or cross out the region that is WRONG (the area you are not allowed to be in). The completely un-shaded, empty white space left over in the middle is your safe 'Feasible Region'."
+      "icon": "📚",
+      "title": "2. The Rules: The Components",
+      "content": "• **Decision Variables:** The things you can control (e.g., x = number of chairs, y = number of tables).\n• **Objective Function:** What you want to maximize or minimize (e.g., Profit = 40x + 60y).\n• **Constraints:** The limitations written as inequalities (e.g., 2x + 3y <= 120).\n• **Non-negativity:** x >= 0, y >= 0 (you can't make negative chairs!)."
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: Finding the Maximum Profit",
-      "content": "Once you have your blank 'Feasible Region' polygon mapped out on the graph, how do you find the best solution?\n\n1. **The Corner Trick:** Mathematical law states that the absolute maximum (and absolute minimum) profit will ALWAYS occur exactly on one of the sharp corners (vertices) of your safe region polygon.\n2. **Find the Coordinates:** Read the (x, y) coordinates for every corner of your polygon.\n3. **Test them all:** Take the 'Profit Formula' given in the question (e.g., Profit = 5x + 10y) and plug the coordinates of every corner into it.\n4. **The Winner:** Whichever corner gives you the highest number is your perfect manufacturing sweet spot!"
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: The Graphical Method",
+      "content": "1. Graph each constraint as a line (turn <= into =).\n2. Shade the region that satisfies ALL constraints. This is the **Feasible Region**.\n3. Identify the **corner points** (vertices) of the feasible region.\n4. Substitute each corner point into the objective function.\n5. The corner point that gives the maximum (or minimum) value is your optimal solution!"
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: Testing the Corners",
-      "content": "You've drawn the graph and found the safe region. The three corners of your polygon are A(0, 10), B(4, 6), and C(8, 0). Your Profit formula is **P = 20x + 15y**. Which corner gives the most profit?\n\n� **Test Corner A (0, 10):** P = 20(0) + 15(10) = 0 + 150 = ****.\n� **Test Corner B (4, 6):** P = 20(4) + 15(6) = 80 + 90 = ****.\n� **Test Corner C (8, 0):** P = 20(8) + 15(0) = 160 + 0 = ****.\n\n**Final Answer: Corner B is the winner! You should make 4 of item x and 6 of item y to get a maximum profit of .**"
+      "icon": "📝",
+      "title": "4. Worked Example: Maximizing Profit",
+      "content": "Maximize P = 5x + 4y subject to: x + y <= 10, 2x + y <= 14, x >= 0, y >= 0.\n\n**Step 1:** Graph the lines x + y = 10 and 2x + y = 14.\n**Step 2:** Corner points of feasible region: (0,0), (7,0), (4,6), (0,10).\n**Step 3:** Evaluate P at each:\n  P(0,0) = 0, P(7,0) = 35, P(4,6) = 44, P(0,10) = 40.\n**Step 4:** Maximum is at (4, 6).\n\n**Final Answer: Make 4 of x and 6 of y for maximum profit of 44.**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "The biggest disaster in Linear Programming is shading the wrong side of a line. If the rule is y = x + 2, how do you know which side is less than? **Use a Test Point!** Pick a really easy coordinate, like (0,0). Plug x=0 and y=0 into the rule. 0 = 0 + 2. Is 0 less than 2? Yes! That means the point (0,0) is in the SAFE zone. Shade the completely opposite side of the line to block off the danger zone. If you guess the shading, your safe region will be completely wrong."
+      "content": "The biggest mistake: testing random points inside the feasible region instead of just the corner points! The **optimal solution always occurs at a corner point** (vertex) of the feasible region. You never need to test interior points. Also, students often forget to check ALL corners, including (0,0). Don't skip any vertex!"
     }
   ]
 }

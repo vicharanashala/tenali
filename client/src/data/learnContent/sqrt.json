@@ -1,30 +1,30 @@
 {
-  "title": "Square Roots: Un-baking the Cake",
+  "title": "Square Roots: Un-Squaring Numbers",
   "blocks": [
     {
-      "icon": "?",
-      "title": "1. The Core Concept: The Mathematical Reverse Gear",
-      "content": "If you take a number and multiply it by itself (like 5 � 5), you 'square' it, creating a much bigger number (25). But what if you are given the 25 and told to find the original starting number? That's what a **Square Root (v)** does! It is the mathematical reverse gear. It 'un-bakes' the cake. Taking the square root of a number asks the question: 'What identical twin numbers multiplied together to create this?'"
+      "icon": "🌱",
+      "title": "1. The Core Concept: Working Backwards",
+      "content": "Squaring a number means multiplying it by itself: 5^2 = 25. The **Square Root** is the exact opposite operation. It asks: 'What number multiplied by itself gives 25?' The answer is 5. Square roots are essential for Pythagoras' theorem, quadratic equations, and finding the side length of a square area."
     },
     {
-      "icon": "??",
-      "title": "2. The Rules: Perfect Squares vs. Surds",
-      "content": "� **Perfect Squares:** These are the nice, friendly numbers that have clean, whole-number roots. (e.g., v9 = 3, v16 = 4, v100 = 10). You MUST memorize the perfect squares up to 12 � 12 = 144.\n� **Surds (Irrational Roots):** Most numbers are not perfect squares! If you try to find v10, the answer is a never-ending, chaotic decimal (3.16227...). We call these messy, unbreakable roots 'Surds'. Often, it's better to just leave them written as v10 rather than writing a messy decimal."
+      "icon": "📚",
+      "title": "2. The Rules: Perfect and Imperfect Roots",
+      "content": "• **Perfect Squares:** 1, 4, 9, 16, 25, 36, 49... (Their roots are whole numbers).\n• **Imperfect Squares:** sqrt(10) is a messy decimal (approx 3.16).\n• **Multiplication Rule:** sqrt(a * b) = sqrt(a) * sqrt(b).\n• **Division Rule:** sqrt(a / b) = sqrt(a) / sqrt(b).\n• **Addition Rule:** sqrt(a + b) does NOT equal sqrt(a) + sqrt(b)!"
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: Estimating Ugly Roots",
-      "content": "If you are in an exam without a calculator, how do you find the square root of 50?\n\n1. **Find the Neighbors:** Think of the perfect squares that trap the number 50. The perfect square below it is 49 (which is 7�7). The perfect square above it is 64 (which is 8�8).\n2. **Establish the Bracket:** Because 50 is trapped between 49 and 64, the square root of 50 MUST be trapped between 7 and 8.\n3. **Estimate the Decimal:** Look at the gaps. 50 is incredibly close to 49, and very far from 64. Therefore, the answer must be very close to 7, like 7.1!"
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Simplifying Surds",
+      "content": "To simplify sqrt(48):\n\n1. Find the BIGGEST perfect square that divides into 48.\n2. The perfect squares are 4, 9, 16, 25... 16 works!\n3. Rewrite 48 as 16 * 3.\n4. Use the multiplication rule: sqrt(16 * 3) = sqrt(16) * sqrt(3).\n5. Simplify the perfect square: 4 * sqrt(3) or 4sqrt(3)."
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: Finding v85 without a calculator",
-      "content": "Estimate the value of **v85** to one decimal place.\n\n� **Step 1 (Neighbors):** What perfect squares are near 85? We know 9 � 9 = 81. And 10 � 10 = 100.\n� **Step 2 (The Bracket):** Since 85 is between 81 and 100, the answer MUST be 'Nine point something'.\n� **Step 3 (The Gaps):** 85 is only 4 steps away from 81. But it is 15 steps away from 100. It is much closer to the 9 than the 10.\n� **Step 4 (Estimate):** Because it's a little bit past the 9, a highly educated guess would be 9.2.\n\n*(Checking with a calculator, v85 is actually 9.219! Our logic was perfect!)*"
+      "icon": "📝",
+      "title": "4. Worked Example: Using Rules",
+      "content": "Simplify: **sqrt(72) / sqrt(2)**\n\n**Step 1:** Use the division rule backwards to combine them into one root.\n**Step 2:** sqrt(72 / 2).\n**Step 3:** Calculate the fraction: 72 / 2 = 36.\n**Step 4:** Evaluate the new root: sqrt(36) = 6.\n\n**Final Answer: 6.**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "The most embarrassing trap in all of mathematics is thinking that a square root means 'divide by 2'. **v100 is NOT 50!** 50 � 50 is 2,500, not 100! A square root is asking what number multiplied by ITSELF makes the target. The square root of 100 is 10 (because 10 � 10 = 100). Never, ever divide by 2 when you see a square root symbol!"
+      "content": "The absolute most devastating mistake: thinking sqrt(16 + 9) = sqrt(16) + sqrt(9). If you do that, you get 4 + 3 = 7. But 16 + 9 = 25, and sqrt(25) = 5! You CANNOT split a square root over addition or subtraction. You must do the addition inside the root first, or leave it alone. The split rule ONLY works for multiplication and division."
     }
   ]
 }

@@ -1,30 +1,30 @@
 {
-  "title": "Mastering Matrices: The Number Grids",
+  "title": "Matrices: The Number Grid",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: Organizing Data",
-      "content": "Imagine you are running three different stores, and each store sells apples, bananas, and cherries. Writing all those inventory numbers in sentences would be confusing. A **Matrix** (plural: matrices) solves this by organizing numbers into a neat, rectangular grid of rows and columns. It's essentially a spreadsheet for mathematics! Computer graphics, encryption, and physics all rely heavily on matrices to process massive amounts of data instantly."
+      "icon": "📊",
+      "title": "1. The Core Concept: Arrays of Numbers with Superpowers",
+      "content": "A **Matrix** is a rectangular grid of numbers arranged in rows and columns. They might look simple, but matrices can solve systems of equations, transform 3D graphics in video games, encrypt data, and even power Google's search algorithm. A 2x2 matrix has 2 rows and 2 columns. A 3x1 matrix has 3 rows and 1 column."
     },
     {
-      "icon": "??",
-      "title": "2. The Rules: Size Matters",
-      "content": "Before you do anything with a matrix, you must know its size (also called its **order**). We always state the size by counting the **Rows first (horizontal), then the Columns (vertical)**.\n\n� Think 'RC Cola' or 'Roman Catholic' to remember Rows then Columns.\n� A matrix with 2 rows and 3 columns is a **2�3 matrix**.\n� You can ONLY add or subtract matrices if they are the exact same size. A 2�3 can only be added to another 2�3!"
+      "icon": "📚",
+      "title": "2. The Rules: Matrix Operations",
+      "content": "• **Addition:** Add corresponding elements (matrices must be same size).\n• **Scalar multiplication:** Multiply every element by the scalar.\n• **Matrix multiplication:** Row-by-column dot products. The number of columns in the first MUST equal the number of rows in the second.\n• **Determinant (2x2):** For [[a,b],[c,d]], det = ad - bc.\n• Matrix multiplication is NOT commutative: A*B does not equal B*A!"
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: Matrix Multiplication",
-      "content": "Adding is easy (just add the numbers in matching positions), but multiplication is tricky. You do NOT just multiply matching positions. You must multiply the **Rows** of the first matrix by the **Columns** of the second matrix.\n\n1. Check if it's possible: The number of columns in Matrix A MUST equal the number of rows in Matrix B.\n2. Take the first row of A, and lay it over the first column of B.\n3. Multiply the first numbers together, multiply the second numbers together, and add those results up. This single sum becomes the top-left number of your new matrix.\n4. Repeat for every row-and-column combination."
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Multiplying 2x2 Matrices",
+      "content": "To multiply matrix A by matrix B:\n\n1. Take the first ROW of A and the first COLUMN of B.\n2. Multiply corresponding elements and add: this gives you position (1,1) of the answer.\n3. First row of A x second column of B = position (1,2).\n4. Second row of A x first column of B = position (2,1).\n5. Second row of A x second column of B = position (2,2)."
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: The Dive",
-      "content": "Let's multiply a 1�2 matrix by a 2�1 matrix.\nMatrix A (Row): [ 2,  3 ]\nMatrix B (Col): \n[ 4 ]\n[ 5 ]\n\n� **Step 1:** Take Row 1 of A and multiply it by Column 1 of B.\n� **Step 2:** Multiply the first numbers: 2 � 4 = 8.\n� **Step 3:** Multiply the second numbers: 3 � 5 = 15.\n� **Step 4:** Add them together: 8 + 15 = 23.\n\n**Final Answer:** You get a tiny 1�1 matrix containing just **[ 23 ]**."
+      "icon": "📝",
+      "title": "4. Worked Example: 2x2 Multiplication",
+      "content": "Multiply [[1,2],[3,4]] x [[5,6],[7,8]].\n\n**Position (1,1):** 1*5 + 2*7 = 5 + 14 = **19**\n**Position (1,2):** 1*6 + 2*8 = 6 + 16 = **22**\n**Position (2,1):** 3*5 + 4*7 = 15 + 28 = **43**\n**Position (2,2):** 3*6 + 4*8 = 18 + 32 = **50**\n\n**Final Answer: [[19,22],[43,50]]**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "The biggest trap in matrix math is assuming it acts like normal numbers. With regular numbers, 3 � 4 is the same as 4 � 3 (commutative property). **Matrix multiplication is NOT commutative!** Matrix A � Matrix B is almost always completely different from Matrix B � Matrix A. In fact, if you swap the order, the multiplication might not even be possible due to the sizing rules. Never swap the order!"
+      "content": "The absolute deadliest matrix mistake: trying to multiply matrices of incompatible sizes. You can only multiply an (m x n) matrix by an (n x p) matrix. The 'inner dimensions' (n) must match! If you try to multiply a 2x3 by a 2x3, it's impossible. Also, remember: matrix multiplication is NOT commutative. A*B usually gives a completely different result from B*A."
     }
   ]
 }

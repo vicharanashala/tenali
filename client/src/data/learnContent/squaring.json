@@ -1,30 +1,30 @@
 {
-  "title": "Squaring Numbers: The Area Trick",
+  "title": "Squaring Numbers: The 2D Expansion",
   "blocks": [
     {
-      "icon": "?",
-      "title": "1. The Core Concept: Building the Box",
-      "content": "Why do we call it 'squaring' a number? Because it literally means calculating the area of a perfect square! If you have a square rug that is 5 meters long and 5 meters wide, you multiply 5 � 5 to find that the rug covers 25 square meters. In math, instead of writing 5 � 5, we use a tiny little '2' floating in the air: **5�**. It simply means: 'Multiply this number by an identical copy of itself!'"
+      "icon": "🟨",
+      "title": "1. The Core Concept: Building a Square",
+      "content": "Squaring a number means multiplying it by itself: 7^2 = 7 * 7 = 49. Geometrically, if you have a square with a side length of 7cm, its area is 49cm^2. That's why we call it 'squaring'! This operation makes numbers grow very quickly and is the driving force behind parabolas and quadratic equations."
     },
     {
-      "icon": "?",
-      "title": "2. The Rules: The Danger of Negatives",
-      "content": "Squaring positive numbers is easy (4� = 16). But what happens when you square a negative number?\n\n� **The Golden Rule:** When you multiply two negative numbers together, the minus signs instantly destroy each other, creating a POSITIVE answer. (-4) � (-4) = +16.\n� **Therefore:** Any real number you square, whether it started off positive or negative, will ALWAYS result in a positive answer! You can never square a real number and get a negative result."
+      "icon": "📚",
+      "title": "2. The Rules: Sign and Size",
+      "content": "• **Positive * Positive = Positive.** (3^2 = 9)\n• **Negative * Negative = Positive.** ((-3)^2 = 9)\n• A real number squared can NEVER be negative.\n• Squaring a fraction between 0 and 1 makes it SMALLER! (0.5^2 = 0.25)."
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: The Trick for Squaring numbers ending in 5",
-      "content": "Want to look like a genius? You can instantly square any two-digit number ending in 5 (like 35�, 65�, 85�) entirely in your head in two seconds!\n\n1. **The Tail:** The answer will ALWAYS end in the number **25**.\n2. **The Head:** Look at the first digit of the number. (For 35, the digit is 3).\n3. **The Multiplier:** Take that digit, and multiply it by the number that comes directly AFTER it in the alphabet of numbers (3 � 4 = 12).\n4. **Combine:** Put the Head in front of the Tail (12 followed by 25 = 1225). Done!"
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: The Ends-in-5 Trick",
+      "content": "To quickly square any two-digit number ending in 5 (like 35):\n\n1. Take the first digit (3).\n2. Multiply it by the next number up (3 * 4 = 12).\n3. Slap '25' onto the end of that result.\n4. Result: 1225. Therefore, 35^2 = 1225.\n5. Let's try 65: 6 * 7 = 42. Slap on 25. Answer: 4225."
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: Mental Math Magic",
-      "content": "Calculate **75�** in your head, without a calculator.\n\n� **Step 1 (The Tail):** Because it ends in a 5, the answer will finish with **25**.\n� **Step 2 (The Head):** The first digit of 75 is **7**.\n� **Step 3 (Multiply up):** What number comes after 7? It's 8. Multiply them together: 7 � 8 = **56**.\n� **Step 4 (Combine):** Slap the 56 in front of the 25.\n\n**Final Answer: 5625. (Try it on a calculator, it works perfectly!)**"
+      "icon": "📝",
+      "title": "4. Worked Example: Squaring Decimals",
+      "content": "Calculate: **0.04^2**\n\n**Step 1:** Ignore the decimals. What is 4^2? It's 16.\n**Step 2:** Count the decimal places in the original number: 0.04 has 2.\n**Step 3:** When squaring, DOUBLE the number of decimal places! So we need 4 decimal places in the answer.\n**Step 4:** Pad 16 with zeros to make 4 places: 0.0016.\n\n**Final Answer: 0.0016**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "The calculator trap is brutal here. If you want to square the number -6, and you type -6� into a cheap calculator, it will confidently tell you the answer is -36. **The calculator is wrong!** Why? Because without brackets, the calculator only squares the 6 (getting 36) and then sticks the minus sign back on at the end. To tell the calculator to square the NEGATIVE sign too, you MUST type it with brackets: **(-6)�**. This will give you the correct answer of +36."
+      "content": "The trap of the missing brackets: -3^2 versus (-3)^2. Students think these are the same, but calculators know they aren't! (-3)^2 means (-3) * (-3) = +9. But -3^2 means -(3 * 3) = -9! The squared only applies to the number exactly touching it, not the minus sign, unless there are brackets. Always use brackets when squaring negative numbers."
     }
   ]
 }

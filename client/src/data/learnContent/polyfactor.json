@@ -1,30 +1,30 @@
 {
-  "title": "Factoring Polynomials: The Reverse Explosion",
+  "title": "Polynomial Factoring: Cracking the Code",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: Un-baking the Cake",
-      "content": "When you multiply (x+2)(x+3), it explodes into a polynomial: x� + 5x + 6. But what if you are given the messy x� + 5x + 6 and asked to put it back into its original neat brackets? That reverse process is called **Factoring**. Factoring is the ultimate mathematical superpower because once an equation is neatly boxed up in brackets, it becomes incredibly easy to solve and graph!"
+      "icon": "🔓",
+      "title": "1. The Core Concept: Reverse Engineering",
+      "content": "Expanding brackets is easy: (x+2)(x+3) = x^2 + 5x + 6. But **Factoring** is the reverse: given x^2 + 5x + 6, can you figure out it came from (x+2)(x+3)? Factoring is like reverse-engineering a product back into its ingredients. It's essential for solving quadratic equations, simplifying expressions, and finding roots."
     },
     {
-      "icon": "??",
-      "title": "2. The Rules: The Golden Question (Add/Multiply)",
-      "content": "When factoring a standard quadratic like **x� + bx + c**, you don't need complicated math. You just need to solve a mental riddle. Ask yourself this one golden question:\n\n**'What two numbers MULTIPLY to make the last number (c), but ADD together to make the middle number (b)?'**\n\nOnce you find those two magic numbers, you just drop them into the two brackets: (x + number1)(x + number2)!"
+      "icon": "📚",
+      "title": "2. The Rules: The Factor Hunt",
+      "content": "For a quadratic x^2 + bx + c, you need two numbers that:\n\n• **MULTIPLY** to give c (the constant at the end).\n• **ADD** to give b (the coefficient of x).\n\nFor x^2 + 5x + 6: find two numbers that multiply to 6 and add to 5. That's 2 and 3!\nSo x^2 + 5x + 6 = (x + 2)(x + 3)."
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: Cracking the Code",
-      "content": "Factorise: x� - 2x - 15\n\n1. **The Target:** We need two numbers that MULTIPLY to make -15, and ADD to make -2.\n2. **List Factors:** What multiplies to 15? (1 and 15) or (3 and 5).\n3. **Test the Gap:** Which pair has a gap of 2 between them? The 3 and 5!\n4. **Fix the Signs:** We need them to add up to NEGATIVE 2. So the negative sign must go on the bigger number! We need -5 and +3.\n5. **Check it:** (-5) � (3) = -15. (-5) + (3) = -2. Perfect!\n6. **Build Brackets:** Write (x - 5)(x + 3)."
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Factoring with Negatives",
+      "content": "For x^2 - 7x + 12:\n\n1. We need two numbers that multiply to +12 and add to -7.\n2. Since they multiply to positive but add to negative, BOTH must be negative.\n3. Factors of 12: (1,12), (2,6), (3,4). Which pair adds to -7? That's -3 and -4.\n4. Answer: (x - 3)(x - 4).\n\nCheck: -3 x -4 = 12, -3 + (-4) = -7. Correct!"
     },
     {
-      "icon": "??",
+      "icon": "📝",
       "title": "4. Worked Example: Difference of Two Squares",
-      "content": "Factorise: **x� - 49**\n\n� **Step 1 (Spot the Pattern):** There is no middle 'x' term! And 49 is a perfect square (7�7). This is a famous pattern called the Difference of Two Squares.\n� **Step 2 (The Rule):** A� - B� ALWAYS factors into (A + B)(A - B).\n� **Step 3 (Find A and B):** The square root of x� is x. The square root of 49 is 7.\n� **Step 4 (Build Brackets):** One bracket gets a plus, the other gets a minus.\n\n**Final Answer: (x + 7)(x - 7).**"
+      "content": "Factorise: **x^2 - 25**.\n\n**Step 1:** Recognize the pattern: x^2 - something^2.\n**Step 2:** 25 = 5^2. So this is x^2 - 5^2.\n**Step 3:** Apply the formula: a^2 - b^2 = (a+b)(a-b).\n**Step 4:** x^2 - 25 = (x + 5)(x - 5).\n\n**Final Answer: (x + 5)(x - 5).**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "The absolute biggest mistake students make is diving straight into the double brackets without looking for a **Common Factor** first! If you see 2x� + 10x + 12, don't try to guess numbers that multiply to 12 and add to 10. Notice that ALL the numbers are even! Pull a massive 2 out of the whole thing first: 2(x� + 5x + 6). Now the inside is incredibly easy to factor into 2(x+2)(x+3). Always, always look to pull out common numbers before building brackets!"
+      "content": "Students constantly mix up the MULTIPLY and ADD conditions. For x^2 + 5x + 6, you need numbers that MULTIPLY to 6 and ADD to 5. Students often reverse this: they look for numbers that multiply to 5 and add to 6, getting completely wrong factors. Write down 'M = c, A = b' at the top of every factoring problem to keep yourself on track."
     }
   ]
 }

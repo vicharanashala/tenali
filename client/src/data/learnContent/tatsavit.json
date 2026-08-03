@@ -1,30 +1,30 @@
 {
-  "title": "Logical Puzzles: Thinking Like a Detective",
+  "title": "Tatsavit: The Ultimate Challenge",
   "blocks": [
     {
-      "icon": "??????",
-      "title": "1. The Core Concept: The Mind Gym",
-      "content": "Not all math requires a calculator. Some of the most powerful mathematics in the world requires nothing but pure, unbreakable logic. **Logical Puzzles** are the ultimate workout for your brain. They force you to read carefully, identify hidden rules, eliminate impossible options, and build a chain of reasoning to uncover the hidden truth. This is exactly how computer programmers, detectives, and lawyers train their minds!"
+      "icon": "👑",
+      "title": "1. The Core Concept: Mastery of All Domains",
+      "content": "Tatsavit is the final boss of the Tenali math platform. It is not a topic; it is a brutal, high-speed test of every single concept you have learned. It demands rapid context-switching, deep conceptual understanding, and perfect execution under pressure. This is where you prove you are a true math warrior."
     },
     {
-      "icon": "??",
-      "title": "2. The Rules: The Chain of Truth",
-      "content": "Logic puzzles follow strict laws:\n\n� **No Contradictions:** A true solution cannot break any of the rules given in the puzzle. If your answer breaks even one minor rule, the whole answer is wrong.\n� **The Law of Excluded Middle:** In true/false logic, an exact statement must be entirely true or entirely false. There is no 'maybe'.\n� **Process of Elimination:** Sometimes, the fastest way to find the right answer is to systematically destroy all the wrong answers until only one impossible survivor remains."
+      "icon": "📚",
+      "title": "2. The Strategy: Mind Over Panic",
+      "content": "When facing a mix of geometry, algebra, statistics, and probability questions back-to-back, your brain will try to panic. The key is to take a 2-second breath before every question. Identify the topic first. Load the specific rules for that topic into your working memory, THEN start calculating."
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: The Grid Method",
-      "content": "When faced with a puzzle like 'Alice, Bob, and Charlie have a Red, Blue, and Green car, but Bob hates Green...', the best weapon is a Logic Grid:\n\n1. **Draw a Table:** Write the names down the left side, and the car colors along the top.\n2. **Read Clue 1:** If a clue gives a definite NO (e.g., Bob hates Green), put a big 'X' in Bob's Green box.\n3. **Read Clue 2:** If a clue gives a definite YES (e.g., Alice has the Red car), put a big 'O' in Alice's Red box.\n4. **The Sweep:** If Alice has the Red car, no one else can have it! Put X's in the rest of the Red column. And Alice can't have any other car, so put X's in the rest of her row.\n5. **Repeat:** Keep sweeping and reading clues until the grid is full."
+      "icon": "🛠️",
+      "title": "3. The Method: Triage",
+      "content": "In a timed, mixed exam:\n\n1. Do the immediate, 10-second questions first (like basic indices or evaluating functions).\n2. If a question looks like a 3-minute slog, flag it and move on.\n3. Secure the easy points to build a safety net.\n4. Return to the flagged monsters with the remaining time."
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: The Fruit Thief",
-      "content": "Someone stole an Apple. \nDan says: 'Eve did it.' \nEve says: 'Fred did it.' \nFred says: 'Eve is lying.' \n**Only ONE person is telling the truth.** Who stole the apple?\n\n� **Step 1:** Look for contradictions. Eve says Fred did it, and Fred says Eve is lying. They can't both be telling the truth! They are complete opposites.\n� **Step 2:** Because one MUST be the truthteller and one MUST be a liar, the third person (Dan) HAS to be a liar. (Since there is only one truthteller total).\n� **Step 3:** If Dan is a liar, his statement 'Eve did it' is FALSE.\n� **Step 4:** Therefore, Eve did NOT do it.\n*(Advanced: Eve is also lying because if Fred did it, Dan's lie works out. Fred is the truthteller!)*"
+      "icon": "📝",
+      "title": "4. The Ultimate Advice: Read Carefully",
+      "content": "In high-level tests, the math is often easy, but the wording is a trap. 'Find the radius' vs 'Find the diameter'. 'Nearest tenth' vs 'Nearest whole number'. 'Increase by 20%' vs 'Decrease by 20%'. Under pressure, your eyes will lie to you. Read every question twice."
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "The biggest trap in logical reasoning is **assuming information that isn't explicitly written down**. If a puzzle says 'John has a dog', you cannot assume the dog is his ONLY pet. You cannot assume the dog is a boy. You cannot assume John likes the dog! You must act like a ruthless robot and only use the exact, literal facts printed on the page. Assuming things will destroy your logic chain."
+      "content": "The biggest pitfall in Tatsavit is losing your confidence after one hard question. If you stare at a probability question for 2 minutes and get it wrong, you carry that frustration into the next algebra question, causing you to make a simple sign error. You must develop a goldfish memory. When a question is done, forget it instantly and attack the next one fresh."
     }
   ]
 }

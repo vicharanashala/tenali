@@ -1,30 +1,30 @@
 {
-  "title": "Circle Theorems: Geometry's Hidden Rules",
+  "title": "Circle Theorems: Secrets of the Ring",
   "blocks": [
     {
-      "icon": "?",
-      "title": "1. The Core Concept: The Perfect Loop",
-      "content": "A circle isn't just a round shape; it is a perfectly symmetrical mathematical object where every point on the edge is the exact same distance from the center. Because of this absolute perfection, whenever you draw lines and triangles inside a circle, they follow strict, hidden, magical rules. These rules are called **Circle Theorems**, and they allow you to instantly find missing angles just by recognizing a specific pattern."
+      "icon": "⭕",
+      "title": "1. The Core Concept: Hidden Rules Inside Circles",
+      "content": "A circle looks simple, but it hides some of the most elegant rules in geometry. When you draw lines inside a circle (chords, tangents, diameters), they create angles that follow strict, beautiful patterns. These **Circle Theorems** let you find unknown angles instantly, without needing a protractor. They're the cheat codes of geometry exams."
     },
     {
-      "icon": "??",
-      "title": "2. The Rules: The Big Three Theorems",
-      "content": "There are many theorems, but these three are the most famous:\n\n� **The Arrowhead (Angle at the Center):** The angle at the center of the circle is always exactly DOUBLE the angle at the edge (circumference), as long as they start from the same two points.\n� **The Bowtie (Angles in the same segment):** If you draw a 'bowtie' shape starting from two bottom points, the two 'ears' at the top of the bowtie are always EQUAL.\n� **The Semi-Circle:** Any triangle drawn inside a half-circle, where the longest side goes directly through the center point, will ALWAYS have a perfect 90� right angle at the top edge!"
+      "icon": "📚",
+      "title": "2. The Rules: The Big Five Theorems",
+      "content": "• **Theorem 1:** The angle at the center is TWICE the angle at the circumference (from the same arc).\n• **Theorem 2:** Angles in the same segment are equal.\n• **Theorem 3:** The angle in a semicircle is always 90 degrees (if the chord is a diameter).\n• **Theorem 4:** Opposite angles in a cyclic quadrilateral add up to 180 degrees.\n• **Theorem 5:** A tangent to a circle meets the radius at exactly 90 degrees."
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: Cracking the Code",
-      "content": "When faced with a terrifying circle geometry puzzle with a dozen crossing lines:\n\n1. **Find the Center:** Is the center point marked? If yes, look immediately for the 'Arrowhead' theorem or a 'Semi-Circle' triangle.\n2. **Look for Radii:** Any line going from the center to the edge is a radius. They are all equal length! Two radii make an Isosceles triangle (two equal angles). This is the secret to solving 50% of puzzles.\n3. **Hunt for Bowties:** Trace from two points on the edge and see if they make a bowtie shape touching the top edge."
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Identifying Which Theorem to Use",
+      "content": "When faced with a circle diagram:\n\n1. Look for the **center point**. If angles are drawn from it, use Theorem 1.\n2. Look for a **diameter** (line through the center). Any angle touching the opposite circumference = 90.\n3. Look for a **tangent** (line touching the circle once). It makes 90 with the radius.\n4. Look for a **cyclic quad** (4 points on the circle). Opposite angles = 180.\n5. Always mark the known angles and work outward."
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: The Isosceles Trap",
-      "content": "A triangle is drawn inside a circle. The center of the circle 'O' is the top point of the triangle. The two bottom points A and B are on the edge. The angle at 'O' is 100�. Find the angle at A.\n\n� **Step 1:** The lines OA and OB both go from the center to the edge. That means they are both Radii.\n� **Step 2:** Because they are both Radii, they are the exact same length. Therefore, triangle OAB is Isosceles!\n� **Step 3:** In an Isosceles triangle, the two bottom angles must be equal.\n� **Step 4:** A triangle has 180�. 180� - 100� = 80� left for the bottom two angles.\n� **Step 5:** Split the 80� equally between A and B. 80 / 2 = 40�.\n\n**Final Answer: Angle A is 40�.**"
+      "icon": "📝",
+      "title": "4. Worked Example: Angle at the Center",
+      "content": "The angle at the center of a circle is 140 degrees. Find the angle at the circumference from the same arc.\n\n**Step 1:** Identify: We have a center angle and need the circumference angle from the same arc.\n**Step 2:** Apply Theorem 1: Center angle = 2 x Circumference angle.\n**Step 3:** 140 = 2 x Circumference angle.\n**Step 4:** Circumference angle = 140 / 2 = 70.\n\n**Final Answer: 70 degrees.**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "The deadliest trap in Circle Theorems is assuming a line goes exactly through the center just because it looks like it does. **If there is no dot labeled 'O' or 'Center', DO NOT assume it's the diameter!** If it's not the diameter, you cannot use the Semi-Circle 90� rule. Geometry diagrams are designed to trick your eyes. Only trust the written facts, never the drawing!"
+      "content": "The most common trap is applying Theorem 1 (center = 2x circumference) when the two angles are NOT from the same arc! If the angles are looking at different arcs, the theorem doesn't apply. Always trace the arc that both angles are 'looking at'. If they share the same arc, you can use the theorem. If not, look for a different theorem."
     }
   ]
 }

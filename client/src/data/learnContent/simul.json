@@ -1,30 +1,30 @@
 {
-  "title": "Simultaneous Equations: The Intersection",
+  "title": "Simultaneous Equations: Two Unknowns, Two Equations",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: Crossing Paths",
-      "content": "If you draw a straight line on a graph, it represents an equation with infinite possible answers (every point on the line). If you draw a second line, it also has infinite answers. But where do the two lines cross? That single point of intersection is the ONE magical coordinate (x, y) that works perfectly for BOTH equations at the same time. Solving **Simultaneous Equations** is the mathematical art of finding that exact intersection point without needing to draw the graph."
+      "icon": "🔀",
+      "title": "1. The Core Concept: Two Mysteries at Once",
+      "content": "One equation with one unknown gives you one answer. But what if you have TWO unknowns (x AND y)? You need TWO equations to find them both. **Simultaneous equations** are a pair of equations that are both true at the same time. Solving them gives you the ONE pair of values (x, y) that satisfies both equations perfectly."
     },
     {
-      "icon": "??",
-      "title": "2. The Rules: Two Paths to Victory",
-      "content": "There are two main ways to solve these puzzles algebraically:\n\n� **Substitution Method:** Best used when one equation already has x or y completely alone (like y = 2x + 1). You take that expression and 'substitute' it into the other equation, trapping it down to just one variable.\n� **Elimination Method:** Best used when the equations are stacked neatly (like 3x + 2y = 10). You manipulate the equations so that when you add or subtract them vertically, one of the variables gets completely destroyed (eliminated)!"
+      "icon": "📚",
+      "title": "2. The Rules: Two Methods",
+      "content": "• **Elimination Method:** Make the coefficients of one variable the same in both equations, then add or subtract to eliminate it.\n• **Substitution Method:** Rearrange one equation to express x in terms of y (or vice versa), then substitute into the other.\n• Both methods give the same answer. Use whichever feels more natural for the given problem."
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: The Elimination Method",
-      "content": "1. **Stack 'em up:** Write the equations one above the other, aligning the x's, y's, and numbers.\n2. **Match the coefficients:** Multiply one (or both) equations by a number so that the x's OR the y's have the exact same number in front of them (ignoring the sign).\n3. **Eliminate:** If the matched signs are the SAME (both +, or both -), SUBTRACT the equations. If the signs are DIFFERENT (+ and -), ADD the equations. The variable will vanish!\n4. **Solve:** Solve the simple equation left behind for the remaining variable.\n5. **Tag Team:** Take your answer and plug it back into EITHER original equation to find the other variable."
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Elimination Method",
+      "content": "To solve: 2x + 3y = 13 and 4x - 3y = 11:\n\n1. Look at the y-coefficients: +3y and -3y. They're already matched!\n2. ADD the equations: (2x + 4x) + (3y - 3y) = 13 + 11.\n3. This gives 6x = 24, so x = 4.\n4. Substitute x = 4 into equation 1: 2(4) + 3y = 13, so 3y = 5, y = 5/3.\n5. Check in equation 2: 4(4) - 3(5/3) = 16 - 5 = 11. Correct!"
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: Elimination in Action",
-      "content": "Solve: \n1) 3x + y = 11\n2) 2x - y = 4\n\n� **Step 1:** Look at the y's. We have a +y and a -y. The coefficients already match (they are both 1), and the signs are different.\n� **Step 2:** Because the signs are different, we ADD the two equations vertically.\n� **Step 3:** (3x + 2x) = 5x. (+y + -y) = 0. (11 + 4) = 15. We are left with **5x = 15**.\n� **Step 4:** Divide by 5. **x = 3**.\n� **Step 5 (Tag Team):** Plug x=3 into the first equation: 3(3) + y = 11. Which means 9 + y = 11. So, **y = 2**.\n\n**Final Answer: x = 3, y = 2 (Coordinate: 3,2)**"
+      "icon": "📝",
+      "title": "4. Worked Example: Substitution Method",
+      "content": "Solve: y = 2x + 1 and 3x + y = 11.\n\n**Step 1:** Equation 1 already gives y in terms of x: y = 2x + 1.\n**Step 2:** Substitute into equation 2: 3x + (2x + 1) = 11.\n**Step 3:** 5x + 1 = 11, so 5x = 10, x = 2.\n**Step 4:** y = 2(2) + 1 = 5.\n\n**Final Answer: x = 2, y = 5.**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "When using the Elimination method and deciding to SUBTRACT the equations, students often make a fatal error: they subtract the first term, but forget to distribute the minus sign to the rest of the bottom equation. If you are subtracting an equation like (2x - 3y = 4), that minus sign changes the -3y into a +3y. Pro tip: Put big brackets around the entire bottom equation with a minus sign outside to remind your brain to flip EVERY sign!"
+      "content": "The classic elimination mistake: adding when you should subtract (or vice versa). If both equations have +3y, you need to SUBTRACT to eliminate y (3y - 3y = 0). If one has +3y and the other has -3y, you ADD (3y + (-3y) = 0). Also, students often solve for x but forget to find y! Both unknowns must be found for full marks."
     }
   ]
 }

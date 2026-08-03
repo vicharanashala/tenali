@@ -1,30 +1,30 @@
 {
-  "title": "Coordinate Geometry: Math on a Grid",
+  "title": "Coordinate Geometry: GPS Mathematics",
   "blocks": [
     {
-      "icon": "???",
-      "title": "1. The Core Concept: The Cartesian Map",
-      "content": "If you draw a triangle on a blank piece of paper, it's just a drawing. But if you pin that triangle to a grid with an x-axis and a y-axis, it suddenly becomes a powerful mathematical machine! **Coordinate Geometry** fuses algebra and geometry together. By giving every point an address (like x=3, y=4), we can calculate exact lengths, precise midpoints, and perfect slopes without ever needing a ruler."
+      "icon": "🗺️",
+      "title": "1. The Core Concept: Math on a Map",
+      "content": "Coordinate Geometry is like giving every point on a piece of paper a unique address using two numbers: (x, y). Just like GPS coordinates can pinpoint any location on Earth, the (x, y) system lets you describe the exact position of any point, the slope of any line, and the distance between any two points using pure algebra. It bridges the gap between shapes and equations."
     },
     {
-      "icon": "??",
-      "title": "2. The Rules: Midpoints and Distances",
-      "content": "There are two massive formulas you must master to navigate the grid:\n\n� **The Midpoint Formula:** To find the exact halfway point between two dots, you just find the average! Add the two x-coordinates together and divide by 2. Add the two y-coordinates and divide by 2.\n� **The Distance Formula:** To find the exact distance between two dots, you actually just use Pythagoras! The formula is **v[ (x2 - x1)� + (y2 - y1)� ]**."
+      "icon": "📚",
+      "title": "2. The Rules: The Big Three Formulas",
+      "content": "• **Distance:** d = sqrt[(x2-x1)^2 + (y2-y1)^2]. This is Pythagoras in disguise!\n• **Midpoint:** M = ((x1+x2)/2, (y1+y2)/2). Just average the x's and average the y's.\n• **Gradient (Slope):** m = (y2-y1) / (x2-x1). Rise over Run.\n\nParallel lines have EQUAL gradients. Perpendicular lines have gradients that multiply to -1."
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: Parallel and Perpendicular",
-      "content": "Lines on a grid are judged by their 'm' (Gradient or Slope).\n\n1. **Parallel Lines:** These are lines that never touch, like train tracks. Their rule is simple: **They have the exact same gradient.** (If Line A has m=3, Line B has m=3).\n2. **Perpendicular Lines:** These lines smash into each other at a perfect 90� right angle. Their rule is tricky: **Their gradients are Negative Reciprocals.**\n3. **The Flip Trick:** To find a perpendicular gradient, take the fraction, flip it upside down (reciprocal), and change the sign (positive to negative). (e.g., 2/3 becomes -3/2)."
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Finding the Equation of a Line",
+      "content": "Given two points, find the line equation:\n\n1. Calculate the gradient: m = (y2-y1)/(x2-x1).\n2. Use point-slope form: y - y1 = m(x - x1).\n3. Substitute one of your points and the gradient.\n4. Simplify to y = mx + c form.\n5. 'c' is the y-intercept (where the line crosses the y-axis)."
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: Finding the 90� Line",
-      "content": "Line A has the equation **y = 4x - 2**. Line B is completely perpendicular to Line A, and passes through the point (0, 5). Find the equation of Line B.\n\n� **Step 1 (Find original slope):** The slope of Line A is 4 (which is 4/1).\n� **Step 2 (The Flip Trick):** To make it perpendicular, flip 4/1 upside down to get 1/4. Change the sign to negative. The new slope is **-1/4**.\n� **Step 3 (The Intercept):** Line B passes through (0, 5), which is directly on the y-axis. So the y-intercept 'c' is 5.\n� **Step 4 (Build equation):** Put the new 'm' and 'c' into y = mx + c.\n\n**Final Answer: y = -�x + 5**"
+      "icon": "📝",
+      "title": "4. Worked Example: Line Through Two Points",
+      "content": "Find the equation of the line through (2, 3) and (6, 11).\n\n**Step 1:** m = (11-3)/(6-2) = 8/4 = 2.\n**Step 2:** y - 3 = 2(x - 2).\n**Step 3:** y - 3 = 2x - 4.\n**Step 4:** y = 2x - 1.\n\n**Final Answer: y = 2x - 1** (gradient 2, y-intercept -1)."
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "When using the Distance Formula, the negative signs are absolutely brutal. If your coordinate has a negative (like x = -5), and the formula asks you to subtract it (x2 - x1), you end up with a double negative (like 3 - - 5). Students constantly forget that this transforms into a PLUS! (3 + 5 = 8). Always put negative coordinates inside small brackets when you substitute them into formulas to protect yourself from the minus-sign traps!"
+      "content": "The most common error is getting the gradient fraction upside down. It's (y2-y1) on TOP and (x2-x1) on BOTTOM. Students often write (x2-x1)/(y2-y1) by mistake. Remember: Rise (y-difference) is always on top, Run (x-difference) is always on the bottom. Rise over Run, not Run over Rise!"
     }
   ]
 }

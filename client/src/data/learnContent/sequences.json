@@ -1,30 +1,30 @@
 {
-  "title": "Number Sequences: Finding the Pattern",
+  "title": "Sequences & Series: Spotting the Pattern",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: The Train of Numbers",
-      "content": "A number sequence is like a train with an infinite number of carriages. Inside each carriage is a number. The most important rule of the train is that it must follow a strict mathematical pattern to move from one carriage to the next. If you can figure out the 'rule' of the train (like 'add 4 every time' or 'multiply by 2'), you can predict exactly what number will be in the 100th or even the 1,000th carriage!"
+      "icon": "🔢",
+      "title": "1. The Core Concept: Numbers with a Hidden Rule",
+      "content": "A **sequence** is a list of numbers that follows a hidden pattern: 2, 5, 8, 11, 14... Can you spot the rule? Each number is 3 more than the previous one! A **series** is what you get when you ADD all the terms together. Sequences are the math of prediction: if you know the pattern, you can find the 100th term without listing all 100 numbers."
     },
     {
-      "icon": "??",
-      "title": "2. The Rules: Arithmetic vs. Geometric",
-      "content": "There are two main types of sequences you must know:\n\n� **Arithmetic Sequence (The Walker):** This sequence moves forward by ADDING or SUBTRACTING the exact same amount every time. Example: 3, 7, 11, 15... (The rule is +4). It grows at a steady, walking pace.\n� **Geometric Sequence (The Runner):** This sequence moves forward by MULTIPLYING or DIVIDING by the exact same amount every time. Example: 2, 6, 18, 54... (The rule is x3). It explodes in size very quickly!"
+      "icon": "📚",
+      "title": "2. The Rules: Arithmetic vs Geometric",
+      "content": "• **Arithmetic Sequence:** Constant ADDITION between terms. Formula: a_n = a + (n-1)d, where a = first term, d = common difference.\n• **Geometric Sequence:** Constant MULTIPLICATION between terms. Formula: a_n = a * r^(n-1), where r = common ratio.\n• **Sum of Arithmetic Series:** S_n = n/2 * (2a + (n-1)d) or S_n = n/2 * (first + last)."
     },
     {
-      "icon": " nth",
-      "title": "3. Step-by-Step: Finding the 'nth' Term Formula",
-      "content": "For Arithmetic sequences, we use the magic formula **U? = dn + c** to predict the future:\n\n1. **Find 'd' (The Difference):** Look at the gap between the numbers. If the sequence is 5, 8, 11... the gap is +3. So, d = 3.\n2. **Start your formula:** Write down **3n**.\n3. **Find 'c' (The Zero Term):** What number would come *before* the first number in the sequence? If the first number is 5, and we are going up by 3, the 'zero term' would be 2. So, c = +2.\n4. **Combine:** Your magic formula is **3n + 2**."
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Finding the nth Term",
+      "content": "For the arithmetic sequence 3, 7, 11, 15...:\n\n1. Find the common difference: d = 7 - 3 = 4.\n2. Identify the first term: a = 3.\n3. Use the formula: a_n = a + (n-1)d.\n4. For the 50th term: a_50 = 3 + (49)(4) = 3 + 196 = 199."
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: Predicting the Future",
-      "content": "Given the sequence: **7, 12, 17, 22...** Find the 50th term.\n\n� **Step 1 (Find d):** The numbers go up by 5 every time. d = 5.\n� **Step 2:** Start with **5n**.\n� **Step 3 (Find c):** The number before the first '7' would be 2 (because 7 - 5 = 2). c = +2.\n� **Step 4 (The Formula):** Our formula is **5n + 2**.\n� **Step 5 (Predict):** To find the 50th term, replace 'n' with 50. \n  Calculation: 5(50) + 2 = 250 + 2 = **252**.\n\n**Final Answer: The 50th term is 252.**"
+      "icon": "📝",
+      "title": "4. Worked Example: Sum of First 20 Terms",
+      "content": "Find the sum of the first 20 terms of 5, 8, 11, 14...\n\n**Step 1:** a = 5, d = 3, n = 20.\n**Step 2:** Last term: a_20 = 5 + 19(3) = 5 + 57 = 62.\n**Step 3:** Sum = n/2 * (first + last) = 20/2 * (5 + 62) = 10 * 67 = 670.\n\n**Final Answer: S_20 = 670.**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "When finding the 'nth term' formula for a sequence that is going *down* (e.g., 20, 16, 12...), the difference 'd' is NEGATIVE! The biggest mistake students make is writing '4n' instead of '-4n'. If the numbers are dropping, your 'n' MUST have a negative sign in front of it!"
+      "content": "The most common sequence mistake: using 'n' instead of '(n-1)' in the formula. For the 50th term, you multiply d by 49 (which is n-1), not by 50. If d = 4, using 50 gives 200 instead of 196. You're always one step off! Remember: the first term has ZERO d's added to it, the second has ONE d, the third has TWO d's... so the nth has (n-1) d's."
     }
   ]
 }

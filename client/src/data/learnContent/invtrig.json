@@ -1,30 +1,30 @@
 {
-  "title": "Inverse Trigonometry: Finding the Angle",
+  "title": "Inverse Trigonometry: Working Backwards",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: The Backward Spell",
-      "content": "Normal trigonometry (Sin, Cos, Tan) is a machine where you input an angle, and it spits out the ratio of two sides. But what if you have a triangle where you know the lengths of the sides, but the angle is a complete mystery? You need to run the machine in reverse! **Inverse Trigonometry** (Sin?�, Cos?�, Tan?�) takes the ratio of the sides and magically spits out the missing angle."
+      "icon": "🔄",
+      "title": "1. The Core Concept: Finding the Angle from the Ratio",
+      "content": "Normal trigonometry says: 'Here's an angle, what's the ratio?' sin(30) = 0.5. **Inverse trigonometry** asks the opposite: 'Here's a ratio, what's the angle?' arcsin(0.5) = 30 degrees. It's like having a dictionary that works both ways: English to French, AND French to English."
     },
     {
-      "icon": "???",
-      "title": "2. The Rules: SOH CAH TOA Returns",
-      "content": "You still must label your triangle correctly relative to the missing angle ?:\n\n� **H (Hypotenuse):** The longest side, opposite the 90� corner.\n� **O (Opposite):** The side looking directly at the missing angle ?.\n� **A (Adjacent):** The side touching the missing angle ?.\nIdentify which two sides you actually have numbers for, and pick S, C, or T!"
+      "icon": "📚",
+      "title": "2. The Rules: The Three Inverse Functions",
+      "content": "• **arcsin (or sin^(-1)):** Input a ratio between -1 and 1, get an angle.\n• **arccos (or cos^(-1)):** Same input range, different output range.\n• **arctan (or tan^(-1)):** Input any real number, get an angle.\n\nCritical: sin^(-1) does NOT mean 1/sin! The -1 means 'inverse function', not 'reciprocal'."
     },
     {
-      "icon": "?",
-      "title": "3. Step-by-Step: The Calculator Shift",
-      "content": "1. Label H, O, A.\n2. Look at the two sides you know. (e.g., I know O and A).\n3. Pick the rule. (O and A means TOA: Tangent).\n4. Write the fraction: Tan(?) = Opposite � Adjacent.\n5. To get ? by itself, move 'Tan' to the other side. It transforms into its evil twin, **Tan?�** (Inverse Tan).\n6. Hit 'Shift' or '2nd' on your calculator, press Tan, and type the fraction in the brackets."
+      "icon": "📱",
+      "title": "3. Step-by-Step: Using Your Calculator",
+      "content": "To find an angle using inverse trig:\n\n1. Identify which trig ratio you have (opposite/hypotenuse = sin, etc.).\n2. Press SHIFT (or 2nd) then the trig button on your calculator.\n3. Enter the ratio value.\n4. Make sure your calculator is in the correct mode (degrees or radians).\n5. The output is your angle."
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: Finding the Incline",
-      "content": "A ramp is 5 meters long (Hypotenuse). The height of the ramp is 3 meters (Opposite). Find the angle of the ramp (?).\n\n� **Step 1:** We have H (5) and O (3). This means we must use Sine (SOH).\n� **Step 2 (The Equation):** Sin(?) = O / H = 3 / 5.\n� **Step 3 (The Decimal):** 3 � 5 = 0.6. So, Sin(?) = 0.6.\n� **Step 4 (The Inverse):** To find ?, we do Sin?�(0.6).\n� **Step 5 (Calculate):** Press Shift + Sin on the calculator, type 0.6, hit equals.\n\n**Final Answer: The angle ? is 36.87�.**"
+      "icon": "📝",
+      "title": "4. Worked Example: Finding an Angle",
+      "content": "In a right triangle, the opposite side is 5 and the hypotenuse is 10. Find the angle.\n\n**Step 1:** sin(angle) = opposite/hypotenuse = 5/10 = 0.5.\n**Step 2:** angle = arcsin(0.5).\n**Step 3:** angle = 30 degrees.\n\n**Final Answer: The angle is 30 degrees.**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "Students often see Sin?� on their calculator and assume the '-1' power means they should calculate 1 � Sin(?). **NO!** In trigonometry, the -1 is just a symbol that means 'Inverse function'. (1 � Sin is a completely different advanced math concept called Cosecant). Never try to do inverse trig manually with fractions. You MUST use the Shift/2nd button on your calculator to activate the inverse spell."
+      "content": "The most common mistake: confusing sin^(-1)(x) with 1/sin(x). They are COMPLETELY different! sin^(-1)(0.5) = 30 degrees (inverse function), but 1/sin(0.5) = 1/0.479 = 2.09 (reciprocal). On a calculator, the inverse trig functions are usually accessed by pressing SHIFT + sin/cos/tan. Make sure you're pressing the right button!"
     }
   ]
 }

@@ -1,30 +1,30 @@
 {
-  "title": "Function Evaluation: The Math Machine",
+  "title": "Functions: The Math Machine",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: The Vending Machine",
-      "content": "Think of a mathematical function (like **f(x) = 2x + 3**) as a vending machine. The 'x' is the coin slot. You drop a number into the machine, the gears turn, it does the math, and it spits out a completely new number at the bottom. **Function Evaluation** is simply the process of dropping different numbers into the machine and seeing what comes out!"
+      "icon": "⚙️",
+      "title": "1. The Core Concept: Input Goes In, Output Comes Out",
+      "content": "A **function** is like a machine. You feed it a number (input), it processes it according to a rule, and spits out a result (output). If f(x) = 2x + 3, then feeding in x = 4 gives f(4) = 2(4) + 3 = 11. The function is the rule book that tells the machine what to do with whatever you give it."
     },
     {
-      "icon": "??",
-      "title": "2. The Rules: Exact Substitution",
-      "content": "When a question asks you to find **f(5)**, it is giving you a strict command: 'Erase every single letter 'x' in the equation, and replace it with the number 5 in brackets.'\n\n� If f(x) = x�, then f(5) = (5)� = 25.\n� The brackets are CRITICAL! If you are substituting a negative number, failing to use brackets will completely destroy the calculation."
+      "icon": "📚",
+      "title": "2. The Rules: Function Notation",
+      "content": "• **f(x)** means 'the function f, applied to x'. It does NOT mean f times x!\n• **f(3)** means 'substitute x = 3 into the function'.\n• **f(a+1)** means 'everywhere you see x, replace it with (a+1)'.\n• **Composite functions:** f(g(x)) means 'first apply g, then apply f to the result'."
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: Evaluating Complex Functions",
-      "content": "1. Write the original function out on paper.\n2. Wherever you see an 'x', draw empty brackets ( ).\n3. Write the requested number inside EVERY set of brackets.\n4. Use BODMAS (Order of Operations) to calculate the final result. Remember to do powers and brackets before multiplication!"
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Evaluating Composite Functions",
+      "content": "To find f(g(2)) when f(x) = x^2 and g(x) = 3x + 1:\n\n1. Start from the INSIDE: calculate g(2) first.\n2. g(2) = 3(2) + 1 = 7.\n3. Now use this result as the input for f: f(7) = 7^2 = 49.\n4. Always work inside-out, like peeling an onion."
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: The Negative Drop",
-      "content": "Given the function **f(x) = x� - 4x + 1**, calculate the value of **f(-3)**.\n\n� **Step 1 (The Brackets):** f(-3) = (-3)� - 4(-3) + 1\n� **Step 2 (The Square):** What is (-3)�? A negative times a negative is positive! It becomes +9.\n� **Step 3 (The Multiply):** What is -4 multiplied by -3? Again, double negative! It becomes +12.\n� **Step 4 (Combine):** We now have 9 + 12 + 1.\n\n**Final Answer: 22.**"
+      "icon": "📝",
+      "title": "4. Worked Example: Multi-Variable Function",
+      "content": "If f(x, y) = 3x^2 - 2y + 1, find f(2, 5).\n\n**Step 1:** Replace x with 2 and y with 5.\n**Step 2:** f(2, 5) = 3(2)^2 - 2(5) + 1.\n**Step 3:** = 3(4) - 10 + 1.\n**Step 4:** = 12 - 10 + 1 = 3.\n\n**Final Answer: f(2, 5) = 3.**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "The most brutal trap is evaluating a function like **f(x) = -x�**. What is f(4)? Students often say 'Well, -4 squared is positive 16!' **WRONG!** The minus sign is NOT attached to the x, it is outside! The correct substitution is -(4)�. You square the 4 first (getting 16), and THEN apply the minus sign. The true answer is -16. This is why using brackets when substituting is mandatory."
+      "content": "The deadliest mistake with composite functions is doing them in the WRONG ORDER. f(g(x)) means 'g first, then f'. But students often apply f first. Also, when substituting expressions like f(x+1), students will replace only the first 'x' but not others. If f(x) = x^2 + x, then f(x+1) = (x+1)^2 + (x+1), NOT (x+1)^2 + x!"
     }
   ]
 }

@@ -1,30 +1,30 @@
 {
-  "title": "HCF and LCM: The Building Blocks",
+  "title": "HCF & LCM: The Number Matchmakers",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: The DNA of Numbers",
-      "content": "Every single whole number in the universe (except 1) can be broken down into a unique recipe of Prime Numbers. Primes (2, 3, 5, 7, 11...) are the unbreakable atoms of mathematics. By smashing numbers down into their prime DNA, we can easily find their **Highest Common Factor (HCF)** (the biggest number that divides perfectly into both) and their **Lowest Common Multiple (LCM)** (the smallest future number they will both meet at)."
+      "icon": "🔗",
+      "title": "1. The Core Concept: Finding Common Ground",
+      "content": "**HCF (Highest Common Factor)** finds the BIGGEST number that divides evenly into two or more numbers. **LCM (Lowest Common Multiple)** finds the SMALLEST number that both numbers divide into evenly. HCF is like finding the biggest tile that perfectly covers two different floors. LCM is like finding when two buses with different schedules will both arrive at the station at the same time."
     },
     {
-      "icon": "??",
-      "title": "2. The Rules: Prime Factor Trees",
-      "content": "Before finding HCF or LCM, you must build a factor tree:\n\n� Take a number like 60, and split it into any two numbers that multiply to make it (e.g., 6 and 10).\n� Keep splitting those branches down (6 becomes 2 and 3. 10 becomes 2 and 5).\n� When you hit a Prime number, circle it! It's a dead end. It cannot be split further.\n� Write the final recipe: 60 = 2 � 2 � 3 � 5 (or 2� � 3 � 5)."
+      "icon": "📚",
+      "title": "2. The Rules: Prime Factor Method",
+      "content": "The most reliable method uses Prime Factorization:\n\n• Break each number into its prime factors.\n• **For HCF:** Take the COMMON primes, each to the LOWEST power they appear.\n• **For LCM:** Take ALL primes, each to the HIGHEST power they appear.\n• Shortcut: HCF x LCM = Product of the two original numbers."
     },
     {
-      "icon": "?",
-      "title": "3. Step-by-Step: The Venn Diagram Method",
-      "content": "The absolute safest way to find HCF and LCM is using a Venn Diagram:\n\n1. Draw two overlapping circles, one for Number A, one for Number B.\n2. Look at their Prime DNA recipes. Any prime numbers they BOTH share go straight into the middle intersection.\n3. Put the leftover primes for Number A in its left circle, and the leftovers for Number B in its right circle.\n4. **For the HCF:** Simply multiply all the numbers in the MIDDLE intersection together.\n5. **For the LCM:** Simply multiply EVERY SINGLE NUMBER you can see inside the entire Venn diagram together!"
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Finding HCF and LCM of 12 and 18",
+      "content": "1. Prime factorize: 12 = 2^2 x 3, and 18 = 2 x 3^2.\n2. **HCF:** Common primes are 2 and 3. Lowest powers: 2^1 and 3^1. HCF = 2 x 3 = **6**.\n3. **LCM:** All primes are 2 and 3. Highest powers: 2^2 and 3^2. LCM = 4 x 9 = **36**.\n4. Check: HCF x LCM = 6 x 36 = 216 = 12 x 18. Correct!"
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: 24 and 36",
-      "content": "Find the HCF and LCM of 24 and 36.\n\n� **Step 1 (DNA):** 24 = 2 � 2 � 2 � 3.  And 36 = 2 � 2 � 3 � 3.\n� **Step 2 (The Overlap):** What do they share? They both have a '2', another '2', and a '3'. Put (2, 2, 3) in the middle.\n� **Step 3 (Leftovers):** 24 has one '2' left over. 36 has one '3' left over.\n� **Step 4 (Find HCF):** Multiply the middle. 2 � 2 � 3 = **12**. (12 is the biggest number that divides into both).\n� **Step 5 (Find LCM):** Multiply everything. (Leftover 2) � (Middle 12) � (Leftover 3) = **72**. (72 is the first number they both fit into).\n\n**Final Answer: HCF = 12, LCM = 72.**"
+      "icon": "📝",
+      "title": "4. Worked Example: Word Problem",
+      "content": "Two traffic lights flash every 12 seconds and 18 seconds respectively. They just flashed together. When will they next flash together?\n\n**Step 1:** This is an LCM problem (we want the first time both events happen together).\n**Step 2:** LCM of 12 and 18 = 36.\n\n**Final Answer: They'll flash together again in 36 seconds.**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "When building a Venn diagram, students often see 2� in one number and 2� in another, and they put a '2' in the middle. But they forget to put the *other* shared '2' in the middle! It is much safer to write the DNA out fully (2 � 2 � 2 instead of 2�) so you can physically cross off pairs of matching numbers one-by-one. If you mess up the Venn diagram, both your HCF and LCM will be completely wrong!"
+      "content": "The most common mistake: mixing up HCF and LCM in word problems! If a question says 'the BIGGEST tile that fits perfectly' = HCF. If it says 'when will they BOTH happen together' = LCM. Also, students often forget to use the LOWEST power for HCF and HIGHEST for LCM, getting them exactly backwards!"
     }
   ]
 }

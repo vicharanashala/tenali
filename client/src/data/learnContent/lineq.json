@@ -1,30 +1,30 @@
 {
-  "title": "Linear Equations & Graphs: The Perfect Straight Line",
+  "title": "Line Equations: Drawing with Algebra",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: The Code of the Line",
-      "content": "Every straight line you draw on a graph isn't just a random scribble�it has a mathematical 'DNA code' that perfectly describes how it moves. That code is a **Linear Equation**. It guarantees that the line is perfectly straight, with no bends or curves. If you know the equation, you can predict exactly where the line will be a million miles away without having to draw it."
+      "icon": "📉",
+      "title": "1. The Core Concept: Every Line Has an Equation",
+      "content": "Every straight line on a graph can be described by an equation of the form **y = mx + c**, where **m** is the gradient (steepness) and **c** is the y-intercept (where the line crosses the y-axis). If you know two points on a line, you can find its exact equation. If you know the equation, you can draw the exact line. Algebra and geometry become one."
     },
     {
-      "icon": "??",
-      "title": "2. The Rules: The y = mx + c Formula",
-      "content": "The DNA of almost every straight line can be written in the famous format: **y = mx + c** (in some countries, it's y = mx + b).\n\n� **'m' is the Gradient (Slope):** It tells you how steep the line is. A big number means a steep cliff. A positive 'm' goes uphill. A negative 'm' goes downhill.\n� **'c' is the Y-Intercept:** It tells you the exact coordinate where the line crashes through the vertical y-axis. It's your 'starting point' on the graph."
+      "icon": "📚",
+      "title": "2. The Rules: Gradient and Y-Intercept",
+      "content": "• **Gradient (m):** m = (y2 - y1) / (x2 - x1). It measures the steepness and direction.\n• Positive m = line goes uphill (left to right). Negative m = downhill.\n• **Y-intercept (c):** The value of y when x = 0. It's where the line hits the y-axis.\n• **Parallel lines** have the same gradient. **Perpendicular lines** have gradients that multiply to -1."
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: Calculating Gradient (m)",
-      "content": "To find the gradient 'm' from any two points on a line, use the **Rise over Run** method:\n\n1. Pick two clear coordinates on the line: Point 1 (x1, y1) and Point 2 (x2, y2).\n2. Calculate the **Rise**: How far UP or DOWN did you go? Subtract the y-values (y2 - y1).\n3. Calculate the **Run**: How far ACROSS did you go? Subtract the x-values (x2 - x1).\n4. Divide the Rise by the Run. That fraction is your gradient!"
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Finding the Equation from Two Points",
+      "content": "Given two points (x1, y1) and (x2, y2):\n\n1. Calculate m = (y2 - y1) / (x2 - x1).\n2. Substitute m and one point into y = mx + c.\n3. Solve for c.\n4. Write the final equation y = mx + c."
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: Graphing the Equation",
-      "content": "Graph the line: **y = 2x - 3**\n\n� **Step 1 (Find the start):** Look at 'c', which is -3. This means our line crosses the y-axis at -3. Put a big dot at (0, -3).\n� **Step 2 (Use the slope):** Look at 'm', which is 2. This means the gradient is 2 (or 2/1). For every 1 step we Run to the right, we must Rise 2 steps up.\n� **Step 3 (Find the next point):** From our starting dot at (0, -3), go RIGHT 1, and UP 2. Put a second dot at (1, -1).\n� **Step 4 (Draw):** Take a ruler and draw a long straight line passing through both dots!"
+      "icon": "📝",
+      "title": "4. Worked Example: Points (1, 5) and (3, 9)",
+      "content": "**Step 1:** m = (9 - 5) / (3 - 1) = 4 / 2 = 2.\n**Step 2:** Use point (1, 5): 5 = 2(1) + c.\n**Step 3:** 5 = 2 + c, so c = 3.\n**Step 4:** y = 2x + 3.\n\n**Final Answer: y = 2x + 3.** (Gradient 2, y-intercept 3.)"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "When calculating the gradient using (y2 - y1) / (x2 - x1), the absolute most common mistake is putting the x's on top and the y's on the bottom. **Always remember: Rise (y) over Run (x).** The 'y's must be in the numerator. Also, make sure you subtract the coordinates in the exact same order for both top and bottom!"
+      "content": "The classic gradient error: putting the x-difference on top instead of the y-difference. The gradient formula is RISE (y-change) over RUN (x-change), not the other way around. Also, be careful with negative gradients: (3-7)/(2-1) = -4/1 = -4. Don't lose the negative sign, or your line will slope in the wrong direction!"
     }
   ]
 }

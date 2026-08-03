@@ -1,30 +1,30 @@
 {
-  "title": "Number Bases: The Alien Math",
+  "title": "Number Bases: Speaking Different Languages",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: Counting with Fewer Fingers",
-      "content": "Humans count in Base 10 because we have 10 fingers. Our columns are Ones, Tens, Hundreds, and Thousands. But what if we were aliens with only 2 fingers? We would use Base 2 (Binary)! Computers use Binary because they only have two 'fingers': electricity ON (1) or electricity OFF (0). Number bases are just different ways of packing items into boxes when you run out of digits."
+      "icon": "💻",
+      "title": "1. The Core Concept: Not Everything is Base 10!",
+      "content": "Humans count in Base 10 because we have 10 fingers. But computers only understand ON and OFF (two states), so they count in **Base 2 (Binary)**, using only 0s and 1s. Programmers also use **Base 16 (Hexadecimal)** as a shortcut. Learning number bases is like learning to speak the native language of computers."
     },
     {
-      "icon": "??",
-      "title": "2. The Rules: The Magic Columns",
-      "content": "In Base 10, each column is 10 times bigger than the last (1, 10, 100, 1000). \n� In **Base 2 (Binary)**, each column is 2 times bigger than the last (1, 2, 4, 8, 16). The only digits you are allowed to write are 0 and 1.\n� In **Base 8 (Octal)**, each column is 8 times bigger (1, 8, 64). You can only use digits 0 through 7.\n� **The Golden Rule:** The 'Base' tells you the multiplier for the columns, and it tells you the absolute maximum limit for digits!"
+      "icon": "📚",
+      "title": "2. The Rules: Place Value Changes Everything",
+      "content": "In Base 10, each column is worth 10x more than the one to its right (1, 10, 100, 1000...).\n\n• In **Base 2**, columns are worth 1, 2, 4, 8, 16, 32... (powers of 2).\n• In **Base 8 (Octal)**, columns are worth 1, 8, 64, 512... (powers of 8).\n• In **Base 16 (Hex)**, columns are 1, 16, 256... and digits go 0-9 then A=10, B=11, C=12, D=13, E=14, F=15."
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: Converting Base 2 to Base 10",
-      "content": "How do you translate an alien number like **1101** (Base 2) into human numbers (Base 10)?\n\n1. **Draw the Columns:** From right to left, write the Base 2 column values: 8, 4, 2, 1.\n2. **Drop the alien number:** Write 1 1 0 1 directly underneath those column headers.\n3. **Add the active columns:** Everywhere you see a '1', add that column's value. Everywhere you see a '0', ignore it.\n4. **Calculate:** We have one 8, one 4, zero 2s, and one 1. Add them up: 8 + 4 + 1 = 13."
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Converting Base 10 to Binary",
+      "content": "To convert a decimal number to binary:\n\n1. Divide the number by 2.\n2. Write down the remainder (0 or 1).\n3. Take the quotient and divide by 2 again.\n4. Repeat until the quotient is 0.\n5. Read the remainders from BOTTOM to TOP. That's your binary number!"
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: Human to Alien",
-      "content": "Convert the human number **23** into Base 2 (Binary).\n\n� **Step 1 (Find the biggest box):** The binary columns are 1, 2, 4, 8, 16, 32. The number 32 is too big, so we start at the 16 column.\n� **Step 2:** Does a 16 fit inside 23? Yes! Put a **1** in the 16 column. (We have 23 - 16 = 7 left over).\n� **Step 3:** Does an 8 fit into our leftover 7? No! Put a **0** in the 8 column.\n� **Step 4:** Does a 4 fit into 7? Yes! Put a **1** in the 4 column. (7 - 4 = 3 left).\n� **Step 5:** Does a 2 fit into 3? Yes! Put a **1** in the 2 column. (3 - 2 = 1 left).\n� **Step 6:** Does a 1 fit into 1? Yes! Put a **1** in the 1 column.\n\n**Final Answer: 10111**"
+      "icon": "📝",
+      "title": "4. Worked Example: Convert 13 to Binary",
+      "content": "**Step 1:** 13 / 2 = 6 remainder **1**\n**Step 2:** 6 / 2 = 3 remainder **0**\n**Step 3:** 3 / 2 = 1 remainder **1**\n**Step 4:** 1 / 2 = 0 remainder **1**\n**Step 5:** Read bottom to top: **1101**\n\n**Final Answer: 13 in binary = 1101**\nCheck: 8 + 4 + 0 + 1 = 13. Correct!"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "When converting from human Base 10 into an alien base using the 'division' method, students often write the final answer completely backwards! If you are dividing by 2 repeatedly and writing down the remainders, you MUST read the remainders from the BOTTOM up to the TOP to form your binary number. If you read them from top to bottom, your number is completely reversed and mathematically wrong."
+      "content": "The classic mistake is reading the remainders from TOP to BOTTOM instead of bottom to top! For 13, if you read top to bottom you'd get 1011, which is actually 11 in decimal, not 13. Always read your remainders in REVERSE order. Another trap: in Hex, students forget that A=10, B=11, etc. and write the literal letter value."
     }
   ]
 }

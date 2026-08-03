@@ -1,30 +1,30 @@
 {
-  "title": "Complex Numbers: Unlocking the Imaginary",
+  "title": "Complex Numbers: Beyond Reality",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: The Impossible Number",
-      "content": "For years, mathematicians hit a brick wall: what is the square root of -9? You can't multiply a positive by a positive to get a negative, and a negative times a negative is ALSO positive. It seemed impossible. So, mathematicians simply invented a new dimension! They defined the square root of -1 as a new, 'imaginary' number called **i**. By combining real numbers (like 4) with imaginary numbers (like 3i), we create a **Complex Number** (4 + 3i). These aren't just fantasy�they are absolutely essential for quantum physics and designing electrical circuits!"
+      "icon": "🌌",
+      "title": "1. The Core Concept: The Imaginary Dimension",
+      "content": "What's the square root of -1? In the real number world, it doesn't exist. But mathematicians invented a magical number called **i** (imaginary unit) where i^2 = -1. A **Complex Number** combines a real part and an imaginary part: **z = a + bi**. It's like adding a second dimension to the number line, creating a whole number PLANE instead of just a line."
     },
     {
-      "icon": "?",
-      "title": "2. The Rules: The Power of 'i'",
-      "content": "Every complex number has a standard form: **z = a + bi**\n� 'a' is the real part (normal numbers).\n� 'bi' is the imaginary part.\n\nThe single most important rule to memorize in this entire topic is the core definition of i:\n**i = v-1**, which means that **i� = -1**.\nWhenever you are doing math and you see an i�, you must instantly erase it and replace it with a -1. It is the magic key that turns imaginary math back into real math!"
+      "icon": "📚",
+      "title": "2. The Rules: Arithmetic with Complex Numbers",
+      "content": "• **Addition:** Add real parts together, add imaginary parts together. (3+2i) + (1+4i) = 4+6i.\n• **Subtraction:** Same idea but subtract. (3+2i) - (1+4i) = 2-2i.\n• **Multiplication:** Use FOIL, remembering i^2 = -1. (2+3i)(1+i) = 2+2i+3i+3i^2 = 2+5i-3 = -1+5i.\n• **Conjugate:** The conjugate of a+bi is a-bi. You flip the sign of the imaginary part."
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: Division and the Conjugate",
-      "content": "Adding and multiplying complex numbers is just like normal algebra. But DIVISION is weird. You aren't allowed to leave an 'i' in the denominator of a fraction. To destroy it, we use the **Complex Conjugate**:\n\n1. Look at the bottom of the fraction (e.g., 3 + 2i).\n2. Find its conjugate by flipping the sign of the middle imaginary part (it becomes 3 - 2i).\n3. Multiply BOTH the top and the bottom of the fraction by this conjugate.\n4. When you FOIL the bottom, the middle 'i' terms will beautifully cancel out, and the i� will turn into a -1, leaving you with a perfectly real number on the bottom!"
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Finding the Modulus",
+      "content": "The **Modulus** of a complex number z = a + bi is its distance from the origin.\n\n1. Use the formula: |z| = sqrt(a^2 + b^2).\n2. Square the real part.\n3. Square the imaginary part (just the coefficient, not the i).\n4. Add them together.\n5. Take the square root.\n\nThis is essentially Pythagoras' Theorem on the complex plane!"
     },
     {
-      "icon": "??",
+      "icon": "📝",
       "title": "4. Worked Example: Multiplying Complex Numbers",
-      "content": "Expand and simplify: **(2 + 3i)(4 - i)**\n\n� **First:** 2 � 4 = **8**\n� **Outer:** 2 � -i = **-2i**\n� **Inner:** 3i � 4 = **+12i**\n� **Last:** 3i � -i = **-3i�**\n� **Combine:** We have 8 + 10i - 3i�.\n� **The Magic Trick:** We know i� is actually -1! So -3(-1) becomes +3.\n� **Final Step:** 8 + 10i + 3. Add the real numbers together.\n\n**Final Answer: 11 + 10i**"
+      "content": "Calculate (3 + 2i)(4 - i).\n\n**Step 1 (FOIL):**\nFirst: 3 * 4 = 12\nOuter: 3 * (-i) = -3i\nInner: 2i * 4 = 8i\nLast: 2i * (-i) = -2i^2\n\n**Step 2:** Combine: 12 - 3i + 8i - 2i^2\n**Step 3:** Since i^2 = -1: -2(-1) = +2\n**Step 4:** 12 + 2 + 5i = **14 + 5i**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "The classic mistake happens when finding the 'Modulus' (length) of a complex number, written as |z|. The formula is v(a� + b�). Notice there is NO 'i' in that formula! If z = 3 - 4i, students often plug in (-4i) and square it, resulting in 16i�, which becomes -16, ruining the whole calculation. **'b' is just the coefficient!** It is just the -4. You square -4 to get 16. Never put the 'i' into the modulus formula!"
+      "content": "The single most common error: forgetting that i^2 = -1, not +1! When you multiply 2i * 3i, you get 6i^2 = 6(-1) = -6, NOT +6. Every time you see i^2 in your working, immediately replace it with -1. If you miss this step, your real and imaginary parts will both be wrong."
     }
   ]
 }

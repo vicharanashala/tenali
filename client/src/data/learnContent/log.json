@@ -1,30 +1,30 @@
 {
-  "title": "Logarithms: The Power Hunters",
+  "title": "Logarithms: The Power Inverter",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: Finding the Missing Power",
-      "content": "If I ask '10 to what power equals 100?', you instantly know the answer is 2 (because 10� = 100). But what if I ask '10 to what power equals 50?' That's incredibly hard! The answer is a messy decimal. A **Logarithm (Log)** is a magical mathematical tool designed specifically to hunt down missing powers. A Logarithm literally *is* a power."
+      "icon": "🔍",
+      "title": "1. The Core Concept: Asking the Reverse Question",
+      "content": "Exponents ask: '2 raised to what power gives 8?' The answer is 3 because 2^3 = 8. A **Logarithm** is just a fancy way of writing this question: **log base 2 of 8 = 3**. Logarithms reverse exponents. They're essential in science (earthquake scales, sound decibels, pH levels) because they compress enormous number ranges into manageable scales."
     },
     {
-      "icon": "??",
-      "title": "2. The Rules: The Circle of Life",
-      "content": "Every Logarithm equation can be translated into a normal Exponent equation using the 'Circle of Life' motion:\n\n� The equation **Log2(8) = 3** means 'The Base 2, raised to the Power of 3, equals 8'.\n� Start at the tiny base (2), circle around to the answer (3), and point back to the big number (8).\n� **2� = 8.** They are the exact same statement written in two different languages!"
+      "icon": "📚",
+      "title": "2. The Rules: The Three Log Laws",
+      "content": "• **Product Rule:** log(AB) = log(A) + log(B). Multiplication becomes addition!\n• **Quotient Rule:** log(A/B) = log(A) - log(B). Division becomes subtraction!\n• **Power Rule:** log(A^n) = n * log(A). Powers become multipliers!\n• Also: log(1) = 0 (always), and log base a of a = 1 (always)."
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: The Three Log Laws",
-      "content": "Because Logs ARE powers, they follow the exact same rules as Indices (exponents):\n\n1. **The Addition Law:** Log(A) + Log(B) = Log(A � B). (Adding logs means you multiply the insides).\n2. **The Subtraction Law:** Log(A) - Log(B) = Log(A � B). (Subtracting logs means you divide the insides).\n3. **The Power Drop:** Log(A�) = 3 � Log(A). If the inside number has a power, you are allowed to take that power and drop it to the very front of the log to multiply it!"
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Solving Log Equations",
+      "content": "To solve log equations:\n\n1. Use the log laws to combine or simplify.\n2. If log base a of x = b, then x = a^b (convert to exponential form).\n3. If you have logs on both sides, the arguments must be equal: log(A) = log(B) means A = B.\n4. Always check that your answer doesn't make you take the log of a negative number or zero!"
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: Expanding Logs",
-      "content": "Expand and simplify the expression: **Log(100x�)** (Assume Base 10).\n\n� **Step 1 (The Multiply Split):** The inside is 100 MULTIPLIED by x�. Using the Addition Law, we can split them apart: Log(100) + Log(x�).\n� **Step 2 (The Power Drop):** On the second term, drop the little 3 to the front: + 3Log(x).\n� **Step 3 (Solve the number):** What is Log10(100)? It asks '10 to what power is 100?'. The answer is 2!\n\n**Final Answer: 2 + 3Log(x)**"
+      "icon": "📝",
+      "title": "4. Worked Example: Simplify log2(32)",
+      "content": "What is log base 2 of 32?\n\n**Step 1:** Ask: '2 to what power gives 32?'\n**Step 2:** 2^1 = 2, 2^2 = 4, 2^3 = 8, 2^4 = 16, 2^5 = 32.\n**Step 3:** The answer is 5.\n\n**Final Answer: log base 2 of 32 = 5.**\n(Because 2^5 = 32.)"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "A catastrophic mistake is thinking that Log(A + B) is equal to Log(A) + Log(B). **THIS IS COMPLETELY FALSE!** You cannot distribute a Log like a normal algebraic bracket! Log(10 + 10) does NOT equal Log(10) + Log(10). The Log laws ONLY work when you are multiplying or dividing inside the bracket, or adding/subtracting completely separate Logs. Never distribute a Log over addition!"
+      "content": "The most devastating log mistake: thinking log(A + B) = log(A) + log(B). WRONG! The product rule says log(A * B) = log(A) + log(B). There is NO rule for log(A + B). You cannot split a log of a SUM. This mistake is so common that teachers call it 'The Log Trap'. Never break apart log(x + 5) into log(x) + log(5)!"
     }
   ]
 }

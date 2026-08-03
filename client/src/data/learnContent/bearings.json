@@ -1,30 +1,30 @@
 {
-  "title": "Bearings: Navigating the Seas",
+  "title": "Bearings: The Compass of Mathematics",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: The Pirate's Map",
-      "content": "If you are flying a plane or sailing a ship in the middle of a blank ocean, you can't just say 'turn left at the traffic light'. You need a universal system that everyone understands. **Bearings** are the exact mathematical angles used by pilots and sailors to navigate the globe. They tell you precisely what direction you are facing, based entirely on a compass pointing strictly to True North."
+      "icon": "🧭",
+      "title": "1. The Core Concept: Navigation by Numbers",
+      "content": "A bearing is a way to describe direction using a single number measured in degrees. Sailors, pilots, and hikers all use bearings to navigate. Instead of saying 'go slightly east of north', you say 'go on a bearing of 040 degrees'. It's precise, universal, and eliminates all confusion about direction."
     },
     {
-      "icon": "??",
-      "title": "2. The Rules: The Three Golden Rules of Bearings",
-      "content": "A bearing is not a normal geometry angle. It MUST obey three strict rules:\n\n� **Rule 1 (North):** You must ALWAYS measure starting from the North line (000�).\n� **Rule 2 (Clockwise):** You must ALWAYS measure the angle turning clockwise (to the right).\n� **Rule 3 (Three Digits):** You must ALWAYS write the answer using exactly 3 digits. An angle of 45� is completely wrong. It must be written as **045�**."
+      "icon": "📚",
+      "title": "2. The Rules: The Three Golden Laws",
+      "content": "Bearings ALWAYS follow three strict rules:\n\n• **Rule 1:** Always measure from NORTH (the 12 o'clock position).\n• **Rule 2:** Always measure CLOCKWISE.\n• **Rule 3:** Always write as a THREE-figure number (so 40 degrees becomes 040 degrees, and 5 degrees becomes 005 degrees)."
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: The Reverse Bearing",
-      "content": "If a ship sails from Island A to Island B on a bearing of 100�, what bearing must it sail to get BACK home? This is the most common exam question.\n\n1. **The 180� Trick:** A reverse bearing is just turning completely around, which is a half-circle (180�).\n2. **If the original bearing is LESS than 180�:** Add 180 to it. (e.g., 100� + 180� = 280�).\n3. **If the original bearing is MORE than 180�:** Subtract 180 from it. (e.g., if you sailed out at 300�, you sail back at 300 - 180 = 120�).\n*(Why? Because you can't have an angle bigger than 360!)*"
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Finding a Bearing",
+      "content": "To find the bearing of point B from point A:\n\n1. Stand at point A and draw a line pointing directly NORTH (straight up).\n2. Draw a line from A to B.\n3. Measure the angle CLOCKWISE from the North line to the line AB.\n4. Write the answer as three digits.\n\nTo find the RETURN bearing (B back to A), add or subtract 180 degrees."
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: Finding the Home Path",
-      "content": "You walk from the Camp to the Lake on a bearing of **065�**. What is the bearing of the Camp FROM the Lake?\n\n� **Step 1:** The word 'FROM' is critical. We are now standing at the Lake, looking backwards at the Camp.\n� **Step 2:** We need a reverse bearing. Look at the original number (065�).\n� **Step 3:** Since 65 is less than 180, we must ADD 180 to it to turn completely around.\n� **Step 4:** 65 + 180 = 245.\n\n**Final Answer: The bearing is 245�.**"
+      "icon": "📝",
+      "title": "4. Worked Example: Return Bearings",
+      "content": "The bearing of B from A is 130 degrees. Find the bearing of A from B.\n\n**Step 1:** The original bearing is 130.\n**Step 2:** Since 130 < 180, we ADD 180.\n**Step 3:** 130 + 180 = 310.\n\n**Final Answer: The bearing of A from B is 310 degrees.**\n(If the result were > 360, you'd subtract 360.)"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "The deadliest trap in Bearings is failing to read the word **'FROM'**. The question will say: 'Find the bearing of Town A FROM Town B.' Students will instantly draw a North line at Town A, measure the angle to B, and write it down. **WRONG!** The word 'FROM' tells you exactly where you are standing. You are standing at Town B! You must draw the North line at Town B and measure the angle looking toward Town A. Always stand at 'FROM'!"
+      "content": "Two deadly mistakes: (1) Measuring ANTICLOCKWISE instead of clockwise. Bearings are ALWAYS clockwise from North. (2) Writing a two-digit answer like '40' instead of '040'. Bearings must ALWAYS be three digits. An examiner will mark you wrong for writing 40 instead of 040, even though mathematically they're the same number!"
     }
   ]
 }

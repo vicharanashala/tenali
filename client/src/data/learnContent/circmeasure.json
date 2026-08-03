@@ -2,29 +2,29 @@
   "title": "Circular Measure: Radians and Arcs",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: The Natural Angle",
-      "content": "Why are there 360 degrees in a circle? Because ancient Babylonians loved the number 60. It's completely made up! In advanced mathematics and physics, using 360� breaks down. We need a 'natural' way to measure angles based on the circle itself. Enter the **Radian**. One Radian is the exact angle created when you take a piece of the circle's edge (the arc) that is exactly the same length as the circle's radius. It is the purest way to measure a spin."
+      "icon": "🌀",
+      "title": "1. The Core Concept: A New Way to Measure Angles",
+      "content": "Degrees are great for everyday life, but in advanced math and physics, there's a more natural unit called the **Radian**. One radian is the angle you get when you wrap the radius of a circle along its circumference. A full circle is 2*pi radians (about 6.28 radians), which equals 360 degrees."
     },
     {
-      "icon": "p",
-      "title": "2. The Rules: The Pi Connection",
-      "content": "� A full circle is 360�. In radians, a full circle is exactly **2p**.\n� A half-circle is 180�. In radians, a half-circle is exactly **p**.\n� **Conversion Rule:** To turn Degrees into Radians, multiply by (p / 180). \n� **Conversion Rule:** To turn Radians into Degrees, multiply by (180 / p).\nCalculus only works if you use Radians. If you try to integrate Sine or Cosine using degrees, the math literally explodes."
+      "icon": "📚",
+      "title": "2. The Rules: Converting Between Degrees and Radians",
+      "content": "The key conversion factors:\n\n• **Degrees to Radians:** Multiply by pi/180.\n• **Radians to Degrees:** Multiply by 180/pi.\n• **Arc Length** = r * theta (where theta is in radians).\n• **Sector Area** = (1/2) * r^2 * theta (where theta is in radians).\n\nRemember: pi radians = 180 degrees. This single fact unlocks everything."
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: Arc Length and Sector Area",
-      "content": "The beautiful thing about radians is that it makes formulas incredibly simple and clean. (No more messy 'angle / 360' fractions!).\n\n1. **Arc Length (The Crust):** If the angle ? is in radians, the formula for the length of the crust is simply **s = r?** (Radius � Angle).\n2. **Sector Area (The Pizza Slice):** If ? is in radians, the formula for the area of the slice is simply **Area = �r�?**.\n3. **Warning:** If your angle is in degrees, you CANNOT use these clean formulas. You must convert to radians first!"
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Finding Arc Length",
+      "content": "To find the arc length of a sector:\n\n1. Make sure the angle is in RADIANS. If it's in degrees, convert it first.\n2. Use the formula: Arc Length = r * theta.\n3. Multiply the radius by the angle in radians.\n4. That's it! The formula is beautifully simple when you use radians."
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: The Perfect Slice",
-      "content": "A pizza has a radius of 10cm. A slice has an angle of 1.5 radians. Find the area of the slice, and the length of its crust.\n\n� **Step 1 (The Crust):** Use s = r?. \n� **Step 2:** s = 10 � 1.5 = **15cm**. The crust is 15cm long.\n� **Step 3 (The Area):** Use Area = �r�?.\n� **Step 4:** Area = 0.5 � (10)� � 1.5\n� **Step 5:** Area = 0.5 � 100 � 1.5 = 50 � 1.5 = **75cm�**.\n\n**Final Answer: Crust is 15cm, Area is 75cm�.**"
+      "icon": "📝",
+      "title": "4. Worked Example: Sector Area",
+      "content": "Find the area of a sector with radius 6cm and angle pi/3 radians.\n\n**Step 1:** r = 6, theta = pi/3.\n**Step 2:** Area = (1/2) * r^2 * theta = (1/2) * 36 * (pi/3).\n**Step 3:** = (1/2) * 36 * 1.047 = 18.85 cm^2.\n\n**Final Answer: Area = 6*pi = 18.85 cm^2 (2 d.p.)**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "The calculator trap claims thousands of victims every year. If you are solving a trig equation like Sin(1.2) = x, and 1.2 is an angle in RADIANS, you must physically change your calculator mode from 'D' (Degrees) to 'R' (Radians). If you leave it in Degrees, your calculator will assume you mean a tiny 1.2 degrees, and give you a wildly incorrect answer. **Always check the tiny letter at the top of your calculator screen!**"
+      "content": "The absolute deadliest mistake: using the arc length or sector area formula with an angle in DEGREES instead of RADIANS. If the question gives you 60 degrees, you MUST convert to pi/3 radians before plugging into r*theta or (1/2)*r^2*theta. If you use 60 directly, your answer will be catastrophically wrong."
     }
   ]
 }

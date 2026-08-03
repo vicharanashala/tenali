@@ -1,30 +1,30 @@
 {
-  "title": "Decimals Gym: Precision Under Pressure",
+  "title": "Gym Decimals: Signed Multiplication",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: The Moving Target",
-      "content": "The Decimals Gym tests your ability to track the decimal point without losing your mind. In the real world, misplacing a decimal point by one spot means giving a patient 10x the dose of medicine, or building a bridge that is 10x too short! This gym trains absolute precision."
+      "icon": "➖",
+      "title": "1. The Core Concept: Positive and Negative Decimals",
+      "content": "This gym drills you on multiplying decimals that can be positive OR negative. It's not just about the decimal arithmetic; it's about keeping track of signs. In real-world applications (like temperatures, bank balances, and coordinates), you constantly deal with signed numbers. This workout makes you bulletproof."
     },
     {
-      "icon": "??",
-      "title": "2. The Strategy: The Multiplication Hop",
-      "content": "When multiplying decimals (e.g., 0.05 � 0.4), do NOT try to do the decimal math in your head. \n\n1. Strip the decimals away: Just see '5 � 4'.\n2. Calculate the whole numbers: 5 � 4 = 20.\n3. Count the total invisible hops: 0.05 has 2 hops. 0.4 has 1 hop. Total = 3 hops.\n4. Take your '20' and hop the decimal point 3 spaces LEFT. \n5. Answer: 0.020 (which is 0.02)."
+      "icon": "📚",
+      "title": "2. The Rules: Sign Rules for Multiplication",
+      "content": "The sign rules are simple but students constantly mess them up:\n\n• **Positive x Positive = Positive** (+2.5 x +3 = +7.5)\n• **Negative x Negative = Positive** (-2.5 x -3 = +7.5)\n• **Positive x Negative = Negative** (+2.5 x -3 = -7.5)\n• **Negative x Positive = Negative** (-2.5 x +3 = -7.5)\n\nSame signs = positive. Different signs = negative."
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: The Division Trick",
-      "content": "Dividing by a decimal (like 12 � 0.2) is horrifying. The trick? Eliminate the decimal entirely!\n\n1. You are allowed to multiply BOTH numbers by 10, and the answer will remain exactly the same!\n2. Multiply 0.2 by 10 to turn it into a normal '2'.\n3. You MUST multiply the 12 by 10 as well, making it 120.\n4. The new question is 120 � 2. That's incredibly easy: 60!"
+      "icon": "🛠️",
+      "title": "3. The Method: Separate Sign from Value",
+      "content": "To multiply signed decimals:\n\n1. First, determine the sign of the answer (same signs = +, different = -).\n2. Then ignore the signs and multiply the absolute values as normal decimals.\n3. Apply the sign you determined in step 1.\n4. Count decimal places to position the decimal point correctly."
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: Mental Division",
-      "content": "Mentally calculate: **4.5 � 0.09**\n\n� **Step 1:** The enemy is 0.09. To turn it into a normal '9', we must hop the decimal two spaces (multiply by 100).\n� **Step 2:** We MUST multiply 4.5 by 100 as well to keep it fair. Hop its decimal two spaces right: 4.5 becomes 450.\n� **Step 3:** The new equation is 450 � 9.\n� **Step 4:** Since 45 � 9 = 5, then 450 � 9 = 50.\n\n**Final Answer: 50.**"
+      "icon": "📝",
+      "title": "4. Worked Example: -0.6 x -0.8",
+      "content": "**Step 1 (Sign):** Both negative, so answer is POSITIVE.\n**Step 2 (Values):** 6 x 8 = 48.\n**Step 3 (Decimal places):** 0.6 has 1 place, 0.8 has 1 place. Total = 2 places.\n**Step 4:** Place decimal: 0.48.\n**Step 5:** Apply sign: +0.48.\n\n**Final Answer: -0.6 x -0.8 = 0.48**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "When ADDING decimals under time pressure, students often right-align the numbers instead of aligning the decimal points! If you add 4.2 and 1.35, and you right-align them so the 2 is above the 5, you will get 5.55. **WRONG!** You MUST stack the decimal dots perfectly vertically. 4.20 + 1.35 = 5.55 is correct. (Wait, let me fix that: 4.2 + 1.35. Right aligned makes the 2 and 5 touch, 1 and 3 touch, getting 1.77. The correct answer is 4.20 + 1.35 = 5.55! Always line up the dots!)"
+      "content": "The most common error: getting the sign wrong on negative x negative. Students see two negatives and think the answer must be negative. But negative x negative = POSITIVE! Think of it as: 'I owe you a debt, and I'm taking that debt away from you, so you gain money.' Double negatives cancel out."
     }
   ]
 }

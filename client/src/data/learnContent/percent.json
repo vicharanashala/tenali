@@ -1,30 +1,30 @@
 {
-  "title": "Percentages: The Hundredth Rule",
+  "title": "Percentages: The Universal Comparison Tool",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: The Universal Standard",
-      "content": "If one student gets 14/20 on a test, and another gets 38/50, who did better? It's hard to compare them because the total marks are different! **Percentages** fix this by forcing every single test in the world to be graded out of 100. 'Percent' translates to 'per 100'. By translating fractions into a standard out of 100, we can instantly compare any two things fairly."
+      "icon": "📊",
+      "title": "1. The Core Concept: Parts Per Hundred",
+      "content": "**Percent** literally means 'per hundred'. So 45% means '45 out of every 100'. Percentages are the universal language for comparing things fairly. If one school has 50 A-students out of 200, and another has 80 out of 400, which is better? Both are 25%! Percentages let you compare things that have different totals."
     },
     {
-      "icon": "??",
-      "title": "2. The Rules: The Decimal Conversion",
-      "content": "Percentages are useless for actual calculations; they must be transformed into Decimals first.\n\n� **Percentage to Decimal:** Divide by 100. (Move the decimal point two spots to the left). 45% becomes 0.45. \n� **The Danger Zone:** Single-digit percentages! 7% does NOT become 0.7. It becomes **0.07**. (0.7 is 70%!).\n� The word 'OF' in math means MULTIPLY. To find 20% OF 80, you calculate 0.20 � 80."
+      "icon": "📚",
+      "title": "2. The Rules: The Three Types of Percentage Problems",
+      "content": "• **Finding a percentage of a number:** 20% of 150 = 0.20 x 150 = 30.\n• **Finding what percentage one number is of another:** (30/150) x 100 = 20%.\n• **Finding the original after a percentage change:** If something increased by 20% to 60, the original = 60 / 1.20 = 50.\n\nThe decimal multiplier is key: 25% = 0.25, 130% = 1.30, 85% = 0.85."
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: Percentage Increase / Decrease",
-      "content": "If a  shirt increases in price by 15%, use the Multiplier Method:\n\n1. Start at 100%.\n2. If it's an INCREASE, add the percentage. (100 + 15 = 115%).\n3. If it's a DECREASE, subtract the percentage. (e.g., 20% off sale: 100 - 20 = 80%).\n4. Turn your new total into a decimal multiplier. (115% = 1.15).\n5. Multiply the original price by the multiplier! ( � 1.15)."
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Percentage Increase and Decrease",
+      "content": "To increase by a percentage:\n\n1. Convert the percentage to a decimal multiplier: increase by 15% = multiply by 1.15.\n2. Multiply the original by this multiplier.\n\nTo decrease by a percentage:\n1. Subtract from 1: decrease by 15% = multiply by 0.85.\n2. Multiply the original by this multiplier.\n\nThis is MUCH faster than calculating the percentage separately and adding/subtracting!"
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: Finding the Change",
-      "content": "A town's population was 8,000. It grew to 9,600. What was the percentage increase?\n\n� **Step 1 (Find the Change):** How much did it grow? 9,600 - 8,000 = 1,600 people.\n� **Step 2 (The Fraction):** Create a fraction: (Change � ORIGINAL Amount).\n� **Step 3 (Plug in):** 1600 � 8000.\n� **Step 4 (Calculate Decimal):** 1600 � 8000 = 0.20.\n� **Step 5 (Convert to %):** Multiply by 100. 0.20 � 100 = 20.\n\n**Final Answer: The population increased by 20%.**"
+      "icon": "📝",
+      "title": "4. Worked Example: Reverse Percentage",
+      "content": "A shirt costs Rs. 680 after a 15% discount. What was the original price?\n\n**Step 1:** 15% discount means the sale price is 85% of the original.\n**Step 2:** 85% as a multiplier = 0.85.\n**Step 3:** Original x 0.85 = 680.\n**Step 4:** Original = 680 / 0.85 = Rs. 800.\n\n**Final Answer: The original price was Rs. 800.**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "When calculating percentage change (like the town population above), the absolute most common mistake is putting the NEW number on the bottom of the fraction (1600 � 9600). This will give you 16.6%, which is completely wrong! **The bottom of the fraction MUST always be the ORIGINAL starting number.** Percentages are always a measure of how much the *original* thing changed."
+      "content": "The deadliest percentage trap: assuming you can reverse a percentage change by applying the same percentage. If a price INCREASES by 20% (from 100 to 120), then DECREASING by 20% gives 120 x 0.80 = 96, NOT 100! This is because 20% of 120 is bigger than 20% of 100. You must use the multiplier method to reverse percentage changes correctly."
     }
   ]
 }

@@ -1,30 +1,30 @@
 {
-  "title": "Statistics: Making Sense of Data",
+  "title": "Statistics: The Data Detective",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: The Story in the Numbers",
-      "content": "Imagine trying to understand the test scores of an entire country�millions of numbers staring back at you. It's impossible for a human brain to process. **Statistics** is the science of crushing mountains of raw data down into a few, powerful summary numbers that tell a clear story. It helps us find the 'average' experience, spot wild anomalies (outliers), and predict future trends. It is the math of reality."
+      "icon": "📊",
+      "title": "1. The Core Concept: Making Sense of Information",
+      "content": "If you survey 1,000 people about their salary, you get a giant, confusing list of numbers. **Statistics** is the science of boiling that massive list down into a few useful numbers that tell a story. It allows companies to spot trends, doctors to test vaccines, and scientists to prove their theories."
     },
     {
-      "icon": "??",
+      "icon": "📚",
       "title": "2. The Rules: The Three Averages",
-      "content": "When people say 'average', they usually mean the Mean. But there are actually three distinct types of averages, and choosing the right one is crucial:\n\n� **The Mean:** Add all numbers together and divide by how many there are. (Best for normal data, easily ruined by extreme outliers).\n� **The Median:** Line all the numbers up in order from smallest to largest, and pick the one exactly in the middle. (Best when dealing with wildly unfair data, like house prices).\n� **The Mode:** The number that appears the MOST often. (Best for non-numerical data, like finding the most popular shoe size in a store)."
+      "content": "• **Mean:** The mathematical average. Add all numbers, divide by how many there are.\n• **Median:** The middle number when arranged in order (if there are two middles, average them).\n• **Mode:** The most frequent number. (There can be no mode, or multiple modes).\n• **Range:** Highest number minus lowest number (measures spread, not average)."
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: Measuring the Spread (Range & IQR)",
-      "content": "Knowing the 'average' isn't enough. You need to know how scattered the data is! If the average temperature is 20�C, is it 20�C every day, or is it 40�C in summer and 0�C in winter? \n\n1. **The Range:** Simply subtract the lowest value from the highest value. This gives the total spread, but it's easily skewed by one crazy outlier.\n2. **The Interquartile Range (IQR):** This is much better. It measures the spread of the middle 50% of the data, ignoring the extreme highs and lows. \n3. **Find IQR:** Find the Median (Q2). Find the median of the lower half (Q1). Find the median of the upper half (Q3). Then do Q3 - Q1!"
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Mean from a Frequency Table",
+      "content": "If data is grouped in a table (e.g., Score x, Frequency f):\n\n1. Create a new column: multiply each score by its frequency (x * f).\n2. Sum the (x * f) column. This gives the total of all scores.\n3. Sum the frequency (f) column. This gives the total number of people.\n4. Mean = Sum of (x * f) / Sum of (f)."
     },
     {
-      "icon": "??",
+      "icon": "📝",
       "title": "4. Worked Example: Finding the Median",
-      "content": "Find the Median of this dataset: **12, 5, 20, 8, 15**\n\n� **Step 1 (The Trap):** Do NOT pick the middle number yet! You MUST put them in order first.\n� **Step 2 (Sort):** 5, 8, 12, 15, 20.\n� **Step 3 (Find the middle):** Cross one off each end until you hit the center. The number left perfectly in the middle is 12.\n*(Note: If there are TWO numbers left in the middle, you must add them together and divide by 2 to find the halfway point between them).*\n\n**Final Answer: The Median is 12.**"
+      "content": "Find the median of: 12, 7, 3, 14, 8, 9.\n\n**Step 1:** Order them from smallest to largest: 3, 7, 8, 9, 12, 14.\n**Step 2:** Count them. There are 6 numbers (an even amount).\n**Step 3:** The middle falls between the 3rd and 4th numbers (8 and 9).\n**Step 4:** Average the two middle numbers: (8 + 9) / 2 = 8.5.\n\n**Final Answer: The median is 8.5.**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "When calculating the Mean from a **Frequency Table** (a table that says, for example, a score of 5 happened 4 times), students always make a massive error. They just add up the score column (1+2+3+4+5) and divide it. **WRONG!** You have to multiply the score by its frequency first! If a score of 5 happened 4 times, that's worth 20 points in total. You must create an 'f � x' column, add that up, and divide by the total frequency."
+      "content": "The most common frequency table mistake: dividing by the number of ROWS instead of the total FREQUENCY. If a table has 5 rows showing scores of 20 students, the mean is the total score divided by 20. But students often divide by 5! Always divide by the sum of the frequency column, which represents the actual number of people or items."
     }
   ]
 }

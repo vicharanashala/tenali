@@ -1,30 +1,30 @@
 {
-  "title": "Inequalities: The Boundaries of Math",
+  "title": "Inequalities: The Flexible Equation",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: More Than One Answer",
-      "content": "An equation like x = 5 is a sniper rifle; it has exactly one perfect target. An **Inequality** like x > 5 is a shotgun; it covers a massive, infinite area! It means x can be 6, 7, 100, or a million. Inequalities are used when we have limits, like a rollercoaster sign saying 'You must be taller than 120cm to ride' (Height > 120)."
+      "icon": "⚖️",
+      "title": "1. The Core Concept: Not Always Equal",
+      "content": "Equations (=) demand perfection: x MUST be exactly 5. But **Inequalities** are flexible. They say things like 'x must be MORE than 3' (x > 3) or 'x can be anything up to 10' (x <= 10). In real life, inequalities are everywhere: speed limits (v <= 60), minimum ages (age >= 18), and budget constraints (cost < 500)."
     },
     {
-      "icon": "??",
-      "title": "2. The Rules: The Crocodile Mouth",
-      "content": "� **> (Greater Than):** The mouth is open to the left. The left side is bigger. (e.g., 10 > 5).\n� **< (Less Than):** The mouth points to the left. The left side is smaller. (e.g., 2 < 8).\n� **= or =:** If there is a line underneath, it means 'or equal to'. You are allowed to be exactly that number.\n*(Trick: The crocodile always eats the bigger number!)*"
+      "icon": "📚",
+      "title": "2. The Rules: The Four Symbols",
+      "content": "Master these four:\n\n• **>** means 'greater than' (strict, not equal).\n• **<** means 'less than' (strict, not equal).\n• **>=** means 'greater than or equal to'.\n• **<=** means 'less than or equal to'.\n\nThe critical rule: if you MULTIPLY or DIVIDE both sides by a NEGATIVE number, you must FLIP the inequality sign! (e.g., > becomes <)."
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: Solving like Equations",
-      "content": "You solve inequalities almost exactly the same way you solve normal algebra equations. You use inverse operations to get 'x' by itself.\n\n1. Move the loose numbers first by adding or subtracting to both sides.\n2. Move the attached numbers by multiplying or dividing both sides.\n3. Keep the inequality symbol exactly where it is... **UNLESS you trigger the Golden Trap!**"
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Solving Inequalities",
+      "content": "Solve inequalities exactly like equations, with one extra rule:\n\n1. Use inverse operations to isolate x (same as equations).\n2. If you multiply or divide by a POSITIVE number, the sign stays the same.\n3. If you multiply or divide by a NEGATIVE number, FLIP the sign!\n4. Express the solution as a range (e.g., x > 3) or on a number line."
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: The Golden Trap",
-      "content": "Solve: **-3x > 12**\n\n� **Step 1:** The -3 is attached to the x by multiplication. To get x alone, we must divide both sides by -3.\n� **Step 2 (The Trap):** We are dividing by a NEGATIVE number. The Golden Rule of Inequalities states that whenever you multiply or divide by a negative number, the entire universe flips upside down! You MUST flip the symbol to face the other way!\n� **Step 3:** 12 � -3 = -4. \n� **Step 4 (Flip):** The > becomes a <.\n\n**Final Answer: x < -4**"
+      "icon": "📝",
+      "title": "4. Worked Example: Solve -2x + 4 > 10",
+      "content": "**Step 1:** Subtract 4 from both sides: -2x > 6.\n**Step 2:** Divide both sides by -2. Since we're dividing by a NEGATIVE, FLIP the sign!\n**Step 3:** x < -3.\n\n**Final Answer: x < -3.** (All numbers less than -3 satisfy this inequality.)"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "Forgetting to flip the symbol when dividing by a negative is the number one reason students fail this topic. Let's prove why it's necessary: We know that 10 > 5. If we divide both sides by -1, we get -10 and -5. If we don't flip the symbol, it says -10 > -5. That is completely false! -10 is colder and smaller than -5. We MUST flip the symbol to make it true: -10 < -5. Always flip the mouth when crossing over to the negative side!"
+      "content": "The absolute number one mistake: forgetting to FLIP the inequality sign when dividing by a negative! If -2x > 6, dividing by -2 gives x < -3, NOT x > -3. This single rule is responsible for more lost marks than any other concept in inequalities. Write 'FLIP!' in big letters next to any step where you divide by a negative number."
     }
   ]
 }

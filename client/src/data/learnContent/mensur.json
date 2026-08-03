@@ -1,30 +1,30 @@
 {
-  "title": "Mensuration: Measuring 2D & 3D Space",
+  "title": "Mensuration: Measuring Shapes",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: The World Builders",
-      "content": "If you want to paint your bedroom walls, fill a swimming pool with water, or wrap a birthday present, you are doing **Mensuration**. It is the mathematical measurement of 2D shapes (finding their Perimeter and Area) and 3D solids (finding their Surface Area and Volume). It's the ultimate bridge between abstract math and physical reality!"
+      "icon": "📐",
+      "title": "1. The Core Concept: Area, Volume, and Surface Area",
+      "content": "**Mensuration** is the branch of math concerned with measuring geometric shapes. How much paint do you need to cover a wall (area)? How much water can a tank hold (volume)? How much wrapping paper to cover a gift box (surface area)? Mensuration gives you the formulas to answer all these practical questions."
     },
     {
-      "icon": "??",
-      "title": "2. The Rules: The Big Three Concepts",
-      "content": "You must clearly separate these three concepts in your mind:\n\n� **Perimeter (1D):** The total distance walking around the outside edge of a shape. Measured in flat units (cm, m).\n� **Area (2D):** The amount of flat space a shape takes up (like a carpet on the floor). Measured in square units (cm�, m�).\n� **Volume (3D):** The amount of 3D space inside a solid object (how much water it can hold). Measured in cubic units (cm�, m�)."
+      "icon": "📚",
+      "title": "2. The Rules: Essential Formulas",
+      "content": "• **Circle:** Area = pi * r^2, Circumference = 2 * pi * r.\n• **Cylinder:** Volume = pi * r^2 * h, Surface Area = 2*pi*r*(r+h).\n• **Sphere:** Volume = (4/3)*pi*r^3, Surface Area = 4*pi*r^2.\n• **Cone:** Volume = (1/3)*pi*r^2*h, Slant Surface = pi*r*l.\n• **Prism:** Volume = Base Area x Height."
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: The Prism Secret",
-      "content": "A 'Prism' is a 3D shape that looks exactly the same all the way through, like a Toblerone box (triangular prism) or a soda can (cylinder). There is a master cheat-code formula to find the volume of ANY prism in the universe:\n\n1. **Find the Face (Cross-Section):** Identify the front face of the shape (the part that stays exactly the same if you sliced it like a loaf of bread).\n2. **Calculate the 2D Area:** Use normal 2D formulas (Area of a triangle, Area of a circle) to find the area of just that front face.\n3. **Multiply by the Length:** Take that 2D area, and multiply it by how 'deep' or 'long' the 3D shape goes.\n\n**Master Formula:** Volume = Area of Cross-Section � Length"
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Composite Shapes",
+      "content": "Many exam questions combine shapes. For composite shapes:\n\n1. Break the shape into simpler components (rectangles, triangles, semicircles).\n2. Calculate the area/volume of each component separately.\n3. Add them together (if the shape is a combination) or subtract (if there's a cutout).\n4. Always double-check your units: cm^2 for area, cm^3 for volume."
     },
     {
-      "icon": "??",
+      "icon": "📝",
       "title": "4. Worked Example: Volume of a Cylinder",
-      "content": "Find the volume of a cylinder (a soda can). The circle on top has a radius of 3cm. The can is 10cm tall.\n\n� **Step 1 (Find the Face):** The face of a cylinder is a Circle.\n� **Step 2 (Area of the Face):** The formula for a circle is Area = pr�. So, Area = p � 3� = 9p. (Which is roughly 28.27 cm�).\n� **Step 3 (Multiply by Length):** The can goes 10cm deep (tall). So multiply the face area by 10.\n� **Step 4:** 28.27 � 10 = 282.7.\n\n**Final Answer: The volume is 282.7 cm�.**"
+      "content": "Find the volume of a cylinder with radius 5cm and height 12cm.\n\n**Step 1:** Formula: V = pi * r^2 * h.\n**Step 2:** V = pi * 25 * 12.\n**Step 3:** V = 300 * pi.\n**Step 4:** V = 942.48 cm^3 (2 d.p.).\n\n**Final Answer: Volume = 300*pi = 942.48 cm^3.**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "The absolute classic trap in Mensuration is the **Units Trap**. The question will say 'A rectangular room is 4 meters long and 300 centimeters wide. Find the area.' Students immediately do 4 � 300 = 1200. **WRONG!** You cannot multiply meters by centimeters! You must convert them to the exact SAME unit before you do any math. Change the 300cm into 3m. Then do 4m � 3m = 12m�."
+      "content": "The most brutal mensuration mistake: confusing radius with diameter! If a question says 'the diameter is 10cm', the radius is 5cm. Using 10 in place of r in pi*r^2 gives you 100*pi instead of 25*pi. Your answer will be 4 times too large! Always check: are they giving you the radius (r) or the diameter (d = 2r)?"
     }
   ]
 }

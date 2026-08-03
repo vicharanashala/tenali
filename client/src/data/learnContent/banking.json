@@ -1,30 +1,30 @@
 {
-  "title": "Banking & Interest: Making Money Work",
+  "title": "Banking & Recurring Deposits: Growing Your Money",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: The Price of Money",
-      "content": "When you put money in a bank, you aren't just storing it; you are actually *lending* it to the bank! Because they are using your money, they pay you a 'thank you' fee called **Interest**. Conversely, if you borrow money for a car, you must pay the bank an extra fee. Understanding how interest grows is the single most important math skill for building real wealth and avoiding massive debt in your adult life."
+      "icon": "🏦",
+      "title": "1. The Core Concept: Money That Makes Money",
+      "content": "When you deposit money in a bank, the bank pays you a small reward called **interest** for letting them use your money. A **Recurring Deposit (RD)** is when you deposit a fixed amount every month (like Rs. 500/month). Over time, each deposit earns interest, and the total grows much bigger than what you put in. It's like planting seeds every month and watching a forest grow."
     },
     {
-      "icon": "??",
-      "title": "2. The Rules: Simple vs. Compound",
-      "content": "There are two entirely different ways interest can grow:\n\n� **Simple Interest (The Slow Burn):** You only ever earn interest on the original starting amount. If you put in  and earn  a year, you will get exactly  every single year forever. It grows in a boring, straight line.\n� **Compound Interest (The Snowball):** You earn interest on your starting amount AND on the interest you earned previously! It's like a snowball rolling down a hill, gathering more and more snow, growing faster and faster every year. This is how millionaires are made."
+      "icon": "📚",
+      "title": "2. The Rules: Simple Interest on RD",
+      "content": "For Recurring Deposits, interest is calculated using a special formula:\n\n• **Interest = P x n(n+1) / (2 x 12) x r/100**\n• P = monthly installment amount\n• n = number of months\n• r = annual rate of interest\n• **Maturity Value = Total deposits + Interest = (P x n) + Interest**"
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: The Compound Formula",
-      "content": "To calculate Compound Interest, we use a powerful formula: **Total = P � (Multiplier)n**\n\n1. **Find 'P' (Principal):** This is your starting amount of money.\n2. **Create the Multiplier:** Start with 100%. Add the interest rate (e.g., 5% interest makes 105%). Convert that to a decimal by dividing by 100 (105 � 100 = **1.05**). This is your multiplier!\n3. **Find 'n' (Time):** This is the number of years the money is sitting in the bank.\n4. **Calculate:** Plug it all into a calculator: Starting Money � Multiplier to the power of Years!"
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Calculating RD Interest",
+      "content": "Follow this process:\n\n1. Write down P (monthly deposit), n (number of months), and r (annual rate).\n2. Calculate n(n+1)/2 first. This represents the sum of months.\n3. Multiply: P x [n(n+1)/2] x (1/12) x (r/100).\n4. This gives you the total interest earned.\n5. Add the interest to total deposits (P x n) to get the Maturity Value."
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: The 3-Year Investment",
-      "content": "You invest  in a bank account that pays 4% Compound Interest per year. How much money will you have in total after 3 years?\n\n� **Step 1 (Principal):** P = .\n� **Step 2 (Multiplier):** 100% + 4% = 104%. As a decimal, the multiplier is **1.04**.\n� **Step 3 (Time):** The time 'n' is 3 years.\n� **Step 4 (The Equation):** Total = 2000 � (1.04)�\n� **Step 5 (Calculate):** 2000 � 1.124864 = 2249.728.\n\n**Final Answer: You will have ,249.73 (always round money to 2 decimal places!).**"
+      "icon": "📝",
+      "title": "4. Worked Example: RD Calculation",
+      "content": "Rahul deposits Rs. 500 per month for 24 months at 10% per annum.\n\n**Step 1:** P = 500, n = 24, r = 10.\n**Step 2:** n(n+1)/2 = 24 x 25 / 2 = 300.\n**Step 3:** Interest = 500 x 300 x (1/12) x (10/100) = 500 x 300 x 0.00833 = Rs. 1250.\n**Step 4:** Total deposited = 500 x 24 = Rs. 12,000.\n**Step 5:** Maturity Value = 12,000 + 1,250 = **Rs. 13,250.**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "When asked 'How much INTEREST was earned?', students often use the formula, get an answer like ,249.73, and just write that down as their final answer. **Wrong!** That number is the TOTAL amount in the bank account! The question only asked for the *interest* (the extra free money). You must take your final total and SUBTRACT your original starting money. (,249.73 -  = .73). The interest earned was only .73! Read the question carefully!"
+      "content": "The most devastating mistake is forgetting to divide by 12! The rate 'r' is given per YEAR, but the deposits are MONTHLY. If you skip the /12 step, your interest calculation will be 12 times too large. Also, students often confuse n(n+1) with n^2. They are NOT the same! For n=24, n^2 is 576 but n(n+1) is 600."
     }
   ]
 }

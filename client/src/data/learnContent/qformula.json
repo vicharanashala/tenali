@@ -2,29 +2,29 @@
   "title": "The Quadratic Formula: The Ultimate Weapon",
   "blocks": [
     {
-      "icon": "??",
+      "icon": "🚀",
       "title": "1. The Core Concept: The Unbreakable Equation",
-      "content": "A quadratic equation is any equation where the highest power of 'x' is 2, like **ax� + bx + c = 0**. When graphed, it creates a beautiful U-shaped curve called a parabola. Sometimes, these equations are easy to solve by factoring (finding two numbers that multiply and add to certain values). But what happens when the numbers are ugly decimals or fractions? That's where the **Quadratic Formula** comes in. It is the ultimate weapon�a master key that can solve *any* quadratic equation in the universe, no matter how nasty the numbers are."
+      "content": "A quadratic equation is any equation where the highest power of 'x' is 2, like **ax^2 + bx + c = 0**. When graphed, it creates a beautiful U-shaped curve called a parabola. Sometimes, these equations are easy to solve by factoring. But what happens when the numbers are ugly decimals or fractions? That's where the **Quadratic Formula** comes in. It is the ultimate weapon that can solve ANY quadratic equation in the universe."
     },
     {
-      "icon": "??",
+      "icon": "📚",
       "title": "2. The Rules: Memorizing the Magic",
-      "content": "To use the weapon, you must first memorize it. Say it out loud to the tune of 'Pop Goes the Weasel':\n\n**x = [ -b � v(b� - 4ac) ] / 2a**\n\n� **a** is the number attached to x�\n� **b** is the number attached to x\n� **c** is the lonely number at the end\n� The **�** symbol means you will actually get TWO answers (one using +, one using -)."
+      "content": "To use the weapon, you must first memorize it:\n\n**x = [-b +/- sqrt(b^2 - 4ac)] / 2a**\n\n• **a** is the number attached to x^2\n• **b** is the number attached to x\n• **c** is the lonely number at the end\n• The **+/-** symbol means you will actually get TWO answers (one using +, one using -)."
     },
     {
-      "icon": "??",
+      "icon": "🛠️",
       "title": "3. Step-by-Step: The Discriminant Trick",
-      "content": "The chunk of math sitting inside the square root, **(b� - 4ac)**, is incredibly special. It's called the **Discriminant**, and it acts like a crystal ball predicting the future of your graph:\n\n1. Calculate (b� - 4ac) first before doing the whole formula.\n2. If it's a **positive number**, the curve crosses the x-axis twice. You will have 2 real answers.\n3. If it's **exactly zero**, the curve just kisses the x-axis once. You will have exactly 1 answer.\n4. If it's a **negative number**, stop! You can't take the square root of a negative. The curve never touches the x-axis, meaning there are 0 real answers."
+      "content": "The chunk of math sitting inside the square root, **(b^2 - 4ac)**, is incredibly special. It's called the **Discriminant**, and it acts like a crystal ball predicting the future of your graph:\n\n1. Calculate (b^2 - 4ac) first before doing the whole formula.\n2. If it's a **positive number**, the curve crosses the x-axis twice. You will have 2 real answers.\n3. If it's **exactly zero**, the curve just kisses the x-axis once. You will have exactly 1 answer.\n4. If it's a **negative number**, stop! You can't take the square root of a negative. There are 0 real answers."
     },
     {
-      "icon": "??",
+      "icon": "📝",
       "title": "4. Worked Example: Solving the Puzzle",
-      "content": "Let's solve: **2x� - 5x - 3 = 0**\n\n� **Step 1:** Identify a = 2, b = -5, c = -3.\n� **Step 2:** Plug into the formula: x = [ -(-5) � v((-5)� - 4(2)(-3)) ] / 2(2)\n� **Step 3 (Clean it up):** -(-5) becomes positive 5. The bottom becomes 4.\n� **Step 4 (The root):** (-5)� is 25. And -4(2)(-3) is +24. So inside the root is 25 + 24 = 49.\n� **Step 5:** We now have: x = [ 5 � v49 ] / 4. Since v49 is 7, we have: x = [ 5 � 7 ] / 4\n� **Step 6 (Split the �):** \n   Path 1 (+): (5 + 7)/4 = 12/4 = **3**\n   Path 2 (-): (5 - 7)/4 = -2/4 = **-0.5**\n\n**Final Answers: x = 3, and x = -0.5**"
+      "content": "Let's solve: **2x^2 - 5x - 3 = 0**\n\n• **Step 1:** Identify a = 2, b = -5, c = -3.\n• **Step 2:** Plug into the formula: x = [-(-5) +/- sqrt((-5)^2 - 4(2)(-3))] / 2(2)\n• **Step 3:** -(-5) becomes 5. Bottom = 4. Inside root: 25 + 24 = 49.\n• **Step 4:** x = [5 +/- sqrt(49)] / 4 = [5 +/- 7] / 4.\n• **Step 5 (Split):**\n   Path 1 (+): (5 + 7)/4 = 12/4 = **3**\n   Path 2 (-): (5 - 7)/4 = -2/4 = **-0.5**\n\n**Final Answers: x = 3, and x = -0.5**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "Negative signs are the silent assassins of the Quadratic Formula. \nFirst, if 'b' is already negative (like -5), the formula asks for '-b', which flips it to a positive 5. Don't write -5! \nSecond, when calculating b�, remember that squaring a negative number ALWAYS makes it positive. (-5)� is +25, never -25. Keep your signs organized and you'll never fail."
+      "content": "Negative signs are the silent assassins of the Quadratic Formula. \nFirst, if 'b' is already negative (like -5), the formula asks for '-b', which flips it to a positive 5. Don't write -5! \nSecond, when calculating b^2, remember that squaring a negative number ALWAYS makes it positive. (-5)^2 is +25, never -25. Keep your signs organized and you'll never fail."
     }
   ]
 }

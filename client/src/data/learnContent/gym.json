@@ -1,30 +1,30 @@
 {
-  "title": "Math Gym: The Training Ground",
+  "title": "The Gym: Adaptive Math Workout",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: Repetition is Mastery",
-      "content": "You can read a hundred books about how to ride a bicycle, but until you actually get on one and pedal, you will fall over. Mathematics is exactly the same. Reading the theory (this Learn section) is only 20% of the battle. The other 80% is pure, relentless practice. The **Math Gym** is where you build the muscle memory required to survive high-pressure exams without panicking."
+      "icon": "🏋️",
+      "title": "1. The Core Concept: Cross-Training for Your Brain",
+      "content": "Just like a gym workout targets different muscle groups, the Math Gym targets different mathematical skills. It bundles together 7 different mini-games covering decimals, functions, dot products, fractions, linear equations, indices, and polynomials. The gym adapts to your level, making problems harder when you're succeeding and easier when you're struggling."
     },
     {
-      "icon": "??",
-      "title": "2. The Strategy: Time vs Perfection",
-      "content": "In the Gym, you have a timer. This mimics the stress of an exam room. Your goal is not just to get the answer right, but to get it right *efficiently*.\n\n� Don't guess just to be fast. A wrong answer wastes more time than a slow, correct answer.\n� Write down your working! Trying to hold 4 different numbers in your head is a guaranteed way to drop a negative sign and fail."
+      "icon": "📚",
+      "title": "2. The Strategy: Warm Up Then Push Hard",
+      "content": "Like any workout:\n\n• Start with topics you're comfortable with (warm-up).\n• Gradually move to harder challenges.\n• Don't skip topics you find difficult! That's where the growth happens.\n• Track your accuracy rates. Aim for 80%+ on each topic before moving on."
     },
     {
-      "icon": "??",
-      "title": "3. The Method: Analyzing Mistakes",
-      "content": "When you get an answer wrong in the Gym, DO NOT instantly skip to the next question! That is a wasted opportunity.\n\n1. Look at the correct answer provided.\n2. Look at your scribbled working.\n3. Find the exact line where your math went wrong (e.g., 'Ah, I added 3 instead of subtracting 3!').\n4. If you don't know why you got it wrong, come back to this Learn section immediately!"
+      "icon": "🛠️",
+      "title": "3. The Method: Rotation System",
+      "content": "The Gym cycles through different exercise types:\n\n1. **Decimals:** Signed decimal multiplication.\n2. **Functions:** Polynomial evaluation.\n3. **Dot Products:** 2D and 3D vector products.\n4. **Fractions:** Adding fractions with different denominators.\n5. **Linear Equations:** Solving for x.\n6. **Indices:** Applying index laws.\n7. **Polynomials:** Monomial algebra."
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: Building Stamina",
-      "content": "Just like lifting weights, don't start with the 100kg bar. \n\n� **Session 1:** Start with the topics you are confident in, just to get used to the timer and the interface.\n� **Session 2:** Pick one 'safe' topic, and one 'scary' topic.\n� **Session 3:** Full random mode. This forces your brain to instantly switch contexts, which is the exact skill required for a final exam."
+      "icon": "📝",
+      "title": "4. Pro Tip: Use It as Exam Prep",
+      "content": "The Gym is the perfect exam preparation tool because it:\n\n• Forces context switching between topics (just like a real exam).\n• Keeps you sharp on fundamentals.\n• Identifies weak areas automatically.\n• Builds speed and confidence under pressure."
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "The biggest danger in the Gym is 'Tilt' (a gaming term for getting angry and making worse mistakes). If you get 3 questions wrong in a row, your brain releases stress hormones that literally block your logical thinking pathways. If you are frustrated, **stop**. Close the gym. Breathe. Go do a different topic, or walk away for 5 minutes. You cannot learn math when you are angry."
+      "content": "Don't treat the Gym as a one-time activity! Mathematical fitness, like physical fitness, requires regular practice. Doing the gym once won't help. Aim for 15-20 minutes per day, 3-4 days per week. Consistency beats intensity. Also, don't just rush through problems. Quality matters more than quantity."
     }
   ]
 }

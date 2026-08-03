@@ -1,30 +1,30 @@
 {
-  "title": "General Knowledge: The Big Picture",
+  "title": "General Knowledge: The Genius Warm-Up",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: Connecting the Dots",
-      "content": "Math isn't just floating in a vacuum; it is the underlying code of the entire universe! General Knowledge (GK) in math means understanding *why* these formulas exist, who discovered them, and how they apply to physics, engineering, and everyday life. Knowing the history and context of math makes it 100x easier to remember the formulas."
+      "icon": "🌍",
+      "title": "1. The Core Concept: Beyond Mathematics",
+      "content": "**General Knowledge** isn't just trivia; it's the fuel for a curious mind. This section tests your awareness of the world: science, history, geography, current affairs, and logic. A well-rounded student doesn't just know formulas; they understand the world those formulas describe. GK questions sharpen your brain and improve your ability to think critically across subjects."
     },
     {
-      "icon": "???",
-      "title": "2. The Rules: The Giants of Math",
-      "content": "You should know the names of the giants whose shoulders we stand on:\n� **Pythagoras:** Ancient Greek who linked the sides of right triangles.\n� **Isaac Newton & Gottfried Leibniz:** The bitter rivals who both invented Calculus independently.\n� **Al-Khwarizmi:** The Persian scholar who literally invented Algebra (the word algebra comes from his book 'Al-Jabr')."
+      "icon": "📚",
+      "title": "2. The Strategy: Read Widely, Think Deeply",
+      "content": "GK can't be crammed overnight. Build it gradually:\n\n• Read newspapers or news apps for 10 minutes daily.\n• Watch educational videos on science and history.\n• Play quiz games with friends.\n• Keep a 'fact journal' where you write one interesting thing you learned each day."
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: Real World Application",
-      "content": "Whenever you learn a new math topic, ask yourself: 'Where is this used?'\n\n1. **Trigonometry:** Used in video game graphics (rendering 3D worlds on a 2D screen) and architecture.\n2. **Calculus:** Used in aerospace engineering to calculate rocket trajectories and fuel burn rates.\n3. **Matrices:** The absolute foundation of AI, Machine Learning, and Google's search algorithms!"
+      "icon": "🛠️",
+      "title": "3. The Method: Elimination Strategy",
+      "content": "When faced with a multiple-choice GK question you don't know:\n\n1. Eliminate obviously wrong options first.\n2. Look for clues in the question itself.\n3. Use logic and common sense.\n4. If two options are very similar, the answer is usually one of them.\n5. Never leave a question blank. An educated guess is better than nothing."
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: The Golden Ratio",
-      "content": "You've likely heard of the Fibonacci sequence (1, 1, 2, 3, 5, 8...), where you add the previous two numbers. But did you know if you divide a Fibonacci number by the one before it (e.g., 8/5 = 1.6), it gets closer and closer to a magical number called the **Golden Ratio (1.618...)**? This ratio appears in sunflower seeds, hurricane spirals, the Mona Lisa, and galaxy formations! Math is nature's DNA."
+      "icon": "📝",
+      "title": "4. Key Areas to Focus On",
+      "content": "The most commonly tested GK areas:\n\n• **Science:** Planets, elements, inventions, human body.\n• **Geography:** Countries, capitals, rivers, mountains.\n• **History:** Major events, famous leaders, dates.\n• **Current Affairs:** Recent discoveries, awards, sports.\n• **Logic:** Patterns, analogies, odd-one-out."
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "The biggest pitfall in math education is believing 'I'm never going to use this in real life.' While you might not use the Quadratic Formula to buy groceries, the *process* of learning it rewires your brain. Math teaches you how to break massive, impossible problems down into small, logical steps. It teaches resilience. You are literally upgrading your brain's processing power!"
+      "content": "The biggest GK trap: overconfidence! Students often rush through GK questions because they 'feel easy'. But the details matter. Confusing Mercury (planet) with Mercury (element), or mixing up 'latitude' and 'longitude' can cost you marks. Read every option carefully before selecting your answer."
     }
   ]
 }

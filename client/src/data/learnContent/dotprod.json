@@ -1,30 +1,30 @@
 {
-  "title": "Dot Product: Vector Collisions",
+  "title": "Dot Product: The Angle Finder",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: The Shadow Cast",
-      "content": "When two vectors (arrows) point in different directions, how much do they actually agree with each other? If you push a box North, and your friend pushes it East, your forces are completely independent. But if you both push North-East, your forces combine! The **Dot Product** (or Scalar Product) is a calculation that measures exactly how much one vector 'shadows' or overlaps another. It takes two directional arrows and crushes them down into a single, normal number."
+      "icon": "✴️",
+      "title": "1. The Core Concept: Multiplying Vectors",
+      "content": "When you multiply two numbers, you get a number. But what happens when you multiply two vectors? There are two ways. The **Dot Product** (scalar product) takes two vectors and produces a single number. This magical number tells you how much the two vectors point in the same direction. If the dot product is 0, the vectors are perpendicular (at 90 degrees)!"
     },
     {
-      "icon": "??",
-      "title": "2. The Rules: The Two Formulas",
-      "content": "There are two ways to calculate the Dot Product (A � B):\n\n� **The Component Way:** If you have the coordinates like A=[2, 3] and B=[4, 1], simply multiply the x's together, multiply the y's together, and add the results. (2�4) + (3�1) = 8 + 3 = 11.\n� **The Angle Way:** If you know their lengths and the angle (?) between them, use: **|A| � |B| � Cos(?)**. \nBoth formulas give you the exact same number! We often set them equal to each other to solve for the missing angle."
+      "icon": "📚",
+      "title": "2. The Rules: The Calculation",
+      "content": "For 2D vectors a = (a1, a2) and b = (b1, b2):\n\n• **a . b = a1*b1 + a2*b2** (multiply corresponding components, then add).\n• For 3D: a . b = a1*b1 + a2*b2 + a3*b3.\n• **a . b = |a| * |b| * cos(theta)** where theta is the angle between them.\n• If a . b = 0, the vectors are **perpendicular**."
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: The Perpendicular Test",
-      "content": "The greatest superpower of the Dot Product is its ability to instantly test if two lines are perfectly perpendicular (90� right angles) in 3D space.\n\n1. Calculate the Dot Product using the Component way (x1x2 + y1y2 + z1z2).\n2. Look at your final answer.\n3. **If the answer is exactly ZERO (0), the vectors are perpendicular!**\n4. Why? Because the Cosine of 90� is 0. So if the angle is 90�, the entire 'Angle Way' formula turns into zero. They cast no shadow on each other!"
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Finding the Angle Between Vectors",
+      "content": "1. Calculate a . b using the component formula.\n2. Calculate |a| = sqrt(a1^2 + a2^2) and |b| = sqrt(b1^2 + b2^2).\n3. Use cos(theta) = (a . b) / (|a| * |b|).\n4. Use inverse cosine to find theta.\n5. Make sure your calculator is in the correct mode (degrees or radians)!"
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: Finding the Angle",
-      "content": "Vector A is [3, 4] (Length = 5). Vector B is [12, 5] (Length = 13). Find the angle between them.\n\n� **Step 1 (Component Way):** (3 � 12) + (4 � 5) = 36 + 20 = **56**.\n� **Step 2 (Set up the Angle Way):** We know Length A = 5, Length B = 13. \n   Formula: 5 � 13 � Cos(?) = 65 � Cos(?).\n� **Step 3 (Equate them):** The two formulas must equal each other! \n   65 � Cos(?) = 56.\n� **Step 4 (Solve):** Cos(?) = 56 / 65 = 0.8615.\n� **Step 5:** Use Inverse Cosine (Cos?�) on 0.8615.\n\n**Final Answer: The angle is roughly 30.5�.**"
+      "icon": "📝",
+      "title": "4. Worked Example: Computing a Dot Product",
+      "content": "Find the dot product of a = (3, 4) and b = (2, -1).\n\n**Step 1:** a . b = (3)(2) + (4)(-1) = 6 + (-4) = 2.\n\nSince the result is positive (2), the angle between them is acute (less than 90 degrees).\n\n**Final Answer: a . b = 2.**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "The biggest mistake in the Dot Product is writing the answer as a vector with brackets (e.g., [11, 4]). **The Dot Product DESTROYS direction!** The word 'Product' here means 'Scalar Product'. The output must be a single, plain, normal number (a scalar). If you add the x-multiplication and the y-multiplication together and put brackets around them, you have completely misunderstood the physics of what you are calculating!"
+      "content": "The number one mistake: adding the vectors before multiplying. The dot product requires you to multiply corresponding components FIRST, then add the products together. Students often add (3+4) and (2+(-1)) first, getting 7 * 1 = 7. That's completely wrong! It's (3*2) + (4*(-1)) = 6 - 4 = 2."
     }
   ]
 }

@@ -1,30 +1,30 @@
 {
-  "title": "Mastering Vectors: Direction with Purpose",
+  "title": "Vectors: Direction and Magnitude",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: More Than Just a Number",
-      "content": "In normal math, a number just tells you 'how much' (like 5 kilograms, or 10 meters). These are called *scalars*. But what if you need to tell a pilot how to fly? Saying 'fly 500 km/h' isn't enough; they need to know WHICH WAY. A **Vector** is a mathematical tool that has both a **size (magnitude)** AND a **direction**. It's an instruction manual: 'Go 10 meters, North-East'."
+      "icon": "➡️",
+      "title": "1. The Core Concept: The Mathematical Arrow",
+      "content": "Normal numbers (like 5kg or 20 degrees) are 'Scalars' - they only have size. But a **Vector** is an arrow. It has a size (magnitude) AND a specific direction (like 50 km/h due North). Vectors power physics, computer graphics, and airplane navigation. They tell you not just how hard to push, but exactly which way."
     },
     {
-      "icon": "??",
-      "title": "2. The Rules: Column Vectors",
-      "content": "To make vectors easy to use in algebra, we write them as a vertical stack of numbers, called a **Column Vector**, like [x, y] written vertically.\n\n� The top number is the **x-movement**: Positive means move RIGHT. Negative means move LEFT.\n� The bottom number is the **y-movement**: Positive means move UP. Negative means move DOWN.\n� A vector of [3, -2] means 'Start here, go 3 steps right, and 2 steps down'."
+      "icon": "📚",
+      "title": "2. The Rules: Column Notation",
+      "content": "• A vector is written as a column matrix [x, y] (written vertically).\n• The top number (x) tells you how far to move right/left.\n• The bottom number (y) tells you how far to move up/down.\n• Vector [3, -2] means 'go right 3, go down 2'.\n• **Magnitude (size):** Use Pythagoras! |v| = sqrt(x^2 + y^2)."
     },
     {
-      "icon": "?",
+      "icon": "🛠️",
       "title": "3. Step-by-Step: Adding Vectors",
-      "content": "You can add vectors visually or algebraically:\n\n� **Visually (Nose to Tail):** Draw the first vector as an arrow. Then, take the second arrow and place its starting point (tail) exactly on the tip (nose) of the first arrow. The final answer is a new straight arrow drawn from your very first starting point to your final ending point.\n� **Algebraically:** This is much easier! Just add the top numbers together, and add the bottom numbers together. That's it!"
+      "content": "To add vector a = [2, 5] and vector b = [3, -1]:\n\n1. To add vectors geometrically, place them tip-to-tail. The result (resultant) is the arrow from the very start to the very end.\n2. To add them algebraically, simply add the top numbers together, and the bottom numbers together.\n3. a + b = [2+3, 5+(-1)] = [5, 4].\n4. This means the overall journey is 'right 5, up 4'."
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: Vector Journey",
-      "content": "Vector A is [4, 2] (4 right, 2 up). Vector B is [-1, 5] (1 left, 5 up). Find Vector A + Vector B.\n\n� **Step 1 (Add the tops):** 4 + (-1) = 3\n� **Step 2 (Add the bottoms):** 2 + 5 = 7\n� **Step 3 (Combine):** The new vector is **[3, 7]**.\n\nThis means if you walked the path of Vector A, and then walked the path of Vector B, you would end up exactly 3 steps right and 7 steps up from where you originally started."
+      "icon": "📝",
+      "title": "4. Worked Example: Scalar Multiplication",
+      "content": "If vector p = [-4, 3], find the vector 2p and its magnitude.\n\n**Step 1:** Multiply both components by 2. 2p = [-8, 6].\n**Step 2:** To find the magnitude, use Pythagoras on the new vector.\n**Step 3:** |2p| = sqrt((-8)^2 + 6^2) = sqrt(64 + 36).\n**Step 4:** sqrt(100) = 10.\n\n**Final Answer: 2p = [-8, 6] and its magnitude is 10.**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "The biggest mistake students make is confusing vector addition with scalar addition. If you walk 3 meters North, and then 4 meters East, your total distance walked is 7 meters. But your vector displacement (how far you are from the start) is NOT 7 meters! Because you turned a corner, you formed a triangle, and your displacement is only 5 meters (using Pythagoras). **Vectors must respect direction�they don't add like normal numbers!**"
+      "content": "The biggest error is confusing vectors with coordinates. A coordinate (3,4) is a dot on a map. A vector [3,4] is a JOURNEY. The vector [3,4] can start ANYWHERE on the map; it just means 'take 3 steps right and 4 steps up from wherever you are'. Also, when doing vector geometry (e.g. AB = b - a), students constantly get the subtraction backwards. The vector from A to B is always (End Point - Start Point)."
     }
   ]
 }

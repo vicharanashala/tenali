@@ -1,30 +1,30 @@
 {
-  "title": "Mastering Angles: The Measure of a Turn",
+  "title": "Angles: Measuring the Turn",
   "blocks": [
     {
-      "icon": "??",
-      "title": "1. The Core Concept: It's All About the Spin",
-      "content": "An angle isn't a measurement of length or distance; it's a measurement of a **turn** or a **spin**. Imagine standing still and turning your body to look in a new direction. The amount you rotated is an angle! We measure this spin in **degrees (�)**, where a complete, full-circle spin (like a skateboarder doing a 360) is exactly 360�."
+      "icon": "📐",
+      "title": "1. The Core Concept: What Is an Angle?",
+      "content": "An angle is simply the measure of a **turn** or **rotation** between two lines that meet at a point. Think of opening a book: the wider you open it, the bigger the angle. Angles are measured in **degrees**, where a full circle is 360 degrees. Understanding angles is the gateway to geometry, trigonometry, and even architecture."
     },
     {
-      "icon": "???",
-      "title": "2. The Rules: Naming the Angles",
-      "content": "Just like people, angles have different names depending on their size:\n\n� **Acute Angle (0� to 89�):** Small, sharp, and narrow. (Think 'a-cute' little angle).\n� **Right Angle (Exactly 90�):** A perfect 'L' shape, like the corner of a book or a room.\n� **Obtuse Angle (91� to 179�):** Wide, open, and blunt.\n� **Straight Angle (Exactly 180�):** A perfectly straight line (a half-turn).\n� **Reflex Angle (181� to 359�):** Bent so far backward it looks like Pac-Man's mouth opening."
+      "icon": "📚",
+      "title": "2. The Rules: The Angle Family",
+      "content": "Memorize these angle types:\n\n• **Acute:** Less than 90 degrees (sharp and small, like a pizza slice).\n• **Right Angle:** Exactly 90 degrees (a perfect L-shape, marked with a tiny square).\n• **Obtuse:** Between 90 and 180 degrees (wide and lazy).\n• **Straight:** Exactly 180 degrees (a flat line).\n• **Reflex:** Between 180 and 360 degrees (more than a half turn)."
     },
     {
-      "icon": "??",
-      "title": "3. Step-by-Step: The Three Golden Rules of Geometry",
-      "content": "When solving geometry puzzles to find missing angles, you only need to remember three golden rules:\n\n1. **Angles on a Straight Line:** Any angles that sit side-by-side on a flat, straight line will ALWAYS add up to exactly **180�**.\n2. **Angles Around a Point:** All the angles circling a single central dot will ALWAYS add up to a full circle, which is **360�**.\n3. **Vertically Opposite Angles:** When two straight lines cross like an 'X', the angles directly across from each other are identical mirror images. They are ALWAYS **equal**."
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Angles on Lines and at Points",
+      "content": "Two critical rules you must never forget:\n\n1. **Angles on a straight line add up to 180 degrees.** If one angle is 110, the other is 180 - 110 = 70.\n2. **Angles around a point add up to 360 degrees.** If three angles at a point are 90, 120, and 80, the missing one is 360 - 290 = 70.\n3. **Vertically opposite angles are always equal.** When two lines cross, the angles across from each other are identical twins."
     },
     {
-      "icon": "??",
-      "title": "4. Worked Example: The Straight Line Puzzle",
-      "content": "You are given a straight horizontal line. Two angles are sitting on it side-by-side. One angle is 115�. The other angle is unknown, labeled 'x'. Find x.\n\n� **Step 1 (Identify the rule):** They sit on a straight line, so we know they must add up to 180�.\n� **Step 2 (Set up the math):** x + 115� = 180�\n� **Step 3 (Solve):** To find x, subtract 115 from 180.\n� **Step 4 (Calculate):** 180 - 115 = 65.\n\n**Final Answer: x = 65�**"
+      "icon": "📝",
+      "title": "4. Worked Example: Find the Missing Angle",
+      "content": "Two angles sit on a straight line. One angle is 135 degrees. Find the other.\n\n**Step 1:** Angles on a straight line = 180 degrees.\n**Step 2:** Missing angle = 180 - 135 = 45 degrees.\n\n**Final Answer: 45 degrees.**"
     },
     {
-      "icon": "??",
+      "icon": "⚠️",
       "title": "5. Common Pitfalls",
-      "content": "A major trap in exams is assuming an angle is 90� just because it *looks* like a perfect 'L' shape in the drawing. Geometry diagrams are often drawn 'not to scale' on purpose to trick you! **Never assume an angle is a right angle unless you see the little square symbol in the corner**, or unless the math proves it is exactly 90�."
+      "content": "The most common mistake is confusing 'angles on a straight line' (180) with 'angles around a point' (360). Read the question carefully: does it say the angles are on a LINE or at a POINT? Using 360 when you should use 180 (or vice versa) will give you a completely wrong answer every single time."
     }
   ]
 }
