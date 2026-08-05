@@ -1,0 +1,14 @@
+{
+  "id": 1010,
+  "topic": "primefactor",
+  "question": "Which of the following statements correctly defines a prime number?",
+  "options": [
+    "Any odd number greater than 1",
+    "A whole number greater than 1 whose only divisors are 1 and itself",
+    "A number that can be divided by 2",
+    "A number that has exactly three positive divisors"
+  ],
+  "answerOption": "B",
+  "answerText": "A whole number greater than 1 whose only divisors are 1 and itself",
+  "explanation": "A prime number is an integer greater than 1 that cannot be formed by multiplying two smaller positive integers. That means its only factors are 1 and the number itself."
+}

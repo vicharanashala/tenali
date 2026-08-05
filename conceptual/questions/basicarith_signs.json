@@ -1,0 +1,23 @@
+{
+  "id": 1001,
+  "topic": "basicarith",
+  "op": "*",
+  "question": "How many apples are there in total?",
+  "visualType": "group-counting",
+  "visualData": {
+    "groups": 3,
+    "itemsPerGroup": 2,
+    "icon": "🍎",
+    "label": "3 groups of 2 apples"
+  },
+  "options": [
+    "3 + 2 = 5",
+    "3 × 2 = 6",
+    "3 × 3 = 9",
+    "2 + 2 = 4"
+  ],
+  "answerOption": "B",
+  "answerText": "3 × 2 = 6",
+  "explanation": "3 groups of 2 apples means 3 × 2 = 6 apples total.",
+  "kidExplanation": "3 groups of 2 apples means 3 × 2 = 6 apples total."
+}

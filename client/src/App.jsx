@@ -24,8 +24,8 @@
 
 
 import React, { useEffect, useState, useRef, useMemo, useCallback } from 'react';
+import ConceptualVisualDiagram from './components/ConceptualVisualDiagram';
 import VoiceAssistant from './components/VoiceAssistant';
-import { motion } from 'framer-motion';
 import OnboardingTour from './components/OnboardingTour';
 import SpatialReasoningMCQ from './SpatialReasoningMCQ';
 import ScribbleGuessApp from './ScribbleGuessApp';
@@ -152,8 +152,8 @@ window.fetch = function (url, options) {
 };
 
 // App version — increment with each commit
-const TENALI_VERSION = '1.0.86'
-const TENALI_BUILD_DATE = '2026-05-03 18:28 IST'
+const TENALI_VERSION = '1.0.87'
+const TENALI_BUILD_DATE = '2026-07-08 12:52 IST'
 // ─── Auth helpers ───────────────────────────────────────────────────────────
 // Tiny pub/sub on top of localStorage so AuthMenu and AuthGate stay in sync.
 const AUTH_TOKEN_KEY = 'tenali-auth-token'
@@ -657,9 +657,9 @@ function ResultsTable({ results }) {
           {results.map((r, i) => (
             <tr key={i} className={r.correct ? 'row-correct' : 'row-wrong'}>
               <td>{i + 1}</td>
-              <td>{r.question}</td>
-              <td>{r.userAnswer}</td>
-              <td>{r.correct ? `✓ (${r.correctAnswer})` : `✗ (${r.correctAnswer})`}</td>
+              <td>{r.question || r.prompt || `Question ${i + 1}`}</td>
+              <td>{r.userAnswer || '-'}</td>
+              <td>{r.correct ? `✓ (${r.correctAnswer || r.display || ''})` : `✗ (${r.correctAnswer || r.display || 'Ans'})`}</td>
               {hasCarries && (
                 <td style={{ fontSize: '0.8rem', whiteSpace: 'pre-line' }}>
                   {r.userCarries && <span>Yours: {r.userCarries}</span>}
@@ -54628,6 +54628,7 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
     // Guards against double-submit and double-advance race conditions
     const submittedRef = useRef(false)
     const advancedRef = useRef(false)
+    const promotionTriggeredRef = useRef(false)
     // Tracks the in-flight question fetch so a newer loadQuestion() call (or
     // unmount) can cancel a still-pending older one — otherwise an
     // out-of-order response can land after a newer question and silently
@@ -54666,14 +54667,47 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
       setLoadError('')
       try {
         const diff = effectiveDifficulty()
-        const r = await fetch(`${API}/${apiPath}/question?difficulty=${diff}&goal=${sessionGoal}`, { headers: { 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, signal: controller.signal })
-        if (!r.ok) throw new Error(`Server returned ${r.status}`)
-        const data = await r.json()
-        // Defensive: a question must have a non-empty prompt to be displayable.
-        // If the API returns malformed data (missing prompt), surface a clear
-        // error instead of rendering an empty quiz pane.
-        if (!data || typeof data !== 'object' || !data.prompt) {
-          throw new Error('Question payload is missing a prompt')
+        const isMilestone = (questionNumber > 0 && questionNumber % 5 === 0) || promotionTriggeredRef.current
+        promotionTriggeredRef.current = false
+
+        const headers = { 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }
+
+        let data = null
+        if (isMilestone) {
+          try {
+            const excludeList = results.map(r => r.id || '').filter(Boolean).join(',')
+            const cr = await fetch(`${API}/conceptual-api/question?topic=${apiPath.replace('-api', '')}&difficulty=${diff}&exclude=${excludeList}&goal=${sessionGoal}`, {
+              headers,
+              signal: controller.signal
+            })
+            if (cr.ok) {
+              data = await cr.json()
+            } else {
+              console.warn(`Conceptual question not found or failed for topic: ${apiPath.replace('-api', '')}. Falling back to standard question.`)
+            }
+          } catch (err) {
+            if (err.name !== 'AbortError') console.error('Failed to fetch conceptual question, falling back:', err)
+          }
+        }
+
+        if (!data) {
+          const r = await fetch(`${API}/${apiPath}/question?difficulty=${diff}&goal=${sessionGoal}`, {
+            headers,
+            signal: controller.signal
+          })
+          if (!r.ok) throw new Error(`Server returned ${r.status}`)
+          data = await r.json()
+        }
+
+        // Map conceptual question schema to prompt if conceptual
+        if (data && data.isConceptual && data.question) {
+          data.prompt = data.question
+        }
+        if (!data || typeof data !== 'object') {
+          throw new Error('Question payload is invalid')
+        }
+        if (data.isConceptual && !data.prompt) {
+          throw new Error('Conceptual question payload is missing a prompt')
         }
         setQuestion(data)
         setAnswer('')
@@ -54699,6 +54733,7 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
       setTotalQ(t); setScore(0); setQuestionNumber(1); setResults([]); setStarted(true); setFinished(false)
       setAdaptScore(0); adaptScoreRef.current = 0
       submittedRef.current = false; advancedRef.current = false
+      promotionTriggeredRef.current = false
     }
     useEffect(() => { if (started && !finished && questionNumber > 0) loadQuestion() }, [started, questionNumber])
     const advance = () => {
@@ -54738,34 +54773,49 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
       if (submittedRef.current) return  // prevent double-submit (rapid Enter presses)
       submittedRef.current = true
       const timeTaken = timer.stop()
-      const payload = { ...question, [answerField || 'userAnswer']: answer.trim() }
+      const payload = question.isConceptual
+        ? { id: question.id, answerOption: answer.trim() }
+        : { ...question, [answerField || 'userAnswer']: answer.trim() }
+      const checkPath = question.isConceptual ? 'conceptual-api' : apiPath
       try {
-        const r = await fetch(`${API}/${apiPath}/check`, {
+        const r = await fetch(`${API}/${checkPath}/check`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : ''
+          },
           body: JSON.stringify({ ...payload, sessionGoal })
         })
         const data = await r.json()
+        const qPrompt = question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : title)
+        const corrAns = data.display || data.correctAnswerText || (data.correctAnswer !== undefined ? String(data.correctAnswer) : '') || data.answer || ''
         setIsCorrect(data.correct); setRevealed(true)
         if (data.correct) setScore(s => s + 1)
         const coinMsg = (data.lil?.coinsEarned ?? 0) > 0 ? ` (+${data.lil.coinsEarned}🪙)` : ''
         if (!data.correct && sessionGoal === 'perfect') {
           // Perfect Solve: any wrong answer immediately ends the quiz
-          setFeedback(`❌ Wrong answer — Perfect Solve ended! Correct: ${data.display || ''}`)
+          setFeedback(`❌ Wrong answer — Perfect Solve ended! Correct: ${corrAns}`)
           timer.reset()
           setFinished(true)
-          setResults(prev => [...prev, { prompt: question.prompt, userAnswer: answer.trim(), correctAnswer: data.display, correct: false, time: timeTaken }])
+          setResults(prev => [...prev, { id: question.id, prompt: qPrompt, question: qPrompt, userAnswer: answer.trim(), correctAnswer: corrAns, correct: false, time: timeTaken }])
           return
         }
-        setFeedback(data.correct ? `✅ Correct!${coinMsg} ${data.display || ''}` : `❌ Incorrect. Answer: ${data.display || ''}`)
-        setResults(prev => [...prev, { prompt: question.prompt, userAnswer: answer.trim(), correctAnswer: data.display, correct: data.correct, time: timeTaken }])
+        setFeedback(data.correct ? `✅ Correct!${coinMsg} ${corrAns}` : `❌ Incorrect. Answer: ${corrAns}`)
+        setResults(prev => [...prev, { id: question.id, prompt: qPrompt, question: qPrompt, userAnswer: answer.trim(), correctAnswer: corrAns, correct: data.correct, time: timeTaken }])
         // Smooth adaptive adjustment
         if (isAdaptive) {
+          const oldStage = Math.min(3, Math.max(0, Math.floor(adaptScoreRef.current)))
           setAdaptScore(prev => {
             const next = data.correct
               ? Math.min(3, prev + 0.25)  // gentle climb on correct
               : Math.max(0, prev - 0.35)  // slightly steeper drop on wrong
             adaptScoreRef.current = next
+            
+            // Check for promotion
+            const newStage = Math.min(3, Math.max(0, Math.floor(next)))
+            if (newStage > oldStage) {
+              promotionTriggeredRef.current = true
+            }
             return next
           })
         }
@@ -54776,19 +54826,26 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
       if (!question || revealed) return
       submittedRef.current = true
       timer.stop()
-      const payload = { ...question, [answerField || 'userAnswer']: '', solve: true }
+      const payload = question.isConceptual
+        ? { id: question.id, answerOption: '', solve: true }
+        : { ...question, [answerField || 'userAnswer']: '', solve: true }
+      const checkPath = question.isConceptual ? 'conceptual-api' : apiPath
       try {
-        const r = await fetch(`${API}/${apiPath}/check`, {
+        const r = await fetch(`${API}/${checkPath}/check`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : ''
+          },
           body: JSON.stringify({ ...payload, sessionGoal })
         })
         const data = await r.json()
         setIsCorrect(false); setRevealed(true)
-        const display = data.display || data.correctAnswer || data.answer || ''
+        const qPrompt = question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : title)
+        const display = data.display || data.correctAnswerText || (data.correctAnswer !== undefined ? String(data.correctAnswer) : '') || data.answer || ''
         const explanation = data.explanation || ''
         setFeedback(`Solution: ${display}${explanation ? '\n' + explanation : ''}`)
-        setResults(prev => [...prev, { prompt: question.prompt, userAnswer: '(solved)', correctAnswer: display, correct: false, time: 0 }])
+        setResults(prev => [...prev, { id: question.id, prompt: qPrompt, question: qPrompt, userAnswer: '(solved)', correctAnswer: display, correct: false, time: 0 }])
       } catch (e) { submittedRef.current = false; console.error(`Failed to solve ${title}:`, e) }
     }
 
@@ -54803,6 +54860,21 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
         setAdaptScore(prev => { const next = Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next })
       }
     }
+
+    useEffect(() => {
+      if (!question || !question.options || revealed) return
+      const h = (e) => {
+        const key = e.key.toUpperCase()
+        if (['A', 'B', 'C', 'D'].includes(key)) {
+          setAnswer(key)
+        } else if (['1', '2', '3', '4'].includes(key)) {
+          const idx = Number(key) - 1
+          setAnswer(['A', 'B', 'C', 'D'][idx])
+        }
+      }
+      window.addEventListener('keydown', h)
+      return () => window.removeEventListener('keydown', h)
+    }, [question, revealed])
 
     const handleKeyDown = (e) => { if (e.key === 'Enter') { e.preventDefault(); if (!revealed) handleSubmit() } }
     const getPlaceholder = () => {
@@ -54928,7 +55000,63 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
             <div className="question-prompt" style={{ fontSize: '1.3rem', margin: '20px 0', lineHeight: '1.6', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
               <GlossaryText text={question.prompt} />
             </div>
-            <input className="answer-input" type="text" value={answer} onChange={e => { if (!revealed) setAnswer(e.target.value) }} disabled={revealed} placeholder={getPlaceholder()} onKeyDown={handleKeyDown} autoFocus />
+            <ConceptualVisualDiagram visualType={question.visualType} visualData={question.visualData} />
+            {question.options ? (
+              <div className="mcq-options-container" style={{ display: 'flex', flexDirection: 'column', gap: '10px', maxWidth: '480px', margin: '20px auto', padding: '0 10px' }}>
+                {question.options.map((opt, idx) => {
+                  const letter = ['A', 'B', 'C', 'D'][idx]
+                  const isSelected = answer === letter
+                  const isCorrectChoice = revealed && letter === question.answerOption
+                  const isWrongChoice = revealed && isSelected && !isCorrect
+                  
+                  let cardClass = "mcq-option-card"
+                  if (isSelected) cardClass += " selected"
+                  if (isCorrectChoice) cardClass += " correct"
+                  if (isWrongChoice) cardClass += " wrong"
+                  
+                  return (
+                    <div
+                      key={letter}
+                      className={cardClass}
+                      onClick={() => { if (!revealed) setAnswer(letter) }}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        padding: '12px 16px',
+                        border: isSelected ? '2px solid var(--clr-accent)' : '1px solid var(--clr-border)',
+                        borderRadius: '8px',
+                        cursor: revealed ? 'not-allowed' : 'pointer',
+                        background: isCorrectChoice ? 'rgba(76, 175, 80, 0.15)' : isWrongChoice ? 'rgba(244, 67, 54, 0.15)' : isSelected ? 'var(--clr-bg-soft)' : 'var(--clr-bg-card)',
+                        borderColor: isCorrectChoice ? 'var(--clr-correct)' : isWrongChoice ? 'var(--clr-wrong)' : isSelected ? 'var(--clr-accent)' : 'var(--clr-border)',
+                        transition: 'all 0.2s ease',
+                        textAlign: 'left'
+                      }}
+                    >
+                      <div style={{
+                        width: '24px',
+                        height: '24px',
+                        borderRadius: '50%',
+                        border: '2px solid',
+                        borderColor: isCorrectChoice ? 'var(--clr-correct)' : isWrongChoice ? 'var(--clr-wrong)' : isSelected ? 'var(--clr-accent)' : 'var(--clr-text-soft)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        marginRight: '12px',
+                        fontSize: '0.85rem',
+                        fontWeight: 'bold',
+                        color: isCorrectChoice ? 'var(--clr-correct)' : isWrongChoice ? 'var(--clr-wrong)' : isSelected ? 'var(--clr-accent)' : 'var(--clr-text-soft)',
+                        background: isSelected ? 'rgba(var(--clr-accent-rgb), 0.1)' : 'transparent'
+                      }}>
+                        {letter}
+                      </div>
+                      <span style={{ fontSize: '1rem', color: 'var(--clr-text)' }}>{opt}</span>
+                    </div>
+                  )
+                })}
+              </div>
+            ) : (
+              <input className="answer-input" type="text" value={answer} onChange={e => { if (!revealed) setAnswer(e.target.value) }} disabled={revealed} placeholder={getPlaceholder()} onKeyDown={handleKeyDown} autoFocus />
+            )}
           </div>}
           {!question && loading && <div style={{ textAlign: 'center', padding: '24px', color: 'var(--clr-text-soft)' }}>Loading question…</div>}
           {!question && !loading && loadError && (
@@ -60485,7 +60613,9 @@ function FractionAddApp({ onBack, completedTopics = [], goldMastery = [], markTo
   // ── Refs for auto-advance ────────────────────────────────────────────
   const advanceFnRef = useRef(null)
 
-  const effectiveDiff = () => (isAdaptive) ? adaptiveLevel(adaptScoreRef.current) : difficulty
+  const promotionTriggeredRef = useRef(false)
+
+  const effectiveDiff = () => isAdaptive ? adaptiveLevel(adaptScoreRef.current) : difficulty
 
   /**
    * loadQuestion(): Fetch a new fraction-add question from the API.
@@ -60514,8 +60644,39 @@ function FractionAddApp({ onBack, completedTopics = [], goldMastery = [], markTo
 const loadQuestion = async () => {
     setLoading(true)
     try {
-      const r = await fetch(`${API}/fractionadd-api/question?difficulty=${effectiveDiff()}&goal=${sessionGoal}`, { headers: { 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' } })
-      const data = await r.json()
+      const diff = effectiveDiff()
+      const isMilestone = (questionNumber > 0 && questionNumber % 5 === 0) || promotionTriggeredRef.current
+      promotionTriggeredRef.current = false
+
+      const headers = { 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }
+
+      let data = null
+      if (isMilestone) {
+        try {
+          const excludeList = results.map(r => r.id || '').filter(Boolean).join(',')
+          const cr = await fetch(`${API}/conceptual-api/question?topic=fractionadd&difficulty=${diff}&exclude=${excludeList}&goal=${sessionGoal}`, { headers })
+          if (cr.ok) {
+            data = await cr.json()
+          } else {
+            console.warn('Conceptual question not found or failed for topic: fractionadd. Falling back to standard question.')
+          }
+        } catch (err) {
+          console.error('Failed to fetch conceptual question, falling back:', err)
+        }
+      }
+
+      if (!data) {
+        const r = await fetch(`${API}/fractionadd-api/question?difficulty=${diff}&goal=${sessionGoal}`, {
+          headers: { 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }
+        })
+        if (!r.ok) throw new Error(`Server returned ${r.status}`)
+        data = await r.json()
+      }
+
+      // Map conceptual question schema to prompt if conceptual
+      if (data && data.isConceptual && data.question) {
+        data.prompt = data.question
+      }
       setQuestion(data)
       setAnswer('')
       setFeedback('')
@@ -60540,6 +60701,7 @@ const loadQuestion = async () => {
     setResults([])
     setAdaptScore(0)
     adaptScoreRef.current = 0
+    promotionTriggeredRef.current = false
     setStarted(true)
     setFinished(false)
   }
@@ -60577,6 +60739,20 @@ const loadQuestion = async () => {
     return () => window.removeEventListener('keydown', handleKey)
   }, [revealed, isCorrect, questionNumber])
 
+  // Keyboard listener for option selection (A, B, C, D) in conceptual mode
+  useEffect(() => {
+    if (!started || finished || !question || !question.isConceptual || revealed) return
+    const handleKey = (e) => {
+      const key = e.key.toUpperCase()
+      if (['A', 'B', 'C', 'D'].includes(key)) {
+        e.preventDefault()
+        setAnswer(key)
+      }
+    }
+    window.addEventListener('keydown', handleKey)
+    return () => window.removeEventListener('keydown', handleKey)
+  }, [started, finished, question, revealed])
+
   /**
    * parseAnswer(str): Parse user's answer string into {whole, num, den}
    * Accepts formats: "3/4", "2 3/4", "5", "2 5"
@@ -60603,6 +60779,49 @@ const loadQuestion = async () => {
    */
   const handleSubmit = async () => {
     if (!question || revealed) return
+
+    if (question.isConceptual) {
+      if (!answer) return
+      const timeTaken = timer.stop()
+      try {
+        const r = await fetch(`${API}/conceptual-api/check`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: question.id, answerOption: answer.trim() })
+        })
+        const data = await r.json()
+        setIsCorrect(data.correct)
+        setRevealed(true)
+        if (data.correct) setScore(s => s + 1)
+
+        setFeedback(data.correct ? 'Correct!' : `Incorrect. Correct answer is option ${data.correctAnswer}. ${data.explanation || ''}`)
+        setResults(prev => [...prev, {
+          question: question.prompt,
+          userAnswer: answer.trim(),
+          correctAnswer: data.correctAnswer,
+          correct: data.correct,
+          time: timeTaken,
+          id: question.id
+        }])
+
+        if (isAdaptive) {
+          const oldStage = Math.min(3, Math.max(0, Math.floor(adaptScoreRef.current)))
+          setAdaptScore(prev => {
+            const next = data.correct ? Math.min(3, prev + 0.25) : Math.max(0, prev - 0.35)
+            adaptScoreRef.current = next
+            const newStage = Math.min(3, Math.max(0, Math.floor(next)))
+            if (newStage > oldStage) {
+              promotionTriggeredRef.current = true
+            }
+            return next
+          })
+        }
+      } catch (e) {
+        console.error('Failed to check conceptual fraction answer:', e)
+      }
+      return
+    }
+
     const parsed = parseAnswer(answer)
     if (!parsed || parsed.den === 0) return
 
@@ -60649,13 +60868,23 @@ const loadQuestion = async () => {
 
       setResults(prev => [...prev, {
         prompt,
+        question: prompt,
         userAnswer: answer.trim(),
         correctAnswer: data.display,
         correct: data.correct,
         time: timeTaken
       }])
       if (isAdaptive) {
-        setAdaptScore(prev => { const next = data.correct ? Math.min(3, prev + 0.25) : Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next })
+        const oldStage = Math.min(3, Math.max(0, Math.floor(adaptScoreRef.current)))
+        setAdaptScore(prev => {
+          const next = data.correct ? Math.min(3, prev + 0.25) : Math.max(0, prev - 0.35)
+          adaptScoreRef.current = next
+          const newStage = Math.min(3, Math.max(0, Math.floor(next)))
+          if (newStage > oldStage) {
+            promotionTriggeredRef.current = true
+          }
+          return next
+        })
       }
     } catch (e) {
       console.error('Failed to check fraction answer:', e)
@@ -60665,6 +60894,39 @@ const loadQuestion = async () => {
   const handleSolve = async () => {
     if (!question || revealed) return
     timer.stop()
+
+    if (question.isConceptual) {
+      try {
+        const r = await fetch(`${API}/conceptual-api/check`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: question.id, answerOption: '' })
+        })
+        const data = await r.json()
+        setIsCorrect(false)
+        setRevealed(true)
+        setFeedback(`Solution: Correct option is ${data.correctAnswer}. ${data.explanation || ''}`)
+        setResults(prev => [...prev, {
+          question: question.prompt,
+          userAnswer: '(solved)',
+          correctAnswer: data.correctAnswer,
+          correct: false,
+          time: 0,
+          id: question.id
+        }])
+        if (isAdaptive) {
+          setAdaptScore(prev => {
+            const next = Math.max(0, prev - 0.35)
+            adaptScoreRef.current = next
+            return next
+          })
+        }
+      } catch (e) {
+        console.error('Failed to solve conceptual question:', e)
+      }
+      return
+    }
+
     const op = question.op || '+'
     const prompt = question.mixed
       ? `${question.w1} ${question.n1}/${question.d1} ${op} ${question.w2} ${question.n2}/${question.d2}`
@@ -60676,9 +60938,13 @@ const loadQuestion = async () => {
       const display = data.display || data.correctAnswer || data.answer || ''
       const explanation = data.explanation || ''
       setFeedback(`Solution: ${display}${explanation ? '\n' + explanation : ''}`)
-      setResults(prev => [...prev, { prompt, userAnswer: '(solved)', correctAnswer: display, correct: false, time: 0 }])
+      setResults(prev => [...prev, { prompt, question: prompt, userAnswer: '(solved)', correctAnswer: display, correct: false, time: 0 }])
       if (isAdaptive) {
-        setAdaptScore(prev => Math.max(0, prev - 0.35))
+        setAdaptScore(prev => {
+          const next = Math.max(0, prev - 0.35)
+          adaptScoreRef.current = next
+          return next
+        })
       }
     } catch (e) { console.error('Failed to solve fraction:', e) }
   }
@@ -60817,37 +61083,98 @@ const loadQuestion = async () => {
         </div>
         {isAdaptive && <DifficultySlider pct={adaptivePct(adaptScore)} onChange={(p) => { const v = (p / 100) * 3; setAdaptScore(v); adaptScoreRef.current = v }} />}
         {question && (
-          <div className="fraction-problem">
-            {/* Render the problem: n1/d1 (op) n2/d2 or mixed numbers (op) mixed numbers.
-                The operator comes from the server (default '+' for back-compat). */}
-            {question.mixed ? (
-              <div className="fraction-expression">
-                {formatMixed(question.w1, question.n1, question.d1)}
-                <span className="frac-operator">{question.op || '+'}</span>
-                {formatMixed(question.w2, question.n2, question.d2)}
-                <span className="frac-operator">=</span>
-              </div>
-            ) : (
-              <div className="fraction-expression">
-                {formatFraction(question.n1, question.d1)}
-                <span className="frac-operator">{question.op || '+'}</span>
-                {formatFraction(question.n2, question.d2)}
-                <span className="frac-operator">=</span>
-              </div>
-            )}
+          question.isConceptual ? (
+            <div style={{ textAlign: 'center', width: '100%' }}>
+              <div className="question-prompt" style={{ fontSize: '1.3rem', margin: '20px 0', lineHeight: '1.6' }}>{question.prompt}</div>
+              <ConceptualVisualDiagram visualType={question.visualType} visualData={question.visualData} />
+              {question.options && (
+                <div className="mcq-options-container" style={{ display: 'flex', flexDirection: 'column', gap: '10px', maxWidth: '480px', margin: '20px auto', padding: '0 10px' }}>
+                  {question.options.map((opt, idx) => {
+                    const letter = ['A', 'B', 'C', 'D'][idx]
+                    const isSelected = answer === letter
+                    const isCorrectChoice = revealed && letter === question.answerOption
+                    const isWrongChoice = revealed && isSelected && !isCorrect
 
-            {/* Single text input — type answer as "3/4" or "2 3/4" */}
-            <input
-              className="answer-input"
-              type="text"
-              value={answer}
-              onChange={e => { if (!revealed) setAnswer(e.target.value) }}
-              disabled={revealed}
-              placeholder={question.mixed ? 'e.g. 2 3/4' : 'e.g. 3/4'}
-              onKeyDown={handleKeyDown}
-              autoFocus
-            />
-          </div>
+                    let cardClass = "mcq-option-card"
+                    if (isSelected) cardClass += " selected"
+                    if (isCorrectChoice) cardClass += " correct"
+                    if (isWrongChoice) cardClass += " wrong"
+
+                    return (
+                      <div
+                        key={letter}
+                        className={cardClass}
+                        onClick={() => { if (!revealed) setAnswer(letter) }}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          padding: '12px 16px',
+                          border: isSelected ? '2px solid var(--clr-accent)' : '1px solid var(--clr-border)',
+                          borderRadius: '8px',
+                          cursor: revealed ? 'not-allowed' : 'pointer',
+                          background: isCorrectChoice ? 'rgba(76, 175, 80, 0.15)' : isWrongChoice ? 'rgba(244, 67, 54, 0.15)' : isSelected ? 'var(--clr-bg-soft)' : 'var(--clr-bg-card)',
+                          borderColor: isCorrectChoice ? 'var(--clr-correct)' : isWrongChoice ? 'var(--clr-wrong)' : isSelected ? 'var(--clr-accent)' : 'var(--clr-border)',
+                          transition: 'all 0.2s ease',
+                          textAlign: 'left'
+                        }}
+                      >
+                        <span className="option-badge" style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          width: '28px',
+                          height: '28px',
+                          borderRadius: '50%',
+                          marginRight: '12px',
+                          fontWeight: 'bold',
+                          fontSize: '0.9rem',
+                          background: isCorrectChoice ? 'var(--clr-correct)' : isWrongChoice ? 'var(--clr-wrong)' : isSelected ? 'var(--clr-accent)' : 'var(--clr-bg-soft)',
+                          color: (isCorrectChoice || isWrongChoice || isSelected) ? '#fff' : 'var(--clr-fg)',
+                        }}>
+                          {letter}
+                        </span>
+                        <span className="option-text" style={{ flex: 1, fontSize: '0.95rem', fontWeight: isSelected ? '600' : 'normal', color: 'var(--clr-fg)' }}>
+                          {opt}
+                        </span>
+                      </div>
+                    )
+                  })}
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="fraction-problem">
+              {/* Render the problem: n1/d1 (op) n2/d2 or mixed numbers (op) mixed numbers.
+                  The operator comes from the server (default '+' for back-compat). */}
+              {question.mixed ? (
+                <div className="fraction-expression">
+                  {formatMixed(question.w1, question.n1, question.d1)}
+                  <span className="frac-operator">{question.op || '+'}</span>
+                  {formatMixed(question.w2, question.n2, question.d2)}
+                  <span className="frac-operator">=</span>
+                </div>
+              ) : (
+                <div className="fraction-expression">
+                  {formatFraction(question.n1, question.d1)}
+                  <span className="frac-operator">{question.op || '+'}</span>
+                  {formatFraction(question.n2, question.d2)}
+                  <span className="frac-operator">=</span>
+                </div>
+              )}
+
+              {/* Single text input — type answer as "3/4" or "2 3/4" */}
+              <input
+                className="answer-input"
+                type="text"
+                value={answer}
+                onChange={e => { if (!revealed) setAnswer(e.target.value) }}
+                disabled={revealed}
+                placeholder={question.mixed ? 'e.g. 2 3/4' : 'e.g. 3/4'}
+                onKeyDown={handleKeyDown}
+                autoFocus
+              />
+            </div>
+          )
         )}
 
         {renderFeedback(feedback, isCorrect)}
@@ -60997,9 +61324,12 @@ function TwinHuntApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
+    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
+    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
+    const timeTaken = timer.stop ? timer.stop() : 0
+    const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
     try {
       const r = await fetch(`${API}/twinhunt-api/check`, {
         method: 'POST',
@@ -61007,10 +61337,19 @@ function TwinHuntApp({ onBack, isGoalMode = false }) {
         body: JSON.stringify({ ...(typeof question !== 'undefined' ? question : {}), userAnswer: '', answer: '', sessionGoal })
       })
       const d = await r.json()
-      if (sessionGoal === 'perfect') {
-        try { setFinished(true); timer.reset() } catch(_) {}
+      const corrAns = d.display || d.correctAnswer || d.answer || '—'
+      if (typeof setResults === 'function') {
+        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
-    } catch(e) { console.error('handleTimeout error:', e) }
+      if (sessionGoal === 'perfect') {
+        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+      }
+    } catch(e) {
+      console.error('handleTimeout error:', e)
+      if (typeof setResults === 'function') {
+        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
+      }
+    }
   }
 
 const generateRound = (n) => {
@@ -61307,9 +61646,12 @@ function SqrtApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
+    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
+    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
+    const timeTaken = timer.stop ? timer.stop() : 0
+    const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
     try {
       const r = await fetch(`${API}/sqrt-api/check`, {
         method: 'POST',
@@ -61317,10 +61659,19 @@ function SqrtApp({ onBack, isGoalMode = false }) {
         body: JSON.stringify({ ...(typeof question !== 'undefined' ? question : {}), userAnswer: '', answer: '', sessionGoal })
       })
       const d = await r.json()
-      if (sessionGoal === 'perfect') {
-        try { setFinished(true); timer.reset() } catch(_) {}
+      const corrAns = d.display || d.correctAnswer || d.answer || '—'
+      if (typeof setResults === 'function') {
+        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
-    } catch(e) { console.error('handleTimeout error:', e) }
+      if (sessionGoal === 'perfect') {
+        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+      }
+    } catch(e) {
+      console.error('handleTimeout error:', e)
+      if (typeof setResults === 'function') {
+        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
+      }
+    }
   }
 
 const fetchQuestion = async (step) => {
@@ -61609,9 +61960,12 @@ function PolyMulApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
+    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
+    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
+    const timeTaken = timer.stop ? timer.stop() : 0
+    const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
     try {
       const r = await fetch(`${API}/polymul-api/check`, {
         method: 'POST',
@@ -61619,10 +61973,19 @@ function PolyMulApp({ onBack, isGoalMode = false }) {
         body: JSON.stringify({ ...(typeof question !== 'undefined' ? question : {}), userAnswer: '', answer: '', sessionGoal })
       })
       const d = await r.json()
-      if (sessionGoal === 'perfect') {
-        try { setFinished(true); timer.reset() } catch(_) {}
+      const corrAns = d.display || d.correctAnswer || d.answer || '—'
+      if (typeof setResults === 'function') {
+        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
-    } catch(e) { console.error('handleTimeout error:', e) }
+      if (sessionGoal === 'perfect') {
+        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+      }
+    } catch(e) {
+      console.error('handleTimeout error:', e)
+      if (typeof setResults === 'function') {
+        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
+      }
+    }
   }
 
 const loadQuestion = async () => {
@@ -61927,9 +62290,12 @@ function PolyFactorApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
+    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
+    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
+    const timeTaken = timer.stop ? timer.stop() : 0
+    const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
     try {
       const r = await fetch(`${API}/polyfactor-api/check`, {
         method: 'POST',
@@ -61937,10 +62303,19 @@ function PolyFactorApp({ onBack, isGoalMode = false }) {
         body: JSON.stringify({ ...(typeof question !== 'undefined' ? question : {}), userAnswer: '', answer: '', sessionGoal })
       })
       const d = await r.json()
-      if (sessionGoal === 'perfect') {
-        try { setFinished(true); timer.reset() } catch(_) {}
+      const corrAns = d.display || d.correctAnswer || d.answer || '—'
+      if (typeof setResults === 'function') {
+        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
-    } catch(e) { console.error('handleTimeout error:', e) }
+      if (sessionGoal === 'perfect') {
+        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+      }
+    } catch(e) {
+      console.error('handleTimeout error:', e)
+      if (typeof setResults === 'function') {
+        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
+      }
+    }
   }
 
 const loadQuestion = async () => {
@@ -62230,9 +62605,12 @@ function PrimeFactorApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
+    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
+    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
+    const timeTaken = timer.stop ? timer.stop() : 0
+    const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
     try {
       const r = await fetch(`${API}/primefactor-api/check`, {
         method: 'POST',
@@ -62240,10 +62618,19 @@ function PrimeFactorApp({ onBack, isGoalMode = false }) {
         body: JSON.stringify({ ...(typeof question !== 'undefined' ? question : {}), userAnswer: '', answer: '', sessionGoal })
       })
       const d = await r.json()
-      if (sessionGoal === 'perfect') {
-        try { setFinished(true); timer.reset() } catch(_) {}
+      const corrAns = d.display || d.correctAnswer || d.answer || '—'
+      if (typeof setResults === 'function') {
+        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
-    } catch(e) { console.error('handleTimeout error:', e) }
+      if (sessionGoal === 'perfect') {
+        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+      }
+    } catch(e) {
+      console.error('handleTimeout error:', e)
+      if (typeof setResults === 'function') {
+        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
+      }
+    }
   }
 
 const loadQuestion = async () => {
@@ -62577,9 +62964,12 @@ function QFormulaApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
+    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
+    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
+    const timeTaken = timer.stop ? timer.stop() : 0
+    const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
     try {
       const r = await fetch(`${API}/qformula-api/check`, {
         method: 'POST',
@@ -62587,10 +62977,19 @@ function QFormulaApp({ onBack, isGoalMode = false }) {
         body: JSON.stringify({ ...(typeof question !== 'undefined' ? question : {}), userAnswer: '', answer: '', sessionGoal })
       })
       const d = await r.json()
-      if (sessionGoal === 'perfect') {
-        try { setFinished(true); timer.reset() } catch(_) {}
+      const corrAns = d.display || d.correctAnswer || d.answer || '—'
+      if (typeof setResults === 'function') {
+        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
-    } catch(e) { console.error('handleTimeout error:', e) }
+      if (sessionGoal === 'perfect') {
+        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+      }
+    } catch(e) {
+      console.error('handleTimeout error:', e)
+      if (typeof setResults === 'function') {
+        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
+      }
+    }
   }
 
 const loadQuestion = async () => {
@@ -62901,9 +63300,12 @@ function SimulApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
+    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
+    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
+    const timeTaken = timer.stop ? timer.stop() : 0
+    const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
     try {
       const r = await fetch(`${API}/simul-api/check`, {
         method: 'POST',
@@ -62911,10 +63313,19 @@ function SimulApp({ onBack, isGoalMode = false }) {
         body: JSON.stringify({ ...(typeof question !== 'undefined' ? question : {}), userAnswer: '', answer: '', sessionGoal })
       })
       const d = await r.json()
-      if (sessionGoal === 'perfect') {
-        try { setFinished(true); timer.reset() } catch(_) {}
+      const corrAns = d.display || d.correctAnswer || d.answer || '—'
+      if (typeof setResults === 'function') {
+        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
-    } catch(e) { console.error('handleTimeout error:', e) }
+      if (sessionGoal === 'perfect') {
+        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+      }
+    } catch(e) {
+      console.error('handleTimeout error:', e)
+      if (typeof setResults === 'function') {
+        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
+      }
+    }
   }
 
 const loadQuestion = async () => {
@@ -63223,9 +63634,12 @@ function FuncEvalApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
+    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
+    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
+    const timeTaken = timer.stop ? timer.stop() : 0
+    const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
     try {
       const r = await fetch(`${API}/funceval-api/check`, {
         method: 'POST',
@@ -63233,10 +63647,19 @@ function FuncEvalApp({ onBack, isGoalMode = false }) {
         body: JSON.stringify({ ...(typeof question !== 'undefined' ? question : {}), userAnswer: '', answer: '', sessionGoal })
       })
       const d = await r.json()
-      if (sessionGoal === 'perfect') {
-        try { setFinished(true); timer.reset() } catch(_) {}
+      const corrAns = d.display || d.correctAnswer || d.answer || '—'
+      if (typeof setResults === 'function') {
+        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
-    } catch(e) { console.error('handleTimeout error:', e) }
+      if (sessionGoal === 'perfect') {
+        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+      }
+    } catch(e) {
+      console.error('handleTimeout error:', e)
+      if (typeof setResults === 'function') {
+        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
+      }
+    }
   }
 
 const loadQuestion = async () => {
@@ -63512,9 +63935,12 @@ function LineEqApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
+    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
+    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
+    const timeTaken = timer.stop ? timer.stop() : 0
+    const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
     try {
       const r = await fetch(`${API}/lineq-api/check`, {
         method: 'POST',
@@ -63522,10 +63948,19 @@ function LineEqApp({ onBack, isGoalMode = false }) {
         body: JSON.stringify({ ...(typeof question !== 'undefined' ? question : {}), userAnswer: '', answer: '', sessionGoal })
       })
       const d = await r.json()
-      if (sessionGoal === 'perfect') {
-        try { setFinished(true); timer.reset() } catch(_) {}
+      const corrAns = d.display || d.correctAnswer || d.answer || '—'
+      if (typeof setResults === 'function') {
+        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
-    } catch(e) { console.error('handleTimeout error:', e) }
+      if (sessionGoal === 'perfect') {
+        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+      }
+    } catch(e) {
+      console.error('handleTimeout error:', e)
+      if (typeof setResults === 'function') {
+        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
+      }
+    }
   }
 
 const loadQuestion = async () => {
@@ -64083,22 +64518,33 @@ function CustomApp({ onBack, isGoalMode = false }) {
   
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
-    if (phase === 'finished') return
+    if (typeof finished !== 'undefined' && finished) return
+    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
+    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
+    const timeTaken = timer.stop ? timer.stop() : 0
+    const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
     try {
-      const apiPath = getApiPathForType(curType || 'basicarith')
       const r = await fetch(`${API}/${apiPath}/check`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
         body: JSON.stringify({ ...(typeof question !== 'undefined' ? question : {}), userAnswer: '', answer: '', sessionGoal })
       })
       const d = await r.json()
-      if (sessionGoal === 'perfect') {
-        try { setPhase('finished'); timer.reset() } catch(_) {}
+      const corrAns = d.display || d.correctAnswer || d.answer || '—'
+      if (typeof setResults === 'function') {
+        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
-    } catch(e) { console.error('handleTimeout error:', e) }
+      if (sessionGoal === 'perfect') {
+        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+      }
+    } catch(e) {
+      console.error('handleTimeout error:', e)
+      if (typeof setResults === 'function') {
+        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
+      }
+    }
   }
 
 const startQuiz = async () => {
@@ -67266,9 +67712,12 @@ function RiyaApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
+    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
+    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
+    const timeTaken = timer.stop ? timer.stop() : 0
+    const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
     try {
       const r = await fetch(`${API}/riya-api/check`, {
         method: 'POST',
@@ -67276,10 +67725,19 @@ function RiyaApp({ onBack, isGoalMode = false }) {
         body: JSON.stringify({ ...(typeof question !== 'undefined' ? question : {}), userAnswer: '', answer: '', sessionGoal })
       })
       const d = await r.json()
-      if (sessionGoal === 'perfect') {
-        try { setFinished(true); timer.reset() } catch(_) {}
+      const corrAns = d.display || d.correctAnswer || d.answer || '—'
+      if (typeof setResults === 'function') {
+        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
-    } catch(e) { console.error('handleTimeout error:', e) }
+      if (sessionGoal === 'perfect') {
+        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+      }
+    } catch(e) {
+      console.error('handleTimeout error:', e)
+      if (typeof setResults === 'function') {
+        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
+      }
+    }
   }
 
 const startQuiz = () => {
