@@ -45124,11 +45124,18 @@ function App() {
                         )}
 
                         <div 
-                          style={mode === 'angles' ? { whiteSpace: 'pre-wrap', opacity: 0.9, fontSize: '1rem', letterSpacing: '0' } : { whiteSpace: 'pre-wrap', opacity: 0.95, fontSize: '1.1rem', letterSpacing: '0.2px' }} 
-                          dangerouslySetInnerHTML={{ __html: block.content
-                            .replace(/\*\*(.*?)\*\*/g, mode === 'angles' ? '<strong>$1</strong>' : '<strong style="color: var(--clr-accent, #2ea043); font-weight: 800;">$1</strong>')
-                            .replace(/•/g, mode === 'angles' ? '•' : '<span style="display: inline-block; transform: scale(1.2); margin-right: 8px;">👉</span>') 
-                          }} 
+                          style={mode === 'angles' ? { whiteSpace: 'pre-wrap', opacity: 0.9, fontSize: '1rem', letterSpacing: '0', lineHeight: '1.75' } : { whiteSpace: 'pre-wrap', opacity: 0.95, fontSize: '1.1rem', letterSpacing: '0.2px' }} 
+                          dangerouslySetInnerHTML={{ __html: (() => {
+                            let html = block.content
+                              .replace(/\*\*(.*?)\*\*/g, mode === 'angles' ? '<strong>$1</strong>' : '<strong style="color: var(--clr-accent, #2ea043); font-weight: 800;">$1</strong>');
+                            if (mode === 'angles') {
+                              // Strip bullet markers and present as clean paragraphs
+                              html = html.replace(/•\s*/g, '');
+                            } else {
+                              html = html.replace(/•/g, '<span style="display: inline-block; transform: scale(1.2); margin-right: 8px;">👉</span>');
+                            }
+                            return html;
+                          })() }} 
                         />
                       </div>
                     </div>
@@ -45136,8 +45143,11 @@ function App() {
                       <button 
                         onClick={() => {
                           const elapsed = Date.now() - blockStartTime;
-                          if (elapsed < 60000) {
-                            setWarningMessage('Please take your time to understand this concept. Read for at least 1 minute before proceeding.');
+                          const minTime = mode === 'angles' ? 40000 : 60000;
+                          if (elapsed < minTime) {
+                            setWarningMessage(mode === 'angles'
+                              ? 'Please take your time to understand this concept. Read for at least 40 seconds before proceeding.'
+                              : 'Please take your time to understand this concept. Read for at least 1 minute before proceeding.');
                           } else {
                             setRevealedBlocks(prev => prev + 1);
                             setBlockStartTime(Date.now());
@@ -45160,6 +45170,40 @@ function App() {
                         }}
                       >
                         Got it, next step ↓
+                      </button>
+                    )}
+                    {/* Start Test button — appears inside the last block after all blocks are revealed */}
+                    {idx === revealedBlocks - 1 && revealedBlocks === learnData.blocks.length && (
+                      <button 
+                        onClick={() => {
+                          const elapsed = Date.now() - blockStartTime;
+                          const minTime = mode === 'angles' ? 40000 : 60000;
+                          if (elapsed < minTime) {
+                            setWarningMessage(mode === 'angles'
+                              ? 'Please review this section carefully. Read for at least 40 seconds before proceeding to the test.'
+                              : 'Please review the common pitfalls carefully. Read for at least 1 minute before proceeding to the test.');
+                          } else {
+                            setLearningPhase('test');
+                          }
+                        }}
+                        style={{
+                          padding: '16px 36px', borderRadius: 30, fontSize: '1.25rem',
+                          background: 'linear-gradient(135deg, #2ea043, #1f7f32)', color: 'white', border: 'none', cursor: 'pointer',
+                          fontWeight: '800', boxShadow: '0 8px 24px rgba(46, 160, 67, 0.3)',
+                          transition: 'all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1)',
+                          display: 'inline-flex', alignItems: 'center', gap: '12px',
+                          zIndex: 2, marginTop: '8px'
+                        }}
+                        onMouseOver={(e) => {
+                          e.currentTarget.style.transform = 'translateY(-3px) scale(1.05)';
+                          e.currentTarget.style.boxShadow = '0 12px 30px rgba(46, 160, 67, 0.5)';
+                        }}
+                        onMouseOut={(e) => {
+                          e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                          e.currentTarget.style.boxShadow = '0 8px 24px rgba(46, 160, 67, 0.3)';
+                        }}
+                      >
+                        <span>🎯</span> Start Test <span>🚀</span>
                       </button>
                     )}
                   </div>
@@ -45198,35 +45242,7 @@ function App() {
                 </div>
               </div>
             )}
-            {revealedBlocks === learnData.blocks?.length && (
-              <div style={{ textAlign: 'center', marginTop: 40, marginBottom: 20 }}>
-                <button onClick={() => {
-                  const elapsed = Date.now() - blockStartTime;
-                  if (elapsed < 60000) {
-                    setWarningMessage('Please review the common pitfalls carefully. Read for at least 1 minute before proceeding to the test.');
-                  } else {
-                    setLearningPhase('test');
-                  }
-                }} style={{
-                  padding: '16px 36px', borderRadius: 30, fontSize: '1.25rem',
-                  background: 'linear-gradient(135deg, #2ea043, #1f7f32)', color: 'white', border: 'none', cursor: 'pointer',
-                  fontWeight: '800', boxShadow: '0 8px 24px rgba(46, 160, 67, 0.3)',
-                  transition: 'all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1)',
-                  display: 'inline-flex', alignItems: 'center', gap: '12px'
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-3px) scale(1.05)';
-                  e.currentTarget.style.boxShadow = '0 12px 30px rgba(46, 160, 67, 0.5)';
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                  e.currentTarget.style.boxShadow = '0 8px 24px rgba(46, 160, 67, 0.3)';
-                }}
-                >
-                  <span>🎯</span> I'm Ready — Let's Test! <span>🚀</span>
-                </button>
-              </div>
-            )}
+            {/* Start Test button is now integrated into the last learning block above */}
           </div>
         </div>
       </div>
