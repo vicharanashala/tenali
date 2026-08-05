@@ -10,3 +10,7 @@ ISSUE_DRAFT.md
 PR_DRAFT.md
 **/*.ps1
 .env
+
+# local scratch / debug throwaways
+scratch/
+server/_probe*.js

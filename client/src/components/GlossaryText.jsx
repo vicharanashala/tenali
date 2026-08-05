@@ -23,6 +23,7 @@ import rawTerms from '../data/glossaryTerms.json'
 
 // ─── Build match map once at module load ────────────────────────────────────
 // matchMap: lowercase form → { term (canonical), definition }
+// eslint-disable-next-line react-refresh/only-export-components
 export const matchMap = {}
 
 try {
@@ -157,8 +158,8 @@ export default function GlossaryText({ text }) {
   const segments = useMemo(() => {
     if (!text || typeof text !== 'string' || !glossaryRegex) return null
 
-    // Reset regex lastIndex before each use
-    glossaryRegex.lastIndex = 0
+    // Create a fresh regex instance to avoid mutating the module-level regex's lastIndex
+    const localRegex = new RegExp(glossaryRegex.source, glossaryRegex.flags)
 
     const result = []
     let lastIndex = 0
@@ -166,7 +167,7 @@ export default function GlossaryText({ text }) {
     // Track which base terms have already been made interactive (first occurrence only)
     const seen = new Set()
 
-    while ((match = glossaryRegex.exec(text)) !== null) {
+    while ((match = localRegex.exec(text)) !== null) {
       const matchedText = match[0]
       const entry = matchMap[matchedText.toLowerCase()]
       if (!entry) continue
@@ -209,7 +210,7 @@ export default function GlossaryText({ text }) {
 
   return (
     <>
-      {segments.map((seg, i) => {
+      {segments.map((seg) => {
         if (seg.type === 'text') return seg.value || null
         return (
           <GlossaryTooltip

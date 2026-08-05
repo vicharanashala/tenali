@@ -37,7 +37,7 @@ export default function WordCreatorApp({ onBack }) {
     try {
       const savedXp = localStorage.getItem('tenali_wordcreator_xp');
       if (savedXp) setTotalXp(Number(savedXp));
-    } catch {}
+    } catch { /* ignored */ }
   }, []);
 
   // Initialize stats for the 20 puzzles in a level

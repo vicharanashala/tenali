@@ -276,7 +276,7 @@ export default function IdliVadaSambharApp({ onBack }) {
     );
   }
 
-  const correctIsNumber = truePhraseArr(count).length === 0;
+  const _correctIsNumber = truePhraseArr(count).length === 0;
   const recent = history.slice(-8).reverse();
 
   return (

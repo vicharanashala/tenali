@@ -1,0 +1,473 @@
+{
+  "module": 3,
+  "missionId": 31,
+  "title": "Three Spaces Again",
+  "original_question": "With A = [[1,4,7],[2,5,8],[3,6,9]], identify three fundamental subspaces: R = Row Space = span of rows = { α(1,4,7) + β(2,5,8) + γ(3,6,9) }, C = Column Space = span of columns = { α(1,2,3) + β(4,5,6) + γ(7,8,9) }, N = Null Space = { (x,y,z) | A*(x,y,z) = 0 } = t(1,-2,1). Visualize each set in GeoGebra!",
+  "core_concept": "Any matrix has a row space (span of rows), column space (span of columns), and null space. The row space and column space have the same dimension (rank), and the null space has dimension n-rank.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M3Q10E1",
+        "question": "What is the rank of A = [[1,4,7],[2,5,8],[3,6,9]]?",
+        "options": [
+          "2",
+          "3",
+          "1",
+          "0"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: Row3 = 2×Row2 - Row1, so Row3 is redundant. Step 2: Two independent rows give rank 2."
+      },
+      {
+        "id": "M3Q10E2",
+        "question": "What is the dimension of the row space of A?",
+        "options": [
+          "2",
+          "3",
+          "1",
+          "0"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: The row space dimension equals the rank. Step 2: rank = 2, so the row space is 2-dimensional (a plane)."
+      },
+      {
+        "id": "M3Q10E3",
+        "question": "What is the dimension of the column space of A?",
+        "options": [
+          "2",
+          "3",
+          "1",
+          "0"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: Column space dimension = row space dimension = rank. Step 2: rank = 2, so the column space is also 2-dimensional."
+      },
+      {
+        "id": "M3Q10E4",
+        "question": "What is the dimension of the null space of A?",
+        "options": [
+          "1",
+          "2",
+          "3",
+          "0"
+        ],
+        "correct_option": "1",
+        "explanation": "Step 1: By rank-nullity: 2 + nullity = 3. Step 2: nullity = 1, so the null space is 1-dimensional (a line)."
+      },
+      {
+        "id": "M3Q10E5",
+        "question": "What is the null space direction of A = [[1,4,7],[2,5,8],[3,6,9]]?",
+        "options": [
+          "(1,-2,1)",
+          "(1,2,-1)",
+          "(-1,2,1)",
+          "(2,-1,1)"
+        ],
+        "correct_option": "(1,-2,1)",
+        "explanation": "Step 1: Solving Ax=0 gives x=z, y=-2z. Step 2: Setting z=t gives the null space direction t(1,-2,1). Step 3: This 1-D null space confirms the rank is 2 (one constraint in R^3)."
+      },
+      {
+        "id": "M3Q10E6",
+        "question": "The row space of A is spanned by which vectors?",
+        "options": [
+          "{(1,4,7),(2,5,8)} (first two rows)",
+          "{(1,2,3),(4,5,6)} — does t match",
+          "{(7,8,9)})",
+          "All three rows — does t match"
+        ],
+        "correct_option": "{(1,4,7),(2,5,8)} (first two rows)",
+        "explanation": "Step 1: Row3 = 2×Row2 - Row1, so it's redundant. Step 2: The first two rows span the row space."
+      },
+      {
+        "id": "M3Q10E7",
+        "question": "The column space of A is spanned by which vectors?",
+        "options": [
+          "{(1,2,3),(4,5,6)} (first two columns)",
+          "{(1,4,7),(2,5,8)} — does t match",
+          "{(7,8,9)})",
+          "All three columns — does t match"
+        ],
+        "correct_option": "{(1,2,3),(4,5,6)} (first two columns)",
+        "explanation": "Step 1: Column3 = 2×Column2 - Column1, so it's redundant. Step 2: The first two columns span the column space."
+      },
+      {
+        "id": "M3Q10E8",
+        "question": "Does the rank-nullity theorem hold for A? (rank + nullity = n)",
+        "options": [
+          "Yes: 2 + 1 = 3 = number of columns",
+          "— t here",
+          "Only approximately — does t match",
+          "Only for square matrices"
+        ],
+        "correct_option": "Yes: 2 + 1 = 3 = number of columns",
+        "explanation": "Step 1: rank = 2, nullity = 1. Step 2: 2+1 = 3 = n (number of columns). The theorem holds."
+      },
+      {
+        "id": "M3Q10E9",
+        "question": "What geometric shape is the row space of A?",
+        "options": [
+          "A plane through the origin in R³",
+          "A line through the origin",
+          "All of R³)",
+          "A point)"
+        ],
+        "correct_option": "A plane through the origin in R³",
+        "explanation": "Step 1: The row space is 2-dimensional in R³. Step 2: A 2D subspace in R³ is a plane through the origin."
+      },
+      {
+        "id": "M3Q10E10",
+        "question": "What geometric shape is the null space of A?",
+        "options": [
+          "A line through the origin",
+          "A plane through the origin",
+          "All of R³)",
+          "A point)"
+        ],
+        "correct_option": "A line through the origin",
+        "explanation": "Step 1: The null space is 1-dimensional. Step 2: A 1D subspace in R³ is a line through the origin."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M3Q10M1",
+        "question": "The row space and column space of A both have dimension 2. Are they the same set?",
+        "options": [
+          "No — the row space is in R³ (rows) and the column space is in R³ (columns), but they are generally different planes",
+          "always the same — does t match",
+          "Only for symmetric matrices",
+          "Only for invertible matrices"
+        ],
+        "correct_option": "No — the row space is in R³ (rows) and the column space is in R³ (columns), but they are generally different planes",
+        "explanation": "Step 1: Row space = span{(1,4,7),(2,5,8)}, Column space = span{(1,2,3),(4,5,6)}. Step 2: These are different planes in R³ — same dimension but different orientations."
+      },
+      {
+        "id": "M3Q10M2",
+        "question": "What is the rank-nullity relationship for A?",
+        "options": [
+          "rank(2) + nullity(1) = 3 = n",
+          "rank(3) + nullity(0) = 3 (xx)",
+          "rank(1) + nullity(2) = 3",
+          "rank(0) + nullity(3) = 3"
+        ],
+        "correct_option": "rank(2) + nullity(1) = 3 = n",
+        "explanation": "Step 1: rank = 2, nullity = 1. Step 2: 2+1 = 3 = number of columns."
+      },
+      {
+        "id": "M3Q10M3",
+        "question": "Is the null space perpendicular to the row space of A?",
+        "options": [
+          "Yes — by the Fundamental Theorem",
+          "— t here",
+          "Only approximately",
+          "Only for special matrices"
+        ],
+        "correct_option": "Yes — by the Fundamental Theorem",
+        "explanation": "Step 1: The Fundamental Theorem states R(A) ⊥ N(A). Step 2: Every row vector is perpendicular to (1,-2,1)."
+      },
+      {
+        "id": "M3Q10M4",
+        "question": "How many dimensions of R³ does the row space + null space account for?",
+        "options": [
+          "3 (all of R³)",
+          "2",
+          "1",
+          "4"
+        ],
+        "correct_option": "3 (all of R³)",
+        "explanation": "Step 1: Row space is 2D, null space is 1D. Step 2: 2+1=3 = dim(R³). Together they span all of R³."
+      },
+      {
+        "id": "M3Q10M5",
+        "question": "Is the row space of A the same as the column space of Aᵀ?",
+        "options": [
+          "Yes — row space of A = column space of Aᵀ by definition",
+          "— t here",
+          "Only for symmetric matrices",
+          "Only in R²)"
+        ],
+        "correct_option": "Yes — row space of A = column space of Aᵀ by definition",
+        "explanation": "Step 1: The rows of A become the columns of Aᵀ. Step 2: Therefore span{rows of A} = span{columns of Aᵀ}."
+      },
+      {
+        "id": "M3Q10M6",
+        "question": "What is the dimension of the left null space of A (null space of Aᵀ)?",
+        "options": [
+          "1",
+          "2",
+          "3",
+          "0"
+        ],
+        "correct_option": "1",
+        "explanation": "Step 1: Aᵀ is 3×3 with rank 2. Step 2: Left nullity = m - rank = 3-2 = 1."
+      },
+      {
+        "id": "M3Q10M7",
+        "question": "Can you find a basis for R³ using vectors from the row space and null space of A?",
+        "options": [
+          "Yes — two from row space + one from null space = 3 independent vectors",
+          "— they don't span R³",
+          "Only if A is invertible",
+          "Only with 4 vectors — does t match"
+        ],
+        "correct_option": "Yes — two from row space + one from null space = 3 independent vectors",
+        "explanation": "Step 1: Row space: (1,4,7) and (2,5,8). Null space: (1,-2,1). Step 2: These 3 vectors are independent and span R³ — a basis."
+      },
+      {
+        "id": "M3Q10M8",
+        "question": "Why do the row space and column space have the same dimension?",
+        "options": [
+          "Row rank always equals column rank — a fundamental theorem of linear algebra",
+          "Because A is square — does t match",
+          "By coincidence — does t match",
+          "Because the entries are consecutive"
+        ],
+        "correct_option": "Row rank always equals column rank — a fundamental theorem of linear algebra",
+        "explanation": "Step 1: The rank of A is defined as the dimension of the row space. Step 2: It's a theorem that this equals the dimension of the column space."
+      },
+      {
+        "id": "M3Q10M9",
+        "question": "If A has rank 2, what is the dimension of the column space?",
+        "options": [
+          "2",
+          "3",
+          "1",
+          "0"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: Column space dimension = rank. Step 2: rank = 2, so column space is 2D."
+      },
+      {
+        "id": "M3Q10M10",
+        "question": "Is the null space of A the same as the null space of the matrix formed by only the first two rows of A?",
+        "options": [
+          "Yes — the third row is redundant, so it adds no new constraints",
+          "— t here",
+          "Only approximately — does t match",
+          "Only for special cases"
+        ],
+        "correct_option": "Yes — the third row is redundant, so it adds no new constraints",
+        "explanation": "Step 1: Row3 = 2×Row2 - Row1, so Ax=0 with all three rows is equivalent to using just the first two. Step 2: The null space is determined by the independent rows only."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M3Q10H1",
+        "question": "For A = [[1,4,7],[2,5,8],[3,6,9]], what are all four fundamental subspaces?",
+        "options": [
+          "R(A)=plane, C(A)=plane, N(A)=line, N(Aᵀ)=line",
+          "R(A)=line, C(A)=line, N(A)=plane, N(Aᵀ)=plane",
+          "All are planes — does t match",
+          "All are lines — does t match"
+        ],
+        "correct_option": "R(A)=plane, C(A)=plane, N(A)=line, N(Aᵀ)=line",
+        "explanation": "Step 1: rank=2. R(A) and C(A) are 2D planes. Step 2: N(A) and N(Aᵀ) are 1D lines (nullity = 3-2 = 1)."
+      },
+      {
+        "id": "M3Q10H2",
+        "question": "What is the relationship between dim(R(A)) and dim(C(A))?",
+        "options": [
+          "They are always equal (= rank)",
+          "R(A) is always larger",
+          "C(A) is always larger",
+          "relationship"
+        ],
+        "correct_option": "They are always equal (= rank)",
+        "explanation": "Step 1: Both dimensions equal the rank of A. Step 2: This is a fundamental property — row rank = column rank for any matrix."
+      },
+      {
+        "id": "M3Q10H3",
+        "question": "Why are the row space and column space different planes even though they have the same dimension?",
+        "options": [
+          "Because they are spanned by different vectors in different subspaces of R³",
+          "Because the matrix is t symmetric",
+          "Because rank is 2 — does t match",
+          "By coincidence — does t match"
+        ],
+        "correct_option": "Because they are spanned by different vectors in different subspaces of R³",
+        "explanation": "Step 1: Row space is spanned by rows: {(1,4,7),(2,5,8)}. Step 2: Column space is spanned by columns: {(1,2,3),(4,5,6)}. These are different sets of vectors, creating different planes."
+      },
+      {
+        "id": "M3Q10H4",
+        "question": "If A is an m×n matrix with rank r, what are the dimensions of all four subspaces?",
+        "options": [
+          "R(A): r in Rⁿ, N(A): n-r in Rⁿ, C(A): r in Rᵐ, N(Aᵀ): m-r in Rᵐ",
+          "All are r-dimensional",
+          "All are n-r dimensional",
+          "Depends on m and n only"
+        ],
+        "correct_option": "R(A): r in Rⁿ, N(A): n-r in Rⁿ, C(A): r in Rᵐ, N(Aᵀ): m-r in Rᵐ",
+        "explanation": "Step 1: Row space and null space live in Rⁿ. Step 2: Column space and left null space live in Rᵐ. Their dimensions are r, n-r, r, and m-r respectively."
+      },
+      {
+        "id": "M3Q10H5",
+        "question": "Can the row space and column space of a non-square matrix have the same dimension?",
+        "options": [
+          "Yes — row rank = column rank always, even for non-square matrices",
+          "— they always differ",
+          "Only for square matrices",
+          "Only for invertible matrices"
+        ],
+        "correct_option": "Yes — row rank = column rank always, even for non-square matrices",
+        "explanation": "Step 1: For a 2×5 matrix with rank 2, row space is 2D in R⁵ and column space is 2D in R². Step 2: Same dimension (2), different ambient spaces."
+      },
+      {
+        "id": "M3Q10H6",
+        "question": "For A = [[1,4,7],[2,5,8],[3,6,9]], decompose (1,0,0) into row space and null space components.",
+        "options": [
+          "Project onto row space plane and subtract to get null space component",
+          "t possible — does t match",
+          "(1,0,0) is entirely in the row space",
+          "(1,0,0) is entirely in the null space"
+        ],
+        "correct_option": "Project onto row space plane and subtract to get null space component",
+        "explanation": "Step 1: Project (1,0,0) onto the row space (perpendicular to (1,-2,1)). Step 2: The projection gives the row space component; the difference is the null space component."
+      },
+      {
+        "id": "M3Q10H7",
+        "question": "Why is the Fundamental Theorem called 'fundamental'?",
+        "options": [
+          "Because it connects all four subspaces and underpins virtually all of linear algebra",
+          "Because it was discovered first",
+          "Because it's the simplest theorem",
+          "Because it only applies to fundamental cases"
+        ],
+        "correct_option": "Because it connects all four subspaces and underpins virtually all of linear algebra",
+        "explanation": "Step 1: The theorem states R(A) ⊥ N(A) and C(A) ⊥ N(Aᵀ), with dimensions summing to n and m. Step 2: This structure underlies solutions to linear systems, least squares, and dimension theory."
+      },
+      {
+        "id": "M3Q10H8",
+        "question": "For A = [[1,4,7],[2,5,8],[3,6,9]], what is the equation of the row space plane?",
+        "options": [
+          "x - 2y + z = 0 (perpendicular to null direction (1,-2,1))",
+          "x + y + z = 0 — does t match",
+          "x + 4y + 7z = 0 — does t match",
+          "2x + 5y + 8z = 0 — does t match"
+        ],
+        "correct_option": "x - 2y + z = 0 (perpendicular to null direction (1,-2,1))",
+        "explanation": "Step 1: The row space is perpendicular to the null space direction (1,-2,1). Step 2: The plane perpendicular to (1,-2,1) through the origin is 1·x + (-2)·y + 1·z = 0, or x-2y+z=0."
+      },
+      {
+        "id": "M3Q10H9",
+        "question": "What is the equation of the column space plane of A?",
+        "options": [
+          "Depends on the specific column vectors — it's span{(1,2,3),(4,5,6)}",
+          "Same as row space — does t match",
+          "x+y+z=0)",
+          "Cant be determined — does t match"
+        ],
+        "correct_option": "Depends on the specific column vectors — it's span{(1,2,3),(4,5,6)}",
+        "explanation": "Step 1: Column space is span{(1,2,3),(4,5,6)}. Step 2: The normal to this plane is (1,2,3)×(4,5,6) = (12-18, 12-6, 5-8) = (-6,6,-3) or simplified (2,-2,1)."
+      },
+      {
+        "id": "M3Q10H10",
+        "question": "If we know rank(A)=2 for a 3×3 matrix, what can we definitively say about A?",
+        "options": [
+          "A is singular (det=0), has a non-trivial null space, and maps R³ onto a 2D plane",
+          "A is invertible — does t match",
+          "A is the zero matrix — does t match",
+          "A has full rank — does t match"
+        ],
+        "correct_option": "A is singular (det=0), has a non-trivial null space, and maps R³ onto a 2D plane",
+        "explanation": "Step 1: rank < n means A is singular. Step 2: Null space is 1D (non-trivial), and the range (column space) is a 2D plane — A collapses one dimension."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "emoji": "🏆",
+      "title": "Recommendation Systems",
+      "type": "mcq",
+      "concept": "Row space captures user preferences",
+      "story": "Netflix decomposes its rating matrix into subspaces. The row space captures meaningful user preferences — what genres and styles each user enjoys. The null space captures irrelevant patterns that don't help recommendations.",
+      "question": "In Netflix's recommendation system, which subspace contains the meaningful user preference patterns?",
+      "options": [
+        "The row space",
+        "The null space",
+        "The left null space",
+        "The zero subspace"
+      ],
+      "correct_option": "The row space",
+      "explanation": "Step 1: The row space contains the patterns that predict ratings. Step 2: The null space contains noise — directions that don't help with predictions."
+    },
+    {
+      "emoji": "📈",
+      "title": "Economics",
+      "type": "mcq",
+      "concept": "Column space represents achievable outputs",
+      "story": "In economic input-output analysis, the column space of the technology matrix represents all achievable output combinations. If a country's industries can produce certain goods, the column space shows every possible bundle that can be manufactured.",
+      "question": "In an input-output economic model, what does the column space represent?",
+      "options": [
+        "All achievable output combinations",
+        "The most efficient production",
+        "The cheapest products",
+        "The raw materials"
+      ],
+      "correct_option": "All achievable output combinations",
+      "explanation": "Step 1: The column space is the span of the column vectors. Step 2: Each column represents the output profile of one industry; their span covers all achievable output bundles."
+    },
+    {
+      "emoji": "🏗️",
+      "title": "Control Theory",
+      "type": "mcq",
+      "concept": "Null space represents uncontrollable states",
+      "story": "In engineering control systems, the row space represents states you can control with inputs. The null space represents states that your inputs cannot influence. A well-designed controller minimizes the null space.",
+      "question": "Which subspace represents the uncontrollable states in a control system?",
+      "options": [
+        "The null space",
+        "The row space",
+        "The column space",
+        "The left null space"
+      ],
+      "correct_option": "The null space",
+      "explanation": "Step 1: The null space contains directions that inputs cannot reach. Step 2: States in the null space are uncontrollable — no input can move them."
+    },
+    {
+      "emoji": "🧬",
+      "title": "Bioinformatics",
+      "type": "mcq",
+      "concept": "Four subspaces of gene expression data",
+      "story": "In genomics, researchers form matrices of gene expression data. The row space captures main patterns of gene co-regulation, the column space captures experimental conditions, and the null space reveals redundant genes.",
+      "question": "In gene expression analysis, what do the four fundamental subspaces reveal?",
+      "options": [
+        "Gene patterns, condition patterns, redundant genes, and unmeasurable conditions",
+        "Only gene locations",
+        "Only protein structures",
+        "Only DNA sequences"
+      ],
+      "correct_option": "Gene patterns, condition patterns, redundant genes, and unmeasurable conditions",
+      "explanation": "Step 1: Row space = gene co-regulation patterns. Step 2: Column space = condition profiles. Null space = redundant genes. Left null space = unmeasurable conditions."
+    },
+    {
+      "emoji": "📡",
+      "title": "Communications",
+      "type": "mcq",
+      "concept": "Four subspaces of channel matrix",
+      "story": "In wireless communications, the channel matrix describes signal propagation. The row space contains transmitted signal patterns, the column space contains receivable signals, the null space contains undetectable inputs, and the left null space contains noise-only directions.",
+      "question": "In wireless communications, what does the null space of the channel matrix represent?",
+      "options": [
+        "Input signals that produce zero output (undetectable)",
+        "The strongest signals",
+        "The fastest data rates",
+        "The clearest channels"
+      ],
+      "correct_option": "Input signals that produce zero output (undetectable)",
+      "explanation": "Step 1: The null space contains inputs x such that Hx=0. Step 2: These signals are completely absorbed by the channel — they produce no output and cannot be detected."
+    },
+    {
+      "emoji": "🎓",
+      "title": "Education",
+      "type": "mcq",
+      "concept": "Row space reveals student ability dimensions",
+      "story": "A university analyses student performance across courses using a matrix. The row space reveals the main skill dimensions (math, verbal, etc.), while the null space reveals redundant course combinations.",
+      "question": "In educational data analysis, what does the row space of the performance matrix represent?",
+      "options": [
+        "The main skill dimensions that differentiate students",
+        "The hardest courses",
+        "The best students",
+        "The grading scale"
+      ],
+      "correct_option": "The main skill dimensions that differentiate students",
+      "explanation": "Step 1: The row space captures the directions of maximum variation in student performance. Step 2: These are the fundamental skills (math ability, verbal ability, etc.) that truly differentiate students."
+    }
+  ]
+}

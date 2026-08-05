@@ -1,0 +1,462 @@
+{
+  "module": 1,
+  "missionId": 14,
+  "title": "The Vanishing Act",
+  "original_question": "Matrix [[1,2],[2,4]] has determinant ZERO. Which vectors VANISH (map to the origin)?",
+  "core_concept": "The null space (kernel) of a matrix A is the set of all vectors x such that Ax = 0. When det(A) = 0, the null space contains non-zero vectors — these are the vectors that 'vanish' under the transformation. The dimension of the null space (nullity) is related to the rank by the rank-nullity theorem: rank + nullity = n.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M1Q14E1",
+        "question": "What is the determinant of A = [[1,2],[2,4]]?",
+        "options": [
+          "0",
+          "4",
+          "-4",
+          "8"
+        ],
+        "correct_option": "0",
+        "explanation": "Step 1: det(A) = (1)(4) - (2)(2) = 4 - 4 = 0. Step 2: The determinant is exactly zero. Step 3: This means A is singular — not invertible."
+      },
+      {
+        "id": "M1Q14E2",
+        "question": "What is A × (2, -1) for A = [[1,2],[2,4]]?",
+        "options": [
+          "(0, 0",
+          "(2, -1)",
+          "(1, 2)",
+          "(4, -2)"
+        ],
+        "correct_option": "(0, 0",
+        "explanation": "Step 1: A × (2,-1) = (1·2+2·(-1), 2·2+4·(-1)) = (2-2, 4-4) = (0,0). Step 2: The vector (2,-1) maps to the origin. Step 3: This vector is in the null space of A."
+      },
+      {
+        "id": "M1Q14E3",
+        "question": "What is the null space (kernel) of a matrix?",
+        "options": [
+          "The set of all vectors x such that Ax = 0",
+          "The set of all outputs of A",
+          "The set of all eigenvalues",
+          "The set of all row vectors"
+        ],
+        "correct_option": "The set of all vectors x such that Ax = 0",
+        "explanation": "Step 1: The null space ker(A) = {x : Ax = 0}. Step 2: It contains all vectors that the matrix sends to the zero vector. Step 3: For invertible matrices, the null space is just {0}. For singular matrices, it contains non-zero vectors."
+      },
+      {
+        "id": "M1Q14E4",
+        "question": "If A = [[1,2],[2,4]], what is A × (4, -2)?",
+        "options": [
+          "(0, 0",
+          "(4, -2)",
+          "(2, 4)",
+          "(8, -4)"
+        ],
+        "correct_option": "(0, 0",
+        "explanation": "Step 1: A × (4,-2) = (4-4, 8-8) = (0,0). Step 2: (4,-2) = 2 × (2,-1). Step 3: Scalar multiples of null space vectors are also in the null space."
+      },
+      {
+        "id": "M1Q14E5",
+        "question": "The row 2 of [[1,2],[2,4]] is twice row 1. This means:",
+        "options": [
+          "The rows are linearly dependent, causing det = 0",
+          "The matrix is invertible",
+          "The matrix has full rank",
+          "The null space is trivial"
+        ],
+        "correct_option": "The rows are linearly dependent, causing det = 0",
+        "explanation": "Step 1: Row 2 = 2 × Row 1. Step 2: Linear dependence of rows → det = 0. Step 3: The matrix loses a dimension of rank, creating a non-trivial null space."
+      },
+      {
+        "id": "M1Q14E6",
+        "question": "For the system x + 2y = 0 and 2x + 4y = 0, what is the relationship between x and y?",
+        "options": [
+          "x = -2y (both equations say the same thing)",
+          "x = 2y)",
+          "x = y)",
+          "x = 0 and y = 0 only — does t match"
+        ],
+        "correct_option": "x = -2y (both equations say the same thing)",
+        "explanation": "Step 1: x + 2y = 0 → x = -2y. Step 2: 2x + 4y = 0 → x = -2y (same equation). Step 3: Both equations are identical (one is 2× the other), so there's one free parameter (y)."
+      },
+      {
+        "id": "M1Q14E7",
+        "question": "All vectors in the null space of [[1,2],[2,4]] lie on which line?",
+        "options": [
+          "The line x = -2y (or equivalently, y = -x/2)",
+          "The line x = y — does t match",
+          "The line x = 2y — does t match",
+          "The x-axis)"
+        ],
+        "correct_option": "The line x = -2y (or equivalently, y = -x/2)",
+        "explanation": "Step 1: The null space equation is x + 2y = 0, so x = -2y. Step 2: Parametrically, (x,y) = t(-2, 1) for any real t. Step 3: This is a line through the origin with direction vector (-2, 1)."
+      },
+      {
+        "id": "M1Q14E8",
+        "question": "Is the zero vector (0,0) always in the null space of any matrix?",
+        "options": [
+          "Yes — A × 0 = 0 for any matrix A",
+          "only for singular matrices",
+          "Only for 2×2 matrices",
+          "Only for matrices with positive determinant"
+        ],
+        "correct_option": "Yes — A × 0 = 0 for any matrix A",
+        "explanation": "Step 1: A × (0,0) = (0,0) for any matrix A (all terms are products with zero). Step 2: The zero vector always maps to the zero vector. Step 3: The null space always contains at least the zero vector — the question is whether it contains anything else."
+      },
+      {
+        "id": "M1Q14E9",
+        "question": "A singular (det = 0) 2×2 matrix maps the entire 2D plane to:",
+        "options": [
+          "A line through the origin (or a single point)",
+          "The entire plane — does t match",
+          "A circle)",
+          "A parabola)"
+        ],
+        "correct_option": "A line through the origin (or a single point)",
+        "explanation": "Step 1: det = 0 means the column space has dimension < 2. Step 2: The image is at most 1-dimensional (a line) or 0-dimensional (the origin). Step 3: The transformation collapses 2D space into a lower-dimensional object."
+      },
+      {
+        "id": "M1Q14E10",
+        "question": "If A = [[1,2],[2,4]], what is A × (-2, 1)?",
+        "options": [
+          "(0, 0",
+          "(-2, 1)",
+          "(1, 2)",
+          "(2, -1)"
+        ],
+        "correct_option": "(0, 0",
+        "explanation": "Step 1: A × (-2,1) = (1·(-2)+2·1, 2·(-2)+4·1) = (-2+2, -4+4) = (0,0). Step 2: (-2,1) is another null space vector. Step 3: It's the negative of (2,-1), confirming the null space is a line through the origin."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M1Q14M1",
+        "question": "Why is det(A) = 0 significant for understanding the null space?",
+        "options": [
+          "det = 0 means non-zero vectors exist that map to the origin (non-trivial null space)",
+          "det = 0 means the null space is empty",
+          "det = 0 means the null space is all of ℝ²",
+          "det = 0 tells us thing about the null space"
+        ],
+        "correct_option": "det = 0 means non-zero vectors exist that map to the origin (non-trivial null space)",
+        "explanation": "Step 1: det(A) ≠ 0 → Ax = 0 has only the trivial solution x = 0. Step 2: det(A) = 0 → Ax = 0 has non-trivial solutions. Step 3: These non-trivial solutions are the non-zero vectors in the null space."
+      },
+      {
+        "id": "M1Q14M2",
+        "question": "If the null space of a 2×2 matrix contains a non-zero vector, what is the dimension of the null space?",
+        "options": [
+          "1 (the null space is a line through the origin)",
+          "2 — t here",
+          "0 — t here",
+          "Cant be determined — does t match"
+        ],
+        "correct_option": "1 (the null space is a line through the origin)",
+        "explanation": "Step 1: For a 2×2 singular matrix, rank = 1 (at most). Step 2: By rank-nullity: nullity = 2 - rank = 2 - 1 = 1. Step 3: A 1-dimensional null space is a line through the origin."
+      },
+      {
+        "id": "M1Q14M3",
+        "question": "Can a singular matrix map infinitely many vectors to the origin?",
+        "options": [
+          "Yes — all vectors on the null space line map to the origin",
+          "only the zero vector maps to origin",
+          "Only two vectors — does t match",
+          "Only integer vectors — does t match"
+        ],
+        "correct_option": "Yes — all vectors on the null space line map to the origin",
+        "explanation": "Step 1: The null space is a line: t(-2, 1) for all t ∈ ℝ. Step 2: There are infinitely many values of t. Step 3: Each t gives a different vector that maps to zero — infinitely many vectors vanish."
+      },
+      {
+        "id": "M1Q14M4",
+        "question": "In the rank-nullity theorem, rank(A) + nullity(A) = n. For A = [[1,2],[2,4]], what is the rank?",
+        "options": [
+          "1",
+          "2",
+          "0",
+          "4"
+        ],
+        "correct_option": "1",
+        "explanation": "Step 1: rank(A) = number of linearly independent rows/columns. Step 2: Row 2 = 2 × Row 1, so only one independent row. Step 3: rank = 1. Check: rank + nullity = 1 + 1 = 2 = n ✓."
+      },
+      {
+        "id": "M1Q14M5",
+        "question": "A traffic network has a routing matrix with a null space. What does a null space vector represent physically?",
+        "options": [
+          "A flow pattern that cancels out at every junction (net flow = 0 everywhere)",
+          "The fastest route through the network",
+          "The maximum flow capacity",
+          "A blocked road — does t match"
+        ],
+        "correct_option": "A flow pattern that cancels out at every junction (net flow = 0 everywhere)",
+        "explanation": "Step 1: The routing matrix maps flows to net outputs at junctions. Step 2: A null space vector produces zero net output everywhere. Step 3: This represents a circulating flow — vehicles going in circles with no net effect at any junction."
+      },
+      {
+        "id": "M1Q14M6",
+        "question": "If you blur a photo (a singular transformation), why can't you perfectly restore the original?",
+        "options": [
+          "Because information in the null space is permanently lost — multiple original images could produce the same blurred result",
+          "Because blurring is too slow to reverse",
+          "Because the pixels are too small",
+          "Because the human eye can't see the difference"
+        ],
+        "correct_option": "Because information in the null space is permanently lost — multiple original images could produce the same blurred result",
+        "explanation": "Step 1: Blurring is modeled by a singular matrix (det = 0). Step 2: Null space vectors (certain image patterns) are mapped to zero — completely erased. Step 3: Without knowing what was erased, you can't uniquely reconstruct the original."
+      },
+      {
+        "id": "M1Q14M7",
+        "question": "For A = [[1,2],[2,4]], the augmented matrix [A|0] can be row-reduced to:",
+        "options": [
+          "[[1,2|0],[0,0|0]] — one pivot, one free variable",
+          "[[1,0|0],[0,1|0]] — free variables",
+          "[[0,0|0],[0,0|0]] — all zeros",
+          "[[1,2|0],[2,4|0]] — unchanged"
+        ],
+        "correct_option": "[[1,2|0],[0,0|0]] — one pivot, one free variable",
+        "explanation": "Step 1: Start with [[1,2],[2,4]]. Step 2: R2 → R2 - 2R1: [[1,2],[0,0]]. Step 3: One pivot (in column 1), one free variable (y). The solution x = -2y gives the null space."
+      },
+      {
+        "id": "M1Q14M8",
+        "question": "In audio compression (like MP3), some frequency components are discarded. Mathematically, this is equivalent to:",
+        "options": [
+          "Projecting onto the complement of the null space — those frequencies become zero",
+          "Adding ise to the signal",
+          "Multiplying by a diagonal matrix",
+          "Rotating the signal — does t match"
+        ],
+        "correct_option": "Projecting onto the complement of the null space — those frequencies become zero",
+        "explanation": "Step 1: Compression removes certain frequency components. Step 2: Mathematically, these components are in the null space of the compression operator. Step 3: Once compressed, the null space information is gone — the discarded frequencies cannot be recovered."
+      },
+      {
+        "id": "M1Q14M9",
+        "question": "If A has rank 1 (in ℝ²), what is the geometric relationship between the column space and the null space?",
+        "options": [
+          "The column space is a line and the null space is a perpendicular line (in standard inner product)",
+          "They are the same line",
+          "They are perpendicular planes",
+          "There is relationship"
+        ],
+        "correct_option": "The column space is a line and the null space is a perpendicular line (in standard inner product)",
+        "explanation": "Step 1: rank = 1 → column space is 1D (a line). Step 2: nullity = 2 - 1 = 1 → null space is also 1D. Step 3: The row space is perpendicular to the null space (fundamental theorem of linear algebra), and the column space is perpendicular to the left null space."
+      },
+      {
+        "id": "M1Q14M10",
+        "question": "The matrix [[1,0],[0,0]] has rank 1. What is its null space?",
+        "options": [
+          "{(0, y) : y ∈ ℝ} — the y-axis",
+          "The x-axis)",
+          "Just the origin",
+          "All of ℝ²)"
+        ],
+        "correct_option": "{(0, y) : y ∈ ℝ} — the y-axis",
+        "explanation": "Step 1: [[1,0],[0,0]] × (x,y) = (x, 0). Step 2: For this to equal (0,0), we need x = 0. Step 3: y is free, so the null space is {(0, y)} = the y-axis."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M1Q14H1",
+        "question": "For A = [[1,2],[2,4]], the null space is {t(-2,1) : t ∈ ℝ}. What is the dimension of this null space?",
+        "options": [
+          "1-dimensional (spanned by one non-zero vector)",
+          "2-dimensional — does t match",
+          "0-dimensional — does t match",
+          "Infinite-dimensional — does t match"
+        ],
+        "correct_option": "1-dimensional (spanned by one non-zero vector)",
+        "explanation": "Step 1: The null space is spanned by a single vector (-2, 1). Step 2: All null space vectors are scalar multiples of this one vector. Step 3: One basis vector → dimension = 1."
+      },
+      {
+        "id": "M1Q14H2",
+        "question": "By the rank-nullity theorem, if A is a 3×3 matrix with rank 1, what is the nullity?",
+        "options": [
+          "2",
+          "1",
+          "3",
+          "0"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: Rank-nullity: rank + nullity = n = 3. Step 2: nullity = 3 - 1 = 2. Step 3: The null space is a 2D plane through the origin — a large set of vectors that vanish under A."
+      },
+      {
+        "id": "M1Q14H3",
+        "question": "Can the null space of a non-zero matrix be all of ℝⁿ?",
+        "options": [
+          "Yes — if A is the zero matrix, then Ax = 0 for all x",
+          "the null space is always a proper subset",
+          "Only for n = 1 — does t match",
+          "Only for singular matrices"
+        ],
+        "correct_option": "Yes — if A is the zero matrix, then Ax = 0 for all x",
+        "explanation": "Step 1: The zero matrix maps every vector to 0. Step 2: ker(0) = {x : 0x = 0} = ℝⁿ. Step 3: The zero matrix has rank 0 and nullity n — the entire space vanishes."
+      },
+      {
+        "id": "M1Q14H4",
+        "question": "The fundamental theorem of linear algebra states that the null space of A is orthogonal to the row space of A. For A = [[1,2],[2,4]], verify: is (-2,1) perpendicular to (1,2)?",
+        "options": [
+          "Yes: (-2)(1) + (1)(2) = 0, confirming orthogonality",
+          "the dot product is n-zero",
+          "Only if we use a different inner product",
+          "Orthogonality doesn't apply to null spaces"
+        ],
+        "correct_option": "Yes: (-2)(1) + (1)(2) = 0, confirming orthogonality",
+        "explanation": "Step 1: Null space vector: (-2, 1). Step 2: Row space vector: (1, 2). Step 3: Dot product: (-2)(1) + (1)(2) = -2 + 2 = 0. They are orthogonal — the null space is perpendicular to the row space."
+      },
+      {
+        "id": "M1Q14H5",
+        "question": "If A is an n×n matrix with nullity = n (full null space), what is A?",
+        "options": [
+          "A must be the zero matrix",
+          "A must be the identity matrix",
+          "A must be diagonal",
+          "A could be any matrix"
+        ],
+        "correct_option": "A must be the zero matrix",
+        "explanation": "Step 1: nullity = n means every vector in ℝⁿ maps to 0. Step 2: Ax = 0 for all x. Step 3: This is only possible if every entry of A is 0 — A is the zero matrix."
+      },
+      {
+        "id": "M1Q14H6",
+        "question": "A linear map T: ℝ³ → ℝ² has rank 2. What is the nullity, and what does the null space represent geometrically?",
+        "options": [
+          "nullity = 1, a line through the origin in ℝ³ that maps to zero",
+          "nullity = 2, a plane — does t match",
+          "nullity = 0, just the origin",
+          "nullity = 3, all of ℝ³"
+        ],
+        "correct_option": "nullity = 1, a line through the origin in ℝ³ that maps to zero",
+        "explanation": "Step 1: rank + nullity = dim(domain) = 3. Step 2: nullity = 3 - 2 = 1. Step 3: A 1D null space in ℝ³ is a line through the origin — all vectors along this line are mapped to zero by T."
+      },
+      {
+        "id": "M1Q14H7",
+        "question": "The image of a linear map T: ℝ³ → ℝ³ with rank 2 is a:",
+        "options": [
+          "2-dimensional plane through the origin (the column space)",
+          "A line)",
+          "All of ℝ³)",
+          "A single point — does t match"
+        ],
+        "correct_option": "2-dimensional plane through the origin (the column space)",
+        "explanation": "Step 1: The image (range) of T equals the column space. Step 2: rank = dim(column space) = 2. Step 3: A 2D subspace of ℝ³ is a plane through the origin."
+      },
+      {
+        "id": "M1Q14H8",
+        "question": "In network routing, if the routing matrix has a null space of dimension 3, what does this mean for the traffic flow?",
+        "options": [
+          "There are 3 independent circulating flow patterns that produce zero net traffic at all junctions",
+          "The network has 3 roads",
+          "Traffic can only flow in 3 directions",
+          "The network is completely blocked"
+        ],
+        "correct_option": "There are 3 independent circulating flow patterns that produce zero net traffic at all junctions",
+        "explanation": "Step 1: Each null space vector represents a valid flow pattern. Step 2: The pattern produces zero net output at every node. Step 3: Dimension 3 means there are 3 fundamentally different circulating patterns, and any combination of them also works."
+      },
+      {
+        "id": "M1Q14H9",
+        "question": "If A is an n×n matrix, the null space and column space satisfy: dim(ker(A)) + dim(im(A)) = n. This is called:",
+        "options": [
+          "The rank-nullity theorem",
+          "The fundamental theorem of calculus",
+          "The Pythagorean theorem",
+          "The Cauchy-Schwarz inequality"
+        ],
+        "correct_option": "The rank-nullity theorem",
+        "explanation": "Step 1: nullity(A) + rank(A) = n. Step 2: This is the rank-nullity theorem, a cornerstone of linear algebra. Step 3: It connects the kernel (what vanishes) to the image (what remains), showing they partition the dimension of the space."
+      },
+      {
+        "id": "M1Q14H10",
+        "question": "Why is understanding the null space crucial in applied mathematics and engineering?",
+        "options": [
+          "It reveals which inputs produce no output (redundancies, conservation laws, and hidden symmetries in physical systems)",
+          "It helps compute determinants faster",
+          "It only matters for theoretical mathematics",
+          "It makes matrices easier to multiply"
+        ],
+        "correct_option": "It reveals which inputs produce no output (redundancies, conservation laws, and hidden symmetries in physical systems)",
+        "explanation": "Step 1: Null space vectors represent 'invisible' inputs — they exist but produce no detectable output. Step 2: In physics, these correspond to conservation laws (energy, momentum). Step 3: In engineering, they reveal redundancies and hidden degrees of freedom in a system."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "emoji": "📷",
+      "title": "Image Blur (Information Loss)",
+      "equation": "Blurred = Singular_matrix × Original",
+      "type": "mcq",
+      "concept": "Irreversible Data Loss",
+      "story": "When you blur a photo, some fine details are permanently lost. Mathematically, blurring is like applying a singular matrix to the image — the matrix has determinant zero, meaning certain information (the null space) is destroyed. No amount of processing can perfectly recover the original sharp image.",
+      "question": "Can you perfectly restore a blurred image back to its original sharp version?",
+      "options": [
+        "No — information in the null space is permanently lost during blurring",
+        "with eugh computing power",
+        "by applying the same blur again",
+        "Only if the image is small"
+      ],
+      "answer": "No — information in the null space is permanently lost during blurring",
+      "explanation": "Step 1: Blurring is a singular transformation (det = 0). Step 2: Certain image patterns (null space vectors) are mapped to zero — completely erased. Step 3: Since these patterns are lost, the original image cannot be uniquely reconstructed."
+    },
+    {
+      "emoji": "🔊",
+      "title": "Audio Compression (MP3)",
+      "equation": "Compressed = Projection × Original_signal",
+      "type": "mcq",
+      "concept": "Null Space in Signal Processing",
+      "story": "When you compress an audio file into MP3 format, some sounds are discarded to reduce file size. This is like a singular matrix transformation — certain frequency components (those in the null space) vanish entirely. The compressed file sounds almost the same, but the discarded information cannot be perfectly recovered.",
+      "question": "In audio compression, what mathematical concept represents the sounds that are permanently discarded?",
+      "options": [
+        "The null space — frequency components that map to zero",
+        "The eigenvalues",
+        "The determinant",
+        "The trace"
+      ],
+      "answer": "The null space — frequency components that map to zero",
+      "explanation": "Step 1: Compression removes specific frequency components. Step 2: These components are in the null space of the compression operator. Step 3: Once in the null space, they are zero — the information is gone."
+    },
+    {
+      "emoji": "📦",
+      "title": "Network Routing (Circulating Flows)",
+      "equation": "Net_flow = Routing_matrix × Edge_flows",
+      "type": "mcq",
+      "concept": "Kernel in Traffic Networks",
+      "story": "In a traffic network, certain flow patterns can cancel each other out at a junction — vehicles going in one direction are exactly balanced by vehicles going the other way, resulting in zero net traffic at that node. These cancelling patterns form the kernel (null space) of the network's routing matrix.",
+      "question": "In a traffic network, what does the kernel (null space) of the routing matrix represent?",
+      "options": [
+        "Flow patterns that produce zero net traffic at every junction (circulating flows)",
+        "The fastest route through the network",
+        "The road with the most traffic",
+        "The junction with the most roads"
+      ],
+      "answer": "Flow patterns that produce zero net traffic at every junction (circulating flows)",
+      "explanation": "Step 1: The routing matrix maps edge flows to net flows at junctions. Step 2: Null space vectors produce zero net flow everywhere. Step 3: These represent circulating patterns — traffic that goes in loops without accumulating anywhere."
+    },
+    {
+      "emoji": "🧪",
+      "title": "Chemical Reactions (Conservation Laws)",
+      "equation": "Mass_conservation = Stoichiometric_matrix × Reaction_vector",
+      "type": "mcq",
+      "concept": "Null Space as Reaction Equilibria",
+      "story": "In a chemical reaction network, the null space of the stoichiometric matrix represents all possible reaction pathways that conserve mass. These are the 'balanced' reactions where atoms are neither created nor destroyed — they just rearrange.",
+      "question": "What do null space vectors of a chemical stoichiometric matrix represent?",
+      "options": [
+        "Balanced reaction pathways that conserve mass (no atoms created or destroyed)",
+        "Reactions that produce the most product",
+        "The fastest chemical reactions",
+        "Reactions that require the most energy"
+      ],
+      "answer": "Balanced reaction pathways that conserve mass (no atoms created or destroyed)",
+      "explanation": "Step 1: The stoichiometric matrix maps reaction rates to changes in species concentrations. Step 2: Null space vectors produce zero change — mass is conserved. Step 3: These balanced pathways are the fundamental reactions in the network."
+    },
+    {
+      "emoji": "🏗️",
+      "title": "Structural Engineering (Redundant Constraints)",
+      "equation": "Force_balance = Structure_matrix × Member_forces",
+      "type": "mcq",
+      "concept": "Degree of Statical Indeterminacy",
+      "story": "In a truss structure, the null space of the equilibrium matrix represents self-stress states — internal forces that balance each other without any external load. These are redundant members that carry internal stress but don't affect the overall equilibrium.",
+      "question": "What does the null space of the structural equilibrium matrix represent in engineering?",
+      "options": [
+        "Self-stress states — internal forces that balance without external loads",
+        "The strongest member of the structure",
+        "The point of maximum load",
+        "The foundation of the building"
+      ],
+      "answer": "Self-stress states — internal forces that balance without external loads",
+      "explanation": "Step 1: The equilibrium matrix maps member forces to nodal forces. Step 2: Null space vectors produce zero nodal forces — internal forces that balance perfectly. Step 3: These self-stress states indicate redundant members — the structure is statically indeterminate."
+    }
+  ]
+}

@@ -45,9 +45,26 @@
 
 const express = require('express');
 const cors = require('cors');
+const rateLimit = require('express-rate-limit');
 const fs = require('fs');
 const path = require('path');
+const http = require('http');
 const wordCreator = require('./wordCreator');
+const logger = require('./lib/logger');
+
+// Catch what would otherwise be a silent crash (or, for unhandled promise
+// rejections on Node 15+, a crash with no application-level record of why).
+// Log first, then exit so the process manager (systemd's tenali.service)
+// restarts a clean process rather than continuing in a possibly-corrupt state.
+process.on('uncaughtException', (err) => {
+  logger.error('process', 'uncaughtException:', err);
+  process.exit(1);
+});
+process.on('unhandledRejection', (reason) => {
+  logger.error('process', 'unhandledRejection:', reason);
+  process.exit(1);
+});
+
 
 // Initialize Express app and configure middleware
 const app = express();
@@ -55,10 +72,44 @@ const PORT = process.env.PORT || 4000;
 const clientDistPath = path.join(__dirname, '..', 'client', 'dist');
 const questionsDir = path.join(__dirname, '..', 'chitragupta', 'questions');
 
-// CORS: Enable cross-origin requests for client communication
-app.use(cors());
+// Behind nginx: trust the first proxy hop so rate limiting keys off the real
+// client IP (X-Forwarded-For) instead of 127.0.0.1.
+app.set('trust proxy', 1);
+
+// CORS: allow only trusted frontend origins (the app is same-origin; extra
+// origins configurable via CORS_ORIGINS, comma-separated).
+const ALLOWED_ORIGINS = (process.env.CORS_ORIGINS ||
+  'https://tenali.fun,http://localhost:5173,http://127.0.0.1:5173')
+  .split(',').map(o => o.trim()).filter(Boolean);
+app.use(cors({
+  origin(origin, cb) {
+    // Allow non-browser requests (no Origin header) and allowlisted origins.
+    if (!origin || ALLOWED_ORIGINS.includes(origin)) return cb(null, true);
+    return cb(null, false);
+  }
+}));
 // JSON parsing: Handle application/json request bodies
 app.use(express.json());
+
+// Rate limiting. 'trust proxy' above makes the per-IP key correct behind nginx.
+// Strict on login (anti-brute-force); looser on the rest of /api. The quiz
+// question/check endpoints use the /<type>-api/* prefix, so they are NOT limited.
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  limit: 10,                // max attempts per IP per window
+  standardHeaders: 'draft-7',
+  legacyHeaders: false,
+  message: { error: 'Too many attempts. Please try again in a few minutes.' },
+});
+const apiLimiter = rateLimit({
+  windowMs: 60 * 1000,      // 1 minute
+  limit: 300,               // generous; app-data endpoints only
+  standardHeaders: 'draft-7',
+  legacyHeaders: false,
+});
+app.use('/api/auth/login', authLimiter);
+app.use('/api/', apiLimiter);
+
 // Static file serving: Serve built React/Vue client
 app.use(express.static(clientDistPath));
 
@@ -69,6 +120,7 @@ app.use(express.static(clientDistPath));
 const auth = require('./auth');
 const transferScenarios = require('./transferScenarios');
 const progress = require('./progress');
+const translate = require('./translate');
 
 // Load static collections definitions
 let collections = [];
@@ -76,10 +128,11 @@ try {
   collections = JSON.parse(fs.readFileSync(path.join(__dirname, 'collections.json'), 'utf8'));
   console.log(`[collections] loaded ${collections.length} collections`);
 } catch (e) {
-  console.error('[collections] failed to load collections.json:', e.message);
+  logger.error(null,'[collections] failed to load collections.json:', e.message);
 }
 app.use('/api/auth', auth.router);
 app.use('/api/progress', progress.router);
+app.use('/api/translate', translate.router);
 auth.seedUsers().catch(() => {});  // always populate in-memory fallback
 
 async function connectAuthMongoWithRetry(attempt = 1) {
@@ -91,11 +144,11 @@ async function connectAuthMongoWithRetry(attempt = 1) {
     await auth.seedUsers();
   } catch (err) {
     if (attempt >= maxAttempts) {
-      console.error('[auth] Mongo connect failed - using in-memory auth:', err.message);
+      logger.error(null,'[auth] Mongo connect failed - using in-memory auth:', err.message);
       return;
     }
 
-    console.warn(
+    logger.warn(null,
       `[auth] Mongo unavailable (${err.message}); retrying in ${Math.round(retryDelayMs / 1000)}s ` +
       `(${attempt}/${maxAttempts})`
     );
@@ -249,7 +302,7 @@ app.use((req, res, next) => {
           }
         }
       } catch (err) {
-        console.error('[attempt-logger] Failed to log student attempt:', err.message);
+        logger.error(null,'[attempt-logger] Failed to log student attempt:', err.message);
       }
     })();
 
@@ -323,11 +376,11 @@ app.use(async (req, res, next) => {
   const m = /^Bearer\s+(.+)$/i.exec(authHeader);
   if (m) {
     try {
-      const JWT_SECRET = process.env.JWT_SECRET || 'tenali-dev-secret-change-me';
+      const JWT_SECRET = auth.JWT_SECRET; // single source of truth (server/auth.js)
       const payload = jwt.verify(m[1], JWT_SECRET);
       userId = payload.sub;
     } catch (e) {
-      console.warn('[LIL] JWT verify failed:', e.message);
+      logger.warn(null,'[LIL] JWT verify failed:', e.message);
     }
   }
 
@@ -370,7 +423,7 @@ app.use(async (req, res, next) => {
       // Fire-and-forget: try to save attempt in background
       lilProcess.processAttempt(payloadInput)
         .then(() => {})
-        .catch(err => console.error('[LIL] processAttempt failed:', err.message));
+        .catch(err => logger.error(null,'[LIL] processAttempt failed:', err.message));
     } else {
       originalJson(data);
     }
@@ -392,11 +445,11 @@ app.use(async (req, res, next) => {
   const m = /^Bearer\s+(.+)$/i.exec(authHeader);
   if (m) {
     try {
-      const JWT_SECRET = process.env.JWT_SECRET || 'tenali-dev-secret-change-me';
+      const JWT_SECRET = auth.JWT_SECRET; // single source of truth (server/auth.js)
       const payload = jwt.verify(m[1], JWT_SECRET);
       userId = payload.sub;
     } catch (e) {
-      console.warn('[LIL GET] JWT verify failed:', e.message);
+      logger.warn(null,'[LIL GET] JWT verify failed:', e.message);
     }
   }
 
@@ -455,7 +508,7 @@ app.use(async (req, res, next) => {
         });
       }
     } catch (err) {
-      console.error('[LIL GET] Failed to fetch revision question:', err);
+      logger.error(null,'[LIL GET] Failed to fetch revision question:', err);
     }
   }
 
@@ -509,16 +562,21 @@ function bandForStep(step) {
  * Each file should contain a question object with id, question, options, answerOption, answerText
  * @returns {Array<object>} Array of question objects
  */
-function loadQuestions() {
-  const files = fs.readdirSync(questionsDir).filter((file) => file.endsWith('.json'));
-  return files.map((file) => {
-    const fullPath = path.join(questionsDir, file);
-    return JSON.parse(fs.readFileSync(fullPath, 'utf8'));
-  });
+// Reads all JSON files in `dir` concurrently (fs.promises.readFile lets libuv's
+// thread pool overlap the I/O instead of doing 991+ sequential blocking
+// syscalls) and parses each one. Order is not significant to any caller here.
+async function loadJsonDir(dir) {
+  const files = fs.readdirSync(dir).filter((file) => file.endsWith('.json'));
+  const contents = await Promise.all(
+    files.map((file) => fs.promises.readFile(path.join(dir, file), 'utf8'))
+  );
+  return contents.map((raw) => JSON.parse(raw));
 }
 
-// Load all GK questions at server startup
-const questions = loadQuestions();
+// Populated by initData() before the server starts listening (see bottom of
+// file) — declared here as `let` so the many closures throughout this file
+// that reference `questions` by name see the loaded data once ready.
+let questions = [];
 
 const WordProblemGenerator = {
   addition: (a, b) => {
@@ -943,6 +1001,160 @@ app.post('/column-multiplication-api/check', (req, res) => {
 });
 
 /**
+ * COLUMN DIVISION API
+ * ═══════════════════════════════════════════════════════════════════════════
+ * Long division: dividend ÷ divisor.
+ * User fills quotient digits + partial remainder digits.
+ */
+
+function computeColumnDivision(dividend, divisor) {
+  const dStr = String(dividend);
+  const dividendDigits = dStr.split('').map(Number);
+  const divisorDigits = String(divisor).split('').map(Number);
+  const steps = [];
+  const quotientDigits = [];
+  let current = 0;
+  let firstQuotientCol = -1;
+  for (let i = 0; i < dividendDigits.length; i++) {
+    current = current * 10 + dividendDigits[i];
+    if (current >= divisor || quotientDigits.length > 0) {
+      if (firstQuotientCol === -1) firstQuotientCol = i;
+      const q = Math.floor(current / divisor);
+      const product = q * divisor;
+      const remainder = current - product;
+      quotientDigits.push(q);
+      const isLast = quotientDigits.length === dividendDigits.length - firstQuotientCol;
+      const nextDigit = (i + 1 < dividendDigits.length) ? dividendDigits[i + 1] : null;
+      steps.push({ product, remainder, current, isLast, nextDigit });
+      current = remainder;
+    }
+  }
+  if (quotientDigits.length === 0) {
+    quotientDigits.push(0);
+    firstQuotientCol = 0;
+    steps.push({ product: 0, remainder: dividend, current: dividend, isLast: true, nextDigit: null });
+  }
+  return {
+    quotientDigits,
+    dividendDigits,
+    divisorDigits,
+    steps,
+    firstQuotientCol,
+    digits: dStr.length,
+  };
+}
+
+app.get('/column-division-api/question', (req, res) => {
+  const difficulty = req.query.difficulty || 'easy';
+  const digitMap = { easy: [1, 3], medium: [1, 4], hard: [2, 4], extrahard: [2, 5] };
+  const [divisorDigits, dividendDigits] = digitMap[difficulty] || [1, 3];
+  const dRange = digitRange(divisorDigits);
+  const mRange = digitRange(dividendDigits);
+  const divisorMin = Math.max(dRange.min, 2);
+  let dividend, divisor, data;
+  let attempts = 0;
+  do {
+    divisor = randomInt(divisorMin, dRange.max);
+    dividend = randomInt(Math.max(2 * divisor, divisor + 1), mRange.max);
+    data = computeColumnDivision(dividend, divisor);
+    attempts++;
+  } while (data.steps.length < 2 && attempts < 50);
+  res.json({
+    id: `cd-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+    dividend,
+    divisor,
+    answer: Math.floor(dividend / divisor),
+    quotientDigits: data.quotientDigits,
+    dividendDigits: data.dividendDigits,
+    divisorDigits: data.divisorDigits,
+    firstQuotientCol: data.firstQuotientCol,
+    steps: data.steps,
+  });
+});
+
+app.post('/column-division-api/check', (req, res) => {
+  const { dividend, divisor, userQuotient, userProducts, userRemainders, solve, sessionGoal } = req.body || {};
+  const numDividend = Number(dividend);
+  const numDivisor = Number(divisor);
+  const correctAnswer = Math.floor(numDividend / numDivisor);
+  const data = computeColumnDivision(numDividend, numDivisor);
+
+  if (solve) {
+    const solutionSteps = data.steps.map((step, i) => ({
+      stepNum: i + 1,
+      partialDividend: step.current,
+      divisor: numDivisor,
+      quotientDigit: data.quotientDigits[i],
+      product: step.product,
+      difference: step.current - step.product,
+      remainder: step.remainder,
+      isLast: step.isLast,
+      nextDigit: step.nextDigit,
+    }));
+    return res.json({
+      correct: false,
+      answer: correctAnswer,
+      display: `${numDividend} \u00f7 ${numDivisor} = ${correctAnswer}`,
+      steps: data.steps,
+      solutionSteps,
+      quotientDigits: data.quotientDigits,
+      dividendDigits: data.dividendDigits,
+      divisorDigits: data.divisorDigits,
+      firstQuotientCol: data.firstQuotientCol,
+      explanation: `Long division: ${numDividend} \u00f7 ${numDivisor} = ${correctAnswer}${numDividend % numDivisor !== 0 ? ' R' + (numDividend % numDivisor) : ''}`,
+    });
+  }
+
+  const answerCorrect = Array.isArray(userQuotient) &&
+    userQuotient.length === data.quotientDigits.length &&
+    userQuotient.every((d, i) => Number(d) === data.quotientDigits[i]);
+
+  const productsCorrect = Array.isArray(userProducts) &&
+    userProducts.length === data.steps.length &&
+    userProducts.every((p, i) => Number(p) === data.steps[i].product);
+
+  const remaindersCorrect = Array.isArray(userRemainders) &&
+    userRemainders.length === data.steps.length &&
+    userRemainders.every((r, i) => Number(r) === data.steps[i].remainder);
+
+  const allCorrect = answerCorrect && productsCorrect && remaindersCorrect;
+  let lilCoins = 0;
+  if (allCorrect) lilCoins = 15;
+
+  const solutionSteps = data.steps.map((step, i) => {
+    const qDigit = data.quotientDigits[i];
+    const bdStr = !step.isLast && step.nextDigit !== null ? ` \u2192 ${step.current * 10 + step.nextDigit}` : '';
+    return {
+      stepNum: i + 1,
+      partialDividend: step.current,
+      divisor: numDivisor,
+      quotientDigit: qDigit,
+      product: step.product,
+      difference: step.current - step.product,
+      remainder: step.remainder,
+      bringDown: bdStr,
+      isLast: step.isLast,
+      nextDigit: step.nextDigit,
+    };
+  });
+
+  res.json({
+    correct: allCorrect,
+    display: `${numDividend} \u00f7 ${numDivisor} = ${correctAnswer}${allCorrect ? ` (+${lilCoins} \ud83e\ude99)` : ''}`,
+    lil: allCorrect ? { coinsEarned: lilCoins } : null,
+    explanation: allCorrect ? '' : `Correct: ${numDividend} \u00f7 ${numDivisor} = ${correctAnswer}${numDividend % numDivisor !== 0 ? ' R' + (numDividend % numDivisor) : ''}`,
+    correctAnswer,
+    steps: data.steps,
+    solutionSteps,
+    quotientDigits: data.quotientDigits,
+    dividendDigits: data.dividendDigits,
+    divisorDigits: data.divisorDigits,
+    firstQuotientCol: data.firstQuotientCol,
+    message: allCorrect ? '' : !answerCorrect ? 'Incorrect quotient' : !productsCorrect ? 'Incorrect product(s)' : 'Incorrect remainder(s)',
+  });
+});
+
+/**
  * COLUMN SUBTRACTION API
  * ═══════════════════════════════════════════════════════════════════════════
  * Vertical column subtraction: minuend − subtrahend (minuend >= subtrahend).
@@ -1322,10 +1534,12 @@ const conceptDir = path.join(__dirname, '..', 'concept', 'questions');
  *
  * @returns {Array<object>} Array of vocabulary question objects
  */
-function loadVocab() {
+// Vocab is by far the largest set (~7,600 files) — loaded via loadJsonDir()
+// (see loadQuestions above) so the reads overlap instead of running one at a
+// time. Concepts is tiny (~15 files); left synchronous, not worth the churn.
+async function loadVocabAsync() {
   try {
-    const files = fs.readdirSync(vocabDir).filter((f) => f.endsWith('.json'));
-    return files.map((f) => JSON.parse(fs.readFileSync(path.join(vocabDir, f), 'utf8')));
+    return await loadJsonDir(vocabDir);
   } catch (e) {
     return [];
   }
@@ -1340,9 +1554,33 @@ function loadConcepts() {
   }
 }
 
-// Load all vocabulary questions at server startup
-const vocabQuestions = loadVocab();
+// Populated by initData() before the server starts listening, same as
+// `questions` above.
+let vocabQuestions = [];
 const conceptQuestions = loadConcepts();
+
+/**
+ * Load linear algebra mission quiz questions from JSON files.
+ * Each file is named m{module}q{missionId}.json (e.g. m1q1.json)
+ * and contains MCQs by difficulty + real-life applications.
+ */
+const laQuestionsDir = path.join(__dirname, '..', 'linearalgebra', 'questions');
+const laMissionQuestions = {};
+(function loadLAMissionQuestions() {
+  try {
+    const files = fs.readdirSync(laQuestionsDir).filter(f => f.endsWith('.json'));
+    for (const file of files) {
+      const data = JSON.parse(fs.readFileSync(path.join(laQuestionsDir, file), 'utf8'));
+      const mid = data.missionId || data.mission_id;
+      if (mid) {
+        laMissionQuestions[mid] = data;
+      }
+    }
+    console.log(`Loaded LA mission questions for missions: ${Object.keys(laMissionQuestions).join(', ')}`);
+  } catch (e) {
+    // Directory may not exist yet — that's fine
+  }
+})();
 
 /**
  * GET /vocab-api/question
@@ -7954,6 +8192,38 @@ function shuffleArray(arr) {
   return a;
 }
 
+// deBiasShuffle(arr, correctIndex): returns a permutation of `arr` such that
+// if the longest (or shortest) element is at `correctIndex`, it is swapped
+// to a different position. This breaks the pattern where the correct answer
+// ends up at an "obvious" length-based position.
+function deBiasShuffle(arr, correctIndex) {
+  let shuffled = shuffleArray(arr);
+  if (typeof correctIndex !== 'number' || correctIndex < 0 || correctIndex >= shuffled.length || shuffled.length < 2) {
+    return shuffled;
+  }
+  // Helper: index of max-length element in the current permutation
+  const idxOfMax = (s) => s.indexOf(s.reduce((a, b) => (b.length > a.length ? b : a), ''));
+  const idxOfMin = (s) => s.indexOf(s.reduce((a, b) => (b.length < a.length ? b : a), ''));
+  // If correct is the longest, swap it with a non-longest position.
+  if (idxOfMax(shuffled) === correctIndex) {
+    // pick a random other index
+    const others = shuffled.map((_, i) => i).filter(i => i !== correctIndex);
+    if (others.length > 0) {
+      const swapWith = others[Math.floor(Math.random() * others.length)];
+      [shuffled[correctIndex], shuffled[swapWith]] = [shuffled[swapWith], shuffled[correctIndex]];
+    }
+  }
+  // Same for shortest
+  if (idxOfMin(shuffled) === correctIndex) {
+    const others = shuffled.map((_, i) => i).filter(i => i !== correctIndex);
+    if (others.length > 0) {
+      const swapWith = others[Math.floor(Math.random() * others.length)];
+      [shuffled[correctIndex], shuffled[swapWith]] = [shuffled[swapWith], shuffled[correctIndex]];
+    }
+  }
+  return shuffled;
+}
+
 /**
  * buildOptions(correctText, distractors): Produce a 4-option MC payload.
  *   - Deduplicates distractors against the correct answer.
@@ -9207,7 +9477,7 @@ app.get('/api/learning-journey/progress', auth.requireAuth, async (req, res) => 
       overallProgressPercent
     });
   } catch (err) {
-    console.error('[learning-journey] GET /progress error:', err.message);
+    logger.error(null,'[learning-journey] GET /progress error:', err.message);
     res.status(500).json({ error: err.message });
   }
 });
@@ -9223,7 +9493,7 @@ app.post('/api/learning-journey/complete-concept', auth.requireAuth, async (req,
     const progress = await completeConcept(userId, topicId, conceptKey);
     res.json({ success: true, completedConcepts: progress.completedConcepts });
   } catch (err) {
-    console.error('[learning-journey] POST /complete-concept error:', err.message);
+    logger.error(null,'[learning-journey] POST /complete-concept error:', err.message);
     res.status(400).json({ error: err.message });
   }
 });
@@ -9239,7 +9509,7 @@ app.get('/api/learning-journey/checkpoint/quiz', auth.requireAuth, async (req, r
     const quiz = await getCheckpointQuiz(userId, topicId);
     res.json(quiz);
   } catch (err) {
-    console.error('[learning-journey] GET /checkpoint/quiz error:', err.message);
+    logger.error(null,'[learning-journey] GET /checkpoint/quiz error:', err.message);
     res.status(400).json({ error: err.message });
   }
 });
@@ -9255,66 +9525,534 @@ app.post('/api/learning-journey/checkpoint/verify', auth.requireAuth, async (req
     const result = await verifyCheckpointQuiz(userId, topicId, answers);
     res.json(result);
   } catch (err) {
-    console.error('[learning-journey] POST /checkpoint/verify error:', err.message);
+    logger.error(null,'[learning-journey] POST /checkpoint/verify error:', err.message);
     res.status(400).json({ error: err.message });
   }
 });
 
 // /darts-api — Visual Coordinate Geometry (Dart Board)
 // ═══════════════════════════════════════════════════════════════════════════
-app.get('/darts-api/question', (req, res) => {
-  const level = req.query.level || 'easy';
-  let x, y;
-
-  const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
-  const randHalf = (min, max) => randInt(min * 2, max * 2) / 2;
-
-  if (level === 'easy') {
-    // 1st quadrant only
-    x = randInt(1, 5);
-    y = randInt(1, 5);
-  } else if (level === 'medium') {
-    // Any quadrant, integer
-    do {
-      x = randInt(-5, 5);
-      y = randInt(-5, 5);
-    } while (x === 0 && y === 0);
-  } else if (level === 'hard') {
-    // Any quadrant, half steps allowed
-    do {
-      x = randHalf(-5, 5);
-      y = randHalf(-5, 5);
-    } while (Number.isInteger(x) && Number.isInteger(y));
-  } else {
-    // extrahard
-    const startX = randInt(-4, 4) || 1;
-    const startY = randInt(-4, 4) || 1;
-    const axis = Math.random() < 0.5 ? 'x' : 'y';
-    x = axis === 'y' ? -startX : startX;
-    y = axis === 'x' ? -startY : startY;
-    
-    return res.json({
-      prompt: `Plot the reflection of (${startX}, ${startY}) across the ${axis.toUpperCase()}-axis.`,
-      x, y, level, startX, startY, axis, type: 'reflection'
-    });
-  }
-
-  res.json({
-    prompt: `Throw the dart at coordinate (${x}, ${y}).`,
-    x, y, level, type: 'standard'
-  });
-});
-
-app.post('/darts-api/check', express.json(), (req, res) => {
-  const { userX, userY, x, y } = req.body;
-  const correct = userX === x && userY === y;
-  res.json({ correct, message: correct ? 'Bullseye!' : 'Missed!' });
-});
+const dartsRouter = require('./routes/darts');
+app.use('/darts-api', dartsRouter);
 
 // WORD CREATOR PUZZLE ROUTER (wordcreator-api)
 // ═══════════════════════════════════════════════════════════════════════════
 const wordCreatorRouter = require('./routes/wordCreator');
 app.use('/wordcreator-api', wordCreatorRouter);
+
+// CONTRAST CHALLENGE PUZZLE ROUTER (contrast-api)
+// ═══════════════════════════════════════════════════════════════════════════
+const contrastRouter = require('./routes/contrast');
+app.use('/contrast-api', contrastRouter);
+
+// PROCTOR API — Session management, anomaly logging, emotion tracking
+// ═══════════════════════════════════════════════════════════════════════════
+const { ProctorSession, ProctorEvent, Emotion } = require('./proctorSchema');
+
+// Start a proctored quiz session — public (no login required)
+app.post('/api/proctor/start', async (req, res) => {
+  try {
+    const { quizType, settings, consentGiven, userId, username } = req.body;
+    const session = await ProctorSession.create({
+      userId: userId || `anon-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+      username: username || 'Anonymous',
+      quizType: quizType || 'unknown',
+      settings: settings || {},
+      consentGiven: consentGiven || false,
+    });
+    res.json({ sessionId: session._id, status: 'active' });
+  } catch (e) {
+    logger.error(null,'[proctor] start error:', e.message);
+    res.status(500).json({ error: 'failed to start proctor session' });
+  }
+});
+
+// Log a proctor event (anomaly) — public
+app.post('/api/proctor/event', async (req, res) => {
+  try {
+    const { sessionId, type, severity, evidence, metadata, transcript, userId, username } = req.body;
+    if (!sessionId || !type) return res.status(400).json({ error: 'sessionId and type required' });
+    const event = await ProctorEvent.create({
+      sessionId,
+      userId: userId || `anon-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+      username: username || 'Anonymous',
+      type,
+      severity: severity || 1,
+      evidence: evidence || undefined,
+      metadata: metadata || undefined,
+      transcript: transcript || metadata?.transcript || undefined,
+    });
+    await ProctorSession.findByIdAndUpdate(sessionId, {
+      $inc: { totalPenalty: severity || 1 },
+      $set: { status: (req.body.sessionStatus === 'ejected') ? 'ejected' : undefined },
+    });
+    res.json({ eventId: event._id, recorded: true });
+  } catch (e) {
+    logger.error(null,'[proctor] event error:', e.message);
+    res.status(500).json({ error: 'failed to log proctor event' });
+  }
+});
+
+// End a proctored quiz session — public
+app.post('/api/proctor/end', async (req, res) => {
+  try {
+    const { sessionId } = req.body;
+    if (!sessionId) return res.status(400).json({ error: 'sessionId required' });
+    const session = await ProctorSession.findByIdAndUpdate(
+      sessionId,
+      { endedAt: new Date(), status: 'completed' },
+      { new: true }
+    );
+    if (!session) return res.status(404).json({ error: 'session not found' });
+    const events = await ProctorEvent.find({ sessionId }).sort({ timestamp: 1 });
+    res.json({ session, events });
+  } catch (e) {
+    logger.error(null,'[proctor] end error:', e.message);
+    res.status(500).json({ error: 'failed to end proctor session' });
+  }
+});
+
+// Get proctor session details — public for dashboard view (no login)
+app.get('/api/proctor/session/:id', async (req, res) => {
+  try {
+    const session = await ProctorSession.findById(req.params.id);
+    if (!session) return res.status(404).json({ error: 'session not found' });
+    const events = await ProctorEvent.find({ sessionId: req.params.id }).sort({ timestamp: 1 });
+    res.json({ session, events });
+  } catch (e) {
+    res.status(500).json({ error: 'failed to fetch session' });
+  }
+});
+
+// Get all proctor sessions — public for instructor dashboard view (no login)
+// The dashboard at /proctor is meant to be accessible to anyone monitoring the exam
+app.get('/api/proctor/ping', (req, res) => { res.json({ ok: true }) });
+
+app.get('/api/proctor/sessions', async (req, res) => {
+  try {
+    const limit = Math.min(parseInt(req.query.limit, 10) || 100, 200)
+    const sessions = await ProctorSession.find({})
+      .sort({ startedAt: -1 })
+      .limit(limit);
+    res.json({ sessions });
+  } catch (e) {
+    res.status(500).json({ error: 'failed to fetch sessions' });
+  }
+});
+
+// ─── Face Verification Endpoints (CompreFace proxy) ─────────────────────────
+
+const COMPREFACE_URL = process.env.COMPREFACE_URL || 'http://localhost:8000';
+const COMPREFACE_API_KEY = process.env.COMPREFACE_API_KEY || '';
+
+// Register reference face for a session
+app.post('/api/proctor/face/register', auth.requireAuth, async (req, res) => {
+  try {
+    const { sessionId, image } = req.body;
+    if (!sessionId || !image) return res.status(400).json({ error: 'sessionId and image required' });
+    if (!COMPREFACE_API_KEY) return res.json({ registered: false, reason: 'CompreFace not configured' });
+
+    // Forward to CompreFace detection endpoint
+    const cfRes = await fetch(`${COMPREFACE_URL}/api/v1/detection/detect`, {
+      method: 'POST',
+      headers: { 'x-api-key': COMPREFACE_API_KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ image }),
+    });
+
+    if (cfRes.ok) {
+      const data = await cfRes.json();
+      res.json({ registered: true, faceCount: data.result?.length || 0 });
+    } else {
+      res.json({ registered: false, reason: 'CompreFace detection failed' });
+    }
+  } catch (e) {
+    logger.error(null,'[face] register error:', e.message);
+    res.json({ registered: false, reason: 'CompreFace unreachable' });
+  }
+});
+
+// Verify face identity against reference — public
+app.post('/api/proctor/face/verify', async (req, res) => {
+  try {
+    const { sessionId, image } = req.body;
+    if (!sessionId || !image) return res.status(400).json({ error: 'sessionId and image required' });
+    if (!COMPREFACE_API_KEY) return res.json({ verified: true, similarity: 1, reason: 'CompreFace not configured' });
+
+    // Forward to CompreFace verification endpoint
+    const cfRes = await fetch(`${COMPREFACE_URL}/api/v1/verification/verify`, {
+      method: 'POST',
+      headers: { 'x-api-key': COMPREFACE_API_KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ image }),
+    });
+
+    if (cfRes.ok) {
+      const data = await cfRes.json();
+      const similarity = data.result?.face?.similarity || 0;
+      res.json({ verified: similarity >= 0.88, similarity });
+    } else {
+      res.json({ verified: true, similarity: 1, reason: 'CompreFace verification failed' });
+    }
+  } catch (e) {
+    logger.error(null,'[face] verify error:', e.message);
+    res.json({ verified: true, similarity: 1, reason: 'CompreFace unreachable' });
+  }
+});
+
+// ─── Emotion endpoints ───────────────────────────────────────────────────────
+
+// Submit an emotion for a quiz — public (no login)
+app.post('/api/emotions/submit', async (req, res) => {
+  try {
+    const { quizType, emotion, feedback, userId, username } = req.body;
+    if (!quizType || !emotion) return res.status(400).json({ error: 'quizType and emotion required' });
+    const valid = ['very_sad', 'sad', 'neutral', 'happy', 'very_happy'];
+    if (!valid.includes(emotion)) return res.status(400).json({ error: 'invalid emotion' });
+    const doc = await Emotion.create({
+      userId: userId || 'anonymous',
+      username: username || 'anonymous',
+      quizType,
+      emotion,
+      feedback: feedback || '',
+    });
+    res.json({ id: doc._id, recorded: true });
+  } catch (e) {
+    logger.error(null,'[emotion] submit error:', e.message);
+    res.status(500).json({ error: 'failed to submit emotion' });
+  }
+});
+
+// Get emotion stats for a quiz type
+app.get('/api/emotions/stats/:quizType', async (req, res) => {
+  try {
+    const { quizType } = req.params;
+    const stats = await Emotion.aggregate([
+      { $match: { quizType } },
+      { $group: { _id: '$emotion', count: { $sum: 1 } } },
+      { $sort: { count: -1 } },
+    ]);
+    const total = stats.reduce((s, r) => s + r.count, 0);
+    const scores = { very_sad: -2, sad: -1, neutral: 0, happy: 1, very_happy: 2 };
+    const avg = total > 0
+      ? stats.reduce((s, r) => s + r.count * (scores[r._id] || 0), 0) / total
+      : 0;
+    res.json({ stats, total, averageScore: Math.round(avg * 100) / 100 });
+  } catch (e) {
+    res.status(500).json({ error: 'failed to fetch emotion stats' });
+  }
+});
+
+// Get emotion history for a user — public (filter by userId if provided)
+app.get('/api/emotions/history', async (req, res) => {
+  try {
+    const { userId, limit = 50 } = req.query;
+    const query = userId ? { userId } : {};
+    const emotions = await Emotion.find(query).sort({ timestamp: -1 }).limit(parseInt(limit));
+    res.json({ emotions });
+  } catch (e) {
+    res.status(500).json({ error: 'failed to fetch emotion history' });
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════════════════
+// /playground — Code execution via Judge0 CE (public API, no auth)
+// ═══════════════════════════════════════════════════════════════════════════
+app.post('/api/playground/run', async (req, res) => {
+  try {
+    const { source_code, language_id, stdin, cpu_time_limit, memory_limit } = req.body;
+    if (!source_code || !language_id) {
+      return res.status(400).json({ error: 'source_code and language_id required' });
+    }
+    const params = new URLSearchParams({
+      base64_encoded: 'false',
+      wait: 'true',
+    });
+    const body = {
+      source_code,
+      language_id,
+      stdin: stdin || '',
+      cpu_time_limit: cpu_time_limit || 10,
+      memory_limit: Math.max(Number(memory_limit) || 262144, 131072),
+    };
+    const r = await fetch(`https://ce.judge0.com/submissions?${params}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    if (!r.ok) {
+      const text = await r.text();
+      logger.error(null,'[playground] Judge0 error:', r.status, text);
+      return res.status(502).json({ error: 'Judge0 request failed', detail: text });
+    }
+    const data = await r.json();
+    res.json(data);
+  } catch (e) {
+    logger.error(null,'[playground] error:', e.message);
+    res.status(500).json({ error: 'Failed to execute code' });
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════════════════
+// /playground2 — Code execution via local subprocess (9 languages)
+// ═══════════════════════════════════════════════════════════════════════════
+const compiler = require('./compiler');
+
+app.get('/api/playground2/languages', (req, res) => {
+  try {
+    const langs = compiler.listLanguages();
+    res.json({ languages: langs });
+  } catch (e) {
+    logger.error(null,'[playground2] list error:', e.message);
+    res.status(500).json({ error: 'Failed to list languages' });
+  }
+});
+
+app.post('/api/playground2/run', async (req, res) => {
+  try {
+    const { language, code, stdin, timeout } = req.body;
+    if (!language || !code) {
+      return res.status(400).json({ error: 'language and code required' });
+    }
+    const result = await compiler.executeCode(language, code, stdin || '', timeout);
+    res.json(result);
+  } catch (e) {
+    logger.error(null,'[playground2] run error:', e.message);
+    res.status(500).json({ error: 'Failed to execute code' });
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════════════════
+// /sudoku-api — Sudoku Puzzles
+// ═══════════════════════════════════════════════════════════════════════════
+
+function sudokuIsValid(board, row, col, num) {
+  for (let i = 0; i < 9; i++) {
+    if (board[row][i] === num) return false;
+    if (board[i][col] === num) return false;
+  }
+  const br = Math.floor(row / 3) * 3, bc = Math.floor(col / 3) * 3;
+  for (let r = br; r < br + 3; r++)
+    for (let c = bc; c < bc + 3; c++)
+      if (board[r][c] === num) return false;
+  return true;
+}
+
+function sudokuSolve(board) {
+  for (let r = 0; r < 9; r++) {
+    for (let c = 0; c < 9; c++) {
+      if (board[r][c] === 0) {
+        const nums = [1,2,3,4,5,6,7,8,9].sort(() => Math.random() - 0.5);
+        for (const n of nums) {
+          if (sudokuIsValid(board, r, c, n)) {
+            board[r][c] = n;
+            if (sudokuSolve(board)) return true;
+            board[r][c] = 0;
+          }
+        }
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+function sudokuGenerate(difficulty) {
+  const board = Array.from({ length: 9 }, () => Array(9).fill(0));
+  sudokuSolve(board);
+  const solution = board.map(r => [...r]);
+  let blanks;
+  if (difficulty === 'easy') blanks = randomInt(30, 35);
+  else if (difficulty === 'medium') blanks = randomInt(40, 45);
+  else if (difficulty === 'hard') blanks = randomInt(50, 55);
+  else blanks = randomInt(56, 60);
+  const cells = [];
+  for (let r = 0; r < 9; r++) for (let c = 0; c < 9; c++) cells.push([r, c]);
+  cells.sort(() => Math.random() - 0.5);
+  for (let i = 0; i < blanks && i < cells.length; i++) board[cells[i][0]][cells[i][1]] = 0;
+  return { grid: board, solution };
+}
+
+app.get('/sudoku-api/question', (req, res) => {
+  const difficulty = req.query.difficulty || 'easy';
+  const { grid, solution } = sudokuGenerate(difficulty);
+  const prompt = 'Fill the empty cells (0 = empty) so each row, column, and 3×3 box contains digits 1–9.';
+  res.json({ prompt, grid, solution, difficulty });
+});
+
+app.post('/sudoku-api/check', (req, res) => {
+  const { grid, solution } = req.body || {};
+  if (!grid || !solution || !Array.isArray(grid) || !Array.isArray(solution)) {
+    return res.json({ correct: false, message: 'Invalid submission.' });
+  }
+  let correct = true;
+  for (let r = 0; r < 9; r++) {
+    for (let c = 0; c < 9; c++) {
+      if (solution[r][c] !== 0 && Number(grid[r][c]) !== solution[r][c]) { correct = false; break; }
+    }
+    if (!correct) break;
+  }
+  res.json({ correct, message: correct ? 'Puzzle solved correctly!' : 'Some cells are incorrect.' });
+});
+
+// ═══════════════════════════════════════════════════════════════════════════
+// /riddle-api — Math Riddles
+// ═══════════════════════════════════════════════════════════════════════════
+const riddles = JSON.parse(fs.readFileSync(path.join(__dirname, 'riddles', 'riddles.json'), 'utf8'));
+app.use('/riddles/images', express.static(path.join(__dirname, 'riddles', 'images')));
+
+app.get('/riddle-api/question', (req, res) => {
+  const difficulty = parseInt(req.query.difficulty) || 1;
+  const type = req.query.type;
+  let pool;
+  if (type) {
+    pool = riddles.filter(r => r.type === type || (type === 'image' && r.type.startsWith('image')));
+  } else {
+    pool = riddles.filter(r => r.difficulty <= Math.min(difficulty + 1, 5));
+  }
+  if (pool.length === 0) pool = riddles;
+  // Exclude recently-used riddles to avoid immediate repeats
+  let used = [];
+  if (req.query.used) {
+    try { used = JSON.parse(req.query.used); } catch (e) { used = String(req.query.used).split(',').map(Number); }
+  }
+  if (used.length && pool.length > used.length) {
+    const remaining = pool.filter(r => !used.includes(r.id));
+    if (remaining.length > 0) pool = remaining;
+  }
+  const q = pool[Math.floor(Math.random() * pool.length)];
+  res.json(q);
+});
+
+app.post('/riddle-api/check', (req, res) => {
+  const { id, answer } = req.body;
+  const riddle = riddles.find(r => r.id === id);
+  if (!riddle) return res.status(400).json({ error: 'Riddle not found' });
+  const correct = String(answer).trim() === String(riddle.answer).trim();
+  res.json({ correct, correctAnswer: riddle.answer, hint: riddle.hint });
+});
+
+app.get('/riddle-api/count', (req, res) => {
+  const type = req.query.type;
+  let pool = riddles;
+  if (type) pool = riddles.filter(r => r.type === type || (type === 'image' && r.type.startsWith('image')));
+  res.json({ count: pool.length });
+});
+
+function generateRiddleSolution(r) {
+  const steps = [];
+  if (r.type === 'find-rule' && r.equations && r.equations.length >= 2) {
+    const eqs = r.equations;
+    const xs = eqs.map(e => e.input);
+    const ys = eqs.map(e => e.output);
+    const target = Number(r.answer);
+    const predict = (fn, label, expr) => {
+      const ok = eqs.every((e, i) => fn(e.input) === e.output);
+      if (!ok) return false;
+      const ans = fn(r.question);
+      if (ans !== target) return false;
+      steps.push(`Check every row with ${label}:`);
+      eqs.forEach((e, i) => steps.push(`  ${e.input} → ${fn(e.input)} (given ${e.output}) ✔`));
+      steps.push(`Apply ${expr} to the question ${r.question}: ${ans}.`);
+      steps.push(`Answer: ${r.answer}`);
+      return true;
+    };
+    // 1) Linear y = m*x + c
+    if (xs.length >= 2 && (xs[1] - xs[0]) !== 0) {
+      const m = (ys[1] - ys[0]) / (xs[1] - xs[0]);
+      const c = ys[0] - m * xs[0];
+      if (Number.isInteger(m) && Number.isInteger(c)) {
+        if (predict(x => m * x + c, `output = ${m}x ${c >= 0 ? '+' : '-'} ${Math.abs(c)}`, `${m}×${r.question} ${c >= 0 ? '+' : '-'} ${Math.abs(c)}`)) {
+          steps.unshift(`Compare the first two rows: ${xs[0]} → ${ys[0]} and ${xs[1]} → ${ys[1]}.`);
+          steps.splice(1, 0, `Output changes by ${ys[1] - ys[0] >= 0 ? '+' : ''}${ys[1] - ys[0]} for a change of ${xs[1] - xs[0] >= 0 ? '+' : ''}${xs[1] - xs[0]} in input → slope ${m}.`);
+          return steps;
+        }
+      }
+    }
+    // 2) Simple cube y = x^3
+    if (xs.every((x, i) => x * x * x === ys[i])) {
+      if (predict(x => x * x * x, `output = input³`, `${r.question}³`)) return steps;
+    }
+    // 3) Multiplicative y = k * x
+    if (xs.every(x => x !== 0) && Number.isInteger(ys[0] / xs[0]) && ys.every((y, i) => y / xs[i] === ys[0] / xs[0])) {
+      const k = ys[0] / xs[0];
+      if (predict(x => k * x, `output = ${k} × input`, `${k} × ${r.question}`)) return steps;
+    }
+    // 4) Product-style y = x*(x + d)
+    const tryProduct = (d) => predict(x => x * (x + d), `output = input × (input ${d >= 0 ? '+' : '-'} ${Math.abs(d)})`, `${r.question} × (${r.question} ${d >= 0 ? '+' : '-'} ${Math.abs(d)})`);
+    if (tryProduct(ys[0] / xs[0] - xs[0]) || tryProduct(1) || tryProduct(-1) || tryProduct(2) || tryProduct(-2)) return steps;
+    // 5) Quadratic y = a*x^2 + b*x + c (needs 3 points), via Lagrange interpolation
+    if (xs.length >= 3) {
+      const [x0, x1, x2] = xs; const [y0, y1, y2] = ys;
+      const L = (x, xa, xb, xc) => (x - xb) * (x - xc) / ((xa - xb) * (xa - xc));
+      const f = (x) => y0 * L(x, x0, x1, x2) + y1 * L(x, x1, x0, x2) + y2 * L(x, x2, x0, x1);
+      const a = (f(2) - 2 * f(1) + f(0)) / 2;
+      const b = f(1) - f(0) - a;
+      const c = f(0);
+      if (Number.isInteger(a) && Number.isInteger(b) && Number.isInteger(c) && a !== 0) {
+        let label = `output = ${a}x²`;
+        if (b !== 0) label += ` ${b >= 0 ? '+' : '-'} ${Math.abs(b)}x`;
+        if (c !== 0) label += ` ${c >= 0 ? '+' : '-'} ${Math.abs(c)}`;
+        let expr = `${a}×${r.question}²`;
+        if (b !== 0) expr += ` ${b >= 0 ? '+' : '-'} ${Math.abs(b)}×${r.question}`;
+        if (c !== 0) expr += ` ${c >= 0 ? '+' : '-'} ${Math.abs(c)}`;
+        if (predict(x => a * x * x + b * x + c, label, expr)) return steps;
+      }
+    }
+    // Fallback
+    steps.push(`Compare each input with its output:`);
+    eqs.forEach(e => steps.push(`  ${e.input} → ${e.output}`));
+    steps.push(`Find the relationship linking every input to its output.`);
+    if (r.hint) steps.push(`Hint: ${r.hint}`);
+    steps.push(`Answer: ${r.answer}`);
+  } else if (r.type === 'sequence' && r.sequence && r.sequence.length >= 3) {
+    const s = r.sequence;
+    const diffs = s.slice(1).map((v, i) => v - s[i]);
+    const ratios = s.slice(1).map((v, i) => v / s[i]);
+    steps.push(`Sequence: ${s.join(', ')}, ?`);
+    const allSameDiff = diffs.every(d => d === diffs[0]);
+    const allSameRatio = ratios.every(q => Math.abs(q - ratios[0]) < 1e-9);
+    if (allSameDiff) {
+      steps.push(`Differences between terms: ${diffs.join(', ')} — constant.`);
+      steps.push(`This is an arithmetic sequence; each term adds ${diffs[0]}.`);
+      steps.push(`Next term = ${s[s.length - 1]} + ${diffs[0]} = ${r.answer}.`);
+    } else if (allSameRatio && Number.isInteger(ratios[0])) {
+      steps.push(`Ratios between terms: ${ratios.join(', ')} — constant.`);
+      steps.push(`This is a geometric sequence; each term is multiplied by ${ratios[0]}.`);
+      steps.push(`Next term = ${s[s.length - 1]} × ${ratios[0]} = ${r.answer}.`);
+    } else {
+      //二阶差分检查
+      const secondDiffs = diffs.slice(1).map((v, i) => v - diffs[i]);
+      if (secondDiffs.length > 0 && secondDiffs.every(d => d === secondDiffs[0])) {
+        steps.push(`First differences: ${diffs.join(', ')} (not constant).`);
+        steps.push(`Second differences: ${secondDiffs.join(', ')} — constant. This is a quadratic sequence.`);
+        steps.push(`Next first difference = ${diffs[diffs.length - 1]} + ${secondDiffs[0]} = ${diffs[diffs.length - 1] + secondDiffs[0]}.`);
+        steps.push(`Next term = ${s[s.length - 1]} + ${diffs[diffs.length - 1] + secondDiffs[0]} = ${r.answer}.`);
+      } else {
+        steps.push(`Look for the pattern linking the terms: ${s.join(', ')}.`);
+        if (r.hint) steps.push(`Hint: ${r.hint}`);
+        steps.push(`Answer: ${r.answer}`);
+      }
+    }
+  } else if (r.type === 'logic') {
+    steps.push(`Read carefully: ${r.question}`);
+    if (r.hint) steps.push(`Reasoning: ${r.hint}`);
+    steps.push(`Answer: ${r.answer}`);
+  } else if (r.type === 'image-numpad' || r.type === 'image-option') {
+    steps.push(`Look at the image for "${r.title}".`);
+    if (r.hint) steps.push(`Reasoning: ${r.hint}`);
+    steps.push(`Answer: ${r.answer}`);
+  } else {
+    if (r.hint) steps.push(`Hint: ${r.hint}`);
+    steps.push(`Answer: ${r.answer}`);
+  }
+  return steps;
+}
+
+app.post('/riddle-api/solution', (req, res) => {
+  const { id } = req.body;
+  const riddle = riddles.find(r => r.id === id);
+  if (!riddle) return res.status(400).json({ error: 'Riddle not found' });
+  res.json({ steps: generateRiddleSolution(riddle), answer: riddle.answer });
+});
 
 // ═══════════════════════════════════════════════════════════════════════════
 // /graph — Prerequisite DAG visualisation
@@ -9359,7 +10097,7 @@ function loadInMemoryProfiles() {
       console.log(`[auth] Loaded ${Object.keys(inMemoryUserProfiles).length} in-memory user profiles from persistent file fallback`);
     }
   } catch (err) {
-    console.error('[auth] Failed to load in-memory profiles:', err.message);
+    logger.error(null,'[auth] Failed to load in-memory profiles:', err.message);
   }
 }
 
@@ -9373,7 +10111,7 @@ function saveInMemoryProfiles() {
     }
     fs.writeFileSync(DB_FILE, JSON.stringify(cleaned, null, 2), 'utf8');
   } catch (err) {
-    console.error('[auth] Failed to save in-memory profiles:', err.message);
+    logger.error(null,'[auth] Failed to save in-memory profiles:', err.message);
   }
 }
 
@@ -9411,7 +10149,7 @@ async function getUserFromReq(req) {
   if (!m) return null;
   try {
     const jwt = require('jsonwebtoken');
-    const JWT_SECRET = process.env.JWT_SECRET || 'tenali-dev-secret-change-me';
+    const JWT_SECRET = auth.JWT_SECRET; // single source of truth (server/auth.js)
     const payload = jwt.verify(m[1], JWT_SECRET);
     if (payload && payload.username) {
       const mongoose = require('mongoose');
@@ -9420,13 +10158,13 @@ async function getUserFromReq(req) {
           const dbUser = await auth.User.findById(payload.sub || payload.username);
           if (dbUser) return dbUser;
         } catch (dbErr) {
-          console.error('[auth] Database query failed, falling back to in-memory profile:', dbErr.message);
+          logger.error(null,'[auth] Database query failed, falling back to in-memory profile:', dbErr.message);
         }
       }
       return getInMemoryUser(payload.username);
     }
   } catch (e) {
-    console.error('[auth] getUserFromReq error:', e.message);
+    logger.error(null,'[auth] getUserFromReq error:', e.message);
   }
   return null;
 }
@@ -10093,7 +10831,7 @@ app.get('/transfer-api/question', async (req, res) => {
         const generated = generateGenericTransfer(topic, originalQuestion);
         return res.json(generated);
       } catch (fetchErr) {
-        console.error(`Generic transfer fallback failed to fetch for topic '${topic}':`, fetchErr);
+        logger.error(null,`Generic transfer fallback failed to fetch for topic '${topic}':`, fetchErr);
         return res.status(404).json({ error: `No transfer scenarios available for topic: ${topic}. Fallback failed: ${fetchErr.message}` });
       }
     }
@@ -10165,7 +10903,7 @@ app.post('/transfer-api/check', express.json(), async (req, res) => {
           explanation = generateGenericExplanation(varTopic, originalQuestion, expectedAnswer);
         }
       } catch (checkErr) {
-        console.error(`Generic check call failed for topic ${varTopic}, falling back to compareAnswers:`, checkErr);
+        logger.error(null,`Generic check call failed for topic ${varTopic}, falling back to compareAnswers:`, checkErr);
         correct = compareAnswers(userAnswer, expectedAnswer);
         explanation = generateGenericExplanation(varTopic, originalQuestion, expectedAnswer);
       }
@@ -10339,11 +11077,16 @@ const MQ = (() => {
         () => { const m=ri(2,5),x=ri(1,8); return {type:'m1_yval',answerType:'scalar',prompt:'If y = '+m+'x, what is y when x = '+x+'?',answer:String(m*x),display:String(m*x),data:{m,x}}; },
         () => { const m=ri(2,6); return {type:'m1_ratio',answerType:'scalar',prompt:'If y = '+m+'x, what is the ratio y:x?',answer:m+':1',display:m+':1',data:{m}}; },
         () => { const k=ri(2,5),b=ri(1,8),c=k*b; return {type:'m1_findk',answerType:'scalar',prompt:'A = '+c+' when B = '+b+'. If A = kB, find k.',answer:String(k),display:String(k),data:{k,b,c}}; },
+        () => { return {type:'m1_app_trading',answerType:'scalar',prompt:'Two crypto trading bots: Bot Alpha profit is always exactly 3× Bot Beta profit (A = 3B). If you plot their weekly profits (Bk, Ak) on a graph, what shape do the data points form?',answer:'A straight line passing through the origin (0,0) with a slope of 3',display:'A straight line through the origin with slope 3',choices:['A horizontal line given by y = 3','A straight line passing through the origin (0,0) with a slope of 3','A parabola opening upwards starting at (1, 3)','A circle centered at (0,0) with radius 3'],data:{}}; },
+        () => { return {type:'m1_app_stoich',answerType:'scalar',prompt:'In an ammonia plant, N2 and H2 react in a fixed 1:3 ratio (H2 = 3N2). Which equation defines the line on which all data points (N2, H2) must lie?',answer:'H2 = 3 N2',display:'H2 = 3 N2',choices:['H2 = 3 N2','N2 = 3 H2','H2 = N2 + 3','H2 = 3 N2 + 1'],data:{}}; },
+        () => { return {type:'m1_app_ev',answerType:'scalar',prompt:'A solar EV charging station: Station A delivers 50 kWh/hr, Station B delivers 25 kWh/hr. Plotting total energy (EB, EA) over time, why MUST the line pass through the origin?',answer:'Because at time t = 0 hours, both stations have delivered exactly 0 kWh of energy',display:'At t=0, both stations have delivered 0 kWh',choices:['Because Station A always charges at a constant rate of 0 kWh','Because at time t = 0 hours, both stations have delivered exactly 0 kWh of energy','Because the slope of the charging curve is zero','Because Station B charges twice as fast as Station A'],data:{}}; },
       ],
       medium: [
         () => { const m=ri(2,5),x=ri(1,6); return {type:'m1_eval',answerType:'scalar',prompt:'Ram saves '+m+'x what Lakshman saves. If Lakshman saves '+x+', what does Ram save?',answer:String(m*x),display:String(m*x),data:{m,x}}; },
         () => { const m1=ri(2,4),m2=m1*ri(2,3); return {type:'m1_compare',answerType:'scalar',prompt:'Two proportional relationships: y='+m1+'x and y='+m2+'x. What is the ratio of their slopes?',answer:String(m2/m1),display:String(m2/m1),data:{m1,m2}}; },
         () => { const m=ri(2,5),x=ri(1,10); return {type:'m1_origin',answerType:'scalar',prompt:'For y = '+m+'x, what is y when x = 0? Does it pass through origin?',answer:'0',display:'0 (yes, origin)',data:{m,x}}; },
+        () => { return {type:'m1_app_gear',answerType:'scalar',prompt:'A dual-motor rover uses a gearbox where Motor 1 rotates at 2.5× the speed of Motor 2 (M1 = 2.5 · M2). If Motor 2 has completed 18 full revolutions, how many has Motor 1 completed?',answer:'45',display:'45',data:{}}; },
+        () => { return {type:'m1_app_aspect',answerType:'scalar',prompt:'A game engine scales textures maintaining 16:9 aspect ratio: W = m · H. What is the slope m rounded to 2 decimal places?',answer:'1.78',display:'1.78',data:{}}; },
       ],
       hard: [
         () => { const m=ri(2,4),x1=ri(1,5),x2=x1+ri(1,3); const y1=m*x1,y2=m*x2; return {type:'m1_slope',answerType:'scalar',prompt:'Points ('+x1+','+y1+') and ('+x2+','+y2+') are from y='+m+'x. What is the slope?',answer:String(m),display:String(m),data:{m,x1,x2,y1,y2}}; },
@@ -10357,11 +11100,15 @@ const MQ = (() => {
         () => { const y1=ri(1,5); return {type:'m2_slope',answerType:'scalar',prompt:'Slope between (1,0) and (2,'+y1+')?',answer:String(y1),display:String(y1),data:{x1:2,y1}}; },
         () => { return {type:'m2_collinear',answerType:'scalar',prompt:'Are (2,1), (3,2), (4,3) collinear? (1=yes,0=no)',answer:'1',display:'Yes',data:{}}; },
         () => { return {type:'m2_next',answerType:'scalar',prompt:'Next point in pattern (2,1), (3,2), (4,3)?',answer:'(5,4)',display:'(5,4)',data:{}}; },
+        () => { return {type:'m2_app_cnc',answerType:'scalar',prompt:'CNC laser cutter drills Hole A at (3,2), Hole B at (5,4), Hole C at (7,6). Are they collinear, and what is the slope?',answer:'Yes, the slope is 1',display:'Yes, slope = 1',choices:['Yes, the slope is 1','Yes, the slope is 2','No, they form a curve','Yes, the slope is 0.5'],data:{}}; },
+        () => { return {type:'m2_app_raycast',answerType:'scalar',prompt:'A game engine highlights pixels at (2,1), (3,2), (4,3). What is the equation of the continuous line through these points?',answer:'y = x - 1',display:'y = x - 1',choices:['y = x + 1','y = x - 1','y = 2x - 1','y = x'],data:{}}; },
       ],
       medium: [
         () => { const a=ri(1,3),b=ri(1,5); return {type:'m2_equation',answerType:'scalar',prompt:'Line through (2,1) and (3,2): what is y when x='+(a+5)+'?',answer:String(a+4),display:String(a+4),data:{a,b}}; },
         () => { const m=ri(1,4),x1=ri(1,3),y1=m*x1-1; return {type:'m2_slope2',answerType:'scalar',prompt:'Slope through ('+x1+','+y1+') and ('+(x1+1)+','+(y1+m)+')?',answer:String(m),display:String(m),data:{m,x1,y1}}; },
         () => { const x=ri(2,6); return {type:'m2_check',answerType:'scalar',prompt:'Is point ('+x+','+(x-1)+') on line y = x - 1? (1=yes,0=no)',answer:'1',display:'Yes',data:{x}}; },
+        () => { return {type:'m2_app_drone',answerType:'scalar',prompt:'A drone maps drops at (3,1), (4,3), (5,5). These lie on y = mx + c. What is the y-intercept c?',answer:'-5',display:'-5',data:{}}; },
+        () => { return {type:'m2_app_rivet',answerType:'scalar',prompt:'Rivets at (2,4), (4,7), (6,10). At what y-coordinate is Rivet 5 (x=10)?',answer:'16',display:'16',data:{}}; },
       ],
       hard: [
         () => { const x1=ri(1,3),y1=ri(1,3),x2=x1+ri(1,3),y2=y1+ri(1,3); const x3=x2+ri(1,3),y3=y2+ri(1,3); const collinear=((y2-y1)*(x3-x2)===(y3-y2)*(x2-x1)); return {type:'m2_area',answerType:'scalar',prompt:'Area of triangle with vertices ('+x1+','+y1+'), ('+x2+','+y2+'), ('+x3+','+y3+')? (if collinear, 0)',answer:String(Math.abs((x1*(y2-y3)+x2*(y3-y1)+x3*(y1-y2))/2)),display:String(Math.abs((x1*(y2-y3)+x2*(y3-y1)+x3*(y1-y2))/2)),data:{x1,y1,x2,y2,x3,y3}}; },
@@ -10375,11 +11122,16 @@ const MQ = (() => {
         () => { const a=ri(1,8); return {type:'m3_through',answerType:'scalar',prompt:'Does y = '+a+'x pass through origin? (1=yes,0=no)',answer:'1',display:'Yes',data:{a}}; },
         () => { const a=ri(1,5),x=ri(1,5); return {type:'m3_yval',answerType:'scalar',prompt:'y = '+a+'x. When x = '+x+', y = ?',answer:String(a*x),display:String(a*x),data:{a,x}}; },
         () => { return {type:'m3_not',answerType:'scalar',prompt:'Does y = 2x + 1 pass through origin? (1=yes,0=no)',answer:'0',display:'No',data:{}}; },
+        () => { return {type:'m3_app_bandwidth',answerType:'scalar',prompt:'Three servers: A follows y=x, B follows y=2x, C follows y=10x (data in GB vs hours). What does Server C\'s steeper line represent?',answer:'Server C transfers data at a much faster rate (higher bandwidth).',display:'Higher bandwidth',choices:['Server C has a higher network latency.','Server C transfers data at a much faster rate (higher bandwidth).','Server C started transferring data earlier than the others.','Server C has reached its maximum data capacity.'],data:{}}; },
+        () => { return {type:'m3_app_vehicle',answerType:'scalar',prompt:'Three drones: fastest follows y=10x, slowest follows y=x. How many meters ahead is the fastest at 5 seconds?',answer:'45',display:'45',data:{}}; },
+        () => { return {type:'m3_app_currency',answerType:'scalar',prompt:'Currency conversion: P follows y=x, Q follows y=2x, R follows y=10x (x=USD, y=foreign). Which is mathematically true?',answer:'1 USD buys 10 units of Currency R, meaning Currency R is actually weaker per unit than USD.',display:'Currency R is weaker per unit',choices:['Currency R is the strongest currency because it has the steepest line.','1 USD buys 10 units of Currency R, meaning Currency R is actually weaker per unit than USD.','Currency P fluctuates the least over time.','Currency Q has a constant inflation rate of 2%.'],data:{}}; },
       ],
       medium: [
         () => { const a=ri(1,6); return {type:'m3_neg',answerType:'scalar',prompt:'Does y = -'+a+'x pass through origin? (1=yes,0=no)',answer:'1',display:'Yes',data:{a}}; },
         () => { const a=ri(1,5),b=ri(-3,3); return {type:'m3_intercept',answerType:'scalar',prompt:'y = '+a+'x + '+b+' passes through origin only if b = ?',answer:'0',display:'0',data:{a,b}}; },
         () => { const a=ri(2,5); return {type:'m3_scalar',answerType:'scalar',prompt:'For y='+a+'x, is (3,'+(3*a)+') a scalar multiple of (1,'+a+')? (1=yes,0=no)',answer:'1',display:'Yes',data:{a}}; },
+        () => { return {type:'m3_app_factory',answerType:'scalar',prompt:'A factory\'s new machine produces 120 units in 12 hours (from origin). What is the slope of its line?',answer:'10',display:'10',data:{}}; },
+        () => { return {type:'m3_app_pharma',answerType:'scalar',prompt:'Three solutions plotted as y=x, y=2x, y=10x (active ingredient vs water). How do you identify the most concentrated from the graph?',answer:'The most concentrated solution has the line that rises the fastest (steepest).',display:'Steepest line = most concentrated',choices:['The most concentrated solution has the line that is closest to the x-axis.','The most concentrated solution has the line that rises the fastest (steepest).','The most concentrated solution is the one that crosses the y-intercept at the highest point.','Concentration cannot be determined visually from these lines alone.'],data:{}}; },
       ],
       hard: [
         () => { const a1=ri(1,5),a2=ri(1,5); return {type:'m3_intersect',answerType:'scalar',prompt:'y='+a1+'x and y='+a2+'x intersect at which point?',answer:'(0,0)',display:'(0,0)',data:{a1,a2}}; },
@@ -10393,11 +11145,14 @@ const MQ = (() => {
         () => { const m=ri(2,5),b=ri(1,8); return {type:'m4_yint',answerType:'scalar',prompt:'What is the y-intercept of y = '+m+'x + '+b+'?',answer:String(b),display:String(b),data:{m,b}}; },
         () => { const m=ri(2,4),b=ri(1,5); return {type:'m4_atzero',answerType:'scalar',prompt:'y = '+m+'x + '+b+'. What is y when x = 0?',answer:String(b),display:String(b),data:{m,b}}; },
         () => { const m=ri(1,5); return {type:'m4_shift',answerType:'scalar',prompt:'y = '+m+'x + 3 shifts the line y = '+m+'x up by how many units?',answer:'3',display:'3',data:{m}}; },
+        () => { return {type:'m4_app_cloud',answerType:'scalar',prompt:'Platform A: y=0.05x (per-GB storage). Platform B: y=0.02x+10 ($10 monthly fee). Why does Platform B\'s line not pass through origin?',answer:'Because there is a baseline cost of $10 even if absolutely zero data is stored.',display:'Baseline $10 fee at zero usage',choices:['Because the competitor charges a lower rate per GB.','Because there is a baseline cost of $10 even if absolutely zero data is stored.','Because the slope of the competitor\'s line is less than 1.','Because cloud storage cannot theoretically be zero.'],data:{}}; },
       ],
       medium: [
         () => { const m=ri(2,5),b=ri(1,5),x=ri(1,5); return {type:'m4_eval',answerType:'scalar',prompt:'y = '+m+'x + '+b+'. What is y when x = '+x+'?',answer:String(m*x+b),display:String(m*x+b),data:{m,b,x}}; },
         () => { const b=ri(1,6); return {type:'m4_cross',answerType:'scalar',prompt:'Where does y = 3x + '+b+' cross the y-axis?',answer:'(0,'+b+')',display:'(0,'+b+')',data:{b}}; },
         () => { const m=ri(2,5); return {type:'m4_noshift',answerType:'scalar',prompt:'y = '+m+'x + 0 passes through which special point?',answer:'(0,0)',display:'(0,0) - origin',data:{m}}; },
+        () => { return {type:'m4_app_balloon',answerType:'scalar',prompt:'A weather balloon follows y = 5x + c. If the y-intercept is exactly 150, what was the launch altitude in meters?',answer:'150',display:'150',data:{}}; },
+        () => { return {type:'m4_app_rideshare',answerType:'scalar',prompt:'Ride-share fare: y = 2.5x + 3.5. What is the cost if passenger cancels at 0 miles?',answer:'3.5',display:'3.5',data:{}}; },
       ],
       hard: [
         () => { const m=ri(2,4),b1=ri(1,5),b2=b1+ri(1,4); return {type:'m4_parallel',answerType:'scalar',prompt:'y='+m+'x+'+b1+' and y='+m+'x+'+b2+' are parallel. Distance between intercepts?',answer:String(b2-b1),display:String(b2-b1),data:{m,b1,b2}}; },
@@ -10411,11 +11166,13 @@ const MQ = (() => {
         () => { const m=ri(1,6); return {type:'m5_steep',answerType:'scalar',prompt:'Which is steeper: y='+m+'x or y='+(m+2)+'x?',answer:String(m+2),display:'y='+(m+2)+'x',data:{m}}; },
         () => { const b=ri(-5,5); return {type:'m5_intercept',answerType:'scalar',prompt:'Setting a=0, b='+b+' gives horizontal line at y = ?',answer:String(b),display:String(b),data:{b}}; },
         () => { return {type:'m5_zero',answerType:'scalar',prompt:'a=0, b=0 gives y = ? What kind of line?',answer:'0',display:'0 (x-axis)',data:{}}; },
+        () => { return {type:'m5_app_thermo',answerType:'scalar',prompt:'Temperature scales: K = C + 273.15. Why doesn\'t the Celsius-Kelvin line pass through (0,0)?',answer:'Because zero degrees Celsius does not represent an absolute absence of heat energy.',display:'0°C ≠ absolute zero',choices:['Because temperature scales do not follow linear relationships.','Because zero degrees Celsius does not represent an absolute absence of heat energy.','Because the slope of the line is 273.15.','Because Kelvin can be negative while Celsius cannot.'],data:{}}; },
       ],
       medium: [
         () => { const m=ri(1,5),b=ri(-3,3),x=ri(1,5); return {type:'m5_both',answerType:'scalar',prompt:'Line: slope='+m+', intercept='+b+'. What is y at x='+x+'?',answer:String(m*x+b),display:String(m*x+b),data:{m,b,x}}; },
         () => { const m1=ri(1,5),m2=m1+2; return {type:'m5_angle',answerType:'scalar',prompt:'Slope '+m1+' vs slope '+m2+': which makes a larger angle with x-axis?',answer:String(m2),display:'slope '+m2,data:{m1,m2}}; },
         () => { const m=ri(1,5); return {type:'m5_negative',answerType:'scalar',prompt:'Negative slope means the line goes _____ as x increases.',answer:'down',display:'Down',data:{m}}; },
+        () => { return {type:'m5_app_mlbias',answerType:'scalar',prompt:'Neuron: Output = (Weight × Input) + Bias. If Bias is set to 0, what happens to the line?',answer:'The line shifts to pass perfectly through the origin (0,0).',display:'Passes through origin',choices:['The line becomes completely horizontal.','The line becomes completely vertical.','The line shifts to pass perfectly through the origin (0,0).','The line becomes a parabola.'],data:{}}; },
       ],
       hard: [
         () => { const m1=ri(1,4),m2=-1/m1; return {type:'m5_perp',answerType:'scalar',prompt:'Slope perpendicular to '+rnd2(m1)+' is '+rnd2(m2)+'? Product = ?',answer:'-1',display:'-1',data:{m1,m2}}; },
@@ -11511,7 +12268,7 @@ const MQ = (() => {
         q.choices = ['Yes', 'No'];
         q.prompt = q.prompt.replace(/\(1=yes,0=no\)/g, '').replace(/\s+/g, ' ').trim();
         q._yesno = true;
-      } else {
+      } else if (!q.choices || q.choices.length === 0) {
         q.choices = generateChoices(q.answer, q.prompt);
       }
     }
@@ -11526,10 +12283,138 @@ app.get('/la-mission-quiz-api/question', (req, res) => {
   const seen = new Set(seenStr.split(',').filter(Boolean));
   const id = Date.now();
   try {
+    // If we have JSON-based questions for this mission, serve from JSON
+    const jsonData = laMissionQuestions[missionId];
+    if (jsonData && jsonData.mcqs && jsonData.mcqs[difficulty]) {
+      const pool = jsonData.mcqs[difficulty];
+      // Filter out seen question IDs (client sends type like 'mcq_M1Q1E1', strip prefix for matching)
+      const seenIds = new Set([...seen].map(s => s.replace(/^mcq_/, '')));
+      const unseen = pool.filter(q => !seenIds.has(q.id));
+      const questions = unseen.length > 0 ? unseen : pool;
+      const q = questions[Math.floor(Math.random() * questions.length)];
+      // Shuffle the MCQ choices per request so the user can't guess the
+      // answer by length/position. The check route matches by exact
+      // (normalized) text, so we keep `answer` as the literal correct text.
+      // Length-bias correction: when the correct option is the unique
+      // longest or unique shortest, pad the other options with neutral
+      // characters so length is no longer a giveaway. We add an invisible-
+      // looking suffix in parens (matches how some distractors are styled)
+      // to avoid visual oddity.
+      const correctText = q.correct_option;
+      const opts = Array.isArray(q.options) ? q.options.slice() : [];
+      // Detect if correct is unique-max or unique-min length
+      const lenOf = (s) => (s == null ? 0 : s.length);
+      const correctLen = lenOf(correctText);
+      let maxLen = correctLen, minLen = correctLen;
+      for (const o of opts) {
+        const l = lenOf(o);
+        if (l > maxLen) maxLen = l;
+        if (l < minLen) minLen = l;
+      }
+      const correctIsMax = correctLen === maxLen;
+      const correctIsMin = correctLen === minLen;
+      // Padding strategy: bring all options within 1 char of median length,
+      // and ensure correct is not the unique longest/shortest.
+      const allLens = [correctLen, ...opts.map(lenOf)];
+      const median = allLens.slice().sort((a, b) => a - b)[Math.floor(allLens.length / 2)];
+      // Pad a candidate option to a target length using neutral filler
+      const pad = (s, target) => {
+        if (s == null || s.length >= target) return s;
+        const need = target - s.length;
+        // Use middle-dot `·` filler that reads like punctuation continuation;
+        // also pad with extra spaces if very short to keep the option block
+        // looking like a regular MCQ choice.
+        if (need <= 1) return s + ' ';
+        return s + ' (' + '·'.repeat(Math.max(0, need - 4)) + ')';
+      };
+      let paddedOpts = opts.slice();
+      if (correctIsMax && opts.length > 1) {
+        // Bring at least one distractor up to match (or exceed) the correct
+        // length so correct isn't the unique longest.
+        const target = correctLen;
+        // pick the distractor with the shortest length to pad
+        let minIdx = 0;
+        for (let i = 1; i < paddedOpts.length; i++) {
+          if (lenOf(paddedOpts[i]) < lenOf(paddedOpts[minIdx])) minIdx = i;
+        }
+        // Pad to AT LEAST target. Overhead for ' (·····)' wrapper is 3 chars
+        // (space + open-paren + close-paren), so filler length = need - 3.
+        const cur = paddedOpts[minIdx];
+        const need = Math.max(0, target - cur.length);
+        if (need > 0) {
+          const overhead = 3; // " (" + ")"
+          const fillerLen = Math.max(0, need - overhead);
+          if (fillerLen > 0) {
+            paddedOpts[minIdx] = cur + ' (' + '·'.repeat(fillerLen) + ')';
+          } else {
+            // Need ≤ 3, just append spaces
+            paddedOpts[minIdx] = cur + ' '.repeat(need);
+          }
+        }
+      } else if (correctIsMin && opts.length > 1) {
+        // Bring at least one distractor down (truncate trailing filler)
+        // to match the correct length, but only if safe (i.e., correct
+        // isn't the only short one — meaning there's a longer distractor).
+        // Easiest: pad a shorter distractor UP, but correct is the
+        // shortest — pad is wrong direction. Instead, leave as-is: the
+        // user might guess from short length but that's a less reliable
+        // pattern than the longest.
+      }
+      // Shuffle after padding
+      const shuffled = shuffleArray(paddedOpts);
+      return res.json({
+        id,
+        missionId,
+        difficulty,
+        type: 'mcq_' + q.id,
+        answerType: 'mcq',
+        prompt: q.question,
+        choices: shuffled,
+        answer: correctText,
+        display: correctText,
+        explanation: q.explanation,
+      });
+    }
+    // Fallback to algorithmic generation
     const q = MQ(missionId, difficulty, seen);
+    // Shuffle MCQ choices so the user can't guess the answer by length/position.
+    // Check route (line 12303+) matches by exact (normalized) text, so we keep
+    // `answer`/`display` as literal correct text. Pad short distractors so the
+    // correct option is not the unique longest (length-bias correction).
+    if (q && Array.isArray(q.choices) && q.choices.length > 1) {
+      const correctText = q.answer || q.display || '';
+      const correctLen = (correctText || '').length;
+      let maxLen = correctLen, minLen = correctLen;
+      for (const o of q.choices) {
+        const l = (o || '').length;
+        if (l > maxLen) maxLen = l;
+        if (l < minLen) minLen = l;
+      }
+      const correctIsMax = correctLen === maxLen && maxLen > 0;
+      let padded = q.choices.slice();
+      if (correctIsMax) {
+        // pad the shortest distractor up to match (or exceed) correct length
+        let minIdx = 0;
+        for (let i = 1; i < padded.length; i++) {
+          if ((padded[i] || '').length < (padded[minIdx] || '').length) minIdx = i;
+        }
+        const cur = padded[minIdx] || '';
+        const need = Math.max(0, correctLen - cur.length);
+        if (need > 0) {
+          const overhead = 3;
+          const fillerLen = Math.max(0, need - overhead);
+          if (fillerLen > 0) {
+            padded[minIdx] = cur + ' (' + '·'.repeat(fillerLen) + ')';
+          } else {
+            padded[minIdx] = cur + ' '.repeat(need);
+          }
+        }
+      }
+      q.choices = shuffleArray(padded);
+    }
     res.json({ id, missionId, difficulty, ...q });
   } catch (e) {
-    console.error('Mission quiz question error:', e);
+    logger.error(null,'Mission quiz question error:', e);
     res.status(500).json({ error: 'Failed to generate question' });
   }
 });
@@ -11541,7 +12426,10 @@ app.post('/la-mission-quiz-api/check', (req, res) => {
   const n = norm(raw);
   let correct = false;
 
-  if (answerType === 'scalar') {
+  if (answerType === 'mcq') {
+    // MCQ: exact text match against the correct option
+    correct = n === norm(expected);
+  } else if (answerType === 'scalar') {
     const parseNum = (s) => {
       s = s.replace(/\s+/g, '').replace(/\u2212/g, '-');
       if (s.includes('/')) {
@@ -11604,14 +12492,9 @@ const labRoutes = require('./labRoutes');
 app.use('/api', labRoutes);
 
 /**
- * CATCH-ALL ROUTE
- * ═══════════════════════════════════════════════════════════════════════════
- * Serves the React/Vue SPA index.html for all unmatched routes
- * Enables client-side routing to work properly
+ * CATCH-ALL ROUTE — moved to bottom of file (after all API routes)
+ * to avoid shadowing /<type>-api endpoints added later.
  */
-app.get(/.*/, (_req, res) => {
-  res.sendFile(path.join(clientDistPath, 'index.html'));
-});
 
 /**
  * POST /curiosity-api/variation
@@ -12256,21 +13139,1143 @@ app.post('/curiosity-api/variation', (req, res) => {
 
     return res.json({ original: originalData, variation, newProblem, newAnswer, explanation });
   } catch (err) {
-    console.error('[curiosity-api] error:', err && err.stack ? err.stack : err);
+    logger.error(null,'[curiosity-api] error:', err && err.stack ? err.stack : err);
     return res.status(500).json({ error: 'internal error' });
   }
 });
 
+// ═══════════════════════════════════════════════════════════════════════════
+// MATRIX MYSTICS TEST QUESTIONS (matrixmystics-api)
+// ───────────────────────────────────────────────────────────────────────────
+// Comprehensive MCQ test bank covering 6 modules, 53 topics.
+// Each topic has 10 Easy + 10 Medium + 10 Hard + 5 Real-Application questions.
+// Questions are loaded from JSON files in linearalgebra/matrixmystics/.
+// ═══════════════════════════════════════════════════════════════════════════
+
+// fs and path already required at top of file
+
+// Flat bank: topicKey -> { module, topicId, title, mcqs, real_life_application }
+const mmQuestionBank = {};
+// Module index: moduleNumber -> [topicKey]
+const mmModules = {};
+
+function loadMatrixMysticsBank() {
+  const dir = path.join(__dirname, '..', 'linearalgebra', 'matrixmystics');
+  try {
+    const files = fs.readdirSync(dir).filter(f => f.endsWith('.json'));
+    let totalTopics = 0;
+    for (const file of files) {
+      try {
+        const data = JSON.parse(fs.readFileSync(path.join(dir, file), 'utf8'));
+        const mod = data.module || 0;
+        if (!mmModules[mod]) mmModules[mod] = [];
+        // Each file has { module, topics: [{ topicId, title, mcqs, real_life_application, ... }] }
+        const topics = Array.isArray(data.topics) ? data.topics : [];
+        for (const topic of topics) {
+          if (!topic.topicId) continue;
+          const topicKey = `${file.replace('.json', '')}_${topic.topicId}`;
+          mmQuestionBank[topicKey] = {
+            module: mod,
+            topicId: topic.topicId,
+            title: topic.title || '',
+            mcqs: topic.mcqs || {},
+            real_life_application: topic.real_life_application || [],
+          };
+          mmModules[mod].push(topicKey);
+          totalTopics++;
+        }
+      } catch (e) {
+        logger.error(null,`[matrixmystics] Failed to load ${file}:`, e.message);
+      }
+    }
+    console.log(`[matrixmystics] Loaded ${Object.keys(mmQuestionBank).length} topics across ${Object.keys(mmModules).length} modules (${totalTopics} topic entries)`);
+  } catch (e) {
+    logger.error(null,'[matrixmystics] Failed to read directory:', e.message);
+  }
+}
+
+loadMatrixMysticsBank();
+
+app.get('/matrixmystics-api/question', (req, res) => {
+  try {
+    const difficulty = req.query.difficulty || 'easy';
+    const module = req.query.module ? Number(req.query.module) : null;
+    const topic = req.query.topic || null;
+    const phase = req.query.phase || null; // 'realapp' to restrict to real_life_application tier
+    const seenParam = req.query.seen ? new Set(String(req.query.seen).split(',').filter(Boolean)) : null;
+    const diffKey = difficulty === 'extrahard' ? 'hard' : difficulty;
+
+    // Collect questions matching the filter
+    const candidates = [];
+    const keysToSearch = module && mmModules[module] ? mmModules[module] : Object.keys(mmQuestionBank);
+
+    const seenSet = seenParam;
+
+    for (const key of keysToSearch) {
+      const data = mmQuestionBank[key];
+      if (!data) continue;
+      if (topic && data.topicId !== topic) continue;
+      if (phase === 'realapp') {
+        // Real-life application pool only (used by Phase 2 of LA mission quiz)
+        const pool = data.real_life_application || [];
+        if (pool.length > 0) {
+          for (const q of pool) {
+            if (seenSet && seenSet.has(q.id)) continue;
+            candidates.push({ ...q, _topic: data.topicId, _title: data.title, _module: data.module });
+          }
+        }
+        continue;
+      }
+      const pool = data.mcqs && data.mcqs[diffKey];
+      if (pool && pool.length > 0) {
+        for (const q of pool) {
+          if (seenSet && seenSet.has(q.id)) continue;
+          candidates.push({ ...q, _topic: data.topicId, _title: data.title, _module: data.module });
+        }
+      }
+      // Also include real_life_application at hard/extrahard tiers when not
+      // explicitly requesting Phase 2 — keeps backward compatibility for any
+      // existing matrixmystics-api callers.
+      if (phase !== 'realapp' && (diffKey === 'hard') && data.real_life_application && data.real_life_application.length > 0) {
+        for (const q of data.real_life_application) {
+          candidates.push({ ...q, _topic: data.topicId, _title: data.title, _module: data.module });
+        }
+      }
+    }
+
+    if (candidates.length === 0) {
+      return res.status(404).json({ error: 'No questions found for the given filters' });
+    }
+
+    const q = candidates[Math.floor(Math.random() * candidates.length)];
+
+    // Build 4-option shuffled MCQ
+    let options = Array.isArray(q.options) ? q.options : [];
+    if (options.length >= 4) {
+      const shuffled = shuffleArray(options.map((text, i) => ({ text, idx: i })));
+      const labels = ['A', 'B', 'C', 'D'];
+      options = shuffled.slice(0, 4).map((o, i) => ({ option: labels[i], text: String(o.text) }));
+      const correctIdx = shuffled.findIndex(o => String(o.text) === String(q.correct_option));
+      const correctOption = labels[correctIdx >= 0 ? correctIdx : 0];
+      return res.json({
+        id: q.id || `MM_${Date.now()}_${Math.random().toString(36).slice(2,6)}`,
+        difficulty: diffKey,
+        prompt: q.question,
+        options,
+        correctOption,
+        correctDisplay: String(q.correct_option),
+        explanation: q.explanation || '',
+        topic: q._topic,
+        topicTitle: q._title,
+        module: q._module,
+      });
+    }
+
+    // Fallback: build options from correct + remaining distractors
+    if (q.correct_option) {
+      const { options: opts, correctOption } = buildOptions(q.correct_option, options.filter(o => o !== q.correct_option));
+      return res.json({
+        id: q.id || `MM_${Date.now()}_${Math.random().toString(36).slice(2,6)}`,
+        difficulty: diffKey,
+        prompt: q.question,
+        options: opts,
+        correctOption,
+        correctDisplay: String(q.correct_option),
+        explanation: q.explanation || '',
+        topic: q._topic,
+        topicTitle: q._title,
+        module: q._module,
+      });
+    }
+
+    return res.status(500).json({ error: 'Question format error' });
+  } catch (err) {
+    logger.error(null,'[matrixmystics-api] error:', err);
+    return res.status(500).json({ error: 'internal error' });
+  }
+});
+
+app.post('/matrixmystics-api/check', express.json(), (req, res) => {
+  if (req.body && req.body.correctOption !== undefined) return mcCheck(req, res);
+  return res.status(400).json({ error: 'Missing correctOption in payload' });
+});
+
+app.get('/matrixmystics-api/stats', (req, res) => {
+  const stats = { totalTopics: Object.keys(mmQuestionBank).length, modules: {} };
+  for (const [mod, keys] of Object.entries(mmModules)) {
+    let total = 0;
+    for (const key of keys) {
+      const data = mmQuestionBank[key];
+      const m = data.mcqs || {};
+      total += (m.easy || []).length;
+      total += (m.medium || []).length;
+      total += (m.hard || []).length;
+      total += (data.real_life_application || []).length;
+    }
+    stats.modules[mod] = { topics: keys.length, questions: total };
+  }
+  res.json(stats);
+});
+
 /**
- * START SERVER
+ * CATCH-ALL ROUTE
  * ═══════════════════════════════════════════════════════════════════════════
- * Listen on all interfaces (0.0.0.0) at the configured port
- * 0.0.0.0 makes the server accessible from any network interface/IP address
+ * Serves the React/Vue SPA index.html for all unmatched routes.
+ * MUST be the last route — registered after all API endpoints so it does
+ * not shadow /<type>-api routes.
  */
-if (require.main === module) {
-  app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Tenali app running on http://0.0.0.0:${PORT}`);
+app.get(/.*/, (_req, res) => {
+  res.sendFile(path.join(clientDistPath, 'index.html'));
+});
+
+/**
+ * START SERVER + BATTLE HANDLER
+ * ═══════════════════════════════════════════════════════════════════════════
+ * Attach Socket.IO to the same HTTP server as Express.
+ * Connection limit: 500 concurrent sockets (safety cap).
+ * Battle: live fastest-finger duels (KBC-style).
+ */
+const { Server: SocketIOServer } = require('socket.io');
+const httpServer = http.createServer(app);
+const io = new SocketIOServer(httpServer, {
+  cors: { origin: '*', methods: ['GET', 'POST'] },
+  maxHttpBufferSize: 1e6,
+  connectionStateRecovery: { maxDisconnectionDuration: 2 * 60 * 1000 },
+});
+
+// ─── Connection cap ──────────────────────────────────────────────────────
+let connectionCount = 0;
+const MAX_CONNECTIONS = 500;
+io.use((socket, next) => {
+  if (connectionCount >= MAX_CONNECTIONS) {
+    return next(new Error('Server at capacity. Try again later.'));
+  }
+  next();
+});
+io.on('connection', (socket) => {
+  connectionCount++;
+  socket.on('disconnect', () => { connectionCount = Math.max(0, connectionCount - 1); });
+});
+
+// ─── Battle logic ────────────────────────────────────────────────────────
+const BATTLE_ROUNDS = 5;
+const ROUND_DURATION_MS = 15000;
+const rooms = new Map();
+
+function broadcastOpenRooms() {
+  const openRooms = {};
+  for (const topic of BATTLE_TOPICS) openRooms[topic] = [];
+  for (const [code, room] of rooms) {
+    if (room.state === 'waiting' && openRooms[room.topic]) {
+      openRooms[room.topic].push({
+        code,
+        host: room.players[0]?.name || 'Player',
+        numQuestions: room.numQuestions,
+        players: room.players.length,
+      });
+    }
+  }
+  io.emit('openRooms', openRooms);
+}
+
+function generateRoomCode() {
+  const letters = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
+  let code = '';
+  for (let i = 0; i < 4; i++) code += letters[randomInt(0, letters.length - 1)];
+  return rooms.has(code) ? generateRoomCode() : code;
+}
+
+const BATTLE_QUESTION_COUNTS = [3, 5, 10, 15];
+
+function generateBattleQ_arithmetic() {
+  const ops = ['+', '−', '×', '÷'];
+  const op = pick(ops);
+  let a = randomInt(1, 99), b = randomInt(1, 99), answer;
+  if (op === '+') answer = a + b;
+  else if (op === '−') { answer = a; a = a + b; }
+  else if (op === '×') { a = randomInt(1, 12); b = randomInt(1, 12); answer = a * b; }
+  else { b = randomInt(1, 12); answer = randomInt(1, 12); a = b * answer; }
+  return { prompt: op === '÷' ? `${a} ÷ ${b}` : `(${a}) ${op} (${b})`, answer, type: 'number' };
+}
+function generateBattleQ_multiply() {
+  const t = randomInt(2, 15), m = randomInt(1, 10);
+  return { prompt: `${t} × ${m}`, answer: t * m, type: 'number' };
+}
+function generateBattleQ_gk() {
+  if (!questions || !questions.length) return generateBattleQ_arithmetic();
+  const q = pick(questions);
+  const ci = q.answerOption.charCodeAt(0) - 65;
+  const shuffled = [...q.options].sort(() => Math.random() - 0.5);
+  return { prompt: q.question, options: shuffled, answer: shuffled.indexOf(q.options[ci]), type: 'mcq' };
+}
+
+const BATTLE_MODULES = {
+  addition:    { name: 'Addition',        icon: '➕', color: '#4a90d9', cat: 'Arithmetic' },
+  multiply:    { name: 'Tables',          icon: '✖️', color: '#9b59b6', cat: 'Arithmetic' },
+  basicarith:  { name: 'Arithmetic',      icon: '🔢', color: '#7aa2f7', cat: 'Arithmetic' },
+  hcflcm:      { name: 'HCF & LCM',       icon: '🔄', color: '#4a90d9', cat: 'Arithmetic' },
+  primefactor: { name: 'Prime Factors',   icon: '💎', color: '#5cb87a', cat: 'Arithmetic' },
+  squaring:    { name: 'Squaring',         icon: '📐', color: '#9b59b6', cat: 'Arithmetic' },
+  sqrt:        { name: 'Square Root',      icon: '√',  color: '#5cb87a', cat: 'Arithmetic' },
+  rounding:    { name: 'Rounding',         icon: '🎯', color: '#4a90d9', cat: 'Arithmetic' },
+  decimals:    { name: 'Decimals',         icon: '·',  color: '#7aa2f7', cat: 'Arithmetic' },
+  bases:       { name: 'Number Bases',     icon: '🖥',  color: '#5cb87a', cat: 'Arithmetic' },
+  stdform:     { name: 'Standard Form',    icon: '🔬', color: '#9b59b6', cat: 'Arithmetic' },
+  sdt:         { name: 'Speed, Dist, Time', icon: '🏎',  color: '#4a90d9', cat: 'Arithmetic' },
+  fractionadd: { name: 'Fractions',        icon: ' fractions', color: '#5cb87a', cat: 'Fractions & Ratios' },
+  ratio:       { name: 'Ratio',            icon: '⚖️', color: '#4a90d9', cat: 'Fractions & Ratios' },
+  percent:     { name: 'Percentages',      icon: '%',  color: '#7aa2f7', cat: 'Fractions & Ratios' },
+  profitloss:  { name: 'Profit & Loss',    icon: '💰', color: '#9b59b6', cat: 'Fractions & Ratios' },
+  banking:     { name: 'Banking',          icon: '🏦', color: '#4a90d9', cat: 'Fractions & Ratios' },
+  gst:         { name: 'GST',              icon: '🧾', color: '#5cb87a', cat: 'Fractions & Ratios' },
+  shares:      { name: 'Shares',           icon: '📈', color: '#9b59b6', cat: 'Fractions & Ratios' },
+  variation:   { name: 'Variation',        icon: '↔️', color: '#7aa2f7', cat: 'Algebra' },
+  lineareq:    { name: 'Linear Equations', icon: 'x',  color: '#4a90d9', cat: 'Algebra' },
+  simul:       { name: 'Sim. Equations',   icon: '{x}',color: '#9b59b6', cat: 'Algebra' },
+  quadratic:   { name: 'Quadratic',        icon: 'x²', color: '#7aa2f7', cat: 'Algebra' },
+  qformula:    { name: 'Quadratic Formula', icon: '±',  color: '#5cb87a', cat: 'Algebra' },
+  funceval:    { name: 'Functions',        icon: 'f(x)', color: '#4a90d9', cat: 'Algebra' },
+  sequences:   { name: 'Sequences',        icon: '…',  color: '#9b59b6', cat: 'Algebra' },
+  indices:     { name: 'Indices',          icon: 'ⁿ',  color: '#5cb87a', cat: 'Algebra' },
+  surds:       { name: 'Surds',            icon: '√n', color: '#7aa2f7', cat: 'Algebra' },
+  log:         { name: 'Logarithms',       icon: 'log', color: '#9b59b6', cat: 'Algebra' },
+  binomial:    { name: 'Binomial',         icon: 'C(n,k)', color: '#4a90d9', cat: 'Algebra' },
+  complex:     { name: 'Complex Numbers',  icon: 'i',  color: '#5cb87a', cat: 'Algebra' },
+  remfactor:   { name: 'Remainder Thm',    icon: 'R(x)', color: '#7aa2f7', cat: 'Algebra' },
+  lineq:       { name: 'Line Equation',    icon: 'mx+c', color: '#4a90d9', cat: 'Algebra' },
+  ineq:        { name: 'Inequalities',     icon: '<>',  color: '#5cb87a', cat: 'Algebra' },
+  diff:        { name: 'Differentiation',  icon: "dy/dx", color: '#9b59b6', cat: 'Calculus' },
+  integ:       { name: 'Integration',      icon: '∫',  color: '#4a90d9', cat: 'Calculus' },
+  limits:      { name: 'Limits',           icon: 'lim', color: '#5cb87a', cat: 'Calculus' },
+  angles:      { name: 'Angles',           icon: '∠',  color: '#4a90d9', cat: 'Geometry' },
+  triangles:   { name: 'Triangles',        icon: '△',  color: '#7aa2f7', cat: 'Geometry' },
+  pythag:      { name: 'Pythagoras',       icon: '⊥',  color: '#5cb87a', cat: 'Geometry' },
+  polygons:    { name: 'Polygons',         icon: '⬡',  color: '#9b59b6', cat: 'Geometry' },
+  circleth:    { name: 'Circle Thms',      icon: '⊙',  color: '#4a90d9', cat: 'Geometry' },
+  coordgeom:   { name: 'Coord. Geometry',  icon: '📍', color: '#7aa2f7', cat: 'Geometry' },
+  section:     { name: 'Section Formula',  icon: '÷',  color: '#5cb87a', cat: 'Geometry' },
+  bearings:    { name: 'Bearings',         icon: '🧭', color: '#9b59b6', cat: 'Geometry' },
+  mensur:      { name: 'Mensuration',      icon: '📏', color: '#4a90d9', cat: 'Geometry' },
+  circmeasure: { name: 'Circular Measure', icon: '弧', color: '#5cb87a', cat: 'Geometry' },
+  heron:       { name: "Heron's Formula",  icon: '△',  color: '#7aa2f7', cat: 'Geometry' },
+  similarity:  { name: 'Similarity',       icon: '∝',  color: '#9b59b6', cat: 'Geometry' },
+  congruence:  { name: 'Congruence',       icon: '≅',  color: '#5cb87a', cat: 'Geometry' },
+  transform:   { name: 'Transformations',  icon: '↗',  color: '#4a90d9', cat: 'Geometry' },
+  prob:        { name: 'Probability',      icon: '🎲', color: '#4a90d9', cat: 'Stats & Prob' },
+  stats:       { name: 'Statistics',       icon: '📊', color: '#7aa2f7', cat: 'Stats & Prob' },
+  permcomb:    { name: 'Perm & Comb',      icon: 'nPr', color: '#9b59b6', cat: 'Stats & Prob' },
+  matrix:      { name: 'Matrices',         icon: '▦',  color: '#4a90d9', cat: 'Matrices & Vectors' },
+  vectors:     { name: 'Vectors',          icon: '→',  color: '#7aa2f7', cat: 'Matrices & Vectors' },
+  dotprod:     { name: 'Dot Products',     icon: '·',  color: '#5cb87a', cat: 'Matrices & Vectors' },
+  trig:        { name: 'Trigonometry',     icon: '∡',  color: '#5cb87a', cat: 'Trig & Misc' },
+  invtrig:     { name: 'Inverse Trig',     icon: 'sin⁻¹', color: '#9b59b6', cat: 'Trig & Misc' },
+  gk:          { name: 'GK',              icon: '🧠', color: '#5cb87a', cat: 'Trig & Misc' },
+  vocab:       { name: 'Vocabulary',       icon: '📖', color: '#4a90d9', cat: 'Trig & Misc' },
+  sudoku:      { name: 'Sudoku',           icon: '🔢', color: '#1abc9c', cat: 'Trig & Misc' },
+  linprog:     { name: 'Linear Prog.',     icon: 'lin', color: '#5cb87a', cat: 'Trig & Misc' },
+  conics:      { name: 'Conic Sections',   icon: '◯',  color: '#9b59b6', cat: 'Geometry' },
+};
+
+const BATTLE_TOPICS = ['arithmetic', 'multiply', 'gk', 'sudoku', ...Object.keys(BATTLE_MODULES).filter(k => k !== 'sudoku')];
+
+function generateBattleQ_addition() {
+  const d = pick([1, 2, 3]);
+  const range = d === 1 ? [1, 9] : d === 2 ? [10, 99] : [100, 999];
+  const a = randomInt(...range), b = randomInt(...range);
+  return { prompt: `${a} + ${b}`, answer: a + b, type: 'number' };
+}
+function generateBattleQ_basicarith() {
+  const ops = ['+', '−', '×'];
+  const op = pick(ops);
+  let a, b, answer;
+  if (op === '×') { a = randomInt(2, 12); b = randomInt(2, 12); answer = a * b; }
+  else { a = randomInt(1, 99); b = randomInt(1, 99); answer = op === '+' ? a + b : a - b; }
+  return { prompt: `${a} ${op} ${b}`, answer, type: 'number' };
+}
+function generateBattleQ_hcflcm() {
+  const type = pick(['hcf', 'lcm']);
+  const a = randomInt(2, 50), b = randomInt(2, 50);
+  const g = gcd(a, b);
+  return { prompt: type === 'hcf' ? `HCF of ${a} and ${b}` : `LCM of ${a} and ${b}`,
+    answer: type === 'hcf' ? g : (a * b) / g, type: 'number' };
+}
+function generateBattleQ_primefactor() {
+  const n = randomInt(2, 200);
+  let temp = n, factors = [];
+  for (let d = 2; d * d <= temp; d++) { while (temp % d === 0) { factors.push(d); temp /= d; } }
+  if (temp > 1) factors.push(temp);
+  return { prompt: `Prime factorize ${n}`, answer: factors.sort((a, b) => a - b).join('×'), type: 'text' };
+}
+function generateBattleQ_squaring() {
+  const a = randomInt(2, 30);
+  return { prompt: `${a}² = ?`, answer: a * a, type: 'number' };
+}
+function generateBattleQ_sqrt() {
+  const perfects = [4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225];
+  const n = pick(perfects);
+  return { prompt: `√${n} = ?`, answer: Math.sqrt(n), type: 'number' };
+}
+function generateBattleQ_rounding() {
+  const n = Math.round((randomInt(100, 9999) + Math.random()) * 100) / 100;
+  const dp = pick([0, 1, 2]);
+  const answer = dp === 0 ? Math.round(n) : Number(n.toFixed(dp));
+  return { prompt: `Round ${n} to ${dp} d.p.`, answer, type: 'number' };
+}
+function generateBattleQ_decimals() {
+  const op = pick(['+', '−', '×']);
+  const a = Math.round((randomInt(1, 50) + Math.random()) * 10) / 10;
+  const b = Math.round((randomInt(1, 50) + Math.random()) * 10) / 10;
+  let answer;
+  if (op === '+') answer = Math.round((a + b) * 100) / 100;
+  else if (op === '−') answer = Math.round((a - b) * 100) / 100;
+  else answer = Math.round(a * b * 100) / 100;
+  return { prompt: `${a} ${op} ${b}`, answer, type: 'number' };
+}
+function generateBattleQ_bases() {
+  const n = randomInt(10, 255);
+  const base = pick([2, 8, 16]);
+  const answer = n.toString(base).toUpperCase();
+  const labels = { 2: 'binary', 8: 'octal', 16: 'hexadecimal' };
+  return { prompt: `Convert ${n} to ${labels[base]}`, answer, type: 'text' };
+}
+function generateBattleQ_stdform() {
+  const a = randomInt(1, 99);
+  const exp = randomInt(1, 5);
+  const n = a * Math.pow(10, exp);
+  return { prompt: `Write ${n.toLocaleString()} in standard form (e.g. 3.5e7)`, answer: `${a}e${exp}`, type: 'text' };
+}
+function generateBattleQ_sdt() {
+  const type = pick(['speed', 'distance', 'time']);
+  if (type === 'speed') {
+    const d = randomInt(10, 200), t = randomInt(2, 20);
+    return { prompt: `Travel ${d}km in ${t}h. Speed?`, answer: d / t, type: 'number' };
+  } else if (type === 'distance') {
+    const s = randomInt(10, 100), t = randomInt(2, 15);
+    return { prompt: `Speed ${s}km/h for ${t}h. Distance?`, answer: s * t, type: 'number' };
+  } else {
+    const d = randomInt(20, 200), s = randomInt(5, 50);
+    return { prompt: `Travel ${d}km at ${s}km/h. Time (hours)?`, answer: d / s, type: 'number' };
+  }
+}
+function generateBattleQ_fractionadd() {
+  const d1 = randomInt(2, 12), d2 = randomInt(2, 12);
+  const n1 = randomInt(1, d1 - 1), n2 = randomInt(1, d2 - 1);
+  const op = pick(['+', '−']);
+  const rn = op === '+' ? n1 * d2 + n2 * d1 : n1 * d2 - n2 * d1;
+  const rd = d1 * d2;
+  const g = gcd(Math.abs(rn), rd);
+  return { prompt: `${n1}/${d1} ${op} ${n2}/${d2} (as fraction a/b)`, answer: `${rn/g}/${rd/g}`, type: 'text' };
+}
+function generateBattleQ_ratio() {
+  const a = randomInt(1, 10), b = randomInt(1, 10);
+  const total = randomInt(20, 200);
+  const answer = Math.round(a * total / (a + b));
+  return { prompt: `Ratio ${a}:${b}, total = ${total}. Find the larger share.`, answer, type: 'number' };
+}
+function generateBattleQ_percent() {
+  const base = randomInt(10, 500);
+  const pct = pick([10, 15, 20, 25, 30, 40, 50]);
+  const answer = base * pct / 100;
+  return { prompt: `${pct}% of ${base} = ?`, answer, type: 'number' };
+}
+function generateBattleQ_profitloss() {
+  const cp = randomInt(20, 200) * 5;
+  const profit = randomInt(5, 40) * 5;
+  return { prompt: `CP=$${cp}, SP=$${cp + profit}. Profit?`, answer: profit, type: 'number' };
+}
+function generateBattleQ_banking() {
+  const p = randomInt(5, 50) * 1000, r = pick([5, 6, 7, 8, 10]);
+  const t = pick([1, 2, 3]);
+  const si = p * r * t / 100;
+  return { prompt: `Simple interest on $${p} at ${r}% for ${t} year(s)?`, answer: si, type: 'number' };
+}
+function generateBattleQ_gst() {
+  const price = randomInt(100, 5000);
+  const rate = pick([5, 12, 18, 28]);
+  const gst = Math.round(price * rate / 100);
+  return { prompt: `GST on $${price} at ${rate}%?`, answer: gst, type: 'number' };
+}
+function generateBattleQ_shares() {
+  const mv = randomInt(50, 200), fv = pick([10, 20, 50, 100]);
+  const div = pick([5, 8, 10, 12, 15]);
+  const shares = randomInt(5, 20);
+  const income = shares * fv * div / 100;
+  return { prompt: `${shares} shares, FV=$${fv}, dividend ${div}%. Annual income?`, answer: income, type: 'number' };
+}
+function generateBattleQ_variation() {
+  const type = pick(['direct', 'inverse']);
+  if (type === 'direct') {
+    const x1 = randomInt(2, 10), y1 = randomInt(2, 20), x2 = randomInt(2, 10);
+    const k = y1 / x1;
+    return { prompt: `y ∝ x. When x=${x1}, y=${y1}. Find y when x=${x2}.`, answer: Math.round(k * x2 * 100) / 100, type: 'number' };
+  } else {
+    const x1 = randomInt(2, 10), y1 = randomInt(2, 20), x2 = randomInt(2, 10);
+    const k = x1 * y1;
+    return { prompt: `y ∝ 1/x. When x=${x1}, y=${y1}. Find y when x=${x2}.`, answer: Math.round(k / x2 * 100) / 100, type: 'number' };
+  }
+}
+function generateBattleQ_lineareq() {
+  const x = randomInt(-10, 10);
+  const a = randomInt(1, 10), b = randomInt(-20, 20);
+  const y = a * x + b;
+  return { prompt: `Solve: ${a}x + ${b} = ${y}. x = ?`, answer: x, type: 'number' };
+}
+function generateBattleQ_simul() {
+  const x = randomInt(-5, 5), y = randomInt(-5, 5);
+  const a1 = randomInt(1, 5), b1 = randomInt(1, 5);
+  const a2 = randomInt(1, 5), b2 = randomInt(-5, 5);
+  if (a1 * b2 === a2 * b1) return generateBattleQ_lineareq();
+  const c1 = a1 * x + b1 * y, c2 = a2 * x + b2 * y;
+  return { prompt: `${a1}x + ${b1}y = ${c1} and ${a2}x + ${b2}y = ${c2}. x = ?`, answer: x, type: 'number' };
+}
+function generateBattleQ_quadratic() {
+  const a = randomInt(1, 5), b = randomInt(-10, 10), c = randomInt(-10, 10);
+  const x = randomInt(-5, 5);
+  const y = a * x * x + b * x + c;
+  return { prompt: `y = ${a}x² ${b >= 0 ? '+' : ''}${b}x ${c >= 0 ? '+' : ''}${c}. Find y when x=${x}.`, answer: y, type: 'number' };
+}
+function generateBattleQ_qformula() {
+  const r1 = randomInt(-8, 8), r2 = randomInt(-8, 8);
+  const a = 1, b = -(r1 + r2), c = r1 * r2;
+  return { prompt: `Solve x² ${b >= 0 ? '+' : ''}${b}x ${c >= 0 ? '+' : ''}${c} = 0. Smaller root?`, answer: Math.min(r1, r2), type: 'number' };
+}
+function generateBattleQ_funceval() {
+  const a = randomInt(1, 10), b = randomInt(-10, 10), x = randomInt(-5, 5);
+  return { prompt: `f(x) = ${a}x ${b >= 0 ? '+' : ''}${b}. f(${x}) = ?`, answer: a * x + b, type: 'number' };
+}
+function generateBattleQ_sequences() {
+  const a = randomInt(1, 20), d = pick([-5, -3, -2, -1, 1, 2, 3, 5]);
+  const n = randomInt(5, 15);
+  const terms = [a, a + d, a + 2 * d, a + 3 * d];
+  return { prompt: `${terms.join(', ')}, ... Find ${n}th term.`, answer: a + (n - 1) * d, type: 'number' };
+}
+function generateBattleQ_indices() {
+  const base = randomInt(2, 10), m = randomInt(2, 6), n = randomInt(2, 6);
+  return { prompt: `${base}^${m} × ${base}^${n} = ${base}^?`, answer: m + n, type: 'number' };
+}
+function generateBattleQ_surds() {
+  const a = randomInt(2, 9), b = randomInt(2, 9);
+  const n = a * a * b;
+  return { prompt: `Simplify √${n} (as a√b, e.g. 3√2)`, answer: `${a}√${b}`, type: 'text' };
+}
+function generateBattleQ_log() {
+  const base = pick([2, 3, 5, 10]), exp = randomInt(1, 5);
+  const val = Math.pow(base, exp);
+  return { prompt: `log base ${base} of ${val} = ?`, answer: exp, type: 'number' };
+}
+function generateBattleQ_binomial() {
+  const n = randomInt(3, 8), r = randomInt(1, Math.min(n - 1, 4));
+  let ans = 1;
+  for (let i = 0; i < r; i++) ans = ans * (n - i) / (i + 1);
+  return { prompt: `C(${n}, ${r}) = ?`, answer: ans, type: 'number' };
+}
+function generateBattleQ_complex() {
+  const op = pick(['add', 'multiply']);
+  const a1 = randomInt(-5, 5), b1 = randomInt(-5, 5), a2 = randomInt(-5, 5), b2 = randomInt(-5, 5);
+  if (op === 'add') return { prompt: `(${a1}+${b1}i) + (${a2}+${b2}i) = ? (real part)`, answer: a1 + a2, type: 'number' };
+  const re = a1 * a2 - b1 * b2, im = a1 * b2 + b1 * a2;
+  return { prompt: `(${a1}+${b1}i) × (${a2}+${b2}i) = ? (real part)`, answer: re, type: 'number' };
+}
+function generateBattleQ_remfactor() {
+  const a = randomInt(-5, 5), b = randomInt(1, 5);
+  const c = randomInt(-10, 10);
+  const remainder = a * b + c;
+  return { prompt: `P(x) = ${a}x + ${c >= 0 ? '+' : ''}${c}. Remainder when ÷(x − ${b})?`, answer: remainder, type: 'number' };
+}
+function generateBattleQ_lineq() {
+  const m = randomInt(-5, 5), c = randomInt(-10, 10);
+  const x1 = randomInt(-3, 3), x2 = randomInt(-3, 3);
+  const y1 = m * x1 + c, y2 = m * x2 + c;
+  return { prompt: `Line through (${x1},${y1}) and (${x2},${y2}). Slope m = ?`, answer: m, type: 'number' };
+}
+function generateBattleQ_ineq() {
+  const x = randomInt(-5, 5);
+  const a = randomInt(1, 5);
+  const b = randomInt(-20, 20);
+  const rhs = a * x + b;
+  return { prompt: `Solve: ${a}x ${b >= 0 ? '+' : ''}${b} < ${rhs + a}. x < ?`, answer: x + 1, type: 'number' };
+}
+function generateBattleQ_diff() {
+  const n = randomInt(2, 5), a = randomInt(1, 10);
+  return { prompt: `d/dx (${a}x^${n}) = ? (coeff of x^${n - 1})`, answer: a * n, type: 'number' };
+}
+function generateBattleQ_integ() {
+  const n = randomInt(1, 4), a = randomInt(1, 10);
+  return { prompt: `∫${a}x^${n} dx → coeff of x^${n + 1} = ?`, answer: a / (n + 1), type: 'number' };
+}
+function generateBattleQ_limits() {
+  const a = randomInt(1, 5), b = randomInt(1, 5);
+  return { prompt: `lim(x→0) (${a}x + ${b}) = ?`, answer: b, type: 'number' };
+}
+function generateBattleQ_angles() {
+  const a1 = randomInt(20, 150), a2 = randomInt(20, 160 - a1);
+  const a3 = 180 - a1 - a2;
+  return { prompt: `Triangle angles: ${a1}°, ${a2}°, ?`, answer: a3, type: 'number' };
+}
+function generateBattleQ_triangles() {
+  const a = randomInt(20, 70), b = randomInt(20, 160 - a - 10);
+  return { prompt: `Triangle: two angles ${a}° and ${b}°. Third angle?`, answer: 180 - a - b, type: 'number' };
+}
+function generateBattleQ_pythag() {
+  const triples = [[3,4,5],[5,12,13],[8,15,17],[7,24,25],[6,8,10],[9,12,15]];
+  const [a, b, c] = pick(triples);
+  const type = pick(['hyp', 'leg']);
+  if (type === 'hyp') return { prompt: `Right △ legs ${a} and ${b}. Hypotenuse?`, answer: c, type: 'number' };
+  return { prompt: `Right △ hyp=${c}, leg=${a}. Other leg?`, answer: b, type: 'number' };
+}
+function generateBattleQ_polygons() {
+  const n = pick([3, 4, 5, 6, 7, 8, 9, 10, 12]);
+  const interior = (n - 2) * 180 / n;
+  return { prompt: `Regular ${n}-gon. Each interior angle?`, answer: Math.round(interior * 100) / 100, type: 'number' };
+}
+function generateBattleQ_circleth() {
+  const angle = randomInt(20, 150);
+  return { prompt: `Angle at centre = ${angle * 2}°. Angle at circumference?`, answer: angle, type: 'number' };
+}
+function generateBattleQ_coordgeom() {
+  const x1 = randomInt(-5, 5), y1 = randomInt(-5, 5), x2 = randomInt(-5, 5), y2 = randomInt(-5, 5);
+  const type = pick(['mid', 'dist']);
+  if (type === 'mid') return { prompt: `Midpoint of (${x1},${y1}) and (${x2},${y2}) x-coord?`, answer: (x1 + x2) / 2, type: 'number' };
+  const d = Math.round(Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2) * 100) / 100;
+  return { prompt: `Distance (${x1},${y1}) to (${x2},${y2}) = ?`, answer: d, type: 'number' };
+}
+function generateBattleQ_section() {
+  const x1 = randomInt(0, 10), y1 = randomInt(0, 10), x2 = randomInt(0, 10), y2 = randomInt(0, 10);
+  const mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
+  return { prompt: `Section point of (${x1},${y1}) and (${x2},${y2}) — y-coord?`, answer: my, type: 'number' };
+}
+function generateBattleQ_bearings() {
+  const angle = randomInt(10, 170);
+  const bearing = (90 - angle + 360) % 360 || 360;
+  return { prompt: `Bearing of point ${angle}° east of north = ?`, answer: bearing, type: 'number' };
+}
+function generateBattleQ_mensur() {
+  const type = pick(['rect_area', 'circle_area', 'cyl_vol']);
+  if (type === 'rect_area') {
+    const l = randomInt(3, 20), w = randomInt(3, 20);
+    return { prompt: `Rectangle ${l}×${w}. Area?`, answer: l * w, type: 'number' };
+  } else if (type === 'circle_area') {
+    const r = randomInt(2, 10);
+    return { prompt: `Circle r=${r}. Area? (round to 1dp)`, answer: Math.round(Math.PI * r * r * 10) / 10, type: 'number' };
+  } else {
+    const r = randomInt(2, 8), h = randomInt(3, 15);
+    return { prompt: `Cylinder r=${r}, h=${h}. Volume? (round to 1dp)`, answer: Math.round(Math.PI * r * r * h * 10) / 10, type: 'number' };
+  }
+}
+function generateBattleQ_circmeasure() {
+  const r = randomInt(3, 15), theta = pick([30, 45, 60, 90, 120]);
+  const arc = Math.round(r * theta * Math.PI / 180 * 100) / 100;
+  return { prompt: `Arc length: r=${r}, θ=${theta}° = ? (round to 1dp)`, answer: Math.round(arc * 10) / 10, type: 'number' };
+}
+function generateBattleQ_heron() {
+  const a = randomInt(3, 12), b = randomInt(3, 12), c = a + randomInt(1, 3);
+  const s = (a + b + c) / 2;
+  const area = Math.round(Math.sqrt(s * (s - a) * (s - b) * (s - c)) * 100) / 100;
+  return { prompt: `△ sides ${a},${b},${c}. Area? (round to 1dp)`, answer: Math.round(area * 10) / 10, type: 'number' };
+}
+function generateBattleQ_similarity() {
+  const a = randomInt(3, 10), b = randomInt(3, 10);
+  const k = randomInt(2, 4);
+  return { prompt: `Scale factor ${k}. Side ${a} becomes ?`, answer: a * k, type: 'number' };
+}
+function generateBattleQ_congruence() {
+  const criteria = ['SSS', 'SAS', 'ASA', 'RHS', 'AAS'];
+  const c = pick(criteria);
+  const wrong = criteria.filter(x => x !== c);
+  const options = [c, ...wrong.slice(0, 3)].sort(() => Math.random() - 0.5);
+  return { prompt: `Two triangles with two sides + included angle equal. Criterion?`, options, answer: options.indexOf(c), type: 'mcq' };
+}
+function generateBattleQ_transform() {
+  const ops = ['Translation', 'Rotation', 'Reflection', 'Enlargement'];
+  const o = pick(ops);
+  const wrong = ops.filter(x => x !== o);
+  const options = [o, ...wrong.slice(0, 3)].sort(() => Math.random() - 0.5);
+  return { prompt: `A shape is moved keeping size and orientation same. Type?`, options, answer: options.indexOf(o), type: 'mcq' };
+}
+function generateBattleQ_prob() {
+  const total = randomInt(4, 20), favorable = randomInt(1, total - 1);
+  const g = gcd(favorable, total);
+  return { prompt: `Probability: ${favorable} red out of ${total}. Simplify.`, answer: `${favorable/g}/${total/g}`, type: 'text' };
+}
+function generateBattleQ_stats() {
+  const nums = Array.from({ length: 5 }, () => randomInt(1, 30));
+  const sorted = [...nums].sort((a, b) => a - b);
+  const median = sorted[2];
+  return { prompt: `Find median of: ${nums.join(', ')}`, answer: median, type: 'number' };
+}
+function generateBattleQ_permcomb() {
+  const type = pick(['P', 'C']);
+  const n = randomInt(4, 8), r = randomInt(2, 4);
+  let ans = 1;
+  for (let i = 0; i < r; i++) ans *= (n - i);
+  if (type === 'C') { let d = 1; for (let i = 1; i <= r; i++) d *= i; ans /= d; }
+  return { prompt: `${type}(${n},${r}) = ?`, answer: ans, type: 'number' };
+}
+function generateBattleQ_matrix() {
+  const a = randomInt(1, 9), b = randomInt(1, 9), c = randomInt(1, 9), d = randomInt(1, 9);
+  return { prompt: `Matrix [[${a},${b}],[${c},${d}]]. Trace = ?`, answer: a + d, type: 'number' };
+}
+function generateBattleQ_vectors() {
+  const ax = randomInt(-5, 5), ay = randomInt(-5, 5), bx = randomInt(-5, 5), by = randomInt(-5, 5);
+  return { prompt: `(${ax},${ay}) + (${bx},${by}) = (x,y). x = ?`, answer: ax + bx, type: 'number' };
+}
+function generateBattleQ_dotprod() {
+  const ax = randomInt(-5, 5), ay = randomInt(-5, 5), bx = randomInt(-5, 5), by = randomInt(-5, 5);
+  return { prompt: `(${ax},${ay})·(${bx},${by}) = ?`, answer: ax * bx + ay * by, type: 'number' };
+}
+function generateBattleQ_trig() {
+  const triples = [[3,4,5],[5,12,13],[8,15,17],[6,8,10],[9,12,15]];
+  const [a, b, c] = pick(triples);
+  const sub = pick(['find_hyp', 'find_leg']);
+  if (sub === 'find_hyp') return { prompt: `Right △ legs ${a} and ${b}. Hypotenuse?`, answer: c, type: 'number' };
+  return { prompt: `Right △ hyp=${c}, leg=${a}. Other leg?`, answer: b, type: 'number' };
+}
+function generateBattleQ_invtrig() {
+  const angles = [30, 45, 60, 90];
+  const a = pick(angles);
+  return { prompt: `sin⁻¹(sin(${a}°)) = ?`, answer: a, type: 'number' };
+}
+// generateBattleQ_gk is defined earlier (line ~12311) using hoisted declaration
+function generateBattleQ_vocab() {
+  if (!vocabQuestions || !vocabQuestions.length) return generateBattleQ_gk();
+  const q = pick(vocabQuestions);
+  const correct = q.meaning;
+  const others = vocabQuestions.filter(v => v.word !== q.word).slice(0, 3).map(v => v.meaning);
+  const options = [correct, ...others].sort(() => Math.random() - 0.5);
+  return { prompt: `What does "${q.word}" mean?`, options, answer: options.indexOf(correct), type: 'mcq' };
+}
+function generateBattleQ_linprog() {
+  const x = randomInt(1, 5), y = randomInt(1, 5);
+  const a = randomInt(1, 5), b = randomInt(1, 5);
+  return { prompt: `Max Z = ${a}x + ${b}y at (${x},${y}). Z = ?`, answer: a * x + b * y, type: 'number' };
+}
+function generateBattleQ_conics() {
+  const types = ['Circle', 'Parabola', 'Ellipse', 'Hyperbola'];
+  const t = pick(types);
+  const wrong = types.filter(x => x !== t);
+  const options = [t, ...wrong.slice(0, 3)].sort(() => Math.random() - 0.5);
+  return { prompt: `Which conic: x² + y² = 25?`, options, answer: options.indexOf('Circle'), type: 'mcq' };
+}
+
+const BATTLE_Q_GENERATORS = {
+  addition: generateBattleQ_addition, multiply: generateBattleQ_multiply,
+  basicarith: generateBattleQ_basicarith, hcflcm: generateBattleQ_hcflcm,
+  primefactor: generateBattleQ_primefactor, squaring: generateBattleQ_squaring,
+  sqrt: generateBattleQ_sqrt, rounding: generateBattleQ_rounding,
+  decimals: generateBattleQ_decimals, bases: generateBattleQ_bases,
+  stdform: generateBattleQ_stdform, sdt: generateBattleQ_sdt,
+  fractionadd: generateBattleQ_fractionadd, ratio: generateBattleQ_ratio,
+  percent: generateBattleQ_percent, profitloss: generateBattleQ_profitloss,
+  banking: generateBattleQ_banking, gst: generateBattleQ_gst,
+  shares: generateBattleQ_shares, variation: generateBattleQ_variation,
+  lineareq: generateBattleQ_lineareq, simul: generateBattleQ_simul,
+  quadratic: generateBattleQ_quadratic, qformula: generateBattleQ_qformula,
+  funceval: generateBattleQ_funceval, sequences: generateBattleQ_sequences,
+  indices: generateBattleQ_indices, surds: generateBattleQ_surds,
+  log: generateBattleQ_log, binomial: generateBattleQ_binomial,
+  complex: generateBattleQ_complex, remfactor: generateBattleQ_remfactor,
+  lineq: generateBattleQ_lineq, ineq: generateBattleQ_ineq,
+  diff: generateBattleQ_diff, integ: generateBattleQ_integ,
+  limits: generateBattleQ_limits, angles: generateBattleQ_angles,
+  triangles: generateBattleQ_triangles, pythag: generateBattleQ_pythag,
+  polygons: generateBattleQ_polygons, circleth: generateBattleQ_circleth,
+  coordgeom: generateBattleQ_coordgeom, section: generateBattleQ_section,
+  bearings: generateBattleQ_bearings, mensur: generateBattleQ_mensur,
+  circmeasure: generateBattleQ_circmeasure, heron: generateBattleQ_heron,
+  similarity: generateBattleQ_similarity, congruence: generateBattleQ_congruence,
+  transform: generateBattleQ_transform, prob: generateBattleQ_prob,
+  stats: generateBattleQ_stats, permcomb: generateBattleQ_permcomb,
+  matrix: generateBattleQ_matrix, vectors: generateBattleQ_vectors,
+  dotprod: generateBattleQ_dotprod, trig: generateBattleQ_trig,
+  invtrig: generateBattleQ_invtrig, gk: generateBattleQ_gk,
+  vocab: generateBattleQ_vocab, linprog: generateBattleQ_linprog,
+  conics: generateBattleQ_conics,
+};
+
+function generateSudokuBattleQ() {
+  const { grid } = sudokuGenerate('easy');
+  const hintType = pick(['row', 'col', 'box']);
+  let r, c, hint;
+  if (hintType === 'row') {
+    r = randomInt(0, 8);
+    const empties = [];
+    for (let col = 0; col < 9; col++) if (grid[r][col] === 0) empties.push(col);
+    if (!empties.length) return generateBattleQ_arithmetic();
+    c = pick(empties);
+    hint = `Row ${r + 1}`;
+  } else if (hintType === 'col') {
+    c = randomInt(0, 8);
+    const empties = [];
+    for (let row = 0; row < 9; row++) if (grid[row][c] === 0) empties.push(row);
+    if (!empties.length) return generateBattleQ_arithmetic();
+    r = pick(empties);
+    hint = `Column ${c + 1}`;
+  } else {
+    const br = randomInt(0, 2) * 3, bc = randomInt(0, 2) * 3;
+    const empties = [];
+    for (let dr = 0; dr < 3; dr++) for (let dc = 0; dc < 3; dc++) if (grid[br + dr][bc + dc] === 0) empties.push([br + dr, bc + dc]);
+    if (!empties.length) return generateBattleQ_arithmetic();
+    [r, c] = pick(empties);
+    hint = `Box ${Math.floor(br / 3) * 3 + Math.floor(bc / 3) + 1}`;
+  }
+  return { prompt: 'What number fills the empty cell?', grid, row: r, col: c, answer: grid[r][c], hint, type: 'number' };
+}
+
+function startSudokuRace(room) {
+  const { grid, solution } = sudokuGenerate('medium');
+  room.sudokuPuzzle = grid;
+  room.sudokuSolution = solution;
+  room.sudokuRaceStart = Date.now();
+  room.sudokuGrids = {};
+  room.sudokuCompleted = {};
+  for (const p of room.players) {
+    room.sudokuGrids[p.socketId] = grid.map(row => [...row]);
+  }
+  io.to(room.code).emit('sudokuRaceStart', {
+    puzzle: grid,
+    raceStart: room.sudokuRaceStart,
   });
 }
 
+function endSudokuRace(room) {
+  if (!room || room.state === 'ended') return;
+  room.state = 'ended';
+  const sol = room.sudokuSolution;
+  const results = room.players.map(p => {
+    const grid = room.sudokuGrids[p.socketId] || [];
+    let errors = 0;
+    for (let r = 0; r < 9; r++)
+      for (let c = 0; c < 9; c++)
+        if (sol[r][c] !== 0 && Number(grid[r]?.[c]) !== sol[r][c]) errors++;
+    const completed = room.sudokuCompleted[p.socketId];
+    return { id: p.socketId, name: p.name, errors, completed: !!completed, time: completed?.time || null };
+  });
+  results.sort((a, b) => {
+    if (a.completed && !b.completed) return -1;
+    if (!a.completed && b.completed) return 1;
+    if (a.completed && b.completed) return a.time - b.time;
+    return a.errors - b.errors;
+  });
+  const winner = results[0].errors === results[1].errors && results[0].time === results[1].time
+    ? 'draw' : results[0].id;
+  const scores = results.map(r => ({
+    id: r.id, name: r.name, score: r.completed ? Math.max(100 - r.errors * 5, 10) : Math.max(50 - r.errors * 5, 0),
+  }));
+  io.to(room.code).emit('matchEnd', {
+    winner,
+    finalScores: scores,
+    topic: room.topic,
+    numQuestions: 1,
+    history: [{
+      round: 1,
+      prompt: 'Sudoku Race',
+      type: 'sudoku-race',
+      players: results.map(r => ({
+        id: r.id, name: r.name, correct: r.completed && r.errors === 0,
+        time: r.time, errors: r.errors, completed: r.completed,
+      })),
+      winner: winner === 'draw' ? 'draw' : winner,
+    }],
+    players: room.players.map(p => ({ id: p.socketId, name: p.name })),
+    sudokuResults: results,
+  });
+  rooms.delete(room.code);
+}
+
+function generateBattleQuestion(topic) {
+  if (topic === 'sudoku') return generateSudokuBattleQ();
+  const gen = BATTLE_Q_GENERATORS[topic];
+  if (gen) return gen();
+  return generateBattleQ_arithmetic();
+}
+
+function startRound(room) {
+  const q = generateBattleQuestion(room.topic);
+  room.currentQuestion = q;
+  room.roundStartTime = Date.now();
+  room.answers = {};
+  room.round++;
+  io.to(room.code).emit('roundStart', {
+    prompt: q.prompt,
+    options: q.options || null,
+    type: q.type,
+    round: room.round,
+    total: room.numQuestions,
+    duration: ROUND_DURATION_MS,
+    streaks: room.streaks,
+  });
+  room.roundTimer = setTimeout(() => endRound(room), ROUND_DURATION_MS);
+}
+
+function endRound(room) {
+  if (!room || room.state !== 'playing') return;
+  clearTimeout(room.roundTimer);
+  const q = room.currentQuestion;
+  const results = {};
+  let winner = null;
+  let bestTime = Infinity;
+  for (const p of room.players) {
+    const ans = room.answers[p.socketId];
+    if (ans !== undefined && ans.correct) {
+      results[p.socketId] = { correct: true, time: ans.time };
+      if (ans.time < bestTime) { bestTime = ans.time; winner = p.socketId; }
+    } else {
+      results[p.socketId] = { correct: false, time: room.answers[p.socketId]?.time || null };
+    }
+  }
+  for (const p of room.players) {
+    if (winner === p.socketId) p.score += 10 + Math.max(0, Math.round((ROUND_DURATION_MS - (results[p.socketId]?.time || 0)) / 1500));
+    else if (results[p.socketId]?.correct) p.score += 5;
+  }
+  for (const p of room.players) {
+    if (results[p.socketId]?.correct) {
+      room.streaks[p.socketId] = (room.streaks[p.socketId] || 0) + 1;
+    } else {
+      room.streaks[p.socketId] = 0;
+    }
+  }
+  const correctAnswer = q.type === 'mcq' ? q.options[q.answer] : q.answer;
+  room.roundHistory.push({
+    round: room.round,
+    prompt: q.prompt,
+    correctAnswer,
+    type: q.type,
+    players: room.players.map(p => ({
+      id: p.socketId,
+      name: p.name,
+      correct: results[p.socketId]?.correct || false,
+      time: results[p.socketId]?.time || null,
+      answer: room.answers[p.socketId] != null ? (q.type === 'mcq' ? q.options[Number(room.answers[p.socketId].raw)] : room.answers[p.socketId].raw) : null,
+    })),
+    winner,
+  });
+  io.to(room.code).emit('roundResult', {
+    winner,
+    correctAnswer,
+    scores: room.players.map(p => ({ id: p.socketId, name: p.name, score: p.score })),
+    results,
+    streaks: room.streaks,
+    players: room.players.map(p => ({
+      id: p.socketId,
+      name: p.name,
+      correct: results[p.socketId]?.correct || false,
+      time: results[p.socketId]?.time || null,
+    })),
+  });
+  room.currentQuestion = null;
+  if (room.round >= room.numQuestions) {
+    setTimeout(() => endMatch(room), 2500);
+  } else {
+    room.state = 'between_rounds';
+    setTimeout(() => {
+      if (room.state === 'between_rounds') { room.state = 'playing'; startRound(room); }
+    }, 3000);
+  }
+}
+
+function endMatch(room) {
+  if (!room || room.state === 'ended') return;
+  room.state = 'ended';
+  const scores = room.players.map(p => ({ id: p.socketId, name: p.name, score: p.score }));
+  scores.sort((a, b) => b.score - a.score);
+  const winner = scores[0].score > scores[1].score ? scores[0].id
+    : scores[0].score === scores[1].score ? 'draw' : scores[1].id;
+  io.to(room.code).emit('matchEnd', {
+    winner,
+    finalScores: scores,
+    topic: room.topic,
+    numQuestions: room.numQuestions,
+    history: room.roundHistory,
+    players: room.players.map(p => ({ id: p.socketId, name: p.name })),
+    streaks: room.streaks,
+  });
+  rooms.delete(room.code);
+}
+
+io.on('connection', (socket) => {
+  socket.on('getOpenRooms', () => {
+    const openRooms = {};
+    for (const topic of BATTLE_TOPICS) openRooms[topic] = [];
+    for (const [code, room] of rooms) {
+      if (room.state === 'waiting' && openRooms[room.topic]) {
+        openRooms[room.topic].push({
+          code,
+          host: room.players[0]?.name || 'Player',
+          numQuestions: room.numQuestions,
+          players: room.players.length,
+        });
+      }
+    }
+    socket.emit('openRooms', openRooms);
+  });
+
+  socket.on('createRoom', ({ name, topic, numQuestions }, cb) => {
+    const code = generateRoomCode();
+    const nq = BATTLE_QUESTION_COUNTS.includes(numQuestions) ? numQuestions : 5;
+    const room = {
+      code, topic: BATTLE_TOPICS.includes(topic) ? topic : 'arithmetic',
+      numQuestions: nq,
+      players: [{ socketId: socket.id, name: (name || 'Player').slice(0, 20), score: 0, ready: false }],
+      round: 0, state: 'waiting', currentQuestion: null, roundStartTime: 0, answers: {}, roundTimer: null,
+      roundHistory: [], streaks: {},
+    };
+    rooms.set(code, room);
+    socket.join(code);
+    socket.roomCode = code;
+    cb?.({ ok: true, code, players: room.players.map(p => ({ id: p.socketId, name: p.name })) });
+    broadcastOpenRooms();
+  });
+
+  socket.on('joinRoom', ({ code, name }, cb) => {
+    const room = rooms.get(code?.toUpperCase());
+    if (!room) return cb?.({ ok: false, error: 'Room not found.' });
+    if (room.players.length >= 2) return cb?.({ ok: false, error: 'Room is full.' });
+    if (room.state !== 'waiting') return cb?.({ ok: false, error: 'Match already in progress.' });
+    room.players.push({ socketId: socket.id, name: (name || 'Player').slice(0, 20), score: 0, ready: false });
+    socket.join(code);
+    socket.roomCode = code;
+    io.to(code).emit('roomUpdate', {
+      players: room.players.map(p => ({ id: p.socketId, name: p.name, ready: p.ready })),
+      topic: room.topic,
+    });
+    cb?.({ ok: true, code, players: room.players.map(p => ({ id: p.socketId, name: p.name })) });
+    broadcastOpenRooms();
+  });
+
+  socket.on('ready', () => {
+    const room = rooms.get(socket.roomCode);
+    if (!room || room.state !== 'waiting') return;
+    const player = room.players.find(p => p.socketId === socket.id);
+    if (player) player.ready = true;
+    io.to(room.code).emit('roomUpdate', {
+      players: room.players.map(p => ({ id: p.socketId, name: p.name, ready: p.ready })),
+      topic: room.topic,
+    });
+    if (room.players.length === 2 && room.players.every(p => p.ready)) {
+      room.state = 'playing';
+      io.to(room.code).emit('matchStart', { topic: room.topic, rounds: room.numQuestions });
+      broadcastOpenRooms();
+      if (room.topic === 'sudoku') {
+        setTimeout(() => startSudokuRace(room), 1500);
+      } else {
+        setTimeout(() => startRound(room), 1500);
+      }
+    }
+  });
+
+  socket.on('submitAnswer', ({ answer }) => {
+    const room = rooms.get(socket.roomCode);
+    if (!room || room.state !== 'playing' || !room.currentQuestion) return;
+    if (room.answers[socket.id]) return;
+    const q = room.currentQuestion;
+    const time = Date.now() - room.roundStartTime;
+    let correct = false;
+    if (q.type === 'mcq') correct = Number(answer) === q.answer;
+    else correct = Number(answer) === q.answer;
+    room.answers[socket.id] = { correct, time, raw: answer };
+    socket.to(room.code).emit('opponentAnswered', { playerId: socket.id, answeredCount: Object.keys(room.answers).length });
+    if (Object.keys(room.answers).length >= 2) endRound(room);
+  });
+
+  socket.on('submitCell', ({ r, c, val }) => {
+    const room = rooms.get(socket.roomCode);
+    if (!room || room.state !== 'playing' || room.topic !== 'sudoku') return;
+    if (!room.sudokuGrids?.[socket.id]) return;
+    const num = Number(val);
+    if (r < 0 || r > 8 || c < 0 || c > 8 || isNaN(num) || num < 0 || num > 9) return;
+    if (room.sudokuPuzzle[r][c] !== 0) return;
+    room.sudokuGrids[socket.id][r][c] = num;
+    socket.to(room.code).emit('opponentCellUpdate', { r, c, val: num });
+  });
+
+  socket.on('sudokuComplete', () => {
+    const room = rooms.get(socket.roomCode);
+    if (!room || room.state !== 'playing' || room.topic !== 'sudoku') return;
+    if (room.sudokuCompleted[socket.id]) return;
+    const time = Date.now() - room.sudokuRaceStart;
+    room.sudokuCompleted[socket.id] = { time };
+    socket.to(room.code).emit('opponentFinished', { playerId: socket.id, time });
+    if (Object.keys(room.sudokuCompleted).length >= 2) {
+      endSudokuRace(room);
+    } else {
+      setTimeout(() => {
+        if (room.state === 'playing' && Object.keys(room.sudokuCompleted).length < 2) {
+          endSudokuRace(room);
+        }
+      }, 30000);
+    }
+  });
+
+  socket.on('leave', () => {
+    const room = rooms.get(socket.roomCode);
+    if (!room) return;
+    room.players = room.players.filter(p => p.socketId !== socket.id);
+    socket.leave(room.code);
+    if (room.players.length === 0) { clearTimeout(room.roundTimer); rooms.delete(room.code); }
+    else { io.to(room.code).emit('opponentLeft', { name: 'Opponent' }); clearTimeout(room.roundTimer); rooms.delete(room.code); }
+    socket.roomCode = null;
+    broadcastOpenRooms();
+  });
+
+  socket.on('sendReaction', ({ emoji }) => {
+    const room = rooms.get(socket.roomCode);
+    if (!room || room.state === 'ended') return;
+    socket.to(room.code).emit('opponentReaction', { emoji, from: socket.id });
+  });
+
+  socket.on('disconnect', () => {
+    const room = rooms.get(socket.roomCode);
+    if (!room) return;
+    const player = room.players.find(p => p.socketId === socket.id);
+    room.players = room.players.filter(p => p.socketId !== socket.id);
+    clearTimeout(room.roundTimer);
+    if (room.players.length === 0) rooms.delete(room.code);
+    else { io.to(room.code).emit('opponentLeft', { name: player?.name || 'Opponent' }); rooms.delete(room.code); }
+    broadcastOpenRooms();
+  });
+});
+
+// Global error handler — catches anything an individual route didn't handle
+// itself (thrown errors, and in Express 5, rejected async handlers too).
+// Must be registered after all routes. Logs full detail server-side but
+// never leaks stack traces to the client.
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, next) => {
+  logger.error('http', `${req.method} ${req.originalUrl} ->`, err);
+  if (res.headersSent) return;
+  res.status(err.status || 500).json({ error: 'Internal server error' });
+});
+
+// Loads the two large question sets concurrently (Promise.all lets their
+// internal per-file reads all overlap on libuv's thread pool, rather than
+// finishing the ~991 GK files, then starting the ~7,600 vocab files) and
+// assigns them into the module-level `questions`/`vocabQuestions` variables
+// that every route closure below already references by name.
+async function initData() {
+  const [loadedQuestions, loadedVocab] = await Promise.all([
+    loadJsonDir(questionsDir),
+    loadVocabAsync(),
+  ]);
+  questions = loadedQuestions;
+  vocabQuestions = loadedVocab;
+}
+
+if (require.main === module) {
+  initData()
+    .then(() => {
+      httpServer.listen(PORT, '0.0.0.0', () => {
+        console.log(`Tenali app running on http://0.0.0.0:${PORT}`);
+      });
+    })
+    .catch((err) => {
+      logger.error('startup', 'Failed to load question/vocab data:', err);
+      process.exit(1);
+    });
+} else {
+  // Required as a module (e.g. by tests) rather than run directly — still
+  // populate the data so route handlers work, without starting the listener.
+  initData().catch((err) => logger.error('startup', 'Failed to load question/vocab data:', err));
+}
+
 module.exports = app;
+module.exports.io = io;

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+// eslint-disable-next-line no-unused-vars -- motion is used in JSX via <motion.div>
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 
@@ -47,7 +48,7 @@ export default function ProbLabApp({ onBack }) {
   // Game Progress
   const [currentLevel, setCurrentLevel] = useState(1);
   const [xp, setXp] = useState(0);
-  const [lives, setLives] = useState(3);
+  const [_lives, setLives] = useState(3);
   const [logs, setLogs] = useState([]);
   const [showHint, setShowHint] = useState(false);
   const [hintText, setHintText] = useState('');
@@ -57,7 +58,7 @@ export default function ProbLabApp({ onBack }) {
   // Active Interactive Trials State
   const [isTesting, setIsTesting] = useState(false);
   const [testResultMsg, setTestResultMsg] = useState('');
-  const [testTally, setTestTally] = useState({ red: 0, blue: 0, green: 0, total: 0 });
+  const [_testTally, setTestTally] = useState({ red: 0, blue: 0, green: 0, total: 0 });
 
   // Easy Level 1 composition jar state
   const [jarMarbles, setJarMarbles] = useState([
@@ -91,17 +92,11 @@ export default function ProbLabApp({ onBack }) {
         setTimer(t => t + 1);
       }, 1000);
     } else {
+       
       setTimer(0);
     }
     return () => clearInterval(interval);
   }, [phase, currentLevel]);
-
-  // Loaded level configuration
-  useEffect(() => {
-    if (phase === 'game') {
-      loadLevelConfig(currentLevel);
-    }
-  }, [phase, currentLevel, difficulty]);
 
   const loadLevelConfig = (lvl) => {
     setShowHint(false);
@@ -142,6 +137,15 @@ export default function ProbLabApp({ onBack }) {
       else setHintText("Black first: 6/10. White second: 4/9 (no replacement). Joint probability = 6/10 × 4/9 = 24/90 = 4/15.");
     }
   };
+
+  // Loaded level configuration
+  useEffect(() => {
+    if (phase === 'game') {
+       
+      loadLevelConfig(currentLevel);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase, currentLevel, difficulty]);
 
   const getLevelQuestion = (lvl) => {
     if (difficulty === 'easy') {
@@ -215,19 +219,19 @@ export default function ProbLabApp({ onBack }) {
     }
   };
 
-  const checkEasyLevel1 = () => {
+  const _checkEasyLevel1 = () => {
     const redCount = jarMarbles.filter(m => m.color === 'red').length;
     const total = jarMarbles.length;
     const isCorrect = total > 0 && Math.abs((redCount / total) - 0.4) < 0.01;
     handleEvaluation(isCorrect);
   };
 
-  const checkEasyLevel2 = () => {
+  const _checkEasyLevel2 = () => {
     const isCorrect = spinnerRedAngle === 120;
     handleEvaluation(isCorrect);
   };
 
-  const checkMediumLevel2 = () => {
+  const _checkMediumLevel2 = () => {
     const requiredKeys = ['1-6', '2-5', '3-4', '4-3', '5-2', '6-1'];
     const isCorrect = 
       diceMatrixSelections.length === requiredKeys.length && 
@@ -1163,26 +1167,26 @@ export default function ProbLabApp({ onBack }) {
               <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap', margin: '8px 0' }}>
                 {(() => {
                   let options = [];
-                  let correctIndex = -1;
+                  let _correctIndex = -1;
 
                   if (difficulty === 'easy') {
-                    if (currentLevel === 3) { options = ['1/2', '1/13', '1/26', '1/52']; correctIndex = 2; }
-                    else if (currentLevel === 4) { options = ['1/6', '1/3', '1/2', '2/3']; correctIndex = 2; }
-                    else if (currentLevel === 5) { options = ['1/11', '2/11', '3/11', '4/11']; correctIndex = 1; }
+                    if (currentLevel === 3) { options = ['1/2', '1/13', '1/26', '1/52']; _correctIndex = 2; }
+                    else if (currentLevel === 4) { options = ['1/6', '1/3', '1/2', '2/3']; _correctIndex = 2; }
+                    else if (currentLevel === 5) { options = ['1/11', '2/11', '3/11', '4/11']; _correctIndex = 1; }
                   } else if (difficulty === 'medium') {
-                    if (currentLevel === 1) { options = ['1/4', '1/2', '3/4', '1']; correctIndex = 2; }
-                    else if (currentLevel === 3) { options = ['1/4', '1/8', '1/12', '1/24']; correctIndex = 1; }
-                    else if (currentLevel === 5) { options = ['1/3', '1/4', '1/6', '1/12']; correctIndex = 2; }
+                    if (currentLevel === 1) { options = ['1/4', '1/2', '3/4', '1']; _correctIndex = 2; }
+                    else if (currentLevel === 3) { options = ['1/4', '1/8', '1/12', '1/24']; _correctIndex = 1; }
+                    else if (currentLevel === 5) { options = ['1/3', '1/4', '1/6', '1/12']; _correctIndex = 2; }
                   } else if (difficulty === 'hard') {
-                    if (currentLevel === 2) { options = ['17/52', '4/13', '9/26', '5/13']; correctIndex = 1; }
-                    else if (currentLevel === 3) { options = ['7/12', '1/2', '5/12', '1/3']; correctIndex = 1; }
-                    else if (currentLevel === 5) { options = ['0.5', '0.6', '0.7', '0.8']; correctIndex = 2; }
+                    if (currentLevel === 2) { options = ['17/52', '4/13', '9/26', '5/13']; _correctIndex = 1; }
+                    else if (currentLevel === 3) { options = ['7/12', '1/2', '5/12', '1/3']; _correctIndex = 1; }
+                    else if (currentLevel === 5) { options = ['0.5', '0.6', '0.7', '0.8']; _correctIndex = 2; }
                   } else if (difficulty === 'extra') {
-                    if (currentLevel === 1) { options = ['1/4', '2/9', '5/18', '1/3']; correctIndex = 1; }
-                    else if (currentLevel === 2) { options = ['1/169', '1/221', '1/2652', '3/676']; correctIndex = 1; }
-                    else if (currentLevel === 3) { options = ['4/15', '1/3', '2/15', '8/15']; correctIndex = 0; }
-                    else if (currentLevel === 4) { options = ['1/15', '3/100', '1/10', '2/15']; correctIndex = 0; }
-                    else if (currentLevel === 5) { options = ['6/25', '4/15', '2/15', '3/10']; correctIndex = 1; }
+                    if (currentLevel === 1) { options = ['1/4', '2/9', '5/18', '1/3']; _correctIndex = 1; }
+                    else if (currentLevel === 2) { options = ['1/169', '1/221', '1/2652', '3/676']; _correctIndex = 1; }
+                    else if (currentLevel === 3) { options = ['4/15', '1/3', '2/15', '8/15']; _correctIndex = 0; }
+                    else if (currentLevel === 4) { options = ['1/15', '3/100', '1/10', '2/15']; _correctIndex = 0; }
+                    else if (currentLevel === 5) { options = ['6/25', '4/15', '2/15', '3/10']; _correctIndex = 1; }
                   }
 
                   return options.map((opt, idx) => (

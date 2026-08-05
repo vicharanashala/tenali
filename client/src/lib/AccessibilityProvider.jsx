@@ -1,8 +1,9 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 import { useI18n, LANGUAGES } from './i18n';
 
 const AccessibilityContext = createContext();
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAccessibility() {
   return useContext(AccessibilityContext);
 }
@@ -42,16 +43,24 @@ function LanguageSection() {
 
 export function AccessibilityProvider({ children }) {
   const { t } = useI18n();
-  const [dyslexiaFont, setDyslexiaFont] = useState(false);
-  const [textSize, setTextSize] = useState('normal'); // normal, large, xl
-  const [letterSpacing, setLetterSpacing] = useState(false);
-  const [highContrast, setHighContrast] = useState(false);
-  const [readingRuler, setReadingRuler] = useState(false);
-  const [colorTint, setColorTint] = useState('none'); // none, blue, peach, green (Irlen syndrome)
-  const [textToSpeech, setTextToSpeech] = useState(false);
+  const readSavedA11y = () => {
+    try {
+      return JSON.parse(localStorage.getItem('tenali-a11y')) || {};
+    } catch { return {}; }
+  };
+
+  const [dyslexiaFont, setDyslexiaFont] = useState(() => readSavedA11y().dyslexiaFont || false);
+  const [textSize, setTextSize] = useState(() => readSavedA11y().textSize || 'normal'); // normal, large, xl
+  const [letterSpacing, setLetterSpacing] = useState(() => readSavedA11y().letterSpacing || false);
+  const [highContrast, setHighContrast] = useState(() => readSavedA11y().highContrast || false);
+  const [readingRuler, setReadingRuler] = useState(() => readSavedA11y().readingRuler || false);
+  const [colorTint, setColorTint] = useState(() => readSavedA11y().colorTint || 'none'); // none, blue, peach, green (Irlen syndrome)
+  const [textToSpeech, setTextToSpeech] = useState(() => readSavedA11y().textToSpeech || false);
 
   const [mouseY, setMouseY] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
+  const panelRef = useRef(null);
+  const openButtonRef = useRef(null);
 
   // Free Web Speech API Text-to-Speech
   const readAloud = (text) => {
@@ -70,28 +79,13 @@ export function AccessibilityProvider({ children }) {
     window.speechSynthesis.speak(utterance);
   };
 
-  // Load from localStorage
-  useEffect(() => {
-    try {
-      const saved = JSON.parse(localStorage.getItem('tenali-a11y'));
-      if (saved) {
-        setDyslexiaFont(saved.dyslexiaFont || false);
-        setTextSize(saved.textSize || 'normal');
-        setLetterSpacing(saved.letterSpacing || false);
-        setHighContrast(saved.highContrast || false);
-        setReadingRuler(saved.readingRuler || false);
-        setColorTint(saved.colorTint || 'none');
-        setTextToSpeech(saved.textToSpeech || false);
-      }
-    } catch (e) {}
-  }, []);
-
   // Save to localStorage & apply to document
   useEffect(() => {
     const config = { dyslexiaFont, textSize, letterSpacing, highContrast, readingRuler, colorTint, textToSpeech };
     try {
       localStorage.setItem('tenali-a11y', JSON.stringify(config));
-    } catch (e) {}
+    } catch { // ignored
+    }
 
     const root = document.documentElement;
     root.setAttribute('data-a11y-dyslexia', dyslexiaFont);
@@ -99,7 +93,7 @@ export function AccessibilityProvider({ children }) {
     root.setAttribute('data-a11y-spacing', letterSpacing);
     root.setAttribute('data-a11y-contrast', highContrast ? 'high' : 'normal');
     root.setAttribute('data-a11y-tint', colorTint);
-  }, [dyslexiaFont, textSize, letterSpacing, highContrast, readingRuler, colorTint]);
+  }, [dyslexiaFont, textSize, letterSpacing, highContrast, readingRuler, colorTint, textToSpeech]);
 
   // Track mouse for reading ruler
   useEffect(() => {
@@ -108,6 +102,45 @@ export function AccessibilityProvider({ children }) {
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [readingRuler]);
+
+  // Modal a11y: move focus into the panel on open, restore it on close,
+  // close on Escape, and trap Tab navigation inside the panel.
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const panel = panelRef.current;
+    const focusableSelector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    const getFocusable = () => panel ? Array.from(panel.querySelectorAll(focusableSelector)) : [];
+
+    const first = getFocusable()[0];
+    if (first) first.focus();
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setIsOpen(false);
+        return;
+      }
+      if (e.key !== 'Tab') return;
+      const focusable = getFocusable();
+      if (focusable.length === 0) return;
+      const firstEl = focusable[0];
+      const lastEl = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === firstEl) {
+        e.preventDefault();
+        lastEl.focus();
+      } else if (!e.shiftKey && document.activeElement === lastEl) {
+        e.preventDefault();
+        firstEl.focus();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    const triggerButton = openButtonRef.current;
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      if (triggerButton) triggerButton.focus();
+    };
+  }, [isOpen]);
 
   return (
     <AccessibilityContext.Provider value={{
@@ -124,10 +157,13 @@ export function AccessibilityProvider({ children }) {
       {children}
       
       {/* Global Settings Button - Positioned absolutely so it shows up on every route next to theme toggle */}
-      <button 
+      <button
+        ref={openButtonRef}
         className="a11y-toggle-btn"
         onClick={() => setIsOpen(true)}
         title="Accessibility Settings"
+        aria-label="Open accessibility settings"
+        aria-haspopup="dialog"
         style={{ fontSize: '1.2rem', padding: 0 }}
       >
         ⚙️
@@ -156,10 +192,17 @@ export function AccessibilityProvider({ children }) {
       {/* Settings Panel */}
       {isOpen && (
         <div className="a11y-modal-backdrop" onClick={() => setIsOpen(false)}>
-          <div className="a11y-panel" onClick={e => e.stopPropagation()}>
+          <div
+            className="a11y-panel"
+            onClick={e => e.stopPropagation()}
+            ref={panelRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="a11y-panel-title"
+          >
             <div className="a11y-header">
-              <h2>⚙️ {t('settings_title')}</h2>
-              <button onClick={() => setIsOpen(false)}>✕</button>
+              <h2 id="a11y-panel-title">⚙️ {t('settings_title')}</h2>
+              <button onClick={() => setIsOpen(false)} aria-label="Close accessibility settings">✕</button>
             </div>
             
             <div className="a11y-scroll-content">

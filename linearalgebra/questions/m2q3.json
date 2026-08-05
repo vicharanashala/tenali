@@ -1,0 +1,479 @@
+{
+  "module": 2,
+  "missionId": 17,
+  "title": "Markov Chain",
+  "original_question": "City (C) and Suburb (S): each year 90% stay in C, 10% move to S; 80% stay in S, 20% move to C. From 1000 people in City, what is long-run distribution? Keep multiplying by transition matrix [[0.9,0.2],[0.1,0.8]]!",
+  "core_concept": "A Markov chain models state transitions using a matrix. Repeated multiplication by the transition matrix converges to a steady-state distribution, regardless of the starting state. The steady state satisfies Mv = v (eigenvalue 1).",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M2Q3E1",
+        "question": "If 1000 people start in City and 90% stay, how many remain in City after 1 year?",
+        "options": [
+          "900",
+          "100x",
+          "800",
+          "950"
+        ],
+        "correct_option": "900",
+        "explanation": "Step 1: 90% of 1000 stay in City: 0.9 × 1000 = 900. Step 2: The remaining 100 (10%) move to Suburb. Step 3: This first multiplication step initiates the Markov chain — each subsequent multiplication further mixes the population toward equilibrium."
+      },
+      {
+        "id": "M2Q3E2",
+        "question": "In the transition matrix [[0.9,0.2],[0.1,0.8]], what does the entry 0.2 represent?",
+        "options": [
+          "Probability of moving from Suburb to City",
+          "Probability of staying in City",
+          "Probability of moving from City to Suburb",
+          "Probability of staying in Suburb"
+        ],
+        "correct_option": "Probability of moving from Suburb to City",
+        "explanation": "Step 1: In this row-stochastic matrix, rows represent 'from' states and columns represent 'to' states. Step 2: Row 2 is 'from Suburb', column 1 is 'to City', so entry 0.2 is the Suburb→City transition probability. Step 3: Understanding matrix indexing is critical for reading Markov chains — each entry M[i][j] is the probability of transitioning from state i to state j."
+      },
+      {
+        "id": "M2Q3E3",
+        "question": "After 1 year, if 900 are in City and 100 moved to Suburb, what is the total population?",
+        "options": [
+          "900 ()",
+          "1000",
+          "1100",
+          "800"
+        ],
+        "correct_option": "1000",
+        "explanation": "Step 1: 900 + 100 = 1000. Step 2: People only move between states — none leave the system. Step 3: Population conservation (the sum of all state probabilities equals 1) is guaranteed by the row-stochastic property: each row sums to 1, so the total population is preserved under multiplication."
+      },
+      {
+        "id": "M2Q3E4",
+        "question": "What is 0.9 + 0.1 in the first column of the transition matrix?",
+        "options": [
+          "1.0",
+          "0.8x",
+          "0.9",
+          "1.1"
+        ],
+        "correct_option": "1.0",
+        "explanation": "Step 1: The first column has entries 0.9 (City→City) and 0.1 (Suburb→City). Step 2: These sum to 1.0. Step 3: In a row-stochastic matrix, each ROW sums to 1 (total probability from each state). The column sum being 1.0 here is coincidental — what matters for a valid Markov chain is that rows sum to 1."
+      },
+      {
+        "id": "M2Q3E5",
+        "question": "After the first year, how many people are in Suburb?",
+        "options": [
+          "100",
+          "200",
+          "900",
+          "0 (x)"
+        ],
+        "correct_option": "100",
+        "explanation": "Step 1: Initially all 1000 are in City. Step 2: 10% of City residents (100 people) move to Suburb. Step 3: After year 1, Suburb has 100 people. This is the first step toward equilibrium — over time, the City population will decrease and Suburb will increase until flows balance."
+      },
+      {
+        "id": "M2Q3E6",
+        "question": "What is [[0.9,0.2],[0.1,0.8]] × [1000, 0]?",
+        "options": [
+          "[900, 100]",
+          "[800, 200]",
+          "[1000, 0] ()",
+          "[0, 1000]"
+        ],
+        "correct_option": "[900, 100]",
+        "explanation": "Step 1: First component: 0.9×1000 + 0.2×0 = 900 (City). Step 2: Second component: 0.1×1000 + 0.8×0 = 100 (Suburb). Step 3: The matrix-vector product represents one year of transitions — this is the fundamental operation that drives the Markov chain forward at each time step."
+      },
+      {
+        "id": "M2Q3E7",
+        "question": "If 80% of Suburb residents stay, and 20% move to City, what is the sum of these probabilities?",
+        "options": [
+          "1.0",
+          "0.6x",
+          "1.2",
+          "0.8"
+        ],
+        "correct_option": "1.0",
+        "explanation": "Step 1: Each row of a transition matrix must sum to 1. Step 2: 0.8 + 0.2 = 1.0 ✓. Step 3: This constraint ensures every person is accounted for — the law of total probability states that the probabilities of all possible outcomes must sum to 1, which is what makes the matrix stochastic."
+      },
+      {
+        "id": "M2Q3E8",
+        "question": "In [[0.9,0.2],[0.1,0.8]], what does the entry 0.8 represent?",
+        "options": [
+          "Probability of staying in Suburb",
+          "Probability of staying in City",
+          "Probability of moving from City to Suburb",
+          "The total population — does t match"
+        ],
+        "correct_option": "Probability of staying in Suburb",
+        "explanation": "Step 1: Row 2 is 'from Suburb', column 2 is 'to Suburb'. Step 2: Entry 0.8 means 80% of Suburb residents stay each year. Step 3: High retention (0.8) means the Suburb state is 'sticky' — people who move there tend to stay, which influences where the steady-state distribution concentrates."
+      },
+      {
+        "id": "M2Q3E9",
+        "question": "If [[0.9,0.2],[0.1,0.8]] × [900, 100] = ?, what is the first component (City population after year 2)?",
+        "options": [
+          "830",
+          "810x",
+          "900",
+          "850"
+        ],
+        "correct_option": "830",
+        "explanation": "Step 1: 0.9×900 + 0.2×100 = 810 + 20 = 830. Step 2: City population decreases from 900 → 830 as people continue flowing to Suburb. Step 3: This second multiplication step shows the chain progressing — each step brings the distribution closer to steady state, demonstrating convergence through repeated matrix-vector products."
+      },
+      {
+        "id": "M2Q3E10",
+        "question": "What does it mean for a Markov chain to reach 'steady state'?",
+        "options": [
+          "The population distribution stops changing with further multiplications",
+          "All people return to City",
+          "The transition matrix becomes zero",
+          "The population doubles"
+        ],
+        "correct_option": "The population distribution stops changing with further multiplications",
+        "explanation": "Step 1: Steady state means Mv = v — multiplying by M doesn't change v. Step 2: The distribution has converged to a fixed point of the transition operator. Step 3: This is the eigenvector equation with eigenvalue 1 — the steady state is the eigenvector corresponding to the dominant eigenvalue, a concept from spectral theory that underpins all of Markov chain theory."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M2Q3M1",
+        "question": "What is the steady-state equation for a Markov chain with transition matrix M?",
+        "options": [
+          "Mv = v (the distribution is unchanged by multiplication)",
+          "Mv = 0)",
+          "Mv = 2v)",
+          "Mv = b)"
+        ],
+        "correct_option": "Mv = v (the distribution is unchanged by multiplication)",
+        "explanation": "Step 1: At steady state, applying M doesn't change the distribution. Step 2: Mv = v is equivalent to (M - I)v = 0, which is a homogeneous linear system. Step 3: The steady state is the eigenvector of M with eigenvalue 1 — this eigenvalue problem is the mathematical engine that computes long-run equilibrium in any Markov chain."
+      },
+      {
+        "id": "M2Q3M2",
+        "question": "If the steady-state City fraction is approximately 2/3, what is the Suburb fraction?",
+        "options": [
+          "1/3 (approximately 33.3%)",
+          "2/3 (approximately 66.7%)",
+          "1/2 (50%))",
+          "0% — t here"
+        ],
+        "correct_option": "1/3 (approximately 33.3%)",
+        "explanation": "Step 1: Total probability must sum to 1. Step 2: City ≈ 2/3, so Suburb = 1 - 2/3 = 1/3 ≈ 33.3%. Step 3: The normalisation constraint (fractions sum to 1) is what makes the steady-state vector a valid probability distribution — without it, the null space of (M-I) would give infinitely many solutions along a line."
+      },
+      {
+        "id": "M2Q3M3",
+        "question": "Why does the Markov chain converge to the same steady state regardless of the starting distribution?",
+        "options": [
+          "Because the transition matrix has a unique dominant eigenvalue of 1 with a positive eigenvector",
+          "Because all Markov chains start in the same state",
+          "Because the matrix is symmetric",
+          "Because the population is always 1000"
+        ],
+        "correct_option": "Because the transition matrix has a unique dominant eigenvalue of 1 with a positive eigenvector",
+        "explanation": "Step 1: By the Perron-Frobenius theorem, a positive stochastic matrix has eigenvalue 1 as its largest eigenvalue. Step 2: The corresponding eigenvector (steady state) is unique and has all positive entries. Step 3: Repeated multiplication converges to this eigenvector regardless of starting point — this universality is what makes Markov chains so powerful for predicting long-run behavior."
+      },
+      {
+        "id": "M2Q3M4",
+        "question": "What is 0.9 × 830 + 0.2 × 170? (City population after year 3)",
+        "options": [
+          "781",
+          "830x",
+          "750",
+          "800"
+        ],
+        "correct_option": "781",
+        "explanation": "Step 1: 0.9×830 = 747, 0.2×170 = 34. Step 2: 747 + 34 = 781. Step 3: The sequence 1000 → 900 → 830 → 781 shows diminishing decreases as the distribution approaches the steady state — the rate of convergence is governed by the second-largest eigenvalue of the matrix."
+      },
+      {
+        "id": "M2Q3M5",
+        "question": "If the transition matrix were [[0.5,0.5],[0.5,0.5]], what would the steady state be?",
+        "options": [
+          "50% City, 50% Suburb (equal distribution)",
+          "100% City, 0% Suburb — does t match",
+          "0% City, 100% Suburb — does t match",
+          "Cant be determined — does t match"
+        ],
+        "correct_option": "50% City, 50% Suburb (equal distribution)",
+        "explanation": "Step 1: This matrix says 50% of each group switches to the other state each year. Step 2: After one step, any distribution becomes exactly 50-50. Step 3: This is the 'maximum mixing' case — the chain converges in a single step because the second eigenvalue is 0, meaning all transient effects vanish immediately."
+      },
+      {
+        "id": "M2Q3M6",
+        "question": "Why must each row of a transition matrix sum to exactly 1?",
+        "options": [
+          "Because every person must be in some state — the probabilities of all possible outcomes sum to 100%",
+          "Because the matrix must be symmetric",
+          "Because the determinant must be 1",
+          "Because the matrix must be invertible"
+        ],
+        "correct_option": "Because every person must be in some state — the probabilities of all possible outcomes sum to 100%",
+        "explanation": "Step 1: Each row represents all possible transitions from one state. Step 2: A person must go somewhere — stay or move. Step 3: The probabilities must sum to 1 (100%), which is the law of total probability. This constraint is what makes the matrix 'stochastic' and guarantees population conservation."
+      },
+      {
+        "id": "M2Q3M7",
+        "question": "How can you find the steady state numerically without solving equations?",
+        "options": [
+          "Repeatedly multiply the transition matrix by any starting vector until values stabilise",
+          "Take the determinant of the matrix",
+          "Find the transpose of the matrix",
+          "Add all entries in the matrix"
+        ],
+        "correct_option": "Repeatedly multiply the transition matrix by any starting vector until values stabilise",
+        "explanation": "Step 1: Start with any v₀. Step 2: Compute v₁ = Mv₀, v₂ = Mv₁, etc. Step 3: After enough iterations, values converge to steady state — this is the power iteration method, which converges at rate |λ₂|ᵏ where λ₂ is the second-largest eigenvalue. It's the most intuitive way to observe Markov chain convergence."
+      },
+      {
+        "id": "M2Q3M8",
+        "question": "If you start with 500 in City and 500 in Suburb instead of 1000 in City, will you reach the same steady state?",
+        "options": [
+          "Yes — the steady state is independent of the starting distribution",
+          "— different starting points give different steady states",
+          "Only if the starting distribution is already at steady state",
+          "Only if the population is exactly 1000"
+        ],
+        "correct_option": "Yes — the steady state is independent of the starting distribution",
+        "explanation": "Step 1: The steady state is determined solely by the transition matrix. Step 2: Any starting distribution converges to the same steady state. Step 3: This universality — the long-run behavior being independent of initial conditions — is a defining feature of ergodic Markov chains and is why they're used for modeling everything from web traffic to genetic drift."
+      },
+      {
+        "id": "M2Q3M9",
+        "question": "What happens to the City population if you increase the 'stay in City' probability from 0.9 to 0.95?",
+        "options": [
+          "The steady-state City population increases (people are more reluctant to leave)",
+          "The steady-state City population decreases",
+          "The steady state doesn't change",
+          "The chain longer converges"
+        ],
+        "correct_option": "The steady-state City population increases (people are more reluctant to leave)",
+        "explanation": "Step 1: Higher retention means fewer people leave City each year. Step 2: City retains more residents, shifting the inflow/outflow balance. Step 3: The steady state shifts toward a higher City fraction — changing transition parameters directly reshapes the equilibrium, which is how policy changes (like tax incentives) affect long-run population distributions."
+      },
+      {
+        "id": "M2Q3M10",
+        "question": "Can a Markov chain have a steady state where everyone is in one state (e.g., 100% City)?",
+        "options": [
+          "Only if the transition probabilities make it impossible to leave that state",
+          "always — every chain reaches 100% in one state",
+          "Never — Markov chains always mix the states",
+          "Only if the matrix is the identity"
+        ],
+        "correct_option": "Only if the transition probabilities make it impossible to leave that state",
+        "explanation": "Step 1: If 100% are in City and the City→Suburb probability is nonzero, people will eventually leave. Step 2: For 100% City to be steady, the probability of leaving must be exactly 0. Step 3: This is called an absorbing state — once entered, you can't leave. Absorbing states break the usual convergence behavior and create fundamentally different Markov chain dynamics."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M2Q3H1",
+        "question": "What is the eigenvalue corresponding to the steady-state eigenvector of a stochastic matrix?",
+        "options": [
+          "1",
+          "0 — t here",
+          "-1 — t here",
+          "The determinant of the matrix"
+        ],
+        "correct_option": "1",
+        "explanation": "Step 1: The steady state satisfies Mv = v. Step 2: This is the eigenvalue equation with λ = 1. Step 3: For any stochastic matrix (rows sum to 1), λ = 1 is always an eigenvalue because M × [1,1,...,1]ᵀ = [1,1,...,1]ᵀ — the vector of ones is always a right eigenvector. The steady state is the corresponding left eigenvector."
+      },
+      {
+        "id": "M2Q3H2",
+        "question": "If M = [[0.9,0.2],[0.1,0.8]], what is (M - I) where I is the identity matrix?",
+        "options": [
+          "[[-0.1, 0.2], [0.1, -0.2]]",
+          "[[0.1, 0.2], [0.1, 0.2]]",
+          "[[-0.1, -0.2], [-0.1, -0.2]]",
+          "[[0, 0], [0, 0]]"
+        ],
+        "correct_option": "[[-0.1, 0.2], [0.1, -0.2]]",
+        "explanation": "Step 1: M - I = [[0.9-1, 0.2-0], [0.1-0, 0.8-1]] = [[-0.1, 0.2], [0.1, -0.2]]. Step 2: This matrix is singular (its rows are negatives of each other, so det = 0). Step 3: The singularity confirms that (M-I)v = 0 has nontrivial solutions — the null space is 1-dimensional, containing the steady-state direction."
+      },
+      {
+        "id": "M2Q3H3",
+        "question": "To find the steady state, we solve (M - I)v = 0 with the constraint that the entries of v sum to 1. Why is the constraint needed?",
+        "options": [
+          "Because (M - I)v = 0 has infinitely many solutions (a whole line), and the constraint picks the unique probability distribution",
+          "Because M - I is always invertible",
+          "Because v must be an integer",
+          "Because the constraint ensures v is a eigenvector"
+        ],
+        "correct_option": "Because (M - I)v = 0 has infinitely many solutions (a whole line), and the constraint picks the unique probability distribution",
+        "explanation": "Step 1: (M-I) has rank 1 for a 2×2 stochastic matrix, so its null space is 1-dimensional. Step 2: Any scalar multiple of the steady-state vector also satisfies the equation. Step 3: The constraint v₁ + v₂ = 1 normalises to a probability distribution, selecting the unique valid steady state from the infinite family of solutions."
+      },
+      {
+        "id": "M2Q3H4",
+        "question": "For the matrix [[0.9,0.2],[0.1,0.8]], what is the second eigenvalue (besides λ=1)?",
+        "options": [
+          "0.7",
+          "0.9x",
+          "0.8",
+          "1.0"
+        ],
+        "correct_option": "0.7",
+        "explanation": "Step 1: trace = 0.9 + 0.8 = 1.7 equals the sum of eigenvalues. Step 2: One eigenvalue is 1, so the other is 1.7 - 1 = 0.7. Step 3: Since |0.7| < 1, transient effects decay as 0.7ᵏ — after 10 steps, only 0.7¹⁰ ≈ 2.8% of the initial deviation remains, explaining the rapid convergence."
+      },
+      {
+        "id": "M2Q3H5",
+        "question": "Why does the convergence rate of a Markov chain depend on the magnitude of the second-largest eigenvalue?",
+        "options": [
+          "The gap between eigenvalue 1 and the next largest determines how quickly transient effects decay",
+          "Larger eigenvalues always mean faster convergence",
+          "The eigenvalues don't affect convergence",
+          "Only the determinant matters for convergence"
+        ],
+        "correct_option": "The gap between eigenvalue 1 and the next largest determines how quickly transient effects decay",
+        "explanation": "Step 1: After k steps, Mᵏv = c₁v₁(1)ᵏ + c₂v₂(0.7)ᵏ. Step 2: The transient term decays as 0.7ᵏ — it vanishes exponentially. Step 3: The spectral gap (1 - 0.7 = 0.3) governs convergence speed — a larger gap means faster convergence. This spectral gap is the single most important quantity for predicting Markov chain mixing time."
+      },
+      {
+        "id": "M2Q3H6",
+        "question": "What is the determinant of [[0.9,0.2],[0.1,0.8]]?",
+        "options": [
+          "0.7",
+          "0.72",
+          "0.9",
+          "1.0"
+        ],
+        "correct_option": "0.7",
+        "explanation": "Step 1: det = 0.9×0.8 - 0.2×0.1 = 0.72 - 0.02 = 0.70. Step 2: This equals the product of eigenvalues: 1 × 0.7 = 0.7. Step 3: The determinant being less than 1 (but positive) indicates the matrix is a contraction — it shrinks the space, driving all trajectories toward the steady state."
+      },
+      {
+        "id": "M2Q3H7",
+        "question": "Can you predict the steady state of [[0.9,0.2],[0.1,0.8]] without solving equations, using just the transition rates?",
+        "options": [
+          "Yes — City steady state = 0.2/(0.1+0.2) = 2/3, by flow balance",
+          "— you must always solve the full system",
+          "— it's always 50-50",
+          "Only if the matrix is symmetric"
+        ],
+        "correct_option": "Yes — City steady state = 0.2/(0.1+0.2) = 2/3, by flow balance",
+        "explanation": "Step 1: At steady state, inflow to City = outflow from City. Step 2: Flow in = 0.2 × S, flow out = 0.1 × C. Setting equal: 0.2S = 0.1C → C/S = 2. Step 3: With C + S = 1: C = 2/3, S = 1/3. This 'detailed balance' shortcut works for 2-state chains and connects to the time-reversibility property of Markov chains."
+      },
+      {
+        "id": "M2Q3H8",
+        "question": "If we define π = [city fraction, suburb fraction], the steady state satisfies πM = π (left eigenvector) or Mv = v (right eigenvector). Which is correct for this row-stochastic matrix?",
+        "options": [
+          "Mv = v (right eigenvector), because we multiply M on the left of the column vector",
+          "πM = π (left eigenvector), because rows sum to 1",
+          "Both give the same result",
+          "Neither — steady state is t an eigenvector"
+        ],
+        "correct_option": "Mv = v (right eigenvector), because we multiply M on the left of the column vector",
+        "explanation": "Step 1: With row-stochastic M, we compute v_new = M × v_old (column vector on the right). Step 2: At steady state, Mv = v — this is a right eigenvector equation. Step 3: The convention (left vs. right) depends on whether M is row-stochastic or column-stochastic — mixing them up is a common source of errors in Markov chain analysis."
+      },
+      {
+        "id": "M2Q3H9",
+        "question": "If the transition matrix were [[0.5,0.5],[0.5,0.5]], what is its second eigenvalue?",
+        "options": [
+          "0",
+          "0.5",
+          "1",
+          "-0.5"
+        ],
+        "correct_option": "0",
+        "explanation": "Step 1: trace = 0.5 + 0.5 = 1.0. Step 2: One eigenvalue is 1 (stochastic matrix). Step 3: The other is 1 - 1 = 0. With λ₂ = 0, the chain converges in exactly ONE step — the transient vanishes immediately. This is the fastest possible convergence and occurs when the matrix has rank 1."
+      },
+      {
+        "id": "M2Q3H10",
+        "question": "What does it mean for a Markov chain to be 'irreducible'?",
+        "options": [
+          "Every state can be reached from every other state (possibly in multiple steps)",
+          "The matrix is t decomposable into smaller blocks",
+          "The chain has exactly one steady state",
+          "The transition probabilities are all equal"
+        ],
+        "correct_option": "Every state can be reached from every other state (possibly in multiple steps)",
+        "explanation": "Step 1: Irreducibility means there are no isolated states or absorbing subsets. Step 2: From any state, you can reach any other state in finitely many steps with positive probability. Step 3: This guarantees a unique steady state exists — the Perron-Frobenius theorem for irreducible nonnegative matrices ensures the dominant eigenvalue 1 has a unique positive eigenvector."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "emoji": "🏙️",
+      "title": "Urban Planning",
+      "equation": "",
+      "type": "mcq",
+      "concept": "Population migration modelling",
+      "story": "City planners study how populations shift between urban and suburban areas over time. Each year, a certain percentage of city dwellers move to the suburbs and vice versa. By modelling these transitions as a matrix and multiplying it repeatedly, planners can predict the long-run population distribution — the steady state where the proportions stabilise.",
+      "question": "When you repeatedly apply a transition matrix to population data, what does the final stable distribution represent?",
+      "options": [
+        "The steady state — the long-run population balance",
+        "The initial population",
+        "The total migration rate",
+        "The fastest growing region"
+      ],
+      "answer": "The steady state — the long-run population balance",
+      "explanation": "Step 1: Each multiplication represents one year of transitions. Step 2: After many years, the distribution stabilises. Step 3: This stable distribution is the steady state, independent of where you started."
+    },
+    {
+      "emoji": "📈",
+      "title": "Stock Market",
+      "equation": "",
+      "type": "mcq",
+      "concept": "Bull/Bear market transitions",
+      "story": "Financial analysts model the stock market as switching between two states: a bull market (prices rising) and a bear market (prices falling). The transition probabilities between these states form a Markov chain. By raising the transition matrix to higher powers, analysts predict the long-run probability of being in a bull or bear market.",
+      "question": "In a stock market Markov model, what does the steady-state vector represent?",
+      "options": [
+        "The long-run probability of being in each market state",
+        "The current stock price",
+        "The total market capitalisation",
+        "The daily trading volume"
+      ],
+      "answer": "The long-run probability of being in each market state",
+      "explanation": "Step 1: The transition matrix captures monthly bull/bear switches. Step 2: Raising it to high powers reveals the long-run proportions. Step 3: The steady state gives the probability of being bull or bear in any given month, far into the future."
+    },
+    {
+      "emoji": "🧬",
+      "title": "Genetics",
+      "equation": "",
+      "type": "mcq",
+      "concept": "Gene frequency evolution",
+      "story": "Gene frequencies in a population change across generations due to mutation, selection, and genetic drift. These changes can be modelled as a Markov chain where each generation's gene distribution is obtained by multiplying the current distribution by a transition matrix. Over many generations, the gene frequencies settle into a steady state.",
+      "question": "In population genetics, what does the transition matrix of a Markov chain represent?",
+      "options": [
+        "The probabilities of gene types changing from one generation to the next",
+        "The total population size",
+        "The mutation rate per individual",
+        "The physical location of genes"
+      ],
+      "answer": "The probabilities of gene types changing from one generation to the next",
+      "explanation": "Step 1: Each entry represents the probability of a gene type in one generation producing a different type in the next. Step 2: Repeated multiplication models evolution over many generations. Step 3: The steady state represents the equilibrium gene frequencies."
+    },
+    {
+      "emoji": "🌤️",
+      "title": "Weather Forecasting",
+      "equation": "",
+      "type": "mcq",
+      "concept": "Weather state transitions",
+      "story": "Meteorologists model weather as a Markov chain with states like Sunny, Cloudy, and Rainy. The transition matrix captures daily weather patterns — for example, if it's sunny today, there's a 70% chance it stays sunny tomorrow. By multiplying the matrix repeatedly, forecasters can predict the long-run frequency of each weather type in a region.",
+      "question": "When weather is modelled as a Markov chain, what does the steady-state distribution tell you?",
+      "options": [
+        "The long-run percentage of days with each weather type",
+        "Tomorrow's exact weather",
+        "The temperature next week",
+        "The total annual rainfall"
+      ],
+      "answer": "The long-run percentage of days with each weather type",
+      "explanation": "Step 1: Daily transitions follow the weather matrix. Step 2: After many days, the proportions stabilise. Step 3: The steady state gives the climatological average — what fraction of days are sunny, cloudy, or rainy in the long run."
+    },
+    {
+      "emoji": "👥",
+      "title": "Customer Loyalty",
+      "equation": "",
+      "type": "mcq",
+      "concept": "Brand switching models",
+      "story": "A company studies how customers switch between its product and competitors' products each month. Some loyal customers stay, while others switch to rival brands. By modelling these switches as a Markov chain, the company can predict its long-run market share — the steady-state proportion of customers who choose its product.",
+      "question": "In customer loyalty analysis, what does the steady-state probability represent for a brand?",
+      "options": [
+        "The long-run market share (fraction of customers choosing that brand)",
+        "The number of new customers this month",
+        "The total revenue",
+        "The advertising budget"
+      ],
+      "answer": "The long-run market share (fraction of customers choosing that brand)",
+      "explanation": "Step 1: Monthly brand-switching follows a transition matrix. Step 2: Repeated multiplication models months of customer behaviour. Step 3: The steady state reveals the stable market share each brand will hold in the long run."
+    },
+    {
+      "emoji": "🔬",
+      "title": "Random Walk on Networks",
+      "equation": "",
+      "type": "mcq",
+      "concept": "PageRank and network analysis",
+      "story": "Google's original PageRank algorithm models web surfing as a Markov chain: a 'random surfer' clicks links on web pages, following a transition matrix based on link structure. The steady-state distribution reveals which pages are most important — pages that are 'visited' most often in the long run rank higher in search results.",
+      "question": "In Google's PageRank algorithm, what does the steady-state distribution of the web-surfing Markov chain represent?",
+      "options": [
+        "The importance rank of each web page",
+        "The number of links on each page",
+        "The loading speed of each page",
+        "The total traffic to each page"
+      ],
+      "answer": "The importance rank of each web page",
+      "explanation": "Step 1: The surfer follows links randomly (transition matrix). Step 2: Pages with more incoming links from important pages are visited more often. Step 3: The steady state assigns each page a rank — this is the PageRank that determines search result ordering."
+    }
+  ]
+}

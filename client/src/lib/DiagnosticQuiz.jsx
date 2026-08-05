@@ -7,7 +7,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { getPromptForType } from './questionFormatters'
-import { getPrerequisites, getTopicLabel, getTopicApiPath } from './prerequisiteGraph'
+import { getTopicLabel, getTopicApiPath } from './prerequisiteGraph'
 import requestCache from './RequestCache'
 
 const API = import.meta.env.VITE_API_BASE_URL || ''
@@ -144,12 +144,25 @@ function renderDiagnosticQuestion(type, q) {
 export default function DiagnosticScreen({ topicKey, onPass, onFail, onSkip, onNavigate }) {
   const topicLabel = getTopicLabel(topicKey)
 
-  const [phase, setPhase] = useState('loading') // loading | quiz | result
+  const [phase, setPhase] = useState(() => {
+    const cached = getCachedResult(topicKey)
+    if (cached && cached.score >= PASS_THRESHOLD) return 'passed'
+    if (cached) return 'result'
+    return 'loading'
+  })
   const [questions, setQuestions] = useState([])
   const [currentIdx, setCurrentIdx] = useState(0)
   const [answer, setAnswer] = useState('')
-  const [score, setScore] = useState(0)
-  const [results, setResults] = useState([]) // { prereqKey, correct }
+  const [score, setScore] = useState(() => {
+    const cached = getCachedResult(topicKey)
+    return cached && cached.score < PASS_THRESHOLD ? cached.score : 0
+  })
+  const [results, setResults] = useState(() => {
+    const cached = getCachedResult(topicKey)
+    return cached && cached.score < PASS_THRESHOLD
+      ? cached.weakTopics.map(k => ({ prereqKey: k, correct: false }))
+      : []
+  }) // { prereqKey, correct }
   const [submitting, setSubmitting] = useState(false)
   const [feedback, setFeedback] = useState(null) // null | { correct, text }
 
@@ -159,11 +172,6 @@ export default function DiagnosticScreen({ topicKey, onPass, onFail, onSkip, onN
     if (cached) {
       if (cached.score >= PASS_THRESHOLD) {
         onPass(cached.score, cached.total)
-      } else {
-        // Show result screen with cached data
-        setScore(cached.score)
-        setResults(cached.weakTopics.map(k => ({ prereqKey: k, correct: false })))
-        setPhase('result')
       }
       return
     }
@@ -304,7 +312,7 @@ export default function DiagnosticScreen({ topicKey, onPass, onFail, onSkip, onN
   }
 
   // ─── Render: Quiz ──────────────────────────────────────────────────────
-  const progressPct = ((currentIdx) / questions.length) * 100
+  const _progressPct = ((currentIdx) / questions.length) * 100
 
   return (
     <>
@@ -363,6 +371,7 @@ export default function DiagnosticScreen({ topicKey, onPass, onFail, onSkip, onN
 
 // ─── Utility: get cached readiness status for home screen badges ─────────
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function getDiagnosticStatus(topicKey) {
   const cached = getCachedResult(topicKey)
   if (!cached) return null // no diagnostic taken

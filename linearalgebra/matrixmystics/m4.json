@@ -1,0 +1,3485 @@
+{
+  "module": 4,
+  "topics": [
+    {
+      "topicId": "Q4.1",
+      "title": "M = [[1,3],[2,6]]: plot R, C, N",
+      "topic": "Visualising row space, column space, null space of a 2x2 rank-1 matrix.",
+      "mcqs": {
+        "easy": [
+          {
+            "id": "M4Q1E1",
+            "question": "For M = [[1,3],[2,6]], what is the rank of M?",
+            "options": [
+              "Rank 0",
+              "Rank 1",
+              "Rank 2",
+              "Rank 3"
+            ],
+            "correct_option": "Rank 1",
+            "explanation": "Row 2 is 2×Row 1, so only one independent row. Rank = 1."
+          },
+          {
+            "id": "M4Q1E2",
+            "question": "The row space R(M) of M = [[1,3],[2,6]] is:",
+            "options": [
+              "A plane in ℝ²",
+              "A line in ℝ²",
+              "A point at origin",
+              "All of ℝ²"
+            ],
+            "correct_option": "A line in ℝ²",
+            "explanation": "R(M) = span{(1,3)}, a line through the origin."
+          },
+          {
+            "id": "M4Q1E3",
+            "question": "What is the direction vector of R(M) for M = [[1,3],[2,6]]?",
+            "options": [
+              "(1, 2)",
+              "(2, 6)",
+              "(1, 3)",
+              "(3, 1)"
+            ],
+            "correct_option": "(1, 3)",
+            "explanation": "R(M) is spanned by row (1, 3)."
+          },
+          {
+            "id": "M4Q1E4",
+            "question": "The column space C(M) of M = [[1,3],[2,6]] is spanned by:",
+            "options": [
+              "(1, 3)",
+              "(1, 2)",
+              "(2, 6)",
+              "(3, 6)"
+            ],
+            "correct_option": "(1, 2)",
+            "explanation": "C(M) = span{(1,2)} since column 2 is 3×column 1."
+          },
+          {
+            "id": "M4Q1E5",
+            "question": "Which equation defines the null space N(M) of M = [[1,3],[2,6]]?",
+            "options": [
+              "x + 2y = 0",
+              "x + 3y = 0",
+              "2x + 3y = 0",
+              "3x + y = 0"
+            ],
+            "correct_option": "x + 3y = 0",
+            "explanation": "M·(x,y)ᵀ = (x+3y, 2x+6y)ᵀ = 0 requires x+3y = 0."
+          },
+          {
+            "id": "M4Q1E6",
+            "question": "N(M) for M = [[1,3],[2,6]] is parametrised as:",
+            "options": [
+              "t·(1, 3)",
+              "t·(-3, 1)",
+              "t·(3, -1)",
+              "t·(1, -3)"
+            ],
+            "correct_option": "t·(-3, 1)",
+            "explanation": "From x+3y=0, x = -3y, giving direction (-3, 1)."
+          },
+          {
+            "id": "M4Q1E7",
+            "question": "How many independent rows does M = [[1,3],[2,6]] have?",
+            "options": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ],
+            "correct_option": "1",
+            "explanation": "Row 2 = 2×Row 1, so only 1 independent row."
+          },
+          {
+            "id": "M4Q1E8",
+            "question": "The nullity of M = [[1,3],[2,6]] is:",
+            "options": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ],
+            "correct_option": "1",
+            "explanation": "Nullity = n − rank = 2 − 1 = 1."
+          },
+          {
+            "id": "M4Q1E9",
+            "question": "C(M) for M = [[1,3],[2,6]] lies along the line:",
+            "options": [
+              "y = 3x",
+              "y = 2x",
+              "y = x",
+              "y = -x/3"
+            ],
+            "correct_option": "y = 2x",
+            "explanation": "C(M) = span{(1,2)}, so y = 2x."
+          },
+          {
+            "id": "M4Q1E10",
+            "question": "Which subspace of M = [[1,3],[2,6]] is a line with slope −1/3?",
+            "options": [
+              "R(M)",
+              "C(M)",
+              "N(M)",
+              "N(Mᵀ)"
+            ],
+            "correct_option": "N(M)",
+            "explanation": "N(M) is y = -x/3, which has slope -1/3."
+          }
+        ],
+        "medium": [
+          {
+            "id": "M4Q1M1",
+            "question": "R(M) has direction (1,3) and C(M) has direction (1,2). These lines are:",
+            "options": [
+              "Perpendicular",
+              "Parallel",
+              "Identical",
+              "Different lines"
+            ],
+            "correct_option": "Different lines",
+            "explanation": "Different slopes (3 vs 2) mean distinct lines through the origin."
+          },
+          {
+            "id": "M4Q1M2",
+            "question": "What is the direction of N(M) for M = [[1,3],[2,6]]?",
+            "options": [
+              "(1, 3)",
+              "(3, -1)",
+              "(-3, 1)",
+              "(2, 6)"
+            ],
+            "correct_option": "(-3, 1)",
+            "explanation": "From x + 3y = 0, setting y = t gives x = -3t, direction (-3, 1)."
+          },
+          {
+            "id": "M4Q1M3",
+            "question": "Verify R(M) ⊥ N(M): (1,3)·(-3,1) equals:",
+            "options": [
+              "-6",
+              "0",
+              "6",
+              "-3"
+            ],
+            "correct_option": "0",
+            "explanation": "(1)(-3) + (3)(1) = -3 + 3 = 0, confirming orthogonality."
+          },
+          {
+            "id": "M4Q1M4",
+            "question": "N(Mᵀ) for M = [[1,3],[2,6]] is the null space of which matrix?",
+            "options": [
+              "[[1,3],[2,6]]",
+              "[[1,2],[3,6]]",
+              "[[3,1],[6,2]]",
+              "[[2,1],[6,3]]"
+            ],
+            "correct_option": "[[1,2],[3,6]]",
+            "explanation": "Mᵀ = [[1,2],[3,6]]."
+          },
+          {
+            "id": "M4Q1M5",
+            "question": "N(Mᵀ) for M = [[1,3],[2,6]] has direction:",
+            "options": [
+              "(-3, 1)",
+              "(-2, 1)",
+              "(1, -2)",
+              "(3, -1)"
+            ],
+            "correct_option": "(-2, 1)",
+            "explanation": "Mᵀ·(x,y) = (x+2y, 3x+6y) = 0 gives x+2y=0, direction (-2,1)."
+          },
+          {
+            "id": "M4Q1M6",
+            "question": "Verify C(M) ⊥ N(Mᵀ): (1,2)·(-2,1) equals:",
+            "options": [
+              "-1",
+              "0",
+              "1",
+              "-4"
+            ],
+            "correct_option": "0",
+            "explanation": "(1)(-2) + (2)(1) = -2 + 2 = 0."
+          },
+          {
+            "id": "M4Q1M7",
+            "question": "R(M) and C(M) for M = [[1,3],[2,6]] are different because:",
+            "options": [
+              "M is symmetric",
+              "(1,3) and (1,2) are not collinear",
+              "M is invertible",
+              "Both are 2D"
+            ],
+            "correct_option": "(1,3) and (1,2) are not collinear",
+            "explanation": "R(M) = span{(1,3)} and C(M) = span{(1,2)} are different lines."
+          },
+          {
+            "id": "M4Q1M8",
+            "question": "The product of slopes of R(M) (slope 3) and N(M) (slope -1/3) is:",
+            "options": [
+              "-3",
+              "-1",
+              "1",
+              "3"
+            ],
+            "correct_option": "-1",
+            "explanation": "3 × (-1/3) = -1 confirms perpendicularity."
+          },
+          {
+            "id": "M4Q1M9",
+            "question": "For M = [[1,3],[2,6]], how many dimensions does R(M) have?",
+            "options": [
+              "0D",
+              "1D",
+              "2D",
+              "3D"
+            ],
+            "correct_option": "1D",
+            "explanation": "R(M) is spanned by one vector (1,3), so it is 1-dimensional."
+          },
+          {
+            "id": "M4Q1M10",
+            "question": "The null space of M = [[1,3],[2,6]] consists of vectors satisfying:",
+            "options": [
+              "x − 3y = 0",
+              "x + 3y = 0",
+              "2x + 6y = 1",
+              "3x + y = 0"
+            ],
+            "correct_option": "x + 3y = 0",
+            "explanation": "Both rows give the same equation x + 3y = 0."
+          }
+        ],
+        "hard": [
+          {
+            "id": "M4Q1H1",
+            "question": "R(M) = N(M)⊥ for M = [[1,3],[2,6]]. This holds because:",
+            "options": [
+              "M is symmetric",
+              "It is a general theorem for all matrices",
+              "M has rank 2",
+              "M is diagonal"
+            ],
+            "correct_option": "It is a general theorem for all matrices",
+            "explanation": "R(A) = N(A)⊥ holds for any matrix A, not just symmetric ones."
+          },
+          {
+            "id": "M4Q1H2",
+            "question": "R(M) and C(M) are isomorphic because they have:",
+            "options": [
+              "The same basis vectors",
+              "The same dimension (rank = 1)",
+              "Both are 2D planes",
+              "Equal span"
+            ],
+            "correct_option": "The same dimension (rank = 1)",
+            "explanation": "dim(R) = dim(C) = rank(M) = 1, so they are isomorphic."
+          },
+          {
+            "id": "M4Q1H3",
+            "question": "dim(R) + dim(N) for M = [[1,3],[2,6]] equals:",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "correct_option": "2",
+            "explanation": "dim R(M) + dim N(M) = 1 + 1 = 2 = n."
+          },
+          {
+            "id": "M4Q1H4",
+            "question": "The product of slopes of C(M) (slope 2) and N(Mᵀ) (slope -1/2) is:",
+            "options": [
+              "-2",
+              "-1",
+              "0",
+              "1"
+            ],
+            "correct_option": "-1",
+            "explanation": "2 × (-1/2) = -1, confirming C(M) ⊥ N(Mᵀ)."
+          },
+          {
+            "id": "M4Q1H5",
+            "question": "For M = [[1,3],[2,6]], which statement is FALSE?",
+            "options": [
+              "R(M) ⊕ N(M) = ℝ²",
+              "R(M) ⊥ N(M)",
+              "C(M) = R(M)",
+              "C(M) ⊥ N(Mᵀ)"
+            ],
+            "correct_option": "C(M) = R(M)",
+            "explanation": "C(M) = span{(1,2)} ≠ span{(1,3)} = R(M)."
+          },
+          {
+            "id": "M4Q1H6",
+            "question": "The four fundamental subspaces of M = [[1,3],[2,6]] pair as:",
+            "options": [
+              "(R, C) and (N, N(Mᵀ))",
+              "(R, N) and (C, N(Mᵀ))",
+              "(R, N(Mᵀ)) and (C, N)",
+              "(C, N) and (R, N(Mᵀ))"
+            ],
+            "correct_option": "(R, N) and (C, N(Mᵀ))",
+            "explanation": "R⊥N in ℝ² and C⊥N(Mᵀ) in ℝ²."
+          },
+          {
+            "id": "M4Q1H7",
+            "question": "dim(C) + dim(N(Mᵀ)) for M = [[1,3],[2,6]] equals:",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "correct_option": "2",
+            "explanation": "dim(C) + dim(N(Mᵀ)) = 1 + 1 = 2 = m."
+          },
+          {
+            "id": "M4Q1H8",
+            "question": "Why are R(M) and C(M) different lines for M = [[1,3],[2,6]]?",
+            "options": [
+              "M is not square",
+              "M is not symmetric",
+              "M is not invertible",
+              "M is rank 0"
+            ],
+            "correct_option": "M is not symmetric",
+            "explanation": "M ≠ Mᵀ, so rows and columns differ, giving different subspaces."
+          },
+          {
+            "id": "M4Q1H9",
+            "question": "The rank-nullity theorem for M = [[1,3],[2,6]] gives:",
+            "options": [
+              "rank + nullity = 1",
+              "rank + nullity = 2",
+              "rank + nullity = 3",
+              "rank − nullity = 0"
+            ],
+            "correct_option": "rank + nullity = 2",
+            "explanation": "rank(M) + nullity(M) = 1 + 1 = 2 = number of columns."
+          },
+          {
+            "id": "M4Q1H10",
+            "question": "For M = [[1,3],[2,6]], R(M) and C(M) are both 1D, which means:",
+            "options": [
+              "M must be square",
+              "rank(M) = 1",
+              "M is invertible",
+              "N(M) is 2D"
+            ],
+            "correct_option": "rank(M) = 1",
+            "explanation": "dim(R) = dim(C) = rank = 1."
+          }
+        ],
+        "real_life_application": [
+          {
+            "id": "M4Q1R1",
+            "question": "In GeoGebra, you plot R(M), C(M), N(M) for M = [[1,3],[2,6]]. You observe N(M) is perpendicular to:",
+            "options": [
+              "C(M)",
+              "N(Mᵀ)",
+              "R(M)",
+              "The origin"
+            ],
+            "correct_option": "R(M)",
+            "explanation": "R(M) ⊥ N(M) is a fundamental theorem of linear algebra."
+          },
+          {
+            "id": "M4Q1R2",
+            "question": "A 2×2 rank-1 matrix maps ℝ² onto a 1D line. The kernel has dimension:",
+            "options": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ],
+            "correct_option": "1",
+            "explanation": "By rank-nullity: nullity = 2 − 1 = 1."
+          },
+          {
+            "id": "M4Q1R3",
+            "question": "When sketching all four fundamental subspaces of a general rank-1 2×2 matrix, you see:",
+            "options": [
+              "1 distinct line",
+              "2 distinct lines",
+              "Up to 4 distinct lines",
+              "All of ℝ²"
+            ],
+            "correct_option": "Up to 4 distinct lines",
+            "explanation": "R, C, N, N(Mᵀ) can all be different lines through the origin."
+          },
+          {
+            "id": "M4Q1R4",
+            "question": "The four fundamental subspaces theorem states R and N are in ℝⁿ, while C and N(Aᵀ) are in:",
+            "options": [
+              "ℝⁿ",
+              "ℝᵐ",
+              "ℝᵐ⁺ⁿ",
+              "ℝᵐ⁻ⁿ"
+            ],
+            "correct_option": "ℝᵐ",
+            "explanation": "C(A) and N(Aᵀ) are subspaces of ℝᵐ (the codomain)."
+          },
+          {
+            "id": "M4Q1R5",
+            "question": "For a general rank-1 2×2 matrix, which pair is always perpendicular?",
+            "options": [
+              "R and C",
+              "R and N",
+              "N and N(Mᵀ)",
+              "C and R"
+            ],
+            "correct_option": "R and N",
+            "explanation": "R(A) ⊥ N(A) is always true by the fundamental theorem."
+          }
+        ]
+      },
+      "real_life_application": [
+        {
+          "id": "M4Q1R1",
+          "question": "In a Geogebra sketch of M = [[1, 3], [2, 6]], the row space R(M) appears as a line whose slope equals which value?",
+          "options": [
+            "Three to one",
+            "Two to one",
+            "Negative three",
+            "Negative one half"
+          ],
+          "correct_option": "Three to one",
+          "explanation": "R(M) is spanned by (1, 3), giving the line y = 3x with slope 3; the other lines (C, N) have different slopes."
+        },
+        {
+          "id": "M4Q1R2",
+          "question": "When plotting M = [[1, 3], [2, 6]], the column space C(M) should be drawn as a line through which origin in ℝ²?",
+          "options": [
+            "Random offset",
+            "Through shared origin",
+            "Tilted no origin",
+            "Shrunk to single point"
+          ],
+          "correct_option": "Through shared origin",
+          "explanation": "Every column space passes through the origin because M·0 = 0, so C(M) is a line through the shared origin."
+        },
+        {
+          "id": "M4Q1R3",
+          "question": "In a 2D Geogebra plot of M = [[1, 3], [2, 6]], the null space N(M) should be visually verified as perpendicular to which subspace?",
+          "options": [
+            "Column space C(M)",
+            "Left null N(Mᵀ)",
+            "Kernel again only",
+            "Row space R(M)"
+          ],
+          "correct_option": "Row space R(M)",
+          "explanation": "The fundamental theorem gives R(M) ⊥ N(M), so N(M) should be drawn perpendicular to the row line through origin."
+        },
+        {
+          "id": "M4Q1R4",
+          "question": "For a rank-1 2x2 matrix, the four fundamental subspaces reduce to how many distinct lines in ℝ²?",
+          "options": [
+            "Two distinct lines",
+            "Four distinct lines",
+            "Three distinct lines",
+            "Just one line"
+          ],
+          "correct_option": "Three distinct lines",
+          "explanation": "R(M) and N(M) are perpendicular lines, and C(M) and N(Mᵀ) are another perpendicular pair; in 2D, R(M) ≠ C(M) generally, yielding three or four distinct lines."
+        },
+        {
+          "id": "M4Q1R5",
+          "question": "A data analyst uses M = [[1, 3], [2, 6]] to model two perfectly collinear feature vectors; the rank-deficient geometry reveals which real-world interpretation?",
+          "options": [
+            "Linear dependency here",
+            "Hidden third feature",
+            "Random noise only",
+            "Full rank matrix"
+          ],
+          "correct_option": "Linear dependency here",
+          "explanation": "Rank 1 (rows are multiples) means the two features carry one piece of information; the second is linearly redundant."
+        }
+      ]
+    },
+    {
+      "topicId": "Q4.2",
+      "title": "R and N are orthogonal",
+      "topic": "The fundamental theorem: R(A) ⊥ N(A).",
+      "mcqs": {
+        "easy": [
+          {
+            "id": "M4Q2E1",
+            "question": "For any matrix A, R(A) is orthogonal to:",
+            "options": [
+              "C(A)",
+              "N(A)",
+              "R(Aᵀ)",
+              "C(Aᵀ)"
+            ],
+            "correct_option": "N(A)",
+            "explanation": "R(A) ⊥ N(A) is the fundamental orthogonality theorem."
+          },
+          {
+            "id": "M4Q2E2",
+            "question": "If v ∈ N(A), then A·v = 0. This means v is perpendicular to:",
+            "options": [
+              "Each column of A",
+              "Each row of A",
+              "The determinant of A",
+              "The trace of A"
+            ],
+            "correct_option": "Each row of A",
+            "explanation": "A·v = 0 implies row_i(A)·v = 0 for every row i."
+          },
+          {
+            "id": "M4Q2E3",
+            "question": "Since v ⊥ each row of A, v is perpendicular to any:",
+            "options": [
+              "Column of A",
+              "Linear combination of rows",
+              "Eigenvalue of A",
+              "Determinant of A"
+            ],
+            "correct_option": "Linear combination of rows",
+            "explanation": "Orthogonality to each row implies orthogonality to their span, R(A)."
+          },
+          {
+            "id": "M4Q2E4",
+            "question": "N(A) ⊂ R(A)⊥ because:",
+            "options": [
+              "N(A) = R(A)",
+              "Every null vector is orthogonal to every row vector",
+              "A is always symmetric",
+              "Rank equals nullity"
+            ],
+            "correct_option": "Every null vector is orthogonal to every row vector",
+            "explanation": "A·v = 0 means v is perpendicular to all rows, hence to R(A)."
+          },
+          {
+            "id": "M4Q2E5",
+            "question": "dim(N(A)) + dim(R(A)) equals:",
+            "options": [
+              "m (rows of A)",
+              "n (columns of A)",
+              "rank(A)",
+              "det(A)"
+            ],
+            "correct_option": "n (columns of A)",
+            "explanation": "This is the rank-nullity theorem: rank + nullity = n."
+          },
+          {
+            "id": "M4Q2E6",
+            "question": "The orthogonal complement of R(A) in ℝⁿ is:",
+            "options": [
+              "C(A)",
+              "N(A)",
+              "R(Aᵀ)",
+              "N(Aᵀ)"
+            ],
+            "correct_option": "N(A)",
+            "explanation": "R(A)⊥ = N(A) by the fundamental theorem."
+          },
+          {
+            "id": "M4Q2E7",
+            "question": "C(A) = N(Aᵀ)⊥ means C(A) is orthogonal to:",
+            "options": [
+              "R(A)",
+              "N(Aᵀ)",
+              "C(Aᵀ)",
+              "R(Aᵀ)"
+            ],
+            "correct_option": "N(Aᵀ)",
+            "explanation": "C(A) and N(Aᵀ) are orthogonal complements in ℝᵐ."
+          },
+          {
+            "id": "M4Q2E8",
+            "question": "The two orthogonality relations are:",
+            "options": [
+              "R⊥C and N⊥N(Aᵀ)",
+              "R⊥N and C⊥N(Aᵀ)",
+              "R⊥N(Aᵀ) and C⊥N",
+              "N⊥C and R⊥N(Aᵀ)"
+            ],
+            "correct_option": "R⊥N and C⊥N(Aᵀ)",
+            "explanation": "R⊥N in ℝⁿ and C⊥N(Aᵀ) in ℝᵐ."
+          },
+          {
+            "id": "M4Q2E9",
+            "question": "The pair (R, N) lives in which space?",
+            "options": [
+              "ℝᵐ",
+              "ℝⁿ",
+              "ℝᵐ⁺ⁿ",
+              "Depends on A"
+            ],
+            "correct_option": "ℝⁿ",
+            "explanation": "R(A) and N(A) are both subspaces of ℝⁿ (the domain)."
+          },
+          {
+            "id": "M4Q2E10",
+            "question": "This orthogonality result is known as the:",
+            "options": [
+              "Rank-nullity theorem",
+              "Fundamental theorem of linear algebra",
+              "Spectral theorem",
+              "Cayley-Hamilton theorem"
+            ],
+            "correct_option": "Fundamental theorem of linear algebra",
+            "explanation": "The orthogonality of the four fundamental subspaces is the fundamental theorem."
+          }
+        ],
+        "medium": [
+          {
+            "id": "M4Q2M1",
+            "question": "For M = [[1,3],[2,6]], R = span{(1,3)} and N = span{(-3,1)}. Their dot product is:",
+            "options": [
+              "-6",
+              "-3",
+              "0",
+              "3"
+            ],
+            "correct_option": "0",
+            "explanation": "(1)(-3) + (3)(1) = 0."
+          },
+          {
+            "id": "M4Q2M2",
+            "question": "The angle between R and N for M = [[1,3],[2,6]] is:",
+            "options": [
+              "45°",
+              "60°",
+              "90°",
+              "0°"
+            ],
+            "correct_option": "90°",
+            "explanation": "R ⊥ N, so the angle is 90°."
+          },
+          {
+            "id": "M4Q2M3",
+            "question": "R is y = 3x and N is y = -x/3. Product of slopes:",
+            "options": [
+              "-1",
+              "0",
+              "1",
+              "-3"
+            ],
+            "correct_option": "-1",
+            "explanation": "3 × (-1/3) = -1 confirms perpendicularity."
+          },
+          {
+            "id": "M4Q2M4",
+            "question": "Since R ⊕ N = ℝ², any (x,y) can be uniquely written as:",
+            "options": [
+              "r + c where r ∈ R, c ∈ C",
+              "r + n where r ∈ R, n ∈ N",
+              "c + n where c ∈ C, n ∈ N",
+              "r₁ + r₂ where both ∈ R"
+            ],
+            "correct_option": "r + n where r ∈ R, n ∈ N",
+            "explanation": "R and N are complementary subspaces spanning ℝ²."
+          },
+          {
+            "id": "M4Q2M5",
+            "question": "The decomposition R ⊕ N = ℝ² requires R ∩ N =:",
+            "options": [
+              "ℝ²",
+              "R itself",
+              "{0}",
+              "N itself"
+            ],
+            "correct_option": "{0}",
+            "explanation": "The intersection must be trivial for a direct sum."
+          },
+          {
+            "id": "M4Q2M6",
+            "question": "Projection formula P = vvᵀ/(vᵀv) for v = (1,3) gives:",
+            "options": [
+              "[[1,3],[3,9]]/10",
+              "[[1,3],[3,9]]/5",
+              "[[3,9],[1,3]]/10",
+              "[[1,1],[3,3]]/10"
+            ],
+            "correct_option": "[[1,3],[3,9]]/10",
+            "explanation": "vvᵀ = [[1,3],[3,9]], vᵀv = 1+9 = 10."
+          },
+          {
+            "id": "M4Q2M7",
+            "question": "R(Aᵀ) = C(A). The row space of A equals the:",
+            "options": [
+              "Null space of A",
+              "Column space of Aᵀ",
+              "Column space of A",
+              "Null space of Aᵀ"
+            ],
+            "correct_option": "Column space of Aᵀ",
+            "explanation": "The row space of A is the column space of Aᵀ."
+          },
+          {
+            "id": "M4Q2M8",
+            "question": "C(A) ⊥ N(Aᵀ) means the column space is orthogonal to the:",
+            "options": [
+              "Left null space",
+              "Right null space",
+              "Row space",
+              "Column space"
+            ],
+            "correct_option": "Left null space",
+            "explanation": "N(Aᵀ) is the left null space of A."
+          },
+          {
+            "id": "M4Q2M9",
+            "question": "For a 3×5 matrix of rank 2, dim(C) + dim(N(Aᵀ)) =:",
+            "options": [
+              "2 + 1 = 3",
+              "2 + 3 = 5",
+              "3 + 2 = 5",
+              "1 + 2 = 3"
+            ],
+            "correct_option": "2 + 1 = 3",
+            "explanation": "m = 3, rank = 2, so dim(N(Aᵀ)) = 3 − 2 = 1."
+          },
+          {
+            "id": "M4Q2M10",
+            "question": "For a 3×3 matrix of rank 2, N(A) is:",
+            "options": [
+              "0D",
+              "1D",
+              "2D",
+              "3D"
+            ],
+            "correct_option": "1D",
+            "explanation": "dim(N) = n − rank = 3 − 2 = 1."
+          }
+        ],
+        "hard": [
+          {
+            "id": "M4Q2H1",
+            "question": "R(A) ⊥ N(A) is deeper than rank-nullity because:",
+            "options": [
+              "It only gives a dimension count",
+              "It provides geometric orthogonality, not just counting",
+              "It only works for square matrices",
+              "It requires A to be symmetric"
+            ],
+            "correct_option": "It provides geometric orthogonality, not just counting",
+            "explanation": "Rank-nullity counts dimensions; orthogonality gives the geometric relationship."
+          },
+          {
+            "id": "M4Q2H2",
+            "question": "R(A) and C(A) are isomorphic because they:",
+            "options": [
+              "Are equal",
+              "Have the same dimension = rank(A)",
+              "Always share a basis",
+              "Live in the same ℝⁿ"
+            ],
+            "correct_option": "Have the same dimension = rank(A)",
+            "explanation": "dim(R) = dim(C) = rank, so they are isomorphic but not equal in general."
+          },
+          {
+            "id": "M4Q2H3",
+            "question": "(C(A), N(Aᵀ)) lives in ℝᵐ. They are subspaces of:",
+            "options": [
+              "The domain ℝⁿ",
+              "The codomain ℝᵐ",
+              "Both ℝⁿ and ℝᵐ",
+              "Neither"
+            ],
+            "correct_option": "The codomain ℝᵐ",
+            "explanation": "C(A) ⊂ ℝᵐ and N(Aᵀ) ⊂ ℝᵐ."
+          },
+          {
+            "id": "M4Q2H4",
+            "question": "For a 4×3 matrix, R and N are in ℝ³ while C and N(Aᵀ) are in:",
+            "options": [
+              "ℝ³",
+              "ℝ⁴",
+              "ℝ⁷",
+              "ℝ¹²"
+            ],
+            "correct_option": "ℝ⁴",
+            "explanation": "C(A) and N(Aᵀ) live in ℝᵐ = ℝ⁴."
+          },
+          {
+            "id": "M4Q2H5",
+            "question": "P = vvᵀ/(vᵀv) works because R and N are:",
+            "options": [
+              "Equal subspaces",
+              "Perpendicular, giving orthogonal projection",
+              "Both 2D",
+              "Not related"
+            ],
+            "correct_option": "Perpendicular, giving orthogonal projection",
+            "explanation": "Orthogonal complement structure enables the projection formula."
+          },
+          {
+            "id": "M4Q2H6",
+            "question": "If R(A) = span{(1,0,0)}, then N(A) must be:",
+            "options": [
+              "span{(1,0,0)}",
+              "span{(0,1,0),(0,0,1)}",
+              "span{(0,1,0)}",
+              "The origin only"
+            ],
+            "correct_option": "span{(0,1,0),(0,0,1)}",
+            "explanation": "N(A) = R(A)⊥ = span{(0,1,0),(0,0,1)} in ℝ³."
+          },
+          {
+            "id": "M4Q2H7",
+            "question": "For a 5×5 matrix of rank 3, R ⊕ N =:",
+            "options": [
+              "ℝ²",
+              "ℝ³",
+              "ℝ⁵",
+              "ℝ⁸"
+            ],
+            "correct_option": "ℝ⁵",
+            "explanation": "R ⊕ N = ℝⁿ = ℝ⁵."
+          },
+          {
+            "id": "M4Q2H8",
+            "question": "C(A) ⊥ N(Aᵀ) is the column-space analogue of R(A) ⊥ N(A). It lives in:",
+            "options": [
+              "ℝⁿ (domain)",
+              "ℝᵐ (codomain)",
+              "ℝⁿˣᵐ",
+              "The space of eigenvalues"
+            ],
+            "correct_option": "ℝᵐ (codomain)",
+            "explanation": "C(A) and N(Aᵀ) are both in ℝᵐ."
+          },
+          {
+            "id": "M4Q2H9",
+            "question": "If A is m×n with rank = min(m,n), then one null space is:",
+            "options": [
+              "0D",
+              "1D",
+              "max(m,n)−min(m,n) dimensional",
+              "m-dimensional"
+            ],
+            "correct_option": "0D",
+            "explanation": "Full rank means nullity = 0, so the null space is trivial."
+          },
+          {
+            "id": "M4Q2H10",
+            "question": "R(A) = N(A)⊥ holds because dim(R)+dim(N)=n and:",
+            "options": [
+              "R = N",
+              "Every null vector is perpendicular to every row vector",
+              "A is always diagonal",
+              "The determinant is zero"
+            ],
+            "correct_option": "Every null vector is perpendicular to every row vector",
+            "explanation": "A·v = 0 implies v is orthogonal to all rows, hence to R(A)."
+          }
+        ],
+        "real_life_application": [
+          {
+            "id": "M4Q2R1",
+            "question": "In signal processing, signal ∈ C(A) and noise ∈ N(Aᵀ). Their orthogonality means:",
+            "options": [
+              "Signal equals noise",
+              "They can be perfectly separated",
+              "They overlap completely",
+              "Noise is larger than signal"
+            ],
+            "correct_option": "They can be perfectly separated",
+            "explanation": "Orthogonality allows clean separation of signal from noise."
+          },
+          {
+            "id": "M4Q2R2",
+            "question": "In least-squares regression, the residual lies in N(Aᵀ), perpendicular to:",
+            "options": [
+              "The data points",
+              "The column space C(A)",
+              "The null space N(A)",
+              "The row space R(A)"
+            ],
+            "correct_option": "The column space C(A)",
+            "explanation": "The residual is perpendicular to the model subspace C(A)."
+          },
+          {
+            "id": "M4Q2R3",
+            "question": "The four subspaces of a 3×3 rank-2 matrix: R and N in ℝ³ have dimensions:",
+            "options": [
+              "2 and 1",
+              "1 and 2",
+              "3 and 0",
+              "2 and 2"
+            ],
+            "correct_option": "2 and 1",
+            "explanation": "dim(R) = 2, dim(N) = 3 − 2 = 1."
+          },
+          {
+            "id": "M4Q2R4",
+            "question": "Quantum mechanics uses orthogonal eigenspaces. This mirrors:",
+            "options": [
+              "R ⊥ C",
+              "R ⊥ N",
+              "N ⊥ N(Aᵀ)",
+              "C ⊥ R"
+            ],
+            "correct_option": "R ⊥ N",
+            "explanation": "Orthogonal eigenspaces mirror the fundamental orthogonality R ⊥ N."
+          },
+          {
+            "id": "M4Q2R5",
+            "question": "For Ax = b, if b has a component in N(Aᵀ), that component:",
+            "options": [
+              "Can always be matched",
+              "Cannot be represented by C(A)",
+              "Lies in the row space",
+              "Is an eigenvector"
+            ],
+            "correct_option": "Cannot be represented by C(A)",
+            "explanation": "Components in N(Aᵀ) are outside C(A), making the system inconsistent."
+          }
+        ]
+      },
+      "real_life_application": [
+        {
+          "id": "M4Q2R1",
+          "question": "In signal processing, a noisy signal is decomposed into a component in C(A) plus a component in N(Aᵀ); the noise component lies in which subspace?",
+          "options": [
+            "Row space only",
+            "Kernel of Aᵀᵀ",
+            "Left null space",
+            "True signal span"
+          ],
+          "correct_option": "Left null space",
+          "explanation": "Noise modeled as unobservable lives in N(Aᵀ), the left null space, which is orthogonal to the signal subspace C(A)."
+        },
+        {
+          "id": "M4Q2R2",
+          "question": "In a least-squares regression, the residual vector r = b − A·x̂ is constrained to live in which fundamental subspace?",
+          "options": [
+            "Column space only",
+            "Row space signal",
+            "Strict image set",
+            "Left null space"
+          ],
+          "correct_option": "Left null space",
+          "explanation": "The normal equations force Aᵀ·r = 0, so the residual lies in N(Aᵀ), perpendicular to the model column space C(A)."
+        },
+        {
+          "id": "M4Q2R3",
+          "question": "A Green's function for a boundary-value PDE relates the kernel of a differential operator to which companion subspace?",
+          "options": [
+            "Eigenvalue set only",
+            "Range of operator",
+            "Strict transpose form",
+            "Adjoint operator only"
+          ],
+          "correct_option": "Range of operator",
+          "explanation": "The Green's function solves the PDE by inverting on the range, mapping the kernel complement to the range of the operator."
+        },
+        {
+          "id": "M4Q2R4",
+          "question": "In quantum mechanics, eigenspaces of a Hermitian operator for distinct eigenvalues are always which of the following?",
+          "options": [
+            "Mutually orthogonal",
+            "Parallel subspaces",
+            "Identical subspaces",
+            "Strictly nested here"
+          ],
+          "correct_option": "Mutually orthogonal",
+          "explanation": "Hermitian operators have orthogonal eigenspaces; this is a direct physical realization of the R(A) ⊥ N(A) pairing."
+        },
+        {
+          "id": "M4Q2R5",
+          "question": "For a 3x3 matrix of rank 2, the dimension of its null space in ℝ³ must be which value?",
+          "options": [
+            "Two dimensional",
+            "One dimensional",
+            "Equal to five",
+            "Always zero dim"
+          ],
+          "correct_option": "One dimensional",
+          "explanation": "By rank-nullity, nullity = 3 − rank = 3 − 2 = 1, so N(A) is a 1D line through the origin complementary to the 2D row space."
+        }
+      ]
+    },
+    {
+      "topicId": "Q4.3",
+      "title": "Null space of M and of Mᵀ",
+      "topic": "Computing null space of M and Mᵀ explicitly.",
+      "mcqs": {
+        "easy": [
+          {
+            "id": "M4Q3E1",
+            "question": "M = [[1,3],[2,6]]. Mᵀ equals:",
+            "options": [
+              "[[2,6],[1,3]]",
+              "[[1,2],[3,6]]",
+              "[[3,1],[6,2]]",
+              "[[6,2],[3,1]]"
+            ],
+            "correct_option": "[[1,2],[3,6]]",
+            "explanation": "Transposing swaps rows and columns."
+          },
+          {
+            "id": "M4Q3E2",
+            "question": "M·(x,y)ᵀ for M = [[1,3],[2,6]] gives:",
+            "options": [
+              "(x+2y, 3x+6y)",
+              "(x+3y, 2x+6y)",
+              "(x+3y, x+6y)",
+              "(x+y, 2x+3y)"
+            ],
+            "correct_option": "(x+3y, 2x+6y)",
+            "explanation": "Row 1: 1·x+3·y; Row 2: 2·x+6·y."
+          },
+          {
+            "id": "M4Q3E3",
+            "question": "M·(x,y)ᵀ = 0 for M = [[1,3],[2,6]] reduces to:",
+            "options": [
+              "2x + 6y = 0",
+              "x + 3y = 0",
+              "x + 2y = 0",
+              "3x + y = 0"
+            ],
+            "correct_option": "x + 3y = 0",
+            "explanation": "Both rows give proportional equations; x+3y = 0 is sufficient."
+          },
+          {
+            "id": "M4Q3E4",
+            "question": "N(M) for M = [[1,3],[2,6]] is:",
+            "options": [
+              "{(x,y) : x+3y=0}",
+              "{(x,y) : x+2y=0}",
+              "{(x,y) : x=y}",
+              "The origin only"
+            ],
+            "correct_option": "{(x,y) : x+3y=0}",
+            "explanation": "N(M) is the solution set of M·x = 0."
+          },
+          {
+            "id": "M4Q3E5",
+            "question": "Parametrising N(M): setting y = t gives x =:",
+            "options": [
+              "t",
+              "3t",
+              "-3t",
+              "-t/3"
+            ],
+            "correct_option": "-3t",
+            "explanation": "From x + 3y = 0, x = -3y = -3t."
+          },
+          {
+            "id": "M4Q3E6",
+            "question": "Mᵀ·(x,y)ᵀ for M = [[1,3],[2,6]] equals:",
+            "options": [
+              "(x+3y, 2x+6y)",
+              "(x+2y, 3x+6y)",
+              "(2x+y, 6x+3y)",
+              "(x+y, 3x+2y)"
+            ],
+            "correct_option": "(x+2y, 3x+6y)",
+            "explanation": "Mᵀ = [[1,2],[3,6]], so Mᵀ·(x,y) = (x+2y, 3x+6y)."
+          },
+          {
+            "id": "M4Q3E7",
+            "question": "N(Mᵀ) for M = [[1,3],[2,6]] requires solving:",
+            "options": [
+              "x+3y=0",
+              "x+2y=0",
+              "2x+6y=0",
+              "3x+y=0"
+            ],
+            "correct_option": "x+2y=0",
+            "explanation": "Mᵀ·(x,y) = 0 requires x+2y = 0."
+          },
+          {
+            "id": "M4Q3E8",
+            "question": "N(M) for M = [[1,3],[2,6]] has dimension:",
+            "options": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ],
+            "correct_option": "1",
+            "explanation": "nullity(M) = 2 - rank = 2 - 1 = 1."
+          },
+          {
+            "id": "M4Q3E9",
+            "question": "N(Mᵀ) for M = [[1,3],[2,6]] has dimension:",
+            "options": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ],
+            "correct_option": "1",
+            "explanation": "nullity(Mᵀ) = 2 - rank(Mᵀ) = 2 - 1 = 1."
+          },
+          {
+            "id": "M4Q3E10",
+            "question": "Both N(M) and N(Mᵀ) are subspaces of:",
+            "options": [
+              "ℝ¹",
+              "ℝ²",
+              "ℝ³",
+              "ℝ⁴"
+            ],
+            "correct_option": "ℝ²",
+            "explanation": "M is 2×2, so both null spaces live in ℝ²."
+          }
+        ],
+        "medium": [
+          {
+            "id": "M4Q3M1",
+            "question": "Verify (-3,1) ∈ N(M): M·(-3,1)ᵀ =:",
+            "options": [
+              "(0, 0)",
+              "(1, 2)",
+              "(-3, -6)",
+              "(3, 6)"
+            ],
+            "correct_option": "(0, 0)",
+            "explanation": "M·(-3,1) = (-3+3, -6+6) = (0,0)."
+          },
+          {
+            "id": "M4Q3M2",
+            "question": "Verify (-2,1) ∈ N(Mᵀ): Mᵀ·(-2,1)ᵀ =:",
+            "options": [
+              "(-2, -6)",
+              "(0, 0)",
+              "(2, 6)",
+              "(1, 3)"
+            ],
+            "correct_option": "(0, 0)",
+            "explanation": "Mᵀ·(-2,1) = (-2+2, -6+6) = (0,0)."
+          },
+          {
+            "id": "M4Q3M3",
+            "question": "N(M) has slope -1/3 and N(Mᵀ) has slope -1/2. These lines are:",
+            "options": [
+              "The same line",
+              "Perpendicular",
+              "Different lines",
+              "Parallel"
+            ],
+            "correct_option": "Different lines",
+            "explanation": "Different slopes mean different lines through the origin."
+          },
+          {
+            "id": "M4Q3M4",
+            "question": "N(M) is y = -x/3. N(Mᵀ) is:",
+            "options": [
+              "y = -x/3",
+              "y = -x/2",
+              "y = -2x",
+              "y = -3x"
+            ],
+            "correct_option": "y = -x/2",
+            "explanation": "From x + 2y = 0, y = -x/2."
+          },
+          {
+            "id": "M4Q3M5",
+            "question": "N(M) = R(M)⊥ because:",
+            "options": [
+              "M is symmetric",
+              "It holds for all matrices, not just symmetric",
+              "M is invertible",
+              "rank = 2"
+            ],
+            "correct_option": "It holds for all matrices, not just symmetric",
+            "explanation": "R(A) ⊥ N(A) is a universal theorem."
+          },
+          {
+            "id": "M4Q3M6",
+            "question": "R(M) direction (1,3) and N(M) direction (-3,1) have dot product:",
+            "options": [
+              "-6",
+              "0",
+              "6",
+              "3"
+            ],
+            "correct_option": "0",
+            "explanation": "(1)(-3)+(3)(1) = 0, confirming orthogonality."
+          },
+          {
+            "id": "M4Q3M7",
+            "question": "N(Mᵀ) = C(M)⊥ because:",
+            "options": [
+              "C(M) and N(Mᵀ) are the same subspace",
+              "C(A) ⊥ N(Aᵀ) is always true",
+              "M is rank 1",
+              "M is 2×2"
+            ],
+            "correct_option": "C(A) ⊥ N(Aᵀ) is always true",
+            "explanation": "This is the second fundamental orthogonality relation."
+          },
+          {
+            "id": "M4Q3M8",
+            "question": "C(M) direction (1,2) and N(Mᵀ) direction (-2,1): verify orthogonality:",
+            "options": [
+              "(1)(-2)+(2)(1) = 0",
+              "(1)(2)+(2)(-1) = 2",
+              "(1)(-2)+(2)(1) = -2",
+              "(1)(1)+(2)(2) = 5"
+            ],
+            "correct_option": "(1)(-2)+(2)(1) = 0",
+            "explanation": "1(-2)+2(1) = -2+2 = 0."
+          },
+          {
+            "id": "M4Q3M9",
+            "question": "The right null space is N(M) and the left null space is:",
+            "options": [
+              "N(M)",
+              "N(Mᵀ)",
+              "C(M)",
+              "R(M)"
+            ],
+            "correct_option": "N(Mᵀ)",
+            "explanation": "N(Mᵀ) is the left null space."
+          },
+          {
+            "id": "M4Q3M10",
+            "question": "dim(N(M)) + dim(N(Mᵀ)) for M = [[1,3],[2,6]] equals:",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "correct_option": "2",
+            "explanation": "1 + 1 = 2."
+          }
+        ],
+        "hard": [
+          {
+            "id": "M4Q3H1",
+            "question": "N(M) ≠ N(Mᵀ) for M = [[1,3],[2,6]] because:",
+            "options": [
+              "M has rank 0",
+              "M is not symmetric (2 ≠ 3)",
+              "M is invertible",
+              "M is 3×3"
+            ],
+            "correct_option": "M is not symmetric (2 ≠ 3)",
+            "explanation": "For non-symmetric matrices, N(A) and N(Aᵀ) generally differ."
+          },
+          {
+            "id": "M4Q3H2",
+            "question": "The number of free variables in M·x = 0 equals:",
+            "options": [
+              "rank(M)",
+              "nullity(M)",
+              "dim(N(Mᵀ))",
+              "m"
+            ],
+            "correct_option": "nullity(M)",
+            "explanation": "Free variables = n - rank = nullity = dim(N)."
+          },
+          {
+            "id": "M4Q3H3",
+            "question": "General solution to Mᵀ·x = 0 for M = [[1,3],[2,6]] is:",
+            "options": [
+              "t·(-3,1)",
+              "t·(-2,1)",
+              "t·(1,3)",
+              "t·(2,6)"
+            ],
+            "correct_option": "t·(-2,1)",
+            "explanation": "N(Mᵀ) is spanned by (-2,1)."
+          },
+          {
+            "id": "M4Q3H4",
+            "question": "For symmetric M, N(M) = N(Mᵀ). M = [[1,3],[2,6]]:",
+            "options": [
+              "Is symmetric",
+              "Is not symmetric",
+              "Is diagonal",
+              "Is the identity"
+            ],
+            "correct_option": "Is not symmetric",
+            "explanation": "M₁₂ = 3 ≠ 2 = M₂₁."
+          },
+          {
+            "id": "M4Q3H5",
+            "question": "dim(N(Mᵀ)) = 2 − rank(Mᵀ). Since rank(Mᵀ) = rank(M):",
+            "options": [
+              "2 − 1 = 1",
+              "2 − 2 = 0",
+              "2 − 0 = 2",
+              "1 − 1 = 0"
+            ],
+            "correct_option": "2 − 1 = 1",
+            "explanation": "rank(Mᵀ) = rank(M) = 1, so dim(N(Mᵀ)) = 1."
+          },
+          {
+            "id": "M4Q3H6",
+            "question": "Swapping rows 1 and 2 of M gives M'. Then N(M') is:",
+            "options": [
+              "Different from N(M)",
+              "The same as N(M)",
+              "0D",
+              "ℝ²"
+            ],
+            "correct_option": "The same as N(M)",
+            "explanation": "Row swaps don't change the solution set of M·x = 0."
+          },
+          {
+            "id": "M4Q3H7",
+            "question": "N(Mᵀ) direction (-2,1) is perpendicular to C(M) direction:",
+            "options": [
+              "(1,3)",
+              "(1,2)",
+              "(-3,1)",
+              "(3,1)"
+            ],
+            "correct_option": "(1,2)",
+            "explanation": "C(M) = span{(1,2)}, and (-2,1)·(1,2) = 0."
+          },
+          {
+            "id": "M4Q3H8",
+            "question": "N(M) and N(Mᵀ) would be the same if and only if:",
+            "options": [
+              "M has rank 0",
+              "M is symmetric",
+              "M is 2×2",
+              "M is invertible"
+            ],
+            "correct_option": "M is symmetric",
+            "explanation": "For symmetric matrices, M = Mᵀ, so N(M) = N(Mᵀ)."
+          },
+          {
+            "id": "M4Q3H9",
+            "question": "For M = [[1,3],[2,6]], solving Mᵀx = 0 requires:",
+            "options": [
+              "x + 3y = 0",
+              "x + 2y = 0",
+              "2x + 6y = 0",
+              "3x + 6y = 0"
+            ],
+            "correct_option": "x + 2y = 0",
+            "explanation": "Row 1 of Mᵀ gives x + 2y = 0; row 2 is 3 times row 1."
+          },
+          {
+            "id": "M4Q3H10",
+            "question": "N(M) and N(Mᵀ) have same dimension because:",
+            "options": [
+              "They are the same subspace",
+              "rank(M) = rank(Mᵀ)",
+              "M is square",
+              "M has rank 1"
+            ],
+            "correct_option": "rank(M) = rank(Mᵀ)",
+            "explanation": "Equal ranks give equal nullities for square matrices."
+          }
+        ],
+        "real_life_application": [
+          {
+            "id": "M4Q3R1",
+            "question": "For a 2×2 rank-1 matrix, N(M) is always:",
+            "options": [
+              "0D",
+              "1D",
+              "2D",
+              "3D"
+            ],
+            "correct_option": "1D",
+            "explanation": "nullity = 2 - 1 = 1 for any 2×2 rank-1 matrix."
+          },
+          {
+            "id": "M4Q3R2",
+            "question": "For a 3×3 rank-2 matrix, N(Mᵀ) is:",
+            "options": [
+              "0D",
+              "1D",
+              "2D",
+              "3D"
+            ],
+            "correct_option": "1D",
+            "explanation": "dim(N(Mᵀ)) = 3 - 2 = 1."
+          },
+          {
+            "id": "M4Q3R3",
+            "question": "If A is symmetric, then N(A) = N(Aᵀ):",
+            "options": [
+              "Always true",
+              "Never true",
+              "Only for rank 1",
+              "Only for 3×3 matrices"
+            ],
+            "correct_option": "Always true",
+            "explanation": "For symmetric A, A = Aᵀ, so N(A) = N(Aᵀ)."
+          },
+          {
+            "id": "M4Q3R4",
+            "question": "For a non-symmetric rank-1 matrix, N(A) ≠ N(Aᵀ) in general because:",
+            "options": [
+              "Rank changes",
+              "Row and column spaces differ",
+              "Rows are zero",
+              "Columns are zero"
+            ],
+            "correct_option": "Row and column spaces differ",
+            "explanation": "Different row and column spaces lead to different orthogonal complements."
+          },
+          {
+            "id": "M4Q3R5",
+            "question": "N(M) and N(Mᵀ) always have the same dimension (= nullity) because:",
+            "options": [
+              "They are the same set",
+              "rank(M) = rank(Mᵀ)",
+              "M is always symmetric",
+              "M is always square"
+            ],
+            "correct_option": "rank(M) = rank(Mᵀ)",
+            "explanation": "The rank of a matrix equals the rank of its transpose."
+          }
+        ]
+      },
+      "real_life_application": [
+        {
+          "id": "M4Q3R1",
+          "question": "For a rank-1 design matrix X in statistics, the right null space N(X) corresponds to which geometric object in the parameter space?",
+          "options": [
+            "Strict span of rows",
+            "Sample mean vector",
+            "Linear constraint set",
+            "Squared residual norm"
+          ],
+          "correct_option": "Linear constraint set",
+          "explanation": "N(X) is the set of parameter directions that produce zero fitted values; one such direction identifies one linear constraint."
+        },
+        {
+          "id": "M4Q3R2",
+          "question": "The left null space N(Xᵀ) of a design matrix gives which economically meaningful vector in regression diagnostics?",
+          "options": [
+            "Hat matrix values",
+            "Response y values",
+            "Cook's distances only",
+            "Leverage scores only"
+          ],
+          "correct_option": "Leverage scores only",
+          "explanation": "Projectors onto N(Xᵀ) reveal data points that the model cannot fit; their norms are the leverage scores."
+        },
+        {
+          "id": "M4Q3R3",
+          "question": "A symmetric matrix A has the special property that N(A) equals which other subspace?",
+          "options": [
+            "N(Aᵀ) itself",
+            "Just C(A) only",
+            "Strict R(A) only",
+            "Plain spectrum set"
+          ],
+          "correct_option": "N(Aᵀ) itself",
+          "explanation": "Symmetry gives A = Aᵀ, so the right and left null spaces coincide; this identifies invariant directions of A."
+        },
+        {
+          "id": "M4Q3R4",
+          "question": "For a non-symmetric rank-1 matrix, N(A) and N(Aᵀ) generally turn out to be which kind of subspaces?",
+          "options": [
+            "Identical subspaces",
+            "Nested subspaces",
+            "Distinct subspaces",
+            "Trivial zero only"
+          ],
+          "correct_option": "Distinct subspaces",
+          "explanation": "When A ≠ Aᵀ, the right and left null spaces differ: for M = [[1,3],[2,6]], N(M) has slope −1/3 and N(Mᵀ) has slope −1/2."
+        },
+        {
+          "id": "M4Q3R5",
+          "question": "The right null space N(A) and the left null space N(Aᵀ) always share which scalar quantity?",
+          "options": [
+            "Same basis vectors",
+            "Common dimension",
+            "Equal span content",
+            "Same row direction"
+          ],
+          "correct_option": "Common dimension",
+          "explanation": "Both have dimension n − rank(A) (or m − rank(A)); this shared nullity is the dimension count from rank-nullity."
+        }
+      ]
+    },
+    {
+      "topicId": "Q4.4",
+      "title": "C(M) ⊥ N(Mᵀ), R(M) ⊥ N(M)",
+      "topic": "Stating the two orthogonality relations explicitly.",
+      "mcqs": {
+        "easy": [
+          {
+            "id": "M4Q4E1",
+            "question": "C(M) and N(Mᵀ) are both subspaces of:",
+            "options": [
+              "ℝⁿ",
+              "ℝᵐ",
+              "ℝⁿˣᵐ",
+              "ℝᵐˣⁿ"
+            ],
+            "correct_option": "ℝᵐ",
+            "explanation": "Both C(M) and N(Mᵀ) live in ℝᵐ."
+          },
+          {
+            "id": "M4Q4E2",
+            "question": "C(M) is the span of which vectors of M?",
+            "options": [
+              "Rows of M",
+              "Columns of M",
+              "Diagonal entries",
+              "Eigenvalues"
+            ],
+            "correct_option": "Columns of M",
+            "explanation": "C(M) = column space = span of columns."
+          },
+          {
+            "id": "M4Q4E3",
+            "question": "N(Mᵀ) is the set of x with:",
+            "options": [
+              "M·x = 0",
+              "Mᵀ·x = 0",
+              "M·x = x",
+              "Mᵀ·x = x"
+            ],
+            "correct_option": "Mᵀ·x = 0",
+            "explanation": "N(Mᵀ) = {x : Mᵀx = 0}."
+          },
+          {
+            "id": "M4Q4E4",
+            "question": "The theorem states C(M) ⊥ N(Mᵀ) and:",
+            "options": [
+              "C(M) = N(Mᵀ)",
+              "C(M) ⊕ N(Mᵀ) = ℝᵐ",
+              "C(M) ∩ N(Mᵀ) ≠ {0}",
+              "C(M) ⊂ N(Mᵀ)"
+            ],
+            "correct_option": "C(M) ⊕ N(Mᵀ) = ℝᵐ",
+            "explanation": "They are orthogonal complements in ℝᵐ."
+          },
+          {
+            "id": "M4Q4E5",
+            "question": "R(M) and N(M) are both subspaces of:",
+            "options": [
+              "ℝᵐ",
+              "ℝⁿ",
+              "ℝᵐˣⁿ",
+              "ℝᵐ⁺ⁿ"
+            ],
+            "correct_option": "ℝⁿ",
+            "explanation": "Both R(M) and N(M) live in ℝⁿ."
+          },
+          {
+            "id": "M4Q4E6",
+            "question": "R(M) is the span of which vectors of M?",
+            "options": [
+              "Columns of M",
+              "Rows of M",
+              "Eigenvectors of M",
+              "Singular values"
+            ],
+            "correct_option": "Rows of M",
+            "explanation": "R(M) = row space = span of rows."
+          },
+          {
+            "id": "M4Q4E7",
+            "question": "N(M) is the set of x with:",
+            "options": [
+              "Mᵀ·x = 0",
+              "M·x = 0",
+              "M·x = x",
+              "Mᵀ·x = x"
+            ],
+            "correct_option": "M·x = 0",
+            "explanation": "N(M) = {x : Mx = 0}."
+          },
+          {
+            "id": "M4Q4E8",
+            "question": "The theorem states R(M) ⊥ N(M) and:",
+            "options": [
+              "R(M) = N(M)",
+              "R(M) ⊕ N(M) = ℝⁿ",
+              "R(M) ⊂ N(M)",
+              "R(M) ∩ N(M) ≠ {0}"
+            ],
+            "correct_option": "R(M) ⊕ N(M) = ℝⁿ",
+            "explanation": "They are orthogonal complements in ℝⁿ."
+          },
+          {
+            "id": "M4Q4E9",
+            "question": "C(M) and N(Mᵀ) are orthogonal:",
+            "options": [
+              "Complements",
+              "Subspaces of ℝⁿ",
+              "Equal subspaces",
+              "Independent sets"
+            ],
+            "correct_option": "Complements",
+            "explanation": "C(M) ⊥ N(Mᵀ) and their direct sum is ℝᵐ."
+          },
+          {
+            "id": "M4Q4E10",
+            "question": "R(M) and N(M) are orthogonal:",
+            "options": [
+              "Complements",
+              "Subspaces of ℝᵐ",
+              "Equal subspaces",
+              "Dependent sets"
+            ],
+            "correct_option": "Complements",
+            "explanation": "R(M) ⊥ N(M) and their direct sum is ℝⁿ."
+          }
+        ],
+        "medium": [
+          {
+            "id": "M4Q4M1",
+            "question": "For M = [[1,3],[2,6]], C(M)·N(Mᵀ) dot product (1,2)·(-2,1) =:",
+            "options": [
+              "-2",
+              "0",
+              "2",
+              "3"
+            ],
+            "correct_option": "0",
+            "explanation": "(1)(-2)+(2)(1) = 0."
+          },
+          {
+            "id": "M4Q4M2",
+            "question": "For M = [[1,3],[2,6]], R(M)·N(M) dot product (1,3)·(-3,1) =:",
+            "options": [
+              "-3",
+              "0",
+              "3",
+              "6"
+            ],
+            "correct_option": "0",
+            "explanation": "(1)(-3)+(3)(1) = 0."
+          },
+          {
+            "id": "M4Q4M3",
+            "question": "C(M) is 1D and N(Mᵀ) is 1D. Together they span:",
+            "options": [
+              "ℝ¹",
+              "ℝ²",
+              "ℝ³",
+              "A line"
+            ],
+            "correct_option": "ℝ²",
+            "explanation": "1D + 1D with trivial intersection = ℝ²."
+          },
+          {
+            "id": "M4Q4M4",
+            "question": "R(M) is 1D and N(M) is 1D. Together they span:",
+            "options": [
+              "ℝ¹",
+              "ℝ²",
+              "ℝ³",
+              "A plane"
+            ],
+            "correct_option": "ℝ²",
+            "explanation": "R ⊕ N = ℝ²."
+          },
+          {
+            "id": "M4Q4M5",
+            "question": "C(M) ⊕ N(Mᵀ) = ℝ² means every vector in ℝ² is:",
+            "options": [
+              "c + n(M) for c∈C, n∈N(M)",
+              "c + n for c∈C(M), n∈N(Mᵀ)",
+              "r + c for r∈R, c∈C",
+              "r + n for r∈R(Mᵀ), n∈N(Mᵀ)"
+            ],
+            "correct_option": "c + n for c∈C(M), n∈N(Mᵀ)",
+            "explanation": "Direct sum decomposition in ℝᵐ."
+          },
+          {
+            "id": "M4Q4M6",
+            "question": "R(M) ⊕ N(M) = ℝ² means every vector in ℝ² is:",
+            "options": [
+              "c + n(Mᵀ)",
+              "r + n for r∈R(M), n∈N(M)",
+              "c + r for c∈C, r∈R",
+              "n + n(Mᵀ)"
+            ],
+            "correct_option": "r + n for r∈R(M), n∈N(M)",
+            "explanation": "Direct sum decomposition in ℝⁿ."
+          },
+          {
+            "id": "M4Q4M7",
+            "question": "dim(C(M)) = dim(R(M)) = rank(M) = 1 for M = [[1,3],[2,6]]. So:",
+            "options": [
+              "C and R are the same subspace",
+              "C and R have same dimension but differ",
+              "C is 2D",
+              "R is 0D"
+            ],
+            "correct_option": "C and R have same dimension but differ",
+            "explanation": "dim(R) = dim(C) = 1, but they are different lines."
+          },
+          {
+            "id": "M4Q4M8",
+            "question": "dim(N(M)) = dim(N(Mᵀ)) = 1 for M = [[1,3],[2,6]]. These null spaces:",
+            "options": [
+              "Are equal",
+              "Are different lines",
+              "Are 0D",
+              "Are 2D planes"
+            ],
+            "correct_option": "Are different lines",
+            "explanation": "N(M) = span{(-3,1)} and N(Mᵀ) = span{(-2,1)} are different."
+          },
+          {
+            "id": "M4Q4M9",
+            "question": "dim(C) + dim(N(Mᵀ)) = m gives:",
+            "options": [
+              "1 + 1 = 2",
+              "1 + 2 = 3",
+              "2 + 1 = 3",
+              "2 + 2 = 4"
+            ],
+            "correct_option": "1 + 1 = 2",
+            "explanation": "m = 2, rank = 1, nullity = 1."
+          },
+          {
+            "id": "M4Q4M10",
+            "question": "dim(R) + dim(N) = n gives:",
+            "options": [
+              "1 + 1 = 2",
+              "1 + 2 = 3",
+              "2 + 1 = 3",
+              "2 + 2 = 4"
+            ],
+            "correct_option": "1 + 1 = 2",
+            "explanation": "n = 2, rank = 1, nullity = 1."
+          }
+        ],
+        "hard": [
+          {
+            "id": "M4Q4H1",
+            "question": "C(M) = N(Mᵀ)⊥. The deeper fact beyond dimension counting is:",
+            "options": [
+              "They have the same dimension",
+              "Every vector in C ⊥ every vector in N(Mᵀ)",
+              "They are equal subspaces",
+              "They span ℝⁿ"
+            ],
+            "correct_option": "Every vector in C ⊥ every vector in N(Mᵀ)",
+            "explanation": "Orthogonality is the geometric content, not just the dimension count."
+          },
+          {
+            "id": "M4Q4H2",
+            "question": "R(M) = N(M)⊥ in ℝⁿ means:",
+            "options": [
+              "Every row equals a null vector",
+              "Every row ⊥ every null vector",
+              "Row space = null space",
+              "They have same dimension"
+            ],
+            "correct_option": "Every row ⊥ every null vector",
+            "explanation": "R(A) ⊥ N(A) geometrically."
+          },
+          {
+            "id": "M4Q4H3",
+            "question": "dim(C) + dim(N(Mᵀ)) = m. For m = 3, rank = 2:",
+            "options": [
+              "2 + 1 = 3",
+              "2 + 0 = 2",
+              "1 + 2 = 3",
+              "3 + 1 = 4"
+            ],
+            "correct_option": "2 + 1 = 3",
+            "explanation": "dim(N(Mᵀ)) = m - rank = 3 - 2 = 1."
+          },
+          {
+            "id": "M4Q4H4",
+            "question": "C(M) = R(Mᵀ) because:",
+            "options": [
+              "Columns of M are rows of Mᵀ",
+              "M is always symmetric",
+              "They have same rank",
+              "M is square"
+            ],
+            "correct_option": "Columns of M are rows of Mᵀ",
+            "explanation": "Transposing swaps rows and columns."
+          },
+          {
+            "id": "M4Q4H5",
+            "question": "N(Mᵀ) is orthogonal complement of R(Mᵀ). Since R(Mᵀ) = C(M):",
+            "options": [
+              "N(Mᵀ) = C(M)⊥",
+              "N(Mᵀ) = R(M)⊥",
+              "C(M) = N(M)⊥",
+              "C(M) = R(M)⊥"
+            ],
+            "correct_option": "N(Mᵀ) = C(M)⊥",
+            "explanation": "The orthogonal complement of C(M) = R(Mᵀ) is N(Mᵀ)."
+          },
+          {
+            "id": "M4Q4H6",
+            "question": "The four fundamental subspaces pair as:",
+            "options": [
+              "(R, C) and (N, N(Aᵀ))",
+              "(R, N) and (C, N(Aᵀ))",
+              "(R, N(Aᵀ)) and (C, N)",
+              "(C, N) and (R, N(Aᵀ))"
+            ],
+            "correct_option": "(R, N) and (C, N(Aᵀ))",
+            "explanation": "R⊥N in ℝⁿ and C⊥N(Aᵀ) in ℝᵐ."
+          },
+          {
+            "id": "M4Q4H7",
+            "question": "For a 4×4 rank-3 matrix, dim(N(Aᵀ)) =:",
+            "options": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ],
+            "correct_option": "1",
+            "explanation": "dim(N(Aᵀ)) = m - rank = 4 - 3 = 1."
+          },
+          {
+            "id": "M4Q4H8",
+            "question": "Projection onto C(M) along N(Mᵀ) is well-defined because:",
+            "options": [
+              "C(M) = N(Mᵀ)",
+              "C(M) ⊕ N(Mᵀ) = ℝᵐ",
+              "C(M) and N(Mᵀ) overlap",
+              "M is always square"
+            ],
+            "correct_option": "C(M) ⊕ N(Mᵀ) = ℝᵐ",
+            "explanation": "Direct sum enables projection onto one component along the other."
+          },
+          {
+            "id": "M4Q4H9",
+            "question": "For a 3×5 rank-2 matrix, dim(R)=2, dim(N)=3, dim(C)=2, dim(N(Aᵀ))=:",
+            "options": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ],
+            "correct_option": "1",
+            "explanation": "dim(N(Aᵀ)) = m - rank = 3 - 2 = 1."
+          },
+          {
+            "id": "M4Q4H10",
+            "question": "dim(R)+dim(N)=n and dim(C)+dim(N(Aᵀ))=m are:",
+            "options": [
+              "The same equation",
+              "Two independent dimension counts",
+              "Contradictory",
+              "Only true for square matrices"
+            ],
+            "correct_option": "Two independent dimension counts",
+            "explanation": "One counts in ℝⁿ, the other in ℝᵐ."
+          }
+        ],
+        "real_life_application": [
+          {
+            "id": "M4Q4R1",
+            "question": "For a 3×3 rank-2 matrix, C(M) is 2D and N(Mᵀ) is:",
+            "options": [
+              "2D plane",
+              "1D line",
+              "0D point",
+              "3D space"
+            ],
+            "correct_option": "1D line",
+            "explanation": "dim(N(Mᵀ)) = 3 - 2 = 1."
+          },
+          {
+            "id": "M4Q4R2",
+            "question": "For a 3×3 rank-2 matrix, R(M) ⊥ N(M) means N(M) is:",
+            "options": [
+              "2D",
+              "1D",
+              "0D",
+              "3D"
+            ],
+            "correct_option": "1D",
+            "explanation": "dim(N) = 3 - 2 = 1."
+          },
+          {
+            "id": "M4Q4R3",
+            "question": "For a 4×4 rank-3 matrix, dimensions are R=3D, N=1D, C=3D, N(Aᵀ)=:",
+            "options": [
+              "0D",
+              "1D",
+              "2D",
+              "3D"
+            ],
+            "correct_option": "1D",
+            "explanation": "dim(N(Aᵀ)) = 4 - 3 = 1."
+          },
+          {
+            "id": "M4Q4R4",
+            "question": "The four subspaces theorem describes:",
+            "options": [
+              "Only the null space",
+              "The complete structure of any linear map",
+              "Only invertible matrices",
+              "Only 2×2 matrices"
+            ],
+            "correct_option": "The complete structure of any linear map",
+            "explanation": "It describes how any matrix partitions the ambient space."
+          },
+          {
+            "id": "M4Q4R5",
+            "question": "Projection onto C(M) along N(Mᵀ) is key in:",
+            "options": [
+              "Finding eigenvalues",
+              "Least-squares regression",
+              "Computing determinants",
+              "Matrix multiplication"
+            ],
+            "correct_option": "Least-squares regression",
+            "explanation": "Least-squares projects data onto the column space."
+          }
+        ]
+      },
+      "real_life_application": [
+        {
+          "id": "M4Q4R1",
+          "question": "To verify the four-subspaces theorem on a 3x3 rank-2 matrix, one confirms by inner product that C(M) is perpendicular to which subspace?",
+          "options": [
+            "R(M) itself",
+            "Strict C(Mᵀ)",
+            "Plain kernel line",
+            "N(Mᵀ)"
+          ],
+          "correct_option": "N(Mᵀ)",
+          "explanation": "The fundamental theorem pairs C(M) with N(Mᵀ) as orthogonal complements in ℝᵐ; checking ⟨c, n⟩ = 0 verifies it."
+        },
+        {
+          "id": "M4Q4R2",
+          "question": "In a 4x4 matrix of rank 3, the dimension of the left null space N(Mᵀ) is forced to be which value?",
+          "options": [
+            "One dimension",
+            "Three dimension",
+            "Four dimension",
+            "Zero dimension"
+          ],
+          "correct_option": "One dimension",
+          "explanation": "dim(N(Mᵀ)) = m − rank = 4 − 3 = 1; one direction in ℝ⁴ lies orthogonal to every column of M."
+        },
+        {
+          "id": "M4Q4R3",
+          "question": "The projection onto C(M) along N(Mᵀ) is well-defined because C(M) and N(Mᵀ) together satisfy which property?",
+          "options": [
+            "Identity map only",
+            "Direct sum only",
+            "Rank one property",
+            "Singular matrix form"
+          ],
+          "correct_option": "Direct sum only",
+          "explanation": "Because C(M) ⊥ N(Mᵀ) and their dimensions sum to m, every vector in ℝᵐ splits uniquely into a C(M) plus N(Mᵀ) part."
+        },
+        {
+          "id": "M4Q4R4",
+          "question": "In a coding-theory view, the orthogonal complement relationship between C(M) and N(Mᵀ) is exactly the same as which dual notion?",
+          "options": [
+            "Just identity code",
+            "Plain message space",
+            "Dual parity check",
+            "Strict generator rank"
+          ],
+          "correct_option": "Dual parity check",
+          "explanation": "C(M) plays the role of a code and N(Mᵀ) the role of its dual parity-check space; the pairing R ⊥ N is the same orthogonality."
+        },
+        {
+          "id": "M4Q4R5",
+          "question": "For the 3x3 matrix A = [[1, 2, 3], [4, 5, 6], [7, 8, 9]], the dimension of R(A) is which value?",
+          "options": [
+            "Three dimension",
+            "One dimension",
+            "Zero dimension",
+            "Two dimension"
+          ],
+          "correct_option": "Two dimension",
+          "explanation": "This special matrix has rank 2, so the row space is a 2D plane in ℝ³, paired with the 1D null space (1, −2, 1)."
+        }
+      ]
+    },
+    {
+      "topicId": "Q4.5",
+      "title": "A = [[1,2,3],[4,5,6],[7,8,9]]: N, C, R, N(Aᵀ)",
+      "topic": "Computing all four fundamental subspaces of the 3x3 magic matrix.",
+      "mcqs": {
+        "easy": [
+          {
+            "id": "M4Q5E1",
+            "question": "A = [[1,2,3],[4,5,6],[7,8,9]]. What is det(A)?",
+            "options": [
+              "1",
+              "0",
+              "-1",
+              "9"
+            ],
+            "correct_option": "0",
+            "explanation": "Rows are dependent (Row 3 − Row 2 = Row 2 − Row 1), so det = 0."
+          },
+          {
+            "id": "M4Q5E2",
+            "question": "rank(A) for A = [[1,2,3],[4,5,6],[7,8,9]] is:",
+            "options": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ],
+            "correct_option": "2",
+            "explanation": "Two independent rows, so rank = 2."
+          },
+          {
+            "id": "M4Q5E3",
+            "question": "N(A) for A = [[1,2,3],[4,5,6],[7,8,9]] is spanned by:",
+            "options": [
+              "(1, 2, 3)",
+              "(1, -2, 1)",
+              "(4, 5, 6)",
+              "(1, 1, 1)"
+            ],
+            "correct_option": "(1, -2, 1)",
+            "explanation": "A·(1,−2,1) = (1−4+3, 4−10+6, 7−16+9) = (0,0,0)."
+          },
+          {
+            "id": "M4Q5E4",
+            "question": "N(A) is:",
+            "options": [
+              "0D",
+              "1D",
+              "2D",
+              "3D"
+            ],
+            "correct_option": "1D",
+            "explanation": "dim(N) = n − rank = 3 − 2 = 1."
+          },
+          {
+            "id": "M4Q5E5",
+            "question": "C(A) for A = [[1,2,3],[4,5,6],[7,8,9]] is spanned by:",
+            "options": [
+              "(1,4,7) and (2,5,8)",
+              "(1,2,3) and (4,5,6)",
+              "(1,4,7) only",
+              "All three columns"
+            ],
+            "correct_option": "(1,4,7) and (2,5,8)",
+            "explanation": "Col 3 = −1·Col1 + 2·Col2, so two independent columns suffice."
+          },
+          {
+            "id": "M4Q5E6",
+            "question": "C(A) has dimension:",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "0"
+            ],
+            "correct_option": "2",
+            "explanation": "dim(C) = rank = 2."
+          },
+          {
+            "id": "M4Q5E7",
+            "question": "R(A) for A = [[1,2,3],[4,5,6],[7,8,9]] is spanned by:",
+            "options": [
+              "(1,4,7) and (2,5,8)",
+              "(1,2,3) and (4,5,6)",
+              "(7,8,9) only",
+              "All three rows"
+            ],
+            "correct_option": "(1,2,3) and (4,5,6)",
+            "explanation": "Row 3 = −Row1 + 2·Row2, so two independent rows suffice."
+          },
+          {
+            "id": "M4Q5E8",
+            "question": "R(A) has dimension:",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "0"
+            ],
+            "correct_option": "2",
+            "explanation": "dim(R) = rank = 2."
+          },
+          {
+            "id": "M4Q5E9",
+            "question": "N(A) is 1D in:",
+            "options": [
+              "ℝ¹",
+              "ℝ²",
+              "ℝ³",
+              "ℝ⁴"
+            ],
+            "correct_option": "ℝ³",
+            "explanation": "A is 3×3, so N(A) lives in ℝ³."
+          },
+          {
+            "id": "M4Q5E10",
+            "question": "C(A) is 2D in:",
+            "options": [
+              "ℝ²",
+              "ℝ³",
+              "ℝ⁴",
+              "ℝ⁶"
+            ],
+            "correct_option": "ℝ³",
+            "explanation": "C(A) lives in ℝᵐ = ℝ³."
+          }
+        ],
+        "medium": [
+          {
+            "id": "M4Q5M1",
+            "question": "Aᵀ = [[1,4,7],[2,5,8],[3,6,9]]. N(Aᵀ) requires solving Aᵀ·x = 0. Row reduction gives:",
+            "options": [
+              "x + y + z = 0",
+              "x − y + z = 0",
+              "2x + 3y = 0",
+              "x = y = z"
+            ],
+            "correct_option": "x + y + z = 0",
+            "explanation": "Row differences give x + y + z = 0 as the essential constraint."
+          },
+          {
+            "id": "M4Q5M2",
+            "question": "N(Aᵀ) for A = [[1,2,3],[4,5,6],[7,8,9]] is spanned by:",
+            "options": [
+              "(1, -2, 1)",
+              "(1, 1, 1)",
+              "(1, 0, -1)",
+              "(-1, 0, 1)"
+            ],
+            "correct_option": "(1, -2, 1)",
+            "explanation": "Solving Aᵀx = 0 gives (x,y,z) = z(1,−2,1)."
+          },
+          {
+            "id": "M4Q5M3",
+            "question": "N(Aᵀ) is:",
+            "options": [
+              "0D",
+              "1D",
+              "2D",
+              "3D"
+            ],
+            "correct_option": "1D",
+            "explanation": "dim(N(Aᵀ)) = m − rank = 3 − 2 = 1."
+          },
+          {
+            "id": "M4Q5M4",
+            "question": "For A = [[1,2,3],[4,5,6],[7,8,9]], N(A) = N(Aᵀ) = span{(1,−2,1)}. This means:",
+            "options": [
+              "A is invertible",
+              "A is symmetric",
+              "Both null spaces happen to be the same",
+              "A has rank 3"
+            ],
+            "correct_option": "Both null spaces happen to be the same",
+            "explanation": "A is not symmetric (A₁₂=2≠4=A₂₁), but both null spaces equal span{(1,−2,1)}."
+          },
+          {
+            "id": "M4Q5M5",
+            "question": "Verify C(A) ⊥ N(Aᵀ): (1,4,7)·(1,−2,1) =:",
+            "options": [
+              "-1",
+              "0",
+              "1",
+              "8"
+            ],
+            "correct_option": "0",
+            "explanation": "1−8+7 = 0."
+          },
+          {
+            "id": "M4Q5M6",
+            "question": "Verify C(A) ⊥ N(Aᵀ): (2,5,8)·(1,−2,1) =:",
+            "options": [
+              "-1",
+              "0",
+              "1",
+              "10"
+            ],
+            "correct_option": "0",
+            "explanation": "2−10+8 = 0."
+          },
+          {
+            "id": "M4Q5M7",
+            "question": "Verify R(A) ⊥ N(A): (1,2,3)·(1,−2,1) =:",
+            "options": [
+              "-1",
+              "0",
+              "1",
+              "6"
+            ],
+            "correct_option": "0",
+            "explanation": "1−4+3 = 0."
+          },
+          {
+            "id": "M4Q5M8",
+            "question": "Verify R(A) ⊥ N(A): (4,5,6)·(1,−2,1) =:",
+            "options": [
+              "-1",
+              "0",
+              "1",
+              "10"
+            ],
+            "correct_option": "0",
+            "explanation": "4−10+6 = 0."
+          },
+          {
+            "id": "M4Q5M9",
+            "question": "For A = [[1,2,3],[4,5,6],[7,8,9]], dim(R) + dim(N) =:",
+            "options": [
+              "2",
+              "3",
+              "4",
+              "5"
+            ],
+            "correct_option": "3",
+            "explanation": "2 + 1 = 3 = n."
+          },
+          {
+            "id": "M4Q5M10",
+            "question": "For A = [[1,2,3],[4,5,6],[7,8,9]], dim(C) + dim(N(Aᵀ)) =:",
+            "options": [
+              "2",
+              "3",
+              "4",
+              "5"
+            ],
+            "correct_option": "3",
+            "explanation": "2 + 1 = 3 = m."
+          }
+        ],
+        "hard": [
+          {
+            "id": "M4Q5H1",
+            "question": "N(A) = span{(1,−2,1)} is 1D and N(Aᵀ) = span{(1,−2,1)} is also 1D. They are:",
+            "options": [
+              "Always different for non-symmetric A",
+              "The same in this special case",
+              "Perpendicular",
+              "In different spaces"
+            ],
+            "correct_option": "The same in this special case",
+            "explanation": "Even though A ≠ Aᵀ, both null spaces happen to equal span{(1,−2,1)}."
+          },
+          {
+            "id": "M4Q5H2",
+            "question": "C(A) = span{(1,4,7),(2,5,8)} is a 2D plane in ℝ³. R(A) = span{(1,2,3),(4,5,6)} is:",
+            "options": [
+              "The same plane",
+              "A different 2D plane",
+              "A line",
+              "A point"
+            ],
+            "correct_option": "A different 2D plane",
+            "explanation": "C(A) and R(A) have same dimension but different spans."
+          },
+          {
+            "id": "M4Q5H3",
+            "question": "R(A) is 2D, N(A) is 1D. R ⊥ N and 2 + 1 = 3. This satisfies:",
+            "options": [
+              "dim(R) + dim(N) = m",
+              "dim(R) + dim(N) = n",
+              "dim(C) + dim(N(Aᵀ)) = n",
+              "rank − nullity = 0"
+            ],
+            "correct_option": "dim(R) + dim(N) = n",
+            "explanation": "Rank-nullity: 2 + 1 = 3 = n."
+          },
+          {
+            "id": "M4Q5H4",
+            "question": "C(A) is 2D, N(Aᵀ) is 1D. C ⊥ N(Aᵀ) and 2 + 1 = 3. This satisfies:",
+            "options": [
+              "dim(C) + dim(N(Aᵀ)) = m",
+              "dim(R) + dim(N) = m",
+              "dim(C) + dim(N(Aᵀ)) = n",
+              "dim(R) + dim(N) = n"
+            ],
+            "correct_option": "dim(C) + dim(N(Aᵀ)) = m",
+            "explanation": "2 + 1 = 3 = m."
+          },
+          {
+            "id": "M4Q5H5",
+            "question": "A = [[1,2,3],[4,5,6],[7,8,9]] is not symmetric, yet N(A) = N(Aᵀ). This is:",
+            "options": [
+              "A contradiction",
+              "A coincidence for this matrix",
+              "Always true for rank-2",
+              "Impossible"
+            ],
+            "correct_option": "A coincidence for this matrix",
+            "explanation": "It is a special property of this particular matrix."
+          },
+          {
+            "id": "M4Q5H6",
+            "question": "The vector (1,−2,1) is the 'kernel direction'. For A as a linear map, this means:",
+            "options": [
+              "A maps (1,−2,1) to itself",
+              "A collapses (1,−2,1) to the zero vector",
+              "A doubles (1,−2,1)",
+              "A rotates (1,−2,1)"
+            ],
+            "correct_option": "A collapses (1,−2,1) to the zero vector",
+            "explanation": "(1,−2,1) ∈ N(A), so A·(1,−2,1) = 0."
+          },
+          {
+            "id": "M4Q5H7",
+            "question": "The SVD of A = [[1,2,3],[4,5,6],[7,8,9]] has how many non-zero singular values?",
+            "options": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ],
+            "correct_option": "2",
+            "explanation": "Number of non-zero singular values = rank = 2."
+          },
+          {
+            "id": "M4Q5H8",
+            "question": "For A = [[1,2,3],[4,5,6],[7,8,9]], the fundamental theorem is satisfied because:",
+            "options": [
+              "A is symmetric",
+              "Both orthogonality relations and dimension counts hold",
+              "A is invertible",
+              "A has integer entries"
+            ],
+            "correct_option": "Both orthogonality relations and dimension counts hold",
+            "explanation": "R⊥N, C⊥N(Aᵀ), and all dimension sums match."
+          },
+          {
+            "id": "M4Q5H9",
+            "question": "Columns (1,4,7), (2,5,8), (3,6,9) satisfy (3,6,9) = -1·(1,4,7) + 2·(2,5,8). This means:",
+            "options": [
+              "rank = 3",
+              "rank = 2",
+              "rank = 1",
+              "rank = 0"
+            ],
+            "correct_option": "rank = 2",
+            "explanation": "One column is a linear combination of the other two."
+          },
+          {
+            "id": "M4Q5H10",
+            "question": "dim(R) = 2, dim(N) = 1, dim(C) = 2, dim(N(Aᵀ)) = 1 for this matrix. Total dimensions in ℝ³:",
+            "options": [
+              "R and C are 2D, N and N(Aᵀ) are 1D",
+              "All are 2D",
+              "R and N are 3D",
+              "C is 1D, N(Aᵀ) is 2D"
+            ],
+            "correct_option": "R and C are 2D, N and N(Aᵀ) are 1D",
+            "explanation": "2 + 1 = 3 in both ℝ³ pairs."
+          }
+        ],
+        "real_life_application": [
+          {
+            "id": "M4Q5R1",
+            "question": "All four fundamental subspaces of A = [[1,2,3],[4,5,6],[7,8,9]] have been computed. Total number of subspaces is:",
+            "options": [
+              "2",
+              "3",
+              "4",
+              "6"
+            ],
+            "correct_option": "4",
+            "explanation": "R, N, C, N(Aᵀ) are the four fundamental subspaces."
+          },
+          {
+            "id": "M4Q5R2",
+            "question": "For any 3×3 rank-2 matrix, dimensions are: R=2D, N=1D, C=2D, N(Aᵀ)=:",
+            "options": [
+              "0D",
+              "1D",
+              "2D",
+              "3D"
+            ],
+            "correct_option": "1D",
+            "explanation": "dim(N(Aᵀ)) = 3 − 2 = 1."
+          },
+          {
+            "id": "M4Q5R3",
+            "question": "The vector (1,−2,1) being in both N(A) and N(Aᵀ) for this matrix means:",
+            "options": [
+              "A is diagonal",
+              "A collapses this direction in both left and right actions",
+              "A is the zero matrix",
+              "A is 2×2"
+            ],
+            "correct_option": "A collapses this direction in both left and right actions",
+            "explanation": "A·(1,−2,1) = 0 and Aᵀ·(1,−2,1) = 0."
+          },
+          {
+            "id": "M4Q5R4",
+            "question": "For a 3×3 rank-2 matrix, the kernel direction represents:",
+            "options": [
+              "The direction of maximum stretch",
+              "The direction collapsed to zero",
+              "The eigenvector with largest eigenvalue",
+              "The trace direction"
+            ],
+            "correct_option": "The direction collapsed to zero",
+            "explanation": "The kernel is the direction the map sends to zero."
+          },
+          {
+            "id": "M4Q5R5",
+            "question": "The SVD of A = [[1,2,3],[4,5,6],[7,8,9]] reveals:",
+            "options": [
+              "3 non-zero singular values",
+              "2 non-zero singular values",
+              "1 non-zero singular value",
+              "0 non-zero singular values"
+            ],
+            "correct_option": "2 non-zero singular values",
+            "explanation": "Number of non-zero singular values equals rank = 2."
+          }
+        ]
+      },
+      "real_life_application": [
+        {
+          "id": "M4Q5R1",
+          "question": "For A = [[1, 2, 3], [4, 5, 6], [7, 8, 9]], the vector (1, −2, 1) is the kernel direction; applied to a linear map, it acts as which kind of invariant?",
+          "options": [
+            "Vanishing direction",
+            "Pure eigenvalue set",
+            "Strict projection axis",
+            "Just unit vector"
+          ],
+          "correct_option": "Vanishing direction",
+          "explanation": "Being in N(A) means A·(1, −2, 1) = 0; this is a direction along which the linear map collapses everything to zero."
+        },
+        {
+          "id": "M4Q5R2",
+          "question": "Applying the SVD to A = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] yields how many nonzero singular values?",
+          "options": [
+            "Three values",
+            "Two values",
+            "Just one value",
+            "Four values"
+          ],
+          "correct_option": "Two values",
+          "explanation": "Rank 2 implies exactly two nonzero singular values; the third column of U and V is the kernel direction (1, −2, 1)."
+        },
+        {
+          "id": "M4Q5R3",
+          "question": "In a numerical linear algebra computation, the four subspaces of A = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] reveal that the matrix behaves like which simpler object?",
+          "options": [
+            "Strict identity ",
+            "Full rank object",
+            "Rank two model",
+            "Zero matrix itself"
+          ],
+          "correct_option": "Rank two model",
+          "explanation": "Although A is 3x3, every output lies in a 2D plane; the rank-2 reduction is what compresses the data."
+        },
+        {
+          "id": "M4Q5R4",
+          "question": "A data scientist fits A = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] and finds exact linear dependence in the columns; the column space C(A) is which geometric object?",
+          "options": [
+            "Single point at origin",
+            "Just one dim line",
+            "Full three dim space",
+            "Two dimensional plane"
+          ],
+          "correct_option": "Two dimensional plane",
+          "explanation": "C(A) is the 2D plane spanned by (1, 4, 7) and (2, 5, 8); the third column adds no new direction."
+        },
+        {
+          "id": "M4Q5R5",
+          "question": "For the matrix A = [[1, 2, 3], [4, 5, 6], [7, 8, 9]], the kernel vector (1, −2, 1) can be interpreted physically as which failure mode of the map?",
+          "options": [
+            "Just identity axis",
+            "Lost information axis",
+            "Pure rotation axis",
+            "Strict null result"
+          ],
+          "correct_option": "Lost information axis",
+          "explanation": "Any input along (1, −2, 1) is destroyed by A; this direction is the one piece of information the map cannot recover."
+        }
+      ]
+    },
+    {
+      "topicId": "Q4.6",
+      "title": "4×4 matrix M with range of various dimensions",
+      "topic": "Understanding rank as dimension of range, giving examples for each case.",
+      "mcqs": {
+        "easy": [
+          {
+            "id": "M4Q6E1",
+            "question": "A 4×4 matrix M maps ℝ⁴ to:",
+            "options": [
+              "ℝ²",
+              "ℝ³",
+              "ℝ⁴",
+              "ℝ⁸"
+            ],
+            "correct_option": "ℝ⁴",
+            "explanation": "A 4×4 matrix maps ℝ⁴ → ℝ⁴."
+          },
+          {
+            "id": "M4Q6E2",
+            "question": "The range of M is a subspace of:",
+            "options": [
+              "ℝ²",
+              "ℝ³",
+              "ℝ⁴",
+              "ℝ¹⁶"
+            ],
+            "correct_option": "ℝ⁴",
+            "explanation": "Range(M) ⊂ ℝ⁴ for a 4×4 matrix."
+          },
+          {
+            "id": "M4Q6E3",
+            "question": "dim(Range(M)) =:",
+            "options": [
+              "det(M)",
+              "rank(M)",
+              "trace(M)",
+              "nullity(M)"
+            ],
+            "correct_option": "rank(M)",
+            "explanation": "The dimension of the range equals the rank."
+          },
+          {
+            "id": "M4Q6E4",
+            "question": "rank(M) for a 4×4 matrix can be at most:",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "correct_option": "4",
+            "explanation": "rank ≤ min(m,n) = 4."
+          },
+          {
+            "id": "M4Q6E5",
+            "question": "A 4×4 matrix with range 4D is:",
+            "options": [
+              "Singular",
+              "Full rank (invertible)",
+              "Rank 1",
+              "Zero matrix"
+            ],
+            "correct_option": "Full rank (invertible)",
+            "explanation": "Rank 4 means full rank, hence invertible."
+          },
+          {
+            "id": "M4Q6E6",
+            "question": "Example of a 4×4 matrix with 4D range:",
+            "options": [
+              "Zero matrix",
+              "Identity I₄",
+              "diag(1,1,1,0)",
+              "diag(1,1,0,0)"
+            ],
+            "correct_option": "Identity I₄",
+            "explanation": "I₄ has rank 4, so range is 4D."
+          },
+          {
+            "id": "M4Q6E7",
+            "question": "A 4×4 matrix with range 3D has rank:",
+            "options": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ],
+            "correct_option": "3",
+            "explanation": "dim(Range) = rank = 3."
+          },
+          {
+            "id": "M4Q6E8",
+            "question": "Example of a 4×4 matrix with 3D range:",
+            "options": [
+              "I₄",
+              "diag(1,1,1,0)",
+              "diag(1,1,0,0)",
+              "Zero matrix"
+            ],
+            "correct_option": "diag(1,1,1,0)",
+            "explanation": "diag(1,1,1,0) has rank 3."
+          },
+          {
+            "id": "M4Q6E9",
+            "question": "A 4×4 matrix with range 2D has rank:",
+            "options": [
+              "0",
+              "1",
+              "2",
+              "4"
+            ],
+            "correct_option": "2",
+            "explanation": "dim(Range) = rank = 2."
+          },
+          {
+            "id": "M4Q6E10",
+            "question": "Example of a 4×4 matrix with 2D range:",
+            "options": [
+              "I₄",
+              "diag(1,1,1,0)",
+              "diag(1,1,0,0)",
+              "diag(1,0,0,0)"
+            ],
+            "correct_option": "diag(1,1,0,0)",
+            "explanation": "diag(1,1,0,0) has rank 2."
+          }
+        ],
+        "medium": [
+          {
+            "id": "M4Q6M1",
+            "question": "Range 4D example: M = I₄. Another example is:",
+            "options": [
+              "Zero matrix",
+              "Any invertible 4×4 matrix",
+              "diag(1,1,0,0)",
+              "Rank-1 matrix"
+            ],
+            "correct_option": "Any invertible 4×4 matrix",
+            "explanation": "All invertible 4×4 matrices have full rank = 4."
+          },
+          {
+            "id": "M4Q6M2",
+            "question": "Range 3D: M = diag(1,1,1,0). The last basis vector collapses to:",
+            "options": [
+              "Itself",
+              "A 1D line",
+              "The zero vector",
+              "A 2D plane"
+            ],
+            "correct_option": "The zero vector",
+            "explanation": "diag(1,1,1,0) maps e₄ to 0."
+          },
+          {
+            "id": "M4Q6M3",
+            "question": "Range 2D: M = diag(1,1,0,0). Nullity =:",
+            "options": [
+              "0",
+              "1",
+              "2",
+              "4"
+            ],
+            "correct_option": "2",
+            "explanation": "nullity = 4 − 2 = 2."
+          },
+          {
+            "id": "M4Q6M4",
+            "question": "Range 1D: M with all rows equal to (1,0,0,0). M·x =:",
+            "options": [
+              "(x₁,0,0,0)",
+              "(Σxᵢ,0,0,0)",
+              "(x₁+x₂,x₃+x₄,0,0)",
+              "(x₁,x₂,x₃,x₄)"
+            ],
+            "correct_option": "(Σxᵢ,0,0,0)",
+            "explanation": "M·x = (sum of all xᵢ, 0, 0, 0)."
+          },
+          {
+            "id": "M4Q6M5",
+            "question": "Range 0D means M is:",
+            "options": [
+              "Identity",
+              "Diagonal",
+              "The zero matrix",
+              "Invertible"
+            ],
+            "correct_option": "The zero matrix",
+            "explanation": "Only the zero matrix has range {0}."
+          },
+          {
+            "id": "M4Q6M6",
+            "question": "For M = diag(1,1,0,0), the range is spanned by:",
+            "options": [
+              "e₁ only",
+              "e₁ and e₂",
+              "e₁, e₂, e₃",
+              "All four basis vectors"
+            ],
+            "correct_option": "e₁ and e₂",
+            "explanation": "The non-zero diagonal entries are in positions 1 and 2."
+          },
+          {
+            "id": "M4Q6M7",
+            "question": "A rank-1 4×4 matrix has range dimension:",
+            "options": [
+              "0",
+              "1",
+              "2",
+              "4"
+            ],
+            "correct_option": "1",
+            "explanation": "rank = 1 means range is 1D."
+          },
+          {
+            "id": "M4Q6M8",
+            "question": "A rank-1 4×4 matrix has kernel dimension:",
+            "options": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ],
+            "correct_option": "3",
+            "explanation": "nullity = 4 − 1 = 3."
+          },
+          {
+            "id": "M4Q6M9",
+            "question": "For M = [[1,1,1,1],[0,0,0,0],[0,0,0,0],[0,0,0,0]], M·x =:",
+            "options": [
+              "(x₁,0,0,0)",
+              "(x₁+x₂+x₃+x₄,0,0,0)",
+              "(x₁,x₂,x₃,x₄)",
+              "(1,1,1,1)"
+            ],
+            "correct_option": "(x₁+x₂+x₃+x₄,0,0,0)",
+            "explanation": "Only the first row is non-zero and equals (1,1,1,1)."
+          },
+          {
+            "id": "M4Q6M10",
+            "question": "For 4×4 M, rank + nullity =:",
+            "options": [
+              "2",
+              "4",
+              "8",
+              "16"
+            ],
+            "correct_option": "4",
+            "explanation": "Rank-nullity theorem: rank + nullity = n = 4."
+          }
+        ],
+        "hard": [
+          {
+            "id": "M4Q6H1",
+            "question": "4D range: M invertible, kernel is:",
+            "options": [
+              "1D",
+              "2D",
+              "3D",
+              "0D (just the origin)"
+            ],
+            "correct_option": "0D (just the origin)",
+            "explanation": "Invertible means nullity = 0."
+          },
+          {
+            "id": "M4Q6H2",
+            "question": "3D range: kernel is 1D, so one vector collapses to 0. Rank + nullity =:",
+            "options": [
+              "3",
+              "4",
+              "5",
+              "7"
+            ],
+            "correct_option": "4",
+            "explanation": "3 + 1 = 4 = n."
+          },
+          {
+            "id": "M4Q6H3",
+            "question": "2D range: kernel is 2D. A plane collapses to:",
+            "options": [
+              "A 3D space",
+              "A 2D plane",
+              "A 1D line",
+              "A point"
+            ],
+            "correct_option": "A 2D plane",
+            "explanation": "Range is 2D, so the image is a 2D plane."
+          },
+          {
+            "id": "M4Q6H4",
+            "question": "1D range: kernel is 3D. A 3D hyperplane collapses to:",
+            "options": [
+              "A 3D space",
+              "A 2D plane",
+              "A 1D line",
+              "A point"
+            ],
+            "correct_option": "A 1D line",
+            "explanation": "Range is 1D, so everything maps to a line."
+          },
+          {
+            "id": "M4Q6H5",
+            "question": "0D range: kernel is 4D. Everything collapses to:",
+            "options": [
+              "A line",
+              "A plane",
+              "The zero vector",
+              "ℝ⁴"
+            ],
+            "correct_option": "The zero vector",
+            "explanation": "Zero matrix maps everything to 0."
+          },
+          {
+            "id": "M4Q6H6",
+            "question": "The progression of rank 4→3→2→1→0 corresponds to:",
+            "options": [
+              "Increasing nullity",
+              "Decreasing nullity from 4 to 0",
+              "Constant nullity",
+              "Random nullity"
+            ],
+            "correct_option": "Increasing nullity",
+            "explanation": "Nullity goes 0→1→2→3→4 as rank decreases."
+          },
+          {
+            "id": "M4Q6H7",
+            "question": "Rank + Nullity = 4 for all cases. Verify for rank 2:",
+            "options": [
+              "2 + 0 = 4",
+              "2 + 2 = 4",
+              "2 + 3 = 4",
+              "2 + 4 = 4"
+            ],
+            "correct_option": "2 + 2 = 4",
+            "explanation": "2 + 2 = 4 ✓."
+          },
+          {
+            "id": "M4Q6H8",
+            "question": "For 4×4 matrices, rank can be:",
+            "options": [
+              "0, 1, or 2 only",
+              "0, 1, 2, 3, or 4",
+              "1, 2, or 3 only",
+              "Always 4"
+            ],
+            "correct_option": "0, 1, 2, 3, or 4",
+            "explanation": "Rank ranges from 0 to min(m,n) = 4."
+          },
+          {
+            "id": "M4Q6H9",
+            "question": "The 5 possible rank values for a 4×4 matrix correspond to:",
+            "options": [
+              "Rank 4, 3, 2, 1, 0",
+              "Rank 1, 2, 3, 4, 5",
+              "Rank 0, 2, 4, 6, 8",
+              "Only rank 0 and 4"
+            ],
+            "correct_option": "Rank 4, 3, 2, 1, 0",
+            "explanation": "Five possible values from 0 to 4."
+          },
+          {
+            "id": "M4Q6H10",
+            "question": "A rank-3 4×4 matrix has a 1D kernel. The range is:",
+            "options": [
+              "A line",
+              "A plane",
+              "A 3D subspace",
+              "All of ℝ⁴"
+            ],
+            "correct_option": "A 3D subspace",
+            "explanation": "dim(Range) = rank = 3, a 3D subspace of ℝ⁴."
+          }
+        ],
+        "real_life_application": [
+          {
+            "id": "M4Q6R1",
+            "question": "A 4×4 rotation preserves all 4 dimensions. Its range is:",
+            "options": [
+              "1D",
+              "2D",
+              "3D",
+              "4D"
+            ],
+            "correct_option": "4D",
+            "explanation": "Rotations are invertible, so rank = 4 and range = ℝ⁴."
+          },
+          {
+            "id": "M4Q6R2",
+            "question": "A 4×4 projection onto a 3D subspace loses 1 dimension. Its range is:",
+            "options": [
+              "1D",
+              "2D",
+              "3D",
+              "4D"
+            ],
+            "correct_option": "3D",
+            "explanation": "Projection onto 3D subspace has rank 3."
+          },
+          {
+            "id": "M4Q6R3",
+            "question": "A 4×4 projection onto a 2D plane has rank:",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "correct_option": "2",
+            "explanation": "Range is 2D, so rank = 2."
+          },
+          {
+            "id": "M4Q6R4",
+            "question": "A rank-1 4×4 transformation maps ℝ⁴ onto a:",
+            "options": [
+              "Point",
+              "Line",
+              "Plane",
+              "3D space"
+            ],
+            "correct_option": "Line",
+            "explanation": "Rank 1 means 1D range, a line."
+          },
+          {
+            "id": "M4Q6R5",
+            "question": "The zero map 0: ℝ⁴ → ℝ⁴ has range:",
+            "options": [
+              "ℝ⁴",
+              "A 3D subspace",
+              "A line",
+              "Just the origin {0}"
+            ],
+            "correct_option": "Just the origin {0}",
+            "explanation": "The zero matrix maps everything to zero."
+          }
+        ]
+      },
+      "real_life_application": [
+        {
+          "id": "M4Q6R1",
+          "question": "A 4x4 graphics transformation that preserves all four dimensions is best modeled by which canonical matrix?",
+          "options": [
+            "Identity matrix I",
+            "Strict zero matrix",
+            "Diagonal 1,1,0,0",
+            "Row duplicate form"
+          ],
+          "correct_option": "Identity matrix I",
+          "explanation": "Identity (or any invertible matrix) has rank 4, so its range is all of ℝ⁴ — no dimension is lost."
+        },
+        {
+          "id": "M4Q6R2",
+          "question": "A 4x4 stereo projection that flattens 3D world points onto a 2D screen is a map whose range has which dimension?",
+          "options": [
+            "Three dimension",
+            "Four dimension",
+            "Two dimension",
+            "One dimension"
+          ],
+          "correct_option": "Two dimension",
+          "explanation": "Projection onto a 2D plane collapses two dimensions; the output subspace is 2D, so rank 2."
+        },
+        {
+          "id": "M4Q6R3",
+          "question": "A rank-1 4x4 transformation collapses its 4D input onto which kind of geometric object?",
+          "options": [
+            "Full 4D space",
+            "Two dimensional plane",
+            "Three dim subspace",
+            "Single line"
+          ],
+          "correct_option": "Single line",
+          "explanation": "Rank 1 means the range is 1D, so all 4D inputs are squashed onto one line through the origin."
+        },
+        {
+          "id": "M4Q6R4",
+          "question": "When a 4x4 transform has rank 3, the null space of the map has which dimension?",
+          "options": [
+            "Two dimension",
+            "One dimension",
+            "Three dimension",
+            "Four dimension"
+          ],
+          "correct_option": "One dimension",
+          "explanation": "Rank-nullity for 4x4 gives nullity = 4 − rank = 4 − 3 = 1; one direction in the input is lost."
+        },
+        {
+          "id": "M4Q6R5",
+          "question": "A 4x4 zero matrix used in a layered neural network layer represents a map whose range is which kind of set?",
+          "options": [
+            "Single line form",
+            "Two dimensional plane",
+            "Zero point only",
+            "Full 4D span"
+          ],
+          "correct_option": "Zero point only",
+          "explanation": "The zero map sends every input to 0, so its range is the 0D set {0}; effectively the layer transmits nothing."
+        }
+      ]
+    },
+    {
+      "module": 4,
+      "topicId": "Q4.7",
+      "title": "Range of A contains S, T",
+      "topic": "Showing range is closed under scalar multiplication and addition (linearity).",
+      "mcqs": {
+        "easy": [
+          {
+            "id": "M4Q7E1",
+            "question": "For a linear map A: ℝ³ → ℝ³, what is the codomain of A?",
+            "options": [
+              "The real line ℝ",
+              "The space ℝ³",
+              "The plane ℝ²",
+              "The space ℝ⁴"
+            ],
+            "correct_option": "The space ℝ³",
+            "explanation": "The codomain of A: ℝ³ → ℝ³ is ℝ³, which is where all output vectors including those in Range(A) live."
+          },
+          {
+            "id": "M4Q7E2",
+            "question": "If (a, b, c) is in Range(A), which statement must be true?",
+            "options": [
+              "A is zero mapping",
+              "(a, b, c) all zero",
+              "Some input x works",
+              "A has full rank"
+            ],
+            "correct_option": "Some input x works",
+            "explanation": "By definition, (a, b, c) ∈ Range(A) means there exists some input x with A·x = (a, b, c)."
+          },
+          {
+            "id": "M4Q7E3",
+            "question": "The identity A·(α·x) = α·(A·x) holds because A is:",
+            "options": [
+              "A linear map",
+              "A scalar only",
+              "A zero matrix",
+              "A row vector"
+            ],
+            "correct_option": "A linear map",
+            "explanation": "Homogeneity (A·(α·x) = α·A·x) is one of the two defining properties of a linear map."
+          },
+          {
+            "id": "M4Q7E4",
+            "question": "From A·(α·x) = α·(a, b, c) we conclude Range(A) is closed under:",
+            "options": [
+              "Multiplying by matrix",
+              "Adding output vectors",
+              "Taking matrix transposes",
+              "Real scalar multiplication"
+            ],
+            "correct_option": "Real scalar multiplication",
+            "explanation": "If (a, b, c) is a Range output then so is α·(a, b, c) for any scalar α: that is closure under scalar multiplication."
+          },
+          {
+            "id": "M4Q7E5",
+            "question": "If (d, e, f) is in Range(A), there exists a vector y such that:",
+            "options": [
+              "Ay is zero vector",
+              "Ay equals (d, e, f)",
+              "Ay equals scalar one",
+              "Ay equals matrix form"
+            ],
+            "correct_option": "Ay equals (d, e, f)",
+            "explanation": "Membership in Range(A) of (d, e, f) means exactly that some input y maps to it under A."
+          },
+          {
+            "id": "M4Q7E6",
+            "question": "The identity A·(x + y) = A·x + A·y is which property of A?",
+            "options": [
+              "Additivity of A",
+              "Invertibility of A",
+              "Commutativity of A",
+              "Transpose of A"
+            ],
+            "correct_option": "Additivity of A",
+            "explanation": "Additivity (A·(x+y) = A·x + A·y) is the second defining property of a linear map, alongside homogeneity."
+          },
+          {
+            "id": "M4Q7E7",
+            "question": "From A·(x + y) = (a, b, c) + (d, e, f) we conclude that this sum lies in:",
+            "options": [
+              "Null space of A",
+              "Kernel of A",
+              "Range of A",
+              "Row space of A"
+            ],
+            "correct_option": "Range of A",
+            "explanation": "Since (x + y) is a valid input, the output (a, b, c) + (d, e, f) is by definition in Range(A)."
+          },
+          {
+            "id": "M4Q7E8",
+            "question": "Closure under addition means: if v, w ∈ Range(A), then which is also in Range(A)?",
+            "options": [
+              "Vector w alone only",
+              "Scalar v alone only",
+              "Vector v alone there",
+              "Sum of the two"
+            ],
+            "correct_option": "Sum of the two",
+            "explanation": "Closure under addition is the statement that the sum of any two Range vectors is again a Range vector."
+          },
+          {
+            "id": "M4Q7E9",
+            "question": "The set S = {α·(a, b, c) : α ∈ ℝ} geometrically describes a:",
+            "options": [
+              "Line through origin",
+              "Plane in 3D space",
+              "Full 3D vector space",
+              "Single point at origin"
+            ],
+            "correct_option": "Line through origin",
+            "explanation": "All scalar multiples of a single nonzero vector trace out the 1D line through the origin in that direction."
+          },
+          {
+            "id": "M4Q7E10",
+            "question": "The set T = {α·(a, b, c) + β·(d, e, f)} geometrically describes a:",
+            "options": [
+              "Single point at origin",
+              "Plane through origin",
+              "Line in 3D space",
+              "Disconnected 3D set"
+            ],
+            "correct_option": "Plane through origin",
+            "explanation": "Linear combinations of two vectors span either a 1D line (if dependent) or a 2D plane through the origin."
+          }
+        ],
+        "medium": [
+          {
+            "id": "M4Q7M1",
+            "question": "S is the line through origin in the direction of (a, b, c), assuming (a, b, c) is:",
+            "options": [
+              "A complex vector form",
+              "A row vector only",
+              "Nonzero vector in ℝ³",
+              "Always unit length one"
+            ],
+            "correct_option": "Nonzero vector in ℝ³",
+            "explanation": "S is genuinely a 1D line only when the spanning vector (a, b, c) is not the zero vector."
+          },
+          {
+            "id": "M4Q7M2",
+            "question": "T is the plane through origin spanned by (a, b, c) and (d, e, f), assuming they are:",
+            "options": [
+              "Two independent vectors",
+              "Both of unit length",
+              "Equal as vector form",
+              "Two dependent vectors"
+            ],
+            "correct_option": "Two independent vectors",
+            "explanation": "Two vectors span a 2D plane precisely when they are linearly independent; otherwise they only span a line."
+          },
+          {
+            "id": "M4Q7M3",
+            "question": "If (a, b, c) and (d, e, f) are linearly dependent, the relationship between T and S is:",
+            "options": [
+              "T contains S only",
+              "T equals S exactly",
+              "S contains T strictly",
+              "T and S disjoint"
+            ],
+            "correct_option": "T equals S exactly",
+            "explanation": "Linear dependence means (d, e, f) is a scalar multiple of (a, b, c), so their spans coincide: T = S."
+          },
+          {
+            "id": "M4Q7M4",
+            "question": "If (a, b, c) and (d, e, f) are linearly independent, then the set T is:",
+            "options": [
+              "Zero dimensional origin",
+              "One dimensional line",
+              "Full 3D vector space",
+              "Two dimensional plane"
+            ],
+            "correct_option": "Two dimensional plane",
+            "explanation": "Two independent spanning vectors in ℝ³ produce a 2D plane (a 2-dimensional subspace)."
+          },
+          {
+            "id": "M4Q7M5",
+            "question": "To show S ⊂ Range(A) we relied on Range(A) being closed under:",
+            "options": [
+              "Scalar mult outputs only",
+              "Inner products only",
+              "Matrix inverse op form",
+              "Transpose operations only"
+            ],
+            "correct_option": "Scalar mult outputs only",
+            "explanation": "S consists of all scalar multiples of a Range vector; closure under scalar multiplication ensures all of S lies in Range(A)."
+          },
+          {
+            "id": "M4Q7M6",
+            "question": "To show T ⊂ Range(A) we relied on Range(A) being closed under:",
+            "options": [
+              "Scalar multiplication acts",
+              "Taking determinants only",
+              "Addition of vectors here",
+              "Transpose operations only"
+            ],
+            "correct_option": "Addition of vectors here",
+            "explanation": "T is built from linear combinations, so closure under both addition and scalar multiplication places T inside Range(A)."
+          },
+          {
+            "id": "M4Q7M7",
+            "question": "Range(A) contains not just two points but the entire linear span of:",
+            "options": [
+              "Their transposes only",
+              "Any two of them",
+              "Single vector only",
+              "The zero set alone"
+            ],
+            "correct_option": "Any two of them",
+            "explanation": "By the closure arguments, Range(A) contains the span of any two (in fact any finite number of) its vectors."
+          },
+          {
+            "id": "M4Q7M8",
+            "question": "Range(A) being closed under linear combinations is a hallmark of being:",
+            "options": [
+              "A square matrix shape",
+              "A diagonal matrix form",
+              "A nonsingular map form",
+              "A subspace of ℝ³"
+            ],
+            "correct_option": "A subspace of ℝ³",
+            "explanation": "A subspace is precisely a set closed under linear combinations, so this property identifies Range(A) as a subspace."
+          },
+          {
+            "id": "M4Q7M9",
+            "question": "From the closure properties we established, Range(A) is a subspace of:",
+            "options": [
+              "The space ℝ³",
+              "The integers ℤ",
+              "An empty set",
+              "The space ℂ⁴"
+            ],
+            "correct_option": "The space ℝ³",
+            "explanation": "Since A: ℝ³ → ℝ³, all outputs live in ℝ³, so Range(A) ⊂ ℝ³ and is itself a subspace there."
+          },
+          {
+            "id": "M4Q7M10",
+            "question": "Even when (a, b, c) and (d, e, f) are linearly independent, T may still be 1D if:",
+            "options": [
+              "Both nonzero still",
+              "They are orthogonal",
+              "One of two zero",
+              "Same length norm"
+            ],
+            "correct_option": "One of two zero",
+            "explanation": "If one of the two vectors is the zero vector, independence fails and the span collapses to a 1D line."
+          }
+        ],
+        "hard": [
+          {
+            "id": "M4Q7H1",
+            "question": "The proof of (a) — that α·(a, b, c) ∈ Range(A) — uses which property of A?",
+            "options": [
+              "A is invertible matrix",
+              "Homogeneity of A",
+              "A is symmetric matrix",
+              "A is diagonal matrix"
+            ],
+            "correct_option": "Homogeneity of A",
+            "explanation": "A·(α·x) = α·(A·x) = α·(a, b, c) is precisely the homogeneity condition A inherits from being linear."
+          },
+          {
+            "id": "M4Q7H2",
+            "question": "The proof of (b) — that (a, b, c) + (d, e, f) ∈ Range(A) — uses which property?",
+            "options": [
+              "Determinant rule of A",
+              "Rank condition of A",
+              "Inverse relation of A",
+              "Additivity property A"
+            ],
+            "correct_option": "Additivity property A",
+            "explanation": "A·(x + y) = A·x + A·y = (a, b, c) + (d, e, f) is the additivity half of A being linear."
+          },
+          {
+            "id": "M4Q7H3",
+            "question": "Combining the two closure proofs, we conclude Range(A) is a:",
+            "options": [
+              "Subspace ℝ³ form here",
+              "Single point set kind",
+              "Plain scalar multiple",
+              "Plain nonsingular matrix A"
+            ],
+            "correct_option": "Subspace ℝ³ form here",
+            "explanation": "Closure under both scalar multiplication and addition is exactly the definition of a subspace, and outputs live in ℝ³."
+          },
+          {
+            "id": "M4Q7H4",
+            "question": "S = {α·(a, b, c)} is the line through the origin and (a, b, c), unless:",
+            "options": [
+              "(a, b, c) is nonzero",
+              "α equals zero case",
+              "(a, b, c) is zero",
+              "α is negative scalar"
+            ],
+            "correct_option": "(a, b, c) is zero",
+            "explanation": "When (a, b, c) = 0 the set S collapses to {0} — just the origin rather than a true 1D line."
+          },
+          {
+            "id": "M4Q7H5",
+            "question": "T = span{(a, b, c), (d, e, f)} is geometrically a plane through the origin when:",
+            "options": [
+              "Both vectors are zero",
+              "Vectors independent pair",
+              "Vectors dependent pair",
+              "Vectors are equal pair"
+            ],
+            "correct_option": "Vectors independent pair",
+            "explanation": "Two linearly independent vectors in ℝ³ span a 2D plane (a 2-dimensional subspace) through the origin."
+          },
+          {
+            "id": "M4Q7H6",
+            "question": "T is 2-dimensional if and only if (a, b, c) and (d, e, f) are:",
+            "options": [
+              "Both zero vectors pair",
+              "Equal length vector pair",
+              "Orthogonal to other vector",
+              "Independent vector pair"
+            ],
+            "correct_option": "Independent vector pair",
+            "explanation": "The dimension of a span equals the number of independent vectors; independence of two vectors gives dim = 2."
+          },
+          {
+            "id": "M4Q7H7",
+            "question": "If (a, b, c) and (d, e, f) are linearly dependent, the common dimension of T and S is:",
+            "options": [
+              "One line through origin",
+              "Two plane through origin",
+              "Three full 3D space",
+              "Zero just origin point"
+            ],
+            "correct_option": "One line through origin",
+            "explanation": "Dependence means one vector is a scalar multiple of the other, so their span is just a 1D line."
+          },
+          {
+            "id": "M4Q7H8",
+            "question": "For (a, b, c) = (1, 0, 0) and (d, e, f) = (2, 0, 0), the set T equals:",
+            "options": [
+              "The y-axis only",
+              "The xy-plane full",
+              "The full x-axis",
+              "The z-axis only"
+            ],
+            "correct_option": "The full x-axis",
+            "explanation": "Both vectors lie on the x-axis, are dependent, and span exactly the entire x-axis (1D)."
+          },
+          {
+            "id": "M4Q7H9",
+            "question": "For (a, b, c) = (1, 0, 0) and (d, e, f) = (0, 1, 0), the set T is the:",
+            "options": [
+              "Full 3D vector space",
+              "Entire xy-plane area",
+              "Standard z-axis only",
+              "Standard x-axis only"
+            ],
+            "correct_option": "Entire xy-plane area",
+            "explanation": "These two standard basis vectors are independent and span the 2D xy-plane inside ℝ³."
+          },
+          {
+            "id": "M4Q7H10",
+            "question": "The rank of a set of vectors is defined as the dimension of their:",
+            "options": [
+              "Image under A here",
+              "Sum with zero vector",
+              "Determinant form only",
+              "Linear span subspace"
+            ],
+            "correct_option": "Linear span subspace",
+            "explanation": "Rank of a vector set equals the number of linearly independent vectors, which is the dimension of their span."
+          }
+        ],
+        "real_life_application": [
+          {
+            "id": "M4Q7R1",
+            "question": "The range of any linear map is always a subspace, because the map is itself:",
+            "options": [
+              "Linear in nature",
+              "Strictly diagonal map",
+              "Always surjective map",
+              "Just a scalar field"
+            ],
+            "correct_option": "Linear in nature",
+            "explanation": "Linearity forces the image to be closed under addition and scalar multiplication, so the range is always a subspace."
+          },
+          {
+            "id": "M4Q7R2",
+            "question": "In quantum mechanics, the range of an observable equals the set of:",
+            "options": [
+              "Pure quantum states",
+              "Hamiltonian energies only",
+              "Measurable scalar values",
+              "Eigenvectors of operator"
+            ],
+            "correct_option": "Measurable scalar values",
+            "explanation": "The spectrum of a Hermitian operator is the range of measurable outcomes, all real scalars by the spectral theorem."
+          },
+          {
+            "id": "M4Q7R3",
+            "question": "In control theory, the reachable set is the range of which map?",
+            "options": [
+              "Identity map of system",
+              "Controllability map here",
+              "Zero map of systems",
+              "Projection map of system"
+            ],
+            "correct_option": "Controllability map here",
+            "explanation": "The reachable set of a control system is precisely the column space (range) of its controllability matrix."
+          },
+          {
+            "id": "M4Q7R4",
+            "question": "In signal processing, the output space of a linear system is the range of:",
+            "options": [
+              "The transpose of A",
+              "The kernel of A",
+              "Zero map of A",
+              "The system map A"
+            ],
+            "correct_option": "The system map A",
+            "explanation": "All possible outputs of a linear system form the range of its transfer / system map A acting on inputs."
+          },
+          {
+            "id": "M4Q7R5",
+            "question": "In computer graphics, the 2D image of a 3D scene is a 2D subspace living inside the:",
+            "options": [
+              "Full 3D screen",
+              "One 1D line only",
+              "Zero pixel set only",
+              "Empty 2D space"
+            ],
+            "correct_option": "Full 3D screen",
+            "explanation": "A perspective projection maps 3D world points into a 2D plane (subspace) of the 3D screen coordinate system."
+          }
+        ]
+      },
+      "real_life_application": [
+        {
+          "id": "M4Q7R1",
+          "question": "In quantum mechanics, the range of an observable equals the set of which physically meaningful numbers?",
+          "options": [
+            "Measurable scalars",
+            "Pure quantum states",
+            "Just Hamiltonian lumps",
+            "Eigenvector axes only"
+          ],
+          "correct_option": "Measurable scalars",
+          "explanation": "The spectrum of a Hermitian operator equals the set of possible measurement outcomes — real scalars in the range."
+        },
+        {
+          "id": "M4Q7R2",
+          "question": "In control theory, the reachable set of a linear time-invariant system is the range of which constructed matrix?",
+          "options": [
+            "Plain identity matrix",
+            "Strict zero matrix",
+            "Just projection map",
+            "Controllability matrix"
+          ],
+          "correct_option": "Controllability matrix",
+          "explanation": "The controllability matrix [B, AB, A²B, …] has its column space exactly equal to the reachable set of states."
+        },
+        {
+          "id": "M4Q7R3",
+          "question": "A linear signal-processing system A has output space equal to the range of A; because A is linear, this output space is always which kind of set?",
+          "options": [
+            "Subspace structure",
+            "Random point cloud",
+            "Discrete finite set",
+            "Bounded Euclidean ball"
+          ],
+          "correct_option": "Subspace structure",
+          "explanation": "Linearity forces the image to be closed under linear combinations, so the output space is itself a subspace."
+        },
+        {
+          "id": "M4Q7R4",
+          "question": "In computer graphics, a perspective projection sends 3D world points onto a 2D image plane; this image plane is a 2D subspace inside which surrounding space?",
+          "options": [
+            "Just one 1D line",
+            "Full 3D screen",
+            "Empty 2D space",
+            "Zero pixel set"
+          ],
+          "correct_option": "Full 3D screen",
+          "explanation": "The 2D rendered image sits inside the 3D screen coordinate frame as a 2D subspace; nearer pixels are still 3D observations."
+        },
+        {
+          "id": "M4Q7R5",
+          "question": "An economist constructs a linear model A mapping policy inputs to predicted outcomes; the set of achievable outcomes is the range of A, which is always which type of object?",
+          "options": [
+            "Convex polyhedron",
+            "Closed ball only",
+            "Linear subspace",
+            "Discrete point set"
+          ],
+          "correct_option": "Linear subspace",
+          "explanation": "Because A is linear, its achievable set is closed under linear combinations — a linear subspace, not a curved region."
+        }
+      ]
+    }
+  ]
+}

@@ -1,23 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 export default function Stage5Review({ onComplete, currentRung }) {
-  const [q, setQ] = useState(null);
-  
-  const [userR1, setUserR1] = useState('');
-  const [userR2, setUserR2] = useState('');
-  
-  const [feedback, setFeedback] = useState(null);
-
-  useEffect(() => {
-    // Generate a random question. Just hardcoding a few for simplicity here.
+  const [q] = useState(() => {
     const pool = [
       { equation: "x² - 3x - 10 = 0", root1: 5, root2: -2 },
       { equation: "x² + 5x + 6 = 0", root1: -2, root2: -3 },
       { equation: "x² - 9 = 0", root1: 3, root2: -3 },
       { equation: "x² - 8x + 15 = 0", root1: 5, root2: 3 }
     ];
-    setQ(pool[Math.floor(Math.random() * pool.length)]);
-  }, []);
+    return pool[Math.floor(Math.random() * pool.length)];
+  });
+
+  const [userR1, setUserR1] = useState('');
+  const [userR2, setUserR2] = useState('');
+  const [feedback, setFeedback] = useState(null);
 
   const handleSubmit = () => {
     const r1 = Number(userR1);

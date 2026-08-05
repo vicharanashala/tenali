@@ -27,6 +27,7 @@ export default function SimulConceptApp({ onBack, SimulQuizApp }) {
 
   useEffect(() => {
     fetchState();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [learnerId]);
 
   const fetchState = async () => {
@@ -84,7 +85,7 @@ export default function SimulConceptApp({ onBack, SimulQuizApp }) {
 
   // BKT mastery derived from stage progress (6 stages total: 0-5)
   const totalStages = 6;
-  const mastery = Math.min(1, (currentStage / totalStages) + 0.03);
+  const _mastery = Math.min(1, (currentStage / totalStages) + 0.03);
 
   return (
     <div className="quiz-layout simul-concept">

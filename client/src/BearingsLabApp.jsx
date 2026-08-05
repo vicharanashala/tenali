@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+// eslint-disable-next-line no-unused-vars -- motion is used in JSX via <motion.div>
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 
@@ -50,12 +51,12 @@ export default function BearingsLabApp({ onBack }) {
   const [heading, setHeading] = useState(0); // Current degree of ship/helm
   const [isSailing, setIsSailing] = useState(false);
   const [sailProgress, setSailProgress] = useState(0);
-  const [lives, setLives] = useState(3);
+  const [_lives, setLives] = useState(3);
   const [xp, setXp] = useState(0);
-  const [xpPopup, setXpPopup] = useState(false);
-  const [recentXp, setRecentXp] = useState(0);
+  const [_xpPopup, setXpPopup] = useState(false);
+  const [_recentXp, setRecentXp] = useState(0);
   const [ribbonPopup, setRibbonPopup] = useState(false);
-  const [hintsUsed, setHintsUsed] = useState(0);
+  const [_hintsUsed, setHintsUsed] = useState(0);
   
   // Active target parameters
   const [targetAngle, setTargetAngle] = useState(0);
@@ -166,13 +167,6 @@ export default function BearingsLabApp({ onBack }) {
 
   const activeMissions = getMissions();
 
-  // Reset/Initialize Level States
-  useEffect(() => {
-    if (phase === 'game') {
-      initMission(1);
-    }
-  }, [phase]);
-
   const initMission = (mId) => {
     const missionsList = getMissions();
     const current = missionsList[mId - 1];
@@ -197,6 +191,15 @@ export default function BearingsLabApp({ onBack }) {
       setTutorText(`Mission loaded: ${current.title}. Steer or input the correct bearing to proceed!`);
     }
   };
+
+  // Reset/Initialize Level States
+  useEffect(() => {
+    if (phase === 'game') {
+       
+      initMission(1);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase]);
 
   // Handle Steering Wheel Turn Math
   const handleHelmDrag = (e) => {

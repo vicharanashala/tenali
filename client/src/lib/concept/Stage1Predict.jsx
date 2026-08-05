@@ -4,7 +4,6 @@ import 'mafs/core.css';
 import 'mafs/font.css';
 
 export default function Stage1Predict({ onComplete }) {
-  const [prediction, setPrediction] = useState('');
   const [hasGivenUp, setHasGivenUp] = useState(false);
 
   // Cannonball equation: y = -x^2 + 2x + 8

@@ -1,0 +1,449 @@
+{
+  "module": 1,
+  "missionId": 1,
+  "title": "Piggy Bank Detectives",
+  "original_question": "Ram and Lakshman were two brothers. Ram's pocket money was twice as much as Lakshman's. They saved everything, weekly, as (R1,L1), (R2,L2), etc. How will the plotted points look?",
+  "core_concept": "Direct proportionality (R = 2L) produces a set of points lying on a straight line through the origin. This is the seed idea for 'linear' relationships and, later, for vector subspaces.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M1Q1E1",
+        "question": "If Lakshman saves ₹50 in week 1, how much does Ram save that week?",
+        "options": [
+          "₹25 ()",
+          "₹50",
+          "₹100",
+          "₹150"
+        ],
+        "correct_option": "₹100",
+        "explanation": "Step 1: The relation is R = 2L. Step 2: Substitute L = 50 → R = 2 × 50 = 100. This works because the ratio R/L is constant at 2 — every point (L, R) lies on the line y = 2x. That constant-ratio property is exactly what makes the relationship linear. In later missions we will see this line is actually a 1-dimensional subspace of R² — a vector space where every element is a scalar multiple of every other element."
+      },
+      {
+        "id": "M1Q1E2",
+        "question": "Which equation correctly relates Ram's (R) and Lakshman's (L) savings?",
+        "options": [
+          "R = L + 2",
+          "R = 2L",
+          "R = L / 2",
+          "R = L - 2"
+        ],
+        "correct_option": "R = 2L",
+        "explanation": "The problem states Ram’s pocket money is twice Lakshman’s. ‘Twice’ means multiply by 2 — not add 2 (common error) or divide by 2 (reversal error). In equation form: R = 2L. Translating word problems into equations is the first step in all of linear algebra. If you wrote R = L + 2 instead, you would have shifted from a direct proportionality (line through the origin) to an affine relationship (line offset from the origin) — a distinction explored in Missions 4 and 5."
+      },
+      {
+        "id": "M1Q1E3",
+        "question": "When you plot the weekly points (L, R) on a graph, they will lie:",
+        "options": [
+          "On a straight line",
+          "On a curve (parabola)",
+          "Scattered randomly",
+          "On a circle"
+        ],
+        "correct_option": "On a straight line",
+        "explanation": "Since R = 2L is a first-degree (linear) equation, every point satisfying it lies on a straight line. There is no squared term to bend it into a curve, and no fixed radius to make it a circle. The word ‘linear’ literally means the graph is a line. This is the seed idea for Mission 3, where we learn ALL equations of the form y = ax pass through the origin — a property that makes them true vector subspaces."
+      },
+      {
+        "id": "M1Q1E4",
+        "question": "Does this straight line pass through the origin (0,0)?",
+        "options": [
+          "Yes, because L=0 gives R=0",
+          "it misses the origin",
+          "Only in even weeks",
+          "Cant be determined"
+        ],
+        "correct_option": "Yes, because L=0 gives R=0",
+        "explanation": "Substitute L = 0: R = 2(0) = 0, so (0,0) satisfies the equation. This is not a coincidence — it reflects that a direct proportionality has no fixed starting offset. This will matter a lot in Mission 3 (lines through the origin are subspaces) and Mission 4 (lines NOT through the origin fail the subspace test). The physical meaning: before saving begins, both have zero — the origin is physically meaningful."
+      },
+      {
+        "id": "M1Q1E5",
+        "question": "If L is on the x-axis and R on the y-axis, what is the slope of the line R = 2L?",
+        "options": [
+          "1",
+          "2",
+          "0.5",
+          "-2"
+        ],
+        "correct_option": "2",
+        "explanation": "Writing R = 2L as y = mx with y = R and x = L, the coefficient of L is the slope m = 2. The slope literally encodes ‘Ram always has twice what Lakshman has.’ The trap answer 0.5 comes from confusing which variable is ‘per unit’ of the other. In Mission 5, we will see that this slope is the ‘a’ parameter in y = ax + b, and changing it rotates the line."
+      },
+      {
+        "id": "M1Q1E6",
+        "question": "If Lakshman's total savings after 4 weeks is ₹80, what is Ram's total savings?",
+        "options": [
+          "₹40 ()",
+          "₹80",
+          "₹160",
+          "₹200"
+        ],
+        "correct_option": "₹160",
+        "explanation": "Step 1: R = 2L still holds for cumulative totals because both totals scale the same way. Step 2: L = 80 → R = 2 × 80 = 160. This generalises: if f(x) = kx, then f(cx) = k(cx) = c · kx = c · f(x) — the function commutes with scalar multiplication. This property is called ‘homogeneity,’ one of the two defining properties of a linear map that we will study formally in Mission 12."
+      },
+      {
+        "id": "M1Q1E7",
+        "question": "Which of these (L, R) pairs could NOT appear on the graph, given R = 2L?",
+        "options": [
+          "(10, 20)",
+          "(20, 40)",
+          "(15, 20)",
+          "(5, 10)"
+        ],
+        "correct_option": "(15, 20)",
+        "explanation": "Check each: (10,20) ✓ since 2×10=20, (20,40) ✓, (5,10) ✓, but (15,20) fails since 2×15=30≠20. This pair breaks the R=2L rule. In linear algebra terms, (15,20) is not in the span of the direction vector (1,2) — it lives outside the 1-dimensional subspace defined by R = 2L."
+      },
+      {
+        "id": "M1Q1E8",
+        "question": "In this graph, which variable is naturally treated as the independent variable (x-axis)?",
+        "options": [
+          "R (Ram's savings) — does t match",
+          "L (Lakshman's savings)",
+          "Either, it's arbitrary by convention here",
+          "Neither — both are dependent"
+        ],
+        "correct_option": "L (Lakshman's savings)",
+        "explanation": "The problem defines R = 2L, so L is the input and R is the output — making L the natural x-axis variable. Mathematically the choice is a convention, but in linear algebra we always write transformations as y = Ax where x is the input. This convention will become essential in Mission 12 when we represent transformations as matrix-vector products."
+      },
+      {
+        "id": "M1Q1E9",
+        "question": "If both brothers save a fixed, equal amount every single week (not changing week to week), would the graph of (week number, cumulative savings) also be a line through the origin?",
+        "options": [
+          "Yes, since equal weekly addition gives constant slope",
+          "cumulative totals always curve upward",
+          "Only for Ram, t Lakshman",
+          "Cant say without more data"
+        ],
+        "correct_option": "Yes, since equal weekly addition gives constant slope",
+        "explanation": "If a fixed amount ‘a’ is saved each week, total after week n = a×n — again linear in n, and at week 0 total is 0, so it passes through the origin. This is the same R = kL pattern at a different scale: savings is directly proportional to the number of weeks. The general principle: any quantity that grows by a fixed amount per unit time produces a linear graph through the origin."
+      },
+      {
+        "id": "M1Q1E10",
+        "question": "What is the general form of any line that passes through the origin?",
+        "options": [
+          "y = mx + c (c ≠ 0)",
+          "y = mx",
+          "y = c",
+          "y = mx²"
+        ],
+        "correct_option": "y = mx",
+        "explanation": "y = mx always gives y = 0 when x = 0, so the origin is always on the line for any slope m. Adding a nonzero c would shift it off the origin (as in y = 2x + 1, explored in Mission 4). This is why the equation y = ax (no constant term) is special: it defines a subspace. The constant term ‘b’ in y = mx + b is exactly what distinguishes a linear subspace from an affine set."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M1Q1M1",
+        "question": "If in week 3 Ram has saved a cumulative ₹300 and R=2L holds throughout, what is Lakshman's cumulative savings in week 3?",
+        "options": [
+          "₹100",
+          "₹150",
+          "₹300",
+          "₹600"
+        ],
+        "correct_option": "₹150",
+        "explanation": "From R = 2L, divide both sides by 2: L = R/2. Substituting R = 300 gives L = 150. This is ‘running the equation backward’ — solving for the input given the output. In linear algebra, this is the inverse problem: if Ax = b, find x = A⁻¹b. We will formalise this in Mission 13 when we study matrix invertibility."
+      },
+      {
+        "id": "M1Q1M2",
+        "question": "Suppose instead the problem said Ram's pocket money was THRICE Lakshman's. The new relation is:",
+        "options": [
+          "R = 3L",
+          "R = L + 3",
+          "R = L/3",
+          "R = 2L + 1"
+        ],
+        "correct_option": "R = 3L",
+        "explanation": "'Thrice' means multiply by 3, same logic as 'twice' means multiply by 2. The new relation R = 3L still passes through the origin (substitute L = 0: R = 0), but with a steeper slope of 3. The line is still a 1D subspace — the slope changes but the subspace property (closure under addition and scalar multiplication) is preserved."
+      },
+      {
+        "id": "M1Q1M3",
+        "question": "In this context, what does the slope of the (L,R) line actually represent?",
+        "options": [
+          "The ratio of Ram's savings to Lakshman's savings",
+          "Their combined total savings",
+          "The difference between their savings",
+          "The week number — does t match"
+        ],
+        "correct_option": "The ratio of Ram's savings to Lakshman's savings",
+        "explanation": "Slope = rise/run = R/L. Since R/L is constant at 2 for every point, the slope literally encodes 'Ram always has twice what Lakshman has.' This is the ratio between them. More deeply: the slope is the coordinate of every vector on the line when expressed in the basis direction (1, 2). In Mission 11, we will learn that this direction vector (1, 2) spans the entire subspace."
+      },
+      {
+        "id": "M1Q1M4",
+        "question": "Because the ratio between the brothers' savings never changes week to week, the slope of the line:",
+        "options": [
+          "Changes every week",
+          "Stays constant",
+          "Becomes zero eventually",
+          "Becomes undefined"
+        ],
+        "correct_option": "Stays constant",
+        "explanation": "The slope is a property of the relationship R = 2L, not of any single week's data. As long as the underlying rule holds every week, every plotted point sits on the same fixed-slope line. This is a key insight: the equation defines a geometric object (a line) that contains ALL possible data points. In later missions, we call this the solution set or the span of a direction vector."
+      },
+      {
+        "id": "M1Q1M5",
+        "question": "If you swapped the axes — plotting L on the y-axis and R on the x-axis instead — what would the new equation be?",
+        "options": [
+          "L = 2R",
+          "L = R/2",
+          "L = R - 2",
+          "L = 2R + 1"
+        ],
+        "correct_option": "L = R/2",
+        "explanation": "Starting from R = 2L, divide both sides by 2: L = R/2. Swapping axes is equivalent to solving for the other variable — the slope becomes the reciprocal (0.5 instead of 2). This is the same operation as finding the inverse function, which we will study in Mission 7. The inverse of y = 2x is y = x/2 — reflected across y = x."
+      },
+      {
+        "id": "M1Q1M6",
+        "question": "For a line through the origin y = mx, if x doubles, what happens to y?",
+        "options": [
+          "Stays the same",
+          "Doubles",
+          "Halves",
+          "Becomes zero"
+        ],
+        "correct_option": "Doubles",
+        "explanation": "y = mx means y is directly proportional to x. If x → 2x, then y → m(2x) = 2(mx) = 2y. This 'doubling behavior' is the hallmark of direct proportionality. In linear algebra terms, this is the homogeneity property of linear maps: T(cv) = cT(v). This will be one of the two defining conditions for a linear transformation in Mission 12."
+      },
+      {
+        "id": "M1Q1M7",
+        "question": "Suppose each week the actual rupee amount saved varies (not fixed), but Ram always saves exactly twice whatever Lakshman saves that week. Do the cumulative totals (L, R) still satisfy R = 2L?",
+        "options": [
+          "Yes, because summing '2×(weekly amount)' over weeks gives 2×(sum of weekly amounts)",
+          "only single-week amounts satisfy it, t totals",
+          "Only true for week 1 — does t match",
+          "Cant be determined without exact amounts"
+        ],
+        "correct_option": "Yes, because summing '2×(weekly amount)' over weeks gives 2×(sum of weekly amounts)",
+        "explanation": "Each week: Ram-saving = 2×(that week's Lakshman-saving). Total R = Σ(2×Lᵢ) = 2×Σ(Lᵢ) = 2×Total L. The relation survives summation because multiplication distributes over addition. This is exactly the additivity property: T(v₁ + v₂) = T(v₁) + T(v₂). Together with homogeneity (from M1Q1M6), these two properties define a linear transformation."
+      },
+      {
+        "id": "M1Q1M8",
+        "question": "Given the data points (2,4), (3,6), (5,10) for (L,R), what equation do they satisfy?",
+        "options": [
+          "R = 2L",
+          "R = L + 2",
+          "R = 3L",
+          "R = L²"
+        ],
+        "correct_option": "R = 2L",
+        "explanation": "Check each pair: 2×2=4 ✓, 2×3=6 ✓, 2×5=10 ✓. All three are consistent only with R = 2L. This is essentially 'fitting a line' from observations — the same process used in regression and data science. If the points did not all lie on one line, no single linear equation would fit perfectly, which is when we use least-squares approximation."
+      },
+      {
+        "id": "M1Q1M9",
+        "question": "Conceptually, WHY must this particular line pass through the origin?",
+        "options": [
+          "Because before any saving starts, both have saved ₹0 — the point (0,0) is physically meaningful",
+          "All straight lines pass through the origin",
+          "Because the slope happens to be positive",
+          "There's real reason, it's a coincidence"
+        ],
+        "correct_option": "Because before any saving starts, both have saved ₹0 — the point (0,0) is physically meaningful",
+        "explanation": "At 'week zero' before they begin, both have zero savings: L = 0, R = 0. This isn't a coincidence of the algebra — it reflects that a direct proportionality has no fixed starting offset. Physical meaning: the origin (0,0) is the only point where both variables are simultaneously zero. This is why lines through the origin are subspaces (Mission 3): they contain the zero vector by construction."
+      },
+      {
+        "id": "M1Q1M10",
+        "question": "If instead the relationship were R = 2L + 5 (say, Ram gets a ₹5 bonus every week), would the line still pass through the origin?",
+        "options": [
+          "No, since at L=0, R=5, not 0",
+          "adding a constant doesn't move the line",
+          "Only if L is negative",
+          "Cant say)"
+        ],
+        "correct_option": "No, since at L=0, R=5, not 0",
+        "explanation": "Substituting L = 0 gives R = 2(0) + 5 = 5 ≠ 0, so (0,0) is not on the line. The +5 constant shifts the line upward and off the origin. This is exactly the situation explored in Mission 4 (y = 2x + 1) and Mission 5 (y = ax + b). Adding a constant term breaks the subspace property: the zero vector is no longer in the set. This is the fundamental difference between linear functions (y = mx) and affine functions (y = mx + b)."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M1Q1H1",
+        "question": "Suppose both brothers received a one-time ₹10 gift before the weekly saving pattern began, so the true relation is R = 2L + 10. Does (L,R) still form a straight line? Does it pass through the origin?",
+        "options": [
+          "Yes, it's still a line, but it does NOT pass through the origin",
+          "a line, and it still passes through the origin",
+          "it's longer a line at all",
+          "Cant be determined without more weeks of data"
+        ],
+        "correct_option": "Yes, it's still a line, but it does NOT pass through the origin",
+        "explanation": "R = 2L + 10 is still degree-1 in L, so it's a straight line (constant slope 2). But at L = 0, R = 10 ≠ 0, so it misses the origin. This is the key distinction between 'linear' in the everyday sense (degree 1) and 'linear' in the strict algebraic sense (must pass through origin). The +10 makes it an affine set, not a vector subspace. We will formalise this in Mission 4."
+      },
+      {
+        "id": "M1Q1H2",
+        "question": "Viewing (L,R) as a vector in ℝ², what kind of set do all vectors satisfying R=2L form, in linear algebra terms?",
+        "options": [
+          "A 1-dimensional subspace",
+          "A 2-dimensional subspace (all of ℝ²)",
+          "t a subspace at all",
+          "An affine set that misses the origin"
+        ],
+        "correct_option": "A 1-dimensional subspace",
+        "explanation": "The solution set of R = 2L is a line through the origin — it has one degree of freedom (pick any L, R is determined). It contains the zero vector, and is closed under addition and scalar multiplication (verified in H4 and H5). Therefore it is a 1-dimensional subspace of R². The dimension equals the number of free parameters — here, just one (L). This will be formalised in Mission 11."
+      },
+      {
+        "id": "M1Q1H3",
+        "question": "Why is {(L,R): R=2L} called a subspace, while {(L,R): R=2L+5} is NOT?",
+        "options": [
+          "A subspace must contain the origin (zero vector), and R=2L+5 fails this at L=0",
+          "Subspaces must always be curves",
+          "There is real difference between them",
+          "Subspaces must be finite sets of points"
+        ],
+        "correct_option": "A subspace must contain the origin (zero vector), and R=2L+5 fails this at L=0",
+        "explanation": "One strict requirement for a subspace is that it contains the zero vector (0,0). R = 2L contains it; R = 2L + 5 does not (at L = 0, R = 5). This single failed condition disqualifies the shifted line from being a subspace, even though both are straight lines. In Missions 3 and 4, we learn that lines through the origin are subspaces while lines not through the origin are affine subsets."
+      },
+      {
+        "id": "M1Q1H4",
+        "question": "If w₁=(L₁,R₁) and w₂=(L₂,R₂) both satisfy R=2L, does their sum w₁+w₂ = (L₁+L₂, R₁+R₂) also satisfy R=2L?",
+        "options": [
+          "Yes: since R₁=2L₁ and R₂=2L₂, adding gives R₁+R₂ = 2(L₁+L₂)",
+          "sums of valid points can leave the line",
+          "Only if L₁=L₂ — does t match",
+          "Cant say without actual numbers"
+        ],
+        "correct_option": "Yes: since R₁=2L₁ and R₂=2L₂, adding gives R₁+R₂ = 2(L₁+L₂)",
+        "explanation": "Add the two true equations: R₁ = 2L₁ and R₂ = 2L₂. Term by term: R₁ + R₂ = 2L₁ + 2L₂ = 2(L₁ + L₂). The sum vector also satisfies the rule — the set is closed under addition, one of the two defining properties of a subspace. This is the additivity property of linear maps: if T(v₁) and T(v₂) are in the image, so is T(v₁ + v₂)."
+      },
+      {
+        "id": "M1Q1H5",
+        "question": "Is the set {(L,R): R=2L} closed under scalar multiplication — i.e., if (L,R) is in the set, is α(L,R) also in the set for any real α?",
+        "options": [
+          "Yes: α(L,R) = (αL, αR), and αR = 2(αL) still holds",
+          "only positive α work",
+          "Only α=1 works — does t match",
+          "Cant say)"
+        ],
+        "correct_option": "Yes: α(L,R) = (αL, αR), and αR = 2(αL) still holds",
+        "explanation": "Given R = 2L, multiply both sides by α: αR = 2(αL). The scaled point (αL, αR) still satisfies the same rule. This holds for every real α — including negative and fractional values. This is the homogeneity property: T(cv) = cT(v). Combined with closure under addition (H4), these two properties are precisely the conditions that define a subspace."
+      },
+      {
+        "id": "M1Q1H6",
+        "question": "Given the closure results in H4 and H5, what can we conclude the set of points {(L,R): R=2L} formally IS?",
+        "options": [
+          "A vector subspace of ℝ²",
+          "Just a coincidentally nice-looking set",
+          "A group under multiplication only",
+          "A field)"
+        ],
+        "correct_option": "A vector subspace of ℝ²",
+        "explanation": "A subset of R² is a vector subspace exactly when it (1) contains the zero vector, (2) is closed under addition, and (3) is closed under scalar multiplication. We verified all three for R = 2L: zero vector at (0,0) ✓, addition in H4 ✓, scalar multiplication in H5 ✓. It formally qualifies as a 1-dimensional subspace — a line through the origin. This is the prototype for all subspaces we will encounter."
+      },
+      {
+        "id": "M1Q1H7",
+        "question": "Suppose a third brother saves an amount T = R + L always (alongside R=2L). Is the set of possible (L,R,T) points a 1-dimensional or 2-dimensional subspace of ℝ³?",
+        "options": [
+          "1-dimensional, since T=3L is also fully determined by L",
+          "2-dimensional, since T introduces a new free direction",
+          "3-dimensional, filling all of ℝ³",
+          "It isn't a subspace at all"
+        ],
+        "correct_option": "1-dimensional, since T=3L is also fully determined by L",
+        "explanation": "Since R = 2L and T = R + L = 3L, both coordinates are completely determined once L is chosen. Still one free parameter (L), so the set is a single line in R³ — still 1-dimensional, just embedded in a bigger space. This illustrates that dimension is about the number of independent directions, not the ambient space. A line in R³ has dimension 1, the same as a line in R²."
+      },
+      {
+        "id": "M1Q1H8",
+        "question": "For the general family R = kL (constant k > 0), as k increases, what happens to the line's angle with the L-axis?",
+        "options": [
+          "It increases, approaching (but never reaching) 90°",
+          "It decreases toward 0°",
+          "It stays exactly the same",
+          "It becomes negative — does t match"
+        ],
+        "correct_option": "It increases, approaching (but never reaching) 90°",
+        "explanation": "The angle θ satisfies tan(θ) = k (the slope). As k grows, tan(θ) grows, pushing θ closer to 90°. The slope and angle are related by the tangent function, which approaches infinity as the angle approaches 90°. This connects to the geometric interpretation: steeper lines have larger slopes, and the slope is the tangent of the angle with the x-axis."
+      },
+      {
+        "id": "M1Q1H9",
+        "question": "If instead R = -2L (say Ram spends money at twice the rate Lakshman saves), what would the line look like?",
+        "options": [
+          "A line through the origin with negative slope, passing through quadrants II and IV",
+          "A line through quadrants I and III only",
+          "valid line exists — does t match",
+          "A parabola opening downward"
+        ],
+        "correct_option": "A line through the origin with negative slope, passing through quadrants II and IV",
+        "explanation": "A negative slope means as L increases, R decreases (goes negative). The line still passes through the origin, but runs through quadrants II and IV instead of I and III. Physically, negative money doesn't make literal sense here, but mathematically the line y = -2x is still a valid 1D subspace — it satisfies all three subspace conditions (zero vector, closure under addition, closure under scalar multiplication)."
+      },
+      {
+        "id": "M1Q1H10",
+        "question": "Since actual savings can never be negative, what is the true geometric shape of the physically meaningful points, as opposed to the full algebraic line?",
+        "options": [
+          "A ray starting at the origin, extending only through the first quadrant",
+          "The complete infinite line in both directions",
+          "A single isolated point",
+          "A circle centered at the origin"
+        ],
+        "correct_option": "A ray starting at the origin, extending only through the first quadrant",
+        "explanation": "Algebraically R = 2L defines a full line in both directions. But since L ≥ 0 and R ≥ 0 for real savings, only the portion in the first quadrant (including the origin) is physically achievable — a ray. This distinction between the 'algebraic solution set' (the full line) and the 'physically valid subset' (a ray) is an important habit of mind. In optimisation and linear programming, constraints like non-negativity define the feasible region."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "id": "M1Q1R1",
+      "question": "A recipe needs flour and sugar in the ratio 2:1 (flour = 2 × sugar). If you plot cups-of-sugar (x) vs cups-of-flour (y) for different batch sizes, the graph is:",
+      "options": [
+        "A straight line through the origin",
+        "A curve",
+        "A circle",
+        "Randomly scattered points"
+      ],
+      "correct_option": "A straight line through the origin",
+      "explanation": "Flour = 2×Sugar is exactly the same structure as R=2L. Zero sugar means zero flour needed (origin included), and the ratio stays fixed for any batch size, so all (sugar, flour) points lie on one straight line through the origin — identical math, different story."
+    },
+    {
+      "id": "M1Q1R2",
+      "question": "A car travels at a constant 60 km/h. Plotting distance traveled (y) vs time elapsed (x) gives:",
+      "options": [
+        "A straight line through the origin with slope 60",
+        "A curve that flattens over time",
+        "A straight line that does T pass through the origin",
+        "A parabola"
+      ],
+      "correct_option": "A straight line through the origin with slope 60",
+      "explanation": "Distance = speed × time = 60×time is a direct proportionality: at time=0, distance=0 (origin included), and the constant speed acts exactly like our constant '2' in R=2L — here it's the slope representing km per hour instead of rupees per rupee."
+    },
+    {
+      "id": "M1Q1R3",
+      "question": "Simple interest is calculated as Interest = (rate × time) × Principal, with rate and time fixed. Plotting interest earned (y) vs principal invested (x) across different depositors gives:",
+      "options": [
+        "A straight line through the origin",
+        "An exponential curve",
+        "A straight line T through the origin",
+        "A circle"
+      ],
+      "correct_option": "A straight line through the origin",
+      "explanation": "With rate and time held constant, Interest is a fixed multiple of Principal — exactly the R=2L pattern, where 'rate×time' plays the role of the constant 2. A depositor with ₹0 principal earns ₹0 interest, so the origin is included."
+    },
+    {
+      "id": "M1Q1R4",
+      "question": "If 1 US Dollar always converts to a fixed X rupees, plotting Rupees (y) vs Dollars (x) for various transaction amounts gives:",
+      "options": [
+        "A straight line through the origin, slope = exchange rate",
+        "A random scatter of points",
+        "A step function",
+        "A hyperbola"
+      ],
+      "correct_option": "A straight line through the origin, slope = exchange rate",
+      "explanation": "Rupees = X × Dollars is direct proportionality with a fixed exchange rate X, mirroring R=2L where X plays the role of 2. Converting $0 always gives ₹0, keeping the origin on the line."
+    },
+    {
+      "id": "M1Q1R5",
+      "question": "A factory's raw material cost is directly proportional to units produced, with NO fixed setup cost. Plotting total material cost (y) vs units produced (x) gives:",
+      "options": [
+        "A straight line through the origin",
+        "A line with a positive y-intercept",
+        "A curve that bends upward sharply",
+        "Cant be determined"
+      ],
+      "correct_option": "A straight line through the origin",
+      "explanation": "'No fixed cost' means producing 0 units costs ₹0 — this is the origin condition. Since cost per unit is constant, total cost = (cost per unit) × units is a direct proportionality, exactly like R=2L."
+    },
+    {
+      "id": "M1Q1R6",
+      "question": "A taxi charges a FIXED base fare of ₹50 PLUS ₹10 per km. Plotting total fare (y) vs distance traveled (x), the graph is:",
+      "options": [
+        "A straight line that does NOT pass through the origin",
+        "A straight line through the origin",
+        "A curve",
+        "A circle"
+      ],
+      "correct_option": "A straight line that does NOT pass through the origin",
+      "explanation": "Fare = 50 + 10×distance. At distance=0, fare=50≠0 — the base fare acts just like the '+5' or '+10' constants explored earlier (R=2L+5, y=2x+1): it shifts the line up and off the origin, even though the line is still perfectly straight. This is a deliberate contrast case to sharpen the 'through the origin vs not' distinction."
+    }
+  ]
+}

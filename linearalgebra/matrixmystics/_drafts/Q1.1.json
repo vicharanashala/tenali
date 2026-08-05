@@ -1,0 +1,436 @@
+{
+  "module": 1,
+  "topicId": "Q1.1",
+  "title": "Ram and Lakshman's piggy-bank points",
+  "topic": "Reading ratios from a real-life story, plotting ordered pairs, recognising that a ratio between two numbers produces points on a straight line through the origin.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M1Q1E1",
+        "question": "Ram's money is twice Lakshman's. If Lakshman has ₹10, how much does Ram have?",
+        "options": [
+          "Twenty rupees amount",
+          "Same as Lakshman has",
+          "Five rupees amount",
+          "Thirty rupees amount"
+        ],
+        "correct_option": "Twenty rupees amount",
+        "explanation": "R = 2 × L = 2 × 10 = 20, so Ram has twenty rupees."
+      },
+      {
+        "id": "M1Q1E2",
+        "question": "Lakshman has ₹15 and Ram has ₹30. What is the ordered pair (R, L)?",
+        "options": [
+          "Fifteen and thirty pair",
+          "Thirty and fifteen pair",
+          "Thirty and thirty pair",
+          "Fifteen and fifteen pair"
+        ],
+        "correct_option": "Thirty and fifteen pair",
+        "explanation": "The first number is R = 30 and the second is L = 15, giving (30, 15)."
+      },
+      {
+        "id": "M1Q1E3",
+        "question": "If Lakshman has ₹0, what is the ordered pair (Ram, Lakshman)?",
+        "options": [
+          "Ten and zero pair",
+          "Five and zero pair",
+          "Zero and zero pair",
+          "Twenty and zero pair"
+        ],
+        "correct_option": "Zero and zero pair",
+        "explanation": "At L = 0, R = 2 × 0 = 0, so the pair is (0, 0)."
+      },
+      {
+        "id": "M1Q1E4",
+        "question": "On which axis of the (R, L) graph are Ram's savings plotted?",
+        "options": [
+          "The vertical R-axis",
+          "The horizontal L-axis",
+          "The horizontal R-axis",
+          "The vertical L-axis"
+        ],
+        "correct_option": "The horizontal R-axis",
+        "explanation": "R is the first coordinate, so it is plotted along the horizontal axis."
+      },
+      {
+        "id": "M1Q1E5",
+        "question": "How would you mark the point (4, 2) on a graph sheet?",
+        "options": [
+          "Right four up two",
+          "Right two up four",
+          "Left four up two",
+          "Left two up four"
+        ],
+        "correct_option": "Right four up two",
+        "explanation": "The first coordinate 4 moves right, the second 2 moves up."
+      },
+      {
+        "id": "M1Q1E6",
+        "question": "In the ordered pair (R, L), what does the first number represent?",
+        "options": [
+          "The total amount",
+          "Ram's amount saved",
+          "The ratio amount",
+          "Just equals Lakshman"
+        ],
+        "correct_option": "Ram's amount saved",
+        "explanation": "By convention R represents Ram's savings as the first coordinate."
+      },
+      {
+        "id": "M1Q1E7",
+        "question": "If the pair is (8, 4), what is the ratio R/L?",
+        "options": [
+          "Equals exactly one",
+          "Equals exactly half",
+          "Equals exactly two",
+          "Equals exactly four"
+        ],
+        "correct_option": "Equals exactly two",
+        "explanation": "R/L = 8/4 = 2, so the ratio is exactly two."
+      },
+      {
+        "id": "M1Q1E8",
+        "question": "Are the points (2, 1), (4, 2), (6, 3) on the same straight line?",
+        "options": [
+          "Yes, all collinear",
+          "No, scattered points",
+          "Yes, but curved",
+          "No, parallel lines"
+        ],
+        "correct_option": "Yes, all collinear",
+        "explanation": "Each point satisfies R = 2L, so they all lie on the same line through origin."
+      },
+      {
+        "id": "M1Q1E9",
+        "question": "Does the point (0, 0) satisfy the equation R = 2L?",
+        "options": [
+          "Yes, satisfies fully",
+          "It fails equation",
+          "It satisfies inversely",
+          "It is undefined here"
+        ],
+        "correct_option": "Yes, satisfies fully",
+        "explanation": "Substituting (0,0): 0 = 2(0), which is true, so origin lies on the line."
+      },
+      {
+        "id": "M1Q1E10",
+        "question": "Lakshman has ₹25. Using R = 2L, what is Ram's savings?",
+        "options": [
+          "Twenty rupees total",
+          "Fifty rupees total",
+          "Ten rupees total",
+          "Seventy rupees total"
+        ],
+        "correct_option": "Fifty rupees total",
+        "explanation": "R = 2 × 25 = 50 rupees."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M1Q1M1",
+        "question": "If (R, L) = (10, 5) and (R, L) = (14, 7) are two weekly points, what line passes through both?",
+        "options": [
+          "Curved line parabola",
+          "Straight line shifted",
+          "Straight line origin",
+          "Curved line circle"
+        ],
+        "correct_option": "Straight line origin",
+        "explanation": "Both points satisfy R = 2L, which is a straight line through the origin."
+      },
+      {
+        "id": "M1Q1M2",
+        "question": "For R = kL, what value of k forces all points onto the L-axis?",
+        "options": [
+          "The value unit one",
+          "The value double",
+          "The value four",
+          "The value zero"
+        ],
+        "correct_option": "The value zero",
+        "explanation": "If k = 0 then R = 0 for every L, so every point lies on the L-axis."
+      },
+      {
+        "id": "M1Q1M3",
+        "question": "Find two more points on the line joining (2, 1) and (6, 3).",
+        "options": [
+          "(8,4) and (10,5)",
+          "(3,2) and (5,4)",
+          "(4,2) and (12,6)",
+          "(8,3) and (10,5)"
+        ],
+        "correct_option": "(8,4) and (10,5)",
+        "explanation": "The line is R = 2L, so (8,4) and (10,5) both satisfy R = 2L."
+      },
+      {
+        "id": "M1Q1M4",
+        "question": "If Lakshman's savings increase by ₹1 each week, by how much do Ram's increase?",
+        "options": [
+          "By rupees one",
+          "By rupees two",
+          "By rupees three",
+          "By rupees five"
+        ],
+        "correct_option": "By rupees two",
+        "explanation": "R = 2L, so a unit rise in L produces a two-unit rise in R."
+      },
+      {
+        "id": "M1Q1M5",
+        "question": "Using x = R and y = L, write the line R = 2L in the form y = mx.",
+        "options": [
+          "Slope value two-one",
+          "Slope value unit one",
+          "Slope value one-half",
+          "Slope value double it"
+        ],
+        "correct_option": "Slope value one-half",
+        "explanation": "R = 2L means L = R/2, so y = (1/2)x with slope one-half."
+      },
+      {
+        "id": "M1Q1M6",
+        "question": "After 5 weeks Lakshman has ₹30 and Ram has ₹60. Is (60, 30) consistent with R = 2L?",
+        "options": [
+          "Yes, fully consistent",
+          "Yes, but borderline",
+          "No, violates ratio",
+          "No, undefined case"
+        ],
+        "correct_option": "Yes, fully consistent",
+        "explanation": "60 = 2 × 30, so the pair lies exactly on the line R = 2L."
+      },
+      {
+        "id": "M1Q1M7",
+        "question": "A new point (4, 4) is added. Does it lie on the line through (2, 1) and (6, 3)?",
+        "options": [
+          "No, point off-line",
+          "Yes, on same line",
+          "No, on axis only",
+          "Yes, on y-axis"
+        ],
+        "correct_option": "No, point off-line",
+        "explanation": "Line is R = 2L; (4,4) gives 4 ≠ 2 × 4, so it fails."
+      },
+      {
+        "id": "M1Q1M8",
+        "question": "If Ram saves half of Lakshman's amount, what equation links R and L?",
+        "options": [
+          "R equals twice L",
+          "R equals half L",
+          "R equals thrice L",
+          "R equals one L"
+        ],
+        "correct_option": "R equals half L",
+        "explanation": "Half of Lakshman means R = (1/2)L."
+      },
+      {
+        "id": "M1Q1M9",
+        "question": "On a graph of (R, L) with R = 3L, what is the slope of the line y = mx?",
+        "options": [
+          "Slope unit value one",
+          "Slope two whole value",
+          "Slope one-third value",
+          "Slope three whole value"
+        ],
+        "correct_option": "Slope one-third value",
+        "explanation": "R = 3L gives L = R/3, so y = (1/3)x and slope is one-third."
+      },
+      {
+        "id": "M1Q1M10",
+        "question": "For the line R = 2L drawn through the origin, what is the y-intercept?",
+        "options": [
+          "Two whole number",
+          "Unit value one",
+          "Origin zero value",
+          "Zero whole number"
+        ],
+        "correct_option": "Zero whole number",
+        "explanation": "The line passes through (0,0), so the y-intercept is zero."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M1Q1H1",
+        "question": "Three brothers save with ratios 2:1, 3:1, 1:2. How many distinct lines do their points form?",
+        "options": [
+          "Three distinct lines",
+          "One single line",
+          "Two distinct lines",
+          "Four distinct lines"
+        ],
+        "correct_option": "Three distinct lines",
+        "explanation": "Each ratio gives a unique slope through origin, so three distinct lines."
+      },
+      {
+        "id": "M1Q1H2",
+        "question": "If (R, L) satisfies R = 2L and their total after 10 weeks is ₹300, what is Ram's saving?",
+        "options": [
+          "Two hundred rupees",
+          "One hundred rupees",
+          "Three hundred rupees",
+          "Fifty rupees total"
+        ],
+        "correct_option": "Two hundred rupees",
+        "explanation": "R + L = 3L = 300, so L = 100 and R = 200."
+      },
+      {
+        "id": "M1Q1H3",
+        "question": "Which statement is true about every point (R, L) that satisfies R = 2L?",
+        "options": [
+          "Points form parabola",
+          "Points scattered random",
+          "All points collinear",
+          "Points form circle"
+        ],
+        "correct_option": "All points collinear",
+        "explanation": "Every (R, L) with R = 2L lies on the single line y = x/2 through origin."
+      },
+      {
+        "id": "M1Q1H4",
+        "question": "If Shyam's savings satisfy S = R + L with R = 2L, what equation links S and R?",
+        "options": [
+          "S equals half R",
+          "S equals 1/2 R",
+          "S equals 2 R",
+          "S equals 3/2 R"
+        ],
+        "correct_option": "S equals 3/2 R",
+        "explanation": "L = R/2, so S = R + R/2 = (3/2)R."
+      },
+      {
+        "id": "M1Q1H5",
+        "question": "The line R = 2L passes through which quadrants of the (R, L) plane?",
+        "options": [
+          "First and third quadrants",
+          "First and second quadrants",
+          "Second and fourth quadrants",
+          "Third and fourth quadrants"
+        ],
+        "correct_option": "First and third quadrants",
+        "explanation": "When L > 0, R > 0 (first quadrant); when L < 0, R < 0 (third quadrant)."
+      },
+      {
+        "id": "M1Q1H6",
+        "question": "If boys save at a fixed weekly rate instead of a fixed ratio, does the line still pass through origin?",
+        "options": [
+          "Yes, always origin",
+          "Yes, has intercept",
+          "No, always ratio",
+          "No, never shifts"
+        ],
+        "correct_option": "Yes, has intercept",
+        "explanation": "Fixed per-week rates with non-zero starting amounts give a line with non-zero intercept."
+      },
+      {
+        "id": "M1Q1H7",
+        "question": "Verify collinearity of (2, 1), (4, 2), (8, 4) using the slope formula.",
+        "options": [
+          "Same slope one-half",
+          "Different slope values",
+          "Different slope every",
+          "Same slope two-one"
+        ],
+        "correct_option": "Same slope one-half",
+        "explanation": "Between consecutive points slope = 1/2 in each case, proving collinearity."
+      },
+      {
+        "id": "M1Q1H8",
+        "question": "Ram has ₹20 and Lakshman has ₹10. After Ram gives ₹5 to Lakshman, what is the new ratio?",
+        "options": [
+          "Four-to-three new ratio",
+          "Five-to-four new ratio",
+          "Equal one-to-one ratio",
+          "Three-to-two new ratio"
+        ],
+        "correct_option": "Equal one-to-one ratio",
+        "explanation": "After transfer: R = 15, L = 15, so the ratio becomes 1:1."
+      },
+      {
+        "id": "M1Q1H9",
+        "question": "Which substitution shows that the line R = mL passes through the origin?",
+        "options": [
+          "Substitute zero for both",
+          "Substitute unit for both",
+          "Substitute two for both",
+          "Substitute m for both"
+        ],
+        "correct_option": "Substitute zero for both",
+        "explanation": "Put R = 0 and L = 0: 0 = m × 0 is true, so origin lies on the line."
+      },
+      {
+        "id": "M1Q1H10",
+        "question": "For what value of m does the line R = mL coincide with the L-axis?",
+        "options": [
+          "Unit value of m",
+          "Zero value of m",
+          "Defined value here",
+          "Double value of m"
+        ],
+        "correct_option": "Zero value of m",
+        "explanation": "R = 0 for all L only when m = 0, which is exactly the L-axis."
+      }
+    ],
+    "real_life_application": [
+      {
+        "id": "M1Q1R1",
+        "question": "A cricket team has batsmen and bowlers in ratio 3:1. For any total squad size, what line do the (B, b) points lie on?",
+        "options": [
+          "B equals half b",
+          "B equals two b",
+          "B equals three b",
+          "B equals four b"
+        ],
+        "correct_option": "B equals three b",
+        "explanation": "Ratio 3:1 means B = 3b, a straight line through origin with slope 3."
+      },
+      {
+        "id": "M1Q1R2",
+        "question": "A bakery sells items A and B in the ratio 2A:1B. For 50 total orders, what is the order split?",
+        "options": [
+          "30-item A, 20-item B",
+          "25-item A, 25-item B",
+          "40-item A, 10-item B",
+          "33-item A, 17-item B"
+        ],
+        "correct_option": "33-item A, 17-item B",
+        "explanation": "A = (2/3) × 50 ≈ 33 and B = (1/3) × 50 ≈ 17."
+      },
+      {
+        "id": "M1Q1R3",
+        "question": "Boys and girls are in ratio 2:1. For totals 30, 60, 90 students, what is the line of (boys, girls) points?",
+        "options": [
+          "Boys equals twice girls",
+          "Boys equals half girls",
+          "Boys equals thrice girls",
+          "Boys equals one girls"
+        ],
+        "correct_option": "Boys equals twice girls",
+        "explanation": "All points (20,10), (40,20), (60,30) satisfy boys = 2 × girls."
+      },
+      {
+        "id": "M1Q1R4",
+        "question": "A factory produces two bulb types in ratio 5:1. The daily line passes through origin; what is the slope?",
+        "options": [
+          "Slope one-fifth ratio",
+          "Slope five whole ratio",
+          "Slope one-half ratio",
+          "Slope five halves ratio"
+        ],
+        "correct_option": "Slope one-fifth ratio",
+        "explanation": "Ratio 5:1 means y = (1/5)x, so the slope is one-fifth."
+      },
+      {
+        "id": "M1Q1R5",
+        "question": "A town's adults and children are in ratio 4:1. With 5000 people, which line of ratio does the point lie on?",
+        "options": [
+          "Line A equals two",
+          "Line A equals four",
+          "Line A equals one",
+          "Line A equals five"
+        ],
+        "correct_option": "Line A equals four",
+        "explanation": "4000 adults and 1000 children satisfy A = 4C, so the point lies on that ratio line."
+      }
+    ]
+  }
+}

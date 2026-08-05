@@ -1,0 +1,473 @@
+{
+  "module": 3,
+  "missionId": 35,
+  "title": "General Collapse Formula",
+  "original_question": "Generalize: B = [[1,2],[2,4]] maps the line 2y + x = k to (k, 2k). The range of B is all points of the form t*(1,2) — a line through origin. Every point in the output space gets contributions only along direction (1,2). The perpendicular direction (2,-1) is the null space — all info along it is LOST.",
+  "core_concept": "For B = [[1,2],[2,4]], the null space direction (2,-1) is where information vanishes, and the range direction (1,2) is where output lives. The null space and range are perpendicular.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M3Q14E1",
+        "question": "What is B*(2,-1) for B = [[1,2],[2,4]]?",
+        "options": [
+          "(0,0)",
+          "(2,4)",
+          "(4,8)",
+          "(1,2)"
+        ],
+        "correct_option": "(0,0)",
+        "explanation": "Step 1: (1·2+2·(-1), 2·2+4·(-1)) = (2-2, 4-4) = (0,0). Step 2: (2,-1) is in the null space — B maps it to zero."
+      },
+      {
+        "id": "M3Q14E2",
+        "question": "What is the null space direction of B = [[1,2],[2,4]]?",
+        "options": [
+          "(2,-1)",
+          "(1,2) (x)",
+          "(2,4)",
+          "(1,1)"
+        ],
+        "correct_option": "(2,-1)",
+        "explanation": "Step 1: Solve B*(x,y) = (0,0): x+2y=0 → x=-2y. Step 2: Setting y=-1 gives x=2, so null space = t(2,-1)."
+      },
+      {
+        "id": "M3Q14E3",
+        "question": "What is the range direction of B = [[1,2],[2,4]]?",
+        "options": [
+          "(1,2)",
+          "(2,-1)",
+          "(2,4)",
+          "(1,1)"
+        ],
+        "correct_option": "(1,2)",
+        "explanation": "Step 1: B*(x,y) = (x+2y)(1,2). Step 2: The output is always a multiple of (1,2), so the range direction is (1,2)."
+      },
+      {
+        "id": "M3Q14E4",
+        "question": "Is (2,-1) perpendicular to (1,2)?",
+        "options": [
+          "Yes — (2,-1)·(1,2) = 2-2 = 0",
+          "— t here",
+          "Only approximately",
+          "Cant determine"
+        ],
+        "correct_option": "Yes — (2,-1)·(1,2) = 2-2 = 0",
+        "explanation": "Step 1: (2)(1)+(-1)(2) = 2-2 = 0. Step 2: The null space and range directions are perpendicular."
+      },
+      {
+        "id": "M3Q14E5",
+        "question": "What does B*(2,-1) = (0,0) tell us?",
+        "options": [
+          "The direction (2,-1) is in the null space — all info along it is lost",
+          "B is invertible — does t match",
+          "(2,-1) is in the range",
+          "B maps everything to zero"
+        ],
+        "correct_option": "The direction (2,-1) is in the null space — all info along it is lost",
+        "explanation": "Step 1: B annihilates (2,-1). Step 2: Any displacement along this direction produces zero output — the information is lost."
+      },
+      {
+        "id": "M3Q14E6",
+        "question": "What is the rank of B = [[1,2],[2,4]]?",
+        "options": [
+          "1",
+          "2",
+          "0",
+          "3"
+        ],
+        "correct_option": "1",
+        "explanation": "Step 1: The range is a line (1D). Step 2: Rank = dim(range) = 1."
+      },
+      {
+        "id": "M3Q14E7",
+        "question": "What is the nullity of B = [[1,2],[2,4]]?",
+        "options": [
+          "1",
+          "2",
+          "0",
+          "3"
+        ],
+        "correct_option": "1",
+        "explanation": "Step 1: For A=[[1,2],[2,4]], rank = 1 (only one independent row). Step 2: By rank-nullity: dim(null space) = n − rank = 2 − 1 = 1. Step 3: The null space is a 1-dimensional line through the origin."
+      },
+      {
+        "id": "M3Q14E8",
+        "question": "Does rank(1) + nullity(1) = 2 = dim(R²)?",
+        "options": [
+          "Yes — the Rank-Nullity Theorem holds",
+          "— t here",
+          "Only approximately — does t match",
+          "Only for special matrices"
+        ],
+        "correct_option": "Yes — the Rank-Nullity Theorem holds",
+        "explanation": "Step 1: rank = 1, nullity = 1. Step 2: 1+1 = 2 = n. The theorem checks out."
+      },
+      {
+        "id": "M3Q14E9",
+        "question": "What is the range of B expressed as a set?",
+        "options": [
+          "{t(1,2) | t ∈ R} — a line through the origin",
+          "All of R²)",
+          "A single point — does t match",
+          "A plane)"
+        ],
+        "correct_option": "{t(1,2) | t ∈ R} — a line through the origin",
+        "explanation": "Step 1: B*(x,y) = (x+2y)(1,2) = t(1,2) where t = x+2y. Step 2: The range is all scalar multiples of (1,2)."
+      },
+      {
+        "id": "M3Q14E10",
+        "question": "Why is (2,-1) called the null space direction?",
+        "options": [
+          "Because B maps it to the zero vector — the 'null' output",
+          "Because it has a negative component",
+          "Because it's the diagonal",
+          "Because it's the longest direction"
+        ],
+        "correct_option": "Because B maps it to the zero vector — the 'null' output",
+        "explanation": "Step 1: B*(2,-1) = (0,0) = null/zero vector. Step 2: The direction that maps to 'nothing' (zero) is the null space direction."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M3Q14M1",
+        "question": "Why does B lose information specifically along the direction (2,-1)?",
+        "options": [
+          "Because B*(2,-1) = (0,0), so any movement along this direction is invisible in the output",
+          "Because (2,-1) has a negative component",
+          "Because B can't handle negative numbers",
+          "Because the entries are positive"
+        ],
+        "correct_option": "Because B*(2,-1) = (0,0), so any movement along this direction is invisible in the output",
+        "explanation": "Step 1: Moving along (2,-1) produces zero change in the output. Step 2: B cannot distinguish between points that differ only in this direction."
+      },
+      {
+        "id": "M3Q14M2",
+        "question": "If the null space direction is (2,-1) and the range direction is (1,2), what is the geometric relationship?",
+        "options": [
+          "They are perpendicular — their dot product is 0",
+          "They are parallel — does t match",
+          "They are the same — does t match",
+          "They are at 45° — does t match"
+        ],
+        "correct_option": "They are perpendicular — their dot product is 0",
+        "explanation": "Step 1: (2,-1)·(1,2) = 2-2 = 0. Step 2: The null space and range are always perpendicular for any matrix."
+      },
+      {
+        "id": "M3Q14M3",
+        "question": "Any vector (x,y) can be decomposed into range and null space components. What is the range component of (3,1)?",
+        "options": [
+          "The projection of (3,1) onto (1,2)",
+          "(3,1) itself — does t match",
+          "(0,0))",
+          "(2,-1))"
+        ],
+        "correct_option": "The projection of (3,1) onto (1,2)",
+        "explanation": "Step 1: Projection = [(3,1)·(1,2)/(1,2)·(1,2)](1,2) = [5/5](1,2) = (1,2). Step 2: The range component of (3,1) is (1,2)."
+      },
+      {
+        "id": "M3Q14M4",
+        "question": "What is the null space component of (3,1)?",
+        "options": [
+          "(3,1) - (1,2) = (2,-1)",
+          "(3,1))",
+          "(1,2))",
+          "(0,0))"
+        ],
+        "correct_option": "(3,1) - (1,2) = (2,-1)",
+        "explanation": "Step 1: Null component = total - range component = (3,1) - (1,2) = (2,-1). Step 2: B maps this null component to zero."
+      },
+      {
+        "id": "M3Q14M5",
+        "question": "If we decompose (3,1) = (1,2) + (2,-1), what does B do to each part?",
+        "options": [
+          "B*(1,2) = (5,10) and B*(2,-1) = (0,0), so B*(3,1) = (5,10)",
+          "B maps both to zero — does t match",
+          "B maps both to (3,1) — does t match",
+          "B swaps them — does t match"
+        ],
+        "correct_option": "B*(1,2) = (5,10) and B*(2,-1) = (0,0), so B*(3,1) = (5,10)",
+        "explanation": "Step 1: B*(1,2) = (1+4, 2+8) = (5,10). Step 2: B*(2,-1) = (0,0). Sum: B*(3,1) = (5,10)+(0,0) = (5,10)."
+      },
+      {
+        "id": "M3Q14M6",
+        "question": "What does the decomposition (x,y) = range component + null space component tell us about B's action?",
+        "options": [
+          "B keeps the range component and destroys the null space component",
+          "B keeps both — does t match",
+          "B destroys both — does t match",
+          "B swaps them — does t match"
+        ],
+        "correct_option": "B keeps the range component and destroys the null space component",
+        "explanation": "Step 1: B preserves the range direction output. Step 2: B annihilates the null space direction, losing that information."
+      },
+      {
+        "id": "M3Q14M7",
+        "question": "For the general formula: line 2y+x=k maps to (k, 2k). What is k geometrically?",
+        "options": [
+          "The value of x+2y on the line — it measures 'how far' the line is from the origin along the range direction",
+          "The slope of the line",
+          "The length of the line",
+          "The angle of the line"
+        ],
+        "correct_option": "The value of x+2y on the line — it measures 'how far' the line is from the origin along the range direction",
+        "explanation": "Step 1: k = x+2y is the projection of any point on the line onto the direction (1,2). Step 2: It measures the signed distance of the line from the origin in the range direction."
+      },
+      {
+        "id": "M3Q14M8",
+        "question": "Is the null space of B a subspace of R²?",
+        "options": [
+          "Yes — it's a line through the origin (1D subspace)",
+          "— t here",
+          "Only for special matrices",
+          "Subspaces can't be null spaces"
+        ],
+        "correct_option": "Yes — it's a line through the origin (1D subspace)",
+        "explanation": "Step 1: The null space t(2,-1) contains (0,0) and is closed under addition and scalar multiplication. Step 2: These are the three subspace conditions."
+      },
+      {
+        "id": "M3Q14M9",
+        "question": "What is the geometric meaning of the range direction (1,2)?",
+        "options": [
+          "It's the only direction in which B produces non-zero output",
+          "It's the direction B cant see",
+          "It's the direction of the null space",
+          "It's the direction B maps to zero"
+        ],
+        "correct_option": "It's the only direction in which B produces non-zero output",
+        "explanation": "Step 1: B outputs only along (1,2). Step 2: All other directions (perpendicular to (1,2)) are mapped to zero — B only 'sees' the (1,2) direction."
+      },
+      {
+        "id": "M3Q14M10",
+        "question": "If B had rank 2 instead of 1, what would the null space be?",
+        "options": [
+          "Only the zero vector (nullity = 0)",
+          "A line)",
+          "A plane)",
+          "All of R²)"
+        ],
+        "correct_option": "Only the zero vector (nullity = 0)",
+        "explanation": "Step 1: Rank 2 means full rank for a 2×2 matrix. Step 2: nullity = 2-2 = 0, so the null space is trivial — only the zero vector."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M3Q14H1",
+        "question": "Prove that the null space and range of any matrix are perpendicular.",
+        "options": [
+          "If n is in null(A) and r is in range(A) = C(A), then r = Ax for some x, so n·r = n·(Ax) = (Aᵀn)·x. Since n ⊥ rows of A, n·r = 0",
+          "They're always parallel",
+          "Only for square matrices",
+          "Only for singular matrices"
+        ],
+        "correct_option": "If n is in null(A) and r is in range(A) = C(A), then r = Ax for some x, so n·r = n·(Ax) = (Aᵀn)·x. Since n ⊥ rows of A, n·r = 0",
+        "explanation": "Step 1: Range(A) = column space of A. Step 2: For n in null(Aᵀ), n is perpendicular to all columns of A, hence to all column combinations (the range)."
+      },
+      {
+        "id": "M3Q14H2",
+        "question": "Why does B map the line 2y+x=k to a SINGLE point rather than another line?",
+        "options": [
+          "Because the line is parallel to the null space, so all points differ by null space vectors that B maps to zero",
+          "Because B is invertible",
+          "Because the line passes through the origin",
+          "By coincidence — does t match"
+        ],
+        "correct_option": "Because the line is parallel to the null space, so all points differ by null space vectors that B maps to zero",
+        "explanation": "Step 1: The line direction (2,-1) equals the null space direction. Step 2: Points on the line differ by multiples of (2,-1), which B maps to (0,0) — so all points give the same output."
+      },
+      {
+        "id": "M3Q14H3",
+        "question": "For B = [[1,2],[2,4]], decompose (5,3) into range and null space components.",
+        "options": [
+          "Range: (13/5, 26/5), Null: (12/5, -11/5)",
+          "(5,3) is entirely in the range",
+          "(5,3) is entirely in the null space",
+          "Cant decompose — does t match"
+        ],
+        "correct_option": "Range: (13/5, 26/5), Null: (12/5, -11/5)",
+        "explanation": "Step 1: Project (5,3) onto (1,2): [(5,3)·(1,2)/5](1,2) = [11/5](1,2) = (11/5, 22/5). Step 2: Null component: (5,3)-(11/5, 22/5) = (14/5, -7/5) = (7/5)(2,-1)."
+      },
+      {
+        "id": "M3Q14H4",
+        "question": "What is the general formula for the projection of a vector v onto the range direction (1,2)?",
+        "options": [
+          "proj = [v·(1,2)/(1,2)·(1,2)](1,2) = [v·(1,2)/5](1,2)",
+          "proj = v·(1,2) — does t match",
+          "proj = (1,2) — does t match",
+          "proj = v/(1,2) — does t match"
+        ],
+        "correct_option": "proj = [v·(1,2)/(1,2)·(1,2)](1,2) = [v·(1,2)/5](1,2)",
+        "explanation": "Step 1: The projection formula is proj_u(v) = [(v·u)/(u·u)]u. Step 2: With u=(1,2), u·u = 5, giving proj = [v·(1,2)/5](1,2)."
+      },
+      {
+        "id": "M3Q14H5",
+        "question": "Can you write any vector (a,b) as a combination of the range direction (1,2) and null space direction (2,-1)?",
+        "options": [
+          "Yes — (1,2) and (2,-1) are independent and span R²",
+          "— they don't span R²",
+          "Only for special (a,b)",
+          "Only for positive components"
+        ],
+        "correct_option": "Yes — (1,2) and (2,-1) are independent and span R²",
+        "explanation": "Step 1: (1,2) and (2,-1) are not scalar multiples — they're independent. Step 2: Two independent vectors in R² form a basis, so any vector can be expressed as their combination."
+      },
+      {
+        "id": "M3Q14H6",
+        "question": "If B has rank 1, nullity 1 in R², what is the 'general collapse formula'?",
+        "options": [
+          "Line 2y+x=k maps to (k, 2k) — each k gives a distinct output on the range line",
+          "All lines map to the origin",
+          "Lines map to lines — does t match",
+          "thing collapses — does t match"
+        ],
+        "correct_option": "Line 2y+x=k maps to (k, 2k) — each k gives a distinct output on the range line",
+        "explanation": "Step 1: The preimage of output t(1,2) is the line x+2y=t. Step 2: Each distinct t (or k) gives a distinct output point on the range."
+      },
+      {
+        "id": "M3Q14H7",
+        "question": "Why is it important that the null space and range directions form a basis for R²?",
+        "options": [
+          "Because it means every vector can be decomposed into a part B keeps and a part B destroys",
+          "Because B is invertible",
+          "Because B is the identity",
+          "Because det=0 — does t match"
+        ],
+        "correct_option": "Because it means every vector can be decomposed into a part B keeps and a part B destroys",
+        "explanation": "Step 1: The range and null space directions span R². Step 2: Any input can be split: range component (preserved by B) + null space component (destroyed by B)."
+      },
+      {
+        "id": "M3Q14H8",
+        "question": "If we change B to [[1,2],[2,5]], what happens to the null space?",
+        "options": [
+          "The null space becomes trivial (only zero vector) since det=1≠0",
+          "The null space stays the same",
+          "The null space gets larger",
+          "The null space becomes 2D"
+        ],
+        "correct_option": "The null space becomes trivial (only zero vector) since det=1≠0",
+        "explanation": "Step 1: det([[1,2],[2,5]]) = 5-4 = 1 ≠ 0. Step 2: Non-zero determinant means B is invertible, null space = {0}, no information is lost."
+      },
+      {
+        "id": "M3Q14H9",
+        "question": "What is the deep reason the null space is perpendicular to the range?",
+        "options": [
+          "The null space consists of inputs that produce zero output, which must be perpendicular to the output directions",
+          "By coincidence — does t match",
+          "Only for 2×2 matrices",
+          "Because the matrix is square"
+        ],
+        "correct_option": "The null space consists of inputs that produce zero output, which must be perpendicular to the output directions",
+        "explanation": "Step 1: The range is spanned by the columns of B. Step 2: Null space vectors are perpendicular to all columns (since Bn=0 means each row·n=0), hence perpendicular to the range."
+      },
+      {
+        "id": "M3Q14H10",
+        "question": "For a rank-1 matrix in R², what is the complete geometric picture?",
+        "options": [
+          "The plane collapses onto a line, with each preimage line (parallel to null space) collapsing to a point on the range",
+          "thing changes — does t match",
+          "The plane expands — does t match",
+          "The origin moves — does t match"
+        ],
+        "correct_option": "The plane collapses onto a line, with each preimage line (parallel to null space) collapsing to a point on the range",
+        "explanation": "Step 1: B maps 2D → 1D. Step 2: The plane is compressed onto the range line, with parallel preimage lines (each a null space coset) collapsing to distinct output points."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "emoji": "📷",
+      "title": "Data Compression",
+      "type": "mcq",
+      "concept": "PCA keeps range, discards null space",
+      "story": "PCA (Principal Component Analysis) keeps the range directions — where data varies most — and discards the null space directions where data barely changes. This is like keeping the most informative features while throwing away noise.",
+      "question": "In PCA data compression, what do the range directions of the transformation represent?",
+      "options": [
+        "High-variance, high-information directions",
+        "Low-variance ise",
+        "Random directions",
+        "The data mean"
+      ],
+      "correct_option": "High-variance, high-information directions",
+      "explanation": "Step 1: PCA identifies directions of maximum variance (range) and minimum variance (null space). Step 2: The range directions carry the most information and are preserved."
+    },
+    {
+      "emoji": "🏗️",
+      "title": "Mechanical Engineering",
+      "type": "mcq",
+      "concept": "Range = deformable modes, null space = rigid body modes",
+      "story": "When analysing a structure, the range of the stiffness matrix represents deformable modes — ways the structure can bend. The null space represents rigid body modes — ways it can move without deforming.",
+      "question": "In structural analysis, what do the null space modes of the stiffness matrix represent?",
+      "options": [
+        "Rigid body motions that require no energy",
+        "Maximum deformation",
+        "Critical loads",
+        "Failure modes"
+      ],
+      "correct_option": "Rigid body motions that require no energy",
+      "explanation": "Step 1: The stiffness matrix maps displacements to forces. Step 2: Null space displacements produce zero force — the structure moves freely without deforming."
+    },
+    {
+      "emoji": "📈",
+      "title": "Economics",
+      "type": "mcq",
+      "concept": "Range = achievable outputs, null space = canceling flows",
+      "story": "In an economic input-output model, the range of the production matrix represents achievable outputs. The null space represents self-canceling flows — internal transactions that balance to zero net output.",
+      "question": "In an economic model, what do the self-canceling flows in the null space represent?",
+      "options": [
+        "Internal transactions with zero net effect",
+        "The most productive industries",
+        "The total GDP",
+        "Export revenues"
+      ],
+      "correct_option": "Internal transactions with zero net effect",
+      "explanation": "Step 1: Null space flows satisfy Ax=0. Step 2: These are internal cycles that don't change overall output — economically irrelevant but mathematically present."
+    },
+    {
+      "emoji": "🎵",
+      "title": "Audio Engineering",
+      "type": "mcq",
+      "concept": "Range = signal, null space = noise",
+      "story": "In audio processing, the useful signal lives in the range of the filtering matrix, while noise lives in the null space. The filter preserves the range and suppresses the null space, separating signal from noise.",
+      "question": "In audio filtering, what does the range of the filtering matrix represent?",
+      "options": [
+        "The preserved audio signal",
+        "The removed ise",
+        "The volume level",
+        "The sample rate"
+      ],
+      "correct_option": "The preserved audio signal",
+      "explanation": "Step 1: The range contains the output that the filter produces. Step 2: This is the clean, desired signal — the noise (null space) has been removed."
+    },
+    {
+      "emoji": "🤖",
+      "title": "Neural Networks",
+      "type": "mcq",
+      "concept": "Range = learned features, null space = unused capacity",
+      "story": "In a neural network layer, the range of the weight matrix represents the features the layer can express. The null space represents input patterns the layer cannot distinguish — they all produce the same output.",
+      "question": "In a neural network, what do null space input patterns represent?",
+      "options": [
+        "Inputs that the layer cannot distinguish — they produce the same output",
+        "The most important inputs",
+        "The training data",
+        "The learning rate"
+      ],
+      "correct_option": "Inputs that the layer cannot distinguish — they produce the same output",
+      "explanation": "Step 1: Null space inputs satisfy Wx=0. Step 2: These inputs produce zero output — the layer is 'blind' to them, unable to distinguish between different null space inputs."
+    },
+    {
+      "emoji": "🌐",
+      "title": "Network Routing",
+      "type": "mcq",
+      "concept": "Range = reachable destinations, null space = redundant paths",
+      "story": "In a communication network, the range of the routing matrix represents destinations that can be reached. The null space represents redundant path combinations — sets of paths that cancel each other out.",
+      "question": "In network routing, what do null space path combinations represent?",
+      "options": [
+        "Redundant paths that cancel to zero net flow",
+        "The fastest routes",
+        "The most popular destinations",
+        "The cheapest paths"
+      ],
+      "correct_option": "Redundant paths that cancel to zero net flow",
+      "explanation": "Step 1: Null space paths satisfy Ax=0. Step 2: These are path combinations with zero net flow — redundant routing that doesn't deliver any data."
+    }
+  ]
+}

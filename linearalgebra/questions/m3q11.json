@@ -1,0 +1,473 @@
+{
+  "module": 3,
+  "missionId": 32,
+  "title": "Check Orthogonality",
+  "original_question": "Verify using GeoGebra that every vector in R (Row Space) is perpendicular to every vector in N (Null Space) for A = [[1,4,7],[2,5,8],[3,6,9]]. Take r1=(1,4,7), r2=(2,5,8), n=(1,-2,1). Compute dot products and see!",
+  "core_concept": "The Fundamental Theorem of Linear Algebra states that the row space and null space are perpendicular: every row vector has dot product 0 with every null space vector.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M3Q11E1",
+        "question": "What is (1,4,7)·(1,-2,1)?",
+        "options": [
+          "0",
+          "2",
+          "-2",
+          "6"
+        ],
+        "correct_option": "0",
+        "explanation": "Step 1: (1)(1) + (4)(-2) + (7)(1) = 1-8+7 = 0. Step 2: The dot product is 0, confirming perpendicularity."
+      },
+      {
+        "id": "M3Q11E2",
+        "question": "What is (2,5,8)·(1,-2,1)?",
+        "options": [
+          "0",
+          "3",
+          "-3",
+          "5"
+        ],
+        "correct_option": "0",
+        "explanation": "Step 1: (2)(1) + (5)(-2) + (8)(1) = 2-10+8 = 0. Step 2: Also 0 — confirming the second row is perpendicular too."
+      },
+      {
+        "id": "M3Q11E3",
+        "question": "What is (3,6,9)·(1,-2,1)?",
+        "options": [
+          "0",
+          "4",
+          "-4",
+          "6"
+        ],
+        "correct_option": "0",
+        "explanation": "Step 1: (3)(1) + (6)(-2) + (9)(1) = 3-12+9 = 0. Step 2: Even the redundant row3 is perpendicular — as expected."
+      },
+      {
+        "id": "M3Q11E4",
+        "question": "Since all three rows have dot product 0 with (1,-2,1), what can we conclude?",
+        "options": [
+          "The row space is perpendicular to the null space",
+          "The rows are parallel",
+          "The matrix is invertible",
+          "The null space is zero"
+        ],
+        "correct_option": "The row space is perpendicular to the null space",
+        "explanation": "Step 1: Every row is perpendicular to the null space direction. Step 2: By linearity, every row space vector is also perpendicular."
+      },
+      {
+        "id": "M3Q11E5",
+        "question": "Is (3,6,9)·(1,-2,1) = 0 because Row3 is redundant?",
+        "options": [
+          "Yes — Row3 = 2×Row2 - Row1, so it inherits perpendicularity from Rows 1 and 2",
+          "— it's independent",
+          "By coincidence — does t match",
+          "Because Row3 is special"
+        ],
+        "correct_option": "Yes — Row3 = 2×Row2 - Row1, so it inherits perpendicularity from Rows 1 and 2",
+        "explanation": "Step 1: Row3·n = (2×Row2 - Row1)·n = 2(Row2·n) - Row1·n = 2(0) - 0 = 0. Step 2: Redundant rows automatically satisfy the perpendicularity if the independent rows do."
+      },
+      {
+        "id": "M3Q11E6",
+        "question": "The Fundamental Theorem says the row space and null space are:",
+        "options": [
+          "Perpendicular (orthogonal) to each other",
+          "Parallel)",
+          "Identical)",
+          "Opposite)"
+        ],
+        "correct_option": "Perpendicular (orthogonal) to each other",
+        "explanation": "Step 1: The theorem states R(A) ⊥ N(A). Step 2: We've verified this with dot products."
+      },
+      {
+        "id": "M3Q11E7",
+        "question": "Does every vector in the row space have dot product 0 with (1,-2,1)?",
+        "options": [
+          "Yes — by linearity, if basis vectors are perpendicular, all combinations are too",
+          "Only the basis vectors",
+          "Only some of them — does t match",
+          "— t here"
+        ],
+        "correct_option": "Yes — by linearity, if basis vectors are perpendicular, all combinations are too",
+        "explanation": "Step 1: Any row space vector is v = α(1,4,7) + β(2,5,8). Step 2: v·(1,-2,1) = α(0) + β(0) = 0."
+      },
+      {
+        "id": "M3Q11E8",
+        "question": "Is (1,-2,1) perpendicular to the plane spanned by (1,4,7) and (2,5,8)?",
+        "options": [
+          "Yes — it's perpendicular to both spanning vectors, hence the entire plane",
+          "— t here",
+          "Only to one vector — does t match",
+          "Only approximately — does t match"
+        ],
+        "correct_option": "Yes — it's perpendicular to both spanning vectors, hence the entire plane",
+        "explanation": "Step 1: (1,-2,1)·(1,4,7) = 0 and (1,-2,1)·(2,5,8) = 0. Step 2: Being perpendicular to both spanning vectors means it's perpendicular to the entire plane."
+      },
+      {
+        "id": "M3Q11E9",
+        "question": "What does the dot product of 0 tell us geometrically?",
+        "options": [
+          "The vectors are perpendicular (90 degrees apart)",
+          "The vectors are parallel",
+          "The vectors are equal",
+          "The vectors have the same length"
+        ],
+        "correct_option": "The vectors are perpendicular (90 degrees apart)",
+        "explanation": "Step 1: A dot product of 0 means cos(θ) = 0. Step 2: This implies θ = 90°, so the vectors are perpendicular."
+      },
+      {
+        "id": "M3Q11E10",
+        "question": "Can we conclude the row space is perpendicular to the null space just by checking the basis vectors?",
+        "options": [
+          "Yes — perpendicularity of basis vectors extends to all linear combinations",
+          "— must check every vector",
+          "Only for special matrices",
+          "Only in R²)"
+        ],
+        "correct_option": "Yes — perpendicularity of basis vectors extends to all linear combinations",
+        "explanation": "Step 1: If n is perpendicular to r₁ and r₂, then n·(αr₁+βr₂) = α(n·r₁)+β(n·r₂) = 0. Step 2: So checking basis vectors is sufficient."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M3Q11M1",
+        "question": "Why is checking just the basis vectors sufficient to confirm row space ⊥ null space?",
+        "options": [
+          "Because any row space vector is a combination of basis vectors, and dot product distributes over addition",
+          "Because basis vectors are special",
+          "Because there are only two basis vectors",
+          "Because the null space is 1D"
+        ],
+        "correct_option": "Because any row space vector is a combination of basis vectors, and dot product distributes over addition",
+        "explanation": "Step 1: Any row space vector v = αr₁ + βr₂. Step 2: v·n = α(r₁·n) + β(r₂·n) = α·0 + β·0 = 0. Linearity makes it sufficient to check basis vectors."
+      },
+      {
+        "id": "M3Q11M2",
+        "question": "If (1,-2,1) is perpendicular to the row space plane, what is the angle between (1,-2,1) and any vector in the row space?",
+        "options": [
+          "90 degrees",
+          "0 degrees",
+          "45 degrees",
+          "180 degrees"
+        ],
+        "correct_option": "90 degrees",
+        "explanation": "Step 1: Perpendicularity means the angle is exactly 90°. Step 2: This holds for every vector in the row space, not just the basis."
+      },
+      {
+        "id": "M3Q11M3",
+        "question": "Does the Fundamental Theorem work for ALL matrices, or just special ones?",
+        "options": [
+          "All matrices — it's a universal property of row space and null space",
+          "Only for square matrices",
+          "Only for singular matrices",
+          "Only for invertible matrices"
+        ],
+        "correct_option": "All matrices — it's a universal property of row space and null space",
+        "explanation": "Step 1: The theorem states R(A) ⊥ N(A) for any m×n matrix A. Step 2: It doesn't require square, singular, or any special structure."
+      },
+      {
+        "id": "M3Q11M4",
+        "question": "If r is a row of A and n is in the null space, why is r·n = 0?",
+        "options": [
+          "Because An=0 means every row·n = 0 — that's exactly what An=0 says",
+          "Because r and n have the same length",
+          "Because they're both in R³",
+          "By definition of matrix multiplication"
+        ],
+        "correct_option": "Because An=0 means every row·n = 0 — that's exactly what An=0 says",
+        "explanation": "Step 1: An = 0 means the matrix-vector product gives the zero vector. Step 2: Each component of the result is a row·n, so each must be 0."
+      },
+      {
+        "id": "M3Q11M5",
+        "question": "What would happen if we checked (1,4,7)·(1,-2,1) and got a non-zero result?",
+        "options": [
+          "It would contradict the Fundamental Theorem — something would be wrong",
+          "thing special — does t match",
+          "The matrix would be invertible",
+          "The null space would be empty"
+        ],
+        "correct_option": "It would contradict the Fundamental Theorem — something would be wrong",
+        "explanation": "Step 1: The Fundamental Theorem guarantees the dot product is 0. Step 2: A non-zero result would mean either (1,-2,1) isn't in the null space or there's a computational error."
+      },
+      {
+        "id": "M3Q11M6",
+        "question": "Can the row space and null space overlap (share non-zero vectors)?",
+        "options": [
+          "No — they are perpendicular, so only the zero vector is in both",
+          "always — does t match",
+          "Only for singular matrices",
+          "Only in R²)"
+        ],
+        "correct_option": "No — they are perpendicular, so only the zero vector is in both",
+        "explanation": "Step 1: If v is in both, v·v = 0 (perpendicular to itself). Step 2: v·v = ||v||² = 0 implies v = 0."
+      },
+      {
+        "id": "M3Q11M7",
+        "question": "Does the fact that row space ⊥ null space imply that the row space and null space together span all of R³?",
+        "options": [
+          "Yes — they are complementary subspaces with dimensions summing to 3",
+          "— they might t span everything",
+          "Only for square matrices",
+          "Only if rank = n/2 — does t match"
+        ],
+        "correct_option": "Yes — they are complementary subspaces with dimensions summing to 3",
+        "explanation": "Step 1: dim(R) + dim(N) = 2 + 1 = 3 = dim(R³). Step 2: Perpendicular complements that together account for all dimensions span the whole space."
+      },
+      {
+        "id": "M3Q11M8",
+        "question": "Is the vector (3,6,9) perpendicular to the null space direction (1,-2,1)?",
+        "options": [
+          "Yes — 3-12+9=0",
+          "— t here",
+          "Only approximately",
+          "Cant determine"
+        ],
+        "correct_option": "Yes — 3-12+9=0",
+        "explanation": "Step 1: (3,6,9)·(1,-2,1) = 3-12+9 = 0. Step 2: Even though Row3 is redundant, it still satisfies the perpendicularity condition."
+      },
+      {
+        "id": "M3Q11M9",
+        "question": "What is the geometric relationship between the null space line and the row space plane?",
+        "options": [
+          "The line is perpendicular to the plane",
+          "The line is parallel to the plane",
+          "The line lies in the plane",
+          "relationship — does t match"
+        ],
+        "correct_option": "The line is perpendicular to the plane",
+        "explanation": "Step 1: The null space direction (1,-2,1) is perpendicular to every vector in the row space plane. Step 2: A line perpendicular to a plane is called the normal to that plane."
+      },
+      {
+        "id": "M3Q11M10",
+        "question": "Does checking (1,4,7)·(1,-2,1)=0 and (2,5,8)·(1,-2,1)=0 prove that EVERY row space vector is perpendicular to (1,-2,1)?",
+        "options": [
+          "Yes — because every row space vector is a combination of these two basis vectors",
+          "— only proves for these two specific vectors",
+          "Only for integer combinations",
+          "Only in 3D)"
+        ],
+        "correct_option": "Yes — because every row space vector is a combination of these two basis vectors",
+        "explanation": "Step 1: Any row space vector v = α(1,4,7)+β(2,5,8). Step 2: v·(1,-2,1) = α(0)+β(0) = 0. Checking basis vectors is sufficient."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M3Q11H1",
+        "question": "Prove formally that if r is any row of A and n is in null(A), then r·n = 0.",
+        "options": [
+          "An = 0 means the i-th component of the result is rᵢ·n = 0 for each row i",
+          "This is an axiom, t provable",
+          "Only true for square matrices",
+          "Only true for singular matrices"
+        ],
+        "correct_option": "An = 0 means the i-th component of the result is rᵢ·n = 0 for each row i",
+        "explanation": "Step 1: (An)ᵢ = Σⱼ aᵢⱼnⱼ = rᵢ·n. Step 2: Since An = 0, each component is 0, so rᵢ·n = 0 for all rows i."
+      },
+      {
+        "id": "M3Q11H2",
+        "question": "Extend the proof: why is EVERY row space vector perpendicular to EVERY null space vector?",
+        "options": [
+          "If v = Σcᵢrᵢ and An=0, then v·n = Σcᵢ(rᵢ·n) = Σcᵢ·0 = 0",
+          "Only basis vectors need checking",
+          "This doesn't extend — does t match",
+          "Only in special cases"
+        ],
+        "correct_option": "If v = Σcᵢrᵢ and An=0, then v·n = Σcᵢ(rᵢ·n) = Σcᵢ·0 = 0",
+        "explanation": "Step 1: Any row space vector is a combination of rows. Step 2: By linearity of dot product, v·n = Σcᵢ(rᵢ·n) = 0."
+      },
+      {
+        "id": "M3Q11H3",
+        "question": "If A is a 5×3 matrix with rank 3, does the Fundamental Theorem still guarantee R(A) ⊥ N(A)?",
+        "options": [
+          "Yes — it holds for ALL matrices regardless of shape or rank",
+          "— only for square matrices",
+          "Only for rank = n — does t match",
+          "Only for singular matrices"
+        ],
+        "correct_option": "Yes — it holds for ALL matrices regardless of shape or rank",
+        "explanation": "Step 1: The Fundamental Theorem is universal. Step 2: For any m×n matrix, R(A) ⊥ N(A) in Rⁿ, and C(A) ⊥ N(Aᵀ) in Rᵐ."
+      },
+      {
+        "id": "M3Q11H4",
+        "question": "For A = [[1,4,7],[2,5,8],[3,6,9]], what is the angle between (1,4,7) and (1,-2,1)?",
+        "options": [
+          "90° — they are perpendicular",
+          "0° — t here",
+          "45° — t here",
+          "60° — t here"
+        ],
+        "correct_option": "90° — they are perpendicular",
+        "explanation": "Step 1: cos(θ) = (1,4,7)·(1,-2,1)/(||(1,4,7)||·||(1,-2,1)||) = 0/(√66·√6). Step 2: cos(θ) = 0, so θ = 90°."
+      },
+      {
+        "id": "M3Q11H5",
+        "question": "If we didn't know the null space direction, could we find it by finding the vector perpendicular to the row space plane?",
+        "options": [
+          "Yes — the null space direction is the normal to the row space plane",
+          "— they're unrelated",
+          "Only approximately — does t match",
+          "Only in R²)"
+        ],
+        "correct_option": "Yes — the null space direction is the normal to the row space plane",
+        "explanation": "Step 1: The null space is perpendicular to the row space. Step 2: The direction perpendicular to a plane (the normal) is unique up to scalar multiples."
+      },
+      {
+        "id": "M3Q11H6",
+        "question": "Why is the orthogonality R(A) ⊥ N(A) so important for solving Ax = b?",
+        "options": [
+          "It allows decomposition of any b into row space and null space components, enabling solution analysis",
+          "It makes the matrix invertible",
+          "It simplifies computation",
+          "It's just a mathematical curiosity"
+        ],
+        "correct_option": "It allows decomposition of any b into row space and null space components, enabling solution analysis",
+        "explanation": "Step 1: Any b can be decomposed as b = b_R + b_N. Step 2: The solution exists iff b_N = 0, and the general solution is x₀ + null space vectors."
+      },
+      {
+        "id": "M3Q11H7",
+        "question": "Can the row space and null space of a matrix both be 1-dimensional?",
+        "options": [
+          "Yes — for a 2×2 matrix with rank 1",
+          "— they must have different dimensions",
+          "Only in R³)",
+          "Only for singular matrices"
+        ],
+        "correct_option": "Yes — for a 2×2 matrix with rank 1",
+        "explanation": "Step 1: For a 2×2 matrix with rank 1: row space is 1D, nullity = 2-1 = 1, so null space is also 1D. Step 2: Two perpendicular lines in R²."
+      },
+      {
+        "id": "M3Q11H8",
+        "question": "Is the zero vector the only vector that is in both the row space and null space?",
+        "options": [
+          "Yes — if v is in both, v·v=0, so v=0",
+          "— many vectors can be in both",
+          "Only for square matrices",
+          "Only if rank = n — does t match"
+        ],
+        "correct_option": "Yes — if v is in both, v·v=0, so v=0",
+        "explanation": "Step 1: If v ∈ R(A) and v ∈ N(A), then v is perpendicular to all of R(A), including itself. Step 2: v·v = ||v||² = 0 implies v = 0."
+      },
+      {
+        "id": "M3Q11H9",
+        "question": "For a 3×3 matrix with rank 3 (invertible), what is the null space?",
+        "options": [
+          "Only the zero vector {0} — trivial null space",
+          "A line)",
+          "A plane)",
+          "All of R³)"
+        ],
+        "correct_option": "Only the zero vector {0} — trivial null space",
+        "explanation": "Step 1: rank = 3, so nullity = 3-3 = 0. Step 2: The null space is {0} — only the zero vector. The Fundamental Theorem still holds (R(A) = R³, N(A) = {0})."
+      },
+      {
+        "id": "M3Q11H10",
+        "question": "What is the deep geometric meaning of R(A) ⊥ N(A)?",
+        "options": [
+          "Every direction that A can 'see' (row space) is perpendicular to every direction that A 'misses' (null space)",
+          "Rows are always perpendicular to columns",
+          "The matrix must be symmetric",
+          "The null space is always zero"
+        ],
+        "correct_option": "Every direction that A can 'see' (row space) is perpendicular to every direction that A 'misses' (null space)",
+        "explanation": "Step 1: The row space contains directions A responds to; the null space contains directions A ignores. Step 2: These two sets of directions are always perpendicular — the directions A sees and the directions A misses are orthogonal."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "emoji": "🖥️",
+      "title": "Computer Graphics",
+      "type": "mcq",
+      "concept": "Light and shadow separation via orthogonality",
+      "story": "In 3D rendering, light and shadow are separated using orthogonal bases. Light directions live in the row space, while shadow directions live in the null space. Because these are perpendicular, lighting and shadowing can be computed independently.",
+      "question": "In computer graphics rendering, what does orthogonality between subspaces enable?",
+      "options": [
+        "Independent computation of lighting and shadowing",
+        "Faster rendering",
+        "Better textures",
+        "Smoother animations"
+      ],
+      "correct_option": "Independent computation of lighting and shadowing",
+      "explanation": "Step 1: Row space ⊥ null space means effects in one don't interfere with the other. Step 2: Lighting (row space) and shadowing (null space) can be calculated separately without interaction."
+    },
+    {
+      "emoji": "📱",
+      "title": "Signal Processing",
+      "type": "mcq",
+      "concept": "OFDM uses orthogonal channels",
+      "story": "Orthogonal Frequency Division Multiplexing (OFDM) splits data across many frequency channels that are mathematically orthogonal. Because the channels are perpendicular, signals never interfere.",
+      "question": "Why are orthogonal frequency channels important in WiFi and 5G?",
+      "options": [
+        "They prevent interference between channels",
+        "They increase data speed",
+        "They reduce hardware cost",
+        "They extend signal range"
+      ],
+      "correct_option": "They prevent interference between channels",
+      "explanation": "Step 1: Orthogonal channels have dot product 0. Step 2: This perpendicularity ensures signals on different channels don't overlap or interfere."
+    },
+    {
+      "emoji": "🤖",
+      "title": "AI Embeddings",
+      "type": "mcq",
+      "concept": "Perpendicular vectors represent unrelated concepts",
+      "story": "Modern AI represents words and concepts as high-dimensional vectors. Unrelated concepts have nearly perpendicular vectors, while related concepts have similar vectors. This orthogonality distinguishes related from unrelated information.",
+      "question": "In AI word embeddings, what does perpendicularity between concept vectors indicate?",
+      "options": [
+        "The concepts are unrelated",
+        "The concepts are synyms",
+        "The concepts have the same length",
+        "The concepts start with the same letter"
+      ],
+      "correct_option": "The concepts are unrelated",
+      "explanation": "Step 1: Perpendicular vectors have dot product near zero. Step 2: In embeddings, this means low semantic similarity — the concepts are unrelated."
+    },
+    {
+      "emoji": "🎵",
+      "title": "Music Production",
+      "type": "mcq",
+      "concept": "Separating instruments via orthogonal projections",
+      "story": "In music production, different instruments can be separated by projecting the mixed audio onto orthogonal subspaces. Each instrument's signal lives in a different subspace, and their perpendicularity allows clean separation.",
+      "question": "How does orthogonality help separate different instruments in a music recording?",
+      "options": [
+        "Each instrument lives in a perpendicular subspace, enabling clean separation",
+        "It makes the music louder",
+        "It adds reverb",
+        "It changes the key"
+      ],
+      "correct_option": "Each instrument lives in a perpendicular subspace, enabling clean separation",
+      "explanation": "Step 1: Different instruments have signals in different subspaces. Step 2: Their perpendicularity means projecting onto one subspace isolates that instrument without contamination from others."
+    },
+    {
+      "emoji": "🔐",
+      "title": "Cryptography",
+      "type": "mcq",
+      "concept": "Orthogonal bases in encryption",
+      "story": "Some encryption schemes use orthogonal bases to encode messages. The message lives in the row space, and the key determines the null space. Without knowing the key, an attacker can't distinguish signal from noise.",
+      "question": "In orthogonal-basis encryption, what does the null space represent?",
+      "options": [
+        "The noise space that masks the message",
+        "The message itself",
+        "The encryption key",
+        "The decoded output"
+      ],
+      "correct_option": "The noise space that masks the message",
+      "explanation": "Step 1: The message is in the row space. Step 2: The null space contains directions that look like random noise to an attacker — they can't distinguish these from the actual message."
+    },
+    {
+      "emoji": "📊",
+      "title": "Statistics",
+      "type": "mcq",
+      "concept": "Orthogonal residuals in regression",
+      "story": "In linear regression, the residuals (errors) are perpendicular to the row space of the design matrix. This orthogonality ensures the best fit — no other line would produce smaller errors.",
+      "question": "In linear regression, why must the residuals be perpendicular to the column space of the design matrix?",
+      "options": [
+        "Perpendicularity ensures the smallest possible errors (best fit)",
+        "It makes the computation faster",
+        "It's required for the data to be valid",
+        "It prevents overfitting"
+      ],
+      "correct_option": "Perpendicularity ensures the smallest possible errors (best fit)",
+      "explanation": "Step 1: The least squares solution minimizes ||b-Ax||². Step 2: The minimum occurs when the error b-Ax is perpendicular to the column space — this is the geometric condition for best fit."
+    }
+  ]
+}

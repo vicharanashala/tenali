@@ -3,12 +3,12 @@ import { Mafs, Coordinates, Plot, Theme, Point } from 'mafs';
 
 export default function Stage3Guided({ onComplete }) {
   const [discriminant, setDiscriminant] = useState(16);
-  const [prediction, setPrediction] = useState('');
+  const [prediction, _setPrediction] = useState('');
 
   // We are graphing y = x^2 - D/4
   const eq = (x) => x * x - (discriminant / 4);
 
-  const handleSubmit = () => {
+  const _handleSubmit = () => {
     if (prediction.trim().length < 5) return;
     onComplete({ prediction, discriminant_experiment: true });
   };

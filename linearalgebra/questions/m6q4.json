@@ -1,0 +1,457 @@
+{
+  "module": 6,
+  "missionId": 54,
+  "title": "Power Method",
+  "original_question": "To compute PageRank, use the Power Method: start with any vector v₀, repeatedly multiply by the transition matrix M. After enough iterations, v converges to the dominant eigenvector (PageRank). For M = column-stochastic matrix of 4 pages, start with v=(0.25,0.25,0.25,0.25) and multiply by M repeatedly until stable.",
+  "core_concept": "The Power Method computes the dominant eigenvector of a matrix by repeatedly multiplying by the matrix. Starting from any initial vector, the iterations converge to the eigenvector with the largest eigenvalue — used by Google to compute PageRank without explicitly solving the eigenvector equation.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M6Q4E1",
+        "question": "What does the Power Method compute?",
+        "options": [
+          "The determinant of a matrix",
+          "The dominant eigenvector (eigenvector with the largest eigenvalue)",
+          "The inverse of a matrix",
+          "The trace of a matrix"
+        ],
+        "correct_option": "The dominant eigenvector (eigenvector with the largest eigenvalue)",
+        "explanation": "Step 1: The Power Method iterates v_{k+1} = Mv_k starting from any initial vector v₀, repeatedly applying the matrix transformation. Step 2: After many iterations, v_k converges to the eigenvector corresponding to the largest eigenvalue (the dominant eigenvector), because the dominant eigenvalue's component grows fastest relative to all others with each multiplication. Step 3: This dominant eigenvector captures the most 'important' direction in the matrix — for PageRank, it is the steady-state importance distribution that tells you which web pages are most central."
+      },
+      {
+        "id": "M6Q4E2",
+        "question": "In the Power Method, what is the update rule at each iteration?",
+        "options": [
+          "v_{k+1} = v_k + M",
+          "v_{k+1} = M × v_k",
+          "v_{k+1} = M - v_k",
+          "v_{k+1} = v_k / M"
+        ],
+        "correct_option": "v_{k+1} = M × v_k",
+        "explanation": "Step 1: At each iteration, multiply the current vector by the matrix M: v_{k+1} = Mv_k. Step 2: This is a linear transformation that maps the current distribution over pages to the next distribution — one step of the random walk. Step 3: Repeated multiplication amplifies the component of v in the dominant eigenvector direction while suppressing other components, leading to convergence to the steady-state distribution (PageRank) as the sub-dominant components decay geometrically."
+      },
+      {
+        "id": "M6Q4E3",
+        "question": "Starting with v₀ = (0.25, 0.25, 0.25, 0.25) for the 4-page web graph, what is the initial assumption about page importance?",
+        "options": [
+          "Page A is the most important",
+          "All four pages are equally important (uniform distribution)",
+          "Page D is the most important",
+          "pages are important"
+        ],
+        "correct_option": "All four pages are equally important (uniform distribution)",
+        "explanation": "Step 1: v₀ = (0.25, 0.25, 0.25, 0.25) gives each page equal weight — this is the uniform distribution, the maximally uninformative starting point. Step 2: It represents the assumption that all pages are equally important before any link structure information is incorporated. Step 3: The Power Method will refine this uniform guess based on the link structure, iteratively transferring rank from pages to the pages they link to, eventually converging to the true PageRank distribution that reflects the actual importance hierarchy encoded in the web graph."
+      },
+      {
+        "id": "M6Q4E4",
+        "question": "After one iteration of the Power Method on the 4-page web graph (A→B, A→C, B→C, C→A, D→C), which page gets the highest score?",
+        "options": [
+          "Page A",
+          "Page B",
+          "Page C",
+          "Page D"
+        ],
+        "correct_option": "Page C",
+        "explanation": "Step 1: v₁ = Mv₀. C receives links from A (0.5×0.25 = 0.125), B (1×0.25 = 0.25), and D (1×0.25 = 0.25), totaling 0.625. Step 2: C's score of 0.625 is the highest because it has the most incoming links (from A, B, and D simultaneously). Step 3: The Power Method immediately reveals C's structural importance after just one iteration — the link structure funnels rank toward C from multiple sources, and the eigenvector computation will amplify this advantage in subsequent iterations until convergence."
+      },
+      {
+        "id": "M6Q4E5",
+        "question": "Why does the Power Method work — why does repeated multiplication by M eventually give the dominant eigenvector?",
+        "options": [
+          "Because M is always symmetric",
+          "Because the dominant eigenvalue's contribution grows faster than all others with each multiplication, eventually dominating the vector",
+          "Because the vector gets shorter with each multiplication",
+          "Because the matrix converges to the identity"
+        ],
+        "correct_option": "Because the dominant eigenvalue's contribution grows faster than all others with each multiplication, eventually dominating the vector",
+        "explanation": "Step 1: Any vector can be decomposed in the eigenbasis: v₀ = c₁u₁ + c₂u₂ + ... + cₙuₙ, where uᵢ are eigenvectors with eigenvalues λᵢ. Step 2: After k multiplications: Mᵏv₀ = c₁λ₁ᵏu₁ + c₂λ₂ᵏu₂ + ... — each component is scaled by its eigenvalue raised to the k-th power. Step 3: If |λ₁| > |λ₂| ≥ ..., the first term grows fastest relative to the others, so v_k ≈ c₁λ₁ᵏu₁ → u₁ (the dominant eigenvector) — this geometric amplification of the dominant direction is why the Power Method converges."
+      },
+      {
+        "id": "M6Q4E6",
+        "question": "For the web graph transition matrix, what is the dominant eigenvalue?",
+        "options": [
+          "0",
+          "0.85",
+          "1",
+          "4"
+        ],
+        "correct_option": "1",
+        "explanation": "Step 1: For any column-stochastic matrix, the largest eigenvalue is always exactly 1 — this is guaranteed by the Perron-Frobenius theorem for non-negative matrices. Step 2: The corresponding eigenvector is the steady-state distribution: Mv = v means the distribution doesn't change after one more step of the random walk. Step 3: The Power Method converges to this eigenvector with eigenvalue 1, which is the PageRank vector — the unique distribution where the probability of being on each page is proportional to its importance in the link structure."
+      },
+      {
+        "id": "M6Q4E7",
+        "question": "What happens to the vector v_k after each Power Method iteration if M is column-stochastic?",
+        "options": [
+          "The vector entries become negative",
+          "The vector remains non-negative and its entries still sum to 1 (if we normalize)",
+          "The vector grows without bound",
+          "The vector becomes the zero vector"
+        ],
+        "correct_option": "The vector remains non-negative and its entries still sum to 1 (if we normalize)",
+        "explanation": "Step 1: If v_k has non-negative entries and M is non-negative (column-stochastic), then Mv_k has non-negative entries (sum of non-negative products is non-negative) — the non-negativity is preserved. Step 2: If entries of v_k sum to 1, and columns of M sum to 1, then entries of Mv_k also sum to 1 (the matrix preserves the probability simplex). Step 3: The iteration stays in the probability simplex — a valid probability distribution at every step — which is why the Power Method naturally produces PageRank scores that are interpretable as probabilities without requiring explicit normalization."
+      },
+      {
+        "id": "M6Q4E8",
+        "question": "If you start the Power Method with v₀ = (1, 0, 0, 0) (all weight on page A), will you still converge to the same PageRank vector?",
+        "options": [
+          "different starting points give different answers",
+          "Yes, as long as v₀ has a non-zero component in the dominant eigenvector direction",
+          "Only if v₀ is the uniform vector",
+          "Only if v₀ sums to 1 — does t match"
+        ],
+        "correct_option": "Yes, as long as v₀ has a non-zero component in the dominant eigenvector direction",
+        "explanation": "Step 1: The Power Method converges to the dominant eigenvector regardless of starting point — the only failure case is if v₀ is exactly orthogonal to the dominant eigenvector (probability 0 for a random start, and impossible for a non-negative starting vector with a positive dominant eigenvector). Step 2: v₀ = (1,0,0,0) has a component in every eigenvector direction, so convergence is guaranteed — though the number of iterations may differ from starting with the uniform vector. Step 3: This independence from initial conditions is a consequence of the Perron-Frobenius theorem: for a positive matrix, the dominant eigenvector is unique and the power method converges from any non-zero starting point."
+      },
+      {
+        "id": "M6Q4E9",
+        "question": "What does it mean for the Power Method to 'converge' in the context of PageRank?",
+        "options": [
+          "The vector v_k stops changing at all — all entries become exactly equal to the previous iteration",
+          "The vector v_k approaches a fixed vector where further multiplications produce negligible changes",
+          "The vector v_k starts oscillating between two values",
+          "The vector v_k grows to infinity"
+        ],
+        "correct_option": "The vector v_k approaches a fixed vector where further multiplications produce negligible changes",
+        "explanation": "Step 1: Convergence means ‖v_{k+1} − v_k‖ → 0 as k → ∞ — the vector approaches a fixed point where Mv* = v* (the eigenvector equation). Step 2: The vector approaches the steady-state eigenvector — each iteration changes it less and less as the sub-dominant components decay. Step 3: In practice, convergence is declared when the change falls below a tolerance (e.g., 10⁻⁶), typically after 50–100 iterations for the damped Google matrix (convergence rate ≈ 0.85 per iteration, so 0.85¹⁰⁰ ≈ 3×10⁻⁷)."
+      },
+      {
+        "id": "M6Q4E10",
+        "question": "Why is normalization (rescaling the vector to sum to 1) often performed after each Power Method iteration?",
+        "options": [
+          "It is required for the mathematics to work",
+          "It prevents the vector from growing or shrinking exponentially and keeps entries interpretable as probabilities",
+          "It speeds up convergence by a factor of 2",
+          "It changes the final answer to be more accurate"
+        ],
+        "correct_option": "It prevents the vector from growing or shrinking exponentially and keeps entries interpretable as probabilities",
+        "explanation": "Step 1: Each multiplication by M can change the magnitude of v — for a stochastic matrix with eigenvalue 1, the magnitude stays roughly constant, but numerical errors can cause drift over many iterations. Step 2: Normalizing to sum-to-1 keeps entries as valid probabilities and prevents numerical overflow or underflow. Step 3: Without normalization, after 100+ iterations, accumulated floating-point errors could make the entries very large or very small, losing the probability interpretation — normalization ensures the vector remains in the probability simplex at every step."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M6Q4M1",
+        "question": "For the column-stochastic web graph matrix M = [[0,0,1,0],[0.5,0,0,0],[0.5,1,0,1],[0,0,0,0]] and v₀ = (0.25,0.25,0.25,0.25), what is v₁ = Mv₀?",
+        "options": [
+          "(0.25, 0.125, 0.625, 0)",
+          "(0.25, 0.25, 0.5, 0)",
+          "(0, 0.25, 0.75, 0)",
+          "(0.125, 0.125, 0.75, 0)"
+        ],
+        "correct_option": "(0.25, 0.125, 0.625, 0)",
+        "explanation": "Step 1: v₁ = Mv₀. Row 1 (A): 0×0.25 + 0×0.25 + 1×0.25 + 0×0.25 = 0.25 (A receives from C). Step 2: Row 2 (B): 0.5×0.25 = 0.125 (B receives from A). Row 3 (C): 0.5×0.25 + 1×0.25 + 0×0.25 + 1×0.25 = 0.625 (C receives from A, B, D). Row 4 (D): 0 (D receives nothing). Step 3: v₁ = (0.25, 0.125, 0.625, 0). C already leads after one step — the link structure funnels rank toward C from three sources, and subsequent iterations will amplify this advantage until convergence to the steady state."
+      },
+      {
+        "id": "M6Q4M2",
+        "question": "After many iterations of the Power Method on the damped Google matrix (d=0.85), what happens to the PageRank vector if the web graph has a single strongly connected component?",
+        "options": [
+          "It converges to the uniform distribution (all pages equal)",
+          "It converges to a unique steady-state vector where each page's score reflects its importance in the link structure",
+          "It oscillates forever between two vectors",
+          "It converges to the zero vector"
+        ],
+        "correct_option": "It converges to a unique steady-state vector where each page's score reflects its importance in the link structure",
+        "explanation": "Step 1: The damped Google matrix M' = 0.85M + 0.15J/n is strictly positive, hence irreducible and aperiodic — the Perron-Frobenius theorem guarantees a unique dominant eigenvector with all positive entries. Step 2: The Power Method converges to this unique vector regardless of the starting point, because the convergence rate (|λ₂/λ₁| = 0.85) ensures geometric decay of sub-dominant components. Step 3: The resulting vector assigns each page a score proportional to its importance based on the full link structure — pages that receive links from important pages get higher scores, creating a self-consistent ranking that the eigenvector computation resolves."
+      },
+      {
+        "id": "M6Q4M3",
+        "question": "The convergence rate of the Power Method is determined by |λ₂/λ₁|, where λ₁ is the dominant eigenvalue. For the Google matrix with d=0.85, approximately how many iterations reduce the error by a factor of 1000?",
+        "options": [
+          "About 5 iterations",
+          "About 43 iterations",
+          "About 850 iterations",
+          "About 1000 iterations"
+        ],
+        "correct_option": "About 43 iterations",
+        "explanation": "Step 1: The convergence rate is |λ₂|/|λ₁| = 0.85/1 = 0.85 per iteration — the sub-dominant components decay by factor 0.85 each step. Step 2: After k iterations, error ≈ 0.85ᵏ. Step 3: Solve 0.85ᵏ ≤ 0.001: k ≥ ln(0.001)/ln(0.85) ≈ −6.908/−0.1625 ≈ 42.5, so about 43 iterations reduce the error by 1000×. This geometric convergence is why the Power Method is practical: ~50 iterations achieve high accuracy, and each iteration is O(L) for sparse matrices."
+      },
+      {
+        "id": "M6Q4M4",
+        "question": "What happens to the Power Method if you start with v₀ = (1, -1, 0, 0) — a vector with some negative entries?",
+        "options": [
+          "The method fails because v₀ has negative entries",
+          "It still converges to the same dominant eigenvector, since the dominant eigenvalue's component grows while others decay",
+          "The result is the negative of the PageRank",
+          "The iteration produces NaN values"
+        ],
+        "correct_option": "It still converges to the same dominant eigenvector, since the dominant eigenvalue's component grows while others decay",
+        "explanation": "Step 1: The Power Method works for ANY starting vector that has a non-zero component in the dominant eigenvector direction — negative entries are fine because the decomposition v₀ = c₁u₁ + c₂u₂ + ... still holds. Step 2: After multiplication by M, the non-negative matrix M will eventually produce non-negative entries (after enough iterations, the dominant positive eigenvector dominates), but the convergence doesn't require non-negativity at intermediate steps. Step 3: The dominant eigenvector component grows relative to all others regardless of the sign of v₀ — the geometric amplification of the dominant direction is independent of the initial vector's signs."
+      },
+      {
+        "id": "M6Q4M5",
+        "question": "Why can't we use the Power Method to find the SMALLEST eigenvalue of a matrix?",
+        "options": [
+          "The Power Method finds the largest eigenvalue because that component grows fastest — the smallest eigenvalue's component decays relative to the dominant one",
+          "The Power Method finds all eigenvalues simultaneously",
+          "Smallest eigenvalues don't exist for stochastic matrices",
+          "The Power Method can find any eigenvalue with the right starting vector"
+        ],
+        "correct_option": "The Power Method finds the largest eigenvalue because that component grows fastest — the smallest eigenvalue's component decays relative to the dominant one",
+        "explanation": "Step 1: After k iterations: Mᵏv₀ = c₁λ₁ᵏu₁ + c₂λ₂ᵏu₂ + ... — the largest |λ| term grows fastest while smaller |λ| terms decay relative to it. Step 2: The smallest eigenvalue's component decays to numerically zero long before it can be measured — it is 'washed out' by the amplification of the dominant direction. Step 3: To find the smallest eigenvalue, you would apply the Power Method to M⁻¹ (inverse iteration) — then the smallest eigenvalue of M becomes the largest of M⁻¹, and the Power Method converges to it. This illustrates how the Power Method's selectivity for the largest eigenvalue can be redirected by transforming the matrix."
+      },
+      {
+        "id": "M6Q4M6",
+        "question": "If the web graph transition matrix has eigenvalues λ₁ = 1, λ₂ = 0.7, λ₃ = 0.3, λ₄ = 0, how does the error in the Power Method decrease per iteration?",
+        "options": [
+          "The error decreases by a factor of 0.7 each iteration (the second-largest eigenvalue ratio)",
+          "The error decreases by a factor of 0.3 each iteration",
+          "The error decreases by a factor of 1 each iteration ( convergence)",
+          "The error decreases exponentially but we cant determine the rate"
+        ],
+        "correct_option": "The error decreases by a factor of 0.7 each iteration (the second-largest eigenvalue ratio)",
+        "explanation": "Step 1: The convergence rate is |λ₂/λ₁| = 0.7/1 = 0.7 — the ratio of the second-largest to largest eigenvalue determines how fast the sub-dominant component decays. Step 2: After k iterations, error ≈ 0.7ᵏ × (initial error). Step 3: After 10 iterations, error ≈ 0.7¹⁰ ≈ 0.028 (about 2.8% of original) — convergence is geometric with rate 0.7 per iteration. The faster the second eigenvalue decays relative to the first (smaller ratio), the faster the Power Method converges to the dominant eigenvector."
+      },
+      {
+        "id": "M6Q4M7",
+        "question": "In PageRank computation, what is the effect of the damping factor d on the convergence speed of the Power Method?",
+        "options": [
+          "Higher d (closer to 1) makes convergence faster",
+          "Lower d (closer to 0) makes convergence faster but makes PageRank less meaningful — it pushes toward uniform distribution",
+          "The damping factor has effect on convergence speed",
+          "d must equal 0.5 for convergence"
+        ],
+        "correct_option": "Lower d (closer to 0) makes convergence faster but makes PageRank less meaningful — it pushes toward uniform distribution",
+        "explanation": "Step 1: Convergence rate = |λ₂| ≈ d (for the Google matrix, all non-dominant eigenvalues have magnitude ≤ d). Step 2: Lower d means faster convergence (smaller ratio = faster exponential decay of sub-dominant components). Step 3: But d → 0 makes M' → uniform matrix (J/n), so PageRank → (1/n, ..., 1/n) regardless of link structure — all pages become equally important. d = 0.85 balances convergence speed (~43 iterations for 1000× error reduction) with meaningful differentiation of pages based on link structure."
+      },
+      {
+        "id": "M6Q4M8",
+        "question": "What is the 'power iteration' formulation of finding the dominant eigenvector, and how does it differ from solving (M - λI)v = 0 directly?",
+        "options": [
+          "Power iteration is iterative (multiply by M repeatedly) while direct solve requires eigenvalue decomposition of the full matrix — power iteration is O(L) per step while direct solve is O(n³)",
+          "They are the same algorithm",
+          "Direct solve is always faster",
+          "Power iteration is exact while direct solve is approximate"
+        ],
+        "correct_option": "Power iteration is iterative (multiply by M repeatedly) while direct solve requires eigenvalue decomposition of the full matrix — power iteration is O(L) per step while direct solve is O(n³)",
+        "explanation": "Step 1: Power iteration: v_{k+1} = Mv_k, each step requiring O(L) operations for sparse M (L = number of non-zero entries = number of links). Step 2: Direct eigendecomposition of an n×n matrix requires O(n³) operations — storing and factoring the full matrix. Step 3: For n = billions (Google's web graph), O(n³) ≈ 10²⁸ operations is impossible, but O(L) per step with ~100 iterations (O(100L) ≈ 10¹² operations) is feasible on distributed systems — this is why Google uses the Power Method: it exploits sparsity to make eigenvector computation tractable at web scale."
+      },
+      {
+        "id": "M6Q4M9",
+        "question": "For the 4-page web graph (A→B, A→C, B→C, C→A, D→C), after the Power Method converges without damping, what is the exact PageRank of page D?",
+        "options": [
+          "0.25",
+          "0.125",
+          "0",
+          "0.5"
+        ],
+        "correct_option": "0",
+        "explanation": "Step 1: Page D has no incoming links — no other page links to D, so it can never accumulate rank from any source. Step 2: In the steady state, v(D) = Σ_{j→D} v(j)/out_degree(j) = 0 (empty sum — no incoming links). Step 3: D's PageRank is 0 because it is a 'rank sink' — it leaks rank (via D→C) but receives none. The damping factor would give D a small positive rank via teleportation (0.15/4 = 0.0375), but without damping, D gets nothing — illustrating how dangling nodes and rank sinks behave in the undamped Power Method."
+      },
+      {
+        "id": "M6Q4M10",
+        "question": "If the web graph has two disconnected components (pages A,B linked to each other, and pages C,D linked to each other, with no cross-links), what happens to the undamped Power Method?",
+        "options": [
+          "It converges to a single global PageRank",
+          "The answer depends on the starting vector — different starting points give different steady states because the chain is reducible",
+          "It does t converge at all",
+          "Both components get equal rank"
+        ],
+        "correct_option": "The answer depends on the starting vector — different starting points give different steady states because the chain is reducible",
+        "explanation": "Step 1: With no cross-links, the chain is reducible (not strongly connected) — the transition matrix is block-diagonal, with no probability mass flowing between components. Step 2: Rank can flow within each component but not between them, so the steady state depends on how much initial rank was placed in each component. Step 3: The damping factor fixes this by allowing teleportation between components (probability 0.15 to jump to any page), making the matrix irreducible and guaranteeing a unique steady state — this is why damping is mathematically essential, not just a heuristic."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M6Q4H1",
+        "question": "For a general n×n matrix A with eigenvalues |λ₁| > |λ₂| ≥ ... ≥ |λₙ|, prove that the Power Method converges to the eigenvector of λ₁. What is the precise error after k iterations?",
+        "options": [
+          "Error = O(|λ₂/λ₁|^k) — the error decays geometrically with rate equal to the ratio of the two largest eigenvalues",
+          "Error = O(1/k) — harmonic decay",
+          "Error = O(e^{-k}) — exponential decay regardless of eigenvalues",
+          "Error = 0 after exactly n iterations"
+        ],
+        "correct_option": "Error = O(|λ₂/λ₁|^k) — the error decays geometrically with rate equal to the ratio of the two largest eigenvalues",
+        "explanation": "Step 1: Write v₀ = c₁u₁ + c₂u₂ + ... + cₙuₙ in the eigenbasis (assuming A is diagonalizable). Step 2: After k iterations: Aᵏv₀ = c₁λ₁ᵏu₁ + c₂λ₂ᵏu₂ + ... — the error relative to u₁ is dominated by the λ₂ term: the ratio of the λ₂ component to the λ₁ component is (c₂/c₁)(λ₂/λ₁)ᵏ. Step 3: Since |λ₂/λ₁| < 1, this ratio decays geometrically: ‖v_k − u₁‖ ≈ |c₂/c₁| × |λ₂/λ₁|ᵏ, which is O(|λ₂/λ₁|ᵏ). The convergence rate is exactly the spectral gap ratio — larger gap means faster convergence, smaller ratio means fewer iterations needed."
+      },
+      {
+        "id": "M6Q4H2",
+        "question": "If the matrix has two eigenvalues with equal largest magnitude (|λ₁| = |λ₂| > all others), what happens to the Power Method?",
+        "options": [
+          "It still converges to λ₁",
+          "The method fails to converge — the vector oscillates between two directions corresponding to the two co-dominant eigenvalues",
+          "It converges to the average of the two eigenvectors",
+          "It converges to zero — does t match"
+        ],
+        "correct_option": "The method fails to converge — the vector oscillates between two directions corresponding to the two co-dominant eigenvalues",
+        "explanation": "Step 1: If λ₁ = −λ₂ (equal magnitude, different signs), after k iterations the component alternates sign: λ₁ᵏ alternates, so the vector doesn't settle on a single direction. Step 2: More generally, if |λ₁| = |λ₂|, the two components grow at the same rate, and their ratio doesn't converge to zero — the vector oscillates between two directions. Step 3: This is why the Power Method requires a strictly dominant eigenvalue (|λ₁| > |λ₂|). The Google matrix's damping factor ensures this: all non-dominant eigenvalues have magnitude ≤ d = 0.85 < 1, guaranteeing strict dominance and convergence."
+      },
+      {
+        "id": "M6Q4H3",
+        "question": "In the context of the Google matrix M' = dM + (1-d)ee^T/n, what is the second largest eigenvalue, and how does it relate to the damping factor d?",
+        "options": [
+          "The second largest eigenvalue is exactly d = 0.85 — all n-dominant eigenvalues of M' equal d times the corresponding eigenvalues of M",
+          "The second largest eigenvalue is 1 - d = 0.15",
+          "The second largest eigenvalue is exactly d = 0.85 — all non-dominant eigenvalues of M' equal d times the corresponding eigenvalues of M",
+          "The second largest eigenvalue equals 1/n"
+        ],
+        "correct_option": "The second largest eigenvalue is exactly d = 0.85 — all non-dominant eigenvalues of M' equal d times the corresponding eigenvalues of M",
+        "explanation": "Step 1: M' = dM + (1−d)J/n where J = ee^T. The eigenvalues of J/n are: 1 (with eigenvector e/√n) and 0 (with multiplicity n−1). Step 2: For any eigenvector v of M with eigenvalue λ (where λ ≠ 1), M'v = dMv + (1−d)(J/n)v = dλv + 0 = dλv (since v is orthogonal to e for eigenvalue ≠ 1). Step 3: So the non-dominant eigenvalues of M' are dλᵢ for each λᵢ of M, and since |λᵢ| ≤ 1, all have magnitude ≤ d = 0.85. This directly determines the convergence rate: |λ₂/λ₁| ≤ 0.85."
+      },
+      {
+        "id": "M6Q4H4",
+        "question": "Why can't the Power Method find eigenvectors corresponding to eigenvalues smaller than the dominant one?",
+        "options": [
+          "Because those components decay exponentially relative to the dominant component with each iteration — they become negligible before they can be measured",
+          "Because the matrix is too large",
+          "Because those eigenvalues don't exist",
+          "Because the Power Method is only defined for the largest eigenvalue"
+        ],
+        "correct_option": "Because those components decay exponentially relative to the dominant component with each iteration — they become negligible before they can be measured",
+        "explanation": "Step 1: After k iterations, the component along u₂ (eigenvalue λ₂) is (λ₂/λ₁)ᵏ times its initial value relative to the dominant component. Step 2: Since |λ₂/λ₁| < 1, this decays to 0 exponentially — by the time the dominant component is well-resolved (after ~50 iterations), the sub-dominant components are numerically zero (0.85⁵⁰ ≈ 0.0002). Step 3: The sub-dominant components have been 'washed out' by the amplification of the dominant direction — they were present in the initial vector but are now undetectable, which is why the Power Method can only find the single most dominant eigenvector."
+      },
+      {
+        "id": "M6Q4H5",
+        "question": "The 'inverse iteration' method applies the Power Method to M⁻¹ instead of M. What eigenvalue of M does it converge to?",
+        "options": [
+          "The largest eigenvalue of M",
+          "The eigenvalue of M closest to 0 (smallest magnitude)",
+          "The second-largest eigenvalue",
+          "All eigenvalues simultaneously"
+        ],
+        "correct_option": "The eigenvalue of M closest to 0 (smallest magnitude)",
+        "explanation": "Step 1: If M has eigenvalues λ₁, λ₂, ..., λₙ, then M⁻¹ has eigenvalues 1/λ₁, 1/λ₂, ..., 1/λₙ — inversion reciprocates eigenvalues. Step 2: The largest eigenvalue of M⁻¹ corresponds to the smallest |λᵢ| of M (since 1/small = large). Step 3: The Power Method on M⁻¹ converges to the eigenvector of the smallest eigenvalue of M — useful for finding null space vectors (eigenvalue 0) or the least important direction. In PageRank, this would identify the least important page, which is the 'opposite' of what PageRank computes."
+      },
+      {
+        "id": "M6Q4H6",
+        "question": "In the Power Method, after convergence to v*, what happens if you then use v* as the starting vector for a fresh Power Method run on the same matrix?",
+        "options": [
+          "It converges to a different eigenvector",
+          "v* is already the fixed point — Mv* = v*, so the iteration stays at v* forever (no change)",
+          "The algorithm crashes",
+          "It converges to the zero vector"
+        ],
+        "correct_option": "v* is already the fixed point — Mv* = v*, so the iteration stays at v* forever (no change)",
+        "explanation": "Step 1: At convergence, Mv* = λ₁v* (the eigenvector equation). After normalization, Mv* = v* (since λ₁ = 1 for stochastic matrices). Step 2: The next iteration gives Mv* = v* — no change. The converged eigenvector is a fixed point of the iteration. Step 3: This is a defining property of eigenvectors: they are invariant under the matrix transformation (up to scalar multiplication). The Power Method finds this fixed point by iteration, and once found, it is self-consistent — applying M again reproduces the same vector."
+      },
+      {
+        "id": "M6Q4H7",
+        "question": "For the 4-page web graph, if we add a 'teleport' from every page to every other page with probability 0.15 (d=0.85), how does the null space of (I - M') change compared to (I - M)?",
+        "options": [
+          "(I - M') has a trivial null space except for the one-dimensional steady-state eigenvector, while (I - M) may have a larger null space if the graph is reducible",
+          "Both have the same null space",
+          "(I - M') has a larger null space",
+          "The null space is always one-dimensional for any 4×4 matrix"
+        ],
+        "correct_option": "(I - M') has a trivial null space except for the one-dimensional steady-state eigenvector, while (I - M) may have a larger null space if the graph is reducible",
+        "explanation": "Step 1: M (without damping) may be reducible — if the graph has disconnected components, the eigenvalue 1 has multiplicity > 1, so null(I − M) has dimension > 1. Step 2: M' (with damping) is strictly positive, hence irreducible — eigenvalue 1 has multiplicity exactly 1. Step 3: null(I − M') = span{v*} (1-dimensional, spanned by the unique PageRank vector), while null(I − M) could be larger (one dimension per connected component). The damping factor guarantees uniqueness by making the null space exactly 1-dimensional."
+      },
+      {
+        "id": "M6Q4H8",
+        "question": "Why does the Power Method converge faster when the spectral gap (|λ₁| - |λ₂|) is larger?",
+        "options": [
+          "Larger spectral gap means the dominant eigenvalue's component grows faster in absolute terms",
+          "Larger spectral gap means |λ₂/λ₁| is smaller, so the sub-dominant error component decays faster relative to the dominant component",
+          "Larger spectral gap means the matrix is smaller",
+          "Larger spectral gap means fewer iterations are needed because the matrix is symmetric"
+        ],
+        "correct_option": "Larger spectral gap means |λ₂/λ₁| is smaller, so the sub-dominant error component decays faster relative to the dominant component",
+        "explanation": "Step 1: Convergence rate = |λ₂/λ₁| — this ratio determines how fast the sub-dominant components decay relative to the dominant one. Step 2: Larger spectral gap → |λ₁| − |λ₂| is larger → |λ₂/λ₁| is smaller (since λ₁ is fixed and λ₂ is smaller). Step 3: After k iterations, error ≈ (|λ₂/λ₁|)ᵏ. Smaller ratio means faster exponential decay — for example, ratio 0.5 converges in ~10 iterations (0.5¹⁰ ≈ 0.001) while ratio 0.9 requires ~65 iterations (0.9⁶⁵ ≈ 0.001). The spectral gap directly determines practical convergence speed."
+      },
+      {
+        "id": "M6Q4H9",
+        "question": "In the PageRank Power Method, why is the power iteration v_{k+1} = Mv_k equivalent to computing M^{k+1}v₀?",
+        "options": [
+          "Because matrix multiplication is associative: M(M(Mv₀)) = M³v₀, so k multiplications give M^kv₀",
+          "Because the Power Method is defined that way and there is deeper reason",
+          "Because M is always diagonalizable",
+          "Because v₀ is always an eigenvector"
+        ],
+        "correct_option": "Because matrix multiplication is associative: M(M(Mv₀)) = M³v₀, so k multiplications give M^kv₀",
+        "explanation": "Step 1: v₁ = Mv₀. Step 2: v₂ = Mv₁ = M(Mv₀) = M²v₀. By induction, vₖ = Mᵏv₀. Step 3: This means the Power Method is computing powers of the matrix applied to a vector — and by the spectral decomposition, Mᵏv₀ = c₁λ₁ᵏu₁ + c₂λ₂ᵏu₂ + ..., where the dominant eigenvalue's power λ₁ᵏ dominates all others as k grows, which is why convergence occurs. The equivalence to matrix powers is what connects the iterative algorithm to the eigenvalue analysis."
+      },
+      {
+        "id": "M6Q4H10",
+        "question": "What is the relationship between the Power Method and the QR algorithm — why do we use Power Method for PageRank but QR for general eigendecomposition?",
+        "options": [
+          "Power Method finds only the dominant eigenvector (sufficient for PageRank) in O(L) per step, while QR finds ALL eigenvalues in O(n³) — overkill for PageRank but necessary for full decomposition",
+          "QR is always better than Power Method",
+          "Power Method is more accurate than QR",
+          "They are the same algorithm with different names"
+        ],
+        "correct_option": "Power Method finds only the dominant eigenvector (sufficient for PageRank) in O(L) per step, while QR finds ALL eigenvalues in O(n³) — overkill for PageRank but necessary for full decomposition",
+        "explanation": "Step 1: PageRank needs only the dominant eigenvector (the steady-state distribution) — one vector, not all eigenvalues. Step 2: The Power Method provides this in O(L) per iteration with ~100 iterations — O(100L) total. Step 3: The QR algorithm finds all eigenvalues in O(n³) — for n = billions, this is 10²⁸ operations (impossible), while Power Method is O(100 × 10n) ≈ O(1000n) — feasible. The Power Method's selectivity (finding only the dominant eigenvector) and its exploitation of sparsity (O(L) per step) make it the right tool for PageRank, while QR is the right tool when you need the full spectrum."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "emoji": "🔍",
+      "title": "Google's PageRank at Scale",
+      "type": "mcq",
+      "concept": "Power iteration for billions of pages",
+      "story": "Google's original PageRank algorithm did not solve the eigenvector equation directly — that would be too slow for billions of pages. Instead, it used the Power Method: start with any ranking vector and repeatedly multiply by the web graph's transition matrix. After enough iterations, the vector converges to the dominant eigenvector — the PageRank scores.",
+      "question": "At what scale was Google's original PageRank power iteration computed?",
+      "options": [
+        "On a single laptop for thousands of pages",
+        "Across thousands of servers for billions of web pages",
+        "On paper for a few hundred pages",
+        "Using quantum computers for infinite pages"
+      ],
+      "answer": "Across thousands of servers for billions of web pages",
+      "explanation": "Step 1: Google's web graph had billions of pages by the early 2000s, with a transition matrix of billions × billions dimensions. Step 2: But the matrix is extremely sparse (each page links to ~10–100 others), so sparse matrix-vector multiplication is O(L) ≈ O(10n) per iteration. Step 3: The Power Method's O(L) per iteration made it feasible — distributed across thousands of servers, Google could compute PageRank for billions of pages in reasonable time, with ~100 iterations each taking minutes on a distributed system."
+    },
+    {
+      "emoji": "📱",
+      "title": "Twitter WhoToFollow",
+      "type": "mcq",
+      "concept": "Personalised PageRank via power iteration",
+      "story": "Twitter's WhoToFollow system uses a personalised version of PageRank. Instead of computing the global eigenvector, it computes a power iteration starting from your specific follow graph. This gives you a personalised ranking of accounts you might find interesting, based on your unique position in the social network.",
+      "question": "What does Twitter's WhoToFollow feature use to generate personalised suggestions?",
+      "options": [
+        "A random selection of popular accounts",
+        "Personalised PageRank via power iteration from your follow graph",
+        "The most recent accounts you followed",
+        "Accounts with the most tweets"
+      ],
+      "answer": "Personalised PageRank via power iteration from your follow graph",
+      "explanation": "Step 1: Instead of uniform teleportation, personalised PageRank teleports to your specific interests (accounts you already follow): M' = dM + (1−d)ep^T where p is your personalization vector. Step 2: The power iteration from this biased starting point converges to a personalised eigenvector that depends on your unique position in the social graph. Step 3: This eigenvector ranks accounts based on how reachable they are from YOUR position — different for every user — which is why the same power method algorithm produces personalised recommendations by simply changing the starting vector."
+    },
+    {
+      "emoji": "📊",
+      "title": "Academic Citation Analysis",
+      "type": "mcq",
+      "concept": "Power method for paper importance",
+      "story": "Academic paper importance is measured using eigenvector centrality of the citation graph. A paper cited by many important papers is itself important. The Power Method iteratively computes each paper's importance score by aggregating the scores of all papers that cite it, converging to the true influence ranking.",
+      "question": "How is academic paper importance computed from the citation graph?",
+      "options": [
+        "By counting total citations only",
+        "By iterative power method on the citation graph's transition matrix",
+        "By the paper's word count",
+        "By the number of authors"
+      ],
+      "answer": "By iterative power method on the citation graph's transition matrix",
+      "explanation": "Step 1: The citation graph is converted to a transition matrix where M(i,j) = 1/out_degree(j) if paper j cites paper i. Step 2: The Power Method iterates: each paper's importance = sum of importances of papers that cite it, weighted by their out-degree. Step 3: After enough iterations, convergence gives the true influence ranking — papers cited by Nobel laureates rank higher because the eigenvector computation recursively weights each citation by the citing paper's own importance."
+    },
+    {
+      "emoji": "🌐",
+      "title": "Knowledge Graph Ranking",
+      "type": "mcq",
+      "concept": "Power method for entity importance",
+      "story": "Google's Knowledge Graph ranks entities (people, places, things) using a PageRank-like algorithm on the entity-relation graph. Entities that are connected to many important entities through high-quality relations receive higher ranks. The Power Method computes these importance scores iteratively.",
+      "question": "How does Google rank entities in its Knowledge Graph?",
+      "options": [
+        "By alphabetical order",
+        "By power iteration on the entity-relation graph to compute eigenvector centrality",
+        "By the date each entity was added",
+        "By the number of search queries mentioning the entity"
+      ],
+      "answer": "By power iteration on the entity-relation graph to compute eigenvector centrality",
+      "explanation": "Step 1: The Knowledge Graph is a network of entities (people, places, things) connected by relations (is-a, part-of, related-to), forming a directed graph with a transition matrix. Step 2: Entity importance is computed via eigenvector centrality — entities linked to important entities are themselves important. Step 3: The Power Method iteratively computes these scores, converging to the importance distribution used in Google's knowledge panels — the same mathematics as web PageRank, applied to the graph of human knowledge."
+    },
+    {
+      "emoji": "🗺️",
+      "title": "Network Routing Optimization",
+      "type": "mcq",
+      "concept": "Steady-state distribution for load balancing",
+      "story": "Internet routers use steady-state analysis of the network topology to balance traffic load. By computing the steady-state distribution of random packet walks (using the Power Method on the routing transition matrix), routers can identify which nodes will be overloaded and redirect traffic proactively.",
+      "question": "What does the steady-state distribution of a random walk on a computer network reveal?",
+      "options": [
+        "The fastest route between two des",
+        "Which nodes will receive the most traffic in steady state — enabling proactive load balancing",
+        "The total number of packets sent",
+        "The bandwidth of each link"
+      ],
+      "answer": "Which nodes will receive the most traffic in steady state — enabling proactive load balancing",
+      "explanation": "Step 1: Model the network as a graph with nodes (routers) and edges (links), and build the transition matrix from routing probabilities. Step 2: The steady-state eigenvector (computed by the Power Method) gives the probability of a random packet being at each router after many hops. Step 3: High-probability routers are the traffic bottlenecks — they handle the most traffic in steady state — allowing network engineers to add bandwidth or reroute before congestion occurs, connecting the eigenvector computation to practical network optimization."
+    }
+  ]
+}

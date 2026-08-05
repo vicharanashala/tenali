@@ -1,4 +1,15 @@
 {
+  "name": "tenali-contributors-bot",
+  "private": true,
+  "version": "1.0.0",
+  "description": "GitHub Actions bot that regenerates README contributor stats",
+  "scripts": {
+    "update-readme": "node scripts/update-readme-contributors.js",
+    "update-readme:dry": "node scripts/update-readme-contributors.js --dry-run"
+  },
+  "engines": {
+    "node": ">=20"
+  },
   "devDependencies": {
     "acorn": "^8.16.0",
     "acorn-jsx": "^5.3.2"

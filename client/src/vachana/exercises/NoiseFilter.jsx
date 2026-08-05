@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { NOISE_CORPUS } from '../noiseCorpus';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 
 // --- Premium Icons ---
 const RocketIcon = () => (
@@ -142,8 +142,8 @@ export default function NoiseFilter() {
   const [sessionFinished, setSessionFinished] = useState(false);
   const [isLoadingPlacement, setIsLoadingPlacement] = useState(false);
   const [teachIndex, setTeachIndex] = useState(0); // for teach stage slideshows
-  const [hintsUsed, setHintsUsed] = useState(0);
-  const [selectedTier, setSelectedTier] = useState(null);
+  const [_hintsUsed, setHintsUsed] = useState(0);
+  const [_selectedTier, _setSelectedTier] = useState(null);
   const [showTutorialModal, setShowTutorialModal] = useState(false);
   const [modalTeachIndex, setModalTeachIndex] = useState(0);
   const [portalTarget, setPortalTarget] = useState(null);
@@ -156,40 +156,6 @@ export default function NoiseFilter() {
   useEffect(() => {
     setHintsUsed(0);
   }, [sessionQIndex]);
-
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (!sessionActive || sessionFinished) return;
-      
-      // space to check / next
-      if (e.code === 'Space') {
-        e.preventDefault();
-        const teachMode = getLevelType(noiseState.currentLevelIndex) === 'teach' && noiseState.failedLevelIndex === null;
-        if (teachMode) {
-          handleNextTeach();
-        } else {
-          if (!hasAnswered) {
-            checkAnswer();
-          } else {
-            handleNextQuestion();
-          }
-        }
-      }
-
-      // number keys to toggle tokens (1, 2, 3, etc.)
-      const isNum = /^[1-9]$/.test(e.key) || e.key === '0';
-      if (isNum && !hasAnswered) {
-        const idx = e.key === '0' ? 9 : parseInt(e.key) - 1;
-        const currentQ = sessionQuestions[sessionQIndex];
-        if (currentQ && currentQ.tokens && idx < currentQ.tokens.length) {
-          toggleToken(idx);
-        }
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [sessionActive, sessionFinished, sessionQuestions, sessionQIndex, sessionSelections, hasAnswered]);
 
   const startSession = (customType = null, customTier = null, customLevelIndex = null, stateOverride = null) => {
     const baseState = stateOverride || noiseState;
@@ -502,25 +468,40 @@ export default function NoiseFilter() {
     }
   };
 
-  const resetAllProgress = () => {
-    const cleanState = {
-      currentTier: 1,
-      currentLevelIndex: 2,
-      questionStates: {},
-      tierStates: { '1': 'in_progress' },
-      placementCompleted: false,
-      isPlacing: false,
-      placementStep: 0,
-      placementTier: 4,
-      placementAnswers: [],
-      failedLevelIndex: null,
-      failedLevelType: null,
-      reteachQuestionIds: []
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!sessionActive || sessionFinished) return;
+      
+      // space to check / next
+      if (e.code === 'Space') {
+        e.preventDefault();
+        const teachMode = getLevelType(noiseState.currentLevelIndex) === 'teach' && noiseState.failedLevelIndex === null;
+        if (teachMode) {
+          handleNextTeach();
+        } else {
+          if (!hasAnswered) {
+            checkAnswer();
+          } else {
+            handleNextQuestion();
+          }
+        }
+      }
+
+      // number keys to toggle tokens (1, 2, 3, etc.)
+      const isNum = /^[1-9]$/.test(e.key) || e.key === '0';
+      if (isNum && !hasAnswered) {
+        const idx = e.key === '0' ? 9 : parseInt(e.key) - 1;
+        const currentQ = sessionQuestions[sessionQIndex];
+        if (currentQ && currentQ.tokens && idx < currentQ.tokens.length) {
+          toggleToken(idx);
+        }
+      }
     };
-    saveNoiseState(cleanState);
-    setSessionActive(false);
-    setSessionFinished(false);
-  };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sessionActive, sessionFinished, sessionQuestions, sessionQIndex, sessionSelections, hasAnswered]);
 
   // --- View Computations ---
   const origLevelIndex = mapStageIndexToOriginal(noiseState.currentTier, noiseState.currentLevelIndex);
@@ -529,18 +510,6 @@ export default function NoiseFilter() {
 
   const totalNoiseCount = currentQ ? currentQ.tokens.filter(tok => tok.isNoise).length : 0;
   const currentSelectedCount = Object.values(sessionSelections).filter(val => val === 'noise').length;
-
-  const showHint = () => {
-    if (!currentQ) return;
-    const unfoundIdx = currentQ.tokens.findIndex((tok, idx) => tok.isNoise && sessionSelections[idx] !== 'noise');
-    if (unfoundIdx !== -1) {
-      setSessionSelections(prev => ({
-        ...prev,
-        [unfoundIdx]: 'noise'
-      }));
-      setHintsUsed(prev => prev + 1);
-    }
-  };
 
   // ==========================================
   // VIEW: 1. DASHBOARD VIEW (Tier Selection)
@@ -603,7 +572,7 @@ export default function NoiseFilter() {
         {/* Tier Grid Selection */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '20px' }}>
           {[1, 2, 3, 4, 5, 6, 7, 8].map(tierNum => {
-            const tierState = noiseState.tierStates[String(tierNum)] || 'locked';
+            const _tierState = noiseState.tierStates[String(tierNum)] || 'locked';
             const isActive = tierNum === noiseState.currentTier;
             const isCertified = noiseState.tierStates[String(tierNum)] === 'certified';
 

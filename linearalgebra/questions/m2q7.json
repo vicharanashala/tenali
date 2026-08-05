@@ -1,0 +1,479 @@
+{
+  "module": 2,
+  "missionId": 21,
+  "title": "3-State Location Chain",
+  "original_question": "Three locations: Park (P), Apartment (A), Restaurant (R). Transition matrix (columns sum to 1): [[0.5,0.5,0.1],[0.3,0.1,0.8],[0.2,0.4,0.1]]. If 1000 people start in Park, multiply repeatedly until values stabilize. Steady state ~= 402 in Park, 353 in Apartment, 246 in Restaurant.",
+  "core_concept": "A 3-state Markov chain extends the 2-state case to three states. The transition matrix (column-stochastic here) models movement between Park, Apartment, and Restaurant. Repeated multiplication converges to a steady state where the population distribution stabilises regardless of starting position.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M2Q7E1",
+        "question": "How many states does this Markov chain have?",
+        "options": [
+          "3 (Park, Apartment, Restaurant)",
+          "2 — t here",
+          "4 — t here",
+          "1000)"
+        ],
+        "correct_option": "3 (Park, Apartment, Restaurant)",
+        "explanation": "Step 1: The three locations are Park, Apartment, and Restaurant. Step 2: Each person is in exactly one state at any time. Step 3: The transition matrix is 3×3, reflecting the three states — each entry represents a probability of moving between two specific locations."
+      },
+      {
+        "id": "M2Q7E2",
+        "question": "If 1000 people start in Park, what is the initial state vector?",
+        "options": [
+          "[1000, 0, 0]",
+          "[0, 1000, 0]",
+          "[0, 0, 1000]",
+          "[333, 333, 334]"
+        ],
+        "correct_option": "[1000, 0, 0]",
+        "explanation": "Step 1: All 1000 start in Park, zero in Apartment and Restaurant. Step 2: The initial vector [1000, 0, 0] is concentrated entirely in one state. Step 3: This extreme starting condition will undergo dramatic changes in early steps before settling into the steady state — illustrating how Markov chains redistribute populations over time."
+      },
+      {
+        "id": "M2Q7E3",
+        "question": "In the transition matrix [[0.5,0.5,0.1],[0.3,0.1,0.8],[0.2,0.4,0.1]], what does the entry 0.8 represent?",
+        "options": [
+          "Probability of moving from Restaurant to Apartment",
+          "Probability of staying in Park",
+          "Probability of moving from Park to Restaurant",
+          "Probability of staying in Apartment"
+        ],
+        "correct_option": "Probability of moving from Restaurant to Apartment",
+        "explanation": "Step 1: This is a column-stochastic matrix — columns represent 'from' states. Step 2: Column 3 is 'from Restaurant', row 2 is 'to Apartment'. Step 3: Entry 0.8 means 80% of Restaurant visitors go to Apartment — the high value makes Apartment a strong attractor in the transition dynamics."
+      },
+      {
+        "id": "M2Q7E4",
+        "question": "What is 0.5 + 0.3 + 0.2?",
+        "options": [
+          "1.0",
+          "0.9x",
+          "1.1",
+          "0.8"
+        ],
+        "correct_option": "1.0",
+        "explanation": "Step 1: These are the entries in column 1 (from Park). Step 2: 0.5 + 0.3 + 0.2 = 1.0. Step 3: In a column-stochastic matrix, each COLUMN sums to 1 — every person leaving a location goes somewhere. This is the conservation law that ensures no one is lost during transitions."
+      },
+      {
+        "id": "M2Q7E5",
+        "question": "After step 1, how many people are in Park?",
+        "options": [
+          "500",
+          "300",
+          "200",
+          "1000"
+        ],
+        "correct_option": "500",
+        "explanation": "Step 1: All 1000 start in Park. Step 2: 50% stay: 0.5 × 1000 = 500. Step 3: After step 1, Park has 500 people. This is the first multiplication step — the transition matrix immediately begins redistributing the concentrated initial population across all three locations."
+      },
+      {
+        "id": "M2Q7E6",
+        "question": "After step 1, how many people are in Apartment?",
+        "options": [
+          "300",
+          "500x",
+          "200",
+          "100"
+        ],
+        "correct_option": "300",
+        "explanation": "Step 1: 30% of Park people move to Apartment: 0.3 × 1000 = 300. Step 2: No one was in Apartment initially. Step 3: After step 1: 300 in Apartment. The transition matrix spreads the initial concentration — this is the 'mixing' process that drives the chain toward equilibrium."
+      },
+      {
+        "id": "M2Q7E7",
+        "question": "What is 500 + 300 + 200?",
+        "options": [
+          "1000",
+          "800 ()",
+          "1200",
+          "900"
+        ],
+        "correct_option": "1000",
+        "explanation": "Step 1: 500 (Park) + 300 (Apartment) + 200 (Restaurant) = 1000. Step 2: Total population is conserved. Step 3: This conservation holds at every step because the transition matrix is stochastic (columns sum to 1) — people move between locations but never leave the system."
+      },
+      {
+        "id": "M2Q7E8",
+        "question": "The steady state has ~402 in Park, ~353 in Apartment, ~246 in Restaurant. What is 402 + 353 + 246?",
+        "options": [
+          "1001 (approximately 1000)",
+          "1000)",
+          "999 — t here",
+          "800 — t here"
+        ],
+        "correct_option": "1001 (approximately 1000)",
+        "explanation": "Step 1: 402 + 353 + 246 = 1001. Step 2: The slight discrepancy from 1000 is due to rounding. Step 3: The exact steady state sums to exactly 1000 — the conservation law guarantees this. Rounding errors are unavoidable when expressing fractional steady-state values as integers."
+      },
+      {
+        "id": "M2Q7E9",
+        "question": "What does the steady state tell us about the long-run distribution?",
+        "options": [
+          "About 40% in Park, 35% in Apartment, 25% in Restaurant",
+          "Everyone ends up in Park",
+          "Everyone ends up in Restaurant",
+          "The distribution keeps changing forever"
+        ],
+        "correct_option": "About 40% in Park, 35% in Apartment, 25% in Restaurant",
+        "explanation": "Step 1: 402/1000 ≈ 40.2%, 353/1000 ≈ 35.3%, 246/1000 ≈ 24.6%. Step 2: These proportions stabilise and don't change with further multiplications. Step 3: This is the long-run crowd distribution — it depends only on the transition probabilities, not on where people originally started."
+      },
+      {
+        "id": "M2Q7E10",
+        "question": "In a 3×3 transition matrix, how many entries are there?",
+        "options": [
+          "9",
+          "3",
+          "6",
+          "12"
+        ],
+        "correct_option": "9",
+        "explanation": "Step 1: A 3×3 matrix has 3 × 3 = 9 entries. Step 2: Each entry is a transition probability between two states. Step 3: With the column-sum constraint (3 constraints), only 6 entries are freely chosen — the other 3 are determined by the requirement that each column sums to 1."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M2Q7M1",
+        "question": "Why must each column of this column-stochastic matrix sum to 1?",
+        "options": [
+          "Because every person leaving a location must go to some location — probabilities of all destinations sum to 100%",
+          "Because the matrix must be symmetric",
+          "Because the determinant must be 1",
+          "Because there are 3 states"
+        ],
+        "correct_option": "Because every person leaving a location must go to some location — probabilities of all destinations sum to 100%",
+        "explanation": "Step 1: Each column represents all possible destinations from one location. Step 2: Everyone leaving Park must go to Park, Apartment, or Restaurant. Step 3: The column-sum constraint is the law of total probability — it ensures population conservation and is what makes the matrix a valid transition operator for the Markov chain."
+      },
+      {
+        "id": "M2Q7M2",
+        "question": "How do you find the steady state of a 3-state Markov chain?",
+        "options": [
+          "Solve Mv = v with the constraint that entries sum to the total population",
+          "Just multiply M by [1,1,1]",
+          "Take the determinant of M",
+          "Find the trace of M — does t match"
+        ],
+        "correct_option": "Solve Mv = v with the constraint that entries sum to the total population",
+        "explanation": "Step 1: The steady state satisfies Mv = v (eigenvalue 1). Step 2: This gives 3 equations, but they're dependent (rank 2). Step 3: The normalisation constraint (entries sum to 1000) provides the third independent equation needed for a unique solution — this combination of eigenvalue equation + normalisation is the standard method for finding steady states."
+      },
+      {
+        "id": "M2Q7M3",
+        "question": "If you start with all 1000 in Restaurant instead of Park, will you reach the same steady state?",
+        "options": [
+          "Yes — the steady state is independent of the starting distribution",
+          "— different starting points give different steady states",
+          "Only if the chain is symmetric",
+          "Only if you multiply more times"
+        ],
+        "correct_option": "Yes — the steady state is independent of the starting distribution",
+        "explanation": "Step 1: The steady state depends only on the transition matrix. Step 2: Any starting distribution converges to the same steady state. Step 3: This universality is guaranteed by the Perron-Frobenius theorem — it's the reason Markov chains are so powerful for predicting long-run behavior regardless of initial conditions."
+      },
+      {
+        "id": "M2Q7M4",
+        "question": "Which location has the highest steady-state population?",
+        "options": [
+          "Park (~402)",
+          "Apartment (~353)",
+          "Restaurant (~246)",
+          "All equal"
+        ],
+        "correct_option": "Park (~402)",
+        "explanation": "Step 1: Park 402 > Apartment 353 > Restaurant 246. Step 2: Park has the highest steady-state population. Step 3: This reflects Park being the most 'attractive' location — it has high inflow rates from both Apartment (0.5) and Restaurant (0.5), making it the strongest magnet in the transition network."
+      },
+      {
+        "id": "M2Q7M5",
+        "question": "If the Restaurant→Apartment probability increases from 0.8 to 0.95, what happens to the steady-state Restaurant population?",
+        "options": [
+          "It decreases — more people leave Restaurant each step",
+          "It increases — does t match",
+          "It stays the same — does t match",
+          "The chain longer converges"
+        ],
+        "correct_option": "It decreases — more people leave Restaurant each step",
+        "explanation": "Step 1: Higher outflow from Restaurant means fewer people stay. Step 2: Restaurant loses more residents each step, reducing its steady-state share. Step 3: The balance shifts toward other locations — this sensitivity analysis shows how small parameter changes can significantly reshape the equilibrium distribution."
+      },
+      {
+        "id": "M2Q7M6",
+        "question": "After step 1 with [1000,0,0], what is the Apartment population?",
+        "options": [
+          "300",
+          "500x",
+          "200",
+          "100"
+        ],
+        "correct_option": "300",
+        "explanation": "Step 1: Column 1 (from Park) has Apartment entry 0.3. Step 2: 0.3 × 1000 = 300. Step 3: After step 1, Apartment has 300 people. This is the first step of the mixing process — the concentrated initial distribution begins spreading across all three locations."
+      },
+      {
+        "id": "M2Q7M7",
+        "question": "What is the Restaurant population after step 1?",
+        "options": [
+          "200",
+          "300x",
+          "500",
+          "100"
+        ],
+        "correct_option": "200",
+        "explanation": "Step 1: Column 1 (from Park) has Restaurant entry 0.2. Step 2: 0.2 × 1000 = 200. Step 3: After step 1: 200 in Restaurant. The 20% outflow from Park to Restaurant is the smallest of the three, which contributes to Restaurant having the lowest steady-state population."
+      },
+      {
+        "id": "M2Q7M8",
+        "question": "If we used a row-stochastic matrix instead (rows sum to 1), how would the multiplication change?",
+        "options": [
+          "We'd multiply M × v (column vector) instead of v × M (row vector)",
+          "thing would change — does t match",
+          "The steady state would be different",
+          "The matrix would be singular"
+        ],
+        "correct_option": "We'd multiply M × v (column vector) instead of v × M (row vector)",
+        "explanation": "Step 1: Column-stochastic: v_new = v_old × M (row vector on left). Step 2: Row-stochastic: v_new = M × v_old (column vector on right). Step 3: The convention determines left vs. right multiplication — mixing them up is a common error that produces incorrect results. Both conventions are valid; you just need to be consistent."
+      },
+      {
+        "id": "M2Q7M9",
+        "question": "How many independent equations does Mv = v provide for a 3×3 stochastic matrix?",
+        "options": [
+          "2 (the third is dependent on the other two)",
+          "3 — t here",
+          "1 — t here",
+          "9 — t here"
+        ],
+        "correct_option": "2 (the third is dependent on the other two)",
+        "explanation": "Step 1: Mv = v gives 3 equations. Step 2: But since M is stochastic, one equation is always a linear combination of the other two (rank of M-I is 2). Step 3: Only 2 are independent — we need the normalisation constraint (sum = 1000) as the third equation. This dependency is a fundamental property of stochastic matrices."
+      },
+      {
+        "id": "M2Q7M10",
+        "question": "What does it mean for a 3-state Markov chain to be 'ergodic'?",
+        "options": [
+          "It is irreducible (all states communicate) and aperiodic (no fixed cycling pattern)",
+          "It has exactly 3 states",
+          "The matrix is symmetric",
+          "The steady state is always uniform"
+        ],
+        "correct_option": "It is irreducible (all states communicate) and aperiodic (no fixed cycling pattern)",
+        "explanation": "Step 1: Irreducible: from any state, you can reach any other state. Step 2: Aperiodic: the chain doesn't cycle with a fixed period. Step 3: Ergodic chains always converge to a unique steady state — this is the Perron-Frobenius theorem applied to stochastic matrices, guaranteeing convergence for our 3-state chain."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M2Q7H1",
+        "question": "For a column-stochastic matrix M, the steady state satisfies Mv = v. How many free variables does the system (M - I)v = 0 have?",
+        "options": [
+          "1 (the null space is 1-dimensional)",
+          "2 — t here",
+          "3 — t here",
+          "0 — t here"
+        ],
+        "correct_option": "1 (the null space is 1-dimensional)",
+        "explanation": "Step 1: (M - I) is a 3×3 matrix with rank 2 (since M is stochastic). Step 2: By rank-nullity: nullity = 3 - 2 = 1. Step 3: The null space is 1-dimensional — one free variable. The normalisation constraint selects the unique probability distribution from this 1D family of solutions."
+      },
+      {
+        "id": "M2Q7H2",
+        "question": "What are the eigenvalues of a 3×3 column-stochastic matrix?",
+        "options": [
+          "One eigenvalue is 1, the other two have magnitude ≤ 1",
+          "All three eigenvalues are 1",
+          "The eigenvalues are 0.5, 0.3, 0.2",
+          "The eigenvalues must all be positive"
+        ],
+        "correct_option": "One eigenvalue is 1, the other two have magnitude ≤ 1",
+        "explanation": "Step 1: λ = 1 is always an eigenvalue of any stochastic matrix. Step 2: By Perron-Frobenius, all other eigenvalues have |λ| ≤ 1. Step 3: For an irreducible aperiodic chain, |λ₂|, |λ₃| < 1, ensuring convergence. The magnitudes of these eigenvalues determine the convergence speed — smaller magnitudes mean faster convergence."
+      },
+      {
+        "id": "M2Q7H3",
+        "question": "For the matrix [[0.5,0.5,0.1],[0.3,0.1,0.8],[0.2,0.4,0.1]], what is the trace?",
+        "options": [
+          "0.7",
+          "1.0x",
+          "0.5",
+          "1.5"
+        ],
+        "correct_option": "0.7",
+        "explanation": "Step 1: Trace = 0.5 + 0.1 + 0.1 = 0.7 (sum of diagonal entries). Step 2: The trace equals the sum of eigenvalues. Step 3: With λ₁ = 1, the other two sum to 0.7 - 1 = -0.3. The trace provides a quick check on the eigenvalue structure without computing the full characteristic polynomial."
+      },
+      {
+        "id": "M2Q7H4",
+        "question": "Why does a 3-state chain need exactly 2 equations (plus normalisation) to find the steady state?",
+        "options": [
+          "Because the null space of (M-I) is 1-dimensional, requiring one constraint to pin down the unique vector",
+          "Because there are 3 states",
+          "Because the matrix is 3×3",
+          "Because we need 3 equations for 3 unkwns"
+        ],
+        "correct_option": "Because the null space of (M-I) is 1-dimensional, requiring one constraint to pin down the unique vector",
+        "explanation": "Step 1: (M-I)v = 0 has a 1D null space (infinitely many solutions along a line). Step 2: The normalisation constraint (sum = 1000) selects one point on this line. Step 3: Together: 2 independent equations + 1 constraint = unique solution. This dimensional analysis generalizes to n-state chains: n-1 independent equations + 1 normalisation = unique steady state."
+      },
+      {
+        "id": "M2Q7H5",
+        "question": "If the transition matrix were [[0.33,0.33,0.34],[0.33,0.33,0.34],[0.34,0.34,0.32]], what would the steady state be?",
+        "options": [
+          "Approximately [333, 333, 334] — nearly uniform",
+          "[1000, 0, 0] — does t match",
+          "[0, 0, 1000] — does t match",
+          "[500, 500, 0] — does t match"
+        ],
+        "correct_option": "Approximately [333, 333, 334] — nearly uniform",
+        "explanation": "Step 1: This matrix nearly equalises transitions (each entry ≈ 1/3). Step 2: Maximum mixing produces nearly uniform distribution. Step 3: The steady state is approximately [333, 333, 334] — maximum entropy. As the matrix approaches the uniform matrix J/3 (all entries 1/3), the steady state approaches perfect uniformity."
+      },
+      {
+        "id": "M2Q7H6",
+        "question": "What is the determinant of [[0.5,0.5,0.1],[0.3,0.1,0.8],[0.2,0.4,0.1]]?",
+        "options": [
+          "0.055",
+          "0.7",
+          "1.0",
+          "0"
+        ],
+        "correct_option": "0.055",
+        "explanation": "Step 1: Expanding along the first row: det = 0.5(0.1×0.1 - 0.8×0.4) - 0.5(0.3×0.1 - 0.8×0.2) + 0.1(0.3×0.4 - 0.1×0.2). Step 2: = 0.5(0.01-0.32) - 0.5(0.03-0.16) + 0.1(0.12-0.02) = 0.5(-0.31) - 0.5(-0.13) + 0.1(0.10). Step 3: = -0.155 + 0.065 + 0.010 = -0.080. The determinant equals the product of eigenvalues — its small magnitude indicates the matrix is close to singular, meaning the chain converges relatively slowly."
+      },
+      {
+        "id": "M2Q7H7",
+        "question": "If Park has the highest steady-state population, what does this suggest about the transition dynamics?",
+        "options": [
+          "Park is the most 'central' location — more people flow into it than out, relative to other locations",
+          "Park has the highest transition probability",
+          "Park is the largest location",
+          "People prefer Park for aesthetic reasons"
+        ],
+        "correct_option": "Park is the most 'central' location — more people flow into it than out, relative to other locations",
+        "explanation": "Step 1: The steady state reflects the balance of inflows and outflows. Step 2: Park has high inflow from both Apartment (0.5) and Restaurant (0.5). Step 3: The net flow balance favours Park — the steady state is determined by the topology of the transition network, not by any single entry in the matrix."
+      },
+      {
+        "id": "M2Q7H8",
+        "question": "For a 3-state chain, what is the dimension of the subspace spanned by the steady-state vector?",
+        "options": [
+          "1 (a line through the origin in R³)",
+          "2 (a plane) — does t match",
+          "3 (all of R³) — does t match",
+          "0 (just the origin) — does t match"
+        ],
+        "correct_option": "1 (a line through the origin in R³)",
+        "explanation": "Step 1: The steady-state vector v = [402, 353, 246] is a single vector in R³. Step 2: Its span is {αv : α ∈ R} — all scalar multiples. Step 3: This is a 1D line through the origin — the steady-state direction. The normalisation constraint selects the specific point on this line where the components sum to 1000."
+      },
+      {
+        "id": "M2Q7H9",
+        "question": "How does the convergence speed of a 3-state chain compare to a 2-state chain?",
+        "options": [
+          "It depends on the second-largest eigenvalue magnitude — could be faster or slower",
+          "3-state chains always converge faster",
+          "3-state chains always converge slower",
+          "Convergence speed is always the same"
+        ],
+        "correct_option": "It depends on the second-largest eigenvalue magnitude — could be faster or slower",
+        "explanation": "Step 1: Convergence speed is determined by |λ₂| (the second-largest eigenvalue in magnitude). Step 2: A 3-state chain can have |λ₂| smaller or larger than a 2-state chain's. Step 3: The spectral gap (1 - |λ₂|) determines speed — larger gap means faster convergence. State count alone doesn't determine convergence rate; the transition structure does."
+      },
+      {
+        "id": "M2Q7H10",
+        "question": "What is the relationship between the number of states and the complexity of finding the steady state?",
+        "options": [
+          "More states require solving larger linear systems — the normal equations grow with the number of states",
+          "More states always make the steady state uniform",
+          "The number of states doesn't affect computation",
+          "More states always converge faster"
+        ],
+        "correct_option": "More states require solving larger linear systems — the normal equations grow with the number of states",
+        "explanation": "Step 1: A k-state chain requires solving (M-I)v = 0 with normalisation. Step 2: This is a k×k system with k-1 independent equations. Step 3: Computational complexity grows with k — a 100-state chain needs a 100×100 system. However, the sparsity structure of real-world transition matrices often allows efficient solutions, connecting to the scalability challenges of large Markov models."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "emoji": "🏔️",
+      "title": "Urban Mobility",
+      "equation": "",
+      "type": "mcq",
+      "concept": "Multi-location crowd dynamics",
+      "story": "People in a city move between three locations daily: the Park (leisure), their Apartment (home), and a Restaurant (dining). Each hour, some people leave the park for the apartment, others head to the restaurant, and so on. By modelling these movements as a 3-state Markov chain and multiplying the transition matrix repeatedly, city planners can predict the long-run crowd distribution at each location.",
+      "question": "According to the steady-state distribution, what percentage of people will end up at the Restaurant in the long run?",
+      "options": [
+        "About 24.6%",
+        "About 40.2%",
+        "About 35.3%",
+        "About 50%"
+      ],
+      "answer": "About 24.6%",
+      "explanation": "Step 1: Steady state: Restaurant ≈ 246 out of 1000. Step 2: 246/1000 = 24.6%. Step 3: This is the long-run fraction of people at the Restaurant, regardless of starting location."
+    },
+    {
+      "emoji": "🛒",
+      "title": "Shopping Patterns",
+      "equation": "",
+      "type": "mcq",
+      "concept": "Multi-channel market share",
+      "story": "Customers in a city shop at three places: Online, Store A, and Store B. Each month, some customers switch between shopping channels based on sales, convenience, and availability. After tracking these transitions over many months, the proportions of customers at each channel stabilise to a steady state — representing the stable market share of each shopping option.",
+      "question": "In a three-channel shopping model, what does the steady-state distribution represent for retailers?",
+      "options": [
+        "The stable market share of each shopping channel",
+        "The total monthly revenue",
+        "The number of products sold",
+        "The customer satisfaction rating"
+      ],
+      "answer": "The stable market share of each shopping channel",
+      "explanation": "Step 1: Monthly switching follows a 3×3 transition matrix. Step 2: After many months, proportions stabilise. Step 3: The steady state reveals what fraction of customers use each channel in the long run."
+    },
+    {
+      "emoji": "🌍",
+      "title": "Epidemiology",
+      "equation": "",
+      "type": "mcq",
+      "concept": "SIR disease modelling",
+      "story": "Epidemiologists track how a disease spreads through a population using three states: Susceptible (can catch the disease), Infected (currently sick), and Recovered (immune). The transition rates between these states form a Markov chain. By multiplying the transition matrix repeatedly, epidemiologists predict the long-term infection rate in the population.",
+      "question": "What does a Markov chain model predict about the long-term spread of a disease in a population?",
+      "options": [
+        "The long-term proportion of people in each disease state (susceptible, infected, recovered)",
+        "The exact day each person gets infected",
+        "The total number of deaths",
+        "The vaccine development timeline"
+      ],
+      "answer": "The long-term proportion of people in each disease state (susceptible, infected, recovered)",
+      "explanation": "Step 1: Disease transitions follow a 3×3 matrix. Step 2: Repeated multiplication models the epidemic over time. Step 3: The steady state gives the endemic equilibrium — what fraction is susceptible, infected, or recovered in the long run."
+    },
+    {
+      "emoji": "🚌",
+      "title": "Public Transport",
+      "equation": "",
+      "type": "mcq",
+      "concept": "Route ridership modelling",
+      "story": "A city's public transport system has three bus routes: Route A (downtown), Route B (suburbs), and Route C (airport). Commuters switch between routes based on congestion, schedule, and destination. The transit authority models these switches as a Markov chain to predict long-term ridership on each route — helping them allocate buses and drivers efficiently.",
+      "question": "When a transit authority uses a Markov chain to model route ridership, what does the steady state help them decide?",
+      "options": [
+        "How many buses to assign to each route in the long run",
+        "The exact departure time of each bus",
+        "The fare price for each route",
+        "The colour of each bus"
+      ],
+      "answer": "How many buses to assign to each route in the long run",
+      "explanation": "Step 1: Ridership follows transition probabilities between routes. Step 2: The steady state gives long-run passenger distribution. Step 3: The authority allocates buses proportionally to steady-state ridership."
+    },
+    {
+      "emoji": "💼",
+      "title": "Job Market",
+      "equation": "",
+      "type": "mcq",
+      "concept": "Employment state transitions",
+      "story": "Labour economists model the job market as three states: Employed (E), Unemployed (U), and Out of Labour Force (O). Each month, some employed people lose jobs, some unemployed people find jobs, and some leave or re-enter the labour force. The transition matrix captures these flows, and its steady state reveals the long-run unemployment rate.",
+      "question": "In a 3-state employment model (Employed, Unemployed, Out of Labour Force), what does the steady-state Unemployed fraction represent?",
+      "options": [
+        "The long-run natural rate of unemployment",
+        "The current monthly unemployment rate",
+        "The total number of jobs available",
+        "The average salary level"
+      ],
+      "answer": "The long-run natural rate of unemployment",
+      "explanation": "Step 1: Employment transitions follow a 3×3 matrix. Step 2: After many months, the E/U/O proportions stabilise. Step 3: The steady-state Unemployed fraction is the 'natural rate of unemployment' — a key economic indicator."
+    },
+    {
+      "emoji": "🌤️",
+      "title": "3-State Weather",
+      "equation": "",
+      "type": "mcq",
+      "concept": "Multi-state weather modelling",
+      "story": "A weather station tracks three states: Sunny (S), Cloudy (C), and Rainy (R). Each day, the weather transitions according to a 3×3 matrix. For example, sunny days have a 60% chance of staying sunny, 30% becoming cloudy, and 10% becoming rainy. The steady state reveals the climate — what percentage of days are sunny, cloudy, or rainy in the long run.",
+      "question": "When weather is modelled with three states (Sunny, Cloudy, Rainy), what does the steady state represent?",
+      "options": [
+        "The long-run percentage of days in each weather type",
+        "Tomorrow's exact weather",
+        "The total annual rainfall",
+        "The average temperature"
+      ],
+      "answer": "The long-run percentage of days in each weather type",
+      "explanation": "Step 1: Daily transitions follow a 3×3 weather matrix. Step 2: After many days, the S/C/R proportions stabilise. Step 3: The steady state gives the climatological distribution — the region's typical weather pattern."
+    }
+  ]
+}

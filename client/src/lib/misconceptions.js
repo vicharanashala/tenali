@@ -11,6 +11,16 @@
 //
 // ─────────────────────────────────────────────────────────────────────────────
 
+function isPrime(n) {
+  if (n < 2) return false
+  if (n === 2) return true
+  if (n % 2 === 0) return false
+  for (let i = 3; i * i <= n; i += 2) {
+    if (n % i === 0) return false
+  }
+  return true
+}
+
 export const misconceptionMap = {
 
   'addition-api': {
@@ -139,7 +149,7 @@ export const misconceptionMap = {
     misconceptions: [
       {
         label: 'multiplied_by_self_wrong',
-        pattern: (ans, correct) => false, // handled generically below
+        pattern: () => false, // handled generically below
         hint: 'n² means n × n. Make sure you multiply correctly — {correct}² = {correct} × {correct}.',
       },
     ],
@@ -224,7 +234,7 @@ export const misconceptionMap = {
     misconceptions: [
       {
         label: 'added_instead_of_subtracting',
-        pattern: (ans, correct) => false,
+        pattern: () => false,
         hint: 'If finding a leg (not the hypotenuse): a² = c² − b². SUBTRACT the smaller squared side from the larger.',
       },
       {
@@ -246,12 +256,12 @@ export const misconceptionMap = {
     misconceptions: [
       {
         label: 'confused_sin_cos',
-        pattern: (ans, correct) => false,
+        pattern: () => false,
         hint: 'Sin is Opposite/Hypotenuse, Cos is Adjacent/Hypotenuse — don\'t swap them. Draw a right triangle and label the sides.',
       },
       {
         label: 'inverse_ratio_wrong',
-        pattern: (ans, correct) => false,
+        pattern: () => false,
         hint: 'arcsin, arccos, arctan give the ANGLE, not the ratio. Make sure you\'re using the right function for what\'s asked.',
       },
     ],
@@ -319,7 +329,7 @@ export const misconceptionMap = {
       },
       {
         label: 'wrong_dimension_result',
-        pattern: (ans, correct) => false,
+        pattern: () => false,
         hint: 'Result dimensions: (m×n) × (n×p) = (m×p). An m×n matrix times n×p matrix. Make sure your result has the right dimensions.',
       },
     ],
@@ -360,7 +370,7 @@ export const misconceptionMap = {
     misconceptions: [
       {
         label: 'counted_impossible_outcomes',
-        pattern: (ans, correct) => false,
+        pattern: () => false,
         hint: 'Only count outcomes that actually satisfy the condition. Check: does {student answer} count any outcome that can\'t happen?',
       },
       {
@@ -377,7 +387,7 @@ export const misconceptionMap = {
     misconceptions: [
       {
         label: 'split_root_wrongly',
-        pattern: (ans, correct) => false,
+        pattern: () => false,
         hint: '√(a+b) ≠ √a + √b. You can only split √(a×b) = √a × √b. Check your splitting carefully.',
       },
       {
@@ -394,7 +404,7 @@ export const misconceptionMap = {
     misconceptions: [
       {
         label: 'union_vs_intersection',
-        pattern: (ans, correct) => false,
+        pattern: () => false,
         hint: '∪ (union) = elements in either set. ∩ (intersection) = elements in BOTH sets. Make sure you used the right operation.',
       },
     ],
@@ -406,7 +416,7 @@ export const misconceptionMap = {
     misconceptions: [
       {
         label: 'applied_wrong_difference',
-        pattern: (ans, correct) => false,
+        pattern: () => false,
         hint: 'For arithmetic sequences: subtract to find d, then add d each time. For geometric: divide or multiply by r each time.',
       },
     ],
@@ -418,7 +428,7 @@ export const misconceptionMap = {
     misconceptions: [
       {
         label: 'swapped_ratio_order',
-        pattern: (ans, correct) => false,
+        pattern: () => false,
         hint: 'a:b means a is to b, not b is to a. Check which value corresponds to which part of the ratio.',
       },
     ],
@@ -430,7 +440,7 @@ export const misconceptionMap = {
     misconceptions: [
       {
         label: 'confused_direct_inverse',
-        pattern: (ans, correct) => false,
+        pattern: () => false,
         hint: 'Direct variation: as x increases, y increases (y = kx). Inverse variation: as x increases, y decreases (y = k/x).',
       },
     ],
@@ -442,7 +452,7 @@ export const misconceptionMap = {
     misconceptions: [
       {
         label: 'wrong_angle_sum_formula',
-        pattern: (ans, correct) => false,
+        pattern: () => false,
         hint: 'Interior angles: (n−2)×180°, not n×180°. For a hexagon (n=6): (6−2)×180 = 720°.',
       },
     ],
@@ -454,7 +464,7 @@ export const misconceptionMap = {
     misconceptions: [
       {
         label: 'measured_from_wrong_direction',
-        pattern: (ans, correct) => false,
+        pattern: () => false,
         hint: 'Bearings are ALWAYS measured clockwise from North (0°). Check: did you start from North and go clockwise?',
       },
     ],
@@ -466,7 +476,7 @@ export const misconceptionMap = {
     misconceptions: [
       {
         label: 'used_diameter_instead_of_radius',
-        pattern: (ans, correct) => false,
+        pattern: () => false,
         hint: 'r = radius (centre to edge), d = diameter (edge to edge, d = 2r). Make sure you\'re using the right value in the formula.',
       },
     ],
@@ -478,7 +488,7 @@ export const misconceptionMap = {
     misconceptions: [
       {
         label: 'forgot_to_flip_sign',
-        pattern: (ans, correct) => false,
+        pattern: () => false,
         hint: 'When multiplying or dividing by a negative number, the inequality sign FLIPS: < becomes >, ≤ becomes ≥.',
       },
     ],
@@ -490,7 +500,7 @@ export const misconceptionMap = {
     misconceptions: [
       {
         label: 'internal_vs_external_confused',
-        pattern: (ans, correct) => false,
+        pattern: () => false,
         hint: 'Internal division: point divides the segment. External: the point lies ON the line extension outside the segment. Check which one the question asks.',
       },
     ],
@@ -502,7 +512,7 @@ export const misconceptionMap = {
     misconceptions: [
       {
         label: 'wrong_rotation_direction',
-        pattern: (ans, correct) => false,
+        pattern: () => false,
         hint: '90° anticlockwise: (x,y)→(−y,x). 90° clockwise: (x,y)→(y,−x). Check your rotation direction.',
       },
     ],
@@ -529,14 +539,14 @@ export function getMisconceptionHint(quizType, studentAnswer, correctAnswer) {
           const history = JSON.parse(localStorage.getItem('tenali-misconceptions') || '[]')
           history.push({ quizType, label: m.label, timestamp: Date.now() })
           localStorage.setItem('tenali-misconceptions', JSON.stringify(history))
-        } catch (_) {}
+        } catch { /* skipped */ }
         
         // Replace placeholders in hint
         return m.hint
           .replace(/\{ans\}/g, String(studentAnswer))
           .replace(/\{correct\}/g, String(correctAnswer))
       }
-    } catch (_) {
+    } catch {
       // Pattern threw — skip
     }
   }

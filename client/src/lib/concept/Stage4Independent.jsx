@@ -10,7 +10,7 @@ export default function Stage4Independent({ onComplete }) {
 
   // Equation: x^2 - 4x - 5 = 0
   const a = 1, b = -4, c = -5;
-  const eq = (x) => a * x * x + b * x + c;
+  const _eq = (x) => a * x * x + b * x + c;
   
   // D = 16 - 4(1)(-5) = 36
   const trueD = 36;

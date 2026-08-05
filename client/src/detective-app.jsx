@@ -10,7 +10,7 @@
  * It imports stories from detective-stories.js and adds hint & deduplication features.
  */
 
-import { useEffect, useState, useRef, useMemo } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { ALL_DETECTIVE_STORIES } from './detective-stories'
 
 // ─── Sound Effects (Web Audio API) ──────────────────────────────────────
@@ -37,7 +37,7 @@ function playTone(freq, duration, type = 'sine', volume = 0.3) {
     gain.connect(ctx.destination);
     osc.start();
     osc.stop(ctx.currentTime + duration);
-  } catch {}
+  } catch { /* ignored */ }
 }
 
 function playStarSound(starCount) {
@@ -75,7 +75,7 @@ function loadDetectiveProgress() {
   try {
     const raw = localStorage.getItem(DETECTIVE_STORAGE_KEY);
     if (raw) return JSON.parse(raw);
-  } catch {}
+  } catch { /* ignored */ }
   return { xp: 0, casesSolved: 0, cases: {}, usedCaseIds: [], age: 8 };
 }
 
@@ -98,10 +98,6 @@ const AGE_TOPIC_MAP = {
   'shapes': 5,
   'patterns': 5,
   'comparisons': 5,
-  // Age 6+ — Class 1: +/- concepts, intro to multiply, basic shapes & measurement
-  'addition': 6,
-  'multiply': 6,
-  'triangles': 6,
   // Age 8+ — Class 3: numbers to 10,000, fractions, measurement, perimeter & area
   'fractionadd': 8,
   'mensur': 8,
@@ -198,7 +194,7 @@ function filterCasesByAge(cases, age) {
 }
 
 function saveDetectiveProgress(data) {
-  try { localStorage.setItem(DETECTIVE_STORAGE_KEY, JSON.stringify(data)); } catch {}
+  try { localStorage.setItem(DETECTIVE_STORAGE_KEY, JSON.stringify(data)); } catch { /* ignored */ }
 }
 
 function getDetectiveRank(xp) {
@@ -558,41 +554,18 @@ function DetectiveCaseView({ caseData, initialStage, onComplete, onBack }) {
   const [revealed, setRevealed] = useState(false);
   const [completed, setCompleted] = useState(false);
   const [hintLevel, setHintLevel] = useState(0); // how many hints revealed (per-stage)
-  const [hintUsed, setHintUsed] = useState(false); // was a hint shown? (per-stage)
+  const [_hintUsed, setHintUsed] = useState(false); // was a hint shown? (per-stage)
   const [totalHintsUsed, setTotalHintsUsed] = useState(0); // cumulative hints across ALL stages
   const inputRef = useRef(null);
   const celebrationRef = useRef(null);
 
   useEffect(() => { setTimeout(() => inputRef.current?.focus(), 100); }, [stageIndex]);
 
-  const stage = caseData.stages[stageIndex];
-  if (!stage) return null;
-
-  const hints = stage.hints || [];
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (revealed || !answer.trim()) return;
-    const correct = checkDetectiveAnswer(stage.answer, answer);
-    setRevealed(true);
-    setFeedback({ correct, correctAnswer: stage.answer });
-  };
-
-  const handleHint = () => {
-    if (hintLevel < hints.length) {
-      setHintLevel(h => h + 1);
-      setTotalHintsUsed(t => t + 1);
-      setHintUsed(true);
-    }
-  };
-
   const handleNext = () => {
     if (!feedback) return;
     if (feedback.correct) {
       if (stageIndex + 1 >= caseData.stages.length) {
         setCompleted(true);
-        // Calculate stars based on TOTAL hints used across ALL stages
-        // 0 hints = 3 stars, 1-2 hints = 2 stars, 3+ hints = 1 star
         const stars = totalHintsUsed === 0 ? 3 : totalHintsUsed <= 2 ? 2 : 1;
         onComplete(caseData.id, true, { hintUsed: totalHintsUsed > 0, stars, hintLevel: totalHintsUsed, totalHintsUsed });
       } else {
@@ -603,11 +576,8 @@ function DetectiveCaseView({ caseData, initialStage, onComplete, onBack }) {
         setRevealed(false);
         setHintLevel(0);
         setHintUsed(false);
-        // totalHintsUsed is NOT reset — it accumulates across stages
       }
     } else {
-      // Wrong answer — retry the current stage
-      // Remove this stage's hint clicks from total so retry is fair
       setTotalHintsUsed(t => Math.max(0, t - hintLevel));
       setAnswer('');
       setFeedback(null);
@@ -617,12 +587,6 @@ function DetectiveCaseView({ caseData, initialStage, onComplete, onBack }) {
     }
   };
 
-  const handleSkip = () => {
-    if (revealed) return;
-    setRevealed(true);
-    setFeedback({ correct: false, correctAnswer: stage.answer });
-  };
-
   useEffect(() => {
     if (!revealed) return;
     const handleKey = (e) => {
@@ -630,31 +594,15 @@ function DetectiveCaseView({ caseData, initialStage, onComplete, onBack }) {
     };
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [revealed, feedback, stageIndex]);
-
-  // ─── Star rating helper ────────────────────────────────────────────────
-  function renderStars(hintLevel) {
-    const starCount = hintLevel === 0 ? 3 : hintLevel === 1 ? 2 : 1;
-    const stars = [];
-    for (let i = 0; i < 3; i++) {
-      stars.push(
-        <span key={i} className={i < starCount ? 'mda-star' : ''} style={{ fontSize: '1.8rem', opacity: i < starCount ? 1 : 0.25, animationDelay: `${i * 0.15}s` }}>
-          {i < starCount ? '⭐' : '☆'}
-        </span>
-      );
-    }
-    return (
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '0.3rem', margin: '0.2rem 0 0.5rem' }}>
-        {stars}
-      </div>
-    );
-  }
 
   // Play sound on correct stage answer
   useEffect(() => {
     if (revealed && feedback?.correct && stageIndex < caseData.stages.length - 1) {
       playCorrectSound();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [revealed, stageIndex]);
 
   // ─── Confetti effect ──────────────────────────────────────────────────
@@ -705,6 +653,51 @@ function DetectiveCaseView({ caseData, initialStage, onComplete, onBack }) {
     animate();
     return () => { if (frame) cancelAnimationFrame(frame); };
   }, [completed]);
+
+  const stage = caseData.stages[stageIndex];
+  if (!stage) return null;
+
+  const hints = stage.hints || [];
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (revealed || !answer.trim()) return;
+    const correct = checkDetectiveAnswer(stage.answer, answer);
+    setRevealed(true);
+    setFeedback({ correct, correctAnswer: stage.answer });
+  };
+
+  const handleHint = () => {
+    if (hintLevel < hints.length) {
+      setHintLevel(h => h + 1);
+      setTotalHintsUsed(t => t + 1);
+      setHintUsed(true);
+    }
+  };
+
+  const handleSkip = () => {
+    if (revealed) return;
+    setRevealed(true);
+    setFeedback({ correct: false, correctAnswer: stage.answer });
+  };
+
+  // ─── Star rating helper ────────────────────────────────────────────────
+  function renderStars(hintLevel) {
+    const starCount = hintLevel === 0 ? 3 : hintLevel === 1 ? 2 : 1;
+    const stars = [];
+    for (let i = 0; i < 3; i++) {
+      stars.push(
+        <span key={i} className={i < starCount ? 'mda-star' : ''} style={{ fontSize: '1.8rem', opacity: i < starCount ? 1 : 0.25, animationDelay: `${i * 0.15}s` }}>
+          {i < starCount ? '⭐' : '☆'}
+        </span>
+      );
+    }
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '0.3rem', margin: '0.2rem 0 0.5rem' }}>
+        {stars}
+      </div>
+    );
+  }
 
   if (completed) {
     const starCount = totalHintsUsed === 0 ? 3 : totalHintsUsed <= 2 ? 2 : 1;
@@ -968,7 +961,7 @@ const ACHIEVEMENTS = [
   { id: 'veteran',       title: 'Veteran',           icon: '🎖️', desc: 'Solve 10 cases', check: (p) => p.casesSolved >= 10 },
   { id: 'diamond',       title: 'Diamond Detective', icon: '💎', desc: 'Get 3 stars on 5 cases', check: (p) => Object.values(p.cases || {}).filter(c => c.stars === 3).length >= 5 },
   { id: 'scholar',       title: 'Scholar',           icon: '📚', desc: 'Solve cases from 10 topics', check: (p) => { const topics = new Set(Object.values(p.cases || {}).map(c => c.topic)); return topics.size >= 10; } },
-  { id: 'completionist', title: 'Completionist',     icon: '🏆', desc: 'Solve all cases', check: (p) => false },
+  { id: 'completionist', title: 'Completionist',     icon: '🏆', desc: 'Solve all cases', check: () => false },
 ];
 
 const ACHIEVEMENT_STORAGE_KEY = 'tenali-detective-achievements';
@@ -978,15 +971,15 @@ function loadAchievements() {
   try {
     const raw = localStorage.getItem(ACHIEVEMENT_STORAGE_KEY);
     if (raw) return JSON.parse(raw);
-  } catch {}
+  } catch { /* ignored */ }
   return {};
 }
 
 function saveAchievements(data) {
-  try { localStorage.setItem(ACHIEVEMENT_STORAGE_KEY, JSON.stringify(data)); } catch {}
+  try { localStorage.setItem(ACHIEVEMENT_STORAGE_KEY, JSON.stringify(data)); } catch { /* ignored */ }
 }
 
-function checkAndAwardAchievements(progress) {
+function _checkAndAwardAchievements(progress) {
   const unlocked = loadAchievements();
   const newlyUnlocked = [];
   for (const a of ACHIEVEMENTS) {
@@ -1004,9 +997,9 @@ function checkAndAwardAchievements(progress) {
   return newlyUnlocked;
 }
 
-function DetectiveAchievements({ onBack, progress }) {
-  const [unlocked, setUnlocked] = useState(loadAchievements);
-  const [dismissedNotif, setDismissedNotif] = useState(null);
+function DetectiveAchievements({ onBack }) {
+  const [unlocked, _setUnlocked] = useState(loadAchievements);
+  const [_dismissedNotif, _setDismissedNotif] = useState(null);
 
   const earnedCount = Object.keys(unlocked).length;
   const totalCount = ACHIEVEMENTS.length;
@@ -1079,7 +1072,6 @@ function DetectiveAchievements({ onBack, progress }) {
 // ─── Achievement Notification ─────────────────────────────────────────
 
 function AchievementNotification({ achievements, onDismiss }) {
-  if (!achievements || achievements.length === 0) return null;
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
@@ -1092,7 +1084,10 @@ function AchievementNotification({ achievements, onDismiss }) {
       const timer = setTimeout(() => onDismiss(), 500);
       return () => clearTimeout(timer);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible]);
+
+  if (!achievements || achievements.length === 0) return null;
 
   return (
     <div style={{
@@ -1130,12 +1125,12 @@ function loadLeaderboard() {
   try {
     const raw = localStorage.getItem(LEADERBOARD_KEY);
     if (raw) return JSON.parse(raw);
-  } catch {}
+  } catch { /* ignored */ }
   return { bestScores: [], byCase: {} };
 }
 
 function saveLeaderboard(data) {
-  try { localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(data)); } catch {}
+  try { localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(data)); } catch { /* ignored */ }
 }
 
 function updateLeaderboard(caseId, stars, xp, hintLevel, topic) {
@@ -1155,8 +1150,8 @@ function updateLeaderboard(caseId, stars, xp, hintLevel, topic) {
   saveLeaderboard(data);
 }
 
-function DetectiveLeaderboard({ onBack, progress, totalCases, caseLookup }) {
-  const [leaderData, setLeaderData] = useState(loadLeaderboard);
+function DetectiveLeaderboard({ onBack, totalCases, caseLookup }) {
+  const [leaderData, _setLeaderData] = useState(loadLeaderboard);
   const [sortBy, setSortBy] = useState('stars'); // 'stars' | 'xp' | 'recent'
 
   let entries = Object.entries(leaderData.byCase);
@@ -1264,7 +1259,7 @@ function DetectiveLeaderboard({ onBack, progress, totalCases, caseLookup }) {
 
 // ─── Floating Background Particles ───────────────────────────────────
 function DetectiveParticles() {
-  const particles = useMemo(() => {
+  const [particles] = useState(() => {
     const emojis = ['🔍', '🔎', '⭐', '🕵️', '🔦', '📜', '🧩', '💡', '📋', '🔐', '🎯', '📝'];
     return Array.from({ length: 18 }, (_, i) => ({
       id: i,
@@ -1274,7 +1269,7 @@ function DetectiveParticles() {
       duration: 12 + Math.random() * 18,
       delay: Math.random() * 20,
     }));
-  }, []);
+  });
 
   return (
     <div className="mda-particles-container" aria-hidden="true">
@@ -1343,9 +1338,9 @@ export default function EnhancedMathDetectiveApp({ onBack }) {
     : 100;
 
   // Track used case IDs per topic for deduplication
-  const usedCaseIds = progress.usedCaseIds || [];
+  const _usedCaseIds = progress.usedCaseIds || [];
   // Ensure totalStars is initialized
-  if (!progress.totalStars) progress.totalStars = 0;
+  const _totalStars = progress.totalStars || 0;
 
   // Determine initial screen
   useEffect(() => {
@@ -1361,6 +1356,7 @@ export default function EnhancedMathDetectiveApp({ onBack }) {
     } else {
       setScreen('library');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Case deduplication: pick a case that hasn't been used for the same topic
@@ -1477,7 +1473,7 @@ export default function EnhancedMathDetectiveApp({ onBack }) {
       const reset = { xp: 0, casesSolved: 0, cases: {}, usedCaseIds: [] };
       saveDetectiveProgress(reset);
       // Also clear leaderboard
-      try { localStorage.removeItem(LEADERBOARD_KEY); } catch {}
+      try { localStorage.removeItem(LEADERBOARD_KEY); } catch { /* ignored */ }
       setProgress(reset);
       setScreen('dashboard');
       setActiveCaseId(null);

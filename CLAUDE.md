@@ -47,7 +47,7 @@ One monolithic file. The structure top-to-bottom:
 3. **Utility functions** — `gcd`, `lcm`, `simplifyFraction`, `randomInt`, `pick`, `digitRange`, `formatSignedTerm`, etc.
 4. **Data loading** — `loadQuestions()` reads 991 GK JSONs from `chitragupta/questions/`; `loadVocab()` reads 7,662 vocab JSONs from `vocab/questions/`. Both load at startup.
 5. **59 endpoint pairs** — one `GET` (question generation) and one `POST` (answer checking) per puzzle type. Difficulty (0–3) drives parameter ranges via helpers like `digitRange(difficulty)`.
-6. **Auth** (`server/auth.js`) — JWT auth backed by MongoDB, with an in-memory fallback for the two seed users (`sudarshan`/`sherlockholmes`, `tatsavit`/`taittiriya`) when MongoDB is unavailable.
+6. **Auth** (`server/auth.js`) — JWT auth backed by MongoDB, with an in-memory fallback for the seed users when MongoDB is unavailable. Seed users are configured via the `TENALI_SEED_USERS` env var (`"username:password"` pairs), not hardcoded.
 7. **Static serving** — serves `client/dist`, `graph/`, `enhanced/`, and a SPA catch-all.
 
 ### Client (`client/src/App.jsx` — ~47000 lines)
@@ -73,7 +73,7 @@ Each quiz tracks `adaptScore` (float 0–3). Correct → +0.15 to +0.5; wrong �
 
 ### Deployment topology
 ```
-tenali.fun (DNS → 143.110.241.156)
+tenali.fun (DNS → <production IP — see README deployment section>)
   └── Nginx (SSL via Let's Encrypt, /etc/nginx/sites-available/tenali)
         └── proxy_pass http://127.0.0.1:4000
               └── tenali.service (systemd, runs as tenali user)

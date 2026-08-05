@@ -1,0 +1,436 @@
+{
+  "module": 1,
+  "topicId": "Q1.5",
+  "title": "Plot y = 2x + 1",
+  "topic": "The +1 shifts the line off the origin; y-intercept concept.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M1Q5E1",
+        "question": "What is y when x=0 on y=2x+1?",
+        "options": [
+          "Zero",
+          "One",
+          "Two",
+          "Three"
+        ],
+        "correct_option": "One",
+        "explanation": "At x=0 the line gives y=2(0)+1=1, so the y-value is 1."
+      },
+      {
+        "id": "M1Q5E2",
+        "question": "What is y when x=1 on y=2x+1?",
+        "options": [
+          "Two",
+          "Three",
+          "Four",
+          "Five"
+        ],
+        "correct_option": "Three",
+        "explanation": "y=2(1)+1=3, so y takes the value 3 when x=1."
+      },
+      {
+        "id": "M1Q5E3",
+        "question": "What is y when x=2 on y=2x+1?",
+        "options": [
+          "Three",
+          "Four",
+          "Five",
+          "Six"
+        ],
+        "correct_option": "Five",
+        "explanation": "y=2(2)+1=5, so y is 5 at x=2."
+      },
+      {
+        "id": "M1Q5E4",
+        "question": "Does y=2x+1 pass through origin?",
+        "options": [
+          "No, 0≠1",
+          "Yes, obviously",
+          "Only if x>0",
+          "Cannot decide"
+        ],
+        "correct_option": "No, 0≠1",
+        "explanation": "At x=0 the line gives y=1, not 0, so (0,0) is not on it."
+      },
+      {
+        "id": "M1Q5E5",
+        "question": "Where does y=2x+1 cross y-axis?",
+        "options": [
+          "(0,0)",
+          "(0,1)",
+          "(1,0)",
+          "(0,2)"
+        ],
+        "correct_option": "(0,1)",
+        "explanation": "The y-axis has x=0; substituting gives y=1, so the crossing is at (0,1)."
+      },
+      {
+        "id": "M1Q5E6",
+        "question": "Where does y=2x+1 cross x-axis?",
+        "options": [
+          "(-½,0)",
+          "(0,0)",
+          "(½,0)",
+          "(-1,0)"
+        ],
+        "correct_option": "(-½,0)",
+        "explanation": "Setting y=0 gives 2x+1=0 so x=-½, and the crossing is (-½,0)."
+      },
+      {
+        "id": "M1Q5E7",
+        "question": "What is the y-intercept of y=2x+1?",
+        "options": [
+          "Zero",
+          "One",
+          "Two",
+          "Minus one"
+        ],
+        "correct_option": "One",
+        "explanation": "The constant term b=1 is the y-intercept, located at (0,1)."
+      },
+      {
+        "id": "M1Q5E8",
+        "question": "What is the slope of y=2x+1?",
+        "options": [
+          "One",
+          "Two",
+          "Three",
+          "Zero"
+        ],
+        "correct_option": "Two",
+        "explanation": "The coefficient of x is 2, so the slope equals 2."
+      },
+      {
+        "id": "M1Q5E9",
+        "question": "As x increases, does y=2x+1 go up?",
+        "options": [
+          "Yes, slope>0",
+          "No, slope<0",
+          "Stays flat",
+          "Cannot decide"
+        ],
+        "correct_option": "Yes, slope>0",
+        "explanation": "Positive slope 2 means y increases whenever x increases, so the line rises."
+      },
+      {
+        "id": "M1Q5E10",
+        "question": "Which pair of points lie on y=2x+1?",
+        "options": [
+          "(0,1)&(1,3)",
+          "(0,0)&(1,2)",
+          "(1,1)&(2,3)",
+          "(0,2)&(1,4)"
+        ],
+        "correct_option": "(0,1)&(1,3)",
+        "explanation": "Substituting: 2(0)+1=1 and 2(1)+1=3, so both (0,1) and (1,3) lie on the line."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M1Q5M1",
+        "question": "y=2x+1 versus y=2x — which lies above?",
+        "options": [
+          "y=2x+1",
+          "y=2x",
+          "Coincide always",
+          "Depends on x"
+        ],
+        "correct_option": "y=2x+1",
+        "explanation": "For every x, 2x+1 exceeds 2x by exactly 1, so y=2x+1 is always above y=2x."
+      },
+      {
+        "id": "M1Q5M2",
+        "question": "The vertical gap between y=2x+1 and y=2x?",
+        "options": [
+          "Zero",
+          "One",
+          "Two",
+          "Equals x"
+        ],
+        "correct_option": "One",
+        "explanation": "Subtracting gives (2x+1) − 2x = 1, a constant vertical gap of 1 unit."
+      },
+      {
+        "id": "M1Q5M3",
+        "question": "y=2x+b passes through (0,1). What is b?",
+        "options": [
+          "Zero",
+          "One",
+          "Two",
+          "Three"
+        ],
+        "correct_option": "One",
+        "explanation": "Substituting (0,1): 1=2(0)+b, so b=1."
+      },
+      {
+        "id": "M1Q5M4",
+        "question": "On y=2x+1, what is x when y=9?",
+        "options": [
+          "Three",
+          "Four",
+          "Five",
+          "Eight"
+        ],
+        "correct_option": "Four",
+        "explanation": "Setting 2x+1=9 gives 2x=8, so x=4."
+      },
+      {
+        "id": "M1Q5M5",
+        "question": "Slope and intercept of y=2x+1 are:",
+        "options": [
+          "Two, one",
+          "One, two",
+          "Two, zero",
+          "Zero, one"
+        ],
+        "correct_option": "Two, one",
+        "explanation": "Coefficient of x is 2 (slope) and constant term is 1 (y-intercept)."
+      },
+      {
+        "id": "M1Q5M6",
+        "question": "y=2x+c through (3,7). What is c?",
+        "options": [
+          "Zero",
+          "One",
+          "Two",
+          "Three"
+        ],
+        "correct_option": "One",
+        "explanation": "Plugging in: 7=2(3)+c = 6+c, so c=1."
+      },
+      {
+        "id": "M1Q5M7",
+        "question": "Intercepts of y=2x+1 and y=2x-1 are:",
+        "options": [
+          "One, minus one",
+          "Both one",
+          "Both minus one",
+          "Minus one, one"
+        ],
+        "correct_option": "One, minus one",
+        "explanation": "First line has y-intercept 1, second has y-intercept -1; both share slope 2."
+      },
+      {
+        "id": "M1Q5M8",
+        "question": "Do y=2x+1 and y=2x+5 meet?",
+        "options": [
+          "No, parallel",
+          "Yes, one point",
+          "Two points",
+          "At origin"
+        ],
+        "correct_option": "No, parallel",
+        "explanation": "Same slope 2 with different y-intercepts makes two parallel lines that never intersect."
+      },
+      {
+        "id": "M1Q5M9",
+        "question": "y=2x+1 with itself — how many common points?",
+        "options": [
+          "Infinitely many",
+          "None",
+          "Exactly one",
+          "Cannot decide"
+        ],
+        "correct_option": "Infinitely many",
+        "explanation": "A line coincides with itself, so every point on it lies on the 'other' copy — infinitely many."
+      },
+      {
+        "id": "M1Q5M10",
+        "question": "y=2x+1 meets y=-2x+1 at:",
+        "options": [
+          "(0,1)",
+          "(1,3)",
+          "(0,0)",
+          "(1,1)"
+        ],
+        "correct_option": "(0,1)",
+        "explanation": "Equating: 2x+1 = -2x+1 ⇒ 4x=0 ⇒ x=0, giving y=1; intersection is (0,1)."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M1Q5H1",
+        "question": "y=2x+1 is y=2x shifted how?",
+        "options": [
+          "Up by one",
+          "Down by one",
+          "Left by one",
+          "Right by one"
+        ],
+        "correct_option": "Up by one",
+        "explanation": "Adding +1 to the right side translates the whole graph vertically up by one unit."
+      },
+      {
+        "id": "M1Q5H2",
+        "question": "y=2x+1 meets x-axis at which point?",
+        "options": [
+          "(0,0)",
+          "(-½,0)",
+          "(½,0)",
+          "(0,1)"
+        ],
+        "correct_option": "(-½,0)",
+        "explanation": "Setting y=0 in 2x+1=0 gives x=-½, so the x-intercept is (-½, 0)."
+      },
+      {
+        "id": "M1Q5H3",
+        "question": "Are y=2x+1 and y=4x+1 parallel?",
+        "options": [
+          "No, slopes differ",
+          "Yes, same intercept",
+          "Yes, always",
+          "Cannot decide"
+        ],
+        "correct_option": "No, slopes differ",
+        "explanation": "Parallel lines require equal slopes, but 2 ≠ 4, so these two lines are not parallel."
+      },
+      {
+        "id": "M1Q5H4",
+        "question": "Vertical gap between y=2x+1 and y=2x-1?",
+        "options": [
+          "One",
+          "Two",
+          "Three",
+          "Four"
+        ],
+        "correct_option": "Two",
+        "explanation": "At any x, (2x+1) − (2x-1) = 2, so the lines stay exactly 2 units apart."
+      },
+      {
+        "id": "M1Q5H5",
+        "question": "y=2x+1 and y=-x+4 intersect at:",
+        "options": [
+          "(1,3)",
+          "(2,5)",
+          "(3,1)",
+          "(0,4)"
+        ],
+        "correct_option": "(1,3)",
+        "explanation": "Equating: 2x+1 = -x+4 ⇒ 3x = 3 ⇒ x=1; then y=2(1)+1=3; intersection is (1,3)."
+      },
+      {
+        "id": "M1Q5H6",
+        "question": "Does y=2x+1 ever pass through (0,0)?",
+        "options": [
+          "No, never",
+          "Yes, always",
+          "Only m adjusted",
+          "Cannot decide"
+        ],
+        "correct_option": "No, never",
+        "explanation": "Plugging (0,0) gives 0=1, a false statement, so (0,0) is never on this line."
+      },
+      {
+        "id": "M1Q5H7",
+        "question": "Is the point (1,3) on y=2x+1?",
+        "options": [
+          "Yes, satisfies",
+          "No, fails",
+          "Approximately only",
+          "Cannot decide"
+        ],
+        "correct_option": "Yes, satisfies",
+        "explanation": "Compute 2(1)+1 = 3, matching the y-coordinate; (1,3) lies exactly on the line."
+      },
+      {
+        "id": "M1Q5H8",
+        "question": "From y-2x=1, what is the x-intercept?",
+        "options": [
+          "Zero",
+          "Minus ½",
+          "Plus ½",
+          "One"
+        ],
+        "correct_option": "Minus ½",
+        "explanation": "Setting y=0 gives -2x=1, so x=-½; the x-intercept is the point (-½, 0)."
+      },
+      {
+        "id": "M1Q5H9",
+        "question": "y=2x+b passes through (1,5). What is b?",
+        "options": [
+          "One",
+          "Two",
+          "Three",
+          "Four"
+        ],
+        "correct_option": "Three",
+        "explanation": "Substituting: 5 = 2(1) + b ⇒ b = 3."
+      },
+      {
+        "id": "M1Q5H10",
+        "question": "Is y=2x+1 steeper than y=x+1?",
+        "options": [
+          "Yes, slope bigger",
+          "No, slopes equal",
+          "Intercept decides",
+          "Cannot decide"
+        ],
+        "correct_option": "Yes, slope bigger",
+        "explanation": "Slope 2 > slope 1, so y=2x+1 rises faster and is the steeper line."
+      }
+    ],
+    "real_life_application": [
+      {
+        "id": "M1Q5R1",
+        "question": "Taxi: ₹20 base + ₹10/km. Which equation fits?",
+        "options": [
+          "y=10x+20",
+          "y=20x+10",
+          "y=10x only",
+          "y=20+x"
+        ],
+        "correct_option": "y=10x+20",
+        "explanation": "Slope ₹10/km and y-intercept ₹20 base fare give Fare = 10·distance + 20."
+      },
+      {
+        "id": "M1Q5R2",
+        "question": "Phone plan: ₹300/month + ₹0.50/min. What is the intercept?",
+        "options": [
+          "₹0.50",
+          "₹300",
+          "₹300.50",
+          "₹0"
+        ],
+        "correct_option": "₹300",
+        "explanation": "The fixed monthly fee ₹300 is the cost when minutes = 0, i.e. the y-intercept."
+      },
+      {
+        "id": "M1Q5R3",
+        "question": "Tank starts at 100 L, fills 20 L/min. Which equation?",
+        "options": [
+          "V=20t+100",
+          "V=100t+20",
+          "V=20t only",
+          "V=100t only"
+        ],
+        "correct_option": "V=20t+100",
+        "explanation": "Initial volume 100 L (intercept) and filling rate 20 L/min (slope) give V = 20t + 100."
+      },
+      {
+        "id": "M1Q5R4",
+        "question": "School: ₹1000 one-time + ₹500/month. What is intercept?",
+        "options": [
+          "₹500",
+          "₹1000",
+          "₹1500",
+          "₹0"
+        ],
+        "correct_option": "₹1000",
+        "explanation": "When months = 0 only the one-time ₹1000 fee applies; that is the y-intercept."
+      },
+      {
+        "id": "M1Q5R5",
+        "question": "Printer: ₹50 setup + ₹2/page. Slope and intercept?",
+        "options": [
+          "Slope=2, int=50",
+          "Slope=50, int=2",
+          "Slope=52, int=0",
+          "Slope=0, int=52"
+        ],
+        "correct_option": "Slope=2, int=50",
+        "explanation": "₹2 per page is the slope and the ₹50 setup fee is the intercept, so Cost = 2·pages + 50."
+      }
+    ]
+  }
+}

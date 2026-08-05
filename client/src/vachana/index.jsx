@@ -191,7 +191,7 @@ function ConfirmModal({ isOpen, title, message, onConfirm, onCancel, confirmLabe
 export default function Vachana({ onBack }) {
   // Pre-select tab based on URL (e.g. /vachana/vocab → 'vocab')
   const [activeTab, setActiveTab] = useState(getTabFromUrl);
-  const [confirmModal, setConfirmModal] = useState(null);
+  const [, setConfirmModal] = useState(null);
 
   // Keep URL in sync when tab changes programmatically
   const selectTab = (id) => {

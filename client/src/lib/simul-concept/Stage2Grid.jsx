@@ -5,8 +5,8 @@ import 'mafs/font.css';
 
 export default function Stage2Grid({ onComplete }) {
   // Line 1 (Fixed initially)
-  const [m1, setM1] = useState(1);
-  const [c1, setC1] = useState(1);
+  const [m1, _setM1] = useState(1);
+  const [c1, _setC1] = useState(1);
   
   // Line 2 (Varying)
   const [m2, setM2] = useState(-1);

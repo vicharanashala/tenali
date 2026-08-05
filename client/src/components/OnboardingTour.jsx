@@ -70,7 +70,7 @@ export default function OnboardingTour({ onFinish, mode }) {
 
   const [currentStep, setCurrentStep] = useState(0);
   const [muted, setMuted] = useState(false);
-  const [position, setPosition] = useState({ x: window.innerWidth / 2 - 240, y: window.innerHeight / 2 - 150 });
+  const [position, setPosition] = useState(() => ({ x: window.innerWidth / 2 - 240, y: window.innerHeight / 2 - 160 }));
   const utteranceRef = useRef(null);
 
   // Speak current step message
@@ -110,6 +110,7 @@ export default function OnboardingTour({ onFinish, mode }) {
     return () => {
       window.speechSynthesis.cancel();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentStep, muted]);
 
   // Handle Highlighting and auto-positioning
@@ -145,6 +146,7 @@ export default function OnboardingTour({ onFinish, mode }) {
         }, 500);
       }
     } else {
+       
       setPosition({
         x: window.innerWidth / 2 - 240,
         y: window.innerHeight / 2 - 160
@@ -154,6 +156,7 @@ export default function OnboardingTour({ onFinish, mode }) {
     return () => {
       document.querySelectorAll('.tour-highlighted').forEach(el => el.classList.remove('tour-highlighted'));
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentStep]);
 
   const handleNext = () => {

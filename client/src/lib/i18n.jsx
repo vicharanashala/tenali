@@ -30,6 +30,7 @@ const LOCALE_DATA = {
 };
 
 // Language metadata (displayed in the language selector)
+// eslint-disable-next-line react-refresh/only-export-components
 export const LANGUAGES = [
   { code: 'en', name: 'English', nativeName: 'English', script: 'latin' },
   { code: 'hi', name: 'Hindi', nativeName: 'हिन्दी', script: 'devanagari' },
@@ -43,13 +44,14 @@ const STORAGE_KEY = 'tenali-lang';
 
 const I18nContext = createContext();
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useI18n() {
   return useContext(I18nContext);
 }
 
 export function I18nProvider({ children }) {
   // Load saved language preference from localStorage (default: English)
-  const [locale, setLocaleState] = useState(() => {
+  const [locale, _setLocaleState] = useState(() => {
     try {
       return localStorage.getItem(STORAGE_KEY) || 'en';
     } catch {
@@ -57,20 +59,19 @@ export function I18nProvider({ children }) {
     }
   });
 
-  const [translations, setTranslations] = useState(LOCALE_DATA[locale] || en);
-  const [loading, setLoading] = useState(false);
+  const [translations] = useState(() => LOCALE_DATA[locale] || en);
+  const [loading] = useState(false);
 
   // Load translations when locale changes
   useEffect(() => {
-    setTranslations(LOCALE_DATA[locale] || en);
-
     // Set lang attribute on <html> for CSS script-aware styling
     document.documentElement.setAttribute('lang', locale);
 
     // Persist preference
     try {
       localStorage.setItem(STORAGE_KEY, locale);
-    } catch {}
+    } catch { // ignored
+    }
   }, [locale]);
 
   // Global fetch interceptor to translate API questions/options automatically
@@ -104,7 +105,7 @@ export function I18nProvider({ children }) {
             statusText: response.statusText,
             headers: response.headers
           });
-        } catch (e) {
+        } catch {
           // Fall back to original response if parsing fails
         }
       }
@@ -136,7 +137,8 @@ export function I18nProvider({ children }) {
     if (LOCALE_DATA[code] && code !== locale) {
       try {
         localStorage.setItem(STORAGE_KEY, code);
-      } catch {}
+      } catch { // ignored
+      }
       window.location.reload();
     }
   }, [locale]);

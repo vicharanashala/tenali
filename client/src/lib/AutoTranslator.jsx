@@ -1,7 +1,45 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useI18n } from './i18n';
 import { translateDynamic } from './QuestionTranslator';
 import en from '../locales/en.json';
+
+// ── Translation fallback ─────────────────────────────────────────────────────
+// Text not covered by the bundled dictionaries is translated via the server's
+// /api/translate proxy (backed by the official Google Cloud Translation API —
+// see server/translate.js), never called directly from the browser. Every call
+// is defensively wrapped: a request timeout (AbortController), an HTTP-ok
+// check, defensive parsing, and a graceful fallback to the original text on
+// ANY failure — a failed translation never breaks the UI.
+const API = import.meta.env.VITE_API_BASE_URL || '';
+const TRANSLATE_TIMEOUT_MS = 5000;
+
+function fetchTranslation(text, locale, cacheKey) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), TRANSLATE_TIMEOUT_MS);
+  return fetch(`${API}/api/translate`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text, targetLang: locale }),
+    signal: controller.signal,
+  })
+    .then(r => {
+      if (!r.ok) throw new Error(`translate HTTP ${r.status}`);
+      return r.json();
+    })
+    .then(data => {
+      const resText = data && data.translated;
+      if (!resText) throw new Error('empty translation');
+      if (cacheKey) localStorage.setItem(cacheKey, resText);
+      return resText;
+    })
+    .catch(err => {
+      if (err && err.name !== 'AbortError') {
+        console.warn('[AutoTranslator] translation failed, using original text:', err.message);
+      }
+      return text; // graceful fallback — UI keeps the untranslated string
+    })
+    .finally(() => clearTimeout(timer));
+}
 
 
 const extraDicts = {
@@ -319,12 +357,10 @@ const extraDicts = {
 
 export function AutoTranslator() {
   const { locale, translations } = useI18n();
-  const [enToCurrent, setEnToCurrent] = useState({});
   const enToCurrentRef = useRef({});
 
   useEffect(() => {
     if (locale === 'en' || !translations) {
-      setEnToCurrent({});
       enToCurrentRef.current = {};
       return;
     }
@@ -334,7 +370,6 @@ export function AutoTranslator() {
         map[en[key].trim().toLowerCase()] = translations[key];
       }
     }
-    setEnToCurrent(map);
     enToCurrentRef.current = map;
   }, [locale, translations]);
 
@@ -399,13 +434,7 @@ export function AutoTranslator() {
             } else {
               if (!window.pendingTrans) window.pendingTrans = {};
               if (!window.pendingTrans[cacheKey]) {
-                window.pendingTrans[cacheKey] = fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=${locale}&dt=t&q=${encodeURIComponent(trimmed)}`)
-                  .then(r => r.json())
-                  .then(data => {
-                    const resText = data[0].map(item => item[0]).join('');
-                    localStorage.setItem(cacheKey, resText);
-                    return resText;
-                  }).catch(e => trimmed);
+                window.pendingTrans[cacheKey] = fetchTranslation(trimmed, locale, cacheKey);
               }
               window.pendingTrans[cacheKey].then(resText => {
                 // Ensure the node hasn't been modified by React while we were fetching
@@ -435,13 +464,7 @@ export function AutoTranslator() {
               } else {
                 if (!window.pendingTrans) window.pendingTrans = {};
                 if (!window.pendingTrans[cacheKey]) {
-                  window.pendingTrans[cacheKey] = fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=${locale}&dt=t&q=${encodeURIComponent(ph)}`)
-                    .then(r => r.json())
-                    .then(data => {
-                      const resText = data[0].map(item => item[0]).join('');
-                      localStorage.setItem(cacheKey, resText);
-                      return resText;
-                    }).catch(e => ph);
+                  window.pendingTrans[cacheKey] = fetchTranslation(ph, locale, cacheKey);
                 }
                 window.pendingTrans[cacheKey].then(resText => {
                   if (resText && resText !== ph && node.getAttribute('placeholder') === ph) {
@@ -489,13 +512,7 @@ export function AutoTranslator() {
                  } else {
                    if (!window.pendingTrans) window.pendingTrans = {};
                    if (!window.pendingTrans[cacheKey]) {
-                     window.pendingTrans[cacheKey] = fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=${locale}&dt=t&q=${encodeURIComponent(trimmed)}`)
-                       .then(r => r.json())
-                       .then(data => {
-                         const resText = data[0].map(item => item[0]).join('');
-                         localStorage.setItem(cacheKey, resText);
-                         return resText;
-                       }).catch(e => trimmed);
+                     window.pendingTrans[cacheKey] = fetchTranslation(trimmed, locale, cacheKey);
                    }
                    window.pendingTrans[cacheKey].then(resText => {
                      if (resText && resText !== trimmed && node.nodeValue === original) {

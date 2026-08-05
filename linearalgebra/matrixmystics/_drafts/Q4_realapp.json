@@ -1,0 +1,292 @@
+{
+  "module": 4,
+  "topics": [
+    {
+      "topicId": "Q4.1",
+      "title": "M = [[1, 3], [2, 6]]: plot R, C, N",
+      "real_life_application": [
+        {
+          "id": "M4Q1R1",
+          "question": "In a Geogebra sketch of M = [[1, 3], [2, 6]], the row space R(M) appears as a line whose slope equals which value?",
+          "options": ["Three to one", "Two to one", "Negative three", "Negative one half"],
+          "correct_option": "Three to one",
+          "explanation": "R(M) is spanned by (1, 3), giving the line y = 3x with slope 3; the other lines (C, N) have different slopes."
+        },
+        {
+          "id": "M4Q1R2",
+          "question": "When plotting M = [[1, 3], [2, 6]], the column space C(M) should be drawn as a line through which origin in ℝ²?",
+          "options": ["Random offset", "Tilted no origin", "Through shared origin", "Shrunk to single point"],
+          "correct_option": "Through shared origin",
+          "explanation": "Every column space passes through the origin because M·0 = 0, so C(M) is a line through the shared origin."
+        },
+        {
+          "id": "M4Q1R3",
+          "question": "In a 2D Geogebra plot of M = [[1, 3], [2, 6]], the null space N(M) should be visually verified as perpendicular to which subspace?",
+          "options": ["Column space C(M)", "Row space R(M)", "Left null N(Mᵀ)", "Kernel again only"],
+          "correct_option": "Row space R(M)",
+          "explanation": "The fundamental theorem gives R(M) ⊥ N(M), so N(M) should be drawn perpendicular to the row line through origin."
+        },
+        {
+          "id": "M4Q1R4",
+          "question": "For a rank-1 2x2 matrix, the four fundamental subspaces reduce to how many distinct lines in ℝ²?",
+          "options": ["Three distinct lines", "Two distinct lines", "Four distinct lines", "Just one line"],
+          "correct_option": "Three distinct lines",
+          "explanation": "R(M) and N(M) are perpendicular lines, and C(M) and N(Mᵀ) are another perpendicular pair; in 2D, R(M) ≠ C(M) generally, yielding three or four distinct lines."
+        },
+        {
+          "id": "M4Q1R5",
+          "question": "A data analyst uses M = [[1, 3], [2, 6]] to model two perfectly collinear feature vectors; the rank-deficient geometry reveals which real-world interpretation?",
+          "options": ["Hidden third feature", "Linear dependency here", "Random noise only", "Full rank matrix"],
+          "correct_option": "Linear dependency here",
+          "explanation": "Rank 1 (rows are multiples) means the two features carry one piece of information; the second is linearly redundant."
+        }
+      ]
+    },
+    {
+      "topicId": "Q4.2",
+      "title": "R and N are orthogonal",
+      "real_life_application": [
+        {
+          "id": "M4Q2R1",
+          "question": "In signal processing, a noisy signal is decomposed into a component in C(A) plus a component in N(Aᵀ); the noise component lies in which subspace?",
+          "options": ["Left null space", "Row space only", "Kernel of Aᵀᵀ", "True signal span"],
+          "correct_option": "Left null space",
+          "explanation": "Noise modeled as unobservable lives in N(Aᵀ), the left null space, which is orthogonal to the signal subspace C(A)."
+        },
+        {
+          "id": "M4Q2R2",
+          "question": "In a least-squares regression, the residual vector r = b − A·x̂ is constrained to live in which fundamental subspace?",
+          "options": ["Column space only", "Row space signal", "Left null space", "Strict image set"],
+          "correct_option": "Left null space",
+          "explanation": "The normal equations force Aᵀ·r = 0, so the residual lies in N(Aᵀ), perpendicular to the model column space C(A)."
+        },
+        {
+          "id": "M4Q2R3",
+          "question": "A Green's function for a boundary-value PDE relates the kernel of a differential operator to which companion subspace?",
+          "options": ["Eigenvalue set only", "Range of operator", "Strict transpose form", "Adjoint operator only"],
+          "correct_option": "Range of operator",
+          "explanation": "The Green's function solves the PDE by inverting on the range, mapping the kernel complement to the range of the operator."
+        },
+        {
+          "id": "M4Q2R4",
+          "question": "In quantum mechanics, eigenspaces of a Hermitian operator for distinct eigenvalues are always which of the following?",
+          "options": ["Mutually orthogonal", "Parallel subspaces", "Identical subspaces", "Strictly nested here"],
+          "correct_option": "Mutually orthogonal",
+          "explanation": "Hermitian operators have orthogonal eigenspaces; this is a direct physical realization of the R(A) ⊥ N(A) pairing."
+        },
+        {
+          "id": "M4Q2R5",
+          "question": "For a 3x3 matrix of rank 2, the dimension of its null space in ℝ³ must be which value?",
+          "options": ["Two dimensional", "Equal to five", "One dimensional", "Always zero dim"],
+          "correct_option": "One dimensional",
+          "explanation": "By rank-nullity, nullity = 3 − rank = 3 − 2 = 1, so N(A) is a 1D line through the origin complementary to the 2D row space."
+        }
+      ]
+    },
+    {
+      "topicId": "Q4.3",
+      "title": "Null space of M and of Mᵀ",
+      "real_life_application": [
+        {
+          "id": "M4Q3R1",
+          "question": "For a rank-1 design matrix X in statistics, the right null space N(X) corresponds to which geometric object in the parameter space?",
+          "options": ["Linear constraint set", "Strict span of rows", "Sample mean vector", "Squared residual norm"],
+          "correct_option": "Linear constraint set",
+          "explanation": "N(X) is the set of parameter directions that produce zero fitted values; one such direction identifies one linear constraint."
+        },
+        {
+          "id": "M4Q3R2",
+          "question": "The left null space N(Xᵀ) of a design matrix gives which economically meaningful vector in regression diagnostics?",
+          "options": ["Hat matrix values", "Leverage scores only", "Response y values", "Cook's distances only"],
+          "correct_option": "Leverage scores only",
+          "explanation": "Projectors onto N(Xᵀ) reveal data points that the model cannot fit; their norms are the leverage scores."
+        },
+        {
+          "id": "M4Q3R3",
+          "question": "A symmetric matrix A has the special property that N(A) equals which other subspace?",
+          "options": ["N(Aᵀ) itself", "Just C(A) only", "Strict R(A) only", "Plain spectrum set"],
+          "correct_option": "N(Aᵀ) itself",
+          "explanation": "Symmetry gives A = Aᵀ, so the right and left null spaces coincide; this identifies invariant directions of A."
+        },
+        {
+          "id": "M4Q3R4",
+          "question": "For a non-symmetric rank-1 matrix, N(A) and N(Aᵀ) generally turn out to be which kind of subspaces?",
+          "options": ["Distinct subspaces", "Identical subspaces", "Nested subspaces", "Trivial zero only"],
+          "correct_option": "Distinct subspaces",
+          "explanation": "When A ≠ Aᵀ, the right and left null spaces differ: for M = [[1,3],[2,6]], N(M) has slope −1/3 and N(Mᵀ) has slope −1/2."
+        },
+        {
+          "id": "M4Q3R5",
+          "question": "The right null space N(A) and the left null space N(Aᵀ) always share which scalar quantity?",
+          "options": ["Common dimension", "Same basis vectors", "Equal span content", "Same row direction"],
+          "correct_option": "Common dimension",
+          "explanation": "Both have dimension n − rank(A) (or m − rank(A)); this shared nullity is the dimension count from rank-nullity."
+        }
+      ]
+    },
+    {
+      "topicId": "Q4.4",
+      "title": "C(M) ⊥ N(Mᵀ), R(M) ⊥ N(M)",
+      "real_life_application": [
+        {
+          "id": "M4Q4R1",
+          "question": "To verify the four-subspaces theorem on a 3x3 rank-2 matrix, one confirms by inner product that C(M) is perpendicular to which subspace?",
+          "options": ["N(Mᵀ)", "R(M) itself", "Strict C(Mᵀ)", "Plain kernel line"],
+          "correct_option": "N(Mᵀ)",
+          "explanation": "The fundamental theorem pairs C(M) with N(Mᵀ) as orthogonal complements in ℝᵐ; checking ⟨c, n⟩ = 0 verifies it."
+        },
+        {
+          "id": "M4Q4R2",
+          "question": "In a 4x4 matrix of rank 3, the dimension of the left null space N(Mᵀ) is forced to be which value?",
+          "options": ["One dimension", "Three dimension", "Four dimension", "Zero dimension"],
+          "correct_option": "One dimension",
+          "explanation": "dim(N(Mᵀ)) = m − rank = 4 − 3 = 1; one direction in ℝ⁴ lies orthogonal to every column of M."
+        },
+        {
+          "id": "M4Q4R3",
+          "question": "The projection onto C(M) along N(Mᵀ) is well-defined because C(M) and N(Mᵀ) together satisfy which property?",
+          "options": ["Direct sum only", "Identity map only", "Rank one property", "Singular matrix form"],
+          "correct_option": "Direct sum only",
+          "explanation": "Because C(M) ⊥ N(Mᵀ) and their dimensions sum to m, every vector in ℝᵐ splits uniquely into a C(M) plus N(Mᵀ) part."
+        },
+        {
+          "id": "M4Q4R4",
+          "question": "In a coding-theory view, the orthogonal complement relationship between C(M) and N(Mᵀ) is exactly the same as which dual notion?",
+          "options": ["Dual parity check", "Just identity code", "Plain message space", "Strict generator rank"],
+          "correct_option": "Dual parity check",
+          "explanation": "C(M) plays the role of a code and N(Mᵀ) the role of its dual parity-check space; the pairing R ⊥ N is the same orthogonality."
+        },
+        {
+          "id": "M4Q4R5",
+          "question": "For the 3x3 matrix A = [[1, 2, 3], [4, 5, 6], [7, 8, 9]], the dimension of R(A) is which value?",
+          "options": ["Two dimension", "Three dimension", "One dimension", "Zero dimension"],
+          "correct_option": "Two dimension",
+          "explanation": "This special matrix has rank 2, so the row space is a 2D plane in ℝ³, paired with the 1D null space (1, −2, 1)."
+        }
+      ]
+    },
+    {
+      "topicId": "Q4.5",
+      "title": "A = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]: N, C, R, N(Aᵀ)",
+      "real_life_application": [
+        {
+          "id": "M4Q5R1",
+          "question": "For A = [[1, 2, 3], [4, 5, 6], [7, 8, 9]], the vector (1, −2, 1) is the kernel direction; applied to a linear map, it acts as which kind of invariant?",
+          "options": ["Vanishing direction", "Pure eigenvalue set", "Strict projection axis", "Just unit vector"],
+          "correct_option": "Vanishing direction",
+          "explanation": "Being in N(A) means A·(1, −2, 1) = 0; this is a direction along which the linear map collapses everything to zero."
+        },
+        {
+          "id": "M4Q5R2",
+          "question": "Applying the SVD to A = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] yields how many nonzero singular values?",
+          "options": ["Two values", "Three values", "Just one value", "Four values"],
+          "correct_option": "Two values",
+          "explanation": "Rank 2 implies exactly two nonzero singular values; the third column of U and V is the kernel direction (1, −2, 1)."
+        },
+        {
+          "id": "M4Q5R3",
+          "question": "In a numerical linear algebra computation, the four subspaces of A = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] reveal that the matrix behaves like which simpler object?",
+          "options": ["Rank two model", "Strict identity ", "Full rank object", "Zero matrix itself"],
+          "correct_option": "Rank two model",
+          "explanation": "Although A is 3x3, every output lies in a 2D plane; the rank-2 reduction is what compresses the data."
+        },
+        {
+          "id": "M4Q5R4",
+          "question": "A data scientist fits A = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] and finds exact linear dependence in the columns; the column space C(A) is which geometric object?",
+          "options": ["Two dimensional plane", "Single point at origin", "Just one dim line", "Full three dim space"],
+          "correct_option": "Two dimensional plane",
+          "explanation": "C(A) is the 2D plane spanned by (1, 4, 7) and (2, 5, 8); the third column adds no new direction."
+        },
+        {
+          "id": "M4Q5R5",
+          "question": "For the matrix A = [[1, 2, 3], [4, 5, 6], [7, 8, 9]], the kernel vector (1, −2, 1) can be interpreted physically as which failure mode of the map?",
+          "options": ["Lost information axis", "Just identity axis", "Pure rotation axis", "Strict null result"],
+          "correct_option": "Lost information axis",
+          "explanation": "Any input along (1, −2, 1) is destroyed by A; this direction is the one piece of information the map cannot recover."
+        }
+      ]
+    },
+    {
+      "topicId": "Q4.6",
+      "title": "4x4 matrix M with range of various dimensions",
+      "real_life_application": [
+        {
+          "id": "M4Q6R1",
+          "question": "A 4x4 graphics transformation that preserves all four dimensions is best modeled by which canonical matrix?",
+          "options": ["Identity matrix I", "Strict zero matrix", "Diagonal 1,1,0,0", "Row duplicate form"],
+          "correct_option": "Identity matrix I",
+          "explanation": "Identity (or any invertible matrix) has rank 4, so its range is all of ℝ⁴ — no dimension is lost."
+        },
+        {
+          "id": "M4Q6R2",
+          "question": "A 4x4 stereo projection that flattens 3D world points onto a 2D screen is a map whose range has which dimension?",
+          "options": ["Two dimension", "Three dimension", "Four dimension", "One dimension"],
+          "correct_option": "Two dimension",
+          "explanation": "Projection onto a 2D plane collapses two dimensions; the output subspace is 2D, so rank 2."
+        },
+        {
+          "id": "M4Q6R3",
+          "question": "A rank-1 4x4 transformation collapses its 4D input onto which kind of geometric object?",
+          "options": ["Single line", "Full 4D space", "Two dimensional plane", "Three dim subspace"],
+          "correct_option": "Single line",
+          "explanation": "Rank 1 means the range is 1D, so all 4D inputs are squashed onto one line through the origin."
+        },
+        {
+          "id": "M4Q6R4",
+          "question": "When a 4x4 transform has rank 3, the null space of the map has which dimension?",
+          "options": ["One dimension", "Two dimension", "Three dimension", "Four dimension"],
+          "correct_option": "One dimension",
+          "explanation": "Rank-nullity for 4x4 gives nullity = 4 − rank = 4 − 3 = 1; one direction in the input is lost."
+        },
+        {
+          "id": "M4Q6R5",
+          "question": "A 4x4 zero matrix used in a layered neural network layer represents a map whose range is which kind of set?",
+          "options": ["Zero point only", "Single line form", "Two dimensional plane", "Full 4D span"],
+          "correct_option": "Zero point only",
+          "explanation": "The zero map sends every input to 0, so its range is the 0D set {0}; effectively the layer transmits nothing."
+        }
+      ]
+    },
+    {
+      "topicId": "Q4.7",
+      "title": "Range of A contains S, T",
+      "real_life_application": [
+        {
+          "id": "M4Q7R1",
+          "question": "In quantum mechanics, the range of an observable equals the set of which physically meaningful numbers?",
+          "options": ["Measurable scalars", "Pure quantum states", "Just Hamiltonian lumps", "Eigenvector axes only"],
+          "correct_option": "Measurable scalars",
+          "explanation": "The spectrum of a Hermitian operator equals the set of possible measurement outcomes — real scalars in the range."
+        },
+        {
+          "id": "M4Q7R2",
+          "question": "In control theory, the reachable set of a linear time-invariant system is the range of which constructed matrix?",
+          "options": ["Controllability matrix", "Plain identity matrix", "Strict zero matrix", "Just projection map"],
+          "correct_option": "Controllability matrix",
+          "explanation": "The controllability matrix [B, AB, A²B, …] has its column space exactly equal to the reachable set of states."
+        },
+        {
+          "id": "M4Q7R3",
+          "question": "A linear signal-processing system A has output space equal to the range of A; because A is linear, this output space is always which kind of set?",
+          "options": ["Subspace structure", "Random point cloud", "Discrete finite set", "Bounded Euclidean ball"],
+          "correct_option": "Subspace structure",
+          "explanation": "Linearity forces the image to be closed under linear combinations, so the output space is itself a subspace."
+        },
+        {
+          "id": "M4Q7R4",
+          "question": "In computer graphics, a perspective projection sends 3D world points onto a 2D image plane; this image plane is a 2D subspace inside which surrounding space?",
+          "options": ["Full 3D screen", "Just one 1D line", "Empty 2D space", "Zero pixel set"],
+          "correct_option": "Full 3D screen",
+          "explanation": "The 2D rendered image sits inside the 3D screen coordinate frame as a 2D subspace; nearer pixels are still 3D observations."
+        },
+        {
+          "id": "M4Q7R5",
+          "question": "An economist constructs a linear model A mapping policy inputs to predicted outcomes; the set of achievable outcomes is the range of A, which is always which type of object?",
+          "options": ["Linear subspace", "Convex polyhedron", "Closed ball only", "Discrete point set"],
+          "correct_option": "Linear subspace",
+          "explanation": "Because A is linear, its achievable set is closed under linear combinations — a linear subspace, not a curved region."
+        }
+      ]
+    }
+  ]
+}

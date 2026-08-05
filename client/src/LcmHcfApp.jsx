@@ -426,6 +426,7 @@ export default function InteractiveLcmHcfApp({ onBack }) {
     if (isActivityCompleted(currentStep)) {
       setMaxStepReached(prev => Math.max(prev, currentStep + 1));
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activityState, currentStep]);
 
   // ==========================================================================

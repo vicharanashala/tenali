@@ -27,6 +27,7 @@ export default function QFormulaConceptApp({ onBack, QFormulaApp }) {
 
   useEffect(() => {
     fetchState();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [learnerId]);
 
   const fetchState = async () => {
@@ -82,11 +83,11 @@ export default function QFormulaConceptApp({ onBack, QFormulaApp }) {
   if (error) return <div className="quiz-layout"><div className="welcome-box">Error: {error}</div></div>;
 
   const currentStage = state.conceptReviewRung || 0;
-  const isDue = state.nextConceptReviewDue ? new Date() >= new Date(state.nextConceptReviewDue) : true;
+  const _isDue = state.nextConceptReviewDue ? new Date() >= new Date(state.nextConceptReviewDue) : true;
 
   // BKT mastery derived from stage progress (5 stages total: 0-4)
   const totalStages = 5;
-  const mastery = Math.min(1, (currentStage / totalStages) + 0.04); // +0.04 so stage 0 shows ~4% rather than 0%
+  const _mastery = Math.min(1, (currentStage / totalStages) + 0.04); // +0.04 so stage 0 shows ~4% rather than 0%
 
   return (
     <div className="quiz-layout qformula-concept">

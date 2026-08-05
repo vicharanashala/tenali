@@ -1,6 +1,6 @@
 export function getPromptForType(type, q) {
   if (!q) return 'Loading…'
-  const sup = (n) => String(n).split('').map(d => '⁰¹²³⁴⁵⁶⁷⁸⁹'[d]).join('')
+  const _sup = (n) => String(n).split('').map(d => '⁰¹²³⁴⁵⁶⁷⁸⁹'[d]).join('')
 
   switch (type) {
     case 'basicarith': case 'addition': return `${q.prompt} = ?`

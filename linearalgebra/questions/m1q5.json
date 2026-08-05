@@ -1,0 +1,479 @@
+{
+  "module": 1,
+  "missionId": 5,
+  "title": "Game Controller",
+  "original_question": "Create sliders for a and b. Watch the line y = ax + b dance as you drag! How do slope (a) and intercept (b) change the line visually?",
+  "core_concept": "The slope-intercept form y = mx + b has two parameters: m (slope, controlling steepness and direction) and b (y-intercept, controlling vertical position). Understanding how each parameter independently affects the line's appearance is essential for interpreting linear relationships and connecting to the concept of a parameter space.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M1Q5E1",
+        "question": "In the equation y = ax + b, what does the parameter a control?",
+        "options": [
+          "The slope or steepness of the line",
+          "The y-intercept — does t match",
+          "The length of the line",
+          "The color of the line"
+        ],
+        "correct_option": "The slope or steepness of the line",
+        "explanation": "Step 1: The parameter a is the coefficient of x. Step 2: It determines how much y changes for each unit change in x. Step 3: A larger |a| means a steeper line; a smaller |a| means a flatter line."
+      },
+      {
+        "id": "M1Q5E2",
+        "question": "In y = ax + b, what does the parameter b control?",
+        "options": [
+          "The y-intercept — where the line crosses the y-axis",
+          "The slope of the line",
+          "The x-intercept — does t match",
+          "The origin)"
+        ],
+        "correct_option": "The y-intercept — where the line crosses the y-axis",
+        "explanation": "Step 1: When x = 0, y = b. Step 2: The point (0, b) is where the line crosses the y-axis. Step 3: Changing b shifts the line up or down without changing its steepness."
+      },
+      {
+        "id": "M1Q5E3",
+        "question": "If a = 2 and b = 3, what is y when x = 1?",
+        "options": [
+          "5",
+          "3",
+          "2",
+          "6"
+        ],
+        "correct_option": "5",
+        "explanation": "Step 1: y = 2(1) + 3. Step 2: y = 2 + 3 = 5. Step 3: Substitute x = 1 directly into the equation."
+      },
+      {
+        "id": "M1Q5E4",
+        "question": "If a = 0 and b = 3, what does the graph of y = 0x + 3 look like?",
+        "options": [
+          "A horizontal line at y = 3",
+          "A line at x = 3",
+          "A line through the origin with slope 3",
+          "A parabola)"
+        ],
+        "correct_option": "A horizontal line at y = 3",
+        "explanation": "Step 1: y = 0x + 3 simplifies to y = 3. Step 2: This means y is always 3, regardless of x. Step 3: The graph is a horizontal line passing through (0, 3)."
+      },
+      {
+        "id": "M1Q5E5",
+        "question": "If you keep a = 2 fixed and increase b from 0 to 5, what happens to the line?",
+        "options": [
+          "It shifts upward while maintaining the same slope",
+          "It becomes steeper — does t match",
+          "It rotates around the origin",
+          "It becomes"
+        ],
+        "correct_option": "It shifts upward while maintaining the same slope",
+        "explanation": "Step 1: The slope a = 2 stays the same — the steepness doesn't change. Step 2: Increasing b moves the y-intercept upward. Step 3: The line translates (slides) up without rotating."
+      },
+      {
+        "id": "M1Q5E6",
+        "question": "What is the slope of the line y = -3x + 7?",
+        "options": [
+          "-3",
+          "3 (x)",
+          "7",
+          "-7"
+        ],
+        "correct_option": "-3",
+        "explanation": "Step 1: In y = ax + b, the coefficient of x is the slope. Step 2: Here a = -3. Step 3: A negative slope means the line falls from left to right."
+      },
+      {
+        "id": "M1Q5E7",
+        "question": "For the line y = 2x + 0, where does it cross the y-axis?",
+        "options": [
+          "At the origin (0,0)",
+          "At (0, 2))",
+          "At (0, 1))",
+          "It doesn't cross the y-axis"
+        ],
+        "correct_option": "At the origin (0,0)",
+        "explanation": "Step 1: The y-intercept is b = 0. Step 2: The line crosses the y-axis at (0, 0). Step 3: This is the origin — the line passes through it because b = 0."
+      },
+      {
+        "id": "M1Q5E8",
+        "question": "If you keep b = 2 fixed and change a from 1 to 4, what happens to the line?",
+        "options": [
+          "It becomes steeper while keeping the same y-intercept",
+          "It shifts up — does t match",
+          "It shifts down — does t match",
+          "It becomes"
+        ],
+        "correct_option": "It becomes steeper while keeping the same y-intercept",
+        "explanation": "Step 1: The y-intercept stays at (0, 2) since b = 2 is fixed. Step 2: Increasing a from 1 to 4 increases the slope. Step 3: The line rotates around the y-intercept point (0,2), becoming steeper."
+      },
+      {
+        "id": "M1Q5E9",
+        "question": "What are the two independent parameters needed to define any non-vertical line?",
+        "options": [
+          "Slope (a) and y-intercept (b)",
+          "Two points on the line",
+          "The angle and the length",
+          "Both A and B are valid"
+        ],
+        "correct_option": "Both A and B are valid",
+        "explanation": "Step 1: y = ax + b uses slope and intercept — two parameters. Step 2: Two distinct points also determine a unique line — two parameters (two x,y pairs). Step 3: Both are equivalent parameterizations; they give you the same information in different forms."
+      },
+      {
+        "id": "M1Q5E10",
+        "question": "If a = 0 and b = 0, what is the graph of y = 0x + 0?",
+        "options": [
+          "The x-axis (y = 0)",
+          "The y-axis (x = 0)",
+          "A single point at the origin",
+          "An empty graph"
+        ],
+        "correct_option": "The x-axis (y = 0)",
+        "explanation": "Step 1: y = 0x + 0 simplifies to y = 0. Step 2: This means y is 0 for all x-values. Step 3: The graph is the x-axis — a horizontal line through the origin."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M1Q5M1",
+        "question": "When you increase the slope parameter a, does the line y = ax + b become steeper?",
+        "options": [
+          "Yes, increasing |a| always makes the line steeper",
+          "increasing a always makes the line flatter",
+          "Only if b is positive",
+          "Only if a starts negative"
+        ],
+        "correct_option": "Yes, increasing |a| always makes the line steeper",
+        "explanation": "Step 1: The slope a determines the rate of change of y with respect to x. Step 2: A larger |a| means a greater change in y per unit change in x. Step 3: This produces a steeper line, whether a is positive (rising) or negative (falling)."
+      },
+      {
+        "id": "M1Q5M2",
+        "question": "Is the slope a equal to the tangent of the angle the line makes with the x-axis?",
+        "options": [
+          "Yes, tan(θ) = slope = a",
+          "tan(θ) = 1/slope",
+          "Only for slopes between 0 and 1",
+          "Only for positive slopes"
+        ],
+        "correct_option": "Yes, tan(θ) = slope = a",
+        "explanation": "Step 1: The angle θ between the line and the positive x-axis satisfies tan(θ) = rise/run = slope. Step 2: So tan(θ) = a. Step 3: This relationship holds for all slopes (including negative ones, where θ > 90°)."
+      },
+      {
+        "id": "M1Q5M3",
+        "question": "If you set a = 0 and b = 3, you get a horizontal line at y = 3. What does this represent physically?",
+        "options": [
+          "A constant value that never changes over time",
+          "A value that increases linearly",
+          "A value that decreases to zero",
+          "An undefined state — does t match"
+        ],
+        "correct_option": "A constant value that never changes over time",
+        "explanation": "Step 1: y = 3 means y is always 3, regardless of x. Step 2: In a time vs value graph, this represents a quantity that stays constant. Step 3: Zero slope means zero rate of change — the value doesn't increase or decrease."
+      },
+      {
+        "id": "M1Q5M4",
+        "question": "Two lines have equations y = 3x + 1 and y = 3x - 2. What is the relationship between them?",
+        "options": [
+          "They are parallel (same slope, different intercepts)",
+          "They are perpendicular",
+          "They intersect at the origin",
+          "They are the same line"
+        ],
+        "correct_option": "They are parallel (same slope, different intercepts)",
+        "explanation": "Step 1: Both have slope a = 3 (same steepness). Step 2: Their intercepts differ (b = 1 vs b = -2). Step 3: Equal slopes with different intercepts means the lines are parallel and never intersect."
+      },
+      {
+        "id": "M1Q5M5",
+        "question": "What are the slopes of y = 2x and y = -2x, and how do their graphs differ?",
+        "options": [
+          "Same steepness but opposite directions — one rises, one falls",
+          "Different steepness — does t match",
+          "Same direction, different steepness",
+          "They are parallel — does t match"
+        ],
+        "correct_option": "Same steepness but opposite directions — one rises, one falls",
+        "explanation": "Step 1: y = 2x has slope 2 (rising line through Quadrants I and III). Step 2: y = -2x has slope -2 (falling line through Quadrants II and IV). Step 3: |2| = |-2|, so same steepness, but the sign controls direction."
+      },
+      {
+        "id": "M1Q5M6",
+        "question": "A running speed graph has y = 5x (slope = speed in m/s). If the runner's speed doubles, what equation describes the new graph?",
+        "options": [
+          "y = 10x",
+          "y = 5x + 5",
+          "y = 25x",
+          "y = 5x²"
+        ],
+        "correct_option": "y = 10x",
+        "explanation": "Step 1: Speed is the slope of the distance-time graph. Step 2: Doubling speed from 5 to 10 m/s. Step 3: The new equation is y = 10x — same origin, steeper slope."
+      },
+      {
+        "id": "M1Q5M7",
+        "question": "If a line has slope a = -1 and y-intercept b = 5, at what x-value does it cross the x-axis?",
+        "options": [
+          "x = 5",
+          "x = -5",
+          "x = 1",
+          "x = 0"
+        ],
+        "correct_option": "x = 5",
+        "explanation": "Step 1: Set y = 0: 0 = -1(x) + 5. Step 2: Solve: x = 5. Step 3: The x-intercept is (5, 0) — the line crosses the x-axis at x = 5."
+      },
+      {
+        "id": "M1Q5M8",
+        "question": "When the slope a is very close to 0 (say a = 0.01), what does the line look like?",
+        "options": [
+          "Nearly horizontal — y barely changes as x increases",
+          "Nearly — does t match",
+          "A parabola)",
+          "A circle)"
+        ],
+        "correct_option": "Nearly horizontal — y barely changes as x increases",
+        "explanation": "Step 1: A small slope means y changes very slowly with x. Step 2: For every 1 unit increase in x, y increases by only 0.01 units. Step 3: This produces a line that appears nearly horizontal."
+      },
+      {
+        "id": "M1Q5M9",
+        "question": "For the line y = 2x + 3, what is the average rate of change of y with respect to x?",
+        "options": [
+          "2",
+          "3",
+          "5",
+          "1"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: For a linear function, the rate of change equals the slope. Step 2: The slope of y = 2x + 3 is 2. Step 3: This means y increases by 2 units for every 1 unit increase in x, consistently along the entire line."
+      },
+      {
+        "id": "M1Q5M10",
+        "question": "If b = 0, what special property does the line y = ax have that y = ax + b (b ≠ 0) does not?",
+        "options": [
+          "It passes through the origin (0,0)",
+          "It has a steeper slope",
+          "It is always positive",
+          "It is always"
+        ],
+        "correct_option": "It passes through the origin (0,0)",
+        "explanation": "Step 1: When b = 0, at x = 0, y = 0. Step 2: The point (0,0) lies on the line. Step 3: This is the key distinction — lines with b = 0 pass through the origin (making them direct proportionality relationships), while b ≠ 0 shifts the line away from the origin."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M1Q5H1",
+        "question": "Consider the set of all lines y = ax + b where a and b are real numbers. Is this collection a vector space over ℝ?",
+        "options": [
+          "No, because adding two lines y = a₁x + b₁ and y = a₂x + b₂ does not always give another line of this form (the sum is y = (a₁+a₂)x + (b₁+b₂), which IS a line — but the zero element must be the zero LINE, which doesn't exist in this set)",
+          "it is a 2-dimensional vector space",
+          "because lines cant be added",
+          "because each line is a vector"
+        ],
+        "correct_option": "No, because adding two lines y = a₁x + b₁ and y = a₂x + b₂ does not always give another line of this form (the sum is y = (a₁+a₂)x + (b₁+b₂), which IS a line — but the zero element must be the zero LINE, which doesn't exist in this set)",
+        "explanation": "Step 1: The set of all lines in the plane is not itself a vector space because there's no 'zero vector' (zero line) — every line has infinitely many points. Step 2: The set of functions {f(x) = ax + b} IS a 2D vector space, but the set of geometric lines is not directly. Step 3: This distinction between functions and their graphs is important in linear algebra."
+      },
+      {
+        "id": "M1Q5H2",
+        "question": "The set V = {f(x) = ax + b : a, b ∈ ℝ} of all linear functions is a vector space. What is its dimension?",
+        "options": [
+          "2-dimensional (basis: {1, x})",
+          "1-dimensional — does t match",
+          "3-dimensional — does t match",
+          "Infinite-dimensional"
+        ],
+        "correct_option": "2-dimensional (basis: {1, x})",
+        "explanation": "Step 1: Any f(x) = ax + b can be written as a·x + b·1. Step 2: The functions {x, 1} are linearly independent and span V. Step 3: Since the basis has 2 elements, dim(V) = 2."
+      },
+      {
+        "id": "M1Q5H3",
+        "question": "If T: V → ℝ is defined by T(f) = f(0) (evaluate at x = 0), what is T(y = 3x + 5)?",
+        "options": [
+          "5",
+          "3",
+          "8",
+          "0"
+        ],
+        "correct_option": "5",
+        "explanation": "Step 1: T(f) = f(0) means evaluate the function at x = 0. Step 2: f(0) = 3(0) + 5 = 5. Step 3: This functional extracts the y-intercept b from any linear function y = ax + b."
+      },
+      {
+        "id": "M1Q5H4",
+        "question": "Consider two linear maps T₁(x) = 2x and T₂(x) = 2x + 1. Which is a linear map in the strict linear algebra sense?",
+        "options": [
+          "Only T₁, because T₁(0) = 0 while T₂(0) = 1 ≠ 0",
+          "Both are linear maps — does t match",
+          "Only T₂, because it has a n-zero intercept",
+          "Neither is a linear map"
+        ],
+        "correct_option": "Only T₁, because T₁(0) = 0 while T₂(0) = 1 ≠ 0",
+        "explanation": "Step 1: A linear map must satisfy T(0) = 0. Step 2: T₁(0) = 2(0) = 0 ✓. Step 3: T₂(0) = 2(0) + 1 = 1 ≠ 0 ✗. T₂ is an affine map, not a linear map."
+      },
+      {
+        "id": "M1Q5H5",
+        "question": "In the parameter space (a, b), what geometric object represents all lines passing through the point (1, 2)?",
+        "options": [
+          "The line b = -a + 2 in the (a, b) parameter plane",
+          "A circle centered at origin",
+          "A single point — does t match",
+          "The entire (a, b) plane"
+        ],
+        "correct_option": "The line b = -a + 2 in the (a, b) parameter plane",
+        "explanation": "Step 1: For y = ax + b to pass through (1,2): 2 = a(1) + b. Step 2: This gives b = 2 - a, or b = -a + 2. Step 3: In the (a, b) parameter space, this constraint defines a line — all pairs (a, 2-a) produce lines through (1,2)."
+      },
+      {
+        "id": "M1Q5H6",
+        "question": "How many lines of the form y = ax + b pass through both (1, 2) and (3, 6)?",
+        "options": [
+          "Exactly one: y = 2x",
+          "Two: one with positive slope, one negative",
+          "Infinitely many — does t match",
+          "ne)"
+        ],
+        "correct_option": "Exactly one: y = 2x",
+        "explanation": "Step 1: Two distinct points determine a unique line. Step 2: Slope = (6-2)/(3-1) = 4/2 = 2. Step 3: Using (1,2): 2 = 2(1) + b → b = 0. The unique line is y = 2x."
+      },
+      {
+        "id": "M1Q5H7",
+        "question": "The set of all lines through the origin is a 1-parameter family (parameterized by slope a). The set of ALL lines in the plane is a 2-parameter family. Why?",
+        "options": [
+          "Because you need two independent parameters (slope and intercept) to specify any line",
+          "Because the plane is 2-dimensional",
+          "Because lines have two endpoints",
+          "Because you need to specify two points"
+        ],
+        "correct_option": "Because you need two independent parameters (slope and intercept) to specify any line",
+        "explanation": "Step 1: Lines through the origin are determined by slope alone (1 parameter). Step 2: General lines need both slope and intercept (2 parameters). Step 3: The extra parameter (intercept) accounts for the vertical position, which is the degree of freedom that moves a line off the origin."
+      },
+      {
+        "id": "M1Q5H8",
+        "question": "If we define the 'angle' between two lines y = a₁x + b₁ and y = a₂x + b₂ using tan(θ) = |(a₁ - a₂)/(1 + a₁a₂)|, what happens when a₁a₂ = -1?",
+        "options": [
+          "The lines are perpendicular (θ = 90°)",
+          "The lines are parallel",
+          "The formula gives 0 — does t match",
+          "The lines coincide — does t match"
+        ],
+        "correct_option": "The lines are perpendicular (θ = 90°)",
+        "explanation": "Step 1: When a₁a₂ = -1, the denominator 1 + a₁a₂ = 0. Step 2: The formula gives |(a₁ - a₂)/0| → ∞. Step 3: tan(θ) = ∞ means θ = 90°, confirming the lines are perpendicular."
+      },
+      {
+        "id": "M1Q5H9",
+        "question": "Consider the map φ: ℝ² → {lines in ℝ²} defined by φ(a, b) = line y = ax + b. Is this map injective (one-to-one)?",
+        "options": [
+          "Yes, different (a,b) pairs always give different lines",
+          "two different (a,b) pairs can give the same line",
+          "Only if b ≠ 0 — does t match",
+          "Only for positive slopes"
+        ],
+        "correct_option": "Yes, different (a,b) pairs always give different lines",
+        "explanation": "Step 1: If (a₁, b₁) ≠ (a₂, b₂), then either a₁ ≠ a₂ or b₁ ≠ b₂. Step 2: If a₁ ≠ a₂, the slopes differ, so the lines are different. Step 3: If a₁ = a₂ but b₁ ≠ b₂, the lines are parallel but at different heights. Either way, distinct (a,b) gives distinct lines."
+      },
+      {
+        "id": "M1Q5H10",
+        "question": "In the space V = {f(x) = ax + b}, what is the kernel (null space) of the linear functional D(f) = f'(0)?",
+        "options": [
+          "The set of constant functions {f(x) = b}, i.e., all functions with a = 0",
+          "The zero function only",
+          "All of V)",
+          "The set of functions with b = 0"
+        ],
+        "correct_option": "The set of constant functions {f(x) = b}, i.e., all functions with a = 0",
+        "explanation": "Step 1: D(f) = f'(0) = a (the derivative of ax + b is a). Step 2: D(f) = 0 when a = 0. Step 3: Functions with a = 0 are constant functions f(x) = b, forming a 1D subspace of V."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "emoji": "🏃",
+      "title": "Running Speed as Slope",
+      "equation": "y = 5x",
+      "type": "mcq",
+      "concept": "Slope Represents Physical Speed",
+      "story": "When you go for a run, your distance from home can be modelled as a linear function. The slope of the line represents your running speed — a steeper line means you run faster. The y-intercept represents how far ahead you started from home.",
+      "question": "In a distance-time graph for a runner, what does the slope of the line physically represent?",
+      "options": [
+        "The runner's speed",
+        "The runner's starting position",
+        "The total distance run",
+        "The time elapsed"
+      ],
+      "answer": "The runner's speed",
+      "explanation": "Step 1: Distance = speed × time (d = v·t). Step 2: Slope = rise/run = distance/time = speed. Step 3: A steeper slope means the runner covers more distance per unit time, i.e., runs faster."
+    },
+    {
+      "emoji": "🏦",
+      "title": "Savings Over Time",
+      "equation": "y = 100x + 500",
+      "type": "mcq",
+      "concept": "Intercept as Initial Savings",
+      "story": "Every week you save ₹100. Your total savings over time form a straight line. The slope shows how much you save each week, while the y-intercept shows how much money you already had saved before starting this weekly plan.",
+      "question": "In a savings graph over time, what does the y-intercept represent?",
+      "options": [
+        "The initial savings before the plan started",
+        "The amount saved per week",
+        "The total savings after one year",
+        "The interest rate"
+      ],
+      "answer": "The initial savings before the plan started",
+      "explanation": "Step 1: At week 0 (before any saving), the total is the y-intercept. Step 2: In y = 100x + 500, at x = 0, y = 500. Step 3: This ₹500 is the starting balance — the savings already in the account before the weekly plan begins."
+    },
+    {
+      "emoji": "🌡️",
+      "title": "Celsius to Kelvin Conversion",
+      "equation": "y = x + 273.15",
+      "type": "mcq",
+      "concept": "Offset in Measurement Scales",
+      "story": "When graphing the relationship between Kelvin (y) and Celsius (x), the equation is K = C + 273.15. If you plot Celsius on the x-axis and Kelvin on the y-axis, the resulting straight line doesn't pass through the origin.",
+      "question": "Why doesn't the Celsius-Kelvin line pass through the origin?",
+      "options": [
+        "Because 0°C does not represent absolute zero — it's the freezing point of water",
+        "Because temperature is always positive",
+        "Because the slope is exactly 1",
+        "Because Kelvin and Celsius are t related"
+      ],
+      "answer": "Because 0°C does not represent absolute zero — it's the freezing point of water",
+      "explanation": "Step 1: At 0°C, Kelvin = 273.15, not 0. Step 2: The +273.15 offset shifts the line up. Step 3: The origin (0,0) would mean 0°C = 0K, which is false — 0K is absolute zero, which equals -273.15°C."
+    },
+    {
+      "emoji": "🤖",
+      "title": "Neural Network Bias Term",
+      "equation": "y = wx + b",
+      "type": "mcq",
+      "concept": "Bias as Y-Intercept in ML",
+      "story": "In a simple machine learning model, an artificial neuron calculates: Output = (Weight × Input) + Bias. If an engineer sets the Bias term to exactly zero, what happens to the line on an Input-vs-Output graph?",
+      "question": "What happens to the neuron's line if Bias is set to zero?",
+      "options": [
+        "The line shifts to pass through the origin (0,0)",
+        "The line becomes",
+        "The line becomes",
+        "The line becomes a parabola"
+      ],
+      "answer": "The line shifts to pass through the origin (0,0)",
+      "explanation": "Step 1: Output = w × Input + b is y = mx + c form. Step 2: Setting b = 0 gives y = wx, which always passes through (0,0). Step 3: The bias term is literally the y-intercept — removing it forces the line through the origin."
+    },
+    {
+      "emoji": "🚕",
+      "title": "Ride-Sharing Base Fare",
+      "equation": "y = 2.5x + 3.5",
+      "type": "mcq",
+      "concept": "Flag-Down Cost",
+      "story": "A ride-sharing app calculates the total fare y for a trip of x miles. The graph yields the line y = 2.5x + 3.5. What is the exact cost if a passenger gets into the car but cancels before driving anywhere (0 miles)?",
+      "question": "What is the exact cost if the passenger cancels at 0 miles?",
+      "options": [
+        "$3.50",
+        "$0",
+        "$2.50",
+        "$6.00"
+      ],
+      "answer": "$3.50",
+      "explanation": "Step 1: At x = 0 miles: y = 2.5(0) + 3.5 = 3.5. Step 2: The $3.50 is the flag-down or base fare. Step 3: This is the y-intercept — the minimum charge just for starting the ride, before any distance is covered."
+    },
+    {
+      "emoji": "🏭",
+      "title": "Factory Break-Even Analysis",
+      "equation": "y = 30x - 500",
+      "type": "mcq",
+      "concept": "Negative Intercept as Startup Cost",
+      "story": "A factory's profit P (in ₹ thousands) from producing x units is P = 30x - 500, where ₹500K represents fixed startup costs. At zero production, the factory loses ₹500K (the y-intercept is negative).",
+      "question": "What does the negative y-intercept of -500 represent in this factory scenario?",
+      "options": [
+        "The fixed startup costs that must be recovered before making profit",
+        "The profit per unit",
+        "The number of units produced",
+        "The maximum possible profit"
+      ],
+      "answer": "The fixed startup costs that must be recovered before making profit",
+      "explanation": "Step 1: At x = 0 (no production): P = -500. Step 2: A negative y-intercept means a loss at zero production. Step 3: This represents fixed costs (rent, equipment, etc.) that must be paid regardless of output."
+    }
+  ]
+}

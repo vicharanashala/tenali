@@ -1,0 +1,479 @@
+{
+  "module": 1,
+  "missionId": 11,
+  "title": "Dimensional Portal",
+  "original_question": "What are ℝ, ℝ², and ℝ³? A point lives in different dimensions!",
+  "core_concept": "Dimensional spaces — ℝ is the 1D number line (one coordinate), ℝ² is the 2D plane (two coordinates), and ℝ³ is 3D space (three coordinates). The dimension of a space equals the number of coordinates needed to specify a point. This generalizes to ℝⁿ for any n, forming the foundation of linear algebra.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M1Q11E1",
+        "question": "How many coordinates does a point in ℝ² need?",
+        "options": [
+          "2",
+          "1",
+          "3",
+          "4"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: ℝ² is the 2-dimensional real coordinate plane. Step 2: Any point is specified as (x, y) — two numbers. Step 3: The '2' in ℝ² directly tells you the number of coordinates needed."
+      },
+      {
+        "id": "M1Q11E2",
+        "question": "How many coordinates does a point in ℝ³ need?",
+        "options": [
+          "3",
+          "2",
+          "1",
+          "4"
+        ],
+        "correct_option": "3",
+        "explanation": "Step 1: ℝ³ is 3-dimensional space. Step 2: A point is (x, y, z) — three numbers. Step 3: The '3' in ℝ³ means three coordinates are required."
+      },
+      {
+        "id": "M1Q11E3",
+        "question": "What is ℝ (just ℝ, not ℝ² or ℝ³)?",
+        "options": [
+          "The real number line (1D)",
+          "The 2D plane",
+          "3D space)",
+          "The set of complex numbers"
+        ],
+        "correct_option": "The real number line (1D)",
+        "explanation": "Step 1: ℝ is the set of all real numbers. Step 2: It can be visualized as a number line — one dimension. Step 3: A point in ℝ is specified by a single coordinate."
+      },
+      {
+        "id": "M1Q11E4",
+        "question": "The point (3, 5) lives in which space?",
+        "options": [
+          "ℝ²",
+          "ℝ",
+          "ℝ³",
+          "ℝ⁴"
+        ],
+        "correct_option": "ℝ²",
+        "explanation": "Step 1: (3, 5) has two coordinates. Step 2: Two coordinates correspond to ℝ². Step 3: This point can be plotted on a standard 2D graph."
+      },
+      {
+        "id": "M1Q11E5",
+        "question": "The point (2, 3, 7) lives in which space?",
+        "options": [
+          "ℝ³",
+          "ℝ²",
+          "ℝ",
+          "ℝ⁴"
+        ],
+        "correct_option": "ℝ³",
+        "explanation": "Step 1: (2, 3, 7) has three coordinates. Step 2: Three coordinates correspond to ℝ³. Step 3: This point requires a 3D coordinate system to plot."
+      },
+      {
+        "id": "M1Q11E6",
+        "question": "The number 4.5 is a point in which space?",
+        "options": [
+          "ℝ",
+          "ℝ²",
+          "ℝ³",
+          "ℝ⁴"
+        ],
+        "correct_option": "ℝ",
+        "explanation": "Step 1: 4.5 is a single real number. Step 2: Single numbers live in ℝ (the real number line). Step 3: It corresponds to the point at position 4.5 on the number line."
+      },
+      {
+        "id": "M1Q11E7",
+        "question": "GPS coordinates (latitude, longitude) form a point in which space?",
+        "options": [
+          "ℝ² (two numbers)",
+          "ℝ (one number)",
+          "ℝ³ (three numbers)",
+          "ℝ⁴ (four numbers)"
+        ],
+        "correct_option": "ℝ² (two numbers)",
+        "explanation": "Step 1: Latitude and longitude are two numbers. Step 2: Two coordinates define a point in ℝ². Step 3: This is why a flat map can represent GPS positions — it's a 2D coordinate system."
+      },
+      {
+        "id": "M1Q11E8",
+        "question": "If your phone tracks latitude, longitude, AND altitude, the position lives in:",
+        "options": [
+          "ℝ³",
+          "ℝ²",
+          "ℝ",
+          "ℝ⁴"
+        ],
+        "correct_option": "ℝ³",
+        "explanation": "Step 1: Three independent measurements = three coordinates. Step 2: (latitude, longitude, altitude) is a point in ℝ³. Step 3: The third coordinate (altitude) adds the height dimension."
+      },
+      {
+        "id": "M1Q11E9",
+        "question": "How many axes does a coordinate system in ℝ² have?",
+        "options": [
+          "2 (x-axis and y-axis)",
+          "1 — t here",
+          "3 — t here",
+          "4 — t here"
+        ],
+        "correct_option": "2 (x-axis and y-axis)",
+        "explanation": "Step 1: ℝ² has two independent directions. Step 2: These are represented by the x-axis and y-axis. Step 3: Every point in ℝ² is reached by moving along these two axes."
+      },
+      {
+        "id": "M1Q11E10",
+        "question": "A data point with 5 independent measurements (temperature, pressure, humidity, wind speed, rainfall) lives in:",
+        "options": [
+          "ℝ⁵",
+          "ℝ²",
+          "ℝ³",
+          "ℝ"
+        ],
+        "correct_option": "ℝ⁵",
+        "explanation": "Step 1: Five independent measurements require five coordinates. Step 2: This defines a point in ℝ⁵. Step 3: While we can't visualize ℝ⁵, the mathematics works the same as ℝ² or ℝ³."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M1Q11M1",
+        "question": "What does ℝⁿ represent mathematically?",
+        "options": [
+          "The set of all ordered n-tuples of real numbers",
+          "The nth power of a real number",
+          "An n-sided polygon — does t match",
+          "The nth root of a real number"
+        ],
+        "correct_option": "The set of all ordered n-tuples of real numbers",
+        "explanation": "Step 1: ℝⁿ = {(x₁, x₂, ..., xₙ) : each xᵢ ∈ ℝ}. Step 2: Each element is an ordered list of n real numbers. Step 3: For n=2, this gives the familiar (x,y) plane; for n=3, 3D space."
+      },
+      {
+        "id": "M1Q11M2",
+        "question": "Why is ℝ³ called 3-dimensional?",
+        "options": [
+          "Because you need exactly 3 coordinates to specify any point",
+          "Because it has 3 axes drawn on paper",
+          "Because space has 3 colours",
+          "Because physics only works in 3D"
+        ],
+        "correct_option": "Because you need exactly 3 coordinates to specify any point",
+        "explanation": "Step 1: Dimension = number of independent coordinates needed. Step 2: In ℝ³, a point is (x, y, z) — three independent numbers. Step 3: No fewer coordinates can uniquely specify every point in this space."
+      },
+      {
+        "id": "M1Q11M3",
+        "question": "Can a point in ℝ² also be considered a point in ℝ³?",
+        "options": [
+          "Yes, by appending z = 0: (x, y) in ℝ² corresponds to (x, y, 0) in ℝ³",
+          "ℝ² and ℝ³ are completely separate",
+          "Only if x = y — does t match",
+          "Only for integer coordinates"
+        ],
+        "correct_option": "Yes, by appending z = 0: (x, y) in ℝ² corresponds to (x, y, 0) in ℝ³",
+        "explanation": "Step 1: ℝ² can be embedded in ℝ³ as the plane z = 0. Step 2: Every point (x, y) maps to (x, y, 0). Step 3: This is like saying the 2D plane sits inside 3D space as a 'flat slice'."
+      },
+      {
+        "id": "M1Q11M4",
+        "question": "A sound wave is described by frequency, amplitude, and time — three values. This lives in:",
+        "options": [
+          "ℝ³",
+          "ℝ²",
+          "ℝ",
+          "ℝ⁶"
+        ],
+        "correct_option": "ℝ³",
+        "explanation": "Step 1: Three independent properties (frequency, amplitude, time) → three coordinates. Step 2: The state of the sound wave is a point in ℝ³. Step 3: Changing any one property moves the point in a different direction in this 3D space."
+      },
+      {
+        "id": "M1Q11M5",
+        "question": "In ℝ², how many points are needed to uniquely determine a line?",
+        "options": [
+          "2 distinct points",
+          "1 point",
+          "3 points",
+          "0 points"
+        ],
+        "correct_option": "2 distinct points",
+        "explanation": "Step 1: One point is not enough — infinitely many lines pass through it. Step 2: Two distinct points determine exactly one line. Step 3: Three or more points may or may not be collinear."
+      },
+      {
+        "id": "M1Q11M6",
+        "question": "In ℝ³, how many non-coplanar points are needed to determine a unique plane?",
+        "options": [
+          "3 non-collinear points",
+          "2 points",
+          "4 points",
+          "1 point"
+        ],
+        "correct_option": "3 non-collinear points",
+        "explanation": "Step 1: Two points determine a line, not a plane (infinitely many planes contain that line). Step 2: Three non-collinear points determine exactly one plane. Step 3: If the three points are collinear, they don't determine a unique plane."
+      },
+      {
+        "id": "M1Q11M7",
+        "question": "What is the difference between ℝ² and ℝ³ geometrically?",
+        "options": [
+          "ℝ² is a flat plane (2D), while ℝ³ is a volume (3D) with an extra dimension",
+          "They are the same thing",
+          "ℝ² is circular while ℝ³ is square",
+          "ℝ³ is a subset of ℝ² — does t match"
+        ],
+        "correct_option": "ℝ² is a flat plane (2D), while ℝ³ is a volume (3D) with an extra dimension",
+        "explanation": "Step 1: ℝ² has length and width — a flat surface. Step 2: ℝ³ adds height/depth — a volume. Step 3: The extra dimension allows points to be at different heights, not just different horizontal positions."
+      },
+      {
+        "id": "M1Q11M8",
+        "question": "Why can we not directly visualize ℝ⁴ or higher?",
+        "options": [
+          "Because our physical world is 3-dimensional — we can only see up to 3 spatial dimensions",
+          "Because mathematics doesn't work in higher dimensions",
+          "Because ℝ⁴ doesn't exist",
+          "Because we need special glasses"
+        ],
+        "correct_option": "Because our physical world is 3-dimensional — we can only see up to 3 spatial dimensions",
+        "explanation": "Step 1: Human vision is limited to 3 spatial dimensions. Step 2: ℝ⁴ requires 4 coordinates, which we can't directly picture. Step 3: However, the mathematical framework of ℝⁿ works for any n — we just can't draw it faithfully."
+      },
+      {
+        "id": "M1Q11M9",
+        "question": "A student has test scores in Math, English, Science, and History. Their data point lives in:",
+        "options": [
+          "ℝ⁴",
+          "ℝ²",
+          "ℝ³",
+          "ℝ"
+        ],
+        "correct_option": "ℝ⁴",
+        "explanation": "Step 1: Four independent scores → four coordinates. Step 2: The student's performance is a single point in ℝ⁴. Step 3: Similar students have nearby points in this 4D space."
+      },
+      {
+        "id": "M1Q11M10",
+        "question": "What does the origin (0, 0, 0) represent in ℝ³?",
+        "options": [
+          "The point where all three axes meet — the reference point for all measurements",
+          "The center of a sphere",
+          "The maximum point — does t match",
+          "An invalid coordinate"
+        ],
+        "correct_option": "The point where all three axes meet — the reference point for all measurements",
+        "explanation": "Step 1: (0, 0, 0) means zero displacement along each axis. Step 2: It is the reference point from which all other positions are measured. Step 3: The origin is the zero vector in ℝ³."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M1Q11H1",
+        "question": "What is the dimension of the vector space ℝⁿ?",
+        "options": [
+          "n",
+          "n²",
+          "2n",
+          "n-1"
+        ],
+        "correct_option": "n",
+        "explanation": "Step 1: A basis for ℝⁿ is the standard basis {e₁, e₂, ..., eₙ} where eᵢ has 1 in position i and 0 elsewhere. Step 2: This basis has n elements. Step 3: The dimension of a vector space equals the number of elements in any basis, so dim(ℝⁿ) = n."
+      },
+      {
+        "id": "M1Q11H2",
+        "question": "The standard basis for ℝ³ is {(1,0,0), (0,1,0), (0,0,1)}. Why is this a basis?",
+        "options": [
+          "These three vectors are linearly independent AND span all of ℝ³",
+          "They are all unit vectors",
+          "They sum to zero — does t match",
+          "They are perpendicular to each other"
+        ],
+        "correct_option": "These three vectors are linearly independent AND span all of ℝ³",
+        "explanation": "Step 1: Linear independence: no vector is a combination of the others (each has a unique non-zero position). Step 2: Spanning: any (a,b,c) = a(1,0,0) + b(0,1,0) + c(0,0,1). Step 3: Independence + spanning = basis."
+      },
+      {
+        "id": "M1Q11H3",
+        "question": "Can ℝ² be considered a subspace of ℝ³?",
+        "options": [
+          "Yes: ℝ² ≅ {(x,y,0) : x,y ∈ ℝ} is a subspace of ℝ³ (the z = 0 plane)",
+          "they are different spaces entirely",
+          "Only if we change the origin",
+          "Only for vector addition"
+        ],
+        "correct_option": "Yes: ℝ² ≅ {(x,y,0) : x,y ∈ ℝ} is a subspace of ℝ³ (the z = 0 plane)",
+        "explanation": "Step 1: Embed ℝ² as {(x,y,0) : x,y ∈ ℝ} in ℝ³. Step 2: This set contains (0,0,0), is closed under addition and scalar multiplication. Step 3: It is a 2-dimensional subspace of the 3-dimensional space ℝ³."
+      },
+      {
+        "id": "M1Q11H4",
+        "question": "What is the dimension of the set {(x,y,z) : x + y + z = 0} as a subspace of ℝ³?",
+        "options": [
+          "2 (it is a plane through the origin)",
+          "3 — t here",
+          "1 — t here",
+          "0 — t here"
+        ],
+        "correct_option": "2 (it is a plane through the origin)",
+        "explanation": "Step 1: x + y + z = 0 is one linear constraint on 3 variables. Step 2: The solution set is a 2D plane passing through the origin. Step 3: A basis is {(1,-1,0), (1,0,-1)} — two linearly independent vectors spanning the plane."
+      },
+      {
+        "id": "M1Q11H5",
+        "question": "The set of all polynomials of degree ≤ 2, denoted P₂, is isomorphic to ℝ³. Why?",
+        "options": [
+          "Because any polynomial a + bx + cx² is determined by 3 coefficients (a, b, c), just as a point in ℝ³ is determined by 3 coordinates",
+          "Because both involve the number 2",
+          "Because both have a basis of 2 elements",
+          "Because polymials can be plotted in 3D"
+        ],
+        "correct_option": "Because any polynomial a + bx + cx² is determined by 3 coefficients (a, b, c), just as a point in ℝ³ is determined by 3 coordinates",
+        "explanation": "Step 1: P₂ has basis {1, x, x²} — 3 elements. Step 2: ℝ³ has standard basis {(1,0,0), (0,1,0), (0,0,1)} — 3 elements. Step 3: Both are 3-dimensional vector spaces, so they are isomorphic (structurally identical)."
+      },
+      {
+        "id": "M1Q11H6",
+        "question": "In ℝ⁴, what is the subspace spanned by (1,0,0,1) and (0,1,1,0)?",
+        "options": [
+          "A 2-dimensional plane through the origin",
+          "A line)",
+          "All of ℝ⁴)",
+          "A 3-dimensional space"
+        ],
+        "correct_option": "A 2-dimensional plane through the origin",
+        "explanation": "Step 1: Two linearly independent vectors span a 2D subspace. Step 2: These vectors are not scalar multiples, so they're independent. Step 3: Their span is a plane through the origin in ℝ⁴."
+      },
+      {
+        "id": "M1Q11H7",
+        "question": "What is the rank-nullity theorem for a linear map T: ℝ³ → ℝ²?",
+        "options": [
+          "rank(T) + nullity(T) = 3 (dimension of the domain)",
+          "rank(T) + nullity(T) = 2",
+          "rank(T) + nullity(T) = 5",
+          "rank(T) = nullity(T) — does t match"
+        ],
+        "correct_option": "rank(T) + nullity(T) = 3 (dimension of the domain)",
+        "explanation": "Step 1: The rank-nullity theorem states: rank(T) + nullity(T) = dim(domain). Step 2: Domain is ℝ³, so dim = 3. Step 3: For any T: ℝ³ → ℝ², rank + nullity = 3."
+      },
+      {
+        "id": "M1Q11H8",
+        "question": "A dataset has 100 samples, each with 50 features. The data matrix is 100 × 50. Each data point lives in which space?",
+        "options": [
+          "ℝ⁵⁰ (50-dimensional feature space)",
+          "ℝ¹⁰⁰)",
+          "ℝ⁵⁰⁰⁰)",
+          "ℝ² — t here"
+        ],
+        "correct_option": "ℝ⁵⁰ (50-dimensional feature space)",
+        "explanation": "Step 1: Each sample is a row vector with 50 entries. Step 2: 50 features → 50 coordinates → ℝ⁵⁰. Step 3: The 100 samples are 100 different points in this 50-dimensional space."
+      },
+      {
+        "id": "M1Q11H9",
+        "question": "Can ℝ⁵ contain a 3-dimensional subspace? If so, give an example.",
+        "options": [
+          "Yes: {(x₁,x₂,x₃,0,0) : xᵢ ∈ ℝ} is a 3D subspace of ℝ⁵",
+          "subspaces must have the same dimension as the full space",
+          "Only if the subspace passes through a specific point",
+          "Only for even dimensions"
+        ],
+        "correct_option": "Yes: {(x₁,x₂,x₃,0,0) : xᵢ ∈ ℝ} is a 3D subspace of ℝ⁵",
+        "explanation": "Step 1: The set {(x₁,x₂,x₃,0,0)} has 3 free parameters. Step 2: It contains the zero vector, and is closed under addition and scalar multiplication. Step 3: It is a 3-dimensional subspace embedded in the 5-dimensional space ℝ⁵."
+      },
+      {
+        "id": "M1Q11H10",
+        "question": "The set of all continuous functions on [0,1] is an infinite-dimensional vector space. What does 'infinite-dimensional' mean in this context?",
+        "options": [
+          "No finite set of functions can serve as a basis — you need infinitely many basis functions",
+          "The functions can only take infinite values",
+          "There are infinitely many points in [0,1]",
+          "The functions are t well-defined"
+        ],
+        "correct_option": "No finite set of functions can serve as a basis — you need infinitely many basis functions",
+        "explanation": "Step 1: Unlike ℝⁿ (n basis vectors), this space requires infinitely many basis functions. Step 2: No finite collection of functions can represent every continuous function. Step 3: For example, {1, x, x², x³, ...} is needed — an infinite basis."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "emoji": "🌍",
+      "title": "GPS Coordinates on Earth",
+      "equation": "Position = (latitude, longitude)",
+      "type": "mcq",
+      "concept": "2D Coordinate Systems",
+      "story": "Your position on Earth's surface is described by two numbers: latitude and longitude. These two coordinates form a point in a 2-dimensional space (ℝ²). Just like you need an (x,y) pair to locate a point on a flat map, you need exactly two numbers to pinpoint any location on the globe.",
+      "question": "What mathematical space do latitude and longitude together define?",
+      "options": [
+        "ℝ² (two-dimensional coordinate space)",
+        "ℝ (one-dimensional number line)",
+        "ℝ³ (three-dimensional space)",
+        "ℝ⁴ (four-dimensional space)"
+      ],
+      "answer": "ℝ² (two-dimensional coordinate space)",
+      "explanation": "Step 1: Latitude and longitude are two independent numbers. Step 2: Two coordinates define a point in ℝ². Step 3: A flat map projection uses these two coordinates to represent any position on Earth's surface."
+    },
+    {
+      "emoji": "📱",
+      "title": "Phone Location with Altitude",
+      "equation": "Position = (lat, long, alt)",
+      "type": "mcq",
+      "concept": "3D Coordinate Systems",
+      "story": "Your phone tracks not just your latitude and longitude, but also your altitude above sea level. Now you need three numbers to describe your exact position — this is a point in 3-dimensional space (ℝ³).",
+      "question": "When your phone tracks latitude, longitude, and altitude, what is the third coordinate that makes it 3D?",
+      "options": [
+        "Altitude (height above sea level)",
+        "Speed",
+        "Time",
+        "Temperature"
+      ],
+      "answer": "Altitude (height above sea level)",
+      "explanation": "Step 1: Latitude and longitude give horizontal position (ℝ²). Step 2: Altitude adds the vertical dimension. Step 3: Together, (latitude, longitude, altitude) is a point in ℝ³ — full 3D positioning."
+    },
+    {
+      "emoji": "🎵",
+      "title": "Sound Wave Properties",
+      "equation": "Sound = (frequency, amplitude, time)",
+      "type": "mcq",
+      "concept": "Multi-Dimensional Data",
+      "story": "A sound wave can be described by three key properties: frequency (pitch), amplitude (loudness), and time. These three values together form a point in a 3-dimensional space, allowing us to analyse sound mathematically.",
+      "question": "How many dimensions are needed to describe a sound wave using frequency, amplitude, and time?",
+      "options": [
+        "3 dimensions",
+        "2 dimensions",
+        "1 dimension",
+        "4 dimensions"
+      ],
+      "answer": "3 dimensions",
+      "explanation": "Step 1: Three independent properties → three coordinates. Step 2: Each property defines a different axis in the space. Step 3: The state of the sound wave at any moment is a single point in ℝ³."
+    },
+    {
+      "emoji": "🧬",
+      "title": "Gene Expression Data",
+      "equation": "Gene = (expr₁, expr₂, ..., expr₂₀₀₀₀)",
+      "type": "mcq",
+      "concept": "Very High Dimensional Spaces",
+      "story": "A single cell's gene expression profile measures the activity of about 20,000 genes. Each gene's expression level is one coordinate, making the data point live in ℝ²⁰⁰⁰⁰ — a 20,000-dimensional space!",
+      "question": "If a cell's gene expression measures 20,000 genes, what space does the data point live in?",
+      "options": [
+        "ℝ²⁰⁰⁰⁰ (20,000-dimensional space)",
+        "ℝ³",
+        "ℝ²",
+        "ℝ¹⁰⁰⁰⁰"
+      ],
+      "answer": "ℝ²⁰⁰⁰⁰ (20,000-dimensional space)",
+      "explanation": "Step 1: Each gene is one coordinate. Step 2: 20,000 genes → 20,000 coordinates → ℝ²⁰⁰⁰⁰. Step 3: While we can't visualize 20,000 dimensions, the mathematics of ℝⁿ applies perfectly."
+    },
+    {
+      "emoji": "📊",
+      "title": "Student Performance Profile",
+      "equation": "Student = (math, english, science, history)",
+      "type": "mcq",
+      "concept": "Low-Dimensional Feature Spaces",
+      "story": "A school tracks student performance across 4 subjects: Math, English, Science, and History. Each student's profile is a point in ℝ⁴ — a 4-dimensional space where each axis represents one subject's score.",
+      "question": "If student performance is measured across 4 subjects, the data lives in which space?",
+      "options": [
+        "ℝ⁴",
+        "ℝ²",
+        "ℝ³",
+        "ℝ"
+      ],
+      "answer": "ℝ⁴",
+      "explanation": "Step 1: Four independent scores → four coordinates. Step 2: The student's academic profile is a point (math, english, science, history) in ℝ⁴. Step 3: Similar students have nearby points in this 4D feature space."
+    },
+    {
+      "emoji": "🌡️",
+      "title": "Weather Station Data",
+      "equation": "Weather = (temp, humidity, pressure, wind, rainfall)",
+      "type": "mcq",
+      "concept": "Multi-Sensor Data Fusion",
+      "story": "A weather station measures 5 variables: temperature, humidity, pressure, wind speed, and rainfall. Each measurement is a 5-dimensional data point, creating a high-dimensional picture of weather conditions.",
+      "question": "With 5 independent weather measurements, the data point lives in ℝⁿ where n = ?",
+      "options": [
+        "5",
+        "3",
+        "2",
+        "10"
+      ],
+      "answer": "5",
+      "explanation": "Step 1: Five independent measurements → five coordinates. Step 2: Each measurement adds one dimension. Step 3: The weather state is a single point in ℝ⁵, with each axis representing a different atmospheric variable."
+    }
+  ]
+}

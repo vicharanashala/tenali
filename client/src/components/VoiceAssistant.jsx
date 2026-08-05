@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './VoiceAssistant.css';
 
-export default function VoiceAssistant({ progressData, onNavigate, onStartTour }) {
+export default function VoiceAssistant({ onStartTour }) {
   const [speaking, setSpeaking] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [greetingPlayed, setGreetingPlayed] = useState(false);
@@ -56,20 +56,6 @@ export default function VoiceAssistant({ progressData, onNavigate, onStartTour }
 
     return () => clearTimeout(timer);
   }, [greetingPlayed, onStartTour]);
-
-  const handleGuideMe = () => {
-    const userStr = localStorage.getItem('tenali-user');
-    const username = userStr ? JSON.parse(userStr).username : 'Student';
-    let msg = 'Hello ' + username + '. ';
-    
-    if (progressData && progressData.length > 0) {
-      const needsPractice = progressData.sort((a, b) => a.score - b.score)[0];
-      msg += 'Your lowest score is in ' + needsPractice.topic.replace('-', ' ') + '. Shall we practice that?';
-    } else {
-      msg += 'I dont have enough data yet. Try the random mix quiz!';
-    }
-    speak(msg);
-  };
 
   return (
     <div className={'voice-assistant ' + (expanded ? 'expanded ' : '') + (speaking ? 'speaking' : '')}>

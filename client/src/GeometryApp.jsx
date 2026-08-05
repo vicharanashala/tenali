@@ -1,8 +1,37 @@
-import React, { useState, useEffect, useRef, useCallback, Fragment } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useReducer, Fragment } from 'react';
 import geometryData from './geometry.json';
 
+const INITIAL_DRAWING = {
+  points: [],
+  segments: [],
+  lines: [],
+  rays: [],
+  selectedPoints: [],
+  history: [],
+  validationFeedback: { status: null, message: '' },
+  selectedOption: null,
+  showHint: false,
+};
+const drawingReducer = (state, action) => {
+  switch (action.type) {
+    case 'reset':
+      return { ...INITIAL_DRAWING, ...action.payload, validationFeedback: { status: null, message: '' }, selectedOption: null, showHint: false };
+    case 'setPoints':       return { ...state, points: action.payload };
+    case 'setSegments':     return { ...state, segments: action.payload };
+    case 'setLines':        return { ...state, lines: action.payload };
+    case 'setRays':         return { ...state, rays: action.payload };
+    case 'setSelectedPoints': return { ...state, selectedPoints: action.payload };
+    case 'setHistory':      return { ...state, history: action.payload };
+    case 'setValidationFeedback': return { ...state, validationFeedback: action.payload };
+    case 'setSelectedOption': return { ...state, selectedOption: action.payload };
+    case 'setShowHint':     return { ...state, showHint: action.payload };
+    default:
+      return state;
+  }
+};
+
 // Local helper component to avoid circular dependencies
-function QuizLayout({ title, subtitle, onBack, children }) {
+function QuizLayout({ title, onBack, children }) {
   return (
     <>
       <div className="header-row">
@@ -31,13 +60,44 @@ export default function GeometryApp({ onBack }) {
   })
 
   // Canvas Drawing States
-  const [points, setPoints] = useState([])
-  const [segments, setSegments] = useState([])
-  const [lines, setLines] = useState([])
-  const [rays, setRays] = useState([])
-  const [selectedPoints, setSelectedPoints] = useState([])
+  const [drawing, dispatchDrawing] = useReducer(drawingReducer, INITIAL_DRAWING)
+  const points = drawing.points
+  const segments = drawing.segments
+  const lines = drawing.lines
+  const rays = drawing.rays
+  const selectedPoints = drawing.selectedPoints
+  const history = drawing.history
+  const setPoints = useCallback((updater) => {
+    dispatchDrawing(typeof updater === 'function'
+      ? { type: 'setPoints', payload: updater(points) }
+      : { type: 'setPoints', payload: updater })
+  }, [points])
+  const setSegments = useCallback((updater) => {
+    dispatchDrawing(typeof updater === 'function'
+      ? { type: 'setSegments', payload: updater(segments) }
+      : { type: 'setSegments', payload: updater })
+  }, [segments])
+  const setLines = useCallback((updater) => {
+    dispatchDrawing(typeof updater === 'function'
+      ? { type: 'setLines', payload: updater(lines) }
+      : { type: 'setLines', payload: updater })
+  }, [lines])
+  const setRays = useCallback((updater) => {
+    dispatchDrawing(typeof updater === 'function'
+      ? { type: 'setRays', payload: updater(rays) }
+      : { type: 'setRays', payload: updater })
+  }, [rays])
+  const setSelectedPoints = useCallback((updater) => {
+    dispatchDrawing(typeof updater === 'function'
+      ? { type: 'setSelectedPoints', payload: updater(selectedPoints) }
+      : { type: 'setSelectedPoints', payload: updater })
+  }, [selectedPoints])
+  const setHistory = useCallback((updater) => {
+    dispatchDrawing(typeof updater === 'function'
+      ? { type: 'setHistory', payload: updater(history) }
+      : { type: 'setHistory', payload: updater })
+  }, [history])
   const [activeTool, setActiveTool] = useState('point')
-  const [history, setHistory] = useState([])
 
   const distanceToSegment = (x, y, x1, y1, x2, y2) => {
     const A = x - x1
@@ -95,11 +155,29 @@ export default function GeometryApp({ onBack }) {
     if (onBack) onBack()
   }
 
+  // Particle effects state (separate from drawing canvas state)
+  const [particlesRaw, setParticles] = useState([])
+  const particles = particlesRaw
+
   // Validation and hint feedback state
-  const [validationFeedback, setValidationFeedback] = useState({ status: null, message: '' })
-  const [particles, setParticles] = useState([])
-  const [selectedOption, setSelectedOption] = useState(null)
-  const [showHint, setShowHint] = useState(false)
+  const validationFeedback = drawing.validationFeedback
+  const selectedOption = drawing.selectedOption
+  const showHint = drawing.showHint
+  const setValidationFeedback = useCallback((payload) => {
+    dispatchDrawing(typeof payload === 'function'
+      ? { type: 'setValidationFeedback', payload: payload(validationFeedback) }
+      : { type: 'setValidationFeedback', payload })
+  }, [validationFeedback])
+  const setSelectedOption = useCallback((payload) => {
+    dispatchDrawing(typeof payload === 'function'
+      ? { type: 'setSelectedOption', payload: payload(selectedOption) }
+      : { type: 'setSelectedOption', payload })
+  }, [selectedOption])
+  const setShowHint = useCallback((payload) => {
+    dispatchDrawing(typeof payload === 'function'
+      ? { type: 'setShowHint', payload: payload(showHint) }
+      : { type: 'setShowHint', payload })
+  }, [showHint])
 
   // Scroll window to top when chapter changes
   useEffect(() => {
@@ -122,17 +200,12 @@ export default function GeometryApp({ onBack }) {
         ]
       }
     }
-    
-    setPoints(initialPoints)
-    setSegments([])
-    setLines([])
-    setRays([])
-    setSelectedPoints([])
-    setHistory([])
-    setValidationFeedback({ status: null, message: '' })
-    setSelectedOption(null)
-    setShowHint(false)
-    
+
+    dispatchDrawing({
+      type: 'reset',
+      payload: { points: initialPoints },
+    })
+
     if (currentActivity && currentActivity.allowed_tools && currentActivity.allowed_tools.length > 0) {
       // Filter out eraser from starting default tool if present
       const toolsNoEraser = currentActivity.allowed_tools.filter(t => t !== 'eraser')
@@ -140,6 +213,7 @@ export default function GeometryApp({ onBack }) {
     } else {
       setActiveTool('point')
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentChapterId, currentActivityIndex])
 
   const isChapterCompleted = (chId) => {
@@ -775,7 +849,7 @@ export default function GeometryApp({ onBack }) {
         setCompletedActivities(nextCompleted)
         try {
           localStorage.setItem('tenali-geometry-completed', JSON.stringify(nextCompleted))
-        } catch {}
+        } catch { /* ignored */ }
       }
     }
   }

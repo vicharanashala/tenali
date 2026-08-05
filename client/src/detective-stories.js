@@ -89,7 +89,6 @@ const DETECTIVE_TOPICS = {
   variation: 'Variation',
   vectors: 'Vectors',
   gst: 'GST (Goods & Services Tax)',
-  profitloss: 'Profit & Loss',
 };
 
 /**

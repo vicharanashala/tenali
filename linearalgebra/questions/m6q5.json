@@ -1,0 +1,457 @@
+{
+  "module": 6,
+  "missionId": 55,
+  "title": "Dimensionality Reduction",
+  "original_question": "PCA (Principal Component Analysis) finds the directions of maximum variance in data. Given 2D points: (1,1), (2,2), (3,3), (1,4), (2,5), (3,6). Center the data (subtract mean), compute covariance matrix, find eigenvectors. The eigenvector with largest eigenvalue = first principal component — direction of most variance. Project data onto this component to reduce from 2D to 1D!",
+  "core_concept": "PCA finds orthogonal directions (principal components) of maximum variance in data by computing eigenvectors of the covariance matrix. Projecting onto the top k components reduces dimensions while preserving the most variance.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M6Q5E1",
+        "question": "What does PCA stand for?",
+        "options": [
+          "Principal Component Analysis",
+          "Primary Covariance Algorithm",
+          "Population Correlation Assessment",
+          "Pattern Classification Approach"
+        ],
+        "correct_option": "Principal Component Analysis",
+        "explanation": "Step 1: PCA = Principal Component Analysis — 'Principal' means the most important or primary directions in the data. Step 2: 'Component' refers to the new axes (directions) found by PCA that capture the most variance, and 'Analysis' refers to the process of discovering these directions. Step 3: PCA transforms the original correlated features into a new set of uncorrelated features (principal components) ordered by the variance they explain, which is the foundation of dimensionality reduction, feature extraction, and data visualization in high-dimensional datasets."
+      },
+      {
+        "id": "M6Q5E2",
+        "question": "What is the first step before computing PCA?",
+        "options": [
+          "Sort the data by the first variable",
+          "Center the data by subtracting the mean of each feature",
+          "Multiply all data by 2",
+          "Remove all outliers — does t match"
+        ],
+        "correct_option": "Center the data by subtracting the mean of each feature",
+        "explanation": "Step 1: PCA requires centered data (mean = 0 for each feature) — if data is not centered, the first principal component may point toward the mean rather than the direction of maximum variance. Step 2: Centering ensures the covariance matrix C = X^TX/n correctly captures the spread of the data around its center, not its absolute location. Step 3: Without centering, the principal components would reflect both the location and spread of the data, producing misleading directions — centering separates the 'where is the data' question (the mean) from the 'how does it spread' question (the covariance), which PCA only answers the latter."
+      },
+      {
+        "id": "M6Q5E3",
+        "question": "In PCA, what does the eigenvector with the largest eigenvalue represent?",
+        "options": [
+          "The direction of minimum variance in the data",
+          "The direction of maximum variance — the first principal component",
+          "The mean of the data — does t match",
+          "The outlier direction"
+        ],
+        "correct_option": "The direction of maximum variance — the first principal component",
+        "explanation": "Step 1: The covariance matrix's eigenvectors are the principal component directions, and the eigenvalues measure the variance along each direction. Step 2: The largest eigenvalue corresponds to the direction where data varies the most — projecting onto this direction preserves the maximum possible variance. Step 3: This is the optimal 1D summary of the data in the least-squares sense: no other 1D projection captures more variance, which is why PCA is the foundation of dimensionality reduction — it finds the 'best' lower-dimensional representation."
+      },
+      {
+        "id": "M6Q5E4",
+        "question": "What is the covariance matrix?",
+        "options": [
+          "A matrix of correlations between data points",
+          "A matrix showing how pairs of features vary together",
+          "The matrix of raw data values",
+          "A matrix of distances between data points"
+        ],
+        "correct_option": "A matrix showing how pairs of features vary together",
+        "explanation": "Step 1: The covariance between features X and Y measures how they co-vary: Cov(X,Y) = E[(X−μₓ)(Y−μᵧ)], positive when both increase together, negative when one increases as the other decreases. Step 2: The covariance matrix C stores all pairwise covariances: C(i,j) = Cov(feature i, feature j), with diagonal entries C(i,i) = Var(feature i). Step 3: Its eigenvectors give the principal directions (uncorrelated axes of maximum variance) and eigenvalues give the variance along each — the covariance matrix encodes the complete second-order statistics of the data, which PCA decomposes."
+      },
+      {
+        "id": "M6Q5E5",
+        "question": "For points (1,1), (2,2), (3,3) that lie exactly on the line y=x, what is the first principal component direction?",
+        "options": [
+          "(1, 0) —",
+          "(0, 1) —",
+          "(1, 1) — along the line y=x",
+          "(1, -1) — perpendicular to y=x"
+        ],
+        "correct_option": "(1, 1) — along the line y=x",
+        "explanation": "Step 1: Points on y=x vary entirely along the (1,1) direction — all variation is in this single direction, with zero variance perpendicular to it. Step 2: The covariance matrix has eigenvector (1,1)/√2 with eigenvalue = all variance, and eigenvector (1,−1)/√2 with eigenvalue = 0. Step 3: PCA finds (1,1) as the first principal component (capturing 100% of variance) and (1,−1) as the second (capturing 0%) — this illustrates how PCA identifies the intrinsic dimensionality of data: the data is effectively 1D despite being embedded in 2D."
+      },
+      {
+        "id": "M6Q5E6",
+        "question": "If you reduce data from 2D to 1D using PCA, what do you keep?",
+        "options": [
+          "The first principal component (direction of max variance) and project all data onto it",
+          "The second principal component",
+          "Both components ( reduction)",
+          "The mean vector only — does t match"
+        ],
+        "correct_option": "The first principal component (direction of max variance) and project all data onto it",
+        "explanation": "Step 1: PCA ranks components by variance explained (eigenvalue): the first component captures the most variance possible in 1D. Step 2: Projecting 2D data onto the first PC gives 1D coordinates: x_new = Xv₁ where v₁ is the first eigenvector. Step 3: This 1D representation preserves as much information (variance) as possible — it is the optimal 1D summary in the least-squares sense, which is why PCA is the gold standard for linear dimensionality reduction."
+      },
+      {
+        "id": "M6Q5E7",
+        "question": "What is the total variance in a dataset equal to?",
+        "options": [
+          "The sum of all eigenvalues of the covariance matrix (which equals the sum of feature variances)",
+          "The product of all eigenvalues",
+          "The largest eigenvalue only",
+          "The trace of the data matrix"
+        ],
+        "correct_option": "The sum of all eigenvalues of the covariance matrix (which equals the sum of feature variances)",
+        "explanation": "Step 1: The trace of the covariance matrix = Σᵢ C(i,i) = Σᵢ Var(feature i) = total variance across all features. Step 2: The trace also equals the sum of eigenvalues (a fundamental matrix property: trace = sum of eigenvalues). Step 3: So total variance = Σλᵢ = ΣVar(feature i). The fraction of variance explained by the first k components is Σᵢ₌₁ᵏ λᵢ / Σλᵢ, which tells you how much information is retained after reducing to k dimensions — this ratio guides the choice of k in practice."
+      },
+      {
+        "id": "M6Q5E8",
+        "question": "Why are principal components orthogonal to each other?",
+        "options": [
+          "Because PCA requires the data to be on a grid",
+          "Because eigenvectors of a symmetric matrix (the covariance matrix) are orthogonal",
+          "Because the data is centered",
+          "Because PCA only works for 2D data"
+        ],
+        "correct_option": "Because eigenvectors of a symmetric matrix (the covariance matrix) are orthogonal",
+        "explanation": "Step 1: The covariance matrix C is always symmetric: C(i,j) = Cov(Xᵢ,Xⱼ) = Cov(Xⱼ,Xᵢ) = C(j,i). Step 2: A fundamental theorem of linear algebra (the spectral theorem) states that eigenvectors of a symmetric matrix corresponding to distinct eigenvalues are orthogonal. Step 3: This orthogonality means each principal component captures variance in a direction perpendicular to all previous components — no overlap, no redundant information. The components are the axes of the ellipsoid that best fits the data, and these axes are always perpendicular."
+      },
+      {
+        "id": "M6Q5E9",
+        "question": "If all eigenvalues of the covariance matrix are equal, what does PCA find?",
+        "options": [
+          "A single dominant direction",
+          "No preferred direction — all directions are equally important (the data is spherical)",
+          "Only one principal component",
+          "The data must be 1D — does t match"
+        ],
+        "correct_option": "No preferred direction — all directions are equally important (the data is spherical)",
+        "explanation": "Step 1: Equal eigenvalues mean equal variance in every direction — the data cloud is a sphere/hypersphere, not an ellipsoid. Step 2: There is no 'best' direction to project onto — all directions capture the same amount of variance. Step 3: PCA cannot reduce dimensions meaningfully here because the data has no low-dimensional structure — it is uniformly spread in all directions. This is the worst case for PCA: when eigenvalues are equal, the data is maximally high-dimensional and no linear projection captures more variance than any other."
+      },
+      {
+        "id": "M6Q5E10",
+        "question": "What does reducing dimensions with PCA cost you?",
+        "options": [
+          "thing — PCA is lossless",
+          "Some information (variance) is lost — specifically, the variance along discarded components",
+          "All original data features",
+          "The ability to compute the mean"
+        ],
+        "correct_option": "Some information (variance) is lost — specifically, the variance along discarded components",
+        "explanation": "Step 1: PCA is a lossy compression: projecting from n dimensions to k < n dimensions discards n−k components, each carrying some variance. Step 2: The discarded variance = sum of discarded eigenvalues = Σᵢ₌ₖ₊₁ⁿ λᵢ, which is the information lost in the reduction. Step 3: PCA minimizes this loss by keeping components with the largest eigenvalues (the Eckart-Young theorem guarantees this is optimal), but some information is always lost when reducing dimensions — the trade-off is between compression (fewer dimensions) and fidelity (retained variance)."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M6Q5M1",
+        "question": "For the data points (1,1), (2,2), (3,3), (1,4), (2,5), (3,6), what is the mean of the x-coordinates?",
+        "options": [
+          "2",
+          "2.5",
+          "3",
+          "1.5"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: x-coordinates are 1, 2, 3, 1, 2, 3. Step 2: Mean = (1+2+3+1+2+3)/6 = 12/6 = 2. Step 3: Centering requires subtracting this mean from each x-coordinate: the centered x-values become −1, 0, 1, −1, 0, 1, which shifts the data so its center of mass is at the origin — the essential preprocessing step before computing the covariance matrix."
+      },
+      {
+        "id": "M6Q5M2",
+        "question": "For the data points (1,1), (2,2), (3,3), (1,4), (2,5), (3,6), what is the mean of the y-coordinates?",
+        "options": [
+          "2 (x)",
+          "3",
+          "3.5",
+          "4"
+        ],
+        "correct_option": "3.5",
+        "explanation": "Step 1: y-coordinates are 1, 2, 3, 4, 5, 6. Step 2: Mean = (1+2+3+4+5+6)/6 = 21/6 = 3.5. Step 3: After centering, the y-coordinates become: −2.5, −1.5, −0.5, 0.5, 1.5, 2.5. The centered data has mean (0, 0), which is the prerequisite for computing the covariance matrix C = X^TX/n that PCA decomposes."
+      },
+      {
+        "id": "M6Q5M3",
+        "question": "After centering the data (subtracting mean), the centered points for (1,1), (2,2), (3,3) become:",
+        "options": [
+          "(-1,-2.5), (0,-1.5), (1,-0.5)",
+          "(-1,-1), (0,0), (1,1)",
+          "(1,1), (2,2), (3,3)",
+          "(-2,-2.5), (-1,-1.5), (0,-0.5)"
+        ],
+        "correct_option": "(-1,-2.5), (0,-1.5), (1,-0.5)",
+        "explanation": "Step 1: Mean = (2, 3.5). Step 2: Centered point = (x − 2, y − 3.5). Step 3: (1,1) → (−1, −2.5), (2,2) → (0, −1.5), (3,3) → (1, −0.5). Centering shifts the data so its mean is at the origin — this is essential because PCA finds directions of variance around the center, and without centering, the 'center' would be at the data's mean, producing incorrect principal components."
+      },
+      {
+        "id": "M6Q5M4",
+        "question": "What does the eigenvalue of a principal component tell you?",
+        "options": [
+          "The direction of the component",
+          "The amount of variance captured by that component — larger eigenvalue means more important component",
+          "The number of data points",
+          "The correlation between components"
+        ],
+        "correct_option": "The amount of variance captured by that component — larger eigenvalue means more important component",
+        "explanation": "Step 1: Each eigenvalue λᵢ measures the variance of the data projected onto the i-th eigenvector: Var(Xvᵢ) = vᵢ^TCvᵢ = λᵢ. Step 2: Larger λᵢ means more spread (information) along that direction — the data is more 'stretched' along this axis. Step 3: The proportion λᵢ/Σλⱼ tells you the percentage of total variance explained by the i-th component — this ratio guides how many components to keep: if the first 2 components explain 95% of variance, reducing to 2D retains most of the information."
+      },
+      {
+        "id": "M6Q5M5",
+        "question": "If the first two principal components explain 95% of the total variance in a 10-dimensional dataset, what can you conclude?",
+        "options": [
+          "The data is truly 10-dimensional and PCA is wrong",
+          "You can reduce from 10D to 2D while retaining 95% of the information — the data effectively lives near a 2D subspace",
+          "All 10 features are equally important",
+          "You must keep all 10 dimensions"
+        ],
+        "correct_option": "You can reduce from 10D to 2D while retaining 95% of the information — the data effectively lives near a 2D subspace",
+        "explanation": "Step 1: 95% variance explained means the first 2 components capture almost all the data's spread — the remaining 8 components contribute only 5% (mostly noise or minor variations). Step 2: The data effectively lives near a 2D subspace (the plane spanned by the first two PCs), despite being nominally 10-dimensional. Step 3: Reducing to 2D is a good trade-off: 80% fewer dimensions with only 5% information loss — this is the power of PCA: revealing the intrinsic low-dimensional structure hidden in high-dimensional data."
+      },
+      {
+        "id": "M6Q5M6",
+        "question": "Why is PCA sensitive to the scale of features?",
+        "options": [
+          "PCA isn't sensitive to scale",
+          "Features with larger numerical ranges dominate the covariance matrix and thus the principal components, even if they are not more informative",
+          "PCA always rmalizes features automatically",
+          "Scale only matters for categorical data"
+        ],
+        "correct_option": "Features with larger numerical ranges dominate the covariance matrix and thus the principal components, even if they are not more informative",
+        "explanation": "Step 1: If feature X ranges from 0–1000 and feature Y from 0–1, Cov(X,X) will be much larger than Cov(Y,Y), so PCA will find the first PC almost aligned with X, not because X is more meaningful but because it has larger numerical variance. Step 2: The eigenvectors of the covariance matrix are determined by the relative magnitudes of the diagonal entries, so scale-dominant features control the principal directions. Step 3: Solution: standardize features (z-score normalization: subtract mean, divide by standard deviation) before PCA so all features are on equal footing, ensuring the principal components reflect true structural relationships rather than arbitrary unit choices."
+      },
+      {
+        "id": "M6Q5M7",
+        "question": "In PCA, what is the relationship between the number of principal components k and the rank of the data matrix?",
+        "options": [
+          "k must equal the rank",
+          "k can be at most the rank — you cannot have more meaningful components than the rank of the data",
+          "k is always equal to the number of features",
+          "k is unrelated to rank"
+        ],
+        "correct_option": "k can be at most the rank — you cannot have more meaningful components than the rank of the data",
+        "explanation": "Step 1: The rank of the data matrix X tells you the number of linearly independent features — if rank = r, only r directions have non-zero variance. Step 2: PCA cannot find more independent directions than the rank: the covariance matrix C = X^TX/n has at most r non-zero eigenvalues, so only r principal components have non-zero variance. Step 3: If rank = r, then k should be ≤ r — the remaining n−r components have zero eigenvalue (zero variance) and are meaningless. The rank determines the intrinsic dimensionality of the data, which PCA reveals."
+      },
+      {
+        "id": "M6Q5M8",
+        "question": "What is the difference between PCA and simply dropping the last feature of the original data?",
+        "options": [
+          "They are identical — both reduce one dimension",
+          "PCA finds the optimal projection that preserves maximum variance; dropping an arbitrary feature may discard the most informative dimension",
+          "Dropping a feature always preserves more information than PCA",
+          "PCA requires dropping the first feature, t the last"
+        ],
+        "correct_option": "PCA finds the optimal projection that preserves maximum variance; dropping an arbitrary feature may discard the most informative dimension",
+        "explanation": "Step 1: Dropping the last feature discards whatever information that feature contained — possibly the most important direction (the one with the most variance). Step 2: PCA finds the projection that preserves the MOST variance — it is the optimal linear reduction by the Eckart-Young theorem, guaranteeing that no other k-dimensional linear projection captures more information. Step 3: PCA may combine all original features into new components, ensuring no important information is arbitrarily discarded — it finds the 'best' k dimensions rather than relying on the 'original' k dimensions."
+      },
+      {
+        "id": "M6Q5M9",
+        "question": "For the 6 data points (1,1), (2,2), (3,3), (1,4), (2,5), (3,6), approximately what direction does the first principal component point?",
+        "options": [
+          "Along the x-axis (1,0)",
+          "Along y=x direction (1,1) approximately",
+          "Along the y-axis (0,1)",
+          "Along (1,-1) — does t match"
+        ],
+        "correct_option": "Along y=x direction (1,1) approximately",
+        "explanation": "Step 1: The data roughly follows a trend where both x and y increase together — the centered data shows positive correlation between x and y. Step 2: The first PC captures this main trend — the direction of maximum variance is approximately (1,1), along which the data is most spread out. Step 3: The data varies more along this diagonal than perpendicular to it, so PCA finds (1,1) as the first principal component — this direction captures the dominant pattern (both features increasing together), while the second PC (approximately (1,−1)) captures the remaining variation (differences between features)."
+      },
+      {
+        "id": "M6Q5M10",
+        "question": "If you perform PCA on a dataset and find that the first component explains 99% of variance, what does this imply about the original features?",
+        "options": [
+          "All features are completely unrelated",
+          "The features are highly correlated — the data effectively lies along a single line in feature space",
+          "The data has structure",
+          "PCA made an error — does t match"
+        ],
+        "correct_option": "The features are highly correlated — the data effectively lies along a single line in feature space",
+        "explanation": "Step 1: 99% variance in one component means the data is almost perfectly aligned along one direction — knowing one feature almost determines the others (high correlation). Step 2: Despite having many features, the data is essentially 1-dimensional — PCA has revealed this hidden low-dimensional structure. Step 3: This is common in real data: many measured features are redundant (e.g., height in cm and height in inches are perfectly correlated), and PCA identifies the intrinsic dimensionality by analyzing the eigenvalue spectrum — the sharp drop-off after the first eigenvalue signals that most features are carrying the same information."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M6Q5H1",
+        "question": "For the covariance matrix C of centered data X (where C = X^TX/n), prove that the eigenvectors of C give the principal components. Why must C be positive semi-definite?",
+        "options": [
+          "C is positive semi-definite because for any vector v, v^TCv = v^TX^TXv/n = ‖Xv‖²/n ≥ 0 — the quadratic form is always non-negative, guaranteeing non-negative eigenvalues",
+          "C is positive semi-definite because it is symmetric",
+          "C is positive semi-definite because the data is centered",
+          "C must be positive definite (strictly > 0) for PCA to work"
+        ],
+        "correct_option": "C is positive semi-definite because for any vector v, v^TCv = v^TX^TXv/n = ‖Xv‖²/n ≥ 0 — the quadratic form is always non-negative, guaranteeing non-negative eigenvalues",
+        "explanation": "Step 1: v^TCv = v^T(X^TX/n)v = (Xv)^T(Xv)/n = ‖Xv‖²/n. Step 2: The norm squared is always ≥ 0, so v^TCv ≥ 0 for all v — this is the definition of positive semi-definite. Step 3: This guarantees all eigenvalues λᵢ ≥ 0, meaning variance along any direction is non-negative — a physical requirement (variance cannot be negative). The eigenvectors of C give the principal component directions because they diagonalize the covariance matrix, making the components uncorrelated — this is the spectral theorem applied to the covariance matrix."
+      },
+      {
+        "id": "M6Q5H2",
+        "question": "If you perform PCA and then inverse-transform back to the original space, you get an approximation of the original data. What is the reconstruction error (Frobenius norm) equal to?",
+        "options": [
+          "The sum of the discarded eigenvalues",
+          "Zero — reconstruction is always perfect",
+          "The sum of the kept eigenvalues",
+          "The trace of the covariance matrix"
+        ],
+        "correct_option": "The sum of the discarded eigenvalues",
+        "explanation": "Step 1: PCA projection keeps k components: X̂ = XV_kV_k^T (where V_k are the top k eigenvectors of C). Step 2: The error matrix X − X̂ has variance equal to the sum of discarded eigenvalues — by the Eckart-Young theorem applied to the covariance matrix, the reconstruction error is minimized by keeping the top k components. Step 3: ‖X − X̂‖_F²/n = Σᵢ₌ₖ₊₁ᵈ λᵢ — exactly the variance lost by discarding those components. This formula directly quantifies the information loss in dimensionality reduction."
+      },
+      {
+        "id": "M6Q5H3",
+        "question": "Why does PCA fail when the data has a nonlinear manifold structure (e.g., data lying on a Swiss roll)?",
+        "options": [
+          "PCA assumes the best projection is linear — it finds flat subspaces, but a Swiss roll requires nonlinear unfolding to reveal its true low-dimensional structure",
+          "PCA cant handle more than 2 dimensions",
+          "Swiss roll data has low-dimensional structure",
+          "PCA always works for any data shape"
+        ],
+        "correct_option": "PCA assumes the best projection is linear — it finds flat subspaces, but a Swiss roll requires nonlinear unfolding to reveal its true low-dimensional structure",
+        "explanation": "Step 1: PCA finds the best LINEAR subspace (flat plane/hyperplane) that captures maximum variance — it is constrained to linear projections. Step 2: A Swiss roll is a 2D sheet curled in 3D — its intrinsic dimension is 2, but no flat 2D plane captures it well (points far apart on the sheet may be close in 3D). Step 3: Nonlinear methods (kernel PCA, Isomap, t-SNE) can 'unroll' the manifold by preserving geodesic distances rather than Euclidean distances, but standard PCA cannot — it would project the curled sheet onto a plane, mixing points that are far apart on the manifold. This is the fundamental limitation of linear dimensionality reduction."
+      },
+      {
+        "id": "M6Q5H4",
+        "question": "In PCA, the projection matrix onto the first k principal components is P = V_k V_k^T where V_k contains the top k eigenvectors. Why is P² = P (idempotent)?",
+        "options": [
+          "Because projecting twice gives the same result as projecting once — once data is in the k-dimensional subspace, a second projection doesn't change it",
+          "Because all projection matrices are invertible",
+          "Because V_k is always the identity matrix",
+          "Because PCA is always lossless"
+        ],
+        "correct_option": "Because projecting twice gives the same result as projecting once — once data is in the k-dimensional subspace, a second projection doesn't change it",
+        "explanation": "Step 1: P² = (V_kV_k^T)(V_kV_k^T) = V_k(V_k^TV_k)V_k^T = V_k·I·V_k^T = V_kV_k^T = P. Step 2: The key is V_k^TV_k = I (orthonormal columns) — the eigenvectors are orthonormal. Step 3: Geometrically: projecting onto a subspace and then projecting again doesn't change anything — you're already in the subspace. This idempotency (P² = P) is the defining property of projection matrices, and it ensures that PCA's dimensionality reduction is stable: applying it twice gives the same result as applying it once."
+      },
+      {
+        "id": "M6Q5H5",
+        "question": "If the data matrix X has SVD X = UΣV^T (after centering), how do the singular values relate to PCA?",
+        "options": [
+          "The principal component directions are the columns of V, and the eigenvalues of the covariance matrix are σᵢ²/n",
+          "The principal components are the columns of U",
+          "SVD and PCA are unrelated",
+          "The singular values ARE the eigenvalues"
+        ],
+        "correct_option": "The principal component directions are the columns of V, and the eigenvalues of the covariance matrix are σᵢ²/n",
+        "explanation": "Step 1: C = X^TX/n = (UΣV^T)^T(UΣV^T)/n = VΣ²V^T/n. Step 2: This is the eigendecomposition of C: eigenvectors = columns of V (the right singular vectors of X), eigenvalues = σᵢ²/n. Step 3: The SVD of X directly gives PCA: columns of V are principal component directions, and σᵢ²/n are the variances explained by each component. This is why SVD is preferred for computing PCA numerically — it avoids explicitly forming the n×n covariance matrix, which is important when d (number of features) is large."
+      },
+      {
+        "id": "M6Q5H6",
+        "question": "Why does SVD of the centered data matrix X = UΣV^T give the same result as eigendecomposition of the covariance matrix for PCA?",
+        "options": [
+          "Because X^TX/n = V(Σ²/n)V^T, so the right singular vectors of X are exactly the eigenvectors of the covariance matrix, and σᵢ²/n are the eigenvalues",
+          "Because SVD always equals eigendecomposition",
+          "Because the covariance matrix is always diagonal",
+          "Because PCA uses U instead of V"
+        ],
+        "correct_option": "Because X^TX/n = V(Σ²/n)V^T, so the right singular vectors of X are exactly the eigenvectors of the covariance matrix, and σᵢ²/n are the eigenvalues",
+        "explanation": "Step 1: SVD of centered X: X = UΣV^T. Step 2: C = X^TX/n = V(Σ²/n)V^T — this is the eigendecomposition of C, with eigenvectors V and eigenvalues σᵢ²/n. Step 3: So V (right singular vectors) = principal component directions, and σᵢ²/n = variance along each PC. SVD directly gives PCA without explicitly forming the n×n covariance matrix — this is computationally important when d (number of features) is large, since the SVD of the n×d data matrix is cheaper than the eigendecomposition of the d×d covariance matrix."
+      },
+      {
+        "id": "M6Q5H7",
+        "question": "If you have n data points in d dimensions and n < d (fewer samples than features), what is the maximum rank of the covariance matrix, and what does this mean for PCA?",
+        "options": [
+          "Rank = d — all features are independent",
+          "Rank ≤ n − 1 — at most n-1 principal components have non-zero eigenvalues, so PCA can reduce to at most n-1 dimensions",
+          "Rank = 0 — PCA doesn't work",
+          "Rank = d but only n components matter"
+        ],
+        "correct_option": "Rank ≤ n − 1 — at most n-1 principal components have non-zero eigenvalues, so PCA can reduce to at most n-1 dimensions",
+        "explanation": "Step 1: The centered data matrix X̃ is n×d with rank ≤ n−1 (centering reduces rank by at most 1, since the centered data lies in the (n−1)-dimensional subspace orthogonal to the all-ones vector). Step 2: C = X̃^TX̃/n has the same rank as X̃, so at most n−1 eigenvalues are non-zero. Step 3: In genomics (n patients, d=20,000 genes), PCA can find at most n−1 meaningful components — a powerful dimensionality reduction from 20,000D to (n−1)D. This is the 'curse of dimensionality' in reverse: when d ≫ n, the data is inherently low-dimensional and PCA reveals this."
+      },
+      {
+        "id": "M6Q5H8",
+        "question": "Why is PCA equivalent to finding the best rank-k approximation to the data matrix (in the least-squares sense)?",
+        "options": [
+          "Because by the Eckart-Young theorem, the rank-k SVD truncation minimizes ‖X − X_k‖_F, and PCA's projection onto the top k eigenvectors is exactly this truncation",
+          "Because PCA always gives exact reconstruction",
+          "Because rank-k approximation is always worse than PCA",
+          "Because PCA uses the Frobenius rm but approximation uses spectral rm"
+        ],
+        "correct_option": "Because by the Eckart-Young theorem, the rank-k SVD truncation minimizes ‖X − X_k‖_F, and PCA's projection onto the top k eigenvectors is exactly this truncation",
+        "explanation": "Step 1: PCA projects centered X onto the top k eigenvectors: X_k = XV_kV_k^T. Step 2: The Eckart-Young theorem says the best rank-k approximation (in Frobenius norm) is the truncated SVD: X_k = U_kΣ_kV_k^T. Step 3: These are identical — PCA projection = optimal low-rank approximation. The reconstruction error ‖X − X_k‖_F² = Σᵢ₌ₖ₊₁ σᵢ² = sum of discarded eigenvalues — PCA achieves the theoretical minimum error for any rank-k linear approximation."
+      },
+      {
+        "id": "M6Q5H9",
+        "question": "In kernel PCA, what is the 'kernel trick' and why does it help with nonlinear data?",
+        "options": [
+          "It maps data to a higher-dimensional space where linear PCA can find nonlinear structures in the original space — computed efficiently via the kernel matrix without explicitly mapping",
+          "It makes PCA faster by reducing the matrix size",
+          "It eliminates the need for centering",
+          "It only works for binary data"
+        ],
+        "correct_option": "It maps data to a higher-dimensional space where linear PCA can find nonlinear structures in the original space — computed efficiently via the kernel matrix without explicitly mapping",
+        "explanation": "Step 1: Kernel PCA applies the feature map φ: x → φ(x) in a high-dimensional (possibly infinite) space — e.g., φ(x) = (x₁², x₂², √2x₁x₂) maps 2D to 3D. Step 2: PCA in this high-dimensional space finds linear directions there, which correspond to nonlinear curves/surfaces in the original space. Step 3: The kernel trick computes inner products φ(xᵢ)·φ(xⱼ) = K(xᵢ,xⱼ) via a kernel function (e.g., Gaussian kernel) without ever computing φ explicitly — making it computationally feasible. This extends PCA to capture nonlinear structure while maintaining the elegance of the eigenvector computation."
+      },
+      {
+        "id": "M6Q5H10",
+        "question": "What is the probabilistic interpretation of PCA — specifically, what generative model does probabilistic PCA (PPCA) assume?",
+        "options": [
+          "Data is generated by a low-dimensional latent variable z ~ N(0,I), transformed by a linear mapping W, with Gaussian noise: x = Wz + μ + ε",
+          "Data is generated by independent uniform random variables",
+          "Data follows a categorical distribution",
+          "Data is generated by a nlinear neural network"
+        ],
+        "correct_option": "Data is generated by a low-dimensional latent variable z ~ N(0,I), transformed by a linear mapping W, with Gaussian noise: x = Wz + μ + ε",
+        "explanation": "Step 1: PPCA assumes each data point x is generated from a low-dimensional latent z (k-dimensional, standard normal), which is a generative story for how the data arose. Step 2: z is mapped to d dimensions via x = Wz + μ + ε, where W is the d×k loading matrix and ε ~ N(0, σ²I) is isotropic Gaussian noise. Step 3: Maximum likelihood estimation of W and σ² gives the PPCA solution — the principal components are the columns of W, and the noise variance σ² accounts for the discarded dimensions. This probabilistic interpretation enables Bayesian PCA (automatic relevance determination for choosing k) and connects PCA to factor analysis and variational autoencoders."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "emoji": "📷",
+      "title": "Eigenfaces for Face Recognition",
+      "type": "mcq",
+      "concept": "PCA for image dimensionality reduction",
+      "story": "Eigenfaces is a classic face recognition technique that uses PCA on face images. Each face image has millions of pixels, but PCA reduces this to around 100 eigenface coefficients — the principal components. These 100 numbers capture the essential features of a face (shape, lighting, expression) while discarding irrelevant details like background and image noise.",
+      "question": "How does the Eigenfaces technique reduce millions of face pixels to a manageable number?",
+      "options": [
+        "By cropping the image to a smaller size",
+        "By computing PCA to find principal components (eigenfaces) that capture the most variance across all faces",
+        "By converting the image to black and white",
+        "By randomly sampling pixels"
+      ],
+      "answer": "By computing PCA to find principal components (eigenfaces) that capture the most variance across all faces",
+      "explanation": "Step 1: Each face image is a high-dimensional vector (e.g., 100×100 = 10,000 dimensions), and the covariance matrix of many face images has a low-rank structure. Step 2: PCA finds the directions (eigenfaces) where face images vary the most — these capture lighting, expression, and shape variations while discarding directions with low variance (noise). Step 3: Each face is then represented by ~100 coefficients (its projection onto the top 100 eigenfaces), reducing 10,000D to 100D while preserving the essential structure — the eigenvalue spectrum drops off sharply, revealing that face images intrinsically live in a ~100-dimensional subspace."
+    },
+    {
+      "emoji": "📊",
+      "title": "Financial Market Analysis",
+      "type": "mcq",
+      "concept": "PCA on stock returns",
+      "story": "Financial analysts use PCA to reduce hundreds of stock return time series to a few market factors. The first principal component typically represents the overall market movement. The second might represent sector-specific trends. This dimensionality reduction reveals the hidden structure driving stock prices across the entire market.",
+      "question": "When PCA is applied to stock returns, what do the principal components represent?",
+      "options": [
+        "Individual stock prices",
+        "Hidden market factors — the first PC is often the overall market trend, and subsequent PCs capture sector-specific patterns",
+        "The exact future price of each stock",
+        "The company's revenue growth"
+      ],
+      "answer": "Hidden market factors — the first PC is often the overall market trend, and subsequent PCs capture sector-specific patterns",
+      "explanation": "Step 1: Stock returns are correlated — when the market goes up, most stocks go up, creating a dominant direction of co-movement in the return space. Step 2: PCA finds these dominant patterns: PC1 (market factor) explains ~50% of variance (the overall market trend), PC2 (sector factor) explains ~10%, etc. Step 3: Analysts use these factors to understand risk exposure and build factor models — reducing hundreds of stocks to a few interpretable factors, where the eigenvalue spectrum reveals how many independent market forces drive stock prices."
+    },
+    {
+      "emoji": "🧬",
+      "title": "Genomics and Gene Expression",
+      "type": "mcq",
+      "concept": "PCA for high-dimensional biological data",
+      "story": "In genomics, researchers measure thousands of gene expression levels for each patient. PCA reduces this high-dimensional data to 2-3 principal components that can be plotted on a scatter plot. Patients with similar genetic profiles cluster together, revealing hidden patterns like disease subtypes or treatment responses.",
+      "question": "How does PCA help genomics researchers visualise high-dimensional gene expression data?",
+      "options": [
+        "By creating 3D models of genes",
+        "By projecting thousands of gene measurements onto 2-3 principal components, revealing clusters of patients with similar genetic profiles",
+        "By counting the number of genes",
+        "By sorting genes alphabetically"
+      ],
+      "answer": "By projecting thousands of gene measurements onto 2-3 principal components, revealing clusters of patients with similar genetic profiles",
+      "explanation": "Step 1: Each patient has thousands of gene expression values — too many dimensions to visualize directly, but the covariance structure has low rank (many genes are co-regulated). Step 2: PCA reduces to 2–3 components that capture the most variance, where the eigenvalue spectrum reveals the number of independent biological processes. Step 3: Plotting patients in this 2–3D space reveals natural clusters — cancer vs. healthy, different cancer subtypes — patterns invisible in the raw high-dimensional data, because PCA projects onto the subspace where the most patient-to-patient variation occurs."
+    },
+    {
+      "emoji": "🎨",
+      "title": "Image Compression with PCA",
+      "type": "mcq",
+      "concept": "Low-rank approximation for compression",
+      "story": "JPEG image compression uses a mathematical transform (DCT, which is closely related to SVD) to decompose an image into frequency components. By keeping only the largest singular values — the most important frequency components — and discarding the small ones, JPEG achieves dramatic compression while maintaining visual quality.",
+      "question": "In JPEG image compression, what does keeping only the largest singular values achieve?",
+      "options": [
+        "Makes the image larger",
+        "Achieves compression by keeping the most important visual information and discarding imperceptible details",
+        "Makes the image black and white",
+        "Adds more colors to the image"
+      ],
+      "answer": "Achieves compression by keeping the most important visual information and discarding imperceptible details",
+      "explanation": "Step 1: Images have low-rank structure — most visual information is captured by a few principal frequency components (the large singular values correspond to low-frequency patterns like shapes and colors). Step 2: Keeping the largest singular values preserves the dominant patterns while discarding small singular values that represent high-frequency noise invisible to the human eye. Step 3: This achieves 10:1 or higher compression with minimal visual loss — the singular value spectrum drops off rapidly for natural images, meaning most of the 'energy' is concentrated in a few components, which is why low-rank approximation works so well for compression."
+    },
+    {
+      "emoji": "🗣️",
+      "title": "Natural Language Processing",
+      "type": "mcq",
+      "concept": "Latent Semantic Analysis via PCA",
+      "story": "Latent Semantic Analysis (LSA) applies SVD/PCA to a document-word matrix to discover hidden topics. The singular vectors reveal which words tend to co-occur — words like 'queen', 'king', and 'crown' cluster together as a 'royalty' topic. SVD automatically discovers these semantic relationships without any human labelling.",
+      "question": "What technique is used to automatically discover topics from a document-word matrix?",
+      "options": [
+        "Counting word frequencies",
+        "SVD/PCA to find latent semantic dimensions where co-occurring words cluster together",
+        "Reading each document manually",
+        "Alphabetical sorting of words"
+      ],
+      "answer": "SVD/PCA to find latent semantic dimensions where co-occurring words cluster together",
+      "explanation": "Step 1: The document-word matrix has documents as rows and words as columns, with entries = word frequency — words that co-occur in similar documents have correlated columns. Step 2: SVD/PCA finds latent dimensions where words that co-occur in similar documents have similar coordinates — the principal components are 'topic directions' in word space. Step 3: These dimensions correspond to topics — 'sports' (game, team, score), 'cooking' (recipe, ingredient, oven) — discovered automatically from the data's covariance structure, without any human labeling, by analyzing the eigenvalue spectrum of the document-word matrix."
+    }
+  ]
+}

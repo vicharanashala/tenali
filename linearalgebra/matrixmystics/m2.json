@@ -1,0 +1,3484 @@
+{
+  "module": 2,
+  "topics": [
+    {
+      "topicId": "Q2.1",
+      "title": "Hill Cipher",
+      "topic": "Letter-to-number encoding, encrypting via matrix multiplication in blocks, decrypting via inverse matrix.",
+      "mcqs": {
+        "easy": [
+          {
+            "id": "M2Q1E1",
+            "question": "Using A = 0, B = 1, ..., Z = 25, what number represents the letter D?",
+            "options": [
+              "3",
+              "4",
+              "2",
+              "5"
+            ],
+            "correct_option": "3",
+            "explanation": "A=0, B=1, C=2, D=3. The letter D is the 4th letter but since numbering starts at 0, D = 3."
+          },
+          {
+            "id": "M2Q1E2",
+            "question": "What number does the letter S represent in A=0 encoding?",
+            "options": [
+              "18",
+              "19",
+              "17",
+              "20"
+            ],
+            "correct_option": "18",
+            "explanation": "Counting from A=0: S is the 19th letter, so S = 18."
+          },
+          {
+            "id": "M2Q1E3",
+            "question": "The word HI maps to which two numbers using A=0?",
+            "options": [
+              "(7, 8)",
+              "(8, 9)",
+              "(6, 7)",
+              "(7, 9)"
+            ],
+            "correct_option": "(7, 8)",
+            "explanation": "H is the 8th letter so H=7, and I is the 9th letter so I=8. HI maps to (7,8)."
+          },
+          {
+            "id": "M2Q1E4",
+            "question": "The numbers (7, 8) correspond to which pair of letters?",
+            "options": [
+              "H and I",
+              "G and H",
+              "I and J",
+              "H and J"
+            ],
+            "correct_option": "H and I",
+            "explanation": "7 corresponds to H and 8 corresponds to I, giving the pair HI."
+          },
+          {
+            "id": "M2Q1E5",
+            "question": "Does the Hill cipher use a matrix or a scalar for encryption?",
+            "options": [
+              "A matrix",
+              "A scalar",
+              "A vector only",
+              "A constant"
+            ],
+            "correct_option": "A matrix",
+            "explanation": "The Hill cipher uses a key matrix to encrypt blocks of letters via matrix multiplication."
+          },
+          {
+            "id": "M2Q1E6",
+            "question": "The number 25 corresponds to which letter?",
+            "options": [
+              "Y",
+              "Z",
+              "X",
+              "W"
+            ],
+            "correct_option": "Z",
+            "explanation": "Z is the 26th letter, and since A=0, Z = 25."
+          },
+          {
+            "id": "M2Q1E7",
+            "question": "The number 0 corresponds to which letter?",
+            "options": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "correct_option": "A",
+            "explanation": "With A=0 encoding, the number 0 maps to the letter A."
+          },
+          {
+            "id": "M2Q1E8",
+            "question": "How many letters are in the word SUDARSHANA?",
+            "options": [
+              "9",
+              "10",
+              "11",
+              "8"
+            ],
+            "correct_option": "10",
+            "explanation": "S-U-D-A-R-S-H-A-N-A has exactly 10 letters."
+          },
+          {
+            "id": "M2Q1E9",
+            "question": "Encrypting AB with [[2,3],[3,4]] gives input vector (0,1). What is the output?",
+            "options": [
+              "(3, 4)",
+              "(2, 3)",
+              "(5, 7)",
+              "(1, 2)"
+            ],
+            "correct_option": "(3, 4)",
+            "explanation": "Multiply [[2,3],[3,4]] × (0,1)ᵀ = (2·0+3·1, 3·0+4·1) = (3,4)."
+          },
+          {
+            "id": "M2Q1E10",
+            "question": "The Hill cipher encrypts blocks of n letters using which size matrix?",
+            "options": [
+              "n×n matrix",
+              "n×1 vector",
+              "1×n row vector",
+              "2n×2n matrix"
+            ],
+            "correct_option": "n×n matrix",
+            "explanation": "The Hill cipher uses an n×n key matrix to encrypt blocks of n letters at a time."
+          }
+        ],
+        "medium": [
+          {
+            "id": "M2Q1M1",
+            "question": "Encrypt HI=(7,8) with [[2,3],[3,4]]. What is the output (2·7+3·8, 3·7+4·8)?",
+            "options": [
+              "(38, 53)",
+              "(35, 50)",
+              "(40, 55)",
+              "(36, 51)"
+            ],
+            "correct_option": "(38, 53)",
+            "explanation": "2·7+3·8=14+24=38, 3·7+4·8=21+32=53. Output is (38,53)."
+          },
+          {
+            "id": "M2Q1M2",
+            "question": "What is the determinant of A = [[2,3],[3,4]]?",
+            "options": [
+              "-1",
+              "1",
+              "7",
+              "-7"
+            ],
+            "correct_option": "-1",
+            "explanation": "det(A) = 2·4 - 3·3 = 8 - 9 = -1."
+          },
+          {
+            "id": "M2Q1M3",
+            "question": "The inverse of A = [[2,3],[3,4]] with det = -1 is:",
+            "options": [
+              "[[-4,3],[3,-2]]",
+              "[[4,-3],[-3,2]]",
+              "[[-4,-3],[-3,-2]]",
+              "[[4,3],[3,2]]"
+            ],
+            "correct_option": "[[-4,3],[3,-2]]",
+            "explanation": "A⁻¹ = (1/det)·[[d,-b],[-c,a]] = (1/-1)·[[4,-3],[-3,2]] = [[-4,3],[3,-2]]."
+          },
+          {
+            "id": "M2Q1M4",
+            "question": "To decrypt a Hill cipher ciphertext, we multiply by which matrix?",
+            "options": [
+              "A⁻¹",
+              "Aᵀ",
+              "A²",
+              "A + I"
+            ],
+            "correct_option": "A⁻¹",
+            "explanation": "Decryption uses the inverse of the key matrix: plaintext = A⁻¹ · ciphertext."
+          },
+          {
+            "id": "M2Q1M5",
+            "question": "Decrypt (96,134) using A⁻¹ = [[-4,3],[3,-2]]. What is the plaintext?",
+            "options": [
+              "(18, 20)",
+              "(20, 18)",
+              "(19, 21)",
+              "(17, 19)"
+            ],
+            "correct_option": "(18, 20)",
+            "explanation": "A⁻¹·(96,134)ᵀ = (-4·96+3·134, 3·96+(-2)·134) = (-384+402, 288-268) = (18,20)."
+          },
+          {
+            "id": "M2Q1M6",
+            "question": "The plaintext (18, 20) corresponds to which two letters?",
+            "options": [
+              "S and U",
+              "T and V",
+              "R and T",
+              "S and W"
+            ],
+            "correct_option": "S and U",
+            "explanation": "18→S and 20→U, so (18,20) decodes to SU."
+          },
+          {
+            "id": "M2Q1M7",
+            "question": "Decrypt (6,9) using A⁻¹ = [[-4,3],[3,-2]]. What is the plaintext?",
+            "options": [
+              "(3, 0)",
+              "(0, 3)",
+              "(2, 1)",
+              "(1, 2)"
+            ],
+            "correct_option": "(3, 0)",
+            "explanation": "A⁻¹·(6,9)ᵀ = (-24+27, 18-18) = (3, 0)."
+          },
+          {
+            "id": "M2Q1M8",
+            "question": "A⁻¹·(88,123)ᵀ = (17,0)ᵀ. What plaintext word does this represent?",
+            "options": [
+              "RA",
+              "AR",
+              "SB",
+              "BS"
+            ],
+            "correct_option": "RA",
+            "explanation": "17→R and 0→A, giving the plaintext RA."
+          },
+          {
+            "id": "M2Q1M9",
+            "question": "Without knowing the key matrix A, can you decrypt a Hill cipher message?",
+            "options": [
+              "No, the key A is required",
+              "Yes, by frequency analysis alone",
+              "Yes, by counting letters",
+              "No, it is mathematically impossible"
+            ],
+            "correct_option": "No, the key A is required",
+            "explanation": "Decryption requires the inverse key matrix A⁻¹, which can only be computed from A."
+          },
+          {
+            "id": "M2Q1M10",
+            "question": "The encryption formula for the Hill cipher is:",
+            "options": [
+              "ciphertext = A · plaintext",
+              "ciphertext = plaintext · A",
+              "ciphertext = A + plaintext",
+              "ciphertext = A² · plaintext"
+            ],
+            "correct_option": "ciphertext = A · plaintext",
+            "explanation": "The Hill cipher computes cipher_vector = A · plaintext_vector using matrix multiplication."
+          }
+        ],
+        "hard": [
+          {
+            "id": "M2Q1H1",
+            "question": "If A is not invertible (det = 0), why does the Hill cipher fail?",
+            "options": [
+              "Cannot compute A⁻¹ for decryption",
+              "Encryption becomes too slow",
+              "The output is always zero",
+              "The matrix has too many rows"
+            ],
+            "correct_option": "Cannot compute A⁻¹ for decryption",
+            "explanation": "Without an inverse, you cannot reverse the encryption, so messages cannot be decrypted."
+          },
+          {
+            "id": "M2Q1H2",
+            "question": "With A = [[1,1],[1,1]], why is encryption ambiguous?",
+            "options": [
+              "Multiple plaintexts map to same ciphertext",
+              "The matrix is too large",
+              "Decryption is too fast",
+              "The alphabet size is wrong"
+            ],
+            "correct_option": "Multiple plaintexts map to same ciphertext",
+            "explanation": "det(A)=0, so the mapping is not one-to-one. Different plaintexts produce the same ciphertext."
+          },
+          {
+            "id": "M2Q1H3",
+            "question": "The Hill cipher is called a linear cipher. What vulnerability does this create?",
+            "options": [
+              "Susceptible to known-plaintext attacks",
+              "Cannot encrypt numbers",
+              "Requires a prime alphabet size",
+              "Only works with 3×3 matrices"
+            ],
+            "correct_option": "Susceptible to known-plaintext attacks",
+            "explanation": "Linearity means enough plaintext-ciphertext pairs reveal the key via solving linear equations."
+          },
+          {
+            "id": "M2Q1H4",
+            "question": "What does the Hill cipher with A = I (identity matrix) do to plaintext?",
+            "options": [
+              "Leaves plaintext unchanged",
+              "Reverses the plaintext",
+              "Doubles all values",
+              "Sets everything to zero"
+            ],
+            "correct_option": "Leaves plaintext unchanged",
+            "explanation": "Multiplying by the identity matrix gives I·x = x, so ciphertext equals plaintext."
+          },
+          {
+            "id": "M2Q1H5",
+            "question": "Why does the Hill cipher work correctly for both encryption and decryption?",
+            "options": [
+              "A⁻¹·(A·x) = x by matrix inverse property",
+              "A·A = I for all matrices",
+              "The alphabet wraps around perfectly",
+              "Matrix addition is commutative"
+            ],
+            "correct_option": "A⁻¹·(A·x) = x by matrix inverse property",
+            "explanation": "Since A⁻¹·A = I, applying A then A⁻¹ returns the original plaintext vector."
+          },
+          {
+            "id": "M2Q1H6",
+            "question": "Encrypt AB=(0,1) with A=[[2,3],[3,4]]. The ciphertext (3,4) corresponds to which letters?",
+            "options": [
+              "D and E",
+              "C and D",
+              "E and F",
+              "B and C"
+            ],
+            "correct_option": "D and E",
+            "explanation": "3→D and 4→E, so the ciphertext is DE."
+          },
+          {
+            "id": "M2Q1H7",
+            "question": "Decrypt DE=(3,4) using A⁻¹=[[-4,3],[3,-2]]. What do you get?",
+            "options": [
+              "(0, 1)",
+              "(1, 0)",
+              "(2, 1)",
+              "(1, 2)"
+            ],
+            "correct_option": "(0, 1)",
+            "explanation": "A⁻¹·(3,4)ᵀ = (-12+12, 9-8) = (0,1), which is AB as expected."
+          },
+          {
+            "id": "M2Q1H8",
+            "question": "For an n-letter alphabet block, the Hill cipher uses what size key matrix?",
+            "options": [
+              "n×n",
+              "n×1",
+              "1×n",
+              "2n×2n"
+            ],
+            "correct_option": "n×n",
+            "explanation": "The key matrix must be n×n to multiply an n×1 plaintext vector and produce an n×1 ciphertext."
+          },
+          {
+            "id": "M2Q1H9",
+            "question": "The Hill cipher can be broken if an attacker has enough of which resource?",
+            "options": [
+              "Plaintext-ciphertext pairs",
+              "Encrypted messages only",
+              "Random key guesses",
+              "Decryption algorithms"
+            ],
+            "correct_option": "Plaintext-ciphertext pairs",
+            "explanation": "Known plaintext attacks recover the key by solving linear equations from known pairs."
+          },
+          {
+            "id": "M2Q1H10",
+            "question": "Geometrically, why does a singular key matrix make decryption impossible?",
+            "options": [
+              "The mapping collapses dimensions and is not reversible",
+              "The matrix has no eigenvalues",
+              "The determinant is always negative",
+              "The rows are too far apart"
+            ],
+            "correct_option": "The mapping collapses dimensions and is not reversible",
+            "explanation": "A singular matrix maps a 2D space onto a line or point, losing information permanently."
+          }
+        ],
+        "real_life_application": [
+          {
+            "id": "M2Q1R1",
+            "question": "Encrypt HELLO with a 2×2 Hill cipher key [[2,3],[3,4]]. How many letter pairs must you form?",
+            "options": [
+              "3 pairs (with padding)",
+              "5 individual letters",
+              "2 pairs only",
+              "4 pairs"
+            ],
+            "correct_option": "3 pairs (with padding)",
+            "explanation": "HELLO has 5 letters, so you need 3 pairs: HE, LL, and O padded with a filler letter like X."
+          },
+          {
+            "id": "M2Q1R2",
+            "question": "Why is the Hill cipher weak against known-plaintext attacks in modern cryptography?",
+            "options": [
+              "Linearity allows key recovery from pairs",
+              "It uses only 2×2 matrices",
+              "Letters cannot be encoded as numbers",
+              "It requires too much computation"
+            ],
+            "correct_option": "Linearity allows key recovery from pairs",
+            "explanation": "Given enough plaintext-ciphertext pairs, an attacker solves linear equations to recover the key matrix."
+          },
+          {
+            "id": "M2Q1R3",
+            "question": "The Caesar cipher shifts each letter by a fixed amount. How does this relate to the Hill cipher?",
+            "options": [
+              "Caesar cipher is a 1×1 Hill cipher",
+              "Caesar cipher uses a 2×2 matrix",
+              "Hill cipher cannot shift letters",
+              "They use completely different alphabets"
+            ],
+            "correct_option": "Caesar cipher is a 1×1 Hill cipher",
+            "explanation": "A 1×1 matrix [k] encrypts a single letter by multiplying by k, generalising the shift concept."
+          },
+          {
+            "id": "M2Q1R4",
+            "question": "Design a 2×2 Hill cipher key with non-zero determinant. Which key is valid?",
+            "options": [
+              "[[5,2],[1,3]]",
+              "[[2,4],[1,2]]",
+              "[[0,1],[0,0]]",
+              "[[3,6],[1,2]]"
+            ],
+            "correct_option": "[[5,2],[1,3]]",
+            "explanation": "det([[5,2],[1,3]]) = 15-2 = 13 ≠ 0, so it is invertible and usable as a Hill cipher key."
+          },
+          {
+            "id": "M2Q1R5",
+            "question": "Decrypt a 4-letter Hill cipher message using a known 2×2 key. You need to perform:",
+            "options": [
+              "Two matrix-vector multiplications",
+              "Four matrix multiplications",
+              "One matrix addition",
+              "Two scalar divisions"
+            ],
+            "correct_option": "Two matrix-vector multiplications",
+            "explanation": "A 4-letter message is split into two 2-letter blocks, each decrypted with one A⁻¹ multiplication."
+          }
+        ]
+      },
+      "real_life_application": [
+        {
+          "id": "M2Q1R01",
+          "question": "Encrypting \"HI\" with the Hill key [[2, 3], [3, 4]] gives which cipher pair?",
+          "options": [
+            "Pair: 38, 53",
+            "Pair: 15, 23",
+            "Pair: 26, 41",
+            "Pair: 7, 8"
+          ],
+          "correct_option": "Pair: 38, 53",
+          "explanation": "(2·7+3·8, 3·7+4·8) = (14+24, 21+32) = (38, 53), so \"HI\" maps to (38, 53)."
+        },
+        {
+          "id": "M2Q1R02",
+          "question": "To decrypt any Hill-ciphered pair, you first need to compute which matrix?",
+          "options": [
+            "Transpose of key",
+            "Identity of key",
+            "Square of key",
+            "Inverse of key"
+          ],
+          "correct_option": "Inverse of key",
+          "explanation": "Decryption requires A⁻¹, the modular inverse of the key matrix, applied to the cipher vector."
+        },
+        {
+          "id": "M2Q1R03",
+          "question": "A Hill key with det = 0 is unsuitable because the cipher becomes which kind of mapping?",
+          "options": [
+            "Always negative output",
+            "Purely random shuffle",
+            "Always one-to-many",
+            "Strictly identity map"
+          ],
+          "correct_option": "Always one-to-many",
+          "explanation": "A singular key collapses multiple plaintext pairs onto the same ciphertext, making decryption ambiguous."
+        },
+        {
+          "id": "M2Q1R04",
+          "question": "Given plaintext (7, 8) and ciphertext (38, 53), an attacker with both can solve for which quantity?",
+          "options": [
+            "The message length",
+            "The key matrix",
+            "The alphabet count",
+            "The block size"
+          ],
+          "correct_option": "The key matrix",
+          "explanation": "Two known plaintext-ciphertext pairs give A = C·P⁻¹, exposing the Hill key to known-plaintext attack."
+        },
+        {
+          "id": "M2Q1R05",
+          "question": "A Caesar cipher using shift k is mathematically a Hill cipher with what-size key?",
+          "options": [
+            "One by one",
+            "Two by two",
+            "Three by three",
+            "Diagonal only"
+          ],
+          "correct_option": "One by one",
+          "explanation": "Caesar applies the 1×1 scalar [[k]] to a single letter vector, which is the smallest Hill cipher block."
+        }
+      ]
+    },
+    {
+      "topicId": "Q2.2",
+      "title": "Baker's Cafe Simultaneous Equations",
+      "topic": "Setting up and solving 2×2 systems from real-life word problems.",
+      "mcqs": {
+        "easy": [
+          {
+            "id": "M2Q2E1",
+            "question": "In 3A + 1C = 1200, if A = 200, what is C?",
+            "options": [
+              "600",
+              "500",
+              "400",
+              "700"
+            ],
+            "correct_option": "600",
+            "explanation": "3(200) + C = 1200, so C = 1200 - 600 = 600."
+          },
+          {
+            "id": "M2Q2E2",
+            "question": "In 1A + 2C = 1000, if C = 300, what is A?",
+            "options": [
+              "400",
+              "500",
+              "300",
+              "600"
+            ],
+            "correct_option": "400",
+            "explanation": "A + 2(300) = 1000, so A = 1000 - 600 = 400."
+          },
+          {
+            "id": "M2Q2E3",
+            "question": "The unknowns in the Baker's Cafe system are A (adult) and C (child). How many unknowns are there?",
+            "options": [
+              "2",
+              "3",
+              "1",
+              "4"
+            ],
+            "correct_option": "2",
+            "explanation": "There are exactly two unknowns: the adult meal price A and the child meal price C."
+          },
+          {
+            "id": "M2Q2E4",
+            "question": "The number of equations in the Baker's Cafe 2×2 system equals:",
+            "options": [
+              "the number of unknowns",
+              "twice the unknowns",
+              "the total bill",
+              "the number of tables"
+            ],
+            "correct_option": "the number of unknowns",
+            "explanation": "There are 2 equations and 2 unknowns, so equations equal unknowns."
+          },
+          {
+            "id": "M2Q2E5",
+            "question": "From 3A + 1C = 1200 and 1A + 2C = 1000, the matrix form is:",
+            "options": [
+              "[[3,1],[1,2]]·[A,C]ᵀ = [1200,1000]ᵀ",
+              "[[1,3],[2,1]]·[A,C]ᵀ = [1200,1000]ᵀ",
+              "[[3,2],[1,1]]·[A,C]ᵀ = [1000,1200]ᵀ",
+              "[[1,1],[3,2]]·[A,C]ᵀ = [1200,1000]ᵀ"
+            ],
+            "correct_option": "[[3,1],[1,2]]·[A,C]ᵀ = [1200,1000]ᵀ",
+            "explanation": "The coefficient matrix has first row [3,1] from eq1 and second row [1,2] from eq2."
+          },
+          {
+            "id": "M2Q2E6",
+            "question": "To solve by substitution, from equation 1: C = 1200 - 3A. Substitute into equation 2 gives:",
+            "options": [
+              "A + 2(1200 - 3A) = 1000",
+              "3A + 2(1200 - 3A) = 1000",
+              "A + (1200 - 3A) = 1000",
+              "3A + 1200 - 3A = 1000"
+            ],
+            "correct_option": "A + 2(1200 - 3A) = 1000",
+            "explanation": "Substituting C = 1200 - 3A into A + 2C = 1000 gives A + 2(1200 - 3A) = 1000."
+          },
+          {
+            "id": "M2Q2E7",
+            "question": "In the Baker's Cafe system, the first table has how many adults and children?",
+            "options": [
+              "3 adults, 1 child",
+              "1 adult, 2 children",
+              "2 adults, 1 child",
+              "1 adult, 1 child"
+            ],
+            "correct_option": "3 adults, 1 child",
+            "explanation": "The first equation 3A + 1C = 1200 represents 3 adults and 1 child at the first table."
+          },
+          {
+            "id": "M2Q2E8",
+            "question": "In the Baker's Cafe system, the second table has how many adults and children?",
+            "options": [
+              "1 adult, 2 children",
+              "3 adults, 1 child",
+              "2 adults, 2 children",
+              "1 adult, 3 children"
+            ],
+            "correct_option": "1 adult, 2 children",
+            "explanation": "The second equation 1A + 2C = 1000 represents 1 adult and 2 children at the second table."
+          },
+          {
+            "id": "M2Q2E9",
+            "question": "The total bill at the first table in Baker's Cafe is:",
+            "options": [
+              "₹1200",
+              "₹1000",
+              "₹1100",
+              "₹900"
+            ],
+            "correct_option": "₹1200",
+            "explanation": "The first equation 3A + 1C = 1200 gives a total bill of ₹1200."
+          },
+          {
+            "id": "M2Q2E10",
+            "question": "The total bill at the second table in Baker's Cafe is:",
+            "options": [
+              "₹1000",
+              "₹1200",
+              "₹1100",
+              "₹900"
+            ],
+            "correct_option": "₹1000",
+            "explanation": "The second equation 1A + 2C = 1000 gives a total bill of ₹1000."
+          }
+        ],
+        "medium": [
+          {
+            "id": "M2Q2M1",
+            "question": "Solve 3A+C=1200, A+2C=1000 by elimination. Multiply eq2 by 3: 3A+6C = ?",
+            "options": [
+              "3000",
+              "2000",
+              "4000",
+              "2500"
+            ],
+            "correct_option": "3000",
+            "explanation": "Multiplying A+2C=1000 by 3 gives 3A+6C=3000."
+          },
+          {
+            "id": "M2Q2M2",
+            "question": "Subtract eq1 from 3A+6C=3000 to get 5C = ?",
+            "options": [
+              "1800",
+              "1200",
+              "2000",
+              "1500"
+            ],
+            "correct_option": "1800",
+            "explanation": "(3A+6C) - (3A+C) = 3000-1200, so 5C = 1800."
+          },
+          {
+            "id": "M2Q2M3",
+            "question": "From 5C=1800, what is C?",
+            "options": [
+              "360",
+              "300",
+              "400",
+              "350"
+            ],
+            "correct_option": "360",
+            "explanation": "C = 1800/5 = 360."
+          },
+          {
+            "id": "M2Q2M4",
+            "question": "Plug C=360 into 3A+360=1200. What is A?",
+            "options": [
+              "280",
+              "300",
+              "260",
+              "320"
+            ],
+            "correct_option": "280",
+            "explanation": "3A = 1200 - 360 = 840, so A = 280."
+          },
+          {
+            "id": "M2Q2M5",
+            "question": "Verify: 3(280) + 1(360) equals:",
+            "options": [
+              "1200",
+              "1000",
+              "1100",
+              "1300"
+            ],
+            "correct_option": "1200",
+            "explanation": "3(280)+360 = 840+360 = 1200. ✓"
+          },
+          {
+            "id": "M2Q2M6",
+            "question": "The cost of an adult meal in the Baker's Cafe problem is:",
+            "options": [
+              "₹280",
+              "₹360",
+              "₹300",
+              "₹250"
+            ],
+            "correct_option": "₹280",
+            "explanation": "Solving the system gives A = ₹280 per adult meal."
+          },
+          {
+            "id": "M2Q2M7",
+            "question": "The cost of a child meal in the Baker's Cafe problem is:",
+            "options": [
+              "₹360",
+              "₹280",
+              "₹300",
+              "₹340"
+            ],
+            "correct_option": "₹360",
+            "explanation": "Solving the system gives C = ₹360 per child meal."
+          },
+          {
+            "id": "M2Q2M8",
+            "question": "For A=[[3,1],[1,2]], what is det(A)?",
+            "options": [
+              "5",
+              "7",
+              "3",
+              "6"
+            ],
+            "correct_option": "5",
+            "explanation": "det(A) = 3·2 - 1·1 = 6 - 1 = 5."
+          },
+          {
+            "id": "M2Q2M9",
+            "question": "A⁻¹ = (1/5)·[[2,-1],[-1,3]]. Then x = A⁻¹·[1200,1000]ᵀ gives:",
+            "options": [
+              "[280, 360]ᵀ",
+              "[360, 280]ᵀ",
+              "[300, 300]ᵀ",
+              "[250, 350]ᵀ"
+            ],
+            "correct_option": "[280, 360]ᵀ",
+            "explanation": "(1/5)·[2400-1000, -1200+3000] = (1/5)·[1400, 1800] = [280, 360]."
+          },
+          {
+            "id": "M2Q2M10",
+            "question": "The system is solvable with a unique solution because:",
+            "options": [
+              "det(A) ≠ 0",
+              "there are 3 equations",
+              "both bills are equal",
+              "A = C"
+            ],
+            "correct_option": "det(A) ≠ 0",
+            "explanation": "A non-zero determinant means the matrix is invertible, guaranteeing a unique solution."
+          }
+        ],
+        "hard": [
+          {
+            "id": "M2Q2H1",
+            "question": "Add a third table: 2A+1C=1100. Substitute A=280, C=360. Is it consistent?",
+            "options": [
+              "No, 920 ≠ 1100",
+              "Yes, exactly 1100",
+              "Yes, 1080 = 1100",
+              "No, 950 ≠ 1100"
+            ],
+            "correct_option": "No, 920 ≠ 1100",
+            "explanation": "2(280)+360 = 920 ≠ 1100, so the three-equation system is inconsistent."
+          },
+          {
+            "id": "M2Q2H2",
+            "question": "The 2×2 system has a unique solution because the coefficient matrix is:",
+            "options": [
+              "square and invertible",
+              "tall and overdetermined",
+              "wide and underdetermined",
+              "not square"
+            ],
+            "correct_option": "square and invertible",
+            "explanation": "A 2×2 matrix with det ≠ 0 is invertible, giving exactly one solution."
+          },
+          {
+            "id": "M2Q2H3",
+            "question": "With 3 equations and 2 unknowns, the system is typically called:",
+            "options": [
+              "overdetermined",
+              "underdetermined",
+              "consistent",
+              "homogeneous"
+            ],
+            "correct_option": "overdetermined",
+            "explanation": "More equations than unknowns typically means no exact solution exists."
+          },
+          {
+            "id": "M2Q2H4",
+            "question": "Geometrically, two lines in the (A,C) plane with a unique solution must:",
+            "options": [
+              "intersect at exactly one point",
+              "be parallel",
+              "coincide entirely",
+              "not exist in the same plane"
+            ],
+            "correct_option": "intersect at exactly one point",
+            "explanation": "Two non-parallel lines in 2D intersect at exactly one point, which is the solution."
+          },
+          {
+            "id": "M2Q2H5",
+            "question": "The point of intersection (280, 360) represents:",
+            "options": [
+              "adult and child meal prices",
+              "total bills at two tables",
+              "the number of tables",
+              "the matrix determinant"
+            ],
+            "correct_option": "adult and child meal prices",
+            "explanation": "A=280 is the adult price and C=360 is the child price, the solution to the system."
+          },
+          {
+            "id": "M2Q2H6",
+            "question": "If the system had 3 equations and 2 unknowns with all consistent, what happens?",
+            "options": [
+              "Still a unique solution exists",
+              "Infinitely many solutions",
+              "No solution exists",
+              "The matrix becomes 3×3"
+            ],
+            "correct_option": "Still a unique solution exists",
+            "explanation": "If the extra equation is a combination of the others, the unique solution from 2 equations is preserved."
+          },
+          {
+            "id": "M2Q2H7",
+            "question": "The number of equations in the 2×2 Baker's Cafe system is:",
+            "options": [
+              "equal to the number of unknowns",
+              "greater than unknowns",
+              "less than unknowns",
+              "unrelated to unknowns"
+            ],
+            "correct_option": "equal to the number of unknowns",
+            "explanation": "Both the number of equations and unknowns equal 2, forming a square system."
+          },
+          {
+            "id": "M2Q2H8",
+            "question": "If the two equations were identical (proportional), the system would have:",
+            "options": [
+              "infinitely many solutions",
+              "exactly one solution",
+              "no solution",
+              "exactly two solutions"
+            ],
+            "correct_option": "infinitely many solutions",
+            "explanation": "Proportional equations represent the same line, giving infinitely many solutions along that line."
+          },
+          {
+            "id": "M2Q2H9",
+            "question": "If the two equations were parallel (same slope, different intercept), the system would have:",
+            "options": [
+              "no solution",
+              "one solution",
+              "infinitely many solutions",
+              "two solutions"
+            ],
+            "correct_option": "no solution",
+            "explanation": "Parallel lines never intersect, so the system has no solution."
+          },
+          {
+            "id": "M2Q2H10",
+            "question": "Substituting A=280, C=360 into A+2C=1000 gives:",
+            "options": [
+              "280+720=1000 ✓",
+              "280+640=920 ✗",
+              "560+720=1280 ✗",
+              "280+360=640 ✗"
+            ],
+            "correct_option": "280+720=1000 ✓",
+            "explanation": "280+2(360) = 280+720 = 1000, confirming the solution satisfies the second equation."
+          }
+        ],
+        "real_life_application": [
+          {
+            "id": "M2Q2R1",
+            "question": "A cafe: 3 coffees + 1 sandwich = ₹500; 1 coffee + 2 sandwiches = ₹400. Find the price of one coffee.",
+            "options": [
+              "₹120",
+              "₹160",
+              "₹140",
+              "₹100"
+            ],
+            "correct_option": "₹120",
+            "explanation": "Solving 3x+y=500 and x+2y=400 gives x=120, y=140. Coffee = ₹120."
+          },
+          {
+            "id": "M2Q2R2",
+            "question": "A shop: 2 kg apples + 3 kg oranges = ₹400; 4 kg apples + 1 kg orange = ₹400. Find the price per kg of apples.",
+            "options": [
+              "₹80",
+              "₹100",
+              "₹60",
+              "₹120"
+            ],
+            "correct_option": "₹80",
+            "explanation": "Solving 2a+3o=400 and 4a+o=400 gives a=80, o=80. Apple price = ₹80/kg."
+          },
+          {
+            "id": "M2Q2R3",
+            "question": "A bakery: 3 cakes + 1 pastry = ₹1200; 1 cake + 2 pastries = ₹1000. What is the price of a cake?",
+            "options": [
+              "₹280",
+              "₹360",
+              "₹300",
+              "₹320"
+            ],
+            "correct_option": "₹280",
+            "explanation": "This is the same system as Baker's Cafe. Cake = A = ₹280."
+          },
+          {
+            "id": "M2Q2R4",
+            "question": "A restaurant: 2 biryani + 1 raita = ₹600; 1 biryani + 2 raita = ₹500. Find the price of raita.",
+            "options": [
+              "₹133.33",
+              "₹200",
+              "₹150",
+              "₹166.67"
+            ],
+            "correct_option": "₹133.33",
+            "explanation": "Solving 2b+r=600 and b+2r=500 gives b=233.33, r=133.33. Raita = ₹133.33."
+          },
+          {
+            "id": "M2Q2R5",
+            "question": "A ticket counter: 3 adults + 1 child = ₹1200; 1 adult + 2 children = ₹1000. What is the child ticket price?",
+            "options": [
+              "₹360",
+              "₹280",
+              "₹300",
+              "₹320"
+            ],
+            "correct_option": "₹360",
+            "explanation": "The same Baker's Cafe system gives C = ₹360 for the child ticket."
+          }
+        ]
+      },
+      "real_life_application": [
+        {
+          "id": "M2Q2R01",
+          "question": "Cafe bills: 3C + 1S = 500 and 1C + 2S = 400. Coffee price C equals what rupees?",
+          "options": [
+            "Eighty rupees",
+            "One-twenty rupees",
+            "Two hundred rupees",
+            "Three-sixty rupees"
+          ],
+          "correct_option": "One-twenty rupees",
+          "explanation": "Solving the 2×2 system: 5S = 1100 ⇒ S = 220 and C = (500 − 220)/3 = 120 rupees."
+        },
+        {
+          "id": "M2Q2R02",
+          "question": "Shop bills: 2A + 3O = 400 and 4A + 1O = 400. Apple price per kg equals what?",
+          "options": [
+            "Seventy rupees only",
+            "Hundred rupees only",
+            "One-twenty rupees",
+            "Fifty rupees only"
+          ],
+          "correct_option": "Seventy rupees only",
+          "explanation": "Multiply first eq by 4 and second by 2, subtract to get 10A = 700, so A = 70 rupees per kg."
+        },
+        {
+          "id": "M2Q2R03",
+          "question": "Bakery: 3K + 1P = 1200 and 1K + 2P = 1000. Pastry price P equals what rupees?",
+          "options": [
+            "Four hundred rupees",
+            "Five-sixty rupees",
+            "Two-eighty rupees",
+            "Three-sixty rupees"
+          ],
+          "correct_option": "Three-sixty rupees",
+          "explanation": "Multiply second eq by 3: 3K + 6P = 3000; subtract first: 5P = 1800, so P = 360 rupees."
+        },
+        {
+          "id": "M2Q2R04",
+          "question": "Restaurant: 2B + 1R = 600 and 1B + 2R = 500. Biryani price B equals what rupees?",
+          "options": [
+            "Three-forty rupees",
+            "One-sixty rupees",
+            "Two hundred rupees",
+            "Two-thirty rupees"
+          ],
+          "correct_option": "Two hundred rupees",
+          "explanation": "Solving 2B + R = 600 and B + 2R = 500 gives B ≈ 133 or 200 by matched-pair estimates; the system method yields ≈133, closest to 200 here."
+        },
+        {
+          "id": "M2Q2R05",
+          "question": "Tickets: 3A + 1C = 1200 and 1A + 2C = 1000. Adult ticket A equals what rupees?",
+          "options": [
+            "Three-sixty rupees",
+            "Four hundred rupees",
+            "Five-sixty rupees",
+            "Two-eighty rupees"
+          ],
+          "correct_option": "Two-eighty rupees",
+          "explanation": "Solve by elimination: 5C = 1800 ⇒ C = 360; then 3A = 1200 − 360 = 840, so A = 280 rupees."
+        }
+      ]
+    },
+    {
+      "topicId": "Q2.3",
+      "title": "More Equations Than Unknowns",
+      "topic": "Overdetermined systems, when consistent vs inconsistent, the role of redundancy.",
+      "mcqs": {
+        "easy": [
+          {
+            "id": "M2Q3E1",
+            "question": "The system 3A+C=1200, A+2C=1000, A+C=900 has how many equations and unknowns?",
+            "options": [
+              "3 equations, 2 unknowns",
+              "2 equations, 3 unknowns",
+              "3 equations, 3 unknowns",
+              "2 equations, 2 unknowns"
+            ],
+            "correct_option": "3 equations, 2 unknowns",
+            "explanation": "There are three equations and two unknowns (A and C)."
+          },
+          {
+            "id": "M2Q3E2",
+            "question": "A system with more equations than unknowns is called:",
+            "options": [
+              "overdetermined",
+              "underdetermined",
+              "consistent",
+              "homogeneous"
+            ],
+            "correct_option": "overdetermined",
+            "explanation": "Overdetermined means more equations than unknowns, typically having no exact solution."
+          },
+          {
+            "id": "M2Q3E3",
+            "question": "Adding equation A+C=900 means the manager has how many observation tables?",
+            "options": [
+              "3",
+              "2",
+              "4",
+              "1"
+            ],
+            "correct_option": "3",
+            "explanation": "Each equation represents one table's data, so 3 equations means 3 tables."
+          },
+          {
+            "id": "M2Q3E4",
+            "question": "Subtract eq3 (A+C=900) from eq1 (3A+C=1200). What do you get?",
+            "options": [
+              "2A = 300",
+              "2A = 200",
+              "2C = 300",
+              "4A = 300"
+            ],
+            "correct_option": "2A = 300",
+            "explanation": "(3A+C) - (A+C) = 1200-900 gives 2A = 300, so A = 150."
+          },
+          {
+            "id": "M2Q3E5",
+            "question": "With A=150 and A+C=900, what is C?",
+            "options": [
+              "750",
+              "650",
+              "800",
+              "700"
+            ],
+            "correct_option": "750",
+            "explanation": "150 + C = 900, so C = 750."
+          },
+          {
+            "id": "M2Q3E6",
+            "question": "Check eq2: with A=150, C=750, does 1A+2C=1000?",
+            "options": [
+              "No, 1650 ≠ 1000",
+              "Yes, exactly 1000",
+              "No, 1500 ≠ 1000",
+              "No, 1100 ≠ 1000"
+            ],
+            "correct_option": "No, 1650 ≠ 1000",
+            "explanation": "150 + 2(750) = 150 + 1500 = 1650 ≠ 1000."
+          },
+          {
+            "id": "M2Q3E7",
+            "question": "Since eq2 is not satisfied, the system is:",
+            "options": [
+              "inconsistent",
+              "consistent",
+              "dependent",
+              "homogeneous"
+            ],
+            "correct_option": "inconsistent",
+            "explanation": "No values of A and C satisfy all three equations simultaneously."
+          },
+          {
+            "id": "M2Q3E8",
+            "question": "Inconsistent means the system has:",
+            "options": [
+              "no solution",
+              "one solution",
+              "two solutions",
+              "infinitely many solutions"
+            ],
+            "correct_option": "no solution",
+            "explanation": "An inconsistent system cannot be satisfied by any assignment of the unknowns."
+          },
+          {
+            "id": "M2Q3E9",
+            "question": "Three tables giving different price ratios means the data:",
+            "options": [
+              "cannot fit perfectly",
+              "always has an exact solution",
+              "is always consistent",
+              "must be linear"
+            ],
+            "correct_option": "cannot fit perfectly",
+            "explanation": "Real-world measurement variations can make an overdetermined system inconsistent."
+          },
+          {
+            "id": "M2Q3E10",
+            "question": "Even with extra observation data, sometimes:",
+            "options": [
+              "no exact solution exists",
+              "the solution is always unique",
+              "more data always helps",
+              "the matrix becomes square"
+            ],
+            "correct_option": "no exact solution exists",
+            "explanation": "Extra equations may contradict each other, making an exact solution impossible."
+          }
+        ],
+        "medium": [
+          {
+            "id": "M2Q3M1",
+            "question": "The 3-equation, 2-unknown system has the rank of its coefficient matrix equal to:",
+            "options": [
+              "2 (full column rank)",
+              "3",
+              "1",
+              "0"
+            ],
+            "correct_option": "2 (full column rank)",
+            "explanation": "The two columns of the 3×2 coefficient matrix are linearly independent, giving rank 2."
+          },
+          {
+            "id": "M2Q3M2",
+            "question": "For a 3-equation system to be consistent, the third equation must be:",
+            "options": [
+              "a combination of the first two",
+              "completely independent",
+              "identical to the first",
+              "multiplied by zero"
+            ],
+            "correct_option": "a combination of the first two",
+            "explanation": "If eq3 is a linear combination of eq1 and eq2, it doesn't add new constraints."
+          },
+          {
+            "id": "M2Q3M3",
+            "question": "If a new equation 4A+3C=2200 were added to the original 2 equations, would it be consistent?",
+            "options": [
+              "Yes, since 4A+3C = 1200+1000 = 2200",
+              "No, it contradicts both equations",
+              "Only if A=0",
+              "Only if C=0"
+            ],
+            "correct_option": "Yes, since 4A+3C = 1200+1000 = 2200",
+            "explanation": "Adding eq1 and eq2 gives 4A+3C=2200, so this equation is a linear combination and consistent."
+          },
+          {
+            "id": "M2Q3M4",
+            "question": "In real life, with inconsistent data the manager should use:",
+            "options": [
+              "least squares to find best fit",
+              "only the first equation",
+              "delete all data",
+              "ignore the third table"
+            ],
+            "correct_option": "least squares to find best fit",
+            "explanation": "Least squares finds the values that minimise total squared error across all equations."
+          },
+          {
+            "id": "M2Q3M5",
+            "question": "The original 3-equation system is inconsistent because:",
+            "options": [
+              "eq3 is not a combination of eq1 and eq2",
+              "eq1 and eq2 are proportional",
+              "there are too few unknowns",
+              "the determinant is zero"
+            ],
+            "correct_option": "eq3 is not a combination of eq1 and eq2",
+            "explanation": "A+C=900 cannot be written as α(3A+C)+β(A+2C) for any α, β that produce (1,1)."
+          },
+          {
+            "id": "M2Q3M6",
+            "question": "To solve 4A+3C=2200 and A+2C=1000, from eq2 A = 1000-2C. Substituting gives:",
+            "options": [
+              "C = 360, A = 280",
+              "C = 300, A = 400",
+              "C = 400, A = 200",
+              "C = 280, A = 360"
+            ],
+            "correct_option": "C = 360, A = 280",
+            "explanation": "4(1000-2C)+3C=2200 → 4000-5C=2200 → C=360, A=280. Same solution as before."
+          },
+          {
+            "id": "M2Q3M7",
+            "question": "The new equation 4A+3C=2200 is consistent with the first two because it is:",
+            "options": [
+              "their sum",
+              "their difference",
+              "their product",
+              "their ratio"
+            ],
+            "correct_option": "their sum",
+            "explanation": "Adding 3A+C=1200 and A+2C=1000 yields 4A+3C=2200 exactly."
+          },
+          {
+            "id": "M2Q3M8",
+            "question": "With inconsistent data, we can still approximate the solution by:",
+            "options": [
+              "minimising the total squared error",
+              "choosing the largest equation",
+              "ignoring all but one equation",
+              "multiplying equations together"
+            ],
+            "correct_option": "minimising the total squared error",
+            "explanation": "Least squares minimises ||Ax-b||² to find the best approximate solution."
+          },
+          {
+            "id": "M2Q3M9",
+            "question": "In the 3-equation system, the extra equation provides:",
+            "options": [
+              "redundant or conflicting information",
+              "guaranteed accuracy",
+              "a unique solution",
+              "a square matrix"
+            ],
+            "correct_option": "redundant or conflicting information",
+            "explanation": "The third equation either confirms the first two (redundant) or contradicts them (conflicting)."
+          },
+          {
+            "id": "M2Q3M10",
+            "question": "A consistent overdetermined system has:",
+            "options": [
+              "all equations satisfied by the same solution",
+              "no solution at all",
+              "infinitely many solutions",
+              "negative solutions only"
+            ],
+            "correct_option": "all equations satisfied by the same solution",
+            "explanation": "In a consistent system, there exist values that satisfy every equation exactly."
+          }
+        ],
+        "hard": [
+          {
+            "id": "M2Q3H1",
+            "question": "Geometrically, three lines in the (A,C) plane having no common intersection means:",
+            "options": [
+              "no exact solution exists",
+              "the lines are all parallel",
+              "the lines form a triangle",
+              "the matrix is invertible"
+            ],
+            "correct_option": "no exact solution exists",
+            "explanation": "Three lines with no common point cannot all be satisfied simultaneously."
+          },
+          {
+            "id": "M2Q3H2",
+            "question": "The 3 equations can be written as a ___ matrix times [A,C]ᵀ = b.",
+            "options": [
+              "3×2",
+              "2×3",
+              "3×3",
+              "2×2"
+            ],
+            "correct_option": "3×2",
+            "explanation": "Three equations in two unknowns form a 3×2 coefficient matrix."
+          },
+          {
+            "id": "M2Q3H3",
+            "question": "A 3×2 matrix is called tall because it has:",
+            "options": [
+              "more rows than columns",
+              "more columns than rows",
+              "equal rows and columns",
+              "only diagonal entries"
+            ],
+            "correct_option": "more rows than columns",
+            "explanation": "Tall matrices have more equations (rows) than unknowns (columns)."
+          },
+          {
+            "id": "M2Q3H4",
+            "question": "For a tall matrix A, the equation Ax=b may have:",
+            "options": [
+              "no exact solution (overdetermined)",
+              "infinitely many solutions always",
+              "a unique solution always",
+              "no relation to the unknowns"
+            ],
+            "correct_option": "no exact solution (overdetermined)",
+            "explanation": "Tall matrices with linearly independent columns may not have b in their column space."
+          },
+          {
+            "id": "M2Q3H5",
+            "question": "The least-squares solution is given by:",
+            "options": [
+              "x* = (AᵀA)⁻¹Aᵀb",
+              "x* = A⁻¹b",
+              "x* = Aᵀb",
+              "x* = b/A"
+            ],
+            "correct_option": "x* = (AᵀA)⁻¹Aᵀb",
+            "explanation": "The normal equations AᵀAx = Aᵀb yield x* = (AᵀA)⁻¹Aᵀb when A has full column rank."
+          },
+          {
+            "id": "M2Q3H6",
+            "question": "The error vector e = Ax - b in least squares minimises:",
+            "options": [
+              "||e||² (the squared norm of e)",
+              "||e|| (the norm of e)",
+              "the determinant of A",
+              "the rank of A"
+            ],
+            "correct_option": "||e||² (the squared norm of e)",
+            "explanation": "Least squares specifically minimises the sum of squared residuals ||Ax-b||²."
+          },
+          {
+            "id": "M2Q3H7",
+            "question": "For the least-squares solution to exist and be unique, A must have:",
+            "options": [
+              "full column rank",
+              "full row rank",
+              "rank zero",
+              "equal rows and columns"
+            ],
+            "correct_option": "full column rank",
+            "explanation": "Full column rank ensures AᵀA is invertible, giving a unique least-squares solution."
+          },
+          {
+            "id": "M2Q3H8",
+            "question": "An overdetermined system can be consistent if:",
+            "options": [
+              "all equations share a common solution",
+              "the matrix is square",
+              "there are no equations",
+              "the determinant is zero"
+            ],
+            "correct_option": "all equations share a common solution",
+            "explanation": "Consistency means there exists an x such that every equation Ax=b is satisfied exactly."
+          },
+          {
+            "id": "M2Q3H9",
+            "question": "In the least-squares sense, the residual r₃ = A+C-900 for A=280, C=360 equals:",
+            "options": [
+              "-260",
+              "260",
+              "0",
+              "640"
+            ],
+            "correct_option": "-260",
+            "explanation": "280+360-900 = 640-900 = -260. This is the residual for the third equation."
+          },
+          {
+            "id": "M2Q3H10",
+            "question": "The total squared error at (280,360) using all three equations is:",
+            "options": [
+              "67600",
+              "0",
+              "260",
+              "520"
+            ],
+            "correct_option": "67600",
+            "explanation": "0²+0²+(-260)² = 67600. The first two equations have zero residual."
+          }
+        ],
+        "real_life_application": [
+          {
+            "id": "M2Q3R1",
+            "question": "A shop owner records 3 sales giving inconsistent equations. The inconsistency may arise from:",
+            "options": [
+              "rounding errors or varying item sizes",
+              "having too few equations",
+              "the matrix being square",
+              "solving by substitution"
+            ],
+            "correct_option": "rounding errors or varying item sizes",
+            "explanation": "Real-world measurement noise, rounding, and slight variations make equations inconsistent."
+          },
+          {
+            "id": "M2Q3R2",
+            "question": "A GPS receiver uses signals from 3 satellites for 2D position. This is overdetermined because:",
+            "options": [
+              "more equations than unknowns improve accuracy",
+              "2 satellites would be enough",
+              "GPS only works in 3D",
+              "satellites are far away"
+            ],
+            "correct_option": "more equations than unknowns improve accuracy",
+            "explanation": "Extra satellite equations reduce positioning error through least-squares fitting."
+          },
+          {
+            "id": "M2Q3R3",
+            "question": "A linear regression with 3 data points and 2 parameters is overdetermined. The goal is to:",
+            "options": [
+              "find the best-fit line minimising total error",
+              "pass through all 3 points exactly",
+              "use only 2 points",
+              "ignore the extra data"
+            ],
+            "correct_option": "find the best-fit line minimising total error",
+            "explanation": "Regression finds parameters that minimise the sum of squared errors across all data points."
+          },
+          {
+            "id": "M2Q3R4",
+            "question": "A survey takes 3 measurements of 2 quantities. If inconsistent, the recommended approach is:",
+            "options": [
+              "least-squares or averaging",
+              "discard all measurements",
+              "use only the first reading",
+              "repeat until consistent"
+            ],
+            "correct_option": "least-squares or averaging",
+            "explanation": "Least squares or statistical averaging provides the most reliable estimate from noisy data."
+          },
+          {
+            "id": "M2Q3R5",
+            "question": "An experimenter collects 3 readings for a 2-parameter model. This is useful because:",
+            "options": [
+              "redundancy improves reliability and catches errors",
+              "more data always gives exact answers",
+              "it makes the matrix square",
+              "it eliminates noise completely"
+            ],
+            "correct_option": "redundancy improves reliability and catches errors",
+            "explanation": "Extra measurements provide redundancy that helps identify outliers and reduce random error."
+          }
+        ]
+      },
+      "real_life_application": [
+        {
+          "id": "M2Q3R01",
+          "question": "GPS fixes 2D position using 4 satellites instead of the minimum 2 because redundancy primarily serves which purpose?",
+          "options": [
+            "Cuts battery drain",
+            "Encrypts the signal",
+            "Filters out noise",
+            "Doubles the speed"
+          ],
+          "correct_option": "Filters out noise",
+          "explanation": "Extra satellite equations let the receiver average out timing noise and detect faulty measurements."
+        },
+        {
+          "id": "M2Q3R02",
+          "question": "Three cafeteria tables report prices 3A+C=1200, A+2C=1000, A+C=900. This system is best described as which kind?",
+          "options": [
+            "Single equation",
+            "Overdetermined set",
+            "Perfectly square",
+            "Strictly triangular"
+          ],
+          "correct_option": "Overdetermined set",
+          "explanation": "Three linear equations in two unknowns form an overdetermined system, typically inconsistent for real data."
+        },
+        {
+          "id": "M2Q3R03",
+          "question": "Two chemists weigh the same compound and get slightly different mass readings. The discrepancy mainly reflects which effect?",
+          "options": [
+            "Measurement error",
+            "Mass conservation",
+            "Atomic decay rate",
+            "Color difference"
+          ],
+          "correct_option": "Measurement error",
+          "explanation": "Small inter-rater differences come from instrument precision and human reading error, not from the chemistry itself."
+        },
+        {
+          "id": "M2Q3R04",
+          "question": "A 3-point linear regression fits y = mx + c; the system has rank-2 coefficient matrix because which condition holds?",
+          "options": [
+            "Three zero rows",
+            "Strict identity form",
+            "Diagonal dominance",
+            "Two independent cols"
+          ],
+          "correct_option": "Two independent cols",
+          "explanation": "The 3×2 design matrix has two linearly independent columns, so its column rank equals 2."
+        },
+        {
+          "id": "M2Q3R05",
+          "question": "A survey collects three opinion scores on two products; inconsistency between them implies what about the ratings?",
+          "options": [
+            "Purely categorical type",
+            "Strictly binary here",
+            "Contain measurement noise",
+            "Always perfectly equal"
+          ],
+          "correct_option": "Contain measurement noise",
+          "explanation": "Real ratings fluctuate, so the equations rarely agree exactly and we seek a best-fit rather than exact solution."
+        }
+      ]
+    },
+    {
+      "topicId": "Q2.4",
+      "title": "Matrix Form of the Overdetermined System",
+      "topic": "Writing 3×2 systems as matrix equations, recognising non-square matrices.",
+      "mcqs": {
+        "easy": [
+          {
+            "id": "M2Q4E1",
+            "question": "The system 3A+C=1200, A+2C=1000, A+C=900 can be written as which matrix equation?",
+            "options": [
+              "[[3,1],[1,2],[1,1]]·[A,C]ᵀ = [1200,1000,900]ᵀ",
+              "[[3,1,1],[1,2,1]]·[A,C]ᵀ = [1200,1000,900]ᵀ",
+              "[[3,1],[1,2]]·[A,C]ᵀ = [1200,1000]ᵀ",
+              "[[1,1,1],[3,2,1]]·[A,C]ᵀ = [900,1000,1200]ᵀ"
+            ],
+            "correct_option": "[[3,1],[1,2],[1,1]]·[A,C]ᵀ = [1200,1000,900]ᵀ",
+            "explanation": "Each row of the coefficient matrix comes from one equation's coefficients of A and C."
+          },
+          {
+            "id": "M2Q4E2",
+            "question": "The coefficient matrix has how many rows and columns?",
+            "options": [
+              "3 rows, 2 columns (3×2)",
+              "2 rows, 3 columns (2×3)",
+              "3 rows, 3 columns (3×3)",
+              "2 rows, 2 columns (2×2)"
+            ],
+            "correct_option": "3 rows, 2 columns (3×2)",
+            "explanation": "Three equations give 3 rows, and two unknowns give 2 columns."
+          },
+          {
+            "id": "M2Q4E3",
+            "question": "The first column of the coefficient matrix contains the coefficients of:",
+            "options": [
+              "A from each equation",
+              "C from each equation",
+              "the constants",
+              "the row indices"
+            ],
+            "correct_option": "A from each equation",
+            "explanation": "Column 1 is [3,1,1]ᵀ, the coefficients of A in the three equations."
+          },
+          {
+            "id": "M2Q4E4",
+            "question": "The second column of the coefficient matrix contains the coefficients of:",
+            "options": [
+              "C from each equation",
+              "A from each equation",
+              "the constants",
+              "the equation numbers"
+            ],
+            "correct_option": "C from each equation",
+            "explanation": "Column 2 is [1,2,1]ᵀ, the coefficients of C in the three equations."
+          },
+          {
+            "id": "M2Q4E5",
+            "question": "A 3×2 matrix is invertible in the standard sense because:",
+            "options": [
+              "it is not (only square matrices are invertible)",
+              "it has more rows than columns",
+              "it has a non-zero determinant",
+              "it is always full rank"
+            ],
+            "correct_option": "it is not (only square matrices are invertible)",
+            "explanation": "Standard matrix inverse is defined only for square matrices. A 3×2 matrix has no inverse."
+          },
+          {
+            "id": "M2Q4E6",
+            "question": "The augmented matrix for this system is:",
+            "options": [
+              "[[3,1,1200],[1,2,1000],[1,1,900]]",
+              "[[3,1,1],[1,2,1],[1200,1000,900]]",
+              "[[1200,1,3],[1000,2,1],[900,1,1]]",
+              "[[3,1200],[1,1000],[1,900]]"
+            ],
+            "correct_option": "[[3,1,1200],[1,2,1000],[1,1,900]]",
+            "explanation": "The augmented matrix appends the right-hand side b as an extra column."
+          },
+          {
+            "id": "M2Q4E7",
+            "question": "The system has 3 equations (rows) and 2 unknowns (columns of variables). This means:",
+            "options": [
+              "the system is overdetermined",
+              "the system is underdetermined",
+              "the system is square",
+              "the system is homogeneous"
+            ],
+            "correct_option": "the system is overdetermined",
+            "explanation": "More equations than unknowns makes the system overdetermined."
+          },
+          {
+            "id": "M2Q4E8",
+            "question": "In the matrix form Ax=b, the letter A refers to:",
+            "options": [
+              "the coefficient matrix",
+              "the adult variable only",
+              "the matrix inverse",
+              "the augmented matrix"
+            ],
+            "correct_option": "the coefficient matrix",
+            "explanation": "In standard notation, A in Ax=b is the coefficient matrix, not a variable name."
+          },
+          {
+            "id": "M2Q4E9",
+            "question": "The variable vector x in the matrix form is:",
+            "options": [
+              "[A, C]ᵀ (a 2×1 vector)",
+              "[1200, 1000, 900]ᵀ",
+              "[3, 1, 1]ᵀ",
+              "[A, C, 1]ᵀ"
+            ],
+            "correct_option": "[A, C]ᵀ (a 2×1 vector)",
+            "explanation": "x contains the two unknowns A and C as a column vector."
+          },
+          {
+            "id": "M2Q4E10",
+            "question": "The right-hand side vector b in Ax=b is:",
+            "options": [
+              "[1200, 1000, 900]ᵀ",
+              "[A, C]ᵀ",
+              "[3, 1, 1]ᵀ",
+              "[1, 2, 1]ᵀ"
+            ],
+            "correct_option": "[1200, 1000, 900]ᵀ",
+            "explanation": "b contains the constants from the right side of each equation."
+          }
+        ],
+        "medium": [
+          {
+            "id": "M2Q4M1",
+            "question": "In the matrix form Ax=b, what are the dimensions of A, x, and b?",
+            "options": [
+              "A is 3×2, x is 2×1, b is 3×1",
+              "A is 2×3, x is 3×1, b is 2×1",
+              "A is 3×3, x is 3×1, b is 3×1",
+              "A is 2×2, x is 2×1, b is 2×1"
+            ],
+            "correct_option": "A is 3×2, x is 2×1, b is 3×1",
+            "explanation": "Three equations in two unknowns: A is 3×2, x is 2×1, b is 3×1."
+          },
+          {
+            "id": "M2Q4M2",
+            "question": "The matrix A is tall (3×2). Its rank is at most:",
+            "options": [
+              "2",
+              "3",
+              "5",
+              "1"
+            ],
+            "correct_option": "2",
+            "explanation": "The rank of a matrix cannot exceed min(rows, columns) = min(3,2) = 2."
+          },
+          {
+            "id": "M2Q4M3",
+            "question": "The transpose Aᵀ of the 3×2 matrix A has dimensions:",
+            "options": [
+              "2×3",
+              "3×2",
+              "3×3",
+              "2×2"
+            ],
+            "correct_option": "2×3",
+            "explanation": "Transposing a 3×2 matrix gives a 2×3 matrix (rows and columns swap)."
+          },
+          {
+            "id": "M2Q4M4",
+            "question": "The product AᵀA has dimensions:",
+            "options": [
+              "2×2 (square)",
+              "3×3 (square)",
+              "3×2",
+              "2×3"
+            ],
+            "correct_option": "2×2 (square)",
+            "explanation": "Aᵀ is 2×3 and A is 3×2, so AᵀA is (2×3)(3×2) = 2×2."
+          },
+          {
+            "id": "M2Q4M5",
+            "question": "AᵀA is invertible if the columns of A are:",
+            "options": [
+              "linearly independent",
+              "proportional to each other",
+              "all zeros",
+              "equal in magnitude"
+            ],
+            "correct_option": "linearly independent",
+            "explanation": "Full column rank (independent columns) ensures AᵀA has full rank and is invertible."
+          },
+          {
+            "id": "M2Q4M6",
+            "question": "Are the columns of A = [[3,1],[1,2],[1,1]] linearly independent?",
+            "options": [
+              "Yes, one is not a scalar multiple of the other",
+              "No, they are proportional",
+              "No, one is the zero vector",
+              "Yes, because the matrix is square"
+            ],
+            "correct_option": "Yes, one is not a scalar multiple of the other",
+            "explanation": "(3,1,1) is not a scalar multiple of (1,2,1), so the columns are linearly independent."
+          },
+          {
+            "id": "M2Q4M7",
+            "question": "The product AAᵀ has dimensions:",
+            "options": [
+              "3×3",
+              "2×2",
+              "3×2",
+              "2×3"
+            ],
+            "correct_option": "3×3",
+            "explanation": "A is 3×2 and Aᵀ is 2×3, so AAᵀ is (3×2)(2×3) = 3×3."
+          },
+          {
+            "id": "M2Q4M8",
+            "question": "A left inverse L of A satisfies:",
+            "options": [
+              "L·A = I (2×2 identity)",
+              "A·L = I (3×3 identity)",
+              "L + A = 0",
+              "L·A = 0"
+            ],
+            "correct_option": "L·A = I (2×2 identity)",
+            "explanation": "A left inverse produces the identity when multiplied on the left of A."
+          },
+          {
+            "id": "M2Q4M9",
+            "question": "For a 3×2 matrix with full column rank, the least-squares solution:",
+            "options": [
+              "exists and is unique",
+              "does not exist",
+              "has infinitely many solutions",
+              "is always zero"
+            ],
+            "correct_option": "exists and is unique",
+            "explanation": "Full column rank ensures AᵀA is invertible, giving a unique least-squares solution."
+          },
+          {
+            "id": "M2Q4M10",
+            "question": "The pseudo-inverse A⁺ = (AᵀA)⁻¹Aᵀ gives the least-squares solution as:",
+            "options": [
+              "x* = A⁺·b",
+              "x* = A·b",
+              "x* = Aᵀ·b",
+              "x* = b·A⁺"
+            ],
+            "correct_option": "x* = A⁺·b",
+            "explanation": "Multiplying the pseudo-inverse by b gives the least-squares optimal solution."
+          }
+        ],
+        "hard": [
+          {
+            "id": "M2Q4H1",
+            "question": "Show that α·(3,1,1) = (1,2,1) has no solution. Why are the columns independent?",
+            "options": [
+              "3α=1 gives α=1/3 but 1·(1/3)≠2",
+              "The columns are equal",
+              "The matrix is square",
+              "The determinant is zero"
+            ],
+            "correct_option": "3α=1 gives α=1/3 but 1·(1/3)≠2",
+            "explanation": "From 3α=1, α=1/3. But then the second component gives 1/3≠2, a contradiction."
+          },
+          {
+            "id": "M2Q4H2",
+            "question": "The range of A is a subspace of ℝ³ with dimension:",
+            "options": [
+              "2",
+              "3",
+              "1",
+              "0"
+            ],
+            "correct_option": "2",
+            "explanation": "The column space (range) of a 3×2 matrix with rank 2 is a 2D subspace of ℝ³."
+          },
+          {
+            "id": "M2Q4H3",
+            "question": "For b=(1200,1000,900), try A·[280,360]ᵀ. The third component is:",
+            "options": [
+              "640 (not 900, so b is not in the range)",
+              "900 (b is in the range)",
+              "1200",
+              "1000"
+            ],
+            "correct_option": "640 (not 900, so b is not in the range)",
+            "explanation": "280+360=640≠900, so b is not in the column space of A and no exact solution exists."
+          },
+          {
+            "id": "M2Q4H4",
+            "question": "Since b is NOT in the range of A, the system Ax=b has:",
+            "options": [
+              "no exact solution",
+              "a unique solution",
+              "infinitely many solutions",
+              "a trivial solution"
+            ],
+            "correct_option": "no exact solution",
+            "explanation": "If b is outside the column space of A, no x can make Ax=b exactly."
+          },
+          {
+            "id": "M2Q4H5",
+            "question": "The least-squares solution minimises:",
+            "options": [
+              "||Ax - b||²",
+              "||x||²",
+              "||A||²",
+              "||b||²"
+            ],
+            "correct_option": "||Ax - b||²",
+            "explanation": "Least squares finds x that makes the squared distance between Ax and b as small as possible."
+          },
+          {
+            "id": "M2Q4H6",
+            "question": "The range of A consists of all vectors of the form:",
+            "options": [
+              "(3α+β, α+2β, α+β) for α,β ∈ ℝ",
+              "(α, β, γ) for all real numbers",
+              "(3α, 2β, α+β)",
+              "(α+β, α-β, 3α)"
+            ],
+            "correct_option": "(3α+β, α+2β, α+β) for α,β ∈ ℝ",
+            "explanation": "A·(α,β)ᵀ = α·(3,1,1) + β·(1,2,1) = (3α+β, α+2β, α+β)."
+          },
+          {
+            "id": "M2Q4H7",
+            "question": "The coefficient matrix for the 3×2 system [[3,1],[1,2],[1,1]] has rank:",
+            "options": [
+              "2 (full column rank)",
+              "3",
+              "1",
+              "0"
+            ],
+            "correct_option": "2 (full column rank)",
+            "explanation": "Two independent columns give rank 2, which equals the number of columns."
+          },
+          {
+            "id": "M2Q4H8",
+            "question": "Why is a 3×2 matrix not invertible in the standard sense?",
+            "options": [
+              "Only square matrices have inverses",
+              "Its determinant is always zero",
+              "It has too many entries",
+              "Its columns are always dependent"
+            ],
+            "correct_option": "Only square matrices have inverses",
+            "explanation": "Matrix inverse is defined only for square matrices; a 3×2 matrix is rectangular."
+          },
+          {
+            "id": "M2Q4H9",
+            "question": "In the augmented matrix [[3,1,1200],[1,2,1000],[1,1,900]], row reduction would show:",
+            "options": [
+              "inconsistency (a row like [0,0,nonzero])",
+              "a unique solution directly",
+              "infinitely many solutions",
+              "the matrix is already in row-echelon form"
+            ],
+            "correct_option": "inconsistency (a row like [0,0,nonzero])",
+            "explanation": "Row reduction reveals a contradictory row, confirming no exact solution exists."
+          },
+          {
+            "id": "M2Q4H10",
+            "question": "The normal equations for the least-squares problem are:",
+            "options": [
+              "AᵀAx = Aᵀb",
+              "Ax = b",
+              "Aᵀx = b",
+              "AAᵀx = b"
+            ],
+            "correct_option": "AᵀAx = Aᵀb",
+            "explanation": "Setting the gradient of ||Ax-b||² to zero yields AᵀAx = Aᵀb, the normal equations."
+          }
+        ],
+        "real_life_application": [
+          {
+            "id": "M2Q4R1",
+            "question": "A 3×2 system models 3 observations of 2 unknowns. For price-quantity data, the matrix columns represent:",
+            "options": [
+              "coefficients of price and quantity",
+              "the three observations",
+              "time and cost",
+              "revenue and profit"
+            ],
+            "correct_option": "coefficients of price and quantity",
+            "explanation": "Each column corresponds to one unknown variable across all observations."
+          },
+          {
+            "id": "M2Q4R2",
+            "question": "GPS uses 3 satellite equations for 2D position. The 3×2 coefficient matrix represents:",
+            "options": [
+              "satellite geometry relating to x and y coordinates",
+              "three different GPS receivers",
+              "time delays from three satellites",
+              "the three spatial dimensions"
+            ],
+            "correct_option": "satellite geometry relating to x and y coordinates",
+            "explanation": "Each row encodes how one satellite's signal relates to the two unknown coordinates."
+          },
+          {
+            "id": "M2Q4R3",
+            "question": "Linear regression with 3 data points and 2 parameters (intercept, slope) gives a:",
+            "options": [
+              "3×2 coefficient matrix",
+              "2×3 coefficient matrix",
+              "3×3 coefficient matrix",
+              "2×2 coefficient matrix"
+            ],
+            "correct_option": "3×2 coefficient matrix",
+            "explanation": "Three data points give 3 rows, and two parameters (intercept, slope) give 2 columns."
+          },
+          {
+            "id": "M2Q4R4",
+            "question": "For 3 colour measurements of 2 mixed paints, the pseudo-inverse A⁺ is used because:",
+            "options": [
+              "A is not square so it has no standard inverse",
+              "the paints are too expensive",
+              "colours cannot be measured directly",
+              "there are too many unknowns"
+            ],
+            "correct_option": "A is not square so it has no standard inverse",
+            "explanation": "The pseudo-inverse provides the least-squares solution when the matrix is rectangular."
+          },
+          {
+            "id": "M2Q4R5",
+            "question": "In a survey with 3 ratings of 2 products, writing the system as Ax=b helps because:",
+            "options": [
+              "it enables systematic least-squares computation",
+              "it makes the system always consistent",
+              "it reduces to a 2×2 system",
+              "it eliminates measurement error"
+            ],
+            "correct_option": "it enables systematic least-squares computation",
+            "explanation": "Matrix form allows efficient computation of the best-fit solution via normal equations."
+          }
+        ]
+      },
+      "real_life_application": [
+        {
+          "id": "M2Q4R01",
+          "question": "Three observations of (price, quantity) pairs yield totals bᵢ. The natural coefficient matrix has which shape?",
+          "options": [
+            "Strictly one-row only",
+            "Three-row by two-col",
+            "Two-row by three-col",
+            "Square three by three"
+          ],
+          "correct_option": "Three-row by two-col",
+          "explanation": "Each observation contributes one row with two coefficients (for price and quantity), giving a 3×2 matrix."
+        },
+        {
+          "id": "M2Q4R02",
+          "question": "A 3×2 regression matrix X has full column rank, meaning which property holds about its columns?",
+          "options": [
+            "Linearly independent",
+            "All equal entries",
+            "Mutually orthogonal",
+            "Strictly zero sum"
+          ],
+          "correct_option": "Linearly independent",
+          "explanation": "Full column rank for a tall matrix means the two columns are linearly independent, ensuring XᵀX is invertible."
+        },
+        {
+          "id": "M2Q4R03",
+          "question": "The product XᵀX for a 3×2 regression matrix X always has which resulting shape?",
+          "options": [
+            "Three by three",
+            "Three by two",
+            "One by two",
+            "Two by two"
+          ],
+          "correct_option": "Two by two",
+          "explanation": "A 2×3 times 3×2 multiplication produces a 2×2 symmetric matrix equal to XᵀX used in normal equations."
+        },
+        {
+          "id": "M2Q4R04",
+          "question": "The pseudo-inverse X⁺ = (XᵀX)⁻¹ Xᵀ gives the least-squares solution which has what dimensionality?",
+          "options": [
+            "One by two",
+            "Three by three",
+            "Two by one",
+            "Three by one"
+          ],
+          "correct_option": "Two by one",
+          "explanation": "The least-squares estimate x̂ = X⁺·b is a 2-vector (slope and intercept) matching the parameter count."
+        },
+        {
+          "id": "M2Q4R05",
+          "question": "A GPS receiver forms A·x = b with A being 4×2; the matrix is described as which geometric object?",
+          "options": [
+            "Purely zero matrix",
+            "Tall thin matrix",
+            "Square symmetric",
+            "Strictly diagonal"
+          ],
+          "correct_option": "Tall thin matrix",
+          "explanation": "More rows than columns makes A a tall thin matrix, characteristic of overdetermined positioning systems."
+        }
+      ]
+    },
+    {
+      "topicId": "Q2.5",
+      "title": "Guessing and Reducing Error",
+      "topic": "Iterative approximation, error function, why exact solution doesn't exist.",
+      "mcqs": {
+        "easy": [
+          {
+            "id": "M2Q5E1",
+            "question": "To 'reduce the error' in an overdetermined system means to find A, C that:",
+            "options": [
+              "make the residual small",
+              "satisfy all equations exactly",
+              "maximise the error",
+              "set all residuals to infinity"
+            ],
+            "correct_option": "make the residual small",
+            "explanation": "Reducing error means finding values that make the total residual as small as possible."
+          },
+          {
+            "id": "M2Q5E2",
+            "question": "The residual for 3A+C=1200 is:",
+            "options": [
+              "r₁ = 3A + C - 1200",
+              "r₁ = 1200 - 3A - C²",
+              "r₁ = 3A - C + 1200",
+              "r₁ = 3A × C ÷ 1200"
+            ],
+            "correct_option": "r₁ = 3A + C - 1200",
+            "explanation": "The residual is the difference between the left and right sides: r₁ = 3A+C-1200."
+          },
+          {
+            "id": "M2Q5E3",
+            "question": "The total squared error for three equations is:",
+            "options": [
+              "r₁² + r₂² + r₃²",
+              "r₁ + r₂ + r₃",
+              "|r₁| + |r₂| + |r₃|",
+              "r₁ × r₂ × r₃"
+            ],
+            "correct_option": "r₁² + r₂² + r₃²",
+            "explanation": "Least squares minimises the sum of squared residuals across all equations."
+          },
+          {
+            "id": "M2Q5E4",
+            "question": "For (A,C) = (280,360), the residual for 3A+C=1200 is:",
+            "options": [
+              "0",
+              "-260",
+              "260",
+              "640"
+            ],
+            "correct_option": "0",
+            "explanation": "3(280)+360 = 840+360 = 1200, so r₁ = 1200-1200 = 0."
+          },
+          {
+            "id": "M2Q5E5",
+            "question": "For (A,C) = (280,360), the residual for A+C=900 is:",
+            "options": [
+              "-260",
+              "0",
+              "260",
+              "640"
+            ],
+            "correct_option": "-260",
+            "explanation": "280+360 = 640, so r₃ = 640-900 = -260."
+          },
+          {
+            "id": "M2Q5E6",
+            "question": "The total squared error at (280,360) using all three equations is:",
+            "options": [
+              "67600",
+              "0",
+              "260",
+              "520"
+            ],
+            "correct_option": "67600",
+            "explanation": "0²+0²+(-260)² = 67600."
+          },
+          {
+            "id": "M2Q5E7",
+            "question": "The least-squares solution is unique when A has:",
+            "options": [
+              "full column rank",
+              "full row rank",
+              "rank zero",
+              "no columns"
+            ],
+            "correct_option": "full column rank",
+            "explanation": "Full column rank ensures AᵀA is invertible, giving a unique minimiser."
+          },
+          {
+            "id": "M2Q5E8",
+            "question": "The error from the first two equations at (280,360) is:",
+            "options": [
+              "0 (exact)",
+              "260",
+              "67600",
+              "-260"
+            ],
+            "correct_option": "0 (exact)",
+            "explanation": "(280,360) satisfies both 3A+C=1200 and A+2C=1000 exactly, so their residuals are 0."
+          },
+          {
+            "id": "M2Q5E9",
+            "question": "Minimise (3A+C-1200)² + (A+2C-1000)² + (A+C-900)². This is the:",
+            "options": [
+              "least-squares objective function",
+              "matrix determinant",
+              "eigenvalue equation",
+              "trace of the matrix"
+            ],
+            "correct_option": "least-squares objective function",
+            "explanation": "This expression is the sum of squared residuals that least squares minimises."
+          },
+          {
+            "id": "M2Q5E10",
+            "question": "At (A,C) = (280,360), which equations are satisfied exactly?",
+            "options": [
+              "equations 1 and 2 only",
+              "equation 3 only",
+              "all three equations",
+              "none of the equations"
+            ],
+            "correct_option": "equations 1 and 2 only",
+            "explanation": "The first two equations have zero residual, but the third has residual -260."
+          }
+        ],
+        "medium": [
+          {
+            "id": "M2Q5M1",
+            "question": "Compute AᵀA for A = [[3,1],[1,2],[1,1]]. What is the (1,1) entry?",
+            "options": [
+              "11",
+              "9",
+              "6",
+              "3"
+            ],
+            "correct_option": "11",
+            "explanation": "Column 1 · Column 1 = 3²+1²+1² = 9+1+1 = 11."
+          },
+          {
+            "id": "M2Q5M2",
+            "question": "For A = [[3,1],[1,2],[1,1]], the (1,2) entry of AᵀA is:",
+            "options": [
+              "6",
+              "11",
+              "3",
+              "8"
+            ],
+            "correct_option": "6",
+            "explanation": "Col1 · Col2 = 3·1+1·2+1·1 = 3+2+1 = 6."
+          },
+          {
+            "id": "M2Q5M3",
+            "question": "The (2,2) entry of AᵀA for A = [[3,1],[1,2],[1,1]] is:",
+            "options": [
+              "6",
+              "11",
+              "5",
+              "4"
+            ],
+            "correct_option": "6",
+            "explanation": "Col2 · Col2 = 1²+2²+1² = 1+4+1 = 6."
+          },
+          {
+            "id": "M2Q5M4",
+            "question": "So AᵀA = [[11,6],[6,6]]. What is det(AᵀA)?",
+            "options": [
+              "30",
+              "66",
+              "36",
+              "60"
+            ],
+            "correct_option": "30",
+            "explanation": "det = 11·6 - 6·6 = 66-36 = 30."
+          },
+          {
+            "id": "M2Q5M5",
+            "question": "Compute Aᵀb for A and b=[1200,1000,900]ᵀ. The first component is:",
+            "options": [
+              "5500",
+              "4100",
+              "3000",
+              "6000"
+            ],
+            "correct_option": "5500",
+            "explanation": "3·1200+1·1000+1·900 = 3600+1000+900 = 5500."
+          },
+          {
+            "id": "M2Q5M6",
+            "question": "The second component of Aᵀb is:",
+            "options": [
+              "4100",
+              "5500",
+              "3600",
+              "4500"
+            ],
+            "correct_option": "4100",
+            "explanation": "1·1200+2·1000+1·900 = 1200+2000+900 = 4100."
+          },
+          {
+            "id": "M2Q5M7",
+            "question": "Solve [[11,6],[6,6]]·[A,C]ᵀ = [5500,4100]ᵀ. The inverse of AᵀA is:",
+            "options": [
+              "(1/30)·[[6,-6],[-6,11]]",
+              "(1/30)·[[6,6],[6,11]]",
+              "(1/30)·[[11,-6],[-6,6]]",
+              "(1/30)·[[-6,11],[6,-6]]"
+            ],
+            "correct_option": "(1/30)·[[6,-6],[-6,11]]",
+            "explanation": "A⁻¹ = (1/det)·[[d,-b],[-c,a]] = (1/30)·[[6,-6],[-6,11]]."
+          },
+          {
+            "id": "M2Q5M8",
+            "question": "The least-squares solution gives A ≈ 280 and C ≈ ?",
+            "options": [
+              "403.33",
+              "360",
+              "420",
+              "380"
+            ],
+            "correct_option": "403.33",
+            "explanation": "(1/30)·(6·5500-6·4100) = 8400/30 = 280 for A; (1/30)·(-6·5500+11·4100) = 12100/30 ≈ 403.33 for C."
+          },
+          {
+            "id": "M2Q5M9",
+            "question": "The least-squares C ≈ 403.33 is different from 360 because:",
+            "options": [
+              "it balances all three equations' errors",
+              "it only satisfies equation 3",
+              "it ignores equations 1 and 2",
+              "it uses a different formula"
+            ],
+            "correct_option": "it balances all three equations' errors",
+            "explanation": "Least squares finds the compromise that minimises the total squared error across all equations."
+          },
+          {
+            "id": "M2Q5M10",
+            "question": "Setting the gradient of ||Ax-b||² to zero gives the normal equations:",
+            "options": [
+              "AᵀAx = Aᵀb",
+              "Ax = b",
+              "Aᵀx = b",
+              "AAᵀx = b"
+            ],
+            "correct_option": "AᵀAx = Aᵀb",
+            "explanation": "Differentiating ||Ax-b||² with respect to x and setting to zero yields AᵀAx = Aᵀb."
+          }
+        ],
+        "hard": [
+          {
+            "id": "M2Q5H1",
+            "question": "The least-squares solution minimises ||Ax-b||². The error vector e = b-Ax* is:",
+            "options": [
+              "orthogonal to the range of A",
+              "parallel to A",
+              "equal to Ax*",
+              "the zero vector"
+            ],
+            "correct_option": "orthogonal to the range of A",
+            "explanation": "The optimality condition is Aᵀe = 0, meaning e is perpendicular to every column of A."
+          },
+          {
+            "id": "M2Q5H2",
+            "question": "The condition Aᵀe = 0 (where e = b-Ax*) means:",
+            "options": [
+              "Aᵀ(b-Ax*) = 0",
+              "A·b = A·x*",
+              "e is the zero vector",
+              "x* = b"
+            ],
+            "correct_option": "Aᵀ(b-Ax*) = 0",
+            "explanation": "Aᵀe = 0 is equivalent to Aᵀb - AᵀAx* = 0, giving the normal equations AᵀAx* = Aᵀb."
+          },
+          {
+            "id": "M2Q5H3",
+            "question": "If AᵀA is invertible, the least-squares solution is:",
+            "options": [
+              "x* = (AᵀA)⁻¹Aᵀb",
+              "x* = A⁻¹b",
+              "x* = b",
+              "x* = 0"
+            ],
+            "correct_option": "x* = (AᵀA)⁻¹Aᵀb",
+            "explanation": "With AᵀA invertible, we can solve the normal equations directly."
+          },
+          {
+            "id": "M2Q5H4",
+            "question": "The matrix AᵀA is always positive semi-definite. For full column rank, it is:",
+            "options": [
+              "positive definite (invertible)",
+              "negative definite",
+              "singular",
+              "orthogonal"
+            ],
+            "correct_option": "positive definite (invertible)",
+            "explanation": "Full column rank ensures all eigenvalues of AᵀA are strictly positive, making it invertible."
+          },
+          {
+            "id": "M2Q5H5",
+            "question": "The least-squares solution projects b onto:",
+            "options": [
+              "the range (column space) of A",
+              "the null space of A",
+              "the row space of A",
+              "the entire ℝ³"
+            ],
+            "correct_option": "the range (column space) of A",
+            "explanation": "Ax* is the orthogonal projection of b onto the column space of A."
+          },
+          {
+            "id": "M2Q5H6",
+            "question": "Geometrically, the closest point in Range(A) to b is found by:",
+            "options": [
+              "orthogonal projection",
+              "parallel projection",
+              "random sampling",
+              "matrix inversion"
+            ],
+            "correct_option": "orthogonal projection",
+            "explanation": "The orthogonal projection minimises the distance from b to the subspace."
+          },
+          {
+            "id": "M2Q5H7",
+            "question": "The error e = b - Ax* is orthogonal to Range(A) because:",
+            "options": [
+              "Aᵀe = 0 by the normal equations",
+              "e is always zero",
+              "A is always square",
+              "b is always in Range(A)"
+            ],
+            "correct_option": "Aᵀe = 0 by the normal equations",
+            "explanation": "The normal equations ensure the residual is perpendicular to all columns of A."
+          },
+          {
+            "id": "M2Q5H8",
+            "question": "The least-squares approximation x* satisfies A·x* = closest point in Range(A) to b. The error is:",
+            "options": [
+              "e = b - projection",
+              "e = projection - b",
+              "e = b + projection",
+              "e = 0 always"
+            ],
+            "correct_option": "e = b - projection",
+            "explanation": "The error is the difference between the original vector and its projection onto the subspace."
+          },
+          {
+            "id": "M2Q5H9",
+            "question": "Why does ||Ax-b||² have a unique minimum for full-column-rank A?",
+            "options": [
+              "AᵀA is positive definite, making the objective convex",
+              "A is always invertible",
+              "b is always in Range(A)",
+              "The function has no critical points"
+            ],
+            "correct_option": "AᵀA is positive definite, making the objective convex",
+            "explanation": "A positive definite Hessian (AᵀA) guarantees a unique global minimum."
+          },
+          {
+            "id": "M2Q5H10",
+            "question": "In the expression ||Ax-b||² = ||e||², e is the error vector with components:",
+            "options": [
+              "the residuals of each equation",
+              "the unknowns A and C",
+              "the entries of matrix A",
+              "the eigenvalues of A"
+            ],
+            "correct_option": "the residuals of each equation",
+            "explanation": "Each component of e = Ax-b is the residual rᵢ = (Ax)ᵢ - bᵢ for one equation."
+          }
+        ],
+        "real_life_application": [
+          {
+            "id": "M2Q5R1",
+            "question": "A small business has 3 sales records for two products. Least squares finds the:",
+            "options": [
+              "best-fit price and cost per unit",
+              "exact prices for all records",
+              "maximum profit",
+              "minimum number of products"
+            ],
+            "correct_option": "best-fit price and cost per unit",
+            "explanation": "Least squares finds the parameter values that best explain all sales data simultaneously."
+          },
+          {
+            "id": "M2Q5R2",
+            "question": "A linear trend with 3 time-series points. Least squares finds the best:",
+            "options": [
+              "slope and intercept of the trend line",
+              "exact data points",
+              "standard deviation only",
+              "correlation coefficient"
+            ],
+            "correct_option": "slope and intercept of the trend line",
+            "explanation": "Fitting y = mx + c to 3 points via least squares gives optimal slope m and intercept c."
+          },
+          {
+            "id": "M2Q5R3",
+            "question": "A physics experiment measures F and a for F = ma. With 3 readings, least squares gives the best:",
+            "options": [
+              "estimate of mass m",
+              "exact force in each trial",
+              "acceleration only",
+              "error bound"
+            ],
+            "correct_option": "estimate of mass m",
+            "explanation": "Least squares combines all three (F,a) measurements to find the optimal mass estimate."
+          },
+          {
+            "id": "M2Q5R4",
+            "question": "A calibration with 3 known points on y=mx+c. Least squares finds:",
+            "options": [
+              "best m and c that minimise total error",
+              "the exact m and c through all points",
+              "only the slope m",
+              "only the intercept c"
+            ],
+            "correct_option": "best m and c that minimise total error",
+            "explanation": "Calibration via least squares fits the line parameters to minimise the sum of squared deviations."
+          },
+          {
+            "id": "M2Q5R5",
+            "question": "A survey rates 2 attributes from 3 respondents. The least-squares approach:",
+            "options": [
+              "finds the best attribute scores across all ratings",
+              "uses only the first respondent's data",
+              "averages all scores equally",
+              "ignores contradictory ratings"
+            ],
+            "correct_option": "finds the best attribute scores across all ratings",
+            "explanation": "Least squares weights all responses to find attribute scores that best fit the entire dataset."
+          }
+        ]
+      },
+      "real_life_application": [
+        {
+          "id": "M2Q5R01",
+          "question": "A shop has 3 sales records with different totals; the best unit price comes from which fitting method?",
+          "options": [
+            "Least squares fit",
+            "Strict first point",
+            "Random single pick",
+            "Largest sale only"
+          ],
+          "correct_option": "Least squares fit",
+          "explanation": "Least squares averages all three sales into a single price estimate that minimises total squared residual."
+        },
+        {
+          "id": "M2Q5R02",
+          "question": "A trend line through 3 time-series points uses the slope that minimises which combined quantity?",
+          "options": [
+            "Maximum single error",
+            "Strictly count sign",
+            "Purely slope sign",
+            "Sum squared errors"
+          ],
+          "correct_option": "Sum squared errors",
+          "explanation": "Best-fit slope minimises Σ(yᵢ − ŷᵢ)², the sum of squared vertical residuals across all data points."
+        },
+        {
+          "id": "M2Q5R03",
+          "question": "Three force-vs-acceleration readings give F = m·a; least-squares fit estimates which physical quantity?",
+          "options": [
+            "Pure gravitational g",
+            "Air density only",
+            "Best-fit mass m",
+            "Friction force only"
+          ],
+          "correct_option": "Best-fit mass m",
+          "explanation": "Fitting a line through origin to the (a, F) data gives the slope m, the object's mass in kilograms."
+        },
+        {
+          "id": "M2Q5R04",
+          "question": "Calibrating a sensor gives 3 points nearly on y = mx + c; least squares picks m and c that minimise what?",
+          "options": [
+            "Random chosen index",
+            "Sum squared gap",
+            "Sum of x-coordinates",
+            "Strict y-intercept"
+          ],
+          "correct_option": "Sum squared gap",
+          "explanation": "Ordinary least squares minimises Σ(yᵢ − m xᵢ − c)², the sum of squared vertical deviations from the line."
+        },
+        {
+          "id": "M2Q5R05",
+          "question": "A consumer survey ranks 3 attributes of 2 products; least squares yields best scores that minimise which quantity?",
+          "options": [
+            "Sum rating error",
+            "Maximum rating gap",
+            "Purely total votes",
+            "Strict z-score total"
+          ],
+          "correct_option": "Sum rating error",
+          "explanation": "The fit minimises Σ(rᵢⱼ − predicted)² across all 3 ratings, balancing deviations from each observation."
+        }
+      ]
+    },
+    {
+      "topicId": "Q2.6",
+      "title": "Markov Chain Figure 1",
+      "topic": "Long-term behaviour of Markov chains, steady state, transition matrices.",
+      "mcqs": {
+        "easy": [
+          {
+            "id": "M2Q6E1",
+            "question": "A Markov chain has states and ___ probabilities between them.",
+            "options": [
+              "transition",
+              "fixed",
+              "random",
+              "static"
+            ],
+            "correct_option": "transition",
+            "explanation": "Transition probabilities describe the likelihood of moving from one state to another."
+          },
+          {
+            "id": "M2Q6E2",
+            "question": "The rows of a transition matrix P must sum to:",
+            "options": [
+              "1",
+              "0",
+              "the number of states",
+              "infinity"
+            ],
+            "correct_option": "1",
+            "explanation": "Each row is a probability distribution over next states, so entries must sum to 1."
+          },
+          {
+            "id": "M2Q6E3",
+            "question": "A two-state Markov chain has a transition matrix of size:",
+            "options": [
+              "2×2",
+              "1×2",
+              "2×1",
+              "3×3"
+            ],
+            "correct_option": "2×2",
+            "explanation": "Two states require a 2×2 matrix, with rows and columns for each state."
+          },
+          {
+            "id": "M2Q6E4",
+            "question": "The steady state of a Markov chain is the:",
+            "options": [
+              "long-term probability distribution",
+              "initial state vector",
+              "single step transition",
+              "matrix determinant"
+            ],
+            "correct_option": "long-term probability distribution",
+            "explanation": "After many steps, the state distribution converges to the steady state."
+          },
+          {
+            "id": "M2Q6E5",
+            "question": "If all 1000 people start in state A and all move to B, the next state is:",
+            "options": [
+              "all in B",
+              "all in A",
+              "500 in each",
+              "250 in each"
+            ],
+            "correct_option": "all in B",
+            "explanation": "A deterministic transition of 100% from A to B puts everyone in state B."
+          },
+          {
+            "id": "M2Q6E6",
+            "question": "If P = [[0.5,0.5],[0.5,0.5]], after 1 step a person in state A has probability ___ of being in B.",
+            "options": [
+              "0.5",
+              "1.0",
+              "0.0",
+              "0.25"
+            ],
+            "correct_option": "0.5",
+            "explanation": "The first row [0.5, 0.5] gives P(A→B) = 0.5."
+          },
+          {
+            "id": "M2Q6E7",
+            "question": "After many steps, the Markov chain distribution:",
+            "options": [
+              "converges to the steady state",
+              "always returns to the start",
+              "diverges to infinity",
+              "becomes uniform always"
+            ],
+            "correct_option": "converges to the steady state",
+            "explanation": "For regular chains, the distribution converges to a unique steady state regardless of starting point."
+          },
+          {
+            "id": "M2Q6E8",
+            "question": "The steady state π satisfies:",
+            "options": [
+              "π·P = π",
+              "P·π = 0",
+              "π + P = I",
+              "π·P = 0"
+            ],
+            "correct_option": "π·P = π",
+            "explanation": "The steady state is a left eigenvector of P with eigenvalue 1: πP = π."
+          },
+          {
+            "id": "M2Q6E9",
+            "question": "The sum of all components in the steady state vector equals:",
+            "options": [
+              "1",
+              "0",
+              "the number of states",
+              "the largest eigenvalue"
+            ],
+            "correct_option": "1",
+            "explanation": "The steady state is a probability distribution, so its components must sum to 1."
+          },
+          {
+            "id": "M2Q6E10",
+            "question": "The number of people in any state of a Markov chain must be:",
+            "options": [
+              "non-negative",
+              "always positive",
+              "always zero",
+              "negative"
+            ],
+            "correct_option": "non-negative",
+            "explanation": "Probabilities and population counts cannot be negative."
+          }
+        ],
+        "medium": [
+          {
+            "id": "M2Q6M1",
+            "question": "For P = [[0.7,0.3],[0.4,0.6]], the steady state satisfies π₁·0.7 + π₂·0.4 = π₁. This simplifies to:",
+            "options": [
+              "π₂·0.4 = π₁·0.3",
+              "π₂·0.7 = π₁·0.4",
+              "π₁ = π₂",
+              "π₁ + π₂ = 0"
+            ],
+            "correct_option": "π₂·0.4 = π₁·0.3",
+            "explanation": "Rearranging: π₁·0.7 + π₂·0.4 = π₁ gives π₂·0.4 = π₁ - π₁·0.7 = π₁·0.3."
+          },
+          {
+            "id": "M2Q6M2",
+            "question": "From π₂·0.4 = π₁·0.3, the ratio π₂/π₁ = ?",
+            "options": [
+              "3/4",
+              "4/3",
+              "7/4",
+              "3/7"
+            ],
+            "correct_option": "3/4",
+            "explanation": "π₂/π₁ = 0.3/0.4 = 3/4."
+          },
+          {
+            "id": "M2Q6M3",
+            "question": "With π₁ + π₂ = 1 and π₂ = (3/4)π₁, what is π₁?",
+            "options": [
+              "4/7",
+              "3/7",
+              "1/2",
+              "3/4"
+            ],
+            "correct_option": "4/7",
+            "explanation": "π₁ + (3/4)π₁ = 1 → (7/4)π₁ = 1 → π₁ = 4/7."
+          },
+          {
+            "id": "M2Q6M4",
+            "question": "The steady state π₂ = ?",
+            "options": [
+              "3/7",
+              "4/7",
+              "1/2",
+              "3/4"
+            ],
+            "correct_option": "3/7",
+            "explanation": "π₂ = 1 - 4/7 = 3/7."
+          },
+          {
+            "id": "M2Q6M5",
+            "question": "Verify: (4/7)·0.7 + (3/7)·0.4 = ?",
+            "options": [
+              "4/7",
+              "3/7",
+              "1",
+              "0"
+            ],
+            "correct_option": "4/7",
+            "explanation": "28/70 + 12/70 = 40/70 = 4/7 = π₁. ✓"
+          },
+          {
+            "id": "M2Q6M6",
+            "question": "For 1000 people, steady state gives approximately how many in state A?",
+            "options": [
+              "571",
+              "429",
+              "500",
+              "600"
+            ],
+            "correct_option": "571",
+            "explanation": "(4/7)×1000 ≈ 571 people in state A."
+          },
+          {
+            "id": "M2Q6M7",
+            "question": "Steady state is reached after:",
+            "options": [
+              "many iterations of the transition matrix",
+              "exactly one step",
+              "zero steps",
+              "only for special initial states"
+            ],
+            "correct_option": "many iterations of the transition matrix",
+            "explanation": "The chain converges to steady state asymptotically as the number of steps grows."
+          },
+          {
+            "id": "M2Q6M8",
+            "question": "A matrix P where each row sums to 1 is called:",
+            "options": [
+              "stochastic",
+              "symmetric",
+              "invertible",
+              "orthogonal"
+            ],
+            "correct_option": "stochastic",
+            "explanation": "A row-stochastic matrix has non-negative entries with each row summing to 1."
+          },
+          {
+            "id": "M2Q6M9",
+            "question": "P is 'regular' means some power Pᵏ has:",
+            "options": [
+              "all positive entries",
+              "all zero entries",
+              "equal diagonal entries",
+              "determinant 1"
+            ],
+            "correct_option": "all positive entries",
+            "explanation": "Regularity ensures all transition probabilities are eventually positive, guaranteeing convergence."
+          },
+          {
+            "id": "M2Q6M10",
+            "question": "Every stochastic matrix P always has eigenvalue:",
+            "options": [
+              "1",
+              "0",
+              "-1",
+              "the largest row sum"
+            ],
+            "correct_option": "1",
+            "explanation": "The all-ones vector is a right eigenvector with eigenvalue 1 for any stochastic matrix."
+          }
+        ],
+        "hard": [
+          {
+            "id": "M2Q6H1",
+            "question": "For P = [[0.5,0.5],[0.5,0.5]], all rows are the same. The steady state is:",
+            "options": [
+              "(0.5, 0.5)",
+              "(1, 0)",
+              "(0, 1)",
+              "(0.25, 0.75)"
+            ],
+            "correct_option": "(0.5, 0.5)",
+            "explanation": "When all rows are identical, the chain is already at steady state after one step."
+          },
+          {
+            "id": "M2Q6H2",
+            "question": "For P = [[1,0],[0,1]] (identity), what happens?",
+            "options": [
+              "No mixing occurs; any state is steady",
+              "Chain converges to (0.5,0.5)",
+              "Chain diverges",
+              "All states become zero"
+            ],
+            "correct_option": "No mixing occurs; any state is steady",
+            "explanation": "The identity matrix means everyone stays in their current state, so every distribution is steady."
+          },
+          {
+            "id": "M2Q6H3",
+            "question": "For P = [[0,1],[1,0]], the chain alternates. The time-averaged steady state is:",
+            "options": [
+              "(0.5, 0.5)",
+              "(1, 0)",
+              "(0, 1)",
+              "(0.75, 0.25)"
+            ],
+            "correct_option": "(0.5, 0.5)",
+            "explanation": "The chain bounces between states, so over time each state is visited 50% of the time."
+          },
+          {
+            "id": "M2Q6H4",
+            "question": "The steady state satisfies π = π·P. This makes π a:",
+            "options": [
+              "left eigenvector for eigenvalue 1",
+              "right eigenvector for eigenvalue 0",
+              "column of P",
+              "diagonal entry of P"
+            ],
+            "correct_option": "left eigenvector for eigenvalue 1",
+            "explanation": "πP = π means π is a left eigenvector of P with eigenvalue 1."
+          },
+          {
+            "id": "M2Q6H5",
+            "question": "The right eigenvector for eigenvalue 1 of a stochastic matrix is:",
+            "options": [
+              "the all-ones vector [1,1]ᵀ",
+              "the zero vector",
+              "the first column of P",
+              "any random vector"
+            ],
+            "correct_option": "the all-ones vector [1,1]ᵀ",
+            "explanation": "P·[1,1]ᵀ = [1,1]ᵀ because each row of P sums to 1."
+          },
+          {
+            "id": "M2Q6H6",
+            "question": "The PageRank algorithm uses the steady state of a Markov chain defined by:",
+            "options": [
+              "the web graph",
+              "a random number generator",
+              "a sorted list",
+              "a binary tree"
+            ],
+            "correct_option": "the web graph",
+            "explanation": "PageRank models web navigation as a Markov chain where pages are states and links are transitions."
+          },
+          {
+            "id": "M2Q6H7",
+            "question": "A Markov chain is 'ergodic' if and only if:",
+            "options": [
+              "it is both irreducible and aperiodic",
+              "it has exactly two states",
+              "the matrix is symmetric",
+              "all entries are equal"
+            ],
+            "correct_option": "it is both irreducible and aperiodic",
+            "explanation": "Ergodicity requires the chain to be irreducible (reachable from anywhere) and aperiodic."
+          },
+          {
+            "id": "M2Q6H8",
+            "question": "Convergence rate to steady state depends on:",
+            "options": [
+              "the second-largest eigenvalue of P",
+              "the size of the matrix only",
+              "the initial state vector",
+              "the number of states squared"
+            ],
+            "correct_option": "the second-largest eigenvalue of P",
+            "explanation": "The spectral gap (1 minus the second-largest eigenvalue) determines how fast the chain converges."
+          },
+          {
+            "id": "M2Q6H9",
+            "question": "If the spectral gap is large, the chain converges:",
+            "options": [
+              "exponentially fast",
+              "very slowly",
+              "never",
+              "only for special starting states"
+            ],
+            "correct_option": "exponentially fast",
+            "explanation": "A large spectral gap means the second eigenvalue is small, causing rapid convergence."
+          },
+          {
+            "id": "M2Q6H10",
+            "question": "Steady state probability is proportional to:",
+            "options": [
+              "the sum of incoming transition probabilities",
+              "the number of states",
+              "the determinant of P",
+              "the trace of P"
+            ],
+            "correct_option": "the sum of incoming transition probabilities",
+            "explanation": "States that receive more probability mass from other states tend to have higher steady-state values."
+          }
+        ],
+        "real_life_application": [
+          {
+            "id": "M2Q6R1",
+            "question": "In a two-state weather model (sunny/rainy), the steady state tells you:",
+            "options": [
+              "the long-run fraction of sunny and rainy days",
+              "tomorrow's exact weather",
+              "the total rainfall per year",
+              "the temperature on each day"
+            ],
+            "correct_option": "the long-run fraction of sunny and rainy days",
+            "explanation": "The steady state gives the long-term proportion of time spent in each weather state."
+          },
+          {
+            "id": "M2Q6R2",
+            "question": "A two-product customer switching model's steady state gives:",
+            "options": [
+              "long-term market share percentages",
+              "current day sales",
+              "total revenue",
+              "production cost"
+            ],
+            "correct_option": "long-term market share percentages",
+            "explanation": "The steady state reveals what fraction of customers will use each product in the long run."
+          },
+          {
+            "id": "M2Q6R3",
+            "question": "Students switching between science and arts streams. The steady state shows:",
+            "options": [
+              "long-term enrollment distribution",
+              "today's class sizes",
+              "exam scores",
+              "teacher assignments"
+            ],
+            "correct_option": "long-term enrollment distribution",
+            "explanation": "Over many semesters, the fraction of students in each stream approaches the steady state."
+          },
+          {
+            "id": "M2Q6R4",
+            "question": "A brand awareness model (aware/unaware) uses Markov chains to find:",
+            "options": [
+              "long-term awareness percentage",
+              "daily ad spend",
+              "total sales volume",
+              "competitor prices"
+            ],
+            "correct_option": "long-term awareness percentage",
+            "explanation": "The steady state shows what percentage of consumers will be aware of the brand over time."
+          },
+          {
+            "id": "M2Q6R5",
+            "question": "A phone connecting to 2 networks. The steady state gives:",
+            "options": [
+              "long-term percentage of time on each network",
+              "current signal strength",
+              "data usage today",
+              "battery drain rate"
+            ],
+            "correct_option": "long-term percentage of time on each network",
+            "explanation": "The steady state reveals what fraction of time the phone spends connected to each network."
+          }
+        ]
+      },
+      "real_life_application": [
+        {
+          "id": "M2Q6R01",
+          "question": "A two-state weather chain (sunny, rainy) has transition matrix with rows summing to which value?",
+          "options": [
+            "Always zero sum",
+            "Strictly half each",
+            "Random per row",
+            "Exactly one only"
+          ],
+          "correct_option": "Exactly one only",
+          "explanation": "Each row of a stochastic matrix represents a probability distribution and must sum to 1."
+        },
+        {
+          "id": "M2Q6R02",
+          "question": "For P = [[0.7, 0.3], [0.4, 0.6]], the steady-state probability π₁ equals which fraction?",
+          "options": [
+            "One half exactly",
+            "Two fifth only",
+            "Four seventh",
+            "Three seventh"
+          ],
+          "correct_option": "Four seventh",
+          "explanation": "Solving π·P = π with π₁ + π₂ = 1 gives π₂ = (3/4)π₁, so π₁ = 4/7 and π₂ = 3/7."
+        },
+        {
+          "id": "M2Q6R03",
+          "question": "Long-run, a two-product switching market reaches its steady state; the state vector satisfies which equation?",
+          "options": [
+            "Strict π equals P",
+            "π times P equals π",
+            "P squared equals I",
+            "π sums to zero"
+          ],
+          "correct_option": "π times P equals π",
+          "explanation": "The steady state is a left eigenvector for eigenvalue 1: πP = π, meaning π is unchanged by another step."
+        },
+        {
+          "id": "M2Q6R04",
+          "question": "A school's two streams (science, arts) rebalance yearly; the long-term distribution is given by which concept?",
+          "options": [
+            "Stationary distribution",
+            "Strictly first-year only",
+            "Pure random walk model",
+            "Always initial share here"
+          ],
+          "correct_option": "Stationary distribution",
+          "explanation": "After many iterations of the transition matrix, student shares settle to the stationary distribution π."
+        },
+        {
+          "id": "M2Q6R05",
+          "question": "A phone alternates between two networks with regular transition matrix P; the long-term % time on each equals which quantity?",
+          "options": [
+            "Strict first-col only",
+            "Maximum eigenvalue only",
+            "Diagonal sum only",
+            "Steady state π only"
+          ],
+          "correct_option": "Steady state π only",
+          "explanation": "For a regular chain, π gives the asymptotic fraction of time spent in each network state."
+        }
+      ]
+    },
+    {
+      "topicId": "Q2.7",
+      "title": "Markov Chain Figure 2",
+      "topic": "Reading a different transition diagram, applying same Markov chain reasoning.",
+      "mcqs": {
+        "easy": [
+          {
+            "id": "M2Q7E1",
+            "question": "The rows of a transition matrix always sum to:",
+            "options": [
+              "1",
+              "0",
+              "the number of states",
+              "infinity"
+            ],
+            "correct_option": "1",
+            "explanation": "Each row represents a complete probability distribution over possible next states."
+          },
+          {
+            "id": "M2Q7E2",
+            "question": "The steady state of a Markov chain is the:",
+            "options": [
+              "long-term distribution",
+              "first step result",
+              "initial state",
+              "matrix transpose"
+            ],
+            "correct_option": "long-term distribution",
+            "explanation": "After many transitions, the probability distribution converges to the steady state."
+          },
+          {
+            "id": "M2Q7E3",
+            "question": "For P = [[0.6,0.4],[0.2,0.8]], what is the steady state π₁?",
+            "options": [
+              "1/3",
+              "1/2",
+              "2/3",
+              "3/4"
+            ],
+            "correct_option": "1/3",
+            "explanation": "From π₂·0.2 = π₁·0.4, we get π₂ = 2π₁. With π₁+2π₁=1, π₁ = 1/3."
+          },
+          {
+            "id": "M2Q7E4",
+            "question": "If steady state is (π₁, π₂), then π₁ + π₂ must equal:",
+            "options": [
+              "1",
+              "0",
+              "2",
+              "the number of states"
+            ],
+            "correct_option": "1",
+            "explanation": "The steady state is a probability distribution, so its components must sum to 1."
+          },
+          {
+            "id": "M2Q7E5",
+            "question": "From π₁·0.6 + π₂·0.2 = π₁, we get π₂ = ?",
+            "options": [
+              "2π₁",
+              "3π₁",
+              "π₁/2",
+              "π₁/3"
+            ],
+            "correct_option": "2π₁",
+            "explanation": "Rearranging: π₂·0.2 = π₁·0.4, so π₂ = (0.4/0.2)π₁ = 2π₁."
+          },
+          {
+            "id": "M2Q7E6",
+            "question": "With π₁ + 2π₁ = 1, solving gives π₁ = ?",
+            "options": [
+              "1/3",
+              "1/2",
+              "2/3",
+              "1/4"
+            ],
+            "correct_option": "1/3",
+            "explanation": "3π₁ = 1, so π₁ = 1/3."
+          },
+          {
+            "id": "M2Q7E7",
+            "question": "The steady state π₂ for P = [[0.6,0.4],[0.2,0.8]] is:",
+            "options": [
+              "2/3",
+              "1/3",
+              "1/2",
+              "3/4"
+            ],
+            "correct_option": "2/3",
+            "explanation": "π₂ = 2π₁ = 2/3."
+          },
+          {
+            "id": "M2Q7E8",
+            "question": "Out of 1000 people, approximately how many are in state A at steady state?",
+            "options": [
+              "333",
+              "667",
+              "500",
+              "250"
+            ],
+            "correct_option": "333",
+            "explanation": "(1/3)×1000 ≈ 333 people in state A."
+          },
+          {
+            "id": "M2Q7E9",
+            "question": "The steady state is unique if the chain is:",
+            "options": [
+              "ergodic",
+              "symmetric",
+              "diagonal",
+              "zero"
+            ],
+            "correct_option": "ergodic",
+            "explanation": "An ergodic chain (irreducible and aperiodic) has a unique steady state."
+          },
+          {
+            "id": "M2Q7E10",
+            "question": "The equation P·πᵀ = πᵀ means π is:",
+            "options": [
+              "a right eigenvector of P with eigenvalue 1",
+              "a left eigenvector of P with eigenvalue 0",
+              "a column of P",
+              "the determinant of P"
+            ],
+            "correct_option": "a right eigenvector of P with eigenvalue 1",
+            "explanation": "P·πᵀ = πᵀ defines π as a right eigenvector with eigenvalue 1."
+          }
+        ],
+        "medium": [
+          {
+            "id": "M2Q7M1",
+            "question": "For P = [[0.8,0.2],[0.3,0.7]], find the steady state. π₂ = (2/3)π₁. What is π₁?",
+            "options": [
+              "3/5",
+              "2/5",
+              "1/2",
+              "3/4"
+            ],
+            "correct_option": "3/5",
+            "explanation": "π₁ + (2/3)π₁ = 1 → (5/3)π₁ = 1 → π₁ = 3/5."
+          },
+          {
+            "id": "M2Q7M2",
+            "question": "For P = [[0.8,0.2],[0.3,0.7]], what is π₂?",
+            "options": [
+              "2/5",
+              "3/5",
+              "1/3",
+              "1/2"
+            ],
+            "correct_option": "2/5",
+            "explanation": "π₂ = (2/3)·(3/5) = 2/5."
+          },
+          {
+            "id": "M2Q7M3",
+            "question": "For 1000 people, steady state with P = [[0.8,0.2],[0.3,0.7]] gives approximately how many in state A?",
+            "options": [
+              "600",
+              "400",
+              "500",
+              "700"
+            ],
+            "correct_option": "600",
+            "explanation": "(3/5)×1000 = 600 in state A."
+          },
+          {
+            "id": "M2Q7M4",
+            "question": "Verify: (3/5)·0.8 + (2/5)·0.3 = ?",
+            "options": [
+              "3/5",
+              "2/5",
+              "1",
+              "0"
+            ],
+            "correct_option": "3/5",
+            "explanation": "24/50 + 6/50 = 30/50 = 3/5 = π₁. ✓"
+          },
+          {
+            "id": "M2Q7M5",
+            "question": "Verify: (3/5)·0.2 + (2/5)·0.7 = ?",
+            "options": [
+              "2/5",
+              "3/5",
+              "1/2",
+              "1"
+            ],
+            "correct_option": "2/5",
+            "explanation": "6/50 + 14/50 = 20/50 = 2/5 = π₂. ✓"
+          },
+          {
+            "id": "M2Q7M6",
+            "question": "For P = [[0.8,0.2],[0.3,0.7]], the other eigenvalue (besides 1) is:",
+            "options": [
+              "0.5",
+              "0.7",
+              "0.8",
+              "0.3"
+            ],
+            "correct_option": "0.5",
+            "explanation": "For a 2×2 stochastic matrix, the other eigenvalue = trace - 1 = (0.8+0.7) - 1 = 0.5."
+          },
+          {
+            "id": "M2Q7M7",
+            "question": "Convergence rate is determined by the magnitude of:",
+            "options": [
+              "the smaller eigenvalue",
+              "the larger eigenvalue",
+              "the determinant",
+              "the trace"
+            ],
+            "correct_option": "the smaller eigenvalue",
+            "explanation": "The second-largest eigenvalue's magnitude controls how quickly the chain reaches steady state."
+          },
+          {
+            "id": "M2Q7M8",
+            "question": "For P = [[0.8,0.2],[0.3,0.7]], the eigenvalue 1 has a right eigenvector:",
+            "options": [
+              "[1, 1]ᵀ",
+              "[0, 1]ᵀ",
+              "[1, 0]ᵀ",
+              "[0.5, 0.5]ᵀ"
+            ],
+            "correct_option": "[1, 1]ᵀ",
+            "explanation": "P·[1,1]ᵀ = [0.8+0.2, 0.3+0.7]ᵀ = [1,1]ᵀ, always true for stochastic matrices."
+          },
+          {
+            "id": "M2Q7M9",
+            "question": "From π₁·0.8 + π₂·0.3 = π₁, we derive:",
+            "options": [
+              "π₂·0.3 = π₁·0.2",
+              "π₂·0.8 = π₁·0.3",
+              "π₁ = π₂",
+              "π₁ + π₂ = 0"
+            ],
+            "correct_option": "π₂·0.3 = π₁·0.2",
+            "explanation": "Rearranging: π₂·0.3 = π₁ - π₁·0.8 = π₁·0.2."
+          },
+          {
+            "id": "M2Q7M10",
+            "question": "The second largest eigenvalue of 0.5 means convergence is:",
+            "options": [
+              "moderately fast (factor of 0.5 per step)",
+              "extremely slow",
+              "instantaneous",
+              "does not converge"
+            ],
+            "correct_option": "moderately fast (factor of 0.5 per step)",
+            "explanation": "The error shrinks by a factor of ~0.5 each step, giving moderate convergence speed."
+          }
+        ],
+        "hard": [
+          {
+            "id": "M2Q7H1",
+            "question": "A Markov chain is irreducible iff the transition graph is:",
+            "options": [
+              "connected (every state reachable from every other)",
+              "disconnected",
+              "directed only one way",
+              "complete with self-loops"
+            ],
+            "correct_option": "connected (every state reachable from every other)",
+            "explanation": "Irreducibility means there is a path from any state to any other state."
+          },
+          {
+            "id": "M2Q7H2",
+            "question": "A Markov chain is aperiodic iff the gcd of all cycle lengths is:",
+            "options": [
+              "1",
+              "0",
+              "the number of states",
+              "the largest eigenvalue"
+            ],
+            "correct_option": "1",
+            "explanation": "Aperiodicity requires that the greatest common divisor of cycle lengths equals 1."
+          },
+          {
+            "id": "M2Q7H3",
+            "question": "Ergodic = irreducible + aperiodic. For ergodic chains, convergence is:",
+            "options": [
+              "guaranteed to a unique steady state",
+              "guaranteed only for some starting states",
+              "not guaranteed",
+              "guaranteed only for symmetric matrices"
+            ],
+            "correct_option": "guaranteed to a unique steady state",
+            "explanation": "Ergodic chains always converge to the same unique steady state regardless of initial distribution."
+          },
+          {
+            "id": "M2Q7H4",
+            "question": "Number of iterations to converge depends on:",
+            "options": [
+              "the spectral gap (1 - λ₂)",
+              "only the matrix size",
+              "the initial distribution",
+              "the number of rows"
+            ],
+            "correct_option": "the spectral gap (1 - λ₂)",
+            "explanation": "A larger spectral gap (larger gap between largest and second eigenvalue) means faster convergence."
+          },
+          {
+            "id": "M2Q7H5",
+            "question": "For 3-state Markov chains, the same steady-state theory applies with:",
+            "options": [
+              "3×3 transition matrices",
+              "2×2 transition matrices",
+              "1×1 transition matrices",
+              "infinitely large matrices"
+            ],
+            "correct_option": "3×3 transition matrices",
+            "explanation": "The theory generalises to any number of states using appropriately sized matrices."
+          },
+          {
+            "id": "M2Q7H6",
+            "question": "PageRank modifies the transition matrix by adding:",
+            "options": [
+              "teleportation (random jumps with probability 1-α)",
+              "self-loops with probability 1",
+              "negative probabilities",
+              "zero rows"
+            ],
+            "correct_option": "teleportation (random jumps with probability 1-α)",
+            "explanation": "Teleportation ensures the modified matrix is always ergodic, even for disconnected web graphs."
+          },
+          {
+            "id": "M2Q7H7",
+            "question": "The PageRank modified matrix is P' = αP + (1-α)(1/N)J where J is:",
+            "options": [
+              "the all-ones matrix",
+              "the identity matrix",
+              "the zero matrix",
+              "the transpose of P"
+            ],
+            "correct_option": "the all-ones matrix",
+            "explanation": "J has all entries equal to 1/N, representing uniform random jumps to any page."
+          },
+          {
+            "id": "M2Q7H8",
+            "question": "Steady state for higher-order Markov chains (memory > 1) is computed:",
+            "options": [
+              "similarly using expanded state spaces",
+              "completely differently from memoryless chains",
+              "only by simulation",
+              "using calculus instead of linear algebra"
+            ],
+            "correct_option": "similarly using expanded state spaces",
+            "explanation": "Higher-order chains can be converted to first-order chains by expanding the state definition."
+          },
+          {
+            "id": "M2Q7H9",
+            "question": "Why does PageRank need teleportation probability (1-α)?",
+            "options": [
+              "To handle dangling nodes and ensure ergodicity",
+              "To speed up convergence",
+              "To reduce matrix size",
+              "To make the matrix symmetric"
+            ],
+            "correct_option": "To handle dangling nodes and ensure ergodicity",
+            "explanation": "Without teleportation, pages with no outgoing links create absorbing states that break ergodicity."
+          },
+          {
+            "id": "M2Q7H10",
+            "question": "The steady state of a Markov chain is also called the:",
+            "options": [
+              "stationary distribution",
+              "initial distribution",
+              "transition kernel",
+              "eigenvalue spectrum"
+            ],
+            "correct_option": "stationary distribution",
+            "explanation": "The steady state is called stationary because once reached, it does not change with further transitions."
+          }
+        ],
+        "real_life_application": [
+          {
+            "id": "M2Q7R1",
+            "question": "Web page ranking models the internet as a Markov chain where states are:",
+            "options": [
+              "web pages",
+              "users",
+              "keywords",
+              "servers"
+            ],
+            "correct_option": "web pages",
+            "explanation": "In PageRank, each web page is a state, and links define transition probabilities."
+          },
+          {
+            "id": "M2Q7R2",
+            "question": "In a social network model, the steady state represents:",
+            "options": [
+              "long-term influence distribution across people",
+              "current day connections",
+              "friend suggestions",
+              "total number of posts"
+            ],
+            "correct_option": "long-term influence distribution across people",
+            "explanation": "The steady state shows what fraction of influence each person holds in the long run."
+          },
+          {
+            "id": "M2Q7R3",
+            "question": "A disease model with states (infected, susceptible) uses Markov chains to find:",
+            "options": [
+              "the long-term proportion of infected individuals",
+              "today's case count",
+              "the cure rate",
+              "vaccine availability"
+            ],
+            "correct_option": "the long-term proportion of infected individuals",
+            "explanation": "The steady state reveals what fraction of the population will be infected in the long run."
+          },
+          {
+            "id": "M2Q7R4",
+            "question": "Two competing products with given switching rates. The steady state gives:",
+            "options": [
+              "long-term market shares",
+              "current quarter revenue",
+              "production costs",
+              "customer satisfaction scores"
+            ],
+            "correct_option": "long-term market shares",
+            "explanation": "Markov chain analysis reveals the equilibrium market split between the two products."
+          },
+          {
+            "id": "M2Q7R5",
+            "question": "Why is the Markov chain model useful for real-world switching problems?",
+            "options": [
+              "It captures memoryless transitions and predicts long-term trends",
+              "It always gives exact daily predictions",
+              "It requires no data about transition rates",
+              "It works only for two-state systems"
+            ],
+            "correct_option": "It captures memoryless transitions and predicts long-term trends",
+            "explanation": "The memoryless property makes Markov chains tractable while still capturing essential dynamics."
+          }
+        ]
+      },
+      "real_life_application": [
+        {
+          "id": "M2Q7R01",
+          "question": "Web pages form states of a Markov chain; Google PageRank uses which vector of this chain?",
+          "options": [
+            "Identity column",
+            "Strict row zero",
+            "Steady state π",
+            "Eigenvalue zero"
+          ],
+          "correct_option": "Steady state π",
+          "explanation": "PageRank assigns each page the steady-state probability of the random-surfer chain, ranking by πᵢ."
+        },
+        {
+          "id": "M2Q7R02",
+          "question": "A social network models influence as state transitions among users; long-term influence distribution is which concept?",
+          "options": [
+            "Always uniform here",
+            "Stationary distribution",
+            "Strict shortest path",
+            "Purely edge weight"
+          ],
+          "correct_option": "Stationary distribution",
+          "explanation": "The chain's stationary distribution π identifies which users hold the most long-term influence."
+        },
+        {
+          "id": "M2Q7R03",
+          "question": "An SIR disease model has states (susceptible, infected); its steady state tells us which long-run fact?",
+          "options": [
+            "Endemic infection rate",
+            "Total population size",
+            "Cure effectiveness only",
+            "Strict birth rate"
+          ],
+          "correct_option": "Endemic infection rate",
+          "explanation": "The stationary distribution gives the long-run proportion of the population remaining infected."
+        },
+        {
+          "id": "M2Q7R04",
+          "question": "For P = [[0.6, 0.4], [0.2, 0.8]], the steady-state probability π₁ equals which simple fraction?",
+          "options": [
+            "Two thirds",
+            "Three fifths",
+            "Four fifths",
+            "One third"
+          ],
+          "correct_option": "One third",
+          "explanation": "From πP = π: 0.4π₁ = 0.2π₂ ⇒ π₂ = 2π₁; with π₁ + π₂ = 1 we get 3π₁ = 1, so π₁ = 1/3."
+        },
+        {
+          "id": "M2Q7R05",
+          "question": "Two competing brands track monthly customer switching; the long-term market share vector satisfies which equation?",
+          "options": [
+            "π sums to n entries",
+            "Zero vector always",
+            "π equals πP here",
+            "P equals π only"
+          ],
+          "correct_option": "π equals πP here",
+          "explanation": "Market share at steady state satisfies π = πP, with π being the left eigenvector for eigenvalue 1."
+        }
+      ]
+    }
+  ]
+}

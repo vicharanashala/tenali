@@ -1,0 +1,449 @@
+{
+  "module": 4,
+  "missionId": 37,
+  "title": "Four Subspaces Intro",
+  "original_question": "M = [[1,2],[3,6]]. Plot and explain three sets: Row Space = span{(1,2),(3,6)} — linear combos of rows. Column Space = span{(1,3),(2,6)} — linear combos of columns. Null Space = {(x,y) | M*(x,y) = (0,0)}. Notice: (3,6) = 3(1,2) and (2,6) = 2(1,3) — both rows and columns are multiples!",
+  "core_concept": "For a rank-1 matrix, the row space, column space, and null space are all 1-dimensional lines through the origin. Rank determines the dimension of each subspace via the Rank-Nullity Theorem.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M4Q1E1",
+        "question": "What is the rank of M = [[1,2],[3,6]]?",
+        "options": [
+          "0",
+          "1",
+          "2",
+          "3"
+        ],
+        "correct_option": "1",
+        "explanation": "Step 1: Row 2 equals 3 times Row 1, so (3,6) = 3·(1,2) — the rows are collinear. Step 2: Only one row is linearly independent, meaning only one direction of information is preserved by M. Step 3: Rank equals the number of independent rows, which is 1. This connects to the core concept that rank counts independent directions and directly determines subspace dimensions."
+      },
+      {
+        "id": "M4Q1E2",
+        "question": "What is the direction of the row space of M = [[1,2],[3,6]]?",
+        "options": [
+          "(1,2)",
+          "(1,3)x",
+          "(2,6)",
+          "(3,6)"
+        ],
+        "correct_option": "(1,2)",
+        "explanation": "Step 1: The row space is span{(1,2),(3,6)}, but since (3,6) = 3·(1,2), the second row adds no new direction. Step 2: The span collapses to all multiples of (1,2), forming the line t(1,2). Step 3: The row space direction (1,2) represents the only input direction that M can distinguish — this is the fundamental idea of rank limiting what a matrix can 'see'."
+      },
+      {
+        "id": "M4Q1E3",
+        "question": "What is the direction of the column space of M = [[1,2],[3,6]]?",
+        "options": [
+          "(1,2)",
+          "(1,3)",
+          "(2,1)",
+          "(3,6)"
+        ],
+        "correct_option": "(1,3)",
+        "explanation": "Step 1: The columns are (1,3) and (2,6) = 2·(1,3), so they are collinear. Step 2: The column space (range) is the line t(1,3) — the only output direction M can produce. Step 3: Note that the row space direction (1,2) differs from the column space direction (1,3); for general matrices, R(M) and C(M) are distinct subspaces, a key insight of the four-subspace framework."
+      },
+      {
+        "id": "M4Q1E4",
+        "question": "What is the null space direction of M = [[1,2],[3,6]]? (Find (x,y) such that M*(x,y) = (0,0))",
+        "options": [
+          "(2,-1)",
+          "(-2,1)",
+          "(1,2)",
+          "(3,1)"
+        ],
+        "correct_option": "(-2,1)",
+        "explanation": "Step 1: Solving M(x,y) = (0,0) gives x + 2y = 0 (both rows reduce to this single equation). Step 2: Setting y = 1 gives x = -2, so the null space direction is (-2,1). Step 3: This null direction is perpendicular to the row space (1,2) since (-2,1)·(1,2) = 0 — a preview of the Fundamental Theorem that row space ⊥ null space."
+      },
+      {
+        "id": "M4Q1E5",
+        "question": "What is the dimension of the row space of M = [[1,2],[3,6]]?",
+        "options": [
+          "0",
+          "1",
+          "2",
+          "3"
+        ],
+        "correct_option": "1",
+        "explanation": "Step 1: The two rows (1,2) and (3,6) are collinear, so only one independent direction exists. Step 2: The span of collinear vectors is a line, which is 1-dimensional. Step 3: Since rank = dim(row space) = 1, this directly illustrates that rank counts the number of independent directions in the row space — the core concept of Module 4."
+      },
+      {
+        "id": "M4Q1E6",
+        "question": "What is the dimension of the null space of M = [[1,2],[3,6]]?",
+        "options": [
+          "0",
+          "1",
+          "2",
+          "3"
+        ],
+        "correct_option": "1",
+        "explanation": "Step 1: Solving M(x,y) = 0 produces one free variable (y), giving the solution line t(-2,1). Step 2: One free variable means the null space is 1-dimensional. Step 3: By the Rank-Nullity Theorem, rank + nullity = n → 1 + 1 = 2 = number of columns, confirming the dimension calculation and connecting rank to nullity."
+      },
+      {
+        "id": "M4Q1E7",
+        "question": "Which of the following vectors is in the row space of M = [[1,2],[3,6]]?",
+        "options": [
+          "(1,3)",
+          "(2,4)",
+          "(1,1)",
+          "(3,1)"
+        ],
+        "correct_option": "(2,4)",
+        "explanation": "Step 1: The row space is all multiples of (1,2), i.e., t(1,2). Step 2: Checking (2,4): 2 = 2·1 and 4 = 2·2, so (2,4) = 2·(1,2) ✓. Step 3: Understanding membership in the row space is crucial — it tells you which input directions M can faithfully represent, forming the foundation for solving linear systems."
+      },
+      {
+        "id": "M4Q1E8",
+        "question": "Which of the following vectors is in the null space of M = [[1,2],[3,6]]?",
+        "options": [
+          "(1,2) ()",
+          "(2,-1)",
+          "(1,-2)",
+          "(3,1)"
+        ],
+        "correct_option": "(2,-1)",
+        "explanation": "Step 1: The null space condition requires x + 2y = 0, i.e., x = -2y. Step 2: For (2,-1): 2 + 2(-1) = 0 ✓, confirming it satisfies the equation. Step 3: Note (2,-1) = -1·(-2,1), placing it on the same null space line. Recognizing null space vectors is essential for understanding which inputs M destroys — a key idea for later missions on solving Ax = b."
+      },
+      {
+        "id": "M4Q1E9",
+        "question": "For M = [[1,2],[3,6]], verify the Rank-Nullity Theorem: rank + nullity = ?",
+        "options": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: Rank (dim of row space) = 1, and nullity (dim of null space) = 1. Step 2: Their sum is 1 + 1 = 2, which equals n = 2 (the number of columns of M). Step 3: This is the Rank-Nullity Theorem: rank + nullity = n. It holds for every matrix and provides a fundamental accounting identity — dimensions in the input space are partitioned between what M preserves (row space) and what M destroys (null space)."
+      },
+      {
+        "id": "M4Q1E10",
+        "question": "Is M = [[1,2],[3,6]] an invertible matrix?",
+        "options": [
+          "because it has rank 2",
+          "No, because its determinant is 0",
+          "because it is 2×2",
+          "because it has null space"
+        ],
+        "correct_option": "No, because its determinant is 0",
+        "explanation": "Step 1: det(M) = 1·6 - 2·3 = 0, confirming M is singular. Step 2: A zero determinant is equivalent to rank < n (here rank 1 < 2), meaning information is lost. Step 3: The nontrivial null space (dim 1) is the 'smoking gun' — M collapses the entire line t(-2,1) to zero, making inversion impossible. This connects rank, determinant, null space, and invertibility into one unified picture."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M4Q1M1",
+        "question": "For M = [[1,2],[3,6]], the row space and column space are both 1-dimensional. Are they the same subspace?",
+        "options": [
+          "they are both t(1,2)",
+          "No, row space is t(1,2) and column space is t(1,3)",
+          "they are both t(1,3)",
+          "row space is t(1,3) and column space is t(1,2)"
+        ],
+        "correct_option": "No, row space is t(1,2) and column space is t(1,3)",
+        "explanation": "Step 1: R(M) = span{(1,2)} (from rows) and C(M) = span{(1,3)} (from columns) — different directions. Step 2: Both are 1-dimensional lines, but (1,2) and (1,3) are not parallel, so they are genuinely different subspaces of R². Step 3: A matrix's row space and column space can have the same dimension without being the same subspace — they live in different roles (input vs output), and only coincide for symmetric matrices."
+      },
+      {
+        "id": "M4Q1M2",
+        "question": "Why is the row space of M = [[1,2],[3,6]] a 1-dimensional line rather than a 2-dimensional plane?",
+        "options": [
+          "Because M is a 2×2 matrix",
+          "Because the two rows are scalar multiples of each other",
+          "Because the determinant is nzero",
+          "Because M has only one zero entry"
+        ],
+        "correct_option": "Because the two rows are scalar multiples of each other",
+        "explanation": "Step 1: (3,6) = 3·(1,2), so the second row is a scalar multiple and adds no new direction. Step 2: The span of two collinear vectors remains a line (1D), not a plane (2D). Step 3: This linear dependence between rows directly reduces rank from 2 to 1, collapsing the row space dimension — a concrete illustration of how redundancy in a matrix limits its information capacity."
+      },
+      {
+        "id": "M4Q1M3",
+        "question": "For M = [[1,2],[3,6]], what geometric object is the null space?",
+        "options": [
+          "A point (the origin only)",
+          "A line through the origin",
+          "A plane through the origin",
+          "The entire R²"
+        ],
+        "correct_option": "A line through the origin",
+        "explanation": "Step 1: Solving M(x,y) = 0 gives x = -2y, parametrized as t(-2,1). Step 2: This is a 1-dimensional line through the origin. Step 3: The null space being a line (not a point) means M collapses an entire direction of inputs to zero — precisely the geometric meaning of rank deficiency. This connects to later missions where the null space determines solution structure for Ax = b."
+      },
+      {
+        "id": "M4Q1M4",
+        "question": "The rank-1 matrix M = [[1,2],[3,6]] maps R² onto what geometric object?",
+        "options": [
+          "A point)",
+          "A line through the origin",
+          "A plane through the origin",
+          "All of R²)"
+        ],
+        "correct_option": "A line through the origin",
+        "explanation": "Step 1: The range (column space) of M is t(1,3), a 1-dimensional line. Step 2: Every possible output of M lies on this single line — the entire 2D input plane collapses to a 1D output. Step 3: This geometric flattening is the hallmark of rank-deficient matrices: rank < n means the matrix is not onto, mapping Rⁿ onto a lower-dimensional subspace."
+      },
+      {
+        "id": "M4Q1M5",
+        "question": "If you apply M = [[1,2],[3,6]] to the null space direction (-2,1), what do you get?",
+        "options": [
+          "(0,0)",
+          "(1,2)",
+          "(-2,1)",
+          "(3,6)"
+        ],
+        "correct_option": "(0,0)",
+        "explanation": "Step 1: By definition, N(M) = {v : Mv = 0}, and (-2,1) is in N(M). Step 2: Direct computation: M(-2,1) = (-2+2, -6+6) = (0,0). Step 3: This is the defining property of the null space — these input directions are annihilated by M. Understanding this annihilating behavior is essential for later missions on why Ax = b may have infinitely many solutions."
+      },
+      {
+        "id": "M4Q1M6",
+        "question": "What is the determinant of M = [[1,2],[3,6]]?",
+        "options": [
+          "-3",
+          "0",
+          "3",
+          "6"
+        ],
+        "correct_option": "0",
+        "explanation": "Step 1: det(M) = 1·6 - 2·3 = 0. Step 2: A zero determinant means the matrix is singular (non-invertible), equivalently rank < n. Step 3: Geometrically, det measures area scaling — det = 0 means M flattens 2D area onto a line (zero area). This links the algebraic condition det = 0 to the geometric picture of rank deficiency and the four subspaces."
+      },
+      {
+        "id": "M4Q1M7",
+        "question": "For a 2×2 matrix with rank 1, how many dimensions does the null space have?",
+        "options": [
+          "0 — t here",
+          "1",
+          "2 — t here",
+          "It depends on the matrix"
+        ],
+        "correct_option": "1",
+        "explanation": "Step 1: By Rank-Nullity: rank + nullity = n = 2. Step 2: With rank = 1, nullity = 2 - 1 = 1. Step 3: Every 2×2 rank-1 matrix has a 1-dimensional null space — exactly one direction is destroyed. This is a universal consequence of the Rank-Nullity Theorem, not a coincidence of this particular matrix."
+      },
+      {
+        "id": "M4Q1M8",
+        "question": "If a matrix A has rank 3 and is 5×5, what is the dimension of its null space?",
+        "options": [
+          "2",
+          "3x",
+          "5",
+          "8"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: Rank-Nullity Theorem: rank + nullity = n = 5. Step 2: nullity = 5 - 3 = 2. Step 3: The null space is 2-dimensional, meaning two independent input directions are collapsed to zero. This illustrates how rank partitions the input space: 3 dimensions preserved (row space) + 2 dimensions lost (null space) = 5 total."
+      },
+      {
+        "id": "M4Q1M9",
+        "question": "The null space of M = [[1,2],[3,6]] is t(-2,1). Which statement correctly describes every vector in this null space?",
+        "options": [
+          "It is perpendicular to (1,2)",
+          "It is parallel to (1,3)",
+          "It has magnitude 5",
+          "It always has positive components"
+        ],
+        "correct_option": "It is perpendicular to (1,2)",
+        "explanation": "Step 1: The null space direction (-2,1) and row space direction (1,2) satisfy (-2,1)·(1,2) = -2 + 2 = 0. Step 2: A zero dot product proves perpendicularity for every vector on the null space line and every vector on the row space line. Step 3: This is the Fundamental Theorem of Linear Algebra: R(M) ⊥ N(M) always holds — the row space and null space are orthogonal complements in the input space."
+      },
+      {
+        "id": "M4Q1M10",
+        "question": "For M = [[1,2],[3,6]], if you compute M², what relationship does it have with M?",
+        "options": [
+          "M² = 7M (a scalar multiple of M)",
+          "M² = I (the identity matrix)",
+          "M² = 0 (the zero matrix)",
+          "M² = M (M is idempotent)"
+        ],
+        "correct_option": "M² = 7M (a scalar multiple of M)",
+        "explanation": "Step 1: M² = [[1,2],[3,6]]·[[1,2],[3,6]] = [[7,14],[21,42]]. Step 2: Factoring: [[7,14],[21,42]] = 7·[[1,2],[3,6]] = 7M. Step 3: For any rank-1 matrix M = uvᵀ, we have M² = (vᵀu)·M — the matrix squares to a scalar multiple of itself. This elegant property reveals that rank-1 matrices have a special algebraic structure tied directly to their single independent direction."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M4Q1H1",
+        "question": "For M = [[1,2],[3,6]], the row space is t(1,2) and the null space is t(-2,1). Prove they are perpendicular using the dot product.",
+        "options": [
+          "(1,2)·(-2,1) = -2+2 = 0, so they are perpendicular",
+          "(1,2)·(-2,1) = 1·2+2·1 = 4, t perpendicular",
+          "(1,2)·(-2,1) = -2+1 = -1, t perpendicular",
+          "The dot product is undefined for these vectors"
+        ],
+        "correct_option": "(1,2)·(-2,1) = -2+2 = 0, so they are perpendicular",
+        "explanation": "Step 1: Compute (1,2)·(-2,1) = (1)(-2) + (2)(1) = 0. Step 2: This is not a coincidence — the Fundamental Theorem of Linear Algebra states R(A) ⊥ N(A) for ANY matrix A. The proof: if v ∈ N(A), then Av = 0, so every row of A dotted with v equals 0, meaning v is perpendicular to every row and hence to the entire row space. Step 3: This orthogonality is one of the deepest results in linear algebra — it guarantees that the row space and null space are always complementary perpendicular subspaces."
+      },
+      {
+        "id": "M4Q1H2",
+        "question": "If M = [[1,2],[3,6]] and v is any vector in the null space of M, which of the following is always true?",
+        "options": [
+          "Mv is in the row space",
+          "Mv = (0,0)",
+          "v is in the column space",
+          "v is perpendicular to the column space"
+        ],
+        "correct_option": "Mv = (0,0)",
+        "explanation": "Step 1: The null space is defined as N(M) = {v : Mv = 0} — it is literally the set of inputs that produce zero output. Step 2: By this definition, Mv = 0 is tautologically true for every v ∈ N(M). Step 3: This is the defining property of the null space, distinct from orthogonality relationships. The null space captures all directions that M annihilates — understanding this is key to solving Ax = b, where null space vectors represent solution ambiguity."
+      },
+      {
+        "id": "M4Q1H3",
+        "question": "For the rank-1 matrix M = [[1,2],[3,6]], write M as an outer product of two vectors.",
+        "options": [
+          "(1,3)ᵀ × (1,2)",
+          "(1,2)ᵀ × (1,3)x",
+          "(3,6)ᵀ × (1,2)",
+          "(1,2)ᵀ × (3,6)"
+        ],
+        "correct_option": "(1,3)ᵀ × (1,2)",
+        "explanation": "Step 1: A rank-1 matrix can always be factored as M = uvᵀ where u is a column vector and vᵀ is a row vector. Step 2: Here u = (1,3)ᵀ (column direction) and vᵀ = (1,2) (row direction), giving [[1,2],[3,6]]. Step 3: This outer product factorization M = uvᵀ is a hallmark of rank-1 matrices: it explicitly separates the column space direction u from the row space direction v, revealing the matrix's complete structure in two vectors."
+      },
+      {
+        "id": "M4Q1H4",
+        "question": "Suppose A is a 4×4 matrix with rank 2. What are the dimensions of all four fundamental subspaces?",
+        "options": [
+          "R(A)=2D, C(A)=2D, N(A)=2D, N(Aᵀ)=2D",
+          "R(A)=2D, C(A)=2D, N(A)=1D, N(Aᵀ)=3Dx",
+          "R(A)=2D, C(A)=2D, N(A)=3D, N(Aᵀ)=1D",
+          "R(A)=2D, C(A)=2D, N(A)=0D, N(Aᵀ)=4D"
+        ],
+        "correct_option": "R(A)=2D, C(A)=2D, N(A)=2D, N(Aᵀ)=2D",
+        "explanation": "Step 1: rank = 2 → dim(R(A)) = dim(C(A)) = 2 (rank equals dimension of both row and column spaces). Step 2: By Rank-Nullity, dim(N(A)) = n - rank = 4 - 2 = 2, and dim(N(Aᵀ)) = m - rank = 4 - 2 = 2. Step 3: All four subspaces are 2-dimensional, forming two orthogonal pairs that decompose R⁴ = R(A) ⊕ N(A) and R⁴ = C(A) ⊕ N(Aᵀ). This is the complete four-subspace picture for a rank-2 square matrix."
+      },
+      {
+        "id": "M4Q1H5",
+        "question": "Can the row space and column space of a square matrix ever be the same subspace?",
+        "options": [
+          "they always live in different spaces",
+          "Only if the matrix is symmetric",
+          "Only if the matrix is the zero matrix...",
+          "for any diagonal matrix with equal di"
+        ],
+        "correct_option": "Only if the matrix is symmetric",
+        "explanation": "Step 1: For a general matrix A, R(A) ⊂ Rⁿ (input space) and C(A) ⊂ Rᵐ (output space) — they live in different spaces when m ≠ n. Step 2: For square matrices (m = n), they live in the same space and R(A) = C(A) exactly when A = Aᵀ (symmetric), because symmetry means rows equal columns. Step 3: This is a deep structural observation: only symmetric matrices have aligned row and column spaces. For non-symmetric matrices, the row and column spaces are generally distinct subspaces — as we saw with M = [[1,2],[3,6]]."
+      },
+      {
+        "id": "M4Q1H6",
+        "question": "If a 3×3 matrix has rank 3 (full rank), what can you say about its null space?",
+        "options": [
+          "It is a plane through the origin",
+          "It is a line through the origin",
+          "It contains only the zero vector",
+          "It is all of R³ — does t match"
+        ],
+        "correct_option": "It contains only the zero vector",
+        "explanation": "Step 1: Rank-Nullity: rank + nullity = n = 3. Step 2: With rank = 3, nullity = 0, so N(A) = {0}. Step 3: A trivial null space means no non-zero input is destroyed — the matrix is invertible, one-to-one, and preserves all information. This is the full-rank condition that connects invertibility, trivial null space, and the rank-nullity theorem into a single requirement."
+      },
+      {
+        "id": "M4Q1H7",
+        "question": "For M = [[1,2],[3,6]], is it possible for a vector to be in BOTH the row space and the null space (other than the origin)?",
+        "options": [
+          "(1,2) is in both",
+          "(-2,1) is in both",
+          "No, because the row space and null space are perpendicular and share only the origin",
+          "any vector satisfying x+2y=0 is in both"
+        ],
+        "correct_option": "No, because the row space and null space are perpendicular and share only the origin",
+        "explanation": "Step 1: R(M) = t(1,2) and N(M) = t(-2,1) are perpendicular lines through the origin. Step 2: If v is in both, then v·v = 0 (by orthogonality), which implies |v|² = 0, so v = 0. Step 3: This proves that perpendicular subspaces intersect only at the origin — a fundamental property that underlies the orthogonal decomposition Rⁿ = R(A) ⊕ N(A), where every input vector splits uniquely into row space and null space components."
+      },
+      {
+        "id": "M4Q1H8",
+        "question": "What is the geometric interpretation of the fact that det(M) = 0 for M = [[1,2],[3,6]]?",
+        "options": [
+          "M rotates vectors by 90°",
+          "M scales area by a factor of 0, collapsing the plane onto a line",
+          "M reflects vectors across the x-axis",
+          "M has effect on any vector"
+        ],
+        "correct_option": "M scales area by a factor of 0, collapsing the plane onto a line",
+        "explanation": "Step 1: The determinant measures signed area scaling: det(M) = factor by which area changes under M. Step 2: det(M) = 0 means all 2D areas collapse to zero — the image has no area. Step 3: Geometrically, M flattens R² onto the line t(1,3), losing one dimension entirely. This is the geometric heart of rank deficiency: rank < n means the matrix cannot preserve the full dimensionality of the input, and det = 0 is the algebraic certificate of this collapse."
+      },
+      {
+        "id": "M4Q1H9",
+        "question": "For M = [[1,2],[3,6]], the null space is t(-2,1). If you take any vector v in R² and decompose it as v = v_row + v_null (row space component + null space component), what is Mv equal to?",
+        "options": [
+          "Mv = 0 always — does t match",
+          "Mv = M·v_row (the null space component vanishes)",
+          "Mv = M·v_null (the row space component vanishes)",
+          "Mv = v_row + v_null — does t match"
+        ],
+        "correct_option": "Mv = M·v_row (the null space component vanishes)",
+        "explanation": "Step 1: Any v ∈ R² decomposes uniquely as v = v_row + v_null where v_row ∈ R(M) and v_null ∈ N(M). Step 2: Mv = M(v_row + v_null) = Mv_row + Mv_null = Mv_row + 0 = Mv_row. Step 3: The null space component is annihilated by M, so only the row space component survives. This decomposition is the operational heart of the Fundamental Theorem — it tells us exactly what information M preserves and what it destroys."
+      },
+      {
+        "id": "M4Q1H10",
+        "question": "If A is an m×n matrix with rank r, what is the dimension of the subspace spanned by ALL four fundamental subspaces together?",
+        "options": [
+          "r",
+          "m + n",
+          "max(m,n)",
+          "min(m,n)"
+        ],
+        "correct_option": "max(m,n)",
+        "explanation": "Step 1: R(A) and N(A) together span Rⁿ (input space), while C(A) and N(Aᵀ) together span Rᵐ (output space). Step 2: The four subspaces don't form a single subspace — they live in two different ambient spaces. Step 3: The largest ambient space involved is max(m,n), which bounds the total dimension. Understanding that the four subspaces partition two different spaces (Rⁿ and Rᵐ) is crucial for the complete picture of the Fundamental Theorem."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "id": "M4Q1R1",
+      "question": "A rank-1 image filter keeps only one pattern from the original image — like preserving only brightness variation while discarding colour and texture. What does this tell you about the filter matrix?",
+      "options": [
+        "It has rank 1, so its output is 1-dimensional",
+        "It is invertible",
+        "It preserves all information",
+        "It maps to a 2D output"
+      ],
+      "correct_option": "It has rank 1, so its output is 1-dimensional",
+      "explanation": "Step 1: A rank-1 filter has column space = 1D line, meaning the output lives along a single direction. Step 2: The null space captures all image patterns that are annihilated — they contribute nothing to the output. Step 3: This is why rank-1 filters extract only one feature: the rank directly quantifies the information capacity of the filter, connecting the four-subspace framework to practical signal processing."
+    },
+    {
+      "id": "M4Q1R2",
+      "question": "In finance, a single-factor model explains all stock returns using just one underlying factor like overall market movement. What is the rank of the covariance matrix in this model?",
+      "options": [
+        "0",
+        "1",
+        "Equal to the number of stocks",
+        "Infinite"
+      ],
+      "correct_option": "1",
+      "explanation": "Step 1: All stock returns are driven by one common factor, so all return vectors are collinear — multiples of the single factor direction. Step 2: The covariance matrix captures relationships between stocks; with one factor, all correlations collapse to one direction, giving rank 1. Step 3: The column space (range of the covariance) is a line representing the single market factor — this is how rank quantifies the effective dimensionality of financial risk models."
+    },
+    {
+      "id": "M4Q1R3",
+      "question": "A simple lever applies force along one direction only — the line from fulcrum to the point of application. The mechanical system has rank 1 because it can only transmit force in that single direction. What is the null space of this system?",
+      "options": [
+        "The direction perpendicular to the lever arm",
+        "The lever arm direction itself",
+        "The entire 2D plane",
+        "Just the origin"
+      ],
+      "correct_option": "The direction perpendicular to the lever arm",
+      "explanation": "Step 1: The lever transmits force along one direction (column space, rank 1). Step 2: Forces perpendicular to the lever arm produce no torque and are completely lost — they map to zero. Step 3: This perpendicular direction is the null space: inputs along it produce zero output. Understanding the null space in mechanical systems tells engineers which forces are wasted, directly connecting subspace theory to mechanism design."
+    },
+    {
+      "id": "M4Q1R4",
+      "question": "A temperature sensor network has 4 sensors but only 2 independent temperature zones to monitor. The sensor reading matrix has rank 2. How many sensors are providing redundant information?",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "4"
+      ],
+      "correct_option": "2",
+      "explanation": "Step 1: Rank 2 means only 2 independent measurement directions exist. Step 2: By Rank-Nullity, nullity = 4 - 2 = 2. Step 3: The 2D null space represents the 2 redundant sensor combinations that add no new information — their readings are linear combinations of the independent sensors. Identifying this redundancy through rank and nullity is essential for efficient sensor network design."
+    },
+    {
+      "id": "M4Q1R5",
+      "question": "In audio engineering, a rank-1 mixing matrix can only blend two channels into one output. If you want to preserve both left and right stereo channels independently, what rank mixing matrix do you need?",
+      "options": [
+        "Rank 0",
+        "Rank 1",
+        "Rank 2",
+        "Any rank works"
+      ],
+      "correct_option": "Rank 2",
+      "explanation": "Step 1: Preserving two independent channels requires a 2-dimensional column space. Step 2: A rank-1 matrix collapses both channels onto a single line — stereo information is lost. Step 3: A rank-2 matrix has a 2D column space, allowing both left and right channels to survive independently. This directly illustrates how rank determines the information-carrying capacity of a mixing system."
+    },
+    {
+      "id": "M4Q1R6",
+      "question": "A factory produces two products using three machines. The production matrix has rank 2, meaning the three machines can collectively produce 2 independent product combinations. What happens to the third machine's contribution?",
+      "options": [
+        "It doubles the output",
+        "It is redundant — its output is a combination of the other two",
+        "It reduces the rank",
+        "It adds a new dimension to the output"
+      ],
+      "correct_option": "It is redundant — its output is a combination of the other two",
+      "explanation": "Step 1: Rank 2 with 3 machines means dim(N(Aᵀ)) = 3 - 2 = 1. Step 2: The left null space captures the dependency: the third machine's output is a linear combination of the other two. Step 3: This redundancy is precisely what rank reveals — by computing rank, manufacturers can identify and potentially remove redundant machines without changing production capability, a direct application of the four-subspace framework."
+    }
+  ]
+}

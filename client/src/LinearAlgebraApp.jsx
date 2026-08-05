@@ -51,6 +51,17 @@ const MISSIONS = [
       { emoji: '🌳', title: 'Tree Growth', equation: 'Height = 50 + 20x', story: 'A sapling is planted at a height of 50 cm. Each year it grows by 20 cm. After 1 year it is 70 cm tall, after 2 years it is 90 cm, and the growth continues at this steady rate. The starting height is the y-intercept.', question: 'Using the growth rate shown in the graph, what will be the tree\'s height after 5 years of growth?', answer: '150' },
       { emoji: '🎂', title: 'Bakery', equation: 'Total = 500 + 200x', story: 'A bakery charges Rs500 for a basic cake order (covering decoration and packaging) plus Rs200 per kilogram of cake. A 1 kg cake costs Rs700, a 2 kg cake costs Rs900. The relationship between weight and total cost is a straight line.', question: 'What type of mathematical function describes the relationship between cake weight and total cost — is it linear, quadratic, or something else?', answer: 'linear' },
       { emoji: '✈️', title: 'Flight', equation: 'Total = 2500 + 5x', story: 'A airline charges Rs2500 as a base ticket price plus Rs5 per kilometre of distance travelled. A short 100 km hop costs Rs3000, while a longer 200 km flight costs Rs3500. The longer the route, the higher the fare.', question: 'Looking at the graph, what flight distance would give a total fare of Rs3500? Trace from the y-value to the line and down to the x-axis.', answer: '200' },
+      { emoji: '📈', title: 'Algorithmic Trading & Leverage Ratios', equation: 'A = 3B', type: 'mcq', concept: 'Proportionality & Linearity through Origin', story: 'Two automated crypto trading bots, Bot Alpha (A) and Bot Beta (B), execute trades simultaneously. Bot Alpha is programmed to trade with a leverage multiplier that makes its cumulative profit always exactly 3 times that of Bot Beta (A = 3B). If you record their weekly profits (Bk, Ak) starting from day 0, how will these data points appear on a Cartesian coordinate plane?', question: 'How will these data points appear on a Cartesian coordinate plane?', options: ['A horizontal line given by y = 3', 'A straight line passing through the origin (0,0) with a slope of 3', 'A parabola opening upwards starting at (1, 3)', 'A circle centered at (0,0) with radius 3'], answer: 'A straight line passing through the origin (0,0) with a slope of 3', explanation: 'Since both bots start at zero profit at week 0 (0,0), and A = 3B, all coordinates (Bk, Ak) satisfy y = 3x. This forms a ray/line starting at the origin with a constant slope m = 3.' },
+      { emoji: '🤖', title: 'Robotics & Gear Train Ratios', equation: 'M1 = 2.5 × M2', type: 'numerical', concept: 'Linear Scaling Vectors', story: 'A dual-motor drive system in an autonomous rover uses a gearbox where Motor 1 (M1) rotates at 2.5 times the speed of Motor 2 (M2), such that M1 = 2.5 · M2. If Motor 2 has completed 18 full revolutions, how many revolutions M1 has Motor 1 completed?', question: 'How many revolutions has Motor 1 completed?', answer: '45', explanation: 'Since M1 = 2.5 · M2, substituting M2 = 18 gives M1 = 2.5 × 18 = 45. The point (18, 45) lies on the vector line y = 2.5x passing through the origin.' },
+      { emoji: '⚗️', title: 'Chemical Engineering Stoichiometry', equation: 'H2 = 3 × N2', type: 'mcq', concept: 'Constant Ratio Constraints', story: 'In an industrial ammonia synthesis plant, Nitrogen (N2) and Hydrogen (H2) react in a fixed 1:3 stoichiometric ratio (H2 = 3 N2). Which equation defines the operational trajectory line on which all hourly mass flow data points (N2, H2) must lie on a 2D graph?', question: 'Which equation defines the trajectory line for all data points?', options: ['H2 = 3 N2', 'N2 = 3 H2', 'H2 = N2 + 3', 'H2 = 3 N2 + 1'], answer: 'H2 = 3 N2', explanation: 'For zero reactants, zero product is formed (0,0). For every 1 unit of N2, 3 units of H2 are consumed. Thus, the relationship is y = 3x, or H2 = 3 N2.' },
+      { emoji: '🖥️', title: 'Computer Graphics Aspect Ratio Scaling', equation: 'W = m × H', type: 'numerical', concept: 'Slope of a Proportional Line', story: 'A game graphics engine scales texture dimensions while maintaining a fixed 16:9 aspect ratio. The relationship between Width (W) and Height (H) is given by W = m · H. What is the value of the slope m rounded to 2 decimal places?', question: 'What is the value of the slope m (rounded to 2 decimal places)?', answer: '1.78', explanation: 'The ratio of Width to Height is 16 / 9 ≈ 1.7777.... Rounding to 2 decimal places gives 1.78. Plotting Width vs Height yields a line W = 1.78 H passing through (0,0).' },
+      { emoji: '🔌', title: 'EV Charging & Renewable Energy Output', equation: 'E = rate × t', type: 'mcq', concept: 'Physical Meaning of the Origin (0,0)', story: 'A solar EV charging station charges two batteries simultaneously. Station A delivers energy at 50 kWh/hr, while Station B delivers energy at 25 kWh/hr. If we plot total energy delivered (EB, EA) over time, why MUST the resulting line pass through the origin (0,0)?', question: 'Why MUST the resulting line pass through the origin (0,0)?', options: ['Because Station A always charges at a constant rate of 0 kWh', 'Because at time t = 0 hours, both stations have delivered exactly 0 kWh of energy', 'Because the slope of the charging curve is zero', 'Because Station B charges twice as fast as Station A'], answer: 'Because at time t = 0 hours, both stations have delivered exactly 0 kWh of energy', explanation: 'At initial state t = 0, no energy has been transferred, yielding (0,0). Any direct proportional relationship where output depends on elapsed time starts at (0,0).' },
+      { emoji: '🍳', title: 'Recipe Scaling (Flour & Sugar)', equation: 'y = 2x', type: 'mcq', concept: 'Direct Proportionality', story: 'A recipe needs flour and sugar in the ratio 2:1 (flour = 2 × sugar). If you plot cups-of-sugar (x) vs cups-of-flour (y) for different batch sizes, how does the graph look?', question: 'How does the graph of sugar vs flour look?', options: ['A straight line through the origin', 'A curve', 'A circle', 'Randomly scattered points'], answer: 'A straight line through the origin', explanation: 'Flour = 2×Sugar is exactly the same structure as R=2L. Zero sugar means zero flour needed (origin included), and the ratio stays fixed for any batch size, so all (sugar, flour) points lie on one straight line through the origin.' },
+      { emoji: '🚗', title: 'Car Distance vs Time', equation: 'y = 60x', type: 'mcq', concept: 'Constant Speed Proportionality', story: 'A car travels at a constant 60 km/h. If you plot distance traveled (y) vs time elapsed (x), what does the graph look like?', question: 'What does the distance vs time graph look like?', options: ['A straight line through the origin with slope 60', 'A curve that flattens over time', 'A straight line that does NOT pass through the origin', 'A parabola'], answer: 'A straight line through the origin with slope 60', explanation: 'Distance = speed × time = 60×time is a direct proportionality: at time=0, distance=0 (origin included), and the constant speed acts exactly like our constant 2 in R=2L.' },
+      { emoji: '💰', title: 'Simple Interest vs Principal', equation: 'y = 0.15x', type: 'mcq', concept: 'Fixed Rate Proportionality', story: 'Simple interest is calculated as Interest = 0.15 × Principal (rate × time = 15% fixed). If you plot interest earned (y) vs principal invested (x) across different depositors, what does the graph look like?', question: 'What does the interest vs principal graph look like?', options: ['A straight line through the origin', 'An exponential curve', 'A straight line NOT through the origin', 'A circle'], answer: 'A straight line through the origin', explanation: 'With rate and time held constant, Interest is a fixed multiple of Principal — exactly the R=2L pattern. A depositor with ₹0 principal earns ₹0 interest, so the origin is included.' },
+      { emoji: '💱', title: 'Currency Exchange (USD to INR)', equation: 'y = 83x', type: 'mcq', concept: 'Exchange Rate as Slope', story: 'If 1 US Dollar always converts to ₹83, and you plot Rupees (y) vs Dollars (x) for various transaction amounts, what does the graph look like?', question: 'What does the currency conversion graph look like?', options: ['A straight line through the origin, slope = 83', 'A random scatter of points', 'A step function', 'A hyperbola'], answer: 'A straight line through the origin, slope = 83', explanation: 'Rupees = 83 × Dollars is direct proportionality with a fixed exchange rate, mirroring R=2L where 83 plays the role of 2. Converting $0 always gives ₹0, keeping the origin on the line.' },
+      { emoji: '🏭', title: 'Factory Material Cost (No Fixed Cost)', equation: 'y = 10x', type: 'mcq', concept: 'Zero Intercept Proportionality', story: 'A factory\'s raw material cost is ₹10 per unit produced, with NO fixed setup cost. If you plot total material cost (y) vs units produced (x), what does the graph look like?', question: 'What does the cost vs units graph look like?', options: ['A straight line through the origin', 'A line with a positive y-intercept', 'A curve that bends upward sharply', 'Cannot be determined'], answer: 'A straight line through the origin', explanation: "'No fixed cost' means producing 0 units costs ₹0 — this is the origin condition. Since cost per unit is constant, total cost = 10 × units is a direct proportionality, exactly like R=2L." },
+      { emoji: '🚕', title: 'Taxi Fare with Base Charge', equation: 'y = 10x + 50', type: 'mcq', concept: 'Non-Origin Linear Relationship', story: 'A taxi charges a FIXED base fare of ₹50 PLUS ₹10 per km. If you plot total fare (y) vs distance traveled (x), what does the graph look like?', question: 'What does the taxi fare graph look like?', options: ['A straight line that does NOT pass through the origin', 'A straight line through the origin', 'A curve', 'A circle'], answer: 'A straight line that does NOT pass through the origin', explanation: 'Fare = 10×distance + 50. At distance=0, fare=50≠0 — the base fare shifts the line up and off the origin, even though the line is still perfectly straight. This is a deliberate contrast case to sharpen the distinction.' },
     ],
     solveExplanation: 'Ram = 2xLakshman. Points are (2L,L)=L(2,1). Scalar multiples lie on a line through the origin.'
   },
@@ -82,6 +93,11 @@ const MISSIONS = [
       { emoji: '📍', title: 'GPS Path', equation: '', story: 'Your phone\'s GPS records waypoints as you walk. If all the recorded points happen to lie on a single straight line, that means you were walking in a perfectly straight direction the whole time. GPS apps use this to detect whether you deviated from a straight path.', question: 'What does it mean for GPS waypoints to be collinear, and what does that tell us about the path you walked?', answer: 'on same line' },
       { emoji: '📐', title: 'Architecture', equation: '', story: 'When an architect designs a building, the centres of all supporting columns must line up perfectly in a straight row. If even one column is slightly off the line, the structural load distribution becomes uneven, which could cause serious problems.', question: 'Why is it critical for architects to verify that column centre points are collinear during building design?', answer: 'alignment' },
       { emoji: '🛤️', title: 'Railway Tracks', equation: '', story: 'Railway sleepers (the horizontal beams under the rails) must be perfectly collinear — lying along a straight line — for the train to travel smoothly. If the sleepers are misaligned, the rails will not be straight, and the train could derail.', question: 'What dangerous consequence could occur if railway sleepers are not collinear?', answer: 'derailment' },
+      { emoji: '🏭', title: 'CNC Machining & Collinearity', equation: 'y = x - 1', type: 'mcq', concept: 'Coordinate Tracking & Spatial Patterns', story: 'A CNC laser cutter starts at the origin (0,0). It cuts a metal sheet by moving 3 cm Right and 2 cm Up to drill Hole A. From Hole A, it moves 2 cm Right and 2 cm Up to drill Hole B. From Hole B, it moves 2 cm Right and 2 cm Up to drill Hole C. Are Holes A, B, and C on a straight line, and if so, what is the slope of that line?', question: 'Are Holes A, B, and C on a straight line, and what is the slope?', options: ['Yes, the slope is 1', 'Yes, the slope is 2', 'No, they form a curve', 'Yes, the slope is 0.5'], answer: 'Yes, the slope is 1', explanation: 'Hole A is at (3,2). Hole B is at (5,4). Hole C is at (7,6). Slope between A and B = (4-2)/(5-3) = 1. Slope between B and C = (6-4)/(7-5) = 1. Equal slopes → collinear with slope 1.' },
+      { emoji: '🚁', title: 'Automated Drone Delivery Corridors', equation: 'y = 2x - 5', type: 'numerical', concept: 'Equation of an Emergent Line', story: 'A delivery drone maps its drops on a coordinate grid. Drop 1 is at (3, 1) km. It then flies 1 km East and 2 km North to Drop 2 at (4, 3). It repeats this exact relative movement for Drop 3 at (5, 5) and Drop 4 at (6, 7). These drop zones lie on a linear flight corridor given by y = mx + c. What is the value of the y-intercept c?', question: 'What is the value of the y-intercept c?', answer: '-5', explanation: 'The coordinates are (3,1), (4,3), (5,5). Slope m = (3-1)/(4-3) = 2. Using y - 1 = 2(x - 3) → y = 2x - 6 + 1 → y = 2x - 5. The y-intercept c = -5.' },
+      { emoji: '🎮', title: 'Computer Graphics & Pixel Raycasting', equation: 'y = x - 1', type: 'mcq', concept: 'Staircase Approximation of Continuous Lines', story: 'In a video game engine, a laser beam is drawn on a pixel grid using a staircase algorithm. If the algorithm highlights the centers of pixels at (2,1), (3,2), and (4,3), what is the exact mathematical equation of the continuous line passing through these points?', question: 'What is the equation of the continuous line?', options: ['y = x + 1', 'y = x - 1', 'y = 2x - 1', 'y = x'], answer: 'y = x - 1', explanation: 'Points are (2,1), (3,2), (4,3). Slope = (2-1)/(3-2) = 1. Using y = mx + c with point (2,1): 1 = 1(2) + c → c = -1. Equation: y = x - 1.' },
+      { emoji: '🚕', title: 'Subway Tunnel Path Planning', equation: 'y = x - 1', type: 'numerical', concept: 'Displacement Vectors vs Grid Paths', story: 'A taxi in a grid-city drives 2 blocks East and 1 block North to drop Passenger 1. From there, it goes 1 block East and 1 block North for Passenger 2, and repeats this for Passenger 3. If civil engineers want to dig a perfectly straight subway tunnel connecting these three drop-off points, what would be the slope of this tunnel on the map?', question: 'What is the slope of the subway tunnel?', answer: '1', explanation: 'Passenger 1 is at (2,1). Passenger 2 is at (3,2). Passenger 3 is at (4,3). Slope m = (2-1)/(3-2) = 1.' },
+      { emoji: '🔧', title: 'Assembly Line Robotics Trajectory', equation: 'y = 1.5x + 1', type: 'numerical', concept: 'Predicting Future State on a Trajectory', story: 'An assembly line robot places structural rivets on a chassis. Rivet 1 is placed at (2, 4) cm. Rivet 2 is at (4, 7) cm. Rivet 3 is at (6, 10) cm. Assuming the robot continues this exact linear trajectory, at what exact y-coordinate (in cm) will Rivet 5 be placed if its x-coordinate is 10 cm?', question: 'What is the y-coordinate of Rivet 5 at x = 10 cm?', answer: '16', explanation: 'Pattern: x increases by 2, y increases by 3 each step. Rivet 4: (8,13). Rivet 5: (10,16). Or use y = 1.5x + 1: y = 1.5(10) + 1 = 16.' },
     ],
     solveExplanation: 'B=(2,1), C=(3,2), D=(4,3). Slope=1. All satisfy y=x-1 -> collinear!'
   },
@@ -115,6 +131,11 @@ const MISSIONS = [
       { emoji: '🛒', title: 'Unit Pricing', equation: '', story: 'When you buy items at a fixed price per unit, the total cost equals the price times the quantity. If you buy zero items, you pay nothing — the cost is zero. There is no fixed charge, so the cost line goes through the origin.', question: 'Why does the unit pricing line pass through the origin (0,0)?', answer: 'yes' },
       { emoji: '🏃', title: 'Distance', equation: '', story: 'Distance travelled equals speed multiplied by time. At time zero (the moment you start), you have covered zero distance. The starting point is the origin, and the slope of the distance-time graph represents your speed.', question: 'In a distance-time graph, what does the slope of the line represent in physical terms?', answer: 'speed' },
       { emoji: '💧', title: 'Water Flow', equation: '', story: 'Water flows out of a tank at a constant rate. The volume dispensed equals the flow rate multiplied by time. At time zero, the tank has dispensed nothing — the volume is zero. The line starts at the origin.', question: 'Why does the water flow volume line pass through the origin (0,0)?', answer: 'yes' },
+      { emoji: '🌐', title: 'Network Bandwidth & Data Transfer Rates', equation: 'y = mx', type: 'mcq', concept: 'Comparing Slopes as Rates of Change', story: 'A network engineer plots the total data transferred (y, in GB) against time (x, in hours) for three different servers. Server A follows y=x, Server B follows y=2x, and Server C follows y=10x. Visually on a graph, what does the steepness of Server C\'s line represent in the real world compared to the others?', question: 'What does the steepness of Server C\'s line represent?', options: ['Server C has a higher network latency.', 'Server C transfers data at a much faster rate (higher bandwidth).', 'Server C started transferring data earlier than the others.', 'Server C has reached its maximum data capacity.'], answer: 'Server C transfers data at a much faster rate (higher bandwidth).', explanation: 'The slope of the line represents the rate of data transfer (GB/hour). A steeper line (m=10) means more data (y) is transferred in the same amount of time (x), indicating a higher bandwidth.' },
+      { emoji: '🤖', title: 'Autonomous Vehicle Speed Profiling', equation: 'y = 10x vs y = x', type: 'numerical', concept: 'Distance-Time Graphs and Steepness', story: 'Three drones are flying at constant speeds. Their distance from the base (y, in meters) over time (x, in seconds) is plotted as y=x, y=2x, and y=10x. How many meters ahead is the fastest drone compared to the slowest drone exactly 5 seconds after takeoff?', question: 'How many meters ahead is the fastest drone at 5 seconds?', answer: '45', explanation: 'The fastest drone follows y=10x, so at x=5, distance = 50 meters. The slowest drone follows y=x, so at x=5, distance = 5 meters. Difference = 50 - 5 = 45 meters.' },
+      { emoji: '💱', title: 'Currency Exchange & Conversion Graphs', equation: 'y = 10x', type: 'mcq', concept: 'Proportionality Constants & Value Inverse', story: 'A financial analyst plots currency conversion graphs where the x-axis is USD and the y-axis is the converted foreign currency. If Currency P follows y=x, Currency Q follows y=2x, and Currency R follows y=10x, which statement is mathematically true regarding their exchange values?', question: 'Which statement about exchange values is mathematically true?', options: ['Currency R is the strongest currency because it has the steepest line.', '1 USD buys 10 units of Currency R, meaning Currency R is actually weaker per unit than USD.', 'Currency P fluctuates the least over time.', 'Currency Q has a constant inflation rate of 2%.'], answer: '1 USD buys 10 units of Currency R, meaning Currency R is actually weaker per unit than USD.', explanation: 'The equation y=10x means for every 1 unit of x (USD), you get 10 units of y (Currency R). This means it takes more of Currency R to equal 1 USD, representing a mathematically weaker per-unit value despite having the steepest slope.' },
+      { emoji: '🏭', title: 'Factory Production Scaling', equation: 'y = 10x', type: 'numerical', concept: 'Finding the Multiplier (Slope)', story: 'A factory visualizes its output using a graph where the x-axis is hours worked and the y-axis is units produced. Line 1 is y=x (legacy machine) and Line 2 is y=2x (standard machine). A new experimental machine produces 120 units in 12 hours. What is the slope of the new machine\'s line?', question: 'What is the slope of the new machine\'s line?', answer: '10', explanation: 'The line passes through (0,0) and (12, 120). Slope m = 120/12 = 10. Its equation is y = 10x.' },
+      { emoji: '💊', title: 'Pharmacology & Concentration Ratios', equation: 'y = 10x', type: 'mcq', concept: 'Visualizing Ratios without Computation', story: 'A pharmacist mixes three solutions of medication. On a graph comparing the volume of active ingredient (y) to the total volume of water (x), the three solutions correspond to y=x, y=2x, and y=10x. How can you immediately tell which solution is the most concentrated without doing any math?', question: 'How do you identify the most concentrated solution from the graph?', options: ['The most concentrated solution has the line that is closest to the x-axis.', 'The most concentrated solution has the line that rises the fastest (steepest).', 'The most concentrated solution is the one that crosses the y-intercept at the highest point.', 'Concentration cannot be determined visually from these lines alone.'], answer: 'The most concentrated solution has the line that rises the fastest (steepest).', explanation: 'Concentration is the ratio of active ingredient to water (y/x). Since the slope m = y/x, the line with the steepest slope (y=10x) represents the highest ratio of active ingredient per unit of water.' },
     ],
     solveExplanation: 'When x=0, y=a(0)=0. So (0,0) satisfies the equation for any a. The origin is always on y=ax!'
   },
@@ -148,6 +169,9 @@ const MISSIONS = [
       { emoji: '📱', title: 'Phone Plan', equation: 'Total = 199 + 1x', story: 'Your phone plan costs Rs199 per month as a fixed rental fee, plus Rs1 per extra minute. Even if you do not make a single extra call (x=0), you still pay Rs199. The y-intercept on the graph shows this fixed monthly charge.', question: 'What is the y-intercept value on the graph, and what does it represent in this phone plan?', answer: '199' },
       { emoji: '⚡', title: 'Electricity', equation: 'Total = 200 + 8x', story: 'Your electricity bill has a fixed charge of Rs200 per month, plus Rs8 per unit consumed. Even if you use zero units of electricity, you still owe Rs200. The y-intercept represents this unavoidable fixed charge.', question: 'What is the y-intercept value on the graph, and what does it represent for this electricity bill?', answer: '200' },
       { emoji: '🌳', title: 'Tree Height', equation: 'Height = 50 + 20x', story: 'A sapling is planted at a height of 50 cm and grows 20 cm per year. At year zero (when it is first planted), the tree is already 50 cm tall. The y-intercept shows this initial height, which is why the line does not start at the origin.', question: 'Does this tree growth line pass through the origin? Why or why not?', answer: 'no' },
+      { emoji: '☁️', title: 'Cloud Computing Costs & Fixed Fees', equation: 'y = 0.02x + 10', type: 'mcq', concept: 'Y-Intercept as a Fixed Base Cost', story: 'A cloud hosting platform charges $0.05 per GB of storage (y = 0.05x). A competitor charges $0.02 per GB plus a flat $10 monthly account fee (y = 0.02x + 10). If you plot both billing models (Storage vs. Cost), why does the competitor\'s line fail to pass through the origin (0,0)?', question: 'Why does the competitor\'s line fail to pass through the origin?', options: ['Because the competitor charges a lower rate per GB.', 'Because there is a baseline cost of $10 even if absolutely zero data is stored.', 'Because the slope of the competitor\'s line is less than 1.', 'Because cloud storage cannot theoretically be zero.'], answer: 'Because there is a baseline cost of $10 even if absolutely zero data is stored.', explanation: 'The origin (0,0) represents zero usage = zero cost. The equation y = 0.02x + 10 has a constant term (+10), meaning when x = 0, y = 10. This constant term represents a fixed initial fee, permanently shifting the entire line upward off the origin.' },
+      { emoji: '🎈', title: 'Atmospheric Science & Launch Altitude', equation: 'y = 5x + 150', type: 'numerical', concept: 'Physical Meaning of the Constant Term', story: 'A weather balloon\'s altitude in meters is tracked over time (x, in seconds). The trajectory data forms a line given by y = 5x + c. If the graph of this equation intersects the y-axis at exactly 150, what was the physical launch altitude of the balloon in meters?', question: 'What was the physical launch altitude of the balloon?', answer: '150', explanation: 'The y-intercept occurs where x = 0. Physically, x = 0 represents the exact moment of launch. Since the line does not pass through the origin (0,0) but rather (0,150), it means the balloon was launched from an initial elevation of 150 meters, not sea level.' },
+      { emoji: '🚖', title: 'Ride-Sharing Algorithms & Base Fares', equation: 'y = 2.5x + 3.5', type: 'numerical', concept: 'Calculating Initial States from Equations', story: 'A ride-sharing app calculates the total fare y for a trip of x miles. A plotted graph of thousands of trips yields the perfectly straight line y = 2.5x + 3.5. What is the exact cost in dollars if a passenger gets into the car but cancels the trip before driving anywhere (0 miles)?', question: 'What is the exact cost if the passenger cancels at 0 miles?', answer: '3.5', explanation: 'A trip of 0 miles means x = 0. Plugging into y = 2.5(0) + 3.5 gives y = 3.5. The 3.5 is the y-intercept, representing the flag drop or base fare required just to start the ride.' },
     ],
     solveExplanation: 'When x=0, y=2(0)+1=1. The constant term is the y-intercept - where the line meets the y-axis.'
   },
@@ -178,6 +202,8 @@ const MISSIONS = [
     realLife: [
       { emoji: '🏃', title: 'Running Speed', equation: '', story: 'When you go for a run, your distance from home can be modelled as a linear function. The slope of the line represents your running speed — a steeper line means you run faster. The y-intercept represents how far ahead you started from home (your initial position).', question: 'In a distance-time graph for a runner, what does the slope of the line physically represent?', answer: 'speed' },
       { emoji: '🏦', title: 'Savings', equation: '', story: 'Every week you save a fixed amount of money. Your total savings over time form a straight line. The slope shows how much you save each week, while the y-intercept shows how much money you already had saved before you started this weekly plan.', question: 'In a savings graph over time, what does the y-intercept value represent?', answer: 'initial savings' },
+      { emoji: '🌡️', title: 'Thermodynamics & Absolute Zero', equation: 'K = C + 273.15', type: 'mcq', concept: 'Offset in Measurement Scales', story: 'When graphing the relationship between the Kelvin and Celsius temperature scales, the mathematical equation is K = C + 273.15. If you plot Celsius on the x-axis and Kelvin on the y-axis, why doesn\'t the resulting straight line pass through the origin (0,0)?', question: 'Why doesn\'t the Celsius-Kelvin line pass through the origin?', options: ['Because temperature scales do not follow linear relationships.', 'Because zero degrees Celsius does not represent an absolute absence of heat energy.', 'Because the slope of the line is 273.15.', 'Because Kelvin can be negative while Celsius cannot.'], answer: 'Because zero degrees Celsius does not represent an absolute absence of heat energy.', explanation: 'Passing through (0,0) would mean 0°C = 0K. However, Celsius is an offset scale where zero is simply the freezing point of water, not absolute zero. The + 273.15 is the offset that shifts the line away from the origin.' },
+      { emoji: '🤖', title: 'Machine Learning & Neural Network Biases', equation: 'Output = (Weight × Input) + Bias', type: 'mcq', concept: 'Mathematical Shifting of Linear Functions', story: 'In a simple machine learning model, an artificial neuron calculates its activation output using the formula: Output = (Weight × Input) + Bias. Geometrically, if an engineer intentionally sets the Bias term to exactly zero, what happens to the line representing this neuron on an Input-vs-Output graph?', question: 'What happens to the line if Bias is set to zero?', options: ['The line becomes completely horizontal.', 'The line becomes completely vertical.', 'The line shifts to pass perfectly through the origin (0,0).', 'The line becomes a parabola.'], answer: 'The line shifts to pass perfectly through the origin (0,0).', explanation: 'The formula is a standard linear equation y = mx + c, where Weight is the slope (m) and Bias is the y-intercept (c). Setting Bias to 0 changes the equation to y = mx, which represents a direct proportionality that must pass through the origin (0,0).' },
     ],
     solveExplanation: 'Slope a = steepness. Intercept b = where line crosses y-axis. Together they define every line!'
   },
@@ -1803,7 +1829,7 @@ function GGBEmbed({ missionId }) {
         const applet = new window.GGBApplet(params);
         applet.inject(containerId);
         appletRef.current = applet;
-      } catch (e) {
+      } catch {
         if (!cancelled) setGgbFailed(true);
       }
     };
@@ -1816,6 +1842,7 @@ function GGBEmbed({ missionId }) {
 
     const timer = setTimeout(tryInject, 400);
     return () => { cancelled = true; clearTimeout(timer); el.innerHTML = ''; };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [missionId]);
 
   useEffect(() => {
@@ -1842,7 +1869,7 @@ function GGBEmbed({ missionId }) {
         try {
           if (typeof api.setWidth === 'function') api.setWidth(targetW);
           if (typeof api.setHeight === 'function') api.setHeight(targetH);
-        } catch (e) {}
+        } catch { /* ignored */ }
       };
       setTimeout(retryResize, 100);
     });
@@ -1870,7 +1897,7 @@ function parseLinearParams(story) {
   if (pat1) return { m: +pat1[1], b: +pat1[2] };
   const pat2 = story.match(/=\s*(\d+(?:\.\d+)?)\s*\+\s*(\d+(?:\.\d+)?)\s*x/i);
   if (pat2) return { m: +pat2[2], b: +pat2[1] };
-  const pat3 = story.match(/=\s*(\d+(?:\.\d+)?)\s*x\s*[\.\s,;]/);
+  const pat3 = story.match(/=\s*(\d+(?:\.\d+)?)\s*x\s*[.\s,;]/);
   if (pat3) return { m: +pat3[1], b: 0 };
   const pat4 = story.match(/(\d+(?:\.\d+)?)\D*\+\s*\D*(\d+(?:\.\d+)?)\D*\//);
   if (pat4) return { m: +pat4[2], b: +pat4[1] };
@@ -1884,7 +1911,7 @@ function parseLinearParams(story) {
   if (pat8) return { m: +pat8[2], b: +pat8[1] };
   const pat9 = story.match(/=-\s*(\d+(?:\.\d+)?)\s*[a-z]\s*\+\s*(\d+(?:\.\d+)?)/i);
   if (pat9) return { m: -(+pat9[1]), b: +pat9[2] };
-  const pat11 = story.match(/=\s*(\d+(?:\.\d+)?)\s*x(?!\s*[\+\-])/i);
+  const pat11 = story.match(/=\s*(\d+(?:\.\d+)?)\s*x(?!\s*[-+])/i);
   if (pat11) return { m: +pat11[1], b: 0 };
   return null;
 }
@@ -2008,6 +2035,11 @@ function generateMqExplanation(q) {
   else if (t === 'm1_slope') { step('Formula', `Slope = (y₂−y₁)/(x₂−x₁).`); step('Compute', `(${d.y2}−${d.y1})/(${d.x2}−${d.x1}) = ${d.m}.`); step('Answer', `Slope = ${ans}`); }
   else if (t === 'm1_notprop') { step('Concept', `y = kx with no constant term.`); step('Fix', `Set b = 0.`); step('Answer', `b = ${ans}`); }
   else if (t === 'm1_inverse') { step('Set up', `${d.a}x = ${d.y}.`); step('Solve', `x = ${d.y}/${d.a} = ${d.x}.`); step('Answer', `x = ${ans}`); }
+  else if (t === 'm1_app_trading') { step('Identify', 'Bot Alpha profit A = 3 × Bot Beta profit B.'); step('Relationship', 'This is a direct proportion: A = 3B.'); step('Graph', 'At week 0, both profits are 0 → point (0,0). All points satisfy y = 3x.'); step('Answer', 'A straight line through the origin with slope 3.'); }
+  else if (t === 'm1_app_gear') { step('Identify', 'M1 = 2.5 × M2 (Motor 1 is 2.5 times Motor 2).'); step('Substitute', 'M2 = 18 revolutions.'); step('Compute', 'M1 = 2.5 × 18 = 45.'); step('Answer', `Motor 1 completed ${ans} revolutions.`); }
+  else if (t === 'm1_app_stoich') { step('Identify', 'N2 and H2 react in a 1:3 ratio.'); step('Equation', 'For every 1 unit of N2, 3 units of H2 are consumed.'); step('Graph', 'At zero reactants: (0,0). The line is H2 = 3 × N2.'); step('Answer', 'H2 = 3 N2.'); }
+  else if (t === 'm1_app_aspect') { step('Identify', 'Width and Height maintain 16:9 ratio.'); step('Compute', 'm = W/H = 16/9 ≈ 1.7777...'); step('Round', 'Rounding to 2 decimal places: 1.78.'); step('Answer', `Slope m = ${ans}.`); }
+  else if (t === 'm1_app_ev') { step('Identify', 'Two stations deliver energy over time.'); step('Initial state', 'At t = 0 hours, no energy has been delivered.'); step('Graph', 'Both E_A and E_B start at 0 → point (0,0).'); step('Answer', 'At t=0, both stations have delivered 0 kWh, so the line passes through the origin.'); }
   else if (t === 'm2_slope') { step('Compute', `(${d.y1}−0)/(${d.x1}−1) = ${d.y1}.`); step('Answer', `Slope = ${ans}`); }
   else if (t === 'm2_collinear') { step('Check', `Slope (2,1)→(3,2)=1; (3,2)→(4,3)=1.`); step('Conclusion', `Same slopes → collinear.`); step('Answer', `${ans} (Yes)`); }
   else if (t === 'm2_next') { step('Pattern', `x+1, y+1 each step.`); step('Extend', `(4,3) → (5,4).`); step('Answer', `${ans}`); }
@@ -2017,6 +2049,10 @@ function generateMqExplanation(q) {
   else if (t === 'm2_area') { step('Formula', `½|x₁(y₂−y₃)+x₂(y₃−y₁)+x₃(y₁−y₂)|.`); step('Answer', `Area = ${ans}`); }
   else if (t === 'm2_extend') { step('Slope', `(${d.m*d.x0}−${d.m*(d.x0-1)})/((${d.x0+1})−${d.x0}) = ${d.m}.`); step('Answer', `Slope = ${ans}`); }
   else if (t === 'm2_perpslope') { step('Rule', `m₁ × m₂ = −1.`); step('Compute', `−1/${d.m} = ${(-1/d.m).toFixed(4).replace(/\.?0+$/,'')}.`); step('Answer', `${ans}`); }
+  else if (t === 'm2_app_cnc') { step('Track', 'Hole A=(3,2), Hole B=(5,4), Hole C=(7,6).'); step('Slope A→B', '(4-2)/(5-3) = 2/2 = 1.'); step('Slope B→C', '(6-4)/(7-5) = 2/2 = 1.'); step('Conclusion', 'Equal slopes → collinear with slope 1.'); step('Answer', 'Yes, the slope is 1.'); }
+  else if (t === 'm2_app_raycast') { step('Points', '(2,1), (3,2), (4,3).'); step('Slope', '(2-1)/(3-2) = 1.'); step('Intercept', '1 = 1(2) + c → c = -1.'); step('Answer', 'Equation: y = x - 1.'); }
+  else if (t === 'm2_app_drone') { step('Points', '(3,1), (4,3), (5,5).'); step('Slope', 'm = (3-1)/(4-3) = 2.'); step('Solve', 'y - 1 = 2(x - 3) → y = 2x - 5.'); step('Answer', `y-intercept c = ${ans}.`); }
+  else if (t === 'm2_app_rivet') { step('Pattern', 'x+2, y+3 each step.'); step('Extend', 'Rivet 4: (8,13). Rivet 5: (10,16).'); step('Verify', 'y = 1.5x + 1 → y = 1.5(10) + 1 = 16.'); step('Answer', `Rivet 5 y-coordinate = ${ans} cm.`); }
   else if (t === 'm3_through') { step('Test', `y=${d.a}(0)=0.`); step('Answer', `${ans} (Yes)`); }
   else if (t === 'm3_yval') { step('Compute', `y = ${d.a}×${d.x} = ${d.a*d.x}.`); step('Answer', `y = ${ans}`); }
   else if (t === 'm3_not') { step('Test', `y=2(0)+1=1≠0.`); step('Answer', `${ans} (No)`); }
@@ -2026,6 +2062,11 @@ function generateMqExplanation(q) {
   else if (t === 'm3_intersect') { step('Set equal', `${d.a1}x = ${d.a2}x → x=0.`); step('Answer', `${ans}`); }
   else if (t === 'm3_proportional') { step('Definition', `k = slope = ${d.a}.`); step('Answer', `k = ${ans}`); }
   else if (t === 'm3_findx') { step('Solve', `${d.a}x = ${d.a*d.x} → x = ${d.x}.`); step('Answer', `x = ${ans}`); }
+  else if (t === 'm3_app_bandwidth') { step('Identify', 'Slope = rate of data transfer (GB/hour).'); step('Compare', 'y=x → 1 GB/hr, y=2x → 2 GB/hr, y=10x → 10 GB/hr.'); step('Conclusion', 'Steeper slope = faster transfer rate = higher bandwidth.'); step('Answer', 'Server C has the highest bandwidth.'); }
+  else if (t === 'm3_app_vehicle') { step('Identify', 'Fastest: y=10x. Slowest: y=x.'); step('Compute at t=5', 'Fastest: 10×5 = 50 m. Slowest: 1×5 = 5 m.'); step('Difference', '50 − 5 = 45 meters.'); step('Answer', `Fastest drone is ${ans} meters ahead.`); }
+  else if (t === 'm3_app_currency') { step('Identify', 'y=10x means 1 USD = 10 units of Currency R.'); step('Interpret', 'More units per USD = weaker per-unit value.'); step('Answer', 'Currency R is weaker per unit despite steepest slope.'); }
+  else if (t === 'm3_app_factory') { step('Points', '(0,0) and (12, 120).'); step('Slope', 'm = 120/12 = 10.'); step('Answer', `Slope = ${ans} (equation: y = 10x).`); }
+  else if (t === 'm3_app_pharma') { step('Identify', 'Slope m = y/x = concentration ratio.'); step('Compare', 'Steepest slope (y=10x) has highest concentration.'); step('Answer', 'The steepest line = most concentrated solution.'); }
   else if (t === 'm4_yint') { step('Compute', `y=${d.m}(0)+${d.b}=${d.b}.`); step('Answer', `y-int = ${ans}`); }
   else if (t === 'm4_atzero') { step('Compute', `y = ${d.b}.`); step('Answer', `y = ${ans}`); }
   else if (t === 'm4_shift') { step('Concept', `b=3 shifts up 3 units.`); step('Answer', `${ans}`); }
@@ -2035,6 +2076,9 @@ function generateMqExplanation(q) {
   else if (t === 'm4_parallel') { step('Compute', `|${d.b2}−${d.b1}| = ${Math.abs(d.b2-d.b1)}.`); step('Answer', `Distance = ${ans}`); }
   else if (t === 'm4_frompts') { step('Compute', `(${d.m*d.x+3}−3)/(${d.x}−0) = ${d.m}.`); step('Answer', `Slope = ${ans}`); }
   else if (t === 'm4_compare') { step('Diff', `(${d.b+1})−(${d.b}) = 1.`); step('Answer', `${ans}`); }
+  else if (t === 'm4_app_cloud') { step('Identify', 'Origin (0,0) = zero usage = zero cost.'); step('Compare', 'y=0.05x passes through (0,0); y=0.02x+10 does not.'); step('Reason', 'Constant term +10 = baseline cost shifting line upward.'); step('Answer', '$10 baseline fee at zero storage shifts the line off the origin.'); }
+  else if (t === 'm4_app_balloon') { step('Identify', 'y-intercept occurs where x = 0.'); step('Interpret', 'x = 0 = moment of launch.'); step('Read', 'Line intersects y-axis at 150.'); step('Answer', `Launch altitude = ${ans} meters (not sea level).`); }
+  else if (t === 'm4_app_rideshare') { step('Plug in', 'x = 0 → y = 2.5(0) + 3.5 = 3.5.'); step('Concept', 'y-intercept = base fare (flag drop).'); step('Answer', `Cancellation cost = $${ans}.`); }
   else if (t === 'm5_steep') { step('Compare', `|${d.m+2}| > |${d.m}|.`); step('Answer', `y=${d.m+2}x steeper`); }
   else if (t === 'm5_intercept') { step('Compute', `y = 0+${d.b} = ${d.b}.`); step('Answer', `y = ${ans}`); }
   else if (t === 'm5_zero') { step('Compute', `y = 0.`); step('Answer', `y = ${ans}`); }
@@ -2044,6 +2088,8 @@ function generateMqExplanation(q) {
   else if (t === 'm5_perp') { step('Compute', `${d.m1}×${d.m2}=${d.m1*d.m2}.`); step('Answer', `Product = ${ans}`); }
   else if (t === 'm5_model') { step('Compute', `${d.b}+${d.m}×${d.x}=${d.b+d.m*d.x}.`); step('Answer', `Total = ${ans}`); }
   else if (t === 'm5_intersect') { step('Concept', `Different slopes → exactly 1 intersection.`); step('Answer', `${ans}`); }
+  else if (t === 'm5_app_thermo') { step('Identify', 'K = C + 273.15.'); step('Check origin', 'At C=0, K=273.15 ≠ 0.'); step('Reason', 'Celsius is offset from absolute zero.'); step('Answer', '0°C is not the same as 0K — the line is shifted off the origin.'); }
+  else if (t === 'm5_app_mlbias') { step('Formula', 'Output = (Weight × Input) + Bias.'); step('Setup', 'Set Bias = 0: y = (Weight × Input).'); step('Conclusion', 'Equation becomes y = mx, passing through origin.'); step('Answer', 'The line shifts to pass through (0,0).'); }
   else if (t === 'm6_verify') { step('Check', `${d.x}+${d.y}=${d.x+d.y}. ✓`); step('Answer', `${ans} (Yes)`); }
   else if (t === 'm6_count') { step('Identify', `x and y → 2 unknowns.`); step('Answer', `${ans}`); }
   else if (t === 'm6_easy') { step('Solve', `x=${d.x}.`); step('Answer', `x = ${ans}`); }
@@ -2204,6 +2250,33 @@ function generateMqExplanation(q) {
   else if (t === 'm23_3dot') { step('Compute', `Dot = ${d.a*d.d+d.b*d.e+d.c*d.f}.`); step('Answer', `= ${d.a*d.d+d.b*d.e+d.c*d.f}`); }
   else if (t === 'm23_check2') { step('Compute', `= ${d.x+2*d.y+3*d.z}.`); step('Answer', `= ${d.x+2*d.y+3*d.z}`); }
   else if (t === 'm23_3planes') { step('Concept', `Each equation removes 1 dimension.`); step('Answer', `${ans}`); }
+  else if (t.startsWith('mcq_')) {
+    // JSON-based MCQ questions: use the explanation field directly
+    const explanation = q.explanation || '';
+    if (explanation) {
+      // Split explanation into step-by-step parts if it contains "Step N:" patterns
+      const steps = explanation.split(/(?=Step \d+:)/i).filter(Boolean);
+      if (steps.length > 1) {
+        steps.forEach((stepText, idx) => {
+          const match = stepText.match(/^(Step \d+:\s*)(.*)/i);
+          if (match) {
+            step(match[1].trim(), match[2].trim());
+          } else {
+            step(`Step ${idx + 1}`, stepText.trim());
+          }
+        });
+      } else {
+        // No step pattern — break into logical sentences
+        const sentences = explanation.split(/(?<=[.!?])\s+/).filter(Boolean);
+        sentences.forEach((sentence, idx) => {
+          const labels = ['Concept', 'Reasoning', 'Conclusion', 'Answer'];
+          step(labels[Math.min(idx, labels.length - 1)], sentence.trim());
+        });
+      }
+    } else {
+      step('Answer', ans);
+    }
+  }
   else { _genericExplanation(t, d, s, step, ans); }
   return s;
   } catch {
@@ -2534,7 +2607,7 @@ function LinearAlgebraApp({ onBack }) {
   const [showAnswer, setShowAnswer] = useState(false);
   const [answer, setAnswer] = useState('');
   const [feedback, setFeedback] = useState(null);
-  const [attempts, setAttempts] = useState(0);
+  const [_attempts, setAttempts] = useState(0);
   const [quizAnswers, setQuizAnswers] = useState({});
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [quizPassed, setQuizPassed] = useState(false);
@@ -2572,7 +2645,6 @@ function LinearAlgebraApp({ onBack }) {
   const mqSubmittedRef = useRef(false);
   const mqAdvancedRef = useRef(false);
   const mqAdvanceRef = useRef(null);
-  const mqSubmitRef = useRef(null);
   const mqSeenRef = useRef(new Set());
   const [mqExplanation, setMqExplanation] = useState([]);
 
@@ -2604,14 +2676,13 @@ function LinearAlgebraApp({ onBack }) {
   const mission = MISSIONS.find(m => m.id === currentMission) || MISSIONS[0];
   const mod = MODULES.find(m => m.id === currentModule) || MODULES[0];
   const modMissions = MISSIONS.filter(m => m.id >= mod.start && m.id <= mod.end);
-  const isFirstMission = currentMission <= mod.start;
   const isLastMission = currentMission >= mod.end;
   const modSolvedCount = solvedMissions.filter(id => id >= mod.start && id <= mod.end).length;
   const modTotal = mod.end - mod.start + 1;
   const moduleComplete = modSolvedCount >= modTotal;
 
   useEffect(() => {
-    try { localStorage.setItem('la_solved', JSON.stringify([...new Set(solvedMissions)])); } catch {}
+    try { localStorage.setItem('la_solved', JSON.stringify([...new Set(solvedMissions)])); } catch { /* ignored */ }
   }, [solvedMissions]);
 
   const markSolved = (id) => {
@@ -2675,7 +2746,7 @@ function LinearAlgebraApp({ onBack }) {
     else if (currentModule < MODULES.length) {
       const nextMod = MODULES.find(m => m.id === currentModule + 1);
       if (nextMod) { setCurrentModule(nextMod.id); setCurrentMission(nextMod.start); setPhase('intro');
-        try { localStorage.setItem('la_module', String(nextMod.id)); } catch {} }
+        try { localStorage.setItem('la_module', String(nextMod.id)); } catch { /* ignored */ } }
     }
   };
   const selectQuizOption = (qi, oi) => setQuizAnswers(prev => ({ ...prev, [qi]: oi }));
@@ -2772,7 +2843,7 @@ function LinearAlgebraApp({ onBack }) {
       setMqFeedback(data.correct ? `Correct! ${data.display}` : `Incorrect. Answer: ${data.display}`);
       setMqResults(prev => [...prev, { prompt: mqQuestion.prompt, userAnswer: String(ans).trim(), correctAnswer: data.display, correct: data.correct, time: mqTimer }]);
       setMqExplanation(generateMqExplanation(mqQuestion));
-    } catch (e) { mqSubmittedRef.current = false; }
+    } catch { mqSubmittedRef.current = false; }
   };
 
   const mqSolve = () => {
@@ -2890,7 +2961,7 @@ function LinearAlgebraApp({ onBack }) {
     );
   };
 
-  const quizSection = () => {
+  const _quizSection = () => {
     const qs = shuffledQuiz;
     const allAnswered = qs.every((_, i) => {
       const ans = quizAnswers[i];
@@ -3029,6 +3100,7 @@ function LinearAlgebraApp({ onBack }) {
         {selectedRL !== null && (
           <div className="la-reallife-expanded">
             {rl.equation && <MiniGraph story={rl.story} equation={rl.equation} />}
+            {rl.concept && <div style={{ fontSize: '0.8rem', color: 'var(--clr-dim)', marginBottom: 6, fontStyle: 'italic' }}>Concept: {rl.concept}</div>}
             <div className="rl-story">{rl.story}</div>
             <div className="rl-puzzle-box">
               <div className="rl-question">
@@ -3038,34 +3110,80 @@ function LinearAlgebraApp({ onBack }) {
               <button className="rl-summary-toggle" onClick={() => setShowRLSummary(v => !v)}>
                 {showRLSummary ? 'Show Full Context' : 'View Summary'}
               </button>
-              <div className="rl-input-area">
-                <input className="la-text-input" type="text" value={rlAnswer}
-                  onChange={e => setRlAnswer(e.target.value)}
-                  placeholder="Type your answer here..."
-                  style={{ flex: 1, minWidth: 150 }}
-                    onKeyDown={e => {
-                    if (e.key === 'Enter' && rlAnswer.trim()) {
-                      const exp = (rl.answer || '').replace(/\s+/g,'').toLowerCase();
-                      const got = rlAnswer.replace(/\s+/g,'').toLowerCase();
-                      setRlFeedback(got.includes(exp) || got === exp ? '✓ Correct! Well done!' : '✗ Not quite. Try again!');
-                    }
-                  }} />
-                <button className="la-check-btn" onClick={() => {
-                  const exp = (rl.answer || '').replace(/\s+/g,'').toLowerCase();
-                  const got = rlAnswer.replace(/\s+/g,'').toLowerCase();
-                  setRlFeedback(got.includes(exp) || got === exp ? '✓ Correct! Well done!' : '✗ Not quite. Try again!');
-                }} disabled={!rlAnswer.trim()}>Check</button>
-              </div>
+              {rl.type === 'mcq' && rl.options ? (
+                <div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8, margin: '12px 0' }}>
+                    {rl.options.map((opt, oi) => {
+                      const isSelected = rlAnswer === opt;
+                      const showResult = rlFeedback !== null;
+                      const isCorrectOpt = opt === rl.answer;
+                      let optBg = 'var(--clr-card)';
+                      let optBorder = '1px solid var(--clr-border)';
+                      let optColor = 'var(--clr-text)';
+                      if (showResult && isCorrectOpt) { optBg = 'rgba(76,175,80,0.2)'; optBorder = '2px solid #4caf50'; optColor = '#4caf50'; }
+                      else if (showResult && isSelected && !isCorrectOpt) { optBg = 'rgba(244,67,54,0.2)'; optBorder = '2px solid #f44336'; optColor = '#f44336'; }
+                      else if (isSelected) { optBg = 'rgba(33,150,243,0.15)'; optBorder = '2px solid var(--clr-accent)'; }
+                      return (
+                        <button key={oi} disabled={rlFeedback !== null}
+                          onClick={() => { if (rlFeedback === null) { setRlAnswer(opt); setRlFeedback(null); } }}
+                          style={{ padding: '10px 16px', borderRadius: 8, background: optBg, border: optBorder, color: optColor, cursor: rlFeedback !== null ? 'default' : 'pointer', fontSize: '0.95rem', fontWeight: 500, textAlign: 'left', transition: 'all 0.15s' }}>
+                          {opt}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <button className="la-check-btn" onClick={() => {
+                    const exp = (rl.answer || '').replace(/\s+/g,'').toLowerCase();
+                    const got = (rlAnswer || '').replace(/\s+/g,'').toLowerCase();
+                    setRlFeedback(got.includes(exp) || got === exp ? '✓ Correct! Well done!' : '✗ Not quite. Try again!');
+                  }} disabled={!rlAnswer.trim()}>Check</button>
+                </div>
+              ) : (
+                <div className="rl-input-area">
+                  <input className="la-text-input" type="text" value={rlAnswer}
+                    onChange={e => setRlAnswer(e.target.value)}
+                    placeholder="Type your answer here..."
+                    style={{ flex: 1, minWidth: 150 }}
+                      onKeyDown={e => {
+                      if (e.key === 'Enter' && rlAnswer.trim()) {
+                        const exp = (rl.answer || '').replace(/\s+/g,'').toLowerCase();
+                        const got = rlAnswer.replace(/\s+/g,'').toLowerCase();
+                        setRlFeedback(got.includes(exp) || got === exp ? '✓ Correct! Well done!' : '✗ Not quite. Try again!');
+                      }
+                    }} />
+                  <button className="la-check-btn" onClick={() => {
+                    const exp = (rl.answer || '').replace(/\s+/g,'').toLowerCase();
+                    const got = rlAnswer.replace(/\s+/g,'').toLowerCase();
+                    setRlFeedback(got.includes(exp) || got === exp ? '✓ Correct! Well done!' : '✗ Not quite. Try again!');
+                  }} disabled={!rlAnswer.trim()}>Check</button>
+                </div>
+              )}
               {rlFeedback && (
                 <div className={'rl-feedback ' + (rlFeedback.startsWith('✓') ? 'correct' : 'wrong')}>
                   {rlFeedback}
                 </div>
               )}
-              {rlFeedback && rlFeedback.startsWith('✓') && (
-                <div className="rl-done">Great! You understand how this concept applies in real life!</div>
+              {rlFeedback && rlFeedback.startsWith('✓') && rl.explanation && (
+                <div className="rl-done">
+                  {rl.explanation.split(/(?=Step \d+:)/i).filter(Boolean).map((stepText, idx) => {
+                    const match = stepText.match(/^(Step \d+:\s*)(.*)/i);
+                    if (match) {
+                      return <div key={idx} style={{ display: 'flex', gap: 8, alignItems: 'flex-start', marginBottom: 4 }}><span style={{ fontWeight: 700, color: 'var(--la-accent)', minWidth: 55, flexShrink: 0 }}>{match[1].trim()}</span><span>{match[2].trim()}</span></div>;
+                    }
+                    return <div key={idx}>{stepText.trim()}</div>;
+                  })}
+                </div>
               )}
               {rlFeedback && rlFeedback.startsWith('✗') && (
-                <div className="rl-hint">Hint: Look at the graph above and think about what changes in this scenario!</div>
+                <div className="rl-hint">
+                  <strong>Hint:</strong> {rl.explanation ? rl.explanation.split(/(?=Step \d+:)/i).filter(Boolean).map((stepText, idx) => {
+                    const match = stepText.match(/^(Step \d+:\s*)(.*)/i);
+                    if (match) {
+                      return <div key={idx} style={{ display: 'flex', gap: 8, alignItems: 'flex-start', marginTop: 4 }}><span style={{ fontWeight: 700, color: 'var(--la-accent)', minWidth: 55, flexShrink: 0 }}>{match[1].trim()}</span><span>{match[2].trim()}</span></div>;
+                    }
+                    return <div key={idx}>{stepText.trim()}</div>;
+                  }) : 'Look at the graph above and think about what changes in this scenario!'}
+                </div>
               )}
             </div>
           </div>
@@ -3105,7 +3223,7 @@ function LinearAlgebraApp({ onBack }) {
             <button className="la-quiz-next-btn" onClick={() => {
               const nextMod = MODULES.find(m => m.id === currentModule + 1);
               if (nextMod) { setCurrentModule(nextMod.id); setCurrentMission(nextMod.start); setPhase('intro');
-                try { localStorage.setItem('la_module', String(nextMod.id)); } catch {} }
+        try { localStorage.setItem('la_module', String(nextMod.id)); } catch { /* ignored */ } }
             }} style={{ maxWidth: 300, margin: '16px auto 0' }}>
               Next Module &rarr;
             </button>
@@ -3120,7 +3238,7 @@ function LinearAlgebraApp({ onBack }) {
     setCurrentModule(m.id);
     setCurrentMission(m.start);
     setPhase('intro');
-    try { localStorage.setItem('la_module', String(m.id)); } catch {}
+    try { localStorage.setItem('la_module', String(m.id)); } catch { /* ignored */ }
   };
 
   const isModuleUnlocked = (m) => {
@@ -3183,7 +3301,7 @@ function LinearAlgebraApp({ onBack }) {
             const endIdx = Math.min(modMissions.length - 1, startIdx + 4);
             startIdx = Math.max(0, endIdx - 4);
             const maxUnlocked = Math.max(0, ...solvedMissions.filter(id => id >= mod.start && id <= mod.end)) - mod.start;
-            return modMissions.slice(startIdx, endIdx + 1).map((m, i) => {
+            return modMissions.slice(startIdx, endIdx + 1).map((m) => {
               const absId = m.id;
               const canClick = solvedMissions.includes(absId) || (absId - mod.start) <= maxUnlocked + 1;
               return (
@@ -3231,15 +3349,7 @@ function LinearAlgebraApp({ onBack }) {
           <h3 style={{ textAlign: 'center', margin: '12px 0 4px' }}>Mission {currentMission} Quiz</h3>
           {!mqStarted && !mqFinished && (
             <div style={{ textAlign: 'center', padding: '16px 0' }}>
-              <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)', marginBottom: 12 }}>Test your understanding of this mission with 10 questions.</p>
-              <div className="checkbox-group" style={{ marginBottom: 12, justifyContent: 'center' }}>
-                {['easy', 'medium', 'hard', 'adaptive'].map(d => (
-                  <label key={d} className={`checkbox-pill${mqDifficulty === d ? ' active' : ''}`}>
-                    <input type="radio" name="mq-diff" checked={mqDifficulty === d} onChange={() => setMqDifficulty(d)} />
-                    {d.charAt(0).toUpperCase() + d.slice(1)}
-                  </label>
-                ))}
-              </div>
+              <p style={{ fontSize: '0.9rem', color: 'var(--clr-dim)', marginBottom: 12 }}>Test your understanding of this mission with 10 adaptive questions. Pass (≥7/10) to unlock real-life applications.</p>
               <button className="la-quiz-next-btn" onClick={mqStart} style={{ maxWidth: 250, margin: '0 auto' }}>Start Quiz</button>
             </div>
           )}
@@ -3313,7 +3423,7 @@ function LinearAlgebraApp({ onBack }) {
           )}
           {mqFinished && (() => {
             const pct = mqTotal > 0 ? Math.round((mqScore / mqTotal) * 100) : 0;
-            const passed = pct >= 80;
+            const passed = pct >= 70; // 70% threshold (≥7/10) — matches Matrix Mystics plan
             const hasNext = currentMission < mod.end || MODULES.some(m => m.id === currentModule + 1);
             return (
             <div>

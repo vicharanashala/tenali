@@ -7,7 +7,7 @@ import React from 'react';
  * @param {string} [label]  – optional text below the percentage (default: "Mastery")
  * @param {number} [size]   – diameter in px (default: 72)
  */
-export default function MasteryBadge({ mastery = 0, label = 'Mastery', size = 72 }) {
+export default function MasteryBadge({ mastery = 0, label = 'Mastery', size: _size = 72 }) {
   const pct = Math.round(mastery * 100);
 
   // Color ramp: red → amber → green

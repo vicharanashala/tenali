@@ -18,13 +18,13 @@ const parseEquation = (eqStr) => {
     // Test if it works
     fn(0);
     return fn;
-  } catch (e) {
+  } catch {
     return null;
   }
 };
 
 export default function EquationSandbox({ levelConfig, onVictory, onAttempt }) {
-  const { startPos, stars: initialStars, allowedFunctions } = levelConfig;
+  const { startPos, stars: initialStars, allowedFunctions: _allowedFunctions } = levelConfig;
   
   const [equationStr, setEquationStr] = useState('');
   const [fn, setFn] = useState(() => () => 0);
@@ -120,7 +120,7 @@ export default function EquationSandbox({ levelConfig, onVictory, onAttempt }) {
           vy *= friction;
         }
       }
-    } catch (e) {
+    } catch {
       // Equation might be invalid at this x, ignore collision
     }
 
