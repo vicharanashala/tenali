@@ -1,0 +1,30 @@
+{
+  "title": "Logarithms: The Power Inverter",
+  "blocks": [
+    {
+      "icon": "🔍",
+      "title": "1. The Core Concept: Asking the Reverse Question",
+      "content": "Exponents ask: '2 raised to what power gives 8?' The answer is 3 because 2^3 = 8. A **Logarithm** is just a fancy way of writing this question: **log base 2 of 8 = 3**. Logarithms reverse exponents. They're essential in science (earthquake scales, sound decibels, pH levels) because they compress enormous number ranges into manageable scales."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: The Three Log Laws",
+      "content": "• **Product Rule:** log(AB) = log(A) + log(B). Multiplication becomes addition!\n• **Quotient Rule:** log(A/B) = log(A) - log(B). Division becomes subtraction!\n• **Power Rule:** log(A^n) = n * log(A). Powers become multipliers!\n• Also: log(1) = 0 (always), and log base a of a = 1 (always)."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Solving Log Equations",
+      "content": "To solve log equations:\n\n1. Use the log laws to combine or simplify.\n2. If log base a of x = b, then x = a^b (convert to exponential form).\n3. If you have logs on both sides, the arguments must be equal: log(A) = log(B) means A = B.\n4. Always check that your answer doesn't make you take the log of a negative number or zero!"
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Simplify log2(32)",
+      "content": "What is log base 2 of 32?\n\n**Step 1:** Ask: '2 to what power gives 32?'\n**Step 2:** 2^1 = 2, 2^2 = 4, 2^3 = 8, 2^4 = 16, 2^5 = 32.\n**Step 3:** The answer is 5.\n\n**Final Answer: log base 2 of 32 = 5.**\n(Because 2^5 = 32.)"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The most devastating log mistake: thinking log(A + B) = log(A) + log(B). WRONG! The product rule says log(A * B) = log(A) + log(B). There is NO rule for log(A + B). You cannot split a log of a SUM. This mistake is so common that teachers call it 'The Log Trap'. Never break apart log(x + 5) into log(x) + log(5)!"
+    }
+  ]
+}

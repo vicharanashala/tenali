@@ -1,0 +1,30 @@
+{
+  "title": "Congruence: The Perfect Clone",
+  "blocks": [
+    {
+      "icon": "🧩",
+      "title": "1. The Core Concept: Identical Twins in Geometry",
+      "content": "Two shapes are **Congruent** if they are exactly the same shape AND size. If you could cut one out and place it perfectly on top of the other (maybe after flipping or rotating it), with no gaps and no overlaps, they are congruent. Unlike similarity (same shape, different size), congruence means they are perfect clones."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: The Four Proofs (SSS, SAS, ASA, RHS)",
+      "content": "To PROVE two triangles are congruent, you need one of these four sets of evidence:\n\n• **SSS:** All 3 sides of one triangle match all 3 sides of the other.\n• **SAS:** 2 sides and the INCLUDED angle (the angle between them) match.\n• **ASA:** 2 angles and the INCLUDED side (the side between them) match.\n• **RHS:** Both triangles are right-angled, and they share the same Hypotenuse and one other Side."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Writing a Congruence Proof",
+      "content": "1. List the matching parts from both triangles (e.g., AB = PQ, angle B = angle Q, BC = QR).\n2. Identify which rule applies (SSS, SAS, ASA, or RHS).\n3. State the conclusion: 'Triangle ABC is congruent to Triangle PQR by SAS.'\n4. **Critical:** The order of the letters matters! If A matches P, B matches Q, and C matches R, write ABC = PQR, NOT ACB = PQR."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: SAS Proof",
+      "content": "In triangles ABC and DEF: AB = DE = 5cm, BC = EF = 8cm, and angle B = angle E = 60 degrees.\n\n**Step 1:** AB = DE (Side)\n**Step 2:** Angle B = Angle E (Angle) -- this angle is BETWEEN the two sides.\n**Step 3:** BC = EF (Side)\n**Step 4:** The angle is included between the two sides.\n\n**Final Answer: Triangle ABC is congruent to Triangle DEF by SAS.**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The most dangerous trap is **SSA (or ASS)**. Having two sides and a NON-included angle does NOT prove congruence! This is called the Ambiguous Case because two different triangles can have the same SSA measurements. Only the INCLUDED angle (between the two sides) counts for SAS. If the angle is at the wrong vertex, your proof is invalid."
+    }
+  ]
+}

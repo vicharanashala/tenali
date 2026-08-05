@@ -30,6 +30,23 @@
 
 </div>
 
+### 🧠 Pedagogical Features: Progressive Disclosure & Time-Bounded Learning
+
+**The Problem**: In digital learning environments, students often develop habits of rapidly skipping through theoretical material just to reach the interactive quizzes, completely bypassing the essential conceptual understanding.
+
+**Our Contribution & Solution**: To enforce true conceptual mastery, we engineered a state-driven **Time-Bounded Progressive Disclosure** system. 
+
+#### 1. Progressive Disclosure (Step-by-Step Unlocking)
+- **Feature**: Instead of presenting a wall of text, the 5 learning blocks are hidden by default and progressively disclosed one at a time.
+- **Merits**: Reduces cognitive overload. It breaks down complex mathematical concepts into digestible, bite-sized chunks, keeping the student focused entirely on the current step without feeling overwhelmed.
+- **Mechanism**: A dynamic *"Got it, next step ↓"* button controls the flow. The final assessment entry point is strictly hidden until the user has successfully revealed the entire sequence, making skipping physically impossible.
+
+#### 2. Soft Time-Bounded Gating (The 60-Second Rule)
+- **Feature**: An active time-tracking mechanism measures exactly how long a student spends on a specific conceptual block.
+- **Merits**: Prevents students from simply rapid-clicking the "Next Step" button to bypass the progressive disclosure. It forces them to slow down and actually *read* the material.
+- **Mechanism**: When a student attempts to proceed to the next block or start the quiz, the system calculates the time elapsed since the block was revealed. If it has been less than 1 minute, progression is halted. 
+- **User Experience**: Rather than rigidly disabling buttons (which can feel broken), the UI allows the click but instantly renders a custom warning modal (*"Hold on! Please take your time..."*). The student must dismiss the popup and wait out the remainder of the minute, striking a balance between strict pedagogical enforcement and interactive UX.
+
 ---
 
 ## 📑 Table of Contents
@@ -79,11 +96,11 @@ It is built to run on a single VPS — `tenali.fun` — with one Node process se
 <p align="center">
   <table>
     <tr>
-      <td align="center"><b>822</b><br/><sub>commits</sub></td>
+      <td align="center"><b>820</b><br/><sub>commits</sub></td>
       <td align="center"><b>61</b><br/><sub>PRs merged</sub></td>
       <td align="center"><b>20</b><br/><sub>GitHub contributors</sub></td>
       <td align="center"><b>⭐ 6</b><br/><sub>stars</sub></td>
-      <td align="center"><b>🍴 59</b><br/><sub>forks</sub></td>
+      <td align="center"><b>🍴 58</b><br/><sub>forks</sub></td>
       <td align="center"><b>🐛 51</b><br/><sub>open issues</sub></td>
     </tr>
   </table>
@@ -525,13 +542,13 @@ tenali.fun (DNS → <production IP — redacted from public docs>)
 <!-- live-snapshot:start -->
 | 🏆 Commits | 🔀 Merged PRs | 👥 Contributors | 🧩 Puzzles | 📚 Vocab | 🌍 GK |
 |----------:|------------:|--------------:|---------:|-------:|----:|
-| **822** | **61** | **20** | **69** | **7,662** | **991** |
+| **820** | **61** | **20** | **69** | **7,662** | **991** |
 <!-- live-snapshot:end -->
 
 ### 🥇 Leaderboard
 
 <!-- live-rank:start -->
-_Live data — last regenerated 2026-08-05 · auto-refreshed by [`github-actions[bot]`](https://github.com/features/actions) on every push to `main` and every 12h._
+_Live data — last regenerated 2026-08-04 · auto-refreshed by [`github-actions[bot]`](https://github.com/features/actions) on every push to `main` and every 12h._
 
 | # | 👤 Real Name | 🔗 GitHub ID | 📝 Commits | 🔀 PRs | 🏷️ Role |
 |--:|:-------------|:-------------|----------:|-----:|:--------|
@@ -547,7 +564,7 @@ _Live data — last regenerated 2026-08-05 · auto-refreshed by [`github-actions
 | 10. | **K C Dharshan** | [KCDharshan9](https://github.com/KCDharshan9) | **21** | 1  | Tap-to-Define Word Glossary |
 | 11. | **Ahana Banerjee** | [ahana4banerjee](https://github.com/ahana4banerjee) | **20** | 2  | Goal Practice & Learning Journey |
 | 12. | **Shubh Dixit**<br/><sub>↳ also commits as <b>Shubh dixit</b></sub> | [Shubhdix9](https://github.com/Shubhdix9) | **16** | 2  | Premium UI Suite + Word Games |
-| 13. | **github-actions-bot-**<br/><sub>↳ also commits as <b>github-actions[bot]</b></sub> | [github-actions-bot-](https://github.com/github-actions-bot-) | **12** | 0  | — |
+| 13. | **github-actions-bot-**<br/><sub>↳ also commits as <b>github-actions[bot]</b></sub> | [github-actions-bot-](https://github.com/github-actions-bot-) | **10** | 0  | — |
 | 14. | **SemiColonSlayer** | [sharonyamita-spec](https://github.com/sharonyamita-spec) | **6** | 1  | Math Detective Agency |
 | 15. | **PANDRAJU POORVI PRAVALLIKA** | [poorvipravallika06](https://github.com/poorvipravallika06) | **6** | 1  | HCF/LCM Interactive Module |
 | 16. | **Rukmender T** | [RukmenderT](https://github.com/RukmenderT) | **5** | 1  | Curiosity Mode |

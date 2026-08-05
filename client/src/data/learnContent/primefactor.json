@@ -1,0 +1,30 @@
+{
+  "title": "Prime Factorization: The DNA of Math",
+  "blocks": [
+    {
+      "icon": "🧬",
+      "title": "1. The Core Concept: The Atomic Breakdown",
+      "content": "In chemistry, everything is made of atoms. You can break a water molecule down into Hydrogen and Oxygen, but you can't break those atoms down any further. In mathematics, **Prime Numbers** (2, 3, 5, 7, 11...) are the unbreakable atoms. Every single whole number in the universe is just a unique recipe of prime numbers multiplied together. Finding that secret recipe is called Prime Factorization."
+    },
+    {
+      "icon": "🌳",
+      "title": "2. The Rules: The Factor Tree",
+      "content": "To find the DNA of a large number, we build a Factor Tree.\n\n• Start with your massive number at the top.\n• Split it into ANY two numbers that multiply to make it.\n• Every time a branch hits a Prime Number, circle it! It is a dead end. That branch cannot grow anymore.\n• If a number is not prime (like 10), split it again (into 2 and 5).\n• Keep splitting until every single branch ends in a circled prime number."
+    },
+    {
+      "icon": "🔋",
+      "title": "3. Step-by-Step: Writing the Recipe (Index Form)",
+      "content": "Once the tree is finished, you must write the final answer properly.\n\n1. Gather all the circled prime numbers from the ends of the branches.\n2. Write them in order from smallest to largest with multiplication signs between them. (e.g., 2 × 2 × 2 × 3 × 5).\n3. **Index Form:** Mathematicians are lazy! Instead of writing 2 × 2 × 2, use indices (powers) to compress it! Write it as **2³ × 3 × 5**."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Breaking down 120",
+      "content": "Find the prime factorization of 120 and write it in index form.\n\n• **Step 1 (First split):** 120 ends in 0, so 10 is an easy factor. Split it into 10 and 12.\n• **Step 2 (The 10):** Split 10 into 2 and 5. Both are prime! Circle them.\n• **Step 3 (The 12):** Split 12 into 3 and 4. 3 is prime! Circle it. \n• **Step 4 (The 4):** 4 is not prime! Split it into 2 and 2. Circle them both.\n• **Step 5 (Gather):** We have three 2s, one 3, and one 5.\n\n**Final Answer: 2³ × 3 × 5**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The most humiliating mistake is writing your final answer using Addition signs! Students will do all the hard work on the tree, find 2, 2, and 3, and then write the answer as 2 + 2 + 3. **WRONG!** Prime factorization is about what numbers MULTIPLY to make the target. (2+2+3 = 7, not 12!). Always use multiplication (×) signs between your prime atoms!"
+    }
+  ]
+}

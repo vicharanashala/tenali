@@ -1,0 +1,30 @@
+{
+  "title": "Circular Measure: Radians and Arcs",
+  "blocks": [
+    {
+      "icon": "🌀",
+      "title": "1. The Core Concept: A New Way to Measure Angles",
+      "content": "Degrees are great for everyday life, but in advanced math and physics, there's a more natural unit called the **Radian**. One radian is the angle you get when you wrap the radius of a circle along its circumference. A full circle is 2*pi radians (about 6.28 radians), which equals 360 degrees."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: Converting Between Degrees and Radians",
+      "content": "The key conversion factors:\n\n• **Degrees to Radians:** Multiply by pi/180.\n• **Radians to Degrees:** Multiply by 180/pi.\n• **Arc Length** = r * theta (where theta is in radians).\n• **Sector Area** = (1/2) * r^2 * theta (where theta is in radians).\n\nRemember: pi radians = 180 degrees. This single fact unlocks everything."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Finding Arc Length",
+      "content": "To find the arc length of a sector:\n\n1. Make sure the angle is in RADIANS. If it's in degrees, convert it first.\n2. Use the formula: Arc Length = r * theta.\n3. Multiply the radius by the angle in radians.\n4. That's it! The formula is beautifully simple when you use radians."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Sector Area",
+      "content": "Find the area of a sector with radius 6cm and angle pi/3 radians.\n\n**Step 1:** r = 6, theta = pi/3.\n**Step 2:** Area = (1/2) * r^2 * theta = (1/2) * 36 * (pi/3).\n**Step 3:** = (1/2) * 36 * 1.047 = 18.85 cm^2.\n\n**Final Answer: Area = 6*pi = 18.85 cm^2 (2 d.p.)**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The absolute deadliest mistake: using the arc length or sector area formula with an angle in DEGREES instead of RADIANS. If the question gives you 60 degrees, you MUST convert to pi/3 radians before plugging into r*theta or (1/2)*r^2*theta. If you use 60 directly, your answer will be catastrophically wrong."
+    }
+  ]
+}

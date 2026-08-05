@@ -1,0 +1,30 @@
+{
+  "title": "Functions Gym: Polynomial Evaluation",
+  "blocks": [
+    {
+      "icon": "🧠",
+      "title": "1. The Core Concept: Speed Substitution",
+      "content": "The Functions Gym tests your ability to evaluate polynomial functions quickly. You'll be given a function like f(x) = 2x^3 - x + 4 and asked to compute f(3) as fast as possible. Speed and accuracy with substitution is crucial for every future math topic."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: Order of Operations",
+      "content": "• Always compute powers FIRST (x^2, x^3, etc.).\n• Then multiply by coefficients.\n• Then add/subtract all terms.\n• Be extra careful with negative inputs: (-2)^2 = 4, but -2^2 = -4!"
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. The Method: Horner's Method Shortcut",
+      "content": "For speed, rewrite polynomials in nested form:\n\n1. f(x) = 2x^3 - 3x^2 + x - 5 becomes f(x) = ((2x - 3)x + 1)x - 5.\n2. Work from inside out: start with 2, multiply by x, subtract 3, multiply by x, add 1, multiply by x, subtract 5.\n3. This reduces errors because you never compute large powers directly."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Evaluating f(-2)",
+      "content": "Find f(-2) where f(x) = x^3 + 2x^2 - 5.\n\n**Step 1:** (-2)^3 = -8.\n**Step 2:** 2(-2)^2 = 2(4) = 8.\n**Step 3:** Combine: -8 + 8 - 5 = -5.\n\n**Final Answer: f(-2) = -5.**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The number one error: computing (-2)^3 as +8 instead of -8! An odd power of a negative number stays negative. An even power of a negative number becomes positive. Know this rule cold: (-2)^2 = +4, (-2)^3 = -8, (-2)^4 = +16, (-2)^5 = -32. The sign alternates with odd/even powers."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "title": "Profit & Loss: The Business Math",
+  "blocks": [
+    {
+      "icon": "💵",
+      "title": "1. The Core Concept: Buy Low, Sell High",
+      "content": "Every business operates on one simple principle: buy something at a low price (Cost Price) and sell it at a higher price (Selling Price). The difference is your **Profit**. If you sell for LESS than you paid, you make a **Loss**. Understanding profit and loss percentages is essential for business, shopping, and economics."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: The Formulas",
+      "content": "• **Profit** = Selling Price (SP) - Cost Price (CP).\n• **Loss** = CP - SP.\n• **Profit %** = (Profit / CP) x 100.\n• **Loss %** = (Loss / CP) x 100.\n• Critical: percentage is ALWAYS calculated on the **Cost Price**, not the selling price!\n• **Discount %** = (Discount / Marked Price) x 100."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Finding the Cost Price",
+      "content": "If you know the selling price and profit percentage:\n\n1. SP = CP + Profit.\n2. SP = CP + (Profit% / 100) x CP.\n3. SP = CP x (1 + Profit%/100).\n4. So CP = SP / (1 + Profit%/100).\n\nFor loss: CP = SP / (1 - Loss%/100)."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Finding Profit %",
+      "content": "A shopkeeper buys a toy for Rs. 200 and sells it for Rs. 250.\n\n**Step 1:** Profit = SP - CP = 250 - 200 = Rs. 50.\n**Step 2:** Profit % = (50/200) x 100 = 25%.\n\n**Final Answer: The profit percentage is 25%.**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The deadliest mistake: calculating profit/loss percentage on the SELLING PRICE instead of the COST PRICE. If CP = 200 and SP = 250, Profit% = (50/200) x 100 = 25%. But if you mistakenly use SP: (50/250) x 100 = 20%. That's the wrong answer! Profit and loss percentages are ALWAYS based on Cost Price."
+    }
+  ]
+}

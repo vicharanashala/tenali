@@ -1,0 +1,30 @@
+{
+  "title": "Ratio & Proportion: Fair Sharing",
+  "blocks": [
+    {
+      "icon": "⚖️",
+      "title": "1. The Core Concept: Comparing Quantities",
+      "content": "A **ratio** compares two or more quantities using the same units. If a recipe needs 2 cups of flour and 3 cups of sugar, the ratio is 2:3. **Proportion** means two ratios are equal. Ratios are everywhere: map scales (1:50000), screen resolutions (16:9), and even mixing paint colors."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: Simplifying and Scaling",
+      "content": "• **Simplify** ratios like fractions: 10:15 = 2:3 (divide both by GCD of 5).\n• **Scaling:** To share Rs. 100 in ratio 2:3, find total parts (2+3=5), then each part = 100/5 = 20.\n• **Equivalent ratios:** 2:3 = 4:6 = 6:9 (multiply both sides by the same number).\n• **Units must match!** You can't have a ratio of 2km : 500m without converting first."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Sharing in a Given Ratio",
+      "content": "To divide an amount in a ratio (e.g., divide Rs. 350 in ratio 3:4):\n\n1. Add the ratio parts: 3 + 4 = 7 total parts.\n2. Find the value of one part: 350 / 7 = Rs. 50.\n3. First share: 3 x 50 = Rs. 150.\n4. Second share: 4 x 50 = Rs. 200.\n5. Check: 150 + 200 = 350. Correct!"
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Three-Way Split",
+      "content": "Divide Rs. 1200 among A, B, and C in the ratio 2:3:5.\n\n**Step 1:** Total parts = 2 + 3 + 5 = 10.\n**Step 2:** One part = 1200 / 10 = Rs. 120.\n**Step 3:** A = 2 x 120 = Rs. 240.\n**Step 4:** B = 3 x 120 = Rs. 360.\n**Step 5:** C = 5 x 120 = Rs. 600.\n\n**Check:** 240 + 360 + 600 = 1200. Correct!"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The biggest ratio mistake: dividing by the ratio numbers instead of the TOTAL parts. To share Rs. 100 in ratio 2:3, students divide 100 by 2 to get 50 and by 3 to get 33.33. But 50 + 33.33 = 83.33, which isn't 100! The correct method: total parts = 5, each part = 20, shares are 40 and 60. Always find the total parts first!"
+    }
+  ]
+}

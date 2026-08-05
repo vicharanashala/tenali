@@ -1,0 +1,30 @@
+{
+  "title": "Polygons: Many-Sided Wonders",
+  "blocks": [
+    {
+      "icon": "⬣",
+      "title": "1. The Core Concept: Shapes with Many Sides",
+      "content": "A **Polygon** is any closed 2D shape made of straight lines. Triangles (3 sides), quadrilaterals (4), pentagons (5), hexagons (6), and so on. Regular polygons have all sides equal and all angles equal. Polygons are everywhere: stop signs (octagon), soccer balls (pentagons and hexagons), and honeycomb (hexagons)."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: Angle Formulas",
+      "content": "• **Sum of interior angles:** (n - 2) x 180 degrees, where n = number of sides.\n• **Each interior angle (regular polygon):** (n - 2) x 180 / n.\n• **Sum of exterior angles:** ALWAYS 360 degrees (for any polygon!).\n• **Each exterior angle (regular polygon):** 360 / n.\n• Interior + Exterior = 180 degrees (they're supplementary)."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Finding the Number of Sides",
+      "content": "If each interior angle of a regular polygon is 144 degrees:\n\n1. Each exterior angle = 180 - 144 = 36 degrees.\n2. Number of sides = 360 / exterior angle = 360 / 36 = 10.\n3. It's a regular decagon!\n\nThe exterior angle shortcut is almost always faster than using the interior angle formula."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Interior Angle Sum",
+      "content": "Find the sum of interior angles of a heptagon (7 sides).\n\n**Step 1:** Formula: (n - 2) x 180.\n**Step 2:** n = 7.\n**Step 3:** (7 - 2) x 180 = 5 x 180 = 900 degrees.\n\n**Final Answer: The sum of interior angles is 900 degrees.**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "Two classic mistakes: (1) Using n x 180 instead of (n-2) x 180. The '-2' is critical! Without it, you get an answer that's 360 degrees too large. (2) Confusing interior and exterior angles. If a question asks for the exterior angle but you calculate the interior angle (or vice versa), your answer will be 180 minus what it should be. Always read the question carefully."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "title": "Inequalities: The Flexible Equation",
+  "blocks": [
+    {
+      "icon": "⚖️",
+      "title": "1. The Core Concept: Not Always Equal",
+      "content": "Equations (=) demand perfection: x MUST be exactly 5. But **Inequalities** are flexible. They say things like 'x must be MORE than 3' (x > 3) or 'x can be anything up to 10' (x <= 10). In real life, inequalities are everywhere: speed limits (v <= 60), minimum ages (age >= 18), and budget constraints (cost < 500)."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: The Four Symbols",
+      "content": "Master these four:\n\n• **>** means 'greater than' (strict, not equal).\n• **<** means 'less than' (strict, not equal).\n• **>=** means 'greater than or equal to'.\n• **<=** means 'less than or equal to'.\n\nThe critical rule: if you MULTIPLY or DIVIDE both sides by a NEGATIVE number, you must FLIP the inequality sign! (e.g., > becomes <)."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Solving Inequalities",
+      "content": "Solve inequalities exactly like equations, with one extra rule:\n\n1. Use inverse operations to isolate x (same as equations).\n2. If you multiply or divide by a POSITIVE number, the sign stays the same.\n3. If you multiply or divide by a NEGATIVE number, FLIP the sign!\n4. Express the solution as a range (e.g., x > 3) or on a number line."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Solve -2x + 4 > 10",
+      "content": "**Step 1:** Subtract 4 from both sides: -2x > 6.\n**Step 2:** Divide both sides by -2. Since we're dividing by a NEGATIVE, FLIP the sign!\n**Step 3:** x < -3.\n\n**Final Answer: x < -3.** (All numbers less than -3 satisfy this inequality.)"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The absolute number one mistake: forgetting to FLIP the inequality sign when dividing by a negative! If -2x > 6, dividing by -2 gives x < -3, NOT x > -3. This single rule is responsible for more lost marks than any other concept in inequalities. Write 'FLIP!' in big letters next to any step where you divide by a negative number."
+    }
+  ]
+}

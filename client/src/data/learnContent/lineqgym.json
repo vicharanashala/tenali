@@ -1,0 +1,30 @@
+{
+  "title": "Linear Equations Gym: Solve for x",
+  "blocks": [
+    {
+      "icon": "🎯",
+      "title": "1. The Core Concept: Speed Solving",
+      "content": "This gym throws rapid-fire linear equations at you. Each one has a single unknown 'x', and your job is to isolate it as fast as possible. The faster you can solve basic equations, the more time you'll have for harder problems in exams."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: Inverse Operations",
+      "content": "• Addition is undone by subtraction.\n• Subtraction is undone by addition.\n• Multiplication is undone by division.\n• Division is undone by multiplication.\n• Always perform the same operation on BOTH sides."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. The Method: Two-Step Strategy",
+      "content": "Most gym equations are two-step:\n\n1. Undo the addition/subtraction first (move the constant to the other side).\n2. Undo the multiplication/division second (isolate x).\n3. Example: 3x + 5 = 20 becomes 3x = 15 becomes x = 5.\n4. Always check by substituting back!"
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Solve 4x - 7 = 13",
+      "content": "**Step 1:** Add 7 to both sides: 4x = 20.\n**Step 2:** Divide by 4: x = 5.\n**Check:** 4(5) - 7 = 20 - 7 = 13. Correct!\n\n**Final Answer: x = 5.**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "In speed-solving mode, the most common mistake is doing the operations in the wrong order. If you have 3x + 5 = 20, don't divide by 3 first! That gives you x + 5/3 = 20/3, which is a mess. Always undo addition/subtraction FIRST, then multiplication/division. Work from the outside in."
+    }
+  ]
+}

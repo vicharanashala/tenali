@@ -1,0 +1,30 @@
+{
+  "title": "Vocabulary: The Language of Math",
+  "blocks": [
+    {
+      "icon": "📖",
+      "title": "1. The Core Concept: Translating the Code",
+      "content": "Mathematics is literally a foreign language. Before you can solve an equation, you have to translate English words into math symbols. If a question says 'find the product of the sum of x and y, and the quotient of a and b', you can't even start unless you know what 'product', 'sum', and 'quotient' mean. Vocabulary is the gatekeeper."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: The Core Glossary",
+      "content": "• **Sum:** The result of Addition (+)\n• **Difference:** The result of Subtraction (-)\n• **Product:** The result of Multiplication (*)\n• **Quotient:** The result of Division (/)\n• **Integer:** A whole number (positive, negative, or zero)\n• **Prime:** A number with exactly two factors (1 and itself)"
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Translating Word Problems",
+      "content": "When translating English to Math:\n\n1. Identify the 'equals' sign first (words like 'is', 'yields', 'results in').\n2. Look for the operation words (sum, difference, less than, times).\n3. Warning: '5 less than x' translates to x - 5 (NOT 5 - x). The order flips!\n4. Use brackets to group things together when you see words like 'the sum of'."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Translating a Sentence",
+      "content": "Translate into algebra: 'Three times the difference between a number and five is equal to twice the sum of the number and four.'\n\n**Step 1:** Let 'a number' be x.\n**Step 2:** 'difference between x and 5' = (x - 5).\n**Step 3:** 'Three times' that difference = 3(x - 5).\n**Step 4:** 'sum of x and 4' = (x + 4).\n**Step 5:** 'Twice' that sum = 2(x + 4).\n\n**Final Answer: 3(x - 5) = 2(x + 4).**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The deadliest vocabulary trap: 'Consecutive integers'. If a problem says 'the sum of three consecutive integers is 60', students often write x + y + z = 60, which is unsolvable. 'Consecutive' means 'one after the other'. So if the first is x, the next is (x+1), and the next is (x+2). The correct equation is x + (x+1) + (x+2) = 60. Knowing the vocabulary turns an impossible problem into an easy one."
+    }
+  ]
+}

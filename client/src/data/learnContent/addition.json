@@ -1,0 +1,30 @@
+{
+  "title": "Addition: Building the Number Tower",
+  "blocks": [
+    {
+      "icon": "➕",
+      "title": "1. The Core Concept: Stacking Blocks",
+      "content": "Addition is the most fundamental operation in all of mathematics. Think of it as stacking blocks on top of each other. If you have 3 blocks and add 5 more, you now have a tower of 8 blocks. Every other operation in math (subtraction, multiplication, division) is just addition wearing a different costume. **Master addition, and you master the foundation of everything.**"
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: The Order Doesn't Matter!",
+      "content": "Addition has a beautiful superpower called the **Commutative Property**.\n\n• This means 3 + 5 is exactly the same as 5 + 3. The order doesn't change the answer!\n• There's also the **Associative Property**: (2 + 3) + 4 = 2 + (3 + 4). You can group numbers however you like.\n• The **Identity Element** is 0. Adding zero to anything gives you the same number back (7 + 0 = 7)."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Column Addition",
+      "content": "When adding large numbers, use Column Addition:\n\n1. Write the numbers vertically, lining up the ones, tens, hundreds columns.\n2. Start adding from the RIGHT (ones column) first.\n3. If a column adds up to 10 or more, write down the ones digit and **carry** the tens digit to the next column.\n4. Work your way left, column by column, always remembering to add any carried digits."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Adding 478 + 365",
+      "content": "**Step 1 (Ones):** 8 + 5 = 13. Write down 3, carry 1.\n**Step 2 (Tens):** 7 + 6 = 13, plus the carried 1 = 14. Write down 4, carry 1.\n**Step 3 (Hundreds):** 4 + 3 = 7, plus the carried 1 = 8. Write down 8.\n\n**Final Answer: 478 + 365 = 843**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The number one killer mistake is **forgetting to carry**! When 8 + 5 = 13, students write down 13 in the ones column instead of carrying the 1. Another classic error: not lining up the columns properly, so you end up adding hundreds to tens. Always use graph paper or draw vertical lines to keep your columns razor-straight!"
+    }
+  ]
+}

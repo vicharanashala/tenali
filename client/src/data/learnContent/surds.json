@@ -1,0 +1,30 @@
+{
+  "title": "Surds: The Irrational Radicals",
+  "blocks": [
+    {
+      "icon": "√",
+      "title": "1. The Core Concept: Exact Values Only",
+      "content": "A **Surd** is a square root (or cube root) that cannot be simplified into a whole number, like sqrt(2) or sqrt(5). If you type sqrt(2) into a calculator, you get 1.41421356... an ugly decimal that goes on forever without repeating. By keeping it written as sqrt(2), you maintain 100% perfect mathematical precision. Surds are the language of exactness."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: Arithmetic with Surds",
+      "content": "• **Multiplication:** sqrt(a) * sqrt(b) = sqrt(ab). (e.g., sqrt(2) * sqrt(3) = sqrt(6)).\n• **Division:** sqrt(a) / sqrt(b) = sqrt(a/b).\n• **Addition/Subtraction:** You can ONLY add 'like' surds! 3sqrt(2) + 4sqrt(2) = 7sqrt(2). But you CANNOT add sqrt(2) + sqrt(3).\n• **Squaring:** sqrt(a) * sqrt(a) = a."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Rationalizing the Denominator",
+      "content": "Mathematicians hate having surds in the bottom of a fraction. To remove it:\n\n1. If the bottom is just sqrt(x), multiply top and bottom by sqrt(x).\n2. Example: 1/sqrt(2) becomes sqrt(2)/2.\n3. If the bottom is a binomial like (a + sqrt(b)), multiply top and bottom by its **conjugate**: (a - sqrt(b)).\n4. This uses the difference of two squares to destroy the surd on the bottom!"
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Conjugate Rationalization",
+      "content": "Rationalize: **5 / (3 - sqrt(2))**\n\n**Step 1:** Multiply top and bottom by the conjugate: (3 + sqrt(2)).\n**Step 2:** Top becomes: 5(3 + sqrt(2)) = 15 + 5sqrt(2).\n**Step 3:** Bottom becomes: (3 - sqrt(2))(3 + sqrt(2)) = 3^2 - (sqrt(2))^2.\n**Step 4:** Evaluate bottom: 9 - 2 = 7.\n\n**Final Answer: (15 + 5sqrt(2)) / 7**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "A massive error is treating addition like multiplication. Students will happily write sqrt(16 + 9) = 4 + 3 = 7. **THIS IS FATAL.** As proven earlier, 16+9 is 25, and sqrt(25) is 5. You can only split surds across a multiplication or division sign. NEVER split a surd across an addition or subtraction sign."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "title": "Inverse Trigonometry: Working Backwards",
+  "blocks": [
+    {
+      "icon": "🔄",
+      "title": "1. The Core Concept: Finding the Angle from the Ratio",
+      "content": "Normal trigonometry says: 'Here's an angle, what's the ratio?' sin(30) = 0.5. **Inverse trigonometry** asks the opposite: 'Here's a ratio, what's the angle?' arcsin(0.5) = 30 degrees. It's like having a dictionary that works both ways: English to French, AND French to English."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: The Three Inverse Functions",
+      "content": "• **arcsin (or sin^(-1)):** Input a ratio between -1 and 1, get an angle.\n• **arccos (or cos^(-1)):** Same input range, different output range.\n• **arctan (or tan^(-1)):** Input any real number, get an angle.\n\nCritical: sin^(-1) does NOT mean 1/sin! The -1 means 'inverse function', not 'reciprocal'."
+    },
+    {
+      "icon": "📱",
+      "title": "3. Step-by-Step: Using Your Calculator",
+      "content": "To find an angle using inverse trig:\n\n1. Identify which trig ratio you have (opposite/hypotenuse = sin, etc.).\n2. Press SHIFT (or 2nd) then the trig button on your calculator.\n3. Enter the ratio value.\n4. Make sure your calculator is in the correct mode (degrees or radians).\n5. The output is your angle."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Finding an Angle",
+      "content": "In a right triangle, the opposite side is 5 and the hypotenuse is 10. Find the angle.\n\n**Step 1:** sin(angle) = opposite/hypotenuse = 5/10 = 0.5.\n**Step 2:** angle = arcsin(0.5).\n**Step 3:** angle = 30 degrees.\n\n**Final Answer: The angle is 30 degrees.**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The most common mistake: confusing sin^(-1)(x) with 1/sin(x). They are COMPLETELY different! sin^(-1)(0.5) = 30 degrees (inverse function), but 1/sin(0.5) = 1/0.479 = 2.09 (reciprocal). On a calculator, the inverse trig functions are usually accessed by pressing SHIFT + sin/cos/tan. Make sure you're pressing the right button!"
+    }
+  ]
+}

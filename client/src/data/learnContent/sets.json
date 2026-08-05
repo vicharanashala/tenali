@@ -1,0 +1,30 @@
+{
+  "title": "Sets and Venn Diagrams: The Sorting Hat",
+  "blocks": [
+    {
+      "icon": "🗂️",
+      "title": "1. The Core Concept: Organizing the Chaos",
+      "content": "Imagine dumping 1,000 random items on the floor. To make sense of them, you start sorting them into boxes: a box for 'Red things', a box for 'Round things'. **Set Theory** is the mathematical language of organizing data into groups. It allows computers to instantly search databases (like finding all movies that are 'Action' AND 'Comedy' but NOT 'Horror')."
+    },
+    {
+      "icon": "⭕",
+      "title": "2. The Rules: The Secret Symbols",
+      "content": "You must memorize the secret code of sets:\n\n• **∩ (Intersection / AND):** This looks like an 'n' for iNtersection. It means you only want the items that are in BOTH groups (the overlapping middle of the Venn Diagram).\n• **∪ (Union / OR):** This looks like a 'U'. It means you want EVERYTHING in group A, plus EVERYTHING in group B, joined together in one massive super-group.\n• **' (Complement / NOT):** A tiny little tick mark (like A') means 'Everything outside of A'. It's the rebel symbol. Reject group A!"
+    },
+    {
+      "icon": "🎨",
+      "title": "3. Step-by-Step: Shading the Venn",
+      "content": "When asked to shade a region like **(A ∪ B)'**:\n\n1. Work from the inside out, just like BODMAS brackets.\n2. First, figure out what (A ∪ B) is. The Union means EVERYTHING in A and B combined. So the two circles form a giant figure-8 shape.\n3. Next, apply the ' (NOT) symbol outside the brackets.\n4. The NOT symbol means shade the exact OPPOSITE of what you just found. \n5. So, shade the entire blank rectangle background, completely ignoring the two circles!"
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: The Probability Overlap",
+      "content": "In a class of 30 students, 20 play Soccer, 15 play Tennis, and 5 play neither. How many play BOTH?\n\n• **Step 1 (The Outsiders):** 5 play neither, so they sit in the background rectangle. This leaves 25 students inside the circles (30 - 5 = 25).\n• **Step 2 (The Impossible Total):** If you add the Soccer kids and Tennis kids (20 + 15), you get 35. But there are only 25 kids available!\n• **Step 3 (Find the overlap):** Why do we have 10 extra kids? Because we counted the kids who play BOTH sports twice! \n• **Step 4 (The math):** 35 - 25 = 10.\n\n**Final Answer: 10 kids play both (Intersection).**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The biggest trap in Venn Diagram word problems is the word **'ONLY'**. If a question says '20 students play Soccer', that means the ENTIRE Soccer circle adds up to 20 (including the intersection in the middle!). But if it says '20 students play ONLY Soccer', that 20 goes purely in the left crescent moon shape, completely avoiding the middle overlap. Read the question carefully: is it the whole circle, or just the 'Only' crescent?"
+    }
+  ]
+}

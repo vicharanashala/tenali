@@ -1,0 +1,30 @@
+{
+  "title": "Trigonometry: SOH CAH TOA",
+  "blocks": [
+    {
+      "icon": "▶️",
+      "title": "1. The Core Concept: The Triangle Ratios",
+      "content": "If you have a right-angled triangle and you know one angle, the ratio between its sides is permanently locked, no matter how big the triangle grows. **Trigonometry** is the study of these locked ratios. It allows you to find the height of a mountain just by looking at its peak with an angle-measurer from a known distance away."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: The Magic Spell",
+      "content": "Memorize SOH CAH TOA. It unlocks everything:\n\n• **SOH:** Sin(angle) = Opposite / Hypotenuse\n• **CAH:** Cos(angle) = Adjacent / Hypotenuse\n• **TOA:** Tan(angle) = Opposite / Adjacent\n\n(Opposite is the side across from your angle. Adjacent is the side next to your angle. Hypotenuse is the longest side)."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Finding a Missing Side",
+      "content": "1. Label the triangle's three sides: O, A, H (relative to the angle you know).\n2. Look at what side you WANT to find, and what side you ALREADY know.\n3. Pick the ratio from SOH CAH TOA that uses those two sides.\n4. Write the formula, plug in the numbers.\n5. Use algebra to solve for the missing side."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Finding the Opposite",
+      "content": "You have an angle of 30 degrees, and the hypotenuse is 12cm. Find the opposite side.\n\n**Step 1:** We want O, we know H. O and H means we use Sine (SOH).\n**Step 2:** sin(30) = Opp / 12.\n**Step 3:** To isolate Opp, multiply both sides by 12.\n**Step 4:** 12 * sin(30) = Opp.\n**Step 5:** Since sin(30) is 0.5, then 12 * 0.5 = 6.\n\n**Final Answer: The opposite side is 6cm.**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The absolute worst mistake is having your calculator in RADIANS mode instead of DEGREES mode when doing standard trig! If you type sin(30) in radians mode, it gives -0.98 instead of 0.5, destroying your entire calculation. Always check for a tiny 'D' or 'DEG' at the top of your calculator screen before an exam. Second mistake: labeling Opposite and Adjacent incorrectly. O is ALWAYS across from the specific angle you are using."
+    }
+  ]
+}
