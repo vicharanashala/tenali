@@ -1421,6 +1421,186 @@ app.post('/quadratic-api/check', (req, res) => {
 });
 
 /**
+ * EQUATION CRAFTING (ALCHEMY) API
+ * ═══════════════════════════════════════════════════════════════════════════
+ */
+const ALCHEMY_QUESTION_BANK = {
+  0: [
+    { target: '12', reagents: ['3', '4', '2', '6'] },
+    { target: '15', reagents: ['5', '3', '10', '5'] },
+    { target: '20', reagents: ['4', '5', '10', '2'] },
+    { target: '8', reagents: ['2', '4', '12', '4'] }
+  ],
+  1: [
+    { target: '2x + 6', reagents: ['2', 'x', '6'] },
+    { target: '3x + 12', reagents: ['3', 'x', '4'] },
+    { target: '5x - 10', reagents: ['5', 'x', '2'] },
+    { target: '4x + 8', reagents: ['4', 'x', '2'] }
+  ],
+  2: [
+    { target: '3*(x + 4)', reagents: ['3', 'x', '4'] },
+    { target: '2*(x + 5)', reagents: ['2', 'x', '5'] },
+    { target: '4*(x - 2)', reagents: ['4', 'x', '2'] }
+  ],
+  3: [
+    { target: '(x + 2)*(x + 3)', reagents: ['x', '2', 'x', '3'] },
+    { target: '(x + 1)*(x + 4)', reagents: ['x', '1', 'x', '4'] },
+    { target: '(x - 1)*(x + 3)', reagents: ['x', '1', 'x', '3'] }
+  ],
+  4: [
+    { target: 'x^2 + 5x + 6', reagents: ['x', '2', 'x', '3'] },
+    { target: 'x^2 + 7x + 12', reagents: ['x', '3', 'x', '4'] },
+    { target: 'x^2 - 4', reagents: ['x', '2', 'x', '2'] }
+  ],
+  5: [
+    { target: '(x + 1)/(x - 1)', reagents: ['x', '1', 'x', '1'] },
+    { target: '(2x + 4)/2', reagents: ['2', 'x', '4', '2'] }
+  ],
+  6: [
+    { target: 'x^3 + 1', reagents: ['x', '1', 'x^2', 'x'] },
+    { target: '(x + 1)^3', reagents: ['x', '1', '3'] }
+  ],
+  7: [
+    { target: 'x*(x + 1)*(x + 2)', reagents: ['x', 'x', '1', 'x', '2'] }
+  ],
+  8: [
+    { target: '(x + 2)^2', reagents: ['x', '2', 'x', '2'] },
+    { target: '(x - 3)^2', reagents: ['x', '3', 'x', '3'] }
+  ],
+  9: [
+    { target: 'a^2 - b^2', reagents: ['a', 'b', 'a', 'b'] },
+    { target: '(a + b)^2', reagents: ['a', 'b', 'a', 'b'] }
+  ]
+};
+
+const SAFE_MATH_REGEX = /^[\d\s\+\-\*\/\^\(\)\.xab]*$/;
+
+const sanitizeMathExpr = (expr) => {
+  if (typeof expr !== 'string') return null;
+  const trimmed = expr.trim();
+  if (!trimmed || !SAFE_MATH_REGEX.test(trimmed)) return null;
+  const lower = trimmed.toLowerCase();
+  const forbidden = [
+    'process', 'require', 'import', 'global', 'window', 'document',
+    'eval', 'function', 'constructor', 'prototype', 'this', 'self',
+    'fetch', 'xmlhttprequest', 'exec', 'spawn', 'cookie', 'storage'
+  ];
+  for (const kw of forbidden) {
+    if (lower.includes(kw)) return null;
+  }
+  return trimmed;
+};
+
+app.get('/alchemy-api/question', (req, res) => {
+  const diff = Number(req.query.difficulty || 0);
+  const pool = ALCHEMY_QUESTION_BANK[diff] || ALCHEMY_QUESTION_BANK[0];
+  const q = pool[Math.floor(Math.random() * pool.length)];
+  res.json(q);
+});
+
+app.post('/alchemy-api/check', (req, res) => {
+  const { userExpression, target } = req.body || {};
+  const safeUser = sanitizeMathExpr(userExpression);
+  const safeTarget = sanitizeMathExpr(target);
+
+  if (!safeUser || !safeTarget) {
+    return res.status(400).json({
+      correct: false,
+      error: 'Invalid or unsafe mathematical expression provided.'
+    });
+  }
+
+  const evalMathExpr = (expr, xVal = 3, aVal = 2, bVal = 5) => {
+    try {
+      let js = String(expr)
+        .replace(/\^/g, '**')
+        .replace(/(\d+)([a-zA-Z])/g, '$1*$2')
+        .replace(/([a-zA-Z])([a-zA-Z])/g, '$1*$2')
+        .replace(/\)\(/g, ')*(')
+        .replace(/(\d+)\(/g, '$1*(')
+        .replace(/\)([a-zA-Z0-9])/g, ')*$1');
+      const fn = new Function('x', 'a', 'b', `return (${js});`);
+      return fn(xVal, aVal, bVal);
+    } catch (e) {
+      return NaN;
+    }
+  };
+
+  const clean1 = safeUser.replace(/\s+/g, '');
+  const clean2 = safeTarget.replace(/\s+/g, '');
+  let correct = clean1 === clean2;
+
+  if (!correct) {
+    const testPoints = [[2, 3, 4], [5, 1, 3], [7, 4, 2]];
+    correct = testPoints.every(([x, a, b]) => {
+      const v1 = evalMathExpr(clean1, x, a, b);
+      const v2 = evalMathExpr(clean2, x, a, b);
+      return !isNaN(v1) && !isNaN(v2) && Math.abs(v1 - v2) < 1e-5;
+    });
+  }
+
+  res.json({ correct, target: safeTarget, userExpression: safeUser });
+});
+
+/**
+ * WATER JUG LAB API
+ * ═══════════════════════════════════════════════════════════════════════════
+ * Note: Water Jug Lab is an interactive client-side lab module.
+ * These endpoints provide backend support for problem data and GCD verification.
+ */
+app.get('/jug-api/question', (req, res) => {
+  const diff = Math.min(12, Math.max(0, Number(req.query.difficulty || 0)));
+  const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b));
+
+  const levelConfigs = [
+    { jugA: 3, jugB: 5, target: 4 },
+    { jugA: 4, jugB: 6, target: 2 },
+    { jugA: 2, jugB: 7, target: 3 },
+    { jugA: 5, jugB: 8, target: 6 },
+    { jugA: 3, jugB: 7, target: 5 },
+    { jugA: 4, jugB: 9, target: 7 },
+    { jugA: 5, jugB: 11, target: 9 },
+    { jugA: 6, jugB: 10, target: 4 },
+    { jugA: 7, jugB: 12, target: 8 },
+    { jugA: 8, jugB: 15, target: 11 },
+    { jugA: 6, jugB: 9, target: 5 },
+    { jugA: 4, jugB: 10, target: 7 },
+    { jugA: 9, jugB: 14, target: 11 }
+  ];
+
+  const cfg = levelConfigs[diff] || levelConfigs[0];
+  const g = gcd(cfg.jugA, cfg.jugB);
+  const solvable = cfg.target % g === 0 && cfg.target <= Math.max(cfg.jugA, cfg.jugB);
+
+  res.json({
+    difficulty: diff,
+    jugA: cfg.jugA,
+    jugB: cfg.jugB,
+    target: cfg.target,
+    gcd: g,
+    solvable
+  });
+});
+
+app.post('/jug-api/check', (req, res) => {
+  const { jugA, jugB, target, userClaimedImpossible } = req.body || {};
+  const jA = Number(jugA);
+  const jB = Number(jugB);
+  const tgt = Number(target);
+
+  const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b));
+  const g = gcd(jA, jB);
+  const isSolvable = tgt % g === 0 && tgt <= Math.max(jA, jB);
+
+  if (userClaimedImpossible !== undefined) {
+    const correct = (userClaimedImpossible && !isSolvable) || (!userClaimedImpossible && isSolvable);
+    return res.json({ correct, isSolvable, gcd: g });
+  }
+
+  res.json({ isSolvable, gcd: g });
+});
+
+/**
  * SQUARE ROOT APPROXIMATION API
  * ═══════════════════════════════════════════════════════════════════════════
  */
