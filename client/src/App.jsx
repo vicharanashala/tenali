@@ -69,6 +69,7 @@ function useProgressSubmit(revealed, isCorrect, topic, questionId) {
 
 
 import Vachana from './vachana'
+import ReflectionJournal from './ReflectionJournal'  // Feature CT — platform-wide reflection journal
 import 'chart.js/auto'
 import { Line } from 'react-chartjs-2'
 
@@ -78,6 +79,10 @@ import GlossaryText from './components/GlossaryText'
 import KeyTerms from './components/KeyTerms'
 import InteractiveLcmHcfApp from './LcmHcfApp';
 import IdliVadaSambharApp from './IdliVadaSambharApp';
+import CarJourneyApp from './CarJourneyApp';
+import RealWorldHubApp from './RealWorldHub';
+import { cjTakeReco } from './cjReco'; // Feature CR — Road License difficulty hand-off
+const CJ_RECO_DIFFS = ['easy', 'medium', 'hard', 'extrahard'];
 import VisualMathLabRedux, {
   FrogJumpTemplate,
   MathMachineTemplate,
@@ -44698,6 +44703,8 @@ function App() {
     variation: VariationApp,       // Variation
     hcflcm: InteractiveLcmHcfApp,  // HCF & LCM
     idlivada: IdliVadaSambharApp,  // Idli–Vada–Sambhar (Multiples, Common Multiples & LCM)
+    carjourney: CarJourneyApp,     // The Car Journey (Feature CR — 16-stop math road trip)
+    realworld: RealWorldHubApp,    // Real-World hub (Feature CR) — phenomenon pathway cards
     profitloss: ProfitLossApp,     // Profit & Loss
     rounding: RoundingApp,         // Rounding
     binomial: BinomialApp,         // Binomial Theorem
@@ -44899,6 +44906,7 @@ function App() {
         )}
       </div>
       {renderCelebrationModal()}
+      <ReflectionJournal />
     </div>
   )
 }
@@ -44930,6 +44938,9 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
     ...featuredApps,
     { key: 'curiosity', name: 'Curiosity Mode', subtitle: 'Explore "What if" variations', color: 'pink' },
   ]
+
+  // Set false to remove the Car Journey card from the home grid (hamburger-only mode).
+  const CJ_SHOW_GRID_CARD = true
 
   // All regular quiz apps sorted alphabetically by name
   const regularApps = [
@@ -45007,6 +45018,7 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
     { key: 'sudoku', name: 'Sudoku', subtitle: '9x9 number puzzle — fill every row, column & box', color: 'teal' },
     { key: 'surds', name: 'Surds', subtitle: 'Simplify, add, multiply, rationalise', color: 'green' },
     { key: 'tatsavit', name: 'Tatsavit', subtitle: 'Algebra simplification drill', color: 'blue' },
+    ...(CJ_SHOW_GRID_CARD ? [{ key: 'carjourney', name: 'The Car Journey', subtitle: '16-stop math road trip — counting to calculus', color: 'orange' }] : []),
     { key: 'transform', name: 'Transformations', subtitle: 'Reflect, rotate, translate, enlarge', color: 'purple' },
     { key: 'triangles', name: 'Triangles', subtitle: 'Angle sum, isosceles, exterior', color: 'blue' },
     { key: 'trig', name: 'Trigonometry', subtitle: 'SOH-CAH-TOA, sine/cosine rule', color: 'green' },
@@ -45146,6 +45158,18 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
                 <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>{app.subtitle}</span>
               </button>
             ))}
+            <div style={{ height: '1px', background: 'var(--clr-border)', margin: '4px 0' }} />
+
+            {/* Real-World hub (Feature CR) — opens the phenomenon pathway cards */}
+            <button onClick={() => { setMenuOpen(false); onSelect('realworld') }} style={{
+              display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
+              background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
+              fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)'
+            }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
+              onMouseLeave={e => e.target.style.background = 'none'}>
+              <strong style={{ color: 'var(--clr-accent)' }}>🌍 Real-World</strong>
+              <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>Math pathways through real phenomena</span>
+            </button>
             <div style={{ height: '1px', background: 'var(--clr-border)', margin: '4px 0' }} />
 
             <button onClick={() => { setMenuOpen(false); onSelect('goalpractice') }} style={{
@@ -49985,7 +50009,7 @@ function AdditionApp({ onBack, completedTopics = [], goldMastery = [], markTopic
   // Mode selection: 'standard' (default), 'counting' (Visual Counting), 'scale' (Balance Scale)
   const [additionMode, setAdditionMode] = useState(initialMode || 'standard')
   // Difficulty level: 'easy' (1-digit), 'medium' (2-digit), 'hard' (3-digit), 'extrahard' (4-digit)
-  const [difficulty, setDifficulty] = useState(initialDifficulty || 'easy')
+  const [difficulty, setDifficulty] = useState(() => initialDifficulty || cjTakeReco('addition', CJ_RECO_DIFFS) || 'easy')
   // Adaptive mode enabled?
   const [isAdaptive, setIsAdaptive] = useState(false)
   // Adaptive score (0-3)
@@ -51589,7 +51613,7 @@ function GymQuiz({ title, subtitle, typeKeys, welcomeText, algebraInput, onBack 
  */
 function BasicArithApp({ onBack, completedTopics = [], goldMastery = [], markTopicCompleted, setTransferTopic, setMode, isGoalMode = false }) {
   // Difficulty level: 'easy', 'medium', 'hard', 'extrahard'
-  const [difficulty, setDifficulty] = useState('easy')
+  const [difficulty, setDifficulty] = useState(() => cjTakeReco('basicarith', CJ_RECO_DIFFS) || 'easy')
   // Adaptive mode enabled?
   const [isAdaptive, setIsAdaptive] = useState(false)
   // Adaptive score (0-3)
@@ -51938,7 +51962,7 @@ const fetchQuestion = async () => {
  */
 function QuadraticApp({ onBack, isGoalMode = false }) {
   // Difficulty level: 'easy', 'medium', 'hard', 'extrahard'
-  const [difficulty, setDifficulty] = useState('easy')
+  const [difficulty, setDifficulty] = useState(() => cjTakeReco('quadratic', CJ_RECO_DIFFS) || 'easy')
   // Adaptive mode enabled?
   const [isAdaptive, setIsAdaptive] = useState(false)
   // Adaptive score (0-3)
@@ -54613,7 +54637,8 @@ function TransferChallengeApp({ topicKey, onBack, completedTopics, goldMastery, 
 function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, answerField, topicKey: customTopicKey }) {
   return function GeneratedQuizApp({ onBack, completedTopics = [], goldMastery = [], markTopicCompleted, markGoldMastery, updateCoins, setMode, setTransferTopic, initialDifficulty, initialNumQuestions, initialStarted, isGoalMode = false }) {
     const diffs = Object.keys(diffLabels)
-    const [difficulty, setDifficulty] = useState(initialDifficulty || diffs[0])
+    // Feature CR: a just-earned Road License pre-selects the earned difficulty (one-shot; student can change it)
+    const [difficulty, setDifficulty] = useState(() => initialDifficulty || cjTakeReco(customTopicKey || apiPath.replace('-api', ''), diffs) || diffs[0])
     const topicKey = customTopicKey || apiPath.replace('-api', '')
     const [isAdaptive, setIsAdaptive] = useState(false)
     const [adaptScore, setAdaptScore] = useState(0) // 0.0 (easy) → 3.0 (extrahard)
@@ -58568,7 +58593,7 @@ const loadQuestion = async () => {
 
 /* ── Ratio & Proportion App ────────────────────────── */
 function RatioApp({ onBack, completedTopics = [], goldMastery = [], markTopicCompleted, markGoldMastery, updateCoins, setMode, setTransferTopic, isGoalMode = false }) {
-  const [difficulty, setDifficulty] = useState('easy')
+  const [difficulty, setDifficulty] = useState(() => cjTakeReco('ratio', CJ_RECO_DIFFS) || 'easy')
   const [isAdaptive, setIsAdaptive] = useState(false)
   const [adaptScore, setAdaptScore] = useState(0)
   const adaptScoreRef = useRef(0)
@@ -60468,7 +60493,7 @@ const loadQuestion = async () => {
 function FractionAddApp({ onBack, completedTopics = [], goldMastery = [], markTopicCompleted, markGoldMastery, updateCoins, setMode, setTransferTopic, isGoalMode = false }) {
   // ── State variables ──────────────────────────────────────────────────
   // Difficulty: 'easy' | 'medium' | 'hard' | 'extrahard'
-  const [difficulty, setDifficulty] = useState('easy')
+  const [difficulty, setDifficulty] = useState(() => cjTakeReco('fractionadd', CJ_RECO_DIFFS) || 'easy')
   // Adaptive mode enabled?
   const [isAdaptive, setIsAdaptive] = useState(false)
   // Adaptive score (0-3)
@@ -62873,7 +62898,7 @@ const loadQuestion = async () => {
 function SimulApp({ onBack, isGoalMode = false }) {
   // ─────── Quiz State Management ──────────────────────────────────
   // Difficulty level: 'easy' (2×2) | 'hard' (3×3)
-  const [difficulty, setDifficulty] = useState('easy')
+  const [difficulty, setDifficulty] = useState(() => cjTakeReco('simul', CJ_RECO_DIFFS) || 'easy')
   // Adaptive mode enabled?
   const [isAdaptive, setIsAdaptive] = useState(false)
   // Adaptive score (0-3)
