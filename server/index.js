@@ -2041,13 +2041,14 @@ app.get('/polymul-api/question', (req, res) => {
       p1 = [0, a];
       p2 = [c, b];
     } else {
-      // a × (bx + c) → coeffs: a = [a], (bx+c) = [c, b]
+      // a × (x + c) form — b is fixed at 1 so prompt is a(x±c).
+      // This guarantees the Bracketeer monster can trigger on wrong answers
+      // where the student forgets to multiply the constant term.
       const a = randomInt(2, range.max);
-      const b = randomInt(1, range.max);
       let c = randomInt(1, range.max);
       if (Math.random() < 0.3) c = -c;
       p1 = [a];
-      p2 = [c, b];
+      p2 = [c, 1]; // b=1 always: inner term is x, not bx
     }
   } else if (difficulty === 'medium') {
     // Medium: two degree-1 polynomials (ax+b)(cx+d)
@@ -2072,6 +2073,20 @@ app.get('/polymul-api/question', (req, res) => {
   }
 
   const product = multiplyPolys(p1, p2);
+
+  // Build a Bracketeer-compatible prompt for the monster interceptor.
+  // Fires only for easy constant × pure-binomial (inner coeff = 1) form: a(x±c).
+  // For all other cases we fall back to the generic display form.
+  let prompt;
+  if (p1.length === 1 && p2.length === 2 && p2[1] === 1) {
+    const aVal = p1[0];
+    const cVal = p2[0];
+    const innerOp = cVal >= 0 ? '+' : '-';
+    prompt = `${aVal}(x${innerOp}${Math.abs(cVal)})`;
+  } else {
+    prompt = `(${formatPoly(p1)})(${formatPoly(p2)})`;
+  }
+
   res.json({
     id: `polymul-${Date.now()}-${Math.random()}`,
     p1, p2, product,
@@ -2079,6 +2094,7 @@ app.get('/polymul-api/question', (req, res) => {
     p2Display: formatPoly(p2),
     productDisplay: formatPoly(product),
     resultDegree: product.length - 1,
+    prompt,
   });
 });
 
@@ -2106,7 +2122,14 @@ app.post('/polymul-api/check', (req, res) => {
   const product = multiplyPolys(p1, p2);
   // Check both length and values to ensure correct answer
   const correct = product.length === userCoeffs.length && product.every((c, i) => Number(userCoeffs[i]) === c);
-  res.json({ correct, correctCoeffs: product, correctDisplay: formatPoly(product), message: correct ? 'Correct' : 'Incorrect' });
+  const correctDisplay = formatPoly(product);
+  res.json({
+    correct,
+    correctCoeffs: product,
+    correctDisplay,
+    correctAnswer: correctDisplay,  // alias for monster interceptor (extractNormalized reads this field)
+    message: correct ? 'Correct' : 'Incorrect',
+  });
 });
 
 /**
