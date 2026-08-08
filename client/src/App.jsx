@@ -44997,13 +44997,50 @@ function pmTrackCorrectTotal(moduleId) {
 function pmTrackThresholdMet(moduleId) {
   return pmTrackCorrectTotal(moduleId) >= PM_TRACK_THRESHOLD
 }
+function pmGetKnownFromStorage() {
+  try {
+    const r = localStorage.getItem('tenali_pathmap_known')
+    return new Set(r ? JSON.parse(r) : [])
+  } catch {
+    return new Set()
+  }
+}
+
+function pmGetCurrentSuggestedModule() {
+  if (!pmNodes.length) return null
+  const known = pmGetKnownFromStorage()
+  const isCompleted = (id) => known.has(id) || pmTrackThresholdMet(id)
+  
+  const allNodeIds = new Set(pmNodes.map(n => n.id))
+  const sortedIds = pmTopoSort(allNodeIds)
+  
+  for (const id of sortedIds) {
+    if (isCompleted(id)) continue
+    const prereqs = pmPrereqMap[id] || []
+    if (prereqs.every(p => isCompleted(p))) {
+      return pmNodeById[id] || null
+    }
+  }
+  return null
+}
+
 // Picks the next module to suggest: first successor (per graph-data.json edges)
 // that hasn't been started yet, falling back to the first successor overall.
 // AFTER
 function pmTrackNextModule(moduleId) {
   const successors = pmSuccessorMap[moduleId] || []
-  if (!successors.length) return []
-  return successors.map((id) => pmNodeById[id]).filter(Boolean)
+  if (successors.length > 0) {
+    return successors.map((id) => pmNodeById[id]).filter(Boolean)
+  }
+  
+  // Fallback: suggest the next uncompleted node in the entire graph
+  const nextGlobalNode = pmGetCurrentSuggestedModule()
+  if (nextGlobalNode && nextGlobalNode.id !== moduleId) {
+    return [nextGlobalNode]
+  }
+  
+  // If everything is completed, return a special virtual node
+  return [{ id: 'dashboard', label: '🎉 Go to Dashboard' }]
 }
 
 // Registered by the top-level App component so any nested quiz can navigate
@@ -45072,7 +45109,12 @@ function PmSuggestIcon({ moduleId }) {
           cursor: 'not-allowed', opacity: 0.45,
         }}>
           <span style={{ fontSize: '0.8rem' }}>🔒</span>
-          Next module
+          {(() => {
+            if (!pmNodeById[moduleId]) return 'Next module'
+            const correctCount = pmTrackCorrectTotal(moduleId)
+            const remaining = Math.max(0, PM_TRACK_THRESHOLD - correctCount)
+            return `Unlock next: get ${remaining} more right`
+          })()}
         </button>
       )}
     </div>
@@ -45829,7 +45871,7 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
   const [showAbout, setShowAbout] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [search, setSearch] = useState('')
- 
+
   const featuredApps = [
     { key: 'randommix', name: 'Random Mix', subtitle: 'Adaptive cross-topic quiz', color: 'featured' },
     { key: 'custom', name: 'Custom Lesson', subtitle: 'Build your own mixed quiz', color: 'featured' },
@@ -45984,6 +46026,7 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
  
   // ── PathMap state (re-integrated from the previous version) ────────────
   const pmStatus = usePmGraphData()
+  const suggestedModule = pmStatus === 'ready' ? pmGetCurrentSuggestedModule() : null
   const [pmOpen, setPmOpen] = useState(false)
   const [pmGoalIds, setPmGoalIds] = useState(() => {
     try { const r = localStorage.getItem('tenali_pathmap_goal'); return r ? JSON.parse(r) : [] } catch { return [] }
@@ -46197,6 +46240,26 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
               </p>
             </div>
             <div className="journey-banner-arrow">➔</div>
+          </button>
+        </div>
+      )}
+
+      {!search && !isGoalSelection && suggestedModule && (
+        <div className="quest-banner-row">
+          <button className="quest-banner-btn" onClick={() => onSelect(suggestedModule.id)}>
+            <div className="quest-banner-content">
+              <div className="quest-banner-header">
+                <span>🚀</span>
+                <span className="quest-banner-tag">Today's Quest</span>
+              </div>
+              <h3 className="quest-banner-title">
+                {suggestedModule.label}
+              </h3>
+              <p className="quest-banner-subtitle">
+                {suggestedModule.sub || 'Embark on your next learning step!'}
+              </p>
+            </div>
+            <div className="quest-banner-arrow">➔</div>
           </button>
         </div>
       )}
