@@ -169,6 +169,8 @@ export default defineConfig({
       '/darts-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
       // Sudoku quiz API
       '/sudoku-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      // Drishya quiz API
+      '/drishya-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
       // Math Riddles API
       '/riddle-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
       // Math Riddles static images
