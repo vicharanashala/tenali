@@ -127,6 +127,7 @@ UserSchema.pre('save', function (next) {
     this.coinBalance = val;
   }
   next();
+});
 
 const ProgressSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, index: true },
