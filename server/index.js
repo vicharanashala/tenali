@@ -10072,6 +10072,11 @@ app.get('/enhanced', (_req, res) => {
   res.sendFile(path.join(__dirname, '..', 'enhanced', 'index.html'));
 });
 
+// serves the shared node/edge data used by PathMap
+app.get('/graph-data.json', (_req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'graph', 'graph-data.json'));
+});
+
 // ═══════════════════════════════════════════════════════════════════════════
 // LEARNING TRANSFER CHALLENGES & PROGRESS SYNC API
 // ═══════════════════════════════════════════════════════════════════════════
