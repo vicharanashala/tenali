@@ -19,12 +19,126 @@
 ---
 
 <!-- live-changelog:start -->
-### 📊 Total: 793 commits · 43 active days · 21 unique authors
+### 📊 Total: 872 commits · 48 active days · 23 unique authors
 
 > **📖 How to read this:** Each entry shows a clickable SHA, the author, and a one-line subject. Sub-bullets show the **exact files touched** with per-file `+additions −deletions`, the **total line stats**, and (when present) the **commit body** explaining what & why.
 
-#### 📅 2026-08-03  <sub>(35 commits)</sub>
+#### 📅 2026-08-08  <sub>(1 commit)</sub>
 
+- 📌 [`af7e965`](https://github.com/vicharanashala/tenali/commit/af7e965121848cd0ae58f6ad55958c46eac5f748) — **github-actions[bot]** — 🤖 docs(contributors): refresh contributor stats
+    - 📁 **3 files:** `CHANGELOG.md` `+5 −2`, `CONTRIBUTORS.md` `+27 −27`, `README.md` `+5 −5`
+    - 📊 **`+37 −34`** · 3 files
+
+#### 📅 2026-08-07  <sub>(2 commits)</sub>
+
+- 📌 [`9aac167`](https://github.com/vicharanashala/tenali/commit/9aac167ec047cd50dcf47e267d19c689df9b938c) — **github-actions[bot]** — 🤖 docs(contributors): refresh contributor stats
+    - 📁 **3 files:** `CHANGELOG.md` `+7 −1`, `CONTRIBUTORS.md` `+4 −4`, `README.md` `+3 −3`
+    - 📊 **`+14 −8`** · 3 files
+- 📌 [`9464497`](https://github.com/vicharanashala/tenali/commit/94644972ec5ea7d5f15c89a590156241a6b5e0ee) — **github-actions[bot]** — 🤖 docs(contributors): refresh contributor stats
+    - 📁 **3 files:** `CHANGELOG.md` `+5 −2`, `CONTRIBUTORS.md` `+5 −5`, `README.md` `+4 −4`
+    - 📊 **`+14 −11`** · 3 files
+
+#### 📅 2026-08-06  <sub>(28 commits)</sub>
+
+- 📌 [`1a1acea`](https://github.com/vicharanashala/tenali/commit/1a1acea68082a24f5b5cff10795a771b118e2e35) — **github-actions[bot]** — 🤖 docs(contributors): refresh contributor stats
+    - 📁 **3 files:** `CHANGELOG.md` `+5 −2`, `CONTRIBUTORS.md` `+4 −4`, `README.md` `+3 −3`
+    - 📊 **`+12 −9`** · 3 files
+- 📌 [`eceb62e`](https://github.com/vicharanashala/tenali/commit/eceb62e3e490280c6b756acdeed44cd72d3a2829) — **github-actions[bot]** — 🤖 docs(contributors): refresh contributor stats
+    - 📁 **3 files:** `CHANGELOG.md` `+178 −11`, `CONTRIBUTORS.md` `+107 −61`, `README.md` `+6 −6`
+    - 📊 **`+291 −78`** · 3 files
+- 🐛 [`34f618d`](https://github.com/vicharanashala/tenali/commit/34f618d9435e7d3b7a3f55b864d2ff149078d3bf) — **muditagrawal2007** — bot only commits README.md — collapse multi-line file_pattern
+    - 📁 **1 file:** `.github/workflows/update-readme.yml` `+2 −5`
+    - 📊 **`+2 −5`** · 1 file
+- 📌 [`a7f605f`](https://github.com/vicharanashala/tenali/commit/a7f605f4376e10d4e3d5fa7c937ed268a2ff3626) — **github-actions[bot]** — 🤖 docs(contributors): refresh contributor stats
+    - 📁 **1 file:** `README.md` `+17 −16`
+    - 📊 **`+17 −16`** · 1 file
+- 📌 [`264cbc5`](https://github.com/vicharanashala/tenali/commit/264cbc53c1adf6abd7b33564f61ba5b1dd3dc5d7) — **muditagrawal2007** — 🔀 PR [#150](https://github.com/vicharanashala/tenali/pull/150) from `muditagrawal2007` — fix/server-error-message-mapping
+- 🐛 [`edff518`](https://github.com/vicharanashala/tenali/commit/edff518ffdb9815156844ecc886fc0465ae48de5) — **muditagrawal2007** — map body-parser errors to useful 400 messages, not 'Internal server error'
+    - 📁 **1 file:** `server/index.js` `+16 −1`
+    - 📊 **`+16 −1`** · 1 file
+- 📌 [`51d5cd1`](https://github.com/vicharanashala/tenali/commit/51d5cd1b7464015621028754dbc8f4d005b90d1e) — **muditagrawal2007** — 🔀 PR [#147](https://github.com/vicharanashala/tenali/pull/147) from `muditagrawal2007` — fix/voice-assistant-auth-user-key
+- 📌 [`2710aa9`](https://github.com/vicharanashala/tenali/commit/2710aa98f51ab2adcd20090198e51ee2660495e2) — **muditagrawal2007** — 🔀 PR [#148](https://github.com/vicharanashala/tenali/pull/148) from `muditagrawal2007` — fix/lcmhcf-api-base-path
+- 📌 [`6585437`](https://github.com/vicharanashala/tenali/commit/65854370349d8a447ad3b3d5d4a6f3d263d75652) — **muditagrawal2007** — 🔀 PR [#149](https://github.com/vicharanashala/tenali/pull/149) from `muditagrawal2007` — fix/la-mission-quiz-check-validation
+- 🐛 [`860c2f3`](https://github.com/vicharanashala/tenali/commit/860c2f39d943be67b851ab7b25afeb5159df01ac) — **muditagrawal2007** — validate answer in /la-mission-quiz-api/check
+    - 📁 **1 file:** `server/index.js` `+8 −1`
+    - 📊 **`+8 −1`** · 1 file
+- 🐛 [`e6da2f2`](https://github.com/vicharanashala/tenali/commit/e6da2f25eba1909457e27300743c1dd93f93bd0f) — **muditagrawal2007** — anchor /hcflcm-api fetches to the current sub-path
+    - 📁 **1 file:** `client/src/LcmHcfApp.jsx` `+9 −2`
+    - 📊 **`+9 −2`** · 1 file
+- 🐛 [`c4c8c18`](https://github.com/vicharanashala/tenali/commit/c4c8c18e12cb40678fe5b58a4710947438eb662e) — **muditagrawal2007** — read correct localStorage key 'tenali-auth-user' in VoiceAssistant
+    - 📁 **1 file:** `client/src/components/VoiceAssistant.jsx` `+1 −1`
+    - 📊 **`+1 −1`** · 1 file
+- 📌 [`5177fe2`](https://github.com/vicharanashala/tenali/commit/5177fe25241558abf96db7b5144b13a038ff79f3) — **muditagrawal2007** — 🔀 PR [#145](https://github.com/vicharanashala/tenali/pull/145) from `muditagrawal2007` — fix/navigation-drop-subpath
+- 📌 [`ba44f04`](https://github.com/vicharanashala/tenali/commit/ba44f04e46f2651e33ba6dbd7c3d6fd08834394d) — **muditagrawal2007** — 🔀 PR [#146](https://github.com/vicharanashala/tenali/pull/146) from `muditagrawal2007` — fix/wordcreator-api-base-path
+- 🐛 [`9d8cd33`](https://github.com/vicharanashala/tenali/commit/9d8cd330522c9cc623559146089578b43a93797e) — **muditagrawal2007** — anchor /wordcreator-api fetches to the current sub-path
+    - 📁 **1 file:** `client/src/language/WordCreatorApp.jsx` `+9 −4`
+    - 📊 **`+9 −4`** · 1 file
+- 🐛 [`aef724a`](https://github.com/vicharanashala/tenali/commit/aef724a2726424279ec05c49432ed074da83b494) — **muditagrawal2007** — stop dropping the /summership/ sub-path in 13 places
+    - 📁 **1 file:** `client/src/App.jsx` `+13 −13`
+    - 📊 **`+13 −13`** · 1 file
+- 📌 [`978a9fb`](https://github.com/vicharanashala/tenali/commit/978a9fb50dbe071eab8000ee43a5604540962627) — **muditagrawal2007** — 🔀 PR [#140](https://github.com/vicharanashala/tenali/pull/140) from `muditagrawal2007` — fix/auth-token-key-mismatch
+- 📌 [`dc1a7bf`](https://github.com/vicharanashala/tenali/commit/dc1a7bf2a933d1fa855f0c5936685e79c9f7a90d) — **muditagrawal2007** — 🔀 PR [#141](https://github.com/vicharanashala/tenali/pull/141) from `muditagrawal2007` — fix/deployment-root-summership-split
+- 📌 [`a55cc07`](https://github.com/vicharanashala/tenali/commit/a55cc070928567e4b4a2360f280b181282d28d0a) — **muditagrawal2007** — 🔀 PR [#142](https://github.com/vicharanashala/tenali/pull/142) from `muditagrawal2007` — fix/impure-render-body-random-values
+- 📌 [`8d87037`](https://github.com/vicharanashala/tenali/commit/8d87037edc24ae60eee16833048659648deb6229) — **muditagrawal2007** — 🔀 PR [#143](https://github.com/vicharanashala/tenali/pull/143) from `muditagrawal2007` — fix/battle-socket-and-room
+- 📌 [`57a04ca`](https://github.com/vicharanashala/tenali/commit/57a04caefaae700ed586c30ca03bd65d45fd2135) — **muditagrawal2007** — 🔀 PR [#144](https://github.com/vicharanashala/tenali/pull/144) from `muditagrawal2007` — fix/playground-api-base-path
+- 🐛 [`2bd8688`](https://github.com/vicharanashala/tenali/commit/2bd8688ea6e6cf019be968199b1dd5300683f454) — **muditagrawal2007** — socket.io path + room deletion on opponent leave
+    - 📁 **2 files:** `client/src/BattleApp.jsx` `+10 −1`, `server/index.js` `+22 −5`
+    - 📊 **`+32 −6`** · 2 files
+- 🐛 [`fa01db5`](https://github.com/vicharanashala/tenali/commit/fa01db5aba7a596576192a75e02a755917fe922f) — **muditagrawal2007** — anchor /api/playground* fetches to the current sub-path
+    - 📁 **2 files:** `client/src/LocalCompilerApp.jsx` `+11 −2`, `client/src/PlaygroundApp.jsx` `+10 −1`
+    - 📊 **`+21 −3`** · 2 files
+- 🐛 [`6ca43b5`](https://github.com/vicharanashala/tenali/commit/6ca43b520bf17ac824701491211ce52e06daebee) — **muditagrawal2007** — redirect root / to /summership/ + nginx template + deployment docs
+    - 📁 **3 files:** `DEPLOYMENT.md` `+88 −0`, `server/deploy/tenali-nginx.conf` `+80 −0`, `server/index.js` `+10 −0`
+    - 📊 **`+178 −0`** · 3 files
+- 🐛 [`6fa596b`](https://github.com/vicharanashala/tenali/commit/6fa596bf4ca14e65f0e56f5c2ff244629d498684) — **muditagrawal2007** — lock impure Math.random values that ran during render
+    - 📁 **1 file:** `client/src/App.jsx` `+37 −26`
+    - 📊 **`+37 −26`** · 1 file
+- 🐛 [`07a2ae4`](https://github.com/vicharanashala/tenali/commit/07a2ae4f7a6e0af68ecb0085a3a9e9005586499c) — **muditagrawal2007** — use correct localStorage key 'tenali-auth-token' in progress hooks
+    - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
+    - 📊 **`+2 −2`** · 1 file
+- 📌 [`e7d3f64`](https://github.com/vicharanashala/tenali/commit/e7d3f649206b95685750170975952c3709825ca3) — **jgupta05072003-code** — 🔀 PR [#21](https://github.com/vicharanashala/tenali/pull/21) from `harshyy07` — feat-hints
+- 📌 [`56ab171`](https://github.com/vicharanashala/tenali/commit/56ab1714a847c2e9a4dd425bbf6adac7efa2e5c5) — **github-actions[bot]** — 🤖 docs(contributors): refresh contributor stats
+    - 📁 **1 file:** `README.md` `+5 −5`
+    - 📊 **`+5 −5`** · 1 file
+
+#### 📅 2026-08-05  <sub>(4 commits)</sub>
+
+- 📌 [`f802616`](https://github.com/vicharanashala/tenali/commit/f8026169b8acbd7d3a2bbad12671ccd59b666b1d) — **harshyy07** — Merge branch 'main' into feat-hints
+- 📌 [`9e736b9`](https://github.com/vicharanashala/tenali/commit/9e736b9c6c01a24a6e50031b632a25adbe0af22f) — **harshyy07** — Merge branch 'main' into feat-hints
+- 📌 [`72d481b`](https://github.com/vicharanashala/tenali/commit/72d481bbf630939bb0dcd94ea923e910bf072bc2) — **github-actions[bot]** — 🤖 docs(contributors): refresh contributor stats
+    - 📁 **1 file:** `README.md` `+4 −4`
+    - 📊 **`+4 −4`** · 1 file
+- 📌 [`3ac09e1`](https://github.com/vicharanashala/tenali/commit/3ac09e13235a8babc1d004c6fce911f5e1b46d47) — **github-actions[bot]** — 🤖 docs(contributors): refresh contributor stats
+    - 📁 **1 file:** `README.md` `+4 −4`
+    - 📊 **`+4 −4`** · 1 file
+
+#### 📅 2026-08-04  <sub>(3 commits)</sub>
+
+- 📌 [`906fd50`](https://github.com/vicharanashala/tenali/commit/906fd5072a5fd0bc5f57e97ddbe29d1ffb5f4320) — **github-actions[bot]** — 🤖 docs(contributors): refresh contributor stats
+    - 📁 **1 file:** `README.md` `+3 −3`
+    - 📊 **`+3 −3`** · 1 file
+- 📌 [`2c7d978`](https://github.com/vicharanashala/tenali/commit/2c7d9787e23f45e4f0316173b836fb945296e53d) — **github-actions[bot]** — 🤖 docs(contributors): refresh contributor stats
+    - 📁 **1 file:** `README.md` `+5 −5`
+    - 📊 **`+5 −5`** · 1 file
+- 📌 [`3120192`](https://github.com/vicharanashala/tenali/commit/3120192df6e0c919d86d0167587bf2abf7b3956b) — **harshyy07** — Merge branch 'main' into feat-hints
+
+#### 📅 2026-08-03  <sub>(44 commits)</sub>
+
+- 📌 [`e303ff9`](https://github.com/vicharanashala/tenali/commit/e303ff94c13c7d1ea162e23e580b2c057c5f5de6) — **github-actions[bot]** — 🤖 docs(contributors): refresh contributor stats
+    - 📁 **1 file:** `README.md` `+4 −4`
+    - 📊 **`+4 −4`** · 1 file
+- 📌 [`3cc47db`](https://github.com/vicharanashala/tenali/commit/3cc47db4984166d954359a95df010973a30ff75b) — **github-actions[bot]** — 🤖 docs(contributors): refresh contributor stats
+    - 📁 **1 file:** `README.md` `+18 −17`
+    - 📊 **`+18 −17`** · 1 file
+- 📌 [`5ecb94c`](https://github.com/vicharanashala/tenali/commit/5ecb94c1ef5c002f317f319fba9e07655f43a837) — **jgupta05072003-code** — 🔀 PR [#36](https://github.com/vicharanashala/tenali/pull/36) from `SaniyaJos` — feat/contrast-challenge-enhancement
+- 📌 [`270bb2b`](https://github.com/vicharanashala/tenali/commit/270bb2b66f9d793af35a85364d20dd8a5037785e) — **harshyy07** — Merge branch 'main' into feat-hints
+- 📌 [`67da084`](https://github.com/vicharanashala/tenali/commit/67da084abc99e4f062fa86c61982e1573fb8cb99) — **harshyy07** — Merge upstream main, resolving README.md stats conflict
+- 📌 [`a7063c1`](https://github.com/vicharanashala/tenali/commit/a7063c1cccf6abcabb659f750888f1eacfc624ff) — **github-actions[bot]** — 🤖 docs(contributors): refresh contributor stats
+    - 📁 **1 file:** `README.md` `+10 −10`
+    - 📊 **`+10 −10`** · 1 file
+- ✨ [`cbb2bc0`](https://github.com/vicharanashala/tenali/commit/cbb2bc03ef0dabaa8b21cf005728e99ed3712409) — **Mudit Agrawal** — deep per-commit details — files + stats + body
+    - 📁 **4 files:** `CHANGELOG.md` `+1397 −278`, `CONTRIBUTORS.md` `+30 −30`, `README.md` `+10 −10`, `scripts/update-readme-contributors.js` `+137 −67`
+    - 📊 **`+1574 −385`** · 4 files
 - 📌 [`ed68a24`](https://github.com/vicharanashala/tenali/commit/ed68a24e947fdd45c7b8f187e795356686e3687c) — **github-actions[bot]** — 🤖 docs(contributors): refresh contributor stats
     - 📁 **1 file:** `README.md` `+10 −10`
     - 📊 **`+10 −10`** · 1 file
@@ -34,6 +148,7 @@
 - 📌 [`8a2c391`](https://github.com/vicharanashala/tenali/commit/8a2c3919b04c426d6399f7bda84946c07839747a) — **muditagrawal2007** — Update README.md
     - 📁 **1 file:** `README.md` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
+- 🔀 [`b18d55b`](https://github.com/vicharanashala/tenali/commit/b18d55bf9b79bfda75dec75f76b4279f2b798de8) — **harshyy07** — resolve conflicts with main, keeping progressive hints and translation features
 - 📌 [`65a31d0`](https://github.com/vicharanashala/tenali/commit/65a31d0d4a461cda56b32abc1e08f87774c5cb5f) — **github-actions[bot]** — 🤖 docs(contributors): refresh contributor stats
     - 📁 **1 file:** `README.md` `+4 −4`
     - 📊 **`+4 −4`** · 1 file
@@ -58,6 +173,9 @@
 - 📝 [`5ef467c`](https://github.com/vicharanashala/tenali/commit/5ef467c9dd475facd790c74f4d859c523de1e401) — **Mudit Agrawal** — reframe tagline around math strengths (drop GK/vocab/Logic)
     - 📁 **1 file:** `README.md` `+7 −7`
     - 📊 **`+7 −7`** · 1 file
+- 📌 [`4a329bc`](https://github.com/vicharanashala/tenali/commit/4a329bcd7d22ea05162435e90e6e382bbe9779c5) — **github-actions[bot]** — 🤖 docs(contributors): refresh contributor stats
+    - 📁 **1 file:** `README.md` `+8 −7`
+    - 📊 **`+8 −7`** · 1 file
 - 📌 [`d1b49dc`](https://github.com/vicharanashala/tenali/commit/d1b49dcfdc54795658a5cab38ff9102bb3ae7501) — **github-actions[bot]** — 🤖 docs(contributors): refresh contributor stats
     - 📁 **1 file:** `README.md` `+5 −5`
     - 📊 **`+5 −5`** · 1 file
@@ -169,7 +287,7 @@
     - 📁 **2 files:** `.env.example` `+5 −0`, `server/auth.js` `+21 −15`
     - 📊 **`+26 −15`** · 2 files
 
-#### 📅 2026-07-28  <sub>(5 commits)</sub>
+#### 📅 2026-07-28  <sub>(7 commits)</sub>
 
 - 📌 [`d5f3dd7`](https://github.com/vicharanashala/tenali/commit/d5f3dd7b5391c81e348ea04a958148ec6cb0cd93) — **jgupta05072003-code** — 🔀 PR [#106](https://github.com/vicharanashala/tenali/pull/106) from `vicharanashala` — fix/translation-api-resilience
 - 📌 [`c748a8d`](https://github.com/vicharanashala/tenali/commit/c748a8ddfc2ea5dbb18f02eea1aa56dff834be77) — **jgupta05072003-code** — 🔀 PR [#105](https://github.com/vicharanashala/tenali/pull/105) from `vicharanashala` — fix/vite-base-env
@@ -179,11 +297,15 @@
 - 🐛 [`756a1de`](https://github.com/vicharanashala/tenali/commit/756a1de947743bb68ec039a53e308bf49d78c901) — **Jinal Gupta** — read Vite base path from VITE_BASE_PATH env
     - 📁 **1 file:** `client/vite.config.js` `+5 −2`
     - 📊 **`+5 −2`** · 1 file
+- ✨ [`5a35754`](https://github.com/vicharanashala/tenali/commit/5a35754431ca93d67d95ed14ff6525e440d1ebdd) — **SaniyaJos** — style card headers, align module title, add mission icon, and remove start/done buttons
+    - 📁 **2 files:** `client/public/contrast/mission.svg` `+9 −0`, `client/src/ContrastChallengeApp.jsx` `+1279 −341`
+    - 📊 **`+1288 −341`** · 2 files
+- 📌 [`1fa0f00`](https://github.com/vicharanashala/tenali/commit/1fa0f0006164347cbe5ba2e70dee44e56b7f5856) — **SaniyaJos** — Merge branch 'main' into feat/contrast-challenge-enhancement
 - 📝 [`14cada5`](https://github.com/vicharanashala/tenali/commit/14cada5cfaa61ee05da3aa5c007f563320e2ae1a) — **Jinal Gupta** — append Jul 17–27 commit history to CHANGELOG.md
     - 📁 **1 file:** `CHANGELOG.md` `+196 −0`
     - 📊 **`+196 −0`** · 1 file
 
-#### 📅 2026-07-27  <sub>(20 commits)</sub>
+#### 📅 2026-07-27  <sub>(23 commits)</sub>
 
 - 📌 [`7e9db00`](https://github.com/vicharanashala/tenali/commit/7e9db00c273cc4953658fb7f1fe50dc1e8e3358c) — **muditagrawal2007** — 🔀 PR [#103](https://github.com/vicharanashala/tenali/pull/103) from `muditagrawal2007` — merge-newf-into-main
 - 🔀 [`8b505d3`](https://github.com/vicharanashala/tenali/commit/8b505d312e42bb2c84b3959cb1eccfc85f42a3aa) — **muditagrawal2007** — sync new_f into main — LA quiz length-bias fix + conflict resolution
@@ -196,6 +318,7 @@
 - 🐛 [`197f6c5`](https://github.com/vicharanashala/tenali/commit/197f6c5851aac1fd7d22b3a0438079feb53c48a2) — **muditagrawal2007** — pad short distractors so the correct option isn't length-guessable
     - 📁 **1 file:** `server/index.js` `+127 −3`
     - 📊 **`+127 −3`** · 1 file
+- 📌 [`87b02e3`](https://github.com/vicharanashala/tenali/commit/87b02e3c0ba52842aa113676862f2456b6f726e5) — **harshyy07** — Merge origin/main into feat-hints: resolve CSS, App.jsx, main.jsx, auth.js conflicts cleanly
 - 🐛 [`a2194f8`](https://github.com/vicharanashala/tenali/commit/a2194f8ed5cd41e3bde861ee6cc173f9ae469eaa) — **muditagrawal2007** — ensure correct_option is always present in options array
     - 📁 **56 files:** `linearalgebra/questions/m1q1.json` `+8 −8`, `linearalgebra/questions/m1q10.json` `+9 −9`, `linearalgebra/questions/m1q11.json` `+6 −6`, `linearalgebra/questions/m1q12.json` `+5 −5`, `linearalgebra/questions/m1q13.json` `+6 −6`, `linearalgebra/questions/m1q14.json` `+7 −7`, `linearalgebra/questions/m1q2.json` `+9 −9`, `linearalgebra/questions/m1q3.json` `+7 −7` *(+48 more in [`a2194f8`](https://github.com/vicharanashala/tenali/commit/a2194f8ed5cd41e3bde861ee6cc173f9ae469eaa))*
     - 📊 **`+415 −415`** · 56 files
@@ -212,6 +335,10 @@
 - ✨ [`5e04f4b`](https://github.com/vicharanashala/tenali/commit/5e04f4b485e851cd347c9cd414edbf0fd013dc56) — **muditagrawal2007** — 2-phase mission quiz (adaptive → real-life MCQs)
     - 📁 **2 files:** `client/src/LinearAlgebraApp.jsx` `+175 −12`, `server/index.js` `+20 −2`
     - 📊 **`+195 −14`** · 2 files
+- ✨ [`03445c1`](https://github.com/vicharanashala/tenali/commit/03445c1dc56543f7e1d5d6f4b6224d17b7ae0a8b) — **SaniyaJos** — enhance contrast challenge visual discovery headers and fix JSX duplicate style property
+    - 📁 **3 files:** `client/package-lock.json` `+0 −30`, `client/src/App.jsx` `+2 −2`, `client/src/ContrastChallengeApp.jsx` `+956 −4982`
+    - 📊 **`+958 −5014`** · 3 files
+- 📌 [`a42d63a`](https://github.com/vicharanashala/tenali/commit/a42d63acb39a080197bd10a1cf6f9a20d1b2fde7) — **SaniyaJos** — Merge branch 'main' into feat/contrast-challenge-enhancement
 - 📌 [`96d26f2`](https://github.com/vicharanashala/tenali/commit/96d26f2c4d211d1a8797579f98992ddad710f4aa) — **muditagrawal2007** — Revert "feat(matrixmystics): single-button 2-phase test flow (no setup, no difficulty picker)"
     - 📁 **2 files:** `client/src/App.jsx` `+13 −431`, `server/index.js` `+2 −15`
     - 📊 **`+15 −446`** · 2 files
@@ -421,7 +548,7 @@
     - 📁 **2 files:** `client/package-lock.json` `+95 −0`, `client/package.json` `+1 −0`
     - 📊 **`+96 −0`** · 2 files
 
-#### 📅 2026-07-20  <sub>(28 commits)</sub>
+#### 📅 2026-07-20  <sub>(31 commits)</sub>
 
 - ✨ [`cd026f3`](https://github.com/vicharanashala/tenali/commit/cd026f37d4b4af3185f226595d6de2004edea1df) — **S Hamsalekha** — Add support for tracking  user progress .
     - 📁 **3 files:** `client/package-lock.json` `+65 −23`, `client/package.json` `+1 −0`, `client/src/App.jsx` `+368 −1`
@@ -432,6 +559,10 @@
 - 📌 [`d1ffff1`](https://github.com/vicharanashala/tenali/commit/d1ffff18f240f4ac3c7f6728e3c82258cf263274) — **jgupta05072003-code** — 🔀 PR [#52](https://github.com/vicharanashala/tenali/pull/52) from `24F3005086` — feature/concept-playgrounds
 - 📌 [`1d4d224`](https://github.com/vicharanashala/tenali/commit/1d4d224a4ce3c41d0742b8d9e6b38e15270401f8) — **jgupta05072003-code** — 🔀 PR [#51](https://github.com/vicharanashala/tenali/pull/51) from `24F3005086` — feature/i18n
 - 📌 [`7b0b000`](https://github.com/vicharanashala/tenali/commit/7b0b0002079ad06578c1ee687c0f792608bed39e) — **jgupta05072003-code** — 🔀 PR [#58](https://github.com/vicharanashala/tenali/pull/58) from `diptosubhro-ctrl` — tenali_main
+- 🐛 [`97ea9e0`](https://github.com/vicharanashala/tenali/commit/97ea9e0a09cd25d9f781bc4b548894e4815cdd11) — **harshyy07** — remove stray extra closing brace from App.css merge artifact
+    - 📁 **1 file:** `client/src/App.css` `+1 −2`
+    - 📊 **`+1 −2`** · 1 file
+- 📌 [`f60d434`](https://github.com/vicharanashala/tenali/commit/f60d434987f77c3ecb4416d0fa6fd97a35a87870) — **harshyy07** — Merge origin/main into feat-hints: resolve CSS, App.jsx, main.jsx conflicts cleanly
 - 📌 [`bed204d`](https://github.com/vicharanashala/tenali/commit/bed204dffd1d86125dc3895dfbcb6385054070a5) — **24F3005086** — Resolve merge conflicts
 - 📌 [`4ee9e0b`](https://github.com/vicharanashala/tenali/commit/4ee9e0b4e8ae8c81476e704d08367d9225e96f76) — **24F3005086** — Merge remote-tracking branch 'origin/main' into feature/i18n
 - 📌 [`fb24b99`](https://github.com/vicharanashala/tenali/commit/fb24b99293f66911aa9f9aaabeb43d04b6f2387c) — **jgupta05072003-code** — 🔀 PR [#49](https://github.com/vicharanashala/tenali/pull/49) from `24F3005086` — feature/bkt-prereqs
@@ -443,6 +574,9 @@
 - 🐛 [`f1ab5b6`](https://github.com/vicharanashala/tenali/commit/f1ab5b6ed6349bba4697876ffc6ac5459d9ddea8) — **RukmenderT** — remove duplicate hover tooltip and left-side variation label in Curiosity Mode
     - 📁 **1 file:** `client/src/Curiosity.jsx` `+0 −4`
     - 📊 **`+0 −4`** · 1 file
+- 📌 [`74e57a4`](https://github.com/vicharanashala/tenali/commit/74e57a4263b6406c6cf6828c88e386f907da2cd6) — **SaniyaJos** — fixed radius vs diameter challenge
+    - 📁 **1 file:** `client/src/ContrastChallengeApp.jsx` `+2 −2`
+    - 📊 **`+2 −2`** · 1 file
 - 📌 [`aacee65`](https://github.com/vicharanashala/tenali/commit/aacee659eb5c2095cc77432b455c7819fb7fa9c5) — **jgupta05072003-code** — 🔀 PR [#46](https://github.com/vicharanashala/tenali/pull/46) from `patnaikArpita` — main
 - 📌 [`aa16753`](https://github.com/vicharanashala/tenali/commit/aa1675307824ff393b72fd337a452de99c330bfc) — **jgupta05072003-code** — 🔀 PR [#65](https://github.com/vicharanashala/tenali/pull/65) from `vicharanashala` — fix/module-theming
 - 📌 [`96983bb`](https://github.com/vicharanashala/tenali/commit/96983bba9f773af9d398f438d7831b8b911af4aa) — **Anshul Kanodia** — 🔀 PR [#8](https://github.com/vicharanashala/tenali/pull/8) from `patnaikArpita` — Re-added-geometry-game-20July
@@ -486,8 +620,12 @@
     - 📁 **6 files:** `client/src/locales/bn.json` `+218 −0`, `client/src/locales/en.json` `+230 −0`, `client/src/locales/hi.json` `+242 −0`, `client/src/locales/mr.json` `+218 −0`, `client/src/locales/ta.json` `+218 −0`, `client/src/locales/te.json` `+218 −0`
     - 📊 **`+1344 −0`** · 6 files
 
-#### 📅 2026-07-18  <sub>(8 commits)</sub>
+#### 📅 2026-07-18  <sub>(10 commits)</sub>
 
+- ✨ [`f323215`](https://github.com/vicharanashala/tenali/commit/f3232157dcc43a535c08143d797f2b955c199096) — **SaniyaJos** — enhance contrast challenge with discovery steps and unified flow
+    - 📁 **1 file:** `client/src/ContrastChallengeApp.jsx` `+6636 −1156`
+    - 📊 **`+6636 −1156`** · 1 file
+- 📌 [`d5a95e1`](https://github.com/vicharanashala/tenali/commit/d5a95e172bbae5e63ada11ab88bd11d8024dca0d) — **SaniyaJos** — Merge remote-tracking branch 'upstream/main' into feat/contrast-challenge-enhancement
 - 🐛 [`a20f15f`](https://github.com/vicharanashala/tenali/commit/a20f15f23b11aae42f82f76b57b452bd0d751702) — **24F3005086** — remove MasteryBadge usage from concept playgrounds since it belongs to BKT branch
     - 📁 **2 files:** `client/src/lib/concept/QFormulaConceptApp.jsx` `+1 −2`, `client/src/lib/simul-concept/SimulConceptApp.jsx` `+1 −2`
     - 📊 **`+2 −4`** · 2 files
@@ -511,7 +649,7 @@
     - 📊 **`+91 −73`** · 3 files
 - 📌 [`4bfa35f`](https://github.com/vicharanashala/tenali/commit/4bfa35f5cb7b6961afb7b89129444d1bd57f4a83) — **muditagrawal2007** — Merge branch 'vicharanashala:main' into new_f
 
-#### 📅 2026-07-17  <sub>(58 commits)</sub>
+#### 📅 2026-07-17  <sub>(59 commits)</sub>
 
 - ✨ [`4d88e05`](https://github.com/vicharanashala/tenali/commit/4d88e05d64b8b8a1089a7fc58c726d31ea92df52) — **muditagrawal2007** — inline proctor dashboard on /linear, no-auth endpoints, localStorage persistence
     - 📁 **4 files:** `client/src/App.jsx` `+33 −38`, `client/src/proctor/ProctorDashboard.jsx` `+93 −45`, `client/src/proctor/ProctoredQuiz.jsx` `+26 −5`, `server/index.js` `+34 −32`
@@ -605,6 +743,7 @@
 - 🐛 [`fafb069`](https://github.com/vicharanashala/tenali/commit/fafb069fa37b4e9c8351c70539f4d27620a45ddf) — **muditagrawal2007** — dashboard broken + compulsory monitoring + auto-collapse alerts
     - 📁 **4 files:** `client/src/proctor/ProctorContext.jsx` `+13 −3`, `client/src/proctor/ProctorPanel.jsx` `+66 −25`, `client/src/proctor/useTabSwitch.js` `+12 −9`, `server/proctorSchema.js` `+1 −0`
     - 📊 **`+92 −37`** · 4 files
+- 📌 [`171f53d`](https://github.com/vicharanashala/tenali/commit/171f53db9ccf5a2465d296406db90cabe5f8eb51) — **harshyy07** — resolved merge conflicts
 - 📌 [`4e4d3ea`](https://github.com/vicharanashala/tenali/commit/4e4d3eaf8e94050a4bfb920f97b16d69a8527455) — **24F3005086** — Restore scratch folder from main
     - 📁 **1 file:** `scratch/generate_puzzles.js` `+228 −0`
     - 📊 **`+228 −0`** · 1 file
@@ -666,7 +805,7 @@
 - 📌 [`3b99282`](https://github.com/vicharanashala/tenali/commit/3b992825667d4226d1d66a38c0076c755bdc5745) — **Sharonya Banerjee** — Merge upstream/main into feature/math-detective-agency, resolve client/package-lock.json conflict
 - 📌 [`cde8069`](https://github.com/vicharanashala/tenali/commit/cde80697ab8d4bcb2049a999a47d76ffb54dc902) — **jgupta05072003-code** — 🔀 PR [#9](https://github.com/vicharanashala/tenali/pull/9) from `Ritish007-svg` — feature/level-wise-explanation
 
-#### 📅 2026-07-16  <sub>(42 commits)</sub>
+#### 📅 2026-07-16  <sub>(54 commits)</sub>
 
 - 📌 [`3e5716f`](https://github.com/vicharanashala/tenali/commit/3e5716f8c5bc8b9f7e94bf779a638b5785579213) — **Ritish Karmakar** — Merge upstream/main and resolve conflicts with level-wise explanation feature
 - 📌 [`88f107f`](https://github.com/vicharanashala/tenali/commit/88f107f3a670925aa6e27bbb322e59d6b1358cb0) — **Ritish Karmakar** — Replace CHANGELOG with cleaned-up Versions 1-4 summary
@@ -684,18 +823,46 @@
 - 🔧 [`0928764`](https://github.com/vicharanashala/tenali/commit/09287644b7a794c9bb128e5d0288c628fe28e0f9) — **Dipto Subhro** — rename Teach stages to Tutorial
     - 📁 **1 file:** `client/src/vachana/exercises/NoiseFilter.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
+- 📌 [`a2ecd4a`](https://github.com/vicharanashala/tenali/commit/a2ecd4ad3df018d3db04e04e0122da4370232858) — **SaniyaJos** — Render contrast challenge status badges as interactive-looking button pills
+    - 📁 **1 file:** `client/src/ContrastChallengeApp.jsx` `+24 −3`
+    - 📊 **`+24 −3`** · 1 file
+- 📌 [`853ad34`](https://github.com/vicharanashala/tenali/commit/853ad346ce03a4de09854231373219fd2e970e1a) — **SaniyaJos** — Update contrast challenge status labels to Start and Done
+    - 📁 **1 file:** `client/src/ContrastChallengeApp.jsx` `+2 −2`
+    - 📊 **`+2 −2`** · 1 file
+- 📌 [`d730b94`](https://github.com/vicharanashala/tenali/commit/d730b94aa37c4c45ebcfcb47c8c359b5e2fa8b0c) — **SaniyaJos** — Unlock all contrast challenges by default and simplify post-quiz recommendations
+    - 📁 **1 file:** `client/src/ContrastChallengeApp.jsx` `+7 −91`
+    - 📊 **`+7 −91`** · 1 file
 - 📌 [`7407dc1`](https://github.com/vicharanashala/tenali/commit/7407dc1586fd0073871224562c19f5e91f285697) — **Dipto Subhro** — Merge upstream/main and resolve conflicts in App.jsx
+- 📌 [`e5a7fb5`](https://github.com/vicharanashala/tenali/commit/e5a7fb5da31040b5b1b70b0588124149452ef049) — **harshyy07** — universal xp bank enhanced and cleanup
+    - 📁 **3 files:** `client/scratch/fix_api.cjs` `+0 −20`, `client/scratch/fix_exports.cjs` `+0 −29`, `server/hints/index.js` `+3 −3`
+    - 📊 **`+3 −52`** · 3 files
 - 📌 [`b9f2225`](https://github.com/vicharanashala/tenali/commit/b9f2225972d0ea2aed5f3d472d5e0cf45f9bb869) — **Sharonya Banerjee** — Resolve merge conflict in client/src/App.css: keep feature/math-detective-agency version as base, append badge-detail modal CSS from upstream/main
 - 🐛 [`bf5c05c`](https://github.com/vicharanashala/tenali/commit/bf5c05c98d751f82ab7af5d0fa969328d306dc15) — **RukmenderT** — resolve merge conflicts and restore Curiosity Mode in hamburger menu
     - 📁 **2 files:** `client/src/App.jsx` `+1 −1`, `server/index.js` `+27 −22`
     - 📊 **`+28 −23`** · 2 files
+- 📌 [`d05b230`](https://github.com/vicharanashala/tenali/commit/d05b230d5fd6a3f6e498e3155b0fceaca0466286) — **SaniyaJos** — Optimize all 15 comparison card descriptions to be concise and scan-friendly
+    - 📁 **1 file:** `client/src/ContrastChallengeApp.jsx` `+264 −691`
+    - 📊 **`+264 −691`** · 1 file
+- 📌 [`f3dcd57`](https://github.com/vicharanashala/tenali/commit/f3dcd5721161d9108f148984dae433b11bace6df) — **harshyy07** — unify user coin and xp balances
+    - 📁 **2 files:** `server/auth.js` `+28 −3`, `server/hints/index.js` `+3 −3`
+    - 📊 **`+31 −6`** · 2 files
+- 💄 [`ca1a986`](https://github.com/vicharanashala/tenali/commit/ca1a98691bf4bf2848d1e4e491ea7bed27eee51e) — **SaniyaJos** — shorten comparison card descriptions to be concise and scannable
+    - 📁 **1 file:** `client/src/ContrastChallengeApp.jsx` `+96 −193`
+    - 📊 **`+96 −193`** · 1 file
+- 📌 [`34eed34`](https://github.com/vicharanashala/tenali/commit/34eed3455243623e710d723197408f77d74c8b9d) — **harshyy07** — improved functionality and resolved conflicts
+    - 📁 **1 file:** `client/src/App.css` `+11 −205`
+    - 📊 **`+11 −205`** · 1 file
+- 📌 [`ed9b657`](https://github.com/vicharanashala/tenali/commit/ed9b657a8ab29dc5015d32c240649ce6e3d27729) — **harshyy07** — resolved conflicts
 - 🔧 [`ca6a01c`](https://github.com/vicharanashala/tenali/commit/ca6a01cf644c31d050bb925ee41994b0560b5a99) — **Dipto Subhro** — remove empty settings_icon.png
     - 📁 **1 file:** `client/public/settings_icon.png`
     - 📊 **`+0 −0`** · 1 file
+- 📌 [`2b01f5a`](https://github.com/vicharanashala/tenali/commit/2b01f5af2555655979e0db6c87a73991f966bd34) — **harshyy07** — resolved conflicts
+- 📌 [`b1be62c`](https://github.com/vicharanashala/tenali/commit/b1be62c20eb6cf831667e140ac0d03ca8f3099a4) — **SaniyaJos** — Merge upstream/main and resolve conflicts in client/src/App.jsx and server/auth.js
 - 🔧 [`d9cba15`](https://github.com/vicharanashala/tenali/commit/d9cba15c41292f45c3e83abe6c046f4ee0eecee6) — **Dipto Subhro** — completely remove voice narration context, button, and audio assets
     - 📁 **8 files:** `client/src/App.jsx` `+0 −137`, `client/src/main.jsx` `+3 −6`, `client/src/narration/AudioCatalog.js` `+0 −132`, `client/src/narration/NarrationButton.jsx` `+0 −7`, `client/src/narration/NarrationContext.jsx` `+0 −433`, `client/src/narration/NarrationSettings.jsx` `+0 −197`, `client/src/narration/generate_mock_audio.js` `+0 −146`, `client/src/vachana/exercises/NoiseFilter.jsx` `+1 −4`
     - 📊 **`+4 −1062`** · 8 files
 - 📌 [`e35be03`](https://github.com/vicharanashala/tenali/commit/e35be03fb111d7aa6f0073ba8fc5b4d5d6f2e1ad) — **jgupta05072003-code** — 🔀 PR [#59](https://github.com/vicharanashala/tenali/pull/59) from `varshini-nandula` — feat/profile-achievement-showcase
+- 📌 [`1a8ae4c`](https://github.com/vicharanashala/tenali/commit/1a8ae4c6a4bbcc6ea2b806f06d6b79330d2f3d1d) — **SaniyaJos** — Merge remote-tracking branch 'upstream/main' into feat/contrast-challenge-enhancement
 - 💄 [`b6af5e2`](https://github.com/vicharanashala/tenali/commit/b6af5e2356352561c6e288944fbbc945f9d03578) — **varshini-nandula** — remove Tenali header and view achievements label from profile page
     - 📁 **1 file:** `client/src/App.jsx` `+0 −7`
     - 📊 **`+0 −7`** · 1 file
@@ -771,7 +938,7 @@
     - 📁 **2 files:** `client/src/App.jsx` `+3 −5`, `server/index.js` `+12 −9`
     - 📊 **`+15 −14`** · 2 files
 
-#### 📅 2026-07-15  <sub>(45 commits)</sub>
+#### 📅 2026-07-15  <sub>(50 commits)</sub>
 
 - 📌 [`53cd78e`](https://github.com/vicharanashala/tenali/commit/53cd78e5bcfd4f8bd6b793cff29d81003f6655aa) — **Ritish Karmakar** — Update lockfile after clean reinstall
     - 📁 **1 file:** `client/package-lock.json` `+398 −328`
@@ -797,6 +964,9 @@
 - ✨ [`6ce4d59`](https://github.com/vicharanashala/tenali/commit/6ce4d592c6d10f98bef21aa056fc904c072e61a6) — **24F3005086** — Add Accessibility Provider and aria-labels
     - 📁 **2 files:** `client/src/lib/AccessibilityProvider.jsx` `+217 −0`, `client/src/main.jsx` `+4 −1`
     - 📊 **`+221 −1`** · 2 files
+- ✨ [`091fda0`](https://github.com/vicharanashala/tenali/commit/091fda006cf2be06e0f9aa9277e2de52b244a7dc) — **harshyy07** — implementation of progressive hints with collision-safe resolvers and safe state management
+    - 📁 **30 files:** `client/injectHint.cjs` `+17 −0`, `client/scratch/fix_api.cjs` `+20 −0`, `client/scratch/fix_exports.cjs` `+29 −0`, `client/src/App.css` `+264 −0`, `client/src/App.jsx` `+762 −37`, `client/src/components/HintSystem/HintModal.jsx` `+671 −0`, `client/src/components/HintSystem/hintUtils.js` `+19 −0`, `client/src/components/HintSystem/useHints.jsx` `+82 −0` *(+22 more in [`091fda0`](https://github.com/vicharanashala/tenali/commit/091fda006cf2be06e0f9aa9277e2de52b244a7dc))*
+    - 📊 **`+6393 −98`** · 30 files
 - 📌 [`4bcb7b5`](https://github.com/vicharanashala/tenali/commit/4bcb7b54423768ae9b289377ec08e4a84128b3e5) — **Ritish Karmakar** — Update lockfile after clean reinstall
     - 📁 **1 file:** `client/package-lock.json` `+398 −328`
     - 📊 **`+398 −328`** · 1 file
@@ -811,6 +981,12 @@
 - 📌 [`27ab01b`](https://github.com/vicharanashala/tenali/commit/27ab01b8fc619dfcd99b4c40a87f206f72aa36f2) — **muditagrawal2007** — fixed the subtraction
     - 📁 **3 files:** `client/src/App.jsx` `+140 −95`, `server/explanations.js` `+44 −12`, `server/index.js` `+37 −21`
     - 📊 **`+221 −128`** · 3 files
+- 📌 [`391e8c0`](https://github.com/vicharanashala/tenali/commit/391e8c073bb13491c0ef44af2f35f56bba957523) — **SaniyaJos** — Make guest progress and user account progress completely independent and isolated (no merging)
+    - 📁 **1 file:** `client/src/ContrastChallengeApp.jsx` `+2 −18`
+    - 📊 **`+2 −18`** · 1 file
+- 📌 [`e458763`](https://github.com/vicharanashala/tenali/commit/e4587639903b6b5053d079d18104598f3517269c) — **SaniyaJos** — Implement namespaces for localStorage keys to resolve guest/user login/logout session reset bug
+    - 📁 **5 files:** `client/src/ContrastChallengeApp.jsx` `+197 −17`, `client/vite.config.js` `+2 −0`, `server/auth.js` `+11 −1`, `server/index.js` `+5 −0`, `server/routes/contrast.js` `+47 −0`
+    - 📊 **`+262 −18`** · 5 files
 - 📌 [`99549f6`](https://github.com/vicharanashala/tenali/commit/99549f6581c5500d4ba41097b6751a831acfbfd7) — **Sharonya Banerjee** — Merge remote-tracking branch 'upstream/main' into feature/math-detective-agency
     - 📁 **1 file:** `pr_body.md` `+22 −0`
     - 📊 **`+22 −0`** · 1 file
@@ -824,6 +1000,10 @@
 - 💄 [`3a3c9ba`](https://github.com/vicharanashala/tenali/commit/3a3c9ba8e0259fc2e7377f8ad7578e93a64f51fa) — **varshini-nandula** — update celebration modal subtext since pinned badges feature is removed
     - 📁 **1 file:** `client/src/App.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
+- 📌 [`99429d4`](https://github.com/vicharanashala/tenali/commit/99429d4bc609bbe867c4d622c58ba7e07f863b78) — **SaniyaJos** — Fix Tenth route by restoring TENTH_UNITS constant definition
+    - 📁 **1 file:** `client/src/App.jsx` `+57 −0`
+    - 📊 **`+57 −0`** · 1 file
+- 📌 [`26b56e9`](https://github.com/vicharanashala/tenali/commit/26b56e92dccff947c6e517c2d0e0bd250de3d295) — **SaniyaJos** — Merge upstream/main and resolve conflicts
 - 📌 [`3ec995e`](https://github.com/vicharanashala/tenali/commit/3ec995e5676315a8085973ecab9fa51320634635) — **24F3005086** — Feature/concept playgrounds
     - 📁 **20 files:** `client/src/App.jsx` `+5 −0`, `client/src/components/concept/EquationSandbox.jsx` `+223 −0`, `client/src/lib/EquationSandboxApp.jsx` `+181 −0`, `client/src/lib/concept/CompletionScreen.jsx` `+32 −0`, `client/src/lib/concept/QFormulaConceptApp.jsx` `+107 −0`, `client/src/lib/concept/Stage1Predict.jsx` `+93 −0`, `client/src/lib/concept/Stage2Derivation.jsx` `+189 −0`, `client/src/lib/concept/Stage3Guided.jsx` `+78 −0` *(+12 more in [`3ec995e`](https://github.com/vicharanashala/tenali/commit/3ec995e5676315a8085973ecab9fa51320634635))*
     - 📊 **`+2139 −0`** · 20 files
@@ -891,7 +1071,7 @@
     - 📊 **`+0 −3`** · 1 file
 - 📌 [`fc9dd2a`](https://github.com/vicharanashala/tenali/commit/fc9dd2a3e0cba32e95b24bd430b85c305fcb7bde) — **varshini-nandula** — Merge branch 'upstream/main' into feat/profile-achievement-showcase
 
-#### 📅 2026-07-14  <sub>(56 commits)</sub>
+#### 📅 2026-07-14  <sub>(57 commits)</sub>
 
 - 🐛 [`79a9c71`](https://github.com/vicharanashala/tenali/commit/79a9c71679fb90ce18709b112ebc8274948d242c) — **KCDharshan9** — resolve submit button issue in addition app
     - 📁 **1 file:** `client/src/App.jsx` `+1 −0`
@@ -908,6 +1088,7 @@
 - 📝 [`f5d4167`](https://github.com/vicharanashala/tenali/commit/f5d416709ce3d88688be1ae78669e98d97e9b1c3) — **Jinal Gupta** — add curated CHANGELOG.md
     - 📁 **1 file:** `CHANGELOG.md` `+434 −0`
     - 📊 **`+434 −0`** · 1 file
+- 📌 [`0845eb3`](https://github.com/vicharanashala/tenali/commit/0845eb3f4669dff691f73fa1fa25519973431c8d) — **SaniyaJos** — Merge upstream/main and resolve conflicts
 - ♻️ [`fdea52e`](https://github.com/vicharanashala/tenali/commit/fdea52e06ba15efca82f4829b0a401c3f3ed2843) — **Vaibhav** — move CHANGELOG and exercise-references into vachana folder
     - 📁 **5 files:** `CHANGELOG.md` `+0 −87`, `client/src/App.css` `+2 −0`, `exercise-references.md => client/src/vachana/exercise-references.md`, `client/src/vachana/exercises/VocabExplorer.jsx` `+732 −339`, `client/src/vachana/index.jsx` `+113 −2`
     - 📊 **`+847 −428`** · 5 files
@@ -1010,7 +1191,7 @@
 - 📌 [`c30b976`](https://github.com/vicharanashala/tenali/commit/c30b976ba54ce0080a4302cf0620e6f87770083a) — **Vaibhav** — Merge upstream/main into feature branch
 - 📌 [`9b86577`](https://github.com/vicharanashala/tenali/commit/9b865779f3a54c63c684c737fce0acbe80a9026f) — **Ahana Banerjee** — Merge remote-tracking branch 'origin/main' into feature/AL-learning-checkpoints
 
-#### 📅 2026-07-13  <sub>(41 commits)</sub>
+#### 📅 2026-07-13  <sub>(44 commits)</sub>
 
 - ✨ [`4f4a40f`](https://github.com/vicharanashala/tenali/commit/4f4a40f8cb94a570eec5390a0a4b9615897d0341) — **Vaibhav** — implement adaptive placement check, MCQ auto-submit, and guided exploration
     - 📁 **3 files:** `CHANGELOG.md` `+27 −0`, `client/src/App.jsx` `+2198 −180`, `client/src/vocabCorpus.js` `+782 −0`
@@ -1025,10 +1206,17 @@
 - 🐛 [`23a7be5`](https://github.com/vicharanashala/tenali/commit/23a7be597a4cea5dc1805449a4e448539c9a71bf) — **Shubh dixit** — fix addition screen crash and remove extra modes
     - 📁 **1 file:** `client/src/App.jsx` `+4 −20`
     - 📊 **`+4 −20`** · 1 file
+- 🔧 [`a676336`](https://github.com/vicharanashala/tenali/commit/a67633616d5053f35f76000a97e07beab037dda5) — **SaniyaJos** — apply copilot suggestions
+    - 📁 **2 files:** `client/src/App.jsx` `+1 −1`, `client/vite.config.js` `+0 −2`
+    - 📊 **`+1 −3`** · 2 files
+- 📌 [`07c3989`](https://github.com/vicharanashala/tenali/commit/07c39890795fbf34e01cf9bd0e85dbcf5e0af9b8) — **SaniyaJos** — Merge branch 'main' of https://github.com/vicharanashala/tenali into feat/contrast-challenge-enhancement
 - 📌 [`80d52fc`](https://github.com/vicharanashala/tenali/commit/80d52fc41b777489ad3c4fff74624ec943f84799) — **jgupta05072003-code** — 🔀 PR [#35](https://github.com/vicharanashala/tenali/pull/35) from `KrishnaG-101` — language_integration
 - 🐛 [`21e10b4`](https://github.com/vicharanashala/tenali/commit/21e10b43614f3e96fe1d61bcb5f66ffd8c839ae4) — **Ahana Banerjee** — hide the Guided Learning Journey banner from the Goal Selection view
     - 📁 **1 file:** `client/src/App.jsx` `+38 −45`
     - 📊 **`+38 −45`** · 1 file
+- ✨ [`3600fe0`](https://github.com/vicharanashala/tenali/commit/3600fe0ebf088e74e260765983b3b8a95530341d) — **SaniyaJos** — Implemented Contrast Challenges
+    - 📁 **4 files:** `client/src/App.jsx` `+22 −2`, `client/src/ContrastChallengeApp.jsx` `+12324 −0`, `client/vite.config.js` `+2 −0`, `server/index.js` `+3 −0`
+    - 📊 **`+12351 −2`** · 4 files
 - ✨ [`1cfebc2`](https://github.com/vicharanashala/tenali/commit/1cfebc2e3dd3b73ec1ebb7da6076e2fdbe199a27) — **Krishna Gelra** — optimize wordCreator verification latency and restore original layout
     - 📁 **2 files:** `client/src/App.jsx` `+3 −1`, `server/routes/wordCreator.js` `+28 −2`
     - 📊 **`+31 −3`** · 2 files

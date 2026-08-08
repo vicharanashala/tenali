@@ -1,8 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useTimer, QuizLayout } from '../App';
 
-// API base URL from environment variables (Vite)
-const API = import.meta.env.VITE_API_BASE_URL || '';
+// Anchor /wordcreator-api fetches to the current sub-path so they reach
+// /summership/wordcreator-api on the sub-path deployment (where the route
+// actually lives) instead of the root /wordcreator-api (which returns
+// the stale SPA shell or a 404 from Express). Same build, both mounts.
+const WC_BASE = (typeof window !== 'undefined'
+  ? window.location.pathname.replace(/\/[^/]*$/, '')
+  : '') + '/wordcreator-api';
 
 /**
  * WordCreatorApp Component
@@ -76,7 +81,7 @@ export default function WordCreatorApp({ onBack }) {
       setIsCorrect(null);
       setRevealed(false);
       try {
-        const res = await fetch(`${API}/wordcreator-api/question?level=${level}&index=${puzzleIndex}`);
+        const res = await fetch(`${WC_BASE}/question?level=${level}&index=${puzzleIndex}`);
         const data = await res.json();
         setPuzzle(data);
         setUserInputs(Array(data.blanksCount).fill(''));
@@ -160,7 +165,7 @@ export default function WordCreatorApp({ onBack }) {
     setSubmitting(true);
     setFeedback(null);
     try {
-      const res = await fetch(`${API}/wordcreator-api/check`, {
+      const res = await fetch(`${WC_BASE}/check`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 

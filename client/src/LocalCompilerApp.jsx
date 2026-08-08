@@ -1,5 +1,14 @@
 import { useState, useRef, useCallback, useEffect } from 'react'
 
+// The app is served from /summership/ in production; fetches with a leading
+// '/' resolve against window.location.origin and would hit /api/playground2/*
+// at the root (which the production nginx routes to a stale static shell).
+// Anchor fetches to the current sub-path so the same build works on root,
+// /summership, or any future mount point.
+const PG_BASE = (typeof window !== 'undefined'
+  ? window.location.pathname.replace(/\/[^/]*$/, '')
+  : '') + '/api/playground2'
+
 const LANGUAGES = [
   { key: 'c', name: 'C (C99)', icon: '🔧', color: '#6d9eeb' },
   { key: 'cpp', name: 'C++ (g++)', icon: '⚡', color: '#f7768e' },
@@ -119,7 +128,7 @@ export default function LocalCompilerApp({ onBack }) {
   const gutterRef = useRef(null)
 
   useEffect(() => {
-    fetch('/api/playground2/languages')
+    fetch(`${PG_BASE}/languages`)
       .then(r => r.json())
       .then(d => {
         const m = {}
@@ -175,7 +184,7 @@ export default function LocalCompilerApp({ onBack }) {
     setError(null)
     setActiveTab('output')
     try {
-      const res = await fetch('/api/playground2/run', {
+      const res = await fetch(`${PG_BASE}/run`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ language: langKey, code, stdin: stdin || undefined }),

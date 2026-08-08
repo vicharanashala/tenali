@@ -84,10 +84,7 @@ jobs:
 
             Triggered by: ${{ github.event_name }}  (cron every 12h or manual)
             Commit:       ${{ github.sha }}
-          file_pattern: |
-            README.md
-            CONTRIBUTORS.md
-            CHANGELOG.md
+          file_pattern: 'README.md CONTRIBUTORS.md CHANGELOG.md'
           branch: main              # always push to main, not the PR source branch
           commit_user_name: 'github-actions[bot]'
           commit_user_email: '41898282+github-actions[bot]@users.noreply.github.com'

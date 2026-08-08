@@ -47,7 +47,7 @@ export default function VoiceAssistant({ onStartTour }) {
         if (onStartTour) onStartTour();
         sessionStorage.setItem('tenali-tour', 'true');
       } else {
-        const userStr = localStorage.getItem('tenali-user');
+        const userStr = localStorage.getItem('tenali-auth-user');
         const username = userStr ? JSON.parse(userStr).username : 'Student';
         speak('Welcome back, ' + username);
       }

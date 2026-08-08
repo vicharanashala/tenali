@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './LcmHcfApp.css';
 
+// Anchor /hcflcm-api fetches to the current sub-path so they reach
+// /summership/hcflcm-api on the sub-path deployment (where the route
+// actually lives) instead of the root /hcflcm-api. Same build, both mounts.
+const HC_BASE = (typeof window !== 'undefined'
+  ? window.location.pathname.replace(/\/[^/]*$/, '')
+  : '') + '/hcflcm-api';
+
 // ==========================================================================
 // CONFIGURATION & REWARDS DEFINITION
 // ==========================================================================
@@ -1638,7 +1645,7 @@ export default function InteractiveLcmHcfApp({ onBack }) {
     
     try {
       const fetchedQs = await Promise.all(diffs.map(async (diff) => {
-        const res = await fetch(`/hcflcm-api/question?difficulty=${diff}`);
+        const res = await fetch(`${HC_BASE}/question?difficulty=${diff}`);
         if (!res.ok) throw new Error('Failed to fetch question');
         const qdata = await res.json();
         return {
@@ -1666,7 +1673,7 @@ export default function InteractiveLcmHcfApp({ onBack }) {
     if (!currentQ) return;
 
     try {
-      const res = await fetch('/hcflcm-api/check', {
+      const res = await fetch(`${HC_BASE}/check`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

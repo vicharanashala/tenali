@@ -1,5 +1,14 @@
 import { useState, useRef, useCallback, useEffect, useMemo } from 'react'
 
+// The app is served from /summership/ in production; fetches with a leading
+// '/' resolve against window.location.origin and would hit /api/playground/*
+// at the root (where nginx serves a stale static SPA shell). Anchor fetches
+// to the current sub-path so the same build works on root, /summership, or
+// any future mount point.
+const PG_BASE = (typeof window !== 'undefined'
+  ? window.location.pathname.replace(/\/[^/]*$/, '')
+  : '') + '/api/playground'
+
 const CATEGORIES = [
   {
     label: 'Popular',
@@ -880,7 +889,7 @@ setTimeout(()=>{
     setError(null)
     setActiveTab('output')
     try {
-      const res = await fetch('/api/playground/run', {
+      const res = await fetch(`${PG_BASE}/run`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

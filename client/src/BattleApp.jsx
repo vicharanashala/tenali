@@ -3,7 +3,16 @@ import { io } from 'socket.io-client'
 import confetti from 'canvas-confetti'
 
 const API = import.meta.env?.VITE_API_BASE_URL || ''
-const socket = io(API || window.location.origin, { transports: ['websocket', 'polling'] })
+// socket.io must mount at the same sub-path as the app (e.g. /summership).
+// Using just `window.location.origin` (no path) makes the client connect to
+// the host's `/socket.io/` endpoint, which on this deployment returns the
+// stale static SPA shell instead of the Socket.IO handshake → "parser error".
+// VITE_SOCKET_PATH lets the build-time base drive the path; at runtime we
+// fall back to deriving the path from `window.location.pathname` so the
+// same build works on root, /summership, or any other sub-path.
+const SOCKET_PATH = import.meta.env?.VITE_SOCKET_PATH
+  || (window.location.pathname.replace(/\/[^/]*$/, '/').replace(/\/+$/, '/') + 'socket.io')
+const socket = io(window.location.origin, { path: SOCKET_PATH, transports: ['websocket', 'polling'] })
 
 // Inject keyframe styles once
 if (typeof document !== 'undefined' && !document.getElementById('battle-animations')) {

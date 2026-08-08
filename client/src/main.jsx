@@ -9,7 +9,8 @@
 import React from 'react'; window.React = React;
 import ReactDOM from 'react-dom/client'
 import App, { AuthMenu } from './App.jsx'
-import { ProctorProvider } from './proctor/ProctorContext'
+import { GlobalXpPanel } from './components/HintSystem/HintModal.jsx';
+import { ProctorProvider } from './proctor/ProctorContext';
 import './index.css';
 import './kid-zone.css';
 import { I18nProvider } from './lib/i18n.jsx';
@@ -23,6 +24,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <App />
           {/* Hamburger menu (login/logout) — fixed top-right, visible on every page */}
           <AuthMenu />
+          <GlobalXpPanel />
         </ProctorProvider>
       </AccessibilityProvider>
     </I18nProvider>
