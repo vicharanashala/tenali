@@ -1,0 +1,15 @@
+{
+  "id": 2894,
+  "word": "Bequest",
+  "question": "Bequest",
+  "options": [
+    "A lover of flying or air",
+    "The action of bequeathing something",
+    "Aggressively greedy or grasping",
+    "Preventing success or harmful"
+  ],
+  "answerOption": "B",
+  "answerText": "The action of bequeathing something",
+  "difficulty": "hard",
+  "sourceFile": "2894.json"
+}

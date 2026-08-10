@@ -1,0 +1,14 @@
+{
+  "id": 615,
+  "question": "Which country is associated with the city of Mogadishu?",
+  "options": [
+    "Ethiopia",
+    "Somalia",
+    "Kenya",
+    "Djibouti"
+  ],
+  "answerOption": "B",
+  "answerText": "Somalia",
+  "genre": "geography",
+  "sourceFile": "0615.json"
+}

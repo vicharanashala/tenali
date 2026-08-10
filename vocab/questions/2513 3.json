@@ -1,0 +1,15 @@
+{
+  "id": 2513,
+  "word": "Bankruptcy",
+  "question": "Bankruptcy",
+  "options": [
+    "A loud confused noise from a large crowd",
+    "Legal state of being unable to pay debts",
+    "The action of making clear",
+    "Device for collecting airborne organisms"
+  ],
+  "answerOption": "B",
+  "answerText": "Legal state of being unable to pay debts",
+  "difficulty": "hard",
+  "sourceFile": "2513.json"
+}

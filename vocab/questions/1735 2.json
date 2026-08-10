@@ -1,0 +1,15 @@
+{
+  "id": 1735,
+  "word": "Anachronism",
+  "question": "Anachronism",
+  "options": [
+    "Vigorous or incisive in expression",
+    "Bowel distension from gas",
+    "Something that belongs to a different time",
+    "Excessively talkative about trivial things"
+  ],
+  "answerOption": "C",
+  "answerText": "Something that belongs to a different time",
+  "difficulty": "hard",
+  "sourceFile": "1735.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2488,
+  "word": "Aerodynamic",
+  "question": "Aerodynamic",
+  "options": [
+    "A type of winged figure in art",
+    "A scarcity or lack of something",
+    "Showing excessive vanity about achievements",
+    "Relating to air flow around objects"
+  ],
+  "answerOption": "D",
+  "answerText": "Relating to air flow around objects",
+  "difficulty": "hard",
+  "sourceFile": "2488.json"
+}

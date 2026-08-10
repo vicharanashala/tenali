@@ -1,0 +1,15 @@
+{
+  "id": 368,
+  "word": "Boil",
+  "question": "Boil",
+  "options": [
+    "The outer surface of something",
+    "To give up something completely",
+    "To heat a liquid until it bubbles",
+    "To keep safe from harm or injury"
+  ],
+  "answerOption": "C",
+  "answerText": "To heat a liquid until it bubbles",
+  "difficulty": "easy",
+  "sourceFile": "0368.json"
+}

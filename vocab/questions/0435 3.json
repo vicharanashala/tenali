@@ -1,0 +1,15 @@
+{
+  "id": 435,
+  "word": "Tie",
+  "question": "Tie",
+  "options": [
+    "Weak and delicate in health",
+    "To be turned into ice or become very cold",
+    "To fasten with string or rope",
+    "Arranged in a tidy way"
+  ],
+  "answerOption": "C",
+  "answerText": "To fasten with string or rope",
+  "difficulty": "easy",
+  "sourceFile": "0435.json"
+}

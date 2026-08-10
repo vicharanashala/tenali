@@ -1,0 +1,15 @@
+{
+  "id": 2236,
+  "word": "Sesquipedalian",
+  "question": "Sesquipedalian",
+  "options": [
+    "The fact of being born",
+    "Continually changing in pattern",
+    "Characterized by long words",
+    "Knowledge derived from experience"
+  ],
+  "answerOption": "C",
+  "answerText": "Characterized by long words",
+  "difficulty": "hard",
+  "sourceFile": "2236.json"
+}

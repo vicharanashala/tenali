@@ -1,0 +1,15 @@
+{
+  "id": 143,
+  "word": "Lucky",
+  "question": "Lucky",
+  "options": [
+    "To cause a liquid to flow over the edge",
+    "Having good fortune; fortunate",
+    "Open to more than one interpretation",
+    "To break up and move earth with a tool"
+  ],
+  "answerOption": "B",
+  "answerText": "Having good fortune; fortunate",
+  "difficulty": "easy",
+  "sourceFile": "0143.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 173,
+  "word": "Cry",
+  "question": "Cry",
+  "options": [
+    "To make someone feel admiration",
+    "With little or no light",
+    "To make someone feel happy or satisfied",
+    "To shed tears of sadness or pain"
+  ],
+  "answerOption": "D",
+  "answerText": "To shed tears of sadness or pain",
+  "difficulty": "easy",
+  "sourceFile": "0173.json"
+}

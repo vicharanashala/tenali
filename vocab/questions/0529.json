@@ -1,0 +1,15 @@
+{
+  "id": 529,
+  "word": "Enable",
+  "question": "Enable",
+  "options": [
+    "To give someone the means to do something",
+    "Expressing approval or agreement",
+    "To work together toward a common goal",
+    "Having a strong unpleasant smell"
+  ],
+  "answerOption": "A",
+  "answerText": "To give someone the means to do something",
+  "difficulty": "easy",
+  "sourceFile": "0529.json"
+}

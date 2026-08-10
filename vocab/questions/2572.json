@@ -1,0 +1,15 @@
+{
+  "id": 2572,
+  "word": "AEROSCOPY",
+  "question": "AEROSCOPY",
+  "options": [
+    "The quality of being airy",
+    "Unable to be avoided or escaped",
+    "Presence of air in thorax",
+    "Observation of air conditions"
+  ],
+  "answerOption": "D",
+  "answerText": "Observation of air conditions",
+  "difficulty": "hard",
+  "sourceFile": "2572.json"
+}

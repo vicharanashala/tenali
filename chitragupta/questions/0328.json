@@ -1,0 +1,14 @@
+{
+  "id": 328,
+  "question": "Which organ in the body is mainly affected by hepatitis?",
+  "options": [
+    "Kidney",
+    "Heart",
+    "Liver",
+    "Lungs"
+  ],
+  "answerOption": "C",
+  "answerText": "Liver",
+  "genre": "science",
+  "sourceFile": "0328.json"
+}

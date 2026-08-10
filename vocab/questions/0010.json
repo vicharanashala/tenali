@@ -1,0 +1,15 @@
+{
+  "id": 10,
+  "word": "Tall",
+  "question": "Tall",
+  "options": [
+    "Well informed about many subjects",
+    "In a state of great discomfort or unhappiness",
+    "Of great or more than average height",
+    "Able to be relied on as honest"
+  ],
+  "answerOption": "C",
+  "answerText": "Of great or more than average height",
+  "difficulty": "easy",
+  "sourceFile": "0010.json"
+}

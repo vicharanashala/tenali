@@ -1,0 +1,15 @@
+{
+  "id": 1395,
+  "word": "Demagnetize",
+  "question": "Demagnetize",
+  "options": [
+    "The quality of being unrelenting",
+    "Having a friendly and pleasant manner",
+    "To remove magnetic properties",
+    "Not safely held or supported"
+  ],
+  "answerOption": "C",
+  "answerText": "To remove magnetic properties",
+  "difficulty": "medium",
+  "sourceFile": "1395.json"
+}

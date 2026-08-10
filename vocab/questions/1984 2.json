@@ -1,0 +1,15 @@
+{
+  "id": 1984,
+  "word": "Advisableness",
+  "question": "Advisableness",
+  "options": [
+    "A mature human or animal",
+    "The philosophy of Aeolus",
+    "The quality of being advisable",
+    "A remark used too often to be meaningful"
+  ],
+  "answerOption": "C",
+  "answerText": "The quality of being advisable",
+  "difficulty": "hard",
+  "sourceFile": "1984.json"
+}

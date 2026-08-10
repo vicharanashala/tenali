@@ -1,0 +1,15 @@
+{
+  "id": 512,
+  "word": "Perceive",
+  "question": "Perceive",
+  "options": [
+    "To become aware of through the senses",
+    "Stretched or pulled tight",
+    "Unable to be seen",
+    "Soft and light in texture"
+  ],
+  "answerOption": "A",
+  "answerText": "To become aware of through the senses",
+  "difficulty": "easy",
+  "sourceFile": "0512.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1950,
+  "word": "Bamboozling",
+  "question": "Bamboozling",
+  "options": [
+    "Difficult or impossible to understand",
+    "Unable to be appeased",
+    "Deceiving or confusing someone",
+    "Extremely unpleasant or revolting"
+  ],
+  "answerOption": "C",
+  "answerText": "Deceiving or confusing someone",
+  "difficulty": "medium",
+  "sourceFile": "1950.json"
+}

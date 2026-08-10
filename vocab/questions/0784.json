@@ -1,0 +1,15 @@
+{
+  "id": 784,
+  "word": "Pure",
+  "question": "Pure",
+  "options": [
+    "Not mixed with anything else",
+    "Not firmly fixed in place",
+    "Insufficient for the demand; in short supply",
+    "To move forward in a purposeful way"
+  ],
+  "answerOption": "A",
+  "answerText": "Not mixed with anything else",
+  "difficulty": "easy",
+  "sourceFile": "0784.json"
+}

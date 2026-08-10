@@ -1,0 +1,14 @@
+{
+  "id": 214,
+  "question": "Which is the capital of Egypt?",
+  "options": [
+    "Alexandria",
+    "Cairo",
+    "Giza",
+    "Luxor"
+  ],
+  "answerOption": "B",
+  "answerText": "Cairo",
+  "genre": "geography",
+  "sourceFile": "0214.json"
+}

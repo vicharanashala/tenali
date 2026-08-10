@@ -1,0 +1,15 @@
+{
+  "id": 132,
+  "word": "Present",
+  "question": "Present",
+  "options": [
+    "To rub out or remove written marks",
+    "To keep something for future use",
+    "In a particular place; existing now",
+    "Having little or no rain; very dry"
+  ],
+  "answerOption": "C",
+  "answerText": "In a particular place; existing now",
+  "difficulty": "easy",
+  "sourceFile": "0132.json"
+}

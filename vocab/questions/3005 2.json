@@ -1,0 +1,15 @@
+{
+  "id": 3005,
+  "word": "ABLACTATION",
+  "question": "ABLACTATION",
+  "options": [
+    "Living in abyss ocean",
+    "One who abuses another",
+    "Weaning a child gradually",
+    "Eating abyss organisms"
+  ],
+  "answerOption": "C",
+  "answerText": "Weaning a child gradually",
+  "difficulty": "extra-hard",
+  "sourceFile": "3005.json"
+}

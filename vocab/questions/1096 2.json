@@ -1,0 +1,15 @@
+{
+  "id": 1096,
+  "word": "Replenish",
+  "question": "Replenish",
+  "options": [
+    "Kept secret or done in a hidden way",
+    "To make something ineffective; to nullify",
+    "Lacking interest or excitement; dull",
+    "To fill something up again"
+  ],
+  "answerOption": "D",
+  "answerText": "To fill something up again",
+  "difficulty": "medium",
+  "sourceFile": "1096.json"
+}

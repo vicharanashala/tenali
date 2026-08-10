@@ -1,0 +1,15 @@
+{
+  "id": 359,
+  "word": "Deliver",
+  "question": "Deliver",
+  "options": [
+    "To bring something to a person or place",
+    "Of little weight; easy to carry",
+    "Of very great size",
+    "Done with good judgment; practical"
+  ],
+  "answerOption": "A",
+  "answerText": "To bring something to a person or place",
+  "difficulty": "easy",
+  "sourceFile": "0359.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 364,
+  "word": "Contain",
+  "question": "Contain",
+  "options": [
+    "To study something thoroughly",
+    "Not allowing water to pass through",
+    "Able to resume its shape after stretching",
+    "To have something inside"
+  ],
+  "answerOption": "D",
+  "answerText": "To have something inside",
+  "difficulty": "easy",
+  "sourceFile": "0364.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 243,
+  "word": "Farewell",
+  "question": "Farewell",
+  "options": [
+    "An act of saying goodbye",
+    "Logical and well organized",
+    "Domesticated and not dangerous to people",
+    "Relating to or found in the sea"
+  ],
+  "answerOption": "A",
+  "answerText": "An act of saying goodbye",
+  "difficulty": "easy",
+  "sourceFile": "0243.json"
+}

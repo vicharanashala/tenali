@@ -1,0 +1,15 @@
+{
+  "id": 78,
+  "word": "Clever",
+  "question": "Clever",
+  "options": [
+    "Morally right and justifiable",
+    "To have something inside",
+    "Feeling thankful for something received",
+    "Quick to understand and learn things"
+  ],
+  "answerOption": "D",
+  "answerText": "Quick to understand and learn things",
+  "difficulty": "easy",
+  "sourceFile": "0078.json"
+}

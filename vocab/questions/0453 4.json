@@ -1,0 +1,15 @@
+{
+  "id": 453,
+  "word": "Demolish",
+  "question": "Demolish",
+  "options": [
+    "To make something happen later than planned",
+    "To pull down or destroy a building",
+    "To set free from confinement",
+    "To present something for acceptance"
+  ],
+  "answerOption": "B",
+  "answerText": "To pull down or destroy a building",
+  "difficulty": "easy",
+  "sourceFile": "0453.json"
+}

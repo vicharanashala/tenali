@@ -1,0 +1,15 @@
+{
+  "id": 1447,
+  "word": "Deranged",
+  "question": "Deranged",
+  "options": [
+    "The action of moving downward",
+    "Disturbed or insane in mind",
+    "Able to adapt to many different functions",
+    "Having great energy or enthusiasm"
+  ],
+  "answerOption": "B",
+  "answerText": "Disturbed or insane in mind",
+  "difficulty": "medium",
+  "sourceFile": "1447.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 323,
+  "word": "Amuse",
+  "question": "Amuse",
+  "options": [
+    "To achieve or realize something desired",
+    "To give someone the means to do something",
+    "To have enough money to pay for something",
+    "To cause someone to find something funny"
+  ],
+  "answerOption": "D",
+  "answerText": "To cause someone to find something funny",
+  "difficulty": "easy",
+  "sourceFile": "0323.json"
+}

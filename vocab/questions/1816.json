@@ -1,0 +1,15 @@
+{
+  "id": 1816,
+  "word": "Unprepared",
+  "question": "Unprepared",
+  "options": [
+    "Unwilling and hesitant to do something",
+    "Suffering from dementia",
+    "Required officially or necessarily",
+    "Not ready or equipped"
+  ],
+  "answerOption": "D",
+  "answerText": "Not ready or equipped",
+  "difficulty": "medium",
+  "sourceFile": "1816.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2022,
+  "word": "Blandishment",
+  "question": "Blandishment",
+  "options": [
+    "Psychological condition from flying",
+    "To combine or unite to form one entity",
+    "A flattering statement used to persuade",
+    "Relating to lending money at unreasonably high rates"
+  ],
+  "answerOption": "C",
+  "answerText": "A flattering statement used to persuade",
+  "difficulty": "hard",
+  "sourceFile": "2022.json"
+}

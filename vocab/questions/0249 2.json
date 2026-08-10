@@ -1,0 +1,15 @@
+{
+  "id": 249,
+  "word": "Avoid",
+  "question": "Avoid",
+  "options": [
+    "To keep away from something",
+    "To arrange things in a neat pile",
+    "Pleased and relieved about something",
+    "Easily seen or noticed"
+  ],
+  "answerOption": "A",
+  "answerText": "To keep away from something",
+  "difficulty": "easy",
+  "sourceFile": "0249.json"
+}

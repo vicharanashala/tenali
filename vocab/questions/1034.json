@@ -1,0 +1,15 @@
+{
+  "id": 1034,
+  "word": "Knack",
+  "question": "Knack",
+  "options": [
+    "Likely to cause resentment",
+    "Abundant in supply or quantity",
+    "Spacious and comfortable",
+    "A skill or talent for doing something"
+  ],
+  "answerOption": "D",
+  "answerText": "A skill or talent for doing something",
+  "difficulty": "medium",
+  "sourceFile": "1034.json"
+}

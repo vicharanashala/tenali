@@ -1,0 +1,15 @@
+{
+  "id": 102,
+  "word": "Cheap",
+  "question": "Cheap",
+  "options": [
+    "To make a public or formal statement",
+    "To give up something valued for a greater cause",
+    "Low in price; not expensive",
+    "To walk slowly with no clear direction"
+  ],
+  "answerOption": "C",
+  "answerText": "Low in price; not expensive",
+  "difficulty": "easy",
+  "sourceFile": "0102.json"
+}

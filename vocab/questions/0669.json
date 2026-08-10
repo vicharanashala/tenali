@@ -1,0 +1,15 @@
+{
+  "id": 669,
+  "word": "Cramped",
+  "question": "Cramped",
+  "options": [
+    "Uncomfortably small or crowded",
+    "A sentence that asks for information",
+    "To tell someone about a possible danger",
+    "To do something repeatedly to improve"
+  ],
+  "answerOption": "A",
+  "answerText": "Uncomfortably small or crowded",
+  "difficulty": "easy",
+  "sourceFile": "0669.json"
+}

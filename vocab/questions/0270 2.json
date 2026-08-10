@@ -1,0 +1,15 @@
+{
+  "id": 270,
+  "word": "Starve",
+  "question": "Starve",
+  "options": [
+    "To suffer or die from lack of food",
+    "To prove more powerful than opposing forces",
+    "To control something by means of rules",
+    "To take someone's property without permission"
+  ],
+  "answerOption": "A",
+  "answerText": "To suffer or die from lack of food",
+  "difficulty": "easy",
+  "sourceFile": "0270.json"
+}

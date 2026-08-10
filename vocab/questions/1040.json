@@ -1,0 +1,15 @@
+{
+  "id": 1040,
+  "word": "Quench",
+  "question": "Quench",
+  "options": [
+    "The action of removing from office",
+    "To satisfy thirst by drinking",
+    "Occurring at irregular intervals",
+    "To remove a fuse from an explosive"
+  ],
+  "answerOption": "B",
+  "answerText": "To satisfy thirst by drinking",
+  "difficulty": "medium",
+  "sourceFile": "1040.json"
+}

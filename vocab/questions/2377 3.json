@@ -1,0 +1,15 @@
+{
+  "id": 2377,
+  "word": "AEROMOTOR",
+  "question": "AEROMOTOR",
+  "options": [
+    "The quality of being decidable",
+    "A plant used as herbal medicine",
+    "An engine powered by air",
+    "The use of many words where fewer would do"
+  ],
+  "answerOption": "C",
+  "answerText": "An engine powered by air",
+  "difficulty": "hard",
+  "sourceFile": "2377.json"
+}

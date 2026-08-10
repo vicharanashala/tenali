@@ -1,0 +1,15 @@
+{
+  "id": 1189,
+  "word": "Elucidate",
+  "question": "Elucidate",
+  "options": [
+    "To remove oxygen from something",
+    "To make something clear; explain",
+    "Prone to discord or quarreling",
+    "A natural dislike or opposition"
+  ],
+  "answerOption": "B",
+  "answerText": "To make something clear; explain",
+  "difficulty": "medium",
+  "sourceFile": "1189.json"
+}

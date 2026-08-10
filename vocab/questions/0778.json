@@ -1,0 +1,15 @@
+{
+  "id": 778,
+  "word": "Actual",
+  "question": "Actual",
+  "options": [
+    "Existing in large quantities",
+    "Existing in fact; real",
+    "To notice the differences between things",
+    "To honor a special occasion with festivities"
+  ],
+  "answerOption": "B",
+  "answerText": "Existing in fact; real",
+  "difficulty": "easy",
+  "sourceFile": "0778.json"
+}

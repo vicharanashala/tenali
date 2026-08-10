@@ -1,0 +1,15 @@
+{
+  "id": 2757,
+  "word": "Durability",
+  "question": "Durability",
+  "options": [
+    "Unable to be avoided or escaped",
+    "The quality of lasting long",
+    "The action of advocating",
+    "To make worse by adding inferior matter"
+  ],
+  "answerOption": "B",
+  "answerText": "The quality of lasting long",
+  "difficulty": "hard",
+  "sourceFile": "2757.json"
+}

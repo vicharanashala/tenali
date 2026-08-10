@@ -1,0 +1,457 @@
+{
+  "module": 6,
+  "missionId": 56,
+  "title": "SVD & The Big Picture",
+  "original_question": "The Singular Value Decomposition (SVD) A = UΣV^T unifies everything you have learned: U columns = eigenvectors of AA^T (left singular vectors = basis for column space). V columns = eigenvectors of A^TA (right singular vectors = basis for row space). Non-zero singular values = square roots of eigenvalues. Zero singular values = null space! SVD reveals the four subspaces and their dimensions automatically!",
+  "core_concept": "SVD decomposes any matrix A = UΣV^T, where U columns span the column space, V columns span the row space, and the number of non-zero singular values equals the rank. SVD unifies all four fundamental subspaces and provides optimal low-rank approximations.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M6Q6E1",
+        "question": "What does SVD stand for?",
+        "options": [
+          "Singular Value Decomposition",
+          "Square Vector Distribution",
+          "System of Variable Directions",
+          "Symmetric Value Decomposition"
+        ],
+        "correct_option": "Singular Value Decomposition",
+        "explanation": "Step 1: SVD = Singular Value Decomposition — 'singular values' are the non-negative values in the diagonal matrix Σ, ordered by importance (σ₁ ≥ σ₂ ≥ ... ≥ 0). Step 2: 'Decomposition' means breaking any matrix into three simpler matrices: U (orthogonal, left singular vectors), Σ (diagonal, singular values), and V^T (orthogonal, right singular vectors). Step 3: The SVD exists for ANY m×n matrix (unlike eigendecomposition, which requires square diagonalizable matrices), making it the most universal matrix decomposition — the 'Swiss Army knife' of linear algebra that reveals the complete structure of any matrix."
+      },
+      {
+        "id": "M6Q6E2",
+        "question": "In the SVD A = UΣV^T, what does U represent?",
+        "options": [
+          "The right singular vectors (basis for the row space) (x)",
+          "The left singular vectors (basis for the column space)",
+          "The singular values — does t match",
+          "The transpose of A — does t match"
+        ],
+        "correct_option": "The left singular vectors (basis for the column space)",
+        "explanation": "Step 1: U is an m×m orthogonal matrix whose columns are the left singular vectors — the first r columns (where r = rank) span the column space C(A). Step 2: U diagonalizes AA^T: AA^T = U(ΣΣ^T)U^T, so columns of U are eigenvectors of AA^T. Step 3: Each left singular vector uᵢ represents a direction in the output space where A produces the i-th largest output — u₁ is the direction of maximum 'stretch' in the transformation, and the first r columns form an orthonormal basis for all possible outputs of A."
+      },
+      {
+        "id": "M6Q6E3",
+        "question": "In the SVD A = UΣV^T, what does V represent?",
+        "options": [
+          "The left singular vectors",
+          "The right singular vectors (basis for the row space)",
+          "The eigenvalues of A — does t match",
+          "The null space of A — does t match"
+        ],
+        "correct_option": "The right singular vectors (basis for the row space)",
+        "explanation": "Step 1: V is an n×n orthogonal matrix whose columns are the right singular vectors — the first r columns span the row space R(A). Step 2: V diagonalizes A^TA: A^TA = V(Σ^TΣ)V^T, so columns of V are eigenvectors of A^TA. Step 3: Each right singular vector vᵢ represents a direction in the input space that A maps to the direction uᵢ in the output space, scaled by σᵢ: Avᵢ = σᵢuᵢ. The first r columns of V form an orthonormal basis for the row space, and the last n−r columns span the null space."
+      },
+      {
+        "id": "M6Q6E4",
+        "question": "What does the diagonal matrix Σ contain?",
+        "options": [
+          "The eigenvectors of A",
+          "The singular values (square roots of eigenvalues of A^TA), in decreasing order",
+          "The entries of the original matrix A",
+          "The null space vectors"
+        ],
+        "correct_option": "The singular values (square roots of eigenvalues of A^TA), in decreasing order",
+        "explanation": "Step 1: Σ is a diagonal matrix with singular values σ₁ ≥ σ₂ ≥ ... ≥ σᵣ > 0 on the diagonal, where r = rank(A). Step 2: Each σᵢ = √λᵢ where λᵢ is an eigenvalue of A^TA (or AA^T) — the singular values are the square roots of the eigenvalues of the symmetric matrix A^TA. Step 3: The number of non-zero singular values equals the rank of A, and their magnitudes measure the 'importance' of each principal direction — large σᵢ means A stretches significantly in that direction, while σᵢ ≈ 0 means the direction is nearly in the null space."
+      },
+      {
+        "id": "M6Q6E5",
+        "question": "For the matrix A = [[1,2],[2,4]] (rank 1), how many non-zero singular values does SVD give?",
+        "options": [
+          "2",
+          "1",
+          "0",
+          "4"
+        ],
+        "correct_option": "1",
+        "explanation": "Step 1: A has rank 1 — the second row is exactly twice the first, so only one row direction is linearly independent. Step 2: The number of non-zero singular values equals the rank, so SVD gives 1 non-zero singular value (σ₁ = √25 = 5) and one zero singular value. Step 3: The zero σ₂ = 0 corresponds to the null space direction — the input direction that A maps to zero. This illustrates how SVD reveals rank: count the non-zero singular values."
+      },
+      {
+        "id": "M6Q6E6",
+        "question": "What does a zero singular value in SVD indicate?",
+        "options": [
+          "The matrix is t square",
+          "A direction in the input space that is mapped to zero — a null space direction",
+          "The matrix is orthogonal",
+          "The matrix has maximum rank"
+        ],
+        "correct_option": "A direction in the input space that is mapped to zero — a null space direction",
+        "explanation": "Step 1: If σᵢ = 0, then the i-th right singular vector vᵢ is in the null space of A: Avᵢ = σᵢuᵢ = 0 — this input direction produces zero output. Step 2: The number of zero singular values = nullity(A) = n − rank(A). Step 3: SVD automatically partitions the input space: the first r right singular vectors span the row space (mapped to non-zero outputs), and the last n−r span the null space (mapped to zero). Zero singular values are the 'dead directions' of the transformation."
+      },
+      {
+        "id": "M6Q6E7",
+        "question": "Why is SVD called a 'decomposition' of a matrix?",
+        "options": [
+          "Because it breaks the matrix into a sum of outer products of singular vectors, weighted by singular values",
+          "Because it removes rows from the matrix",
+          "Because it converts the matrix to a vector",
+          "Because it changes the matrix to a different size"
+        ],
+        "correct_option": "Because it breaks the matrix into a sum of outer products of singular vectors, weighted by singular values",
+        "explanation": "Step 1: A = UΣV^T = Σᵢ₌₁ʳ σᵢ uᵢvᵢ^T — the full matrix is a weighted sum of rank-1 matrices (outer products). Step 2: Each term σᵢ uᵢvᵢ^T is a rank-1 matrix, and the terms are ordered by importance (σ₁ ≥ σ₂ ≥ ...). Step 3: This decomposition reveals the matrix's structure layer by layer: the first term captures the most important pattern, the second captures the next most important, and so on. Truncating to the first k terms gives the best rank-k approximation — the decomposition is a 'recipe' for reconstructing the matrix from its fundamental building blocks."
+      },
+      {
+        "id": "M6Q6E8",
+        "question": "What is the relationship between singular values and eigenvalues?",
+        "options": [
+          "Singular values are always equal to eigenvalues",
+          "Singular values are the square roots of the eigenvalues of A^TA (or AA^T)",
+          "Eigenvalues are the square roots of singular values",
+          "They are completely unrelated"
+        ],
+        "correct_option": "Singular values are the square roots of the eigenvalues of A^TA (or AA^T)",
+        "explanation": "Step 1: For any matrix A, A^TA is symmetric positive semi-definite, so its eigenvalues λᵢ are real and non-negative. Step 2: The singular values of A are σᵢ = √λᵢ — the square roots of these eigenvalues. Step 3: Note: eigenvalues of A itself can be negative or complex (for non-symmetric matrices), but singular values are always real and non-negative — this is why SVD is more universally applicable than eigendecomposition: it always produces well-behaved, non-negative values regardless of the matrix's structure."
+      },
+      {
+        "id": "M6Q6E9",
+        "question": "For an n×n orthogonal matrix Q, what is its SVD?",
+        "options": [
+          "U = Q, Σ = I, V = Q",
+          "U = I, Σ = Q, V = I — does t match",
+          "U = Q, Σ = Q, V = Q — does t match",
+          "SVD is t defined for orthogonal matrices"
+        ],
+        "correct_option": "U = Q, Σ = I, V = Q",
+        "explanation": "Step 1: An orthogonal matrix Q satisfies Q^TQ = QQ^T = I, so Q·I·Q^T = Q·Q^T = I — wait, that's not A. Actually, A = Q = Q·I·Q^T is already in SVD form: U = Q, Σ = I, V = Q. Step 2: All singular values are 1 (the identity matrix), confirming that orthogonal matrices preserve lengths and angles — no stretching or compression. Step 3: The SVD reveals that orthogonal transformations are pure rotations/reflections: the singular values (all 1) tell you the transformation doesn't stretch any direction, and the singular vectors tell you the rotation axes."
+      },
+      {
+        "id": "M6Q6E10",
+        "question": "How many matrices do you need to store to represent the SVD of an m×n matrix?",
+        "options": [
+          "1 (just the original matrix)",
+          "3: U (m×m), Σ (m×n diagonal), V^T (n×n)",
+          "m × n values (same as original)",
+          "Just the singular values"
+        ],
+        "correct_option": "3: U (m×m), Σ (m×n diagonal), V^T (n×n)",
+        "explanation": "Step 1: SVD stores three matrices: U (m×m orthogonal), Σ (m×n diagonal), V^T (n×n orthogonal) — total O(m² + mn + n²) storage. Step 2: For truncated SVD (keeping only k components), you store U_k (m×k), Σ_k (k×k), V_k^T (k×n) — O(k(m+n)) storage, much less than the original mn entries. Step 3: This is why SVD is useful for compression: the truncated version uses O(k(m+n)) instead of O(mn), and by the Eckart-Young theorem, it is the best rank-k approximation — the SVD decomposition enables both compression and optimal low-rank approximation."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M6Q6M1",
+        "question": "For A = [[1,2],[2,4]], what is the column space of A?",
+        "options": [
+          "All of ℝ²)",
+          "The line spanned by (1,2) in ℝ²",
+          "The line spanned by (1,0)",
+          "Just the zero vector"
+        ],
+        "correct_option": "The line spanned by (1,2) in ℝ²",
+        "explanation": "Step 1: Column 1 = (1,2), column 2 = (2,4) = 2×(1,2) — both columns are multiples of (1,2). Step 2: The column space is span{(1,2)} — a 1-dimensional line in ℝ². Step 3: This matches rank = 1: the column space has dimension 1, meaning A maps all of ℝ² onto this single line. The SVD confirms this: the single non-zero singular value σ₁ corresponds to the single direction u₁ = (1,2)/√5 that A maps to, while the null space direction v₂ = (−2,1)/√5 is mapped to zero."
+      },
+      {
+        "id": "M6Q6M2",
+        "question": "For A = [[1,2],[2,4]], what is the null space of A?",
+        "options": [
+          "The line spanned by (1,2) (x)",
+          "The line spanned by (-2,1)",
+          "All of ℝ²)",
+          "Just the zero vector"
+        ],
+        "correct_option": "The line spanned by (-2,1)",
+        "explanation": "Step 1: Solve Ax = 0: x₁ + 2x₂ = 0 and 2x₁ + 4x₂ = 0 (same equation). Step 2: x₁ = −2x₂, so x = t(−2,1). The null space is span{(−2,1)}. Step 3: Note (−2,1) ⊥ (1,2) — the null space is orthogonal to the row space, as guaranteed by the fundamental theorem of linear algebra. The SVD makes this explicit: v₂ = (−2,1)/√5 is the right singular vector for σ₂ = 0, confirming it is in the null space."
+      },
+      {
+        "id": "M6Q6M3",
+        "question": "In SVD A = UΣV^T, the first column of U (u₁) corresponds to the largest singular value σ₁. What does u₁ represent geometrically?",
+        "options": [
+          "The direction of maximum variance in the output space — where A maps the most 'spread'",
+          "The direction of zero output",
+          "The direction of minimum variance",
+          "The mean of the output"
+        ],
+        "correct_option": "The direction of maximum variance in the output space — where A maps the most 'spread'",
+        "explanation": "Step 1: u₁ is the first left singular vector — A maps v₁ (first right singular vector) to σ₁u₁, the longest output vector. Step 2: u₁ points in the direction where A produces the largest output magnitude — the direction of maximum 'stretch' in the transformation. Step 3: Geometrically, A takes the unit sphere in the input space and maps it to an ellipsoid in the output space — u₁ is the direction of the ellipsoid's longest axis, σ₁ is the length of that axis, and v₁ is the input direction that maps to it. This geometric interpretation is the essence of SVD."
+      },
+      {
+        "id": "M6Q6M4",
+        "question": "The SVD A = UΣV^T can be written as A = Σᵢ σᵢ uᵢvᵢ^T (sum of rank-1 matrices). If we keep only the first k terms, what kind of approximation do we get?",
+        "options": [
+          "The best rank-k approximation to A in both the Frobenius norm and the spectral norm",
+          "The worst possible rank-k approximation",
+          "An approximation that only works for square matrices",
+          "A rank-0 approximation"
+        ],
+        "correct_option": "The best rank-k approximation to A in both the Frobenius norm and the spectral norm",
+        "explanation": "Step 1: A_k = Σᵢ₌₁ᵏ σᵢ uᵢvᵢ^T is rank k — it is the sum of k rank-1 matrices. Step 2: By the Eckart-Young theorem, this is the BEST rank-k approximation: ‖A − A_k‖_F is minimized (Frobenius norm) AND ‖A − A_k‖₂ is minimized (spectral norm). Step 3: The error is determined by the discarded singular values: ‖A − A_k‖_F² = Σᵢ₌ₖ₊₁ σᵢ² and ‖A − A_k‖₂ = σ_{k+1}. This theorem makes SVD the gold standard for low-rank approximation — no other method achieves smaller error for the same rank."
+      },
+      {
+        "id": "M6Q6M5",
+        "question": "How does SVD automatically reveal all four fundamental subspaces of a matrix A (m×n, rank r)?",
+        "options": [
+          "U's first r columns span C(A), V's first r columns span R(A), V's last n-r columns span N(A), U's last m-r columns span N(A^T)",
+          "SVD only reveals the column space",
+          "SVD reveals two subspaces, t four",
+          "SVD cant find the null space"
+        ],
+        "correct_option": "U's first r columns span C(A), V's first r columns span R(A), V's last n-r columns span N(A), U's last m-r columns span N(A^T)",
+        "explanation": "Step 1: First r columns of U: basis for C(A) (column space = range) — the output directions that A actually uses. Step 2: First r columns of V: basis for R(A) (row space) — the input directions that A maps to non-zero outputs. Step 3: Last n−r columns of V: basis for N(A) (null space) — input directions mapped to zero. Last m−r columns of U: basis for N(A^T) (left null space) — output directions orthogonal to the column space. The SVD encodes all four subspaces in U and V, with the rank r as the bridge connecting them."
+      },
+      {
+        "id": "M6Q6M6",
+        "question": "For the matrix A = [[1,2],[2,4]], what is the row space?",
+        "options": [
+          "All of ℝ²)",
+          "The line spanned by (1,2) in ℝ²",
+          "The line spanned by (-2,1)",
+          "Just the zero vector"
+        ],
+        "correct_option": "The line spanned by (1,2) in ℝ²",
+        "explanation": "Step 1: The row space is span{rows of A}: row 1 = (1,2), row 2 = (2,4) = 2×(1,2). Step 2: The row space = span{(1,2)} — a 1-dimensional line in ℝ². Step 3: Note: row space and column space both have dimension = rank = 1, but they live in different spaces (ℝ² in both cases here since A is square). The SVD confirms: the first right singular vector v₁ = (1,2)/√5 spans the row space, and the first left singular vector u₁ = (1,2)/√5 spans the column space — for this special matrix, they happen to be the same direction."
+      },
+      {
+        "id": "M6Q6M7",
+        "question": "Why are the left singular vectors (columns of U) orthogonal to each other?",
+        "options": [
+          "Because U must be an orthogonal matrix — its columns form an orthonormal basis, which is required for the decomposition A = UΣV^T to hold",
+          "Because the data is centered",
+          "Because A is symmetric",
+          "Because singular values are always positive"
+        ],
+        "correct_option": "Because U must be an orthogonal matrix — its columns form an orthonormal basis, which is required for the decomposition A = UΣV^T to hold",
+        "explanation": "Step 1: SVD requires U and V to be orthogonal matrices: U^TU = I, V^TV = I. Step 2: Orthogonal matrices have orthonormal columns — unit length and mutually perpendicular. Step 3: This orthonormality ensures the decomposition is numerically stable and the singular values are uniquely defined. It also means the principal components (columns of V) are uncorrelated — each captures independent variance in the data, which is why PCA's components don't overlap in information."
+      },
+      {
+        "id": "M6Q6M8",
+        "question": "If you multiply A by an orthogonal matrix Q from the left (QA), what happens to the singular values?",
+        "options": [
+          "They all double — does t match",
+          "They stay the same — orthogonal transformations preserve singular values because they preserve lengths and angles",
+          "They all become 1 — does t match",
+          "They become the eigenvalues of Q"
+        ],
+        "correct_option": "They stay the same — orthogonal transformations preserve singular values because they preserve lengths and angles",
+        "explanation": "Step 1: QA = (QU)ΣV^T is still an SVD (since QU is also orthogonal). Step 2: The singular values Σ are unchanged because orthogonal transformations (rotations, reflections) don't stretch or compress — they preserve the geometric structure that singular values measure. Step 3: This invariance is why SVD is useful for comparing matrices: two matrices that differ only by a rotation (orthogonal transformation) have the same singular values, meaning they have the same 'intrinsic geometry' even though they look different."
+      },
+      {
+        "id": "M6Q6M9",
+        "question": "What is the pseudoinverse (Moore-Penrose inverse) A⁺ of a matrix A in terms of its SVD?",
+        "options": [
+          "A⁺ = VΣ⁺U^T, where Σ⁺ is obtained by inverting each non-zero singular value and transposing the diagonal matrix",
+          "A⁺ = A^T always — does t match",
+          "A⁺ = (A^TA)^{-1}A^T only",
+          "A⁺ = UΣV)"
+        ],
+        "correct_option": "A⁺ = VΣ⁺U^T, where Σ⁺ is obtained by inverting each non-zero singular value and transposing the diagonal matrix",
+        "explanation": "Step 1: From A = UΣV^T, the pseudoinverse is A⁺ = VΣ⁺U^T. Step 2: Σ⁺ is formed by taking the reciprocal of each non-zero σᵢ and transposing the matrix (swapping rows and columns for non-square matrices). Step 3: For systems Ax = b that may not have exact solutions, x = A⁺b gives the minimum-norm least-squares solution — it inverts only the non-zero singular values (the row space directions) and sets the null space components to zero. This is more numerically stable than normal equations (A^TA)⁻¹A^Tb and handles rank-deficient matrices gracefully."
+      },
+      {
+        "id": "M6Q6M10",
+        "question": "Why does the SVD of a real matrix A always exist, even if A is not square or not symmetric?",
+        "options": [
+          "SVD only works for square symmetric matrices",
+          "The spectral theorem guarantees eigendecomposition of A^TA (symmetric), which provides V, and then U is determined by Avᵢ = σᵢuᵢ — this works for ANY real matrix",
+          "SVD is an approximation that only works approximately",
+          "SVD requires A to be invertible"
+        ],
+        "correct_option": "The spectral theorem guarantees eigendecomposition of A^TA (symmetric), which provides V, and then U is determined by Avᵢ = σᵢuᵢ — this works for ANY real matrix",
+        "explanation": "Step 1: A^TA is always symmetric positive semi-definite (regardless of A's shape), so the spectral theorem guarantees A^TA = VΛV^T with real non-negative eigenvalues. Step 2: Set σᵢ = √λᵢ and uᵢ = Avᵢ/σᵢ for non-zero σᵢ (this works because ‖Avᵢ‖ = σᵢ). Step 3: Complete U with any orthonormal basis for the remaining dimensions (the left null space). This construction works for any m×n matrix — SVD always exists because it is built on the spectral theorem for the symmetric matrix A^TA, which always has a valid eigendecomposition."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M6Q6H1",
+        "question": "For A = [[1,2],[2,4]], express the SVD explicitly. What are U, Σ, and V?",
+        "options": [
+          "U = [[1/√5,2/√5],[2/√5,-1/√5]], Σ = [[√20,0],[0,0]], V = [[1/√5,2/√5],[2/√5,-1/√5]]",
+          "U = I, Σ = A, V = I — does t match",
+          "U = A, Σ = I, V = A — does t match",
+          "U = [[1,0],[0,1]], Σ = [[5,0],[0,0]], V = [[1,0],[0,1]]"
+        ],
+        "correct_option": "U = [[1/√5,2/√5],[2/√5,-1/√5]], Σ = [[√20,0],[0,0]], V = [[1/√5,2/√5],[2/√5,-1/√5]]",
+        "explanation": "Step 1: A^TA = [[1,2],[2,4]]^T[[1,2],[2,4]] = [[5,10],[10,20]]. Eigenvalues: det(A^TA − λI) = (5−λ)(20−λ) − 100 = λ² − 25λ = λ(λ−25). So λ₁ = 25, λ₂ = 0. Step 2: σ₁ = √25 = 5, σ₂ = 0. V's first column: eigenvector for λ=25 is (1,2)/√5. U's first column: Av₁/σ₁ = (1,2)/√5. Step 3: The SVD is A = (1,2)/√5 · 5 · (1,2)^T/√5 = 5 · (1,2)(1,2)^T/5 = (1,2)(1,2)^T, which equals [[1,2],[2,4]] = A. The second singular value is 0, confirming rank 1."
+      },
+      {
+        "id": "M6Q6H2",
+        "question": "Why does the truncated SVD A_k = Σᵢ₌₁ᵏ σᵢ uᵢvᵢ^T minimize ‖A − B‖_F over all rank-k matrices B? (Eckart-Young Theorem)",
+        "options": [
+          "Because the Frobenius norm squared equals the sum of squared singular values of the error, and the truncated SVD discards the smallest σᵢ² terms, which are the optimal choice to minimize the sum",
+          "Because any other rank-k matrix has larger singular values",
+          "Because the Frobenius rm igres the smallest singular values",
+          "Because the theorem only holds for square matrices"
+        ],
+        "correct_option": "Because the Frobenius norm squared equals the sum of squared singular values of the error, and the truncated SVD discards the smallest σᵢ² terms, which are the optimal choice to minimize the sum",
+        "explanation": "Step 1: ‖A − B‖_F² = Σ σᵢ(A−B)² — the Frobenius norm squared equals the sum of squared singular values of the error matrix. Step 2: For any rank-k B, the matrix A − B has at least n−k non-zero singular values (by rank inequalities: rank(A−B) ≥ rank(A) − rank(B) ≥ r − k, and the remaining dimensions contribute). Step 3: The truncated SVD makes exactly n−k singular values of the error equal to σ_{k+1}, ..., σₙ — the smallest possible values, achieving the minimum. This is the Eckart-Young theorem: truncating at the k-th singular value is provably optimal."
+      },
+      {
+        "id": "M6Q6H3",
+        "question": "For the 4-page web graph (A→B, A→C, B→C, C→A, D→C) with its column-stochastic transition matrix M, what do the singular values of M tell you about the web graph's structure?",
+        "options": [
+          "The singular values tell you the number of pages",
+          "The number of non-zero singular values equals the rank of M, which reveals how many independent 'linking patterns' exist in the web graph",
+          "The singular values are the PageRank scores",
+          "The singular values tell you the diameter of the graph"
+        ],
+        "correct_option": "The number of non-zero singular values equals the rank of M, which reveals how many independent 'linking patterns' exist in the web graph",
+        "explanation": "Step 1: The transition matrix M has rank equal to the number of non-zero singular values — for our 4-page graph, M has rank 3 (D has no incoming links, so one dimension is lost). Step 2: This means there are 3 independent 'linking patterns' — the web's structure is effectively 3-dimensional despite having 4 pages. Step 3: The singular values quantify how much each linking pattern contributes to the overall structure: large singular values correspond to dominant patterns (like the A→B→C→A cycle), while small ones capture minor variations. The rank tells you the intrinsic complexity of the web graph's link structure."
+      },
+      {
+        "id": "M6Q6H4",
+        "question": "How does the relationship R(A) ⊥ N(A) (row space perpendicular to null space) manifest in the SVD?",
+        "options": [
+          "The right singular vectors spanning R(A) are orthogonal to those spanning N(A) — V's first r columns are perpendicular to V's last n-r columns by construction (V is orthogonal)",
+          "This orthogonality is a coincidence",
+          "SVD doesn't preserve this orthogonality",
+          "Only true for symmetric matrices"
+        ],
+        "correct_option": "The right singular vectors spanning R(A) are orthogonal to those spanning N(A) — V's first r columns are perpendicular to V's last n-r columns by construction (V is orthogonal)",
+        "explanation": "Step 1: V is an orthogonal matrix: V^TV = I, so all columns are mutually orthogonal. Step 2: V's first r columns span R(A) (the row space — directions mapped to non-zero outputs) and the last n−r columns span N(A) (the null space — directions mapped to zero). Step 3: Since V is orthogonal, these two sets of columns are automatically perpendicular — the SVD construction guarantees R(A) ⊥ N(A), which is the fundamental theorem of linear algebra made concrete in the decomposition."
+      },
+      {
+        "id": "M6Q6H5",
+        "question": "In image compression using SVD, if a 1000×1000 image has singular values σ₁=500, σ₂=300, σ₃=100, σ₄=5, σ₅=1, ..., σ₁₀₀₀≈0, and you keep k=3 components, what percentage of the 'energy' (Frobenius norm squared) is preserved?",
+        "options": [
+          "(500²+300²+100²)/(500²+300²+100²+5²+1²+...) ≈ 99.99%",
+          "3/1000 = 0.3% — does t match",
+          "50% — t here",
+          "100%)"
+        ],
+        "correct_option": "(500²+300²+100²)/(500²+300²+100²+5²+1²+...) ≈ 99.99%",
+        "explanation": "Step 1: Energy preserved = (σ₁²+σ₂²+σ₃²)/(Σσᵢ²). Step 2: = (250,000+90,000+10,000)/(250,000+90,000+10,000+25+1+...) ≈ 350,000/350,026 ≈ 99.99%. Step 3: The top 3 components capture almost all the image information — the remaining 997 components contribute negligible detail (less than 0.01%). This is why SVD-based compression works so well for images: the singular value spectrum drops off rapidly, concentrating nearly all the 'energy' in a few dominant components."
+      },
+      {
+        "id": "M6Q6H6",
+        "question": "If A is an m×n matrix with SVD A = UΣV^T, and you compute the Frobenius norm ‖A‖_F, what is it equal to in terms of singular values?",
+        "options": [
+          "‖A‖_F = Σᵢ σᵢ (sum of singular values)",
+          "‖A‖_F = √(Σᵢ σᵢ²) (root sum of squared singular values)",
+          "‖A‖_F = σ₁ (largest singular value)",
+          "‖A‖_F = product of all singular values"
+        ],
+        "correct_option": "‖A‖_F = √(Σᵢ σᵢ²) (root sum of squared singular values)",
+        "explanation": "Step 1: ‖A‖_F² = Σᵢⱼ aᵢⱼ² = trace(A^TA). Step 2: trace(A^TA) = trace(VΣ²V^T) = trace(Σ²) = Σᵢ σᵢ² (using the cyclic property of trace and the fact that V^TV = I). Step 3: So ‖A‖_F = √(Σᵢ σᵢ²). This equals the Euclidean distance from A to the zero matrix — the total 'energy' or 'magnitude' of the matrix, distributed across the singular value spectrum. Large singular values contribute disproportionately to the Frobenius norm."
+      },
+      {
+        "id": "M6Q6H7",
+        "question": "Why is SVD preferred over eigendecomposition for computing low-rank approximations, especially for non-square or non-symmetric matrices?",
+        "options": [
+          "SVD always exists for any matrix (square or not, symmetric or not), while eigendecomposition requires the matrix to be diagonalizable — SVD also guarantees real non-negative singular values while eigenvalues can be complex",
+          "SVD is always faster — does t match",
+          "Eigendecomposition doesn't exist for most matrices",
+          "SVD and eigendecomposition are the same thing"
+        ],
+        "correct_option": "SVD always exists for any matrix (square or not, symmetric or not), while eigendecomposition requires the matrix to be diagonalizable — SVD also guarantees real non-negative singular values while eigenvalues can be complex",
+        "explanation": "Step 1: Eigendecomposition requires n×n matrices that are diagonalizable (not all are — defective matrices cannot be diagonalized). Step 2: SVD works for any m×n matrix — always exists, guaranteed by the spectral theorem applied to A^TA. Step 3: Singular values are always real and non-negative (unlike eigenvalues which can be complex or negative), making SVD more robust and universally applicable for approximations. The Eckart-Young theorem (best rank-k approximation) only holds for SVD, not for eigendecomposition of non-symmetric matrices."
+      },
+      {
+        "id": "M6Q6H8",
+        "question": "In the context of recommendation systems, what is the connection between SVD and the four subspaces of the rating matrix R?",
+        "options": [
+          "U's columns span C(R) = 'movie importance space', V's columns span R(R) = 'user preference space', non-zero σ's give the latent factors, and zero σ's reveal redundant dimensions that can be discarded",
+          "SVD only gives the column space",
+          "SVD is unrelated to recommendation systems",
+          "The four subspaces are irrelevant for recommendations"
+        ],
+        "correct_option": "U's columns span C(R) = 'movie importance space', V's columns span R(R) = 'user preference space', non-zero σ's give the latent factors, and zero σ's reveal redundant dimensions that can be discarded",
+        "explanation": "Step 1: U's first r columns span the column space of R — they represent independent 'movie profile' directions (how movies are rated across users). Step 2: V's first r columns span the row space — independent 'user taste' directions (how users rate across movies). Step 3: The σᵢ values weight the importance of each latent factor, and zero σᵢ's indicate redundant dimensions that can be discarded. SVD reveals the complete subspace structure: the column space tells you what movie patterns are possible, the row space tells you what user taste patterns exist, and the singular values quantify how much each latent factor contributes."
+      },
+      {
+        "id": "M6Q6H9",
+        "question": "If A has SVD A = UΣV^T and you want to solve the least-squares problem min‖Ax − b‖₂, what is the solution in terms of the SVD?",
+        "options": [
+          "x = A⁻¹b (standard inverse)",
+          "x = VΣ⁺U^Tb (pseudoinverse solution, where Σ⁺ inverts only non-zero singular values)",
+          "x = UΣV^Tb)",
+          "x = VΣU^Tb)"
+        ],
+        "correct_option": "x = VΣ⁺U^Tb (pseudoinverse solution, where Σ⁺ inverts only non-zero singular values)",
+        "explanation": "Step 1: The pseudoinverse A⁺ = VΣ⁺U^T inverts only non-zero singular values (setting 1/σᵢ for σᵢ > 0 and 0 for σᵢ = 0). Step 2: x = A⁺b gives the minimum-norm least-squares solution — it minimizes ‖Ax − b‖₂ among all solutions, and among all minimizers, it selects the one with smallest ‖x‖₂. Step 3: For zero singular values, the corresponding null space directions are set to zero — we don't try to invert them (which would be undefined). This is more numerically stable than normal equations (A^TA)⁻¹A^Tb, which can fail for rank-deficient or ill-conditioned matrices."
+      },
+      {
+        "id": "M6Q6H10",
+        "question": "The SVD unifies all major linear algebra concepts covered in this course. Specifically, what is the relationship between the rank, the four subspaces, the conditioning of a matrix, and the optimal low-rank approximation — all expressed through singular values?",
+        "options": [
+          "Rank = number of non-zero σᵢ; C(A) = span of first r columns of U; R(A) = span of first r columns of V; N(A) = span of last n-r columns of V; N(A^T) = span of last m-r columns of U; conditioning = σ₁/σᵣ; best rank-k approximation uses top k singular values — everything flows from the singular values",
+          "SVD only gives the rank",
+          "Only the rank and null space are determined by SVD",
+          "SVD gives the eigenvalues, which determine everything"
+        ],
+        "correct_option": "Rank = number of non-zero σᵢ; C(A) = span of first r columns of U; R(A) = span of first r columns of V; N(A) = span of last n-r columns of V; N(A^T) = span of last m-r columns of U; conditioning = σ₁/σᵣ; best rank-k approximation uses top k singular values — everything flows from the singular values",
+        "explanation": "Step 1: The singular values are the 'DNA' of a matrix — they encode everything. Count non-zero σᵢ → rank. The corresponding U and V columns → four subspaces (C(A), R(A), N(A), N(A^T)). σ₁/σᵣ → conditioning (how sensitive Ax = b is to perturbations). Top k σᵢ → best approximation. Step 2: This is why SVD is called the 'Swiss Army knife' of linear algebra — a single decomposition reveals the complete structure of any matrix. Step 3: Every concept we've covered — rank, null space, column space, conditioning, low-rank approximation, PCA, recommendation systems, PageRank — is ultimately governed by the singular value spectrum, making SVD the unifying framework for the entire course."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "emoji": "🎬",
+      "title": "Netflix Prize Competition",
+      "type": "mcq",
+      "concept": "SVD for matrix factorization in recommendations",
+      "story": "The Netflix Prize was a million-dollar competition to improve movie recommendations. The winning solution used SVD (Singular Value Decomposition) to factorise the massive user-movie rating matrix into three smaller matrices: user factors, singular values, and movie factors. This factorisation revealed latent features that captured hidden patterns in viewing behaviour.",
+      "question": "What was the core mathematical technique used to win the Netflix Prize competition?",
+      "options": [
+        "Simple average rating per movie",
+        "SVD factorisation of the user-movie rating matrix into user factors, singular values, and movie factors",
+        "Counting how many users rated each movie",
+        "Using only the most recent ratings"
+      ],
+      "answer": "SVD factorisation of the user-movie rating matrix into user factors, singular values, and movie factors",
+      "explanation": "Step 1: The rating matrix R is decomposed as R ≈ UΣV^T, where U captures user latent features (taste profiles), Σ weights their importance, and V captures movie latent features. Step 2: Predicting missing entries via (UΣV^T)(i,j) gives personalized ratings — the dot product of user i's latent vector with movie j's latent vector, weighted by singular values. Step 3: This factorization won the $1M prize because it exploited the low-rank structure of the rating matrix — the singular values decay rapidly, so keeping only the top k components captures the dominant patterns while filtering out noise."
+    },
+    {
+      "emoji": "📷",
+      "title": "Image Compression",
+      "type": "mcq",
+      "concept": "Truncated SVD for lossy compression",
+      "story": "JPEG image compression uses a mathematical transform (DCT, which is closely related to SVD) to decompose an image into frequency components. By keeping only the largest singular values — the most important frequency components — and discarding the small ones, JPEG achieves dramatic compression while maintaining visual quality.",
+      "question": "In JPEG image compression, what does keeping only the largest singular values achieve?",
+      "options": [
+        "Makes the image colors more vibrant",
+        "Achieves compression by preserving the most visually important information while discarding imperceptible high-frequency details",
+        "Increases the image resolution",
+        "Adds extra metadata to the image"
+      ],
+      "answer": "Achieves compression by preserving the most visually important information while discarding imperceptible high-frequency details",
+      "explanation": "Step 1: Images have low intrinsic rank — most visual information is captured by a few principal frequency components (the large singular values correspond to low-frequency patterns like shapes and colors). Step 2: Keeping the largest singular values preserves the dominant patterns while discarding small singular values that represent high-frequency noise invisible to the human eye. Step 3: The singular value spectrum drops off rapidly for natural images, concentrating nearly all the 'energy' in a few components — this is why truncating at k ≪ min(m,n) achieves 10:1 or higher compression with minimal visual loss."
+    },
+    {
+      "emoji": "📊",
+      "title": "Topic Modeling in NLP",
+      "type": "mcq",
+      "concept": "SVD for latent semantic analysis",
+      "story": "Latent Semantic Analysis (LSA) applies SVD to a document-word matrix to discover hidden topics. The singular vectors reveal which words tend to co-occur — words like 'queen', 'king', and 'crown' cluster together as a 'royalty' topic. SVD automatically discovers these semantic relationships without any human labelling.",
+      "question": "What technique is used to automatically discover topics from a document-word matrix?",
+      "options": [
+        "Alphabetical sorting of words",
+        "SVD to find latent semantic dimensions where co-occurring words cluster together",
+        "Counting word frequencies only",
+        "Reading each document manually"
+      ],
+      "answer": "SVD to find latent semantic dimensions where co-occurring words cluster together",
+      "explanation": "Step 1: The document-word matrix has rows = documents, columns = words, entries = frequency — words that co-occur in similar documents have correlated columns. Step 2: SVD finds latent dimensions where words that co-occur in similar documents have similar coordinates — the principal components are 'topic directions' in word space. Step 3: These dimensions correspond to topics — 'sports' (game, team, score), 'cooking' (recipe, ingredient, heat) — discovered automatically from the data's covariance structure, with the singular values indicating the importance of each topic."
+    },
+    {
+      "emoji": "🧬",
+      "title": "Genomic Data Analysis",
+      "type": "mcq",
+      "concept": "SVD for dimensionality reduction in biology",
+      "story": "In genomics, researchers measure thousands of gene expression levels for each patient. SVD reduces this high-dimensional data to a few principal components that capture the essential structure. Patients with similar genetic profiles cluster together, revealing disease subtypes or treatment responses invisible in the raw data.",
+      "question": "How does SVD help genomics researchers discover hidden patterns in gene expression data?",
+      "options": [
+        "By sorting genes alphabetically",
+        "By reducing thousands of gene measurements to a few principal components that reveal patient clusters and disease subtypes",
+        "By counting the number of genes",
+        "By creating 3D models of DNA"
+      ],
+      "answer": "By reducing thousands of gene measurements to a few principal components that reveal patient clusters and disease subtypes",
+      "explanation": "Step 1: Each patient has thousands of gene expression values — too many dimensions to visualize directly, but the covariance structure has low rank (many genes are co-regulated). Step 2: SVD reduces to 2–3 principal components that capture the most variance, where the singular value spectrum reveals the number of independent biological processes. Step 3: Plotting patients in this reduced space reveals natural clusters — cancer vs. healthy, different cancer subtypes — patterns invisible in the raw high-dimensional data, because SVD projects onto the subspace where the most patient-to-patient variation occurs."
+    },
+    {
+      "emoji": "🔊",
+      "title": "Audio Signal Processing",
+      "type": "mcq",
+      "concept": "SVD for noise reduction",
+      "story": "In audio processing, SVD is used to separate signal from noise. A noisy audio recording can be represented as a matrix, and SVD decomposition reveals which singular values correspond to the true signal (large σ) and which correspond to noise (small σ). Truncating the small singular values effectively denoises the audio.",
+      "question": "How does SVD help remove noise from audio recordings?",
+      "options": [
+        "By increasing the volume of the recording",
+        "By keeping only the large singular values (signal) and discarding small ones (noise)",
+        "By converting audio to text",
+        "By adding reverb effects"
+      ],
+      "answer": "By keeping only the large singular values (signal) and discarding small ones (noise)",
+      "explanation": "Step 1: A noisy audio signal is represented as a matrix where rows are time segments and columns are frequency bins. Step 2: SVD separates it into components ordered by importance (σ₁ ≥ σ₂ ≥ ...) — large σᵢ correspond to the dominant signal patterns (the actual audio), while small σᵢ correspond to random noise. Step 3: Truncating (keeping only large σᵢ) removes noise while preserving the essential audio structure — the singular value spectrum cleanly separates signal (large, structured) from noise (small, random), which is why SVD is a powerful denoising tool."
+    }
+  ]
+}

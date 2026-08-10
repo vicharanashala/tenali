@@ -1,0 +1,15 @@
+{
+  "id": 590,
+  "word": "Versatile",
+  "question": "Versatile",
+  "options": [
+    "In a state of complete confusion",
+    "Having a practical view of what is achievable",
+    "Involving or creating good conditions",
+    "Able to adapt to many different uses"
+  ],
+  "answerOption": "D",
+  "answerText": "Able to adapt to many different uses",
+  "difficulty": "easy",
+  "sourceFile": "0590.json"
+}

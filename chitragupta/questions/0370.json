@@ -1,0 +1,14 @@
+{
+  "id": 370,
+  "question": "Which Indian city is known as the City of Pearls?",
+  "options": [
+    "Hyderabad",
+    "Chennai",
+    "Kochi",
+    "Surat"
+  ],
+  "answerOption": "A",
+  "answerText": "Hyderabad",
+  "genre": "india-gk",
+  "sourceFile": "0370.json"
+}

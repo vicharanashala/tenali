@@ -1,0 +1,15 @@
+{
+  "id": 315,
+  "word": "Motivate",
+  "question": "Motivate",
+  "options": [
+    "Feeling pleasure or happiness",
+    "To provide someone with a reason for doing something",
+    "To separate into parts or groups",
+    "To believe in the reliability of someone"
+  ],
+  "answerOption": "B",
+  "answerText": "To provide someone with a reason for doing something",
+  "difficulty": "easy",
+  "sourceFile": "0315.json"
+}

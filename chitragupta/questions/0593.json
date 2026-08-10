@@ -1,0 +1,14 @@
+{
+  "id": 593,
+  "question": "What is the SI unit of resistivity?",
+  "options": [
+    "ohm·metre",
+    "siemens",
+    "ohm/metre",
+    "ampere·metre"
+  ],
+  "answerOption": "A",
+  "answerText": "ohm·metre",
+  "genre": "mixed",
+  "sourceFile": "0593.json"
+}

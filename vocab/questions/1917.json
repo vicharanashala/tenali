@@ -1,0 +1,15 @@
+{
+  "id": 1917,
+  "word": "Immoral",
+  "question": "Immoral",
+  "options": [
+    "Not conforming to morality",
+    "To make unclean or impure",
+    "Causing great pleasure and satisfaction",
+    "The belief that events are inevitable"
+  ],
+  "answerOption": "A",
+  "answerText": "Not conforming to morality",
+  "difficulty": "medium",
+  "sourceFile": "1917.json"
+}

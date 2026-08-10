@@ -1,0 +1,15 @@
+{
+  "id": 1051,
+  "word": "Discreet",
+  "question": "Discreet",
+  "options": [
+    "Causing great damage or ruin",
+    "A ruler with absolute power",
+    "To remove oxygen from something",
+    "Careful to avoid social awkwardness"
+  ],
+  "answerOption": "D",
+  "answerText": "Careful to avoid social awkwardness",
+  "difficulty": "medium",
+  "sourceFile": "1051.json"
+}

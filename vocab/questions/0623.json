@@ -1,0 +1,15 @@
+{
+  "id": 623,
+  "word": "Attentive",
+  "question": "Attentive",
+  "options": [
+    "Paying close attention to something",
+    "To create a plan for making something",
+    "Relating to or powered by electricity",
+    "To cover something in paper or cloth"
+  ],
+  "answerOption": "A",
+  "answerText": "Paying close attention to something",
+  "difficulty": "easy",
+  "sourceFile": "0623.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 400,
+  "word": "Evolve",
+  "question": "Evolve",
+  "options": [
+    "Refusing to change one's mind",
+    "At the point that is in the middle",
+    "To develop gradually over time",
+    "Feeling or showing the need for food"
+  ],
+  "answerOption": "C",
+  "answerText": "To develop gradually over time",
+  "difficulty": "easy",
+  "sourceFile": "0400.json"
+}

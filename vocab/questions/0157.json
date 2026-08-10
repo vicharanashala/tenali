@@ -1,0 +1,15 @@
+{
+  "id": 157,
+  "word": "Reject",
+  "question": "Reject",
+  "options": [
+    "To refuse to accept or consider something",
+    "To be turned into ice or become very cold",
+    "To estimate something without full information",
+    "To pull down or destroy a building"
+  ],
+  "answerOption": "A",
+  "answerText": "To refuse to accept or consider something",
+  "difficulty": "easy",
+  "sourceFile": "0157.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 958,
+  "word": "Cryptic",
+  "question": "Cryptic",
+  "options": [
+    "Having a hidden meaning",
+    "Making or given to making a lot of noise",
+    "Reaching a high or the highest degree",
+    "To inspect something in detail"
+  ],
+  "answerOption": "A",
+  "answerText": "Having a hidden meaning",
+  "difficulty": "easy",
+  "sourceFile": "0958.json"
+}

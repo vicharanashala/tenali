@@ -1,0 +1,15 @@
+{
+  "id": 184,
+  "word": "Catch",
+  "question": "Catch",
+  "options": [
+    "To join or link things together",
+    "After the expected or usual time",
+    "To capture or seize something",
+    "To shape into a curve"
+  ],
+  "answerOption": "C",
+  "answerText": "To capture or seize something",
+  "difficulty": "easy",
+  "sourceFile": "0184.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 20,
+  "word": "Strong",
+  "question": "Strong",
+  "options": [
+    "Awkward in movement or handling things",
+    "To go or come up a slope or stairs",
+    "Having the power to move heavy things",
+    "Done according to a fixed plan"
+  ],
+  "answerOption": "C",
+  "answerText": "Having the power to move heavy things",
+  "difficulty": "easy",
+  "sourceFile": "0020.json"
+}

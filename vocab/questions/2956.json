@@ -1,0 +1,15 @@
+{
+  "id": 2956,
+  "word": "Adjuration",
+  "question": "Adjuration",
+  "options": [
+    "The action of reducing something",
+    "The practices of a dishonest person",
+    "A turning point or pivotal event",
+    "An earnest or solemn request"
+  ],
+  "answerOption": "D",
+  "answerText": "An earnest or solemn request",
+  "difficulty": "hard",
+  "sourceFile": "2956.json"
+}

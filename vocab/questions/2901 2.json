@@ -1,0 +1,15 @@
+{
+  "id": 2901,
+  "word": "Aberrations",
+  "question": "Aberrations",
+  "options": [
+    "Plural of aberration",
+    "Imaginary abyss place",
+    "Study of abyss layers",
+    "One who weans"
+  ],
+  "answerOption": "A",
+  "answerText": "Plural of aberration",
+  "difficulty": "extra-hard",
+  "sourceFile": "2901.json"
+}

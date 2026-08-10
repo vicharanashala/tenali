@@ -1,0 +1,15 @@
+{
+  "id": 471,
+  "word": "Summarize",
+  "question": "Summarize",
+  "options": [
+    "To pledge to carry out a course of action",
+    "To give a brief statement of main points",
+    "Having limits or bounds",
+    "To make something previously hidden visible"
+  ],
+  "answerOption": "B",
+  "answerText": "To give a brief statement of main points",
+  "difficulty": "easy",
+  "sourceFile": "0471.json"
+}

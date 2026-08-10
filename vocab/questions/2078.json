@@ -1,0 +1,15 @@
+{
+  "id": 2078,
+  "word": "Nadir",
+  "question": "Nadir",
+  "options": [
+    "Excessive flattery to gain advantage",
+    "The gathering of a substance",
+    "The activity of promoting products",
+    "The lowest point in the fortunes of a person"
+  ],
+  "answerOption": "D",
+  "answerText": "The lowest point in the fortunes of a person",
+  "difficulty": "hard",
+  "sourceFile": "2078.json"
+}

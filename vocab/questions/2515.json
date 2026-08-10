@@ -1,0 +1,15 @@
+{
+  "id": 2515,
+  "word": "Aerolite",
+  "question": "Aerolite",
+  "options": [
+    "Description of air conditions",
+    "Special importance given to something",
+    "The point on which a lever rests",
+    "A meteorite or stone from space"
+  ],
+  "answerOption": "D",
+  "answerText": "A meteorite or stone from space",
+  "difficulty": "hard",
+  "sourceFile": "2515.json"
+}

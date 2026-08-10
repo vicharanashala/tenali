@@ -1,0 +1,15 @@
+{
+  "id": 2310,
+  "word": "Adventurously",
+  "question": "Adventurously",
+  "options": [
+    "In an adventurous manner",
+    "The science of ballooning",
+    "In an eternal manner",
+    "Belief that all events are predetermined"
+  ],
+  "answerOption": "A",
+  "answerText": "In an adventurous manner",
+  "difficulty": "hard",
+  "sourceFile": "2310.json"
+}

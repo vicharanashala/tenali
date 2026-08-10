@@ -1,0 +1,15 @@
+{
+  "id": 366,
+  "word": "Pour",
+  "question": "Pour",
+  "options": [
+    "Known for sure; established beyond doubt",
+    "To try to find something by looking carefully",
+    "To make a statement less confusing",
+    "To cause a liquid to flow from a container"
+  ],
+  "answerOption": "D",
+  "answerText": "To cause a liquid to flow from a container",
+  "difficulty": "easy",
+  "sourceFile": "0366.json"
+}

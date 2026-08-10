@@ -1,0 +1,15 @@
+{
+  "id": 705,
+  "word": "Intermittent",
+  "question": "Intermittent",
+  "options": [
+    "Not firmly fixed in place",
+    "Devoted to a task or purpose",
+    "Occurring at irregular intervals",
+    "Extremely large or huge"
+  ],
+  "answerOption": "C",
+  "answerText": "Occurring at irregular intervals",
+  "difficulty": "easy",
+  "sourceFile": "0705.json"
+}

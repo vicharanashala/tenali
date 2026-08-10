@@ -1,0 +1,15 @@
+{
+  "id": 453,
+  "word": "Demolish",
+  "question": "Demolish",
+  "options": [
+    "To give permission for something",
+    "Having the form of a circle",
+    "To say sorry for doing something wrong",
+    "To pull down or destroy a building"
+  ],
+  "answerOption": "D",
+  "answerText": "To pull down or destroy a building",
+  "difficulty": "easy",
+  "sourceFile": "0453.json"
+}

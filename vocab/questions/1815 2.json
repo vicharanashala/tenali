@@ -1,0 +1,15 @@
+{
+  "id": 1815,
+  "word": "Sardonic",
+  "question": "Sardonic",
+  "options": [
+    "Deceit used to achieve one's goal",
+    "Grimly mocking or cynical",
+    "Wary and unwilling to take risks",
+    "Just begun and not fully formed"
+  ],
+  "answerOption": "B",
+  "answerText": "Grimly mocking or cynical",
+  "difficulty": "hard",
+  "sourceFile": "1815.json"
+}

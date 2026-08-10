@@ -1,0 +1,15 @@
+{
+  "id": 107,
+  "word": "Fancy",
+  "question": "Fancy",
+  "options": [
+    "Strong and healthy; vigorous",
+    "Elaborate in structure or decoration",
+    "To prove more powerful than opposing forces",
+    "In a state of peaceful happiness"
+  ],
+  "answerOption": "B",
+  "answerText": "Elaborate in structure or decoration",
+  "difficulty": "easy",
+  "sourceFile": "0107.json"
+}

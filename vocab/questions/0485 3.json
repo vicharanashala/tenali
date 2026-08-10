@@ -1,0 +1,15 @@
+{
+  "id": 485,
+  "word": "Analyze",
+  "question": "Analyze",
+  "options": [
+    "To examine something in detail",
+    "Able to read and write",
+    "Feeling pleasure or happiness",
+    "Very unusual or strangely surprising"
+  ],
+  "answerOption": "A",
+  "answerText": "To examine something in detail",
+  "difficulty": "easy",
+  "sourceFile": "0485.json"
+}

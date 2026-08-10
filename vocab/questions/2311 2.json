@@ -1,0 +1,15 @@
+{
+  "id": 2311,
+  "word": "Cacoethes",
+  "question": "Cacoethes",
+  "options": [
+    "Truthful; corresponding to facts",
+    "The study or practice of fermentation in brewing",
+    "An irresistible urge to do something inadvisable",
+    "Elementary instruction or teaching"
+  ],
+  "answerOption": "C",
+  "answerText": "An irresistible urge to do something inadvisable",
+  "difficulty": "extra-hard",
+  "sourceFile": "2311.json"
+}

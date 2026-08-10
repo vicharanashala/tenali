@@ -1,0 +1,15 @@
+{
+  "id": 653,
+  "word": "Brief",
+  "question": "Brief",
+  "options": [
+    "To regard with respect and warm approval",
+    "To say something in a serious way",
+    "To move downward from a higher point",
+    "Of short duration; not lasting long"
+  ],
+  "answerOption": "D",
+  "answerText": "Of short duration; not lasting long",
+  "difficulty": "easy",
+  "sourceFile": "0653.json"
+}

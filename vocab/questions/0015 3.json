@@ -1,0 +1,15 @@
+{
+  "id": 15,
+  "word": "Dark",
+  "question": "Dark",
+  "options": [
+    "To produce flowers; to flourish",
+    "With little or no light",
+    "Lasting or existing forever",
+    "A response to a question"
+  ],
+  "answerOption": "B",
+  "answerText": "With little or no light",
+  "difficulty": "easy",
+  "sourceFile": "0015.json"
+}

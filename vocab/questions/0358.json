@@ -1,0 +1,15 @@
+{
+  "id": 358,
+  "word": "Receive",
+  "question": "Receive",
+  "options": [
+    "To remove the wrapping from something",
+    "To take on or start using something new",
+    "To be given or presented with something",
+    "Living in a natural state; not tamed"
+  ],
+  "answerOption": "C",
+  "answerText": "To be given or presented with something",
+  "difficulty": "easy",
+  "sourceFile": "0358.json"
+}

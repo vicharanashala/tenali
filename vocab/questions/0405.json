@@ -1,0 +1,15 @@
+{
+  "id": 405,
+  "word": "Conserve",
+  "question": "Conserve",
+  "options": [
+    "Being reserved or timid around other people",
+    "To dry out and shrivel up",
+    "To settle or find a solution to a problem",
+    "To protect something from being wasted"
+  ],
+  "answerOption": "D",
+  "answerText": "To protect something from being wasted",
+  "difficulty": "easy",
+  "sourceFile": "0405.json"
+}

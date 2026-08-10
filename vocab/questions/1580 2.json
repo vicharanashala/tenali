@@ -1,0 +1,15 @@
+{
+  "id": 1580,
+  "word": "Detainer",
+  "question": "Detainer",
+  "options": [
+    "Feeling cautious about possible dangers",
+    "To wish or want something",
+    "To destroy a building or structure",
+    "The action of detaining or holding"
+  ],
+  "answerOption": "D",
+  "answerText": "The action of detaining or holding",
+  "difficulty": "medium",
+  "sourceFile": "1580.json"
+}

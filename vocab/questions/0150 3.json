@@ -1,0 +1,15 @@
+{
+  "id": 150,
+  "word": "Build",
+  "question": "Build",
+  "options": [
+    "To construct something by putting parts together",
+    "To be turned into ice or become very cold",
+    "To estimate something without full information",
+    "To pull down or destroy a building"
+  ],
+  "answerOption": "A",
+  "answerText": "To construct something by putting parts together",
+  "difficulty": "easy",
+  "sourceFile": "0150.json"
+}

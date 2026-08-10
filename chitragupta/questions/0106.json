@@ -1,0 +1,14 @@
+{
+  "id": 106,
+  "question": "What does CPU stand for in computing?",
+  "options": [
+    "Central Process Unit",
+    "Central Processing Unit",
+    "Computer Processing Unit",
+    "Core Processing Utility"
+  ],
+  "answerOption": "B",
+  "answerText": "Central Processing Unit",
+  "genre": "mixed",
+  "sourceFile": "0106.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 429,
+  "question": "Which city is the capital of Meghalaya?",
+  "options": [
+    "Gangtok",
+    "Kohima",
+    "Shillong",
+    "Itanagar"
+  ],
+  "answerOption": "C",
+  "answerText": "Shillong",
+  "genre": "geography",
+  "sourceFile": "0429.json"
+}

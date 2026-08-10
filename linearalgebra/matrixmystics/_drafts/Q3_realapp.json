@@ -1,0 +1,995 @@
+{
+  "module": 3,
+  "topics": [
+    {
+      "topicId": "Q3.1",
+      "title": "Vectors perpendicular to (1, 1)",
+      "real_life_application": [
+        {
+          "id": "M3Q01R1",
+          "question": "A force (1, 1) pulls on an object; which displacement direction produces zero work?",
+          "options": [
+            "Direction (0, 1)",
+            "Direction (1, 0)",
+            "Direction (1, \u22121)",
+            "Direction (2, 2)"
+          ],
+          "correct_option": "Direction (1, \u22121)",
+          "explanation": "Force F does no work on v when F\u00b7v = 0; (1, 1)\u00b7(1, \u22121) = 0 gives the perpendicular direction."
+        },
+        {
+          "id": "M3Q01R2",
+          "question": "A river flows along (1, 1); which heading lets a boat drift with no upstream work?",
+          "options": [
+            "Opposite along y-axis",
+            "Along the x-axis",
+            "Along vector (1, 1)",
+            "Along vector (1, \u22121)"
+          ],
+          "correct_option": "Along vector (1, \u22121)",
+          "explanation": "A heading perpendicular to current leaves the rowing component orthogonal to flow; only downstream drift remains."
+        },
+        {
+          "id": "M3Q01R3",
+          "question": "A level curve has gradient \u2207f = (1, 1); the tangent direction at every point is which?",
+          "options": [
+            "Along y-axis only",
+            "Parallel to gradient",
+            "Direction (1, \u22121)",
+            "Upward along x-axis"
+          ],
+          "correct_option": "Direction (1, \u22121)",
+          "explanation": "The gradient is normal to level sets, so the tangent must be perpendicular to (1, 1), namely along (1, \u22121)."
+        },
+        {
+          "id": "M3Q01R4",
+          "question": "Wind along (1, 1) is trimmed on a glider; which motion remains untrimmed?",
+          "options": [
+            "Straight into wind",
+            "Random heading here",
+            "Along positive x",
+            "Perpendicular to wind"
+          ],
+          "correct_option": "Perpendicular to wind",
+          "explanation": "Wind parallel to (1, 1) is trimmed out; only motions perpendicular to (1, 1), like (1, \u22121), survive trimming."
+        },
+        {
+          "id": "M3Q01R5",
+          "question": "A sail aligned along which direction produces no useful thrust in wind (1, 1)?",
+          "options": [
+            "Into the wind",
+            "Down y-axis here",
+            "Along the wind",
+            "Along (1, \u22121)"
+          ],
+          "correct_option": "Along (1, \u22121)",
+          "explanation": "Wind contributes no component along (1, \u22121); a sail aligned perpendicular to (1, 1) generates no thrust."
+        }
+      ]
+    },
+    {
+      "topicId": "Q3.2",
+      "title": "Vectors perpendicular to (1, 1) as [1, 1]\u00b7[x, y]\u1d40 = 0",
+      "real_life_application": [
+        {
+          "id": "M3Q02R1",
+          "question": "A budget line p\u2081x + p\u2082y = m with p\u2081 = p\u2082 = 1 has normal direction which vector?",
+          "options": [
+            "Vector (2, 0)",
+            "Vector (1, 1)",
+            "Vector (1, \u22121)",
+            "Vector (0, 1)"
+          ],
+          "correct_option": "Vector (1, 1)",
+          "explanation": "The coefficients of (x, y) in p\u00b7v = constant form a normal; here (1, 1) is the budget normal."
+        },
+        {
+          "id": "M3Q02R2",
+          "question": "Solving x + y = 0 gives the allowed direction set which line?",
+          "options": [
+            "Horizontal x-axis",
+            "Diagonal y = \u2212x",
+            "Vertical y-axis",
+            "Diagonal y = x"
+          ],
+          "correct_option": "Diagonal y = \u2212x",
+          "explanation": "Equation x + y = 0 rearranges to y = \u2212x, a diagonal line through origin."
+        },
+        {
+          "id": "M3Q02R3",
+          "question": "Constraint x + y = 0 with x = t gives general solution in which form?",
+          "options": [
+            "Pair (\u2212t, t)",
+            "Pair (t, t)",
+            "Pair (0, t)",
+            "Pair (t, \u2212t)"
+          ],
+          "correct_option": "Pair (t, \u2212t)",
+          "explanation": "Substituting x = t forces y = \u2212t, giving the parametric solution (t, \u2212t)."
+        },
+        {
+          "id": "M3Q02R4",
+          "question": "An economist solves 1\u00b7x + 1\u00b7y = 0; the solution set is best described as which?",
+          "options": [
+            "Empty set",
+            "Single point",
+            "Origin line",
+            "Plane of 2D"
+          ],
+          "correct_option": "Origin line",
+          "explanation": "A single linear equation in two unknowns defines a 1D line; here it passes through origin."
+        },
+        {
+          "id": "M3Q02R5",
+          "question": "Equation p \u2212 \u03c1c = 0 rewritten as [1, \u22121]\u00b7[p, \u03c1c] = 0 specifies which object?",
+          "options": [
+            "Constraint line",
+            "Random isocurve",
+            "Trivial zero only",
+            "Scalar equality"
+          ],
+          "correct_option": "Constraint line",
+          "explanation": "[1, \u22121]\u00b7v = 0 specifies the set of (p, \u03c1c) on a constraint line inside the 2D state space."
+        }
+      ]
+    },
+    {
+      "topicId": "Q3.3",
+      "title": "[a, b]\u00b7[x, y]\u1d40 = 0 with parameters (a, b)",
+      "real_life_application": [
+        {
+          "id": "M3Q03R1",
+          "question": "A workshop varies constraint 2x + 3y = 0; the permitted line of (x, y) does what?",
+          "options": [
+            "Rotates through origin",
+            "Stays fixed always",
+            "Collapses to point",
+            "Translates parallel away"
+          ],
+          "correct_option": "Rotates through origin",
+          "explanation": "Different (a, b) yield different normals; every null-space line passes through origin and rotates."
+        },
+        {
+          "id": "M3Q03R2",
+          "question": "A grocer varies price vectors (p\u2081, p\u2082); null spaces p\u00b7v = 0 sweep which family?",
+          "options": [
+            "Half plane wedge",
+            "All origin lines",
+            "Two parallel lines",
+            "Single fixed line"
+          ],
+          "correct_option": "All origin lines",
+          "explanation": "Varying (a, b) over non-zero vectors makes the null-line rotate through every direction through origin."
+        },
+        {
+          "id": "M3Q03R3",
+          "question": "For varying constraint a\u00b7x + b\u00b7y = 0, the perpendicular direction to (a, b) is spanned by which?",
+          "options": [
+            "Vector (a, \u2212b)",
+            "Vector (b, \u2212a)",
+            "Vector (\u2212b, a)",
+            "Vector (a, b)"
+          ],
+          "correct_option": "Vector (\u2212b, a)",
+          "explanation": "Rotating (a, b) by 90\u00b0 gives (\u2212b, a), and (a, b)\u00b7(\u2212b, a) = \u2212ab + ba = 0 confirms perpendicularity."
+        },
+        {
+          "id": "M3Q03R4",
+          "question": "The locus of all null-space lines of a\u00b7x + b\u00b7y = 0 is best described as which object?",
+          "options": [
+            "Closed unit disk",
+            "Real projective line",
+            "Upper half plane",
+            "Bounded convex hull"
+          ],
+          "correct_option": "Real projective line",
+          "explanation": "Lines through origin are parameterised by direction alone, giving the real projective line \u211dP\u00b9 (a circle topologically)."
+        },
+        {
+          "id": "M3Q03R5",
+          "question": "In a linear optimiser, the map (a, b) \u21a6 (\u2212b, a) is which classical matrix operation?",
+          "options": [
+            "Identity permutation",
+            "Ninety-degree rotation",
+            "Scalar dilation only",
+            "Reflection across x-axis"
+          ],
+          "correct_option": "Ninety-degree rotation",
+          "explanation": "The map (a, b) \u2192 (\u2212b, a) is exactly a 90\u00b0 rotation, producing perpendicular solution directions."
+        }
+      ]
+    },
+    {
+      "topicId": "Q3.4",
+      "title": "Vectors (x, y, z) with [1, 2, 3]\u00b7[x, y, z]\u1d40 = 0",
+      "real_life_application": [
+        {
+          "id": "M3Q04R1",
+          "question": "A structural plane x + 2y + 3z = 0 has which normal vector in \u211d\u00b3?",
+          "options": [
+            "Vector (3, 2, 1)",
+            "Vector (1, 2, 3)",
+            "Zero vector only",
+            "Vector (1, 1, 1)"
+          ],
+          "correct_option": "Vector (1, 2, 3)",
+          "explanation": "The coefficients (a, b, c) in ax + by + cz = 0 form the normal; here n = (1, 2, 3)."
+        },
+        {
+          "id": "M3Q04R2",
+          "question": "A lattice point (3, 0, \u22121) satisfies x + 2y + 3z = 0 because the sum equals which?",
+          "options": [
+            "Greater than 0",
+            "Equals nine",
+            "Not zero here",
+            "Exactly zero"
+          ],
+          "correct_option": "Exactly zero",
+          "explanation": "Plugging in: 3 + 2\u00b70 + 3\u00b7(\u22121) = 3 + 0 \u2212 3 = 0, so the point sits on the constraint plane."
+        },
+        {
+          "id": "M3Q04R3",
+          "question": "A basis for vectors on plane x + 2y + 3z = 0 is naturally given by which pair?",
+          "options": [
+            "(3, 0, \u22121) and (0, 3, \u22122)",
+            "(1, 0, 0) and (0, 1, 0)",
+            "(3, 0, 1) and (0, 1, 2)",
+            "(1, 1, 1) and (0, 0, 0)"
+          ],
+          "correct_option": "(3, 0, \u22121) and (0, 3, \u22122)",
+          "explanation": "Both vectors satisfy the plane equation and are linearly independent, giving a 2D basis for the null space."
+        },
+        {
+          "id": "M3Q04R4",
+          "question": "A force-balance reduces to x + 2y + 3z = 0; the allowed (x, y, z) set is which?",
+          "options": [
+            "Plane through origin",
+            "Single line again",
+            "Just origin point",
+            "Entire 3D space"
+          ],
+          "correct_option": "Plane through origin",
+          "explanation": "One linear equation in three unknowns defines a 2D plane, and the zero constant keeps origin on it."
+        },
+        {
+          "id": "M3Q04R5",
+          "question": "A linear economic model restricts trade by x + 2y + 3z = 0; the perpendicular normal is which?",
+          "options": [
+            "Vector (1, 1, 1)",
+            "Vector (0, 0, 1)",
+            "Vector (1, 2, 3)",
+            "Vector (2, 2, 2)"
+          ],
+          "correct_option": "Vector (1, 2, 3)",
+          "explanation": "The normal (1, 2, 3) encodes the constraint and is perpendicular to every point of the plane."
+        }
+      ]
+    },
+    {
+      "topicId": "Q3.5",
+      "title": "T = {\u03b1(1, 2, 1) | \u03b1 \u2208 \u211d}",
+      "real_life_application": [
+        {
+          "id": "M3Q05R1",
+          "question": "An object moves with velocity (1, 2, 1) m/s; at t = 3 its position is which point?",
+          "options": [
+            "Point (3, 3, 3)",
+            "Point (1, 2, 1)",
+            "Point (0, 0, 0)",
+            "Point (3, 6, 3)"
+          ],
+          "correct_option": "Point (3, 6, 3)",
+          "explanation": "Position = t\u00b7(1, 2, 1) at t = 3 gives (3, 6, 3) along the parametric line T."
+        },
+        {
+          "id": "M3Q05R2",
+          "question": "A force along (1, 2, 1) acts through origin; the line of action parameterises by which scalar?",
+          "options": [
+            "\u03b1\u00b2\u00b7(1, 2, 1)",
+            "\u03b1\u00b7(1, 2, 1)",
+            "Const vec 1,2,1",
+            "\u03b1\u00b7(2, 1, 4)"
+          ],
+          "correct_option": "\u03b1\u00b7(1, 2, 1)",
+          "explanation": "Lines through origin are spanned by the direction vector (1, 2, 1) and traced by \u03b1\u00b7(1, 2, 1)."
+        },
+        {
+          "id": "M3Q05R3",
+          "question": "A satellite follows direction (1, 2, 1) through origin; which point is on its trajectory?",
+          "options": [
+            "Point (2, 4, 2)",
+            "Point (1, 1, 1)",
+            "Point (0, 1, 0)",
+            "Point (\u22121, 2, \u22121)"
+          ],
+          "correct_option": "Point (2, 4, 2)",
+          "explanation": "(2, 4, 2) = 2\u00b7(1, 2, 1) is a scalar multiple, so it lies on T; the others are not collinear with (1, 2, 1)."
+        },
+        {
+          "id": "M3Q05R4",
+          "question": "A wire carries current along (1, 2, 1) through origin; positions T form which subspace?",
+          "options": [
+            "One-dimensional span",
+            "Two-dimensional plane",
+            "Three-dimensional full",
+            "Zero-dimensional point"
+          ],
+          "correct_option": "One-dimensional span",
+          "explanation": "T = span{(1, 2, 1)} is 1D because a single non-zero vector spans exactly one line through origin."
+        },
+        {
+          "id": "M3Q05R5",
+          "question": "Along parametric line (t, 2t, t), which pair of coordinate ratios stays constant?",
+          "options": [
+            "y:x = 2 and z:x = 1",
+            "y:x = 1 and z:x = 2",
+            "y:z = 1 and y = z",
+            "x = z and y = 2z"
+          ],
+          "correct_option": "y:x = 2 and z:x = 1",
+          "explanation": "From (x, y, z) = (t, 2t, t) we get y = 2x and z = x, so y:x = 2 and z:x = 1 along T."
+        }
+      ]
+    },
+    {
+      "topicId": "Q3.6",
+      "title": "S = {\u03b2(2, 7, 3) | \u03b2 \u2208 \u211d}",
+      "real_life_application": [
+        {
+          "id": "M3Q06R1",
+          "question": "A drone flies along (2, 7, 3) from origin; at \u03b2 = 2 its position is which point?",
+          "options": [
+            "Point (2, 7, 3)",
+            "Point (4, 14, 6)",
+            "Point (1, 3.5, 1.5)",
+            "Point (0, 0, 0)"
+          ],
+          "correct_option": "Point (4, 14, 6)",
+          "explanation": "Position = 2\u00b7(2, 7, 3) = (4, 14, 6), matching the parametric form \u03b2\u00b7(2, 7, 3)."
+        },
+        {
+          "id": "M3Q06R2",
+          "question": "A galvanometer reads current (2, 7, 3) on a wire; which point lies on the line through origin?",
+          "options": [
+            "Point (0, 7, 3)",
+            "Point (6, 21, 9)",
+            "Point (2, 4, 6)",
+            "Point (1, 7, 1)"
+          ],
+          "correct_option": "Point (6, 21, 9)",
+          "explanation": "(6, 21, 9) = 3\u00b7(2, 7, 3) is a scalar multiple, so it sits on span{(2, 7, 3)}; the others fail the test."
+        },
+        {
+          "id": "M3Q06R3",
+          "question": "A photon beam travels along (2, 7, 3); positions it occupies form which subspace?",
+          "options": [
+            "One origin point",
+            "Plane at origin",
+            "Line at origin",
+            "Whole 3D space"
+          ],
+          "correct_option": "Line at origin",
+          "explanation": "A single direction spans a 1D line S = span{(2, 7, 3)}; this line passes through origin."
+        },
+        {
+          "id": "M3Q06R4",
+          "question": "Along the line (2\u03b2, 7\u03b2, 3\u03b2), the ratio y to z stays which value?",
+          "options": [
+            "One to one",
+            "Seven to three",
+            "Two to three",
+            "Three to seven"
+          ],
+          "correct_option": "Seven to three",
+          "explanation": "From (2\u03b2, 7\u03b2, 3\u03b2), the ratio y:z = 7\u03b2:3\u03b2 = 7:3 for any non-zero \u03b2."
+        },
+        {
+          "id": "M3Q06R5",
+          "question": "A basis for S in \u211d\u00b3 is best given as which set?",
+          "options": [
+            "Zero + unit set",
+            "{(1,0,0),(0,1,0)}",
+            "{(2,7,3),(7,2,0)}",
+            "Just {(2, 7, 3)}"
+          ],
+          "correct_option": "Just {(2, 7, 3)}",
+          "explanation": "A single non-zero vector already spans a 1D line; {(2, 7, 3)} alone forms the minimal basis for S."
+        }
+      ]
+    },
+    {
+      "topicId": "Q3.7",
+      "title": "W = {\u03b1(1, 2, 1) + \u03b2(2, 7, 3)}",
+      "real_life_application": [
+        {
+          "id": "M3Q07R1",
+          "question": "Two joint axes (1, 2, 1) and (2, 7, 3) span plane W; W is which object?",
+          "options": [
+            "Empty zero set",
+            "Whole 3D space",
+            "Plane at origin",
+            "Single line here"
+          ],
+          "correct_option": "Plane at origin",
+          "explanation": "Two linearly independent vectors in \u211d\u00b3 span a 2D plane through origin, so the arm directions fill a plane."
+        },
+        {
+          "id": "M3Q07R2",
+          "question": "For directions (1, 2, 1) and (2, 7, 3) spanning W, a normal vector is which?",
+          "options": [
+            "Vector (\u22121, \u22121, 3)",
+            "Vector (2, 7, 3)",
+            "Vector (1, 1, 1)",
+            "Vector (1, 2, 1)"
+          ],
+          "correct_option": "Vector (\u22121, \u22121, 3)",
+          "explanation": "Cross product (1, 2, 1) \u00d7 (2, 7, 3) = (\u22121, \u22121, 3), perpendicular to both spanning vectors."
+        },
+        {
+          "id": "M3Q07R3",
+          "question": "A 2-axis gantry along (1, 2, 1) and (2, 7, 3); the equation of plane W is which?",
+          "options": [
+            "\u2212x\u2212y+3z = 0",
+            "x + y + z = 1",
+            "2x \u2212 y + 0z = 0",
+            "x \u2212 2y + z = 0"
+          ],
+          "correct_option": "\u2212x\u2212y+3z = 0",
+          "explanation": "Dotting the normal (\u22121, \u22121, 3) with (x, y, z) gives \u2212x \u2212 y + 3z = 0, the equation of plane through origin."
+        },
+        {
+          "id": "M3Q07R4",
+          "question": "A 2D crystal plane is spanned by (1, 2, 1) and (2, 7, 3); the dimension of W is which?",
+          "options": [
+            "Zero dimensions",
+            "One dimension",
+            "Two dimensions",
+            "Three dimensions"
+          ],
+          "correct_option": "Two dimensions",
+          "explanation": "Two independent vectors in \u211d\u00b3 span a 2D subspace, so dim(W) = 2."
+        },
+        {
+          "id": "M3Q07R5",
+          "question": "Two forces (1, 2, 1) and (2, 7, 3) act through origin; their combinations form which?",
+          "options": [
+            "A 1D line",
+            "Just a point",
+            "A 3D volume",
+            "A 2D plane"
+          ],
+          "correct_option": "A 2D plane",
+          "explanation": "Two independent vectors generate a 2D plane of resultants; \u03b1(1, 2, 1) + \u03b2(2, 7, 3) lies on it."
+        }
+      ]
+    },
+    {
+      "topicId": "Q3.8",
+      "title": "Vectors in W perpendicular to (w\u2081, w\u2082, w\u2083)",
+      "real_life_application": [
+        {
+          "id": "M3Q08R1",
+          "question": "An engineer needs a normal line to plane W = span{(1, 2, 1), (2, 7, 3)}; that line is spanned by which?",
+          "options": [
+            "Vector (1, 1, 1)",
+            "Vector (\u22121, \u22121, 3)",
+            "Vector (2, 7, 3)",
+            "Vector (1, 2, 1)"
+          ],
+          "correct_option": "Vector (\u22121, \u22121, 3)",
+          "explanation": "Cross product (1, 2, 1) \u00d7 (2, 7, 3) = (\u22121, \u22121, 3), a 1D direction orthogonal to both vectors in W."
+        },
+        {
+          "id": "M3Q08R2",
+          "question": "In a 3D sensing app, vectors orthogonal to every vector of W form a subspace of which dim?",
+          "options": [
+            "Zero dimensions",
+            "One dimension",
+            "Two dimensions",
+            "Three dimensions"
+          ],
+          "correct_option": "One dimension",
+          "explanation": "W is 2D in \u211d\u00b3, so W\u22a5 has dimension 3 \u2212 2 = 1, a single line through origin."
+        },
+        {
+          "id": "M3Q08R3",
+          "question": "Solving x + 2y + z = 0 and 2x + 7y + 3z = 0 for the perpendicular line yields which?",
+          "options": [
+            "Vector (1, 1, \u22123)",
+            "Vector (3, 3, \u22121)",
+            "Vector (1, 2, 1)",
+            "Vector (2, 7, 3)"
+          ],
+          "correct_option": "Vector (1, 1, \u22123)",
+          "explanation": "Eliminating x from both equations back-substitutes to v = (1, 1, \u22123), the perpendicular basis."
+        },
+        {
+          "id": "M3Q08R4",
+          "question": "Two non-collinear forces (1, 2, 1) and (2, 7, 3) span plane W; a force perpendicular to both lies along which?",
+          "options": [
+            "Span of (1, 1, \u22123)",
+            "Span of (1, 2, 1)",
+            "Span of (2, 4, 6)",
+            "Span of (0, 0, 0)"
+          ],
+          "correct_option": "Span of (1, 1, \u22123)",
+          "explanation": "Cross product gives (1, 1, \u22123) (up to scalar), a 1D line perpendicular to both forces."
+        },
+        {
+          "id": "M3Q08R5",
+          "question": "A least-squares residual r is perpendicular to every column of A; this forces r into which subspace?",
+          "options": [
+            "Full \u211d\u00b3 again",
+            "Quadrant one",
+            "W itself only",
+            "W\u22a5 for row space"
+          ],
+          "correct_option": "W\u22a5 for row space",
+          "explanation": "By the fundamental theorem, the residual belongs to the orthogonal complement of the row space, W\u22a5."
+        }
+      ]
+    },
+    {
+      "topicId": "Q3.9",
+      "title": "A\u00b7(x, y, z)\u1d40 = 0 for A = [[1,2,3],[4,5,6],[7,8,9]]",
+      "real_life_application": [
+        {
+          "id": "M3Q09R1",
+          "question": "In regression, collinear predictors cause which property for design matrix A?",
+          "options": [
+            "Strict diagonal matrix",
+            "Inverse always exists",
+            "Determinant equals zero",
+            "Orthogonal columns only"
+          ],
+          "correct_option": "Determinant equals zero",
+          "explanation": "Collinear predictors make A rank-deficient, so det(A) = 0 and the matrix is non-invertible."
+        },
+        {
+          "id": "M3Q09R2",
+          "question": "A 3\u00d73 matrix A has rows in arithmetic progression; a non-zero null vector of A is which?",
+          "options": [
+            "Vector (1, \u22122, 1)",
+            "Vector (0, 1, 0)",
+            "Vector (1, 1, 1)",
+            "Vector (1, 2, 3)"
+          ],
+          "correct_option": "Vector (1, \u22122, 1)",
+          "explanation": "Computing A\u00b7(1, \u22122, 1)\u1d40 = (0, 0, 0) confirms this vector lies in the null space."
+        },
+        {
+          "id": "M3Q09R3",
+          "question": "A finite-difference operator matrix A has rows in arithmetic progression; rank of A is which?",
+          "options": [
+            "Exactly two",
+            "Equals three",
+            "Zero rank",
+            "Strictly one"
+          ],
+          "correct_option": "Exactly two",
+          "explanation": "Three arithmetic-progression rows have only two independent ones, so rank(A) = 2."
+        },
+        {
+          "id": "M3Q09R4",
+          "question": "A chemistry matrix loses rank from a balance error; the hidden null vector is which?",
+          "options": [
+            "Vector (1, 1, 1)",
+            "Vector (1, \u22122, 1)",
+            "Vector (0, 0, 1)",
+            "Vector (\u22121, \u22121, \u22121)"
+          ],
+          "correct_option": "Vector (1, \u22122, 1)",
+          "explanation": "(1, \u22122, 1) is the non-zero null vector revealing the hidden conservation law from rank loss."
+        },
+        {
+          "id": "M3Q09R5",
+          "question": "A Hankel-style matrix from arithmetic progression has null space best described as which?",
+          "options": [
+            "1D line here",
+            "Two-dim plane",
+            "Three-dim full",
+            "Empty zero set"
+          ],
+          "correct_option": "1D line here",
+          "explanation": "Rank 2 in \u211d\u00b3 leaves nullity 1, so the null space is a single line through origin."
+        }
+      ]
+    },
+    {
+      "topicId": "Q3.10",
+      "title": "Row space, Column space, Null space of A",
+      "real_life_application": [
+        {
+          "id": "M3Q10R1",
+          "question": "For A with arithmetic-progression rows, C(A) is spanned by at most how many columns?",
+          "options": [
+            "Just one column",
+            "No column at all",
+            "Two indep columns",
+            "All three columns"
+          ],
+          "correct_option": "Two indep columns",
+          "explanation": "Rank is 2, so at most two columns are linearly independent and span the column space C(A)."
+        },
+        {
+          "id": "M3Q10R2",
+          "question": "In a network with incidence matrix A, conservation laws live in which subspace?",
+          "options": [
+            "Null space N(A)",
+            "Strict range only",
+            "Column space C(A)",
+            "Row space R(A)"
+          ],
+          "correct_option": "Null space N(A)",
+          "explanation": "Null space vectors sum to zero across cuts; they encode conserved quantities in N(A)."
+        },
+        {
+          "id": "M3Q10R3",
+          "question": "For A with arithmetic-progression rows, R(A) in \u211d\u00b3 is a plane whose normal is which?",
+          "options": [
+            "Vector (1, 1, 1)",
+            "Vector (7, 8, 9)",
+            "Vector (1, \u22122, 1)",
+            "Vector (1, 2, 3)"
+          ],
+          "correct_option": "Vector (1, \u22122, 1)",
+          "explanation": "(1, \u22122, 1) \u2208 N(A) is orthogonal to R(A), serving as the plane's perpendicular normal in \u211d\u00b3."
+        },
+        {
+          "id": "M3Q10R4",
+          "question": "In regression y = A\u00b7x, hidden unobservable patterns in the inputs live in which subspace?",
+          "options": [
+            "Column space C(A)",
+            "Right eigenspace only",
+            "Null space N(A)",
+            "Strict identity span"
+          ],
+          "correct_option": "Null space N(A)",
+          "explanation": "Adding a null-space vector to x leaves y unchanged, so N(A) hides unobservable modes."
+        },
+        {
+          "id": "M3Q10R5",
+          "question": "For a 3\u00d73 rank-2 matrix, dim C(A) + dim N(A\u1d40) equals which value?",
+          "options": [
+            "Five (sum)",
+            "Zero only",
+            "Three total",
+            "Two (rank)"
+          ],
+          "correct_option": "Three total",
+          "explanation": "For any m\u00d7n matrix, dim C(A) + dim N(A\u1d40) = m; here m = 3, so the pair sums to 3."
+        }
+      ]
+    },
+    {
+      "topicId": "Q3.11",
+      "title": "Every vector of R is perpendicular to every vector of N",
+      "real_life_application": [
+        {
+          "id": "M3Q11R1",
+          "question": "Residual r of fitted model is perpendicular to every column of A; r must lie in which subspace?",
+          "options": [
+            "Row space R(A)",
+            "Strict span alone",
+            "Left null N(A\u1d40)",
+            "Column space C(A)"
+          ],
+          "correct_option": "Left null N(A\u1d40)",
+          "explanation": "A\u1d40\u00b7r = 0 is the normal equation defining N(A\u1d40), guaranteeing r \u22a5 C(A)."
+        },
+        {
+          "id": "M3Q11R2",
+          "question": "In regression, parameter space R(A\u1d40) and residual space N(A) in \u211d\u207f satisfy which relationship?",
+          "options": [
+            "Equal dimension here",
+            "Orthogonal decomposition",
+            "Strict containment only",
+            "Identical subspaces"
+          ],
+          "correct_option": "Orthogonal decomposition",
+          "explanation": "By the fundamental theorem, R(A\u1d40) \u22a5 N(A) and together they decompose \u211d\u207f into complementary pieces."
+        },
+        {
+          "id": "M3Q11R3",
+          "question": "In PDE theory, the kernel of a symmetric elliptic operator is orthogonal to which subspace?",
+          "options": [
+            "Discrete spectrum only",
+            "Range of operator",
+            "Strict null space",
+            "Adjoint kernel again"
+          ],
+          "correct_option": "Range of operator",
+          "explanation": "Self-adjoint operators have ranges perpendicular to their kernels under the standard inner product."
+        },
+        {
+          "id": "M3Q11R4",
+          "question": "Eigenspaces of a Hermitian operator for distinct eigenvalues are related how?",
+          "options": [
+            "Strictly equal sets",
+            "Always overlapping",
+            "Mutually orthogonal",
+            "Parallel sub-spaces"
+          ],
+          "correct_option": "Mutually orthogonal",
+          "explanation": "Hermitian operators have orthogonal eigenspaces \u2014 a physical realisation of R(A) \u22a5 N(A)."
+        },
+        {
+          "id": "M3Q11R5",
+          "question": "Signal processing separates 'signal' from 'noise' using which pair of orthogonal subspaces?",
+          "options": [
+            "C(A) and N(A\u1d40)",
+            "Strict overlap sets",
+            "C(A) and C(A\u1d40)",
+            "N(A) and N(A\u1d40)"
+          ],
+          "correct_option": "C(A) and N(A\u1d40)",
+          "explanation": "Signal lives in column space C(A); noise is the perpendicular left-null piece N(A\u1d40)."
+        }
+      ]
+    },
+    {
+      "topicId": "Q3.12",
+      "title": "B takes line 2y + x = 4 to where?",
+      "real_life_application": [
+        {
+          "id": "M3Q12R1",
+          "question": "A projection lens B = [[1, 2], [2, 4]] maps line x + 2y = 4 to which screen point?",
+          "options": [
+            "All 2D plane",
+            "Origin alone",
+            "Just (4, 8)",
+            "Whole y = 2x"
+          ],
+          "correct_option": "Just (4, 8)",
+          "explanation": "For any (x, y) on x + 2y = 4, B\u00b7(x, y) = (4, 2\u00b74) = (4, 8); the line collapses to one point."
+        },
+        {
+          "id": "M3Q12R2",
+          "question": "A camera uses B = [[1, 2], [2, 4]]; the line x + 2y = 4 lands on which pixel?",
+          "options": [
+            "Pixel (2, 4)",
+            "Random pixel",
+            "Pixel (4, 8)",
+            "Pixel (1, 2)"
+          ],
+          "correct_option": "Pixel (4, 8)",
+          "explanation": "Rank-deficient B sends every point on the parallel-to-kernel line to a single image spot (4, 8)."
+        },
+        {
+          "id": "M3Q12R3",
+          "question": "A lossy encoder uses rank-1 matrix B; line x + 2y = 4 is encoded as which single codeword?",
+          "options": [
+            "Sum (0, 0)",
+            "Random error",
+            "Just (4, 8)",
+            "Spread on row"
+          ],
+          "correct_option": "Just (4, 8)",
+          "explanation": "Parallel lines to the kernel collapse to single outputs; here x + 2y = 4 yields code (4, 8)."
+        },
+        {
+          "id": "M3Q12R4",
+          "question": "A 3D shadow loses depth: line x + 2y = 4 projects via B to which shadow spot?",
+          "options": [
+            "Two parallel shadows",
+            "Random fuzzy edge",
+            "Single point (4, 8)",
+            "Entire shadow line"
+          ],
+          "correct_option": "Single point (4, 8)",
+          "explanation": "Each line parallel to N(B) collapses to one shadow; x + 2y = 4 under B yields the spot (4, 8)."
+        },
+        {
+          "id": "M3Q12R5",
+          "question": "A bad microphone mixes inputs via B; any signal on x + 2y = 4 produces which output?",
+          "options": [
+            "Silent zero",
+            "Output (4, 8)",
+            "Output y = 0",
+            "Random mix"
+          ],
+          "correct_option": "Output (4, 8)",
+          "explanation": "B\u00b7(x, y) only depends on s = x + 2y, so s = 4 yields the fixed output (4, 8)."
+        }
+      ]
+    },
+    {
+      "topicId": "Q3.13",
+      "title": "B takes 2y + x = k to where?",
+      "real_life_application": [
+        {
+          "id": "M3Q13R1",
+          "question": "A factory robot uses B = [[1, 2], [2, 4]]; inputs satisfying x + 2y = k produce which image?",
+          "options": [
+            "Point (k, 2k)",
+            "Zero vector only",
+            "Full line y = 2x",
+            "Entire plane image"
+          ],
+          "correct_option": "Point (k, 2k)",
+          "explanation": "B\u00b7(x, y) = (x + 2y, 2(x + 2y)) = (k, 2k); every k-fibre lands at the point (k, 2k)."
+        },
+        {
+          "id": "M3Q13R2",
+          "question": "An engineer varies constant k in x + 2y = k; the image point traces which locus?",
+          "options": [
+            "Line y = 2x",
+            "Vertical x = 0",
+            "Horizontal axis",
+            "Random squiggle"
+          ],
+          "correct_option": "Line y = 2x",
+          "explanation": "As k changes, the image point (k, 2k) slides along y = 2x, sweeping out that entire line."
+        },
+        {
+          "id": "M3Q13R3",
+          "question": "A sensor reads scalar k = x + 2y and reconstructs a 2D point by which formula?",
+          "options": [
+            "Just zero output",
+            "k\u00b7(1, 2) vector",
+            "(\u2212k, 2k) pair",
+            "Random (x,y) point"
+          ],
+          "correct_option": "k\u00b7(1, 2) vector",
+          "explanation": "Reconstruction multiplies the scalar k by direction (1, 2), giving the 2D point (k, 2k)."
+        },
+        {
+          "id": "M3Q13R4",
+          "question": "A linear encoder with B = [[1, 2], [2, 4]] produces code c = (c\u2081, c\u2082); the encoded scalar is which?",
+          "options": [
+            "Strict c\u2082 alone",
+            "Random output",
+            "c\u2081 times c\u2082",
+            "Just c\u2081 here"
+          ],
+          "correct_option": "Just c\u2081 here",
+          "explanation": "The first code component c\u2081 equals x + 2y, the value of the 1D fibre; c\u2082 = 2c\u2081 adds no new info."
+        },
+        {
+          "id": "M3Q13R5",
+          "question": "For the 1D subspace spanned by (1, 2), the matrix B acts as which kind of map?",
+          "options": [
+            "Projection onto line",
+            "Strict scalar negation",
+            "Reflection off x-axis",
+            "Strict 180-degree spin"
+          ],
+          "correct_option": "Projection onto line",
+          "explanation": "B = (1, 2)\u1d40\u00b7(1, 2) projects inputs onto span{(1, 2)}, preserving that direction exactly."
+        }
+      ]
+    },
+    {
+      "topicId": "Q3.14",
+      "title": "Range of B = [[1, 2], [2, 4]]",
+      "real_life_application": [
+        {
+          "id": "M3Q14R1",
+          "question": "A classifier uses B = [[1, 2], [2, 4]]; the achievable outputs form which subspace?",
+          "options": [
+            "Whole plane \u211d\u00b2",
+            "Two perp lines",
+            "Origin (0, 0)",
+            "Line y = 2x"
+          ],
+          "correct_option": "Line y = 2x",
+          "explanation": "Column space C(B) = span{(1, 2)}, the line y = 2x; rank 1 restricts outputs to that line."
+        },
+        {
+          "id": "M3Q14R2",
+          "question": "A regression uses design matrix B = [[1, 2], [2, 4]]; the prediction space is which?",
+          "options": [
+            "Entire plane",
+            "Scattered cloud",
+            "One point only",
+            "Line y = 2x"
+          ],
+          "correct_option": "Line y = 2x",
+          "explanation": "Predictions B\u00b7x live in C(B) = span{(1, 2)}, exactly the prediction subspace y = 2x."
+        },
+        {
+          "id": "M3Q14R3",
+          "question": "A feature map sends 2D inputs to 1D scalars; the back-mapped feature space equals which?",
+          "options": [
+            "Whole plane x = 0",
+            "Random half plane",
+            "Strict zero line",
+            "Span of (1, 2)"
+          ],
+          "correct_option": "Span of (1, 2)",
+          "explanation": "The image of B = (1, 2)\u1d40\u00b7(1, 2) is span{(1, 2)}; features can only live on that direction."
+        },
+        {
+          "id": "M3Q14R4",
+          "question": "A covariance estimate of rank 1 lives in a 1D variance space spanned by which?",
+          "options": [
+            "Vector (2, 2)",
+            "Vector (1, 2)",
+            "Vector (0, 0)",
+            "Vector (1, 1)"
+          ],
+          "correct_option": "Vector (1, 2)",
+          "explanation": "A rank-1 covariance has range span{(1, 2)}; only that direction carries variance information."
+        },
+        {
+          "id": "M3Q14R5",
+          "question": "A sensor uses B = [[1, 2], [2, 4]]; which observation is NOT in the range?",
+          "options": [
+            "Point (1, 2)",
+            "Point (3, 5)",
+            "Point (2, 4)",
+            "Point (0, 0)"
+          ],
+          "correct_option": "Point (3, 5)",
+          "explanation": "Points (2, 4), (1, 2), and (0, 0) satisfy y = 2x, but (3, 5) fails 5 \u2260 6, so it is not in the range."
+        }
+      ]
+    },
+    {
+      "topicId": "Q3.15",
+      "title": "B collapses a dimension",
+      "real_life_application": [
+        {
+          "id": "M3Q15R1",
+          "question": "A compression algorithm replaces B by a rank-1 approximation; geometrically, B does which action?",
+          "options": [
+            "Strict rotation only",
+            "Random pixel scatter",
+            "Preserves both axes",
+            "Collapses one dimension"
+          ],
+          "correct_option": "Collapses one dimension",
+          "explanation": "Rank 1 in 2D drops one dimension: B 'squeezes' the plane onto the line y = 2x."
+        },
+        {
+          "id": "M3Q15R2",
+          "question": "A recommendation matrix B has rank 1; users' vectors collapse onto which kind of subspace?",
+          "options": [
+            "Just one origin",
+            "Quadrupled random set",
+            "Entire 2D plane",
+            "Single line direction"
+          ],
+          "correct_option": "Single line direction",
+          "explanation": "Rank 1 forces every output onto a 1D line through origin; B collapses 2D inputs to 1D outputs."
+        },
+        {
+          "id": "M3Q15R3",
+          "question": "A smoothing filter uses singular B; the input component parallel to N(B) maps to which output?",
+          "options": [
+            "Same as input",
+            "Random sample y",
+            "Doubled vector",
+            "Strict zero"
+          ],
+          "correct_option": "Strict zero",
+          "explanation": "Anything in the kernel of B is killed: B\u00b7v = 0 for v \u2208 N(B), so that direction vanishes."
+        },
+        {
+          "id": "M3Q15R4",
+          "question": "A feature embedding uses B of rank 1; features live in a space of which intrinsic dimension?",
+          "options": [
+            "Three axes flat",
+            "Two dimensions fully",
+            "Strict zero axis",
+            "One dimension here"
+          ],
+          "correct_option": "One dimension here",
+          "explanation": "Rank equals the intrinsic dimension of the output; rank 1 embeddings live in a 1D subspace."
+        },
+        {
+          "id": "M3Q15R5",
+          "question": "Gene expression data is approximately rank 1 because responses are linearly correlated; the approximation effectively does which action?",
+          "options": [
+            "Strict diagonal form",
+            "Random permutation mix",
+            "Preserves all axes",
+            "Collapses one axis"
+          ],
+          "correct_option": "Collapses one axis",
+          "explanation": "Low-rank structure shows that one 'major pattern' suffices \u2014 one dimension collapses out of the data."
+        }
+      ]
+    }
+  ]
+}

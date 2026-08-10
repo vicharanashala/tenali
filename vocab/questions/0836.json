@@ -1,0 +1,15 @@
+{
+  "id": 836,
+  "word": "Curved",
+  "question": "Curved",
+  "options": [
+    "Available to be chosen but not required",
+    "Lasting or existing forever",
+    "Unpleasantly rough or sharp",
+    "Bending in a smooth line without angles"
+  ],
+  "answerOption": "D",
+  "answerText": "Bending in a smooth line without angles",
+  "difficulty": "easy",
+  "sourceFile": "0836.json"
+}

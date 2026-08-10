@@ -1,0 +1,15 @@
+{
+  "id": 540,
+  "word": "Detest",
+  "question": "Detest",
+  "options": [
+    "Free from pretense or deceit",
+    "To open something that is locked",
+    "Providing a mirror-like image",
+    "To dislike something very intensely"
+  ],
+  "answerOption": "D",
+  "answerText": "To dislike something very intensely",
+  "difficulty": "easy",
+  "sourceFile": "0540.json"
+}

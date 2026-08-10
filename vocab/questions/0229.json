@@ -1,0 +1,15 @@
+{
+  "id": 229,
+  "word": "Retreat",
+  "question": "Retreat",
+  "options": [
+    "Not easily bent or moved",
+    "Absolutely necessary or important",
+    "Relating to or resembling the moon",
+    "To withdraw from a position"
+  ],
+  "answerOption": "D",
+  "answerText": "To withdraw from a position",
+  "difficulty": "easy",
+  "sourceFile": "0229.json"
+}

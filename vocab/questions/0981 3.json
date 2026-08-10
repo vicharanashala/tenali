@@ -1,0 +1,15 @@
+{
+  "id": 981,
+  "word": "Witty",
+  "question": "Witty",
+  "options": [
+    "To delay or prevent by obstructing",
+    "To get off a train",
+    "Showing quick and inventive verbal humor",
+    "Sumptuously rich or elaborate"
+  ],
+  "answerOption": "C",
+  "answerText": "Showing quick and inventive verbal humor",
+  "difficulty": "medium",
+  "sourceFile": "0981.json"
+}

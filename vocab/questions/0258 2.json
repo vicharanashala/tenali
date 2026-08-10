@@ -1,0 +1,15 @@
+{
+  "id": 258,
+  "word": "Return",
+  "question": "Return",
+  "options": [
+    "Having a modest opinion of one's importance",
+    "To keep doing something without stopping",
+    "Lesser in importance or seriousness",
+    "To come or go back to a place"
+  ],
+  "answerOption": "D",
+  "answerText": "To come or go back to a place",
+  "difficulty": "easy",
+  "sourceFile": "0258.json"
+}

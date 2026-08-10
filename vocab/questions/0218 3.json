@@ -1,0 +1,15 @@
+{
+  "id": 218,
+  "word": "Enjoy",
+  "question": "Enjoy",
+  "options": [
+    "Not easily bent or moved",
+    "Absolutely necessary or important",
+    "Relating to or resembling the moon",
+    "To take delight or pleasure in something"
+  ],
+  "answerOption": "D",
+  "answerText": "To take delight or pleasure in something",
+  "difficulty": "easy",
+  "sourceFile": "0218.json"
+}

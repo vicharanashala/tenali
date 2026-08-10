@@ -1,0 +1,15 @@
+{
+  "id": 812,
+  "word": "Truthful",
+  "question": "Truthful",
+  "options": [
+    "To control something by means of rules",
+    "To have the same opinion as someone else",
+    "Telling or expressing the truth; honest",
+    "Bringing or worthy of honor"
+  ],
+  "answerOption": "C",
+  "answerText": "Telling or expressing the truth; honest",
+  "difficulty": "easy",
+  "sourceFile": "0812.json"
+}

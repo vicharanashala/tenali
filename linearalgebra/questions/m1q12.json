@@ -1,0 +1,479 @@
+{
+  "module": 1,
+  "missionId": 12,
+  "title": "Transformation Machine",
+  "original_question": "φ(x,y) = (2x+3y, 3x+4y). This IS a matrix! Write it as a 2×2 matrix.",
+  "core_concept": "A linear transformation φ(x,y) = (ax+by, cx+dy) can be represented as a 2×2 matrix [[a,b],[c,d]]. The columns of the matrix are the images of the standard basis vectors: φ(1,0) = first column, φ(0,1) = second column. Matrix multiplication encodes the transformation compactly.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M1Q12E1",
+        "question": "What is φ(1, 0) for φ(x,y) = (2x+3y, 3x+4y)?",
+        "options": [
+          "(2, 3)",
+          "(3, 4) (x)",
+          "(5, 7) (x)",
+          "(0, 0) (x)"
+        ],
+        "correct_option": "(2, 3)",
+        "explanation": "Step 1: Substitute x=1, y=0. Step 2: φ(1,0) = (2(1)+3(0), 3(1)+4(0)) = (2, 3). Step 3: This gives the first column of the transformation matrix."
+      },
+      {
+        "id": "M1Q12E2",
+        "question": "What is φ(0, 1) for φ(x,y) = (2x+3y, 3x+4y)?",
+        "options": [
+          "(3, 4)",
+          "(2, 3) (x)",
+          "(5, 7) (x)",
+          "(0, 0) (x)"
+        ],
+        "correct_option": "(3, 4)",
+        "explanation": "Step 1: Substitute x=0, y=1. Step 2: φ(0,1) = (2(0)+3(1), 3(0)+4(1)) = (3, 4). Step 3: This gives the second column of the transformation matrix."
+      },
+      {
+        "id": "M1Q12E3",
+        "question": "What 2×2 matrix represents φ(x,y) = (2x+3y, 3x+4y)?",
+        "options": [
+          "[[2,3],[3,4]]",
+          "[[3,4],[2,3]] (x)",
+          "[[2,3,3,4]] (x)",
+          "[[4,3],[3,2]] (x)"
+        ],
+        "correct_option": "[[2,3],[3,4]]",
+        "explanation": "Step 1: First column = φ(1,0) = (2,3). Step 2: Second column = φ(0,1) = (3,4). Step 3: Matrix = [[2,3],[3,4]]."
+      },
+      {
+        "id": "M1Q12E4",
+        "question": "What is φ(1, 2) for φ(x,y) = (2x+3y, 3x+4y)?",
+        "options": [
+          "(8, 11)",
+          "(2, 6) (x)",
+          "(3, 8) (x)",
+          "(5, 7) (x)"
+        ],
+        "correct_option": "(8, 11)",
+        "explanation": "Step 1: φ(1,2) = (2(1)+3(2), 3(1)+4(2)). Step 2: = (2+6, 3+8) = (8, 11). Step 3: The transformation maps (1,2) to (8,11)."
+      },
+      {
+        "id": "M1Q12E5",
+        "question": "The matrix [[2,3],[3,4]] multiplied by the vector (1,2) gives:",
+        "options": [
+          "(8, 11)",
+          "(2, 6) (x)",
+          "(3, 8) (x)",
+          "(11, 8) (x)"
+        ],
+        "correct_option": "(8, 11)",
+        "explanation": "Step 1: Matrix-vector product: [[2,3],[3,4]] × (1,2). Step 2: First component: 2(1) + 3(2) = 8. Step 3: Second component: 3(1) + 4(2) = 11. Result: (8, 11)."
+      },
+      {
+        "id": "M1Q12E6",
+        "question": "What does the first column of a transformation matrix represent?",
+        "options": [
+          "Where the basis vector (1,0) is mapped to",
+          "Where the origin is mapped to",
+          "The determinant of the matrix",
+          "The eigenvalue — does t match"
+        ],
+        "correct_option": "Where the basis vector (1,0) is mapped to",
+        "explanation": "Step 1: The matrix acts on standard basis vectors. Step 2: First column = A × (1,0) = image of (1,0). Step 3: Similarly, second column = image of (0,1). The matrix is built from where it sends the basis."
+      },
+      {
+        "id": "M1Q12E7",
+        "question": "If φ is a linear transformation, what must φ(0,0) equal?",
+        "options": [
+          "(0, 0)",
+          "(1, 1)",
+          "Depends on the matrix",
+          "Cant be determined"
+        ],
+        "correct_option": "(0, 0)",
+        "explanation": "Step 1: Linear transformations always map the zero vector to the zero vector. Step 2: A(0,0) = (0,0) for any matrix A. Step 3: This is because A(0) = 0·A = 0."
+      },
+      {
+        "id": "M1Q12E8",
+        "question": "In computer graphics, a 2×2 matrix can perform which of these transformations?",
+        "options": [
+          "Rotation, scaling, and shearing of shapes",
+          "Only rotation — does t match",
+          "Only translation — does t match",
+          "Only reflection — does t match"
+        ],
+        "correct_option": "Rotation, scaling, and shearing of shapes",
+        "explanation": "Step 1: Different matrices encode different geometric operations. Step 2: Rotation matrices rotate shapes, scaling matrices resize them, shear matrices skew them. Step 3: All these are linear transformations representable by 2×2 matrices."
+      },
+      {
+        "id": "M1Q12E9",
+        "question": "What happens to the vector (1,0) under the identity transformation φ(x,y) = (x, y)?",
+        "options": [
+          "It stays at (1, 0)",
+          "It becomes (0, 1) (x)",
+          "It becomes (0, 0) (x)",
+          "It becomes (2, 0) (x)"
+        ],
+        "correct_option": "It stays at (1, 0)",
+        "explanation": "Step 1: The identity transformation doesn't change anything. Step 2: φ(1,0) = (1, 0). Step 3: The identity matrix is [[1,0],[0,1]], which maps every vector to itself."
+      },
+      {
+        "id": "M1Q12E10",
+        "question": "What is the image of (1,1) under φ(x,y) = (2x+3y, 3x+4y)?",
+        "options": [
+          "(5, 7)",
+          "(2, 3)",
+          "(3, 4)",
+          "(8, 11)"
+        ],
+        "correct_option": "(5, 7)",
+        "explanation": "Step 1: φ(1,1) = (2+3, 3+4) = (5, 7). Step 2: This is the same as adding the two columns: (2,3) + (3,4) = (5,7). Step 3: Linearity means φ(v+w) = φ(v) + φ(w)."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M1Q12M1",
+        "question": "If φ(1,0) = (2,3) is the first column of the matrix, why is the matrix [[2,3],[...]] rather than [[2,3,...]]?",
+        "options": [
+          "Because the output vector (2,3) becomes the first COLUMN, not the first row",
+          "Because matrices are always written ly",
+          "Because 2 and 3 are the x-coordinates",
+          "Because the matrix has only one row"
+        ],
+        "correct_option": "Because the output vector (2,3) becomes the first COLUMN, not the first row",
+        "explanation": "Step 1: φ(1,0) = (2,3) means the first standard basis vector maps to (2,3). Step 2: In matrix representation, this output becomes column 1. Step 3: So column 1 = [2; 3] (written vertically), giving [[2,...],[3,...]]."
+      },
+      {
+        "id": "M1Q12M2",
+        "question": "Can matrix multiplication be used to compose (combine) two linear transformations?",
+        "options": [
+          "Yes — if T₁ has matrix A and T₂ has matrix B, then T₂∘T₁ has matrix BA",
+          "transformations can't be composed",
+          "Only if the matrices are the same size",
+          "Only for rotation matrices"
+        ],
+        "correct_option": "Yes — if T₁ has matrix A and T₂ has matrix B, then T₂∘T₁ has matrix BA",
+        "explanation": "Step 1: Applying T₁ then T₂ to a vector v gives T₂(T₁(v)) = B(Av) = (BA)v. Step 2: The matrix product BA represents the combined transformation. Step 3: Note the order reversal: T₂∘T₁ → BA (right to left)."
+      },
+      {
+        "id": "M1Q12M3",
+        "question": "If the transformation matrix is [[1,0],[0,2]], what does it do to the vector (3,4)?",
+        "options": [
+          "(3, 8) — doubles the y-coordinate",
+          "(6, 4) — doubles the x-coordinate (x)",
+          "(3, 4) — change",
+          "(6, 8) — doubles both"
+        ],
+        "correct_option": "(3, 8) — doubles the y-coordinate",
+        "explanation": "Step 1: [[1,0],[0,2]] × (3,4) = (1·3+0·4, 0·3+2·4) = (3, 8). Step 2: The diagonal matrix scales x by 1 and y by 2. Step 3: Only the y-coordinate is doubled."
+      },
+      {
+        "id": "M1Q12M4",
+        "question": "A neural network layer computes Output = W × Input + b. If the input is a 2D vector, W must be a:",
+        "options": [
+          "Matrix (2×2 or similar dimensions depending on output size)",
+          "Scalar)",
+          "Vector)",
+          "Function)"
+        ],
+        "correct_option": "Matrix (2×2 or similar dimensions depending on output size)",
+        "explanation": "Step 1: The weight matrix W transforms the input vector. Step 2: For 2D input → 2D output, W is 2×2. Step 3: Matrix multiplication is the fundamental operation in neural network layers."
+      },
+      {
+        "id": "M1Q12M5",
+        "question": "If A = [[2,3],[3,4]], what is A × (0,0)?",
+        "options": [
+          "(0, 0)",
+          "(2, 3) (x)",
+          "(3, 4) (x)",
+          "(5, 7) (x)"
+        ],
+        "correct_option": "(0, 0)",
+        "explanation": "Step 1: A × (0,0) = (2·0+3·0, 3·0+4·0) = (0,0). Step 2: Any matrix times the zero vector gives the zero vector. Step 3: This is a key property of linear transformations: T(0) = 0."
+      },
+      {
+        "id": "M1Q12M6",
+        "question": "What rotation matrix rotates points by 90° counterclockwise?",
+        "options": [
+          "[[0,-1],[1,0]]",
+          "[[1,0],[0,1]]",
+          "[[0,1],[-1,0]]",
+          "[[-1,0],[0,-1]]"
+        ],
+        "correct_option": "[[0,-1],[1,0]]",
+        "explanation": "Step 1: (1,0) rotates to (0,1) — first column is [0,1]. Step 2: (0,1) rotates to (-1,0) — second column is [-1,0]. Step 3: Matrix = [[0,-1],[1,0]]."
+      },
+      {
+        "id": "M1Q12M7",
+        "question": "In image processing, what does a matrix transformation do to each pixel's RGB values?",
+        "options": [
+          "Transforms the colour values (e.g., warming, black-and-white, or other filters)",
+          "Changes the pixel's position on screen",
+          "Deletes the pixel — does t match",
+          "Creates new pixels — does t match"
+        ],
+        "correct_option": "Transforms the colour values (e.g., warming, black-and-white, or other filters)",
+        "explanation": "Step 1: Each pixel has (R, G, B) — a point in ℝ³. Step 2: A 3×3 matrix multiplies (R,G,B) to produce new colour values. Step 3: Different matrices create different visual effects (warm filter, grayscale, etc.)."
+      },
+      {
+        "id": "M1Q12M8",
+        "question": "If T₁ is represented by matrix A and T₂ by matrix B, what is the matrix for T₁ followed by T₂?",
+        "options": [
+          "B × A (matrix multiplication in reverse order)",
+          "A × B)",
+          "A + B)",
+          "A - B)"
+        ],
+        "correct_option": "B × A (matrix multiplication in reverse order)",
+        "explanation": "Step 1: T₁ then T₂ means T₂(T₁(v)). Step 2: T₁(v) = Av, then T₂(Av) = B(Av) = (BA)v. Step 3: The combined matrix is BA — note the right-to-left reading order."
+      },
+      {
+        "id": "M1Q12M9",
+        "question": "The matrix [[2,0],[0,2]] applied to any vector (x,y) gives:",
+        "options": [
+          "(2x, 2y) — uniform scaling by factor 2",
+          "(x+2, y+2) — translation",
+          "(2x, y) — stretch only in x",
+          "(x, 2y) — stretch only in y"
+        ],
+        "correct_option": "(2x, 2y) — uniform scaling by factor 2",
+        "explanation": "Step 1: [[2,0],[0,2]] × (x,y) = (2x, 2y). Step 2: Both coordinates are multiplied by 2. Step 3: This is a uniform scaling — every dimension is scaled equally, making the shape twice as large in all directions."
+      },
+      {
+        "id": "M1Q12M10",
+        "question": "For the transformation φ(x,y) = (2x+3y, 3x+4y), what is φ(2, 0)?",
+        "options": [
+          "(4, 6)",
+          "(2, 3) (x)",
+          "(6, 8) (x)",
+          "(3, 4) (x)"
+        ],
+        "correct_option": "(4, 6)",
+        "explanation": "Step 1: φ(2,0) = (2·2+3·0, 3·2+4·0) = (4, 6). Step 2: Alternatively, φ(2,0) = 2·φ(1,0) = 2(2,3) = (4,6). Step 3: Linearity allows us to factor out scalars: φ(cv) = c·φ(v)."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M1Q12H1",
+        "question": "The set of all 2×2 matrices with real entries forms a vector space. What is its dimension?",
+        "options": [
+          "4",
+          "2",
+          "8",
+          "16"
+        ],
+        "correct_option": "4",
+        "explanation": "Step 1: A 2×2 matrix has 4 entries: [[a,b],[c,d]]. Step 2: Each entry is an independent real number. Step 3: The basis is {[[1,0],[0,0]], [[0,1],[0,0]], [[0,0],[1,0]], [[0,0],[0,1]]} — 4 matrices."
+      },
+      {
+        "id": "M1Q12H2",
+        "question": "The linear map φ: ℝ² → ℝ² with matrix [[2,3],[3,4]] is onto (surjective). Why?",
+        "options": [
+          "Because the matrix has non-zero determinant, so its columns span all of ℝ²",
+          "Because the trace is positive",
+          "Because both diagonal entries are positive",
+          "Because the matrix is symmetric"
+        ],
+        "correct_option": "Because the matrix has non-zero determinant, so its columns span all of ℝ²",
+        "explanation": "Step 1: det(A) = 2·4 - 3·3 = -1 ≠ 0. Step 2: Non-zero determinant means the columns are linearly independent. Step 3: Two independent vectors in ℝ² span all of ℝ², so every output can be reached — the map is surjective."
+      },
+      {
+        "id": "M1Q12H3",
+        "question": "Is the set of all linear transformations from ℝ² to ℝ² a vector space? If so, what is its dimension?",
+        "options": [
+          "Yes, it's isomorphic to the space of 2×2 matrices, dimension 4",
+          "transformations can't be added",
+          "dimension 2 — does t match",
+          "dimension 8 — does t match"
+        ],
+        "correct_option": "Yes, it's isomorphic to the space of 2×2 matrices, dimension 4",
+        "explanation": "Step 1: Each linear transformation has a unique 2×2 matrix representation. Step 2: Adding transformations = adding matrices; scalar multiplication = scaling matrices. Step 3: The space of 2×2 matrices has dimension 4, so the space of transformations does too."
+      },
+      {
+        "id": "M1Q12H4",
+        "question": "A rotation by angle θ has matrix [[cos θ, -sin θ],[sin θ, cos θ]]. What is its determinant?",
+        "options": [
+          "cos²θ + sin²θ = 1 (always)",
+          "cos θ - sin θ",
+          "2cos θ)",
+          "0 — t here"
+        ],
+        "correct_option": "cos²θ + sin²θ = 1 (always)",
+        "explanation": "Step 1: det = cos θ · cos θ - (-sin θ) · sin θ = cos²θ + sin²θ. Step 2: By the Pythagorean identity, cos²θ + sin²θ = 1. Step 3: All rotation matrices have determinant 1 — rotations preserve area."
+      },
+      {
+        "id": "M1Q12H5",
+        "question": "The image (range) of the linear map with matrix [[2,3],[3,4]] is:",
+        "options": [
+          "All of ℝ² (since the matrix has rank 2)",
+          "A line through the origin",
+          "Just the origin — does t match",
+          "A half-plane — does t match"
+        ],
+        "correct_option": "All of ℝ² (since the matrix has rank 2)",
+        "explanation": "Step 1: rank(A) = 2 (full rank for a 2×2 matrix). Step 2: The column space (image) has dimension = rank = 2. Step 3: A 2D subspace of ℝ² is all of ℝ² — the transformation is surjective."
+      },
+      {
+        "id": "M1Q12H6",
+        "question": "The kernel (null space) of the matrix [[2,3],[3,4]] is:",
+        "options": [
+          "(0,0) only — trivial kernel, since det ≠ 0",
+          "All of ℝ²)",
+          "A line through the origin",
+          "Two points)"
+        ],
+        "correct_option": "(0,0) only — trivial kernel, since det ≠ 0",
+        "explanation": "Step 1: det(A) = -1 ≠ 0. Step 2: Ax = 0 has only the trivial solution x = 0. Step 3: The kernel is {(0,0)}, meaning only the zero vector maps to the origin."
+      },
+      {
+        "id": "M1Q12H7",
+        "question": "By the rank-nullity theorem, for a 2×2 matrix A with rank 2, what is the nullity?",
+        "options": [
+          "0 (nullity = n - rank = 2 - 2 = 0)",
+          "2 — t here",
+          "1 — t here",
+          "4 — t here"
+        ],
+        "correct_option": "0 (nullity = n - rank = 2 - 2 = 0)",
+        "explanation": "Step 1: Rank-nullity: rank + nullity = n (dimension of domain). Step 2: rank = 2, n = 2. Step 3: nullity = 2 - 2 = 0 — the kernel is trivial."
+      },
+      {
+        "id": "M1Q12H8",
+        "question": "If a linear transformation T: ℝ² → ℝ² has matrix [[1,2],[2,4]], what is its rank?",
+        "options": [
+          "1 (the second row is twice the first)",
+          "2 — t here",
+          "0 — t here",
+          "4 — t here"
+        ],
+        "correct_option": "1 (the second row is twice the first)",
+        "explanation": "Step 1: Row 2 = 2 × Row 1 (linearly dependent). Step 2: Only one independent row → rank = 1. Step 3: The image is a 1D line, not all of ℝ²."
+      },
+      {
+        "id": "M1Q12H9",
+        "question": "An AI neural network layer applies matrix A to input x, then applies matrix B. What is the combined effect?",
+        "options": [
+          "The product BA applied to x — matrix multiplication composes transformations",
+          "The sum A + B — does t match",
+          "The product AB — does t match",
+          "The difference A - B — does t match"
+        ],
+        "correct_option": "The product BA applied to x — matrix multiplication composes transformations",
+        "explanation": "Step 1: First layer: Ax. Step 2: Second layer: B(Ax) = (BA)x. Step 3: The combined transformation has matrix BA — this is how neural networks stack linear layers."
+      },
+      {
+        "id": "M1Q12H10",
+        "question": "For the linear map with matrix A = [[2,3],[3,4]], what is A⁻¹ and what does it represent?",
+        "options": [
+          "A⁻¹ = [[-4,3],[3,-2]] — the inverse transformation that undoes A",
+          "A⁻¹ = [[4,-3],[-3,2]]",
+          "A⁻¹ doesn't exist — does t match",
+          "A⁻¹ = [[2,3],[3,4]] (same as A)"
+        ],
+        "correct_option": "A⁻¹ = [[-4,3],[3,-2]] — the inverse transformation that undoes A",
+        "explanation": "Step 1: For det(A) = -1, A⁻¹ = (1/det)[[4,-3],[-3,2]] = [[-4,3],[3,-2]]. Step 2: A⁻¹ × A = I (identity matrix). Step 3: The inverse transformation maps the output back to the input: if y = Ax, then x = A⁻¹y."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "emoji": "🖥️",
+      "title": "Image Processing (Colour Filters)",
+      "equation": "New_RGB = Matrix × Original_RGB",
+      "type": "mcq",
+      "concept": "Matrix as Colour Transform",
+      "story": "Every pixel in a digital image has three colour values: red, green, and blue (RGB). When you apply a filter — like making an image warmer or converting to black-and-white — each pixel's RGB triplet is multiplied by a matrix.",
+      "question": "What does the filter matrix do to each pixel's RGB colour values?",
+      "options": [
+        "Transforms the original colours into new colours, creating the filtered effect",
+        "Deletes the pixel",
+        "Moves the pixel to a new position",
+        "Increases the image resolution"
+      ],
+      "answer": "Transforms the original colours into new colours, creating the filtered effect",
+      "explanation": "Step 1: Each pixel is a 3D vector (R, G, B). Step 2: A 3×3 matrix multiplies this vector to produce new colour values. Step 3: Different matrices create different visual effects — this is the mathematics behind photo filters."
+    },
+    {
+      "emoji": "🎨",
+      "title": "Computer Graphics (Shape Transformations)",
+      "equation": "New_point = Matrix × Original_point",
+      "type": "mcq",
+      "concept": "Geometric Transformations",
+      "story": "When you rotate, scale, or skew a shape on screen, the computer uses matrix multiplication to transform every point. A 2×2 matrix can rotate a shape by any angle, stretch it along an axis, or shear it into a parallelogram.",
+      "question": "What common transformation does a matrix perform on objects in computer graphics?",
+      "options": [
+        "Rotation, scaling, shearing, or reflection",
+        "Only translation",
+        "Only colour change",
+        "Only resizing"
+      ],
+      "answer": "Rotation, scaling, shearing, or reflection",
+      "explanation": "Step 1: Different matrix structures encode different geometric operations. Step 2: Rotation matrices rotate, diagonal matrices scale, off-diagonal entries create shearing. Step 3: All these transformations are achieved through matrix multiplication."
+    },
+    {
+      "emoji": "🤖",
+      "title": "Neural Network Layer",
+      "equation": "Output = W × Input + b",
+      "type": "mcq",
+      "concept": "Matrix Operations in AI",
+      "story": "A neural network processes information through layers, and each layer is essentially a matrix multiplication followed by a non-linear function. When an AI recognises a cat in a photo, it passes the image through dozens of matrix transformations.",
+      "question": "In a neural network, what mathematical operation does each layer essentially perform?",
+      "options": [
+        "Matrix multiplication (linear transformation) plus non-linear activation",
+        "Only addition",
+        "Only multiplication by a scalar",
+        "Only comparison"
+      ],
+      "answer": "Matrix multiplication (linear transformation) plus non-linear activation",
+      "explanation": "Step 1: The weight matrix W transforms the input vector linearly. Step 2: The bias b adds an offset. Step 3: A non-linear activation function is applied after the linear step, enabling the network to learn complex patterns."
+    },
+    {
+      "emoji": "🌍",
+      "title": "GPS Coordinate Transformation",
+      "equation": "Local = Matrix × Global",
+      "type": "mcq",
+      "concept": "Coordinate System Rotation",
+      "story": "GPS data comes in global coordinates (latitude, longitude). To navigate locally, we apply a rotation matrix that aligns the coordinate system with the local direction of travel.",
+      "question": "Why is a rotation matrix applied to GPS coordinates?",
+      "options": [
+        "To align the global coordinate system with the local direction of travel",
+        "To convert coordinates to a different planet",
+        "To increase GPS accuracy",
+        "To encrypt the location data"
+      ],
+      "answer": "To align the global coordinate system with the local direction of travel",
+      "explanation": "Step 1: Global GPS coordinates use north/east directions. Step 2: Local navigation may need forward/left directions. Step 3: A rotation matrix transforms between these coordinate systems — the same mathematical operation used in computer graphics."
+    },
+    {
+      "emoji": "🔐",
+      "title": "Data Encryption (Matrix Cipher)",
+      "equation": "Ciphertext = Matrix × Plaintext",
+      "type": "mcq",
+      "concept": "Linear Transformations for Security",
+      "story": "Some encryption schemes use matrix multiplication to transform plaintext data into ciphertext. The encryption matrix scrambles the data, and only someone with the inverse matrix (the decryption key) can recover the original message.",
+      "question": "What property of the encryption matrix is essential for being able to decrypt the message?",
+      "options": [
+        "The matrix must be invertible (non-zero determinant)",
+        "The matrix must be symmetric",
+        "The matrix must have all positive entries",
+        "The matrix must be diagonal"
+      ],
+      "answer": "The matrix must be invertible (non-zero determinant)",
+      "explanation": "Step 1: Encryption: ciphertext = A × plaintext. Step 2: Decryption: plaintext = A⁻¹ × ciphertext. Step 3: The inverse A⁻¹ exists only if det(A) ≠ 0 — the matrix must be invertible for decryption to work."
+    },
+    {
+      "emoji": "📊",
+      "title": "Principal Component Analysis (PCA)",
+      "equation": "Reduced = Projection_matrix × High_dim_data",
+      "type": "mcq",
+      "concept": "Dimensionality Reduction",
+      "story": "PCA compresses high-dimensional data by projecting it onto fewer dimensions using a matrix multiplication. The projection matrix selects the most important directions of variation, reducing a 100-dimensional dataset to 2 or 3 dimensions for visualization.",
+      "question": "What mathematical operation does PCA use to reduce dimensionality?",
+      "options": [
+        "Matrix multiplication (projection onto principal components)",
+        "Addition of all dimensions",
+        "Finding the maximum value",
+        "Random sampling"
+      ],
+      "answer": "Matrix multiplication (projection onto principal components)",
+      "explanation": "Step 1: PCA finds the directions of maximum variance (principal components). Step 2: A projection matrix maps high-dimensional data onto these components. Step 3: The matrix multiplication compresses the data while preserving the most important information."
+    }
+  ]
+}

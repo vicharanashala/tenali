@@ -1,0 +1,15 @@
+{
+  "id": 1904,
+  "word": "Arrogant",
+  "question": "Arrogant",
+  "options": [
+    "Fond of the company of others; sociable",
+    "The action of detracting",
+    "Aggressively self-assured or self-important",
+    "The action of deceiving someone"
+  ],
+  "answerOption": "C",
+  "answerText": "Aggressively self-assured or self-important",
+  "difficulty": "medium",
+  "sourceFile": "1904.json"
+}

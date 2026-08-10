@@ -1,0 +1,15 @@
+{
+  "id": 3011,
+  "word": "Tmesis",
+  "question": "Tmesis",
+  "options": [
+    "Made blind or limited",
+    "One who prepares sauce",
+    "The state of being infatuated with another person",
+    "The insertion of a word between parts of a compound word"
+  ],
+  "answerOption": "D",
+  "answerText": "The insertion of a word between parts of a compound word",
+  "difficulty": "extra-hard",
+  "sourceFile": "3011.json"
+}

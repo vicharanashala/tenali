@@ -1,0 +1,15 @@
+{
+  "id": 196,
+  "word": "Mix",
+  "question": "Mix",
+  "options": [
+    "To attract and hold attention of someone",
+    "To achieve or realize something desired",
+    "Produced without artificial chemicals",
+    "To combine different things together"
+  ],
+  "answerOption": "D",
+  "answerText": "To combine different things together",
+  "difficulty": "easy",
+  "sourceFile": "0196.json"
+}

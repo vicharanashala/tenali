@@ -1,0 +1,15 @@
+{
+  "id": 144,
+  "word": "Clumsy",
+  "question": "Clumsy",
+  "options": [
+    "Awkward in movement or handling things",
+    "Existing in or caused by nature",
+    "In a state of complete confusion",
+    "To settle a dispute by making concessions"
+  ],
+  "answerOption": "A",
+  "answerText": "Awkward in movement or handling things",
+  "difficulty": "easy",
+  "sourceFile": "0144.json"
+}

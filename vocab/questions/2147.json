@@ -1,0 +1,15 @@
+{
+  "id": 2147,
+  "word": "Sophistry",
+  "question": "Sophistry",
+  "options": [
+    "Tolerance for air exposure",
+    "To extend known data into an unknown area",
+    "The use of clever but false arguments",
+    "Wrongdoing by a public official"
+  ],
+  "answerOption": "C",
+  "answerText": "The use of clever but false arguments",
+  "difficulty": "hard",
+  "sourceFile": "2147.json"
+}

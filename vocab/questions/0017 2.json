@@ -1,0 +1,15 @@
+{
+  "id": 17,
+  "word": "Eloquent",
+  "question": "Eloquent",
+  "options": [
+    "Fluent and persuasive in speaking or writing",
+    "A feeling that something is worthless",
+    "Truthful and straightforward; frank",
+    "Acting with care and thought for the future"
+  ],
+  "answerOption": "A",
+  "answerText": "Fluent and persuasive in speaking or writing",
+  "difficulty": "medium",
+  "sourceFile": "0017.json"
+}

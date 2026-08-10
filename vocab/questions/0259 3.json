@@ -1,0 +1,15 @@
+{
+  "id": 259,
+  "word": "Travel",
+  "question": "Travel",
+  "options": [
+    "Moving at a low speed",
+    "To go from one place to another",
+    "Arranged or planned in a methodical way",
+    "To increase in size or amount"
+  ],
+  "answerOption": "B",
+  "answerText": "To go from one place to another",
+  "difficulty": "easy",
+  "sourceFile": "0259.json"
+}

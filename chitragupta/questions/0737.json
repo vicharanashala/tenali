@@ -1,0 +1,14 @@
+{
+  "id": 737,
+  "question": "Which country is associated with the city of Moscow?",
+  "options": [
+    "Ukraine",
+    "Poland",
+    "Russia",
+    "Belarus"
+  ],
+  "answerOption": "C",
+  "answerText": "Russia",
+  "genre": "geography",
+  "sourceFile": "0737.json"
+}

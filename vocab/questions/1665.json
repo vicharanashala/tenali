@@ -1,0 +1,15 @@
+{
+  "id": 1665,
+  "word": "Detail",
+  "question": "Detail",
+  "options": [
+    "Not enough in quantity",
+    "To plan and draw something",
+    "A small individual part or feature",
+    "Deep-seated and bitter anger"
+  ],
+  "answerOption": "C",
+  "answerText": "A small individual part or feature",
+  "difficulty": "medium",
+  "sourceFile": "1665.json"
+}

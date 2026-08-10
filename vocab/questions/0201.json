@@ -1,0 +1,15 @@
+{
+  "id": 201,
+  "word": "Attack",
+  "question": "Attack",
+  "options": [
+    "Crowded or filled tightly",
+    "Costing a lot of money",
+    "Arranged or planned in a methodical way",
+    "To take aggressive action against something"
+  ],
+  "answerOption": "D",
+  "answerText": "To take aggressive action against something",
+  "difficulty": "easy",
+  "sourceFile": "0201.json"
+}

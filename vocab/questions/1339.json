@@ -1,0 +1,15 @@
+{
+  "id": 1339,
+  "word": "Defensible",
+  "question": "Defensible",
+  "options": [
+    "Producing confusion or perplexity",
+    "Able to be protected or justified",
+    "Wanting large quantities of food or knowledge",
+    "Waste matter or debris"
+  ],
+  "answerOption": "B",
+  "answerText": "Able to be protected or justified",
+  "difficulty": "medium",
+  "sourceFile": "1339.json"
+}

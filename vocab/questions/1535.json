@@ -1,0 +1,15 @@
+{
+  "id": 1535,
+  "word": "Derangement",
+  "question": "Derangement",
+  "options": [
+    "Involving violent or noisy disorder",
+    "Showing polite submission",
+    "Producing confusion or perplexity",
+    "The state of being disordered"
+  ],
+  "answerOption": "D",
+  "answerText": "The state of being disordered",
+  "difficulty": "medium",
+  "sourceFile": "1535.json"
+}

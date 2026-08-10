@@ -1,0 +1,14 @@
+{
+  "id": 875,
+  "question": "Who discovered the electron charge with the oil-drop experiment?",
+  "options": [
+    "Thomson",
+    "Millikan",
+    "Rutherford",
+    "Planck"
+  ],
+  "answerOption": "B",
+  "answerText": "Millikan",
+  "genre": "general-knowledge",
+  "sourceFile": "0875.json"
+}

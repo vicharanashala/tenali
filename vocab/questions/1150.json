@@ -1,0 +1,15 @@
+{
+  "id": 1150,
+  "word": "Juxtapose",
+  "question": "Juxtapose",
+  "options": [
+    "Required officially or necessarily",
+    "Able to be derived from something",
+    "To place close together for comparison",
+    "Moving downward or declining"
+  ],
+  "answerOption": "C",
+  "answerText": "To place close together for comparison",
+  "difficulty": "medium",
+  "sourceFile": "1150.json"
+}

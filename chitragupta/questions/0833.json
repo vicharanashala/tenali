@@ -1,0 +1,14 @@
+{
+  "id": 833,
+  "question": "What is the chemical symbol for radium?",
+  "options": [
+    "Rm",
+    "Rd",
+    "Ra",
+    "Ru"
+  ],
+  "answerOption": "C",
+  "answerText": "Ra",
+  "genre": "mixed",
+  "sourceFile": "0833.json"
+}

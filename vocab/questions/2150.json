@@ -1,0 +1,15 @@
+{
+  "id": 2150,
+  "word": "Accolade",
+  "question": "Accolade",
+  "options": [
+    "An award or privilege given as honor",
+    "The state of being unaware of surroundings",
+    "Attractive or appealing in appearance",
+    "A woman who commits adultery"
+  ],
+  "answerOption": "A",
+  "answerText": "An award or privilege given as honor",
+  "difficulty": "hard",
+  "sourceFile": "2150.json"
+}

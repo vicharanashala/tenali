@@ -1,0 +1,15 @@
+{
+  "id": 87,
+  "word": "Shallow",
+  "question": "Shallow",
+  "options": [
+    "Continuing firmly despite difficulty",
+    "Acting in the same way over time",
+    "To tell someone you will definitely do something",
+    "Of little depth"
+  ],
+  "answerOption": "D",
+  "answerText": "Of little depth",
+  "difficulty": "easy",
+  "sourceFile": "0087.json"
+}

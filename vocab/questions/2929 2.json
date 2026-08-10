@@ -1,0 +1,15 @@
+{
+  "id": 2929,
+  "word": "Abigail",
+  "question": "Abigail",
+  "options": [
+    "Causing or relating to vertigo",
+    "A female servant or attendant",
+    "The price set on a person's life in Anglo-Saxon law",
+    "To wander from the right path"
+  ],
+  "answerOption": "B",
+  "answerText": "A female servant or attendant",
+  "difficulty": "extra-hard",
+  "sourceFile": "2929.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 204,
+  "word": "Gather",
+  "question": "Gather",
+  "options": [
+    "Closely and neatly packed together",
+    "No longer fresh; old and dry",
+    "To collect things from different places",
+    "Happening or done at once"
+  ],
+  "answerOption": "C",
+  "answerText": "To collect things from different places",
+  "difficulty": "easy",
+  "sourceFile": "0204.json"
+}

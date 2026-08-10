@@ -1,0 +1,15 @@
+{
+  "id": 461,
+  "word": "Achieve",
+  "question": "Achieve",
+  "options": [
+    "To receive money in return for labor",
+    "To successfully reach a desired goal",
+    "To ask someone earnestly for something",
+    "To attract and hold attention of someone"
+  ],
+  "answerOption": "B",
+  "answerText": "To successfully reach a desired goal",
+  "difficulty": "easy",
+  "sourceFile": "0461.json"
+}

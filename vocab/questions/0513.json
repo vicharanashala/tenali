@@ -1,0 +1,15 @@
+{
+  "id": 513,
+  "word": "Sense",
+  "question": "Sense",
+  "options": [
+    "To love and respect deeply",
+    "To feel or detect something",
+    "To ask for something forcefully",
+    "To bring something to an end"
+  ],
+  "answerOption": "B",
+  "answerText": "To feel or detect something",
+  "difficulty": "easy",
+  "sourceFile": "0513.json"
+}

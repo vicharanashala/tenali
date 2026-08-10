@@ -1,0 +1,15 @@
+{
+  "id": 1538,
+  "word": "Derelict",
+  "question": "Derelict",
+  "options": [
+    "Loyalty to a person or country",
+    "Abandoned by an owner or crew",
+    "To remove sulfur from something",
+    "Changing frequently in loyalties or affections"
+  ],
+  "answerOption": "B",
+  "answerText": "Abandoned by an owner or crew",
+  "difficulty": "medium",
+  "sourceFile": "1538.json"
+}

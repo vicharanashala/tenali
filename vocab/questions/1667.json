@@ -1,0 +1,15 @@
+{
+  "id": 1667,
+  "word": "Detain",
+  "question": "Detain",
+  "options": [
+    "Hostile and aggressive",
+    "To keep someone from proceeding",
+    "Likely to cause resentment",
+    "To cause a train to leave the track"
+  ],
+  "answerOption": "B",
+  "answerText": "To keep someone from proceeding",
+  "difficulty": "medium",
+  "sourceFile": "1667.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1906,
+  "word": "Vain",
+  "question": "Vain",
+  "options": [
+    "Important or significant in effect",
+    "Diligent and careful in work",
+    "Able to be discovered or noticed",
+    "Excessively proud of appearance"
+  ],
+  "answerOption": "D",
+  "answerText": "Excessively proud of appearance",
+  "difficulty": "medium",
+  "sourceFile": "1906.json"
+}

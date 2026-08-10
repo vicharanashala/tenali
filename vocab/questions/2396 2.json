@@ -1,0 +1,15 @@
+{
+  "id": 2396,
+  "word": "Mnemonic",
+  "question": "Mnemonic",
+  "options": [
+    "Mystic or entrancing in nature",
+    "A specified period of five years",
+    "In an abysmal manner",
+    "A system to assist the memory"
+  ],
+  "answerOption": "D",
+  "answerText": "A system to assist the memory",
+  "difficulty": "extra-hard",
+  "sourceFile": "2396.json"
+}

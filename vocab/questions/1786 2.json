@@ -1,0 +1,15 @@
+{
+  "id": 1786,
+  "word": "Heresy",
+  "question": "Heresy",
+  "options": [
+    "A colorless liquid chemical compound",
+    "Of an airy nature",
+    "A genus of weasel-like animals",
+    "Belief contrary to the accepted doctrine"
+  ],
+  "answerOption": "D",
+  "answerText": "Belief contrary to the accepted doctrine",
+  "difficulty": "hard",
+  "sourceFile": "1786.json"
+}

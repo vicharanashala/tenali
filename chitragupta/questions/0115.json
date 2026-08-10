@@ -1,0 +1,14 @@
+{
+  "id": 115,
+  "question": "Who was the first Indian to win a Nobel Prize?",
+  "options": [
+    "C. V. Raman",
+    "Rabindranath Tagore",
+    "Mother Teresa",
+    "Amartya Sen"
+  ],
+  "answerOption": "B",
+  "answerText": "Rabindranath Tagore",
+  "genre": "india-gk",
+  "sourceFile": "0115.json"
+}

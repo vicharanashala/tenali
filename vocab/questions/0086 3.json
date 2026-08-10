@@ -1,0 +1,15 @@
+{
+  "id": 86,
+  "word": "Deep",
+  "question": "Deep",
+  "options": [
+    "To perceive the flavor of something",
+    "To arrange systematically into groups",
+    "Extending far down from the top",
+    "Not giving enough attention to avoid harm"
+  ],
+  "answerOption": "C",
+  "answerText": "Extending far down from the top",
+  "difficulty": "easy",
+  "sourceFile": "0086.json"
+}

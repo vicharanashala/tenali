@@ -1,0 +1,15 @@
+{
+  "id": 2088,
+  "word": "Aerator",
+  "question": "Aerator",
+  "options": [
+    "At the point of death; in terminal decline",
+    "Done with deliberation or awareness",
+    "Reckless pursuit of adventure",
+    "A device that aerates something"
+  ],
+  "answerOption": "D",
+  "answerText": "A device that aerates something",
+  "difficulty": "hard",
+  "sourceFile": "2088.json"
+}

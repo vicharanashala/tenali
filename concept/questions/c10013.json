@@ -1,0 +1,15 @@
+{
+  "id": 10013,
+  "word": "Eigenvector",
+  "question": "Eigenvector",
+  "options": [
+    "A non-zero vector that changes at most by a scalar factor when a linear transformation is applied",
+    "A vector whose magnitude is exactly one",
+    "A vector that is perpendicular to a given plane in 3D space",
+    "The resultant vector when two matrices are cross-multiplied"
+  ],
+  "answerOption": "A",
+  "answerText": "A non-zero vector that changes at most by a scalar factor when a linear transformation is applied",
+  "difficulty": "hard",
+  "sourceFile": "c10013.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1532,
+  "word": "Lacuna",
+  "question": "Lacuna",
+  "options": [
+    "The act of loving someone who loves you in return",
+    "An unfilled space or gap",
+    "A feeling of guilt that follows wrongdoing",
+    "The smell of a good book"
+  ],
+  "answerOption": "B",
+  "answerText": "An unfilled space or gap",
+  "difficulty": "extra-hard",
+  "sourceFile": "1532.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 668,
+  "word": "Spacious",
+  "question": "Spacious",
+  "options": [
+    "Able to adapt to many different uses",
+    "Not mixed with anything else",
+    "To actively resist or be against something",
+    "Having ample space; roomy"
+  ],
+  "answerOption": "D",
+  "answerText": "Having ample space; roomy",
+  "difficulty": "easy",
+  "sourceFile": "0668.json"
+}

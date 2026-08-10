@@ -1,0 +1,15 @@
+{
+  "id": 1553,
+  "word": "Destination",
+  "question": "Destination",
+  "options": [
+    "Spacious and comfortable",
+    "The place someone is going to",
+    "Extremely or damnably",
+    "The action of becoming worse"
+  ],
+  "answerOption": "B",
+  "answerText": "The place someone is going to",
+  "difficulty": "medium",
+  "sourceFile": "1553.json"
+}

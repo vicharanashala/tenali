@@ -1,0 +1,15 @@
+{
+  "id": 30,
+  "word": "Prudent",
+  "question": "Prudent",
+  "options": [
+    "A feeling that something is worthless",
+    "Acting with care and thought for the future",
+    "Fluent and persuasive in speaking or writing",
+    "Truthful and straightforward; frank"
+  ],
+  "answerOption": "B",
+  "answerText": "Acting with care and thought for the future",
+  "difficulty": "medium",
+  "sourceFile": "0030.json"
+}

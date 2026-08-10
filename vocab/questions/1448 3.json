@@ -1,0 +1,15 @@
+{
+  "id": 1448,
+  "word": "Deploy",
+  "question": "Deploy",
+  "options": [
+    "To do something one considers beneath oneself",
+    "To move into position for action",
+    "To provide money to pay a cost",
+    "To cause someone to lose confidence"
+  ],
+  "answerOption": "B",
+  "answerText": "To move into position for action",
+  "difficulty": "medium",
+  "sourceFile": "1448.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1867,
+  "word": "Treacherous",
+  "question": "Treacherous",
+  "options": [
+    "Failing in or neglectful of a duty",
+    "Feeling calm and relaxed; not worried",
+    "A man holding a small landed estate",
+    "Presenting hidden dangers"
+  ],
+  "answerOption": "D",
+  "answerText": "Presenting hidden dangers",
+  "difficulty": "medium",
+  "sourceFile": "1867.json"
+}

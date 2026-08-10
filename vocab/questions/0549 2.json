@@ -1,0 +1,15 @@
+{
+  "id": 549,
+  "word": "Negotiate",
+  "question": "Negotiate",
+  "options": [
+    "Not approximated in any way; precise",
+    "Having a practical view of what is achievable",
+    "To try to reach an agreement by discussion",
+    "Having a sharp, unpleasant taste"
+  ],
+  "answerOption": "C",
+  "answerText": "To try to reach an agreement by discussion",
+  "difficulty": "easy",
+  "sourceFile": "0549.json"
+}

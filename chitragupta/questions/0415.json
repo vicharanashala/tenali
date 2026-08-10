@@ -1,0 +1,14 @@
+{
+  "id": 415,
+  "question": "Which Indian state has Kohima as its capital?",
+  "options": [
+    "Nagaland",
+    "Mizoram",
+    "Tripura",
+    "Manipur"
+  ],
+  "answerOption": "A",
+  "answerText": "Nagaland",
+  "genre": "geography",
+  "sourceFile": "0415.json"
+}

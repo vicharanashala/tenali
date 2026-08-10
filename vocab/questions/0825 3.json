@@ -1,0 +1,15 @@
+{
+  "id": 825,
+  "word": "Prominent",
+  "question": "Prominent",
+  "options": [
+    "Important and well known",
+    "Insufficient for the demand; in short supply",
+    "Possessing great power or strength",
+    "To give an account of something in words"
+  ],
+  "answerOption": "A",
+  "answerText": "Important and well known",
+  "difficulty": "easy",
+  "sourceFile": "0825.json"
+}

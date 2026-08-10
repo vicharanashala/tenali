@@ -1,0 +1,15 @@
+{
+  "id": 1234,
+  "word": "Exuberant",
+  "question": "Exuberant",
+  "options": [
+    "Not producing intended effect",
+    "Unwilling to spend money",
+    "Self-assertive in a rude or noisy way",
+    "Filled with lively energy and excitement"
+  ],
+  "answerOption": "D",
+  "answerText": "Filled with lively energy and excitement",
+  "difficulty": "medium",
+  "sourceFile": "1234.json"
+}

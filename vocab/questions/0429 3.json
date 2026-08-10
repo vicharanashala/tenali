@@ -1,0 +1,15 @@
+{
+  "id": 429,
+  "word": "Fold",
+  "question": "Fold",
+  "options": [
+    "Thin and light in construction",
+    "To run away from a place of danger",
+    "To keep doing something without stopping",
+    "To bend something over on itself"
+  ],
+  "answerOption": "D",
+  "answerText": "To bend something over on itself",
+  "difficulty": "easy",
+  "sourceFile": "0429.json"
+}

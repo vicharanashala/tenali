@@ -1,0 +1,15 @@
+{
+  "id": 155,
+  "word": "Forget",
+  "question": "Forget",
+  "options": [
+    "To fail to remember something",
+    "To make something full or complete",
+    "To be exceptionally good at something",
+    "Dark or poorly lit; depressing"
+  ],
+  "answerOption": "A",
+  "answerText": "To fail to remember something",
+  "difficulty": "easy",
+  "sourceFile": "0155.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1363,
+  "word": "Syzygy",
+  "question": "Syzygy",
+  "options": [
+    "An alignment of three celestial objects",
+    "Showing spontaneous and undirected playfulness",
+    "The art of repairing with gold to show beauty in damage",
+    "The taste of bliss in the absence of all thought"
+  ],
+  "answerOption": "A",
+  "answerText": "An alignment of three celestial objects",
+  "difficulty": "extra-hard",
+  "sourceFile": "1363.json"
+}

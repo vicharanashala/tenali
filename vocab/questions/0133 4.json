@@ -1,0 +1,15 @@
+{
+  "id": 133,
+  "word": "Visible",
+  "question": "Visible",
+  "options": [
+    "Able to be seen",
+    "To state the exact meaning of a word",
+    "To produce a picture using a pencil",
+    "Bad tempered and unwilling to be friendly"
+  ],
+  "answerOption": "A",
+  "answerText": "Able to be seen",
+  "difficulty": "easy",
+  "sourceFile": "0133.json"
+}

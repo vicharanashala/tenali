@@ -1,0 +1,14 @@
+{
+  "id": 860,
+  "question": "Which country is associated with the city of Islamabad?",
+  "options": [
+    "India",
+    "Pakistan",
+    "Afghanistan",
+    "Iran"
+  ],
+  "answerOption": "B",
+  "answerText": "Pakistan",
+  "genre": "geography",
+  "sourceFile": "0860.json"
+}

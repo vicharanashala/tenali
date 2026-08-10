@@ -1,0 +1,15 @@
+{
+  "id": 1561,
+  "word": "Derring-Do",
+  "question": "Derring-Do",
+  "options": [
+    "In a determinable manner",
+    "Delayed or prevented by obstructing",
+    "Adventurous or daring action",
+    "In a despicable manner"
+  ],
+  "answerOption": "C",
+  "answerText": "Adventurous or daring action",
+  "difficulty": "medium",
+  "sourceFile": "1561.json"
+}

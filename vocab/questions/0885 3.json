@@ -1,0 +1,15 @@
+{
+  "id": 885,
+  "word": "Fine",
+  "question": "Fine",
+  "options": [
+    "Of high quality; thin or slender",
+    "Different from what is normal or expected",
+    "Able to move quickly and easily",
+    "To put things in a neat or attractive order"
+  ],
+  "answerOption": "A",
+  "answerText": "Of high quality; thin or slender",
+  "difficulty": "easy",
+  "sourceFile": "0885.json"
+}

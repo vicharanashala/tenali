@@ -1,0 +1,15 @@
+{
+  "id": 1436,
+  "word": "Denial",
+  "question": "Denial",
+  "options": [
+    "Feeling distrust or doubt",
+    "The action of declaring something untrue",
+    "Famous for something bad",
+    "To engage in a close fight or struggle"
+  ],
+  "answerOption": "B",
+  "answerText": "The action of declaring something untrue",
+  "difficulty": "medium",
+  "sourceFile": "1436.json"
+}

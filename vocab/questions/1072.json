@@ -1,0 +1,15 @@
+{
+  "id": 1072,
+  "word": "Adamant",
+  "question": "Adamant",
+  "options": [
+    "To mix or cause to mix together",
+    "A place for storage of goods",
+    "Refusing to be persuaded or to change",
+    "Special words used by a particular profession"
+  ],
+  "answerOption": "C",
+  "answerText": "Refusing to be persuaded or to change",
+  "difficulty": "medium",
+  "sourceFile": "1072.json"
+}

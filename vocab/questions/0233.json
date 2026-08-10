@@ -1,0 +1,15 @@
+{
+  "id": 233,
+  "word": "Doubt",
+  "question": "Doubt",
+  "options": [
+    "Having lived for a long time; no longer young",
+    "To examine something with the possibility of change",
+    "To feel uncertain about something",
+    "Required to explain actions or decisions"
+  ],
+  "answerOption": "C",
+  "answerText": "To feel uncertain about something",
+  "difficulty": "easy",
+  "sourceFile": "0233.json"
+}

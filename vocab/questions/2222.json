@@ -1,0 +1,15 @@
+{
+  "id": 2222,
+  "word": "Mettle",
+  "question": "Mettle",
+  "options": [
+    "The position of an advocate",
+    "Just begun and not fully formed",
+    "A person who pleads for another",
+    "A person's ability to cope with difficulties"
+  ],
+  "answerOption": "D",
+  "answerText": "A person's ability to cope with difficulties",
+  "difficulty": "hard",
+  "sourceFile": "2222.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 875,
+  "word": "Delayed",
+  "question": "Delayed",
+  "options": [
+    "Giving out or reflecting much light",
+    "Made to happen later than expected",
+    "To come or go back to a place",
+    "In a state of complete confusion"
+  ],
+  "answerOption": "B",
+  "answerText": "Made to happen later than expected",
+  "difficulty": "easy",
+  "sourceFile": "0875.json"
+}

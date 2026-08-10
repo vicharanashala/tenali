@@ -1,0 +1,15 @@
+{
+  "id": 696,
+  "word": "Minor",
+  "question": "Minor",
+  "options": [
+    "To actively resist or be against something",
+    "Not mixed with anything else",
+    "Very cold with visible frost",
+    "Lesser in importance or seriousness"
+  ],
+  "answerOption": "D",
+  "answerText": "Lesser in importance or seriousness",
+  "difficulty": "easy",
+  "sourceFile": "0696.json"
+}

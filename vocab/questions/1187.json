@@ -1,0 +1,15 @@
+{
+  "id": 1187,
+  "word": "Censure",
+  "question": "Censure",
+  "options": [
+    "Clear and definite; able to be touched",
+    "Mysterious or difficult to understand",
+    "To express severe disapproval of",
+    "Showing polite submission"
+  ],
+  "answerOption": "C",
+  "answerText": "To express severe disapproval of",
+  "difficulty": "medium",
+  "sourceFile": "1187.json"
+}

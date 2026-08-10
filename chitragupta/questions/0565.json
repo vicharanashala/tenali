@@ -1,0 +1,14 @@
+{
+  "id": 565,
+  "question": "Which part of the ear converts sound vibrations into nerve impulses?",
+  "options": [
+    "Eardrum",
+    "Cochlea",
+    "Semicircular canals",
+    "Auditory canal"
+  ],
+  "answerOption": "B",
+  "answerText": "Cochlea",
+  "genre": "mixed",
+  "sourceFile": "0565.json"
+}

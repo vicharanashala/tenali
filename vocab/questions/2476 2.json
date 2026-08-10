@@ -1,0 +1,15 @@
+{
+  "id": 2476,
+  "word": "Triskaidekaphobia",
+  "question": "Triskaidekaphobia",
+  "options": [
+    "The inability to remember a particular word",
+    "Extreme fear of the number thirteen",
+    "A fine filmy substance of cobwebs",
+    "A type of dark slate rock"
+  ],
+  "answerOption": "B",
+  "answerText": "Extreme fear of the number thirteen",
+  "difficulty": "extra-hard",
+  "sourceFile": "2476.json"
+}

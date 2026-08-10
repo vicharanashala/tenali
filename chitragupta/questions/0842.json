@@ -1,0 +1,14 @@
+{
+  "id": 842,
+  "question": "Who discovered the law of universal gravitation?",
+  "options": [
+    "Newton",
+    "Einstein",
+    "Kepler",
+    "Galileo"
+  ],
+  "answerOption": "A",
+  "answerText": "Newton",
+  "genre": "general-knowledge",
+  "sourceFile": "0842.json"
+}

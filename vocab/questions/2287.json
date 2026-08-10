@@ -1,0 +1,15 @@
+{
+  "id": 2287,
+  "word": "Adultery",
+  "question": "Adultery",
+  "options": [
+    "To make worse by adding inferior matter",
+    "The beginning of something",
+    "Hypocritical and sanctimonious talk",
+    "Voluntary sexual intercourse outside marriage"
+  ],
+  "answerOption": "D",
+  "answerText": "Voluntary sexual intercourse outside marriage",
+  "difficulty": "hard",
+  "sourceFile": "2287.json"
+}

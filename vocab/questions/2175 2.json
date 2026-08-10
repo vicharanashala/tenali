@@ -1,0 +1,15 @@
+{
+  "id": 2175,
+  "word": "AEROMETER",
+  "question": "AEROMETER",
+  "options": [
+    "An expert in aeronautics",
+    "To reprimand someone firmly",
+    "Instrument measuring air properties",
+    "Derived from an external source"
+  ],
+  "answerOption": "C",
+  "answerText": "Instrument measuring air properties",
+  "difficulty": "hard",
+  "sourceFile": "2175.json"
+}

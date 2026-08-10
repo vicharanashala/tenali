@@ -1,0 +1,15 @@
+{
+  "id": 1747,
+  "word": "Faithless",
+  "question": "Faithless",
+  "options": [
+    "Concerned only with surface",
+    "Lacking faith or loyalty",
+    "To turn aside or away from a course",
+    "Demonstrating aggression or eagerness to fight"
+  ],
+  "answerOption": "B",
+  "answerText": "Lacking faith or loyalty",
+  "difficulty": "medium",
+  "sourceFile": "1747.json"
+}

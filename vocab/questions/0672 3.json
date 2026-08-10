@@ -1,0 +1,15 @@
+{
+  "id": 672,
+  "word": "Plentiful",
+  "question": "Plentiful",
+  "options": [
+    "To establish a home in a new place",
+    "Causing laughter or amusement",
+    "Existing in large quantities",
+    "To impart knowledge or skill to someone"
+  ],
+  "answerOption": "C",
+  "answerText": "Existing in large quantities",
+  "difficulty": "easy",
+  "sourceFile": "0672.json"
+}

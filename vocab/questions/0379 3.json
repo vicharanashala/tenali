@@ -1,0 +1,15 @@
+{
+  "id": 379,
+  "word": "Spin",
+  "question": "Spin",
+  "options": [
+    "To open something that was folded",
+    "To turn around quickly in a circle",
+    "In a natural or raw state; not refined",
+    "Acting in the same way over time"
+  ],
+  "answerOption": "B",
+  "answerText": "To turn around quickly in a circle",
+  "difficulty": "easy",
+  "sourceFile": "0379.json"
+}

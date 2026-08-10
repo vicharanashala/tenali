@@ -1,0 +1,15 @@
+{
+  "id": 1428,
+  "word": "Demurrer",
+  "question": "Demurrer",
+  "options": [
+    "Careful to avoid danger",
+    "To remove poison from something",
+    "A legal objection to a claim",
+    "Not even or regular in pattern"
+  ],
+  "answerOption": "C",
+  "answerText": "A legal objection to a claim",
+  "difficulty": "medium",
+  "sourceFile": "1428.json"
+}

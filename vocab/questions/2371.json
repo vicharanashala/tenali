@@ -1,0 +1,15 @@
+{
+  "id": 2371,
+  "word": "Aegis",
+  "question": "Aegis",
+  "options": [
+    "The act of freeing someone",
+    "Sponsorship, support, or auspices",
+    "Relating to air-dependent plants",
+    "Medical condition from altitude"
+  ],
+  "answerOption": "B",
+  "answerText": "Sponsorship, support, or auspices",
+  "difficulty": "hard",
+  "sourceFile": "2371.json"
+}

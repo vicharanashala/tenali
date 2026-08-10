@@ -1,0 +1,15 @@
+{
+  "id": 846,
+  "word": "Cozy",
+  "question": "Cozy",
+  "options": [
+    "Having four equal sides and right angles",
+    "Conforming to what is standard or expected",
+    "To withdraw from a position",
+    "Warm and comfortable"
+  ],
+  "answerOption": "D",
+  "answerText": "Warm and comfortable",
+  "difficulty": "easy",
+  "sourceFile": "0846.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1608,
+  "word": "Desman",
+  "question": "Desman",
+  "options": [
+    "Famous for something bad",
+    "To discover or identify something",
+    "A subtle difference in meaning",
+    "A small aquatic mammal"
+  ],
+  "answerOption": "D",
+  "answerText": "A small aquatic mammal",
+  "difficulty": "medium",
+  "sourceFile": "1608.json"
+}

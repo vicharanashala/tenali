@@ -1,0 +1,15 @@
+{
+  "id": 3144,
+  "word": "Ignis fatuus",
+  "question": "Ignis fatuus",
+  "options": [
+    "Having sight blocked",
+    "A will-o-the-wisp; something deceptive",
+    "Plural of abstinency",
+    "A profound awareness of the universe that triggers emotion"
+  ],
+  "answerOption": "B",
+  "answerText": "A will-o-the-wisp; something deceptive",
+  "difficulty": "extra-hard",
+  "sourceFile": "3144.json"
+}

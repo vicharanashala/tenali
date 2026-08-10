@@ -1,0 +1,15 @@
+{
+  "id": 1907,
+  "word": "Narcissistic",
+  "question": "Narcissistic",
+  "options": [
+    "The quality of being harmful",
+    "Excessively self-centered or self-loving",
+    "Failing in or neglectful of a duty",
+    "Inspiring fear or respect through size"
+  ],
+  "answerOption": "B",
+  "answerText": "Excessively self-centered or self-loving",
+  "difficulty": "medium",
+  "sourceFile": "1907.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1652,
+  "word": "Destruction",
+  "question": "Destruction",
+  "options": [
+    "Twisted or bent out of shape",
+    "The action of destroying something",
+    "Worthy of reward or recognition",
+    "Affected by a lack of energy"
+  ],
+  "answerOption": "B",
+  "answerText": "The action of destroying something",
+  "difficulty": "medium",
+  "sourceFile": "1652.json"
+}

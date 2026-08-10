@@ -1,0 +1,15 @@
+{
+  "id": 877,
+  "word": "Tardy",
+  "question": "Tardy",
+  "options": [
+    "Existing in large quantities",
+    "Late or delayed in occurring",
+    "In a particular place; existing now",
+    "Possessing great power or strength"
+  ],
+  "answerOption": "B",
+  "answerText": "Late or delayed in occurring",
+  "difficulty": "easy",
+  "sourceFile": "0877.json"
+}

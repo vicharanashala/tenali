@@ -1,0 +1,15 @@
+{
+  "id": 222,
+  "word": "Include",
+  "question": "Include",
+  "options": [
+    "Of short duration; not lasting long",
+    "To cause something to come closer",
+    "To contain as part of a whole",
+    "To extend to full length"
+  ],
+  "answerOption": "C",
+  "answerText": "To contain as part of a whole",
+  "difficulty": "easy",
+  "sourceFile": "0222.json"
+}

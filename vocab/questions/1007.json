@@ -1,0 +1,15 @@
+{
+  "id": 1007,
+  "word": "Hypothetical",
+  "question": "Hypothetical",
+  "options": [
+    "A person appointed to act for another",
+    "Serving to detract from",
+    "Based on an imagined situation, not reality",
+    "The action of leaving a place"
+  ],
+  "answerOption": "C",
+  "answerText": "Based on an imagined situation, not reality",
+  "difficulty": "medium",
+  "sourceFile": "1007.json"
+}

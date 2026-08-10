@@ -1,0 +1,15 @@
+{
+  "id": 1586,
+  "word": "Detective",
+  "question": "Detective",
+  "options": [
+    "A modest view of one's own importance",
+    "To attract by offering pleasure or advantage",
+    "To publicly state one's disapproval of",
+    "A police officer investigating crime"
+  ],
+  "answerOption": "D",
+  "answerText": "A police officer investigating crime",
+  "difficulty": "medium",
+  "sourceFile": "1586.json"
+}

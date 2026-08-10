@@ -1,0 +1,14 @@
+{
+  "id": 337,
+  "question": "Which organ in the human body is primarily responsible for detoxification?",
+  "options": [
+    "Spleen",
+    "Liver",
+    "Kidney",
+    "Pancreas"
+  ],
+  "answerOption": "B",
+  "answerText": "Liver",
+  "genre": "science",
+  "sourceFile": "0337.json"
+}

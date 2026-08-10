@@ -1,0 +1,15 @@
+{
+  "id": 1410,
+  "word": "Demographics",
+  "question": "Demographics",
+  "options": [
+    "The study of the skin",
+    "Not discovered or known about; uncertain",
+    "Likely to cause injury",
+    "Statistical data of a population"
+  ],
+  "answerOption": "D",
+  "answerText": "Statistical data of a population",
+  "difficulty": "medium",
+  "sourceFile": "1410.json"
+}

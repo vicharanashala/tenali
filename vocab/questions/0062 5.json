@@ -1,0 +1,15 @@
+{
+  "id": 62,
+  "word": "Busy",
+  "question": "Busy",
+  "options": [
+    "To move smoothly along a surface",
+    "To stop briefly before continuing",
+    "To create difficulties for someone",
+    "Having a great deal to do"
+  ],
+  "answerOption": "D",
+  "answerText": "Having a great deal to do",
+  "difficulty": "easy",
+  "sourceFile": "0062.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 142,
+  "question": "Which is the tallest mountain in Africa?",
+  "options": [
+    "Mount Kenya",
+    "Mount Kilimanjaro",
+    "Atlas Peak",
+    "Rwenzori"
+  ],
+  "answerOption": "B",
+  "answerText": "Mount Kilimanjaro",
+  "genre": "mixed",
+  "sourceFile": "0142.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1137,
+  "word": "Uphold",
+  "question": "Uphold",
+  "options": [
+    "Making a loud confused noise; uproarious",
+    "To gather or collect something",
+    "To attack or plunder",
+    "To maintain or support a principle"
+  ],
+  "answerOption": "D",
+  "answerText": "To maintain or support a principle",
+  "difficulty": "medium",
+  "sourceFile": "1137.json"
+}

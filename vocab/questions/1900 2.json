@@ -1,0 +1,15 @@
+{
+  "id": 1900,
+  "word": "Adopt",
+  "question": "Adopt",
+  "options": [
+    "To legally take as one's own child",
+    "Familiar with many different cultures",
+    "Relating to prehistoric stone tools",
+    "Tolerating air exposure"
+  ],
+  "answerOption": "A",
+  "answerText": "To legally take as one's own child",
+  "difficulty": "hard",
+  "sourceFile": "1900.json"
+}

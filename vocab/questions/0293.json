@@ -1,0 +1,15 @@
+{
+  "id": 293,
+  "word": "Pause",
+  "question": "Pause",
+  "options": [
+    "Not decorated or elaborate; simple",
+    "To stop briefly before continuing",
+    "To welcome someone with particular words",
+    "To construct something by putting parts together"
+  ],
+  "answerOption": "B",
+  "answerText": "To stop briefly before continuing",
+  "difficulty": "easy",
+  "sourceFile": "0293.json"
+}

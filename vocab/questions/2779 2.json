@@ -1,0 +1,15 @@
+{
+  "id": 2779,
+  "word": "Salubrious",
+  "question": "Salubrious",
+  "options": [
+    "Health-giving; healthy",
+    "A whispering or rustling sound",
+    "Expert in abyss layers",
+    "Gradual weaning process"
+  ],
+  "answerOption": "A",
+  "answerText": "Health-giving; healthy",
+  "difficulty": "extra-hard",
+  "sourceFile": "2779.json"
+}

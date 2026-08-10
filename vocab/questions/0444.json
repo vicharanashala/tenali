@@ -1,0 +1,15 @@
+{
+  "id": 444,
+  "word": "Classify",
+  "question": "Classify",
+  "options": [
+    "Showing gentleness and concern",
+    "Having a lighthearted excited feeling",
+    "Complex and detailed in design",
+    "To arrange into categories or classes"
+  ],
+  "answerOption": "D",
+  "answerText": "To arrange into categories or classes",
+  "difficulty": "easy",
+  "sourceFile": "0444.json"
+}

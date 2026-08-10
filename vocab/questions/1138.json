@@ -1,0 +1,15 @@
+{
+  "id": 1138,
+  "word": "Valor",
+  "question": "Valor",
+  "options": [
+    "To satisfy thirst by drinking",
+    "Great courage in the face of danger",
+    "Abundant in supply or quantity",
+    "Difficult or impossible to understand"
+  ],
+  "answerOption": "B",
+  "answerText": "Great courage in the face of danger",
+  "difficulty": "medium",
+  "sourceFile": "1138.json"
+}

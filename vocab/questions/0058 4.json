@@ -1,0 +1,15 @@
+{
+  "id": 58,
+  "word": "False",
+  "question": "False",
+  "options": [
+    "Unusual or surprising; hard to explain",
+    "Not according to truth or fact",
+    "Having great power or strength",
+    "Extremely large or huge"
+  ],
+  "answerOption": "B",
+  "answerText": "Not according to truth or fact",
+  "difficulty": "easy",
+  "sourceFile": "0058.json"
+}

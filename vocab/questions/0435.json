@@ -1,0 +1,15 @@
+{
+  "id": 435,
+  "word": "Tie",
+  "question": "Tie",
+  "options": [
+    "At a great distance in space or time",
+    "Costing a lot of money",
+    "To fasten with string or rope",
+    "To place equipment in position for use"
+  ],
+  "answerOption": "C",
+  "answerText": "To fasten with string or rope",
+  "difficulty": "easy",
+  "sourceFile": "0435.json"
+}

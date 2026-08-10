@@ -1,0 +1,15 @@
+{
+  "id": 708,
+  "word": "Uniform",
+  "question": "Uniform",
+  "options": [
+    "To give a portion of something to others",
+    "To become visible or noticeable",
+    "Not varying; the same in all cases",
+    "To take and use something temporarily"
+  ],
+  "answerOption": "C",
+  "answerText": "Not varying; the same in all cases",
+  "difficulty": "easy",
+  "sourceFile": "0708.json"
+}

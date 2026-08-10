@@ -1,0 +1,15 @@
+{
+  "id": 2674,
+  "word": "Fealty",
+  "question": "Fealty",
+  "options": [
+    "Relating to the atmosphere",
+    "The state of being noticeable",
+    "Loyalty owed to a feudal lord",
+    "A meteorite or stone from space"
+  ],
+  "answerOption": "C",
+  "answerText": "Loyalty owed to a feudal lord",
+  "difficulty": "hard",
+  "sourceFile": "2674.json"
+}

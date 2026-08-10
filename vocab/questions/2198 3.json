@@ -1,0 +1,15 @@
+{
+  "id": 2198,
+  "word": "Advocating",
+  "question": "Advocating",
+  "options": [
+    "Ornamental work of fine twisted wire",
+    "To insert something between fixed points",
+    "Supporting or recommending",
+    "Excessively complicated and detailed"
+  ],
+  "answerOption": "C",
+  "answerText": "Supporting or recommending",
+  "difficulty": "hard",
+  "sourceFile": "2198.json"
+}

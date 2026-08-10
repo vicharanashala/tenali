@@ -1,0 +1,15 @@
+{
+  "id": 620,
+  "word": "Dedicated",
+  "question": "Dedicated",
+  "options": [
+    "Devoted to a task or purpose",
+    "Using imagination to create new things",
+    "Allowing light to pass through clearly",
+    "To suffer or die from lack of food"
+  ],
+  "answerOption": "A",
+  "answerText": "Devoted to a task or purpose",
+  "difficulty": "easy",
+  "sourceFile": "0620.json"
+}

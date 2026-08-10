@@ -1,0 +1,15 @@
+{
+  "id": 2030,
+  "word": "Jejune",
+  "question": "Jejune",
+  "options": [
+    "Naive and simplistic; lacking nourishment",
+    "Relating to air flow around objects",
+    "A form of Christian church governance",
+    "Belief in reason as basis of truth"
+  ],
+  "answerOption": "A",
+  "answerText": "Naive and simplistic; lacking nourishment",
+  "difficulty": "hard",
+  "sourceFile": "2030.json"
+}

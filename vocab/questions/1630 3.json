@@ -1,0 +1,15 @@
+{
+  "id": 1630,
+  "word": "Detailed",
+  "question": "Detailed",
+  "options": [
+    "Done with excessive speed",
+    "Containing many details or giving details",
+    "A formal statement made under oath",
+    "The ability to understand another's feelings"
+  ],
+  "answerOption": "B",
+  "answerText": "Containing many details or giving details",
+  "difficulty": "medium",
+  "sourceFile": "1630.json"
+}

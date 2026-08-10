@@ -1,0 +1,15 @@
+{
+  "id": 2698,
+  "word": "Laceration",
+  "question": "Laceration",
+  "options": [
+    "A person who tells stories in a skillful way",
+    "In a state of quietness; inactive",
+    "A deep cut or tear in the skin",
+    "A lengthy discourse on a topic"
+  ],
+  "answerOption": "C",
+  "answerText": "A deep cut or tear in the skin",
+  "difficulty": "hard",
+  "sourceFile": "2698.json"
+}

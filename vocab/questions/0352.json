@@ -1,0 +1,15 @@
+{
+  "id": 352,
+  "word": "Deny",
+  "question": "Deny",
+  "options": [
+    "Easily perceived or understood",
+    "To move something quickly back and forth",
+    "To apply color to a surface with a brush",
+    "To state that something is not true"
+  ],
+  "answerOption": "D",
+  "answerText": "To state that something is not true",
+  "difficulty": "easy",
+  "sourceFile": "0352.json"
+}

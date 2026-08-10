@@ -1,0 +1,15 @@
+{
+  "id": 1168,
+  "word": "Enigma",
+  "question": "Enigma",
+  "options": [
+    "Of the same kind; alike throughout",
+    "To rely on someone or something",
+    "A person or thing that is mysterious",
+    "To take away or modify the nature"
+  ],
+  "answerOption": "C",
+  "answerText": "A person or thing that is mysterious",
+  "difficulty": "medium",
+  "sourceFile": "1168.json"
+}

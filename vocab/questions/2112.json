@@ -1,0 +1,15 @@
+{
+  "id": 2112,
+  "word": "Dilettante",
+  "question": "Dilettante",
+  "options": [
+    "A person with a casual interest in an art",
+    "The air envelope of earth",
+    "In equal measure",
+    "The action of expressing an idea"
+  ],
+  "answerOption": "A",
+  "answerText": "A person with a casual interest in an art",
+  "difficulty": "hard",
+  "sourceFile": "2112.json"
+}

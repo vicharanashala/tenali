@@ -1,0 +1,15 @@
+{
+  "id": 53,
+  "word": "Near",
+  "question": "Near",
+  "options": [
+    "Not open; shut or fastened",
+    "Needing much effort or skill to accomplish",
+    "Very impressive; magnificent",
+    "Not far away in distance"
+  ],
+  "answerOption": "D",
+  "answerText": "Not far away in distance",
+  "difficulty": "easy",
+  "sourceFile": "0053.json"
+}

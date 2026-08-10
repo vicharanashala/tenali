@@ -1,0 +1,15 @@
+{
+  "id": 1083,
+  "word": "Mediocre",
+  "question": "Mediocre",
+  "options": [
+    "To subtract an amount from a total",
+    "Of only moderate quality; not very good",
+    "Having an untidy or disheveled appearance",
+    "To remove sulfur from something"
+  ],
+  "answerOption": "B",
+  "answerText": "Of only moderate quality; not very good",
+  "difficulty": "medium",
+  "sourceFile": "1083.json"
+}

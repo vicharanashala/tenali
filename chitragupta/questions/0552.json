@@ -1,0 +1,14 @@
+{
+  "id": 552,
+  "question": "What is the chemical symbol for mercury?",
+  "options": [
+    "Me",
+    "Mg",
+    "Hy",
+    "Hg"
+  ],
+  "answerOption": "D",
+  "answerText": "Hg",
+  "genre": "mixed",
+  "sourceFile": "0552.json"
+}

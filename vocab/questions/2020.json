@@ -1,0 +1,15 @@
+{
+  "id": 2020,
+  "word": "Xenophobia",
+  "question": "Xenophobia",
+  "options": [
+    "Using or expressed in more words than needed",
+    "Inner sanctum of Greek temple",
+    "Dislike of people from other countries",
+    "Treating serious issues with inappropriate humor"
+  ],
+  "answerOption": "C",
+  "answerText": "Dislike of people from other countries",
+  "difficulty": "hard",
+  "sourceFile": "2020.json"
+}

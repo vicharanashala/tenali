@@ -1,0 +1,15 @@
+{
+  "id": 583,
+  "word": "Determined",
+  "question": "Determined",
+  "options": [
+    "To try to find something by looking carefully",
+    "Refusing to change one's mind",
+    "Having made a firm decision about something",
+    "To want something to happen and think it possible"
+  ],
+  "answerOption": "C",
+  "answerText": "Having made a firm decision about something",
+  "difficulty": "easy",
+  "sourceFile": "0583.json"
+}

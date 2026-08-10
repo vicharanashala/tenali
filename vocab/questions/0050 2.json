@@ -1,0 +1,15 @@
+{
+  "id": 50,
+  "word": "Obsequious",
+  "question": "Obsequious",
+  "options": [
+    "Excessively obedient or attentive to please",
+    "To use ambiguous language to conceal the truth",
+    "Carried out with minimum effort or care",
+    "Indicating a good chance of success; favorable"
+  ],
+  "answerOption": "A",
+  "answerText": "Excessively obedient or attentive to please",
+  "difficulty": "extra-hard",
+  "sourceFile": "0050.json"
+}

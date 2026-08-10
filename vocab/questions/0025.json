@@ -1,0 +1,15 @@
+{
+  "id": 25,
+  "word": "Poor",
+  "question": "Poor",
+  "options": [
+    "To dry out and shrivel up",
+    "To begin to grow; to produce shoots",
+    "Full of energy and enthusiasm",
+    "Lacking sufficient money to live comfortably"
+  ],
+  "answerOption": "D",
+  "answerText": "Lacking sufficient money to live comfortably",
+  "difficulty": "easy",
+  "sourceFile": "0025.json"
+}

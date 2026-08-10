@@ -1,0 +1,15 @@
+{
+  "id": 2764,
+  "word": "Desiderium",
+  "question": "Desiderium",
+  "options": [
+    "Of abyss tides",
+    "A female servant or attendant",
+    "The action of cleansing",
+    "An ardent longing for something lost"
+  ],
+  "answerOption": "D",
+  "answerText": "An ardent longing for something lost",
+  "difficulty": "extra-hard",
+  "sourceFile": "2764.json"
+}

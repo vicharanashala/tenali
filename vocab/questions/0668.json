@@ -1,0 +1,15 @@
+{
+  "id": 668,
+  "word": "Spacious",
+  "question": "Spacious",
+  "options": [
+    "An act of saying goodbye",
+    "Having ample space; roomy",
+    "A series of images during sleep",
+    "To gather a crop from the fields"
+  ],
+  "answerOption": "B",
+  "answerText": "Having ample space; roomy",
+  "difficulty": "easy",
+  "sourceFile": "0668.json"
+}

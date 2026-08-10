@@ -1,0 +1,15 @@
+{
+  "id": 617,
+  "word": "Enthusiastic",
+  "question": "Enthusiastic",
+  "options": [
+    "Sending out light; shining brightly",
+    "To believe in the reliability of someone",
+    "Unusual or surprising; hard to explain",
+    "Having intense enjoyment or interest"
+  ],
+  "answerOption": "D",
+  "answerText": "Having intense enjoyment or interest",
+  "difficulty": "easy",
+  "sourceFile": "0617.json"
+}

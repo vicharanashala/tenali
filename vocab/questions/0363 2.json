@@ -1,0 +1,15 @@
+{
+  "id": 363,
+  "word": "Display",
+  "question": "Display",
+  "options": [
+    "To write or name the letters of a word",
+    "To fasten or join one thing to another",
+    "To show something for others to see",
+    "To examine and record the features of something"
+  ],
+  "answerOption": "C",
+  "answerText": "To show something for others to see",
+  "difficulty": "easy",
+  "sourceFile": "0363.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 460,
+  "word": "Attempt",
+  "question": "Attempt",
+  "options": [
+    "To try to achieve something",
+    "An act of saying goodbye",
+    "Not occupied or in use",
+    "To tell someone you will definitely do something"
+  ],
+  "answerOption": "A",
+  "answerText": "To try to achieve something",
+  "difficulty": "easy",
+  "sourceFile": "0460.json"
+}

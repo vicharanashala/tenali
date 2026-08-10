@@ -1,0 +1,15 @@
+{
+  "id": 2287,
+  "word": "AERY",
+  "question": "AERY",
+  "options": [
+    "An eagle's nest or high place",
+    "In a manner that gives advantage",
+    "To place close together for contrasting effect",
+    "A genus of water beetles"
+  ],
+  "answerOption": "A",
+  "answerText": "An eagle's nest or high place",
+  "difficulty": "hard",
+  "sourceFile": "2287.json"
+}

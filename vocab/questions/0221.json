@@ -1,0 +1,15 @@
+{
+  "id": 221,
+  "word": "Endanger",
+  "question": "Endanger",
+  "options": [
+    "To put someone at risk or in danger",
+    "Lacking in quantity or quality",
+    "Inspiring great fear or worry",
+    "Thick and full of foliage"
+  ],
+  "answerOption": "A",
+  "answerText": "To put someone at risk or in danger",
+  "difficulty": "easy",
+  "sourceFile": "0221.json"
+}

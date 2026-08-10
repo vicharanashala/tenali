@@ -1,0 +1,14 @@
+{
+  "id": 557,
+  "question": "What is the SI unit of surface tension?",
+  "options": [
+    "N/m",
+    "J/m² only",
+    "Pa",
+    "W/m"
+  ],
+  "answerOption": "A",
+  "answerText": "N/m",
+  "genre": "mixed",
+  "sourceFile": "0557.json"
+}

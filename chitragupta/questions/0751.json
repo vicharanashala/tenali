@@ -1,0 +1,14 @@
+{
+  "id": 751,
+  "question": "What is the SI unit of electric resistance?",
+  "options": [
+    "ampere",
+    "ohm",
+    "volt",
+    "watt"
+  ],
+  "answerOption": "B",
+  "answerText": "ohm",
+  "genre": "mixed",
+  "sourceFile": "0751.json"
+}

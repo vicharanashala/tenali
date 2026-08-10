@@ -1,0 +1,15 @@
+{
+  "id": 3067,
+  "word": "Desiderium",
+  "question": "Desiderium",
+  "options": [
+    "Opponent of ablation doctrine",
+    "Extremely wretched or miserable",
+    "An ardent longing for something lost",
+    "With abyss chest"
+  ],
+  "answerOption": "C",
+  "answerText": "An ardent longing for something lost",
+  "difficulty": "extra-hard",
+  "sourceFile": "3067.json"
+}

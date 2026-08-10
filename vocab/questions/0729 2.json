@@ -1,0 +1,15 @@
+{
+  "id": 729,
+  "word": "Triangular",
+  "question": "Triangular",
+  "options": [
+    "To call out in a very loud voice",
+    "To have power over something's behavior",
+    "Shaped like a triangle",
+    "To say sorry for doing something wrong"
+  ],
+  "answerOption": "C",
+  "answerText": "Shaped like a triangle",
+  "difficulty": "easy",
+  "sourceFile": "0729.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1334,
+  "word": "Desultory",
+  "question": "Desultory",
+  "options": [
+    "An inescapable agent of someone's downfall",
+    "Using or expressed in more words than needed",
+    "Lacking a plan or purpose; random",
+    "Continually changing in pattern"
+  ],
+  "answerOption": "C",
+  "answerText": "Lacking a plan or purpose; random",
+  "difficulty": "hard",
+  "sourceFile": "1334.json"
+}

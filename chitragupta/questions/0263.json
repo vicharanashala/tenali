@@ -1,0 +1,14 @@
+{
+  "id": 263,
+  "question": "Which Indian monument is known as the symbol of love?",
+  "options": [
+    "India Gate",
+    "Taj Mahal",
+    "Red Fort",
+    "Hawa Mahal"
+  ],
+  "answerOption": "B",
+  "answerText": "Taj Mahal",
+  "genre": "india-gk",
+  "sourceFile": "0263.json"
+}

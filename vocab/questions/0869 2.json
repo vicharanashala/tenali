@@ -1,0 +1,15 @@
+{
+  "id": 869,
+  "word": "Obsolete",
+  "question": "Obsolete",
+  "options": [
+    "Showing no activity or development",
+    "No longer produced or used; out of date",
+    "Ostentatiously rich and luxurious",
+    "A formal expression of disapproval"
+  ],
+  "answerOption": "B",
+  "answerText": "No longer produced or used; out of date",
+  "difficulty": "medium",
+  "sourceFile": "0869.json"
+}

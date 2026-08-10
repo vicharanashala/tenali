@@ -1,0 +1,15 @@
+{
+  "id": 701,
+  "word": "Final",
+  "question": "Final",
+  "options": [
+    "Lacking the power to perform demanding tasks",
+    "To actively resist or be against something",
+    "Having intense enjoyment or interest",
+    "Coming at the end; last"
+  ],
+  "answerOption": "D",
+  "answerText": "Coming at the end; last",
+  "difficulty": "easy",
+  "sourceFile": "0701.json"
+}

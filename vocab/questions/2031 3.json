@@ -1,0 +1,15 @@
+{
+  "id": 2031,
+  "word": "Travesty",
+  "question": "Travesty",
+  "options": [
+    "An award or privilege given as honor",
+    "A fence made of pointed wooden stakes",
+    "A false or distorted representation",
+    "Brain injury from violent shaking"
+  ],
+  "answerOption": "C",
+  "answerText": "A false or distorted representation",
+  "difficulty": "hard",
+  "sourceFile": "2031.json"
+}

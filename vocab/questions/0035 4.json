@@ -1,0 +1,15 @@
+{
+  "id": 35,
+  "word": "Tired",
+  "question": "Tired",
+  "options": [
+    "Not able to be seen through",
+    "In need of sleep or rest",
+    "To cause someone to feel sudden wonder",
+    "To buy something"
+  ],
+  "answerOption": "B",
+  "answerText": "In need of sleep or rest",
+  "difficulty": "easy",
+  "sourceFile": "0035.json"
+}

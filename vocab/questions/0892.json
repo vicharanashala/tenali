@@ -1,0 +1,15 @@
+{
+  "id": 892,
+  "word": "Organized",
+  "question": "Organized",
+  "options": [
+    "To manage or guide the operations of something",
+    "To give authorization for something",
+    "Plain or obvious; clearly seen",
+    "Arranged or planned in a methodical way"
+  ],
+  "answerOption": "D",
+  "answerText": "Arranged or planned in a methodical way",
+  "difficulty": "easy",
+  "sourceFile": "0892.json"
+}

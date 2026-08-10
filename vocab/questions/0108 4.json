@@ -1,0 +1,15 @@
+{
+  "id": 108,
+  "word": "Rare",
+  "question": "Rare",
+  "options": [
+    "Not found in large numbers; uncommon",
+    "To give something in return for good behavior",
+    "Completely different in every way",
+    "To rot and break down over time"
+  ],
+  "answerOption": "A",
+  "answerText": "Not found in large numbers; uncommon",
+  "difficulty": "easy",
+  "sourceFile": "0108.json"
+}

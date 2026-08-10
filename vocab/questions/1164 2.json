@@ -1,0 +1,15 @@
+{
+  "id": 1164,
+  "word": "Perfunctory",
+  "question": "Perfunctory",
+  "options": [
+    "An accusation in response to another",
+    "The pursuit of pleasure as the highest good",
+    "Lacking a plan or purpose; random",
+    "Carried out with minimum effort"
+  ],
+  "answerOption": "D",
+  "answerText": "Carried out with minimum effort",
+  "difficulty": "hard",
+  "sourceFile": "1164.json"
+}

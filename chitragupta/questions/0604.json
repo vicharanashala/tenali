@@ -1,0 +1,14 @@
+{
+  "id": 604,
+  "question": "What is the SI unit of conductivity?",
+  "options": [
+    "siemens per metre",
+    "ohm·metre",
+    "ampere per metre",
+    "volt per metre"
+  ],
+  "answerOption": "A",
+  "answerText": "siemens per metre",
+  "genre": "mixed",
+  "sourceFile": "0604.json"
+}

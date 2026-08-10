@@ -1,0 +1,15 @@
+{
+  "id": 37,
+  "word": "Safe",
+  "question": "Safe",
+  "options": [
+    "Lacking energy or enthusiasm",
+    "Protected from danger or risk",
+    "Elaborately or highly decorated",
+    "To take delight or pleasure in something"
+  ],
+  "answerOption": "B",
+  "answerText": "Protected from danger or risk",
+  "difficulty": "easy",
+  "sourceFile": "0037.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 480,
+  "word": "Specify",
+  "question": "Specify",
+  "options": [
+    "To state something in an exact way",
+    "An act of saying goodbye",
+    "Not occupied or in use",
+    "To tell someone you will definitely do something"
+  ],
+  "answerOption": "A",
+  "answerText": "To state something in an exact way",
+  "difficulty": "easy",
+  "sourceFile": "0480.json"
+}

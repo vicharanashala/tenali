@@ -1,0 +1,15 @@
+{
+  "id": 922,
+  "word": "Insincere",
+  "question": "Insincere",
+  "options": [
+    "Not occupied or in use",
+    "To share information with others",
+    "To study something thoroughly",
+    "Not truthful or genuine"
+  ],
+  "answerOption": "D",
+  "answerText": "Not truthful or genuine",
+  "difficulty": "easy",
+  "sourceFile": "0922.json"
+}

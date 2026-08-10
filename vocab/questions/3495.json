@@ -1,0 +1,15 @@
+{
+  "id": 3495,
+  "word": "Abyssophagus",
+  "question": "Abyssophagus",
+  "options": [
+    "A joke so poorly told that one laughs anyway",
+    "A type of dark slate rock",
+    "Creature of abyss feeder",
+    "Confused state or perplexity"
+  ],
+  "answerOption": "C",
+  "answerText": "Creature of abyss feeder",
+  "difficulty": "extra-hard",
+  "sourceFile": "3495.json"
+}

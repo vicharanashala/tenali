@@ -1,0 +1,15 @@
+{
+  "id": 2168,
+  "word": "Adversity",
+  "question": "Adversity",
+  "options": [
+    "A difficult or unfortunate situation",
+    "A substance that adulterates",
+    "A short public announcement",
+    "A state of physical or mental sluggishness"
+  ],
+  "answerOption": "A",
+  "answerText": "A difficult or unfortunate situation",
+  "difficulty": "hard",
+  "sourceFile": "2168.json"
+}

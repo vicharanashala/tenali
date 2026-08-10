@@ -1,0 +1,15 @@
+{
+  "id": 231,
+  "word": "Despise",
+  "question": "Despise",
+  "options": [
+    "Known for sure; established beyond doubt",
+    "Happening with great speed",
+    "To extend to full length",
+    "To feel contempt or deep dislike for"
+  ],
+  "answerOption": "D",
+  "answerText": "To feel contempt or deep dislike for",
+  "difficulty": "easy",
+  "sourceFile": "0231.json"
+}

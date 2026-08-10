@@ -1,0 +1,15 @@
+{
+  "id": 2207,
+  "word": "Trepidation",
+  "question": "Trepidation",
+  "options": [
+    "A city built in air",
+    "A feeling of fear about something",
+    "A revival or recurrence of something",
+    "The act of placing things side by side"
+  ],
+  "answerOption": "B",
+  "answerText": "A feeling of fear about something",
+  "difficulty": "hard",
+  "sourceFile": "2207.json"
+}

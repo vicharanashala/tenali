@@ -1,0 +1,15 @@
+{
+  "id": 2786,
+  "word": "Promotion",
+  "question": "Promotion",
+  "options": [
+    "Belief that all events are predetermined",
+    "The action of spreading widely",
+    "The action of presenting or bestowing",
+    "The action of moving up"
+  ],
+  "answerOption": "D",
+  "answerText": "The action of moving up",
+  "difficulty": "hard",
+  "sourceFile": "2786.json"
+}

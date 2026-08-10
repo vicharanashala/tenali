@@ -1,0 +1,15 @@
+{
+  "id": 2327,
+  "word": "Aeroceracausis",
+  "question": "Aeroceracausis",
+  "options": [
+    "A substance that adsorbs",
+    "The fruiting body of fungal spore",
+    "Damage from atmospheric electricity",
+    "Something that blocks or obstructs"
+  ],
+  "answerOption": "C",
+  "answerText": "Damage from atmospheric electricity",
+  "difficulty": "hard",
+  "sourceFile": "2327.json"
+}

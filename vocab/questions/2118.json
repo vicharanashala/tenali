@@ -1,0 +1,15 @@
+{
+  "id": 2118,
+  "word": "Jaundiced",
+  "question": "Jaundiced",
+  "options": [
+    "The use of many words where fewer would do",
+    "A genus of weasel-like animals",
+    "The quality of being substantial",
+    "Having a skeptical or cynical outlook"
+  ],
+  "answerOption": "D",
+  "answerText": "Having a skeptical or cynical outlook",
+  "difficulty": "hard",
+  "sourceFile": "2118.json"
+}

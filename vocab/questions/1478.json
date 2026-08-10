@@ -1,0 +1,15 @@
+{
+  "id": 1478,
+  "word": "Depict",
+  "question": "Depict",
+  "options": [
+    "About to happen very soon",
+    "The quality of being loyal",
+    "Forced someone to act against their will",
+    "To show or represent in a picture"
+  ],
+  "answerOption": "D",
+  "answerText": "To show or represent in a picture",
+  "difficulty": "medium",
+  "sourceFile": "1478.json"
+}

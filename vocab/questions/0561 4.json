@@ -1,0 +1,15 @@
+{
+  "id": 561,
+  "word": "Exceed",
+  "question": "Exceed",
+  "options": [
+    "To allow something you disagree with",
+    "Lasting for a limited time only",
+    "To cause someone to feel sudden wonder",
+    "To go beyond the limit of something"
+  ],
+  "answerOption": "D",
+  "answerText": "To go beyond the limit of something",
+  "difficulty": "easy",
+  "sourceFile": "0561.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1284,
+  "word": "Moratorium",
+  "question": "Moratorium",
+  "options": [
+    "Wicked or criminal in nature",
+    "Attractive or appealing in appearance",
+    "Intended to gain goodwill or reduce hostility",
+    "A temporary prohibition of an activity"
+  ],
+  "answerOption": "D",
+  "answerText": "A temporary prohibition of an activity",
+  "difficulty": "hard",
+  "sourceFile": "1284.json"
+}

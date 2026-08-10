@@ -1,0 +1,15 @@
+{
+  "id": 2136,
+  "word": "Aerodynamic",
+  "question": "Aerodynamic",
+  "options": [
+    "Iron meteorite from space",
+    "The right of patronage of church",
+    "One who gives advice",
+    "Relating to air flow around objects"
+  ],
+  "answerOption": "D",
+  "answerText": "Relating to air flow around objects",
+  "difficulty": "hard",
+  "sourceFile": "2136.json"
+}

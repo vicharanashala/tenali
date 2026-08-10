@@ -1,0 +1,15 @@
+{
+  "id": 498,
+  "word": "Navigate",
+  "question": "Navigate",
+  "options": [
+    "To find the way to a destination",
+    "Moving or capable of moving at high speed",
+    "To make someone afraid or anxious",
+    "To keep something in good condition"
+  ],
+  "answerOption": "A",
+  "answerText": "To find the way to a destination",
+  "difficulty": "easy",
+  "sourceFile": "0498.json"
+}

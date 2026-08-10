@@ -1,0 +1,15 @@
+{
+  "id": 330,
+  "word": "Declare",
+  "question": "Declare",
+  "options": [
+    "To regard with respect and warm approval",
+    "To say something in a serious way",
+    "To allow liquid to escape through a hole",
+    "Of small width in relation to length"
+  ],
+  "answerOption": "B",
+  "answerText": "To say something in a serious way",
+  "difficulty": "easy",
+  "sourceFile": "0330.json"
+}

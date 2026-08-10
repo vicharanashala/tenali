@@ -1,0 +1,15 @@
+{
+  "id": 2244,
+  "word": "Specious",
+  "question": "Specious",
+  "options": [
+    "Superficially plausible but actually wrong",
+    "Observation of air conditions",
+    "One who adulterates",
+    "Extremely poor; poverty-stricken"
+  ],
+  "answerOption": "A",
+  "answerText": "Superficially plausible but actually wrong",
+  "difficulty": "hard",
+  "sourceFile": "2244.json"
+}

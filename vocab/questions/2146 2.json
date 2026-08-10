@@ -1,0 +1,15 @@
+{
+  "id": 2146,
+  "word": "Aeroelastic",
+  "question": "Aeroelastic",
+  "options": [
+    "Tending to induce drowsiness or sleep",
+    "Extremely charming or appealing",
+    "Condition from air in blood",
+    "Relating to air-structure interaction"
+  ],
+  "answerOption": "D",
+  "answerText": "Relating to air-structure interaction",
+  "difficulty": "hard",
+  "sourceFile": "2146.json"
+}

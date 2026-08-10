@@ -1,0 +1,15 @@
+{
+  "id": 448,
+  "word": "Draw",
+  "question": "Draw",
+  "options": [
+    "To produce a picture using a pencil",
+    "To remove liquid from something",
+    "Given to unpredictable changes of mood",
+    "To give someone the means to do something"
+  ],
+  "answerOption": "A",
+  "answerText": "To produce a picture using a pencil",
+  "difficulty": "easy",
+  "sourceFile": "0448.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 677,
+  "word": "Intense",
+  "question": "Intense",
+  "options": [
+    "Before the usual or expected time",
+    "Of extreme force or strength",
+    "To assign responsibility for a fault",
+    "Belonging to the very distant past"
+  ],
+  "answerOption": "B",
+  "answerText": "Of extreme force or strength",
+  "difficulty": "easy",
+  "sourceFile": "0677.json"
+}

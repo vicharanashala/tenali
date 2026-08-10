@@ -1,0 +1,15 @@
+{
+  "id": 1045,
+  "word": "Galvanize",
+  "question": "Galvanize",
+  "options": [
+    "Having skill in dealing with others",
+    "To express passionate grief about something",
+    "To shock someone into taking action",
+    "To make someone feel annoyed or frustrated"
+  ],
+  "answerOption": "C",
+  "answerText": "To shock someone into taking action",
+  "difficulty": "medium",
+  "sourceFile": "1045.json"
+}

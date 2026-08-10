@@ -1,0 +1,14 @@
+{
+  "id": 134,
+  "question": "Which Indian leader is known as the Iron Man of India?",
+  "options": [
+    "Bhagat Singh",
+    "Sardar Vallabhbhai Patel",
+    "Lal Bahadur Shastri",
+    "B. R. Ambedkar"
+  ],
+  "answerOption": "B",
+  "answerText": "Sardar Vallabhbhai Patel",
+  "genre": "india-gk",
+  "sourceFile": "0134.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 549,
+  "word": "Negotiate",
+  "question": "Negotiate",
+  "options": [
+    "The outer surface of something",
+    "To try to reach an agreement by discussion",
+    "Notably large in size or amount",
+    "Required by law or rules"
+  ],
+  "answerOption": "B",
+  "answerText": "To try to reach an agreement by discussion",
+  "difficulty": "easy",
+  "sourceFile": "0549.json"
+}

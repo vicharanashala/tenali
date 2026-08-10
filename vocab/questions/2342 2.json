@@ -1,0 +1,15 @@
+{
+  "id": 2342,
+  "word": "Hygge",
+  "question": "Hygge",
+  "options": [
+    "The power to perform something",
+    "Plural of abetment",
+    "A quality of coziness creating contentment",
+    "A widespread long-lived windstorm"
+  ],
+  "answerOption": "C",
+  "answerText": "A quality of coziness creating contentment",
+  "difficulty": "extra-hard",
+  "sourceFile": "2342.json"
+}

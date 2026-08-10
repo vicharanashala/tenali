@@ -1,0 +1,15 @@
+{
+  "id": 5,
+  "word": "Loud",
+  "question": "Loud",
+  "options": [
+    "Notably large in size or amount",
+    "To examine similarities and differences",
+    "Producing much noise or sound",
+    "To shine with a bright shimmering light"
+  ],
+  "answerOption": "C",
+  "answerText": "Producing much noise or sound",
+  "difficulty": "easy",
+  "sourceFile": "0005.json"
+}

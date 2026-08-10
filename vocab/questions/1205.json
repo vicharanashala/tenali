@@ -1,0 +1,15 @@
+{
+  "id": 1205,
+  "word": "Utilitarian",
+  "question": "Utilitarian",
+  "options": [
+    "Able to be detached or separated",
+    "Designed to be useful rather than attractive",
+    "The action of removing from office",
+    "To hold and use a weapon or tool"
+  ],
+  "answerOption": "B",
+  "answerText": "Designed to be useful rather than attractive",
+  "difficulty": "medium",
+  "sourceFile": "1205.json"
+}

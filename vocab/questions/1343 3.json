@@ -1,0 +1,15 @@
+{
+  "id": 1343,
+  "word": "Denarius",
+  "question": "Denarius",
+  "options": [
+    "A Roman silver coin",
+    "To mark or point out specifically",
+    "Affected by a lack of energy",
+    "Making marks that cannot be removed"
+  ],
+  "answerOption": "A",
+  "answerText": "A Roman silver coin",
+  "difficulty": "medium",
+  "sourceFile": "1343.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 828,
+  "question": "Which part of the body contains the scapula and clavicle?",
+  "options": [
+    "Shoulder girdle",
+    "Pelvis",
+    "Rib cage",
+    "Forearm"
+  ],
+  "answerOption": "A",
+  "answerText": "Shoulder girdle",
+  "genre": "science",
+  "sourceFile": "0828.json"
+}

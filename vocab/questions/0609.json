@@ -1,0 +1,15 @@
+{
+  "id": 609,
+  "word": "Brilliant",
+  "question": "Brilliant",
+  "options": [
+    "Happening or done at once",
+    "Having a practical view of what is achievable",
+    "Exceptionally clever or talented",
+    "To examine and record the features of something"
+  ],
+  "answerOption": "C",
+  "answerText": "Exceptionally clever or talented",
+  "difficulty": "easy",
+  "sourceFile": "0609.json"
+}

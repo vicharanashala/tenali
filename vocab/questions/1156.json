@@ -1,0 +1,15 @@
+{
+  "id": 1156,
+  "word": "Paradox",
+  "question": "Paradox",
+  "options": [
+    "The action of removing from throne",
+    "A seemingly contradictory statement",
+    "The reduction of population",
+    "Not domesticated or cultivated"
+  ],
+  "answerOption": "B",
+  "answerText": "A seemingly contradictory statement",
+  "difficulty": "medium",
+  "sourceFile": "1156.json"
+}

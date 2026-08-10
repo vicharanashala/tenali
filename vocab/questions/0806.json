@@ -1,0 +1,15 @@
+{
+  "id": 806,
+  "word": "Noble",
+  "question": "Noble",
+  "options": [
+    "Not occupied or in use",
+    "To allow liquid to escape through a hole",
+    "Having high moral qualities",
+    "Lasting for a limited time only"
+  ],
+  "answerOption": "C",
+  "answerText": "Having high moral qualities",
+  "difficulty": "easy",
+  "sourceFile": "0806.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 597,
+  "word": "Outstanding",
+  "question": "Outstanding",
+  "options": [
+    "To continue in spite of difficulty",
+    "Exceptionally good; remarkable",
+    "Feeling optimistic about a future event",
+    "Making sure to avoid danger or mistakes"
+  ],
+  "answerOption": "B",
+  "answerText": "Exceptionally good; remarkable",
+  "difficulty": "easy",
+  "sourceFile": "0597.json"
+}

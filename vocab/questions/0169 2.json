@@ -1,0 +1,15 @@
+{
+  "id": 169,
+  "word": "Pull",
+  "question": "Pull",
+  "options": [
+    "To make something less strong",
+    "To cut into thin flat pieces",
+    "Having the skill to do something well",
+    "To exert force to move something closer"
+  ],
+  "answerOption": "D",
+  "answerText": "To exert force to move something closer",
+  "difficulty": "easy",
+  "sourceFile": "0169.json"
+}

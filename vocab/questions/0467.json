@@ -1,0 +1,15 @@
+{
+  "id": 467,
+  "word": "Illustrate",
+  "question": "Illustrate",
+  "options": [
+    "To make something happen later than planned",
+    "To explain something by using examples",
+    "To set free from confinement",
+    "To present something for acceptance"
+  ],
+  "answerOption": "B",
+  "answerText": "To explain something by using examples",
+  "difficulty": "easy",
+  "sourceFile": "0467.json"
+}

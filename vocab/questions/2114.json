@@ -1,0 +1,15 @@
+{
+  "id": 2114,
+  "word": "Filigree",
+  "question": "Filigree",
+  "options": [
+    "Ornamental work of fine twisted wire",
+    "Dealing with things in practical way",
+    "The action of aeroporting",
+    "A club for aviation enthusiasts"
+  ],
+  "answerOption": "A",
+  "answerText": "Ornamental work of fine twisted wire",
+  "difficulty": "hard",
+  "sourceFile": "2114.json"
+}

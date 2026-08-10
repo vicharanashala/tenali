@@ -1,0 +1,15 @@
+{
+  "id": 114,
+  "word": "Humble",
+  "question": "Humble",
+  "options": [
+    "Offensively impolite or bad-mannered",
+    "To break the connection between things",
+    "Having a modest opinion of one's importance",
+    "To present something for acceptance"
+  ],
+  "answerOption": "C",
+  "answerText": "Having a modest opinion of one's importance",
+  "difficulty": "easy",
+  "sourceFile": "0114.json"
+}

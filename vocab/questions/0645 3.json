@@ -1,0 +1,15 @@
+{
+  "id": 645,
+  "word": "Knowledgeable",
+  "question": "Knowledgeable",
+  "options": [
+    "Average in amount or intensity",
+    "Well informed about many subjects",
+    "Truly what something is said to be",
+    "To give out a steady light without flame"
+  ],
+  "answerOption": "B",
+  "answerText": "Well informed about many subjects",
+  "difficulty": "easy",
+  "sourceFile": "0645.json"
+}

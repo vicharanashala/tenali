@@ -1,0 +1,15 @@
+{
+  "id": 209,
+  "word": "Decrease",
+  "question": "Decrease",
+  "options": [
+    "To become smaller or fewer in amount",
+    "Elegant and cultured in manner",
+    "Occurring continuously over time",
+    "Having high principles and expectations"
+  ],
+  "answerOption": "A",
+  "answerText": "To become smaller or fewer in amount",
+  "difficulty": "easy",
+  "sourceFile": "0209.json"
+}

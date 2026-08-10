@@ -1,0 +1,15 @@
+{
+  "id": 741,
+  "word": "Electric",
+  "question": "Electric",
+  "options": [
+    "Relating to or powered by electricity",
+    "To make sounds showing amusement",
+    "To take and use something temporarily",
+    "Hot and humid weather or manner"
+  ],
+  "answerOption": "A",
+  "answerText": "Relating to or powered by electricity",
+  "difficulty": "easy",
+  "sourceFile": "0741.json"
+}

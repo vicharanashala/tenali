@@ -1,0 +1,15 @@
+{
+  "id": 2610,
+  "word": "Serenity",
+  "question": "Serenity",
+  "options": [
+    "The action of aerifying",
+    "The state of being peaceful",
+    "The quality of being sure",
+    "To act in a very submissive way"
+  ],
+  "answerOption": "B",
+  "answerText": "The state of being peaceful",
+  "difficulty": "hard",
+  "sourceFile": "2610.json"
+}

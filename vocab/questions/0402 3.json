@@ -1,0 +1,15 @@
+{
+  "id": 402,
+  "word": "Preserve",
+  "question": "Preserve",
+  "options": [
+    "To accept something as true without proof",
+    "To take the place of something",
+    "Not likely to bring success",
+    "To maintain something in its original state"
+  ],
+  "answerOption": "D",
+  "answerText": "To maintain something in its original state",
+  "difficulty": "easy",
+  "sourceFile": "0402.json"
+}

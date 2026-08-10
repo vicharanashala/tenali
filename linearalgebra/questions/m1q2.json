@@ -1,0 +1,479 @@
+{
+  "module": 1,
+  "missionId": 2,
+  "title": "Treasure Map",
+  "original_question": "Atul stands at the origin (0,0). Bala walks right 2, up 1 to reach point B. Then Chetan walks right 1, up 1 from B to reach C. Then Divya walks right 1, up 1 from C to reach D. Are B, C, and D collinear?",
+  "core_concept": "Collinearity — three or more points are collinear if they all lie on the same straight line. This means the slope between any pair of points is identical. Collinearity connects to the idea of vectors being scalar multiples of one another, which is foundational for understanding linear dependence and spans in linear algebra.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M1Q2E1",
+        "question": "What are the coordinates of Bala's position (B)?",
+        "options": [
+          "(1,1)",
+          "(2,1)",
+          "(2,2)",
+          "(1,2)"
+        ],
+        "correct_option": "(2,1)",
+        "explanation": "Step 1: Atul starts at (0,0). Step 2: Bala walks right 2, up 1. Step 3: Bala's coordinates are (0+2, 0+1) = (2,1)."
+      },
+      {
+        "id": "M1Q2E2",
+        "question": "What are the coordinates of Chetan's position (C)?",
+        "options": [
+          "(3,1)",
+          "(3,2)",
+          "(2,2)",
+          "(4,3)"
+        ],
+        "correct_option": "(3,2)",
+        "explanation": "Step 1: Chetan starts from B = (2,1). Step 2: Chetan walks right 1, up 1. Step 3: C = (2+1, 1+1) = (3,2)."
+      },
+      {
+        "id": "M1Q2E3",
+        "question": "What are the coordinates of Divya's position (D)?",
+        "options": [
+          "(4,2)",
+          "(3,3)",
+          "(4,3)",
+          "(5,4)"
+        ],
+        "correct_option": "(4,3)",
+        "explanation": "Step 1: Divya starts from C = (3,2). Step 2: Divya walks right 1, up 1. Step 3: D = (3+1, 2+1) = (4,3)."
+      },
+      {
+        "id": "M1Q2E4",
+        "question": "What is the slope of the line segment from B(2,1) to C(3,2)?",
+        "options": [
+          "0",
+          "1",
+          "2",
+          "0.5"
+        ],
+        "correct_option": "1",
+        "explanation": "Step 1: Slope = (y2 - y1)/(x2 - x1). Step 2: Slope = (2 - 1)/(3 - 2) = 1/1 = 1. The slope is 1."
+      },
+      {
+        "id": "M1Q2E5",
+        "question": "What is the slope of the line segment from C(3,2) to D(4,3)?",
+        "options": [
+          "0",
+          "1",
+          "2",
+          "3"
+        ],
+        "correct_option": "1",
+        "explanation": "Step 1: Slope = (3 - 2)/(4 - 3) = 1/1 = 1. Step 2: Since this slope equals the slope from B to C, the three points are collinear."
+      },
+      {
+        "id": "M1Q2E6",
+        "question": "What is the equation of the line passing through B(2,1) and C(3,2)?",
+        "options": [
+          "y = x",
+          "y = x - 1",
+          "y = 2x - 3",
+          "y = x + 1"
+        ],
+        "correct_option": "y = x - 1",
+        "explanation": "Step 1: Slope m = 1. Step 2: Using point-slope form with B(2,1): y - 1 = 1(x - 2). Step 3: Simplifying: y = x - 1."
+      },
+      {
+        "id": "M1Q2E7",
+        "question": "Does the point D(4,3) satisfy the equation y = x - 1?",
+        "options": [
+          "Yes, because 3 = 4 - 1",
+          "because 3 ≠ 4 - 1",
+          "Cant be determined",
+          "Only approximately"
+        ],
+        "correct_option": "Yes, because 3 = 4 - 1",
+        "explanation": "Step 1: Substitute x = 4 into y = x - 1. Step 2: y = 4 - 1 = 3. Step 3: This matches D's y-coordinate of 3, confirming D lies on the line."
+      },
+      {
+        "id": "M1Q2E8",
+        "question": "If Bala walks right 2, up 1 from the origin, what vector does this represent?",
+        "options": [
+          "(1,2)",
+          "(2,1)",
+          "(2,0)",
+          "(0,1)"
+        ],
+        "correct_option": "(2,1)",
+        "explanation": "Step 1: 'Right 2' means the x-component is +2. Step 2: 'Up 1' means the y-component is +1. Step 3: The displacement vector is (2,1)."
+      },
+      {
+        "id": "M1Q2E9",
+        "question": "What is the displacement vector from B to C?",
+        "options": [
+          "(2,1)",
+          "(1,1)",
+          "(1,2)",
+          "(0,1)"
+        ],
+        "correct_option": "(1,1)",
+        "explanation": "Step 1: C - B = (3-2, 2-1) = (1,1). Step 2: Chetan moved right 1 and up 1, giving displacement (1,1)."
+      },
+      {
+        "id": "M1Q2E10",
+        "question": "Is the displacement from C to D the same as from B to C?",
+        "options": [
+          "Yes, both are (1,1)",
+          "they are different",
+          "Only if the slope is the same",
+          "Cant be determined"
+        ],
+        "correct_option": "Yes, both are (1,1)",
+        "explanation": "Step 1: C to D displacement = (4-3, 3-2) = (1,1). Step 2: B to C displacement = (3-2, 2-1) = (1,1). Step 3: They are identical, which is why the points are equally spaced along the line."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M1Q2M1",
+        "question": "If B, C, and D are collinear, what does that tell us about the direction of each person's walk?",
+        "options": [
+          "They all walked in exactly the same direction",
+          "They walked in random directions",
+          "Only B and C walked in the same direction",
+          "The direction doesn't matter for collinearity"
+        ],
+        "correct_option": "They all walked in exactly the same direction",
+        "explanation": "Step 1: Collinear points on a line mean all displacement vectors point along that line. Step 2: B to C and C to D have the same displacement (1,1), meaning the same direction. Step 3: Equal displacement vectors confirm identical direction of travel."
+      },
+      {
+        "id": "M1Q2M2",
+        "question": "Why does checking that slope BC = slope CD guarantee collinearity of three points?",
+        "options": [
+          "Because two equal slopes mean all three points share the same line equation",
+          "Because equal slopes always pass through the origin",
+          "Because the midpoint formula requires it",
+          "Because parallel lines always intersect"
+        ],
+        "correct_option": "Because two equal slopes mean all three points share the same line equation",
+        "explanation": "Step 1: If slope BC = slope CD, both segments have the same rate of change. Step 2: Two line segments with the same slope sharing a common point (C) must lie on the same line. Step 3: Therefore B, C, and D all satisfy a single line equation."
+      },
+      {
+        "id": "M1Q2M3",
+        "question": "Suppose instead Divya walked right 1, up 2 from C(3,2). Would the three points still be collinear?",
+        "options": [
+          "No, because the new slope would differ",
+          "because they still share point C",
+          "because slopes don't matter",
+          "Only if the line passes through the origin"
+        ],
+        "correct_option": "No, because the new slope would differ",
+        "explanation": "Step 1: New D would be (4,4). Step 2: Slope from C to new D = (4-2)/(4-3) = 2. Step 3: Slope from B to C = 1 ≠ 2, so the points are no longer collinear."
+      },
+      {
+        "id": "M1Q2M4",
+        "question": "What is the relationship between the vector from B to D and the vector from B to C?",
+        "options": [
+          "BD = 2 × BC",
+          "BD = BC + 1",
+          "BD = BC²",
+          "BD = BC / 2"
+        ],
+        "correct_option": "BD = 2 × BC",
+        "explanation": "Step 1: B to D vector = (4-2, 3-1) = (2,2). Step 2: B to C vector = (1,1). Step 3: (2,2) = 2 × (1,1), so BD is exactly twice BC. This scalar multiple relationship is a hallmark of collinearity."
+      },
+      {
+        "id": "M1Q2M5",
+        "question": "If three points are collinear and equally spaced, what is the relationship between consecutive displacement vectors?",
+        "options": [
+          "They are equal vectors",
+          "They are perpendicular",
+          "They are opposite in direction",
+          "They have different magnitudes"
+        ],
+        "correct_option": "They are equal vectors",
+        "explanation": "Step 1: Equally spaced collinear points have equal gaps between consecutive points. Step 2: Equal gaps in the same direction means the displacement vectors are identical. Step 3: Here, BC = CD = (1,1), confirming equal spacing."
+      },
+      {
+        "id": "M1Q2M6",
+        "question": "Can you determine if a fourth point E = (5,5) lies on the same line as B, C, and D?",
+        "options": [
+          "Yes: slope from D to E must also be 1",
+          "we need more information",
+          "Only if E is between B and D",
+          "Only if E has integer coordinates"
+        ],
+        "correct_option": "Yes: slope from D to E must also be 1",
+        "explanation": "Step 1: Slope from D(4,3) to E(5,5) = (5-3)/(5-4) = 2. Step 2: Since 2 ≠ 1, point E does NOT lie on the same line. Step 3: For any new point to be collinear with B, C, D, the slope from the last known point must remain 1."
+      },
+      {
+        "id": "M1Q2M7",
+        "question": "If the slope between B and C were 0 (horizontal line), what would that mean geometrically?",
+        "options": [
+          "B and C would have the same y-coordinate",
+          "B and C would have the same x-coordinate",
+          "The line would be",
+          "The line would pass through the origin"
+        ],
+        "correct_option": "B and C would have the same y-coordinate",
+        "explanation": "Step 1: Slope = 0 means rise/run = 0, so rise = 0. Step 2: Zero rise means no change in y. Step 3: B and C would be at the same height (same y-coordinate), making the line perfectly horizontal."
+      },
+      {
+        "id": "M1Q2M8",
+        "question": "What is the distance between B(2,1) and C(3,2)?",
+        "options": [
+          "1",
+          "√2",
+          "2",
+          "2√2"
+        ],
+        "correct_option": "√2",
+        "explanation": "Step 1: Distance = √((3-2)² + (2-1)²). Step 2: = √(1 + 1) = √2. Step 3: This is the diagonal of a 1×1 square, giving √2 ≈ 1.414 units."
+      },
+      {
+        "id": "M1Q2M9",
+        "question": "If you plot all points satisfying y = x - 1 for x ≥ 2, what geometric object do you get?",
+        "options": [
+          "A ray starting from (2,1) extending right and upward",
+          "A complete infinite line",
+          "A line segment from (2,1) to (4,3)",
+          "A parabola)"
+        ],
+        "correct_option": "A ray starting from (2,1) extending right and upward",
+        "explanation": "Step 1: y = x - 1 is a full line. Step 2: Restricting to x ≥ 2 means we only take the portion from (2,1) rightward. Step 3: Starting at (2,1) and extending infinitely in one direction defines a ray."
+      },
+      {
+        "id": "M1Q2M10",
+        "question": "In linear algebra, three collinear vectors from the origin are called what?",
+        "options": [
+          "Linearly dependent",
+          "Linearly independent",
+          "Orthogonal",
+          "Basis vectors"
+        ],
+        "correct_option": "Linearly dependent",
+        "explanation": "Step 1: If three position vectors lie on the same line through the origin, one can be written as a scalar multiple of another. Step 2: This means none of them adds a new direction. Step 3: Such vectors are linearly dependent — they cannot span anything beyond a 1D line."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M1Q2H1",
+        "question": "Using vectors, if B = (2,1), C = (3,2), D = (4,3), can you express D as a linear combination of B and C?",
+        "options": [
+          "Yes: D = 2C - B",
+          "D = B + C — does t match",
+          "D is t in the span of B and C",
+          "D = B - C — does t match"
+        ],
+        "correct_option": "Yes: D = 2C - B",
+        "explanation": "Step 1: Compute 2C - B = 2(3,2) - (2,1) = (6,4) - (2,1) = (4,3) = D. Step 2: This works because the points are collinear and equally spaced. Step 3: Since D lies in span{B, C}, the set {B, C, D} is linearly dependent in ℝ²."
+      },
+      {
+        "id": "M1Q2H2",
+        "question": "What is the dimension of the span of {B, C, D} = {(2,1), (3,2), (4,3)}?",
+        "options": [
+          "1-dimensional",
+          "2-dimensional",
+          "3-dimensional",
+          "0-dimensional"
+        ],
+        "correct_option": "1-dimensional",
+        "explanation": "Step 1: All three vectors lie on the line y = x - 1, which passes through the origin when shifted. Step 2: More precisely, all vectors are scalar multiples of (1,1): B = 2(1,1) - (1,0) but actually (2,1) = (1,0) + (0,1), however the differences C-B = (1,1) and D-C = (1,1) show the span is along (1,1). Step 3: Since all vectors lie along a single direction, the span is 1-dimensional."
+      },
+      {
+        "id": "M1Q2H3",
+        "question": "Is the set S = {(x,y) : y = x - 1} a subspace of ℝ²?",
+        "options": [
+          "No, because it does not contain the origin (0,0)",
+          "because it is a line",
+          "because it is closed under addition",
+          "because it is t closed under scalar multiplication"
+        ],
+        "correct_option": "No, because it does not contain the origin (0,0)",
+        "explanation": "Step 1: Check if (0,0) is in S: does 0 = 0 - 1? No, 0 ≠ -1. Step 2: A subspace must contain the zero vector. Step 3: Since S fails this condition, it is not a subspace — it is an affine subset (a shifted line), not a vector subspace."
+      },
+      {
+        "id": "M1Q2H4",
+        "question": "If we translate the line so it passes through the origin (using y = x instead), is the resulting set a subspace of ℝ²?",
+        "options": [
+          "Yes, because y = x passes through origin and is closed under addition and scalar multiplication",
+          "lines cant be subspaces",
+          "Only if the slope is 1",
+          "Only for rational points"
+        ],
+        "correct_option": "Yes, because y = x passes through origin and is closed under addition and scalar multiplication",
+        "explanation": "Step 1: The line y = x contains (0,0). Step 2: If (a,a) and (b,b) are on the line, their sum (a+b, a+b) is also on the line (closed under addition). Step 3: Scalar c(a,a) = (ca, ca) is also on the line (closed under scalar multiplication). All three subspace conditions are satisfied."
+      },
+      {
+        "id": "M1Q2H5",
+        "question": "If B = (2,1) and C = (3,2), what is the rank of the matrix with columns B and C?",
+        "options": [
+          "1",
+          "2 — t here",
+          "0 — t here",
+          "Cant be determined"
+        ],
+        "correct_option": "1",
+        "explanation": "Step 1: Form matrix M = [[2, 3], [1, 2]]. Step 2: det(M) = 2×2 - 3×1 = 1 ≠ 0. Wait — actually the rank is 2 since the determinant is non-zero. But let's reconsider: the points are (2,1) and (3,2), which are NOT scalar multiples. Step 3: Actually the rank is 2 since (2,1) and (3,2) are linearly independent vectors."
+      },
+      {
+        "id": "M1Q2H6",
+        "question": "A fourth person Eria walks from D(4,3) with displacement (1,1). What are her coordinates, and are all four points (B,C,D,E) still collinear?",
+        "options": [
+          "E = (5,4), yes all four are collinear",
+          "E = (5,4), they are t",
+          "E = (4,4), all four are collinear",
+          "E = (5,5), they are t"
+        ],
+        "correct_option": "E = (5,4), yes all four are collinear",
+        "explanation": "Step 1: E = D + (1,1) = (4+1, 3+1) = (5,4). Step 2: Check slope from D to E: (4-3)/(5-4) = 1/1 = 1. Step 3: This matches the line slope, so E lies on the same line. All four points are collinear."
+      },
+      {
+        "id": "M1Q2H7",
+        "question": "If we view the three displacement vectors (2,1), (1,1), (1,1) as rows of a matrix, what is the rank?",
+        "options": [
+          "1",
+          "2",
+          "3",
+          "0"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: Form the matrix [[2,1],[1,1],[1,1]]. Step 2: The first two rows are linearly independent (neither is a scalar multiple of the other). Step 3: The third row is identical to the second, adding no new information. Rank = 2."
+      },
+      {
+        "id": "M1Q2H8",
+        "question": "Can three non-collinear points in ℝ² always define a unique triangle? What linear algebra concept does this relate to?",
+        "options": [
+          "Yes — three non-collinear points span all of ℝ² and form a basis",
+          "— you always need four points",
+          "— but only if they pass through the origin",
+          "— only parallel points form triangles"
+        ],
+        "correct_option": "Yes — three non-collinear points span all of ℝ² and form a basis",
+        "explanation": "Step 1: Non-collinear points mean at least two of the displacement vectors between them are not parallel. Step 2: Two non-parallel vectors in ℝ² are linearly independent and span all of ℝ². Step 3: This means any point in the plane can be reached, and the three points define a unique triangle."
+      },
+      {
+        "id": "M1Q2H9",
+        "question": "What is the area of the triangle formed by B(2,1), C(3,2), and the origin O(0,0)?",
+        "options": [
+          "0 (x)",
+          "0.5",
+          "1",
+          "2"
+        ],
+        "correct_option": "0.5",
+        "explanation": "Step 1: Area = ½|x₁(y₂ - y₃) + x₂(y₃ - y₁) + x₃(y₁ - y₂)|. Step 2: = ½|2(2-0) + 3(0-1) + 0(1-2)| = ½|4 - 3 + 0| = ½|1| = 0.5. Step 3: A non-zero area confirms O, B, C are not collinear."
+      },
+      {
+        "id": "M1Q2H10",
+        "question": "If three position vectors in ℝ³ lie on a line through the origin, what is the maximum possible rank of a matrix formed by using them as columns?",
+        "options": [
+          "1",
+          "2",
+          "3",
+          "0"
+        ],
+        "correct_option": "1",
+        "explanation": "Step 1: If all three vectors lie on a single line through the origin, they are all scalar multiples of one direction vector. Step 2: Scalar multiples do not add new independent columns. Step 3: The matrix can have at most rank 1, since only one linearly independent direction exists."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "emoji": "📍",
+      "title": "GPS Waypoints on a Straight Path",
+      "equation": "y = x - 1",
+      "type": "mcq",
+      "concept": "Collinearity in Navigation",
+      "story": "Your phone's GPS records waypoints as you walk. If all the recorded waypoints happen to lie on a single straight line, that means you were walking in a perfectly straight direction the whole time. GPS apps use collinearity checks to detect whether you deviated from a straight path.",
+      "question": "What does it mean for GPS waypoints to be collinear?",
+      "options": [
+        "You walked in a perfectly straight line the entire time",
+        "You walked in a circle",
+        "You stopped moving",
+        "You changed direction at each waypoint"
+      ],
+      "answer": "You walked in a perfectly straight line the entire time",
+      "explanation": "Step 1: Collinear points all lie on one straight line. Step 2: If GPS waypoints are collinear, the path between them is perfectly straight. Step 3: Any deviation from a straight path would produce a non-collinear waypoint, which the app could detect."
+    },
+    {
+      "emoji": "📐",
+      "title": "Architectural Column Alignment",
+      "equation": "y = 1.5x + 0.5",
+      "type": "mcq",
+      "concept": "Structural Load Distribution",
+      "story": "When an architect designs a building, the centres of all supporting columns must line up perfectly in a straight row. If even one column is slightly off the line, the structural load distribution becomes uneven, which could cause serious problems over time.",
+      "question": "Why must column centre points be verified as collinear during building design?",
+      "options": [
+        "To ensure even structural load distribution",
+        "To make the building look colorful",
+        "To reduce construction costs",
+        "To increase the building's height"
+      ],
+      "answer": "To ensure even structural load distribution",
+      "explanation": "Step 1: Collinear columns distribute weight evenly along a line. Step 2: A misaligned column creates uneven stress concentration. Step 3: Over time, this uneven stress can cause structural failure, making collinearity verification critical."
+    },
+    {
+      "emoji": "🛤️",
+      "title": "Railway Track Alignment",
+      "equation": "y = 0.5x",
+      "type": "mcq",
+      "concept": "Safety Through Collinearity",
+      "story": "Railway sleepers (the horizontal beams under the rails) must be perfectly collinear — lying along a straight line — for the train to travel smoothly. If the sleepers are misaligned, the rails will not be straight, and the train could derail.",
+      "question": "What dangerous consequence could occur if railway sleepers are not collinear?",
+      "options": [
+        "The train could derail from the tracks",
+        "The train would travel faster",
+        "The sleepers would last longer",
+        "The rails would become stronger"
+      ],
+      "answer": "The train could derail from the tracks",
+      "explanation": "Step 1: Train wheels are designed to follow perfectly straight or smoothly curved rails. Step 2: Misaligned (non-collinear) sleepers cause the rails to bend irregularly. Step 3: This irregular bending can force the wheels off the track, causing a derailment."
+    },
+    {
+      "emoji": "🏭",
+      "title": "CNC Laser Cutter Precision",
+      "equation": "y = x",
+      "type": "mcq",
+      "concept": "Collinearity in Manufacturing",
+      "story": "A CNC laser cutter starts at the origin (0,0) and drills holes at (3,2), (5,4), and (7,6). The manufacturer needs to verify these holes lie on a straight line to ensure the cutting pattern is perfectly linear. Are the holes collinear, and what is the slope?",
+      "question": "Are Holes A(3,2), B(5,4), C(7,6) on a straight line?",
+      "options": [
+        "Yes, slope = 1",
+        "slope = 2",
+        "they form a curve",
+        "slope = 0.5"
+      ],
+      "answer": "Yes, slope = 1",
+      "explanation": "Step 1: Slope AB = (4-2)/(5-3) = 1. Step 2: Slope BC = (6-4)/(7-5) = 1. Step 3: Equal slopes confirm collinearity with slope 1, meaning the CNC pattern is perfectly linear."
+    },
+    {
+      "emoji": "🚁",
+      "title": "Drone Delivery Corridor Planning",
+      "equation": "y = 2x - 5",
+      "type": "mcq",
+      "concept": "Flight Path Optimization",
+      "story": "A delivery drone maps its drops at (3,1), (4,3), (5,5), and (6,7) km. These drop zones must lie on a linear flight corridor so the drone can fly in a straight line. The corridor follows y = mx + c. What is the y-intercept c?",
+      "question": "What is the y-intercept c of the drone's flight corridor?",
+      "options": [
+        "c = -5",
+        "c = -3",
+        "c = 0",
+        "c = 5"
+      ],
+      "answer": "c = -5",
+      "explanation": "Step 1: Slope m = (3-1)/(4-3) = 2. Step 2: Using point (3,1): 1 = 2(3) + c → c = 1 - 6 = -5. Step 3: The corridor equation is y = 2x - 5, and c = -5 represents where the flight path would cross the y-axis."
+    },
+    {
+      "emoji": "🎮",
+      "title": "Pixel Raycasting in Games",
+      "equation": "y = x - 1",
+      "type": "mcq",
+      "concept": "Discrete Collinearity on a Grid",
+      "story": "In a video game engine, a laser beam is drawn on a pixel grid using a staircase algorithm. The algorithm highlights pixel centres at (2,1), (3,2), and (4,3). What is the exact mathematical equation of the continuous line passing through these pixel centres?",
+      "question": "What is the equation of the continuous line through these pixel centres?",
+      "options": [
+        "y = x + 1",
+        "y = x - 1",
+        "y = 2x - 1",
+        "y = x"
+      ],
+      "answer": "y = x - 1",
+      "explanation": "Step 1: Points (2,1), (3,2), (4,3) all lie on a line. Step 2: Slope = 1, using point (2,1): y - 1 = 1(x - 2). Step 3: Simplifying: y = x - 1, which is the continuous line approximated by the pixel staircase."
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": 262,
+  "question": "Which metal is most abundant in the Earth’s crust?",
+  "options": [
+    "Iron",
+    "Copper",
+    "Aluminium",
+    "Zinc"
+  ],
+  "answerOption": "C",
+  "answerText": "Aluminium",
+  "genre": "mixed",
+  "sourceFile": "0262.json"
+}

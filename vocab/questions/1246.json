@@ -1,0 +1,15 @@
+{
+  "id": 1246,
+  "word": "Reprimand",
+  "question": "Reprimand",
+  "options": [
+    "The reduction of swelling",
+    "Confused or disorganized",
+    "Showing ill will or resentment",
+    "A formal expression of disapproval"
+  ],
+  "answerOption": "D",
+  "answerText": "A formal expression of disapproval",
+  "difficulty": "medium",
+  "sourceFile": "1246.json"
+}

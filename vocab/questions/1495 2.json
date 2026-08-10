@@ -1,0 +1,15 @@
+{
+  "id": 1495,
+  "word": "Solipsism",
+  "question": "Solipsism",
+  "options": [
+    "A joke so poorly told that one laughs anyway",
+    "The dark gray color seen when the eyes are closed",
+    "The view that the self is all that can be known",
+    "Wandering alone"
+  ],
+  "answerOption": "C",
+  "answerText": "The view that the self is all that can be known",
+  "difficulty": "extra-hard",
+  "sourceFile": "1495.json"
+}

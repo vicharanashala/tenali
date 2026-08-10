@@ -1,0 +1,15 @@
+{
+  "id": 201,
+  "word": "Attack",
+  "question": "Attack",
+  "options": [
+    "To impart knowledge or skill to someone",
+    "To call out in a very loud voice",
+    "Affected by physical illness",
+    "To take aggressive action against something"
+  ],
+  "answerOption": "D",
+  "answerText": "To take aggressive action against something",
+  "difficulty": "easy",
+  "sourceFile": "0201.json"
+}

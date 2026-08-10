@@ -1,0 +1,14 @@
+{
+  "id": 676,
+  "question": "Which country is associated with the city of Riga?",
+  "options": [
+    "Estonia",
+    "Latvia",
+    "Lithuania",
+    "Belarus"
+  ],
+  "answerOption": "B",
+  "answerText": "Latvia",
+  "genre": "geography",
+  "sourceFile": "0676.json"
+}

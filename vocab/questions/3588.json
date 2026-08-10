@@ -1,0 +1,15 @@
+{
+  "id": 3588,
+  "word": "Abiography",
+  "question": "Abiography",
+  "options": [
+    "A longing for a home that may never have existed",
+    "Place of anti-ablation",
+    "Description of non-living things",
+    "Opposed ablation"
+  ],
+  "answerOption": "C",
+  "answerText": "Description of non-living things",
+  "difficulty": "extra-hard",
+  "sourceFile": "3588.json"
+}

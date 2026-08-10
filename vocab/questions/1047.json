@@ -1,0 +1,15 @@
+{
+  "id": 1047,
+  "word": "Yield",
+  "question": "Yield",
+  "options": [
+    "Able to be detached or separated",
+    "Extremely or damnably",
+    "Proceeding in a subtle manner",
+    "To produce or provide a natural product"
+  ],
+  "answerOption": "D",
+  "answerText": "To produce or provide a natural product",
+  "difficulty": "medium",
+  "sourceFile": "1047.json"
+}

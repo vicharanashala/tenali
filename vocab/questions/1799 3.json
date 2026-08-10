@@ -1,0 +1,15 @@
+{
+  "id": 1799,
+  "word": "Thrifty",
+  "question": "Thrifty",
+  "options": [
+    "An action or performance",
+    "To continue in a course of action",
+    "Dealing with things in a practical way",
+    "Careful with money"
+  ],
+  "answerOption": "D",
+  "answerText": "Careful with money",
+  "difficulty": "medium",
+  "sourceFile": "1799.json"
+}

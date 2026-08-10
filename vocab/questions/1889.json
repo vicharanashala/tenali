@@ -1,0 +1,15 @@
+{
+  "id": 1889,
+  "word": "Repulsive",
+  "question": "Repulsive",
+  "options": [
+    "Morally corrupt or wicked",
+    "Confusing or perplexing",
+    "Relating to demons or evil spirits",
+    "Causing repulsion or distaste"
+  ],
+  "answerOption": "D",
+  "answerText": "Causing repulsion or distaste",
+  "difficulty": "medium",
+  "sourceFile": "1889.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2803,
+  "word": "Threnody",
+  "question": "Threnody",
+  "options": [
+    "One eating abyss food",
+    "To howl or wail as an expression of strong emotion",
+    "A song of mourning for the dead",
+    "A soft gentle breeze"
+  ],
+  "answerOption": "C",
+  "answerText": "A song of mourning for the dead",
+  "difficulty": "extra-hard",
+  "sourceFile": "2803.json"
+}

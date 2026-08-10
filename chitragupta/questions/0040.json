@@ -1,0 +1,14 @@
+{
+  "id": 40,
+  "question": "Which gas do plants primarily absorb from the atmosphere for photosynthesis?",
+  "options": [
+    "Oxygen",
+    "Nitrogen",
+    "Carbon dioxide",
+    "Hydrogen"
+  ],
+  "answerOption": "C",
+  "answerText": "Carbon dioxide",
+  "genre": "science",
+  "sourceFile": "0040.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 134,
+  "word": "Hidden",
+  "question": "Hidden",
+  "options": [
+    "To honor a special occasion with festivities",
+    "Making or given to making a lot of noise",
+    "To move forward in a purposeful way",
+    "Kept out of sight; concealed"
+  ],
+  "answerOption": "D",
+  "answerText": "Kept out of sight; concealed",
+  "difficulty": "easy",
+  "sourceFile": "0134.json"
+}

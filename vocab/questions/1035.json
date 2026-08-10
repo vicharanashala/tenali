@@ -1,0 +1,15 @@
+{
+  "id": 1035,
+  "word": "Languid",
+  "question": "Languid",
+  "options": [
+    "Displaying a lack of energy; relaxed",
+    "In complete disorder",
+    "Having sharp powers of judgment",
+    "To treat or speak of with mockery"
+  ],
+  "answerOption": "A",
+  "answerText": "Displaying a lack of energy; relaxed",
+  "difficulty": "medium",
+  "sourceFile": "1035.json"
+}

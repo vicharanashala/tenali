@@ -1,0 +1,15 @@
+{
+  "id": 38,
+  "word": "Scary",
+  "question": "Scary",
+  "options": [
+    "Causing feelings of fear or alarm",
+    "Having a great deal to do",
+    "Having the form of a circle",
+    "Able to express oneself easily in a language"
+  ],
+  "answerOption": "A",
+  "answerText": "Causing feelings of fear or alarm",
+  "difficulty": "easy",
+  "sourceFile": "0038.json"
+}

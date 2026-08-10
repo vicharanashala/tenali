@@ -1,0 +1,15 @@
+{
+  "id": 599,
+  "word": "Magnificent",
+  "question": "Magnificent",
+  "options": [
+    "Acting in the same way over time",
+    "Occurring at irregular intervals",
+    "To take the place of something",
+    "Extremely beautiful or impressive"
+  ],
+  "answerOption": "D",
+  "answerText": "Extremely beautiful or impressive",
+  "difficulty": "easy",
+  "sourceFile": "0599.json"
+}

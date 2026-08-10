@@ -1,0 +1,15 @@
+{
+  "id": 10006,
+  "word": "Polymorphism (Computer Science)",
+  "question": "Polymorphism (Computer Science)",
+  "options": [
+    "The ability of different objects to respond to the same method call in their own way",
+    "The process of hiding internal implementation details",
+    "A security mechanism to prevent unauthorized access",
+    "A technique for optimizing database queries"
+  ],
+  "answerOption": "A",
+  "answerText": "The ability of different objects to respond to the same method call in their own way",
+  "difficulty": "medium",
+  "sourceFile": "c10006.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 78,
+  "word": "Clever",
+  "question": "Clever",
+  "options": [
+    "To conduct the affairs of a state or organization",
+    "Quick to understand and learn things",
+    "Without limits or end",
+    "To have as belonging to one; to own"
+  ],
+  "answerOption": "B",
+  "answerText": "Quick to understand and learn things",
+  "difficulty": "easy",
+  "sourceFile": "0078.json"
+}

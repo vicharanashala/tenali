@@ -1,0 +1,15 @@
+{
+  "id": 1670,
+  "word": "Detectable",
+  "question": "Detectable",
+  "options": [
+    "Lacking consideration for others",
+    "Strange or odd; unusual",
+    "Able to be discovered or noticed",
+    "Able to be denied or refuted"
+  ],
+  "answerOption": "C",
+  "answerText": "Able to be discovered or noticed",
+  "difficulty": "medium",
+  "sourceFile": "1670.json"
+}

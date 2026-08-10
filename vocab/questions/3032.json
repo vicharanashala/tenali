@@ -1,0 +1,15 @@
+{
+  "id": 3032,
+  "word": "Ubuntu",
+  "question": "Ubuntu",
+  "options": [
+    "A genus of tropical plants",
+    "Abyss body form",
+    "Avoiding looking at",
+    "The belief in a universal bond of sharing among humans"
+  ],
+  "answerOption": "D",
+  "answerText": "The belief in a universal bond of sharing among humans",
+  "difficulty": "extra-hard",
+  "sourceFile": "3032.json"
+}

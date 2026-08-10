@@ -1,0 +1,15 @@
+{
+  "id": 447,
+  "word": "Erase",
+  "question": "Erase",
+  "options": [
+    "To present something for acceptance",
+    "To rub out or remove written marks",
+    "Sufficient to cause death",
+    "To set free from confinement"
+  ],
+  "answerOption": "B",
+  "answerText": "To rub out or remove written marks",
+  "difficulty": "easy",
+  "sourceFile": "0447.json"
+}

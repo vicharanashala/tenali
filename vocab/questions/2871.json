@@ -1,0 +1,15 @@
+{
+  "id": 2871,
+  "word": "Magnum Opus",
+  "question": "Magnum Opus",
+  "options": [
+    "An airport or air terminal",
+    "The action of moving up",
+    "A person's most important work",
+    "The act of freeing someone"
+  ],
+  "answerOption": "C",
+  "answerText": "A person's most important work",
+  "difficulty": "hard",
+  "sourceFile": "2871.json"
+}

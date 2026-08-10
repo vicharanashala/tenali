@@ -1,0 +1,15 @@
+{
+  "id": 2201,
+  "word": "Advoutrer",
+  "question": "Advoutrer",
+  "options": [
+    "A person guilty of adultery",
+    "Just beginning to develop",
+    "A person's ability to cope with difficulties",
+    "The quality of being solid"
+  ],
+  "answerOption": "A",
+  "answerText": "A person guilty of adultery",
+  "difficulty": "hard",
+  "sourceFile": "2201.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1958,
+  "word": "Adventurously",
+  "question": "Adventurously",
+  "options": [
+    "A prehistoric stone artifact",
+    "In an adventurous manner",
+    "Description of air conditions",
+    "In an advisable manner"
+  ],
+  "answerOption": "B",
+  "answerText": "In an adventurous manner",
+  "difficulty": "hard",
+  "sourceFile": "1958.json"
+}

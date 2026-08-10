@@ -1,0 +1,15 @@
+{
+  "id": 790,
+  "word": "Fatal",
+  "question": "Fatal",
+  "options": [
+    "Continuing firmly despite difficulty",
+    "To agree to give something requested",
+    "To show that something is true",
+    "Causing death"
+  ],
+  "answerOption": "D",
+  "answerText": "Causing death",
+  "difficulty": "easy",
+  "sourceFile": "0790.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 131,
+  "word": "Absent",
+  "question": "Absent",
+  "options": [
+    "Bent or twisted out of shape",
+    "Being the only one of its kind",
+    "Not present in a place",
+    "Having lived or existed for only a short time"
+  ],
+  "answerOption": "C",
+  "answerText": "Not present in a place",
+  "difficulty": "easy",
+  "sourceFile": "0131.json"
+}

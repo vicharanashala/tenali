@@ -1,0 +1,15 @@
+{
+  "id": 1151,
+  "word": "Kudos",
+  "question": "Kudos",
+  "options": [
+    "Praise and honor received for achievement",
+    "Making marks that cannot be removed",
+    "Showing no respect or esteem",
+    "Without authority or control"
+  ],
+  "answerOption": "A",
+  "answerText": "Praise and honor received for achievement",
+  "difficulty": "medium",
+  "sourceFile": "1151.json"
+}

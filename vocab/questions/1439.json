@@ -1,0 +1,15 @@
+{
+  "id": 1439,
+  "word": "Denigration",
+  "question": "Denigration",
+  "options": [
+    "The action of leaving a place",
+    "Able to exist together",
+    "The action of criticizing unfairly",
+    "The action of expressing disagreement"
+  ],
+  "answerOption": "C",
+  "answerText": "The action of criticizing unfairly",
+  "difficulty": "medium",
+  "sourceFile": "1439.json"
+}

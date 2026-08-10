@@ -1,0 +1,15 @@
+{
+  "id": 1578,
+  "word": "Detain",
+  "question": "Detain",
+  "options": [
+    "Expressing contempt or mockery",
+    "To keep someone from proceeding",
+    "Lasting for a very short time",
+    "A police officer investigating crime"
+  ],
+  "answerOption": "B",
+  "answerText": "To keep someone from proceeding",
+  "difficulty": "medium",
+  "sourceFile": "1578.json"
+}

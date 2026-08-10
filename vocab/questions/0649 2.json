@@ -1,0 +1,15 @@
+{
+  "id": 649,
+  "word": "Articulate",
+  "question": "Articulate",
+  "options": [
+    "Having the ability to speak clearly",
+    "To impose a penalty for wrongdoing",
+    "Poisonous; harmful to living things",
+    "Extremely beautiful or impressive"
+  ],
+  "answerOption": "A",
+  "answerText": "Having the ability to speak clearly",
+  "difficulty": "easy",
+  "sourceFile": "0649.json"
+}

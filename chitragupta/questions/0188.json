@@ -1,0 +1,14 @@
+{
+  "id": 188,
+  "question": "Which is the hardest tissue in the human body?",
+  "options": [
+    "Bone",
+    "Cartilage",
+    "Tooth enamel",
+    "Nail"
+  ],
+  "answerOption": "C",
+  "answerText": "Tooth enamel",
+  "genre": "science",
+  "sourceFile": "0188.json"
+}

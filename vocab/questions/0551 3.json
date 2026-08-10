@@ -1,0 +1,15 @@
+{
+  "id": 551,
+  "word": "Collaborate",
+  "question": "Collaborate",
+  "options": [
+    "To fix something that is broken",
+    "To tell a story or give an account",
+    "To work together on an activity",
+    "Noticeably happy and optimistic"
+  ],
+  "answerOption": "C",
+  "answerText": "To work together on an activity",
+  "difficulty": "easy",
+  "sourceFile": "0551.json"
+}

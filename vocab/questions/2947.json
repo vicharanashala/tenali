@@ -1,0 +1,15 @@
+{
+  "id": 2947,
+  "word": "Authentication",
+  "question": "Authentication",
+  "options": [
+    "The appearance of being true or real",
+    "The action of authenticating something",
+    "Not telling the truth; lying",
+    "Showy and tasteless; extravagantly bright"
+  ],
+  "answerOption": "B",
+  "answerText": "The action of authenticating something",
+  "difficulty": "hard",
+  "sourceFile": "2947.json"
+}

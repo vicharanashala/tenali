@@ -1,0 +1,15 @@
+{
+  "id": 840,
+  "word": "Jubilant",
+  "question": "Jubilant",
+  "options": [
+    "Showing quick and inventive verbal humor",
+    "Producing a great deal of profit",
+    "Feeling or expressing great happiness",
+    "Complaining in a whiny manner"
+  ],
+  "answerOption": "C",
+  "answerText": "Feeling or expressing great happiness",
+  "difficulty": "medium",
+  "sourceFile": "0840.json"
+}

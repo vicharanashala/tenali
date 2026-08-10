@@ -1,0 +1,15 @@
+{
+  "id": 112,
+  "word": "Sharp",
+  "question": "Sharp",
+  "options": [
+    "To make a public or formal statement",
+    "Lively and full of spirit",
+    "Having an edge able to cut or pierce",
+    "To walk slowly with no clear direction"
+  ],
+  "answerOption": "C",
+  "answerText": "Having an edge able to cut or pierce",
+  "difficulty": "easy",
+  "sourceFile": "0112.json"
+}

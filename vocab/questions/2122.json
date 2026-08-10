@@ -1,0 +1,15 @@
+{
+  "id": 2122,
+  "word": "Nemesis",
+  "question": "Nemesis",
+  "options": [
+    "Mapping from aircraft",
+    "An inescapable agent of someone's downfall",
+    "A state of balance",
+    "Generosity in bestowing money or gifts"
+  ],
+  "answerOption": "B",
+  "answerText": "An inescapable agent of someone's downfall",
+  "difficulty": "hard",
+  "sourceFile": "2122.json"
+}

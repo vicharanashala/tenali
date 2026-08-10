@@ -1,0 +1,15 @@
+{
+  "id": 527,
+  "word": "Permit",
+  "question": "Permit",
+  "options": [
+    "Made or done without method or plan",
+    "To give authorization for something",
+    "To feel or detect something",
+    "Stale smelling or damp"
+  ],
+  "answerOption": "B",
+  "answerText": "To give authorization for something",
+  "difficulty": "easy",
+  "sourceFile": "0527.json"
+}

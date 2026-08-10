@@ -1,0 +1,15 @@
+{
+  "id": 2113,
+  "word": "Adrift",
+  "question": "Adrift",
+  "options": [
+    "The state of being a fully developed adult",
+    "The science of extracting and using metals",
+    "Floating without being propelled",
+    "Unable to be avoided or escaped"
+  ],
+  "answerOption": "C",
+  "answerText": "Floating without being propelled",
+  "difficulty": "hard",
+  "sourceFile": "2113.json"
+}

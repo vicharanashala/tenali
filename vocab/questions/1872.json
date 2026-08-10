@@ -1,0 +1,15 @@
+{
+  "id": 1872,
+  "word": "Chancy",
+  "question": "Chancy",
+  "options": [
+    "Characterized by conflict or disorder",
+    "Involving risk or uncertainty",
+    "Making a situation likely to happen",
+    "Clearing forest to use the land"
+  ],
+  "answerOption": "B",
+  "answerText": "Involving risk or uncertainty",
+  "difficulty": "medium",
+  "sourceFile": "1872.json"
+}

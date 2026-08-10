@@ -1,0 +1,14 @@
+{
+  "id": 907,
+  "question": "Which country is associated with the city of Bangkok?",
+  "options": [
+    "Vietnam",
+    "Thailand",
+    "Laos",
+    "Myanmar"
+  ],
+  "answerOption": "B",
+  "answerText": "Thailand",
+  "genre": "geography",
+  "sourceFile": "0907.json"
+}

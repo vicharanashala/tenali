@@ -1,0 +1,15 @@
+{
+  "id": 3440,
+  "word": "Abyistico",
+  "question": "Abyistico",
+  "options": [
+    "To wander from the right path",
+    "Those who bind",
+    "A situation where any move will worsen one's position",
+    "Relating to abyss"
+  ],
+  "answerOption": "D",
+  "answerText": "Relating to abyss",
+  "difficulty": "extra-hard",
+  "sourceFile": "3440.json"
+}

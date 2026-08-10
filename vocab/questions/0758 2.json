@@ -1,0 +1,15 @@
+{
+  "id": 758,
+  "word": "Stormy",
+  "question": "Stormy",
+  "options": [
+    "Able to be trusted to do what is needed",
+    "Having strong winds and usually rain",
+    "Able to withstand fire or great heat",
+    "To control something by means of rules"
+  ],
+  "answerOption": "B",
+  "answerText": "Having strong winds and usually rain",
+  "difficulty": "easy",
+  "sourceFile": "0758.json"
+}

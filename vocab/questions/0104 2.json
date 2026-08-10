@@ -1,0 +1,15 @@
+{
+  "id": 104,
+  "word": "Ancient",
+  "question": "Ancient",
+  "options": [
+    "Offensively impolite or bad-mannered",
+    "To break the connection between things",
+    "Belonging to the very distant past",
+    "To present something for acceptance"
+  ],
+  "answerOption": "C",
+  "answerText": "Belonging to the very distant past",
+  "difficulty": "easy",
+  "sourceFile": "0104.json"
+}

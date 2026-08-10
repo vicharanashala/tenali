@@ -1,0 +1,15 @@
+{
+  "id": 1089,
+  "word": "Tangible",
+  "question": "Tangible",
+  "options": [
+    "Confusing or perplexing",
+    "Clear and definite; able to be touched",
+    "Moral corruption or wickedness",
+    "To discover or identify something"
+  ],
+  "answerOption": "B",
+  "answerText": "Clear and definite; able to be touched",
+  "difficulty": "medium",
+  "sourceFile": "1089.json"
+}

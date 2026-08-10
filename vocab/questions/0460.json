@@ -1,0 +1,15 @@
+{
+  "id": 460,
+  "word": "Attempt",
+  "question": "Attempt",
+  "options": [
+    "To try to win against other people",
+    "Happening or doing at the expected time",
+    "To exert force to move something closer",
+    "To try to achieve something"
+  ],
+  "answerOption": "D",
+  "answerText": "To try to achieve something",
+  "difficulty": "easy",
+  "sourceFile": "0460.json"
+}

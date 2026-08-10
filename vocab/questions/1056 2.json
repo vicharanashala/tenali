@@ -1,0 +1,15 @@
+{
+  "id": 1056,
+  "word": "Scrutinize",
+  "question": "Scrutinize",
+  "options": [
+    "Having good judgment; sensible",
+    "To examine or inspect closely",
+    "To feel or express strong disapproval of",
+    "Rough or abrupt in speech or manner"
+  ],
+  "answerOption": "B",
+  "answerText": "To examine or inspect closely",
+  "difficulty": "medium",
+  "sourceFile": "1056.json"
+}

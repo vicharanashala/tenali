@@ -1,0 +1,15 @@
+{
+  "id": 2301,
+  "word": "Aerification",
+  "question": "Aerification",
+  "options": [
+    "A Roman imperial treasury",
+    "The action of aerifying",
+    "The process of adding air",
+    "The science of extracting and using metals"
+  ],
+  "answerOption": "B",
+  "answerText": "The action of aerifying",
+  "difficulty": "hard",
+  "sourceFile": "2301.json"
+}

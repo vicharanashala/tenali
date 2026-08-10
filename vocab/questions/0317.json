@@ -1,0 +1,15 @@
+{
+  "id": 317,
+  "word": "Excite",
+  "question": "Excite",
+  "options": [
+    "Not occupied or in use",
+    "To cause strong feelings of enthusiasm",
+    "Trustworthy and reliable",
+    "Free from bacteria; completely clean"
+  ],
+  "answerOption": "B",
+  "answerText": "To cause strong feelings of enthusiasm",
+  "difficulty": "easy",
+  "sourceFile": "0317.json"
+}

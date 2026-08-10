@@ -1,0 +1,15 @@
+{
+  "id": 312,
+  "word": "Encourage",
+  "question": "Encourage",
+  "options": [
+    "To give support and confidence to someone",
+    "Very large in size or quantity",
+    "To stop fighting and give up",
+    "Telling or expressing the truth; honest"
+  ],
+  "answerOption": "A",
+  "answerText": "To give support and confidence to someone",
+  "difficulty": "easy",
+  "sourceFile": "0312.json"
+}

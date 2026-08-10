@@ -1,0 +1,15 @@
+{
+  "id": 2090,
+  "word": "Pedagogy",
+  "question": "Pedagogy",
+  "options": [
+    "The quality of lasting long",
+    "Extracting metal from ore by heating",
+    "A tendency to choose a particular thing",
+    "The method and practice of teaching"
+  ],
+  "answerOption": "D",
+  "answerText": "The method and practice of teaching",
+  "difficulty": "hard",
+  "sourceFile": "2090.json"
+}

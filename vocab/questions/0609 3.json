@@ -1,0 +1,15 @@
+{
+  "id": 609,
+  "word": "Brilliant",
+  "question": "Brilliant",
+  "options": [
+    "Exceptionally clever or talented",
+    "Costing a lot of money",
+    "Awkward in movement or handling things",
+    "Producing or using too much"
+  ],
+  "answerOption": "A",
+  "answerText": "Exceptionally clever or talented",
+  "difficulty": "easy",
+  "sourceFile": "0609.json"
+}

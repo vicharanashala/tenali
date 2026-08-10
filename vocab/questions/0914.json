@@ -1,0 +1,15 @@
+{
+  "id": 914,
+  "word": "Peppy",
+  "question": "Peppy",
+  "options": [
+    "To have a strong emotional effect on someone",
+    "Very small in size",
+    "Lively and enthusiastic in manner",
+    "Feeling deep pleasure from achievements"
+  ],
+  "answerOption": "C",
+  "answerText": "Lively and enthusiastic in manner",
+  "difficulty": "easy",
+  "sourceFile": "0914.json"
+}

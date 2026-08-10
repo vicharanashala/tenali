@@ -1,0 +1,15 @@
+{
+  "id": 565,
+  "word": "Amaze",
+  "question": "Amaze",
+  "options": [
+    "To show how something is done",
+    "Side by side and having the same distance apart",
+    "To move something quickly back and forth",
+    "To fill someone with great surprise"
+  ],
+  "answerOption": "D",
+  "answerText": "To fill someone with great surprise",
+  "difficulty": "easy",
+  "sourceFile": "0565.json"
+}

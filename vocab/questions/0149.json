@@ -1,0 +1,15 @@
+{
+  "id": 149,
+  "word": "Forbid",
+  "question": "Forbid",
+  "options": [
+    "To make something look more attractive",
+    "To order someone not to do something",
+    "The inner part of something",
+    "To show how something is done"
+  ],
+  "answerOption": "B",
+  "answerText": "To order someone not to do something",
+  "difficulty": "easy",
+  "sourceFile": "0149.json"
+}

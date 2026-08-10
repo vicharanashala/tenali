@@ -1,0 +1,15 @@
+{
+  "id": 342,
+  "word": "Trap",
+  "question": "Trap",
+  "options": [
+    "To catch an animal in a device",
+    "Domesticated and not dangerous to people",
+    "Giving information clearly in few words",
+    "To grow and develop well"
+  ],
+  "answerOption": "A",
+  "answerText": "To catch an animal in a device",
+  "difficulty": "easy",
+  "sourceFile": "0342.json"
+}

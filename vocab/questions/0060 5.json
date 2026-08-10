@@ -1,0 +1,15 @@
+{
+  "id": 60,
+  "word": "Difficult",
+  "question": "Difficult",
+  "options": [
+    "Expecting the best possible outcome",
+    "Needing much effort or skill to accomplish",
+    "Belonging to the very distant past",
+    "Having the ability to do something"
+  ],
+  "answerOption": "B",
+  "answerText": "Needing much effort or skill to accomplish",
+  "difficulty": "easy",
+  "sourceFile": "0060.json"
+}

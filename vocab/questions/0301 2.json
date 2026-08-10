@@ -1,0 +1,15 @@
+{
+  "id": 301,
+  "word": "Believe",
+  "question": "Believe",
+  "options": [
+    "Without limits or end",
+    "To go out of or leave a place",
+    "At a great distance in space or time",
+    "To accept something as true"
+  ],
+  "answerOption": "D",
+  "answerText": "To accept something as true",
+  "difficulty": "easy",
+  "sourceFile": "0301.json"
+}

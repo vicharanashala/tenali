@@ -1,0 +1,15 @@
+{
+  "id": 1023,
+  "word": "Zealous",
+  "question": "Zealous",
+  "options": [
+    "Having great energy or enthusiasm",
+    "The arrangement of teeth",
+    "Proceeding in a subtle manner",
+    "Unable to be appeased"
+  ],
+  "answerOption": "A",
+  "answerText": "Having great energy or enthusiasm",
+  "difficulty": "medium",
+  "sourceFile": "1023.json"
+}

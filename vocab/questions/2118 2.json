@@ -1,0 +1,15 @@
+{
+  "id": 2118,
+  "word": "Aerobiology",
+  "question": "Aerobiology",
+  "options": [
+    "Study of organisms in air",
+    "The act of advising someone",
+    "Equivalent in seriousness or effect",
+    "The gathering of a substance"
+  ],
+  "answerOption": "A",
+  "answerText": "Study of organisms in air",
+  "difficulty": "hard",
+  "sourceFile": "2118.json"
+}

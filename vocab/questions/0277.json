@@ -1,0 +1,15 @@
+{
+  "id": 277,
+  "word": "Puzzle",
+  "question": "Puzzle",
+  "options": [
+    "To make something clear and easy to understand",
+    "Very great in degree; intense",
+    "To formally put an end to a system",
+    "Something that is difficult to understand"
+  ],
+  "answerOption": "D",
+  "answerText": "Something that is difficult to understand",
+  "difficulty": "easy",
+  "sourceFile": "0277.json"
+}

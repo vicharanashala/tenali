@@ -1,0 +1,15 @@
+{
+  "id": 1039,
+  "word": "Distraught",
+  "question": "Distraught",
+  "options": [
+    "To express sharp disapproval of",
+    "The action of becoming worse",
+    "Very worried and upset",
+    "Changing frequently in loyalties or affections"
+  ],
+  "answerOption": "C",
+  "answerText": "Very worried and upset",
+  "difficulty": "medium",
+  "sourceFile": "1039.json"
+}

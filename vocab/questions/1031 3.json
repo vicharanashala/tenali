@@ -1,0 +1,15 @@
+{
+  "id": 1031,
+  "word": "Composure",
+  "question": "Composure",
+  "options": [
+    "Refusing to be persuaded or to change",
+    "In a despicable manner",
+    "The state of being calm and in control",
+    "Never done or known before"
+  ],
+  "answerOption": "C",
+  "answerText": "The state of being calm and in control",
+  "difficulty": "medium",
+  "sourceFile": "1031.json"
+}

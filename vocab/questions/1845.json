@@ -1,0 +1,15 @@
+{
+  "id": 1845,
+  "word": "Distrustful",
+  "question": "Distrustful",
+  "options": [
+    "Lacking faith or confidence",
+    "Loyalty to a person or country",
+    "In a determinable manner",
+    "Expressed clearly and easy to understand"
+  ],
+  "answerOption": "A",
+  "answerText": "Lacking faith or confidence",
+  "difficulty": "medium",
+  "sourceFile": "1845.json"
+}

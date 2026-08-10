@@ -1,0 +1,15 @@
+{
+  "id": 251,
+  "word": "Escape",
+  "question": "Escape",
+  "options": [
+    "To increase in size or amount",
+    "To say that you will not do something",
+    "Moving at a low speed",
+    "To break free from confinement"
+  ],
+  "answerOption": "D",
+  "answerText": "To break free from confinement",
+  "difficulty": "easy",
+  "sourceFile": "0251.json"
+}

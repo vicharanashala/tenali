@@ -1,0 +1,15 @@
+{
+  "id": 197,
+  "word": "Divide",
+  "question": "Divide",
+  "options": [
+    "Arranged or planned in a methodical way",
+    "To separate into parts or groups",
+    "Not far away; close",
+    "To shape into a curve"
+  ],
+  "answerOption": "B",
+  "answerText": "To separate into parts or groups",
+  "difficulty": "easy",
+  "sourceFile": "0197.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 209,
+  "word": "Decrease",
+  "question": "Decrease",
+  "options": [
+    "Not clearly expressed or understood",
+    "To become smaller or fewer in amount",
+    "Not according to truth or fact",
+    "To feel curious about something"
+  ],
+  "answerOption": "B",
+  "answerText": "To become smaller or fewer in amount",
+  "difficulty": "easy",
+  "sourceFile": "0209.json"
+}

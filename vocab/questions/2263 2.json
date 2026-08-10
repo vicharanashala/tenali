@@ -1,0 +1,15 @@
+{
+  "id": 2263,
+  "word": "AEROTHERM",
+  "question": "AEROTHERM",
+  "options": [
+    "An organism needing warm air",
+    "The sound of the patient's voice",
+    "Greek god of the winds",
+    "The quality of being advisable"
+  ],
+  "answerOption": "A",
+  "answerText": "An organism needing warm air",
+  "difficulty": "hard",
+  "sourceFile": "2263.json"
+}

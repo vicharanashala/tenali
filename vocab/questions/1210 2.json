@@ -1,0 +1,15 @@
+{
+  "id": 1210,
+  "word": "Spurious",
+  "question": "Spurious",
+  "options": [
+    "Continually changing in pattern",
+    "Not being what it claims to be; false",
+    "Stubborn or unmanageable",
+    "To lower the body briefly by bending a knee"
+  ],
+  "answerOption": "B",
+  "answerText": "Not being what it claims to be; false",
+  "difficulty": "hard",
+  "sourceFile": "1210.json"
+}

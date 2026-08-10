@@ -1,0 +1,15 @@
+{
+  "id": 1777,
+  "word": "Extemporaneous",
+  "question": "Extemporaneous",
+  "options": [
+    "To diminish or reduce something",
+    "Clear and easy to understand",
+    "Done without preparation",
+    "Appearing as true on the surface"
+  ],
+  "answerOption": "C",
+  "answerText": "Done without preparation",
+  "difficulty": "medium",
+  "sourceFile": "1777.json"
+}

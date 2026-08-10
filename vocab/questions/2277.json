@@ -1,0 +1,15 @@
+{
+  "id": 2277,
+  "word": "Adult",
+  "question": "Adult",
+  "options": [
+    "A mature human or animal",
+    "One who studies airborne life",
+    "The action of transferring pollen",
+    "Slow to act; intended to cause delay"
+  ],
+  "answerOption": "A",
+  "answerText": "A mature human or animal",
+  "difficulty": "hard",
+  "sourceFile": "2277.json"
+}

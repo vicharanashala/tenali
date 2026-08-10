@@ -1,0 +1,14 @@
+{
+  "id": 308,
+  "question": "Which Indian freedom fighter is popularly called Lokmanya?",
+  "options": [
+    "Bal Gangadhar Tilak",
+    "Lala Lajpat Rai",
+    "Bipin Chandra Pal",
+    "Gopal Krishna Gokhale"
+  ],
+  "answerOption": "A",
+  "answerText": "Bal Gangadhar Tilak",
+  "genre": "india-gk",
+  "sourceFile": "0308.json"
+}

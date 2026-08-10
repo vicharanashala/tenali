@@ -1,0 +1,15 @@
+{
+  "id": 275,
+  "word": "Find",
+  "question": "Find",
+  "options": [
+    "To cut into thin flat pieces",
+    "To discover something by searching",
+    "Not varying; the same in all cases",
+    "Greatly pleased or entertained"
+  ],
+  "answerOption": "B",
+  "answerText": "To discover something by searching",
+  "difficulty": "easy",
+  "sourceFile": "0275.json"
+}

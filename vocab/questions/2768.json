@@ -1,0 +1,15 @@
+{
+  "id": 2768,
+  "word": "Inactivity",
+  "question": "Inactivity",
+  "options": [
+    "The state of not being active",
+    "Relating to divination by air",
+    "The sound of the patient's voice",
+    "A revelation of something discreditable"
+  ],
+  "answerOption": "A",
+  "answerText": "The state of not being active",
+  "difficulty": "hard",
+  "sourceFile": "2768.json"
+}

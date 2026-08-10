@@ -1,0 +1,15 @@
+{
+  "id": 734,
+  "word": "Reflective",
+  "question": "Reflective",
+  "options": [
+    "To fail to care for something properly",
+    "To suffer or die from lack of food",
+    "Mild in temperament or behavior",
+    "Providing a mirror-like image"
+  ],
+  "answerOption": "D",
+  "answerText": "Providing a mirror-like image",
+  "difficulty": "easy",
+  "sourceFile": "0734.json"
+}

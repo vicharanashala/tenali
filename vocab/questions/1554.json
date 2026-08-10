@@ -1,0 +1,15 @@
+{
+  "id": 1554,
+  "word": "Dernier Cri",
+  "question": "Dernier Cri",
+  "options": [
+    "A public display of group feeling",
+    "The latest fashion or style",
+    "A legal objection to a claim",
+    "To sharpen or stimulate interest"
+  ],
+  "answerOption": "B",
+  "answerText": "The latest fashion or style",
+  "difficulty": "medium",
+  "sourceFile": "1554.json"
+}

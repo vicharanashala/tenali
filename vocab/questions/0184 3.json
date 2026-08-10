@@ -1,0 +1,15 @@
+{
+  "id": 184,
+  "word": "Catch",
+  "question": "Catch",
+  "options": [
+    "Involving or creating good conditions",
+    "Happening or doing at the expected time",
+    "Free from pretense or deceit",
+    "To capture or seize something"
+  ],
+  "answerOption": "D",
+  "answerText": "To capture or seize something",
+  "difficulty": "easy",
+  "sourceFile": "0184.json"
+}

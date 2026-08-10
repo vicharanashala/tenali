@@ -1,0 +1,15 @@
+{
+  "id": 2701,
+  "word": "Syzygy",
+  "question": "Syzygy",
+  "options": [
+    "A tropical plant yielding musk",
+    "The killing of one's wife",
+    "An alignment of three celestial objects",
+    "Genuine happiness at another person's accomplishment"
+  ],
+  "answerOption": "C",
+  "answerText": "An alignment of three celestial objects",
+  "difficulty": "extra-hard",
+  "sourceFile": "2701.json"
+}

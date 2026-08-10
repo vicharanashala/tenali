@@ -1,0 +1,15 @@
+{
+  "id": 2719,
+  "word": "Komorebi",
+  "question": "Komorebi",
+  "options": [
+    "To abuse habitually",
+    "Sunlight filtering through tree leaves",
+    "A wish or inclination not strong enough for action",
+    "In manner of abyss"
+  ],
+  "answerOption": "B",
+  "answerText": "Sunlight filtering through tree leaves",
+  "difficulty": "extra-hard",
+  "sourceFile": "2719.json"
+}

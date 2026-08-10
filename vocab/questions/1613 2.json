@@ -1,0 +1,15 @@
+{
+  "id": 1613,
+  "word": "Detest",
+  "question": "Detest",
+  "options": [
+    "To dislike intensely",
+    "A factor that determines something",
+    "A police officer investigating crime",
+    "To end racial segregation"
+  ],
+  "answerOption": "A",
+  "answerText": "To dislike intensely",
+  "difficulty": "medium",
+  "sourceFile": "1613.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 299,
+  "word": "Dream",
+  "question": "Dream",
+  "options": [
+    "Easy to understand or do",
+    "A series of images during sleep",
+    "Causing laughter or amusement",
+    "To turn around quickly in a circle"
+  ],
+  "answerOption": "B",
+  "answerText": "A series of images during sleep",
+  "difficulty": "easy",
+  "sourceFile": "0299.json"
+}

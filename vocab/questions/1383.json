@@ -1,0 +1,15 @@
+{
+  "id": 1383,
+  "word": "Delinquent",
+  "question": "Delinquent",
+  "options": [
+    "A feeling of embarrassment or disappointment",
+    "Failing in or neglectful of a duty",
+    "Full of incessant activity",
+    "Given to or characterized by quarreling"
+  ],
+  "answerOption": "B",
+  "answerText": "Failing in or neglectful of a duty",
+  "difficulty": "medium",
+  "sourceFile": "1383.json"
+}

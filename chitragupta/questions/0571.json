@@ -1,0 +1,14 @@
+{
+  "id": 571,
+  "question": "What is the SI unit of specific heat capacity?",
+  "options": [
+    "J/(kg·K)",
+    "W/(m·K)",
+    "N/m²",
+    "J/mol"
+  ],
+  "answerOption": "A",
+  "answerText": "J/(kg·K)",
+  "genre": "mixed",
+  "sourceFile": "0571.json"
+}

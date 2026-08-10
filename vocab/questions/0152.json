@@ -1,0 +1,15 @@
+{
+  "id": 152,
+  "word": "Begin",
+  "question": "Begin",
+  "options": [
+    "To examine and record the features of something",
+    "To start doing something",
+    "Having strong winds and usually rain",
+    "To determine the total number of items"
+  ],
+  "answerOption": "B",
+  "answerText": "To start doing something",
+  "difficulty": "easy",
+  "sourceFile": "0152.json"
+}

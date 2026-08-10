@@ -1,0 +1,15 @@
+{
+  "id": 381,
+  "word": "Bounce",
+  "question": "Bounce",
+  "options": [
+    "To make something less strong",
+    "Greatly pleased or entertained",
+    "To spring back after hitting a surface",
+    "Living; not dead"
+  ],
+  "answerOption": "C",
+  "answerText": "To spring back after hitting a surface",
+  "difficulty": "easy",
+  "sourceFile": "0381.json"
+}

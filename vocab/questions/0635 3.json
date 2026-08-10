@@ -1,0 +1,15 @@
+{
+  "id": 635,
+  "word": "Trustworthy",
+  "question": "Trustworthy",
+  "options": [
+    "Able to be relied on as honest",
+    "Briefly and clearly expressed",
+    "Able to move quickly and easily",
+    "To capture or seize something"
+  ],
+  "answerOption": "A",
+  "answerText": "Able to be relied on as honest",
+  "difficulty": "easy",
+  "sourceFile": "0635.json"
+}

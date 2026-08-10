@@ -1,0 +1,15 @@
+{
+  "id": 581,
+  "word": "Idealistic",
+  "question": "Idealistic",
+  "options": [
+    "Having high principles and expectations",
+    "Willfully causing pain to others",
+    "Expressing approval or agreement",
+    "Working by itself with little human control"
+  ],
+  "answerOption": "A",
+  "answerText": "Having high principles and expectations",
+  "difficulty": "easy",
+  "sourceFile": "0581.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 63,
+  "question": "Which vitamin is mainly produced in the human body when skin is exposed to sunlight?",
+  "options": [
+    "Vitamin A",
+    "Vitamin B12",
+    "Vitamin C",
+    "Vitamin D"
+  ],
+  "answerOption": "D",
+  "answerText": "Vitamin D",
+  "genre": "science",
+  "sourceFile": "0063.json"
+}

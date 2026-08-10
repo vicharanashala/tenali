@@ -1,0 +1,15 @@
+{
+  "id": 122,
+  "word": "Faithful",
+  "question": "Faithful",
+  "options": [
+    "Full of energy and enthusiasm",
+    "Remaining true to a person or belief",
+    "Standing out so as to be clearly visible",
+    "Occurring or done many times"
+  ],
+  "answerOption": "B",
+  "answerText": "Remaining true to a person or belief",
+  "difficulty": "easy",
+  "sourceFile": "0122.json"
+}

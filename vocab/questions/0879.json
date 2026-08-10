@@ -1,0 +1,15 @@
+{
+  "id": 879,
+  "word": "Sluggish",
+  "question": "Sluggish",
+  "options": [
+    "To shine with flashes of light",
+    "Unpleasant or repulsive in appearance",
+    "Moving slowly or apathetically",
+    "To put goods or cargo onto a vehicle"
+  ],
+  "answerOption": "C",
+  "answerText": "Moving slowly or apathetically",
+  "difficulty": "easy",
+  "sourceFile": "0879.json"
+}

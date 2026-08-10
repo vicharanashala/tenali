@@ -1,0 +1,15 @@
+{
+  "id": 933,
+  "word": "Taut",
+  "question": "Taut",
+  "options": [
+    "Unpleasant or repulsive in appearance",
+    "Complex and detailed in design",
+    "Stretched or pulled tight",
+    "To heat a liquid until it bubbles"
+  ],
+  "answerOption": "C",
+  "answerText": "Stretched or pulled tight",
+  "difficulty": "easy",
+  "sourceFile": "0933.json"
+}

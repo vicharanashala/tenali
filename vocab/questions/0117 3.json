@@ -1,0 +1,15 @@
+{
+  "id": 117,
+  "word": "Cheerful",
+  "question": "Cheerful",
+  "options": [
+    "Noticeably happy and optimistic",
+    "To gather a crop from the fields",
+    "Not open; shut or fastened",
+    "To produce flowers; to flourish"
+  ],
+  "answerOption": "A",
+  "answerText": "Noticeably happy and optimistic",
+  "difficulty": "easy",
+  "sourceFile": "0117.json"
+}

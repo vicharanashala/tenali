@@ -1,0 +1,14 @@
+{
+  "id": 509,
+  "question": "Which Indian state has Agartala as its capital?",
+  "options": [
+    "Tripura",
+    "Assam",
+    "Mizoram",
+    "Manipur"
+  ],
+  "answerOption": "A",
+  "answerText": "Tripura",
+  "genre": "geography",
+  "sourceFile": "0509.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 162,
+  "word": "Help",
+  "question": "Help",
+  "options": [
+    "To make it easier for someone to do something",
+    "Uncomfortably small or crowded",
+    "To point out the faults of something",
+    "To set up an organization on a firm basis"
+  ],
+  "answerOption": "A",
+  "answerText": "To make it easier for someone to do something",
+  "difficulty": "easy",
+  "sourceFile": "0162.json"
+}

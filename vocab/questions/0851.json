@@ -1,0 +1,15 @@
+{
+  "id": 851,
+  "word": "Miserable",
+  "question": "Miserable",
+  "options": [
+    "Free from disturbance; calm",
+    "Able to soak up liquid easily",
+    "Tending to stick or adhere to things",
+    "In a state of great discomfort or unhappiness"
+  ],
+  "answerOption": "D",
+  "answerText": "In a state of great discomfort or unhappiness",
+  "difficulty": "easy",
+  "sourceFile": "0851.json"
+}

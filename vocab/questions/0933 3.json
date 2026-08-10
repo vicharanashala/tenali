@@ -1,0 +1,15 @@
+{
+  "id": 933,
+  "word": "Whimsical",
+  "question": "Whimsical",
+  "options": [
+    "A state of despair and discouragement",
+    "To destroy a building or structure",
+    "Playfully quaint or fanciful",
+    "To discover or identify something"
+  ],
+  "answerOption": "C",
+  "answerText": "Playfully quaint or fanciful",
+  "difficulty": "medium",
+  "sourceFile": "0933.json"
+}

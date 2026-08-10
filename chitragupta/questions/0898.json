@@ -1,0 +1,14 @@
+{
+  "id": 898,
+  "question": "Who discovered the law of inertia concept foundationally before Newton formalized it?",
+  "options": [
+    "Galileo",
+    "Faraday",
+    "Maxwell",
+    "Planck"
+  ],
+  "answerOption": "A",
+  "answerText": "Galileo",
+  "genre": "general-knowledge",
+  "sourceFile": "0898.json"
+}

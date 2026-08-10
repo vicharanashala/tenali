@@ -1,0 +1,15 @@
+{
+  "id": 487,
+  "word": "Estimate",
+  "question": "Estimate",
+  "options": [
+    "Of or at a low temperature",
+    "To roughly calculate the value of something",
+    "To blind temporarily with a bright light",
+    "To bring something into existence"
+  ],
+  "answerOption": "B",
+  "answerText": "To roughly calculate the value of something",
+  "difficulty": "easy",
+  "sourceFile": "0487.json"
+}

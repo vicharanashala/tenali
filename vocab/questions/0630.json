@@ -1,0 +1,15 @@
+{
+  "id": 630,
+  "word": "Logical",
+  "question": "Logical",
+  "options": [
+    "To honor a special occasion with festivities",
+    "After the expected or usual time",
+    "Following the rules of reason",
+    "Very small; much smaller than normal"
+  ],
+  "answerOption": "C",
+  "answerText": "Following the rules of reason",
+  "difficulty": "easy",
+  "sourceFile": "0630.json"
+}

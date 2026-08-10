@@ -1,0 +1,15 @@
+{
+  "id": 320,
+  "word": "Please",
+  "question": "Please",
+  "options": [
+    "Done on purpose; deliberate",
+    "Bringing or worthy of honor",
+    "Required by law or rules",
+    "To make someone feel happy or satisfied"
+  ],
+  "answerOption": "D",
+  "answerText": "To make someone feel happy or satisfied",
+  "difficulty": "easy",
+  "sourceFile": "0320.json"
+}

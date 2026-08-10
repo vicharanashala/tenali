@@ -1,0 +1,14 @@
+{
+  "id": 972,
+  "question": "Who wrote the Ramayana?",
+  "options": [
+    "Valmiki",
+    "Kalidasa",
+    "Tulsidas",
+    "Vyasa"
+  ],
+  "answerOption": "A",
+  "answerText": "Valmiki",
+  "genre": "general-knowledge",
+  "sourceFile": "0972.json"
+}

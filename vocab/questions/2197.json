@@ -1,0 +1,15 @@
+{
+  "id": 2197,
+  "word": "Soporific",
+  "question": "Soporific",
+  "options": [
+    "A lengthy and aggressive speech",
+    "Tending to induce drowsiness or sleep",
+    "A variety of acmite mineral",
+    "An earnest request or plea"
+  ],
+  "answerOption": "B",
+  "answerText": "Tending to induce drowsiness or sleep",
+  "difficulty": "hard",
+  "sourceFile": "2197.json"
+}

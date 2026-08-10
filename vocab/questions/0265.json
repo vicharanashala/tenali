@@ -1,0 +1,15 @@
+{
+  "id": 265,
+  "word": "Fly",
+  "question": "Fly",
+  "options": [
+    "To have something inside",
+    "To take the place of something",
+    "Thinly sown or distributed",
+    "To move through the air with wings"
+  ],
+  "answerOption": "D",
+  "answerText": "To move through the air with wings",
+  "difficulty": "easy",
+  "sourceFile": "0265.json"
+}

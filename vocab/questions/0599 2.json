@@ -1,0 +1,15 @@
+{
+  "id": 599,
+  "word": "Magnificent",
+  "question": "Magnificent",
+  "options": [
+    "Done with good judgment; practical",
+    "Extremely beautiful or impressive",
+    "To practice for a public performance",
+    "Having a violent or aggressive nature"
+  ],
+  "answerOption": "B",
+  "answerText": "Extremely beautiful or impressive",
+  "difficulty": "easy",
+  "sourceFile": "0599.json"
+}

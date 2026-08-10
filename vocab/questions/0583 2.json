@@ -1,0 +1,15 @@
+{
+  "id": 583,
+  "word": "Determined",
+  "question": "Determined",
+  "options": [
+    "Well informed about many subjects",
+    "Done on purpose; deliberate",
+    "To agree to receive or do something",
+    "Having made a firm decision about something"
+  ],
+  "answerOption": "D",
+  "answerText": "Having made a firm decision about something",
+  "difficulty": "easy",
+  "sourceFile": "0583.json"
+}

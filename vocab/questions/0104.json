@@ -1,0 +1,15 @@
+{
+  "id": 104,
+  "word": "Ancient",
+  "question": "Ancient",
+  "options": [
+    "Stretched tight or under strain",
+    "Belonging to the very distant past",
+    "Done of one's own free will",
+    "Lively and full of spirit"
+  ],
+  "answerOption": "B",
+  "answerText": "Belonging to the very distant past",
+  "difficulty": "easy",
+  "sourceFile": "0104.json"
+}

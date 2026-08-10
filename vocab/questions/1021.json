@@ -1,0 +1,15 @@
+{
+  "id": 1021,
+  "word": "Versatile",
+  "question": "Versatile",
+  "options": [
+    "Able to adapt to many different functions",
+    "To reduce to a lower rank or position",
+    "To reduce in rank or lower in status",
+    "Widespread destruction or confusion"
+  ],
+  "answerOption": "A",
+  "answerText": "Able to adapt to many different functions",
+  "difficulty": "medium",
+  "sourceFile": "1021.json"
+}

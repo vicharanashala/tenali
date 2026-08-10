@@ -1,0 +1,14 @@
+{
+  "id": 606,
+  "question": "Which Indian union territory has Kavaratti as its capital?",
+  "options": [
+    "Lakshadweep",
+    "Andaman and Nicobar Islands",
+    "Puducherry",
+    "Chandigarh"
+  ],
+  "answerOption": "A",
+  "answerText": "Lakshadweep",
+  "genre": "geography",
+  "sourceFile": "0606.json"
+}

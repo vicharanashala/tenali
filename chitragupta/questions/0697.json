@@ -1,0 +1,14 @@
+{
+  "id": 697,
+  "question": "Which organ in the human body removes carbon dioxide from the blood?",
+  "options": [
+    "Kidneys",
+    "Lungs",
+    "Liver",
+    "Pancreas"
+  ],
+  "answerOption": "B",
+  "answerText": "Lungs",
+  "genre": "science",
+  "sourceFile": "0697.json"
+}

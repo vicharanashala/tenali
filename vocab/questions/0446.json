@@ -1,0 +1,15 @@
+{
+  "id": 446,
+  "word": "Mark",
+  "question": "Mark",
+  "options": [
+    "Able to withstand fire or great heat",
+    "To make a visible sign on something",
+    "Extremely large or great in scale",
+    "To move through water using the body"
+  ],
+  "answerOption": "B",
+  "answerText": "To make a visible sign on something",
+  "difficulty": "easy",
+  "sourceFile": "0446.json"
+}

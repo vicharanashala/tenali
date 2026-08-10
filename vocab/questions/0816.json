@@ -1,0 +1,15 @@
+{
+  "id": 816,
+  "word": "Exact",
+  "question": "Exact",
+  "options": [
+    "To perform better than someone else",
+    "Not approximated in any way; precise",
+    "Lacking firmness or strength",
+    "To identify someone from previous encounters"
+  ],
+  "answerOption": "B",
+  "answerText": "Not approximated in any way; precise",
+  "difficulty": "easy",
+  "sourceFile": "0816.json"
+}

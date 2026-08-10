@@ -1,0 +1,15 @@
+{
+  "id": 300,
+  "word": "Imagine",
+  "question": "Imagine",
+  "options": [
+    "To manage or guide the operations of something",
+    "Logical and well organized",
+    "Giving off light; bright or shining",
+    "To form a picture of something in your mind"
+  ],
+  "answerOption": "D",
+  "answerText": "To form a picture of something in your mind",
+  "difficulty": "easy",
+  "sourceFile": "0300.json"
+}

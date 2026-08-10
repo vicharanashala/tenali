@@ -1,0 +1,15 @@
+{
+  "id": 28,
+  "word": "Soft",
+  "question": "Soft",
+  "options": [
+    "Extending in one direction without curves",
+    "To manage or guide the operations of something",
+    "Easy to mold, cut, or fold; not hard",
+    "Spread over a wide area"
+  ],
+  "answerOption": "C",
+  "answerText": "Easy to mold, cut, or fold; not hard",
+  "difficulty": "easy",
+  "sourceFile": "0028.json"
+}

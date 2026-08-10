@@ -1,0 +1,15 @@
+{
+  "id": 173,
+  "word": "Cry",
+  "question": "Cry",
+  "options": [
+    "To have an idea that something is possible",
+    "Very dry or thirsty",
+    "To make something clear and easy to understand",
+    "To shed tears of sadness or pain"
+  ],
+  "answerOption": "D",
+  "answerText": "To shed tears of sadness or pain",
+  "difficulty": "easy",
+  "sourceFile": "0173.json"
+}

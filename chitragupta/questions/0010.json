@@ -1,0 +1,14 @@
+{
+  "id": 10,
+  "question": "What is the capital of Germany?",
+  "options": [
+    "Bangkok",
+    "Tokyo",
+    "Berlin",
+    "Ottawa"
+  ],
+  "answerOption": "C",
+  "answerText": "Berlin",
+  "genre": "geography",
+  "sourceFile": "0010.json"
+}

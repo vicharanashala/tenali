@@ -1,0 +1,15 @@
+{
+  "id": 2093,
+  "word": "Aereometer",
+  "question": "Aereometer",
+  "options": [
+    "An instrument for measuring air",
+    "Relating to the atmosphere",
+    "Relating to aecia fungal structure",
+    "The process of aerating something"
+  ],
+  "answerOption": "A",
+  "answerText": "An instrument for measuring air",
+  "difficulty": "hard",
+  "sourceFile": "2093.json"
+}

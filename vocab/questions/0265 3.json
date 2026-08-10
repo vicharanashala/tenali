@@ -1,0 +1,15 @@
+{
+  "id": 265,
+  "word": "Fly",
+  "question": "Fly",
+  "options": [
+    "Having the properties of a magnet",
+    "To help someone with a task",
+    "To move through the air with wings",
+    "To cause someone to feel sudden wonder"
+  ],
+  "answerOption": "C",
+  "answerText": "To move through the air with wings",
+  "difficulty": "easy",
+  "sourceFile": "0265.json"
+}

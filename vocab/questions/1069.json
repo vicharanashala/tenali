@@ -1,0 +1,15 @@
+{
+  "id": 1069,
+  "word": "Vigilant",
+  "question": "Vigilant",
+  "options": [
+    "Having a feeling of vague longing",
+    "Keeping careful watch for possible danger",
+    "To describe or portray precisely",
+    "Without regret or compassion"
+  ],
+  "answerOption": "B",
+  "answerText": "Keeping careful watch for possible danger",
+  "difficulty": "medium",
+  "sourceFile": "1069.json"
+}

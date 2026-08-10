@@ -1,0 +1,14 @@
+{
+  "id": 247,
+  "question": "Which blood group is known as the universal recipient in the ABO and Rh system?",
+  "options": [
+    "O-",
+    "AB+",
+    "A+",
+    "B+"
+  ],
+  "answerOption": "B",
+  "answerText": "AB+",
+  "genre": "science",
+  "sourceFile": "0247.json"
+}

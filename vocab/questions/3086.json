@@ -1,0 +1,15 @@
+{
+  "id": 3086,
+  "word": "Witzelsucht",
+  "question": "Witzelsucht",
+  "options": [
+    "A sudden and striking realization",
+    "The feeling of anticipation while waiting for someone",
+    "A tendency to make puns or tell inappropriate jokes",
+    "Act of binding"
+  ],
+  "answerOption": "C",
+  "answerText": "A tendency to make puns or tell inappropriate jokes",
+  "difficulty": "extra-hard",
+  "sourceFile": "3086.json"
+}

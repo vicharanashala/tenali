@@ -1,0 +1,14 @@
+{
+  "id": 735,
+  "question": "Which country is associated with the city of Canberra?",
+  "options": [
+    "New Zealand",
+    "Australia",
+    "Canada",
+    "South Africa"
+  ],
+  "answerOption": "B",
+  "answerText": "Australia",
+  "genre": "geography",
+  "sourceFile": "0735.json"
+}

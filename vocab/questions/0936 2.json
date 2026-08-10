@@ -1,0 +1,15 @@
+{
+  "id": 936,
+  "word": "Listless",
+  "question": "Listless",
+  "options": [
+    "Optimistic or positive about the future",
+    "Lacking energy or enthusiasm",
+    "Having skill in dealing with others",
+    "So intense as to be almost touched or felt"
+  ],
+  "answerOption": "B",
+  "answerText": "Lacking energy or enthusiasm",
+  "difficulty": "medium",
+  "sourceFile": "0936.json"
+}

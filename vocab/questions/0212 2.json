@@ -1,0 +1,15 @@
+{
+  "id": 212,
+  "word": "Worsen",
+  "question": "Worsen",
+  "options": [
+    "To put a hand or finger on something",
+    "To make or become worse",
+    "To please someone greatly",
+    "Important and well known"
+  ],
+  "answerOption": "B",
+  "answerText": "To make or become worse",
+  "difficulty": "easy",
+  "sourceFile": "0212.json"
+}

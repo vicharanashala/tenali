@@ -1,0 +1,15 @@
+{
+  "id": 3188,
+  "word": "Abecedary",
+  "question": "Abecedary",
+  "options": [
+    "One fearing the abyss",
+    "A beginner or one learning basics",
+    "One denying ablation logic",
+    "A social gathering centered around drinking chocolate"
+  ],
+  "answerOption": "B",
+  "answerText": "A beginner or one learning basics",
+  "difficulty": "extra-hard",
+  "sourceFile": "3188.json"
+}

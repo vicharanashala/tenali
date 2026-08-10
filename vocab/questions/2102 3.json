@@ -1,0 +1,15 @@
+{
+  "id": 2102,
+  "word": "Adorable",
+  "question": "Adorable",
+  "options": [
+    "To make something unclear or unintelligible",
+    "Physical exercise with air",
+    "Extremely charming or appealing",
+    "Put in a very difficult situation"
+  ],
+  "answerOption": "C",
+  "answerText": "Extremely charming or appealing",
+  "difficulty": "hard",
+  "sourceFile": "2102.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2482,
+  "word": "Zymurgy",
+  "question": "Zymurgy",
+  "options": [
+    "The impossibility of comprehending something",
+    "Things promoting weaning",
+    "A place where one feels safe and at home",
+    "The study or practice of fermentation in brewing"
+  ],
+  "answerOption": "D",
+  "answerText": "The study or practice of fermentation in brewing",
+  "difficulty": "extra-hard",
+  "sourceFile": "2482.json"
+}

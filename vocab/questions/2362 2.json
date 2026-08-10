@@ -1,0 +1,15 @@
+{
+  "id": 2362,
+  "word": "Bucolic",
+  "question": "Bucolic",
+  "options": [
+    "A timid or submissive person",
+    "The partially shaded outer region of a shadow",
+    "In the direction of the sun's course; clockwise",
+    "Relating to the pleasant aspects of countryside life"
+  ],
+  "answerOption": "D",
+  "answerText": "Relating to the pleasant aspects of countryside life",
+  "difficulty": "extra-hard",
+  "sourceFile": "2362.json"
+}

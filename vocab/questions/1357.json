@@ -1,0 +1,15 @@
+{
+  "id": 1357,
+  "word": "Defy",
+  "question": "Defy",
+  "options": [
+    "To hold and use a weapon or tool",
+    "To openly resist or refuse to obey",
+    "Distorted or inaccurately presented",
+    "Dead or no longer with someone"
+  ],
+  "answerOption": "B",
+  "answerText": "To openly resist or refuse to obey",
+  "difficulty": "medium",
+  "sourceFile": "1357.json"
+}

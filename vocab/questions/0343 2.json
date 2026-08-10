@@ -1,0 +1,15 @@
+{
+  "id": 343,
+  "word": "Chase",
+  "question": "Chase",
+  "options": [
+    "Feeling worried or nervous about something",
+    "To run after someone to catch them",
+    "To do something repeatedly to improve",
+    "Being reserved or timid around other people"
+  ],
+  "answerOption": "B",
+  "answerText": "To run after someone to catch them",
+  "difficulty": "easy",
+  "sourceFile": "0343.json"
+}

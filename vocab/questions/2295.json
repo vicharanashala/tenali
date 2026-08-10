@@ -1,0 +1,15 @@
+{
+  "id": 2295,
+  "word": "Advancement",
+  "question": "Advancement",
+  "options": [
+    "Not able to be denied or disputed",
+    "Clever or skillful in movement",
+    "The process of promoting someone",
+    "To alternate between different opinions"
+  ],
+  "answerOption": "C",
+  "answerText": "The process of promoting someone",
+  "difficulty": "hard",
+  "sourceFile": "2295.json"
+}

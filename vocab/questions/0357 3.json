@@ -1,0 +1,15 @@
+{
+  "id": 357,
+  "word": "Donate",
+  "question": "Donate",
+  "options": [
+    "Correct in all details; exact",
+    "To give money or goods to a cause",
+    "A person who lacks courage",
+    "To become visible or noticeable"
+  ],
+  "answerOption": "B",
+  "answerText": "To give money or goods to a cause",
+  "difficulty": "easy",
+  "sourceFile": "0357.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2655,
+  "word": "Inadequacy",
+  "question": "Inadequacy",
+  "options": [
+    "The action of taking an oath",
+    "To renounce or reject something",
+    "The action of reducing something",
+    "Lack of the quality or quantity needed"
+  ],
+  "answerOption": "D",
+  "answerText": "Lack of the quality or quantity needed",
+  "difficulty": "hard",
+  "sourceFile": "2655.json"
+}

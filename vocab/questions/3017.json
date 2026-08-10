@@ -1,0 +1,15 @@
+{
+  "id": 3017,
+  "word": "Fernweh",
+  "question": "Fernweh",
+  "options": [
+    "An ache for distant places; the craving for travel",
+    "Of non-literary nature",
+    "In manner of abyss cutting",
+    "The belief that all things tend toward the good"
+  ],
+  "answerOption": "A",
+  "answerText": "An ache for distant places; the craving for travel",
+  "difficulty": "extra-hard",
+  "sourceFile": "3017.json"
+}

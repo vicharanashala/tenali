@@ -1,0 +1,14 @@
+{
+  "id": 59,
+  "question": "Which blood group is known as the universal donor in the ABO and Rh system?",
+  "options": [
+    "AB+",
+    "O-",
+    "O+",
+    "A-"
+  ],
+  "answerOption": "B",
+  "answerText": "O-",
+  "genre": "science",
+  "sourceFile": "0059.json"
+}

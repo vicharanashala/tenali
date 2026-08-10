@@ -1,0 +1,15 @@
+{
+  "id": 409,
+  "word": "Afford",
+  "question": "Afford",
+  "options": [
+    "To have enough money to pay for something",
+    "Feeling thankful for something received",
+    "Not approximated in any way; precise",
+    "Having the properties of a magnet"
+  ],
+  "answerOption": "A",
+  "answerText": "To have enough money to pay for something",
+  "difficulty": "easy",
+  "sourceFile": "0409.json"
+}

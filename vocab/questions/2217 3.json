@@ -1,0 +1,15 @@
+{
+  "id": 2217,
+  "word": "Aegir",
+  "question": "Aegir",
+  "options": [
+    "Norse god of the sea",
+    "A person's ability to cope with difficulties",
+    "Something that blocks or obstructs",
+    "Not telling the truth; lying"
+  ],
+  "answerOption": "A",
+  "answerText": "Norse god of the sea",
+  "difficulty": "hard",
+  "sourceFile": "2217.json"
+}

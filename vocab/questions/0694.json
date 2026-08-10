@@ -1,0 +1,15 @@
+{
+  "id": 694,
+  "word": "Vital",
+  "question": "Vital",
+  "options": [
+    "Absolutely necessary or important",
+    "Poisonous; harmful to living things",
+    "To withstand the action of something",
+    "To move a spoon around in a liquid"
+  ],
+  "answerOption": "A",
+  "answerText": "Absolutely necessary or important",
+  "difficulty": "easy",
+  "sourceFile": "0694.json"
+}

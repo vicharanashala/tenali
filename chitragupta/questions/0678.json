@@ -1,0 +1,14 @@
+{
+  "id": 678,
+  "question": "Who discovered the law of gravitation?",
+  "options": [
+    "Newton",
+    "Einstein",
+    "Galileo",
+    "Kepler"
+  ],
+  "answerOption": "A",
+  "answerText": "Newton",
+  "genre": "general-knowledge",
+  "sourceFile": "0678.json"
+}

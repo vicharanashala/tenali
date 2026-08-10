@@ -1,0 +1,15 @@
+{
+  "id": 856,
+  "word": "Terrible",
+  "question": "Terrible",
+  "options": [
+    "Causing extreme fear or suffering",
+    "To discover the presence of something hidden",
+    "Producing much noise or sound",
+    "Diligent and hardworking"
+  ],
+  "answerOption": "A",
+  "answerText": "Causing extreme fear or suffering",
+  "difficulty": "easy",
+  "sourceFile": "0856.json"
+}

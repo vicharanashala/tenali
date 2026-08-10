@@ -1,0 +1,15 @@
+{
+  "id": 310,
+  "word": "Promise",
+  "question": "Promise",
+  "options": [
+    "Worthy of attention; striking",
+    "To tell someone you will definitely do something",
+    "Very fine in texture or structure",
+    "Having elegance of movement"
+  ],
+  "answerOption": "B",
+  "answerText": "To tell someone you will definitely do something",
+  "difficulty": "easy",
+  "sourceFile": "0310.json"
+}

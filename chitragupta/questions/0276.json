@@ -1,0 +1,14 @@
+{
+  "id": 276,
+  "question": "Which Indian scientist won the Nobel Prize in Physics in 1930?",
+  "options": [
+    "Hargobind Khurana",
+    "C. V. Raman",
+    "S. Chandrasekhar",
+    "Venkatraman Ramakrishnan"
+  ],
+  "answerOption": "B",
+  "answerText": "C. V. Raman",
+  "genre": "india-gk",
+  "sourceFile": "0276.json"
+}

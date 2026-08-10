@@ -1,0 +1,14 @@
+{
+  "id": 455,
+  "question": "Which Indian state has Jaipur as its capital?",
+  "options": [
+    "Gujarat",
+    "Rajasthan",
+    "Madhya Pradesh",
+    "Haryana"
+  ],
+  "answerOption": "B",
+  "answerText": "Rajasthan",
+  "genre": "geography",
+  "sourceFile": "0455.json"
+}

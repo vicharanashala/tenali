@@ -1,0 +1,15 @@
+{
+  "id": 211,
+  "word": "Improve",
+  "question": "Improve",
+  "options": [
+    "To impart knowledge or skill to someone",
+    "To call out in a very loud voice",
+    "Affected by physical illness",
+    "To make or become better"
+  ],
+  "answerOption": "D",
+  "answerText": "To make or become better",
+  "difficulty": "easy",
+  "sourceFile": "0211.json"
+}

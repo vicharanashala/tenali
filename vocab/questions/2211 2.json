@@ -1,0 +1,15 @@
+{
+  "id": 2211,
+  "word": "AEROPLUVIOGRAPH",
+  "question": "AEROPLUVIOGRAPH",
+  "options": [
+    "Apparently attractive but having no real value",
+    "A loud confused noise from a large crowd",
+    "The fruiting body of fungal spore",
+    "Device recording airborne water"
+  ],
+  "answerOption": "D",
+  "answerText": "Device recording airborne water",
+  "difficulty": "hard",
+  "sourceFile": "2211.json"
+}

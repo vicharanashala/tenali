@@ -1,0 +1,15 @@
+{
+  "id": 186,
+  "word": "Grow",
+  "question": "Grow",
+  "options": [
+    "To greatly surprise someone",
+    "To increase in size or amount",
+    "Well known from long experience",
+    "Serious in manner or expression"
+  ],
+  "answerOption": "B",
+  "answerText": "To increase in size or amount",
+  "difficulty": "easy",
+  "sourceFile": "0186.json"
+}

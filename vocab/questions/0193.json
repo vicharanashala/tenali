@@ -1,0 +1,15 @@
+{
+  "id": 193,
+  "word": "Sink",
+  "question": "Sink",
+  "options": [
+    "In a natural or raw state; not refined",
+    "To find the size or amount of something",
+    "Not giving enough attention to avoid harm",
+    "To go down below the surface of a liquid"
+  ],
+  "answerOption": "D",
+  "answerText": "To go down below the surface of a liquid",
+  "difficulty": "easy",
+  "sourceFile": "0193.json"
+}

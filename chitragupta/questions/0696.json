@@ -1,0 +1,14 @@
+{
+  "id": 696,
+  "question": "Which is the largest species of woodpecker historically known, though possibly extinct?",
+  "options": [
+    "Pileated woodpecker",
+    "Ivory-billed woodpecker",
+    "Great spotted woodpecker",
+    "Acorn woodpecker"
+  ],
+  "answerOption": "B",
+  "answerText": "Ivory-billed woodpecker",
+  "genre": "mixed",
+  "sourceFile": "0696.json"
+}

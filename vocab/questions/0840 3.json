@@ -1,0 +1,15 @@
+{
+  "id": 840,
+  "word": "Steep",
+  "question": "Steep",
+  "options": [
+    "Having a slope that rises at a sharp angle",
+    "Not likely to bring success",
+    "Relating to or resembling the moon",
+    "To take someone's property without permission"
+  ],
+  "answerOption": "A",
+  "answerText": "Having a slope that rises at a sharp angle",
+  "difficulty": "easy",
+  "sourceFile": "0840.json"
+}

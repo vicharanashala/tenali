@@ -1,0 +1,15 @@
+{
+  "id": 2470,
+  "word": "Aerobiology",
+  "question": "Aerobiology",
+  "options": [
+    "The state of being a fully developed adult",
+    "Study of organisms in air",
+    "Characterized by bitterness or resentment",
+    "Having a skeptical or cynical outlook"
+  ],
+  "answerOption": "B",
+  "answerText": "Study of organisms in air",
+  "difficulty": "hard",
+  "sourceFile": "2470.json"
+}

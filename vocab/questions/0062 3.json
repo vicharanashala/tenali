@@ -1,0 +1,15 @@
+{
+  "id": 62,
+  "word": "Busy",
+  "question": "Busy",
+  "options": [
+    "Not found in large numbers; uncommon",
+    "Having a great deal to do",
+    "Very fine in texture or structure",
+    "Feeling worried or nervous about something"
+  ],
+  "answerOption": "B",
+  "answerText": "Having a great deal to do",
+  "difficulty": "easy",
+  "sourceFile": "0062.json"
+}

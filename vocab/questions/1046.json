@@ -1,0 +1,15 @@
+{
+  "id": 1046,
+  "word": "Wary",
+  "question": "Wary",
+  "options": [
+    "Serving to describe or characterize",
+    "The final part of a narrative",
+    "Aggressively self-assured or self-important",
+    "Feeling cautious about possible dangers"
+  ],
+  "answerOption": "D",
+  "answerText": "Feeling cautious about possible dangers",
+  "difficulty": "medium",
+  "sourceFile": "1046.json"
+}

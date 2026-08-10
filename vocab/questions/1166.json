@@ -1,0 +1,15 @@
+{
+  "id": 1166,
+  "word": "Clandestine",
+  "question": "Clandestine",
+  "options": [
+    "To satisfy thirst by drinking",
+    "Concerned about precise details",
+    "The action of moving downward",
+    "Kept secret or done in a hidden way"
+  ],
+  "answerOption": "D",
+  "answerText": "Kept secret or done in a hidden way",
+  "difficulty": "medium",
+  "sourceFile": "1166.json"
+}

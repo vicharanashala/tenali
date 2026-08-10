@@ -1,0 +1,15 @@
+{
+  "id": 1698,
+  "word": "Germane",
+  "question": "Germane",
+  "options": [
+    "A device that aerates something",
+    "A solution for all difficulties or diseases",
+    "A gaseous compound",
+    "Relevant to a subject under consideration"
+  ],
+  "answerOption": "D",
+  "answerText": "Relevant to a subject under consideration",
+  "difficulty": "hard",
+  "sourceFile": "1698.json"
+}

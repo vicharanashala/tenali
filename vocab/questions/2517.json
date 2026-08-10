@@ -1,0 +1,15 @@
+{
+  "id": 2517,
+  "word": "AEROLITH",
+  "question": "AEROLITH",
+  "options": [
+    "Having a ready insight into things",
+    "A meteorite or stone",
+    "Recovery from illness or tiredness",
+    "Treatment with hot air"
+  ],
+  "answerOption": "B",
+  "answerText": "A meteorite or stone",
+  "difficulty": "hard",
+  "sourceFile": "2517.json"
+}

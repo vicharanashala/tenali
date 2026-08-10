@@ -1,0 +1,15 @@
+{
+  "id": 73,
+  "word": "Curious",
+  "question": "Curious",
+  "options": [
+    "Eager to know or learn something",
+    "To heat a liquid until it bubbles",
+    "Existing at the beginning",
+    "To refuse to take notice of something"
+  ],
+  "answerOption": "A",
+  "answerText": "Eager to know or learn something",
+  "difficulty": "easy",
+  "sourceFile": "0073.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2088,
+  "word": "Bourgeois",
+  "question": "Bourgeois",
+  "options": [
+    "The action of moving up",
+    "Belonging to the middle class",
+    "To legally take as one's own child",
+    "Familiar with many different cultures"
+  ],
+  "answerOption": "B",
+  "answerText": "Belonging to the middle class",
+  "difficulty": "hard",
+  "sourceFile": "2088.json"
+}

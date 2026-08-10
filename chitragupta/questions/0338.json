@@ -1,0 +1,14 @@
+{
+  "id": 338,
+  "question": "Which country is known for the city of Athens?",
+  "options": [
+    "Italy",
+    "Greece",
+    "Turkey",
+    "Cyprus"
+  ],
+  "answerOption": "B",
+  "answerText": "Greece",
+  "genre": "geography",
+  "sourceFile": "0338.json"
+}

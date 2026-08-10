@@ -1,0 +1,14 @@
+{
+  "id": 876,
+  "question": "Which country is associated with the city of Astana/Nur-Sultan?",
+  "options": [
+    "Kyrgyzstan",
+    "Kazakhstan",
+    "Uzbekistan",
+    "Tajikistan"
+  ],
+  "answerOption": "B",
+  "answerText": "Kazakhstan",
+  "genre": "geography",
+  "sourceFile": "0876.json"
+}

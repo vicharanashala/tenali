@@ -1,0 +1,15 @@
+{
+  "id": 530,
+  "word": "Empower",
+  "question": "Empower",
+  "options": [
+    "Bringing or worthy of honor",
+    "To establish a home in a new place",
+    "To give someone the authority to do something",
+    "To succeed in doing something"
+  ],
+  "answerOption": "C",
+  "answerText": "To give someone the authority to do something",
+  "difficulty": "easy",
+  "sourceFile": "0530.json"
+}

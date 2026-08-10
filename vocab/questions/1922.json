@@ -1,0 +1,15 @@
+{
+  "id": 1922,
+  "word": "Twisted",
+  "question": "Twisted",
+  "options": [
+    "A ruler with absolute power",
+    "To dislike intensely",
+    "The action of discovering something",
+    "Turned from its course"
+  ],
+  "answerOption": "D",
+  "answerText": "Turned from its course",
+  "difficulty": "medium",
+  "sourceFile": "1922.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 818,
+  "word": "Ambiguous",
+  "question": "Ambiguous",
+  "options": [
+    "Arranged or planned in a methodical way",
+    "Open to more than one interpretation",
+    "Happening or done at once",
+    "To recognize what someone or something is"
+  ],
+  "answerOption": "B",
+  "answerText": "Open to more than one interpretation",
+  "difficulty": "easy",
+  "sourceFile": "0818.json"
+}

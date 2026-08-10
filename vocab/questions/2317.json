@@ -1,0 +1,15 @@
+{
+  "id": 2317,
+  "word": "Adversary",
+  "question": "Adversary",
+  "options": [
+    "Treating serious issues with inappropriate humor",
+    "In an adventurous manner",
+    "One's opponent in a contest",
+    "The process of aerating something"
+  ],
+  "answerOption": "C",
+  "answerText": "One's opponent in a contest",
+  "difficulty": "hard",
+  "sourceFile": "2317.json"
+}

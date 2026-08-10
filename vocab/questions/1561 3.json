@@ -1,0 +1,15 @@
+{
+  "id": 1561,
+  "word": "Designation",
+  "question": "Designation",
+  "options": [
+    "Famous for something bad",
+    "To discover or identify something",
+    "A subtle difference in meaning",
+    "A name or title given to someone"
+  ],
+  "answerOption": "D",
+  "answerText": "A name or title given to someone",
+  "difficulty": "medium",
+  "sourceFile": "1561.json"
+}

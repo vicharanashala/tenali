@@ -1,0 +1,15 @@
+{
+  "id": 2323,
+  "word": "Advertence",
+  "question": "Advertence",
+  "options": [
+    "The art of air technology",
+    "Involving conflict or opposition",
+    "To use ambiguous language to deceive",
+    "The action of noticing something"
+  ],
+  "answerOption": "D",
+  "answerText": "The action of noticing something",
+  "difficulty": "hard",
+  "sourceFile": "2323.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 948,
+  "word": "Somber",
+  "question": "Somber",
+  "options": [
+    "Well informed about many subjects",
+    "Darkly colored or gloomy",
+    "To put a limit on something",
+    "Showing gentleness and concern"
+  ],
+  "answerOption": "B",
+  "answerText": "Darkly colored or gloomy",
+  "difficulty": "easy",
+  "sourceFile": "0948.json"
+}

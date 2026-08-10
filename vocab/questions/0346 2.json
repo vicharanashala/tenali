@@ -1,0 +1,15 @@
+{
+  "id": 346,
+  "word": "Explore",
+  "question": "Explore",
+  "options": [
+    "To travel through an unfamiliar area to learn about it",
+    "To watch over and direct the work of others",
+    "Marked by exactness and accuracy",
+    "To cut into thin flat pieces"
+  ],
+  "answerOption": "A",
+  "answerText": "To travel through an unfamiliar area to learn about it",
+  "difficulty": "easy",
+  "sourceFile": "0346.json"
+}

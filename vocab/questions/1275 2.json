@@ -1,0 +1,15 @@
+{
+  "id": 1275,
+  "word": "Aberrant",
+  "question": "Aberrant",
+  "options": [
+    "To extend known data into an unknown area",
+    "A person who tells stories in a skillful way",
+    "Deserving or causing public disgrace",
+    "Departing from accepted standards"
+  ],
+  "answerOption": "D",
+  "answerText": "Departing from accepted standards",
+  "difficulty": "hard",
+  "sourceFile": "1275.json"
+}

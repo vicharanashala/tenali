@@ -1,0 +1,14 @@
+{
+  "id": 38,
+  "question": "What is the capital city of Australia?",
+  "options": [
+    "Sydney",
+    "Melbourne",
+    "Canberra",
+    "Perth"
+  ],
+  "answerOption": "C",
+  "answerText": "Canberra",
+  "genre": "geography",
+  "sourceFile": "0038.json"
+}

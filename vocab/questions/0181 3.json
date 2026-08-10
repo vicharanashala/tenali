@@ -1,0 +1,15 @@
+{
+  "id": 181,
+  "word": "Learn",
+  "question": "Learn",
+  "options": [
+    "To become aware of through the senses",
+    "To gain knowledge or skill through study",
+    "Able to soak up liquid easily",
+    "To form a picture of something in your mind"
+  ],
+  "answerOption": "B",
+  "answerText": "To gain knowledge or skill through study",
+  "difficulty": "easy",
+  "sourceFile": "0181.json"
+}

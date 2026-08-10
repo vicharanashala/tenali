@@ -1,0 +1,15 @@
+{
+  "id": 134,
+  "word": "Hidden",
+  "question": "Hidden",
+  "options": [
+    "Kept out of sight; concealed",
+    "Having or showing a willingness to act dishonestly",
+    "Having high principles and expectations",
+    "Not clearly expressed or understood"
+  ],
+  "answerOption": "A",
+  "answerText": "Kept out of sight; concealed",
+  "difficulty": "easy",
+  "sourceFile": "0134.json"
+}

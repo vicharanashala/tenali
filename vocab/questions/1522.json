@@ -1,0 +1,15 @@
+{
+  "id": 1522,
+  "word": "Deprived",
+  "question": "Deprived",
+  "options": [
+    "To engage in a close fight or struggle",
+    "Not revealing one's thoughts readily",
+    "Lacking important necessities",
+    "Very great or intense; deep"
+  ],
+  "answerOption": "C",
+  "answerText": "Lacking important necessities",
+  "difficulty": "medium",
+  "sourceFile": "1522.json"
+}

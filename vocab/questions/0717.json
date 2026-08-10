@@ -1,0 +1,15 @@
+{
+  "id": 717,
+  "word": "Remote",
+  "question": "Remote",
+  "options": [
+    "To apply color to a surface with a brush",
+    "To open something that was folded",
+    "Situated far from the main centers",
+    "Growing thickly and strongly; abundant"
+  ],
+  "answerOption": "C",
+  "answerText": "Situated far from the main centers",
+  "difficulty": "easy",
+  "sourceFile": "0717.json"
+}

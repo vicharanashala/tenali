@@ -1,0 +1,15 @@
+{
+  "id": 870,
+  "word": "Rapid",
+  "question": "Rapid",
+  "options": [
+    "Conforming to accepted standards of behavior",
+    "Happening with great speed",
+    "To construct something by putting parts together",
+    "Having experience, knowledge, and good judgment"
+  ],
+  "answerOption": "B",
+  "answerText": "Happening with great speed",
+  "difficulty": "easy",
+  "sourceFile": "0870.json"
+}

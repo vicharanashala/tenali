@@ -1,0 +1,15 @@
+{
+  "id": 660,
+  "word": "Enormous",
+  "question": "Enormous",
+  "options": [
+    "Moving at a low speed",
+    "Brief or using few words",
+    "To fail to remember something",
+    "Very large in size or quantity"
+  ],
+  "answerOption": "D",
+  "answerText": "Very large in size or quantity",
+  "difficulty": "easy",
+  "sourceFile": "0660.json"
+}

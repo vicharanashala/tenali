@@ -1,0 +1,15 @@
+{
+  "id": 94,
+  "word": "Dull",
+  "question": "Dull",
+  "options": [
+    "To give someone the means to do something",
+    "Lacking interest or excitement",
+    "To keep doing something without stopping",
+    "Very fine in texture or structure"
+  ],
+  "answerOption": "B",
+  "answerText": "Lacking interest or excitement",
+  "difficulty": "easy",
+  "sourceFile": "0094.json"
+}

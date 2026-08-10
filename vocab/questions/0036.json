@@ -1,0 +1,15 @@
+{
+  "id": 36,
+  "word": "Awake",
+  "question": "Awake",
+  "options": [
+    "Luxuriously rich and expensive",
+    "To greatly surprise someone",
+    "Not asleep; fully conscious",
+    "To make a displeased facial expression"
+  ],
+  "answerOption": "C",
+  "answerText": "Not asleep; fully conscious",
+  "difficulty": "easy",
+  "sourceFile": "0036.json"
+}

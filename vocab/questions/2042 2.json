@@ -1,0 +1,15 @@
+{
+  "id": 2042,
+  "word": "Aenigma",
+  "question": "Aenigma",
+  "options": [
+    "A riddle or mysterious statement",
+    "A genus of spiders in taxonomy",
+    "Medical treatment using air",
+    "Voluntary sexual intercourse outside marriage"
+  ],
+  "answerOption": "A",
+  "answerText": "A riddle or mysterious statement",
+  "difficulty": "hard",
+  "sourceFile": "2042.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1700,
+  "word": "Deterministic",
+  "question": "Deterministic",
+  "options": [
+    "Relating to or based on determinism",
+    "A playing card or die with two spots",
+    "Showing resistance to authority",
+    "To accumulate or receive over time"
+  ],
+  "answerOption": "A",
+  "answerText": "Relating to or based on determinism",
+  "difficulty": "medium",
+  "sourceFile": "1700.json"
+}

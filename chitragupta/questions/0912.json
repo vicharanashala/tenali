@@ -1,0 +1,14 @@
+{
+  "id": 912,
+  "question": "Who wrote 'The Prince'?",
+  "options": [
+    "Machiavelli",
+    "Dante",
+    "Voltaire",
+    "Cervantes"
+  ],
+  "answerOption": "A",
+  "answerText": "Machiavelli",
+  "genre": "general-knowledge",
+  "sourceFile": "0912.json"
+}

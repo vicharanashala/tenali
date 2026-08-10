@@ -1,0 +1,15 @@
+{
+  "id": 3189,
+  "word": "Abyssophage",
+  "question": "Abyssophage",
+  "options": [
+    "In a non-living manner",
+    "Creature eating abyss organisms",
+    "Abyss chested creatures",
+    "One who believes in abiogenesis"
+  ],
+  "answerOption": "B",
+  "answerText": "Creature eating abyss organisms",
+  "difficulty": "extra-hard",
+  "sourceFile": "3189.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 86,
+  "word": "Deep",
+  "question": "Deep",
+  "options": [
+    "Strikingly unusual or different",
+    "Extending far down from the top",
+    "Important, serious, or significant",
+    "To work together on an activity"
+  ],
+  "answerOption": "B",
+  "answerText": "Extending far down from the top",
+  "difficulty": "easy",
+  "sourceFile": "0086.json"
+}

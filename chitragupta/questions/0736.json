@@ -1,0 +1,14 @@
+{
+  "id": 736,
+  "question": "Which organ produces insulin?",
+  "options": [
+    "Liver",
+    "Pancreas",
+    "Kidney",
+    "Spleen"
+  ],
+  "answerOption": "B",
+  "answerText": "Pancreas",
+  "genre": "science",
+  "sourceFile": "0736.json"
+}

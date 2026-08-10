@@ -1,0 +1,15 @@
+{
+  "id": 3081,
+  "word": "Abusancy",
+  "question": "Abusancy",
+  "options": [
+    "Plural of abeyancy",
+    "The feeling of solitude in the woods",
+    "Quality of abyss fear",
+    "State of being abused"
+  ],
+  "answerOption": "D",
+  "answerText": "State of being abused",
+  "difficulty": "extra-hard",
+  "sourceFile": "3081.json"
+}

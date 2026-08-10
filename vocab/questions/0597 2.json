@@ -1,0 +1,15 @@
+{
+  "id": 597,
+  "word": "Outstanding",
+  "question": "Outstanding",
+  "options": [
+    "Exceptionally good; remarkable",
+    "Using more words than needed",
+    "Graceful and stylish in appearance",
+    "To make a thorough change in form"
+  ],
+  "answerOption": "A",
+  "answerText": "Exceptionally good; remarkable",
+  "difficulty": "easy",
+  "sourceFile": "0597.json"
+}

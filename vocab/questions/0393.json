@@ -1,0 +1,15 @@
+{
+  "id": 393,
+  "word": "Ripen",
+  "question": "Ripen",
+  "options": [
+    "Kept out of sight; concealed",
+    "To buy something",
+    "To become mature and ready to eat",
+    "Made by human skill; not natural"
+  ],
+  "answerOption": "C",
+  "answerText": "To become mature and ready to eat",
+  "difficulty": "easy",
+  "sourceFile": "0393.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 660,
+  "word": "Enormous",
+  "question": "Enormous",
+  "options": [
+    "To express dissatisfaction about something",
+    "Very large in size or quantity",
+    "To walk slowly with no clear direction",
+    "To tell someone you will definitely do something"
+  ],
+  "answerOption": "B",
+  "answerText": "Very large in size or quantity",
+  "difficulty": "easy",
+  "sourceFile": "0660.json"
+}

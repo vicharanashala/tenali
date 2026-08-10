@@ -1,0 +1,15 @@
+{
+  "id": 1253,
+  "word": "Belligerent",
+  "question": "Belligerent",
+  "options": [
+    "Expressing opposition or negation",
+    "Formally forbidden by authority",
+    "Severely hampered or restricted",
+    "Hostile and aggressive"
+  ],
+  "answerOption": "D",
+  "answerText": "Hostile and aggressive",
+  "difficulty": "medium",
+  "sourceFile": "1253.json"
+}

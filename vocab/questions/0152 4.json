@@ -1,0 +1,15 @@
+{
+  "id": 152,
+  "word": "Begin",
+  "question": "Begin",
+  "options": [
+    "Free of deceit; truthful",
+    "Noticeably happy and optimistic",
+    "Difficult to grip or stand on",
+    "To start doing something"
+  ],
+  "answerOption": "D",
+  "answerText": "To start doing something",
+  "difficulty": "easy",
+  "sourceFile": "0152.json"
+}

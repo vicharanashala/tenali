@@ -1,0 +1,15 @@
+{
+  "id": 465,
+  "word": "Rehearse",
+  "question": "Rehearse",
+  "options": [
+    "Having an uneven or irregular surface",
+    "Being the only one of its kind",
+    "Feeling deep pleasure from achievements",
+    "To practice for a public performance"
+  ],
+  "answerOption": "D",
+  "answerText": "To practice for a public performance",
+  "difficulty": "easy",
+  "sourceFile": "0465.json"
+}

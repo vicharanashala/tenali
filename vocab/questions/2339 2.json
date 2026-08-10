@@ -1,0 +1,15 @@
+{
+  "id": 2339,
+  "word": "Eudaimonia",
+  "question": "Eudaimonia",
+  "options": [
+    "Of or resembling twilight",
+    "Relating to gradual weaning",
+    "Relating to functional loss",
+    "A contented state of being happy and prosperous"
+  ],
+  "answerOption": "D",
+  "answerText": "A contented state of being happy and prosperous",
+  "difficulty": "extra-hard",
+  "sourceFile": "2339.json"
+}

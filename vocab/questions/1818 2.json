@@ -1,0 +1,15 @@
+{
+  "id": 1818,
+  "word": "Aberrant",
+  "question": "Aberrant",
+  "options": [
+    "Relating to meteorites from space",
+    "A typical example or pattern of something",
+    "Departing from accepted standards",
+    "Happening by chance or accident"
+  ],
+  "answerOption": "C",
+  "answerText": "Departing from accepted standards",
+  "difficulty": "hard",
+  "sourceFile": "1818.json"
+}

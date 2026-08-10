@@ -1,0 +1,15 @@
+{
+  "id": 264,
+  "word": "Swim",
+  "question": "Swim",
+  "options": [
+    "To make something clear and easy to understand",
+    "Very great in degree; intense",
+    "To formally put an end to a system",
+    "To move through water using the body"
+  ],
+  "answerOption": "D",
+  "answerText": "To move through water using the body",
+  "difficulty": "easy",
+  "sourceFile": "0264.json"
+}

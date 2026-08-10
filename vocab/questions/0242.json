@@ -1,0 +1,15 @@
+{
+  "id": 242,
+  "word": "Greet",
+  "question": "Greet",
+  "options": [
+    "Having a sharp taste",
+    "To welcome someone with particular words",
+    "To extend to full length",
+    "To find the size or amount of something"
+  ],
+  "answerOption": "B",
+  "answerText": "To welcome someone with particular words",
+  "difficulty": "easy",
+  "sourceFile": "0242.json"
+}

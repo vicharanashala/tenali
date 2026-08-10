@@ -1,0 +1,15 @@
+{
+  "id": 893,
+  "word": "Optimistic",
+  "question": "Optimistic",
+  "options": [
+    "Suave and courteous in manner",
+    "Abundant in supply or quantity",
+    "Possible and practical to do easily",
+    "Hopeful and confident about the future"
+  ],
+  "answerOption": "D",
+  "answerText": "Hopeful and confident about the future",
+  "difficulty": "medium",
+  "sourceFile": "0893.json"
+}

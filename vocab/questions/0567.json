@@ -1,0 +1,15 @@
+{
+  "id": 567,
+  "word": "Fascinate",
+  "question": "Fascinate",
+  "options": [
+    "Lacking consideration for other people",
+    "To attract and hold attention of someone",
+    "To say sorry for doing something wrong",
+    "To offer suggestions about the best action"
+  ],
+  "answerOption": "B",
+  "answerText": "To attract and hold attention of someone",
+  "difficulty": "easy",
+  "sourceFile": "0567.json"
+}

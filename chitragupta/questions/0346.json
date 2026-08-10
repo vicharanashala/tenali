@@ -1,0 +1,14 @@
+{
+  "id": 346,
+  "question": "What is the capital of Vietnam?",
+  "options": [
+    "Ho Chi Minh City",
+    "Hanoi",
+    "Da Nang",
+    "Hue"
+  ],
+  "answerOption": "B",
+  "answerText": "Hanoi",
+  "genre": "geography",
+  "sourceFile": "0346.json"
+}

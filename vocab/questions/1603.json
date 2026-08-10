@@ -1,0 +1,15 @@
+{
+  "id": 1603,
+  "word": "Desire",
+  "question": "Desire",
+  "options": [
+    "To wish or want something",
+    "Feeling cautious about possible dangers",
+    "A person's death or the end of something",
+    "Not firmly fixed or secure"
+  ],
+  "answerOption": "A",
+  "answerText": "To wish or want something",
+  "difficulty": "medium",
+  "sourceFile": "1603.json"
+}

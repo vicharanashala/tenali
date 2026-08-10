@@ -1,0 +1,15 @@
+{
+  "id": 161,
+  "word": "Blame",
+  "question": "Blame",
+  "options": [
+    "To impose a penalty for wrongdoing",
+    "To want something to happen and think it possible",
+    "To assign responsibility for a fault",
+    "Going in a slanting direction"
+  ],
+  "answerOption": "C",
+  "answerText": "To assign responsibility for a fault",
+  "difficulty": "easy",
+  "sourceFile": "0161.json"
+}

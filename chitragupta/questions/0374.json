@@ -1,0 +1,14 @@
+{
+  "id": 374,
+  "question": "Which city is the capital of Jammu and Kashmir in the summer under the traditional seasonal arrangement?",
+  "options": [
+    "Jammu",
+    "Srinagar",
+    "Leh",
+    "Kargil"
+  ],
+  "answerOption": "B",
+  "answerText": "Srinagar",
+  "genre": "geography",
+  "sourceFile": "0374.json"
+}

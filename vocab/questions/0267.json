@@ -1,0 +1,15 @@
+{
+  "id": 267,
+  "word": "Plant",
+  "question": "Plant",
+  "options": [
+    "Created directly and not a copy",
+    "To put a seed in the ground to grow",
+    "To take delight or pleasure in something",
+    "To manage or guide the operations of something"
+  ],
+  "answerOption": "B",
+  "answerText": "To put a seed in the ground to grow",
+  "difficulty": "easy",
+  "sourceFile": "0267.json"
+}

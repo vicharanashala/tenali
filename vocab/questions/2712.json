@@ -1,0 +1,15 @@
+{
+  "id": 2712,
+  "word": "Materia Medica",
+  "question": "Materia Medica",
+  "options": [
+    "The action of freeing a slave",
+    "A genus of weasel-like animals",
+    "The action of validating something",
+    "Knowledge of medicinal drugs"
+  ],
+  "answerOption": "D",
+  "answerText": "Knowledge of medicinal drugs",
+  "difficulty": "hard",
+  "sourceFile": "2712.json"
+}

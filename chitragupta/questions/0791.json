@@ -1,0 +1,14 @@
+{
+  "id": 791,
+  "question": "Which organ in the human body removes excess water and salts?",
+  "options": [
+    "Heart",
+    "Kidney",
+    "Liver",
+    "Pancreas"
+  ],
+  "answerOption": "B",
+  "answerText": "Kidney",
+  "genre": "science",
+  "sourceFile": "0791.json"
+}

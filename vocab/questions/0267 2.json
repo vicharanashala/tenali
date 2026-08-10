@@ -1,0 +1,15 @@
+{
+  "id": 267,
+  "word": "Plant",
+  "question": "Plant",
+  "options": [
+    "Having opposite surfaces close together",
+    "Occurring or found frequently",
+    "To put a seed in the ground to grow",
+    "To apply color to a surface with a brush"
+  ],
+  "answerOption": "C",
+  "answerText": "To put a seed in the ground to grow",
+  "difficulty": "easy",
+  "sourceFile": "0267.json"
+}

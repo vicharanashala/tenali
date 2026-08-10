@@ -1,0 +1,15 @@
+{
+  "id": 348,
+  "word": "Decide",
+  "question": "Decide",
+  "options": [
+    "Telling or expressing the truth; honest",
+    "To make a choice after thinking about it",
+    "To disappear suddenly and completely",
+    "Domesticated and not dangerous to people"
+  ],
+  "answerOption": "B",
+  "answerText": "To make a choice after thinking about it",
+  "difficulty": "easy",
+  "sourceFile": "0348.json"
+}

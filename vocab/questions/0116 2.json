@@ -1,0 +1,15 @@
+{
+  "id": 116,
+  "word": "Eager",
+  "question": "Eager",
+  "options": [
+    "Strongly wanting to do or have something",
+    "To move downward from a higher point",
+    "Done with the hands; requiring human effort",
+    "Having a sharp, unpleasant taste"
+  ],
+  "answerOption": "A",
+  "answerText": "Strongly wanting to do or have something",
+  "difficulty": "easy",
+  "sourceFile": "0116.json"
+}

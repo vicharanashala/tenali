@@ -1,0 +1,15 @@
+{
+  "id": 46,
+  "word": "Gentle",
+  "question": "Gentle",
+  "options": [
+    "Very small; much smaller than normal",
+    "Insufficient for the demand; in short supply",
+    "Mild in temperament or behavior",
+    "Of very little importance"
+  ],
+  "answerOption": "C",
+  "answerText": "Mild in temperament or behavior",
+  "difficulty": "easy",
+  "sourceFile": "0046.json"
+}

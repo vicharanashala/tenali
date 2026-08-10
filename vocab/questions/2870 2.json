@@ -1,0 +1,15 @@
+{
+  "id": 2870,
+  "word": "Lacuna",
+  "question": "Lacuna",
+  "options": [
+    "A person learning the alphabet",
+    "An unfilled space or gap",
+    "A fine filmy substance of cobwebs",
+    "The study or practice of fermentation in brewing"
+  ],
+  "answerOption": "B",
+  "answerText": "An unfilled space or gap",
+  "difficulty": "extra-hard",
+  "sourceFile": "2870.json"
+}

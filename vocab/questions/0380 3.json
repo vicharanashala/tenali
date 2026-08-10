@@ -1,0 +1,15 @@
+{
+  "id": 380,
+  "word": "Slide",
+  "question": "Slide",
+  "options": [
+    "To cause someone to feel sudden wonder",
+    "To move smoothly along a surface",
+    "Created directly and not a copy",
+    "Having the properties of a magnet"
+  ],
+  "answerOption": "B",
+  "answerText": "To move smoothly along a surface",
+  "difficulty": "easy",
+  "sourceFile": "0380.json"
+}

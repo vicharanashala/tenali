@@ -1,0 +1,15 @@
+{
+  "id": 1823,
+  "word": "Inefficient",
+  "question": "Inefficient",
+  "options": [
+    "Seeking to take revenge",
+    "Showing quick and inventive verbal humor",
+    "The reduction of population",
+    "Not working well or wastes effort"
+  ],
+  "answerOption": "D",
+  "answerText": "Not working well or wastes effort",
+  "difficulty": "medium",
+  "sourceFile": "1823.json"
+}

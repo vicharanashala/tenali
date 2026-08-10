@@ -1,0 +1,15 @@
+{
+  "id": 132,
+  "word": "Present",
+  "question": "Present",
+  "options": [
+    "Hard but likely to break easily",
+    "Of great weight; difficult to lift",
+    "To keep away from something",
+    "In a particular place; existing now"
+  ],
+  "answerOption": "D",
+  "answerText": "In a particular place; existing now",
+  "difficulty": "easy",
+  "sourceFile": "0132.json"
+}

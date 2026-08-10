@@ -1,0 +1,15 @@
+{
+  "id": 194,
+  "word": "Bend",
+  "question": "Bend",
+  "options": [
+    "Tending to stick or adhere to things",
+    "Feeling strong displeasure or hostility",
+    "To shape into a curve",
+    "To finish making or doing something"
+  ],
+  "answerOption": "C",
+  "answerText": "To shape into a curve",
+  "difficulty": "easy",
+  "sourceFile": "0194.json"
+}

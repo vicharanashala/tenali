@@ -1,0 +1,15 @@
+{
+  "id": 292,
+  "word": "Continue",
+  "question": "Continue",
+  "options": [
+    "To leave a place",
+    "To keep doing something without stopping",
+    "Feeling pleasure or happiness",
+    "To believe in the reliability of someone"
+  ],
+  "answerOption": "B",
+  "answerText": "To keep doing something without stopping",
+  "difficulty": "easy",
+  "sourceFile": "0292.json"
+}

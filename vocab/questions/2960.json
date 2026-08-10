@@ -1,0 +1,15 @@
+{
+  "id": 2960,
+  "word": "Entreaty",
+  "question": "Entreaty",
+  "options": [
+    "An earnest request or plea",
+    "Superficially plausible but actually wrong",
+    "Having air spaces in tissue",
+    "Poisoning from atmosphere"
+  ],
+  "answerOption": "A",
+  "answerText": "An earnest request or plea",
+  "difficulty": "hard",
+  "sourceFile": "2960.json"
+}

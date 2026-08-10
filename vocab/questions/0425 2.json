@@ -1,0 +1,15 @@
+{
+  "id": 425,
+  "word": "Connect",
+  "question": "Connect",
+  "options": [
+    "To join or link things together",
+    "Plain or obvious; clearly seen",
+    "Not physically existing but made to appear so",
+    "To take part in something"
+  ],
+  "answerOption": "A",
+  "answerText": "To join or link things together",
+  "difficulty": "easy",
+  "sourceFile": "0425.json"
+}

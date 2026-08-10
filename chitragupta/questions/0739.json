@@ -1,0 +1,14 @@
+{
+  "id": 739,
+  "question": "Which part of the plant absorbs water?",
+  "options": [
+    "Leaf",
+    "Stem",
+    "Root",
+    "Flower"
+  ],
+  "answerOption": "C",
+  "answerText": "Root",
+  "genre": "science",
+  "sourceFile": "0739.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1119,
+  "word": "Blunt",
+  "question": "Blunt",
+  "options": [
+    "Loyalty to a person or country",
+    "The manner of standing or walking",
+    "Uncompromisingly direct in speech",
+    "To hold and use a weapon or tool"
+  ],
+  "answerOption": "C",
+  "answerText": "Uncompromisingly direct in speech",
+  "difficulty": "medium",
+  "sourceFile": "1119.json"
+}

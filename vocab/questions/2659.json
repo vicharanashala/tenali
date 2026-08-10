@@ -1,0 +1,15 @@
+{
+  "id": 2659,
+  "word": "Deprivation",
+  "question": "Deprivation",
+  "options": [
+    "Derived from an external source",
+    "The lack of something needed",
+    "A substance that adulterates",
+    "Study of organisms in air"
+  ],
+  "answerOption": "B",
+  "answerText": "The lack of something needed",
+  "difficulty": "hard",
+  "sourceFile": "2659.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2900,
+  "word": "Aberration",
+  "question": "Aberration",
+  "options": [
+    "Having cleansing properties",
+    "With fear of abyss",
+    "A deviation from normal pattern",
+    "The state of being abstruse"
+  ],
+  "answerOption": "C",
+  "answerText": "A deviation from normal pattern",
+  "difficulty": "extra-hard",
+  "sourceFile": "2900.json"
+}

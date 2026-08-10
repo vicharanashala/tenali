@@ -1,0 +1,15 @@
+{
+  "id": 88,
+  "word": "Heavy",
+  "question": "Heavy",
+  "options": [
+    "Able to withstand wear and tear",
+    "To agree to give something requested",
+    "To try to win against other people",
+    "Of great weight; difficult to lift"
+  ],
+  "answerOption": "D",
+  "answerText": "Of great weight; difficult to lift",
+  "difficulty": "easy",
+  "sourceFile": "0088.json"
+}

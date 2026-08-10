@@ -1,0 +1,15 @@
+{
+  "id": 762,
+  "word": "Chaotic",
+  "question": "Chaotic",
+  "options": [
+    "To give attention to sound or speech",
+    "To move something quickly back and forth",
+    "Causing an urge to scratch",
+    "In a state of complete confusion"
+  ],
+  "answerOption": "D",
+  "answerText": "In a state of complete confusion",
+  "difficulty": "easy",
+  "sourceFile": "0762.json"
+}

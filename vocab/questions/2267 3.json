@@ -1,0 +1,15 @@
+{
+  "id": 2267,
+  "word": "Aeolus",
+  "question": "Aeolus",
+  "options": [
+    "Relating to airborne organisms",
+    "Stubbornness or persistence",
+    "Greek god of the winds",
+    "The action of expressing an idea"
+  ],
+  "answerOption": "C",
+  "answerText": "Greek god of the winds",
+  "difficulty": "hard",
+  "sourceFile": "2267.json"
+}

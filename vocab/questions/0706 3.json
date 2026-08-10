@@ -1,0 +1,15 @@
+{
+  "id": 706,
+  "word": "Regular",
+  "question": "Regular",
+  "options": [
+    "Existing in very large quantities",
+    "To exert force to move something closer",
+    "To make something untidy or disordered",
+    "Arranged in a constant pattern"
+  ],
+  "answerOption": "D",
+  "answerText": "Arranged in a constant pattern",
+  "difficulty": "easy",
+  "sourceFile": "0706.json"
+}

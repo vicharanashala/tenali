@@ -1,0 +1,15 @@
+{
+  "id": 2251,
+  "word": "Adolescent",
+  "question": "Adolescent",
+  "options": [
+    "Extremely idealistic; unrealistic and impractical",
+    "A young person developing into adulthood",
+    "Extreme scarcity of food",
+    "One who is advised"
+  ],
+  "answerOption": "B",
+  "answerText": "A young person developing into adulthood",
+  "difficulty": "hard",
+  "sourceFile": "2251.json"
+}

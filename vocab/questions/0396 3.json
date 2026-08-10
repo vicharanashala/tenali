@@ -1,0 +1,15 @@
+{
+  "id": 396,
+  "word": "Wither",
+  "question": "Wither",
+  "options": [
+    "To dry out and shrivel up",
+    "To determine an amount by mathematics",
+    "Having four equal sides and right angles",
+    "Covered or saturated with water"
+  ],
+  "answerOption": "A",
+  "answerText": "To dry out and shrivel up",
+  "difficulty": "easy",
+  "sourceFile": "0396.json"
+}

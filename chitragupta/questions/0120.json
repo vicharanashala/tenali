@@ -1,0 +1,14 @@
+{
+  "id": 120,
+  "question": "How many degrees are there in a right angle?",
+  "options": [
+    "45",
+    "90",
+    "120",
+    "180"
+  ],
+  "answerOption": "B",
+  "answerText": "90",
+  "genre": "mixed",
+  "sourceFile": "0120.json"
+}

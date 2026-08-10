@@ -1,0 +1,15 @@
+{
+  "id": 71,
+  "word": "Careful",
+  "question": "Careful",
+  "options": [
+    "Making sure to avoid danger or mistakes",
+    "Able to withstand wear and tear",
+    "To go out of or leave a place",
+    "Existing at the beginning"
+  ],
+  "answerOption": "A",
+  "answerText": "Making sure to avoid danger or mistakes",
+  "difficulty": "easy",
+  "sourceFile": "0071.json"
+}

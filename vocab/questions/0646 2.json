@@ -1,0 +1,15 @@
+{
+  "id": 646,
+  "word": "Educated",
+  "question": "Educated",
+  "options": [
+    "To study something thoroughly",
+    "Having high moral standards",
+    "To achieve or realize something desired",
+    "Having received a good education"
+  ],
+  "answerOption": "D",
+  "answerText": "Having received a good education",
+  "difficulty": "easy",
+  "sourceFile": "0646.json"
+}

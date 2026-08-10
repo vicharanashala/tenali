@@ -1,0 +1,15 @@
+{
+  "id": 470,
+  "word": "Recite",
+  "question": "Recite",
+  "options": [
+    "To blind temporarily with a bright light",
+    "Important and well known",
+    "To repeat aloud from memory",
+    "Made by chemical processes; not natural"
+  ],
+  "answerOption": "C",
+  "answerText": "To repeat aloud from memory",
+  "difficulty": "easy",
+  "sourceFile": "0470.json"
+}

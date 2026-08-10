@@ -1,0 +1,14 @@
+{
+  "id": 777,
+  "question": "Who discovered the laws of planetary motion?",
+  "options": [
+    "Galileo",
+    "Kepler",
+    "Newton",
+    "Copernicus"
+  ],
+  "answerOption": "B",
+  "answerText": "Kepler",
+  "genre": "geography",
+  "sourceFile": "0777.json"
+}

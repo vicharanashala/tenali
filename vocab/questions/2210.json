@@ -1,0 +1,15 @@
+{
+  "id": 2210,
+  "word": "Circumspect",
+  "question": "Circumspect",
+  "options": [
+    "A flattering statement used to persuade",
+    "The quality of being solid",
+    "Wary and unwilling to take risks",
+    "The quality of being stable"
+  ],
+  "answerOption": "C",
+  "answerText": "Wary and unwilling to take risks",
+  "difficulty": "hard",
+  "sourceFile": "2210.json"
+}

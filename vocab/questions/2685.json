@@ -1,0 +1,15 @@
+{
+  "id": 2685,
+  "word": "Abyss",
+  "question": "Abyss",
+  "options": [
+    "The act of freeing someone",
+    "A very deep or seemingly bottomless chasm",
+    "Surgical use of air",
+    "Divination by air and weather"
+  ],
+  "answerOption": "B",
+  "answerText": "A very deep or seemingly bottomless chasm",
+  "difficulty": "hard",
+  "sourceFile": "2685.json"
+}

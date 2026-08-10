@@ -1,0 +1,15 @@
+{
+  "id": 75,
+  "word": "Phosphenes",
+  "question": "Phosphenes",
+  "options": [
+    "The strange wistfulness of used bookshops",
+    "The pleasant smell of earth after rain",
+    "The lights you see when you rub your closed eyes",
+    "A feeling of melancholy about the state of the world"
+  ],
+  "answerOption": "C",
+  "answerText": "The lights you see when you rub your closed eyes",
+  "difficulty": "hardest",
+  "sourceFile": "0075.json"
+}

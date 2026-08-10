@@ -1,0 +1,14 @@
+{
+  "id": 403,
+  "question": "Who painted 'Starry Night'?",
+  "options": [
+    "Vincent van Gogh",
+    "Claude Monet",
+    "Salvador Dalí",
+    "Rembrandt"
+  ],
+  "answerOption": "A",
+  "answerText": "Vincent van Gogh",
+  "genre": "general-knowledge",
+  "sourceFile": "0403.json"
+}

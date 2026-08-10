@@ -1,0 +1,15 @@
+{
+  "id": 74,
+  "word": "Afraid",
+  "question": "Afraid",
+  "options": [
+    "Of great or more than average height",
+    "Feeling fear or anxiety",
+    "Strongly wanting to do or have something",
+    "Pleased and relieved about something"
+  ],
+  "answerOption": "B",
+  "answerText": "Feeling fear or anxiety",
+  "difficulty": "easy",
+  "sourceFile": "0074.json"
+}

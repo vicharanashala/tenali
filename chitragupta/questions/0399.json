@@ -1,0 +1,14 @@
+{
+  "id": 399,
+  "question": "Which city is the capital of Himachal Pradesh?",
+  "options": [
+    "Dharamshala",
+    "Shimla",
+    "Solan",
+    "Mandi"
+  ],
+  "answerOption": "B",
+  "answerText": "Shimla",
+  "genre": "geography",
+  "sourceFile": "0399.json"
+}

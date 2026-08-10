@@ -1,0 +1,15 @@
+{
+  "id": 1071,
+  "word": "Laborious",
+  "question": "Laborious",
+  "options": [
+    "Requiring considerable effort and time",
+    "Unconventional and slightly strange",
+    "To persuade someone by force or threats",
+    "Dealing with things in a practical way"
+  ],
+  "answerOption": "A",
+  "answerText": "Requiring considerable effort and time",
+  "difficulty": "medium",
+  "sourceFile": "1071.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 899,
+  "word": "Unwavering",
+  "question": "Unwavering",
+  "options": [
+    "An event marking a turning point",
+    "Steady and resolute; not changing",
+    "To perceive or recognize something",
+    "To extract information from various sources"
+  ],
+  "answerOption": "B",
+  "answerText": "Steady and resolute; not changing",
+  "difficulty": "medium",
+  "sourceFile": "0899.json"
+}

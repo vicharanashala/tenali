@@ -1,0 +1,14 @@
+{
+  "id": 22,
+  "question": "What is the capital of Brazil?",
+  "options": [
+    "Brasília",
+    "Thimphu",
+    "Berlin",
+    "Moscow"
+  ],
+  "answerOption": "A",
+  "answerText": "Brasília",
+  "genre": "geography",
+  "sourceFile": "0022.json"
+}

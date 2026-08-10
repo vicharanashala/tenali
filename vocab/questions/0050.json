@@ -1,0 +1,15 @@
+{
+  "id": 50,
+  "word": "Full",
+  "question": "Full",
+  "options": [
+    "Uncomfortably small or crowded",
+    "To give up something valued for a greater cause",
+    "Containing as much as possible; filled completely",
+    "Not far away in distance"
+  ],
+  "answerOption": "C",
+  "answerText": "Containing as much as possible; filled completely",
+  "difficulty": "easy",
+  "sourceFile": "0050.json"
+}

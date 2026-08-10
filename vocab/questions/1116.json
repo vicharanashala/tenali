@@ -1,0 +1,15 @@
+{
+  "id": 1116,
+  "word": "Wane",
+  "question": "Wane",
+  "options": [
+    "A religious group or value",
+    "To complete an arrangement or transaction",
+    "Liable to change rapidly and unpredictably",
+    "To decrease gradually in size or intensity"
+  ],
+  "answerOption": "D",
+  "answerText": "To decrease gradually in size or intensity",
+  "difficulty": "medium",
+  "sourceFile": "1116.json"
+}

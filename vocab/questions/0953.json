@@ -1,0 +1,15 @@
+{
+  "id": 953,
+  "word": "Ornate",
+  "question": "Ornate",
+  "options": [
+    "Marked by exactness and accuracy",
+    "Elaborately or highly decorated",
+    "Having sharp points protruding outward",
+    "Exceptionally good; remarkable"
+  ],
+  "answerOption": "B",
+  "answerText": "Elaborately or highly decorated",
+  "difficulty": "easy",
+  "sourceFile": "0953.json"
+}

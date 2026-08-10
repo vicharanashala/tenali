@@ -1,0 +1,15 @@
+{
+  "id": 687,
+  "word": "Frail",
+  "question": "Frail",
+  "options": [
+    "Far away in space or time",
+    "Required by law or rules",
+    "Weak and delicate in health",
+    "To fail to remember something"
+  ],
+  "answerOption": "C",
+  "answerText": "Weak and delicate in health",
+  "difficulty": "easy",
+  "sourceFile": "0687.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1000,
+  "word": "Ambiguous",
+  "question": "Ambiguous",
+  "options": [
+    "Mysterious or difficult to understand",
+    "Lasting for a very short time",
+    "A feeling of great happiness and triumph",
+    "Open to more than one interpretation"
+  ],
+  "answerOption": "D",
+  "answerText": "Open to more than one interpretation",
+  "difficulty": "medium",
+  "sourceFile": "1000.json"
+}

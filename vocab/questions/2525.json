@@ -1,0 +1,15 @@
+{
+  "id": 2525,
+  "word": "AEROMEDICATE",
+  "question": "AEROMEDICATE",
+  "options": [
+    "Stubbornly refusing to change one's opinion",
+    "Loyalty owed to a feudal lord",
+    "To treat medical conditions",
+    "In an advisable manner"
+  ],
+  "answerOption": "C",
+  "answerText": "To treat medical conditions",
+  "difficulty": "hard",
+  "sourceFile": "2525.json"
+}

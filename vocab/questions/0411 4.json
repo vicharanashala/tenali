@@ -1,0 +1,15 @@
+{
+  "id": 411,
+  "word": "Possess",
+  "question": "Possess",
+  "options": [
+    "To have as belonging to one; to own",
+    "To show the way by going in front",
+    "To separate into parts or groups",
+    "To examine similarities and differences"
+  ],
+  "answerOption": "A",
+  "answerText": "To have as belonging to one; to own",
+  "difficulty": "easy",
+  "sourceFile": "0411.json"
+}

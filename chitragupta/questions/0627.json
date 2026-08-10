@@ -1,0 +1,14 @@
+{
+  "id": 627,
+  "question": "Which country is associated with the city of Jerusalem in many GK references?",
+  "options": [
+    "Israel",
+    "Jordan",
+    "Egypt",
+    "Lebanon"
+  ],
+  "answerOption": "A",
+  "answerText": "Israel",
+  "genre": "geography",
+  "sourceFile": "0627.json"
+}

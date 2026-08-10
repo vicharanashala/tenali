@@ -1,0 +1,15 @@
+{
+  "id": 2138,
+  "word": "Aerodynamicist",
+  "question": "Aerodynamicist",
+  "options": [
+    "Permission to graduate without examination",
+    "An expert in aerodynamics",
+    "Treatment with hot air",
+    "Damage from atmospheric electricity"
+  ],
+  "answerOption": "B",
+  "answerText": "An expert in aerodynamics",
+  "difficulty": "hard",
+  "sourceFile": "2138.json"
+}

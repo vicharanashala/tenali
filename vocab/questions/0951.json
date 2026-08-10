@@ -1,0 +1,15 @@
+{
+  "id": 951,
+  "word": "Grave",
+  "question": "Grave",
+  "options": [
+    "Luxuriously rich and expensive",
+    "Of great weight; difficult to lift",
+    "To contain as part of a whole",
+    "Serious in manner or expression"
+  ],
+  "answerOption": "D",
+  "answerText": "Serious in manner or expression",
+  "difficulty": "easy",
+  "sourceFile": "0951.json"
+}

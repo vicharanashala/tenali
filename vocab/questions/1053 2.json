@@ -1,0 +1,15 @@
+{
+  "id": 1053,
+  "word": "Paramount",
+  "question": "Paramount",
+  "options": [
+    "More important than anything else",
+    "Not easily convinced; having doubts",
+    "Showing smug satisfaction with oneself",
+    "Attractively unusual or old-fashioned"
+  ],
+  "answerOption": "A",
+  "answerText": "More important than anything else",
+  "difficulty": "medium",
+  "sourceFile": "1053.json"
+}

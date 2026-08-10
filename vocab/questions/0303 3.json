@@ -1,0 +1,15 @@
+{
+  "id": 303,
+  "word": "Celebrate",
+  "question": "Celebrate",
+  "options": [
+    "Not occupied or in use",
+    "To honor a special occasion with festivities",
+    "Trustworthy and reliable",
+    "Free from bacteria; completely clean"
+  ],
+  "answerOption": "B",
+  "answerText": "To honor a special occasion with festivities",
+  "difficulty": "easy",
+  "sourceFile": "0303.json"
+}

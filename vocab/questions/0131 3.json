@@ -1,0 +1,15 @@
+{
+  "id": 131,
+  "word": "Absent",
+  "question": "Absent",
+  "options": [
+    "To rub out or remove written marks",
+    "To keep something for future use",
+    "Not present in a place",
+    "Having little or no rain; very dry"
+  ],
+  "answerOption": "C",
+  "answerText": "Not present in a place",
+  "difficulty": "easy",
+  "sourceFile": "0131.json"
+}

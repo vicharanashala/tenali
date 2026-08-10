@@ -1,0 +1,15 @@
+{
+  "id": 1361,
+  "word": "Degree",
+  "question": "Degree",
+  "options": [
+    "The amount or extent of something",
+    "Dangerously steep or sudden",
+    "In a destructive manner",
+    "Created or done without preparation"
+  ],
+  "answerOption": "A",
+  "answerText": "The amount or extent of something",
+  "difficulty": "medium",
+  "sourceFile": "1361.json"
+}

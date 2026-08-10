@@ -1,0 +1,15 @@
+{
+  "id": 1369,
+  "word": "Dentition",
+  "question": "Dentition",
+  "options": [
+    "The action of leaving the track",
+    "To hold and use a weapon or tool",
+    "The arrangement of teeth",
+    "To decrease in value over time"
+  ],
+  "answerOption": "C",
+  "answerText": "The arrangement of teeth",
+  "difficulty": "medium",
+  "sourceFile": "1369.json"
+}

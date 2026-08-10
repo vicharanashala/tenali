@@ -1,0 +1,15 @@
+{
+  "id": 2566,
+  "word": "AEROPONICS",
+  "question": "AEROPONICS",
+  "options": [
+    "The state of being peaceful",
+    "A written statement made under oath",
+    "Growing plants without soil",
+    "Rejecting all moral and religious principles"
+  ],
+  "answerOption": "C",
+  "answerText": "Growing plants without soil",
+  "difficulty": "hard",
+  "sourceFile": "2566.json"
+}

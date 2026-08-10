@@ -1,0 +1,15 @@
+{
+  "id": 3000,
+  "word": "ABJURED",
+  "question": "ABJURED",
+  "options": [
+    "To abuse habitually",
+    "The act of abiding somewhere",
+    "Renounced under oath",
+    "The state of being abysmal"
+  ],
+  "answerOption": "C",
+  "answerText": "Renounced under oath",
+  "difficulty": "extra-hard",
+  "sourceFile": "3000.json"
+}

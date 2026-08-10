@@ -1,0 +1,14 @@
+{
+  "id": 66,
+  "question": "What is the boiling point of water at standard atmospheric pressure in degrees Celsius?",
+  "options": [
+    "50",
+    "75",
+    "100",
+    "120"
+  ],
+  "answerOption": "C",
+  "answerText": "100",
+  "genre": "science",
+  "sourceFile": "0066.json"
+}

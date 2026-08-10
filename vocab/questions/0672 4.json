@@ -1,0 +1,15 @@
+{
+  "id": 672,
+  "word": "Plentiful",
+  "question": "Plentiful",
+  "options": [
+    "Existing in large quantities",
+    "To throw in various random directions",
+    "Of very great size",
+    "Having limits or bounds"
+  ],
+  "answerOption": "A",
+  "answerText": "Existing in large quantities",
+  "difficulty": "easy",
+  "sourceFile": "0672.json"
+}

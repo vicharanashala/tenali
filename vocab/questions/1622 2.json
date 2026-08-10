@@ -1,0 +1,15 @@
+{
+  "id": 1622,
+  "word": "Detoxicate",
+  "question": "Detoxicate",
+  "options": [
+    "Given to or characterized by quarreling",
+    "A polite refusal of an invitation",
+    "To remove poison from something",
+    "To discharge feces from the body"
+  ],
+  "answerOption": "C",
+  "answerText": "To remove poison from something",
+  "difficulty": "medium",
+  "sourceFile": "1622.json"
+}

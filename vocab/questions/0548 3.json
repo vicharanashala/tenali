@@ -1,0 +1,15 @@
+{
+  "id": 548,
+  "word": "Persuade",
+  "question": "Persuade",
+  "options": [
+    "Parallel to the ground; flat",
+    "To cause someone to believe something",
+    "To develop gradually over time",
+    "Producing much noise or sound"
+  ],
+  "answerOption": "B",
+  "answerText": "To cause someone to believe something",
+  "difficulty": "easy",
+  "sourceFile": "0548.json"
+}

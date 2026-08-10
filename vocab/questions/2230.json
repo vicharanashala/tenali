@@ -1,0 +1,15 @@
+{
+  "id": 2230,
+  "word": "Exigent",
+  "question": "Exigent",
+  "options": [
+    "Pressing; demanding immediate attention",
+    "To use ambiguous language to deceive",
+    "Showing susceptibility to bribery",
+    "Brain injury from violent shaking"
+  ],
+  "answerOption": "A",
+  "answerText": "Pressing; demanding immediate attention",
+  "difficulty": "hard",
+  "sourceFile": "2230.json"
+}

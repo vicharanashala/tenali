@@ -1,0 +1,15 @@
+{
+  "id": 1835,
+  "word": "Thrifty",
+  "question": "Thrifty",
+  "options": [
+    "To remove salt from something",
+    "Careful with money",
+    "Loyalty owed to a feudal lord",
+    "The main point or essence of a matter"
+  ],
+  "answerOption": "B",
+  "answerText": "Careful with money",
+  "difficulty": "medium",
+  "sourceFile": "1835.json"
+}

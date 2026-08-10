@@ -1,0 +1,15 @@
+{
+  "id": 1969,
+  "word": "Proscribed",
+  "question": "Proscribed",
+  "options": [
+    "Done without preparation",
+    "To accumulate or receive over time",
+    "Confined to working at a desk",
+    "Forbidden or excluded"
+  ],
+  "answerOption": "D",
+  "answerText": "Forbidden or excluded",
+  "difficulty": "medium",
+  "sourceFile": "1969.json"
+}

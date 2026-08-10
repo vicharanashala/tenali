@@ -1,0 +1,15 @@
+{
+  "id": 1420,
+  "word": "Xicolatada",
+  "question": "Xicolatada",
+  "options": [
+    "A social gathering centered around drinking chocolate",
+    "A dealer in rare books",
+    "Expressing an idea with two words joined by and",
+    "An overwhelming desire to kiss"
+  ],
+  "answerOption": "A",
+  "answerText": "A social gathering centered around drinking chocolate",
+  "difficulty": "extra-hard",
+  "sourceFile": "1420.json"
+}

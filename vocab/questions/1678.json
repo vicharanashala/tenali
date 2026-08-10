@@ -1,0 +1,15 @@
+{
+  "id": 1678,
+  "word": "Detention",
+  "question": "Detention",
+  "options": [
+    "One who deserts a duty or post",
+    "The action of holding someone",
+    "In agreement or harmony with something",
+    "Great pleasure and satisfaction"
+  ],
+  "answerOption": "B",
+  "answerText": "The action of holding someone",
+  "difficulty": "medium",
+  "sourceFile": "1678.json"
+}

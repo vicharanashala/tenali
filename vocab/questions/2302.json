@@ -1,0 +1,15 @@
+{
+  "id": 2302,
+  "word": "Adventist",
+  "question": "Adventist",
+  "options": [
+    "Physical exercise with air",
+    "A member of a Christian sect",
+    "Wicked or criminal in nature",
+    "The action of mediating between parties"
+  ],
+  "answerOption": "B",
+  "answerText": "A member of a Christian sect",
+  "difficulty": "hard",
+  "sourceFile": "2302.json"
+}

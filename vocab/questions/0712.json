@@ -1,0 +1,15 @@
+{
+  "id": 712,
+  "word": "Opposite",
+  "question": "Opposite",
+  "options": [
+    "To identify someone from previous encounters",
+    "Clear and easy to understand",
+    "Completely different in every way",
+    "Having elegance of movement"
+  ],
+  "answerOption": "C",
+  "answerText": "Completely different in every way",
+  "difficulty": "easy",
+  "sourceFile": "0712.json"
+}

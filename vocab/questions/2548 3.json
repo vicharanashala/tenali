@@ -1,0 +1,15 @@
+{
+  "id": 2548,
+  "word": "Concussion",
+  "question": "Concussion",
+  "options": [
+    "The action of reducing something",
+    "To renounce or reject something",
+    "Brain injury from violent shaking",
+    "Relating to sandy regions"
+  ],
+  "answerOption": "C",
+  "answerText": "Brain injury from violent shaking",
+  "difficulty": "hard",
+  "sourceFile": "2548.json"
+}

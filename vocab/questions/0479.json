@@ -1,0 +1,15 @@
+{
+  "id": 479,
+  "word": "Clarify",
+  "question": "Clarify",
+  "options": [
+    "To ask someone to come to an event",
+    "Having four equal sides and right angles",
+    "To make a statement less confusing",
+    "Having a pleasant taste"
+  ],
+  "answerOption": "C",
+  "answerText": "To make a statement less confusing",
+  "difficulty": "easy",
+  "sourceFile": "0479.json"
+}

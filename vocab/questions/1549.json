@@ -1,0 +1,15 @@
+{
+  "id": 1549,
+  "word": "Derma",
+  "question": "Derma",
+  "options": [
+    "To make something less severe or serious",
+    "Fine in texture, form, or structure",
+    "The layer of skin beneath the epidermis",
+    "Demonstrating aggression or eagerness to fight"
+  ],
+  "answerOption": "C",
+  "answerText": "The layer of skin beneath the epidermis",
+  "difficulty": "medium",
+  "sourceFile": "1549.json"
+}

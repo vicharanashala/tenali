@@ -1,0 +1,15 @@
+{
+  "id": 3389,
+  "word": "Abuser",
+  "question": "Abuser",
+  "options": [
+    "One who abuses another",
+    "A longing for a home that may never have existed",
+    "Practicing abstinence in diet",
+    "The quality of being abject"
+  ],
+  "answerOption": "A",
+  "answerText": "One who abuses another",
+  "difficulty": "extra-hard",
+  "sourceFile": "3389.json"
+}

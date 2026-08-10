@@ -1,0 +1,15 @@
+{
+  "id": 1523,
+  "word": "Depth",
+  "question": "Depth",
+  "options": [
+    "The distance from top to bottom",
+    "Grossly unjust or wicked",
+    "Full of or shedding light; bright",
+    "A public display of group feeling"
+  ],
+  "answerOption": "A",
+  "answerText": "The distance from top to bottom",
+  "difficulty": "medium",
+  "sourceFile": "1523.json"
+}

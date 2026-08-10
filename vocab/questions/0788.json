@@ -1,0 +1,15 @@
+{
+  "id": 788,
+  "word": "Harmless",
+  "question": "Harmless",
+  "options": [
+    "To feel or detect something",
+    "Kind and pleasant to others",
+    "Arranged neatly and in order",
+    "Not able to cause damage or injury"
+  ],
+  "answerOption": "D",
+  "answerText": "Not able to cause damage or injury",
+  "difficulty": "easy",
+  "sourceFile": "0788.json"
+}

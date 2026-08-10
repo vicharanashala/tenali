@@ -1,0 +1,15 @@
+{
+  "id": 344,
+  "word": "Flee",
+  "question": "Flee",
+  "options": [
+    "To run away from a place of danger",
+    "Clearly visible or understood",
+    "To perceive the flavor of something",
+    "To give authorization for something"
+  ],
+  "answerOption": "A",
+  "answerText": "To run away from a place of danger",
+  "difficulty": "easy",
+  "sourceFile": "0344.json"
+}

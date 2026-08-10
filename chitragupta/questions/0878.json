@@ -1,0 +1,14 @@
+{
+  "id": 878,
+  "question": "Who wrote 'Middlemarch'?",
+  "options": [
+    "George Eliot",
+    "Jane Austen",
+    "Thomas Hardy",
+    "Charles Dickens"
+  ],
+  "answerOption": "A",
+  "answerText": "George Eliot",
+  "genre": "general-knowledge",
+  "sourceFile": "0878.json"
+}

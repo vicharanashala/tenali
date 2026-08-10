@@ -1,0 +1,15 @@
+{
+  "id": 227,
+  "word": "Repel",
+  "question": "Repel",
+  "options": [
+    "To contain as part of a whole",
+    "To drive or force something away",
+    "Graceful and stylish in appearance",
+    "To ask someone to come to an event"
+  ],
+  "answerOption": "B",
+  "answerText": "To drive or force something away",
+  "difficulty": "easy",
+  "sourceFile": "0227.json"
+}

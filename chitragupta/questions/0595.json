@@ -1,0 +1,14 @@
+{
+  "id": 595,
+  "question": "Which Indian state has Port Blair as its capital?",
+  "options": [
+    "Lakshadweep",
+    "Andaman and Nicobar Islands is a union territory",
+    "Goa",
+    "Puducherry"
+  ],
+  "answerOption": "B",
+  "answerText": "Andaman and Nicobar Islands is a union territory",
+  "genre": "geography",
+  "sourceFile": "0595.json"
+}

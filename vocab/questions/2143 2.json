@@ -1,0 +1,15 @@
+{
+  "id": 2143,
+  "word": "Aerodromics",
+  "question": "Aerodromics",
+  "options": [
+    "The legal process of becoming a parent",
+    "The science of aerodromes",
+    "Ornamental work of fine twisted wire",
+    "Tolerating air exposure"
+  ],
+  "answerOption": "B",
+  "answerText": "The science of aerodromes",
+  "difficulty": "hard",
+  "sourceFile": "2143.json"
+}

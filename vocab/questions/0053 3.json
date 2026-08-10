@@ -1,0 +1,15 @@
+{
+  "id": 53,
+  "word": "Near",
+  "question": "Near",
+  "options": [
+    "Not giving enough attention to avoid harm",
+    "Not far away in distance",
+    "Producing powerful feelings or strong images",
+    "To rest on the surface of a liquid"
+  ],
+  "answerOption": "B",
+  "answerText": "Not far away in distance",
+  "difficulty": "easy",
+  "sourceFile": "0053.json"
+}

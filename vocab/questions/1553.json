@@ -1,0 +1,15 @@
+{
+  "id": 1553,
+  "word": "Dermic",
+  "question": "Dermic",
+  "options": [
+    "An alternative spelling of dispatch",
+    "Hard but easily broken",
+    "Relating to the skin or dermis",
+    "To publicly declare to be wrong"
+  ],
+  "answerOption": "C",
+  "answerText": "Relating to the skin or dermis",
+  "difficulty": "medium",
+  "sourceFile": "1553.json"
+}

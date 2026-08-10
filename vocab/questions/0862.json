@@ -1,0 +1,15 @@
+{
+  "id": 862,
+  "word": "Odd",
+  "question": "Odd",
+  "options": [
+    "At the point that is in the middle",
+    "Strikingly unusual or different",
+    "Different from what is normal or expected",
+    "To go beyond the limit of something"
+  ],
+  "answerOption": "C",
+  "answerText": "Different from what is normal or expected",
+  "difficulty": "easy",
+  "sourceFile": "0862.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 406,
+  "question": "Which sea is the saltiest large water body commonly cited in GK among seas/lakes?",
+  "options": [
+    "Baltic Sea",
+    "Red Sea",
+    "Dead Sea",
+    "Caspian Sea"
+  ],
+  "answerOption": "C",
+  "answerText": "Dead Sea",
+  "genre": "science",
+  "sourceFile": "0406.json"
+}

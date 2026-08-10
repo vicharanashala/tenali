@@ -1,0 +1,15 @@
+{
+  "id": 622,
+  "word": "Focused",
+  "question": "Focused",
+  "options": [
+    "To continue in spite of difficulty",
+    "Directing attention or effort at something",
+    "Feeling optimistic about a future event",
+    "Making sure to avoid danger or mistakes"
+  ],
+  "answerOption": "B",
+  "answerText": "Directing attention or effort at something",
+  "difficulty": "easy",
+  "sourceFile": "0622.json"
+}

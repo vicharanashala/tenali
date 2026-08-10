@@ -1,0 +1,15 @@
+{
+  "id": 2189,
+  "word": "Advisedness",
+  "question": "Advisedness",
+  "options": [
+    "Designed to impress or attract notice",
+    "Relating to the atmosphere",
+    "The quality of being advised",
+    "The state of being extremely poor"
+  ],
+  "answerOption": "C",
+  "answerText": "The quality of being advised",
+  "difficulty": "hard",
+  "sourceFile": "2189.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2315,
+  "word": "Glogg",
+  "question": "Glogg",
+  "options": [
+    "In the direction of the sun's course; clockwise",
+    "A small songbird of the finch family",
+    "A Scandinavian spiced alcoholic drink",
+    "Wandering alone"
+  ],
+  "answerOption": "C",
+  "answerText": "A Scandinavian spiced alcoholic drink",
+  "difficulty": "extra-hard",
+  "sourceFile": "2315.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1010,
+  "word": "Reticent",
+  "question": "Reticent",
+  "options": [
+    "Not revealing one's thoughts readily",
+    "A sentimental longing for the past",
+    "Courage in pain or adversity",
+    "Expressed clearly and easy to understand"
+  ],
+  "answerOption": "A",
+  "answerText": "Not revealing one's thoughts readily",
+  "difficulty": "medium",
+  "sourceFile": "1010.json"
+}

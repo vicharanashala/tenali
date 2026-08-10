@@ -1,0 +1,15 @@
+{
+  "id": 23,
+  "word": "Mean",
+  "question": "Mean",
+  "options": [
+    "Unwilling to give or share; unkind",
+    "To open something that is locked",
+    "Of chief importance; principal",
+    "Correct in all details; exact"
+  ],
+  "answerOption": "A",
+  "answerText": "Unwilling to give or share; unkind",
+  "difficulty": "easy",
+  "sourceFile": "0023.json"
+}

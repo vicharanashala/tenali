@@ -1,0 +1,14 @@
+{
+  "id": 61,
+  "question": "Which instrument is used to measure temperature?",
+  "options": [
+    "Barometer",
+    "Thermometer",
+    "Hygrometer",
+    "Altimeter"
+  ],
+  "answerOption": "B",
+  "answerText": "Thermometer",
+  "genre": "mixed",
+  "sourceFile": "0061.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 588,
+  "word": "Stubborn",
+  "question": "Stubborn",
+  "options": [
+    "Of great extent from side to side",
+    "To make sounds showing amusement",
+    "Refusing to change one's mind",
+    "A long journey by sea or space"
+  ],
+  "answerOption": "C",
+  "answerText": "Refusing to change one's mind",
+  "difficulty": "easy",
+  "sourceFile": "0588.json"
+}

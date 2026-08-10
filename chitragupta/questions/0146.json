@@ -1,0 +1,14 @@
+{
+  "id": 146,
+  "question": "Which organ in the human body filters blood to produce urine?",
+  "options": [
+    "Liver",
+    "Lungs",
+    "Kidneys",
+    "Pancreas"
+  ],
+  "answerOption": "C",
+  "answerText": "Kidneys",
+  "genre": "science",
+  "sourceFile": "0146.json"
+}

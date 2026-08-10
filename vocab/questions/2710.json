@@ -1,0 +1,15 @@
+{
+  "id": 2710,
+  "word": "Therapeutics",
+  "question": "Therapeutics",
+  "options": [
+    "The action of giving emphasis",
+    "To make more attractive with ornament",
+    "Relating to the Aegean Sea",
+    "The healing art of medicine"
+  ],
+  "answerOption": "D",
+  "answerText": "The healing art of medicine",
+  "difficulty": "hard",
+  "sourceFile": "2710.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 823,
+  "word": "Evident",
+  "question": "Evident",
+  "options": [
+    "Occurring immediately without delay",
+    "Not physically existing but made to appear so",
+    "Plain or obvious; clearly seen",
+    "Arranged in a tidy way"
+  ],
+  "answerOption": "C",
+  "answerText": "Plain or obvious; clearly seen",
+  "difficulty": "easy",
+  "sourceFile": "0823.json"
+}

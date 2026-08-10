@@ -1,0 +1,15 @@
+{
+  "id": 2869,
+  "word": "Tome",
+  "question": "Tome",
+  "options": [
+    "A large heavy book",
+    "The right of patronage of church",
+    "Pursuit of pleasure and avoidance of pain",
+    "A young person developing into adulthood"
+  ],
+  "answerOption": "A",
+  "answerText": "A large heavy book",
+  "difficulty": "hard",
+  "sourceFile": "2869.json"
+}

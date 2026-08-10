@@ -1,0 +1,15 @@
+{
+  "id": 840,
+  "word": "Steep",
+  "question": "Steep",
+  "options": [
+    "Having limits or bounds",
+    "To give out a bright light",
+    "To greatly surprise someone",
+    "Having a slope that rises at a sharp angle"
+  ],
+  "answerOption": "D",
+  "answerText": "Having a slope that rises at a sharp angle",
+  "difficulty": "easy",
+  "sourceFile": "0840.json"
+}

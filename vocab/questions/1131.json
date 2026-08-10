@@ -1,0 +1,15 @@
+{
+  "id": 1131,
+  "word": "Ornate",
+  "question": "Ornate",
+  "options": [
+    "To attract by offering pleasure or advantage",
+    "Made in an intricate shape or decorated",
+    "Never tiring or growing weary",
+    "The removal of foam"
+  ],
+  "answerOption": "B",
+  "answerText": "Made in an intricate shape or decorated",
+  "difficulty": "medium",
+  "sourceFile": "1131.json"
+}

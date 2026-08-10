@@ -1,0 +1,15 @@
+{
+  "id": 1268,
+  "word": "Oblivion",
+  "question": "Oblivion",
+  "options": [
+    "The rejection of established beliefs",
+    "Clear, logical, and convincing",
+    "In a state of quietness; inactive",
+    "The state of being unaware of surroundings"
+  ],
+  "answerOption": "D",
+  "answerText": "The state of being unaware of surroundings",
+  "difficulty": "hard",
+  "sourceFile": "1268.json"
+}

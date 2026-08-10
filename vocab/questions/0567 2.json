@@ -1,0 +1,15 @@
+{
+  "id": 567,
+  "word": "Fascinate",
+  "question": "Fascinate",
+  "options": [
+    "To cause someone to believe something",
+    "Not approximated in any way; precise",
+    "Having good manners and showing respect",
+    "To attract and hold attention of someone"
+  ],
+  "answerOption": "D",
+  "answerText": "To attract and hold attention of someone",
+  "difficulty": "easy",
+  "sourceFile": "0567.json"
+}

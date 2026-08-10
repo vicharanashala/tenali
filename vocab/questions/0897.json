@@ -1,0 +1,15 @@
+{
+  "id": 897,
+  "word": "Packed",
+  "question": "Packed",
+  "options": [
+    "Crowded or filled tightly",
+    "To reach a destination",
+    "Occurring from time to time",
+    "Made or done without method or plan"
+  ],
+  "answerOption": "A",
+  "answerText": "Crowded or filled tightly",
+  "difficulty": "easy",
+  "sourceFile": "0897.json"
+}

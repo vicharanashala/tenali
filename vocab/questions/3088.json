@@ -1,0 +1,15 @@
+{
+  "id": 3088,
+  "word": "Bathypelagic",
+  "question": "Bathypelagic",
+  "options": [
+    "Relating to the ocean at great depths",
+    "A type of fish",
+    "Mysterious like abyss",
+    "Relating to oblique eclipse"
+  ],
+  "answerOption": "A",
+  "answerText": "Relating to the ocean at great depths",
+  "difficulty": "extra-hard",
+  "sourceFile": "3088.json"
+}

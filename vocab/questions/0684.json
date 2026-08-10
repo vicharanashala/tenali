@@ -1,0 +1,15 @@
+{
+  "id": 684,
+  "word": "Durable",
+  "question": "Durable",
+  "options": [
+    "To arrange into categories or classes",
+    "Darkly colored or gloomy",
+    "Refusing to change one's mind",
+    "Able to withstand wear and tear"
+  ],
+  "answerOption": "D",
+  "answerText": "Able to withstand wear and tear",
+  "difficulty": "easy",
+  "sourceFile": "0684.json"
+}

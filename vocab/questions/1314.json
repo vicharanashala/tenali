@@ -1,0 +1,15 @@
+{
+  "id": 1314,
+  "word": "Decelerate",
+  "question": "Decelerate",
+  "options": [
+    "Made someone do something against will",
+    "To search or investigate something",
+    "Having careful and persistent effort",
+    "To reduce speed gradually"
+  ],
+  "answerOption": "D",
+  "answerText": "To reduce speed gradually",
+  "difficulty": "medium",
+  "sourceFile": "1314.json"
+}

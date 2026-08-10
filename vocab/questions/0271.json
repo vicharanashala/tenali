@@ -1,0 +1,15 @@
+{
+  "id": 271,
+  "word": "Cure",
+  "question": "Cure",
+  "options": [
+    "To give attention to sound or speech",
+    "To relieve a person of symptoms of disease",
+    "The inner part of something",
+    "Existing in or caused by nature"
+  ],
+  "answerOption": "B",
+  "answerText": "To relieve a person of symptoms of disease",
+  "difficulty": "easy",
+  "sourceFile": "0271.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1551,
+  "word": "Deserve",
+  "question": "Deserve",
+  "options": [
+    "To do something worthy of reward",
+    "To care for and encourage growth",
+    "Producing a great deal of profit",
+    "Serving to cleanse or purify"
+  ],
+  "answerOption": "A",
+  "answerText": "To do something worthy of reward",
+  "difficulty": "medium",
+  "sourceFile": "1551.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 662,
+  "word": "Gigantic",
+  "question": "Gigantic",
+  "options": [
+    "Average in amount or intensity",
+    "Extremely large or huge",
+    "Truly what something is said to be",
+    "To give out a steady light without flame"
+  ],
+  "answerOption": "B",
+  "answerText": "Extremely large or huge",
+  "difficulty": "easy",
+  "sourceFile": "0662.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2400,
+  "word": "AEROPHONY",
+  "question": "AEROPHONY",
+  "options": [
+    "Showing aeolotropy property",
+    "Loyalty to a person or country",
+    "In an enigmatic manner",
+    "The use of air in sound"
+  ],
+  "answerOption": "D",
+  "answerText": "The use of air in sound",
+  "difficulty": "hard",
+  "sourceFile": "2400.json"
+}

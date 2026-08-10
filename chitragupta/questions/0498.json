@@ -1,0 +1,14 @@
+{
+  "id": 498,
+  "question": "Who discovered radioactivity?",
+  "options": [
+    "Marie Curie",
+    "Henri Becquerel",
+    "Rutherford",
+    "Faraday"
+  ],
+  "answerOption": "B",
+  "answerText": "Henri Becquerel",
+  "genre": "general-knowledge",
+  "sourceFile": "0498.json"
+}

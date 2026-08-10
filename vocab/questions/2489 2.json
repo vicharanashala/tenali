@@ -1,0 +1,15 @@
+{
+  "id": 2489,
+  "word": "Abelmusk",
+  "question": "Abelmusk",
+  "options": [
+    "Inability to identify and describe emotions",
+    "A plant yielding musk-scented seeds",
+    "The realization that each passerby has a vivid inner life",
+    "A tendency to make puns or tell inappropriate jokes"
+  ],
+  "answerOption": "B",
+  "answerText": "A plant yielding musk-scented seeds",
+  "difficulty": "extra-hard",
+  "sourceFile": "2489.json"
+}

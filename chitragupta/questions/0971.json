@@ -1,0 +1,14 @@
+{
+  "id": 971,
+  "question": "What is the boiling point of water at sea level?",
+  "options": [
+    "50°C",
+    "75°C",
+    "100°C",
+    "120°C"
+  ],
+  "answerOption": "C",
+  "answerText": "100°C",
+  "genre": "science",
+  "sourceFile": "0971.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 122,
+  "question": "Who invented the light bulb in general-knowledge convention?",
+  "options": [
+    "Nikola Tesla",
+    "Thomas Edison",
+    "Michael Faraday",
+    "James Watt"
+  ],
+  "answerOption": "B",
+  "answerText": "Thomas Edison",
+  "genre": "general-knowledge",
+  "sourceFile": "0122.json"
+}

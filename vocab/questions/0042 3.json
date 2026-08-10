@@ -1,0 +1,15 @@
+{
+  "id": 42,
+  "word": "Ugly",
+  "question": "Ugly",
+  "options": [
+    "Very small; much smaller than normal",
+    "Insufficient for the demand; in short supply",
+    "Unpleasant or repulsive in appearance",
+    "Of very little importance"
+  ],
+  "answerOption": "C",
+  "answerText": "Unpleasant or repulsive in appearance",
+  "difficulty": "easy",
+  "sourceFile": "0042.json"
+}

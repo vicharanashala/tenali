@@ -1,0 +1,15 @@
+{
+  "id": 1202,
+  "word": "Reverie",
+  "question": "Reverie",
+  "options": [
+    "To regard or consider in a specified way",
+    "To remove salt from seawater",
+    "A state of being pleasantly lost in thought",
+    "A muscle that depresses something"
+  ],
+  "answerOption": "C",
+  "answerText": "A state of being pleasantly lost in thought",
+  "difficulty": "medium",
+  "sourceFile": "1202.json"
+}

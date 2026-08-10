@@ -1,0 +1,15 @@
+{
+  "id": 264,
+  "word": "Swim",
+  "question": "Swim",
+  "options": [
+    "To express the meaning in another language",
+    "In good physical condition; not sick",
+    "To cause someone to feel greatly astonished",
+    "To move through water using the body"
+  ],
+  "answerOption": "D",
+  "answerText": "To move through water using the body",
+  "difficulty": "easy",
+  "sourceFile": "0264.json"
+}

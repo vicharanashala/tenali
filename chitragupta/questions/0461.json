@@ -1,0 +1,14 @@
+{
+  "id": 461,
+  "question": "Which Indian state has Mumbai as its capital?",
+  "options": [
+    "Gujarat",
+    "Maharashtra",
+    "Goa",
+    "Karnataka"
+  ],
+  "answerOption": "B",
+  "answerText": "Maharashtra",
+  "genre": "geography",
+  "sourceFile": "0461.json"
+}

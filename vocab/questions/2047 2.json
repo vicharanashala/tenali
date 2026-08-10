@@ -1,0 +1,15 @@
+{
+  "id": 2047,
+  "word": "Aenigmatise",
+  "question": "Aenigmatise",
+  "options": [
+    "The atmosphere or air layer",
+    "To speak in riddles",
+    "To conceal one's true motives or feelings",
+    "To alternate between different opinions"
+  ],
+  "answerOption": "B",
+  "answerText": "To speak in riddles",
+  "difficulty": "hard",
+  "sourceFile": "2047.json"
+}

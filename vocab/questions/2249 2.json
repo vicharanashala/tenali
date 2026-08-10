@@ -1,0 +1,15 @@
+{
+  "id": 2249,
+  "word": "AEROSTATION",
+  "question": "AEROSTATION",
+  "options": [
+    "The use of air in sound",
+    "Technology for air use",
+    "Shaped with an adze",
+    "The science of ballooning"
+  ],
+  "answerOption": "D",
+  "answerText": "The science of ballooning",
+  "difficulty": "hard",
+  "sourceFile": "2249.json"
+}

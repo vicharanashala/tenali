@@ -1,0 +1,14 @@
+{
+  "id": 583,
+  "question": "Which Indian state has Jammu as its winter capital under the traditional seasonal arrangement?",
+  "options": [
+    "Himachal Pradesh",
+    "Jammu and Kashmir",
+    "Ladakh",
+    "Punjab"
+  ],
+  "answerOption": "B",
+  "answerText": "Jammu and Kashmir",
+  "genre": "geography",
+  "sourceFile": "0583.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 673,
+  "word": "Sufficient",
+  "question": "Sufficient",
+  "options": [
+    "Lacking the power to perform demanding tasks",
+    "To actively resist or be against something",
+    "Having intense enjoyment or interest",
+    "Enough to meet the needs"
+  ],
+  "answerOption": "D",
+  "answerText": "Enough to meet the needs",
+  "difficulty": "easy",
+  "sourceFile": "0673.json"
+}

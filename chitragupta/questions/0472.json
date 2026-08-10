@@ -1,0 +1,14 @@
+{
+  "id": 472,
+  "question": "Who discovered X-rays?",
+  "options": [
+    "Roentgen",
+    "Becquerel",
+    "Curie",
+    "Rutherford"
+  ],
+  "answerOption": "A",
+  "answerText": "Roentgen",
+  "genre": "general-knowledge",
+  "sourceFile": "0472.json"
+}

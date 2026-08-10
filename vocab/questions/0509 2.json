@@ -1,0 +1,15 @@
+{
+  "id": 509,
+  "word": "Recognize",
+  "question": "Recognize",
+  "options": [
+    "To identify someone from previous encounters",
+    "Important and well known",
+    "To stop fighting and give up",
+    "To create a plan for making something"
+  ],
+  "answerOption": "A",
+  "answerText": "To identify someone from previous encounters",
+  "difficulty": "easy",
+  "sourceFile": "0509.json"
+}

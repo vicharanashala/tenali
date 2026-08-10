@@ -1,0 +1,15 @@
+{
+  "id": 76,
+  "word": "Shy",
+  "question": "Shy",
+  "options": [
+    "To interfere with the peace of someone",
+    "Being reserved or timid around other people",
+    "To regard with respect and warm approval",
+    "Not approximated in any way; precise"
+  ],
+  "answerOption": "B",
+  "answerText": "Being reserved or timid around other people",
+  "difficulty": "easy",
+  "sourceFile": "0076.json"
+}

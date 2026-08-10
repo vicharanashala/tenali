@@ -1,0 +1,15 @@
+{
+  "id": 699,
+  "word": "Secondary",
+  "question": "Secondary",
+  "options": [
+    "Coming after or less important than the first",
+    "To remove liquid from something",
+    "Making little or no noise",
+    "To cook food by prolonged exposure to heat"
+  ],
+  "answerOption": "A",
+  "answerText": "Coming after or less important than the first",
+  "difficulty": "easy",
+  "sourceFile": "0699.json"
+}

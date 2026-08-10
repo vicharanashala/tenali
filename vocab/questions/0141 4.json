@@ -1,0 +1,15 @@
+{
+  "id": 141,
+  "word": "Glad",
+  "question": "Glad",
+  "options": [
+    "To honor a special occasion with festivities",
+    "To need something as necessary",
+    "Feeling pleasure or happiness",
+    "To move forward in a purposeful way"
+  ],
+  "answerOption": "C",
+  "answerText": "Feeling pleasure or happiness",
+  "difficulty": "easy",
+  "sourceFile": "0141.json"
+}

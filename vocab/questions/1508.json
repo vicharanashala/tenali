@@ -1,0 +1,15 @@
+{
+  "id": 1508,
+  "word": "Depreciate",
+  "question": "Depreciate",
+  "options": [
+    "The number below the line in a fraction",
+    "To decrease in value over time",
+    "Not stable or balanced",
+    "The state of having lost morale"
+  ],
+  "answerOption": "B",
+  "answerText": "To decrease in value over time",
+  "difficulty": "medium",
+  "sourceFile": "1508.json"
+}

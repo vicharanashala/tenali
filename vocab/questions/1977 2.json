@@ -1,0 +1,15 @@
+{
+  "id": 1977,
+  "word": "Advertiser",
+  "question": "Advertiser",
+  "options": [
+    "Feeling regret and sorrow for wrongdoing",
+    "One who poses riddles",
+    "A type of winged figure in art",
+    "One who advertises products"
+  ],
+  "answerOption": "D",
+  "answerText": "One who advertises products",
+  "difficulty": "hard",
+  "sourceFile": "1977.json"
+}

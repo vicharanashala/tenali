@@ -1,0 +1,15 @@
+{
+  "id": 3342,
+  "word": "Abstin",
+  "question": "Abstin",
+  "options": [
+    "Relating to the ocean at great depths",
+    "Absence of life or viability",
+    "In manner of payment",
+    "A substance for abstinence"
+  ],
+  "answerOption": "D",
+  "answerText": "A substance for abstinence",
+  "difficulty": "extra-hard",
+  "sourceFile": "3342.json"
+}

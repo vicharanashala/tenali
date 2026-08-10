@@ -1,0 +1,15 @@
+{
+  "id": 410,
+  "word": "Purchase",
+  "question": "Purchase",
+  "options": [
+    "To want something to happen and think it possible",
+    "Done on purpose; deliberate",
+    "To buy something",
+    "To become liquid through heating"
+  ],
+  "answerOption": "C",
+  "answerText": "To buy something",
+  "difficulty": "easy",
+  "sourceFile": "0410.json"
+}

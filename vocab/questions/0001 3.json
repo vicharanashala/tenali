@@ -1,0 +1,15 @@
+{
+  "id": 1,
+  "word": "Brave",
+  "question": "Brave",
+  "options": [
+    "Strongly wanting to do or have something",
+    "Not afraid of danger",
+    "Lasting for a limited time only",
+    "Having lived or existed for only a short time"
+  ],
+  "answerOption": "B",
+  "answerText": "Not afraid of danger",
+  "difficulty": "easy",
+  "sourceFile": "0001.json"
+}

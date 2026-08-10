@@ -1,0 +1,15 @@
+{
+  "id": 764,
+  "word": "Systematic",
+  "question": "Systematic",
+  "options": [
+    "A long journey by sea or space",
+    "To fail to care for something properly",
+    "Done according to a fixed plan",
+    "Exceptionally clever or talented"
+  ],
+  "answerOption": "C",
+  "answerText": "Done according to a fixed plan",
+  "difficulty": "easy",
+  "sourceFile": "0764.json"
+}

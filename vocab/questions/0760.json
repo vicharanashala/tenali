@@ -1,0 +1,15 @@
+{
+  "id": 760,
+  "word": "Turbulent",
+  "question": "Turbulent",
+  "options": [
+    "Characterized by conflict or disorder",
+    "In use or inhabited",
+    "To take and use something temporarily",
+    "To give a portion of something to others"
+  ],
+  "answerOption": "A",
+  "answerText": "Characterized by conflict or disorder",
+  "difficulty": "easy",
+  "sourceFile": "0760.json"
+}

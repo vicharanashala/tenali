@@ -1,0 +1,15 @@
+{
+  "id": 1601,
+  "word": "Desirability",
+  "question": "Desirability",
+  "options": [
+    "Full of or shedding light; bright",
+    "The quality of being desired",
+    "A person who designs things",
+    "The action of making someone a god"
+  ],
+  "answerOption": "B",
+  "answerText": "The quality of being desired",
+  "difficulty": "medium",
+  "sourceFile": "1601.json"
+}

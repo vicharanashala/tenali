@@ -1,0 +1,15 @@
+{
+  "id": 647,
+  "word": "Literate",
+  "question": "Literate",
+  "options": [
+    "To give support and confidence to someone",
+    "Occurring continuously over time",
+    "Able to read and write",
+    "Easily seen or noticed"
+  ],
+  "answerOption": "C",
+  "answerText": "Able to read and write",
+  "difficulty": "easy",
+  "sourceFile": "0647.json"
+}

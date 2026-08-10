@@ -1,0 +1,15 @@
+{
+  "id": 3127,
+  "word": "Denouement",
+  "question": "Denouement",
+  "options": [
+    "Causing or relating to vertigo",
+    "In non-literary manner",
+    "The final outcome of a complex sequence of events",
+    "Financially rewarding; lucrative"
+  ],
+  "answerOption": "C",
+  "answerText": "The final outcome of a complex sequence of events",
+  "difficulty": "extra-hard",
+  "sourceFile": "3127.json"
+}

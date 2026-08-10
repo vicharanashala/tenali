@@ -1,0 +1,15 @@
+{
+  "id": 2023,
+  "word": "Aegiswine",
+  "question": "Aegiswine",
+  "options": [
+    "Making airy or ethereal",
+    "A plant used as herbal medicine",
+    "Permission to graduate without examination",
+    "Preventing success or harmful"
+  ],
+  "answerOption": "B",
+  "answerText": "A plant used as herbal medicine",
+  "difficulty": "hard",
+  "sourceFile": "2023.json"
+}

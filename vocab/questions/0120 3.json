@@ -1,0 +1,15 @@
+{
+  "id": 120,
+  "word": "Peaceful",
+  "question": "Peaceful",
+  "options": [
+    "To feel contempt or deep dislike for",
+    "Free from disturbance; tranquil",
+    "Closely and neatly packed together",
+    "To cover something in paper or cloth"
+  ],
+  "answerOption": "B",
+  "answerText": "Free from disturbance; tranquil",
+  "difficulty": "easy",
+  "sourceFile": "0120.json"
+}

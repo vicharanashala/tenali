@@ -1,0 +1,15 @@
+{
+  "id": 2098,
+  "word": "Adolescent",
+  "question": "Adolescent",
+  "options": [
+    "A member of a Christian sect",
+    "A young person developing into adulthood",
+    "To publicly support or recommend",
+    "A state of physical or mental sluggishness"
+  ],
+  "answerOption": "B",
+  "answerText": "A young person developing into adulthood",
+  "difficulty": "hard",
+  "sourceFile": "2098.json"
+}

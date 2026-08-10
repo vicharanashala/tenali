@@ -1,0 +1,15 @@
+{
+  "id": 2169,
+  "word": "Vestige",
+  "question": "Vestige",
+  "options": [
+    "A trace of something that once existed",
+    "Unable to be avoided or escaped",
+    "A kind of feldspar mineral",
+    "In an adorable manner"
+  ],
+  "answerOption": "A",
+  "answerText": "A trace of something that once existed",
+  "difficulty": "hard",
+  "sourceFile": "2169.json"
+}

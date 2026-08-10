@@ -1,0 +1,15 @@
+{
+  "id": 766,
+  "word": "Deliberate",
+  "question": "Deliberate",
+  "options": [
+    "Solid, firm, and rigid; not easily broken",
+    "To dry out and shrivel up",
+    "Done consciously and intentionally",
+    "To keep doing something without stopping"
+  ],
+  "answerOption": "C",
+  "answerText": "Done consciously and intentionally",
+  "difficulty": "easy",
+  "sourceFile": "0766.json"
+}

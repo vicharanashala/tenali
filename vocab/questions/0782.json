@@ -1,0 +1,15 @@
+{
+  "id": 782,
+  "word": "Natural",
+  "question": "Natural",
+  "options": [
+    "To accept something as true",
+    "Existing in or caused by nature",
+    "To examine and make corrections to something",
+    "Able to be used for a practical purpose"
+  ],
+  "answerOption": "B",
+  "answerText": "Existing in or caused by nature",
+  "difficulty": "easy",
+  "sourceFile": "0782.json"
+}

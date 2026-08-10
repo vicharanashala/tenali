@@ -1,0 +1,15 @@
+{
+  "id": 1017,
+  "word": "Banal",
+  "question": "Banal",
+  "options": [
+    "A modest view of one's own importance",
+    "Self-assertive in a rude or noisy way",
+    "To grow or develop in a healthy way",
+    "So lacking in originality as to be obvious"
+  ],
+  "answerOption": "D",
+  "answerText": "So lacking in originality as to be obvious",
+  "difficulty": "medium",
+  "sourceFile": "1017.json"
+}

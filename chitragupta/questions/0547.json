@@ -1,0 +1,14 @@
+{
+  "id": 547,
+  "question": "What is the SI unit of wave number?",
+  "options": [
+    "per metre",
+    "metre",
+    "hertz",
+    "joule"
+  ],
+  "answerOption": "A",
+  "answerText": "per metre",
+  "genre": "mixed",
+  "sourceFile": "0547.json"
+}

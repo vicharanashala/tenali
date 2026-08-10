@@ -1,0 +1,15 @@
+{
+  "id": 1225,
+  "word": "Scrutinize",
+  "question": "Scrutinize",
+  "options": [
+    "Producing a great deal of profit",
+    "To examine or inspect closely",
+    "Complete freedom of action",
+    "To take a position of power illegally"
+  ],
+  "answerOption": "B",
+  "answerText": "To examine or inspect closely",
+  "difficulty": "medium",
+  "sourceFile": "1225.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1471,
+  "word": "Departmental",
+  "question": "Departmental",
+  "options": [
+    "To remove odor from something",
+    "Refusal to change position",
+    "Relating to a department",
+    "To place close together for comparison"
+  ],
+  "answerOption": "C",
+  "answerText": "Relating to a department",
+  "difficulty": "medium",
+  "sourceFile": "1471.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 494,
+  "word": "Examine",
+  "question": "Examine",
+  "options": [
+    "Next to or adjoining something else",
+    "Lacking interest or excitement",
+    "To inspect something in detail",
+    "To keep away from something"
+  ],
+  "answerOption": "C",
+  "answerText": "To inspect something in detail",
+  "difficulty": "easy",
+  "sourceFile": "0494.json"
+}

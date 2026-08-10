@@ -1,0 +1,15 @@
+{
+  "id": 2280,
+  "word": "Aeralgia",
+  "question": "Aeralgia",
+  "options": [
+    "Pain from atmospheric pressure",
+    "Loyalty owed to a feudal lord",
+    "Cheerful and lighthearted",
+    "Treating serious issues with inappropriate humor"
+  ],
+  "answerOption": "A",
+  "answerText": "Pain from atmospheric pressure",
+  "difficulty": "hard",
+  "sourceFile": "2280.json"
+}

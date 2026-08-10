@@ -1,0 +1,15 @@
+{
+  "id": 337,
+  "word": "Struggle",
+  "question": "Struggle",
+  "options": [
+    "Marked by exactness and accuracy",
+    "Having the skill to do something well",
+    "Lasting for a limited time only",
+    "To make great efforts under difficulty"
+  ],
+  "answerOption": "D",
+  "answerText": "To make great efforts under difficulty",
+  "difficulty": "easy",
+  "sourceFile": "0337.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2327,
+  "word": "Sonder",
+  "question": "Sonder",
+  "options": [
+    "The warmth of the sun in winter",
+    "The amniotic tranquility of being indoors during a storm",
+    "The realization that each passerby has a vivid inner life",
+    "Undying; immortal"
+  ],
+  "answerOption": "C",
+  "answerText": "The realization that each passerby has a vivid inner life",
+  "difficulty": "extra-hard",
+  "sourceFile": "2327.json"
+}

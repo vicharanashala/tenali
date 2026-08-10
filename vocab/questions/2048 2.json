@@ -1,0 +1,15 @@
+{
+  "id": 2048,
+  "word": "Aenigmatism",
+  "question": "Aenigmatism",
+  "options": [
+    "The state of being a fully developed adult",
+    "Of or belonging to a time before a great flood",
+    "Study of organisms in air",
+    "A fondness for riddles"
+  ],
+  "answerOption": "D",
+  "answerText": "A fondness for riddles",
+  "difficulty": "hard",
+  "sourceFile": "2048.json"
+}

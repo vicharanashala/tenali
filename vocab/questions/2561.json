@@ -1,0 +1,15 @@
+{
+  "id": 2561,
+  "word": "AEROPLANKTON",
+  "question": "AEROPLANKTON",
+  "options": [
+    "Grimly mocking or cynical",
+    "Fusion of different religious beliefs",
+    "Organisms floating in air",
+    "One believing in predestination"
+  ],
+  "answerOption": "C",
+  "answerText": "Organisms floating in air",
+  "difficulty": "hard",
+  "sourceFile": "2561.json"
+}

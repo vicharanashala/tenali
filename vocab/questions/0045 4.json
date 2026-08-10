@@ -1,0 +1,15 @@
+{
+  "id": 45,
+  "word": "Tame",
+  "question": "Tame",
+  "options": [
+    "To successfully reach a desired goal",
+    "To combine different things together",
+    "Domesticated and not dangerous to people",
+    "To work together on an activity"
+  ],
+  "answerOption": "C",
+  "answerText": "Domesticated and not dangerous to people",
+  "difficulty": "easy",
+  "sourceFile": "0045.json"
+}

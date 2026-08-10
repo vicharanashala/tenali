@@ -1,0 +1,15 @@
+{
+  "id": 130,
+  "word": "Asleep",
+  "question": "Asleep",
+  "options": [
+    "To experience something bad or unpleasant",
+    "In a state of sleep; not awake",
+    "To cause a liquid to flow over the edge",
+    "Open to more than one interpretation"
+  ],
+  "answerOption": "B",
+  "answerText": "In a state of sleep; not awake",
+  "difficulty": "easy",
+  "sourceFile": "0130.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2741,
+  "word": "Obviousness",
+  "question": "Obviousness",
+  "options": [
+    "Public shame or disgrace",
+    "The action of authenticating something",
+    "The quality of being clear",
+    "Relating to air exposure"
+  ],
+  "answerOption": "C",
+  "answerText": "The quality of being clear",
+  "difficulty": "hard",
+  "sourceFile": "2741.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 824,
+  "word": "Subtle",
+  "question": "Subtle",
+  "options": [
+    "Unpleasantly rough or sharp",
+    "So delicate as to be difficult to notice",
+    "Very small; much smaller than normal",
+    "To call out in a very loud voice"
+  ],
+  "answerOption": "B",
+  "answerText": "So delicate as to be difficult to notice",
+  "difficulty": "easy",
+  "sourceFile": "0824.json"
+}

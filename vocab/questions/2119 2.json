@@ -1,0 +1,15 @@
+{
+  "id": 2119,
+  "word": "Aerobioscope",
+  "question": "Aerobioscope",
+  "options": [
+    "Carried out with minimum effort",
+    "Device for collecting airborne organisms",
+    "An unpleasant or unhealthy atmosphere",
+    "The quality of being advisable"
+  ],
+  "answerOption": "B",
+  "answerText": "Device for collecting airborne organisms",
+  "difficulty": "hard",
+  "sourceFile": "2119.json"
+}

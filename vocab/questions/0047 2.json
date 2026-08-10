@@ -1,0 +1,15 @@
+{
+  "id": 47,
+  "word": "Iconoclast",
+  "question": "Iconoclast",
+  "options": [
+    "Exceedingly idealistic; unrealistic and impractical",
+    "A person who attacks cherished beliefs",
+    "Carried out with minimum effort or care",
+    "Eager or quick to argue or fight"
+  ],
+  "answerOption": "B",
+  "answerText": "A person who attacks cherished beliefs",
+  "difficulty": "extra-hard",
+  "sourceFile": "0047.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2039,
+  "word": "Sanguine",
+  "question": "Sanguine",
+  "options": [
+    "The process of adding air",
+    "A defensive barrier made of wooden posts",
+    "Optimistic in a difficult situation",
+    "The quality of being determinable"
+  ],
+  "answerOption": "C",
+  "answerText": "Optimistic in a difficult situation",
+  "difficulty": "hard",
+  "sourceFile": "2039.json"
+}

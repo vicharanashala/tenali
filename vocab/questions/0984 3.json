@@ -1,0 +1,15 @@
+{
+  "id": 984,
+  "word": "Bemused",
+  "question": "Bemused",
+  "options": [
+    "In a detectable manner",
+    "Puzzled or confused",
+    "Relating to fundamental change",
+    "Suffering from dementia"
+  ],
+  "answerOption": "B",
+  "answerText": "Puzzled or confused",
+  "difficulty": "medium",
+  "sourceFile": "0984.json"
+}

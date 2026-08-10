@@ -1,0 +1,15 @@
+{
+  "id": 1384,
+  "word": "Delirious",
+  "question": "Delirious",
+  "options": [
+    "In a disturbed mental state from fever",
+    "To treat or speak of with mockery",
+    "To push down or cause sadness",
+    "A person who deposits money"
+  ],
+  "answerOption": "A",
+  "answerText": "In a disturbed mental state from fever",
+  "difficulty": "medium",
+  "sourceFile": "1384.json"
+}

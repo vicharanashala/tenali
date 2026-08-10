@@ -1,0 +1,15 @@
+{
+  "id": 2864,
+  "word": "Oration",
+  "question": "Oration",
+  "options": [
+    "A formal speech delivered publicly",
+    "Plural of aerospace",
+    "Relating to airborne organisms",
+    "A creative work of art or literature"
+  ],
+  "answerOption": "A",
+  "answerText": "A formal speech delivered publicly",
+  "difficulty": "hard",
+  "sourceFile": "2864.json"
+}

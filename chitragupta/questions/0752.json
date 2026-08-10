@@ -1,0 +1,14 @@
+{
+  "id": 752,
+  "question": "Who wrote 'The Invisible Man'?",
+  "options": [
+    "H. G. Wells",
+    "Jules Verne",
+    "Arthur Conan Doyle",
+    "George Orwell"
+  ],
+  "answerOption": "A",
+  "answerText": "H. G. Wells",
+  "genre": "general-knowledge",
+  "sourceFile": "0752.json"
+}

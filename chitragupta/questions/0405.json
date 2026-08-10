@@ -1,0 +1,14 @@
+{
+  "id": 405,
+  "question": "Which part of the plant carries water from roots to leaves?",
+  "options": [
+    "Phloem",
+    "Xylem",
+    "Cortex",
+    "Epidermis"
+  ],
+  "answerOption": "B",
+  "answerText": "Xylem",
+  "genre": "science",
+  "sourceFile": "0405.json"
+}

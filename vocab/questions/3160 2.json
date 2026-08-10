@@ -1,0 +1,15 @@
+{
+  "id": 3160,
+  "word": "Abyssic",
+  "question": "Abyssic",
+  "options": [
+    "Of or resembling twilight",
+    "The sense that time keeps going faster",
+    "Relating to the abyss",
+    "Something bearing visible traces of an earlier form"
+  ],
+  "answerOption": "C",
+  "answerText": "Relating to the abyss",
+  "difficulty": "extra-hard",
+  "sourceFile": "3160.json"
+}

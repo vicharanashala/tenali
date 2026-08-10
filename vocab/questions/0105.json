@@ -1,0 +1,15 @@
+{
+  "id": 105,
+  "word": "Modern",
+  "question": "Modern",
+  "options": [
+    "Important and well known",
+    "Liable to change rapidly and unpredictably",
+    "To keep something for future use",
+    "Relating to the present time"
+  ],
+  "answerOption": "D",
+  "answerText": "Relating to the present time",
+  "difficulty": "easy",
+  "sourceFile": "0105.json"
+}

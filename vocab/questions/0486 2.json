@@ -1,0 +1,15 @@
+{
+  "id": 486,
+  "word": "Evaluate",
+  "question": "Evaluate",
+  "options": [
+    "To achieve or realize something desired",
+    "To put things in a neat or attractive order",
+    "To form an idea of the value of something",
+    "Occurring or done many times"
+  ],
+  "answerOption": "C",
+  "answerText": "To form an idea of the value of something",
+  "difficulty": "easy",
+  "sourceFile": "0486.json"
+}

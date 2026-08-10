@@ -1,0 +1,14 @@
+{
+  "id": 468,
+  "question": "Which is the deepest cave known in the world among recent records?",
+  "options": [
+    "Mammoth Cave",
+    "Krubera Cave",
+    "Son Doong",
+    "Eisriesenwelt"
+  ],
+  "answerOption": "B",
+  "answerText": "Krubera Cave",
+  "genre": "mixed",
+  "sourceFile": "0468.json"
+}

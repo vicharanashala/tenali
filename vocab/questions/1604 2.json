@@ -1,0 +1,15 @@
+{
+  "id": 1604,
+  "word": "Determine",
+  "question": "Determine",
+  "options": [
+    "A doctor specializing in skin",
+    "To establish or decide exactly",
+    "Of only moderate quality; not very good",
+    "A person's death or the end of something"
+  ],
+  "answerOption": "B",
+  "answerText": "To establish or decide exactly",
+  "difficulty": "medium",
+  "sourceFile": "1604.json"
+}

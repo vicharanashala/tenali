@@ -1,0 +1,15 @@
+{
+  "id": 57,
+  "word": "Insidious",
+  "question": "Insidious",
+  "options": [
+    "Expressing a strong opinion, especially controversial",
+    "Excessively obedient or attentive to please",
+    "Proceeding in a harmful way that is hard to notice",
+    "Using very few words to express meaning"
+  ],
+  "answerOption": "C",
+  "answerText": "Proceeding in a harmful way that is hard to notice",
+  "difficulty": "extra-hard",
+  "sourceFile": "0057.json"
+}

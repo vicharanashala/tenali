@@ -1,0 +1,15 @@
+{
+  "id": 457,
+  "word": "Neglect",
+  "question": "Neglect",
+  "options": [
+    "Of very little importance",
+    "Feeling dedication to a cause or activity",
+    "To fail to care for something properly",
+    "To shine with flashes of light"
+  ],
+  "answerOption": "C",
+  "answerText": "To fail to care for something properly",
+  "difficulty": "easy",
+  "sourceFile": "0457.json"
+}

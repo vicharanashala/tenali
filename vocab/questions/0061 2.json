@@ -1,0 +1,15 @@
+{
+  "id": 61,
+  "word": "Sesquipedalian",
+  "question": "Sesquipedalian",
+  "options": [
+    "A feeling of melancholy about the state of the world",
+    "Characterized by the use of long words",
+    "The strange wistfulness of used bookshops",
+    "The lights you see when you rub your closed eyes"
+  ],
+  "answerOption": "B",
+  "answerText": "Characterized by the use of long words",
+  "difficulty": "hardest",
+  "sourceFile": "0061.json"
+}

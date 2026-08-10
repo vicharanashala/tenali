@@ -1,0 +1,15 @@
+{
+  "id": 1440,
+  "word": "Remunerative",
+  "question": "Remunerative",
+  "options": [
+    "A noisy mock serenade; cacophonous celebration",
+    "To throw someone or something out of a window",
+    "Financially rewarding; lucrative",
+    "Abnormal sensitivity or irritation"
+  ],
+  "answerOption": "C",
+  "answerText": "Financially rewarding; lucrative",
+  "difficulty": "extra-hard",
+  "sourceFile": "1440.json"
+}

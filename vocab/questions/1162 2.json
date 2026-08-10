@@ -1,0 +1,15 @@
+{
+  "id": 1162,
+  "word": "Nihilism",
+  "question": "Nihilism",
+  "options": [
+    "A person with a casual interest in an art",
+    "Cheerful and full of energy",
+    "Causing laughter; laughable",
+    "The belief that life is meaningless"
+  ],
+  "answerOption": "D",
+  "answerText": "The belief that life is meaningless",
+  "difficulty": "hard",
+  "sourceFile": "1162.json"
+}

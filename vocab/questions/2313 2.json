@@ -1,0 +1,15 @@
+{
+  "id": 2313,
+  "word": "Eigengrau",
+  "question": "Eigengrau",
+  "options": [
+    "A contented state of being happy and prosperous",
+    "Inability to identify and describe emotions",
+    "The dark gray color seen when the eyes are closed",
+    "The price set on a person's life in Anglo-Saxon law"
+  ],
+  "answerOption": "C",
+  "answerText": "The dark gray color seen when the eyes are closed",
+  "difficulty": "extra-hard",
+  "sourceFile": "2313.json"
+}

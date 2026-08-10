@@ -1,0 +1,15 @@
+{
+  "id": 1407,
+  "word": "Democrat",
+  "question": "Democrat",
+  "options": [
+    "To examine or inspect closely",
+    "A ruler with absolute power",
+    "Involving violent or noisy disorder",
+    "A member of a democratic party"
+  ],
+  "answerOption": "D",
+  "answerText": "A member of a democratic party",
+  "difficulty": "medium",
+  "sourceFile": "1407.json"
+}

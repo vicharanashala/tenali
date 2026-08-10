@@ -1,0 +1,15 @@
+{
+  "id": 43,
+  "word": "Pernicious",
+  "question": "Pernicious",
+  "options": [
+    "Dealing with things sensibly and realistically",
+    "Having a harmful effect, especially gradually",
+    "Insisting on beliefs without considering evidence",
+    "A person who flatters to gain advantage"
+  ],
+  "answerOption": "B",
+  "answerText": "Having a harmful effect, especially gradually",
+  "difficulty": "hard",
+  "sourceFile": "0043.json"
+}

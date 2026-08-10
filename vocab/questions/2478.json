@@ -1,0 +1,15 @@
+{
+  "id": 2478,
+  "word": "Aerocardia",
+  "question": "Aerocardia",
+  "options": [
+    "Heart condition from altitude",
+    "A formal expression of opinion",
+    "The action of making clear",
+    "The action of uttering words"
+  ],
+  "answerOption": "A",
+  "answerText": "Heart condition from altitude",
+  "difficulty": "hard",
+  "sourceFile": "2478.json"
+}

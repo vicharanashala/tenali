@@ -1,0 +1,14 @@
+{
+  "id": 330,
+  "question": "Which city is the capital of Haryana?",
+  "options": [
+    "Gurugram",
+    "Faridabad",
+    "Chandigarh",
+    "Panipat"
+  ],
+  "answerOption": "C",
+  "answerText": "Chandigarh",
+  "genre": "geography",
+  "sourceFile": "0330.json"
+}

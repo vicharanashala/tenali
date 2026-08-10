@@ -1,0 +1,15 @@
+{
+  "id": 2190,
+  "word": "Advisee",
+  "question": "Advisee",
+  "options": [
+    "The method and practice of teaching",
+    "One who is advised",
+    "Of doubtful authenticity; probably untrue",
+    "A state of balance"
+  ],
+  "answerOption": "B",
+  "answerText": "One who is advised",
+  "difficulty": "hard",
+  "sourceFile": "2190.json"
+}

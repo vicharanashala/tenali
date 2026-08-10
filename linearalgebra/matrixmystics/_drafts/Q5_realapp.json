@@ -1,0 +1,210 @@
+{
+  "module": 5,
+  "topics": [
+    {
+      "topicId": "Q5.1",
+      "title": "Two 2-dim subspaces in ℝ³",
+      "real_life_application": [
+        {
+          "id": "M5Q1R1",
+          "question": "Two room walls are 2D subspaces; their intersection represents which feature?",
+          "options": ["Shared edge", "Corner dot", "Wall plane", "Ceiling span"],
+          "correct_option": "Shared edge",
+          "explanation": "Two planes in ℝ³ meet along a line — the shared edge where the walls join."
+        },
+        {
+          "id": "M5Q1R2",
+          "question": "The xy-plane and xz-plane model which pair of surfaces?",
+          "options": ["Floor, wall", "Wall, ceiling", "Two walls", "Wall, floor"],
+          "correct_option": "Floor, wall",
+          "explanation": "xy-plane (z=0) is the floor; xz-plane (y=0) is one wall meeting it."
+        },
+        {
+          "id": "M5Q1R3",
+          "question": "Two distinct 2D subspaces in ℝ³ through origin must intersect in at least how many dimensions?",
+          "options": ["One", "Two", "Three", "Zero"],
+          "correct_option": "One",
+          "explanation": "By dim(S₁)+dim(S₂)−n = 2+2−3 = 1, so a line is guaranteed."
+        },
+        {
+          "id": "M5Q1R4",
+          "question": "A folded sheet through origin models which algebraic object?",
+          "options": ["Plane subspace", "Full ℝ³", "Single line", "Point only"],
+          "correct_option": "Plane subspace",
+          "explanation": "The flat paper is a 2D plane through origin — a 2D subspace of ℝ³."
+        },
+        {
+          "id": "M5Q1R5",
+          "question": "Ceiling plane and floor plane intersect (through origin) in which subspace?",
+          "options": ["Edge line", "Whole plane", "Empty set", "Single dot"],
+          "correct_option": "Edge line",
+          "explanation": "Two non-coincident planes in ℝ³ meet along a line through origin."
+        }
+      ]
+    },
+    {
+      "topicId": "Q5.2",
+      "title": "S₃, S₄ as perpendicular complements",
+      "real_life_application": [
+        {
+          "id": "M5Q2R1",
+          "question": "Floor and flagpole illustrate which subspace pair?",
+          "options": ["Plane, normal", "Parallel planes", "Skew lines", "Same plane"],
+          "correct_option": "Plane, normal",
+          "explanation": "The floor plane and pole line form an orthogonal complement pair in ℝ³."
+        },
+        {
+          "id": "M5Q2R2",
+          "question": "The normal vector to a tabletop lies in which subspace?",
+          "options": ["S₁⊥", "S₁", "Skew line", "Random ray"],
+          "correct_option": "S₁⊥",
+          "explanation": "Every normal to the table plane lives in S₁⊥, a 1D line."
+        },
+        {
+          "id": "M5Q2R3",
+          "question": "If S₁ is the ceiling (xy-plane), S₁⊥ is which line?",
+          "options": ["Vertical z-axis", "Horizontal x-axis", "Floor diagonal", "Wall diagonal"],
+          "correct_option": "Vertical z-axis",
+          "explanation": "S₁⊥ for the xy-plane is the z-axis — the vertical through the room."
+        },
+        {
+          "id": "M5Q2R4",
+          "question": "The dimension of S⊥ for a 2D plane S in ℝ³ equals what?",
+          "options": ["One", "Two", "Three", "Zero"],
+          "correct_option": "One",
+          "explanation": "dim(S⊥) = 3 − dim(S) = 1, so it is a line."
+        },
+        {
+          "id": "M5Q2R5",
+          "question": "Surface normals in 3D rendering form what subspace?",
+          "options": ["Perpendicular complement", "Column space only", "Null space alone", "Whole space"],
+          "correct_option": "Perpendicular complement",
+          "explanation": "Normals are perpendicular to the surface — they live in S⊥ for each face."
+        }
+      ]
+    },
+    {
+      "topicId": "Q5.3",
+      "title": "Find M with N(M) = S₃, C(M) = S₂",
+      "real_life_application": [
+        {
+          "id": "M5Q3R1",
+          "question": "Camera projection to a wall has which null-space property?",
+          "options": ["Vertical direction", "Whole space", "Empty only", "Random axis"],
+          "correct_option": "Vertical direction",
+          "explanation": "Projection to xz-plane kills the y-direction, so the y-axis is in N(M)."
+        },
+        {
+          "id": "M5Q3R2",
+          "question": "To remove only the z-component, which column is chosen?",
+          "options": ["Third zero", "First basis", "All identity", "Random entries"],
+          "correct_option": "Third zero",
+          "explanation": "Setting column 3 to zero forces M·(0,0,1)=0, killing that direction."
+        },
+        {
+          "id": "M5Q3R3",
+          "question": "A matrix whose column space is xz-plane has columns spanning which set?",
+          "options": ["{(1,0,0),(0,0,1)}", "{(0,1,0),(1,0,0)}", "{(1,1,1),(0,0,1)}", "{(0,0,1),(0,1,0)}"],
+          "correct_option": "{(1,0,0),(0,0,1)}",
+          "explanation": "Linear combinations of (1,0,0) and (0,0,1) span exactly the xz-plane."
+        },
+        {
+          "id": "M5Q3R4",
+          "question": "Rank of a 3x3 matrix with N(M)=z-axis and C(M)=xz-plane is what?",
+          "options": ["Two", "Three", "One", "Zero"],
+          "correct_option": "Two",
+          "explanation": "rank(M) = dim(C(M)) = 2, since the xz-plane is 2-dimensional."
+        },
+        {
+          "id": "M5Q3R5",
+          "question": "An image filter erasing the vertical-shadow direction uses null space equal to?",
+          "options": ["Vertical line", "Image diagonal", "Image surface", "Pixel origin"],
+          "correct_option": "Vertical line",
+          "explanation": "M·(0,0,1)=0 puts (0,0,1), the vertical line, inside N(M)."
+        }
+      ]
+    },
+    {
+      "topicId": "Q5.4",
+      "title": "What does S₁ and S₄ represent?",
+      "real_life_application": [
+        {
+          "id": "M5Q4R1",
+          "question": "In a 3D scanner, the row space of the projection matrix is which surface?",
+          "options": ["Scanned surface", "Light source", "Hidden face", "Shadow only"],
+          "correct_option": "Scanned surface",
+          "explanation": "Row space is the plane onto which the 3D scene gets projected."
+        },
+        {
+          "id": "M5Q4R2",
+          "question": "The left-null space N(Mᵀ) of a transformation represents which direction?",
+          "options": ["Unreachable ray", "Completely reachable", "Every mapped point", "Fixed origin only"],
+          "correct_option": "Unreachable ray",
+          "explanation": "N(Mᵀ) consists of y with yᵀM=0 — directions the map never produces."
+        },
+        {
+          "id": "M5Q4R3",
+          "question": "For a navigation map, perpendicular pairing satisfies which relation?",
+          "options": ["R ⊕ N = ℝⁿ", "R = N = ℝⁿ", "R ∩ N = whole", "R × N empty"],
+          "correct_option": "R ⊕ N = ℝⁿ",
+          "explanation": "Row space and null space are orthogonal complements summing to ℝⁿ."
+        },
+        {
+          "id": "M5Q4R4",
+          "question": "A 3x3 matrix has four canonical subspaces; what is the sum of their dimensions?",
+          "options": ["Six", "Five", "Four", "Three"],
+          "correct_option": "Six",
+          "explanation": "dim(R)+dim(N)+dim(C)+dim(N(Mᵀ)) = 2+1+2+1 = 6, equal to m+n."
+        },
+        {
+          "id": "M5Q4R5",
+          "question": "An audio equalizer's four subspaces clarify which band pair?",
+          "options": ["Pass and stop", "Left and right", "Loud and soft", "Speed and pitch"],
+          "correct_option": "Pass and stop",
+          "explanation": "Column space ↔ pass band; null space ↔ stop band for the filter."
+        }
+      ]
+    },
+    {
+      "topicId": "Q5.5",
+      "title": "Bijection from S₁ to S₂",
+      "real_life_application": [
+        {
+          "id": "M5Q5R1",
+          "question": "Rotating a whiteboard to an adjacent wall uses which map type?",
+          "options": ["Linear bijection", "Constant map", "Random projection", "Identity only"],
+          "correct_option": "Linear bijection",
+          "explanation": "A rigid rotation between two planes is one-to-one and onto — a bijection."
+        },
+        {
+          "id": "M5Q5R2",
+          "question": "Mapping a 2D floor plan to a 2D ceiling is which kind of map?",
+          "options": ["Linear bijection", "Singular collapse", "Many-to-one", "Always null"],
+          "correct_option": "Linear bijection",
+          "explanation": "Two 2D planes of equal dimension admit a bijective linear isomorphism."
+        },
+        {
+          "id": "M5Q5R3",
+          "question": "Two 2D subspaces of ℝ³ of the same dimension are guaranteed to be what?",
+          "options": ["Isomorphic", "Orthogonal", "Identical", "Always skew"],
+          "correct_option": "Isomorphic",
+          "explanation": "Any two 2D vector subspaces are isomorphic — both equal ℝ² up to basis."
+        },
+        {
+          "id": "M5Q5R4",
+          "question": "In a 3D game, mapping floor plane to wall plane transfers which property?",
+          "options": ["Vector-space structure", "Texture color only", "Depth buffer", "Shadow only"],
+          "correct_option": "Vector-space structure",
+          "explanation": "The bijection preserves addition and scaling — linear structure transfers cleanly."
+        },
+        {
+          "id": "M5Q5R5",
+          "question": "Choosing different bases of S₁ and S₂ gives how many distinct bijections?",
+          "options": ["Infinitely many", "Exactly one", "At most two", "None possible"],
+          "correct_option": "Infinitely many",
+          "explanation": "Every basis pair extends to a bijection; infinitely many choices exist."
+        }
+      ]
+    }
+  ]
+}

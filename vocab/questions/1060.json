@@ -1,0 +1,15 @@
+{
+  "id": 1060,
+  "word": "Melancholy",
+  "question": "Melancholy",
+  "options": [
+    "Widespread destruction or confusion",
+    "Damned or cursed",
+    "A deep feeling of sadness",
+    "Refusal to change position"
+  ],
+  "answerOption": "C",
+  "answerText": "A deep feeling of sadness",
+  "difficulty": "medium",
+  "sourceFile": "1060.json"
+}

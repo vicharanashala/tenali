@@ -1,0 +1,15 @@
+{
+  "id": 59,
+  "word": "Propitious",
+  "question": "Propitious",
+  "options": [
+    "To use ambiguous language to conceal the truth",
+    "Indicating a good chance of success; favorable",
+    "Expressing a strong opinion, especially controversial",
+    "Stubbornly resistant to authority or control"
+  ],
+  "answerOption": "B",
+  "answerText": "Indicating a good chance of success; favorable",
+  "difficulty": "extra-hard",
+  "sourceFile": "0059.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1153,
+  "word": "Malleable",
+  "question": "Malleable",
+  "options": [
+    "Unable to be controlled",
+    "To actively break the terms of a law",
+    "Easily influenced or shaped by others",
+    "A seemingly contradictory statement"
+  ],
+  "answerOption": "C",
+  "answerText": "Easily influenced or shaped by others",
+  "difficulty": "medium",
+  "sourceFile": "1153.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 33,
+  "question": "Which bird is India's national bird?",
+  "options": [
+    "Parrot",
+    "Peacock",
+    "Sparrow",
+    "Crow"
+  ],
+  "answerOption": "B",
+  "answerText": "Peacock",
+  "genre": "india-gk",
+  "sourceFile": "0033.json"
+}

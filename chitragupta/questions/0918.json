@@ -1,0 +1,14 @@
+{
+  "id": 918,
+  "question": "Who wrote 'Little Women'?",
+  "options": [
+    "Louisa May Alcott",
+    "Jane Austen",
+    "Emily Dickinson",
+    "George Eliot"
+  ],
+  "answerOption": "A",
+  "answerText": "Louisa May Alcott",
+  "genre": "general-knowledge",
+  "sourceFile": "0918.json"
+}

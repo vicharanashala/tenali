@@ -1,0 +1,15 @@
+{
+  "id": 161,
+  "word": "Blame",
+  "question": "Blame",
+  "options": [
+    "Something that is difficult to understand",
+    "Sufficiently great or important",
+    "To assign responsibility for a fault",
+    "Made impure by exposure to a harmful substance"
+  ],
+  "answerOption": "C",
+  "answerText": "To assign responsibility for a fault",
+  "difficulty": "easy",
+  "sourceFile": "0161.json"
+}

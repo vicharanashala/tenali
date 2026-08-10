@@ -1,0 +1,15 @@
+{
+  "id": 1699,
+  "word": "Hubris",
+  "question": "Hubris",
+  "options": [
+    "A peculiar behavioral habit",
+    "A fondness for riddles",
+    "Excessive pride or self-confidence",
+    "A substance sprayed as fine mist"
+  ],
+  "answerOption": "C",
+  "answerText": "Excessive pride or self-confidence",
+  "difficulty": "hard",
+  "sourceFile": "1699.json"
+}

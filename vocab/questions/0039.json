@@ -1,0 +1,15 @@
+{
+  "id": 39,
+  "word": "Funny",
+  "question": "Funny",
+  "options": [
+    "To believe in the reliability of someone",
+    "Causing laughter or amusement",
+    "To move downward from a higher point",
+    "A person who lacks courage"
+  ],
+  "answerOption": "B",
+  "answerText": "Causing laughter or amusement",
+  "difficulty": "easy",
+  "sourceFile": "0039.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 14,
+  "word": "Bright",
+  "question": "Bright",
+  "options": [
+    "To find something for the first time",
+    "To cause a liquid to flow over the edge",
+    "Giving out or reflecting much light",
+    "Possessing great power or strength"
+  ],
+  "answerOption": "C",
+  "answerText": "Giving out or reflecting much light",
+  "difficulty": "easy",
+  "sourceFile": "0014.json"
+}

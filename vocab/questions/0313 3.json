@@ -1,0 +1,15 @@
+{
+  "id": 313,
+  "word": "Discourage",
+  "question": "Discourage",
+  "options": [
+    "Lacking in liveliness or joy",
+    "Lacking interest or excitement",
+    "To cause someone to lose confidence",
+    "To apply color to a surface with a brush"
+  ],
+  "answerOption": "C",
+  "answerText": "To cause someone to lose confidence",
+  "difficulty": "easy",
+  "sourceFile": "0313.json"
+}

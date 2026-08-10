@@ -1,0 +1,15 @@
+{
+  "id": 1990,
+  "word": "Fractious",
+  "question": "Fractious",
+  "options": [
+    "Prone to discord or quarreling",
+    "The quality of lasting a short time",
+    "Causing a physical or emotional shock",
+    "Free from disagreement or dissent"
+  ],
+  "answerOption": "A",
+  "answerText": "Prone to discord or quarreling",
+  "difficulty": "medium",
+  "sourceFile": "1990.json"
+}

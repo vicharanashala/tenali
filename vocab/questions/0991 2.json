@@ -1,0 +1,15 @@
+{
+  "id": 991,
+  "word": "Trepidation",
+  "question": "Trepidation",
+  "options": [
+    "Holding firmly to something; persistent",
+    "A feeling of fear about something",
+    "Having a friendly and pleasant manner",
+    "Uncalled for and lacking good reason"
+  ],
+  "answerOption": "B",
+  "answerText": "A feeling of fear about something",
+  "difficulty": "medium",
+  "sourceFile": "0991.json"
+}

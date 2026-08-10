@@ -1,0 +1,14 @@
+{
+  "id": 949,
+  "question": "Who wrote 'Oliver Twist'?",
+  "options": [
+    "Dickens",
+    "Hardy",
+    "Austen",
+    "Eliot"
+  ],
+  "answerOption": "A",
+  "answerText": "Dickens",
+  "genre": "general-knowledge",
+  "sourceFile": "0949.json"
+}

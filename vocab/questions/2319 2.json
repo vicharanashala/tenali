@@ -1,0 +1,15 @@
+{
+  "id": 2319,
+  "word": "Komorebi",
+  "question": "Komorebi",
+  "options": [
+    "The action of abiding or remaining",
+    "Sunlight filtering through tree leaves",
+    "Physical or intellectual pleasure or ecstasy",
+    "The taste of bliss in the absence of all thought"
+  ],
+  "answerOption": "B",
+  "answerText": "Sunlight filtering through tree leaves",
+  "difficulty": "extra-hard",
+  "sourceFile": "2319.json"
+}

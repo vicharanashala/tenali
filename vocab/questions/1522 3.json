@@ -1,0 +1,15 @@
+{
+  "id": 1522,
+  "word": "Derogatory",
+  "question": "Derogatory",
+  "options": [
+    "Uncompromisingly direct in speech",
+    "Producing powerful feelings or strong images",
+    "Showing disapproval or disrespect",
+    "To relieve congestion or overcrowding"
+  ],
+  "answerOption": "C",
+  "answerText": "Showing disapproval or disrespect",
+  "difficulty": "medium",
+  "sourceFile": "1522.json"
+}

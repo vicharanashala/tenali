@@ -1,0 +1,15 @@
+{
+  "id": 843,
+  "word": "Slippery",
+  "question": "Slippery",
+  "options": [
+    "To consider something to be important",
+    "Difficult to grip or stand on",
+    "To take something away from a position",
+    "Not decorated or elaborate; simple"
+  ],
+  "answerOption": "B",
+  "answerText": "Difficult to grip or stand on",
+  "difficulty": "easy",
+  "sourceFile": "0843.json"
+}

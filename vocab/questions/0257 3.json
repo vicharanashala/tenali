@@ -1,0 +1,15 @@
+{
+  "id": 257,
+  "word": "Exit",
+  "question": "Exit",
+  "options": [
+    "Full of energy and enthusiasm",
+    "To go out of or leave a place",
+    "To stay where you are until something happens",
+    "To cause someone to feel sudden wonder"
+  ],
+  "answerOption": "B",
+  "answerText": "To go out of or leave a place",
+  "difficulty": "easy",
+  "sourceFile": "0257.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 382,
+  "question": "What is the SI unit of pressure?",
+  "options": [
+    "Joule",
+    "Pascal",
+    "Newton",
+    "Tesla"
+  ],
+  "answerOption": "B",
+  "answerText": "Pascal",
+  "genre": "mixed",
+  "sourceFile": "0382.json"
+}

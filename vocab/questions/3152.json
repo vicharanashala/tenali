@@ -1,0 +1,15 @@
+{
+  "id": 3152,
+  "word": "Quodlibet",
+  "question": "Quodlibet",
+  "options": [
+    "Plural obliterated things",
+    "Buzzing or making a buzz",
+    "A philosophical question proposed for discussion",
+    "Quality of being non-literary"
+  ],
+  "answerOption": "C",
+  "answerText": "A philosophical question proposed for discussion",
+  "difficulty": "extra-hard",
+  "sourceFile": "3152.json"
+}

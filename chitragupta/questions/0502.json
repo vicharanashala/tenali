@@ -1,0 +1,14 @@
+{
+  "id": 502,
+  "question": "What is the SI unit of energy?",
+  "options": [
+    "Watt",
+    "Newton",
+    "Joule",
+    "Pascal"
+  ],
+  "answerOption": "C",
+  "answerText": "Joule",
+  "genre": "mixed",
+  "sourceFile": "0502.json"
+}

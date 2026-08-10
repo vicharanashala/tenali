@@ -1,0 +1,15 @@
+{
+  "id": 1550,
+  "word": "Dessert",
+  "question": "Dessert",
+  "options": [
+    "To fill something up again",
+    "A sweet course at the end of meal",
+    "To describe or portray precisely",
+    "To determine the future of something"
+  ],
+  "answerOption": "B",
+  "answerText": "A sweet course at the end of meal",
+  "difficulty": "medium",
+  "sourceFile": "1550.json"
+}

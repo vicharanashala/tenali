@@ -1,0 +1,15 @@
+{
+  "id": 352,
+  "word": "Deny",
+  "question": "Deny",
+  "options": [
+    "To state that something is not true",
+    "Of chief importance; principal",
+    "To state something is true without proof",
+    "To make something stronger"
+  ],
+  "answerOption": "A",
+  "answerText": "To state that something is not true",
+  "difficulty": "easy",
+  "sourceFile": "0352.json"
+}

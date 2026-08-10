@@ -1,0 +1,15 @@
+{
+  "id": 672,
+  "word": "Plentiful",
+  "question": "Plentiful",
+  "options": [
+    "To try to reach an agreement by discussion",
+    "Lacking energy or enthusiasm",
+    "Existing in large quantities",
+    "To move a spoon around in a liquid"
+  ],
+  "answerOption": "C",
+  "answerText": "Existing in large quantities",
+  "difficulty": "easy",
+  "sourceFile": "0672.json"
+}

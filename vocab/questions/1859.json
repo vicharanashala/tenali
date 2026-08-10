@@ -1,0 +1,15 @@
+{
+  "id": 1859,
+  "word": "Chaotic",
+  "question": "Chaotic",
+  "options": [
+    "Excessively self-centered or self-loving",
+    "A difficult or complicated situation",
+    "In complete disorder",
+    "The state of having lost morale"
+  ],
+  "answerOption": "C",
+  "answerText": "In complete disorder",
+  "difficulty": "medium",
+  "sourceFile": "1859.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1926,
+  "word": "Adulterant",
+  "question": "Adulterant",
+  "options": [
+    "A substance that adulterates",
+    "To blame or insult someone in strong language",
+    "A harsh mixture of discordant sounds",
+    "The use of clever but false arguments"
+  ],
+  "answerOption": "A",
+  "answerText": "A substance that adulterates",
+  "difficulty": "hard",
+  "sourceFile": "1926.json"
+}

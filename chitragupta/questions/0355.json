@@ -1,0 +1,14 @@
+{
+  "id": 355,
+  "question": "Which organ of the human body is affected by nephritis?",
+  "options": [
+    "Liver",
+    "Kidney",
+    "Heart",
+    "Lung"
+  ],
+  "answerOption": "B",
+  "answerText": "Kidney",
+  "genre": "science",
+  "sourceFile": "0355.json"
+}

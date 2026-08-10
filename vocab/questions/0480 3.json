@@ -1,0 +1,15 @@
+{
+  "id": 480,
+  "word": "Specify",
+  "question": "Specify",
+  "options": [
+    "To feel or detect something",
+    "To state something in an exact way",
+    "To fill someone with great surprise",
+    "Existing in large quantities"
+  ],
+  "answerOption": "B",
+  "answerText": "To state something in an exact way",
+  "difficulty": "easy",
+  "sourceFile": "0480.json"
+}

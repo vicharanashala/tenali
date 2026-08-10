@@ -1,0 +1,15 @@
+{
+  "id": 1395,
+  "word": "Den",
+  "question": "Den",
+  "options": [
+    "Tending to derogate",
+    "A small room or animal's lair",
+    "To subtract an amount from a total",
+    "A person or thing used to entice or lure"
+  ],
+  "answerOption": "B",
+  "answerText": "A small room or animal's lair",
+  "difficulty": "medium",
+  "sourceFile": "1395.json"
+}

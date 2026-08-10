@@ -1,0 +1,15 @@
+{
+  "id": 1256,
+  "word": "Euphoria",
+  "question": "Euphoria",
+  "options": [
+    "Used in or appropriate for informal speech",
+    "Wicked or cruel and barbaric",
+    "A feeling of intense excitement and happiness",
+    "Enduring pain without showing feelings"
+  ],
+  "answerOption": "C",
+  "answerText": "A feeling of intense excitement and happiness",
+  "difficulty": "medium",
+  "sourceFile": "1256.json"
+}

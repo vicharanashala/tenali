@@ -1,0 +1,15 @@
+{
+  "id": 2077,
+  "word": "Maudlin",
+  "question": "Maudlin",
+  "options": [
+    "Unable to be avoided or escaped",
+    "A special right or advantage",
+    "Self-pityingly sentimental",
+    "An eagle's nest or high place"
+  ],
+  "answerOption": "C",
+  "answerText": "Self-pityingly sentimental",
+  "difficulty": "hard",
+  "sourceFile": "2077.json"
+}

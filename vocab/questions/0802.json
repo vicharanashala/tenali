@@ -1,0 +1,15 @@
+{
+  "id": 802,
+  "word": "Virtuous",
+  "question": "Virtuous",
+  "options": [
+    "Very small or delicate",
+    "Having high moral standards",
+    "To show that something is true",
+    "To move from one region to another"
+  ],
+  "answerOption": "B",
+  "answerText": "Having high moral standards",
+  "difficulty": "easy",
+  "sourceFile": "0802.json"
+}

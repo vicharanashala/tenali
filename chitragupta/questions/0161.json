@@ -1,0 +1,14 @@
+{
+  "id": 161,
+  "question": "What is the instrument used to measure earthquakes?",
+  "options": [
+    "Thermometer",
+    "Seismograph",
+    "Speedometer",
+    "Electrometer"
+  ],
+  "answerOption": "B",
+  "answerText": "Seismograph",
+  "genre": "mixed",
+  "sourceFile": "0161.json"
+}

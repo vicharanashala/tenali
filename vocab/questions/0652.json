@@ -1,0 +1,15 @@
+{
+  "id": 652,
+  "word": "Concise",
+  "question": "Concise",
+  "options": [
+    "Giving information clearly in few words",
+    "Briefly and clearly expressed",
+    "Lacking emotion or interest",
+    "To capture or seize something"
+  ],
+  "answerOption": "A",
+  "answerText": "Giving information clearly in few words",
+  "difficulty": "easy",
+  "sourceFile": "0652.json"
+}

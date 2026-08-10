@@ -1,0 +1,15 @@
+{
+  "id": 682,
+  "word": "Fragile",
+  "question": "Fragile",
+  "options": [
+    "To make a thorough change in form",
+    "Unable to bend or be changed easily",
+    "Easily broken or damaged",
+    "Relating to the edge or outer part"
+  ],
+  "answerOption": "C",
+  "answerText": "Easily broken or damaged",
+  "difficulty": "easy",
+  "sourceFile": "0682.json"
+}

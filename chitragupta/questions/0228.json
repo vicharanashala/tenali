@@ -1,0 +1,14 @@
+{
+  "id": 228,
+  "question": "Which vitamin helps in blood clotting?",
+  "options": [
+    "Vitamin A",
+    "Vitamin C",
+    "Vitamin K",
+    "Vitamin D"
+  ],
+  "answerOption": "C",
+  "answerText": "Vitamin K",
+  "genre": "science",
+  "sourceFile": "0228.json"
+}

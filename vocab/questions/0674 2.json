@@ -1,0 +1,15 @@
+{
+  "id": 674,
+  "word": "Excessive",
+  "question": "Excessive",
+  "options": [
+    "More than is necessary or normal",
+    "Not found in large numbers; uncommon",
+    "To gather a crop from the fields",
+    "Being reserved or timid around other people"
+  ],
+  "answerOption": "A",
+  "answerText": "More than is necessary or normal",
+  "difficulty": "easy",
+  "sourceFile": "0674.json"
+}

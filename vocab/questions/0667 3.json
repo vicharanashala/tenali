@@ -1,0 +1,15 @@
+{
+  "id": 667,
+  "word": "Compact",
+  "question": "Compact",
+  "options": [
+    "More than is necessary or normal",
+    "To go or come up a slope or stairs",
+    "Closely and neatly packed together",
+    "To ask for something forcefully"
+  ],
+  "answerOption": "C",
+  "answerText": "Closely and neatly packed together",
+  "difficulty": "easy",
+  "sourceFile": "0667.json"
+}

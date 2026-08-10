@@ -1,0 +1,15 @@
+{
+  "id": 1359,
+  "word": "Degradation",
+  "question": "Degradation",
+  "options": [
+    "Having awareness or knowledge of something",
+    "Free from disturbance; calm",
+    "To hold and use a weapon or tool",
+    "The action of reducing in rank or status"
+  ],
+  "answerOption": "D",
+  "answerText": "The action of reducing in rank or status",
+  "difficulty": "medium",
+  "sourceFile": "1359.json"
+}

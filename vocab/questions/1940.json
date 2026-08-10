@@ -1,0 +1,15 @@
+{
+  "id": 1940,
+  "word": "Inconsistent",
+  "question": "Inconsistent",
+  "options": [
+    "A drying agent or substance",
+    "Not in keeping with something else",
+    "A small valley, usually among trees",
+    "Tried to compel someone to act"
+  ],
+  "answerOption": "B",
+  "answerText": "Not in keeping with something else",
+  "difficulty": "medium",
+  "sourceFile": "1940.json"
+}

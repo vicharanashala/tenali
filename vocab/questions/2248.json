@@ -1,0 +1,15 @@
+{
+  "id": 2248,
+  "word": "Admonition",
+  "question": "Admonition",
+  "options": [
+    "Full of or giving advice",
+    "Responding to air stimulus",
+    "One treating with air",
+    "Firm or stern reproof"
+  ],
+  "answerOption": "D",
+  "answerText": "Firm or stern reproof",
+  "difficulty": "hard",
+  "sourceFile": "2248.json"
+}

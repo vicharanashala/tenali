@@ -1,0 +1,15 @@
+{
+  "id": 298,
+  "word": "Wish",
+  "question": "Wish",
+  "options": [
+    "Shockingly unacceptable",
+    "Notably large in size or amount",
+    "To make someone feel weary and uninterested",
+    "To feel a strong desire for something"
+  ],
+  "answerOption": "D",
+  "answerText": "To feel a strong desire for something",
+  "difficulty": "easy",
+  "sourceFile": "0298.json"
+}

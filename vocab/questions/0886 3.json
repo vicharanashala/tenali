@@ -1,0 +1,15 @@
+{
+  "id": 886,
+  "word": "Crude",
+  "question": "Crude",
+  "options": [
+    "Absolutely necessary or important",
+    "In a natural or raw state; not refined",
+    "To be disloyal to someone who trusts you",
+    "Extremely small in size"
+  ],
+  "answerOption": "B",
+  "answerText": "In a natural or raw state; not refined",
+  "difficulty": "easy",
+  "sourceFile": "0886.json"
+}

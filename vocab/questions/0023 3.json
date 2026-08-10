@@ -1,0 +1,15 @@
+{
+  "id": 23,
+  "word": "Mean",
+  "question": "Mean",
+  "options": [
+    "To dry out and shrivel up",
+    "To begin to grow; to produce shoots",
+    "Full of energy and enthusiasm",
+    "Unwilling to give or share; unkind"
+  ],
+  "answerOption": "D",
+  "answerText": "Unwilling to give or share; unkind",
+  "difficulty": "easy",
+  "sourceFile": "0023.json"
+}

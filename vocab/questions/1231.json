@@ -1,0 +1,15 @@
+{
+  "id": 1231,
+  "word": "Benign",
+  "question": "Benign",
+  "options": [
+    "Careful and thorough; extremely attentive",
+    "Gentle and kindly; not harmful",
+    "A person's death or the end of something",
+    "A unit of fineness for yarn"
+  ],
+  "answerOption": "B",
+  "answerText": "Gentle and kindly; not harmful",
+  "difficulty": "medium",
+  "sourceFile": "1231.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2009,
+  "word": "Machination",
+  "question": "Machination",
+  "options": [
+    "A narrow opening or crack",
+    "A plot or scheme to accomplish an evil end",
+    "Damage to the skin or surface",
+    "To treat medical conditions"
+  ],
+  "answerOption": "B",
+  "answerText": "A plot or scheme to accomplish an evil end",
+  "difficulty": "hard",
+  "sourceFile": "2009.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 322,
+  "word": "Shock",
+  "question": "Shock",
+  "options": [
+    "Lesser in importance or seriousness",
+    "Able to be easily modified or adjusted",
+    "Luxuriously rich and expensive",
+    "To cause someone to feel greatly astonished"
+  ],
+  "answerOption": "D",
+  "answerText": "To cause someone to feel greatly astonished",
+  "difficulty": "easy",
+  "sourceFile": "0322.json"
+}

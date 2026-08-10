@@ -1,0 +1,15 @@
+{
+  "id": 1568,
+  "word": "Descant",
+  "question": "Descant",
+  "options": [
+    "To lose courage or hope",
+    "Relating to machines or mechanics",
+    "A melody played above the main tune",
+    "Loyalty owed to a feudal lord"
+  ],
+  "answerOption": "C",
+  "answerText": "A melody played above the main tune",
+  "difficulty": "medium",
+  "sourceFile": "1568.json"
+}

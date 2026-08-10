@@ -1,0 +1,15 @@
+{
+  "id": 1394,
+  "word": "Xenial",
+  "question": "Xenial",
+  "options": [
+    "An unfilled space or gap",
+    "Relating to hospitality between host and guest",
+    "The urge to pinch or squeeze something very cute",
+    "A social gathering centered around drinking chocolate"
+  ],
+  "answerOption": "B",
+  "answerText": "Relating to hospitality between host and guest",
+  "difficulty": "extra-hard",
+  "sourceFile": "1394.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 566,
+  "word": "Impress",
+  "question": "Impress",
+  "options": [
+    "To give money or goods to a cause",
+    "To determine an amount by mathematics",
+    "Able to be used for a practical purpose",
+    "To make someone feel admiration"
+  ],
+  "answerOption": "D",
+  "answerText": "To make someone feel admiration",
+  "difficulty": "easy",
+  "sourceFile": "0566.json"
+}

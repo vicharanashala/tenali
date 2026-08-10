@@ -1,0 +1,15 @@
+{
+  "id": 272,
+  "word": "Heal",
+  "question": "Heal",
+  "options": [
+    "To express the meaning in another language",
+    "In good physical condition; not sick",
+    "To become sound or healthy again",
+    "Of a rough or irregular surface"
+  ],
+  "answerOption": "C",
+  "answerText": "To become sound or healthy again",
+  "difficulty": "easy",
+  "sourceFile": "0272.json"
+}

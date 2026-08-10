@@ -1,0 +1,15 @@
+{
+  "id": 1839,
+  "word": "Leery",
+  "question": "Leery",
+  "options": [
+    "Hard but easily broken",
+    "Bitterness in tone or manner",
+    "Wary or suspicious",
+    "Based on principles of democracy"
+  ],
+  "answerOption": "C",
+  "answerText": "Wary or suspicious",
+  "difficulty": "medium",
+  "sourceFile": "1839.json"
+}

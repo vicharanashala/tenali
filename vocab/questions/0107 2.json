@@ -1,0 +1,15 @@
+{
+  "id": 107,
+  "word": "Fancy",
+  "question": "Fancy",
+  "options": [
+    "Working by itself with little human control",
+    "To stop feeling angry toward someone",
+    "To make a thorough change in form",
+    "Elaborate in structure or decoration"
+  ],
+  "answerOption": "D",
+  "answerText": "Elaborate in structure or decoration",
+  "difficulty": "easy",
+  "sourceFile": "0107.json"
+}

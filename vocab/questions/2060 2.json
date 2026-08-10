@@ -1,0 +1,15 @@
+{
+  "id": 2060,
+  "word": "Aeolipile",
+  "question": "Aeolipile",
+  "options": [
+    "A woman who commits adultery",
+    "In an advertent manner",
+    "Interaction of air and structure",
+    "An ancient heat-driven engine"
+  ],
+  "answerOption": "D",
+  "answerText": "An ancient heat-driven engine",
+  "difficulty": "hard",
+  "sourceFile": "2060.json"
+}

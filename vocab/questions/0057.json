@@ -1,0 +1,15 @@
+{
+  "id": 57,
+  "word": "True",
+  "question": "True",
+  "options": [
+    "In accordance with fact or reality",
+    "Made to happen later than expected",
+    "To arrive at a judgment after reasoning",
+    "Lacking flavor or interest"
+  ],
+  "answerOption": "A",
+  "answerText": "In accordance with fact or reality",
+  "difficulty": "easy",
+  "sourceFile": "0057.json"
+}

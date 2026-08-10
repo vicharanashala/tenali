@@ -1,0 +1,15 @@
+{
+  "id": 264,
+  "word": "Swim",
+  "question": "Swim",
+  "options": [
+    "Calm and not easily disturbed",
+    "Graceful and stylish in appearance",
+    "To move through water using the body",
+    "Feeling optimistic about a future event"
+  ],
+  "answerOption": "C",
+  "answerText": "To move through water using the body",
+  "difficulty": "easy",
+  "sourceFile": "0264.json"
+}

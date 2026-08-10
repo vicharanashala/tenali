@@ -1,0 +1,15 @@
+{
+  "id": 3000,
+  "word": "Obsequious",
+  "question": "Obsequious",
+  "options": [
+    "An unfilled space or gap",
+    "Obedient or attentive to an excessive degree",
+    "Relating to non-literal",
+    "Plural of abjection"
+  ],
+  "answerOption": "B",
+  "answerText": "Obedient or attentive to an excessive degree",
+  "difficulty": "extra-hard",
+  "sourceFile": "3000.json"
+}

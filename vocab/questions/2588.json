@@ -1,0 +1,15 @@
+{
+  "id": 2588,
+  "word": "AEROSPHERE",
+  "question": "AEROSPHERE",
+  "options": [
+    "Unable to be avoided or escaped",
+    "An easterly wind in the Aegean",
+    "Native and restricted to a certain place",
+    "The atmosphere or air layer"
+  ],
+  "answerOption": "D",
+  "answerText": "The atmosphere or air layer",
+  "difficulty": "hard",
+  "sourceFile": "2588.json"
+}

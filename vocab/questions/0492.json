@@ -1,0 +1,15 @@
+{
+  "id": 492,
+  "word": "Research",
+  "question": "Research",
+  "options": [
+    "In perfect original condition",
+    "To study something thoroughly",
+    "Arranged or planned in a methodical way",
+    "To take someone as a prisoner"
+  ],
+  "answerOption": "B",
+  "answerText": "To study something thoroughly",
+  "difficulty": "easy",
+  "sourceFile": "0492.json"
+}

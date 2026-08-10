@@ -1,0 +1,15 @@
+{
+  "id": 532,
+  "word": "Weaken",
+  "question": "Weaken",
+  "options": [
+    "Not able to be seen through",
+    "To show the way by going in front",
+    "To make something less strong",
+    "Easy to perceive and understand"
+  ],
+  "answerOption": "C",
+  "answerText": "To make something less strong",
+  "difficulty": "easy",
+  "sourceFile": "0532.json"
+}

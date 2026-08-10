@@ -1,0 +1,15 @@
+{
+  "id": 494,
+  "word": "Examine",
+  "question": "Examine",
+  "options": [
+    "Closely and neatly packed together",
+    "Able to move quickly and easily",
+    "To inspect something in detail",
+    "Insufficient for the demand; in short supply"
+  ],
+  "answerOption": "C",
+  "answerText": "To inspect something in detail",
+  "difficulty": "easy",
+  "sourceFile": "0494.json"
+}

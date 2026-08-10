@@ -1,0 +1,15 @@
+{
+  "id": 876,
+  "word": "Vivid",
+  "question": "Vivid",
+  "options": [
+    "Not friendly or interested; distant",
+    "To perceive or recognize something",
+    "Displaying a lack of energy; relaxed",
+    "Producing powerful feelings or strong images"
+  ],
+  "answerOption": "D",
+  "answerText": "Producing powerful feelings or strong images",
+  "difficulty": "medium",
+  "sourceFile": "0876.json"
+}

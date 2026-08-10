@@ -1,0 +1,15 @@
+{
+  "id": 1302,
+  "word": "Deluge",
+  "question": "Deluge",
+  "options": [
+    "A serious loss of mental abilities",
+    "A severe flood of water or rain",
+    "Sumptuously rich or elaborate",
+    "To clear someone of blame or suspicion"
+  ],
+  "answerOption": "B",
+  "answerText": "A severe flood of water or rain",
+  "difficulty": "medium",
+  "sourceFile": "1302.json"
+}

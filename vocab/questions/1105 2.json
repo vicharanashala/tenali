@@ -1,0 +1,15 @@
+{
+  "id": 1105,
+  "word": "Dearth",
+  "question": "Dearth",
+  "options": [
+    "Sarcastic in a scathing and bitter way",
+    "A person's ability to cope with difficulties",
+    "A scarcity or lack of something",
+    "Harsh criticism or censure"
+  ],
+  "answerOption": "C",
+  "answerText": "A scarcity or lack of something",
+  "difficulty": "hard",
+  "sourceFile": "1105.json"
+}

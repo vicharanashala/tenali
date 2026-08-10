@@ -1,0 +1,15 @@
+{
+  "id": 396,
+  "word": "Wither",
+  "question": "Wither",
+  "options": [
+    "Not varying; the same in all cases",
+    "To dry out and shrivel up",
+    "Going straight up and down",
+    "To move from one region to another"
+  ],
+  "answerOption": "B",
+  "answerText": "To dry out and shrivel up",
+  "difficulty": "easy",
+  "sourceFile": "0396.json"
+}

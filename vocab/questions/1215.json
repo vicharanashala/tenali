@@ -1,0 +1,15 @@
+{
+  "id": 1215,
+  "word": "Heed",
+  "question": "Heed",
+  "options": [
+    "Not revealing one's thoughts readily",
+    "To pay attention to advice or warning",
+    "To question someone about a completed task",
+    "Abandoned by an owner or crew"
+  ],
+  "answerOption": "B",
+  "answerText": "To pay attention to advice or warning",
+  "difficulty": "medium",
+  "sourceFile": "1215.json"
+}

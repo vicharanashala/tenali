@@ -1,0 +1,15 @@
+{
+  "id": 84,
+  "word": "Narrow",
+  "question": "Narrow",
+  "options": [
+    "Of small width in relation to length",
+    "Of extreme force or strength",
+    "To take someone's property without permission",
+    "To buy something"
+  ],
+  "answerOption": "A",
+  "answerText": "Of small width in relation to length",
+  "difficulty": "easy",
+  "sourceFile": "0084.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 377,
+  "word": "Squeeze",
+  "question": "Squeeze",
+  "options": [
+    "To study something thoroughly",
+    "Not allowing water to pass through",
+    "Able to resume its shape after stretching",
+    "To firmly press something from both sides"
+  ],
+  "answerOption": "D",
+  "answerText": "To firmly press something from both sides",
+  "difficulty": "easy",
+  "sourceFile": "0377.json"
+}

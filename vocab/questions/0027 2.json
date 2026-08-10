@@ -1,0 +1,15 @@
+{
+  "id": 27,
+  "word": "Serene",
+  "question": "Serene",
+  "options": [
+    "Fluent and persuasive in speaking or writing",
+    "Producing no useful result; pointless",
+    "Existing in very large quantities",
+    "Calm, peaceful, and untroubled"
+  ],
+  "answerOption": "D",
+  "answerText": "Calm, peaceful, and untroubled",
+  "difficulty": "medium",
+  "sourceFile": "0027.json"
+}

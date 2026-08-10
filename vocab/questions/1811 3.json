@@ -1,0 +1,15 @@
+{
+  "id": 1811,
+  "word": "Cynical",
+  "question": "Cynical",
+  "options": [
+    "To support or strengthen something",
+    "Distrusting human motives",
+    "No longer produced or used; out of date",
+    "To remove sulfur from something"
+  ],
+  "answerOption": "B",
+  "answerText": "Distrusting human motives",
+  "difficulty": "medium",
+  "sourceFile": "1811.json"
+}

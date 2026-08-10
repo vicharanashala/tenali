@@ -1,0 +1,15 @@
+{
+  "id": 149,
+  "word": "Forbid",
+  "question": "Forbid",
+  "options": [
+    "Not decorated or elaborate; simple",
+    "To order someone not to do something",
+    "Closely compacted or thick",
+    "Covered or marked with an unclean substance"
+  ],
+  "answerOption": "B",
+  "answerText": "To order someone not to do something",
+  "difficulty": "easy",
+  "sourceFile": "0149.json"
+}

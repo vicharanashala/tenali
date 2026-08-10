@@ -1,0 +1,15 @@
+{
+  "id": 1147,
+  "word": "Grapple",
+  "question": "Grapple",
+  "options": [
+    "Serving to cleanse or purify",
+    "To engage in a close fight or struggle",
+    "To plan and draw something",
+    "To detract from the rank or dignity"
+  ],
+  "answerOption": "B",
+  "answerText": "To engage in a close fight or struggle",
+  "difficulty": "medium",
+  "sourceFile": "1147.json"
+}

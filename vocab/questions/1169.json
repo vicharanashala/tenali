@@ -1,0 +1,15 @@
+{
+  "id": 1169,
+  "word": "Fortitude",
+  "question": "Fortitude",
+  "options": [
+    "One who dethrones",
+    "Producing involuntary convulsions",
+    "Courage in pain or adversity",
+    "To appoint as a deputy"
+  ],
+  "answerOption": "C",
+  "answerText": "Courage in pain or adversity",
+  "difficulty": "medium",
+  "sourceFile": "1169.json"
+}

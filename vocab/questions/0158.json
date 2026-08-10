@@ -1,0 +1,15 @@
+{
+  "id": 158,
+  "word": "Arrive",
+  "question": "Arrive",
+  "options": [
+    "Free of deceit; truthful",
+    "Noticeably happy and optimistic",
+    "Difficult to grip or stand on",
+    "To reach a destination"
+  ],
+  "answerOption": "D",
+  "answerText": "To reach a destination",
+  "difficulty": "easy",
+  "sourceFile": "0158.json"
+}

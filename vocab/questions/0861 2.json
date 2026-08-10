@@ -1,0 +1,15 @@
+{
+  "id": 861,
+  "word": "Gullible",
+  "question": "Gullible",
+  "options": [
+    "To move back and forth at a regular speed",
+    "Coming after something in time",
+    "To accumulate or receive over time",
+    "Easily persuaded to believe something"
+  ],
+  "answerOption": "D",
+  "answerText": "Easily persuaded to believe something",
+  "difficulty": "medium",
+  "sourceFile": "0861.json"
+}

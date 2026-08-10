@@ -1,0 +1,14 @@
+{
+  "id": 92,
+  "question": "In which country is the city of Dubai located?",
+  "options": [
+    "Saudi Arabia",
+    "Qatar",
+    "United Arab Emirates",
+    "Oman"
+  ],
+  "answerOption": "C",
+  "answerText": "United Arab Emirates",
+  "genre": "geography",
+  "sourceFile": "0092.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2189,
+  "word": "Esoteric",
+  "question": "Esoteric",
+  "options": [
+    "The use of air in sound",
+    "Relating to sandy regions",
+    "Intended for a small group with special knowledge",
+    "A colorless liquid chemical compound"
+  ],
+  "answerOption": "C",
+  "answerText": "Intended for a small group with special knowledge",
+  "difficulty": "hard",
+  "sourceFile": "2189.json"
+}

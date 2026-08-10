@@ -1,0 +1,15 @@
+{
+  "id": 2713,
+  "word": "Posology",
+  "question": "Posology",
+  "options": [
+    "A right exclusive to a person",
+    "An expert in aerodynamics",
+    "The study of doses of medicines",
+    "Relating to aircraft operation"
+  ],
+  "answerOption": "C",
+  "answerText": "The study of doses of medicines",
+  "difficulty": "hard",
+  "sourceFile": "2713.json"
+}

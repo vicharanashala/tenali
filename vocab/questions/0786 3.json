@@ -1,0 +1,15 @@
+{
+  "id": 786,
+  "word": "Sterile",
+  "question": "Sterile",
+  "options": [
+    "Showing a willingness to take risks",
+    "Free from bacteria; completely clean",
+    "To control something by means of rules",
+    "Morally right and justifiable"
+  ],
+  "answerOption": "B",
+  "answerText": "Free from bacteria; completely clean",
+  "difficulty": "easy",
+  "sourceFile": "0786.json"
+}

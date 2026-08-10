@@ -1,0 +1,14 @@
+{
+  "id": 252,
+  "question": "Which is the world’s highest waterfall?",
+  "options": [
+    "Niagara Falls",
+    "Victoria Falls",
+    "Angel Falls",
+    "Iguazu Falls"
+  ],
+  "answerOption": "C",
+  "answerText": "Angel Falls",
+  "genre": "science",
+  "sourceFile": "0252.json"
+}

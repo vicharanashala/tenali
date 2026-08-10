@@ -1,0 +1,15 @@
+{
+  "id": 240,
+  "word": "Invite",
+  "question": "Invite",
+  "options": [
+    "To ease the grief or distress of someone",
+    "To say what will happen in the future",
+    "To join or link things together",
+    "To ask someone to come to an event"
+  ],
+  "answerOption": "D",
+  "answerText": "To ask someone to come to an event",
+  "difficulty": "easy",
+  "sourceFile": "0240.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 427,
+  "question": "What is the pH value of a neutral solution at 25°C?",
+  "options": [
+    "5",
+    "6",
+    "7",
+    "8"
+  ],
+  "answerOption": "C",
+  "answerText": "7",
+  "genre": "mixed",
+  "sourceFile": "0427.json"
+}

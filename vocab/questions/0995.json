@@ -1,0 +1,15 @@
+{
+  "id": 995,
+  "word": "Acrid",
+  "question": "Acrid",
+  "options": [
+    "Sufficiently great or important",
+    "Harsh or bitter taste or smell",
+    "To have enough money to pay for something",
+    "Happening by chance; unintentional"
+  ],
+  "answerOption": "B",
+  "answerText": "Harsh or bitter taste or smell",
+  "difficulty": "easy",
+  "sourceFile": "0995.json"
+}

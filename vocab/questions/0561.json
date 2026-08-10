@@ -1,0 +1,15 @@
+{
+  "id": 561,
+  "word": "Exceed",
+  "question": "Exceed",
+  "options": [
+    "Measuring a small distance from end to end",
+    "To go beyond the limit of something",
+    "Occurring or found frequently",
+    "Not fulfilling the intended purpose"
+  ],
+  "answerOption": "B",
+  "answerText": "To go beyond the limit of something",
+  "difficulty": "easy",
+  "sourceFile": "0561.json"
+}

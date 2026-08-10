@@ -1,0 +1,14 @@
+{
+  "id": 599,
+  "question": "Who measured the charge of the electron with the oil-drop experiment?",
+  "options": [
+    "Thomson",
+    "Millikan",
+    "Faraday",
+    "Chadwick"
+  ],
+  "answerOption": "B",
+  "answerText": "Millikan",
+  "genre": "general-knowledge",
+  "sourceFile": "0599.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 98,
+  "word": "Neat",
+  "question": "Neat",
+  "options": [
+    "Relating to computer technology",
+    "To formally put an end to a system",
+    "Based on clear thought and reason",
+    "Arranged in a tidy way"
+  ],
+  "answerOption": "D",
+  "answerText": "Arranged in a tidy way",
+  "difficulty": "easy",
+  "sourceFile": "0098.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 17,
+  "question": "What is the capital of Russia?",
+  "options": [
+    "Cairo",
+    "Moscow",
+    "Sri Jayawardenepura Kotte",
+    "Bangkok"
+  ],
+  "answerOption": "B",
+  "answerText": "Moscow",
+  "genre": "geography",
+  "sourceFile": "0017.json"
+}

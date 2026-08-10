@@ -1,0 +1,14 @@
+{
+  "id": 705,
+  "question": "What is the SI unit of magnetic field strength (B)?",
+  "options": [
+    "tesla",
+    "weber",
+    "henry",
+    "ampere"
+  ],
+  "answerOption": "A",
+  "answerText": "tesla",
+  "genre": "mixed",
+  "sourceFile": "0705.json"
+}

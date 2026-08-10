@@ -1,0 +1,14 @@
+{
+  "id": 177,
+  "question": "What is the capital of Rajasthan?",
+  "options": [
+    "Udaipur",
+    "Jodhpur",
+    "Jaipur",
+    "Ajmer"
+  ],
+  "answerOption": "C",
+  "answerText": "Jaipur",
+  "genre": "geography",
+  "sourceFile": "0177.json"
+}

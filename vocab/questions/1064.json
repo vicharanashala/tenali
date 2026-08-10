@@ -1,0 +1,15 @@
+{
+  "id": 1064,
+  "word": "Quarrelsome",
+  "question": "Quarrelsome",
+  "options": [
+    "Given to or characterized by quarreling",
+    "The manner of standing or walking",
+    "Full of or shedding light; bright",
+    "In a destructive manner"
+  ],
+  "answerOption": "A",
+  "answerText": "Given to or characterized by quarreling",
+  "difficulty": "medium",
+  "sourceFile": "1064.json"
+}

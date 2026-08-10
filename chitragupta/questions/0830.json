@@ -1,0 +1,14 @@
+{
+  "id": 830,
+  "question": "What is the SI unit of electric conductance?",
+  "options": [
+    "siemens",
+    "ohm",
+    "weber",
+    "tesla"
+  ],
+  "answerOption": "A",
+  "answerText": "siemens",
+  "genre": "mixed",
+  "sourceFile": "0830.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2097,
+  "word": "Kinesthetic",
+  "question": "Kinesthetic",
+  "options": [
+    "The action of expressing an idea",
+    "Relating to awareness of body position",
+    "The origin or creation of something",
+    "Brain injury from violent shaking"
+  ],
+  "answerOption": "B",
+  "answerText": "Relating to awareness of body position",
+  "difficulty": "hard",
+  "sourceFile": "2097.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 68,
+  "word": "Greedy",
+  "question": "Greedy",
+  "options": [
+    "Having an intense desire for food or wealth",
+    "Strongly wanting to do or have something",
+    "Showing a great deal of variety",
+    "Lacking good sense or judgment"
+  ],
+  "answerOption": "A",
+  "answerText": "Having an intense desire for food or wealth",
+  "difficulty": "easy",
+  "sourceFile": "0068.json"
+}

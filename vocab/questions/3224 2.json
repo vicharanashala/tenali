@@ -1,0 +1,15 @@
+{
+  "id": 3224,
+  "word": "Abyssorhabdus",
+  "question": "Abyssorhabdus",
+  "options": [
+    "Rod-shaped abyss organism",
+    "A deviation from normal pattern",
+    "Relating to ocean depths",
+    "Creature of abyss feeder"
+  ],
+  "answerOption": "A",
+  "answerText": "Rod-shaped abyss organism",
+  "difficulty": "extra-hard",
+  "sourceFile": "3224.json"
+}

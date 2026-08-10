@@ -1,0 +1,15 @@
+{
+  "id": 1266,
+  "word": "Legerdemain",
+  "question": "Legerdemain",
+  "options": [
+    "Skillful use of one's hands; trickery",
+    "Producing offspring or vegetation abundantly",
+    "A peculiar behavioral habit",
+    "Mental calmness in a difficult situation"
+  ],
+  "answerOption": "A",
+  "answerText": "Skillful use of one's hands; trickery",
+  "difficulty": "hard",
+  "sourceFile": "1266.json"
+}

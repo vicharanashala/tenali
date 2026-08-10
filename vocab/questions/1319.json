@@ -1,0 +1,15 @@
+{
+  "id": 1319,
+  "word": "Decompose",
+  "question": "Decompose",
+  "options": [
+    "To break down into component parts",
+    "Lacking moral sense",
+    "Very great or intense; deep",
+    "Lacking basic necessities or resources"
+  ],
+  "answerOption": "A",
+  "answerText": "To break down into component parts",
+  "difficulty": "medium",
+  "sourceFile": "1319.json"
+}

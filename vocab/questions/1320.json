@@ -1,0 +1,15 @@
+{
+  "id": 1320,
+  "word": "Decongest",
+  "question": "Decongest",
+  "options": [
+    "To relieve congestion or overcrowding",
+    "Closely compacted or thick in texture",
+    "Excessively self-centered or self-loving",
+    "To cause something to cease to exist"
+  ],
+  "answerOption": "A",
+  "answerText": "To relieve congestion or overcrowding",
+  "difficulty": "medium",
+  "sourceFile": "1320.json"
+}

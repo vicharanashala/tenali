@@ -1,0 +1,15 @@
+{
+  "id": 753,
+  "word": "Arid",
+  "question": "Arid",
+  "options": [
+    "Bent or twisted out of shape",
+    "Existing in very large quantities",
+    "Having little or no rain; very dry",
+    "Not severe or strong; gentle"
+  ],
+  "answerOption": "C",
+  "answerText": "Having little or no rain; very dry",
+  "difficulty": "easy",
+  "sourceFile": "0753.json"
+}

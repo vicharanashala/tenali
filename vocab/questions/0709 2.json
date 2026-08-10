@@ -1,0 +1,15 @@
+{
+  "id": 709,
+  "word": "Diverse",
+  "question": "Diverse",
+  "options": [
+    "To give an account of something in words",
+    "To cook food by prolonged exposure to heat",
+    "Showing a great deal of variety",
+    "Not open; shut or fastened"
+  ],
+  "answerOption": "C",
+  "answerText": "Showing a great deal of variety",
+  "difficulty": "easy",
+  "sourceFile": "0709.json"
+}

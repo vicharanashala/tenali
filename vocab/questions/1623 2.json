@@ -1,0 +1,15 @@
+{
+  "id": 1623,
+  "word": "Detoxication",
+  "question": "Detoxication",
+  "options": [
+    "The removal of toxins",
+    "To give a specified name to something",
+    "Sufficient for a specific need",
+    "A piece of furniture for writing"
+  ],
+  "answerOption": "A",
+  "answerText": "The removal of toxins",
+  "difficulty": "medium",
+  "sourceFile": "1623.json"
+}

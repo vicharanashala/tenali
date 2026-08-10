@@ -1,0 +1,15 @@
+{
+  "id": 2357,
+  "word": "Waldeinsamkeit",
+  "question": "Waldeinsamkeit",
+  "options": [
+    "To walk in the wind for fun to clear one's mind",
+    "A profound emotional awareness of the universe",
+    "To howl or wail as an expression of strong emotion",
+    "The feeling of solitude in the woods"
+  ],
+  "answerOption": "D",
+  "answerText": "The feeling of solitude in the woods",
+  "difficulty": "extra-hard",
+  "sourceFile": "2357.json"
+}

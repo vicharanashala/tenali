@@ -1,0 +1,15 @@
+{
+  "id": 1104,
+  "word": "Kinship",
+  "question": "Kinship",
+  "options": [
+    "A person or thing used to entice or lure",
+    "Hard but easily broken",
+    "A sharing of characteristics or origins",
+    "Playfully quaint or fanciful"
+  ],
+  "answerOption": "C",
+  "answerText": "A sharing of characteristics or origins",
+  "difficulty": "medium",
+  "sourceFile": "1104.json"
+}

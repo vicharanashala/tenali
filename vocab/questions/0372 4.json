@@ -1,0 +1,15 @@
+{
+  "id": 372,
+  "word": "Slice",
+  "question": "Slice",
+  "options": [
+    "Reaching a high or the highest degree",
+    "To be successful in a contest",
+    "To cut into thin flat pieces",
+    "Having the training needed to do something"
+  ],
+  "answerOption": "C",
+  "answerText": "To cut into thin flat pieces",
+  "difficulty": "easy",
+  "sourceFile": "0372.json"
+}

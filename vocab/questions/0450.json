@@ -1,0 +1,15 @@
+{
+  "id": 450,
+  "word": "Sketch",
+  "question": "Sketch",
+  "options": [
+    "To make a rough drawing of something",
+    "Suggested or understood indirectly",
+    "To move downward from a higher point",
+    "Moving at a low speed"
+  ],
+  "answerOption": "A",
+  "answerText": "To make a rough drawing of something",
+  "difficulty": "easy",
+  "sourceFile": "0450.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2230,
+  "word": "AEROSOLVENCY",
+  "question": "AEROSOLVENCY",
+  "options": [
+    "The action of dissolving in air",
+    "Relating to measuring air",
+    "The process of adding air",
+    "The action of adulterating"
+  ],
+  "answerOption": "A",
+  "answerText": "The action of dissolving in air",
+  "difficulty": "hard",
+  "sourceFile": "2230.json"
+}

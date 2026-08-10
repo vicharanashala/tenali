@@ -1,0 +1,15 @@
+{
+  "id": 126,
+  "word": "Certain",
+  "question": "Certain",
+  "options": [
+    "To cover something in paper or cloth",
+    "Known for sure; established beyond doubt",
+    "To feel contempt or deep dislike for",
+    "Bad-tempered and argumentative"
+  ],
+  "answerOption": "B",
+  "answerText": "Known for sure; established beyond doubt",
+  "difficulty": "easy",
+  "sourceFile": "0126.json"
+}

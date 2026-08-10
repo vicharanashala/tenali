@@ -1,0 +1,15 @@
+{
+  "id": 495,
+  "word": "Inspect",
+  "question": "Inspect",
+  "options": [
+    "To shine with flashes of light",
+    "To attract and hold attention of someone",
+    "To gradually grow faint and disappear",
+    "To look at something closely"
+  ],
+  "answerOption": "D",
+  "answerText": "To look at something closely",
+  "difficulty": "easy",
+  "sourceFile": "0495.json"
+}

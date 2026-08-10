@@ -1,0 +1,15 @@
+{
+  "id": 1243,
+  "word": "Heresy",
+  "question": "Heresy",
+  "options": [
+    "Relating to pleasant aspects of the countryside",
+    "Belief contrary to the accepted doctrine",
+    "Excessively complicated and detailed",
+    "Aggressively greedy or grasping"
+  ],
+  "answerOption": "B",
+  "answerText": "Belief contrary to the accepted doctrine",
+  "difficulty": "hard",
+  "sourceFile": "1243.json"
+}

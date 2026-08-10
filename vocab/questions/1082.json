@@ -1,0 +1,15 @@
+{
+  "id": 1082,
+  "word": "Lavish",
+  "question": "Lavish",
+  "options": [
+    "The quality of holding firmly",
+    "Sumptuously rich or elaborate",
+    "The removal of salt from water",
+    "Flourishing or spreading in an uncontrolled way"
+  ],
+  "answerOption": "B",
+  "answerText": "Sumptuously rich or elaborate",
+  "difficulty": "medium",
+  "sourceFile": "1082.json"
+}

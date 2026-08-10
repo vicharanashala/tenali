@@ -1,0 +1,15 @@
+{
+  "id": 1632,
+  "word": "Detrimental",
+  "question": "Detrimental",
+  "options": [
+    "Causing harm or damage",
+    "The quality of being resolved",
+    "Containing many details or giving details",
+    "To let air out of something inflated"
+  ],
+  "answerOption": "A",
+  "answerText": "Causing harm or damage",
+  "difficulty": "medium",
+  "sourceFile": "1632.json"
+}

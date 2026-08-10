@@ -1,0 +1,15 @@
+{
+  "id": 2866,
+  "word": "Disquisition",
+  "question": "Disquisition",
+  "options": [
+    "A long detailed discussion or treatise",
+    "Impossible to understand or interpret",
+    "Angry and bitter in tone or manner",
+    "One believing in predestination"
+  ],
+  "answerOption": "A",
+  "answerText": "A long detailed discussion or treatise",
+  "difficulty": "hard",
+  "sourceFile": "2866.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 898,
+  "word": "Tedious",
+  "question": "Tedious",
+  "options": [
+    "Too long, slow, or dull; tiresome",
+    "Feeling cautious about possible dangers",
+    "Having passionate and sincere feeling",
+    "Not revealing one's thoughts readily"
+  ],
+  "answerOption": "A",
+  "answerText": "Too long, slow, or dull; tiresome",
+  "difficulty": "medium",
+  "sourceFile": "0898.json"
+}

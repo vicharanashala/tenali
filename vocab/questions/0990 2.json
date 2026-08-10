@@ -1,0 +1,15 @@
+{
+  "id": 990,
+  "word": "Sanguine",
+  "question": "Sanguine",
+  "options": [
+    "To regard with great respect",
+    "Very great or intense; deep",
+    "Optimistic or positive about the future",
+    "Expressed clearly and easy to understand"
+  ],
+  "answerOption": "C",
+  "answerText": "Optimistic or positive about the future",
+  "difficulty": "medium",
+  "sourceFile": "0990.json"
+}

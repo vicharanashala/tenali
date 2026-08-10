@@ -1,0 +1,15 @@
+{
+  "id": 895,
+  "word": "Dense",
+  "question": "Dense",
+  "options": [
+    "To turn around quickly in a circle",
+    "Closely compacted or thick",
+    "To ask someone to come to an event",
+    "To relieve a person of symptoms of disease"
+  ],
+  "answerOption": "B",
+  "answerText": "Closely compacted or thick",
+  "difficulty": "easy",
+  "sourceFile": "0895.json"
+}

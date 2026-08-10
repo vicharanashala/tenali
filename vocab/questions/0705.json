@@ -1,0 +1,15 @@
+{
+  "id": 705,
+  "word": "Intermittent",
+  "question": "Intermittent",
+  "options": [
+    "Feeling deep pleasure from achievements",
+    "Lacking emotion or interest",
+    "To cause liquid to scatter in drops",
+    "Occurring at irregular intervals"
+  ],
+  "answerOption": "D",
+  "answerText": "Occurring at irregular intervals",
+  "difficulty": "easy",
+  "sourceFile": "0705.json"
+}

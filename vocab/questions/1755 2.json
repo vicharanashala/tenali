@@ -1,0 +1,15 @@
+{
+  "id": 1755,
+  "word": "Verbose",
+  "question": "Verbose",
+  "options": [
+    "A genus of spiders in taxonomy",
+    "Using or expressed in more words than needed",
+    "A genus of water beetles",
+    "Mental calmness in a difficult situation"
+  ],
+  "answerOption": "B",
+  "answerText": "Using or expressed in more words than needed",
+  "difficulty": "hard",
+  "sourceFile": "1755.json"
+}

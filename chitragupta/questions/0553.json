@@ -1,0 +1,14 @@
+{
+  "id": 553,
+  "question": "Who discovered the law of electrolysis?",
+  "options": [
+    "Faraday",
+    "Ohm",
+    "Ampere",
+    "Volta"
+  ],
+  "answerOption": "A",
+  "answerText": "Faraday",
+  "genre": "general-knowledge",
+  "sourceFile": "0553.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 138,
+  "word": "Tender",
+  "question": "Tender",
+  "options": [
+    "Showing gentleness and concern",
+    "In a state of complete confusion",
+    "To give facts or information to someone",
+    "Kind and pleasant to others"
+  ],
+  "answerOption": "A",
+  "answerText": "Showing gentleness and concern",
+  "difficulty": "easy",
+  "sourceFile": "0138.json"
+}

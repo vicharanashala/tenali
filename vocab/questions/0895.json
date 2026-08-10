@@ -1,0 +1,15 @@
+{
+  "id": 895,
+  "word": "Dense",
+  "question": "Dense",
+  "options": [
+    "To find something for the first time",
+    "Closely compacted or thick",
+    "Well informed about many subjects",
+    "Weak and delicate in health"
+  ],
+  "answerOption": "B",
+  "answerText": "Closely compacted or thick",
+  "difficulty": "easy",
+  "sourceFile": "0895.json"
+}

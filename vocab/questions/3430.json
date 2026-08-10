@@ -1,0 +1,15 @@
+{
+  "id": 3430,
+  "word": "Abyissal",
+  "question": "Abyissal",
+  "options": [
+    "Family of abyss creatures",
+    "A great spiritual anguish without a specific cause",
+    "Relating to ocean depths",
+    "A low rumbling sound like distant thunder"
+  ],
+  "answerOption": "C",
+  "answerText": "Relating to ocean depths",
+  "difficulty": "extra-hard",
+  "sourceFile": "3430.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 767,
+  "question": "Which country is associated with the city of Managua?",
+  "options": [
+    "Honduras",
+    "Nicaragua",
+    "Guatemala",
+    "Costa Rica"
+  ],
+  "answerOption": "B",
+  "answerText": "Nicaragua",
+  "genre": "geography",
+  "sourceFile": "0767.json"
+}

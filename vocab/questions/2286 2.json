@@ -1,0 +1,15 @@
+{
+  "id": 2286,
+  "word": "AERUGO",
+  "question": "AERUGO",
+  "options": [
+    "An eagle's nest or high place",
+    "An indicator of a trend",
+    "Knowledge of air properties",
+    "Verdigris or green patina"
+  ],
+  "answerOption": "D",
+  "answerText": "Verdigris or green patina",
+  "difficulty": "hard",
+  "sourceFile": "2286.json"
+}

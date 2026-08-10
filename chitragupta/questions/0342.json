@@ -1,0 +1,14 @@
+{
+  "id": 342,
+  "question": "Which blood component helps in clotting?",
+  "options": [
+    "Plasma",
+    "Platelets",
+    "Red blood cells",
+    "White blood cells"
+  ],
+  "answerOption": "B",
+  "answerText": "Platelets",
+  "genre": "science",
+  "sourceFile": "0342.json"
+}

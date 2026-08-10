@@ -1,0 +1,15 @@
+{
+  "id": 76,
+  "word": "Shy",
+  "question": "Shy",
+  "options": [
+    "Very hot; burning",
+    "To set free from confinement",
+    "To catch an animal in a device",
+    "Being reserved or timid around other people"
+  ],
+  "answerOption": "D",
+  "answerText": "Being reserved or timid around other people",
+  "difficulty": "easy",
+  "sourceFile": "0076.json"
+}

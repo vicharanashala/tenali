@@ -1,0 +1,14 @@
+{
+  "id": 260,
+  "question": "Which is the smallest bone in the human body?",
+  "options": [
+    "Femur",
+    "Stapes",
+    "Radius",
+    "Fibula"
+  ],
+  "answerOption": "B",
+  "answerText": "Stapes",
+  "genre": "science",
+  "sourceFile": "0260.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2370,
+  "word": "Aegir",
+  "question": "Aegir",
+  "options": [
+    "Norse god of the sea",
+    "The action of fertilizing an egg",
+    "Cheerful and lighthearted",
+    "Loyalty owed to a feudal lord"
+  ],
+  "answerOption": "A",
+  "answerText": "Norse god of the sea",
+  "difficulty": "hard",
+  "sourceFile": "2370.json"
+}

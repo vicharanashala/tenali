@@ -1,0 +1,15 @@
+{
+  "id": 263,
+  "word": "Jump",
+  "question": "Jump",
+  "options": [
+    "To comply with a command or rule",
+    "Characterized by conflict or disorder",
+    "To push off the ground using the legs",
+    "Not giving enough attention to avoid harm"
+  ],
+  "answerOption": "C",
+  "answerText": "To push off the ground using the legs",
+  "difficulty": "easy",
+  "sourceFile": "0263.json"
+}

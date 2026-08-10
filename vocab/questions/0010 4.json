@@ -1,0 +1,15 @@
+{
+  "id": 10,
+  "word": "Tall",
+  "question": "Tall",
+  "options": [
+    "To give a portion of something to others",
+    "Going straight up and down",
+    "Of great or more than average height",
+    "Created directly and not a copy"
+  ],
+  "answerOption": "C",
+  "answerText": "Of great or more than average height",
+  "difficulty": "easy",
+  "sourceFile": "0010.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2017,
+  "word": "Umbrage",
+  "question": "Umbrage",
+  "options": [
+    "The quality of being adroit",
+    "Offense or annoyance taken at something",
+    "Relating to aircraft equipment",
+    "Enjoying social or economic benefits"
+  ],
+  "answerOption": "B",
+  "answerText": "Offense or annoyance taken at something",
+  "difficulty": "hard",
+  "sourceFile": "2017.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 580,
+  "word": "Realistic",
+  "question": "Realistic",
+  "options": [
+    "Having a practical view of what is achievable",
+    "To cause someone to feel sudden wonder",
+    "Not decorated or elaborate; simple",
+    "To firmly press something from both sides"
+  ],
+  "answerOption": "A",
+  "answerText": "Having a practical view of what is achievable",
+  "difficulty": "easy",
+  "sourceFile": "0580.json"
+}

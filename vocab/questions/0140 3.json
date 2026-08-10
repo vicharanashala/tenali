@@ -1,0 +1,15 @@
+{
+  "id": 140,
+  "word": "Relaxed",
+  "question": "Relaxed",
+  "options": [
+    "To honor a special occasion with festivities",
+    "To need something as necessary",
+    "Free from tension and anxiety",
+    "To move forward in a purposeful way"
+  ],
+  "answerOption": "C",
+  "answerText": "Free from tension and anxiety",
+  "difficulty": "easy",
+  "sourceFile": "0140.json"
+}

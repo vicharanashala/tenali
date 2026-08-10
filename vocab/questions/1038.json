@@ -1,0 +1,15 @@
+{
+  "id": 1038,
+  "word": "Obsolete",
+  "question": "Obsolete",
+  "options": [
+    "To hold and use a weapon or tool",
+    "No longer produced or used; out of date",
+    "Required officially or necessarily",
+    "Defiant of authority or discipline"
+  ],
+  "answerOption": "B",
+  "answerText": "No longer produced or used; out of date",
+  "difficulty": "medium",
+  "sourceFile": "1038.json"
+}

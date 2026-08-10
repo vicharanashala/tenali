@@ -1,0 +1,14 @@
+{
+  "id": 531,
+  "question": "Who gave the equation E = mc²?",
+  "options": [
+    "Newton",
+    "Einstein",
+    "Maxwell",
+    "Planck"
+  ],
+  "answerOption": "B",
+  "answerText": "Einstein",
+  "genre": "general-knowledge",
+  "sourceFile": "0531.json"
+}

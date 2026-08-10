@@ -1,0 +1,15 @@
+{
+  "id": 1628,
+  "word": "Despond",
+  "question": "Despond",
+  "options": [
+    "To lose courage or hope",
+    "Not ready or equipped",
+    "Not competent or skilled",
+    "Deserving strong disapproval"
+  ],
+  "answerOption": "A",
+  "answerText": "To lose courage or hope",
+  "difficulty": "medium",
+  "sourceFile": "1628.json"
+}

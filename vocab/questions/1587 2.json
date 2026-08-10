@@ -1,0 +1,15 @@
+{
+  "id": 1587,
+  "word": "Detector",
+  "question": "Detector",
+  "options": [
+    "An instrument for finding something",
+    "Changing frequently in loyalties or affections",
+    "In a disturbed mental state from fever",
+    "Lasting for a very short time"
+  ],
+  "answerOption": "A",
+  "answerText": "An instrument for finding something",
+  "difficulty": "medium",
+  "sourceFile": "1587.json"
+}

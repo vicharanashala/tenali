@@ -1,0 +1,15 @@
+{
+  "id": 576,
+  "word": "Thankful",
+  "question": "Thankful",
+  "options": [
+    "To fix something that is broken",
+    "To tell a story or give an account",
+    "Pleased and relieved about something",
+    "Noticeably happy and optimistic"
+  ],
+  "answerOption": "C",
+  "answerText": "Pleased and relieved about something",
+  "difficulty": "easy",
+  "sourceFile": "0576.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 571,
+  "word": "Enchant",
+  "question": "Enchant",
+  "options": [
+    "Shaped like a triangle",
+    "Careful to avoid potential problems",
+    "Stretched tight or under strain",
+    "To fill someone with delight"
+  ],
+  "answerOption": "D",
+  "answerText": "To fill someone with delight",
+  "difficulty": "easy",
+  "sourceFile": "0571.json"
+}

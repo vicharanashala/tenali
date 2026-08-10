@@ -1,0 +1,15 @@
+{
+  "id": 2790,
+  "word": "Gezellig",
+  "question": "Gezellig",
+  "options": [
+    "A person learning the alphabet",
+    "Convivial; cozy and warm with loved ones",
+    "Relating to hospitality between host and guest",
+    "With abyss scent"
+  ],
+  "answerOption": "B",
+  "answerText": "Convivial; cozy and warm with loved ones",
+  "difficulty": "extra-hard",
+  "sourceFile": "2790.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 971,
+  "word": "Opulent",
+  "question": "Opulent",
+  "options": [
+    "Luxuriously rich and expensive",
+    "Involving or creating good conditions",
+    "To be required to pay money to someone",
+    "Going straight up and down"
+  ],
+  "answerOption": "A",
+  "answerText": "Luxuriously rich and expensive",
+  "difficulty": "easy",
+  "sourceFile": "0971.json"
+}

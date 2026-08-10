@@ -1,0 +1,15 @@
+{
+  "id": 1241,
+  "word": "Fastidious",
+  "question": "Fastidious",
+  "options": [
+    "Very attentive to accuracy and detail",
+    "A typical example or pattern of something",
+    "To insert something between fixed points",
+    "Excessively obedient or attentive to please"
+  ],
+  "answerOption": "A",
+  "answerText": "Very attentive to accuracy and detail",
+  "difficulty": "hard",
+  "sourceFile": "1241.json"
+}

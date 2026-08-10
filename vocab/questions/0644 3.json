@@ -1,0 +1,15 @@
+{
+  "id": 644,
+  "word": "Intelligent",
+  "question": "Intelligent",
+  "options": [
+    "Having the ability to learn and understand",
+    "To exert force to move something closer",
+    "To successfully reach a desired goal",
+    "To state the exact meaning of a word"
+  ],
+  "answerOption": "A",
+  "answerText": "Having the ability to learn and understand",
+  "difficulty": "easy",
+  "sourceFile": "0644.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1990,
+  "word": "Advisedness",
+  "question": "Advisedness",
+  "options": [
+    "To make something unclear or unintelligible",
+    "Physical exercise with air",
+    "The quality of being advised",
+    "Put in a very difficult situation"
+  ],
+  "answerOption": "C",
+  "answerText": "The quality of being advised",
+  "difficulty": "hard",
+  "sourceFile": "1990.json"
+}

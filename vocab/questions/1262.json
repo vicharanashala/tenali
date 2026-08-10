@@ -1,0 +1,15 @@
+{
+  "id": 1262,
+  "word": "Ostentatious",
+  "question": "Ostentatious",
+  "options": [
+    "To hold and use a weapon or tool",
+    "The final part of a narrative",
+    "Designed to impress or attract notice",
+    "The action of discovering something"
+  ],
+  "answerOption": "C",
+  "answerText": "Designed to impress or attract notice",
+  "difficulty": "medium",
+  "sourceFile": "1262.json"
+}

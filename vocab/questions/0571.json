@@ -1,0 +1,15 @@
+{
+  "id": 571,
+  "word": "Enchant",
+  "question": "Enchant",
+  "options": [
+    "To become liquid through heating",
+    "Having received a good education",
+    "To make something previously hidden visible",
+    "To fill someone with delight"
+  ],
+  "answerOption": "D",
+  "answerText": "To fill someone with delight",
+  "difficulty": "easy",
+  "sourceFile": "0571.json"
+}

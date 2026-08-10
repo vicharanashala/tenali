@@ -1,0 +1,15 @@
+{
+  "id": 669,
+  "word": "Cramped",
+  "question": "Cramped",
+  "options": [
+    "Hard but likely to break easily",
+    "Bent or twisted out of shape",
+    "Uncomfortably small or crowded",
+    "Having an exaggerated sense of importance"
+  ],
+  "answerOption": "C",
+  "answerText": "Uncomfortably small or crowded",
+  "difficulty": "easy",
+  "sourceFile": "0669.json"
+}

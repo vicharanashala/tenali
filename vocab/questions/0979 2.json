@@ -1,0 +1,15 @@
+{
+  "id": 979,
+  "word": "Harbinger",
+  "question": "Harbinger",
+  "options": [
+    "To satisfy thirst by drinking",
+    "Requiring considerable effort and time",
+    "A person or thing announcing what is to come",
+    "Arrogantly superior and disdainful"
+  ],
+  "answerOption": "C",
+  "answerText": "A person or thing announcing what is to come",
+  "difficulty": "medium",
+  "sourceFile": "0979.json"
+}

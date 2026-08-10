@@ -1,0 +1,15 @@
+{
+  "id": 1326,
+  "word": "Dehydrate",
+  "question": "Dehydrate",
+  "options": [
+    "To remove water from something",
+    "Having a harmful effect gradually",
+    "Having mixed feelings about something",
+    "Hostile and aggressive"
+  ],
+  "answerOption": "A",
+  "answerText": "To remove water from something",
+  "difficulty": "medium",
+  "sourceFile": "1326.json"
+}

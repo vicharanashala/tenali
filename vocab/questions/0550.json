@@ -1,0 +1,15 @@
+{
+  "id": 550,
+  "word": "Compromise",
+  "question": "Compromise",
+  "options": [
+    "Tender and juicy in food",
+    "Having high moral standards",
+    "To settle a dispute by making concessions",
+    "Using imagination to create new things"
+  ],
+  "answerOption": "C",
+  "answerText": "To settle a dispute by making concessions",
+  "difficulty": "easy",
+  "sourceFile": "0550.json"
+}

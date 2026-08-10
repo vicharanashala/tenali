@@ -1,0 +1,15 @@
+{
+  "id": 2360,
+  "word": "Aeroidography",
+  "question": "Aeroidography",
+  "options": [
+    "Inner sanctum of a Greek temple",
+    "In equal measure",
+    "A position requiring little or no work",
+    "Description of air conditions"
+  ],
+  "answerOption": "D",
+  "answerText": "Description of air conditions",
+  "difficulty": "hard",
+  "sourceFile": "2360.json"
+}

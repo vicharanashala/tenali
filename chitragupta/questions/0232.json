@@ -1,0 +1,14 @@
+{
+  "id": 232,
+  "question": "Which country is the largest producer of coffee often associated with global GK?",
+  "options": [
+    "Colombia",
+    "Vietnam",
+    "Brazil",
+    "Ethiopia"
+  ],
+  "answerOption": "C",
+  "answerText": "Brazil",
+  "genre": "geography",
+  "sourceFile": "0232.json"
+}

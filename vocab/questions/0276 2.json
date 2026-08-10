@@ -1,0 +1,15 @@
+{
+  "id": 276,
+  "word": "Solve",
+  "question": "Solve",
+  "options": [
+    "To make something look more attractive",
+    "To find an answer to a problem",
+    "To manage or guide the operations of something",
+    "Being reserved or timid around other people"
+  ],
+  "answerOption": "B",
+  "answerText": "To find an answer to a problem",
+  "difficulty": "easy",
+  "sourceFile": "0276.json"
+}

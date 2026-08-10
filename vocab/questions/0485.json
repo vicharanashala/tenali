@@ -1,0 +1,15 @@
+{
+  "id": 485,
+  "word": "Analyze",
+  "question": "Analyze",
+  "options": [
+    "Done with the hands; requiring human effort",
+    "To take part in something",
+    "To make something previously hidden visible",
+    "To examine something in detail"
+  ],
+  "answerOption": "D",
+  "answerText": "To examine something in detail",
+  "difficulty": "easy",
+  "sourceFile": "0485.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 407,
+  "question": "Which city is the capital of Jharkhand?",
+  "options": [
+    "Jamshedpur",
+    "Dhanbad",
+    "Ranchi",
+    "Bokaro"
+  ],
+  "answerOption": "C",
+  "answerText": "Ranchi",
+  "genre": "geography",
+  "sourceFile": "0407.json"
+}

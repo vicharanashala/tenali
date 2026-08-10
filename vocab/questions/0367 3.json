@@ -1,0 +1,15 @@
+{
+  "id": 367,
+  "word": "Stir",
+  "question": "Stir",
+  "options": [
+    "Able to be seen",
+    "To attach a tag showing the contents",
+    "To move a spoon around in a liquid",
+    "Not able to cause damage or injury"
+  ],
+  "answerOption": "C",
+  "answerText": "To move a spoon around in a liquid",
+  "difficulty": "easy",
+  "sourceFile": "0367.json"
+}

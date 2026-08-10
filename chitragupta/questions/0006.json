@@ -1,0 +1,14 @@
+{
+  "id": 6,
+  "question": "Which river is considered sacred by many in India?",
+  "options": [
+    "Godavari",
+    "Narmada",
+    "Ganga",
+    "Tapti"
+  ],
+  "answerOption": "C",
+  "answerText": "Ganga",
+  "genre": "geography",
+  "sourceFile": "0006.json"
+}

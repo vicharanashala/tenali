@@ -1,0 +1,15 @@
+{
+  "id": 1841,
+  "word": "Dubious",
+  "question": "Dubious",
+  "options": [
+    "The action of leaving a place",
+    "Not certain or definite",
+    "Keeping careful watch for possible danger",
+    "To place money in a bank account"
+  ],
+  "answerOption": "B",
+  "answerText": "Not certain or definite",
+  "difficulty": "medium",
+  "sourceFile": "1841.json"
+}

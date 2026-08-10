@@ -1,0 +1,15 @@
+{
+  "id": 1794,
+  "word": "Raconteur",
+  "question": "Raconteur",
+  "options": [
+    "A person who tells stories in a skillful way",
+    "The use of clever but false arguments",
+    "Tending to talk a great deal",
+    "Relating to air therapy"
+  ],
+  "answerOption": "A",
+  "answerText": "A person who tells stories in a skillful way",
+  "difficulty": "hard",
+  "sourceFile": "1794.json"
+}

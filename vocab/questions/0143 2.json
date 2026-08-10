@@ -1,0 +1,15 @@
+{
+  "id": 143,
+  "word": "Lucky",
+  "question": "Lucky",
+  "options": [
+    "Not decorated or elaborate; simple",
+    "Having good fortune; fortunate",
+    "Covered or marked with an unclean substance",
+    "Able to adjust to new conditions"
+  ],
+  "answerOption": "B",
+  "answerText": "Having good fortune; fortunate",
+  "difficulty": "easy",
+  "sourceFile": "0143.json"
+}

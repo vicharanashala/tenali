@@ -1,0 +1,15 @@
+{
+  "id": 1209,
+  "word": "Bolster",
+  "question": "Bolster",
+  "options": [
+    "Able to exist together",
+    "To support or strengthen something",
+    "Not competent or skilled",
+    "Lacking consideration for others"
+  ],
+  "answerOption": "B",
+  "answerText": "To support or strengthen something",
+  "difficulty": "medium",
+  "sourceFile": "1209.json"
+}

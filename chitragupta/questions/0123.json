@@ -1,0 +1,14 @@
+{
+  "id": 123,
+  "question": "Which sea separates Europe and Africa?",
+  "options": [
+    "Black Sea",
+    "Caspian Sea",
+    "Mediterranean Sea",
+    "Red Sea"
+  ],
+  "answerOption": "C",
+  "answerText": "Mediterranean Sea",
+  "genre": "mixed",
+  "sourceFile": "0123.json"
+}

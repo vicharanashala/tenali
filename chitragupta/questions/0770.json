@@ -1,0 +1,14 @@
+{
+  "id": 770,
+  "question": "Which part of the body contains the scapula?",
+  "options": [
+    "Shoulder",
+    "Hip",
+    "Knee",
+    "Ankle"
+  ],
+  "answerOption": "A",
+  "answerText": "Shoulder",
+  "genre": "science",
+  "sourceFile": "0770.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1135,
+  "word": "Shrewd",
+  "question": "Shrewd",
+  "options": [
+    "Excessively proud of oneself",
+    "Causing repulsion or distaste",
+    "Disrespectful or insulting language",
+    "Having sharp powers of judgment"
+  ],
+  "answerOption": "D",
+  "answerText": "Having sharp powers of judgment",
+  "difficulty": "medium",
+  "sourceFile": "1135.json"
+}

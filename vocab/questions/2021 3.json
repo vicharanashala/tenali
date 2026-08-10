@@ -1,0 +1,15 @@
+{
+  "id": 2021,
+  "word": "Equivocate",
+  "question": "Equivocate",
+  "options": [
+    "To use ambiguous language to deceive",
+    "Responsibility for one's actions",
+    "Dangerously high or steep",
+    "Of or relating to an adverb"
+  ],
+  "answerOption": "A",
+  "answerText": "To use ambiguous language to deceive",
+  "difficulty": "hard",
+  "sourceFile": "2021.json"
+}

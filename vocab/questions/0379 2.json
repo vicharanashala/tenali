@@ -1,0 +1,15 @@
+{
+  "id": 379,
+  "word": "Spin",
+  "question": "Spin",
+  "options": [
+    "To give permission for something",
+    "Relating to computer technology",
+    "To collect things from different places",
+    "To turn around quickly in a circle"
+  ],
+  "answerOption": "D",
+  "answerText": "To turn around quickly in a circle",
+  "difficulty": "easy",
+  "sourceFile": "0379.json"
+}

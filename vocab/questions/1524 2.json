@@ -1,0 +1,15 @@
+{
+  "id": 1524,
+  "word": "Derecho",
+  "question": "Derecho",
+  "options": [
+    "Pleasure derived from another's misfortune",
+    "A noisy mock serenade; cacophonous celebration",
+    "A widespread long-lived windstorm",
+    "An abnormal sensation like tingling or numbness"
+  ],
+  "answerOption": "C",
+  "answerText": "A widespread long-lived windstorm",
+  "difficulty": "extra-hard",
+  "sourceFile": "1524.json"
+}

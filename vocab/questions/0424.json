@@ -1,0 +1,15 @@
+{
+  "id": 424,
+  "word": "Install",
+  "question": "Install",
+  "options": [
+    "To separate into parts or groups",
+    "Liable to change rapidly and unpredictably",
+    "To place equipment in position for use",
+    "To show the way by going in front"
+  ],
+  "answerOption": "C",
+  "answerText": "To place equipment in position for use",
+  "difficulty": "easy",
+  "sourceFile": "0424.json"
+}

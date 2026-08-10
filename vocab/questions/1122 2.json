@@ -1,0 +1,15 @@
+{
+  "id": 1122,
+  "word": "Umbrage",
+  "question": "Umbrage",
+  "options": [
+    "To alternate between different opinions",
+    "Bitter and abusive in language",
+    "Offense or annoyance taken at something",
+    "Just begun and not fully formed"
+  ],
+  "answerOption": "C",
+  "answerText": "Offense or annoyance taken at something",
+  "difficulty": "hard",
+  "sourceFile": "1122.json"
+}

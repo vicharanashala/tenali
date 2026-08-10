@@ -1,0 +1,15 @@
+{
+  "id": 415,
+  "word": "Appreciate",
+  "question": "Appreciate",
+  "options": [
+    "To recognize the full worth of something",
+    "To become sound or healthy again",
+    "Enough to meet the needs",
+    "Tender and juicy in food"
+  ],
+  "answerOption": "A",
+  "answerText": "To recognize the full worth of something",
+  "difficulty": "easy",
+  "sourceFile": "0415.json"
+}

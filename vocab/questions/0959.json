@@ -1,0 +1,15 @@
+{
+  "id": 959,
+  "word": "Explicit",
+  "question": "Explicit",
+  "options": [
+    "Economical or thrifty",
+    "Highly complex with many details",
+    "Expressing approval or agreement",
+    "Clearly and directly expressed"
+  ],
+  "answerOption": "D",
+  "answerText": "Clearly and directly expressed",
+  "difficulty": "easy",
+  "sourceFile": "0959.json"
+}

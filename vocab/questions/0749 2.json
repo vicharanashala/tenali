@@ -1,0 +1,15 @@
+{
+  "id": 749,
+  "word": "Desert",
+  "question": "Desert",
+  "options": [
+    "To heat a liquid until it bubbles",
+    "A barren area with very little rainfall",
+    "To show that something is true",
+    "To move from one region to another"
+  ],
+  "answerOption": "B",
+  "answerText": "A barren area with very little rainfall",
+  "difficulty": "easy",
+  "sourceFile": "0749.json"
+}

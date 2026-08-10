@@ -1,0 +1,14 @@
+{
+  "id": 632,
+  "question": "Which organ produces most clotting proteins?",
+  "options": [
+    "Kidney",
+    "Liver",
+    "Spleen",
+    "Pancreas"
+  ],
+  "answerOption": "B",
+  "answerText": "Liver",
+  "genre": "science",
+  "sourceFile": "0632.json"
+}

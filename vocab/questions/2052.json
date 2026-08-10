@@ -1,0 +1,15 @@
+{
+  "id": 2052,
+  "word": "Insidious",
+  "question": "Insidious",
+  "options": [
+    "In an advisable manner",
+    "The fruiting body of fungal spore",
+    "Proceeding in a harmful way gradually",
+    "The quality of lasting long"
+  ],
+  "answerOption": "C",
+  "answerText": "Proceeding in a harmful way gradually",
+  "difficulty": "hard",
+  "sourceFile": "2052.json"
+}

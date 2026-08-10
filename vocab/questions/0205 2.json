@@ -1,0 +1,15 @@
+{
+  "id": 205,
+  "word": "Scatter",
+  "question": "Scatter",
+  "options": [
+    "Of short duration; not lasting long",
+    "To cause something to come closer",
+    "To throw in various random directions",
+    "To extend to full length"
+  ],
+  "answerOption": "C",
+  "answerText": "To throw in various random directions",
+  "difficulty": "easy",
+  "sourceFile": "0205.json"
+}

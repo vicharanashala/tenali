@@ -1,0 +1,15 @@
+{
+  "id": 1666,
+  "word": "Detest",
+  "question": "Detest",
+  "options": [
+    "The action of holding someone",
+    "Stripping leaves from a plant",
+    "To dislike intensely",
+    "To conclude by reasoning"
+  ],
+  "answerOption": "C",
+  "answerText": "To dislike intensely",
+  "difficulty": "medium",
+  "sourceFile": "1666.json"
+}

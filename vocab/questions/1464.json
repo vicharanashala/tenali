@@ -1,0 +1,15 @@
+{
+  "id": 1464,
+  "word": "Deodorant",
+  "question": "Deodorant",
+  "options": [
+    "A person new to a field or activity",
+    "Having fixed or defined limits",
+    "To release someone from military service",
+    "A substance reducing body odor"
+  ],
+  "answerOption": "D",
+  "answerText": "A substance reducing body odor",
+  "difficulty": "medium",
+  "sourceFile": "1464.json"
+}

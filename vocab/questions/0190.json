@@ -1,0 +1,15 @@
+{
+  "id": 190,
+  "word": "Freeze",
+  "question": "Freeze",
+  "options": [
+    "To become aware of through the senses",
+    "Containing or using many words",
+    "To be turned into ice or become very cold",
+    "Able to soak up liquid easily"
+  ],
+  "answerOption": "C",
+  "answerText": "To be turned into ice or become very cold",
+  "difficulty": "easy",
+  "sourceFile": "0190.json"
+}

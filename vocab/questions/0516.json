@@ -1,0 +1,15 @@
+{
+  "id": 516,
+  "word": "Conclude",
+  "question": "Conclude",
+  "options": [
+    "Occurring or done many times",
+    "To arrive at a judgment after reasoning",
+    "Irritable and bad-tempered",
+    "To say sorry for doing something wrong"
+  ],
+  "answerOption": "B",
+  "answerText": "To arrive at a judgment after reasoning",
+  "difficulty": "easy",
+  "sourceFile": "0516.json"
+}

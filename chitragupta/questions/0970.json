@@ -1,0 +1,14 @@
+{
+  "id": 970,
+  "question": "Which gas do plants take in from the air?",
+  "options": [
+    "Oxygen",
+    "Nitrogen",
+    "Carbon dioxide",
+    "Hydrogen"
+  ],
+  "answerOption": "C",
+  "answerText": "Carbon dioxide",
+  "genre": "science",
+  "sourceFile": "0970.json"
+}

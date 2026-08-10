@@ -1,0 +1,15 @@
+{
+  "id": 369,
+  "word": "Bake",
+  "question": "Bake",
+  "options": [
+    "Having the pleasant taste of sugar",
+    "In a natural or raw state; not refined",
+    "To cook food using an oven",
+    "Bad tempered and unwilling to be friendly"
+  ],
+  "answerOption": "C",
+  "answerText": "To cook food using an oven",
+  "difficulty": "easy",
+  "sourceFile": "0369.json"
+}

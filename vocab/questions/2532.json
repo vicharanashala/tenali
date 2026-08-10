@@ -1,0 +1,15 @@
+{
+  "id": 2532,
+  "word": "AERONAUT",
+  "question": "AERONAUT",
+  "options": [
+    "One's opponent in a contest",
+    "Lack of money or financial means",
+    "A person who flies in balloon",
+    "Belief in reason as basis of truth"
+  ],
+  "answerOption": "C",
+  "answerText": "A person who flies in balloon",
+  "difficulty": "hard",
+  "sourceFile": "2532.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 988,
+  "word": "Industrious",
+  "question": "Industrious",
+  "options": [
+    "To say what will happen in the future",
+    "Containing or made of metal",
+    "Diligent and hardworking",
+    "Free from disturbance; tranquil"
+  ],
+  "answerOption": "C",
+  "answerText": "Diligent and hardworking",
+  "difficulty": "easy",
+  "sourceFile": "0988.json"
+}

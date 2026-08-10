@@ -1,0 +1,15 @@
+{
+  "id": 827,
+  "word": "Invisible",
+  "question": "Invisible",
+  "options": [
+    "Enough to meet the needs",
+    "To remove the skin of a fruit or vegetable",
+    "Providing a mirror-like image",
+    "Unable to be seen"
+  ],
+  "answerOption": "D",
+  "answerText": "Unable to be seen",
+  "difficulty": "easy",
+  "sourceFile": "0827.json"
+}

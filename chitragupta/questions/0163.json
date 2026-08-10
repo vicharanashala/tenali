@@ -1,0 +1,14 @@
+{
+  "id": 163,
+  "question": "Which gas is released during respiration by humans?",
+  "options": [
+    "Oxygen",
+    "Carbon dioxide",
+    "Nitrogen",
+    "Helium"
+  ],
+  "answerOption": "B",
+  "answerText": "Carbon dioxide",
+  "genre": "science",
+  "sourceFile": "0163.json"
+}

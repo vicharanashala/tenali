@@ -1,0 +1,15 @@
+{
+  "id": 1451,
+  "word": "Dent",
+  "question": "Dent",
+  "options": [
+    "A depression in a surface caused by pressure",
+    "To reduce in rank or lower in status",
+    "Easily broken or damaged",
+    "Showing a willingness to take bold risks"
+  ],
+  "answerOption": "A",
+  "answerText": "A depression in a surface caused by pressure",
+  "difficulty": "medium",
+  "sourceFile": "1451.json"
+}

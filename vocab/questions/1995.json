@@ -1,0 +1,15 @@
+{
+  "id": 1995,
+  "word": "Seditious",
+  "question": "Seditious",
+  "options": [
+    "Small or meager in amount",
+    "Not certain or definite",
+    "Wanted or wished for",
+    "Inciting rebellion against authority"
+  ],
+  "answerOption": "D",
+  "answerText": "Inciting rebellion against authority",
+  "difficulty": "medium",
+  "sourceFile": "1995.json"
+}

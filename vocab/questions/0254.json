@@ -1,0 +1,15 @@
+{
+  "id": 254,
+  "word": "Climb",
+  "question": "Climb",
+  "options": [
+    "Allowing light to pass through clearly",
+    "Stretched or pulled tight",
+    "To live in or occupy a place",
+    "To go or come up a slope or stairs"
+  ],
+  "answerOption": "D",
+  "answerText": "To go or come up a slope or stairs",
+  "difficulty": "easy",
+  "sourceFile": "0254.json"
+}

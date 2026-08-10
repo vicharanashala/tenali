@@ -1,0 +1,15 @@
+{
+  "id": 1526,
+  "word": "Depurate",
+  "question": "Depurate",
+  "options": [
+    "Extremely or damnably",
+    "To purify from impurities",
+    "To testify under oath or penalty",
+    "Fine in texture, form, or structure"
+  ],
+  "answerOption": "B",
+  "answerText": "To purify from impurities",
+  "difficulty": "medium",
+  "sourceFile": "1526.json"
+}

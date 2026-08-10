@@ -1,0 +1,14 @@
+{
+  "id": 620,
+  "question": "Who wrote 'The Sun Also Rises'?",
+  "options": [
+    "Ernest Hemingway",
+    "John Steinbeck",
+    "William Faulkner",
+    "F. Scott Fitzgerald"
+  ],
+  "answerOption": "A",
+  "answerText": "Ernest Hemingway",
+  "genre": "general-knowledge",
+  "sourceFile": "0620.json"
+}

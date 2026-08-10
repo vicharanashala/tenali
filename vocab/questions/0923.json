@@ -1,0 +1,15 @@
+{
+  "id": 923,
+  "word": "Plump",
+  "question": "Plump",
+  "options": [
+    "Having full rounded form",
+    "To move about freely without a destination",
+    "Having an edge able to cut or pierce",
+    "To fill someone with great surprise"
+  ],
+  "answerOption": "A",
+  "answerText": "Having full rounded form",
+  "difficulty": "easy",
+  "sourceFile": "0923.json"
+}

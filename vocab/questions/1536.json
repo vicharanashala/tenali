@@ -1,0 +1,15 @@
+{
+  "id": 1536,
+  "word": "Deranged",
+  "question": "Deranged",
+  "options": [
+    "Disturbed or insane in mind",
+    "A mental state of sadness",
+    "The state of being tedious",
+    "Serving to detract from"
+  ],
+  "answerOption": "A",
+  "answerText": "Disturbed or insane in mind",
+  "difficulty": "medium",
+  "sourceFile": "1536.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1724,
+  "word": "Lampoon",
+  "question": "Lampoon",
+  "options": [
+    "Of the nature of a riddle",
+    "Medical use of air",
+    "To publicly criticize using ridicule",
+    "The activity of promoting products"
+  ],
+  "answerOption": "C",
+  "answerText": "To publicly criticize using ridicule",
+  "difficulty": "hard",
+  "sourceFile": "1724.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 478,
+  "word": "Define",
+  "question": "Define",
+  "options": [
+    "Done with the hands; requiring human effort",
+    "To leave out or keep from entering",
+    "To state the exact meaning of a word",
+    "To freely offer to do something"
+  ],
+  "answerOption": "C",
+  "answerText": "To state the exact meaning of a word",
+  "difficulty": "easy",
+  "sourceFile": "0478.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1499,
+  "word": "Depository",
+  "question": "Depository",
+  "options": [
+    "Gentle and kindly; not harmful",
+    "A place where things are stored",
+    "A spoon between teaspoon and tablespoon",
+    "Not enough or satisfactory"
+  ],
+  "answerOption": "B",
+  "answerText": "A place where things are stored",
+  "difficulty": "medium",
+  "sourceFile": "1499.json"
+}

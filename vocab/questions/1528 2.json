@@ -1,0 +1,15 @@
+{
+  "id": 1528,
+  "word": "Hallux",
+  "question": "Hallux",
+  "options": [
+    "The study of ants",
+    "The taste of bliss in the absence of all thought",
+    "A quality of coziness creating contentment",
+    "The big toe"
+  ],
+  "answerOption": "D",
+  "answerText": "The big toe",
+  "difficulty": "extra-hard",
+  "sourceFile": "1528.json"
+}

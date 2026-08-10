@@ -1,0 +1,15 @@
+{
+  "id": 570,
+  "word": "Charm",
+  "question": "Charm",
+  "options": [
+    "Low in price; not expensive",
+    "Having exceptional natural ability",
+    "Having an even and regular surface",
+    "To delight someone greatly"
+  ],
+  "answerOption": "D",
+  "answerText": "To delight someone greatly",
+  "difficulty": "easy",
+  "sourceFile": "0570.json"
+}

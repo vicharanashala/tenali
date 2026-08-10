@@ -1,0 +1,15 @@
+{
+  "id": 2584,
+  "word": "Emphasis",
+  "question": "Emphasis",
+  "options": [
+    "The philosophy of Aeolus",
+    "A division into opposing groups",
+    "A deep crevice especially in a glacier",
+    "Special importance given to something"
+  ],
+  "answerOption": "D",
+  "answerText": "Special importance given to something",
+  "difficulty": "hard",
+  "sourceFile": "2584.json"
+}

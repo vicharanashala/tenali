@@ -1,0 +1,14 @@
+{
+  "id": 289,
+  "question": "Which continent is also known as the Dark Continent in older GK terminology?",
+  "options": [
+    "Asia",
+    "Africa",
+    "South America",
+    "Antarctica"
+  ],
+  "answerOption": "B",
+  "answerText": "Africa",
+  "genre": "geography",
+  "sourceFile": "0289.json"
+}

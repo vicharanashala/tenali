@@ -1,0 +1,15 @@
+{
+  "id": 1517,
+  "word": "Dermic",
+  "question": "Dermic",
+  "options": [
+    "To remove water from something",
+    "The reduction of supplies or resources",
+    "Relating to the skin or dermis",
+    "Requiring considerable effort and time"
+  ],
+  "answerOption": "C",
+  "answerText": "Relating to the skin or dermis",
+  "difficulty": "medium",
+  "sourceFile": "1517.json"
+}

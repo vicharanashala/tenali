@@ -1,0 +1,15 @@
+{
+  "id": 1212,
+  "word": "Empirical",
+  "question": "Empirical",
+  "options": [
+    "Extremely unpleasant or revolting",
+    "Fierce wild or untamed",
+    "Based on observation rather than theory",
+    "A strong feeling of dislike"
+  ],
+  "answerOption": "C",
+  "answerText": "Based on observation rather than theory",
+  "difficulty": "medium",
+  "sourceFile": "1212.json"
+}

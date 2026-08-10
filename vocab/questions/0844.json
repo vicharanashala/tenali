@@ -1,0 +1,15 @@
+{
+  "id": 844,
+  "word": "Fuzzy",
+  "question": "Fuzzy",
+  "options": [
+    "Lacking interest or excitement",
+    "Bad tempered and unwilling to be friendly",
+    "Covered with fine soft hair or fibers",
+    "Guilty of misleading or tricking others"
+  ],
+  "answerOption": "C",
+  "answerText": "Covered with fine soft hair or fibers",
+  "difficulty": "easy",
+  "sourceFile": "0844.json"
+}

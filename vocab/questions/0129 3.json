@@ -1,0 +1,15 @@
+{
+  "id": 129,
+  "word": "Dead",
+  "question": "Dead",
+  "options": [
+    "To take apart the pieces of something",
+    "Happening or changing slowly over time",
+    "Covered or marked with an unclean substance",
+    "No longer living"
+  ],
+  "answerOption": "D",
+  "answerText": "No longer living",
+  "difficulty": "easy",
+  "sourceFile": "0129.json"
+}

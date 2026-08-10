@@ -1,0 +1,15 @@
+{
+  "id": 625,
+  "word": "Vigilant",
+  "question": "Vigilant",
+  "options": [
+    "Keeping careful watch for dangers",
+    "A sentence that asks for information",
+    "To tell someone about a possible danger",
+    "To do something repeatedly to improve"
+  ],
+  "answerOption": "A",
+  "answerText": "Keeping careful watch for dangers",
+  "difficulty": "easy",
+  "sourceFile": "0625.json"
+}

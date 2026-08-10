@@ -1,0 +1,14 @@
+{
+  "id": 740,
+  "question": "Which country is associated with the city of Seoul?",
+  "options": [
+    "China",
+    "Japan",
+    "South Korea",
+    "North Korea"
+  ],
+  "answerOption": "C",
+  "answerText": "South Korea",
+  "genre": "geography",
+  "sourceFile": "0740.json"
+}

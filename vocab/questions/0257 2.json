@@ -1,0 +1,15 @@
+{
+  "id": 257,
+  "word": "Exit",
+  "question": "Exit",
+  "options": [
+    "To go out of or leave a place",
+    "To put someone at risk or in danger",
+    "To give attention to sound or speech",
+    "To break the connection between things"
+  ],
+  "answerOption": "A",
+  "answerText": "To go out of or leave a place",
+  "difficulty": "easy",
+  "sourceFile": "0257.json"
+}

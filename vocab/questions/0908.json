@@ -1,0 +1,15 @@
+{
+  "id": 908,
+  "word": "Microscopic",
+  "question": "Microscopic",
+  "options": [
+    "Absolutely necessary or important",
+    "Too small to be seen by the eye",
+    "To be disloyal to someone who trusts you",
+    "Extremely small in size"
+  ],
+  "answerOption": "B",
+  "answerText": "Too small to be seen by the eye",
+  "difficulty": "easy",
+  "sourceFile": "0908.json"
+}

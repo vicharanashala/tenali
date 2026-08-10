@@ -1,0 +1,15 @@
+{
+  "id": 890,
+  "word": "Tidy",
+  "question": "Tidy",
+  "options": [
+    "Arranged neatly and in order",
+    "Not approximated in any way; precise",
+    "Originating from another place",
+    "To become limp through heat or lack of water"
+  ],
+  "answerOption": "A",
+  "answerText": "Arranged neatly and in order",
+  "difficulty": "easy",
+  "sourceFile": "0890.json"
+}

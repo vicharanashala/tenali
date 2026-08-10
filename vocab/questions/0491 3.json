@@ -1,0 +1,15 @@
+{
+  "id": 491,
+  "word": "Investigate",
+  "question": "Investigate",
+  "options": [
+    "Having a pleasant taste",
+    "To carry out a careful examination",
+    "Having a lighthearted excited feeling",
+    "To make something previously hidden visible"
+  ],
+  "answerOption": "B",
+  "answerText": "To carry out a careful examination",
+  "difficulty": "easy",
+  "sourceFile": "0491.json"
+}

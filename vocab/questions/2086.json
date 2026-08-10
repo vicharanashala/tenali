@@ -1,0 +1,15 @@
+{
+  "id": 2086,
+  "word": "Zealot",
+  "question": "Zealot",
+  "options": [
+    "The state of being quiet or still",
+    "A person who is fanatical about a cause",
+    "Faithful adherence to a person",
+    "The quality of being apparent"
+  ],
+  "answerOption": "B",
+  "answerText": "A person who is fanatical about a cause",
+  "difficulty": "hard",
+  "sourceFile": "2086.json"
+}

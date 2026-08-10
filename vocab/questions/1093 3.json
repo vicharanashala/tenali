@@ -1,0 +1,15 @@
+{
+  "id": 1093,
+  "word": "Ubiquitous",
+  "question": "Ubiquitous",
+  "options": [
+    "Present or found everywhere",
+    "Intense dislike or disgust",
+    "A system of ranking one above another",
+    "Truthful and straightforward; frank"
+  ],
+  "answerOption": "A",
+  "answerText": "Present or found everywhere",
+  "difficulty": "medium",
+  "sourceFile": "1093.json"
+}

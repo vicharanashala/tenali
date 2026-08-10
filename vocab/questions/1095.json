@@ -1,0 +1,15 @@
+{
+  "id": 1095,
+  "word": "Brash",
+  "question": "Brash",
+  "options": [
+    "Strong dislike or hatred",
+    "Very great or intense; deep",
+    "Self-assertive in a rude or noisy way",
+    "The quality of holding firmly"
+  ],
+  "answerOption": "C",
+  "answerText": "Self-assertive in a rude or noisy way",
+  "difficulty": "medium",
+  "sourceFile": "1095.json"
+}

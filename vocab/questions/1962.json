@@ -1,0 +1,15 @@
+{
+  "id": 1962,
+  "word": "Impeded",
+  "question": "Impeded",
+  "options": [
+    "Confined to working at a desk",
+    "Delayed or prevented by obstructing",
+    "Involving or inciting rebellion",
+    "Relating to a religious sect"
+  ],
+  "answerOption": "B",
+  "answerText": "Delayed or prevented by obstructing",
+  "difficulty": "medium",
+  "sourceFile": "1962.json"
+}

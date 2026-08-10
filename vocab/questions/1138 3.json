@@ -1,0 +1,15 @@
+{
+  "id": 1138,
+  "word": "Unprecedented",
+  "question": "Unprecedented",
+  "options": [
+    "Having fixed or defined limits",
+    "Able to be protected or justified",
+    "To let air out of something inflated",
+    "Never done or known before"
+  ],
+  "answerOption": "D",
+  "answerText": "Never done or known before",
+  "difficulty": "medium",
+  "sourceFile": "1138.json"
+}

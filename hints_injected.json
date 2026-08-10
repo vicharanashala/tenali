@@ -1,0 +1,20 @@
+[
+  {
+    "line": "const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('gk', finished, score, totalQ, wasSolved, results)"
+  },
+  {
+    "line": "const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('indices', finished, score, totalQ)"
+  },
+  {
+    "line": "const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('surds', finished, score, totalQ)"
+  },
+  {
+    "line": "const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('fractionadd', finished, score, totalQ)"
+  },
+  {
+    "line": "const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('sqrt', finished, score, totalQ)"
+  },
+  {
+    "line": "const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('funceval', finished, score, totalQ, wasSolved, results)"
+  }
+]

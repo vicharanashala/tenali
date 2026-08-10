@@ -1,0 +1,15 @@
+{
+  "id": 162,
+  "word": "Help",
+  "question": "Help",
+  "options": [
+    "Not supporting either side in a conflict",
+    "To become limp through heat or lack of water",
+    "To hold something dear; to love deeply",
+    "To make it easier for someone to do something"
+  ],
+  "answerOption": "D",
+  "answerText": "To make it easier for someone to do something",
+  "difficulty": "easy",
+  "sourceFile": "0162.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 158,
+  "word": "Arrive",
+  "question": "Arrive",
+  "options": [
+    "To reach a destination",
+    "To make it easier for someone to do something",
+    "Showing a willingness to take risks",
+    "To attract and hold attention of someone"
+  ],
+  "answerOption": "A",
+  "answerText": "To reach a destination",
+  "difficulty": "easy",
+  "sourceFile": "0158.json"
+}

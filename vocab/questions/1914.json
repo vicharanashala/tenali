@@ -1,0 +1,15 @@
+{
+  "id": 1914,
+  "word": "Venal",
+  "question": "Venal",
+  "options": [
+    "Hopeful and confident about the future",
+    "Corrupt or able to be bribed",
+    "To spend excessive effort on something",
+    "Feeling or expressing great happiness"
+  ],
+  "answerOption": "B",
+  "answerText": "Corrupt or able to be bribed",
+  "difficulty": "medium",
+  "sourceFile": "1914.json"
+}

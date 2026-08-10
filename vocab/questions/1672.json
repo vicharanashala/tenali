@@ -1,0 +1,15 @@
+{
+  "id": 1672,
+  "word": "Detect",
+  "question": "Detect",
+  "options": [
+    "Causing disapproval or opposition",
+    "Playfully quaint or fanciful behavior",
+    "Made or planned with clear intent",
+    "To discover or identify something"
+  ],
+  "answerOption": "D",
+  "answerText": "To discover or identify something",
+  "difficulty": "medium",
+  "sourceFile": "1672.json"
+}

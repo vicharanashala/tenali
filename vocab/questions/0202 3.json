@@ -1,0 +1,15 @@
+{
+  "id": 202,
+  "word": "Repair",
+  "question": "Repair",
+  "options": [
+    "To construct something by putting parts together",
+    "To arrange systematically into groups",
+    "To move behind someone in the same direction",
+    "To fix something that is broken"
+  ],
+  "answerOption": "D",
+  "answerText": "To fix something that is broken",
+  "difficulty": "easy",
+  "sourceFile": "0202.json"
+}

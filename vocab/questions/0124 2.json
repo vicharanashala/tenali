@@ -1,0 +1,15 @@
+{
+  "id": 124,
+  "word": "Hostile",
+  "question": "Hostile",
+  "options": [
+    "Unfriendly and opposed to something",
+    "To establish a home in a new place",
+    "To take apart the pieces of something",
+    "Covered or marked with an unclean substance"
+  ],
+  "answerOption": "A",
+  "answerText": "Unfriendly and opposed to something",
+  "difficulty": "easy",
+  "sourceFile": "0124.json"
+}

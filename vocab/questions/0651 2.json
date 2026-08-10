@@ -1,0 +1,15 @@
+{
+  "id": 651,
+  "word": "Verbose",
+  "question": "Verbose",
+  "options": [
+    "To have something inside",
+    "Using more words than needed",
+    "To gain knowledge or skill through study",
+    "To take and use something temporarily"
+  ],
+  "answerOption": "B",
+  "answerText": "Using more words than needed",
+  "difficulty": "easy",
+  "sourceFile": "0651.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1946,
+  "word": "Puzzling",
+  "question": "Puzzling",
+  "options": [
+    "Causing confusion or bewilderment",
+    "To kill one in every ten of a group",
+    "To publicly state one's disapproval of",
+    "Showing loss of all hope"
+  ],
+  "answerOption": "A",
+  "answerText": "Causing confusion or bewilderment",
+  "difficulty": "medium",
+  "sourceFile": "1946.json"
+}

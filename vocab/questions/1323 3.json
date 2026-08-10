@@ -1,0 +1,15 @@
+{
+  "id": 1323,
+  "word": "Demolition",
+  "question": "Demolition",
+  "options": [
+    "The destruction of a building",
+    "Continuing without pause or interruption",
+    "To remove sulfur from something",
+    "One who despises"
+  ],
+  "answerOption": "A",
+  "answerText": "The destruction of a building",
+  "difficulty": "medium",
+  "sourceFile": "1323.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2121,
+  "word": "Miasma",
+  "question": "Miasma",
+  "options": [
+    "A plot or scheme to accomplish an evil end",
+    "A substance sprayed as fine mist",
+    "A huge and overwhelming force",
+    "An unpleasant or unhealthy atmosphere"
+  ],
+  "answerOption": "D",
+  "answerText": "An unpleasant or unhealthy atmosphere",
+  "difficulty": "hard",
+  "sourceFile": "2121.json"
+}

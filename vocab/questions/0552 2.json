@@ -1,0 +1,15 @@
+{
+  "id": 552,
+  "word": "Participate",
+  "question": "Participate",
+  "options": [
+    "Noticeably happy and optimistic",
+    "Refusing to change one's mind",
+    "To take part in something",
+    "To discover something by searching"
+  ],
+  "answerOption": "C",
+  "answerText": "To take part in something",
+  "difficulty": "easy",
+  "sourceFile": "0552.json"
+}

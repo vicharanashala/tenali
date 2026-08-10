@@ -1,0 +1,15 @@
+{
+  "id": 686,
+  "word": "Feeble",
+  "question": "Feeble",
+  "options": [
+    "To suffer or die from lack of food",
+    "To create a plan for making something",
+    "Lacking physical strength",
+    "To write or name the letters of a word"
+  ],
+  "answerOption": "C",
+  "answerText": "Lacking physical strength",
+  "difficulty": "easy",
+  "sourceFile": "0686.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1112,
+  "word": "Stoic",
+  "question": "Stoic",
+  "options": [
+    "Enduring pain without showing feelings",
+    "Making someone feel puzzled",
+    "The main point or essence of a matter",
+    "Causing repulsion or distaste"
+  ],
+  "answerOption": "A",
+  "answerText": "Enduring pain without showing feelings",
+  "difficulty": "medium",
+  "sourceFile": "1112.json"
+}

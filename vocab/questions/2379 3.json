@@ -1,0 +1,15 @@
+{
+  "id": 2379,
+  "word": "AERONAUT",
+  "question": "AERONAUT",
+  "options": [
+    "A person who flies in balloon",
+    "The action of making clear",
+    "The action of uttering words",
+    "Of doubtful authenticity; probably untrue"
+  ],
+  "answerOption": "A",
+  "answerText": "A person who flies in balloon",
+  "difficulty": "hard",
+  "sourceFile": "2379.json"
+}

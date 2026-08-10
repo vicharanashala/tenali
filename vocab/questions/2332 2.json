@@ -1,0 +1,15 @@
+{
+  "id": 2332,
+  "word": "Xenial",
+  "question": "Xenial",
+  "options": [
+    "Something bearing visible traces of an earlier form",
+    "Relating to hospitality between host and guest",
+    "Not recognizing a situation one has experienced before",
+    "Giving opinions beyond one's knowledge"
+  ],
+  "answerOption": "B",
+  "answerText": "Relating to hospitality between host and guest",
+  "difficulty": "extra-hard",
+  "sourceFile": "2332.json"
+}

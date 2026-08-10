@@ -1,0 +1,15 @@
+{
+  "id": 749,
+  "word": "Desert",
+  "question": "Desert",
+  "options": [
+    "To examine something in detail",
+    "Quick to notice any unusual activity",
+    "A barren area with very little rainfall",
+    "Able to be easily modified or adjusted"
+  ],
+  "answerOption": "C",
+  "answerText": "A barren area with very little rainfall",
+  "difficulty": "easy",
+  "sourceFile": "0749.json"
+}

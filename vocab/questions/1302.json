@@ -1,0 +1,15 @@
+{
+  "id": 1302,
+  "word": "Convolution",
+  "question": "Convolution",
+  "options": [
+    "Difficult or impossible to understand",
+    "A feeling of embarrassment or disappointment",
+    "The quality of being stubborn",
+    "A coil or twist"
+  ],
+  "answerOption": "D",
+  "answerText": "A coil or twist",
+  "difficulty": "medium",
+  "sourceFile": "1302.json"
+}

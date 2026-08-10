@@ -1,0 +1,15 @@
+{
+  "id": 1799,
+  "word": "Untamed",
+  "question": "Untamed",
+  "options": [
+    "Pulled or twisted out of shape",
+    "A sad and depressed state",
+    "Not domesticated or cultivated",
+    "Showing a lack of experience or wisdom"
+  ],
+  "answerOption": "C",
+  "answerText": "Not domesticated or cultivated",
+  "difficulty": "medium",
+  "sourceFile": "1799.json"
+}

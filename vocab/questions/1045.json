@@ -1,0 +1,15 @@
+{
+  "id": 1045,
+  "word": "Vivid",
+  "question": "Vivid",
+  "options": [
+    "Producing powerful feelings or strong images",
+    "Based on an imagined situation, not reality",
+    "Not ready or equipped",
+    "A tropical plant providing insecticide"
+  ],
+  "answerOption": "A",
+  "answerText": "Producing powerful feelings or strong images",
+  "difficulty": "medium",
+  "sourceFile": "1045.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 526,
+  "word": "Prohibit",
+  "question": "Prohibit",
+  "options": [
+    "To formally forbid something by law or rule",
+    "To rot and break down over time",
+    "Calm, peaceful, and untroubled",
+    "Relating to computer technology"
+  ],
+  "answerOption": "A",
+  "answerText": "To formally forbid something by law or rule",
+  "difficulty": "easy",
+  "sourceFile": "0526.json"
+}

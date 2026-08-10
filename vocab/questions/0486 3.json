@@ -1,0 +1,15 @@
+{
+  "id": 486,
+  "word": "Evaluate",
+  "question": "Evaluate",
+  "options": [
+    "To be in charge of running something",
+    "Of great or more than average height",
+    "To give assistance or encouragement to",
+    "To form an idea of the value of something"
+  ],
+  "answerOption": "D",
+  "answerText": "To form an idea of the value of something",
+  "difficulty": "easy",
+  "sourceFile": "0486.json"
+}

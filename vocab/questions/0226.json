@@ -1,0 +1,15 @@
+{
+  "id": 226,
+  "word": "Attract",
+  "question": "Attract",
+  "options": [
+    "Having an exaggerated sense of importance",
+    "To freely offer to do something",
+    "To cause something to come closer",
+    "Not occupied or in use"
+  ],
+  "answerOption": "C",
+  "answerText": "To cause something to come closer",
+  "difficulty": "easy",
+  "sourceFile": "0226.json"
+}

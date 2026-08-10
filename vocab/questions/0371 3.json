@@ -1,0 +1,15 @@
+{
+  "id": 371,
+  "word": "Chop",
+  "question": "Chop",
+  "options": [
+    "To discover the presence of something hidden",
+    "Having the ability to learn and understand",
+    "To cut something into pieces with a tool",
+    "To exceed or be greater than something"
+  ],
+  "answerOption": "C",
+  "answerText": "To cut something into pieces with a tool",
+  "difficulty": "easy",
+  "sourceFile": "0371.json"
+}

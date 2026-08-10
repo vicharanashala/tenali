@@ -1,0 +1,14 @@
+{
+  "id": 237,
+  "question": "Which is the nearest planet to Earth on average in many recent explanations?",
+  "options": [
+    "Venus",
+    "Mars",
+    "Mercury",
+    "Jupiter"
+  ],
+  "answerOption": "C",
+  "answerText": "Mercury",
+  "genre": "geography",
+  "sourceFile": "0237.json"
+}

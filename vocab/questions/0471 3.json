@@ -1,0 +1,15 @@
+{
+  "id": 471,
+  "word": "Summarize",
+  "question": "Summarize",
+  "options": [
+    "Happening or changing slowly over time",
+    "To ask for something forcefully",
+    "To give a brief statement of main points",
+    "To feel contempt or deep dislike for"
+  ],
+  "answerOption": "C",
+  "answerText": "To give a brief statement of main points",
+  "difficulty": "easy",
+  "sourceFile": "0471.json"
+}

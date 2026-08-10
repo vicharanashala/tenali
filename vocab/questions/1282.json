@@ -1,0 +1,15 @@
+{
+  "id": 1282,
+  "word": "Cerebral",
+  "question": "Cerebral",
+  "options": [
+    "Stubborn or obstinate in nature",
+    "A state of being deserted or lonely",
+    "Of or relating to the brain or intellect",
+    "A person or thing announcing what is to come"
+  ],
+  "answerOption": "C",
+  "answerText": "Of or relating to the brain or intellect",
+  "difficulty": "medium",
+  "sourceFile": "1282.json"
+}

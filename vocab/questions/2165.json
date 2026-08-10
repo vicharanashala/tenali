@@ -1,0 +1,15 @@
+{
+  "id": 2165,
+  "word": "Quizzical",
+  "question": "Quizzical",
+  "options": [
+    "A plant needing air exposure",
+    "A prefix relating to air",
+    "Indicating mild puzzlement",
+    "Extremely unwilling to spend money"
+  ],
+  "answerOption": "C",
+  "answerText": "Indicating mild puzzlement",
+  "difficulty": "hard",
+  "sourceFile": "2165.json"
+}

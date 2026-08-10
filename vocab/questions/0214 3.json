@@ -1,0 +1,15 @@
+{
+  "id": 214,
+  "word": "Succeed",
+  "question": "Succeed",
+  "options": [
+    "To achieve a desired aim or result",
+    "To fasten or join one thing to another",
+    "To try to win against other people",
+    "Happening by chance; unintentional"
+  ],
+  "answerOption": "A",
+  "answerText": "To achieve a desired aim or result",
+  "difficulty": "easy",
+  "sourceFile": "0214.json"
+}

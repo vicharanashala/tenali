@@ -1,0 +1,15 @@
+{
+  "id": 1204,
+  "word": "Moribund",
+  "question": "Moribund",
+  "options": [
+    "A person who acts obediently to gain advantage",
+    "The highest point of development; a perfect example",
+    "The belief that life is meaningless",
+    "At the point of death; in terminal decline"
+  ],
+  "answerOption": "D",
+  "answerText": "At the point of death; in terminal decline",
+  "difficulty": "hard",
+  "sourceFile": "1204.json"
+}

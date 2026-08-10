@@ -1,0 +1,15 @@
+{
+  "id": 305,
+  "word": "Respect",
+  "question": "Respect",
+  "options": [
+    "To create a plan for making something",
+    "To hold something dear; to love deeply",
+    "To feel admiration for someone's qualities",
+    "To love and respect deeply"
+  ],
+  "answerOption": "C",
+  "answerText": "To feel admiration for someone's qualities",
+  "difficulty": "easy",
+  "sourceFile": "0305.json"
+}

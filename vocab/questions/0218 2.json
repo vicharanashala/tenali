@@ -1,0 +1,15 @@
+{
+  "id": 218,
+  "word": "Enjoy",
+  "question": "Enjoy",
+  "options": [
+    "To fill or take up a space or time",
+    "Having a violent or aggressive nature",
+    "To take delight or pleasure in something",
+    "To cause someone to lose confidence"
+  ],
+  "answerOption": "C",
+  "answerText": "To take delight or pleasure in something",
+  "difficulty": "easy",
+  "sourceFile": "0218.json"
+}

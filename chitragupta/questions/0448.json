@@ -1,0 +1,14 @@
+{
+  "id": 448,
+  "question": "What is the SI unit of luminous intensity?",
+  "options": [
+    "Lumen",
+    "Lux",
+    "Candela",
+    "Watt"
+  ],
+  "answerOption": "C",
+  "answerText": "Candela",
+  "genre": "mixed",
+  "sourceFile": "0448.json"
+}

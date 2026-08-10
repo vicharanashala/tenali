@@ -1,0 +1,15 @@
+{
+  "id": 1067,
+  "word": "Tedious",
+  "question": "Tedious",
+  "options": [
+    "Too long, slow, or dull; tiresome",
+    "A system where power rests with people",
+    "A person who designs things",
+    "Lasting for a very short time"
+  ],
+  "answerOption": "A",
+  "answerText": "Too long, slow, or dull; tiresome",
+  "difficulty": "medium",
+  "sourceFile": "1067.json"
+}

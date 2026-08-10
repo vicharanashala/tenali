@@ -1,0 +1,15 @@
+{
+  "id": 2998,
+  "word": "ABJURER",
+  "question": "ABJURER",
+  "options": [
+    "A Roman numeral symbol",
+    "The act of abiding somewhere",
+    "Plural of absurdity",
+    "One who abjures"
+  ],
+  "answerOption": "D",
+  "answerText": "One who abjures",
+  "difficulty": "extra-hard",
+  "sourceFile": "2998.json"
+}

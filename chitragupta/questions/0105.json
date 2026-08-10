@@ -1,0 +1,14 @@
+{
+  "id": 105,
+  "question": "Which is the tallest animal in the world?",
+  "options": [
+    "Camel",
+    "Elephant",
+    "Ostrich",
+    "Giraffe"
+  ],
+  "answerOption": "D",
+  "answerText": "Giraffe",
+  "genre": "mixed",
+  "sourceFile": "0105.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 398,
+  "word": "Thrive",
+  "question": "Thrive",
+  "options": [
+    "To become aware of through the senses",
+    "To state something in an exact way",
+    "To give someone the means to do something",
+    "To grow and develop well"
+  ],
+  "answerOption": "D",
+  "answerText": "To grow and develop well",
+  "difficulty": "easy",
+  "sourceFile": "0398.json"
+}

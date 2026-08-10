@@ -1,0 +1,15 @@
+{
+  "id": 466,
+  "word": "Demonstrate",
+  "question": "Demonstrate",
+  "options": [
+    "To show how something is done",
+    "An act of saying goodbye",
+    "Not occupied or in use",
+    "To tell someone you will definitely do something"
+  ],
+  "answerOption": "A",
+  "answerText": "To show how something is done",
+  "difficulty": "easy",
+  "sourceFile": "0466.json"
+}

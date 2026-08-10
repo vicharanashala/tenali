@@ -1,0 +1,15 @@
+{
+  "id": 1494,
+  "word": "Deposal",
+  "question": "Deposal",
+  "options": [
+    "To subtract an amount from a total",
+    "The action of removing from office",
+    "The manner in which someone behaves",
+    "One who deserts a duty or post"
+  ],
+  "answerOption": "B",
+  "answerText": "The action of removing from office",
+  "difficulty": "medium",
+  "sourceFile": "1494.json"
+}

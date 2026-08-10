@@ -1,0 +1,14 @@
+{
+  "id": 321,
+  "question": "Which city is the capital of Bihar?",
+  "options": [
+    "Gaya",
+    "Patna",
+    "Muzaffarpur",
+    "Bhagalpur"
+  ],
+  "answerOption": "B",
+  "answerText": "Patna",
+  "genre": "geography",
+  "sourceFile": "0321.json"
+}

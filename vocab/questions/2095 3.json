@@ -1,0 +1,15 @@
+{
+  "id": 2095,
+  "word": "Admonition",
+  "question": "Admonition",
+  "options": [
+    "An accusation in response to another",
+    "Firm or stern reproof",
+    "Unable to be avoided or escaped",
+    "The pursuit of pleasure as the highest good"
+  ],
+  "answerOption": "B",
+  "answerText": "Firm or stern reproof",
+  "difficulty": "hard",
+  "sourceFile": "2095.json"
+}

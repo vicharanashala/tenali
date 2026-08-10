@@ -1,0 +1,15 @@
+{
+  "id": 280,
+  "word": "Explain",
+  "question": "Explain",
+  "options": [
+    "To cause something to come closer",
+    "To use something carelessly or to no purpose",
+    "To make something clear and easy to understand",
+    "Having an uneven or irregular surface"
+  ],
+  "answerOption": "C",
+  "answerText": "To make something clear and easy to understand",
+  "difficulty": "easy",
+  "sourceFile": "0280.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1994,
+  "word": "Advisory",
+  "question": "Advisory",
+  "options": [
+    "Providing advice or recommendations",
+    "The atmosphere or air layer",
+    "A state of physical or mental weariness",
+    "To extend known data into an unknown area"
+  ],
+  "answerOption": "A",
+  "answerText": "Providing advice or recommendations",
+  "difficulty": "hard",
+  "sourceFile": "1994.json"
+}

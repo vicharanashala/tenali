@@ -1,0 +1,15 @@
+{
+  "id": 1409,
+  "word": "Democratize",
+  "question": "Democratize",
+  "options": [
+    "Unable to move or function normally",
+    "To make more democratic or popular",
+    "Fierce or violent in nature",
+    "Stubborn refusal to change"
+  ],
+  "answerOption": "B",
+  "answerText": "To make more democratic or popular",
+  "difficulty": "medium",
+  "sourceFile": "1409.json"
+}

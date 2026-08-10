@@ -1,0 +1,15 @@
+{
+  "id": 934,
+  "word": "Limp",
+  "question": "Limp",
+  "options": [
+    "Lacking firmness or strength",
+    "To turn around quickly in a circle",
+    "Having good manners and showing respect",
+    "To relieve a person of symptoms of disease"
+  ],
+  "answerOption": "A",
+  "answerText": "Lacking firmness or strength",
+  "difficulty": "easy",
+  "sourceFile": "0934.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 499,
+  "word": "Roam",
+  "question": "Roam",
+  "options": [
+    "To move about freely without a destination",
+    "To place equipment in position for use",
+    "Expecting the best possible outcome",
+    "Having an uneven or irregular surface"
+  ],
+  "answerOption": "A",
+  "answerText": "To move about freely without a destination",
+  "difficulty": "easy",
+  "sourceFile": "0499.json"
+}

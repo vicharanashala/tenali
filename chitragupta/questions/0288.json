@@ -1,0 +1,14 @@
+{
+  "id": 288,
+  "question": "Which famous scientist gave the law of buoyancy associated with displacement of water?",
+  "options": [
+    "Pythagoras",
+    "Archimedes",
+    "Euclid",
+    "Aristotle"
+  ],
+  "answerOption": "B",
+  "answerText": "Archimedes",
+  "genre": "science",
+  "sourceFile": "0288.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1755,
+  "word": "Insidious",
+  "question": "Insidious",
+  "options": [
+    "To criticize unfairly or harshly",
+    "Proceeding in a subtle manner",
+    "Not prepared or practiced",
+    "The state of relying on something"
+  ],
+  "answerOption": "B",
+  "answerText": "Proceeding in a subtle manner",
+  "difficulty": "medium",
+  "sourceFile": "1755.json"
+}

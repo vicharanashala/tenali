@@ -1,0 +1,15 @@
+{
+  "id": 2269,
+  "word": "AEROTIC",
+  "question": "AEROTIC",
+  "options": [
+    "Overly dramatic or emotional",
+    "Relating to air exposure",
+    "In an enigmatic manner",
+    "Expert in aerostation"
+  ],
+  "answerOption": "B",
+  "answerText": "Relating to air exposure",
+  "difficulty": "hard",
+  "sourceFile": "2269.json"
+}

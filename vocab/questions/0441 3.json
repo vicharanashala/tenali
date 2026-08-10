@@ -1,0 +1,15 @@
+{
+  "id": 441,
+  "word": "Stack",
+  "question": "Stack",
+  "options": [
+    "To arrange things in a neat pile",
+    "Extremely beautiful or impressive",
+    "To move from one region to another",
+    "Not allowing water to pass through"
+  ],
+  "answerOption": "A",
+  "answerText": "To arrange things in a neat pile",
+  "difficulty": "easy",
+  "sourceFile": "0441.json"
+}

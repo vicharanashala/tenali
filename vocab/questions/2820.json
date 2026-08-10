@@ -1,0 +1,15 @@
+{
+  "id": 2820,
+  "word": "Credibility",
+  "question": "Credibility",
+  "options": [
+    "Showing susceptibility to bribery",
+    "Deceit used to achieve one's goal",
+    "The quality of being believable",
+    "Lack of pity or compassion"
+  ],
+  "answerOption": "C",
+  "answerText": "The quality of being believable",
+  "difficulty": "hard",
+  "sourceFile": "2820.json"
+}

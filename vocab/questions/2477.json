@@ -1,0 +1,15 @@
+{
+  "id": 2477,
+  "word": "Aerocamera",
+  "question": "Aerocamera",
+  "options": [
+    "The action of returning something to original state",
+    "A female aeromotor operator",
+    "The action of killing a king",
+    "A camera for aerial photography"
+  ],
+  "answerOption": "D",
+  "answerText": "A camera for aerial photography",
+  "difficulty": "hard",
+  "sourceFile": "2477.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1840,
+  "word": "Doubtful",
+  "question": "Doubtful",
+  "options": [
+    "Having a sharp edge or showing eagerness",
+    "The highest point reached by something",
+    "Feeling uncertain or skeptical",
+    "A feeling of intense excitement and happiness"
+  ],
+  "answerOption": "C",
+  "answerText": "Feeling uncertain or skeptical",
+  "difficulty": "medium",
+  "sourceFile": "1840.json"
+}

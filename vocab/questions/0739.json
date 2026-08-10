@@ -1,0 +1,15 @@
+{
+  "id": 739,
+  "word": "Brittle",
+  "question": "Brittle",
+  "options": [
+    "To stop feeling angry toward someone",
+    "To determine an amount by mathematics",
+    "Affected by physical illness",
+    "Hard but likely to break easily"
+  ],
+  "answerOption": "D",
+  "answerText": "Hard but likely to break easily",
+  "difficulty": "easy",
+  "sourceFile": "0739.json"
+}

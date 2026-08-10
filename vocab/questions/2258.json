@@ -1,0 +1,15 @@
+{
+  "id": 2258,
+  "word": "Adore",
+  "question": "Adore",
+  "options": [
+    "A state of physical or mental weariness",
+    "Something that belongs to a different time",
+    "To love and respect deeply",
+    "The quality of standing out"
+  ],
+  "answerOption": "C",
+  "answerText": "To love and respect deeply",
+  "difficulty": "hard",
+  "sourceFile": "2258.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 844,
+  "word": "Notorious",
+  "question": "Notorious",
+  "options": [
+    "Famous for something bad",
+    "Affected by a lack of energy",
+    "Great energy or enthusiasm for a cause",
+    "To extract information from various sources"
+  ],
+  "answerOption": "A",
+  "answerText": "Famous for something bad",
+  "difficulty": "medium",
+  "sourceFile": "0844.json"
+}

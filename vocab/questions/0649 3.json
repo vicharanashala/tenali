@@ -1,0 +1,15 @@
+{
+  "id": 649,
+  "word": "Articulate",
+  "question": "Articulate",
+  "options": [
+    "Having the ability to speak clearly",
+    "To formally forbid something by law or rule",
+    "Allowing access; not closed or blocked",
+    "Of great importance; critical"
+  ],
+  "answerOption": "A",
+  "answerText": "Having the ability to speak clearly",
+  "difficulty": "easy",
+  "sourceFile": "0649.json"
+}

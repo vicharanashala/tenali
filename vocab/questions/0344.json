@@ -1,0 +1,15 @@
+{
+  "id": 344,
+  "word": "Flee",
+  "question": "Flee",
+  "options": [
+    "Exceptionally good; remarkable",
+    "To run away from a place of danger",
+    "Tending to cause harm",
+    "Having a high amount of moisture in the air"
+  ],
+  "answerOption": "B",
+  "answerText": "To run away from a place of danger",
+  "difficulty": "easy",
+  "sourceFile": "0344.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2859,
+  "word": "Recurrence",
+  "question": "Recurrence",
+  "options": [
+    "A defensive wall of a city or fortress",
+    "The quality of being adroit",
+    "In a state of quietness; inactive",
+    "The action of occurring again"
+  ],
+  "answerOption": "D",
+  "answerText": "The action of occurring again",
+  "difficulty": "hard",
+  "sourceFile": "2859.json"
+}

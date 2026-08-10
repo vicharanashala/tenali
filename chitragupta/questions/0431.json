@@ -1,0 +1,14 @@
+{
+  "id": 431,
+  "question": "Which Indian state has Amaravati as its planned capital, with administrative functions historically centered in Amaravati/Vijayawada region?",
+  "options": [
+    "Telangana",
+    "Andhra Pradesh",
+    "Odisha",
+    "Tamil Nadu"
+  ],
+  "answerOption": "B",
+  "answerText": "Andhra Pradesh",
+  "genre": "geography",
+  "sourceFile": "0431.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1999,
+  "word": "Cacophony",
+  "question": "Cacophony",
+  "options": [
+    "Relating to air response",
+    "A harsh mixture of discordant sounds",
+    "Skin distension from air",
+    "Saying the same thing twice in different words"
+  ],
+  "answerOption": "B",
+  "answerText": "A harsh mixture of discordant sounds",
+  "difficulty": "hard",
+  "sourceFile": "1999.json"
+}

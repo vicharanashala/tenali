@@ -1,0 +1,15 @@
+{
+  "id": 2107,
+  "word": "Verbose",
+  "question": "Verbose",
+  "options": [
+    "A public notice promoting something",
+    "Using or expressed in more words than needed",
+    "A person who tells stories in a skillful way",
+    "Intended to gain goodwill or reduce hostility"
+  ],
+  "answerOption": "B",
+  "answerText": "Using or expressed in more words than needed",
+  "difficulty": "hard",
+  "sourceFile": "2107.json"
+}

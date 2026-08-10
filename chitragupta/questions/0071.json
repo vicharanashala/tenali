@@ -1,0 +1,14 @@
+{
+  "id": 71,
+  "question": "In which sport is the term 'checkmate' used?",
+  "options": [
+    "Tennis",
+    "Boxing",
+    "Chess",
+    "Cricket"
+  ],
+  "answerOption": "C",
+  "answerText": "Chess",
+  "genre": "mixed",
+  "sourceFile": "0071.json"
+}

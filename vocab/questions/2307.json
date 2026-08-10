@@ -1,0 +1,15 @@
+{
+  "id": 2307,
+  "word": "Adventuress",
+  "question": "Adventuress",
+  "options": [
+    "Belonging to the middle class",
+    "A state of balance",
+    "Having a ready insight into things",
+    "A female adventurer"
+  ],
+  "answerOption": "D",
+  "answerText": "A female adventurer",
+  "difficulty": "hard",
+  "sourceFile": "2307.json"
+}

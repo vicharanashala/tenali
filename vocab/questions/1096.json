@@ -1,0 +1,15 @@
+{
+  "id": 1096,
+  "word": "Callous",
+  "question": "Callous",
+  "options": [
+    "To become gradually worse",
+    "To criticize unfairly or harshly",
+    "Showing cruel disregard for others",
+    "The quality of being harmful"
+  ],
+  "answerOption": "C",
+  "answerText": "Showing cruel disregard for others",
+  "difficulty": "medium",
+  "sourceFile": "1096.json"
+}

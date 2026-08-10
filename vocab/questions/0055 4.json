@@ -1,0 +1,15 @@
+{
+  "id": 55,
+  "word": "Early",
+  "question": "Early",
+  "options": [
+    "Before the usual or expected time",
+    "To recognize the full worth of something",
+    "Able to recover quickly from difficulties",
+    "Unfriendly and opposed to something"
+  ],
+  "answerOption": "A",
+  "answerText": "Before the usual or expected time",
+  "difficulty": "easy",
+  "sourceFile": "0055.json"
+}

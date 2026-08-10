@@ -1,0 +1,15 @@
+{
+  "id": 2175,
+  "word": "Fraught",
+  "question": "Fraught",
+  "options": [
+    "Pursuit of pleasure and avoidance of pain",
+    "The study of medicines and their effects",
+    "Filled with something undesirable",
+    "An instrument for measuring air"
+  ],
+  "answerOption": "C",
+  "answerText": "Filled with something undesirable",
+  "difficulty": "hard",
+  "sourceFile": "2175.json"
+}

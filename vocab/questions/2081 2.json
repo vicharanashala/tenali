@@ -1,0 +1,15 @@
+{
+  "id": 2081,
+  "word": "Aeralgia",
+  "question": "Aeralgia",
+  "options": [
+    "A scarcity or lack of something",
+    "Burned or scorched by heat",
+    "Pain from atmospheric pressure",
+    "Technology of air use"
+  ],
+  "answerOption": "C",
+  "answerText": "Pain from atmospheric pressure",
+  "difficulty": "hard",
+  "sourceFile": "2081.json"
+}

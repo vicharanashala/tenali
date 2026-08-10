@@ -1,0 +1,15 @@
+{
+  "id": 1379,
+  "word": "Depart",
+  "question": "Depart",
+  "options": [
+    "Lacking consistency or purpose",
+    "To make more democratic or popular",
+    "To regard or treat as a god",
+    "To go away from a place"
+  ],
+  "answerOption": "D",
+  "answerText": "To go away from a place",
+  "difficulty": "medium",
+  "sourceFile": "1379.json"
+}

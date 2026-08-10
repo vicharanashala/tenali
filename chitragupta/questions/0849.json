@@ -1,0 +1,14 @@
+{
+  "id": 849,
+  "question": "Which country is associated with the city of Thimphu?",
+  "options": [
+    "Nepal",
+    "Bhutan",
+    "Bangladesh",
+    "Myanmar"
+  ],
+  "answerOption": "B",
+  "answerText": "Bhutan",
+  "genre": "geography",
+  "sourceFile": "0849.json"
+}

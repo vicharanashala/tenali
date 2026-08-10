@@ -1,0 +1,15 @@
+{
+  "id": 406,
+  "word": "Waste",
+  "question": "Waste",
+  "options": [
+    "Competent or skilled in doing something",
+    "Of chief importance; principal",
+    "To use something carelessly or to no purpose",
+    "Bad tempered and unwilling to be friendly"
+  ],
+  "answerOption": "C",
+  "answerText": "To use something carelessly or to no purpose",
+  "difficulty": "easy",
+  "sourceFile": "0406.json"
+}

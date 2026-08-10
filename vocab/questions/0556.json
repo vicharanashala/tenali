@@ -1,0 +1,15 @@
+{
+  "id": 556,
+  "word": "Dedicate",
+  "question": "Dedicate",
+  "options": [
+    "Free from pretense or deceit",
+    "To open something that is locked",
+    "Providing a mirror-like image",
+    "To devote time or effort to a purpose"
+  ],
+  "answerOption": "D",
+  "answerText": "To devote time or effort to a purpose",
+  "difficulty": "easy",
+  "sourceFile": "0556.json"
+}

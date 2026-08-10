@@ -1,0 +1,15 @@
+{
+  "id": 1298,
+  "word": "Contiguous",
+  "question": "Contiguous",
+  "options": [
+    "Sharing a common border or touching",
+    "In a despotic manner",
+    "To light a fire; to arouse an emotion",
+    "Friendly and easy to talk to"
+  ],
+  "answerOption": "A",
+  "answerText": "Sharing a common border or touching",
+  "difficulty": "medium",
+  "sourceFile": "1298.json"
+}

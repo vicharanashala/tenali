@@ -1,0 +1,15 @@
+{
+  "id": 2478,
+  "word": "AEROYACHT",
+  "question": "AEROYACHT",
+  "options": [
+    "A large aircraft for travel",
+    "An abnormal change in body tissue",
+    "Relating to prehistoric stone tools",
+    "A jet-powered aircraft"
+  ],
+  "answerOption": "A",
+  "answerText": "A large aircraft for travel",
+  "difficulty": "hard",
+  "sourceFile": "2478.json"
+}

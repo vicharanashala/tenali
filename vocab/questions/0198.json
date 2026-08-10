@@ -1,0 +1,15 @@
+{
+  "id": 198,
+  "word": "Share",
+  "question": "Share",
+  "options": [
+    "Not supporting either side in a conflict",
+    "Done without delay; quick",
+    "To send someone away or allow them to leave",
+    "To give a portion of something to others"
+  ],
+  "answerOption": "D",
+  "answerText": "To give a portion of something to others",
+  "difficulty": "easy",
+  "sourceFile": "0198.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1073,
+  "word": "Bemused",
+  "question": "Bemused",
+  "options": [
+    "The state of being thick or dense",
+    "Puzzled or confused",
+    "Not enough in quantity",
+    "Corrupt or able to be bribed"
+  ],
+  "answerOption": "B",
+  "answerText": "Puzzled or confused",
+  "difficulty": "medium",
+  "sourceFile": "1073.json"
+}

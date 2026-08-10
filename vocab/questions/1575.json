@@ -1,0 +1,15 @@
+{
+  "id": 1575,
+  "word": "Descriptive",
+  "question": "Descriptive",
+  "options": [
+    "Causing extreme disgust",
+    "Serving to describe or characterize",
+    "Presenting hidden dangers",
+    "Distorted or inaccurately presented"
+  ],
+  "answerOption": "B",
+  "answerText": "Serving to describe or characterize",
+  "difficulty": "medium",
+  "sourceFile": "1575.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 362,
+  "word": "Decorate",
+  "question": "Decorate",
+  "options": [
+    "Feeling deep pleasure from achievements",
+    "To show how something is done",
+    "To make something look more attractive",
+    "To feel admiration for someone's qualities"
+  ],
+  "answerOption": "C",
+  "answerText": "To make something look more attractive",
+  "difficulty": "easy",
+  "sourceFile": "0362.json"
+}

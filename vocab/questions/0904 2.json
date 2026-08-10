@@ -1,0 +1,15 @@
+{
+  "id": 904,
+  "word": "Bemused",
+  "question": "Bemused",
+  "options": [
+    "To express passionate grief about something",
+    "Puzzled or confused",
+    "Free from disturbance; calm",
+    "Not friendly or interested; distant"
+  ],
+  "answerOption": "B",
+  "answerText": "Puzzled or confused",
+  "difficulty": "medium",
+  "sourceFile": "0904.json"
+}

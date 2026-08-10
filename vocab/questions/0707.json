@@ -1,0 +1,15 @@
+{
+  "id": 707,
+  "word": "Irregular",
+  "question": "Irregular",
+  "options": [
+    "Telling or expressing the truth; honest",
+    "Lasting or intended to last forever",
+    "Lacking emotion or interest",
+    "Not even or balanced in shape"
+  ],
+  "answerOption": "D",
+  "answerText": "Not even or balanced in shape",
+  "difficulty": "easy",
+  "sourceFile": "0707.json"
+}

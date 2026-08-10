@@ -1,0 +1,15 @@
+{
+  "id": 466,
+  "word": "Demonstrate",
+  "question": "Demonstrate",
+  "options": [
+    "Having no special features; normal",
+    "To arouse the curiosity of someone",
+    "Very impressive; magnificent",
+    "To show how something is done"
+  ],
+  "answerOption": "D",
+  "answerText": "To show how something is done",
+  "difficulty": "easy",
+  "sourceFile": "0466.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 89,
+  "word": "Light",
+  "question": "Light",
+  "options": [
+    "To attract and hold the attention of someone",
+    "In a particular place; existing now",
+    "To give a portion of something to others",
+    "Of little weight; easy to carry"
+  ],
+  "answerOption": "D",
+  "answerText": "Of little weight; easy to carry",
+  "difficulty": "easy",
+  "sourceFile": "0089.json"
+}

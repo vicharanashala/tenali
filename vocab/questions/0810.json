@@ -1,0 +1,15 @@
+{
+  "id": 810,
+  "word": "Sincere",
+  "question": "Sincere",
+  "options": [
+    "Free from pretense or deceit",
+    "Occurring from time to time",
+    "Completely different in every way",
+    "To make or become better"
+  ],
+  "answerOption": "A",
+  "answerText": "Free from pretense or deceit",
+  "difficulty": "easy",
+  "sourceFile": "0810.json"
+}

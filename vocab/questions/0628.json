@@ -1,0 +1,15 @@
+{
+  "id": 628,
+  "word": "Sensible",
+  "question": "Sensible",
+  "options": [
+    "Done with good judgment; practical",
+    "Containing thick solid pieces",
+    "Showing a great deal of variety",
+    "Not based on or acting on fairness"
+  ],
+  "answerOption": "A",
+  "answerText": "Done with good judgment; practical",
+  "difficulty": "easy",
+  "sourceFile": "0628.json"
+}

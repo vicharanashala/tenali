@@ -1,0 +1,15 @@
+{
+  "id": 385,
+  "word": "Leak",
+  "question": "Leak",
+  "options": [
+    "To become aware of through the senses",
+    "To state something in an exact way",
+    "To give someone the means to do something",
+    "To allow liquid to escape through a hole"
+  ],
+  "answerOption": "D",
+  "answerText": "To allow liquid to escape through a hole",
+  "difficulty": "easy",
+  "sourceFile": "0385.json"
+}

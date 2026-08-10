@@ -1,0 +1,15 @@
+{
+  "id": 870,
+  "word": "Pensive",
+  "question": "Pensive",
+  "options": [
+    "Engaged in deep or serious thought",
+    "Expressed clearly and easy to understand",
+    "Playfully quaint or fanciful",
+    "Widespread destruction or confusion"
+  ],
+  "answerOption": "A",
+  "answerText": "Engaged in deep or serious thought",
+  "difficulty": "medium",
+  "sourceFile": "0870.json"
+}

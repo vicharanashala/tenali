@@ -1,0 +1,15 @@
+{
+  "id": 412,
+  "word": "Belong",
+  "question": "Belong",
+  "options": [
+    "To manage or guide the operations of something",
+    "Easily annoyed or made angry",
+    "To conduct the affairs of a state or organization",
+    "To be the property of someone"
+  ],
+  "answerOption": "D",
+  "answerText": "To be the property of someone",
+  "difficulty": "easy",
+  "sourceFile": "0412.json"
+}

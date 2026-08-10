@@ -1,0 +1,14 @@
+{
+  "id": 387,
+  "question": "Which city is the capital of Uttar Pradesh?",
+  "options": [
+    "Kanpur",
+    "Varanasi",
+    "Lucknow",
+    "Prayagraj"
+  ],
+  "answerOption": "C",
+  "answerText": "Lucknow",
+  "genre": "geography",
+  "sourceFile": "0387.json"
+}

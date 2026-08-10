@@ -1,0 +1,14 @@
+{
+  "id": 390,
+  "question": "What is the common name of HCl in aqueous solution?",
+  "options": [
+    "Sulfuric acid",
+    "Nitric acid",
+    "Hydrochloric acid",
+    "Acetic acid"
+  ],
+  "answerOption": "C",
+  "answerText": "Hydrochloric acid",
+  "genre": "mixed",
+  "sourceFile": "0390.json"
+}

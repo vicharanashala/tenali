@@ -1,0 +1,15 @@
+{
+  "id": 566,
+  "word": "Impress",
+  "question": "Impress",
+  "options": [
+    "Noticeably happy and optimistic",
+    "Refusing to change one's mind",
+    "To make someone feel admiration",
+    "To discover something by searching"
+  ],
+  "answerOption": "C",
+  "answerText": "To make someone feel admiration",
+  "difficulty": "easy",
+  "sourceFile": "0566.json"
+}

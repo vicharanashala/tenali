@@ -1,0 +1,15 @@
+{
+  "id": 403,
+  "word": "Recycle",
+  "question": "Recycle",
+  "options": [
+    "To convert waste into reusable material",
+    "To keep away from something",
+    "Weak and delicate in health",
+    "Not open; shut or fastened"
+  ],
+  "answerOption": "A",
+  "answerText": "To convert waste into reusable material",
+  "difficulty": "easy",
+  "sourceFile": "0403.json"
+}

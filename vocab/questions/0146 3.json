@@ -1,0 +1,15 @@
+{
+  "id": 146,
+  "word": "Obey",
+  "question": "Obey",
+  "options": [
+    "To cut something into pieces with a tool",
+    "To feel admiration for someone's qualities",
+    "To comply with a command or rule",
+    "To ease the grief or distress of someone"
+  ],
+  "answerOption": "C",
+  "answerText": "To comply with a command or rule",
+  "difficulty": "easy",
+  "sourceFile": "0146.json"
+}

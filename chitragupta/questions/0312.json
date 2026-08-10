@@ -1,0 +1,14 @@
+{
+  "id": 312,
+  "question": "Which is the largest plateau in the world?",
+  "options": [
+    "Deccan Plateau",
+    "Tibetan Plateau",
+    "Iranian Plateau",
+    "Brazilian Plateau"
+  ],
+  "answerOption": "B",
+  "answerText": "Tibetan Plateau",
+  "genre": "mixed",
+  "sourceFile": "0312.json"
+}

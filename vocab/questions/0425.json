@@ -1,0 +1,15 @@
+{
+  "id": 425,
+  "word": "Connect",
+  "question": "Connect",
+  "options": [
+    "To join or link things together",
+    "To feel contempt or deep dislike for",
+    "Slightly wet or damp",
+    "Smelling extremely unpleasant"
+  ],
+  "answerOption": "A",
+  "answerText": "To join or link things together",
+  "difficulty": "easy",
+  "sourceFile": "0425.json"
+}

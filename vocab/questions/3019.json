@@ -1,0 +1,15 @@
+{
+  "id": 3019,
+  "word": "Hiraeth",
+  "question": "Hiraeth",
+  "options": [
+    "In non-literal manner",
+    "A genus of plants",
+    "A longing for a home that may never have existed",
+    "Practice of abstaining"
+  ],
+  "answerOption": "C",
+  "answerText": "A longing for a home that may never have existed",
+  "difficulty": "extra-hard",
+  "sourceFile": "3019.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 160,
+  "word": "Praise",
+  "question": "Praise",
+  "options": [
+    "Expecting the best possible outcome",
+    "To express warm approval of something",
+    "Having the taste of salt",
+    "Hot and humid weather or manner"
+  ],
+  "answerOption": "B",
+  "answerText": "To express warm approval of something",
+  "difficulty": "easy",
+  "sourceFile": "0160.json"
+}

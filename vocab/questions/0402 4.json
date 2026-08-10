@@ -1,0 +1,15 @@
+{
+  "id": 402,
+  "word": "Preserve",
+  "question": "Preserve",
+  "options": [
+    "To maintain something in its original state",
+    "To become sound or healthy again",
+    "Having or showing a willingness to act dishonestly",
+    "Enough to meet the needs"
+  ],
+  "answerOption": "A",
+  "answerText": "To maintain something in its original state",
+  "difficulty": "easy",
+  "sourceFile": "0402.json"
+}

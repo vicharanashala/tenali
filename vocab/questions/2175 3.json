@@ -1,0 +1,15 @@
+{
+  "id": 2175,
+  "word": "Advertisement",
+  "question": "Advertisement",
+  "options": [
+    "A public notice promoting something",
+    "Reckless pursuit of adventure",
+    "The use of trickery to achieve a goal",
+    "Excessively complicated and detailed"
+  ],
+  "answerOption": "A",
+  "answerText": "A public notice promoting something",
+  "difficulty": "hard",
+  "sourceFile": "2175.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 354,
+  "word": "Claim",
+  "question": "Claim",
+  "options": [
+    "To exert force to move something closer",
+    "To give support and confidence to someone",
+    "To state something is true without proof",
+    "To move from a lower to a higher position"
+  ],
+  "answerOption": "C",
+  "answerText": "To state something is true without proof",
+  "difficulty": "easy",
+  "sourceFile": "0354.json"
+}

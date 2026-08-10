@@ -1,0 +1,14 @@
+{
+  "id": 930,
+  "question": "Which country is associated with the city of Nuku'alofa?",
+  "options": [
+    "Fiji",
+    "Tonga",
+    "Samoa",
+    "Tuvalu"
+  ],
+  "answerOption": "B",
+  "answerText": "Tonga",
+  "genre": "geography",
+  "sourceFile": "0930.json"
+}

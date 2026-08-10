@@ -1,0 +1,15 @@
+{
+  "id": 612,
+  "word": "Vibrant",
+  "question": "Vibrant",
+  "options": [
+    "To control something by means of rules",
+    "Full of energy and enthusiasm",
+    "To make someone feel weary and uninterested",
+    "Affected by physical illness"
+  ],
+  "answerOption": "B",
+  "answerText": "Full of energy and enthusiasm",
+  "difficulty": "easy",
+  "sourceFile": "0612.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1144,
+  "word": "Discern",
+  "question": "Discern",
+  "options": [
+    "To perceive or recognize something",
+    "One who deserts a duty or post",
+    "The manner in which someone behaves",
+    "In a despicable manner"
+  ],
+  "answerOption": "A",
+  "answerText": "To perceive or recognize something",
+  "difficulty": "medium",
+  "sourceFile": "1144.json"
+}

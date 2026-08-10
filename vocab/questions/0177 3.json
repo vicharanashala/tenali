@@ -1,0 +1,15 @@
+{
+  "id": 177,
+  "word": "Lose",
+  "question": "Lose",
+  "options": [
+    "To greatly surprise someone",
+    "Well known from long experience",
+    "To stay where you are until something happens",
+    "To be defeated in a contest"
+  ],
+  "answerOption": "D",
+  "answerText": "To be defeated in a contest",
+  "difficulty": "easy",
+  "sourceFile": "0177.json"
+}

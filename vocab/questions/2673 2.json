@@ -1,0 +1,15 @@
+{
+  "id": 2673,
+  "word": "Allegiance",
+  "question": "Allegiance",
+  "options": [
+    "The action of moving up",
+    "Relating to Aelian the Roman author",
+    "Loyalty to a person or country",
+    "A feeling of fear about something"
+  ],
+  "answerOption": "C",
+  "answerText": "Loyalty to a person or country",
+  "difficulty": "hard",
+  "sourceFile": "2673.json"
+}

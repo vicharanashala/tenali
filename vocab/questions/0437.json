@@ -1,0 +1,15 @@
+{
+  "id": 437,
+  "word": "Fill",
+  "question": "Fill",
+  "options": [
+    "Clearly and directly expressed",
+    "To get or acquire something",
+    "Existing in very large quantities",
+    "To make something full or complete"
+  ],
+  "answerOption": "D",
+  "answerText": "To make something full or complete",
+  "difficulty": "easy",
+  "sourceFile": "0437.json"
+}

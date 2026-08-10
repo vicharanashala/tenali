@@ -1,0 +1,15 @@
+{
+  "id": 2234,
+  "word": "Palimpsest",
+  "question": "Palimpsest",
+  "options": [
+    "Treatment with hot air",
+    "Something reused but still bearing traces of its earlier form",
+    "The process of adding air",
+    "Relating to the Aelp mountains"
+  ],
+  "answerOption": "B",
+  "answerText": "Something reused but still bearing traces of its earlier form",
+  "difficulty": "hard",
+  "sourceFile": "2234.json"
+}

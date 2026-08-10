@@ -1,0 +1,15 @@
+{
+  "id": 950,
+  "word": "Blunt",
+  "question": "Blunt",
+  "options": [
+    "Having mixed feelings about something",
+    "Uncompromisingly direct in speech",
+    "A man holding a small landed estate",
+    "Showing cruel disregard for others"
+  ],
+  "answerOption": "B",
+  "answerText": "Uncompromisingly direct in speech",
+  "difficulty": "medium",
+  "sourceFile": "0950.json"
+}

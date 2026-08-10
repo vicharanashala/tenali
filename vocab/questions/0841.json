@@ -1,0 +1,15 @@
+{
+  "id": 841,
+  "word": "Spiky",
+  "question": "Spiky",
+  "options": [
+    "Not discovered or known about",
+    "To formally put an end to a system",
+    "To give a brief statement of main points",
+    "Having sharp points protruding outward"
+  ],
+  "answerOption": "D",
+  "answerText": "Having sharp points protruding outward",
+  "difficulty": "easy",
+  "sourceFile": "0841.json"
+}

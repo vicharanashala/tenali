@@ -1,0 +1,15 @@
+{
+  "id": 325,
+  "word": "Inform",
+  "question": "Inform",
+  "options": [
+    "To collide violently with an obstacle",
+    "To give facts or information to someone",
+    "To attract and hold the attention of someone",
+    "Crowded or filled tightly"
+  ],
+  "answerOption": "B",
+  "answerText": "To give facts or information to someone",
+  "difficulty": "easy",
+  "sourceFile": "0325.json"
+}

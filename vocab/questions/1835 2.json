@@ -1,0 +1,15 @@
+{
+  "id": 1835,
+  "word": "Cogent",
+  "question": "Cogent",
+  "options": [
+    "The action of noticing something",
+    "Resembling a riddle or puzzle",
+    "Clear, logical, and convincing",
+    "Stubborn or unmanageable"
+  ],
+  "answerOption": "C",
+  "answerText": "Clear, logical, and convincing",
+  "difficulty": "hard",
+  "sourceFile": "1835.json"
+}

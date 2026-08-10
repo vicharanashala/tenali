@@ -1,0 +1,15 @@
+{
+  "id": 1027,
+  "word": "Lament",
+  "question": "Lament",
+  "options": [
+    "Showing smug satisfaction with oneself",
+    "Extreme anger",
+    "Dealing with things in a practical way",
+    "To express passionate grief about something"
+  ],
+  "answerOption": "D",
+  "answerText": "To express passionate grief about something",
+  "difficulty": "medium",
+  "sourceFile": "1027.json"
+}

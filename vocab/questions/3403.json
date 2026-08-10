@@ -1,0 +1,15 @@
+{
+  "id": 3403,
+  "word": "Abutter",
+  "question": "Abutter",
+  "options": [
+    "A city in Texas",
+    "One whose property abuts",
+    "With abyss heat source",
+    "Speaking of the abyss"
+  ],
+  "answerOption": "B",
+  "answerText": "One whose property abuts",
+  "difficulty": "extra-hard",
+  "sourceFile": "3403.json"
+}

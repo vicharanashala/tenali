@@ -1,0 +1,15 @@
+{
+  "id": 937,
+  "word": "Thrilling",
+  "question": "Thrilling",
+  "options": [
+    "Not decorated or elaborate; simple",
+    "The inner part of something",
+    "Causing excitement and fear",
+    "Having a sharp taste"
+  ],
+  "answerOption": "C",
+  "answerText": "Causing excitement and fear",
+  "difficulty": "easy",
+  "sourceFile": "0937.json"
+}

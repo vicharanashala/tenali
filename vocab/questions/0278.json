@@ -1,0 +1,15 @@
+{
+  "id": 278,
+  "word": "Answer",
+  "question": "Answer",
+  "options": [
+    "A response to a question",
+    "To put someone at risk or in danger",
+    "To give attention to sound or speech",
+    "To break the connection between things"
+  ],
+  "answerOption": "A",
+  "answerText": "A response to a question",
+  "difficulty": "easy",
+  "sourceFile": "0278.json"
+}

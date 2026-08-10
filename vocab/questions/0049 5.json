@@ -1,0 +1,15 @@
+{
+  "id": 49,
+  "word": "Empty",
+  "question": "Empty",
+  "options": [
+    "To form a pleased expression with the mouth",
+    "Having a great deal to do",
+    "Thick and full of foliage",
+    "Containing nothing; not filled"
+  ],
+  "answerOption": "D",
+  "answerText": "Containing nothing; not filled",
+  "difficulty": "easy",
+  "sourceFile": "0049.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 799,
+  "word": "Unjust",
+  "question": "Unjust",
+  "options": [
+    "To make someone feel happy or satisfied",
+    "Able to be seen",
+    "Not decorated or elaborate; simple",
+    "Not based on or acting on fairness"
+  ],
+  "answerOption": "D",
+  "answerText": "Not based on or acting on fairness",
+  "difficulty": "easy",
+  "sourceFile": "0799.json"
+}

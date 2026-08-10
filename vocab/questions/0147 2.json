@@ -1,0 +1,15 @@
+{
+  "id": 147,
+  "word": "Refuse",
+  "question": "Refuse",
+  "options": [
+    "To meet the expectations of someone",
+    "Remaining true to a person or belief",
+    "Not mixed with anything else",
+    "To say that you will not do something"
+  ],
+  "answerOption": "D",
+  "answerText": "To say that you will not do something",
+  "difficulty": "easy",
+  "sourceFile": "0147.json"
+}

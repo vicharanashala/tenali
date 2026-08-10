@@ -1,0 +1,15 @@
+{
+  "id": 2325,
+  "word": "Advertent",
+  "question": "Advertent",
+  "options": [
+    "Paying attention or noticing",
+    "Lasting for ages or eternities",
+    "Growing plants with air roots",
+    "Feeling regret and sorrow for wrongdoing"
+  ],
+  "answerOption": "A",
+  "answerText": "Paying attention or noticing",
+  "difficulty": "hard",
+  "sourceFile": "2325.json"
+}

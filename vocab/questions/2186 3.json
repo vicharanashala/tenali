@@ -1,0 +1,15 @@
+{
+  "id": 2186,
+  "word": "Advise",
+  "question": "Advise",
+  "options": [
+    "To absolve someone from blame",
+    "A jet-powered aircraft",
+    "To offer suggestions about action",
+    "A burden or impediment"
+  ],
+  "answerOption": "C",
+  "answerText": "To offer suggestions about action",
+  "difficulty": "hard",
+  "sourceFile": "2186.json"
+}

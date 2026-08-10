@@ -1,0 +1,15 @@
+{
+  "id": 750,
+  "word": "Fertile",
+  "question": "Fertile",
+  "options": [
+    "Trustworthy and reliable",
+    "To give permission for something",
+    "To receive property from someone who has died",
+    "Producing abundant vegetation or crops"
+  ],
+  "answerOption": "D",
+  "answerText": "Producing abundant vegetation or crops",
+  "difficulty": "easy",
+  "sourceFile": "0750.json"
+}

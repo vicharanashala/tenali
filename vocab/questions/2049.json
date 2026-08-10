@@ -1,0 +1,15 @@
+{
+  "id": 2049,
+  "word": "Furtive",
+  "question": "Furtive",
+  "options": [
+    "The action of revealing something",
+    "Attempting to avoid notice or attention",
+    "A woman who commits adultery",
+    "A chamber with compressed air"
+  ],
+  "answerOption": "B",
+  "answerText": "Attempting to avoid notice or attention",
+  "difficulty": "hard",
+  "sourceFile": "2049.json"
+}

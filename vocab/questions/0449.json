@@ -1,0 +1,15 @@
+{
+  "id": 449,
+  "word": "Paint",
+  "question": "Paint",
+  "options": [
+    "Weak and delicate in health",
+    "To be turned into ice or become very cold",
+    "To apply color to a surface with a brush",
+    "Arranged in a tidy way"
+  ],
+  "answerOption": "C",
+  "answerText": "To apply color to a surface with a brush",
+  "difficulty": "easy",
+  "sourceFile": "0449.json"
+}

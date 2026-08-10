@@ -1,0 +1,15 @@
+{
+  "id": 282,
+  "word": "Observe",
+  "question": "Observe",
+  "options": [
+    "Having the form of a circle",
+    "To create a plan for making something",
+    "To watch something carefully",
+    "To make a rough drawing of something"
+  ],
+  "answerOption": "C",
+  "answerText": "To watch something carefully",
+  "difficulty": "easy",
+  "sourceFile": "0282.json"
+}

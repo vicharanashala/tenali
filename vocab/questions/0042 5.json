@@ -1,0 +1,15 @@
+{
+  "id": 42,
+  "word": "Ugly",
+  "question": "Ugly",
+  "options": [
+    "To fasten with string or rope",
+    "To have something inside",
+    "To take the place of something",
+    "Unpleasant or repulsive in appearance"
+  ],
+  "answerOption": "D",
+  "answerText": "Unpleasant or repulsive in appearance",
+  "difficulty": "easy",
+  "sourceFile": "0042.json"
+}

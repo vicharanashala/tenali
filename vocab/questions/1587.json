@@ -1,0 +1,15 @@
+{
+  "id": 1587,
+  "word": "Deserve",
+  "question": "Deserve",
+  "options": [
+    "Present or found everywhere",
+    "Characterized by peculiar or unexpected traits",
+    "Failing to take proper care",
+    "To do something worthy of reward"
+  ],
+  "answerOption": "D",
+  "answerText": "To do something worthy of reward",
+  "difficulty": "medium",
+  "sourceFile": "1587.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1477,
+  "word": "Dependent",
+  "question": "Dependent",
+  "options": [
+    "Causing feelings of sadness",
+    "Morally corrupt or wicked",
+    "Relying on another for support",
+    "The state of being tedious"
+  ],
+  "answerOption": "C",
+  "answerText": "Relying on another for support",
+  "difficulty": "medium",
+  "sourceFile": "1477.json"
+}

@@ -1,0 +1,8 @@
+# Backend server — kept for Render deployment (Express serves React frontend)
+services:
+  - type: web
+    name: tenali
+    env: node
+    buildCommand: npm install && cd client && npm install && npm run build
+    startCommand: node server/index.js
+    healthCheckPath: /api/health

@@ -1,0 +1,15 @@
+{
+  "id": 2703,
+  "word": "Psephology",
+  "question": "Psephology",
+  "options": [
+    "A person learning the alphabet",
+    "Quality of abyss fear",
+    "Practicing abstinence",
+    "The statistical study of elections and voting"
+  ],
+  "answerOption": "D",
+  "answerText": "The statistical study of elections and voting",
+  "difficulty": "extra-hard",
+  "sourceFile": "2703.json"
+}

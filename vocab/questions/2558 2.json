@@ -1,0 +1,15 @@
+{
+  "id": 2558,
+  "word": "Abis",
+  "question": "Abis",
+  "options": [
+    "A whispering or rustling sound",
+    "A Roman numeral symbol",
+    "The origin of life from non-life",
+    "Quality of being miserable"
+  ],
+  "answerOption": "B",
+  "answerText": "A Roman numeral symbol",
+  "difficulty": "extra-hard",
+  "sourceFile": "2558.json"
+}

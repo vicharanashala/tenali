@@ -1,0 +1,15 @@
+{
+  "id": 990,
+  "word": "Oblivious",
+  "question": "Oblivious",
+  "options": [
+    "Sufficient to cause death",
+    "Not aware of surroundings or events",
+    "To come near or nearer to something",
+    "Relating to a continuous physical quantity"
+  ],
+  "answerOption": "B",
+  "answerText": "Not aware of surroundings or events",
+  "difficulty": "easy",
+  "sourceFile": "0990.json"
+}

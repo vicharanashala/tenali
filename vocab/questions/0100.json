@@ -1,0 +1,15 @@
+{
+  "id": 100,
+  "word": "Useful",
+  "question": "Useful",
+  "options": [
+    "Able to be used for a practical purpose",
+    "To believe in the reliability of someone",
+    "Sufficiently great or important",
+    "To make someone slightly angry or irritated"
+  ],
+  "answerOption": "A",
+  "answerText": "Able to be used for a practical purpose",
+  "difficulty": "easy",
+  "sourceFile": "0100.json"
+}

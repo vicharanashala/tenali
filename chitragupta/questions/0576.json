@@ -1,0 +1,14 @@
+{
+  "id": 576,
+  "question": "Who discovered the neutron?",
+  "options": [
+    "Chadwick",
+    "Thomson",
+    "Rutherford",
+    "Bohr"
+  ],
+  "answerOption": "A",
+  "answerText": "Chadwick",
+  "genre": "general-knowledge",
+  "sourceFile": "0576.json"
+}

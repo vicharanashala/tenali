@@ -1,0 +1,15 @@
+{
+  "id": 2656,
+  "word": "Scarcity",
+  "question": "Scarcity",
+  "options": [
+    "The state of being scarce",
+    "A form of carbon material",
+    "A very deep or seemingly bottomless chasm",
+    "Made worse by adding inferior matter"
+  ],
+  "answerOption": "A",
+  "answerText": "The state of being scarce",
+  "difficulty": "hard",
+  "sourceFile": "2656.json"
+}

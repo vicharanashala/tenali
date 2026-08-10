@@ -1,0 +1,15 @@
+{
+  "id": 1400,
+  "word": "Duende",
+  "question": "Duende",
+  "options": [
+    "Irregular and winding like a maze",
+    "The mysterious power of art to deeply move a person",
+    "Mystic or entrancing in nature",
+    "The smell of a good book"
+  ],
+  "answerOption": "B",
+  "answerText": "The mysterious power of art to deeply move a person",
+  "difficulty": "extra-hard",
+  "sourceFile": "1400.json"
+}

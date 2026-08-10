@@ -1,0 +1,15 @@
+{
+  "id": 474,
+  "word": "Communicate",
+  "question": "Communicate",
+  "options": [
+    "Clear and easy to understand",
+    "To shape into a curve",
+    "To share information with others",
+    "To become aware of something"
+  ],
+  "answerOption": "C",
+  "answerText": "To share information with others",
+  "difficulty": "easy",
+  "sourceFile": "0474.json"
+}

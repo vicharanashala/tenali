@@ -1,0 +1,15 @@
+{
+  "id": 215,
+  "word": "Fail",
+  "question": "Fail",
+  "options": [
+    "Having an exaggerated sense of importance",
+    "To freely offer to do something",
+    "To be unsuccessful in achieving a goal",
+    "Not occupied or in use"
+  ],
+  "answerOption": "C",
+  "answerText": "To be unsuccessful in achieving a goal",
+  "difficulty": "easy",
+  "sourceFile": "0215.json"
+}

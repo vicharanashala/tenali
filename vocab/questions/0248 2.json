@@ -1,0 +1,15 @@
+{
+  "id": 248,
+  "word": "Choose",
+  "question": "Choose",
+  "options": [
+    "To move something quickly back and forth",
+    "To fill someone with delight",
+    "To pick out something from alternatives",
+    "Dark or poorly lit; depressing"
+  ],
+  "answerOption": "C",
+  "answerText": "To pick out something from alternatives",
+  "difficulty": "easy",
+  "sourceFile": "0248.json"
+}

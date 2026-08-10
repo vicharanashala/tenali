@@ -1,0 +1,15 @@
+{
+  "id": 1480,
+  "word": "Depilatory",
+  "question": "Depilatory",
+  "options": [
+    "Cheerful and friendly in manner",
+    "Lacking interest or excitement; dull",
+    "Serving to remove hair from the body",
+    "Very weak or slight; insubstantial"
+  ],
+  "answerOption": "C",
+  "answerText": "Serving to remove hair from the body",
+  "difficulty": "medium",
+  "sourceFile": "1480.json"
+}

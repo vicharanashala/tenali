@@ -1,0 +1,15 @@
+{
+  "id": 414,
+  "word": "Value",
+  "question": "Value",
+  "options": [
+    "To consider something to be important",
+    "A sentence that asks for information",
+    "Feeling optimistic about a future event",
+    "Next to or adjoining something else"
+  ],
+  "answerOption": "A",
+  "answerText": "To consider something to be important",
+  "difficulty": "easy",
+  "sourceFile": "0414.json"
+}

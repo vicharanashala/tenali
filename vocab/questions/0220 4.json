@@ -1,0 +1,15 @@
+{
+  "id": 220,
+  "word": "Protect",
+  "question": "Protect",
+  "options": [
+    "Not easily bent or moved",
+    "Absolutely necessary or important",
+    "Relating to or resembling the moon",
+    "To keep safe from harm or injury"
+  ],
+  "answerOption": "D",
+  "answerText": "To keep safe from harm or injury",
+  "difficulty": "easy",
+  "sourceFile": "0220.json"
+}

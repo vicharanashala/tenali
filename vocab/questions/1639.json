@@ -1,0 +1,15 @@
+{
+  "id": 1639,
+  "word": "Dessert",
+  "question": "Dessert",
+  "options": [
+    "To deprive of possessions by force",
+    "A sweet course at the end of meal",
+    "Without being affected by",
+    "Fierce or violent in nature"
+  ],
+  "answerOption": "B",
+  "answerText": "A sweet course at the end of meal",
+  "difficulty": "medium",
+  "sourceFile": "1639.json"
+}

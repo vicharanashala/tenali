@@ -1,0 +1,15 @@
+{
+  "id": 722,
+  "word": "Exterior",
+  "question": "Exterior",
+  "options": [
+    "The outer surface of something",
+    "To call out in a very loud voice",
+    "To allow liquid to escape through a hole",
+    "Showing lack of courage or confidence"
+  ],
+  "answerOption": "A",
+  "answerText": "The outer surface of something",
+  "difficulty": "easy",
+  "sourceFile": "0722.json"
+}

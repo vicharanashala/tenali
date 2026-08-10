@@ -1,0 +1,14 @@
+{
+  "id": 84,
+  "question": "Which is the hardest natural substance?",
+  "options": [
+    "Iron",
+    "Diamond",
+    "Quartz",
+    "Graphite"
+  ],
+  "answerOption": "B",
+  "answerText": "Diamond",
+  "genre": "mixed",
+  "sourceFile": "0084.json"
+}

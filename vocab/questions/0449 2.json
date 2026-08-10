@@ -1,0 +1,15 @@
+{
+  "id": 449,
+  "word": "Paint",
+  "question": "Paint",
+  "options": [
+    "To watch something carefully",
+    "To apply color to a surface with a brush",
+    "To please someone greatly",
+    "Having or showing a lack of common sense"
+  ],
+  "answerOption": "B",
+  "answerText": "To apply color to a surface with a brush",
+  "difficulty": "easy",
+  "sourceFile": "0449.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 877,
+  "word": "Tardy",
+  "question": "Tardy",
+  "options": [
+    "Not likely to bring success",
+    "Lacking energy or enthusiasm",
+    "Late or delayed in occurring",
+    "Relating to or resembling the moon"
+  ],
+  "answerOption": "C",
+  "answerText": "Late or delayed in occurring",
+  "difficulty": "easy",
+  "sourceFile": "0877.json"
+}

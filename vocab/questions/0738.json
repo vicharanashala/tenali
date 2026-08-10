@@ -1,0 +1,15 @@
+{
+  "id": 738,
+  "word": "Elastic",
+  "question": "Elastic",
+  "options": [
+    "To try to reach an agreement by discussion",
+    "Not aware of surroundings or events",
+    "Occurring continuously over time",
+    "Able to resume its shape after stretching"
+  ],
+  "answerOption": "D",
+  "answerText": "Able to resume its shape after stretching",
+  "difficulty": "easy",
+  "sourceFile": "0738.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 244,
+  "word": "Agree",
+  "question": "Agree",
+  "options": [
+    "To have the same opinion as someone else",
+    "Having an exaggerated sense of importance",
+    "To break free from confinement",
+    "No longer living"
+  ],
+  "answerOption": "A",
+  "answerText": "To have the same opinion as someone else",
+  "difficulty": "easy",
+  "sourceFile": "0244.json"
+}

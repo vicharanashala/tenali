@@ -1,0 +1,15 @@
+{
+  "id": 3114,
+  "word": "Abyes",
+  "question": "Abyes",
+  "options": [
+    "Pays the penalty",
+    "Family of abyss creatures",
+    "Of the nature of abyss",
+    "One who weans"
+  ],
+  "answerOption": "A",
+  "answerText": "Pays the penalty",
+  "difficulty": "extra-hard",
+  "sourceFile": "3114.json"
+}

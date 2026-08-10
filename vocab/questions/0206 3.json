@@ -1,0 +1,15 @@
+{
+  "id": 206,
+  "word": "Appear",
+  "question": "Appear",
+  "options": [
+    "To tell a story or give an account",
+    "To state an intention to harm someone",
+    "To become visible or noticeable",
+    "Habitually or typically so"
+  ],
+  "answerOption": "C",
+  "answerText": "To become visible or noticeable",
+  "difficulty": "easy",
+  "sourceFile": "0206.json"
+}

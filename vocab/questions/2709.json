@@ -1,0 +1,15 @@
+{
+  "id": 2709,
+  "word": "Prophylaxis",
+  "question": "Prophylaxis",
+  "options": [
+    "A large heavy book",
+    "Treatment to prevent disease",
+    "Lasting for a very short time",
+    "Using high-flown or bombastic language"
+  ],
+  "answerOption": "B",
+  "answerText": "Treatment to prevent disease",
+  "difficulty": "hard",
+  "sourceFile": "2709.json"
+}

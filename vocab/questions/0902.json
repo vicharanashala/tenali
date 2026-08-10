@@ -1,0 +1,15 @@
+{
+  "id": 902,
+  "word": "Confined",
+  "question": "Confined",
+  "options": [
+    "Able to resume its shape after stretching",
+    "Restricted or limited to a space",
+    "Trustworthy and reliable",
+    "Lasting or existing forever"
+  ],
+  "answerOption": "B",
+  "answerText": "Restricted or limited to a space",
+  "difficulty": "easy",
+  "sourceFile": "0902.json"
+}

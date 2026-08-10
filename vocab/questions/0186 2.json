@@ -1,0 +1,15 @@
+{
+  "id": 186,
+  "word": "Grow",
+  "question": "Grow",
+  "options": [
+    "To dislike something very intensely",
+    "To increase in size or amount",
+    "To tell a story or give an account",
+    "Costing a lot of money"
+  ],
+  "answerOption": "B",
+  "answerText": "To increase in size or amount",
+  "difficulty": "easy",
+  "sourceFile": "0186.json"
+}

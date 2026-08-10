@@ -1,0 +1,15 @@
+{
+  "id": 1269,
+  "word": "Vex",
+  "question": "Vex",
+  "options": [
+    "Acting without forethought",
+    "To appoint as a deputy",
+    "To make someone feel annoyed or frustrated",
+    "Relying on another for support"
+  ],
+  "answerOption": "C",
+  "answerText": "To make someone feel annoyed or frustrated",
+  "difficulty": "medium",
+  "sourceFile": "1269.json"
+}

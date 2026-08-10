@@ -1,0 +1,15 @@
+{
+  "id": 509,
+  "word": "Recognize",
+  "question": "Recognize",
+  "options": [
+    "Trustworthy and reliable",
+    "Lasting or intended to last forever",
+    "Able to withstand wear and tear",
+    "To identify someone from previous encounters"
+  ],
+  "answerOption": "D",
+  "answerText": "To identify someone from previous encounters",
+  "difficulty": "easy",
+  "sourceFile": "0509.json"
+}

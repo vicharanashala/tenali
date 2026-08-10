@@ -1,0 +1,15 @@
+{
+  "id": 966,
+  "word": "Capricious",
+  "question": "Capricious",
+  "options": [
+    "Stripping leaves from a plant",
+    "The state of being calm and in control",
+    "Given to sudden changes of mood or behavior",
+    "Not working well or wastes effort"
+  ],
+  "answerOption": "C",
+  "answerText": "Given to sudden changes of mood or behavior",
+  "difficulty": "medium",
+  "sourceFile": "0966.json"
+}

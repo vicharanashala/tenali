@@ -1,0 +1,15 @@
+{
+  "id": 1496,
+  "word": "Deposit",
+  "question": "Deposit",
+  "options": [
+    "To place money in a bank account",
+    "To give someone pleasure or satisfaction",
+    "A state of low spirits",
+    "Deserving blame or censure"
+  ],
+  "answerOption": "A",
+  "answerText": "To place money in a bank account",
+  "difficulty": "medium",
+  "sourceFile": "1496.json"
+}

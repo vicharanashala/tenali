@@ -1,0 +1,15 @@
+{
+  "id": 1648,
+  "word": "Destroy",
+  "question": "Destroy",
+  "options": [
+    "Not producing intended effect",
+    "The action of reducing in rank",
+    "The action of criticizing unfairly",
+    "To cause something to cease to exist"
+  ],
+  "answerOption": "D",
+  "answerText": "To cause something to cease to exist",
+  "difficulty": "medium",
+  "sourceFile": "1648.json"
+}

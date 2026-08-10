@@ -1,0 +1,15 @@
+{
+  "id": 283,
+  "word": "Notice",
+  "question": "Notice",
+  "options": [
+    "To grow and develop well",
+    "To finish making or doing something",
+    "To become aware of something",
+    "To agree to give something requested"
+  ],
+  "answerOption": "C",
+  "answerText": "To become aware of something",
+  "difficulty": "easy",
+  "sourceFile": "0283.json"
+}

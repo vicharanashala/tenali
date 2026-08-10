@@ -1,0 +1,15 @@
+{
+  "id": 812,
+  "word": "Truthful",
+  "question": "Truthful",
+  "options": [
+    "Of high quality; thin or slender",
+    "Not under control of another",
+    "Telling or expressing the truth; honest",
+    "Coming at the end; last"
+  ],
+  "answerOption": "C",
+  "answerText": "Telling or expressing the truth; honest",
+  "difficulty": "easy",
+  "sourceFile": "0812.json"
+}

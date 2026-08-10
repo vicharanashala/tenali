@@ -1,0 +1,15 @@
+{
+  "id": 1123,
+  "word": "Vacillate",
+  "question": "Vacillate",
+  "options": [
+    "To alternate between different opinions",
+    "Clear, logical, and convincing",
+    "Grimly mocking or cynical",
+    "The act of placing things side by side"
+  ],
+  "answerOption": "A",
+  "answerText": "To alternate between different opinions",
+  "difficulty": "hard",
+  "sourceFile": "1123.json"
+}

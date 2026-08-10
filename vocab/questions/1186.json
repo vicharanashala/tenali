@@ -1,0 +1,15 @@
+{
+  "id": 1186,
+  "word": "Banal",
+  "question": "Banal",
+  "options": [
+    "So lacking in originality as to be obvious",
+    "A person or thing announcing what is to come",
+    "Requiring careful handling",
+    "Quick and light in movement"
+  ],
+  "answerOption": "A",
+  "answerText": "So lacking in originality as to be obvious",
+  "difficulty": "medium",
+  "sourceFile": "1186.json"
+}

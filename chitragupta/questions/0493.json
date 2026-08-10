@@ -1,0 +1,14 @@
+{
+  "id": 493,
+  "question": "Which Indian state has Ranchi as its capital?",
+  "options": [
+    "Bihar",
+    "Odisha",
+    "Jharkhand",
+    "Chhattisgarh"
+  ],
+  "answerOption": "C",
+  "answerText": "Jharkhand",
+  "genre": "geography",
+  "sourceFile": "0493.json"
+}

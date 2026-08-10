@@ -1,0 +1,15 @@
+{
+  "id": 2395,
+  "word": "Aenigmatic",
+  "question": "Aenigmatic",
+  "options": [
+    "Having a nightmarishly complex quality",
+    "Mental calmness in a difficult situation",
+    "Of the nature of a riddle",
+    "Science of air equilibrium"
+  ],
+  "answerOption": "C",
+  "answerText": "Of the nature of a riddle",
+  "difficulty": "hard",
+  "sourceFile": "2395.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 3015,
+  "word": "ABLACTOR",
+  "question": "ABLACTOR",
+  "options": [
+    "A feeling of guilt that follows wrongdoing",
+    "In a non-living manner",
+    "A sudden and striking realization",
+    "One who weans child"
+  ],
+  "answerOption": "D",
+  "answerText": "One who weans child",
+  "difficulty": "extra-hard",
+  "sourceFile": "3015.json"
+}

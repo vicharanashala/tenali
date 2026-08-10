@@ -1,0 +1,15 @@
+{
+  "id": 2414,
+  "word": "AEROPORTABLE",
+  "question": "AEROPORTABLE",
+  "options": [
+    "The quality of being imputable",
+    "Able to be transported by air",
+    "Of or belonging to a time before a great flood",
+    "The quality of lasting forever"
+  ],
+  "answerOption": "B",
+  "answerText": "Able to be transported by air",
+  "difficulty": "hard",
+  "sourceFile": "2414.json"
+}

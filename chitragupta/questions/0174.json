@@ -1,0 +1,14 @@
+{
+  "id": 174,
+  "question": "What is the study of earthquakes called?",
+  "options": [
+    "Seismology",
+    "Meteorology",
+    "Ecology",
+    "Hydrology"
+  ],
+  "answerOption": "A",
+  "answerText": "Seismology",
+  "genre": "mixed",
+  "sourceFile": "0174.json"
+}

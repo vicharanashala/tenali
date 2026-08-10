@@ -1,0 +1,15 @@
+{
+  "id": 508,
+  "word": "Identify",
+  "question": "Identify",
+  "options": [
+    "To give support and confidence to someone",
+    "Moving at a low speed",
+    "To recognize what someone or something is",
+    "To use something carelessly or to no purpose"
+  ],
+  "answerOption": "C",
+  "answerText": "To recognize what someone or something is",
+  "difficulty": "easy",
+  "sourceFile": "0508.json"
+}

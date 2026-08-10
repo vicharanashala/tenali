@@ -1,0 +1,15 @@
+{
+  "id": 2742,
+  "word": "Apparentness",
+  "question": "Apparentness",
+  "options": [
+    "The quality of being apparent",
+    "To make mysterious or obscure",
+    "Subject to sudden changes of mood",
+    "The action of improving something"
+  ],
+  "answerOption": "A",
+  "answerText": "The quality of being apparent",
+  "difficulty": "hard",
+  "sourceFile": "2742.json"
+}

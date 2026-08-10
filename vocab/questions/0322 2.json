@@ -1,0 +1,15 @@
+{
+  "id": 322,
+  "word": "Shock",
+  "question": "Shock",
+  "options": [
+    "To cause someone to feel greatly astonished",
+    "To throw in various random directions",
+    "Telling or expressing the truth; honest",
+    "Domesticated and not dangerous to people"
+  ],
+  "answerOption": "A",
+  "answerText": "To cause someone to feel greatly astonished",
+  "difficulty": "easy",
+  "sourceFile": "0322.json"
+}

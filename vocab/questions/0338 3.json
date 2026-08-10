@@ -1,0 +1,15 @@
+{
+  "id": 338,
+  "word": "Surrender",
+  "question": "Surrender",
+  "options": [
+    "Relating to or found in the sea",
+    "Of great extent from side to side",
+    "Clearly visible or understood",
+    "To stop fighting and give up"
+  ],
+  "answerOption": "D",
+  "answerText": "To stop fighting and give up",
+  "difficulty": "easy",
+  "sourceFile": "0338.json"
+}

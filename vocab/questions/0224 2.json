@@ -1,0 +1,15 @@
+{
+  "id": 224,
+  "word": "Support",
+  "question": "Support",
+  "options": [
+    "Known for sure; established beyond doubt",
+    "To give assistance or encouragement to",
+    "To explain something by using examples",
+    "To extend to full length"
+  ],
+  "answerOption": "B",
+  "answerText": "To give assistance or encouragement to",
+  "difficulty": "easy",
+  "sourceFile": "0224.json"
+}

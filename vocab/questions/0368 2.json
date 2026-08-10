@@ -1,0 +1,15 @@
+{
+  "id": 368,
+  "word": "Boil",
+  "question": "Boil",
+  "options": [
+    "To connect or link things together",
+    "To heat a liquid until it bubbles",
+    "To move downward from a higher point",
+    "To try to win against other people"
+  ],
+  "answerOption": "B",
+  "answerText": "To heat a liquid until it bubbles",
+  "difficulty": "easy",
+  "sourceFile": "0368.json"
+}

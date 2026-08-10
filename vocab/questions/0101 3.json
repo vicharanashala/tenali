@@ -1,0 +1,15 @@
+{
+  "id": 101,
+  "word": "Useless",
+  "question": "Useless",
+  "options": [
+    "Happening with great speed",
+    "To tell a story or give an account",
+    "Not fulfilling the intended purpose",
+    "Known for sure; established beyond doubt"
+  ],
+  "answerOption": "C",
+  "answerText": "Not fulfilling the intended purpose",
+  "difficulty": "easy",
+  "sourceFile": "0101.json"
+}

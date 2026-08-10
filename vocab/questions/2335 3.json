@@ -1,0 +1,15 @@
+{
+  "id": 2335,
+  "word": "Aerodynamic",
+  "question": "Aerodynamic",
+  "options": [
+    "Optimistic in a difficult situation",
+    "Relating to air flow around objects",
+    "In relation to atmosphere",
+    "A difficult or unfortunate situation"
+  ],
+  "answerOption": "B",
+  "answerText": "Relating to air flow around objects",
+  "difficulty": "hard",
+  "sourceFile": "2335.json"
+}

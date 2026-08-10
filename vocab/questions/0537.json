@@ -1,0 +1,15 @@
+{
+  "id": 537,
+  "word": "Cherish",
+  "question": "Cherish",
+  "options": [
+    "Having lived or existed for only a short time",
+    "Not decorated or elaborate; simple",
+    "To hold something dear; to love deeply",
+    "Not firmly fixed in place"
+  ],
+  "answerOption": "C",
+  "answerText": "To hold something dear; to love deeply",
+  "difficulty": "easy",
+  "sourceFile": "0537.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 582,
+  "word": "Ambitious",
+  "question": "Ambitious",
+  "options": [
+    "To have a commanding influence over something",
+    "Characterized by constant change and activity",
+    "Having a strong desire for success",
+    "To put things in a neat or attractive order"
+  ],
+  "answerOption": "C",
+  "answerText": "Having a strong desire for success",
+  "difficulty": "easy",
+  "sourceFile": "0582.json"
+}

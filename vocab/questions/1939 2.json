@@ -1,0 +1,15 @@
+{
+  "id": 1939,
+  "word": "Adustious",
+  "question": "Adustious",
+  "options": [
+    "Burned or scorched by heat",
+    "Skin distension from air",
+    "Tightness of chest from altitude",
+    "The point on which a lever rests"
+  ],
+  "answerOption": "A",
+  "answerText": "Burned or scorched by heat",
+  "difficulty": "hard",
+  "sourceFile": "1939.json"
+}

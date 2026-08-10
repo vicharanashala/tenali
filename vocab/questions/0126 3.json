@@ -1,0 +1,15 @@
+{
+  "id": 126,
+  "word": "Certain",
+  "question": "Certain",
+  "options": [
+    "Showing a great deal of variety",
+    "Known for sure; established beyond doubt",
+    "Quick to understand and learn things",
+    "Sending out light; shining brightly"
+  ],
+  "answerOption": "B",
+  "answerText": "Known for sure; established beyond doubt",
+  "difficulty": "easy",
+  "sourceFile": "0126.json"
+}

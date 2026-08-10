@@ -1,0 +1,15 @@
+{
+  "id": 872,
+  "word": "Sudden",
+  "question": "Sudden",
+  "options": [
+    "Feeling thankful for something received",
+    "Very small; much smaller than normal",
+    "Free from disturbance; calm",
+    "Happening quickly and unexpectedly"
+  ],
+  "answerOption": "D",
+  "answerText": "Happening quickly and unexpectedly",
+  "difficulty": "easy",
+  "sourceFile": "0872.json"
+}

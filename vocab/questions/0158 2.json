@@ -1,0 +1,15 @@
+{
+  "id": 158,
+  "word": "Arrive",
+  "question": "Arrive",
+  "options": [
+    "To give special importance to something",
+    "To cause someone to lose confidence",
+    "Not even or balanced in shape",
+    "To reach a destination"
+  ],
+  "answerOption": "D",
+  "answerText": "To reach a destination",
+  "difficulty": "easy",
+  "sourceFile": "0158.json"
+}

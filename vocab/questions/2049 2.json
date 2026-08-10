@@ -1,0 +1,15 @@
+{
+  "id": 2049,
+  "word": "Aenigmatist",
+  "question": "Aenigmatist",
+  "options": [
+    "Affected by nausea; bad-tempered",
+    "Extremely idealistic; unrealistic and impractical",
+    "The quality of being advised",
+    "One who uses riddles"
+  ],
+  "answerOption": "D",
+  "answerText": "One who uses riddles",
+  "difficulty": "hard",
+  "sourceFile": "2049.json"
+}

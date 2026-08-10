@@ -1,0 +1,15 @@
+{
+  "id": 151,
+  "word": "Destroy",
+  "question": "Destroy",
+  "options": [
+    "To put an end to the existence of something",
+    "Difficult to manage or iritable",
+    "In a state of complete confusion",
+    "To settle a dispute by making concessions"
+  ],
+  "answerOption": "A",
+  "answerText": "To put an end to the existence of something",
+  "difficulty": "easy",
+  "sourceFile": "0151.json"
+}

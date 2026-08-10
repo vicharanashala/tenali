@@ -1,0 +1,15 @@
+{
+  "id": 3043,
+  "word": "Abstinent",
+  "question": "Abstinent",
+  "options": [
+    "A contented state of being happy and prosperous",
+    "Practicing abstinence",
+    "Plural of abider",
+    "A chemical compound or substance"
+  ],
+  "answerOption": "B",
+  "answerText": "Practicing abstinence",
+  "difficulty": "extra-hard",
+  "sourceFile": "3043.json"
+}

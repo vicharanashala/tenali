@@ -1,0 +1,15 @@
+{
+  "id": 3173,
+  "word": "Lacuna",
+  "question": "Lacuna",
+  "options": [
+    "A ring of light produced by pressure on the eyeball",
+    "Device that ablates",
+    "Loss of function with age",
+    "An unfilled space or gap"
+  ],
+  "answerOption": "D",
+  "answerText": "An unfilled space or gap",
+  "difficulty": "extra-hard",
+  "sourceFile": "3173.json"
+}

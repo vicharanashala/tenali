@@ -1,0 +1,15 @@
+{
+  "id": 1061,
+  "word": "Nonchalant",
+  "question": "Nonchalant",
+  "options": [
+    "A skill or talent for doing something",
+    "Abundant in supply or quantity",
+    "Feeling calm and relaxed; not worried",
+    "Likely to cause resentment"
+  ],
+  "answerOption": "C",
+  "answerText": "Feeling calm and relaxed; not worried",
+  "difficulty": "medium",
+  "sourceFile": "1061.json"
+}

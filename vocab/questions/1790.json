@@ -1,0 +1,15 @@
+{
+  "id": 1790,
+  "word": "Remorseless",
+  "question": "Remorseless",
+  "options": [
+    "Having a hidden or obscure meaning",
+    "With great speed or force",
+    "Without regret or compassion",
+    "Causing great damage or ruin"
+  ],
+  "answerOption": "C",
+  "answerText": "Without regret or compassion",
+  "difficulty": "medium",
+  "sourceFile": "1790.json"
+}

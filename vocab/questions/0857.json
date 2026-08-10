@@ -1,0 +1,15 @@
+{
+  "id": 857,
+  "word": "Wonderful",
+  "question": "Wonderful",
+  "options": [
+    "Inspiring a feeling of admiration or amazement",
+    "Conforming to accepted standards of behavior",
+    "To look at something closely",
+    "Very impressive; magnificent"
+  ],
+  "answerOption": "A",
+  "answerText": "Inspiring a feeling of admiration or amazement",
+  "difficulty": "easy",
+  "sourceFile": "0857.json"
+}

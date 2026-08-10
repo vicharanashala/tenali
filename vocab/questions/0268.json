@@ -1,0 +1,15 @@
+{
+  "id": 268,
+  "word": "Harvest",
+  "question": "Harvest",
+  "options": [
+    "To regard with respect and warm approval",
+    "Moving with speed or done rapidly",
+    "To gather a crop from the fields",
+    "Bent or twisted out of shape"
+  ],
+  "answerOption": "C",
+  "answerText": "To gather a crop from the fields",
+  "difficulty": "easy",
+  "sourceFile": "0268.json"
+}

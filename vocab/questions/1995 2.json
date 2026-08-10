@@ -1,0 +1,15 @@
+{
+  "id": 1995,
+  "word": "Advocation",
+  "question": "Advocation",
+  "options": [
+    "The action of advocating",
+    "A person seeking unusual experiences",
+    "A word modifying a verb or adjective",
+    "Extremely idealistic; unrealistic and impractical"
+  ],
+  "answerOption": "A",
+  "answerText": "The action of advocating",
+  "difficulty": "hard",
+  "sourceFile": "1995.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 175,
+  "word": "Shout",
+  "question": "Shout",
+  "options": [
+    "To come or go back to a place",
+    "Having lived or existed for only a short time",
+    "To call out in a very loud voice",
+    "Devoted to a task or purpose"
+  ],
+  "answerOption": "C",
+  "answerText": "To call out in a very loud voice",
+  "difficulty": "easy",
+  "sourceFile": "0175.json"
+}

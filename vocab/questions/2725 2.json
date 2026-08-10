@@ -1,0 +1,15 @@
+{
+  "id": 2725,
+  "word": "Quiddity",
+  "question": "Quiddity",
+  "options": [
+    "A person who achieves great success when young",
+    "Plural of abiotrophy",
+    "Relating to abyss",
+    "The inherent nature or essence of something"
+  ],
+  "answerOption": "D",
+  "answerText": "The inherent nature or essence of something",
+  "difficulty": "extra-hard",
+  "sourceFile": "2725.json"
+}

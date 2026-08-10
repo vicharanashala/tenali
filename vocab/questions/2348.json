@@ -1,0 +1,15 @@
+{
+  "id": 2348,
+  "word": "Advocate",
+  "question": "Advocate",
+  "options": [
+    "To move forward or progress",
+    "At the point of death; in terminal decline",
+    "A fence made of pointed wooden stakes",
+    "To publicly support or recommend"
+  ],
+  "answerOption": "D",
+  "answerText": "To publicly support or recommend",
+  "difficulty": "hard",
+  "sourceFile": "2348.json"
+}

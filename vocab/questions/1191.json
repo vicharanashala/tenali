@@ -1,0 +1,15 @@
+{
+  "id": 1191,
+  "word": "Garner",
+  "question": "Garner",
+  "options": [
+    "To gather or collect something",
+    "Not firmly fixed or secure",
+    "To criticize unfairly or harshly",
+    "The state of being famous for bad acts"
+  ],
+  "answerOption": "A",
+  "answerText": "To gather or collect something",
+  "difficulty": "medium",
+  "sourceFile": "1191.json"
+}

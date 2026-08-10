@@ -1,0 +1,15 @@
+{
+  "id": 1055,
+  "word": "Rebuke",
+  "question": "Rebuke",
+  "options": [
+    "To sharpen or stimulate interest",
+    "Filled with lively energy and excitement",
+    "To express sharp disapproval of",
+    "Suave and courteous in manner"
+  ],
+  "answerOption": "C",
+  "answerText": "To express sharp disapproval of",
+  "difficulty": "medium",
+  "sourceFile": "1055.json"
+}

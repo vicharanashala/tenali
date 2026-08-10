@@ -1,0 +1,15 @@
+{
+  "id": 2203,
+  "word": "Iconoclasm",
+  "question": "Iconoclasm",
+  "options": [
+    "An earnest request or application",
+    "Saying the same thing twice in different words",
+    "Unable to be prevented or avoided",
+    "The rejection of established beliefs"
+  ],
+  "answerOption": "D",
+  "answerText": "The rejection of established beliefs",
+  "difficulty": "hard",
+  "sourceFile": "2203.json"
+}

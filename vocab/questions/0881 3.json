@@ -1,0 +1,15 @@
+{
+  "id": 881,
+  "word": "Nimble",
+  "question": "Nimble",
+  "options": [
+    "Moving with speed or done rapidly",
+    "Far away from other places or people",
+    "Quick and light in movement or action",
+    "Feeling deep pleasure from achievements"
+  ],
+  "answerOption": "C",
+  "answerText": "Quick and light in movement or action",
+  "difficulty": "easy",
+  "sourceFile": "0881.json"
+}

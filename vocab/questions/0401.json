@@ -1,0 +1,15 @@
+{
+  "id": 401,
+  "word": "Transform",
+  "question": "Transform",
+  "options": [
+    "Characterized by constant change and activity",
+    "To arrange into a structured whole",
+    "To recognize what someone or something is",
+    "To make a thorough change in form"
+  ],
+  "answerOption": "D",
+  "answerText": "To make a thorough change in form",
+  "difficulty": "easy",
+  "sourceFile": "0401.json"
+}

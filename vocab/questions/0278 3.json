@@ -1,0 +1,15 @@
+{
+  "id": 278,
+  "word": "Answer",
+  "question": "Answer",
+  "options": [
+    "To shed tears of sadness or pain",
+    "A response to a question",
+    "Lacking good sense or judgment",
+    "Not based on or acting on fairness"
+  ],
+  "answerOption": "B",
+  "answerText": "A response to a question",
+  "difficulty": "easy",
+  "sourceFile": "0278.json"
+}

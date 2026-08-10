@@ -1,0 +1,15 @@
+{
+  "id": 481,
+  "word": "Emphasize",
+  "question": "Emphasize",
+  "options": [
+    "To say sorry for doing something wrong",
+    "To give special importance to something",
+    "To watch something carefully",
+    "To place equipment in position for use"
+  ],
+  "answerOption": "B",
+  "answerText": "To give special importance to something",
+  "difficulty": "easy",
+  "sourceFile": "0481.json"
+}

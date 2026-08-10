@@ -1,0 +1,15 @@
+{
+  "id": 213,
+  "word": "Create",
+  "question": "Create",
+  "options": [
+    "To move forward on hands and knees",
+    "Lasting or intended to last forever",
+    "To bring something into existence",
+    "To express the meaning in another language"
+  ],
+  "answerOption": "C",
+  "answerText": "To bring something into existence",
+  "difficulty": "easy",
+  "sourceFile": "0213.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 154,
+  "word": "Remember",
+  "question": "Remember",
+  "options": [
+    "To cause someone to believe something",
+    "To have something come into the mind again",
+    "Shaped like a ball or globe",
+    "In a state of sleep; not awake"
+  ],
+  "answerOption": "B",
+  "answerText": "To have something come into the mind again",
+  "difficulty": "easy",
+  "sourceFile": "0154.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1066,
+  "word": "Spontaneous",
+  "question": "Spontaneous",
+  "options": [
+    "The action of spoiling the appearance",
+    "The number below the line in a fraction",
+    "Performed without planning or prompting",
+    "One who destroys or a warship"
+  ],
+  "answerOption": "C",
+  "answerText": "Performed without planning or prompting",
+  "difficulty": "medium",
+  "sourceFile": "1066.json"
+}

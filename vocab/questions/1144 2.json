@@ -1,0 +1,15 @@
+{
+  "id": 1144,
+  "word": "Sanguine",
+  "question": "Sanguine",
+  "options": [
+    "Wrongdoing by a public official",
+    "Optimistic in a difficult situation",
+    "A tendency to choose a particular thing",
+    "A turning point or pivotal event"
+  ],
+  "answerOption": "B",
+  "answerText": "Optimistic in a difficult situation",
+  "difficulty": "hard",
+  "sourceFile": "1144.json"
+}

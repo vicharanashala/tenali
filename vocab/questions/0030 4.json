@@ -1,0 +1,15 @@
+{
+  "id": 30,
+  "word": "Sweet",
+  "question": "Sweet",
+  "options": [
+    "To move from one region to another",
+    "To give an authoritative order",
+    "Having the pleasant taste of sugar",
+    "Full of life and energy"
+  ],
+  "answerOption": "C",
+  "answerText": "Having the pleasant taste of sugar",
+  "difficulty": "easy",
+  "sourceFile": "0030.json"
+}

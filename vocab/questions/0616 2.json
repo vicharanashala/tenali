@@ -1,0 +1,15 @@
+{
+  "id": 616,
+  "word": "Spirited",
+  "question": "Spirited",
+  "options": [
+    "Full of energy and enthusiasm",
+    "To take aggressive action against something",
+    "Expressing approval or agreement",
+    "Unfairly supporting one side over another"
+  ],
+  "answerOption": "A",
+  "answerText": "Full of energy and enthusiasm",
+  "difficulty": "easy",
+  "sourceFile": "0616.json"
+}

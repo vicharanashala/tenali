@@ -1,0 +1,15 @@
+{
+  "id": 2046,
+  "word": "Venal",
+  "question": "Venal",
+  "options": [
+    "The state of being calm",
+    "Showing susceptibility to bribery",
+    "Belief contrary to the accepted doctrine",
+    "To act in a very submissive way"
+  ],
+  "answerOption": "B",
+  "answerText": "Showing susceptibility to bribery",
+  "difficulty": "hard",
+  "sourceFile": "2046.json"
+}

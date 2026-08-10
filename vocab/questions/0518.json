@@ -1,0 +1,15 @@
+{
+  "id": 518,
+  "word": "Resolve",
+  "question": "Resolve",
+  "options": [
+    "Of great or more than average height",
+    "To settle or find a solution to a problem",
+    "Not according to truth or fact",
+    "Of considerable or unusual duration"
+  ],
+  "answerOption": "B",
+  "answerText": "To settle or find a solution to a problem",
+  "difficulty": "easy",
+  "sourceFile": "0518.json"
+}

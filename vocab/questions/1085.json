@@ -1,0 +1,15 @@
+{
+  "id": 1085,
+  "word": "Obscure",
+  "question": "Obscure",
+  "options": [
+    "Not discovered or known about; uncertain",
+    "A person who deposits money",
+    "An event marking a turning point",
+    "A state of uncertainty about what to do"
+  ],
+  "answerOption": "A",
+  "answerText": "Not discovered or known about; uncertain",
+  "difficulty": "medium",
+  "sourceFile": "1085.json"
+}

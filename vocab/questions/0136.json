@@ -1,0 +1,15 @@
+{
+  "id": 136,
+  "word": "Strange",
+  "question": "Strange",
+  "options": [
+    "Covered with fine soft hair or fibers",
+    "Occurring or found frequently",
+    "To establish a home in a new place",
+    "Unusual or surprising; hard to explain"
+  ],
+  "answerOption": "D",
+  "answerText": "Unusual or surprising; hard to explain",
+  "difficulty": "easy",
+  "sourceFile": "0136.json"
+}

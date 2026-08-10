@@ -1,0 +1,15 @@
+{
+  "id": 412,
+  "word": "Belong",
+  "question": "Belong",
+  "options": [
+    "To love and respect deeply",
+    "To achieve or realize something desired",
+    "Without limits or end",
+    "To be the property of someone"
+  ],
+  "answerOption": "D",
+  "answerText": "To be the property of someone",
+  "difficulty": "easy",
+  "sourceFile": "0412.json"
+}

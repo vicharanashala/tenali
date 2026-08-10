@@ -1,0 +1,15 @@
+{
+  "id": 2930,
+  "word": "Abigails",
+  "question": "Abigails",
+  "options": [
+    "A small songbird of the finch family",
+    "A deviation from normal pattern",
+    "Plural of abigail",
+    "Of abyss tides"
+  ],
+  "answerOption": "C",
+  "answerText": "Plural of abigail",
+  "difficulty": "extra-hard",
+  "sourceFile": "2930.json"
+}

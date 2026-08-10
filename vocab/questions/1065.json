@@ -1,0 +1,15 @@
+{
+  "id": 1065,
+  "word": "Reluctant",
+  "question": "Reluctant",
+  "options": [
+    "Unwilling and hesitant to do something",
+    "Of a very wicked character",
+    "Excessively self-centered",
+    "Changing frequently in loyalties or affections"
+  ],
+  "answerOption": "A",
+  "answerText": "Unwilling and hesitant to do something",
+  "difficulty": "medium",
+  "sourceFile": "1065.json"
+}

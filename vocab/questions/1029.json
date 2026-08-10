@@ -1,0 +1,15 @@
+{
+  "id": 1029,
+  "word": "Feasible",
+  "question": "Feasible",
+  "options": [
+    "In accordance with the highest standards",
+    "To make something clear; explain",
+    "Possible and practical to do easily",
+    "Relating to ordinary people"
+  ],
+  "answerOption": "C",
+  "answerText": "Possible and practical to do easily",
+  "difficulty": "medium",
+  "sourceFile": "1029.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1871,
+  "word": "Risky",
+  "question": "Risky",
+  "options": [
+    "Important or significant in effect",
+    "Unwilling to spend freely",
+    "Involving the possibility of loss",
+    "Physically or emotionally separate"
+  ],
+  "answerOption": "C",
+  "answerText": "Involving the possibility of loss",
+  "difficulty": "medium",
+  "sourceFile": "1871.json"
+}

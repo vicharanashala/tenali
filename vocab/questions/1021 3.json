@@ -1,0 +1,15 @@
+{
+  "id": 1021,
+  "word": "Jeopardize",
+  "question": "Jeopardize",
+  "options": [
+    "To release someone from military service",
+    "To put something in danger of loss or harm",
+    "Serving to describe or characterize",
+    "The final part of a narrative"
+  ],
+  "answerOption": "B",
+  "answerText": "To put something in danger of loss or harm",
+  "difficulty": "medium",
+  "sourceFile": "1021.json"
+}

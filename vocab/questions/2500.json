@@ -1,0 +1,15 @@
+{
+  "id": 2500,
+  "word": "Aeroembolism",
+  "question": "Aeroembolism",
+  "options": [
+    "Relating to glands near the kidneys",
+    "A short public announcement",
+    "A deep opening in the earth",
+    "Condition from air in blood"
+  ],
+  "answerOption": "D",
+  "answerText": "Condition from air in blood",
+  "difficulty": "hard",
+  "sourceFile": "2500.json"
+}

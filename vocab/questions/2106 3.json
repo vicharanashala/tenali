@@ -1,0 +1,15 @@
+{
+  "id": 2106,
+  "word": "Adorer",
+  "question": "Adorer",
+  "options": [
+    "A genus of weasel-like animals",
+    "One who adores something",
+    "One treating with air",
+    "An extensive fire destroying much"
+  ],
+  "answerOption": "B",
+  "answerText": "One who adores something",
+  "difficulty": "hard",
+  "sourceFile": "2106.json"
+}

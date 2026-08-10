@@ -1,0 +1,15 @@
+{
+  "id": 273,
+  "word": "Injure",
+  "question": "Injure",
+  "options": [
+    "To comply with a command or rule",
+    "Characterized by conflict or disorder",
+    "To do physical harm or damage to someone",
+    "Not giving enough attention to avoid harm"
+  ],
+  "answerOption": "C",
+  "answerText": "To do physical harm or damage to someone",
+  "difficulty": "easy",
+  "sourceFile": "0273.json"
+}

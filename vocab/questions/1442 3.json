@@ -1,0 +1,15 @@
+{
+  "id": 1442,
+  "word": "Depict",
+  "question": "Depict",
+  "options": [
+    "A place for storage of goods",
+    "The quality of being loyal",
+    "Enduring pain without showing feelings",
+    "To show or represent in a picture"
+  ],
+  "answerOption": "D",
+  "answerText": "To show or represent in a picture",
+  "difficulty": "medium",
+  "sourceFile": "1442.json"
+}

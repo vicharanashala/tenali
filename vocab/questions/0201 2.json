@@ -1,0 +1,15 @@
+{
+  "id": 201,
+  "word": "Attack",
+  "question": "Attack",
+  "options": [
+    "To have the same opinion as someone else",
+    "To begin to grow; to produce shoots",
+    "To take aggressive action against something",
+    "Unable to bend or be changed easily"
+  ],
+  "answerOption": "C",
+  "answerText": "To take aggressive action against something",
+  "difficulty": "easy",
+  "sourceFile": "0201.json"
+}

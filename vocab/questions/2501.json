@@ -1,0 +1,15 @@
+{
+  "id": 2501,
+  "word": "Aeroenteritis",
+  "question": "Aeroenteritis",
+  "options": [
+    "Bowel distension from gas",
+    "A thing added to make more attractive",
+    "A genus of water beetles",
+    "Exposure to air or atmosphere"
+  ],
+  "answerOption": "A",
+  "answerText": "Bowel distension from gas",
+  "difficulty": "hard",
+  "sourceFile": "2501.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 458,
+  "word": "Abandon",
+  "question": "Abandon",
+  "options": [
+    "To say a word in a particular way",
+    "Of very little importance",
+    "Able to resume its shape after stretching",
+    "To give up something completely"
+  ],
+  "answerOption": "D",
+  "answerText": "To give up something completely",
+  "difficulty": "easy",
+  "sourceFile": "0458.json"
+}

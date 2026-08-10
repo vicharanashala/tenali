@@ -1,0 +1,15 @@
+{
+  "id": 1113,
+  "word": "Tranquil",
+  "question": "Tranquil",
+  "options": [
+    "To cause something to cease to exist",
+    "Unable to be governed or controlled",
+    "The quality of being destructible",
+    "Free from disturbance; calm"
+  ],
+  "answerOption": "D",
+  "answerText": "Free from disturbance; calm",
+  "difficulty": "medium",
+  "sourceFile": "1113.json"
+}

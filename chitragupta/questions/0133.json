@@ -1,0 +1,14 @@
+{
+  "id": 133,
+  "question": "Which metal is used in electrical wiring because of its excellent conductivity?",
+  "options": [
+    "Lead",
+    "Tin",
+    "Copper",
+    "Nickel"
+  ],
+  "answerOption": "C",
+  "answerText": "Copper",
+  "genre": "mixed",
+  "sourceFile": "0133.json"
+}

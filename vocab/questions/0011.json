@@ -1,0 +1,15 @@
+{
+  "id": 11,
+  "word": "Short",
+  "question": "Short",
+  "options": [
+    "Having an even and regular surface",
+    "Going straight up and down",
+    "Measuring a small distance from end to end",
+    "Eager to know or learn something"
+  ],
+  "answerOption": "C",
+  "answerText": "Measuring a small distance from end to end",
+  "difficulty": "easy",
+  "sourceFile": "0011.json"
+}

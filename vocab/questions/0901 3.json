@@ -1,0 +1,15 @@
+{
+  "id": 901,
+  "word": "Roomy",
+  "question": "Roomy",
+  "options": [
+    "Large and comfortable with plenty of space",
+    "To move about freely without a destination",
+    "Having an edge able to cut or pierce",
+    "To fill someone with great surprise"
+  ],
+  "answerOption": "A",
+  "answerText": "Large and comfortable with plenty of space",
+  "difficulty": "easy",
+  "sourceFile": "0901.json"
+}

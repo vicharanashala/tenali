@@ -1,0 +1,15 @@
+{
+  "id": 987,
+  "word": "Indolent",
+  "question": "Indolent",
+  "options": [
+    "Wanting to avoid exertion or effort",
+    "To be in charge of running something",
+    "Extending in one direction without curves",
+    "To get or acquire something"
+  ],
+  "answerOption": "A",
+  "answerText": "Wanting to avoid exertion or effort",
+  "difficulty": "easy",
+  "sourceFile": "0987.json"
+}

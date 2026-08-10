@@ -1,0 +1,15 @@
+{
+  "id": 991,
+  "word": "Impulsive",
+  "question": "Impulsive",
+  "options": [
+    "Having a sharp edge or showing eagerness",
+    "Disturbed or insane in mind",
+    "Acting without forethought",
+    "Open to more than one interpretation"
+  ],
+  "answerOption": "C",
+  "answerText": "Acting without forethought",
+  "difficulty": "medium",
+  "sourceFile": "0991.json"
+}

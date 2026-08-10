@@ -1,0 +1,14 @@
+{
+  "id": 896,
+  "question": "Which country is associated with the city of Hanoi?",
+  "options": [
+    "Thailand",
+    "Vietnam",
+    "Laos",
+    "Cambodia"
+  ],
+  "answerOption": "B",
+  "answerText": "Vietnam",
+  "genre": "geography",
+  "sourceFile": "0896.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2750,
+  "word": "Hardness",
+  "question": "Hardness",
+  "options": [
+    "The quality of being attributable",
+    "The quality of being hard",
+    "A person who dislikes humankind",
+    "Making something pure or suitable"
+  ],
+  "answerOption": "B",
+  "answerText": "The quality of being hard",
+  "difficulty": "hard",
+  "sourceFile": "2750.json"
+}

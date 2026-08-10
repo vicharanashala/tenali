@@ -1,0 +1,15 @@
+{
+  "id": 1682,
+  "word": "Deteriorate",
+  "question": "Deteriorate",
+  "options": [
+    "Wary or suspicious",
+    "Showing ill will or resentment",
+    "To express severe disapproval of",
+    "To become gradually worse"
+  ],
+  "answerOption": "D",
+  "answerText": "To become gradually worse",
+  "difficulty": "medium",
+  "sourceFile": "1682.json"
+}

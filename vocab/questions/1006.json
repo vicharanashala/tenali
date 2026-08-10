@@ -1,0 +1,15 @@
+{
+  "id": 1006,
+  "word": "Gregarious",
+  "question": "Gregarious",
+  "options": [
+    "Deserving intense dislike",
+    "The action of releasing from military",
+    "Fond of the company of others; sociable",
+    "Wicked or cruel and barbaric"
+  ],
+  "answerOption": "C",
+  "answerText": "Fond of the company of others; sociable",
+  "difficulty": "medium",
+  "sourceFile": "1006.json"
+}

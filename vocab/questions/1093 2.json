@@ -1,0 +1,15 @@
+{
+  "id": 1093,
+  "word": "Ostentatious",
+  "question": "Ostentatious",
+  "options": [
+    "Kept secret or done in a hidden way",
+    "Standing out and clearly visible",
+    "Courage in pain or adversity",
+    "Designed to impress or attract notice"
+  ],
+  "answerOption": "D",
+  "answerText": "Designed to impress or attract notice",
+  "difficulty": "medium",
+  "sourceFile": "1093.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 191,
+  "word": "Melt",
+  "question": "Melt",
+  "options": [
+    "To observe and check progress over time",
+    "Causing extreme fear or suffering",
+    "To fasten or join one thing to another",
+    "To become liquid through heating"
+  ],
+  "answerOption": "D",
+  "answerText": "To become liquid through heating",
+  "difficulty": "easy",
+  "sourceFile": "0191.json"
+}

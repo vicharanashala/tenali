@@ -1,0 +1,15 @@
+{
+  "id": 1172,
+  "word": "Impeccable",
+  "question": "Impeccable",
+  "options": [
+    "Reduced in rank or quality",
+    "To remove odor from something",
+    "In accordance with the highest standards",
+    "To stop doing something"
+  ],
+  "answerOption": "C",
+  "answerText": "In accordance with the highest standards",
+  "difficulty": "medium",
+  "sourceFile": "1172.json"
+}

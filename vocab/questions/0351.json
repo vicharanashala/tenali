@@ -1,0 +1,15 @@
+{
+  "id": 351,
+  "word": "Prove",
+  "question": "Prove",
+  "options": [
+    "To show that something is true",
+    "Of a rough or irregular surface",
+    "Evil or morally wrong",
+    "Containing nothing; not filled"
+  ],
+  "answerOption": "A",
+  "answerText": "To show that something is true",
+  "difficulty": "easy",
+  "sourceFile": "0351.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1468,
+  "word": "Depart",
+  "question": "Depart",
+  "options": [
+    "In complete disorder",
+    "Appearing as true on the surface",
+    "A branching extension of a nerve cell",
+    "To go away from a place"
+  ],
+  "answerOption": "D",
+  "answerText": "To go away from a place",
+  "difficulty": "medium",
+  "sourceFile": "1468.json"
+}

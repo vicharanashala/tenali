@@ -1,0 +1,15 @@
+{
+  "id": 610,
+  "word": "Luminous",
+  "question": "Luminous",
+  "options": [
+    "Low in price; not expensive",
+    "Having exceptional natural ability",
+    "Having an even and regular surface",
+    "Giving off light; bright or shining"
+  ],
+  "answerOption": "D",
+  "answerText": "Giving off light; bright or shining",
+  "difficulty": "easy",
+  "sourceFile": "0610.json"
+}

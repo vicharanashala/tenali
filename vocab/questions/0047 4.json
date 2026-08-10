@@ -1,0 +1,15 @@
+{
+  "id": 47,
+  "word": "Rough",
+  "question": "Rough",
+  "options": [
+    "Uncomfortably small or crowded",
+    "To give up something valued for a greater cause",
+    "Having an uneven or irregular surface",
+    "Not far away in distance"
+  ],
+  "answerOption": "C",
+  "answerText": "Having an uneven or irregular surface",
+  "difficulty": "easy",
+  "sourceFile": "0047.json"
+}

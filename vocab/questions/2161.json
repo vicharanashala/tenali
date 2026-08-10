@@ -1,0 +1,15 @@
+{
+  "id": 2161,
+  "word": "Legerdemain",
+  "question": "Legerdemain",
+  "options": [
+    "Lack of the quality or quantity needed",
+    "A lover of flying or air",
+    "A camera for aerial photography",
+    "Skillful use of one's hands; trickery"
+  ],
+  "answerOption": "D",
+  "answerText": "Skillful use of one's hands; trickery",
+  "difficulty": "hard",
+  "sourceFile": "2161.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 428,
+  "word": "Detach",
+  "question": "Detach",
+  "options": [
+    "To try to win against other people",
+    "To put forward someone or something as good",
+    "To exert force to move something closer",
+    "To separate something from something else"
+  ],
+  "answerOption": "D",
+  "answerText": "To separate something from something else",
+  "difficulty": "easy",
+  "sourceFile": "0428.json"
+}

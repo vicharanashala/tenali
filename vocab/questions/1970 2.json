@@ -1,0 +1,15 @@
+{
+  "id": 1970,
+  "word": "Advert",
+  "question": "Advert",
+  "options": [
+    "The quality of being adustious",
+    "Relating to prehistoric stone tools",
+    "A short public announcement",
+    "In an Aeolian manner"
+  ],
+  "answerOption": "C",
+  "answerText": "A short public announcement",
+  "difficulty": "hard",
+  "sourceFile": "1970.json"
+}

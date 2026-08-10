@@ -1,0 +1,15 @@
+{
+  "id": 2238,
+  "word": "Calumny",
+  "question": "Calumny",
+  "options": [
+    "The making of false statements to damage reputation",
+    "Ornamental work of fine twisted wire",
+    "A solution for all difficulties or diseases",
+    "Loyalty to a person or country"
+  ],
+  "answerOption": "A",
+  "answerText": "The making of false statements to damage reputation",
+  "difficulty": "hard",
+  "sourceFile": "2238.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 292,
+  "word": "Continue",
+  "question": "Continue",
+  "options": [
+    "To keep doing something without stopping",
+    "To prove more powerful than opposing forces",
+    "To control something by means of rules",
+    "To take someone's property without permission"
+  ],
+  "answerOption": "A",
+  "answerText": "To keep doing something without stopping",
+  "difficulty": "easy",
+  "sourceFile": "0292.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 64,
+  "word": "Wise",
+  "question": "Wise",
+  "options": [
+    "Expecting the best possible outcome",
+    "Having experience, knowledge, and good judgment",
+    "Belonging to the very distant past",
+    "Having the ability to do something"
+  ],
+  "answerOption": "B",
+  "answerText": "Having experience, knowledge, and good judgment",
+  "difficulty": "easy",
+  "sourceFile": "0064.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 438,
+  "word": "Drain",
+  "question": "Drain",
+  "options": [
+    "To remove liquid from something",
+    "Relating to a continuous physical quantity",
+    "Lacking energy or enthusiasm",
+    "To move or act with great speed"
+  ],
+  "answerOption": "A",
+  "answerText": "To remove liquid from something",
+  "difficulty": "easy",
+  "sourceFile": "0438.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 682,
+  "word": "Fragile",
+  "question": "Fragile",
+  "options": [
+    "Easily broken or damaged",
+    "To make or become worse",
+    "Having lived or existed for only a short time",
+    "To call out in a very loud voice"
+  ],
+  "answerOption": "A",
+  "answerText": "Easily broken or damaged",
+  "difficulty": "easy",
+  "sourceFile": "0682.json"
+}

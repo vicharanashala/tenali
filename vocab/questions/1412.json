@@ -1,0 +1,15 @@
+{
+  "id": 1412,
+  "word": "Demolition",
+  "question": "Demolition",
+  "options": [
+    "To assign responsibility to another person",
+    "The action of becoming worse",
+    "Occurring at irregular intervals",
+    "The destruction of a building"
+  ],
+  "answerOption": "D",
+  "answerText": "The destruction of a building",
+  "difficulty": "medium",
+  "sourceFile": "1412.json"
+}

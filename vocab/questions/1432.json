@@ -1,0 +1,15 @@
+{
+  "id": 1432,
+  "word": "Denarius",
+  "question": "Denarius",
+  "options": [
+    "In agreement or harmony with something",
+    "A Roman silver coin",
+    "Sharing a common border or touching",
+    "Totally confused or puzzled"
+  ],
+  "answerOption": "B",
+  "answerText": "A Roman silver coin",
+  "difficulty": "medium",
+  "sourceFile": "1432.json"
+}

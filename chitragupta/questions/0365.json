@@ -1,0 +1,14 @@
+{
+  "id": 365,
+  "question": "Who is known as the father of modern chemistry?",
+  "options": [
+    "Antoine Lavoisier",
+    "Dmitri Mendeleev",
+    "Robert Boyle",
+    "Dalton"
+  ],
+  "answerOption": "A",
+  "answerText": "Antoine Lavoisier",
+  "genre": "general-knowledge",
+  "sourceFile": "0365.json"
+}

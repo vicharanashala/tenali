@@ -1,0 +1,15 @@
+{
+  "id": 544,
+  "word": "Persist",
+  "question": "Persist",
+  "options": [
+    "Able to be trusted to do what is needed",
+    "To take aggressive action against something",
+    "Giving off light; bright or shining",
+    "To continue in spite of difficulty"
+  ],
+  "answerOption": "D",
+  "answerText": "To continue in spite of difficulty",
+  "difficulty": "easy",
+  "sourceFile": "0544.json"
+}

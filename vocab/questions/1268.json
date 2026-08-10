@@ -1,0 +1,15 @@
+{
+  "id": 1268,
+  "word": "Unorthodox",
+  "question": "Unorthodox",
+  "options": [
+    "The action of removing from office",
+    "To plan and draw something",
+    "Contrary to what is usual or accepted",
+    "Using more words than are needed"
+  ],
+  "answerOption": "C",
+  "answerText": "Contrary to what is usual or accepted",
+  "difficulty": "medium",
+  "sourceFile": "1268.json"
+}

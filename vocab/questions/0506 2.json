@@ -1,0 +1,15 @@
+{
+  "id": 506,
+  "word": "Occupy",
+  "question": "Occupy",
+  "options": [
+    "To fill or take up a space or time",
+    "Lacking good sense or judgment",
+    "Having or showing a willingness to act dishonestly",
+    "To cook food by prolonged exposure to heat"
+  ],
+  "answerOption": "A",
+  "answerText": "To fill or take up a space or time",
+  "difficulty": "easy",
+  "sourceFile": "0506.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1581,
+  "word": "Deselect",
+  "question": "Deselect",
+  "options": [
+    "Forced or driven to do something",
+    "To remove from selected status",
+    "Causing loss of sense or direction",
+    "To stop doing something"
+  ],
+  "answerOption": "B",
+  "answerText": "To remove from selected status",
+  "difficulty": "medium",
+  "sourceFile": "1581.json"
+}

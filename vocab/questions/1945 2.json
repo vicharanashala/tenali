@@ -1,0 +1,15 @@
+{
+  "id": 1945,
+  "word": "Advantage",
+  "question": "Advantage",
+  "options": [
+    "Of an airy or ethereal quality",
+    "A prefix relating to air",
+    "A condition giving superiority",
+    "Growing plants with air roots"
+  ],
+  "answerOption": "C",
+  "answerText": "A condition giving superiority",
+  "difficulty": "hard",
+  "sourceFile": "1945.json"
+}

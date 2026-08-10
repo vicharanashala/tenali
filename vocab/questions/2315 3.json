@@ -1,0 +1,15 @@
+{
+  "id": 2315,
+  "word": "Aerobiological",
+  "question": "Aerobiological",
+  "options": [
+    "Relating to air description",
+    "Continually changing in pattern",
+    "Relating to airborne organisms",
+    "The gathering of a substance"
+  ],
+  "answerOption": "C",
+  "answerText": "Relating to airborne organisms",
+  "difficulty": "hard",
+  "sourceFile": "2315.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1777,
+  "word": "Notoriety",
+  "question": "Notoriety",
+  "options": [
+    "Briefly and clearly expressed",
+    "The state of being famous for bad acts",
+    "Playfully quaint or fanciful",
+    "Not firmly fixed or secure"
+  ],
+  "answerOption": "B",
+  "answerText": "The state of being famous for bad acts",
+  "difficulty": "medium",
+  "sourceFile": "1777.json"
+}

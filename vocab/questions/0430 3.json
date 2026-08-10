@@ -1,0 +1,15 @@
+{
+  "id": 430,
+  "word": "Unfold",
+  "question": "Unfold",
+  "options": [
+    "To open something that was folded",
+    "To move downward from a higher point",
+    "To politely ask for something",
+    "To establish the truth of something"
+  ],
+  "answerOption": "A",
+  "answerText": "To open something that was folded",
+  "difficulty": "easy",
+  "sourceFile": "0430.json"
+}

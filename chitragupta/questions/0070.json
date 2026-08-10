@@ -1,0 +1,14 @@
+{
+  "id": 70,
+  "question": "Which country is known as the Land of the Rising Sun?",
+  "options": [
+    "China",
+    "Japan",
+    "Thailand",
+    "South Korea"
+  ],
+  "answerOption": "B",
+  "answerText": "Japan",
+  "genre": "geography",
+  "sourceFile": "0070.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1093,
+  "word": "Zeal",
+  "question": "Zeal",
+  "options": [
+    "Appearing as true on the surface",
+    "A system of ranking one above another",
+    "A sharing of characteristics or origins",
+    "Great energy or enthusiasm for a cause"
+  ],
+  "answerOption": "D",
+  "answerText": "Great energy or enthusiasm for a cause",
+  "difficulty": "medium",
+  "sourceFile": "1093.json"
+}

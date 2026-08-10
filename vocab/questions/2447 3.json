@@ -1,0 +1,15 @@
+{
+  "id": 2447,
+  "word": "AEROSTATICKS",
+  "question": "AEROSTATICKS",
+  "options": [
+    "The quality of being determinable",
+    "Science of air equilibrium",
+    "Pain from atmospheric pressure",
+    "A balloon or airship"
+  ],
+  "answerOption": "B",
+  "answerText": "Science of air equilibrium",
+  "difficulty": "hard",
+  "sourceFile": "2447.json"
+}

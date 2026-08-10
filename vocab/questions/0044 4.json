@@ -1,0 +1,15 @@
+{
+  "id": 44,
+  "word": "Wild",
+  "question": "Wild",
+  "options": [
+    "To say what will happen in the future",
+    "Not discovered or known about",
+    "Living in a natural state; not tamed",
+    "Relating to the region near the equator"
+  ],
+  "answerOption": "C",
+  "answerText": "Living in a natural state; not tamed",
+  "difficulty": "easy",
+  "sourceFile": "0044.json"
+}

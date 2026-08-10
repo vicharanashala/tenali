@@ -1,0 +1,15 @@
+{
+  "id": 215,
+  "word": "Fail",
+  "question": "Fail",
+  "options": [
+    "Having lived for a long time; no longer young",
+    "To examine something with the possibility of change",
+    "To be unsuccessful in achieving a goal",
+    "Required to explain actions or decisions"
+  ],
+  "answerOption": "C",
+  "answerText": "To be unsuccessful in achieving a goal",
+  "difficulty": "easy",
+  "sourceFile": "0215.json"
+}

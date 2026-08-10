@@ -1,0 +1,15 @@
+{
+  "id": 57,
+  "word": "True",
+  "question": "True",
+  "options": [
+    "Unusual or surprising; hard to explain",
+    "In accordance with fact or reality",
+    "Having great power or strength",
+    "Extremely large or huge"
+  ],
+  "answerOption": "B",
+  "answerText": "In accordance with fact or reality",
+  "difficulty": "easy",
+  "sourceFile": "0057.json"
+}

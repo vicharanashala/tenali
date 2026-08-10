@@ -1,0 +1,15 @@
+{
+  "id": 350,
+  "word": "Guess",
+  "question": "Guess",
+  "options": [
+    "To stop working or moving to relax",
+    "Working by itself with little human control",
+    "To estimate something without full information",
+    "Causing feelings of fear or alarm"
+  ],
+  "answerOption": "C",
+  "answerText": "To estimate something without full information",
+  "difficulty": "easy",
+  "sourceFile": "0350.json"
+}

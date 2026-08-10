@@ -1,0 +1,15 @@
+{
+  "id": 1978,
+  "word": "Advertising",
+  "question": "Advertising",
+  "options": [
+    "Relating to hot air",
+    "To publicly support or recommend",
+    "A difficult or unfortunate situation",
+    "The activity of promoting products"
+  ],
+  "answerOption": "D",
+  "answerText": "The activity of promoting products",
+  "difficulty": "hard",
+  "sourceFile": "1978.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 874,
+  "question": "Which country is associated with the city of Tashkent?",
+  "options": [
+    "Kazakhstan",
+    "Uzbekistan",
+    "Turkmenistan",
+    "Kyrgyzstan"
+  ],
+  "answerOption": "B",
+  "answerText": "Uzbekistan",
+  "genre": "geography",
+  "sourceFile": "0874.json"
+}

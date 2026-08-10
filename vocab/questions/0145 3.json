@@ -1,0 +1,15 @@
+{
+  "id": 145,
+  "word": "Graceful",
+  "question": "Graceful",
+  "options": [
+    "To examine and record the features of something",
+    "Having elegance of movement",
+    "Having strong winds and usually rain",
+    "To determine the total number of items"
+  ],
+  "answerOption": "B",
+  "answerText": "Having elegance of movement",
+  "difficulty": "easy",
+  "sourceFile": "0145.json"
+}

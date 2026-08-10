@@ -1,0 +1,14 @@
+{
+  "id": 948,
+  "question": "What is the SI unit of resistance?",
+  "options": [
+    "ohm",
+    "volt",
+    "ampere",
+    "farad"
+  ],
+  "answerOption": "A",
+  "answerText": "ohm",
+  "genre": "mixed",
+  "sourceFile": "0948.json"
+}

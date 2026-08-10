@@ -1,0 +1,15 @@
+{
+  "id": 48,
+  "word": "Smooth",
+  "question": "Smooth",
+  "options": [
+    "To successfully reach a desired goal",
+    "To combine different things together",
+    "Having an even and regular surface",
+    "To work together on an activity"
+  ],
+  "answerOption": "C",
+  "answerText": "Having an even and regular surface",
+  "difficulty": "easy",
+  "sourceFile": "0048.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 493,
+  "word": "Experiment",
+  "question": "Experiment",
+  "options": [
+    "Bringing or worthy of honor",
+    "Using more words than needed",
+    "To make something clear and easy to understand",
+    "To test something to discover new facts"
+  ],
+  "answerOption": "D",
+  "answerText": "To test something to discover new facts",
+  "difficulty": "easy",
+  "sourceFile": "0493.json"
+}

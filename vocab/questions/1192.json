@@ -1,0 +1,15 @@
+{
+  "id": 1192,
+  "word": "Hindsight",
+  "question": "Hindsight",
+  "options": [
+    "To maintain or support a principle",
+    "Understanding of a situation after it occurs",
+    "The main point or essence of a matter",
+    "The removal of toxins"
+  ],
+  "answerOption": "B",
+  "answerText": "Understanding of a situation after it occurs",
+  "difficulty": "medium",
+  "sourceFile": "1192.json"
+}

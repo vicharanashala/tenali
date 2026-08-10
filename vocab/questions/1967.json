@@ -1,0 +1,15 @@
+{
+  "id": 1967,
+  "word": "Banned",
+  "question": "Banned",
+  "options": [
+    "Showing a lack of experience or wisdom",
+    "Officially prohibited",
+    "Uncompromisingly direct in speech",
+    "Not even or regular in pattern"
+  ],
+  "answerOption": "B",
+  "answerText": "Officially prohibited",
+  "difficulty": "medium",
+  "sourceFile": "1967.json"
+}

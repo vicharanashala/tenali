@@ -1,0 +1,15 @@
+{
+  "id": 1160,
+  "word": "Trepidation",
+  "question": "Trepidation",
+  "options": [
+    "A feeling of fear about something",
+    "A factor that determines something",
+    "Liable to change rapidly and unpredictably",
+    "Done in return for harm"
+  ],
+  "answerOption": "A",
+  "answerText": "A feeling of fear about something",
+  "difficulty": "medium",
+  "sourceFile": "1160.json"
+}

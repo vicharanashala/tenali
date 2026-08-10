@@ -1,0 +1,15 @@
+{
+  "id": 339,
+  "word": "Defend",
+  "question": "Defend",
+  "options": [
+    "To protect from attack or danger",
+    "Showing strong feelings or beliefs",
+    "Covered with fine soft hair or fibers",
+    "To set free from confinement"
+  ],
+  "answerOption": "A",
+  "answerText": "To protect from attack or danger",
+  "difficulty": "easy",
+  "sourceFile": "0339.json"
+}

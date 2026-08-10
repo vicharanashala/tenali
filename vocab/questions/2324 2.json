@@ -1,0 +1,15 @@
+{
+  "id": 2324,
+  "word": "Petrichor",
+  "question": "Petrichor",
+  "options": [
+    "Showing luminous colors that change with angle",
+    "Non-living factors in environment",
+    "The act of renouncing",
+    "The pleasant smell of earth after rain"
+  ],
+  "answerOption": "D",
+  "answerText": "The pleasant smell of earth after rain",
+  "difficulty": "extra-hard",
+  "sourceFile": "2324.json"
+}

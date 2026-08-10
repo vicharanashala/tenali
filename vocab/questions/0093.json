@@ -1,0 +1,15 @@
+{
+  "id": 93,
+  "word": "Tight",
+  "question": "Tight",
+  "options": [
+    "Able to withstand wear and tear",
+    "To agree to give something requested",
+    "To try to win against other people",
+    "Fixed or fastened firmly; not easily moved"
+  ],
+  "answerOption": "D",
+  "answerText": "Fixed or fastened firmly; not easily moved",
+  "difficulty": "easy",
+  "sourceFile": "0093.json"
+}

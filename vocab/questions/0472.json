@@ -1,0 +1,15 @@
+{
+  "id": 472,
+  "word": "Translate",
+  "question": "Translate",
+  "options": [
+    "To say a word in a particular way",
+    "Of very little importance",
+    "Able to resume its shape after stretching",
+    "To express the meaning in another language"
+  ],
+  "answerOption": "D",
+  "answerText": "To express the meaning in another language",
+  "difficulty": "easy",
+  "sourceFile": "0472.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2333,
+  "word": "Adviceless",
+  "question": "Adviceless",
+  "options": [
+    "Lacking advice or counsel",
+    "A very steep or overhanging cliff",
+    "A family of sea slugs",
+    "The minimum number needed for a meeting"
+  ],
+  "answerOption": "A",
+  "answerText": "Lacking advice or counsel",
+  "difficulty": "hard",
+  "sourceFile": "2333.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 456,
+  "word": "Maintain",
+  "question": "Maintain",
+  "options": [
+    "Happening by chance; unintentional",
+    "Directing attention or effort at something",
+    "To cause liquid to scatter in drops",
+    "To keep something in good condition"
+  ],
+  "answerOption": "D",
+  "answerText": "To keep something in good condition",
+  "difficulty": "easy",
+  "sourceFile": "0456.json"
+}

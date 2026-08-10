@@ -1,0 +1,15 @@
+{
+  "id": 525,
+  "word": "Restrict",
+  "question": "Restrict",
+  "options": [
+    "To offer suggestions about the best action",
+    "To be required to pay money to someone",
+    "A series of images during sleep",
+    "To put a limit on something"
+  ],
+  "answerOption": "D",
+  "answerText": "To put a limit on something",
+  "difficulty": "easy",
+  "sourceFile": "0525.json"
+}

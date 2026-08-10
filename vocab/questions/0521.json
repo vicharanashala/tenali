@@ -1,0 +1,15 @@
+{
+  "id": 521,
+  "word": "Direct",
+  "question": "Direct",
+  "options": [
+    "Resembling without being identical",
+    "Tall and thin in appearance",
+    "Arranged neatly and in order",
+    "To manage or guide the operations of something"
+  ],
+  "answerOption": "D",
+  "answerText": "To manage or guide the operations of something",
+  "difficulty": "easy",
+  "sourceFile": "0521.json"
+}

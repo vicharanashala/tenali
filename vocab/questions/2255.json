@@ -1,0 +1,15 @@
+{
+  "id": 2255,
+  "word": "Adorable",
+  "question": "Adorable",
+  "options": [
+    "Not having enough of something",
+    "Extremely charming or appealing",
+    "A formal written work on a subject",
+    "Producing or generating gas"
+  ],
+  "answerOption": "B",
+  "answerText": "Extremely charming or appealing",
+  "difficulty": "hard",
+  "sourceFile": "2255.json"
+}

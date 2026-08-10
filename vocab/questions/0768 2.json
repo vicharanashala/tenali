@@ -1,0 +1,15 @@
+{
+  "id": 768,
+  "word": "Intentional",
+  "question": "Intentional",
+  "options": [
+    "Feeling regret or sadness",
+    "Very small; much smaller than normal",
+    "Done on purpose; deliberate",
+    "Unpleasantly rough or sharp"
+  ],
+  "answerOption": "C",
+  "answerText": "Done on purpose; deliberate",
+  "difficulty": "easy",
+  "sourceFile": "0768.json"
+}

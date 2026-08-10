@@ -1,0 +1,15 @@
+{
+  "id": 9,
+  "word": "Small",
+  "question": "Small",
+  "options": [
+    "Of a size that is less than normal",
+    "Careful to avoid attracting attention",
+    "To gradually grow faint and disappear",
+    "Smelling extremely unpleasant"
+  ],
+  "answerOption": "A",
+  "answerText": "Of a size that is less than normal",
+  "difficulty": "easy",
+  "sourceFile": "0009.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1525,
+  "word": "Depurant",
+  "question": "Depurant",
+  "options": [
+    "A substance that purifies the blood",
+    "Relating to or based on determinism",
+    "To testify under oath or penalty",
+    "Having mixed feelings about something"
+  ],
+  "answerOption": "A",
+  "answerText": "A substance that purifies the blood",
+  "difficulty": "medium",
+  "sourceFile": "1525.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2711,
+  "word": "Pharmacology",
+  "question": "Pharmacology",
+  "options": [
+    "The position of an advocate",
+    "The state of being scarce",
+    "The study of medicines and their effects",
+    "Showy and tasteless; extravagantly bright"
+  ],
+  "answerOption": "C",
+  "answerText": "The study of medicines and their effects",
+  "difficulty": "hard",
+  "sourceFile": "2711.json"
+}

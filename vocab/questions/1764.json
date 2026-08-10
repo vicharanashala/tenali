@@ -1,0 +1,15 @@
+{
+  "id": 1764,
+  "word": "Rancor",
+  "question": "Rancor",
+  "options": [
+    "Deep-seated and bitter anger",
+    "Made or occurring without plan",
+    "Wary or suspicious",
+    "A muscle that depresses something"
+  ],
+  "answerOption": "A",
+  "answerText": "Deep-seated and bitter anger",
+  "difficulty": "medium",
+  "sourceFile": "1764.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 114,
+  "word": "Humble",
+  "question": "Humble",
+  "options": [
+    "Important, serious, or significant",
+    "Lacking physical strength",
+    "Easy to perceive and understand",
+    "Having a modest opinion of one's importance"
+  ],
+  "answerOption": "D",
+  "answerText": "Having a modest opinion of one's importance",
+  "difficulty": "easy",
+  "sourceFile": "0114.json"
+}

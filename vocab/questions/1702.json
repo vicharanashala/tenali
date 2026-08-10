@@ -1,0 +1,15 @@
+{
+  "id": 1702,
+  "word": "Detest",
+  "question": "Detest",
+  "options": [
+    "Prevented or forbidden from",
+    "Tending to expect bad outcomes",
+    "To dislike intensely",
+    "In a disturbed mental state from fever"
+  ],
+  "answerOption": "C",
+  "answerText": "To dislike intensely",
+  "difficulty": "medium",
+  "sourceFile": "1702.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 112,
+  "question": "Which instrument measures atmospheric pressure?",
+  "options": [
+    "Thermometer",
+    "Barometer",
+    "Seismograph",
+    "Odometer"
+  ],
+  "answerOption": "B",
+  "answerText": "Barometer",
+  "genre": "mixed",
+  "sourceFile": "0112.json"
+}

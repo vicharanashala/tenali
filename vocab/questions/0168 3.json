@@ -1,0 +1,15 @@
+{
+  "id": 168,
+  "word": "Push",
+  "question": "Push",
+  "options": [
+    "To come or go back to a place",
+    "Having lived or existed for only a short time",
+    "To exert force to move something away",
+    "Devoted to a task or purpose"
+  ],
+  "answerOption": "C",
+  "answerText": "To exert force to move something away",
+  "difficulty": "easy",
+  "sourceFile": "0168.json"
+}

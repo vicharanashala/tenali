@@ -1,0 +1,15 @@
+{
+  "id": 1360,
+  "word": "Degrade",
+  "question": "Degrade",
+  "options": [
+    "The action of distorting the shape",
+    "A subtle difference in meaning",
+    "To reduce in rank or lower in status",
+    "Love, loyalty, or enthusiasm"
+  ],
+  "answerOption": "C",
+  "answerText": "To reduce in rank or lower in status",
+  "difficulty": "medium",
+  "sourceFile": "1360.json"
+}

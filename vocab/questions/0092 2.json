@@ -1,0 +1,15 @@
+{
+  "id": 92,
+  "word": "Loose",
+  "question": "Loose",
+  "options": [
+    "Not firmly fixed in place",
+    "To believe in the reliability of someone",
+    "Sufficiently great or important",
+    "To make someone slightly angry or irritated"
+  ],
+  "answerOption": "A",
+  "answerText": "Not firmly fixed in place",
+  "difficulty": "easy",
+  "sourceFile": "0092.json"
+}

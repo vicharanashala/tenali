@@ -1,0 +1,15 @@
+{
+  "id": 1469,
+  "word": "Departed",
+  "question": "Departed",
+  "options": [
+    "Public shame or disgrace",
+    "Not qualified to do something",
+    "Dangerously steep or sudden",
+    "Dead or no longer with someone"
+  ],
+  "answerOption": "D",
+  "answerText": "Dead or no longer with someone",
+  "difficulty": "medium",
+  "sourceFile": "1469.json"
+}

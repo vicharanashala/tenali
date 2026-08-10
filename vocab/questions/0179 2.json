@@ -1,0 +1,15 @@
+{
+  "id": 179,
+  "word": "Lend",
+  "question": "Lend",
+  "options": [
+    "Feeling strong displeasure or hostility",
+    "To finish making or doing something",
+    "To give something to someone temporarily",
+    "Relating to the earth or dry land"
+  ],
+  "answerOption": "C",
+  "answerText": "To give something to someone temporarily",
+  "difficulty": "easy",
+  "sourceFile": "0179.json"
+}

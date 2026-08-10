@@ -1,0 +1,15 @@
+{
+  "id": 604,
+  "word": "Gleam",
+  "question": "Gleam",
+  "options": [
+    "To shine brightly with reflected light",
+    "Using imagination to create new things",
+    "Allowing light to pass through clearly",
+    "To suffer or die from lack of food"
+  ],
+  "answerOption": "A",
+  "answerText": "To shine brightly with reflected light",
+  "difficulty": "easy",
+  "sourceFile": "0604.json"
+}

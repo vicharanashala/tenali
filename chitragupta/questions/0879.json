@@ -1,0 +1,14 @@
+{
+  "id": 879,
+  "question": "Which organ in the body helps in immune response and filters blood?",
+  "options": [
+    "Pancreas",
+    "Gallbladder",
+    "Spleen",
+    "Thyroid"
+  ],
+  "answerOption": "C",
+  "answerText": "Spleen",
+  "genre": "science",
+  "sourceFile": "0879.json"
+}

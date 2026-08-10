@@ -1,0 +1,15 @@
+{
+  "id": 691,
+  "word": "Trivial",
+  "question": "Trivial",
+  "options": [
+    "To give someone the authority to do something",
+    "Of very little importance",
+    "To accept something as true without proof",
+    "Able to recover quickly from difficulties"
+  ],
+  "answerOption": "B",
+  "answerText": "Of very little importance",
+  "difficulty": "easy",
+  "sourceFile": "0691.json"
+}

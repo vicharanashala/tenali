@@ -1,0 +1,15 @@
+{
+  "id": 2480,
+  "word": "Aeroceracausis",
+  "question": "Aeroceracausis",
+  "options": [
+    "Inner sanctum of a Greek temple",
+    "Damage from atmospheric electricity",
+    "The quality of being believable",
+    "Study of interpretation and meaning"
+  ],
+  "answerOption": "B",
+  "answerText": "Damage from atmospheric electricity",
+  "difficulty": "hard",
+  "sourceFile": "2480.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 180,
+  "word": "Teach",
+  "question": "Teach",
+  "options": [
+    "To say something in a serious way",
+    "Not found in large numbers; uncommon",
+    "To impart knowledge or skill to someone",
+    "Possessing great power or strength"
+  ],
+  "answerOption": "C",
+  "answerText": "To impart knowledge or skill to someone",
+  "difficulty": "easy",
+  "sourceFile": "0180.json"
+}

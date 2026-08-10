@@ -1,0 +1,15 @@
+{
+  "id": 1313,
+  "word": "Decapitate",
+  "question": "Decapitate",
+  "options": [
+    "Not stable or balanced",
+    "To cut off the head of someone",
+    "Treacherous and disloyal",
+    "Relating to demons or evil spirits"
+  ],
+  "answerOption": "B",
+  "answerText": "To cut off the head of someone",
+  "difficulty": "medium",
+  "sourceFile": "1313.json"
+}

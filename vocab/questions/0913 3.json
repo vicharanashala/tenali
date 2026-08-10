@@ -1,0 +1,15 @@
+{
+  "id": 913,
+  "word": "Capricious",
+  "question": "Capricious",
+  "options": [
+    "To stop doing something",
+    "One who desolates",
+    "Given to sudden changes of mood or behavior",
+    "To remove odor from something"
+  ],
+  "answerOption": "C",
+  "answerText": "Given to sudden changes of mood or behavior",
+  "difficulty": "medium",
+  "sourceFile": "0913.json"
+}

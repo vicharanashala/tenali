@@ -1,0 +1,15 @@
+{
+  "id": 1980,
+  "word": "Adviceful",
+  "question": "Adviceful",
+  "options": [
+    "A person who tells stories in a skillful way",
+    "Mapping from aircraft",
+    "Full of or giving advice",
+    "Kept secret because it would not be approved"
+  ],
+  "answerOption": "C",
+  "answerText": "Full of or giving advice",
+  "difficulty": "hard",
+  "sourceFile": "1980.json"
+}

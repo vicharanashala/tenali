@@ -1,0 +1,15 @@
+{
+  "id": 1959,
+  "word": "Crippled",
+  "question": "Crippled",
+  "options": [
+    "Firmly resolved or decided",
+    "Tending to crumble easily",
+    "Unable to move or function normally",
+    "Savage cruel and violent"
+  ],
+  "answerOption": "C",
+  "answerText": "Unable to move or function normally",
+  "difficulty": "medium",
+  "sourceFile": "1959.json"
+}

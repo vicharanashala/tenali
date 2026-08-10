@@ -1,0 +1,15 @@
+{
+  "id": 941,
+  "word": "Tart",
+  "question": "Tart",
+  "options": [
+    "To make something look more attractive",
+    "Having a sharp or sour taste",
+    "Having four equal sides and right angles",
+    "Not arranged in a neat way"
+  ],
+  "answerOption": "B",
+  "answerText": "Having a sharp or sour taste",
+  "difficulty": "easy",
+  "sourceFile": "0941.json"
+}

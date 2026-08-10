@@ -1,0 +1,15 @@
+{
+  "id": 972,
+  "word": "Frosty",
+  "question": "Frosty",
+  "options": [
+    "Very cold with visible frost",
+    "To give up something completely",
+    "Done consciously and intentionally",
+    "To cause someone to believe something"
+  ],
+  "answerOption": "A",
+  "answerText": "Very cold with visible frost",
+  "difficulty": "easy",
+  "sourceFile": "0972.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2520,
+  "word": "Abidancy",
+  "question": "Abidancy",
+  "options": [
+    "A cattle thief in Roman times",
+    "A state of being pleasantly lost in thought",
+    "The act of abiding somewhere",
+    "To walk in the wind for fun to clear one's mind"
+  ],
+  "answerOption": "C",
+  "answerText": "The act of abiding somewhere",
+  "difficulty": "extra-hard",
+  "sourceFile": "2520.json"
+}

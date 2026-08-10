@@ -1,0 +1,15 @@
+{
+  "id": 2472,
+  "word": "Aerobiosis",
+  "question": "Aerobiosis",
+  "options": [
+    "Treatment with hot air",
+    "Life dependent on air",
+    "Not being what it claims to be; false",
+    "A state of physical or mental sluggishness"
+  ],
+  "answerOption": "B",
+  "answerText": "Life dependent on air",
+  "difficulty": "hard",
+  "sourceFile": "2472.json"
+}

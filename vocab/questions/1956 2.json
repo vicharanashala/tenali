@@ -1,0 +1,15 @@
+{
+  "id": 1956,
+  "word": "Adventurism",
+  "question": "Adventurism",
+  "options": [
+    "Reckless pursuit of adventure",
+    "A notebook for recording observations",
+    "A person who attacks cherished beliefs",
+    "A type of small bean"
+  ],
+  "answerOption": "A",
+  "answerText": "Reckless pursuit of adventure",
+  "difficulty": "hard",
+  "sourceFile": "1956.json"
+}

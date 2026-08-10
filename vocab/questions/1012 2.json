@@ -1,0 +1,15 @@
+{
+  "id": 1012,
+  "word": "Tenuous",
+  "question": "Tenuous",
+  "options": [
+    "Playfully quaint or fanciful behavior",
+    "Very weak or slight; insubstantial",
+    "To actively break the terms of a law",
+    "Feeling or expressing great happiness"
+  ],
+  "answerOption": "B",
+  "answerText": "Very weak or slight; insubstantial",
+  "difficulty": "medium",
+  "sourceFile": "1012.json"
+}

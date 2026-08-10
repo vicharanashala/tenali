@@ -1,0 +1,15 @@
+{
+  "id": 304,
+  "word": "Mourn",
+  "question": "Mourn",
+  "options": [
+    "To bring something to a person or place",
+    "To feel sadness after someone's death",
+    "To carry out an action or task",
+    "To move forward in a purposeful way"
+  ],
+  "answerOption": "B",
+  "answerText": "To feel sadness after someone's death",
+  "difficulty": "easy",
+  "sourceFile": "0304.json"
+}

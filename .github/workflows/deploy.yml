@@ -1,0 +1,28 @@
+name: Deploy to droplet
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-droplet
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger deploy over SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -t ed25519 -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+          ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes \
+              "$SSH_USER@$SSH_HOST" 'bash /home/tenali/deploy.sh'

@@ -1,0 +1,14 @@
+{
+  "id": 534,
+  "question": "Which part of the heart receives oxygenated blood from the lungs?",
+  "options": [
+    "Right atrium",
+    "Right ventricle",
+    "Left atrium",
+    "Left ventricle"
+  ],
+  "answerOption": "C",
+  "answerText": "Left atrium",
+  "genre": "science",
+  "sourceFile": "0534.json"
+}

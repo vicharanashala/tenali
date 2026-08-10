@@ -1,0 +1,15 @@
+{
+  "id": 62,
+  "word": "Busy",
+  "question": "Busy",
+  "options": [
+    "To make a rough drawing of something",
+    "To create difficulties for someone",
+    "Having a great deal to do",
+    "Causing wonder or surprise"
+  ],
+  "answerOption": "C",
+  "answerText": "Having a great deal to do",
+  "difficulty": "easy",
+  "sourceFile": "0062.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 289,
+  "word": "Organize",
+  "question": "Organize",
+  "options": [
+    "Conforming to what is standard or expected",
+    "Occurring or found frequently",
+    "To come near or nearer to something",
+    "To arrange into a structured whole"
+  ],
+  "answerOption": "D",
+  "answerText": "To arrange into a structured whole",
+  "difficulty": "easy",
+  "sourceFile": "0289.json"
+}

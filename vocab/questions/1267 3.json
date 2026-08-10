@@ -1,0 +1,15 @@
+{
+  "id": 1267,
+  "word": "Defuse",
+  "question": "Defuse",
+  "options": [
+    "To remove a fuse from an explosive",
+    "In a determinable manner",
+    "Difficult to control or discipline",
+    "Extreme anger"
+  ],
+  "answerOption": "A",
+  "answerText": "To remove a fuse from an explosive",
+  "difficulty": "medium",
+  "sourceFile": "1267.json"
+}

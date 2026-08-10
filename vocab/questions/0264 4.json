@@ -1,0 +1,15 @@
+{
+  "id": 264,
+  "word": "Swim",
+  "question": "Swim",
+  "options": [
+    "To move through water using the body",
+    "To fit together the parts of something",
+    "To shine with flashes of light",
+    "To show how something is done"
+  ],
+  "answerOption": "A",
+  "answerText": "To move through water using the body",
+  "difficulty": "easy",
+  "sourceFile": "0264.json"
+}

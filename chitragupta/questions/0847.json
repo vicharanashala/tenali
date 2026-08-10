@@ -1,0 +1,14 @@
+{
+  "id": 847,
+  "question": "Who wrote 'Far from the Madding Crowd'?",
+  "options": [
+    "Thomas Hardy",
+    "Charles Dickens",
+    "George Eliot",
+    "Emily Brontë"
+  ],
+  "answerOption": "A",
+  "answerText": "Thomas Hardy",
+  "genre": "general-knowledge",
+  "sourceFile": "0847.json"
+}

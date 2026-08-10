@@ -1,0 +1,15 @@
+{
+  "id": 121,
+  "word": "Loyal",
+  "question": "Loyal",
+  "options": [
+    "Sending out light; shining brightly",
+    "To protect something from being wasted",
+    "Giving constant support to a person",
+    "In perfect original condition"
+  ],
+  "answerOption": "C",
+  "answerText": "Giving constant support to a person",
+  "difficulty": "easy",
+  "sourceFile": "0121.json"
+}

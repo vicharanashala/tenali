@@ -1,0 +1,15 @@
+{
+  "id": 89,
+  "word": "Light",
+  "question": "Light",
+  "options": [
+    "To put a limit on something",
+    "Of little weight; easy to carry",
+    "Directing attention or effort at something",
+    "To produce a picture using a pencil"
+  ],
+  "answerOption": "B",
+  "answerText": "Of little weight; easy to carry",
+  "difficulty": "easy",
+  "sourceFile": "0089.json"
+}

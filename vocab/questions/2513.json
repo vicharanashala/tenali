@@ -1,0 +1,15 @@
+{
+  "id": 2513,
+  "word": "Aeroidography",
+  "question": "Aeroidography",
+  "options": [
+    "The quality of being calm",
+    "Strong public criticism or verbal abuse",
+    "Dedication to a cause",
+    "Description of air conditions"
+  ],
+  "answerOption": "D",
+  "answerText": "Description of air conditions",
+  "difficulty": "hard",
+  "sourceFile": "2513.json"
+}

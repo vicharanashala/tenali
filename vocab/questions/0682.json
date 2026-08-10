@@ -1,0 +1,15 @@
+{
+  "id": 682,
+  "word": "Fragile",
+  "question": "Fragile",
+  "options": [
+    "To formally put an end to a system",
+    "Easily broken or damaged",
+    "Thick and full of foliage",
+    "Extremely large or huge"
+  ],
+  "answerOption": "B",
+  "answerText": "Easily broken or damaged",
+  "difficulty": "easy",
+  "sourceFile": "0682.json"
+}

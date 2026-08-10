@@ -1,0 +1,15 @@
+{
+  "id": 1247,
+  "word": "Defeatist",
+  "question": "Defeatist",
+  "options": [
+    "Not harmful or offensive",
+    "A person who expects or accepts defeat",
+    "Puzzled or confused",
+    "Something greatly desired or needed"
+  ],
+  "answerOption": "B",
+  "answerText": "A person who expects or accepts defeat",
+  "difficulty": "medium",
+  "sourceFile": "1247.json"
+}

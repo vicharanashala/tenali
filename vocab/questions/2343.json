@@ -1,0 +1,15 @@
+{
+  "id": 2343,
+  "word": "Advisee",
+  "question": "Advisee",
+  "options": [
+    "In an adventitious manner",
+    "The action of validating something",
+    "An unpleasant or unhealthy atmosphere",
+    "One who is advised"
+  ],
+  "answerOption": "D",
+  "answerText": "One who is advised",
+  "difficulty": "hard",
+  "sourceFile": "2343.json"
+}

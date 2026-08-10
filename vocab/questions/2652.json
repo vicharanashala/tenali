@@ -1,0 +1,15 @@
+{
+  "id": 2652,
+  "word": "Incapacity",
+  "question": "Incapacity",
+  "options": [
+    "The quality of being stable",
+    "Lack of the necessary capacity",
+    "Legal state of being unable to pay debts",
+    "The action of giving emphasis"
+  ],
+  "answerOption": "B",
+  "answerText": "Lack of the necessary capacity",
+  "difficulty": "hard",
+  "sourceFile": "2652.json"
+}

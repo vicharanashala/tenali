@@ -1,0 +1,15 @@
+{
+  "id": 495,
+  "word": "Inspect",
+  "question": "Inspect",
+  "options": [
+    "To attract and hold attention of someone",
+    "To look at something closely",
+    "To say something in a serious way",
+    "Not supporting either side in a conflict"
+  ],
+  "answerOption": "B",
+  "answerText": "To look at something closely",
+  "difficulty": "easy",
+  "sourceFile": "0495.json"
+}

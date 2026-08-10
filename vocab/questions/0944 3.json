@@ -1,0 +1,15 @@
+{
+  "id": 944,
+  "word": "Jovial",
+  "question": "Jovial",
+  "options": [
+    "A doctor specializing in skin",
+    "To grow or develop in a healthy way",
+    "State of being partially clothed",
+    "Cheerful and friendly in manner"
+  ],
+  "answerOption": "D",
+  "answerText": "Cheerful and friendly in manner",
+  "difficulty": "medium",
+  "sourceFile": "0944.json"
+}

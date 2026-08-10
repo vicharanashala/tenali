@@ -1,0 +1,15 @@
+{
+  "id": 683,
+  "word": "Sturdy",
+  "question": "Sturdy",
+  "options": [
+    "Having a violent or aggressive nature",
+    "Shockingly unacceptable",
+    "To make someone afraid or anxious",
+    "Strongly and solidly built"
+  ],
+  "answerOption": "D",
+  "answerText": "Strongly and solidly built",
+  "difficulty": "easy",
+  "sourceFile": "0683.json"
+}

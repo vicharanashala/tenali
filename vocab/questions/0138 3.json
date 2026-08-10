@@ -1,0 +1,15 @@
+{
+  "id": 138,
+  "word": "Tender",
+  "question": "Tender",
+  "options": [
+    "Hard but likely to break easily",
+    "Showing gentleness and concern",
+    "To move from one region to another",
+    "To make available for someone to use"
+  ],
+  "answerOption": "B",
+  "answerText": "Showing gentleness and concern",
+  "difficulty": "easy",
+  "sourceFile": "0138.json"
+}

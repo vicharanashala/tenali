@@ -1,0 +1,15 @@
+{
+  "id": 2433,
+  "word": "Aeralgia",
+  "question": "Aeralgia",
+  "options": [
+    "Extremely idealistic; unrealistic and impractical",
+    "Showing deep love and affection",
+    "Pain from atmospheric pressure",
+    "A long narrow opening or crack"
+  ],
+  "answerOption": "C",
+  "answerText": "Pain from atmospheric pressure",
+  "difficulty": "hard",
+  "sourceFile": "2433.json"
+}

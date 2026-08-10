@@ -1,0 +1,15 @@
+{
+  "id": 1978,
+  "word": "Forced",
+  "question": "Forced",
+  "options": [
+    "Abundant in supply or quantity",
+    "A strong desire to possess something",
+    "Made someone do something against will",
+    "To produce or provide a natural product"
+  ],
+  "answerOption": "C",
+  "answerText": "Made someone do something against will",
+  "difficulty": "medium",
+  "sourceFile": "1978.json"
+}

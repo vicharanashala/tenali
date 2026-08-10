@@ -1,0 +1,15 @@
+{
+  "id": 1380,
+  "word": "Departed",
+  "question": "Departed",
+  "options": [
+    "Mercy or leniency shown to a wrongdoer",
+    "A formal statement made under oath",
+    "Dead or no longer with someone",
+    "The deepest or most remote parts"
+  ],
+  "answerOption": "C",
+  "answerText": "Dead or no longer with someone",
+  "difficulty": "medium",
+  "sourceFile": "1380.json"
+}

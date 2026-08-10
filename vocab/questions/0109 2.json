@@ -1,0 +1,15 @@
+{
+  "id": 109,
+  "word": "Common",
+  "question": "Common",
+  "options": [
+    "To travel through an unfamiliar area to learn about it",
+    "To develop gradually over time",
+    "Lacking physical strength",
+    "Occurring or found frequently"
+  ],
+  "answerOption": "D",
+  "answerText": "Occurring or found frequently",
+  "difficulty": "easy",
+  "sourceFile": "0109.json"
+}

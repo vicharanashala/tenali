@@ -1,0 +1,15 @@
+{
+  "id": 1773,
+  "word": "Quorum",
+  "question": "Quorum",
+  "options": [
+    "The minimum number needed for a meeting",
+    "The use of many words where fewer would do",
+    "Medical treatment using air",
+    "Cheerful and lighthearted"
+  ],
+  "answerOption": "A",
+  "answerText": "The minimum number needed for a meeting",
+  "difficulty": "hard",
+  "sourceFile": "1773.json"
+}

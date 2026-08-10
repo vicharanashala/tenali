@@ -1,0 +1,15 @@
+{
+  "id": 2081,
+  "word": "Palimpsest",
+  "question": "Palimpsest",
+  "options": [
+    "Burned or scorched by heat",
+    "Complaining in a petulant or whining manner",
+    "Norse god of the sea",
+    "Something reused but still bearing traces of its earlier form"
+  ],
+  "answerOption": "D",
+  "answerText": "Something reused but still bearing traces of its earlier form",
+  "difficulty": "hard",
+  "sourceFile": "2081.json"
+}

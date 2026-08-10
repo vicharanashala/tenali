@@ -1,0 +1,14 @@
+{
+  "id": 587,
+  "question": "What is the chemical symbol for platinum?",
+  "options": [
+    "Pl",
+    "Pt",
+    "Pm",
+    "Pa"
+  ],
+  "answerOption": "B",
+  "answerText": "Pt",
+  "genre": "mixed",
+  "sourceFile": "0587.json"
+}

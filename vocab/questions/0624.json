@@ -1,0 +1,15 @@
+{
+  "id": 624,
+  "word": "Alert",
+  "question": "Alert",
+  "options": [
+    "To take the place of something",
+    "Acting in the same way over time",
+    "Lacking flavor or interest",
+    "Quick to notice any unusual activity"
+  ],
+  "answerOption": "D",
+  "answerText": "Quick to notice any unusual activity",
+  "difficulty": "easy",
+  "sourceFile": "0624.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 65,
+  "word": "Polite",
+  "question": "Polite",
+  "options": [
+    "To do physical harm or damage to someone",
+    "Having good manners and showing respect",
+    "To have power over something's behavior",
+    "Willfully causing pain to others"
+  ],
+  "answerOption": "B",
+  "answerText": "Having good manners and showing respect",
+  "difficulty": "easy",
+  "sourceFile": "0065.json"
+}

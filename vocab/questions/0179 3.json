@@ -1,0 +1,15 @@
+{
+  "id": 179,
+  "word": "Lend",
+  "question": "Lend",
+  "options": [
+    "To make someone feel admiration",
+    "With little or no light",
+    "To make someone feel happy or satisfied",
+    "To give something to someone temporarily"
+  ],
+  "answerOption": "D",
+  "answerText": "To give something to someone temporarily",
+  "difficulty": "easy",
+  "sourceFile": "0179.json"
+}

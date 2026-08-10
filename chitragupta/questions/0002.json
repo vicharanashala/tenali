@@ -1,0 +1,14 @@
+{
+  "id": 2,
+  "question": "Which planet is called the Red Planet?",
+  "options": [
+    "Venus",
+    "Mars",
+    "Jupiter",
+    "Mercury"
+  ],
+  "answerOption": "B",
+  "answerText": "Mars",
+  "genre": "geography",
+  "sourceFile": "0002.json"
+}

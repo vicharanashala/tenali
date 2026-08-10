@@ -1,0 +1,15 @@
+{
+  "id": 2532,
+  "word": "Abyss",
+  "question": "Abyss",
+  "options": [
+    "Dedication to a cause",
+    "Showing susceptibility to bribery",
+    "Relating to medicine and aviation",
+    "A very deep or seemingly bottomless chasm"
+  ],
+  "answerOption": "D",
+  "answerText": "A very deep or seemingly bottomless chasm",
+  "difficulty": "hard",
+  "sourceFile": "2532.json"
+}

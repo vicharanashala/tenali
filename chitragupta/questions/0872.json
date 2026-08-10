@@ -1,0 +1,14 @@
+{
+  "id": 872,
+  "question": "Who wrote 'Sense and Sensibility'?",
+  "options": [
+    "Jane Austen",
+    "Charlotte Brontë",
+    "George Eliot",
+    "Virginia Woolf"
+  ],
+  "answerOption": "A",
+  "answerText": "Jane Austen",
+  "genre": "general-knowledge",
+  "sourceFile": "0872.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2158,
+  "word": "Imbroglio",
+  "question": "Imbroglio",
+  "options": [
+    "An extremely confused or complicated situation",
+    "Patient self-control; restraint",
+    "A person's most important work",
+    "Aggressively greedy or grasping"
+  ],
+  "answerOption": "A",
+  "answerText": "An extremely confused or complicated situation",
+  "difficulty": "hard",
+  "sourceFile": "2158.json"
+}

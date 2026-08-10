@@ -1,0 +1,15 @@
+{
+  "id": 2180,
+  "word": "AERONAUT",
+  "question": "AERONAUT",
+  "options": [
+    "Science of air equilibrium",
+    "A person who flies in balloon",
+    "The action of adulterating",
+    "Relating to the Aelp mountains"
+  ],
+  "answerOption": "B",
+  "answerText": "A person who flies in balloon",
+  "difficulty": "hard",
+  "sourceFile": "2180.json"
+}

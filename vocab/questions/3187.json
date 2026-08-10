@@ -1,0 +1,15 @@
+{
+  "id": 3187,
+  "word": "Abdominous",
+  "question": "Abdominous",
+  "options": [
+    "In manner resembling abyss",
+    "Act of washing away",
+    "Having a large abdomen or belly",
+    "Abyss heat quality"
+  ],
+  "answerOption": "C",
+  "answerText": "Having a large abdomen or belly",
+  "difficulty": "extra-hard",
+  "sourceFile": "3187.json"
+}

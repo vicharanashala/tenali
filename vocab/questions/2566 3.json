@@ -1,0 +1,15 @@
+{
+  "id": 2566,
+  "word": "Purification",
+  "question": "Purification",
+  "options": [
+    "The action of improving",
+    "The action of extending",
+    "The quality of being hard",
+    "The process of making pure"
+  ],
+  "answerOption": "D",
+  "answerText": "The process of making pure",
+  "difficulty": "hard",
+  "sourceFile": "2566.json"
+}

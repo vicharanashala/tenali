@@ -1,0 +1,15 @@
+{
+  "id": 883,
+  "word": "Elaborate",
+  "question": "Elaborate",
+  "options": [
+    "The state of being tedious",
+    "Involving careful detail and complexity",
+    "Feeling calm and relaxed; not worried",
+    "Contrary to what is usual or accepted"
+  ],
+  "answerOption": "B",
+  "answerText": "Involving careful detail and complexity",
+  "difficulty": "medium",
+  "sourceFile": "0883.json"
+}

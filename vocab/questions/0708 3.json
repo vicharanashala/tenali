@@ -1,0 +1,15 @@
+{
+  "id": 708,
+  "word": "Uniform",
+  "question": "Uniform",
+  "options": [
+    "Occurring continuously over time",
+    "To try to reach an agreement by discussion",
+    "Not arranged in a neat way",
+    "Not varying; the same in all cases"
+  ],
+  "answerOption": "D",
+  "answerText": "Not varying; the same in all cases",
+  "difficulty": "easy",
+  "sourceFile": "0708.json"
+}

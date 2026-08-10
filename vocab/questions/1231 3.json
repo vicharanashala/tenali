@@ -1,0 +1,15 @@
+{
+  "id": 1231,
+  "word": "Decongest",
+  "question": "Decongest",
+  "options": [
+    "Extremely or damnably",
+    "To fill something up again",
+    "To relieve congestion or overcrowding",
+    "Having teeth or tooth-like projections"
+  ],
+  "answerOption": "C",
+  "answerText": "To relieve congestion or overcrowding",
+  "difficulty": "medium",
+  "sourceFile": "1231.json"
+}

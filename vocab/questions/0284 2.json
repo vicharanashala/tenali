@@ -1,0 +1,15 @@
+{
+  "id": 284,
+  "word": "Measure",
+  "question": "Measure",
+  "options": [
+    "To find the size or amount of something",
+    "Able to express oneself easily in a language",
+    "Free from pretense or deceit",
+    "Large and heavy or solid"
+  ],
+  "answerOption": "A",
+  "answerText": "To find the size or amount of something",
+  "difficulty": "easy",
+  "sourceFile": "0284.json"
+}

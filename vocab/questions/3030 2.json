@@ -1,0 +1,15 @@
+{
+  "id": 3030,
+  "word": "Abstinence",
+  "question": "Abstinence",
+  "options": [
+    "In a lasting or permanent manner",
+    "Plural of abettor",
+    "Restraint from indulging in something",
+    "In manner resembling abyss"
+  ],
+  "answerOption": "C",
+  "answerText": "Restraint from indulging in something",
+  "difficulty": "extra-hard",
+  "sourceFile": "3030.json"
+}

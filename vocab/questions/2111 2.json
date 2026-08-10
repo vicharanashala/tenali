@@ -1,0 +1,15 @@
+{
+  "id": 2111,
+  "word": "Aero",
+  "question": "Aero",
+  "options": [
+    "A false or distorted representation",
+    "A variety of acmite mineral",
+    "A plant needing air exposure",
+    "A prefix relating to air"
+  ],
+  "answerOption": "D",
+  "answerText": "A prefix relating to air",
+  "difficulty": "hard",
+  "sourceFile": "2111.json"
+}

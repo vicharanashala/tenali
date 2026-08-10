@@ -1,0 +1,15 @@
+{
+  "id": 2338,
+  "word": "Advisal",
+  "question": "Advisal",
+  "options": [
+    "Very attentive to accuracy and detail",
+    "The action of reproducing",
+    "The act of advising someone",
+    "Using different words to say the same thing"
+  ],
+  "answerOption": "C",
+  "answerText": "The act of advising someone",
+  "difficulty": "hard",
+  "sourceFile": "2338.json"
+}

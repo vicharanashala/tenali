@@ -1,0 +1,15 @@
+{
+  "id": 1857,
+  "word": "Haphazard",
+  "question": "Haphazard",
+  "options": [
+    "The action of setting limits",
+    "Placing things close together for contrast",
+    "Showing great attention to detail",
+    "Lacking order or predictability"
+  ],
+  "answerOption": "D",
+  "answerText": "Lacking order or predictability",
+  "difficulty": "medium",
+  "sourceFile": "1857.json"
+}

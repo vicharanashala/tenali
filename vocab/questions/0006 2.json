@@ -1,0 +1,15 @@
+{
+  "id": 6,
+  "word": "Ancient",
+  "question": "Ancient",
+  "options": [
+    "Shiny and smooth on the surface",
+    "Belonging to the very distant past",
+    "A great victory or achievement",
+    "To throw in various random directions"
+  ],
+  "answerOption": "B",
+  "answerText": "Belonging to the very distant past",
+  "difficulty": "easy",
+  "sourceFile": "0006.json"
+}

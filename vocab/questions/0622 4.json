@@ -1,0 +1,15 @@
+{
+  "id": 622,
+  "word": "Focused",
+  "question": "Focused",
+  "options": [
+    "Directing attention or effort at something",
+    "Using more words than needed",
+    "Very beautiful or attractive",
+    "To make a thorough change in form"
+  ],
+  "answerOption": "A",
+  "answerText": "Directing attention or effort at something",
+  "difficulty": "easy",
+  "sourceFile": "0622.json"
+}

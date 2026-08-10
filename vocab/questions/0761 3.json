@@ -1,0 +1,15 @@
+{
+  "id": 761,
+  "word": "Tranquil",
+  "question": "Tranquil",
+  "options": [
+    "Occurring from time to time",
+    "To cause someone to believe something",
+    "Of considerable or unusual duration",
+    "Free from disturbance; calm"
+  ],
+  "answerOption": "D",
+  "answerText": "Free from disturbance; calm",
+  "difficulty": "easy",
+  "sourceFile": "0761.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2108,
+  "word": "Aeriloquy",
+  "question": "Aeriloquy",
+  "options": [
+    "A meteorite with iron core",
+    "To use ambiguous language to deceive",
+    "Speaking in an airy manner",
+    "Having air spaces in tissue"
+  ],
+  "answerOption": "C",
+  "answerText": "Speaking in an airy manner",
+  "difficulty": "hard",
+  "sourceFile": "2108.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1718,
+  "word": "Demagogue",
+  "question": "Demagogue",
+  "options": [
+    "Relating to wind instruments",
+    "Having a greenish tinge",
+    "Wary and unwilling to take risks",
+    "A leader who seeks support by appealing to emotions"
+  ],
+  "answerOption": "D",
+  "answerText": "A leader who seeks support by appealing to emotions",
+  "difficulty": "hard",
+  "sourceFile": "1718.json"
+}

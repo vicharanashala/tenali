@@ -1,0 +1,15 @@
+{
+  "id": 488,
+  "word": "Calculate",
+  "question": "Calculate",
+  "options": [
+    "To move forward on hands and knees",
+    "To grow and develop well",
+    "To determine an amount by mathematics",
+    "To keep away from something"
+  ],
+  "answerOption": "C",
+  "answerText": "To determine an amount by mathematics",
+  "difficulty": "easy",
+  "sourceFile": "0488.json"
+}

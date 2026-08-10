@@ -1,0 +1,15 @@
+{
+  "id": 168,
+  "word": "Push",
+  "question": "Push",
+  "options": [
+    "Going in a slanting direction",
+    "To finish making or doing something",
+    "To want something to happen and think it possible",
+    "To exert force to move something away"
+  ],
+  "answerOption": "D",
+  "answerText": "To exert force to move something away",
+  "difficulty": "easy",
+  "sourceFile": "0168.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 771,
+  "word": "Compulsory",
+  "question": "Compulsory",
+  "options": [
+    "To open something that is locked",
+    "Required by law or rule; mandatory",
+    "Attractively old-fashioned",
+    "To give out a steady light without flame"
+  ],
+  "answerOption": "B",
+  "answerText": "Required by law or rule; mandatory",
+  "difficulty": "easy",
+  "sourceFile": "0771.json"
+}

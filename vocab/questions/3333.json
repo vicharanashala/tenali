@@ -1,0 +1,15 @@
+{
+  "id": 3333,
+  "word": "Abstinence",
+  "question": "Abstinence",
+  "options": [
+    "Restraint from indulging in something",
+    "Naivety; lack of nourishing substance",
+    "The process of forgetting something",
+    "In an appalling manner"
+  ],
+  "answerOption": "A",
+  "answerText": "Restraint from indulging in something",
+  "difficulty": "extra-hard",
+  "sourceFile": "3333.json"
+}

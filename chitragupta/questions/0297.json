@@ -1,0 +1,14 @@
+{
+  "id": 297,
+  "question": "Who was the first man to circumnavigate the globe in expedition terms, commonly linked to the Magellan-Elcano voyage?",
+  "options": [
+    "Ferdinand Magellan",
+    "Juan Sebastián Elcano",
+    "Vasco da Gama",
+    "Christopher Columbus"
+  ],
+  "answerOption": "B",
+  "answerText": "Juan Sebastián Elcano",
+  "genre": "general-knowledge",
+  "sourceFile": "0297.json"
+}

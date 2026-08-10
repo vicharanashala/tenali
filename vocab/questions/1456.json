@@ -1,0 +1,15 @@
+{
+  "id": 1456,
+  "word": "Dentist",
+  "question": "Dentist",
+  "options": [
+    "The action of making someone a god",
+    "To accumulate or receive over time",
+    "Done routinely without care",
+    "A person who treats teeth"
+  ],
+  "answerOption": "D",
+  "answerText": "A person who treats teeth",
+  "difficulty": "medium",
+  "sourceFile": "1456.json"
+}

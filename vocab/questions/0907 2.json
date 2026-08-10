@@ -1,0 +1,15 @@
+{
+  "id": 907,
+  "word": "Eccentric",
+  "question": "Eccentric",
+  "options": [
+    "Unconventional and slightly strange",
+    "Present or found everywhere",
+    "Great courage in the face of danger",
+    "Enduring pain without showing feelings"
+  ],
+  "answerOption": "A",
+  "answerText": "Unconventional and slightly strange",
+  "difficulty": "medium",
+  "sourceFile": "0907.json"
+}

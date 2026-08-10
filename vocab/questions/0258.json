@@ -1,0 +1,15 @@
+{
+  "id": 258,
+  "word": "Return",
+  "question": "Return",
+  "options": [
+    "Made to happen later than expected",
+    "Having ample space; roomy",
+    "To come or go back to a place",
+    "Existing in large quantities"
+  ],
+  "answerOption": "C",
+  "answerText": "To come or go back to a place",
+  "difficulty": "easy",
+  "sourceFile": "0258.json"
+}

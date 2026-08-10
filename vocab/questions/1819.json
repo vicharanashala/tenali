@@ -1,0 +1,15 @@
+{
+  "id": 1819,
+  "word": "Unqualified",
+  "question": "Unqualified",
+  "options": [
+    "Not competent or skilled",
+    "To provide evidence to support a claim",
+    "To gather or collect something",
+    "Showing resistance to authority"
+  ],
+  "answerOption": "A",
+  "answerText": "Not competent or skilled",
+  "difficulty": "medium",
+  "sourceFile": "1819.json"
+}

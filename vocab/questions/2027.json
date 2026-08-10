@@ -1,0 +1,15 @@
+{
+  "id": 2027,
+  "word": "Grandiloquent",
+  "question": "Grandiloquent",
+  "options": [
+    "Tissue with air spaces in plants",
+    "The state of being peaceful",
+    "Pompous or extravagant in language",
+    "Treating serious issues with inappropriate humor"
+  ],
+  "answerOption": "C",
+  "answerText": "Pompous or extravagant in language",
+  "difficulty": "hard",
+  "sourceFile": "2027.json"
+}

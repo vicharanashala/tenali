@@ -1,0 +1,15 @@
+{
+  "id": 230,
+  "word": "Admire",
+  "question": "Admire",
+  "options": [
+    "Of or at a low temperature",
+    "To shine brightly with reflected light",
+    "To regard with respect and warm approval",
+    "To give an authoritative order"
+  ],
+  "answerOption": "C",
+  "answerText": "To regard with respect and warm approval",
+  "difficulty": "easy",
+  "sourceFile": "0230.json"
+}

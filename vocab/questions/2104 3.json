@@ -1,0 +1,15 @@
+{
+  "id": 2104,
+  "word": "Adoration",
+  "question": "Adoration",
+  "options": [
+    "The minimum number needed for a meeting",
+    "Making airy or ethereal",
+    "Unable to be avoided or escaped",
+    "Love, respect, and deep affection"
+  ],
+  "answerOption": "D",
+  "answerText": "Love, respect, and deep affection",
+  "difficulty": "hard",
+  "sourceFile": "2104.json"
+}

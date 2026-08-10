@@ -1,0 +1,15 @@
+{
+  "id": 475,
+  "word": "Express",
+  "question": "Express",
+  "options": [
+    "Restricted within limits",
+    "To cook food using an oven",
+    "To give authorization for something",
+    "To convey thoughts or feelings in words"
+  ],
+  "answerOption": "D",
+  "answerText": "To convey thoughts or feelings in words",
+  "difficulty": "easy",
+  "sourceFile": "0475.json"
+}

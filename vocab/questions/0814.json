@@ -1,0 +1,15 @@
+{
+  "id": 814,
+  "word": "Precise",
+  "question": "Precise",
+  "options": [
+    "To throw in various random directions",
+    "Quick to notice any unusual activity",
+    "Marked by exactness and accuracy",
+    "Unfairly supporting one side over another"
+  ],
+  "answerOption": "C",
+  "answerText": "Marked by exactness and accuracy",
+  "difficulty": "easy",
+  "sourceFile": "0814.json"
+}

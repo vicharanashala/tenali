@@ -1,0 +1,15 @@
+{
+  "id": 2047,
+  "word": "Didactic",
+  "question": "Didactic",
+  "options": [
+    "One who accepts duration of eons",
+    "Intended to teach a moral lesson",
+    "The action of interpreting something",
+    "The period from puberty to adulthood"
+  ],
+  "answerOption": "B",
+  "answerText": "Intended to teach a moral lesson",
+  "difficulty": "hard",
+  "sourceFile": "2047.json"
+}

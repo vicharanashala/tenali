@@ -1,0 +1,15 @@
+{
+  "id": 1612,
+  "word": "Despair",
+  "question": "Despair",
+  "options": [
+    "Understanding of a situation after it occurs",
+    "Involving or inciting rebellion",
+    "The complete loss of hope",
+    "To remove toxic substances from"
+  ],
+  "answerOption": "C",
+  "answerText": "The complete loss of hope",
+  "difficulty": "medium",
+  "sourceFile": "1612.json"
+}

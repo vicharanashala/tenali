@@ -1,0 +1,15 @@
+{
+  "id": 940,
+  "word": "Savory",
+  "question": "Savory",
+  "options": [
+    "To give out a steady light without flame",
+    "Having a pleasant taste",
+    "In perfect original condition",
+    "Smelling extremely unpleasant"
+  ],
+  "answerOption": "B",
+  "answerText": "Having a pleasant taste",
+  "difficulty": "easy",
+  "sourceFile": "0940.json"
+}

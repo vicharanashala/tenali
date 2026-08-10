@@ -1,0 +1,15 @@
+{
+  "id": 1312,
+  "word": "Decadent",
+  "question": "Decadent",
+  "options": [
+    "Tending to purify the blood",
+    "Blocked or prevented from passing",
+    "To push down or thrust out",
+    "In decline morally or in style"
+  ],
+  "answerOption": "D",
+  "answerText": "In decline morally or in style",
+  "difficulty": "medium",
+  "sourceFile": "1312.json"
+}

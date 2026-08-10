@@ -1,0 +1,15 @@
+{
+  "id": 1032,
+  "word": "Imminent",
+  "question": "Imminent",
+  "options": [
+    "A member of a democratic party",
+    "Without regret or compassion",
+    "About to happen very soon",
+    "Truthful and straightforward; frank"
+  ],
+  "answerOption": "C",
+  "answerText": "About to happen very soon",
+  "difficulty": "medium",
+  "sourceFile": "1032.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 141,
+  "word": "Glad",
+  "question": "Glad",
+  "options": [
+    "To cause someone to believe something",
+    "Feeling pleasure or happiness",
+    "Shaped like a ball or globe",
+    "In a state of sleep; not awake"
+  ],
+  "answerOption": "B",
+  "answerText": "Feeling pleasure or happiness",
+  "difficulty": "easy",
+  "sourceFile": "0141.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 166,
+  "word": "Rise",
+  "question": "Rise",
+  "options": [
+    "Showing great activity or vitality",
+    "Attractive in a delicate way",
+    "To move from a lower to a higher position",
+    "To arrange into categories or classes"
+  ],
+  "answerOption": "C",
+  "answerText": "To move from a lower to a higher position",
+  "difficulty": "easy",
+  "sourceFile": "0166.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2353,
+  "word": "Serendipity",
+  "question": "Serendipity",
+  "options": [
+    "Unfamiliar, rare, strange, and yet marvelous",
+    "Irregular and winding like a maze",
+    "Relating to the ocean at great depths",
+    "The occurrence of events by chance in a happy way"
+  ],
+  "answerOption": "D",
+  "answerText": "The occurrence of events by chance in a happy way",
+  "difficulty": "extra-hard",
+  "sourceFile": "2353.json"
+}

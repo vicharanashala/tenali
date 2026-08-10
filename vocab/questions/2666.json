@@ -1,0 +1,15 @@
+{
+  "id": 2666,
+  "word": "Bankruptcy",
+  "question": "Bankruptcy",
+  "options": [
+    "The science of aerodromes",
+    "Legal state of being unable to pay debts",
+    "Impossible to pass through or get into",
+    "Relating to viewing air"
+  ],
+  "answerOption": "B",
+  "answerText": "Legal state of being unable to pay debts",
+  "difficulty": "hard",
+  "sourceFile": "2666.json"
+}

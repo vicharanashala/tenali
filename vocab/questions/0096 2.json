@@ -1,0 +1,15 @@
+{
+  "id": 96,
+  "word": "Noisy",
+  "question": "Noisy",
+  "options": [
+    "To keep something for future use",
+    "Important and well known",
+    "To cause something to come closer",
+    "Making or given to making a lot of noise"
+  ],
+  "answerOption": "D",
+  "answerText": "Making or given to making a lot of noise",
+  "difficulty": "easy",
+  "sourceFile": "0096.json"
+}

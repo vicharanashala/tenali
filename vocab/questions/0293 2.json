@@ -1,0 +1,15 @@
+{
+  "id": 293,
+  "word": "Pause",
+  "question": "Pause",
+  "options": [
+    "To stop briefly before continuing",
+    "Resulting in good; favorable",
+    "To freely offer to do something",
+    "To manage or guide the operations of something"
+  ],
+  "answerOption": "A",
+  "answerText": "To stop briefly before continuing",
+  "difficulty": "easy",
+  "sourceFile": "0293.json"
+}

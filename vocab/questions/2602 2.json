@@ -1,0 +1,15 @@
+{
+  "id": 2602,
+  "word": "ABJURING",
+  "question": "ABJURING",
+  "options": [
+    "The action of encouraging wrongdoing",
+    "The process of forgetting something",
+    "A ringing or tinkling sound of bells",
+    "The act of renouncing"
+  ],
+  "answerOption": "D",
+  "answerText": "The act of renouncing",
+  "difficulty": "extra-hard",
+  "sourceFile": "2602.json"
+}

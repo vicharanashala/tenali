@@ -1,0 +1,15 @@
+{
+  "id": 2705,
+  "word": "Etiology",
+  "question": "Etiology",
+  "options": [
+    "A female aeromotor operator",
+    "The use of many words where fewer would do",
+    "The study of the causes of diseases",
+    "Scorched or burned by heat"
+  ],
+  "answerOption": "C",
+  "answerText": "The study of the causes of diseases",
+  "difficulty": "hard",
+  "sourceFile": "2705.json"
+}

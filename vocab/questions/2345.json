@@ -1,0 +1,15 @@
+{
+  "id": 2345,
+  "word": "Advisor",
+  "question": "Advisor",
+  "options": [
+    "A poisonous air substance",
+    "One who gives advice or counsel",
+    "Measure of opposition to electric current",
+    "The fact of being preeminent"
+  ],
+  "answerOption": "B",
+  "answerText": "One who gives advice or counsel",
+  "difficulty": "hard",
+  "sourceFile": "2345.json"
+}

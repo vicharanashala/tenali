@@ -1,0 +1,15 @@
+{
+  "id": 2360,
+  "word": "Adyton",
+  "question": "Adyton",
+  "options": [
+    "Inner sanctum of Greek temple",
+    "Pompous or extravagant in language",
+    "Attractive or appealing in appearance",
+    "To reduce to remove unwanted elements"
+  ],
+  "answerOption": "A",
+  "answerText": "Inner sanctum of Greek temple",
+  "difficulty": "hard",
+  "sourceFile": "2360.json"
+}

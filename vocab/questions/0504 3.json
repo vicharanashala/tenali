@@ -1,0 +1,15 @@
+{
+  "id": 504,
+  "word": "Inhabit",
+  "question": "Inhabit",
+  "options": [
+    "To produce a picture using a pencil",
+    "To live in or occupy a place",
+    "Before the usual or expected time",
+    "Not fulfilling the intended purpose"
+  ],
+  "answerOption": "B",
+  "answerText": "To live in or occupy a place",
+  "difficulty": "easy",
+  "sourceFile": "0504.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 847,
+  "word": "Grumpy",
+  "question": "Grumpy",
+  "options": [
+    "Enough to meet the needs",
+    "To remove the skin of a fruit or vegetable",
+    "Providing a mirror-like image",
+    "Bad tempered and unwilling to be friendly"
+  ],
+  "answerOption": "D",
+  "answerText": "Bad tempered and unwilling to be friendly",
+  "difficulty": "easy",
+  "sourceFile": "0847.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2193,
+  "word": "Advisory",
+  "question": "Advisory",
+  "options": [
+    "Put in a very difficult situation",
+    "One who poses riddles",
+    "An instrument like a barometer",
+    "Providing advice or recommendations"
+  ],
+  "answerOption": "D",
+  "answerText": "Providing advice or recommendations",
+  "difficulty": "hard",
+  "sourceFile": "2193.json"
+}

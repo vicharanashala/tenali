@@ -1,0 +1,15 @@
+{
+  "id": 1329,
+  "word": "Deduce",
+  "question": "Deduce",
+  "options": [
+    "To conclude by reasoning",
+    "Careful to avoid social awkwardness",
+    "To cause something to cease to exist",
+    "Occurring in sudden bursts"
+  ],
+  "answerOption": "A",
+  "answerText": "To conclude by reasoning",
+  "difficulty": "medium",
+  "sourceFile": "1329.json"
+}

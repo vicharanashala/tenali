@@ -1,0 +1,15 @@
+{
+  "id": 1771,
+  "word": "Abhorrence",
+  "question": "Abhorrence",
+  "options": [
+    "Requiring careful attention to detail",
+    "Refusal to change position",
+    "A feeling of hatred or disgust",
+    "Forced someone to act against their will"
+  ],
+  "answerOption": "C",
+  "answerText": "A feeling of hatred or disgust",
+  "difficulty": "medium",
+  "sourceFile": "1771.json"
+}

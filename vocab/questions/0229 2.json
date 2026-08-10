@@ -1,0 +1,15 @@
+{
+  "id": 229,
+  "word": "Retreat",
+  "question": "Retreat",
+  "options": [
+    "Well known from long experience",
+    "To withdraw from a position",
+    "Having lived or existed for only a short time",
+    "Not severe or strong; gentle"
+  ],
+  "answerOption": "B",
+  "answerText": "To withdraw from a position",
+  "difficulty": "easy",
+  "sourceFile": "0229.json"
+}

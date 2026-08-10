@@ -1,0 +1,15 @@
+{
+  "id": 2026,
+  "word": "Aegle",
+  "question": "Aegle",
+  "options": [
+    "A person who is new to a subject",
+    "A citrus tree from Asia",
+    "Treatment with hot air",
+    "An unpleasant or unhealthy atmosphere"
+  ],
+  "answerOption": "B",
+  "answerText": "A citrus tree from Asia",
+  "difficulty": "hard",
+  "sourceFile": "2026.json"
+}

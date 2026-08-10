@@ -1,0 +1,15 @@
+{
+  "id": 1220,
+  "word": "Nonchalance",
+  "question": "Nonchalance",
+  "options": [
+    "A playing card or die with two spots",
+    "To ask for something forcefully",
+    "Casual lack of concern about things",
+    "Relating to a department"
+  ],
+  "answerOption": "C",
+  "answerText": "Casual lack of concern about things",
+  "difficulty": "medium",
+  "sourceFile": "1220.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1078,
+  "word": "Gratitude",
+  "question": "Gratitude",
+  "options": [
+    "The action of stripping bare",
+    "An abundant supply of something",
+    "The quality of being thankful",
+    "Feeling uncertain or skeptical"
+  ],
+  "answerOption": "C",
+  "answerText": "The quality of being thankful",
+  "difficulty": "medium",
+  "sourceFile": "1078.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1805,
+  "word": "Inhumane",
+  "question": "Inhumane",
+  "options": [
+    "Unwilling to believe",
+    "Lacking compassion or kindness",
+    "Able to be shown or proven",
+    "Forbidden or excluded"
+  ],
+  "answerOption": "B",
+  "answerText": "Lacking compassion or kindness",
+  "difficulty": "medium",
+  "sourceFile": "1805.json"
+}

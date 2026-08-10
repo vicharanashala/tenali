@@ -1,0 +1,15 @@
+{
+  "id": 269,
+  "word": "Feed",
+  "question": "Feed",
+  "options": [
+    "To carefully choose as being the best",
+    "Dark or poorly lit; depressing",
+    "To give food to a person or animal",
+    "Existing in or caused by nature"
+  ],
+  "answerOption": "C",
+  "answerText": "To give food to a person or animal",
+  "difficulty": "easy",
+  "sourceFile": "0269.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 484,
+  "word": "Review",
+  "question": "Review",
+  "options": [
+    "Far away in space or time",
+    "To present something for acceptance",
+    "To examine something with the possibility of change",
+    "To fasten or join one thing to another"
+  ],
+  "answerOption": "C",
+  "answerText": "To examine something with the possibility of change",
+  "difficulty": "easy",
+  "sourceFile": "0484.json"
+}

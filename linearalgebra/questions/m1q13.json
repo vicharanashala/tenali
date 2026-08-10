@@ -1,0 +1,462 @@
+{
+  "module": 1,
+  "missionId": 13,
+  "title": "Jigsaw Puzzle",
+  "original_question": "Can you REVERSE the transformation? If φ(x,y) = (2x+3y, 3x+4y), can you always find (x,y) from the output?",
+  "core_concept": "A matrix is invertible if and only if its determinant is non-zero. The determinant measures how much the transformation scales area: det = 0 means the transformation collapses space (squashing a 2D area into a line or point), making reversal impossible. Non-zero det means the transformation is bijective — every output has a unique input.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M1Q13E1",
+        "question": "What is the determinant of A = [[2,3],[3,4]]?",
+        "options": [
+          "-1",
+          "1 ()",
+          "8",
+          "17"
+        ],
+        "correct_option": "-1",
+        "explanation": "Step 1: det(A) = ad - bc for a 2×2 matrix [[a,b],[c,d]]. Step 2: det = (2)(4) - (3)(3) = 8 - 9 = -1. Step 3: The determinant is -1."
+      },
+      {
+        "id": "M1Q13E2",
+        "question": "Since det(A) = -1 ≠ 0, is the matrix A invertible?",
+        "options": [
+          "Yes, a non-zero determinant means the matrix is invertible",
+          "because the determinant is negative",
+          "Only if the determinant is positive",
+          "Cant be determined — does t match"
+        ],
+        "correct_option": "Yes, a non-zero determinant means the matrix is invertible",
+        "explanation": "Step 1: The key condition for invertibility is det(A) ≠ 0. Step 2: -1 ≠ 0. Step 3: Therefore A is invertible — the transformation can be reversed."
+      },
+      {
+        "id": "M1Q13E3",
+        "question": "What is the determinant of B = [[1,2],[2,4]]?",
+        "options": [
+          "0",
+          "4",
+          "-4",
+          "8"
+        ],
+        "correct_option": "0",
+        "explanation": "Step 1: det(B) = (1)(4) - (2)(2) = 4 - 4 = 0. Step 2: The determinant is exactly zero. Step 3: A zero determinant means B is NOT invertible."
+      },
+      {
+        "id": "M1Q13E4",
+        "question": "If det(A) = 0, can you find the inverse of A?",
+        "options": [
+          "No — a zero determinant means the matrix is singular (not invertible)",
+          "always — does t match",
+          "Only if the matrix is 3×3",
+          "Only for positive matrices"
+        ],
+        "correct_option": "No — a zero determinant means the matrix is singular (not invertible)",
+        "explanation": "Step 1: The inverse formula A⁻¹ = (1/det(A)) × adj(A) requires dividing by det(A). Step 2: If det(A) = 0, division by zero is undefined. Step 3: Therefore, a zero-determinant matrix has no inverse — it is singular."
+      },
+      {
+        "id": "M1Q13E5",
+        "question": "What does det(A) = 0 mean geometrically for a 2D transformation?",
+        "options": [
+          "The transformation collapses 2D space into a line or point (zero area)",
+          "The transformation rotates by 90°",
+          "The transformation doubles all areas",
+          "The transformation preserves area"
+        ],
+        "correct_option": "The transformation collapses 2D space into a line or point (zero area)",
+        "explanation": "Step 1: The determinant measures how areas scale under the transformation. Step 2: det = 0 means all 2D shapes are squashed to zero area. Step 3: Information is lost — you can't reverse a squashing operation."
+      },
+      {
+        "id": "M1Q13E6",
+        "question": "If A = [[2,3],[3,4]] and A⁻¹ exists, what is A⁻¹ × A?",
+        "options": [
+          "The identity matrix [[1,0],[0,1]]",
+          "The zero matrix [[0,0],[0,0]]",
+          "Matrix A itself — does t match",
+          "A matrix with all entries equal to 1"
+        ],
+        "correct_option": "The identity matrix [[1,0],[0,1]]",
+        "explanation": "Step 1: A⁻¹ × A = I by definition of the inverse. Step 2: Multiplying by the inverse undoes the transformation. Step 3: The identity matrix I maps every vector to itself — it's the 'do nothing' transformation."
+      },
+      {
+        "id": "M1Q13E7",
+        "question": "What is det([[1,0],[0,1]]) (the identity matrix)?",
+        "options": [
+          "1",
+          "0",
+          "-1",
+          "2"
+        ],
+        "correct_option": "1",
+        "explanation": "Step 1: det = (1)(1) - (0)(0) = 1. Step 2: The identity matrix has determinant 1. Step 3: This makes sense — the identity transformation preserves all areas (scaling factor = 1)."
+      },
+      {
+        "id": "M1Q13E8",
+        "question": "If det(A) = 5, what happens to areas under the transformation?",
+        "options": [
+          "All areas are multiplied by 5 (stretched to 5× their original size)",
+          "All areas are halved — does t match",
+          "Areas are unchanged — does t match",
+          "Areas become zero — does t match"
+        ],
+        "correct_option": "All areas are multiplied by 5 (stretched to 5× their original size)",
+        "explanation": "Step 1: The absolute value of the determinant gives the area scaling factor. Step 2: |det(A)| = 5 means areas are multiplied by 5. Step 3: A unit square becomes a parallelogram with area 5."
+      },
+      {
+        "id": "M1Q13E9",
+        "question": "The matrix [[0,1],[1,0]] swaps x and y coordinates. What is its determinant?",
+        "options": [
+          "-1",
+          "1 ()",
+          "0",
+          "2"
+        ],
+        "correct_option": "-1",
+        "explanation": "Step 1: det = (0)(0) - (1)(1) = 0 - 1 = -1. Step 2: The negative sign indicates a reflection (orientation reversal). Step 3: |det| = 1 means areas are preserved, but the sign flip means the transformation is a reflection."
+      },
+      {
+        "id": "M1Q13E10",
+        "question": "Is the identity matrix [[1,0],[0,1]] invertible?",
+        "options": [
+          "Yes — det = 1 ≠ 0, and its inverse is itself",
+          "— it's already the simplest matrix",
+          "Only for 3×3 identity matrices",
+          "Only if we define a special inverse"
+        ],
+        "correct_option": "Yes — det = 1 ≠ 0, and its inverse is itself",
+        "explanation": "Step 1: det(I) = 1 ≠ 0. Step 2: I⁻¹ = I (the identity is its own inverse). Step 3: Applying I does nothing, and undoing 'nothing' is also 'nothing'."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M1Q13M1",
+        "question": "det([[1,2],[2,4]]) = 0. What does this tell you about the rows (1,2) and (2,4)?",
+        "options": [
+          "They are linearly dependent — row 2 is exactly 2× row 1",
+          "They are perpendicular",
+          "They are equal — does t match",
+          "They sum to zero — does t match"
+        ],
+        "correct_option": "They are linearly dependent — row 2 is exactly 2× row 1",
+        "explanation": "Step 1: Row 2 = (2,4) = 2 × (1,2) = 2 × Row 1. Step 2: One row is a scalar multiple of the other. Step 3: This linear dependence is exactly what causes the determinant to be zero."
+      },
+      {
+        "id": "M1Q13M2",
+        "question": "Does a zero determinant always mean a matrix is not invertible?",
+        "options": [
+          "Yes — det = 0 is equivalent to being singular (non-invertible)",
+          "some zero-determinant matrices are invertible",
+          "Only for 3×3 matrices",
+          "Only if the matrix is symmetric"
+        ],
+        "correct_option": "Yes — det = 0 is equivalent to being singular (non-invertible)",
+        "explanation": "Step 1: For any square matrix, det = 0 ↔ not invertible. Step 2: This is a fundamental theorem in linear algebra. Step 3: The two conditions (det = 0 and non-invertibility) are logically equivalent."
+      },
+      {
+        "id": "M1Q13M3",
+        "question": "If det(A) ≠ 0, does Ax = b always have a unique solution?",
+        "options": [
+          "Yes — an invertible matrix guarantees a unique solution for any b",
+          "Only if b is positive",
+          "Only for 2×2 matrices",
+          "it depends on b — does t match"
+        ],
+        "correct_option": "Yes — an invertible matrix guarantees a unique solution for any b",
+        "explanation": "Step 1: det(A) ≠ 0 means A⁻¹ exists. Step 2: x = A⁻¹b is the unique solution. Step 3: This works for ANY b, because A⁻¹A = I."
+      },
+      {
+        "id": "M1Q13M4",
+        "question": "For a robot arm, if the forward kinematics matrix is A, what does A⁻¹ give you?",
+        "options": [
+          "The joint angles needed to reach a desired end-effector position",
+          "The speed of the robot arm",
+          "The weight of the robot",
+          "The length of each link"
+        ],
+        "correct_option": "The joint angles needed to reach a desired end-effector position",
+        "explanation": "Step 1: Forward: joint angles → end position (x = Aθ). Step 2: Inverse: end position → joint angles (θ = A⁻¹x). Step 3: The inverse matrix solves the inverse kinematics problem."
+      },
+      {
+        "id": "M1Q13M5",
+        "question": "What is the determinant of a 2×2 diagonal matrix [[a,0],[0,d]]?",
+        "options": [
+          "a × d",
+          "a + d",
+          "a - d",
+          "0"
+        ],
+        "correct_option": "a × d",
+        "explanation": "Step 1: det = ad - (0)(0) = ad. Step 2: For a diagonal matrix, the determinant is the product of diagonal entries. Step 3: The matrix is invertible if and only if both a ≠ 0 and d ≠ 0."
+      },
+      {
+        "id": "M1Q13M6",
+        "question": "If det(A) = -1, what can you say about the area transformation?",
+        "options": [
+          "Areas are preserved (|det| = 1) but orientation is reversed (negative sign)",
+          "Areas are doubled — does t match",
+          "Areas become zero — does t match",
+          "Orientation is preserved"
+        ],
+        "correct_option": "Areas are preserved (|det| = 1) but orientation is reversed (negative sign)",
+        "explanation": "Step 1: |det| = 1 means areas don't change size. Step 2: Negative sign means the transformation includes a reflection (flips orientation). Step 3: Example: a reflection across a line preserves area but reverses left-right."
+      },
+      {
+        "id": "M1Q13M7",
+        "question": "The inverse of A = [[2,3],[3,4]] is A⁻¹ = [[-4,3],[3,-2]]. Verify: what is A⁻¹ × (8, 11)?",
+        "options": [
+          "(1, 2) — recovering the original input",
+          "(8, 11))",
+          "(2, 3))",
+          "(11, 8))"
+        ],
+        "correct_option": "(1, 2) — recovering the original input",
+        "explanation": "Step 1: We know A × (1,2) = (8,11). Step 2: A⁻¹ × (8,11) should give back (1,2). Step 3: [(-4)(8)+(3)(11), (3)(8)+(-2)(11)] = [-32+33, 24-22] = (1, 2) ✓."
+      },
+      {
+        "id": "M1Q13M8",
+        "question": "In PCA (data compression), why must the transformation matrix be invertible?",
+        "options": [
+          "So that compressed data can be reconstructed back to the original (lossless compression)",
+          "To make the compression faster",
+          "Because compressed data is always smaller",
+          "To ensure the data has positive values"
+        ],
+        "correct_option": "So that compressed data can be reconstructed back to the original (lossless compression)",
+        "explanation": "Step 1: Compression applies matrix A to original data: compressed = A × original. Step 2: Decompression applies A⁻¹: original = A⁻¹ × compressed. Step 3: If A weren't invertible, the original data could never be recovered."
+      },
+      {
+        "id": "M1Q13M9",
+        "question": "What is the determinant of a 3×3 matrix [[1,0,0],[0,2,0],[0,0,3]]?",
+        "options": [
+          "6 (product of diagonal entries)",
+          "3 — t here",
+          "0 — t here",
+          "1 — t here"
+        ],
+        "correct_option": "6 (product of diagonal entries)",
+        "explanation": "Step 1: For a diagonal matrix, det = product of diagonal entries. Step 2: det = 1 × 2 × 3 = 6. Step 3: Non-zero determinant → invertible. The inverse is [[1,0,0],[0,0.5,0],[0,0,1/3]]."
+      },
+      {
+        "id": "M1Q13M10",
+        "question": "The matrix [[1,2],[2,4]] has det = 0. How many non-zero vectors map to the origin under this transformation?",
+        "options": [
+          "Infinitely many — all vectors on the line x = -2y",
+          "Exactly one (the zero vector)",
+          "ne)",
+          "Exactly two — does t match"
+        ],
+        "correct_option": "Infinitely many — all vectors on the line x = -2y",
+        "explanation": "Step 1: det = 0 means the matrix is singular. Step 2: Ax = 0 has non-trivial solutions. Step 3: x + 2y = 0 and 2x + 4y = 0 both give x = -2y, so all vectors of the form t(-2, 1) map to zero — infinitely many."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M1Q13H1",
+        "question": "A 2×2 matrix A is invertible if and only if all of these hold EXCEPT:",
+        "options": [
+          "The columns are linearly dependent",
+          "det(A) ≠ 0)",
+          "Ax = 0 has only the trivial solution",
+          "The columns span all of ℝ²"
+        ],
+        "correct_option": "The columns are linearly dependent",
+        "explanation": "Step 1: Invertible ↔ det ≠ 0 ↔ columns are linearly independent ↔ Ax = 0 has only trivial solution ↔ columns span ℝ². Step 2: 'Columns are linearly dependent' is the OPPOSITE of being invertible. Step 3: Linear dependence means det = 0, which means NOT invertible."
+      },
+      {
+        "id": "M1Q13H2",
+        "question": "The determinant of a product equals the product of determinants: det(AB) = det(A)·det(B). If det(A) = 3 and det(B) = 0, what is det(AB)?",
+        "options": [
+          "0",
+          "3",
+          "Undefined",
+          "9"
+        ],
+        "correct_option": "0",
+        "explanation": "Step 1: det(AB) = det(A) × det(B) = 3 × 0 = 0. Step 2: Even though A is invertible, B is not. Step 3: The product AB is not invertible because det(AB) = 0."
+      },
+      {
+        "id": "M1Q13H3",
+        "question": "A 2×2 matrix A has eigenvalues 2 and 3. What is det(A)?",
+        "options": [
+          "6 (product of eigenvalues)",
+          "5 (sum of eigenvalues)",
+          "1 — t here",
+          "0 — t here"
+        ],
+        "correct_option": "6 (product of eigenvalues)",
+        "explanation": "Step 1: For any matrix, det(A) = product of eigenvalues. Step 2: det(A) = 2 × 3 = 6. Step 3: Since det ≠ 0, A is invertible. The trace (sum of eigenvalues) = 5."
+      },
+      {
+        "id": "M1Q13H4",
+        "question": "The general linear group GL(2, ℝ) is the set of all invertible 2×2 real matrices. Is it a subgroup of the group of all 2×2 matrices under multiplication?",
+        "options": [
+          "Yes — it's closed under multiplication and inverses, and contains the identity",
+          "— it doesn't contain the identity",
+          "Only for matrices with positive determinants",
+          "Only for integer matrices"
+        ],
+        "correct_option": "Yes — it's closed under multiplication and inverses, and contains the identity",
+        "explanation": "Step 1: Identity: det(I) = 1 ≠ 0, so I ∈ GL(2). Step 2: Closure: det(AB) = det(A)det(B) ≠ 0 if both are non-zero. Step 3: Inverse: det(A⁻¹) = 1/det(A) ≠ 0. All group axioms are satisfied."
+      },
+      {
+        "id": "M1Q13H5",
+        "question": "If A is invertible and symmetric (A = Aᵀ), what can you say about A⁻¹?",
+        "options": [
+          "A⁻¹ is also symmetric: (A⁻¹)ᵀ = A⁻¹",
+          "A⁻¹ is t symmetric",
+          "A⁻¹ doesn't exist — does t match",
+          "A⁻¹ is the zero matrix"
+        ],
+        "correct_option": "A⁻¹ is also symmetric: (A⁻¹)ᵀ = A⁻¹",
+        "explanation": "Step 1: (A⁻¹)ᵀ = (Aᵀ)⁻¹ = A⁻¹ (since A = Aᵀ). Step 2: The inverse of a symmetric matrix is symmetric. Step 3: This is because the transpose and inverse operations commute."
+      },
+      {
+        "id": "M1Q13H6",
+        "question": "What is the geometric interpretation of the determinant of a 2×2 matrix as the signed area of a parallelogram?",
+        "options": [
+          "det(A) = area of the parallelogram formed by the column vectors of A (with sign for orientation)",
+          "det(A) = perimeter of the parallelogram",
+          "det(A) = the height of the parallelogram",
+          "det(A) = the diagonal of the parallelogram"
+        ],
+        "correct_option": "det(A) = area of the parallelogram formed by the column vectors of A (with sign for orientation)",
+        "explanation": "Step 1: The columns of A are two vectors in ℝ². Step 2: These vectors form the sides of a parallelogram. Step 3: The signed area of this parallelogram equals det(A) — positive if the columns form a right-handed system, negative otherwise."
+      },
+      {
+        "id": "M1Q13H7",
+        "question": "The Cramer's rule formula for solving Ax = b uses determinants. For a 2×2 system, x₁ = det(A₁)/det(A) where A₁ replaces column 1 with b. Why must det(A) ≠ 0?",
+        "options": [
+          "Because we divide by det(A), and division by zero is undefined",
+          "Because det(A) must be positive",
+          "Because Cramer's rule only works for 3×3 systems",
+          "Because det(A) represents the answer"
+        ],
+        "correct_option": "Because we divide by det(A), and division by zero is undefined",
+        "explanation": "Step 1: Cramer's rule requires computing x₁ = det(A₁)/det(A). Step 2: Division by zero is undefined. Step 3: If det(A) = 0, Cramer's rule fails — we need other methods (or the system may be inconsistent/have infinitely many solutions)."
+      },
+      {
+        "id": "M1Q13H8",
+        "question": "If det(A) = 2, what is det(A⁻¹)?",
+        "options": [
+          "1/2",
+          "2 (x)",
+          "-2",
+          "4"
+        ],
+        "correct_option": "1/2",
+        "explanation": "Step 1: Since A × A⁻¹ = I, det(A × A⁻¹) = det(I) = 1. Step 2: det(A) × det(A⁻¹) = 1. Step 3: det(A⁻¹) = 1/det(A) = 1/2."
+      },
+      {
+        "id": "M1Q13H9",
+        "question": "A matrix with det = 0 is called 'singular.' What happens to the column space of a singular 2×2 matrix?",
+        "options": [
+          "The column space collapses from 2D to 1D (a line) or 0D (the origin)",
+          "The column space expands to 3D",
+          "The column space stays 2D",
+          "The column space becomes a circle"
+        ],
+        "correct_option": "The column space collapses from 2D to 1D (a line) or 0D (the origin)",
+        "explanation": "Step 1: det = 0 means the columns are linearly dependent. Step 2: The column space (span of columns) has dimension = rank < 2. Step 3: rank is 1 (columns span a line) or 0 (columns are both zero)."
+      },
+      {
+        "id": "M1Q13H10",
+        "question": "Why is the concept of matrix invertibility fundamental to solving real-world linear systems?",
+        "options": [
+          "Because invertibility guarantees a unique solution exists for every possible right-hand side, making the system reliable and predictable",
+          "Because invertible matrices are always faster to compute",
+          "Because only invertible matrices can be stored in computers",
+          "Because n-invertible matrices don't appear in practice"
+        ],
+        "correct_option": "Because invertibility guarantees a unique solution exists for every possible right-hand side, making the system reliable and predictable",
+        "explanation": "Step 1: Ax = b with invertible A always has x = A⁻¹b — a unique solution for any b. Step 2: This makes the system fully predictable: any input produces a valid, unique output. Step 3: In engineering, science, and economics, this reliability is essential for model validity."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "emoji": "🏆",
+      "title": "Robotics (Inverse Kinematics)",
+      "equation": "Joint_angles = A⁻¹ × Desired_position",
+      "type": "mcq",
+      "concept": "Invertibility for Reversing Transformations",
+      "story": "A robot arm needs to reach a specific position in space. The forward problem is: given the joint angles, where does the arm end up? The inverse problem is harder but essential — given the desired position, what joint angles achieve it? This requires the matrix to be invertible.",
+      "question": "What does the inverse of the robot arm's transformation matrix give you?",
+      "options": [
+        "The joint angles needed to reach the desired position",
+        "The speed of the robot arm",
+        "The weight of the object being held",
+        "The length of each arm segment"
+      ],
+      "answer": "The joint angles needed to reach the desired position",
+      "explanation": "Step 1: Forward kinematics: position = A × angles. Step 2: Inverse kinematics: angles = A⁻¹ × position. Step 3: The inverse matrix solves the reverse problem — finding inputs from desired outputs."
+    },
+    {
+      "emoji": "📊",
+      "title": "Data Analysis (PCA Reconstruction)",
+      "equation": "Original = Projection⁻¹ × Compressed",
+      "type": "mcq",
+      "concept": "Reversible Data Compression",
+      "story": "Principal Component Analysis (PCA) compresses high-dimensional data by projecting it onto fewer dimensions. The key insight is that this compression is reversible — you can reconstruct the original data from the compressed version because the transformation matrix is invertible.",
+      "question": "What property of the transformation matrix is essential for being able to reconstruct compressed data?",
+      "options": [
+        "Invertibility (non-zero determinant)",
+        "Symmetry",
+        "Having all positive entries",
+        "Being a diagonal matrix"
+      ],
+      "answer": "Invertibility (non-zero determinant)",
+      "explanation": "Step 1: Compression: compressed = A × original. Step 2: Reconstruction: original = A⁻¹ × compressed. Step 3: A⁻¹ exists only if det(A) ≠ 0 — invertibility is the essential property."
+    },
+    {
+      "emoji": "🔐",
+      "title": "Cryptography (Matrix Encryption)",
+      "equation": "Decryption_key = Encryption_matrix⁻¹",
+      "type": "mcq",
+      "concept": "Invertibility for Secure Communication",
+      "story": "Some encryption schemes use a matrix to transform plaintext into ciphertext. For the receiver to decrypt the message, they need the inverse matrix. If the encryption matrix had determinant zero, decryption would be impossible — the original message would be permanently lost.",
+      "question": "Why must an encryption matrix be invertible for the cipher to work?",
+      "options": [
+        "So the receiver can apply the inverse matrix to recover the original message",
+        "To make the ciphertext longer",
+        "To ensure the message is in English",
+        "To increase the number of possible messages"
+      ],
+      "answer": "So the receiver can apply the inverse matrix to recover the original message",
+      "explanation": "Step 1: Encryption: ciphertext = A × plaintext. Step 2: Decryption: plaintext = A⁻¹ × ciphertext. Step 3: Without invertibility, the decryption step is impossible — the original information is irrecoverably lost."
+    },
+    {
+      "emoji": "🧭",
+      "title": "Navigation (Coordinate Transformation)",
+      "equation": "Local_frame = Rotation_matrix⁻¹ × Global_position",
+      "type": "mcq",
+      "concept": "Reversible Frame Changes",
+      "story": "A ship's navigation system converts between global GPS coordinates and local coordinates (relative to the ship's heading). The rotation matrix that performs this conversion must be invertible — otherwise, the ship couldn't convert back to global coordinates.",
+      "question": "Why must the coordinate transformation matrix in navigation be invertible?",
+      "options": [
+        "To allow conversion back and forth between coordinate systems",
+        "To make the coordinates larger",
+        "To ensure the ship moves in a straight line",
+        "To reduce computational errors"
+      ],
+      "answer": "To allow conversion back and forth between coordinate systems",
+      "explanation": "Step 1: Global → Local: local = A × global. Step 2: Local → Global: global = A⁻¹ × local. Step 3: Two-way conversion requires invertibility — the ship needs to translate in both directions."
+    },
+    {
+      "emoji": "🧬",
+      "title": "Genomics (Gene Expression Reversal)",
+      "equation": "Original_expression = Transform⁻¹ × Processed_data",
+      "type": "mcq",
+      "concept": "Invertibility in Bioinformatics",
+      "story": "When analysing gene expression data, scientists apply transformations to remove noise and reveal patterns. If the transformation is invertible, they can always recover the original data from the processed version — essential for verifying results.",
+      "question": "Why is invertibility important for gene expression data transformations?",
+      "options": [
+        "So the original data can be recovered for verification and further analysis",
+        "To make the data more complex",
+        "To increase the number of genes measured",
+        "To reduce the cost of experiments"
+      ],
+      "answer": "So the original data can be recovered for verification and further analysis",
+      "explanation": "Step 1: Processed data = A × original data. Step 2: Recovery: original = A⁻¹ × processed. Step 3: Invertibility ensures no information is permanently lost, allowing scientists to verify their analysis."
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1861,
+  "word": "Magniloquent",
+  "question": "Magniloquent",
+  "options": [
+    "Little known; abstruse and difficult",
+    "Familiar with many different cultures",
+    "To make mysterious or obscure",
+    "Using high-flown or bombastic language"
+  ],
+  "answerOption": "D",
+  "answerText": "Using high-flown or bombastic language",
+  "difficulty": "hard",
+  "sourceFile": "1861.json"
+}

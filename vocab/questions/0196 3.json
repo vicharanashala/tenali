@@ -1,0 +1,15 @@
+{
+  "id": 196,
+  "word": "Mix",
+  "question": "Mix",
+  "options": [
+    "Protected from danger or risk",
+    "To devote time or effort to a purpose",
+    "To combine different things together",
+    "Closely compacted or thick"
+  ],
+  "answerOption": "C",
+  "answerText": "To combine different things together",
+  "difficulty": "easy",
+  "sourceFile": "0196.json"
+}

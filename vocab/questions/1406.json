@@ -1,0 +1,15 @@
+{
+  "id": 1406,
+  "word": "Democracy",
+  "question": "Democracy",
+  "options": [
+    "A system where power rests with people",
+    "The removal of salt from water",
+    "In a determined manner",
+    "Uncompromisingly direct in speech"
+  ],
+  "answerOption": "A",
+  "answerText": "A system where power rests with people",
+  "difficulty": "medium",
+  "sourceFile": "1406.json"
+}

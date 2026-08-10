@@ -1,0 +1,15 @@
+{
+  "id": 1124,
+  "word": "Gist",
+  "question": "Gist",
+  "options": [
+    "In a despondent manner",
+    "The action of reducing in rank or status",
+    "Unwilling to believe",
+    "The main point or essence of a matter"
+  ],
+  "answerOption": "D",
+  "answerText": "The main point or essence of a matter",
+  "difficulty": "medium",
+  "sourceFile": "1124.json"
+}

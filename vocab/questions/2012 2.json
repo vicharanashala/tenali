@@ -1,0 +1,15 @@
+{
+  "id": 2012,
+  "word": "Aecia",
+  "question": "Aecia",
+  "options": [
+    "To speak in riddles",
+    "The atmosphere or air layer",
+    "Plural of aecium fungal structure",
+    "Building a nest in the air"
+  ],
+  "answerOption": "C",
+  "answerText": "Plural of aecium fungal structure",
+  "difficulty": "hard",
+  "sourceFile": "2012.json"
+}

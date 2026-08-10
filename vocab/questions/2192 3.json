@@ -1,0 +1,15 @@
+{
+  "id": 2192,
+  "word": "Advisor",
+  "question": "Advisor",
+  "options": [
+    "One who gives advice or counsel",
+    "Having a skeptical or cynical outlook",
+    "Organisms floating in air",
+    "Characterized by concern or care"
+  ],
+  "answerOption": "A",
+  "answerText": "One who gives advice or counsel",
+  "difficulty": "hard",
+  "sourceFile": "2192.json"
+}

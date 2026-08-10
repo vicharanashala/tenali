@@ -1,0 +1,14 @@
+{
+  "id": 283,
+  "question": "What is the common name of sodium bicarbonate?",
+  "options": [
+    "Washing soda",
+    "Baking soda",
+    "Bleaching powder",
+    "Epsom salt"
+  ],
+  "answerOption": "B",
+  "answerText": "Baking soda",
+  "genre": "mixed",
+  "sourceFile": "0283.json"
+}

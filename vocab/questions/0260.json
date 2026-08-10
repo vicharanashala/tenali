@@ -1,0 +1,15 @@
+{
+  "id": 260,
+  "word": "Rest",
+  "question": "Rest",
+  "options": [
+    "To fasten or join one thing to another",
+    "To stop working or moving to relax",
+    "A barren area with very little rainfall",
+    "Arranged in a tidy way"
+  ],
+  "answerOption": "B",
+  "answerText": "To stop working or moving to relax",
+  "difficulty": "easy",
+  "sourceFile": "0260.json"
+}

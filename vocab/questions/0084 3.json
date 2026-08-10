@@ -1,0 +1,15 @@
+{
+  "id": 84,
+  "word": "Narrow",
+  "question": "Narrow",
+  "options": [
+    "To put a limit on something",
+    "Of small width in relation to length",
+    "Directing attention or effort at something",
+    "To produce a picture using a pencil"
+  ],
+  "answerOption": "B",
+  "answerText": "Of small width in relation to length",
+  "difficulty": "easy",
+  "sourceFile": "0084.json"
+}

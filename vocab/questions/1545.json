@@ -1,0 +1,15 @@
+{
+  "id": 1545,
+  "word": "Derisory",
+  "question": "Derisory",
+  "options": [
+    "Of such small amount as to be ridiculous",
+    "Excessively proud of appearance",
+    "Declared illegal",
+    "Done routinely without care"
+  ],
+  "answerOption": "A",
+  "answerText": "Of such small amount as to be ridiculous",
+  "difficulty": "medium",
+  "sourceFile": "1545.json"
+}

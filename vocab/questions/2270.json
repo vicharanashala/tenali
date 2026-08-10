@@ -1,0 +1,15 @@
+{
+  "id": 2270,
+  "word": "Adscititious",
+  "question": "Adscititious",
+  "options": [
+    "One who studies aerodynamics",
+    "Derived from an external source",
+    "Providing advice or recommendations",
+    "Aggressively greedy or grasping"
+  ],
+  "answerOption": "B",
+  "answerText": "Derived from an external source",
+  "difficulty": "hard",
+  "sourceFile": "2270.json"
+}

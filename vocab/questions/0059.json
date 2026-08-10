@@ -1,0 +1,15 @@
+{
+  "id": 59,
+  "word": "Simple",
+  "question": "Simple",
+  "options": [
+    "Easy to understand or do",
+    "To recognize the full worth of something",
+    "Slightly wet or damp",
+    "Unfriendly and opposed to something"
+  ],
+  "answerOption": "A",
+  "answerText": "Easy to understand or do",
+  "difficulty": "easy",
+  "sourceFile": "0059.json"
+}

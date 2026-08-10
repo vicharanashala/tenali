@@ -1,0 +1,15 @@
+{
+  "id": 3303,
+  "word": "ABJURED",
+  "question": "ABJURED",
+  "options": [
+    "Remaining or continuing in place",
+    "In the direction of the sun's course; clockwise",
+    "One speaking against ablation",
+    "Renounced under oath"
+  ],
+  "answerOption": "D",
+  "answerText": "Renounced under oath",
+  "difficulty": "extra-hard",
+  "sourceFile": "3303.json"
+}

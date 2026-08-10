@@ -1,0 +1,15 @@
+{
+  "id": 1378,
+  "word": "Hiraeth",
+  "question": "Hiraeth",
+  "options": [
+    "A period when normal government is suspended",
+    "A widespread long-lived windstorm",
+    "A longing for a home that may never have existed",
+    "The taste of bliss in the absence of all thought"
+  ],
+  "answerOption": "C",
+  "answerText": "A longing for a home that may never have existed",
+  "difficulty": "extra-hard",
+  "sourceFile": "1378.json"
+}

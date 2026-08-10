@@ -1,0 +1,15 @@
+{
+  "id": 261,
+  "word": "Rush",
+  "question": "Rush",
+  "options": [
+    "Strongly and solidly built",
+    "To move with urgent haste",
+    "To allow liquid to escape through a hole",
+    "To push off the ground using the legs"
+  ],
+  "answerOption": "B",
+  "answerText": "To move with urgent haste",
+  "difficulty": "easy",
+  "sourceFile": "0261.json"
+}

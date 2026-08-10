@@ -1,0 +1,15 @@
+{
+  "id": 2124,
+  "word": "Adult",
+  "question": "Adult",
+  "options": [
+    "The state of being few in number",
+    "A poisonous air substance",
+    "A person who is new to a subject",
+    "A mature human or animal"
+  ],
+  "answerOption": "D",
+  "answerText": "A mature human or animal",
+  "difficulty": "hard",
+  "sourceFile": "2124.json"
+}

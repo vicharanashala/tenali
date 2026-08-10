@@ -1,0 +1,15 @@
+{
+  "id": 268,
+  "word": "Harvest",
+  "question": "Harvest",
+  "options": [
+    "To gather a crop from the fields",
+    "To put someone at risk or in danger",
+    "To give attention to sound or speech",
+    "To break the connection between things"
+  ],
+  "answerOption": "A",
+  "answerText": "To gather a crop from the fields",
+  "difficulty": "easy",
+  "sourceFile": "0268.json"
+}

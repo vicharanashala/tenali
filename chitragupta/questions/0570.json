@@ -1,0 +1,14 @@
+{
+  "id": 570,
+  "question": "Which Indian state has Chandigarh as its capital city, though the city is a union territory shared with another state?",
+  "options": [
+    "Haryana",
+    "Punjab",
+    "Both Punjab and Haryana use Chandigarh",
+    "Himachal Pradesh"
+  ],
+  "answerOption": "C",
+  "answerText": "Both Punjab and Haryana use Chandigarh",
+  "genre": "geography",
+  "sourceFile": "0570.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 603,
+  "word": "Dazzle",
+  "question": "Dazzle",
+  "options": [
+    "To blind temporarily with a bright light",
+    "Quick to understand and learn things",
+    "To carry out an action or task",
+    "To allow liquid to escape through a hole"
+  ],
+  "answerOption": "A",
+  "answerText": "To blind temporarily with a bright light",
+  "difficulty": "easy",
+  "sourceFile": "0603.json"
+}

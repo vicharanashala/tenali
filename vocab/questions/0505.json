@@ -1,0 +1,15 @@
+{
+  "id": 505,
+  "word": "Dwell",
+  "question": "Dwell",
+  "options": [
+    "Having a pleasant taste",
+    "To live in a particular place",
+    "Having a lighthearted excited feeling",
+    "To make something previously hidden visible"
+  ],
+  "answerOption": "B",
+  "answerText": "To live in a particular place",
+  "difficulty": "easy",
+  "sourceFile": "0505.json"
+}

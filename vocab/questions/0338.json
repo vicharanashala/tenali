@@ -1,0 +1,15 @@
+{
+  "id": 338,
+  "word": "Surrender",
+  "question": "Surrender",
+  "options": [
+    "Luxuriously expensive or rich",
+    "To stop fighting and give up",
+    "To feel or detect something",
+    "Very bad or disagreeable"
+  ],
+  "answerOption": "B",
+  "answerText": "To stop fighting and give up",
+  "difficulty": "easy",
+  "sourceFile": "0338.json"
+}

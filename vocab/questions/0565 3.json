@@ -1,0 +1,15 @@
+{
+  "id": 565,
+  "word": "Amaze",
+  "question": "Amaze",
+  "options": [
+    "In a state of complete confusion",
+    "Having high principles and expectations",
+    "Involving or creating good conditions",
+    "To fill someone with great surprise"
+  ],
+  "answerOption": "D",
+  "answerText": "To fill someone with great surprise",
+  "difficulty": "easy",
+  "sourceFile": "0565.json"
+}

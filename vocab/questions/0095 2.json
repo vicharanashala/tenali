@@ -1,0 +1,15 @@
+{
+  "id": 95,
+  "word": "Exciting",
+  "question": "Exciting",
+  "options": [
+    "Enough to meet the needs",
+    "To bring something to an end",
+    "Causing great enthusiasm and eagerness",
+    "To break free from confinement"
+  ],
+  "answerOption": "C",
+  "answerText": "Causing great enthusiasm and eagerness",
+  "difficulty": "easy",
+  "sourceFile": "0095.json"
+}

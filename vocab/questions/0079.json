@@ -1,0 +1,15 @@
+{
+  "id": 79,
+  "word": "Foolish",
+  "question": "Foolish",
+  "options": [
+    "To have the same opinion as someone else",
+    "Lacking good sense or judgment",
+    "Sad or abandoned in appearance",
+    "Abundant or in large amounts"
+  ],
+  "answerOption": "B",
+  "answerText": "Lacking good sense or judgment",
+  "difficulty": "easy",
+  "sourceFile": "0079.json"
+}

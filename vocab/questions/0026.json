@@ -1,0 +1,15 @@
+{
+  "id": 26,
+  "word": "Old",
+  "question": "Old",
+  "options": [
+    "To arouse the curiosity of someone",
+    "Having lived for a long time; no longer young",
+    "Stretched tight or under strain",
+    "Decaying or decomposing"
+  ],
+  "answerOption": "B",
+  "answerText": "Having lived for a long time; no longer young",
+  "difficulty": "easy",
+  "sourceFile": "0026.json"
+}

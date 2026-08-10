@@ -1,0 +1,15 @@
+{
+  "id": 137,
+  "word": "Cruel",
+  "question": "Cruel",
+  "options": [
+    "Willfully causing pain to others",
+    "To make something stronger",
+    "To fill someone with delight",
+    "Measuring a small distance from end to end"
+  ],
+  "answerOption": "A",
+  "answerText": "Willfully causing pain to others",
+  "difficulty": "easy",
+  "sourceFile": "0137.json"
+}

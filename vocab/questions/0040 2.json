@@ -1,0 +1,15 @@
+{
+  "id": 40,
+  "word": "Ubiquitous",
+  "question": "Ubiquitous",
+  "options": [
+    "Present, appearing, or found everywhere",
+    "A person who flatters to gain advantage",
+    "Open to more than one interpretation",
+    "A harsh mixture of discordant sounds"
+  ],
+  "answerOption": "A",
+  "answerText": "Present, appearing, or found everywhere",
+  "difficulty": "hard",
+  "sourceFile": "0040.json"
+}

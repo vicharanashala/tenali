@@ -1,0 +1,15 @@
+{
+  "id": 106,
+  "word": "Plain",
+  "question": "Plain",
+  "options": [
+    "To make something clear and easy to understand",
+    "To welcome someone with particular words",
+    "Not decorated or elaborate; simple",
+    "To walk slowly with no clear direction"
+  ],
+  "answerOption": "C",
+  "answerText": "Not decorated or elaborate; simple",
+  "difficulty": "easy",
+  "sourceFile": "0106.json"
+}

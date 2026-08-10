@@ -1,0 +1,15 @@
+{
+  "id": 1400,
+  "word": "Demented",
+  "question": "Demented",
+  "options": [
+    "Praise and honor received for achievement",
+    "To illegally obtain money by deception",
+    "To describe or portray precisely",
+    "Suffering from dementia"
+  ],
+  "answerOption": "D",
+  "answerText": "Suffering from dementia",
+  "difficulty": "medium",
+  "sourceFile": "1400.json"
+}

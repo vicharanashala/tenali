@@ -1,0 +1,15 @@
+{
+  "id": 957,
+  "word": "Windy",
+  "question": "Windy",
+  "options": [
+    "To determine an amount by mathematics",
+    "Containing or using many words",
+    "Tall and thin in appearance",
+    "To keep something for future use"
+  ],
+  "answerOption": "B",
+  "answerText": "Containing or using many words",
+  "difficulty": "easy",
+  "sourceFile": "0957.json"
+}

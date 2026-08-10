@@ -1,0 +1,15 @@
+{
+  "id": 1738,
+  "word": "Garbled",
+  "question": "Garbled",
+  "options": [
+    "Distorted or inaccurately presented",
+    "In a way that can be shown",
+    "Complete freedom of action",
+    "Not stable or balanced"
+  ],
+  "answerOption": "A",
+  "answerText": "Distorted or inaccurately presented",
+  "difficulty": "medium",
+  "sourceFile": "1738.json"
+}

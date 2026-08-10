@@ -1,0 +1,14 @@
+{
+  "id": 144,
+  "question": "Which scientist is known for the laws of planetary motion?",
+  "options": [
+    "Johannes Kepler",
+    "Galileo Galilei",
+    "Copernicus",
+    "Tycho Brahe"
+  ],
+  "answerOption": "A",
+  "answerText": "Johannes Kepler",
+  "genre": "geography",
+  "sourceFile": "0144.json"
+}

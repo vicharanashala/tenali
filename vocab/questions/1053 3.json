@@ -1,0 +1,15 @@
+{
+  "id": 1053,
+  "word": "Tangible",
+  "question": "Tangible",
+  "options": [
+    "In a despotic manner",
+    "Holding firmly to something; persistent",
+    "Clear and definite; able to be touched",
+    "Easily crumbled or reduced"
+  ],
+  "answerOption": "C",
+  "answerText": "Clear and definite; able to be touched",
+  "difficulty": "medium",
+  "sourceFile": "1053.json"
+}

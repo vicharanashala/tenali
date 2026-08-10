@@ -1,0 +1,15 @@
+{
+  "id": 881,
+  "word": "Chronic",
+  "question": "Chronic",
+  "options": [
+    "Keeping careful watch for possible danger",
+    "Made in an intricate shape or decorated",
+    "Existing but not yet developed or visible",
+    "Persisting for a long time or recurring"
+  ],
+  "answerOption": "D",
+  "answerText": "Persisting for a long time or recurring",
+  "difficulty": "medium",
+  "sourceFile": "0881.json"
+}

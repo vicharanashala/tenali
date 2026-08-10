@@ -1,0 +1,15 @@
+{
+  "id": 903,
+  "word": "Adamant",
+  "question": "Adamant",
+  "options": [
+    "Showing no activity or development",
+    "Refusing to be persuaded or to change",
+    "Giving the impression that something bad will happen",
+    "Uncalled for and lacking good reason"
+  ],
+  "answerOption": "B",
+  "answerText": "Refusing to be persuaded or to change",
+  "difficulty": "medium",
+  "sourceFile": "0903.json"
+}

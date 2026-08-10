@@ -1,0 +1,15 @@
+{
+  "id": 528,
+  "word": "Authorize",
+  "question": "Authorize",
+  "options": [
+    "To give official permission for something",
+    "Conforming to accepted standards of behavior",
+    "To give something in return for good behavior",
+    "To produce a picture using a pencil"
+  ],
+  "answerOption": "A",
+  "answerText": "To give official permission for something",
+  "difficulty": "easy",
+  "sourceFile": "0528.json"
+}

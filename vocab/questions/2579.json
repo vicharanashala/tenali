@@ -1,0 +1,15 @@
+{
+  "id": 2579,
+  "word": "AEROSIS",
+  "question": "AEROSIS",
+  "options": [
+    "In an aerostatic manner",
+    "The action of showing or displaying",
+    "Medical condition from altitude",
+    "Special importance given to something"
+  ],
+  "answerOption": "C",
+  "answerText": "Medical condition from altitude",
+  "difficulty": "hard",
+  "sourceFile": "2579.json"
+}

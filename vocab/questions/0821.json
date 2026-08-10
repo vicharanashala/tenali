@@ -1,0 +1,15 @@
+{
+  "id": 821,
+  "word": "Obscure",
+  "question": "Obscure",
+  "options": [
+    "Not discovered or known about",
+    "Crowded or filled tightly",
+    "To give something to someone temporarily",
+    "Having no strong flavor or taste"
+  ],
+  "answerOption": "A",
+  "answerText": "Not discovered or known about",
+  "difficulty": "easy",
+  "sourceFile": "0821.json"
+}

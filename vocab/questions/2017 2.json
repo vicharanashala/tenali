@@ -1,0 +1,15 @@
+{
+  "id": 2017,
+  "word": "Aegean",
+  "question": "Aegean",
+  "options": [
+    "A thing added to make more attractive",
+    "Relating to the Aegean Sea",
+    "A prefix meaning other or different",
+    "Attempting to avoid notice or attention"
+  ],
+  "answerOption": "B",
+  "answerText": "Relating to the Aegean Sea",
+  "difficulty": "hard",
+  "sourceFile": "2017.json"
+}

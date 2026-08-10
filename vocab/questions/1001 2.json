@@ -1,0 +1,15 @@
+{
+  "id": 1001,
+  "word": "Gratify",
+  "question": "Gratify",
+  "options": [
+    "To give someone pleasure or satisfaction",
+    "Strong and healthy; vigorous",
+    "Designed to be useful rather than attractive",
+    "Extremely happy; full of joy"
+  ],
+  "answerOption": "A",
+  "answerText": "To give someone pleasure or satisfaction",
+  "difficulty": "medium",
+  "sourceFile": "1001.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 265,
+  "word": "Fly",
+  "question": "Fly",
+  "options": [
+    "To move through the air with wings",
+    "Lasting or existing forever",
+    "Having the shape of a rectangle",
+    "To bend something over on itself"
+  ],
+  "answerOption": "A",
+  "answerText": "To move through the air with wings",
+  "difficulty": "easy",
+  "sourceFile": "0265.json"
+}

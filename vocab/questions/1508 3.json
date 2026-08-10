@@ -1,0 +1,15 @@
+{
+  "id": 1508,
+  "word": "Designation",
+  "question": "Designation",
+  "options": [
+    "Praise and honor received for achievement",
+    "The positioning of forces",
+    "Reliable and worthy of trust",
+    "A name or title given to someone"
+  ],
+  "answerOption": "D",
+  "answerText": "A name or title given to someone",
+  "difficulty": "medium",
+  "sourceFile": "1508.json"
+}

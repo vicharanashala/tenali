@@ -1,0 +1,15 @@
+{
+  "id": 1009,
+  "word": "Jubilant",
+  "question": "Jubilant",
+  "options": [
+    "Feeling or expressing great happiness",
+    "To remove or obliterate written matter",
+    "The action of damaging someone's reputation",
+    "To lose courage or hope"
+  ],
+  "answerOption": "A",
+  "answerText": "Feeling or expressing great happiness",
+  "difficulty": "medium",
+  "sourceFile": "1009.json"
+}

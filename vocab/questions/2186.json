@@ -1,0 +1,15 @@
+{
+  "id": 2186,
+  "word": "Bucolic",
+  "question": "Bucolic",
+  "options": [
+    "The state of being very poor",
+    "A period of time of great length",
+    "An organism requiring air to live",
+    "Relating to pleasant aspects of the countryside"
+  ],
+  "answerOption": "D",
+  "answerText": "Relating to pleasant aspects of the countryside",
+  "difficulty": "hard",
+  "sourceFile": "2186.json"
+}

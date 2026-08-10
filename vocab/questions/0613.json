@@ -1,0 +1,15 @@
+{
+  "id": 613,
+  "word": "Dynamic",
+  "question": "Dynamic",
+  "options": [
+    "Characterized by constant change and activity",
+    "Crowded or filled tightly",
+    "To create difficulties for someone",
+    "Containing or using many words"
+  ],
+  "answerOption": "A",
+  "answerText": "Characterized by constant change and activity",
+  "difficulty": "easy",
+  "sourceFile": "0613.json"
+}

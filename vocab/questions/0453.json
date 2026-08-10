@@ -1,0 +1,15 @@
+{
+  "id": 453,
+  "word": "Demolish",
+  "question": "Demolish",
+  "options": [
+    "To state the exact meaning of a word",
+    "To provide someone with a reason for doing something",
+    "To connect or link things together",
+    "To pull down or destroy a building"
+  ],
+  "answerOption": "D",
+  "answerText": "To pull down or destroy a building",
+  "difficulty": "easy",
+  "sourceFile": "0453.json"
+}

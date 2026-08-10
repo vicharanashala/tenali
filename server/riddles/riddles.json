@@ -1,0 +1,533 @@
+[
+  {
+    "id": 1,
+    "type": "find-rule",
+    "difficulty": 1,
+    "title": "Warm Up",
+    "equations": [
+      { "input": 1, "output": 6 },
+      { "input": 3, "output": 8 },
+      { "input": 7, "output": 12 }
+    ],
+    "question": 9,
+    "answer": "14",
+    "hint": "Each output is the input with the same amount added. How much?"
+  },
+  {
+    "id": 2,
+    "type": "find-rule",
+    "difficulty": 1,
+    "title": "Triple Trouble",
+    "equations": [
+      { "input": 2, "output": 6 },
+      { "input": 4, "output": 12 },
+      { "input": 5, "output": 15 }
+    ],
+    "question": 8,
+    "answer": "24",
+    "hint": "The output grows three times as fast as the input."
+  },
+  {
+    "id": 3,
+    "type": "find-rule",
+    "difficulty": 2,
+    "title": "Perfect Squares",
+    "equations": [
+      { "input": 3, "output": 9 },
+      { "input": 5, "output": 25 },
+      { "input": 7, "output": 49 }
+    ],
+    "question": 9,
+    "answer": "81",
+    "hint": "Try multiplying the number by itself."
+  },
+  {
+    "id": 4,
+    "type": "find-rule",
+    "difficulty": 2,
+    "title": "Double Plus",
+    "equations": [
+      { "input": 1, "output": 3 },
+      { "input": 3, "output": 7 },
+      { "input": 5, "output": 11 }
+    ],
+    "question": 8,
+    "answer": "17",
+    "hint": "Double the input, then nudge it up by one."
+  },
+  {
+    "id": 5,
+    "type": "find-rule",
+    "difficulty": 3,
+    "title": "Square & Add",
+    "equations": [
+      { "input": 2, "output": 6 },
+      { "input": 5, "output": 30 },
+      { "input": 8, "output": 72 }
+    ],
+    "question": 9,
+    "answer": "90",
+    "hint": "Multiply the number by itself, then add the number once more."
+  },
+  {
+    "id": 6,
+    "type": "find-rule",
+    "difficulty": 3,
+    "title": "Almost Square",
+    "equations": [
+      { "input": 2, "output": 3 },
+      { "input": 4, "output": 15 },
+      { "input": 5, "output": 24 }
+    ],
+    "question": 7,
+    "answer": "48",
+    "hint": "Square the number, then take one away."
+  },
+  {
+    "id": 7,
+    "type": "find-rule",
+    "difficulty": 2,
+    "title": "Nine Lives",
+    "equations": [
+      { "input": 2, "output": 18 },
+      { "input": 3, "output": 27 },
+      { "input": 5, "output": 45 }
+    ],
+    "question": 9,
+    "answer": "81",
+    "hint": "A single multiplier turns each input into its output."
+  },
+  {
+    "id": 8,
+    "type": "find-rule",
+    "difficulty": 3,
+    "title": "Cube Crunch",
+    "equations": [
+      { "input": 2, "output": 8 },
+      { "input": 3, "output": 27 },
+      { "input": 4, "output": 64 }
+    ],
+    "question": 5,
+    "answer": "125",
+    "hint": "Multiply the number by itself, and once more again."
+  },
+  {
+    "id": 9,
+    "type": "find-rule",
+    "difficulty": 3,
+    "title": "Neighbours",
+    "equations": [
+      { "input": 3, "output": 6 },
+      { "input": 5, "output": 20 },
+      { "input": 7, "output": 42 }
+    ],
+    "question": 9,
+    "answer": "72",
+    "hint": "Multiply the number by the value just below it."
+  },
+  {
+    "id": 10,
+    "type": "find-rule",
+    "difficulty": 3,
+    "title": "Square Plus One",
+    "equations": [
+      { "input": 2, "output": 5 },
+      { "input": 4, "output": 17 },
+      { "input": 6, "output": 37 }
+    ],
+    "question": 8,
+    "answer": "65",
+    "hint": "Square the number, then add one."
+  },
+  {
+    "id": 11,
+    "type": "find-rule",
+    "difficulty": 2,
+    "title": "Minus Five",
+    "equations": [
+      { "input": 12, "output": 7 },
+      { "input": 20, "output": 15 },
+      { "input": 9, "output": 4 }
+    ],
+    "question": 18,
+    "answer": "13",
+    "hint": "The output is always 5 less than the input."
+  },
+  {
+    "id": 12,
+    "type": "find-rule",
+    "difficulty": 1,
+    "title": "Double Up",
+    "equations": [
+      { "input": 3, "output": 6 },
+      { "input": 7, "output": 14 },
+      { "input": 10, "output": 20 }
+    ],
+    "question": 15,
+    "answer": "30",
+    "hint": "The output is always twice the input."
+  },
+  {
+    "id": 13,
+    "type": "find-rule",
+    "difficulty": 2,
+    "title": "Triple Plus One",
+    "equations": [
+      { "input": 2, "output": 7 },
+      { "input": 4, "output": 13 },
+      { "input": 6, "output": 19 }
+    ],
+    "question": 10,
+    "answer": "31",
+    "hint": "Triple the input, then add one."
+  },
+  {
+    "id": 14,
+    "type": "find-rule",
+    "difficulty": 3,
+    "title": "Half & Add",
+    "equations": [
+      { "input": 10, "output": 12 },
+      { "input": 20, "output": 22 },
+      { "input": 8, "output": 10 }
+    ],
+    "question": 14,
+    "answer": "16",
+    "hint": "Take half the input, then add the input divided by... hmm, just add 2!"
+  },
+  {
+    "id": 15,
+    "type": "find-rule",
+    "difficulty": 4,
+    "title": "Fibonacci Style",
+    "equations": [
+      { "input": 1, "output": 1 },
+      { "input": 2, "output": 1 },
+      { "input": 3, "output": 2 },
+      { "input": 4, "output": 3 }
+    ],
+    "question": 6,
+    "answer": "8",
+    "hint": "Each number is the sum of the two before it. The sequence goes: 1, 1, 2, 3, 5, 8..."
+  },
+  {
+    "id": 16,
+    "type": "find-rule",
+    "difficulty": 4,
+    "title": "Tribonacci Twist",
+    "equations": [
+      { "input": 1, "output": 0 },
+      { "input": 2, "output": 0 },
+      { "input": 3, "output": 1 },
+      { "input": 4, "output": 1 },
+      { "input": 5, "output": 2 }
+    ],
+    "question": 7,
+    "answer": "4",
+    "hint": "Each number is the sum of the three before it. 0, 0, 1, 1, 2, 4..."
+  },
+  {
+    "id": 17,
+    "type": "find-rule",
+    "difficulty": 5,
+    "title": "Power Chain",
+    "equations": [
+      { "input": 1, "output": 1 },
+      { "input": 2, "output": 4 },
+      { "input": 3, "output": 27 },
+      { "input": 4, "output": 256 }
+    ],
+    "question": 5,
+    "answer": "3125",
+    "hint": "Raise the number to the power of itself."
+  },
+  {
+    "id": 18,
+    "type": "sequence",
+    "difficulty": 1,
+    "title": "Counting by Twos",
+    "sequence": [2, 4, 6, 8, 10],
+    "question": "What comes next?",
+    "answer": "12",
+    "hint": "Each number increases by 2."
+  },
+  {
+    "id": 19,
+    "type": "sequence",
+    "difficulty": 1,
+    "title": "Triangle Numbers",
+    "sequence": [1, 3, 6, 10, 15],
+    "question": "What comes next?",
+    "answer": "21",
+    "hint": "Add 2, then 3, then 4, then 5... the differences keep growing by 1."
+  },
+  {
+    "id": 20,
+    "type": "sequence",
+    "difficulty": 2,
+    "title": "Powers of Two",
+    "sequence": [1, 2, 4, 8, 16],
+    "question": "What comes next?",
+    "answer": "32",
+    "hint": "Each number is double the previous one."
+  },
+  {
+    "id": 21,
+    "type": "sequence",
+    "difficulty": 2,
+    "title": "Square Dance",
+    "sequence": [1, 4, 9, 16, 25],
+    "question": "What comes next?",
+    "answer": "36",
+    "hint": "These are perfect squares: 1², 2², 3², 4², 5²..."
+  },
+  {
+    "id": 22,
+    "type": "sequence",
+    "difficulty": 2,
+    "title": "Odd One Out",
+    "sequence": [1, 3, 5, 7, 9],
+    "question": "What comes next?",
+    "answer": "11",
+    "hint": "These are odd numbers in order."
+  },
+  {
+    "id": 23,
+    "type": "sequence",
+    "difficulty": 3,
+    "title": "Cubic Sequence",
+    "sequence": [1, 8, 27, 64],
+    "question": "What comes next?",
+    "answer": "125",
+    "hint": "These are cubes: 1³, 2³, 3³, 4³..."
+  },
+  {
+    "id": 24,
+    "type": "sequence",
+    "difficulty": 3,
+    "title": "Jumping by 3s",
+    "sequence": [5, 8, 11, 14, 17],
+    "question": "What comes next?",
+    "answer": "20",
+    "hint": "Each number is 3 more than the previous."
+  },
+  {
+    "id": 25,
+    "type": "sequence",
+    "difficulty": 3,
+    "title": "Decreasing Step",
+    "sequence": [100, 96, 91, 85, 78],
+    "question": "What comes next?",
+    "answer": "70",
+    "hint": "The differences are 4, 5, 6, 7... each gap grows by 1."
+  },
+  {
+    "id": 26,
+    "type": "sequence",
+    "difficulty": 4,
+    "title": "Double Step",
+    "sequence": [2, 6, 12, 20, 30],
+    "question": "What comes next?",
+    "answer": "42",
+    "hint": "These are n×(n+1): 1×2, 2×3, 3×4, 4×5, 5×6..."
+  },
+  {
+    "id": 27,
+    "type": "sequence",
+    "difficulty": 4,
+    "title": "Prime Patrol",
+    "sequence": [2, 3, 5, 7, 11],
+    "question": "What comes next?",
+    "answer": "13",
+    "hint": "These are prime numbers in order."
+  },
+  {
+    "id": 28,
+    "type": "sequence",
+    "difficulty": 5,
+    "title": "Pentagonal Numbers",
+    "sequence": [1, 5, 12, 22, 35],
+    "question": "What comes next?",
+    "answer": "51",
+    "hint": "Pentagonal numbers: n(3n-1)/2. The pattern of differences is 3, 7, 10, 13..."
+  },
+  {
+    "id": 29,
+    "type": "sequence",
+    "difficulty": 5,
+    "title": "Fibonacci Sequence",
+    "sequence": [0, 1, 1, 2, 3, 5, 8],
+    "question": "What comes next?",
+    "answer": "13",
+    "hint": "Each number is the sum of the two before it."
+  },
+  {
+    "id": 30,
+    "type": "logic",
+    "difficulty": 1,
+    "question": "A farmer has 17 sheep. All but 9 die. How many are left?",
+    "answer": "9",
+    "hint": "Read carefully — 'all but 9' means 9 survive."
+  },
+  {
+    "id": 31,
+    "type": "logic",
+    "difficulty": 1,
+    "question": "If you have 3 apples and you take away 2, how many apples do you have?",
+    "answer": "2",
+    "hint": "You took 2 apples, so you have 2."
+  },
+  {
+    "id": 32,
+    "type": "logic",
+    "difficulty": 2,
+    "question": "I am a number. Multiply me by 3, then add 6, and you get 24. What number am I?",
+    "answer": "6",
+    "hint": "Work backwards: 24 minus 6 is 18, divided by 3 is 6."
+  },
+  {
+    "id": 33,
+    "type": "logic",
+    "difficulty": 2,
+    "question": "What 3-digit number is the same as the sum of the cubes of its digits? (Hint: it's between 100 and 200)",
+    "answer": "153",
+    "hint": "Try 153: 1³ + 5³ + 3³ = 1 + 125 + 27 = 153."
+  },
+  {
+    "id": 34,
+    "type": "logic",
+    "difficulty": 2,
+    "question": "I am a two-digit number. My tens digit is 3 more than my ones digit. My ones digit is 2. What number am I?",
+    "answer": "52",
+    "hint": "Ones digit is 2, tens digit is 2+3=5, so the number is 52."
+  },
+  {
+    "id": 35,
+    "type": "logic",
+    "difficulty": 3,
+    "question": "A clock shows 3:00. What is the angle between the hour and minute hands in degrees?",
+    "answer": "90",
+    "hint": "At 3:00, the hour hand points at 3 and the minute hand points at 12. Each hour mark is 30 degrees apart."
+  },
+  {
+    "id": 36,
+    "type": "logic",
+    "difficulty": 3,
+    "question": "If 5 machines make 5 widgets in 5 minutes, how long would 100 machines take to make 100 widgets?",
+    "answer": "5",
+    "hint": "Each machine makes 1 widget in 5 minutes. So 100 machines make 100 widgets in 5 minutes."
+  },
+  {
+    "id": 37,
+    "type": "logic",
+    "difficulty": 3,
+    "question": "I am a number. Reverse my digits and subtract the smaller from the larger. You get 27. The sum of my digits is 9. What number am I?",
+    "answer": "63",
+    "hint": "63 reversed is 36. 63 - 36 = 27. And 6 + 3 = 9."
+  },
+  {
+    "id": 38,
+    "type": "logic",
+    "difficulty": 4,
+    "question": "What is the smallest positive number that is divisible by 2, 3, 4, 5, and 6?",
+    "answer": "60",
+    "hint": "Find the LCM of 2, 3, 4, 5, 6. Think about the highest power of each prime factor."
+  },
+  {
+    "id": 39,
+    "type": "logic",
+    "difficulty": 4,
+    "question": "A train 100 meters long passes a pole in 10 seconds. How long will it take to pass a platform 100 meters long?",
+    "answer": "20",
+    "hint": "Speed = 100m / 10s = 10 m/s. Total distance = 100 + 100 = 200m. Time = 200/10 = 20s."
+  },
+  {
+    "id": 40,
+    "type": "logic",
+    "difficulty": 4,
+    "question": "I am a three-digit number. My hundreds digit is twice my ones digit. My tens digit is 3 more than my ones digit. The sum of my digits is 11. What number am I?",
+    "answer": "452",
+    "hint": "Let ones = x. Then hundreds = 2x, tens = x+3. Sum: 2x + (x+3) + x = 11. Solve for x."
+  },
+  {
+    "id": 41,
+    "type": "logic",
+    "difficulty": 5,
+    "question": "How many squares are there on a standard 8×8 chessboard?",
+    "answer": "204",
+    "hint": "Count 1×1 squares (64) + 2×2 (49) + 3×3 (36) + 4×4 (25) + 5×5 (16) + 6×6 (9) + 7×7 (4) + 8×8 (1) = 204."
+  },
+  {
+    "id": 42,
+    "type": "logic",
+    "difficulty": 5,
+    "question": "What is the remainder when 2^10 is divided by 3?",
+    "answer": "1",
+    "hint": "2^10 = 1024. 1024 / 3 = 341 remainder 1. Or: powers of 2 mod 3 alternate 2, 1, 2, 1..."
+  },
+  {
+    "id": 43,
+    "type": "logic",
+    "difficulty": 1,
+    "question": "What number should replace the question mark? 1, 1, 2, 3, 5, 8, ?",
+    "answer": "13",
+    "hint": "Each number is the sum of the two previous numbers."
+  },
+  {
+    "id": 44,
+    "type": "logic",
+    "difficulty": 2,
+    "question": "If you multiply me by 5 and subtract 10, you get 30. What number am I?",
+    "answer": "8",
+    "hint": "Work backwards: 30 + 10 = 40, then 40 / 5 = 8."
+  },
+  {
+    "id": 100,
+    "type": "image-numpad",
+    "difficulty": 4,
+    "title": "Visual Pattern",
+    "image": "/riddles/images/game_puzzle_100.png",
+    "question": "Solve the visual math puzzle shown in the image",
+    "answer": "40",
+    "hint": "Look at the pattern carefully. The numbers follow a hidden rule."
+  },
+  {
+    "id": 104,
+    "type": "image-option",
+    "difficulty": 5,
+    "title": "Shape Sequence",
+    "image": "/riddles/images/game_puzzle_104.png",
+    "question": "Which option completes the pattern?",
+    "options": ["A", "B", "C", "D", "E", "F"],
+    "answer": "F",
+    "hint": "Look at how the shapes change in each step of the sequence."
+  },
+  {
+    "id": 105,
+    "type": "image-option",
+    "difficulty": 5,
+    "title": "Missing Piece",
+    "image": "/riddles/images/game_puzzle_105.png",
+    "question": "Which option fits in the missing spot?",
+    "options": ["A", "B", "C", "D"],
+    "answer": "B",
+    "hint": "Check the rotation and color pattern across the grid."
+  },
+  {
+    "id": 112,
+    "type": "image-option",
+    "difficulty": 5,
+    "title": "Number Clock",
+    "image": "/riddles/images/game_puzzle_112.png",
+    "question": "Which option shows the correct clock time?",
+    "options": ["A", "B", "C", "D"],
+    "optionImages": [
+      "/riddles/images/game_puzzle_112_option_a.png",
+      "/riddles/images/game_puzzle_112_option_b.png",
+      "/riddles/images/game_puzzle_112_option_c.png",
+      "/riddles/images/game_puzzle_112_option_d.png"
+    ],
+    "answer": "B",
+    "hint": "Follow the pattern of how the clock hands move between frames."
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "id": 68,
+  "question": "Which organ in the human body pumps blood?",
+  "options": [
+    "Brain",
+    "Liver",
+    "Heart",
+    "Kidney"
+  ],
+  "answerOption": "C",
+  "answerText": "Heart",
+  "genre": "science",
+  "sourceFile": "0068.json"
+}

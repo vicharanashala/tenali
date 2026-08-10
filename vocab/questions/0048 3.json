@@ -1,0 +1,15 @@
+{
+  "id": 48,
+  "word": "Smooth",
+  "question": "Smooth",
+  "options": [
+    "Having an even and regular surface",
+    "To produce flowers; to flourish",
+    "To form a pleased expression with the mouth",
+    "Having a great deal to do"
+  ],
+  "answerOption": "A",
+  "answerText": "Having an even and regular surface",
+  "difficulty": "easy",
+  "sourceFile": "0048.json"
+}

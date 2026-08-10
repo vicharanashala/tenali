@@ -1,0 +1,15 @@
+{
+  "id": 716,
+  "word": "Nearby",
+  "question": "Nearby",
+  "options": [
+    "Hard but likely to break easily",
+    "Bent or twisted out of shape",
+    "Not far away; close",
+    "Having an exaggerated sense of importance"
+  ],
+  "answerOption": "C",
+  "answerText": "Not far away; close",
+  "difficulty": "easy",
+  "sourceFile": "0716.json"
+}

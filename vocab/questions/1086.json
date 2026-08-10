@@ -1,0 +1,15 @@
+{
+  "id": 1086,
+  "word": "Perceptive",
+  "question": "Perceptive",
+  "options": [
+    "One who deserts a duty or post",
+    "In a desultory manner",
+    "Lacking order or predictability",
+    "Having a keen sense of understanding"
+  ],
+  "answerOption": "D",
+  "answerText": "Having a keen sense of understanding",
+  "difficulty": "medium",
+  "sourceFile": "1086.json"
+}

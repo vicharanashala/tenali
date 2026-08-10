@@ -1,0 +1,15 @@
+{
+  "id": 2234,
+  "word": "Aelianus",
+  "question": "Aelianus",
+  "options": [
+    "Greek naturalist and author",
+    "Relating to glands near the kidneys",
+    "Relating to awareness of body position",
+    "A person seeking unusual experiences"
+  ],
+  "answerOption": "A",
+  "answerText": "Greek naturalist and author",
+  "difficulty": "hard",
+  "sourceFile": "2234.json"
+}

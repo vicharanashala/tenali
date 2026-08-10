@@ -1,0 +1,15 @@
+{
+  "id": 1589,
+  "word": "Detention",
+  "question": "Detention",
+  "options": [
+    "The state of relying on something",
+    "An official order issued by a legal authority",
+    "Hopeful and confident about the future",
+    "The action of holding someone"
+  ],
+  "answerOption": "D",
+  "answerText": "The action of holding someone",
+  "difficulty": "medium",
+  "sourceFile": "1589.json"
+}

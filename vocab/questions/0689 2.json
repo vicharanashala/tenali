@@ -1,0 +1,15 @@
+{
+  "id": 689,
+  "word": "Powerful",
+  "question": "Powerful",
+  "options": [
+    "To care for and encourage growth",
+    "To continue to live despite difficulties",
+    "To bend something over on itself",
+    "Having great power or strength"
+  ],
+  "answerOption": "D",
+  "answerText": "Having great power or strength",
+  "difficulty": "easy",
+  "sourceFile": "0689.json"
+}

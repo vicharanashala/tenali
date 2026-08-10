@@ -1,0 +1,15 @@
+{
+  "id": 166,
+  "word": "Rise",
+  "question": "Rise",
+  "options": [
+    "Causing feelings of fear or alarm",
+    "To fill someone with great surprise",
+    "Made by human skill; not natural",
+    "To move from a lower to a higher position"
+  ],
+  "answerOption": "D",
+  "answerText": "To move from a lower to a higher position",
+  "difficulty": "easy",
+  "sourceFile": "0166.json"
+}

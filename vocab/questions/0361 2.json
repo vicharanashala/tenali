@@ -1,0 +1,15 @@
+{
+  "id": 361,
+  "word": "Unwrap",
+  "question": "Unwrap",
+  "options": [
+    "Having limits or bounds",
+    "To remove the wrapping from something",
+    "To observe and check progress over time",
+    "To tell someone you will definitely do something"
+  ],
+  "answerOption": "B",
+  "answerText": "To remove the wrapping from something",
+  "difficulty": "easy",
+  "sourceFile": "0361.json"
+}

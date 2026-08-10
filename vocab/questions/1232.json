@@ -1,0 +1,15 @@
+{
+  "id": 1232,
+  "word": "Conspicuous",
+  "question": "Conspicuous",
+  "options": [
+    "To do something one considers beneath oneself",
+    "Standing out and clearly visible",
+    "In a despondent manner",
+    "To relieve congestion or overcrowding"
+  ],
+  "answerOption": "B",
+  "answerText": "Standing out and clearly visible",
+  "difficulty": "medium",
+  "sourceFile": "1232.json"
+}

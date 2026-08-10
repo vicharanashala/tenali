@@ -1,0 +1,14 @@
+{
+  "id": 924,
+  "question": "Which country is associated with the city of Suva?",
+  "options": [
+    "Samoa",
+    "Fiji",
+    "Tonga",
+    "Vanuatu"
+  ],
+  "answerOption": "B",
+  "answerText": "Fiji",
+  "genre": "geography",
+  "sourceFile": "0924.json"
+}

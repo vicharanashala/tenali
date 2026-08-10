@@ -1,0 +1,15 @@
+{
+  "id": 827,
+  "word": "Invisible",
+  "question": "Invisible",
+  "options": [
+    "Without limits or end",
+    "Unable to be seen",
+    "To fail to care for something properly",
+    "To ask for something forcefully"
+  ],
+  "answerOption": "B",
+  "answerText": "Unable to be seen",
+  "difficulty": "easy",
+  "sourceFile": "0827.json"
+}

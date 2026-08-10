@@ -1,0 +1,15 @@
+{
+  "id": 490,
+  "word": "Confirm",
+  "question": "Confirm",
+  "options": [
+    "To capture or seize something",
+    "To establish the truth of something",
+    "Extending in one direction without curves",
+    "Unable to be seen"
+  ],
+  "answerOption": "B",
+  "answerText": "To establish the truth of something",
+  "difficulty": "easy",
+  "sourceFile": "0490.json"
+}

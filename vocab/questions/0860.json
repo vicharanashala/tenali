@@ -1,0 +1,15 @@
+{
+  "id": 860,
+  "word": "Decent",
+  "question": "Decent",
+  "options": [
+    "To give attention to sound or speech",
+    "Conforming to accepted standards of behavior",
+    "To be required to pay money to someone",
+    "Diligent and hardworking"
+  ],
+  "answerOption": "B",
+  "answerText": "Conforming to accepted standards of behavior",
+  "difficulty": "easy",
+  "sourceFile": "0860.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 196,
+  "word": "Mix",
+  "question": "Mix",
+  "options": [
+    "To discover the presence of something hidden",
+    "To say that you will not do something",
+    "To combine different things together",
+    "Extremely beautiful or impressive"
+  ],
+  "answerOption": "C",
+  "answerText": "To combine different things together",
+  "difficulty": "easy",
+  "sourceFile": "0196.json"
+}

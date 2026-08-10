@@ -1,0 +1,15 @@
+{
+  "id": 775,
+  "word": "Digital",
+  "question": "Digital",
+  "options": [
+    "To find the size or amount of something",
+    "Relating to computer technology",
+    "Lasting for a limited time only",
+    "To give an authoritative order"
+  ],
+  "answerOption": "B",
+  "answerText": "Relating to computer technology",
+  "difficulty": "easy",
+  "sourceFile": "0775.json"
+}

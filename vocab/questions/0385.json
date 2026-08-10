@@ -1,0 +1,15 @@
+{
+  "id": 385,
+  "word": "Leak",
+  "question": "Leak",
+  "options": [
+    "Unusually good; outstanding",
+    "To allow liquid to escape through a hole",
+    "Sending out light; shining brightly",
+    "Slightly wet or damp"
+  ],
+  "answerOption": "B",
+  "answerText": "To allow liquid to escape through a hole",
+  "difficulty": "easy",
+  "sourceFile": "0385.json"
+}

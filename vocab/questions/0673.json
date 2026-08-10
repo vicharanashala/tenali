@@ -1,0 +1,15 @@
+{
+  "id": 673,
+  "word": "Sufficient",
+  "question": "Sufficient",
+  "options": [
+    "To become sound or healthy again",
+    "Happening or done at once",
+    "Enough to meet the needs",
+    "To convey thoughts or feelings in words"
+  ],
+  "answerOption": "C",
+  "answerText": "Enough to meet the needs",
+  "difficulty": "easy",
+  "sourceFile": "0673.json"
+}

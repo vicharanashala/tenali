@@ -1,0 +1,15 @@
+{
+  "id": 2580,
+  "word": "AEROSOL",
+  "question": "AEROSOL",
+  "options": [
+    "A defensive wall of a city or fortress",
+    "A request made earnestly",
+    "Relation to wind formation",
+    "A substance sprayed as fine mist"
+  ],
+  "answerOption": "D",
+  "answerText": "A substance sprayed as fine mist",
+  "difficulty": "hard",
+  "sourceFile": "2580.json"
+}

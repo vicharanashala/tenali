@@ -1,0 +1,15 @@
+{
+  "id": 2170,
+  "word": "Advertence",
+  "question": "Advertence",
+  "options": [
+    "The study of medicines and their effects",
+    "A fondness for riddles",
+    "A member of a Christian sect",
+    "The action of noticing something"
+  ],
+  "answerOption": "D",
+  "answerText": "The action of noticing something",
+  "difficulty": "hard",
+  "sourceFile": "2170.json"
+}

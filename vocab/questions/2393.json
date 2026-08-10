@@ -1,0 +1,15 @@
+{
+  "id": 2393,
+  "word": "Aeneid",
+  "question": "Aeneid",
+  "options": [
+    "Epic poem by Virgil about Aeneas",
+    "Just begun and not fully formed",
+    "Rapid increase or spread",
+    "A poison from air"
+  ],
+  "answerOption": "A",
+  "answerText": "Epic poem by Virgil about Aeneas",
+  "difficulty": "hard",
+  "sourceFile": "2393.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2899,
+  "word": "Inauguration",
+  "question": "Inauguration",
+  "options": [
+    "The action of beginning or starting",
+    "The action of correcting something",
+    "Swollen and distended; dull and pompous",
+    "The giving of voting rights"
+  ],
+  "answerOption": "A",
+  "answerText": "The action of beginning or starting",
+  "difficulty": "hard",
+  "sourceFile": "2899.json"
+}

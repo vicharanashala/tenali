@@ -1,0 +1,15 @@
+{
+  "id": 313,
+  "word": "Discourage",
+  "question": "Discourage",
+  "options": [
+    "To cause someone to lose confidence",
+    "Possessing great power or strength",
+    "Very small; much smaller than normal",
+    "To fasten with string or rope"
+  ],
+  "answerOption": "A",
+  "answerText": "To cause someone to lose confidence",
+  "difficulty": "easy",
+  "sourceFile": "0313.json"
+}

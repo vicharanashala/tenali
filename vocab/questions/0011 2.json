@@ -1,0 +1,15 @@
+{
+  "id": 11,
+  "word": "Scatter",
+  "question": "Scatter",
+  "options": [
+    "Wanting to do something very much",
+    "To throw in various random directions",
+    "Belonging to the very distant past",
+    "A great victory or achievement"
+  ],
+  "answerOption": "B",
+  "answerText": "To throw in various random directions",
+  "difficulty": "easy",
+  "sourceFile": "0011.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 986,
+  "word": "Ostracize",
+  "question": "Ostracize",
+  "options": [
+    "Based on observation rather than theory",
+    "To gather or collect something",
+    "To exclude someone from a group",
+    "Done openly without concealment"
+  ],
+  "answerOption": "C",
+  "answerText": "To exclude someone from a group",
+  "difficulty": "medium",
+  "sourceFile": "0986.json"
+}

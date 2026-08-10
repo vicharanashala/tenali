@@ -1,0 +1,15 @@
+{
+  "id": 1092,
+  "word": "Negligent",
+  "question": "Negligent",
+  "options": [
+    "Failing to take proper care",
+    "Having an untidy or disheveled appearance",
+    "Puzzled or confused",
+    "Not easily upset or excited; calm"
+  ],
+  "answerOption": "A",
+  "answerText": "Failing to take proper care",
+  "difficulty": "medium",
+  "sourceFile": "1092.json"
+}

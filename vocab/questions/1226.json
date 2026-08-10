@@ -1,0 +1,15 @@
+{
+  "id": 1226,
+  "word": "Terse",
+  "question": "Terse",
+  "options": [
+    "A statement describing something",
+    "The removal of foam",
+    "Using few words; devoid of superfluity",
+    "Demonstrating aggression or eagerness to fight"
+  ],
+  "answerOption": "C",
+  "answerText": "Using few words; devoid of superfluity",
+  "difficulty": "medium",
+  "sourceFile": "1226.json"
+}

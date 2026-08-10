@@ -1,0 +1,15 @@
+{
+  "id": 577,
+  "word": "Hopeful",
+  "question": "Hopeful",
+  "options": [
+    "To allow something you disagree with",
+    "Delicious or pleasing to senses",
+    "Feeling optimistic about a future event",
+    "Lasting for a limited time only"
+  ],
+  "answerOption": "C",
+  "answerText": "Feeling optimistic about a future event",
+  "difficulty": "easy",
+  "sourceFile": "0577.json"
+}

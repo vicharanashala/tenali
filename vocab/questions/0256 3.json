@@ -1,0 +1,15 @@
+{
+  "id": 256,
+  "word": "Enter",
+  "question": "Enter",
+  "options": [
+    "To move something quickly back and forth",
+    "To come or go into a place",
+    "To fill someone with delight",
+    "Habitually or typically so"
+  ],
+  "answerOption": "B",
+  "answerText": "To come or go into a place",
+  "difficulty": "easy",
+  "sourceFile": "0256.json"
+}

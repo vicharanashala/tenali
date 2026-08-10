@@ -1,0 +1,15 @@
+{
+  "id": 3139,
+  "word": "Charivari",
+  "question": "Charivari",
+  "options": [
+    "A noisy mock serenade; cacophonous celebration",
+    "Things promoting weaning",
+    "Of non-literary nature",
+    "Oblique angle or position"
+  ],
+  "answerOption": "A",
+  "answerText": "A noisy mock serenade; cacophonous celebration",
+  "difficulty": "extra-hard",
+  "sourceFile": "3139.json"
+}

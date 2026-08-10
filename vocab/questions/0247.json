@@ -1,0 +1,15 @@
+{
+  "id": 247,
+  "word": "Demand",
+  "question": "Demand",
+  "options": [
+    "To ask for something forcefully",
+    "To come or go back to a place",
+    "Kept out of sight; concealed",
+    "To give up something valued for a greater cause"
+  ],
+  "answerOption": "A",
+  "answerText": "To ask for something forcefully",
+  "difficulty": "easy",
+  "sourceFile": "0247.json"
+}

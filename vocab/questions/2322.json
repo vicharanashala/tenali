@@ -1,0 +1,15 @@
+{
+  "id": 2322,
+  "word": "Advert",
+  "question": "Advert",
+  "options": [
+    "A short public announcement",
+    "Study of structures of consciousness",
+    "Queen of Brittany in legend",
+    "The quality of being airy"
+  ],
+  "answerOption": "A",
+  "answerText": "A short public announcement",
+  "difficulty": "hard",
+  "sourceFile": "2322.json"
+}

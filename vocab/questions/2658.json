@@ -1,0 +1,15 @@
+{
+  "id": 2658,
+  "word": "Famine",
+  "question": "Famine",
+  "options": [
+    "A deep-seated feeling of dislike",
+    "The philosophy of Aeolus",
+    "Eager or quick to argue or fight",
+    "Extreme scarcity of food"
+  ],
+  "answerOption": "D",
+  "answerText": "Extreme scarcity of food",
+  "difficulty": "hard",
+  "sourceFile": "2658.json"
+}

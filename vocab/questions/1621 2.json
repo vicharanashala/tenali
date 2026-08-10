@@ -1,0 +1,15 @@
+{
+  "id": 1621,
+  "word": "Detonator",
+  "question": "Detonator",
+  "options": [
+    "A device for causing explosion",
+    "Unconventional and slightly strange",
+    "To remove a monarch from the throne",
+    "To take away or modify the nature"
+  ],
+  "answerOption": "A",
+  "answerText": "A device for causing explosion",
+  "difficulty": "medium",
+  "sourceFile": "1621.json"
+}

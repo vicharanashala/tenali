@@ -1,0 +1,15 @@
+{
+  "id": 2680,
+  "word": "Stockade",
+  "question": "Stockade",
+  "options": [
+    "An instance of breaking or tearing",
+    "The action of revealing something",
+    "Relating to awareness of body position",
+    "A defensive barrier made of wooden posts"
+  ],
+  "answerOption": "D",
+  "answerText": "A defensive barrier made of wooden posts",
+  "difficulty": "hard",
+  "sourceFile": "2680.json"
+}

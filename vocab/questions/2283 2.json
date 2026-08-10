@@ -1,0 +1,15 @@
+{
+  "id": 2283,
+  "word": "AERUGINO",
+  "question": "AERUGINO",
+  "options": [
+    "Science of air flow and forces",
+    "One who studies airborne life",
+    "A green patina on copper",
+    "In an advertent manner"
+  ],
+  "answerOption": "C",
+  "answerText": "A green patina on copper",
+  "difficulty": "hard",
+  "sourceFile": "2283.json"
+}

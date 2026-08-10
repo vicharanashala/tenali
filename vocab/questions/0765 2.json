@@ -1,0 +1,15 @@
+{
+  "id": 765,
+  "word": "Random",
+  "question": "Random",
+  "options": [
+    "To feel sadness after someone's death",
+    "To relieve a person of symptoms of disease",
+    "To give an account of something in words",
+    "Made or done without method or plan"
+  ],
+  "answerOption": "D",
+  "answerText": "Made or done without method or plan",
+  "difficulty": "easy",
+  "sourceFile": "0765.json"
+}

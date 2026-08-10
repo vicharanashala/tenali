@@ -1,0 +1,15 @@
+{
+  "id": 253,
+  "word": "Lead",
+  "question": "Lead",
+  "options": [
+    "To show the way by going in front",
+    "To fit together the parts of something",
+    "To shine with flashes of light",
+    "To show how something is done"
+  ],
+  "answerOption": "A",
+  "answerText": "To show the way by going in front",
+  "difficulty": "easy",
+  "sourceFile": "0253.json"
+}

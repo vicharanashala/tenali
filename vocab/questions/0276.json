@@ -1,0 +1,15 @@
+{
+  "id": 276,
+  "word": "Solve",
+  "question": "Solve",
+  "options": [
+    "Done with the hands; requiring human effort",
+    "To find an answer to a problem",
+    "Trustworthy and reliable",
+    "To make it easier for someone to do something"
+  ],
+  "answerOption": "B",
+  "answerText": "To find an answer to a problem",
+  "difficulty": "easy",
+  "sourceFile": "0276.json"
+}

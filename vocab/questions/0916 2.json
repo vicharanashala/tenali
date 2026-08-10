@@ -1,0 +1,15 @@
+{
+  "id": 916,
+  "word": "Obscure",
+  "question": "Obscure",
+  "options": [
+    "Relating to or resulting from motion",
+    "Careful to avoid social awkwardness",
+    "Not discovered or known about; uncertain",
+    "To make someone weak and infirm"
+  ],
+  "answerOption": "C",
+  "answerText": "Not discovered or known about; uncertain",
+  "difficulty": "medium",
+  "sourceFile": "0916.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1055,
+  "word": "Hectic",
+  "question": "Hectic",
+  "options": [
+    "To exclude someone from a group",
+    "The expression of disapproval",
+    "Full of incessant activity",
+    "Dealing with things in a practical way"
+  ],
+  "answerOption": "C",
+  "answerText": "Full of incessant activity",
+  "difficulty": "medium",
+  "sourceFile": "1055.json"
+}

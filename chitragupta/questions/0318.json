@@ -1,0 +1,14 @@
+{
+  "id": 318,
+  "question": "Which famous scientist is associated with the laws of electromagnetism and the unit 'tesla' is named after?",
+  "options": [
+    "Michael Faraday",
+    "Nikola Tesla",
+    "James Watt",
+    "André-Marie Ampère"
+  ],
+  "answerOption": "B",
+  "answerText": "Nikola Tesla",
+  "genre": "mixed",
+  "sourceFile": "0318.json"
+}

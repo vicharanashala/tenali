@@ -1,0 +1,14 @@
+{
+  "id": 78,
+  "question": "Who invented the telephone?",
+  "options": [
+    "Thomas Edison",
+    "Alexander Graham Bell",
+    "Guglielmo Marconi",
+    "Nikola Tesla"
+  ],
+  "answerOption": "B",
+  "answerText": "Alexander Graham Bell",
+  "genre": "general-knowledge",
+  "sourceFile": "0078.json"
+}

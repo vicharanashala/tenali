@@ -1,0 +1,15 @@
+{
+  "id": 587,
+  "word": "Rigid",
+  "question": "Rigid",
+  "options": [
+    "Unable to bend or be changed easily",
+    "Not even or balanced in shape",
+    "To become greater in size or amount",
+    "Unusual or surprising; hard to explain"
+  ],
+  "answerOption": "A",
+  "answerText": "Unable to bend or be changed easily",
+  "difficulty": "easy",
+  "sourceFile": "0587.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2214,
+  "word": "AEROPONICS",
+  "question": "AEROPONICS",
+  "options": [
+    "To dispute the truth or honesty of",
+    "That which aerifies",
+    "Relating to heat in air",
+    "Growing plants without soil"
+  ],
+  "answerOption": "D",
+  "answerText": "Growing plants without soil",
+  "difficulty": "hard",
+  "sourceFile": "2214.json"
+}

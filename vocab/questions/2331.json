@@ -1,0 +1,15 @@
+{
+  "id": 2331,
+  "word": "Advice",
+  "question": "Advice",
+  "options": [
+    "Guidance or recommendations offered",
+    "Cheerful and lighthearted",
+    "Extreme tiredness or exhaustion",
+    "Poisoning from atmosphere"
+  ],
+  "answerOption": "A",
+  "answerText": "Guidance or recommendations offered",
+  "difficulty": "hard",
+  "sourceFile": "2331.json"
+}

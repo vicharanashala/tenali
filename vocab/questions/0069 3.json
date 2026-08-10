@@ -1,0 +1,15 @@
+{
+  "id": 69,
+  "word": "Selfish",
+  "question": "Selfish",
+  "options": [
+    "To attract and hold attention of someone",
+    "To move smoothly along a surface",
+    "Lacking consideration for other people",
+    "Worthy of attention; striking"
+  ],
+  "answerOption": "C",
+  "answerText": "Lacking consideration for other people",
+  "difficulty": "easy",
+  "sourceFile": "0069.json"
+}

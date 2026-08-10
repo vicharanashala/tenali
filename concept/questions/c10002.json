@@ -1,0 +1,15 @@
+{
+  "id": 10002,
+  "word": "Photosynthesis",
+  "question": "Photosynthesis",
+  "options": [
+    "The process used by plants to convert light energy into chemical energy",
+    "The method by which cells divide into two identical cells",
+    "A chemical reaction that absorbs heat from the environment",
+    "The breakdown of glucose to produce cellular energy"
+  ],
+  "answerOption": "A",
+  "answerText": "The process used by plants to convert light energy into chemical energy",
+  "difficulty": "easy",
+  "sourceFile": "c10002.json"
+}

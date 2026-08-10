@@ -1,0 +1,15 @@
+{
+  "id": 2620,
+  "word": "AEROTHORAX",
+  "question": "AEROTHORAX",
+  "options": [
+    "Saying the same thing twice in different words",
+    "The action of reducing in amount",
+    "Presence of air in thorax",
+    "A short public announcement"
+  ],
+  "answerOption": "C",
+  "answerText": "Presence of air in thorax",
+  "difficulty": "hard",
+  "sourceFile": "2620.json"
+}

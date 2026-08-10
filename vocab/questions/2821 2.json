@@ -1,0 +1,15 @@
+{
+  "id": 2821,
+  "word": "Reverie",
+  "question": "Reverie",
+  "options": [
+    "In an abject manner",
+    "Abyss tidal nature",
+    "One who abuses another",
+    "A state of being pleasantly lost in thought"
+  ],
+  "answerOption": "D",
+  "answerText": "A state of being pleasantly lost in thought",
+  "difficulty": "extra-hard",
+  "sourceFile": "2821.json"
+}

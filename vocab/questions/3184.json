@@ -1,0 +1,15 @@
+{
+  "id": 3184,
+  "word": "Yarborough",
+  "question": "Yarborough",
+  "options": [
+    "Health-giving; healthy",
+    "A hand of cards with no card above a nine",
+    "A language group in Ethiopia",
+    "Full of blight disease"
+  ],
+  "answerOption": "B",
+  "answerText": "A hand of cards with no card above a nine",
+  "difficulty": "extra-hard",
+  "sourceFile": "3184.json"
+}

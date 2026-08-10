@@ -1,0 +1,14 @@
+{
+  "id": 569,
+  "question": "Which Indian state has Shimla as its capital?",
+  "options": [
+    "Uttarakhand",
+    "Himachal Pradesh",
+    "Punjab",
+    "Haryana"
+  ],
+  "answerOption": "B",
+  "answerText": "Himachal Pradesh",
+  "genre": "geography",
+  "sourceFile": "0569.json"
+}

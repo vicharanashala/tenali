@@ -1,0 +1,15 @@
+{
+  "id": 538,
+  "word": "Adore",
+  "question": "Adore",
+  "options": [
+    "Greatly pleased or entertained",
+    "Exactly alike in every way",
+    "Making sure to avoid danger or mistakes",
+    "To love and respect deeply"
+  ],
+  "answerOption": "D",
+  "answerText": "To love and respect deeply",
+  "difficulty": "easy",
+  "sourceFile": "0538.json"
+}

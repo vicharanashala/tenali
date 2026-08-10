@@ -1,0 +1,15 @@
+{
+  "id": 409,
+  "word": "Afford",
+  "question": "Afford",
+  "options": [
+    "Having an uneven or irregular surface",
+    "To have enough money to pay for something",
+    "Feeling sorrow or unhappiness",
+    "Feeling pleasure or happiness"
+  ],
+  "answerOption": "B",
+  "answerText": "To have enough money to pay for something",
+  "difficulty": "easy",
+  "sourceFile": "0409.json"
+}

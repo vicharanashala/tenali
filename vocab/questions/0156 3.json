@@ -1,0 +1,15 @@
+{
+  "id": 156,
+  "word": "Accept",
+  "question": "Accept",
+  "options": [
+    "To agree to receive or do something",
+    "Careful to avoid potential problems",
+    "Low in price; not expensive",
+    "Calm, peaceful, and untroubled"
+  ],
+  "answerOption": "A",
+  "answerText": "To agree to receive or do something",
+  "difficulty": "easy",
+  "sourceFile": "0156.json"
+}

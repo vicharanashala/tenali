@@ -1,0 +1,15 @@
+{
+  "id": 2008,
+  "word": "Laconic",
+  "question": "Laconic",
+  "options": [
+    "A narrow opening or crack",
+    "A formal statement given under oath",
+    "Using very few words to express oneself",
+    "The study of atmosphere"
+  ],
+  "answerOption": "C",
+  "answerText": "Using very few words to express oneself",
+  "difficulty": "hard",
+  "sourceFile": "2008.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 204,
+  "word": "Gather",
+  "question": "Gather",
+  "options": [
+    "Extremely beautiful or impressive",
+    "To collect things from different places",
+    "To discover the presence of something hidden",
+    "Too long and therefore boring"
+  ],
+  "answerOption": "B",
+  "answerText": "To collect things from different places",
+  "difficulty": "easy",
+  "sourceFile": "0204.json"
+}

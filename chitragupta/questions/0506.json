@@ -1,0 +1,14 @@
+{
+  "id": 506,
+  "question": "Which country is associated with the city of Bucharest?",
+  "options": [
+    "Hungary",
+    "Bulgaria",
+    "Romania",
+    "Serbia"
+  ],
+  "answerOption": "C",
+  "answerText": "Romania",
+  "genre": "geography",
+  "sourceFile": "0506.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1581,
+  "word": "Detectable",
+  "question": "Detectable",
+  "options": [
+    "Able to be discovered or noticed",
+    "To sharpen or stimulate interest",
+    "Relating to ordinary people",
+    "To be a sign or indication of"
+  ],
+  "answerOption": "A",
+  "answerText": "Able to be discovered or noticed",
+  "difficulty": "medium",
+  "sourceFile": "1581.json"
+}

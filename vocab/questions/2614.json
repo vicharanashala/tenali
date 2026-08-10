@@ -1,0 +1,15 @@
+{
+  "id": 2614,
+  "word": "AEROTHERAPY",
+  "question": "AEROTHERAPY",
+  "options": [
+    "Swollen and distended; dull and pompous",
+    "Medical treatment using air",
+    "A departure from what is normal or expected",
+    "Something that hinders or delays"
+  ],
+  "answerOption": "B",
+  "answerText": "Medical treatment using air",
+  "difficulty": "hard",
+  "sourceFile": "2614.json"
+}

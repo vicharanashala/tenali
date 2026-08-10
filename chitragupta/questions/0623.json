@@ -1,0 +1,14 @@
+{
+  "id": 623,
+  "question": "Who discovered the atomic nucleus?",
+  "options": [
+    "Rutherford",
+    "Thomson",
+    "Chadwick",
+    "Bohr"
+  ],
+  "answerOption": "A",
+  "answerText": "Rutherford",
+  "genre": "general-knowledge",
+  "sourceFile": "0623.json"
+}

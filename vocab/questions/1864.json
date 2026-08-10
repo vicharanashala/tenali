@@ -1,0 +1,15 @@
+{
+  "id": 1864,
+  "word": "Unstable",
+  "question": "Unstable",
+  "options": [
+    "The quality of being desired",
+    "Causing harm or damage",
+    "Not firmly fixed or secure",
+    "A substance that reduces activity"
+  ],
+  "answerOption": "C",
+  "answerText": "Not firmly fixed or secure",
+  "difficulty": "medium",
+  "sourceFile": "1864.json"
+}

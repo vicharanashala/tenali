@@ -1,0 +1,15 @@
+{
+  "id": 27,
+  "word": "Young",
+  "question": "Young",
+  "options": [
+    "Extending in one direction without curves",
+    "To manage or guide the operations of something",
+    "Having lived or existed for only a short time",
+    "Having a natural ability to do something well"
+  ],
+  "answerOption": "C",
+  "answerText": "Having lived or existed for only a short time",
+  "difficulty": "easy",
+  "sourceFile": "0027.json"
+}

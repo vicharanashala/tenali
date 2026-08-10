@@ -1,0 +1,15 @@
+{
+  "id": 1824,
+  "word": "Inadequate",
+  "question": "Inadequate",
+  "options": [
+    "Extremely unpleasant or offensive",
+    "Making a situation likely to happen",
+    "To convert into normal language from code",
+    "Not enough or satisfactory"
+  ],
+  "answerOption": "D",
+  "answerText": "Not enough or satisfactory",
+  "difficulty": "medium",
+  "sourceFile": "1824.json"
+}

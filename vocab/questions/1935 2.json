@@ -1,0 +1,15 @@
+{
+  "id": 1935,
+  "word": "Adultery",
+  "question": "Adultery",
+  "options": [
+    "Voluntary sexual intercourse outside marriage",
+    "Familiar with many different cultures",
+    "Of doubtful authenticity; probably untrue",
+    "Involving a great deal of effort or difficulty"
+  ],
+  "answerOption": "A",
+  "answerText": "Voluntary sexual intercourse outside marriage",
+  "difficulty": "hard",
+  "sourceFile": "1935.json"
+}

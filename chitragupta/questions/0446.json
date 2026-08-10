@@ -1,0 +1,14 @@
+{
+  "id": 446,
+  "question": "Which hormone is known as the 'fight or flight' hormone?",
+  "options": [
+    "Insulin",
+    "Thyroxine",
+    "Adrenaline",
+    "Estrogen"
+  ],
+  "answerOption": "C",
+  "answerText": "Adrenaline",
+  "genre": "mixed",
+  "sourceFile": "0446.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2891,
+  "word": "Patrimony",
+  "question": "Patrimony",
+  "options": [
+    "A genus of long-tailed birds",
+    "The action of distributing something",
+    "Property inherited from one's father",
+    "Norse god of the sea"
+  ],
+  "answerOption": "C",
+  "answerText": "Property inherited from one's father",
+  "difficulty": "hard",
+  "sourceFile": "2891.json"
+}

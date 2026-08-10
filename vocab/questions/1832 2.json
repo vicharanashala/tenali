@@ -1,0 +1,15 @@
+{
+  "id": 1832,
+  "word": "Travesty",
+  "question": "Travesty",
+  "options": [
+    "Aggressively greedy or grasping",
+    "A prefix meaning other or different",
+    "A false or distorted representation",
+    "Using different words to say the same thing"
+  ],
+  "answerOption": "C",
+  "answerText": "A false or distorted representation",
+  "difficulty": "hard",
+  "sourceFile": "1832.json"
+}

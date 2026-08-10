@@ -1,0 +1,15 @@
+{
+  "id": 2250,
+  "word": "Aenigmatous",
+  "question": "Aenigmatous",
+  "options": [
+    "Excessively talkative about trivial things",
+    "The action of modulating something",
+    "The quality of being dependable",
+    "Obscure or puzzling in meaning"
+  ],
+  "answerOption": "D",
+  "answerText": "Obscure or puzzling in meaning",
+  "difficulty": "hard",
+  "sourceFile": "2250.json"
+}

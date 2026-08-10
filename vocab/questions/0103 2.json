@@ -1,0 +1,15 @@
+{
+  "id": 103,
+  "word": "Expensive",
+  "question": "Expensive",
+  "options": [
+    "Costing a lot of money",
+    "To give something in return for good behavior",
+    "Completely different in every way",
+    "To rot and break down over time"
+  ],
+  "answerOption": "A",
+  "answerText": "Costing a lot of money",
+  "difficulty": "easy",
+  "sourceFile": "0103.json"
+}

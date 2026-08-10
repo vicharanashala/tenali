@@ -1,0 +1,14 @@
+{
+  "id": 104,
+  "question": "Who wrote the Indian national song 'Vande Mataram'?",
+  "options": [
+    "Rabindranath Tagore",
+    "Bankim Chandra Chattopadhyay",
+    "Subramania Bharati",
+    "Sri Aurobindo"
+  ],
+  "answerOption": "B",
+  "answerText": "Bankim Chandra Chattopadhyay",
+  "genre": "india-gk",
+  "sourceFile": "0104.json"
+}

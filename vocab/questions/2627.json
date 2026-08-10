@@ -1,0 +1,15 @@
+{
+  "id": 2627,
+  "word": "AEROTOXIA",
+  "question": "AEROTOXIA",
+  "options": [
+    "The state of being unable to pay debts",
+    "One who gives advice",
+    "Poisoning from atmosphere",
+    "Relating to the Aelp mountains"
+  ],
+  "answerOption": "C",
+  "answerText": "Poisoning from atmosphere",
+  "difficulty": "hard",
+  "sourceFile": "2627.json"
+}

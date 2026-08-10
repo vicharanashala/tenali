@@ -1,0 +1,14 @@
+{
+  "id": 86,
+  "question": "What is the process by which water vapor turns into liquid water called?",
+  "options": [
+    "Evaporation",
+    "Condensation",
+    "Sublimation",
+    "Filtration"
+  ],
+  "answerOption": "B",
+  "answerText": "Condensation",
+  "genre": "science",
+  "sourceFile": "0086.json"
+}

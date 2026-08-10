@@ -1,0 +1,15 @@
+{
+  "id": 556,
+  "word": "Dedicate",
+  "question": "Dedicate",
+  "options": [
+    "Not supporting either side in a conflict",
+    "An act of saying goodbye",
+    "To devote time or effort to a purpose",
+    "To be unsuccessful in achieving a goal"
+  ],
+  "answerOption": "C",
+  "answerText": "To devote time or effort to a purpose",
+  "difficulty": "easy",
+  "sourceFile": "0556.json"
+}

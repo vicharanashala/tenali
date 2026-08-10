@@ -1,0 +1,15 @@
+{
+  "id": 858,
+  "word": "Awful",
+  "question": "Awful",
+  "options": [
+    "Very bad or disagreeable",
+    "In a particular place; existing now",
+    "Reflecting light brightly",
+    "A barren area with very little rainfall"
+  ],
+  "answerOption": "A",
+  "answerText": "Very bad or disagreeable",
+  "difficulty": "easy",
+  "sourceFile": "0858.json"
+}

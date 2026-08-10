@@ -1,0 +1,15 @@
+{
+  "id": 2305,
+  "word": "Hepaticocholangiocholecystenterostomy",
+  "question": "Hepaticocholangiocholecystenterostomy",
+  "options": [
+    "A whispering or rustling sound",
+    "Relating to hazelnuts or filberts",
+    "Lack of path or way",
+    "A surgical connection between the liver and intestine"
+  ],
+  "answerOption": "D",
+  "answerText": "A surgical connection between the liver and intestine",
+  "difficulty": "extra-hard",
+  "sourceFile": "2305.json"
+}

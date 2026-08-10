@@ -1,0 +1,14 @@
+{
+  "id": 258,
+  "question": "Which Indian state has Thiruvananthapuram as its capital?",
+  "options": [
+    "Tamil Nadu",
+    "Karnataka",
+    "Andhra Pradesh",
+    "Kerala"
+  ],
+  "answerOption": "D",
+  "answerText": "Kerala",
+  "genre": "geography",
+  "sourceFile": "0258.json"
+}

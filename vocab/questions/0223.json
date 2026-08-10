@@ -1,0 +1,15 @@
+{
+  "id": 223,
+  "word": "Exclude",
+  "question": "Exclude",
+  "options": [
+    "To leave out or keep from entering",
+    "Lacking in quantity or quality",
+    "Able to be used for a practical purpose",
+    "Well informed about many subjects"
+  ],
+  "answerOption": "A",
+  "answerText": "To leave out or keep from entering",
+  "difficulty": "easy",
+  "sourceFile": "0223.json"
+}

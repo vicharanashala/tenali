@@ -1,0 +1,15 @@
+{
+  "id": 25,
+  "word": "Poor",
+  "question": "Poor",
+  "options": [
+    "Of chief importance; principal",
+    "Having the properties of a magnet",
+    "Lacking sufficient money to live comfortably",
+    "Having a violent or aggressive nature"
+  ],
+  "answerOption": "C",
+  "answerText": "Lacking sufficient money to live comfortably",
+  "difficulty": "easy",
+  "sourceFile": "0025.json"
+}

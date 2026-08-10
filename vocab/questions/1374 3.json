@@ -1,0 +1,15 @@
+{
+  "id": 1374,
+  "word": "Deny",
+  "question": "Deny",
+  "options": [
+    "To state that something is not true",
+    "Having fixed or defined limits",
+    "Moral corruption or wickedness",
+    "The quality of being resolved"
+  ],
+  "answerOption": "A",
+  "answerText": "To state that something is not true",
+  "difficulty": "medium",
+  "sourceFile": "1374.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1573,
+  "word": "Describe",
+  "question": "Describe",
+  "options": [
+    "To give a written account of something",
+    "The expression of disapproval",
+    "Deceiving or confusing someone",
+    "Not conforming to morality"
+  ],
+  "answerOption": "A",
+  "answerText": "To give a written account of something",
+  "difficulty": "medium",
+  "sourceFile": "1573.json"
+}

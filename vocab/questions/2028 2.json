@@ -1,0 +1,15 @@
+{
+  "id": 2028,
+  "word": "Aegoster",
+  "question": "Aegoster",
+  "options": [
+    "An easterly wind in the Aegean",
+    "Full of or giving advice",
+    "Native and restricted to a certain place",
+    "Pompous or extravagant in language"
+  ],
+  "answerOption": "A",
+  "answerText": "An easterly wind in the Aegean",
+  "difficulty": "hard",
+  "sourceFile": "2028.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2999,
+  "word": "Antediluvian",
+  "question": "Antediluvian",
+  "options": [
+    "In manner of sauce preparation",
+    "Relating to gradual weaning",
+    "Relating to distance",
+    "Of or belonging to the time before the biblical flood"
+  ],
+  "answerOption": "D",
+  "answerText": "Of or belonging to the time before the biblical flood",
+  "difficulty": "extra-hard",
+  "sourceFile": "2999.json"
+}

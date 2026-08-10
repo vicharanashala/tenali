@@ -1,0 +1,15 @@
+{
+  "id": 780,
+  "word": "Artificial",
+  "question": "Artificial",
+  "options": [
+    "Occurring from time to time",
+    "To cause someone to believe something",
+    "Of considerable or unusual duration",
+    "Made by human skill; not natural"
+  ],
+  "answerOption": "D",
+  "answerText": "Made by human skill; not natural",
+  "difficulty": "easy",
+  "sourceFile": "0780.json"
+}

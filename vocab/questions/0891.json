@@ -1,0 +1,15 @@
+{
+  "id": 891,
+  "word": "Cluttered",
+  "question": "Cluttered",
+  "options": [
+    "Full of unnecessary things creating disorder",
+    "Relating to or determined by the sun",
+    "To make ready for use or consideration",
+    "To freely offer to do something"
+  ],
+  "answerOption": "A",
+  "answerText": "Full of unnecessary things creating disorder",
+  "difficulty": "easy",
+  "sourceFile": "0891.json"
+}

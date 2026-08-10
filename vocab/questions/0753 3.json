@@ -1,0 +1,15 @@
+{
+  "id": 753,
+  "word": "Arid",
+  "question": "Arid",
+  "options": [
+    "Having little or no rain; very dry",
+    "Not firmly fixed in place",
+    "Insufficient for the demand; in short supply",
+    "To move forward in a purposeful way"
+  ],
+  "answerOption": "A",
+  "answerText": "Having little or no rain; very dry",
+  "difficulty": "easy",
+  "sourceFile": "0753.json"
+}

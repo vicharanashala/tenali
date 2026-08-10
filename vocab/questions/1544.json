@@ -1,0 +1,15 @@
+{
+  "id": 1544,
+  "word": "Derisive",
+  "question": "Derisive",
+  "options": [
+    "Having a keen sense of understanding",
+    "Fine in texture, form, or structure",
+    "Expressing contempt or mockery",
+    "Relating to ordinary people"
+  ],
+  "answerOption": "C",
+  "answerText": "Expressing contempt or mockery",
+  "difficulty": "medium",
+  "sourceFile": "1544.json"
+}

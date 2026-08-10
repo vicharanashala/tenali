@@ -1,0 +1,15 @@
+{
+  "id": 357,
+  "word": "Donate",
+  "question": "Donate",
+  "options": [
+    "Being reserved or timid around other people",
+    "Made to happen later than expected",
+    "Feeling worried or nervous about something",
+    "To give money or goods to a cause"
+  ],
+  "answerOption": "D",
+  "answerText": "To give money or goods to a cause",
+  "difficulty": "easy",
+  "sourceFile": "0357.json"
+}

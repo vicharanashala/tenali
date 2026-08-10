@@ -1,0 +1,14 @@
+{
+  "id": 32,
+  "question": "What is the capital of Argentina?",
+  "options": [
+    "Berlin",
+    "Buenos Aires",
+    "Madrid",
+    "Cairo"
+  ],
+  "answerOption": "B",
+  "answerText": "Buenos Aires",
+  "genre": "geography",
+  "sourceFile": "0032.json"
+}

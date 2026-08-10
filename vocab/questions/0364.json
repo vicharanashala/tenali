@@ -1,0 +1,15 @@
+{
+  "id": 364,
+  "word": "Contain",
+  "question": "Contain",
+  "options": [
+    "To spring back after hitting a surface",
+    "To collide violently with an obstacle",
+    "Hot and humid weather or manner",
+    "To have something inside"
+  ],
+  "answerOption": "D",
+  "answerText": "To have something inside",
+  "difficulty": "easy",
+  "sourceFile": "0364.json"
+}

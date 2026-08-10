@@ -1,0 +1,15 @@
+{
+  "id": 3022,
+  "word": "Komorebi",
+  "question": "Komorebi",
+  "options": [
+    "Sunlight filtering through tree leaves",
+    "The state of being abysmal",
+    "Relating to ablution",
+    "Those desiring ablution"
+  ],
+  "answerOption": "A",
+  "answerText": "Sunlight filtering through tree leaves",
+  "difficulty": "extra-hard",
+  "sourceFile": "3022.json"
+}

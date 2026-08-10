@@ -1,0 +1,15 @@
+{
+  "id": 1520,
+  "word": "Deprivation",
+  "question": "Deprivation",
+  "options": [
+    "Unable to be stopped or prevented",
+    "Lacking in quantity",
+    "The lack of something needed",
+    "To relieve congestion or overcrowding"
+  ],
+  "answerOption": "C",
+  "answerText": "The lack of something needed",
+  "difficulty": "medium",
+  "sourceFile": "1520.json"
+}

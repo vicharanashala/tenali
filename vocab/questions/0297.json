@@ -1,0 +1,15 @@
+{
+  "id": 297,
+  "word": "Hope",
+  "question": "Hope",
+  "options": [
+    "To want something to happen and think it possible",
+    "Willing to give more than is expected",
+    "To say or do something again",
+    "To set up an organization on a firm basis"
+  ],
+  "answerOption": "A",
+  "answerText": "To want something to happen and think it possible",
+  "difficulty": "easy",
+  "sourceFile": "0297.json"
+}

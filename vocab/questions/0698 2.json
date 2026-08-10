@@ -1,0 +1,15 @@
+{
+  "id": 698,
+  "word": "Primary",
+  "question": "Primary",
+  "options": [
+    "Having high moral qualities",
+    "Of chief importance; principal",
+    "To stop briefly before continuing",
+    "To try to reach an agreement by discussion"
+  ],
+  "answerOption": "B",
+  "answerText": "Of chief importance; principal",
+  "difficulty": "easy",
+  "sourceFile": "0698.json"
+}

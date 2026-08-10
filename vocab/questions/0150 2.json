@@ -1,0 +1,15 @@
+{
+  "id": 150,
+  "word": "Build",
+  "question": "Build",
+  "options": [
+    "Having a natural ability to do something well",
+    "Produced without artificial chemicals",
+    "To construct something by putting parts together",
+    "To achieve a desired aim or result"
+  ],
+  "answerOption": "C",
+  "answerText": "To construct something by putting parts together",
+  "difficulty": "easy",
+  "sourceFile": "0150.json"
+}

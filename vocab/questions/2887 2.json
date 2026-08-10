@@ -1,0 +1,15 @@
+{
+  "id": 2887,
+  "word": "Abelian",
+  "question": "Abelian",
+  "options": [
+    "In an abstractious manner",
+    "Mystic or entrancing in nature",
+    "Relating to groups with commutative property",
+    "A social gathering centered around drinking chocolate"
+  ],
+  "answerOption": "C",
+  "answerText": "Relating to groups with commutative property",
+  "difficulty": "extra-hard",
+  "sourceFile": "2887.json"
+}

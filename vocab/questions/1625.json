@@ -1,0 +1,15 @@
+{
+  "id": 1625,
+  "word": "Despoil",
+  "question": "Despoil",
+  "options": [
+    "The final part of a narrative",
+    "To deprive of possessions by force",
+    "A muscle that depresses something",
+    "A system of ranking one above another"
+  ],
+  "answerOption": "B",
+  "answerText": "To deprive of possessions by force",
+  "difficulty": "medium",
+  "sourceFile": "1625.json"
+}

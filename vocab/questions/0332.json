@@ -1,0 +1,15 @@
+{
+  "id": 332,
+  "word": "Request",
+  "question": "Request",
+  "options": [
+    "To make something happen later than planned",
+    "Feeling sorrow or unhappiness",
+    "Having a sharp or sour taste",
+    "To politely ask for something"
+  ],
+  "answerOption": "D",
+  "answerText": "To politely ask for something",
+  "difficulty": "easy",
+  "sourceFile": "0332.json"
+}

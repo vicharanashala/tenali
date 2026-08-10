@@ -1,0 +1,15 @@
+{
+  "id": 866,
+  "word": "Normal",
+  "question": "Normal",
+  "options": [
+    "Exceptionally good; remarkable",
+    "Able to recover quickly from difficulties",
+    "Very dry or thirsty",
+    "Conforming to what is standard or expected"
+  ],
+  "answerOption": "D",
+  "answerText": "Conforming to what is standard or expected",
+  "difficulty": "easy",
+  "sourceFile": "0866.json"
+}

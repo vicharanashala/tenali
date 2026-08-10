@@ -1,0 +1,15 @@
+{
+  "id": 199,
+  "word": "Steal",
+  "question": "Steal",
+  "options": [
+    "Parallel to the ground; flat",
+    "Done according to a fixed plan",
+    "To form an idea of the value of something",
+    "To take someone's property without permission"
+  ],
+  "answerOption": "D",
+  "answerText": "To take someone's property without permission",
+  "difficulty": "easy",
+  "sourceFile": "0199.json"
+}

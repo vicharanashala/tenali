@@ -1,0 +1,14 @@
+{
+  "id": 967,
+  "question": "Which organ in the body contains the cornea?",
+  "options": [
+    "Ear",
+    "Eye",
+    "Nose",
+    "Mouth"
+  ],
+  "answerOption": "B",
+  "answerText": "Eye",
+  "genre": "science",
+  "sourceFile": "0967.json"
+}

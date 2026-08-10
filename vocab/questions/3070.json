@@ -1,0 +1,15 @@
+{
+  "id": 3070,
+  "word": "Gossamer",
+  "question": "Gossamer",
+  "options": [
+    "Having sight blocked",
+    "A fine filmy substance of cobwebs",
+    "Study of abyssal zones",
+    "Of the abyss nature"
+  ],
+  "answerOption": "B",
+  "answerText": "A fine filmy substance of cobwebs",
+  "difficulty": "extra-hard",
+  "sourceFile": "3070.json"
+}

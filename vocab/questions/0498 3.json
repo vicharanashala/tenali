@@ -1,0 +1,15 @@
+{
+  "id": 498,
+  "word": "Navigate",
+  "question": "Navigate",
+  "options": [
+    "Extremely small in size",
+    "Arranged neatly and in order",
+    "Resembling without being identical",
+    "To find the way to a destination"
+  ],
+  "answerOption": "D",
+  "answerText": "To find the way to a destination",
+  "difficulty": "easy",
+  "sourceFile": "0498.json"
+}

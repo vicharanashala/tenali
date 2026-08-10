@@ -1,0 +1,14 @@
+{
+  "id": 532,
+  "question": "Which Indian state has Lucknow as its capital?",
+  "options": [
+    "Bihar",
+    "Uttar Pradesh",
+    "Madhya Pradesh",
+    "Rajasthan"
+  ],
+  "answerOption": "B",
+  "answerText": "Uttar Pradesh",
+  "genre": "geography",
+  "sourceFile": "0532.json"
+}

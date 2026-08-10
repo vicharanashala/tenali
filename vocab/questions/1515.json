@@ -1,0 +1,15 @@
+{
+  "id": 1515,
+  "word": "Depressant",
+  "question": "Depressant",
+  "options": [
+    "Difficult to understand or analyze",
+    "A formal statement made under oath",
+    "A substance that reduces activity",
+    "Causing or likely to cause debate"
+  ],
+  "answerOption": "C",
+  "answerText": "A substance that reduces activity",
+  "difficulty": "medium",
+  "sourceFile": "1515.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 876,
+  "word": "Punctual",
+  "question": "Punctual",
+  "options": [
+    "To feel contempt or deep dislike for",
+    "Easily annoyed or made angry",
+    "Happening or doing at the expected time",
+    "Able to float or rise up"
+  ],
+  "answerOption": "C",
+  "answerText": "Happening or doing at the expected time",
+  "difficulty": "easy",
+  "sourceFile": "0876.json"
+}

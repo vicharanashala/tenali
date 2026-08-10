@@ -1,0 +1,15 @@
+{
+  "id": 2505,
+  "word": "Famine",
+  "question": "Famine",
+  "options": [
+    "Extreme scarcity of food",
+    "In an adventitious manner",
+    "Knowledge of medicinal drugs",
+    "Technology of air use"
+  ],
+  "answerOption": "A",
+  "answerText": "Extreme scarcity of food",
+  "difficulty": "hard",
+  "sourceFile": "2505.json"
+}

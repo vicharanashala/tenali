@@ -1,0 +1,15 @@
+{
+  "id": 156,
+  "word": "Accept",
+  "question": "Accept",
+  "options": [
+    "Feeling fear or anxiety",
+    "To comply with a command or rule",
+    "To agree to receive or do something",
+    "To try to find something by looking carefully"
+  ],
+  "answerOption": "C",
+  "answerText": "To agree to receive or do something",
+  "difficulty": "easy",
+  "sourceFile": "0156.json"
+}

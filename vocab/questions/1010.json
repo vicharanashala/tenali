@@ -1,0 +1,15 @@
+{
+  "id": 1010,
+  "word": "Keen",
+  "question": "Keen",
+  "options": [
+    "Having a sharp edge or showing eagerness",
+    "Stubbornly refusing to change opinion",
+    "The quality of lasting a short time",
+    "Deserving strong disapproval"
+  ],
+  "answerOption": "A",
+  "answerText": "Having a sharp edge or showing eagerness",
+  "difficulty": "medium",
+  "sourceFile": "1010.json"
+}

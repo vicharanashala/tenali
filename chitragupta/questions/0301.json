@@ -1,0 +1,14 @@
+{
+  "id": 301,
+  "question": "Which is the tallest statue in the world as per recent records in India?",
+  "options": [
+    "Statue of Unity",
+    "Spring Temple Buddha",
+    "The Motherland Calls",
+    "Ushiku Daibutsu"
+  ],
+  "answerOption": "A",
+  "answerText": "Statue of Unity",
+  "genre": "india-gk",
+  "sourceFile": "0301.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 113,
+  "word": "Blunt",
+  "question": "Blunt",
+  "options": [
+    "To try to win against other people",
+    "Made by chemical processes; not natural",
+    "To pause before doing something",
+    "Not having a sharp edge or point"
+  ],
+  "answerOption": "D",
+  "answerText": "Not having a sharp edge or point",
+  "difficulty": "easy",
+  "sourceFile": "0113.json"
+}

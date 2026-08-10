@@ -1,0 +1,15 @@
+{
+  "id": 1007,
+  "word": "Callous",
+  "question": "Callous",
+  "options": [
+    "Abundant in supply or quantity",
+    "A paste or powder for cleaning teeth",
+    "Showing cruel disregard for others",
+    "To remove magnetic properties"
+  ],
+  "answerOption": "C",
+  "answerText": "Showing cruel disregard for others",
+  "difficulty": "medium",
+  "sourceFile": "1007.json"
+}

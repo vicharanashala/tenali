@@ -1,0 +1,15 @@
+{
+  "id": 1802,
+  "word": "Cautious",
+  "question": "Cautious",
+  "options": [
+    "The state of having lost morale",
+    "To reduce in extent or quantity",
+    "A difficult or complicated situation",
+    "Careful to avoid danger"
+  ],
+  "answerOption": "D",
+  "answerText": "Careful to avoid danger",
+  "difficulty": "medium",
+  "sourceFile": "1802.json"
+}

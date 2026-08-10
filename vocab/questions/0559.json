@@ -1,0 +1,15 @@
+{
+  "id": 559,
+  "word": "Excel",
+  "question": "Excel",
+  "options": [
+    "Sufficient to cause death",
+    "To be exceptionally good at something",
+    "Having an edge able to cut or pierce",
+    "To move downward from a higher point"
+  ],
+  "answerOption": "B",
+  "answerText": "To be exceptionally good at something",
+  "difficulty": "easy",
+  "sourceFile": "0559.json"
+}

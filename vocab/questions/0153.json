@@ -1,0 +1,15 @@
+{
+  "id": 153,
+  "word": "Finish",
+  "question": "Finish",
+  "options": [
+    "To cut something into pieces with a tool",
+    "To feel admiration for someone's qualities",
+    "To bring something to an end",
+    "To ease the grief or distress of someone"
+  ],
+  "answerOption": "C",
+  "answerText": "To bring something to an end",
+  "difficulty": "easy",
+  "sourceFile": "0153.json"
+}

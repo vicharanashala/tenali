@@ -1,0 +1,14 @@
+{
+  "id": 220,
+  "question": "What is the national currency of Nepal?",
+  "options": [
+    "Rupee",
+    "Taka",
+    "Kyat",
+    "Dinar"
+  ],
+  "answerOption": "A",
+  "answerText": "Rupee",
+  "genre": "india-gk",
+  "sourceFile": "0220.json"
+}

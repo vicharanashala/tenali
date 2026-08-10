@@ -1,0 +1,15 @@
+{
+  "id": 797,
+  "word": "Biased",
+  "question": "Biased",
+  "options": [
+    "With little or no light",
+    "Pleasantly warm and soothing",
+    "Unfairly supporting one side over another",
+    "Dark or gloomy in appearance"
+  ],
+  "answerOption": "C",
+  "answerText": "Unfairly supporting one side over another",
+  "difficulty": "easy",
+  "sourceFile": "0797.json"
+}

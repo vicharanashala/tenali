@@ -1,0 +1,15 @@
+{
+  "id": 651,
+  "word": "Verbose",
+  "question": "Verbose",
+  "options": [
+    "Using more words than needed",
+    "Relating to the present time",
+    "Not making or accompanied by any sound",
+    "To share information with others"
+  ],
+  "answerOption": "A",
+  "answerText": "Using more words than needed",
+  "difficulty": "easy",
+  "sourceFile": "0651.json"
+}

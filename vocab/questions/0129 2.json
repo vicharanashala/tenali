@@ -1,0 +1,15 @@
+{
+  "id": 129,
+  "word": "Dead",
+  "question": "Dead",
+  "options": [
+    "No longer living",
+    "Having the pleasant taste of sugar",
+    "To travel through an unfamiliar area to learn about it",
+    "To recognize what someone or something is"
+  ],
+  "answerOption": "A",
+  "answerText": "No longer living",
+  "difficulty": "easy",
+  "sourceFile": "0129.json"
+}

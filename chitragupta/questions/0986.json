@@ -1,0 +1,14 @@
+{
+  "id": 986,
+  "question": "Which river is often called the Ganga of South India?",
+  "options": [
+    "Godavari",
+    "Kaveri",
+    "Krishna",
+    "Narmada"
+  ],
+  "answerOption": "A",
+  "answerText": "Godavari",
+  "genre": "geography",
+  "sourceFile": "0986.json"
+}

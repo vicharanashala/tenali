@@ -1,0 +1,15 @@
+{
+  "id": 2257,
+  "word": "Adoration",
+  "question": "Adoration",
+  "options": [
+    "Supreme power or authority",
+    "Severe emotional or physical shock",
+    "A public notice promoting something",
+    "Love, respect, and deep affection"
+  ],
+  "answerOption": "D",
+  "answerText": "Love, respect, and deep affection",
+  "difficulty": "hard",
+  "sourceFile": "2257.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 17,
+  "word": "Cold",
+  "question": "Cold",
+  "options": [
+    "To give facts or information to someone",
+    "Of or at a low temperature",
+    "Standing out so as to be clearly visible",
+    "To be the property of someone"
+  ],
+  "answerOption": "B",
+  "answerText": "Of or at a low temperature",
+  "difficulty": "easy",
+  "sourceFile": "0017.json"
+}

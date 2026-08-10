@@ -1,0 +1,15 @@
+{
+  "id": 554,
+  "word": "Volunteer",
+  "question": "Volunteer",
+  "options": [
+    "Greatly pleased or entertained",
+    "Exactly alike in every way",
+    "Making sure to avoid danger or mistakes",
+    "To freely offer to do something"
+  ],
+  "answerOption": "D",
+  "answerText": "To freely offer to do something",
+  "difficulty": "easy",
+  "sourceFile": "0554.json"
+}

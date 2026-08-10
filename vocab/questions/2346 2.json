@@ -1,0 +1,15 @@
+{
+  "id": 2346,
+  "word": "Litost",
+  "question": "Litost",
+  "options": [
+    "Relating to spontaneous generation",
+    "One who abjures",
+    "To drain of blood",
+    "A state of agony caused by sudden awareness of one's misery"
+  ],
+  "answerOption": "D",
+  "answerText": "A state of agony caused by sudden awareness of one's misery",
+  "difficulty": "extra-hard",
+  "sourceFile": "2346.json"
+}

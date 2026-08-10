@@ -1,0 +1,15 @@
+{
+  "id": 119,
+  "word": "Fierce",
+  "question": "Fierce",
+  "options": [
+    "To exert force to move something closer",
+    "Having a violent or aggressive nature",
+    "To make someone feel happy or satisfied",
+    "Treating people equally without favoritism"
+  ],
+  "answerOption": "B",
+  "answerText": "Having a violent or aggressive nature",
+  "difficulty": "easy",
+  "sourceFile": "0119.json"
+}

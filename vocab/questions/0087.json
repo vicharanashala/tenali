@@ -1,0 +1,15 @@
+{
+  "id": 87,
+  "word": "Shallow",
+  "question": "Shallow",
+  "options": [
+    "Very full of people or things",
+    "Of little depth",
+    "To give food to a person or animal",
+    "Harsh or bitter taste or smell"
+  ],
+  "answerOption": "B",
+  "answerText": "Of little depth",
+  "difficulty": "easy",
+  "sourceFile": "0087.json"
+}

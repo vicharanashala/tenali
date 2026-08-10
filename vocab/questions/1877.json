@@ -1,0 +1,15 @@
+{
+  "id": 1877,
+  "word": "Brittle",
+  "question": "Brittle",
+  "options": [
+    "Hard but easily broken",
+    "A tropical plant providing insecticide",
+    "To continue in a course of action",
+    "A piece of furniture for writing"
+  ],
+  "answerOption": "A",
+  "answerText": "Hard but easily broken",
+  "difficulty": "medium",
+  "sourceFile": "1877.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 826,
+  "word": "Conspicuous",
+  "question": "Conspicuous",
+  "options": [
+    "To put or keep out of sight",
+    "To have as belonging to one; to own",
+    "Noticeably happy and optimistic",
+    "Standing out so as to be clearly visible"
+  ],
+  "answerOption": "D",
+  "answerText": "Standing out so as to be clearly visible",
+  "difficulty": "easy",
+  "sourceFile": "0826.json"
+}

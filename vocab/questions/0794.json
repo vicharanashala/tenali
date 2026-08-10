@@ -1,0 +1,15 @@
+{
+  "id": 794,
+  "word": "Favorable",
+  "question": "Favorable",
+  "options": [
+    "Existing in or caused by nature",
+    "Having high moral qualities",
+    "Expressing approval or agreement",
+    "To move from one region to another"
+  ],
+  "answerOption": "C",
+  "answerText": "Expressing approval or agreement",
+  "difficulty": "easy",
+  "sourceFile": "0794.json"
+}

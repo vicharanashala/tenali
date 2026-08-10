@@ -1,0 +1,15 @@
+{
+  "id": 388,
+  "word": "Shine",
+  "question": "Shine",
+  "options": [
+    "To give out a bright light",
+    "To separate something from something else",
+    "Unable to bend or be changed easily",
+    "Poisonous; harmful to living things"
+  ],
+  "answerOption": "A",
+  "answerText": "To give out a bright light",
+  "difficulty": "easy",
+  "sourceFile": "0388.json"
+}

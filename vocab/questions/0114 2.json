@@ -1,0 +1,15 @@
+{
+  "id": 114,
+  "word": "Humble",
+  "question": "Humble",
+  "options": [
+    "Of small width in relation to length",
+    "Having a modest opinion of one's importance",
+    "To examine and make corrections to something",
+    "To stop working or moving to relax"
+  ],
+  "answerOption": "B",
+  "answerText": "Having a modest opinion of one's importance",
+  "difficulty": "easy",
+  "sourceFile": "0114.json"
+}

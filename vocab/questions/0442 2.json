@@ -1,0 +1,15 @@
+{
+  "id": 442,
+  "word": "Disarrange",
+  "question": "Disarrange",
+  "options": [
+    "Made impure by exposure to a harmful substance",
+    "Relating to or living in water",
+    "To make something untidy or disordered",
+    "To shape into a curve"
+  ],
+  "answerOption": "C",
+  "answerText": "To make something untidy or disordered",
+  "difficulty": "easy",
+  "sourceFile": "0442.json"
+}

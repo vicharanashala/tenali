@@ -1,0 +1,14 @@
+{
+  "id": 378,
+  "question": "Which is the largest landlocked country in the world?",
+  "options": [
+    "Mongolia",
+    "Kazakhstan",
+    "Afghanistan",
+    "Bolivia"
+  ],
+  "answerOption": "B",
+  "answerText": "Kazakhstan",
+  "genre": "geography",
+  "sourceFile": "0378.json"
+}

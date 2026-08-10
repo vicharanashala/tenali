@@ -1,0 +1,15 @@
+{
+  "id": 770,
+  "word": "Voluntary",
+  "question": "Voluntary",
+  "options": [
+    "To regard with respect and warm approval",
+    "To go from one place to another",
+    "Done of one's own free will",
+    "Paying close attention to something"
+  ],
+  "answerOption": "C",
+  "answerText": "Done of one's own free will",
+  "difficulty": "easy",
+  "sourceFile": "0770.json"
+}

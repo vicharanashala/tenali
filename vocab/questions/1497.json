@@ -1,0 +1,15 @@
+{
+  "id": 1497,
+  "word": "Deposition",
+  "question": "Deposition",
+  "options": [
+    "Able to be destroyed or ruined",
+    "A formal statement made under oath",
+    "Involving or producing danger",
+    "The reduction in value of something"
+  ],
+  "answerOption": "B",
+  "answerText": "A formal statement made under oath",
+  "difficulty": "medium",
+  "sourceFile": "1497.json"
+}

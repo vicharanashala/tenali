@@ -1,0 +1,15 @@
+{
+  "id": 1563,
+  "word": "Destruction",
+  "question": "Destruction",
+  "options": [
+    "A public display of group feeling",
+    "A violent criminal or fugitive",
+    "The action of destroying something",
+    "Reserved, modest, and shy in manner"
+  ],
+  "answerOption": "C",
+  "answerText": "The action of destroying something",
+  "difficulty": "medium",
+  "sourceFile": "1563.json"
+}

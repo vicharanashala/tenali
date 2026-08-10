@@ -1,0 +1,15 @@
+{
+  "id": 427,
+  "word": "Attach",
+  "question": "Attach",
+  "options": [
+    "To fasten or join one thing to another",
+    "Having experience, knowledge, and good judgment",
+    "To be in charge of running something",
+    "To perform better than someone else"
+  ],
+  "answerOption": "A",
+  "answerText": "To fasten or join one thing to another",
+  "difficulty": "easy",
+  "sourceFile": "0427.json"
+}

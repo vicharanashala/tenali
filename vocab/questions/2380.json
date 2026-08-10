@@ -1,0 +1,15 @@
+{
+  "id": 2380,
+  "word": "Aegoster",
+  "question": "Aegoster",
+  "options": [
+    "An easterly wind in the Aegean",
+    "Knowledge of medicinal drugs",
+    "The action of making pregnant",
+    "Relating to air-dependent plants"
+  ],
+  "answerOption": "A",
+  "answerText": "An easterly wind in the Aegean",
+  "difficulty": "hard",
+  "sourceFile": "2380.json"
+}

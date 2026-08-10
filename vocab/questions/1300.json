@@ -1,0 +1,15 @@
+{
+  "id": 1300,
+  "word": "Contumely",
+  "question": "Contumely",
+  "options": [
+    "Disrespectful or insulting language",
+    "The quality of being loyal",
+    "A disturbed state of mind in illness",
+    "Able to be detected or found"
+  ],
+  "answerOption": "A",
+  "answerText": "Disrespectful or insulting language",
+  "difficulty": "medium",
+  "sourceFile": "1300.json"
+}

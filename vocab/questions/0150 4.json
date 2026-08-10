@@ -1,0 +1,15 @@
+{
+  "id": 150,
+  "word": "Build",
+  "question": "Build",
+  "options": [
+    "Not decorated or elaborate; simple",
+    "To construct something by putting parts together",
+    "Closely compacted or thick",
+    "Covered or marked with an unclean substance"
+  ],
+  "answerOption": "B",
+  "answerText": "To construct something by putting parts together",
+  "difficulty": "easy",
+  "sourceFile": "0150.json"
+}

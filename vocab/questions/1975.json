@@ -1,0 +1,15 @@
+{
+  "id": 1975,
+  "word": "Compelled",
+  "question": "Compelled",
+  "options": [
+    "To publicly declare to be wrong",
+    "Forced or driven to do something",
+    "Made in an intricate shape or decorated",
+    "Worthy of reward or recognition"
+  ],
+  "answerOption": "B",
+  "answerText": "Forced or driven to do something",
+  "difficulty": "medium",
+  "sourceFile": "1975.json"
+}

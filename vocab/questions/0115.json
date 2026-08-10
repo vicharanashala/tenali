@@ -1,0 +1,15 @@
+{
+  "id": 115,
+  "word": "Patient",
+  "question": "Patient",
+  "options": [
+    "To bring something into existence",
+    "To fasten or join one thing to another",
+    "Having experience, knowledge, and good judgment",
+    "Able to wait without becoming annoyed"
+  ],
+  "answerOption": "D",
+  "answerText": "Able to wait without becoming annoyed",
+  "difficulty": "easy",
+  "sourceFile": "0115.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2301,
+  "word": "Advent",
+  "question": "Advent",
+  "options": [
+    "A plant needing air exposure",
+    "A defensive wall or fortification",
+    "Showing deep love and affection",
+    "The arrival of a notable person"
+  ],
+  "answerOption": "D",
+  "answerText": "The arrival of a notable person",
+  "difficulty": "hard",
+  "sourceFile": "2301.json"
+}

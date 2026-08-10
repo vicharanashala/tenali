@@ -1,0 +1,15 @@
+{
+  "id": 3233,
+  "word": "Abigails",
+  "question": "Abigails",
+  "options": [
+    "Plural of abigail",
+    "A wish or inclination not strong enough for action",
+    "A tendency to make puns or tell inappropriate jokes",
+    "Abyss tide related"
+  ],
+  "answerOption": "A",
+  "answerText": "Plural of abigail",
+  "difficulty": "extra-hard",
+  "sourceFile": "3233.json"
+}

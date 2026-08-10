@@ -1,0 +1,15 @@
+{
+  "id": 2421,
+  "word": "Reverie",
+  "question": "Reverie",
+  "options": [
+    "A state of being pleasantly lost in thought",
+    "A small songbird of the finch family",
+    "Expressing an idea with two words joined by and",
+    "Showing spontaneous and undirected playfulness"
+  ],
+  "answerOption": "A",
+  "answerText": "A state of being pleasantly lost in thought",
+  "difficulty": "extra-hard",
+  "sourceFile": "2421.json"
+}

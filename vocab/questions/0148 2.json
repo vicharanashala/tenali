@@ -1,0 +1,15 @@
+{
+  "id": 148,
+  "word": "Allow",
+  "question": "Allow",
+  "options": [
+    "Not supporting either side in a conflict",
+    "To become limp through heat or lack of water",
+    "To hold something dear; to love deeply",
+    "To give permission for something"
+  ],
+  "answerOption": "D",
+  "answerText": "To give permission for something",
+  "difficulty": "easy",
+  "sourceFile": "0148.json"
+}

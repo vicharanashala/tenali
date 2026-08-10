@@ -1,0 +1,15 @@
+{
+  "id": 683,
+  "word": "Sturdy",
+  "question": "Sturdy",
+  "options": [
+    "To drive or force something away",
+    "Strongly and solidly built",
+    "Acting with care and thought for the future",
+    "Notably large in size or amount"
+  ],
+  "answerOption": "B",
+  "answerText": "Strongly and solidly built",
+  "difficulty": "easy",
+  "sourceFile": "0683.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 543,
+  "word": "Resist",
+  "question": "Resist",
+  "options": [
+    "To withstand the action of something",
+    "Lacking good sense or judgment",
+    "Having or showing a willingness to act dishonestly",
+    "To cook food by prolonged exposure to heat"
+  ],
+  "answerOption": "A",
+  "answerText": "To withstand the action of something",
+  "difficulty": "easy",
+  "sourceFile": "0543.json"
+}

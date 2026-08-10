@@ -1,0 +1,15 @@
+{
+  "id": 1875,
+  "word": "Ticklish",
+  "question": "Ticklish",
+  "options": [
+    "Causing intense distaste or aversion",
+    "Morally corrupt or wicked",
+    "Requiring careful handling",
+    "Performed without planning or prompting"
+  ],
+  "answerOption": "C",
+  "answerText": "Requiring careful handling",
+  "difficulty": "medium",
+  "sourceFile": "1875.json"
+}

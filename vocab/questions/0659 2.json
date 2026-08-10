@@ -1,0 +1,15 @@
+{
+  "id": 659,
+  "word": "Finite",
+  "question": "Finite",
+  "options": [
+    "To cause liquid to scatter in drops",
+    "Feeling deep pleasure from achievements",
+    "Going straight up and down",
+    "Having limits or bounds"
+  ],
+  "answerOption": "D",
+  "answerText": "Having limits or bounds",
+  "difficulty": "easy",
+  "sourceFile": "0659.json"
+}

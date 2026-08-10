@@ -1,0 +1,15 @@
+{
+  "id": 107,
+  "word": "Fancy",
+  "question": "Fancy",
+  "options": [
+    "To agree to receive or do something",
+    "Having good fortune; fortunate",
+    "To give something in return for good behavior",
+    "Elaborate in structure or decoration"
+  ],
+  "answerOption": "D",
+  "answerText": "Elaborate in structure or decoration",
+  "difficulty": "easy",
+  "sourceFile": "0107.json"
+}

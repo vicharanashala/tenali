@@ -1,0 +1,15 @@
+{
+  "id": 2719,
+  "word": "Purification",
+  "question": "Purification",
+  "options": [
+    "Relating to meteorites from space",
+    "The process of making pure",
+    "The quality of being advisable",
+    "Belief denying full divinity of Christ"
+  ],
+  "answerOption": "B",
+  "answerText": "The process of making pure",
+  "difficulty": "hard",
+  "sourceFile": "2719.json"
+}

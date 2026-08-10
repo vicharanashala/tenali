@@ -1,0 +1,15 @@
+{
+  "id": 240,
+  "word": "Invite",
+  "question": "Invite",
+  "options": [
+    "To fail to care for something properly",
+    "To leave out or keep from entering",
+    "To ask someone to come to an event",
+    "To keep something in good condition"
+  ],
+  "answerOption": "C",
+  "answerText": "To ask someone to come to an event",
+  "difficulty": "easy",
+  "sourceFile": "0240.json"
+}

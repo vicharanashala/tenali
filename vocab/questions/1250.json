@@ -1,0 +1,15 @@
+{
+  "id": 1250,
+  "word": "Venomous",
+  "question": "Venomous",
+  "options": [
+    "A thing that spoils or damages something",
+    "Excessively self-centered",
+    "Secreting venom; full of malice",
+    "Wary and cautious in manner"
+  ],
+  "answerOption": "C",
+  "answerText": "Secreting venom; full of malice",
+  "difficulty": "medium",
+  "sourceFile": "1250.json"
+}

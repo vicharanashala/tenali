@@ -1,0 +1,15 @@
+{
+  "id": 247,
+  "word": "Demand",
+  "question": "Demand",
+  "options": [
+    "To look at something closely",
+    "To ask for something forcefully",
+    "To leave a place",
+    "More than is necessary or normal"
+  ],
+  "answerOption": "B",
+  "answerText": "To ask for something forcefully",
+  "difficulty": "easy",
+  "sourceFile": "0247.json"
+}

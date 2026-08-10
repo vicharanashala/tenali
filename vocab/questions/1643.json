@@ -1,0 +1,15 @@
+{
+  "id": 1643,
+  "word": "Destine",
+  "question": "Destine",
+  "options": [
+    "Having the ability to assess situations quickly",
+    "Wary or suspicious",
+    "To determine the future of something",
+    "A lack or shortage of something"
+  ],
+  "answerOption": "C",
+  "answerText": "To determine the future of something",
+  "difficulty": "medium",
+  "sourceFile": "1643.json"
+}

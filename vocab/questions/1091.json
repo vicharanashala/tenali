@@ -1,0 +1,15 @@
+{
+  "id": 1091,
+  "word": "Voracious",
+  "question": "Voracious",
+  "options": [
+    "In a despondent manner",
+    "Wanting large quantities of food or knowledge",
+    "Giving a sign of future success",
+    "Feeling distrust or doubt"
+  ],
+  "answerOption": "B",
+  "answerText": "Wanting large quantities of food or knowledge",
+  "difficulty": "medium",
+  "sourceFile": "1091.json"
+}

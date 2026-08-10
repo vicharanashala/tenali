@@ -1,0 +1,15 @@
+{
+  "id": 2854,
+  "word": "Resurrection",
+  "question": "Resurrection",
+  "options": [
+    "Philosophy based on Aristotle",
+    "The action of beginning again",
+    "The medieval chemical philosophy",
+    "The action of raising from death"
+  ],
+  "answerOption": "D",
+  "answerText": "The action of raising from death",
+  "difficulty": "hard",
+  "sourceFile": "2854.json"
+}

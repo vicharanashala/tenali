@@ -1,0 +1,15 @@
+{
+  "id": 355,
+  "word": "Collect",
+  "question": "Collect",
+  "options": [
+    "To bring or gather things together",
+    "Having the shape of a rectangle",
+    "Free of deceit; truthful",
+    "To fill someone with great surprise"
+  ],
+  "answerOption": "A",
+  "answerText": "To bring or gather things together",
+  "difficulty": "easy",
+  "sourceFile": "0355.json"
+}

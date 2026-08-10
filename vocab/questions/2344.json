@@ -1,0 +1,15 @@
+{
+  "id": 2344,
+  "word": "Adviser",
+  "question": "Adviser",
+  "options": [
+    "The quality of being ascertainable",
+    "Directly opposed or contrasted",
+    "One who gives advice",
+    "The action of occurring again"
+  ],
+  "answerOption": "C",
+  "answerText": "One who gives advice",
+  "difficulty": "hard",
+  "sourceFile": "2344.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2541,
+  "word": "AEROPHAGOUS",
+  "question": "AEROPHAGOUS",
+  "options": [
+    "A person who flies in balloon",
+    "Damage to the skin or surface",
+    "Feeding on air organisms",
+    "Excessive flattery to gain advantage"
+  ],
+  "answerOption": "C",
+  "answerText": "Feeding on air organisms",
+  "difficulty": "hard",
+  "sourceFile": "2541.json"
+}

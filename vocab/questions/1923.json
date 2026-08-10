@@ -1,0 +1,15 @@
+{
+  "id": 1923,
+  "word": "Warped",
+  "question": "Warped",
+  "options": [
+    "Bent out of the normal shape",
+    "Understanding of a situation after it occurs",
+    "An instrument for finding something",
+    "Having careful and persistent effort"
+  ],
+  "answerOption": "A",
+  "answerText": "Bent out of the normal shape",
+  "difficulty": "medium",
+  "sourceFile": "1923.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 490,
+  "word": "Confirm",
+  "question": "Confirm",
+  "options": [
+    "To remove the wrapping from something",
+    "To establish the truth of something",
+    "Growing thickly and strongly; abundant",
+    "Not approximated in any way; precise"
+  ],
+  "answerOption": "B",
+  "answerText": "To establish the truth of something",
+  "difficulty": "easy",
+  "sourceFile": "0490.json"
+}

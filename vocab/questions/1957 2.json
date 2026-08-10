@@ -1,0 +1,15 @@
+{
+  "id": 1957,
+  "word": "Adventurous",
+  "question": "Adventurous",
+  "options": [
+    "Willing to undertake risky ventures",
+    "The quality of being adverse",
+    "Shaped with an adze",
+    "The quality of being enigmatic"
+  ],
+  "answerOption": "A",
+  "answerText": "Willing to undertake risky ventures",
+  "difficulty": "hard",
+  "sourceFile": "1957.json"
+}

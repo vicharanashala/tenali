@@ -1,0 +1,15 @@
+{
+  "id": 2220,
+  "word": "AEROSCOPY",
+  "question": "AEROSCOPY",
+  "options": [
+    "Grimly mocking or cynical",
+    "Angry and bitter in tone or manner",
+    "Observation of air conditions",
+    "The process of aerating something"
+  ],
+  "answerOption": "C",
+  "answerText": "Observation of air conditions",
+  "difficulty": "hard",
+  "sourceFile": "2220.json"
+}

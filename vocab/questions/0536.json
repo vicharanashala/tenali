@@ -1,0 +1,15 @@
+{
+  "id": 536,
+  "word": "Nurture",
+  "question": "Nurture",
+  "options": [
+    "Of great width between opposite sides",
+    "To rest on the surface of a liquid",
+    "To make something untidy or disordered",
+    "To care for and encourage growth"
+  ],
+  "answerOption": "D",
+  "answerText": "To care for and encourage growth",
+  "difficulty": "easy",
+  "sourceFile": "0536.json"
+}

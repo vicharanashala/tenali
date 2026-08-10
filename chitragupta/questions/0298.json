@@ -1,0 +1,14 @@
+{
+  "id": 298,
+  "question": "Which country is famous for the pyramids and the Sphinx?",
+  "options": [
+    "Greece",
+    "Mexico",
+    "Egypt",
+    "Iraq"
+  ],
+  "answerOption": "C",
+  "answerText": "Egypt",
+  "genre": "geography",
+  "sourceFile": "0298.json"
+}

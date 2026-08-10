@@ -1,0 +1,15 @@
+{
+  "id": 2859,
+  "word": "Alexithymia",
+  "question": "Alexithymia",
+  "options": [
+    "Inability to identify and describe emotions",
+    "To darken or obscure; to cloud over",
+    "The state of being abysmal",
+    "The quality of being bottomless"
+  ],
+  "answerOption": "A",
+  "answerText": "Inability to identify and describe emotions",
+  "difficulty": "extra-hard",
+  "sourceFile": "2859.json"
+}

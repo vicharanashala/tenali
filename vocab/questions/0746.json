@@ -1,0 +1,15 @@
+{
+  "id": 746,
+  "word": "Marine",
+  "question": "Marine",
+  "options": [
+    "Relating to or found in the sea",
+    "Strongly wanting to do or have something",
+    "To have something come into the mind again",
+    "To join or link things together"
+  ],
+  "answerOption": "A",
+  "answerText": "Relating to or found in the sea",
+  "difficulty": "easy",
+  "sourceFile": "0746.json"
+}

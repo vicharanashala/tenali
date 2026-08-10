@@ -1,0 +1,15 @@
+{
+  "id": 747,
+  "word": "Tropical",
+  "question": "Tropical",
+  "options": [
+    "Relating to the region near the equator",
+    "Feeling optimistic about a future event",
+    "Occurring or found frequently",
+    "Sad or abandoned in appearance"
+  ],
+  "answerOption": "A",
+  "answerText": "Relating to the region near the equator",
+  "difficulty": "easy",
+  "sourceFile": "0747.json"
+}

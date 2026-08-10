@@ -1,0 +1,14 @@
+{
+  "id": 34,
+  "question": "What is the capital of Sri Lanka?",
+  "options": [
+    "Canberra",
+    "Brasília",
+    "Sri Jayawardenepura Kotte",
+    "Bangkok"
+  ],
+  "answerOption": "C",
+  "answerText": "Sri Jayawardenepura Kotte",
+  "genre": "geography",
+  "sourceFile": "0034.json"
+}

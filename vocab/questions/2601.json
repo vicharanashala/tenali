@@ -1,0 +1,15 @@
+{
+  "id": 2601,
+  "word": "AEROSTATION",
+  "question": "AEROSTATION",
+  "options": [
+    "The action of allocating something",
+    "The science of ballooning",
+    "Expert in aerostation",
+    "Something that hinders or delays"
+  ],
+  "answerOption": "B",
+  "answerText": "The science of ballooning",
+  "difficulty": "hard",
+  "sourceFile": "2601.json"
+}

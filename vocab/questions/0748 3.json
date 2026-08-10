@@ -1,0 +1,15 @@
+{
+  "id": 748,
+  "word": "Arctic",
+  "question": "Arctic",
+  "options": [
+    "Protected from danger or risk",
+    "To grow and develop well",
+    "Relating to regions around the North Pole",
+    "Very hot; burning"
+  ],
+  "answerOption": "C",
+  "answerText": "Relating to regions around the North Pole",
+  "difficulty": "easy",
+  "sourceFile": "0748.json"
+}

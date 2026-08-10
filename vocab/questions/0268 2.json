@@ -1,0 +1,15 @@
+{
+  "id": 268,
+  "word": "Harvest",
+  "question": "Harvest",
+  "options": [
+    "To love and respect deeply",
+    "Affected by physical illness",
+    "To gather a crop from the fields",
+    "To receive money in return for labor"
+  ],
+  "answerOption": "C",
+  "answerText": "To gather a crop from the fields",
+  "difficulty": "easy",
+  "sourceFile": "0268.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 198,
+  "word": "Share",
+  "question": "Share",
+  "options": [
+    "Protected from danger or risk",
+    "To devote time or effort to a purpose",
+    "To give a portion of something to others",
+    "Closely compacted or thick"
+  ],
+  "answerOption": "C",
+  "answerText": "To give a portion of something to others",
+  "difficulty": "easy",
+  "sourceFile": "0198.json"
+}

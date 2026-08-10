@@ -1,0 +1,15 @@
+{
+  "id": 869,
+  "word": "Quick",
+  "question": "Quick",
+  "options": [
+    "To throw in various random directions",
+    "Performed without planning or prompting",
+    "Moving with speed or done rapidly",
+    "To try to find something by looking carefully"
+  ],
+  "answerOption": "C",
+  "answerText": "Moving with speed or done rapidly",
+  "difficulty": "easy",
+  "sourceFile": "0869.json"
+}

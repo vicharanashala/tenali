@@ -1,0 +1,14 @@
+{
+  "id": 608,
+  "question": "Which part of the respiratory tract connects the throat to the lungs?",
+  "options": [
+    "Esophagus",
+    "Trachea",
+    "Aorta",
+    "Ureter"
+  ],
+  "answerOption": "B",
+  "answerText": "Trachea",
+  "genre": "mixed",
+  "sourceFile": "0608.json"
+}

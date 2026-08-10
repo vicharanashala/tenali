@@ -1,0 +1,14 @@
+{
+  "id": 725,
+  "question": "Which organ helps in hearing?",
+  "options": [
+    "Eye",
+    "Ear",
+    "Nose",
+    "Skin"
+  ],
+  "answerOption": "B",
+  "answerText": "Ear",
+  "genre": "science",
+  "sourceFile": "0725.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2753,
+  "word": "Immutability",
+  "question": "Immutability",
+  "options": [
+    "A mature human or animal",
+    "Equivalent in seriousness or effect",
+    "The quality of never changing",
+    "Great technical skill or expertise"
+  ],
+  "answerOption": "C",
+  "answerText": "The quality of never changing",
+  "difficulty": "hard",
+  "sourceFile": "2753.json"
+}

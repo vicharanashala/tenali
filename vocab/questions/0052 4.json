@@ -1,0 +1,15 @@
+{
+  "id": 52,
+  "word": "Closed",
+  "question": "Closed",
+  "options": [
+    "Not open; shut or fastened",
+    "To cause someone to find something funny",
+    "Needing much effort or skill to accomplish",
+    "Happening by chance; unintentional"
+  ],
+  "answerOption": "A",
+  "answerText": "Not open; shut or fastened",
+  "difficulty": "easy",
+  "sourceFile": "0052.json"
+}

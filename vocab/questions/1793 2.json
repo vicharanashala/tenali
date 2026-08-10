@@ -1,0 +1,15 @@
+{
+  "id": 1793,
+  "word": "Panegyric",
+  "question": "Panegyric",
+  "options": [
+    "A person's ability to cope with difficulties",
+    "A public speech of praise",
+    "An organism requiring air to live",
+    "One who writes about air"
+  ],
+  "answerOption": "B",
+  "answerText": "A public speech of praise",
+  "difficulty": "hard",
+  "sourceFile": "1793.json"
+}

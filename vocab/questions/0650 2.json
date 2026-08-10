@@ -1,0 +1,15 @@
+{
+  "id": 650,
+  "word": "Eloquent",
+  "question": "Eloquent",
+  "options": [
+    "To do physical harm or damage to someone",
+    "To ask for something forcefully",
+    "Fluent and persuasive in speaking",
+    "More than is necessary or normal"
+  ],
+  "answerOption": "C",
+  "answerText": "Fluent and persuasive in speaking",
+  "difficulty": "easy",
+  "sourceFile": "0650.json"
+}

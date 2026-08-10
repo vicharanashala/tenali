@@ -1,0 +1,15 @@
+{
+  "id": 159,
+  "word": "Depart",
+  "question": "Depart",
+  "options": [
+    "To leave a place",
+    "Showing great activity or vitality",
+    "No longer fresh; old and dry",
+    "To make a rough drawing of something"
+  ],
+  "answerOption": "A",
+  "answerText": "To leave a place",
+  "difficulty": "easy",
+  "sourceFile": "0159.json"
+}

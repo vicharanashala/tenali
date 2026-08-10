@@ -1,0 +1,15 @@
+{
+  "id": 29,
+  "word": "Hard",
+  "question": "Hard",
+  "options": [
+    "Relating to or powered by electricity",
+    "Given to sudden changes of mood",
+    "Solid, firm, and rigid; not easily broken",
+    "In use or inhabited"
+  ],
+  "answerOption": "C",
+  "answerText": "Solid, firm, and rigid; not easily broken",
+  "difficulty": "easy",
+  "sourceFile": "0029.json"
+}

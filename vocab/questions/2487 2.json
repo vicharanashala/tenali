@@ -1,0 +1,15 @@
+{
+  "id": 2487,
+  "word": "Abelian",
+  "question": "Abelian",
+  "options": [
+    "A situation where any move will worsen one's position",
+    "Relating to loss of function",
+    "Quality of being miserable",
+    "Relating to groups with commutative property"
+  ],
+  "answerOption": "D",
+  "answerText": "Relating to groups with commutative property",
+  "difficulty": "extra-hard",
+  "sourceFile": "2487.json"
+}

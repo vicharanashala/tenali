@@ -1,0 +1,15 @@
+{
+  "id": 61,
+  "word": "Lazy",
+  "question": "Lazy",
+  "options": [
+    "Caught in a place unable to escape",
+    "Restricted or limited to a space",
+    "Unwilling to work or use energy",
+    "Not giving enough attention to avoid harm"
+  ],
+  "answerOption": "C",
+  "answerText": "Unwilling to work or use energy",
+  "difficulty": "easy",
+  "sourceFile": "0061.json"
+}

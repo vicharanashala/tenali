@@ -1,0 +1,15 @@
+{
+  "id": 1161,
+  "word": "Usurp",
+  "question": "Usurp",
+  "options": [
+    "Present or found everywhere",
+    "Deceiving or confusing someone",
+    "Made someone do something against will",
+    "To take a position of power illegally"
+  ],
+  "answerOption": "D",
+  "answerText": "To take a position of power illegally",
+  "difficulty": "medium",
+  "sourceFile": "1161.json"
+}

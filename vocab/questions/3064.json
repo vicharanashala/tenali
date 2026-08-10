@@ -1,0 +1,15 @@
+{
+  "id": 3064,
+  "word": "Acatalepsy",
+  "question": "Acatalepsy",
+  "options": [
+    "The quality of being abstinent",
+    "Quality of being abundant",
+    "The impossibility of comprehending something",
+    "In non-literary manner"
+  ],
+  "answerOption": "C",
+  "answerText": "The impossibility of comprehending something",
+  "difficulty": "extra-hard",
+  "sourceFile": "3064.json"
+}

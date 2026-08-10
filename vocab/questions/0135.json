@@ -1,0 +1,15 @@
+{
+  "id": 135,
+  "word": "Familiar",
+  "question": "Familiar",
+  "options": [
+    "Well known from long experience",
+    "To spring back after hitting a surface",
+    "Very great in degree; intense",
+    "Making sure to avoid danger or mistakes"
+  ],
+  "answerOption": "A",
+  "answerText": "Well known from long experience",
+  "difficulty": "easy",
+  "sourceFile": "0135.json"
+}

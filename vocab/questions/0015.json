@@ -1,0 +1,15 @@
+{
+  "id": 15,
+  "word": "Dark",
+  "question": "Dark",
+  "options": [
+    "To be defeated in a contest",
+    "With little or no light",
+    "Keeping careful watch for dangers",
+    "Giving information clearly in few words"
+  ],
+  "answerOption": "B",
+  "answerText": "With little or no light",
+  "difficulty": "easy",
+  "sourceFile": "0015.json"
+}

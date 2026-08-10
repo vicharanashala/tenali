@@ -1,0 +1,15 @@
+{
+  "id": 1977,
+  "word": "Pressured",
+  "question": "Pressured",
+  "options": [
+    "Tending to derogate",
+    "Causing harm or damage to something",
+    "Tried to compel someone to act",
+    "Prone to discord or quarreling"
+  ],
+  "answerOption": "C",
+  "answerText": "Tried to compel someone to act",
+  "difficulty": "medium",
+  "sourceFile": "1977.json"
+}

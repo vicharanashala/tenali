@@ -1,0 +1,15 @@
+{
+  "id": 2353,
+  "word": "Advocat",
+  "question": "Advocat",
+  "options": [
+    "A camera for aerial photography",
+    "Philosophy based on Plato's ideas",
+    "Not able to be corrected or reformed",
+    "A person who pleads for another"
+  ],
+  "answerOption": "D",
+  "answerText": "A person who pleads for another",
+  "difficulty": "hard",
+  "sourceFile": "2353.json"
+}

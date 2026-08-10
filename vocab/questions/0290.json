@@ -1,0 +1,15 @@
+{
+  "id": 290,
+  "word": "Prepare",
+  "question": "Prepare",
+  "options": [
+    "To love and respect deeply",
+    "Affected by physical illness",
+    "To make ready for use or consideration",
+    "To receive money in return for labor"
+  ],
+  "answerOption": "C",
+  "answerText": "To make ready for use or consideration",
+  "difficulty": "easy",
+  "sourceFile": "0290.json"
+}

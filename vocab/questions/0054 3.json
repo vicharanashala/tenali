@@ -1,0 +1,15 @@
+{
+  "id": 54,
+  "word": "Far",
+  "question": "Far",
+  "options": [
+    "At a great distance in space or time",
+    "To recognize the full worth of something",
+    "Able to recover quickly from difficulties",
+    "Unfriendly and opposed to something"
+  ],
+  "answerOption": "A",
+  "answerText": "At a great distance in space or time",
+  "difficulty": "easy",
+  "sourceFile": "0054.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 540,
+  "question": "Which gland secretes thyroxine?",
+  "options": [
+    "Pituitary",
+    "Adrenal",
+    "Thyroid",
+    "Pancreas"
+  ],
+  "answerOption": "C",
+  "answerText": "Thyroid",
+  "genre": "mixed",
+  "sourceFile": "0540.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 148,
+  "word": "Allow",
+  "question": "Allow",
+  "options": [
+    "To form an idea of the value of something",
+    "To give permission for something",
+    "To arouse the curiosity of someone",
+    "To prove more powerful than opposing forces"
+  ],
+  "answerOption": "B",
+  "answerText": "To give permission for something",
+  "difficulty": "easy",
+  "sourceFile": "0148.json"
+}

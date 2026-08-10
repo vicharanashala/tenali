@@ -1,0 +1,15 @@
+{
+  "id": 1430,
+  "word": "Demystify",
+  "question": "Demystify",
+  "options": [
+    "A device for causing explosion",
+    "To rely on someone or something",
+    "To remove the mystery from something",
+    "Feeling or expressing contempt"
+  ],
+  "answerOption": "C",
+  "answerText": "To remove the mystery from something",
+  "difficulty": "medium",
+  "sourceFile": "1430.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 8,
+  "word": "Big",
+  "question": "Big",
+  "options": [
+    "Mild in temperament or behavior",
+    "Easily seen or noticed",
+    "A barren area with very little rainfall",
+    "Of considerable size or extent"
+  ],
+  "answerOption": "D",
+  "answerText": "Of considerable size or extent",
+  "difficulty": "easy",
+  "sourceFile": "0008.json"
+}

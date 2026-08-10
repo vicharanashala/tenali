@@ -1,0 +1,15 @@
+{
+  "id": 635,
+  "word": "Trustworthy",
+  "question": "Trustworthy",
+  "options": [
+    "To move forward in a purposeful way",
+    "Able to be relied on as honest",
+    "Having experience, knowledge, and good judgment",
+    "Evil or morally wrong"
+  ],
+  "answerOption": "B",
+  "answerText": "Able to be relied on as honest",
+  "difficulty": "easy",
+  "sourceFile": "0635.json"
+}

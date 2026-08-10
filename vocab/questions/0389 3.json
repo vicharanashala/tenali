@@ -1,0 +1,15 @@
+{
+  "id": 389,
+  "word": "Fade",
+  "question": "Fade",
+  "options": [
+    "Competent or skilled in doing something",
+    "Of chief importance; principal",
+    "To gradually grow faint and disappear",
+    "Bad tempered and unwilling to be friendly"
+  ],
+  "answerOption": "C",
+  "answerText": "To gradually grow faint and disappear",
+  "difficulty": "easy",
+  "sourceFile": "0389.json"
+}

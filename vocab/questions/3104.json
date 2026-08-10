@@ -1,0 +1,15 @@
+{
+  "id": 3104,
+  "word": "Revenant",
+  "question": "Revenant",
+  "options": [
+    "Abyss stage or period",
+    "Using the ablative case",
+    "A person who has returned from the dead",
+    "Obedient or attentive to an excessive degree"
+  ],
+  "answerOption": "C",
+  "answerText": "A person who has returned from the dead",
+  "difficulty": "extra-hard",
+  "sourceFile": "3104.json"
+}

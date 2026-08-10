@@ -1,0 +1,15 @@
+{
+  "id": 2165,
+  "word": "AEROLITH",
+  "question": "AEROLITH",
+  "options": [
+    "A meteorite or stone",
+    "An expert in aerodynamics",
+    "Device recording airborne water",
+    "A person who acts obediently to gain advantage"
+  ],
+  "answerOption": "A",
+  "answerText": "A meteorite or stone",
+  "difficulty": "hard",
+  "sourceFile": "2165.json"
+}

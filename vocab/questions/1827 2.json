@@ -1,0 +1,15 @@
+{
+  "id": 1827,
+  "word": "Moratorium",
+  "question": "Moratorium",
+  "options": [
+    "A meteorite with iron core",
+    "Having a ready insight into things",
+    "A temporary prohibition of an activity",
+    "The sound of the patient's voice"
+  ],
+  "answerOption": "C",
+  "answerText": "A temporary prohibition of an activity",
+  "difficulty": "hard",
+  "sourceFile": "1827.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 398,
+  "word": "Thrive",
+  "question": "Thrive",
+  "options": [
+    "To move downward without control",
+    "To make the environment dirty or harmful",
+    "To grow and develop well",
+    "Able to be trusted to do what is needed"
+  ],
+  "answerOption": "C",
+  "answerText": "To grow and develop well",
+  "difficulty": "easy",
+  "sourceFile": "0398.json"
+}

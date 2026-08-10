@@ -1,0 +1,15 @@
+{
+  "id": 721,
+  "word": "Interior",
+  "question": "Interior",
+  "options": [
+    "Bad-tempered and argumentative",
+    "To gather a crop from the fields",
+    "The inner part of something",
+    "To offer suggestions about the best action"
+  ],
+  "answerOption": "C",
+  "answerText": "The inner part of something",
+  "difficulty": "easy",
+  "sourceFile": "0721.json"
+}

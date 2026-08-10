@@ -1,0 +1,15 @@
+{
+  "id": 1541,
+  "word": "Derider",
+  "question": "Derider",
+  "options": [
+    "Not original; based on something else",
+    "One who derides",
+    "A playing card or die with two spots",
+    "Tending to purify the blood"
+  ],
+  "answerOption": "B",
+  "answerText": "One who derides",
+  "difficulty": "medium",
+  "sourceFile": "1541.json"
+}

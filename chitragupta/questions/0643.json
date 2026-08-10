@@ -1,0 +1,14 @@
+{
+  "id": 643,
+  "question": "Which part of the digestive system mainly absorbs water?",
+  "options": [
+    "Stomach",
+    "Small intestine",
+    "Large intestine",
+    "Esophagus"
+  ],
+  "answerOption": "C",
+  "answerText": "Large intestine",
+  "genre": "science",
+  "sourceFile": "0643.json"
+}

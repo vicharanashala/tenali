@@ -1,0 +1,15 @@
+{
+  "id": 3270,
+  "word": "Abyssoticus",
+  "question": "Abyssoticus",
+  "options": [
+    "Moderate in eating and drinking",
+    "Expert in deep ocean zones",
+    "Related to abyss",
+    "Relating to abyss sounds"
+  ],
+  "answerOption": "C",
+  "answerText": "Related to abyss",
+  "difficulty": "extra-hard",
+  "sourceFile": "3270.json"
+}

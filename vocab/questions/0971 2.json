@@ -1,0 +1,15 @@
+{
+  "id": 971,
+  "word": "Yeoman",
+  "question": "Yeoman",
+  "options": [
+    "Open to more than one interpretation",
+    "To perceive or recognize something",
+    "Full of or shedding light; bright",
+    "A man holding a small landed estate"
+  ],
+  "answerOption": "D",
+  "answerText": "A man holding a small landed estate",
+  "difficulty": "medium",
+  "sourceFile": "0971.json"
+}

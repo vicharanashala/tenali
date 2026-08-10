@@ -1,0 +1,15 @@
+{
+  "id": 2542,
+  "word": "AEROPHAGUS",
+  "question": "AEROPHAGUS",
+  "options": [
+    "Study of organisms in air",
+    "Damage from atmospheric electricity",
+    "Swallowing of air",
+    "Public shame or disgrace"
+  ],
+  "answerOption": "C",
+  "answerText": "Swallowing of air",
+  "difficulty": "hard",
+  "sourceFile": "2542.json"
+}

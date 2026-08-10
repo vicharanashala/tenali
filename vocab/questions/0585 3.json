@@ -1,0 +1,15 @@
+{
+  "id": 585,
+  "word": "Resilient",
+  "question": "Resilient",
+  "options": [
+    "Low in price; not expensive",
+    "Having exceptional natural ability",
+    "Having an even and regular surface",
+    "Able to recover quickly from difficulties"
+  ],
+  "answerOption": "D",
+  "answerText": "Able to recover quickly from difficulties",
+  "difficulty": "easy",
+  "sourceFile": "0585.json"
+}

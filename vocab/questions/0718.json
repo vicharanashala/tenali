@@ -1,0 +1,15 @@
+{
+  "id": 718,
+  "word": "Isolated",
+  "question": "Isolated",
+  "options": [
+    "To cover something in paper or cloth",
+    "To give out a bright light",
+    "Caught in a place unable to escape",
+    "Far away from other places or people"
+  ],
+  "answerOption": "D",
+  "answerText": "Far away from other places or people",
+  "difficulty": "easy",
+  "sourceFile": "0718.json"
+}

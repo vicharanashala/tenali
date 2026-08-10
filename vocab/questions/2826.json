@@ -1,0 +1,15 @@
+{
+  "id": 2826,
+  "word": "Allegiance",
+  "question": "Allegiance",
+  "options": [
+    "To love and respect deeply",
+    "Providing advice or recommendations",
+    "The quality of being loyal",
+    "Loyalty to a person or country"
+  ],
+  "answerOption": "D",
+  "answerText": "Loyalty to a person or country",
+  "difficulty": "hard",
+  "sourceFile": "2826.json"
+}

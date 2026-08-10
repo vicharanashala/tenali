@@ -1,0 +1,15 @@
+{
+  "id": 1006,
+  "word": "Nuance",
+  "question": "Nuance",
+  "options": [
+    "Showing great attention to detail",
+    "A seemingly contradictory statement",
+    "A subtle difference in meaning",
+    "Having a keen sense of understanding"
+  ],
+  "answerOption": "C",
+  "answerText": "A subtle difference in meaning",
+  "difficulty": "medium",
+  "sourceFile": "1006.json"
+}

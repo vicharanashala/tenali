@@ -1,0 +1,15 @@
+{
+  "id": 1304,
+  "word": "Deluxe",
+  "question": "Deluxe",
+  "options": [
+    "Luxuriously elegant and expensive",
+    "To determine the future of something",
+    "To make disorderly or insane",
+    "To support or strengthen something"
+  ],
+  "answerOption": "A",
+  "answerText": "Luxuriously elegant and expensive",
+  "difficulty": "medium",
+  "sourceFile": "1304.json"
+}

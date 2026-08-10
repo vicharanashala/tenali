@@ -1,0 +1,15 @@
+{
+  "id": 938,
+  "word": "Mundane",
+  "question": "Mundane",
+  "options": [
+    "Being the only one of its kind",
+    "Able to recover quickly from difficulties",
+    "Lacking interest or excitement",
+    "To be exceptionally good at something"
+  ],
+  "answerOption": "C",
+  "answerText": "Lacking interest or excitement",
+  "difficulty": "easy",
+  "sourceFile": "0938.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2221,
+  "word": "Interpolate",
+  "question": "Interpolate",
+  "options": [
+    "To insert something between fixed points",
+    "Happening by chance or accident",
+    "The action of bestowing something",
+    "Having a nightmarishly complex quality"
+  ],
+  "answerOption": "A",
+  "answerText": "To insert something between fixed points",
+  "difficulty": "hard",
+  "sourceFile": "2221.json"
+}

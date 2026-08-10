@@ -1,0 +1,14 @@
+{
+  "id": 233,
+  "question": "Which instrument is used to measure humidity?",
+  "options": [
+    "Barometer",
+    "Hygrometer",
+    "Thermometer",
+    "Odometer"
+  ],
+  "answerOption": "B",
+  "answerText": "Hygrometer",
+  "genre": "mixed",
+  "sourceFile": "0233.json"
+}

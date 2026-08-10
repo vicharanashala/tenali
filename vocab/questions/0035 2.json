@@ -1,0 +1,15 @@
+{
+  "id": 35,
+  "word": "Gregarious",
+  "question": "Gregarious",
+  "options": [
+    "Having a harmful effect, especially gradually",
+    "Fond of company; sociable",
+    "To place side by side for comparison",
+    "Lacking energy; sluggish and apathetic"
+  ],
+  "answerOption": "B",
+  "answerText": "Fond of company; sociable",
+  "difficulty": "hard",
+  "sourceFile": "0035.json"
+}

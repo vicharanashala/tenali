@@ -1,0 +1,15 @@
+{
+  "id": 440,
+  "word": "Unload",
+  "question": "Unload",
+  "options": [
+    "Of very little importance",
+    "Able to resume its shape after stretching",
+    "To be exceptionally good at something",
+    "To remove goods from a vehicle"
+  ],
+  "answerOption": "D",
+  "answerText": "To remove goods from a vehicle",
+  "difficulty": "easy",
+  "sourceFile": "0440.json"
+}

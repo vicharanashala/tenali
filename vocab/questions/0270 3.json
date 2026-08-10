@@ -1,0 +1,15 @@
+{
+  "id": 270,
+  "word": "Starve",
+  "question": "Starve",
+  "options": [
+    "To impart knowledge or skill to someone",
+    "To suffer or die from lack of food",
+    "To become limp through heat or lack of water",
+    "Able to be seen"
+  ],
+  "answerOption": "B",
+  "answerText": "To suffer or die from lack of food",
+  "difficulty": "easy",
+  "sourceFile": "0270.json"
+}

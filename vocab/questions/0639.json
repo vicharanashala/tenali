@@ -1,0 +1,15 @@
+{
+  "id": 639,
+  "word": "Competent",
+  "question": "Competent",
+  "options": [
+    "Having the skill to do something well",
+    "Using more words than needed",
+    "Very beautiful or attractive",
+    "To make a thorough change in form"
+  ],
+  "answerOption": "A",
+  "answerText": "Having the skill to do something well",
+  "difficulty": "easy",
+  "sourceFile": "0639.json"
+}

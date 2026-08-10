@@ -1,0 +1,15 @@
+{
+  "id": 24,
+  "word": "Rich",
+  "question": "Rich",
+  "options": [
+    "To give special importance to something",
+    "Full of energy and enthusiasm",
+    "Having a great deal of money or assets",
+    "To withstand the action of something"
+  ],
+  "answerOption": "C",
+  "answerText": "Having a great deal of money or assets",
+  "difficulty": "easy",
+  "sourceFile": "0024.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1041,
+  "word": "Reckless",
+  "question": "Reckless",
+  "options": [
+    "Without thought or care for consequences",
+    "Fineness of texture, form, or structure",
+    "To kill one in every ten of a group",
+    "The action of reducing in rank"
+  ],
+  "answerOption": "A",
+  "answerText": "Without thought or care for consequences",
+  "difficulty": "medium",
+  "sourceFile": "1041.json"
+}

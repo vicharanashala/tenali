@@ -1,0 +1,15 @@
+{
+  "id": 2276,
+  "word": "AEROTOXIN",
+  "question": "AEROTOXIN",
+  "options": [
+    "A poison from air",
+    "A plant used as herbal medicine",
+    "A gas-filled cavity in organisms",
+    "The action of aerifying"
+  ],
+  "answerOption": "A",
+  "answerText": "A poison from air",
+  "difficulty": "hard",
+  "sourceFile": "2276.json"
+}

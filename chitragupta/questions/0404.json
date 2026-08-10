@@ -1,0 +1,14 @@
+{
+  "id": 404,
+  "question": "Which Indian state has Panaji as its capital?",
+  "options": [
+    "Goa",
+    "Kerala",
+    "Karnataka",
+    "Maharashtra"
+  ],
+  "answerOption": "A",
+  "answerText": "Goa",
+  "genre": "geography",
+  "sourceFile": "0404.json"
+}

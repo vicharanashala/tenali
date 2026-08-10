@@ -1,0 +1,15 @@
+{
+  "id": 216,
+  "word": "Discover",
+  "question": "Discover",
+  "options": [
+    "Lasting for a limited time only",
+    "To find something for the first time",
+    "Wanting to avoid exertion or effort",
+    "To unfasten a knot or bow"
+  ],
+  "answerOption": "B",
+  "answerText": "To find something for the first time",
+  "difficulty": "easy",
+  "sourceFile": "0216.json"
+}

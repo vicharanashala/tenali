@@ -1,0 +1,14 @@
+{
+  "id": 391,
+  "question": "Who discovered radium along with Pierre Curie?",
+  "options": [
+    "Marie Curie",
+    "Rosalind Franklin",
+    "Dorothy Hodgkin",
+    "Ada Lovelace"
+  ],
+  "answerOption": "A",
+  "answerText": "Marie Curie",
+  "genre": "general-knowledge",
+  "sourceFile": "0391.json"
+}

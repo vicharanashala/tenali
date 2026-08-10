@@ -1,0 +1,15 @@
+{
+  "id": 612,
+  "word": "Vibrant",
+  "question": "Vibrant",
+  "options": [
+    "Intensely passionate or devoted",
+    "Full of energy and enthusiasm",
+    "To become greater in size or amount",
+    "To put goods or cargo onto a vehicle"
+  ],
+  "answerOption": "B",
+  "answerText": "Full of energy and enthusiasm",
+  "difficulty": "easy",
+  "sourceFile": "0612.json"
+}

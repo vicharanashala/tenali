@@ -1,0 +1,15 @@
+{
+  "id": 188,
+  "word": "Hide",
+  "question": "Hide",
+  "options": [
+    "Smooth and shiny; sophisticated",
+    "To take on or start using something new",
+    "To bring something to an end",
+    "To put or keep out of sight"
+  ],
+  "answerOption": "D",
+  "answerText": "To put or keep out of sight",
+  "difficulty": "easy",
+  "sourceFile": "0188.json"
+}

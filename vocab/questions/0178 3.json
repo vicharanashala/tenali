@@ -1,0 +1,15 @@
+{
+  "id": 178,
+  "word": "Borrow",
+  "question": "Borrow",
+  "options": [
+    "To take and use something temporarily",
+    "A person who lacks courage",
+    "Able to read and write",
+    "Having the pleasant taste of sugar"
+  ],
+  "answerOption": "A",
+  "answerText": "To take and use something temporarily",
+  "difficulty": "easy",
+  "sourceFile": "0178.json"
+}

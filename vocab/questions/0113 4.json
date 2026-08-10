@@ -1,0 +1,15 @@
+{
+  "id": 113,
+  "word": "Blunt",
+  "question": "Blunt",
+  "options": [
+    "To give attention to sound or speech",
+    "A long journey by sea or space",
+    "To cause something to come closer",
+    "Not having a sharp edge or point"
+  ],
+  "answerOption": "D",
+  "answerText": "Not having a sharp edge or point",
+  "difficulty": "easy",
+  "sourceFile": "0113.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 67,
+  "word": "Honest",
+  "question": "Honest",
+  "options": [
+    "Free of deceit; truthful",
+    "Easily seen or noticed",
+    "Insufficient for the demand; in short supply",
+    "Done with good judgment; practical"
+  ],
+  "answerOption": "A",
+  "answerText": "Free of deceit; truthful",
+  "difficulty": "easy",
+  "sourceFile": "0067.json"
+}

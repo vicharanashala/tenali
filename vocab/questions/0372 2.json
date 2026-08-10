@@ -1,0 +1,15 @@
+{
+  "id": 372,
+  "word": "Slice",
+  "question": "Slice",
+  "options": [
+    "Sufficiently great or important",
+    "Characterized by constant change and activity",
+    "Insufficient for the demand; in short supply",
+    "To cut into thin flat pieces"
+  ],
+  "answerOption": "D",
+  "answerText": "To cut into thin flat pieces",
+  "difficulty": "easy",
+  "sourceFile": "0372.json"
+}

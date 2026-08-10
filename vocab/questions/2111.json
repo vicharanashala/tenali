@@ -1,0 +1,15 @@
+{
+  "id": 2111,
+  "word": "Cabal",
+  "question": "Cabal",
+  "options": [
+    "The quality of being definable",
+    "A material transparent to air",
+    "A secret political group or faction",
+    "An organism loving air"
+  ],
+  "answerOption": "C",
+  "answerText": "A secret political group or faction",
+  "difficulty": "hard",
+  "sourceFile": "2111.json"
+}

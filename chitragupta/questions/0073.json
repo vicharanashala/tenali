@@ -1,0 +1,14 @@
+{
+  "id": 73,
+  "question": "Who was the first President of independent India?",
+  "options": [
+    "Dr. Rajendra Prasad",
+    "Dr. S. Radhakrishnan",
+    "Jawaharlal Nehru",
+    "Zakir Husain"
+  ],
+  "answerOption": "A",
+  "answerText": "Dr. Rajendra Prasad",
+  "genre": "india-gk",
+  "sourceFile": "0073.json"
+}

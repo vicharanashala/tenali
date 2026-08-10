@@ -1,0 +1,15 @@
+{
+  "id": 1849,
+  "word": "Fatalistic",
+  "question": "Fatalistic",
+  "options": [
+    "Causing loss of sense or direction",
+    "The quality of holding firmly",
+    "Believing in fate over free will",
+    "Accorded great respect due to age or wisdom"
+  ],
+  "answerOption": "C",
+  "answerText": "Believing in fate over free will",
+  "difficulty": "medium",
+  "sourceFile": "1849.json"
+}

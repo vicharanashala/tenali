@@ -1,0 +1,15 @@
+{
+  "id": 359,
+  "word": "Deliver",
+  "question": "Deliver",
+  "options": [
+    "Telling or expressing the truth; honest",
+    "Lasting for a limited time only",
+    "To bring something to a person or place",
+    "To watch something carefully"
+  ],
+  "answerOption": "C",
+  "answerText": "To bring something to a person or place",
+  "difficulty": "easy",
+  "sourceFile": "0359.json"
+}

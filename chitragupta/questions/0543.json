@@ -1,0 +1,14 @@
+{
+  "id": 543,
+  "question": "Who discovered the circulation of planets in elliptical orbits?",
+  "options": [
+    "Newton",
+    "Kepler",
+    "Copernicus",
+    "Galileo"
+  ],
+  "answerOption": "B",
+  "answerText": "Kepler",
+  "genre": "geography",
+  "sourceFile": "0543.json"
+}

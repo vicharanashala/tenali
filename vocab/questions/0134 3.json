@@ -1,0 +1,15 @@
+{
+  "id": 134,
+  "word": "Hidden",
+  "question": "Hidden",
+  "options": [
+    "Lacking physical strength",
+    "Able to recover quickly from difficulties",
+    "Careful to avoid potential problems",
+    "Kept out of sight; concealed"
+  ],
+  "answerOption": "D",
+  "answerText": "Kept out of sight; concealed",
+  "difficulty": "easy",
+  "sourceFile": "0134.json"
+}

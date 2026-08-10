@@ -1,0 +1,15 @@
+{
+  "id": 1318,
+  "word": "Democrat",
+  "question": "Democrat",
+  "options": [
+    "Fluent and persuasive in speaking or writing",
+    "The buttocks or rear",
+    "A member of a democratic party",
+    "The lack of something needed"
+  ],
+  "answerOption": "C",
+  "answerText": "A member of a democratic party",
+  "difficulty": "medium",
+  "sourceFile": "1318.json"
+}

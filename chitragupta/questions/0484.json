@@ -1,0 +1,14 @@
+{
+  "id": 484,
+  "question": "Which country is associated with the city of Prague?",
+  "options": [
+    "Poland",
+    "Czech Republic",
+    "Slovakia",
+    "Austria"
+  ],
+  "answerOption": "B",
+  "answerText": "Czech Republic",
+  "genre": "geography",
+  "sourceFile": "0484.json"
+}

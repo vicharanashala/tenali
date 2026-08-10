@@ -1,0 +1,15 @@
+{
+  "id": 392,
+  "word": "Sprout",
+  "question": "Sprout",
+  "options": [
+    "Having an uneven or irregular surface",
+    "To begin to grow; to produce shoots",
+    "Feeling sorrow or unhappiness",
+    "Feeling pleasure or happiness"
+  ],
+  "answerOption": "B",
+  "answerText": "To begin to grow; to produce shoots",
+  "difficulty": "easy",
+  "sourceFile": "0392.json"
+}

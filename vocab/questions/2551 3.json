@@ -1,0 +1,15 @@
+{
+  "id": 2551,
+  "word": "Pathology",
+  "question": "Pathology",
+  "options": [
+    "Eager or quick to argue or fight",
+    "A deep-seated feeling of dislike",
+    "The action of continuing",
+    "The study of diseases"
+  ],
+  "answerOption": "D",
+  "answerText": "The study of diseases",
+  "difficulty": "hard",
+  "sourceFile": "2551.json"
+}

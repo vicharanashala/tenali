@@ -1,0 +1,15 @@
+{
+  "id": 2893,
+  "word": "Legacy",
+  "question": "Legacy",
+  "options": [
+    "Relating to the atmosphere",
+    "Something handed down from predecessor",
+    "Lack of mercy or compassion",
+    "One who fears flying"
+  ],
+  "answerOption": "B",
+  "answerText": "Something handed down from predecessor",
+  "difficulty": "hard",
+  "sourceFile": "2893.json"
+}

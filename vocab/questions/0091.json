@@ -1,0 +1,15 @@
+{
+  "id": 91,
+  "word": "Thin",
+  "question": "Thin",
+  "options": [
+    "To perceive the flavor of something",
+    "To arrange systematically into groups",
+    "Having opposite surfaces close together",
+    "Not giving enough attention to avoid harm"
+  ],
+  "answerOption": "C",
+  "answerText": "Having opposite surfaces close together",
+  "difficulty": "easy",
+  "sourceFile": "0091.json"
+}

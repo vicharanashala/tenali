@@ -1,0 +1,436 @@
+{
+  "module": 1,
+  "topicId": "Q1.3",
+  "title": "Plot y = x, y = 2x, y = 10x",
+  "topic": "Plotting lines through origin with different slopes, recognising slope as the steepness factor.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M1Q3E1",
+        "question": "For y = x, what is y when x = 3?",
+        "options": [
+          "It equals four",
+          "It equals three",
+          "It equals seven",
+          "It equals eight"
+        ],
+        "correct_option": "It equals three",
+        "explanation": "On y = x, the output equals the input, so y = 3 when x = 3."
+      },
+      {
+        "id": "M1Q3E2",
+        "question": "For y = 2x, what is y when x = 4?",
+        "options": [
+          "It equals eight",
+          "It equals seven",
+          "It equals nine",
+          "It equals five"
+        ],
+        "correct_option": "It equals eight",
+        "explanation": "y = 2·4 = 8, so the line y = 2x gives y = 8 at x = 4."
+      },
+      {
+        "id": "M1Q3E3",
+        "question": "For y = 10x, what is y when x = 5?",
+        "options": [
+          "It equals forty",
+          "It equals sixty",
+          "It equals fifty",
+          "It equals thirty"
+        ],
+        "correct_option": "It equals fifty",
+        "explanation": "y = 10·5 = 50, so on y = 10x the point (5, 50) lies on the line."
+      },
+      {
+        "id": "M1Q3E4",
+        "question": "Does y = x pass through (0, 0)?",
+        "options": [
+          "Yes, it passes",
+          "No, never passes",
+          "Only for x>0",
+          "Only for y>0"
+        ],
+        "correct_option": "Yes, it passes",
+        "explanation": "Substituting x = 0 gives y = 0, so (0, 0) satisfies y = x and lies on the line."
+      },
+      {
+        "id": "M1Q3E5",
+        "question": "Does y = 10x pass through (5, 50)?",
+        "options": [
+          "Yes, it passes",
+          "No, never passes",
+          "Only for x>0",
+          "Only for y>0"
+        ],
+        "correct_option": "Yes, it passes",
+        "explanation": "10·5 = 50, so the point (5, 50) satisfies y = 10x and lies on the line."
+      },
+      {
+        "id": "M1Q3E6",
+        "question": "Which line is steepest among y = x, y = 2x and y = 10x?",
+        "options": [
+          "Line y = 2x",
+          "Line y = 10x",
+          "Line y = x",
+          "Lines all equal"
+        ],
+        "correct_option": "Line y = 10x",
+        "explanation": "For any fixed x > 0, y = 10x has the largest y-value, so its slope makes it the steepest of the three lines."
+      },
+      {
+        "id": "M1Q3E7",
+        "question": "For y = 2x, what is x when y = 6?",
+        "options": [
+          "It equals two",
+          "It equals five",
+          "It equals four",
+          "It equals three"
+        ],
+        "correct_option": "It equals three",
+        "explanation": "Solving 2x = 6 gives x = 3, so the point (3, 6) lies on y = 2x."
+      },
+      {
+        "id": "M1Q3E8",
+        "question": "Name two points on y = x.",
+        "options": [
+          "(1,1) and (2,2)",
+          "(1,2) and (2,1)",
+          "(1,0) and (0,1)",
+          "(0,0) and (1,1)"
+        ],
+        "correct_option": "(0,0) and (1,1)",
+        "explanation": "Both (0,0) and (1,1) satisfy y = x because the coordinates match, so they lie on the line."
+      },
+      {
+        "id": "M1Q3E9",
+        "question": "Name two points on y = 2x.",
+        "options": [
+          "(1,1) and (2,2)",
+          "(1,2) and (2,4)",
+          "(0,2) and (1,2)",
+          "(2,1) and (4,2)"
+        ],
+        "correct_option": "(1,2) and (2,4)",
+        "explanation": "At x = 1, y = 2·1 = 2 and at x = 2, y = 2·2 = 4, so both points lie on y = 2x."
+      },
+      {
+        "id": "M1Q3E10",
+        "question": "Name two points on y = 10x.",
+        "options": [
+          "(1,1) and (2,2)",
+          "(1,10) and (2,20)",
+          "(1,5) and (2,10)",
+          "(0,10) and (1,10)"
+        ],
+        "correct_option": "(1,10) and (2,20)",
+        "explanation": "At x = 1, y = 10 and at x = 2, y = 20, so both (1, 10) and (2, 20) lie on y = 10x."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M1Q3M1",
+        "question": "Find the slope of y = 2x.",
+        "options": [
+          "Slope is just two",
+          "Slope is just three",
+          "Slope is just four",
+          "Slope is just seven"
+        ],
+        "correct_option": "Slope is just two",
+        "explanation": "In y = mx, the coefficient m is the slope, so y = 2x has slope 2."
+      },
+      {
+        "id": "M1Q3M2",
+        "question": "Find the slope of y = 10x.",
+        "options": [
+          "Slope is just two",
+          "Slope is just four",
+          "Slope is just one",
+          "Slope is just ten"
+        ],
+        "correct_option": "Slope is just ten",
+        "explanation": "The slope equals the coefficient of x, so y = 10x has slope 10."
+      },
+      {
+        "id": "M1Q3M3",
+        "question": "Which line has greater slope: y = 5x or y = 10x?",
+        "options": [
+          "y = 2x wins",
+          "y = 5x wins",
+          "y = 10x wins",
+          "No line wins"
+        ],
+        "correct_option": "y = 10x wins",
+        "explanation": "Since 10 > 5, the slope of y = 10x is greater than the slope of y = 5x."
+      },
+      {
+        "id": "M1Q3M4",
+        "question": "For y = mx, what is the y-intercept?",
+        "options": [
+          "Always equals m",
+          "Always equals zero",
+          "Always equals one",
+          "Always equals m+1"
+        ],
+        "correct_option": "Always equals zero",
+        "explanation": "Setting x = 0 in y = mx gives y = 0, so every line y = mx crosses the y-axis at 0."
+      },
+      {
+        "id": "M1Q3M5",
+        "question": "If y = m₁x and y = m₂x both pass through origin, do they meet at any other point?",
+        "options": [
+          "No, never again",
+          "Yes, at midpoint",
+          "Only at x-axis",
+          "Only at infinity"
+        ],
+        "correct_option": "No, never again",
+        "explanation": "Two distinct lines through the origin share only the origin, so they meet at no other point."
+      },
+      {
+        "id": "M1Q3M6",
+        "question": "The line y = 4x makes what angle with the positive x-axis?",
+        "options": [
+          "An acute angle",
+          "A right angle",
+          "An obtuse angle",
+          "A reflex angle"
+        ],
+        "correct_option": "An acute angle",
+        "explanation": "A positive slope less than infinity corresponds to an acute angle (0° to 90°) with the positive x-axis."
+      },
+      {
+        "id": "M1Q3M7",
+        "question": "For x = 2, the y-values of y = x, y = 2x and y = 10x are ___.",
+        "options": [
+          "1, 4, 20",
+          "2, 4, 10",
+          "1, 2, 10",
+          "2, 4, 20"
+        ],
+        "correct_option": "2, 4, 20",
+        "explanation": "At x = 2: y = x gives 2, y = 2x gives 4 and y = 10x gives 20, so the triple is 2, 4, 20."
+      },
+      {
+        "id": "M1Q3M8",
+        "question": "On the same axes, do y = 2x and y = 10x intersect?",
+        "options": [
+          "At many points",
+          "Only at origin",
+          "Along the x-axis",
+          "Along the y-axis"
+        ],
+        "correct_option": "Only at origin",
+        "explanation": "Both lines pass through (0,0) and have different slopes, so they intersect only at the origin."
+      },
+      {
+        "id": "M1Q3M9",
+        "question": "Does y = 5x lie between y = 2x and y = 10x for x > 0?",
+        "options": [
+          "Yes, it does",
+          "No, never lies",
+          "Only for x<0",
+          "Only at origin"
+        ],
+        "correct_option": "Yes, it does",
+        "explanation": "For x > 0, 2x < 5x < 10x, so the line y = 5x lies strictly between the other two."
+      },
+      {
+        "id": "M1Q3M10",
+        "question": "What does m represent in y = mx?",
+        "options": [
+          "The power m",
+          "The length m",
+          "The height m",
+          "The slope m"
+        ],
+        "correct_option": "The slope m",
+        "explanation": "In the equation y = mx, the coefficient m is the slope that controls the steepness of the line."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M1Q3H1",
+        "question": "For x > 0, arrange the y-values of y = x, y = 2x and y = 10x in increasing order.",
+        "options": [
+          "x, then 20x",
+          "x, then 10x",
+          "x, then 2x",
+          "x, then 100x"
+        ],
+        "correct_option": "x, then 2x",
+        "explanation": "For x > 0, multiplying by 1 < 2 < 10 keeps the order, so x < 2x < 10x."
+      },
+      {
+        "id": "M1Q3H2",
+        "question": "For x < 0, do y = 2x and y = 10x both give negative y?",
+        "options": [
+          "Yes, both go neg",
+          "Only y = 2x",
+          "Only y = 10x",
+          "Both y stay zero"
+        ],
+        "correct_option": "Yes, both go neg",
+        "explanation": "When x < 0, multiplying by a positive slope gives a negative y, so both y = 2x and y = 10x are negative."
+      },
+      {
+        "id": "M1Q3H3",
+        "question": "As x increases, which grows faster: y = 2x or y = 10x?",
+        "options": [
+          "Line y = 2x",
+          "They grow equal",
+          "Neither grows now",
+          "Line y = 10x"
+        ],
+        "correct_option": "Line y = 10x",
+        "explanation": "A larger slope means y rises faster as x increases, so y = 10x grows faster than y = 2x."
+      },
+      {
+        "id": "M1Q3H4",
+        "question": "The three lines y = x, y = 2x and y = 10x all pass through which single common point?",
+        "options": [
+          "The point (1, 1)",
+          "The point (0, 0)",
+          "The point (0, 5)",
+          "The point (5, 0)"
+        ],
+        "correct_option": "The point (0, 0)",
+        "explanation": "Every line y = mx passes through (0, 0), so all three lines share the origin as a common point."
+      },
+      {
+        "id": "M1Q3H5",
+        "question": "Does y = -x also pass through the same common point as y = x?",
+        "options": [
+          "No, different point",
+          "At infinity only",
+          "Yes, same origin",
+          "Passes through (1,1)"
+        ],
+        "correct_option": "Yes, same origin",
+        "explanation": "For y = -x at x = 0 we get y = 0, so it also passes through (0, 0), the same point as y = x."
+      },
+      {
+        "id": "M1Q3H6",
+        "question": "Can two distinct lines y = m₁x and y = m₂x (with m₁ ≠ m₂) ever be parallel?",
+        "options": [
+          "Yes, always parallel",
+          "Yes, sometimes parallel",
+          "Only for negative m",
+          "No, never parallel"
+        ],
+        "correct_option": "No, never parallel",
+        "explanation": "Distinct lines through the origin with different slopes always intersect at (0, 0), so they can never be parallel."
+      },
+      {
+        "id": "M1Q3H7",
+        "question": "Find the slope of the line joining (1, 2) and (3, 6).",
+        "options": [
+          "Slope is just three",
+          "Slope is just two",
+          "Slope is just four",
+          "Slope is just five"
+        ],
+        "correct_option": "Slope is just two",
+        "explanation": "Slope = (6 − 2) / (3 − 1) = 4 / 2 = 2, so the line joining them has slope 2."
+      },
+      {
+        "id": "M1Q3H8",
+        "question": "Which line has greater slope: y = 10x or y = 100x?",
+        "options": [
+          "y = 2x wins",
+          "Both equal slopes",
+          "y = 10x wins",
+          "y = 100x wins"
+        ],
+        "correct_option": "y = 100x wins",
+        "explanation": "Since 100 > 10, the slope of y = 100x is greater than the slope of y = 10x."
+      },
+      {
+        "id": "M1Q3H9",
+        "question": "If y = mx passes through (2, 8), what is m?",
+        "options": [
+          "Slope is just two",
+          "Slope is just five",
+          "Slope is just four",
+          "Slope is just six"
+        ],
+        "correct_option": "Slope is just four",
+        "explanation": "Substituting (2, 8) into y = mx gives 8 = 2m, hence m = 4."
+      },
+      {
+        "id": "M1Q3H10",
+        "question": "If y = mx passes through (3, 9), what is m?",
+        "options": [
+          "Slope is just three",
+          "Slope is just one",
+          "Slope is just nine",
+          "Slope is just six"
+        ],
+        "correct_option": "Slope is just three",
+        "explanation": "Substituting (3, 9) into y = mx gives 9 = 3m, hence m = 3."
+      }
+    ],
+    "real_life_application": [
+      {
+        "id": "M1Q3R1",
+        "question": "A car travels at a constant 60 km/h. Plotting distance vs time, what is the slope of the line?",
+        "options": [
+          "Slope is 100 km/h",
+          "Slope is 60 km/h",
+          "Slope is 40 km/h",
+          "Slope is 20 km/h"
+        ],
+        "correct_option": "Slope is 60 km/h",
+        "explanation": "Distance = speed × time, so the slope of distance vs time equals the speed, which is 60 km/h."
+      },
+      {
+        "id": "M1Q3R2",
+        "question": "A mobile plan costs ₹1000 per month fixed. Plotting (months, cost), what is the slope and does the line pass through origin?",
+        "options": [
+          "₹1000, no origin",
+          "₹10, no origin",
+          "₹1000, yes origin",
+          "₹500, yes origin"
+        ],
+        "correct_option": "₹1000, no origin",
+        "explanation": "Slope is ₹1000 per month, but the constant rate means y = 1000x — passing through origin only at the fixed-rate model."
+      },
+      {
+        "id": "M1Q3R3",
+        "question": "Sales grow linearly: month 1 = 100, month 2 = 200. Is the line y = 100x?",
+        "options": [
+          "No, it's y=50x",
+          "No, it's y=10x",
+          "No, it's y=200x",
+          "Yes, exactly y=100x"
+        ],
+        "correct_option": "Yes, exactly y=100x",
+        "explanation": "Each month adds 100 units of sales, so sales = 100 × month, which is the line y = 100x."
+      },
+      {
+        "id": "M1Q3R4",
+        "question": "A taxi charges ₹10 per km. Plotting fare vs distance, which line represents the fare?",
+        "options": [
+          "y = 5x",
+          "y = 10x",
+          "y = 100x",
+          "y = x"
+        ],
+        "correct_option": "y = 10x",
+        "explanation": "Fare = 10 × distance, so the relationship between fare (y) and distance (x) is y = 10x."
+      },
+      {
+        "id": "M1Q3R5",
+        "question": "A leaking tap drips 2 ml per minute. Plotting volume vs time, which line represents the leak?",
+        "options": [
+          "y = 2x",
+          "y = 5x",
+          "y = 10x",
+          "y = 20x"
+        ],
+        "correct_option": "y = 2x",
+        "explanation": "Volume leaked = 2 × time, so volume (y) versus time (x) follows the line y = 2x with slope 2 ml/min."
+      }
+    ]
+  }
+}

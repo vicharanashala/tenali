@@ -1,0 +1,14 @@
+{
+  "id": 926,
+  "question": "Who wrote 'Frankenstein'?",
+  "options": [
+    "Mary Shelley",
+    "Bram Stoker",
+    "Jane Austen",
+    "Emily Brontë"
+  ],
+  "answerOption": "A",
+  "answerText": "Mary Shelley",
+  "genre": "general-knowledge",
+  "sourceFile": "0926.json"
+}

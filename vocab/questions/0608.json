@@ -1,0 +1,15 @@
+{
+  "id": 608,
+  "word": "Radiant",
+  "question": "Radiant",
+  "options": [
+    "Easily annoyed or made angry",
+    "To express dissatisfaction about something",
+    "Sending out light; shining brightly",
+    "To finish making or doing something"
+  ],
+  "answerOption": "C",
+  "answerText": "Sending out light; shining brightly",
+  "difficulty": "easy",
+  "sourceFile": "0608.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 3004,
+  "word": "Syzygy",
+  "question": "Syzygy",
+  "options": [
+    "Convivial; cozy and warm with loved ones",
+    "Like an abyss",
+    "An alignment of three celestial objects",
+    "Relating to distance"
+  ],
+  "answerOption": "C",
+  "answerText": "An alignment of three celestial objects",
+  "difficulty": "extra-hard",
+  "sourceFile": "3004.json"
+}

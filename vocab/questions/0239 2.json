@@ -1,0 +1,15 @@
+{
+  "id": 239,
+  "word": "Punish",
+  "question": "Punish",
+  "options": [
+    "Existing in large quantities",
+    "Sufficient to cause death",
+    "To impose a penalty for wrongdoing",
+    "Having ample space; roomy"
+  ],
+  "answerOption": "C",
+  "answerText": "To impose a penalty for wrongdoing",
+  "difficulty": "easy",
+  "sourceFile": "0239.json"
+}

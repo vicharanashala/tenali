@@ -1,0 +1,15 @@
+{
+  "id": 3090,
+  "word": "Abusionist",
+  "question": "Abusionist",
+  "options": [
+    "One who abuses",
+    "Relating to abyss fear",
+    "The inability to remember a particular word",
+    "The feeling of solitude in the woods"
+  ],
+  "answerOption": "A",
+  "answerText": "One who abuses",
+  "difficulty": "extra-hard",
+  "sourceFile": "3090.json"
+}

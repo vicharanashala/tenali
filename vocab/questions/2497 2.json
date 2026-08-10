@@ -1,0 +1,15 @@
+{
+  "id": 2497,
+  "word": "Aberrant",
+  "question": "Aberrant",
+  "options": [
+    "A soft gentle breeze",
+    "Deviating from normal course",
+    "Making or characterized by a hissing sound",
+    "A person who has returned from the dead"
+  ],
+  "answerOption": "B",
+  "answerText": "Deviating from normal course",
+  "difficulty": "extra-hard",
+  "sourceFile": "2497.json"
+}

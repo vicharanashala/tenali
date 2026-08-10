@@ -1,0 +1,15 @@
+{
+  "id": 1258,
+  "word": "Hospitable",
+  "question": "Hospitable",
+  "options": [
+    "Friendly and welcoming to strangers",
+    "In a way that can be shown",
+    "The literal meaning of a word",
+    "A severe flood of water or rain"
+  ],
+  "answerOption": "A",
+  "answerText": "Friendly and welcoming to strangers",
+  "difficulty": "medium",
+  "sourceFile": "1258.json"
+}

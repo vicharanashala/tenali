@@ -1,0 +1,15 @@
+{
+  "id": 130,
+  "word": "Asleep",
+  "question": "Asleep",
+  "options": [
+    "To shed tears of sadness or pain",
+    "To turn around quickly in a circle",
+    "In a state of sleep; not awake",
+    "Poisonous; harmful to living things"
+  ],
+  "answerOption": "C",
+  "answerText": "In a state of sleep; not awake",
+  "difficulty": "easy",
+  "sourceFile": "0130.json"
+}

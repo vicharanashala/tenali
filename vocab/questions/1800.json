@@ -1,0 +1,15 @@
+{
+  "id": 1800,
+  "word": "Feral",
+  "question": "Feral",
+  "options": [
+    "Wild or untamed",
+    "Producing confusion or perplexity",
+    "Lacking compassion or kindness",
+    "A feeling of embarrassment or disappointment"
+  ],
+  "answerOption": "A",
+  "answerText": "Wild or untamed",
+  "difficulty": "medium",
+  "sourceFile": "1800.json"
+}

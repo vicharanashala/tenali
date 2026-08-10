@@ -1,0 +1,15 @@
+{
+  "id": 238,
+  "word": "Reward",
+  "question": "Reward",
+  "options": [
+    "To give something in return for good behavior",
+    "Existing in large quantities",
+    "To break the connection between things",
+    "Too small to be seen by the eye"
+  ],
+  "answerOption": "A",
+  "answerText": "To give something in return for good behavior",
+  "difficulty": "easy",
+  "sourceFile": "0238.json"
+}

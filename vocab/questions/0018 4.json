@@ -1,0 +1,15 @@
+{
+  "id": 18,
+  "word": "Wet",
+  "question": "Wet",
+  "options": [
+    "Covered or saturated with water",
+    "Not occupied or in use",
+    "Having a strong desire for success",
+    "Able to withstand fire or great heat"
+  ],
+  "answerOption": "A",
+  "answerText": "Covered or saturated with water",
+  "difficulty": "easy",
+  "sourceFile": "0018.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 180,
+  "word": "Teach",
+  "question": "Teach",
+  "options": [
+    "Noticeably happy and optimistic",
+    "To impart knowledge or skill to someone",
+    "To share information with others",
+    "Strange or odd; unusual"
+  ],
+  "answerOption": "B",
+  "answerText": "To impart knowledge or skill to someone",
+  "difficulty": "easy",
+  "sourceFile": "0180.json"
+}

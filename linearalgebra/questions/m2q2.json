@@ -1,0 +1,481 @@
+{
+  "module": 2,
+  "missionId": 16,
+  "title": "Baker's Cafe",
+  "original_question": "Table1: 3 adults + 1 child = ₹1200. Table2: 1 adult + 2 children = ₹1000. Can you find cost per adult (A) and child (C)? Then try: 3A+1C=1200, 1A+2C=1000, 1A+1C=900 — overdetermined! No exact solution — just minimize error.",
+  "core_concept": "An overdetermined system has more equations than unknowns and typically has no exact solution. The least squares method finds the best approximate solution by minimising the total squared error across all equations.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M2Q2E1",
+        "question": "If 3A + 1C = 1200, what is the value of A when C = 300?",
+        "options": [
+          "300",
+          "400 (x)",
+          "200 (x)",
+          "500 (x)"
+        ],
+        "correct_option": "300",
+        "explanation": "Step 1: Substitute C = 300: 3A + 300 = 1200 → 3A = 900 → A = 300. Step 2: This is solving a single linear equation with one unknown after substitution. Step 3: This basic algebraic manipulation is the building block for solving larger systems — each equation constrains the solution to a specific relationship between variables."
+      },
+      {
+        "id": "M2Q2E2",
+        "question": "Solve the system: 3A + 1C = 1200 and 1A + 2C = 1000. What is A?",
+        "options": [
+          "280",
+          "360 (x)",
+          "200 (x)",
+          "400 (x)"
+        ],
+        "correct_option": "280",
+        "explanation": "Step 1: From equation 2: A = 1000 - 2C. Step 2: Substitute into equation 1: 3(1000 - 2C) + C = 1200 → -5C = -1800 → C = 360. Step 3: A = 1000 - 720 = 280. This substitution method is equivalent to Gaussian elimination — the fundamental algorithm for solving square linear systems."
+      },
+      {
+        "id": "M2Q2E3",
+        "question": "If A = 280 and C = 360, what is 1A + 1C?",
+        "options": [
+          "640",
+          "900 (x)",
+          "540 (x)",
+          "720 (x)"
+        ],
+        "correct_option": "640",
+        "explanation": "Step 1: 280 + 360 = 640. Step 2: The third equation expects 1A + 1C = 900, but we get 640 — a discrepancy of 260. Step 3: This conflict is why the system is overdetermined: the third equation is inconsistent with the first two, meaning no single (A,C) pair satisfies all three constraints simultaneously."
+      },
+      {
+        "id": "M2Q2E4",
+        "question": "How many unknowns are in the system 3A+1C=1200, 1A+2C=1000?",
+        "options": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: The unknowns are A (cost per adult) and C (cost per child). Step 2: Two equations with two unknowns is a square system — typically solvable with a unique solution. Step 3: Square systems are the boundary case: fewer equations than unknowns is underdetermined, more is overdetermined, and exactly equal is well-determined."
+      },
+      {
+        "id": "M2Q2E5",
+        "question": "What is 3×280 + 1×360?",
+        "options": [
+          "1200",
+          "1100 (x)",
+          "1300 (x)",
+          "1000 (x)"
+        ],
+        "correct_option": "1200",
+        "explanation": "Step 1: 3×280 + 360 = 840 + 360 = 1200. Step 2: This matches the first equation exactly. Step 3: Verifying solutions by substitution is essential in linear algebra — it confirms that the computed (A,C) satisfies each constraint, building confidence in the solution before tackling overdetermined systems."
+      },
+      {
+        "id": "M2Q2E6",
+        "question": "What is 1×280 + 2×360?",
+        "options": [
+          "1000",
+          "1200 (x)",
+          "900 (x)",
+          "800 (x)"
+        ],
+        "correct_option": "1000",
+        "explanation": "Step 1: 280 + 720 = 1000. Step 2: This matches the second equation exactly. Step 3: Both equations 1 and 2 are satisfied, giving A=280, C=360 as the unique solution to the 2-equation square system — the foundation upon which the overdetermined system is built."
+      },
+      {
+        "id": "M2Q2E7",
+        "question": "If a system has 4 equations and 2 unknowns, is it overdetermined?",
+        "options": [
+          "Yes, because there are more equations than unknowns",
+          "because 4 > 2 — does t match",
+          "Only if the equations contradict",
+          "Cant determine without solving"
+        ],
+        "correct_option": "Yes, because there are more equations than unknowns",
+        "explanation": "Step 1: Overdetermined means more equations (constraints) than unknowns (degrees of freedom). Step 2: 4 > 2 satisfies this definition. Step 3: Such systems are the norm in real-world applications like data fitting — you almost always have more measurements than parameters, which is why least squares is one of the most important tools in applied mathematics."
+      },
+      {
+        "id": "M2Q2E8",
+        "question": "If 1A + 1C = 900 is added to the system, but A=280 and C=360 give 640, what is the error in the third equation?",
+        "options": [
+          "260",
+          "360 (x)",
+          "100 (x)",
+          "540 (x)"
+        ],
+        "correct_option": "260",
+        "explanation": "Step 1: The third equation expects 900, but 280 + 360 = 640. Step 2: Error = 900 - 640 = 260. Step 3: In overdetermined systems, 'error' measures the residual — the gap between what the equation demands and what the solution delivers. Least squares minimises the total of these squared residuals across all equations."
+      },
+      {
+        "id": "M2Q2E9",
+        "question": "In the matrix form [[3,1],[1,2]] × [A,C] = [1200,1000], how many rows does the coefficient matrix have?",
+        "options": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: The coefficient matrix [[3,1],[1,2]] has 2 rows and 2 columns. Step 2: Each row represents one equation; each column represents one unknown. Step 3: A 2×2 matrix with 2 rows corresponds to 2 equations — this square system has a unique solution, unlike the overdetermined 3×2 version."
+      },
+      {
+        "id": "M2Q2E10",
+        "question": "If 2A + 1C = 800 and 1A + 1C = 500, what is A?",
+        "options": [
+          "300",
+          "200 (x)",
+          "400 (x)",
+          "100 (x)"
+        ],
+        "correct_option": "300",
+        "explanation": "Step 1: Subtract equation 2 from equation 1: A = 300. Step 2: Then C = 500 - 300 = 200. Step 3: This elimination technique — subtracting equations to eliminate variables — is the core of Gaussian elimination, the standard algorithm for solving square linear systems before overdetermined ones."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M2Q2M1",
+        "question": "What does 'overdetermined' mean in the context of linear systems?",
+        "options": [
+          "More equations than unknowns",
+          "More unkwns than equations",
+          "Exactly as many equations as unkwns",
+          "Equations with variables"
+        ],
+        "correct_option": "More equations than unknowns",
+        "explanation": "Step 1: An overdetermined system has more constraints than degrees of freedom. Step 2: With 3 equations and 2 unknowns, there are more restrictions than variables to satisfy them. Step 3: This over-constraining is the geometric reason why three random lines in a plane almost never meet at one point — each equation is a line, and the intersection of two lines is a point that the third line almost surely misses."
+      },
+      {
+        "id": "M2Q2M2",
+        "question": "When an overdetermined system has no exact solution, what does the least squares method do?",
+        "options": [
+          "Finds the solution that minimises the sum of squared errors across all equations",
+          "Igres the extra equations",
+          "Always returns A=0, C=0",
+          "Finds a solution that satisfies at least half the equations exactly"
+        ],
+        "correct_option": "Finds the solution that minimises the sum of squared errors across all equations",
+        "explanation": "Step 1: Least squares minimises ||Ax - b||² — the total squared residual. Step 2: This is achieved by solving the normal equations AᵀAx = Aᵀb. Step 3: The geometric interpretation is that least squares finds the projection of b onto the column space of A — the closest point in the 'reachable' space to the target, which is the fundamental principle behind regression analysis."
+      },
+      {
+        "id": "M2Q2M3",
+        "question": "Can an overdetermined system (more equations than unknowns) ever have an exact solution?",
+        "options": [
+          "Yes, if all equations are consistent with each other",
+          "Never — overdetermined systems always have solution (x)",
+          "Only if there are more unkwns than equations",
+          "Only if the matrix is square"
+        ],
+        "correct_option": "Yes, if all equations are consistent with each other",
+        "explanation": "Step 1: Overdetermined systems USUALLY have no solution, but consistency is possible. Step 2: If all extra equations are linear combinations of the first n independent equations, an exact solution exists. Step 3: This is rare in practice with real-world data — it only occurs in perfectly noiseless systems, which is why least squares is needed for real applications."
+      },
+      {
+        "id": "M2Q2M4",
+        "question": "In matrix form, the system [[3,1],[1,2],[1,1]] × [A,C] = [1200,1000,900] has a coefficient matrix with how many rows and columns?",
+        "options": [
+          "3 rows, 2 columns",
+          "2 rows, 3 columns (x)",
+          "3 rows, 3 columns (x)",
+          "2 rows, 2 columns (x)"
+        ],
+        "correct_option": "3 rows, 2 columns",
+        "explanation": "Step 1: 3 equations → 3 rows; 2 unknowns → 2 columns. Step 2: A 3×2 matrix is 'tall' — more rows than columns, the hallmark of overdetermined systems. Step 3: The matrix has full column rank (rank = 2), which guarantees the normal equations AᵀA have a unique solution — the key condition for least squares to work."
+      },
+      {
+        "id": "M2Q2M5",
+        "question": "Why is the error in the third equation (1A+1C=900) larger than zero when A=280, C=360?",
+        "options": [
+          "Because the third equation conflicts with the first two — no (A,C) satisfies all three exactly",
+          "Because 280 and 360 are wrong values",
+          "Because we need more equations",
+          "Because the matrix is t square"
+        ],
+        "correct_option": "Because the third equation conflicts with the first two — no (A,C) satisfies all three exactly",
+        "explanation": "Step 1: The first two equations uniquely determine A=280, C=360. Step 2: Substituting into the third gives 640≠900 — the third line doesn't pass through the intersection of the first two. Step 3: This geometric impossibility is the fundamental reason overdetermined systems lack exact solutions: each new constraint adds a line that almost never passes through the existing intersection point."
+      },
+      {
+        "id": "M2Q2M6",
+        "question": "If you have 5 data points and want to fit a line y = mx + c (2 unknowns), how many equations do you get?",
+        "options": [
+          "5 — one per data point",
+          "2 — one per unkwn",
+          "7 — 5+2",
+          "10 — 5×2"
+        ],
+        "correct_option": [
+          "5 — one per data point"
+        ],
+        "explanation": "Step 1: Each data point (xᵢ, yᵢ) gives one equation: yᵢ = mxᵢ + c. Step 2: 5 points → 5 equations for 2 unknowns (m and c). Step 3: This is the classic overdetermined setup — more data than parameters — which is exactly the scenario where least squares regression shines, fitting the best line through scattered data."
+      },
+      {
+        "id": "M2Q2M7",
+        "question": "What is the geometric interpretation of solving 3A+1C=1200 and 1A+2C=1000 simultaneously?",
+        "options": [
+          "Finding the intersection point of two lines in the A-C plane",
+          "Finding where a line meets a circle",
+          "Finding the midpoint of a line segment",
+          "Finding the slope of a line"
+        ],
+        "correct_option": "Finding the intersection point of two lines in the A-C plane",
+        "explanation": "Step 1: Each equation defines a line in the A-C plane. Step 2: Solving simultaneously finds the unique point where both lines cross: (280, 360). Step 3: This intersection-point interpretation extends to higher dimensions — in nD, each equation is a hyperplane, and solving means finding where they all meet, which is the geometric core of linear algebra."
+      },
+      {
+        "id": "M2Q2M8",
+        "question": "Why do we typically get an error when a third line is added to a system of two equations?",
+        "options": [
+          "The third line almost never passes through the intersection point of the first two",
+          "Three lines always form a triangle",
+          "The third equation is always wrong",
+          "We need at least four equations to avoid errors"
+        ],
+        "correct_option": "The third line almost never passes through the intersection point of the first two",
+        "explanation": "Step 1: Two non-parallel lines intersect at exactly one point. Step 2: A third random line has zero probability of passing through that specific point. Step 3: The perpendicular distance from the intersection to the third line is the error — this geometric fact is why overdetermined systems almost always require approximate solutions like least squares."
+      },
+      {
+        "id": "M2Q2M9",
+        "question": "If instead of 3A+1C=1200, the third equation were 6A+2C=2400, would the system still be inconsistent?",
+        "options": [
+          "No — 6A+2C=2400 is just 2×(3A+1C=1200), so it adds no new information",
+          "— three equations are always inconsistent",
+          "— because there are more equations than unkwns",
+          "Cant determine without solving"
+        ],
+        "correct_option": "No — 6A+2C=2400 is just 2×(3A+1C=1200), so it adds no new information",
+        "explanation": "Step 1: 6A+2C=2400 is a scalar multiple of the first equation — they define the same line. Step 2: Any solution to equation 1 automatically satisfies this one. Step 3: Redundant equations don't add new constraints — the system effectively has only 2 independent equations. This illustrates that rank, not the number of equations, determines the true complexity of a system."
+      },
+      {
+        "id": "M2Q2M10",
+        "question": "In a least squares solution, why do we square the errors instead of just adding them?",
+        "options": [
+          "Squaring ensures all errors are positive and penalises large errors more heavily",
+          "Squaring makes the computation easier",
+          "Squaring cancels out positive and negative errors",
+          "Squaring is required for the matrix to be invertible"
+        ],
+        "correct_option": "Squaring ensures all errors are positive and penalises large errors more heavily",
+        "explanation": "Step 1: Without squaring, +10 and -10 errors cancel to zero, hiding the actual discrepancy. Step 2: Squaring makes all contributions non-negative. Step 3: Large errors are penalised disproportionately (10² = 100 vs 1² = 1), which discourages outliers and produces the smooth, differentiable objective function that leads to the clean closed-form normal equations."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M2Q2H1",
+        "question": "For an overdetermined system Ax = b where A is m×n with m > n, what is the least squares solution?",
+        "options": [
+          "x = (AᵀA)⁻¹Aᵀb",
+          "x = A⁻¹b",
+          "x = Aᵀb",
+          "x = b/A"
+        ],
+        "correct_option": "x = (AᵀA)⁻¹Aᵀb",
+        "explanation": "Step 1: When A is not square (m > n), A⁻¹ doesn't exist — you can't directly invert a tall matrix. Step 2: The normal equations AᵀAx = Aᵀb reduce the overdetermined system to a square n×n system. Step 3: If AᵀA is invertible (guaranteed by full column rank), x = (AᵀA)⁻¹Aᵀb minimises ||Ax - b||², giving the unique least squares solution."
+      },
+      {
+        "id": "M2Q2H2",
+        "question": "What is the rank of the 3×2 matrix [[3,1],[1,2],[1,1]]?",
+        "options": [
+          "1",
+          "2",
+          "3",
+          "0"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: The rank is the number of linearly independent rows. Step 2: [3,1] and [1,2] are not scalar multiples, so they're linearly independent. Step 3: Rank = 2 = number of columns (full column rank), which guarantees AᵀA is invertible and the least squares solution is unique — this is the key rank condition for well-posed overdetermined problems."
+      },
+      {
+        "id": "M2Q2H3",
+        "question": "If the coefficient matrix A has full column rank, what can we say about AᵀA?",
+        "options": [
+          "AᵀA is invertible (positive definite)",
+          "AᵀA is always singular",
+          "AᵀA is the zero matrix",
+          "AᵀA has rank 0 — does t match"
+        ],
+        "correct_option": "AᵀA is invertible (positive definite)",
+        "explanation": "Step 1: Full column rank means columns of A are linearly independent. Step 2: For any nonzero v, ||Av||² = vᵀ(AᵀA)v > 0 (since Av ≠ 0 when columns are independent). Step 3: This makes AᵀA positive definite, hence invertible — guaranteeing a unique least squares solution. This connects the rank condition to the definiteness property, a bridge between linear algebra and optimization theory."
+      },
+      {
+        "id": "M2Q2H4",
+        "question": "In the least squares context, what does the vector e = b - Ax̂ represent?",
+        "options": [
+          "The residual vector — the error between the observed and predicted values",
+          "The exact solution to the system",
+          "The null space of A — does t match",
+          "The eigenvalues of A — does t match"
+        ],
+        "correct_option": "The residual vector — the error between the observed and predicted values",
+        "explanation": "Step 1: Ax̂ is the best approximation of b in the column space of A. Step 2: e = b - Ax̂ is the residual — the part of b that 'escapes' the column space. Step 3: Least squares ensures e ⊥ col(A), meaning the residual is orthogonal to all columns of A — this orthogonality principle is the geometric heart of the method."
+      },
+      {
+        "id": "M2Q2H5",
+        "question": "Why is the least squares solution also called the 'best approximation' in the column space of A?",
+        "options": [
+          "Because it minimises the distance ||b - Ax|| over all possible x",
+          "Because it always gives an exact solution",
+          "Because it maximises the error",
+          "Because it finds a solution in the null space"
+        ],
+        "correct_option": "Because it minimises the distance ||b - Ax|| over all possible x",
+        "explanation": "Step 1: The column space col(A) is a subspace of Rᵐ. Step 2: We want the point in col(A) closest to b. Step 3: The projection theorem guarantees this closest point is the orthogonal projection of b onto col(A), achieved by x̂ = (AᵀA)⁻¹Aᵀb — the deepest connection between geometry and algebra in linear systems."
+      },
+      {
+        "id": "M2Q2H6",
+        "question": "What geometric object does the column space of [[3,1],[1,2],[1,1]] represent in R³?",
+        "options": [
+          "A plane through the origin in R³",
+          "A line through the origin in R³ (x)",
+          "All of R³)",
+          "Just the zero vector"
+        ],
+        "correct_option": "A plane through the origin in R³",
+        "explanation": "Step 1: The columns are [3,1,1] and [1,2,1] — two independent vectors in R³. Step 2: Two independent vectors span a 2D plane through the origin. Step 3: This plane is the 'reachable' space — only vectors b lying on this plane have exact solutions. Vectors off the plane (like our b = [1200,1000,900]) require the least squares projection."
+      },
+      {
+        "id": "M2Q2H7",
+        "question": "If we added a fourth equation 2A + 3C = 1500 to the overdetermined system, would the residual error necessarily increase?",
+        "options": [
+          "Not necessarily — the residual depends on all equations, and a consistent fourth equation could reduce it",
+          "always — more equations always increase error",
+          "— adding equations never changes the least squares solution",
+          "— because the system becomes more overdetermined"
+        ],
+        "correct_option": "Not necessarily — the residual depends on all equations, and a consistent fourth equation could reduce it",
+        "explanation": "Step 1: Adding a new equation changes both A and b in Ax = b. Step 2: The least squares solution adjusts to accommodate all equations. Step 3: A well-chosen additional equation can improve the fit by providing more information that constrains the solution, potentially reducing the overall residual — this is why more data generally improves regression models."
+      },
+      {
+        "id": "M2Q2H8",
+        "question": "What is the connection between the normal equations AᵀAx = Aᵀb and the condition that the residual e = b - Ax̂ is perpendicular to the column space of A?",
+        "options": [
+          "Aᵀe = 0 is equivalent to Aᵀ(b - Ax̂) = 0, which rearranges to AᵀAx̂ = Aᵀb",
+          "They are unrelated conditions",
+          "The rmal equations only apply to square systems",
+          "Perpendicularity is a separate concept from least squares"
+        ],
+        "correct_option": "Aᵀe = 0 is equivalent to Aᵀ(b - Ax̂) = 0, which rearranges to AᵀAx̂ = Aᵀb",
+        "explanation": "Step 1: The residual e = b - Ax̂ must be orthogonal to every column of A. Step 2: This means Aᵀe = 0 → Aᵀ(b - Ax̂) = 0. Step 3: Rearranging gives AᵀAx̂ = Aᵀb — the normal equations. This derivation shows the normal equations are simply the algebraic encoding of the orthogonality principle."
+      },
+      {
+        "id": "M2Q2H9",
+        "question": "Can the least squares solution be interpreted as a projection?",
+        "options": [
+          "Yes — x̂ gives the projection of b onto the column space of A",
+          "— least squares has geometric interpretation",
+          "Only for 2×2 systems — does t match",
+          "Only when the system is square"
+        ],
+        "correct_option": "Yes — x̂ gives the projection of b onto the column space of A",
+        "explanation": "Step 1: The column space col(A) is a subspace of Rᵐ. Step 2: The closest point in col(A) to b is the orthogonal projection. Step 3: Ax̂ = this projection, and x̂ = (AᵀA)⁻¹Aᵀb gives the coordinates — this projection interpretation is the most powerful geometric insight in all of applied linear algebra."
+      },
+      {
+        "id": "M2Q2H10",
+        "question": "If the system Ax = b has an exact solution, does the least squares method still work?",
+        "options": [
+          "Yes — the least squares solution reduces to the exact solution (residual = 0)",
+          "— least squares only works for overdetermined systems",
+          "— but it gives a different answer than the exact solution",
+          "— the rmal equations become undefined"
+        ],
+        "correct_option": "Yes — the least squares solution reduces to the exact solution (residual = 0)",
+        "explanation": "Step 1: If an exact solution x₀ exists, then Ax₀ = b, so the residual e = 0. Step 2: Since ||e||² = 0 is the minimum possible, x̂ = x₀. Step 3: Least squares naturally generalizes exact solutions — it gives the exact answer when possible and the best approximation when not, making it a universal tool for linear systems of any consistency."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "emoji": "📈",
+      "title": "Business Forecasting",
+      "equation": "y = mx + b",
+      "type": "mcq",
+      "concept": "Least squares regression for trend lines",
+      "story": "A company collects sales data from many past months (lots of data points) but wants to fit a simple trend line with just two parameters (slope and intercept). This creates an overdetermined system — more equations than unknowns. No single trend line passes through all the data points, so the best approach is to minimise the total error using least squares.",
+      "question": "When you have many data points but only a few parameters to estimate, what type of system do you get?",
+      "options": [
+        "An overdetermined system",
+        "An underdetermined system",
+        "A square system",
+        "A homogeneous system"
+      ],
+      "answer": "An overdetermined system",
+      "explanation": "Step 1: Each data point gives one equation. Step 2: With many points and few parameters, equations outnumber unknowns. Step 3: This is the definition of an overdetermined system, solved by least squares."
+    },
+    {
+      "emoji": "📡",
+      "title": "GPS Positioning",
+      "equation": "",
+      "type": "mcq",
+      "concept": "Overdetermined systems for error reduction",
+      "story": "Your phone determines your location using signals from at least 4 satellites. But your position has only 3 coordinates (latitude, longitude, altitude). With 4+ satellite signals for 3 unknowns, the system is overdetermined. The extra signals are not wasted — they reduce positioning error and improve accuracy through least squares estimation.",
+      "question": "Why does GPS use more satellite signals than the minimum needed for a 3D position?",
+      "options": [
+        "To reduce positioning error through least squares",
+        "Because GPS always needs exactly 10 satellites (x)",
+        "Because satellites send duplicate signals",
+        "To increase the data transmission speed"
+      ],
+      "answer": "To reduce positioning error through least squares",
+      "explanation": "Step 1: 4 satellites give 4 equations for 3 unknowns (x, y, z). Step 2: Extra equations reduce the effect of measurement noise. Step 3: Least squares combines all signals to find the position that best fits all measurements simultaneously."
+    },
+    {
+      "emoji": "🏥",
+      "title": "Medical Imaging",
+      "equation": "",
+      "type": "mcq",
+      "concept": "Overdetermined systems in CT reconstruction",
+      "story": "A CT scanner takes hundreds of X-ray measurements from different angles around your body. Each measurement is one equation, but the image has millions of pixels to reconstruct. This massively overdetermined system is solved using least squares to produce the sharpest possible image from the available measurements.",
+      "question": "What mathematical technique is used to find the best image when you have far more measurements than unknowns?",
+      "options": [
+        "Least squares",
+        "Matrix inversion",
+        "Gaussian elimination",
+        "Cramer's rule"
+      ],
+      "answer": "Least squares",
+      "explanation": "Step 1: Hundreds of X-ray measurements create hundreds of equations. Step 2: The image pixels are the unknowns. Step 3: Since measurements vastly outnumber pixels, least squares finds the image that best fits all measurements simultaneously."
+    },
+    {
+      "emoji": "🌤️",
+      "title": "Weather Prediction",
+      "equation": "",
+      "type": "mcq",
+      "concept": "Parameter estimation from measurements",
+      "story": "Meteorologists collect thousands of temperature, pressure, and humidity measurements to estimate just a few weather parameters for their forecast model. With far more measurements than parameters, the system is overdetermined. No single set of parameters perfectly fits all the data, so they use least squares to find the best compromise.",
+      "question": "When thousands of weather measurements are used to estimate a few forecast parameters, what type of system results?",
+      "options": [
+        "An overdetermined system requiring least squares",
+        "An underdetermined system requiring free variables",
+        "A square system with a unique solution",
+        "A homogeneous system"
+      ],
+      "answer": "An overdetermined system requiring least squares",
+      "explanation": "Step 1: Thousands of measurements → thousands of equations. Step 2: A few forecast parameters → few unknowns. Step 3: Equations far outnumber unknowns, creating an overdetermined system best solved by least squares."
+    },
+    {
+      "emoji": "🏀",
+      "title": "Sports Analytics",
+      "equation": "",
+      "type": "mcq",
+      "concept": "Skill estimation from multiple observations",
+      "story": "A sports analyst collects performance statistics from dozens of games to estimate a player's true skill rating. Each game provides one equation, but the skill rating is a single number. With many equations for one unknown, the system is overdetermined — the analyst uses least squares to find the skill estimate that best fits all the game data.",
+      "question": "When multiple game statistics are used to estimate a single skill rating, can all the data fit exactly?",
+      "options": [
+        "No — the system is overdetermined, so least squares finds the best compromise",
+        "— there is always a perfect fit",
+        "— because skill ratings are always integers",
+        "— because sports data is always random"
+      ],
+      "answer": "No — the system is overdetermined, so least squares finds the best compromise",
+      "explanation": "Step 1: Each game gives one equation for the skill rating. Step 2: With dozens of equations and one unknown, the system is overdetermined. Step 3: No single value satisfies all equations exactly, but least squares finds the rating that minimises total error across all games."
+    },
+    {
+      "emoji": "🚗",
+      "title": "Self-Driving Cars",
+      "equation": "",
+      "type": "mcq",
+      "concept": "Sensor fusion via least squares",
+      "story": "A self-driving car uses lidar, radar, cameras, and GPS to estimate its position and velocity. Each sensor provides measurements, but they don't all agree perfectly due to noise. With far more sensor readings than state variables (position, velocity, acceleration), the system is overdetermined. The car's computer uses least squares to find the best estimate that satisfies as many sensor readings as possible.",
+      "question": "When a self-driving car combines data from multiple noisy sensors, why is least squares used?",
+      "options": [
+        "To find the best position estimate that minimises total sensor error",
+        "Because sensors always give perfect data",
+        "To igre all sensor data",
+        "To increase the number of unkwns"
+      ],
+      "answer": "To find the best position estimate that minimises total sensor error",
+      "explanation": "Step 1: Multiple sensors give redundant, slightly different measurements. Step 2: The system is overdetermined (many measurements, few state variables). Step 3: Least squares finds the state estimate that minimises the total squared discrepancy across all sensors."
+    }
+  ]
+}

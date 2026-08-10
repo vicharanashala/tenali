@@ -1,0 +1,457 @@
+{
+  "module": 6,
+  "missionId": 52,
+  "title": "Collaborative Filtering",
+  "original_question": "To recommend movies to Bob, find users similar to Bob using dot products / cosine similarity. Bob = (4,0,0,1). Alice = (5,3,0,1). Dot(Bob, Alice) = 4·5 + 0·3 + 0·0 + 1·1 = 21. Charlie = (1,1,5,4). Dot(Bob, Charlie) = 4·1 + 0·1 + 0·5 + 1·4 = 8. Alice is more similar! Recommend movies Alice liked that Bob hasn't seen: M2 (rating 3)!",
+  "core_concept": "Collaborative filtering uses dot products (or cosine similarity) between user rating vectors to find similar users, then recommends items that similar users liked but the target user hasn't seen yet.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M6Q2E1",
+        "question": "What is the dot product of two vectors u = (2,3) and v = (4,1)?",
+        "options": [
+          "11",
+          "8 (x)",
+          "14 (x)",
+          "7 (x)"
+        ],
+        "correct_option": "11",
+        "explanation": "Step 1: The dot product u·v = u₁v₁ + u₂v₂ = 2×4 + 3×1 = 8 + 3 = 11. Step 2: Geometrically, u·v = ‖u‖‖v‖cos θ, so the dot product encodes both the magnitudes of the vectors and the angle between them — it measures how much two vectors 'agree in direction' while being scaled by their lengths. Step 3: In collaborative filtering, the dot product between two user rating vectors is the foundational similarity measure: a large dot product means the users gave high ratings to the same movies, which is the signal that drives recommendations."
+      },
+      {
+        "id": "M6Q2E2",
+        "question": "In collaborative filtering, what does a high dot product between two user rating vectors indicate?",
+        "options": [
+          "The users rated very different movies",
+          "The users have similar tastes",
+          "The users rated the same number of movies",
+          "The users are the same person"
+        ],
+        "correct_option": "The users have similar tastes",
+        "explanation": "Step 1: The dot product u·v = Σᵢ uᵢvᵢ sums the products of corresponding ratings — when both users give high ratings to the same movies, each term uᵢvᵢ is large and positive, making the total large. Step 2: A high dot product (relative to the vector magnitudes) means cos θ ≈ 1, so the angle between rating vectors is small — the users' taste patterns point in the same direction in the movie space. Step 3: This directional agreement is the core signal in collaborative filtering: if two users agree on what they like (small angle between vectors), then movies that one user loved but the other hasn't seen are good recommendations."
+      },
+      {
+        "id": "M6Q2E3",
+        "question": "If Bob's rating vector is (4,0,0,1) and Alice's is (5,3,0,1), what is their dot product?",
+        "options": [
+          "21",
+          "13 (x)",
+          "9 (x)",
+          "25 (x)"
+        ],
+        "correct_option": "21",
+        "explanation": "Step 1: Dot(Bob, Alice) = 4×5 + 0×3 + 0×0 + 1×1 = 20 + 0 + 0 + 1 = 21. Step 2: The large dot product (21) reflects that Bob and Alice agree on M1 (both rate highly: 4 and 5) and M4 (both give 1), while the zero entries for Bob on M2 and M3 don't contribute — they are 'silent' on those movies. Step 3: This computation is the first step in user-based collaborative filtering: by computing dot products between the target user and all others, the system identifies the nearest neighbors (most similar users) whose preferences will drive the recommendation."
+      },
+      {
+        "id": "M6Q2E4",
+        "question": "What does cosine similarity measure that the raw dot product does not?",
+        "options": [
+          "The angle between vectors, normalized for their magnitudes",
+          "The product of the magnitudes",
+          "The sum of all components",
+          "The Euclidean distance between vectors"
+        ],
+        "correct_option": "The angle between vectors, normalized for their magnitudes",
+        "explanation": "Step 1: Cosine similarity = (u·v)/(‖u‖‖v‖) = cos θ, which divides out the magnitude factors from the dot product, leaving only the directional component. Step 2: The raw dot product conflates magnitude (how many ratings a user gave and how high they rated) with direction (the pattern of preferences), so a power user with many 5-star ratings would have inflated dot products with everyone. Step 3: By normalizing to the unit sphere, cosine similarity isolates the pure taste pattern — two users with proportional rating vectors (same direction, different magnitudes) get cosine similarity = 1, correctly identifying them as having identical preferences regardless of rating volume."
+      },
+      {
+        "id": "M6Q2E5",
+        "question": "In user-based collaborative filtering, what is the first step to recommend a movie to a target user?",
+        "options": [
+          "Find the most popular movie overall",
+          "Find other users most similar to the target user",
+          "Compute the average rating of all users",
+          "Remove all zero entries from the matrix"
+        ],
+        "correct_option": "Find other users most similar to the target user",
+        "explanation": "Step 1: Collaborative filtering begins by identifying 'nearest neighbors' — users whose rating vectors have the highest dot product (or cosine similarity) with the target user's vector. Step 2: These neighbors represent users with proven taste alignment: their past agreement on rated movies predicts future agreement on unseen movies. Step 3: Once the k most similar users are identified, the system looks at what they rated highly that the target hasn't seen — the recommendation is driven by the collective judgment of the most taste-aligned peers, not by content analysis or popularity."
+      },
+      {
+        "id": "M6Q2E6",
+        "question": "If two users have a dot product of 0 between their rating vectors, what can we say about their tastes?",
+        "options": [
+          "They have identical tastes",
+          "Their rating vectors are orthogonal — they share no common preference pattern",
+          "They have opposite tastes",
+          "They rated movies in common"
+        ],
+        "correct_option": "Their rating vectors are orthogonal — they share no common preference pattern",
+        "explanation": "Step 1: A dot product of 0 means cos θ = 0, so the angle between the vectors is 90° — the vectors are orthogonal in the movie space. Step 2: Orthogonality means the two users' rating patterns are linearly independent: knowing one user's ratings provides zero information about the other's through a linear model. Step 3: In recommendation terms, orthogonal users are completely uncorrelated — neither user's preferences can predict the other's, so collaborative filtering between them would be useless. This geometric orthogonality is the linear algebra formalization of 'these two people have completely different taste.'"
+      },
+      {
+        "id": "M6Q2E7",
+        "question": "After finding similar users in collaborative filtering, how do you decide which movie to recommend?",
+        "options": [
+          "Pick the most recent movie released",
+          "Find movies that similar users rated highly but the target user hasn't rated yet",
+          "Recommend the movie with the highest overall average rating",
+          "Pick a random movie from the catalog"
+        ],
+        "correct_option": "Find movies that similar users rated highly but the target user hasn't rated yet",
+        "explanation": "Step 1: Look at the 'neighbor' users who are most similar to the target (highest dot product or cosine similarity). Step 2: Identify movies those neighbors rated highly (large entries in their rating vectors) where the target has a zero (unrated) — these are the 'hidden gems' that similar users enjoyed but the target hasn't discovered. Step 3: Recommend the highest-rated unrated movie, which implements the core insight of collaborative filtering: 'people like you loved this movie you haven't seen' — the recommendation is driven purely by behavioral similarity, not by any analysis of the movie's content."
+      },
+      {
+        "id": "M6Q2E8",
+        "question": "What is the main advantage of cosine similarity over the raw dot product for recommendation systems?",
+        "options": [
+          "It is faster to compute",
+          "It is independent of the magnitude of rating vectors, so it compares patterns not intensities",
+          "It always returns values between 0 and 1",
+          "It doesn't require kwing the ratings"
+        ],
+        "correct_option": "It is independent of the magnitude of rating vectors, so it compares patterns not intensities",
+        "explanation": "Step 1: The raw dot product u·v = ‖u‖‖v‖cos θ depends on both the angle (taste pattern) and magnitudes (rating volume/intensity), so a user who rated 100 movies at 5 stars has ‖u‖ ≈ 22.4 while one who rated 5 movies at 3 stars has ‖u‖ ≈ 6.7 — the magnitude difference dominates the dot product. Step 2: Cosine similarity divides by ‖u‖‖v‖, canceling the magnitude effect and leaving only cos θ — the directional agreement between taste patterns. Step 3: This normalization is essential because in real systems, users vary enormously in rating activity (some rate 10 movies, others rate 1000), and without normalization, the most active users would dominate similarity computations regardless of their actual taste alignment."
+      },
+      {
+        "id": "M6Q2E9",
+        "question": "If Bob = (4,0,0,1) and Charlie = (1,1,5,4), what is Dot(Bob, Charlie)?",
+        "options": [
+          "8",
+          "21",
+          "13",
+          "4"
+        ],
+        "correct_option": "8",
+        "explanation": "Step 1: Dot(Bob, Charlie) = 4×1 + 0×1 + 0×5 + 1×4 = 4 + 0 + 0 + 4 = 8. Step 2: This is much smaller than Dot(Bob, Alice) = 21, confirming that Alice is more similar to Bob than Charlie is — the dot product correctly ranks similarity. Step 3: The low dot product with Charlie reflects a fundamental taste mismatch: Bob likes M1 (rated 4) while Charlie doesn't (rated 1), and Charlie loves M3 (rated 5) while Bob hasn't seen it (rated 0) — their rating vectors point in different directions in the movie space."
+      },
+      {
+        "id": "M6Q2E10",
+        "question": "Why is collaborative filtering called 'collaborative'?",
+        "options": [
+          "Because multiple computers work together to compute the answer",
+          "Because it uses the collective ratings of many users to make predictions",
+          "Because users must collaborate by filling out surveys",
+          "Because it requires human experts to collaborate on recommendations"
+        ],
+        "correct_option": "Because it uses the collective ratings of many users to make predictions",
+        "explanation": "Step 1: The method 'collaborates' across the ratings of many users — each user's past behavior contributes to predictions for other users through the dot product similarity computation. Step 2: No content analysis of the movies is needed; the system relies entirely on the collective behavioral data (the matrix of user-item interactions) to discover patterns. Step 3: This crowd-sourced intelligence is the essence of collaborative filtering: the 'collaboration' is the implicit cooperation of millions of users whose rating behavior, when aggregated through the linear algebra of dot products and matrix factorization, reveals patterns no individual user or expert could identify alone."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M6Q2M1",
+        "question": "Why might the dot product be misleading as a similarity measure when comparing a user who rated 200 movies to one who rated only 5?",
+        "options": [
+          "The user with 200 ratings has a much larger vector norm, inflating the dot product even if their taste patterns are similar",
+          "The dot product only works for users with the same number of ratings",
+          "The dot product will always be zero for users with different numbers of ratings",
+          "The dot product cant handle sparse vectors"
+        ],
+        "correct_option": "The user with 200 ratings has a much larger vector norm, inflating the dot product even if their taste patterns are similar",
+        "explanation": "Step 1: The dot product u·v = ‖u‖‖v‖cos θ — a user with 200 ratings has ‖u‖ = √(Σuᵢ²) much larger than a user with 5 ratings, even if their taste directions (θ) are identical. Step 2: This magnitude inflation means the dot product is dominated by rating volume rather than taste alignment — the active user appears more similar to everyone simply because their vector is longer. Step 3: Cosine similarity resolves this by normalizing to unit vectors first, making the similarity measure depend only on the angle (taste pattern) rather than the magnitude (number of ratings), which is why cosine similarity is preferred over raw dot products in practice."
+      },
+      {
+        "id": "M6Q2M2",
+        "question": "In the matrix [[5,3,0,1],[4,0,0,1],[1,1,5,4]], Bob = (4,0,0,1) and Alice = (5,3,0,1). Alice rated M2 = 3 but Bob has M2 = 0. What is the recommendation?",
+        "options": [
+          "Recommend M2 (Alice rated it 3, Bob hasn't seen it)",
+          "Recommend M3 (both have 0 for M3)",
+          "Recommend M1 (both rated it highly)",
+          "Recommend M4 (both rated it 1)"
+        ],
+        "correct_option": "Recommend M2 (Alice rated it 3, Bob hasn't seen it)",
+        "explanation": "Step 1: Alice is Bob's most similar user (dot product 21 vs Charlie's 8), so Alice's preferences are the most predictive of Bob's potential interests. Step 2: M2 is the movie Alice rated (3) that Bob hasn't rated (0) — it is the 'gap' in Bob's rating vector where Alice has signal. Step 3: Collaborative filtering recommends M2 because a similar user liked it, implementing the fundamental insight: 'similar users liked things you haven't tried yet' — the recommendation is driven by the intersection of taste similarity (high dot product) and unexplored territory (zero entries in the target vector)."
+      },
+      {
+        "id": "M6Q2M3",
+        "question": "What is the cold-start problem in collaborative filtering, and why does it occur?",
+        "options": [
+          "New users have no rating history, so the system cannot compute their similarity to existing users",
+          "The system runs slowly when there are too many users",
+          "The system cant recommend movies released in the current year",
+          "The system crashes when the matrix is too large"
+        ],
+        "correct_option": "New users have no rating history, so the system cannot compute their similarity to existing users",
+        "explanation": "Step 1: Collaborative filtering requires a rating vector to compute dot products — a new user has an all-zero vector, so their dot product with every existing user is 0, making them equidistant from everyone (similarity = 0 for all users). Step 2: The all-zero vector lies in the null space of the similarity computation — it provides no directional information, so the system cannot determine which neighborhood the new user belongs to. Step 3: This is the cold-start problem, typically solved by asking new users to rate a few seed movies (to initialize a non-zero rating vector) or by hybridizing with content-based methods that use movie features (genre, director) until enough collaborative data accumulates."
+      },
+      {
+        "id": "M6Q2M4",
+        "question": "If we use cosine similarity instead of dot product, which pair is most similar: Bob=(4,0,0,1), Alice=(5,3,0,1), or Bob=(4,0,0,1), Charlie=(1,1,5,4)?",
+        "options": [
+          "Bob-Alice (cosine ≈ 0.92)",
+          "Bob-Charlie (cosine ≈ 0.57)",
+          "They are equally similar",
+          "Cant determine without computing"
+        ],
+        "correct_option": "Bob-Alice (cosine ≈ 0.92)",
+        "explanation": "Step 1: cos(Bob,Alice) = (4×5+0×3+0×0+1×1)/(√(16+0+0+1)·√(25+9+0+1)) = 21/(√17·√35) ≈ 21/24.4 ≈ 0.86. Step 2: cos(Bob,Charlie) = (4×1+0×1+0×5+1×4)/(√17·√(1+1+25+16)) = 8/(√17·√43) ≈ 8/26.9 ≈ 0.30. Step 3: Alice is far more similar to Bob by cosine similarity (0.86 >> 0.30), confirming the dot product ranking — the normalization to unit vectors preserves the relative ordering because all vectors are in the same positive quadrant, but the absolute values change, reflecting the pure directional agreement rather than magnitude-influenced similarity."
+      },
+      {
+        "id": "M6Q2M5",
+        "question": "In item-based collaborative filtering (as opposed to user-based), what are you comparing?",
+        "options": [
+          "Users to other users based on their rating patterns (x)",
+          "Movies to other movies based on how users rated them",
+          "Movies to their genres",
+          "Users to their demographics"
+        ],
+        "correct_option": "Movies to other movies based on how users rated them",
+        "explanation": "Step 1: In user-based CF, rows (users) are compared via dot products — the similarity matrix is m×m where m is the number of users. Step 2: In item-based CF, columns (items) are compared — the similarity matrix is n×n where n is the number of items, and the dot product is computed between movie columns (how users rated each movie). Step 3: Item-based CF is often preferred in practice because movie similarity patterns are more stable over time than user preferences (movies don't change, but user tastes evolve), and the n×n item similarity matrix is typically much smaller than the m×m user similarity matrix (fewer movies than users), making computation more efficient."
+      },
+      {
+        "id": "M6Q2M6",
+        "question": "What happens to the dot product between two users if both add the same constant rating to every entry (e.g., they both increase every rating by 1)?",
+        "options": [
+          "The dot product increases by a large amount because every component grows",
+          "The dot product stays exactly the same",
+          "The dot product may increase or decrease unpredictably",
+          "The dot product doubles"
+        ],
+        "correct_option": "The dot product increases by a large amount because every component grows",
+        "explanation": "Step 1: If u becomes u + c·1̄ (adding c to each entry), the new dot product is (u+c·1̄)·(v+c·1̄) = u·v + c(u·1̄) + c(v·1̄) + c²n, where n is the dimension. Step 2: All three extra terms are positive when c > 0 and entries are non-negative, so the dot product inflates significantly. Step 3: This inflation is another reason cosine similarity is preferred — it normalizes by ‖u‖‖v‖, which also changes with the shift, but the directional component (cos θ) is invariant to uniform additive shifts, making cosine similarity more robust to rating scale differences between users."
+      },
+      {
+        "id": "M6Q2M7",
+        "question": "Why can't collaborative filtering make good recommendations for a movie that no one in the user's neighborhood has rated?",
+        "options": [
+          "Because there is no signal — no similar user has provided information about that movie",
+          "Because the dot product would be undefined",
+          "Because the movie doesn't exist in the matrix",
+          "Because the system only recommends movies with the highest average rating"
+        ],
+        "correct_option": "Because there is no signal — no similar user has provided information about that movie",
+        "explanation": "Step 1: Collaborative filtering works by aggregating opinions from similar users — the prediction for a missing entry R(i,j) is a weighted average of other users' ratings for item j, weighted by similarity to user i. Step 2: If no neighbor has rated item j, the weighted average has no terms — there is literally no data to aggregate. Step 3: This 'missing signal' problem is why long-tail items (niche movies with few ratings) are poorly served by pure collaborative filtering — the system can only recommend items where at least some neighbors have provided ratings, which is why hybrid methods that incorporate content features are essential for covering the long tail."
+      },
+      {
+        "id": "M6Q2M8",
+        "question": "In a 1000-user × 500-movie rating matrix, roughly what percentage of entries are typically missing in a real-world system like Netflix?",
+        "options": [
+          "About 50%)",
+          "About 99% or more",
+          "About 10%)",
+          "Almost ne — users rate most movies"
+        ],
+        "correct_option": "About 99% or more",
+        "explanation": "Step 1: A typical Netflix user rates maybe 100–200 movies out of thousands available, so in a 1000×500 matrix (500,000 entries), if each user rates 100, there are 100,000 known entries — only 20% filled. Step 2: In real systems with millions of movies, sparsity exceeds 99%: 1000 users × 1,000,000 movies = 10⁹ entries, but only 10⁵ are observed. Step 3: This extreme sparsity is why matrix completion (recovering the full low-rank matrix from sparse observations) is the central mathematical challenge — the low-rank assumption (rank ≪ min(m,n)) provides the structural constraint that makes recovery possible from O(k(m+n)log(mn)) observations, far fewer than the mn total entries."
+      },
+      {
+        "id": "M6Q2M9",
+        "question": "If two users have exactly the same rating pattern but scaled differently (e.g., Bob = (4,0,0,1) and Eve = (8,0,0,2)), what does cosine similarity say about them?",
+        "options": [
+          "They are perfectly similar (cosine = 1) even though their dot product is different from the case where ratings are identical",
+          "They are t similar because their ratings differ",
+          "Cosine similarity is undefined for proportional vectors",
+          "They have cosine similarity of 0"
+        ],
+        "correct_option": "They are perfectly similar (cosine = 1) even though their dot product is different from the case where ratings are identical",
+        "explanation": "Step 1: Eve = 2×Bob, so they point in exactly the same direction in ℝⁿ — the angle between them is 0°. Step 2: cos(Bob,Eve) = (Bob·Eve)/(‖Bob‖‖Eve‖) = (2‖Bob‖²)/(‖Bob‖·2‖Bob‖) = 1, confirming perfect directional alignment. Step 3: Cosine similarity correctly identifies them as having identical taste patterns (same direction) despite the magnitude difference, while the raw dot product would be different (Dot(Bob,Eve) = 2×Dot(Bob,Bob)) — this shows why normalization is essential: two users who rate proportionally the same way should be considered identical for recommendation purposes."
+      },
+      {
+        "id": "M6Q2M10",
+        "question": "What is the key difference between user-based and item-based collaborative filtering?",
+        "options": [
+          "User-based finds similar users then recommends what they liked; item-based finds similar items to what the user already likes",
+          "User-based is always more accurate",
+          "Item-based requires computing the dot product between users",
+          "There is difference — they produce identical results"
+        ],
+        "correct_option": "User-based finds similar users then recommends what they liked; item-based finds similar items to what the user already likes",
+        "explanation": "Step 1: User-based CF answers: 'Find users like me (high dot product between user rows), recommend what they liked that I haven't seen' — it operates in the user space ℝᵐ. Step 2: Item-based CF answers: 'Find items like what I already liked (high dot product between item columns), recommend those similar items' — it operates in the item space ℝⁿ. Step 3: The mathematical duality is that both compute the same type of similarity (dot product / cosine), but on different axes of the matrix: user-based on rows (user similarity), item-based on columns (item similarity). Item-based is often preferred because item similarity patterns are more stable over time than user preferences."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M6Q2H1",
+        "question": "In a rating matrix R, the user-based collaborative filtering prediction for user i's rating of item j can be written as: r̂(i,j) = r̄ᵢ + Σₖ sim(i,k)(r(k,j) − r̄ₖ) / Σₖ |sim(i,k)|. Why is the mean-centering (r̄ᵢ and r̄ₖ) necessary?",
+        "options": [
+          "Because it adjusts for the fact that some users rate higher overall and some lower, focusing on relative preference rather than absolute scale",
+          "Because it makes the formula look more complicated",
+          "Because without it the dot product would always be zero",
+          "Because it ensures the prediction is always an integer"
+        ],
+        "correct_option": "Because it adjusts for the fact that some users rate higher overall and some lower, focusing on relative preference rather than absolute scale",
+        "explanation": "Step 1: Some users are 'generous' raters (average 4.5 stars) while others are 'harsh' (average 2.5 stars) — without mean-centering, a generous user's 3-star rating for a movie is actually below their average (they disliked it), but the raw number looks positive. Step 2: Mean-centering converts ratings to deviations from each user's personal baseline: r(k,j) − r̄ₖ measures whether user k liked movie j relative to their own average, removing the absolute scale. Step 3: The similarity-weighted average of these deviations then predicts how much user i will deviate from their own average for movie j, which is mathematically equivalent to computing cosine similarity on mean-centered vectors — this is precisely why Pearson correlation (cosine of mean-centered vectors) often outperforms raw dot product for collaborative filtering."
+      },
+      {
+        "id": "M6Q2H2",
+        "question": "If we represent collaborative filtering as a matrix factorization problem R ≈ UV^T where U is m×k and V is n×k, what do the rows of U and V represent?",
+        "options": [
+          "U rows are user latent factor vectors; V rows are item latent factor vectors — the dot product of a user's row and an item's row approximates the rating",
+          "U stores the ratings and V stores the movie titles",
+          "U is the adjacency matrix and V is the transition matrix",
+          "U and V are both identity matrices"
+        ],
+        "correct_option": "U rows are user latent factor vectors; V rows are item latent factor vectors — the dot product of a user's row and an item's row approximates the rating",
+        "explanation": "Step 1: R ≈ UV^T means R(i,j) ≈ U(i,:)·V(j,:) — the predicted rating for user i on item j is the dot product of their k-dimensional latent vectors. Step 2: Each of the k dimensions represents a latent factor (genre preference, mood, viewing context), and U(i,l) measures how much user i 'has' factor l while V(j,l) measures how much item j 'embodies' factor l. Step 3: The dot product captures the match: if user i loves action (U(i, action) = 0.9) and movie j is an action film (V(j, action) = 0.8), the product 0.9×0.8 contributes positively to the predicted rating — this latent factor interpretation is why matrix factorization is the dominant approach in modern recommendation systems."
+      },
+      {
+        "id": "M6Q2H3",
+        "question": "Why does collaborative filtering fail for items with very few ratings (the 'long tail' problem), and how does hybrid filtering address this?",
+        "options": [
+          "Items with few ratings have unreliable similarity scores; hybrid filtering combines collaborative signals with content-based features (like genre, director) to compensate",
+          "Items with few ratings are always bad movies",
+          "Hybrid filtering just igres long-tail items entirely",
+          "Collaborative filtering never fails — it handles all items equally well"
+        ],
+        "correct_option": "Items with few ratings have unreliable similarity scores; hybrid filtering combines collaborative signals with content-based features (like genre, director) to compensate",
+        "explanation": "Step 1: Items with very few ratings have poorly estimated column vectors in the rating matrix — one or two ratings don't reliably represent the item's true appeal, so the dot product between their column and other items' columns is noisy. Step 2: This leads to unreliable or no recommendations for niche items because the collaborative signal is too weak. Step 3: Hybrid filtering supplements the sparse collaborative data with content features (genre, actors, keywords) that are available even for unrated items — the content features provide a 'prior' that fills in where collaborative data is insufficient, effectively regularizing the matrix factorization for items with few observations."
+      },
+      {
+        "id": "M6Q2H4",
+        "question": "For the matrix R = [[5,3,0,1],[4,0,0,1],[1,1,5,4]], if we perform rank-2 SVD approximation R ≈ U₂Σ₂V₂^T, how would we predict Bob's missing rating for M2?",
+        "options": [
+          "Compute the (2,2) entry of U₂Σ₂V₂^T using the rank-2 approximation",
+          "Take the average of Alice's and Charlie's M2 ratings",
+          "Use 0 since Bob hasn't rated M2",
+          "Find the nearest neighbor and use their exact rating"
+        ],
+        "correct_option": "Compute the (2,2) entry of U₂Σ₂V₂^T using the rank-2 approximation",
+        "explanation": "Step 1: The rank-2 SVD approximation R̂ = U₂Σ₂V₂^T fills in ALL entries of the matrix, including missing ones, by projecting onto the 2-dimensional latent space. Step 2: R̂(2,2) gives the predicted rating for Bob (row 2) and M2 (column 2) — it is the dot product of Bob's 2D latent vector with M2's 2D latent vector, weighted by the two singular values. Step 3: This prediction uses the global latent factor structure (combining Bob's latent preferences with M2's latent attributes) rather than relying on just one or two neighbors, making it more robust — it captures the underlying 2-dimensional taste geometry that explains all observed ratings simultaneously."
+      },
+      {
+        "id": "M6Q2H5",
+        "question": "In the cosine similarity computation, if we have two users u and v with most entries being zero (sparse vectors), what computational advantage can we exploit?",
+        "options": [
+          "We only need to compute the dot product over the entries where BOTH users have non-zero ratings, ignoring the zeros",
+          "We must compute over all entries even if they are zero",
+          "Sparse vectors always have cosine similarity 0",
+          "We can skip the rmalization step"
+        ],
+        "correct_option": "We only need to compute the dot product over the entries where BOTH users have non-zero ratings, ignoring the zeros",
+        "explanation": "Step 1: The dot product u·v = Σᵢ uᵢvᵢ — if uᵢ = 0 or vᵢ = 0, that term contributes nothing, so we only need to compute over the intersection of each user's rated items. Step 2: With 99% sparsity, each user rates ~1% of items, so the intersection is tiny — maybe 2–3 items in common out of thousands, making the dot product computation O(|rated(u) ∩ rated(v)|) instead of O(n). Step 3: This sparse intersection computation is the practical enabler of collaborative filtering at scale: for millions of users and items, computing full dot products is infeasible, but computing intersections of sparse rating sets is fast and makes real-time recommendation possible."
+      },
+      {
+        "id": "M6Q2H6",
+        "question": "Why does the k-nearest-neighbor approach in collaborative filtering often outperform using ALL users for similarity computation?",
+        "options": [
+          "Distant users (low similarity) add noise to the prediction — restricting to k nearest neighbors focuses on the most relevant signal and reduces noise",
+          "Using all users is always better, k-NN never outperforms it",
+          "k-NN is only faster, t more accurate",
+          "All users always provide equally useful information"
+        ],
+        "correct_option": "Distant users (low similarity) add noise to the prediction — restricting to k nearest neighbors focuses on the most relevant signal and reduces noise",
+        "explanation": "Step 1: Users with very low similarity to the target provide weak, potentially misleading signal — their rating patterns are uncorrelated with the target's, so including them in the weighted average adds noise. Step 2: Even with small weights (low similarity), accumulating thousands of noisy terms can shift the prediction away from the true value — this is the bias-variance tradeoff in action. Step 3: Using only the k most similar neighbors ensures the prediction is driven by users with genuinely matching tastes, reducing variance at the cost of slight bias — in practice, k = 50–200 typically outperforms using all users, especially in sparse matrices where most users have near-zero similarity."
+      },
+      {
+        "id": "M6Q2H7",
+        "question": "If Bob's mean rating is 2.5, Alice's mean is 3.0, their cosine similarity is 0.92, and Alice rated M2 = 4 (above her mean), what is the predicted rating for Bob's M2 using adjusted user-based CF?",
+        "options": [
+          "3.42",
+          "2.5 (x)",
+          "4.0 (x)",
+          "2.92 (x)"
+        ],
+        "correct_option": "3.42",
+        "explanation": "Step 1: r̂(Bob, M2) = r̄_Bob + sim(Bob,Alice) × (r(Alice, M2) − r̄_Alice) = 2.5 + 0.92 × (4 − 3.0) = 2.5 + 0.92 = 3.42. Step 2: The deviation term (4 − 3.0 = +1.0) measures that Alice rated M2 above her personal average — she liked it more than usual — and the similarity weight (0.92) transfers 92% of this positive deviation to Bob. Step 3: The prediction (3.42) is above Bob's average (2.5) because Alice, who is very similar (0.92), rated it above her average — this is mean-centered collaborative filtering in action, where predictions are expressed as deviations from personal baselines rather than absolute ratings."
+      },
+      {
+        "id": "M6Q2H8",
+        "question": "What is the mathematical relationship between collaborative filtering and the low-rank matrix approximation problem?",
+        "options": [
+          "CF predictions are entries of the best rank-k approximation to the observed part of the rating matrix, found by minimizing ‖P_Ω(R − UV^T)‖² over all rank-k factorizations",
+          "There is relationship — they are completely different techniques",
+          "CF is a special case of SVD where all singular values are equal",
+          "CF always produces a full-rank approximation"
+        ],
+        "correct_option": "CF predictions are entries of the best rank-k approximation to the observed part of the rating matrix, found by minimizing ‖P_Ω(R − UV^T)‖² over all rank-k factorizations",
+        "explanation": "Step 1: The rating matrix R has missing entries (the set Ω of observed positions); we seek U (m×k) and V (n×k) such that UV^T matches R on Ω while being rank k. Step 2: The objective ‖P_Ω(R − UV^T)‖² = Σ_{(i,j)∈Ω} (R(i,j) − U(i,:)·V(j,:))² minimizes prediction error only on observed entries, with the rank-k constraint providing regularization. Step 3: This is exactly the matrix factorization formulation of CF — the Netflix Prize winning approach — and it connects to nuclear norm minimization (the convex relaxation of rank minimization) through the theory of matrix completion, unifying collaborative filtering with the fundamental linear algebra of low-rank approximation."
+      },
+      {
+        "id": "M6Q2H9",
+        "question": "Why does the Pearson correlation coefficient often outperform raw cosine similarity for collaborative filtering?",
+        "options": [
+          "It automatically mean-centers each user's ratings, so similarity is based on agreement about relative preferences rather than absolute rating levels",
+          "It is faster to compute than cosine similarity",
+          "It only works for binary ratings",
+          "It doesn't require kwing the ratings"
+        ],
+        "correct_option": "It automatically mean-centers each user's ratings, so similarity is based on agreement about relative preferences rather than absolute rating levels",
+        "explanation": "Step 1: Pearson correlation = cosine similarity of mean-centered vectors: corr(u,v) = cos(u − r̄_u·1̄, v − r̄_v·1̄), which subtracts each user's average before computing the angle. Step 2: Two users who agree about which movies are above/below average get high correlation, even if one rates everything 2 points higher than the other — raw cosine similarity would miss this because the magnitude difference shifts the angle. Step 3: This mean-centering is equivalent to the adjusted CF formula r̂ = r̄ᵢ + sim × (rⱼ − r̄ⱼ), which predicts deviations from personal baselines rather than absolute ratings — Pearson correlation naturally captures this 'relative preference agreement' that is the true signal for prediction."
+      },
+      {
+        "id": "M6Q2H10",
+        "question": "In a matrix factorization recommendation system, what is the role of regularization terms (like λ‖U‖² + λ‖V‖²) in the objective function?",
+        "options": [
+          "They prevent overfitting by penalizing large values in the latent factor matrices, ensuring the model generalizes to unseen ratings rather than memorizing the training data",
+          "They make the computation faster",
+          "They increase the rank of the approximation",
+          "They ensure all predicted ratings are integers"
+        ],
+        "correct_option": "They prevent overfitting by penalizing large values in the latent factor matrices, ensuring the model generalizes to unseen ratings rather than memorizing the training data",
+        "explanation": "Step 1: Without regularization, the model can achieve zero training error by making U and V very large (e.g., setting U(i,l) and V(j,l) to huge values that reproduce every observed rating exactly), but this overfits — the large latent factors amplify noise in the training data. Step 2: Regularization λ‖U‖² + λ‖V‖² penalizes large latent factor magnitudes, keeping the factors small and smooth — this is a form of Occam's razor that prefers simpler explanations. Step 3: The regularized objective min ‖P_Ω(R − UV^T)‖² + λ(‖U‖² + ‖V‖²) balances fitting the observed data with keeping the model simple, which provably improves generalization to the missing entries — the ones we actually want to predict."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "emoji": "🎬",
+      "title": "Netflix's 'Users Who Liked This Also Liked'",
+      "type": "mcq",
+      "concept": "Dot-product based user similarity",
+      "story": "Netflix's 'Users who liked this also liked...' feature works by computing the similarity between users using dot products on their rating vectors. Users with high dot products have similar taste. The system finds your nearest neighbours (most similar users) and recommends movies they loved but you have not yet seen.",
+      "question": "How does Netflix identify users with similar taste to yours?",
+      "options": [
+        "By comparing their age and gender demographics",
+        "By computing high dot products between their rating vectors",
+        "By checking if they live in the same city",
+        "By counting how many movies they have rated"
+      ],
+      "answer": "By computing high dot products between their rating vectors",
+      "explanation": "Step 1: Your rating vector and another user's rating vector are compared using the dot product (or cosine similarity), which measures the alignment of taste patterns in the movie space. Step 2: A high dot product means your rating patterns align — you tend to give similar scores to the same movies, so your preferences are correlated. Step 3: Netflix finds your nearest neighbors (highest dot products) and recommends movies they loved but you haven't watched — this is user-based collaborative filtering, where the dot product is the mathematical engine that identifies taste-aligned peers."
+    },
+    {
+      "emoji": "🛒",
+      "title": "Amazon's 'Frequently Bought Together'",
+      "type": "mcq",
+      "concept": "Purchase vector similarity",
+      "story": "Amazon's 'Frequently bought together' feature uses the same principle. It computes the dot product between your purchase history vector and other customers' vectors. Customers with high dot product scores tend to buy similar products. Amazon then suggests items that those similar customers bought but you have not.",
+      "question": "What does Amazon's 'Frequently bought together' feature use to find similar customers?",
+      "options": [
+        "Product descriptions and reviews",
+        "Similar purchase vectors with high dot products",
+        "Customer age and location data",
+        "The time of day purchases were made"
+      ],
+      "answer": "Similar purchase vectors with high dot products",
+      "explanation": "Step 1: Each customer's purchase history is a vector in product space, where each coordinate indicates whether (or how often) they bought a particular product. Step 2: The dot product between your vector and others measures purchase pattern overlap — high dot product means you bought many of the same products. Step 3: Amazon then suggests items that similar customers bought but you haven't — the dot product identifies your 'purchase neighbors,' and their unexplored purchases become your recommendations, driving cross-selling through collaborative filtering."
+    },
+    {
+      "emoji": "🎵",
+      "title": "Spotify's Discover Weekly",
+      "type": "mcq",
+      "concept": "Collaborative filtering for music",
+      "story": "Spotify's Discover Weekly playlist is powered by collaborative filtering — the same dot-product-based technique used by Netflix and Amazon. Your listening history is a vector, and Spotify finds users with the most similar vectors (highest dot products). Songs that those similar users loved but you have not heard appear in your playlist.",
+      "question": "What powers Spotify's Discover Weekly playlist recommendations?",
+      "options": [
+        "Random song selection",
+        "Collaborative filtering using dot products on listening history vectors",
+        "The newest songs released that week",
+        "Songs chosen by Spotify editors"
+      ],
+      "answer": "Collaborative filtering using dot products on listening history vectors",
+      "explanation": "Step 1: Your listening history is encoded as a vector (play counts for each song/artist), and Spotify computes dot products between your vector and millions of other users' vectors. Step 2: Users with the highest dot products have the most similar taste — they listen to the same music in similar proportions. Step 3: Songs those similar users played frequently but you haven't heard are placed in your Discover Weekly — collaborative filtering in action, where the dot product identifies your musical neighbors and their unexplored favorites become your new discoveries."
+    },
+    {
+      "emoji": "📱",
+      "title": "LinkedIn 'People You May Know'",
+      "type": "mcq",
+      "concept": "Network-based collaborative filtering",
+      "story": "LinkedIn's 'People You May Know' uses a network-based form of collaborative filtering. Your professional profile is a vector of skills, endorsements, and connections. LinkedIn computes similarity between your profile vector and others using dot products on shared skills and mutual connections.",
+      "question": "How does LinkedIn determine which professionals to suggest in 'People You May Know'?",
+      "options": [
+        "By randomly selecting professionals in your industry",
+        "By computing similarity between your professional profile vector and others using shared skills and connections",
+        "By finding people with the most endorsements",
+        "By suggesting people who viewed your profile"
+      ],
+      "answer": "By computing similarity between your professional profile vector and others using shared skills and connections",
+      "explanation": "Step 1: Your profile is a vector of skills, endorsements, and connection patterns — a high-dimensional representation of your professional identity. Step 2: Other professionals have similar vectors, and the dot product measures overlap in skills and mutual connections. Step 3: High similarity (shared skills, mutual connections) makes someone a good suggestion — collaborative filtering applied to professional networking, where the dot product identifies career-aligned peers whose connections are likely relevant to you."
+    },
+    {
+      "emoji": "📚",
+      "title": "Goodreads Book Recommendations",
+      "type": "mcq",
+      "concept": "User-based collaborative filtering for books",
+      "story": "Goodreads recommends books by finding readers with similar rating patterns using cosine similarity on their book rating vectors. If Reader A and Reader B have rated 50 books in common with similar scores, and Reader A loved a book that Reader B hasn't read, Goodreads recommends it to Reader B.",
+      "question": "When Goodreads recommends a book to you, what is it primarily using?",
+      "options": [
+        "The book's publication date and sales rank",
+        "Cosine similarity between your rating vector and other readers' vectors",
+        "The number of pages in the book",
+        "The author's previous books' average rating"
+      ],
+      "answer": "Cosine similarity between your rating vector and other readers' vectors",
+      "explanation": "Step 1: Your reading history is a vector of book ratings, and Goodreads computes cosine similarity between your vector and thousands of other readers' vectors. Step 2: Cosine similarity normalizes for rating volume, so a prolific reader and a casual reader with proportional tastes get high similarity — the directional agreement in taste patterns is what matters. Step 3: Books that your most similar readers rated highly, but you haven't read, become your recommendations — classic user-based collaborative filtering where cosine similarity identifies your literary neighbors."
+    }
+  ]
+}

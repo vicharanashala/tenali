@@ -1,0 +1,15 @@
+{
+  "id": 213,
+  "word": "Create",
+  "question": "Create",
+  "options": [
+    "To perceive the scent of something",
+    "To bring something into existence",
+    "In need of sleep or rest",
+    "Having no special features; normal"
+  ],
+  "answerOption": "B",
+  "answerText": "To bring something into existence",
+  "difficulty": "easy",
+  "sourceFile": "0213.json"
+}

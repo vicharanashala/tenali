@@ -1,0 +1,15 @@
+{
+  "id": 342,
+  "word": "Trap",
+  "question": "Trap",
+  "options": [
+    "Done with good judgment; practical",
+    "To stop briefly before continuing",
+    "To keep safe from harm or injury",
+    "To catch an animal in a device"
+  ],
+  "answerOption": "D",
+  "answerText": "To catch an animal in a device",
+  "difficulty": "easy",
+  "sourceFile": "0342.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1705,
+  "word": "Nihilism",
+  "question": "Nihilism",
+  "options": [
+    "Excessively obedient or attentive to please",
+    "The belief that life is meaningless",
+    "One who poses riddles",
+    "Tending to induce drowsiness or sleep"
+  ],
+  "answerOption": "B",
+  "answerText": "The belief that life is meaningless",
+  "difficulty": "hard",
+  "sourceFile": "1705.json"
+}

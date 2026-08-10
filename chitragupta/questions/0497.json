@@ -1,0 +1,14 @@
+{
+  "id": 497,
+  "question": "What is the chemical symbol for zinc?",
+  "options": [
+    "Zi",
+    "Zn",
+    "Z",
+    "Zc"
+  ],
+  "answerOption": "B",
+  "answerText": "Zn",
+  "genre": "mixed",
+  "sourceFile": "0497.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1613,
+  "word": "Despairing",
+  "question": "Despairing",
+  "options": [
+    "Containing many details or giving details",
+    "A small individual part or feature",
+    "Showing loss of all hope",
+    "A person or thing announcing what is to come"
+  ],
+  "answerOption": "C",
+  "answerText": "Showing loss of all hope",
+  "difficulty": "medium",
+  "sourceFile": "1613.json"
+}

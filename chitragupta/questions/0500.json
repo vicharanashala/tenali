@@ -1,0 +1,14 @@
+{
+  "id": 500,
+  "question": "Which part of the eye focuses light onto the retina?",
+  "options": [
+    "Iris",
+    "Cornea",
+    "Lens",
+    "Pupil"
+  ],
+  "answerOption": "C",
+  "answerText": "Lens",
+  "genre": "mixed",
+  "sourceFile": "0500.json"
+}

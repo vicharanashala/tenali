@@ -1,0 +1,15 @@
+{
+  "id": 1408,
+  "word": "Democratic",
+  "question": "Democratic",
+  "options": [
+    "Based on principles of democracy",
+    "The action of damaging someone's reputation",
+    "One who despises",
+    "Continuing without pause or interruption"
+  ],
+  "answerOption": "A",
+  "answerText": "Based on principles of democracy",
+  "difficulty": "medium",
+  "sourceFile": "1408.json"
+}

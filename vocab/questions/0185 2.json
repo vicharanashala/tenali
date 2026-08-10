@@ -1,0 +1,15 @@
+{
+  "id": 185,
+  "word": "Release",
+  "question": "Release",
+  "options": [
+    "To set free from confinement",
+    "To arrive at a judgment after reasoning",
+    "In a state of sleep; not awake",
+    "To shine with a flickering light"
+  ],
+  "answerOption": "A",
+  "answerText": "To set free from confinement",
+  "difficulty": "easy",
+  "sourceFile": "0185.json"
+}

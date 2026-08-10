@@ -1,0 +1,14 @@
+{
+  "id": 622,
+  "question": "What is the chemical formula of nitric acid?",
+  "options": [
+    "HNO3",
+    "HCl",
+    "H2SO4",
+    "H2CO3"
+  ],
+  "answerOption": "A",
+  "answerText": "HNO3",
+  "genre": "mixed",
+  "sourceFile": "0622.json"
+}

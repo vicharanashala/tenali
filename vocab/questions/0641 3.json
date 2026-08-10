@@ -1,0 +1,15 @@
+{
+  "id": 641,
+  "word": "Skilled",
+  "question": "Skilled",
+  "options": [
+    "Occurring immediately without delay",
+    "To cause someone to find something funny",
+    "Clearly visible or understood",
+    "Having the training needed to do something"
+  ],
+  "answerOption": "D",
+  "answerText": "Having the training needed to do something",
+  "difficulty": "easy",
+  "sourceFile": "0641.json"
+}

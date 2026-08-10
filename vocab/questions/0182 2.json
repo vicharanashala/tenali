@@ -1,0 +1,15 @@
+{
+  "id": 182,
+  "word": "Save",
+  "question": "Save",
+  "options": [
+    "To ask someone earnestly for something",
+    "Not far away; close",
+    "To extend to full length",
+    "To keep something for future use"
+  ],
+  "answerOption": "D",
+  "answerText": "To keep something for future use",
+  "difficulty": "easy",
+  "sourceFile": "0182.json"
+}

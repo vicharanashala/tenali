@@ -1,0 +1,15 @@
+{
+  "id": 2084,
+  "word": "Usurious",
+  "question": "Usurious",
+  "options": [
+    "A leader who seeks support by appealing to emotions",
+    "Stubbornly refusing to change one's opinion",
+    "Affected by nausea; bad-tempered",
+    "Relating to lending money at unreasonably high rates"
+  ],
+  "answerOption": "D",
+  "answerText": "Relating to lending money at unreasonably high rates",
+  "difficulty": "hard",
+  "sourceFile": "2084.json"
+}

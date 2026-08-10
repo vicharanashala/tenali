@@ -1,0 +1,15 @@
+{
+  "id": 789,
+  "word": "Lethal",
+  "question": "Lethal",
+  "options": [
+    "Sufficient to cause death",
+    "Spread over a wide area",
+    "To place equipment in position for use",
+    "After the expected or usual time"
+  ],
+  "answerOption": "A",
+  "answerText": "Sufficient to cause death",
+  "difficulty": "easy",
+  "sourceFile": "0789.json"
+}

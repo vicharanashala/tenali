@@ -1,0 +1,15 @@
+{
+  "id": 1067,
+  "word": "Paradox",
+  "question": "Paradox",
+  "options": [
+    "Having no moral principles; dishonest",
+    "Using more words than are needed",
+    "A seemingly contradictory statement",
+    "Full of incessant activity"
+  ],
+  "answerOption": "C",
+  "answerText": "A seemingly contradictory statement",
+  "difficulty": "medium",
+  "sourceFile": "1067.json"
+}

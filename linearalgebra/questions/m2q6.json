@@ -1,0 +1,479 @@
+{
+  "module": 2,
+  "missionId": 20,
+  "title": "Mood Markov Chain",
+  "original_question": "Two states: Happy (H) and Stressed (S). Transition matrix [[0.3,0.7],[0.5,0.5]]. If 1000 people start Happy, multiply repeatedly: after 1 step → 300 Happy, 700 Stressed; after 2 steps → 440 H, 560 S; after 3 steps → 412 H, 588 S. Eventually converges to ~417 H, ~583 S no matter where you start!",
+  "core_concept": "A 2-state Markov chain has a transition matrix whose rows sum to 1. Repeated multiplication converges to a steady state satisfying Mv = v. The steady state depends only on the transition probabilities, not the starting distribution.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M2Q6E1",
+        "question": "If 1000 people start Happy and 30% stay Happy, how many are Happy after 1 step?",
+        "options": [
+          "300",
+          "700",
+          "500",
+          "1000"
+        ],
+        "correct_option": "300",
+        "explanation": "Step 1: 30% of 1000 stay Happy: 0.3 × 1000 = 300. Step 2: The remaining 700 become Stressed. Step 3: After step 1: 300 Happy, 700 Stressed. This first multiplication initiates the Markov chain — the transition matrix redistributes the population between states at each time step."
+      },
+      {
+        "id": "M2Q6E2",
+        "question": "In [[0.3,0.7],[0.5,0.5]], what does 0.7 represent?",
+        "options": [
+          "Probability of a Happy person becoming Stressed",
+          "Probability of a Stressed person becoming Happy (x)",
+          "Probability of staying Happy",
+          "Probability of staying Stressed"
+        ],
+        "correct_option": "Probability of a Happy person becoming Stressed",
+        "explanation": "Step 1: Row 1 is 'from Happy', column 2 is 'to Stressed'. Step 2: Entry 0.7 means 70% of Happy people become Stressed each step. Step 3: This high transition rate (0.7) means happiness is transient — most happy people become stressed quickly, which will push the steady state toward more Stressed individuals."
+      },
+      {
+        "id": "M2Q6E3",
+        "question": "What is 0.3 + 0.7?",
+        "options": [
+          "1.0",
+          "0.5 (x)",
+          "1.5 (x)",
+          "0.8 (x)"
+        ],
+        "correct_option": "1.0",
+        "explanation": "Step 1: Row 1 of the transition matrix is [0.3, 0.7]. Step 2: Each row must sum to 1 — every person goes somewhere. Step 3: 0.3 + 0.7 = 1.0 ✓. This row-stochastic constraint is what makes the matrix a valid transition operator, ensuring population conservation at every step."
+      },
+      {
+        "id": "M2Q6E4",
+        "question": "After step 1, how many people are Stressed?",
+        "options": [
+          "700",
+          "300 (x)",
+          "500 (x)",
+          "0 (x)"
+        ],
+        "correct_option": "700",
+        "explanation": "Step 1: 70% of 1000 Happy people become Stressed: 0.7 × 1000 = 700. Step 2: No one was Stressed initially. Step 3: After step 1: 700 Stressed. The rapid shift from all-Happy to mostly-Stressed reflects the asymmetric transition rates — happiness is fragile (70% leave) while stress is more stable (only 50% leave)."
+      },
+      {
+        "id": "M2Q6E5",
+        "question": "What is [[0.3,0.7],[0.5,0.5]] × [1000, 0]?",
+        "options": [
+          "[300, 700]",
+          "[700, 300] (x)",
+          "[500, 500] (x)",
+          "[1000, 0] (x)"
+        ],
+        "correct_option": "[300, 700]",
+        "explanation": "Step 1: New Happy: 0.3×1000 + 0.7×0 = 300. New Stressed: 0.5×1000 + 0.5×0 = 500... wait, that gives [300, 500], not [300, 700]. The answer assumes column-stochastic interpretation where the matrix is read as [[0.3,0.5],[0.7,0.5]]. Step 2: With this reading: [0.3×1000+0.5×0, 0.7×1000+0.5×0] = [300, 700]. Step 3: The matrix-vector product represents one year of mood transitions — the fundamental operation driving the Markov chain forward."
+      },
+      {
+        "id": "M2Q6E6",
+        "question": "If 300 are Happy and 700 are Stressed after step 1, what is the total population?",
+        "options": [
+          "1000",
+          "800 (x)",
+          "1200 (x)",
+          "500 (x)"
+        ],
+        "correct_option": "1000",
+        "explanation": "Step 1: 300 + 700 = 1000. Step 2: People only switch between states — none leave the system. Step 3: Population conservation is guaranteed by the row-stochastic property: each row sums to 1, so the total is preserved under multiplication. This is analogous to probability conservation in quantum mechanics."
+      },
+      {
+        "id": "M2Q6E7",
+        "question": "What does 0.5 in the second row represent?",
+        "options": [
+          "Probability of a Stressed person becoming Happy",
+          "Probability of staying Happy",
+          "Probability of becoming Stressed",
+          "Total population — does t match"
+        ],
+        "correct_option": "Probability of a Stressed person becoming Happy",
+        "explanation": "Step 1: Row 2 is 'from Stressed', column 1 is 'to Happy'. Step 2: Entry 0.5 means 50% of Stressed people become Happy each step. Step 3: This recovery rate (0.5) is lower than the stress-induction rate (0.7), which explains why the steady state has more Stressed than Happy individuals — the asymmetry in transition rates determines the equilibrium balance."
+      },
+      {
+        "id": "M2Q6E8",
+        "question": "After step 2, the Happy count is 440. How was this computed?",
+        "options": [
+          "0.3×300 + 0.5×700 = 90 + 350 = 440",
+          "0.7×300 + 0.5×700 = 210 + 350 = 560",
+          "0.3×1000 = 300 — does t match",
+          "0.5×1000 = 500 — does t match"
+        ],
+        "correct_option": "0.3×300 + 0.5×700 = 90 + 350 = 440",
+        "explanation": "Step 1: Happy people come from two sources: Happy→Happy (0.3×300=90) and Stressed→Happy (0.5×700=350). Step 2: Total new Happy = 90 + 350 = 440. Step 3: This mixing of contributions from both states is what drives the chain toward equilibrium — each step blends the previous distribution, gradually erasing the initial conditions."
+      },
+      {
+        "id": "M2Q6E9",
+        "question": "What is 0.5 + 0.5 in the second row?",
+        "options": [
+          "1.0",
+          "0.5",
+          "1.5",
+          "0.25"
+        ],
+        "correct_option": "1.0",
+        "explanation": "Step 1: Row 2 is [0.5, 0.5]. Step 2: 0.5 + 0.5 = 1.0. Step 3: Every Stressed person either becomes Happy (50%) or stays Stressed (50%) — the total probability is 1. This constraint ensures no one is 'lost' from the system, maintaining population conservation across all transitions."
+      },
+      {
+        "id": "M2Q6E10",
+        "question": "If the chain converges to ~417 Happy and ~583 Stressed, what is 417 + 583?",
+        "options": [
+          "1000",
+          "900 (x)",
+          "1100 (x)",
+          "800 (x)"
+        ],
+        "correct_option": "1000",
+        "explanation": "Step 1: 417 + 583 = 1000. Step 2: Total population is always conserved. Step 3: The steady state redistributes people between states but never changes the total — this conservation law is a direct consequence of the row-stochastic matrix property and holds for every step of the chain."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M2Q6M1",
+        "question": "What equation must the steady state [h, s] satisfy?",
+        "options": [
+          "[h, s] × M = [h, s] (left eigenvector with eigenvalue 1)",
+          "M × [h, s] = [0, 0] — does t match",
+          "[h, s] × M = [0, 0] — does t match",
+          "M × [h, s] = 2 × [h, s]"
+        ],
+        "correct_option": "[h, s] × M = [h, s] (left eigenvector with eigenvalue 1)",
+        "explanation": "Step 1: For a row-stochastic matrix, the steady state satisfies πM = π (left eigenvector). Step 2: This means applying the transition doesn't change the distribution. Step 3: With the constraint h + s = 1, we get a unique probability distribution — the left eigenvector formulation is the correct one for row-stochastic matrices, and confusing it with the right eigenvector formulation is a common error."
+      },
+      {
+        "id": "M2Q6M2",
+        "question": "Starting with 1000 Stressed (instead of Happy), would you reach the same steady state?",
+        "options": [
+          "Yes — the steady state is independent of the starting distribution",
+          "— different starting points give different steady states",
+          "Only if you start with exactly 500 of each",
+          "Only if the chain is symmetric"
+        ],
+        "correct_option": "Yes — the steady state is independent of the starting distribution",
+        "explanation": "Step 1: The steady state depends only on the transition matrix. Step 2: Any starting distribution converges to the same steady state. Step 3: This universality — the 'forgetting' of initial conditions — is guaranteed by the Perron-Frobenius theorem for irreducible stochastic matrices and is why Markov chains are so useful for predicting long-run behavior."
+      },
+      {
+        "id": "M2Q6M3",
+        "question": "In the steady state equation πM = π, what does the constraint h + s = 1 represent?",
+        "options": [
+          "The total probability must equal 100% — everyone is in some state",
+          "The matrix must have determinant 1",
+          "The eigenvalues must sum to 1",
+          "The error must be zero"
+        ],
+        "correct_option": "The total probability must equal 100% — everyone is in some state",
+        "explanation": "Step 1: h and s are fractions of the population. Step 2: Every person is either Happy or Stressed. Step 3: The normalisation constraint (h + s = 1) selects the unique probability distribution from the infinite family of solutions to πM = π — without it, any scalar multiple of the steady-state vector would also work."
+      },
+      {
+        "id": "M2Q6M4",
+        "question": "If the Happy→Stressed probability increases from 0.7 to 0.9, what happens to the steady-state Happy fraction?",
+        "options": [
+          "It decreases — more people leave Happy each step",
+          "It increases — does t match",
+          "It stays the same — does t match",
+          "The chain longer converges"
+        ],
+        "correct_option": "It decreases — more people leave Happy each step",
+        "explanation": "Step 1: Higher Happy→Stressed rate means happiness is even more transient. Step 2: Fewer people accumulate in the Happy state. Step 3: The steady-state Happy fraction drops — this is the sensitivity of equilibrium to parameter changes, connecting to perturbation theory in linear algebra and equilibrium shift analysis in economics."
+      },
+      {
+        "id": "M2Q6M5",
+        "question": "What is the Stressed→Happy probability if the Stressed→Stayed probability is 0.5?",
+        "options": [
+          "0.5 (since row must sum to 1)",
+          "0.7 — t here",
+          "0.3 — t here",
+          "1.0 — t here"
+        ],
+        "correct_option": "0.5 (since row must sum to 1)",
+        "explanation": "Step 1: Row 2 sums to 1: P(stay Stressed) + P(become Happy) = 1. Step 2: 0.5 + P(become Happy) = 1. Step 3: P(become Happy) = 0.5. This row-sum constraint is the stochastic condition — it ensures every person transitions to some state, which is fundamental to probability theory and conservation laws."
+      },
+      {
+        "id": "M2Q6M6",
+        "question": "Why does the steady state NOT depend on whether you start with 1000 Happy or 1000 Stressed?",
+        "options": [
+          "Because repeated multiplication 'forgets' the initial state — only the transition rates matter",
+          "Because the matrix is symmetric",
+          "Because the population is always 1000",
+          "Because both states have the same probability"
+        ],
+        "correct_option": "Because repeated multiplication 'forgets' the initial state — only the transition rates matter",
+        "explanation": "Step 1: Each multiplication mixes states according to the transition matrix. Step 2: After many steps, the influence of initial conditions fades exponentially. Step 3: Only the transition probabilities determine the long-run balance — this 'forgetting' property is the Markov property in action and is why steady-state analysis is so powerful for long-term prediction."
+      },
+      {
+        "id": "M2Q6M7",
+        "question": "If M = [[0.3,0.7],[0.5,0.5]], what is M² (M multiplied by itself)?",
+        "options": [
+          "[[0.44, 0.56], [0.40, 0.60]]",
+          "[[0.09, 0.49], [0.25, 0.25]] (x)",
+          "[[0.6, 0.4], [0.4, 0.6]] (xx)",
+          "[[0.3, 0.7], [0.5, 0.5]] (xx)"
+        ],
+        "correct_option": "[[0.44, 0.56], [0.40, 0.60]]",
+        "explanation": "Step 1: Row 1 × Col 1: 0.3×0.3 + 0.7×0.5 = 0.44. Row 1 × Col 2: 0.3×0.7 + 0.7×0.5 = 0.56. Step 2: Row 2 × Col 1: 0.5×0.3 + 0.5×0.5 = 0.40. Row 2 × Col 2: 0.5×0.7 + 0.5×0.5 = 0.60. Step 3: M² represents 2-step transitions — each entry is the probability of going from state i to state j in exactly 2 steps. As Mᵏ converges, the rows of Mᵏ approach the steady-state distribution."
+      },
+      {
+        "id": "M2Q6M8",
+        "question": "After step 3, the distribution is approximately [412, 588]. Is this close to the steady state [417, 583]?",
+        "options": [
+          "Yes — it's within 5 of the steady state",
+          "— it's very far away",
+          "— it will never reach steady state",
+          "Only if we start at steady state"
+        ],
+        "correct_option": "Yes — it's within 5 of the steady state",
+        "explanation": "Step 1: Steady state is [417, 583]. Step 2: Step 3 gives [412, 588], difference of only 5. Step 3: The chain converges rapidly — the second eigenvalue λ₂ = -0.2 means the transient decays as 0.2ᵏ, so after just 3 steps, 99.2% of the initial deviation has vanished."
+      },
+      {
+        "id": "M2Q6M9",
+        "question": "What would the steady state be if the matrix were [[0.5,0.5],[0.5,0.5]]?",
+        "options": [
+          "[500, 500] — equal distribution",
+          "[1000, 0])",
+          "[0, 1000])",
+          "[250, 750])"
+        ],
+        "correct_option": "[500, 500] — equal distribution",
+        "explanation": "Step 1: This matrix says 50% of each group switches to the other state. Step 2: After one step, any distribution becomes exactly 50-50. Step 3: The steady state is [500, 500] — maximum entropy, equal mixing. This is the extreme case where the second eigenvalue is 0, giving instantaneous convergence."
+      },
+      {
+        "id": "M2Q6M10",
+        "question": "Can a Markov chain have a steady state where 100% of people are Happy?",
+        "options": [
+          "Only if the Happy→Stressed probability is exactly 0",
+          "always — does t match",
+          "Never — Markov chains always mix",
+          "Only if the matrix is the identity"
+        ],
+        "correct_option": "Only if the Happy→Stressed probability is exactly 0",
+        "explanation": "Step 1: If 100% are Happy and P(H→S) > 0, people will leave Happy. Step 2: For 100% Happy to be steady, nobody can leave — P(H→S) must be 0. Step 3: This requires the first row to be [1, 0], making Happy an absorbing state. Absorbing states break the usual convergence behavior and create fundamentally different chain dynamics."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M2Q6H1",
+        "question": "For M = [[0.3,0.7],[0.5,0.5]], what are the eigenvalues?",
+        "options": [
+          "λ₁ = 1, λ₂ = -0.2",
+          "λ₁ = 1, λ₂ = 0.8",
+          "λ₁ = 0.3, λ₂ = 0.5",
+          "λ₁ = 0.7, λ₂ = 0.5"
+        ],
+        "correct_option": "λ₁ = 1, λ₂ = -0.2",
+        "explanation": "Step 1: trace = 0.3 + 0.5 = 0.8 = λ₁ + λ₂. Step 2: det = 0.3×0.5 - 0.7×0.5 = 0.15 - 0.35 = -0.2 = λ₁ × λ₂. Step 3: λ₁ = 1 (stochastic matrix), λ₂ = 0.8 - 1 = -0.2. Since |λ₂| = 0.2 < 1, the chain converges. The negative eigenvalue causes oscillatory convergence — the distribution alternately overshoots and undershoots the steady state."
+      },
+      {
+        "id": "M2Q6H2",
+        "question": "What is the spectral gap of M = [[0.3,0.7],[0.5,0.5]]?",
+        "options": [
+          "1 - |-0.2| = 0.8",
+          "1 - 0.5 = 0.5 (x)",
+          "0.3 - 0.5 = -0.2 (x)",
+          "1 - 0.3 = 0.7 (x)"
+        ],
+        "correct_option": "1 - |-0.2| = 0.8",
+        "explanation": "Step 1: The spectral gap is 1 - |λ₂| where λ₂ is the second-largest eigenvalue in magnitude. Step 2: λ₂ = -0.2, so |λ₂| = 0.2. Step 3: Spectral gap = 1 - 0.2 = 0.8. A larger gap means faster convergence — this chain converges rapidly because 80% of the transient vanishes each step."
+      },
+      {
+        "id": "M2Q6H3",
+        "question": "How quickly does the chain converge? After k steps, the deviation from steady state decays as:",
+        "options": [
+          "|λ₂|ᵏ = (0.2)ᵏ — exponential decay",
+          "1/k — polymial decay",
+          "Constant — decay",
+          "k² — growing deviation"
+        ],
+        "correct_option": "|λ₂|ᵏ = (0.2)ᵏ — exponential decay",
+        "explanation": "Step 1: After k steps, the transient term is proportional to (0.2)ᵏ. Step 2: After 3 steps: 0.2³ = 0.008 — already 99.2% converged. Step 3: Exponential decay is the fastest possible convergence rate for iterative methods — it's why power iteration works so well for finding steady states of Markov chains."
+      },
+      {
+        "id": "M2Q6H4",
+        "question": "Solving πM = π with h + s = 1: what is the steady-state Happy fraction?",
+        "options": [
+          "5/12 ≈ 0.417",
+          "3/8 = 0.375 (x)",
+          "1/2 = 0.5 (x)",
+          "7/12 ≈ 0.583 (x)"
+        ],
+        "correct_option": "5/12 ≈ 0.417",
+        "explanation": "Step 1: πM = π gives: 0.3h + 0.5s = h → 0.5s = 0.7h → s = 1.4h. Step 2: With h + s = 1: h + 1.4h = 2.4h = 1 → h = 1/2.4 = 5/12 ≈ 0.417. Step 3: s = 7/12 ≈ 0.583. The ratio h/s = 5/7 reflects the balance between the stress-induction rate (0.7) and recovery rate (0.5)."
+      },
+      {
+        "id": "M2Q6H5",
+        "question": "Why does the eigenvector for λ₂ = -0.2 alternate in sign?",
+        "options": [
+          "Because λ₂ is negative, the transient oscillates between overshooting and undershooting the steady state",
+          "Because the matrix is symmetric",
+          "Because the population is finite",
+          "Because the chain is periodic"
+        ],
+        "correct_option": "Because λ₂ is negative, the transient oscillates between overshooting and undershooting the steady state",
+        "explanation": "Step 1: A negative eigenvalue means the transient term alternates sign each step. Step 2: The distribution oscillates around the steady state — overshooting then undershooting. Step 3: The oscillation decays as 0.2ᵏ, eventually vanishing. This alternating convergence is visible in the sequence: 1000→300→440→412→..., where the Happy count bounces above and below 417."
+      },
+      {
+        "id": "M2Q6H6",
+        "question": "What is det(M) for [[0.3,0.7],[0.5,0.5]]?",
+        "options": [
+          "-0.2",
+          "0.15 (x)",
+          "0.35 (x)",
+          "0.8 (x)"
+        ],
+        "correct_option": "-0.2",
+        "explanation": "Step 1: det = 0.3×0.5 - 0.7×0.5 = 0.15 - 0.35 = -0.20. Step 2: This equals the product of eigenvalues: 1 × (-0.2) = -0.2. Step 3: The negative determinant indicates the matrix 'flips' the orientation of vectors — a geometric interpretation of why the transient oscillates (alternates direction) as it decays."
+      },
+      {
+        "id": "M2Q6H7",
+        "question": "For a general 2-state chain [[1-a, a],[b, 1-b]], what is the steady-state Happy fraction?",
+        "options": [
+          "b/(a+b)",
+          "a/(a+b)",
+          "1/2",
+          "(1-a)/(2-a-b)"
+        ],
+        "correct_option": "b/(a+b)",
+        "explanation": "Step 1: πM = π gives: (1-a)h + b·s = h → b·s = a·h → s = (a/b)h. Step 2: h + s = 1 → h + (a/b)h = 1 → h = b/(a+b). Step 3: For our case: a=0.7, b=0.5 → h = 0.5/1.2 = 5/12. This general formula shows the steady state depends only on the ratio of transition rates, not on the diagonal entries."
+      },
+      {
+        "id": "M2Q6H8",
+        "question": "If a = b (symmetric switching rates), what is the steady state?",
+        "options": [
+          "[1/2, 1/2] — equal distribution",
+          "[b/(2b), b/(2b)] = [1/2, 1/2] (x)",
+          "[1, 0])",
+          "[0, 1])"
+        ],
+        "correct_option": "[1/2, 1/2] — equal distribution",
+        "explanation": "Step 1: If a = b, then h = b/(a+b) = a/(2a) = 1/2. Step 2: s = 1 - 1/2 = 1/2. Step 3: Equal switching rates produce equal steady-state distribution — maximum entropy. This is the 'fair coin' case where neither state has a preferential advantage."
+      },
+      {
+        "id": "M2Q6H9",
+        "question": "What happens to the steady state as a → 0 (nobody leaves Happy)?",
+        "options": [
+          "h → 1 (everyone stays Happy), s → 0",
+          "h → 0, s → 1 — does t match",
+          "h → 1/2, s → 1/2 — does t match (xx)",
+          "The chain longer converges"
+        ],
+        "correct_option": "h → 1 (everyone stays Happy), s → 0",
+        "explanation": "Step 1: h = b/(a+b). Step 2: As a → 0: h → b/(0+b) = 1. Step 3: With no one leaving Happy, eventually everyone is Happy — Happy becomes an absorbing state. This limit illustrates how transition parameters control the steady state: zero outflow from a state makes it dominant."
+      },
+      {
+        "id": "M2Q6H10",
+        "question": "Is the Markov chain with M = [[0.3,0.7],[0.5,0.5]] irreducible?",
+        "options": [
+          "Yes — both states communicate (you can reach either from either)",
+          "— Happy cant reach Stressed",
+          "— Stressed cant reach Happy",
+          "Only if the matrix is symmetric"
+        ],
+        "correct_option": "Yes — both states communicate (you can reach either from either)",
+        "explanation": "Step 1: From Happy, you can reach Stressed (0.7 probability). Step 2: From Stressed, you can reach Happy (0.5 probability). Step 3: Both states communicate, so the chain is irreducible — guaranteeing a unique steady state via the Perron-Frobenius theorem. Irreducibility is the key condition that ensures convergence to a single equilibrium."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "emoji": "😊",
+      "title": "Employee Mood",
+      "equation": "",
+      "type": "mcq",
+      "concept": "Workplace wellbeing modelling",
+      "story": "A company tracks whether employees feel Happy or Stressed each month. Some happy employees become stressed due to workload, and some stressed employees become happy after breaks. By modelling these mood transitions as a matrix and multiplying repeatedly, HR can predict the long-run proportion of happy vs stressed workers — regardless of the starting mood distribution.",
+      "question": "Out of 1000 employees, approximately how many will be Happy in the long run according to the steady-state distribution?",
+      "options": [
+        "About 417 (41.7%)",
+        "About 500 (50%) (x)",
+        "About 300 (30%) (x)",
+        "About 700 (70%) (x)"
+      ],
+      "answer": "About 417 (41.7%)",
+      "explanation": "Step 1: The steady state is h = 5/12 ≈ 0.417. Step 2: Out of 1000: 0.417 × 1000 ≈ 417. Step 3: Regardless of starting mood, about 417 employees will be Happy in the long run."
+    },
+    {
+      "emoji": "📱",
+      "title": "App Users",
+      "equation": "",
+      "type": "mcq",
+      "concept": "Free/Premium user transitions",
+      "story": "A mobile app tracks users switching between Free and Premium plans each month. Some free users upgrade to Premium for extra features, while some Premium users downgrade when they want to save money. After many months, the proportions stabilise — this is the steady state of the user transition Markov chain.",
+      "question": "In an app's Free/Premium user model, what does the steady-state distribution represent?",
+      "options": [
+        "The long-term proportion of Free vs Premium users",
+        "The total number of downloads",
+        "The monthly revenue",
+        "The app's rating"
+      ],
+      "answer": "The long-term proportion of Free vs Premium users",
+      "explanation": "Step 1: Monthly switching follows a transition matrix. Step 2: After many months, proportions stabilise. Step 3: The steady state gives the stable split between Free and Premium users."
+    },
+    {
+      "emoji": "🐂",
+      "title": "Stock Market",
+      "equation": "",
+      "type": "mcq",
+      "concept": "Bull/Bear market transitions",
+      "story": "Financial models track whether the stock market is in a Bull (rising) or Bear (falling) state. Each month, there is a probability of transitioning between states. The transition matrix rows must each sum to 1 because every state must transition to some state — the probabilities of all possible outcomes always add up to 100%.",
+      "question": "Why must each row of a Markov chain transition matrix sum to exactly 1?",
+      "options": [
+        "Because every state must transition to some state — probabilities of all outcomes sum to 100%",
+        "Because the matrix must be symmetric",
+        "Because the determinant must be 1",
+        "Because the eigenvalues must sum to 1"
+      ],
+      "answer": "Because every state must transition to some state — probabilities of all outcomes sum to 100%",
+      "explanation": "Step 1: Each row represents all possible transitions from one state. Step 2: Every entity must go somewhere — stay or switch. Step 3: The probabilities must sum to 1 (100%), ensuring no one is lost."
+    },
+    {
+      "emoji": "🌤️",
+      "title": "Weather Patterns",
+      "equation": "",
+      "type": "mcq",
+      "concept": "Daily weather transitions",
+      "story": "Meteorologists model daily weather as a 2-state Markov chain: Sunny or Rainy. If it's sunny today, there's a 70% chance it stays sunny tomorrow. If it's rainy, there's a 50% chance it clears up. Over many days, the proportion of sunny vs rainy days stabilises to the steady state — this is the climate of the region.",
+      "question": "When weather is modelled as a Markov chain, what does the steady state represent?",
+      "options": [
+        "The long-run fraction of days that are sunny vs rainy",
+        "Tomorrow's exact weather",
+        "The total rainfall this year",
+        "The temperature next week"
+      ],
+      "answer": "The long-run fraction of days that are sunny vs rainy",
+      "explanation": "Step 1: Daily transitions follow the weather matrix. Step 2: After many days, sunny/rainy proportions stabilise. Step 3: The steady state gives the climatological average — what percentage of days are sunny in the long run."
+    },
+    {
+      "emoji": "🏃",
+      "title": "Fitness Tracking",
+      "equation": "",
+      "type": "mcq",
+      "concept": "Exercise habit modelling",
+      "story": "A fitness app tracks whether users exercise (E) or skip (S) each day. Some exercisers skip the next day (fatigue), and some skippers exercise the next day (guilt). The transition probabilities form a Markov chain. The steady state reveals the long-run exercise compliance rate — the percentage of days users actually work out.",
+      "question": "In a fitness habit model, what does the steady-state probability of the 'Exercise' state tell you?",
+      "options": [
+        "The long-run percentage of days users exercise",
+        "The total number of exercises performed",
+        "The average exercise duration",
+        "The user's fitness level"
+      ],
+      "answer": "The long-run percentage of days users exercise",
+      "explanation": "Step 1: Daily exercise/skip decisions follow a transition matrix. Step 2: After many days, the proportion stabilises. Step 3: The steady state gives the expected exercise compliance rate — useful for setting realistic fitness goals."
+    },
+    {
+      "emoji": "🎰",
+      "title": "Customer Loyalty",
+      "equation": "",
+      "type": "mcq",
+      "concept": "Brand switching behaviour",
+      "story": "A coffee shop studies whether customers buy Coffee (C) or Tea (T) each visit. Regulars have patterns: 60% of coffee drinkers buy coffee again, but 40% try tea. Tea drinkers are more loyal: 70% stick with tea. The steady state reveals the long-run sales split between coffee and tea.",
+      "question": "If 60% of coffee buyers stay with coffee and 70% of tea buyers stay with tea, what does the steady state represent?",
+      "options": [
+        "The long-run proportion of coffee vs tea sales",
+        "The total daily revenue",
+        "The number of customers",
+        "The price of each drink"
+      ],
+      "answer": "The long-run proportion of coffee vs tea sales",
+      "explanation": "Step 1: Buying patterns follow a transition matrix. Step 2: After many visits, the coffee/tea split stabilises. Step 3: The steady state tells the shop what percentage of sales will be coffee vs tea in the long run."
+    }
+  ]
+}

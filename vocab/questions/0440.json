@@ -1,0 +1,15 @@
+{
+  "id": 440,
+  "word": "Unload",
+  "question": "Unload",
+  "options": [
+    "Designed to impress or attract",
+    "To impart knowledge or skill to someone",
+    "Causing excitement and fear",
+    "To remove goods from a vehicle"
+  ],
+  "answerOption": "D",
+  "answerText": "To remove goods from a vehicle",
+  "difficulty": "easy",
+  "sourceFile": "0440.json"
+}

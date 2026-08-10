@@ -1,0 +1,15 @@
+{
+  "id": 2497,
+  "word": "Aerodynamist",
+  "question": "Aerodynamist",
+  "options": [
+    "The process of making pure",
+    "The action of making larger",
+    "Saying the same thing twice in different words",
+    "One who studies aerodynamics"
+  ],
+  "answerOption": "D",
+  "answerText": "One who studies aerodynamics",
+  "difficulty": "hard",
+  "sourceFile": "2497.json"
+}

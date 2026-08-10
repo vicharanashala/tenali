@@ -1,0 +1,15 @@
+{
+  "id": 428,
+  "word": "Detach",
+  "question": "Detach",
+  "options": [
+    "Able to adjust to new conditions",
+    "To achieve or realize something desired",
+    "Absolutely necessary or important",
+    "To separate something from something else"
+  ],
+  "answerOption": "D",
+  "answerText": "To separate something from something else",
+  "difficulty": "easy",
+  "sourceFile": "0428.json"
+}

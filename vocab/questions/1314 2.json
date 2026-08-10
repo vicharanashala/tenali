@@ -1,0 +1,15 @@
+{
+  "id": 1314,
+  "word": "Antipathy",
+  "question": "Antipathy",
+  "options": [
+    "Sarcastic in a scathing and bitter way",
+    "A deep-seated feeling of dislike",
+    "Excessively complicated and detailed",
+    "Using high-flown or bombastic language"
+  ],
+  "answerOption": "B",
+  "answerText": "A deep-seated feeling of dislike",
+  "difficulty": "hard",
+  "sourceFile": "1314.json"
+}

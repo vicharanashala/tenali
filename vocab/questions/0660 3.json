@@ -1,0 +1,15 @@
+{
+  "id": 660,
+  "word": "Enormous",
+  "question": "Enormous",
+  "options": [
+    "To take the place of something",
+    "Restricted within limits",
+    "To discover the presence of something hidden",
+    "Very large in size or quantity"
+  ],
+  "answerOption": "D",
+  "answerText": "Very large in size or quantity",
+  "difficulty": "easy",
+  "sourceFile": "0660.json"
+}

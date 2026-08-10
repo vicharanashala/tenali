@@ -1,0 +1,15 @@
+{
+  "id": 3203,
+  "word": "Aberration",
+  "question": "Aberration",
+  "options": [
+    "A deviation from normal pattern",
+    "Relating to spontaneous generation",
+    "State of being able",
+    "Rod-shaped abyss organism"
+  ],
+  "answerOption": "A",
+  "answerText": "A deviation from normal pattern",
+  "difficulty": "extra-hard",
+  "sourceFile": "3203.json"
+}

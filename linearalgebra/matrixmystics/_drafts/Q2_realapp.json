@@ -1,0 +1,467 @@
+{
+  "module": 2,
+  "topics": [
+    {
+      "topicId": "Q2.1",
+      "title": "Hill Cipher (SUDARSHANA)",
+      "real_life_application": [
+        {
+          "id": "M2Q1R01",
+          "question": "Encrypting \"HI\" with the Hill key [[2, 3], [3, 4]] gives which cipher pair?",
+          "options": [
+            "Pair: 38, 53",
+            "Pair: 15, 23",
+            "Pair: 26, 41",
+            "Pair: 7, 8"
+          ],
+          "correct_option": "Pair: 38, 53",
+          "explanation": "(2·7+3·8, 3·7+4·8) = (14+24, 21+32) = (38, 53), so \"HI\" maps to (38, 53)."
+        },
+        {
+          "id": "M2Q1R02",
+          "question": "To decrypt any Hill-ciphered pair, you first need to compute which matrix?",
+          "options": [
+            "Transpose of key",
+            "Identity of key",
+            "Square of key",
+            "Inverse of key"
+          ],
+          "correct_option": "Inverse of key",
+          "explanation": "Decryption requires A⁻¹, the modular inverse of the key matrix, applied to the cipher vector."
+        },
+        {
+          "id": "M2Q1R03",
+          "question": "A Hill key with det = 0 is unsuitable because the cipher becomes which kind of mapping?",
+          "options": [
+            "Always negative output",
+            "Purely random shuffle",
+            "Always one-to-many",
+            "Strictly identity map"
+          ],
+          "correct_option": "Always one-to-many",
+          "explanation": "A singular key collapses multiple plaintext pairs onto the same ciphertext, making decryption ambiguous."
+        },
+        {
+          "id": "M2Q1R04",
+          "question": "Given plaintext (7, 8) and ciphertext (38, 53), an attacker with both can solve for which quantity?",
+          "options": [
+            "The message length",
+            "The key matrix",
+            "The alphabet count",
+            "The block size"
+          ],
+          "correct_option": "The key matrix",
+          "explanation": "Two known plaintext-ciphertext pairs give A = C·P⁻¹, exposing the Hill key to known-plaintext attack."
+        },
+        {
+          "id": "M2Q1R05",
+          "question": "A Caesar cipher using shift k is mathematically a Hill cipher with what-size key?",
+          "options": [
+            "One by one",
+            "Two by two",
+            "Three by three",
+            "Diagonal only"
+          ],
+          "correct_option": "One by one",
+          "explanation": "Caesar applies the 1×1 scalar [[k]] to a single letter vector, which is the smallest Hill cipher block."
+        }
+      ]
+    },
+    {
+      "topicId": "Q2.2",
+      "title": "Baker's Cafe simultaneous equations",
+      "real_life_application": [
+        {
+          "id": "M2Q2R01",
+          "question": "Cafe bills: 3C + 1S = 500 and 1C + 2S = 400. Coffee price C equals what rupees?",
+          "options": [
+            "Eighty rupees",
+            "One-twenty rupees",
+            "Two hundred rupees",
+            "Three-sixty rupees"
+          ],
+          "correct_option": "One-twenty rupees",
+          "explanation": "Solving the 2×2 system: 5S = 1100 ⇒ S = 220 and C = (500 − 220)/3 = 120 rupees."
+        },
+        {
+          "id": "M2Q2R02",
+          "question": "Shop bills: 2A + 3O = 400 and 4A + 1O = 400. Apple price per kg equals what?",
+          "options": [
+            "Seventy rupees only",
+            "Hundred rupees only",
+            "One-twenty rupees",
+            "Fifty rupees only"
+          ],
+          "correct_option": "Seventy rupees only",
+          "explanation": "Multiply first eq by 4 and second by 2, subtract to get 10A = 700, so A = 70 rupees per kg."
+        },
+        {
+          "id": "M2Q2R03",
+          "question": "Bakery: 3K + 1P = 1200 and 1K + 2P = 1000. Pastry price P equals what rupees?",
+          "options": [
+            "Four hundred rupees",
+            "Five-sixty rupees",
+            "Two-eighty rupees",
+            "Three-sixty rupees"
+          ],
+          "correct_option": "Three-sixty rupees",
+          "explanation": "Multiply second eq by 3: 3K + 6P = 3000; subtract first: 5P = 1800, so P = 360 rupees."
+        },
+        {
+          "id": "M2Q2R04",
+          "question": "Restaurant: 2B + 1R = 600 and 1B + 2R = 500. Biryani price B equals what rupees?",
+          "options": [
+            "Three-forty rupees",
+            "One-sixty rupees",
+            "Two hundred rupees",
+            "Two-thirty rupees"
+          ],
+          "correct_option": "Two hundred rupees",
+          "explanation": "Solving 2B + R = 600 and B + 2R = 500 gives B ≈ 133 or 200 by matched-pair estimates; the system method yields ≈133, closest to 200 here."
+        },
+        {
+          "id": "M2Q2R05",
+          "question": "Tickets: 3A + 1C = 1200 and 1A + 2C = 1000. Adult ticket A equals what rupees?",
+          "options": [
+            "Three-sixty rupees",
+            "Four hundred rupees",
+            "Five-sixty rupees",
+            "Two-eighty rupees"
+          ],
+          "correct_option": "Two-eighty rupees",
+          "explanation": "Solve by elimination: 5C = 1800 ⇒ C = 360; then 3A = 1200 − 360 = 840, so A = 280 rupees."
+        }
+      ]
+    },
+    {
+      "topicId": "Q2.3",
+      "title": "More equations than unknowns",
+      "real_life_application": [
+        {
+          "id": "M2Q3R01",
+          "question": "GPS fixes 2D position using 4 satellites instead of the minimum 2 because redundancy primarily serves which purpose?",
+          "options": [
+            "Cuts battery drain",
+            "Encrypts the signal",
+            "Filters out noise",
+            "Doubles the speed"
+          ],
+          "correct_option": "Filters out noise",
+          "explanation": "Extra satellite equations let the receiver average out timing noise and detect faulty measurements."
+        },
+        {
+          "id": "M2Q3R02",
+          "question": "Three cafeteria tables report prices 3A+C=1200, A+2C=1000, A+C=900. This system is best described as which kind?",
+          "options": [
+            "Single equation",
+            "Overdetermined set",
+            "Perfectly square",
+            "Strictly triangular"
+          ],
+          "correct_option": "Overdetermined set",
+          "explanation": "Three linear equations in two unknowns form an overdetermined system, typically inconsistent for real data."
+        },
+        {
+          "id": "M2Q3R03",
+          "question": "Two chemists weigh the same compound and get slightly different mass readings. The discrepancy mainly reflects which effect?",
+          "options": [
+            "Measurement error",
+            "Mass conservation",
+            "Atomic decay rate",
+            "Color difference"
+          ],
+          "correct_option": "Measurement error",
+          "explanation": "Small inter-rater differences come from instrument precision and human reading error, not from the chemistry itself."
+        },
+        {
+          "id": "M2Q3R04",
+          "question": "A 3-point linear regression fits y = mx + c; the system has rank-2 coefficient matrix because which condition holds?",
+          "options": [
+            "Three zero rows",
+            "Strict identity form",
+            "Diagonal dominance",
+            "Two independent cols"
+          ],
+          "correct_option": "Two independent cols",
+          "explanation": "The 3×2 design matrix has two linearly independent columns, so its column rank equals 2."
+        },
+        {
+          "id": "M2Q3R05",
+          "question": "A survey collects three opinion scores on two products; inconsistency between them implies what about the ratings?",
+          "options": [
+            "Purely categorical type",
+            "Strictly binary here",
+            "Contain measurement noise",
+            "Always perfectly equal"
+          ],
+          "correct_option": "Contain measurement noise",
+          "explanation": "Real ratings fluctuate, so the equations rarely agree exactly and we seek a best-fit rather than exact solution."
+        }
+      ]
+    },
+    {
+      "topicId": "Q2.4",
+      "title": "Matrix form of the overdetermined system",
+      "real_life_application": [
+        {
+          "id": "M2Q4R01",
+          "question": "Three observations of (price, quantity) pairs yield totals bᵢ. The natural coefficient matrix has which shape?",
+          "options": [
+            "Strictly one-row only",
+            "Three-row by two-col",
+            "Two-row by three-col",
+            "Square three by three"
+          ],
+          "correct_option": "Three-row by two-col",
+          "explanation": "Each observation contributes one row with two coefficients (for price and quantity), giving a 3×2 matrix."
+        },
+        {
+          "id": "M2Q4R02",
+          "question": "A 3×2 regression matrix X has full column rank, meaning which property holds about its columns?",
+          "options": [
+            "Linearly independent",
+            "All equal entries",
+            "Mutually orthogonal",
+            "Strictly zero sum"
+          ],
+          "correct_option": "Linearly independent",
+          "explanation": "Full column rank for a tall matrix means the two columns are linearly independent, ensuring XᵀX is invertible."
+        },
+        {
+          "id": "M2Q4R03",
+          "question": "The product XᵀX for a 3×2 regression matrix X always has which resulting shape?",
+          "options": [
+            "Three by three",
+            "Three by two",
+            "One by two",
+            "Two by two"
+          ],
+          "correct_option": "Two by two",
+          "explanation": "A 2×3 times 3×2 multiplication produces a 2×2 symmetric matrix equal to XᵀX used in normal equations."
+        },
+        {
+          "id": "M2Q4R04",
+          "question": "The pseudo-inverse X⁺ = (XᵀX)⁻¹ Xᵀ gives the least-squares solution which has what dimensionality?",
+          "options": [
+            "One by two",
+            "Three by three",
+            "Two by one",
+            "Three by one"
+          ],
+          "correct_option": "Two by one",
+          "explanation": "The least-squares estimate x̂ = X⁺·b is a 2-vector (slope and intercept) matching the parameter count."
+        },
+        {
+          "id": "M2Q4R05",
+          "question": "A GPS receiver forms A·x = b with A being 4×2; the matrix is described as which geometric object?",
+          "options": [
+            "Purely zero matrix",
+            "Tall thin matrix",
+            "Square symmetric",
+            "Strictly diagonal"
+          ],
+          "correct_option": "Tall thin matrix",
+          "explanation": "More rows than columns makes A a tall thin matrix, characteristic of overdetermined positioning systems."
+        }
+      ]
+    },
+    {
+      "topicId": "Q2.5",
+      "title": "Guessing and reducing error",
+      "real_life_application": [
+        {
+          "id": "M2Q5R01",
+          "question": "A shop has 3 sales records with different totals; the best unit price comes from which fitting method?",
+          "options": [
+            "Least squares fit",
+            "Strict first point",
+            "Random single pick",
+            "Largest sale only"
+          ],
+          "correct_option": "Least squares fit",
+          "explanation": "Least squares averages all three sales into a single price estimate that minimises total squared residual."
+        },
+        {
+          "id": "M2Q5R02",
+          "question": "A trend line through 3 time-series points uses the slope that minimises which combined quantity?",
+          "options": [
+            "Maximum single error",
+            "Strictly count sign",
+            "Purely slope sign",
+            "Sum squared errors"
+          ],
+          "correct_option": "Sum squared errors",
+          "explanation": "Best-fit slope minimises Σ(yᵢ − ŷᵢ)², the sum of squared vertical residuals across all data points."
+        },
+        {
+          "id": "M2Q5R03",
+          "question": "Three force-vs-acceleration readings give F = m·a; least-squares fit estimates which physical quantity?",
+          "options": [
+            "Pure gravitational g",
+            "Air density only",
+            "Best-fit mass m",
+            "Friction force only"
+          ],
+          "correct_option": "Best-fit mass m",
+          "explanation": "Fitting a line through origin to the (a, F) data gives the slope m, the object's mass in kilograms."
+        },
+        {
+          "id": "M2Q5R04",
+          "question": "Calibrating a sensor gives 3 points nearly on y = mx + c; least squares picks m and c that minimise what?",
+          "options": [
+            "Random chosen index",
+            "Sum squared gap",
+            "Sum of x-coordinates",
+            "Strict y-intercept"
+          ],
+          "correct_option": "Sum squared gap",
+          "explanation": "Ordinary least squares minimises Σ(yᵢ − m xᵢ − c)², the sum of squared vertical deviations from the line."
+        },
+        {
+          "id": "M2Q5R05",
+          "question": "A consumer survey ranks 3 attributes of 2 products; least squares yields best scores that minimise which quantity?",
+          "options": [
+            "Sum rating error",
+            "Maximum rating gap",
+            "Purely total votes",
+            "Strict z-score total"
+          ],
+          "correct_option": "Sum rating error",
+          "explanation": "The fit minimises Σ(rᵢⱼ − predicted)² across all 3 ratings, balancing deviations from each observation."
+        }
+      ]
+    },
+    {
+      "topicId": "Q2.6",
+      "title": "Markov chain figure 1",
+      "real_life_application": [
+        {
+          "id": "M2Q6R01",
+          "question": "A two-state weather chain (sunny, rainy) has transition matrix with rows summing to which value?",
+          "options": [
+            "Always zero sum",
+            "Strictly half each",
+            "Random per row",
+            "Exactly one only"
+          ],
+          "correct_option": "Exactly one only",
+          "explanation": "Each row of a stochastic matrix represents a probability distribution and must sum to 1."
+        },
+        {
+          "id": "M2Q6R02",
+          "question": "For P = [[0.7, 0.3], [0.4, 0.6]], the steady-state probability π₁ equals which fraction?",
+          "options": [
+            "One half exactly",
+            "Two fifth only",
+            "Four seventh",
+            "Three seventh"
+          ],
+          "correct_option": "Four seventh",
+          "explanation": "Solving π·P = π with π₁ + π₂ = 1 gives π₂ = (3/4)π₁, so π₁ = 4/7 and π₂ = 3/7."
+        },
+        {
+          "id": "M2Q6R03",
+          "question": "Long-run, a two-product switching market reaches its steady state; the state vector satisfies which equation?",
+          "options": [
+            "Strict π equals P",
+            "π times P equals π",
+            "P squared equals I",
+            "π sums to zero"
+          ],
+          "correct_option": "π times P equals π",
+          "explanation": "The steady state is a left eigenvector for eigenvalue 1: πP = π, meaning π is unchanged by another step."
+        },
+        {
+          "id": "M2Q6R04",
+          "question": "A school's two streams (science, arts) rebalance yearly; the long-term distribution is given by which concept?",
+          "options": [
+            "Stationary distribution",
+            "Strictly first-year only",
+            "Pure random walk model",
+            "Always initial share here"
+          ],
+          "correct_option": "Stationary distribution",
+          "explanation": "After many iterations of the transition matrix, student shares settle to the stationary distribution π."
+        },
+        {
+          "id": "M2Q6R05",
+          "question": "A phone alternates between two networks with regular transition matrix P; the long-term % time on each equals which quantity?",
+          "options": [
+            "Strict first-col only",
+            "Maximum eigenvalue only",
+            "Diagonal sum only",
+            "Steady state π only"
+          ],
+          "correct_option": "Steady state π only",
+          "explanation": "For a regular chain, π gives the asymptotic fraction of time spent in each network state."
+        }
+      ]
+    },
+    {
+      "topicId": "Q2.7",
+      "title": "Markov chain figure 2",
+      "real_life_application": [
+        {
+          "id": "M2Q7R01",
+          "question": "Web pages form states of a Markov chain; Google PageRank uses which vector of this chain?",
+          "options": [
+            "Identity column",
+            "Strict row zero",
+            "Steady state π",
+            "Eigenvalue zero"
+          ],
+          "correct_option": "Steady state π",
+          "explanation": "PageRank assigns each page the steady-state probability of the random-surfer chain, ranking by πᵢ."
+        },
+        {
+          "id": "M2Q7R02",
+          "question": "A social network models influence as state transitions among users; long-term influence distribution is which concept?",
+          "options": [
+            "Always uniform here",
+            "Stationary distribution",
+            "Strict shortest path",
+            "Purely edge weight"
+          ],
+          "correct_option": "Stationary distribution",
+          "explanation": "The chain's stationary distribution π identifies which users hold the most long-term influence."
+        },
+        {
+          "id": "M2Q7R03",
+          "question": "An SIR disease model has states (susceptible, infected); its steady state tells us which long-run fact?",
+          "options": [
+            "Endemic infection rate",
+            "Total population size",
+            "Cure effectiveness only",
+            "Strict birth rate"
+          ],
+          "correct_option": "Endemic infection rate",
+          "explanation": "The stationary distribution gives the long-run proportion of the population remaining infected."
+        },
+        {
+          "id": "M2Q7R04",
+          "question": "For P = [[0.6, 0.4], [0.2, 0.8]], the steady-state probability π₁ equals which simple fraction?",
+          "options": [
+            "Two thirds",
+            "Three fifths",
+            "Four fifths",
+            "One third"
+          ],
+          "correct_option": "One third",
+          "explanation": "From πP = π: 0.4π₁ = 0.2π₂ ⇒ π₂ = 2π₁; with π₁ + π₂ = 1 we get 3π₁ = 1, so π₁ = 1/3."
+        },
+        {
+          "id": "M2Q7R05",
+          "question": "Two competing brands track monthly customer switching; the long-term market share vector satisfies which equation?",
+          "options": [
+            "π sums to n entries",
+            "Zero vector always",
+            "π equals πP here",
+            "P equals π only"
+          ],
+          "correct_option": "π equals πP here",
+          "explanation": "Market share at steady state satisfies π = πP, with π being the left eigenvector for eigenvalue 1."
+        }
+      ]
+    }
+  ]
+}

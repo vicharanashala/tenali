@@ -1,0 +1,15 @@
+{
+  "id": 1483,
+  "word": "Reverie",
+  "question": "Reverie",
+  "options": [
+    "Divination using a rod or wand",
+    "Relating to the ocean at great depths",
+    "A state of being pleasantly lost in thought",
+    "A system to assist the memory"
+  ],
+  "answerOption": "C",
+  "answerText": "A state of being pleasantly lost in thought",
+  "difficulty": "extra-hard",
+  "sourceFile": "1483.json"
+}

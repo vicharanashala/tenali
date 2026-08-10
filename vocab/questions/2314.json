@@ -1,0 +1,15 @@
+{
+  "id": 2314,
+  "word": "Adversaria",
+  "question": "Adversaria",
+  "options": [
+    "Relating to air navigation",
+    "To move forward or progress",
+    "A notebook for recording observations",
+    "Philosophy emphasizing individual existence"
+  ],
+  "answerOption": "C",
+  "answerText": "A notebook for recording observations",
+  "difficulty": "hard",
+  "sourceFile": "2314.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 978,
+  "word": "Capricious",
+  "question": "Capricious",
+  "options": [
+    "Full of energy and enthusiasm",
+    "Diligent and hardworking",
+    "Given to sudden changes of mood",
+    "Shaped like a triangle"
+  ],
+  "answerOption": "C",
+  "answerText": "Given to sudden changes of mood",
+  "difficulty": "easy",
+  "sourceFile": "0978.json"
+}

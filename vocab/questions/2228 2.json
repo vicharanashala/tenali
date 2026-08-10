@@ -1,0 +1,15 @@
+{
+  "id": 2228,
+  "word": "AEROSOL",
+  "question": "AEROSOL",
+  "options": [
+    "Iron meteorite from space",
+    "Relating to aircraft operation",
+    "Instrument measuring air properties",
+    "A substance sprayed as fine mist"
+  ],
+  "answerOption": "D",
+  "answerText": "A substance sprayed as fine mist",
+  "difficulty": "hard",
+  "sourceFile": "2228.json"
+}

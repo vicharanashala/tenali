@@ -1,0 +1,15 @@
+{
+  "id": 845,
+  "word": "Itchy",
+  "question": "Itchy",
+  "options": [
+    "Causing an urge to scratch",
+    "Insufficient for the demand; in short supply",
+    "Possessing great power or strength",
+    "To give an account of something in words"
+  ],
+  "answerOption": "A",
+  "answerText": "Causing an urge to scratch",
+  "difficulty": "easy",
+  "sourceFile": "0845.json"
+}

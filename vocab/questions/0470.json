@@ -1,0 +1,15 @@
+{
+  "id": 470,
+  "word": "Recite",
+  "question": "Recite",
+  "options": [
+    "To pay out money for goods or services",
+    "Remaining true to a person or belief",
+    "To take part in something",
+    "To repeat aloud from memory"
+  ],
+  "answerOption": "D",
+  "answerText": "To repeat aloud from memory",
+  "difficulty": "easy",
+  "sourceFile": "0470.json"
+}

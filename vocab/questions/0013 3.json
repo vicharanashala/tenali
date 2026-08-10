@@ -1,0 +1,15 @@
+{
+  "id": 13,
+  "word": "Dirty",
+  "question": "Dirty",
+  "options": [
+    "To find something for the first time",
+    "To cause a liquid to flow over the edge",
+    "Covered or marked with an unclean substance",
+    "Possessing great power or strength"
+  ],
+  "answerOption": "C",
+  "answerText": "Covered or marked with an unclean substance",
+  "difficulty": "easy",
+  "sourceFile": "0013.json"
+}

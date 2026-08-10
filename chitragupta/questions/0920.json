@@ -1,0 +1,14 @@
+{
+  "id": 920,
+  "question": "Which country is associated with the city of Wellington?",
+  "options": [
+    "Australia",
+    "New Zealand",
+    "Canada",
+    "Fiji"
+  ],
+  "answerOption": "B",
+  "answerText": "New Zealand",
+  "genre": "geography",
+  "sourceFile": "0920.json"
+}

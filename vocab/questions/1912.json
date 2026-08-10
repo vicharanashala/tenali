@@ -1,0 +1,15 @@
+{
+  "id": 1912,
+  "word": "Self-serving",
+  "question": "Self-serving",
+  "options": [
+    "A feeling of embarrassment or disappointment",
+    "Done to benefit oneself",
+    "Causing a physical or emotional shock",
+    "To take to the person's address"
+  ],
+  "answerOption": "B",
+  "answerText": "Done to benefit oneself",
+  "difficulty": "medium",
+  "sourceFile": "1912.json"
+}

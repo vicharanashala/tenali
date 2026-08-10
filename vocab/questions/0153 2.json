@@ -1,0 +1,15 @@
+{
+  "id": 153,
+  "word": "Finish",
+  "question": "Finish",
+  "options": [
+    "To impose a penalty for wrongdoing",
+    "To want something to happen and think it possible",
+    "To bring something to an end",
+    "Going in a slanting direction"
+  ],
+  "answerOption": "C",
+  "answerText": "To bring something to an end",
+  "difficulty": "easy",
+  "sourceFile": "0153.json"
+}

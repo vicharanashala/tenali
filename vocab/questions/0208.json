@@ -1,0 +1,15 @@
+{
+  "id": 208,
+  "word": "Increase",
+  "question": "Increase",
+  "options": [
+    "Lacking in quantity or quality",
+    "To say sorry for doing something wrong",
+    "To become greater in size or amount",
+    "Completely different in every way"
+  ],
+  "answerOption": "C",
+  "answerText": "To become greater in size or amount",
+  "difficulty": "easy",
+  "sourceFile": "0208.json"
+}

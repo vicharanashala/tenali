@@ -1,0 +1,15 @@
+{
+  "id": 2346,
+  "word": "Advisory",
+  "question": "Advisory",
+  "options": [
+    "Providing advice or recommendations",
+    "Unable to be prevented or avoided",
+    "Relating to pleasant aspects of the countryside",
+    "Deliberate and unprovoked cruelty"
+  ],
+  "answerOption": "A",
+  "answerText": "Providing advice or recommendations",
+  "difficulty": "hard",
+  "sourceFile": "2346.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 909,
+  "word": "Gratitude",
+  "question": "Gratitude",
+  "options": [
+    "A sharing of characteristics or origins",
+    "The quality of being thankful",
+    "Not friendly or interested; distant",
+    "Of imposing height; noble in character"
+  ],
+  "answerOption": "B",
+  "answerText": "The quality of being thankful",
+  "difficulty": "medium",
+  "sourceFile": "0909.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 523,
+  "question": "What is the chemical symbol for nickel?",
+  "options": [
+    "Nl",
+    "Nk",
+    "Ni",
+    "Ne"
+  ],
+  "answerOption": "C",
+  "answerText": "Ni",
+  "genre": "mixed",
+  "sourceFile": "0523.json"
+}

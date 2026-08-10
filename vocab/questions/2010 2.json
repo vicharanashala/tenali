@@ -1,0 +1,15 @@
+{
+  "id": 2010,
+  "word": "Adzed",
+  "question": "Adzed",
+  "options": [
+    "To use ambiguous language to deceive",
+    "Saying the same thing twice in different words",
+    "In an enigmatic manner",
+    "Shaped with an adze"
+  ],
+  "answerOption": "D",
+  "answerText": "Shaped with an adze",
+  "difficulty": "hard",
+  "sourceFile": "2010.json"
+}

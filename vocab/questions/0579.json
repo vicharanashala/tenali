@@ -1,0 +1,15 @@
+{
+  "id": 579,
+  "word": "Pessimistic",
+  "question": "Pessimistic",
+  "options": [
+    "Habitually or typically so",
+    "Expecting the worst possible outcome",
+    "Trustworthy and reliable",
+    "To tell a story or give an account"
+  ],
+  "answerOption": "B",
+  "answerText": "Expecting the worst possible outcome",
+  "difficulty": "easy",
+  "sourceFile": "0579.json"
+}

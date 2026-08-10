@@ -1,0 +1,15 @@
+{
+  "id": 1144,
+  "word": "Disdain",
+  "question": "Disdain",
+  "options": [
+    "In a determined manner",
+    "To make disorderly or insane",
+    "The feeling that someone is unworthy",
+    "Ready or likely to fight"
+  ],
+  "answerOption": "C",
+  "answerText": "The feeling that someone is unworthy",
+  "difficulty": "medium",
+  "sourceFile": "1144.json"
+}

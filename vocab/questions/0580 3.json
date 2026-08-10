@@ -1,0 +1,15 @@
+{
+  "id": 580,
+  "word": "Realistic",
+  "question": "Realistic",
+  "options": [
+    "Having a practical view of what is achievable",
+    "Feeling strong displeasure or hostility",
+    "Full of unnecessary things creating disorder",
+    "Exceptionally good; remarkable"
+  ],
+  "answerOption": "A",
+  "answerText": "Having a practical view of what is achievable",
+  "difficulty": "easy",
+  "sourceFile": "0580.json"
+}

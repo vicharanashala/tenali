@@ -1,0 +1,15 @@
+{
+  "id": 1498,
+  "word": "Charivari",
+  "question": "Charivari",
+  "options": [
+    "The practice of burying someone alive",
+    "A surgical connection between the liver and intestine",
+    "A noisy mock serenade; cacophonous celebration",
+    "Relating to the ocean at great depths"
+  ],
+  "answerOption": "C",
+  "answerText": "A noisy mock serenade; cacophonous celebration",
+  "difficulty": "extra-hard",
+  "sourceFile": "1498.json"
+}

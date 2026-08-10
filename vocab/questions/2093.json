@@ -1,0 +1,15 @@
+{
+  "id": 2093,
+  "word": "Gauche",
+  "question": "Gauche",
+  "options": [
+    "Carrying or bearing air",
+    "A typical example or pattern of something",
+    "Lacking ease or grace; unsophisticated",
+    "Building a nest in the air"
+  ],
+  "answerOption": "C",
+  "answerText": "Lacking ease or grace; unsophisticated",
+  "difficulty": "hard",
+  "sourceFile": "2093.json"
+}

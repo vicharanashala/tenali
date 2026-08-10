@@ -1,0 +1,15 @@
+{
+  "id": 944,
+  "word": "Tranquil",
+  "question": "Tranquil",
+  "options": [
+    "Fluent and persuasive in speaking or writing",
+    "Characterized by peculiar or unexpected traits",
+    "To make something ineffective; to nullify",
+    "Free from disturbance; calm"
+  ],
+  "answerOption": "D",
+  "answerText": "Free from disturbance; calm",
+  "difficulty": "medium",
+  "sourceFile": "0944.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 932,
+  "word": "Jagged",
+  "question": "Jagged",
+  "options": [
+    "To fail to care for something properly",
+    "Uneven with rough sharp edges",
+    "To capture or seize something",
+    "To connect or link things together"
+  ],
+  "answerOption": "B",
+  "answerText": "Uneven with rough sharp edges",
+  "difficulty": "easy",
+  "sourceFile": "0932.json"
+}

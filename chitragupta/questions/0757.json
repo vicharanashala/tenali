@@ -1,0 +1,14 @@
+{
+  "id": 757,
+  "question": "Which country is associated with the city of Quito?",
+  "options": [
+    "Ecuador",
+    "Peru",
+    "Bolivia",
+    "Chile"
+  ],
+  "answerOption": "A",
+  "answerText": "Ecuador",
+  "genre": "geography",
+  "sourceFile": "0757.json"
+}

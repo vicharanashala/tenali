@@ -1,0 +1,15 @@
+{
+  "id": 2492,
+  "word": "Ineluctable",
+  "question": "Ineluctable",
+  "options": [
+    "An instrument like a barometer",
+    "Unable to be avoided or escaped",
+    "Extracting metal from ore by heating",
+    "Organisms floating in air"
+  ],
+  "answerOption": "B",
+  "answerText": "Unable to be avoided or escaped",
+  "difficulty": "hard",
+  "sourceFile": "2492.json"
+}

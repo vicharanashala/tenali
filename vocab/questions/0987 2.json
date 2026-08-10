@@ -1,0 +1,15 @@
+{
+  "id": 987,
+  "word": "Paradox",
+  "question": "Paradox",
+  "options": [
+    "Very great or intense; deep",
+    "A seemingly contradictory statement",
+    "To actively break the terms of a law",
+    "To care for and encourage growth"
+  ],
+  "answerOption": "B",
+  "answerText": "A seemingly contradictory statement",
+  "difficulty": "medium",
+  "sourceFile": "0987.json"
+}

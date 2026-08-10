@@ -1,0 +1,14 @@
+{
+  "id": 240,
+  "question": "Which is the official residence of the President of India?",
+  "options": [
+    "Parliament House",
+    "Rashtrapati Bhavan",
+    "Raj Bhavan",
+    "North Block"
+  ],
+  "answerOption": "B",
+  "answerText": "Rashtrapati Bhavan",
+  "genre": "india-gk",
+  "sourceFile": "0240.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2413,
+  "word": "Ethereal",
+  "question": "Ethereal",
+  "options": [
+    "An alignment of three celestial objects",
+    "A plant adapted to dry conditions",
+    "One who abjures",
+    "Extremely delicate and light; heavenly"
+  ],
+  "answerOption": "D",
+  "answerText": "Extremely delicate and light; heavenly",
+  "difficulty": "extra-hard",
+  "sourceFile": "2413.json"
+}

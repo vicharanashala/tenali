@@ -1,0 +1,15 @@
+{
+  "id": 1222,
+  "word": "Paramount",
+  "question": "Paramount",
+  "options": [
+    "More important than anything else",
+    "To produce or provide a natural product",
+    "Preoccupied with oneself",
+    "Lacking energy or enthusiasm"
+  ],
+  "answerOption": "A",
+  "answerText": "More important than anything else",
+  "difficulty": "medium",
+  "sourceFile": "1222.json"
+}

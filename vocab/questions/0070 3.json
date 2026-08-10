@@ -1,0 +1,15 @@
+{
+  "id": 70,
+  "word": "Generous",
+  "question": "Generous",
+  "options": [
+    "To perceive the scent of something",
+    "Willing to give more than is expected",
+    "To cause strong feelings of enthusiasm",
+    "Not showing or feeling nervousness or anger"
+  ],
+  "answerOption": "B",
+  "answerText": "Willing to give more than is expected",
+  "difficulty": "easy",
+  "sourceFile": "0070.json"
+}

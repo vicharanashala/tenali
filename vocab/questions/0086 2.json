@@ -1,0 +1,15 @@
+{
+  "id": 86,
+  "word": "Deep",
+  "question": "Deep",
+  "options": [
+    "To take apart the pieces of something",
+    "To give a portion of something to others",
+    "Easily broken or damaged",
+    "Extending far down from the top"
+  ],
+  "answerOption": "D",
+  "answerText": "Extending far down from the top",
+  "difficulty": "easy",
+  "sourceFile": "0086.json"
+}

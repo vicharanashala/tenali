@@ -1,0 +1,14 @@
+{
+  "id": 327,
+  "question": "What is the capital of Odisha?",
+  "options": [
+    "Cuttack",
+    "Puri",
+    "Sambalpur",
+    "Bhubaneswar"
+  ],
+  "answerOption": "D",
+  "answerText": "Bhubaneswar",
+  "genre": "geography",
+  "sourceFile": "0327.json"
+}

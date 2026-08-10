@@ -1,0 +1,15 @@
+{
+  "id": 3030,
+  "word": "Sonder",
+  "question": "Sonder",
+  "options": [
+    "Undying; immortal",
+    "Lack of literary quality",
+    "The act of throwing someone out of a window",
+    "The realization that each passerby has a vivid inner life"
+  ],
+  "answerOption": "D",
+  "answerText": "The realization that each passerby has a vivid inner life",
+  "difficulty": "extra-hard",
+  "sourceFile": "3030.json"
+}

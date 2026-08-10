@@ -1,0 +1,15 @@
+{
+  "id": 2339,
+  "word": "Advise",
+  "question": "Advise",
+  "options": [
+    "An earnest and humble request",
+    "The action of modulating something",
+    "Excessively talkative about trivial things",
+    "To offer suggestions about action"
+  ],
+  "answerOption": "D",
+  "answerText": "To offer suggestions about action",
+  "difficulty": "hard",
+  "sourceFile": "2339.json"
+}

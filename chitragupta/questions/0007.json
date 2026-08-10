@@ -1,0 +1,14 @@
+{
+  "id": 7,
+  "question": "What is the capital of Thailand?",
+  "options": [
+    "Lisbon",
+    "Thimphu",
+    "Ottawa",
+    "Bangkok"
+  ],
+  "answerOption": "D",
+  "answerText": "Bangkok",
+  "genre": "geography",
+  "sourceFile": "0007.json"
+}

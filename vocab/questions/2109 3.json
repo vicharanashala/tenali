@@ -1,0 +1,15 @@
+{
+  "id": 2109,
+  "word": "Adorn",
+  "question": "Adorn",
+  "options": [
+    "The state of being very poor",
+    "A period of time of great length",
+    "An organism requiring air to live",
+    "To make more attractive with ornament"
+  ],
+  "answerOption": "D",
+  "answerText": "To make more attractive with ornament",
+  "difficulty": "hard",
+  "sourceFile": "2109.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 256,
+  "word": "Enter",
+  "question": "Enter",
+  "options": [
+    "Having the training needed to do something",
+    "To come or go into a place",
+    "Fluent and persuasive in speaking",
+    "Very beautiful or attractive"
+  ],
+  "answerOption": "B",
+  "answerText": "To come or go into a place",
+  "difficulty": "easy",
+  "sourceFile": "0256.json"
+}

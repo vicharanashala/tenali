@@ -1,0 +1,15 @@
+{
+  "id": 306,
+  "word": "Betray",
+  "question": "Betray",
+  "options": [
+    "Not occupied or in use",
+    "To be disloyal to someone who trusts you",
+    "Trustworthy and reliable",
+    "Free from bacteria; completely clean"
+  ],
+  "answerOption": "B",
+  "answerText": "To be disloyal to someone who trusts you",
+  "difficulty": "easy",
+  "sourceFile": "0306.json"
+}

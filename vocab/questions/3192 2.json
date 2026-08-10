@@ -1,0 +1,15 @@
+{
+  "id": 3192,
+  "word": "Abyssophagus",
+  "question": "Abyssophagus",
+  "options": [
+    "A person who has returned from the dead",
+    "In manner of renouncing",
+    "Creature of abyss feeder",
+    "Quality of abysmal depth"
+  ],
+  "answerOption": "C",
+  "answerText": "Creature of abyss feeder",
+  "difficulty": "extra-hard",
+  "sourceFile": "3192.json"
+}

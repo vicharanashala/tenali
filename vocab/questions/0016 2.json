@@ -1,0 +1,15 @@
+{
+  "id": 16,
+  "word": "Diligent",
+  "question": "Diligent",
+  "options": [
+    "Giving the impression that something bad will happen",
+    "Showing careful and persistent effort",
+    "Fluent and persuasive in speaking or writing",
+    "Strange or unusual in character"
+  ],
+  "answerOption": "B",
+  "answerText": "Showing careful and persistent effort",
+  "difficulty": "medium",
+  "sourceFile": "0016.json"
+}

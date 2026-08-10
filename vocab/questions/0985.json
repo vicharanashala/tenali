@@ -1,0 +1,15 @@
+{
+  "id": 985,
+  "word": "Apathetic",
+  "question": "Apathetic",
+  "options": [
+    "Diligent and hardworking",
+    "Lacking emotion or interest",
+    "To give shares of something to many people",
+    "Bending in a smooth line without angles"
+  ],
+  "answerOption": "B",
+  "answerText": "Lacking emotion or interest",
+  "difficulty": "easy",
+  "sourceFile": "0985.json"
+}

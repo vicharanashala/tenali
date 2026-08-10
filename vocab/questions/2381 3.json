@@ -1,0 +1,15 @@
+{
+  "id": 2381,
+  "word": "AERONAUTICAL",
+  "question": "AERONAUTICAL",
+  "options": [
+    "Relating to aircraft operation",
+    "Inner sanctum of a Greek temple",
+    "Self-pityingly sentimental",
+    "The quality of being believable"
+  ],
+  "answerOption": "A",
+  "answerText": "Relating to aircraft operation",
+  "difficulty": "hard",
+  "sourceFile": "2381.json"
+}

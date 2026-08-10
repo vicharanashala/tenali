@@ -1,0 +1,15 @@
+{
+  "id": 1270,
+  "word": "Quizzical",
+  "question": "Quizzical",
+  "options": [
+    "To extend known data into an unknown area",
+    "The use of clever but false arguments",
+    "Indicating mild puzzlement",
+    "Tending to talk a great deal"
+  ],
+  "answerOption": "C",
+  "answerText": "Indicating mild puzzlement",
+  "difficulty": "hard",
+  "sourceFile": "1270.json"
+}

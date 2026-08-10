@@ -1,0 +1,15 @@
+{
+  "id": 929,
+  "word": "Dingy",
+  "question": "Dingy",
+  "options": [
+    "Dark and dirty in appearance",
+    "To maintain something in its original state",
+    "To perceive the scent of something",
+    "To withdraw from a position"
+  ],
+  "answerOption": "A",
+  "answerText": "Dark and dirty in appearance",
+  "difficulty": "easy",
+  "sourceFile": "0929.json"
+}

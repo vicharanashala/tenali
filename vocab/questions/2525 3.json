@@ -1,0 +1,15 @@
+{
+  "id": 2525,
+  "word": "Rampart",
+  "question": "Rampart",
+  "options": [
+    "The quality of being believable",
+    "Having a shape like wind-formed",
+    "A defensive wall of a city or fortress",
+    "Things for which one is responsible"
+  ],
+  "answerOption": "C",
+  "answerText": "A defensive wall of a city or fortress",
+  "difficulty": "hard",
+  "sourceFile": "2525.json"
+}

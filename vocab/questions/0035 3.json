@@ -1,0 +1,15 @@
+{
+  "id": 35,
+  "word": "Tired",
+  "question": "Tired",
+  "options": [
+    "To believe in the reliability of someone",
+    "In need of sleep or rest",
+    "To move downward from a higher point",
+    "A person who lacks courage"
+  ],
+  "answerOption": "B",
+  "answerText": "In need of sleep or rest",
+  "difficulty": "easy",
+  "sourceFile": "0035.json"
+}

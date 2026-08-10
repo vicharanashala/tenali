@@ -1,0 +1,15 @@
+{
+  "id": 967,
+  "word": "Parched",
+  "question": "Parched",
+  "options": [
+    "To gather a crop from the fields",
+    "Happening or doing at the expected time",
+    "To try to reach an agreement by discussion",
+    "Very dry or thirsty"
+  ],
+  "answerOption": "D",
+  "answerText": "Very dry or thirsty",
+  "difficulty": "easy",
+  "sourceFile": "0967.json"
+}

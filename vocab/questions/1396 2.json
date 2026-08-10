@@ -1,0 +1,15 @@
+{
+  "id": 1396,
+  "word": "Zugzwang",
+  "question": "Zugzwang",
+  "options": [
+    "A noisy mock serenade; cacophonous celebration",
+    "A profound awareness of the universe that triggers emotion",
+    "A situation where any move will worsen one's position",
+    "Relating to the ocean at great depths"
+  ],
+  "answerOption": "C",
+  "answerText": "A situation where any move will worsen one's position",
+  "difficulty": "extra-hard",
+  "sourceFile": "1396.json"
+}

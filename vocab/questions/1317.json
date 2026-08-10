@@ -1,0 +1,15 @@
+{
+  "id": 1317,
+  "word": "Decipher",
+  "question": "Decipher",
+  "options": [
+    "To convert into normal language from code",
+    "In agreement or harmony with something",
+    "Love, loyalty, or enthusiasm",
+    "The quality of holding firmly"
+  ],
+  "answerOption": "A",
+  "answerText": "To convert into normal language from code",
+  "difficulty": "medium",
+  "sourceFile": "1317.json"
+}

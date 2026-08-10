@@ -1,0 +1,15 @@
+{
+  "id": 2379,
+  "word": "Salubrious",
+  "question": "Salubrious",
+  "options": [
+    "Health-giving; healthy",
+    "A profound awareness of the universe that triggers emotion",
+    "The mysterious power of art to deeply move a person",
+    "The quality of being bottomless"
+  ],
+  "answerOption": "A",
+  "answerText": "Health-giving; healthy",
+  "difficulty": "extra-hard",
+  "sourceFile": "2379.json"
+}

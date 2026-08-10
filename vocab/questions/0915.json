@@ -1,0 +1,15 @@
+{
+  "id": 915,
+  "word": "Murky",
+  "question": "Murky",
+  "options": [
+    "To go out of or leave a place",
+    "To separate into pieces suddenly",
+    "Not fulfilling the intended purpose",
+    "Dark or gloomy in appearance"
+  ],
+  "answerOption": "D",
+  "answerText": "Dark or gloomy in appearance",
+  "difficulty": "easy",
+  "sourceFile": "0915.json"
+}

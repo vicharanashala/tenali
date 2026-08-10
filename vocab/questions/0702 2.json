@@ -1,0 +1,15 @@
+{
+  "id": 702,
+  "word": "Frequent",
+  "question": "Frequent",
+  "options": [
+    "To find an answer to a problem",
+    "Occurring or done many times",
+    "To collide violently with an obstacle",
+    "Lacking the power to perform demanding tasks"
+  ],
+  "answerOption": "B",
+  "answerText": "Occurring or done many times",
+  "difficulty": "easy",
+  "sourceFile": "0702.json"
+}

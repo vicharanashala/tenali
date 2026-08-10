@@ -1,0 +1,15 @@
+{
+  "id": 117,
+  "word": "Cheerful",
+  "question": "Cheerful",
+  "options": [
+    "Not present in a place",
+    "Noticeably happy and optimistic",
+    "To form an idea of the value of something",
+    "To ask someone earnestly for something"
+  ],
+  "answerOption": "B",
+  "answerText": "Noticeably happy and optimistic",
+  "difficulty": "easy",
+  "sourceFile": "0117.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 3492,
+  "word": "Abyssophage",
+  "question": "Abyssophage",
+  "options": [
+    "Naivety; lack of nourishing substance",
+    "A small amount or piece",
+    "Creature eating abyss organisms",
+    "Making non-ablative"
+  ],
+  "answerOption": "C",
+  "answerText": "Creature eating abyss organisms",
+  "difficulty": "extra-hard",
+  "sourceFile": "3492.json"
+}

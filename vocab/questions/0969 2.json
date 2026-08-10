@@ -1,0 +1,15 @@
+{
+  "id": 969,
+  "word": "Valor",
+  "question": "Valor",
+  "options": [
+    "Kept secret or done in a hidden way",
+    "Not revealing one's thoughts readily",
+    "Great courage in the face of danger",
+    "Requiring considerable effort and time"
+  ],
+  "answerOption": "C",
+  "answerText": "Great courage in the face of danger",
+  "difficulty": "medium",
+  "sourceFile": "0969.json"
+}

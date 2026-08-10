@@ -1,0 +1,15 @@
+{
+  "id": 2125,
+  "word": "Aerocamera",
+  "question": "Aerocamera",
+  "options": [
+    "In an adventitious manner",
+    "Having a shape like wind-formed",
+    "An unpleasant or unhealthy atmosphere",
+    "A camera for aerial photography"
+  ],
+  "answerOption": "D",
+  "answerText": "A camera for aerial photography",
+  "difficulty": "hard",
+  "sourceFile": "2125.json"
+}

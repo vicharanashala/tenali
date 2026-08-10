@@ -1,0 +1,15 @@
+{
+  "id": 175,
+  "word": "Shout",
+  "question": "Shout",
+  "options": [
+    "To conduct the affairs of a state or organization",
+    "To give attention to sound or speech",
+    "Parallel to the ground; flat",
+    "To call out in a very loud voice"
+  ],
+  "answerOption": "D",
+  "answerText": "To call out in a very loud voice",
+  "difficulty": "easy",
+  "sourceFile": "0175.json"
+}

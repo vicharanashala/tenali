@@ -1,0 +1,15 @@
+{
+  "id": 1441,
+  "word": "Deputize",
+  "question": "Deputize",
+  "options": [
+    "To remove sulfur from something",
+    "To appoint as a deputy",
+    "Lacking basic necessities or resources",
+    "A paste or powder for cleaning teeth"
+  ],
+  "answerOption": "B",
+  "answerText": "To appoint as a deputy",
+  "difficulty": "medium",
+  "sourceFile": "1441.json"
+}

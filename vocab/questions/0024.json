@@ -1,0 +1,15 @@
+{
+  "id": 24,
+  "word": "Rich",
+  "question": "Rich",
+  "options": [
+    "To cause to move apart",
+    "Having the ability to learn and understand",
+    "Correct in all details; exact",
+    "Having a great deal of money or assets"
+  ],
+  "answerOption": "D",
+  "answerText": "Having a great deal of money or assets",
+  "difficulty": "easy",
+  "sourceFile": "0024.json"
+}

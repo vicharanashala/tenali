@@ -1,0 +1,15 @@
+{
+  "id": 420,
+  "word": "Grant",
+  "question": "Grant",
+  "options": [
+    "Parallel to the ground; flat",
+    "To agree to give something requested",
+    "To point out the faults of something",
+    "Feeling regret or sadness"
+  ],
+  "answerOption": "B",
+  "answerText": "To agree to give something requested",
+  "difficulty": "easy",
+  "sourceFile": "0420.json"
+}

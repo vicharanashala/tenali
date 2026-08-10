@@ -1,0 +1,15 @@
+{
+  "id": 73,
+  "word": "Curious",
+  "question": "Curious",
+  "options": [
+    "Eager to know or learn something",
+    "To place equipment in position for use",
+    "Having lived for a long time; no longer young",
+    "To set free from confinement"
+  ],
+  "answerOption": "A",
+  "answerText": "Eager to know or learn something",
+  "difficulty": "easy",
+  "sourceFile": "0073.json"
+}

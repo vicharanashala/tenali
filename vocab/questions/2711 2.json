@@ -1,0 +1,15 @@
+{
+  "id": 2711,
+  "word": "Cacoethes",
+  "question": "Cacoethes",
+  "options": [
+    "An irresistible urge to do something inadvisable",
+    "The opposite of paranoia; belief that the world conspires to help you",
+    "Quality of being abstractious",
+    "A small songbird of the finch family"
+  ],
+  "answerOption": "A",
+  "answerText": "An irresistible urge to do something inadvisable",
+  "difficulty": "extra-hard",
+  "sourceFile": "2711.json"
+}

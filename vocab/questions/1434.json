@@ -1,0 +1,15 @@
+{
+  "id": 1434,
+  "word": "Dendrite",
+  "question": "Dendrite",
+  "options": [
+    "Tending to derogate",
+    "To subtract an amount from a total",
+    "A branching extension of a nerve cell",
+    "Causing someone to feel insulted"
+  ],
+  "answerOption": "C",
+  "answerText": "A branching extension of a nerve cell",
+  "difficulty": "medium",
+  "sourceFile": "1434.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 257,
+  "question": "Which gas is most responsible for the greenhouse effect among the listed common school-level choices?",
+  "options": [
+    "Oxygen",
+    "Nitrogen",
+    "Carbon dioxide",
+    "Helium"
+  ],
+  "answerOption": "C",
+  "answerText": "Carbon dioxide",
+  "genre": "science",
+  "sourceFile": "0257.json"
+}

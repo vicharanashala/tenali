@@ -1,0 +1,15 @@
+{
+  "id": 1095,
+  "word": "Quintessence",
+  "question": "Quintessence",
+  "options": [
+    "Unwilling and hesitant to do something",
+    "The most perfect example of a quality",
+    "Representing the most perfect example",
+    "The feeling that someone is unworthy"
+  ],
+  "answerOption": "B",
+  "answerText": "The most perfect example of a quality",
+  "difficulty": "medium",
+  "sourceFile": "1095.json"
+}

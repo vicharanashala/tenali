@@ -1,0 +1,15 @@
+{
+  "id": 1371,
+  "word": "Delete",
+  "question": "Delete",
+  "options": [
+    "In decline morally or in style",
+    "Able to be determined or found",
+    "Rough or abrupt in speech or manner",
+    "To remove or obliterate written matter"
+  ],
+  "answerOption": "D",
+  "answerText": "To remove or obliterate written matter",
+  "difficulty": "medium",
+  "sourceFile": "1371.json"
+}

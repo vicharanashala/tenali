@@ -1,0 +1,15 @@
+{
+  "id": 325,
+  "word": "Inform",
+  "question": "Inform",
+  "options": [
+    "To give facts or information to someone",
+    "Willing to give more than is expected",
+    "To cut something into pieces with a tool",
+    "To love and respect deeply"
+  ],
+  "answerOption": "A",
+  "answerText": "To give facts or information to someone",
+  "difficulty": "easy",
+  "sourceFile": "0325.json"
+}

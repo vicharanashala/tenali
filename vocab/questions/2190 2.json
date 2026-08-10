@@ -1,0 +1,15 @@
+{
+  "id": 2190,
+  "word": "AEROPHAGUS",
+  "question": "AEROPHAGUS",
+  "options": [
+    "Extremely unwilling to spend money",
+    "Swallowing of air",
+    "A poison from air",
+    "A mature human or animal"
+  ],
+  "answerOption": "B",
+  "answerText": "Swallowing of air",
+  "difficulty": "hard",
+  "sourceFile": "2190.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 774,
+  "word": "Manual",
+  "question": "Manual",
+  "options": [
+    "Bent or twisted out of shape",
+    "Coming at the end; last",
+    "To be disloyal to someone who trusts you",
+    "Done with the hands; requiring human effort"
+  ],
+  "answerOption": "D",
+  "answerText": "Done with the hands; requiring human effort",
+  "difficulty": "easy",
+  "sourceFile": "0774.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 10014,
+  "word": "Closure (JavaScript)",
+  "question": "Closure (JavaScript)",
+  "options": [
+    "A function that automatically terminates a program when an error is thrown",
+    "A function bundled together with references to its surrounding lexical environment",
+    "A method to close an open file stream in memory",
+    "A keyword used to prevent a class from being inherited"
+  ],
+  "answerOption": "B",
+  "answerText": "A function bundled together with references to its surrounding lexical environment",
+  "difficulty": "hard",
+  "sourceFile": "c10014.json"
+}

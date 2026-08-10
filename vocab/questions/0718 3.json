@@ -1,0 +1,15 @@
+{
+  "id": 718,
+  "word": "Isolated",
+  "question": "Isolated",
+  "options": [
+    "To attract and hold attention of someone",
+    "Having or showing a lack of common sense",
+    "Different from what is normal or expected",
+    "Far away from other places or people"
+  ],
+  "answerOption": "D",
+  "answerText": "Far away from other places or people",
+  "difficulty": "easy",
+  "sourceFile": "0718.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 145,
+  "word": "Graceful",
+  "question": "Graceful",
+  "options": [
+    "Hard but likely to break easily",
+    "Having elegance of movement",
+    "To move from one region to another",
+    "To make available for someone to use"
+  ],
+  "answerOption": "B",
+  "answerText": "Having elegance of movement",
+  "difficulty": "easy",
+  "sourceFile": "0145.json"
+}

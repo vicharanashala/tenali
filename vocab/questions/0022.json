@@ -1,0 +1,15 @@
+{
+  "id": 22,
+  "word": "Kind",
+  "question": "Kind",
+  "options": [
+    "Extremely beautiful or impressive",
+    "Generous and considerate towards others",
+    "Loud and energetic",
+    "To buy something"
+  ],
+  "answerOption": "B",
+  "answerText": "Generous and considerate towards others",
+  "difficulty": "easy",
+  "sourceFile": "0022.json"
+}

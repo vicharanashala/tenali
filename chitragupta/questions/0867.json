@@ -1,0 +1,14 @@
+{
+  "id": 867,
+  "question": "Who wrote 'Wuthering Heights'?",
+  "options": [
+    "Charlotte Brontë",
+    "Emily Brontë",
+    "Anne Brontë",
+    "George Eliot"
+  ],
+  "answerOption": "B",
+  "answerText": "Emily Brontë",
+  "genre": "general-knowledge",
+  "sourceFile": "0867.json"
+}

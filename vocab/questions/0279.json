@@ -1,0 +1,15 @@
+{
+  "id": 279,
+  "word": "Question",
+  "question": "Question",
+  "options": [
+    "Having a modest opinion of one's importance",
+    "To keep doing something without stopping",
+    "Lesser in importance or seriousness",
+    "A sentence that asks for information"
+  ],
+  "answerOption": "D",
+  "answerText": "A sentence that asks for information",
+  "difficulty": "easy",
+  "sourceFile": "0279.json"
+}

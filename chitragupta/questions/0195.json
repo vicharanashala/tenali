@@ -1,0 +1,14 @@
+{
+  "id": 195,
+  "question": "Who discovered penicillin?",
+  "options": [
+    "Louis Pasteur",
+    "Alexander Fleming",
+    "Robert Koch",
+    "Edward Jenner"
+  ],
+  "answerOption": "B",
+  "answerText": "Alexander Fleming",
+  "genre": "general-knowledge",
+  "sourceFile": "0195.json"
+}

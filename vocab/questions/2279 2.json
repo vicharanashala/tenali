@@ -1,0 +1,15 @@
+{
+  "id": 2279,
+  "word": "AEROYACHT",
+  "question": "AEROYACHT",
+  "options": [
+    "A chamber with compressed air",
+    "A large aircraft for travel",
+    "Relation to wind formation",
+    "A poison from air"
+  ],
+  "answerOption": "B",
+  "answerText": "A large aircraft for travel",
+  "difficulty": "hard",
+  "sourceFile": "2279.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 118,
+  "question": "What is the term for animals that eat only plants?",
+  "options": [
+    "Carnivores",
+    "Omnivores",
+    "Herbivores",
+    "Insectivores"
+  ],
+  "answerOption": "C",
+  "answerText": "Herbivores",
+  "genre": "science",
+  "sourceFile": "0118.json"
+}

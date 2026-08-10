@@ -1,0 +1,15 @@
+{
+  "id": 2364,
+  "word": "Desiderium",
+  "question": "Desiderium",
+  "options": [
+    "An ardent longing for something lost",
+    "A plant yielding musk-scented seeds",
+    "Origin of life from non-living matter",
+    "The opposite of paranoia; belief that the world conspires to help you"
+  ],
+  "answerOption": "A",
+  "answerText": "An ardent longing for something lost",
+  "difficulty": "extra-hard",
+  "sourceFile": "2364.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1945,
+  "word": "Mysterious",
+  "question": "Mysterious",
+  "options": [
+    "Difficult or impossible to understand",
+    "To place close together for comparison",
+    "Corresponding in size or degree",
+    "An alternative spelling of dispatch"
+  ],
+  "answerOption": "A",
+  "answerText": "Difficult or impossible to understand",
+  "difficulty": "medium",
+  "sourceFile": "1945.json"
+}

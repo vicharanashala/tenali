@@ -1,0 +1,15 @@
+{
+  "id": 1868,
+  "word": "Gossamer",
+  "question": "Gossamer",
+  "options": [
+    "A fine, filmy substance; something very light",
+    "The process of adding air",
+    "A gaseous compound",
+    "A young person developing into adulthood"
+  ],
+  "answerOption": "A",
+  "answerText": "A fine, filmy substance; something very light",
+  "difficulty": "hard",
+  "sourceFile": "1868.json"
+}

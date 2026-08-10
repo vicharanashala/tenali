@@ -1,0 +1,15 @@
+{
+  "id": 1114,
+  "word": "Unkempt",
+  "question": "Unkempt",
+  "options": [
+    "To publicly state one's disapproval of",
+    "A type of hat or horse race",
+    "Having an untidy or disheveled appearance",
+    "Calm, peaceful, and untroubled"
+  ],
+  "answerOption": "C",
+  "answerText": "Having an untidy or disheveled appearance",
+  "difficulty": "medium",
+  "sourceFile": "1114.json"
+}

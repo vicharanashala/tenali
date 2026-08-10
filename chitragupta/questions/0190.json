@@ -1,0 +1,14 @@
+{
+  "id": 190,
+  "question": "Who was the first Vice President of India?",
+  "options": [
+    "Dr. S. Radhakrishnan",
+    "V. V. Giri",
+    "Zakir Husain",
+    "Rajendra Prasad"
+  ],
+  "answerOption": "A",
+  "answerText": "Dr. S. Radhakrishnan",
+  "genre": "india-gk",
+  "sourceFile": "0190.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1030,
+  "word": "Gullible",
+  "question": "Gullible",
+  "options": [
+    "Friendly and welcoming to strangers",
+    "Prevented from happening or passing",
+    "Easily persuaded to believe something",
+    "The action of holding someone"
+  ],
+  "answerOption": "C",
+  "answerText": "Easily persuaded to believe something",
+  "difficulty": "medium",
+  "sourceFile": "1030.json"
+}

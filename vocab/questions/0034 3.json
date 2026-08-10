@@ -1,0 +1,15 @@
+{
+  "id": 34,
+  "word": "Thirsty",
+  "question": "Thirsty",
+  "options": [
+    "To buy something",
+    "Feeling a need to drink something",
+    "Having great power or strength",
+    "Closely and neatly packed together"
+  ],
+  "answerOption": "B",
+  "answerText": "Feeling a need to drink something",
+  "difficulty": "easy",
+  "sourceFile": "0034.json"
+}

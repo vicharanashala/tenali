@@ -1,0 +1,15 @@
+{
+  "id": 2160,
+  "word": "Kindred",
+  "question": "Kindred",
+  "options": [
+    "Similar in kind; related",
+    "A steep slope or cliff",
+    "Device for collecting airborne organisms",
+    "Something handed down from predecessor"
+  ],
+  "answerOption": "A",
+  "answerText": "Similar in kind; related",
+  "difficulty": "hard",
+  "sourceFile": "2160.json"
+}

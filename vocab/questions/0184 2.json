@@ -1,0 +1,15 @@
+{
+  "id": 184,
+  "word": "Catch",
+  "question": "Catch",
+  "options": [
+    "Correct in all details; exact",
+    "To continue to live despite difficulties",
+    "To capture or seize something",
+    "Very fine in texture or structure"
+  ],
+  "answerOption": "C",
+  "answerText": "To capture or seize something",
+  "difficulty": "easy",
+  "sourceFile": "0184.json"
+}

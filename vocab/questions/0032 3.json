@@ -1,0 +1,15 @@
+{
+  "id": 32,
+  "word": "Bitter",
+  "question": "Bitter",
+  "options": [
+    "Able to be seen",
+    "To determine an amount by mathematics",
+    "Having a sharp, unpleasant taste",
+    "Of extreme force or strength"
+  ],
+  "answerOption": "C",
+  "answerText": "Having a sharp, unpleasant taste",
+  "difficulty": "easy",
+  "sourceFile": "0032.json"
+}

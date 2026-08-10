@@ -1,0 +1,15 @@
+{
+  "id": 334,
+  "word": "Assist",
+  "question": "Assist",
+  "options": [
+    "To help someone with a task",
+    "Clearly visible or understood",
+    "To perceive the flavor of something",
+    "To give authorization for something"
+  ],
+  "answerOption": "A",
+  "answerText": "To help someone with a task",
+  "difficulty": "easy",
+  "sourceFile": "0334.json"
+}

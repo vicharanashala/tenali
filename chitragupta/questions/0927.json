@@ -1,0 +1,14 @@
+{
+  "id": 927,
+  "question": "Which organ in the body contains the pharynx?",
+  "options": [
+    "Throat",
+    "Heart",
+    "Chest",
+    "Leg"
+  ],
+  "answerOption": "A",
+  "answerText": "Throat",
+  "genre": "science",
+  "sourceFile": "0927.json"
+}

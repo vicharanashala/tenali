@@ -1,0 +1,15 @@
+{
+  "id": 1368,
+  "word": "Delay",
+  "question": "Delay",
+  "options": [
+    "To decrease in value over time",
+    "To postpone or defer something",
+    "A formal expression of disapproval",
+    "A substance reducing body odor"
+  ],
+  "answerOption": "B",
+  "answerText": "To postpone or defer something",
+  "difficulty": "medium",
+  "sourceFile": "1368.json"
+}

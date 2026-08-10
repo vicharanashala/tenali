@@ -1,0 +1,15 @@
+{
+  "id": 1901,
+  "word": "Adoption",
+  "question": "Adoption",
+  "options": [
+    "Verdigris or green patina",
+    "The legal process of becoming a parent",
+    "Shaped with an adze",
+    "Having a nightmarishly complex quality"
+  ],
+  "answerOption": "B",
+  "answerText": "The legal process of becoming a parent",
+  "difficulty": "hard",
+  "sourceFile": "1901.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 57,
+  "word": "True",
+  "question": "True",
+  "options": [
+    "Weak and delicate in health",
+    "To cause someone to find something funny",
+    "In accordance with fact or reality",
+    "Able to soak up liquid easily"
+  ],
+  "answerOption": "C",
+  "answerText": "In accordance with fact or reality",
+  "difficulty": "easy",
+  "sourceFile": "0057.json"
+}

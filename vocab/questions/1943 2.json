@@ -1,0 +1,15 @@
+{
+  "id": 1943,
+  "word": "Advancement",
+  "question": "Advancement",
+  "options": [
+    "Wicked or criminal in nature",
+    "The quality of being adustious",
+    "The process of promoting someone",
+    "One who travels in air"
+  ],
+  "answerOption": "C",
+  "answerText": "The process of promoting someone",
+  "difficulty": "hard",
+  "sourceFile": "1943.json"
+}

@@ -1,0 +1,42 @@
+{
+  "name": "client",
+  "private": true,
+  "version": "1.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "axios": "^1.13.6",
+    "canvas-confetti": "^1.9.4",
+    "chart.js": "^4.5.1",
+    "face-api.js": "^0.22.2",
+    "framer-motion": "^12.42.2",
+    "howler": "^2.2.4",
+    "lucide-react": "^1.23.0",
+    "mafs": "^0.21.0",
+    "react": "^19.2.4",
+    "react-chartjs-2": "^5.3.1",
+    "react-dom": "^19.2.4",
+    "socket.io-client": "^4.8.3",
+    "three": "^0.185.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.0",
+    "eslint": "^9.39.4",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "esprima": "^4.0.1",
+    "globals": "^17.4.0",
+    "jsdom": "^29.1.1",
+    "vite": "^8.0.0"
+  }
+}

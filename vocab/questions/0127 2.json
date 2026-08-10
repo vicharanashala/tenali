@@ -1,0 +1,15 @@
+{
+  "id": 127,
+  "word": "Doubtful",
+  "question": "Doubtful",
+  "options": [
+    "Feeling uncertain or unsure",
+    "To state the exact meaning of a word",
+    "To produce a picture using a pencil",
+    "Producing abundant vegetation or crops"
+  ],
+  "answerOption": "A",
+  "answerText": "Feeling uncertain or unsure",
+  "difficulty": "easy",
+  "sourceFile": "0127.json"
+}

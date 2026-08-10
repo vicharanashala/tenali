@@ -1,0 +1,15 @@
+{
+  "id": 3026,
+  "word": "Oneiric",
+  "question": "Oneiric",
+  "options": [
+    "Rejection of literature",
+    "Of or relating to dancing",
+    "Of or relating to dreams",
+    "The statistical study of elections and voting"
+  ],
+  "answerOption": "C",
+  "answerText": "Of or relating to dreams",
+  "difficulty": "extra-hard",
+  "sourceFile": "3026.json"
+}

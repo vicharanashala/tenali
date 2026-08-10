@@ -1,0 +1,15 @@
+{
+  "id": 678,
+  "word": "Mild",
+  "question": "Mild",
+  "options": [
+    "Able to adapt to many different uses",
+    "Not mixed with anything else",
+    "To actively resist or be against something",
+    "Not severe or strong; gentle"
+  ],
+  "answerOption": "D",
+  "answerText": "Not severe or strong; gentle",
+  "difficulty": "easy",
+  "sourceFile": "0678.json"
+}

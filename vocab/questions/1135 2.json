@@ -1,0 +1,15 @@
+{
+  "id": 1135,
+  "word": "Jejune",
+  "question": "Jejune",
+  "options": [
+    "A loud confused noise from a large crowd",
+    "An award or privilege given as honor",
+    "Naive and simplistic; lacking nourishment",
+    "Excessively obedient or attentive to please"
+  ],
+  "answerOption": "C",
+  "answerText": "Naive and simplistic; lacking nourishment",
+  "difficulty": "hard",
+  "sourceFile": "1135.json"
+}

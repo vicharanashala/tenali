@@ -1,0 +1,15 @@
+{
+  "id": 2514,
+  "word": "Insolvency",
+  "question": "Insolvency",
+  "options": [
+    "A short public announcement",
+    "Familiar with many different cultures",
+    "The action of reducing in amount",
+    "The state of being unable to pay debts"
+  ],
+  "answerOption": "D",
+  "answerText": "The state of being unable to pay debts",
+  "difficulty": "hard",
+  "sourceFile": "2514.json"
+}

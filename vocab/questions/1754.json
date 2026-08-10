@@ -1,0 +1,15 @@
+{
+  "id": 1754,
+  "word": "Pernicious",
+  "question": "Pernicious",
+  "options": [
+    "Having a harmful effect gradually",
+    "Showing loss of all hope",
+    "Extremely unpleasant or revolting",
+    "Not harmful or offensive"
+  ],
+  "answerOption": "A",
+  "answerText": "Having a harmful effect gradually",
+  "difficulty": "medium",
+  "sourceFile": "1754.json"
+}

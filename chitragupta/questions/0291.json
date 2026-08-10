@@ -1,0 +1,14 @@
+{
+  "id": 291,
+  "question": "Which city is the capital of Maharashtra?",
+  "options": [
+    "Pune",
+    "Nagpur",
+    "Mumbai",
+    "Nashik"
+  ],
+  "answerOption": "C",
+  "answerText": "Mumbai",
+  "genre": "geography",
+  "sourceFile": "0291.json"
+}

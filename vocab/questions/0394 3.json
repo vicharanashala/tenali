@@ -1,0 +1,15 @@
+{
+  "id": 394,
+  "word": "Decay",
+  "question": "Decay",
+  "options": [
+    "To protect something from being wasted",
+    "To cause liquid to scatter in drops",
+    "To rot and break down over time",
+    "Close to the actual but not completely exact"
+  ],
+  "answerOption": "C",
+  "answerText": "To rot and break down over time",
+  "difficulty": "easy",
+  "sourceFile": "0394.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 198,
+  "word": "Share",
+  "question": "Share",
+  "options": [
+    "To make a displeased facial expression",
+    "To give a portion of something to others",
+    "To keep something in good condition",
+    "Completely different in every way"
+  ],
+  "answerOption": "B",
+  "answerText": "To give a portion of something to others",
+  "difficulty": "easy",
+  "sourceFile": "0198.json"
+}

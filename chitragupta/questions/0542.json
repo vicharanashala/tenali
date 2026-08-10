@@ -1,0 +1,14 @@
+{
+  "id": 542,
+  "question": "What is the chemical symbol for manganese?",
+  "options": [
+    "Mg",
+    "Mn",
+    "Ma",
+    "Me"
+  ],
+  "answerOption": "B",
+  "answerText": "Mn",
+  "genre": "mixed",
+  "sourceFile": "0542.json"
+}

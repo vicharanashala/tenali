@@ -1,0 +1,15 @@
+{
+  "id": 105,
+  "word": "Modern",
+  "question": "Modern",
+  "options": [
+    "To bring something into existence",
+    "To fasten or join one thing to another",
+    "Having experience, knowledge, and good judgment",
+    "Relating to the present time"
+  ],
+  "answerOption": "D",
+  "answerText": "Relating to the present time",
+  "difficulty": "easy",
+  "sourceFile": "0105.json"
+}

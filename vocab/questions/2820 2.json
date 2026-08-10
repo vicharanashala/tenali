@@ -1,0 +1,15 @@
+{
+  "id": 2820,
+  "word": "Solivagant",
+  "question": "Solivagant",
+  "options": [
+    "Relating to abyss",
+    "The act of loving someone who loves you in return",
+    "Wandering alone",
+    "The act of abiding somewhere"
+  ],
+  "answerOption": "C",
+  "answerText": "Wandering alone",
+  "difficulty": "extra-hard",
+  "sourceFile": "2820.json"
+}

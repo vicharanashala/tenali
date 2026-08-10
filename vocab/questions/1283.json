@@ -1,0 +1,15 @@
+{
+  "id": 1283,
+  "word": "Chagrin",
+  "question": "Chagrin",
+  "options": [
+    "Luxuriously elegant and expensive",
+    "The quality of being unrelenting",
+    "Stubbornly refusing to change opinion",
+    "A feeling of embarrassment or disappointment"
+  ],
+  "answerOption": "D",
+  "answerText": "A feeling of embarrassment or disappointment",
+  "difficulty": "medium",
+  "sourceFile": "1283.json"
+}

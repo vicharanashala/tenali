@@ -1,0 +1,15 @@
+{
+  "id": 960,
+  "word": "Implicit",
+  "question": "Implicit",
+  "options": [
+    "Domesticated and not dangerous to people",
+    "Thinly sown or distributed",
+    "To move smoothly along a surface",
+    "Suggested or understood indirectly"
+  ],
+  "answerOption": "D",
+  "answerText": "Suggested or understood indirectly",
+  "difficulty": "easy",
+  "sourceFile": "0960.json"
+}

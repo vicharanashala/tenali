@@ -1,0 +1,15 @@
+{
+  "id": 136,
+  "word": "Strange",
+  "question": "Strange",
+  "options": [
+    "To make something full or complete",
+    "Unusual or surprising; hard to explain",
+    "Made or done without method or plan",
+    "To fill someone with great surprise"
+  ],
+  "answerOption": "B",
+  "answerText": "Unusual or surprising; hard to explain",
+  "difficulty": "easy",
+  "sourceFile": "0136.json"
+}

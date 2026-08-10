@@ -1,0 +1,15 @@
+{
+  "id": 1052,
+  "word": "Elaborate",
+  "question": "Elaborate",
+  "options": [
+    "Involving careful detail and complexity",
+    "Holding firmly to something; persistent",
+    "To actively break the terms of a law",
+    "To conclude by reasoning"
+  ],
+  "answerOption": "A",
+  "answerText": "Involving careful detail and complexity",
+  "difficulty": "medium",
+  "sourceFile": "1052.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 754,
+  "word": "Humid",
+  "question": "Humid",
+  "options": [
+    "Side by side and having the same distance apart",
+    "Occurring or done many times",
+    "Having a high amount of moisture in the air",
+    "Able to move quickly and easily"
+  ],
+  "answerOption": "C",
+  "answerText": "Having a high amount of moisture in the air",
+  "difficulty": "easy",
+  "sourceFile": "0754.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 715,
+  "word": "Distant",
+  "question": "Distant",
+  "options": [
+    "Far away in space or time",
+    "To come or go into a place",
+    "To be unsuccessful in achieving a goal",
+    "To become sound or healthy again"
+  ],
+  "answerOption": "A",
+  "answerText": "Far away in space or time",
+  "difficulty": "easy",
+  "sourceFile": "0715.json"
+}

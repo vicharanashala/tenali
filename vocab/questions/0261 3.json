@@ -1,0 +1,15 @@
+{
+  "id": 261,
+  "word": "Rush",
+  "question": "Rush",
+  "options": [
+    "Having the pleasant taste of sugar",
+    "To move with urgent haste",
+    "To set free from confinement",
+    "To give attention to sound or speech"
+  ],
+  "answerOption": "B",
+  "answerText": "To move with urgent haste",
+  "difficulty": "easy",
+  "sourceFile": "0261.json"
+}

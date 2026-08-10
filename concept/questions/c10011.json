@@ -1,0 +1,15 @@
+{
+  "id": 10011,
+  "word": "NP-Completeness",
+  "question": "NP-Completeness",
+  "options": [
+    "A class of decision problems for which no efficient solution exists",
+    "A class of problems where a proposed solution can be verified quickly, and any NP problem can be reduced to it",
+    "A programming paradigm used to design quantum algorithms",
+    "A type of network protocol used for secure data transmission"
+  ],
+  "answerOption": "B",
+  "answerText": "A class of problems where a proposed solution can be verified quickly, and any NP problem can be reduced to it",
+  "difficulty": "hard",
+  "sourceFile": "c10011.json"
+}

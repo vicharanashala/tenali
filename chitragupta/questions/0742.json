@@ -1,0 +1,14 @@
+{
+  "id": 742,
+  "question": "Who wrote 'The Time Machine'?",
+  "options": [
+    "Jules Verne",
+    "H. G. Wells",
+    "George Orwell",
+    "Isaac Asimov"
+  ],
+  "answerOption": "B",
+  "answerText": "H. G. Wells",
+  "genre": "general-knowledge",
+  "sourceFile": "0742.json"
+}

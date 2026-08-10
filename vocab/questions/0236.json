@@ -1,0 +1,15 @@
+{
+  "id": 236,
+  "word": "Convince",
+  "question": "Convince",
+  "options": [
+    "To fill or take up a space or time",
+    "Having a violent or aggressive nature",
+    "To cause someone to believe something",
+    "To cause someone to lose confidence"
+  ],
+  "answerOption": "C",
+  "answerText": "To cause someone to believe something",
+  "difficulty": "easy",
+  "sourceFile": "0236.json"
+}

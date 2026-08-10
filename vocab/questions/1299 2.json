@@ -1,0 +1,15 @@
+{
+  "id": 1299,
+  "word": "Neophyte",
+  "question": "Neophyte",
+  "options": [
+    "A person who attacks cherished beliefs",
+    "A person who is new to a subject",
+    "Causing harm or damage",
+    "Intended to teach a moral lesson"
+  ],
+  "answerOption": "B",
+  "answerText": "A person who is new to a subject",
+  "difficulty": "hard",
+  "sourceFile": "1299.json"
+}

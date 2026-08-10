@@ -1,0 +1,15 @@
+{
+  "id": 1583,
+  "word": "Detect",
+  "question": "Detect",
+  "options": [
+    "To engage in a close fight or struggle",
+    "To discover or identify something",
+    "Pleasant and easy to get along with",
+    "To express severe disapproval of"
+  ],
+  "answerOption": "B",
+  "answerText": "To discover or identify something",
+  "difficulty": "medium",
+  "sourceFile": "1583.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2009,
+  "word": "Miscreant",
+  "question": "Miscreant",
+  "options": [
+    "The quality of being clear",
+    "The tendency to relapse into a previous behavior",
+    "The quality of being tangible",
+    "A person who behaves badly or unlawfully"
+  ],
+  "answerOption": "D",
+  "answerText": "A person who behaves badly or unlawfully",
+  "difficulty": "hard",
+  "sourceFile": "2009.json"
+}

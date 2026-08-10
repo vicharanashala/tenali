@@ -1,0 +1,15 @@
+{
+  "id": 983,
+  "word": "Placid",
+  "question": "Placid",
+  "options": [
+    "Very beautiful or attractive",
+    "Calm and peaceful in manner",
+    "To become visible or noticeable",
+    "To need something as necessary"
+  ],
+  "answerOption": "B",
+  "answerText": "Calm and peaceful in manner",
+  "difficulty": "easy",
+  "sourceFile": "0983.json"
+}

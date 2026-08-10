@@ -1,0 +1,15 @@
+{
+  "id": 3028,
+  "word": "Quiddity",
+  "question": "Quiddity",
+  "options": [
+    "Quality of washing",
+    "The partially shaded outer region of a shadow",
+    "The inherent nature or essence of something",
+    "Doctrine of ablation"
+  ],
+  "answerOption": "C",
+  "answerText": "The inherent nature or essence of something",
+  "difficulty": "extra-hard",
+  "sourceFile": "3028.json"
+}

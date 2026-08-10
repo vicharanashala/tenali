@@ -1,0 +1,15 @@
+{
+  "id": 478,
+  "word": "Define",
+  "question": "Define",
+  "options": [
+    "To arouse the curiosity of someone",
+    "Of or at a low temperature",
+    "To gather a crop from the fields",
+    "To state the exact meaning of a word"
+  ],
+  "answerOption": "D",
+  "answerText": "To state the exact meaning of a word",
+  "difficulty": "easy",
+  "sourceFile": "0478.json"
+}

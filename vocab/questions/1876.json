@@ -1,0 +1,15 @@
+{
+  "id": 1876,
+  "word": "Fragile",
+  "question": "Fragile",
+  "options": [
+    "Easily broken or damaged",
+    "Caused to move more slowly",
+    "One who destroys or a warship",
+    "The feeling that someone is unworthy"
+  ],
+  "answerOption": "A",
+  "answerText": "Easily broken or damaged",
+  "difficulty": "medium",
+  "sourceFile": "1876.json"
+}

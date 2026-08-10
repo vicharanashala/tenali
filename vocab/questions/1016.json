@@ -1,0 +1,15 @@
+{
+  "id": 1016,
+  "word": "Quaint",
+  "question": "Quaint",
+  "options": [
+    "Very weak or slight; insubstantial",
+    "Attractively unusual or old-fashioned",
+    "One who commits depredation",
+    "A Roman silver coin"
+  ],
+  "answerOption": "B",
+  "answerText": "Attractively unusual or old-fashioned",
+  "difficulty": "medium",
+  "sourceFile": "1016.json"
+}

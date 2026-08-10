@@ -1,0 +1,14 @@
+{
+  "id": 980,
+  "question": "Which Indian scientist is known as the Missile Man of India?",
+  "options": [
+    "C. V. Raman",
+    "A. P. J. Abdul Kalam",
+    "Homi Bhabha",
+    "Vikram Sarabhai"
+  ],
+  "answerOption": "B",
+  "answerText": "A. P. J. Abdul Kalam",
+  "genre": "india-gk",
+  "sourceFile": "0980.json"
+}

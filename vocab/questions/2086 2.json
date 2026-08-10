@@ -1,0 +1,15 @@
+{
+  "id": 2086,
+  "word": "Aeration",
+  "question": "Aeration",
+  "options": [
+    "The period from puberty to adulthood",
+    "A chamber with compressed air",
+    "The process of aerating something",
+    "Relating to air-structure interaction"
+  ],
+  "answerOption": "C",
+  "answerText": "The process of aerating something",
+  "difficulty": "hard",
+  "sourceFile": "2086.json"
+}

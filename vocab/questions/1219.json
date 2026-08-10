@@ -1,0 +1,15 @@
+{
+  "id": 1219,
+  "word": "Magnanimous",
+  "question": "Magnanimous",
+  "options": [
+    "Very generous or forgiving",
+    "To extract information from various sources",
+    "The quality of being stubborn",
+    "Causing disapproval or opposition"
+  ],
+  "answerOption": "A",
+  "answerText": "Very generous or forgiving",
+  "difficulty": "medium",
+  "sourceFile": "1219.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 266,
+  "word": "Dig",
+  "question": "Dig",
+  "options": [
+    "To break up and move earth with a tool",
+    "Having a sharp taste",
+    "To stay where you are until something happens",
+    "Full of energy and enthusiasm"
+  ],
+  "answerOption": "A",
+  "answerText": "To break up and move earth with a tool",
+  "difficulty": "easy",
+  "sourceFile": "0266.json"
+}

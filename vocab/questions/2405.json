@@ -1,0 +1,15 @@
+{
+  "id": 2405,
+  "word": "Aenius",
+  "question": "Aenius",
+  "options": [
+    "A genus of water beetles",
+    "A person who commits adultery",
+    "Deceitful and untrustworthy",
+    "Self-pityingly sentimental"
+  ],
+  "answerOption": "A",
+  "answerText": "A genus of water beetles",
+  "difficulty": "hard",
+  "sourceFile": "2405.json"
+}

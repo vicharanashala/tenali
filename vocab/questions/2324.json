@@ -1,0 +1,15 @@
+{
+  "id": 2324,
+  "word": "Advertency",
+  "question": "Advertency",
+  "options": [
+    "Not able to be corrected or reformed",
+    "The quality of being reliable",
+    "Notice or attention",
+    "Relating to the air sphere"
+  ],
+  "answerOption": "C",
+  "answerText": "Notice or attention",
+  "difficulty": "hard",
+  "sourceFile": "2324.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 927,
+  "word": "Callous",
+  "question": "Callous",
+  "options": [
+    "Clear and definite; able to be touched",
+    "Having passionate and sincere feeling",
+    "Showing cruel disregard for others",
+    "Present or found everywhere"
+  ],
+  "answerOption": "C",
+  "answerText": "Showing cruel disregard for others",
+  "difficulty": "medium",
+  "sourceFile": "0927.json"
+}

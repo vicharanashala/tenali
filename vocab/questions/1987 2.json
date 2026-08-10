@@ -1,0 +1,15 @@
+{
+  "id": 1987,
+  "word": "Advise",
+  "question": "Advise",
+  "options": [
+    "A wild ox of central Asia",
+    "One having the right of patronage",
+    "Science of air flow and forces",
+    "To offer suggestions about action"
+  ],
+  "answerOption": "D",
+  "answerText": "To offer suggestions about action",
+  "difficulty": "hard",
+  "sourceFile": "1987.json"
+}

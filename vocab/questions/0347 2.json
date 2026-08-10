@@ -1,0 +1,15 @@
+{
+  "id": 347,
+  "word": "Hesitate",
+  "question": "Hesitate",
+  "options": [
+    "An act of saying goodbye",
+    "Having good fortune; fortunate",
+    "Correct in all details; exact",
+    "To pause before doing something"
+  ],
+  "answerOption": "D",
+  "answerText": "To pause before doing something",
+  "difficulty": "easy",
+  "sourceFile": "0347.json"
+}

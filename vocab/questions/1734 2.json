@@ -1,0 +1,15 @@
+{
+  "id": 1734,
+  "word": "Zealot",
+  "question": "Zealot",
+  "options": [
+    "A person who is fanatical about a cause",
+    "A colorless liquid chemical compound",
+    "Presence of air in thorax",
+    "A female aeromotor operator"
+  ],
+  "answerOption": "A",
+  "answerText": "A person who is fanatical about a cause",
+  "difficulty": "hard",
+  "sourceFile": "1734.json"
+}

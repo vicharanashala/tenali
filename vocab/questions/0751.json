@@ -1,0 +1,15 @@
+{
+  "id": 751,
+  "word": "Barren",
+  "question": "Barren",
+  "options": [
+    "To save someone from a dangerous situation",
+    "Too poor to produce much vegetation",
+    "Having a lighthearted excited feeling",
+    "Restricted or limited to a space"
+  ],
+  "answerOption": "B",
+  "answerText": "Too poor to produce much vegetation",
+  "difficulty": "easy",
+  "sourceFile": "0751.json"
+}

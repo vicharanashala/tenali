@@ -1,0 +1,14 @@
+{
+  "id": 275,
+  "question": "Which is the capital city of Sri Lanka, commonly used in GK as the official capital?",
+  "options": [
+    "Colombo",
+    "Kandy",
+    "Sri Jayawardenepura Kotte",
+    "Galle"
+  ],
+  "answerOption": "C",
+  "answerText": "Sri Jayawardenepura Kotte",
+  "genre": "geography",
+  "sourceFile": "0275.json"
+}

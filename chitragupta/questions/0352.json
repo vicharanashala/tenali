@@ -1,0 +1,14 @@
+{
+  "id": 352,
+  "question": "Who wrote the epic 'Paradise Lost'?",
+  "options": [
+    "William Blake",
+    "John Milton",
+    "Alexander Pope",
+    "Percy Shelley"
+  ],
+  "answerOption": "B",
+  "answerText": "John Milton",
+  "genre": "general-knowledge",
+  "sourceFile": "0352.json"
+}

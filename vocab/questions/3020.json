@@ -1,0 +1,15 @@
+{
+  "id": 3020,
+  "word": "Ikigai",
+  "question": "Ikigai",
+  "options": [
+    "Filled with buzzing sound",
+    "Plural of abstinence",
+    "A reason for being; the thing that gets you up in the morning",
+    "Not relating to literature"
+  ],
+  "answerOption": "C",
+  "answerText": "A reason for being; the thing that gets you up in the morning",
+  "difficulty": "extra-hard",
+  "sourceFile": "3020.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 239,
+  "word": "Punish",
+  "question": "Punish",
+  "options": [
+    "To impose a penalty for wrongdoing",
+    "Made or done without method or plan",
+    "Noticeably happy and optimistic",
+    "To dislike something very intensely"
+  ],
+  "answerOption": "A",
+  "answerText": "To impose a penalty for wrongdoing",
+  "difficulty": "easy",
+  "sourceFile": "0239.json"
+}

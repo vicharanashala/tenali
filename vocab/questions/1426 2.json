@@ -1,0 +1,15 @@
+{
+  "id": 1426,
+  "word": "Desiderium",
+  "question": "Desiderium",
+  "options": [
+    "The process of exact thinking or reasoning",
+    "A figure of speech with an unexpected ending",
+    "An ardent longing for something lost",
+    "A person who achieves great success when young"
+  ],
+  "answerOption": "C",
+  "answerText": "An ardent longing for something lost",
+  "difficulty": "extra-hard",
+  "sourceFile": "1426.json"
+}

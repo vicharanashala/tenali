@@ -1,0 +1,15 @@
+{
+  "id": 500,
+  "word": "Trek",
+  "question": "Trek",
+  "options": [
+    "Not approximated in any way; precise",
+    "To make a long and difficult journey",
+    "To receive money in return for labor",
+    "Affected by physical illness"
+  ],
+  "answerOption": "B",
+  "answerText": "To make a long and difficult journey",
+  "difficulty": "easy",
+  "sourceFile": "0500.json"
+}

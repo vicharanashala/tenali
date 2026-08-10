@@ -1,0 +1,15 @@
+{
+  "id": 399,
+  "word": "Adapt",
+  "question": "Adapt",
+  "options": [
+    "Having a great deal of money or assets",
+    "Fixed or fastened firmly; not easily moved",
+    "Smooth like velvet fabric",
+    "To adjust to new conditions"
+  ],
+  "answerOption": "D",
+  "answerText": "To adjust to new conditions",
+  "difficulty": "easy",
+  "sourceFile": "0399.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1183,
+  "word": "Vindicate",
+  "question": "Vindicate",
+  "options": [
+    "The state of having lost morale",
+    "To clear someone of blame or suspicion",
+    "Having teeth or tooth-like projections",
+    "To remove odor from something"
+  ],
+  "answerOption": "B",
+  "answerText": "To clear someone of blame or suspicion",
+  "difficulty": "medium",
+  "sourceFile": "1183.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1056,
+  "word": "Incessant",
+  "question": "Incessant",
+  "options": [
+    "To relieve congestion or overcrowding",
+    "Not competent or skilled",
+    "Lacking compassion or kindness",
+    "Continuing without pause or interruption"
+  ],
+  "answerOption": "D",
+  "answerText": "Continuing without pause or interruption",
+  "difficulty": "medium",
+  "sourceFile": "1056.json"
+}

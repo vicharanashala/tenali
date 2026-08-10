@@ -1,0 +1,14 @@
+{
+  "id": 568,
+  "question": "Who wrote 'Anna Karenina'?",
+  "options": [
+    "Tolstoy",
+    "Dostoevsky",
+    "Gorky",
+    "Chekhov"
+  ],
+  "answerOption": "A",
+  "answerText": "Tolstoy",
+  "genre": "general-knowledge",
+  "sourceFile": "0568.json"
+}

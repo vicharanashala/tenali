@@ -1,0 +1,15 @@
+{
+  "id": 235,
+  "word": "Disturb",
+  "question": "Disturb",
+  "options": [
+    "To interfere with the peace of someone",
+    "Free from disturbance; tranquil",
+    "Of very great extent or quantity",
+    "To agree to give something requested"
+  ],
+  "answerOption": "A",
+  "answerText": "To interfere with the peace of someone",
+  "difficulty": "easy",
+  "sourceFile": "0235.json"
+}

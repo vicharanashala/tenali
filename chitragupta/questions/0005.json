@@ -1,0 +1,14 @@
+{
+  "id": 5,
+  "question": "What is the capital of India?",
+  "options": [
+    "Mumbai",
+    "New Delhi",
+    "Kolkata",
+    "Chennai"
+  ],
+  "answerOption": "B",
+  "answerText": "New Delhi",
+  "genre": "geography",
+  "sourceFile": "0005.json"
+}

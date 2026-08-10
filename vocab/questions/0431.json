@@ -1,0 +1,15 @@
+{
+  "id": 431,
+  "word": "Assemble",
+  "question": "Assemble",
+  "options": [
+    "To push off the ground using the legs",
+    "Happening by chance; unintentional",
+    "Enough to meet the needs",
+    "To fit together the parts of something"
+  ],
+  "answerOption": "D",
+  "answerText": "To fit together the parts of something",
+  "difficulty": "easy",
+  "sourceFile": "0431.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1886,
+  "word": "Calumny",
+  "question": "Calumny",
+  "options": [
+    "Display of air phenomena",
+    "To absolve someone from blame",
+    "The making of false statements to damage reputation",
+    "The rejection of established beliefs"
+  ],
+  "answerOption": "C",
+  "answerText": "The making of false statements to damage reputation",
+  "difficulty": "hard",
+  "sourceFile": "1886.json"
+}

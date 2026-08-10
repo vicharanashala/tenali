@@ -1,0 +1,15 @@
+{
+  "id": 193,
+  "word": "Sink",
+  "question": "Sink",
+  "options": [
+    "To help someone with a task",
+    "To go down below the surface of a liquid",
+    "Not clearly expressed or understood",
+    "Not according to truth or fact"
+  ],
+  "answerOption": "B",
+  "answerText": "To go down below the surface of a liquid",
+  "difficulty": "easy",
+  "sourceFile": "0193.json"
+}

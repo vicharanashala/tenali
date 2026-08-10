@@ -1,0 +1,15 @@
+{
+  "id": 1321,
+  "word": "Umbrageous",
+  "question": "Umbrageous",
+  "options": [
+    "To extend known data into an unknown area",
+    "Stubborn or unmanageable",
+    "Not being what it claims to be; false",
+    "Shady; tending to take offense easily"
+  ],
+  "answerOption": "D",
+  "answerText": "Shady; tending to take offense easily",
+  "difficulty": "hard",
+  "sourceFile": "1321.json"
+}

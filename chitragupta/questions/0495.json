@@ -1,0 +1,14 @@
+{
+  "id": 495,
+  "question": "Which organ in the human body produces digestive enzymes and hormones like insulin?",
+  "options": [
+    "Liver",
+    "Pancreas",
+    "Spleen",
+    "Gallbladder"
+  ],
+  "answerOption": "B",
+  "answerText": "Pancreas",
+  "genre": "science",
+  "sourceFile": "0495.json"
+}

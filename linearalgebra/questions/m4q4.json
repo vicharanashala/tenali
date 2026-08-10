@@ -1,0 +1,449 @@
+{
+  "module": 4,
+  "missionId": 40,
+  "title": "Orthogonal Subspaces",
+  "original_question": "The four fundamental subspaces for any matrix M satisfy: C(M) ⊥ N(Mᵀ) and R(M) ⊥ N(M). Verify these for M = [[1,2],[3,6]]: C(M)=t(1,3), N(Mᵀ)=t(-3,1) — dot = -3+3 = 0. R(M)=t(1,2), N(M)=t(-2,1) — dot = -2+2 = 0. Both pairs confirmed orthogonal!",
+  "core_concept": "The four fundamental subspaces form exactly two orthogonal pairs: Row Space ⊥ Null Space in the input domain, and Column Space ⊥ Left Null Space in the output domain. This is the heart of the Fundamental Theorem of Linear Algebra.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M4Q4E1",
+        "question": "How many orthogonal pairs exist among the four fundamental subspaces?",
+        "options": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: The first pair is R(M) ⊥ N(M) in the input space Rⁿ. Step 2: The second pair is C(M) ⊥ N(Mᵀ) in the output space Rᵐ. Step 3: These two pairs are the complete orthogonal structure — the Fundamental Theorem of Linear Algebra. No other pair (e.g., R(M) ⊥ C(M)) is guaranteed to be orthogonal."
+      },
+      {
+        "id": "M4Q4E2",
+        "question": "Which subspace is perpendicular to the row space R(M)?",
+        "options": [
+          "Column space C(M)",
+          "Left null space N(Mᵀ)",
+          "Null space N(M)",
+          "R(M) itself"
+        ],
+        "correct_option": "Null space N(M)",
+        "explanation": "Step 1: The Fundamental Theorem guarantees R(M) ⊥ N(M) for any matrix. Step 2: Every row space vector is perpendicular to every null space vector — this is a universal property. Step 3: The proof: if v ∈ N(M), then Mv = 0, so every row of M dotted with v equals 0, meaning v ⊥ R(M)."
+      },
+      {
+        "id": "M4Q4E3",
+        "question": "Which subspace is perpendicular to the column space C(M)?",
+        "options": [
+          "Row space R(M)",
+          "Null space N(M)",
+          "Left null space N(Mᵀ)",
+          "The entire input space"
+        ],
+        "correct_option": "Left null space N(Mᵀ)",
+        "explanation": "Step 1: The Fundamental Theorem guarantees C(M) ⊥ N(Mᵀ) for any matrix. Step 2: Every column of M is perpendicular to every vector in the left null space. Step 3: This holds universally — the proof mirrors the first pair: if y ∈ N(Mᵀ), then Mᵀy = 0, so y ⊥ every column of M, hence y ⊥ C(M)."
+      },
+      {
+        "id": "M4Q4E4",
+        "question": "For M = [[1,2],[3,6]], verify: (1,2)·(-2,1) = ?",
+        "options": [
+          "-3",
+          "0",
+          "3",
+          "5"
+        ],
+        "correct_option": "0",
+        "explanation": "Step 1: (1,2) is the row space direction and (-2,1) is the null space direction. Step 2: (1,2)·(-2,1) = -2 + 2 = 0. Step 3: Zero dot product confirms R(M) ⊥ N(M) — the first orthogonality pair of the Fundamental Theorem, verified for this specific matrix."
+      },
+      {
+        "id": "M4Q4E5",
+        "question": "For M = [[1,2],[3,6]], verify: (1,3)·(-3,1) = ?",
+        "options": [
+          "-3",
+          "0",
+          "3",
+          "6"
+        ],
+        "correct_option": "0",
+        "explanation": "Step 1: (1,3) is the column space direction and (-3,1) is the left null space direction. Step 2: (1,3)·(-3,1) = -3 + 3 = 0. Step 3: Zero dot product confirms C(M) ⊥ N(Mᵀ) — the second orthogonality pair. Together with the first pair, this completes the verification of the Fundamental Theorem for M."
+      },
+      {
+        "id": "M4Q4E6",
+        "question": "The two orthogonal pairs are R(M) ⊥ N(M) and C(M) ⊥ N(Mᵀ). Do R(M) and C(M) have to be perpendicular?",
+        "options": [
+          "always — does t match",
+          "No, they are generally NOT perpendicular",
+          "Only if M is symmetric",
+          "Only for square matrices"
+        ],
+        "correct_option": "No, they are generally NOT perpendicular",
+        "explanation": "Step 1: The guaranteed pairs are R(M) ⊥ N(M) and C(M) ⊥ N(Mᵀ). Step 2: R(M) and C(M) have no general orthogonality relationship. Step 3: For M = [[1,2],[3,6]], R(M) = t(1,2) and C(M) = t(1,3) with dot product 1+6 = 7 ≠ 0. The row space and column space are generally NOT perpendicular — a common misconception."
+      },
+      {
+        "id": "M4Q4E7",
+        "question": "For M = [[1,2],[3,6]], which pair of subspaces are perpendicular lines in R²?",
+        "options": [
+          "R(M) and C(M)",
+          "R(M) and N(M)",
+          "C(M) and R(M)",
+          "N(M) and N(Mᵀ)"
+        ],
+        "correct_option": "R(M) and N(M)",
+        "explanation": "Step 1: R(M) = t(1,2) and N(M) = t(-2,1) in R². Step 2: (1,2)·(-2,1) = 0, confirming perpendicularity. Step 3: Similarly, C(M) = t(1,3) ⊥ N(Mᵀ) = t(-3,1). Both pairs are perpendicular lines that together decompose R² — the complete four-subspace picture for a rank-1 square matrix."
+      },
+      {
+        "id": "M4Q4E8",
+        "question": "What does the zero vector have in common with all four fundamental subspaces?",
+        "options": [
+          "It is excluded from all four",
+          "It belongs to all four subspaces",
+          "It belongs to only the row space",
+          "It belongs to only the null space"
+        ],
+        "correct_option": "It belongs to all four subspaces",
+        "explanation": "Step 1: Every subspace must contain the zero vector (subspace axiom). Step 2: R(M), C(M), N(M), and N(Mᵀ) are all subspaces. Step 3: Therefore 0 is in all four. The zero vector is the only vector that can be in both subspaces of an orthogonal pair — if v ≠ 0 is in both R(M) and N(M), then v·v = 0, a contradiction."
+      },
+      {
+        "id": "M4Q4E9",
+        "question": "If a matrix M has rank 1 in R²×R², how many of the four subspaces are 1-dimensional?",
+        "options": [
+          "1 (xx)",
+          "2 (xx)",
+          "3 (xx)",
+          "All 4"
+        ],
+        "correct_option": "All 4",
+        "explanation": "Step 1: rank = 1 → R(M) and C(M) are both 1D. Step 2: nullity = n - rank = 2 - 1 = 1 → N(M) is 1D. Step 3: dim(N(Mᵀ)) = m - rank = 2 - 1 = 1 → N(Mᵀ) is 1D. All four are 1D lines — the most symmetric case for a 2×2 rank-1 matrix."
+      },
+      {
+        "id": "M4Q4E10",
+        "question": "Can a nonzero vector be in both R(M) and N(M) simultaneously?",
+        "options": [
+          "if the matrix is symmetric",
+          "No, because they are perpendicular and share only the origin",
+          "always — does t match",
+          "Only for n-square matrices"
+        ],
+        "correct_option": "No, because they are perpendicular and share only the origin",
+        "explanation": "Step 1: R(M) ⊥ N(M) means every R(M) vector is perpendicular to every N(M) vector. Step 2: If v is in both, then v·v = 0, so |v|² = 0, meaning v = 0. Step 3: The only vector in both perpendicular subspaces is the zero vector. This intersection property makes the decomposition Rⁿ = R(A) ⊕ N(A) well-defined and unique."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M4Q4M1",
+        "question": "For M = [[1,2],[3,6]], all four subspaces are 1D lines in R². How many distinct lines are there among the four?",
+        "options": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "correct_option": "4",
+        "explanation": "Step 1: R(M) = t(1,2), N(M) = t(-2,1), C(M) = t(1,3), N(Mᵀ) = t(-3,1). Step 2: None of these directions are parallel — each points in a different direction. Step 3: All four are distinct lines in R². This is the maximum number of distinct 1D subspaces for a rank-1 2×2 matrix — a visually rich configuration."
+      },
+      {
+        "id": "M4Q4M2",
+        "question": "If A is 5×3 with rank 3, what are the dimensions of R(A), N(A), C(A), N(Aᵀ)?",
+        "options": [
+          "R(A)=3D, N(A)=0D, C(A)=3D, N(Aᵀ)=2D",
+          "R(A)=3D, N(A)=0D, C(A)=5D, N(Aᵀ)=0D (x)",
+          "R(A)=3D, N(A)=2D, C(A)=3D, N(Aᵀ)=2D (x)",
+          "R(A)=3D, N(A)=3D, C(A)=3D, N(Aᵀ)=3D (x)"
+        ],
+        "correct_option": "R(A)=3D, N(A)=0D, C(A)=3D, N(Aᵀ)=2D",
+        "explanation": "Step 1: rank = 3 → R(A) and C(A) are both 3D. Step 2: N(A) ⊂ R³: nullity = 3 - 3 = 0D (trivial). Step 3: N(Aᵀ) ⊂ R⁵: nullity = 5 - 3 = 2D. R(A) and N(A) decompose R³; C(A) and N(Aᵀ) decompose R⁵. The dimensions satisfy the Rank-Nullity Theorem in both spaces."
+      },
+      {
+        "id": "M4Q4M3",
+        "question": "The Fundamental Theorem says R(A) ⊥ N(A) in Rⁿ and C(A) ⊥ N(Aᵀ) in Rᵐ. What do these pairs TOGETHER give us?",
+        "options": [
+          "A decomposition of Rⁿ and Rᵐ into orthogonal subspaces",
+          "A single decomposition of Rⁿ",
+          "The eigenvalues of A — does t match",
+          "The determinant of A — does t match"
+        ],
+        "correct_option": "A decomposition of Rⁿ and Rᵐ into orthogonal subspaces",
+        "explanation": "Step 1: R(A) ⊥ N(A) decomposes the input space Rⁿ = R(A) ⊕ N(A). Step 2: C(A) ⊥ N(Aᵀ) decomposes the output space Rᵐ = C(A) ⊕ N(Aᵀ). Step 3: Together, these give the complete orthogonal picture of how A maps between two spaces — what information is preserved, what is destroyed, what is reachable, and what is not."
+      },
+      {
+        "id": "M4Q4M4",
+        "question": "For a 3×3 matrix with rank 2, R(A) is a 2D plane and N(A) is a 1D line. What is the geometric relationship?",
+        "options": [
+          "The line lies in the plane",
+          "The line is perpendicular to the plane",
+          "The line intersects the plane at 45° (x)",
+          "They are parallel — does t match"
+        ],
+        "correct_option": "The line is perpendicular to the plane",
+        "explanation": "Step 1: R(A) is a 2D plane in R³. Step 2: N(A) is a 1D line in R³. Step 3: R(A) ⊥ N(A) means the line is perpendicular to the plane — every direction in the plane is perpendicular to the line. Together they decompose R³: every 3D vector splits into a planar component (row space) and a perpendicular component (null space)."
+      },
+      {
+        "id": "M4Q4M5",
+        "question": "Why is the orthogonality C(A) ⊥ N(Aᵀ) useful in practice?",
+        "options": [
+          "It guarantees A is invertible",
+          "It allows us to decompose any output into reachable (column space) and unreachable (left null space) components",
+          "It means all columns of A are perpendicular",
+          "It makes the determinant zero"
+        ],
+        "correct_option": "It allows us to decompose any output into reachable (column space) and unreachable (left null space) components",
+        "explanation": "Step 1: Any output b ∈ Rᵐ decomposes as b = p + n where p ∈ C(A) and n ∈ N(Aᵀ). Step 2: p is the component M can produce; n is unreachable. Step 3: This decomposition is fundamental to least squares (projecting b onto C(A) to find the best approximation) and signal processing (separating signal from noise)."
+      },
+      {
+        "id": "M4Q4M6",
+        "question": "If a matrix A has rank 0 (the zero matrix), what are its four subspaces?",
+        "options": [
+          "R(A)={0}, C(A)={0}, N(A)=Rⁿ, N(Aᵀ)=Rᵐ",
+          "All four are {0} — does t match",
+          "All four are Rⁿ — does t match",
+          "R(A)=Rⁿ, N(A)={0}, C(A)=Rᵐ, N(Aᵀ)={0} (x)"
+        ],
+        "correct_option": "R(A)={0}, C(A)={0}, N(A)=Rⁿ, N(Aᵀ)=Rᵐ",
+        "explanation": "Step 1: Rank 0 means no independent rows or columns → R(A) = C(A) = {0}. Step 2: Every vector maps to zero → N(A) = Rⁿ (all inputs are null). Step 3: Every output direction is unreachable → N(Aᵀ) = Rᵐ. This is the extreme case: the matrix destroys all information, and both null spaces fill their entire ambient spaces."
+      },
+      {
+        "id": "M4Q4M7",
+        "question": "For M = [[1,2],[3,6]], the four subspaces split R² into four 1D lines. What is the angle between R(M) and C(M)?",
+        "options": [
+          "90°",
+          "0°",
+          "About 8.1°",
+          "45°"
+        ],
+        "correct_option": "About 8.1°",
+        "explanation": "Step 1: R(M) = t(1,2) and C(M) = t(1,3). Step 2: cos(θ) = (1·1+2·3)/(√5·√10) = 7/√50 ≈ 0.990, so θ ≈ 8.1°. Step 3: The row space and column space are NOT generally perpendicular — only their respective null space partners are. The angle between R(M) and C(M) depends on the specific matrix."
+      },
+      {
+        "id": "M4Q4M8",
+        "question": "If b is a vector in Rᵐ and we decompose b = p + n where p ∈ C(A) and n ∈ N(Aᵀ), what is special about this decomposition?",
+        "options": [
+          "p and n are perpendicular",
+          "p equals b",
+          "n equals b",
+          "p and n are parallel"
+        ],
+        "correct_option": "p and n are perpendicular",
+        "explanation": "Step 1: Since C(A) ⊥ N(Aᵀ), any p ∈ C(A) is perpendicular to any n ∈ N(Aᵀ). Step 2: The decomposition b = p + n is unique because the subspaces are orthogonal. Step 3: p is the orthogonal projection of b onto C(A) — the closest point in the column space. This projection is the foundation of least-squares approximation."
+      },
+      {
+        "id": "M4Q4M9",
+        "question": "For an invertible n×n matrix, all four subspaces are either {0} or Rⁿ. Which subspaces equal Rⁿ and which equal {0}?",
+        "options": [
+          "R(A)=C(A)=Rⁿ, N(A)=N(Aᵀ)={0}",
+          "R(A)=N(A)=Rⁿ, C(A)=N(Aᵀ)={0} (x)",
+          "All four equal Rⁿ",
+          "All four equal {0}"
+        ],
+        "correct_option": "R(A)=C(A)=Rⁿ, N(A)=N(Aᵀ)={0}",
+        "explanation": "Step 1: Full rank (rank = n) means the row space and column space span all of Rⁿ. Step 2: Nullity = 0 means both null spaces contain only the zero vector. Step 3: The matrix maps every direction to a nonzero output — no information is lost. This is the ideal scenario: Rⁿ = R(A) ⊕ {0} and Rⁿ = C(A) ⊕ {0}."
+      },
+      {
+        "id": "M4Q4M10",
+        "question": "In the orthogonal decomposition Rⁿ = R(A) ⊕ N(A), any vector v can be written as v = v_row + v_null. What happens when A is applied to v?",
+        "options": [
+          "Av = Av_row (the null space component vanishes)",
+          "Av = Av_null (the row space component vanishes) (x)",
+          "Av = v)",
+          "Av = 0)"
+        ],
+        "correct_option": "Av = Av_row (the null space component vanishes)",
+        "explanation": "Step 1: v = v_row + v_null where v_row ∈ R(A) and v_null ∈ N(A). Step 2: Av = A(v_row + v_null) = Av_row + Av_null = Av_row + 0 = Av_row. Step 3: Only the row space component survives — the null space component is annihilated. This is the operational meaning of the orthogonal decomposition: M preserves what's in R(M) and destroys what's in N(M)."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M4Q4H1",
+        "question": "Prove that if v ∈ N(A), then v is perpendicular to every row of A.",
+        "options": [
+          "Av = 0 means row_i(A)·v = 0 for each i",
+          "v is always the zero vector",
+          "Only the first row is perpendicular to v",
+          "This only works for square matrices"
+        ],
+        "correct_option": "Av = 0 means row_i(A)·v = 0 for each i",
+        "explanation": "Step 1: The jth component of Av is rowⱼ(A) · v. Step 2: If Av = 0, every component is 0, so rowⱼ(A) · v = 0 for every j. Step 3: Since v ⊥ every row, v ⊥ R(A). This is the standard proof of R(A) ⊥ N(A) — it uses only the definition of matrix-vector multiplication and holds for any m×n matrix."
+      },
+      {
+        "id": "M4Q4H2",
+        "question": "Prove that R(A) ⊥ N(A) implies N(A) ⊆ R(A)⊥ (the orthogonal complement of the row space).",
+        "options": [
+          "By definition, R(A)⊥ = {v : v·r = 0 for all r ∈ R(A)}, and N(A) satisfies this",
+          "This is false — N(A) is t a subset of R(A)⊥",
+          "Only true for symmetric matrices",
+          "Only true when A has full rank"
+        ],
+        "correct_option": "By definition, R(A)⊥ = {v : v·r = 0 for all r ∈ R(A)}, and N(A) satisfies this",
+        "explanation": "Step 1: R(A)⊥ is the set of all vectors perpendicular to every vector in R(A). Step 2: Since R(A) ⊥ N(A), every v ∈ N(A) is perpendicular to every r ∈ R(A), so N(A) ⊆ R(A)⊥. Step 3: In fact, dim(N(A)) = n - r = dim(R(A)⊥), so N(A) = R(A)⊥ exactly — the null space IS the orthogonal complement of the row space."
+      },
+      {
+        "id": "M4Q4H3",
+        "question": "For an m×n matrix A with rank r, prove that dim(R(A)) + dim(N(A)) = n.",
+        "options": [
+          "This is the Rank-Nullity Theorem, proved by counting pivots in row echelon form",
+          "This follows from the Pythagorean theorem",
+          "This is only true for square matrices",
+          "This requires A to be symmetric"
+        ],
+        "correct_option": "This is the Rank-Nullity Theorem, proved by counting pivots in row echelon form",
+        "explanation": "Step 1: In row echelon form, there are r pivot columns and n - r free columns. Step 2: The r pivot rows span R(A), so dim(R(A)) = r. Step 3: The n - r free variables parametrize N(A), so dim(N(A)) = n - r. Therefore r + (n - r) = n. This is the Rank-Nullity Theorem — one of the most fundamental results in linear algebra."
+      },
+      {
+        "id": "M4Q4H4",
+        "question": "If A is 4×6 with rank 3, the four subspaces have dimensions: R(A)=3D in R⁶, N(A)=3D in R⁶, C(A)=3D in R⁴, N(Aᵀ)=1D in R⁴. What is special about R(A) and N(A) in this case?",
+        "options": [
+          "They are equal in dimension and together span R⁶",
+          "R(A) is contained in N(A)",
+          "N(A) is contained in R(A)",
+          "They are parallel subspaces"
+        ],
+        "correct_option": "They are equal in dimension and together span R⁶",
+        "explanation": "Step 1: R(A) = 3D and N(A) = 3D, both in R⁶. Step 2: dim(R(A)) + dim(N(A)) = 3 + 3 = 6 = dim(R⁶). Step 3: Since they are orthogonal and their dimensions sum to 6, R(A) ⊕ N(A) = R⁶. They form an orthogonal decomposition of the entire input space — a complete partition into preserved and destroyed directions."
+      },
+      {
+        "id": "M4Q4H5",
+        "question": "Why can we write ANY b ∈ Rᵐ uniquely as b = p + n where p ∈ C(A) and n ∈ N(Aᵀ)?",
+        "options": [
+          "Because C(A) and N(Aᵀ) are orthogonal subspaces whose dimensions sum to m",
+          "Because A is always invertible",
+          "Because C(A) always equals Rᵐ",
+          "Because N(Aᵀ) is always trivial"
+        ],
+        "correct_option": "Because C(A) and N(Aᵀ) are orthogonal subspaces whose dimensions sum to m",
+        "explanation": "Step 1: dim(C(A)) = r and dim(N(Aᵀ)) = m - r. Step 2: Since C(A) ⊥ N(Aᵀ) and r + (m - r) = m, these subspaces form an orthogonal decomposition of Rᵐ. Step 3: Every b can be uniquely projected: p = proj_{C(A)}(b), n = b - p ∈ N(Aᵀ). This unique decomposition is the foundation of least-squares methods."
+      },
+      {
+        "id": "M4Q4H6",
+        "question": "For A = [[1,2,3],[4,5,6],[7,8,9]], N(A) = t(1,-2,1) and N(Aᵀ) = t(1,-2,1) (same direction!). R(A) is a plane. Is it possible for N(A) and N(Aᵀ) to be the same subspace?",
+        "options": [
+          "Yes — it happens when A and Aᵀ share the same null direction",
+          "— they always live in different spaces",
+          "Only if A is symmetric",
+          "Only if rank = 0 — does t match"
+        ],
+        "correct_option": "Yes — it happens when A and Aᵀ share the same null direction",
+        "explanation": "Step 1: For this specific matrix, both M and Mᵀ have the same null direction (1,-2,1). Step 2: This is not because M is symmetric (it is not: M ≠ Mᵀ). Step 3: It happens because the row and column dependencies of this particular matrix produce the same null direction — a coincidence, not a general rule."
+      },
+      {
+        "id": "M4Q4H7",
+        "question": "If A is m×n with rank r, prove that C(A) = R(Aᵀ).",
+        "options": [
+          "The columns of A are the rows of Aᵀ, so their spans are equal",
+          "This is false in general",
+          "Only true for square matrices",
+          "Only when r = m = n — does t match"
+        ],
+        "correct_option": "The columns of A are the rows of Aᵀ, so their spans are equal",
+        "explanation": "Step 1: C(A) = span of columns of A. Step 2: The columns of A are exactly the rows of Aᵀ. Step 3: Therefore C(A) = R(Aᵀ). This identity is why R(Aᵀ) ⊥ N(A) is equivalent to C(A) ⊥ N(A) — it connects the column space to the transpose's row space, unifying the four-subspace framework."
+      },
+      {
+        "id": "M4Q4H8",
+        "question": "For a rank-1 matrix M = [[1,2],[3,6]], all four subspaces are perpendicular lines in R². Do R(M) and N(Mᵀ) point in the same direction?",
+        "options": [
+          "No: R(M) = t(1,2) and N(Mᵀ) = t(-3,1) are different directions",
+          "they are the same line",
+          "They are perpendicular",
+          "They are parallel — does t match"
+        ],
+        "correct_option": "No: R(M) = t(1,2) and N(Mᵀ) = t(-3,1) are different directions",
+        "explanation": "Step 1: R(M) = t(1,2) (row space). Step 2: N(Mᵀ) = t(-3,1) (left null space). Step 3: These are different lines — the row space and left null space live in different orthogonal pairs. R(M) ⊥ N(M) and C(M) ⊥ N(Mᵀ), but there is no required relationship between R(M) and N(Mᵀ)."
+      },
+      {
+        "id": "M4Q4H9",
+        "question": "If A is 3×3 with rank 2, R(A) is a 2D plane and N(A) is a 1D line perpendicular to it. C(A) is a 2D plane and N(Aᵀ) is a 1D line perpendicular to it. Can the two 1D lines (N(A) and N(Aᵀ)) ever be the same?",
+        "options": [
+          "Yes, it depends on the matrix — as seen with [[1,4,7],[2,5,8],[3,6,9]]",
+          "Never — they live in different spaces",
+          "Only if the matrix is the identity",
+          "Only if the matrix has rank 3"
+        ],
+        "correct_option": "Yes, it depends on the matrix — as seen with [[1,4,7],[2,5,8],[3,6,9]]",
+        "explanation": "Step 1: For A = [[1,4,7],[2,5,8],[3,6,9]], N(A) = t(1,-2,1) and N(Aᵀ) = t(1,-2,1). Step 2: Both are the same 1D line, even though A ≠ Aᵀ. Step 3: This happens because the row dependency (row3 = 2·row2 - row1) and column dependency (col3 = 2·col2 - col1) produce the same null direction — a special case, not the general rule."
+      },
+      {
+        "id": "M4Q4H10",
+        "question": "The Fundamental Theorem says R(A) ⊥ N(A) and C(A) ⊥ N(Aᵀ). Can we also say R(A) ⊥ N(Aᵀ) in general?",
+        "options": [
+          "No — this is not guaranteed and is generally false",
+          "always — does t match",
+          "Only for square matrices",
+          "Only when rank equals m"
+        ],
+        "correct_option": "No — this is not guaranteed and is generally false",
+        "explanation": "Step 1: The guaranteed pairs are R(A) ⊥ N(A) and C(A) ⊥ N(Aᵀ). Step 2: R(A) and N(Aᵀ) live in different spaces when m ≠ n (orthogonality is meaningless). Step 3: Even for square matrices, R(A) and N(Aᵀ) are generally not perpendicular. For M = [[1,2],[3,6]], R(M) = t(1,2) and N(Mᵀ) = t(-3,1) with dot product -3+2 = -1 ≠ 0."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "id": "M4Q4R1",
+      "question": "In signal processing, the useful signal lives in C(A) (column space) and measurement ambiguity lives in N(Aᵀ) (left null space). Because they are orthogonal, what can the receiver do?",
+      "options": [
+        "Mix signal and ambiguity together",
+        "Separate the signal from ambiguity by projecting onto the column space",
+        "Igre the left null space entirely",
+        "Double the signal amplitude"
+      ],
+      "correct_option": "Separate the signal from ambiguity by projecting onto the column space",
+      "explanation": "Step 1: The received signal b decomposes as b = p + n where p ∈ C(A) and n ∈ N(Aᵀ). Step 2: Because C(A) ⊥ N(Aᵀ), this decomposition is unique and non-overlapping. Step 3: The receiver projects b onto C(A) to extract the true signal p, while n (the ambiguity) is discarded. This is orthogonal projection applied to signal recovery."
+    },
+    {
+      "id": "M4Q4R2",
+      "question": "In structural engineering, forces in the column space cause deformation while forces in the left null space cause rigid body motion. Why is this separation important?",
+      "options": [
+        "It makes the structure heavier",
+        "It allows engineers to compute internal stresses independently of overall movement",
+        "It eliminates all forces",
+        "It makes the structure flexible"
+      ],
+      "correct_option": "It allows engineers to compute internal stresses independently of overall movement",
+      "explanation": "Step 1: C(A) contains forces that cause deformation (stress). Step 2: N(Aᵀ) contains forces causing rigid body motion (translation/rotation without stress). Step 3: Because C(A) ⊥ N(Aᵀ), these effects are independent — engineers can analyze stress and motion separately, a direct application of the C(A) ⊥ N(Aᵀ) orthogonality."
+    },
+    {
+      "id": "M4Q4R3",
+      "question": "In econometrics, instrumental variables (row space) must be orthogonal to error terms (null space) for unbiased estimates. What happens if this orthogonality fails?",
+      "options": [
+        "The estimates become more accurate",
+        "The estimates become biased and unreliable",
+        "thing changes",
+        "The model becomes simpler"
+      ],
+      "correct_option": "The estimates become biased and unreliable",
+      "explanation": "Step 1: R(A) ⊥ N(A) ensures instruments (row space) are uncorrelated with errors (null space). Step 2: If this orthogonality fails, instruments pick up error signal, biasing estimates. Step 3: The R(A) ⊥ N(A) condition is not just mathematical elegance — it is a practical requirement for trustworthy economic analysis."
+    },
+    {
+      "id": "M4Q4R4",
+      "question": "A GPS receiver gets signals from 4 satellites but the system matrix has rank 3. The 1D left null space represents what?",
+      "options": [
+        "A direction the receiver cannot determine from satellite signals",
+        "An extra satellite providing redundant information",
+        "The speed of light",
+        "The satellite orbit radius"
+      ],
+      "correct_option": "A direction the receiver cannot determine from satellite signals",
+      "explanation": "Step 1: rank = 3 means the column space is 3D. Step 2: For 4 satellites, N(Aᵀ) is 1D (4 - 3 = 1). Step 3: This left null space direction represents a position combination that the satellite geometry cannot resolve — the 'blind spot' of the configuration. Understanding N(Aᵀ) is critical for satellite geometry design."
+    },
+    {
+      "id": "M4Q4R5",
+      "question": "In machine learning, the row space of a data matrix contains signal and the null space contains noise. The column space contains learnable patterns and the left null space contains unlearnable patterns. Which subspace should a good model focus on?",
+      "options": [
+        "The null space (ise)",
+        "The row space (signal) and column space (learnable patterns)",
+        "The left null space (unlearnable patterns)",
+        "All four equally"
+      ],
+      "correct_option": "The row space (signal) and column space (learnable patterns)",
+      "explanation": "Step 1: The row space contains meaningful input variations (signal). Step 2: The column space contains output patterns the model can learn to produce. Step 3: A good model focuses on R(A) and C(A), while filtering out N(A) (noise) and N(Aᵀ) (unlearnable artifacts) — leveraging the four-subspace framework for model design."
+    },
+    {
+      "id": "M4Q4R6",
+      "question": "Audio noise-cancelling headphones use a reference mic to capture ambient noise. The anti-noise signal is designed to be in the left null space of the music channel. Why does this prevent music distortion?",
+      "options": [
+        "The anti-ise is louder than the music",
+        "Because N(Aᵀ) ⊥ C(A), the anti-noise cancels noise without affecting music",
+        "The headphones turn off the music temporarily",
+        "The ise and music are at different frequencies"
+      ],
+      "correct_option": "Because N(Aᵀ) ⊥ C(A), the anti-noise cancels noise without affecting music",
+      "explanation": "Step 1: Music lives in C(A) (column space of the audio channel). Step 2: Anti-noise is in N(Aᵀ) (left null space). Step 3: Because C(A) ⊥ N(Aᵀ), the anti-noise signal has zero effect on the music — it only cancels the noise. This is the C(A) ⊥ N(Aᵀ) orthogonality applied to consumer audio technology."
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1920,
+  "word": "Degraded",
+  "question": "Degraded",
+  "options": [
+    "Reduced in rank or status",
+    "To destroy a building or structure",
+    "Causing intense distaste or aversion",
+    "The action of detracting"
+  ],
+  "answerOption": "A",
+  "answerText": "Reduced in rank or status",
+  "difficulty": "medium",
+  "sourceFile": "1920.json"
+}

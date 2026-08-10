@@ -1,0 +1,15 @@
+{
+  "id": 105,
+  "word": "Modern",
+  "question": "Modern",
+  "options": [
+    "Treating people equally without favoritism",
+    "Free from bacteria; completely clean",
+    "To warn someone about potential danger",
+    "Relating to the present time"
+  ],
+  "answerOption": "D",
+  "answerText": "Relating to the present time",
+  "difficulty": "easy",
+  "sourceFile": "0105.json"
+}

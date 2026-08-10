@@ -1,0 +1,14 @@
+{
+  "id": 501,
+  "question": "Which country is associated with the city of Helsinki?",
+  "options": [
+    "Sweden",
+    "Finland",
+    "Norway",
+    "Estonia"
+  ],
+  "answerOption": "B",
+  "answerText": "Finland",
+  "genre": "geography",
+  "sourceFile": "0501.json"
+}

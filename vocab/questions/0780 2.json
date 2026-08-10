@@ -1,0 +1,15 @@
+{
+  "id": 780,
+  "word": "Artificial",
+  "question": "Artificial",
+  "options": [
+    "Made by human skill; not natural",
+    "Done of one's own free will",
+    "Showing a willingness to take risks",
+    "To live in or occupy a place"
+  ],
+  "answerOption": "A",
+  "answerText": "Made by human skill; not natural",
+  "difficulty": "easy",
+  "sourceFile": "0780.json"
+}

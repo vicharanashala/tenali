@@ -1,0 +1,15 @@
+{
+  "id": 2140,
+  "word": "Advance",
+  "question": "Advance",
+  "options": [
+    "Toxemia from air exposure",
+    "Dental pain from altitude",
+    "To move forward or progress",
+    "A person who pleads for another"
+  ],
+  "answerOption": "C",
+  "answerText": "To move forward or progress",
+  "difficulty": "hard",
+  "sourceFile": "2140.json"
+}

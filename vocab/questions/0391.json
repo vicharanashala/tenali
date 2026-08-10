@@ -1,0 +1,15 @@
+{
+  "id": 391,
+  "word": "Wilt",
+  "question": "Wilt",
+  "options": [
+    "To write or name the letters of a word",
+    "To fasten or join one thing to another",
+    "To become limp through heat or lack of water",
+    "To examine and record the features of something"
+  ],
+  "answerOption": "C",
+  "answerText": "To become limp through heat or lack of water",
+  "difficulty": "easy",
+  "sourceFile": "0391.json"
+}

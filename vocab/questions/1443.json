@@ -1,0 +1,15 @@
+{
+  "id": 1443,
+  "word": "Denomination",
+  "question": "Denomination",
+  "options": [
+    "To attract by offering pleasure or advantage",
+    "Easily crumbled or reduced",
+    "A religious group or value",
+    "To remove poison from something"
+  ],
+  "answerOption": "C",
+  "answerText": "A religious group or value",
+  "difficulty": "medium",
+  "sourceFile": "1443.json"
+}

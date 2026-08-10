@@ -1,0 +1,15 @@
+{
+  "id": 218,
+  "word": "Enjoy",
+  "question": "Enjoy",
+  "options": [
+    "Lacking in liveliness or joy",
+    "To move through the air with wings",
+    "To exert force to move something closer",
+    "To take delight or pleasure in something"
+  ],
+  "answerOption": "D",
+  "answerText": "To take delight or pleasure in something",
+  "difficulty": "easy",
+  "sourceFile": "0218.json"
+}

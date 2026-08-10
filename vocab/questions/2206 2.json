@@ -1,0 +1,15 @@
+{
+  "id": 2206,
+  "word": "AEROPHYTUM",
+  "question": "AEROPHYTUM",
+  "options": [
+    "An air-dependent plant",
+    "Divination by air and weather",
+    "One's opponent in a contest",
+    "A meteorite or stone"
+  ],
+  "answerOption": "A",
+  "answerText": "An air-dependent plant",
+  "difficulty": "hard",
+  "sourceFile": "2206.json"
+}

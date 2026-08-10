@@ -1,0 +1,15 @@
+{
+  "id": 249,
+  "word": "Avoid",
+  "question": "Avoid",
+  "options": [
+    "To do physical harm or damage to someone",
+    "To give something to someone temporarily",
+    "To keep away from something",
+    "Of or at a low temperature"
+  ],
+  "answerOption": "C",
+  "answerText": "To keep away from something",
+  "difficulty": "easy",
+  "sourceFile": "0249.json"
+}

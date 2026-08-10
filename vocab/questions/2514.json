@@ -1,0 +1,15 @@
+{
+  "id": 2514,
+  "word": "Aerojet",
+  "question": "Aerojet",
+  "options": [
+    "The quality of being imputable",
+    "A jet-powered aircraft",
+    "Of or belonging to a time before a great flood",
+    "The quality of lasting forever"
+  ],
+  "answerOption": "B",
+  "answerText": "A jet-powered aircraft",
+  "difficulty": "hard",
+  "sourceFile": "2514.json"
+}

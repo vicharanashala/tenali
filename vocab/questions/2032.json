@@ -1,0 +1,15 @@
+{
+  "id": 2032,
+  "word": "Loquacious",
+  "question": "Loquacious",
+  "options": [
+    "The quality of being clear",
+    "The action of corroborating something",
+    "Description of air and atmosphere",
+    "Tending to talk a great deal"
+  ],
+  "answerOption": "D",
+  "answerText": "Tending to talk a great deal",
+  "difficulty": "hard",
+  "sourceFile": "2032.json"
+}

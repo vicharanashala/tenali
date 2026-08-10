@@ -1,0 +1,14 @@
+{
+  "id": 362,
+  "question": "Which process converts sugar into alcohol with the help of yeast?",
+  "options": [
+    "Oxidation",
+    "Fermentation",
+    "Distillation",
+    "Filtration"
+  ],
+  "answerOption": "B",
+  "answerText": "Fermentation",
+  "genre": "mixed",
+  "sourceFile": "0362.json"
+}

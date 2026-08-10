@@ -1,0 +1,474 @@
+{
+  "module": 3,
+  "missionId": 22,
+  "title": "Perpendicular Vectors 2D",
+  "original_question": "Draw vector [1,1]. Find all vectors [x,y] perpendicular to it: [1,1]·[x,y]=0 → x+y=0 → y=-x. Now generalize: replace [1,1] with [a,b]. For any [a,b], perpendicular vectors satisfy ax+by=0 — a whole line through origin!",
+  "core_concept": "Two vectors are perpendicular (orthogonal) when their dot product equals zero. For any vector [a,b], the set of all perpendicular vectors forms a line through the origin defined by ax+by=0.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M3Q1E1",
+        "question": "What is the dot product of [1,1] and [2,-2]?",
+        "options": [
+          "0",
+          "4",
+          "-4",
+          "2"
+        ],
+        "correct_option": "0",
+        "explanation": "Step 1: Compute (1)(2) + (1)(-2) = 2 − 2 = 0. Step 2: The dot product being zero tells us cos(θ) = 0, so the angle between them is 90°. Step 3: This is the defining test of perpendicularity: two vectors are orthogonal if and only if their dot product vanishes. Step 4: This zero-dot-product condition scales to any dimension and is the foundation for orthonormal bases, projections, and least-squares approximations."
+      },
+      {
+        "id": "M3Q1E2",
+        "question": "Is the vector [3,4] perpendicular to [4,-3]?",
+        "options": [
+          "Yes",
+          "",
+          "Only if scaled",
+          "Cant determine"
+        ],
+        "correct_option": "Yes",
+        "explanation": "Step 1: Compute (3)(4) + (4)(-3) = 12 − 12 = 0. Step 2: The zero result confirms orthogonality by the fundamental dot product condition. Step 3: Notice the pattern: [a,b] is always perpendicular to [b,-a] — swapping coordinates and negating one guarantees a dot product of zero. Step 4: This swap-and-negate trick appears constantly in computer graphics, physics, and engineering whenever a perpendicular direction is needed."
+      },
+      {
+        "id": "M3Q1E3",
+        "question": "What is the dot product of [1,2] and [3,5]?",
+        "options": [
+          "13",
+          "7 (x)",
+          "11",
+          "0"
+        ],
+        "correct_option": "13",
+        "explanation": "Step 1: Compute (1)(3) + (2)(5) = 3 + 10 = 13. Step 2: Since 13 ≠ 0, these vectors are not perpendicular — the angle between them is acute (less than 90°). Step 3: A positive dot product means the vectors point in roughly the same direction (angle < 90°), while a negative dot product means they point in opposite directions (angle > 90°). Step 4: Only a zero dot product signals pure perpendicularity, which is the geometric core of orthogonality: no projection of one vector onto the other."
+      },
+      {
+        "id": "M3Q1E4",
+        "question": "Which vector is perpendicular to [1,0]?",
+        "options": [
+          "[0,5]",
+          "[3,0]",
+          "[1,1]",
+          "[2,3]"
+        ],
+        "correct_option": "[0,5]",
+        "explanation": "Step 1: Dot product of [1,0] and [0,5] = (1)(0) + (0)(5) = 0. Step 2: The x-axis direction [1,0] is perpendicular to the y-axis direction [0,5], matching our geometric intuition from coordinate geometry. Step 3: The standard basis vectors e₁ = [1,0] and e₂ = [0,1] are designed to be orthogonal, which is why axes are perpendicular in graphs. Step 4: This perpendicularity of basis vectors simplifies coordinate calculations tremendously and underlies the entire Cartesian coordinate system."
+      },
+      {
+        "id": "M3Q1E5",
+        "question": "If [1,1]·[x,y] = 0, what equation must x and y satisfy?",
+        "options": [
+          "x + y = 0",
+          "x - y = 0",
+          "x + y = 1",
+          "xy = 0 (x)"
+        ],
+        "correct_option": "x + y = 0",
+        "explanation": "Step 1: The dot product [1,1]·[x,y] = 1·x + 1·y = x + y. Step 2: Setting this equal to 0 gives x + y = 0, which rearranges to y = −x — a line through the origin with slope −1. Step 3: This equation defines the entire orthogonal complement of [1,1] — a 1-dimensional subspace (a line) in R². Step 4: In higher dimensions, perpendicularity to a single vector always yields an (n−1)-dimensional hyperplane, a pattern that recurs throughout linear algebra."
+      },
+      {
+        "id": "M3Q1E6",
+        "question": "Which of these vectors is perpendicular to [2,3]?",
+        "options": [
+          "[3,-2]",
+          "[-2,3]",
+          "[2,-3]",
+          "[3,2] (x)"
+        ],
+        "correct_option": "[3,-2]",
+        "explanation": "Step 1: Compute [2,3]·[3,−2] = (2)(3) + (3)(−2) = 6 − 6 = 0. Step 2: This matches the swap-and-negate pattern: for [a,b], the perpendicular is [b,−a] — here a=2, b=3 gives [3,−2]. Step 3: The rule works because ax + by = 0 is solved by x = b, y = −a, giving ab − ab = 0. Step 4: This quick method avoids solving equations every time you need a perpendicular direction, which is handy in graphics, physics simulations, and geometry problems."
+      },
+      {
+        "id": "M3Q1E7",
+        "question": "What is the dot product of any vector with the zero vector [0,0]?",
+        "options": [
+          "0",
+          "Undefined",
+          "1 — t here",
+          "Depends on the vector"
+        ],
+        "correct_option": "0",
+        "explanation": "Step 1: For any vector [a,b], the dot product [a,b]·[0,0] = a·0 + b·0 = 0. Step 2: The zero vector is trivially perpendicular to every vector by this calculation. Step 3: However, the zero vector is usually excluded from discussions of orthogonality because it has no meaningful direction — it is perpendicular to everything only because every component is zero. Step 4: This edge case is important when proving subspace properties: the zero vector must be in every subspace, including orthogonal complements."
+      },
+      {
+        "id": "M3Q1E8",
+        "question": "Is [1,2] perpendicular to [-2,1]?",
+        "options": [
+          "Yes",
+          "— t here",
+          "Only approximately",
+          "Only in 3D"
+        ],
+        "correct_option": "Yes",
+        "explanation": "Step 1: [1,2]·[−2,1] = (1)(−2) + (2)(1) = −2 + 2 = 0. Step 2: The exact zero result confirms perpendicularity — there is no 'approximately perpendicular'; the condition is exact. Step 3: This is another instance of the [a,b] ↔ [b,−a] pattern: for [1,2], the perpendiculars are [2,−1] or [−2,1]. Step 4: The dot product condition is both necessary and sufficient for orthogonality, making it the definitive test in any dimension."
+      },
+      {
+        "id": "M3Q1E9",
+        "question": "The set of all vectors perpendicular to [1,1] forms what geometric shape?",
+        "options": [
+          "A line through the origin",
+          "A circle)",
+          "A single point",
+          "A plane)"
+        ],
+        "correct_option": "A line through the origin",
+        "explanation": "Step 1: The condition [1,1]·[x,y] = 0 gives x + y = 0, or y = −x. Step 2: This is a line through the origin with slope −1 — it is the orthogonal complement of span{[1,1]}. Step 3: In R², the orthogonal complement of any 1D subspace is always another 1D subspace (a line). Step 4: The dimension formula dim(W) + dim(W⊥) = n holds universally: 1 + 1 = 2 in R², and generalizes to any subspace and its complement."
+      },
+      {
+        "id": "M3Q1E10",
+        "question": "What is the slope of the line containing all vectors perpendicular to [1,1]?",
+        "options": [
+          "-1",
+          "1 (x)",
+          "0",
+          "2"
+        ],
+        "correct_option": "-1",
+        "explanation": "Step 1: From x + y = 0, we get y = −x, which has slope −1. Step 2: The original vector [1,1] has slope 1/1 = 1, and the perpendicular slope is −1 — their product is (1)(−1) = −1. Step 3: This is the classic perpendicular slopes theorem: two non-vertical lines are perpendicular if and only if their slopes multiply to −1. Step 4: This geometric fact is a direct consequence of the dot product condition and bridges algebraic orthogonality with geometric intuition about right angles."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M3Q1M1",
+        "question": "For a general vector [a,b], the perpendicular line through the origin has equation:",
+        "options": [
+          "ax + by = 0",
+          "ax - by = 0",
+          "x + y = 0 (x)",
+          "bx + ay = 0"
+        ],
+        "correct_option": "ax + by = 0",
+        "explanation": "Step 1: Perpendicularity requires [a,b]·[x,y] = 0, which expands to ax + by = 0. Step 2: This is a homogeneous linear equation — it always passes through the origin since (0,0) trivially satisfies it. Step 3: The coefficients (a,b) in the equation are exactly the components of the original vector, creating a direct algebraic link between a vector and its orthogonal complement. Step 4: This generalizes to n dimensions: a single vector's perpendicular set is always an (n−1)-dimensional hyperplane defined by one homogeneous linear equation, a pattern that reappears in the Fundamental Theorem of Linear Algebra."
+      },
+      {
+        "id": "M3Q1M2",
+        "question": "The slope of the line of vectors perpendicular to [a,b] is:",
+        "options": [
+          "-a/b",
+          "a/b (x)",
+          "b/a",
+          "-b/a"
+        ],
+        "correct_option": "-a/b",
+        "explanation": "Step 1: From ax + by = 0, solve for y: y = −(a/b)x, giving slope −a/b. Step 2: The original vector [a,b] has slope b/a, and (b/a)(−a/b) = −1, confirming the perpendicular slopes theorem. Step 3: This formula reveals why vertical and horizontal lines are perpendicular: [1,0] (horizontal) has perpendicular slope −1/0 (undefined = vertical), and [0,1] (vertical) has perpendicular slope 0 (horizontal). Step 4: The dot product formulation avoids these special cases entirely and works uniformly across all dimensions."
+      },
+      {
+        "id": "M3Q1M3",
+        "question": "If two vectors have a dot product of 5, can they be perpendicular?",
+        "options": [
+          "No, perpendicular vectors must have dot product = 0",
+          "if scaled appropriately",
+          "Only in 3D)",
+          "always — does t match"
+        ],
+        "correct_option": "No, perpendicular vectors must have dot product = 0",
+        "explanation": "Step 1: By definition, two vectors are perpendicular if and only if their dot product is exactly 0. Step 2: A dot product of 5 means cos(θ) > 0, so the angle is acute (less than 90°). Step 3: The dot product formula u·v = ‖u‖‖v‖cos(θ) can only be zero when cos(θ) = 0, i.e., θ = 90°. Step 4: Perpendicularity is a property of direction, not magnitude — scaling vectors changes their lengths but not whether they are perpendicular."
+      },
+      {
+        "id": "M3Q1M4",
+        "question": "If [1,2]·[x,y] = 0, which of the following is a valid perpendicular vector?",
+        "options": [
+          "[2,-1]",
+          "[-2,-1]",
+          "[1,2]",
+          "[2,1]"
+        ],
+        "correct_option": "[2,-1]",
+        "explanation": "Step 1: The condition is x + 2y = 0, so x = −2y. Step 2: Setting y = −1 gives x = 2, so [2,−1] satisfies the equation: (1)(2) + (2)(−1) = 0. Step 3: This follows the swap-and-negate pattern [a,b] → [b,−a]: for [1,2], we get [2,−1]. Step 4: All perpendicular vectors to [1,2] lie on the line t(2,−1) — the direction is unique up to scalar multiples, forming the orthogonal complement of the original vector."
+      },
+      {
+        "id": "M3Q1M5",
+        "question": "What is the geometric relationship between a vector and the set of all vectors perpendicular to it?",
+        "options": [
+          "The vector is perpendicular to its own perpendicular set",
+          "The vector lies in its perpendicular set",
+          "They are parallel — does t match",
+          "They are identical — does t match"
+        ],
+        "correct_option": "The vector is perpendicular to its own perpendicular set",
+        "explanation": "Step 1: The perpendicular set of [a,b] is the line ax + by = 0. Step 2: The vector [a,b] itself gives a·a + b·b = a² + b² > 0 (for non-zero vectors), so it is NOT in its own perpendicular set. Step 3: Instead, [a,b] is perpendicular to every member of its perpendicular set — this is the defining property of orthogonal complements. Step 4: The vector and its orthogonal complement are 'orthogonal partners' that together partition the space, a principle that generalizes to the Fundamental Theorem of Linear Algebra."
+      },
+      {
+        "id": "M3Q1M6",
+        "question": "If [3,4] is perpendicular to a vector [x,y], and y = 3, what is x?",
+        "options": [
+          "-4",
+          "4 (x)",
+          "-3",
+          "3"
+        ],
+        "correct_option": "-4",
+        "explanation": "Step 1: The dot product condition is 3x + 4y = 0. Step 2: Substituting y = 3: 3x + 12 = 0, so x = −4. Step 3: The perpendicular vector [−4,3] follows the swap-and-negate rule from [3,4] → [4,−3] → its multiple [−4,3]. Step 4: This substitution method is a practical way to find specific perpendicular vectors when one component is known, useful in physics force decomposition and engineering calculations."
+      },
+      {
+        "id": "M3Q1M7",
+        "question": "How many dimensions does the perpendicular set of a non-zero vector in R² have?",
+        "options": [
+          "1 (a line)",
+          "2 (a plane)",
+          "0 (a point)",
+          "3"
+        ],
+        "correct_option": "1 (a line)",
+        "explanation": "Step 1: In R², the perpendicular set of [a,b] is the line ax + by = 0 — one equation in two unknowns. Step 2: This single constraint removes one degree of freedom, leaving a 1-dimensional subspace. Step 3: The general formula dim(W) + dim(W⊥) = n gives 1 + dim(W⊥) = 2, so dim(W⊥) = 1. Step 4: This dimension-counting principle extends to any dimension: in Rⁿ, the orthogonal complement of a 1D line is an (n−1)-dimensional hyperplane."
+      },
+      {
+        "id": "M3Q1M8",
+        "question": "Are the vectors [1,3] and [3,1] perpendicular?",
+        "options": [
+          "No",
+          "",
+          "Only if scaled",
+          "Cant determine"
+        ],
+        "correct_option": "No",
+        "explanation": "Step 1: [1,3]·[3,1] = (1)(3) + (3)(1) = 3 + 3 = 6 ≠ 0. Step 2: Since the dot product is not zero, these vectors are NOT perpendicular. Step 3: A common misconception is that symmetric-looking vectors are perpendicular — but the swap-and-negate rule requires negating one component: [1,3] is perpendicular to [3,−1], not [3,1]. Step 4: Always verify with the dot product rather than relying on visual symmetry; the algebraic test is definitive and never misleads."
+      },
+      {
+        "id": "M3Q1M9",
+        "question": "If u is perpendicular to v, what can you say about the angle between them?",
+        "options": [
+          "90 degrees",
+          "0 degrees",
+          "45 degrees",
+          "180 degrees"
+        ],
+        "correct_option": "90 degrees",
+        "explanation": "Step 1: Two vectors are perpendicular (orthogonal) when the angle between them is exactly 90°. Step 2: This is equivalent to their dot product being zero, since u·v = ‖u‖‖v‖cos(90°) = 0. Step 3: The term 'orthogonal' is used in higher-dimensional spaces where geometric intuition about angles breaks down, but the algebraic condition u·v = 0 still applies perfectly. Step 4: Perpendicularity is the gateway to understanding orthogonal bases, Gram-Schmidt orthogonalization, projections, and the structure of the Fundamental Theorem of Linear Algebra."
+      },
+      {
+        "id": "M3Q1M10",
+        "question": "Which pair of vectors are perpendicular?",
+        "options": [
+          "[1,-1] and [1,1]",
+          "[2,3] and [4,6] (x)",
+          "[1,0] and [1,1]",
+          "[3,2] and [1,4]"
+        ],
+        "correct_option": "[1,-1] and [1,1]",
+        "explanation": "Step 1: [1,−1]·[1,1] = (1)(1) + (−1)(1) = 1 − 1 = 0. Step 2: The other pairs have non-zero dot products: [2,3]·[4,6] = 26, [1,0]·[1,1] = 1, [3,2]·[1,4] = 11. Step 3: The pair [1,−1] and [1,1] forms an orthogonal basis for R² — they are perpendicular and together span the entire plane. Step 4: Orthogonal bases simplify computations enormously because the coordinates of any vector can be found independently via dot products, without solving linear systems."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M3Q1H1",
+        "question": "Why is the perpendicular set of a non-zero vector in R² always a 1-dimensional subspace?",
+        "options": [
+          "Because one linear equation in two unknowns reduces degrees of freedom by 1",
+          "Because all perpendicular sets are lines",
+          "Because R² only has two dimensions",
+          "Because the dot product is linear"
+        ],
+        "correct_option": "Because one linear equation in two unknowns reduces degrees of freedom by 1",
+        "explanation": "Step 1: The perpendicular set satisfies ax + by = 0, one independent linear equation in two unknowns. Step 2: Each independent equation removes exactly one degree of freedom from R² (2 − 1 = 1), leaving a 1-dimensional solution set — a line through the origin. Step 3: This is an instance of the rank-nullity principle: one constraint on an n-dimensional space yields an (n−1)-dimensional solution. Step 4: The perpendicular set is always a subspace because the equation is homogeneous (right-hand side = 0), guaranteeing closure under addition and scalar multiplication — the three subspace axioms are all satisfied."
+      },
+      {
+        "id": "M3Q1H2",
+        "question": "Is the perpendicular set of a non-zero vector in R² closed under addition?",
+        "options": [
+          "Yes — if u·v = 0 and w·v = 0, then (u+w)·v = 0",
+          "— adding two perpendicular vectors may",
+          "Only for certain vectors...",
+          "Only in R³)"
+        ],
+        "correct_option": "Yes — if u·v = 0 and w·v = 0, then (u+w)·v = 0",
+        "explanation": "Step 1: If u·v = 0 and w·v = 0, then (u+w)·v = u·v + w·v = 0 + 0 = 0 by the linearity (distributive property) of the dot product. Step 2: This proves the sum of two vectors perpendicular to v is also perpendicular to v — closure under addition holds. Step 3: Together with closure under scalar multiplication and containing the zero vector, this proves the perpendicular set is a genuine subspace. Step 4: The linearity of the dot product is what makes all three subspace conditions verifiable simultaneously, a technique used throughout abstract linear algebra."
+      },
+      {
+        "id": "M3Q1H3",
+        "question": "Is the perpendicular set of a non-zero vector in R² closed under scalar multiplication?",
+        "options": [
+          "Yes — if u·v = 0, then (cu)·v = c(u·v) = 0 for any scalar c",
+          "— only positive scalars work",
+          "Only if c = 1 — does t match",
+          "Depends on the vector"
+        ],
+        "correct_option": "Yes — if u·v = 0, then (cu)·v = c(u·v) = 0 for any scalar c",
+        "explanation": "Step 1: By the homogeneity property of the dot product, (cu)·v = c(u·v). Step 2: If u·v = 0, then c·0 = 0 for any scalar c, so cu is also perpendicular to v. Step 3: This closure under scalar multiplication means the entire line through any perpendicular vector stays in the perpendicular set — scaling does not break orthogonality. Step 4: This property is essential for the perpendicular set to be a subspace rather than just a set of isolated points, enabling us to talk about its dimension and basis."
+      },
+      {
+        "id": "M3Q1H4",
+        "question": "Does the perpendicular set of [a,b] always contain the zero vector?",
+        "options": [
+          "Yes, because [a,b]·[0,0] = 0 always",
+          "it depends on a and b",
+          "Only if a = b — does t match",
+          "Only in 3D)"
+        ],
+        "correct_option": "Yes, because [a,b]·[0,0] = 0 always",
+        "explanation": "Step 1: The zero vector [0,0] satisfies ax + by = a(0) + b(0) = 0 for any a, b. Step 2: This means the zero vector is always in the perpendicular set, satisfying one of the three subspace requirements. Step 3: The zero vector being in every subspace is a fundamental fact — it is the 'anchor' that all subspaces share, guaranteeing non-emptiness. Step 4: Combined with closure under addition and scalar multiplication, the presence of the zero vector completes the proof that the perpendicular set is a genuine subspace."
+      },
+      {
+        "id": "M3Q1H5",
+        "question": "Since the perpendicular set of a non-zero vector in R² contains the zero vector, is closed under addition, and is closed under scalar multiplication, what is it formally?",
+        "options": [
+          "A 1-dimensional subspace (line through origin)",
+          "A 2-dimensional subspace",
+          "t a subspace — does t match",
+          "An affine set — does t match"
+        ],
+        "correct_option": "A 1-dimensional subspace (line through origin)",
+        "explanation": "Step 1: We have verified all three subspace conditions: contains zero vector, closed under addition, closed under scalar multiplication. Step 2: Since the solution set of one independent linear equation in R² is 1-dimensional, it is a 1-dimensional subspace. Step 3: Formally, this is the orthogonal complement W⊥ of the 1D subspace W = span{[a,b]}. The dimension formula dim(W) + dim(W⊥) = n = 2 gives 1 + 1 = 2, confirming it is a complementary subspace. Step 4: This structure — a subspace and its orthogonal complement partitioning the ambient space — is the geometric heart of the Fundamental Theorem of Linear Algebra."
+      },
+      {
+        "id": "M3Q1H6",
+        "question": "In R³, the perpendicular set of a non-zero vector [a,b,c] is:",
+        "options": [
+          "A plane through the origin (2D subspace)",
+          "A line through the origin (1D subspace)",
+          "A point (0D) — does t match",
+          "t a subspace — does t match"
+        ],
+        "correct_option": "A plane through the origin (2D subspace)",
+        "explanation": "Step 1: The perpendicular set satisfies ax + by + cz = 0, one equation in three unknowns. Step 2: This leaves 3 − 1 = 2 free parameters, forming a 2D plane through the origin. Step 3: The formula dim(W) + dim(W⊥) = 3 gives 1 + 2 = 3, confirming the plane is the 2D orthogonal complement of the 1D line. Step 4: In Rⁿ, a single non-zero vector always has an (n−1)-dimensional perpendicular set — this generalizes the 2D line and 3D plane cases to hyperplanes in higher dimensions."
+      },
+      {
+        "id": "M3Q1H7",
+        "question": "If [a,b] and [c,d] are both perpendicular to [1,2], what can you say about [a,b] + [c,d]?",
+        "options": [
+          "It is also perpendicular to [1,2]",
+          "It may t be perpendicular to [1,2]",
+          "It is parallel to [1,2]",
+          "It is the zero vector"
+        ],
+        "correct_option": "It is also perpendicular to [1,2]",
+        "explanation": "Step 1: If [a,b]·[1,2] = 0 and [c,d]·[1,2] = 0, then ([a,b]+[c,d])·[1,2] = [a,b]·[1,2] + [c,d]·[1,2] = 0 + 0 = 0. Step 2: By the distributive property of the dot product, the sum is also perpendicular to [1,2]. Step 3: This closure property is what makes the perpendicular set a subspace — it is not just a random collection of vectors but a structured geometric object closed under the vector space operations. Step 4: This additive closure is the foundation for understanding why null spaces and orthogonal complements are always subspaces."
+      },
+      {
+        "id": "M3Q1H8",
+        "question": "What is the relationship between the slopes of two perpendicular non-vertical lines in R²?",
+        "options": [
+          "Their product is -1",
+          "Their sum is 0",
+          "They are equal",
+          "Their product is 1"
+        ],
+        "correct_option": "Their product is -1",
+        "explanation": "Step 1: The slope of [a,b] is b/a, and the slope of its perpendicular [b,−a] is −a/b. Step 2: Multiplying: (b/a)(−a/b) = −1. This is the classic perpendicular slopes theorem from analytic geometry. Step 3: This theorem is a special case of the dot product condition — it only works in 2D for non-vertical, non-horizontal lines, which is why the dot product formulation u·v = 0 is preferred. Step 4: The dot product condition works uniformly in all dimensions without special cases, making it the more powerful and general tool for orthogonality."
+      },
+      {
+        "id": "M3Q1H9",
+        "question": "Can a non-zero vector in R² be perpendicular to itself?",
+        "options": [
+          "No, because [a,b]·[a,b] = a²+b² > 0 for any non-zero vector",
+          "if a = -b — does t match",
+          "Only in R³)",
+          "always — does t match"
+        ],
+        "correct_option": "No, because [a,b]·[a,b] = a²+b² > 0 for any non-zero vector",
+        "explanation": "Step 1: [a,b]·[a,b] = a² + b². Step 2: For any non-zero vector, at least one of a or b is non-zero, so a² + b² > 0. The dot product with itself is always positive, never zero. Step 3: This property — u·u > 0 for all u ≠ 0 — is called positive definiteness of the dot product. It guarantees that non-zero vectors always have positive length (‖u‖ = √(u·u) > 0). Step 4: This ensures that no non-zero vector can be perpendicular to itself, which is geometrically consistent and essential for defining distances and angles."
+      },
+      {
+        "id": "M3Q1H10",
+        "question": "If the perpendicular set of [a,b] is the same as the perpendicular set of [c,d], what must be true?",
+        "options": [
+          "[a,b] and [c,d] are scalar multiples of each other",
+          "[a,b] = [c,d] — does t match",
+          "a = c and b = d — does t match",
+          "[a,b] and [c,d] are perpendicular"
+        ],
+        "correct_option": "[a,b] and [c,d] are scalar multiples of each other",
+        "explanation": "Step 1: The perpendicular set of [a,b] is the line ax + by = 0, and of [c,d] is cx + dy = 0. Step 2: For these to be the same line, the equations must be proportional: [a,b] = k[c,d] for some scalar k ≠ 0. Step 3: This reveals a deep fact: a subspace uniquely determines its orthogonal complement, and vice versa — two vectors have the same perpendicular set if and only if they span the same 1D subspace. Step 4: This uniqueness is fundamental to how subspaces pair up in the Fundamental Theorem of Linear Algebra and is why the orthogonal complement operation is well-defined."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "emoji": "🏗️",
+      "title": "Force Analysis",
+      "type": "mcq",
+      "concept": "Perpendicular forces are independent",
+      "story": "When two forces act on an object at right angles — like gravity pulling down and a normal force pushing up from a surface — they are perpendicular. Their dot product is zero, meaning they do not interfere with each other.",
+      "question": "If force F₁ = [0, -10] (gravity) and F₂ = [5, 0] (horizontal push), what is their dot product?",
+      "options": [
+        "0",
+        "50",
+        "-50",
+        "10"
+      ],
+      "correct_option": "0",
+      "explanation": "Step 1: F₁·F₂ = (0)(5) + (−10)(0) = 0 + 0 = 0. Step 2: The dot product is 0, confirming the forces are perpendicular and act independently. Step 3: In physics, perpendicular forces can be analyzed separately — the horizontal push does not affect the vertical gravitational pull. Step 4: This independence is why we decompose forces into perpendicular components (like x and y) for analysis, just as we decompose vectors into orthogonal basis components."
+    },
+    {
+      "emoji": "📱",
+      "title": "WiFi Signals",
+      "type": "mcq",
+      "concept": "Orthogonal frequency channels prevent interference",
+      "story": "In WiFi and 5G communications, data is transmitted on multiple frequency channels designed to be orthogonal (perpendicular) to each other. Because the channels are perpendicular, signals on different channels do not interfere.",
+      "question": "Why are orthogonal frequency channels important in wireless communications?",
+      "options": [
+        "They prevent signal interference between channels",
+        "They increase the speed of data",
+        "They reduce the cost of hardware",
+        "They make signals travel farther"
+      ],
+      "correct_option": "They prevent signal interference between channels",
+      "explanation": "Step 1: Orthogonal channels have a dot product of zero, meaning they are mathematically perpendicular. Step 2: This perpendicularity ensures signals on different channels do not overlap or interfere, allowing simultaneous data transmission. Step 3: This is an engineering application of the abstract condition u·v = 0 — by designing signals to be orthogonal, engineers pack many channels into the same frequency band without crosstalk. Step 4: Orthogonal Frequency Division Multiplexing (OFDM) is the technology behind WiFi, 4G, and 5G, making it one of the most impactful applications of perpendicularity in modern life."
+    },
+    {
+      "emoji": "🤖",
+      "title": "AI Word Embeddings",
+      "type": "mcq",
+      "concept": "Perpendicular vectors represent unrelated concepts",
+      "story": "In natural language processing, words are represented as vectors. The word 'cat' and 'dog' are similar (close together), while 'cat' and 'democracy' are unrelated (nearly perpendicular). This orthogonality helps AI distinguish related from unrelated concepts.",
+      "question": "In word embeddings, what does it mean when two word vectors are nearly perpendicular?",
+      "options": [
+        "The concepts are unrelated",
+        "The concepts are synyms",
+        "The words have the same length",
+        "The words start with the same letter"
+      ],
+      "correct_option": "The concepts are unrelated",
+      "explanation": "Step 1: Perpendicular vectors have a dot product near zero. Step 2: In word embeddings, this means the semantic similarity between the concepts is very low — they are unrelated. Step 3: The dot product in high-dimensional embedding spaces measures semantic similarity: a high dot product means similar meaning, while a near-zero dot product means no relationship. Step 4: This is a direct application of the perpendicularity condition to natural language understanding, enabling AI to distinguish related concepts from unrelated ones automatically."
+    },
+    {
+      "emoji": "🗺️",
+      "title": "Navigation",
+      "equation": "y = -x",
+      "type": "mcq",
+      "concept": "Perpendicular directions in navigation",
+      "story": "A drone is flying in the direction [1,1] (northeast). The wind is blowing perpendicular to the drone's path. What direction must the wind be blowing to stay perpendicular to the drone's direction?",
+      "question": "If the drone flies in direction [1,1], which wind direction is perpendicular to it?",
+      "options": [
+        "[1,-1]",
+        "[1,1] (x)",
+        "[2,2]",
+        "[0,1]"
+      ],
+      "correct_option": "[1,-1]",
+      "explanation": "Step 1: The dot product [1,1]·[1,−1] = (1)(1) + (1)(−1) = 1 − 1 = 0. Step 2: The wind direction [1,−1] (southeast) is perpendicular to the drone's northeast path. Step 3: In navigation, perpendicular crosswinds are the most destabilizing because they push the vehicle directly sideways without any headwind or tailwind component. Step 4: Understanding perpendicular directions is essential for flight path planning and wind correction, where pilots must compute the component of wind perpendicular to their flight path."
+    },
+    {
+      "emoji": "📐",
+      "title": "Architecture",
+      "type": "mcq",
+      "concept": "Perpendicular vectors in structural design",
+      "story": "An architect designs a roof support beam along direction [3,4]. A cross-brace must be perpendicular to the beam to provide maximum stability. What direction should the cross-brace follow?",
+      "question": "What direction should the cross-brace follow to be perpendicular to the beam direction [3,4]?",
+      "options": [
+        "[4,-3]",
+        "[3,4] (x)",
+        "[4,3]",
+        "[-3,4]"
+      ],
+      "correct_option": "[4,-3]",
+      "explanation": "Step 1: [3,4]·[4,−3] = (3)(4) + (4)(−3) = 12 − 12 = 0. Step 2: The cross-brace direction [4,−3] is perpendicular to [3,4], providing maximum structural stability. Step 3: In structural engineering, perpendicular braces resist forces that the main beam cannot — they handle shear and lateral loads along the orthogonal direction. Step 4: The dot product condition ensures the brace is truly at 90° to the beam, which is the optimal angle for distributing stress across the structure."
+    },
+    {
+      "emoji": "🎮",
+      "title": "Game Design",
+      "type": "mcq",
+      "concept": "Perpendicular vectors in collision detection",
+      "story": "In a game, a character moves along vector [2,1]. A wall surface has a normal vector [1,-2]. The game checks if the character's movement is perpendicular to the wall normal to determine sliding behavior.",
+      "question": "Is the character's movement [2,1] perpendicular to the wall normal [1,-2]?",
+      "options": [
+        "Yes",
+        "",
+        "Only partially",
+        "Cant determine"
+      ],
+      "correct_option": "Yes",
+      "explanation": "Step 1: [2,1]·[1,−2] = (2)(1) + (1)(−2) = 2 − 2 = 0. Step 2: The movement is perpendicular to the wall normal, meaning the character is moving parallel to the wall surface. Step 3: In game physics, when movement is perpendicular to the wall normal (i.e., parallel to the surface), the character slides along the wall rather than bouncing off. Step 4: This perpendicularity check is computed millions of times per second using the dot product — making it one of the most performance-critical applications of orthogonality in computer science."
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": 622,
+  "word": "Focused",
+  "question": "Focused",
+  "options": [
+    "Having no special features; normal",
+    "Directing attention or effort at something",
+    "To settle or find a solution to a problem",
+    "Arranged in a tidy way"
+  ],
+  "answerOption": "B",
+  "answerText": "Directing attention or effort at something",
+  "difficulty": "easy",
+  "sourceFile": "0622.json"
+}

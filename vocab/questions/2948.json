@@ -1,0 +1,15 @@
+{
+  "id": 2948,
+  "word": "Certification",
+  "question": "Certification",
+  "options": [
+    "The action of certifying something",
+    "The action of affirming something",
+    "The beginning or start of something",
+    "In equal measure"
+  ],
+  "answerOption": "A",
+  "answerText": "The action of certifying something",
+  "difficulty": "hard",
+  "sourceFile": "2948.json"
+}

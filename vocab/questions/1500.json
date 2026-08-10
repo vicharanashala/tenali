@@ -1,0 +1,15 @@
+{
+  "id": 1500,
+  "word": "Depot",
+  "question": "Depot",
+  "options": [
+    "A place for storage of goods",
+    "To make unclean or impure",
+    "The quality of being frank and truthful",
+    "Confined to working at a desk"
+  ],
+  "answerOption": "A",
+  "answerText": "A place for storage of goods",
+  "difficulty": "medium",
+  "sourceFile": "1500.json"
+}

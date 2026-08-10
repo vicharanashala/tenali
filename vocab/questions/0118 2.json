@@ -1,0 +1,15 @@
+{
+  "id": 118,
+  "word": "Gloomy",
+  "question": "Gloomy",
+  "options": [
+    "Far away from other places or people",
+    "Dark or poorly lit; depressing",
+    "To state the exact meaning of a word",
+    "To move through water using the body"
+  ],
+  "answerOption": "B",
+  "answerText": "Dark or poorly lit; depressing",
+  "difficulty": "easy",
+  "sourceFile": "0118.json"
+}

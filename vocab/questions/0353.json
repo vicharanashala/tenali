@@ -1,0 +1,15 @@
+{
+  "id": 353,
+  "word": "Admit",
+  "question": "Admit",
+  "options": [
+    "To confess something to be true",
+    "Calm and not easily disturbed",
+    "Attractively old-fashioned",
+    "To continue to live despite difficulties"
+  ],
+  "answerOption": "A",
+  "answerText": "To confess something to be true",
+  "difficulty": "easy",
+  "sourceFile": "0353.json"
+}

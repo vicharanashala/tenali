@@ -1,0 +1,15 @@
+{
+  "id": 212,
+  "word": "Worsen",
+  "question": "Worsen",
+  "options": [
+    "To make or become worse",
+    "Having the ability to learn and understand",
+    "Able to be used for a practical purpose",
+    "Well informed about many subjects"
+  ],
+  "answerOption": "A",
+  "answerText": "To make or become worse",
+  "difficulty": "easy",
+  "sourceFile": "0212.json"
+}

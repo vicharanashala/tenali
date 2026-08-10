@@ -1,0 +1,15 @@
+{
+  "id": 2000,
+  "word": "Advocatory",
+  "question": "Advocatory",
+  "options": [
+    "Serving to advocate or plead",
+    "In a state of quietness; inactive",
+    "Belonging to the middle class",
+    "A person who is fanatical about a cause"
+  ],
+  "answerOption": "A",
+  "answerText": "Serving to advocate or plead",
+  "difficulty": "hard",
+  "sourceFile": "2000.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 628,
+  "word": "Sensible",
+  "question": "Sensible",
+  "options": [
+    "To try to reach an agreement by discussion",
+    "Causing death",
+    "Done with good judgment; practical",
+    "To move a spoon around in a liquid"
+  ],
+  "answerOption": "C",
+  "answerText": "Done with good judgment; practical",
+  "difficulty": "easy",
+  "sourceFile": "0628.json"
+}

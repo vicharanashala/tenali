@@ -1,0 +1,14 @@
+{
+  "id": 183,
+  "question": "Which organelle is known as the powerhouse of the cell?",
+  "options": [
+    "Nucleus",
+    "Ribosome",
+    "Golgi body",
+    "Mitochondria"
+  ],
+  "answerOption": "D",
+  "answerText": "Mitochondria",
+  "genre": "science",
+  "sourceFile": "0183.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 225,
+  "word": "Oppose",
+  "question": "Oppose",
+  "options": [
+    "To actively resist or be against something",
+    "To fasten or join one thing to another",
+    "To try to win against other people",
+    "Happening by chance; unintentional"
+  ],
+  "answerOption": "A",
+  "answerText": "To actively resist or be against something",
+  "difficulty": "easy",
+  "sourceFile": "0225.json"
+}

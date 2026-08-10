@@ -1,0 +1,15 @@
+{
+  "id": 1517,
+  "word": "Weltanschauung",
+  "question": "Weltanschauung",
+  "options": [
+    "A particular philosophy or view of life",
+    "The opposite of paranoia; belief that the world conspires to help you",
+    "Health-giving; healthy",
+    "Something bearing visible traces of an earlier form"
+  ],
+  "answerOption": "A",
+  "answerText": "A particular philosophy or view of life",
+  "difficulty": "extra-hard",
+  "sourceFile": "1517.json"
+}

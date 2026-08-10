@@ -1,0 +1,15 @@
+{
+  "id": 2769,
+  "word": "Lethargy",
+  "question": "Lethargy",
+  "options": [
+    "Assuming power without justification",
+    "Belief in reason as basis of truth",
+    "A state of physical or mental sluggishness",
+    "Description of air conditions"
+  ],
+  "answerOption": "C",
+  "answerText": "A state of physical or mental sluggishness",
+  "difficulty": "hard",
+  "sourceFile": "2769.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 545,
+  "word": "Prevail",
+  "question": "Prevail",
+  "options": [
+    "To give support and confidence to someone",
+    "Hot and humid weather or manner",
+    "Moving at a low speed",
+    "To prove more powerful than opposing forces"
+  ],
+  "answerOption": "D",
+  "answerText": "To prove more powerful than opposing forces",
+  "difficulty": "easy",
+  "sourceFile": "0545.json"
+}

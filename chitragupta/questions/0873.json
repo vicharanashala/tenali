@@ -1,0 +1,14 @@
+{
+  "id": 873,
+  "question": "Which organ in the human body is responsible for producing most digestive enzymes along with insulin?",
+  "options": [
+    "Liver",
+    "Pancreas",
+    "Stomach",
+    "Spleen"
+  ],
+  "answerOption": "B",
+  "answerText": "Pancreas",
+  "genre": "science",
+  "sourceFile": "0873.json"
+}

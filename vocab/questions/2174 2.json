@@ -1,0 +1,15 @@
+{
+  "id": 2174,
+  "word": "AEROMEDICINE",
+  "question": "AEROMEDICINE",
+  "options": [
+    "A person's ability to cope with difficulties",
+    "Relating to air conditions",
+    "Medicine relating to aviation",
+    "A person seeking unusual experiences"
+  ],
+  "answerOption": "C",
+  "answerText": "Medicine relating to aviation",
+  "difficulty": "hard",
+  "sourceFile": "2174.json"
+}

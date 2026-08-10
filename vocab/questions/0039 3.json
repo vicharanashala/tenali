@@ -1,0 +1,15 @@
+{
+  "id": 39,
+  "word": "Funny",
+  "question": "Funny",
+  "options": [
+    "Willfully causing pain to others",
+    "To freely offer to do something",
+    "To put someone at risk or in danger",
+    "Causing laughter or amusement"
+  ],
+  "answerOption": "D",
+  "answerText": "Causing laughter or amusement",
+  "difficulty": "easy",
+  "sourceFile": "0039.json"
+}

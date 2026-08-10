@@ -1,0 +1,15 @@
+{
+  "id": 81,
+  "word": "Sick",
+  "question": "Sick",
+  "options": [
+    "Unassuming in the estimation of one's abilities",
+    "Affected by physical illness",
+    "To cause to move apart",
+    "To discover something by searching"
+  ],
+  "answerOption": "B",
+  "answerText": "Affected by physical illness",
+  "difficulty": "easy",
+  "sourceFile": "0081.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 678,
+  "word": "Mild",
+  "question": "Mild",
+  "options": [
+    "To agree to give something requested",
+    "Far away in space or time",
+    "Not severe or strong; gentle",
+    "To arouse the curiosity of someone"
+  ],
+  "answerOption": "C",
+  "answerText": "Not severe or strong; gentle",
+  "difficulty": "easy",
+  "sourceFile": "0678.json"
+}

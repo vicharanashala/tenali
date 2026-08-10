@@ -1,0 +1,15 @@
+{
+  "id": 29,
+  "word": "Hard",
+  "question": "Hard",
+  "options": [
+    "To move from one region to another",
+    "To give an authoritative order",
+    "Solid, firm, and rigid; not easily broken",
+    "Full of life and energy"
+  ],
+  "answerOption": "C",
+  "answerText": "Solid, firm, and rigid; not easily broken",
+  "difficulty": "easy",
+  "sourceFile": "0029.json"
+}

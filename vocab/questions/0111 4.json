@@ -1,0 +1,15 @@
+{
+  "id": 111,
+  "word": "Crooked",
+  "question": "Crooked",
+  "options": [
+    "Made impure by exposure to a harmful substance",
+    "Moving slowly or apathetically",
+    "Not under control of another",
+    "Bent or twisted out of shape"
+  ],
+  "answerOption": "D",
+  "answerText": "Bent or twisted out of shape",
+  "difficulty": "easy",
+  "sourceFile": "0111.json"
+}

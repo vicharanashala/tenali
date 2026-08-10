@@ -1,0 +1,15 @@
+{
+  "id": 710,
+  "word": "Similar",
+  "question": "Similar",
+  "options": [
+    "Feeling pleasure and contentment",
+    "Relating to regions around the North Pole",
+    "Hot and humid weather or manner",
+    "Resembling without being identical"
+  ],
+  "answerOption": "D",
+  "answerText": "Resembling without being identical",
+  "difficulty": "easy",
+  "sourceFile": "0710.json"
+}

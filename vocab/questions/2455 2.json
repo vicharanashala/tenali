@@ -1,0 +1,15 @@
+{
+  "id": 2455,
+  "word": "Weltanschauung",
+  "question": "Weltanschauung",
+  "options": [
+    "The recurrence of an undesirable condition",
+    "A particular philosophy or view of life",
+    "In an abysmal manner",
+    "A sudden and striking realization"
+  ],
+  "answerOption": "B",
+  "answerText": "A particular philosophy or view of life",
+  "difficulty": "extra-hard",
+  "sourceFile": "2455.json"
+}

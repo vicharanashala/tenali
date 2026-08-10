@@ -1,0 +1,15 @@
+{
+  "id": 702,
+  "word": "Frequent",
+  "question": "Frequent",
+  "options": [
+    "Occurring or done many times",
+    "A long journey by sea or space",
+    "To examine and make corrections to something",
+    "Of extreme force or strength"
+  ],
+  "answerOption": "A",
+  "answerText": "Occurring or done many times",
+  "difficulty": "easy",
+  "sourceFile": "0702.json"
+}

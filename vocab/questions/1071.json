@@ -1,0 +1,15 @@
+{
+  "id": 1071,
+  "word": "Yearn",
+  "question": "Yearn",
+  "options": [
+    "To have an intense feeling of longing",
+    "Feeling calm and relaxed; not worried",
+    "To unfasten or separate something",
+    "To do something one considers beneath oneself"
+  ],
+  "answerOption": "A",
+  "answerText": "To have an intense feeling of longing",
+  "difficulty": "medium",
+  "sourceFile": "1071.json"
+}

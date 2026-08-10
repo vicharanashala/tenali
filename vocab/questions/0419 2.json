@@ -1,0 +1,15 @@
+{
+  "id": 419,
+  "word": "Offer",
+  "question": "Offer",
+  "options": [
+    "To welcome someone with particular words",
+    "To present something for acceptance",
+    "To take on or start using something new",
+    "Working by itself with little human control"
+  ],
+  "answerOption": "B",
+  "answerText": "To present something for acceptance",
+  "difficulty": "easy",
+  "sourceFile": "0419.json"
+}

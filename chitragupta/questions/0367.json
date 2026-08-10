@@ -1,0 +1,14 @@
+{
+  "id": 367,
+  "question": "Which city is the capital of Telangana?",
+  "options": [
+    "Warangal",
+    "Hyderabad",
+    "Nizamabad",
+    "Karimnagar"
+  ],
+  "answerOption": "B",
+  "answerText": "Hyderabad",
+  "genre": "geography",
+  "sourceFile": "0367.json"
+}

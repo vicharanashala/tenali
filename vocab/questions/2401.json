@@ -1,0 +1,15 @@
+{
+  "id": 2401,
+  "word": "Aenigmatist",
+  "question": "Aenigmatist",
+  "options": [
+    "The action of spreading or promoting",
+    "The fact of being preeminent",
+    "One who uses riddles",
+    "The action of publishing something"
+  ],
+  "answerOption": "C",
+  "answerText": "One who uses riddles",
+  "difficulty": "hard",
+  "sourceFile": "2401.json"
+}

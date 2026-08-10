@@ -1,0 +1,15 @@
+{
+  "id": 287,
+  "word": "Select",
+  "question": "Select",
+  "options": [
+    "To carefully choose as being the best",
+    "Generous and considerate towards others",
+    "To need something as necessary",
+    "Delicious or pleasing to senses"
+  ],
+  "answerOption": "A",
+  "answerText": "To carefully choose as being the best",
+  "difficulty": "easy",
+  "sourceFile": "0287.json"
+}

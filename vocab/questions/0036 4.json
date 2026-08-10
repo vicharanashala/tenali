@@ -1,0 +1,15 @@
+{
+  "id": 36,
+  "word": "Awake",
+  "question": "Awake",
+  "options": [
+    "To believe in the reliability of someone",
+    "Not asleep; fully conscious",
+    "To move downward from a higher point",
+    "A person who lacks courage"
+  ],
+  "answerOption": "B",
+  "answerText": "Not asleep; fully conscious",
+  "difficulty": "easy",
+  "sourceFile": "0036.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 202,
+  "word": "Repair",
+  "question": "Repair",
+  "options": [
+    "Unwilling to give or share; unkind",
+    "Far away from other places or people",
+    "To feel sadness after someone's death",
+    "To fix something that is broken"
+  ],
+  "answerOption": "D",
+  "answerText": "To fix something that is broken",
+  "difficulty": "easy",
+  "sourceFile": "0202.json"
+}

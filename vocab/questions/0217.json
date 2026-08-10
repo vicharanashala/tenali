@@ -1,0 +1,15 @@
+{
+  "id": 217,
+  "word": "Ignore",
+  "question": "Ignore",
+  "options": [
+    "To grow or develop in a healthy way",
+    "Made to happen later than expected",
+    "To collect things from different places",
+    "To refuse to take notice of something"
+  ],
+  "answerOption": "D",
+  "answerText": "To refuse to take notice of something",
+  "difficulty": "easy",
+  "sourceFile": "0217.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2864,
+  "word": "Feuilleton",
+  "question": "Feuilleton",
+  "options": [
+    "A part of a newspaper devoted to fiction",
+    "A whispering or rustling sound",
+    "Government by the worst or least qualified",
+    "A wordless look between two people who both want to initiate something"
+  ],
+  "answerOption": "A",
+  "answerText": "A part of a newspaper devoted to fiction",
+  "difficulty": "extra-hard",
+  "sourceFile": "2864.json"
+}

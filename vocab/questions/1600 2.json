@@ -1,0 +1,15 @@
+{
+  "id": 1600,
+  "word": "Determinate",
+  "question": "Determinate",
+  "options": [
+    "To push down or thrust out",
+    "The quality of being destructible",
+    "The state of being tedious",
+    "Having fixed or defined limits"
+  ],
+  "answerOption": "D",
+  "answerText": "Having fixed or defined limits",
+  "difficulty": "medium",
+  "sourceFile": "1600.json"
+}

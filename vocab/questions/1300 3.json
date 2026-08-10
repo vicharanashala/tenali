@@ -1,0 +1,15 @@
+{
+  "id": 1300,
+  "word": "Defeatist",
+  "question": "Defeatist",
+  "options": [
+    "Sumptuously rich or elaborate",
+    "Fond of the company of others; sociable",
+    "A person who expects or accepts defeat",
+    "A place where things are stored"
+  ],
+  "answerOption": "C",
+  "answerText": "A person who expects or accepts defeat",
+  "difficulty": "medium",
+  "sourceFile": "1300.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 496,
+  "word": "Monitor",
+  "question": "Monitor",
+  "options": [
+    "To cause someone to believe something",
+    "To observe and check progress over time",
+    "Of very great extent or quantity",
+    "To heat a liquid until it bubbles"
+  ],
+  "answerOption": "B",
+  "answerText": "To observe and check progress over time",
+  "difficulty": "easy",
+  "sourceFile": "0496.json"
+}

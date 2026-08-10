@@ -1,0 +1,14 @@
+{
+  "id": 607,
+  "question": "Which is the largest species of jellyfish commonly cited?",
+  "options": [
+    "Box jellyfish",
+    "Lion's mane jellyfish",
+    "Moon jellyfish",
+    "Irukandji jellyfish"
+  ],
+  "answerOption": "B",
+  "answerText": "Lion's mane jellyfish",
+  "genre": "mixed",
+  "sourceFile": "0607.json"
+}

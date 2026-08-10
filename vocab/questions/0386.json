@@ -1,0 +1,15 @@
+{
+  "id": 386,
+  "word": "Glow",
+  "question": "Glow",
+  "options": [
+    "Darkly colored or gloomy",
+    "Expecting the worst possible outcome",
+    "To give out a steady light without flame",
+    "Very unusual or strangely surprising"
+  ],
+  "answerOption": "C",
+  "answerText": "To give out a steady light without flame",
+  "difficulty": "easy",
+  "sourceFile": "0386.json"
+}

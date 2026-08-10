@@ -1,0 +1,15 @@
+{
+  "id": 1828,
+  "word": "Sparse",
+  "question": "Sparse",
+  "options": [
+    "Abandoned by an owner or crew",
+    "Occurring in cycles",
+    "A person who expects or accepts defeat",
+    "Thinly sown or distributed"
+  ],
+  "answerOption": "D",
+  "answerText": "Thinly sown or distributed",
+  "difficulty": "medium",
+  "sourceFile": "1828.json"
+}

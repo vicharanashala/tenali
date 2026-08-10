@@ -1,0 +1,15 @@
+{
+  "id": 906,
+  "word": "Unlimited",
+  "question": "Unlimited",
+  "options": [
+    "Of extreme force or strength",
+    "Having a sharp, unpleasant taste",
+    "Tending to stick or adhere to things",
+    "Having no limits or restrictions"
+  ],
+  "answerOption": "D",
+  "answerText": "Having no limits or restrictions",
+  "difficulty": "easy",
+  "sourceFile": "0906.json"
+}

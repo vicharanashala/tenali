@@ -1,0 +1,15 @@
+{
+  "id": 933,
+  "word": "Indifferent",
+  "question": "Indifferent",
+  "options": [
+    "Ostentatiously rich and luxurious",
+    "To mix or cause to mix together",
+    "Having no particular interest or concern",
+    "To satisfy thirst by drinking"
+  ],
+  "answerOption": "C",
+  "answerText": "Having no particular interest or concern",
+  "difficulty": "medium",
+  "sourceFile": "0933.json"
+}

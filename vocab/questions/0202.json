@@ -1,0 +1,15 @@
+{
+  "id": 202,
+  "word": "Repair",
+  "question": "Repair",
+  "options": [
+    "Relating to or powered by electricity",
+    "Of or at a fairly high temperature",
+    "To give permission for something",
+    "To fix something that is broken"
+  ],
+  "answerOption": "D",
+  "answerText": "To fix something that is broken",
+  "difficulty": "easy",
+  "sourceFile": "0202.json"
+}

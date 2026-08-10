@@ -1,0 +1,15 @@
+{
+  "id": 2206,
+  "word": "Adyta",
+  "question": "Adyta",
+  "options": [
+    "Slow to act; intended to cause delay",
+    "In an advisable manner",
+    "Grimly mocking or cynical",
+    "Inner sanctum of a Greek temple"
+  ],
+  "answerOption": "D",
+  "answerText": "Inner sanctum of a Greek temple",
+  "difficulty": "hard",
+  "sourceFile": "2206.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 507,
+  "word": "Reside",
+  "question": "Reside",
+  "options": [
+    "To have one's permanent home somewhere",
+    "Able to read and write",
+    "Feeling pleasure or happiness",
+    "Very unusual or strangely surprising"
+  ],
+  "answerOption": "A",
+  "answerText": "To have one's permanent home somewhere",
+  "difficulty": "easy",
+  "sourceFile": "0507.json"
+}

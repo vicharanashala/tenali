@@ -1,0 +1,15 @@
+{
+  "id": 2328,
+  "word": "Advertisement",
+  "question": "Advertisement",
+  "options": [
+    "An expert in aeronautics",
+    "Exposure to the air",
+    "A public notice promoting something",
+    "An estimate of the course of a disease"
+  ],
+  "answerOption": "C",
+  "answerText": "A public notice promoting something",
+  "difficulty": "hard",
+  "sourceFile": "2328.json"
+}

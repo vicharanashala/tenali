@@ -1,0 +1,15 @@
+{
+  "id": 1241,
+  "word": "Monotonous",
+  "question": "Monotonous",
+  "options": [
+    "Dull and lacking in variety",
+    "Containing many details or giving details",
+    "A person descended from an ancestor",
+    "The action of damaging someone's reputation"
+  ],
+  "answerOption": "A",
+  "answerText": "Dull and lacking in variety",
+  "difficulty": "medium",
+  "sourceFile": "1241.json"
+}

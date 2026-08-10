@@ -1,0 +1,15 @@
+{
+  "id": 1911,
+  "word": "Self-centered",
+  "question": "Self-centered",
+  "options": [
+    "To give someone pleasure or satisfaction",
+    "Preoccupied with oneself",
+    "Able to be destroyed or ruined",
+    "Causing repulsion or distaste"
+  ],
+  "answerOption": "B",
+  "answerText": "Preoccupied with oneself",
+  "difficulty": "medium",
+  "sourceFile": "1911.json"
+}

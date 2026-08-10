@@ -1,0 +1,15 @@
+{
+  "id": 1389,
+  "word": "Dell",
+  "question": "Dell",
+  "options": [
+    "Disrespectful or insulting language",
+    "Defiant of authority or discipline",
+    "A small valley, usually among trees",
+    "The action of expressing disagreement"
+  ],
+  "answerOption": "C",
+  "answerText": "A small valley, usually among trees",
+  "difficulty": "medium",
+  "sourceFile": "1389.json"
+}

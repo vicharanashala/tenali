@@ -1,0 +1,14 @@
+{
+  "id": 138,
+  "question": "Which gas is used in balloons to make them float safely?",
+  "options": [
+    "Oxygen",
+    "Nitrogen",
+    "Helium",
+    "Hydrogen"
+  ],
+  "answerOption": "C",
+  "answerText": "Helium",
+  "genre": "science",
+  "sourceFile": "0138.json"
+}

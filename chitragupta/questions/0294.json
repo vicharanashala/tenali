@@ -1,0 +1,14 @@
+{
+  "id": 294,
+  "question": "Which Mughal emperor wrote his autobiography 'Tuzuk-i-Baburi' or Baburnama?",
+  "options": [
+    "Akbar",
+    "Babur",
+    "Humayun",
+    "Jahangir"
+  ],
+  "answerOption": "B",
+  "answerText": "Babur",
+  "genre": "mixed",
+  "sourceFile": "0294.json"
+}

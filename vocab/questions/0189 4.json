@@ -1,0 +1,15 @@
+{
+  "id": 189,
+  "word": "Reveal",
+  "question": "Reveal",
+  "options": [
+    "To attract and hold attention of someone",
+    "To achieve or realize something desired",
+    "Produced without artificial chemicals",
+    "To make something previously hidden visible"
+  ],
+  "answerOption": "D",
+  "answerText": "To make something previously hidden visible",
+  "difficulty": "easy",
+  "sourceFile": "0189.json"
+}

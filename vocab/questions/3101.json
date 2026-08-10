@@ -1,0 +1,15 @@
+{
+  "id": 3101,
+  "word": "Orphic",
+  "question": "Orphic",
+  "options": [
+    "Mystic or entrancing in nature",
+    "The belief that all things tend toward the good",
+    "The abyss ocean region",
+    "To make non-literary"
+  ],
+  "answerOption": "A",
+  "answerText": "Mystic or entrancing in nature",
+  "difficulty": "extra-hard",
+  "sourceFile": "3101.json"
+}

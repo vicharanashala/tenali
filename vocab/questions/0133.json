@@ -1,0 +1,15 @@
+{
+  "id": 133,
+  "word": "Visible",
+  "question": "Visible",
+  "options": [
+    "Far away in space or time",
+    "Relating to the present time",
+    "Able to be seen",
+    "Involving or creating good conditions"
+  ],
+  "answerOption": "C",
+  "answerText": "Able to be seen",
+  "difficulty": "easy",
+  "sourceFile": "0133.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1334,
+  "word": "Defamation",
+  "question": "Defamation",
+  "options": [
+    "A small aquatic mammal",
+    "The quality of being loyal",
+    "The action of damaging someone's reputation",
+    "Feeling cautious about possible dangers"
+  ],
+  "answerOption": "C",
+  "answerText": "The action of damaging someone's reputation",
+  "difficulty": "medium",
+  "sourceFile": "1334.json"
+}

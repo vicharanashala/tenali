@@ -1,0 +1,15 @@
+{
+  "id": 3093,
+  "word": "Gezellig",
+  "question": "Gezellig",
+  "options": [
+    "Convivial; cozy and warm with loved ones",
+    "A cattle thief in Roman times",
+    "Non-literary speech",
+    "Able to be unloaded"
+  ],
+  "answerOption": "A",
+  "answerText": "Convivial; cozy and warm with loved ones",
+  "difficulty": "extra-hard",
+  "sourceFile": "3093.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2811,
+  "word": "Selcouth",
+  "question": "Selcouth",
+  "options": [
+    "A situation where any move will worsen one's position",
+    "Extravagant boasting or bragging",
+    "Unfamiliar, rare, strange, and yet marvelous",
+    "With abyss tidal motion"
+  ],
+  "answerOption": "C",
+  "answerText": "Unfamiliar, rare, strange, and yet marvelous",
+  "difficulty": "extra-hard",
+  "sourceFile": "2811.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1765,
+  "word": "Animosity",
+  "question": "Animosity",
+  "options": [
+    "The quality of being destructive",
+    "Strong dislike or hatred",
+    "So intense as to be almost touched or felt",
+    "Designed to be useful rather than attractive"
+  ],
+  "answerOption": "B",
+  "answerText": "Strong dislike or hatred",
+  "difficulty": "medium",
+  "sourceFile": "1765.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 457,
+  "word": "Neglect",
+  "question": "Neglect",
+  "options": [
+    "To fail to care for something properly",
+    "Plain or obvious; clearly seen",
+    "Not physically existing but made to appear so",
+    "To take part in something"
+  ],
+  "answerOption": "A",
+  "answerText": "To fail to care for something properly",
+  "difficulty": "easy",
+  "sourceFile": "0457.json"
+}

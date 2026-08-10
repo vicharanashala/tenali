@@ -1,0 +1,15 @@
+{
+  "id": 2182,
+  "word": "AERONAUTICAL",
+  "question": "AERONAUTICAL",
+  "options": [
+    "The appearance of being true or real",
+    "Relating to aircraft operation",
+    "Relating to the Aelp mountains",
+    "Relating to air conditions"
+  ],
+  "answerOption": "B",
+  "answerText": "Relating to aircraft operation",
+  "difficulty": "hard",
+  "sourceFile": "2182.json"
+}

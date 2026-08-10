@@ -1,0 +1,15 @@
+{
+  "id": 1766,
+  "word": "Enmity",
+  "question": "Enmity",
+  "options": [
+    "To actively break the terms of a law",
+    "The action of becoming worse",
+    "A person who depones",
+    "The state of being an enemy"
+  ],
+  "answerOption": "D",
+  "answerText": "The state of being an enemy",
+  "difficulty": "medium",
+  "sourceFile": "1766.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 600,
+  "word": "Splendid",
+  "question": "Splendid",
+  "options": [
+    "Very impressive; magnificent",
+    "Having a strong pleasant taste",
+    "To find the size or amount of something",
+    "Unwilling to work or use energy"
+  ],
+  "answerOption": "A",
+  "answerText": "Very impressive; magnificent",
+  "difficulty": "easy",
+  "sourceFile": "0600.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 419,
+  "word": "Offer",
+  "question": "Offer",
+  "options": [
+    "To accept something as true without proof",
+    "To take the place of something",
+    "Not likely to bring success",
+    "To present something for acceptance"
+  ],
+  "answerOption": "D",
+  "answerText": "To present something for acceptance",
+  "difficulty": "easy",
+  "sourceFile": "0419.json"
+}

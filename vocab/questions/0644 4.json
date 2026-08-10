@@ -1,0 +1,15 @@
+{
+  "id": 644,
+  "word": "Intelligent",
+  "question": "Intelligent",
+  "options": [
+    "Of short duration; not lasting long",
+    "Having the ability to learn and understand",
+    "To bring or gather things together",
+    "To give up something valued for a greater cause"
+  ],
+  "answerOption": "B",
+  "answerText": "Having the ability to learn and understand",
+  "difficulty": "easy",
+  "sourceFile": "0644.json"
+}

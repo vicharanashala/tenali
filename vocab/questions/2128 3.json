@@ -1,0 +1,15 @@
+{
+  "id": 2128,
+  "word": "Adulteration",
+  "question": "Adulteration",
+  "options": [
+    "The action of adulterating",
+    "A public notice promoting something",
+    "A city built in air",
+    "The act of placing things side by side"
+  ],
+  "answerOption": "A",
+  "answerText": "The action of adulterating",
+  "difficulty": "hard",
+  "sourceFile": "2128.json"
+}

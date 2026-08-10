@@ -1,0 +1,15 @@
+{
+  "id": 2213,
+  "word": "AEROPONIC",
+  "question": "AEROPONIC",
+  "options": [
+    "Relating to viewing air",
+    "A jet-powered aircraft",
+    "Growing plants with air roots",
+    "A huge and overwhelming force"
+  ],
+  "answerOption": "C",
+  "answerText": "Growing plants with air roots",
+  "difficulty": "hard",
+  "sourceFile": "2213.json"
+}

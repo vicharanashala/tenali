@@ -1,0 +1,14 @@
+{
+  "id": 143,
+  "question": "What is the primary source of energy for Earth?",
+  "options": [
+    "Moon",
+    "Sun",
+    "Wind",
+    "Volcanoes"
+  ],
+  "answerOption": "B",
+  "answerText": "Sun",
+  "genre": "mixed",
+  "sourceFile": "0143.json"
+}

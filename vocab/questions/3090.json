@@ -1,0 +1,15 @@
+{
+  "id": 3090,
+  "word": "Diaphanous",
+  "question": "Diaphanous",
+  "options": [
+    "Related to abyss",
+    "Light, delicate, and translucent",
+    "One practicing non-literary",
+    "The action of absconding or hiding"
+  ],
+  "answerOption": "B",
+  "answerText": "Light, delicate, and translucent",
+  "difficulty": "extra-hard",
+  "sourceFile": "3090.json"
+}

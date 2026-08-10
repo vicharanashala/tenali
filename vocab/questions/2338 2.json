@@ -1,0 +1,15 @@
+{
+  "id": 2338,
+  "word": "Duende",
+  "question": "Duende",
+  "options": [
+    "A melancholic longing for something absent",
+    "The mysterious power of art to deeply move a person",
+    "The thumb",
+    "Plural of abigail"
+  ],
+  "answerOption": "B",
+  "answerText": "The mysterious power of art to deeply move a person",
+  "difficulty": "extra-hard",
+  "sourceFile": "2338.json"
+}

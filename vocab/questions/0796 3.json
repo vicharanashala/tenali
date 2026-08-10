@@ -1,0 +1,15 @@
+{
+  "id": 796,
+  "word": "Neutral",
+  "question": "Neutral",
+  "options": [
+    "The inner part of something",
+    "Not supporting either side in a conflict",
+    "To move a spoon around in a liquid",
+    "To agree to give something requested"
+  ],
+  "answerOption": "B",
+  "answerText": "Not supporting either side in a conflict",
+  "difficulty": "easy",
+  "sourceFile": "0796.json"
+}

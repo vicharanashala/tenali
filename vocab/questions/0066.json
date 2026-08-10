@@ -1,0 +1,15 @@
+{
+  "id": 66,
+  "word": "Rude",
+  "question": "Rude",
+  "options": [
+    "To move smoothly along a surface",
+    "To stop briefly before continuing",
+    "To create difficulties for someone",
+    "Offensively impolite or bad-mannered"
+  ],
+  "answerOption": "D",
+  "answerText": "Offensively impolite or bad-mannered",
+  "difficulty": "easy",
+  "sourceFile": "0066.json"
+}

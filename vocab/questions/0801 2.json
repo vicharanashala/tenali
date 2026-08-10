@@ -1,0 +1,15 @@
+{
+  "id": 801,
+  "word": "Wicked",
+  "question": "Wicked",
+  "options": [
+    "Having intense enjoyment or interest",
+    "Situated far from the main centers",
+    "Evil or morally wrong",
+    "Happening by chance; unintentional"
+  ],
+  "answerOption": "C",
+  "answerText": "Evil or morally wrong",
+  "difficulty": "easy",
+  "sourceFile": "0801.json"
+}

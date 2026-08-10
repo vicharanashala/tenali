@@ -1,0 +1,15 @@
+{
+  "id": 173,
+  "word": "Cry",
+  "question": "Cry",
+  "options": [
+    "To shed tears of sadness or pain",
+    "To explain something by using examples",
+    "Having opposite surfaces close together",
+    "To provide someone with enjoyment"
+  ],
+  "answerOption": "A",
+  "answerText": "To shed tears of sadness or pain",
+  "difficulty": "easy",
+  "sourceFile": "0173.json"
+}

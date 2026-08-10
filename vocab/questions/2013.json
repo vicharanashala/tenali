@@ -1,0 +1,15 @@
+{
+  "id": 2013,
+  "word": "Quixotic",
+  "question": "Quixotic",
+  "options": [
+    "The pursuit of pleasure as the highest good",
+    "Extremely idealistic; unrealistic and impractical",
+    "A type of mineral pyroxene",
+    "Deserving or causing public disgrace"
+  ],
+  "answerOption": "B",
+  "answerText": "Extremely idealistic; unrealistic and impractical",
+  "difficulty": "hard",
+  "sourceFile": "2013.json"
+}

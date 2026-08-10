@@ -1,0 +1,15 @@
+{
+  "id": 1836,
+  "word": "Prudent",
+  "question": "Prudent",
+  "options": [
+    "Feeling sad and without hope",
+    "Acting with careful judgment",
+    "Persistence in effort",
+    "Unable to be controlled"
+  ],
+  "answerOption": "B",
+  "answerText": "Acting with careful judgment",
+  "difficulty": "medium",
+  "sourceFile": "1836.json"
+}

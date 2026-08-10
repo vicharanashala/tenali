@@ -1,0 +1,15 @@
+{
+  "id": 491,
+  "word": "Investigate",
+  "question": "Investigate",
+  "options": [
+    "To produce a picture using a pencil",
+    "To carry out a careful examination",
+    "Before the usual or expected time",
+    "Not fulfilling the intended purpose"
+  ],
+  "answerOption": "B",
+  "answerText": "To carry out a careful examination",
+  "difficulty": "easy",
+  "sourceFile": "0491.json"
+}

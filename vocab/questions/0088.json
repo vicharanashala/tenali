@@ -1,0 +1,15 @@
+{
+  "id": 88,
+  "word": "Heavy",
+  "question": "Heavy",
+  "options": [
+    "Feeling sorrow or unhappiness",
+    "Full of energy and enthusiasm",
+    "Not having a sharp edge or point",
+    "Of great weight; difficult to lift"
+  ],
+  "answerOption": "D",
+  "answerText": "Of great weight; difficult to lift",
+  "difficulty": "easy",
+  "sourceFile": "0088.json"
+}

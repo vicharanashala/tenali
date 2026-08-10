@@ -1,0 +1,15 @@
+{
+  "id": 2454,
+  "word": "AEROTECHNICIAN",
+  "question": "AEROTECHNICIAN",
+  "options": [
+    "Relevant to a subject under consideration",
+    "Divination by air and weather",
+    "Splendor and impressiveness of appearance",
+    "Expert in air technology"
+  ],
+  "answerOption": "D",
+  "answerText": "Expert in air technology",
+  "difficulty": "hard",
+  "sourceFile": "2454.json"
+}

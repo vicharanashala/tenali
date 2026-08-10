@@ -1,0 +1,15 @@
+{
+  "id": 605,
+  "word": "Glitter",
+  "question": "Glitter",
+  "options": [
+    "To cook food using an oven",
+    "To control something by means of rules",
+    "In accordance with fact or reality",
+    "To shine with a bright shimmering light"
+  ],
+  "answerOption": "D",
+  "answerText": "To shine with a bright shimmering light",
+  "difficulty": "easy",
+  "sourceFile": "0605.json"
+}

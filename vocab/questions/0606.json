@@ -1,0 +1,15 @@
+{
+  "id": 606,
+  "word": "Twinkle",
+  "question": "Twinkle",
+  "options": [
+    "To shine with a flickering light",
+    "Easily broken or damaged",
+    "Giving information clearly in few words",
+    "Not far away; close"
+  ],
+  "answerOption": "A",
+  "answerText": "To shine with a flickering light",
+  "difficulty": "easy",
+  "sourceFile": "0606.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 3240,
+  "word": "Abiogenesis",
+  "question": "Abiogenesis",
+  "options": [
+    "A deviation from normal pattern",
+    "Multiple ablismo doctrines",
+    "Tending to remove limits",
+    "Origin of life from non-living matter"
+  ],
+  "answerOption": "D",
+  "answerText": "Origin of life from non-living matter",
+  "difficulty": "extra-hard",
+  "sourceFile": "3240.json"
+}

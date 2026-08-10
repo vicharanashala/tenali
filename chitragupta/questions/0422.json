@@ -1,0 +1,14 @@
+{
+  "id": 422,
+  "question": "Who wrote 'Gitanjali'?",
+  "options": [
+    "Bankim Chandra Chattopadhyay",
+    "Rabindranath Tagore",
+    "Premchand",
+    "Sarojini Naidu"
+  ],
+  "answerOption": "B",
+  "answerText": "Rabindranath Tagore",
+  "genre": "general-knowledge",
+  "sourceFile": "0422.json"
+}

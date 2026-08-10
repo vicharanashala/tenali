@@ -1,0 +1,15 @@
+{
+  "id": 2010,
+  "word": "Oblivion",
+  "question": "Oblivion",
+  "options": [
+    "A lightweight airmail letter",
+    "Relating to air flow around objects",
+    "The state of being unaware of surroundings",
+    "Producing offspring or vegetation abundantly"
+  ],
+  "answerOption": "C",
+  "answerText": "The state of being unaware of surroundings",
+  "difficulty": "hard",
+  "sourceFile": "2010.json"
+}

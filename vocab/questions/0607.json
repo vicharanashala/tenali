@@ -1,0 +1,15 @@
+{
+  "id": 607,
+  "word": "Shimmer",
+  "question": "Shimmer",
+  "options": [
+    "To give assistance or encouragement to",
+    "To remove goods from a vehicle",
+    "To shine with a soft trembling light",
+    "Having a sharp taste"
+  ],
+  "answerOption": "C",
+  "answerText": "To shine with a soft trembling light",
+  "difficulty": "easy",
+  "sourceFile": "0607.json"
+}

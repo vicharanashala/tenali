@@ -1,0 +1,15 @@
+{
+  "id": 326,
+  "word": "Warn",
+  "question": "Warn",
+  "options": [
+    "To build or put together a structure",
+    "To have as belonging to one; to own",
+    "Neatly and methodically arranged",
+    "To tell someone about a possible danger"
+  ],
+  "answerOption": "D",
+  "answerText": "To tell someone about a possible danger",
+  "difficulty": "easy",
+  "sourceFile": "0326.json"
+}

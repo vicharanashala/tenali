@@ -1,0 +1,15 @@
+{
+  "id": 1976,
+  "word": "Advertisement",
+  "question": "Advertisement",
+  "options": [
+    "An aerobic organism",
+    "A turning point or pivotal event",
+    "A public notice promoting something",
+    "A lover of flying or air"
+  ],
+  "answerOption": "C",
+  "answerText": "A public notice promoting something",
+  "difficulty": "hard",
+  "sourceFile": "1976.json"
+}

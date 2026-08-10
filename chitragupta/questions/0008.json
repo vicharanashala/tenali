@@ -1,0 +1,14 @@
+{
+  "id": 8,
+  "question": "What is the capital of Mexico?",
+  "options": [
+    "Mexico City",
+    "Sri Jayawardenepura Kotte",
+    "Kathmandu",
+    "Madrid"
+  ],
+  "answerOption": "A",
+  "answerText": "Mexico City",
+  "genre": "geography",
+  "sourceFile": "0008.json"
+}

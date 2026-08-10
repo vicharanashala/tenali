@@ -1,0 +1,15 @@
+{
+  "id": 1145,
+  "word": "Tenuous",
+  "question": "Tenuous",
+  "options": [
+    "To rid a person or thing of lice",
+    "To remove salt from seawater",
+    "Very weak or slight; insubstantial",
+    "The action of delivering something"
+  ],
+  "answerOption": "C",
+  "answerText": "Very weak or slight; insubstantial",
+  "difficulty": "medium",
+  "sourceFile": "1145.json"
+}

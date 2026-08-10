@@ -1,0 +1,15 @@
+{
+  "id": 1838,
+  "word": "Cautious",
+  "question": "Cautious",
+  "options": [
+    "Showing smug satisfaction with oneself",
+    "To remove poison from something",
+    "In a destructive manner",
+    "Careful to avoid danger"
+  ],
+  "answerOption": "D",
+  "answerText": "Careful to avoid danger",
+  "difficulty": "medium",
+  "sourceFile": "1838.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1330,
+  "word": "Deduct",
+  "question": "Deduct",
+  "options": [
+    "To make something less severe or serious",
+    "Made or occurring without plan",
+    "To subtract an amount from a total",
+    "The action of despoiling"
+  ],
+  "answerOption": "C",
+  "answerText": "To subtract an amount from a total",
+  "difficulty": "medium",
+  "sourceFile": "1330.json"
+}

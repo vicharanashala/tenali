@@ -1,0 +1,15 @@
+{
+  "id": 66,
+  "word": "Rude",
+  "question": "Rude",
+  "options": [
+    "To become larger in size or volume",
+    "Occurring at irregular intervals",
+    "Offensively impolite or bad-mannered",
+    "Using more words than needed"
+  ],
+  "answerOption": "C",
+  "answerText": "Offensively impolite or bad-mannered",
+  "difficulty": "easy",
+  "sourceFile": "0066.json"
+}

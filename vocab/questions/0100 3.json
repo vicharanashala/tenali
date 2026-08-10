@@ -1,0 +1,15 @@
+{
+  "id": 100,
+  "word": "Useful",
+  "question": "Useful",
+  "options": [
+    "Important and well known",
+    "Next to or adjoining something else",
+    "To keep something for future use",
+    "Able to be used for a practical purpose"
+  ],
+  "answerOption": "D",
+  "answerText": "Able to be used for a practical purpose",
+  "difficulty": "easy",
+  "sourceFile": "0100.json"
+}

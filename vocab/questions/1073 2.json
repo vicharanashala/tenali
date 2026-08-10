@@ -1,0 +1,15 @@
+{
+  "id": 1073,
+  "word": "Nostalgia",
+  "question": "Nostalgia",
+  "options": [
+    "To publicly declare to be wrong",
+    "A sentimental longing for the past",
+    "To hold and use a weapon or tool",
+    "Attractively unusual or old-fashioned"
+  ],
+  "answerOption": "B",
+  "answerText": "A sentimental longing for the past",
+  "difficulty": "medium",
+  "sourceFile": "1073.json"
+}

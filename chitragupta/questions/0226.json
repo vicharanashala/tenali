@@ -1,0 +1,14 @@
+{
+  "id": 226,
+  "question": "Which instrument is used to measure wind speed?",
+  "options": [
+    "Hygrometer",
+    "Anemometer",
+    "Barometer",
+    "Thermometer"
+  ],
+  "answerOption": "B",
+  "answerText": "Anemometer",
+  "genre": "mixed",
+  "sourceFile": "0226.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 555,
+  "word": "Sacrifice",
+  "question": "Sacrifice",
+  "options": [
+    "To become liquid through heating",
+    "Having received a good education",
+    "To make something previously hidden visible",
+    "To give up something valued for a greater cause"
+  ],
+  "answerOption": "D",
+  "answerText": "To give up something valued for a greater cause",
+  "difficulty": "easy",
+  "sourceFile": "0555.json"
+}

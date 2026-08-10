@@ -1,0 +1,15 @@
+{
+  "id": 615,
+  "word": "Lively",
+  "question": "Lively",
+  "options": [
+    "To practice for a public performance",
+    "Full of life and energy",
+    "Having a violent or aggressive nature",
+    "To attach a tag showing the contents"
+  ],
+  "answerOption": "B",
+  "answerText": "Full of life and energy",
+  "difficulty": "easy",
+  "sourceFile": "0615.json"
+}

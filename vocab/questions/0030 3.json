@@ -1,0 +1,15 @@
+{
+  "id": 30,
+  "word": "Sweet",
+  "question": "Sweet",
+  "options": [
+    "To make someone afraid or anxious",
+    "To ask for something forcefully",
+    "Having the pleasant taste of sugar",
+    "Easily seen or noticed"
+  ],
+  "answerOption": "C",
+  "answerText": "Having the pleasant taste of sugar",
+  "difficulty": "easy",
+  "sourceFile": "0030.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1883,
+  "word": "Nefarious",
+  "question": "Nefarious",
+  "options": [
+    "Wary or suspicious",
+    "Optimistic or positive about the future",
+    "Loss of respect or reputation",
+    "Wicked or criminal in character"
+  ],
+  "answerOption": "D",
+  "answerText": "Wicked or criminal in character",
+  "difficulty": "medium",
+  "sourceFile": "1883.json"
+}

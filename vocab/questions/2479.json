@@ -1,0 +1,15 @@
+{
+  "id": 2479,
+  "word": "Aerocartography",
+  "question": "Aerocartography",
+  "options": [
+    "A change of circumstances; ups and downs",
+    "Producing or generating gas",
+    "Mapping from aircraft",
+    "Floating without being propelled"
+  ],
+  "answerOption": "C",
+  "answerText": "Mapping from aircraft",
+  "difficulty": "hard",
+  "sourceFile": "2479.json"
+}

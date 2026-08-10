@@ -1,0 +1,15 @@
+{
+  "id": 952,
+  "word": "Flimsy",
+  "question": "Flimsy",
+  "options": [
+    "To call out in a very loud voice",
+    "Not arranged in a neat way",
+    "Thin and light in construction",
+    "To inspect something in detail"
+  ],
+  "answerOption": "C",
+  "answerText": "Thin and light in construction",
+  "difficulty": "easy",
+  "sourceFile": "0952.json"
+}

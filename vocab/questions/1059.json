@@ -1,0 +1,15 @@
+{
+  "id": 1059,
+  "word": "Lethargic",
+  "question": "Lethargic",
+  "options": [
+    "Affected by a lack of energy",
+    "So lacking in originality as to be obvious",
+    "A countless or very great number",
+    "Lacking moral sense"
+  ],
+  "answerOption": "A",
+  "answerText": "Affected by a lack of energy",
+  "difficulty": "medium",
+  "sourceFile": "1059.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 101,
+  "word": "Useless",
+  "question": "Useless",
+  "options": [
+    "Not fulfilling the intended purpose",
+    "To build or put together a structure",
+    "To become aware of something",
+    "In good physical condition; not sick"
+  ],
+  "answerOption": "A",
+  "answerText": "Not fulfilling the intended purpose",
+  "difficulty": "easy",
+  "sourceFile": "0101.json"
+}

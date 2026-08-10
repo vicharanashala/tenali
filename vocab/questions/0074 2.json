@@ -1,0 +1,15 @@
+{
+  "id": 74,
+  "word": "Vellichor",
+  "question": "Vellichor",
+  "options": [
+    "Pleasure derived from another's misfortune",
+    "The state of being infatuated with another person",
+    "The lights you see when you rub your closed eyes",
+    "The strange wistfulness of used bookshops"
+  ],
+  "answerOption": "D",
+  "answerText": "The strange wistfulness of used bookshops",
+  "difficulty": "hardest",
+  "sourceFile": "0074.json"
+}

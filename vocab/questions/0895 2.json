@@ -1,0 +1,15 @@
+{
+  "id": 895,
+  "word": "Quarrelsome",
+  "question": "Quarrelsome",
+  "options": [
+    "Given to or characterized by quarreling",
+    "Relating to fundamental change",
+    "To accumulate or receive over time",
+    "Not easily convinced; having doubts"
+  ],
+  "answerOption": "A",
+  "answerText": "Given to or characterized by quarreling",
+  "difficulty": "medium",
+  "sourceFile": "0895.json"
+}

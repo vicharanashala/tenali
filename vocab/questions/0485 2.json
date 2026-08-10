@@ -1,0 +1,15 @@
+{
+  "id": 485,
+  "word": "Analyze",
+  "question": "Analyze",
+  "options": [
+    "Having a strong desire for success",
+    "To examine something in detail",
+    "Resembling without being identical",
+    "To determine an amount by mathematics"
+  ],
+  "answerOption": "B",
+  "answerText": "To examine something in detail",
+  "difficulty": "easy",
+  "sourceFile": "0485.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 707,
+  "question": "Which planet is known as the Blue Planet?",
+  "options": [
+    "Mars",
+    "Earth",
+    "Neptune",
+    "Uranus"
+  ],
+  "answerOption": "B",
+  "answerText": "Earth",
+  "genre": "geography",
+  "sourceFile": "0707.json"
+}

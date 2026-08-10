@@ -1,0 +1,15 @@
+{
+  "id": 1211,
+  "word": "Contumely",
+  "question": "Contumely",
+  "options": [
+    "In a desultory manner",
+    "Playfully quaint or fanciful behavior",
+    "Disrespectful or insulting language",
+    "Full of incessant activity"
+  ],
+  "answerOption": "C",
+  "answerText": "Disrespectful or insulting language",
+  "difficulty": "medium",
+  "sourceFile": "1211.json"
+}

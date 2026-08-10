@@ -1,0 +1,15 @@
+{
+  "id": 1599,
+  "word": "Designer",
+  "question": "Designer",
+  "options": [
+    "To reduce sensitivity to something",
+    "Having a friendly and pleasant manner",
+    "A person who designs things",
+    "A coil or twist"
+  ],
+  "answerOption": "C",
+  "answerText": "A person who designs things",
+  "difficulty": "medium",
+  "sourceFile": "1599.json"
+}

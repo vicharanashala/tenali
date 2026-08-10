@@ -1,0 +1,15 @@
+{
+  "id": 1741,
+  "word": "Gauche",
+  "question": "Gauche",
+  "options": [
+    "A genus of weasel-like animals",
+    "Damage from atmospheric electricity",
+    "A trace of something that once existed",
+    "Lacking ease or grace; unsophisticated"
+  ],
+  "answerOption": "D",
+  "answerText": "Lacking ease or grace; unsophisticated",
+  "difficulty": "hard",
+  "sourceFile": "1741.json"
+}

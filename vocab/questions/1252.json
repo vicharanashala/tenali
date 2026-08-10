@@ -1,0 +1,15 @@
+{
+  "id": 1252,
+  "word": "Ambivalent",
+  "question": "Ambivalent",
+  "options": [
+    "So intense as to be almost touched or felt",
+    "Having mixed feelings about something",
+    "Making a situation likely to happen",
+    "The belief that events are inevitable"
+  ],
+  "answerOption": "B",
+  "answerText": "Having mixed feelings about something",
+  "difficulty": "medium",
+  "sourceFile": "1252.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 337,
+  "word": "Struggle",
+  "question": "Struggle",
+  "options": [
+    "Having a strong desire for success",
+    "To make great efforts under difficulty",
+    "Feeling dedication to a cause or activity",
+    "Feeling a need to drink something"
+  ],
+  "answerOption": "B",
+  "answerText": "To make great efforts under difficulty",
+  "difficulty": "easy",
+  "sourceFile": "0337.json"
+}

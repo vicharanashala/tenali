@@ -1,0 +1,15 @@
+{
+  "id": 893,
+  "word": "Scattered",
+  "question": "Scattered",
+  "options": [
+    "Having ample space; roomy",
+    "To feel sadness after someone's death",
+    "Spread over a wide area",
+    "Loud and energetic"
+  ],
+  "answerOption": "C",
+  "answerText": "Spread over a wide area",
+  "difficulty": "easy",
+  "sourceFile": "0893.json"
+}

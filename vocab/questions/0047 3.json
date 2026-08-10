@@ -1,0 +1,15 @@
+{
+  "id": 47,
+  "word": "Rough",
+  "question": "Rough",
+  "options": [
+    "To move about freely without a destination",
+    "To make available for someone to use",
+    "To make sounds showing amusement",
+    "Having an uneven or irregular surface"
+  ],
+  "answerOption": "D",
+  "answerText": "Having an uneven or irregular surface",
+  "difficulty": "easy",
+  "sourceFile": "0047.json"
+}

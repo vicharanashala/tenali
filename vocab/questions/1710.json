@@ -1,0 +1,15 @@
+{
+  "id": 1710,
+  "word": "Detonator",
+  "question": "Detonator",
+  "options": [
+    "Having a strong rhythm",
+    "A melody played above the main tune",
+    "Involving conflict or opposition",
+    "A device for causing explosion"
+  ],
+  "answerOption": "D",
+  "answerText": "A device for causing explosion",
+  "difficulty": "medium",
+  "sourceFile": "1710.json"
+}

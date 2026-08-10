@@ -1,0 +1,15 @@
+{
+  "id": 429,
+  "word": "Fold",
+  "question": "Fold",
+  "options": [
+    "To bend something over on itself",
+    "Extremely beautiful or impressive",
+    "To move from one region to another",
+    "Not allowing water to pass through"
+  ],
+  "answerOption": "A",
+  "answerText": "To bend something over on itself",
+  "difficulty": "easy",
+  "sourceFile": "0429.json"
+}

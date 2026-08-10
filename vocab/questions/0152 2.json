@@ -1,0 +1,15 @@
+{
+  "id": 152,
+  "word": "Begin",
+  "question": "Begin",
+  "options": [
+    "Not even or balanced in shape",
+    "To agree to give something requested",
+    "To carry out an action or task",
+    "To start doing something"
+  ],
+  "answerOption": "D",
+  "answerText": "To start doing something",
+  "difficulty": "easy",
+  "sourceFile": "0152.json"
+}

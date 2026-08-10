@@ -1,0 +1,15 @@
+{
+  "id": 387,
+  "word": "Sparkle",
+  "question": "Sparkle",
+  "options": [
+    "To shine with flashes of light",
+    "Containing as much as possible; filled completely",
+    "To make something look more attractive",
+    "Extremely beautiful or impressive"
+  ],
+  "answerOption": "A",
+  "answerText": "To shine with flashes of light",
+  "difficulty": "easy",
+  "sourceFile": "0387.json"
+}

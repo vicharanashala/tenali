@@ -1,0 +1,15 @@
+{
+  "id": 2909,
+  "word": "Birth",
+  "question": "Birth",
+  "options": [
+    "Producing or generating gas",
+    "The emergence of a baby from womb",
+    "The action of attesting something",
+    "The state of being extremely poor"
+  ],
+  "answerOption": "B",
+  "answerText": "The emergence of a baby from womb",
+  "difficulty": "hard",
+  "sourceFile": "2909.json"
+}

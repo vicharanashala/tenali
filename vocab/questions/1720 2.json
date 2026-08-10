@@ -1,0 +1,15 @@
+{
+  "id": 1720,
+  "word": "Fulcrum",
+  "question": "Fulcrum",
+  "options": [
+    "A difficult or unfortunate situation",
+    "The point on which a lever rests",
+    "Relation to wind formation",
+    "Having a harmful effect in a gradual way"
+  ],
+  "answerOption": "B",
+  "answerText": "The point on which a lever rests",
+  "difficulty": "hard",
+  "sourceFile": "1720.json"
+}

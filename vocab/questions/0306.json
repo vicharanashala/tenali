@@ -1,0 +1,15 @@
+{
+  "id": 306,
+  "word": "Betray",
+  "question": "Betray",
+  "options": [
+    "To grow and develop well",
+    "Having a sharp or sour taste",
+    "To make ready for use or consideration",
+    "To be disloyal to someone who trusts you"
+  ],
+  "answerOption": "D",
+  "answerText": "To be disloyal to someone who trusts you",
+  "difficulty": "easy",
+  "sourceFile": "0306.json"
+}

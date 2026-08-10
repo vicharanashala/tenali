@@ -1,0 +1,15 @@
+{
+  "id": 547,
+  "word": "Influence",
+  "question": "Influence",
+  "options": [
+    "Having four equal sides and right angles",
+    "Not easily bent or moved",
+    "To have an effect on someone's character",
+    "Causing an urge to scratch"
+  ],
+  "answerOption": "C",
+  "answerText": "To have an effect on someone's character",
+  "difficulty": "easy",
+  "sourceFile": "0547.json"
+}

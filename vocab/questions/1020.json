@@ -1,0 +1,15 @@
+{
+  "id": 1020,
+  "word": "Unanimous",
+  "question": "Unanimous",
+  "options": [
+    "Fully in agreement with all parties",
+    "The state of being tedious",
+    "To cause to be seen as illegitimate",
+    "To assign responsibility to another person"
+  ],
+  "answerOption": "A",
+  "answerText": "Fully in agreement with all parties",
+  "difficulty": "medium",
+  "sourceFile": "1020.json"
+}

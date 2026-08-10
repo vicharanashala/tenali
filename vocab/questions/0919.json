@@ -1,0 +1,15 @@
+{
+  "id": 919,
+  "word": "Frugal",
+  "question": "Frugal",
+  "options": [
+    "Economical or thrifty",
+    "Having a practical view of what is achievable",
+    "Having high principles and expectations",
+    "To perceive the flavor of something"
+  ],
+  "answerOption": "A",
+  "answerText": "Economical or thrifty",
+  "difficulty": "easy",
+  "sourceFile": "0919.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1003,
+  "word": "Diligent",
+  "question": "Diligent",
+  "options": [
+    "Having careful and persistent effort",
+    "The quality of being loyal",
+    "Clashing or not in harmony",
+    "The deepest or most remote parts"
+  ],
+  "answerOption": "A",
+  "answerText": "Having careful and persistent effort",
+  "difficulty": "medium",
+  "sourceFile": "1003.json"
+}

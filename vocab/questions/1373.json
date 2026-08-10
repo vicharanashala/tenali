@@ -1,0 +1,15 @@
+{
+  "id": 1373,
+  "word": "Deliberate",
+  "question": "Deliberate",
+  "options": [
+    "To make something clear; explain",
+    "Dangerously steep or sudden",
+    "Done consciously and intentionally",
+    "Causing disapproval or opposition"
+  ],
+  "answerOption": "C",
+  "answerText": "Done consciously and intentionally",
+  "difficulty": "medium",
+  "sourceFile": "1373.json"
+}

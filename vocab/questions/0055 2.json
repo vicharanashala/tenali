@@ -1,0 +1,15 @@
+{
+  "id": 55,
+  "word": "Truculent",
+  "question": "Truculent",
+  "options": [
+    "Kept secret because it would not be approved",
+    "Expressing a strong opinion, especially controversial",
+    "Very generous or forgiving toward rivals",
+    "Eager or quick to argue or fight"
+  ],
+  "answerOption": "D",
+  "answerText": "Eager or quick to argue or fight",
+  "difficulty": "extra-hard",
+  "sourceFile": "0055.json"
+}

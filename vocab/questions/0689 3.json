@@ -1,0 +1,15 @@
+{
+  "id": 689,
+  "word": "Powerful",
+  "question": "Powerful",
+  "options": [
+    "To live in a particular place",
+    "Caught in a place unable to escape",
+    "Having great power or strength",
+    "To give out a bright light"
+  ],
+  "answerOption": "C",
+  "answerText": "Having great power or strength",
+  "difficulty": "easy",
+  "sourceFile": "0689.json"
+}

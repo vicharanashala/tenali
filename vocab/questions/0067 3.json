@@ -1,0 +1,15 @@
+{
+  "id": 67,
+  "word": "Honest",
+  "question": "Honest",
+  "options": [
+    "Free from disturbance; calm",
+    "To move downward without control",
+    "To set up an organization on a firm basis",
+    "Free of deceit; truthful"
+  ],
+  "answerOption": "D",
+  "answerText": "Free of deceit; truthful",
+  "difficulty": "easy",
+  "sourceFile": "0067.json"
+}

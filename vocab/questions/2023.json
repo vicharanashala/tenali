@@ -1,0 +1,15 @@
+{
+  "id": 2023,
+  "word": "Circumlocution",
+  "question": "Circumlocution",
+  "options": [
+    "The action of stripping bare",
+    "The use of many words where fewer would do",
+    "A lengthy and aggressive speech",
+    "One who studies aerodynamics"
+  ],
+  "answerOption": "B",
+  "answerText": "The use of many words where fewer would do",
+  "difficulty": "hard",
+  "sourceFile": "2023.json"
+}

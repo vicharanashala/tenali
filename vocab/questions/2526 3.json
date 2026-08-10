@@ -1,0 +1,15 @@
+{
+  "id": 2526,
+  "word": "Battlement",
+  "question": "Battlement",
+  "options": [
+    "Saying the same thing twice in different words",
+    "Relating to air and space",
+    "Relating to meteorites from space",
+    "A defensive structure at the top of a wall"
+  ],
+  "answerOption": "D",
+  "answerText": "A defensive structure at the top of a wall",
+  "difficulty": "hard",
+  "sourceFile": "2526.json"
+}

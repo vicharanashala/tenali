@@ -1,0 +1,15 @@
+{
+  "id": 2529,
+  "word": "Abigail",
+  "question": "Abigail",
+  "options": [
+    "Origin of life from non-living matter",
+    "Having keen mental perception and understanding",
+    "In an abject way",
+    "A female servant or attendant"
+  ],
+  "answerOption": "D",
+  "answerText": "A female servant or attendant",
+  "difficulty": "extra-hard",
+  "sourceFile": "2529.json"
+}

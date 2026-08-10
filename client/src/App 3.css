@@ -1,0 +1,1788 @@
+/**
+ * ══════════════════════════════════════════════════════════════════════
+ * TENALI CSS ARCHITECTURE
+ * ══════════════════════════════════════════════════════════════════════
+ *
+ * A comprehensive dark-first CSS system for an educational quiz platform.
+ * This stylesheet implements:
+ *
+ * THEMING SYSTEM:
+ * - CSS custom properties (variables) for complete dark/light theme support
+ * - Dark theme enabled by default (:root)
+ * - Light theme activated via [data-theme="light"] selector
+ * - Seamless transitions between themes (180ms ease)
+ * - Color variables cover: backgrounds, text, accents, feedback states
+ *
+ * RESPONSIVE DESIGN:
+ * - Mobile-first approach with breakpoints at 700px and 500px
+ * - Flexible layouts using CSS Grid and Flexbox
+ * - Clamp() functions for fluid typography scaling
+ * - Touch-friendly interactive elements
+ *
+ * COMPONENT SECTIONS:
+ * 1. Theme Variables & Base Styles (root, light theme, resets)
+ * 2. Core Layout (shell, cards, headers)
+ * 3. Typography & Text Components
+ * 4. Navigation & Menu (search, menu grid)
+ * 5. Buttons & Controls (primary, secondary, pills)
+ * 6. Quiz Question Display (question boxes, scoring pills)
+ * 7. Answer Input Methods (text input, options, checkboxes, radio)
+ * 8. Feedback & Results (correct/wrong indicators, results tables)
+ * 9. Specialized Puzzle Types (Twin Hunt, Coefficient, Prime, Roots)
+ * 10. Numeric Keypad
+ * 11. UI Controls (theme toggle, custom puzzle selection)
+ * 12. Adaptive Layouts (table layouts for Multiplication reference)
+ * 13. Interval Scheduling (timeline visualization and controls)
+ * 14. Extended Euclid Algorithm (multi-step algorithm display)
+ *
+ * TYPOGRAPHY:
+ * - Display font: Source Serif 4 (headings, emphasis)
+ * - Body font: DM Sans (content, UI text)
+ * - Weights: 400 (regular), 500 (medium), 600 (semibold), 700 (bold)
+ *
+ * SPACING & SIZING:
+ * - Border radius: 16px (default), 10px (small), 999px (pills)
+ * - Shadow system: card shadows + button shadows
+ * - Consistent padding/margin scale for visual hierarchy
+ */
+
+/* ── Base ─────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap');
+
+/* ── Dark theme (default) ─────────────────────────────── */
+:root {
+  /* TYPOGRAPHY FONT FAMILIES */
+  --font-display: 'Source Serif 4', 'Georgia', serif;  /* Serif font for headings and emphasis */
+  --font-body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;  /* Sans-serif for body copy and UI */
+
+  /* PRIMARY BACKGROUND COLORS - Dark theme palette */
+  --clr-bg: #1a1614;           /* Main page background (very dark brown) */
+  --clr-card: #2c2622;          /* Card/modal background (dark brown, slightly lighter) */
+  --clr-surface: #362f2a;       /* Surface containers, panels (medium dark brown) */
+  --clr-input: #3e3631;         /* Input field background (darker brown with slight warmth) */
+
+  /* TEXT COLORS */
+  --clr-text: #ede8e3;          /* Primary text (off-white/cream for good contrast on dark) */
+  --clr-text-soft: #a89e94;     /* Secondary text, labels, hints (muted brown-gray) */
+
+  /* BORDERS & DIVIDERS */
+  --clr-border: rgba(255, 245, 230, 0.10);  /* Subtle light border (10% opacity cream) */
+
+  /* ACCENT COLORS */
+  --clr-accent: #e8864a;        /* Primary action color (warm orange, eye-catching) */
+  --clr-accent-soft: rgba(232, 134, 74, 0.15);  /* Accent background overlay (15% opacity) */
+
+  /* SEMANTIC COLORS - Feedback states */
+  --clr-correct: #5cb87a;       /* Success/correct answer indicator (muted green) */
+  --clr-correct-bg: rgba(92, 184, 122, 0.12);  /* Correct answer background (12% opacity) */
+  --clr-wrong: #e05a4a;         /* Error/incorrect indicator (muted red) */
+  --clr-wrong-bg: rgba(224, 90, 74, 0.12);    /* Wrong answer background (12% opacity) */
+
+  /* UI ELEMENT COLORS */
+  --clr-badge: #4a4340;         /* Badge backgrounds (dark gray-brown) */
+  --clr-placeholder: #6b6058;   /* Input placeholder text (mid-tone brown) */
+
+  /* HOVER & INTERACTION STATES */
+  --clr-hover: rgba(255, 245, 230, 0.04);     /* Subtle hover state (4% opacity cream) */
+  --clr-hover-strong: rgba(255, 245, 230, 0.08);  /* More pronounced hover (8% opacity) */
+
+  /* SIZING & EFFECTS */
+  --radius: 16px;               /* Default border-radius for cards and containers */
+  --radius-sm: 10px;            /* Small border-radius for buttons and inputs */
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(0, 0, 0, 0.15);  /* Layered shadow for cards */
+  --shadow-btn: 0 2px 8px rgba(0, 0, 0, 0.20);  /* Subtle shadow for buttons */
+  --transition: 180ms ease;     /* Standard transition timing for all interactive elements */
+}
+
+/* ── Light theme ──────────────────────────────────────── */
+/* Applied when DOM element has data-theme="light" attribute */
+[data-theme="light"] {
+  /* LIGHT THEME BACKGROUND COLORS */
+  --clr-bg: #f5f0eb;            /* Light page background (warm off-white) */
+  --clr-card: #fffdf9;          /* Card background (near white) */
+  --clr-surface: #f0ebe5;       /* Surface containers (light warm gray) */
+  --clr-input: #ffffff;         /* Input field background (pure white) */
+
+  /* LIGHT THEME TEXT COLORS */
+  --clr-text: #2c2420;          /* Primary text (very dark brown) */
+  --clr-text-soft: #6b5e54;     /* Secondary text (warm brown) */
+
+  /* LIGHT THEME BORDERS */
+  --clr-border: rgba(60, 45, 30, 0.12);  /* Dark border with 12% opacity */
+
+  /* LIGHT THEME ACCENT - slightly muted for better contrast on light backgrounds */
+  --clr-accent: #e07a3a;        /* Slightly darker/muted orange */
+  --clr-accent-soft: rgba(224, 122, 58, 0.10);  /* Accent overlay (10% opacity) */
+
+  /* LIGHT THEME SEMANTIC COLORS */
+  --clr-correct: #3a8a5c;       /* Darker green for light background */
+  --clr-correct-bg: #eaf5ef;    /* Light green tint background */
+  --clr-wrong: #c24b3a;         /* Darker red for light background */
+  --clr-wrong-bg: #fdf0ee;      /* Light red/pink tint background */
+
+  /* LIGHT THEME UI COLORS */
+  --clr-badge: #c0c0c0;         /* Light gray badges */
+  --clr-placeholder: #b5a99a;   /* Light brown placeholder text */
+
+  /* LIGHT THEME HOVER STATES - now using dark colors with low opacity */
+  --clr-hover: rgba(60, 40, 20, 0.04);       /* Subtle dark overlay (4%) */
+  --clr-hover-strong: rgba(60, 40, 20, 0.08);  /* More pronounced dark overlay (8%) */
+
+  /* LIGHT THEME SHADOWS - lighter, more subtle */
+  --shadow-card: 0 4px 24px rgba(60, 40, 20, 0.08), 0 1px 3px rgba(60, 40, 20, 0.06);
+  --shadow-btn: 0 2px 8px rgba(60, 40, 20, 0.10);
+}
+
+/* RESET: Apply border-box sizing to all elements (better box model for layouts) */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* BASE DOCUMENT STYLES */
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--clr-bg);      /* Use theme variable for dynamic background */
+  font-family: var(--font-body);
+  color: var(--clr-text);
+  /* Smooth font rendering on macOS/iOS */
+  -webkit-font-smoothing: antialiased;
+  /* Animate background and text color when theme changes */
+  transition: background var(--transition), color var(--transition);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* CORE LAYOUT - App shell and main content container */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.app-shell {
+  /* Full viewport height with centered content */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;  /* Generous padding for mobile spacing */
+}
+
+.card {
+  width: 100%;
+  max-width: 900px;    /* Prevent content from stretching too wide */
+  background: var(--clr-card);
+  border: 1px solid var(--clr-border);
+  border-radius: 24px;
+  padding: 48px 40px;
+  box-shadow: var(--shadow-card);  /* Elevated appearance with shadow */
+  /* Smooth color transitions when theme changes */
+  transition: background var(--transition), border-color var(--transition);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* TYPOGRAPHY - Text hierarchy and heading styles */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+h1 {
+  margin: 0 0 6px;
+  text-align: center;
+  font-family: var(--font-display);  /* Serif display font for emphasis */
+  /* clamp(min, preferred, max) creates fluid sizing: scales between 2.4rem and 3.2rem based on 5vw viewport width */
+  font-size: clamp(2.4rem, 5vw, 3.2rem);
+  font-weight: 700;
+  color: var(--clr-text);
+  letter-spacing: -0.02em;  /* Slight negative spacing for sophisticated look */
+  line-height: 1.15;        /* Compact line height for headings */
+}
+
+.subtitle {
+  margin: 0 0 36px;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--clr-text-soft);  /* Softer color for secondary text */
+  font-weight: 400;
+  line-height: 1.6;  /* Generous line height for readability */
+  letter-spacing: 0.01em;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* SEARCH BAR - Quiz topic filtering */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.search-bar-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.search-bar {
+  width: 100%;
+  max-width: 340px;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 400;
+  padding: 10px 18px;
+  border: 1.5px solid var(--clr-border);
+  border-radius: 999px;  /* Pill-shaped input */
+  background: var(--clr-input);
+  color: var(--clr-text);
+  outline: none;
+  /* Transition multiple properties for focus state animation */
+  transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+.search-bar::placeholder {
+  color: var(--clr-placeholder);
+}
+
+.search-bar:focus {
+  border-color: var(--clr-accent);
+  /* Box-shadow creates glowing effect around focused input (accent color + 3px spread) */
+  box-shadow: 0 0 0 3px var(--clr-accent-soft);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* MENU GRID - Home page quiz topic selection */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.menu-grid {
+  display: grid;
+  /* auto-fill fills grid with as many 180px columns as fit, wrapping as needed */
+  grid-template-columns: repeat(auto-fill, 180px);
+  gap: 14px;
+  justify-content: center;
+}
+
+.grid-dimension {
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--clr-text-soft);
+  opacity: 0.45;  /* Very subtle text describing grid size */
+  margin-top: 16px;
+  letter-spacing: 0.06em;
+}
+
+.menu-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px 16px 16px;
+  gap: 10px;
+  width: 180px;
+  height: 160px;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+  background: var(--clr-surface);
+  color: var(--clr-text);
+  cursor: pointer;
+  /* Multiple transitions: lift on hover (transform), glow effect (shadow), highlight border */
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), background var(--transition);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+
+  /* Reset browser button defaults since menu-card is a <button> element */
+  font-family: var(--font-body);
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0;
+  line-height: inherit;
+  -webkit-appearance: none;  /* iOS button styling */
+  appearance: none;
+  box-sizing: border-box;
+}
+
+.menu-card:hover {
+  /* Lift card up 3px on hover */
+  transform: translateY(-3px);
+  /* Enhanced shadow creates depth effect */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  /* Accent color highlight on border */
+  border-color: var(--clr-accent);
+}
+
+.menu-card::before {
+  /* Decorative dot indicator that appears on hover */
+  content: '';
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--clr-accent);
+  opacity: 0;  /* Hidden by default */
+  transition: opacity var(--transition);
+}
+
+.menu-card:hover::before {
+  opacity: 1;  /* Fade in dot on hover */
+}
+
+/* Category-specific dot colors using CSS custom properties */
+.menu-card.purple { --dot: #9b6dca; }
+.menu-card.blue   { --dot: #5a8fc2; }
+.menu-card.green  { --dot: #5aab7a; }
+.menu-card.purple::before { background: var(--dot); }
+.menu-card.blue::before   { background: var(--dot); }
+.menu-card.green::before  { background: var(--dot); }
+
+/* Placeholder state for disabled/unavailable quiz options */
+.menu-card.placeholder {
+  border-style: dashed;  /* Dashed border indicates disabled state */
+  border-color: var(--clr-border);
+  background: var(--clr-hover);
+  cursor: default;  /* Not clickable */
+  box-shadow: none;
+}
+
+.menu-card.placeholder:hover {
+  transform: none;  /* No lift on hover */
+  box-shadow: none;
+  border-color: var(--clr-border);
+}
+
+.menu-card.placeholder::before {
+  display: none;  /* Hide indicator dot for disabled cards */
+}
+
+.placeholder-text {
+  color: var(--clr-text-soft);
+  opacity: 0.35;  /* Very faint text for disabled state */
+  font-weight: 500;
+  font-size: 0.88rem;
+  background: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+.menu-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--clr-text);
+  line-height: 1;
+  background: var(--clr-badge);  /* Subtle background badge */
+  width: 140px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 8px;
+  flex-shrink: 0;  /* Don't shrink below content size */
+}
+
+.menu-subtitle {
+  font-size: 0.82rem;
+  color: var(--clr-text-soft);
+  line-height: 1.4;
+  min-height: 1.3em;  /* Prevent layout shift with variable-height subtitles */
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* BUTTONS - Primary, secondary, and utility buttons */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+button {
+  /* PRIMARY BUTTON STYLE - High visibility call-to-action */
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 12px 28px;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  background: var(--clr-accent);  /* Warm orange accent color */
+  color: #fff;  /* White text for contrast */
+  box-shadow: var(--shadow-btn);
+  /* Animate position lift and shadow on interaction */
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+  line-height: 1.4;
+}
+
+button:hover {
+  /* Subtle lift with enhanced glow on hover */
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(232, 134, 74, 0.3);
+  background: #cc6a2e;  /* Slightly darker accent on hover */
+}
+
+button:active {
+  /* Return to normal position when clicked */
+  transform: translateY(0);
+}
+
+button.secondary {
+  /* SECONDARY BUTTON STYLE - Subtle, low-emphasis actions */
+  background: transparent;
+  color: var(--clr-text);
+  border: 1px solid var(--clr-border);
+  box-shadow: none;
+}
+
+button.secondary:hover {
+  background: var(--clr-hover);  /* Subtle background tint on hover */
+  box-shadow: none;
+}
+
+button:disabled {
+  /* Disabled state for unavailable actions */
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.back-button {
+  /* UTILITY BUTTON STYLE - Minimal navigation button */
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 500;
+  padding: 8px 16px;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--clr-text-soft);  /* Subtle text color for navigation */
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+  box-shadow: none;
+}
+
+.back-button:hover {
+  background: var(--clr-hover);
+  color: var(--clr-text);  /* Brighten text on hover */
+  transform: none;
+  box-shadow: none;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* HEADER & STATUS INDICATORS - Quiz progress tracking */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.header-row {
+  /* Flex container for back button and navigation */
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.top-mini-row {
+  /* Row of status pills (score, progress, timer) positioned at top-right */
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.score-pill,
+.progress-pill {
+  /* PILL BADGES - Small status indicators with rounded edges */
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--clr-text-soft);
+  background: var(--clr-surface);
+  border-radius: 999px;  /* Maximum border-radius for pill shape */
+  border: none;
+  letter-spacing: 0.02em;
+}
+
+.progress-pill.center {
+  /* Variant: center-aligned progress indicator */
+  display: table;
+  margin: 0 auto 20px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* RADIO GROUP - Difficulty or option selection (single choice) */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.radio-group {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;  /* Allow options to wrap on small screens */
+  margin-bottom: 28px;
+}
+
+.radio-pill {
+  /* PILL-STYLE RADIO BUTTON - Accessible radio input styled as button */
+  position: relative;
+  padding: 10px 20px;
+  border-radius: 999px;  /* Pill shape */
+  background: transparent;
+  border: 1px solid var(--clr-border);
+  color: var(--clr-text-soft);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;  /* Prevent text selection on click */
+  transition: all var(--transition);  /* Animate all properties on state change */
+}
+
+.radio-pill input {
+  /* Hidden native radio button (we style the label instead) */
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.radio-pill:hover {
+  /* Hover highlight shows interactive nature */
+  border-color: var(--clr-accent);
+  color: var(--clr-accent);
+}
+
+.radio-pill.active {
+  /* Selected state: filled with accent color */
+  background: var(--clr-accent);
+  border-color: var(--clr-accent);
+  color: #fff;  /* White text on colored background */
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* WELCOME & RESULTS SCREENS - Quiz completion states */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.welcome-box {
+  /* Container for welcome/results content */
+  text-align: center;
+  padding: 32px 8px;
+}
+
+.welcome-box > button {
+  margin-top: 8px;  /* Spacing between welcome text and action button */
+}
+
+.welcome-text {
+  /* Descriptive text on welcome/results screens */
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--clr-text-soft);
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+
+.final-score {
+  /* Large score display at end of quiz */
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--clr-text);
+  margin-bottom: 32px;
+  font-family: var(--font-display);  /* Use serif font for emphasis */
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* QUESTION DISPLAY - Question text, equations, vocabulary */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.question-box {
+  /* Main question text container */
+  font-family: var(--font-body);
+  /* Responsive font size: minimum 1.4rem, preferred 3.5% of viewport width, maximum 1.8rem */
+  font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+  font-weight: 400;
+  margin: 16px 0 28px;
+  color: var(--clr-text);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.question-box .equation {
+  /* Mathematical equations within questions (larger than base question) */
+  display: block;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);  /* Scales larger than parent */
+  font-weight: 600;
+  margin-top: 12px;
+  letter-spacing: 0.01em;  /* Subtle spacing for mathematical readability */
+}
+
+.question-box .given {
+  /* "Given" context text in problem statements */
+  font-size: inherit;
+  font-weight: 600;
+  color: var(--clr-text);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.vocab-word {
+  /* Vocabulary words being defined (for vocab quizzes) */
+  font-family: var(--font-display);  /* Use serif for emphasis */
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--clr-text);
+  letter-spacing: 0.01em;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ANSWER INPUT - Text entry field for short answers */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.answer-input {
+  /* Main input for student answers (numbers, short text) */
+  width: 100%;
+  max-width: 320px;
+  display: block;
+  margin: 0 auto;
+  font-family: var(--font-body);
+  font-size: 1.3rem;  /* Large for easy reading */
+  font-weight: 500;
+  padding: 14px 20px;
+  border: 1.5px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  text-align: center;  /* Center student input */
+  outline: none;
+  color: var(--clr-text);
+  background: var(--clr-input);
+  /* Smooth transitions on focus and state changes */
+  transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+.answer-input::placeholder {
+  color: var(--clr-placeholder);
+  font-weight: 400;
+}
+
+.answer-input:focus {
+  /* Highlighted focus state with accent color */
+  border-color: var(--clr-accent);
+  /* 3px glow box-shadow (outline-like effect but inside the browser's default outline) */
+  box-shadow: 0 0 0 3px var(--clr-accent-soft);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* MULTIPLE CHOICE OPTIONS - Answer option cards for GK quizzes */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.options-list {
+  /* Container for multiple choice options */
+  display: grid;
+  gap: 10px;  /* Space between option cards */
+  margin-bottom: 8px;
+}
+
+.option-card {
+  /* Individual answer option (styled radio button) */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--clr-border);
+  background: var(--clr-input);
+  cursor: pointer;
+  color: var(--clr-text);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.option-card:hover {
+  /* Highlight on hover to show clickable state */
+  border-color: var(--clr-text-soft);
+  background: var(--clr-hover);
+}
+
+.option-card.selected {
+  /* Selected option gets accent color highlight */
+  border-color: var(--clr-accent);
+  background: var(--clr-accent-soft);
+}
+
+.option-card input[type="radio"] {
+  /* Hide native radio button (we use custom styling instead) */
+  display: none;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* FEEDBACK & RESULTS - Answer feedback with color-coded states */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.feedback {
+  /* Feedback message shown after answer submission */
+  margin-top: 20px;
+  padding: 16px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 0.92rem;
+  font-weight: 500;
+  text-align: left;
+  line-height: 1.75;
+  white-space: pre-line;  /* Preserve line breaks in feedback text */
+}
+
+.feedback.correct {
+  /* Success state: green background with green text */
+  background: var(--clr-correct-bg);
+  color: var(--clr-correct);
+}
+
+.feedback.wrong {
+  /* Error state: red background with red text */
+  background: var(--clr-wrong-bg);
+  color: var(--clr-wrong);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* BUTTON ROW - Horizontal button layout for actions */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.button-row {
+  /* Flex container for action buttons (Next, Submit, etc.) */
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;  /* Buttons wrap on small screens */
+  margin-top: 24px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* TIMER - Quiz countdown display */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.timer-pill {
+  /* Countdown timer display in pill format */
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--clr-accent);
+  background: var(--clr-accent-soft);  /* Warm background for timer visibility */
+  border-radius: 999px;
+  border: none;
+  letter-spacing: 0.02em;
+  /* tabular-nums: monospace numerals for consistent digit widths (MM:SS) */
+  font-variant-numeric: tabular-nums;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* RESULTS TABLE - Quiz answer review and scoring summary */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.results-table-wrapper {
+  margin-top: 28px;
+  overflow-x: auto;  /* Allow horizontal scroll on small screens */
+}
+
+.results-table {
+  /* Table showing all questions and answers from completed quiz */
+  width: 100%;
+  border-collapse: collapse;  /* No double borders between cells */
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+.results-table th {
+  /* Table header row (Question #, Question, User Answer, Correct Answer, etc.) */
+  padding: 10px 12px;
+  font-weight: 600;
+  color: var(--clr-text-soft);
+  border-bottom: 2px solid var(--clr-border);
+  font-size: 0.78rem;
+  text-transform: uppercase;  /* Styled headers */
+  letter-spacing: 0.04em;
+}
+
+.results-table td {
+  /* Table data cells */
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--clr-border);
+  color: var(--clr-text);
+  vertical-align: middle;
+}
+
+.results-table tr.row-correct td:nth-child(4) {
+  /* Color-code correct answers in green (4th column is result column) */
+  color: var(--clr-correct);
+  font-weight: 600;
+}
+
+.results-table tr.row-wrong td:nth-child(4) {
+  /* Color-code wrong answers in red */
+  color: var(--clr-wrong);
+  font-weight: 600;
+}
+
+.results-table tr:last-child td {
+  /* Remove bottom border from last row */
+  border-bottom: none;
+}
+
+.results-summary {
+  /* Text summary below results table */
+  margin-top: 16px;
+  margin-bottom: 32px;
+  font-size: 0.85rem;
+  color: var(--clr-text-soft);
+  text-align: center;
+  font-weight: 500;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* CHECKBOX GROUP - Multiple selection (Multiplication problems) */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.checkbox-group {
+  /* Container for checkbox pill options (allow multiple selections) */
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.checkbox-pill {
+  /* PILL-STYLE CHECKBOX - Larger than radio pills for multiplication problems */
+  position: relative;
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: transparent;
+  border: 1px solid var(--clr-border);
+  color: var(--clr-text-soft);
+  font-family: var(--font-body);
+  font-size: 1rem;  /* Larger than radio pills */
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  transition: all var(--transition);  /* Smooth state changes */
+}
+
+.checkbox-pill input {
+  /* Hidden native checkbox (we style the label instead) */
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.checkbox-pill:hover {
+  /* Hover highlight */
+  border-color: var(--clr-accent);
+  color: var(--clr-accent);
+}
+
+.checkbox-pill.active {
+  /* Selected state: filled with accent color (can have multiple selected) */
+  background: var(--clr-accent);
+  border-color: var(--clr-accent);
+  color: #fff;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* QUESTION COUNT - Quiz length selector */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.question-count-row {
+  /* Vertical layout for label + number input */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.question-count-label {
+  /* Label text above question count input */
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--clr-text-soft);
+}
+
+.question-count-input {
+  /* Number input for selecting quiz length */
+  max-width: 160px;
+  font-size: 1.1rem;
+}
+
+/* ── Twin Hunt Panels ──────────────────────────────── */
+.twin-panels {
+  display: flex;
+  gap: 0;
+  align-items: stretch;
+  margin: 16px 0 20px;
+}
+
+.twin-panel {
+  flex: 1;
+  position: relative;
+  min-height: 280px;
+}
+
+.twin-panel::before {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+
+.twin-circle {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--clr-border);
+  background: var(--clr-hover);
+  overflow: visible;
+}
+
+.twin-divider {
+  width: 1px;
+  background: var(--clr-border);
+  flex-shrink: 0;
+  margin: 20px 0;
+}
+
+.twin-item {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  font-size: 1.5rem;
+  border: 1.5px solid var(--clr-border);
+  border-radius: 50%;
+  background: var(--clr-input);
+  cursor: pointer;
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+  padding: 0;
+  line-height: 1;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  transform: translate(-50%, -50%);
+}
+
+.twin-item:hover:not(:disabled) {
+  transform: translate(-50%, -50%) scale(1.2);
+  border-color: var(--clr-accent);
+  box-shadow: 0 2px 12px rgba(232, 134, 74, 0.25);
+  z-index: 10;
+}
+
+.twin-item:active:not(:disabled) {
+  transform: translate(-50%, -50%) scale(0.95);
+}
+
+.twin-item:disabled {
+  cursor: default;
+}
+
+.twin-item.twin-match {
+  border-color: var(--clr-correct);
+  background: var(--clr-correct-bg);
+  transform: translate(-50%, -50%) scale(1.25);
+  box-shadow: 0 0 0 3px rgba(92, 184, 122, 0.25);
+  z-index: 10;
+}
+
+.twin-item.twin-dim {
+  opacity: 0.25;
+}
+
+/* ── Polynomial / Coefficient Inputs ───────────────── */
+.coeff-inputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 16px 0;
+}
+.coeff-field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.coeff-label {
+  font-size: 0.78rem;
+  color: var(--clr-text-soft);
+  font-weight: 500;
+}
+.coeff-input {
+  width: 72px !important;
+  text-align: center;
+  font-size: 1.1rem !important;
+}
+.poly-expr {
+  font-family: var(--font-body);
+  font-weight: 500;
+}
+
+/* ── Factor Inputs ─────────────────────────────────── */
+.factor-inputs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 16px 0;
+}
+.factor-group {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--clr-text);
+}
+.factor-input {
+  width: 56px !important;
+  text-align: center;
+  font-size: 1.1rem !important;
+}
+
+/* ── Prime Factorization ───────────────────────────── */
+.prime-chain {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  word-spacing: 0.15em;
+}
+.prime-input-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 12px 0;
+}
+.prime-input-row .answer-input {
+  max-width: 140px;
+}
+.give-up-btn {
+  background: var(--clr-wrong) !important;
+  font-size: 0.85rem;
+}
+
+/* ── Roots / Variable Inputs ───────────────────────── */
+.roots-inputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  margin: 16px 0;
+}
+.single-input-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 12px 0;
+}
+.single-input-row .answer-input {
+  max-width: 180px;
+}
+
+/* ── Equation System Display ───────────────────────── */
+.equation-system {
+  text-align: left;
+  display: inline-block;
+  margin: 0 auto;
+}
+.equation-system div {
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  line-height: 1.8;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Numeric Keypad ─────────────────────────────────── */
+.numpad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 20px auto 0;
+  max-width: 280px;
+}
+
+.numpad-row {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.numpad-key {
+  flex: 1;
+  padding: 14px 0;
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--clr-text);
+  background: var(--clr-input);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  line-height: 1;
+}
+
+.numpad-key:hover {
+  background: var(--clr-hover-strong);
+  transform: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.numpad-key:active {
+  background: var(--clr-hover-strong);
+  transform: scale(0.96);
+}
+
+.numpad-key:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.numpad-key.numpad-special {
+  font-size: 1.05rem;
+  color: var(--clr-text-soft);
+  background: var(--clr-surface);
+}
+
+.numpad-key.numpad-special:hover {
+  background: var(--clr-hover-strong);
+}
+
+/* ── Theme Toggle ───────────────────────────────────── */
+.theme-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--clr-border);
+  background: var(--clr-surface);
+  color: var(--clr-text);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: background var(--transition), color var(--transition), transform var(--transition);
+  z-index: 100;
+  padding: 0;
+  line-height: 1;
+}
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Custom Puzzle ──────────────────────────────────── */
+.custom-section-label {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--clr-text);
+  margin: 20px 0 10px;
+  text-align: left;
+}
+
+.custom-puzzle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.custom-puzzle-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--clr-border);
+  background: var(--clr-input);
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--clr-text);
+  transition: border-color var(--transition), background var(--transition);
+  user-select: none;
+}
+
+.custom-puzzle-check:hover {
+  border-color: var(--clr-accent);
+}
+
+.custom-puzzle-check.checked {
+  border-color: var(--clr-accent);
+  background: var(--clr-accent-soft);
+  color: var(--clr-accent);
+  font-weight: 600;
+}
+
+.custom-order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 8px 0 16px;
+}
+
+.custom-order-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--clr-border);
+  background: var(--clr-surface);
+  font-size: 0.88rem;
+}
+
+.custom-order-num {
+  font-weight: 700;
+  color: var(--clr-accent);
+  min-width: 20px;
+}
+
+.custom-order-name {
+  flex: 1;
+  font-weight: 500;
+  color: var(--clr-text);
+}
+
+.custom-order-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid var(--clr-border);
+  background: transparent;
+  color: var(--clr-text-soft);
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-shadow: none;
+  transition: background var(--transition);
+}
+
+.custom-order-btn:hover {
+  background: var(--clr-hover);
+  transform: none;
+  box-shadow: none;
+}
+
+.custom-order-btn:disabled {
+  opacity: 0.25;
+}
+
+.custom-type-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--clr-surface);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--clr-text-soft);
+  margin-bottom: 8px;
+}
+
+/* ── Adaptive Tables ────────────────────────────────── */
+.tables-layout {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.tables-quiz-area {
+  flex: 1;
+  max-width: 480px;
+}
+
+.ref-table {
+  flex-shrink: 0;
+  width: 200px;
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+}
+
+.ref-table-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--clr-accent);
+  text-align: center;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.ref-table-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 4px 0;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--clr-text);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 700px) {
+  .tables-layout {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .tables-quiz-area {
+    order: -1;          /* question + input always on top */
+  }
+  .ref-table {
+    min-width: auto;
+    width: 100%;
+    padding: 8px 10px;
+    max-height: 180px;
+    overflow-y: auto;
+  }
+  .ref-table-rows {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px 10px;
+  }
+  .ref-table-row {
+    font-size: 0.78rem;
+    padding: 1px 0;
+  }
+  .ref-table-title {
+    font-size: 0.88rem;
+    margin-bottom: 4px;
+    padding-bottom: 4px;
+  }
+}
+
+/* ── Responsive ──────────────────────────────────────── */
+@media (max-width: 500px) {
+  .card {
+    padding: 32px 24px;
+    border-radius: 20px;
+  }
+  .menu-card {
+    width: 100%;
+    height: 140px;
+  }
+  .button-row button {
+    width: 100%;
+  }
+}
+
+/* ── Interval Scheduling ───────────────────────────── */
+.card.is-wide {
+  max-width: 1100px;
+}
+
+.is-algo-explain {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  margin-bottom: 24px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--clr-text-soft);
+}
+
+.is-timeline-container {
+  margin-bottom: 20px;
+}
+
+.is-timeline-labels {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0 4px;
+  user-select: none;
+}
+
+.is-timeline-label {
+  font-size: 0.7rem;
+  color: var(--clr-text-soft);
+  width: 0;
+  text-align: center;
+}
+
+.is-timeline {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  cursor: crosshair;
+  overflow: hidden;
+  touch-action: none;
+}
+
+.is-grid-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--clr-border);
+  pointer-events: none;
+}
+
+.is-interval {
+  position: absolute;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--clr-text);
+  background: var(--clr-input);
+  border: 1.5px solid var(--clr-border);
+  transition: opacity 0.3s, border-color 0.3s, background 0.3s, box-shadow 0.3s;
+  user-select: none;
+  z-index: 1;
+}
+
+.is-interval.is-preview {
+  background: var(--clr-accent-soft);
+  border: 1.5px dashed var(--clr-accent);
+  opacity: 0.8;
+}
+
+.is-interval.is-selected {
+  border-color: #fff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+  z-index: 3;
+}
+
+.is-interval.is-considering {
+  border-color: var(--clr-accent);
+  box-shadow: 0 0 12px var(--clr-accent-soft);
+  background: var(--clr-accent-soft);
+  z-index: 2;
+  animation: is-pulse 1s ease-in-out infinite;
+}
+
+.is-interval.is-rejected {
+  border-color: var(--clr-wrong);
+  background: var(--clr-wrong-bg);
+  box-shadow: 0 0 12px var(--clr-wrong-bg);
+  z-index: 2;
+  animation: is-pulse-red 1s ease-in-out infinite;
+}
+
+.is-interval.is-skipped {
+  opacity: 0.3;
+}
+
+@keyframes is-pulse {
+  0%, 100% { box-shadow: 0 0 8px var(--clr-accent-soft); }
+  50% { box-shadow: 0 0 18px var(--clr-accent-soft); }
+}
+
+@keyframes is-pulse-red {
+  0%, 100% { box-shadow: 0 0 8px var(--clr-wrong-bg); }
+  50% { box-shadow: 0 0 18px var(--clr-wrong-bg); }
+}
+
+.is-interval-label {
+  font-family: var(--font-body);
+  pointer-events: none;
+}
+
+.is-interval-remove {
+  position: absolute;
+  right: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--clr-text-soft);
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0 4px;
+  line-height: 1;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.is-interval:hover .is-interval-remove {
+  opacity: 1;
+}
+
+.is-interval-remove:hover {
+  color: var(--clr-wrong);
+}
+
+.is-controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.is-btn {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 10px 22px;
+  border: 1.5px solid var(--clr-border);
+  border-radius: 999px;
+  background: var(--clr-surface);
+  color: var(--clr-text);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.is-btn:hover:not(:disabled) {
+  border-color: var(--clr-accent);
+  background: var(--clr-hover-strong);
+}
+
+.is-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.is-btn-primary {
+  background: var(--clr-accent);
+  border-color: var(--clr-accent);
+  color: #fff;
+}
+
+.is-btn-primary:hover:not(:disabled) {
+  background: #d07a42;
+  border-color: #d07a42;
+}
+
+/* Log */
+.is-log {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  padding: 18px 20px;
+  margin-bottom: 20px;
+}
+
+.is-log h3 {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--clr-text);
+}
+
+.is-log-header {
+  font-size: 0.82rem;
+  color: var(--clr-text-soft);
+  margin-bottom: 12px;
+  word-break: break-word;
+}
+
+.is-log-entries {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.is-log-entry {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  padding: 6px 10px;
+  border-radius: 6px;
+  flex-wrap: wrap;
+}
+
+.is-log-accept {
+  background: var(--clr-correct-bg);
+}
+
+.is-log-reject {
+  background: var(--clr-wrong-bg);
+}
+
+.is-log-current {
+  border: 1.5px dashed var(--clr-accent);
+  background: var(--clr-accent-soft);
+}
+
+.is-log-step {
+  font-weight: 700;
+  min-width: 56px;
+}
+
+.is-log-verdict {
+  margin-left: auto;
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+
+.is-log-verdict.is-accept { color: var(--clr-correct); }
+.is-log-verdict.is-reject { color: var(--clr-wrong); }
+.is-log-verdict.is-pending { color: var(--clr-accent); font-style: italic; }
+
+.is-result {
+  background: var(--clr-correct-bg);
+  border: 1px solid var(--clr-correct);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  margin-top: 14px;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.is-result-note {
+  font-size: 0.82rem;
+  color: var(--clr-text-soft);
+}
+
+.is-legend {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  font-size: 0.82rem;
+  color: var(--clr-text-soft);
+}
+
+.is-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.is-legend-swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 1.5px solid var(--clr-border);
+}
+
+.is-swatch-default { background: var(--clr-input); }
+.is-swatch-considering { background: var(--clr-accent-soft); border-color: var(--clr-accent); }
+.is-swatch-selected { background: var(--clr-correct); border-color: var(--clr-correct); }
+.is-swatch-rejected { background: var(--clr-wrong-bg); border-color: var(--clr-wrong); }
+
+/* ── Extended Euclid ───────────────────────────────── */
+.ee-input-row {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.ee-field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.ee-label {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--clr-text);
+}
+
+.ee-input {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 10px 16px;
+  border: 1.5px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  background: var(--clr-input);
+  color: var(--clr-text);
+  width: 140px;
+  text-align: center;
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.ee-input:focus {
+  border-color: var(--clr-accent);
+  box-shadow: 0 0 0 3px var(--clr-accent-soft);
+}
+
+.ee-input::placeholder {
+  color: var(--clr-placeholder);
+  font-weight: 400;
+}
+
+.ee-table-wrap {
+  overflow-x: auto;
+  margin: 20px 0;
+}
+
+.ee-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.ee-table th {
+  background: var(--clr-surface);
+  font-weight: 700;
+  padding: 10px 14px;
+  text-align: center;
+  border-bottom: 2px solid var(--clr-border);
+  color: var(--clr-text);
+  white-space: nowrap;
+}
+
+.ee-table td {
+  padding: 8px 14px;
+  text-align: center;
+  border-bottom: 1px solid var(--clr-border);
+  color: var(--clr-text);
+}
+
+.ee-table tr:hover td {
+  background: var(--clr-hover);
+}
+
+.ee-row-gcd td {
+  background: var(--clr-correct-bg);
+  font-weight: 700;
+}
+
+.ee-row-zero td {
+  opacity: 0.5;
+}
+
+.ee-eq {
+  text-align: left !important;
+  font-family: var(--font-body);
+  font-size: 0.84rem;
+  white-space: nowrap;
+}
+
+.ee-divisions {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  padding: 18px 20px;
+  margin-top: 16px;
+}
+
+.ee-divisions h3 {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--clr-text);
+}
+
+.ee-division-step {
+  font-size: 0.88rem;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: var(--clr-hover);
+  margin-bottom: 4px;
+}
+
+@media (max-width: 600px) {
+  .ee-input-row { flex-direction: column; align-items: center; }
+  .ee-input { width: 200px; }
+  .is-timeline { height: 180px; }
+}

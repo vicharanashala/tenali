@@ -1,0 +1,15 @@
+{
+  "id": 1179,
+  "word": "Reticent",
+  "question": "Reticent",
+  "options": [
+    "The quality of being stubborn",
+    "To convert into normal language from code",
+    "Never tiring or growing weary",
+    "Not revealing one's thoughts readily"
+  ],
+  "answerOption": "D",
+  "answerText": "Not revealing one's thoughts readily",
+  "difficulty": "medium",
+  "sourceFile": "1179.json"
+}

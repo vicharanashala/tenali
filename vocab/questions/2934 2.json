@@ -1,0 +1,15 @@
+{
+  "id": 2934,
+  "word": "Ability",
+  "question": "Ability",
+  "options": [
+    "Having cleansing properties",
+    "To abuse habitually",
+    "The power to perform something",
+    "People of Abyssinia"
+  ],
+  "answerOption": "C",
+  "answerText": "The power to perform something",
+  "difficulty": "extra-hard",
+  "sourceFile": "2934.json"
+}

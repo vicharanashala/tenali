@@ -1,0 +1,15 @@
+{
+  "id": 74,
+  "word": "Afraid",
+  "question": "Afraid",
+  "options": [
+    "Morally right and justifiable",
+    "To have something inside",
+    "Feeling thankful for something received",
+    "Feeling fear or anxiety"
+  ],
+  "answerOption": "D",
+  "answerText": "Feeling fear or anxiety",
+  "difficulty": "easy",
+  "sourceFile": "0074.json"
+}

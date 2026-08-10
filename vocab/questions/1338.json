@@ -1,0 +1,15 @@
+{
+  "id": 1338,
+  "word": "Defect",
+  "question": "Defect",
+  "options": [
+    "A place where things are stored",
+    "Sumptuously rich or elaborate",
+    "A shortcoming or imperfection",
+    "Showing no respect or esteem"
+  ],
+  "answerOption": "C",
+  "answerText": "A shortcoming or imperfection",
+  "difficulty": "medium",
+  "sourceFile": "1338.json"
+}

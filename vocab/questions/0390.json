@@ -1,0 +1,15 @@
+{
+  "id": 390,
+  "word": "Bloom",
+  "question": "Bloom",
+  "options": [
+    "Feeling deep pleasure from achievements",
+    "To show how something is done",
+    "To produce flowers; to flourish",
+    "To feel admiration for someone's qualities"
+  ],
+  "answerOption": "C",
+  "answerText": "To produce flowers; to flourish",
+  "difficulty": "easy",
+  "sourceFile": "0390.json"
+}

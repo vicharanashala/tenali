@@ -1,0 +1,15 @@
+{
+  "id": 56,
+  "word": "Late",
+  "question": "Late",
+  "options": [
+    "After the expected or usual time",
+    "Required to explain actions or decisions",
+    "Of great extent from side to side",
+    "To fit together the parts of something"
+  ],
+  "answerOption": "A",
+  "answerText": "After the expected or usual time",
+  "difficulty": "easy",
+  "sourceFile": "0056.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2540,
+  "word": "Cleft",
+  "question": "Cleft",
+  "options": [
+    "Unable to be avoided or escaped",
+    "A space or opening split in something",
+    "Generation of gas or air",
+    "The process of aerating something"
+  ],
+  "answerOption": "B",
+  "answerText": "A space or opening split in something",
+  "difficulty": "hard",
+  "sourceFile": "2540.json"
+}

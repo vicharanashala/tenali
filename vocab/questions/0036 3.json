@@ -1,0 +1,15 @@
+{
+  "id": 36,
+  "word": "Awake",
+  "question": "Awake",
+  "options": [
+    "Not asleep; fully conscious",
+    "To make someone feel bewildered",
+    "To shine brightly with reflected light",
+    "To attract and hold the attention of someone"
+  ],
+  "answerOption": "A",
+  "answerText": "Not asleep; fully conscious",
+  "difficulty": "easy",
+  "sourceFile": "0036.json"
+}

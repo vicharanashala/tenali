@@ -1,0 +1,15 @@
+{
+  "id": 1173,
+  "word": "Jaded",
+  "question": "Jaded",
+  "options": [
+    "Tired and lacking enthusiasm after excess",
+    "To grow or develop in a healthy way",
+    "An explosion or violent outburst",
+    "To regard or consider in a specified way"
+  ],
+  "answerOption": "A",
+  "answerText": "Tired and lacking enthusiasm after excess",
+  "difficulty": "medium",
+  "sourceFile": "1173.json"
+}

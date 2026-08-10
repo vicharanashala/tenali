@@ -1,0 +1,15 @@
+{
+  "id": 621,
+  "word": "Committed",
+  "question": "Committed",
+  "options": [
+    "Feeling dedication to a cause or activity",
+    "Expressing approval or agreement",
+    "Working by itself with little human control",
+    "Having no strong flavor or taste"
+  ],
+  "answerOption": "A",
+  "answerText": "Feeling dedication to a cause or activity",
+  "difficulty": "easy",
+  "sourceFile": "0621.json"
+}

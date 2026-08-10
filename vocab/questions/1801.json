@@ -1,0 +1,15 @@
+{
+  "id": 1801,
+  "word": "Ferocious",
+  "question": "Ferocious",
+  "options": [
+    "Engaged in deep or serious thought",
+    "Puzzled or confused",
+    "Fierce or violent in nature",
+    "To postpone or defer something"
+  ],
+  "answerOption": "C",
+  "answerText": "Fierce or violent in nature",
+  "difficulty": "medium",
+  "sourceFile": "1801.json"
+}

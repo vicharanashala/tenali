@@ -1,0 +1,15 @@
+{
+  "id": 942,
+  "word": "Zesty",
+  "question": "Zesty",
+  "options": [
+    "Moving at a low speed",
+    "Extremely large in scale or degree",
+    "Having a strong pleasant taste",
+    "Very loving or loyal to a person or cause"
+  ],
+  "answerOption": "C",
+  "answerText": "Having a strong pleasant taste",
+  "difficulty": "easy",
+  "sourceFile": "0942.json"
+}

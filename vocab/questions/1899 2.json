@@ -1,0 +1,15 @@
+{
+  "id": 1899,
+  "word": "Adolescent",
+  "question": "Adolescent",
+  "options": [
+    "A young person developing into adulthood",
+    "A plant used as herbal medicine",
+    "The activity of promoting products",
+    "Relating to heat in air"
+  ],
+  "answerOption": "A",
+  "answerText": "A young person developing into adulthood",
+  "difficulty": "hard",
+  "sourceFile": "1899.json"
+}

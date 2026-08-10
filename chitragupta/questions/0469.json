@@ -1,0 +1,14 @@
+{
+  "id": 469,
+  "question": "Which blood group system includes the factor known as Rh?",
+  "options": [
+    "ABO only",
+    "Rhesus system",
+    "Kell system",
+    "Duffy system"
+  ],
+  "answerOption": "B",
+  "answerText": "Rhesus system",
+  "genre": "science",
+  "sourceFile": "0469.json"
+}

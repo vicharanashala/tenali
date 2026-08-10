@@ -1,0 +1,15 @@
+{
+  "id": 1246,
+  "word": "Largesse",
+  "question": "Largesse",
+  "options": [
+    "Feeling calm and relaxed; not worried",
+    "Ornamental work of fine twisted wire",
+    "Generosity in bestowing money or gifts",
+    "Deserving or causing public disgrace"
+  ],
+  "answerOption": "C",
+  "answerText": "Generosity in bestowing money or gifts",
+  "difficulty": "hard",
+  "sourceFile": "1246.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 165,
+  "word": "Separate",
+  "question": "Separate",
+  "options": [
+    "To freely offer to do something",
+    "To make something clear and easy to understand",
+    "To have an idea that something is possible",
+    "To cause to move apart"
+  ],
+  "answerOption": "D",
+  "answerText": "To cause to move apart",
+  "difficulty": "easy",
+  "sourceFile": "0165.json"
+}

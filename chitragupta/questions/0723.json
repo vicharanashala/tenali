@@ -1,0 +1,14 @@
+{
+  "id": 723,
+  "question": "Which country is associated with the city of Paris?",
+  "options": [
+    "Belgium",
+    "France",
+    "Germany",
+    "Switzerland"
+  ],
+  "answerOption": "B",
+  "answerText": "France",
+  "genre": "geography",
+  "sourceFile": "0723.json"
+}

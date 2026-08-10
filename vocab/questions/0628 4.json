@@ -1,0 +1,15 @@
+{
+  "id": 628,
+  "word": "Sensible",
+  "question": "Sensible",
+  "options": [
+    "Performed without planning or prompting",
+    "In a state of sleep; not awake",
+    "Done with good judgment; practical",
+    "Evil or morally wrong"
+  ],
+  "answerOption": "C",
+  "answerText": "Done with good judgment; practical",
+  "difficulty": "easy",
+  "sourceFile": "0628.json"
+}

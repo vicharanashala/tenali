@@ -1,0 +1,15 @@
+{
+  "id": 124,
+  "word": "Hostile",
+  "question": "Hostile",
+  "options": [
+    "Made by chemical processes; not natural",
+    "Unfriendly and opposed to something",
+    "Restricted or limited to a space",
+    "To produce flowers; to flourish"
+  ],
+  "answerOption": "B",
+  "answerText": "Unfriendly and opposed to something",
+  "difficulty": "easy",
+  "sourceFile": "0124.json"
+}

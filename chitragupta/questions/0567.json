@@ -1,0 +1,14 @@
+{
+  "id": 567,
+  "question": "What is the SI unit of latent heat?",
+  "options": [
+    "J/kg",
+    "W/kg",
+    "N/kg",
+    "Pa"
+  ],
+  "answerOption": "A",
+  "answerText": "J/kg",
+  "genre": "mixed",
+  "sourceFile": "0567.json"
+}

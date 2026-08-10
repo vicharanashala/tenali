@@ -1,0 +1,15 @@
+{
+  "id": 255,
+  "word": "Descend",
+  "question": "Descend",
+  "options": [
+    "Done with the hands; requiring human effort",
+    "To move downward from a higher point",
+    "Trustworthy and reliable",
+    "To make it easier for someone to do something"
+  ],
+  "answerOption": "B",
+  "answerText": "To move downward from a higher point",
+  "difficulty": "easy",
+  "sourceFile": "0255.json"
+}

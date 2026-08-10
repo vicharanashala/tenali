@@ -1,0 +1,14 @@
+{
+  "id": 481,
+  "question": "What is the SI unit of capacitance?",
+  "options": [
+    "Tesla",
+    "Farad",
+    "Henry",
+    "Volt"
+  ],
+  "answerOption": "B",
+  "answerText": "Farad",
+  "genre": "mixed",
+  "sourceFile": "0481.json"
+}

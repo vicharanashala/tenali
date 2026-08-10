@@ -1,0 +1,15 @@
+{
+  "id": 545,
+  "word": "Prevail",
+  "question": "Prevail",
+  "options": [
+    "To move from one region to another",
+    "Awkward in movement or handling things",
+    "To prove more powerful than opposing forces",
+    "To stay where you are until something happens"
+  ],
+  "answerOption": "C",
+  "answerText": "To prove more powerful than opposing forces",
+  "difficulty": "easy",
+  "sourceFile": "0545.json"
+}

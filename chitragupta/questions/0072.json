@@ -1,0 +1,14 @@
+{
+  "id": 72,
+  "question": "Which is the chemical symbol for gold?",
+  "options": [
+    "Ag",
+    "Gd",
+    "Go",
+    "Au"
+  ],
+  "answerOption": "D",
+  "answerText": "Au",
+  "genre": "mixed",
+  "sourceFile": "0072.json"
+}

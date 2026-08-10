@@ -1,0 +1,15 @@
+{
+  "id": 29,
+  "word": "Hard",
+  "question": "Hard",
+  "options": [
+    "Solid, firm, and rigid; not easily broken",
+    "To reach a destination",
+    "Existing in or caused by nature",
+    "To let liquid fall in small drops"
+  ],
+  "answerOption": "A",
+  "answerText": "Solid, firm, and rigid; not easily broken",
+  "difficulty": "easy",
+  "sourceFile": "0029.json"
+}

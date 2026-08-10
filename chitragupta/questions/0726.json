@@ -1,0 +1,14 @@
+{
+  "id": 726,
+  "question": "Which country is associated with the city of Berlin?",
+  "options": [
+    "Austria",
+    "Germany",
+    "Switzerland",
+    "Netherlands"
+  ],
+  "answerOption": "B",
+  "answerText": "Germany",
+  "genre": "geography",
+  "sourceFile": "0726.json"
+}

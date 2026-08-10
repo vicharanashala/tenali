@@ -1,0 +1,15 @@
+{
+  "id": 752,
+  "word": "Lush",
+  "question": "Lush",
+  "options": [
+    "Growing thickly and strongly; abundant",
+    "To find an answer to a problem",
+    "Strikingly bold or showy",
+    "Producing or using too much"
+  ],
+  "answerOption": "A",
+  "answerText": "Growing thickly and strongly; abundant",
+  "difficulty": "easy",
+  "sourceFile": "0752.json"
+}

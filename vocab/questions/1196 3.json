@@ -1,0 +1,15 @@
+{
+  "id": 1196,
+  "word": "Clemency",
+  "question": "Clemency",
+  "options": [
+    "The action of removing from office",
+    "To plan and draw something",
+    "Mercy or leniency shown to a wrongdoer",
+    "Using more words than are needed"
+  ],
+  "answerOption": "C",
+  "answerText": "Mercy or leniency shown to a wrongdoer",
+  "difficulty": "medium",
+  "sourceFile": "1196.json"
+}

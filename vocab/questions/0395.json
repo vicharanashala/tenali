@@ -1,0 +1,15 @@
+{
+  "id": 395,
+  "word": "Flourish",
+  "question": "Flourish",
+  "options": [
+    "To grow or develop in a healthy way",
+    "Able to be used for a practical purpose",
+    "Having elegance of movement",
+    "To go or come up a slope or stairs"
+  ],
+  "answerOption": "A",
+  "answerText": "To grow or develop in a healthy way",
+  "difficulty": "easy",
+  "sourceFile": "0395.json"
+}

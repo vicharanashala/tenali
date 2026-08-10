@@ -1,0 +1,15 @@
+{
+  "id": 155,
+  "word": "Forget",
+  "question": "Forget",
+  "options": [
+    "To be disloyal to someone who trusts you",
+    "To carry out an action or task",
+    "To formally put an end to a system",
+    "To fail to remember something"
+  ],
+  "answerOption": "D",
+  "answerText": "To fail to remember something",
+  "difficulty": "easy",
+  "sourceFile": "0155.json"
+}

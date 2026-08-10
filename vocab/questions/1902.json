@@ -1,0 +1,15 @@
+{
+  "id": 1902,
+  "word": "Disdainful",
+  "question": "Disdainful",
+  "options": [
+    "A strong feeling of dislike",
+    "To cause someone to lose confidence",
+    "Feeling or showing arrogant disrespect",
+    "Concerned with small details"
+  ],
+  "answerOption": "C",
+  "answerText": "Feeling or showing arrogant disrespect",
+  "difficulty": "medium",
+  "sourceFile": "1902.json"
+}

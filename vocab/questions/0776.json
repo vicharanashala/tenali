@@ -1,0 +1,15 @@
+{
+  "id": 776,
+  "word": "Analog",
+  "question": "Analog",
+  "options": [
+    "To give someone the authority to do something",
+    "Relating to a continuous physical quantity",
+    "To go down below the surface of a liquid",
+    "To have something come into the mind again"
+  ],
+  "answerOption": "B",
+  "answerText": "Relating to a continuous physical quantity",
+  "difficulty": "easy",
+  "sourceFile": "0776.json"
+}

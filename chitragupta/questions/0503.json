@@ -1,0 +1,14 @@
+{
+  "id": 503,
+  "question": "Who wrote 'The Republic'?",
+  "options": [
+    "Aristotle",
+    "Plato",
+    "Socrates",
+    "Homer"
+  ],
+  "answerOption": "B",
+  "answerText": "Plato",
+  "genre": "general-knowledge",
+  "sourceFile": "0503.json"
+}

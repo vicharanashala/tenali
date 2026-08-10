@@ -1,0 +1,15 @@
+{
+  "id": 1358,
+  "word": "Degenerate",
+  "question": "Degenerate",
+  "options": [
+    "To decline into a worse condition",
+    "An amount by which spending exceeds income",
+    "The quality of lasting a short time",
+    "An event marking a turning point"
+  ],
+  "answerOption": "A",
+  "answerText": "To decline into a worse condition",
+  "difficulty": "medium",
+  "sourceFile": "1358.json"
+}

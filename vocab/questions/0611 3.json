@@ -1,0 +1,15 @@
+{
+  "id": 611,
+  "word": "Vivid",
+  "question": "Vivid",
+  "options": [
+    "To settle a dispute by making concessions",
+    "Of great extent from side to side",
+    "Producing powerful feelings or strong images",
+    "Lasting or existing forever"
+  ],
+  "answerOption": "C",
+  "answerText": "Producing powerful feelings or strong images",
+  "difficulty": "easy",
+  "sourceFile": "0611.json"
+}

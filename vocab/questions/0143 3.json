@@ -1,0 +1,15 @@
+{
+  "id": 143,
+  "word": "Lucky",
+  "question": "Lucky",
+  "options": [
+    "Having the properties of a magnet",
+    "To give something in return for good behavior",
+    "Having good fortune; fortunate",
+    "Unfriendly and opposed to something"
+  ],
+  "answerOption": "C",
+  "answerText": "Having good fortune; fortunate",
+  "difficulty": "easy",
+  "sourceFile": "0143.json"
+}

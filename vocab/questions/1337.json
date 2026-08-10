@@ -1,0 +1,15 @@
+{
+  "id": 1337,
+  "word": "Defecate",
+  "question": "Defecate",
+  "options": [
+    "Having no particular interest or concern",
+    "Done with excessive speed",
+    "To prosper or flourish",
+    "To discharge feces from the body"
+  ],
+  "answerOption": "D",
+  "answerText": "To discharge feces from the body",
+  "difficulty": "medium",
+  "sourceFile": "1337.json"
+}

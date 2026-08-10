@@ -1,0 +1,15 @@
+{
+  "id": 282,
+  "word": "Observe",
+  "question": "Observe",
+  "options": [
+    "To make great efforts under difficulty",
+    "Kind and pleasant to others",
+    "Of considerable size or extent",
+    "To watch something carefully"
+  ],
+  "answerOption": "D",
+  "answerText": "To watch something carefully",
+  "difficulty": "easy",
+  "sourceFile": "0282.json"
+}

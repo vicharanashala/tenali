@@ -1,0 +1,15 @@
+{
+  "id": 566,
+  "word": "Impress",
+  "question": "Impress",
+  "options": [
+    "Expressing approval or agreement",
+    "Growing thickly and strongly; abundant",
+    "Making or given to making a lot of noise",
+    "To make someone feel admiration"
+  ],
+  "answerOption": "D",
+  "answerText": "To make someone feel admiration",
+  "difficulty": "easy",
+  "sourceFile": "0566.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2793,
+  "word": "Jamais vu",
+  "question": "Jamais vu",
+  "options": [
+    "One viewing the abyss",
+    "Relating to abyss ocean",
+    "Not recognizing a situation one has experienced before",
+    "The nineteenth letter of the Hebrew alphabet"
+  ],
+  "answerOption": "C",
+  "answerText": "Not recognizing a situation one has experienced before",
+  "difficulty": "extra-hard",
+  "sourceFile": "2793.json"
+}

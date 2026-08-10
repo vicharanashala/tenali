@@ -1,0 +1,15 @@
+{
+  "id": 458,
+  "word": "Abandon",
+  "question": "Abandon",
+  "options": [
+    "Done with the hands; requiring human effort",
+    "To leave out or keep from entering",
+    "To give up something completely",
+    "To freely offer to do something"
+  ],
+  "answerOption": "C",
+  "answerText": "To give up something completely",
+  "difficulty": "easy",
+  "sourceFile": "0458.json"
+}

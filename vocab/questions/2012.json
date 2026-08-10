@@ -1,0 +1,15 @@
+{
+  "id": 2012,
+  "word": "Pernicious",
+  "question": "Pernicious",
+  "options": [
+    "Having a harmful effect in a gradual way",
+    "Treatment with hot air",
+    "Belief in living according to virtue",
+    "Makes or becomes airy"
+  ],
+  "answerOption": "A",
+  "answerText": "Having a harmful effect in a gradual way",
+  "difficulty": "hard",
+  "sourceFile": "2012.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2149,
+  "word": "Adventist",
+  "question": "Adventist",
+  "options": [
+    "Special importance given to something",
+    "A type of winged figure in art",
+    "One who studies aerodynamics",
+    "A member of a Christian sect"
+  ],
+  "answerOption": "D",
+  "answerText": "A member of a Christian sect",
+  "difficulty": "hard",
+  "sourceFile": "2149.json"
+}

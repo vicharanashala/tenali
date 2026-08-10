@@ -1,0 +1,15 @@
+{
+  "id": 146,
+  "word": "Obey",
+  "question": "Obey",
+  "options": [
+    "Made up of exactly similar parts",
+    "To live in or occupy a place",
+    "Very small; much smaller than normal",
+    "To comply with a command or rule"
+  ],
+  "answerOption": "D",
+  "answerText": "To comply with a command or rule",
+  "difficulty": "easy",
+  "sourceFile": "0146.json"
+}

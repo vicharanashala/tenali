@@ -1,0 +1,15 @@
+{
+  "id": 767,
+  "word": "Accidental",
+  "question": "Accidental",
+  "options": [
+    "Happening by chance; unintentional",
+    "Moving slowly or apathetically",
+    "Very small; much smaller than normal",
+    "To drive or force something away"
+  ],
+  "answerOption": "A",
+  "answerText": "Happening by chance; unintentional",
+  "difficulty": "easy",
+  "sourceFile": "0767.json"
+}

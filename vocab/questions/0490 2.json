@@ -1,0 +1,15 @@
+{
+  "id": 490,
+  "word": "Confirm",
+  "question": "Confirm",
+  "options": [
+    "To establish the truth of something",
+    "Not even or balanced in shape",
+    "Relating to or resembling the moon",
+    "Guilty of misleading or tricking others"
+  ],
+  "answerOption": "A",
+  "answerText": "To establish the truth of something",
+  "difficulty": "easy",
+  "sourceFile": "0490.json"
+}

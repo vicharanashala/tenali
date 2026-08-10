@@ -1,0 +1,15 @@
+{
+  "id": 1324,
+  "word": "Decrement",
+  "question": "Decrement",
+  "options": [
+    "Clear and easy to understand",
+    "Having skill in dealing with others",
+    "Not aware or conscious",
+    "A reduction in amount or quantity"
+  ],
+  "answerOption": "D",
+  "answerText": "A reduction in amount or quantity",
+  "difficulty": "medium",
+  "sourceFile": "1324.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1130,
+  "word": "Nurture",
+  "question": "Nurture",
+  "options": [
+    "To support or strengthen something",
+    "The buttocks or rear",
+    "To care for and encourage growth",
+    "Disturbed or insane in mind"
+  ],
+  "answerOption": "C",
+  "answerText": "To care for and encourage growth",
+  "difficulty": "medium",
+  "sourceFile": "1130.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 585,
+  "word": "Resilient",
+  "question": "Resilient",
+  "options": [
+    "To cause someone to find something funny",
+    "Able to recover quickly from difficulties",
+    "To cover something in paper or cloth",
+    "To remove goods from a vehicle"
+  ],
+  "answerOption": "B",
+  "answerText": "Able to recover quickly from difficulties",
+  "difficulty": "easy",
+  "sourceFile": "0585.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2767,
+  "word": "Gossamer",
+  "question": "Gossamer",
+  "options": [
+    "Relating to abyss speech",
+    "A fine filmy substance of cobwebs",
+    "Showing spontaneous and undirected playfulness",
+    "Extreme fear of the number thirteen"
+  ],
+  "answerOption": "B",
+  "answerText": "A fine filmy substance of cobwebs",
+  "difficulty": "extra-hard",
+  "sourceFile": "2767.json"
+}

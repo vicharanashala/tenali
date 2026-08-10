@@ -1,0 +1,15 @@
+{
+  "id": 327,
+  "word": "Advise",
+  "question": "Advise",
+  "options": [
+    "To give authorization for something",
+    "To put an end to the existence of something",
+    "Dark and dirty in appearance",
+    "To offer suggestions about the best action"
+  ],
+  "answerOption": "D",
+  "answerText": "To offer suggestions about the best action",
+  "difficulty": "easy",
+  "sourceFile": "0327.json"
+}

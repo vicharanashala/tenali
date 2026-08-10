@@ -1,0 +1,15 @@
+{
+  "id": 742,
+  "word": "Solar",
+  "question": "Solar",
+  "options": [
+    "Having the ability to speak clearly",
+    "To consider something to be important",
+    "To remove goods from a vehicle",
+    "Relating to or determined by the sun"
+  ],
+  "answerOption": "D",
+  "answerText": "Relating to or determined by the sun",
+  "difficulty": "easy",
+  "sourceFile": "0742.json"
+}

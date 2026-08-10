@@ -1,0 +1,15 @@
+{
+  "id": 2222,
+  "word": "AEROSIDERITE",
+  "question": "AEROSIDERITE",
+  "options": [
+    "Having a skeptical or cynical outlook",
+    "A condition giving superiority",
+    "Iron meteorite from space",
+    "Deliberately and knowingly"
+  ],
+  "answerOption": "C",
+  "answerText": "Iron meteorite from space",
+  "difficulty": "hard",
+  "sourceFile": "2222.json"
+}

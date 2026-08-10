@@ -1,0 +1,15 @@
+{
+  "id": 359,
+  "word": "Deliver",
+  "question": "Deliver",
+  "options": [
+    "Of small width in relation to length",
+    "Having the pleasant taste of sugar",
+    "To bring something to a person or place",
+    "Having an uneven or irregular surface"
+  ],
+  "answerOption": "C",
+  "answerText": "To bring something to a person or place",
+  "difficulty": "easy",
+  "sourceFile": "0359.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1181,
+  "word": "Lampoon",
+  "question": "Lampoon",
+  "options": [
+    "To publicly criticize using ridicule",
+    "Dangerously high or steep",
+    "Carried out with minimum effort",
+    "The pursuit of pleasure as the highest good"
+  ],
+  "answerOption": "A",
+  "answerText": "To publicly criticize using ridicule",
+  "difficulty": "hard",
+  "sourceFile": "1181.json"
+}

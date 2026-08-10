@@ -1,0 +1,14 @@
+{
+  "id": 433,
+  "question": "Who wrote the novel '1984'?",
+  "options": [
+    "Aldous Huxley",
+    "George Orwell",
+    "H. G. Wells",
+    "Ray Bradbury"
+  ],
+  "answerOption": "B",
+  "answerText": "George Orwell",
+  "genre": "general-knowledge",
+  "sourceFile": "0433.json"
+}

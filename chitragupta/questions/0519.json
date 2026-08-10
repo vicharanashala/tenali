@@ -1,0 +1,14 @@
+{
+  "id": 519,
+  "question": "Who discovered the positron?",
+  "options": [
+    "Dirac",
+    "Carl Anderson",
+    "Chadwick",
+    "Fermi"
+  ],
+  "answerOption": "B",
+  "answerText": "Carl Anderson",
+  "genre": "general-knowledge",
+  "sourceFile": "0519.json"
+}

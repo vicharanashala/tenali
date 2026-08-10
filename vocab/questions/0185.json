@@ -1,0 +1,15 @@
+{
+  "id": 185,
+  "word": "Release",
+  "question": "Release",
+  "options": [
+    "Made by human skill; not natural",
+    "To set up an organization on a firm basis",
+    "To set free from confinement",
+    "Having a natural ability to do something well"
+  ],
+  "answerOption": "C",
+  "answerText": "To set free from confinement",
+  "difficulty": "easy",
+  "sourceFile": "0185.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 176,
+  "question": "Which gas is used by fire extinguishers commonly for electrical fires?",
+  "options": [
+    "Carbon dioxide",
+    "Hydrogen",
+    "Nitrogen",
+    "Oxygen"
+  ],
+  "answerOption": "A",
+  "answerText": "Carbon dioxide",
+  "genre": "science",
+  "sourceFile": "0176.json"
+}

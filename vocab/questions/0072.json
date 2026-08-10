@@ -1,0 +1,15 @@
+{
+  "id": 72,
+  "word": "Careless",
+  "question": "Careless",
+  "options": [
+    "Mild in temperament or behavior",
+    "Not giving enough attention to avoid harm",
+    "To determine the total number of items",
+    "In a state of great discomfort or unhappiness"
+  ],
+  "answerOption": "B",
+  "answerText": "Not giving enough attention to avoid harm",
+  "difficulty": "easy",
+  "sourceFile": "0072.json"
+}

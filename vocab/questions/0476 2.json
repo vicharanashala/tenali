@@ -1,0 +1,15 @@
+{
+  "id": 476,
+  "word": "Pronounce",
+  "question": "Pronounce",
+  "options": [
+    "Covered or marked with an unclean substance",
+    "Covered or saturated with water",
+    "To say a word in a particular way",
+    "To continue in spite of difficulty"
+  ],
+  "answerOption": "C",
+  "answerText": "To say a word in a particular way",
+  "difficulty": "easy",
+  "sourceFile": "0476.json"
+}

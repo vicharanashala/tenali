@@ -1,0 +1,15 @@
+{
+  "id": 231,
+  "word": "Despise",
+  "question": "Despise",
+  "options": [
+    "To explain something by using examples",
+    "To turn around quickly in a circle",
+    "To feel contempt or deep dislike for",
+    "Sufficiently great or important"
+  ],
+  "answerOption": "C",
+  "answerText": "To feel contempt or deep dislike for",
+  "difficulty": "easy",
+  "sourceFile": "0231.json"
+}

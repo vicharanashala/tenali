@@ -1,0 +1,15 @@
+{
+  "id": 2530,
+  "word": "AEROMOTOR",
+  "question": "AEROMOTOR",
+  "options": [
+    "Relating to air therapy",
+    "Relating to iron meteorites",
+    "An abnormal change in body tissue",
+    "An engine powered by air"
+  ],
+  "answerOption": "D",
+  "answerText": "An engine powered by air",
+  "difficulty": "hard",
+  "sourceFile": "2530.json"
+}

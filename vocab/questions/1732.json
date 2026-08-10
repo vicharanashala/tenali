@@ -1,0 +1,15 @@
+{
+  "id": 1732,
+  "word": "DEUCED",
+  "question": "DEUCED",
+  "options": [
+    "Damned or cursed",
+    "To release someone from military service",
+    "Causing great damage or ruin",
+    "Not certain or definite"
+  ],
+  "answerOption": "A",
+  "answerText": "Damned or cursed",
+  "difficulty": "medium",
+  "sourceFile": "1732.json"
+}

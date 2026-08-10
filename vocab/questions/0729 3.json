@@ -1,0 +1,15 @@
+{
+  "id": 729,
+  "word": "Triangular",
+  "question": "Triangular",
+  "options": [
+    "Shaped like a triangle",
+    "In use or inhabited",
+    "To take and use something temporarily",
+    "To give a portion of something to others"
+  ],
+  "answerOption": "A",
+  "answerText": "Shaped like a triangle",
+  "difficulty": "easy",
+  "sourceFile": "0729.json"
+}

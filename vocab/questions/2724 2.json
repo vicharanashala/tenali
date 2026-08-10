@@ -1,0 +1,15 @@
+{
+  "id": 2724,
+  "word": "Petrichor",
+  "question": "Petrichor",
+  "options": [
+    "The pleasant smell of earth after rain",
+    "A feeling of guilt that follows wrongdoing",
+    "A journey on foot; travels",
+    "The quality of being abstinent"
+  ],
+  "answerOption": "A",
+  "answerText": "The pleasant smell of earth after rain",
+  "difficulty": "extra-hard",
+  "sourceFile": "2724.json"
+}

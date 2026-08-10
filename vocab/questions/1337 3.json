@@ -1,0 +1,15 @@
+{
+  "id": 1337,
+  "word": "Deliberate",
+  "question": "Deliberate",
+  "options": [
+    "Done consciously and intentionally",
+    "A feeling of hatred or disgust",
+    "The action of detracting",
+    "The quality of lasting a short time"
+  ],
+  "answerOption": "A",
+  "answerText": "Done consciously and intentionally",
+  "difficulty": "medium",
+  "sourceFile": "1337.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 193,
+  "word": "Sink",
+  "question": "Sink",
+  "options": [
+    "To go down below the surface of a liquid",
+    "Causing feelings of fear or alarm",
+    "To identify someone from previous encounters",
+    "In a state of sleep; not awake"
+  ],
+  "answerOption": "A",
+  "answerText": "To go down below the surface of a liquid",
+  "difficulty": "easy",
+  "sourceFile": "0193.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 128,
+  "word": "Alive",
+  "question": "Alive",
+  "options": [
+    "Living; not dead",
+    "To have an effect on someone's character",
+    "To give money or goods to a cause",
+    "To remove goods from a vehicle"
+  ],
+  "answerOption": "A",
+  "answerText": "Living; not dead",
+  "difficulty": "easy",
+  "sourceFile": "0128.json"
+}

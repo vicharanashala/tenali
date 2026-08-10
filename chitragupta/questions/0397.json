@@ -1,0 +1,14 @@
+{
+  "id": 397,
+  "question": "Which famous Indian philosopher and statesman became the second President of India?",
+  "options": [
+    "Rajendra Prasad",
+    "S. Radhakrishnan",
+    "Zakir Husain",
+    "V. V. Giri"
+  ],
+  "answerOption": "B",
+  "answerText": "S. Radhakrishnan",
+  "genre": "india-gk",
+  "sourceFile": "0397.json"
+}

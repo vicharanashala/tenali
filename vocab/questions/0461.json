@@ -1,0 +1,15 @@
+{
+  "id": 461,
+  "word": "Achieve",
+  "question": "Achieve",
+  "options": [
+    "To successfully reach a desired goal",
+    "Extremely beautiful or impressive",
+    "To move from one region to another",
+    "Not allowing water to pass through"
+  ],
+  "answerOption": "A",
+  "answerText": "To successfully reach a desired goal",
+  "difficulty": "easy",
+  "sourceFile": "0461.json"
+}

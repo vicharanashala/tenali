@@ -1,0 +1,15 @@
+{
+  "id": 2223,
+  "word": "AEROSIDEROLITE",
+  "question": "AEROSIDEROLITE",
+  "options": [
+    "To reduce to remove unwanted elements",
+    "Inner sanctum of Greek temple",
+    "The point on which a lever rests",
+    "A meteorite with iron core"
+  ],
+  "answerOption": "D",
+  "answerText": "A meteorite with iron core",
+  "difficulty": "hard",
+  "sourceFile": "2223.json"
+}

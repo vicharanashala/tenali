@@ -1,0 +1,15 @@
+{
+  "id": 1521,
+  "word": "Deprive",
+  "question": "Deprive",
+  "options": [
+    "The desire for revenge",
+    "Small or meager in amount",
+    "To prevent someone from having something",
+    "Active opposition or hostility"
+  ],
+  "answerOption": "C",
+  "answerText": "To prevent someone from having something",
+  "difficulty": "medium",
+  "sourceFile": "1521.json"
+}

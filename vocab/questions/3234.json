@@ -1,0 +1,15 @@
+{
+  "id": 3234,
+  "word": "Abigeus",
+  "question": "Abigeus",
+  "options": [
+    "The origin of life from non-life",
+    "To make anti-ablation",
+    "Light, delicate, and translucent",
+    "A cattle thief in Roman times"
+  ],
+  "answerOption": "D",
+  "answerText": "A cattle thief in Roman times",
+  "difficulty": "extra-hard",
+  "sourceFile": "3234.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 934,
+  "word": "Jubilance",
+  "question": "Jubilance",
+  "options": [
+    "Stubbornly refusing to change opinion",
+    "About to happen very soon",
+    "A feeling of great joy and celebration",
+    "Having a friendly and pleasant manner"
+  ],
+  "answerOption": "C",
+  "answerText": "A feeling of great joy and celebration",
+  "difficulty": "medium",
+  "sourceFile": "0934.json"
+}

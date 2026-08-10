@@ -1,0 +1,15 @@
+{
+  "id": 468,
+  "word": "Describe",
+  "question": "Describe",
+  "options": [
+    "To let liquid fall in small drops",
+    "To begin to grow; to produce shoots",
+    "Lively and enthusiastic in manner",
+    "To give an account of something in words"
+  ],
+  "answerOption": "D",
+  "answerText": "To give an account of something in words",
+  "difficulty": "easy",
+  "sourceFile": "0468.json"
+}

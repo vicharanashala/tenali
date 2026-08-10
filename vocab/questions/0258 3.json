@@ -1,0 +1,15 @@
+{
+  "id": 258,
+  "word": "Return",
+  "question": "Return",
+  "options": [
+    "Having the pleasant taste of sugar",
+    "To come or go back to a place",
+    "To set free from confinement",
+    "To give attention to sound or speech"
+  ],
+  "answerOption": "B",
+  "answerText": "To come or go back to a place",
+  "difficulty": "easy",
+  "sourceFile": "0258.json"
+}

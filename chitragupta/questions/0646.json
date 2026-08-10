@@ -1,0 +1,14 @@
+{
+  "id": 646,
+  "question": "Who discovered infrared radiation?",
+  "options": [
+    "Newton",
+    "Herschel",
+    "Maxwell",
+    "Faraday"
+  ],
+  "answerOption": "B",
+  "answerText": "Herschel",
+  "genre": "general-knowledge",
+  "sourceFile": "0646.json"
+}

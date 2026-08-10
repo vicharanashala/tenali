@@ -1,0 +1,15 @@
+{
+  "id": 2666,
+  "word": "Credence",
+  "question": "Credence",
+  "options": [
+    "Swollen and distended; dull and pompous",
+    "Silly and pointless",
+    "Belief in something as true",
+    "The action of raising in rank"
+  ],
+  "answerOption": "C",
+  "answerText": "Belief in something as true",
+  "difficulty": "hard",
+  "sourceFile": "2666.json"
+}

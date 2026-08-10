@@ -1,0 +1,15 @@
+{
+  "id": 46,
+  "word": "Gentle",
+  "question": "Gentle",
+  "options": [
+    "Uncomfortably small or crowded",
+    "To give up something valued for a greater cause",
+    "Mild in temperament or behavior",
+    "Not far away in distance"
+  ],
+  "answerOption": "C",
+  "answerText": "Mild in temperament or behavior",
+  "difficulty": "easy",
+  "sourceFile": "0046.json"
+}

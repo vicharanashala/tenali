@@ -1,0 +1,15 @@
+{
+  "id": 418,
+  "word": "Provide",
+  "question": "Provide",
+  "options": [
+    "To open something that was folded",
+    "To pull down or destroy a building",
+    "To make available for someone to use",
+    "To cause someone to feel greatly astonished"
+  ],
+  "answerOption": "C",
+  "answerText": "To make available for someone to use",
+  "difficulty": "easy",
+  "sourceFile": "0418.json"
+}

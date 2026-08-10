@@ -1,0 +1,15 @@
+{
+  "id": 878,
+  "word": "Prompt",
+  "question": "Prompt",
+  "options": [
+    "Done without delay; quick",
+    "Showing a willingness to take risks",
+    "To keep something for future use",
+    "Existing at the beginning"
+  ],
+  "answerOption": "A",
+  "answerText": "Done without delay; quick",
+  "difficulty": "easy",
+  "sourceFile": "0878.json"
+}

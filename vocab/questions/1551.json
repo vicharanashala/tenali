@@ -1,0 +1,15 @@
+{
+  "id": 1551,
+  "word": "Dermatologist",
+  "question": "Dermatologist",
+  "options": [
+    "A playing card or die with two spots",
+    "A doctor specializing in skin",
+    "Reserved, modest, and shy in manner",
+    "With complete sincerity and commitment"
+  ],
+  "answerOption": "B",
+  "answerText": "A doctor specializing in skin",
+  "difficulty": "medium",
+  "sourceFile": "1551.json"
+}

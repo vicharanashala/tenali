@@ -1,0 +1,15 @@
+{
+  "id": 2268,
+  "word": "AEROTHORAX",
+  "question": "AEROTHORAX",
+  "options": [
+    "Description of air conditions",
+    "Lasting for eons or ages",
+    "Presence of air in thorax",
+    "The point on which a lever rests"
+  ],
+  "answerOption": "C",
+  "answerText": "Presence of air in thorax",
+  "difficulty": "hard",
+  "sourceFile": "2268.json"
+}

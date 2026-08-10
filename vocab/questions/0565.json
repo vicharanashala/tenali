@@ -1,0 +1,15 @@
+{
+  "id": 565,
+  "word": "Amaze",
+  "question": "Amaze",
+  "options": [
+    "To state that something is not true",
+    "To make someone feel happy or satisfied",
+    "To give money or goods to a cause",
+    "To fill someone with great surprise"
+  ],
+  "answerOption": "D",
+  "answerText": "To fill someone with great surprise",
+  "difficulty": "easy",
+  "sourceFile": "0565.json"
+}

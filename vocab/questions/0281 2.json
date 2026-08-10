@@ -1,0 +1,15 @@
+{
+  "id": 281,
+  "word": "Listen",
+  "question": "Listen",
+  "options": [
+    "To give attention to sound or speech",
+    "To settle or find a solution to a problem",
+    "Allowing light through but not transparent",
+    "Of little depth"
+  ],
+  "answerOption": "A",
+  "answerText": "To give attention to sound or speech",
+  "difficulty": "easy",
+  "sourceFile": "0281.json"
+}

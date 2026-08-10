@@ -1,0 +1,15 @@
+{
+  "id": 380,
+  "word": "Slide",
+  "question": "Slide",
+  "options": [
+    "Delicious or pleasing to senses",
+    "Not able to cause damage or injury",
+    "Able to be seen",
+    "To move smoothly along a surface"
+  ],
+  "answerOption": "D",
+  "answerText": "To move smoothly along a surface",
+  "difficulty": "easy",
+  "sourceFile": "0380.json"
+}

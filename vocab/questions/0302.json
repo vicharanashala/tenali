@@ -1,0 +1,15 @@
+{
+  "id": 302,
+  "word": "Wonder",
+  "question": "Wonder",
+  "options": [
+    "Liable to change rapidly and unpredictably",
+    "To feel curious about something",
+    "To fail to remember something",
+    "To accept something as true without proof"
+  ],
+  "answerOption": "B",
+  "answerText": "To feel curious about something",
+  "difficulty": "easy",
+  "sourceFile": "0302.json"
+}

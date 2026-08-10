@@ -1,0 +1,15 @@
+{
+  "id": 1010,
+  "word": "Fervid",
+  "question": "Fervid",
+  "options": [
+    "Diesel engine road vehicle fuel",
+    "Intensely enthusiastic or passionate",
+    "To make disorderly or insane",
+    "Inborn; natural rather than learned"
+  ],
+  "answerOption": "B",
+  "answerText": "Intensely enthusiastic or passionate",
+  "difficulty": "medium",
+  "sourceFile": "1010.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2215,
+  "word": "AEROPORTABLE",
+  "question": "AEROPORTABLE",
+  "options": [
+    "An organism loving air",
+    "Able to be transported by air",
+    "Relating to Aeolus philosophy",
+    "To reprimand someone firmly"
+  ],
+  "answerOption": "B",
+  "answerText": "Able to be transported by air",
+  "difficulty": "hard",
+  "sourceFile": "2215.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2493,
+  "word": "Aerodontia",
+  "question": "Aerodontia",
+  "options": [
+    "Carrying or bearing air",
+    "Technology for air use",
+    "Shaped with an adze",
+    "Dental pain from altitude"
+  ],
+  "answerOption": "D",
+  "answerText": "Dental pain from altitude",
+  "difficulty": "hard",
+  "sourceFile": "2493.json"
+}

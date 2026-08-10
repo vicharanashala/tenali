@@ -1,0 +1,15 @@
+{
+  "id": 3039,
+  "word": "Abstin",
+  "question": "Abstin",
+  "options": [
+    "One who believes in absurdism",
+    "A low rumbling sound like distant thunder",
+    "State of being abused",
+    "A substance for abstinence"
+  ],
+  "answerOption": "D",
+  "answerText": "A substance for abstinence",
+  "difficulty": "extra-hard",
+  "sourceFile": "3039.json"
+}

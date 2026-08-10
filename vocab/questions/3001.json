@@ -1,0 +1,15 @@
+{
+  "id": 3001,
+  "word": "Prevaricate",
+  "question": "Prevaricate",
+  "options": [
+    "The state of being too much or excessive",
+    "Made subject to ablism",
+    "To speak or act in an evasive way",
+    "Removed boundaries"
+  ],
+  "answerOption": "C",
+  "answerText": "To speak or act in an evasive way",
+  "difficulty": "extra-hard",
+  "sourceFile": "3001.json"
+}

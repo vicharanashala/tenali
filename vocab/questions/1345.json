@@ -1,0 +1,15 @@
+{
+  "id": 1345,
+  "word": "Definite",
+  "question": "Definite",
+  "options": [
+    "Grossly unjust or wicked",
+    "Relating to rule by a despot",
+    "Clearly defined or determined",
+    "To remove or obliterate written matter"
+  ],
+  "answerOption": "C",
+  "answerText": "Clearly defined or determined",
+  "difficulty": "medium",
+  "sourceFile": "1345.json"
+}

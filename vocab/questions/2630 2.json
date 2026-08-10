@@ -1,0 +1,15 @@
+{
+  "id": 2630,
+  "word": "Betterment",
+  "question": "Betterment",
+  "options": [
+    "The action of improving",
+    "To make mysterious or obscure",
+    "Subject to sudden changes of mood",
+    "The action of making easier"
+  ],
+  "answerOption": "A",
+  "answerText": "The action of improving",
+  "difficulty": "hard",
+  "sourceFile": "2630.json"
+}

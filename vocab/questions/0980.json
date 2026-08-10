@@ -1,0 +1,15 @@
+{
+  "id": 980,
+  "word": "Flighty",
+  "question": "Flighty",
+  "options": [
+    "Fickle or frivolous in manner",
+    "Having or showing a willingness to act dishonestly",
+    "To conduct the affairs of a state or organization",
+    "Showing great activity or vitality"
+  ],
+  "answerOption": "A",
+  "answerText": "Fickle or frivolous in manner",
+  "difficulty": "easy",
+  "sourceFile": "0980.json"
+}

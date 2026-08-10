@@ -1,0 +1,14 @@
+{
+  "id": 477,
+  "question": "What is the SI unit of magnetic flux density?",
+  "options": [
+    "Weber",
+    "Tesla",
+    "Henry",
+    "Gauss"
+  ],
+  "answerOption": "B",
+  "answerText": "Tesla",
+  "genre": "mixed",
+  "sourceFile": "0477.json"
+}

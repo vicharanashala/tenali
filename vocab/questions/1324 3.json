@@ -1,0 +1,15 @@
+{
+  "id": 1324,
+  "word": "Degrade",
+  "question": "Degrade",
+  "options": [
+    "Easily crumbled or reduced",
+    "To reduce to a lower rank or position",
+    "Careful and thorough; extremely attentive",
+    "To reduce in rank or lower in status"
+  ],
+  "answerOption": "D",
+  "answerText": "To reduce in rank or lower in status",
+  "difficulty": "medium",
+  "sourceFile": "1324.json"
+}

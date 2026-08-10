@@ -1,0 +1,15 @@
+{
+  "id": 187,
+  "word": "Shrink",
+  "question": "Shrink",
+  "options": [
+    "To become or make smaller in size",
+    "A person who lacks courage",
+    "Smelling extremely unpleasant",
+    "Having the pleasant taste of sugar"
+  ],
+  "answerOption": "A",
+  "answerText": "To become or make smaller in size",
+  "difficulty": "easy",
+  "sourceFile": "0187.json"
+}

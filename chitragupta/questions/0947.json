@@ -1,0 +1,14 @@
+{
+  "id": 947,
+  "question": "Which country is associated with the city of Pyongyang?",
+  "options": [
+    "South Korea",
+    "Japan",
+    "North Korea",
+    "China"
+  ],
+  "answerOption": "C",
+  "answerText": "North Korea",
+  "genre": "geography",
+  "sourceFile": "0947.json"
+}

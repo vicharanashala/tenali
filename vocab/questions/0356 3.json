@@ -1,0 +1,15 @@
+{
+  "id": 356,
+  "word": "Distribute",
+  "question": "Distribute",
+  "options": [
+    "At the point that is in the middle",
+    "Made up of exactly similar parts",
+    "To give shares of something to many people",
+    "Having the shape of a rectangle"
+  ],
+  "answerOption": "C",
+  "answerText": "To give shares of something to many people",
+  "difficulty": "easy",
+  "sourceFile": "0356.json"
+}

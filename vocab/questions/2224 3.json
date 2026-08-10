@@ -1,0 +1,15 @@
+{
+  "id": 2224,
+  "word": "Aegithus",
+  "question": "Aegithus",
+  "options": [
+    "Of doubtful authenticity; probably untrue",
+    "Scorched or burned by heat",
+    "A person who attacks cherished beliefs",
+    "A genus of terns or seabirds"
+  ],
+  "answerOption": "D",
+  "answerText": "A genus of terns or seabirds",
+  "difficulty": "hard",
+  "sourceFile": "2224.json"
+}

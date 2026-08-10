@@ -1,0 +1,14 @@
+{
+  "id": 375,
+  "question": "Which gas is used in fire extinguishers to smother flames by displacing oxygen?",
+  "options": [
+    "Hydrogen",
+    "Carbon dioxide",
+    "Helium",
+    "Nitrogen dioxide"
+  ],
+  "answerOption": "B",
+  "answerText": "Carbon dioxide",
+  "genre": "science",
+  "sourceFile": "0375.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1818,
+  "word": "Unequipped",
+  "question": "Unequipped",
+  "options": [
+    "To follow a winding course",
+    "Lacking necessary equipment",
+    "Self-assertive in a rude or noisy way",
+    "A subtle difference in meaning"
+  ],
+  "answerOption": "B",
+  "answerText": "Lacking necessary equipment",
+  "difficulty": "medium",
+  "sourceFile": "1818.json"
+}

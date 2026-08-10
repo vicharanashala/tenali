@@ -1,0 +1,15 @@
+{
+  "id": 2000,
+  "word": "Dearth",
+  "question": "Dearth",
+  "options": [
+    "Measure of opposition to electric current",
+    "A position requiring little or no work",
+    "Stubbornly refusing to change one's opinion",
+    "A scarcity or lack of something"
+  ],
+  "answerOption": "D",
+  "answerText": "A scarcity or lack of something",
+  "difficulty": "hard",
+  "sourceFile": "2000.json"
+}

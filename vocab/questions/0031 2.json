@@ -1,0 +1,15 @@
+{
+  "id": 31,
+  "word": "Ambiguous",
+  "question": "Ambiguous",
+  "options": [
+    "A harsh mixture of discordant sounds",
+    "A person who flatters to gain advantage",
+    "Open to more than one interpretation",
+    "Lacking energy; sluggish and apathetic"
+  ],
+  "answerOption": "C",
+  "answerText": "Open to more than one interpretation",
+  "difficulty": "hard",
+  "sourceFile": "0031.json"
+}

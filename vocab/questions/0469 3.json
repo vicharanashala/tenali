@@ -1,0 +1,15 @@
+{
+  "id": 469,
+  "word": "Narrate",
+  "question": "Narrate",
+  "options": [
+    "To discover something by searching",
+    "To shine with flashes of light",
+    "To tell a story or give an account",
+    "Not far away in distance"
+  ],
+  "answerOption": "C",
+  "answerText": "To tell a story or give an account",
+  "difficulty": "easy",
+  "sourceFile": "0469.json"
+}

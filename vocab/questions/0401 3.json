@@ -1,0 +1,15 @@
+{
+  "id": 401,
+  "word": "Transform",
+  "question": "Transform",
+  "options": [
+    "To open something that was folded",
+    "To pull down or destroy a building",
+    "To make a thorough change in form",
+    "To cause someone to feel greatly astonished"
+  ],
+  "answerOption": "C",
+  "answerText": "To make a thorough change in form",
+  "difficulty": "easy",
+  "sourceFile": "0401.json"
+}

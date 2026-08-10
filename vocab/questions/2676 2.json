@@ -1,0 +1,15 @@
+{
+  "id": 2676,
+  "word": "Dedication",
+  "question": "Dedication",
+  "options": [
+    "Commitment to someone or something",
+    "A state of physical or mental weariness",
+    "Public shame or disgrace",
+    "Lasting for eons or ages"
+  ],
+  "answerOption": "A",
+  "answerText": "Commitment to someone or something",
+  "difficulty": "hard",
+  "sourceFile": "2676.json"
+}

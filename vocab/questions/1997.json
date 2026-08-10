@@ -1,0 +1,15 @@
+{
+  "id": 1997,
+  "word": "Aberration",
+  "question": "Aberration",
+  "options": [
+    "Rapid increase or spread",
+    "At the point of death; in terminal decline",
+    "A departure from what is normal or expected",
+    "Presence of air in thorax"
+  ],
+  "answerOption": "C",
+  "answerText": "A departure from what is normal or expected",
+  "difficulty": "hard",
+  "sourceFile": "1997.json"
+}

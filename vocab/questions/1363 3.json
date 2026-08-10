@@ -1,0 +1,15 @@
+{
+  "id": 1363,
+  "word": "Dental",
+  "question": "Dental",
+  "options": [
+    "To lose courage or hope",
+    "Showing no activity or development",
+    "Of or relating to the teeth",
+    "To attack or plunder"
+  ],
+  "answerOption": "C",
+  "answerText": "Of or relating to the teeth",
+  "difficulty": "medium",
+  "sourceFile": "1363.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 840,
+  "question": "Which country is associated with the city of Male?",
+  "options": [
+    "Sri Lanka",
+    "Maldives",
+    "Mauritius",
+    "Seychelles"
+  ],
+  "answerOption": "B",
+  "answerText": "Maldives",
+  "genre": "geography",
+  "sourceFile": "0840.json"
+}

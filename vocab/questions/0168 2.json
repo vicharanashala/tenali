@@ -1,0 +1,15 @@
+{
+  "id": 168,
+  "word": "Push",
+  "question": "Push",
+  "options": [
+    "To pledge to carry out a course of action",
+    "To convey thoughts or feelings in words",
+    "Average in amount or intensity",
+    "To exert force to move something away"
+  ],
+  "answerOption": "D",
+  "answerText": "To exert force to move something away",
+  "difficulty": "easy",
+  "sourceFile": "0168.json"
+}

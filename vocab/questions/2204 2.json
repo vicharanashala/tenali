@@ -1,0 +1,15 @@
+{
+  "id": 2204,
+  "word": "AEROPHYTE",
+  "question": "AEROPHYTE",
+  "options": [
+    "Of a greenish color",
+    "Enjoying social or economic benefits",
+    "A plant needing air exposure",
+    "Heart condition from altitude"
+  ],
+  "answerOption": "C",
+  "answerText": "A plant needing air exposure",
+  "difficulty": "hard",
+  "sourceFile": "2204.json"
+}

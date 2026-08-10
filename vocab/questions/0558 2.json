@@ -1,0 +1,15 @@
+{
+  "id": 558,
+  "word": "Fulfill",
+  "question": "Fulfill",
+  "options": [
+    "To cover something in paper or cloth",
+    "Able to recover quickly from difficulties",
+    "To achieve or realize something desired",
+    "To have a commanding influence over something"
+  ],
+  "answerOption": "C",
+  "answerText": "To achieve or realize something desired",
+  "difficulty": "easy",
+  "sourceFile": "0558.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1140,
+  "word": "Yeoman",
+  "question": "Yeoman",
+  "options": [
+    "To regard or treat as a god",
+    "A man holding a small landed estate",
+    "To question someone about a completed task",
+    "The process of drying completely"
+  ],
+  "answerOption": "B",
+  "answerText": "A man holding a small landed estate",
+  "difficulty": "medium",
+  "sourceFile": "1140.json"
+}

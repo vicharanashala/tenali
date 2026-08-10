@@ -1,0 +1,15 @@
+{
+  "id": 3872,
+  "word": "Ablepharous",
+  "question": "Ablepharous",
+  "options": [
+    "A wordless look between two people who both want to initiate something",
+    "Improper use of language",
+    "One sent on a mission",
+    "Lacking eyelids"
+  ],
+  "answerOption": "D",
+  "answerText": "Lacking eyelids",
+  "difficulty": "extra-hard",
+  "sourceFile": "3872.json"
+}

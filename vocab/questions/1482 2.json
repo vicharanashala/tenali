@@ -1,0 +1,15 @@
+{
+  "id": 1482,
+  "word": "Solivagant",
+  "question": "Solivagant",
+  "options": [
+    "A feeling of guilt that follows wrongdoing",
+    "Wandering alone",
+    "Unfamiliar, rare, strange, and yet marvelous",
+    "A specified period of five years"
+  ],
+  "answerOption": "B",
+  "answerText": "Wandering alone",
+  "difficulty": "extra-hard",
+  "sourceFile": "1482.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2120,
+  "word": "Lissome",
+  "question": "Lissome",
+  "options": [
+    "Thin, supple, and graceful",
+    "Plural of aegis",
+    "Pompous or extravagant in language",
+    "Swollen and distended; dull and pompous"
+  ],
+  "answerOption": "A",
+  "answerText": "Thin, supple, and graceful",
+  "difficulty": "hard",
+  "sourceFile": "2120.json"
+}

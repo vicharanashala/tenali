@@ -1,0 +1,14 @@
+{
+  "id": 460,
+  "question": "Who gave the laws of motion of planetary bodies after observational data from Tycho Brahe?",
+  "options": [
+    "Kepler",
+    "Galileo",
+    "Newton",
+    "Copernicus"
+  ],
+  "answerOption": "A",
+  "answerText": "Kepler",
+  "genre": "geography",
+  "sourceFile": "0460.json"
+}

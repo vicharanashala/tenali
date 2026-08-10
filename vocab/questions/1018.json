@@ -1,0 +1,15 @@
+{
+  "id": 1018,
+  "word": "Skeptical",
+  "question": "Skeptical",
+  "options": [
+    "Not easily convinced; having doubts",
+    "To explode or cause to explode",
+    "Based on principles of democracy",
+    "Having no particular interest or concern"
+  ],
+  "answerOption": "A",
+  "answerText": "Not easily convinced; having doubts",
+  "difficulty": "medium",
+  "sourceFile": "1018.json"
+}

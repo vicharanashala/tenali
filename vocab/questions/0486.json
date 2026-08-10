@@ -1,0 +1,15 @@
+{
+  "id": 486,
+  "word": "Evaluate",
+  "question": "Evaluate",
+  "options": [
+    "Having the form of a circle",
+    "To say sorry for doing something wrong",
+    "To form an idea of the value of something",
+    "Able to move quickly and easily"
+  ],
+  "answerOption": "C",
+  "answerText": "To form an idea of the value of something",
+  "difficulty": "easy",
+  "sourceFile": "0486.json"
+}

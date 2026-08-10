@@ -1,0 +1,15 @@
+{
+  "id": 1642,
+  "word": "DEUCE",
+  "question": "DEUCE",
+  "options": [
+    "The action of becoming worse",
+    "A person who depones",
+    "To remove poison from something",
+    "A playing card or die with two spots"
+  ],
+  "answerOption": "D",
+  "answerText": "A playing card or die with two spots",
+  "difficulty": "medium",
+  "sourceFile": "1642.json"
+}

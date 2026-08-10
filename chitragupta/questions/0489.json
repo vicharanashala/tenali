@@ -1,0 +1,14 @@
+{
+  "id": 489,
+  "question": "Which part of the blood contains clotting factors in liquid form?",
+  "options": [
+    "Plasma",
+    "RBCs",
+    "WBCs",
+    "Platelets"
+  ],
+  "answerOption": "A",
+  "answerText": "Plasma",
+  "genre": "science",
+  "sourceFile": "0489.json"
+}

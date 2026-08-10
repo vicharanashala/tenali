@@ -1,0 +1,15 @@
+{
+  "id": 209,
+  "word": "Decrease",
+  "question": "Decrease",
+  "options": [
+    "Made to happen later than expected",
+    "Extending in one direction without curves",
+    "To become smaller or fewer in amount",
+    "To observe and check progress over time"
+  ],
+  "answerOption": "C",
+  "answerText": "To become smaller or fewer in amount",
+  "difficulty": "easy",
+  "sourceFile": "0209.json"
+}

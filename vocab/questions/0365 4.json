@@ -1,0 +1,15 @@
+{
+  "id": 365,
+  "word": "Spill",
+  "question": "Spill",
+  "options": [
+    "To cause a liquid to flow over the edge",
+    "Having limits or bounds",
+    "To give facts or information to someone",
+    "No longer living"
+  ],
+  "answerOption": "A",
+  "answerText": "To cause a liquid to flow over the edge",
+  "difficulty": "easy",
+  "sourceFile": "0365.json"
+}

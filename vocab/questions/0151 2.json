@@ -1,0 +1,15 @@
+{
+  "id": 151,
+  "word": "Destroy",
+  "question": "Destroy",
+  "options": [
+    "To ask for something forcefully",
+    "To give something to someone temporarily",
+    "To put an end to the existence of something",
+    "To make it easier for someone to do something"
+  ],
+  "answerOption": "C",
+  "answerText": "To put an end to the existence of something",
+  "difficulty": "easy",
+  "sourceFile": "0151.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 374,
+  "word": "Taste",
+  "question": "Taste",
+  "options": [
+    "An act of saying goodbye",
+    "Having good fortune; fortunate",
+    "Correct in all details; exact",
+    "To perceive the flavor of something"
+  ],
+  "answerOption": "D",
+  "answerText": "To perceive the flavor of something",
+  "difficulty": "easy",
+  "sourceFile": "0374.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 680,
+  "question": "Which is the largest species of salmon?",
+  "options": [
+    "Coho salmon",
+    "Sockeye salmon",
+    "Chinook salmon",
+    "Pink salmon"
+  ],
+  "answerOption": "C",
+  "answerText": "Chinook salmon",
+  "genre": "mixed",
+  "sourceFile": "0680.json"
+}

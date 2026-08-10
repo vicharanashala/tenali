@@ -1,0 +1,15 @@
+{
+  "id": 2827,
+  "word": "Fealty",
+  "question": "Fealty",
+  "options": [
+    "Something that prevents movement",
+    "A peculiar behavioral habit",
+    "Loyalty owed to a feudal lord",
+    "A fence made of pointed wooden stakes"
+  ],
+  "answerOption": "C",
+  "answerText": "Loyalty owed to a feudal lord",
+  "difficulty": "hard",
+  "sourceFile": "2827.json"
+}

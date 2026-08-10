@@ -1,0 +1,14 @@
+{
+  "id": 45,
+  "question": "Which is the smallest prime number?",
+  "options": [
+    "0",
+    "1",
+    "2",
+    "3"
+  ],
+  "answerOption": "C",
+  "answerText": "2",
+  "genre": "mixed",
+  "sourceFile": "0045.json"
+}

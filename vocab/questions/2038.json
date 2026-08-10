@@ -1,0 +1,15 @@
+{
+  "id": 2038,
+  "word": "Recondite",
+  "question": "Recondite",
+  "options": [
+    "To lower the body briefly by bending a knee",
+    "The action of improving",
+    "Little known; abstruse and difficult",
+    "The act of freeing someone"
+  ],
+  "answerOption": "C",
+  "answerText": "Little known; abstruse and difficult",
+  "difficulty": "hard",
+  "sourceFile": "2038.json"
+}

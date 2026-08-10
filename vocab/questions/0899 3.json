@@ -1,0 +1,15 @@
+{
+  "id": 899,
+  "word": "Vacant",
+  "question": "Vacant",
+  "options": [
+    "Not occupied or in use",
+    "Graceful and stylish in appearance",
+    "Existing in very large quantities",
+    "To perceive the scent of something"
+  ],
+  "answerOption": "A",
+  "answerText": "Not occupied or in use",
+  "difficulty": "easy",
+  "sourceFile": "0899.json"
+}

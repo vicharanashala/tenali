@@ -1,0 +1,15 @@
+{
+  "id": 36,
+  "word": "Juxtapose",
+  "question": "Juxtapose",
+  "options": [
+    "Fond of company; sociable",
+    "To place side by side for comparison",
+    "A seemingly contradictory statement that may be true",
+    "Something that deviates from what is standard"
+  ],
+  "answerOption": "B",
+  "answerText": "To place side by side for comparison",
+  "difficulty": "hard",
+  "sourceFile": "0036.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 804,
+  "word": "Honorable",
+  "question": "Honorable",
+  "options": [
+    "Bringing or worthy of honor",
+    "To regard with respect and warm approval",
+    "Well known from long experience",
+    "Relating to the earth or dry land"
+  ],
+  "answerOption": "A",
+  "answerText": "Bringing or worthy of honor",
+  "difficulty": "easy",
+  "sourceFile": "0804.json"
+}

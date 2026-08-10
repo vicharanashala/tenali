@@ -1,0 +1,15 @@
+{
+  "id": 945,
+  "word": "Unkempt",
+  "question": "Unkempt",
+  "options": [
+    "Having careful and persistent effort",
+    "Understanding of a situation after it occurs",
+    "Showing cruel disregard for others",
+    "Having an untidy or disheveled appearance"
+  ],
+  "answerOption": "D",
+  "answerText": "Having an untidy or disheveled appearance",
+  "difficulty": "medium",
+  "sourceFile": "0945.json"
+}

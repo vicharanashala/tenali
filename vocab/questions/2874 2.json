@@ -1,0 +1,15 @@
+{
+  "id": 2874,
+  "word": "Rhabdomancy",
+  "question": "Rhabdomancy",
+  "options": [
+    "Divination using a rod or wand",
+    "A place where one feels safe and at home",
+    "Disturbance in abyss",
+    "Practicing abstinence"
+  ],
+  "answerOption": "A",
+  "answerText": "Divination using a rod or wand",
+  "difficulty": "extra-hard",
+  "sourceFile": "2874.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 1199,
+  "word": "Oscillate",
+  "question": "Oscillate",
+  "options": [
+    "Incapable of producing any useful result",
+    "Likely to cause resentment",
+    "Full of danger or risk",
+    "To move back and forth at a regular speed"
+  ],
+  "answerOption": "D",
+  "answerText": "To move back and forth at a regular speed",
+  "difficulty": "medium",
+  "sourceFile": "1199.json"
+}

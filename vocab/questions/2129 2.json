@@ -1,0 +1,15 @@
+{
+  "id": 2129,
+  "word": "Aerochamber",
+  "question": "Aerochamber",
+  "options": [
+    "To move forward or progress",
+    "Science of air equilibrium",
+    "At the point of death; in terminal decline",
+    "A chamber with compressed air"
+  ],
+  "answerOption": "D",
+  "answerText": "A chamber with compressed air",
+  "difficulty": "hard",
+  "sourceFile": "2129.json"
+}

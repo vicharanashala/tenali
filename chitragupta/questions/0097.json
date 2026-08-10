@@ -1,0 +1,14 @@
+{
+  "id": 97,
+  "question": "Who was the first woman Prime Minister of India?",
+  "options": [
+    "Pratibha Patil",
+    "Sarojini Naidu",
+    "Indira Gandhi",
+    "Sonia Gandhi"
+  ],
+  "answerOption": "C",
+  "answerText": "Indira Gandhi",
+  "genre": "india-gk",
+  "sourceFile": "0097.json"
+}

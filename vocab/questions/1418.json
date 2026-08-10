@@ -1,0 +1,15 @@
+{
+  "id": 1418,
+  "word": "Demonstration",
+  "question": "Demonstration",
+  "options": [
+    "A public display of group feeling",
+    "A person who depones",
+    "To question someone about a completed task",
+    "Causing repulsion or distaste"
+  ],
+  "answerOption": "A",
+  "answerText": "A public display of group feeling",
+  "difficulty": "medium",
+  "sourceFile": "1418.json"
+}

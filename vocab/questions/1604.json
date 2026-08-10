@@ -1,0 +1,15 @@
+{
+  "id": 1604,
+  "word": "Desirous",
+  "question": "Desirous",
+  "options": [
+    "The furnishings and decoration of a room",
+    "The quality of being desired",
+    "Intended for a small group",
+    "Feeling or showing desire for something"
+  ],
+  "answerOption": "D",
+  "answerText": "Feeling or showing desire for something",
+  "difficulty": "medium",
+  "sourceFile": "1604.json"
+}

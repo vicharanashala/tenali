@@ -1,0 +1,15 @@
+{
+  "id": 241,
+  "word": "Dismiss",
+  "question": "Dismiss",
+  "options": [
+    "To send someone away or allow them to leave",
+    "To move something quickly back and forth",
+    "Occurring continuously over time",
+    "To be exceptionally good at something"
+  ],
+  "answerOption": "A",
+  "answerText": "To send someone away or allow them to leave",
+  "difficulty": "easy",
+  "sourceFile": "0241.json"
+}

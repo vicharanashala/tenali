@@ -1,0 +1,15 @@
+{
+  "id": 898,
+  "word": "Occupied",
+  "question": "Occupied",
+  "options": [
+    "Being reserved or timid around other people",
+    "Of great width between opposite sides",
+    "In use or inhabited",
+    "Causing laughter or amusement"
+  ],
+  "answerOption": "C",
+  "answerText": "In use or inhabited",
+  "difficulty": "easy",
+  "sourceFile": "0898.json"
+}

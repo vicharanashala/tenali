@@ -1,0 +1,15 @@
+{
+  "id": 1437,
+  "word": "Denier",
+  "question": "Denier",
+  "options": [
+    "A formal statement made under oath",
+    "To describe or portray precisely",
+    "Unable to be controlled",
+    "A unit of fineness for yarn"
+  ],
+  "answerOption": "D",
+  "answerText": "A unit of fineness for yarn",
+  "difficulty": "medium",
+  "sourceFile": "1437.json"
+}

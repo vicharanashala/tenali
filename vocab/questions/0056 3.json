@@ -1,0 +1,15 @@
+{
+  "id": 56,
+  "word": "Late",
+  "question": "Late",
+  "options": [
+    "Weak and delicate in health",
+    "To cause someone to find something funny",
+    "After the expected or usual time",
+    "Able to soak up liquid easily"
+  ],
+  "answerOption": "C",
+  "answerText": "After the expected or usual time",
+  "difficulty": "easy",
+  "sourceFile": "0056.json"
+}

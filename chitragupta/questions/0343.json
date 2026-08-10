@@ -1,0 +1,14 @@
+{
+  "id": 343,
+  "question": "Which Indian state has Dispur as its capital?",
+  "options": [
+    "Arunachal Pradesh",
+    "Assam",
+    "Manipur",
+    "Meghalaya"
+  ],
+  "answerOption": "B",
+  "answerText": "Assam",
+  "genre": "geography",
+  "sourceFile": "0343.json"
+}

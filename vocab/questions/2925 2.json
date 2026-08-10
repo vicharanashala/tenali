@@ -1,0 +1,15 @@
+{
+  "id": 2925,
+  "word": "Abides",
+  "question": "Abides",
+  "options": [
+    "Study of abyss layers",
+    "Obedient or attentive to an excessive degree",
+    "Remains or continues in place",
+    "The state of being abject"
+  ],
+  "answerOption": "C",
+  "answerText": "Remains or continues in place",
+  "difficulty": "extra-hard",
+  "sourceFile": "2925.json"
+}

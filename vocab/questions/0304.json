@@ -1,0 +1,15 @@
+{
+  "id": 304,
+  "word": "Mourn",
+  "question": "Mourn",
+  "options": [
+    "To be defeated in a contest",
+    "Very small; much smaller than normal",
+    "To feel sadness after someone's death",
+    "To settle or find a solution to a problem"
+  ],
+  "answerOption": "C",
+  "answerText": "To feel sadness after someone's death",
+  "difficulty": "easy",
+  "sourceFile": "0304.json"
+}

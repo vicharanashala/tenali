@@ -1,0 +1,15 @@
+{
+  "id": 1942,
+  "word": "Paradoxical",
+  "question": "Paradoxical",
+  "options": [
+    "Seemingly contradictory",
+    "The quality of being unrelenting",
+    "Not ready or equipped",
+    "Done consciously and intentionally"
+  ],
+  "answerOption": "A",
+  "answerText": "Seemingly contradictory",
+  "difficulty": "medium",
+  "sourceFile": "1942.json"
+}

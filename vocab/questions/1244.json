@@ -1,0 +1,15 @@
+{
+  "id": 1244,
+  "word": "Prolific",
+  "question": "Prolific",
+  "options": [
+    "Incapable of producing any useful result",
+    "To remove poison from something",
+    "Providing good value",
+    "Producing much fruit or many works"
+  ],
+  "answerOption": "D",
+  "answerText": "Producing much fruit or many works",
+  "difficulty": "medium",
+  "sourceFile": "1244.json"
+}

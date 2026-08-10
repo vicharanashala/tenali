@@ -1,0 +1,15 @@
+{
+  "id": 976,
+  "word": "Cantankerous",
+  "question": "Cantankerous",
+  "options": [
+    "To move forward in a purposeful way",
+    "Bad-tempered and argumentative",
+    "To move smoothly along a surface",
+    "To suffer or die from lack of food"
+  ],
+  "answerOption": "B",
+  "answerText": "Bad-tempered and argumentative",
+  "difficulty": "easy",
+  "sourceFile": "0976.json"
+}

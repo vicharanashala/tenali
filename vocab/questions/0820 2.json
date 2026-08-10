@@ -1,0 +1,15 @@
+{
+  "id": 820,
+  "word": "Obvious",
+  "question": "Obvious",
+  "options": [
+    "To leave a place",
+    "Shaped like a ball or globe",
+    "Easily perceived or understood",
+    "To state the exact meaning of a word"
+  ],
+  "answerOption": "C",
+  "answerText": "Easily perceived or understood",
+  "difficulty": "easy",
+  "sourceFile": "0820.json"
+}

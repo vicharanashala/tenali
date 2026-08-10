@@ -1,0 +1,15 @@
+{
+  "id": 301,
+  "word": "Believe",
+  "question": "Believe",
+  "options": [
+    "To succeed in doing something",
+    "Strong and difficult to break or damage",
+    "To accept something as true",
+    "Uneven with rough sharp edges"
+  ],
+  "answerOption": "C",
+  "answerText": "To accept something as true",
+  "difficulty": "easy",
+  "sourceFile": "0301.json"
+}

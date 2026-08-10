@@ -1,0 +1,15 @@
+{
+  "id": 182,
+  "word": "Save",
+  "question": "Save",
+  "options": [
+    "To keep something for future use",
+    "To explain something by using examples",
+    "Having opposite surfaces close together",
+    "To provide someone with enjoyment"
+  ],
+  "answerOption": "A",
+  "answerText": "To keep something for future use",
+  "difficulty": "easy",
+  "sourceFile": "0182.json"
+}

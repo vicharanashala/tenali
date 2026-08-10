@@ -1,0 +1,15 @@
+{
+  "id": 1190,
+  "word": "Formidable",
+  "question": "Formidable",
+  "options": [
+    "Inspiring fear or respect through size",
+    "Refusal to change position",
+    "A strong desire to possess something",
+    "An action or performance"
+  ],
+  "answerOption": "A",
+  "answerText": "Inspiring fear or respect through size",
+  "difficulty": "medium",
+  "sourceFile": "1190.json"
+}

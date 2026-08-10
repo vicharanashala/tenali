@@ -1,0 +1,15 @@
+{
+  "id": 2574,
+  "word": "Construction",
+  "question": "Construction",
+  "options": [
+    "The action of building something",
+    "Conspicuously or obviously offensive",
+    "Silly and pointless",
+    "Unable to be avoided or escaped"
+  ],
+  "answerOption": "A",
+  "answerText": "The action of building something",
+  "difficulty": "hard",
+  "sourceFile": "2574.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 211,
+  "word": "Improve",
+  "question": "Improve",
+  "options": [
+    "Of short duration; not lasting long",
+    "To cause something to come closer",
+    "To make or become better",
+    "To extend to full length"
+  ],
+  "answerOption": "C",
+  "answerText": "To make or become better",
+  "difficulty": "easy",
+  "sourceFile": "0211.json"
+}

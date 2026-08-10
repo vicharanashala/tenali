@@ -1,0 +1,14 @@
+{
+  "id": 254,
+  "question": "Which is the national game of India according to the common traditional answer often given in GK books?",
+  "options": [
+    "Cricket",
+    "Hockey",
+    "Kabaddi",
+    "Football"
+  ],
+  "answerOption": "B",
+  "answerText": "Hockey",
+  "genre": "india-gk",
+  "sourceFile": "0254.json"
+}

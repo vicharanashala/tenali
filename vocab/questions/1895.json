@@ -1,0 +1,15 @@
+{
+  "id": 1895,
+  "word": "Insulting",
+  "question": "Insulting",
+  "options": [
+    "Having a hidden or obscure meaning",
+    "Displaying a lack of energy; relaxed",
+    "Treating with disrespect",
+    "Unwilling to spend freely"
+  ],
+  "answerOption": "C",
+  "answerText": "Treating with disrespect",
+  "difficulty": "medium",
+  "sourceFile": "1895.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2274,
+  "word": "AEROTOXEMIA",
+  "question": "AEROTOXEMIA",
+  "options": [
+    "A lightweight airmail letter",
+    "A colorless liquid chemical compound",
+    "Having an obstinately uncooperative attitude",
+    "Toxemia from air exposure"
+  ],
+  "answerOption": "D",
+  "answerText": "Toxemia from air exposure",
+  "difficulty": "hard",
+  "sourceFile": "2274.json"
+}

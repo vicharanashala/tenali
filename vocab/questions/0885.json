@@ -1,0 +1,15 @@
+{
+  "id": 885,
+  "word": "Fine",
+  "question": "Fine",
+  "options": [
+    "Having high moral qualities",
+    "To settle or find a solution to a problem",
+    "To connect or link things together",
+    "Of high quality; thin or slender"
+  ],
+  "answerOption": "D",
+  "answerText": "Of high quality; thin or slender",
+  "difficulty": "easy",
+  "sourceFile": "0885.json"
+}

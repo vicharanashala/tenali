@@ -1,0 +1,15 @@
+{
+  "id": 446,
+  "word": "Mark",
+  "question": "Mark",
+  "options": [
+    "Making sure to avoid danger or mistakes",
+    "Having a great deal to do",
+    "To devote time or effort to a purpose",
+    "To make a visible sign on something"
+  ],
+  "answerOption": "D",
+  "answerText": "To make a visible sign on something",
+  "difficulty": "easy",
+  "sourceFile": "0446.json"
+}

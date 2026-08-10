@@ -1,0 +1,15 @@
+{
+  "id": 214,
+  "word": "Succeed",
+  "question": "Succeed",
+  "options": [
+    "Important and well known",
+    "Not truthful or genuine",
+    "To achieve a desired aim or result",
+    "To state the exact meaning of a word"
+  ],
+  "answerOption": "C",
+  "answerText": "To achieve a desired aim or result",
+  "difficulty": "easy",
+  "sourceFile": "0214.json"
+}

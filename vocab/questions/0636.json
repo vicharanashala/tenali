@@ -1,0 +1,15 @@
+{
+  "id": 636,
+  "word": "Accountable",
+  "question": "Accountable",
+  "options": [
+    "Well informed about many subjects",
+    "To have an idea that something is possible",
+    "Allowing light to pass through clearly",
+    "Required to explain actions or decisions"
+  ],
+  "answerOption": "D",
+  "answerText": "Required to explain actions or decisions",
+  "difficulty": "easy",
+  "sourceFile": "0636.json"
+}

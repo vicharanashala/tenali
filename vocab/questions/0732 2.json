@@ -1,0 +1,15 @@
+{
+  "id": 732,
+  "word": "Opaque",
+  "question": "Opaque",
+  "options": [
+    "To withdraw from a position",
+    "To provide someone with a reason for doing something",
+    "Done according to a fixed plan",
+    "Not able to be seen through"
+  ],
+  "answerOption": "D",
+  "answerText": "Not able to be seen through",
+  "difficulty": "easy",
+  "sourceFile": "0732.json"
+}

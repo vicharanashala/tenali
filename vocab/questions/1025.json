@@ -1,0 +1,15 @@
+{
+  "id": 1025,
+  "word": "Blissful",
+  "question": "Blissful",
+  "options": [
+    "A state of being extremely poor",
+    "To lose courage or hope",
+    "A Roman silver coin",
+    "Extremely happy; full of joy"
+  ],
+  "answerOption": "D",
+  "answerText": "Extremely happy; full of joy",
+  "difficulty": "medium",
+  "sourceFile": "1025.json"
+}

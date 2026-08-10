@@ -1,0 +1,15 @@
+{
+  "id": 763,
+  "word": "Orderly",
+  "question": "Orderly",
+  "options": [
+    "Feeling uncertain or unsure",
+    "Lacking energy or enthusiasm",
+    "Neatly and methodically arranged",
+    "Using more words than needed"
+  ],
+  "answerOption": "C",
+  "answerText": "Neatly and methodically arranged",
+  "difficulty": "easy",
+  "sourceFile": "0763.json"
+}

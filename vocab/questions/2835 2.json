@@ -1,0 +1,15 @@
+{
+  "id": 2835,
+  "word": "Bibliopole",
+  "question": "Bibliopole",
+  "options": [
+    "Relating to abyss tides",
+    "A type of dark slate rock",
+    "A dealer in rare books",
+    "One who abuses another"
+  ],
+  "answerOption": "C",
+  "answerText": "A dealer in rare books",
+  "difficulty": "extra-hard",
+  "sourceFile": "2835.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 34,
+  "word": "Ephemeral",
+  "question": "Ephemeral",
+  "options": [
+    "A person who flatters to gain advantage",
+    "Lacking energy; sluggish and apathetic",
+    "Lasting for a very short time",
+    "Something that deviates from what is standard"
+  ],
+  "answerOption": "C",
+  "answerText": "Lasting for a very short time",
+  "difficulty": "hard",
+  "sourceFile": "0034.json"
+}

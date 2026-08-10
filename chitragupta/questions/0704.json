@@ -1,0 +1,14 @@
+{
+  "id": 704,
+  "question": "Which country is associated with the city of Ljubljana?",
+  "options": [
+    "Slovakia",
+    "Slovenia",
+    "Croatia",
+    "Serbia"
+  ],
+  "answerOption": "B",
+  "answerText": "Slovenia",
+  "genre": "geography",
+  "sourceFile": "0704.json"
+}

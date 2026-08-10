@@ -1,0 +1,15 @@
+{
+  "id": 502,
+  "word": "Migrate",
+  "question": "Migrate",
+  "options": [
+    "To feel or detect something",
+    "To move from one region to another",
+    "To fill someone with great surprise",
+    "Existing in large quantities"
+  ],
+  "answerOption": "B",
+  "answerText": "To move from one region to another",
+  "difficulty": "easy",
+  "sourceFile": "0502.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 695,
+  "question": "Which Indian union territory has New Delhi as the national capital seat?",
+  "options": [
+    "Chandigarh",
+    "Delhi",
+    "Puducherry",
+    "Lakshadweep"
+  ],
+  "answerOption": "B",
+  "answerText": "Delhi",
+  "genre": "geography",
+  "sourceFile": "0695.json"
+}

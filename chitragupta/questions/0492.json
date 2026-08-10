@@ -1,0 +1,14 @@
+{
+  "id": 492,
+  "question": "Who wrote 'The Adventures of Tom Sawyer'?",
+  "options": [
+    "Charles Dickens",
+    "Mark Twain",
+    "Robert Louis Stevenson",
+    "Jack London"
+  ],
+  "answerOption": "B",
+  "answerText": "Mark Twain",
+  "genre": "general-knowledge",
+  "sourceFile": "0492.json"
+}

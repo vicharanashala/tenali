@@ -1,0 +1,15 @@
+{
+  "id": 2181,
+  "word": "Advisability",
+  "question": "Advisability",
+  "options": [
+    "Mental calmness in a difficult situation",
+    "Hypocritical and sanctimonious talk",
+    "The quality of being advisable",
+    "Clever or skillful in movement"
+  ],
+  "answerOption": "C",
+  "answerText": "The quality of being advisable",
+  "difficulty": "hard",
+  "sourceFile": "2181.json"
+}

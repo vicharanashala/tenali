@@ -1,0 +1,15 @@
+{
+  "id": 321,
+  "word": "Surprise",
+  "question": "Surprise",
+  "options": [
+    "Parallel to the ground; flat",
+    "Truly what something is said to be",
+    "To say or do something again",
+    "To cause someone to feel sudden wonder"
+  ],
+  "answerOption": "D",
+  "answerText": "To cause someone to feel sudden wonder",
+  "difficulty": "easy",
+  "sourceFile": "0321.json"
+}

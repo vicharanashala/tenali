@@ -1,0 +1,15 @@
+{
+  "id": 1635,
+  "word": "DETRITUS",
+  "question": "DETRITUS",
+  "options": [
+    "A small room or animal's lair",
+    "A person forcibly removed from a country",
+    "The action of making someone a god",
+    "Waste matter or debris"
+  ],
+  "answerOption": "D",
+  "answerText": "Waste matter or debris",
+  "difficulty": "medium",
+  "sourceFile": "1635.json"
+}

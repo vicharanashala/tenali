@@ -1,0 +1,15 @@
+{
+  "id": 3174,
+  "word": "Abyssolith",
+  "question": "Abyssolith",
+  "options": [
+    "A substance for abstinence",
+    "Paying penalty for action",
+    "Stone from abyss",
+    "The partially shaded outer region of a shadow"
+  ],
+  "answerOption": "C",
+  "answerText": "Stone from abyss",
+  "difficulty": "extra-hard",
+  "sourceFile": "3174.json"
+}

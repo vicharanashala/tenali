@@ -1,0 +1,15 @@
+{
+  "id": 124,
+  "word": "Hostile",
+  "question": "Hostile",
+  "options": [
+    "Having a slope that rises at a sharp angle",
+    "Unfriendly and opposed to something",
+    "Treating people equally without favoritism",
+    "To exert force to move something closer"
+  ],
+  "answerOption": "B",
+  "answerText": "Unfriendly and opposed to something",
+  "difficulty": "easy",
+  "sourceFile": "0124.json"
+}

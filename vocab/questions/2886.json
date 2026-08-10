@@ -1,0 +1,15 @@
+{
+  "id": 2886,
+  "word": "Suffrage",
+  "question": "Suffrage",
+  "options": [
+    "The action of bequeathing something",
+    "Firm or stern reproof",
+    "Hypocritical and sanctimonious talk",
+    "The right to vote in an election"
+  ],
+  "answerOption": "D",
+  "answerText": "The right to vote in an election",
+  "difficulty": "hard",
+  "sourceFile": "2886.json"
+}

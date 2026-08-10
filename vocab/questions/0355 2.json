@@ -1,0 +1,15 @@
+{
+  "id": 355,
+  "word": "Collect",
+  "question": "Collect",
+  "options": [
+    "To finish making or doing something",
+    "To bring or gather things together",
+    "To point out the faults of something",
+    "To give shares of something to many people"
+  ],
+  "answerOption": "B",
+  "answerText": "To bring or gather things together",
+  "difficulty": "easy",
+  "sourceFile": "0355.json"
+}

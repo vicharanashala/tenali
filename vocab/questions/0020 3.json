@@ -1,0 +1,15 @@
+{
+  "id": 20,
+  "word": "Strong",
+  "question": "Strong",
+  "options": [
+    "To remove goods from a vehicle",
+    "Done consciously and intentionally",
+    "Very impressive; magnificent",
+    "Having the power to move heavy things"
+  ],
+  "answerOption": "D",
+  "answerText": "Having the power to move heavy things",
+  "difficulty": "easy",
+  "sourceFile": "0020.json"
+}

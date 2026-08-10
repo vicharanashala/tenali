@@ -1,0 +1,15 @@
+{
+  "id": 463,
+  "word": "Perform",
+  "question": "Perform",
+  "options": [
+    "To discover the presence of something hidden",
+    "To give authorization for something",
+    "To cook food using an oven",
+    "To carry out an action or task"
+  ],
+  "answerOption": "D",
+  "answerText": "To carry out an action or task",
+  "difficulty": "easy",
+  "sourceFile": "0463.json"
+}

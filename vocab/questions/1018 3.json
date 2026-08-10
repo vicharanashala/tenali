@@ -1,0 +1,15 @@
+{
+  "id": 1018,
+  "word": "Genuine",
+  "question": "Genuine",
+  "options": [
+    "To reduce or use up supplies",
+    "Treating all rivals or disputants equally",
+    "To obtain something from a source",
+    "Truly what something is said to be; authentic"
+  ],
+  "answerOption": "D",
+  "answerText": "Truly what something is said to be; authentic",
+  "difficulty": "medium",
+  "sourceFile": "1018.json"
+}

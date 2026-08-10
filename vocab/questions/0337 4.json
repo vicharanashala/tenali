@@ -1,0 +1,15 @@
+{
+  "id": 337,
+  "word": "Struggle",
+  "question": "Struggle",
+  "options": [
+    "Bending in a smooth line without angles",
+    "To give someone the means to do something",
+    "To have enough money to pay for something",
+    "To make great efforts under difficulty"
+  ],
+  "answerOption": "D",
+  "answerText": "To make great efforts under difficulty",
+  "difficulty": "easy",
+  "sourceFile": "0337.json"
+}

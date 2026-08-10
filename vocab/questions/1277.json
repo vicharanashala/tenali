@@ -1,0 +1,15 @@
+{
+  "id": 1277,
+  "word": "Buoyant",
+  "question": "Buoyant",
+  "options": [
+    "Able to stay afloat or remain high",
+    "A mental state of sadness",
+    "To mix or cause to mix together",
+    "Showing a lack of experience or wisdom"
+  ],
+  "answerOption": "A",
+  "answerText": "Able to stay afloat or remain high",
+  "difficulty": "medium",
+  "sourceFile": "1277.json"
+}

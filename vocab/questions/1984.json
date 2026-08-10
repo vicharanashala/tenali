@@ -1,0 +1,15 @@
+{
+  "id": 1984,
+  "word": "Combative",
+  "question": "Combative",
+  "options": [
+    "Ready or likely to fight",
+    "Unconventional and slightly strange",
+    "Diesel engine road vehicle fuel",
+    "Failing to take proper care"
+  ],
+  "answerOption": "A",
+  "answerText": "Ready or likely to fight",
+  "difficulty": "medium",
+  "sourceFile": "1984.json"
+}

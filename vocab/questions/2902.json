@@ -1,0 +1,15 @@
+{
+  "id": 2902,
+  "word": "Initiation",
+  "question": "Initiation",
+  "options": [
+    "The action of reducing in amount",
+    "The process of aerating something",
+    "The action of beginning something",
+    "Making something pure or suitable"
+  ],
+  "answerOption": "C",
+  "answerText": "The action of beginning something",
+  "difficulty": "hard",
+  "sourceFile": "2902.json"
+}

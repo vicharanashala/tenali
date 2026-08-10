@@ -1,0 +1,15 @@
+{
+  "id": 1489,
+  "word": "Depopulation",
+  "question": "Depopulation",
+  "options": [
+    "The action of holding someone",
+    "The reduction of population",
+    "Hostile and aggressive",
+    "Secreting venom; full of malice"
+  ],
+  "answerOption": "B",
+  "answerText": "The reduction of population",
+  "difficulty": "medium",
+  "sourceFile": "1489.json"
+}

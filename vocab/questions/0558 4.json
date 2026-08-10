@@ -1,0 +1,15 @@
+{
+  "id": 558,
+  "word": "Fulfill",
+  "question": "Fulfill",
+  "options": [
+    "The outer surface of something",
+    "To achieve or realize something desired",
+    "Notably large in size or amount",
+    "Required by law or rules"
+  ],
+  "answerOption": "B",
+  "answerText": "To achieve or realize something desired",
+  "difficulty": "easy",
+  "sourceFile": "0558.json"
+}

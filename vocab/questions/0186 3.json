@@ -1,0 +1,15 @@
+{
+  "id": 186,
+  "word": "Grow",
+  "question": "Grow",
+  "options": [
+    "Smooth and shiny; sophisticated",
+    "To take on or start using something new",
+    "To bring something to an end",
+    "To increase in size or amount"
+  ],
+  "answerOption": "D",
+  "answerText": "To increase in size or amount",
+  "difficulty": "easy",
+  "sourceFile": "0186.json"
+}

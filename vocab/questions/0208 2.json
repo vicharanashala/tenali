@@ -1,0 +1,15 @@
+{
+  "id": 208,
+  "word": "Increase",
+  "question": "Increase",
+  "options": [
+    "To become greater in size or amount",
+    "To fasten or join one thing to another",
+    "To try to win against other people",
+    "Happening by chance; unintentional"
+  ],
+  "answerOption": "A",
+  "answerText": "To become greater in size or amount",
+  "difficulty": "easy",
+  "sourceFile": "0208.json"
+}

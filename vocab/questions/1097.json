@@ -1,0 +1,15 @@
+{
+  "id": 1097,
+  "word": "Deft",
+  "question": "Deft",
+  "options": [
+    "The destruction of a building",
+    "To remove salt from seawater",
+    "Neatly skillful and quick in movement",
+    "Causing feelings of sadness"
+  ],
+  "answerOption": "C",
+  "answerText": "Neatly skillful and quick in movement",
+  "difficulty": "medium",
+  "sourceFile": "1097.json"
+}

@@ -1,0 +1,14 @@
+{
+  "id": 664,
+  "question": "Which organ in the human body secretes digestive juice containing hydrochloric acid?",
+  "options": [
+    "Liver",
+    "Stomach",
+    "Pancreas",
+    "Gallbladder"
+  ],
+  "answerOption": "B",
+  "answerText": "Stomach",
+  "genre": "science",
+  "sourceFile": "0664.json"
+}

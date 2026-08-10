@@ -1,0 +1,15 @@
+{
+  "id": 3456,
+  "word": "Abysmwise",
+  "question": "Abysmwise",
+  "options": [
+    "Having a strong religious or spiritual quality",
+    "Of abliterianism nature",
+    "In manner of abyss",
+    "A ring of light produced by pressure on the eyeball"
+  ],
+  "answerOption": "C",
+  "answerText": "In manner of abyss",
+  "difficulty": "extra-hard",
+  "sourceFile": "3456.json"
+}

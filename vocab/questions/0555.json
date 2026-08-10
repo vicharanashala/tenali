@@ -1,0 +1,15 @@
+{
+  "id": 555,
+  "word": "Sacrifice",
+  "question": "Sacrifice",
+  "options": [
+    "To state an intention to harm someone",
+    "Having good fortune; fortunate",
+    "To give up something valued for a greater cause",
+    "Fluent and persuasive in speaking"
+  ],
+  "answerOption": "C",
+  "answerText": "To give up something valued for a greater cause",
+  "difficulty": "easy",
+  "sourceFile": "0555.json"
+}

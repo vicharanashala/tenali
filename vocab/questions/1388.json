@@ -1,0 +1,15 @@
+{
+  "id": 1388,
+  "word": "Delivery",
+  "question": "Delivery",
+  "options": [
+    "The action of delivering something",
+    "The reduction in value of something",
+    "Expressing disapproval",
+    "To make something ineffective; to nullify"
+  ],
+  "answerOption": "A",
+  "answerText": "The action of delivering something",
+  "difficulty": "medium",
+  "sourceFile": "1388.json"
+}

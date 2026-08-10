@@ -1,0 +1,15 @@
+{
+  "id": 547,
+  "word": "Influence",
+  "question": "Influence",
+  "options": [
+    "To have an effect on someone's character",
+    "To look at something closely",
+    "Having lived for a long time; no longer young",
+    "To state something is true without proof"
+  ],
+  "answerOption": "A",
+  "answerText": "To have an effect on someone's character",
+  "difficulty": "easy",
+  "sourceFile": "0547.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 3346,
+  "word": "Abstinent",
+  "question": "Abstinent",
+  "options": [
+    "Act of limiting",
+    "Practicing abstinence",
+    "Act of rejecting ablation",
+    "In great quantities"
+  ],
+  "answerOption": "B",
+  "answerText": "Practicing abstinence",
+  "difficulty": "extra-hard",
+  "sourceFile": "3346.json"
+}

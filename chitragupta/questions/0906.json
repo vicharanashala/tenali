@@ -1,0 +1,14 @@
+{
+  "id": 906,
+  "question": "What is the chemical symbol for selenium?",
+  "options": [
+    "Sm",
+    "Se",
+    "Si",
+    "Sn"
+  ],
+  "answerOption": "B",
+  "answerText": "Se",
+  "genre": "mixed",
+  "sourceFile": "0906.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 237,
+  "word": "Confuse",
+  "question": "Confuse",
+  "options": [
+    "Well known from long experience",
+    "To make someone feel bewildered",
+    "To heat a liquid until it bubbles",
+    "Of or at a fairly high temperature"
+  ],
+  "answerOption": "B",
+  "answerText": "To make someone feel bewildered",
+  "difficulty": "easy",
+  "sourceFile": "0237.json"
+}

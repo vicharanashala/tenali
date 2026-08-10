@@ -1,0 +1,15 @@
+{
+  "id": 2585,
+  "word": "AEROSPATIAL",
+  "question": "AEROSPATIAL",
+  "options": [
+    "Relating to air and space",
+    "A type of meteorite",
+    "The action of raising from death",
+    "An aerobic organism"
+  ],
+  "answerOption": "A",
+  "answerText": "Relating to air and space",
+  "difficulty": "hard",
+  "sourceFile": "2585.json"
+}

@@ -1,0 +1,15 @@
+{
+  "id": 2041,
+  "word": "Unconscionable",
+  "question": "Unconscionable",
+  "options": [
+    "Familiar with many different cultures",
+    "An unpleasant or unhealthy atmosphere",
+    "To dispute the truth or honesty of",
+    "Not right or reasonable"
+  ],
+  "answerOption": "D",
+  "answerText": "Not right or reasonable",
+  "difficulty": "hard",
+  "sourceFile": "2041.json"
+}

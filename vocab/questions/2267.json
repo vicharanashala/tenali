@@ -1,0 +1,15 @@
+{
+  "id": 2267,
+  "word": "Adroit",
+  "question": "Adroit",
+  "options": [
+    "Clever or skillful in movement",
+    "Inner sanctum of a Greek temple",
+    "The action of beginning again",
+    "The action of aeroporting"
+  ],
+  "answerOption": "A",
+  "answerText": "Clever or skillful in movement",
+  "difficulty": "hard",
+  "sourceFile": "2267.json"
+}

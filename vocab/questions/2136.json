@@ -1,0 +1,15 @@
+{
+  "id": 2136,
+  "word": "Fastidious",
+  "question": "Fastidious",
+  "options": [
+    "Unable to be avoided or escaped",
+    "A person who dislikes humankind",
+    "Very attentive to accuracy and detail",
+    "Surgical use of air"
+  ],
+  "answerOption": "C",
+  "answerText": "Very attentive to accuracy and detail",
+  "difficulty": "hard",
+  "sourceFile": "2136.json"
+}

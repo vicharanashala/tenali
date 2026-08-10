@@ -1,0 +1,15 @@
+{
+  "id": 729,
+  "word": "Triangular",
+  "question": "Triangular",
+  "options": [
+    "Causing an urge to scratch",
+    "Not severe or strong; gentle",
+    "To feel curious about something",
+    "Shaped like a triangle"
+  ],
+  "answerOption": "D",
+  "answerText": "Shaped like a triangle",
+  "difficulty": "easy",
+  "sourceFile": "0729.json"
+}

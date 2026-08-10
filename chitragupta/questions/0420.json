@@ -1,0 +1,14 @@
+{
+  "id": 420,
+  "question": "Which country is associated with the city of Bern?",
+  "options": [
+    "Austria",
+    "Switzerland",
+    "Belgium",
+    "Netherlands"
+  ],
+  "answerOption": "B",
+  "answerText": "Switzerland",
+  "genre": "geography",
+  "sourceFile": "0420.json"
+}

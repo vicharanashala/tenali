@@ -1,0 +1,15 @@
+{
+  "id": 1770,
+  "word": "Nemesis",
+  "question": "Nemesis",
+  "options": [
+    "One who is advised",
+    "An inescapable agent of someone's downfall",
+    "Relating to hot air",
+    "The process of adding air"
+  ],
+  "answerOption": "B",
+  "answerText": "An inescapable agent of someone's downfall",
+  "difficulty": "hard",
+  "sourceFile": "1770.json"
+}

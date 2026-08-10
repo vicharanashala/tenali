@@ -1,0 +1,15 @@
+{
+  "id": 19,
+  "word": "Dry",
+  "question": "Dry",
+  "options": [
+    "Very large in size or quantity",
+    "Of very great size",
+    "To receive money in return for labor",
+    "Free from moisture or liquid"
+  ],
+  "answerOption": "D",
+  "answerText": "Free from moisture or liquid",
+  "difficulty": "easy",
+  "sourceFile": "0019.json"
+}

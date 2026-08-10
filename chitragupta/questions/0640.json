@@ -1,0 +1,14 @@
+{
+  "id": 640,
+  "question": "Who wrote 'Brave New World'?",
+  "options": [
+    "George Orwell",
+    "Aldous Huxley",
+    "Ray Bradbury",
+    "H. G. Wells"
+  ],
+  "answerOption": "B",
+  "answerText": "Aldous Huxley",
+  "genre": "general-knowledge",
+  "sourceFile": "0640.json"
+}

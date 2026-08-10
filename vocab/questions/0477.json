@@ -1,0 +1,15 @@
+{
+  "id": 477,
+  "word": "Spell",
+  "question": "Spell",
+  "options": [
+    "Mild in temperament or behavior",
+    "To break free from confinement",
+    "Characterized by conflict or disorder",
+    "To write or name the letters of a word"
+  ],
+  "answerOption": "D",
+  "answerText": "To write or name the letters of a word",
+  "difficulty": "easy",
+  "sourceFile": "0477.json"
+}

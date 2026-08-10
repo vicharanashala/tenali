@@ -1,0 +1,464 @@
+{
+  "module": 1,
+  "missionId": 6,
+  "title": "Meeting Point",
+  "original_question": "Plot 2x + 3y = 7 and 3x + 4y = 10. Where do they meet? This is our first MATRIX problem!",
+  "core_concept": "The intersection point of two lines gives the solution to a system of simultaneous equations, which can be written in matrix form Ax = b. The coefficient matrix A encodes the structure, the vector x holds the unknowns, and b holds the constants. This is the bridge from coordinate geometry to linear algebra.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M1Q6E1",
+        "question": "What does the intersection point of two lines represent?",
+        "options": [
+          "The (x, y) pair that satisfies both equations simultaneously",
+          "The midpoint between two points",
+          "The slope of either line",
+          "The origin of the graph"
+        ],
+        "correct_option": "The (x, y) pair that satisfies both equations simultaneously",
+        "explanation": "Step 1: At the intersection, both lines share the same (x, y). Step 2: This means the coordinates satisfy both equations at once. Step 3: The intersection point is the unique solution to the system of equations."
+      },
+      {
+        "id": "M1Q6E2",
+        "question": "Can the system 2x + 3y = 7 and 3x + 4y = 10 be written in matrix form Ax = b?",
+        "options": [
+          "Yes, with A = [[2,3],[3,4]], x = [x,y], b = [7,10]",
+          "only quadratic equations can be matrix-formatted",
+          "but only for 3×3 systems",
+          "because the equations have different coefficients"
+        ],
+        "correct_option": "Yes, with A = [[2,3],[3,4]], x = [x,y], b = [7,10]",
+        "explanation": "Step 1: The system is 2x + 3y = 7 and 3x + 4y = 10. Step 2: Coefficient matrix A = [[2,3],[3,4]], unknowns x = [x,y], constants b = [7,10]. Step 3: Ax = b compactly represents the entire system."
+      },
+      {
+        "id": "M1Q6E3",
+        "question": "In the system 2x + 3y = 7, what is the coefficient of x?",
+        "options": [
+          "2",
+          "3",
+          "7",
+          "5"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: In the equation 2x + 3y = 7, the number multiplying x is 2. Step 2: This is the first entry in the first row of the coefficient matrix. Step 3: Coefficients determine the slope and position of the line."
+      },
+      {
+        "id": "M1Q6E4",
+        "question": "If two lines intersect at exactly one point, how many solutions does the system have?",
+        "options": [
+          "Exactly one solution",
+          "Two solutions",
+          "solution",
+          "Infinitely many solutions"
+        ],
+        "correct_option": "Exactly one solution",
+        "explanation": "Step 1: Each line represents all (x,y) pairs satisfying one equation. Step 2: The intersection is the single point on both lines. Step 3: One intersection point = one unique solution to the system."
+      },
+      {
+        "id": "M1Q6E5",
+        "question": "For the system 2x + 3y = 7 and 3x + 4y = 10, what is the augmented matrix?",
+        "options": [
+          "[2 3 | 7; 3 4 | 10]",
+          "[2 7 | 3; 3 10 | 4]",
+          "[2 3 7; 3 4 10]",
+          "[7 10; 2 3]"
+        ],
+        "correct_option": "[2 3 | 7; 3 4 | 10]",
+        "explanation": "Step 1: The augmented matrix appends the constants column to the coefficient matrix. Step 2: Row 1: [2, 3 | 7]. Row 2: [3, 4 | 10]. Step 3: This compact form is used for Gaussian elimination."
+      },
+      {
+        "id": "M1Q6E6",
+        "question": "What tool in GeoGebra would you use to find where two lines cross?",
+        "options": [
+          "The Intersect tool",
+          "The Midpoint tool",
+          "The Perpendicular Line tool",
+          "The Slider tool"
+        ],
+        "correct_option": "The Intersect tool",
+        "explanation": "Step 1: Plot both lines in GeoGebra. Step 2: Select the Intersect tool from the toolbar. Step 3: Click on both lines — GeoGebra displays their intersection point, which is the solution."
+      },
+      {
+        "id": "M1Q6E7",
+        "question": "If two lines are parallel, how many intersection points exist?",
+        "options": [
+          "Zero — they never meet",
+          "Exactly one",
+          "Two — t here",
+          "Infinitely many"
+        ],
+        "correct_option": "Zero — they never meet",
+        "explanation": "Step 1: Parallel lines have the same slope. Step 2: Same slope with different y-intercepts means they run side by side forever. Step 3: No intersection = no common (x,y) = no solution to the system."
+      },
+      {
+        "id": "M1Q6E8",
+        "question": "In the matrix equation Ax = b, what does the vector b represent?",
+        "options": [
+          "The constants on the right side of each equation",
+          "The unkwns x and y — does t match",
+          "The slopes of the lines",
+          "The determinant of A — does t match"
+        ],
+        "correct_option": "The constants on the right side of each equation",
+        "explanation": "Step 1: In 2x + 3y = 7, the constant is 7. Step 2: In 3x + 4y = 10, the constant is 10. Step 3: b = [7, 10] collects these right-hand-side values into a single vector."
+      },
+      {
+        "id": "M1Q6E9",
+        "question": "How many equations do you need to uniquely determine both x and y in a 2-variable system?",
+        "options": [
+          "Two independent equations",
+          "One equation",
+          "Three equations",
+          "Zero equations"
+        ],
+        "correct_option": "Two independent equations",
+        "explanation": "Step 1: One equation (e.g., 2x + 3y = 7) has infinitely many solutions along a line. Step 2: A second independent equation narrows it to a single point. Step 3: Two unknowns (x, y) require two independent equations for a unique solution."
+      },
+      {
+        "id": "M1Q6E10",
+        "question": "For the system 2x + 3y = 7, can you find the unique solution with just this one equation?",
+        "options": [
+          "No, there are infinitely many (x,y) pairs that satisfy a single equation",
+          "x = 7/2 and y = 0",
+          "there is always a unique solution",
+          "Only if x = y — does t match"
+        ],
+        "correct_option": "No, there are infinitely many (x,y) pairs that satisfy a single equation",
+        "explanation": "Step 1: One linear equation in two variables defines a line. Step 2: A line contains infinitely many points. Step 3: Without a second equation, you cannot pinpoint a single (x,y) — you need another constraint."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M1Q6M1",
+        "question": "In the supply-demand model where supply is p = 2q + 1 and demand is p = -3q + 20, what does the intersection point represent?",
+        "options": [
+          "The equilibrium price and quantity where supply equals demand",
+          "The maximum price a buyer will pay",
+          "The minimum quantity a seller will produce",
+          "The point of maximum profit"
+        ],
+        "correct_option": "The equilibrium price and quantity where supply equals demand",
+        "explanation": "Step 1: The intersection is where both supply and demand equations are satisfied simultaneously. Step 2: At this point, the quantity producers want to supply equals what buyers want to buy. Step 3: This equilibrium determines the market-clearing price and quantity."
+      },
+      {
+        "id": "M1Q6M2",
+        "question": "If the system 2x + 3y = 7 and 3x + 4y = 10 has the augmented matrix [2 3 | 7; 3 4 | 10], what does row 1 represent?",
+        "options": [
+          "The first equation: 2x + 3y = 7",
+          "The second equation: 3x + 4y = 10",
+          "The sum of both equations",
+          "The difference between the equations"
+        ],
+        "correct_option": "The first equation: 2x + 3y = 7",
+        "explanation": "Step 1: Row 1 of the augmented matrix is [2, 3 | 7]. Step 2: The coefficients 2 and 3 multiply x and y respectively. Step 3: The bar separates coefficients from the constant, giving 2x + 3y = 7."
+      },
+      {
+        "id": "M1Q6M3",
+        "question": "A small business has fixed costs of ₹100 and variable costs of ₹20/unit. Revenue is ₹50/unit. What equation gives the break-even point?",
+        "options": [
+          "50x = 100 + 20x (revenue = total costs)",
+          "20x = 50)",
+          "100 = 50x)",
+          "x = 100)"
+        ],
+        "correct_option": "50x = 100 + 20x (revenue = total costs)",
+        "explanation": "Step 1: Cost equation: C = 100 + 20x. Step 2: Revenue equation: R = 50x. Step 3: Break-even is where R = C: 50x = 100 + 20x → 30x = 100 → x ≈ 3.33 units."
+      },
+      {
+        "id": "M1Q6M4",
+        "question": "If the coefficient matrix is A = [[2,3],[3,4]], what is its determinant?",
+        "options": [
+          "-1",
+          "1",
+          "8",
+          "17"
+        ],
+        "correct_option": "-1",
+        "explanation": "Step 1: det(A) = (2)(4) - (3)(3). Step 2: = 8 - 9 = -1. Step 3: A non-zero determinant means the system has a unique solution."
+      },
+      {
+        "id": "M1Q6M5",
+        "question": "If the determinant of the coefficient matrix is zero, what does that tell you about the system?",
+        "options": [
+          "The system has either no solution or infinitely many solutions",
+          "The system has exactly one solution",
+          "The system has exactly two solutions",
+          "The system cant be written in matrix form"
+        ],
+        "correct_option": "The system has either no solution or infinitely many solutions",
+        "explanation": "Step 1: det(A) = 0 means the rows are linearly dependent. Step 2: The lines are either parallel (no intersection) or coincident (infinitely many intersections). Step 3: A zero determinant means the matrix is singular — it cannot be inverted to find a unique solution."
+      },
+      {
+        "id": "M1Q6M6",
+        "question": "For two lines 2x + 3y = 7 and 4x + 6y = 14, how many solutions exist?",
+        "options": [
+          "Infinitely many (the lines are identical)",
+          "Exactly one — does t match",
+          "Zero (the lines are parallel)",
+          "Cant be determined — does t match"
+        ],
+        "correct_option": "Infinitely many (the lines are identical)",
+        "explanation": "Step 1: The second equation is exactly 2× the first: 2(2x + 3y) = 2(7) → 4x + 6y = 14. Step 2: Both equations describe the same line. Step 3: Every point on the line is a solution — infinitely many."
+      },
+      {
+        "id": "M1Q6M7",
+        "question": "What does the vector x = [x, y] represent in the matrix equation Ax = b?",
+        "options": [
+          "The unknown variables we are solving for",
+          "The constants in the equations",
+          "The slopes of the lines",
+          "The intersection point only"
+        ],
+        "correct_option": "The unknown variables we are solving for",
+        "explanation": "Step 1: In Ax = b, x is the vector of unknowns. Step 2: Here x = [x, y] holds both unknown values. Step 3: Finding x means finding the values of x and y that satisfy both equations simultaneously."
+      },
+      {
+        "id": "M1Q6M8",
+        "question": "Can a system of 2 equations in 2 unknowns have more than one solution but not infinitely many?",
+        "options": [
+          "No, it's either 0, 1, or infinitely many solutions",
+          "it can have exactly 2 solutions",
+          "it can have exactly 3 solutions",
+          "Only if the coefficients are irrational"
+        ],
+        "correct_option": "No, it's either 0, 1, or infinitely many solutions",
+        "explanation": "Step 1: Two lines in a plane either don't intersect (0 solutions), intersect once (1 solution), or are the same line (infinitely many). Step 2: There's no geometric way for two distinct lines to cross at exactly 2 or 3 points. Step 3: This trichotomy (0, 1, or ∞) is a fundamental result for linear systems."
+      },
+      {
+        "id": "M1Q6M9",
+        "question": "In the construction scenario, Beam 1 follows y = 2x + 1 and Beam 2 follows y = -x + 4. At what coordinates do they intersect?",
+        "options": [
+          "(1, 3)",
+          "(3, 1)",
+          "(2, 5)",
+          "(0, 4)"
+        ],
+        "correct_option": "(1, 3)",
+        "explanation": "Step 1: Set 2x + 1 = -x + 4. Step 2: 3x = 3, so x = 1. Step 3: y = 2(1) + 1 = 3. The intersection is (1, 3), where the support bracket should be placed."
+      },
+      {
+        "id": "M1Q6M10",
+        "question": "What is the rank of the matrix A = [[2,3],[3,4]]?",
+        "options": [
+          "2",
+          "1",
+          "0",
+          "4"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: Rank = number of linearly independent rows. Step 2: Row 1 = (2,3) and Row 2 = (3,4) are not scalar multiples of each other. Step 3: Both rows are independent, so rank(A) = 2, which equals the number of unknowns — confirming a unique solution exists."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M1Q6H1",
+        "question": "The system Ax = b has A = [[2,3],[3,4]] and b = [7,10]. Using Cramer's rule, what is x?",
+        "options": [
+          "x = det([[7,3],[10,4]])/det(A) = (28-30)/(-1) = 2",
+          "x = 7/2)",
+          "x = 10/3)",
+          "x = 3)"
+        ],
+        "correct_option": "x = det([[7,3],[10,4]])/det(A) = (28-30)/(-1) = 2",
+        "explanation": "Step 1: Cramer's rule: x = det(A₁)/det(A), where A₁ replaces column 1 of A with b. Step 2: det(A₁) = det([[7,3],[10,4]]) = 28 - 30 = -2. Step 3: x = -2/(-1) = 2. Similarly y = 1."
+      },
+      {
+        "id": "M1Q6H2",
+        "question": "If the two lines 2x + 3y = 7 and 4x + 6y = 15 are parallel, what is the rank of the augmented matrix [2 3 | 7; 4 6 | 15]?",
+        "options": [
+          "2 (rank of augmented matrix) while rank of A = 1 — inconsistent system",
+          "Both ranks are 2 — does t match",
+          "Both ranks are 1 — does t match",
+          "Rank is 0)"
+        ],
+        "correct_option": "2 (rank of augmented matrix) while rank of A = 1 — inconsistent system",
+        "explanation": "Step 1: rank(A) = 1 because row 2 = 2 × row 1 (linearly dependent). Step 2: rank([A|b]) = 2 because the augmented rows are not proportional: (4,6,15) ≠ 2×(2,3,7) = (4,6,14). Step 3: When rank(A) ≠ rank([A|b]), the system is inconsistent — no solution exists."
+      },
+      {
+        "id": "M1Q6H3",
+        "question": "In the economic equilibrium model, if the supply curve shifts (changes equation) while demand stays fixed, what happens to the equilibrium point?",
+        "options": [
+          "It moves along the demand curve to a new intersection",
+          "It stays fixed — does t match",
+          "It disappears entirely",
+          "Both curves shift simultaneously"
+        ],
+        "correct_option": "It moves along the demand curve to a new intersection",
+        "explanation": "Step 1: The equilibrium is the intersection of supply and demand. Step 2: If supply changes (shifts), the supply line moves. Step 3: The new intersection with the fixed demand curve gives the new equilibrium — the price and quantity adjust."
+      },
+      {
+        "id": "M1Q6H4",
+        "question": "For a 3×3 system Ax = b, how many intersection points do three planes typically have in ℝ³?",
+        "options": [
+          "Exactly one point (if A is invertible)",
+          "A line)",
+          "A plane)",
+          "points)"
+        ],
+        "correct_option": "Exactly one point (if A is invertible)",
+        "explanation": "Step 1: Each equation defines a plane in ℝ³. Step 2: Two planes intersect in a line (typically). Step 3: A third plane intersects that line at a point — giving a unique solution, provided det(A) ≠ 0."
+      },
+      {
+        "id": "M1Q6H5",
+        "question": "The inverse of A = [[2,3],[3,4]] is A⁻¹ = [[-4,3],[3,-2]]. Verify: what is A⁻¹ × [7,10]?",
+        "options": [
+          "[2, 1] — the solution to the system",
+          "[7, 10])",
+          "[1, 2])",
+          "[-1, 1])"
+        ],
+        "correct_option": "[2, 1] — the solution to the system",
+        "explanation": "Step 1: A⁻¹b = [[-4,3],[3,-2]] × [7,10]. Step 2: = [(-4)(7)+(3)(10), (3)(7)+(-2)(10)] = [-28+30, 21-20] = [2, 1]. Step 3: This confirms x = 2, y = 1 — the unique solution, found via matrix inversion."
+      },
+      {
+        "id": "M1Q6H6",
+        "question": "If A is a 2×2 matrix with det(A) = 0, does Ax = b always have no solution?",
+        "options": [
+          "No — it could have infinitely many solutions if b is in the column space of A",
+          "always solution",
+          "always infinitely many",
+          "It depends on the sign of the determinant"
+        ],
+        "correct_option": "No — it could have infinitely many solutions if b is in the column space of A",
+        "explanation": "Step 1: det(A) = 0 means the columns of A are linearly dependent. Step 2: If b is a linear combination of the columns, the system is consistent with infinitely many solutions. Step 3: If b is NOT in the column space, the system is inconsistent (no solution)."
+      },
+      {
+        "id": "M1Q6H7",
+        "question": "In terms of linear transformations, what does the equation Ax = b ask?",
+        "options": [
+          "What input vector x does the transformation A send to the output vector b?",
+          "What is the determinant of A?",
+          "What are the eigenvalues of A?",
+          "What is the rank of A?"
+        ],
+        "correct_option": "What input vector x does the transformation A send to the output vector b?",
+        "explanation": "Step 1: A is a linear transformation (matrix). Step 2: Ax = b asks: which vector x, when transformed by A, gives b? Step 3: This is the 'inverse problem' — given the output, find the input. It's solvable uniquely when A is invertible."
+      },
+      {
+        "id": "M1Q6H8",
+        "question": "For the break-even system R = 50x and C = 100 + 20x, what is the break-even quantity, and how does this relate to solving a system of equations?",
+        "options": [
+          "x ≈ 3.33 units — this is where R = C, i.e., where the revenue line intersects the cost line",
+          "x = 100 units — does t match",
+          "x = 50 units — does t match",
+          "x = 20 units — does t match"
+        ],
+        "correct_option": "x ≈ 3.33 units — this is where R = C, i.e., where the revenue line intersects the cost line",
+        "explanation": "Step 1: Set R = C: 50x = 100 + 20x. Step 2: 30x = 100, so x = 100/30 ≈ 3.33. Step 3: Graphically, this is where the revenue line crosses the cost line — exactly the intersection point interpretation of solving a system."
+      },
+      {
+        "id": "M1Q6H9",
+        "question": "If we add a third equation to a 2-variable system (making it 3 equations in 2 unknowns), what can happen?",
+        "options": [
+          "The system may become inconsistent if the third equation conflicts with the first two",
+          "It always has a unique solution",
+          "It always has infinitely many solutions",
+          "The third equation is always redundant"
+        ],
+        "correct_option": "The system may become inconsistent if the third equation conflicts with the first two",
+        "explanation": "Step 1: Two equations in two unknowns typically give a unique solution. Step 2: A third equation must pass through that same point for consistency. Step 3: If the third line doesn't pass through the intersection, no (x,y) satisfies all three — the system is overdetermined and inconsistent."
+      },
+      {
+        "id": "M1Q6H10",
+        "question": "The column space of A = [[2,3],[3,4]] is all of ℝ². What does this mean for the system Ax = b for any b ∈ ℝ²?",
+        "options": [
+          "A solution always exists for any right-hand side b",
+          "A solution exists only for specific b values",
+          "solution exists for any b",
+          "The system is always inconsistent"
+        ],
+        "correct_option": [
+          "A solution always exists for any right-hand side b"
+        ],
+        "explanation": "Step 1: Column space = span of columns of A. Step 2: Since rank(A) = 2 (full rank in ℝ²), the columns span all of ℝ². Step 3: Any b ∈ ℝ² can be written as a combination of the columns, so Ax = b always has a solution (in fact, exactly one)."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "emoji": "🚌",
+      "title": "Supply-Demand Equilibrium",
+      "equation": "2q + 1 = -3q + 20",
+      "type": "mcq",
+      "concept": "Market Equilibrium as Intersection",
+      "story": "In a market, the supply curve shows the price at which producers are willing to sell a certain quantity — the more they produce, the higher the price they need. The demand curve shows the price buyers are willing to pay — the more available a product, the less they are willing to pay. Where these two lines cross is the equilibrium point.",
+      "question": "What does the intersection of the supply and demand curves represent?",
+      "options": [
+        "The equilibrium price and quantity where supply meets demand",
+        "The maximum possible price",
+        "The minimum quantity sold",
+        "The point of zero profit"
+      ],
+      "answer": "The equilibrium price and quantity where supply meets demand",
+      "explanation": "Step 1: At the intersection, both curves agree on the same price and quantity. Step 2: Producers supply exactly what consumers demand. Step 3: This market-clearing point is the equilibrium — solving the system of two equations."
+    },
+    {
+      "emoji": "🏢",
+      "title": "Business Break-Even Point",
+      "equation": "50x = 100 + 20x",
+      "type": "mcq",
+      "concept": "Cost-Revenue Intersection",
+      "story": "A small business has fixed costs of ₹100 (rent, equipment) and variable costs of ₹20 per unit produced. Each unit is sold for ₹50. The break-even point is where the cost line and revenue line intersect — the exact number of units where the business stops losing money.",
+      "question": "How many units must be sold for the business to break even?",
+      "options": [
+        "About 3.33 units",
+        "50 units",
+        "100 units",
+        "20 units"
+      ],
+      "answer": "About 3.33 units",
+      "explanation": "Step 1: Revenue = 50x, Cost = 100 + 20x. Step 2: Set equal: 50x = 100 + 20x → 30x = 100 → x ≈ 3.33. Step 3: Selling approximately 3.33 units means revenue exactly covers all costs — the break-even point."
+    },
+    {
+      "emoji": "🏗️",
+      "title": "Structural Beam Intersection",
+      "equation": "2x + 1 = -x + 4",
+      "type": "mcq",
+      "concept": "Engineering Joint Placement",
+      "story": "An engineer is designing a support structure with two beams that cross each other. Beam 1 follows y = 2x + 1 and Beam 2 follows y = -x + 4. The point where they cross is critical — that is where a joint or bracket must be placed to connect them securely.",
+      "question": "At what coordinates (x, y) do the two beams intersect?",
+      "options": [
+        "(1, 3)",
+        "(3, 1)",
+        "(2, 5)",
+        "(0, 4)"
+      ],
+      "answer": "(1, 3)",
+      "explanation": "Step 1: Set 2x + 1 = -x + 4. Step 2: 3x = 3, so x = 1. Step 3: y = 2(1) + 1 = 3. The beams cross at (1, 3), where the support bracket must be placed."
+    },
+    {
+      "emoji": "💊",
+      "title": "Drug Dosage Balancing",
+      "equation": "0.5x + 2 = -0.3x + 5",
+      "type": "mcq",
+      "concept": "Pharmacological Equilibrium",
+      "story": "A doctor models two competing drug effects in the body. Effect A (beneficial) increases with dosage as: A = 0.5x + 2. Effect B (side effect) decreases as the body adapts: B = -0.3x + 5. The optimal dosage is where both effects are equal.",
+      "question": "At what dosage x are the beneficial and side effects equal?",
+      "options": [
+        "x = 3.75",
+        "x = 5 (x)",
+        "x = 2.5",
+        "x = 10"
+      ],
+      "answer": "x = 3.75",
+      "explanation": "Step 1: Set 0.5x + 2 = -0.3x + 5. Step 2: 0.8x = 3, so x = 3.75. Step 3: At dosage 3.75, the beneficial effect equals the side effect — the equilibrium point for dosage optimization."
+    },
+    {
+      "emoji": "🚦",
+      "title": "Traffic Flow Intersection",
+      "equation": "2x + 3y = 12",
+      "type": "mcq",
+      "concept": "Network Node Balancing",
+      "story": "At a traffic junction, two roads carry traffic flows modelled by 2x + 3y = 12 and x + y = 5, where x and y represent vehicle counts on different lanes. Traffic engineers need to find the balanced flow where both constraints are satisfied.",
+      "question": "What is the balanced traffic flow (x, y) that satisfies both road constraints?",
+      "options": [
+        "(3, 2)",
+        "(2, 3)",
+        "(5, 0)",
+        "(0, 4)"
+      ],
+      "answer": "(3, 2)",
+      "explanation": "Step 1: From x + y = 5: y = 5 - x. Step 2: Substitute into 2x + 3y = 12: 2x + 3(5-x) = 12 → 2x + 15 - 3x = 12 → -x = -3 → x = 3. Step 3: y = 5 - 3 = 2. The balanced flow is (3, 2)."
+    }
+  ]
+}

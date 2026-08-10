@@ -1,0 +1,15 @@
+{
+  "id": 53,
+  "word": "Near",
+  "question": "Near",
+  "options": [
+    "Not far away in distance",
+    "To prove more powerful than opposing forces",
+    "To arrive at a judgment after reasoning",
+    "Made to happen later than expected"
+  ],
+  "answerOption": "A",
+  "answerText": "Not far away in distance",
+  "difficulty": "easy",
+  "sourceFile": "0053.json"
+}

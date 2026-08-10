@@ -1,0 +1,15 @@
+{
+  "id": 38,
+  "word": "Paradox",
+  "question": "Paradox",
+  "options": [
+    "A seemingly contradictory statement that may be true",
+    "Something that deviates from what is standard",
+    "Present, appearing, or found everywhere",
+    "Reserved or uncommunicative in speech"
+  ],
+  "answerOption": "A",
+  "answerText": "A seemingly contradictory statement that may be true",
+  "difficulty": "hard",
+  "sourceFile": "0038.json"
+}

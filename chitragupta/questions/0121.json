@@ -1,0 +1,14 @@
+{
+  "id": 121,
+  "question": "Which is the national flower of India?",
+  "options": [
+    "Rose",
+    "Sunflower",
+    "Lotus",
+    "Jasmine"
+  ],
+  "answerOption": "C",
+  "answerText": "Lotus",
+  "genre": "india-gk",
+  "sourceFile": "0121.json"
+}

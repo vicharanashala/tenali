@@ -1,0 +1,14 @@
+{
+  "id": 921,
+  "question": "Which Indian state has Kolkata as its capital?",
+  "options": [
+    "Bihar",
+    "Odisha",
+    "West Bengal",
+    "Assam"
+  ],
+  "answerOption": "C",
+  "answerText": "West Bengal",
+  "genre": "geography",
+  "sourceFile": "0921.json"
+}

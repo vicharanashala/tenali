@@ -1,0 +1,15 @@
+{
+  "id": 2570,
+  "word": "Exposition",
+  "question": "Exposition",
+  "options": [
+    "A statement or explanation",
+    "Producing or generating gas",
+    "Tiredness or exhaustion",
+    "Life dependent on air"
+  ],
+  "answerOption": "A",
+  "answerText": "A statement or explanation",
+  "difficulty": "hard",
+  "sourceFile": "2570.json"
+}

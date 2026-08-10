@@ -1,0 +1,15 @@
+{
+  "id": 1916,
+  "word": "Unethical",
+  "question": "Unethical",
+  "options": [
+    "Mixed up in a confused manner",
+    "A formal statement made under oath",
+    "Not morally correct",
+    "To move into position for action"
+  ],
+  "answerOption": "C",
+  "answerText": "Not morally correct",
+  "difficulty": "medium",
+  "sourceFile": "1916.json"
+}

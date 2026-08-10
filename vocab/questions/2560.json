@@ -1,0 +1,15 @@
+{
+  "id": 2560,
+  "word": "AEROPLANIC",
+  "question": "AEROPLANIC",
+  "options": [
+    "A female aeromotor operator",
+    "Relating to aeroplanes",
+    "A difficult or unfortunate situation",
+    "The action of emerging again"
+  ],
+  "answerOption": "B",
+  "answerText": "Relating to aeroplanes",
+  "difficulty": "hard",
+  "sourceFile": "2560.json"
+}

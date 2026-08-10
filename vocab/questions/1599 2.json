@@ -1,0 +1,15 @@
+{
+  "id": 1599,
+  "word": "Determinant",
+  "question": "Determinant",
+  "options": [
+    "To give a specified name to something",
+    "To pay attention to advice or warning",
+    "A factor that determines something",
+    "To deprive of possessions by force"
+  ],
+  "answerOption": "C",
+  "answerText": "A factor that determines something",
+  "difficulty": "medium",
+  "sourceFile": "1599.json"
+}

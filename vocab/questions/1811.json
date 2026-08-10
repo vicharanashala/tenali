@@ -1,0 +1,15 @@
+{
+  "id": 1811,
+  "word": "Hasty",
+  "question": "Hasty",
+  "options": [
+    "Treating with disrespect",
+    "To dry out completely",
+    "Done with excessive speed",
+    "Made in an intricate shape or decorated"
+  ],
+  "answerOption": "C",
+  "answerText": "Done with excessive speed",
+  "difficulty": "medium",
+  "sourceFile": "1811.json"
+}

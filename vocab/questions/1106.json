@@ -1,0 +1,15 @@
+{
+  "id": 1106,
+  "word": "Meander",
+  "question": "Meander",
+  "options": [
+    "Preoccupied with oneself",
+    "To follow a winding course",
+    "To spend excessive effort on something",
+    "Fine in texture, form, or structure"
+  ],
+  "answerOption": "B",
+  "answerText": "To follow a winding course",
+  "difficulty": "medium",
+  "sourceFile": "1106.json"
+}

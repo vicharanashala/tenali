@@ -1,0 +1,15 @@
+{
+  "id": 2334,
+  "word": "Advisability",
+  "question": "Advisability",
+  "options": [
+    "Characterized by concern or care",
+    "The quality of being advisable",
+    "Proceeding in a harmful way gradually",
+    "A return or recurrence of something"
+  ],
+  "answerOption": "B",
+  "answerText": "The quality of being advisable",
+  "difficulty": "hard",
+  "sourceFile": "2334.json"
+}

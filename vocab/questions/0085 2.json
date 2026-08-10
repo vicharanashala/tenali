@@ -1,0 +1,15 @@
+{
+  "id": 85,
+  "word": "Wide",
+  "question": "Wide",
+  "options": [
+    "To consider something to be important",
+    "To try to win against other people",
+    "Of great extent from side to side",
+    "Far away in space or time"
+  ],
+  "answerOption": "C",
+  "answerText": "Of great extent from side to side",
+  "difficulty": "easy",
+  "sourceFile": "0085.json"
+}

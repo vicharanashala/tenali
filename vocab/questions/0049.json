@@ -1,0 +1,15 @@
+{
+  "id": 49,
+  "word": "Empty",
+  "question": "Empty",
+  "options": [
+    "To go out of or leave a place",
+    "Containing nothing; not filled",
+    "To convey thoughts or feelings in words",
+    "To carefully choose as being the best"
+  ],
+  "answerOption": "B",
+  "answerText": "Containing nothing; not filled",
+  "difficulty": "easy",
+  "sourceFile": "0049.json"
+}

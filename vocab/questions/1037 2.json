@@ -1,0 +1,15 @@
+{
+  "id": 1037,
+  "word": "Venerable",
+  "question": "Venerable",
+  "options": [
+    "Standing out and clearly visible",
+    "Accorded great respect due to age or wisdom",
+    "Able to adapt to many different functions",
+    "Filled with lively energy and excitement"
+  ],
+  "answerOption": "B",
+  "answerText": "Accorded great respect due to age or wisdom",
+  "difficulty": "medium",
+  "sourceFile": "1037.json"
+}
