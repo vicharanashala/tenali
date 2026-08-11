@@ -1,0 +1,107 @@
+[
+  {
+    "id": "number_kingdom",
+    "worldId": "number_kingdom",
+    "name": "Number Kingdom",
+    "worldName": "Number Kingdom",
+    "icon": "🔢",
+    "isUnlocked": true,
+    "unlockRequirements": "Available from the start",
+    "requiredUnlockXP": 0,
+    "themeColor": "#e8864a",
+    "levelRange": [
+      1,
+      10
+    ]
+  },
+  {
+    "id": "arithmetic_kingdom",
+    "worldId": "arithmetic_kingdom",
+    "name": "Arithmetic Kingdom",
+    "worldName": "Arithmetic Kingdom",
+    "icon": "🧮",
+    "description": "Apply numbers to the real world — percentages, ratios, profit and loss, finance, and measurement.",
+    "unlockRequirements": "Complete the Number Kingdom Boss to unlock",
+    "requiredUnlockXP": 500,
+    "themeColor": "#f4a261",
+    "levelRange": [
+      11,
+      20
+    ]
+  },
+  {
+    "id": "geometry_kingdom",
+    "worldId": "geometry_kingdom",
+    "name": "Geometry Kingdom",
+    "worldName": "Geometry Kingdom",
+    "icon": "📐",
+    "description": "A realm of shapes, angles, and the hidden symmetry of space.",
+    "unlockRequirements": "Complete the Arithmetic Kingdom Boss to unlock",
+    "requiredUnlockXP": 1000,
+    "themeColor": "#2a9d8f",
+    "levelRange": [
+      21,
+      30
+    ]
+  },
+  {
+    "id": "algebra_kingdom",
+    "worldId": "algebra_kingdom",
+    "name": "Algebra Kingdom",
+    "worldName": "Algebra Kingdom",
+    "icon": "🔠",
+    "description": "Where letters hold secrets — equations, inequalities, surds, and polynomials.",
+    "unlockRequirements": "Complete the Geometry Kingdom Boss to unlock",
+    "requiredUnlockXP": 1500,
+    "themeColor": "#3b82f6",
+    "levelRange": [
+      31,
+      40
+    ]
+  },
+  {
+    "id": "advanced_mathematics",
+    "worldId": "advanced_mathematics",
+    "name": "Advanced Mathematics",
+    "worldName": "Advanced Mathematics",
+    "icon": "🧠",
+    "description": "Matrices, vectors, logarithms, sequences, and complex numbers await the bold.",
+    "unlockRequirements": "Complete the Algebra Kingdom Boss to unlock",
+    "requiredUnlockXP": 2000,
+    "themeColor": "#7c3aed",
+    "levelRange": [
+      41,
+      50
+    ]
+  },
+  {
+    "id": "coordinate_calculus",
+    "worldId": "coordinate_calculus",
+    "name": "Coordinate & Calculus",
+    "worldName": "Coordinate & Calculus",
+    "icon": "📈",
+    "description": "Lines, curves, limits, derivatives, and integrals — mathematics in motion.",
+    "unlockRequirements": "Complete the Advanced Mathematics Boss to unlock",
+    "requiredUnlockXP": 2500,
+    "themeColor": "#0ea5e9",
+    "levelRange": [
+      51,
+      60
+    ]
+  },
+  {
+    "id": "data_logic",
+    "worldId": "data_logic",
+    "name": "Data & Logic",
+    "worldName": "Data & Logic",
+    "icon": "📊",
+    "description": "Statistics, sets, logic, and language — the final frontier of mathematical reasoning.",
+    "unlockRequirements": "Complete the Coordinate & Calculus Boss to unlock",
+    "requiredUnlockXP": 3000,
+    "themeColor": "#a855f7",
+    "levelRange": [
+      61,
+      66
+    ]
+  }
+]
