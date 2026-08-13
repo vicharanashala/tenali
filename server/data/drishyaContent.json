@@ -1,0 +1,5970 @@
+[
+  {
+    "id": "animal_dog",
+    "category": "animal",
+    "image": "animal/dog.jpg",
+    "primaryWord": "dog",
+    "acceptedAnswers": [
+      "dog",
+      "puppy",
+      "beagle"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "dog",
+      "distractors": [
+        "elephant",
+        "fish",
+        "giraffe"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "The animal in the picture is a ___.",
+      "blankAnswers": [
+        "dog",
+        "puppy",
+        "beagle"
+      ]
+    },
+    "matching": {
+      "word": "dog"
+    },
+    "guidedDescription": {
+      "starter": "I see a dog that is ___.",
+      "keywords": {
+        "core": [
+          "four legs",
+          "tail",
+          "ears",
+          "brown",
+          "white",
+          "black",
+          "collar",
+          "fur",
+          "paws",
+          "bell"
+        ],
+        "bonus": [
+          "tan",
+          "brown and white"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "four legs",
+          "tail",
+          "ears",
+          "brown",
+          "white",
+          "black",
+          "collar",
+          "fur",
+          "paws",
+          "bell"
+        ],
+        "bonus": [
+          "tan",
+          "brown and white"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "animal_elephant",
+    "category": "animal",
+    "image": "animal/elephant.jpg",
+    "primaryWord": "elephant",
+    "acceptedAnswers": [
+      "elephant"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "elephant",
+      "distractors": [
+        "dog",
+        "fish",
+        "giraffe"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "The animal in the picture is a ___.",
+      "blankAnswers": [
+        "elephant"
+      ]
+    },
+    "matching": {
+      "word": "elephant"
+    },
+    "guidedDescription": {
+      "starter": "I see a elephant that is ___.",
+      "keywords": {
+        "core": [
+          "trunk",
+          "big ears",
+          "grey",
+          "tusks",
+          "large",
+          "legs",
+          "tail"
+        ],
+        "bonus": [
+          "blue-grey",
+          "sitting",
+          "baby elephant"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "trunk",
+          "big ears",
+          "grey",
+          "tusks",
+          "large",
+          "legs",
+          "tail"
+        ],
+        "bonus": [
+          "blue-grey",
+          "sitting",
+          "baby elephant"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "animal_fish",
+    "category": "animal",
+    "image": "animal/fish.jpg",
+    "primaryWord": "fish",
+    "acceptedAnswers": [
+      "fish",
+      "clownfish"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "fish",
+      "distractors": [
+        "dog",
+        "elephant",
+        "giraffe"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "The animal in the picture is a ___.",
+      "blankAnswers": [
+        "fish",
+        "clownfish"
+      ]
+    },
+    "matching": {
+      "word": "fish"
+    },
+    "guidedDescription": {
+      "starter": "I see a fish that is ___.",
+      "keywords": {
+        "core": [
+          "fins",
+          "tail",
+          "gills",
+          "orange",
+          "stripes",
+          "scales",
+          "swim"
+        ],
+        "bonus": [
+          "white stripes",
+          "orange and white"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "fins",
+          "tail",
+          "gills",
+          "orange",
+          "stripes",
+          "scales",
+          "swim"
+        ],
+        "bonus": [
+          "white stripes",
+          "orange and white"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "animal_giraffe",
+    "category": "animal",
+    "image": "animal/giraffe.png",
+    "primaryWord": "giraffe",
+    "acceptedAnswers": [
+      "giraffe"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "giraffe",
+      "distractors": [
+        "dog",
+        "elephant",
+        "fish"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "The animal in the picture is a ___.",
+      "blankAnswers": [
+        "giraffe"
+      ]
+    },
+    "matching": {
+      "word": "giraffe"
+    },
+    "guidedDescription": {
+      "starter": "I see a giraffe that is ___.",
+      "keywords": {
+        "core": [
+          "long neck",
+          "spots",
+          "tall",
+          "horns",
+          "ears",
+          "yellow",
+          "legs"
+        ],
+        "bonus": [
+          "orange spots",
+          "patches"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "long neck",
+          "spots",
+          "tall",
+          "horns",
+          "ears",
+          "yellow",
+          "legs"
+        ],
+        "bonus": [
+          "orange spots",
+          "patches"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "animal_lion",
+    "category": "animal",
+    "image": "animal/lion.png",
+    "primaryWord": "lion",
+    "acceptedAnswers": [
+      "lion"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "lion",
+      "distractors": [
+        "dog",
+        "elephant",
+        "fish"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "The animal in the picture is a ___.",
+      "blankAnswers": [
+        "lion"
+      ]
+    },
+    "matching": {
+      "word": "lion"
+    },
+    "guidedDescription": {
+      "starter": "I see a lion that is ___.",
+      "keywords": {
+        "core": [
+          "mane",
+          "brown",
+          "orange",
+          "whiskers",
+          "tail",
+          "paws",
+          "roar"
+        ],
+        "bonus": [
+          "sitting",
+          "king of jungle"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "mane",
+          "brown",
+          "orange",
+          "whiskers",
+          "tail",
+          "paws",
+          "roar"
+        ],
+        "bonus": [
+          "sitting",
+          "king of jungle"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "animal_monkey",
+    "category": "animal",
+    "image": "animal/monkey.jpg",
+    "primaryWord": "monkey",
+    "acceptedAnswers": [
+      "monkey"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "monkey",
+      "distractors": [
+        "dog",
+        "elephant",
+        "fish"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "The animal in the picture is a ___.",
+      "blankAnswers": [
+        "monkey"
+      ]
+    },
+    "matching": {
+      "word": "monkey"
+    },
+    "guidedDescription": {
+      "starter": "I see a monkey that is ___.",
+      "keywords": {
+        "core": [
+          "tail",
+          "brown",
+          "ears",
+          "fur",
+          "hands",
+          "climb"
+        ],
+        "bonus": [
+          "banana",
+          "curly tail"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "tail",
+          "brown",
+          "ears",
+          "fur",
+          "hands",
+          "climb"
+        ],
+        "bonus": [
+          "banana",
+          "curly tail"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "animal_panda",
+    "category": "animal",
+    "image": "animal/panda.jpg",
+    "primaryWord": "panda",
+    "acceptedAnswers": [
+      "panda"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "panda",
+      "distractors": [
+        "dog",
+        "elephant",
+        "fish"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "The animal in the picture is a ___.",
+      "blankAnswers": [
+        "panda"
+      ]
+    },
+    "matching": {
+      "word": "panda"
+    },
+    "guidedDescription": {
+      "starter": "I see a panda that is ___.",
+      "keywords": {
+        "core": [
+          "black and white",
+          "ears",
+          "bamboo",
+          "paws",
+          "fur",
+          "round"
+        ],
+        "bonus": [
+          "eating bamboo",
+          "black patches"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "black and white",
+          "ears",
+          "bamboo",
+          "paws",
+          "fur",
+          "round"
+        ],
+        "bonus": [
+          "eating bamboo",
+          "black patches"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "animal_rabbit",
+    "category": "animal",
+    "image": "animal/rabbit.png",
+    "primaryWord": "rabbit",
+    "acceptedAnswers": [
+      "rabbit",
+      "bunny"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "rabbit",
+      "distractors": [
+        "dog",
+        "elephant",
+        "fish"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "The animal in the picture is a ___.",
+      "blankAnswers": [
+        "rabbit",
+        "bunny"
+      ]
+    },
+    "matching": {
+      "word": "rabbit"
+    },
+    "guidedDescription": {
+      "starter": "I see a rabbit that is ___.",
+      "keywords": {
+        "core": [
+          "long ears",
+          "carrot",
+          "fur",
+          "tail",
+          "whiskers",
+          "hop"
+        ],
+        "bonus": [
+          "grey",
+          "white",
+          "holding carrot"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "long ears",
+          "carrot",
+          "fur",
+          "tail",
+          "whiskers",
+          "hop"
+        ],
+        "bonus": [
+          "grey",
+          "white",
+          "holding carrot"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "animal_snake",
+    "category": "animal",
+    "image": "animal/snake.jpg",
+    "primaryWord": "snake",
+    "acceptedAnswers": [
+      "snake"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "snake",
+      "distractors": [
+        "dog",
+        "elephant",
+        "fish"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "The animal in the picture is a ___.",
+      "blankAnswers": [
+        "snake"
+      ]
+    },
+    "matching": {
+      "word": "snake"
+    },
+    "guidedDescription": {
+      "starter": "I see a snake that is ___.",
+      "keywords": {
+        "core": [
+          "long",
+          "green",
+          "tongue",
+          "scales",
+          "slither",
+          "no legs"
+        ],
+        "bonus": [
+          "spots",
+          "curled"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "long",
+          "green",
+          "tongue",
+          "scales",
+          "slither",
+          "no legs"
+        ],
+        "bonus": [
+          "spots",
+          "curled"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "animal_turtle",
+    "category": "animal",
+    "image": "animal/turtle.jpg",
+    "primaryWord": "turtle",
+    "acceptedAnswers": [
+      "turtle"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "turtle",
+      "distractors": [
+        "dog",
+        "elephant",
+        "fish"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "The animal in the picture is a ___.",
+      "blankAnswers": [
+        "turtle"
+      ]
+    },
+    "matching": {
+      "word": "turtle"
+    },
+    "guidedDescription": {
+      "starter": "I see a turtle that is ___.",
+      "keywords": {
+        "core": [
+          "shell",
+          "green",
+          "legs",
+          "slow",
+          "smile"
+        ],
+        "bonus": [
+          "brown shell",
+          "spots"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "shell",
+          "green",
+          "legs",
+          "slow",
+          "smile"
+        ],
+        "bonus": [
+          "brown shell",
+          "spots"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "animal_zebra",
+    "category": "animal",
+    "image": "animal/zebra.jpg",
+    "primaryWord": "zebra",
+    "acceptedAnswers": [
+      "zebra"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "zebra",
+      "distractors": [
+        "dog",
+        "elephant",
+        "fish"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "The animal in the picture is a ___.",
+      "blankAnswers": [
+        "zebra"
+      ]
+    },
+    "matching": {
+      "word": "zebra"
+    },
+    "guidedDescription": {
+      "starter": "I see a zebra that is ___.",
+      "keywords": {
+        "core": [
+          "stripes",
+          "black and white",
+          "mane",
+          "legs",
+          "tail"
+        ],
+        "bonus": [
+          "horse-like",
+          "standing"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "stripes",
+          "black and white",
+          "mane",
+          "legs",
+          "tail"
+        ],
+        "bonus": [
+          "horse-like",
+          "standing"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "food_apple",
+    "category": "food",
+    "image": "food/apple.jpg",
+    "primaryWord": "apple",
+    "acceptedAnswers": [
+      "apple"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "apple",
+      "distractors": [
+        "banana",
+        "biscuit",
+        "candy"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This is a ___.",
+      "blankAnswers": [
+        "apple"
+      ]
+    },
+    "matching": {
+      "word": "apple"
+    },
+    "guidedDescription": {
+      "starter": "I see a apple that is ___.",
+      "keywords": {
+        "core": [
+          "red",
+          "round",
+          "stem",
+          "leaf",
+          "fruit",
+          "shiny"
+        ],
+        "bonus": [
+          "glossy",
+          "green leaf"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "red",
+          "round",
+          "stem",
+          "leaf",
+          "fruit",
+          "shiny"
+        ],
+        "bonus": [
+          "glossy",
+          "green leaf"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "food_banana",
+    "category": "food",
+    "image": "food/banana.jpg",
+    "primaryWord": "banana",
+    "acceptedAnswers": [
+      "banana"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "banana",
+      "distractors": [
+        "apple",
+        "biscuit",
+        "candy"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This is a ___.",
+      "blankAnswers": [
+        "banana"
+      ]
+    },
+    "matching": {
+      "word": "banana"
+    },
+    "guidedDescription": {
+      "starter": "I see a banana that is ___.",
+      "keywords": {
+        "core": [
+          "yellow",
+          "curved",
+          "bunch",
+          "fruit",
+          "peel"
+        ],
+        "bonus": [
+          "ripe",
+          "stem"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "yellow",
+          "curved",
+          "bunch",
+          "fruit",
+          "peel"
+        ],
+        "bonus": [
+          "ripe",
+          "stem"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "food_biscuit",
+    "category": "food",
+    "image": "food/biscuit.jpg",
+    "primaryWord": "biscuit",
+    "acceptedAnswers": [
+      "biscuit",
+      "cracker"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "biscuit",
+      "distractors": [
+        "apple",
+        "banana",
+        "candy"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This is a ___.",
+      "blankAnswers": [
+        "biscuit",
+        "cracker"
+      ]
+    },
+    "matching": {
+      "word": "biscuit"
+    },
+    "guidedDescription": {
+      "starter": "I see a biscuit that is ___.",
+      "keywords": {
+        "core": [
+          "square",
+          "brown",
+          "plate",
+          "crunchy",
+          "holes"
+        ],
+        "bonus": [
+          "stacked",
+          "snack"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "square",
+          "brown",
+          "plate",
+          "crunchy",
+          "holes"
+        ],
+        "bonus": [
+          "stacked",
+          "snack"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "food_candy",
+    "category": "food",
+    "image": "food/candy.jpg",
+    "primaryWord": "candy",
+    "acceptedAnswers": [
+      "candy",
+      "sweet"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "candy",
+      "distractors": [
+        "apple",
+        "banana",
+        "biscuit"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This is a ___.",
+      "blankAnswers": [
+        "candy",
+        "sweet"
+      ]
+    },
+    "matching": {
+      "word": "candy"
+    },
+    "guidedDescription": {
+      "starter": "I see a candy that is ___.",
+      "keywords": {
+        "core": [
+          "wrapper",
+          "twisted ends",
+          "colorful",
+          "stripes"
+        ],
+        "bonus": [
+          "sweet",
+          "treat"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "wrapper",
+          "twisted ends",
+          "colorful",
+          "stripes"
+        ],
+        "bonus": [
+          "sweet",
+          "treat"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "food_cheese",
+    "category": "food",
+    "image": "food/cheese.jpg",
+    "primaryWord": "cheese",
+    "acceptedAnswers": [
+      "cheese"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "cheese",
+      "distractors": [
+        "apple",
+        "banana",
+        "biscuit"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This is a ___.",
+      "blankAnswers": [
+        "cheese"
+      ]
+    },
+    "matching": {
+      "word": "cheese"
+    },
+    "guidedDescription": {
+      "starter": "I see a cheese that is ___.",
+      "keywords": {
+        "core": [
+          "yellow",
+          "holes",
+          "triangle",
+          "wedge"
+        ],
+        "bonus": [
+          "dairy",
+          "slice"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "yellow",
+          "holes",
+          "triangle",
+          "wedge"
+        ],
+        "bonus": [
+          "dairy",
+          "slice"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "food_cherry",
+    "category": "food",
+    "image": "food/cherry.jpg",
+    "primaryWord": "cherry",
+    "acceptedAnswers": [
+      "cherry",
+      "cherries"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "cherry",
+      "distractors": [
+        "apple",
+        "banana",
+        "biscuit"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This is a ___.",
+      "blankAnswers": [
+        "cherry",
+        "cherries"
+      ]
+    },
+    "matching": {
+      "word": "cherry"
+    },
+    "guidedDescription": {
+      "starter": "I see a cherry that is ___.",
+      "keywords": {
+        "core": [
+          "red",
+          "two",
+          "stem",
+          "leaf",
+          "round"
+        ],
+        "bonus": [
+          "pair",
+          "shiny"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "red",
+          "two",
+          "stem",
+          "leaf",
+          "round"
+        ],
+        "bonus": [
+          "pair",
+          "shiny"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "food_coconut",
+    "category": "food",
+    "image": "food/coconut.jpg",
+    "primaryWord": "coconut",
+    "acceptedAnswers": [
+      "coconut"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "coconut",
+      "distractors": [
+        "apple",
+        "banana",
+        "biscuit"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This is a ___.",
+      "blankAnswers": [
+        "coconut"
+      ]
+    },
+    "matching": {
+      "word": "coconut"
+    },
+    "guidedDescription": {
+      "starter": "I see a coconut that is ___.",
+      "keywords": {
+        "core": [
+          "brown",
+          "hairy",
+          "shell",
+          "white inside",
+          "cracked"
+        ],
+        "bonus": [
+          "husk",
+          "half"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "brown",
+          "hairy",
+          "shell",
+          "white inside",
+          "cracked"
+        ],
+        "bonus": [
+          "husk",
+          "half"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "food_eggs",
+    "category": "food",
+    "image": "food/eggs.jpg",
+    "primaryWord": "eggs",
+    "acceptedAnswers": [
+      "eggs",
+      "egg"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "eggs",
+      "distractors": [
+        "apple",
+        "banana",
+        "biscuit"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This is a ___.",
+      "blankAnswers": [
+        "eggs",
+        "egg"
+      ]
+    },
+    "matching": {
+      "word": "eggs"
+    },
+    "guidedDescription": {
+      "starter": "I see a eggs that is ___.",
+      "keywords": {
+        "core": [
+          "white",
+          "oval",
+          "shell",
+          "food"
+        ],
+        "bonus": [
+          "breakfast",
+          "pair"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "white",
+          "oval",
+          "shell",
+          "food"
+        ],
+        "bonus": [
+          "breakfast",
+          "pair"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "food_fries",
+    "category": "food",
+    "image": "food/fries.jpg",
+    "primaryWord": "fries",
+    "acceptedAnswers": [
+      "fries",
+      "french fries"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "fries",
+      "distractors": [
+        "apple",
+        "banana",
+        "biscuit"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This is a ___.",
+      "blankAnswers": [
+        "fries",
+        "french fries"
+      ]
+    },
+    "matching": {
+      "word": "fries"
+    },
+    "guidedDescription": {
+      "starter": "I see a fries that is ___.",
+      "keywords": {
+        "core": [
+          "yellow",
+          "long",
+          "thin",
+          "fried",
+          "potato"
+        ],
+        "bonus": [
+          "salted",
+          "crispy"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "yellow",
+          "long",
+          "thin",
+          "fried",
+          "potato"
+        ],
+        "bonus": [
+          "salted",
+          "crispy"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "food_garlic",
+    "category": "food",
+    "image": "food/garlic.jpg",
+    "primaryWord": "garlic",
+    "acceptedAnswers": [
+      "garlic"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "garlic",
+      "distractors": [
+        "apple",
+        "banana",
+        "biscuit"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This is a ___.",
+      "blankAnswers": [
+        "garlic"
+      ]
+    },
+    "matching": {
+      "word": "garlic"
+    },
+    "guidedDescription": {
+      "starter": "I see a garlic that is ___.",
+      "keywords": {
+        "core": [
+          "white",
+          "cloves",
+          "bulb",
+          "peel"
+        ],
+        "bonus": [
+          "strong smell",
+          "cooking"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "white",
+          "cloves",
+          "bulb",
+          "peel"
+        ],
+        "bonus": [
+          "strong smell",
+          "cooking"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "food_grapes",
+    "category": "food",
+    "image": "food/grapes.jpg",
+    "primaryWord": "grapes",
+    "acceptedAnswers": [
+      "grapes"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "grapes",
+      "distractors": [
+        "apple",
+        "banana",
+        "biscuit"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This is a ___.",
+      "blankAnswers": [
+        "grapes"
+      ]
+    },
+    "matching": {
+      "word": "grapes"
+    },
+    "guidedDescription": {
+      "starter": "I see a grapes that is ___.",
+      "keywords": {
+        "core": [
+          "purple",
+          "green",
+          "bunch",
+          "round",
+          "stem"
+        ],
+        "bonus": [
+          "cluster",
+          "small"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "purple",
+          "green",
+          "bunch",
+          "round",
+          "stem"
+        ],
+        "bonus": [
+          "cluster",
+          "small"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "food_icecream",
+    "category": "food",
+    "image": "food/icecream.png",
+    "primaryWord": "ice cream",
+    "acceptedAnswers": [
+      "ice cream",
+      "icecream"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "ice cream",
+      "distractors": [
+        "apple",
+        "banana",
+        "biscuit"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This is a ___.",
+      "blankAnswers": [
+        "ice cream",
+        "icecream"
+      ]
+    },
+    "matching": {
+      "word": "ice cream"
+    },
+    "guidedDescription": {
+      "starter": "I see a ice cream that is ___.",
+      "keywords": {
+        "core": [
+          "cone",
+          "scoop",
+          "cold",
+          "sweet"
+        ],
+        "bonus": [
+          "dessert",
+          "melting"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "cone",
+          "scoop",
+          "cold",
+          "sweet"
+        ],
+        "bonus": [
+          "dessert",
+          "melting"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "food_juice",
+    "category": "food",
+    "image": "food/juice.jpg",
+    "primaryWord": "juice",
+    "acceptedAnswers": [
+      "juice"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "juice",
+      "distractors": [
+        "apple",
+        "banana",
+        "biscuit"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This is a ___.",
+      "blankAnswers": [
+        "juice"
+      ]
+    },
+    "matching": {
+      "word": "juice"
+    },
+    "guidedDescription": {
+      "starter": "I see a juice that is ___.",
+      "keywords": {
+        "core": [
+          "glass",
+          "liquid",
+          "orange",
+          "drink"
+        ],
+        "bonus": [
+          "bottle",
+          "cold"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "glass",
+          "liquid",
+          "orange",
+          "drink"
+        ],
+        "bonus": [
+          "bottle",
+          "cold"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "food_mango",
+    "category": "food",
+    "image": "food/mango.jpg",
+    "primaryWord": "mango",
+    "acceptedAnswers": [
+      "mango"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "mango",
+      "distractors": [
+        "apple",
+        "banana",
+        "biscuit"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This is a ___.",
+      "blankAnswers": [
+        "mango"
+      ]
+    },
+    "matching": {
+      "word": "mango"
+    },
+    "guidedDescription": {
+      "starter": "I see a mango that is ___.",
+      "keywords": {
+        "core": [
+          "orange",
+          "yellow",
+          "oval",
+          "fruit",
+          "stem"
+        ],
+        "bonus": [
+          "sweet",
+          "tropical"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "orange",
+          "yellow",
+          "oval",
+          "fruit",
+          "stem"
+        ],
+        "bonus": [
+          "sweet",
+          "tropical"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "food_orange",
+    "category": "food",
+    "image": "food/orange.jpg",
+    "primaryWord": "orange",
+    "acceptedAnswers": [
+      "orange"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "orange",
+      "distractors": [
+        "apple",
+        "banana",
+        "biscuit"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This is a ___.",
+      "blankAnswers": [
+        "orange"
+      ]
+    },
+    "matching": {
+      "word": "orange"
+    },
+    "guidedDescription": {
+      "starter": "I see a orange that is ___.",
+      "keywords": {
+        "core": [
+          "round",
+          "orange colored",
+          "citrus",
+          "peel"
+        ],
+        "bonus": [
+          "juicy",
+          "fruit"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "round",
+          "orange colored",
+          "citrus",
+          "peel"
+        ],
+        "bonus": [
+          "juicy",
+          "fruit"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "food_pear",
+    "category": "food",
+    "image": "food/pear.jpg",
+    "primaryWord": "pear",
+    "acceptedAnswers": [
+      "pear"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "pear",
+      "distractors": [
+        "apple",
+        "banana",
+        "biscuit"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This is a ___.",
+      "blankAnswers": [
+        "pear"
+      ]
+    },
+    "matching": {
+      "word": "pear"
+    },
+    "guidedDescription": {
+      "starter": "I see a pear that is ___.",
+      "keywords": {
+        "core": [
+          "green",
+          "yellow",
+          "stem",
+          "fruit"
+        ],
+        "bonus": [
+          "shape",
+          "leaf"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "green",
+          "yellow",
+          "stem",
+          "fruit"
+        ],
+        "bonus": [
+          "shape",
+          "leaf"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "food_pineapple",
+    "category": "food",
+    "image": "food/pineapple.jpg",
+    "primaryWord": "pineapple",
+    "acceptedAnswers": [
+      "pineapple"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "pineapple",
+      "distractors": [
+        "apple",
+        "banana",
+        "biscuit"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This is a ___.",
+      "blankAnswers": [
+        "pineapple"
+      ]
+    },
+    "matching": {
+      "word": "pineapple"
+    },
+    "guidedDescription": {
+      "starter": "I see a pineapple that is ___.",
+      "keywords": {
+        "core": [
+          "spiky leaves",
+          "yellow",
+          "brown",
+          "fruit"
+        ],
+        "bonus": [
+          "tropical",
+          "crown"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "spiky leaves",
+          "yellow",
+          "brown",
+          "fruit"
+        ],
+        "bonus": [
+          "tropical",
+          "crown"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "food_popcorn",
+    "category": "food",
+    "image": "food/popcorn.jpg",
+    "primaryWord": "popcorn",
+    "acceptedAnswers": [
+      "popcorn"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "popcorn",
+      "distractors": [
+        "apple",
+        "banana",
+        "biscuit"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This is a ___.",
+      "blankAnswers": [
+        "popcorn"
+      ]
+    },
+    "matching": {
+      "word": "popcorn"
+    },
+    "guidedDescription": {
+      "starter": "I see a popcorn that is ___.",
+      "keywords": {
+        "core": [
+          "white",
+          "bucket",
+          "fluffy",
+          "snack"
+        ],
+        "bonus": [
+          "movie",
+          "bowl"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "white",
+          "bucket",
+          "fluffy",
+          "snack"
+        ],
+        "bonus": [
+          "movie",
+          "bowl"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "food_potato",
+    "category": "food",
+    "image": "food/potato.jpg",
+    "primaryWord": "potato",
+    "acceptedAnswers": [
+      "potato"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "potato",
+      "distractors": [
+        "apple",
+        "banana",
+        "biscuit"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This is a ___.",
+      "blankAnswers": [
+        "potato"
+      ]
+    },
+    "matching": {
+      "word": "potato"
+    },
+    "guidedDescription": {
+      "starter": "I see a potato that is ___.",
+      "keywords": {
+        "core": [
+          "brown",
+          "oval",
+          "vegetable"
+        ],
+        "bonus": [
+          "dirt",
+          "skin"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "brown",
+          "oval",
+          "vegetable"
+        ],
+        "bonus": [
+          "dirt",
+          "skin"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "food_red_chilli",
+    "category": "food",
+    "image": "food/red_chilli.jpg",
+    "primaryWord": "red chilli",
+    "acceptedAnswers": [
+      "red chilli",
+      "chilli",
+      "chili pepper"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "red chilli",
+      "distractors": [
+        "apple",
+        "banana",
+        "biscuit"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This is a ___.",
+      "blankAnswers": [
+        "red chilli",
+        "chilli",
+        "chili pepper"
+      ]
+    },
+    "matching": {
+      "word": "red chilli"
+    },
+    "guidedDescription": {
+      "starter": "I see a red chilli that is ___.",
+      "keywords": {
+        "core": [
+          "red",
+          "long",
+          "spicy",
+          "stem"
+        ],
+        "bonus": [
+          "hot",
+          "curved"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "red",
+          "long",
+          "spicy",
+          "stem"
+        ],
+        "bonus": [
+          "hot",
+          "curved"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "food_strawberry",
+    "category": "food",
+    "image": "food/strawberry.jpg",
+    "primaryWord": "strawberry",
+    "acceptedAnswers": [
+      "strawberry"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "strawberry",
+      "distractors": [
+        "apple",
+        "banana",
+        "biscuit"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This is a ___.",
+      "blankAnswers": [
+        "strawberry"
+      ]
+    },
+    "matching": {
+      "word": "strawberry"
+    },
+    "guidedDescription": {
+      "starter": "I see a strawberry that is ___.",
+      "keywords": {
+        "core": [
+          "red",
+          "seeds",
+          "leaf",
+          "heart shape"
+        ],
+        "bonus": [
+          "sweet",
+          "juicy"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "red",
+          "seeds",
+          "leaf",
+          "heart shape"
+        ],
+        "bonus": [
+          "sweet",
+          "juicy"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "food_watermelon",
+    "category": "food",
+    "image": "food/watermelon.jpg",
+    "primaryWord": "watermelon",
+    "acceptedAnswers": [
+      "watermelon"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "watermelon",
+      "distractors": [
+        "apple",
+        "banana",
+        "biscuit"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This is a ___.",
+      "blankAnswers": [
+        "watermelon"
+      ]
+    },
+    "matching": {
+      "word": "watermelon"
+    },
+    "guidedDescription": {
+      "starter": "I see a watermelon that is ___.",
+      "keywords": {
+        "core": [
+          "green",
+          "pink",
+          "red",
+          "seeds",
+          "slice"
+        ],
+        "bonus": [
+          "juicy",
+          "summer"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "green",
+          "pink",
+          "red",
+          "seeds",
+          "slice"
+        ],
+        "bonus": [
+          "juicy",
+          "summer"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "objects_bag",
+    "category": "objects",
+    "image": "objects/bag.jpg",
+    "primaryWord": "bag",
+    "acceptedAnswers": [
+      "bag"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "bag",
+      "distractors": [
+        "bed",
+        "books",
+        "camera"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This object is a ___.",
+      "blankAnswers": [
+        "bag"
+      ]
+    },
+    "matching": {
+      "word": "bag"
+    },
+    "guidedDescription": {
+      "starter": "I see a bag that is ___.",
+      "keywords": {
+        "core": [
+          "straps",
+          "zipper",
+          "carry",
+          "fabric"
+        ],
+        "bonus": [
+          "school bag",
+          "pockets"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "straps",
+          "zipper",
+          "carry",
+          "fabric"
+        ],
+        "bonus": [
+          "school bag",
+          "pockets"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "objects_bed",
+    "category": "objects",
+    "image": "objects/bed.jpg",
+    "primaryWord": "bed",
+    "acceptedAnswers": [
+      "bed"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "bed",
+      "distractors": [
+        "bag",
+        "books",
+        "camera"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This object is a ___.",
+      "blankAnswers": [
+        "bed"
+      ]
+    },
+    "matching": {
+      "word": "bed"
+    },
+    "guidedDescription": {
+      "starter": "I see a bed that is ___.",
+      "keywords": {
+        "core": [
+          "pillow",
+          "blanket",
+          "frame",
+          "mattress"
+        ],
+        "bonus": [
+          "sleep",
+          "wooden"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "pillow",
+          "blanket",
+          "frame",
+          "mattress"
+        ],
+        "bonus": [
+          "sleep",
+          "wooden"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "objects_books",
+    "category": "objects",
+    "image": "objects/books.jpg",
+    "primaryWord": "books",
+    "acceptedAnswers": [
+      "books",
+      "book"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "books",
+      "distractors": [
+        "bag",
+        "bed",
+        "camera"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This object is a ___.",
+      "blankAnswers": [
+        "books",
+        "book"
+      ]
+    },
+    "matching": {
+      "word": "books"
+    },
+    "guidedDescription": {
+      "starter": "I see a books that is ___.",
+      "keywords": {
+        "core": [
+          "pages",
+          "cover",
+          "stack",
+          "read"
+        ],
+        "bonus": [
+          "study",
+          "colorful"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "pages",
+          "cover",
+          "stack",
+          "read"
+        ],
+        "bonus": [
+          "study",
+          "colorful"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "objects_camera",
+    "category": "objects",
+    "image": "objects/camera.jpg",
+    "primaryWord": "camera",
+    "acceptedAnswers": [
+      "camera"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "camera",
+      "distractors": [
+        "bag",
+        "bed",
+        "books"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This object is a ___.",
+      "blankAnswers": [
+        "camera"
+      ]
+    },
+    "matching": {
+      "word": "camera"
+    },
+    "guidedDescription": {
+      "starter": "I see a camera that is ___.",
+      "keywords": {
+        "core": [
+          "lens",
+          "button",
+          "photo",
+          "strap"
+        ],
+        "bonus": [
+          "click",
+          "picture"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "lens",
+          "button",
+          "photo",
+          "strap"
+        ],
+        "bonus": [
+          "click",
+          "picture"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "objects_cap",
+    "category": "objects",
+    "image": "objects/cap.jpg",
+    "primaryWord": "cap",
+    "acceptedAnswers": [
+      "cap",
+      "hat"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "cap",
+      "distractors": [
+        "bag",
+        "bed",
+        "books"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This object is a ___.",
+      "blankAnswers": [
+        "cap",
+        "hat"
+      ]
+    },
+    "matching": {
+      "word": "cap"
+    },
+    "guidedDescription": {
+      "starter": "I see a cap that is ___.",
+      "keywords": {
+        "core": [
+          "brim",
+          "head",
+          "cloth"
+        ],
+        "bonus": [
+          "colorful",
+          "sports"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "brim",
+          "head",
+          "cloth"
+        ],
+        "bonus": [
+          "colorful",
+          "sports"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "objects_chair",
+    "category": "objects",
+    "image": "objects/chair.jpg",
+    "primaryWord": "chair",
+    "acceptedAnswers": [
+      "chair"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "chair",
+      "distractors": [
+        "bag",
+        "bed",
+        "books"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This object is a ___.",
+      "blankAnswers": [
+        "chair"
+      ]
+    },
+    "matching": {
+      "word": "chair"
+    },
+    "guidedDescription": {
+      "starter": "I see a chair that is ___.",
+      "keywords": {
+        "core": [
+          "legs",
+          "seat",
+          "backrest",
+          "wood"
+        ],
+        "bonus": [
+          "sit",
+          "furniture"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "legs",
+          "seat",
+          "backrest",
+          "wood"
+        ],
+        "bonus": [
+          "sit",
+          "furniture"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "objects_comb",
+    "category": "objects",
+    "image": "objects/comb.jpg",
+    "primaryWord": "comb",
+    "acceptedAnswers": [
+      "comb"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "comb",
+      "distractors": [
+        "bag",
+        "bed",
+        "books"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This object is a ___.",
+      "blankAnswers": [
+        "comb"
+      ]
+    },
+    "matching": {
+      "word": "comb"
+    },
+    "guidedDescription": {
+      "starter": "I see a comb that is ___.",
+      "keywords": {
+        "core": [
+          "teeth",
+          "plastic",
+          "hair"
+        ],
+        "bonus": [
+          "handle",
+          "grooming"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "teeth",
+          "plastic",
+          "hair"
+        ],
+        "bonus": [
+          "handle",
+          "grooming"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "objects_cup",
+    "category": "objects",
+    "image": "objects/cup.jpg",
+    "primaryWord": "cup",
+    "acceptedAnswers": [
+      "cup"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "cup",
+      "distractors": [
+        "bag",
+        "bed",
+        "books"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This object is a ___.",
+      "blankAnswers": [
+        "cup"
+      ]
+    },
+    "matching": {
+      "word": "cup"
+    },
+    "guidedDescription": {
+      "starter": "I see a cup that is ___.",
+      "keywords": {
+        "core": [
+          "handle",
+          "round",
+          "drink"
+        ],
+        "bonus": [
+          "ceramic",
+          "mug"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "handle",
+          "round",
+          "drink"
+        ],
+        "bonus": [
+          "ceramic",
+          "mug"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "objects_door",
+    "category": "objects",
+    "image": "objects/door.jpg",
+    "primaryWord": "door",
+    "acceptedAnswers": [
+      "door"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "door",
+      "distractors": [
+        "bag",
+        "bed",
+        "books"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This object is a ___.",
+      "blankAnswers": [
+        "door"
+      ]
+    },
+    "matching": {
+      "word": "door"
+    },
+    "guidedDescription": {
+      "starter": "I see a door that is ___.",
+      "keywords": {
+        "core": [
+          "handle",
+          "frame",
+          "wood",
+          "hinge"
+        ],
+        "bonus": [
+          "entrance",
+          "closed"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "handle",
+          "frame",
+          "wood",
+          "hinge"
+        ],
+        "bonus": [
+          "entrance",
+          "closed"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "objects_fan",
+    "category": "objects",
+    "image": "objects/fan.png",
+    "primaryWord": "fan",
+    "acceptedAnswers": [
+      "fan"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "fan",
+      "distractors": [
+        "bag",
+        "bed",
+        "books"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This object is a ___.",
+      "blankAnswers": [
+        "fan"
+      ]
+    },
+    "matching": {
+      "word": "fan"
+    },
+    "guidedDescription": {
+      "starter": "I see a fan that is ___.",
+      "keywords": {
+        "core": [
+          "blades",
+          "spin",
+          "air",
+          "motor"
+        ],
+        "bonus": [
+          "cool",
+          "electric"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "blades",
+          "spin",
+          "air",
+          "motor"
+        ],
+        "bonus": [
+          "cool",
+          "electric"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "objects_guitar",
+    "category": "objects",
+    "image": "objects/guitar.jpg",
+    "primaryWord": "guitar",
+    "acceptedAnswers": [
+      "guitar"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "guitar",
+      "distractors": [
+        "bag",
+        "bed",
+        "books"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This object is a ___.",
+      "blankAnswers": [
+        "guitar"
+      ]
+    },
+    "matching": {
+      "word": "guitar"
+    },
+    "guidedDescription": {
+      "starter": "I see a guitar that is ___.",
+      "keywords": {
+        "core": [
+          "strings",
+          "neck",
+          "body",
+          "wooden"
+        ],
+        "bonus": [
+          "music",
+          "strum"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "strings",
+          "neck",
+          "body",
+          "wooden"
+        ],
+        "bonus": [
+          "music",
+          "strum"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "objects_key",
+    "category": "objects",
+    "image": "objects/key.jpg",
+    "primaryWord": "key",
+    "acceptedAnswers": [
+      "key"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "key",
+      "distractors": [
+        "bag",
+        "bed",
+        "books"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This object is a ___.",
+      "blankAnswers": [
+        "key"
+      ]
+    },
+    "matching": {
+      "word": "key"
+    },
+    "guidedDescription": {
+      "starter": "I see a key that is ___.",
+      "keywords": {
+        "core": [
+          "metal",
+          "teeth",
+          "ring",
+          "lock"
+        ],
+        "bonus": [
+          "small",
+          "silver"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "metal",
+          "teeth",
+          "ring",
+          "lock"
+        ],
+        "bonus": [
+          "small",
+          "silver"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "objects_mic",
+    "category": "objects",
+    "image": "objects/mic.jpg",
+    "primaryWord": "mic",
+    "acceptedAnswers": [
+      "mic",
+      "microphone"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "mic",
+      "distractors": [
+        "bag",
+        "bed",
+        "books"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This object is a ___.",
+      "blankAnswers": [
+        "mic",
+        "microphone"
+      ]
+    },
+    "matching": {
+      "word": "mic"
+    },
+    "guidedDescription": {
+      "starter": "I see a mic that is ___.",
+      "keywords": {
+        "core": [
+          "stand",
+          "sing",
+          "sound"
+        ],
+        "bonus": [
+          "stage",
+          "recording"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "stand",
+          "sing",
+          "sound"
+        ],
+        "bonus": [
+          "stage",
+          "recording"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "objects_pencil",
+    "category": "objects",
+    "image": "objects/pencil.jpg",
+    "primaryWord": "pencil",
+    "acceptedAnswers": [
+      "pencil"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "pencil",
+      "distractors": [
+        "bag",
+        "bed",
+        "books"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This object is a ___.",
+      "blankAnswers": [
+        "pencil"
+      ]
+    },
+    "matching": {
+      "word": "pencil"
+    },
+    "guidedDescription": {
+      "starter": "I see a pencil that is ___.",
+      "keywords": {
+        "core": [
+          "tip",
+          "wood",
+          "write",
+          "eraser"
+        ],
+        "bonus": [
+          "yellow",
+          "sharp"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "tip",
+          "wood",
+          "write",
+          "eraser"
+        ],
+        "bonus": [
+          "yellow",
+          "sharp"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "objects_phone",
+    "category": "objects",
+    "image": "objects/phone.jpg",
+    "primaryWord": "phone",
+    "acceptedAnswers": [
+      "phone"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "phone",
+      "distractors": [
+        "bag",
+        "bed",
+        "books"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This object is a ___.",
+      "blankAnswers": [
+        "phone"
+      ]
+    },
+    "matching": {
+      "word": "phone"
+    },
+    "guidedDescription": {
+      "starter": "I see a phone that is ___.",
+      "keywords": {
+        "core": [
+          "screen",
+          "buttons",
+          "call"
+        ],
+        "bonus": [
+          "mobile",
+          "touch"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "screen",
+          "buttons",
+          "call"
+        ],
+        "bonus": [
+          "mobile",
+          "touch"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "objects_shoes",
+    "category": "objects",
+    "image": "objects/shoes.jpg",
+    "primaryWord": "shoes",
+    "acceptedAnswers": [
+      "shoes"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "shoes",
+      "distractors": [
+        "bag",
+        "bed",
+        "books"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This object is a ___.",
+      "blankAnswers": [
+        "shoes"
+      ]
+    },
+    "matching": {
+      "word": "shoes"
+    },
+    "guidedDescription": {
+      "starter": "I see a shoes that is ___.",
+      "keywords": {
+        "core": [
+          "laces",
+          "sole",
+          "pair",
+          "feet"
+        ],
+        "bonus": [
+          "sneakers",
+          "wear"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "laces",
+          "sole",
+          "pair",
+          "feet"
+        ],
+        "bonus": [
+          "sneakers",
+          "wear"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "objects_soap",
+    "category": "objects",
+    "image": "objects/soap.jpg",
+    "primaryWord": "soap",
+    "acceptedAnswers": [
+      "soap"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "soap",
+      "distractors": [
+        "bag",
+        "bed",
+        "books"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This object is a ___.",
+      "blankAnswers": [
+        "soap"
+      ]
+    },
+    "matching": {
+      "word": "soap"
+    },
+    "guidedDescription": {
+      "starter": "I see a soap that is ___.",
+      "keywords": {
+        "core": [
+          "bar",
+          "wash",
+          "bubbles",
+          "clean"
+        ],
+        "bonus": [
+          "bathroom",
+          "scented"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "bar",
+          "wash",
+          "bubbles",
+          "clean"
+        ],
+        "bonus": [
+          "bathroom",
+          "scented"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "objects_table",
+    "category": "objects",
+    "image": "objects/table.jpg",
+    "primaryWord": "table",
+    "acceptedAnswers": [
+      "table"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "table",
+      "distractors": [
+        "bag",
+        "bed",
+        "books"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This object is a ___.",
+      "blankAnswers": [
+        "table"
+      ]
+    },
+    "matching": {
+      "word": "table"
+    },
+    "guidedDescription": {
+      "starter": "I see a table that is ___.",
+      "keywords": {
+        "core": [
+          "legs",
+          "flat",
+          "wood",
+          "surface"
+        ],
+        "bonus": [
+          "furniture",
+          "dining"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "legs",
+          "flat",
+          "wood",
+          "surface"
+        ],
+        "bonus": [
+          "furniture",
+          "dining"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "objects_watch",
+    "category": "objects",
+    "image": "objects/watch.jpg",
+    "primaryWord": "watch",
+    "acceptedAnswers": [
+      "watch"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "watch",
+      "distractors": [
+        "bag",
+        "bed",
+        "books"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This object is a ___.",
+      "blankAnswers": [
+        "watch"
+      ]
+    },
+    "matching": {
+      "word": "watch"
+    },
+    "guidedDescription": {
+      "starter": "I see a watch that is ___.",
+      "keywords": {
+        "core": [
+          "strap",
+          "dial",
+          "hands",
+          "time"
+        ],
+        "bonus": [
+          "wrist",
+          "wear"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "strap",
+          "dial",
+          "hands",
+          "time"
+        ],
+        "bonus": [
+          "wrist",
+          "wear"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "vehicle_bike",
+    "category": "vehicle",
+    "image": "vehicle/bike.jpg",
+    "primaryWord": "bike",
+    "acceptedAnswers": [
+      "bike",
+      "motorbike"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "bike",
+      "distractors": [
+        "bus",
+        "car",
+        "cycle"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This vehicle is a ___.",
+      "blankAnswers": [
+        "bike",
+        "motorbike"
+      ]
+    },
+    "matching": {
+      "word": "bike"
+    },
+    "guidedDescription": {
+      "starter": "I see a bike that is ___.",
+      "keywords": {
+        "core": [
+          "two wheels",
+          "engine",
+          "seat",
+          "handle"
+        ],
+        "bonus": [
+          "ride",
+          "fast"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "two wheels",
+          "engine",
+          "seat",
+          "handle"
+        ],
+        "bonus": [
+          "ride",
+          "fast"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "vehicle_bus",
+    "category": "vehicle",
+    "image": "vehicle/bus.jpg",
+    "primaryWord": "bus",
+    "acceptedAnswers": [
+      "bus"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "bus",
+      "distractors": [
+        "bike",
+        "car",
+        "cycle"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This vehicle is a ___.",
+      "blankAnswers": [
+        "bus"
+      ]
+    },
+    "matching": {
+      "word": "bus"
+    },
+    "guidedDescription": {
+      "starter": "I see a bus that is ___.",
+      "keywords": {
+        "core": [
+          "windows",
+          "wheels",
+          "doors",
+          "seats",
+          "long"
+        ],
+        "bonus": [
+          "passengers",
+          "road"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "windows",
+          "wheels",
+          "doors",
+          "seats",
+          "long"
+        ],
+        "bonus": [
+          "passengers",
+          "road"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "vehicle_car",
+    "category": "vehicle",
+    "image": "vehicle/car.jpg",
+    "primaryWord": "car",
+    "acceptedAnswers": [
+      "car"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "car",
+      "distractors": [
+        "bike",
+        "bus",
+        "cycle"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This vehicle is a ___.",
+      "blankAnswers": [
+        "car"
+      ]
+    },
+    "matching": {
+      "word": "car"
+    },
+    "guidedDescription": {
+      "starter": "I see a car that is ___.",
+      "keywords": {
+        "core": [
+          "wheels",
+          "windows",
+          "doors",
+          "drive"
+        ],
+        "bonus": [
+          "road",
+          "engine"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "wheels",
+          "windows",
+          "doors",
+          "drive"
+        ],
+        "bonus": [
+          "road",
+          "engine"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "vehicle_cycle",
+    "category": "vehicle",
+    "image": "vehicle/cycle.jpg",
+    "primaryWord": "cycle",
+    "acceptedAnswers": [
+      "cycle",
+      "bicycle"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "cycle",
+      "distractors": [
+        "bike",
+        "bus",
+        "car"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This vehicle is a ___.",
+      "blankAnswers": [
+        "cycle",
+        "bicycle"
+      ]
+    },
+    "matching": {
+      "word": "cycle"
+    },
+    "guidedDescription": {
+      "starter": "I see a cycle that is ___.",
+      "keywords": {
+        "core": [
+          "two wheels",
+          "pedal",
+          "handle",
+          "seat"
+        ],
+        "bonus": [
+          "ride",
+          "chain"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "two wheels",
+          "pedal",
+          "handle",
+          "seat"
+        ],
+        "bonus": [
+          "ride",
+          "chain"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "vehicle_plane",
+    "category": "vehicle",
+    "image": "vehicle/plane.jpg",
+    "primaryWord": "plane",
+    "acceptedAnswers": [
+      "plane",
+      "airplane"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "plane",
+      "distractors": [
+        "bike",
+        "bus",
+        "car"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This vehicle is a ___.",
+      "blankAnswers": [
+        "plane",
+        "airplane"
+      ]
+    },
+    "matching": {
+      "word": "plane"
+    },
+    "guidedDescription": {
+      "starter": "I see a plane that is ___.",
+      "keywords": {
+        "core": [
+          "wings",
+          "fly",
+          "engine",
+          "sky"
+        ],
+        "bonus": [
+          "airport",
+          "clouds"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "wings",
+          "fly",
+          "engine",
+          "sky"
+        ],
+        "bonus": [
+          "airport",
+          "clouds"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "vehicle_rocket",
+    "category": "vehicle",
+    "image": "vehicle/rocket.jpg",
+    "primaryWord": "rocket",
+    "acceptedAnswers": [
+      "rocket"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "rocket",
+      "distractors": [
+        "bike",
+        "bus",
+        "car"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This vehicle is a ___.",
+      "blankAnswers": [
+        "rocket"
+      ]
+    },
+    "matching": {
+      "word": "rocket"
+    },
+    "guidedDescription": {
+      "starter": "I see a rocket that is ___.",
+      "keywords": {
+        "core": [
+          "fly",
+          "space",
+          "fire",
+          "launch"
+        ],
+        "bonus": [
+          "stars",
+          "fast"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "fly",
+          "space",
+          "fire",
+          "launch"
+        ],
+        "bonus": [
+          "stars",
+          "fast"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "vehicle_scooter",
+    "category": "vehicle",
+    "image": "vehicle/scooter.jpg",
+    "primaryWord": "scooter",
+    "acceptedAnswers": [
+      "scooter"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "scooter",
+      "distractors": [
+        "bike",
+        "bus",
+        "car"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This vehicle is a ___.",
+      "blankAnswers": [
+        "scooter"
+      ]
+    },
+    "matching": {
+      "word": "scooter"
+    },
+    "guidedDescription": {
+      "starter": "I see a scooter that is ___.",
+      "keywords": {
+        "core": [
+          "two wheels",
+          "seat",
+          "handle",
+          "ride"
+        ],
+        "bonus": [
+          "engine",
+          "road"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "two wheels",
+          "seat",
+          "handle",
+          "ride"
+        ],
+        "bonus": [
+          "engine",
+          "road"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "vehicle_ship",
+    "category": "vehicle",
+    "image": "vehicle/ship.jpg",
+    "primaryWord": "ship",
+    "acceptedAnswers": [
+      "ship",
+      "boat"
+    ],
+    "difficulty": 1,
+    "mcq": {
+      "correct": "ship",
+      "distractors": [
+        "bike",
+        "bus",
+        "car"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "This vehicle is a ___.",
+      "blankAnswers": [
+        "ship",
+        "boat"
+      ]
+    },
+    "matching": {
+      "word": "ship"
+    },
+    "guidedDescription": {
+      "starter": "I see a ship that is ___.",
+      "keywords": {
+        "core": [
+          "water",
+          "sail",
+          "deck",
+          "float"
+        ],
+        "bonus": [
+          "ocean",
+          "sea"
+        ]
+      },
+      "minWords": 4
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "water",
+          "sail",
+          "deck",
+          "float"
+        ],
+        "bonus": [
+          "ocean",
+          "sea"
+        ]
+      },
+      "minWords": 6,
+      "requiresVerb": false
+    }
+  },
+  {
+    "id": "actions_brushing",
+    "category": "actions",
+    "image": "actions/brushing.jpg",
+    "primaryWord": "brushing teeth",
+    "acceptedAnswers": [
+      "brushing teeth",
+      "brushing",
+      "brush teeth"
+    ],
+    "difficulty": 2,
+    "mcq": {
+      "correct": "brushing teeth",
+      "distractors": [
+        "drawing",
+        "eating breakfast",
+        "listening to music"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "The child is ___.",
+      "blankAnswers": [
+        "brushing teeth",
+        "brushing",
+        "brush teeth"
+      ]
+    },
+    "matching": {
+      "word": "brushing teeth"
+    },
+    "guidedDescription": {
+      "starter": "I see someone who is ___.",
+      "keywords": {
+        "core": [
+          "boy",
+          "brushing",
+          "teeth",
+          "toothbrush"
+        ],
+        "bonus": [
+          "cup",
+          "toothpaste",
+          "foam",
+          "morning"
+        ]
+      },
+      "minWords": 5
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "boy",
+          "brushing",
+          "teeth",
+          "toothbrush"
+        ],
+        "bonus": [
+          "cup",
+          "toothpaste",
+          "foam",
+          "morning"
+        ]
+      },
+      "minWords": 8,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "actions_drawing",
+    "category": "actions",
+    "image": "actions/drawing.jpg",
+    "primaryWord": "drawing",
+    "acceptedAnswers": [
+      "drawing",
+      "coloring"
+    ],
+    "difficulty": 2,
+    "mcq": {
+      "correct": "drawing",
+      "distractors": [
+        "brushing teeth",
+        "eating breakfast",
+        "listening to music"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "The child is ___.",
+      "blankAnswers": [
+        "drawing",
+        "coloring"
+      ]
+    },
+    "matching": {
+      "word": "drawing"
+    },
+    "guidedDescription": {
+      "starter": "I see someone who is ___.",
+      "keywords": {
+        "core": [
+          "boy",
+          "drawing",
+          "crayon",
+          "notebook"
+        ],
+        "bonus": [
+          "flower",
+          "table",
+          "colors"
+        ]
+      },
+      "minWords": 5
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "boy",
+          "drawing",
+          "crayon",
+          "notebook"
+        ],
+        "bonus": [
+          "flower",
+          "table",
+          "colors"
+        ]
+      },
+      "minWords": 8,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "actions_eating",
+    "category": "actions",
+    "image": "actions/eating.jpg",
+    "primaryWord": "eating breakfast",
+    "acceptedAnswers": [
+      "eating breakfast",
+      "eating"
+    ],
+    "difficulty": 2,
+    "mcq": {
+      "correct": "eating breakfast",
+      "distractors": [
+        "brushing teeth",
+        "drawing",
+        "listening to music"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "The child is ___.",
+      "blankAnswers": [
+        "eating breakfast",
+        "eating"
+      ]
+    },
+    "matching": {
+      "word": "eating breakfast"
+    },
+    "guidedDescription": {
+      "starter": "I see someone who is ___.",
+      "keywords": {
+        "core": [
+          "girl",
+          "eating",
+          "fork",
+          "table"
+        ],
+        "bonus": [
+          "strawberries",
+          "egg",
+          "bread",
+          "milk",
+          "juice"
+        ]
+      },
+      "minWords": 5
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "girl",
+          "eating",
+          "fork",
+          "table"
+        ],
+        "bonus": [
+          "strawberries",
+          "egg",
+          "bread",
+          "milk",
+          "juice"
+        ]
+      },
+      "minWords": 8,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "actions_listening",
+    "category": "actions",
+    "image": "actions/listening.jpg",
+    "primaryWord": "listening to music",
+    "acceptedAnswers": [
+      "listening to music",
+      "listening"
+    ],
+    "difficulty": 2,
+    "mcq": {
+      "correct": "listening to music",
+      "distractors": [
+        "brushing teeth",
+        "drawing",
+        "eating breakfast"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "The child is ___.",
+      "blankAnswers": [
+        "listening to music",
+        "listening"
+      ]
+    },
+    "matching": {
+      "word": "listening to music"
+    },
+    "guidedDescription": {
+      "starter": "I see someone who is ___.",
+      "keywords": {
+        "core": [
+          "boy",
+          "listening",
+          "headphones",
+          "phone"
+        ],
+        "bonus": [
+          "music notes",
+          "dancing"
+        ]
+      },
+      "minWords": 5
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "boy",
+          "listening",
+          "headphones",
+          "phone"
+        ],
+        "bonus": [
+          "music notes",
+          "dancing"
+        ]
+      },
+      "minWords": 8,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "actions_painting",
+    "category": "actions",
+    "image": "actions/painting.jpg",
+    "primaryWord": "painting",
+    "acceptedAnswers": [
+      "painting"
+    ],
+    "difficulty": 2,
+    "mcq": {
+      "correct": "painting",
+      "distractors": [
+        "brushing teeth",
+        "drawing",
+        "eating breakfast"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "The child is ___.",
+      "blankAnswers": [
+        "painting"
+      ]
+    },
+    "matching": {
+      "word": "painting"
+    },
+    "guidedDescription": {
+      "starter": "I see someone who is ___.",
+      "keywords": {
+        "core": [
+          "boy",
+          "painting",
+          "brush",
+          "easel"
+        ],
+        "bonus": [
+          "palette",
+          "rainbow",
+          "colors"
+        ]
+      },
+      "minWords": 5
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "boy",
+          "painting",
+          "brush",
+          "easel"
+        ],
+        "bonus": [
+          "palette",
+          "rainbow",
+          "colors"
+        ]
+      },
+      "minWords": 8,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "actions_singing",
+    "category": "actions",
+    "image": "actions/singing.jpg",
+    "primaryWord": "singing",
+    "acceptedAnswers": [
+      "singing"
+    ],
+    "difficulty": 2,
+    "mcq": {
+      "correct": "singing",
+      "distractors": [
+        "brushing teeth",
+        "drawing",
+        "eating breakfast"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "The child is ___.",
+      "blankAnswers": [
+        "singing"
+      ]
+    },
+    "matching": {
+      "word": "singing"
+    },
+    "guidedDescription": {
+      "starter": "I see someone who is ___.",
+      "keywords": {
+        "core": [
+          "kid",
+          "singing",
+          "microphone",
+          "headphones"
+        ],
+        "bonus": [
+          "music notes",
+          "hearts"
+        ]
+      },
+      "minWords": 5
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "kid",
+          "singing",
+          "microphone",
+          "headphones"
+        ],
+        "bonus": [
+          "music notes",
+          "hearts"
+        ]
+      },
+      "minWords": 8,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "actions_sleeping",
+    "category": "actions",
+    "image": "actions/sleeping.jpg",
+    "primaryWord": "sleeping",
+    "acceptedAnswers": [
+      "sleeping"
+    ],
+    "difficulty": 2,
+    "mcq": {
+      "correct": "sleeping",
+      "distractors": [
+        "brushing teeth",
+        "drawing",
+        "eating breakfast"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "The child is ___.",
+      "blankAnswers": [
+        "sleeping"
+      ]
+    },
+    "matching": {
+      "word": "sleeping"
+    },
+    "guidedDescription": {
+      "starter": "I see someone who is ___.",
+      "keywords": {
+        "core": [
+          "girl",
+          "sleeping",
+          "bed",
+          "pillow"
+        ],
+        "bonus": [
+          "blanket",
+          "blue"
+        ]
+      },
+      "minWords": 5
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "girl",
+          "sleeping",
+          "bed",
+          "pillow"
+        ],
+        "bonus": [
+          "blanket",
+          "blue"
+        ]
+      },
+      "minWords": 8,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "actions_studying",
+    "category": "actions",
+    "image": "actions/studying.jpg",
+    "primaryWord": "studying",
+    "acceptedAnswers": [
+      "studying"
+    ],
+    "difficulty": 2,
+    "mcq": {
+      "correct": "studying",
+      "distractors": [
+        "brushing teeth",
+        "drawing",
+        "eating breakfast"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "The child is ___.",
+      "blankAnswers": [
+        "studying"
+      ]
+    },
+    "matching": {
+      "word": "studying"
+    },
+    "guidedDescription": {
+      "starter": "I see someone who is ___.",
+      "keywords": {
+        "core": [
+          "girl",
+          "studying",
+          "book",
+          "pencil"
+        ],
+        "bonus": [
+          "desk",
+          "lamp",
+          "smiling"
+        ]
+      },
+      "minWords": 5
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "girl",
+          "studying",
+          "book",
+          "pencil"
+        ],
+        "bonus": [
+          "desk",
+          "lamp",
+          "smiling"
+        ]
+      },
+      "minWords": 8,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "actions_swimming",
+    "category": "actions",
+    "image": "actions/swimming.jpg",
+    "primaryWord": "swimming",
+    "acceptedAnswers": [
+      "swimming"
+    ],
+    "difficulty": 2,
+    "mcq": {
+      "correct": "swimming",
+      "distractors": [
+        "brushing teeth",
+        "drawing",
+        "eating breakfast"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "The child is ___.",
+      "blankAnswers": [
+        "swimming"
+      ]
+    },
+    "matching": {
+      "word": "swimming"
+    },
+    "guidedDescription": {
+      "starter": "I see someone who is ___.",
+      "keywords": {
+        "core": [
+          "boy",
+          "swimming",
+          "water",
+          "splash"
+        ],
+        "bonus": [
+          "waving",
+          "pool"
+        ]
+      },
+      "minWords": 5
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "boy",
+          "swimming",
+          "water",
+          "splash"
+        ],
+        "bonus": [
+          "waving",
+          "pool"
+        ]
+      },
+      "minWords": 8,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "actions_wakeup",
+    "category": "actions",
+    "image": "actions/wakeup.jpg",
+    "primaryWord": "waking up",
+    "acceptedAnswers": [
+      "waking up",
+      "wake up",
+      "stretching"
+    ],
+    "difficulty": 2,
+    "mcq": {
+      "correct": "waking up",
+      "distractors": [
+        "brushing teeth",
+        "drawing",
+        "eating breakfast"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "The child is ___.",
+      "blankAnswers": [
+        "waking up",
+        "wake up",
+        "stretching"
+      ]
+    },
+    "matching": {
+      "word": "waking up"
+    },
+    "guidedDescription": {
+      "starter": "I see someone who is ___.",
+      "keywords": {
+        "core": [
+          "girl",
+          "waking up",
+          "stretching",
+          "bed"
+        ],
+        "bonus": [
+          "alarm clock",
+          "yawning"
+        ]
+      },
+      "minWords": 5
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "girl",
+          "waking up",
+          "stretching",
+          "bed"
+        ],
+        "bonus": [
+          "alarm clock",
+          "yawning"
+        ]
+      },
+      "minWords": 8,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "actions_workout",
+    "category": "actions",
+    "image": "actions/workout.jpg",
+    "primaryWord": "exercising",
+    "acceptedAnswers": [
+      "exercising",
+      "working out",
+      "workout"
+    ],
+    "difficulty": 2,
+    "mcq": {
+      "correct": "exercising",
+      "distractors": [
+        "brushing teeth",
+        "drawing",
+        "eating breakfast"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "The child is ___.",
+      "blankAnswers": [
+        "exercising",
+        "working out",
+        "workout"
+      ]
+    },
+    "matching": {
+      "word": "exercising"
+    },
+    "guidedDescription": {
+      "starter": "I see someone who is ___.",
+      "keywords": {
+        "core": [
+          "girl",
+          "exercising",
+          "dumbbells",
+          "lifting"
+        ],
+        "bonus": [
+          "red shirt",
+          "strong"
+        ]
+      },
+      "minWords": 5
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "girl",
+          "exercising",
+          "dumbbells",
+          "lifting"
+        ],
+        "bonus": [
+          "red shirt",
+          "strong"
+        ]
+      },
+      "minWords": 8,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "emotions_angry",
+    "category": "emotions",
+    "image": "emotions/angry.jpg",
+    "primaryWord": "angry",
+    "acceptedAnswers": [
+      "angry",
+      "mad",
+      "upset",
+      "furious"
+    ],
+    "difficulty": 3,
+    "mcq": {
+      "correct": "angry",
+      "distractors": [
+        "crying",
+        "happy",
+        "laughing"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "The boy looks ___.",
+      "blankAnswers": [
+        "angry",
+        "mad",
+        "upset",
+        "furious"
+      ]
+    },
+    "matching": {
+      "word": "angry"
+    },
+    "guidedDescription": {
+      "starter": "The boy looks ___ because ___.",
+      "keywords": {
+        "core": [
+          "boy",
+          "angry",
+          "arms crossed",
+          "frowning"
+        ],
+        "bonus": [
+          "steam",
+          "red face",
+          "black shirt"
+        ]
+      },
+      "minWords": 5
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "boy",
+          "angry",
+          "arms crossed",
+          "frowning"
+        ],
+        "bonus": [
+          "steam",
+          "red face",
+          "black shirt"
+        ]
+      },
+      "minWords": 8,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "emotions_crying",
+    "category": "emotions",
+    "image": "emotions/crying.jpg",
+    "primaryWord": "crying",
+    "acceptedAnswers": [
+      "crying",
+      "sad",
+      "upset"
+    ],
+    "difficulty": 3,
+    "mcq": {
+      "correct": "crying",
+      "distractors": [
+        "angry",
+        "happy",
+        "laughing"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "The boy looks ___.",
+      "blankAnswers": [
+        "crying",
+        "sad",
+        "upset"
+      ]
+    },
+    "matching": {
+      "word": "crying"
+    },
+    "guidedDescription": {
+      "starter": "The boy looks ___ because ___.",
+      "keywords": {
+        "core": [
+          "boy",
+          "crying",
+          "tears",
+          "sad face"
+        ],
+        "bonus": [
+          "sitting",
+          "yellow shirt"
+        ]
+      },
+      "minWords": 5
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "boy",
+          "crying",
+          "tears",
+          "sad face"
+        ],
+        "bonus": [
+          "sitting",
+          "yellow shirt"
+        ]
+      },
+      "minWords": 8,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "emotions_happy",
+    "category": "emotions",
+    "image": "emotions/happy.jpg",
+    "primaryWord": "happy",
+    "acceptedAnswers": [
+      "happy",
+      "joyful",
+      "glad"
+    ],
+    "difficulty": 3,
+    "mcq": {
+      "correct": "happy",
+      "distractors": [
+        "angry",
+        "crying",
+        "laughing"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "The boy looks ___.",
+      "blankAnswers": [
+        "happy",
+        "joyful",
+        "glad"
+      ]
+    },
+    "matching": {
+      "word": "happy"
+    },
+    "guidedDescription": {
+      "starter": "The boy looks ___ because ___.",
+      "keywords": {
+        "core": [
+          "boy",
+          "happy",
+          "smiling",
+          "blue shirt"
+        ],
+        "bonus": [
+          "cheerful",
+          "bright"
+        ]
+      },
+      "minWords": 5
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "boy",
+          "happy",
+          "smiling",
+          "blue shirt"
+        ],
+        "bonus": [
+          "cheerful",
+          "bright"
+        ]
+      },
+      "minWords": 8,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "emotions_laughing",
+    "category": "emotions",
+    "image": "emotions/laughing.jpg",
+    "primaryWord": "laughing",
+    "acceptedAnswers": [
+      "laughing",
+      "giggling"
+    ],
+    "difficulty": 3,
+    "mcq": {
+      "correct": "laughing",
+      "distractors": [
+        "angry",
+        "crying",
+        "happy"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "The boy looks ___.",
+      "blankAnswers": [
+        "laughing",
+        "giggling"
+      ]
+    },
+    "matching": {
+      "word": "laughing"
+    },
+    "guidedDescription": {
+      "starter": "The boy looks ___ because ___.",
+      "keywords": {
+        "core": [
+          "boy",
+          "laughing",
+          "open mouth",
+          "tears of joy"
+        ],
+        "bonus": [
+          "ha ha",
+          "funny"
+        ]
+      },
+      "minWords": 5
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "boy",
+          "laughing",
+          "open mouth",
+          "tears of joy"
+        ],
+        "bonus": [
+          "ha ha",
+          "funny"
+        ]
+      },
+      "minWords": 8,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "emotions_scared",
+    "category": "emotions",
+    "image": "emotions/scared.jpg",
+    "primaryWord": "scared",
+    "acceptedAnswers": [
+      "scared",
+      "afraid",
+      "frightened",
+      "fearful"
+    ],
+    "difficulty": 3,
+    "mcq": {
+      "correct": "scared",
+      "distractors": [
+        "angry",
+        "crying",
+        "happy"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "The boy looks ___.",
+      "blankAnswers": [
+        "scared",
+        "afraid",
+        "frightened",
+        "fearful"
+      ]
+    },
+    "matching": {
+      "word": "scared"
+    },
+    "guidedDescription": {
+      "starter": "The boy looks ___ because ___.",
+      "keywords": {
+        "core": [
+          "boy",
+          "scared",
+          "hands up",
+          "wide eyes"
+        ],
+        "bonus": [
+          "crouching",
+          "blue shirt"
+        ]
+      },
+      "minWords": 5
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "boy",
+          "scared",
+          "hands up",
+          "wide eyes"
+        ],
+        "bonus": [
+          "crouching",
+          "blue shirt"
+        ]
+      },
+      "minWords": 8,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "scenario_farmer",
+    "category": "scenario",
+    "image": "scenario/farmer.jpg",
+    "primaryWord": "farmers threshing grain",
+    "acceptedAnswers": [
+      "farmers threshing grain",
+      "farming",
+      "threshing"
+    ],
+    "difficulty": 4,
+    "mcq": {
+      "correct": "farmers threshing grain",
+      "distractors": [
+        "planting rice",
+        "farmers planting rice",
+        "boy fishing"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "In this picture, people are ___.",
+      "blankAnswers": [
+        "farmers threshing grain",
+        "farming",
+        "threshing"
+      ]
+    },
+    "matching": {
+      "word": "farmers threshing grain"
+    },
+    "guidedDescription": {
+      "starter": "I see ___ who are ___ near a ___.",
+      "keywords": {
+        "core": [
+          "farmers",
+          "field",
+          "grain",
+          "threshing",
+          "cloth",
+          "sacks"
+        ],
+        "bonus": [
+          "storm clouds",
+          "lightning",
+          "ox cart",
+          "cows",
+          "village huts",
+          "palm trees",
+          "women in saree"
+        ]
+      },
+      "minWords": 6
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "farmers",
+          "field",
+          "grain",
+          "threshing",
+          "cloth",
+          "sacks"
+        ],
+        "bonus": [
+          "storm clouds",
+          "lightning",
+          "ox cart",
+          "cows",
+          "village huts",
+          "palm trees",
+          "women in saree"
+        ]
+      },
+      "minWords": 12,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "scenario_farming",
+    "category": "scenario",
+    "image": "scenario/farming.jpg",
+    "primaryWord": "planting rice",
+    "acceptedAnswers": [
+      "planting rice",
+      "farming",
+      "rice field"
+    ],
+    "difficulty": 4,
+    "mcq": {
+      "correct": "planting rice",
+      "distractors": [
+        "farmers threshing grain",
+        "farmers planting rice",
+        "boy fishing"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "In this picture, people are ___.",
+      "blankAnswers": [
+        "planting rice",
+        "farming",
+        "rice field"
+      ]
+    },
+    "matching": {
+      "word": "planting rice"
+    },
+    "guidedDescription": {
+      "starter": "I see ___ who are ___ near a ___.",
+      "keywords": {
+        "core": [
+          "boy",
+          "rice field",
+          "water",
+          "planting",
+          "buffalo",
+          "family"
+        ],
+        "bonus": [
+          "mountains",
+          "palm trees",
+          "egret",
+          "butterflies",
+          "huts",
+          "sunny"
+        ]
+      },
+      "minWords": 6
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "boy",
+          "rice field",
+          "water",
+          "planting",
+          "buffalo",
+          "family"
+        ],
+        "bonus": [
+          "mountains",
+          "palm trees",
+          "egret",
+          "butterflies",
+          "huts",
+          "sunny"
+        ]
+      },
+      "minWords": 12,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "scenario_farming2",
+    "category": "scenario",
+    "image": "scenario/farming2.jpg",
+    "primaryWord": "farmers planting rice",
+    "acceptedAnswers": [
+      "farming",
+      "planting rice",
+      "rice field"
+    ],
+    "difficulty": 4,
+    "mcq": {
+      "correct": "farmers planting rice",
+      "distractors": [
+        "farmers threshing grain",
+        "planting rice",
+        "boy fishing"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "In this picture, people are ___.",
+      "blankAnswers": [
+        "farming",
+        "planting rice",
+        "rice field"
+      ]
+    },
+    "matching": {
+      "word": "farmers planting rice"
+    },
+    "guidedDescription": {
+      "starter": "I see ___ who are ___ near a ___.",
+      "keywords": {
+        "core": [
+          "farmers",
+          "rice paddy",
+          "planting",
+          "children",
+          "river",
+          "cows"
+        ],
+        "bonus": [
+          "straw hats",
+          "mountains",
+          "thatched houses",
+          "splashing",
+          "path"
+        ]
+      },
+      "minWords": 6
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "farmers",
+          "rice paddy",
+          "planting",
+          "children",
+          "river",
+          "cows"
+        ],
+        "bonus": [
+          "straw hats",
+          "mountains",
+          "thatched houses",
+          "splashing",
+          "path"
+        ]
+      },
+      "minWords": 12,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "scenario_fishing",
+    "category": "scenario",
+    "image": "scenario/fishing.jpg",
+    "primaryWord": "boy fishing",
+    "acceptedAnswers": [
+      "fishing",
+      "boy fishing"
+    ],
+    "difficulty": 4,
+    "mcq": {
+      "correct": "boy fishing",
+      "distractors": [
+        "farmers threshing grain",
+        "planting rice",
+        "farmers planting rice"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "In this picture, people are ___.",
+      "blankAnswers": [
+        "fishing",
+        "boy fishing"
+      ]
+    },
+    "matching": {
+      "word": "boy fishing"
+    },
+    "guidedDescription": {
+      "starter": "I see ___ who are ___ near a ___.",
+      "keywords": {
+        "core": [
+          "boy",
+          "fishing",
+          "fishing rod",
+          "pond",
+          "fish"
+        ],
+        "bonus": [
+          "cap",
+          "trees",
+          "sun",
+          "rock",
+          "flower"
+        ]
+      },
+      "minWords": 6
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "boy",
+          "fishing",
+          "fishing rod",
+          "pond",
+          "fish"
+        ],
+        "bonus": [
+          "cap",
+          "trees",
+          "sun",
+          "rock",
+          "flower"
+        ]
+      },
+      "minWords": 12,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "scenario_holi",
+    "category": "scenario",
+    "image": "scenario/holi.jpg",
+    "primaryWord": "celebrating Holi",
+    "acceptedAnswers": [
+      "holi",
+      "celebrating holi",
+      "playing with colors"
+    ],
+    "difficulty": 4,
+    "mcq": {
+      "correct": "celebrating Holi",
+      "distractors": [
+        "farmers threshing grain",
+        "planting rice",
+        "farmers planting rice"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "In this picture, people are ___.",
+      "blankAnswers": [
+        "holi",
+        "celebrating holi",
+        "playing with colors"
+      ]
+    },
+    "matching": {
+      "word": "celebrating Holi"
+    },
+    "guidedDescription": {
+      "starter": "I see ___ who are ___ near a ___.",
+      "keywords": {
+        "core": [
+          "children",
+          "holi",
+          "colors",
+          "powder",
+          "festival",
+          "rangoli"
+        ],
+        "bonus": [
+          "courtyard",
+          "diyas",
+          "marigold",
+          "laughing",
+          "traditional clothes"
+        ]
+      },
+      "minWords": 6
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "children",
+          "holi",
+          "colors",
+          "powder",
+          "festival",
+          "rangoli"
+        ],
+        "bonus": [
+          "courtyard",
+          "diyas",
+          "marigold",
+          "laughing",
+          "traditional clothes"
+        ]
+      },
+      "minWords": 12,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "scenario_jungle",
+    "category": "scenario",
+    "image": "scenario/jungle.jpg",
+    "primaryWord": "animals in the jungle",
+    "acceptedAnswers": [
+      "jungle",
+      "jungle animals",
+      "forest"
+    ],
+    "difficulty": 4,
+    "mcq": {
+      "correct": "animals in the jungle",
+      "distractors": [
+        "farmers threshing grain",
+        "planting rice",
+        "farmers planting rice"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "In this picture, people are ___.",
+      "blankAnswers": [
+        "jungle",
+        "jungle animals",
+        "forest"
+      ]
+    },
+    "matching": {
+      "word": "animals in the jungle"
+    },
+    "guidedDescription": {
+      "starter": "I see ___ who are ___ near a ___.",
+      "keywords": {
+        "core": [
+          "jungle",
+          "elephants",
+          "lion",
+          "monkeys",
+          "trees",
+          "river"
+        ],
+        "bonus": [
+          "parrots",
+          "deer",
+          "toucan",
+          "mountains",
+          "flowers",
+          "sunlight"
+        ]
+      },
+      "minWords": 6
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "jungle",
+          "elephants",
+          "lion",
+          "monkeys",
+          "trees",
+          "river"
+        ],
+        "bonus": [
+          "parrots",
+          "deer",
+          "toucan",
+          "mountains",
+          "flowers",
+          "sunlight"
+        ]
+      },
+      "minWords": 12,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "scenario_park",
+    "category": "scenario",
+    "image": "scenario/park.jpg",
+    "primaryWord": "children playing in the park",
+    "acceptedAnswers": [
+      "park",
+      "playing in the park",
+      "playground"
+    ],
+    "difficulty": 4,
+    "mcq": {
+      "correct": "children playing in the park",
+      "distractors": [
+        "farmers threshing grain",
+        "planting rice",
+        "farmers planting rice"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "In this picture, people are ___.",
+      "blankAnswers": [
+        "park",
+        "playing in the park",
+        "playground"
+      ]
+    },
+    "matching": {
+      "word": "children playing in the park"
+    },
+    "guidedDescription": {
+      "starter": "I see ___ who are ___ near a ___.",
+      "keywords": {
+        "core": [
+          "children",
+          "park",
+          "swing",
+          "slide",
+          "playing",
+          "ball"
+        ],
+        "bonus": [
+          "sunny",
+          "clouds",
+          "running",
+          "laughing",
+          "bushes"
+        ]
+      },
+      "minWords": 6
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "children",
+          "park",
+          "swing",
+          "slide",
+          "playing",
+          "ball"
+        ],
+        "bonus": [
+          "sunny",
+          "clouds",
+          "running",
+          "laughing",
+          "bushes"
+        ]
+      },
+      "minWords": 12,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "scenario_park2",
+    "category": "scenario",
+    "image": "scenario/park2.jpg",
+    "primaryWord": "children playing in the park",
+    "acceptedAnswers": [
+      "park",
+      "playground",
+      "playing in the park"
+    ],
+    "difficulty": 4,
+    "mcq": {
+      "correct": "children playing in the park",
+      "distractors": [
+        "farmers threshing grain",
+        "planting rice",
+        "farmers planting rice"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "In this picture, people are ___.",
+      "blankAnswers": [
+        "park",
+        "playground",
+        "playing in the park"
+      ]
+    },
+    "matching": {
+      "word": "children playing in the park"
+    },
+    "guidedDescription": {
+      "starter": "I see ___ who are ___ near a ___.",
+      "keywords": {
+        "core": [
+          "children",
+          "park",
+          "swing",
+          "slide",
+          "sandbox",
+          "ball"
+        ],
+        "bonus": [
+          "balloon",
+          "flowers",
+          "trees",
+          "soccer",
+          "sunny"
+        ]
+      },
+      "minWords": 6
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "children",
+          "park",
+          "swing",
+          "slide",
+          "sandbox",
+          "ball"
+        ],
+        "bonus": [
+          "balloon",
+          "flowers",
+          "trees",
+          "soccer",
+          "sunny"
+        ]
+      },
+      "minWords": 12,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "scenario_picnic",
+    "category": "scenario",
+    "image": "scenario/picnic.jpg",
+    "primaryWord": "family having a picnic",
+    "acceptedAnswers": [
+      "picnic",
+      "family picnic"
+    ],
+    "difficulty": 4,
+    "mcq": {
+      "correct": "family having a picnic",
+      "distractors": [
+        "farmers threshing grain",
+        "planting rice",
+        "farmers planting rice"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "In this picture, people are ___.",
+      "blankAnswers": [
+        "picnic",
+        "family picnic"
+      ]
+    },
+    "matching": {
+      "word": "family having a picnic"
+    },
+    "guidedDescription": {
+      "starter": "I see ___ who are ___ near a ___.",
+      "keywords": {
+        "core": [
+          "family",
+          "picnic",
+          "blanket",
+          "food",
+          "mountains",
+          "eating"
+        ],
+        "bonus": [
+          "watermelon",
+          "burgers",
+          "basket",
+          "grass",
+          "sunny",
+          "fruit"
+        ]
+      },
+      "minWords": 6
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "family",
+          "picnic",
+          "blanket",
+          "food",
+          "mountains",
+          "eating"
+        ],
+        "bonus": [
+          "watermelon",
+          "burgers",
+          "basket",
+          "grass",
+          "sunny",
+          "fruit"
+        ]
+      },
+      "minWords": 12,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "scenario_playing",
+    "category": "scenario",
+    "image": "scenario/playing.jpg",
+    "primaryWord": "children having a picnic at school",
+    "acceptedAnswers": [
+      "playing",
+      "school picnic",
+      "children eating outside"
+    ],
+    "difficulty": 4,
+    "mcq": {
+      "correct": "children having a picnic at school",
+      "distractors": [
+        "farmers threshing grain",
+        "planting rice",
+        "farmers planting rice"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "In this picture, people are ___.",
+      "blankAnswers": [
+        "playing",
+        "school picnic",
+        "children eating outside"
+      ]
+    },
+    "matching": {
+      "word": "children having a picnic at school"
+    },
+    "guidedDescription": {
+      "starter": "I see ___ who are ___ near a ___.",
+      "keywords": {
+        "core": [
+          "children",
+          "school uniform",
+          "eating",
+          "lunch box",
+          "tree",
+          "playground"
+        ],
+        "bonus": [
+          "swing",
+          "slide",
+          "school building",
+          "books",
+          "laughing",
+          "grass"
+        ]
+      },
+      "minWords": 6
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "children",
+          "school uniform",
+          "eating",
+          "lunch box",
+          "tree",
+          "playground"
+        ],
+        "bonus": [
+          "swing",
+          "slide",
+          "school building",
+          "books",
+          "laughing",
+          "grass"
+        ]
+      },
+      "minWords": 12,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "scenario_pool",
+    "category": "scenario",
+    "image": "scenario/pool.jpg",
+    "primaryWord": "children playing at the pool",
+    "acceptedAnswers": [
+      "pool",
+      "water slide",
+      "swimming pool"
+    ],
+    "difficulty": 4,
+    "mcq": {
+      "correct": "children playing at the pool",
+      "distractors": [
+        "farmers threshing grain",
+        "planting rice",
+        "farmers planting rice"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "In this picture, people are ___.",
+      "blankAnswers": [
+        "pool",
+        "water slide",
+        "swimming pool"
+      ]
+    },
+    "matching": {
+      "word": "children playing at the pool"
+    },
+    "guidedDescription": {
+      "starter": "I see ___ who are ___ near a ___.",
+      "keywords": {
+        "core": [
+          "boys",
+          "pool",
+          "water slide",
+          "splash",
+          "swimming"
+        ],
+        "bonus": [
+          "sunny",
+          "tree",
+          "umbrella",
+          "laughing",
+          "excited"
+        ]
+      },
+      "minWords": 6
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "boys",
+          "pool",
+          "water slide",
+          "splash",
+          "swimming"
+        ],
+        "bonus": [
+          "sunny",
+          "tree",
+          "umbrella",
+          "laughing",
+          "excited"
+        ]
+      },
+      "minWords": 12,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "scenario_raining",
+    "category": "scenario",
+    "image": "scenario/raining.jpg",
+    "primaryWord": "children in the rain",
+    "acceptedAnswers": [
+      "raining",
+      "rainy day",
+      "kids in rain"
+    ],
+    "difficulty": 4,
+    "mcq": {
+      "correct": "children in the rain",
+      "distractors": [
+        "farmers threshing grain",
+        "planting rice",
+        "farmers planting rice"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "In this picture, people are ___.",
+      "blankAnswers": [
+        "raining",
+        "rainy day",
+        "kids in rain"
+      ]
+    },
+    "matching": {
+      "word": "children in the rain"
+    },
+    "guidedDescription": {
+      "starter": "I see ___ who are ___ near a ___.",
+      "keywords": {
+        "core": [
+          "children",
+          "rain",
+          "umbrella",
+          "street",
+          "school bag"
+        ],
+        "bonus": [
+          "street vendor",
+          "corn",
+          "puddle",
+          "tree",
+          "paper boat"
+        ]
+      },
+      "minWords": 6
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "children",
+          "rain",
+          "umbrella",
+          "street",
+          "school bag"
+        ],
+        "bonus": [
+          "street vendor",
+          "corn",
+          "puddle",
+          "tree",
+          "paper boat"
+        ]
+      },
+      "minWords": 12,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "scenario_school",
+    "category": "scenario",
+    "image": "scenario/school.jpg",
+    "primaryWord": "children having lunch at school",
+    "acceptedAnswers": [
+      "school",
+      "school lunch",
+      "children eating at school"
+    ],
+    "difficulty": 4,
+    "mcq": {
+      "correct": "children having lunch at school",
+      "distractors": [
+        "farmers threshing grain",
+        "planting rice",
+        "farmers planting rice"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "In this picture, people are ___.",
+      "blankAnswers": [
+        "school",
+        "school lunch",
+        "children eating at school"
+      ]
+    },
+    "matching": {
+      "word": "children having lunch at school"
+    },
+    "guidedDescription": {
+      "starter": "I see ___ who are ___ near a ___.",
+      "keywords": {
+        "core": [
+          "children",
+          "school",
+          "lunch box",
+          "eating",
+          "tree",
+          "uniform"
+        ],
+        "bonus": [
+          "bell tower",
+          "cricket",
+          "playing",
+          "books",
+          "courtyard"
+        ]
+      },
+      "minWords": 6
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "children",
+          "school",
+          "lunch box",
+          "eating",
+          "tree",
+          "uniform"
+        ],
+        "bonus": [
+          "bell tower",
+          "cricket",
+          "playing",
+          "books",
+          "courtyard"
+        ]
+      },
+      "minWords": 12,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "scenario_school1",
+    "category": "scenario",
+    "image": "scenario/school1.jpg",
+    "primaryWord": "children playing cricket in the street",
+    "acceptedAnswers": [
+      "cricket",
+      "playing cricket",
+      "street cricket"
+    ],
+    "difficulty": 4,
+    "mcq": {
+      "correct": "children playing cricket in the street",
+      "distractors": [
+        "farmers threshing grain",
+        "planting rice",
+        "farmers planting rice"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "In this picture, people are ___.",
+      "blankAnswers": [
+        "cricket",
+        "playing cricket",
+        "street cricket"
+      ]
+    },
+    "matching": {
+      "word": "children playing cricket in the street"
+    },
+    "guidedDescription": {
+      "starter": "I see ___ who are ___ near a ___.",
+      "keywords": {
+        "core": [
+          "boys",
+          "cricket",
+          "bat",
+          "ball",
+          "street"
+        ],
+        "bonus": [
+          "balloons",
+          "old man",
+          "balcony",
+          "bicycle",
+          "scooter",
+          "houses",
+          "evening"
+        ]
+      },
+      "minWords": 6
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "boys",
+          "cricket",
+          "bat",
+          "ball",
+          "street"
+        ],
+        "bonus": [
+          "balloons",
+          "old man",
+          "balcony",
+          "bicycle",
+          "scooter",
+          "houses",
+          "evening"
+        ]
+      },
+      "minWords": 12,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "scenario_story",
+    "category": "scenario",
+    "image": "scenario/story.jpg",
+    "primaryWord": "grandmother telling a story",
+    "acceptedAnswers": [
+      "storytelling",
+      "grandmother telling a story",
+      "story time"
+    ],
+    "difficulty": 4,
+    "mcq": {
+      "correct": "grandmother telling a story",
+      "distractors": [
+        "farmers threshing grain",
+        "planting rice",
+        "farmers planting rice"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "In this picture, people are ___.",
+      "blankAnswers": [
+        "storytelling",
+        "grandmother telling a story",
+        "story time"
+      ]
+    },
+    "matching": {
+      "word": "grandmother telling a story"
+    },
+    "guidedDescription": {
+      "starter": "I see ___ who are ___ near a ___.",
+      "keywords": {
+        "core": [
+          "grandmother",
+          "children",
+          "story",
+          "book",
+          "sitting"
+        ],
+        "bonus": [
+          "lantern",
+          "night",
+          "moon",
+          "stars",
+          "village",
+          "hut"
+        ]
+      },
+      "minWords": 6
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "grandmother",
+          "children",
+          "story",
+          "book",
+          "sitting"
+        ],
+        "bonus": [
+          "lantern",
+          "night",
+          "moon",
+          "stars",
+          "village",
+          "hut"
+        ]
+      },
+      "minWords": 12,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "scenario_village",
+    "category": "scenario",
+    "image": "scenario/village.jpg",
+    "primaryWord": "children playing in the village",
+    "acceptedAnswers": [
+      "village",
+      "village life",
+      "village scene"
+    ],
+    "difficulty": 4,
+    "mcq": {
+      "correct": "children playing in the village",
+      "distractors": [
+        "farmers threshing grain",
+        "planting rice",
+        "farmers planting rice"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "In this picture, people are ___.",
+      "blankAnswers": [
+        "village",
+        "village life",
+        "village scene"
+      ]
+    },
+    "matching": {
+      "word": "children playing in the village"
+    },
+    "guidedDescription": {
+      "starter": "I see ___ who are ___ near a ___.",
+      "keywords": {
+        "core": [
+          "village",
+          "children",
+          "bicycle",
+          "river",
+          "cows"
+        ],
+        "bonus": [
+          "boat",
+          "haystack",
+          "sunset",
+          "thatched house",
+          "swimming",
+          "lotus"
+        ]
+      },
+      "minWords": 6
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "village",
+          "children",
+          "bicycle",
+          "river",
+          "cows"
+        ],
+        "bonus": [
+          "boat",
+          "haystack",
+          "sunset",
+          "thatched house",
+          "swimming",
+          "lotus"
+        ]
+      },
+      "minWords": 12,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "scenario_zoo",
+    "category": "scenario",
+    "image": "scenario/zoo.jpg",
+    "primaryWord": "animals at the zoo",
+    "acceptedAnswers": [
+      "zoo",
+      "zoo animals"
+    ],
+    "difficulty": 4,
+    "mcq": {
+      "correct": "animals at the zoo",
+      "distractors": [
+        "farmers threshing grain",
+        "planting rice",
+        "farmers planting rice"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "In this picture, people are ___.",
+      "blankAnswers": [
+        "zoo",
+        "zoo animals"
+      ]
+    },
+    "matching": {
+      "word": "animals at the zoo"
+    },
+    "guidedDescription": {
+      "starter": "I see ___ who are ___ near a ___.",
+      "keywords": {
+        "core": [
+          "zoo",
+          "giraffe",
+          "elephant",
+          "lion",
+          "zebra"
+        ],
+        "bonus": [
+          "monkey",
+          "flamingo",
+          "trees",
+          "sign",
+          "grass"
+        ]
+      },
+      "minWords": 6
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "zoo",
+          "giraffe",
+          "elephant",
+          "lion",
+          "zebra"
+        ],
+        "bonus": [
+          "monkey",
+          "flamingo",
+          "trees",
+          "sign",
+          "grass"
+        ]
+      },
+      "minWords": 12,
+      "requiresVerb": true
+    }
+  },
+  {
+    "id": "scenario_zoo2",
+    "category": "scenario",
+    "image": "scenario/zoo2.jpg",
+    "primaryWord": "visitors at the zoo",
+    "acceptedAnswers": [
+      "zoo",
+      "visiting the zoo",
+      "zoo animals"
+    ],
+    "difficulty": 4,
+    "mcq": {
+      "correct": "visitors at the zoo",
+      "distractors": [
+        "farmers threshing grain",
+        "planting rice",
+        "farmers planting rice"
+      ]
+    },
+    "fillBlank": {
+      "sentence": "In this picture, people are ___.",
+      "blankAnswers": [
+        "zoo",
+        "visiting the zoo",
+        "zoo animals"
+      ]
+    },
+    "matching": {
+      "word": "visitors at the zoo"
+    },
+    "guidedDescription": {
+      "starter": "I see ___ who are ___ near a ___.",
+      "keywords": {
+        "core": [
+          "zoo",
+          "children",
+          "animals",
+          "enclosure",
+          "visiting"
+        ],
+        "bonus": [
+          "giraffe",
+          "elephant",
+          "lion",
+          "tiger",
+          "peacock",
+          "camel",
+          "monkey",
+          "gate"
+        ]
+      },
+      "minWords": 6
+    },
+    "freeDescription": {
+      "keywords": {
+        "core": [
+          "zoo",
+          "children",
+          "animals",
+          "enclosure",
+          "visiting"
+        ],
+        "bonus": [
+          "giraffe",
+          "elephant",
+          "lion",
+          "tiger",
+          "peacock",
+          "camel",
+          "monkey",
+          "gate"
+        ]
+      },
+      "minWords": 12,
+      "requiresVerb": true
+    }
+  }
+]

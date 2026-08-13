@@ -69,6 +69,7 @@ function useProgressSubmit(revealed, isCorrect, topic, questionId) {
 
 
 import Vachana from './vachana'
+import Drishya from './drishya'
 import 'chart.js/auto'
 import { Line } from 'react-chartjs-2'
 
@@ -43502,6 +43503,24 @@ function App() {
     )
   }
 
+  // Route: /drishya → Drishya Image Lab
+if (pathname === '/drishya' || pathname.startsWith('/drishya/')) {
+  return (
+    <>
+      <button
+        className="theme-toggle"
+        onClick={toggleTheme}
+        title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+      >
+        {theme === 'dark' ? '☀️' : '🌙'}
+      </button>
+      <div className="app-shell">
+        <Drishya onBack={() => { window.location.href = withBase('/') }} />
+      </div>
+    </>
+  )
+}
+
   // Route: /supertables → 10-level progressive multiplication mastery
   if (pathname === '/supertables') {
     return (
@@ -44637,6 +44656,7 @@ function App() {
   // Map quiz mode keys to their component classes
   const modeMap = {
     vachana: Vachana,          // Vachana Mathematical Literacy Lab
+    drishya: Drishya,
     linearalgebra: LinearAlgebraApp, // Linear Algebra Module 1
     missionquiz: MissionQuizApp, // Mission-specific Linear Algebra Quiz
     'math-lab': MathLabHubApp,

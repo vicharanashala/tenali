@@ -9543,6 +9543,10 @@ app.use('/darts-api', dartsRouter);
 const wordCreatorRouter = require('./routes/wordCreator');
 app.use('/wordcreator-api', wordCreatorRouter);
 
+// DRISHYA ROUTER (drishya-api)
+const drishyaRouter = require('./routes/drishya');
+app.use('/drishya-api', drishyaRouter);
+
 // CONTRAST CHALLENGE PUZZLE ROUTER (contrast-api)
 // ═══════════════════════════════════════════════════════════════════════════
 const contrastRouter = require('./routes/contrast');
