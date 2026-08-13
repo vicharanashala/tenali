@@ -41,18 +41,15 @@ function playTone(freq, duration, type = 'sine', volume = 0.3) {
 }
 
 function playStarSound(starCount) {
-  const freqs = { 3: [523, 659, 784], 2: [440, 554], 1: [349] };
-  const notes = freqs[starCount] || freqs[1];
-  notes.forEach((f, i) => setTimeout(() => playTone(f, 0.25, 'sine', 0.25), i * 120));
+  window.playGlobalCorrect?.();
 }
 
 function playConfettiSound() {
-  [523, 659, 784, 1047].forEach((f, i) => setTimeout(() => playTone(f, 0.3, 'sine', 0.2), i * 150));
+  window.playGlobalQuizComplete?.();
 }
 
-function playCorrectSound() {
-  playTone(660, 0.15, 'sine', 0.2);
-  setTimeout(() => playTone(880, 0.2, 'sine', 0.2), 100);
+function playCorrect() {
+  window.playGlobalCorrect?.();
 }
 
 // ─── Constants (mirrored from App.jsx for independence) ──────────────
@@ -600,7 +597,7 @@ function DetectiveCaseView({ caseData, initialStage, onComplete, onBack }) {
   // Play sound on correct stage answer
   useEffect(() => {
     if (revealed && feedback?.correct && stageIndex < caseData.stages.length - 1) {
-      playCorrectSound();
+      playCorrect();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [revealed, stageIndex]);
@@ -663,6 +660,9 @@ function DetectiveCaseView({ caseData, initialStage, onComplete, onBack }) {
     e.preventDefault();
     if (revealed || !answer.trim()) return;
     const correct = checkDetectiveAnswer(stage.answer, answer);
+    if (!correct) {
+      window.playGlobalWrong?.();
+    }
     setRevealed(true);
     setFeedback({ correct, correctAnswer: stage.answer });
   };

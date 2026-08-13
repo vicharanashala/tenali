@@ -16,6 +16,7 @@ import React, {
 // eslint-disable-next-line no-unused-vars -- motion is used in JSX via <motion.div>
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
+import { useQuizSound } from './context/QuizSoundContext.jsx';
 
 const API = '/api';
 
@@ -579,6 +580,7 @@ export default function VisualMathLabRedux({ onBack, initialDifficulty, initialN
   const [shake,          setShake]          = useState(false);
   const [showXP,         setShowXP]         = useState(false);
   const timer = useTimer();
+  const { playCorrect, playWrong, playSubmit, playQuizComplete } = useQuizSound();
 
   // ── Double-buffer: prefetch next question while current is shown ──
   const prefetchRef  = useRef(null);   // holds prefetched question data
@@ -670,11 +672,13 @@ export default function VisualMathLabRedux({ onBack, initialDifficulty, initialN
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setFinished(true);
       timer.reset();
+      playQuizComplete();
     }
-  }, [questionNumber, totalQ, started, timer]);
+  }, [questionNumber, totalQ, started, timer, playQuizComplete]);
 
   const submitAns = useCallback(async (optAns) => {
     if (!question || revealed) return;
+    playSubmit();
     const finalAns  = optAns !== undefined ? optAns : answer;
     const timeTaken = timer.stop();
     setAnswer(finalAns);
@@ -686,11 +690,13 @@ export default function VisualMathLabRedux({ onBack, initialDifficulty, initialN
     const data = await res.json();
     setIsCorrect(data.correct);
     if (data.correct) {
+      playCorrect(score);
       setScore(s => s + 1);
       fireConfetti();
       setShowXP(true);
       setTimeout(() => setShowXP(false), 1600);
     } else {
+      playWrong();
       setShake(true);
       setTimeout(() => setShake(false), 600);
     }
@@ -698,7 +704,7 @@ export default function VisualMathLabRedux({ onBack, initialDifficulty, initialN
     setFeedback(data.correct ? `Correct! 🎉 ${eqn}` : `Not quite! ${eqn}`);
     setResults(prev => [...prev, { question:question.prompt, userAnswer:finalAns, correctAnswer:eqn, correct:data.correct, time:timeTaken }]);
     setRevealed(true);
-  }, [question, revealed, answer, timer]);
+  }, [question, revealed, answer, timer, playSubmit, playCorrect, playWrong, score]);
 
   const handleSolve = useCallback(async () => {
     if (revealed || !question) return;

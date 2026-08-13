@@ -19,42 +19,12 @@
 ---
 
 <!-- live-changelog:start -->
-### 📊 Total: 881 commits · 52 active days · 23 unique authors
+### 📊 Total: 874 commits · 49 active days · 23 unique authors
 
 > **📖 How to read this:** Each entry shows a clickable SHA, the author, and a one-line subject. Sub-bullets show the **exact files touched** with per-file `+additions −deletions`, the **total line stats**, and (when present) the **commit body** explaining what & why.
 
-#### 📅 2026-08-12  <sub>(2 commits)</sub>
+#### 📅 2026-08-09  <sub>(1 commit)</sub>
 
-- 📌 [`6226166`](https://github.com/vicharanashala/tenali/commit/62261664691c72ee89598d8c48417bb4c9ba4c61) — **github-actions[bot]** — 🤖 docs(contributors): refresh contributor stats
-    - 📁 **3 files:** `CHANGELOG.md` `+7 −1`, `CONTRIBUTORS.md` `+4 −4`, `README.md` `+3 −3`
-    - 📊 **`+14 −8`** · 3 files
-- 📌 [`8c57d5c`](https://github.com/vicharanashala/tenali/commit/8c57d5c21d73b6782ecad6b62d2b14e6c5d42bfd) — **github-actions[bot]** — 🤖 docs(contributors): refresh contributor stats
-    - 📁 **3 files:** `CHANGELOG.md` `+5 −2`, `CONTRIBUTORS.md` `+5 −5`, `README.md` `+5 −5`
-    - 📊 **`+15 −12`** · 3 files
-
-#### 📅 2026-08-11  <sub>(2 commits)</sub>
-
-- 📌 [`31724a3`](https://github.com/vicharanashala/tenali/commit/31724a3fb2ed3181934d0eb38d6db17f77392072) — **github-actions[bot]** — 🤖 docs(contributors): refresh contributor stats
-    - 📁 **3 files:** `CHANGELOG.md` `+7 −1`, `CONTRIBUTORS.md` `+23 −23`, `README.md` `+6 −6`
-    - 📊 **`+36 −30`** · 3 files
-- 📌 [`4dcb21a`](https://github.com/vicharanashala/tenali/commit/4dcb21affa252df1dbb7ae3beea5cad820362023) — **github-actions[bot]** — 🤖 docs(contributors): refresh contributor stats
-    - 📁 **3 files:** `CHANGELOG.md` `+5 −2`, `CONTRIBUTORS.md` `+5 −5`, `README.md` `+4 −4`
-    - 📊 **`+14 −11`** · 3 files
-
-#### 📅 2026-08-10  <sub>(2 commits)</sub>
-
-- 📌 [`8ede49c`](https://github.com/vicharanashala/tenali/commit/8ede49c76721dd3c6dc6889cfa49c04952750a0c) — **github-actions[bot]** — 🤖 docs(contributors): refresh contributor stats
-    - 📁 **3 files:** `CHANGELOG.md` `+7 −1`, `CONTRIBUTORS.md` `+4 −4`, `README.md` `+4 −4`
-    - 📊 **`+15 −9`** · 3 files
-- 📌 [`303a208`](https://github.com/vicharanashala/tenali/commit/303a20800bda67f0674f6482a07be93561f56d71) — **github-actions[bot]** — 🤖 docs(contributors): refresh contributor stats
-    - 📁 **3 files:** `CHANGELOG.md` `+5 −2`, `CONTRIBUTORS.md` `+5 −5`, `README.md` `+4 −4`
-    - 📊 **`+14 −11`** · 3 files
-
-#### 📅 2026-08-09  <sub>(2 commits)</sub>
-
-- 📌 [`b55e2b5`](https://github.com/vicharanashala/tenali/commit/b55e2b5ecb941c7d529657eb4cc006688cfbe487) — **github-actions[bot]** — 🤖 docs(contributors): refresh contributor stats
-    - 📁 **3 files:** `CHANGELOG.md` `+7 −1`, `CONTRIBUTORS.md` `+5 −5`, `README.md` `+5 −5`
-    - 📊 **`+17 −11`** · 3 files
 - 📌 [`840980b`](https://github.com/vicharanashala/tenali/commit/840980b87726df4a6ed41dfb9ee19fcbe1d61246) — **github-actions[bot]** — 🤖 docs(contributors): refresh contributor stats
     - 📁 **3 files:** `CHANGELOG.md` `+5 −2`, `CONTRIBUTORS.md` `+14 −14`, `README.md` `+6 −6`
     - 📊 **`+25 −22`** · 3 files

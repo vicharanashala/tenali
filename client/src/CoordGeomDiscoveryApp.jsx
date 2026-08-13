@@ -1,3 +1,4 @@
+import { useQuizSound } from './context/QuizSoundContext.jsx';
 import React, { useState, useRef } from 'react';
 // eslint-disable-next-line no-unused-vars -- motion is used in JSX via <motion.div>, <motion.line>, etc.
 import { motion, AnimatePresence } from 'framer-motion';
@@ -23,6 +24,7 @@ const createInitialMission = () => {
 };
 
 export default function CoordGeomDiscoveryApp({ onBack }) {
+  const { playCorrect, playClick } = useQuizSound();
   // Grid config
   const GRID_SIZE = 10; // -10 to 10
   const CELL_SIZE = 40; // 40px per unit
@@ -83,12 +85,14 @@ export default function CoordGeomDiscoveryApp({ onBack }) {
 
     // Check if it's the midpoint
     if (snappedX === midpoint.x && snappedY === midpoint.y) {
+      playCorrect();
       setMission(prev => ({
         ...prev,
         pylon: { x: snappedX, y: snappedY },
         discovered: true,
       }));
     } else {
+      playClick();
       setMission(prev => ({
         ...prev,
         pylon: { x: snappedX, y: snappedY },

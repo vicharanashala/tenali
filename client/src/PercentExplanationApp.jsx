@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './PercentExplanationApp.css';
-import { playSound } from './audioContext';
+import { useQuizSound } from './context/QuizSoundContext.jsx';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // QUIZ HELPER UTILITIES
@@ -1145,7 +1145,7 @@ function MicroQuiz({ onPass }) {
     const newResults    = [...roundResults, isCorrect];
 
     setLastFeedback(isCorrect ? 'correct' : 'wrong');
-    playSound(isCorrect ? 'correct' : 'wrong', true);
+    isCorrect ? playCorrect() : playWrong();
     setPhase('feedback');
 
     setTimeout(() => {

@@ -17,6 +17,7 @@
     "chart.js": "^4.5.1",
     "face-api.js": "^0.22.2",
     "framer-motion": "^12.42.2",
+    "howler": "^2.2.4",
     "lucide-react": "^1.23.0",
     "mafs": "^0.21.0",
     "react": "^19.2.4",

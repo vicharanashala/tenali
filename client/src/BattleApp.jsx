@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { io } from 'socket.io-client'
 import confetti from 'canvas-confetti'
+import { useQuizSound } from './context/QuizSoundContext.jsx'
 
 const API = import.meta.env?.VITE_API_BASE_URL || ''
 // socket.io must mount at the same sub-path as the app (e.g. /summership).
@@ -226,6 +227,7 @@ function FloatingReaction({ emoji }) {
 }
 
 export default function BattleApp({ onBack, initialTopic }) {
+  const { playCorrect, playWrong, playQuizComplete } = useQuizSound()
   const [phase, setPhase] = useState('lobby')
   const [view, setView] = useState('play')
   const [name, setName] = useState('')
@@ -352,7 +354,12 @@ export default function BattleApp({ onBack, initialTopic }) {
       setRoundPlayers(rp || [])
       if (newStreaks) setStreaks(newStreaks)
       setPhase('roundResult')
-      if (w === myId) fireConfetti()
+      if (w === myId) {
+        playCorrect()
+        fireConfetti()
+      } else {
+        playWrong()
+      }
     })
 
     socket.on('matchEnd', ({ winner: w, finalScores: fs, topic: t, numQuestions: nq, history: h, players: mp, streaks: finalStreaks }) => {
@@ -364,7 +371,10 @@ export default function BattleApp({ onBack, initialTopic }) {
       setMatchPlayers(mp || [])
       if (finalStreaks) setStreaks(finalStreaks)
       setPhase('matchEnd')
-      if (w === myId || w === 'draw') fireConfetti()
+      if (w === myId || w === 'draw') {
+        playQuizComplete()
+        fireConfetti()
+      }
       const entry = {
         id: Date.now(), date: new Date().toISOString(), topic: t, numQuestions: nq,
         winner: w, myId: socket.id, myScore: fs.find(s => s.id === socket.id)?.score || 0,
