@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 // eslint-disable-next-line no-unused-vars -- motion is used in JSX via <motion.div>
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
+import { useQuizSound } from './context/QuizSoundContext.jsx';
 
 const FONT_SERIF = "'Georgia', 'Times New Roman', serif";
 const FONT_SANS = "'Plus Jakarta Sans', 'Inter', sans-serif";
@@ -40,6 +41,7 @@ function triggerConfetti() {
 }
 
 export default function ProbLabApp({ onBack }) {
+  const { playCorrect, playWrong } = useQuizSound();
   // Flow: 'setup' | 'game' | 'results'
   const [phase, setPhase] = useState('setup');
   const [difficulty, setDifficulty] = useState('easy'); // easy | medium | hard | extra
@@ -187,12 +189,14 @@ export default function ProbLabApp({ onBack }) {
 
   const handleEvaluation = (isCorrect) => {
     if (isCorrect) {
+      playCorrect();
       setXp(x => x + 60);
       triggerConfetti();
       setLogs(prev => [...new Set([...prev, `Completed Level ${currentLevel} (${difficulty.toUpperCase()})`])]);
       setRibbonPopup(true);
       setTimeout(nextLevel, 2500);
     } else {
+      playWrong();
       setLives(l => Math.max(0, l - 1));
       setHintText("Hmm, that composition doesn't match the target probability. Click 'Reveal Hint' for a breakdown!");
     }

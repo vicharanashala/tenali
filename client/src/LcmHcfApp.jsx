@@ -1,3 +1,4 @@
+import { useQuizSound } from './context/QuizSoundContext.jsx';
 import React, { useState, useEffect } from 'react';
 import './LcmHcfApp.css';
 
@@ -74,6 +75,7 @@ const STEPS_META = [
 ];
 
 export default function InteractiveLcmHcfApp({ onBack }) {
+  const { playCorrect, playWrong } = useQuizSound();
   // --- Core State ---
   const [level, setLevel] = useState(null); // 1, 2, or 3
   const [currentStep, setCurrentStep] = useState(0); // 0 to 11
@@ -1692,9 +1694,11 @@ export default function InteractiveLcmHcfApp({ onBack }) {
       const explanation = data.explanation || `The correct answer is: ${data.display || currentQ.display}.`;
 
       if (isCorrect) {
+        playCorrect();
         setQuizScore(s => s + 1);
         setQuizFeedback({ correct: true, display: `Correct! ${explanation}` });
       } else {
+        playWrong();
         setQuizFeedback({ correct: false, display: `Incorrect. ${explanation}` });
       }
 

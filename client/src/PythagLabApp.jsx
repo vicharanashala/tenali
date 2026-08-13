@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 // eslint-disable-next-line no-unused-vars -- motion is used in JSX via <motion.div>
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
+import { useQuizSound } from './context/QuizSoundContext.jsx';
 
 const FONT = "'Plus Jakarta Sans', 'Poppins', system-ui, sans-serif";
 
@@ -37,6 +38,8 @@ function triggerConfetti() {
 }
 
 export default function PythagLabApp({ onBack }) {
+  const { playCorrect, playWrong } = useQuizSound();
+  
   // Flow states: 'setup' | 'game' | 'results'
   const [phase, setPhase] = useState('setup');
   const [difficulty, setDifficulty] = useState('easy'); // easy | medium | hard
@@ -158,12 +161,14 @@ export default function PythagLabApp({ onBack }) {
 
   const handleEvaluation = (isCorrect) => {
     if (isCorrect) {
+      playCorrect();
       setXp(x => x + 50);
       triggerConfetti();
       setLogs(prev => [...new Set([...prev, `Completed ${difficulty.toUpperCase()} Level ${currentLevel}`])]);
       setRibbonPopup(true);
       setTimeout(nextLevel, 2500);
     } else {
+      playWrong();
       setLives(l => Math.max(0, l - 1));
       setHintText("Oops! That wasn't correct. Try checking your math or use a hint!");
     }

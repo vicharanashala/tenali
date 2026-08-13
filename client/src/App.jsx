@@ -92,7 +92,7 @@ import LanguageDashboard from './language/LanguageDashboard'
 import ContrastChallengeApp, { QuizLayoutExtension } from './ContrastChallengeApp'
 import { VOCAB_CORPUS } from './vocabCorpus'
 import PercentExplanationApp from './PercentExplanationApp'
-import { playSound } from './audioContext'
+import { useQuizSound } from './context/QuizSoundContext.jsx';
 import GeometryApp from './GeometryApp';
 import EquationSandboxApp from './lib/EquationSandboxApp.jsx';
 import QFormulaConceptApp from './lib/concept/QFormulaConceptApp.jsx';
@@ -1446,7 +1446,7 @@ function AdaptiveTablesApp({ studentName }) {
     const elapsed = Date.now() - startTime  // Time taken for this question
 
     // Reveal the correctness
-    setIsCorrect(correct)
+;(correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(correct))
     setRevealed(true)
     if (correct) setScore(s => s + 1)
 
@@ -1552,7 +1552,7 @@ function AdaptiveTablesApp({ studentName }) {
 
   const handleSolve = () => {
     if (!question || revealed) return
-    setIsCorrect(false)
+;(window.playGlobalWrong?.(), setIsCorrect(false))
     setRevealed(true)
     setFeedback(`Solution: ${question.table} × ${question.multiplier} = ${question.answer}`)
   }
@@ -1951,8 +1951,7 @@ function ScaffoldedTablesApp({ studentName, defaultTable = 2 }) {
 
     // Record timing for spaced repetition (track actual multiplier regardless of question type)
     recordTiming(question.multiplier, elapsed)
-
-    setIsCorrect(correct)
+;(correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(correct))
     setRevealed(true)
     if (correct) setScore(s => s + 1)
 
@@ -2745,8 +2744,7 @@ function YazdanTablesApp({ studentName }) {
     const userAns = parseInt(answer, 10)
     const correct = userAns === question.answer
     const elapsed = Date.now() - startTime
-
-    setIsCorrect(correct)
+;(correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(correct))
     setRevealed(true)
     if (correct) setScore(s => s + 1)
     setTotalAnswered(t => t + 1)
@@ -2773,8 +2771,7 @@ function YazdanTablesApp({ studentName }) {
     const userAns = parseInt(answer, 10)
     const correct = userAns === question.answer
     const elapsed = Date.now() - startTime
-
-    setIsCorrect(correct)
+;(correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(correct))
     setRevealed(true)
     if (correct) setScore(s => s + 1)
     setTotalAnswered(t => t + 1)
@@ -2788,8 +2785,7 @@ function YazdanTablesApp({ studentName }) {
     setSelectedOption(opt)
     const correct = opt === question.answer
     const elapsed = Date.now() - startTime
-
-    setIsCorrect(correct)
+;(correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(correct))
     setRevealed(true)
     if (correct) setScore(s => s + 1)
     setTotalAnswered(t => t + 1)
@@ -2815,7 +2811,7 @@ function YazdanTablesApp({ studentName }) {
       }
     })
     const allCorrect = correctCount === matchPairs.length
-    setIsCorrect(allCorrect)
+;(allCorrect ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(allCorrect))
     setRevealed(true)
     setScore(s => s + correctCount)
     setTotalAnswered(t => t + matchPairs.length)
@@ -3399,8 +3395,7 @@ function JatinTablesApp({ studentName }) {
     const userAns = parseInt(answer, 10)
     const correct = userAns === question.answer
     const elapsed = Date.now() - startTime
-
-    setIsCorrect(correct)
+;(correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(correct))
     setRevealed(true)
     if (correct) setScore(s => s + 1)
     setTotalAnswered(t => t + 1)
@@ -3429,8 +3424,7 @@ function JatinTablesApp({ studentName }) {
     setSelectedOption(opt)
     const correct = opt === question.answer
     const elapsed = Date.now() - startTime
-
-    setIsCorrect(correct)
+;(correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(correct))
     setRevealed(true)
     if (correct) setScore(s => s + 1)
     setTotalAnswered(t => t + 1)
@@ -4060,8 +4054,7 @@ function LakshyaTablesApp({ studentName }) {
     const userAns = parseInt(answer, 10)
     const correct = userAns === question.answer
     const elapsed = Date.now() - startTime
-
-    setIsCorrect(correct)
+;(correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(correct))
     setRevealed(true)
     if (correct) setScore(s => s + 1)
     setTotalAnswered(t => t + 1)
@@ -4088,8 +4081,7 @@ function LakshyaTablesApp({ studentName }) {
     setSelectedOption(opt)
     const correct = opt === question.answer
     const elapsed = Date.now() - startTime
-
-    setIsCorrect(correct)
+;(correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(correct))
     setRevealed(true)
     if (correct) setScore(s => s + 1)
     setTotalAnswered(t => t + 1)
@@ -4720,8 +4712,7 @@ function AdaptiveMixedApp({ studentName }) {
     const userNorm = normalizeAnswer(answer)
     const correctNorm = normalizeAnswer(question.correctAnswer)
     const correct = userNorm === correctNorm
-
-    setIsCorrect(correct)
+;(correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(correct))
     setRevealed(true)
     if (correct) setScore(s => s + 1)
 
@@ -4802,7 +4793,7 @@ function AdaptiveMixedApp({ studentName }) {
 
   const handleSolve = () => {
     if (!question || revealed) return
-    setIsCorrect(false)
+;(window.playGlobalWrong?.(), setIsCorrect(false))
     setRevealed(true)
     setFeedback(`Solution: ${question.correctAnswer}`)
   }
@@ -7609,7 +7600,7 @@ function makeBridgeApp({ id, title, subtitle, intro, teach, generator, nextHref,
         bridgeMarkResult(id, scoreRef.current, questions.length)
         setPhase('done')
       } else {
-        setQIdx(qIdx + 1); setSelected(null); setRevealed(false); setIsCorrect(false)
+        setQIdx(qIdx + 1); setSelected(null); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
       }
     }
     advanceRef.current = advance
@@ -7618,7 +7609,7 @@ function makeBridgeApp({ id, title, subtitle, intro, teach, generator, nextHref,
       const newQs = Array.from({ length: BRIDGE_QUESTIONS_PER_SESSION }, () => generator())
       setQuestions(newQs)
       setQIdx(0); setScore(0); scoreRef.current = 0; setResults([])
-      setSelected(null); setRevealed(false); setIsCorrect(false); setPhase('quiz')
+      setSelected(null); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false)); setPhase('quiz')
     }
 
     const pick = (i) => {
@@ -7626,7 +7617,7 @@ function makeBridgeApp({ id, title, subtitle, intro, teach, generator, nextHref,
       const q = questions[qIdx]
       const correct = i === q.correctIndex
       if (correct) { scoreRef.current += 1; setScore(scoreRef.current) }
-      setSelected(i); setRevealed(true); setIsCorrect(correct)
+      setSelected(i); setRevealed(true); (correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(correct))
       setResults(r => [...r, {
         prompt: q.prompt, correct, expected: q.options[q.correctIndex], chosen: q.options[i],
       }])
@@ -9455,13 +9446,13 @@ function Chapter5App({ onBack }) {
     const p = progress[id] || {}
     if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
     else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const acknowledgeTeach = () => {
     setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
     setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setLastWrongSrc(null)
   }
 
@@ -9469,7 +9460,7 @@ function Chapter5App({ onBack }) {
     if (!currentQ) return
     if (revealed) { advance(); return }
     const ok = ch5_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
+;(ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -9477,7 +9468,7 @@ function Chapter5App({ onBack }) {
     if (!currentQ || revealed || currentQ.kind !== 'mcq') return
     const optSourceIdx = optionOrder[displayIdx]
     const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
+    setSelectedIdx(displayIdx); (ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -9507,7 +9498,7 @@ function Chapter5App({ onBack }) {
       setPhase('done')
     } else {
       setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+      setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
       setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
     }
   }
@@ -9520,7 +9511,7 @@ function Chapter5App({ onBack }) {
     if (!lesson) return
     const clamped = Math.max(0, Math.min(playList.length - 1, i))
     setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setProgress(p => {
       const cur = p[activeId] || {}
       const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
@@ -9531,7 +9522,7 @@ function Chapter5App({ onBack }) {
   const backToOverview = () => {
     cancelAutoAdvance()
     setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const resetAll = () => {
@@ -10545,13 +10536,13 @@ function Chapter6App({ onBack }) {
     const p = progress[id] || {}
     if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
     else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const acknowledgeTeach = () => {
     setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
     setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setLastWrongSrc(null)
   }
 
@@ -10559,7 +10550,7 @@ function Chapter6App({ onBack }) {
     if (!currentQ) return
     if (revealed) { advance(); return }
     const ok = ch6_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
+;(ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -10567,7 +10558,7 @@ function Chapter6App({ onBack }) {
     if (!currentQ || revealed || currentQ.kind !== 'mcq') return
     const optSourceIdx = optionOrder[displayIdx]
     const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
+    setSelectedIdx(displayIdx); (ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -10595,7 +10586,7 @@ function Chapter6App({ onBack }) {
       setPhase('done')
     } else {
       setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+      setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
       setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
     }
   }
@@ -10606,7 +10597,7 @@ function Chapter6App({ onBack }) {
     if (!lesson) return
     const clamped = Math.max(0, Math.min(playList.length - 1, i))
     setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setProgress(p => {
       const cur = p[activeId] || {}
       const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
@@ -10617,7 +10608,7 @@ function Chapter6App({ onBack }) {
   const backToOverview = () => {
     cancelAutoAdvance()
     setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const resetAll = () => {
@@ -12221,13 +12212,13 @@ function Chapter7App({ onBack }) {
     const p = progress[id] || {}
     if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
     else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const acknowledgeTeach = () => {
     setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
     setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setLastWrongSrc(null)
   }
 
@@ -12235,7 +12226,7 @@ function Chapter7App({ onBack }) {
     if (!currentQ) return
     if (revealed) { advance(); return }
     const ok = ch7_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
+;(ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -12243,7 +12234,7 @@ function Chapter7App({ onBack }) {
     if (!currentQ || revealed || currentQ.kind !== 'mcq') return
     const optSourceIdx = optionOrder[displayIdx]
     const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
+    setSelectedIdx(displayIdx); (ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -12271,7 +12262,7 @@ function Chapter7App({ onBack }) {
       setPhase('done')
     } else {
       setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+      setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
       setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
     }
   }
@@ -12282,7 +12273,7 @@ function Chapter7App({ onBack }) {
     if (!lesson) return
     const clamped = Math.max(0, Math.min(playList.length - 1, i))
     setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setProgress(p => {
       const cur = p[activeId] || {}
       const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
@@ -12293,7 +12284,7 @@ function Chapter7App({ onBack }) {
   const backToOverview = () => {
     cancelAutoAdvance()
     setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const resetAll = () => {
@@ -13723,13 +13714,13 @@ function Chapter8App({ onBack }) {
     const p = progress[id] || {}
     if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
     else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const acknowledgeTeach = () => {
     setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
     setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setLastWrongSrc(null)
   }
 
@@ -13737,7 +13728,7 @@ function Chapter8App({ onBack }) {
     if (!currentQ) return
     if (revealed) { advance(); return }
     const ok = ch8_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
+;(ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -13745,7 +13736,7 @@ function Chapter8App({ onBack }) {
     if (!currentQ || revealed || currentQ.kind !== 'mcq') return
     const optSourceIdx = optionOrder[displayIdx]
     const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
+    setSelectedIdx(displayIdx); (ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -13771,7 +13762,7 @@ function Chapter8App({ onBack }) {
       setPhase('done')
     } else {
       setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+      setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
       setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
     }
   }
@@ -13782,7 +13773,7 @@ function Chapter8App({ onBack }) {
     if (!lesson) return
     const clamped = Math.max(0, Math.min(playList.length - 1, i))
     setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setProgress(p => {
       const cur = p[activeId] || {}
       const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
@@ -13793,7 +13784,7 @@ function Chapter8App({ onBack }) {
   const backToOverview = () => {
     cancelAutoAdvance()
     setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const resetAll = () => {
@@ -15409,13 +15400,13 @@ function Chapter9App({ onBack }) {
     const p = progress[id] || {}
     if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
     else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const acknowledgeTeach = () => {
     setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
     setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setLastWrongSrc(null)
   }
 
@@ -15423,7 +15414,7 @@ function Chapter9App({ onBack }) {
     if (!currentQ) return
     if (revealed) { advance(); return }
     const ok = ch9_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
+;(ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -15431,7 +15422,7 @@ function Chapter9App({ onBack }) {
     if (!currentQ || revealed || currentQ.kind !== 'mcq') return
     const optSourceIdx = optionOrder[displayIdx]
     const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
+    setSelectedIdx(displayIdx); (ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -15457,7 +15448,7 @@ function Chapter9App({ onBack }) {
       setPhase('done')
     } else {
       setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+      setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
       setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
     }
   }
@@ -15468,7 +15459,7 @@ function Chapter9App({ onBack }) {
     if (!lesson) return
     const clamped = Math.max(0, Math.min(playList.length - 1, i))
     setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setProgress(p => {
       const cur = p[activeId] || {}
       const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
@@ -15479,7 +15470,7 @@ function Chapter9App({ onBack }) {
   const backToOverview = () => {
     cancelAutoAdvance()
     setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const resetAll = () => {
@@ -17097,13 +17088,13 @@ function Chapter10App({ onBack }) {
     const p = progress[id] || {}
     if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
     else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const acknowledgeTeach = () => {
     setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
     setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setLastWrongSrc(null)
   }
 
@@ -17111,7 +17102,7 @@ function Chapter10App({ onBack }) {
     if (!currentQ) return
     if (revealed) { advance(); return }
     const ok = ch10_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
+;(ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -17119,7 +17110,7 @@ function Chapter10App({ onBack }) {
     if (!currentQ || revealed || currentQ.kind !== 'mcq') return
     const optSourceIdx = optionOrder[displayIdx]
     const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
+    setSelectedIdx(displayIdx); (ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -17145,7 +17136,7 @@ function Chapter10App({ onBack }) {
       setPhase('done')
     } else {
       setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+      setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
       setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
     }
   }
@@ -17156,7 +17147,7 @@ function Chapter10App({ onBack }) {
     if (!lesson) return
     const clamped = Math.max(0, Math.min(playList.length - 1, i))
     setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setProgress(p => {
       const cur = p[activeId] || {}
       const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
@@ -17167,7 +17158,7 @@ function Chapter10App({ onBack }) {
   const backToOverview = () => {
     cancelAutoAdvance()
     setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const resetAll = () => {
@@ -18644,13 +18635,13 @@ function Chapter11App({ onBack }) {
     const p = progress[id] || {}
     if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
     else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const acknowledgeTeach = () => {
     setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
     setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setLastWrongSrc(null)
   }
 
@@ -18658,7 +18649,7 @@ function Chapter11App({ onBack }) {
     if (!currentQ) return
     if (revealed) { advance(); return }
     const ok = ch11_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
+;(ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -18666,7 +18657,7 @@ function Chapter11App({ onBack }) {
     if (!currentQ || revealed || currentQ.kind !== 'mcq') return
     const optSourceIdx = optionOrder[displayIdx]
     const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
+    setSelectedIdx(displayIdx); (ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -18692,7 +18683,7 @@ function Chapter11App({ onBack }) {
       setPhase('done')
     } else {
       setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+      setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
       setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
     }
   }
@@ -18703,7 +18694,7 @@ function Chapter11App({ onBack }) {
     if (!lesson) return
     const clamped = Math.max(0, Math.min(playList.length - 1, i))
     setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setProgress(p => {
       const cur = p[activeId] || {}
       const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
@@ -18714,7 +18705,7 @@ function Chapter11App({ onBack }) {
   const backToOverview = () => {
     cancelAutoAdvance()
     setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const resetAll = () => {
@@ -20197,13 +20188,13 @@ function Chapter12App({ onBack }) {
     const p = progress[id] || {}
     if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
     else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const acknowledgeTeach = () => {
     setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
     setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setLastWrongSrc(null)
   }
 
@@ -20211,7 +20202,7 @@ function Chapter12App({ onBack }) {
     if (!currentQ) return
     if (revealed) { advance(); return }
     const ok = ch12_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
+;(ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -20219,7 +20210,7 @@ function Chapter12App({ onBack }) {
     if (!currentQ || revealed || currentQ.kind !== 'mcq') return
     const optSourceIdx = optionOrder[displayIdx]
     const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
+    setSelectedIdx(displayIdx); (ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -20245,7 +20236,7 @@ function Chapter12App({ onBack }) {
       setPhase('done')
     } else {
       setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+      setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
       setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
     }
   }
@@ -20256,7 +20247,7 @@ function Chapter12App({ onBack }) {
     if (!lesson) return
     const clamped = Math.max(0, Math.min(playList.length - 1, i))
     setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setProgress(p => {
       const cur = p[activeId] || {}
       const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
@@ -20267,7 +20258,7 @@ function Chapter12App({ onBack }) {
   const backToOverview = () => {
     cancelAutoAdvance()
     setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const resetAll = () => {
@@ -21585,13 +21576,13 @@ function Chapter13App({ onBack }) {
     const p = progress[id] || {}
     if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
     else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const acknowledgeTeach = () => {
     setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
     setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setLastWrongSrc(null)
   }
 
@@ -21599,7 +21590,7 @@ function Chapter13App({ onBack }) {
     if (!currentQ) return
     if (revealed) { advance(); return }
     const ok = ch13_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
+;(ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -21607,7 +21598,7 @@ function Chapter13App({ onBack }) {
     if (!currentQ || revealed || currentQ.kind !== 'mcq') return
     const optSourceIdx = optionOrder[displayIdx]
     const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
+    setSelectedIdx(displayIdx); (ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -21633,7 +21624,7 @@ function Chapter13App({ onBack }) {
       setPhase('done')
     } else {
       setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+      setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
       setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
     }
   }
@@ -21644,7 +21635,7 @@ function Chapter13App({ onBack }) {
     if (!lesson) return
     const clamped = Math.max(0, Math.min(playList.length - 1, i))
     setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setProgress(p => {
       const cur = p[activeId] || {}
       const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
@@ -21655,7 +21646,7 @@ function Chapter13App({ onBack }) {
   const backToOverview = () => {
     cancelAutoAdvance()
     setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const resetAll = () => {
@@ -23122,13 +23113,13 @@ function Chapter14App({ onBack }) {
     const p = progress[id] || {}
     if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
     else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const acknowledgeTeach = () => {
     setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
     setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setLastWrongSrc(null)
   }
 
@@ -23136,7 +23127,7 @@ function Chapter14App({ onBack }) {
     if (!currentQ) return
     if (revealed) { advance(); return }
     const ok = ch14_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
+;(ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -23144,7 +23135,7 @@ function Chapter14App({ onBack }) {
     if (!currentQ || revealed || currentQ.kind !== 'mcq') return
     const optSourceIdx = optionOrder[displayIdx]
     const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
+    setSelectedIdx(displayIdx); (ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -23170,7 +23161,7 @@ function Chapter14App({ onBack }) {
       setPhase('done')
     } else {
       setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+      setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
       setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
     }
   }
@@ -23181,7 +23172,7 @@ function Chapter14App({ onBack }) {
     if (!lesson) return
     const clamped = Math.max(0, Math.min(playList.length - 1, i))
     setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setProgress(p => {
       const cur = p[activeId] || {}
       const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
@@ -23192,7 +23183,7 @@ function Chapter14App({ onBack }) {
   const backToOverview = () => {
     cancelAutoAdvance()
     setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const resetAll = () => {
@@ -24790,13 +24781,13 @@ function Chapter15App({ onBack }) {
     const p = progress[id] || {}
     if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
     else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const acknowledgeTeach = () => {
     setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
     setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setLastWrongSrc(null)
   }
 
@@ -24804,7 +24795,7 @@ function Chapter15App({ onBack }) {
     if (!currentQ) return
     if (revealed) { advance(); return }
     const ok = ch15_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
+;(ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -24812,7 +24803,7 @@ function Chapter15App({ onBack }) {
     if (!currentQ || revealed || currentQ.kind !== 'mcq') return
     const optSourceIdx = optionOrder[displayIdx]
     const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
+    setSelectedIdx(displayIdx); (ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -24838,7 +24829,7 @@ function Chapter15App({ onBack }) {
       setPhase('done')
     } else {
       setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+      setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
       setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
     }
   }
@@ -24849,7 +24840,7 @@ function Chapter15App({ onBack }) {
     if (!lesson) return
     const clamped = Math.max(0, Math.min(playList.length - 1, i))
     setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setProgress(p => {
       const cur = p[activeId] || {}
       const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
@@ -24860,7 +24851,7 @@ function Chapter15App({ onBack }) {
   const backToOverview = () => {
     cancelAutoAdvance()
     setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const resetAll = () => {
@@ -25930,13 +25921,13 @@ function Chapter16App({ onBack }) {
     const p = progress[id] || {}
     if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
     else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const acknowledgeTeach = () => {
     setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
     setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setLastWrongSrc(null)
   }
 
@@ -25944,7 +25935,7 @@ function Chapter16App({ onBack }) {
     if (!currentQ) return
     if (revealed) { advance(); return }
     const ok = ch16_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
+;(ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -25952,7 +25943,7 @@ function Chapter16App({ onBack }) {
     if (!currentQ || revealed || currentQ.kind !== 'mcq') return
     const optSourceIdx = optionOrder[displayIdx]
     const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
+    setSelectedIdx(displayIdx); (ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -25978,7 +25969,7 @@ function Chapter16App({ onBack }) {
       setPhase('done')
     } else {
       setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+      setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
       setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
     }
   }
@@ -25989,7 +25980,7 @@ function Chapter16App({ onBack }) {
     if (!lesson) return
     const clamped = Math.max(0, Math.min(playList.length - 1, i))
     setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setProgress(p => {
       const cur = p[activeId] || {}
       const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
@@ -26000,7 +25991,7 @@ function Chapter16App({ onBack }) {
   const backToOverview = () => {
     cancelAutoAdvance()
     setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const resetAll = () => {
@@ -27323,13 +27314,13 @@ function Chapter17App({ onBack }) {
     const p = progress[id] || {}
     if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
     else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const acknowledgeTeach = () => {
     setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
     setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setLastWrongSrc(null)
   }
 
@@ -27337,7 +27328,7 @@ function Chapter17App({ onBack }) {
     if (!currentQ) return
     if (revealed) { advance(); return }
     const ok = ch17_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
+;(ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -27345,7 +27336,7 @@ function Chapter17App({ onBack }) {
     if (!currentQ || revealed || currentQ.kind !== 'mcq') return
     const optSourceIdx = optionOrder[displayIdx]
     const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
+    setSelectedIdx(displayIdx); (ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -27371,7 +27362,7 @@ function Chapter17App({ onBack }) {
       setPhase('done')
     } else {
       setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+      setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
       setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
     }
   }
@@ -27382,7 +27373,7 @@ function Chapter17App({ onBack }) {
     if (!lesson) return
     const clamped = Math.max(0, Math.min(playList.length - 1, i))
     setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setProgress(p => {
       const cur = p[activeId] || {}
       const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
@@ -27393,7 +27384,7 @@ function Chapter17App({ onBack }) {
   const backToOverview = () => {
     cancelAutoAdvance()
     setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const resetAll = () => {
@@ -28982,13 +28973,13 @@ function Chapter18App({ onBack }) {
     const p = progress[id] || {}
     if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
     else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const acknowledgeTeach = () => {
     setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
     setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setLastWrongSrc(null)
   }
 
@@ -28996,7 +28987,7 @@ function Chapter18App({ onBack }) {
     if (!currentQ) return
     if (revealed) { advance(); return }
     const ok = ch18_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
+;(ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -29004,7 +28995,7 @@ function Chapter18App({ onBack }) {
     if (!currentQ || revealed || currentQ.kind !== 'mcq') return
     const optSourceIdx = optionOrder[displayIdx]
     const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
+    setSelectedIdx(displayIdx); (ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -29030,7 +29021,7 @@ function Chapter18App({ onBack }) {
       setPhase('done')
     } else {
       setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+      setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
       setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
     }
   }
@@ -29041,7 +29032,7 @@ function Chapter18App({ onBack }) {
     if (!lesson) return
     const clamped = Math.max(0, Math.min(playList.length - 1, i))
     setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setProgress(p => {
       const cur = p[activeId] || {}
       const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
@@ -29052,7 +29043,7 @@ function Chapter18App({ onBack }) {
   const backToOverview = () => {
     cancelAutoAdvance()
     setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const resetAll = () => {
@@ -30379,13 +30370,13 @@ function Chapter19App({ onBack }) {
     const p = progress[id] || {}
     if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
     else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const acknowledgeTeach = () => {
     setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
     setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setLastWrongSrc(null)
   }
 
@@ -30393,7 +30384,7 @@ function Chapter19App({ onBack }) {
     if (!currentQ) return
     if (revealed) { advance(); return }
     const ok = ch19_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
+;(ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -30401,7 +30392,7 @@ function Chapter19App({ onBack }) {
     if (!currentQ || revealed || currentQ.kind !== 'mcq') return
     const optSourceIdx = optionOrder[displayIdx]
     const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
+    setSelectedIdx(displayIdx); (ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -30427,7 +30418,7 @@ function Chapter19App({ onBack }) {
       setPhase('done')
     } else {
       setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+      setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
       setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
     }
   }
@@ -30438,7 +30429,7 @@ function Chapter19App({ onBack }) {
     if (!lesson) return
     const clamped = Math.max(0, Math.min(playList.length - 1, i))
     setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setProgress(p => {
       const cur = p[activeId] || {}
       const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
@@ -30449,7 +30440,7 @@ function Chapter19App({ onBack }) {
   const backToOverview = () => {
     cancelAutoAdvance()
     setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const resetAll = () => {
@@ -31643,13 +31634,13 @@ function Chapter20App({ onBack }) {
     const p = progress[id] || {}
     if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
     else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const acknowledgeTeach = () => {
     setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
     setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setLastWrongSrc(null)
   }
 
@@ -31657,7 +31648,7 @@ function Chapter20App({ onBack }) {
     if (!currentQ) return
     if (revealed) { advance(); return }
     const ok = ch20_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
+;(ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -31665,7 +31656,7 @@ function Chapter20App({ onBack }) {
     if (!currentQ || revealed || currentQ.kind !== 'mcq') return
     const optSourceIdx = optionOrder[displayIdx]
     const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
+    setSelectedIdx(displayIdx); (ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -31691,7 +31682,7 @@ function Chapter20App({ onBack }) {
       setPhase('done')
     } else {
       setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+      setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
       setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
     }
   }
@@ -31702,7 +31693,7 @@ function Chapter20App({ onBack }) {
     if (!lesson) return
     const clamped = Math.max(0, Math.min(playList.length - 1, i))
     setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setProgress(p => {
       const cur = p[activeId] || {}
       const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
@@ -31713,7 +31704,7 @@ function Chapter20App({ onBack }) {
   const backToOverview = () => {
     cancelAutoAdvance()
     setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const resetAll = () => {
@@ -33170,13 +33161,13 @@ function Chapter21App({ onBack }) {
     const p = progress[id] || {}
     if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
     else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const acknowledgeTeach = () => {
     setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
     setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setLastWrongSrc(null)
   }
 
@@ -33184,7 +33175,7 @@ function Chapter21App({ onBack }) {
     if (!currentQ) return
     if (revealed) { advance(); return }
     const ok = ch21_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
+;(ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -33192,7 +33183,7 @@ function Chapter21App({ onBack }) {
     if (!currentQ || revealed || currentQ.kind !== 'mcq') return
     const optSourceIdx = optionOrder[displayIdx]
     const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
+    setSelectedIdx(displayIdx); (ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -33218,7 +33209,7 @@ function Chapter21App({ onBack }) {
       setPhase('done')
     } else {
       setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+      setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
       setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
     }
   }
@@ -33229,7 +33220,7 @@ function Chapter21App({ onBack }) {
     if (!lesson) return
     const clamped = Math.max(0, Math.min(playList.length - 1, i))
     setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setProgress(p => {
       const cur = p[activeId] || {}
       const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
@@ -33240,7 +33231,7 @@ function Chapter21App({ onBack }) {
   const backToOverview = () => {
     cancelAutoAdvance()
     setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const resetAll = () => {
@@ -34528,13 +34519,13 @@ function Chapter22App({ onBack }) {
     const p = progress[id] || {}
     if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
     else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const acknowledgeTeach = () => {
     setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
     setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setLastWrongSrc(null)
   }
 
@@ -34542,7 +34533,7 @@ function Chapter22App({ onBack }) {
     if (!currentQ) return
     if (revealed) { advance(); return }
     const ok = ch22_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
+;(ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -34550,7 +34541,7 @@ function Chapter22App({ onBack }) {
     if (!currentQ || revealed || currentQ.kind !== 'mcq') return
     const optSourceIdx = optionOrder[displayIdx]
     const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
+    setSelectedIdx(displayIdx); (ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -34574,7 +34565,7 @@ function Chapter22App({ onBack }) {
       setPhase('done')
     } else {
       setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+      setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
       setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
     }
   }
@@ -34585,7 +34576,7 @@ function Chapter22App({ onBack }) {
     if (!lesson) return
     const clamped = Math.max(0, Math.min(playList.length - 1, i))
     setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setProgress(p => {
       const cur = p[activeId] || {}
       const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
@@ -34596,7 +34587,7 @@ function Chapter22App({ onBack }) {
   const backToOverview = () => {
     cancelAutoAdvance()
     setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const resetAll = () => {
@@ -36006,13 +35997,13 @@ function Chapter23App({ onBack }) {
     const p = progress[id] || {}
     if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
     else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const acknowledgeTeach = () => {
     setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
     setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setLastWrongSrc(null)
   }
 
@@ -36020,7 +36011,7 @@ function Chapter23App({ onBack }) {
     if (!currentQ) return
     if (revealed) { advance(); return }
     const ok = ch23_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
+;(ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -36028,7 +36019,7 @@ function Chapter23App({ onBack }) {
     if (!currentQ || revealed || currentQ.kind !== 'mcq') return
     const optSourceIdx = optionOrder[displayIdx]
     const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
+    setSelectedIdx(displayIdx); (ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -36052,7 +36043,7 @@ function Chapter23App({ onBack }) {
       setPhase('done')
     } else {
       setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+      setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
       setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
     }
   }
@@ -36063,7 +36054,7 @@ function Chapter23App({ onBack }) {
     if (!lesson) return
     const clamped = Math.max(0, Math.min(playList.length - 1, i))
     setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setProgress(p => {
       const cur = p[activeId] || {}
       const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
@@ -36074,7 +36065,7 @@ function Chapter23App({ onBack }) {
   const backToOverview = () => {
     cancelAutoAdvance()
     setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const resetAll = () => {
@@ -37439,13 +37430,13 @@ function Chapter24App({ onBack }) {
     const p = progress[id] || {}
     if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
     else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const acknowledgeTeach = () => {
     setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
     setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setLastWrongSrc(null)
   }
 
@@ -37453,7 +37444,7 @@ function Chapter24App({ onBack }) {
     if (!currentQ) return
     if (revealed) { advance(); return }
     const ok = ch24_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
+;(ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -37461,7 +37452,7 @@ function Chapter24App({ onBack }) {
     if (!currentQ || revealed || currentQ.kind !== 'mcq') return
     const optSourceIdx = optionOrder[displayIdx]
     const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
+    setSelectedIdx(displayIdx); (ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -37485,7 +37476,7 @@ function Chapter24App({ onBack }) {
       setPhase('done')
     } else {
       setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+      setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
       setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
     }
   }
@@ -37496,7 +37487,7 @@ function Chapter24App({ onBack }) {
     if (!lesson) return
     const clamped = Math.max(0, Math.min(playList.length - 1, i))
     setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setProgress(p => {
       const cur = p[activeId] || {}
       const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
@@ -37507,7 +37498,7 @@ function Chapter24App({ onBack }) {
   const backToOverview = () => {
     cancelAutoAdvance()
     setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const resetAll = () => {
@@ -38290,13 +38281,13 @@ function Chapter1App({ onBack }) {
     const p = progress[id] || {}
     if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
     else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const acknowledgeTeach = () => {
     setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
     setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setLastWrongSrc(null)
   }
 
@@ -38304,7 +38295,7 @@ function Chapter1App({ onBack }) {
     if (!currentQ) return
     if (revealed) { advance(); return }
     const ok = ch1_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
+;(ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -38312,7 +38303,7 @@ function Chapter1App({ onBack }) {
     if (!currentQ || revealed || currentQ.kind !== 'mcq') return
     const optSourceIdx = optionOrder[displayIdx]
     const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
+    setSelectedIdx(displayIdx); (ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -38336,7 +38327,7 @@ function Chapter1App({ onBack }) {
       setPhase('done')
     } else {
       setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+      setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
       setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
     }
   }
@@ -38347,7 +38338,7 @@ function Chapter1App({ onBack }) {
     if (!lesson) return
     const clamped = Math.max(0, Math.min(playList.length - 1, i))
     setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setProgress(p => {
       const cur = p[activeId] || {}
       const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
@@ -38358,7 +38349,7 @@ function Chapter1App({ onBack }) {
   const backToOverview = () => {
     cancelAutoAdvance()
     setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const resetAll = () => {
@@ -39111,13 +39102,13 @@ function Chapter2App({ onBack }) {
     const p = progress[id] || {}
     if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
     else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const acknowledgeTeach = () => {
     setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
     setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setLastWrongSrc(null)
   }
 
@@ -39125,7 +39116,7 @@ function Chapter2App({ onBack }) {
     if (!currentQ) return
     if (revealed) { advance(); return }
     const ok = ch2_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
+;(ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -39133,7 +39124,7 @@ function Chapter2App({ onBack }) {
     if (!currentQ || revealed || currentQ.kind !== 'mcq') return
     const optSourceIdx = optionOrder[displayIdx]
     const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
+    setSelectedIdx(displayIdx); (ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -39157,7 +39148,7 @@ function Chapter2App({ onBack }) {
       setPhase('done')
     } else {
       setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+      setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
       setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
     }
   }
@@ -39168,7 +39159,7 @@ function Chapter2App({ onBack }) {
     if (!lesson) return
     const clamped = Math.max(0, Math.min(playList.length - 1, i))
     setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setProgress(p => {
       const cur = p[activeId] || {}
       const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
@@ -39179,7 +39170,7 @@ function Chapter2App({ onBack }) {
   const backToOverview = () => {
     cancelAutoAdvance()
     setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const resetAll = () => {
@@ -39907,13 +39898,13 @@ function Chapter3App({ onBack }) {
     const p = progress[id] || {}
     if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
     else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const acknowledgeTeach = () => {
     setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
     setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setLastWrongSrc(null)
   }
 
@@ -39921,7 +39912,7 @@ function Chapter3App({ onBack }) {
     if (!currentQ) return
     if (revealed) { advance(); return }
     const ok = ch3_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
+;(ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -39929,7 +39920,7 @@ function Chapter3App({ onBack }) {
     if (!currentQ || revealed || currentQ.kind !== 'mcq') return
     const optSourceIdx = optionOrder[displayIdx]
     const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
+    setSelectedIdx(displayIdx); (ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -39953,7 +39944,7 @@ function Chapter3App({ onBack }) {
       setPhase('done')
     } else {
       setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+      setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
       setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
     }
   }
@@ -39964,7 +39955,7 @@ function Chapter3App({ onBack }) {
     if (!lesson) return
     const clamped = Math.max(0, Math.min(playList.length - 1, i))
     setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setProgress(p => {
       const cur = p[activeId] || {}
       const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
@@ -39975,7 +39966,7 @@ function Chapter3App({ onBack }) {
   const backToOverview = () => {
     cancelAutoAdvance()
     setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const resetAll = () => {
@@ -40701,13 +40692,13 @@ function Chapter4App({ onBack }) {
     const p = progress[id] || {}
     if (p.teachSeen) { setPhase('practice'); setQIdx(p.qIdx || 0) }
     else { setPhase('teach'); setQIdx(0) }
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const acknowledgeTeach = () => {
     setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: 0 } }))
     setPhase('practice'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setLastWrongSrc(null)
   }
 
@@ -40715,7 +40706,7 @@ function Chapter4App({ onBack }) {
     if (!currentQ) return
     if (revealed) { advance(); return }
     const ok = ch4_checkFill(currentQ, fillInput)
-    setIsCorrect(ok); setRevealed(true)
+;(ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -40723,7 +40714,7 @@ function Chapter4App({ onBack }) {
     if (!currentQ || revealed || currentQ.kind !== 'mcq') return
     const optSourceIdx = optionOrder[displayIdx]
     const ok = optSourceIdx === currentQ.correct
-    setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
+    setSelectedIdx(displayIdx); (ok ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(ok)); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
   }
 
@@ -40747,7 +40738,7 @@ function Chapter4App({ onBack }) {
       setPhase('done')
     } else {
       setQIdx(next)
-      setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+      setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
       setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: Math.min(lesson.questions.length, next) } }))
     }
   }
@@ -40758,7 +40749,7 @@ function Chapter4App({ onBack }) {
     if (!lesson) return
     const clamped = Math.max(0, Math.min(playList.length - 1, i))
     setQIdx(clamped); setLastWrongSrc(null)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
     setProgress(p => {
       const cur = p[activeId] || {}
       const saved = Math.max(cur.qIdx || 0, Math.min(lesson.questions.length, clamped))
@@ -40769,7 +40760,7 @@ function Chapter4App({ onBack }) {
   const backToOverview = () => {
     cancelAutoAdvance()
     setActiveId(null); setPhase('teach'); setQIdx(0)
-    setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
+    setSelectedIdx(null); setFillInput(''); setRevealed(false); (window.playGlobalWrong?.(), setIsCorrect(false))
   }
 
   const resetAll = () => {
@@ -41301,6 +41292,7 @@ function ComicAdditionApp({ onBack }) {
     })
     const data = await res.json()
     setLoading(false)
+    if (data.correct) { window.playGlobalCorrect?.() } else { window.playGlobalWrong?.() }
     setIsCorrect(data.correct)
     setFeedback(data.correct ? 'Correct! Great job!' : `Oops! The correct answer was ${data.correctAnswer}.`)
     setRevealed(true)
@@ -41497,7 +41489,7 @@ function DragDropCountingApp({ onBack }) {
     const data = await res.json()
 
     setLoading(false)
-    setIsCorrect(data.correct)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct))
     setFeedback(data.correct ? 'Correct! Great job!' : `Oops! We needed ${data.correctAnswer} apples.`)
     setRevealed(true)
   }
@@ -41647,7 +41639,7 @@ function CoordGeomInteractiveApp({ onBack }) {
       const data = await r.json();
 
       const correct = data.correct;
-      setIsCorrect(correct);
+;(correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(correct));
       setFeedback(data.message + (correct ? ` ${data.display} is correct!` : ` The answer was ${data.display}.`));
       if (correct) setScore(s => s + 1);
 
@@ -41668,7 +41660,7 @@ function CoordGeomInteractiveApp({ onBack }) {
     if (revealed || !currentQ) return;
     timer.stop();
     setRevealed(true);
-    setIsCorrect(false);
+;(window.playGlobalWrong?.(), setIsCorrect(false));
     setFeedback(`Solution: The answer is ${currentQ.display}.`);
     setResults(prev => [...prev, {
       question: currentQ.prompt,
@@ -41933,7 +41925,7 @@ function DartBoardApp({ onBack }) {
       const data = await r.json();
 
       const correct = data.correct;
-      setIsCorrect(correct);
+;(correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(correct));
       setFeedback(correct
         ? `✅ Bullseye! (${dartPos.x}, ${dartPos.y}) is correct!`
         : `❌ Missed! You threw at (${dartPos.x}, ${dartPos.y}) but the target was (${currentQ.x}, ${currentQ.y}).`
@@ -41967,7 +41959,7 @@ function DartBoardApp({ onBack }) {
     if (revealed || !currentQ) return;
     timer.stop();
     setRevealed(true);
-    setIsCorrect(false);
+;(window.playGlobalWrong?.(), setIsCorrect(false));
     setFeedback(`Solution: The target coordinate is (${currentQ.x}, ${currentQ.y}).\nMove ${currentQ.x >= 0 ? 'right' : 'left'} ${Math.abs(currentQ.x)} unit(s) on the x-axis, then ${currentQ.y >= 0 ? 'up' : 'down'} ${Math.abs(currentQ.y)} unit(s) on the y-axis.`);
     setResults(prev => [...prev, {
       question: currentQ.prompt,
@@ -42262,7 +42254,7 @@ function BalanceScaleApp({ onBack }) {
     const data = await res.json()
 
     setLoading(false)
-    setIsCorrect(data.correct)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct))
 
     if (timeExpired) {
       setFeedback(`Time's up! We needed a total weight of ${data.correctAnswer}.`)
@@ -43591,7 +43583,7 @@ function App() {
       try {
         const r = await fetch(`${API}/linearalgebra-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
         const data = await r.json()
-        setIsCorrect(data.correct); setRevealed(true)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct)); setRevealed(true)
         if (data.correct) setScore(s => s + 1)
         setFeedback(data.correct ? `Correct! ${data.display}` : `Incorrect. Answer: ${data.display}`)
         setResults(prev => [...prev, { prompt: question.prompt, userAnswer: answer.trim(), correctAnswer: data.display, correct: data.correct, time: timeTaken }])
@@ -43614,7 +43606,7 @@ function App() {
       try {
         const r = await fetch(`${API}/linearalgebra-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...question, userAnswer: '', solve: true }) })
         const data = await r.json()
-        setIsCorrect(false); setRevealed(true)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true)
         const display = data.display || data.correctAnswer || data.answer || ''
         setFeedback(`Solution: ${display}`)
         if (data.explanation) setExplanation(data.explanation)
@@ -43625,7 +43617,7 @@ function App() {
     const handleSkip = () => {
       if (!question || revealed) return
       submittedRef.current = true; timer.stop()
-      setIsCorrect(false); setRevealed(true)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true)
       setFeedback('Skipped — counted as incorrect.')
       setResults(prev => [...prev, { prompt: question.prompt, userAnswer: '(skipped)', correctAnswer: '—', correct: false, time: 0 }])
       if (isAdaptive) { setAdaptScore(prev => { const next = Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next }) }
@@ -44072,7 +44064,7 @@ function App() {
       try {
         const r = await fetch(`${API}/la-mission-quiz-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
         const data = await r.json()
-        setIsCorrect(data.correct); setRevealed(true)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct)); setRevealed(true)
         if (data.correct) setScore(s => s + 1)
         setFeedback(data.correct ? `Correct! ${data.display}` : `Incorrect. Answer: ${data.display}`)
         setResults(prev => [...prev, { prompt: question.prompt, userAnswer: answer.trim(), correctAnswer: data.display, correct: data.correct, time: timeTaken }])
@@ -44088,7 +44080,7 @@ function App() {
     const handleSolve = async () => {
       if (!question || revealed) return
       submittedRef.current = true; timer.stop()
-      setIsCorrect(false); setRevealed(true)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true)
       const display = question.display || question.answer || ''
       setFeedback(`Solution: ${display}`)
       setExplanation(generateMqExplanation(question))
@@ -44098,7 +44090,7 @@ function App() {
     const handleSkip = () => {
       if (!question || revealed) return
       submittedRef.current = true; timer.stop()
-      setIsCorrect(false); setRevealed(true)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true)
       setFeedback('Skipped — counted as incorrect.')
       setResults(prev => [...prev, { prompt: question.prompt, userAnswer: '(skipped)', correctAnswer: '—', correct: false, time: 0 }])
       if (isAdaptive) { setAdaptScore(prev => { const next = Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next }) }
@@ -44291,7 +44283,7 @@ function App() {
           body: JSON.stringify({ id: question.id, answer: userAnswer })
         })
         const data = await r.json()
-        setIsCorrect(data.correct); setRevealed(true)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct)); setRevealed(true)
         setTotal(t => t + 1)
         if (data.correct) { setScore(s => s + 1); setFeedback('Correct! Well done!') }
         else {
@@ -44321,7 +44313,7 @@ function App() {
     const handleSolve = async () => {
       if (!question || revealed) return
       submittedRef.current = true
-      setIsCorrect(false); setRevealed(true)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true)
       setHintUsed(true)
       setFeedback('Solved — here\'s the step-by-step solution!')
       fetchSolution()
@@ -46666,7 +46658,7 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
     const timeTaken = timer.stop()
     setAnswer(finalAns)
     const data = await customCheck({ question, finalAns, solve: false })
-    setIsCorrect(data.correct)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct))
     if (data.correct) setScore(s => s + 1)
     const ansString = formatMathLabAnswer(question, data.correctAnswer)
     const explanationText = question.hint ? ` (${question.hint})` : ''
@@ -46692,7 +46684,7 @@ function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNum
     if (revealed || !question) return
     const timeTaken = timer.stop()
     const data = await customCheck({ question, finalAns: '', solve: true })
-    setIsCorrect(false)
+;(window.playGlobalWrong?.(), setIsCorrect(false))
     const ansString = formatMathLabAnswer(question, data.correctAnswer)
     setFeedback(`Solution: ${ansString}`)
     setResults(prev => [...prev, {
@@ -47473,7 +47465,7 @@ function GKApp({ onBack, markTopicCompleted, isGoalMode = false }) {
     // POST to backend API to check the answer
     const res = await fetch(`${API}/gk-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  id: question.id, answerOption: option, sessionGoal }) })
     const data = await res.json()
-    setIsCorrect(data.correct)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct))
     if (data.correct) setScore((s) => s + 1)
     // Show feedback with explanation
     (() => {
@@ -47519,7 +47511,7 @@ function GKApp({ onBack, markTopicCompleted, isGoalMode = false }) {
     // POST to backend API with solve flag to get the solution
     const res = await fetch(`${API}/gk-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  id: question.id, answerOption: '', solve: true, sessionGoal }) })
     const data = await res.json()
-    setIsCorrect(false)
+;(window.playGlobalWrong?.(), setIsCorrect(false))
     const display = data.correctAnswer || ''
     const displayText = `${display}) ${data.correctAnswerText || ''}`
     const explanation = data.explanation || ''
@@ -47812,7 +47804,7 @@ function ColumnAdditionApp({ onBack, initialDifficulty, initialNumQuestions, ini
       const data = await r.json()
       setCorrectAnswerDigits(data.answerDigits)
       setCorrectCarryDigits(data.correctCarries)
-      setIsCorrect(data.correct); setRevealed(true)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct)); setRevealed(true)
 
       let explanation = ''
       try {
@@ -47846,7 +47838,7 @@ function ColumnAdditionApp({ onBack, initialDifficulty, initialNumQuestions, ini
       const data = await r.json()
       setCorrectAnswerDigits(data.answerDigits)
       setCorrectCarryDigits(data.correctCarries)
-      setIsCorrect(false); setRevealed(true)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true)
       setAnswerInputs(data.answerDigits ? data.answerDigits.map(String) : question.answerDigits.map(String))
       setCarryInputs(data.correctCarries ? data.correctCarries.map(String) : question.carries.map(String))
       setFeedback(data.explanation || 'Solved — study the carries above each column.')
@@ -47856,7 +47848,7 @@ function ColumnAdditionApp({ onBack, initialDifficulty, initialNumQuestions, ini
       console.error('Solve failed:', e)
       setCorrectAnswerDigits(question.answerDigits)
       setCorrectCarryDigits(question.carries)
-      setRevealed(true); setIsCorrect(false)
+      setRevealed(true); (window.playGlobalWrong?.(), setIsCorrect(false))
       setAnswerInputs(question.answerDigits.map(String))
       setCarryInputs(question.carries.map(String))
       setFeedback('Solved — study the carries above each column.')
@@ -48381,7 +48373,7 @@ function ColumnMultiplicationApp({ onBack, initialDifficulty, initialNumQuestion
         setCorrectCarryDigits(data.correctCarries)
         setCorrectPPDigits(null); setCorrectPPCarries(null)
       }
-      setIsCorrect(data.correct); setRevealed(true)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct)); setRevealed(true)
       let explanation = ''
       try {
         const sr = await fetch(`${API}/column-multiplication-api/check`, {
@@ -48421,7 +48413,7 @@ function ColumnMultiplicationApp({ onBack, initialDifficulty, initialNumQuestion
       })
       const data = await r.json()
       setCorrectAnswerDigits(data.answerDigits)
-      setIsCorrect(false); setRevealed(true)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true)
       setAnswerInputs(data.answerDigits ? data.answerDigits.map(String) : question.answerDigits.map(String))
       if (isMulti) {
         setCorrectCarryDigits(null)
@@ -48448,7 +48440,7 @@ function ColumnMultiplicationApp({ onBack, initialDifficulty, initialNumQuestion
     } catch (e) {
       console.error('Solve failed:', e)
       setCorrectAnswerDigits(question.answerDigits)
-      setIsCorrect(false); setRevealed(true)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true)
       setAnswerInputs(question.answerDigits.map(String))
       if (isMulti && question.partialProducts) {
         setCorrectPPDigits(question.partialProducts.map(pp => pp.digits))
@@ -49093,7 +49085,7 @@ function ColumnDivisionApp({ onBack, initialDifficulty, initialNumQuestions, ini
         body: JSON.stringify({ dividend: question.dividend, divisor: question.divisor, userQuotient, userProducts, userRemainders, sessionGoal })
       })
       const data = await r.json()
-      setIsCorrect(data.correct); setRevealed(true)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct)); setRevealed(true)
       let explanation = ''
       let solSteps = null
       try {
@@ -49132,7 +49124,7 @@ function ColumnDivisionApp({ onBack, initialDifficulty, initialNumQuestions, ini
       setQuotientInputs(sd.quotientDigits.map(String))
       setProductInputs(sd.steps.map(s => String(s.product).split('')))
       setRemainderInputs(sd.steps.map(s => new Array(Math.max(String(s.remainder).length, 1)).fill(String(s.remainder).padStart(Math.max(String(s.remainder).length, 1), '0'))))
-      setIsCorrect(false); setRevealed(true)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true)
       setSolutionSteps(sd.solutionSteps || null)
       setFeedback(sd.explanation || `Solved \u2014 ${question.dividend} \u00f7 ${question.divisor} = ${question.answer}`)
       setResults(prev => [...prev, { question: `${question.dividend} \u00f7 ${question.divisor}`, userAnswer: '\u2014', correct: false, correctAnswer: question.answer, time: timer.elapsed, userCarries: '\u2014', correctCarries: question.quotientDigits.join('') }])
@@ -49148,7 +49140,7 @@ function ColumnDivisionApp({ onBack, initialDifficulty, initialNumQuestions, ini
         isLast: step.isLast, nextDigit: step.nextDigit,
       }))
       setSolutionSteps(fallbackSteps)
-      setIsCorrect(false); setRevealed(true)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true)
       setFeedback(`Solved \u2014 ${question.dividend} \u00f7 ${question.divisor} = ${question.answer}`)
     }
   }
@@ -49676,7 +49668,7 @@ function ColumnSubtractionApp({ onBack, initialDifficulty, initialNumQuestions, 
       }
       setCorrectAnswerDigits(data.answerDigits)
       setCorrectBorrowDigits(data.correctBorrows)
-      setIsCorrect(data.correct); setRevealed(true); setActiveBorrows(allBorrows)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct)); setRevealed(true); setActiveBorrows(allBorrows)
       let explanation = ''
       try {
         const sr = await fetch(`${API}/column-subtraction-api/check`, {
@@ -49712,7 +49704,7 @@ function ColumnSubtractionApp({ onBack, initialDifficulty, initialNumQuestions, 
       }
       setCorrectAnswerDigits(data.answerDigits)
       setCorrectBorrowDigits(data.correctBorrows)
-      setIsCorrect(false); setRevealed(true); setActiveBorrows(allBorrows)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true); setActiveBorrows(allBorrows)
       setAnswerInputs(data.answerDigits ? data.answerDigits.map(String) : question.answerDigits.map(String))
       setBorrowInputs(data.correctBorrows ? data.correctBorrows.map(String) : question.borrows.map(String))
       setFeedback(data.explanation || 'Solved — study the borrows above each column.')
@@ -49725,7 +49717,7 @@ function ColumnSubtractionApp({ onBack, initialDifficulty, initialNumQuestions, 
       }
       setCorrectAnswerDigits(question.answerDigits)
       setCorrectBorrowDigits(question.borrows)
-      setRevealed(true); setIsCorrect(false); setActiveBorrows(allBorrows)
+      setRevealed(true); (window.playGlobalWrong?.(), setIsCorrect(false)); setActiveBorrows(allBorrows)
       setAnswerInputs(question.answerDigits.map(String))
       setBorrowInputs(question.borrows.map(String))
       setFeedback('Solved — study the borrows above each column.')
@@ -50070,7 +50062,7 @@ function AdditionApp({ onBack, completedTopics = [], goldMastery = [], markTopic
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') (window.playGlobalWrong?.(), setIsCorrect(false)) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
     try {
@@ -50261,7 +50253,7 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
         body: JSON.stringify({ a: question.a, b: question.b, answer: Number(submittedAnswer) }),
       })
       const data = await res.json()
-      setIsCorrect(data.correct)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct))
       const newScore = score + (data.correct ? 1 : 0)
       setScore(newScore)
 
@@ -50314,7 +50306,7 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
       body: JSON.stringify({ a: question.a, b: question.b, answer: '', solve: true }),
     })
     const data = await res.json()
-    setIsCorrect(false)
+;(window.playGlobalWrong?.(), setIsCorrect(false))
     const reasoning = `${question.a} + ${question.b} = ${data.correctAnswer}`
     setFeedback(`Solution: ${reasoning}`)
     setResults((prev) => [...prev, {
@@ -51372,7 +51364,7 @@ function GymQuiz({ title, subtitle, typeKeys, welcomeText, algebraInput, onBack 
       if (!trimmed || trimmed === '-' || trimmed === '.' || trimmed === '/') return
       const correct = gymCheckAnswer(question, trimmed)
       const timeTaken = timer.stop()
-      setIsCorrect(correct)
+;(correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(correct))
       if (correct) setScore(s => s + 1)
       if (adaptive) updateAdaptDiff(correct, timeTaken)
       const corrStr = gymFormatAnswer(question)
@@ -51407,7 +51399,7 @@ function GymQuiz({ title, subtitle, typeKeys, welcomeText, algebraInput, onBack 
     const timeTaken = timer.stop()
     const corrStr = gymFormatAnswer(question)
     const promptStem = question.prompt.replace(/\s*=\s*\?\s*$/, '')
-    setIsCorrect(false)
+;(window.playGlobalWrong?.(), setIsCorrect(false))
     setFeedback(`Solution: ${promptStem} = ${corrStr}`)
     setResults(prev => [...prev, {
       question: `[${question.type}] ${mathToPlain(question.prompt)}`,
@@ -51655,7 +51647,7 @@ function BasicArithApp({ onBack, completedTopics = [], goldMastery = [], markTop
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') (window.playGlobalWrong?.(), setIsCorrect(false)) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
     try {
@@ -51760,7 +51752,7 @@ const fetchQuestion = async () => {
       // POST to backend to validate answer for arithmetic operation: a op b
       const res = await fetch(`${API}/basicarith-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  a: question.a, b: question.b, op: question.op, answer: Number(answer), sessionGoal }) })
       const data = await res.json()
-      setIsCorrect(data.correct)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct))
       if (data.correct) setScore(s => s + 1)
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
@@ -51803,7 +51795,7 @@ const fetchQuestion = async () => {
     // POST to backend API with solve flag to get the solution
     const res = await fetch(`${API}/basicarith-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  a: question.a, b: question.b, op: question.op, answer: '', solve: true, sessionGoal }) })
     const data = await res.json()
-    setIsCorrect(false)
+;(window.playGlobalWrong?.(), setIsCorrect(false))
     setFeedback(`Solution: ${question.prompt} = ${data.correctAnswer}`)
     setResults(prev => [...prev, {
       question: question.prompt,
@@ -51992,7 +51984,7 @@ function QuadraticApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') (window.playGlobalWrong?.(), setIsCorrect(false)) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
     try {
@@ -52069,7 +52061,7 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
       // POST to backend to validate quadratic substitution answer
       const res = await fetch(`${API}/quadratic-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  a: question.a, b: question.b, c: question.c, x: question.x, answer: Number(answer), sessionGoal }) })
       const data = await res.json()
-      setIsCorrect(data.correct)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct))
       if (data.correct) setScore((s) => s + 1)
 
       // Generate step-by-step working for feedback
@@ -52126,7 +52118,7 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
     // POST to backend API with solve flag to get the solution
     const res = await fetch(`${API}/quadratic-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  a: question.a, b: question.b, c: question.c, x: question.x, answer: '', solve: true, sessionGoal }) })
     const data = await res.json()
-    setIsCorrect(false)
+;(window.playGlobalWrong?.(), setIsCorrect(false))
     // Generate step-by-step working for feedback
     const { a, b, c, x } = question
     const xSq = x * x
@@ -53216,7 +53208,7 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
     else setAllCorrectInRound(false)
     setRoundTotalTime(t => t + timeTaken)
     setRoundQuestionsCount(c => c + 1)
-    setIsCorrect(correct); setRevealed(true)
+;(correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(correct)); setRevealed(true)
     setFeedback(correct ? `Correct! ${question.table} × ${question.multiplier} = ${correctAnswer}`
       : `Incorrect. ${question.table} × ${question.multiplier} = ${correctAnswer}`)
     recordAnswer(correct, timeTaken, question, answer)
@@ -53226,7 +53218,7 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
     if (!question || revealed) return
     const timeTaken = timer.stop()
     const correctAnswer = question.table * question.multiplier
-    setIsCorrect(false); setRevealed(true)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true)
     setAllCorrectInRound(false)
     setFeedback(`Solution: ${question.table} × ${question.multiplier} = ${correctAnswer}`)
     recordAnswer(false, timeTaken, question, '—')
@@ -53281,7 +53273,7 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
     } else {
       setStreak(0)
     }
-    setIsCorrect(correct); setRevealed(true)
+;(correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(correct)); setRevealed(true)
     setFeedback(correct ? `Correct! ${question.table} × ${question.multiplier} = ${correctAnswer}`
       : `Wrong. ${question.table} × ${question.multiplier} = ${correctAnswer}`)
     recordAnswer(correct, timeTaken, question, rawValue || '—')
@@ -53293,7 +53285,7 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
     if (!question || revealed) return
     const correctAnswer = question.table * question.multiplier
     setStreak(0)
-    setIsCorrect(false); setRevealed(true)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true)
     setFeedback(`Time! ${question.table} × ${question.multiplier} = ${correctAnswer}`)
     recordAnswer(false, MULT_LEVEL3_TIMEOUT_SECONDS, question, '(timed out)')
     setTimeout(() => advanceLevel3(), 700)
@@ -53573,7 +53565,7 @@ function VocabApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') (window.playGlobalWrong?.(), setIsCorrect(false)) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
     try {
@@ -53642,7 +53634,7 @@ const loadQuestion = async (excludeIds) => {
     // POST to backend to validate the selected definition
     const res = await fetch(`${API}/vocab-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  id: question.id, answerOption: option, sessionGoal }) })
     const data = await res.json()
-    setIsCorrect(data.correct)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct))
     if (data.correct) setScore((s) => s + 1)
     // Show feedback with correct answer text
     (() => {
@@ -53698,7 +53690,7 @@ const loadQuestion = async (excludeIds) => {
     // POST to backend API with solve flag to get the solution
     const res = await fetch(`${API}/vocab-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  id: question.id, answerOption: '', solve: true, sessionGoal }) })
     const data = await res.json()
-    setIsCorrect(false)
+;(window.playGlobalWrong?.(), setIsCorrect(false))
     // Show feedback with correct answer text
     setFeedback(`Solution: "${data.correctAnswerText}"`)
     // Truncate long definitions to fit in results table
@@ -53973,7 +53965,7 @@ function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly
     const handleTimeout = async () => {
       if (revealed || finished) return
       timer.reset()
-      setIsCorrect(false); setRevealed(true)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true)
       setFeedback('⏰ Time\'s up! Moving to next question.')
       setResults(prev => [...prev, { prompt: question?.prompt || '', userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: 0 }])
     }
@@ -54068,7 +54060,7 @@ function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly
           body: JSON.stringify({ ...payload, sessionGoal }),
         })
         const data = await r.json()
-        setIsCorrect(data.correct); setRevealed(true)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct)); setRevealed(true)
         setCorrectOption(data.correctOption || '')
         if (data.correct) setScore(s => s + 1)
         const correctText = data.correctDisplay || (question.options.find(o => o.option === data.correctOption)?.text) || ''
@@ -54118,7 +54110,7 @@ function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly
           body: JSON.stringify({ ...question, selectedOption: '', solve: true, sessionGoal }),
         })
         const data = await r.json()
-        setIsCorrect(false); setRevealed(true)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true)
         setCorrectOption(data.correctOption || '')
         const correctText = data.correctDisplay || (question.options.find(o => o.option === data.correctOption)?.text) || ''
         const explanation = data.explanation || ''
@@ -54373,8 +54365,7 @@ function TransferChallengeApp({ topicKey, onBack, completedTopics, goldMastery, 
         body: JSON.stringify(payload)
       })
       const data = await res.json()
-
-      setIsCorrect(data.correct)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct))
       setRevealed(true)
       setExplanation(data.explanation || '')
       setTransferMapping(data.transferMapping || '')
@@ -54667,7 +54658,7 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
     const handleTimeout = async () => {
       if (revealed || finished) return
       timer.reset()
-      setIsCorrect(false); setRevealed(true)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true)
       setFeedback('⏰ Time\'s up! Moving to next question.')
       setResults(prev => [...prev, { prompt: question?.prompt || '', userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: 0 }])
     }
@@ -54764,7 +54755,7 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
           body: JSON.stringify({ ...payload, sessionGoal })
         })
         const data = await r.json()
-        setIsCorrect(data.correct); setRevealed(true)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct)); setRevealed(true)
         if (data.correct) setScore(s => s + 1)
         const coinMsg = (data.lil?.coinsEarned ?? 0) > 0 ? ` (+${data.lil.coinsEarned}🪙)` : ''
         if (!data.correct && sessionGoal === 'perfect') {
@@ -54802,7 +54793,7 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
           body: JSON.stringify({ ...payload, sessionGoal })
         })
         const data = await r.json()
-        setIsCorrect(false); setRevealed(true)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true)
         const display = data.display || data.correctAnswer || data.answer || ''
         const explanation = data.explanation || ''
         setFeedback(`Solution: ${display}${explanation ? '\n' + explanation : ''}`)
@@ -54814,7 +54805,7 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
       if (!question || revealed) return
       submittedRef.current = true
       timer.stop()
-      setIsCorrect(false); setRevealed(true)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true)
       setFeedback('Skipped — counted as incorrect.')
       setResults(prev => [...prev, { prompt: question.prompt, userAnswer: '(skipped)', correctAnswer: '—', correct: false, time: 0 }])
       if (isAdaptive) {
@@ -55095,7 +55086,7 @@ function DotProdApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') (window.playGlobalWrong?.(), setIsCorrect(false)) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
     try {
@@ -55201,7 +55192,7 @@ const loadQuestion = async () => {
     try {
       const r = await fetch(`${API}/dotprod-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ ...payload, sessionGoal }) })
       const data = await r.json()
-      setIsCorrect(data.correct); setRevealed(true)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct)); setRevealed(true)
       if (data.correct) setScore(s => s + 1)
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
@@ -55228,7 +55219,7 @@ const loadQuestion = async () => {
   const handleSolve = async () => {
     if (!question || revealed) return
     const timeTaken = timer.stop()
-    setIsCorrect(false)
+;(window.playGlobalWrong?.(), setIsCorrect(false))
     setRevealed(true)
     const display = question.display || question.answer || '(solution unavailable)'
     setFeedback(`Solution: ${display}`)
@@ -55952,7 +55943,7 @@ function GymApp({ onBack }) {
   const isAdaptive = true
   const handleTimeout = async () => {
     if (revealed) return
-    setIsCorrect(false); setRevealed(true)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true)
     setFeedback('⏰ Time\'s up!')
     setResults(prev => [...prev, {
       question: `[${currentGym?.name || ''} · ${currentDifficulty}] ${question?.prompt || ''}`,
@@ -56105,7 +56096,7 @@ function GymApp({ onBack }) {
         body: JSON.stringify({ ...question, selectedOption: letter }),
       })
       const data = await r.json()
-      setIsCorrect(data.correct); setRevealed(true)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct)); setRevealed(true)
       setCorrectOption(data.correctOption || '')
       if (data.correct) setScore(s => s + 1)
       const correctText = data.correctDisplay || (question.options.find(o => o.option === data.correctOption)?.text) || ''
@@ -56141,7 +56132,7 @@ function GymApp({ onBack }) {
         body: JSON.stringify({ ...question, selectedOption: '', solve: true }),
       })
       const data = await r.json()
-      setIsCorrect(false); setRevealed(true)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true)
       setCorrectOption(data.correctOption || '')
       const correctText = data.correctDisplay || (question.options.find(o => o.option === data.correctOption)?.text) || ''
       const explanation = data.explanation || ''
@@ -56799,7 +56790,7 @@ function TatsavitApp({ onBack }) {
       setScore(s => s + 1)
       streakRef.current += 1
       setStreak(streakRef.current)
-      setFeedback('Correct!')
+;(window.playGlobalCorrect?.(), setFeedback('Correct!'))
       setQuestionsAnswered(prev => [...prev, { levelName: currentQuestion.levelName, userChoice: choiceIdx, correct: true }])
       if (streakRef.current >= 3 && levelRef.current < 13) {
         setTimeout(() => {
@@ -56817,7 +56808,7 @@ function TatsavitApp({ onBack }) {
         }, 1200)
       }
     } else {
-      setFeedback('Incorrect')
+;(window.playGlobalWrong?.(), setFeedback('Incorrect!'))
       streakRef.current = 0
       setStreak(0)
       setTimeout(() => {
@@ -57123,7 +57114,7 @@ function SquaringApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') (window.playGlobalWrong?.(), setIsCorrect(false)) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
     try {
@@ -57186,7 +57177,7 @@ const loadQuestion = async () => {
     try {
       const r = await fetch(`${API}/squaring-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  ...question, userAnswer, sessionGoal }) })
       const data = await r.json()
-      setIsCorrect(data.correct); setRevealed(true)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct)); setRevealed(true)
       if (data.correct) setScore(s => s + 1)
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
@@ -57213,7 +57204,7 @@ const loadQuestion = async () => {
     try {
       const r = await fetch(`${API}/squaring-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  ...question, userAnswer: '', solve: true, sessionGoal }) })
       const data = await r.json()
-      setIsCorrect(false); setRevealed(true)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true)
       const display = data.display || data.correctAnswer || data.answer || ''
       const explanation = data.explanation || ''
       setFeedback(`Solution: ${display}${explanation ? '\n' + explanation : ''}`)
@@ -57652,7 +57643,7 @@ function RandomMixApp({ onBack, isGoalMode = false }) {
   const handleTimeout = () => {
     if (submittedRef.current) return
     submittedRef.current = true
-    setIsCorrect(false)
+;(window.playGlobalWrong?.(), setIsCorrect(false))
     setRevealed(true)
     setFeedback("⏱️ Time's up!")
     setResults(prev => [...prev, {
@@ -57715,7 +57706,7 @@ function RandomMixApp({ onBack, isGoalMode = false }) {
       })
       const data = await r.json()
       const correct = data.correct
-      setIsCorrect(correct)
+;(correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(correct))
       setRevealed(true)
       const coinMsg = (data.lil?.coinsEarned ?? 0) > 0 ? ` (+${data.lil.coinsEarned}🪙)` : ''
 
@@ -57813,7 +57804,7 @@ function RandomMixApp({ onBack, isGoalMode = false }) {
     if (!question || revealed) return
     submittedRef.current = true
     const elapsed = timer.stop()
-    setIsCorrect(false); setRevealed(true); setStreak(s => Math.min(s, 0) - 1)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true); setStreak(s => Math.min(s, 0) - 1)
     if (currentTopic) setTopicDiff(currentTopic.key, d => d - 1)
 
     if (sessionGoal === 'perfect') {
@@ -57865,7 +57856,7 @@ function RandomMixApp({ onBack, isGoalMode = false }) {
         body: JSON.stringify({ ...payload, sessionGoal })
       })
       const data = await r.json()
-      setIsCorrect(false); setRevealed(true)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true)
       const display = data.display || data.correctAnswer || data.answer || ''
       const explanation = data.explanation || ''
       setFeedback(`Solution: ${display}${explanation ? '\n' + explanation : ''}`)
@@ -58137,7 +58128,7 @@ function SetsApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') (window.playGlobalWrong?.(), setIsCorrect(false)) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
     try {
@@ -58198,7 +58189,7 @@ const loadQuestion = async () => {
     try {
       const r = await fetch(`${API}/sets-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ ...payload, sessionGoal }) })
       const data = await r.json()
-      setIsCorrect(data.correct); setRevealed(true)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct)); setRevealed(true)
       if (data.correct) setScore(s => s + 1)
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
@@ -58225,7 +58216,7 @@ const loadQuestion = async () => {
     try {
       const r = await fetch(`${API}/sets-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  ...question, userAnswer: '', solve: true, sessionGoal }) })
       const data = await r.json()
-      setIsCorrect(false); setRevealed(true)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true)
       const display = data.display || data.correctAnswer || data.answer || ''
       const explanation = data.explanation || ''
       setFeedback(`Solution: ${display}${explanation ? '\n' + explanation : ''}`)
@@ -58374,7 +58365,7 @@ function SequencesApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') (window.playGlobalWrong?.(), setIsCorrect(false)) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
     try {
@@ -58428,7 +58419,7 @@ const loadQuestion = async () => {
     try {
       const r = await fetch(`${API}/sequences-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ ...payload, sessionGoal }) })
       const data = await r.json()
-      setIsCorrect(data.correct); setRevealed(true)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct)); setRevealed(true)
       if (data.correct) setScore(s => s + 1)
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
@@ -58455,7 +58446,7 @@ const loadQuestion = async () => {
     try {
       const r = await fetch(`${API}/sequences-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  ...question, answer: '', solve: true, sessionGoal }) })
       const data = await r.json()
-      setIsCorrect(false); setRevealed(true)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true)
       const display = data.display || data.correctAnswer || data.answer || ''
       const explanation = data.explanation || ''
       setFeedback(`Solution: ${display}${explanation ? '\n' + explanation : ''}`)
@@ -58613,7 +58604,7 @@ function RatioApp({ onBack, completedTopics = [], goldMastery = [], markTopicCom
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') (window.playGlobalWrong?.(), setIsCorrect(false)) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
     try {
@@ -58680,7 +58671,7 @@ const loadQuestion = async () => {
     try {
       const r = await fetch(`${API}/ratio-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ ...payload, sessionGoal }) })
       const data = await r.json()
-      setIsCorrect(data.correct)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct))
       setRevealed(true)
       if (data.correct) setScore(s => s + 1)
       (() => {
@@ -58708,7 +58699,7 @@ const loadQuestion = async () => {
     try {
       const r = await fetch(`${API}/ratio-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  ...question, answer: '', solve: true, sessionGoal }) })
       const data = await r.json()
-      setIsCorrect(false); setRevealed(true)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true)
       const display = data.display || data.correctAnswer || data.answer || ''
       const explanation = data.explanation || ''
       setFeedback(`Solution: ${display}${explanation ? '\n' + explanation : ''}`)
@@ -59024,6 +59015,7 @@ function PercentApp({
   pendingEscalationSkill,
   setPendingEscalationSkill,
 }) {
+  const { playCorrect, playWrong } = useQuizSound();
   const restored = quizSession || {};
   const [currentQuestion, setCurrentQuestion] = useState(() => restored.currentQuestion || generateFindQuestion());
   const [diagnosticQuestion, setDiagnosticQuestion] = useState(() => (
@@ -59136,7 +59128,7 @@ function PercentApp({
 
     if (correct) {
       setIsCorrectFirstTry(true);
-      playSound('correct', soundEnabled);
+      playCorrect();
       triggerConfetti();
       
       setMascotExpression('cheering');
@@ -59151,7 +59143,7 @@ function PercentApp({
       awardReward('Quest star earned!', 12, maybeCollectible(correctCount + 1));
     } else {
       setIsCorrectFirstTry(false);
-      playSound('wrong', soundEnabled);
+      playWrong();
       setShake(true);
       
       setMascotExpression('sad');
@@ -59222,7 +59214,7 @@ function PercentApp({
     nextChecked[stepIndex] = true;
 
     if (isStepCorrect) {
-      playSound('correct', soundEnabled);
+      playCorrect();
       setStreak(prev => prev + 1);
       
       setMascotExpression('cheering');
@@ -59237,7 +59229,7 @@ function PercentApp({
         showRecap: stepIndex === 1 ? true : prev.showRecap
       }));
     } else {
-      playSound('wrong', soundEnabled);
+      playWrong();
       
       setMascotExpression('sad');
       setTimeout(() => setMascotExpression('idle'), 2000);
@@ -59283,7 +59275,7 @@ function PercentApp({
 
     if (correct) {
       setIsCheckSuccess(true);
-      playSound('correct', soundEnabled);
+      playCorrect();
       triggerConfetti();
 
       setMascotExpression('cheering');
@@ -59293,7 +59285,7 @@ function PercentApp({
       awardReward('Training badge powered up!', 8);
     } else {
       setIsCheckSuccess(false);
-      playSound('wrong', soundEnabled);
+      playWrong();
       setShake(true);
 
       setMascotExpression('sad');
@@ -59895,7 +59887,7 @@ function IndicesApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') (window.playGlobalWrong?.(), setIsCorrect(false)) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
     try {
@@ -59964,7 +59956,7 @@ const loadQuestion = async () => {
     try {
       const r = await fetch(`${API}/indices-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ ...payload, sessionGoal }) })
       const data = await r.json()
-      setIsCorrect(data.correct)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct))
       setRevealed(true)
       if (data.correct) setScore(s => s + 1)
 
@@ -60000,7 +59992,7 @@ const loadQuestion = async () => {
     try {
       const r = await fetch(`${API}/indices-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  ...question, answer: '', solve: true, sessionGoal }) })
       const data = await r.json()
-      setIsCorrect(false); setRevealed(true)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true)
       const display = data.display || data.correctAnswer || data.answer || ''
       const explanation = data.explanation || ''
       setFeedback(`Solution: ${display}${explanation ? '\n' + explanation : ''}`)
@@ -60187,7 +60179,7 @@ function SurdsApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') (window.playGlobalWrong?.(), setIsCorrect(false)) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
     try {
@@ -60289,7 +60281,7 @@ const loadQuestion = async () => {
     try {
       const r = await fetch(`${API}/surds-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ ...payload, sessionGoal }) })
       const data = await r.json()
-      setIsCorrect(data.correct)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct))
       setRevealed(true)
       if (data.correct) setScore(s => s + 1)
 
@@ -60326,7 +60318,7 @@ const loadQuestion = async () => {
     try {
       const r = await fetch(`${API}/surds-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  ...question, answer: '', solve: true, sessionGoal }) })
       const data = await r.json()
-      setIsCorrect(false); setRevealed(true)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true)
       const display = data.display || data.correctAnswer || data.answer || ''
       const explanation = data.explanation || ''
       setFeedback(`Solution: ${display}${explanation ? '\n' + explanation : ''}`)
@@ -60528,7 +60520,7 @@ function FractionAddApp({ onBack, completedTopics = [], goldMastery = [], markTo
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') (window.playGlobalWrong?.(), setIsCorrect(false)) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
     try {
@@ -60659,8 +60651,7 @@ const loadQuestion = async () => {
     try {
       const r = await fetch(`${API}/fractionadd-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ ...payload, sessionGoal }) })
       const data = await r.json()
-
-      setIsCorrect(data.correct)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct))
       setRevealed(true)
       if (data.correct) setScore(s => s + 1)
 
@@ -60705,7 +60696,7 @@ const loadQuestion = async () => {
     try {
       const r = await fetch(`${API}/fractionadd-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  ...question, ansNum: '', ansDen: '', solve: true, sessionGoal }) })
       const data = await r.json()
-      setIsCorrect(false); setRevealed(true)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true)
       const display = data.display || data.correctAnswer || data.answer || ''
       const explanation = data.explanation || ''
       setFeedback(`Solution: ${display}${explanation ? '\n' + explanation : ''}`)
@@ -61031,7 +61022,7 @@ function TwinHuntApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') (window.playGlobalWrong?.(), setIsCorrect(false)) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
     try {
@@ -61115,7 +61106,7 @@ const generateRound = (n) => {
     const timeTaken = timer.stop()
     const correct = symbol === commonSymbol
     if (correct) setScore((s) => s + 1)
-    setIsCorrect(correct)
+;(correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(correct))
     setFeedback(correct
       ? `Correct! ${commonSymbol} was the match.`
       : `Wrong — you picked ${symbol}. The match was ${commonSymbol}.`)
@@ -61342,7 +61333,7 @@ function SqrtApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') (window.playGlobalWrong?.(), setIsCorrect(false)) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
     try {
@@ -61422,7 +61413,7 @@ const fetchQuestion = async (step) => {
       // POST to backend to validate square root answer
       const res = await fetch(`${API}/sqrt-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  q: question.q, answer: Number(answer), sessionGoal }) })
       const data = await res.json()
-      setIsCorrect(data.correct)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct))
       if (data.correct) setScore((s) => s + 1)
       // Show floor and ceiling values for reference
       const reasoning = `√${question.q} = ${data.sqrtRounded}\n⌊${data.sqrtRounded}⌋ = ${data.floorAnswer}, ⌈${data.sqrtRounded}⌉ = ${data.ceilAnswer}`
@@ -61468,7 +61459,7 @@ const fetchQuestion = async (step) => {
   const handleSolve = async () => {
     if (!question || revealed) return
     const timeTaken = timer.stop()
-    setIsCorrect(false)
+;(window.playGlobalWrong?.(), setIsCorrect(false))
     setRevealed(true)
     setFeedback(`Solution: √${question.q} = (approximately)`)
   }
@@ -61645,7 +61636,7 @@ function PolyMulApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') (window.playGlobalWrong?.(), setIsCorrect(false)) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
     try {
@@ -61704,7 +61695,7 @@ const loadQuestion = async () => {
     // POST to backend to validate polynomial multiplication result
     const res = await fetch(`${API}/polymul-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  p1: question.p1, p2: question.p2, userCoeffs: userCoeffs.map(Number), sessionGoal }) })
     const data = await res.json()
-    setIsCorrect(data.correct)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct))
     if (data.correct) setScore(s => s + 1)
     (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
@@ -61736,7 +61727,7 @@ const loadQuestion = async () => {
     try {
       const r = await fetch(`${API}/polymul-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  p1: question.p1, p2: question.p2, userCoeffs: [], solve: true, sessionGoal }) })
       const data = await r.json()
-      setIsCorrect(false); setRevealed(true)
+;(window.playGlobalWrong?.(), setIsCorrect(false)); setRevealed(true)
       const display = data.correctDisplay || question.productDisplay || ''
       const explanation = data.explanation || ''
       setFeedback(`Solution: ${display}${explanation ? '\n' + explanation : ''}`)
@@ -61963,7 +61954,7 @@ function PolyFactorApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') (window.playGlobalWrong?.(), setIsCorrect(false)) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
     try {
@@ -62024,7 +62015,7 @@ const loadQuestion = async () => {
     // POST to backend to validate factorization
     const res = await fetch(`${API}/polyfactor-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  a: question.a, b: question.b, c: question.c, userP: Number(userP), userQ: Number(userQ), userR: Number(userR), userS: Number(userS), sessionGoal }) })
     const data = await res.json()
-    setIsCorrect(data.correct)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct))
     // Increment score if correct
     if (data.correct) setScore(s => s + 1)
     // Format feedback message using correct factors (p, q, r, s from question.factors)
@@ -62058,7 +62049,7 @@ const loadQuestion = async () => {
     if (!question || revealed) return
     const timeTaken = timer.stop()
     const { p, q, r, s } = question.factors
-    setIsCorrect(false)
+;(window.playGlobalWrong?.(), setIsCorrect(false))
     setRevealed(true)
     setFeedback(`Solution: (${p}x ${q >= 0 ? '+' : '−'} ${Math.abs(q)})(${r}x ${s >= 0 ? '+' : '−'} ${Math.abs(s)})`)
   }
@@ -62266,7 +62257,7 @@ function PrimeFactorApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') (window.playGlobalWrong?.(), setIsCorrect(false)) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
     try {
@@ -62359,7 +62350,7 @@ const loadQuestion = async () => {
       // Sort user's factors and compare to correct factors
       const sorted = [...newFactors].sort((a, b) => a - b)
       const correct = question.factors.length === sorted.length && question.factors.every((v, i) => v === sorted[i])
-      setIsCorrect(correct)
+;(correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(correct))
       if (correct) setScore(s => s + 1)
       setFeedback(correct ? `Correct! ${question.number} = ${question.factors.join(' × ')}` : `Incorrect. ${question.number} = ${question.factors.join(' × ')}`)
       // Add result to history for results table
@@ -62384,7 +62375,7 @@ const loadQuestion = async () => {
    */
   const handleGiveUp = () => {
     const timeTaken = timer.stop()
-    setIsCorrect(false)
+;(window.playGlobalWrong?.(), setIsCorrect(false))
     setFeedback(`${question.number} = ${question.factors.join(' × ')}`)
     // Record partial attempt (shows ellipsis if some factors entered)
     setResults(prev => [...prev, {
@@ -62613,7 +62604,7 @@ function QFormulaApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') (window.playGlobalWrong?.(), setIsCorrect(false)) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
     try {
@@ -62673,7 +62664,7 @@ const loadQuestion = async () => {
     // POST to backend to validate roots
     const res = await fetch(`${API}/qformula-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  a: question.a, b: question.b, c: question.c, userR1: Number(userR1), userR2: Number(userR2), userType: question.roots.type, sessionGoal }) })
     const data = await res.json()
-    setIsCorrect(data.correct)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct))
     if (data.correct) setScore(s => s + 1)
     // Format correct answer display based on root type
     let correctStr = ''
@@ -62713,7 +62704,7 @@ const loadQuestion = async () => {
     if (question.roots.type === 'real_distinct') correctStr = `Roots: ${question.roots.r1} and ${question.roots.r2}`
     else if (question.roots.type === 'real_equal') correctStr = `Root: ${question.roots.r1} (repeated)`
     else correctStr = `Roots: ${question.roots.realPart} ± ${question.roots.imagPart}i`
-    setIsCorrect(false)
+;(window.playGlobalWrong?.(), setIsCorrect(false))
     setRevealed(true)
     setFeedback(`Solution: ${correctStr}`)
   }
@@ -62937,7 +62928,7 @@ function SimulApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') (window.playGlobalWrong?.(), setIsCorrect(false)) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
     try {
@@ -62998,7 +62989,7 @@ const loadQuestion = async () => {
     // POST to backend to validate solution
     const res = await fetch(`${API}/simul-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ ...body, sessionGoal }) })
     const data = await res.json()
-    setIsCorrect(data.correct)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct))
     if (data.correct) setScore(s => s + 1)
     // Format feedback message and result based on system size
     const s = question.solution
@@ -63040,7 +63031,7 @@ const loadQuestion = async () => {
     const timeTaken = timer.stop()
     const s = question.solution
     const display = is3x3 ? `(x, y, z) = (${s.x}, ${s.y}, ${s.z})` : `(x, y) = (${s.x}, ${s.y})`
-    setIsCorrect(false)
+;(window.playGlobalWrong?.(), setIsCorrect(false))
     setRevealed(true)
     setFeedback(`Solution: ${display}`)
   }
@@ -63260,7 +63251,7 @@ function FuncEvalApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') (window.playGlobalWrong?.(), setIsCorrect(false)) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
     try {
@@ -63313,7 +63304,7 @@ const loadQuestion = async () => {
     // POST to backend to validate function evaluation
     const res = await fetch(`${API}/funceval-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  answer: question.answer, userAnswer: Number(answer), sessionGoal }) })
     const data = await res.json()
-    setIsCorrect(data.correct)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct))
     if (data.correct) setScore(s => s + 1)
     // Format variable string for feedback (e.g., "x=2, y=3")
     const varStr = Object.entries(question.vars).map(([k, v]) => `${k}=${v}`).join(', ')
@@ -63346,7 +63337,7 @@ const loadQuestion = async () => {
     if (!question || revealed) return
     const timeTaken = timer.stop()
     const varStr = Object.entries(question.vars).map(([k, v]) => `${k}=${v}`).join(', ')
-    setIsCorrect(false)
+;(window.playGlobalWrong?.(), setIsCorrect(false))
     setRevealed(true)
     setFeedback(`Solution: f(${varStr}) = ${question.answer}`)
   }
@@ -63550,7 +63541,7 @@ function LineEqApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') (window.playGlobalWrong?.(), setIsCorrect(false)) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
     try {
@@ -63604,7 +63595,7 @@ const loadQuestion = async () => {
     // POST to backend to validate line equation
     const res = await fetch(`${API}/lineq-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  x1: question.x1, y1: question.y1, x2: question.x2, y2: question.y2, userM: Number(userM), userC: Number(userC), sessionGoal }) })
     const data = await res.json()
-    setIsCorrect(data.correct)
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct))
     if (data.correct) setScore(s => s + 1)
     // Format feedback message with correct m and c values
     (() => {
@@ -63635,7 +63626,7 @@ const loadQuestion = async () => {
   const handleSolve = async () => {
     if (!question || revealed) return
     const timeTaken = timer.stop()
-    setIsCorrect(false)
+;(window.playGlobalWrong?.(), setIsCorrect(false))
     setRevealed(true)
     setFeedback(`Solution: y = ${question.answer.m}x ${question.answer.c >= 0 ? '+' : '−'} ${Math.abs(question.answer.c)}`)
   }
@@ -64122,7 +64113,7 @@ function CustomApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (phase === 'finished') return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') (window.playGlobalWrong?.(), setIsCorrect(false)) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
     try {
@@ -64685,7 +64676,7 @@ const startQuiz = async () => {
     }
 
     // Update score, feedback, and results (common for all puzzle types)
-    setIsCorrect(correct)
+;(correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(correct))
     if (correct) setScore(s => s + 1)
     // Get puzzle type name for results display
     const typeName = CUSTOM_PUZZLES.find(p => p.key === curType)?.name || curType
@@ -64707,7 +64698,7 @@ const startQuiz = async () => {
 
   const handleSolve = async () => {
     if (!question || revealed) return
-    setIsCorrect(false)
+;(window.playGlobalWrong?.(), setIsCorrect(false))
     setRevealed(true)
     // For most puzzle types, display is available from question object
     const display = question.display || question.answer || '(solution unavailable)'
@@ -67304,7 +67295,7 @@ function RiyaApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
+    try { if (typeof setIsCorrect !== 'undefined') (window.playGlobalWrong?.(), setIsCorrect(false)) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback('⏰ Time\'s up! Speed run requires a quick answer.') } catch(_) {}
     try {
@@ -69170,8 +69161,7 @@ function GenericLabApp({ title, subtitle, endpoint, onBack, renderQuestionCustom
       body: JSON.stringify({ answerOption: finalAns, expected: question.answer })
     });
     const data = await res.json();
-
-    setIsCorrect(data.correct);
+;(data.correct ? window.playGlobalCorrect?.() : window.playGlobalWrong?.(), setIsCorrect(data.correct));
     if (data.correct) setScore(s => s + 1);
 
     const explanationText = question.hint ? ` (${question.hint})` : '';
@@ -69199,7 +69189,7 @@ function GenericLabApp({ title, subtitle, endpoint, onBack, renderQuestionCustom
       body: JSON.stringify({ answerOption: '', expected: question.answer, solve: true })
     });
     const data = await res.json();
-    setIsCorrect(false);
+;(window.playGlobalWrong?.(), setIsCorrect(false));
     const explanationText = question.hint ? ` (${question.hint})` : '';
     setFeedback(`Solution: ${data.correctAnswer}.${explanationText}`);
     setResults(prev => [...prev, {

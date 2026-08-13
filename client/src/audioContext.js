@@ -1,3 +1,5 @@
+// DEPRECATED: Please use useQuizSound() from './context/QuizSoundContext.jsx' instead.
+// This file is kept temporarily for backward compatibility during migration.
 let sharedAudioContext = null;
 
 export function getAudioContext() {
