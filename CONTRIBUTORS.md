@@ -50,13 +50,13 @@
 <!-- live-snapshot:start -->
 | 🏆 Commits | 🔀 Merged PRs | 👥 Contributors | 🧩 Puzzles | 📚 Vocab | 🌍 GK |
 |----------:|------------:|--------------:|---------:|-------:|----:|
-| **873** | **73** | **21** | **69** | **7,662** | **991** |
+| **882** | **73** | **22** | **69** | **7,662** | **991** |
 <!-- live-snapshot:end -->
 
 ## 🥇 Leaderboard
 
 <!-- live-rank:start -->
-_Live data — last regenerated 2026-08-09 · auto-refreshed by [`github-actions[bot]`](https://github.com/features/actions) on every push to `main` and every 12h._
+_Live data — last regenerated 2026-08-13 · auto-refreshed by [`github-actions[bot]`](https://github.com/features/actions) on every push to `main` and every 12h._
 
 | # | 👤 Real Name | 🔗 GitHub ID | 📝 Commits | 🔀 PRs | 🏷️ Role |
 |--:|:-------------|:-------------|----------:|-----:|:--------|
@@ -67,8 +67,8 @@ _Live data — last regenerated 2026-08-09 · auto-refreshed by [`github-actions
 | 5. | **Sameer Mishra** | [24F3005086](https://github.com/24F3005086) | **36** | 4  | i18n · Accessibility · Concept Labs |
 | 6. | **Vaibhav Satish**<br/><sub>↳ also commits as <b>Vaibhav</b></sub> | [Vaibhav-sa30](https://github.com/Vaibhav-sa30) | **35** | 2  | Vachana Literacy Lab & Vocabulary |
 | 7. | **DIPTOSUBHRO DATTA**<br/><sub>↳ also commits as <b>Dipto Subhro</b></sub> | [diptosubhro-ctrl](https://github.com/diptosubhro-ctrl) | **33** | 1  | Tutorial System + Noise Filter Refactor |
-| 8. | **Ritish Karmakar** | [Ritish007-svg](https://github.com/Ritish007-svg) | **27** | 1  | Percentages Level-wise Explanation |
-| 9. | **github-actions-bot-**<br/><sub>↳ also commits as <b>github-actions[bot]</b></sub> | [github-actions-bot-](https://github.com/github-actions-bot-) | **23** | 0  | — |
+| 8. | **github-actions-bot-**<br/><sub>↳ also commits as <b>github-actions[bot]</b></sub> | [github-actions-bot-](https://github.com/github-actions-bot-) | **31** | 0  | — |
+| 9. | **Ritish Karmakar** | [Ritish007-svg](https://github.com/Ritish007-svg) | **27** | 1  | Percentages Level-wise Explanation |
 | 10. | **saniyajos**<br/><sub>↳ also commits as <b>SaniyaJos</b></sub> | [saniyajos](https://github.com/saniyajos) | **22** | 0  | — |
 | 11. | **K C Dharshan** | [KCDharshan9](https://github.com/KCDharshan9) | **21** | 1  | Tap-to-Define Word Glossary |
 | 12. | **Ahana Banerjee** | [ahana4banerjee](https://github.com/ahana4banerjee) | **20** | 2  | Goal Practice & Learning Journey |
@@ -80,7 +80,8 @@ _Live data — last regenerated 2026-08-09 · auto-refreshed by [`github-actions
 | 18. | **S. Hamsalekha**<br/><sub>↳ also commits as <b>S Hamsalekha</b></sub> | [S-Hamsalekha-annamai](https://github.com/S-Hamsalekha-annamai) | **3** | 1  | Track User Progress |
 | 19. | **Krishna Gelra** | [KrishnaG-101](https://github.com/KrishnaG-101) | **3** | 1  | Language Puzzles Framework |
 | 20. | **Anshul Kanodia** | [AnshulKanodia](https://github.com/AnshulKanodia) | **2** | 0  | Geometry Game Restoration |
-| 21. | **Vasuki** | [vasuki-tenali](https://github.com/vasuki-tenali) | **1** | 0  | Infra contributor |
+| 21. | **aftab** | [aftab](https://github.com/aftab) | **1** | 0  | — |
+| 22. | **Vasuki** | [vasuki-tenali](https://github.com/vasuki-tenali) | **1** | 0  | Infra contributor |
 <!-- live-rank:end -->
 
 ---
@@ -291,20 +292,18 @@ _Live data — last regenerated 2026-08-09 · auto-refreshed by [`github-actions
   <table>
     <tr>
       <td align="center" width="220">
-        <a href="https://github.com/Ritish007-svg"><img src="https://avatars.githubusercontent.com/u/214147769?v=4&s=120" width="120" style="border-radius:50%; border:3px solid #E67E22;" alt="Ritish Karmakar"/></a>
-        <br/><b>Ritish Karmakar</b>
-        <br/><a href="https://github.com/Ritish007-svg">@Ritish007-svg</a>
-        <br/><sub>🏆 27 commits · 1 PR merged</sub>
+        <a href="https://github.com/github-actions-bot-"><img src="https://github.com/github-actions-bot-.png?size=120&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="github-actions-bot-"/></a>
+        <br/><b>github-actions-bot-</b>
+        <br/><a href="https://github.com/github-actions-bot-">@github-actions-bot-</a>
+        <br/><sub>🏆 31 commits · 0 PRs merged</sub>
+        <br/><sub>🔗 also commits as: <b>github-actions[bot]</b></sub>
       </td>
       <td valign="top" width="*">
-        <h4>8. Percentages Level-wise Explanation</h4>
+        <h4>8. New Contributor</h4>
         <ul>
-          <li>📈 <b>Level-wise Percentages (PR #9)</b> — diagnostic quiz for Percentages with kid-friendly UI</li>
-          <li>🪜 <b>Percentages Level 1 (Find)</b> — first explanation level with hover info popups, boxed theory cards, mobile-responsive fixes</li>
-          <li>🎴 <b>One-card-at-a-time layout</b> — refactored Percentages workspace + fixed <code>AudioContext</code> singleton</li>
-          <li>📜 <b>CHANGELOG</b> — Version 1 → 4 detailed notes for Percentages redesign</li>
-          <li>🎨 <b>UI & styling polish</b> — theme-consistent cards and progress indicators</li>
-          <li>🔁 <b>Restore feature work</b> — recovered work lost during upstream merges</li>
+          <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
+          <li>📊 <b>31 commits</b> across this repo's history</li>
+          <li>🔗 <i>Add a <code>FALLBACK_PROFILES</code> entry in <code>scripts/update-readme-contributors.js</code> to enrich this card with real name, avatar, location, and curated feature list</i></li>
         </ul>
       </td>
     </tr>
@@ -315,18 +314,20 @@ _Live data — last regenerated 2026-08-09 · auto-refreshed by [`github-actions
   <table>
     <tr>
       <td align="center" width="220">
-        <a href="https://github.com/github-actions-bot-"><img src="https://github.com/github-actions-bot-.png?size=120&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="github-actions-bot-"/></a>
-        <br/><b>github-actions-bot-</b>
-        <br/><a href="https://github.com/github-actions-bot-">@github-actions-bot-</a>
-        <br/><sub>🏆 23 commits · 0 PRs merged</sub>
-        <br/><sub>🔗 also commits as: <b>github-actions[bot]</b></sub>
+        <a href="https://github.com/Ritish007-svg"><img src="https://avatars.githubusercontent.com/u/214147769?v=4&s=120" width="120" style="border-radius:50%; border:3px solid #E67E22;" alt="Ritish Karmakar"/></a>
+        <br/><b>Ritish Karmakar</b>
+        <br/><a href="https://github.com/Ritish007-svg">@Ritish007-svg</a>
+        <br/><sub>🏆 27 commits · 1 PR merged</sub>
       </td>
       <td valign="top" width="*">
-        <h4>9. New Contributor</h4>
+        <h4>9. Percentages Level-wise Explanation</h4>
         <ul>
-          <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
-          <li>📊 <b>23 commits</b> across this repo's history</li>
-          <li>🔗 <i>Add a <code>FALLBACK_PROFILES</code> entry in <code>scripts/update-readme-contributors.js</code> to enrich this card with real name, avatar, location, and curated feature list</i></li>
+          <li>📈 <b>Level-wise Percentages (PR #9)</b> — diagnostic quiz for Percentages with kid-friendly UI</li>
+          <li>🪜 <b>Percentages Level 1 (Find)</b> — first explanation level with hover info popups, boxed theory cards, mobile-responsive fixes</li>
+          <li>🎴 <b>One-card-at-a-time layout</b> — refactored Percentages workspace + fixed <code>AudioContext</code> singleton</li>
+          <li>📜 <b>CHANGELOG</b> — Version 1 → 4 detailed notes for Percentages redesign</li>
+          <li>🎨 <b>UI & styling polish</b> — theme-consistent cards and progress indicators</li>
+          <li>🔁 <b>Restore feature work</b> — recovered work lost during upstream merges</li>
         </ul>
       </td>
     </tr>
@@ -594,13 +595,34 @@ _Live data — last regenerated 2026-08-09 · auto-refreshed by [`github-actions
   <table>
     <tr>
       <td align="center" width="220">
+        <a href="https://github.com/aftab"><img src="https://github.com/aftab.png?size=120&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="aftab"/></a>
+        <br/><b>aftab</b>
+        <br/><a href="https://github.com/aftab">@aftab</a>
+        <br/><sub>🏆 1 commits · 0 PRs merged</sub>
+      </td>
+      <td valign="top" width="*">
+        <h4>21. New Contributor</h4>
+        <ul>
+          <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
+          <li>📊 <b>1 commits</b> across this repo's history</li>
+          <li>🔗 <i>Add a <code>FALLBACK_PROFILES</code> entry in <code>scripts/update-readme-contributors.js</code> to enrich this card with real name, avatar, location, and curated feature list</i></li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</p>
+
+<p align="center">
+  <table>
+    <tr>
+      <td align="center" width="220">
         <a href="https://github.com/vasuki-tenali"><img src="https://github.com/identicons/vasuki-tenali.png&s=120" width="120" style="border-radius:50%; border:3px solid #95A5A6;" alt="Vasuki"/></a>
         <br/><b>Vasuki</b>
         <br/><a href="https://github.com/vasuki-tenali">@vasuki-tenali</a>
         <br/><sub>🏆 1 commits · 0 PRs merged</sub>
       </td>
       <td valign="top" width="*">
-        <h4>21. Infra contributor</h4>
+        <h4>22. Infra contributor</h4>
         <ul>
           <li>🔧 <b>Single administrative / infrastructure commit</b> to the project</li>
           <li>📧 <i>Email was private — no public GitHub profile linked</i></li>
