@@ -19,12 +19,15 @@
 ---
 
 <!-- live-changelog:start -->
-### 📊 Total: 883 commits · 53 active days · 24 unique authors
+### 📊 Total: 884 commits · 53 active days · 24 unique authors
 
 > **📖 How to read this:** Each entry shows a clickable SHA, the author, and a one-line subject. Sub-bullets show the **exact files touched** with per-file `+additions −deletions`, the **total line stats**, and (when present) the **commit body** explaining what & why.
 
-#### 📅 2026-08-13  <sub>(2 commits)</sub>
+#### 📅 2026-08-13  <sub>(3 commits)</sub>
 
+- 📌 [`8c99f51`](https://github.com/aftab-ansari2005/tenali/commit/8c99f517ad1ff8285b365582ac48065f2f189e0b) — **github-actions[bot]** — 🤖 docs(contributors): refresh contributor stats
+    - 📁 **3 files:** `CHANGELOG.md` `+964 −925`, `CONTRIBUTORS.md` `+48 −26`, `README.md` `+11 −10`
+    - 📊 **`+1023 −961`** · 3 files
 - 📌 [`eb9470d`](https://github.com/aftab-ansari2005/tenali/commit/eb9470de905b205c48110471766b6285acfcb5a1) — **aftab** — Implement sound system and fixes
     - 📁 **624 files:** `.kiro/specs/sound-effects-system/design.md` `+584 −0`, `.kiro/specs/sound-effects-system/integration_guide.md` `+79 −0`, `.kiro/specs/sound-effects-system/requirements.md` `+439 −0`, `.kiro/specs/sound-effects-system/tasks.md` `+650 −0`, `CHANGELOG.md` `+2 −32`, `CONTRIBUTORS.md` `+24 −24`, `README.md` `+7 −7`, `client/package-lock.json` `+61 −29` *(+616 more in [`eb9470d`](https://github.com/aftab-ansari2005/tenali/commit/eb9470de905b205c48110471766b6285acfcb5a1))*
     - 📊 **`+2835 −64296`** · 624 files
