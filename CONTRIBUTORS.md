@@ -50,7 +50,7 @@
 <!-- live-snapshot:start -->
 | 🏆 Commits | 🔀 Merged PRs | 👥 Contributors | 🧩 Puzzles | 📚 Vocab | 🌍 GK |
 |----------:|------------:|--------------:|---------:|-------:|----:|
-| **885** | **73** | **22** | **69** | **7,662** | **991** |
+| **886** | **73** | **22** | **69** | **7,662** | **991** |
 <!-- live-snapshot:end -->
 
 ## 🥇 Leaderboard
@@ -65,8 +65,8 @@ _Live data — last regenerated 2026-08-15 · auto-refreshed by [`github-actions
 | 🥉 | **Jinal Gupta** | [jgupta05072003-code](https://github.com/jgupta05072003-code) | **84** | 0  | Upstream Repo Maintainer & PR Reviewer |
 | 4. | **Lakshmi Varshini Nandula ** | [varshini-nandula](https://github.com/varshini-nandula) | **43** | 1  | Profile Showcase & Offline Storage |
 | 5. | **Sameer Mishra** | [24F3005086](https://github.com/24F3005086) | **36** | 4  | i18n · Accessibility · Concept Labs |
-| 6. | **Vaibhav Satish**<br/><sub>↳ also commits as <b>Vaibhav</b></sub> | [Vaibhav-sa30](https://github.com/Vaibhav-sa30) | **35** | 2  | Vachana Literacy Lab & Vocabulary |
-| 7. | **github-actions-bot-**<br/><sub>↳ also commits as <b>github-actions[bot]</b></sub> | [github-actions-bot-](https://github.com/github-actions-bot-) | **34** | 0  | — |
+| 6. | **github-actions-bot-**<br/><sub>↳ also commits as <b>github-actions[bot]</b></sub> | [github-actions-bot-](https://github.com/github-actions-bot-) | **35** | 0  | — |
+| 7. | **Vaibhav Satish**<br/><sub>↳ also commits as <b>Vaibhav</b></sub> | [Vaibhav-sa30](https://github.com/Vaibhav-sa30) | **35** | 2  | Vachana Literacy Lab & Vocabulary |
 | 8. | **DIPTOSUBHRO DATTA**<br/><sub>↳ also commits as <b>Dipto Subhro</b></sub> | [diptosubhro-ctrl](https://github.com/diptosubhro-ctrl) | **33** | 1  | Tutorial System + Noise Filter Refactor |
 | 9. | **Ritish Karmakar** | [Ritish007-svg](https://github.com/Ritish007-svg) | **27** | 1  | Percentages Level-wise Explanation |
 | 10. | **saniyajos**<br/><sub>↳ also commits as <b>SaniyaJos</b></sub> | [saniyajos](https://github.com/saniyajos) | **22** | 0  | — |
@@ -238,23 +238,18 @@ _Live data — last regenerated 2026-08-15 · auto-refreshed by [`github-actions
   <table>
     <tr>
       <td align="center" width="220">
-        <a href="https://github.com/Vaibhav-sa30"><img src="https://avatars.githubusercontent.com/u/86743451?v=4&s=120" width="120" style="border-radius:50%; border:3px solid #FF6B6B;" alt="Vaibhav Satish"/></a>
-        <br/><b>Vaibhav Satish</b>
-        <br/><a href="https://github.com/Vaibhav-sa30">@Vaibhav-sa30</a>
-        <br/><sub>🏆 35 commits · 2 PRs merged</sub>
-        <br/><sub>📍 India · 🐦 @vee42O · 🌐 https://vaibhavsatish-research.vercel.app</sub>
-        <br/><sub>🔗 also commits as: <b>Vaibhav</b></sub>
+        <a href="https://github.com/github-actions-bot-"><img src="https://github.com/github-actions-bot-.png?size=120&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="github-actions-bot-"/></a>
+        <br/><b>github-actions-bot-</b>
+        <br/><a href="https://github.com/github-actions-bot-">@github-actions-bot-</a>
+        <br/><sub>🏆 35 commits · 0 PRs merged</sub>
+        <br/><sub>🔗 also commits as: <b>github-actions[bot]</b></sub>
       </td>
       <td valign="top" width="*">
-        <h4>6. Vachana Literacy Lab & Vocabulary</h4>
+        <h4>6. New Contributor</h4>
         <ul>
-          <li>🆕 <b>Vachana Mathematical Literacy Lab (PR #18)</b> — standalone literacy module with grid dashboard, 8+ exercises across v0.1.x</li>
-          <li>🔤 <b>Notation Literacy Exercise (PR #57)</b> — teaches math notation & root decoding with etymology references</li>
-          <li>🔍 <b>Vocabulary Explorer</b> — adaptive placement check, MCQ auto-submit, guided exploration</li>
-          <li>🧭 <b>Vocab Quiz UX</b> — numeric shortcuts, color-coded feedback, manual submit, previous-question navigation</li>
-          <li>🪟 <b>History view fix</b> — placement-test state overlap fix + previous button</li>
-          <li>♻️ <b>Modularization</b> — split Vachana Literacy Lab into separate component files</li>
-          <li>📚 <b>Exercise research docs</b> — pedagogical references + CHANGELOG entries for every v0.1.x release</li>
+          <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
+          <li>📊 <b>35 commits</b> across this repo's history</li>
+          <li>🔗 <i>Add a <code>FALLBACK_PROFILES</code> entry in <code>scripts/update-readme-contributors.js</code> to enrich this card with real name, avatar, location, and curated feature list</i></li>
         </ul>
       </td>
     </tr>
@@ -265,18 +260,23 @@ _Live data — last regenerated 2026-08-15 · auto-refreshed by [`github-actions
   <table>
     <tr>
       <td align="center" width="220">
-        <a href="https://github.com/github-actions-bot-"><img src="https://github.com/github-actions-bot-.png?size=120&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="github-actions-bot-"/></a>
-        <br/><b>github-actions-bot-</b>
-        <br/><a href="https://github.com/github-actions-bot-">@github-actions-bot-</a>
-        <br/><sub>🏆 34 commits · 0 PRs merged</sub>
-        <br/><sub>🔗 also commits as: <b>github-actions[bot]</b></sub>
+        <a href="https://github.com/Vaibhav-sa30"><img src="https://avatars.githubusercontent.com/u/86743451?v=4&s=120" width="120" style="border-radius:50%; border:3px solid #FF6B6B;" alt="Vaibhav Satish"/></a>
+        <br/><b>Vaibhav Satish</b>
+        <br/><a href="https://github.com/Vaibhav-sa30">@Vaibhav-sa30</a>
+        <br/><sub>🏆 35 commits · 2 PRs merged</sub>
+        <br/><sub>📍 India · 🐦 @vee42O · 🌐 https://vaibhavsatish-research.vercel.app</sub>
+        <br/><sub>🔗 also commits as: <b>Vaibhav</b></sub>
       </td>
       <td valign="top" width="*">
-        <h4>7. New Contributor</h4>
+        <h4>7. Vachana Literacy Lab & Vocabulary</h4>
         <ul>
-          <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
-          <li>📊 <b>34 commits</b> across this repo's history</li>
-          <li>🔗 <i>Add a <code>FALLBACK_PROFILES</code> entry in <code>scripts/update-readme-contributors.js</code> to enrich this card with real name, avatar, location, and curated feature list</i></li>
+          <li>🆕 <b>Vachana Mathematical Literacy Lab (PR #18)</b> — standalone literacy module with grid dashboard, 8+ exercises across v0.1.x</li>
+          <li>🔤 <b>Notation Literacy Exercise (PR #57)</b> — teaches math notation & root decoding with etymology references</li>
+          <li>🔍 <b>Vocabulary Explorer</b> — adaptive placement check, MCQ auto-submit, guided exploration</li>
+          <li>🧭 <b>Vocab Quiz UX</b> — numeric shortcuts, color-coded feedback, manual submit, previous-question navigation</li>
+          <li>🪟 <b>History view fix</b> — placement-test state overlap fix + previous button</li>
+          <li>♻️ <b>Modularization</b> — split Vachana Literacy Lab into separate component files</li>
+          <li>📚 <b>Exercise research docs</b> — pedagogical references + CHANGELOG entries for every v0.1.x release</li>
         </ul>
       </td>
     </tr>
