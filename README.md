@@ -79,7 +79,7 @@ It is built to run on a single VPS — `tenali.fun` — with one Node process se
 <p align="center">
   <table>
     <tr>
-      <td align="center"><b>887</b><br/><sub>commits</sub></td>
+      <td align="center"><b>888</b><br/><sub>commits</sub></td>
       <td align="center"><b>73</b><br/><sub>PRs merged</sub></td>
       <td align="center"><b>22</b><br/><sub>GitHub contributors</sub></td>
       <td align="center"><b>⭐ 0</b><br/><sub>stars</sub></td>
@@ -525,7 +525,7 @@ tenali.fun (DNS → <production IP — redacted from public docs>)
 <!-- live-snapshot:start -->
 | 🏆 Commits | 🔀 Merged PRs | 👥 Contributors | 🧩 Puzzles | 📚 Vocab | 🌍 GK |
 |----------:|------------:|--------------:|---------:|-------:|----:|
-| **887** | **73** | **22** | **69** | **7,662** | **991** |
+| **888** | **73** | **22** | **69** | **7,662** | **991** |
 <!-- live-snapshot:end -->
 
 ### 🥇 Leaderboard
@@ -539,7 +539,7 @@ _Live data — last regenerated 2026-08-16 · auto-refreshed by [`github-actions
 | 🥈 | **Mudit Agrawal** | [muditagrawal2007](https://github.com/muditagrawal2007) | **191** | 24  | Maintainer · Battle Arena · Linear Algebra · Sudoku · Playground |
 | 🥉 | **Jinal Gupta** | [jgupta05072003-code](https://github.com/jgupta05072003-code) | **84** | 0  | Upstream Repo Maintainer & PR Reviewer |
 | 4. | **Lakshmi Varshini Nandula ** | [varshini-nandula](https://github.com/varshini-nandula) | **43** | 1  | Profile Showcase & Offline Storage |
-| 5. | **github-actions-bot-**<br/><sub>↳ also commits as <b>github-actions[bot]</b></sub> | [github-actions-bot-](https://github.com/github-actions-bot-) | **36** | 0  | — |
+| 5. | **github-actions-bot-**<br/><sub>↳ also commits as <b>github-actions[bot]</b></sub> | [github-actions-bot-](https://github.com/github-actions-bot-) | **37** | 0  | — |
 | 6. | **Sameer Mishra** | [24F3005086](https://github.com/24F3005086) | **36** | 4  | i18n · Accessibility · Concept Labs |
 | 7. | **Vaibhav Satish**<br/><sub>↳ also commits as <b>Vaibhav</b></sub> | [Vaibhav-sa30](https://github.com/Vaibhav-sa30) | **35** | 2  | Vachana Literacy Lab & Vocabulary |
 | 8. | **DIPTOSUBHRO DATTA**<br/><sub>↳ also commits as <b>Dipto Subhro</b></sub> | [diptosubhro-ctrl](https://github.com/diptosubhro-ctrl) | **33** | 1  | Tutorial System + Noise Filter Refactor |
