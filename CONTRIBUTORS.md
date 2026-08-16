@@ -50,13 +50,13 @@
 <!-- live-snapshot:start -->
 | 🏆 Commits | 🔀 Merged PRs | 👥 Contributors | 🧩 Puzzles | 📚 Vocab | 🌍 GK |
 |----------:|------------:|--------------:|---------:|-------:|----:|
-| **886** | **73** | **22** | **69** | **7,662** | **991** |
+| **887** | **73** | **22** | **69** | **7,662** | **991** |
 <!-- live-snapshot:end -->
 
 ## 🥇 Leaderboard
 
 <!-- live-rank:start -->
-_Live data — last regenerated 2026-08-15 · auto-refreshed by [`github-actions[bot]`](https://github.com/features/actions) on every push to `main` and every 12h._
+_Live data — last regenerated 2026-08-16 · auto-refreshed by [`github-actions[bot]`](https://github.com/features/actions) on every push to `main` and every 12h._
 
 | # | 👤 Real Name | 🔗 GitHub ID | 📝 Commits | 🔀 PRs | 🏷️ Role |
 |--:|:-------------|:-------------|----------:|-----:|:--------|
@@ -64,8 +64,8 @@ _Live data — last regenerated 2026-08-15 · auto-refreshed by [`github-actions
 | 🥈 | **Mudit Agrawal** | [muditagrawal2007](https://github.com/muditagrawal2007) | **191** | 24  | Maintainer · Battle Arena · Linear Algebra · Sudoku · Playground |
 | 🥉 | **Jinal Gupta** | [jgupta05072003-code](https://github.com/jgupta05072003-code) | **84** | 0  | Upstream Repo Maintainer & PR Reviewer |
 | 4. | **Lakshmi Varshini Nandula ** | [varshini-nandula](https://github.com/varshini-nandula) | **43** | 1  | Profile Showcase & Offline Storage |
-| 5. | **Sameer Mishra** | [24F3005086](https://github.com/24F3005086) | **36** | 4  | i18n · Accessibility · Concept Labs |
-| 6. | **github-actions-bot-**<br/><sub>↳ also commits as <b>github-actions[bot]</b></sub> | [github-actions-bot-](https://github.com/github-actions-bot-) | **35** | 0  | — |
+| 5. | **github-actions-bot-**<br/><sub>↳ also commits as <b>github-actions[bot]</b></sub> | [github-actions-bot-](https://github.com/github-actions-bot-) | **36** | 0  | — |
+| 6. | **Sameer Mishra** | [24F3005086](https://github.com/24F3005086) | **36** | 4  | i18n · Accessibility · Concept Labs |
 | 7. | **Vaibhav Satish**<br/><sub>↳ also commits as <b>Vaibhav</b></sub> | [Vaibhav-sa30](https://github.com/Vaibhav-sa30) | **35** | 2  | Vachana Literacy Lab & Vocabulary |
 | 8. | **DIPTOSUBHRO DATTA**<br/><sub>↳ also commits as <b>Dipto Subhro</b></sub> | [diptosubhro-ctrl](https://github.com/diptosubhro-ctrl) | **33** | 1  | Tutorial System + Noise Filter Refactor |
 | 9. | **Ritish Karmakar** | [Ritish007-svg](https://github.com/Ritish007-svg) | **27** | 1  | Percentages Level-wise Explanation |
@@ -212,22 +212,18 @@ _Live data — last regenerated 2026-08-15 · auto-refreshed by [`github-actions
   <table>
     <tr>
       <td align="center" width="220">
-        <a href="https://github.com/24F3005086"><img src="https://avatars.githubusercontent.com/u/189242179?v=4&s=120" width="120" style="border-radius:50%; border:3px solid #6BCB77;" alt="Sameer Mishra"/></a>
-        <br/><b>Sameer Mishra</b>
-        <br/><a href="https://github.com/24F3005086">@24F3005086</a>
-        <br/><sub>🏆 36 commits · 4 PRs merged</sub>
+        <a href="https://github.com/github-actions-bot-"><img src="https://github.com/github-actions-bot-.png?size=120&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="github-actions-bot-"/></a>
+        <br/><b>github-actions-bot-</b>
+        <br/><a href="https://github.com/github-actions-bot-">@github-actions-bot-</a>
+        <br/><sub>🏆 36 commits · 0 PRs merged</sub>
+        <br/><sub>🔗 also commits as: <b>github-actions[bot]</b></sub>
       </td>
       <td valign="top" width="*">
-        <h4>5. i18n · Accessibility · Concept Labs</h4>
+        <h4>5. New Contributor</h4>
         <ul>
-          <li>🌍 <b>Internationalization (PR #51)</b> — full i18n framework, locales directory, translation layer</li>
-          <li>♿ <b>Accessibility panel (PR #50)</b> — high-contrast toggle, reduced motion, keyboard nav, ARIA roles</li>
-          <li>🧪 <b>Concept Playgrounds (PR #52)</b> — multi-stage concept mastery labs</li>
-          <li>🧠 <b>BKT Prerequisites (PR #49)</b> — Bayesian Knowledge Tracing + <code>bkt.js</code> library</li>
-          <li>🎨 <b>Dark/light theme system</b> — coherent theming across IdliVadaSambhar, Crossword, Word Search</li>
-          <li>🧹 <b>ESLint cleanup</b> — removed unused vars, suppressed <code>react-refresh</code> warnings</li>
-          <li>🧩 <b>MasteryBadge integration</b> — wired <code>updateBKT</code> stub into concept playgrounds</li>
-          <li>🐛 <b>Bugfix sweeps</b> — translation, dark/light, mastery-badge, concept-playgrounds localization</li>
+          <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
+          <li>📊 <b>36 commits</b> across this repo's history</li>
+          <li>🔗 <i>Add a <code>FALLBACK_PROFILES</code> entry in <code>scripts/update-readme-contributors.js</code> to enrich this card with real name, avatar, location, and curated feature list</i></li>
         </ul>
       </td>
     </tr>
@@ -238,18 +234,22 @@ _Live data — last regenerated 2026-08-15 · auto-refreshed by [`github-actions
   <table>
     <tr>
       <td align="center" width="220">
-        <a href="https://github.com/github-actions-bot-"><img src="https://github.com/github-actions-bot-.png?size=120&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="github-actions-bot-"/></a>
-        <br/><b>github-actions-bot-</b>
-        <br/><a href="https://github.com/github-actions-bot-">@github-actions-bot-</a>
-        <br/><sub>🏆 35 commits · 0 PRs merged</sub>
-        <br/><sub>🔗 also commits as: <b>github-actions[bot]</b></sub>
+        <a href="https://github.com/24F3005086"><img src="https://avatars.githubusercontent.com/u/189242179?v=4&s=120" width="120" style="border-radius:50%; border:3px solid #6BCB77;" alt="Sameer Mishra"/></a>
+        <br/><b>Sameer Mishra</b>
+        <br/><a href="https://github.com/24F3005086">@24F3005086</a>
+        <br/><sub>🏆 36 commits · 4 PRs merged</sub>
       </td>
       <td valign="top" width="*">
-        <h4>6. New Contributor</h4>
+        <h4>6. i18n · Accessibility · Concept Labs</h4>
         <ul>
-          <li>🆕 <b>New contributor</b> — auto-added by the readme-bot</li>
-          <li>📊 <b>35 commits</b> across this repo's history</li>
-          <li>🔗 <i>Add a <code>FALLBACK_PROFILES</code> entry in <code>scripts/update-readme-contributors.js</code> to enrich this card with real name, avatar, location, and curated feature list</i></li>
+          <li>🌍 <b>Internationalization (PR #51)</b> — full i18n framework, locales directory, translation layer</li>
+          <li>♿ <b>Accessibility panel (PR #50)</b> — high-contrast toggle, reduced motion, keyboard nav, ARIA roles</li>
+          <li>🧪 <b>Concept Playgrounds (PR #52)</b> — multi-stage concept mastery labs</li>
+          <li>🧠 <b>BKT Prerequisites (PR #49)</b> — Bayesian Knowledge Tracing + <code>bkt.js</code> library</li>
+          <li>🎨 <b>Dark/light theme system</b> — coherent theming across IdliVadaSambhar, Crossword, Word Search</li>
+          <li>🧹 <b>ESLint cleanup</b> — removed unused vars, suppressed <code>react-refresh</code> warnings</li>
+          <li>🧩 <b>MasteryBadge integration</b> — wired <code>updateBKT</code> stub into concept playgrounds</li>
+          <li>🐛 <b>Bugfix sweeps</b> — translation, dark/light, mastery-badge, concept-playgrounds localization</li>
         </ul>
       </td>
     </tr>
