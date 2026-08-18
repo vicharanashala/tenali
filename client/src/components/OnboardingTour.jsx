@@ -73,6 +73,11 @@ export default function OnboardingTour({ onFinish, mode }) {
   const [position, setPosition] = useState(() => ({ x: window.innerWidth / 2 - 240, y: window.innerHeight / 2 - 160 }));
   const utteranceRef = useRef(null);
 
+  // Reset current step to 0 whenever the active mode changes to prevent out-of-bounds index lookup
+  useEffect(() => {
+    setCurrentStep(0);
+  }, [activeMode]);
+
   // Speak current step message
   useEffect(() => {
     const step = tourSteps[currentStep];
@@ -174,7 +179,7 @@ export default function OnboardingTour({ onFinish, mode }) {
     if (onFinish) onFinish();
   };
 
-  const step = tourSteps[currentStep];
+  const step = tourSteps[currentStep] || tourSteps[0] || {};
 
   return (
     <>
