@@ -135,6 +135,22 @@ app.use('/api/auth', auth.router);
 app.use('/api/progress', progress.router);
 app.use('/api/hints', hints);
 app.use('/api/translate', translate.router);
+const treasurehuntRouter = require('./treasurehunt/routes');
+
+console.log("Treasure router imported");
+
+app.use('/treasurehunt-api/', (req, res, next) => {
+    console.log("Treasure API:", req.method, req.url);
+    next();
+});
+
+app.use('/treasurehunt-api', treasurehuntRouter);
+app.get('/test-12345', (req, res) => {
+  res.json({
+    ok: true,
+    message: "THIS IS THE SERVER YOU ARE EDITING"
+  });
+});
 auth.seedUsers().catch(() => {});  // always populate in-memory fallback
 
 async function connectAuthMongoWithRetry(attempt = 1) {
@@ -13358,6 +13374,8 @@ const io = new SocketIOServer(httpServer, {
   connectionStateRecovery: { maxDisconnectionDuration: 2 * 60 * 1000 },
 });
 
+
+
 // ─── Connection cap ──────────────────────────────────────────────────────
 let connectionCount = 0;
 const MAX_CONNECTIONS = 500;
@@ -14326,3 +14344,4 @@ if (require.main === module) {
 
 module.exports = app;
 module.exports.io = io;
+
