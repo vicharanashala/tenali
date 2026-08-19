@@ -57,6 +57,7 @@
 **🤝 Community**
 - [⚙️ Quick Start](#-quick-start)
 - [🧩 Add a Puzzle](#-add-a-new-puzzle)
+- [📝 Contributor Onboarding](#-contributor-onboarding-mandatory)
 - [🏆 Contributors → CONTRIBUTORS.md](CONTRIBUTORS.md)
 
 </td>
@@ -79,12 +80,12 @@ It is built to run on a single VPS — `tenali.fun` — with one Node process se
 <p align="center">
   <table>
     <tr>
-      <td align="center"><b>871</b><br/><sub>commits</sub></td>
-      <td align="center"><b>73</b><br/><sub>PRs merged</sub></td>
-      <td align="center"><b>21</b><br/><sub>GitHub contributors</sub></td>
+      <td align="center"><b>922</b><br/><sub>commits</sub></td>
+      <td align="center"><b>79</b><br/><sub>PRs merged</sub></td>
+      <td align="center"><b>26</b><br/><sub>GitHub contributors</sub></td>
       <td align="center"><b>⭐ 6</b><br/><sub>stars</sub></td>
-      <td align="center"><b>🍴 59</b><br/><sub>forks</sub></td>
-      <td align="center"><b>🐛 51</b><br/><sub>open issues</sub></td>
+      <td align="center"><b>🍴 65</b><br/><sub>forks</sub></td>
+      <td align="center"><b>🐛 52</b><br/><sub>open issues</sub></td>
     </tr>
   </table>
 </p>
@@ -493,6 +494,80 @@ Five-step recipe:
 
 ---
 
+## 📝 Contributor Onboarding (Mandatory)
+
+Every student contributing to the Tenali project is required to submit an **Onboarding Document** (`.md`) before their first pull request. The document is a record of your understanding of the project and your plan for contributing to it. Submissions that omit any of the sections below will be returned for revision.
+
+### Purpose
+
+The Onboarding Document exists to ensure that every contributor:
+
+1. Has a working understanding of what Tenali is and the problem it solves.
+2. Has read the existing codebase and can describe its current state in their own words.
+3. Has independently identified weaknesses, gaps, and risks in the current implementation.
+4. Has formed opinions and proposed ideas for improving the project.
+5. Has a concrete plan for tackling at least one identified gap.
+6. Has produced a tangible contribution (code, documentation, tests, or design) that advances the project.
+
+> Reading the code without forming a view is not enough. The document is intended to surface misunderstanding early and to surface good ideas quickly.
+
+### File Naming and Location
+
+- **File name:** `ONBOARDING-<your-name>.md`
+- **Location:** the PR must add the file to the [`Ideas/`](Ideas) folder.
+- **Format:** Markdown (`.md`). PDF, `.docx`, or plain `.txt` will not be accepted.
+
+> ⚠️ **Raise the PR for your onboarding document against the [`Ideas/`](Ideas) folder specifically** — not `docs/`, not the repo root, and not any other folder. PRs that add the onboarding document elsewhere will be closed and asked to resubmit.
+
+### Required Sections
+
+The document must contain the following six sections, in this order.
+
+**1. What is Tenali?**
+Describe, in your own words, what Tenali is, the domain it operates in (adaptive math learning / education), the population it serves, and the problem it aims to solve. Do not copy the project description verbatim — paraphrase it. A reader who has never heard of Tenali should be able to understand the project's purpose from this section alone.
+
+**2. What do you understand by Tenali (as a system)?**
+Go beyond the mission statement. Describe Tenali as a system: the users (students, and where relevant, maintainers/admins), the main entities (puzzle types, difficulty tiers, the Battle Arena, the code playground, auth/sessions), and the high-level flow of data through it — e.g. how a question is generated, checked, and explained. This section is about demonstrating that you understand how the pieces fit together, not just what the project is for.
+
+**3. Current State of the Repository — What Has Been Done So Far**
+Walk through the repository and describe what already exists:
+- Tech stack (frontend, backend, database, auth, deployment).
+- Implemented features (the 69 puzzle types, adaptive difficulty, Battle Arena multiplayer, step-by-step explanations, the code playground, auth, etc.).
+
+**4. Gaps Observed in the Code**
+This is the most important section. List concrete weaknesses, bugs, missing features, or design problems you found while reading the code. You can also pick issues stated on the Tenali GitHub repo and solve them. For each gap, include:
+- **Where** — file path and line range or component.
+- **What** — what is wrong or missing.
+- **Why it matters** — the impact on users, maintainability, performance, or correctness.
+
+**5. Ideas for the Project**
+Propose improvements, new features, or refactors that would make Tenali better. Each idea should include:
+- **What** — the proposed change in one or two sentences.
+- **Why** — the problem it solves or the value it adds.
+- **How** — a sketch of the implementation.
+
+**6. Your Contribution**
+Describe the actual work you have done as part of this onboarding. A contribution can be any of:
+- A bug fix.
+- A new feature or endpoint (e.g. a new puzzle type — see [🧩 Add a New Puzzle](#-add-a-new-puzzle)).
+- A refactor.
+- Tests (unit, integration, or end-to-end).
+- Documentation (this onboarding document counts only if it is exceptional; the document itself is mandatory, not the contribution).
+- A design document or architectural proposal.
+
+### Review Criteria
+
+A reviewer will check the Onboarding Document against the following:
+
+- All six sections are present and in order.
+- Section 4 cites real files and real code, not vague impressions.
+- Section 5 ideas are grounded in the gaps from Section 4.
+- The document is written in the contributor's own words, not generated by an AI without understanding.
+
+> A document that reads as if it was written without reading the codebase will be sent back.
+
+---
+
 ## 🌐 Deployment Topology
 
 ```
@@ -525,37 +600,42 @@ tenali.fun (DNS → <production IP — redacted from public docs>)
 <!-- live-snapshot:start -->
 | 🏆 Commits | 🔀 Merged PRs | 👥 Contributors | 🧩 Puzzles | 📚 Vocab | 🌍 GK |
 |----------:|------------:|--------------:|---------:|-------:|----:|
-| **871** | **73** | **21** | **69** | **7,662** | **991** |
+| **922** | **79** | **26** | **69** | **7,662** | **991** |
 <!-- live-snapshot:end -->
 
 ### 🥇 Leaderboard
 
 <!-- live-rank:start -->
-_Live data — last regenerated 2026-08-08 · auto-refreshed by [`github-actions[bot]`](https://github.com/features/actions) on every push to `main` and every 12h._
+_Live data — last regenerated 2026-08-19 · auto-refreshed by [`github-actions[bot]`](https://github.com/features/actions) on every push to `main` and every 12h._
 
 | # | 👤 Real Name | 🔗 GitHub ID | 📝 Commits | 🔀 PRs | 🏷️ Role |
 |--:|:-------------|:-------------|----------:|-----:|:--------|
 | 🥇 | **S. R. S. Iyengar**<br/><sub>↳ also commits as <b>sudarshan</b></sub> | [sudarshansudarshan](https://github.com/sudarshansudarshan) | **281** | 0  | Lead Architect · Curriculum Author · 69 puzzle families |
 | 🥈 | **Mudit Agrawal** | [muditagrawal2007](https://github.com/muditagrawal2007) | **191** | 24  | Maintainer · Battle Arena · Linear Algebra · Sudoku · Playground |
-| 🥉 | **Jinal Gupta** | [jgupta05072003-code](https://github.com/jgupta05072003-code) | **84** | 0  | Upstream Repo Maintainer & PR Reviewer |
-| 4. | **Lakshmi Varshini Nandula ** | [varshini-nandula](https://github.com/varshini-nandula) | **43** | 1  | Profile Showcase & Offline Storage |
-| 5. | **Sameer Mishra** | [24F3005086](https://github.com/24F3005086) | **36** | 4  | i18n · Accessibility · Concept Labs |
-| 6. | **Vaibhav Satish**<br/><sub>↳ also commits as <b>Vaibhav</b></sub> | [Vaibhav-sa30](https://github.com/Vaibhav-sa30) | **35** | 2  | Vachana Literacy Lab & Vocabulary |
-| 7. | **DIPTOSUBHRO DATTA**<br/><sub>↳ also commits as <b>Dipto Subhro</b></sub> | [diptosubhro-ctrl](https://github.com/diptosubhro-ctrl) | **33** | 1  | Tutorial System + Noise Filter Refactor |
-| 8. | **Ritish Karmakar** | [Ritish007-svg](https://github.com/Ritish007-svg) | **27** | 1  | Percentages Level-wise Explanation |
-| 9. | **saniyajos**<br/><sub>↳ also commits as <b>SaniyaJos</b></sub> | [saniyajos](https://github.com/saniyajos) | **22** | 0  | — |
-| 10. | **github-actions-bot-**<br/><sub>↳ also commits as <b>github-actions[bot]</b></sub> | [github-actions-bot-](https://github.com/github-actions-bot-) | **21** | 0  | — |
+| 🥉 | **Jinal Gupta** | [jgupta05072003-code](https://github.com/jgupta05072003-code) | **93** | 0  | Upstream Repo Maintainer & PR Reviewer |
+| 4. | **github-actions-bot-**<br/><sub>↳ also commits as <b>github-actions[bot]</b></sub> | [github-actions-bot-](https://github.com/github-actions-bot-) | **43** | 0  | — |
+| 5. | **Lakshmi Varshini Nandula ** | [varshini-nandula](https://github.com/varshini-nandula) | **43** | 1  | Profile Showcase & Offline Storage |
+| 6. | **Sameer Mishra** | [24F3005086](https://github.com/24F3005086) | **36** | 4  | i18n · Accessibility · Concept Labs |
+| 7. | **Vaibhav Satish**<br/><sub>↳ also commits as <b>Vaibhav</b></sub> | [Vaibhav-sa30](https://github.com/Vaibhav-sa30) | **35** | 2  | Vachana Literacy Lab & Vocabulary |
+| 8. | **DIPTOSUBHRO DATTA**<br/><sub>↳ also commits as <b>Dipto Subhro</b></sub> | [diptosubhro-ctrl](https://github.com/diptosubhro-ctrl) | **33** | 1  | Tutorial System + Noise Filter Refactor |
+| 9. | **Ritish Karmakar** | [Ritish007-svg](https://github.com/Ritish007-svg) | **27** | 1  | Percentages Level-wise Explanation |
+| 10. | **saniyajos**<br/><sub>↳ also commits as <b>SaniyaJos</b></sub> | [saniyajos](https://github.com/saniyajos) | **22** | 0  | — |
 | 11. | **K C Dharshan** | [KCDharshan9](https://github.com/KCDharshan9) | **21** | 1  | Tap-to-Define Word Glossary |
 | 12. | **Ahana Banerjee** | [ahana4banerjee](https://github.com/ahana4banerjee) | **20** | 2  | Goal Practice & Learning Journey |
 | 13. | **harshyy07** | [harshyy07](https://github.com/harshyy07) | **16** | 1  | — |
 | 14. | **Shubh Dixit**<br/><sub>↳ also commits as <b>Shubh dixit</b></sub> | [Shubhdix9](https://github.com/Shubhdix9) | **16** | 2  | Premium UI Suite + Word Games |
-| 15. | **SemiColonSlayer** | [sharonyamita-spec](https://github.com/sharonyamita-spec) | **6** | 1  | Math Detective Agency |
-| 16. | **PANDRAJU POORVI PRAVALLIKA** | [poorvipravallika06](https://github.com/poorvipravallika06) | **6** | 1  | HCF/LCM Interactive Module |
-| 17. | **Rukmender T** | [RukmenderT](https://github.com/RukmenderT) | **5** | 1  | Curiosity Mode |
-| 18. | **S. Hamsalekha**<br/><sub>↳ also commits as <b>S Hamsalekha</b></sub> | [S-Hamsalekha-annamai](https://github.com/S-Hamsalekha-annamai) | **3** | 1  | Track User Progress |
-| 19. | **Krishna Gelra** | [KrishnaG-101](https://github.com/KrishnaG-101) | **3** | 1  | Language Puzzles Framework |
-| 20. | **Anshul Kanodia** | [AnshulKanodia](https://github.com/AnshulKanodia) | **2** | 0  | Geometry Game Restoration |
-| 21. | **Vasuki** | [vasuki-tenali](https://github.com/vasuki-tenali) | **1** | 0  | Infra contributor |
+| 15. | **shreejal-bangera**<br/><sub>↳ also commits as <b>Shreejal Bangera</b></sub> | [shreejal-bangera](https://github.com/shreejal-bangera) | **8** | 0  | — |
+| 16. | **SemiColonSlayer** | [sharonyamita-spec](https://github.com/sharonyamita-spec) | **6** | 1  | Math Detective Agency |
+| 17. | **PANDRAJU POORVI PRAVALLIKA** | [poorvipravallika06](https://github.com/poorvipravallika06) | **6** | 1  | HCF/LCM Interactive Module |
+| 18. | **Rukmender T** | [RukmenderT](https://github.com/RukmenderT) | **5** | 1  | Curiosity Mode |
+| 19. | **tanvish desai** | [tanvishdesai](https://github.com/tanvishdesai) | **4** | 1  | — |
+| 20. | **Disha Bansal** | [disha01bansal](https://github.com/disha01bansal) | **4** | 0  | — |
+| 21. | **S. Hamsalekha**<br/><sub>↳ also commits as <b>S Hamsalekha</b></sub> | [S-Hamsalekha-annamai](https://github.com/S-Hamsalekha-annamai) | **3** | 1  | Track User Progress |
+| 22. | **Krishna Gelra** | [KrishnaG-101](https://github.com/KrishnaG-101) | **3** | 1  | Language Puzzles Framework |
+| 23. | **Remy baastin rayappan** | [remy-baastin](https://github.com/remy-baastin) | **2** | 1  | — |
+| 24. | **harsh**<br/><sub>↳ also commits as <b>Harsh</b></sub> | [harsh](https://github.com/harsh) | **2** | 0  | — |
+| 25. | **Anshul Kanodia** | [AnshulKanodia](https://github.com/AnshulKanodia) | **2** | 0  | Geometry Game Restoration |
+| 26. | **Vasuki** | [vasuki-tenali](https://github.com/vasuki-tenali) | **1** | 0  | Infra contributor |
 <!-- live-rank:end -->
 
 

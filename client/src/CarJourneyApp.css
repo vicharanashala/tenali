@@ -1,0 +1,525 @@
+/* The Car Journey — scoped under .cj-app; colors ride on the app's theme variables
+   so light/dark both work without any [data-theme] handling here. */
+
+/* ── Restore the app shell's intended vertical centering ───────────────────
+ * `.card` carries `margin: auto` for "safe flex centering", but that only
+ * absorbs free space while the card is a direct flex child of `.app-shell`.
+ * An unstyled wrapper now sits between them, so the auto margins had nothing
+ * to work with and every screen top-aligned instead. `display: contents`
+ * removes the wrapper from layout without touching the markup, handing the
+ * card back to the flex container. Scoped to class-less divs so any wrapper
+ * that gains real styling later is left alone. */
+.app-shell > div:not([class]) { display: contents; }
+
+/* ── Scrollbars ────────────────────────────────────────────────────────────
+ * Deliberately NOT scoped to .cj-app: the browser default bars clash with the
+ * app's surfaces everywhere they appear, so these ride on the theme variables
+ * and follow light/dark automatically. Components that intentionally hide
+ * their bar (e.g. .word-explorer-list) use a more specific selector and still
+ * win. Lives here rather than App.css purely to keep this branch's diff off
+ * the file that conflicts on every upstream merge. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--clr-border) transparent;
+}
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb {
+  background: var(--clr-border);
+  border-radius: 8px;
+  /* Inset the thumb so it reads as a slim pill rather than a full-width slab. */
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:hover { background: var(--clr-accent); background-clip: content-box; }
+*::-webkit-scrollbar-corner { background: transparent; }
+
+.cj-app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 12px 16px 40px;
+  color: var(--clr-text);
+  font-family: var(--font-body);
+}
+
+.cj-back {
+  background: transparent;
+  border: none;
+  color: var(--clr-text-soft);
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 6px 0;
+}
+.cj-back:hover { color: var(--clr-text); }
+
+.cj-title {
+  font-family: var(--font-display);
+  text-align: center;
+  font-size: 1.9rem;
+  margin: 8px 0 4px;
+}
+.cj-tagline {
+  text-align: center;
+  color: var(--clr-text-soft);
+  margin: 0 auto 18px;
+  max-width: 560px;
+  line-height: 1.45;
+}
+
+/* ── Roadmap progress bar ── */
+.cj-progressbar {
+  position: relative;
+  height: 26px;
+  border-radius: 999px;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  overflow: hidden;
+  margin: 0 0 16px;
+}
+.cj-progressbar-fill {
+  height: 100%;
+  background: var(--clr-accent-soft);
+  border-right: 3px solid var(--clr-accent);
+  transition: width var(--transition);
+}
+.cj-progressbar-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  color: var(--clr-text-soft);
+}
+
+/* ── Roadmap stops ── */
+.cj-roadmap {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cj-stop {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+}
+.cj-stop.locked { opacity: 0.55; }
+.cj-stop.done { border-color: var(--clr-correct); }
+.cj-stop-emoji { font-size: 1.6rem; }
+.cj-stop-body { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.cj-stop-name { font-weight: 700; }
+.cj-stop-q { color: var(--clr-text-soft); font-size: 0.9rem; font-style: italic; }
+.cj-stop-meta { color: var(--clr-text-soft); font-size: 0.78rem; }
+.cj-stop-action {
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--clr-accent);
+  color: #fff;
+  padding: 8px 14px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.cj-stop-action:hover { filter: brightness(1.08); }
+.cj-stop-action.done { background: var(--clr-correct); }
+.cj-stop-action.locked { background: transparent; color: var(--clr-text-soft); cursor: default; font-size: 1.1rem; }
+
+/* ── Bridge / stage-done ── */
+.cj-bridge, .cj-stagedone { text-align: center; padding: 20px 8px; }
+.cj-bridge-emoji { font-size: 3rem; margin-bottom: 6px; }
+.cj-bridge-stopno { color: var(--clr-text-soft); font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; }
+/* The bridge and stage-done screens carry no prose, so the question and the
+   role line own the vertical rhythm that the paragraphs used to provide. */
+.cj-bridge-q { font-family: var(--font-display); font-size: 1.5rem; margin: 8px auto 26px; max-width: 520px; }
+.cj-role { font-size: 1.15rem; max-width: 460px; margin: 14px auto 20px; line-height: 1.5; }
+
+/* ── Buttons ── */
+.cj-primary {
+  background: var(--clr-accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 12px 22px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-btn);
+}
+.cj-primary:hover { filter: brightness(1.08); }
+.cj-secondary {
+  background: transparent;
+  color: var(--clr-text);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  padding: 12px 22px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.cj-secondary:hover { background: var(--clr-hover-strong); }
+.cj-finale-btn { display: block; margin: 0 auto 16px; }
+
+/* ── Quiz header / pips ── */
+.cj-quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 6px 0 10px;
+  font-weight: 700;
+}
+.cj-phase-tag {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--clr-badge);
+  color: var(--clr-text);
+}
+.cj-phase-tag.check { background: var(--clr-accent-soft); color: var(--clr-accent); }
+
+.cj-pips { display: flex; align-items: center; gap: 6px; margin-bottom: 14px; }
+.cj-pip {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+}
+.cj-pip.seen { background: var(--clr-accent); border-color: var(--clr-accent); }
+.cj-pip.now { border-color: var(--clr-accent); box-shadow: 0 0 0 3px var(--clr-accent-soft); }
+.cj-pip-label { margin-left: 8px; font-size: 0.8rem; color: var(--clr-text-soft); }
+
+/* ── Question card ── */
+.cj-question, .cj-review-card {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin-bottom: 12px;
+}
+.cj-prompt { font-size: 1.08rem; line-height: 1.55; margin: 0 0 14px; }
+
+.cj-input-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+.cj-input-label { min-width: 150px; font-size: 0.9rem; color: var(--clr-text-soft); }
+.cj-input {
+  flex: 1;
+  min-width: 140px;
+  max-width: 240px;
+  padding: 10px 12px;
+  font-size: 1.05rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--clr-border);
+  background: var(--clr-input);
+  color: var(--clr-text);
+}
+.cj-input::placeholder { color: var(--clr-placeholder); }
+.cj-input:focus { outline: 2px solid var(--clr-accent); border-color: transparent; }
+.cj-unit { color: var(--clr-text-soft); font-size: 0.95rem; }
+
+/* ── Feedback ── */
+.cj-feedback {
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  margin: 12px 0;
+  line-height: 1.5;
+}
+.cj-feedback.right { background: var(--clr-correct-bg); border: 1px solid var(--clr-correct); }
+.cj-feedback.wrong { background: var(--clr-wrong-bg); border: 1px solid var(--clr-wrong); }
+.cj-hint { display: block; margin-top: 8px; }
+.cj-expl { margin-top: 8px; color: var(--clr-text); }
+
+.cj-actions { display: flex; gap: 10px; justify-content: center; margin-top: 14px; flex-wrap: wrap; }
+.cj-check-note { text-align: center; color: var(--clr-text-soft); font-size: 0.82rem; margin: 10px 0 0; }
+
+/* ── Finale recap table ── */
+.cj-recap {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0 20px;
+  font-size: 0.92rem;
+}
+.cj-recap th, .cj-recap td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--clr-border);
+}
+.cj-recap th { color: var(--clr-text-soft); font-weight: 600; }
+.cj-recap tr.done td:first-child::after { content: ' ✓'; color: var(--clr-correct); }
+
+/* ── One-card roadmap carousel ── */
+.cj-carousel {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  margin: 4px 0 6px;
+}
+/* Two lines now (title + question) rather than three, so the card can sit lower. */
+.cj-stop-card { flex: 1; min-height: 76px; }
+.cj-card-nav {
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  background: var(--clr-surface);
+  color: var(--clr-text);
+  font-size: 1.1rem;
+  padding: 0 12px;
+  cursor: pointer;
+}
+.cj-card-nav:hover:not(:disabled) { background: var(--clr-hover-strong); }
+.cj-card-nav:disabled { opacity: 0.35; cursor: default; }
+
+/* ── Journey overlay (all 16 mysteries, read-only) ── */
+.cj-journey-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+/* Roughly square: wider and shorter than the old 560 × 80vh portrait panel, so
+ * the challenge list reads in fewer, fuller lines and scrolls far less. The
+ * min() keeps it square-ish on desktop while still fitting small screens. */
+.cj-journey-panel {
+  background: var(--clr-bg, var(--clr-surface));
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: min(760px, 94vw);
+  max-height: min(760px, 86vh);
+  overflow-y: auto;
+  padding: 20px 24px;
+}
+.cj-journey-head { display: flex; justify-content: space-between; align-items: center; }
+.cj-journey-title { margin: 0; font-family: var(--font-display); font-size: 1.25rem; }
+.cj-journey-close {
+  background: transparent;
+  border: none;
+  color: var(--clr-text-soft);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+.cj-journey-close:hover { color: var(--clr-text); }
+.cj-journey-sub { color: var(--clr-text-soft); font-size: 0.88rem; margin: 4px 0 14px; }
+.cj-journey-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.cj-journey-item {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  background: var(--clr-surface);
+  line-height: 1.4;
+}
+.cj-journey-item.done { border-color: var(--clr-correct); }
+.cj-journey-item.locked { opacity: 0.6; }
+.cj-journey-status { flex: 0 0 auto; }
+
+/* ── Visualize panel (v1: Stops 1–6) ── */
+.cj-visual-panel {
+  border: 1px dashed var(--clr-border);
+  border-radius: var(--radius-sm);
+  background: var(--clr-accent-soft);
+  padding: 12px 14px;
+  margin: 4px 0 10px;
+}
+.cj-visual { display: flex; flex-direction: column; gap: 8px; }
+.cj-vis-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.cj-vis-row.gears { justify-content: center; }
+.cj-vis-group { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.cj-vis-group.dim { opacity: 0.4; }
+.cj-vis-emojis { font-size: 1.25rem; letter-spacing: 2px; line-height: 1.6; word-break: break-all; }
+.cj-vis-op { font-weight: 700; font-size: 1.1rem; color: var(--clr-text-soft); padding: 0 4px; }
+.cj-vis-glabel { font-size: 0.8rem; color: var(--clr-text-soft); }
+.cj-vis-caption { margin: 0; font-size: 0.8rem; color: var(--clr-text-soft); font-style: italic; }
+.cj-vis-blockrow, .cj-vis-barrow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.cj-vis-barlabel { flex: 0 0 110px; font-size: 0.82rem; color: var(--clr-text-soft); text-align: right; }
+.cj-vis-barval { font-size: 0.82rem; font-weight: 700; white-space: nowrap; }
+.cj-vis-bartrack {
+  flex: 1;
+  min-width: 120px;
+  height: 16px;
+  border-radius: 999px;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  overflow: hidden;
+  display: flex;
+}
+.cj-vis-bartrack.tall { height: 26px; }
+.cj-vis-barfill {
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.cj-vis-barfill.f0 { background: var(--clr-accent); }
+.cj-vis-barfill.f1 { background: #3b82c4; }
+.cj-vis-barfill.f2 { background: #4ca466; }
+.cj-vis-tank { display: inline-flex; gap: 2px; flex: 1; min-width: 120px; height: 22px; }
+.cj-vis-tank.small { flex: 0 0 auto; min-width: 60px; height: 16px; }
+.cj-vis-cell {
+  flex: 1;
+  min-width: 10px;
+  border: 1px solid var(--clr-border);
+  border-radius: 3px;
+  background: var(--clr-surface);
+}
+.cj-vis-cell.a { background: var(--clr-accent); border-color: var(--clr-accent); }
+.cj-vis-cell.b { background: #3b82c4; border-color: #3b82c4; }
+.cj-vis-cell.dim { background: var(--clr-accent); border-color: var(--clr-accent); opacity: 0.3; }
+.cj-vis-gear { width: 84px; height: 84px; color: var(--clr-text); }
+
+/* Stops 7–16 visual kinds */
+.cj-vis-batt {
+  flex: 1;
+  min-width: 160px;
+  max-width: 340px;
+  height: 30px;
+  border: 2px solid var(--clr-text-soft);
+  border-radius: 6px;
+  display: flex;
+  overflow: hidden;
+  background: var(--clr-surface);
+}
+.cj-vis-battfill { height: 100%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; }
+.cj-vis-battfill.a { background: var(--clr-accent); }
+.cj-vis-battfill.q { background: #3b82c4; }
+.cj-vis-battfill.dim { background: var(--clr-accent); opacity: 0.3; }
+.cj-vis-battcap { width: 6px; height: 14px; background: var(--clr-text-soft); border-radius: 0 3px 3px 0; margin-left: 2px; align-self: center; }
+.cj-vis-dst { width: 190px; height: auto; color: var(--clr-text); }
+.cj-vis-circle { width: 130px; height: auto; color: var(--clr-text); }
+.cj-vis-rtri { width: 250px; max-width: 100%; height: auto; color: var(--clr-text); }
+.cj-vis-plot { width: 100%; max-width: 320px; height: auto; display: block; margin: 0 auto; color: var(--clr-text); }
+.cj-vis-meet { display: flex; align-items: center; gap: 10px; justify-content: center; text-align: center; }
+.cj-vis-meetcar { font-size: 1.5rem; line-height: 1.2; }
+.cj-vis-meetcar small { font-size: 0.72rem; color: var(--clr-text-soft); }
+.cj-vis-road {
+  flex: 1;
+  max-width: 260px;
+  border-bottom: 3px dashed var(--clr-border);
+  padding-bottom: 4px;
+  font-size: 0.8rem;
+  color: var(--clr-text-soft);
+  text-align: center;
+  white-space: nowrap;
+}
+.cj-vis-eq {
+  font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+  font-size: 1.02rem;
+  text-align: center;
+  padding: 10px 12px;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  background: var(--clr-surface);
+  overflow-x: auto;
+}
+
+/* ── Band-level resume notice on the bridge screen ── */
+.cj-resume-note {
+  margin: 0 auto 12px;
+  max-width: 520px;
+  padding: 10px 14px;
+  border: 1px solid var(--clr-accent);
+  border-radius: var(--radius-sm);
+  background: var(--clr-accent-soft);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+/* ── Road License (earned Tenali start level) ── */
+.cj-stop-done-actions { display: flex; flex-direction: column; gap: 6px; }
+.cj-stop-action.license { background: var(--clr-surface); color: var(--clr-text); border: 1px solid var(--clr-border); }
+.cj-stop-action.license:hover { border-color: var(--clr-accent); filter: none; }
+
+.cj-license {
+  margin: 14px auto;
+  max-width: 560px;
+  text-align: left;
+  border: 1px solid var(--clr-accent);
+  border-radius: var(--radius-sm);
+  background: var(--clr-accent-soft);
+  padding: 12px 16px;
+}
+.cj-license-head { font-weight: 700; margin-bottom: 8px; }
+.cj-license-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 4px 0;
+}
+.cj-license-text { line-height: 1.4; }
+.cj-license-go {
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--clr-accent);
+  color: var(--clr-on-accent, #fff);
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.cj-license-go:hover { filter: brightness(1.08); }
+.cj-license-note { margin: 8px 0 0; font-size: 0.82rem; color: var(--clr-text-soft); font-style: italic; }
+
+/* ── "Now can you solve…" challenge set ── */
+.cj-challenge { margin: 0 auto 14px; max-width: 560px; text-align: left; }
+.cj-challenge-toggle {
+  width: 100%;
+  border: 1px dashed var(--clr-border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--clr-text);
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+}
+.cj-challenge-toggle:hover { border-color: var(--clr-accent); }
+.cj-challenge-list { margin: 14px 0 0; padding-left: 22px; }
+.cj-challenge-item { margin-bottom: 14px; }
+.cj-challenge-prompt { margin: 0 0 6px; line-height: 1.5; }
+.cj-challenge-reveal {
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  background: var(--clr-surface);
+  color: var(--clr-text-soft);
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.cj-challenge-reveal:hover { color: var(--clr-text); border-color: var(--clr-accent); }
+.cj-challenge-solution {
+  margin: 6px 0 0;
+  padding: 8px 12px;
+  border-left: 3px solid var(--clr-accent);
+  background: var(--clr-accent-soft);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 520px) {
+  .cj-stop { flex-wrap: wrap; }
+  .cj-stop-action { margin-left: auto; }
+  .cj-stop-done-actions { margin-left: auto; }
+  .cj-input-label { min-width: 100%; }
+  .cj-vis-barlabel { flex-basis: 100%; text-align: left; }
+  .cj-license-row { flex-direction: column; align-items: flex-start; }
+}
