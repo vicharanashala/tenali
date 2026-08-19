@@ -1,0 +1,23 @@
+frontend:
+  - changed-files:
+    - any-glob-to-any-file: 'client/**'
+
+backend:
+  - changed-files:
+    - any-glob-to-any-file: 'server/**'
+
+tests:
+  - changed-files:
+    - any-glob-to-any-file: '**/*.test.*'
+    - any-glob-to-any-file: '**/*.spec.*'
+
+infrastructure:
+  - changed-files:
+    - any-glob-to-any-file: '.github/**'
+    - any-glob-to-any-file: 'deploy/**'
+
+docs:
+  - changed-files:
+    - any-glob-to-any-file: '*.md'
+    - any-glob-to-any-file: 'docs/**'
+    - any-glob-to-any-file: 'CLAUDE.md'
