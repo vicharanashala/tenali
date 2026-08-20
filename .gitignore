@@ -13,6 +13,8 @@ PR_DRAFT.md
 # local scratch / debug throwaways
 scratch/
 server/_probe*.js
+.env
+*.env
 
 # Backup snapshots — never commit these; use git history instead
 *.bak
