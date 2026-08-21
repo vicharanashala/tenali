@@ -51,6 +51,7 @@ const path = require('path');
 const http = require('http');
 const wordCreator = require('./wordCreator');
 const logger = require('./lib/logger');
+const { randomInt, digitRange, gcd, lcm, simplifyFraction, pick } = require('./lib/mathHelpers');
 
 // Catch what would otherwise be a silent crash (or, for unhandled promise
 // rejections on Node 15+, a crash with no application-level record of why).
@@ -538,28 +539,7 @@ app.use(async (req, res, next) => {
 const { generateExplanation } = require('./explanations');
 global.generateExplanation = generateExplanation;
 
-/**
- * Generate a random integer between min and max (inclusive)
- * @param {number} min - Minimum value (inclusive)
- * @param {number} max - Maximum value (inclusive)
- * @returns {number} Random integer in range [min, max]
- */
-function randomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
 
-/**
- * Map number of digits to a numeric range for problem generation
- * Used for creating addition problems with appropriate difficulty
- * @param {number} digits - Number of digits (1, 2, or 3)
- * @returns {object} {min, max} range object
- */
-function digitRange(digits) {
-  if (digits === 1) return { min: 0, max: 9 };
-  if (digits === 2) return { min: 10, max: 99 };
-  if (digits === 3) return { min: 100, max: 999 };
-  return { min: 1000, max: 9999 };
-}
 
 /**
  * Map square root approximation step level to a numeric band
@@ -1783,11 +1763,9 @@ app.post('/multiply-api/check', (req, res) => {
 
 function vmRandInt(lo, hi) { return Math.floor(Math.random() * (hi - lo + 1)) + lo; }
 
-function vmPick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
-
 const VM_EMOJIS = ['🍎','🍊','🍋','🍇','🍓','⭐','🌸','🦋','🐣','🍭','🧁','🎈','🦄','🐬','🍕'];
 
-function vmEmoji() { return vmPick(VM_EMOJIS); }
+function vmEmoji() { return pick(VM_EMOJIS); }
 
 // Tables by difficulty
 function vmTables(difficulty) {
@@ -1829,7 +1807,7 @@ app.get('/visual-math-api/question', (req, res) => {
 
     if (type === 'multiply' && mode === 'skip') {
       // "Hop by step to reach target"
-      const step   = vmPick(tables.filter(t => t <= 10));
+      const step   = pick(tables.filter(t => t <= 10));
       const hops   = vmRandInt(2, diff === 'easy' ? 5 : diff === 'medium' ? 8 : 10);
       const target = step * hops;
       return res.json({ id, type, mode, emoji: '🐸', step, hops, target,
@@ -1839,7 +1817,7 @@ app.get('/visual-math-api/question', (req, res) => {
 
     if (type === 'multiply' && mode === 'product') {
       // Balance scale: left = label "A × B", right = drag weights to match
-      const a = vmPick(tables);
+      const a = pick(tables);
       const b = vmRandInt(2, diff === 'easy' ? 5 : diff === 'medium' ? 9 : 12);
       return res.json({ id, type, mode, emoji, a, b,
         prompt: `${a} × ${b} = ?  Drag weight blocks to balance the right pan!`,
@@ -1848,7 +1826,7 @@ app.get('/visual-math-api/question', (req, res) => {
 
     if (type === 'multiply' && mode === 'mystery') {
       // Balance scale: "? × B = total" — drag mystery number weight
-      const b     = vmPick(tables.filter(t => t >= 2 && t <= (diff === 'easy' ? 5 : 10)));
+      const b     = pick(tables.filter(t => t >= 2 && t <= (diff === 'easy' ? 5 : 10)));
       const a     = vmRandInt(2, diff === 'easy' ? 5 : diff === 'medium' ? 9 : 12);
       const total = a * b;
       return res.json({ id, type, mode, emoji, a, b, total,
@@ -1902,7 +1880,7 @@ app.get('/visual-math-api/question', (req, res) => {
     }
 
     // Fallback: simple product
-    const a2 = vmPick(tables);
+    const a2 = pick(tables);
     const b2 = vmRandInt(1, 10);
     res.json({ id, type: 'multiply', mode: 'product', emoji, a: a2, b: b2,
       prompt: `${a2} × ${b2} = ?`, answer: a2 * b2 });
@@ -3092,26 +3070,7 @@ app.post('/basicarith-api/check', (req, res) => {
  * @param {number} b - Second non-negative integer
  * @returns {number} GCD of a and b
  */
-function gcd(a, b) {
-  a = Math.abs(a);
-  b = Math.abs(b);
-  while (b) { [a, b] = [b, a % b]; }
-  return a;
-}
 
-/**
- * simplifyFraction(num, den): Reduce a fraction to lowest terms.
- * Ensures the denominator is always positive. Returns {num, den}.
- *
- * @param {number} num - Numerator (can be negative)
- * @param {number} den - Denominator (must be non-zero)
- * @returns {{num: number, den: number}} Simplified fraction
- */
-function simplifyFraction(num, den) {
-  if (den < 0) { num = -num; den = -den; }
-  const g = gcd(Math.abs(num), den);
-  return { num: num / g, den: den / g };
-}
 
 /**
  * toMixed(num, den): Convert an improper fraction to mixed number form.
@@ -3337,9 +3296,7 @@ const SQUARE_FREE = [2,3,5,6,7,10,11,13,14,15,17,19,21,22,23,26,29,30];
 function randInt(lo, hi) {
   return lo + Math.floor(Math.random() * (hi - lo + 1));
 }
-function pick(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
+
 
 /**
  * Half-up rounding that is robust to IEEE-754 representation errors.
@@ -3676,10 +3633,7 @@ app.post('/surds-api/check', express.json(), (req, res) => {
 // INDICES API — Laws of exponents (IGCSE syllabus)
 // ═══════════════════════════════════════════════════════════════════════════
 
-/**
- * Helper: pick random element
- */
-function idxPick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
 function idxRand(lo, hi) { return lo + Math.floor(Math.random() * (hi - lo + 1)); }
 
 /**
@@ -3715,8 +3669,8 @@ app.get('/indices-api/question', (req, res) => {
   const bases = ['x', 'y', 'a', 'b', 'm', 'n', 'p'];
 
   if (difficulty === 'easy') {
-    const subtype = idxPick(['multiply', 'divide', 'power']);
-    const base = idxPick(bases);
+    const subtype = pick(['multiply', 'divide', 'power']);
+    const base = pick(bases);
     if (subtype === 'multiply') {
       // a^m × a^n
       const m = idxRand(2, 8);
@@ -3741,7 +3695,7 @@ app.get('/indices-api/question', (req, res) => {
     }
   }
   else if (difficulty === 'medium') {
-    const subtype = idxPick(['zero', 'negative_eval', 'negative_simplify']);
+    const subtype = pick(['zero', 'negative_eval', 'negative_simplify']);
     if (subtype === 'zero') {
       // a^0 = 1
       const numBase = idxRand(2, 20);
@@ -3749,8 +3703,8 @@ app.get('/indices-api/question', (req, res) => {
       res.json({ id, difficulty, type: 'evaluate', subtype, prompt, answerNum: 1, answerDen: 1 });
     } else if (subtype === 'negative_eval') {
       // a^(-n) = 1/a^n — evaluate numerically
-      const numBase = idxPick([2, 3, 4, 5, 10]);
-      const n = idxPick([1, 2, 3]);
+      const numBase = pick([2, 3, 4, 5, 10]);
+      const n = pick([1, 2, 3]);
       // Keep answer manageable
       if (numBase === 10 && n > 3) n = 2;
       const prompt = `${numBase}${sup(-n)}`;
@@ -3759,7 +3713,7 @@ app.get('/indices-api/question', (req, res) => {
       res.json({ id, difficulty, type: 'evaluate', subtype, numBase, n, prompt, answerNum, answerDen });
     } else {
       // Simplify: x^(-a) × x^b
-      const base = idxPick(bases);
+      const base = pick(bases);
       const a = idxRand(1, 5);
       const b = idxRand(a + 1, a + 6); // ensure positive result most of the time
       const prompt = `${base}${sup(-a)} × ${base}${sup(b)}`;
@@ -3801,7 +3755,7 @@ app.get('/indices-api/question', (req, res) => {
       { base: 100, expNum: 3, expDen: 2 },  // 100^(3/2) = 1000
       { base: 81, expNum: 3, expDen: 4 },   // 81^(3/4) = 27
     ];
-    const c = idxPick(combos);
+    const c = pick(combos);
     const root = Math.round(Math.pow(c.base, 1 / c.expDen));
     const answer = Math.pow(root, c.expNum);
     const prompt = `${c.base}^(${fmtFracExp(c.expNum, c.expDen)})`;
@@ -3809,7 +3763,7 @@ app.get('/indices-api/question', (req, res) => {
   }
   else {
     // ExtraHard: negative fractional exponents and fraction bases
-    const subtype = idxPick(['neg_frac', 'frac_base']);
+    const subtype = pick(['neg_frac', 'frac_base']);
     if (subtype === 'neg_frac') {
       // a^(-m/n) = 1/a^(m/n)
       const combos = [
@@ -3826,7 +3780,7 @@ app.get('/indices-api/question', (req, res) => {
         { base: 100, expNum: 1, expDen: 2 }, // 100^(-1/2) = 1/10
         { base: 81, expNum: 3, expDen: 4 },  // 81^(-3/4) = 1/27
       ];
-      const c = idxPick(combos);
+      const c = pick(combos);
       const root = Math.round(Math.pow(c.base, 1 / c.expDen));
       const val = Math.pow(root, c.expNum);
       const prompt = `${c.base}^(${fmtFracExp(-c.expNum, c.expDen)})`;
@@ -3847,7 +3801,7 @@ app.get('/indices-api/question', (req, res) => {
       fracBases[6] = { a: 8, b: 27, expNum: -2, expDen: 3, ansNum: 9, ansDen: 4 };  // (8/27)^(-2/3) = 9/4
       fracBases[7] = { a: 4, b: 9, expNum: -1, expDen: 2, ansNum: 3, ansDen: 2 };   // (4/9)^(-1/2) = 3/2
 
-      const c = idxPick(fracBases);
+      const c = pick(fracBases);
       let prompt, ansNum, ansDen;
       if (c.expNum !== undefined) {
         // Fractional exponent on fraction base
@@ -3923,7 +3877,7 @@ app.post('/indices-api/check', express.json(), (req, res) => {
 // ═══════════════════════════════════════════════════════════════════════════
 
 function seqRand(lo, hi) { return lo + Math.floor(Math.random() * (hi - lo + 1)); }
-function seqPick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
 
 /**
  * GET /sequences-api/question?difficulty=easy|medium|hard|extrahard
@@ -3941,7 +3895,7 @@ app.get('/sequences-api/question', (req, res) => {
     // Arithmetic: a, a+d, a+2d, ... Find the nth term
     const a = seqRand(-10, 20);
     let d = seqRand(-8, 8);
-    if (d === 0) d = seqPick([1, -1, 2, -2, 3, 5]);
+    if (d === 0) d = pick([1, -1, 2, -2, 3, 5]);
     const n = seqRand(5, 20);
     const terms = [a, a + d, a + 2 * d, a + 3 * d];
     const answer = a + (n - 1) * d;
@@ -3960,8 +3914,8 @@ app.get('/sequences-api/question', (req, res) => {
   }
   else if (difficulty === 'hard') {
     // Geometric: a, ar, ar², ... Find the nth term
-    const a = seqPick([1, 2, 3, 4, 5, -1, -2, -3]);
-    const r = seqPick([2, 3, -2, -3, 1/2, 1/3, -1/2]);
+    const a = pick([1, 2, 3, 4, 5, -1, -2, -3]);
+    const r = pick([2, 3, -2, -3, 1/2, 1/3, -1/2]);
     const n = seqRand(3, 8);
     const terms = [a, a * r, a * r * r, a * r * r * r];
     const answer = a * Math.pow(r, n - 1);
@@ -3986,8 +3940,8 @@ app.get('/sequences-api/question', (req, res) => {
   }
   else {
     // Geometric sum: S_n = a(r^n - 1)/(r - 1) for r ≠ 1
-    const a = seqPick([1, 2, 3, 4, 5]);
-    const r = seqPick([2, 3, -2, 1/2]);
+    const a = pick([1, 2, 3, 4, 5]);
+    const r = pick([2, 3, -2, 1/2]);
     const n = seqRand(3, 7);
     const terms = [a, a * r, a * r * r];
     const fmtNum = (x) => Number.isInteger(x) ? String(x) : x.toFixed(4).replace(/0+$/, '').replace(/\.$/, '');
@@ -4092,7 +4046,7 @@ app.get('/ratio-api/question', (req, res) => {
   }
   else if (difficulty === 'medium') {
     // Divide amount in ratio a:b (two parts) or a:b:c (three parts)
-    const parts = seqPick([2, 2, 2, 3]); // mostly 2-part
+    const parts = pick([2, 2, 2, 3]); // mostly 2-part
     if (parts === 2) {
       const ra = seqRand(1, 7);
       const rb = seqRand(1, 7);
@@ -4122,7 +4076,7 @@ app.get('/ratio-api/question', (req, res) => {
       { q: `If ${qtyA} kg weighs ${valA} lbs, how much do ${qtyB} kg weigh?`, unit: ' lbs' },
       { q: `A car uses ${valA} litres for ${qtyA} km. How many litres for ${qtyB} km?`, unit: ' litres' },
     ];
-    const ctx = seqPick(contexts);
+    const ctx = pick(contexts);
     res.json({ id, difficulty, type: 'direct', qtyA, valA, qtyB, answer: valB, prompt: ctx.q });
   }
   else {
@@ -4134,7 +4088,7 @@ app.get('/ratio-api/question', (req, res) => {
     const divisors = [];
     for (let i = 2; i <= 20; i++) { if (totalWork % i === 0 && i !== workersA) divisors.push(i); }
     if (divisors.length === 0) divisors.push(workersA + 1);
-    const workersB = seqPick(divisors);
+    const workersB = pick(divisors);
     const daysB = totalWork / workersB;
     const prompt = `${workersA} workers take ${daysA} days to finish a job. How many days for ${workersB} workers?`;
     // ansNum/ansDen to handle non-integer results
@@ -4384,7 +4338,7 @@ app.post('/percent-api/check', express.json(), (req, res) => {
 // SETS API — Union, intersection, complement, Venn diagrams
 // ═══════════════════════════════════════════════════════════════════════════
 
-function setPick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
 function setRand(lo, hi) { return lo + Math.floor(Math.random() * (hi - lo + 1)); }
 
 /** Generate a random subset of size k from universe */
@@ -4429,7 +4383,7 @@ app.get('/sets-api/question', (req, res) => {
       { op: 'B − A', answer: setDiff(B, A) },
       { op: "A'", answer: setDiff(universe, A) },
     ];
-    const chosen = setPick(ops);
+    const chosen = pick(ops);
     const prompt = `U = {${universe.join(', ')}}, A = {${A.join(', ')}}, B = {${B.join(', ')}}. Find ${chosen.op}`;
     res.json({ id, difficulty, type: 'list', prompt, answer: chosen.answer });
   }
@@ -4440,7 +4394,7 @@ app.get('/sets-api/question', (req, res) => {
     const nAB = setRand(2, Math.min(nA, nB) - 1); // intersection
     const nAuB = nA + nB - nAB;
 
-    const subtype = setPick(['find_union', 'find_intersect', 'find_only_a']);
+    const subtype = pick(['find_union', 'find_intersect', 'find_only_a']);
     let prompt, answer;
     if (subtype === 'find_union') {
       prompt = `n(A) = ${nA}, n(B) = ${nB}, n(A ∩ B) = ${nAB}. Find n(A ∪ B)`;
@@ -4462,7 +4416,7 @@ app.get('/sets-api/question', (req, res) => {
     const neither = setRand(2, 10);
     const total = onlyA + both + onlyB + neither;
 
-    const subtype = setPick(['find_neither', 'find_both', 'find_onlyA', 'find_total']);
+    const subtype = pick(['find_neither', 'find_both', 'find_onlyA', 'find_total']);
     let prompt, answer;
     if (subtype === 'find_neither') {
       prompt = `In a group of ${total}: n(A only) = ${onlyA}, n(A ∩ B) = ${both}, n(B only) = ${onlyB}. How many are in neither A nor B?`;
@@ -4499,7 +4453,7 @@ app.get('/sets-api/question', (req, res) => {
     const nBC = bcOnly + abc;
     const total = aOnly + bOnly + cOnly + abOnly + acOnly + bcOnly + abc + neither;
 
-    const subtype = setPick(['find_abc', 'find_neither', 'find_aonly', 'find_total']);
+    const subtype = pick(['find_abc', 'find_neither', 'find_aonly', 'find_total']);
     let prompt, answer;
     if (subtype === 'find_abc') {
       prompt = `n(A) = ${nA}, n(B) = ${nB}, n(C) = ${nC}, n(A∩B) = ${nAB}, n(A∩C) = ${nAC}, n(B∩C) = ${nBC}, total in at least one set = ${total - neither}. Find n(A ∩ B ∩ C).`;
@@ -4557,7 +4511,7 @@ app.post('/sets-api/check', express.json(), (req, res) => {
 // ═══════════════════════════════════════════════════════════════════════════
 
 function triRand(lo, hi) { return lo + Math.floor(Math.random() * (hi - lo + 1)); }
-function triPick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
 
 app.get('/trig-api/question', (req, res) => {
   const difficulty = req.query.difficulty || 'easy';
@@ -4567,8 +4521,8 @@ app.get('/trig-api/question', (req, res) => {
     // SOH-CAH-TOA: find missing side in right triangle
     // Use Pythagorean triples for clean answers
     const triples = [[3,4,5],[5,12,13],[8,15,17],[7,24,25],[6,8,10],[9,12,15],[10,24,26],[20,21,29]];
-    const [a, b, c] = triPick(triples);
-    const subtype = triPick(['find_hyp', 'find_leg']);
+    const [a, b, c] = pick(triples);
+    const subtype = pick(['find_hyp', 'find_leg']);
     let prompt, answer;
     if (subtype === 'find_hyp') {
       prompt = `Right triangle: legs = ${a} and ${b}. Find the hypotenuse.`;
@@ -4584,7 +4538,7 @@ app.get('/trig-api/question', (req, res) => {
     const angle = triRand(15, 75);
     const rad = angle * Math.PI / 180;
     const side = triRand(5, 20);
-    const fn = triPick(['sin', 'cos', 'tan']);
+    const fn = pick(['sin', 'cos', 'tan']);
     let opp, adj, hyp, prompt;
     if (fn === 'sin') {
       hyp = side;
@@ -4610,7 +4564,7 @@ app.get('/trig-api/question', (req, res) => {
     const radB = B * Math.PI / 180;
     const a = triRand(5, 20);
     const b = Math.round(a * Math.sin(radB) / Math.sin(radA) * 10) / 10;
-    const subtype = triPick(['find_side', 'find_angle']);
+    const subtype = pick(['find_side', 'find_angle']);
     let prompt, answer;
     if (subtype === 'find_side') {
       prompt = `Triangle: a = ${a}, angle A = ${A}°, angle B = ${B}°. Find side b (1 d.p.).`;
@@ -4623,7 +4577,7 @@ app.get('/trig-api/question', (req, res) => {
   }
   else {
     // Cosine rule or area = ½ab·sinC
-    const subtype = triPick(['cosine', 'area']);
+    const subtype = pick(['cosine', 'area']);
     if (subtype === 'cosine') {
       const a = triRand(5, 15);
       const b = triRand(5, 15);
@@ -4662,10 +4616,10 @@ app.get('/ineq-api/question', (req, res) => {
 
   if (difficulty === 'easy') {
     // Linear: ax + b > c → x > (c-b)/a
-    const a = triPick([1, 2, 3, 4, 5, -1, -2, -3]);
+    const a = pick([1, 2, 3, 4, 5, -1, -2, -3]);
     const b = triRand(-10, 10);
     const c = triRand(-10, 10);
-    const op = triPick(['>', '<', '>=', '<=']);
+    const op = pick(['>', '<', '>=', '<=']);
     const opDisplay = op.replace('>=', '≥').replace('<=', '≤');
     const prompt = `Solve: ${a}x ${b >= 0 ? '+ ' + b : '− ' + Math.abs(b)} ${opDisplay} ${c}`;
     const val = (c - b) / a;
@@ -4702,7 +4656,7 @@ app.get('/ineq-api/question', (req, res) => {
     // (x-r1)(x-r2) = x² - (r1+r2)x + r1*r2
     const B = -(r1 + r2);
     const C = r1 * r2;
-    const op = triPick(['<=', '>=']);
+    const op = pick(['<=', '>=']);
     const opDisplay = op === '<=' ? '≤' : '≥';
     const prompt = `Solve: x² ${B >= 0 ? '+ ' + B : '− ' + Math.abs(B)}x ${C >= 0 ? '+ ' + C : '− ' + Math.abs(C)} ${opDisplay} 0`;
     let display;
@@ -4786,7 +4740,7 @@ app.get('/coordgeom-api/question', (req, res) => {
   
   if (difficulty === 'easy') {
     // Foundations: midpoint, reflection, translation
-    const subType = triPick(['midpoint', 'reflection', 'translation']);
+    const subType = pick(['midpoint', 'reflection', 'translation']);
     
     if (subType === 'midpoint') {
       const x1 = triRand(-8, 8); const y1 = triRand(-8, 8);
@@ -4796,7 +4750,7 @@ app.get('/coordgeom-api/question', (req, res) => {
       res.json({ id, difficulty, type: 'coord', prompt, ansX: mx, ansY: my, display: `(${mx}, ${my})`, points: [{x:x1, y:y1}, {x:x2, y:y2}] });
     }
     else if (subType === 'reflection') {
-      const axis = triPick(['x-axis', 'y-axis']);
+      const axis = pick(['x-axis', 'y-axis']);
       const x1 = triRand(-8, 8); const y1 = triRand(-8, 8);
       let ansX = x1, ansY = y1;
       if (axis === 'x-axis') ansY = -y1;
@@ -4815,20 +4769,20 @@ app.get('/coordgeom-api/question', (req, res) => {
   }
   else if (difficulty === 'medium') {
     // Lengths: distance, distance to origin
-    const subType = triPick(['distance', 'distance_origin']);
+    const subType = pick(['distance', 'distance_origin']);
     const triples = [[3,4,5],[5,12,13],[8,15,17],[6,8,10],[9,12,15]];
     
     if (subType === 'distance_origin') {
-      const [dx, dy, dist] = triPick(triples);
-      const sx = triPick([1, -1]); const sy = triPick([1, -1]);
+      const [dx, dy, dist] = pick(triples);
+      const sx = pick([1, -1]); const sy = pick([1, -1]);
       const x1 = sx * dx; const y1 = sy * dy;
       const prompt = `Find the distance from (${x1}, ${y1}) to the origin`;
       res.json({ id, difficulty, type: 'scalar', prompt, answer: dist, display: String(dist), points: [{x:x1, y:y1}, {x:0, y:0}] });
     }
     else { // distance
-      const [dx, dy, dist] = triPick(triples);
+      const [dx, dy, dist] = pick(triples);
       const x1 = triRand(-5, 5); const y1 = triRand(-5, 5);
-      const sx = triPick([1, -1]); const sy = triPick([1, -1]);
+      const sx = pick([1, -1]); const sy = pick([1, -1]);
       const x2 = x1 + sx * dx; const y2 = y1 + sy * dy;
       const prompt = `Find the distance between (${x1}, ${y1}) and (${x2}, ${y2})`;
       res.json({ id, difficulty, type: 'scalar', prompt, answer: dist, display: String(dist), points: [{x:x1, y:y1}, {x:x2, y:y2}] });
@@ -4836,10 +4790,10 @@ app.get('/coordgeom-api/question', (req, res) => {
   }
   else if (difficulty === 'hard') {
     // Slopes & Eqs: gradient, equation_line
-    const subType = triPick(['gradient', 'equation_line']);
+    const subType = pick(['gradient', 'equation_line']);
     
     const x1 = triRand(-6, 6); const y1 = triRand(-6, 6);
-    const dx = triRand(1, 6) * triPick([1, -1]);
+    const dx = triRand(1, 6) * pick([1, -1]);
     const dy = triRand(-6, 6);
     const x2 = x1 + dx; const y2 = y1 + dy;
     const g = gcd(Math.abs(dy), Math.abs(dx));
@@ -4870,7 +4824,7 @@ app.get('/coordgeom-api/question', (req, res) => {
   }
   else {
     // Advanced: perp_bisector, area_triangle
-    const subType = triPick(['perp_bisector', 'area_triangle']);
+    const subType = pick(['perp_bisector', 'area_triangle']);
     
     if (subType === 'area_triangle') {
       const x1 = triRand(-8, 8); const y1 = triRand(-8, 8);
@@ -4882,8 +4836,8 @@ app.get('/coordgeom-api/question', (req, res) => {
     }
     else { // perp_bisector
       const x1 = triRand(-6, 6); const y1 = triRand(-6, 6);
-      const dx = triRand(1, 4) * triPick([1, -1]);
-      const dy = triRand(1, 4) * triPick([1, -1]);
+      const dx = triRand(1, 4) * pick([1, -1]);
+      const dy = triRand(1, 4) * pick([1, -1]);
       const x2 = x1 + 2 * dx; const y2 = y1 + 2 * dy;
       
       const perpNum = -dx;
@@ -5271,7 +5225,7 @@ app.get('/stats-api/question', (req, res) => {
   }
   else if (difficulty === 'medium') {
     // Median of a list
-    const n = triPick([5, 7, 9, 6, 8, 10]);
+    const n = pick([5, 7, 9, 6, 8, 10]);
     const data = Array.from({ length: n }, () => triRand(1, 30));
     const sorted = [...data].sort((a, b) => a - b);
     let median, ansNum, ansDen;
@@ -5288,7 +5242,7 @@ app.get('/stats-api/question', (req, res) => {
   }
   else if (difficulty === 'hard') {
     // Mode and range
-    const subtype = triPick(['mode', 'range']);
+    const subtype = pick(['mode', 'range']);
     const n = triRand(7, 12);
     let data;
     if (subtype === 'mode') {
@@ -5458,8 +5412,8 @@ app.get('/vectors-api/question', (req, res) => {
   else if (difficulty === 'hard') {
     // Magnitude (use Pythagorean triples for clean answers)
     const triples = [[3,4,5],[5,12,13],[8,15,17],[6,8,10]];
-    const [x, y, mag] = triPick(triples);
-    const sx = triPick([1,-1]); const sy = triPick([1,-1]);
+    const [x, y, mag] = pick(triples);
+    const sx = pick([1,-1]); const sy = pick([1,-1]);
     const prompt = `Find |v| where v = (${sx*x}, ${sy*y})`;
     res.json({ id, difficulty, type: 'magnitude', prompt, answer: mag, display: String(mag) });
   }
@@ -5639,7 +5593,7 @@ app.get('/transform-api/question', (req, res) => {
 
   if (difficulty === 'easy') {
     // Reflection in x-axis or y-axis
-    const axis = triPick(['x-axis', 'y-axis']);
+    const axis = pick(['x-axis', 'y-axis']);
     const ansX = axis === 'y-axis' ? -x : x;
     const ansY = axis === 'x-axis' ? -y : y;
     const prompt = `Reflect (${x}, ${y}) in the ${axis}`;
@@ -5653,7 +5607,7 @@ app.get('/transform-api/question', (req, res) => {
   }
   else if (difficulty === 'hard') {
     // Rotation 90° or 180° about origin
-    const angle = triPick([90, 180, 270]);
+    const angle = pick([90, 180, 270]);
     let ansX, ansY;
     if (angle === 90) { ansX = -y; ansY = x; }        // 90° anticlockwise
     else if (angle === 180) { ansX = -x; ansY = -y; }
@@ -5663,7 +5617,7 @@ app.get('/transform-api/question', (req, res) => {
   }
   else {
     // Enlargement from origin with scale factor
-    const sf = triPick([2, 3, -1, -2, 0.5]);
+    const sf = pick([2, 3, -1, -2, 0.5]);
     const ansX = x * sf; const ansY = y * sf;
     const sfStr = sf === 0.5 ? '1/2' : String(sf);
     const prompt = `Enlarge (${x}, ${y}) by scale factor ${sfStr} from the origin`;
@@ -5691,7 +5645,7 @@ app.get('/mensur-api/question', (req, res) => {
 
   if (difficulty === 'easy') {
     // Area of rectangle, triangle, or parallelogram
-    const shape = triPick(['rectangle', 'triangle', 'parallelogram']);
+    const shape = pick(['rectangle', 'triangle', 'parallelogram']);
     const a = triRand(3, 15); const b = triRand(3, 15);
     let displayEq;
     if (shape === 'rectangle') { answer = a * b; prompt = `Area of rectangle: length = ${a}, width = ${b}`; displayEq = `${a} × ${b} = ${answer}`; }
@@ -5702,7 +5656,7 @@ app.get('/mensur-api/question', (req, res) => {
   else if (difficulty === 'medium') {
     // Area & circumference of circle
     const r = triRand(2, 12);
-    const subtype = triPick(['area', 'circumference']);
+    const subtype = pick(['area', 'circumference']);
     let displayEq;
     if (subtype === 'area') {
       answer = Math.round(Math.PI * r * r * 100) / 100;
@@ -5717,7 +5671,7 @@ app.get('/mensur-api/question', (req, res) => {
   }
   else if (difficulty === 'hard') {
     // Volume of cylinder, cone, or sphere
-    const shape = triPick(['cylinder', 'cone', 'sphere']);
+    const shape = pick(['cylinder', 'cone', 'sphere']);
     const r = triRand(2, 8);
     let displayEq;
     if (shape === 'cylinder') {
@@ -5739,7 +5693,7 @@ app.get('/mensur-api/question', (req, res) => {
   }
   else {
     // Surface area of cylinder, cone, or sphere
-    const shape = triPick(['cylinder', 'sphere']);
+    const shape = pick(['cylinder', 'sphere']);
     const r = triRand(2, 8);
     let displayEq;
     if (shape === 'cylinder') {
@@ -5782,7 +5736,7 @@ app.get('/bearings-api/question', (req, res) => {
       { name: 'South-South-West', bearing: 203 }, { name: 'West-South-West', bearing: 248 },
       { name: 'West-North-West', bearing: 293 }, { name: 'North-North-West', bearing: 338 },
     ];
-    const d = triPick(dirs);
+    const d = pick(dirs);
     const qType = Math.random();
     let prompt, answer;
     if (qType < 0.5) {
@@ -5861,16 +5815,16 @@ app.get('/log-api/question', (req, res) => {
       { b: 2, n: 1, ans: 0 }, { b: 3, n: 1, ans: 0 }, { b: 10, n: 1, ans: 0 },
       { b: 10, n: 10, ans: 1 }, { b: 2, n: 2, ans: 1 },
     ];
-    const c = triPick(combos);
+    const c = pick(combos);
     const prompt = `Evaluate log${c.b === 10 ? '' : '₊'.replace('₊', String(c.b).split('').map(d => '₀₁₂₃₄₅₆₇₈₉'[d]).join(''))}(${c.n})`;
     res.json({ id, difficulty, type: 'evaluate', prompt, answer: c.ans, display: String(c.ans) });
   }
   else if (difficulty === 'medium') {
     // Laws of logs: log(a) + log(b) = log(ab), log(a) - log(b) = log(a/b)
-    const base = triPick([2, 3, 10]);
+    const base = pick([2, 3, 10]);
     const sub = (n) => String(n).split('').map(d => '₀₁₂₃₄₅₆₇₈₉'[d]).join('');
     const bStr = base === 10 ? '' : sub(base);
-    const subtype = triPick(['add', 'subtract', 'power']);
+    const subtype = pick(['add', 'subtract', 'power']);
     if (subtype === 'add') {
       const a = triRand(2, 20); const b = triRand(2, 20);
       const prompt = `Simplify: log${bStr}(${a}) + log${bStr}(${b})`;
@@ -5901,13 +5855,13 @@ app.get('/log-api/question', (req, res) => {
       { b: 5, n: 125, x: 3 }, { b: 4, n: 64, x: 3 }, { b: 10, n: 100, x: 2 },
       { b: 2, n: 32, x: 5 }, { b: 3, n: 81, x: 4 },
     ];
-    const c = triPick(combos);
+    const c = pick(combos);
     const prompt = `Solve: ${c.b}ˣ = ${c.n}`;
     res.json({ id, difficulty, type: 'solve_exp', prompt, answer: c.x, display: `x = ${c.x}` });
   }
   else {
     // Solve log equations: log(x+a) = b → x+a = 10^b
-    const base = triPick([2, 10]);
+    const base = pick([2, 10]);
     const sub = (n) => String(n).split('').map(d => '₀₁₂₃₄₅₆₇₈₉'[d]).join('');
     const bStr = base === 10 ? '' : sub(base);
     const exp = triRand(1, 4);
@@ -5981,7 +5935,7 @@ app.get('/diff-api/question', (req, res) => {
   }
   else {
     // Find whether turning point is max or min, and its y-value
-    const a = triPick([1, -1, 2, -2, 3]);
+    const a = pick([1, -1, 2, -2, 3]);
     const b = triRand(-8, 8);
     const c = triRand(-10, 10);
     // f'(x) = 2ax + b = 0 → x = -b/(2a)
@@ -6050,7 +6004,7 @@ app.get('/bases-api/question', (req, res) => {
   }
   else {
     // Binary addition or hex to binary
-    const subtype = triPick(['bin_add', 'hex_to_bin']);
+    const subtype = pick(['bin_add', 'hex_to_bin']);
     if (subtype === 'bin_add') {
       const a = triRand(5, 30); const b = triRand(5, 30);
       const sum = a + b;
@@ -6099,7 +6053,7 @@ app.get('/circle-api/question', (req, res) => {
     // Angle at centre = 2 × angle at circumference
     const circumAngle = triRand(20, 80);
     const centreAngle = 2 * circumAngle;
-    const subtype = triPick(['find_centre', 'find_circum']);
+    const subtype = pick(['find_centre', 'find_circum']);
     if (subtype === 'find_centre') {
       const prompt = `Angle at circumference = ${circumAngle}°. Find the angle at the centre subtended by the same arc.`;
       res.json({ id, difficulty, type: 'centre_circum', prompt, answer: centreAngle, display: `${centreAngle}°` });
@@ -6114,7 +6068,7 @@ app.get('/circle-api/question', (req, res) => {
     const c = 180 - a;
     const b = triRand(40, 140);
     const d = 180 - b;
-    const subtype = triPick(['find_opp_a', 'find_opp_b']);
+    const subtype = pick(['find_opp_a', 'find_opp_b']);
     if (subtype === 'find_opp_a') {
       const prompt = `Cyclic quadrilateral ABCD. Angle A = ${a}°. Find angle C.`;
       res.json({ id, difficulty, type: 'cyclic', prompt, answer: c, display: `${c}°` });
@@ -6125,7 +6079,7 @@ app.get('/circle-api/question', (req, res) => {
   }
   else {
     // Tangent perpendicular to radius; alternate segment theorem
-    const subtype = triPick(['tangent_radius', 'alternate_segment']);
+    const subtype = pick(['tangent_radius', 'alternate_segment']);
     if (subtype === 'tangent_radius') {
       const angle = triRand(15, 75);
       const answer = 90 - angle;
@@ -6483,7 +6437,7 @@ app.post('/variation-api/check', express.json(), (req, res) => {
  * Find HCF/LCM of 2-3 numbers, word problems
  * ═══════════════════════════════════════════════════════════════════════════ */
 
-function lcm(a, b) { return Math.abs(a * b) / gcd(a, b); }
+
 
 app.get('/hcflcm-api/question', (req, res) => {
   const diff = req.query.difficulty || 'easy';
@@ -7429,7 +7383,7 @@ function tatsavitQuestion(difficulty, level) {
     case 5: { // Percentage problems
       if (!isHarder && !isMed) {
         // Easy: X% of Y (nice numbers)
-        const pct = triPick([10, 20, 25, 50, 75]);
+        const pct = pick([10, 20, 25, 50, 75]);
         const whole = randomInt(2, 20) * (pct === 25 ? 4 : pct === 75 ? 4 : pct === 50 ? 2 : 10);
         const answer = (pct / 100) * whole;
         return { id, type: 5, typeName: 'Percentage', prompt: `${pct}% of ${whole} = ?`, answer, display: String(answer) };
@@ -7450,7 +7404,7 @@ function tatsavitQuestion(difficulty, level) {
           return { id, type: 5, typeName: 'Percentage', prompt: `${pct}% of ${whole} = ?`, answer, display: String(answer) };
         } else {
           // "Y is X% of what number?"
-          const pct = triPick([10, 20, 25, 50]);
+          const pct = pick([10, 20, 25, 50]);
           const original = randomInt(20, 200);
           const part = (pct / 100) * original;
           return { id, type: 5, typeName: 'Percentage', prompt: `${part} is ${pct}% of what number?`, answer: original, display: String(original) };
@@ -7479,7 +7433,7 @@ function tatsavitQuestion(difficulty, level) {
         ? ['sub_neg', 'neg_add_neg', 'neg_sub_neg', 'neg_sub_pos', 'neg_add_pos']
         : isMed ? ['sub_neg', 'neg_add_neg', 'neg_sub_neg']
         : ['sub_neg'];
-      const pat = triPick(patterns);
+      const pat = pick(patterns);
       const a = randomInt(2, isHarder ? 30 : 12);
       const b = randomInt(2, isHarder ? 30 : 12);
       let prompt, answer;
@@ -7913,7 +7867,7 @@ function invtrigQuestion(difficulty) {
       { val: 0, func: 'arctan', ans: 0 },
       { val: 1, func: 'arctan', ans: 45 }
     ];
-    const chosen = triPick(values);
+    const chosen = pick(values);
     const prompt = `Find ${chosen.func}(${chosen.val}) in degrees`;
     return { id, difficulty, prompt, answer: chosen.ans, display: String(chosen.ans) };
   } else if (difficulty === 'medium') {
@@ -7924,7 +7878,7 @@ function invtrigQuestion(difficulty) {
       { val: '√2/2', func: 'arccos', ans: 45 },
       { val: '√3/2', func: 'arccos', ans: 30 }
     ];
-    const chosen = triPick(values);
+    const chosen = pick(values);
     const prompt = `Find ${chosen.func}(${chosen.val}) in degrees`;
     return { id, difficulty, prompt, answer: chosen.ans, display: String(chosen.ans) };
   } else if (difficulty === 'hard') {
@@ -8035,7 +7989,7 @@ function heronQuestion(difficulty) {
   } else if (difficulty === 'medium') {
     // Pythagorean triple: area is integer
     const triples = [[3, 4, 5], [5, 12, 13], [8, 15, 17], [7, 24, 25]];
-    const [a, b, c] = triPick(triples);
+    const [a, b, c] = pick(triples);
     const s = (a + b + c) / 2;
     const answer = Math.sqrt(s * (s - a) * (s - b) * (s - c));
     const prompt = `Find area using Heron's formula: sides ${a}, ${b}, ${c}`;
@@ -9089,14 +9043,14 @@ function gstQuestion(difficulty) {
   if (difficulty === 'easy') {
     // GST amount = price × (rate/100)
     const price = randomInt(100, 1000);
-    const rate = triPick([5, 12, 18]);
+    const rate = pick([5, 12, 18]);
     const answer = (price * rate) / 100;
     const prompt = `Find GST on price Rs ${price} at rate ${rate}%`;
     return { id, difficulty, prompt, answer, display: answer.toFixed(0) };
   } else if (difficulty === 'medium') {
     // Total = price + GST
     const price = randomInt(500, 2000);
-    const rate = triPick([5, 12, 18]);
+    const rate = pick([5, 12, 18]);
     const gst = (price * rate) / 100;
     const answer = price + gst;
     const prompt = `Total price including ${rate}% GST on Rs ${price}`;
@@ -9104,7 +9058,7 @@ function gstQuestion(difficulty) {
   } else if (difficulty === 'hard') {
     // CGST + SGST = GST
     const listPrice = randomInt(1000, 5000);
-    const rate = triPick([5, 12, 18]);
+    const rate = pick([5, 12, 18]);
     const gst = (listPrice * rate) / 100;
     const cgst = gst / 2;
     const sgst = gst / 2;
@@ -9114,7 +9068,7 @@ function gstQuestion(difficulty) {
   } else {
     // IGST input tax credit
     const billedAmount = randomInt(5000, 20000);
-    const rate = triPick([5, 12, 18]);
+    const rate = pick([5, 12, 18]);
     const igst = (billedAmount * rate) / 100;
     const answer = igst;
     const prompt = `IGST at ${rate}% on Rs ${billedAmount}. Find input tax credit`;
@@ -9292,13 +9246,13 @@ function circmeasureQuestion(difficulty) {
   if (difficulty === 'easy') {
     // degrees to radians
     const angles = [30, 45, 60, 90, 180, 360];
-    const deg = triPick(angles);
+    const deg = pick(angles);
     const answer = (deg * Math.PI) / 180;
     const prompt = `Convert ${deg}° to radians`;
     return { id, difficulty, prompt, answer, display: answer.toFixed(2) };
   } else if (difficulty === 'medium') {
     // radians to degrees
-    const radMult = triPick([0.5, 1, 1.5, 2, 3]);
+    const radMult = pick([0.5, 1, 1.5, 2, 3]);
     const rad = radMult;
     const answer = (rad * 180) / Math.PI;
     const prompt = `Convert ${rad}π radians to degrees`;
@@ -9349,7 +9303,7 @@ function conicsQuestion(difficulty) {
       { eq: 'x²/25 + y²/9 = 1', type: 'ellipse' },
       { eq: 'x²/16 − y²/9 = 1', type: 'hyperbola' }
     ];
-    const chosen = triPick(types);
+    const chosen = pick(types);
     const prompt = `Identify conic: ${chosen.eq}`;
     return { id, difficulty, prompt, answer: chosen.type, display: chosen.type };
   } else if (difficulty === 'medium') {
@@ -9409,7 +9363,7 @@ function diffeqQuestion(difficulty) {
       { de: "d³y/dx³ − y = x", order: 3 },
       { de: "(dy/dx)² + dy/dx = x", order: 1 }
     ];
-    const chosen = triPick(orders);
+    const chosen = pick(orders);
     const prompt = `Find order: ${chosen.de}`;
     return { id, difficulty, prompt, answer: chosen.order, display: String(chosen.order) };
   } else if (difficulty === 'medium') {
@@ -9420,7 +9374,7 @@ function diffeqQuestion(difficulty) {
       { de: "(d²y/dx²)² = 4(dy/dx)", deg: 2 },
       { de: "dy/dx + y = x", deg: 1 }
     ];
-    const chosen = triPick(degrees);
+    const chosen = pick(degrees);
     const prompt = `Find degree: ${chosen.de}`;
     return { id, difficulty, prompt, answer: chosen.deg, display: String(chosen.deg) };
   } else if (difficulty === 'hard') {
@@ -9431,7 +9385,7 @@ function diffeqQuestion(difficulty) {
       { de: "dy/dx = y", sol: "y = e^x", isValid: true },
       { de: "d²y/dx² + y = 0", sol: "y = sin(x)", isValid: true }
     ];
-    const chosen = triPick(solutions);
+    const chosen = pick(solutions);
     const prompt = `Is y = ${chosen.sol.split('=')[1].trim()} a solution of ${chosen.de}? (yes/no)`;
     const answerStr = chosen.isValid ? 'yes' : 'no';
     return { id, difficulty, prompt, answer: answerStr, display: answerStr };
