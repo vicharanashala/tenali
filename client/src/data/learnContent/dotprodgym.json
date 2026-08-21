@@ -1,0 +1,30 @@
+{
+  "title": "Dot Products Gym: Vector Workout",
+  "blocks": [
+    {
+      "icon": "🎯",
+      "title": "1. The Core Concept: Speed-Drilling Dot Products",
+      "content": "The Dot Products Gym throws rapid-fire vector multiplication problems at you. You'll practice computing dot products of 2D and 3D vectors under time pressure. The goal is to make the multiply-and-add process so automatic that you don't even think about it."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: Quick Component Multiply",
+      "content": "• For 2D vectors (a, b) and (c, d): dot product = ac + bd.\n• For 3D vectors (a, b, c) and (d, e, f): dot product = ad + be + cf.\n• Always multiply matching components, then add all products together.\n• Be extra careful with negative signs during multiplication!"
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. The Method: Speed Tips",
+      "content": "To calculate dot products fast:\n\n1. Write the components vertically aligned.\n2. Multiply each pair mentally.\n3. Keep a running total as you go.\n4. Double-check signs: negative times negative = positive, negative times positive = negative."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: 3D Dot Product",
+      "content": "Find (2, -3, 1) . (4, 1, -5).\n\n**Step 1:** 2 * 4 = 8\n**Step 2:** (-3) * 1 = -3\n**Step 3:** 1 * (-5) = -5\n**Step 4:** 8 + (-3) + (-5) = 0\n\n**Final Answer: 0** (These vectors are perpendicular!)"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "In 3D dot products, the most common error is forgetting the third component! Students calculate the first two products and write the answer, completely ignoring the z-components. Always count your components: if the vectors are 3D, you need exactly 3 multiplications before adding."
+    }
+  ]
+}

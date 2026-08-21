@@ -1,0 +1,30 @@
+{
+  "title": "Similarity: The Shrink Ray",
+  "blocks": [
+    {
+      "icon": "🔍",
+      "title": "1. The Core Concept: The Perfect Mini-Me",
+      "content": "If you take a photo of a car and zoom in on your phone, the car gets bigger, but its proportions remain identical. It doesn't stretch into a weird limo! In math, two shapes are **Similar** if one is a perfect, proportional enlargement (or shrinkage) of the other. They have the exact same angles, but different side lengths. (Unlike Congruence, where they must be the exact same size)."
+    },
+    {
+      "icon": "📏",
+      "title": "2. The Rules: The Scale Factor (k)",
+      "content": "The bridge between two similar shapes is the **Scale Factor (k)**.\n\n• To find 'k', find two sides that match up perfectly (e.g., the bottom base of the small triangle, and the bottom base of the big triangle).\n• Divide the Big side by the Small side. This gives you 'k' (e.g., 10 / 5 = 2. The big shape is 2x larger).\n• To find a missing Big side: Multiply the small side by k.\n• To find a missing Small side: Divide the big side by k."
+    },
+    {
+      "icon": "📦",
+      "title": "3. Step-by-Step: The 2D and 3D Traps",
+      "content": "This is where 90% of students fail: The Scale Factor (k) ONLY works for straight 1D lines (lengths, heights, perimeters)!\n\n1. **1D (Lengths):** Multiply by **k**.\n2. **2D (Areas):** If you double the length and width of a square, the area doesn't double; it gets 4 times bigger! You MUST multiply the small area by **k²**.\n3. **3D (Volumes):** If you double the length, width, and depth of a box, the volume gets 8 times bigger! You MUST multiply the small volume by **k³**."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: The Giant's Bucket",
+      "content": "Two buckets are mathematically similar. The small bucket is 10cm tall and holds 2 Liters (Volume). The big bucket is 30cm tall. What is the volume of the big bucket?\n\n• **Step 1 (Find 1D k):** Compare the heights (lengths). Big/Small = 30 / 10 = **3**. (k = 3).\n• **Step 2 (The Volume Trap):** We want to find Volume (3D space). We CANNOT just multiply the 2 Liters by 3! We must use **k³**.\n• **Step 3 (Calculate k³):** 3³ = 3 × 3 × 3 = **27**.\n• **Step 4 (Find Volume):** Multiply the small volume by 27. (2 Liters × 27).\n\n**Final Answer: The big bucket holds 54 Liters.**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The classic exam trick is giving you the two AREAS, and asking you to find a missing Length. Students will divide the Big Area by the Small Area to find 'k', and then try to multiply the length by it. **WRONG!** Dividing the areas gives you **k²**, not k! If Big Area is 100 and Small is 25, then k² = 4. You must SQUARE ROOT it to find the true 1D scale factor! (k = 2). Only then can you multiply the lengths by 2."
+    }
+  ]
+}

@@ -77,6 +77,7 @@ import './App.css'
 import TreasureHuntApp from './treasurehunt/TreasureHuntApp.jsx'
 import EnhancedMathDetectiveApp from './detective-app'
 import GlossaryText from './components/GlossaryText'
+import LearningVisual from './components/LearningVisual'
 import KeyTerms from './components/KeyTerms'
 import InteractiveLcmHcfApp from './LcmHcfApp';
 import IdliVadaSambharApp from './IdliVadaSambharApp';
@@ -114,6 +115,7 @@ import PlaygroundApp from './PlaygroundApp'
 import LocalCompilerApp from './LocalCompilerApp'
 import BattleApp from './BattleApp'
 import SudokuApp from './SudokuApp'
+import { getLearnContent } from './data/learnContent.js'
 
 // API base URL from environment variables (Vite)
 export const API = import.meta.env.VITE_API_BASE_URL || '';
@@ -44878,7 +44880,12 @@ function App() {
         onSelect={(key) => {
           if (key === 'goalpractice') {
             setMode('goalpractice');
+          } else if (key === 'angles') {
+            // PROTOTYPE: ONLY Angles enters the Learn/Test gateway
+            setIsGoalMode(false);
+            handleSelectMode(key);
           } else {
+            // All other topics bypass the gateway and go straight to quiz configuration
             setMode(key);
             setIsGoalMode(false);
           }
@@ -44886,6 +44893,383 @@ function App() {
       />
     );
   };
+
+  // ========== LEARN / TEST GATEWAY ==========
+  const [learningPhase, setLearningPhase] = useState(null)
+  const [learnData, setLearnData] = useState(null)
+  const [revealedBlocks, setRevealedBlocks] = useState(1)
+  const [blockStartTime, setBlockStartTime] = useState(Date.now())
+  const [warningMessage, setWarningMessage] = useState(null)
+
+  useEffect(() => {
+    if (mode && learningPhase === 'learn') {
+      const topicName = getModeLabel(mode)
+      setLearnData(null)
+      getLearnContent(mode, topicName).then(data => {
+        setLearnData(data)
+      })
+    }
+  }, [mode, learningPhase])
+
+
+  const getModeLabel = (key) => {
+    const labels = {
+      gk: 'General Knowledge', addition: 'Addition', quadratic: 'Quadratic Substitution',
+      multiply: 'Multiplication Tables', vocab: 'Vocabulary', spot: 'Twin Hunt',
+      sqrt: 'Square Root', polymul: 'Polynomial Multiplication', polyfactor: 'Polynomial Factoring',
+      primefactor: 'Prime Factorization', qformula: 'Quadratic Formula', simul: 'Simultaneous Equations',
+      funceval: 'Functions', lineq: 'Line Equations', basicarith: 'Arithmetic',
+      fractionadd: 'Fractions', surds: 'Surds', indices: 'Indices',
+      sequences: 'Sequences & Series', ratio: 'Ratio & Proportion', percent: 'Percentages',
+      sets: 'Sets & Venn Diagrams', trig: 'Trigonometry', ineq: 'Inequalities',
+      coordgeom: 'Coordinate Geometry', prob: 'Probability', stats: 'Statistics',
+      matrix: 'Matrices', vectors: 'Vectors', dotprod: 'Dot Products',
+      transform: 'Transformations', mensur: 'Mensuration', bearings: 'Bearings',
+      log: 'Logarithms', diff: 'Differentiation', bases: 'Number Bases',
+      circleth: 'Circle Theorems', integ: 'Integration', stdform: 'Standard Form',
+      bounds: 'Bounds', sdt: 'Speed, Distance, Time', variation: 'Variation',
+      hcflcm: 'HCF & LCM', profitloss: 'Profit & Loss', rounding: 'Rounding',
+      binomial: 'Binomial Theorem', complex: 'Complex Numbers', angles: 'Angles',
+      triangles: 'Triangles', congruence: 'Congruence', pythag: "Pythagoras' Theorem",
+      polygons: 'Polygons', similarity: 'Similarity', squaring: 'Squaring (a+b)²',
+      lineareq: 'Linear Equations', decimals: 'Decimals', permcomb: 'Permutations & Combinations',
+      limits: 'Limits', invtrig: 'Inverse Trig', remfactor: 'Remainder Theorem',
+      heron: "Heron's Formula", shares: 'Shares & Dividends', banking: 'Banking (RD)',
+      gst: 'GST', section: 'Section Formula', linprog: 'Linear Programming',
+      circmeasure: 'Circular Measure', conics: 'Conic Sections', diffeq: 'Differential Equations',
+      tatsavit: 'Math Drill', randommix: 'Random Mix', custom: 'Custom Lesson',
+      gym: 'Gym', guess: 'Guess the Number',
+      gymdecimals: 'Gym Decimals', funcgym: 'Functions Gym', dotprodgym: 'Dot Products Gym',
+      fracaddgym: 'Fractions Gym', lineqgym: 'Linear Equations Gym',
+      indicesgym: 'Indices Gym', polygym: 'Polynomials Gym',
+    }
+    return labels[key] || key
+  }
+
+  const handleSelectMode = (key) => {
+    setMode(key)
+    setLearningPhase('select')
+    setRevealedBlocks(1)
+    setBlockStartTime(Date.now())
+    setWarningMessage(null)
+  }
+
+  const handleBackToHome = () => {
+    setMode(null)
+    setLearningPhase(null)
+    setRevealedBlocks(1)
+    setBlockStartTime(Date.now())
+    setWarningMessage(null)
+  }
+
+  if (mode && learningPhase === 'select') {
+    const topicName = getModeLabel(mode)
+    return (
+      <div className="app-shell">
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <div className="card">
+          <div style={{ maxWidth: 640, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
+            <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
+              <button className="back-button" onClick={handleBackToHome}>← Home</button>
+            </div>
+            <div style={{ textAlign: 'center', marginBottom: 32 }}>
+              <h1 style={{ marginBottom: 8, fontSize: '2.5rem' }}>{topicName}</h1>
+              <p className="subtitle" style={{ fontSize: '1.2rem', opacity: 0.8 }}>
+                🤔 How would you like to proceed?
+              </p>
+            </div>
+            <div className="learn-test-selection">
+              <button className="learn-test-card learn-card" onClick={() => { setLearningPhase('learn'); setRevealedBlocks(1); setBlockStartTime(Date.now()); setWarningMessage(null); }}>
+                <span className="learn-test-icon">📖</span>
+                <span className="learn-test-label">Learn</span>
+                <span className="learn-test-desc">Understand the concepts through explanations and examples 💡</span>
+              </button>
+              <button className="learn-test-card test-card" onClick={() => setLearningPhase('test')}>
+                <span className="learn-test-icon">📝</span>
+                <span className="learn-test-label">Test</span>
+                <span className="learn-test-desc">Assess your understanding with a fast-paced quiz 🎯</span>
+              </button>
+            </div>
+            <p style={{ textAlign: 'center', marginTop: 24, fontSize: '1rem', opacity: 0.6, fontStyle: 'italic', fontWeight: '500' }}>
+              "Understand First. Test Later. Learn Better. 🌟"
+            </p>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (mode && learningPhase === 'learn') {
+    const topicName = getModeLabel(mode)
+
+    if (!learnData) {
+      return (
+        <div className="app-shell">
+          <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+            {theme === 'dark' ? '☀️' : '🌙'}
+          </button>
+          <div className="card">
+            <div style={{ maxWidth: 900, margin: '0 auto', padding: '3rem', textAlign: 'center', color: 'var(--clr-text)' }}>
+              <div style={{ fontSize: '1.2rem', opacity: 0.8 }}>Loading learning content...</div>
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+    return (
+      <div className="app-shell">
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <div className="card">
+          <div style={{ maxWidth: 900, margin: '0 auto', padding: '1.5rem 1rem', color: 'var(--clr-text)' }}>
+            <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
+              <button className="back-button" onClick={() => setLearningPhase('select')}>← Back</button>
+            </div>
+            <div style={{ textAlign: 'center', marginBottom: 32 }}>
+              <h1 style={mode === 'angles' ? { marginBottom: 12, fontSize: '2.5rem', color: 'var(--clr-heading, var(--clr-text))', fontWeight: '700' } : { marginBottom: 12, fontSize: '2.8rem', background: 'linear-gradient(to right, var(--clr-accent, #2ea043), #1f7f32)', WebkitBackgroundClip: 'text', color: 'transparent', display: 'inline-block', fontWeight: '800' }}>
+                {topicName}
+              </h1>
+              <p className="subtitle" style={mode === 'angles' ? { fontSize: '1.1rem', opacity: 0.8, color: 'var(--clr-text)' } : { fontSize: '1.2rem', opacity: 0.85, fontWeight: '500' }}>
+                📖 Master the concepts before you test yourself!
+              </p>
+            </div>
+            
+            <div className="learn-content-area" style={{ marginTop: 24 }}>
+              <h2 style={mode === 'angles' ? { marginBottom: 24, fontSize: '1.5rem', textAlign: 'center', color: 'var(--clr-text)', fontWeight: '600' } : { marginBottom: 32, fontSize: '1.8rem', textAlign: 'center', color: 'var(--clr-text)', fontWeight: '700' }}>
+                {learnData.title}
+              </h2>
+              
+              <div style={{ 
+                display: 'flex', 
+                flexDirection: 'column',
+                gap: '32px',
+                alignItems: 'center',
+                position: 'relative'
+              }}>
+                {/* Vertical connecting line for timeline effect */}
+                <div style={{
+                  position: 'absolute',
+                  top: '20px',
+                  bottom: '20px',
+                  left: '42px',
+                  width: '4px',
+                  background: 'linear-gradient(to bottom, rgba(46, 160, 67, 0.4), rgba(46, 160, 67, 0.05))',
+                  zIndex: 0,
+                  borderRadius: '4px'
+                }} className="timeline-line"></div>
+
+                {learnData.blocks?.slice(0, revealedBlocks).map((block, idx) => (
+                  <div key={idx} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '24px', width: '100%' }}>
+                    <div style={mode === 'angles' ? {
+                      position: 'relative',
+                      zIndex: 1,
+                      backgroundColor: 'var(--clr-bg)',
+                      padding: '1.5rem 2rem',
+                      borderRadius: '16px',
+                      border: '1px solid var(--clr-border, rgba(100, 100, 100, 0.2))',
+                      lineHeight: '1.6',
+                      fontSize: '1rem',
+                      textAlign: 'left',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '16px',
+                      width: '100%',
+                    } : {
+                      position: 'relative',
+                      zIndex: 1,
+                      backgroundColor: 'var(--clr-bg)',
+                      padding: '2rem 2.5rem',
+                      borderRadius: '24px',
+                      border: '2px solid rgba(46, 160, 67, 0.15)',
+                      lineHeight: '1.75',
+                      fontSize: '1.15rem',
+                      textAlign: 'left',
+                      display: 'flex',
+                      flexDirection: 'row',
+                      gap: '32px',
+                      alignItems: 'flex-start',
+                      boxShadow: '0 8px 30px rgba(0,0,0,0.06)',
+                      transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
+                      width: '100%',
+                      backdropFilter: 'blur(10px)',
+                      background: 'linear-gradient(145deg, var(--clr-bg) 0%, rgba(46, 160, 67, 0.05) 100%)'
+                    }}
+                    onMouseOver={(e) => {
+                      if (mode === 'angles') return;
+                      e.currentTarget.style.transform = 'translateY(-6px) scale(1.02)';
+                      e.currentTarget.style.boxShadow = '0 20px 40px rgba(46, 160, 67, 0.15)';
+                      e.currentTarget.style.border = '2px solid var(--clr-accent, #2ea043)';
+                      const icon = e.currentTarget.querySelector('.block-icon-container');
+                      if(icon) icon.style.transform = 'rotate(8deg) scale(1.1)';
+                    }}
+                    onMouseOut={(e) => {
+                      if (mode === 'angles') return;
+                      e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                      e.currentTarget.style.boxShadow = '0 8px 30px rgba(0,0,0,0.06)';
+                      e.currentTarget.style.border = '2px solid rgba(46, 160, 67, 0.15)';
+                      const icon = e.currentTarget.querySelector('.block-icon-container');
+                      if(icon) icon.style.transform = 'rotate(-4deg) scale(1)';
+                    }}
+                    >
+                      {mode !== 'angles' && (
+                        <div className="block-icon-container" style={{
+                          fontSize: '3.5rem',
+                          lineHeight: '1',
+                          padding: '20px',
+                          backgroundColor: 'var(--clr-card)',
+                          borderRadius: '24px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          boxShadow: 'inset 0 -4px 12px rgba(0,0,0,0.05), 0 8px 16px rgba(46, 160, 67, 0.15)',
+                          border: '2px solid rgba(46, 160, 67, 0.25)',
+                          minWidth: '90px',
+                          minHeight: '90px',
+                          transform: 'rotate(-4deg)',
+                          transition: 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+                        }}>
+                          {block.icon}
+                        </div>
+                      )}
+                      <div style={mode === 'angles' ? { width: '100%' } : { flex: 1, width: '100%', paddingTop: '8px' }}>
+                        <h3 style={mode === 'angles' ? { margin: '0 0 12px 0', fontSize: '1.25rem', color: 'var(--clr-heading, var(--clr-text))', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' } : { margin: '0 0 16px 0', fontSize: '1.5rem', color: 'var(--clr-accent, #2ea043)', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          {mode === 'angles' && <span style={{fontSize: '1.25rem'}}>{block.icon}</span>}
+                          {block.title}
+                        </h3>
+                        
+                        {mode === 'angles' && block.visual && (
+                          <LearningVisual visual={block.visual} />
+                        )}
+
+                        <div 
+                          style={mode === 'angles' ? { whiteSpace: 'pre-wrap', opacity: 0.9, fontSize: '1rem', letterSpacing: '0', lineHeight: '1.75' } : { whiteSpace: 'pre-wrap', opacity: 0.95, fontSize: '1.1rem', letterSpacing: '0.2px' }} 
+                          dangerouslySetInnerHTML={{ __html: (() => {
+                            let html = block.content
+                              .replace(/\*\*(.*?)\*\*/g, mode === 'angles' ? '<strong>$1</strong>' : '<strong style="color: var(--clr-accent, #2ea043); font-weight: 800;">$1</strong>');
+                            if (mode === 'angles') {
+                              // Strip bullet markers and present as clean paragraphs
+                              html = html.replace(/•\s*/g, '');
+                            } else {
+                              html = html.replace(/•/g, '<span style="display: inline-block; transform: scale(1.2); margin-right: 8px;">👉</span>');
+                            }
+                            return html;
+                          })() }} 
+                        />
+                      </div>
+                    </div>
+                    {idx === revealedBlocks - 1 && revealedBlocks < learnData.blocks.length && (
+                      <button 
+                        onClick={() => {
+                          const elapsed = Date.now() - blockStartTime;
+                          const minTime = mode === 'angles' ? 40000 : 60000;
+                          if (elapsed < minTime) {
+                            setWarningMessage(mode === 'angles'
+                              ? 'Please take your time to understand this concept. Read for at least 40 seconds before proceeding.'
+                              : 'Please take your time to understand this concept. Read for at least 1 minute before proceeding.');
+                          } else {
+                            setRevealedBlocks(prev => prev + 1);
+                            setBlockStartTime(Date.now());
+                            setWarningMessage(null);
+                          }
+                        }}
+                        style={{
+                          padding: '12px 24px', borderRadius: '20px', fontSize: '1.1rem',
+                          background: 'transparent', color: 'var(--clr-text)', border: '2px solid var(--clr-accent, #2ea043)',
+                          cursor: 'pointer', fontWeight: '600', transition: 'all 0.2s',
+                          zIndex: 2, backgroundColor: 'var(--clr-bg)'
+                        }}
+                        onMouseOver={e => {
+                          e.currentTarget.style.background = 'var(--clr-accent, #2ea043)';
+                          e.currentTarget.style.color = '#fff';
+                        }}
+                        onMouseOut={e => {
+                          e.currentTarget.style.background = 'var(--clr-bg)';
+                          e.currentTarget.style.color = 'var(--clr-text)';
+                        }}
+                      >
+                        Got it, next step ↓
+                      </button>
+                    )}
+                    {/* Start Test button — appears inside the last block after all blocks are revealed */}
+                    {idx === revealedBlocks - 1 && revealedBlocks === learnData.blocks.length && (
+                      <button 
+                        onClick={() => {
+                          const elapsed = Date.now() - blockStartTime;
+                          const minTime = mode === 'angles' ? 40000 : 60000;
+                          if (elapsed < minTime) {
+                            setWarningMessage(mode === 'angles'
+                              ? 'Please review this section carefully. Read for at least 40 seconds before proceeding to the test.'
+                              : 'Please review the common pitfalls carefully. Read for at least 1 minute before proceeding to the test.');
+                          } else {
+                            setLearningPhase('test');
+                          }
+                        }}
+                        style={{
+                          padding: '16px 36px', borderRadius: 30, fontSize: '1.25rem',
+                          background: 'linear-gradient(135deg, #2ea043, #1f7f32)', color: 'white', border: 'none', cursor: 'pointer',
+                          fontWeight: '800', boxShadow: '0 8px 24px rgba(46, 160, 67, 0.3)',
+                          transition: 'all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1)',
+                          display: 'inline-flex', alignItems: 'center', gap: '12px',
+                          zIndex: 2, marginTop: '8px'
+                        }}
+                        onMouseOver={(e) => {
+                          e.currentTarget.style.transform = 'translateY(-3px) scale(1.05)';
+                          e.currentTarget.style.boxShadow = '0 12px 30px rgba(46, 160, 67, 0.5)';
+                        }}
+                        onMouseOut={(e) => {
+                          e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                          e.currentTarget.style.boxShadow = '0 8px 24px rgba(46, 160, 67, 0.3)';
+                        }}
+                      >
+                        <span>🎯</span> Start Test <span>🚀</span>
+                      </button>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            {warningMessage && (
+              <div style={{
+                position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+                backgroundColor: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999
+              }}>
+                <div style={{
+                  background: 'var(--clr-surface, #1c1c1f)',
+                  border: '1px solid var(--clr-accent, #2ea043)',
+                  borderRadius: '16px', padding: '32px', maxWidth: '400px',
+                  textAlign: 'center', boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
+                  color: 'var(--clr-text)'
+                }}>
+                  <div style={{ fontSize: '3rem', marginBottom: '16px' }}>⏱️</div>
+                  <h3 style={{ fontSize: '1.5rem', marginBottom: '12px', color: 'var(--clr-accent, #2ea043)' }}>Hold on!</h3>
+                  <p style={{ fontSize: '1.1rem', lineHeight: '1.6', marginBottom: '24px', opacity: 0.9 }}>
+                    {warningMessage}
+                  </p>
+                  <button 
+                    onClick={() => setWarningMessage(null)}
+                    style={{
+                      padding: '10px 24px', borderRadius: '8px', fontSize: '1rem',
+                      background: 'var(--clr-accent, #2ea043)', color: '#fff', border: 'none',
+                      cursor: 'pointer', fontWeight: 'bold'
+                    }}
+                  >
+                    Okay, I'll keep reading
+                  </button>
+                </div>
+              </div>
+            )}
+            {/* Start Test button is now integrated into the last learning block above */}
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="app-shell">

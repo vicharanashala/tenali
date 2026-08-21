@@ -1,0 +1,30 @@
+{
+  "title": "Fractions Gym: Adding Fractions Workout",
+  "blocks": [
+    {
+      "icon": "🏋️",
+      "title": "1. The Core Concept: Fraction Fitness",
+      "content": "Adding fractions is one of the most fundamental skills in math, yet it trips up students at every level. This gym drills you on rapid-fire fraction addition until finding common denominators becomes second nature."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: Same Denominator Required",
+      "content": "You can ONLY add fractions when they have the same denominator.\n\n• If denominators match: just add the numerators. 3/7 + 2/7 = 5/7.\n• If denominators differ: find the LCM of both denominators first.\n• Convert both fractions to equivalent fractions with that LCM.\n• Then add the numerators."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. The Method: Quick LCM Trick",
+      "content": "For two fractions a/b + c/d where b and d are different:\n\n1. Cross multiply: new numerator 1 = a * d, new numerator 2 = c * b.\n2. New denominator = b * d.\n3. Add: (ad + cb) / (bd).\n4. Simplify the result by dividing top and bottom by their GCD."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Adding Unlike Fractions",
+      "content": "Calculate 2/3 + 3/4.\n\n**Step 1:** Cross multiply: 2*4 = 8, 3*3 = 9.\n**Step 2:** Common denominator: 3*4 = 12.\n**Step 3:** 8/12 + 9/12 = 17/12.\n**Step 4:** Convert: 17/12 = 1 and 5/12.\n\n**Final Answer: 1 5/12.**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "NEVER add the denominators! 2/3 + 3/4 is NOT 5/7. This is the most common fraction mistake in all of mathematics. You need a COMMON denominator first, then only the numerators get added. The denominator stays the same after addition."
+    }
+  ]
+}

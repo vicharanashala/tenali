@@ -1,0 +1,30 @@
+{
+  "title": "HCF & LCM: The Number Matchmakers",
+  "blocks": [
+    {
+      "icon": "🔗",
+      "title": "1. The Core Concept: Finding Common Ground",
+      "content": "**HCF (Highest Common Factor)** finds the BIGGEST number that divides evenly into two or more numbers. **LCM (Lowest Common Multiple)** finds the SMALLEST number that both numbers divide into evenly. HCF is like finding the biggest tile that perfectly covers two different floors. LCM is like finding when two buses with different schedules will both arrive at the station at the same time."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: Prime Factor Method",
+      "content": "The most reliable method uses Prime Factorization:\n\n• Break each number into its prime factors.\n• **For HCF:** Take the COMMON primes, each to the LOWEST power they appear.\n• **For LCM:** Take ALL primes, each to the HIGHEST power they appear.\n• Shortcut: HCF x LCM = Product of the two original numbers."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Finding HCF and LCM of 12 and 18",
+      "content": "1. Prime factorize: 12 = 2^2 x 3, and 18 = 2 x 3^2.\n2. **HCF:** Common primes are 2 and 3. Lowest powers: 2^1 and 3^1. HCF = 2 x 3 = **6**.\n3. **LCM:** All primes are 2 and 3. Highest powers: 2^2 and 3^2. LCM = 4 x 9 = **36**.\n4. Check: HCF x LCM = 6 x 36 = 216 = 12 x 18. Correct!"
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Word Problem",
+      "content": "Two traffic lights flash every 12 seconds and 18 seconds respectively. They just flashed together. When will they next flash together?\n\n**Step 1:** This is an LCM problem (we want the first time both events happen together).\n**Step 2:** LCM of 12 and 18 = 36.\n\n**Final Answer: They'll flash together again in 36 seconds.**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The most common mistake: mixing up HCF and LCM in word problems! If a question says 'the BIGGEST tile that fits perfectly' = HCF. If it says 'when will they BOTH happen together' = LCM. Also, students often forget to use the LOWEST power for HCF and HIGHEST for LCM, getting them exactly backwards!"
+    }
+  ]
+}

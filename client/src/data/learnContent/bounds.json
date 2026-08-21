@@ -1,0 +1,30 @@
+{
+  "title": "Bounds: The Limits of Accuracy",
+  "blocks": [
+    {
+      "icon": "📏",
+      "title": "1. The Core Concept: Nothing is Perfectly Measured",
+      "content": "When a scientist says a bridge is 250 meters long, they don't mean EXACTLY 250.000000... meters. They mean it's 250 meters to the nearest meter. The actual length could be anywhere from 249.5m to 250.5m. **Upper and Lower Bounds** tell us the maximum and minimum values that a rounded measurement could actually be. It's the math of uncertainty."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: Finding the Bounds",
+      "content": "When a number is rounded to a given degree of accuracy:\n\n• The **Lower Bound** = the rounded value MINUS half the degree of accuracy.\n• The **Upper Bound** = the rounded value PLUS half the degree of accuracy.\n• Example: 250 rounded to the nearest 10. Half of 10 is 5.\n• Lower Bound = 250 - 5 = **245**\n• Upper Bound = 250 + 5 = **255**\n• The real number satisfies: 245 <= x < 255 (note: strict inequality on the upper bound!)."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Bounds in Calculations",
+      "content": "When calculating with bounded values:\n\n1. To find the **maximum** of A + B: use Upper Bound of A + Upper Bound of B.\n2. To find the **minimum** of A + B: use Lower Bound of A + Lower Bound of B.\n3. To find the **maximum** of A / B: use Upper Bound of A / Lower Bound of B.\n4. To find the **minimum** of A / B: use Lower Bound of A / Upper Bound of B.\n\nRule of thumb: for division/subtraction, use OPPOSITE bounds!"
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Speed Bounds",
+      "content": "A car travels 100km (nearest 10km) in 2 hours (nearest hour). Find the maximum possible speed.\n\n**Step 1:** Distance bounds: Lower = 95km, Upper = 105km.\n**Step 2:** Time bounds: Lower = 1.5 hours, Upper = 2.5 hours.\n**Step 3:** Maximum speed = Maximum distance / Minimum time.\n**Step 4:** = 105 / 1.5 = 70 km/h.\n\n**Final Answer: Maximum speed = 70 km/h.**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The deadliest mistake is using the SAME type of bound for division. To get the BIGGEST answer from a division, you need the BIGGEST top and the SMALLEST bottom (Upper / Lower). Students instinctively use Upper / Upper, which gives a mediocre answer, not the maximum. Think of it as a fraction: big numerator and small denominator = biggest fraction!"
+    }
+  ]
+}

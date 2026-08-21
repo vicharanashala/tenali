@@ -1,0 +1,30 @@
+{
+  "title": "Standard Form: The Number Telescope",
+  "blocks": [
+    {
+      "icon": "🔭",
+      "title": "1. The Core Concept: Taming Giants and Microbes",
+      "content": "The mass of the Sun is 1,989,000,000,000,000,000,000,000,000,000 kg. Writing those zeros is a waste of time. **Standard Form** (or Scientific Notation) is a mathematical telescope. It compresses massive astronomical numbers and microscopic atomic numbers into a neat, readable format using powers of 10."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: The A x 10^n Format",
+      "content": "A number is in Standard Form if it looks like **A * 10^n**, where:\n\n• **A** is a number between 1 and 10 (can be 1, but must be less than 10).\n• **n** is an integer (whole number).\n• Positive powers of 10 mean huge numbers (e.g., 10^6 is a million).\n• Negative powers of 10 mean tiny numbers (e.g., 10^-3 is a thousandth)."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Converting to Standard Form",
+      "content": "To convert 45,000 to standard form:\n\n1. Place a decimal point after the first non-zero digit to create 'A'. (4.5)\n2. Count how many places the decimal point had to move from the end of 45000 to become 4.5. It moved 4 places.\n3. The power of 10 is 4.\n4. Answer: 4.5 * 10^4."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Tiny Numbers",
+      "content": "Convert **0.00073** into standard form.\n\n**Step 1:** Create 'A' by putting the decimal after the 7: 7.3.\n**Step 2:** Count how many places the decimal moved from 0.00073 to 7.3. It moved 4 places to the RIGHT.\n**Step 3:** Moving right means it's a tiny number, so the power is negative (-4).\n\n**Final Answer: 7.3 * 10^-4.**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The biggest trap in calculations: adding numbers in standard form without matching their powers. If you try to add 3 * 10^4 and 5 * 10^3, you CANNOT just say 8 * 10^something! You must convert them to the same power first. 30 * 10^3 + 5 * 10^3 = 35 * 10^3, which then converts back to 3.5 * 10^4."
+    }
+  ]
+}

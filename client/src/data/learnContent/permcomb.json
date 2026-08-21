@@ -1,0 +1,30 @@
+{
+  "title": "Permutations & Combinations: Counting Without Listing",
+  "blocks": [
+    {
+      "icon": "🎰",
+      "title": "1. The Core Concept: How Many Ways?",
+      "content": "If you have 5 books and want to arrange 3 on a shelf, how many different arrangements are possible? You could list them all, but that takes forever. **Permutations** count arrangements where ORDER MATTERS (like race positions: 1st, 2nd, 3rd). **Combinations** count selections where order DOESN'T matter (like choosing 3 teammates from 5 people)."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: The Formulas",
+      "content": "• **Permutation (order matters):** nPr = n! / (n-r)!\n• **Combination (order doesn't matter):** nCr = n! / [r! x (n-r)!]\n• **Factorial:** n! = n x (n-1) x (n-2) x ... x 1. (e.g., 5! = 120)\n• Key relationship: nPr = nCr x r! (permutation = combination x arrangements within each group)."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Deciding Which to Use",
+      "content": "Ask yourself ONE question:\n\n1. Does the ORDER of selection matter?\n2. If rearranging the selected items creates a DIFFERENT outcome: use **Permutation**.\n   (e.g., passwords, race positions, seating arrangements)\n3. If rearranging creates the SAME outcome: use **Combination**.\n   (e.g., choosing a committee, selecting lottery numbers, picking a hand of cards)"
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: 5 Choose 3",
+      "content": "A committee of 3 must be chosen from 5 candidates. How many possible committees?\n\n**Step 1:** Order doesn't matter (committee {A,B,C} = {C,B,A}). Use Combination.\n**Step 2:** 5C3 = 5! / (3! x 2!) = 120 / (6 x 2) = 120 / 12 = 10.\n\n**Final Answer: 10 possible committees.**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The most common mistake: using permutation when you should use combination (or vice versa). If a question asks 'how many WAYS to ARRANGE' or 'how many DIFFERENT ORDERS', it's a permutation. If it asks 'how many GROUPS' or 'how many SELECTIONS', it's a combination. The word 'arrange' = permutation. The word 'choose/select' = combination."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "title": "Speed, Distance, Time: The Travel Triangle",
+  "blocks": [
+    {
+      "icon": "🏎️",
+      "title": "1. The Core Concept: The Physics of Motion",
+      "content": "How long will a road trip take? How fast must a rocket fly to reach the moon in 3 days? All of these massive physics problems boil down to one beautiful, unbreakable relationship between three variables: **Speed, Distance, and Time (SDT)**. If you know any two of them, you can instantly find the third!"
+    },
+    {
+      "icon": "🔺",
+      "title": "2. The Rules: The Magic Triangle",
+      "content": "You don't need to memorize three different formulas; you just need to draw the Magic Triangle!\n\n• Draw a triangle. Put **D (Distance)** at the very top point.\n• Put **S (Speed)** and **T (Time)** next to each other at the bottom.\n• cover up the letter you want to find with your thumb.\n• If the two remaining letters are one over the other (D over T), you DIVIDE.\n• If the two remaining letters are next to each other (S next to T), you MULTIPLY."
+    },
+    {
+      "icon": "⏳",
+      "title": "3. Step-by-Step: The Decimal Time Trap",
+      "content": "The math is easy, but the TIME units are deadly!\n\n1. If you calculate a time and get **2.5 hours**, this does NOT mean 2 hours and 50 minutes!\n2. There are 60 minutes in an hour, not 100. So 0.5 hours means *half* an hour (30 minutes).\n3. **To convert decimal hours into minutes:** Always multiply the decimal part by 60! (e.g., 0.2 hours × 60 = 12 minutes)."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Finding the Speed",
+      "content": "A train travels 240 kilometers. The journey takes 3 hours and 15 minutes. Find the average speed in km/h.\n\n• **Step 1 (Fix the Time):** We cannot use 3.15! 15 minutes is a quarter of an hour (15/60 = 0.25). So the time is actually **3.25 hours**.\n• **Step 2 (The Triangle):** We want Speed. Cover 'S'. We are left with D over T. (Distance ÷ Time).\n• **Step 3 (Plug in):** Speed = 240 ÷ 3.25\n• **Step 4 (Calculate):** 240 ÷ 3.25 = 73.846...\n\n**Final Answer: 73.8 km/h (1 d.p.)**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The most brutal trap is calculating **Average Speed** for a multi-part journey. If you drive to a city at 100km/h and drive back at 50km/h, your average speed is NOT 75km/h! (You spent way more time driving slowly on the way back, so the average drops lower). You CANNOT just average the two speeds. You MUST calculate the **Total Distance** of the whole trip, and divide it by the **Total Time** of the whole trip. Always!"
+    }
+  ]
+}

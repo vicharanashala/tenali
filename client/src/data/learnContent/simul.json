@@ -1,0 +1,30 @@
+{
+  "title": "Simultaneous Equations: Two Unknowns, Two Equations",
+  "blocks": [
+    {
+      "icon": "🔀",
+      "title": "1. The Core Concept: Two Mysteries at Once",
+      "content": "One equation with one unknown gives you one answer. But what if you have TWO unknowns (x AND y)? You need TWO equations to find them both. **Simultaneous equations** are a pair of equations that are both true at the same time. Solving them gives you the ONE pair of values (x, y) that satisfies both equations perfectly."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: Two Methods",
+      "content": "• **Elimination Method:** Make the coefficients of one variable the same in both equations, then add or subtract to eliminate it.\n• **Substitution Method:** Rearrange one equation to express x in terms of y (or vice versa), then substitute into the other.\n• Both methods give the same answer. Use whichever feels more natural for the given problem."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Elimination Method",
+      "content": "To solve: 2x + 3y = 13 and 4x - 3y = 11:\n\n1. Look at the y-coefficients: +3y and -3y. They're already matched!\n2. ADD the equations: (2x + 4x) + (3y - 3y) = 13 + 11.\n3. This gives 6x = 24, so x = 4.\n4. Substitute x = 4 into equation 1: 2(4) + 3y = 13, so 3y = 5, y = 5/3.\n5. Check in equation 2: 4(4) - 3(5/3) = 16 - 5 = 11. Correct!"
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Substitution Method",
+      "content": "Solve: y = 2x + 1 and 3x + y = 11.\n\n**Step 1:** Equation 1 already gives y in terms of x: y = 2x + 1.\n**Step 2:** Substitute into equation 2: 3x + (2x + 1) = 11.\n**Step 3:** 5x + 1 = 11, so 5x = 10, x = 2.\n**Step 4:** y = 2(2) + 1 = 5.\n\n**Final Answer: x = 2, y = 5.**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The classic elimination mistake: adding when you should subtract (or vice versa). If both equations have +3y, you need to SUBTRACT to eliminate y (3y - 3y = 0). If one has +3y and the other has -3y, you ADD (3y + (-3y) = 0). Also, students often solve for x but forget to find y! Both unknowns must be found for full marks."
+    }
+  ]
+}

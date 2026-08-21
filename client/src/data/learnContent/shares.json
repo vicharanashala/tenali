@@ -1,0 +1,30 @@
+{
+  "title": "Shares & Dividends: Owning a Piece",
+  "blocks": [
+    {
+      "icon": "📈",
+      "title": "1. The Core Concept: Tiny Pieces of Big Companies",
+      "content": "When a company needs money to grow, it divides itself into thousands of tiny pieces called **shares**. Anyone can buy these pieces. If you own shares in a company, you own a small part of it! The company may pay you a portion of its profits each year, called a **dividend**. Understanding shares is essential for personal finance and investing."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: Key Terms",
+      "content": "• **Nominal/Face Value:** The original stated value of the share (e.g., Rs. 100).\n• **Market Value:** The actual price you buy/sell it for (could be Rs. 120 or Rs. 80).\n• **At Premium:** Market Value > Face Value.\n• **At Discount:** Market Value < Face Value.\n• **Dividend** is ALWAYS calculated as a percentage of the FACE VALUE, not market value."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Calculating Returns",
+      "content": "1. **Number of shares** = Total Investment / Market Value per share.\n2. **Annual income (dividend)** = Number of shares x Dividend% x Face Value / 100.\n3. **Return on investment %** = (Annual income / Total Investment) x 100.\n\nThe return% tells you how good your investment actually is."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Buying Shares",
+      "content": "You invest Rs. 9000 in Rs. 100 shares at Rs. 150 each. Dividend is 8%.\n\n**Step 1:** Number of shares = 9000 / 150 = 60 shares.\n**Step 2:** Annual dividend per share = 8% of 100 = Rs. 8.\n**Step 3:** Total dividend = 60 x 8 = Rs. 480.\n**Step 4:** Return % = (480/9000) x 100 = 5.33%.\n\n**Final Answer: Annual income = Rs. 480, Return = 5.33%.**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The absolute deadliest mistake: calculating dividend on the MARKET VALUE instead of the FACE VALUE! If a Rs. 100 share is bought at Rs. 150 with 8% dividend, the dividend is 8% of Rs. 100 (= Rs. 8), NOT 8% of Rs. 150. The company doesn't know or care what price you bought the share for; it pays based on the face value only."
+    }
+  ]
+}

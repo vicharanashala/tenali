@@ -1,0 +1,30 @@
+{
+  "title": "Gym Decimals: Signed Multiplication",
+  "blocks": [
+    {
+      "icon": "➖",
+      "title": "1. The Core Concept: Positive and Negative Decimals",
+      "content": "This gym drills you on multiplying decimals that can be positive OR negative. It's not just about the decimal arithmetic; it's about keeping track of signs. In real-world applications (like temperatures, bank balances, and coordinates), you constantly deal with signed numbers. This workout makes you bulletproof."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: Sign Rules for Multiplication",
+      "content": "The sign rules are simple but students constantly mess them up:\n\n• **Positive x Positive = Positive** (+2.5 x +3 = +7.5)\n• **Negative x Negative = Positive** (-2.5 x -3 = +7.5)\n• **Positive x Negative = Negative** (+2.5 x -3 = -7.5)\n• **Negative x Positive = Negative** (-2.5 x +3 = -7.5)\n\nSame signs = positive. Different signs = negative."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. The Method: Separate Sign from Value",
+      "content": "To multiply signed decimals:\n\n1. First, determine the sign of the answer (same signs = +, different = -).\n2. Then ignore the signs and multiply the absolute values as normal decimals.\n3. Apply the sign you determined in step 1.\n4. Count decimal places to position the decimal point correctly."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: -0.6 x -0.8",
+      "content": "**Step 1 (Sign):** Both negative, so answer is POSITIVE.\n**Step 2 (Values):** 6 x 8 = 48.\n**Step 3 (Decimal places):** 0.6 has 1 place, 0.8 has 1 place. Total = 2 places.\n**Step 4:** Place decimal: 0.48.\n**Step 5:** Apply sign: +0.48.\n\n**Final Answer: -0.6 x -0.8 = 0.48**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The most common error: getting the sign wrong on negative x negative. Students see two negatives and think the answer must be negative. But negative x negative = POSITIVE! Think of it as: 'I owe you a debt, and I'm taking that debt away from you, so you gain money.' Double negatives cancel out."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "title": "Pythagoras' Theorem: The Right-Angle Ruler",
+  "blocks": [
+    {
+      "icon": "📐",
+      "title": "1. The Core Concept: The Most Famous Equation in Geometry",
+      "content": "Over 2,500 years ago, Pythagoras discovered something magical about right-angled triangles: if you square the two shorter sides and add them together, you get the square of the longest side (the hypotenuse). **a^2 + b^2 = c^2**, where c is always the hypotenuse. This single equation lets you find unknown distances in everything from construction to GPS navigation."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: Identifying the Hypotenuse",
+      "content": "• The **hypotenuse** is ALWAYS the longest side.\n• It ALWAYS sits opposite the right angle (the 90-degree angle).\n• In the formula a^2 + b^2 = c^2, **c is always the hypotenuse**.\n• The two shorter sides (a and b) are called the 'legs'.\n• This theorem ONLY works for right-angled triangles!"
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Finding a Missing Side",
+      "content": "Finding the hypotenuse: c = sqrt(a^2 + b^2).\nFinding a leg: a = sqrt(c^2 - b^2).\n\n1. Identify which side is the hypotenuse (longest, opposite the right angle).\n2. If finding the hypotenuse: ADD the squares, then square root.\n3. If finding a shorter side: SUBTRACT the squares, then square root.\n4. Always square root at the end!"
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Finding the Hypotenuse",
+      "content": "A right triangle has legs of 6cm and 8cm. Find the hypotenuse.\n\n**Step 1:** c^2 = a^2 + b^2 = 6^2 + 8^2 = 36 + 64 = 100.\n**Step 2:** c = sqrt(100) = 10.\n\n**Final Answer: The hypotenuse is 10cm.**\n(This is the famous 3-4-5 triple scaled by 2!)"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "Two deadly traps: (1) Students add the squares when they should subtract (or vice versa). If you're finding the HYPOTENUSE, you ADD. If you're finding a SHORTER side, you SUBTRACT. (2) Forgetting to square root at the end! If c^2 = 100, the answer is c = 10, NOT c = 100. Always finish with the square root step."
+    }
+  ]
+}

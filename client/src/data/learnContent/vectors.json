@@ -1,0 +1,30 @@
+{
+  "title": "Vectors: Direction and Magnitude",
+  "blocks": [
+    {
+      "icon": "➡️",
+      "title": "1. The Core Concept: The Mathematical Arrow",
+      "content": "Normal numbers (like 5kg or 20 degrees) are 'Scalars' - they only have size. But a **Vector** is an arrow. It has a size (magnitude) AND a specific direction (like 50 km/h due North). Vectors power physics, computer graphics, and airplane navigation. They tell you not just how hard to push, but exactly which way."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: Column Notation",
+      "content": "• A vector is written as a column matrix [x, y] (written vertically).\n• The top number (x) tells you how far to move right/left.\n• The bottom number (y) tells you how far to move up/down.\n• Vector [3, -2] means 'go right 3, go down 2'.\n• **Magnitude (size):** Use Pythagoras! |v| = sqrt(x^2 + y^2)."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Adding Vectors",
+      "content": "To add vector a = [2, 5] and vector b = [3, -1]:\n\n1. To add vectors geometrically, place them tip-to-tail. The result (resultant) is the arrow from the very start to the very end.\n2. To add them algebraically, simply add the top numbers together, and the bottom numbers together.\n3. a + b = [2+3, 5+(-1)] = [5, 4].\n4. This means the overall journey is 'right 5, up 4'."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Scalar Multiplication",
+      "content": "If vector p = [-4, 3], find the vector 2p and its magnitude.\n\n**Step 1:** Multiply both components by 2. 2p = [-8, 6].\n**Step 2:** To find the magnitude, use Pythagoras on the new vector.\n**Step 3:** |2p| = sqrt((-8)^2 + 6^2) = sqrt(64 + 36).\n**Step 4:** sqrt(100) = 10.\n\n**Final Answer: 2p = [-8, 6] and its magnitude is 10.**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The biggest error is confusing vectors with coordinates. A coordinate (3,4) is a dot on a map. A vector [3,4] is a JOURNEY. The vector [3,4] can start ANYWHERE on the map; it just means 'take 3 steps right and 4 steps up from wherever you are'. Also, when doing vector geometry (e.g. AB = b - a), students constantly get the subtraction backwards. The vector from A to B is always (End Point - Start Point)."
+    }
+  ]
+}

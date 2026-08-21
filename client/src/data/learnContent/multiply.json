@@ -1,0 +1,30 @@
+{
+  "title": "Multiplication: The Times Table Master",
+  "blocks": [
+    {
+      "icon": "✖️",
+      "title": "1. The Core Concept: Rapid Repeated Addition",
+      "content": "Multiplication is just a shortcut for adding the same number over and over. 4 x 6 means '4 added together 6 times' (4+4+4+4+4+4 = 24). But doing repeated addition for 13 x 17 would be insane. **Times tables** are the shortcut to the shortcut: pre-memorized answers that let you multiply instantly. They are the foundation of speed in all future math."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: Key Patterns",
+      "content": "Times tables have hidden patterns:\n\n• **x2:** Just double the number.\n• **x5:** Always ends in 0 or 5.\n• **x9:** The digits always add up to 9 (18, 27, 36, 45...).\n• **x10:** Just add a zero.\n• **x11:** For single digits, repeat the digit (11, 22, 33...).\n• **Commutative:** 7 x 8 = 8 x 7. Learn it once, know it both ways."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: The Grid Method",
+      "content": "For multiplying larger numbers (e.g., 23 x 15):\n\n1. Break each number into tens and ones: 23 = 20 + 3, 15 = 10 + 5.\n2. Draw a grid and multiply each pair: 20x10=200, 20x5=100, 3x10=30, 3x5=15.\n3. Add all four results: 200 + 100 + 30 + 15 = 345.\n4. This method eliminates carry errors!"
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Grid Method for 34 x 12",
+      "content": "**Step 1:** Break apart: 34 = 30 + 4, 12 = 10 + 2.\n**Step 2:** Grid:\n  30 x 10 = 300\n  30 x 2 = 60\n  4 x 10 = 40\n  4 x 2 = 8\n**Step 3:** Add: 300 + 60 + 40 + 8 = 408.\n\n**Final Answer: 34 x 12 = 408.**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The most common multiplication error: mishandling zeros in long multiplication. When multiplying by the tens digit (like the '1' in 12), students forget to add the placeholder zero. In 34 x 12, the second row should be 340 (not 34). Missing that zero makes your answer exactly 10 times too small!"
+    }
+  ]
+}

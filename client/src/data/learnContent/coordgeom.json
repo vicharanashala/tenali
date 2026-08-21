@@ -1,0 +1,30 @@
+{
+  "title": "Coordinate Geometry: GPS Mathematics",
+  "blocks": [
+    {
+      "icon": "🗺️",
+      "title": "1. The Core Concept: Math on a Map",
+      "content": "Coordinate Geometry is like giving every point on a piece of paper a unique address using two numbers: (x, y). Just like GPS coordinates can pinpoint any location on Earth, the (x, y) system lets you describe the exact position of any point, the slope of any line, and the distance between any two points using pure algebra. It bridges the gap between shapes and equations."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: The Big Three Formulas",
+      "content": "• **Distance:** d = sqrt[(x2-x1)^2 + (y2-y1)^2]. This is Pythagoras in disguise!\n• **Midpoint:** M = ((x1+x2)/2, (y1+y2)/2). Just average the x's and average the y's.\n• **Gradient (Slope):** m = (y2-y1) / (x2-x1). Rise over Run.\n\nParallel lines have EQUAL gradients. Perpendicular lines have gradients that multiply to -1."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Finding the Equation of a Line",
+      "content": "Given two points, find the line equation:\n\n1. Calculate the gradient: m = (y2-y1)/(x2-x1).\n2. Use point-slope form: y - y1 = m(x - x1).\n3. Substitute one of your points and the gradient.\n4. Simplify to y = mx + c form.\n5. 'c' is the y-intercept (where the line crosses the y-axis)."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Line Through Two Points",
+      "content": "Find the equation of the line through (2, 3) and (6, 11).\n\n**Step 1:** m = (11-3)/(6-2) = 8/4 = 2.\n**Step 2:** y - 3 = 2(x - 2).\n**Step 3:** y - 3 = 2x - 4.\n**Step 4:** y = 2x - 1.\n\n**Final Answer: y = 2x - 1** (gradient 2, y-intercept -1)."
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The most common error is getting the gradient fraction upside down. It's (y2-y1) on TOP and (x2-x1) on BOTTOM. Students often write (x2-x1)/(y2-y1) by mistake. Remember: Rise (y-difference) is always on top, Run (x-difference) is always on the bottom. Rise over Run, not Run over Rise!"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "title": "Angles: Measuring the Turn",
+  "blocks": [
+    {
+      "icon": "📐",
+      "title": "1. What Is an Angle?",
+      "visual": "angle-concept",
+      "content": "An angle measures a **turn** between two lines that meet at a point.\n\nWe measure angles in **degrees (°)**. A full circle all the way around is **360°**."
+    },
+    {
+      "icon": "📏",
+      "title": "2. The Angle Family",
+      "visual": "angle-types",
+      "content": "**Acute (< 90°)** angles are small and sharp — like a half-open book.\n\n**Right (90°)** angles make a perfect L-shape [ ∟ ].\n\n**Obtuse (> 90°)** angles are wide and open — past the right angle.\n\n**Straight (180°)** angles look like a flat line — no bend at all."
+    },
+    {
+      "icon": "🧩",
+      "title": "3. Angle Rules",
+      "visual": "straight-line",
+      "content": "**Angles on a straight line add up to 180°.** If one angle is 110°, the other must be 70° because together they make a straight line.\n\n**Vertically opposite angles are equal.** When two lines cross, the angles sitting opposite each other are always the same size."
+    },
+    {
+      "icon": "💡",
+      "title": "4. Example",
+      "visual": "worked-example",
+      "content": "Two angles sit on a straight line. One is **135°**.\n\n**Step 1:** A straight line equals 180°.\n**Step 2:** 180° − 135° = 45°.\n\nThe missing angle is **45°**."
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Pitfalls",
+      "visual": "pitfall",
+      "content": "Don't confuse a **straight line (180°)** with a **full circle (360°)**!\n\nAlways check whether the angles sit on a line or go all the way around a point — the total changes."
+    }
+  ]
+}

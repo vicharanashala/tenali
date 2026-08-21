@@ -1,0 +1,30 @@
+{
+  "title": "Rounding & Estimating: The Art of the 'Good Enough'",
+  "blocks": [
+    {
+      "icon": "✂️",
+      "title": "1. The Core Concept: Trimming the Fat",
+      "content": "If someone asks how far you live from the city, you don't say '14.28574 kilometers'. You say 'About 14 kilometers'. **Rounding** is the mathematical art of throwing away useless, microscopic details to make numbers easier to read and communicate. However, you can't just hack numbers off randomly; there are strict rules to ensure the new number is as close to the truth as possible."
+    },
+    {
+      "icon": "⚖️",
+      "title": "2. The Rules: The 'High Five' Rule",
+      "content": "When rounding to a specific place (like 2 decimal places), look at the very next digit to the right (the 'decider').\n\n• If the decider is **0, 1, 2, 3, or 4**, the target number stays exactly the same (Round Down).\n• If the decider is **5, 6, 7, 8, or 9**, the target number is bumped up by one (Round Up).\n• Why does 5 round up? Because it's exactly halfway! Mathematicians agreed long ago that ties go to the winner (up)."
+    },
+    {
+      "icon": "🎯",
+      "title": "3. Step-by-Step: Significant Figures (Sig Figs)",
+      "content": "Rounding to 'Significant Figures' is for scientists dealing with massive or microscopic numbers.\n\n1. Start reading the number from the left. Skip any zeros until you hit the first real number (1-9). That is your **1st Significant Figure**.\n2. From there, count to the right (including zeros now!) until you hit the target number of figures.\n3. Look at the next digit to decide whether to round up or keep it the same.\n4. **CRITICAL:** If you are rounding a big number (like 4,872 to 1 sig fig = 5,000), you MUST fill the rest of the spaces with zeros to keep the number's massive size!"
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Scientific Rounding",
+      "content": "Round **0.003482** to exactly 2 Significant Figures.\n\n• **Step 1 (Find the 1st):** Reading from left to right, skip the 0s. The first real number is **3**. That is the 1st sig fig.\n• **Step 2 (Find the 2nd):** The next digit is **4**. This is our target 2nd sig fig.\n• **Step 3 (The Decider):** Look at the digit immediately after the 4. It's an **8**.\n• **Step 4 (Round):** Because 8 is '5 or higher', we bump the 4 up to a 5.\n\n**Final Answer: 0.0035**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "When rounding massive whole numbers to significant figures, students often throw the zeros in the trash! If asked to round **87,421** to 2 sig figs, they look at the 8 and 7, use the 4 to round down (keep it 7), and write down the answer **87**. **WRONG!** You just turned an eighty-seven-thousand dollar car into an eighty-seven dollar toy! You MUST put placeholder zeros in the empty spaces to maintain the size. The answer is 87,000."
+    }
+  ]
+}

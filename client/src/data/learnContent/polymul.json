@@ -1,0 +1,30 @@
+{
+  "title": "Polynomial Multiplication: The FOIL Master",
+  "blocks": [
+    {
+      "icon": "✖️",
+      "title": "1. The Core Concept: Expanding Brackets",
+      "content": "When you multiply two brackets like **(x + 3)(x + 5)**, every term in the first bracket must be multiplied by every term in the second bracket. This process is called **expansion** or **distribution**. For two binomials, the popular shortcut is **FOIL**: First, Outer, Inner, Last. It's the gateway to quadratics, factoring, and all of algebra."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: FOIL Method",
+      "content": "For (a + b)(c + d):\n\n• **F**irst: a * c\n• **O**uter: a * d\n• **I**nner: b * c\n• **L**ast: b * d\n• Then add all four results together and simplify by combining like terms."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Expanding Double Brackets",
+      "content": "To expand (2x + 3)(x - 4):\n\n1. **F:** 2x * x = 2x^2\n2. **O:** 2x * (-4) = -8x\n3. **I:** 3 * x = 3x\n4. **L:** 3 * (-4) = -12\n5. **Combine:** 2x^2 - 8x + 3x - 12 = **2x^2 - 5x - 12**"
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Perfect Square",
+      "content": "Expand **(x + 5)^2** = (x + 5)(x + 5).\n\n**F:** x * x = x^2\n**O:** x * 5 = 5x\n**I:** 5 * x = 5x\n**L:** 5 * 5 = 25\n\n**Combine:** x^2 + 5x + 5x + 25 = **x^2 + 10x + 25**\n\nNotice: the middle term is always 2 x first x last!"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The absolute classic mistake: saying (x+5)^2 = x^2 + 25. Students just square each term separately and forget the middle term (2 * x * 5 = 10x). (x+5)^2 = x^2 + 10x + 25, NOT x^2 + 25. The middle term is ALWAYS there. If you write (a+b)^2 = a^2 + b^2, you have committed the most common algebra sin in existence."
+    }
+  ]
+}

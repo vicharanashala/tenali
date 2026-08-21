@@ -1,0 +1,30 @@
+{
+  "title": "The Gym: Adaptive Math Workout",
+  "blocks": [
+    {
+      "icon": "🏋️",
+      "title": "1. The Core Concept: Cross-Training for Your Brain",
+      "content": "Just like a gym workout targets different muscle groups, the Math Gym targets different mathematical skills. It bundles together 7 different mini-games covering decimals, functions, dot products, fractions, linear equations, indices, and polynomials. The gym adapts to your level, making problems harder when you're succeeding and easier when you're struggling."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Strategy: Warm Up Then Push Hard",
+      "content": "Like any workout:\n\n• Start with topics you're comfortable with (warm-up).\n• Gradually move to harder challenges.\n• Don't skip topics you find difficult! That's where the growth happens.\n• Track your accuracy rates. Aim for 80%+ on each topic before moving on."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. The Method: Rotation System",
+      "content": "The Gym cycles through different exercise types:\n\n1. **Decimals:** Signed decimal multiplication.\n2. **Functions:** Polynomial evaluation.\n3. **Dot Products:** 2D and 3D vector products.\n4. **Fractions:** Adding fractions with different denominators.\n5. **Linear Equations:** Solving for x.\n6. **Indices:** Applying index laws.\n7. **Polynomials:** Monomial algebra."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Pro Tip: Use It as Exam Prep",
+      "content": "The Gym is the perfect exam preparation tool because it:\n\n• Forces context switching between topics (just like a real exam).\n• Keeps you sharp on fundamentals.\n• Identifies weak areas automatically.\n• Builds speed and confidence under pressure."
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "Don't treat the Gym as a one-time activity! Mathematical fitness, like physical fitness, requires regular practice. Doing the gym once won't help. Aim for 15-20 minutes per day, 3-4 days per week. Consistency beats intensity. Also, don't just rush through problems. Quality matters more than quantity."
+    }
+  ]
+}
