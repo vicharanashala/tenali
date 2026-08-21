@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dog Mascot — Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Nunito", system-ui, sans-serif;
+    background: #EAF6FB;
+    color: #2B2118;
+  }
+  header {
+    padding: 48px 24px;
+    text-align: center;
+  }
+  h1 {
+    font-family: "Baloo 2", sans-serif;
+    font-size: 40px;
+    margin-bottom: 8px;
+  }
+  main {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 24px 120px;
+  }
+  .card {
+    background: #fff;
+    border: 3px solid #2B2118;
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 0 rgba(43,33,24,0.1);
+  }
+  button.demo-btn {
+    font-family: "Baloo 2", sans-serif;
+    font-size: 15px;
+    border: 3px solid #2B2118;
+    border-radius: 12px;
+    padding: 10px 16px;
+    margin: 4px 6px 4px 0;
+    background: #A7E3B5;
+    cursor: pointer;
+  }
+  button.demo-btn:hover { filter: brightness(0.97); }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Lil' Learners 🐾</h1>
+    <p>An example page showing the dog mascot widget in the bottom-right corner.</p>
+  </header>
+
+  <main>
+    <div class="card">
+      <h2>Try it out</h2>
+      <p>These buttons simulate events your app might trigger (a correct quiz answer, a wrong one, a loading state, etc).</p>
+      <button class="demo-btn" onclick="document.querySelector('dog-mascot').celebrate()">✅ Correct answer</button>
+      <button class="demo-btn" onclick="document.querySelector('dog-mascot').encourage()">❌ Wrong answer</button>
+      <button class="demo-btn" onclick="document.querySelector('dog-mascot').think()">🤔 Loading / thinking</button>
+      <button class="demo-btn" onclick="document.querySelector('dog-mascot').say('Lesson complete! Great job today!')">🏁 Custom message</button>
+    </div>
+
+    <div class="card">
+      <h2>Sample lesson content</h2>
+      <p>Scroll the page — the mascot stays anchored to the corner (position: fixed), just like it will on your real pages.</p>
+      <p>1 + 1 = ?</p>
+      <p>The sun is a star. Water boils at 100°C at sea level. The mascot pops up every so often with a friendly line to keep kids encouraged.</p>
+    </div>
+  </main>
+
+  <!-- The mascot: one script tag + one custom element -->
+  <script src="dog-mascot.js"></script>
+  <dog-mascot image="mascot-dog.png" name="Buddy"></dog-mascot>
+</body>
+</html>

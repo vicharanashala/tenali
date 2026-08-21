@@ -8,6 +8,7 @@
 
 import React from 'react'; window.React = React;
 import ReactDOM from 'react-dom/client'
+import "./components/dog-mascot/dog-mascot.js";
 import App, { AuthMenu } from './App.jsx'
 import { GlobalXpPanel } from './components/HintSystem/HintModal.jsx';
 import { ProctorProvider } from './proctor/ProctorContext';

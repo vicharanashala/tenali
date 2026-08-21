@@ -35,6 +35,7 @@ import ShapeSlicer3D from './ShapeSlicer3D';
 import ShapeTranslatorApp from './ShapeTranslatorApp';
 import NetBuilderApp from './NetBuilderApp';
 import CrossSectionApp from './CrossSectionApp';
+import './components/dog-mascot/dog-mascot.js';
 
 window.React = React;
 console.log("React version:", React.version);
@@ -44887,30 +44888,39 @@ function App() {
     );
   };
 
-  return (
-    <div className="app-shell">
-      {mode === null && showTour && <OnboardingTour onFinish={() => { localStorage.setItem('tenali_tour_seen', 'true'); setShowTour(false) }} mode={mode} />}
-      {mode === null && (
-        <button className="guide-toggle" onClick={() => setShowTour(true)} title="Take a Tour">
-          🧭 Guide
-        </button>
-      )}
-      <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-        {theme === 'dark' ? '☀️' : '🌙'}
+ return (
+  <div className="app-shell">
+    {mode === null && showTour && <OnboardingTour onFinish={() => { localStorage.setItem('tenali_tour_seen', 'true'); setShowTour(false) }} mode={mode} />}
+
+    {mode === null && (
+      <button className="guide-toggle" onClick={() => setShowTour(true)} title="Take a Tour">
+        🧭 Guide
       </button>
-      <div>
-        {mode === 'vachana' ? (
-          <Vachana onBack={() => setMode(null)} initialAdaptScore={diagnosticState[mode] || 0} />
-        ) : (
-          <div className={`card ${mode === 'contrastlist' ? 'is-wide' : ''}`}>
-            {renderContent()}
-          </div>
-        )}
-      </div>
-      {renderCelebrationModal()}
-      <ReflectionJournal />
+    )}
+
+    <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+      {theme === 'dark' ? '☀️' : '🌙'}
+    </button>
+
+    <div>
+      {mode === 'vachana' ? (
+        <Vachana onBack={() => setMode(null)} initialAdaptScore={diagnosticState[mode] || 0} />
+      ) : (
+        <div className={`card ${mode === 'contrastlist' ? 'is-wide' : ''}`}>
+          {renderContent()}
+        </div>
+      )}
     </div>
-  )
+
+    {renderCelebrationModal()}
+    <ReflectionJournal />
+
+    <dog-mascot
+      image="/mascot-dog.png"
+      name="Buddy"
+    />
+  </div>
+)
 }
 
 /**
