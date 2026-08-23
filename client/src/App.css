@@ -47,91 +47,126 @@
  * - Consistent padding/margin scale for visual hierarchy
  */
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬ Base Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap');
+/* ── Base ─────────────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap');
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬ Dark theme (default) Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+/* ── Dark theme (default) ─────────────────────────────────────────────────── */
 :root {
   /* TYPOGRAPHY FONT FAMILIES */
-  --font-display: 'Source Serif 4', 'Georgia', serif;  /* Serif font for headings and emphasis */
-  --font-body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;  /* Sans-serif for body copy and UI */
+  --font-display: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', 'DM Sans', system-ui, -apple-system, sans-serif;
 
-  /* PRIMARY BACKGROUND COLORS - Dark theme palette */
-  --clr-bg: #1a1614;           /* Main page background (very dark brown) */
-  --clr-card: #2c2622;          /* Card/modal background (dark brown, slightly lighter) */
-  --clr-surface: #362f2a;       /* Surface containers, panels (medium dark brown) */
-  --clr-input: #3e3631;         /* Input field background (darker brown with slight warmth) */
+  /* PRIMARY BACKGROUND COLORS - Dark Brown Palette */
+  --clr-bg: #1a1614;           /* Main page background */
+  --bg-primary: #1a1614;
+  --clr-card: #2c2622;         /* Card container background */
+  --bg-card: #2c2622;
+  --clr-surface: #362f2a;      /* Section surface / Box background */
+  --clr-input: #3e3631;
 
   /* TEXT COLORS */
-  --clr-text: #ede8e3;          /* Primary text (off-white/cream for good contrast on dark) */
-  --clr-text-soft: #a89e94;     /* Secondary text, labels, hints (muted brown-gray) */
+  --clr-text: #ede8e3;         /* Headings text: Cream */
+  --text-primary: #ede8e3;
+  --clr-text-soft: #a89e94;    /* Muted secondary text */
+  --text-secondary: #a89e94;
 
   /* BORDERS & DIVIDERS */
-  --clr-border: rgba(255, 245, 230, 0.18);  /* Light border (18% opacity cream Ã¢â‚¬â€ more visible) */
+  --clr-border: rgba(255, 245, 230, 0.18);       /* Card border */
+  --border-color: rgba(255, 245, 230, 0.18);
 
   /* ACCENT COLORS */
-  --clr-accent: #e8864a;        /* Primary action color (warm orange, eye-catching) */
-  --clr-accent-soft: rgba(232, 134, 74, 0.22);  /* Accent background overlay (22% opacity Ã¢â‚¬â€ more visible) */
+  --clr-accent: #e8864a;        /* Orange accent */
+  --clr-accent-combine: #F97316;/* Combine accent: Primary Orange */
+  --accent-combine: #F97316;
+  --clr-accent-compare: #7DA6C9;/* Compare accent: Muted Dusty Blue */
+  --accent-compare: #7DA6C9;
+  --clr-accent-change: #7FB88A; /* Change accent: Muted Sage Green */
+  --accent-change: #7FB88A;
+  --clr-accent-soft: rgba(232, 134, 74, 0.22);
 
-  /* SEMANTIC COLORS - Feedback states */
-  --clr-correct: #5cb87a;       /* Success/correct answer indicator (muted green) */
-  --clr-correct-bg: rgba(92, 184, 122, 0.12);  /* Correct answer background (12% opacity) */
-  --clr-wrong: #e05a4a;         /* Error/incorrect indicator (muted red) */
-  --clr-wrong-bg: rgba(224, 90, 74, 0.12);    /* Wrong answer background (12% opacity) */
+  /* SEMANTIC FEEDBACK COLORS */
+  --clr-correct: #5cb87a;
+  --clr-correct-bg: rgba(92, 184, 122, 0.12);
+  --clr-wrong: #e05a4a;
+  --clr-wrong-bg: rgba(224, 90, 74, 0.12);
 
-  /* UI ELEMENT COLORS */
-  --clr-badge: #4a4340;         /* Badge backgrounds (dark gray-brown) */
-  --clr-placeholder: #6b6058;   /* Input placeholder text (mid-tone brown) */
+  /* ICON CONTAINER BG */
+  --clr-icon-bg: rgba(232, 134, 74, 0.22);
+
+  /* HEADER STATS BADGES */
+  --badge-streak-bg: linear-gradient(135deg, #e8864a 0%, #d87035 100%);
+  --badge-streak-text: #FFFFFF;
+  --badge-accuracy-bg: rgba(92, 184, 122, 0.18);
+  --badge-accuracy-text: #5cb87a;
+  --badge-points-bg: #362f2a;
+  --badge-points-text: #e8864a;
+
+  /* PROGRESS BAR TRACK & FILL */
+  --progress-track: rgba(255, 245, 230, 0.18);
+  --progress-fill: #e8864a;
 
   /* HOVER & INTERACTION STATES */
-  --clr-hover: rgba(255, 245, 230, 0.04);     /* Subtle hover state (4% opacity cream) */
-  --clr-hover-strong: rgba(255, 245, 230, 0.08);  /* More pronounced hover (8% opacity) */
+  --clr-hover: rgba(255, 245, 230, 0.05);
+  --clr-hover-strong: rgba(255, 245, 230, 0.10);
 
   /* SIZING & EFFECTS */
-  --radius: 16px;               /* Default border-radius for cards and containers */
-  --radius-sm: 10px;            /* Small border-radius for buttons and inputs */
-  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(0, 0, 0, 0.15);  /* Layered shadow for cards */
-  --shadow-btn: 0 2px 8px rgba(0, 0, 0, 0.20);  /* Subtle shadow for buttons */
-  --transition: 180ms ease;     /* Standard transition timing for all interactive elements */
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-btn: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --transition: 180ms ease;
 }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬ Light theme Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
-/* Applied when DOM element has data-theme="light" attribute */
+/* ── Light theme ────────────────────────────────────────────────────────── */
 [data-theme="light"] {
-  /* LIGHT THEME BACKGROUND COLORS */
-  --clr-bg: #f5f0eb;            /* Light page background (warm off-white) */
-  --clr-card: #fffdf9;          /* Card background (near white) */
-  --clr-surface: #f0ebe5;       /* Surface containers (light warm gray) */
-  --clr-input: #ffffff;         /* Input field background (pure white) */
+  /* LIGHT THEME BACKGROUND COLORS - Light Brown/Off-white Palette */
+  --clr-bg: #f5f0eb;            /* Off-white page background */
+  --bg-primary: #f5f0eb;
+  --clr-card: #fffdf9;          /* Card background */
+  --bg-card: #fffdf9;
+  --clr-surface: #f0ebe5;       /* Surface container background */
+  --clr-input: #ffffff;         /* Pure white input field */
 
   /* LIGHT THEME TEXT COLORS */
-  --clr-text: #2c2420;          /* Primary text (very dark brown) */
-  --clr-text-soft: #6b5e54;     /* Secondary text (warm brown) */
+  --clr-text: #2c2420;          /* Dark Brown primary text */
+  --text-primary: #2c2420;
+  --clr-text-soft: #6b5e54;     /* Secondary text */
+  --text-secondary: #6b5e54;
 
   /* LIGHT THEME BORDERS */
-  --clr-border: rgba(60, 45, 30, 0.22);  /* Dark border with 22% opacity Ã¢â‚¬â€ more visible */
+  --clr-border: rgba(60, 45, 30, 0.22);        /* Border */
+  --border-color: rgba(60, 45, 30, 0.22);
 
-  /* LIGHT THEME ACCENT - slightly muted for better contrast on light backgrounds */
-  --clr-accent: #e07a3a;        /* Slightly darker/muted orange */
-  --clr-accent-soft: rgba(224, 122, 58, 0.18);  /* Accent overlay (18% opacity Ã¢â‚¬â€ more visible) */
+  /* ACCENT COLORS */
+  --clr-accent: #e07a3a;        /* Orange accent */
+  --clr-accent-combine: #9333ea;/* Purple for light mode */
+  --accent-combine: #9333ea;
+  --clr-accent-compare: #0891b2;/* Teal for light mode */
+  --accent-compare: #0891b2;
+  --clr-accent-change: #2563eb; /* Blue for light mode */
+  --accent-change: #2563eb;
+  --clr-accent-soft: rgba(224, 122, 58, 0.18);
+
+  /* ICON CONTAINER BG */
+  --clr-icon-bg: rgba(224, 122, 58, 0.18);
 
   /* LIGHT THEME SEMANTIC COLORS */
-  --clr-correct: #3a8a5c;       /* Darker green for light background */
-  --clr-correct-bg: #eaf5ef;    /* Light green tint background */
-  --clr-wrong: #c24b3a;         /* Darker red for light background */
-  --clr-wrong-bg: #fdf0ee;      /* Light red/pink tint background */
+  --clr-correct: #3a8a5c;       /* Green for light background */
+  --clr-correct-bg: #eaf5ef;    /* Light green background */
+  --clr-wrong: #e05a4a;         /* Red for light background */
+  --clr-wrong-bg: #fdf2f0;      /* Red tint background */
 
   /* LIGHT THEME UI COLORS */
-  --clr-badge: #c0c0c0;         /* Light gray badges */
-  --clr-placeholder: #b5a99a;   /* Light brown placeholder text */
+  --clr-badge: #e0d8cf;
+  --clr-placeholder: #9e9084;
 
-  /* LIGHT THEME HOVER STATES - now using dark colors with low opacity */
-  --clr-hover: rgba(60, 40, 20, 0.04);       /* Subtle dark overlay (4%) */
-  --clr-hover-strong: rgba(60, 40, 20, 0.08);  /* More pronounced dark overlay (8%) */
+  /* LIGHT THEME HOVER STATES */
+  --clr-hover: rgba(44, 36, 32, 0.04);
+  --clr-hover-strong: rgba(44, 36, 32, 0.08);
 
-  /* LIGHT THEME SHADOWS - lighter, more subtle */
-  --shadow-card: 0 4px 24px rgba(60, 40, 20, 0.08), 0 1px 3px rgba(60, 40, 20, 0.06);
-  --shadow-btn: 0 2px 8px rgba(60, 40, 20, 0.10);
+  /* LIGHT THEME SHADOWS */
+  --shadow-card: 0 4px 20px rgba(44, 36, 32, 0.06), 0 1px 3px rgba(44, 36, 32, 0.04);
+  --shadow-btn: 0 2px 8px rgba(44, 36, 32, 0.08);
 }
 
 /* RESET: Apply border-box sizing to all elements (better box model for layouts) */

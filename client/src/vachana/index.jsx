@@ -193,6 +193,21 @@ export default function Vachana({ onBack }) {
   const [activeTab, setActiveTab] = useState(getTabFromUrl);
   const [, setConfirmModal] = useState(null);
 
+  // Theme Management (Default: dark)
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('vachana_theme') || localStorage.getItem('tenali-theme') || 'dark';
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    document.body.setAttribute('data-theme', theme);
+    localStorage.setItem('vachana_theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+  };
+
   // Keep URL in sync when tab changes programmatically
   const selectTab = (id) => {
     setActiveTab(id);
@@ -255,7 +270,7 @@ export default function Vachana({ onBack }) {
   const ExerciseComponent = activeTab ? EXERCISE_COMPONENTS[activeTab] : null;
 
   return (
-    <div style={{ maxWidth: 1100, width: '100%', margin: '0 auto', padding: '1rem', color: 'var(--clr-text)' }}>
+    <div style={{ maxWidth: activeTab === 'schema' ? 1400 : 1100, width: '100%', margin: '0 auto', padding: activeTab === 'schema' ? '0 1rem 1rem' : '1rem', color: 'var(--clr-text)', boxSizing: 'border-box' }}>
 
       {/* Vachana Header — shown on dashboard */}
       {activeTab === null && (
@@ -266,7 +281,30 @@ export default function Vachana({ onBack }) {
             </h1>
             <p className="subtitle" style={{ margin: '4px 0 0 0' }}>Learn to parse, translate, and communicate in the language of mathematics</p>
           </div>
-          <button className="back-button" onClick={onBack}>← Back to Home</button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <button
+              onClick={toggleTheme}
+              title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
+              style={{
+                background: 'var(--clr-surface)',
+                border: '1px solid var(--clr-border)',
+                color: 'var(--clr-text)',
+                borderRadius: '50%',
+                width: '38px',
+                height: '38px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                fontSize: '1.1rem',
+                transition: 'all 0.18s ease',
+                boxShadow: 'var(--shadow-btn)'
+              }}
+            >
+              {theme === 'dark' ? '☀️' : '🌙'}
+            </button>
+            <button className="back-button" onClick={onBack}>← Back to Home</button>
+          </div>
         </div>
       )}
 
@@ -320,9 +358,17 @@ export default function Vachana({ onBack }) {
         </div>
       ) : (
         /* ── Active Exercise Workspace ── */
-        <div style={{ background: 'var(--clr-card, #1e1e24)', border: '1px solid var(--clr-border)', borderRadius: '16px', padding: '24px', boxShadow: 'var(--shadow-card)', width: '100%', boxSizing: 'border-box' }}>
+        <div style={{
+          background: activeTab === 'schema' ? 'transparent' : 'var(--clr-card, #1e1e24)',
+          border: activeTab === 'schema' ? 'none' : '1px solid var(--clr-border)',
+          borderRadius: '16px',
+          padding: activeTab === 'schema' ? 0 : '24px',
+          boxShadow: activeTab === 'schema' ? 'none' : 'var(--shadow-card)',
+          width: '100%',
+          boxSizing: 'border-box'
+        }}>
           {/* Active Tab Header (Minimalist) */}
-          <div style={{ marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ marginBottom: activeTab === 'schema' ? '12px' : '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <button
               onClick={goBack}
               style={{
@@ -333,7 +379,9 @@ export default function Vachana({ onBack }) {
             >
               ← All Modules
             </button>
-            <div id="vachana-header-right" />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div id="vachana-header-right" />
+            </div>
           </div>
 
           {/* Render the active exercise */}
