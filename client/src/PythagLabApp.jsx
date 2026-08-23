@@ -1382,7 +1382,7 @@ export default function PythagLabApp({ onBack }) {
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
               <div style={{ background: 'rgba(255,255,255,0.02)', padding: '16px', borderRadius: '12px', textAlign: 'center' }}>
                 <span style={{ fontSize: '0.8rem', color: C.muted }}>TOTAL REWARD</span>
-                <div style={{ fontSize: '1.75rem', fontWeight: 900, color: C.gold }}>+{xp} Points</div>
+                <div style={{ fontSize: '1.75rem', fontWeight: 900, color: C.gold }}>+{xp} XP</div>
               </div>
               <div style={{ background: 'rgba(255,255,255,0.02)', padding: '16px', borderRadius: '12px', textAlign: 'center' }}>
                 <span style={{ fontSize: '0.8rem', color: C.muted }}>ACCURACY</span>

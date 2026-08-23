@@ -616,7 +616,7 @@ export default function CrosswordApp({ onBack }) {
         setTotalXp(newTotal);
         try { localStorage.setItem('tenali_crossword_xp', String(newTotal)); } catch { /* ignored */ }
 
-        showToast(`Solved: ${w.word}! +${xpGained} Points`, 'correct');
+        showToast(`Solved: ${w.word}! +${xpGained} XP`, 'correct');
 
         if (newSolved.size === puzzle.words.length) {
           timer.stop();
@@ -722,7 +722,7 @@ export default function CrosswordApp({ onBack }) {
       <QuizLayout title="Crossword Puzzles" subtitle="Test your vocabulary with thematic crosswords" onBack={onBack}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24, padding: 12, borderRadius: 12, background: 'rgba(255,255,255,0.03)' }}>
           <div style={{ fontSize: '1.05rem', fontWeight: 700 }}>
-            Language Points: <span style={{ color: '#e67e22' }}>{totalXp} Points</span>
+            Language XP: <span style={{ color: '#e67e22' }}>{totalXp} XP</span>
           </div>
         </div>
 
@@ -782,7 +782,7 @@ export default function CrosswordApp({ onBack }) {
           <div className="cw-results-stats">
             <div>
               <div className="cw-stat-num">{levelXp}</div>
-              <div className="cw-stat-label">Points Gained</div>
+              <div className="cw-stat-label">XP Gained</div>
             </div>
             <div>
               <div className="cw-stat-num">{timer.formattedTime}</div>
@@ -823,7 +823,7 @@ export default function CrosswordApp({ onBack }) {
         </div>
         <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
           {streak >= 2 && <span className="cw-streak-badge">Streak ×{streak}</span>}
-          <span style={{ fontSize: '0.95rem', fontWeight: 700, color: '#e67e22' }}>{totalXp} Points</span>
+          <span style={{ fontSize: '0.95rem', fontWeight: 700, color: '#e67e22' }}>{totalXp} XP</span>
           <span style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.4)' }}>Hints: {hintsLeft}</span>
         </div>
       </div>

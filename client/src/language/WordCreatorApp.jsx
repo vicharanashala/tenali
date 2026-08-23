@@ -330,7 +330,7 @@ export default function WordCreatorApp({ onBack }) {
     return (
       <QuizLayout title="Word Creator" subtitle="Select difficulty level to start playing" onBack={onBack}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24, padding: 12, borderRadius: 12, background: 'rgba(255,255,255,0.03)' }}>
-          <div style={{ fontSize: '1.1rem', fontWeight: 'bold' }}>Cumulative Language Points: <span style={{ color: 'var(--clr-accent, #05c46b)' }}>{totalXp} Points</span></div>
+          <div style={{ fontSize: '1.1rem', fontWeight: 'bold' }}>Cumulative Language XP: <span style={{ color: 'var(--clr-accent, #05c46b)' }}>{totalXp} XP</span></div>
         </div>
         
         <div className="search-bar-row">
@@ -394,8 +394,8 @@ export default function WordCreatorApp({ onBack }) {
           {/* Summary Cards */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 16 }}>
             <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 12, padding: 16, textAlign: 'center' }}>
-              <div style={{ fontSize: '0.85rem', color: 'var(--clr-text-soft)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 4 }}>Points Gained</div>
-              <div style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--clr-accent, #05c46b)' }}>+{totalLevelXp} Points</div>
+              <div style={{ fontSize: '0.85rem', color: 'var(--clr-text-soft)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 4 }}>XP Gained</div>
+              <div style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--clr-accent, #05c46b)' }}>+{totalLevelXp} XP</div>
             </div>
             <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 12, padding: 16, textAlign: 'center' }}>
               <div style={{ fontSize: '0.85rem', color: 'var(--clr-text-soft)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 4 }}>Total Time</div>
@@ -448,7 +448,7 @@ export default function WordCreatorApp({ onBack }) {
                       </div>
                       <div style={{ display: 'flex', gap: 12, fontSize: '0.9rem' }}>
                         <span>Time Spent: <strong style={{ color: '#ffc107' }}>{stat.timeSpent}s</strong></span>
-                        <span>Points: <strong style={{ color: 'var(--clr-accent, #05c46b)' }}>+{stat.xpGained} Points</strong></span>
+                        <span>XP: <strong style={{ color: 'var(--clr-accent, #05c46b)' }}>+{stat.xpGained} XP</strong></span>
                       </div>
                     </div>
 
@@ -574,7 +574,7 @@ export default function WordCreatorApp({ onBack }) {
           Puzzle {puzzleIndex} of 20
         </div>
         <div style={{ marginLeft: 'auto', fontSize: '1.05rem', fontWeight: 'bold', zIndex: 1 }}>
-          Points: <span style={{ color: 'var(--clr-accent, #05c46b)' }}>{totalXp} Points</span>
+          XP: <span style={{ color: 'var(--clr-accent, #05c46b)' }}>{totalXp} XP</span>
         </div>
       </div>
 

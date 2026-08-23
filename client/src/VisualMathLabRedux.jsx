@@ -94,7 +94,7 @@ const XPPopup = memo(function XPPopup({ show }) {
           initial={{ y:0, opacity:1, scale:0.8 }} animate={{ y:-90, opacity:0, scale:1.3 }} exit={{ opacity:0 }}
           transition={{ duration:1.3, ease:'easeOut' }}
           style={{ position:'absolute', top:'40%', left:'50%', transform:'translate(-50%,-50%)', fontSize:'1.7rem', fontWeight:900, color:C.orange, textShadow:`0 0 20px rgba(249,115,22,0.9)`, fontFamily:FONT, zIndex:100, pointerEvents:'none', whiteSpace:'nowrap' }}>
-          +10 Points ⭐
+          +10 XP ⭐
         </motion.div>
       )}
     </AnimatePresence>

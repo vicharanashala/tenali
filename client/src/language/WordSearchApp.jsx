@@ -205,7 +205,7 @@ export default function WordSearchApp({ onBack }) {
       setTotalXp(newTotal);
       try { localStorage.setItem('tenali_wordsearch_xp', String(newTotal)); } catch { /* ignored */ }
 
-      showToast(`Found "${matched.word}"! +${xpGained} Points`, 'correct');
+      showToast(`Found "${matched.word}"! +${xpGained} XP`, 'correct');
       setSuccessAnimation(true);
       setTimeout(() => setSuccessAnimation(false), 1000);
 
@@ -366,7 +366,7 @@ export default function WordSearchApp({ onBack }) {
         </div>
         <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
           {streak >= 2 && <span className="cw-streak-badge">Streak ×{streak}</span>}
-          <span style={{ fontSize: '0.95rem', fontWeight: 700, color: '#e67e22' }}>{totalXp} Points</span>
+          <span style={{ fontSize: '0.95rem', fontWeight: 700, color: '#e67e22' }}>{totalXp} XP</span>
           <span style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.4)' }}>Hints: {hintsLeft}</span>
         </div>
       </div>
@@ -499,8 +499,8 @@ export default function WordSearchApp({ onBack }) {
               <div className="ws-stat-lbl">Total Words</div>
             </div>
             <div className="ws-stat-card">
-              <div className="ws-stat-val">{levelXp} Points</div>
-              <div className="ws-stat-lbl">Points Gained</div>
+              <div className="ws-stat-val">{levelXp} XP</div>
+              <div className="ws-stat-lbl">XP Gained</div>
             </div>
           </div>
         </div>

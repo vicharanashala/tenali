@@ -59468,7 +59468,7 @@ function PercentApp({
             <div className="percentages-finale-panel">
               <div>
                 <strong>{xp}</strong>
-                <span>Total Points</span>
+                <span>Total XP</span>
               </div>
               <div>
                 <strong>{gems}</strong>
@@ -59538,7 +59538,7 @@ function PercentApp({
 
           {rewardToast && (
             <div className="percentages-reward-toast">
-              <strong>+{rewardToast.amount} Points</strong>
+              <strong>+{rewardToast.amount} XP</strong>
               <span>{rewardToast.label}</span>
               {rewardToast.collectible && <em>New Badge: {rewardToast.collectible}</em>}
             </div>
@@ -59557,7 +59557,7 @@ function PercentApp({
               ))}
             </div>
             <div className="percentages-reward-row">
-              <span key={`xp-${xp}`} className="percentages-num-bounce">⚡ Points {xp}</span>
+              <span key={`xp-${xp}`} className="percentages-num-bounce">⚡ XP {xp}</span>
               <span key={`gems-${gems}`} className="percentages-num-bounce">💎 Gems {gems}</span>
               <span key={`combo-${streak}`} className="percentages-num-bounce">🔥 Combo {streak}</span>
             </div>

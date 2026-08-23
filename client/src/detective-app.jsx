@@ -725,7 +725,7 @@ function DetectiveCaseView({ caseData, initialStage, onComplete, onBack }) {
             </div>
             <div className="mda-popIn mda-delay-2" style={{ padding: '0.5rem 1rem', borderRadius: 12, background: 'var(--clr-surface)', border: '1px solid var(--clr-border)' }}>
               <div className="mda-countUp mda-delay-3" style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--clr-accent)' }}>+{xpEarned}</div>
-              <div style={{ fontSize: '0.65rem', color: 'var(--clr-text-soft)', fontWeight: 600, textTransform: 'uppercase' }}>Points Earned</div>
+              <div style={{ fontSize: '0.65rem', color: 'var(--clr-text-soft)', fontWeight: 600, textTransform: 'uppercase' }}>XP Earned</div>
             </div>
           </div>
           <p style={{ fontSize: '0.95rem', color: 'var(--clr-text-soft)', marginBottom: '0.5rem', lineHeight: 1.6 }}>
@@ -1213,7 +1213,7 @@ function DetectiveLeaderboard({ onBack, totalCases, caseLookup }) {
                 cursor: 'pointer', fontSize: '0.78rem', fontWeight: 600, transition: 'all 0.2s',
               }}
             >
-              {s === 'stars' ? '⭐ Best Stars' : s === 'xp' ? '⚡ Best Points' : '🕐 Recent'}
+              {s === 'stars' ? '⭐ Best Stars' : s === 'xp' ? '⚡ Best XP' : '🕐 Recent'}
             </button>
           ))}
         </div>
@@ -1247,7 +1247,7 @@ function DetectiveLeaderboard({ onBack, totalCases, caseLookup }) {
                 <div style={{ fontSize: '1rem', letterSpacing: '1px' }}>
                   <span style={{ color: '#ff9800' }}>{'⭐'.repeat(data.stars)}{'☆'.repeat(3 - data.stars)}</span>
                 </div>
-                <div style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--clr-accent)' }}>+{data.xp} Points</div>
+                <div style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--clr-accent)' }}>+{data.xp} XP</div>
               </div>
             </div>
           ))}
@@ -1468,7 +1468,7 @@ export default function EnhancedMathDetectiveApp({ onBack }) {
   };
 
   const handleReset = () => {
-    const msg = 'Reset all detective progress? This will clear all solved cases, points, stars AND leaderboard data.';
+    const msg = 'Reset all detective progress? This will clear all solved cases, XP, stars AND leaderboard data.';
     if (window.confirm(msg)) {
       const reset = { xp: 0, casesSolved: 0, cases: {}, usedCaseIds: [] };
       saveDetectiveProgress(reset);
@@ -1621,7 +1621,7 @@ export default function EnhancedMathDetectiveApp({ onBack }) {
                   <div style={{ height: '100%', borderRadius: 3, width: xpProgressPct + '%', background: 'linear-gradient(90deg, ' + rankC + ', ' + rankColor(nextRank.title) + ')', transition: 'width 0.5s ease' }} />
                 </div>
                 <div style={{ fontSize: '0.72rem', color: 'var(--clr-text-soft)' }}>
-                  {xpToNext} Points to {nextRank.title}
+                  {xpToNext} XP to {nextRank.title}
                 </div>
               </>
             )}
@@ -1641,7 +1641,7 @@ export default function EnhancedMathDetectiveApp({ onBack }) {
           </div>
           <div style={{ background: 'var(--clr-surface)', borderRadius: 12, padding: '1rem', textAlign: 'center', border: '1.5px solid var(--clr-border)' }}>
             <div style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--clr-accent)', marginBottom: '0.2rem' }}>{progress.xp}</div>
-            <div style={{ fontSize: '0.72rem', color: 'var(--clr-text-soft)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Points Earned</div>
+            <div style={{ fontSize: '0.72rem', color: 'var(--clr-text-soft)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>XP Earned</div>
           </div>
           <div style={{ background: 'var(--clr-surface)', borderRadius: 12, padding: '1rem', textAlign: 'center', border: '1.5px solid var(--clr-border)' }}>
             <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#ff9800', marginBottom: '0.2rem' }}>{progress.totalStars || 0}</div>
