@@ -538,6 +538,65 @@ app.use(async (req, res, next) => {
 const { generateExplanation } = require('./explanations');
 global.generateExplanation = generateExplanation;
 
+// ── Extracted topic routers (Phase 2) ────────────────────────────────────────
+const arithmeticRouter = require('./routes/arithmetic');
+app.use('/addition-api',  arithmeticRouter);
+app.use('/multiply-api',  arithmeticRouter);
+app.use('/basicarith-api', arithmeticRouter);
+app.use('/squaring-api',  arithmeticRouter);
+app.use('/rounding-api',  arithmeticRouter);
+app.use('/decimals-api',  arithmeticRouter);
+
+const algebraRouter = require('./routes/algebra');
+app.use('/quadratic-api', algebraRouter);
+
+const calculusRouter = require('./routes/calculus');
+app.use('/log-api',        calculusRouter);
+app.use('/diff-api',       calculusRouter);
+app.use('/integ-api',      calculusRouter);
+app.use('/limits-api',     calculusRouter);
+app.use('/diffeq-api',     calculusRouter);
+
+const financialRouter = require('./routes/financial');
+app.use('/percent-api',    financialRouter);
+app.use('/profitloss-api', financialRouter);
+app.use('/shares-api',     financialRouter);
+app.use('/banking-api',    financialRouter);
+app.use('/gst-api',        financialRouter);
+
+const miscRouter = require('./routes/misc');
+app.use('/sets-api',       miscRouter);
+app.use('/bounds-api',     miscRouter);
+app.use('/sdt-api',        miscRouter);
+app.use('/variation-api',  miscRouter);
+app.use('/hcflcm-api',     miscRouter);
+app.use('/remfactor-api',  miscRouter);
+
+const geometryRouter = require('./routes/geometry');
+app.use('/mensur-api',     geometryRouter);
+app.use('/bearings-api',   geometryRouter);
+app.use('/angles-api',     geometryRouter);
+app.use('/triangles-api',  geometryRouter);
+app.use('/congruence-api', geometryRouter);
+app.use('/polygons-api',   geometryRouter);
+app.use('/similarity-api', geometryRouter);
+app.use('/invtrig-api',    geometryRouter);
+
+const advancedRouter = require('./routes/advanced');
+app.use('/matrix-api',     advancedRouter);
+app.use('/bases-api',      advancedRouter);
+app.use('/stdform-api',    advancedRouter);
+app.use('/binomial-api',   advancedRouter);
+app.use('/complex-api',    advancedRouter);
+app.use('/dotprod-api',    advancedRouter);
+app.use('/section-api',    advancedRouter);
+app.use('/linprog-api',    advancedRouter);
+app.use('/circmeasure-api',advancedRouter);
+app.use('/conics-api',     advancedRouter);
+
+const statsRouter = require('./routes/stats');
+app.use('/permcomb-api',   statsRouter);
+
 /**
  * Generate a random integer between min and max (inclusive)
  * @param {number} min - Minimum value (inclusive)
@@ -737,22 +796,7 @@ app.post('/gk-api/check', (req, res) => {
  *   answer: number          // Correct sum
  * }
  */
-app.get('/addition-api/question', (req, res) => {
-  const digits = Number(req.query.digits || 1);
-  // Sanitize digits to valid options; default to 1 if invalid
-  const safeDigits = [1, 2, 3, 4].includes(digits) ? digits : 1;
-  const range = digitRange(safeDigits);
-
-  // Optional sumMax: when set, cap each operand so a + b <= sumMax
-  const sumMax = req.query.sumMax ? Number(req.query.sumMax) : null;
-  const effectiveMax = sumMax ? Math.min(range.max, Math.floor(sumMax / 2)) : range.max;
-  const effectiveMin = Math.min(range.min, effectiveMax);
-
-  const a = randomInt(effectiveMin, effectiveMax);
-  const b = randomInt(effectiveMin, effectiveMax);
-  const prompt = WordProblemGenerator.addition(a, b);
-  res.json({ id: `${safeDigits}-${Date.now()}-${Math.random()}`, digits: safeDigits, a, b, prompt, answer: a + b });
-});
+// addition-api → routes/arithmetic.js
 
 /**
  * POST /addition-api/check
@@ -772,12 +816,7 @@ app.get('/addition-api/question', (req, res) => {
  *   message: string         // Feedback message
  * }
  */
-app.post('/addition-api/check', (req, res) => {
-  const { a, b, answer } = req.body || {};
-  const correctAnswer = Number(a) + Number(b);
-  const correct = Number(answer) === correctAnswer;
-  res.json({ correct, correctAnswer, message: correct ? 'Correct' : 'Incorrect' });
-});
+// addition-api/check → routes/arithmetic.js
 
 /**
  * COLUMN ADDITION API
@@ -1735,19 +1774,7 @@ app.post('/concept-api/check', (req, res) => {
  *   answer: number          // Correct product
  * }
  */
-app.get('/multiply-api/question', (req, res) => {
-  const table = Math.max(1, Number(req.query.table || 1));
-  const multiplier = randomInt(1, 10);
-  const answer = table * multiplier;
-
-  res.json({
-    id: `multiply-${Date.now()}-${Math.random()}`,
-    table,
-    multiplier,
-    prompt: `${table} × ${multiplier}`,
-    answer,
-  });
-});
+// multiply-api → routes/arithmetic.js
 
 /**
  * POST /multiply-api/check
@@ -1767,12 +1794,7 @@ app.get('/multiply-api/question', (req, res) => {
  *   message: string
  * }
  */
-app.post('/multiply-api/check', (req, res) => {
-  const { table, multiplier, answer } = req.body || {};
-  const correctAnswer = Number(table) * Number(multiplier);
-  const correct = Number(answer) === correctAnswer;
-  res.json({ correct, correctAnswer, message: correct ? 'Correct' : 'Incorrect' });
-});
+// multiply-api/check → routes/arithmetic.js
 
 /**
  * VISUAL MATH LAB API
@@ -2993,46 +3015,7 @@ function arithRange(difficulty) {
  *   answer: number          // Correct result
  * }
  */
-app.get('/basicarith-api/question', (req, res) => {
-  const difficulty = req.query.difficulty || 'easy';
-  const range = arithRange(difficulty);
-  const ops = ['+', '−', '×', '÷'];
-  const op = ops[randomInt(0, 3)];
-  // Generate two numbers, each randomly positive or negative
-  let a = randomInt(range.min, range.max);
-  let b = randomInt(range.min, range.max);
-  if (Math.random() < 0.4) a = -a;
-  if (Math.random() < 0.4) b = -b;
-  let answer;
-  if (op === '+') answer = a + b;
-  else if (op === '−') answer = a - b;
-  else if (op === '×') answer = a * b;
-  else {
-    // Division: ensure divisor != 0 and result is an integer.
-    // Pick a non-zero divisor b in the same range, then a quotient q in a smaller
-    // range; compute a = b * q so the answer is exact.
-    if (b === 0) b = 1;
-    // Reuse arithRange for the quotient but cap its magnitude to keep questions readable
-    const qMag = Math.max(1, Math.min(Math.abs(range.max), 12));
-    let q = randomInt(1, qMag);
-    if (Math.random() < 0.4) q = -q;
-    a = b * q;
-    answer = q;
-  }
-  // Build a readable prompt with proper sign handling
-  let prompt;
-  if (op === '×' || op === '÷') {
-    prompt = `(${a}) ${op} (${b})`;
-  } else if (b < 0) {
-    prompt = `${a} ${op} (${b})`;
-  } else {
-    prompt = `${a} ${op} ${b}`;
-  }
-  res.json({
-    id: `arith-${Date.now()}-${Math.random()}`,
-    a, b, op, prompt, answer,
-  });
-});
+// basicarith-api → routes/arithmetic.js
 
 /**
  * POST /basicarith-api/check
@@ -3052,20 +3035,7 @@ app.get('/basicarith-api/question', (req, res) => {
  *   message: string
  * }
  */
-app.post('/basicarith-api/check', (req, res) => {
-  const { a, b, op, answer } = req.body || {};
-  let correctAnswer;
-  if (op === '+') correctAnswer = Number(a) + Number(b);
-  else if (op === '−') correctAnswer = Number(a) - Number(b);
-  else if (op === '×') correctAnswer = Number(a) * Number(b);
-  else if (op === '÷') {
-    // Defensive: never divide by zero. Questions are generated with b != 0,
-    // so this is just a safety net.
-    correctAnswer = Number(b) === 0 ? NaN : Number(a) / Number(b);
-  } else correctAnswer = NaN;
-  const correct = Number(answer) === correctAnswer;
-  res.json({ correct, correctAnswer, message: correct ? 'Correct' : 'Incorrect' });
-});
+// basicarith-api/check → routes/arithmetic.js
 
 /**
  * ═══════════════════════════════════════════════════════════════════════════
@@ -6711,56 +6681,7 @@ app.post('/profitloss-api/check', express.json(), (req, res) => {
  * Decimal places, significant figures, estimation
  * ═══════════════════════════════════════════════════════════════════════════ */
 
-app.get('/rounding-api/question', (req, res) => {
-  const diff = req.query.difficulty || 'easy';
-  let prompt, answer, display;
-
-  if (diff === 'easy') {
-    // Round to given dp — use half-up via roundHalfUp() to fix the
-    // historical IEEE-754 bug where e.g. 6.835 would round to 6.83 instead
-    // of 6.84 (Module 49 spec).
-    const dp = randInt(1, 2);
-    const num = (randInt(100, 9999) / 1000).toFixed(4);
-    answer = roundHalfUp(parseFloat(num), dp);
-    display = answer.toFixed(dp);
-    prompt = `Round ${num} to ${dp} decimal place${dp > 1 ? 's' : ''}.`;
-  } else if (diff === 'medium') {
-    // Round to N significant figures — also via half-up so that values like
-    // 0.045 → 0.05, 75 → 80 round up consistently.
-    const sf = randInt(1, 3);
-    const num = randInt(1000, 99999) / (Math.pow(10, randInt(0, 2)));
-    const rounded = roundSigFigs(num, sf);
-    answer = rounded;
-    display = String(rounded);
-    prompt = `Round ${num} to ${sf} significant figure${sf > 1 ? 's' : ''}.`;
-  } else if (diff === 'hard') {
-    // Truncate (not round) to N dp — truncation is unaffected by the half-up
-    // rule, leave existing logic intact.
-    const dp = randInt(1, 3);
-    const num = (randInt(10000, 99999) / 10000).toFixed(5);
-    const factor = Math.pow(10, dp);
-    answer = Math.trunc(parseFloat(num) * factor) / factor;
-    display = answer.toFixed(dp);
-    prompt = `Truncate ${num} to ${dp} decimal place${dp > 1 ? 's' : ''}.`;
-  } else {
-    // Estimation: round each to 1 sf then compute (half-up).
-    const a = randInt(10, 99);
-    const b = randInt(10, 99);
-    const aRound = roundSigFigs(a, 1);
-    const bRound = roundSigFigs(b, 1);
-    answer = aRound * bRound;
-    display = String(answer);
-    prompt = `Estimate ${a} × ${b} by rounding each number to 1 significant figure.`;
-  }
-
-  res.json({ prompt, answer, display, difficulty: diff });
-});
-
-app.post('/rounding-api/check', express.json(), (req, res) => {
-  const ua = parseFloat((req.body.userAnswer || '').replace(/\s/g, ''));
-  const correct = !isNaN(ua) && Math.abs(ua - req.body.answer) < 0.005;
-  res.json({ correct, display: req.body.display, message: correct ? 'Correct!' : 'Incorrect' });
-});
+// rounding-api → routes/arithmetic.js
 
 /* ═══════════════════════════════════════════════════════════════════════════
  * BINOMIAL THEOREM API  /binomial-api
@@ -7306,47 +7227,7 @@ app.post('/similarity-api/check', express.json(), (req, res) => {
 // SQUARING API  /squaring-api
 // Identity: n² = (a+b)² = a² + 2ab + b²  where a = nearest lower ten, b = remainder
 // ═══════════════════════════════════════════════════════════════════════════
-app.get('/squaring-api/question', (req, res) => {
-  const difficulty = req.query.difficulty || 'easy';
-  const id = Date.now();
-  let lo, hi;
-  if (difficulty === 'easy')      { lo = 11;  hi = 29; }
-  else if (difficulty === 'medium') { lo = 30;  hi = 59; }
-  else if (difficulty === 'hard')   { lo = 60;  hi = 79; }
-  else                              { lo = 80;  hi = 99; }
-
-  const n = randomInt(lo, hi);
-  // Split: a = largest multiple of 10 ≤ n, b = remainder
-  const a = Math.floor(n / 10) * 10;
-  const b = n - a;
-  const aSq = a * a;
-  const bSq = b * b;
-  const twoAB = 2 * a * b;
-  const answer = n * n;
-
-  const prompt = `Find ${n}² using (${a} + ${b})²`;
-  const display = `${n}² = ${a}² + 2·${a}·${b} + ${b}² = ${aSq} + ${twoAB} + ${bSq} = ${answer}`;
-
-  res.json({ id, difficulty, n, a, b, aSq, bSq, twoAB, answer, prompt, display });
-});
-
-app.post('/squaring-api/check', express.json(), (req, res) => {
-  const { a, b, aSq, bSq, twoAB, answer, display } = req.body;
-  const ua = (req.body.userAnswer || '').toString().replace(/\s/g, '');
-  // Accept pipe-separated "aSq|bSq|twoAB|final" or just the final answer
-  const parts = ua.split('|').map(s => parseInt(s.trim()));
-
-  let correct = false;
-  if (parts.length === 4) {
-    // Full check: a², b², 2ab, final
-    correct = parts[0] === aSq && parts[1] === bSq && parts[2] === twoAB && parts[3] === answer;
-  } else if (parts.length === 1 && !isNaN(parts[0])) {
-    // Just the final answer
-    correct = parts[0] === answer;
-  }
-
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
-});
+// squaring-api → routes/arithmetic.js
 
 // ═══════════════════════════════════════════════════════════════════════════
 // TATSAVIT API  /tatsavit-api
@@ -7596,53 +7477,7 @@ app.post('/lineareq-api/check', express.json(), (req, res) => {
 // ═══════════════════════════════════════════════════════════════════════════
 // 2. DECIMALS (decimals-api)
 // ═══════════════════════════════════════════════════════════════════════════
-function decimalsQuestion(difficulty) {
-  const id = `q-${Date.now()}-${Math.random()}`;
-  if (difficulty === 'easy') {
-    // add two decimals (1 dp)
-    const a = (randomInt(1, 10) * 10 + randomInt(0, 9)) / 10;
-    const b = (randomInt(1, 10) * 10 + randomInt(0, 9)) / 10;
-    const answer = Math.round((a + b) * 100) / 100;
-    const prompt = `${a.toFixed(1)} + ${b.toFixed(1)} = ?`;
-    return { id, difficulty, prompt, answer, display: answer.toFixed(1) };
-  } else if (difficulty === 'medium') {
-    // subtract decimals (2 dp)
-    let a = (randomInt(10, 100) + randomInt(0, 99) / 100);
-    let b = (randomInt(10, 100) + randomInt(0, 99) / 100);
-    if (a < b) [a, b] = [b, a];
-    const answer = Math.round((a - b) * 100) / 100;
-    const prompt = `${a.toFixed(2)} − ${b.toFixed(2)} = ?`;
-    return { id, difficulty, prompt, answer, display: answer.toFixed(2) };
-  } else if (difficulty === 'hard') {
-    // multiply decimal by integer
-    const dec = (randomInt(10, 50) + randomInt(0, 99) / 100);
-    const int = randomInt(2, 15);
-    const answer = Math.round(dec * int * 100) / 100;
-    const prompt = `${dec.toFixed(2)} × ${int} = ?`;
-    return { id, difficulty, prompt, answer, display: answer.toFixed(2) };
-  } else {
-    // divide decimal by decimal
-    const a = (randomInt(20, 100) + randomInt(0, 99) / 100);
-    const b = (randomInt(2, 20) + randomInt(0, 99) / 100);
-    const answer = Math.round((a / b) * 100) / 100;
-    const prompt = `${a.toFixed(2)} ÷ ${b.toFixed(2)} = ?`;
-    return { id, difficulty, prompt, answer, display: answer.toFixed(2) };
-  }
-}
-
-app.get('/decimals-api/question', (req, res) => {
-  const difficulty = req.query.difficulty || 'easy';
-  const q = decimalsQuestion(difficulty);
-  res.json(q);
-});
-
-app.post('/decimals-api/check', express.json(), (req, res) => {
-  const { answer, display } = req.body;
-  const userStr = (req.body.userAnswer || '').trim();
-  const userNum = parseFloat(userStr);
-  const correct = !isNaN(userNum) && Math.abs(userNum - answer) < 0.01;
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
-});
+// decimals-api → routes/arithmetic.js
 
 // ═══════════════════════════════════════════════════════════════════════════
 // 3. PERMUTATIONS & COMBINATIONS (permcomb-api)
