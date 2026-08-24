@@ -1397,85 +1397,6 @@ function buildQuadraticPrompt(a, b, c, x, opAB = '+', opBC = '+') {
 }
 
 /**
- * GET /quadratic-api/question
- * Generate a quadratic function evaluation problem
- * Task: Evaluate y = ax² + bx + c at a given x value
- *
- * Query Parameters:
- *   - difficulty (optional): 'easy', 'medium', or 'hard' (default: 'hard')
- *                            Controls coefficient ranges
- *
- * Response:
- * {
- *   id: string,             // Unique problem ID
- *   a: number,              // x² coefficient
- *   b: number,              // x coefficient
- *   c: number,              // Constant term
- *   x: number,              // Value of x to evaluate at
- *   prompt: string,         // Display text (formatted equation)
- *   answer: number          // Correct y value (a*x² + b*x + c)
- * }
- */
-app.get('/quadratic-api/question', (req, res) => {
-  const difficulty = req.query.difficulty || 'hard';
-  const range = quadraticRange(difficulty);
-  // Ensure a ≠ 0 (otherwise it's not truly quadratic)
-  let a = 0;
-  while (a === 0) a = randomInRange(range.min, range.max);
-  const b = randomInRange(range.min, range.max);
-  const c = randomInRange(range.min, range.max);
-  const x = randomInRange(range.min, range.max);
-  const answer = a * x * x + b * x + c;
-
-  res.json({
-    id: `quadratic-${Date.now()}-${Math.random()}`,
-    a,
-    b,
-    c,
-    x,
-    prompt: buildQuadraticPrompt(a, b, c, x),
-    answer,
-  });
-});
-
-/**
- * POST /quadratic-api/check
- * Verify if user correctly evaluated the quadratic function
- *
- * Request Body:
- * {
- *   a: number,              // x² coefficient
- *   b: number,              // x coefficient
- *   c: number,              // Constant term
- *   x: number,              // x value to evaluate at
- *   answer: number          // User's calculated y value
- * }
- *
- * Response:
- * {
- *   correct: boolean,
- *   correctAnswer: number,
- *   message: string
- * }
- */
-app.post('/quadratic-api/check', (req, res) => {
-  const { a, b, c, x, answer, opAB, opBC } = req.body || {};
-  // Compute in sequence applying provided operators (default to +)
-  const A = Number(a);
-  const B = Number(b);
-  const C = Number(c);
-  const X = Number(x);
-  const left = A * X * X;
-  const mid = B * X;
-  const third = C;
-  const applyOp = (lhs, op, rhs) => op === '-' ? lhs - rhs : lhs + rhs;
-  const afterMid = applyOp(left, (opAB || '+').toString(), mid);
-  const correctAnswer = applyOp(afterMid, (opBC || '+').toString(), third);
-  const correct = Number(answer) === correctAnswer;
-  res.json({ correct, correctAnswer, message: correct ? 'Correct' : 'Incorrect' });
-});
-
-/**
  * SQUARE ROOT APPROXIMATION API
  * ═══════════════════════════════════════════════════════════════════════════
  */
@@ -4295,61 +4216,6 @@ function generatePercentQuestion(tier, type, cfg, isFirstOfType) {
   };
 }
 
-/**
- * GET /percent-api/question
- *
- * New params (Module 37):
- *   tier   — 1..4 (default 1)
- *   type   — 1..5 (default 1)
- *   first  — '1' to render scaffold for the first questions of a type
- *   seen   — comma-separated list of recently-shown question ids; the server
- *            tries up to 50 generations to return one not in this list.
- *
- * Legacy fallback: if `tier` is absent the endpoint accepts the old
- * `difficulty=easy|medium|hard|extrahard` and maps it to a tier.
- */
-app.get('/percent-api/question', (req, res) => {
-  let tier = parseInt(req.query.tier, 10);
-  if (!tier || isNaN(tier)) {
-    // Legacy difficulty mapping
-    const map = { easy: 1, medium: 2, hard: 3, extrahard: 4 };
-    tier = map[req.query.difficulty] || 1;
-  }
-  tier = Math.max(1, Math.min(4, tier));
-  const type = Math.max(1, Math.min(5, parseInt(req.query.type, 10) || 1));
-  const isFirstOfType = req.query.first === '1';
-  const seen = String(req.query.seen || '').split(',').filter(Boolean);
-  const cfg = PERCENT_TIERS[tier];
-
-  let q;
-  for (let attempt = 0; attempt < 50; attempt++) {
-    q = generatePercentQuestion(tier, type, cfg, isFirstOfType);
-    if (!seen.includes(q.id)) break;
-  }
-  res.json(q);
-});
-
-/**
- * POST /percent-api/check
- *
- * Accepts the user's answer with tolerant parsing — strips %, ₹, $, commas,
- * spaces, unicode minus. Marks correct if within 0.01 of the expected answer
- * (or 1% relative for tier-4 calculator-style answers).
- */
-app.post('/percent-api/check', express.json(), (req, res) => {
-  const { type, tier, answer: expected, expectsPercent } = req.body;
-  const raw = String(req.body.userAnswer || '');
-  const userStr = raw.replace(/\s+/g, '').replace(/[%₹$,]/g, '').replace(/−/g, '-');
-  const userNum = parseFloat(userStr);
-  let correct = false;
-  if (!isNaN(userNum) && expected !== undefined && expected !== null) {
-    const tol = (tier === 4 || type === 5) ? Math.max(0.01, Math.abs(expected) * 0.005) : 0.01;
-    correct = Math.abs(userNum - expected) <= tol;
-  }
-  const display = Number.isInteger(expected) ? String(expected) : (expected != null ? Number(expected).toFixed(2) : '');
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect', expectsPercent: !!expectsPercent });
-});
-
 // ═══════════════════════════════════════════════════════════════════════════
 // SETS API — Union, intersection, complement, Venn diagrams
 // ═══════════════════════════════════════════════════════════════════════════
@@ -4372,155 +4238,6 @@ function randomSubset(universe, k) {
 function setUnion(a, b) { return [...new Set([...a, ...b])].sort((x, y) => x - y); }
 function setIntersect(a, b) { const s = new Set(b); return a.filter(x => s.has(x)).sort((x, y) => x - y); }
 function setDiff(a, b) { const s = new Set(b); return a.filter(x => !s.has(x)).sort((x, y) => x - y); }
-
-/**
- * GET /sets-api/question?difficulty=easy|medium|hard|extrahard
- *
- * Easy:      List elements — union, intersection, complement, difference
- * Medium:    Cardinality — n(A∪B) = n(A) + n(B) − n(A∩B)
- * Hard:      2-set Venn — given some region counts, find a missing region
- * ExtraHard: 3-set Venn — given totals, find specific region
- */
-app.get('/sets-api/question', (req, res) => {
-  const difficulty = req.query.difficulty || 'easy';
-  const id = Date.now();
-
-  if (difficulty === 'easy') {
-    // Generate universe and two sets, ask for a set operation result
-    const universe = [];
-    for (let i = 1; i <= setRand(10, 15); i++) universe.push(i);
-    const A = randomSubset(universe, setRand(3, 6));
-    const B = randomSubset(universe, setRand(3, 6));
-
-    const ops = [
-      { op: 'A ∪ B', answer: setUnion(A, B) },
-      { op: 'A ∩ B', answer: setIntersect(A, B) },
-      { op: 'A − B', answer: setDiff(A, B) },
-      { op: 'B − A', answer: setDiff(B, A) },
-      { op: "A'", answer: setDiff(universe, A) },
-    ];
-    const chosen = setPick(ops);
-    const prompt = `U = {${universe.join(', ')}}, A = {${A.join(', ')}}, B = {${B.join(', ')}}. Find ${chosen.op}`;
-    res.json({ id, difficulty, type: 'list', prompt, answer: chosen.answer });
-  }
-  else if (difficulty === 'medium') {
-    // Cardinality problems using inclusion-exclusion
-    const nA = setRand(10, 30);
-    const nB = setRand(10, 30);
-    const nAB = setRand(2, Math.min(nA, nB) - 1); // intersection
-    const nAuB = nA + nB - nAB;
-
-    const subtype = setPick(['find_union', 'find_intersect', 'find_only_a']);
-    let prompt, answer;
-    if (subtype === 'find_union') {
-      prompt = `n(A) = ${nA}, n(B) = ${nB}, n(A ∩ B) = ${nAB}. Find n(A ∪ B)`;
-      answer = nAuB;
-    } else if (subtype === 'find_intersect') {
-      prompt = `n(A) = ${nA}, n(B) = ${nB}, n(A ∪ B) = ${nAuB}. Find n(A ∩ B)`;
-      answer = nAB;
-    } else {
-      prompt = `n(A) = ${nA}, n(A ∩ B) = ${nAB}. How many elements are in A only?`;
-      answer = nA - nAB;
-    }
-    res.json({ id, difficulty, type: 'cardinality', subtype, prompt, answer });
-  }
-  else if (difficulty === 'hard') {
-    // 2-set Venn diagram: given total and some regions, find missing
-    const onlyA = setRand(5, 20);
-    const both = setRand(3, 15);
-    const onlyB = setRand(5, 20);
-    const neither = setRand(2, 10);
-    const total = onlyA + both + onlyB + neither;
-
-    const subtype = setPick(['find_neither', 'find_both', 'find_onlyA', 'find_total']);
-    let prompt, answer;
-    if (subtype === 'find_neither') {
-      prompt = `In a group of ${total}: n(A only) = ${onlyA}, n(A ∩ B) = ${both}, n(B only) = ${onlyB}. How many are in neither A nor B?`;
-      answer = neither;
-    } else if (subtype === 'find_both') {
-      prompt = `In a group of ${total}: n(A) = ${onlyA + both}, n(B) = ${onlyB + both}, n(neither) = ${neither}. Find n(A ∩ B).`;
-      answer = both;
-    } else if (subtype === 'find_onlyA') {
-      prompt = `In a group of ${total}: n(A ∩ B) = ${both}, n(B only) = ${onlyB}, n(neither) = ${neither}. How many are in A only?`;
-      answer = onlyA;
-    } else {
-      prompt = `n(A only) = ${onlyA}, n(A ∩ B) = ${both}, n(B only) = ${onlyB}, n(neither) = ${neither}. Find the total.`;
-      answer = total;
-    }
-    res.json({ id, difficulty, type: 'venn2', subtype, prompt, answer });
-  }
-  else {
-    // 3-set Venn diagram
-    // Generate all 7 regions + neither
-    const abc = setRand(1, 5);        // all three
-    const abOnly = setRand(1, 8);     // A∩B only (not C)
-    const acOnly = setRand(1, 8);     // A∩C only (not B)
-    const bcOnly = setRand(1, 8);     // B∩C only (not A)
-    const aOnly = setRand(3, 12);     // A only
-    const bOnly = setRand(3, 12);     // B only
-    const cOnly = setRand(3, 12);     // C only
-    const neither = setRand(2, 8);
-
-    const nA = aOnly + abOnly + acOnly + abc;
-    const nB = bOnly + abOnly + bcOnly + abc;
-    const nC = cOnly + acOnly + bcOnly + abc;
-    const nAB = abOnly + abc;
-    const nAC = acOnly + abc;
-    const nBC = bcOnly + abc;
-    const total = aOnly + bOnly + cOnly + abOnly + acOnly + bcOnly + abc + neither;
-
-    const subtype = setPick(['find_abc', 'find_neither', 'find_aonly', 'find_total']);
-    let prompt, answer;
-    if (subtype === 'find_abc') {
-      prompt = `n(A) = ${nA}, n(B) = ${nB}, n(C) = ${nC}, n(A∩B) = ${nAB}, n(A∩C) = ${nAC}, n(B∩C) = ${nBC}, total in at least one set = ${total - neither}. Find n(A ∩ B ∩ C).`;
-      // Using inclusion-exclusion: n(A∪B∪C) = nA+nB+nC - nAB-nAC-nBC + nABC
-      answer = abc;
-    } else if (subtype === 'find_neither') {
-      prompt = `In a group of ${total}: n(A) = ${nA}, n(B) = ${nB}, n(C) = ${nC}, n(A∩B) = ${nAB}, n(A∩C) = ${nAC}, n(B∩C) = ${nBC}, n(A∩B∩C) = ${abc}. How many in neither?`;
-      const inAtLeastOne = nA + nB + nC - nAB - nAC - nBC + abc;
-      answer = total - inAtLeastOne;
-    } else if (subtype === 'find_aonly') {
-      prompt = `n(A) = ${nA}, n(A∩B) = ${nAB}, n(A∩C) = ${nAC}, n(A∩B∩C) = ${abc}. How many are in A only?`;
-      answer = aOnly;
-    } else {
-      prompt = `n(A only) = ${aOnly}, n(B only) = ${bOnly}, n(C only) = ${cOnly}, n(A∩B only) = ${abOnly}, n(A∩C only) = ${acOnly}, n(B∩C only) = ${bcOnly}, n(A∩B∩C) = ${abc}, neither = ${neither}. Find total.`;
-      answer = total;
-    }
-    res.json({ id, difficulty, type: 'venn3', subtype, prompt, answer });
-  }
-});
-
-/**
- * POST /sets-api/check
- */
-app.post('/sets-api/check', express.json(), (req, res) => {
-  const { type, answer: expected } = req.body;
-  const userStr = (req.body.userAnswer || '').replace(/\s+/g, '').replace(/−/g, '-');
-  let correct = false;
-  let display = '';
-
-  if (type === 'list') {
-    // Expected is an array of numbers. User types e.g. "{1,3,5}" or "1,3,5" or "{}" or "empty"
-    const cleaned = userStr.replace(/[{}]/g, '');
-    let userSet;
-    if (cleaned === '' || cleaned.toLowerCase() === 'empty') {
-      userSet = [];
-    } else {
-      userSet = cleaned.split(',').map(s => parseInt(s.trim())).filter(n => !isNaN(n)).sort((a, b) => a - b);
-    }
-    const expectedSorted = [...expected].sort((a, b) => a - b);
-    correct = userSet.length === expectedSorted.length && userSet.every((v, i) => v === expectedSorted[i]);
-    display = expectedSorted.length === 0 ? '{ } (empty set)' : `{${expectedSorted.join(', ')}}`;
-  }
-  else {
-    // Cardinality / Venn — expect a number
-    const userNum = parseInt(userStr);
-    correct = !isNaN(userNum) && userNum === expected;
-    display = String(expected);
-  }
-
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
-});
 
 // ═══════════════════════════════════════════════════════════════════════════
 // TRIGONOMETRY API
@@ -5333,74 +5050,6 @@ app.post('/stats-api/check', express.json(), (req, res) => {
 // MATRICES API
 // ═══════════════════════════════════════════════════════════════════════════
 
-app.get('/matrix-api/question', (req, res) => {
-  const difficulty = req.query.difficulty || 'easy';
-  const id = Date.now();
-
-  if (difficulty === 'easy') {
-    // Add two 2×2 matrices
-    const A = [[triRand(-5,9), triRand(-5,9)], [triRand(-5,9), triRand(-5,9)]];
-    const B = [[triRand(-5,9), triRand(-5,9)], [triRand(-5,9), triRand(-5,9)]];
-    const R = [[A[0][0]+B[0][0], A[0][1]+B[0][1]], [A[1][0]+B[1][0], A[1][1]+B[1][1]]];
-    const fmtM = (m) => `[${m[0][0]},${m[0][1]};${m[1][0]},${m[1][1]}]`;
-    const prompt = `A = ${fmtM(A)}, B = ${fmtM(B)}. Find A + B.`;
-    res.json({ id, difficulty, type: 'add', prompt, answer: R, display: fmtM(R) });
-  }
-  else if (difficulty === 'medium') {
-    // Scalar multiplication
-    let k = triRand(-3, 5); if (k === 0) k = 2;
-    const A = [[triRand(-5,9), triRand(-5,9)], [triRand(-5,9), triRand(-5,9)]];
-    const R = [[k*A[0][0], k*A[0][1]], [k*A[1][0], k*A[1][1]]];
-    const fmtM = (m) => `[${m[0][0]},${m[0][1]};${m[1][0]},${m[1][1]}]`;
-    const prompt = `A = ${fmtM(A)}. Find ${k}A.`;
-    res.json({ id, difficulty, type: 'scalar', prompt, answer: R, display: fmtM(R) });
-  }
-  else if (difficulty === 'hard') {
-    // Determinant of 2×2
-    const a = triRand(-5,8); const b = triRand(-5,8);
-    const c = triRand(-5,8); const d = triRand(-5,8);
-    const det = a * d - b * c;
-    const prompt = `Find the determinant of [${a},${b};${c},${d}]`;
-    res.json({ id, difficulty, type: 'determinant', prompt, answer: det, display: String(det) });
-  }
-  else {
-    // Multiply two 2×2 matrices
-    const A = [[triRand(-3,5), triRand(-3,5)], [triRand(-3,5), triRand(-3,5)]];
-    const B = [[triRand(-3,5), triRand(-3,5)], [triRand(-3,5), triRand(-3,5)]];
-    const R = [
-      [A[0][0]*B[0][0]+A[0][1]*B[1][0], A[0][0]*B[0][1]+A[0][1]*B[1][1]],
-      [A[1][0]*B[0][0]+A[1][1]*B[1][0], A[1][0]*B[0][1]+A[1][1]*B[1][1]]
-    ];
-    const fmtM = (m) => `[${m[0][0]},${m[0][1]};${m[1][0]},${m[1][1]}]`;
-    const prompt = `A = ${fmtM(A)}, B = ${fmtM(B)}. Find AB.`;
-    res.json({ id, difficulty, type: 'multiply', prompt, answer: R, display: fmtM(R) });
-  }
-});
-
-app.post('/matrix-api/check', express.json(), (req, res) => {
-  const { type, answer, display } = req.body;
-  const userStr = (req.body.userAnswer || '').replace(/\s+/g, '').replace(/−/g, '-');
-  let correct = false;
-
-  if (type === 'determinant') {
-    const userNum = parseInt(userStr);
-    correct = !isNaN(userNum) && userNum === answer;
-  } else {
-    // Parse matrix: [a,b;c,d]
-    const m = userStr.replace(/[\[\]]/g, '').split(';');
-    if (m.length === 2) {
-      const r0 = m[0].split(',').map(Number);
-      const r1 = m[1].split(',').map(Number);
-      if (r0.length === 2 && r1.length === 2) {
-        correct = r0[0] === answer[0][0] && r0[1] === answer[0][1] &&
-                  r1[0] === answer[1][0] && r1[1] === answer[1][1];
-      }
-    }
-  }
-
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
-});
-
 // ═══════════════════════════════════════════════════════════════════════════
 // VECTORS API
 // ═══════════════════════════════════════════════════════════════════════════
@@ -5488,116 +5137,6 @@ function fmtVec(v) {
   return '(' + v.join(', ') + ')';
 }
 
-app.get('/dotprod-api/question', (req, res) => {
-  const difficulty = req.query.difficulty || 'easy';
-  const id = Date.now();
-
-  if (difficulty === 'easy') {
-    // Dot product of two 2D vectors, all positive 1-digit
-    const a = [pos1d(), pos1d()];
-    const b = [pos1d(), pos1d()];
-    const dot = a[0]*b[0] + a[1]*b[1];
-    const prompt = `Find the dot product`;
-    res.json({ id, difficulty, type: 'dot2d', prompt, vecA: a, vecB: b, answer: dot, display: String(dot) });
-  }
-  else if (difficulty === 'medium') {
-    // Randomly choose between 2D and 3D dot product
-    if (Math.random() < 0.5) {
-      const a = [pos1d(), pos1d()];
-      const b = [pos1d(), pos1d()];
-      const dot = a[0]*b[0] + a[1]*b[1];
-      const prompt = `Find the dot product`;
-      res.json({ id, difficulty, type: 'dot2d', prompt, vecA: a, vecB: b, answer: dot, display: String(dot) });
-    } else {
-      const a = [pos1d(), pos1d(), pos1d()];
-      const b = [pos1d(), pos1d(), pos1d()];
-      const dot = a[0]*b[0] + a[1]*b[1] + a[2]*b[2];
-      const prompt = `Find the dot product`;
-      res.json({ id, difficulty, type: 'dot3d', prompt, vecA: a, vecB: b, answer: dot, display: String(dot) });
-    }
-  }
-  else if (difficulty === 'hard') {
-    // Matrix multiplication: 2×2 or 3×3
-    if (Math.random() < 0.5) {
-      const A = Array.from({ length: 2 }, () => [pos1d(), pos1d()]);
-      const B = Array.from({ length: 2 }, () => [pos1d(), pos1d()]);
-      const C = matMul(A, B);
-      const prompt = `Compute the matrix product A × B`;
-      res.json({ id, difficulty, type: 'matmul', size: 2, prompt, matA: A, matB: B, answer: C, display: fmtMat(C) });
-    } else {
-      const A = Array.from({ length: 3 }, () => [pos1d(), pos1d(), pos1d()]);
-      const B = Array.from({ length: 3 }, () => [pos1d(), pos1d(), pos1d()]);
-      const C = matMul(A, B);
-      const prompt = `Compute the matrix product A × B`;
-      res.json({ id, difficulty, type: 'matmul', size: 3, prompt, matA: A, matB: B, answer: C, display: fmtMat(C) });
-    }
-  }
-  else {
-    // Extra hard: 4×4 matrix product with missing values
-    const A = Array.from({ length: 4 }, () => [pos1d(), pos1d(), pos1d(), pos1d()]);
-    const B = Array.from({ length: 4 }, () => [pos1d(), pos1d(), pos1d(), pos1d()]);
-    const C = matMul(A, B);
-
-    // Pick 4 unique blank positions
-    const allPos = [];
-    for (let i = 0; i < 4; i++)
-      for (let j = 0; j < 4; j++)
-        allPos.push([i, j]);
-    for (let i = allPos.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [allPos[i], allPos[j]] = [allPos[j], allPos[i]];
-    }
-    const blanks = allPos.slice(0, 4).sort((a, b) => a[0] !== b[0] ? a[0] - b[0] : a[1] - b[1]);
-    const missingValues = blanks.map(([r, c]) => C[r][c]);
-
-    // Build display matrix with blanks marked
-    const Cdisplay = C.map(row => [...row]);
-    blanks.forEach(([r, c], idx) => { Cdisplay[r][c] = '?' + (idx + 1); });
-
-    const prompt = `Find the missing values in C = A × B`;
-    const display = missingValues.join(', ');
-
-    res.json({ id, difficulty, type: 'matfill', prompt, matA: A, matB: B, matC: Cdisplay, blanks, answer: missingValues, display });
-  }
-});
-
-app.post('/dotprod-api/check', express.json(), (req, res) => {
-  const { type, answer, display } = req.body;
-  const userStr = (req.body.userAnswer || '').replace(/\s+/g, '').replace(/−/g, '-');
-  let correct = false;
-
-  if (type === 'dot2d' || type === 'dot3d' || type === 'dotsum') {
-    // Single number answer
-    const userNum = parseInt(userStr);
-    correct = !isNaN(userNum) && userNum === answer;
-  }
-  else if (type === 'matmul') {
-    // Matrix answer: [a,b;c,d] or [a,b,c;d,e,f;g,h,i]
-    const inner = userStr.replace(/[\[\]]/g, '');
-    const rows = inner.split(';');
-    if (rows.length === answer.length) {
-      correct = true;
-      for (let i = 0; i < rows.length; i++) {
-        const vals = rows[i].split(',').map(Number);
-        if (vals.length !== answer[i].length) { correct = false; break; }
-        for (let j = 0; j < vals.length; j++) {
-          if (vals[j] !== answer[i][j]) { correct = false; break; }
-        }
-        if (!correct) break;
-      }
-    }
-  }
-  else if (type === 'matfill') {
-    // Comma-separated missing values
-    const vals = userStr.split(',').map(s => parseInt(s.trim()));
-    if (vals.length === answer.length) {
-      correct = vals.every((v, i) => !isNaN(v) && v === answer[i]);
-    }
-  }
-
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
-});
-
 // ═══════════════════════════════════════════════════════════════════════════
 // TRANSFORMATIONS API
 // ═══════════════════════════════════════════════════════════════════════════
@@ -5655,400 +5194,21 @@ app.post('/transform-api/check', express.json(), (req, res) => {
 // MENSURATION API
 // ═══════════════════════════════════════════════════════════════════════════
 
-app.get('/mensur-api/question', (req, res) => {
-  const difficulty = req.query.difficulty || 'easy';
-  const id = Date.now();
-
-  if (difficulty === 'easy') {
-    // Area of rectangle, triangle, or parallelogram
-    const shape = triPick(['rectangle', 'triangle', 'parallelogram']);
-    const a = triRand(3, 15); const b = triRand(3, 15);
-    let displayEq;
-    if (shape === 'rectangle') { answer = a * b; prompt = `Area of rectangle: length = ${a}, width = ${b}`; displayEq = `${a} × ${b} = ${answer}`; }
-    else if (shape === 'triangle') { answer = a * b / 2; prompt = `Area of triangle: base = ${a}, height = ${b}`; displayEq = `½ × ${a} × ${b} = ${answer}`; }
-    else { answer = a * b; prompt = `Area of parallelogram: base = ${a}, height = ${b}`; displayEq = `${a} × ${b} = ${answer}`; }
-    res.json({ id, difficulty, type: 'area_2d', prompt, answer, display: displayEq });
-  }
-  else if (difficulty === 'medium') {
-    // Area & circumference of circle
-    const r = triRand(2, 12);
-    const subtype = triPick(['area', 'circumference']);
-    let displayEq;
-    if (subtype === 'area') {
-      answer = Math.round(Math.PI * r * r * 100) / 100;
-      prompt = `Area of circle with radius ${r} (to 2 d.p., use π = 3.14159...)`;
-      displayEq = `π × ${r}² = ${answer}`;
-    } else {
-      answer = Math.round(2 * Math.PI * r * 100) / 100;
-      prompt = `Circumference of circle with radius ${r} (to 2 d.p.)`;
-      displayEq = `2 × π × ${r} = ${answer}`;
-    }
-    res.json({ id, difficulty, type: 'circle', prompt, answer, display: displayEq });
-  }
-  else if (difficulty === 'hard') {
-    // Volume of cylinder, cone, or sphere
-    const shape = triPick(['cylinder', 'cone', 'sphere']);
-    const r = triRand(2, 8);
-    let displayEq;
-    if (shape === 'cylinder') {
-      const h = triRand(3, 12);
-      answer = Math.round(Math.PI * r * r * h * 100) / 100;
-      prompt = `Volume of cylinder: radius = ${r}, height = ${h} (2 d.p.)`;
-      displayEq = `π × ${r}² × ${h} = ${answer}`;
-    } else if (shape === 'cone') {
-      const h = triRand(3, 12);
-      answer = Math.round(Math.PI * r * r * h / 3 * 100) / 100;
-      prompt = `Volume of cone: radius = ${r}, height = ${h} (2 d.p.)`;
-      displayEq = `⅓ × π × ${r}² × ${h} = ${answer}`;
-    } else {
-      answer = Math.round(4/3 * Math.PI * r * r * r * 100) / 100;
-      prompt = `Volume of sphere with radius ${r} (2 d.p.)`;
-      displayEq = `⁴⁄₃ × π × ${r}³ = ${answer}`;
-    }
-    res.json({ id, difficulty, type: 'volume', prompt, answer, display: displayEq });
-  }
-  else {
-    // Surface area of cylinder, cone, or sphere
-    const shape = triPick(['cylinder', 'sphere']);
-    const r = triRand(2, 8);
-    let displayEq;
-    if (shape === 'cylinder') {
-      const h = triRand(3, 12);
-      answer = Math.round(2 * Math.PI * r * (r + h) * 100) / 100;
-      prompt = `Total surface area of cylinder: radius = ${r}, height = ${h} (2 d.p.)`;
-      displayEq = `2 × π × ${r} × (${r} + ${h}) = ${answer}`;
-    } else {
-      answer = Math.round(4 * Math.PI * r * r * 100) / 100;
-      prompt = `Surface area of sphere with radius ${r} (2 d.p.)`;
-      displayEq = `4 × π × ${r}² = ${answer}`;
-    }
-    res.json({ id, difficulty, type: 'surface_area', prompt, answer, display: displayEq });
-  }
-});
-
-app.post('/mensur-api/check', express.json(), (req, res) => {
-  const userNum = parseFloat((req.body.userAnswer || '').replace(/\s+/g, ''));
-  const correct = !isNaN(userNum) && Math.abs(userNum - req.body.answer) < 0.5;
-  res.json({ correct, display: req.body.display, message: correct ? 'Correct!' : 'Incorrect' });
-});
-
 // ═══════════════════════════════════════════════════════════════════════════
 // BEARINGS API
 // ═══════════════════════════════════════════════════════════════════════════
-
-app.get('/bearings-api/question', (req, res) => {
-  const difficulty = req.query.difficulty || 'easy';
-  const id = Date.now();
-
-  if (difficulty === 'easy') {
-    // Expanded compass directions + reverse questions for variety
-    const dirs = [
-      { name: 'North', bearing: 0 }, { name: 'East', bearing: 90 },
-      { name: 'South', bearing: 180 }, { name: 'West', bearing: 270 },
-      { name: 'North-East', bearing: 45 }, { name: 'South-East', bearing: 135 },
-      { name: 'South-West', bearing: 225 }, { name: 'North-West', bearing: 315 },
-      { name: 'North-North-East', bearing: 23 }, { name: 'East-North-East', bearing: 68 },
-      { name: 'East-South-East', bearing: 113 }, { name: 'South-South-East', bearing: 158 },
-      { name: 'South-South-West', bearing: 203 }, { name: 'West-South-West', bearing: 248 },
-      { name: 'West-North-West', bearing: 293 }, { name: 'North-North-West', bearing: 338 },
-    ];
-    const d = triPick(dirs);
-    const qType = Math.random();
-    let prompt, answer;
-    if (qType < 0.5) {
-      // Forward: compass → bearing
-      prompt = `What is the three-figure bearing of ${d.name}?`;
-      answer = d.bearing;
-    } else if (qType < 0.75) {
-      // Opposite bearing
-      const opp = (d.bearing + 180) % 360;
-      prompt = `What is the bearing directly opposite ${d.name}?`;
-      answer = opp;
-    } else {
-      // 90° clockwise turn
-      const turned = (d.bearing + 90) % 360;
-      prompt = `Face ${d.name} and turn 90° clockwise. What bearing are you now facing?`;
-      answer = turned;
-    }
-    const display = String(answer).padStart(3, '0');
-    res.json({ id, difficulty, type: 'compass', prompt, answer, display });
-  }
-  else if (difficulty === 'medium') {
-    // Back bearing: if bearing from A to B is x, what is bearing from B to A?
-    const bearing = triRand(0, 359);
-    const back = (bearing + 180) % 360;
-    const fmtB = (b) => String(b).padStart(3, '0');
-    const prompt = `The bearing from A to B is ${fmtB(bearing)}°. Find the bearing from B to A.`;
-    res.json({ id, difficulty, type: 'back_bearing', prompt, answer: back, display: fmtB(back) });
-  }
-  else if (difficulty === 'hard') {
-    // Find bearing given coordinates
-    let dx = triRand(-10, 10); const dy = triRand(-10, 10);
-    if (dx === 0 && dy === 0) dx = 1;
-    // Bearing = angle measured clockwise from North
-    let angle = Math.atan2(dx, dy) * 180 / Math.PI;
-    if (angle < 0) angle += 360;
-    const bearing = Math.round(angle);
-    const fmtB = (b) => String(b).padStart(3, '0');
-    const prompt = `A is at origin. B is ${Math.abs(dx)} units ${dx >= 0 ? 'East' : 'West'} and ${Math.abs(dy)} units ${dy >= 0 ? 'North' : 'South'}. Bearing of B from A?`;
-    res.json({ id, difficulty, type: 'from_coords', prompt, answer: bearing, display: fmtB(bearing) });
-  }
-  else {
-    // Distance using bearing + trig
-    const bearing = triRand(0, 359);
-    const distance = triRand(5, 50);
-    const rad = bearing * Math.PI / 180;
-    const east = Math.round(distance * Math.sin(rad) * 10) / 10;
-    const north = Math.round(distance * Math.cos(rad) * 10) / 10;
-    const fmtB = (b) => String(b).padStart(3, '0');
-    const prompt = `Walking ${distance}m on bearing ${fmtB(bearing)}°. How far East? (to 1 decimal place)`;
-    res.json({ id, difficulty, type: 'distance_component', prompt, answer: east, display: String(east) });
-  }
-});
-
-app.post('/bearings-api/check', express.json(), (req, res) => {
-  const userStr = (req.body.userAnswer || '').replace(/[°\s]/g, '').replace(/−/g, '-');
-  const userNum = parseFloat(userStr);
-  const correct = !isNaN(userNum) && Math.abs(userNum - req.body.answer) < 1;
-  res.json({ correct, display: req.body.display, message: correct ? 'Correct!' : 'Incorrect' });
-});
 
 // ═══════════════════════════════════════════════════════════════════════════
 // LOGARITHMS API
 // ═══════════════════════════════════════════════════════════════════════════
 
-app.get('/log-api/question', (req, res) => {
-  const difficulty = req.query.difficulty || 'easy';
-  const id = Date.now();
-
-  if (difficulty === 'easy') {
-    // Evaluate log_b(n) where n is a perfect power of b
-    const combos = [
-      { b: 2, n: 4, ans: 2 }, { b: 2, n: 8, ans: 3 }, { b: 2, n: 16, ans: 4 }, { b: 2, n: 32, ans: 5 },
-      { b: 2, n: 64, ans: 6 }, { b: 3, n: 9, ans: 2 }, { b: 3, n: 27, ans: 3 }, { b: 3, n: 81, ans: 4 },
-      { b: 5, n: 25, ans: 2 }, { b: 5, n: 125, ans: 3 }, { b: 10, n: 100, ans: 2 }, { b: 10, n: 1000, ans: 3 },
-      { b: 4, n: 16, ans: 2 }, { b: 4, n: 64, ans: 3 }, { b: 7, n: 49, ans: 2 }, { b: 6, n: 36, ans: 2 },
-      { b: 2, n: 1, ans: 0 }, { b: 3, n: 1, ans: 0 }, { b: 10, n: 1, ans: 0 },
-      { b: 10, n: 10, ans: 1 }, { b: 2, n: 2, ans: 1 },
-    ];
-    const c = triPick(combos);
-    const prompt = `Evaluate log${c.b === 10 ? '' : '₊'.replace('₊', String(c.b).split('').map(d => '₀₁₂₃₄₅₆₇₈₉'[d]).join(''))}(${c.n})`;
-    res.json({ id, difficulty, type: 'evaluate', prompt, answer: c.ans, display: String(c.ans) });
-  }
-  else if (difficulty === 'medium') {
-    // Laws of logs: log(a) + log(b) = log(ab), log(a) - log(b) = log(a/b)
-    const base = triPick([2, 3, 10]);
-    const sub = (n) => String(n).split('').map(d => '₀₁₂₃₄₅₆₇₈₉'[d]).join('');
-    const bStr = base === 10 ? '' : sub(base);
-    const subtype = triPick(['add', 'subtract', 'power']);
-    if (subtype === 'add') {
-      const a = triRand(2, 20); const b = triRand(2, 20);
-      const prompt = `Simplify: log${bStr}(${a}) + log${bStr}(${b})`;
-      const product = a * b;
-      // Check if product is a clean power of base
-      let ans = product;
-      const display = `log${bStr}(${product})`;
-      res.json({ id, difficulty, type: 'simplify_log', prompt, ansProduct: product, base, display });
-    } else if (subtype === 'subtract') {
-      const b = triRand(2, 8); const a = b * triRand(2, 8);
-      const prompt = `Simplify: log${bStr}(${a}) − log${bStr}(${b})`;
-      const quotient = a / b;
-      const display = `log${bStr}(${quotient})`;
-      res.json({ id, difficulty, type: 'simplify_log', prompt, ansProduct: quotient, base, display });
-    } else {
-      const n = triRand(2, 10); const k = triRand(2, 4);
-      const prompt = `Simplify: ${k} × log${bStr}(${n})`;
-      const power = Math.pow(n, k);
-      const display = `log${bStr}(${power})`;
-      res.json({ id, difficulty, type: 'simplify_log', prompt, ansProduct: power, base, display });
-    }
-  }
-  else if (difficulty === 'hard') {
-    // Solve: b^x = n → x = log(n)/log(b)
-    const combos = [
-      { b: 2, n: 4, x: 2 }, { b: 2, n: 8, x: 3 }, { b: 2, n: 16, x: 4 },
-      { b: 3, n: 9, x: 2 }, { b: 3, n: 27, x: 3 }, { b: 5, n: 25, x: 2 },
-      { b: 5, n: 125, x: 3 }, { b: 4, n: 64, x: 3 }, { b: 10, n: 100, x: 2 },
-      { b: 2, n: 32, x: 5 }, { b: 3, n: 81, x: 4 },
-    ];
-    const c = triPick(combos);
-    const prompt = `Solve: ${c.b}ˣ = ${c.n}`;
-    res.json({ id, difficulty, type: 'solve_exp', prompt, answer: c.x, display: `x = ${c.x}` });
-  }
-  else {
-    // Solve log equations: log(x+a) = b → x+a = 10^b
-    const base = triPick([2, 10]);
-    const sub = (n) => String(n).split('').map(d => '₀₁₂₃₄₅₆₇₈₉'[d]).join('');
-    const bStr = base === 10 ? '' : sub(base);
-    const exp = triRand(1, 4);
-    const a = triRand(-10, 10);
-    const val = Math.pow(base, exp);
-    const x = val - a;
-    const prompt = `Solve: log${bStr}(x ${a >= 0 ? '+ ' + a : '− ' + Math.abs(a)}) = ${exp}`;
-    res.json({ id, difficulty, type: 'solve_log', prompt, answer: x, display: `x = ${x}` });
-  }
-});
-
-app.post('/log-api/check', express.json(), (req, res) => {
-  const { type } = req.body;
-  const userStr = (req.body.userAnswer || '').replace(/\s+/g, '').replace(/−/g, '-').replace(/^x=/i, '');
-  let correct = false;
-
-  if (type === 'simplify_log') {
-    // User should enter e.g. "log(40)" or just "40" (the argument)
-    const cleaned = userStr.replace(/log[₀₁₂₃₄₅₆₇₈₉]*/g, '').replace(/[()]/g, '');
-    const userNum = parseInt(cleaned);
-    correct = !isNaN(userNum) && userNum === req.body.ansProduct;
-  } else {
-    const expected = req.body.answer;
-    const userNum = parseFloat(userStr);
-    correct = !isNaN(userNum) && Math.abs(userNum - expected) < 0.01;
-  }
-
-  res.json({ correct, display: req.body.display, message: correct ? 'Correct!' : 'Incorrect' });
-});
-
 // ═══════════════════════════════════════════════════════════════════════════
 // DIFFERENTIATION API
 // ═══════════════════════════════════════════════════════════════════════════
 
-app.get('/diff-api/question', (req, res) => {
-  const difficulty = req.query.difficulty || 'easy';
-  const id = Date.now();
-
-  if (difficulty === 'easy') {
-    // Differentiate ax^n → anx^(n-1), evaluate at a point
-    const a = triRand(1, 6); const n = triRand(2, 5);
-    const x = triRand(1, 5);
-    const deriv = a * n * Math.pow(x, n - 1);
-    const prompt = `f(x) = ${a}x${sup(n)}. Find f'(${x}).`;
-    res.json({ id, difficulty, type: 'power_rule', prompt, answer: deriv, display: String(deriv) });
-  }
-  else if (difficulty === 'medium') {
-    // Differentiate polynomial: ax² + bx + c
-    let a = triRand(-5, 5); const b = triRand(-8, 8); const c = triRand(-10, 10);
-    if (a === 0) a = 2;
-    const x = triRand(-3, 3);
-    const deriv = 2 * a * x + b;
-    const bStr = b >= 0 ? `+ ${b}` : `− ${Math.abs(b)}`;
-    const cStr = c >= 0 ? `+ ${c}` : `− ${Math.abs(c)}`;
-    const prompt = `f(x) = ${a}x² ${bStr}x ${cStr}. Find f'(${x}).`;
-    res.json({ id, difficulty, type: 'polynomial', prompt, answer: deriv, display: String(deriv) });
-  }
-  else if (difficulty === 'hard') {
-    // Find gradient at a point, or find x where gradient = 0 (turning point)
-    const a = triRand(1, 4); const b = triRand(-10, 10);
-    const c = triRand(-10, 10);
-    // f(x) = ax² + bx + c, f'(x) = 2ax + b = 0 → x = -b/(2a)
-    const g = gcd(Math.abs(b), 2 * a);
-    const ansNum = -b / g;
-    const ansDen = (2 * a) / g;
-    const bStr = b >= 0 ? `+ ${b}` : `− ${Math.abs(b)}`;
-    const cStr = c >= 0 ? `+ ${c}` : `− ${Math.abs(c)}`;
-    const prompt = `f(x) = ${a}x² ${bStr}x ${cStr}. Find x where f'(x) = 0.`;
-    const display = ansDen === 1 ? String(ansNum) : `${ansNum}/${ansDen}`;
-    res.json({ id, difficulty, type: 'turning_point', prompt, ansNum, ansDen, display });
-  }
-  else {
-    // Find whether turning point is max or min, and its y-value
-    const a = triPick([1, -1, 2, -2, 3]);
-    const b = triRand(-8, 8);
-    const c = triRand(-10, 10);
-    // f'(x) = 2ax + b = 0 → x = -b/(2a)
-    const xTurn = -b / (2 * a);
-    const yTurn = a * xTurn * xTurn + b * xTurn + c;
-    const rounded = Math.round(yTurn * 100) / 100;
-    const nature = a > 0 ? 'minimum' : 'maximum';
-    const bStr = b >= 0 ? `+ ${b}` : `− ${Math.abs(b)}`;
-    const cStr = c >= 0 ? `+ ${c}` : `− ${Math.abs(c)}`;
-    const prompt = `f(x) = ${a}x² ${bStr}x ${cStr}. Find the ${nature} value of f(x).`;
-    res.json({ id, difficulty, type: 'min_max', prompt, answer: rounded, display: String(rounded) });
-  }
-});
-
-app.post('/diff-api/check', express.json(), (req, res) => {
-  const { type } = req.body;
-  const userStr = (req.body.userAnswer || '').replace(/\s+/g, '').replace(/−/g, '-').replace(/^x=/i, '');
-  let correct = false;
-
-  if (type === 'turning_point') {
-    const { ansNum, ansDen } = req.body;
-    const fracMatch = userStr.match(/^(-?\d+)\/(-?\d+)$/);
-    let uNum, uDen;
-    if (fracMatch) { uNum = parseInt(fracMatch[1]); uDen = parseInt(fracMatch[2]); }
-    else { const n = parseFloat(userStr); if (!isNaN(n) && Number.isInteger(n)) { uNum = n; uDen = 1; }
-      else if (!isNaN(n)) { correct = Math.abs(n - ansNum / ansDen) < 0.01; } }
-    if (!correct && uNum !== undefined && uDen !== undefined && uDen !== 0) {
-      const us = simplifyFraction(uNum, uDen);
-      const es = simplifyFraction(ansNum, ansDen);
-      correct = us.num === es.num && us.den === es.den;
-    }
-  } else {
-    const userNum = parseFloat(userStr);
-    correct = !isNaN(userNum) && Math.abs(userNum - req.body.answer) < 0.5;
-  }
-
-  res.json({ correct, display: req.body.display, message: correct ? 'Correct!' : 'Incorrect' });
-});
-
 // ═══════════════════════════════════════════════════════════════════════════
 // NUMBER BASES API
 // ═══════════════════════════════════════════════════════════════════════════
-
-app.get('/bases-api/question', (req, res) => {
-  const difficulty = req.query.difficulty || 'easy';
-  const id = Date.now();
-
-  if (difficulty === 'easy') {
-    // Convert decimal to binary
-    const n = triRand(5, 63);
-    const prompt = `Convert ${n} (decimal) to binary`;
-    res.json({ id, difficulty, type: 'dec_to_bin', prompt, answer: n.toString(2), display: n.toString(2) });
-  }
-  else if (difficulty === 'medium') {
-    // Convert binary to decimal
-    const n = triRand(10, 127);
-    const bin = n.toString(2);
-    const prompt = `Convert ${bin} (binary) to decimal`;
-    res.json({ id, difficulty, type: 'bin_to_dec', prompt, answer: n, display: String(n) });
-  }
-  else if (difficulty === 'hard') {
-    // Convert decimal to hexadecimal
-    const n = triRand(16, 255);
-    const prompt = `Convert ${n} (decimal) to hexadecimal`;
-    res.json({ id, difficulty, type: 'dec_to_hex', prompt, answer: n.toString(16).toUpperCase(), display: n.toString(16).toUpperCase() });
-  }
-  else {
-    // Binary addition or hex to binary
-    const subtype = triPick(['bin_add', 'hex_to_bin']);
-    if (subtype === 'bin_add') {
-      const a = triRand(5, 30); const b = triRand(5, 30);
-      const sum = a + b;
-      const prompt = `Add in binary: ${a.toString(2)} + ${b.toString(2)}`;
-      res.json({ id, difficulty, type: 'bin_add', prompt, answer: sum.toString(2), display: sum.toString(2) });
-    } else {
-      const n = triRand(16, 255);
-      const hex = n.toString(16).toUpperCase();
-      const prompt = `Convert ${hex} (hexadecimal) to binary`;
-      res.json({ id, difficulty, type: 'hex_to_bin', prompt, answer: n.toString(2), display: n.toString(2) });
-    }
-  }
-});
-
-app.post('/bases-api/check', express.json(), (req, res) => {
-  const { type, answer } = req.body;
-  const userStr = (req.body.userAnswer || '').replace(/\s+/g, '').toUpperCase().replace(/^0+/, '') || '0';
-  let correct = false;
-
-  if (type === 'bin_to_dec') {
-    correct = parseInt(userStr) === answer;
-  } else {
-    const expected = String(answer).toUpperCase().replace(/^0+/, '') || '0';
-    correct = userStr === expected;
-  }
-
-  res.json({ correct, display: req.body.display, message: correct ? 'Correct!' : 'Incorrect' });
-});
 
 // ═══════════════════════════════════════════════════════════════════════════
 // CIRCLE THEOREMS API
@@ -6120,333 +5280,25 @@ app.post('/circle-api/check', express.json(), (req, res) => {
  * Reverse differentiation, definite integrals, area under curve
  * ═══════════════════════════════════════════════════════════════════════════ */
 
-app.get('/integ-api/question', (req, res) => {
-  const diff = req.query.difficulty || 'easy';
-  let prompt, answer, display;
-
-  if (diff === 'easy') {
-    // Integrate ax^n → (a/(n+1))x^(n+1) + C, ask for coefficient and power
-    const a = randInt(1, 8);
-    const n = randInt(1, 4);
-    const newCoeffNum = a;
-    const newCoeffDen = n + 1;
-    const g = gcd(Math.abs(newCoeffNum), newCoeffDen);
-    const cNum = newCoeffNum / g;
-    const cDen = newCoeffDen / g;
-    const newPow = n + 1;
-    answer = cDen === 1 ? cNum : cNum + '/' + cDen;
-    display = `${answer}x^${newPow} + C`;
-    prompt = `Integrate ${a === 1 ? '' : a}x${n === 1 ? '' : '^' + n} dx.\nGive the coefficient of x^${newPow} (as a fraction if needed).`;
-  } else if (diff === 'medium') {
-    // Integrate polynomial ax^2 + bx + c between 0 and k
-    const a = randInt(1, 4);
-    const b = randInt(-5, 5);
-    const c = randInt(0, 6);
-    const k = randInt(1, 4);
-    // ∫ = (a/3)k^3 + (b/2)k^2 + ck
-    // Multiply through by 6 to keep integer: 2a*k^3 + 3b*k^2 + 6c*k, then /6
-    const num = 2 * a * k * k * k + 3 * b * k * k + 6 * c * k;
-    const den = 6;
-    const g = gcd(Math.abs(num), den);
-    const rn = num / g;
-    const rd = den / g;
-    answer = rd === 1 ? rn : rn + '/' + rd;
-    display = String(answer);
-    const bStr = b >= 0 ? ` + ${b}x` : ` − ${Math.abs(b)}x`;
-    const cStr = c > 0 ? ` + ${c}` : '';
-    prompt = `Evaluate ∫₀^${k} (${a}x² ${bStr}${cStr}) dx.`;
-  } else if (diff === 'hard') {
-    // ∫ (ax+b)^n dx between limits — substitution style, but keep it clean
-    const a = randInt(1, 3);
-    const b = randInt(-3, 3);
-    const n = randInt(2, 4);
-    const lo = 0;
-    const hi = randInt(1, 3);
-    const evalAt = (x) => Math.pow(a * x + b, n + 1) / (a * (n + 1));
-    const val = evalAt(hi) - evalAt(lo);
-    if (Number.isInteger(val)) {
-      answer = val;
-    } else {
-      // express as fraction
-      const top = Math.pow(a * hi + b, n + 1) - Math.pow(a * lo + b, n + 1);
-      const bot = a * (n + 1);
-      const g2 = gcd(Math.abs(top), Math.abs(bot));
-      const rn2 = top / g2;
-      const rd2 = bot / g2;
-      answer = rd2 === 1 ? rn2 : (rd2 < 0 ? -rn2 + '/' + -rd2 : rn2 + '/' + rd2);
-    }
-    display = String(answer);
-    const bStr = b >= 0 ? `+${b}` : `${b}`;
-    prompt = `Evaluate ∫₀^${hi} (${a}x${bStr})^${n} dx.`;
-  } else {
-    // Area between curve and x-axis: y = x^2 - kx, roots at 0 and k
-    const k = randInt(2, 6);
-    // Area = |∫₀^k (x²-kx) dx| = |k³/3 - k³/2| = k³/6
-    const num = k * k * k;
-    const den = 6;
-    const g = gcd(num, den);
-    answer = (den / g) === 1 ? num / g : (num / g) + '/' + (den / g);
-    display = String(answer);
-    prompt = `Find the area enclosed between y = x² − ${k}x and the x-axis.`;
-  }
-
-  res.json({ prompt, answer, display, difficulty: diff });
-});
-
-app.post('/integ-api/check', express.json(), (req, res) => {
-  const ua = (req.body.userAnswer || '').trim().replace(/\s/g, '');
-  const ans = String(req.body.answer).replace(/\s/g, '');
-  let correct = ua === ans;
-  // Also check numeric equivalence for fractions
-  if (!correct) {
-    const evalFrac = (s) => { const p = String(s).split('/'); return p.length === 2 ? parseFloat(p[0]) / parseFloat(p[1]) : parseFloat(s); };
-    const u = evalFrac(ua);
-    const a2 = evalFrac(ans);
-    if (!isNaN(u) && !isNaN(a2) && Math.abs(u - a2) < 0.001) correct = true;
-  }
-  res.json({ correct, display: req.body.display, message: correct ? 'Correct!' : 'Incorrect' });
-});
-
 /* ═══════════════════════════════════════════════════════════════════════════
  * STANDARD FORM API  /stdform-api
  * Scientific notation: convert, multiply, divide, add
  * ═══════════════════════════════════════════════════════════════════════════ */
-
-app.get('/stdform-api/question', (req, res) => {
-  const diff = req.query.difficulty || 'easy';
-  let prompt, answer, display;
-
-  if (diff === 'easy') {
-    // Convert number to standard form
-    const sig = randInt(11, 99) / 10; // e.g. 3.4
-    const exp = randInt(2, 7) * (Math.random() < 0.5 ? 1 : -1);
-    const val = sig * Math.pow(10, exp);
-    prompt = `Write ${exp > 0 ? val.toLocaleString('en-US', {useGrouping: false}) : val.toFixed(Math.abs(exp) + 1)} in standard form.`;
-    answer = `${sig} × 10^${exp}`;
-    display = answer;
-  } else if (diff === 'medium') {
-    // Multiply two numbers in standard form
-    const a = randInt(11, 49) / 10;
-    const ea = randInt(2, 5);
-    const b = randInt(11, 49) / 10;
-    const eb = randInt(2, 5);
-    let product = a * b;
-    let expR = ea + eb;
-    // Normalize
-    if (product >= 10) { product /= 10; expR += 1; }
-    product = Math.round(product * 100) / 100;
-    answer = `${product} × 10^${expR}`;
-    display = answer;
-    prompt = `Calculate (${a} × 10^${ea}) × (${b} × 10^${eb}). Give answer in standard form.`;
-  } else if (diff === 'hard') {
-    // Divide two numbers in standard form
-    const a = randInt(20, 90) / 10;
-    const ea = randInt(5, 9);
-    const b = randInt(11, 49) / 10;
-    const eb = randInt(2, 4);
-    let quotient = a / b;
-    let expR = ea - eb;
-    if (quotient < 1) { quotient *= 10; expR -= 1; }
-    if (quotient >= 10) { quotient /= 10; expR += 1; }
-    quotient = Math.round(quotient * 100) / 100;
-    answer = `${quotient} × 10^${expR}`;
-    display = answer;
-    prompt = `Calculate (${a} × 10^${ea}) ÷ (${b} × 10^${eb}). Give answer in standard form.`;
-  } else {
-    // Add/subtract two numbers in standard form (same power)
-    const exp = randInt(3, 7);
-    const a = randInt(11, 50) / 10;
-    const b = randInt(11, 40) / 10;
-    const sum = a + b;
-    let resCoeff = sum;
-    let resExp = exp;
-    if (resCoeff >= 10) { resCoeff /= 10; resExp += 1; }
-    resCoeff = Math.round(resCoeff * 100) / 100;
-    answer = `${resCoeff} × 10^${resExp}`;
-    display = answer;
-    prompt = `Calculate (${a} × 10^${exp}) + (${b} × 10^${exp}). Give answer in standard form.`;
-  }
-
-  res.json({ prompt, answer, display, difficulty: diff });
-});
-
-app.post('/stdform-api/check', express.json(), (req, res) => {
-  const normalize = (s) => String(s).replace(/\s/g, '').replace(/×10\^/gi, 'e').replace(/x10\^/gi, 'e').replace(/\*10\^/gi, 'e');
-  const ua = normalize(req.body.userAnswer || '');
-  const ans = normalize(String(req.body.answer));
-  const correct = ua === ans;
-  res.json({ correct, display: req.body.display, message: correct ? 'Correct!' : 'Incorrect' });
-});
 
 /* ═══════════════════════════════════════════════════════════════════════════
  * BOUNDS API  /bounds-api
  * Upper/lower bounds, error intervals, significant figures
  * ═══════════════════════════════════════════════════════════════════════════ */
 
-app.get('/bounds-api/question', (req, res) => {
-  const diff = req.query.difficulty || 'easy';
-  let prompt, answer, display;
-
-  if (diff === 'easy') {
-    // Round to 1 dp → give lower bound
-    const val = randInt(10, 99);
-    const dp1 = randInt(1, 9);
-    const num = val + dp1 / 10; // e.g. 4.3
-    prompt = `${num} is rounded to 1 decimal place. What is the lower bound?`;
-    answer = num - 0.05;
-    display = String(answer);
-  } else if (diff === 'medium') {
-    // Nearest 10 → give upper bound
-    const base = randInt(3, 15) * 10; // e.g. 80
-    prompt = `A length is ${base} cm, rounded to the nearest 10 cm. What is the upper bound?`;
-    answer = base + 5;
-    display = String(answer);
-  } else if (diff === 'hard') {
-    // Bounds of a calculation: a+b where both rounded to 1dp
-    const a = randInt(20, 50) / 10; // e.g. 3.4
-    const b = randInt(20, 50) / 10;
-    prompt = `a = ${a} (1 d.p.) and b = ${b} (1 d.p.). Find the upper bound of a + b.`;
-    answer = Math.round((a + 0.05 + b + 0.05) * 100) / 100;
-    display = String(answer);
-  } else {
-    // Bounds of division: a/b, max = a_upper/b_lower
-    const a = randInt(30, 80) / 10;
-    const b = randInt(20, 40) / 10;
-    const upperA = a + 0.05;
-    const lowerB = b - 0.05;
-    const result = Math.round((upperA / lowerB) * 1000) / 1000;
-    prompt = `a = ${a} (1 d.p.) and b = ${b} (1 d.p.). Find the upper bound of a ÷ b. Give answer to 3 d.p.`;
-    answer = result;
-    display = String(answer);
-  }
-
-  res.json({ prompt, answer, display, difficulty: diff });
-});
-
-app.post('/bounds-api/check', express.json(), (req, res) => {
-  const ua = parseFloat((req.body.userAnswer || '').replace(/\s/g, ''));
-  const correct = !isNaN(ua) && Math.abs(ua - req.body.answer) < 0.005;
-  res.json({ correct, display: req.body.display, message: correct ? 'Correct!' : 'Incorrect' });
-});
-
 /* ═══════════════════════════════════════════════════════════════════════════
  * SPEED DISTANCE TIME API  /sdt-api
  * Rate problems, average speed, unit conversions
  * ═══════════════════════════════════════════════════════════════════════════ */
 
-app.get('/sdt-api/question', (req, res) => {
-  const diff = req.query.difficulty || 'easy';
-  let prompt, answer, display;
-
-  if (diff === 'easy') {
-    // Find distance = speed × time
-    const s = randInt(20, 80); // km/h
-    const t = randInt(2, 6); // hours
-    answer = s * t;
-    display = answer + ' km';
-    prompt = `A car travels at ${s} km/h for ${t} hours. How far does it travel (in km)?`;
-  } else if (diff === 'medium') {
-    // Find time = distance / speed
-    const s = randInt(30, 70);
-    const d = s * randInt(2, 5); // ensure clean answer
-    answer = d / s;
-    display = answer + ' hours';
-    prompt = `A train covers ${d} km at ${s} km/h. How long does the journey take (in hours)?`;
-  } else if (diff === 'hard') {
-    // Average speed for two-leg journey
-    const d1 = randInt(30, 80);
-    const s1 = randInt(20, 60);
-    const d2 = randInt(30, 80);
-    const s2 = randInt(20, 60);
-    const totalD = d1 + d2;
-    // time = d1/s1 + d2/s2 = (d1*s2 + d2*s1) / (s1*s2)
-    const timeNum = d1 * s2 + d2 * s1;
-    const timeDen = s1 * s2;
-    // avg speed = totalD / time = totalD * timeDen / timeNum
-    const ansNum = totalD * timeDen;
-    const ansDen = timeNum;
-    const g = gcd(Math.abs(ansNum), Math.abs(ansDen));
-    const rn = ansNum / g;
-    const rd = ansDen / g;
-    answer = rd === 1 ? rn : Math.round((rn / rd) * 100) / 100;
-    display = answer + ' km/h';
-    prompt = `A cyclist rides ${d1} km at ${s1} km/h then ${d2} km at ${s2} km/h. Find the average speed (to 2 d.p. if needed).`;
-  } else {
-    // Convert units: m/s to km/h or vice versa
-    const ms = randInt(5, 30); // m/s
-    answer = Math.round(ms * 3.6 * 100) / 100;
-    display = answer + ' km/h';
-    prompt = `Convert ${ms} m/s to km/h.`;
-  }
-
-  res.json({ prompt, answer, display, difficulty: diff });
-});
-
-app.post('/sdt-api/check', express.json(), (req, res) => {
-  const ua = parseFloat((req.body.userAnswer || '').replace(/[^\d.\-\/]/g, ''));
-  const correct = !isNaN(ua) && Math.abs(ua - req.body.answer) < 0.05;
-  res.json({ correct, display: req.body.display, message: correct ? 'Correct!' : 'Incorrect' });
-});
-
 /* ═══════════════════════════════════════════════════════════════════════════
  * VARIATION API  /variation-api
  * Direct, inverse, joint variation — find k, find unknowns
  * ═══════════════════════════════════════════════════════════════════════════ */
-
-app.get('/variation-api/question', (req, res) => {
-  const diff = req.query.difficulty || 'easy';
-  let prompt, answer, display;
-
-  if (diff === 'easy') {
-    // y = kx, given y and x find k, then find y for new x
-    const k = randInt(2, 9);
-    const x1 = randInt(2, 6);
-    const y1 = k * x1;
-    const x2 = randInt(3, 8);
-    answer = k * x2;
-    display = String(answer);
-    prompt = `y is directly proportional to x. When x = ${x1}, y = ${y1}. Find y when x = ${x2}.`;
-  } else if (diff === 'medium') {
-    // y = k/x (inverse), given y and x find y for new x
-    const k = randInt(12, 60);
-    const x1 = randInt(2, 6);
-    // ensure k divisible by x1 and x2
-    const x2 = randInt(2, 6);
-    const kUse = x1 * x2 * randInt(1, 4);
-    const y1 = kUse / x1;
-    answer = kUse / x2;
-    display = String(answer);
-    prompt = `y is inversely proportional to x. When x = ${x1}, y = ${y1}. Find y when x = ${x2}.`;
-  } else if (diff === 'hard') {
-    // y = kx², given y and x find y for new x
-    const k = randInt(1, 5);
-    const x1 = randInt(2, 5);
-    const y1 = k * x1 * x1;
-    const x2 = randInt(2, 6);
-    answer = k * x2 * x2;
-    display = String(answer);
-    prompt = `y is directly proportional to x². When x = ${x1}, y = ${y1}. Find y when x = ${x2}.`;
-  } else {
-    // y = k/√x (inverse square root)
-    const x1 = [4, 9, 16, 25][randInt(0, 3)];
-    const sqrtX1 = Math.round(Math.sqrt(x1));
-    const k = sqrtX1 * randInt(2, 6);
-    const y1 = k / sqrtX1;
-    const x2 = [4, 9, 16, 25][randInt(0, 3)];
-    const sqrtX2 = Math.round(Math.sqrt(x2));
-    answer = k / sqrtX2;
-    display = String(answer);
-    prompt = `y is inversely proportional to √x. When x = ${x1}, y = ${y1}. Find y when x = ${x2}.`;
-  }
-
-  res.json({ prompt, answer, display, difficulty: diff });
-});
-
-app.post('/variation-api/check', express.json(), (req, res) => {
-  const ua = parseFloat((req.body.userAnswer || '').replace(/\s/g, ''));
-  const correct = !isNaN(ua) && Math.abs(ua - req.body.answer) < 0.05;
-  res.json({ correct, display: req.body.display, message: correct ? 'Correct!' : 'Incorrect' });
-});
 
 /* ═══════════════════════════════════════════════════════════════════════════
  * HCF & LCM API  /hcflcm-api
@@ -6455,226 +5307,10 @@ app.post('/variation-api/check', express.json(), (req, res) => {
 
 function lcm(a, b) { return Math.abs(a * b) / gcd(a, b); }
 
-app.get('/hcflcm-api/question', (req, res) => {
-  const diff = req.query.difficulty || 'easy';
-  let prompt, answer, display;
-
-  const type = randInt(1, 4);
-
-  if (diff === 'easy') {
-    if (type === 1) {
-      // HCF of two numbers
-      const g = randInt(2, 8);
-      const a = g * randInt(2, 5);
-      const b = g * randInt(2, 5);
-      answer = gcd(a, b);
-      display = String(answer);
-      prompt = `Find the HCF (Highest Common Factor) of ${a} and ${b}.`;
-    } else if (type === 2) {
-      // HCF of two coprime numbers
-      const a = [9, 14, 15, 21, 25, 27][randInt(0, 5)];
-      const b = [8, 11, 16, 22, 26, 29][randInt(0, 5)];
-      answer = gcd(a, b);
-      display = String(answer);
-      prompt = `What is the Highest Common Factor (HCF) of ${a} and ${b}?`;
-    } else if (type === 3) {
-      // Simple word problem
-      const factors = [
-        { a: 12, b: 18, g: 6, fruit1: 'apples', fruit2: 'oranges' },
-        { a: 16, b: 24, g: 8, fruit1: 'stickers', fruit2: 'stamps' },
-        { a: 15, b: 20, g: 5, fruit1: 'pens', fruit2: 'pencils' },
-        { a: 8, b: 12, g: 4, fruit1: 'blue beads', fruit2: 'red beads' }
-      ][randInt(0, 3)];
-      answer = factors.g;
-      display = String(answer);
-      prompt = `A teacher has ${factors.a} ${factors.fruit1} and ${factors.b} ${factors.fruit2}. She wants to divide them equally among her students without leftovers. What is the maximum number of students who can get an equal share?`;
-    } else {
-      // HCF of a and b where a divides b
-      const a = randInt(3, 9);
-      const b = a * randInt(2, 4);
-      answer = a;
-      display = String(answer);
-      prompt = `Find the HCF of ${a} and ${b}.`;
-    }
-  } else if (diff === 'medium') {
-    if (type === 1) {
-      // LCM of two numbers
-      const a = randInt(4, 12);
-      const b = randInt(4, 12);
-      answer = lcm(a, b);
-      display = String(answer);
-      prompt = `Find the LCM (Lowest Common Multiple) of ${a} and ${b}.`;
-    } else if (type === 2) {
-      // LCM of prime numbers
-      const primes = [3, 5, 7, 11];
-      const a = primes[randInt(0, 3)];
-      let b = primes[randInt(0, 3)];
-      while (a === b) { b = primes[randInt(0, 3)]; }
-      answer = lcm(a, b);
-      display = String(answer);
-      prompt = `What is the Lowest Common Multiple (LCM) of ${a} and ${b}?`;
-    } else if (type === 3) {
-      // Simple LCM word problem
-      const p = [
-        { a: 6, b: 8, l: 24, thing: 'neon signs blink', unit: 'seconds' },
-        { a: 10, b: 15, l: 30, thing: 'bus schedules align', unit: 'minutes' },
-        { a: 4, b: 6, l: 12, thing: 'alarms beep', unit: 'minutes' }
-      ][randInt(0, 2)];
-      answer = p.l;
-      display = String(answer);
-      prompt = `Two ${p.thing} at intervals of ${p.a} and ${p.b} ${p.unit}. If they align now, after how many ${p.unit} will they next align?`;
-    } else {
-      // LCM of a and b where a divides b
-      const a = randInt(3, 8);
-      const b = a * randInt(2, 4);
-      answer = b;
-      display = String(answer);
-      prompt = `Find the LCM of ${a} and ${b}.`;
-    }
-  } else if (diff === 'hard') {
-    if (type === 1) {
-      // LCM of three numbers
-      const a = randInt(3, 8);
-      const b = randInt(3, 8);
-      const c = randInt(3, 8);
-      answer = lcm(lcm(a, b), c);
-      display = String(answer);
-      prompt = `Find the LCM of ${a}, ${b}, and ${c}.`;
-    } else if (type === 2) {
-      // HCF of three numbers
-      const g = randInt(2, 6);
-      const a = g * randInt(2, 4);
-      const b = g * randInt(2, 4);
-      const c = g * randInt(2, 4);
-      answer = gcd(gcd(a, b), c);
-      display = String(answer);
-      prompt = `Find the Highest Common Factor (HCF) of ${a}, ${b}, and ${c}.`;
-    } else if (type === 3) {
-      // Product formula problem
-      const base = [
-        { h: 4, l: 24, a: 8, b: 12 },
-        { h: 6, l: 36, a: 12, b: 18 },
-        { h: 5, l: 30, a: 10, b: 15 },
-        { h: 3, l: 18, a: 6, b: 9 }
-      ][randInt(0, 3)];
-      answer = base.b;
-      display = String(answer);
-      prompt = `The HCF of two numbers is ${base.h} and their LCM is ${base.l}. If one of the numbers is ${base.a}, what is the other number?`;
-    } else {
-      // Word problem with three runners
-      const a = [3, 4, 6][randInt(0, 2)];
-      const b = [4, 5, 8][randInt(0, 2)];
-      const c = [6, 8, 12][randInt(0, 2)];
-      answer = lcm(lcm(a, b), c);
-      display = String(answer);
-      prompt = `Three runners start running a lap together. Runner A completes a lap in ${a} minutes, Runner B in ${b} minutes, and Runner C in ${c} minutes. After how many minutes will they next meet at the starting point?`;
-    }
-  } else {
-    // extrahard
-    if (type === 1) {
-      // HCF with remainder: largest number dividing a and b with remainder r
-      const r = randInt(2, 5);
-      const g = randInt(4, 10);
-      const f1 = randInt(2, 4);
-      const f2 = randInt(2, 4);
-      const a = g * f1 + r;
-      const b = g * f2 + r;
-      // answer is g
-      answer = gcd(a - r, b - r);
-      display = String(answer);
-      prompt = `Find the largest number that divides ${a} and ${b} leaving a remainder of ${r} in each case.`;
-    } else if (type === 2) {
-      // LCM with remainder: smallest number divided by a and b leaving remainder r
-      const r = randInt(2, 5);
-      const a = randInt(5, 10);
-      const b = randInt(5, 10);
-      answer = lcm(a, b) + r;
-      display = String(answer);
-      prompt = `What is the smallest positive integer which when divided by ${a} and ${b} leaves a remainder of ${r} in each case?`;
-    } else if (type === 3) {
-      // Merchant ribbon piece division
-      const lengths = [
-        { a: 48, b: 72, c: 96, g: 24 },
-        { a: 30, b: 45, c: 75, g: 15 },
-        { a: 36, b: 54, c: 90, g: 18 },
-        { a: 40, b: 60, c: 80, g: 20 }
-      ][randInt(0, 3)];
-      answer = lengths.g;
-      display = String(answer);
-      prompt = `A merchant has three pieces of ribbon of lengths ${lengths.a} cm, ${lengths.b} cm, and ${lengths.c} cm. He wants to cut them into equal pieces of the maximum possible length. What should be the length of each piece (in cm)?`;
-    } else {
-      // Neon lights word problem
-      const a = randInt(6, 12);
-      const b = randInt(8, 15);
-      answer = lcm(a, b);
-      display = String(answer);
-      prompt = `Two neon signs blink at different rates. Sign A blinks every ${a} seconds, and Sign B blinks every ${b} seconds. If they both blink together now, after how many seconds will they next blink together?`;
-    }
-  }
-
-  res.json({ prompt, answer, display, difficulty: diff });
-});
-
-app.post('/hcflcm-api/check', express.json(), (req, res) => {
-  const ua = parseFloat((req.body.userAnswer || '').replace(/[^\d.\-]/g, ''));
-  const correct = !isNaN(ua) && ua === req.body.answer;
-  res.json({ correct, display: req.body.display, message: correct ? 'Correct!' : 'Incorrect' });
-});
-
 /* ═══════════════════════════════════════════════════════════════════════════
  * PROFIT & LOSS API  /profitloss-api
  * Cost price, selling price, profit %, discount, markup
  * ═══════════════════════════════════════════════════════════════════════════ */
-
-app.get('/profitloss-api/question', (req, res) => {
-  const diff = req.query.difficulty || 'easy';
-  let prompt, answer, display;
-
-  if (diff === 'easy') {
-    // Find profit given CP and SP
-    const cp = randInt(20, 200) * 5;
-    const profit = randInt(10, 50) * 5;
-    const sp = cp + profit;
-    answer = profit;
-    display = '$' + answer;
-    prompt = `An item is bought for $${cp} and sold for $${sp}. Find the profit.`;
-  } else if (diff === 'medium') {
-    // Find profit %
-    const cp = randInt(10, 100) * 10;
-    const profitPct = randInt(5, 40);
-    const profit = cp * profitPct / 100;
-    const sp = cp + profit;
-    answer = profitPct;
-    display = answer + '%';
-    prompt = `Cost price = $${cp}, selling price = $${sp}. Find the profit percentage.`;
-  } else if (diff === 'hard') {
-    // Discount: marked price, discount %, find SP
-    const mp = randInt(20, 100) * 10;
-    const discPct = [10, 15, 20, 25, 30][randInt(0, 4)];
-    const sp = mp * (100 - discPct) / 100;
-    answer = sp;
-    display = '$' + answer;
-    prompt = `A shirt has a marked price of $${mp}. A ${discPct}% discount is applied. Find the selling price.`;
-  } else {
-    // Two successive discounts
-    const mp = randInt(20, 100) * 10;
-    const d1 = [10, 20, 25][randInt(0, 2)];
-    const d2 = [10, 15, 20][randInt(0, 2)];
-    const after1 = mp * (100 - d1) / 100;
-    const after2 = after1 * (100 - d2) / 100;
-    answer = after2;
-    display = '$' + answer;
-    prompt = `Marked price is $${mp}. Successive discounts of ${d1}% and ${d2}% are applied. Find the final price.`;
-  }
-
-  res.json({ prompt, answer, display, difficulty: diff });
-});
-
-app.post('/profitloss-api/check', express.json(), (req, res) => {
-  const ua = parseFloat((req.body.userAnswer || '').replace(/[$,\s%]/g, ''));
-  const correct = !isNaN(ua) && Math.abs(ua - req.body.answer) < 0.05;
-  res.json({ correct, display: req.body.display, message: correct ? 'Correct!' : 'Incorrect' });
-});
 
 /* ═══════════════════════════════════════════════════════════════════════════
  * ROUNDING API  /rounding-api
@@ -6697,53 +5333,6 @@ function nCr(n, r) {
   return Math.round(result);
 }
 
-app.get('/binomial-api/question', (req, res) => {
-  const diff = req.query.difficulty || 'easy';
-  let prompt, answer, display;
-
-  if (diff === 'easy') {
-    // Find nCr
-    const n = randInt(4, 10);
-    const r = randInt(1, Math.min(n - 1, 5));
-    answer = nCr(n, r);
-    display = String(answer);
-    prompt = `Evaluate ${n}C${r} (${n} choose ${r}).`;
-  } else if (diff === 'medium') {
-    // Find coefficient of x^r in (1+x)^n
-    const n = randInt(4, 10);
-    const r = randInt(2, Math.min(n - 1, 5));
-    answer = nCr(n, r);
-    display = String(answer);
-    prompt = `Find the coefficient of x^${r} in the expansion of (1 + x)^${n}.`;
-  } else if (diff === 'hard') {
-    // Find coefficient of x^r in (a+bx)^n
-    const a = randInt(1, 3);
-    const b = randInt(1, 3);
-    const n = randInt(3, 6);
-    const r = randInt(1, Math.min(n, 4));
-    // Term: nCr * a^(n-r) * (bx)^r = nCr * a^(n-r) * b^r * x^r
-    answer = nCr(n, r) * Math.pow(a, n - r) * Math.pow(b, r);
-    display = String(answer);
-    prompt = `Find the coefficient of x^${r} in (${a} + ${b}x)^${n}.`;
-  } else {
-    // Find a specific term in (1+x)^n expansion, e.g. the 4th term
-    const n = randInt(5, 10);
-    const termNum = randInt(2, Math.min(n, 5)); // the termNum-th term (1-indexed)
-    const r = termNum - 1;
-    answer = nCr(n, r);
-    display = `${answer}x^${r}`;
-    prompt = `Find the ${termNum}${termNum === 2 ? 'nd' : termNum === 3 ? 'rd' : 'th'} term in the expansion of (1 + x)^${n}. Give the coefficient only.`;
-  }
-
-  res.json({ prompt, answer, display, difficulty: diff });
-});
-
-app.post('/binomial-api/check', express.json(), (req, res) => {
-  const ua = parseFloat((req.body.userAnswer || '').replace(/[^\d.\-]/g, ''));
-  const correct = !isNaN(ua) && ua === req.body.answer;
-  res.json({ correct, display: req.body.display, message: correct ? 'Correct!' : 'Incorrect' });
-});
-
 /* ═══════════════════════════════════════════════════════════════════════════
  * COMPLEX NUMBERS API  /complex-api
  * Add, multiply, modulus, conjugate
@@ -6756,259 +5345,20 @@ function fmtComplex(re, im) {
   return re + (im > 0 && im !== 1 ? '+' : '') + (im === 1 ? '+i' : im === -1 ? '-i' : (im > 0 ? '' : '') + im + 'i');
 }
 
-app.get('/complex-api/question', (req, res) => {
-  const diff = req.query.difficulty || 'easy';
-  let prompt, answer, display;
-
-  if (diff === 'easy') {
-    // Add two complex numbers
-    const a = randInt(-5, 5), b = randInt(-5, 5);
-    const c = randInt(-5, 5), d = randInt(-5, 5);
-    const re = a + c, im = b + d;
-    answer = re + ',' + im;
-    display = fmtComplex(re, im);
-    const z1 = fmtComplex(a, b), z2 = fmtComplex(c, d);
-    prompt = `If z₁ = ${z1} and z₂ = ${z2}, find z₁ + z₂.\nGive answer as a,b for a + bi.`;
-  } else if (diff === 'medium') {
-    // Multiply two complex numbers
-    const a = randInt(-4, 4), b = randInt(-4, 4);
-    const c = randInt(-4, 4), d = randInt(-4, 4);
-    const re = a * c - b * d;
-    const im = a * d + b * c;
-    answer = re + ',' + im;
-    display = fmtComplex(re, im);
-    const z1 = fmtComplex(a, b), z2 = fmtComplex(c, d);
-    prompt = `If z₁ = ${z1} and z₂ = ${z2}, find z₁ × z₂.\nGive answer as a,b for a + bi.`;
-  } else if (diff === 'hard') {
-    // Find modulus |z| using Pythagorean triples for clean answers
-    const triples = [[3, 4, 5], [5, 12, 13], [8, 15, 17], [6, 8, 10]];
-    const [a, b, c] = triples[randInt(0, triples.length - 1)];
-    const signA = Math.random() < 0.5 ? -1 : 1;
-    const signB = Math.random() < 0.5 ? -1 : 1;
-    answer = c;
-    display = String(c);
-    prompt = `Find |z| where z = ${fmtComplex(signA * a, signB * b)}.`;
-  } else {
-    // Find z² given z = a + bi
-    const a = randInt(-4, 4), b = randInt(1, 5) * (Math.random() < 0.5 ? -1 : 1);
-    const re = a * a - b * b;
-    const im = 2 * a * b;
-    answer = re + ',' + im;
-    display = fmtComplex(re, im);
-    prompt = `If z = ${fmtComplex(a, b)}, find z².\nGive answer as a,b for a + bi.`;
-  }
-
-  res.json({ prompt, answer, display, difficulty: diff });
-});
-
-app.post('/complex-api/check', express.json(), (req, res) => {
-  const ua = (req.body.userAnswer || '').replace(/\s/g, '').replace(/i/g, '');
-  const ans = String(req.body.answer).replace(/\s/g, '');
-  // For modulus: direct numeric check
-  if (!ans.includes(',')) {
-    const correct = parseFloat(ua) === parseFloat(ans);
-    return res.json({ correct, display: req.body.display, message: correct ? 'Correct!' : 'Incorrect' });
-  }
-  // For complex: compare a,b pairs
-  const userParts = ua.split(',').map(Number);
-  const ansParts = ans.split(',').map(Number);
-  const correct = userParts.length === 2 && userParts[0] === ansParts[0] && userParts[1] === ansParts[1];
-  res.json({ correct, display: req.body.display, message: correct ? 'Correct!' : 'Incorrect' });
-});
-
 /* ═══════════════════════════════════════════════════════════════════════════
  * ANGLES API  /angles-api
  * Angles on a line, at a point, vertically opposite, parallel lines
  * ═══════════════════════════════════════════════════════════════════════════ */
-
-app.get('/angles-api/question', (req, res) => {
-  const diff = req.query.difficulty || 'easy';
-  let prompt, answer, display;
-
-  if (diff === 'easy') {
-    // Angles on a straight line: a + b = 180
-    const a = randInt(25, 155);
-    answer = 180 - a;
-    display = answer + '°';
-    prompt = `Two angles on a straight line are ${a}° and x°. Find x.`;
-  } else if (diff === 'medium') {
-    // Angles at a point: a + b + c + x = 360
-    const a = randInt(40, 120);
-    const b = randInt(40, 120);
-    const c = randInt(40, 120);
-    answer = 360 - a - b - c;
-    if (answer < 10) { answer += 60; } // ensure positive and reasonable
-    const cAdj = 360 - a - b - answer;
-    display = answer + '°';
-    prompt = `Four angles meet at a point: ${a}°, ${b}°, ${cAdj}°, and x°. Find x.`;
-  } else if (diff === 'hard') {
-    // Vertically opposite + angles on a line
-    const a = randInt(30, 150);
-    const vertOpp = a; // vertically opposite
-    const adj = 180 - a; // adjacent on line
-    const pick = randInt(0, 1);
-    if (pick === 0) {
-      prompt = `Two straight lines cross. One angle is ${a}°. Find the vertically opposite angle.`;
-      answer = vertOpp;
-    } else {
-      prompt = `Two straight lines cross. One angle is ${a}°. Find the adjacent angle.`;
-      answer = adj;
-    }
-    display = answer + '°';
-  } else {
-    // Parallel lines: alternate / corresponding / co-interior
-    const angle = randInt(30, 150);
-    const type = randInt(0, 2);
-    if (type === 0) {
-      prompt = `Two parallel lines are cut by a transversal. One alternate angle is ${angle}°. Find the other alternate angle.`;
-      answer = angle;
-    } else if (type === 1) {
-      prompt = `Two parallel lines are cut by a transversal. One corresponding angle is ${angle}°. Find the other corresponding angle.`;
-      answer = angle;
-    } else {
-      prompt = `Two parallel lines are cut by a transversal. One co-interior angle is ${angle}°. Find the other co-interior angle.`;
-      answer = 180 - angle;
-    }
-    display = answer + '°';
-  }
-
-  res.json({ prompt, answer, display, difficulty: diff });
-});
-
-app.post('/angles-api/check', express.json(), (req, res) => {
-  const ua = parseFloat((req.body.userAnswer || '').replace(/[°\s]/g, ''));
-  const correct = !isNaN(ua) && Math.abs(ua - req.body.answer) < 0.5;
-  res.json({ correct, display: req.body.display, message: correct ? 'Correct!' : 'Incorrect' });
-});
 
 /* ═══════════════════════════════════════════════════════════════════════════
  * TRIANGLES API  /triangles-api
  * Angle sum, exterior angle theorem, isosceles/equilateral properties
  * ═══════════════════════════════════════════════════════════════════════════ */
 
-app.get('/triangles-api/question', (req, res) => {
-  const diff = req.query.difficulty || 'easy';
-  let prompt, answer, display;
-
-  if (diff === 'easy') {
-    // Angle sum: a + b + x = 180
-    const a = randInt(20, 80);
-    const b = randInt(20, 140 - a);
-    answer = 180 - a - b;
-    display = answer + '°';
-    prompt = `A triangle has angles ${a}° and ${b}°. Find the third angle.`;
-  } else if (diff === 'medium') {
-    // Isosceles triangle: two equal angles
-    const base = randInt(20, 130);
-    const equal = (180 - base) / 2;
-    if (equal === Math.floor(equal)) {
-      answer = equal;
-      display = answer + '°';
-      prompt = `An isosceles triangle has a base angle of ${base}°. The two base angles are equal. Find each of the other two angles.`;
-      // Actually: give one non-base angle and ask for base
-    }
-    // Simpler: give apex, find base angles
-    const apex = randInt(20, 140);
-    if ((180 - apex) % 2 !== 0) {
-      answer = (180 - (apex + 1)) / 2;
-      const apexUse = apex + 1;
-      display = answer + '°';
-      prompt = `An isosceles triangle has an apex angle of ${apexUse}°. Find each base angle.`;
-    } else {
-      answer = (180 - apex) / 2;
-      display = answer + '°';
-      prompt = `An isosceles triangle has an apex angle of ${apex}°. Find each base angle.`;
-    }
-  } else if (diff === 'hard') {
-    // Exterior angle theorem: exterior = sum of two remote interior
-    const a = randInt(25, 75);
-    const b = randInt(25, 75);
-    answer = a + b;
-    display = answer + '°';
-    prompt = `Two interior angles of a triangle are ${a}° and ${b}°. Find the exterior angle at the third vertex.`;
-  } else {
-    // Multi-step: equilateral inside a shape, or angle in isosceles with algebra
-    // Equilateral triangle: all angles 60°; attached to another triangle
-    const extraAngle = randInt(20, 70);
-    // Triangle ABD where ABD shares side with equilateral ABC
-    // Angle ABD = extraAngle, angle ABC = 60° (equilateral), so angle DBC = 60 + extraAngle or |60 - extraAngle|
-    answer = 180 - 60 - extraAngle;
-    display = answer + '°';
-    prompt = `In triangle ABD, angle A = 60° (equilateral triangle ABC shares side AB). If angle ABD = ${60 + extraAngle}°, find angle ADB.`;
-  }
-
-  res.json({ prompt, answer, display, difficulty: diff });
-});
-
-app.post('/triangles-api/check', express.json(), (req, res) => {
-  const ua = parseFloat((req.body.userAnswer || '').replace(/[°\s]/g, ''));
-  const correct = !isNaN(ua) && Math.abs(ua - req.body.answer) < 0.5;
-  res.json({ correct, display: req.body.display, message: correct ? 'Correct!' : 'Incorrect' });
-});
-
 /* ═══════════════════════════════════════════════════════════════════════════
  * CONGRUENCE API  /congruence-api
  * Congruent triangles: identify condition, find missing side/angle
  * ═══════════════════════════════════════════════════════════════════════════ */
-
-app.get('/congruence-api/question', (req, res) => {
-  const diff = req.query.difficulty || 'easy';
-  let prompt, answer, display;
-
-  if (diff === 'easy') {
-    // Given two congruent triangles, find a missing side
-    const sides = [randInt(3, 12), randInt(3, 12), randInt(3, 12)];
-    const idx = randInt(0, 2);
-    answer = sides[idx];
-    display = String(answer) + ' cm';
-    const labels1 = ['AB', 'BC', 'CA'];
-    const labels2 = ['PQ', 'QR', 'RP'];
-    const known = sides.map((s, i) => i === idx ? '?' : s);
-    prompt = `△ABC ≅ △PQR. ${labels1.filter((_, i) => i !== idx).map((l, i) => `${l} = ${sides.filter((_, j) => j !== idx)[i]} cm`).join(', ')}, and ${labels2[idx]} = ${sides[idx]} cm. Find ${labels1[idx]}.`;
-  } else if (diff === 'medium') {
-    // Given congruent triangles, find a missing angle
-    const a1 = randInt(30, 80);
-    const a2 = randInt(30, 130 - a1);
-    const a3 = 180 - a1 - a2;
-    const angles = [a1, a2, a3];
-    const idx = randInt(0, 2);
-    answer = angles[idx];
-    display = answer + '°';
-    const labels1 = ['A', 'B', 'C'];
-    const labels2 = ['P', 'Q', 'R'];
-    prompt = `△ABC ≅ △PQR. Angle ${labels2[idx]} = ${angles[idx]}°. Find angle ${labels1[idx]}.`;
-  } else if (diff === 'hard') {
-    // Identify congruence condition: give info, ask which rule
-    const rules = [
-      { info: 'Three sides of one triangle equal three sides of another', answer: 'SSS' },
-      { info: 'Two sides and the included angle of one triangle equal those of another', answer: 'SAS' },
-      { info: 'Two angles and the included side of one triangle equal those of another', answer: 'ASA' },
-      { info: 'A right angle, the hypotenuse, and one other side are equal in both triangles', answer: 'RHS' },
-    ];
-    const pick = rules[randInt(0, rules.length - 1)];
-    answer = pick.answer;
-    display = answer;
-    prompt = `${pick.info}. Which congruence condition is this? (SSS, SAS, ASA, or RHS)`;
-  } else {
-    // Use congruence to find a side in a real figure
-    // Two triangles sharing a side, with given congruence
-    const shared = randInt(4, 10);
-    const sideA = randInt(3, 9);
-    const sideB = randInt(3, 9);
-    answer = sideA;
-    display = answer + ' cm';
-    prompt = `In the figure, △ABD ≅ △CBD (by SAS). AB = ${sideA} cm and BD = ${shared} cm. Find CB.`;
-  }
-
-  res.json({ prompt, answer, display, difficulty: diff });
-});
-
-app.post('/congruence-api/check', express.json(), (req, res) => {
-  const ua = (req.body.userAnswer || '').trim().replace(/[°\s]/g, '').toUpperCase();
-  const ans = String(req.body.answer).replace(/[°\s]/g, '').toUpperCase();
-  const correct = ua === ans || parseFloat(ua) === parseFloat(ans);
-  res.json({ correct, display: req.body.display, message: correct ? 'Correct!' : 'Incorrect' });
-});
 
 /* ═══════════════════════════════════════════════════════════════════════════
  * PYTHAGORAS API  /pythag-api
@@ -7121,107 +5471,10 @@ app.post('/pythag-api/check', express.json(), (req, res) => {
 
 const POLYGON_NAMES = { 3: 'triangle', 4: 'quadrilateral', 5: 'pentagon', 6: 'hexagon', 7: 'heptagon', 8: 'octagon', 9: 'nonagon', 10: 'decagon', 12: 'dodecagon' };
 
-app.get('/polygons-api/question', (req, res) => {
-  const diff = req.query.difficulty || 'easy';
-  let prompt, answer, display;
-
-  if (diff === 'easy') {
-    // Interior angle sum = (n-2)×180
-    const n = [4, 5, 6, 7, 8, 10][randInt(0, 5)];
-    answer = (n - 2) * 180;
-    display = answer + '°';
-    prompt = `Find the sum of interior angles of a ${POLYGON_NAMES[n] || n + '-sided polygon'}.`;
-  } else if (diff === 'medium') {
-    // Each interior angle of a regular polygon
-    const n = [3, 4, 5, 6, 8, 9, 10, 12][randInt(0, 7)];
-    answer = (n - 2) * 180 / n;
-    display = answer + '°';
-    prompt = `Find each interior angle of a regular ${POLYGON_NAMES[n] || n + '-sided polygon'}.`;
-  } else if (diff === 'hard') {
-    // Given each exterior angle, find number of sides
-    const n = [5, 6, 8, 9, 10, 12, 15, 18, 20, 24, 36][randInt(0, 10)];
-    const ext = 360 / n;
-    answer = n;
-    display = String(n) + ' sides';
-    prompt = `A regular polygon has each exterior angle equal to ${ext}°. How many sides does it have?`;
-  } else {
-    // Number of diagonals = n(n-3)/2
-    const n = [5, 6, 7, 8, 9, 10, 12][randInt(0, 6)];
-    answer = n * (n - 3) / 2;
-    display = String(answer);
-    prompt = `How many diagonals does a ${POLYGON_NAMES[n] || n + '-sided polygon'} have?`;
-  }
-
-  res.json({ prompt, answer, display, difficulty: diff });
-});
-
-app.post('/polygons-api/check', express.json(), (req, res) => {
-  const ua = parseFloat((req.body.userAnswer || '').replace(/[°\s]/g, ''));
-  const correct = !isNaN(ua) && Math.abs(ua - req.body.answer) < 0.5;
-  res.json({ correct, display: req.body.display, message: correct ? 'Correct!' : 'Incorrect' });
-});
-
 /* ═══════════════════════════════════════════════════════════════════════════
  * SIMILARITY API  /similarity-api
  * Similar triangles: scale factor, missing side, area/volume ratios
  * ═══════════════════════════════════════════════════════════════════════════ */
-
-app.get('/similarity-api/question', (req, res) => {
-  const diff = req.query.difficulty || 'easy';
-  let prompt, answer, display;
-
-  if (diff === 'easy') {
-    // Find missing side using scale factor
-    const k = randInt(2, 5);
-    const a = randInt(3, 10);
-    const b = randInt(3, 10);
-    answer = a * k;
-    display = answer + ' cm';
-    prompt = `△ABC is similar to △PQR. AB = ${a} cm, BC = ${b} cm, PQ = ${a * k} cm. Find QR.`;
-    // QR = b * k
-    answer = b * k;
-    display = answer + ' cm';
-  } else if (diff === 'medium') {
-    // Find scale factor and then a side (non-integer scale factor using fractions)
-    const small = randInt(4, 10);
-    const big = small * randInt(2, 4);
-    const otherSmall = randInt(3, 8);
-    // scale factor = big/small
-    const ansNum = otherSmall * big;
-    const ansDen = small;
-    const g = gcd(Math.abs(ansNum), ansDen);
-    const rn = ansNum / g;
-    const rd = ansDen / g;
-    answer = rd === 1 ? rn : rn / rd;
-    answer = Math.round(answer * 100) / 100;
-    display = answer + ' cm';
-    prompt = `Two similar triangles have corresponding sides ${small} cm and ${big} cm. If another side of the smaller triangle is ${otherSmall} cm, find the corresponding side of the larger triangle.`;
-  } else if (diff === 'hard') {
-    // Area ratio = k²
-    const k = randInt(2, 5);
-    const areaSmall = randInt(5, 30);
-    const areaLarge = areaSmall * k * k;
-    answer = areaLarge;
-    display = answer + ' cm²';
-    prompt = `Two similar figures have a length ratio of 1:${k}. The smaller figure has area ${areaSmall} cm². Find the area of the larger figure.`;
-  } else {
-    // Volume ratio = k³
-    const k = randInt(2, 4);
-    const volSmall = randInt(5, 25);
-    const volLarge = volSmall * k * k * k;
-    answer = volLarge;
-    display = answer + ' cm³';
-    prompt = `Two similar solids have a length ratio of 1:${k}. The smaller solid has volume ${volSmall} cm³. Find the volume of the larger solid.`;
-  }
-
-  res.json({ prompt, answer, display, difficulty: diff });
-});
-
-app.post('/similarity-api/check', express.json(), (req, res) => {
-  const ua = parseFloat((req.body.userAnswer || '').replace(/[^\d.\-]/g, ''));
-  const correct = !isNaN(ua) && Math.abs(ua - req.body.answer) < 0.5;
-  res.json({ correct, display: req.body.display, message: correct ? 'Correct!' : 'Incorrect' });
-});
 
 // ═══════════════════════════════════════════════════════════════════════════
 // SQUARING API  /squaring-api
@@ -7640,43 +5893,6 @@ function buildPermCombQuestion(op, level, n, r, id, isMixed) {
   };
 }
 
-app.get('/permcomb-api/question', (req, res) => {
-  let section = (req.query.section || '').toUpperCase();
-  if (section !== 'P' && section !== 'C' && section !== 'MIXED') {
-    // Legacy fallback: difficulty=easy → P/L2; medium → C/L2; hard → word; extrahard → mixed
-    const legacy = req.query.difficulty;
-    if (legacy === 'medium') section = 'C';
-    else if (legacy === 'extrahard') section = 'MIXED';
-    else section = 'P';
-  }
-  const sectionKey = section === 'MIXED' ? 'mixed' : section;
-  const level = Math.max(1, Math.min(3, parseInt(req.query.level, 10)
-    || (req.query.difficulty === 'hard' ? 3 : 2)));
-  const seen = String(req.query.seen || '').split(',').filter(Boolean);
-  const q = generatePermCombQuestion(sectionKey, level, seen);
-  // Always include `display` for client uniformity.
-  q.display = String(q.answer);
-  res.json(q);
-});
-
-app.post('/permcomb-api/check', express.json(), (req, res) => {
-  const { answer, display, level, kind, expected } = req.body;
-  // Level-1 formula-fill: client may post a `blanks` map of student inputs.
-  if (kind === 'formula_fill' && expected && req.body.blanks) {
-    const blanks = req.body.blanks || {};
-    let allCorrect = true;
-    for (const key of Object.keys(expected)) {
-      if (parseInt(blanks[key], 10) !== expected[key]) { allCorrect = false; break; }
-    }
-    return res.json({ correct: allCorrect, display, message: allCorrect ? 'Correct!' : 'Check the blanks.' });
-  }
-  // Default numeric path (Levels 2 & 3, including word problems).
-  const userStr = String(req.body.userAnswer || '').replace(/[\s,]/g, '');
-  const userNum = parseInt(userStr, 10);
-  const correct = !isNaN(userNum) && userNum === answer;
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
-});
-
 // ═══════════════════════════════════════════════════════════════════════════
 // 4. LIMITS (limits-api)
 // ═══════════════════════════════════════════════════════════════════════════
@@ -7716,20 +5932,6 @@ function limitsQuestion(difficulty) {
     return { id, difficulty, prompt, answer, display: answer.toFixed(3) };
   }
 }
-
-app.get('/limits-api/question', (req, res) => {
-  const difficulty = req.query.difficulty || 'easy';
-  const q = limitsQuestion(difficulty);
-  res.json(q);
-});
-
-app.post('/limits-api/check', express.json(), (req, res) => {
-  const { answer, display } = req.body;
-  const userStr = (req.body.userAnswer || '').trim();
-  const userNum = parseFloat(userStr);
-  const correct = !isNaN(userNum) && Math.abs(userNum - answer) < 0.05;
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
-});
 
 // ═══════════════════════════════════════════════════════════════════════════
 // 5. INVERSE TRIGONOMETRIC (invtrig-api)
@@ -7777,20 +5979,6 @@ function invtrigQuestion(difficulty) {
   }
 }
 
-app.get('/invtrig-api/question', (req, res) => {
-  const difficulty = req.query.difficulty || 'easy';
-  const q = invtrigQuestion(difficulty);
-  res.json(q);
-});
-
-app.post('/invtrig-api/check', express.json(), (req, res) => {
-  const { answer, display } = req.body;
-  const userStr = (req.body.userAnswer || '').trim();
-  const userNum = parseFloat(userStr);
-  const correct = !isNaN(userNum) && Math.abs(userNum - answer) < 0.5;
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
-});
-
 // ═══════════════════════════════════════════════════════════════════════════
 // 6. REMAINDER & FACTOR THEOREM (remfactor-api)
 // ═══════════════════════════════════════════════════════════════════════════
@@ -7837,21 +6025,6 @@ function remfactorQuestion(difficulty) {
     return { id, difficulty, prompt, answer, display: answer.toFixed(2) };
   }
 }
-
-app.get('/remfactor-api/question', (req, res) => {
-  const difficulty = req.query.difficulty || 'easy';
-  const q = remfactorQuestion(difficulty);
-  res.json(q);
-});
-
-app.post('/remfactor-api/check', express.json(), (req, res) => {
-  const { answer, display } = req.body;
-  let userStr = (req.body.userAnswer || '').trim().toLowerCase();
-  const correct = (typeof answer === 'string')
-    ? userStr === answer.toLowerCase()
-    : !isNaN(parseFloat(userStr)) && Math.abs(parseFloat(userStr) - answer) < 0.1;
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
-});
 
 // ═══════════════════════════════════════════════════════════════════════════
 // 7. HERON'S FORMULA (heron-api)
@@ -7954,20 +6127,6 @@ function sharesQuestion(difficulty) {
   }
 }
 
-app.get('/shares-api/question', (req, res) => {
-  const difficulty = req.query.difficulty || 'easy';
-  const q = sharesQuestion(difficulty);
-  res.json(q);
-});
-
-app.post('/shares-api/check', express.json(), (req, res) => {
-  const { answer, display } = req.body;
-  const userStr = (req.body.userAnswer || '').trim();
-  const userNum = parseFloat(userStr);
-  const correct = !isNaN(userNum) && Math.abs(userNum - answer) < 1;
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
-});
-
 // ═══════════════════════════════════════════════════════════════════════════
 // 9. BANKING / RECURRING DEPOSITS (banking-api)
 // ═══════════════════════════════════════════════════════════════════════════
@@ -8010,20 +6169,6 @@ function bankingQuestion(difficulty) {
     return { id, difficulty, prompt, answer, display: String(Math.round(answer)) };
   }
 }
-
-app.get('/banking-api/question', (req, res) => {
-  const difficulty = req.query.difficulty || 'easy';
-  const q = bankingQuestion(difficulty);
-  res.json(q);
-});
-
-app.post('/banking-api/check', express.json(), (req, res) => {
-  const { answer, display } = req.body;
-  const userStr = (req.body.userAnswer || '').trim();
-  const userNum = parseFloat(userStr);
-  const correct = !isNaN(userNum) && Math.abs(userNum - answer) < 10;
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
-});
 
 // ═══════════════════════════════════════════════════════════════════════════
 // GYM PUZZLES — shared multiple-choice helpers
@@ -8957,20 +7102,6 @@ function gstQuestion(difficulty) {
   }
 }
 
-app.get('/gst-api/question', (req, res) => {
-  const difficulty = req.query.difficulty || 'easy';
-  const q = gstQuestion(difficulty);
-  res.json(q);
-});
-
-app.post('/gst-api/check', express.json(), (req, res) => {
-  const { answer, display } = req.body;
-  const userStr = (req.body.userAnswer || '').trim();
-  const userNum = parseFloat(userStr);
-  const correct = !isNaN(userNum) && Math.abs(userNum - answer) < 1;
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
-});
-
 // ═══════════════════════════════════════════════════════════════════════════
 // 11. SECTION FORMULA (section-api)
 // ═══════════════════════════════════════════════════════════════════════════
@@ -9023,27 +7154,6 @@ function sectionQuestion(difficulty) {
     return { id, difficulty, prompt, answer: [cx, cy], display: `${cx.toFixed(2)},${cy.toFixed(2)}` };
   }
 }
-
-app.get('/section-api/question', (req, res) => {
-  const difficulty = req.query.difficulty || 'easy';
-  const q = sectionQuestion(difficulty);
-  res.json(q);
-});
-
-app.post('/section-api/check', express.json(), (req, res) => {
-  const { answer, display } = req.body;
-  const userStr = (req.body.userAnswer || '').trim();
-  if (Array.isArray(answer)) {
-    const parts = userStr.split(',').map(p => parseFloat(p.trim()));
-    const correct = parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1]) &&
-                    Math.abs(parts[0] - answer[0]) < 0.2 && Math.abs(parts[1] - answer[1]) < 0.2;
-    res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
-  } else {
-    const userNum = parseFloat(userStr);
-    const correct = !isNaN(userNum) && Math.abs(userNum - answer) < 0.2;
-    res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
-  }
-});
 
 // ═══════════════════════════════════════════════════════════════════════════
 // 12. LINEAR PROGRAMMING (linprog-api)
@@ -9105,20 +7215,6 @@ function linprogQuestion(difficulty) {
   }
 }
 
-app.get('/linprog-api/question', (req, res) => {
-  const difficulty = req.query.difficulty || 'easy';
-  const q = linprogQuestion(difficulty);
-  res.json(q);
-});
-
-app.post('/linprog-api/check', express.json(), (req, res) => {
-  const { answer, display } = req.body;
-  const userStr = (req.body.userAnswer || '').trim();
-  const userNum = parseFloat(userStr);
-  const correct = !isNaN(userNum) && Math.abs(userNum - answer) < 1;
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
-});
-
 // ═══════════════════════════════════════════════════════════════════════════
 // 13. CIRCULAR MEASURE (circmeasure-api)
 // ═══════════════════════════════════════════════════════════════════════════
@@ -9156,20 +7252,6 @@ function circmeasureQuestion(difficulty) {
     return { id, difficulty, prompt, answer, display: answer.toFixed(2) };
   }
 }
-
-app.get('/circmeasure-api/question', (req, res) => {
-  const difficulty = req.query.difficulty || 'easy';
-  const q = circmeasureQuestion(difficulty);
-  res.json(q);
-});
-
-app.post('/circmeasure-api/check', express.json(), (req, res) => {
-  const { answer, display } = req.body;
-  const userStr = (req.body.userAnswer || '').trim();
-  const userNum = parseFloat(userStr);
-  const correct = !isNaN(userNum) && Math.abs(userNum - answer) < 0.5;
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
-});
 
 // ═══════════════════════════════════════════════════════════════════════════
 // 14. CONIC SECTIONS (conics-api)
@@ -9215,21 +7297,6 @@ function conicsQuestion(difficulty) {
     return { id, difficulty, prompt, answer, display: String(answer) };
   }
 }
-
-app.get('/conics-api/question', (req, res) => {
-  const difficulty = req.query.difficulty || 'easy';
-  const q = conicsQuestion(difficulty);
-  res.json(q);
-});
-
-app.post('/conics-api/check', express.json(), (req, res) => {
-  const { answer, display } = req.body;
-  let userStr = (req.body.userAnswer || '').trim().toLowerCase();
-  const correct = (typeof answer === 'string')
-    ? userStr === answer.toLowerCase()
-    : !isNaN(parseFloat(userStr)) && Math.abs(parseFloat(userStr) - answer) < 0.1;
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
-});
 
 // ═══════════════════════════════════════════════════════════════════════════
 // 15. DIFFERENTIAL EQUATIONS (diffeq-api)
@@ -9279,21 +7346,6 @@ function diffeqQuestion(difficulty) {
     return { id, difficulty, prompt, answer: answerStr, display: answerStr };
   }
 }
-
-app.get('/diffeq-api/question', (req, res) => {
-  const difficulty = req.query.difficulty || 'easy';
-  const q = diffeqQuestion(difficulty);
-  res.json(q);
-});
-
-app.post('/diffeq-api/check', express.json(), (req, res) => {
-  const { answer, display } = req.body;
-  let userStr = (req.body.userAnswer || '').trim().toLowerCase();
-  const correct = (typeof answer === 'string')
-    ? userStr === answer.toLowerCase() || userStr === answer.toLowerCase().replace(/\s+/g, '')
-    : !isNaN(parseInt(userStr, 10)) && parseInt(userStr, 10) === answer;
-  res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
-});
 
 // ═══════════════════════════════════════════════════════════════════════════
 // LEARNING JOURNEY ENDPOINTS
