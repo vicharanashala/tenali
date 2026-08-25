@@ -45099,7 +45099,7 @@ function PmSuggestIcon({ moduleId }) {
   const active = thresholdMet && nextModules.length > 0
   return (
     <div style={{
-      position: 'fixed', right: 20, bottom: 20, zIndex: 9999,
+      position: 'fixed', right: 20, bottom: 80, zIndex: 9999,
       display: 'flex', flexDirection: 'column', gap: 5, alignItems: 'flex-end'
     }}>
       {active ? nextModules.map((mod) => (
