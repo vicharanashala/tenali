@@ -44978,12 +44978,13 @@ function usePmGraphData() {
 // ─── Module Progress Tracker (localStorage-based, easy/medium/hard per module) ───
 // Simple design:
 //  - Every answered question is recorded per moduleId + difficulty (correct/total).
-//  - A module is "complete enough" once PM_TRACK_THRESHOLD correct answers have
-//    been logged for it (any difficulty mix).
+//  - A module is "complete enough" using a Vachana-style adaptive correct streak:
+//    - 3 consecutive correct answers on medium or hard difficulty, OR
+//    - 5 consecutive correct answers of any difficulty (e.g. easy).
+//    Any wrong answer resets the current active streak.
 //  - Once complete, we look up the module's successors in the prereq graph
 //    (graph-data.json edges) and suggest the first one not yet started.
 const PM_TRACK_KEY = 'tenali_module_tracking'
-const PM_TRACK_THRESHOLD = 5 // correct answers needed before we suggest the next module
 
 function pmTrackLoad() {
   try { return JSON.parse(localStorage.getItem(PM_TRACK_KEY)) || {} } catch { return {} }
@@ -44992,7 +44993,12 @@ function pmTrackSave(data) {
   try { localStorage.setItem(PM_TRACK_KEY, JSON.stringify(data)) } catch { /* ignore quota errors */ }
 }
 function pmEmptyModuleStat() {
-  return { easy: { correct: 0, total: 0 }, medium: { correct: 0, total: 0 }, hard: { correct: 0, total: 0 } }
+  return {
+    easy: { correct: 0, total: 0 },
+    medium: { correct: 0, total: 0 },
+    hard: { correct: 0, total: 0 },
+    correctStreak: []
+  }
 }
 // Listeners let any mounted <PmSuggestIcon/> re-render the instant a new answer is recorded
 const pmTrackListeners = new Set()
@@ -45003,8 +45009,16 @@ function pmTrackAnswer(moduleId, difficulty, isCorrect) {
   const diff = ['easy', 'medium', 'hard'].includes(difficulty) ? difficulty : 'medium'
   const data = pmTrackLoad()
   const stat = data[moduleId] || pmEmptyModuleStat()
+  if (!Array.isArray(stat.correctStreak)) {
+    stat.correctStreak = []
+  }
   stat[diff].total += 1
-  if (isCorrect) stat[diff].correct += 1
+  if (isCorrect) {
+    stat[diff].correct += 1
+    stat.correctStreak.push(diff)
+  } else {
+    stat.correctStreak = []
+  }
   data[moduleId] = stat
   pmTrackSave(data)
   pmTrackNotify()
@@ -45018,7 +45032,39 @@ function pmTrackCorrectTotal(moduleId) {
   return s.easy.correct + s.medium.correct + s.hard.correct
 }
 function pmTrackThresholdMet(moduleId) {
-  return pmTrackCorrectTotal(moduleId) >= PM_TRACK_THRESHOLD
+  const stat = pmTrackGetStats(moduleId)
+  const streak = stat.correctStreak || []
+  if (streak.length >= 3) {
+    const last3 = streak.slice(-3)
+    if (last3.every((d) => d === 'medium' || d === 'hard')) {
+      return true
+    }
+  }
+  if (streak.length >= 5) {
+    return true
+  }
+  return false
+}
+function pmTrackRemaining(moduleId) {
+  if (pmTrackThresholdMet(moduleId)) return 0
+  const stat = pmTrackGetStats(moduleId)
+  const streak = stat.correctStreak || []
+  
+  // Count how many of the last elements of the streak are medium or hard
+  let N = 0
+  for (let i = streak.length - 1; i >= 0; i--) {
+    if (streak[i] === 'medium' || streak[i] === 'hard') {
+      N++
+    } else {
+      break
+    }
+  }
+  N = Math.min(N, 3)
+  
+  const pathA = Math.max(0, 3 - N)
+  const pathB = Math.max(0, 5 - streak.length)
+  
+  return Math.min(pathA, pathB)
 }
 function pmGetKnownFromStorage() {
   try {
@@ -45134,8 +45180,7 @@ function PmSuggestIcon({ moduleId }) {
           <span style={{ fontSize: '0.8rem' }}>🔒</span>
           {(() => {
             if (!pmNodeById[moduleId]) return 'Next module'
-            const correctCount = pmTrackCorrectTotal(moduleId)
-            const remaining = Math.max(0, PM_TRACK_THRESHOLD - correctCount)
+            const remaining = pmTrackRemaining(moduleId)
             return `Unlock next: get ${remaining} more right`
           })()}
         </button>
