@@ -36348,6 +36348,22 @@ function Home({ onSelect }) {
         ))}
       </div>
       <div className="grid-dimension">{rows} × {cols}</div>
+      <footer style={{
+        marginTop: '32px',
+        padding: '20px 16px',
+        borderTop: '1px solid var(--clr-border, #444)',
+        textAlign: 'center',
+        fontSize: '0.85rem',
+        color: 'var(--clr-text-soft, #999)',
+        lineHeight: 1.6,
+      }}>
+        <p style={{ margin: 0 }}>
+          A product of <strong>Vicharanashala — Lab for Education Design</strong>, an educational research lab at the <strong>Indian Institute of Technology Ropar</strong>.
+        </p>
+        <p style={{ margin: '4px 0 0' }}>
+          &copy; {new Date().getFullYear()} Vicharanashala, IIT Ropar. All rights reserved.
+        </p>
+      </footer>
     </>
   )
 }
