@@ -18666,6 +18666,9 @@ function Chapter11App({ onBack }) {
     const ok = ch11_checkFill(currentQ, fillInput)
     setIsCorrect(ok); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
+    if (ok && typeof window.tenaliIncrementSolved === 'function') {
+      window.tenaliIncrementSolved(1)
+    }
   }
 
   const pickMcq = (displayIdx) => {
@@ -18674,6 +18677,9 @@ function Chapter11App({ onBack }) {
     const ok = optSourceIdx === currentQ.correct
     setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
+    if (ok && typeof window.tenaliIncrementSolved === 'function') {
+      window.tenaliIncrementSolved(1)
+    }
   }
 
   const cancelAutoAdvance = () => {
@@ -18696,6 +18702,9 @@ function Chapter11App({ onBack }) {
     if (next >= workingList.length) {
       setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: lesson.questions.length, completed: true } }))
       setPhase('done')
+      if (typeof window.tenaliIncrementSolved === 'function') {
+        window.tenaliIncrementSolved(0)
+      }
     } else {
       setQIdx(next)
       setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
@@ -42617,39 +42626,7 @@ function App() {
       }
     });
 
-    // 2. Streak milestones
-    if (streak < 3 && finalStreak >= 3) {
-      enqueues.push({
-        title: "Streak Milestone!",
-        badgeType: "streak_3",
-        level: "",
-        message: "Congratulations! You have unlocked the 3-Day Streak badge for maintaining an active learning streak for 3 consecutive days."
-      });
-    }
-    if (streak < 7 && finalStreak >= 7) {
-      enqueues.push({
-        title: "Streak Milestone!",
-        badgeType: "streak_7",
-        level: "",
-        message: "Congratulations! You have unlocked the 7-Day Streak badge for maintaining an active learning streak for 7 consecutive days."
-      });
-    }
-    if (streak < 15 && finalStreak >= 15) {
-      enqueues.push({
-        title: "Streak Milestone!",
-        badgeType: "streak_15",
-        level: "",
-        message: "Congratulations! You have unlocked the 15-Day Streak badge for maintaining an active learning streak for 15 consecutive days."
-      });
-    }
-    if (streak < 30 && finalStreak >= 30) {
-      enqueues.push({
-        title: "Streak Milestone!",
-        badgeType: "streak_30",
-        level: "",
-        message: "Congratulations! You have unlocked the 30-Day Streak badge for maintaining an active learning streak for 30 consecutive days."
-      });
-    }
+    // 2. Streak milestones handled by server
 
     if (enqueues.length > 0) {
       setCelebrationQueue(prev => [...prev, ...enqueues]);
@@ -42685,8 +42662,18 @@ function App() {
             setStreak(data.streak);
             localStorage.setItem('tenali-streak', String(data.streak));
           }
+          const serverEnqueues = [];
+          
+          if (data.streakMilestoneData) {
+            serverEnqueues.push({
+              title: "Streak Milestone!",
+              badgeType: `streak_${data.streakMilestoneData.days}`,
+              level: "",
+              message: `Amazing! You've played for ${data.streakMilestoneData.days} days in a row! You earned a bonus of ${data.streakMilestoneData.bonusCoins} coins!`
+            });
+          }
+
           if (data.newlyCompleted && data.newlyCompleted.length > 0) {
-            const serverEnqueues = [];
             data.newlyCompleted.forEach(colId => {
               const displayName = colId.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
               const defaultBadgeTypes = {
@@ -42709,9 +42696,10 @@ function App() {
                 message: `Congratulations! You have completed the ${displayName} Collection and unlocked the Gold Album Badge!`
               });
             });
-            if (serverEnqueues.length > 0) {
-              setCelebrationQueue(prev => [...prev, ...serverEnqueues]);
-            }
+          }
+          
+          if (serverEnqueues.length > 0) {
+            setCelebrationQueue(prev => [...prev, ...serverEnqueues]);
           }
         }
       } catch (e) {
@@ -53560,6 +53548,7 @@ function VocabApp({ onBack, isGoalMode = false }) {
   const [feedback, setFeedback] = useState('')
   // Is the last answer correct? (null before submission, true/false after)
   const [isCorrect, setIsCorrect] = useState(null)
+  const [correctOption, setCorrectOption] = useState('')
   // API call in progress?
   const [loading, setLoading] = useState(false)
   // Number of correct answers so far
@@ -53621,16 +53610,29 @@ const loadQuestion = async (excludeIds) => {
     setSelected('')
     setFeedback('')
     setIsCorrect(null)
+    setCorrectOption('')
     setRevealed(false)
     const ids = excludeIds || seenIds
     const excludeParam = ids.length ? `&exclude=${ids.join(',')}` : ''
-    const res = await fetch(`${API}/vocab-api/question?difficulty=${effectiveDiff()}&goal=${sessionGoal}`, { headers: { 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' } })
-    const data = await res.json()
-    setQuestion(data)
-    const newSeen = [...ids, data.id]
-    setSeenIds(newSeen)
-    saveVocabSeen(newSeen)
-    setLoading(false)
+    try {
+      const res = await fetch(`${API}/vocab-api/question?difficulty=${effectiveDiff()}&goal=${sessionGoal}`, { headers: { 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' } })
+      
+      if (!res.ok) {
+        throw new Error('Failed to fetch question from server');
+      }
+      
+      const data = await res.json()
+      setQuestion(data)
+      const newSeen = [...ids, data.id]
+      setSeenIds(newSeen)
+      saveVocabSeen(newSeen)
+    } catch (err) {
+      console.error(err);
+      setFeedback('Failed to connect to the server. Please ensure the backend is running.');
+      setQuestion({ question: 'Server Offline', options: [] });
+    } finally {
+      setLoading(false)
+    }
     timer.start(sessionGoal, handleTimeout, getSpeedRunLimit(difficulty ?? 'easy', isAdaptive ?? false))
   }
 
@@ -53666,38 +53668,44 @@ const loadQuestion = async (excludeIds) => {
     if (!question || revealed) return
     const timeTaken = timer.stop()
     setSelected(option)
-    // POST to backend to validate the selected definition
-    const res = await fetch(`${API}/vocab-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  id: question.id, answerOption: option, sessionGoal }) })
-    const data = await res.json()
-    setIsCorrect(data.correct)
-    if (data.correct) setScore((s) => s + 1)
-    // Show feedback with correct answer text
-    (() => {
-        const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
-        if (data.correct) {
-          setFeedback(`Correct! "${data.correctAnswerText}"`.slice(0,-1) + _ci + `Correct! "${data.correctAnswerText}"`.slice(-1))
-        } else if (sessionGoal === 'perfect') {
-          setFeedback(`Incorrect. The right definition is: "${data.correctAnswerText}"` + ' ❌ Perfect Solve ended.')
-          setFinished(true); timer.reset()
-        } else {
-          setFeedback(`Incorrect. The right definition is: "${data.correctAnswerText}"`)
-        }
-      })()
-    // Extract the user's selected definition from options array
-    const userDef = question.options[['A', 'B', 'C', 'D'].indexOf(option)]
-    // Truncate long definitions to fit in results table
-    const truncate = (s) => s.length > 35 ? s.slice(0, 35) + '…' : s
-    setResults((prev) => [...prev, {
-      question: question.question,
-      userAnswer: truncate(userDef),
-      correctAnswer: truncate(data.correctAnswerText),
-      correct: data.correct,
-      time: timeTaken,
-    }])
-    if (isAdaptive) {
-      setAdaptScore(prev => { const next = data.correct ? Math.min(3, prev + 0.25) : Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next })
+    try {
+      // POST to backend to validate the selected definition
+      const res = await fetch(`${API}/vocab-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  id: question.id, answerOption: option, sessionGoal }) })
+      const data = await res.json()
+      const isAnsCorrect = Boolean(data.correct)
+      setIsCorrect(isAnsCorrect)
+      if (isAnsCorrect) setScore((s) => s + 1)
+      if (data.correctAnswer) setCorrectOption(data.correctAnswer)
+      const ansText = data.correctAnswerText || ''
+      // Show feedback with correct answer text
+      const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
+      if (isAnsCorrect) {
+        setFeedback(`Correct! "${ansText}"` + _ci)
+      } else if (sessionGoal === 'perfect') {
+        setFeedback(`Incorrect. The right definition is: "${ansText}" ❌ Perfect Solve ended.`)
+        setFinished(true); timer.reset()
+      } else {
+        setFeedback(`Incorrect. The right definition is: "${ansText}"`)
+      }
+      // Extract the user's selected definition from options array
+      const userDef = question.options[['A', 'B', 'C', 'D'].indexOf(option)] || ''
+      // Truncate long definitions to fit in results table
+      const truncate = (s) => (s && typeof s === 'string' && s.length > 35) ? s.slice(0, 35) + '…' : (s || '')
+      setResults((prev) => [...prev, {
+        question: question.question,
+        userAnswer: truncate(userDef),
+        correctAnswer: truncate(ansText),
+        correct: isAnsCorrect,
+        time: timeTaken,
+      }])
+      if (isAdaptive) {
+        setAdaptScore(prev => { const next = isAnsCorrect ? Math.min(3, prev + 0.25) : Math.max(0, prev - 0.35); adaptScoreRef.current = next; return next })
+      }
+    } catch (err) {
+      console.error('submitVocab error:', err)
+    } finally {
+      setRevealed(true)
     }
-    setRevealed(true)
   }
 
   /**
@@ -53720,24 +53728,31 @@ const loadQuestion = async (excludeIds) => {
    * Fetches the correct answer from the API with solve: true flag
    */
   const handleSolve = async () => {
-    if (revealed) return
+    if (revealed || !question) return
     const timeTaken = timer.stop()
-    // POST to backend API with solve flag to get the solution
-    const res = await fetch(`${API}/vocab-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  id: question.id, answerOption: '', solve: true, sessionGoal }) })
-    const data = await res.json()
-    setIsCorrect(false)
-    // Show feedback with correct answer text
-    setFeedback(`Solution: "${data.correctAnswerText}"`)
-    // Truncate long definitions to fit in results table
-    const truncate = (s) => s.length > 35 ? s.slice(0, 35) + '…' : s
-    setResults((prev) => [...prev, {
-      question: question.question,
-      userAnswer: '—',
-      correctAnswer: truncate(data.correctAnswerText),
-      correct: false,
-      time: timeTaken,
-    }])
-    setRevealed(true)
+    try {
+      // POST to backend API with solve flag to get the solution
+      const res = await fetch(`${API}/vocab-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  id: question.id, answerOption: '', solve: true, sessionGoal }) })
+      const data = await res.json()
+      setIsCorrect(false)
+      if (data.correctAnswer) setCorrectOption(data.correctAnswer)
+      const ansText = data.correctAnswerText || ''
+      // Show feedback with correct answer text
+      setFeedback(`Solution: "${ansText}"`)
+      // Truncate long definitions to fit in results table
+      const truncate = (s) => (s && typeof s === 'string' && s.length > 35) ? s.slice(0, 35) + '…' : (s || '')
+      setResults((prev) => [...prev, {
+        question: question.question,
+        userAnswer: '—',
+        correctAnswer: truncate(ansText),
+        correct: false,
+        time: timeTaken,
+      }])
+    } catch (err) {
+      console.error('handleSolve error:', err)
+    } finally {
+      setRevealed(true)
+    }
   }
 
   useEffect(() => {
@@ -53861,7 +53876,7 @@ const loadQuestion = async (excludeIds) => {
             {question.options.map((option, idx) => {
               const letter = ['A', 'B', 'C', 'D'][idx]
               return (
-                <label key={letter} className={`option-card ${selected === letter ? 'selected' : ''} ${revealed && letter === selected && !isCorrect ? 'option-wrong' : ''} ${revealed && question && letter === ['A', 'B', 'C', 'D'][question.options.indexOf(results[results.length - 1]?.correctAnswer)] ? 'option-correct' : ''}`}>
+                <label key={letter} className={`option-card ${selected === letter ? 'selected' : ''} ${revealed && letter === selected && !isCorrect ? 'option-wrong' : ''} ${revealed && (letter === correctOption || (results.length > 0 && letter === ['A', 'B', 'C', 'D'][question.options.indexOf(results[results.length - 1]?.correctAnswer)])) ? 'option-correct' : ''}`}>
                   <input type="radio" name="vocab" checked={selected === letter} onChange={() => !revealed && setSelected(letter)} disabled={revealed} />
                   <span><strong>{letter})</strong> {option}</span>
                 </label>
