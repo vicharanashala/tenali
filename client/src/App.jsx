@@ -36289,15 +36289,15 @@ function Home({ onSelect }) {
       <div style={{ position: 'relative' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', marginBottom: '4px' }}>
           <div style={{ background: '#fff', borderRadius: '8px', padding: '6px', display: 'flex', alignItems: 'center', flexShrink: 0 }}>
-            <img src="/vicharanashala-logo.png" alt="Vicharanashala" style={{ width: '90px', height: 'auto' }} />
+            <img src="/iit-ropar-logo.png" alt="IIT Ropar" style={{ width: '70px', height: 'auto' }} />
           </div>
-          <img src="/tenali.png" alt="Tenali Raman" style={{ width: '80px', height: 'auto', flexShrink: 0 }} />
-          <div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <img src="/tenali.png" alt="Tenali Raman" style={{ width: '80px', height: 'auto', flexShrink: 0 }} />
             <h1 style={{ margin: 0 }}>Tenali</h1>
             <p className="subtitle" style={{ margin: 0 }}>Choose a learning game to begin</p>
           </div>
           <div style={{ background: '#fff', borderRadius: '8px', padding: '6px', display: 'flex', alignItems: 'center', flexShrink: 0 }}>
-            <img src="/iit-ropar-logo.png" alt="IIT Ropar" style={{ width: '70px', height: 'auto' }} />
+            <img src="/vicharanashala-logo.png" alt="Vicharanashala" style={{ width: '90px', height: 'auto' }} />
           </div>
         </div>
         {/* Hamburger menu — top right */}
