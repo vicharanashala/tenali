@@ -36358,7 +36358,7 @@ function Home({ onSelect }) {
         lineHeight: 1.6,
       }}>
         <p style={{ margin: 0 }}>
-          A product of <strong>Vicharanashala — Lab for Education Design</strong>, an educational research lab at the <strong>Indian Institute of Technology Ropar</strong>.
+          A product of <strong>Vicharanashala Lab for Education Design</strong>, an educational research lab at the <strong>Indian Institute of Technology Ropar</strong>.
         </p>
         <p style={{ margin: '4px 0 0' }}>
           &copy; {new Date().getFullYear()} Vicharanashala, IIT Ropar. All rights reserved.
