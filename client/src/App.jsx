@@ -36288,11 +36288,13 @@ function Home({ onSelect }) {
     <>
       <div style={{ position: 'relative' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', marginBottom: '4px' }}>
+          <img src="/vicharanashala-logo.png" alt="Vicharanashala" style={{ width: '90px', height: 'auto', flexShrink: 0 }} />
           <img src="/tenali.png" alt="Tenali Raman" style={{ width: '80px', height: 'auto', flexShrink: 0 }} />
           <div>
             <h1 style={{ margin: 0 }}>Tenali</h1>
             <p className="subtitle" style={{ margin: 0 }}>Choose a learning game to begin</p>
           </div>
+          <img src="/iit-ropar-logo.png" alt="IIT Ropar" style={{ width: '70px', height: 'auto', flexShrink: 0 }} />
         </div>
         {/* Hamburger menu — top right */}
         <div ref={menuRef} style={{ position: 'absolute', top: '8px', right: '0' }}>
