@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { API, setLocalXp } from './hintUtils.js';
+import { API, setLocalXp, changeXp, recordDailyStreak } from './hintUtils.js';
 
 export function useQuizHintsAndXp(concept, finished, score, totalQ, wasSolved = false, results = []) {
   const [hintsUsedCount, setHintsUsedCount] = useState(0);
@@ -27,6 +27,9 @@ export function useQuizHintsAndXp(concept, finished, score, totalQ, wasSolved = 
     if (!finished) return;
     if (completionSubmittedRef.current) return;
     completionSubmittedRef.current = true;
+
+    // Immediately record active daily practice streak locally
+    recordDailyStreak();
 
     const submitCompletion = async () => {
       setBonusLoading(true);
@@ -57,6 +60,12 @@ export function useQuizHintsAndXp(concept, finished, score, totalQ, wasSolved = 
             alreadyCompleted: !!data.alreadyCompleted,
             wasSolved: !!data.wasSolved
           });
+          if (data.streak !== undefined) {
+            localStorage.setItem('tenali-streak', String(data.streak));
+            try {
+              window.dispatchEvent(new CustomEvent('tenali-streak-change', { detail: { streak: data.streak } }));
+            } catch {}
+          }
           if (data.totalAward > 0) {
             if (data.guest) {
               changeXp(data.totalAward);
@@ -79,4 +88,3 @@ export function useQuizHintsAndXp(concept, finished, score, totalQ, wasSolved = 
 
   return { hintsUsedCount, xpBreakdown, bonusLoading };
 }
-
