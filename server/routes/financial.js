@@ -5,6 +5,22 @@ function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)
 const randInt = randomInt;
 function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
+function gcd(a, b) {
+  a = Math.abs(a);
+  b = Math.abs(b);
+  while (b) { [a, b] = [b, a % b]; }
+  return a;
+}
+
+function simplifyFraction(num, den) {
+  if (den < 0) { num = -num; den = -den; }
+  const g = gcd(Math.abs(num), den);
+  return { num: num / g, den: den / g };
+}
+
+function seqRand(lo, hi) { return lo + Math.floor(Math.random() * (hi - lo + 1)); }
+function seqPick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
 function percentType1(pct, base) {
   const templates = [
     `A new smartphone costs $${base}. It is currently on sale for ${pct}% off. What is the discount amount?`,
@@ -93,6 +109,127 @@ function generatePercentQuestion(tier, type, cfg, isFirstOfType) {
 }
 
 const generators = {
+
+  ratio: {
+    question(difficulty) {
+      difficulty = difficulty || 'easy';
+      const id = Date.now();
+
+      if (difficulty === 'easy') {
+        // Simplify a:b
+        const g = seqRand(2, 8);
+        const a = seqRand(1, 10) * g;
+        const b = seqRand(1, 10) * g;
+        // Ensure they're not already simplified
+        const gc = gcd(a, b);
+        const prompt = `Simplify the ratio ${a} : ${b}`;
+        return { id, difficulty, type: 'simplify', a, b, ansA: a / gc, ansB: b / gc, prompt, answer: `${a / gc}:${b / gc}` };
+      }
+      else if (difficulty === 'medium') {
+        // Divide amount in ratio a:b (two parts) or a:b:c (three parts)
+        const parts = seqPick([2, 2, 2, 3]); // mostly 2-part
+        if (parts === 2) {
+          const ra = seqRand(1, 7);
+          const rb = seqRand(1, 7);
+          const total = (ra + rb) * seqRand(2, 15);
+          const prompt = `Divide ${total} in the ratio ${ra} : ${rb}`;
+          const unit = total / (ra + rb);
+          return { id, difficulty, type: 'divide2', ra, rb, total, ans1: ra * unit, ans2: rb * unit, prompt, answer: `${ra * unit}, ${rb * unit}` };
+        } else {
+          const ra = seqRand(1, 5);
+          const rb = seqRand(1, 5);
+          const rc = seqRand(1, 5);
+          const total = (ra + rb + rc) * seqRand(2, 10);
+          const prompt = `Divide ${total} in the ratio ${ra} : ${rb} : ${rc}`;
+          const unit = total / (ra + rb + rc);
+          return { id, difficulty, type: 'divide3', ra, rb, rc, total, ans1: ra * unit, ans2: rb * unit, ans3: rc * unit, prompt, answer: `${ra * unit}, ${rb * unit}, ${rc * unit}` };
+        }
+      }
+      else if (difficulty === 'hard') {
+        // Direct proportion: if a costs/weighs x, find cost/weight for b
+        const unitVal = seqRand(2, 15);
+        const qtyA = seqRand(2, 10);
+        const valA = unitVal * qtyA;
+        const qtyB = seqRand(2, 15);
+        const valB = unitVal * qtyB;
+        const contexts = [
+          { q: `If ${qtyA} items cost $${valA}, how much do ${qtyB} items cost?`, unit: '$' },
+          { q: `If ${qtyA} kg weighs ${valA} lbs, how much do ${qtyB} kg weigh?`, unit: ' lbs' },
+          { q: `A car uses ${valA} litres for ${qtyA} km. How many litres for ${qtyB} km?`, unit: ' litres' },
+        ];
+        const ctx = seqPick(contexts);
+        return { id, difficulty, type: 'direct', qtyA, valA, qtyB, answer: valB, prompt: ctx.q };
+      }
+      else {
+        // Inverse proportion: if a workers take x days, how long for b workers?
+        const workersA = seqRand(2, 10);
+        const daysA = seqRand(2, 15);
+        const totalWork = workersA * daysA;
+        // Pick workersB that divides totalWork evenly
+        const divisors = [];
+        for (let i = 2; i <= 20; i++) { if (totalWork % i === 0 && i !== workersA) divisors.push(i); }
+        if (divisors.length === 0) divisors.push(workersA + 1);
+        const workersB = seqPick(divisors);
+        const daysB = totalWork / workersB;
+        const prompt = `${workersA} workers take ${daysA} days to finish a job. How many days for ${workersB} workers?`;
+        // ansNum/ansDen to handle non-integer results
+        const g2 = gcd(totalWork, workersB);
+        return { id, difficulty, type: 'inverse', workersA, daysA, workersB, ansNum: totalWork / g2, ansDen: workersB / g2, prompt, answer: (workersB / g2 === 1) ? String(totalWork / g2) : `${totalWork / g2}/${workersB / g2}` };
+      }
+    },
+    check(body) {
+      const { type } = body;
+      const userStr = (body.answer || '').replace(/\s+/g, '').replace(/−/g, '-');
+      let correct = false;
+      let display = '';
+
+      if (type === 'simplify') {
+        // Expect "a:b"
+        const { ansA, ansB } = body;
+        const m = userStr.match(/^(\d+):(\d+)$/);
+        if (m) {
+          correct = parseInt(m[1]) === ansA && parseInt(m[2]) === ansB;
+        }
+        display = `${ansA}:${ansB}`;
+      }
+      else if (type === 'divide2') {
+        // Expect "a, b" or "a and b"
+        const { ans1, ans2 } = body;
+        const m = userStr.match(/^(-?\d+)[,\s&]+(-?\d+)$/);
+        if (m) { correct = parseInt(m[1]) === ans1 && parseInt(m[2]) === ans2; }
+        // Also accept just the larger part
+        display = `${ans1}, ${ans2}`;
+      }
+      else if (type === 'divide3') {
+        const { ans1, ans2, ans3 } = body;
+        const m = userStr.match(/^(-?\d+)[,\s&]+(-?\d+)[,\s&]+(-?\d+)$/);
+        if (m) { correct = parseInt(m[1]) === ans1 && parseInt(m[2]) === ans2 && parseInt(m[3]) === ans3; }
+        display = `${ans1}, ${ans2}, ${ans3}`;
+      }
+      else if (type === 'direct') {
+        const expected = body.answer;
+        const userNum = parseFloat(userStr);
+        correct = !isNaN(userNum) && Math.abs(userNum - expected) < 0.01;
+        display = String(expected);
+      }
+      else if (type === 'inverse') {
+        const { ansNum, ansDen } = body;
+        const s = simplifyFraction(ansNum, ansDen);
+        // Parse fraction or integer
+        let uNum, uDen;
+        const fracMatch = userStr.match(/^(-?\d+)\/(-?\d+)$/);
+        if (fracMatch) { uNum = parseInt(fracMatch[1]); uDen = parseInt(fracMatch[2]); }
+        else { const n = parseFloat(userStr); if (!isNaN(n) && Number.isInteger(n)) { uNum = n; uDen = 1; } }
+        if (uNum !== undefined && uDen !== undefined && uDen !== 0) {
+          const us = simplifyFraction(uNum, uDen);
+          correct = us.num === s.num && us.den === s.den;
+        }
+        display = s.den === 1 ? `${s.num}` : `${s.num}/${s.den}`;
+      }
+
+      return { correct, display, message: correct ? 'Correct!' : 'Incorrect' };
+    },
+  },
 
   percent: {
     question(difficulty, opts = {}) {

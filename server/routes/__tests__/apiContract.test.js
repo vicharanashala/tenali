@@ -12,21 +12,6 @@ const request = require('supertest');
 
 // All topic keys that have a working *-api/question + *-api/check pair.
 // Add new topics here as they are created; the contract tests come for free.
-//
-// Excluded topics and why (re-add when fixed):
-//   trig           — GET /question hangs (>5 s); investigate endpoint
-//   simul          — GET returns structured data without `prompt`; POST /check throws 500
-//   sequences      — POST /check throws 500 (TypeError on rawAns.replace)
-//   fractionadd    — GET returns structured {n1,d1,...} without `prompt` (visual component format)
-//   funceval       — GET returns {formula, vars} without `prompt`
-//   lineq          — GET returns {m,c,...} without `prompt`
-//   column-addition — GET returns {a,b,digits,...} without `prompt`
-//   indices        — GET returns object with no `answer` field
-//   ratio          — GET returns object with no `answer` field
-//   prob           — GET returns object with no `answer` field
-//   stats          — GET returns object with no `answer` field
-//   vectors        — GET returns object with no `answer` field
-//   transform      — GET returns object with no `answer` field
 const TOPICS = [
   'quadratic', 'percent', 'sets',
   'matrix', 'mensur', 'bearings', 'log', 'diff',
@@ -36,6 +21,8 @@ const TOPICS = [
   'remfactor', 'shares', 'banking', 'gst', 'section', 'linprog',
   'circmeasure', 'conics', 'diffeq', 'hcflcm', 'profitloss', 'decimals',
   'addition', 'multiply', 'basicarith',
+  'trig', 'simul', 'sequences', 'fractionadd', 'funceval', 'lineq',
+  'column-addition', 'indices', 'ratio', 'prob', 'stats', 'vectors', 'transform',
 ];
 
 // Build a minimal Express app that mounts either the monolith or a specific router.
