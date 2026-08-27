@@ -74,6 +74,8 @@ import 'chart.js/auto'
 import { Line } from 'react-chartjs-2'
 
 import './App.css'
+import { TenaliAvatar } from './TenaliAvatar'
+import MindReaderApp2 from './MindReaderApp2'
 import TreasureHuntApp from './treasurehunt/TreasureHuntApp.jsx'
 import EnhancedMathDetectiveApp from './detective-app'
 import GlossaryText from './components/GlossaryText'
@@ -106,14 +108,15 @@ import SimulConceptApp from './lib/simul-concept/SimulConceptApp.jsx';
 import DiagnosticQuiz from './lib/DiagnosticQuiz.jsx';
 import { useI18n } from './lib/i18n.jsx';
 import CuriosityApp from './Curiosity.jsx';
-import ProctoredQuiz from './proctor/ProctoredQuiz'
-import useProctor from './proctor/useProctor'
-import ProctorDashboard from './proctor/ProctorDashboard'
-import ProctorPanel from './proctor/ProctorPanel'
-import PlaygroundApp from './PlaygroundApp'
-import LocalCompilerApp from './LocalCompilerApp'
-import BattleApp from './BattleApp'
-import SudokuApp from './SudokuApp'
+import AdventureApp from './adventure/AdventureApp';
+import ProctoredQuiz from './proctor/ProctoredQuiz';
+import useProctor from './proctor/useProctor';
+import ProctorDashboard from './proctor/ProctorDashboard';
+import ProctorPanel from './proctor/ProctorPanel';
+import PlaygroundApp from './PlaygroundApp';
+import LocalCompilerApp from './LocalCompilerApp';
+import BattleApp from './BattleApp';
+import SudokuApp from './SudokuApp';
 
 // API base URL from environment variables (Vite)
 export const API = import.meta.env.VITE_API_BASE_URL || '';
@@ -160,8 +163,8 @@ window.fetch = function (url, options) {
 };
 
 // App version — increment with each commit
-const TENALI_VERSION = '1.0.86'
-const TENALI_BUILD_DATE = '2026-05-03 18:28 IST'
+const TENALI_VERSION = '1.0.87'
+const TENALI_BUILD_DATE = '2026-07-14 17:49 IST'
 // ─── Auth helpers ───────────────────────────────────────────────────────────
 // Tiny pub/sub on top of localStorage so AuthMenu and AuthGate stay in sync.
 const AUTH_TOKEN_KEY = 'tenali-auth-token'
@@ -452,6 +455,21 @@ function AuthGate({ children }) {
   )
 }
 
+// Inject version badge into DOM once (appears on all routes)
+; (() => {
+  if (typeof document !== 'undefined' && !document.getElementById('tenali-version')) {
+    const el = document.createElement('div')
+    el.id = 'tenali-version'
+    Object.assign(el.style, {
+      position: 'fixed', top: '8px', right: '12px', zIndex: '9999',
+      fontSize: '0.65rem', opacity: '0.55', pointerEvents: 'none',
+      textAlign: 'right', lineHeight: '1.4', fontFamily: 'system-ui, sans-serif',
+      color: 'var(--clr-text-soft)',
+    })
+    el.innerHTML = `<div>v${TENALI_VERSION}</div><div>${TENALI_BUILD_DATE}</div>`
+    document.body.appendChild(el)
+  }
+})()
 // Default number of questions for quizzes
 const DEFAULT_TOTAL = 20
 // Delay before auto-advancing to next question after correct answer (ms)
@@ -41236,6 +41254,15 @@ function TenthApp({ onBack }) {
   )
 }
 
+function MindReaderWrapper({ onBack }) {
+  const [subMode, setSubMode] = useState('you'); // 'you' | 'tenali'
+  if (subMode === 'tenali') {
+    return <MindReaderApp onBack={() => setSubMode('you')} />;
+  }
+  return <MindReaderApp2 onBack={onBack} onSwitchMode={() => setSubMode('tenali')} />;
+}
+
+
 
 const isStage3Completed = (topicKey, completedTopics) => {
   if (!completedTopics || !Array.isArray(completedTopics)) return false;
@@ -43005,6 +43032,23 @@ function App() {
     )
   }
 
+  if (pathname === '/mindreader') {
+    return (
+      <>
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <AuthGate><MindReaderWrapper onBack={() => { window.location.href = '/' }} /></AuthGate>
+      </>
+    )
+  }
+
+  if (pathname === '/adventure') {
+    return (
+      <AdventureApp onBack={() => { window.location.href = '/' }} />
+    )
+  }
+
   // Route: /geocraft → Kids Geometry Workspace
   if (pathname === '/geocraft') {
     return (
@@ -44736,6 +44780,9 @@ function App() {
     language: LanguageDashboard,   // Language Puzzles Dashboard
     randommix: RandomMixApp,       // Random Mix (adaptive)
     custom: CustomApp,             // Custom lesson builder
+    mindreader: MindReaderWrapper,     // Tenali Mind Reader wrapper
+    mindreader_tenali: MindReaderApp, // Tenali guesses
+    mindreader_you: MindReaderApp2,   // You guess
     gym: GymApp,                   // Unified adaptive Gym — bundles all 7 below
     curiosity: CuriosityApp,       // Curiosity Mode — experiment with "what if" variations
     guess: GuessNumberApp,         // Binary magic — guess a number 0–31
@@ -44878,6 +44925,8 @@ function App() {
         onSelect={(key) => {
           if (key === 'goalpractice') {
             setMode('goalpractice');
+          } else if (key === 'adventure') {
+            window.location.href = '/adventure';
           } else {
             setMode(key);
             setIsGoalMode(false);
@@ -44925,6 +44974,7 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
   const [showAbout, setShowAbout] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [search, setSearch] = useState('')
+  const [mrMenuOpen, setMrMenuOpen] = useState(false)
   const featuredApps = [
     { key: 'randommix', name: 'Random Mix', subtitle: 'Adaptive cross-topic quiz', color: 'featured' },
     { key: 'custom', name: 'Custom Lesson', subtitle: 'Build your own mixed quiz', color: 'featured' },
@@ -44932,6 +44982,8 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
     { key: 'treasurehunt', name: 'Treasure Hunt', subtitle: 'Solve & seek on a treasure grid', color: 'featured' },
     { key: 'contrastlist', name: 'Contrast Challenge', subtitle: 'Distinguish similar concepts', color: 'featured' },
     { key: 'vachana', name: 'Vachana', subtitle: 'Mathematical Literacy Lab', color: 'featured' },
+    { key: 'mindreader', name: 'Mind Reader', subtitle: "Read Tenali's mind!", color: 'featured' },
+    { key: 'adventure', name: '👑 Adventure', subtitle: 'Knowledge Crystals — story-driven learning', color: 'featured', isRedirect: true, path: '/adventure' },
   ]
   // Visual Learning Universe lives only in the hamburger menu
   const mathLabEntry = { key: 'math-lab', name: '🔬 Visual Learning Universe', subtitle: 'Visual, Mensuration & Addition labs', color: 'orange' }
@@ -44947,6 +44999,7 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
 
   // All regular quiz apps sorted alphabetically by name
   const regularApps = [
+    { key: 'adventure', name: '👑 Adventure', subtitle: 'Knowledge Crystals — story-driven kingdom quest', color: 'featured' },
     { key: 'battle', name: '⚔️ Battle Arena', subtitle: 'Live fastest-finger duels', color: 'red' },
     { key: 'detective', name: '🔍 Detective Agency', subtitle: 'Solve math mysteries and crack cases!', color: 'indigo' },
     { key: 'comic-addition', name: 'Comic Addition', subtitle: 'Story Mode', color: 'purple' },
@@ -45070,7 +45123,10 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
   const filteredRegular = isSearching ? regularApps.filter(matchFilter) : regularApps
   
   // Decide which items to show on the main grid list
-  const displayGridApps = isGoalSelection ? filteredRegular : [...filteredRegular]
+  const featuredKeys = new Set(featuredApps.map(f => f.key))
+  const displayGridApps = isGoalSelection
+    ? filteredRegular
+    : [...filteredFeatured, ...filteredRegular.filter(a => !featuredKeys.has(a.key))]
   const filteredHamburgerApps = isSearching ? hamburgerApps.filter(matchFilter) : hamburgerApps
 
   // Grid layout tracking (for responsive display)
@@ -67184,6 +67240,8 @@ const RIYA_UNITS = [
   },
 ]
 
+export { TenaliAvatar } from './TenaliAvatar';
+
 /**
  * RiyaApp — adaptive lesson ladder for /riya.
  * For each unit in RIYA_UNITS, the student first sees a short lesson
@@ -68133,6 +68191,1436 @@ function TatsavitLineApp({ onBack }) {
  * @param {Function} props.onBack - Callback when back button is clicked
  * @param {React.ReactNode} props.children - Quiz content to display
  */
+// TenaliAvatar is imported and re-exported from ./TenaliAvatar
+
+const WRITING_TEXTS = {
+  yes: [
+    "A positive response! The notebook agrees... writing...",
+    "Yes? Excellent. The pattern falls into place... writing...",
+    "Ah, that confirms my calculations! Noting it down...",
+    "Tracing the connections... notebook updated!"
+  ],
+  no: [
+    "No? Fascinating. That cross-eliminates a whole sector... writing...",
+    "A negative! Even better, it narrows down the map... writing...",
+    "An unexpected turn, but my notebook adapts... writing...",
+    "A door closes, but a path opens... noting down..."
+  ],
+  dontknow: [
+    "Uncertainty? A true mathematician embraces the unknown... writing...",
+    "Don't know? Let me mark this with a question mark... processing...",
+    "No matter, we shall traverse this fog of war! writing...",
+    "A grey area! Intriguing... adjusting formulas..."
+  ]
+};
+
+const SHOCKED_TEXTS = [
+  "Unbelievable! You slipped right through my logical net! Let me re-examine...",
+  "Ah! A false path! My royal intuition was untested... Back to calculations!",
+  "Wait... my gamble failed? The mathematical ether plays tricks on me!"
+];
+
+const CONFUSED_TEXTS = [
+  "Wait, a contradiction? Did I leap to conclusions too quickly? Let us recalculate!",
+  "Hmm... my formulas are acting up. Let's redirect our questions.",
+  "A detour! That leads away from the prime candidate... Fascinating.",
+  "A subtle turn! You almost threw me off. Let me adjust my gears."
+];
+
+const PROUD_TEXTS = [
+  "Ah, the fog is clearing! I can feel the shape of your thoughts!",
+  "Hahaha! The coordinates line up! You cannot hide your secret from me!",
+  "Tenali's mind is a beacon of light piercing through your mystery!",
+  "Excellent! A perfect match. The court shall sing praises of my logic!"
+];
+
+const CONFIDENT_TEXTS = [
+  "Prepare yourself, the answer is close at hand!",
+  "The mathematical truth is undeniable! I am ready to make my guess!",
+  "I have woven the threads of your answers into a single conclusion!",
+  "Your thoughts are aligning like stars in a clear night sky."
+];
+
+const THINKING_TEXTS = [
+  "Aha! I see patterns forming...",
+  "Very interesting. My notebook is filling up with patterns.",
+  "Is it geometry, or does algebra hide within your thoughts?",
+  "Focus on your concept. Let the numbers guide us.",
+  "I'm listening closely... keep focusing on your math concept!",
+  "Hmm, a blank canvas of thoughts. Let's narrow it down...",
+  "Every answer eliminates a host of candidate ideas."
+];
+
+export function MindReaderApp({ onBack }) {
+  const [phase, setPhase] = useState('setup'); // 'setup' | 'playing' | 'gameover'
+  const [history, setHistory] = useState([]);
+  const [incorrectPredictions, setIncorrectPredictions] = useState([]);
+  const [royalChances, setRoyalChances] = useState(3);
+  const [prevChances, setPrevChances] = useState(3);
+  const [shouldShake, setShouldShake] = useState(false);
+  const [lastFeedback, setLastFeedback] = useState(null); // { type: 'yes'|'no'|'dontknow'|'gamble_rejected', change: number }
+  const [nextQuestion, setNextQuestion] = useState(null);
+  const [prediction, setPrediction] = useState(null);
+  const [confidence, setConfidence] = useState(0);
+  const [remainingCount, setRemainingCount] = useState(15);
+  const [isFinalQuestion, setIsFinalQuestion] = useState(false);
+  const [actualConcept, setActualConcept] = useState(null);
+  const [mrr, setMrr] = useState(1000);
+  const [gamesToday, setGamesToday] = useState(0);
+  const [dailyLimit, setDailyLimit] = useState(3);
+  const [authenticated, setAuthenticated] = useState(false);
+  const [unlockedSkins, setUnlockedSkins] = useState(['Classic Tenali']);
+  const [equippedSkin, setEquippedSkin] = useState('classic');
+  const [equippedTitle, setEquippedTitle] = useState('Novice Reader');
+  const [showCabinet, setShowCabinet] = useState(false);
+  const [recommendations, setRecommendations] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [mrrChange, setMrrChange] = useState(0);
+  const [cheated, setCheated] = useState(false);
+  const [cinematicStep, setCinematicStep] = useState('idle'); // 'idle' | 'think' | 'figured' | 'ask' | 'countdown' | 'reveal'
+  const [countdownNum, setCountdownNum] = useState(3);
+
+
+  // 15 MVP concepts
+  const mvpConcepts = [
+    'Prime Number', 'HCF (Highest Common Factor)', 'LCM (Lowest Common Multiple)',
+    'Square Root', 'Equivalent Fractions', 'Percentage', 'Linear Equation',
+    'Quadratic Equation', 'Matrix', 'Vector', 'Right Triangle',
+    "Pythagoras' Theorem", 'Venn Diagram', 'Mean', 'Probability'
+  ];
+
+  const titlesList = [
+    { name: 'Novice Reader', minMrr: 1000 },
+    { name: 'Royal Trickster', minMrr: 1100 },
+    { name: 'Court Genius', minMrr: 1250 },
+    { name: 'Mind Emperor', minMrr: 1400 },
+  ];
+
+  const skinsList = [
+    { id: 'classic', name: 'Classic Tenali', minMrr: 1000, description: 'Traditional court orange attire.' },
+    { id: 'royal', name: 'Royal Robes', minMrr: 1150, description: 'Gold and royal blue garments fitted for the palace.' },
+    { id: 'scholar', name: 'Sage Scholar', minMrr: 1300, description: 'White silver robes showing absolute mathematical wisdom.' }
+  ];
+
+  // Map to matching database or standard concept structures
+  const conceptsFullList = [
+    {
+      name: 'Prime Number',
+      description: 'A whole number greater than 1 with exactly two positive divisors: 1 and itself.',
+      subject: 'Number',
+      categories: ['Number Concepts', 'Primes'],
+      definingCharacteristics: [
+        'It is a number concept, not algebra or geometry.',
+        'It has exactly two factors: 1 and the number itself.',
+        'It is not divisible by other numbers.'
+      ],
+      recommendations: { related: ['Composite Number', 'Prime Factorization'], prerequisites: ['Factors and Multiples'], exercises: ['Chapter 1 Lesson 1 Practice'] }
+    },
+    {
+      name: 'HCF (Highest Common Factor)',
+      description: 'The largest positive integer that divides two or more integers without a remainder.',
+      subject: 'Number',
+      categories: ['Number Concepts', 'Factors & Multiples'],
+      definingCharacteristics: [
+        'It is a number concept.',
+        'It represents an operation/process of finding factors.',
+        'It is used to simplify fractions and solve grouping problems.'
+      ],
+      recommendations: { related: ['LCM', 'Prime Factorization'], prerequisites: ['Factors and Multiples'], exercises: ['Chapter 1 Lesson 2 Practice'] }
+    },
+    {
+      name: 'LCM (Lowest Common Multiple)',
+      description: 'The smallest positive integer that is a multiple of two or more integers.',
+      subject: 'Number',
+      categories: ['Number Concepts', 'Factors & Multiples'],
+      definingCharacteristics: [
+        'It is a number concept.',
+        'It represents an operation/process of finding multiples.',
+        'It is used to find common denominators for fraction addition.'
+      ],
+      recommendations: { related: ['HCF', 'Prime Factorization'], prerequisites: ['Factors and Multiples'], exercises: ['Chapter 1 Lesson 2 Practice'] }
+    },
+    {
+      name: 'Square Root',
+      description: 'A value that, when multiplied by itself, gives the original number.',
+      subject: 'Number',
+      categories: ['Number Concepts', 'Powers & Roots'],
+      definingCharacteristics: [
+        'It is a number concept.',
+        'It is a mathematical operation (finding a number times itself).',
+        'It is the inverse operation of squaring.'
+      ],
+      recommendations: { related: ['Square Number', 'Surds'], prerequisites: ['Powers and Roots'], exercises: ['Chapter 1 Lesson 6 Practice'] }
+    },
+    {
+      name: 'Equivalent Fractions',
+      description: 'Fractions that represent the same value or proportion of a whole, even if they have different numerators and denominators.',
+      subject: 'Number',
+      categories: ['Fractions', 'Decimals & Percentages'],
+      definingCharacteristics: [
+        'It is a number concept.',
+        'It directly involves fractions/decimals/ratios.',
+        'It relies on multiplying or dividing the top and bottom by the same number.'
+      ],
+      recommendations: { related: ['Simplest Form', 'Ratio'], prerequisites: ['Fractions Intro'], exercises: ['Chapter 5 Lesson 1 Practice'] }
+    },
+    {
+      name: 'Percentage',
+      description: 'A relative value representing the hundredth part of any quantity.',
+      subject: 'Number',
+      categories: ['Fractions', 'Decimals & Percentages'],
+      definingCharacteristics: [
+        'It is a number concept.',
+        'It represents parts of a whole (fractions/ratios out of 100).',
+        'It is widely used in finance, discounts, and probability.'
+      ],
+      recommendations: { related: ['Equivalent Fractions', 'Simple Interest'], prerequisites: ['Fractions and Decimals'], exercises: ['Chapter 5 Lesson 8 Practice'] }
+    },
+    {
+      name: 'Linear Equation',
+      description: 'An equation between two variables that gives a straight line when plotted on a graph.',
+      subject: 'Algebra',
+      categories: ['Algebra', 'Equations'],
+      definingCharacteristics: [
+        'It is an algebra-related concept.',
+        'It involves solving an equation for variable x.',
+        'It represents a straight line on a graph.'
+      ],
+      recommendations: { related: ['Quadratic Equation', 'Simultaneous Equations'], prerequisites: ['Simplifying Terms', 'Substitution'], exercises: ['Chapter 6 Lesson 1 Practice'] }
+    },
+    {
+      name: 'Quadratic Equation',
+      description: 'An equation of degree 2, typically written as ax² + bx + c = 0, representing a curved path (parabola).',
+      subject: 'Algebra',
+      categories: ['Algebra', 'Equations'],
+      definingCharacteristics: [
+        'It is an algebra-related concept.',
+        'It involves equations and variables raised to the power of 2.',
+        'It plots as a curve (parabola), not a straight line.'
+      ],
+      recommendations: { related: ['Linear Equation', 'Quadratic Formula'], prerequisites: ['Factoring Quadratics'], exercises: ['Chapter 10 Lesson 3 Practice'] }
+    },
+    {
+      name: 'Matrix',
+      description: 'A rectangular array of numbers arranged in rows and columns.',
+      subject: 'Algebra',
+      categories: ['Algebra', 'Vectors & Matrices'],
+      definingCharacteristics: [
+        'It is an algebra-related concept.',
+        'It involves vectors, grids of numbers, or matrices.',
+        'It does not represent a standard algebraic function.'
+      ],
+      recommendations: { related: ['Vector', 'Translation'], prerequisites: ['Basic Arithmetic'], exercises: ['Matrix Operations Practice'] }
+    },
+    {
+      name: 'Vector',
+      description: 'A quantity having direction as well as magnitude.',
+      subject: 'Geometry',
+      categories: ['Geometry', 'Vectors & Matrices'],
+      definingCharacteristics: [
+        'It is related to geometry, space, or directions.',
+        'It involves vectors or column matrices.',
+        'It is used to represent translation transformations.'
+      ],
+      recommendations: { related: ['Matrix', 'Translation'], prerequisites: ['Coordinate Geometry'], exercises: ['Chapter 23 Lesson 2 Practice'] }
+    },
+    {
+      name: 'Right Triangle',
+      description: 'A triangle in which one angle is a right angle (exactly 90 degrees).',
+      subject: 'Geometry',
+      categories: ['Geometry', 'Triangles'],
+      definingCharacteristics: [
+        'It is a geometry concept.',
+        'It involves a three-sided shape (triangle).',
+        'It has a 90-degree angle.'
+      ],
+      recommendations: { related: ['Pythagoras\' Theorem', 'Trigonometric Ratios'], prerequisites: ['Triangles Classification'], exercises: ['Chapter 3 Lesson 3 Practice'] }
+    },
+    {
+      name: "Pythagoras' Theorem",
+      description: 'The theorem stating that in a right-angled triangle, the square of the hypotenuse is equal to the sum of the squares of the other two sides (a² + b² = c²).',
+      subject: 'Geometry',
+      categories: ['Geometry', 'Triangles'],
+      definingCharacteristics: [
+        'It is a geometry concept.',
+        'It involves triangles, hypotenuse, and squares of sides.',
+        'It is an equation/formula to calculate lengths.'
+      ],
+      recommendations: { related: ['Right Triangle', 'Trigonometric Ratios'], prerequisites: ['Right Triangle', 'Square Roots'], exercises: ['Chapter 11 Lesson 1 Practice'] }
+    },
+    {
+      name: 'Venn Diagram',
+      description: 'A diagram that shows all possible logical relations between a finite collection of different sets.',
+      subject: 'Algebra',
+      categories: ['Sets', 'Logic'],
+      definingCharacteristics: [
+        'It is related to algebra and set theory.',
+        'It involves sets, unions, intersections, and logic.',
+        'It is a visual diagram, not a coordinates plot.'
+      ],
+      recommendations: { related: ['Set Operations', 'Probability'], prerequisites: ['Sets Intro'], exercises: ['Chapter 9 Lesson 3 Practice'] }
+    },
+    {
+      name: 'Mean',
+      description: 'The average of a set of numbers, calculated by summing all values and dividing by the total count.',
+      subject: 'Statistics',
+      categories: ['Statistics', 'Averages'],
+      definingCharacteristics: [
+        'It is a statistics concept.',
+        'It represents an operation/calculation (sum divided by count).',
+        'It is used to summarize numerical data.'
+      ],
+      recommendations: { related: ['Median', 'Mode', 'Range'], prerequisites: ['Basic Arithmetic'], exercises: ['Chapter 12 Lesson 1 Practice'] }
+    },
+    {
+      name: 'Probability',
+      description: 'The branch of mathematics concerning numerical descriptions of how likely an event is to occur.',
+      subject: 'Statistics',
+      categories: ['Statistics', 'Probability'],
+      definingCharacteristics: [
+        'It is a statistics/probability concept.',
+        'It measures the likelihood of events happening.',
+        'Values always fall between 0 and 1 (or 0% and 100%).'
+      ],
+      recommendations: { related: ['Venn Diagram', 'Sample Space'], prerequisites: ['Fractions and Percentages'], exercises: ['Chapter 8 Lesson 1 Practice'] }
+    }
+  ];
+
+  useEffect(() => {
+    const loadProfileAndConfig = async () => {
+      setLoading(true);
+      try {
+        const configRes = await fetch(`${API}/api/mindreader/config`);
+        if (configRes.ok) {
+          const configData = await configRes.json();
+          if (configData.dailyLimit) setDailyLimit(configData.dailyLimit);
+        }
+
+        const token = authGetToken();
+        const headers = {};
+        if (token) {
+          headers['Authorization'] = `Bearer ${token}`;
+        }
+
+        const profileRes = await fetch(`${API}/api/mindreader/profile`, { headers });
+        if (profileRes.ok) {
+          const profileData = await profileRes.json();
+          if (profileData.authenticated) {
+            setMrr(profileData.mrr);
+            setGamesToday(profileData.mindReaderGamesToday);
+            setUnlockedSkins(profileData.unlockedSkins || ['Classic Tenali']);
+            setEquippedSkin(profileData.equippedSkin || 'classic');
+            setEquippedTitle(profileData.equippedTitle || 'Novice Reader');
+            setAuthenticated(true);
+          } else {
+            setAuthenticated(false);
+            const localMrr = parseInt(localStorage.getItem('tenali-mindreader-mrr') || '1000', 10);
+            setMrr(localMrr);
+            setEquippedSkin(localStorage.getItem('tenali-mindreader-skin') || 'classic');
+            setEquippedTitle(localStorage.getItem('tenali-mindreader-title') || 'Novice Reader');
+
+            const todayStr = new Date().toDateString();
+            const lastLocalGameDate = localStorage.getItem('tenali-mindreader-last-date') || '';
+            let localGamesToday = parseInt(localStorage.getItem('tenali-mindreader-games-today') || '0', 10);
+
+            if (lastLocalGameDate !== todayStr) {
+              localGamesToday = 0;
+              localStorage.setItem('tenali-mindreader-games-today', '0');
+              localStorage.setItem('tenali-mindreader-last-date', todayStr);
+            }
+            setGamesToday(localGamesToday);
+          }
+        }
+      } catch (err) {
+        console.error('Failed to load profile/config:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProfileAndConfig();
+  }, []);
+
+  // Trigger Phase 4 cinematic sequence when prediction is set
+  useEffect(() => {
+    if (prediction && cinematicStep === 'idle') {
+      setCinematicStep('think');
+    }
+  }, [prediction]);
+
+  // Timing logic for the cinematic stages: think -> figured -> ask -> countdown -> reveal
+  useEffect(() => {
+    if (cinematicStep === 'idle') return;
+
+    if (cinematicStep === 'think') {
+      const timer = setTimeout(() => {
+        setCinematicStep('figured');
+      }, 1200);
+      return () => clearTimeout(timer);
+    }
+    if (cinematicStep === 'figured') {
+      const timer = setTimeout(() => {
+        setCinematicStep('ask');
+      }, 1200);
+      return () => clearTimeout(timer);
+    }
+    if (cinematicStep === 'ask') {
+      const timer = setTimeout(() => {
+        setCinematicStep('countdown');
+        setCountdownNum(3);
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+    if (cinematicStep === 'countdown') {
+      if (countdownNum > 1) {
+        const timer = setTimeout(() => {
+          setCountdownNum(prev => prev - 1);
+        }, 1000);
+        return () => clearTimeout(timer);
+      } else {
+        const timer = setTimeout(() => {
+          setCinematicStep('reveal');
+        }, 1000);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [cinematicStep, countdownNum]);
+
+
+  const handleEquipItem = async (type, val) => {
+    if (type === 'skin') {
+      setEquippedSkin(val);
+      if (authenticated) {
+        try {
+          const token = authGetToken();
+          await fetch(`${API}/api/mindreader/equip`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': token ? `Bearer ${token}` : ''
+            },
+            body: JSON.stringify({ skin: val })
+          });
+        } catch (err) {
+          console.error('Failed to sync equipped skin:', err);
+        }
+      } else {
+        try { localStorage.setItem('tenali-mindreader-skin', val) } catch { }
+      }
+    } else if (type === 'title') {
+      setEquippedTitle(val);
+      if (authenticated) {
+        try {
+          const token = authGetToken();
+          await fetch(`${API}/api/mindreader/equip`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': token ? `Bearer ${token}` : ''
+            },
+            body: JSON.stringify({ title: val })
+          });
+        } catch (err) {
+          console.error('Failed to sync equipped title:', err);
+        }
+      } else {
+        try { localStorage.setItem('tenali-mindreader-title', val) } catch { }
+      }
+    }
+  };
+
+  const startGame = () => {
+    setPhase('pregame-thinking');
+  };
+
+  useEffect(() => {
+    if (phase === 'pregame-thinking') {
+      let timerFinished = false;
+      let apiFinished = false;
+      let apiData = null;
+      let apiError = null;
+
+      // 1. Start the 2.5s timer
+      const timer = setTimeout(() => {
+        timerFinished = true;
+        if (apiFinished) {
+          transitionToPlay();
+        }
+      }, 2500);
+
+      // 2. Fetch the first question
+      const fetchFirstQuestion = async () => {
+        setLoading(true);
+        setErrorMsg('');
+        setHistory([]);
+        setIncorrectPredictions([]);
+        setRoyalChances(3);
+        setPrevChances(3);
+        setShouldShake(false);
+        setLastFeedback(null);
+        setPrediction(null);
+        setNextQuestion(null);
+        setActualConcept(null);
+        setMrrChange(0);
+        setRecommendations(null);
+        setCheated(false);
+
+        try {
+          const res = await fetch(`${API}/api/mindreader/next`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ history: [], incorrectPredictions: [] })
+          });
+          if (!res.ok) throw new Error('Failed to start engine');
+          apiData = await res.json();
+        } catch (err) {
+          apiError = err.message || 'Error communicating with Tenali.';
+        } finally {
+          apiFinished = true;
+          setLoading(false);
+          if (timerFinished) {
+            transitionToPlay();
+          }
+        }
+      };
+
+      const transitionToPlay = () => {
+        if (apiError) {
+          setErrorMsg(apiError);
+          setPhase('setup');
+        } else if (apiData) {
+          setConfidence(apiData.confidence || 0);
+          setRemainingCount(apiData.remainingCount || 15);
+
+          if (apiData.prediction) {
+            setPrediction(apiData.prediction);
+          } else {
+            setNextQuestion(apiData.nextQuestion);
+            setIsFinalQuestion(apiData.isFinalQuestion || false);
+          }
+          setPhase('playing');
+        }
+      };
+
+      fetchFirstQuestion();
+
+      return () => clearTimeout(timer);
+    }
+  }, [phase]);
+
+  const handleAnswer = async (answerVal) => {
+    if (loading || !nextQuestion) return;
+    setLoading(true);
+    setErrorMsg('');
+    const startTime = Date.now();
+
+    const newHistory = [...history, { questionId: nextQuestion.id, answer: answerVal }];
+    setHistory(newHistory);
+
+    try {
+      const res = await fetch(`${API}/api/mindreader/next`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ history: newHistory, incorrectPredictions })
+      });
+
+      if (res.status === 409) {
+        setNextQuestion(null);
+        setPrediction(null);
+        setPhase('gameover');
+        return;
+      }
+
+      if (!res.ok) throw new Error('Error getting next question.');
+      const data = await res.json();
+
+      const newConfidence = data.confidence || 0;
+      const change = newConfidence - confidence;
+      console.log(`[MindReader Frontend] Confidence update: prev=${confidence} -> new=${newConfidence} (change=${change})`);
+      setConfidence(newConfidence);
+      setRemainingCount(data.remainingCount || 0);
+      setLastFeedback({
+        type: answerVal,
+        change: Math.abs(change),
+        prevConfidence: confidence,
+        newConfidence
+      });
+
+      if (data.prediction) {
+        setPrediction(data.prediction);
+        setNextQuestion(null);
+      } else if (data.nextQuestion) {
+        setNextQuestion(data.nextQuestion);
+        setIsFinalQuestion(data.isFinalQuestion || false);
+        setPrediction(null);
+      } else {
+        setNextQuestion(null);
+        setPrediction(null);
+        setPhase('gameover');
+      }
+    } catch (err) {
+      setErrorMsg(err.message || 'Error processing response.');
+    } finally {
+      const elapsed = Date.now() - startTime;
+      const delay = Math.max(0, 1200 - elapsed);
+      if (delay > 0) {
+        await new Promise(resolve => setTimeout(resolve, delay));
+      }
+      setLoading(false);
+    }
+  };
+
+  const handleGambleResponse = async (isCorrectGuess) => {
+    if (loading || !prediction) return;
+
+    if (isCorrectGuess) {
+      await callEndGameAPI('loss', prediction.name);
+      setPhase('gameover');
+    } else {
+      const nextChances = royalChances - 1;
+      setPrevChances(royalChances);
+      setRoyalChances(nextChances);
+      setShouldShake(true);
+      setTimeout(() => setShouldShake(false), 500);
+      setLastFeedback({
+        type: 'gamble_rejected',
+        change: 0,
+        prevConfidence: confidence,
+        newConfidence: 0
+      });
+
+      const newIncorrect = [...incorrectPredictions, prediction.name];
+      setIncorrectPredictions(newIncorrect);
+      setPrediction(null);
+
+      if (nextChances <= 0) {
+        setPhase('gameover');
+      } else {
+        setLoading(true);
+        const startTime = Date.now();
+        try {
+          const res = await fetch(`${API}/api/mindreader/next`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ history, incorrectPredictions: newIncorrect })
+          });
+
+          if (res.status === 409 || !res.ok) {
+            setPhase('gameover');
+            return;
+          }
+
+          const data = await res.json();
+          setConfidence(data.confidence || 0);
+          setRemainingCount(data.remainingCount || 0);
+
+          if (data.prediction) {
+            setPrediction(data.prediction);
+          } else {
+            setNextQuestion(data.nextQuestion);
+            setIsFinalQuestion(data.isFinalQuestion || false);
+          }
+        } catch (err) {
+          setErrorMsg('Error recovering from incorrect gamble.');
+        } finally {
+          const elapsed = Date.now() - startTime;
+          const delay = Math.max(0, 1200 - elapsed);
+          if (delay > 0) {
+            await new Promise(resolve => setTimeout(resolve, delay));
+          }
+          setLoading(false);
+        }
+      }
+    }
+  };
+
+  const callEndGameAPI = async (outcome, conceptName) => {
+    setLoading(true);
+    setErrorMsg('');
+    const matchedConcept = conceptsFullList.find(c => c.name === conceptName);
+    setActualConcept(matchedConcept || null);
+
+    const token = authGetToken();
+    const headers = { 'Content-Type': 'application/json' };
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+
+    const payload = {
+      outcome,
+      concept: conceptName || 'Unknown',
+      questionsCount: history.length,
+      predictionsMade: incorrectPredictions.concat(prediction ? [prediction.name] : []),
+      scope: 'curriculum'
+    };
+
+    try {
+      const res = await fetch(`${API}/api/mindreader/end`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(payload)
+      });
+
+      if (!res.ok) throw new Error('Failed to save game stats');
+      const data = await res.json();
+
+      setCheated(outcome === 'win' && (data.cheated || false));
+
+      if (data.authenticated) {
+        setMrrChange(data.cheated ? 0 : (data.mrr - mrr));
+        setMrr(data.mrr);
+        setGamesToday(data.mindReaderGamesToday);
+        setRecommendations(data.recommendations);
+      } else {
+        const isCheat = outcome === 'win' && payload.predictionsMade.includes(payload.concept);
+        const diff = isCheat ? 0 : (outcome === 'win' ? 20 : -5);
+        const newMrr = Math.max(1000, mrr + diff);
+        setMrrChange(diff);
+        setMrr(newMrr);
+
+        const newGamesToday = gamesToday + 1;
+        setGamesToday(newGamesToday);
+        setRecommendations(data.recommendations);
+
+        try {
+          localStorage.setItem('tenali-mindreader-mrr', String(newMrr));
+          localStorage.setItem('tenali-mindreader-games-today', String(newGamesToday));
+          localStorage.setItem('tenali-mindreader-last-date', new Date().toDateString());
+        } catch { }
+      }
+    } catch (err) {
+      const isCheat = outcome === 'win' && payload.predictionsMade.includes(payload.concept);
+      setCheated(isCheat);
+      const diff = isCheat ? 0 : (outcome === 'win' ? 20 : -5);
+      const newMrr = Math.max(1000, mrr + diff);
+      setMrrChange(diff);
+      setMrr(newMrr);
+      const newGamesToday = gamesToday + 1;
+      setGamesToday(newGamesToday);
+
+      const matchedConcept = conceptsFullList.find(c => c.name === conceptName);
+      setRecommendations(matchedConcept ? matchedConcept.recommendations : {
+        related: [],
+        prerequisites: [],
+        exercises: []
+      });
+
+      try {
+        localStorage.setItem('tenali-mindreader-mrr', String(newMrr));
+        localStorage.setItem('tenali-mindreader-games-today', String(newGamesToday));
+        localStorage.setItem('tenali-mindreader-last-date', new Date().toDateString());
+      } catch { }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleConceptSelectedForWin = async (conceptName) => {
+    const selected = conceptsFullList.find(c => c.name === conceptName);
+    setActualConcept(selected || null);
+    await callEndGameAPI('win', conceptName);
+  };
+
+  const getConfusedRunners = (chosenConcept) => {
+    if (!chosenConcept) return [];
+    return conceptsFullList
+      .filter(c => c.name !== chosenConcept.name)
+      .map(c => {
+        let score = 0;
+        if (c.subject === chosenConcept.subject) score += 2;
+        const sharedCats = (c.categories || []).filter(cat => (chosenConcept.categories || []).includes(cat));
+        score += sharedCats.length;
+        return { name: c.name, score };
+      })
+      .filter(item => item.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 2)
+      .map(item => item.name);
+  };
+
+
+  const handlePlayAgain = async () => {
+    if (phase === 'gameover' && !recommendations && (royalChances <= 0 || (nextQuestion === null && prediction === null && incorrectPredictions.length > 0))) {
+      await callEndGameAPI('win', 'Unknown');
+    }
+    setPhase('setup');
+    setRecommendations(null);
+    setActualConcept(null);
+  };
+
+  const handleBackToHome = async () => {
+    if (phase === 'gameover' && !recommendations && (royalChances <= 0 || (nextQuestion === null && prediction === null && incorrectPredictions.length > 0))) {
+      await callEndGameAPI('win', 'Unknown');
+    }
+    onBack();
+  };
+
+  const getTenaliState = () => {
+    if (gamesToday >= dailyLimit) {
+      return {
+        expression: 'loss',
+        text: "Alas, my mind-reading energies are completely depleted! Practice your curriculum lessons and I shall return tomorrow."
+      };
+    }
+
+    if (phase === 'setup') {
+      return {
+        expression: 'thinking',
+        text: "Let's play a little game.\n\nThink of one mathematical idea.\nDon't tell me.\nJust keep it in your mind.\n\nWhen you're ready... Start the Game"
+      };
+    }
+
+    if (phase === 'pregame-thinking') {
+      return {
+        expression: 'closed-eyes',
+        text: "Tenali Raman is closing his eyes... searching the mathematical ether..."
+      };
+    }
+
+    if (phase === 'playing') {
+      if (prediction) {
+        const gamblePool = [
+          `Ah! The mathematical patterns in your mind have coalesced! I believe you are secretly thinking of: "${prediction.name}". Am I correct?`,
+          `Eureka! The cosmic math coordinates point to none other than: "${prediction.name}". Speak, am I right?`,
+          `The digital fog lifts! I declare that your chosen secret is: "${prediction.name}". Can you deny my deduction?`,
+          `My royal abacus has finished its work. You are thinking of: "${prediction.name}"! Correct?`
+        ];
+        const index = history.length % gamblePool.length;
+        return {
+          expression: 'gamble',
+          text: gamblePool[index]
+        };
+      }
+
+      if (loading) {
+        const lastItem = history[history.length - 1];
+        const lastAnswer = lastItem?.answer || 'yes';
+        const writingTexts = WRITING_TEXTS[lastAnswer] || WRITING_TEXTS.yes;
+        const index = (history.length - 1) % writingTexts.length;
+        return {
+          expression: 'writing',
+          text: writingTexts[index]
+        };
+      }
+
+      const totalConcepts = mvpConcepts.length || 15;
+      let progress = 0;
+      if (prediction) {
+        progress = 1.0;
+      } else {
+        const eliminated = totalConcepts - remainingCount;
+        const rawProgress = totalConcepts > 1 ? eliminated / (totalConcepts - 1) : 0;
+        progress = Math.min(0.90, Math.max(0, rawProgress));
+      }
+
+      let expression = 'thinking';
+      let selectedText = "";
+
+      if (lastFeedback) {
+        if (lastFeedback.type === 'gamble_rejected') {
+          expression = 'shocked';
+          selectedText = SHOCKED_TEXTS[history.length % SHOCKED_TEXTS.length];
+        } else if (lastFeedback.newConfidence < lastFeedback.prevConfidence && lastFeedback.change > 0.02) {
+          expression = 'confused';
+          selectedText = CONFUSED_TEXTS[history.length % CONFUSED_TEXTS.length];
+        } else if (lastFeedback.newConfidence > lastFeedback.prevConfidence && lastFeedback.change >= 0.15 && confidence > 0.6) {
+          expression = 'proud';
+          selectedText = PROUD_TEXTS[history.length % PROUD_TEXTS.length];
+        }
+      }
+
+      // Fallback to general confidence state mapping if expression was not set by sudden changes above
+      if (expression === 'thinking') {
+        if (progress > 0.75) {
+          expression = 'confident';
+          selectedText = CONFIDENT_TEXTS[history.length % CONFIDENT_TEXTS.length];
+        } else if (progress > 0.3) {
+          expression = 'smirk';
+          selectedText = THINKING_TEXTS[history.length % THINKING_TEXTS.length];
+        } else {
+          expression = 'thinking';
+          selectedText = THINKING_TEXTS[history.length % THINKING_TEXTS.length];
+        }
+      }
+
+      return {
+        expression,
+        text: selectedText
+      };
+    }
+
+    if (phase === 'gameover') {
+      if (cheated) {
+        return {
+          expression: 'cheated',
+          text: "Aha! You told me my guess was incorrect, but now you claim you were thinking of it! Tenali's sharp mind cannot be fooled so easily. No MRR rating points awarded for trickery! 😉"
+        };
+      }
+
+      const didPlayerWin = royalChances <= 0 || (nextQuestion === null && prediction === null && incorrectPredictions.length > 0);
+      if (didPlayerWin) {
+        if (!actualConcept) {
+          return {
+            expression: 'victory',
+            text: "Incredible! My calculation was incorrect. You have bested my royal chances! Tell me, what concept were you secretly thinking of?"
+          };
+        }
+        return {
+          expression: 'loss',
+          text: "A brilliant victory! You successfully guarded your thoughts. I bow to your mathematical shield!"
+        };
+      } else {
+        return {
+          expression: 'confident',
+          text: "Victory! My mind-reading art reigns supreme in the court. Your thoughts are an open book to my logic!"
+        };
+      }
+    }
+
+    return {
+      expression: 'thinking',
+      text: "Tenali is listening..."
+    };
+  };
+
+  const getRiskMeterLabel = () => {
+    if (confidence <= 0.25) return 'Tenali is studying your mind...';
+    if (confidence <= 0.50) return 'Tenali is scanning patterns...';
+    if (confidence <= 0.75) return 'Tenali is narrowing it down!';
+    return 'Tenali is highly confident!';
+  };
+
+  const getConfidenceStatusLabel = () => {
+    if (confidence <= 0.15) return 'Puzzled... 🤔';
+    if (confidence <= 0.35) return 'Analyzing... 🔍';
+    if (confidence <= 0.55) return 'Sensing a Pattern... ⚡';
+    if (confidence <= 0.75) return 'Narrowing Down! 🎯';
+    return 'Highly Confident! 🔥';
+  };
+
+  const getMeterColorClass = () => {
+    if (confidence <= 0.25) return 'meter-low';
+    if (confidence <= 0.50) return 'meter-medium';
+    if (confidence <= 0.75) return 'meter-high';
+    return 'meter-gamble';
+  };
+
+  const matchedRecConcept = conceptsFullList.find(
+    c => c.name === (prediction ? prediction.name : (actualConcept ? actualConcept.name : ''))
+  );
+
+  return (
+    <QuizLayout title="Tenali Mind Reader" subtitle="Recreational learning game" onBack={handleBackToHome}>
+      <div className="mindreader-container">
+
+        {/* Phase 4 - Royal Gamble Cinematic Overlay */}
+        {prediction && cinematicStep !== 'idle' && (
+          <div className="mr-cinematic-overlay">
+
+            {/* Glowing Royal Gamble meter */}
+            <div className="mr-risk-meter royal-gamble-meter" style={{ width: '90%', maxWidth: '400px', margin: '20px auto' }}>
+              <div className="risk-indicator-labels" style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
+                <span className="risk-indicator-label active orange-glow" style={{ color: 'var(--clr-accent)', textShadow: '0 0 12px var(--clr-accent-soft)', fontSize: '1.2rem', fontWeight: 'bold' }}>😈 Royal Gamble</span>
+              </div>
+              <div className="risk-slider-track" style={{ display: 'flex', alignItems: 'center', height: '10px', justifyContent: 'center' }}>
+                <span style={{ color: 'var(--clr-accent)', fontWeight: 'bold' }}>○</span>
+                <div style={{ flexGrow: 1, height: '4px', background: 'var(--clr-accent)', margin: '0 12px', borderRadius: '2px', boxShadow: '0 0 12px var(--clr-accent-soft)' }}></div>
+                <span style={{ color: 'var(--clr-accent)', fontWeight: 'bold' }}>●</span>
+              </div>
+            </div>
+
+            {/* The Zoomed Suspense Tenali Avatar */}
+            <div className="cinematic-avatar-container" style={{ margin: '30px 0', transform: 'scale(1.3)', transition: 'transform 0.8s ease' }}>
+              <TenaliAvatar expression="gamble" skin={equippedSkin} />
+            </div>
+
+            {/* Speech bubble or dialogue */}
+            {(cinematicStep === 'think' || cinematicStep === 'figured' || cinematicStep === 'ask') && (
+              <div className="thought-cloud-bubble mr-card cinematic-bubble" style={{ background: 'var(--clr-surface)', border: '2px solid var(--clr-accent)', borderRadius: '24px', padding: '20px 30px', maxWidth: '400px', textAlign: 'center', boxShadow: '0 8px 24px var(--clr-accent-soft)', margin: '15px' }}>
+                <div className="dialogue-speech" style={{ fontSize: '1.25rem', color: 'var(--clr-text)', fontStyle: 'italic', fontWeight: '600', animation: 'scaleUp 0.3s ease-out forwards' }}>
+                  {cinematicStep === 'think' && "I think..."}
+                  {cinematicStep === 'figured' && "I've figured it out."}
+                  {cinematicStep === 'ask' && "Would you like to hear my guess?"}
+                </div>
+              </div>
+            )}
+
+            {/* Countdown Tick */}
+            {cinematicStep === 'countdown' && (
+              <div className="cinematic-countdown" key={countdownNum} style={{ fontSize: '6.5rem', fontWeight: '900', color: '#fdcb6e', textShadow: '0 0 20px #f1c40f', animation: 'scaleUp 1s ease-out forwards', margin: '20px 0' }}>
+                {countdownNum}
+              </div>
+            )}
+
+            {/* Reveal of Guess & Action Buttons */}
+            {cinematicStep === 'reveal' && (
+              <div className="prediction-hub pulsing-gamble cinematic-reveal-box" style={{ width: '90%', maxWidth: '480px', display: 'flex', flexDirection: 'column', alignItems: 'center', animation: 'scaleUp 0.5s ease-out forwards', padding: '20px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '20px' }}>
+                <h3 className="gamble-title" style={{ color: 'var(--clr-accent)', textShadow: '0 0 10px var(--clr-accent-soft)', fontSize: '1.8rem', marginBottom: '8px', letterSpacing: '1px' }}>⚡ ROYAL GAMBLE ⚡</h3>
+                <p className="gamble-prompt" style={{ color: 'var(--clr-text-soft)', marginBottom: '15px' }}>I believe you are thinking of:</p>
+                <div className="prediction-box" style={{ background: 'linear-gradient(135deg, var(--clr-surface) 0%, rgba(232, 134, 74, 0.1) 100%)', border: '3px solid var(--clr-accent)', borderRadius: '16px', padding: '24px 16px', fontSize: '2rem', fontWeight: '800', textAlign: 'center', boxShadow: '0 0 30px rgba(232, 134, 74, 0.4)', width: '100%', marginBottom: '20px', color: 'var(--clr-text)' }}>
+                  {prediction.name}
+                </div>
+                <p className="gamble-confirm" style={{ fontSize: '1.15rem', marginBottom: '20px', fontWeight: 'bold', color: 'var(--clr-text)' }}>Am I correct?</p>
+                <div className="button-row gamble-btns" style={{ display: 'flex', gap: '16px', width: '100%', justifyContent: 'center' }}>
+                  <button className="submit-btn correct-btn" onClick={() => { handleGambleResponse(true); setCinematicStep('idle'); }} style={{ padding: '14px 28px', background: 'var(--clr-correct)', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', fontSize: '1.1rem', transition: 'transform 0.2s', boxShadow: '0 4px 12px rgba(46, 204, 113, 0.3)' }}>
+                    Yes, read my mind!
+                  </button>
+                  <button className="submit-btn wrong-btn" onClick={() => { handleGambleResponse(false); setCinematicStep('idle'); }} style={{ padding: '14px 28px', background: 'var(--clr-wrong)', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', fontSize: '1.1rem', transition: 'transform 0.2s', boxShadow: '0 4px 12px rgba(231, 76, 60, 0.3)' }}>
+                    No, that is incorrect!
+                  </button>
+                </div>
+              </div>
+            )}
+
+          </div>
+        )}
+
+
+        {/* Top Hud & Rewards Cabinet Button */}
+        {phase === 'setup' && (
+          <div className="mr-top-bar" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', width: '100%', flexWrap: 'wrap', gap: '10px' }}>
+            <div className="mrr-hud" style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+              <span className="mrr-pill" style={{ background: 'var(--clr-surface)', border: '1px solid var(--clr-border)', padding: '6px 12px', borderRadius: '20px', fontSize: '0.9rem', fontWeight: '600' }}>🔮 MRR: <strong>{mrr}</strong></span>
+              <span className="title-pill" style={{ background: 'var(--clr-surface)', border: '1px solid var(--clr-border)', padding: '6px 12px', borderRadius: '20px', fontSize: '0.9rem', fontWeight: '600' }}>🏷️ Title: <strong>{equippedTitle}</strong></span>
+              <span className="chances-pill" style={{ background: 'var(--clr-surface)', border: '1px solid var(--clr-border)', padding: '6px 12px', borderRadius: '20px', fontSize: '0.9rem', fontWeight: '600' }}>⚡ Daily Chances: <strong>{Math.max(0, dailyLimit - gamesToday)} / {dailyLimit}</strong></span>
+            </div>
+            <button className="cabinet-toggle-btn" onClick={() => setShowCabinet(true)} style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'linear-gradient(135deg, var(--clr-accent) 0%, #8e44ad 100%)', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '20px', cursor: 'pointer', fontWeight: '600', boxShadow: '0 4px 12px rgba(142, 68, 173, 0.2)', transition: 'all 0.2s' }}>
+              🎁 Rewards Cabinet
+            </button>
+          </div>
+        )}
+
+        {phase !== 'playing' && (() => {
+          const stateObj = getTenaliState();
+          if (phase === 'setup') {
+            return (
+              <div className="character-hub-horizontal">
+                <TenaliAvatar expression={stateObj.expression} skin={equippedSkin} />
+
+                <div className="thought-cloud-bubble-side">
+                  <div className="thought-dot-side-1" />
+                  <div className="thought-dot-side-2" />
+
+                  <div className="thought-header" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                    <span className="avatar-name" style={{ fontWeight: '700', color: 'var(--clr-accent)', fontSize: '0.95rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Tenali Raman</span>
+                    <span className="avatar-title-tag" style={{ background: 'rgba(74, 144, 226, 0.15)', color: 'var(--clr-accent)', padding: '2px 8px', borderRadius: '12px', fontSize: '0.75rem', fontWeight: '600', border: '1px solid rgba(74, 144, 226, 0.3)' }}>
+                      {equippedTitle}
+                    </span>
+                  </div>
+
+                  <div className="dialogue-speech" style={{ whiteSpace: 'pre-line', fontSize: '1.02rem', lineHeight: '1.5', color: 'var(--clr-text)', fontStyle: 'italic' }}>
+                    "{stateObj.text}"
+                  </div>
+                </div>
+              </div>
+            );
+          }
+
+          return (
+            <div className="character-hub-vertical" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px', position: 'relative', marginBottom: '24px', width: '100%' }}>
+              {/* Dialogue Box styled as a thought cloud above Tenali */}
+              <div className="thought-cloud-bubble mr-card" style={{ position: 'relative', background: 'var(--clr-surface)', border: '2px solid var(--clr-accent)', borderRadius: '24px', padding: '16px 24px', width: '100%', maxWidth: '480px', boxShadow: '0 8px 24px rgba(0,0,0,0.06)', textAlign: 'center' }}>
+                <div className="thought-dot thought-dot-1" style={{ position: 'absolute', bottom: '-14px', left: 'calc(50% - 6px)', width: '12px', height: '12px', background: 'var(--clr-surface)', border: '2px solid var(--clr-accent)', borderRadius: '50%' }}></div>
+                <div className="thought-dot thought-dot-2" style={{ position: 'absolute', bottom: '-24px', left: 'calc(50% - 4px)', width: '8px', height: '8px', background: 'var(--clr-surface)', border: '2px solid var(--clr-accent)', borderRadius: '50%' }}></div>
+
+                <div className="thought-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '8px' }}>
+                  <span className="avatar-name" style={{ fontWeight: '700', color: 'var(--clr-accent)', fontSize: '0.95rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Tenali Raman</span>
+                  <span className="avatar-title-tag" style={{ background: 'rgba(74, 144, 226, 0.15)', color: 'var(--clr-accent)', padding: '2px 8px', borderRadius: '12px', fontSize: '0.75rem', fontWeight: '600', border: '1px solid rgba(74, 144, 226, 0.3)' }}>
+                    {equippedTitle}
+                  </span>
+                </div>
+
+                <div className="dialogue-speech" style={{ whiteSpace: 'pre-line', fontSize: '1.02rem', lineHeight: '1.5', color: 'var(--clr-text)', fontStyle: 'italic' }}>
+                  "{stateObj.text}"
+                </div>
+              </div>
+              <TenaliAvatar expression={stateObj.expression} skin={equippedSkin} />
+            </div>
+          );
+        })()}
+
+        {phase === 'setup' && (
+          <div className="mr-card setup-card" style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
+            <h2 style={{ fontSize: '1.4rem', letterSpacing: '1px', color: 'var(--clr-accent)', textTransform: 'uppercase', margin: '0', textAlign: 'center' }}>CHOOSE A MATHEMATICAL CONCEPT</h2>
+
+            <div className="concept-chips" style={{ margin: '5px 0' }}>
+              {mvpConcepts.map((c, i) => (
+                <span key={i} className="concept-chip">{c}</span>
+              ))}
+            </div>
+
+            {errorMsg && <p className="error-text" style={{ margin: '0' }}>{errorMsg}</p>}
+
+            {gamesToday >= dailyLimit ? (
+              <div className="lockout-warning-box" style={{ padding: '12px', background: 'rgba(231, 76, 60, 0.1)', border: '1px solid rgba(231, 76, 60, 0.3)', borderRadius: '12px', color: 'var(--clr-wrong)', textAlign: 'center' }}>
+                <p style={{ fontWeight: '600', margin: '0 0 4px 0', fontSize: '0.95rem' }}>⚠️ Daily Limit Reached!</p>
+                <p style={{ fontSize: '0.85rem', opacity: 0.9, lineHeight: 1.3, margin: '0' }}>
+                  My mind reading energy is depleted for today! Please complete some curriculum lessons and try again tomorrow.
+                </p>
+              </div>
+            ) : (
+              <button className="submit-btn start-game-btn" onClick={startGame} disabled={loading} style={{ margin: '0 auto', width: '220px', background: 'linear-gradient(135deg, var(--clr-accent) 0%, #d35400 100%)', textTransform: 'uppercase', letterSpacing: '1px', padding: '12px' }}>
+                {loading ? 'Entering...' : "I've got one."}
+              </button>
+            )}
+          </div>
+        )}
+
+        {phase === 'pregame-thinking' && (
+          <div className="mr-card pregame-thinking-card" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '3rem 2rem' }}>
+            <h2 style={{ fontSize: '1.6rem', color: 'var(--clr-accent)', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Tenali Raman is Listening...</h2>
+            <div className="pregame-music-container" style={{ display: 'flex', gap: '6px', height: '40px', alignItems: 'flex-end', margin: '2rem 0' }}>
+              <div className="music-bar bar-1"></div>
+              <div className="music-bar bar-2"></div>
+              <div className="music-bar bar-3"></div>
+              <div className="music-bar bar-4"></div>
+              <div className="music-bar bar-5"></div>
+            </div>
+            <p style={{ fontStyle: 'italic', opacity: 0.8, fontSize: '1.05rem', animation: 'pulse-opacity 1.5s infinite' }}>
+              🎵 🎶 (Visualizing thoughts) 🎶 🎵
+            </p>
+          </div>
+        )}
+
+        {phase === 'playing' && (() => {
+          const stateObj = getTenaliState();
+
+          // Calculate visual progress of the risk meter based on concepts remaining
+          const totalConcepts = mvpConcepts.length; // 15
+          let meterProgress = 0;
+          if (prediction) {
+            meterProgress = 1.0;
+          } else {
+            const eliminated = totalConcepts - remainingCount;
+            // Map eliminated concepts to progress between 0 and 0.90
+            const rawProgress = totalConcepts > 1 ? eliminated / (totalConcepts - 1) : 0;
+            meterProgress = Math.min(0.90, Math.max(0, rawProgress));
+          }
+
+          return (
+            <div className={`mr-card playing-card ${shouldShake ? 'shake-board' : ''}`} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+              <div className="game-hud" style={{ borderBottom: '1px solid var(--clr-border)', paddingBottom: '12px' }}>
+                <div className="chances-display" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span className="hud-label">Royal Chances:</span>
+                  <span className="hud-values" style={{ display: 'flex', alignItems: 'center' }}>
+                    {Array.from({ length: 3 }).map((_, i) => {
+                      const isActive = i < royalChances;
+                      const isShattering = !isActive && i === royalChances && prevChances > royalChances;
+                      return (
+                        <span
+                          key={i}
+                          className={`chance-shield ${isActive ? 'active' : isShattering ? 'shattering' : 'depleted'}`}
+                          style={{ marginRight: 8 }}
+                        >
+                          🛡️
+                        </span>
+                      );
+                    })}
+                  </span>
+                </div>
+                <div className="remaining-count-pill">
+                  Remaining: {remainingCount}
+                </div>
+              </div>
+
+              <div className="playing-character-row" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px', position: 'relative', marginTop: '10px' }}>
+
+                {/* Phase 3 - Glowing Risk/Confidence Meter (○────────────●) */}
+                <div className="mr-risk-meter" style={{ width: '100%', maxWidth: '480px', marginBottom: '8px', marginTop: '5px' }}>
+                  <div className="risk-indicator-labels" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+                    <span className={`risk-indicator-label ${meterProgress <= 0.15 ? 'active blue-glow' : ''}`} style={{ opacity: meterProgress <= 0.15 ? 1 : 0.45 }}>🙂 Calm</span>
+                    <span className={`risk-indicator-label ${meterProgress > 0.15 && meterProgress <= 0.35 ? 'active green-glow' : ''}`} style={{ opacity: meterProgress > 0.15 && meterProgress <= 0.35 ? 1 : 0.45 }}>😐 Curious</span>
+                    <span className={`risk-indicator-label ${meterProgress > 0.35 && meterProgress <= 0.55 ? 'active yellow-glow' : ''}`} style={{ opacity: meterProgress > 0.35 && meterProgress <= 0.55 ? 1 : 0.45 }}>🤔 Thinking</span>
+                    <span className={`risk-indicator-label ${meterProgress > 0.55 && meterProgress <= 0.75 ? 'active orange-glow' : ''}`} style={{ opacity: meterProgress > 0.55 && meterProgress <= 0.75 ? 1 : 0.45 }}>😏 Confident</span>
+                    <span className={`risk-indicator-label ${meterProgress > 0.75 ? 'active purple-glow' : ''}`} style={{ opacity: meterProgress > 0.75 ? 1 : 0.45 }}>😈 Royal Gamble</span>
+                  </div>
+                  <div className="risk-slider-track" style={{ display: 'flex', alignItems: 'center', width: '100%', position: 'relative', height: '20px', padding: '0 4px' }}>
+                    <span className="risk-slider-start-dot" style={{ fontSize: '1.3rem', color: meterProgress <= 0.15 ? '#3498db' : 'var(--clr-text-soft)', fontWeight: 'bold' }}>○</span>
+                    <div className="risk-slider-bar-wrapper" style={{ flexGrow: 1, position: 'relative', height: '3px', background: 'var(--clr-border)', margin: '0 10px', borderRadius: '2px' }}>
+                      <div
+                        className={`risk-slider-glow-dot ${meterProgress <= 0.15 ? 'calm' :
+                            meterProgress <= 0.35 ? 'curious' :
+                              meterProgress <= 0.55 ? 'thinking' :
+                                meterProgress <= 0.75 ? 'confident' : 'royal'
+                          }`}
+                        style={{
+                          position: 'absolute',
+                          top: '50%',
+                          transform: 'translate(-50%, -50%)',
+                          left: `${Math.min(100, Math.max(0, meterProgress * 100))}%`,
+                          width: '14px',
+                          height: '14px',
+                          borderRadius: '50%',
+                          transition: 'left 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s'
+                        }}
+                      />
+                    </div>
+                    <span className="risk-slider-end-dot" style={{ fontSize: '1.3rem', color: meterProgress > 0.75 ? '#9b59b6' : 'var(--clr-text-soft)', fontWeight: 'bold' }}>●</span>
+                  </div>
+                </div>
+
+                <div className="thought-cloud-bubble mr-card" style={{ position: 'relative', background: 'var(--clr-surface)', border: '2px solid var(--clr-accent)', borderRadius: '24px', padding: '16px 24px', width: '100%', maxWidth: '480px', boxShadow: '0 8px 24px rgba(0,0,0,0.06)', textAlign: 'center' }}>
+                  <div className="thought-dot thought-dot-1" style={{ position: 'absolute', bottom: '-14px', left: 'calc(50% - 6px)', width: '12px', height: '12px', background: 'var(--clr-surface)', border: '2px solid var(--clr-accent)', borderRadius: '50%' }}></div>
+                  <div className="thought-dot thought-dot-2" style={{ position: 'absolute', bottom: '-24px', left: 'calc(50% - 4px)', width: '8px', height: '8px', background: 'var(--clr-surface)', border: '2px solid var(--clr-accent)', borderRadius: '50%' }}></div>
+
+                  <div className="thought-header" style={{ fontSize: '0.85rem', fontWeight: 'bold', color: 'var(--clr-accent)', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                    Tenali's Mind Cloud
+                  </div>
+
+                  <div className="dialogue-speech" style={{ whiteSpace: 'pre-line', fontSize: '1.02rem', lineHeight: '1.5', color: 'var(--clr-text)', fontStyle: 'italic' }}>
+                    "{stateObj.text}"
+                  </div>
+                </div>
+
+                <TenaliAvatar expression={stateObj.expression} skin={equippedSkin} />
+              </div>
+
+              {loading && <div className="loading-spinner">Tenali is thinking...</div>}
+
+              {!loading && prediction && cinematicStep === 'idle' && (
+                <div className="prediction-hub pulsing-gamble">
+                  <h3 className="gamble-title">⚡ ROYAL GAMBLE ⚡</h3>
+                  <p className="gamble-prompt">
+                    I believe you are secretly thinking of:
+                  </p>
+                  <div className="prediction-box">
+                    {prediction.name}
+                  </div>
+                  <p className="gamble-confirm">Am I correct?</p>
+
+                  <div className="button-row gamble-btns">
+                    <button className="submit-btn correct-btn" onClick={() => handleGambleResponse(true)}>
+                      Yes, you read my mind!
+                    </button>
+                    <button className="submit-btn wrong-btn" onClick={() => handleGambleResponse(false)}>
+                      No, that is incorrect!
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {!loading && nextQuestion && (
+                <div className={`question-hub ${isFinalQuestion ? 'final-question-flash' : ''}`}>
+                  {isFinalQuestion && <div className="final-q-banner">⚠️ FINAL QUESTION ⚠️</div>}
+                  <p className="question-text" style={{ fontSize: '1.25rem', textAlign: 'center', marginBottom: '20px' }}>{nextQuestion.text}</p>
+
+                  <div className="button-row action-btns" style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
+                    <button className="submit-btn yes-btn" onClick={() => handleAnswer('yes')}>Yes</button>
+                    <button className="submit-btn no-btn" onClick={() => handleAnswer('no')}>No</button>
+                    <button className="submit-btn dontknow-btn" onClick={() => handleAnswer('dontknow')}>Don't Know</button>
+                  </div>
+                </div>
+              )}
+
+              {errorMsg && <p className="error-text">{errorMsg}</p>}
+            </div>
+          );
+        })()}
+
+        {phase === 'gameover' && (
+          <div className="mr-card gameover-card">
+            {royalChances <= 0 || (nextQuestion === null && prediction === null && incorrectPredictions.length > 0) ? (
+              <div className="win-display">
+                <h2>👑 ROYAL VICTORY! 👑</h2>
+                <p className="outcome-desc" style={{ fontSize: '1.2rem', color: '#f1c40f', fontWeight: 'bold', margin: '10px 0' }}>
+                  "You fooled me! That was clever."
+                </p>
+                <p className="outcome-subdesc" style={{ fontSize: '0.98rem', color: 'var(--clr-text-soft)', marginBottom: '15px' }}>
+                  Outstanding! You successfully shielded your thoughts from Tenali's gaze. He ran out of options!
+                </p>
+
+                {mrrChange > 0 && !cheated && <div className="mrr-up-anim">MRR Rating: {mrr - mrrChange} ➔ {mrr} (+{mrrChange})!</div>}
+
+                {cheated && (
+                  <div className="cheating-warning-box" style={{ marginTop: '20px', padding: '16px', background: 'rgba(241, 196, 15, 0.1)', border: '1px solid rgba(241, 196, 15, 0.3)', borderRadius: '12px', color: '#d35400', textAlign: 'center' }}>
+                    <p style={{ fontWeight: '700', fontSize: '1.1rem', marginBottom: '8px' }}>🔮 Tenali catches you red-handed! 🔮</p>
+                    <p style={{ fontSize: '0.95rem', lineHeight: 1.45 }}>
+                      "Aha! You told me my guess was incorrect, but now you claim you were thinking of it!
+                      Tenali's sharp mind cannot be fooled so easily. No MRR rating points awarded for trickery! 😉"
+                    </p>
+                  </div>
+                )}
+
+                {!actualConcept && !recommendations && (
+                  <div className="actual-concept-selection" style={{ marginTop: 20 }}>
+                    <p style={{ marginBottom: 8, fontWeight: '600' }}>What concept were you secretly thinking of?</p>
+                    <select
+                      onChange={(e) => handleConceptSelectedForWin(e.target.value)}
+                      defaultValue=""
+                      style={{ padding: '10px 14px', borderRadius: 8, background: 'var(--clr-surface)', color: 'var(--clr-text)', border: '1px solid var(--clr-border)', width: '100%', fontSize: '1.05rem' }}
+                    >
+                      <option value="" disabled>-- Select your concept --</option>
+                      {mvpConcepts.map((c, i) => (
+                        <option key={i} value={c}>{c}</option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+
+                {actualConcept && (
+                  <div className="confused-candidates-explainability" style={{ marginTop: '20px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '16px', textAlign: 'left' }}>
+                    <h4 style={{ color: 'var(--clr-accent)', margin: '0 0 12px 0', fontSize: '1rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '6px' }}>🧐 Mind-Reading Post-Mortem:</h4>
+
+                    <p style={{ margin: '6px 0', fontSize: '0.92rem' }}>
+                      🔑 **Your Secret Concept**: <strong style={{ color: '#2ecc71' }}>{actualConcept.name}</strong>
+                    </p>
+
+                    {incorrectPredictions.length > 0 && (
+                      <p style={{ margin: '6px 0', fontSize: '0.92rem' }}>
+                        ❌ **Tenali's Rejected Guesses**: <span style={{ color: 'var(--clr-wrong)', textDecoration: 'line-through' }}>{incorrectPredictions.join(', ')}</span>
+                      </p>
+                    )}
+
+                    {(() => {
+                      const runners = getConfusedRunners(actualConcept);
+                      if (runners.length > 0) {
+                        return (
+                          <p style={{ margin: '6px 0', fontSize: '0.92rem' }}>
+                            ⚖️ **Confused Runner-ups**: <span style={{ color: '#f1c40f' }}>{runners.join(', ')}</span>
+                          </p>
+                        );
+                      }
+                      return null;
+                    })()}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="loss-display">
+                <h2>🔮 TENALI TRIUMPHED! 🔮</h2>
+                <p className="outcome-desc" style={{ fontSize: '1.1rem', margin: '10px 0' }}>Tenali Raman successfully peeked into your thoughts and decoded your secret math pattern!</p>
+
+                {actualConcept && actualConcept.definingCharacteristics && (
+                  <div className="concept-characteristics-box" style={{ marginTop: '16px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '16px', textAlign: 'left' }}>
+                    <p style={{ fontWeight: '700', color: 'var(--clr-accent)', marginBottom: '8px', fontSize: '0.95rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>🧩 Key Characteristics Identified:</p>
+                    <ul style={{ listStyleType: 'none', paddingLeft: '0', margin: '0' }}>
+                      {actualConcept.definingCharacteristics.map((char, index) => (
+                        <li key={index} style={{ margin: '6px 0', fontSize: '0.92rem', color: 'var(--clr-text)', display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+                          <span style={{ color: '#2ecc71', fontWeight: 'bold' }}>✓</span>
+                          <span>{char}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <p style={{ marginTop: '12px', fontSize: '0.9rem', fontStyle: 'italic', color: 'var(--clr-text-soft)', textAlign: 'center' }}>"Excellent choice!"</p>
+                  </div>
+                )}
+
+                <div style={{ marginTop: '16px' }}>
+                  {mrrChange < 0 ? (
+                    <div className="mrr-down-anim" style={{ color: 'var(--clr-wrong)', fontWeight: 700, padding: '8px', background: 'rgba(231, 76, 60, 0.1)', borderRadius: '8px', display: 'inline-block', margin: '0 auto' }}>
+                      MRR Rating: {mrr - mrrChange} ➔ {mrr} ({mrrChange})!
+                    </div>
+                  ) : (
+                    <div className="mrr-no-change">MRR Rating: {mrr} (+0)</div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {recommendations && (
+              <div className="recommendations-box" style={{ marginTop: 20, textAlign: 'left', padding: '16px', background: 'var(--clr-surface)', borderRadius: '10px', border: '1px solid var(--clr-border)' }}>
+                <h3>Recommendations & Review</h3>
+                {matchedRecConcept && <p style={{ margin: '8px 0' }}><strong>Description:</strong> {matchedRecConcept.description}</p>}
+                <p style={{ margin: '8px 0' }}><strong>Related Concepts:</strong> {recommendations.related.join(', ')}</p>
+                <p style={{ margin: '8px 0' }}><strong>Prerequisite Topics:</strong> {recommendations.prerequisites.join(', ')}</p>
+                <p style={{ margin: '8px 0' }}><strong>Exercises:</strong> {recommendations.exercises.join(', ')}</p>
+              </div>
+            )}
+
+            <button className="submit-btn restart-btn" onClick={handlePlayAgain} style={{ marginTop: 24 }} disabled={loading}>
+              {loading ? 'Logging game...' : 'Play Again'}
+            </button>
+          </div>
+        )}
+
+      </div>
+
+      {/* Rewards Cabinet Sliding Drawer */}
+      {showCabinet && (
+        <div className="cabinet-overlay" onClick={() => setShowCabinet(false)} style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', zIndex: 1000, display: 'flex', justifyContent: 'flex-end', backdropFilter: 'blur(4px)' }}>
+          <div className="cabinet-drawer" onClick={(e) => e.stopPropagation()} style={{ width: '450px', maxWidth: '100%', height: '100%', background: 'var(--clr-surface)', boxShadow: '-10px 0 30px rgba(0,0,0,0.2)', padding: '30px', display: 'flex', flexDirection: 'column', overflowY: 'auto' }}>
+            <div className="cabinet-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', borderBottom: '1px solid var(--clr-border)', paddingBottom: '12px' }}>
+              <h2 style={{ margin: 0, fontSize: '1.5rem', color: 'var(--clr-text)' }}>🎁 Rewards Cabinet</h2>
+              <button className="close-cabinet-btn" onClick={() => setShowCabinet(false)} style={{ background: 'none', border: 'none', fontSize: '1.8rem', cursor: 'pointer', color: 'var(--clr-text-soft)' }}>&times;</button>
+            </div>
+            <p style={{ fontSize: '0.9rem', color: 'var(--clr-text-soft)', marginBottom: '20px', lineHeight: 1.4 }}>
+              Earn Mind Reader Rating (MRR) by defeating Tenali in games. Higher MRR unlocks special skins and titles!
+            </p>
+            <div className="cabinet-mrr-display" style={{ background: 'linear-gradient(135deg, rgba(74, 144, 226, 0.1) 0%, rgba(142, 68, 173, 0.1) 100%)', border: '1px solid var(--clr-border)', borderRadius: '12px', padding: '16px', textAlign: 'center', marginBottom: '24px' }}>
+              <span style={{ fontSize: '0.85rem', color: 'var(--clr-text-soft)', display: 'block', textTransform: 'uppercase', letterSpacing: '1px' }}>Your Current Rating</span>
+              <span style={{ fontSize: '2rem', fontWeight: '800', color: 'var(--clr-accent)', display: 'block', margin: '4px 0' }}>🔮 {mrr} MRR</span>
+            </div>
+
+            {/* Skins List */}
+            <h3 style={{ borderBottom: '1px solid var(--clr-border)', paddingBottom: '8px', marginBottom: '12px', fontSize: '1.1rem', color: 'var(--clr-text)' }}>Skins</h3>
+            <div className="cabinet-items-list" style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '24px' }}>
+              {skinsList.map((skinItem) => {
+                const isUnlocked = mrr >= skinItem.minMrr;
+                const isEquipped = equippedSkin === skinItem.id;
+                return (
+                  <div key={skinItem.id} className={`cabinet-item-card ${isEquipped ? 'equipped' : ''}`} style={{ border: isEquipped ? '2px solid var(--clr-accent)' : '1px solid var(--clr-border)', borderRadius: '12px', padding: '14px', background: isEquipped ? 'rgba(74, 144, 226, 0.05)' : 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center', transition: 'all 0.2s' }}>
+                    <div style={{ flex: 1, paddingRight: '12px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                        <strong style={{ color: 'var(--clr-text)', fontSize: '0.98rem' }}>{skinItem.name}</strong>
+                        <span style={{ fontSize: '0.75rem', padding: '2px 6px', borderRadius: '4px', background: isUnlocked ? 'rgba(46, 204, 113, 0.15)' : 'rgba(231, 76, 60, 0.1)', color: isUnlocked ? '#2ecc71' : 'var(--clr-wrong)', fontWeight: '600' }}>
+                          {isUnlocked ? '✓ Unlocked' : `🔒 ${skinItem.minMrr} MRR`}
+                        </span>
+                      </div>
+                      <p style={{ margin: '4px 0 0', fontSize: '0.82rem', color: 'var(--clr-text-soft)', lineHeight: 1.3 }}>{skinItem.description}</p>
+                    </div>
+                    <div>
+                      {isEquipped ? (
+                        <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--clr-accent)', padding: '6px 12px' }}>Equipped</span>
+                      ) : isUnlocked ? (
+                        <button onClick={() => handleEquipItem('skin', skinItem.id)} style={{ padding: '6px 14px', borderRadius: '8px', border: '1px solid var(--clr-accent)', background: 'none', color: 'var(--clr-accent)', cursor: 'pointer', fontWeight: '600', transition: 'all 0.2s' }}>Equip</button>
+                      ) : (
+                        <button disabled style={{ padding: '6px 14px', borderRadius: '8px', border: '1px solid var(--clr-border)', background: 'none', color: 'var(--clr-text-soft)', opacity: 0.5, cursor: 'not-allowed' }}>Locked</button>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Titles List */}
+            <h3 style={{ borderBottom: '1px solid var(--clr-border)', paddingBottom: '8px', marginBottom: '12px', fontSize: '1.1rem', color: 'var(--clr-text)' }}>Titles</h3>
+            <div className="cabinet-items-list" style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              {titlesList.map((titleItem) => {
+                const isUnlocked = mrr >= titleItem.minMrr;
+                const isEquipped = equippedTitle === titleItem.name;
+                return (
+                  <div key={titleItem.name} className={`cabinet-item-card ${isEquipped ? 'equipped' : ''}`} style={{ border: isEquipped ? '2px solid var(--clr-accent)' : '1px solid var(--clr-border)', borderRadius: '12px', padding: '14px', background: isEquipped ? 'rgba(74, 144, 226, 0.05)' : 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center', transition: 'all 0.2s' }}>
+                    <div style={{ flex: 1, paddingRight: '12px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                        <strong style={{ color: 'var(--clr-text)', fontSize: '0.98rem' }}>{titleItem.name}</strong>
+                        <span style={{ fontSize: '0.75rem', padding: '2px 6px', borderRadius: '4px', background: isUnlocked ? 'rgba(46, 204, 113, 0.15)' : 'rgba(231, 76, 60, 0.1)', color: isUnlocked ? '#2ecc71' : 'var(--clr-wrong)', fontWeight: '600' }}>
+                          {isUnlocked ? '✓ Unlocked' : `🔒 ${titleItem.minMrr} MRR`}
+                        </span>
+                      </div>
+                      <p style={{ margin: '4px 0 0', fontSize: '0.82rem', color: 'var(--clr-text-soft)' }}>Required Rating: {titleItem.minMrr} MRR</p>
+                    </div>
+                    <div>
+                      {isEquipped ? (
+                        <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--clr-accent)', padding: '6px 12px' }}>Equipped</span>
+                      ) : isUnlocked ? (
+                        <button onClick={() => handleEquipItem('title', titleItem.name)} style={{ padding: '6px 14px', borderRadius: '8px', border: '1px solid var(--clr-accent)', background: 'none', color: 'var(--clr-accent)', cursor: 'pointer', fontWeight: '600', transition: 'all 0.2s' }}>Equip</button>
+                      ) : (
+                        <button disabled style={{ padding: '6px 14px', borderRadius: '8px', border: '1px solid var(--clr-border)', background: 'none', color: 'var(--clr-text-soft)', opacity: 0.5, cursor: 'not-allowed' }}>Locked</button>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+          </div>
+        </div>
+      )}
+    </QuizLayout>
+  );
+}
+
 export function QuizLayout({ title, subtitle, onBack, children, timer, sessionGoal }) {
   // Derive display values from the timer object
   const isSpeed   = timer && (timer.mode === 'speed'   || sessionGoal === 'speed')
@@ -69822,3 +71310,4 @@ export function changeXp(delta) {
 
 export default App
 export { AuthMenu }
+

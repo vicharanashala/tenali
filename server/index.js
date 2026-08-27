@@ -2186,10 +2186,10 @@ function factorCoeffRange(difficulty) {
  */
 
 const POLYFACTOR_TIERS = {
-  1: { aChoices: [1],          qMax: 10, qMin: 1 },
-  2: { aChoices: [1],          qMax: 12, qMin: 1 },
-  3: { aChoices: [2, 3],       qMax: 6,  qMin: 1 },
-  4: { aChoices: [2, 3, 4, 5], qMax: 6,  qMin: 1 },
+  1: { aChoices: [1], qMax: 10, qMin: 1 },
+  2: { aChoices: [1], qMax: 12, qMin: 1 },
+  3: { aChoices: [2, 3], qMax: 6, qMin: 1 },
+  4: { aChoices: [2, 3, 4, 5], qMax: 6, qMin: 1 },
 };
 
 function polyfactorPickFactors(tier) {
@@ -2588,7 +2588,7 @@ app.post('/qformula-api/check', (req, res) => {
     const u2 = parseFloat(Number(userR2).toFixed(2));
     // Accept either order with tolerance of 0.05
     correct = (Math.abs(u1 - roots.r1) < 0.05 && Math.abs(u2 - roots.r2) < 0.05) ||
-              (Math.abs(u1 - roots.r2) < 0.05 && Math.abs(u2 - roots.r1) < 0.05);
+      (Math.abs(u1 - roots.r2) < 0.05 && Math.abs(u2 - roots.r1) < 0.05);
   } else if (disc === 0) {
     // Check single real root
     roots.type = 'real_equal';
@@ -2696,8 +2696,8 @@ app.get('/simul-api/question', (req, res) => {
       }
       // Calculate 3×3 determinant using expansion
       const det = eqs[0].a * (eqs[1].b * eqs[2].c - eqs[1].c * eqs[2].b)
-                - eqs[0].b * (eqs[1].a * eqs[2].c - eqs[1].c * eqs[2].a)
-                + eqs[0].c * (eqs[1].a * eqs[2].b - eqs[1].b * eqs[2].a);
+        - eqs[0].b * (eqs[1].a * eqs[2].c - eqs[1].c * eqs[2].a)
+        + eqs[0].c * (eqs[1].a * eqs[2].b - eqs[1].b * eqs[2].a);
       if (det !== 0) break;
       attempts++;
     } while (attempts < 50);
@@ -3332,7 +3332,7 @@ function simpleSurd(n) {
 /**
  * Utility: list of small primes for generating radicands
  */
-const SQUARE_FREE = [2,3,5,6,7,10,11,13,14,15,17,19,21,22,23,26,29,30];
+const SQUARE_FREE = [2, 3, 5, 6, 7, 10, 11, 13, 14, 15, 17, 19, 21, 22, 23, 26, 29, 30];
 
 function randInt(lo, hi) {
   return lo + Math.floor(Math.random() * (hi - lo + 1));
@@ -3645,8 +3645,8 @@ app.post('/surds-api/check', express.json(), (req, res) => {
     // Normalize user's surd
     const userNorm = normalizeSurd(userParsed.rational, userParsed.coeff, userParsed.radicand);
     correct = userNorm.rational === correctRational
-           && userNorm.coeff === correctCoeff
-           && (correctCoeff === 0 || userNorm.radicand === correctRadicand);
+      && userNorm.coeff === correctCoeff
+      && (correctCoeff === 0 || userNorm.radicand === correctRadicand);
   } else if (userParsed && cDen !== 1) {
     // User might type e.g. "2√3/3" — parse fraction form
     // Try parsing as "X/Y" where X is a surd expression
@@ -3659,8 +3659,8 @@ app.post('/surds-api/check', express.json(), (req, res) => {
         // Compare: user's (numNorm)/userDen vs correct/cDen
         // Cross multiply to avoid floating point
         correct = numNorm.rational * cDen === correctRational * userDen
-               && numNorm.coeff * cDen === correctCoeff * userDen
-               && (correctCoeff === 0 || numNorm.radicand === correctRadicand);
+          && numNorm.coeff * cDen === correctCoeff * userDen
+          && (correctCoeff === 0 || numNorm.radicand === correctRadicand);
       }
     }
   }
@@ -3961,7 +3961,7 @@ app.get('/sequences-api/question', (req, res) => {
   else if (difficulty === 'hard') {
     // Geometric: a, ar, ar², ... Find the nth term
     const a = seqPick([1, 2, 3, 4, 5, -1, -2, -3]);
-    const r = seqPick([2, 3, -2, -3, 1/2, 1/3, -1/2]);
+    const r = seqPick([2, 3, -2, -3, 1 / 2, 1 / 3, -1 / 2]);
     const n = seqRand(3, 8);
     const terms = [a, a * r, a * r * r, a * r * r * r];
     const answer = a * Math.pow(r, n - 1);
@@ -3975,7 +3975,7 @@ app.get('/sequences-api/question', (req, res) => {
     } else {
       // Convert to fraction: a * r^(n-1) where r might be 1/2 or 1/3
       // Use rational arithmetic
-      const rFrac = r === 1/2 ? { n: 1, d: 2 } : r === 1/3 ? { n: 1, d: 3 } : r === -1/2 ? { n: -1, d: 2 } : { n: r, d: 1 };
+      const rFrac = r === 1 / 2 ? { n: 1, d: 2 } : r === 1 / 3 ? { n: 1, d: 3 } : r === -1 / 2 ? { n: -1, d: 2 } : { n: r, d: 1 };
       let num = a * Math.pow(rFrac.n, n - 1);
       let den = Math.pow(rFrac.d, n - 1);
       const g = gcd(Math.abs(num), Math.abs(den));
@@ -3987,7 +3987,7 @@ app.get('/sequences-api/question', (req, res) => {
   else {
     // Geometric sum: S_n = a(r^n - 1)/(r - 1) for r ≠ 1
     const a = seqPick([1, 2, 3, 4, 5]);
-    const r = seqPick([2, 3, -2, 1/2]);
+    const r = seqPick([2, 3, -2, 1 / 2]);
     const n = seqRand(3, 7);
     const terms = [a, a * r, a * r * r];
     const fmtNum = (x) => Number.isInteger(x) ? String(x) : x.toFixed(4).replace(/0+$/, '').replace(/\.$/, '');
@@ -3999,7 +3999,7 @@ app.get('/sequences-api/question', (req, res) => {
       ansNum = Math.round(sn); ansDen = 1;
     } else {
       // r = 1/2: S_n = a(1 - (1/2)^n) / (1 - 1/2) = a * 2 * (1 - 1/2^n) = 2a * (2^n - 1)/2^n
-      const rFrac = r === 1/2 ? { n: 1, d: 2 } : { n: r, d: 1 };
+      const rFrac = r === 1 / 2 ? { n: 1, d: 2 } : { n: r, d: 1 };
       const rn_num = Math.pow(rFrac.n, n);
       const rn_den = Math.pow(rFrac.d, n);
       // S = a * (1 - rn_num/rn_den) / (1 - rFrac.n/rFrac.d)
@@ -4213,9 +4213,9 @@ app.post('/ratio-api/check', express.json(), (req, res) => {
 
 /** Tier configuration per Module 37 spec. */
 const PERCENT_TIERS = {
-  1: { pcts: [10, 25, 50, 100],         lo: 10,   hi: 100,   label: 'Tier 1' },
-  2: { pcts: [20, 30, 75],              lo: 100,  hi: 500,   label: 'Tier 2' },
-  3: { pcts: [15, 35, 60, 80],          lo: 500,  hi: 2000,  label: 'Tier 3' },
+  1: { pcts: [10, 25, 50, 100], lo: 10, hi: 100, label: 'Tier 1' },
+  2: { pcts: [20, 30, 75], lo: 100, hi: 500, label: 'Tier 2' },
+  3: { pcts: [15, 35, 60, 80], lo: 500, hi: 2000, label: 'Tier 3' },
   4: { pcts: [12.5, 17.5, 22.5, 37.5, 47.5, 62.5, 87.5], lo: 2000, hi: 10000, label: 'Tier 4' },
 };
 
@@ -4566,7 +4566,7 @@ app.get('/trig-api/question', (req, res) => {
   if (difficulty === 'easy') {
     // SOH-CAH-TOA: find missing side in right triangle
     // Use Pythagorean triples for clean answers
-    const triples = [[3,4,5],[5,12,13],[8,15,17],[7,24,25],[6,8,10],[9,12,15],[10,24,26],[20,21,29]];
+    const triples = [[3, 4, 5], [5, 12, 13], [8, 15, 17], [7, 24, 25], [6, 8, 10], [9, 12, 15], [10, 24, 26], [20, 21, 29]];
     const [a, b, c] = triPick(triples);
     const subtype = triPick(['find_hyp', 'find_leg']);
     let prompt, answer;
@@ -4629,7 +4629,7 @@ app.get('/trig-api/question', (req, res) => {
       const b = triRand(5, 15);
       const C = triRand(30, 120);
       const radC = C * Math.PI / 180;
-      const c2 = a*a + b*b - 2*a*b*Math.cos(radC);
+      const c2 = a * a + b * b - 2 * a * b * Math.cos(radC);
       const c = Math.round(Math.sqrt(c2) * 10) / 10;
       const prompt = `Triangle: a = ${a}, b = ${b}, angle C = ${C}°. Find side c (1 d.p.).`;
       res.json({ id, difficulty, type: 'cosine_rule', prompt, answer: c, answerDen: 1 });
@@ -5299,7 +5299,7 @@ app.get('/stats-api/question', (req, res) => {
         if (v !== modeVal && data.filter(x => x === v).length < 2) data.push(v);
       }
       // Shuffle
-      for (let i = data.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [data[i], data[j]] = [data[j], data[i]]; }
+      for (let i = data.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[data[i], data[j]] = [data[j], data[i]]; }
       const prompt = `Find the mode of: ${data.join(', ')}`;
       res.json({ id, difficulty, type: 'mode', subtype: 'mode', prompt, data, answer: modeVal, display: String(modeVal) });
     } else {
@@ -5338,7 +5338,8 @@ app.post('/stats-api/check', express.json(), (req, res) => {
     const fracMatch = userStr.match(/^(-?\d+)\/(-?\d+)$/);
     let uNum, uDen;
     if (fracMatch) { uNum = parseInt(fracMatch[1]); uDen = parseInt(fracMatch[2]); }
-    else { const n = parseFloat(userStr);
+    else {
+      const n = parseFloat(userStr);
       if (!isNaN(n)) {
         // Convert decimal to fraction for comparison
         if (Number.isInteger(n)) { uNum = n; uDen = 1; }
@@ -5369,9 +5370,9 @@ app.get('/matrix-api/question', (req, res) => {
 
   if (difficulty === 'easy') {
     // Add two 2×2 matrices
-    const A = [[triRand(-5,9), triRand(-5,9)], [triRand(-5,9), triRand(-5,9)]];
-    const B = [[triRand(-5,9), triRand(-5,9)], [triRand(-5,9), triRand(-5,9)]];
-    const R = [[A[0][0]+B[0][0], A[0][1]+B[0][1]], [A[1][0]+B[1][0], A[1][1]+B[1][1]]];
+    const A = [[triRand(-5, 9), triRand(-5, 9)], [triRand(-5, 9), triRand(-5, 9)]];
+    const B = [[triRand(-5, 9), triRand(-5, 9)], [triRand(-5, 9), triRand(-5, 9)]];
+    const R = [[A[0][0] + B[0][0], A[0][1] + B[0][1]], [A[1][0] + B[1][0], A[1][1] + B[1][1]]];
     const fmtM = (m) => `[${m[0][0]},${m[0][1]};${m[1][0]},${m[1][1]}]`;
     const prompt = `A = ${fmtM(A)}, B = ${fmtM(B)}. Find A + B.`;
     res.json({ id, difficulty, type: 'add', prompt, answer: R, display: fmtM(R) });
@@ -5387,19 +5388,19 @@ app.get('/matrix-api/question', (req, res) => {
   }
   else if (difficulty === 'hard') {
     // Determinant of 2×2
-    const a = triRand(-5,8); const b = triRand(-5,8);
-    const c = triRand(-5,8); const d = triRand(-5,8);
+    const a = triRand(-5, 8); const b = triRand(-5, 8);
+    const c = triRand(-5, 8); const d = triRand(-5, 8);
     const det = a * d - b * c;
     const prompt = `Find the determinant of [${a},${b};${c},${d}]`;
     res.json({ id, difficulty, type: 'determinant', prompt, answer: det, display: String(det) });
   }
   else {
     // Multiply two 2×2 matrices
-    const A = [[triRand(-3,5), triRand(-3,5)], [triRand(-3,5), triRand(-3,5)]];
-    const B = [[triRand(-3,5), triRand(-3,5)], [triRand(-3,5), triRand(-3,5)]];
+    const A = [[triRand(-3, 5), triRand(-3, 5)], [triRand(-3, 5), triRand(-3, 5)]];
+    const B = [[triRand(-3, 5), triRand(-3, 5)], [triRand(-3, 5), triRand(-3, 5)]];
     const R = [
-      [A[0][0]*B[0][0]+A[0][1]*B[1][0], A[0][0]*B[0][1]+A[0][1]*B[1][1]],
-      [A[1][0]*B[0][0]+A[1][1]*B[1][0], A[1][0]*B[0][1]+A[1][1]*B[1][1]]
+      [A[0][0] * B[0][0] + A[0][1] * B[1][0], A[0][0] * B[0][1] + A[0][1] * B[1][1]],
+      [A[1][0] * B[0][0] + A[1][1] * B[1][0], A[1][0] * B[0][1] + A[1][1] * B[1][1]]
     ];
     const fmtM = (m) => `[${m[0][0]},${m[0][1]};${m[1][0]},${m[1][1]}]`;
     const prompt = `A = ${fmtM(A)}, B = ${fmtM(B)}. Find AB.`;
@@ -5423,7 +5424,7 @@ app.post('/matrix-api/check', express.json(), (req, res) => {
       const r1 = m[1].split(',').map(Number);
       if (r0.length === 2 && r1.length === 2) {
         correct = r0[0] === answer[0][0] && r0[1] === answer[0][1] &&
-                  r1[0] === answer[1][0] && r1[1] === answer[1][1];
+          r1[0] === answer[1][0] && r1[1] === answer[1][1];
       }
     }
   }
@@ -5441,9 +5442,9 @@ app.get('/vectors-api/question', (req, res) => {
 
   if (difficulty === 'easy') {
     // Add two column vectors
-    const a = [triRand(-8,8), triRand(-8,8)];
-    const b = [triRand(-8,8), triRand(-8,8)];
-    const ans = [a[0]+b[0], a[1]+b[1]];
+    const a = [triRand(-8, 8), triRand(-8, 8)];
+    const b = [triRand(-8, 8), triRand(-8, 8)];
+    const ans = [a[0] + b[0], a[1] + b[1]];
     const prompt = `a = (${a[0]}, ${a[1]}), b = (${b[0]}, ${b[1]}). Find a + b.`;
     res.json({ id, difficulty, type: 'add', prompt, ansX: ans[0], ansY: ans[1], display: `(${ans[0]}, ${ans[1]})` });
   }
@@ -5457,18 +5458,18 @@ app.get('/vectors-api/question', (req, res) => {
   }
   else if (difficulty === 'hard') {
     // Magnitude (use Pythagorean triples for clean answers)
-    const triples = [[3,4,5],[5,12,13],[8,15,17],[6,8,10]];
+    const triples = [[3, 4, 5], [5, 12, 13], [8, 15, 17], [6, 8, 10]];
     const [x, y, mag] = triPick(triples);
-    const sx = triPick([1,-1]); const sy = triPick([1,-1]);
-    const prompt = `Find |v| where v = (${sx*x}, ${sy*y})`;
+    const sx = triPick([1, -1]); const sy = triPick([1, -1]);
+    const prompt = `Find |v| where v = (${sx * x}, ${sy * y})`;
     res.json({ id, difficulty, type: 'magnitude', prompt, answer: mag, display: String(mag) });
   }
   else {
     // Vector between two points
-    const x1 = triRand(-8,8); const y1 = triRand(-8,8);
-    const x2 = triRand(-8,8); const y2 = triRand(-8,8);
+    const x1 = triRand(-8, 8); const y1 = triRand(-8, 8);
+    const x2 = triRand(-8, 8); const y2 = triRand(-8, 8);
     const prompt = `A = (${x1}, ${y1}), B = (${x2}, ${y2}). Find vector AB.`;
-    res.json({ id, difficulty, type: 'position', prompt, ansX: x2-x1, ansY: y2-y1, display: `(${x2-x1}, ${y2-y1})` });
+    res.json({ id, difficulty, type: 'position', prompt, ansX: x2 - x1, ansY: y2 - y1, display: `(${x2 - x1}, ${y2 - y1})` });
   }
 });
 
@@ -5526,7 +5527,7 @@ app.get('/dotprod-api/question', (req, res) => {
     // Dot product of two 2D vectors, all positive 1-digit
     const a = [pos1d(), pos1d()];
     const b = [pos1d(), pos1d()];
-    const dot = a[0]*b[0] + a[1]*b[1];
+    const dot = a[0] * b[0] + a[1] * b[1];
     const prompt = `Find the dot product`;
     res.json({ id, difficulty, type: 'dot2d', prompt, vecA: a, vecB: b, answer: dot, display: String(dot) });
   }
@@ -5535,13 +5536,13 @@ app.get('/dotprod-api/question', (req, res) => {
     if (Math.random() < 0.5) {
       const a = [pos1d(), pos1d()];
       const b = [pos1d(), pos1d()];
-      const dot = a[0]*b[0] + a[1]*b[1];
+      const dot = a[0] * b[0] + a[1] * b[1];
       const prompt = `Find the dot product`;
       res.json({ id, difficulty, type: 'dot2d', prompt, vecA: a, vecB: b, answer: dot, display: String(dot) });
     } else {
       const a = [pos1d(), pos1d(), pos1d()];
       const b = [pos1d(), pos1d(), pos1d()];
-      const dot = a[0]*b[0] + a[1]*b[1] + a[2]*b[2];
+      const dot = a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
       const prompt = `Find the dot product`;
       res.json({ id, difficulty, type: 'dot3d', prompt, vecA: a, vecB: b, answer: dot, display: String(dot) });
     }
@@ -5649,7 +5650,7 @@ app.get('/transform-api/question', (req, res) => {
     // Translation by vector
     const dx = triRand(-6, 6); const dy = triRand(-6, 6);
     const prompt = `Translate (${x}, ${y}) by vector (${dx}, ${dy})`;
-    res.json({ id, difficulty, type: 'translate', prompt, ansX: x + dx, ansY: y + dy, display: `(${x+dx}, ${y+dy})` });
+    res.json({ id, difficulty, type: 'translate', prompt, ansX: x + dx, ansY: y + dy, display: `(${x + dx}, ${y + dy})` });
   }
   else if (difficulty === 'hard') {
     // Rotation 90° or 180° about origin
@@ -5731,7 +5732,7 @@ app.get('/mensur-api/question', (req, res) => {
       prompt = `Volume of cone: radius = ${r}, height = ${h} (2 d.p.)`;
       displayEq = `⅓ × π × ${r}² × ${h} = ${answer}`;
     } else {
-      answer = Math.round(4/3 * Math.PI * r * r * r * 100) / 100;
+      answer = Math.round(4 / 3 * Math.PI * r * r * r * 100) / 100;
       prompt = `Volume of sphere with radius ${r} (2 d.p.)`;
       displayEq = `⁴⁄₃ × π × ${r}³ = ${answer}`;
     }
@@ -6006,8 +6007,10 @@ app.post('/diff-api/check', express.json(), (req, res) => {
     const fracMatch = userStr.match(/^(-?\d+)\/(-?\d+)$/);
     let uNum, uDen;
     if (fracMatch) { uNum = parseInt(fracMatch[1]); uDen = parseInt(fracMatch[2]); }
-    else { const n = parseFloat(userStr); if (!isNaN(n) && Number.isInteger(n)) { uNum = n; uDen = 1; }
-      else if (!isNaN(n)) { correct = Math.abs(n - ansNum / ansDen) < 0.01; } }
+    else {
+      const n = parseFloat(userStr); if (!isNaN(n) && Number.isInteger(n)) { uNum = n; uDen = 1; }
+      else if (!isNaN(n)) { correct = Math.abs(n - ansNum / ansDen) < 0.01; }
+    }
     if (!correct && uNum !== undefined && uDen !== undefined && uDen !== 0) {
       const us = simplifyFraction(uNum, uDen);
       const es = simplifyFraction(ansNum, ansDen);
@@ -6251,7 +6254,7 @@ app.get('/stdform-api/question', (req, res) => {
     const sig = randInt(11, 99) / 10; // e.g. 3.4
     const exp = randInt(2, 7) * (Math.random() < 0.5 ? 1 : -1);
     const val = sig * Math.pow(10, exp);
-    prompt = `Write ${exp > 0 ? val.toLocaleString('en-US', {useGrouping: false}) : val.toFixed(Math.abs(exp) + 1)} in standard form.`;
+    prompt = `Write ${exp > 0 ? val.toLocaleString('en-US', { useGrouping: false }) : val.toFixed(Math.abs(exp) + 1)} in standard form.`;
     answer = `${sig} × 10^${exp}`;
     display = answer;
   } else if (diff === 'medium') {
@@ -7094,7 +7097,7 @@ app.post('/congruence-api/check', express.json(), (req, res) => {
  * Find hypotenuse, shorter side, word problems, 3D diagonal
  * ═══════════════════════════════════════════════════════════════════════════ */
 
-const PYTH_TRIPLES = [[3,4,5],[5,12,13],[8,15,17],[7,24,25],[6,8,10],[9,12,15],[12,16,20],[15,20,25],[9,40,41],[11,60,61],[20,21,29]];
+const PYTH_TRIPLES = [[3, 4, 5], [5, 12, 13], [8, 15, 17], [7, 24, 25], [6, 8, 10], [9, 12, 15], [12, 16, 20], [15, 20, 25], [9, 40, 41], [11, 60, 61], [20, 21, 29]];
 
 /**
  * Module 44 spec: a Pythagoras session must never open with large numbers.
@@ -7109,11 +7112,11 @@ const PYTH_TRIPLES = [[3,4,5],[5,12,13],[8,15,17],[7,24,25],[6,8,10],[9,12,15],[
  */
 function pythagPoolForIndex(qIdx) {
   // Tier 0 (questions 1-3): single-digit sides only — only the (3,4,5) triple.
-  if (qIdx < 3) return { triples: [[3,4,5]], maxK: 1 };
+  if (qIdx < 3) return { triples: [[3, 4, 5]], maxK: 1 };
   // Tier 1 (questions 4-6): small double-digit sides, k=1.
-  if (qIdx < 6) return { triples: [[3,4,5],[6,8,10],[5,12,13],[9,12,15]], maxK: 1 };
+  if (qIdx < 6) return { triples: [[3, 4, 5], [6, 8, 10], [5, 12, 13], [9, 12, 15]], maxK: 1 };
   // Tier 2 (questions 7-9): broader pool, allow k=2.
-  if (qIdx < 9) return { triples: [[3,4,5],[6,8,10],[5,12,13],[9,12,15],[8,15,17],[7,24,25]], maxK: 2 };
+  if (qIdx < 9) return { triples: [[3, 4, 5], [6, 8, 10], [5, 12, 13], [9, 12, 15], [8, 15, 17], [7, 24, 25]], maxK: 2 };
   // Tier 3 (10+): full pool, larger multipliers permitted.
   return { triples: PYTH_TRIPLES.slice(0, 6), maxK: 3 };
 }
@@ -7167,7 +7170,7 @@ app.get('/pythag-api/question', (req, res) => {
     // 3D Pythagoras: space diagonal of cuboid
     // Use triples that nest: e.g. 3,4,5 then diagonal = √(3²+4²+5²) — not always clean
     // Instead: pick a,b,c so a²+b²+c² is a perfect square
-    const combos = [[1,2,2,3],[2,3,6,7],[2,6,9,11],[1,4,8,9],[4,4,7,9],[2,4,4,6],[3,6,6,9],[6,6,7,11],[1,2,14,15]];
+    const combos = [[1, 2, 2, 3], [2, 3, 6, 7], [2, 6, 9, 11], [1, 4, 8, 9], [4, 4, 7, 9], [2, 4, 4, 6], [3, 6, 6, 9], [6, 6, 7, 11], [1, 2, 14, 15]];
     // Actually simpler: use nested Pythagoras. floor diagonal d = √(a²+b²), then space = √(d²+c²)
     // Pick a triple for floor: (3,4,5), then space with c: (5,12,13) → a=3,b=4,c=12, space=13
     const nested = [
@@ -7310,10 +7313,10 @@ app.get('/squaring-api/question', (req, res) => {
   const difficulty = req.query.difficulty || 'easy';
   const id = Date.now();
   let lo, hi;
-  if (difficulty === 'easy')      { lo = 11;  hi = 29; }
-  else if (difficulty === 'medium') { lo = 30;  hi = 59; }
-  else if (difficulty === 'hard')   { lo = 60;  hi = 79; }
-  else                              { lo = 80;  hi = 99; }
+  if (difficulty === 'easy') { lo = 11; hi = 29; }
+  else if (difficulty === 'medium') { lo = 30; hi = 59; }
+  else if (difficulty === 'hard') { lo = 60; hi = 79; }
+  else { lo = 80; hi = 99; }
 
   const n = randomInt(lo, hi);
   // Split: a = largest multiple of 10 ≤ n, b = remainder
@@ -7365,9 +7368,9 @@ function tatsavitQuestion(difficulty, level) {
     type = Math.max(0, Math.min(8, Number(level)));
   } else {
     const pools = {
-      easy:      [0, 0, 0, 1, 2, 6, 7],       // mostly single-digit tables, some tables-20, squares, add, sub
-      medium:    [0, 1, 1, 2, 3, 4, 6, 7],     // add sqrt, monomial
-      hard:      [1, 2, 3, 4, 5, 6, 7, 8],     // add percentage, negative arith
+      easy: [0, 0, 0, 1, 2, 6, 7],       // mostly single-digit tables, some tables-20, squares, add, sub
+      medium: [0, 1, 1, 2, 3, 4, 6, 7],     // add sqrt, monomial
+      hard: [1, 2, 3, 4, 5, 6, 7, 8],     // add percentage, negative arith
       extrahard: [2, 3, 4, 5, 5, 8, 8, 8],     // heavier on harder types
     };
     const pool = pools[difficulty] || pools.easy;
@@ -7478,18 +7481,18 @@ function tatsavitQuestion(difficulty, level) {
       const patterns = isHarder
         ? ['sub_neg', 'neg_add_neg', 'neg_sub_neg', 'neg_sub_pos', 'neg_add_pos']
         : isMed ? ['sub_neg', 'neg_add_neg', 'neg_sub_neg']
-        : ['sub_neg'];
+          : ['sub_neg'];
       const pat = triPick(patterns);
       const a = randomInt(2, isHarder ? 30 : 12);
       const b = randomInt(2, isHarder ? 30 : 12);
       let prompt, answer;
       switch (pat) {
-        case 'sub_neg':      prompt = `${a} − (−${b})`;   answer = a + b;  break;
-        case 'neg_add_neg':  prompt = `−${a} + (−${b})`;  answer = -(a + b); break;
-        case 'neg_sub_neg':  prompt = `−${a} − (−${b})`;  answer = -a + b; break;
-        case 'neg_sub_pos':  prompt = `−${a} − ${b}`;     answer = -(a + b); break;
-        case 'neg_add_pos':  prompt = `−${a} + ${b}`;     answer = b - a;  break;
-        default:             prompt = `${a} − (−${b})`;   answer = a + b;
+        case 'sub_neg': prompt = `${a} − (−${b})`; answer = a + b; break;
+        case 'neg_add_neg': prompt = `−${a} + (−${b})`; answer = -(a + b); break;
+        case 'neg_sub_neg': prompt = `−${a} − (−${b})`; answer = -a + b; break;
+        case 'neg_sub_pos': prompt = `−${a} − ${b}`; answer = -(a + b); break;
+        case 'neg_add_pos': prompt = `−${a} + ${b}`; answer = b - a; break;
+        default: prompt = `${a} − (−${b})`; answer = a + b;
       }
       return { id, type: 8, typeName: 'Negative Arithmetic', prompt: `${prompt} = ?`, answer, display: String(answer) };
     }
@@ -8797,9 +8800,9 @@ function indicesgymQuestion(difficulty) {
   // Pick the law to apply. Easy/medium = single-base laws; hard/extrahard
   // mix two bases or chain two operations.
   const laws = (difficulty === 'easy') ? ['product', 'quotient']
-              : (difficulty === 'medium') ? ['product', 'quotient', 'power']
-              : (difficulty === 'hard') ? ['product', 'quotient', 'power', 'mixed', 'chain']
-              : ['power', 'mixed', 'chain', 'powerchain'];
+    : (difficulty === 'medium') ? ['product', 'quotient', 'power']
+      : (difficulty === 'hard') ? ['product', 'quotient', 'power', 'mixed', 'chain']
+        : ['power', 'mixed', 'chain', 'powerchain'];
   const law = laws[randomInt(0, laws.length - 1)];
 
   let prompt, correctText, distractors;
@@ -8940,10 +8943,10 @@ function polygymQuestion(difficulty) {
   const kinds = (difficulty === 'easy')
     ? ['intMul', 'twoDigAdd', 'intMul', 'twoDigAdd']
     : (difficulty === 'medium')
-    ? ['intTimesMono', 'monoAdd', 'intTimesMono', 'monoAdd', 'intMul']
-    : (difficulty === 'hard')
-    ? ['monoTimesMono', 'monoTimesMonoXY', 'monoBigAdd', 'monoTimesMono']
-    : ['monoSquare', 'monoTimesMonoXY', 'collectLikeTerms', 'monoSquare'];
+      ? ['intTimesMono', 'monoAdd', 'intTimesMono', 'monoAdd', 'intMul']
+      : (difficulty === 'hard')
+        ? ['monoTimesMono', 'monoTimesMonoXY', 'monoBigAdd', 'monoTimesMono']
+        : ['monoSquare', 'monoTimesMonoXY', 'collectLikeTerms', 'monoSquare'];
   const kind = kinds[randomInt(0, kinds.length - 1)];
 
   let prompt, correctText, distractors;
@@ -9173,7 +9176,7 @@ function sectionQuestion(difficulty) {
     const px = (t * x2 + x1) / (t + 1);
     const py = (t * y2 + y1) / (t + 1);
     const prompt = `Point (${px.toFixed(1)},${py.toFixed(1)}) divides (${x1},${y1}) and (${x2},${y2}). Find ratio m:n`;
-    return { id, difficulty, prompt, answer: t, display: `1:${(1/t).toFixed(2)}` };
+    return { id, difficulty, prompt, answer: t, display: `1:${(1 / t).toFixed(2)}` };
   } else {
     // centroid of triangle
     const x1 = randomInt(-5, 5);
@@ -9201,7 +9204,7 @@ app.post('/section-api/check', express.json(), (req, res) => {
   if (Array.isArray(answer)) {
     const parts = userStr.split(',').map(p => parseFloat(p.trim()));
     const correct = parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1]) &&
-                    Math.abs(parts[0] - answer[0]) < 0.2 && Math.abs(parts[1] - answer[1]) < 0.2;
+      Math.abs(parts[0] - answer[0]) < 0.2 && Math.abs(parts[1] - answer[1]) < 0.2;
     res.json({ correct, display, message: correct ? 'Correct!' : 'Incorrect' });
   } else {
     const userNum = parseFloat(userStr);
@@ -9243,7 +9246,7 @@ function linprogQuestion(difficulty) {
     const c1 = randomInt(4, 8);
     const c2 = randomInt(4, 8);
     const prompt = `Minimize Z = ${a}x + ${b}y subject to x + y ≥ ${c1}, 2x + y ≥ ${c2}, x,y ≥ 0`;
-    const corners = [[0, c1], [0, c2], [c1, 0], [c2/2, 0]].filter(p => p[0] >= 0 && p[1] >= 0);
+    const corners = [[0, c1], [0, c2], [c1, 0], [c2 / 2, 0]].filter(p => p[0] >= 0 && p[1] >= 0);
     let minVal = Infinity;
     corners.forEach(([x, y]) => {
       if (x + y >= c1 && 2 * x + y >= c2) {
@@ -9461,6 +9464,1169 @@ app.post('/diffeq-api/check', express.json(), (req, res) => {
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
+// TENALI MIND READER (MVP API)
+// ═══════════════════════════════════════════════════════════════════════════
+const { QUESTIONS, CONCEPTS } = require('./mindReaderKB');
+const { runInference }        = require('./mindReaderEngine');
+
+app.post('/api/mindreader/next', express.json(), (req, res) => {
+  const history              = req.body.history              || [];
+  const incorrectPredictions = req.body.incorrectPredictions || [];
+
+  const result = runInference(CONCEPTS, QUESTIONS, history, incorrectPredictions);
+
+  console.log(`[MindReader API] History Length: ${history.length} | Remaining: ${result.remainingCount} | Confidence: ${result.confidence} | Prediction: ${result.prediction ? result.prediction.name : 'None'}`);
+
+  if (result.error) {
+    // Distinguish "no candidates" (404) from inconsistent state (409)
+    const statusCode = result.remainingCount === 0 && incorrectPredictions.length > 0
+      ? 404
+      : 409;
+    return res.status(statusCode).json({ error: result.error });
+  }
+
+  return res.json(result);
+});
+
+const JWT_SECRET = process.env.JWT_SECRET || 'tenali-dev-secret-change-me';
+
+// Helper to automatically unlock skins based on MRR threshold
+function updateUnlockedSkins(user) {
+  if (!user.unlockedSkins) {
+    user.unlockedSkins = ["Classic Tenali"];
+  }
+  let updated = false;
+  if (user.mrr >= 1150 && !user.unlockedSkins.includes("Royal Robes")) {
+    user.unlockedSkins.push("Royal Robes");
+    updated = true;
+  }
+  if (user.mrr >= 1300 && !user.unlockedSkins.includes("Sage Scholar")) {
+    user.unlockedSkins.push("Sage Scholar");
+    updated = true;
+  }
+  return updated;
+}
+
+// In-memory profiles fallback when MongoDB is down
+const inMemoryProfiles = {}; // Keyed by username -> { username, mrr, mindReaderGamesToday, lastMindReaderGameDate, unlockedSkins }
+
+// Inline helper to authenticate optional users
+async function getOptionalUser(req) {
+  const authHeader = req.get('authorization') || '';
+  const match = /^Bearer\s+(.+)$/i.exec(authHeader);
+  if (!match) return null;
+  try {
+    const payload = jwt.verify(match[1], JWT_SECRET);
+    const username = payload.username;
+    if (!username) return null;
+
+    const mongoose = require('mongoose');
+    if (mongoose.connection.readyState === 1) {
+      const user = await auth.User.findById(payload.sub);
+      if (user) return user;
+    }
+
+    // Fall back to in-memory profile
+    const lowerName = username.toLowerCase();
+    if (!inMemoryProfiles[lowerName]) {
+      inMemoryProfiles[lowerName] = {
+        username: username,
+        mrr: 1000,
+        mindReaderGamesToday: 0,
+        lastMindReaderGameDate: new Date().toDateString(),
+        unlockedSkins: ["Classic Tenali"],
+        equippedSkin: 'classic',
+        equippedTitle: 'Novice Reader',
+        isInMemory: true
+      };
+    }
+    return inMemoryProfiles[lowerName];
+  } catch (_e) {
+    return null;
+  }
+}
+
+app.get('/api/mindreader/config', (req, res) => {
+  res.json({
+    dailyLimit: 999999,
+    confidenceThreshold: 0.75,
+    startingRoyalChances: 3,
+    maxQuestions: 20
+  });
+});
+
+app.get('/api/mindreader/profile', async (req, res) => {
+  try {
+    const user = await getOptionalUser(req);
+    const todayStr = new Date().toDateString();
+
+    if (user) {
+      let needsSave = false;
+      if (user.lastMindReaderGameDate !== todayStr) {
+        user.mindReaderGamesToday = 0;
+        user.lastMindReaderGameDate = todayStr;
+        needsSave = true;
+      }
+      if (updateUnlockedSkins(user)) {
+        needsSave = true;
+      }
+      if (needsSave && !user.isInMemory) {
+        await user.save();
+      }
+
+      return res.json({
+        mrr: user.mrr || 1000,
+        mindReaderGamesToday: user.mindReaderGamesToday || 0,
+        unlockedSkins: user.unlockedSkins || ["Classic Tenali"],
+        equippedSkin: user.equippedSkin || 'classic',
+        equippedTitle: user.equippedTitle || 'Novice Reader',
+        winStreak: user.reverseMindReaderWinStreak || 0,
+        authenticated: true,
+        username: user.username
+      });
+    }
+
+    return res.json({
+      mrr: 1000,
+      mindReaderGamesToday: 0,
+      unlockedSkins: ["Classic Tenali"],
+      equippedSkin: 'classic',
+      equippedTitle: 'Novice Reader',
+      authenticated: false
+    });
+  } catch (err) {
+    console.error('[mindreader] profile error:', err);
+    return res.status(500).json({ error: 'Internal server error loading profile' });
+  }
+});
+
+app.post('/api/mindreader/equip', express.json(), async (req, res) => {
+  const { skin, title } = req.body;
+  try {
+    const user = await getOptionalUser(req);
+    if (user) {
+      if (skin) user.equippedSkin = skin;
+      if (title) user.equippedTitle = title;
+
+      if (!user.isInMemory) {
+        await user.save();
+      } else {
+        inMemoryProfiles[user.username.toLowerCase()] = user;
+      }
+      return res.json({ success: true, equippedSkin: user.equippedSkin, equippedTitle: user.equippedTitle });
+    }
+    return res.json({ success: true, guest: true });
+  } catch (err) {
+    console.error('[mindreader] equip error:', err);
+    return res.status(500).json({ error: 'Internal server error saving equipment' });
+  }
+});
+
+app.post('/api/mindreader/end', express.json(), async (req, res) => {
+  const { outcome, concept, questionsCount, predictionsMade, scope } = req.body;
+
+  try {
+    const user = await getOptionalUser(req);
+    let finalMrr = 1000;
+    let finalGamesToday = 0;
+    let finalSkins = ["Classic Tenali"];
+    let authenticated = false;
+    let cheated = false;
+
+    if (outcome === 'win' && predictionsMade && predictionsMade.includes(concept)) {
+      cheated = true;
+    }
+
+    if (user) {
+      authenticated = true;
+      const todayStr = new Date().toDateString();
+
+      if (user.lastMindReaderGameDate !== todayStr) {
+        user.mindReaderGamesToday = 0;
+        user.lastMindReaderGameDate = todayStr;
+      }
+
+      if (cheated) {
+        // No rating change for trickery!
+        user.mrr = user.mrr || 1000;
+      } else if (outcome === 'win') {
+        user.mrr = (user.mrr || 1000) + 20;
+      } else {
+        user.mrr = Math.max(1000, (user.mrr || 1000) - 5);
+      }
+
+      updateUnlockedSkins(user);
+
+      user.mindReaderGamesToday += 1;
+
+      if (!user.isInMemory) {
+        await user.save();
+      } else {
+        inMemoryProfiles[user.username.toLowerCase()] = user;
+      }
+
+      finalMrr = user.mrr;
+      finalGamesToday = user.mindReaderGamesToday;
+      finalSkins = user.unlockedSkins;
+    } else {
+      // Guest local calculation fallback base
+      const localMrr = 1000;
+      const diff = cheated ? 0 : (outcome === 'win' ? 20 : -5);
+      finalMrr = Math.max(1000, localMrr + diff);
+    }
+
+    const mongoose = require('mongoose');
+    if (mongoose.connection.readyState === 1) {
+      await auth.MindReaderAnalytic.create({
+        outcome: cheated ? 'loss' : outcome, // Log cheating as loss/discrepancy
+        concept: concept || 'Unknown',
+        questionsCount: questionsCount || 0,
+        scope: scope || 'curriculum',
+        predictionsMade: predictionsMade || []
+      }).catch(err => console.error('[mindreader] failed to save analytic:', err));
+    }
+
+    const { CONCEPTS } = require('./mindReaderKB');
+    const matchedConcept = CONCEPTS.find(c => c.name === concept || c.id === concept);
+    const recommendations = matchedConcept ? matchedConcept.recommendations : {
+      related: [],
+      prerequisites: [],
+      exercises: []
+    };
+
+    return res.json({
+      mrr: finalMrr,
+      mindReaderGamesToday: finalGamesToday,
+      unlockedSkins: finalSkins,
+      equippedSkin: user ? user.equippedSkin : 'classic',
+      equippedTitle: user ? user.equippedTitle : 'Novice Reader',
+      authenticated,
+      recommendations,
+      cheated
+    });
+
+  } catch (err) {
+    console.error('[mindreader] end game error:', err);
+    return res.status(500).json({ error: 'Internal server error ending game' });
+  }
+});
+
+app.get('/mindreader', (_req, res) => {
+  res.sendFile(path.join(clientDistPath, 'index.html'));
+});
+
+// ═══════════════════════════════════════════════════════════════════════════
+// TENALI ADVENTURE GAME
+// ═══════════════════════════════════════════════════════════════════════════
+const adventureRoutes = require('./adventure/adventureRoutes');
+app.use('/api/adventure', adventureRoutes);
+
+app.get('/adventure', (_req, res) => {
+  res.sendFile(path.join(clientDistPath, 'index.html'));
+});
+
+// ═══════════════════════════════════════════════════════════════════════════
+// TENALI REVERSE MIND READER (API)
+// ═══════════════════════════════════════════════════════════════════════════
+const { REVERSE_CONCEPTS, REVERSE_QUESTIONS, PERSONALITY_RESPONSES } = require('./mindReaderKB2');
+const crypto = require('crypto');
+
+// ─── GUESS WHAT'S ON TENALI'S MIND (CONFIGS) ──────────────────────────────────
+let worldsConfig = [];
+let levelsConfig = [];
+let conceptsConfig = {};
+
+try {
+  const dataDir = path.join(__dirname, 'data');
+  worldsConfig = JSON.parse(fs.readFileSync(path.join(dataDir, 'worlds.json'), 'utf8'));
+  levelsConfig = JSON.parse(fs.readFileSync(path.join(dataDir, 'levels.json'), 'utf8'));
+  conceptsConfig = JSON.parse(fs.readFileSync(path.join(dataDir, 'concepts.json'), 'utf8'));
+  console.log(`[GuessMind] Loaded ${worldsConfig.length} worlds, ${levelsConfig.length} levels, and ${Object.keys(conceptsConfig).length} concepts successfully.`);
+} catch (err) {
+  console.error('[GuessMind] Error loading configuration files:', err);
+}
+
+// Seeded random number generator
+function seededRandom(seed) {
+  const x = Math.sin(seed++) * 10000;
+  return x - Math.floor(x);
+}
+
+// Seeded shuffle of array based on string seed
+function seededShuffle(array, seedString) {
+  let seed = 0;
+  for (let i = 0; i < seedString.length; i++) {
+    seed += seedString.charCodeAt(i);
+  }
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const r = seededRandom(seed + i);
+    const j = Math.floor(r * (i + 1));
+    const temp = shuffled[i];
+    shuffled[i] = shuffled[j];
+    shuffled[j] = temp;
+  }
+  return shuffled;
+}
+
+// Get randomized levelsConfig matching the seed string
+function getRandomizedLevelsConfig(seedString) {
+  const randomized = [];
+  const worlds = [...new Set(levelsConfig.map(l => l.worldId))];
+  
+  for (const worldId of worlds) {
+    const worldLevels = levelsConfig.filter(l => l.worldId === worldId);
+    const worldConceptIds = worldLevels.map(l => l.conceptId);
+    const shuffledConceptIds = seededShuffle(worldConceptIds, seedString + '_' + worldId);
+    
+    worldLevels.forEach((l, idx) => {
+      randomized.push({
+        ...l,
+        conceptId: shuffledConceptIds[idx]
+      });
+    });
+  }
+  
+  return randomized;
+}
+
+// In-memory guess mind sessions
+const guessMindSessions = new Map();
+// Track last played concept index per level so replaying always advances to a different predefined question set
+const levelLastConceptIndexMap = new Map();
+
+class GuessMindSession {
+  constructor(gameId, levelNum, selectedConcept, worldId = 'number_kingdom') {
+    this.gameId = gameId;
+    this.levelNum = levelNum;
+    this.worldId = worldId;
+    this.selectedConcept = selectedConcept; // full concept object
+    this.clueIndex = 0; // starts at Clue 1 (index 0)
+    this.hintsRemaining = 3;
+    this.hintsUsed = 0;
+    this.guessed = false;
+    this.createdAt = new Date();
+  }
+}
+
+// Session pruning interval for Guess Mind sessions (runs every 10 mins, cleans sessions older than 30 mins)
+setInterval(() => {
+  const now = Date.now();
+  for (const [gameId, session] of guessMindSessions.entries()) {
+    if (now - session.createdAt.getTime() > 30 * 60 * 1000) {
+      guessMindSessions.delete(gameId);
+      console.log(`[GuessMind] Evicted expired session: ${gameId}`);
+    }
+  }
+}, 10 * 60 * 1000);
+
+
+// In-memory reverse mind reader sessions
+const reverseSessions = new Map();
+
+// Game session helper class
+class GameSession {
+  constructor(gameId, selectedConcept, difficulty = 'easy') {
+    this.gameId = gameId;
+    this.selectedConcept = selectedConcept;
+    this.difficulty = difficulty;
+    this.questionsRemaining = 10;
+    this.hintsRemaining = 2;
+    this.maxQuestions = 10;
+    this.maxHints = 2;
+    this.askedQuestions = [];
+    this.guessed = false;
+    this.createdAt = new Date();
+  }
+}
+
+// Session pruning interval (runs every 10 mins, cleans sessions older than 30 mins)
+setInterval(() => {
+  const now = Date.now();
+  for (const [gameId, session] of reverseSessions.entries()) {
+    if (now - session.createdAt.getTime() > 30 * 60 * 1000) {
+      reverseSessions.delete(gameId);
+      console.log(`[ReverseMindReader] Evicted expired session: ${gameId}`);
+    }
+  }
+}, 10 * 60 * 1000);
+
+app.post('/api/game/start', express.json(), async (req, res) => {
+  try {
+    const { difficulty, allowedCategories } = req.body;
+    const diff = (difficulty || 'easy').toLowerCase();
+    
+    // Filter concepts by chosen difficulty level
+    let pool = REVERSE_CONCEPTS.filter(c => c.difficulty === diff);
+    
+    // Additionally filter by allowed categories if provided
+    if (allowedCategories && Array.isArray(allowedCategories) && allowedCategories.length > 0) {
+      const filtered = pool.filter(c => allowedCategories.includes(c.category));
+      if (filtered.length > 0) {
+        pool = filtered;
+      }
+    }
+    
+    const selectedPool = pool.length > 0 ? pool : REVERSE_CONCEPTS;
+    
+    const randomIndex = Math.floor(Math.random() * selectedPool.length);
+    const concept = selectedPool[randomIndex];
+    const gameId = 'sess_' + crypto.randomUUID().replace(/-/g, '');
+    
+    // Configure question and hint resource limits by difficulty
+    let questionsAllowed = 10;
+    let hintsAllowed = 2;
+    if (diff === 'easy') {
+      questionsAllowed = 15;
+      hintsAllowed = 3;
+    } else if (diff === 'medium') {
+      questionsAllowed = 10;
+      hintsAllowed = 2;
+    } else if (diff === 'hard') {
+      questionsAllowed = 6;
+      hintsAllowed = 1;
+    }
+    
+    const session = new GameSession(gameId, concept, diff);
+    session.questionsRemaining = questionsAllowed;
+    session.hintsRemaining = hintsAllowed;
+    session.maxQuestions = questionsAllowed;
+    session.maxHints = hintsAllowed;
+    
+    reverseSessions.set(gameId, session);
+    
+    console.log(`[ReverseMindReader] Started session ${gameId} with concept "${concept.name}" [Level: ${diff}] [Allowed Cats: ${allowedCategories ? allowedCategories.join(',') : 'all'}]`);
+    res.json({
+      gameId,
+      questionsRemaining: session.questionsRemaining,
+      hintsRemaining: session.hintsRemaining,
+      state: 'PLAYING',
+      difficulty: diff
+    });
+  } catch (err) {
+    console.error('[ReverseMindReader] Start game error:', err);
+    res.status(500).json({ error: 'Internal server error starting game' });
+  }
+});
+
+app.post('/api/game/question', express.json(), (req, res) => {
+  const { gameId, questionId } = req.body;
+  if (!gameId || !questionId) {
+    return res.status(400).json({ error: 'Missing gameId or questionId' });
+  }
+  
+  const session = reverseSessions.get(gameId);
+  if (!session) {
+    return res.status(404).json({ error: 'Game session not found or expired' });
+  }
+  
+  if (session.questionsRemaining <= 0) {
+    return res.status(400).json({ error: 'No questions remaining' });
+  }
+  
+  const question = REVERSE_QUESTIONS.find(q => q.id === questionId);
+  if (!question) {
+    return res.status(400).json({ error: 'Invalid questionId' });
+  }
+  
+  if (session.askedQuestions.includes(questionId)) {
+    return res.status(400).json({ error: 'Question already asked' });
+  }
+  
+  const concept = session.selectedConcept;
+  const attributeVal = concept.attributes[question.attribute];
+  
+  let answer = 'dontknow';
+  if (attributeVal !== null && attributeVal !== undefined) {
+    if (question.operator === 'gte') {
+      answer = attributeVal >= question.expectedValue ? 'yes' : 'no';
+    } else if (question.operator === 'lte') {
+      answer = attributeVal <= question.expectedValue ? 'yes' : 'no';
+    } else {
+      answer = attributeVal === question.expectedValue ? 'yes' : 'no';
+    }
+  }
+  
+  session.questionsRemaining -= 1;
+  session.askedQuestions.push(questionId);
+  
+  const dialoguePool = PERSONALITY_RESPONSES[answer.toUpperCase()];
+  const dialogue = dialoguePool[Math.floor(Math.random() * dialoguePool.length)];
+  
+  console.log(`[ReverseMindReader] Session ${gameId} asked: "${question.text}" -> Answer: ${answer}`);
+  res.json({
+    dialogue,
+    answer,
+    questionsRemaining: session.questionsRemaining
+  });
+});
+
+app.post('/api/game/hint', express.json(), (req, res) => {
+  const { gameId } = req.body;
+  if (!gameId) {
+    return res.status(400).json({ error: 'Missing gameId' });
+  }
+  
+  const session = reverseSessions.get(gameId);
+  if (!session) {
+    return res.status(404).json({ error: 'Game session not found or expired' });
+  }
+  
+  if (session.hintsRemaining <= 0) {
+    return res.status(400).json({ error: 'No hints remaining' });
+  }
+  
+  let hintText = '';
+  if (session.hintsRemaining === 2) {
+    hintText = session.selectedConcept.hints.hint1;
+  } else {
+    hintText = session.selectedConcept.hints.hint2;
+  }
+  
+  session.hintsRemaining -= 1;
+  
+  const hintDialoguePool = PERSONALITY_RESPONSES.HINT;
+  const randomPrefix = hintDialoguePool[Math.floor(Math.random() * hintDialoguePool.length)];
+  const dialogue = `${randomPrefix}"${hintText}"`;
+  
+  console.log(`[ReverseMindReader] Session ${gameId} requested hint. Remaining: ${session.hintsRemaining}`);
+  res.json({
+    dialogue,
+    hint: hintText,
+    hintsRemaining: session.hintsRemaining
+  });
+});
+
+app.post('/api/game/guess', express.json(), async (req, res) => {
+  const { gameId, guess, winStreak } = req.body;
+  if (!gameId || !guess) {
+    return res.status(400).json({ error: 'Missing gameId or guess' });
+  }
+  
+  const session = reverseSessions.get(gameId);
+  if (!session) {
+    return res.status(404).json({ error: 'Game session not found or expired' });
+  }
+  
+  const concept = session.selectedConcept;
+  const normalizedGuess = guess.trim().toLowerCase().replace(/\s+/g, '');
+  const normalizedConceptName = concept.name.trim().toLowerCase().replace(/\s+/g, '');
+  
+  const isCorrect = normalizedGuess === normalizedConceptName;
+  let rewardPoints = 0;
+  let user = null;
+  
+  try {
+    user = await getOptionalUser(req);
+  } catch (err) {
+    console.error('[ReverseMindReader] Error fetching optional user for guess:', err);
+  }
+  
+  let currentStreak = 0;
+  if (isCorrect) {
+    if (user) {
+      user.reverseMindReaderWinStreak = (user.reverseMindReaderWinStreak || 0) + 1;
+      currentStreak = user.reverseMindReaderWinStreak;
+    } else {
+      currentStreak = parseInt(winStreak || 0, 10) + 1;
+    }
+    const multiplier = Math.min(1.5, 1.0 + Math.max(0, currentStreak - 1) * 0.1);
+    
+    let difficultyBonus = 0;
+    if (session.difficulty === 'medium') {
+      difficultyBonus = 10;
+    } else if (session.difficulty === 'hard') {
+      difficultyBonus = 25;
+    }
+    
+    rewardPoints = Math.round((20 + (session.questionsRemaining * 2) + (session.hintsRemaining * 5) + difficultyBonus) * multiplier);
+  } else {
+    if (user) {
+      user.reverseMindReaderWinStreak = 0;
+    }
+    currentStreak = 0;
+    rewardPoints = -5;
+  }
+  
+  let finalMrr = 1000;
+  let finalGamesToday = 0;
+  let finalSkins = ["Classic Tenali"];
+  let authenticated = false;
+  
+  if (user) {
+    authenticated = true;
+    const todayStr = new Date().toDateString();
+    
+    if (user.lastMindReaderGameDate !== todayStr) {
+      user.mindReaderGamesToday = 0;
+      user.lastMindReaderGameDate = todayStr;
+    }
+    
+    user.mrr = Math.max(1000, (user.mrr || 1000) + rewardPoints);
+    updateUnlockedSkins(user);
+    user.mindReaderGamesToday += 1;
+    
+    if (!user.isInMemory) {
+      await user.save();
+    } else {
+      inMemoryProfiles[user.username.toLowerCase()] = user;
+    }
+    
+    finalMrr = user.mrr;
+    finalGamesToday = user.mindReaderGamesToday;
+    finalSkins = user.unlockedSkins || ["Classic Tenali"];
+  } else {
+    finalMrr = 1000;
+  }
+  
+  const mongoose = require('mongoose');
+  if (mongoose.connection.readyState === 1) {
+    await auth.MindReaderAnalytic.create({
+      outcome: isCorrect ? 'win' : 'loss',
+      concept: concept.name,
+      questionsCount: 10 - session.questionsRemaining,
+      scope: 'reverse_mindreader',
+      predictionsMade: [guess],
+      questionsAsked: session.askedQuestions,
+      hintsRequested: 2 - session.hintsRemaining,
+      completionTime: Math.round((new Date() - session.createdAt) / 1000),
+      incorrectGuessesCount: isCorrect ? 0 : 1
+    }).catch(err => console.error('[ReverseMindReader] Failed to save analytic:', err));
+  }
+  
+  reverseSessions.delete(gameId);
+  
+  console.log(`[ReverseMindReader] Session ${gameId} guess: "${guess}" | Secret: "${concept.name}" | Correct: ${isCorrect} | Reward: ${rewardPoints} MRR`);
+  console.log('[ReverseMindReader] Telemetry prepared:', {
+    outcome: isCorrect ? 'win' : 'loss',
+    concept: concept.name,
+    questionsCount: 10 - session.questionsRemaining,
+    questionsAsked: session.askedQuestions,
+    hintsRequested: 2 - session.hintsRemaining,
+    completionTime: Math.round((new Date() - session.createdAt) / 1000),
+    incorrectGuessesCount: isCorrect ? 0 : 1
+  });
+  
+  res.json({
+    correct: isCorrect,
+    reward: {
+      mrrChange: rewardPoints,
+      mrr: finalMrr,
+      mindReaderGamesToday: finalGamesToday,
+      unlockedSkins: finalSkins,
+      equippedSkin: user ? user.equippedSkin : 'classic',
+      equippedTitle: user ? user.equippedTitle : 'Novice Reader',
+      winStreak: currentStreak,
+      authenticated
+    },
+    concept: {
+      name: concept.name,
+      definition: concept.definition,
+      examples: concept.examples,
+      funFact: concept.funFact,
+      relatedLesson: concept.relatedLesson,
+      commonMistakes: concept.commonMistakes
+    }
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════════
+// GUESS WHAT'S ON TENALI'S MIND (MVP API)
+// ═══════════════════════════════════════════════════════════════════════════
+
+app.get('/api/mindreader/worlds', async (req, res) => {
+  try {
+    const user = await getOptionalUser(req);
+    const seedString = user ? user.username : 'guest';
+    const activeLevelsConfig = getRandomizedLevelsConfig(seedString);
+
+    let xp = 0;
+    let unlockedWorlds = ['number_kingdom'];
+    let levelProgressList = [];
+
+    if (user) {
+      xp = user.xp || 0;
+      // Ensure world progress exists
+      if (!user.worldProgress || user.worldProgress.length === 0) {
+        user.worldProgress = [{ worldId: 'number_kingdom', unlocked: true }];
+      }
+      // Re-calculate unlocks based on current XP
+      for (const w of worldsConfig) {
+        if (xp >= w.requiredUnlockXP) {
+          const exists = user.worldProgress.find(wp => wp.worldId === w.worldId);
+          if (!exists) {
+            user.worldProgress.push({ worldId: w.worldId, unlocked: true });
+          }
+        }
+      }
+      unlockedWorlds = user.worldProgress.filter(wp => wp.unlocked).map(wp => wp.worldId);
+      levelProgressList = user.levelProgress || [];
+    }
+
+    // Map worlds and add aggregate star counts & kingdom progress
+    const worlds = worldsConfig.map((w, idx) => {
+      const isUnlocked = true; // Force unlock every kingdom
+
+      // levels in this world
+      const levelsInWorld = activeLevelsConfig.filter(lvl => lvl.worldId === w.worldId);
+      const levelNums = levelsInWorld.map(lvl => lvl.levelNum);
+
+      // Scoped progress for this specific world
+      const worldProgressEntries = levelProgressList.filter(lp => {
+        if (lp.worldId) {
+          return lp.worldId === w.worldId;
+        }
+        return w.worldId === 'number_kingdom' && levelNums.includes(lp.levelNum);
+      });
+
+      const stars = worldProgressEntries.reduce((sum, lp) => sum + (lp.starsEarned || 0), 0);
+      const completedLevelsCount = worldProgressEntries.filter(lp => (lp.starsEarned || 0) > 0).length;
+      const totalLevelsCount = levelsInWorld.length || 12;
+      const completionPercentage = Math.min(100, Math.round((completedLevelsCount / totalLevelsCount) * 100));
+
+      const levelsWithConceptNames = levelsInWorld.map(lvl => {
+        const concept = conceptsConfig[lvl.conceptId];
+        return {
+          levelNum: lvl.levelNum,
+          levelName: lvl.levelName || `Level ${lvl.levelNum}`,
+          conceptId: lvl.conceptId,
+          conceptName: concept ? concept.name : lvl.conceptId,
+          options: lvl.options || [],
+          difficultyTier: lvl.difficultyTier || 'easy'
+        };
+      });
+
+      const minLevel = levelNums.length > 0 ? Math.min(...levelNums) : 1;
+      const maxLevel = levelNums.length > 0 ? Math.max(...levelNums) : 12;
+
+      const worldConcepts = levelsInWorld.map(lvl => {
+        const c = conceptsConfig[lvl.conceptId];
+        return {
+          id: lvl.conceptId,
+          name: c ? c.name : (lvl.conceptId.charAt(0).toUpperCase() + lvl.conceptId.slice(1).replace(/_/g, ' '))
+        };
+      });
+
+      const resWorld = {
+        worldId: w.worldId,
+        worldName: w.worldName,
+        requiredUnlockXP: w.requiredUnlockXP,
+        themeColor: w.themeColor,
+        levelRange: w.levelRange || [minLevel, maxLevel],
+        concepts: worldConcepts,
+        unlocked: isUnlocked,
+        stars,
+        completedLevelsCount,
+        totalLevelsCount,
+        completionPercentage,
+        levels: levelsWithConceptNames
+      };
+
+      return resWorld;
+    });
+
+    res.json({
+      xp,
+      worlds,
+      levelProgress: levelProgressList.reduce((acc, lp) => {
+        const key = lp.worldId ? `${lp.worldId}_${lp.levelNum}` : `${lp.levelNum}`;
+        acc[key] = lp.starsEarned;
+        return acc;
+      }, {})
+    });
+  } catch (err) {
+    console.error('[GuessMind] Error loading worlds:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+app.post('/api/mindreader/start', express.json(), async (req, res) => {
+  try {
+    const { levelNum, worldId: requestedWorldId, previousConceptId } = req.body;
+    if (!levelNum) {
+      return res.status(400).json({ error: 'Missing levelNum' });
+    }
+
+    const user = await getOptionalUser(req);
+
+    // Determine which world this level belongs to
+    // levelNum is just a sequential completion counter — we need to know the world
+    // The client always sends worldId as context
+    const targetWorldId = requestedWorldId || 'number_kingdom';
+    const world = worldsConfig.find(w => w.worldId === targetWorldId);
+    if (!world) {
+      return res.status(400).json({ error: 'Invalid worldId' });
+    }
+
+    // Progression verification for authenticated users
+    if (user) {
+      const xp = user.xp || 0;
+      if (xp < world.requiredUnlockXP) {
+        return res.status(403).json({ error: `World locked. Requires ${world.requiredUnlockXP} XP.` });
+      }
+
+      // Sequential: level N requires level N-1 to be completed in this world
+      if (parseInt(levelNum, 10) > 1) {
+        const completedPrev = user.levelProgress.find(
+          lp => lp.levelNum === parseInt(levelNum, 10) - 1 && lp.starsEarned > 0
+        );
+        if (!completedPrev) {
+          return res.status(403).json({ error: 'Previous level not completed.' });
+        }
+      }
+    }
+
+    // Find level config for target world and levelNum
+    const levelObj = levelsConfig.find(l => l.levelNum === parseInt(levelNum, 10) && l.worldId === targetWorldId);
+    
+    let selectedConceptId;
+    let levelOptions = [];
+    let levelName = levelObj ? (levelObj.levelName || `Level ${levelNum}`) : `Level ${levelNum}`;
+
+    if (levelObj && levelObj.conceptPool && levelObj.conceptPool.length > 0) {
+      const userIdentifier = user ? user.username : (req.ip || 'guest');
+      const trackerKey = `${userIdentifier}_${targetWorldId}_${parseInt(levelNum, 10)}`;
+      const lastIdx = levelLastConceptIndexMap.get(trackerKey);
+
+      let prevConcept = previousConceptId;
+      if (!prevConcept && lastIdx !== undefined && lastIdx < levelObj.conceptPool.length) {
+        prevConcept = levelObj.conceptPool[lastIdx];
+      }
+
+      let selectedIndex = 0;
+      if (prevConcept && levelObj.conceptPool.includes(prevConcept)) {
+        const prevIdx = levelObj.conceptPool.indexOf(prevConcept);
+        selectedIndex = (prevIdx + 1) % levelObj.conceptPool.length;
+      } else if (lastIdx !== undefined) {
+        selectedIndex = (lastIdx + 1) % levelObj.conceptPool.length;
+      } else {
+        selectedIndex = 0;
+      }
+
+      selectedConceptId = levelObj.conceptPool[selectedIndex];
+      levelLastConceptIndexMap.set(trackerKey, selectedIndex);
+      levelOptions = levelObj.options || [];
+    } else {
+      // Fallback for general world levels
+      const worldLevels = levelsConfig.filter(l => l.worldId === targetWorldId);
+      const allConceptIds = [...new Set(worldLevels.map(l => l.conceptId))];
+      const shuffleSeed = (user ? user.username : 'guest') + '_' + targetWorldId;
+      const availableConceptIds = seededShuffle(allConceptIds, shuffleSeed);
+      const levelIdx = (parseInt(levelNum, 10) - 1) % availableConceptIds.length;
+      selectedConceptId = availableConceptIds[levelIdx];
+    }
+
+    const concept = conceptsConfig[selectedConceptId];
+
+    if (!concept) {
+      return res.status(404).json({ error: 'Concept configuration not found' });
+    }
+
+    const gameId = 'sess_gm_' + crypto.randomUUID().replace(/-/g, '');
+    const session = new GuessMindSession(gameId, parseInt(levelNum, 10), concept, targetWorldId);
+    guessMindSessions.set(gameId, session);
+
+    console.log(`[GuessMind] Session ${gameId} started for level ${levelNum} (${levelName}) with secret concept "${concept.name}"`);
+
+    const cluesList = (concept.thoughts && concept.thoughts.length > 0)
+      ? concept.thoughts
+      : (concept.clues && concept.clues.length > 0 ? concept.clues : [`I am ${concept.name}.`]);
+
+    const firstClue = cluesList[0] || `I am thinking of ${concept.name}.`;
+
+    res.json({
+      gameId,
+      levelNum: parseInt(levelNum, 10),
+      levelName,
+      conceptId: selectedConceptId,
+      options: levelOptions,
+      worldId: targetWorldId,
+      clue: firstClue,
+      clueIndex: 0,
+      hintsRemaining: session.hintsRemaining,
+      difficultyTier: levelObj ? (levelObj.difficultyTier || 'easy') : 'easy'
+    });
+  } catch (err) {
+    console.error('[GuessMind] Error in start API:', err);
+    res.status(500).json({ error: 'Internal server error starting level' });
+  }
+});
+
+app.post('/api/mindreader/next-clue', express.json(), (req, res) => {
+  const { gameId } = req.body;
+  if (!gameId) {
+    return res.status(400).json({ error: 'Missing gameId' });
+  }
+
+  const session = guessMindSessions.get(gameId);
+  if (!session) {
+    return res.status(404).json({ error: 'Game session not found or expired' });
+  }
+
+  const concept = session.selectedConcept;
+  const cluesList = (concept.thoughts && concept.thoughts.length > 0)
+    ? concept.thoughts
+    : (concept.clues && concept.clues.length > 0 ? concept.clues : [`I am ${concept.name}.`]);
+
+  if (session.clueIndex >= cluesList.length - 1) {
+    return res.status(400).json({ error: 'All clues already revealed' });
+  }
+
+  session.clueIndex += 1;
+  const clue = cluesList[session.clueIndex] || cluesList[cluesList.length - 1];
+
+  res.json({
+    clue,
+    clueIndex: session.clueIndex,
+    cluesExhausted: session.clueIndex >= cluesList.length - 1
+  });
+});
+
+app.post('/api/mindreader/use-hint', express.json(), (req, res) => {
+  const { gameId } = req.body;
+  if (!gameId) {
+    return res.status(400).json({ error: 'Missing gameId' });
+  }
+
+  const session = guessMindSessions.get(gameId);
+  if (!session) {
+    return res.status(404).json({ error: 'Game session not found or expired' });
+  }
+
+  if (session.hintsRemaining <= 0) {
+    return res.status(400).json({ error: 'No hints remaining' });
+  }
+
+  const concept = session.selectedConcept;
+  const hintIndex = 3 - session.hintsRemaining;
+  const hint = concept.hint
+    || (Array.isArray(concept.hints) && concept.hints.length > 0
+        ? concept.hints[hintIndex % concept.hints.length]
+        : `Think about what makes ${concept.name} special.`);
+
+  session.hintsRemaining -= 1;
+  session.hintsUsed += 1;
+
+  res.json({
+    hint,
+    hintsRemaining: session.hintsRemaining
+  });
+});
+
+app.post('/api/mindreader/submit-guess', express.json(), async (req, res) => {
+  const { gameId, guess } = req.body;
+  if (!gameId || !guess) {
+    return res.status(400).json({ error: 'Missing gameId or guess' });
+  }
+
+  const session = guessMindSessions.get(gameId);
+  if (!session) {
+    return res.status(404).json({ error: 'Game session not found or expired' });
+  }
+
+  const concept = session.selectedConcept;
+  
+  const flexNormalize = (str) => {
+    if (!str) return '';
+    return str
+      .toLowerCase()
+      .replace(/\([^)]*\)/g, '')
+      .replace(/[^a-z0-9]/g, '')
+      .replace(/s$/, '');
+  };
+
+  const normalizedGuess = flexNormalize(guess);
+  const normalizedConceptName = flexNormalize(concept.name);
+
+  const isCorrect = normalizedGuess === normalizedConceptName;
+  const cluesRemaining = session.clueIndex < 4;
+  
+  let starsEarned = 0;
+  let mrrChange = -5;
+  let xpEarned = 0;
+  let xpBreakdown = null;
+  let starTip = '';
+  let user = null;
+
+  try {
+    user = await getOptionalUser(req);
+  } catch (err) {
+    console.error('[GuessMind] Error loading user profile:', err);
+  }
+
+  if (isCorrect) {
+    // Option 1 Star Evaluation: candidate selection consistency across all 5 rounds (R1-R5)
+    let targetCount = 0;
+    const { roundSelections } = req.body;
+    if (roundSelections && typeof roundSelections === 'object') {
+      for (let rIdx = 0; rIdx < 5; rIdx++) {
+        const picks = roundSelections[rIdx] || roundSelections[rIdx.toString()] || [];
+        if (Array.isArray(picks) && picks.some(p => flexNormalize(p) === normalizedConceptName)) {
+          targetCount++;
+        }
+      }
+    } else {
+      targetCount = 5; // fallback
+    }
+
+    if (targetCount >= 5) {
+      starsEarned = 3;
+    } else if (targetCount >= 3) {
+      starsEarned = 2;
+    } else {
+      starsEarned = 1;
+    }
+
+    if (starsEarned < 3) {
+      starTip = "To get 3 stars, select the secret concept in candidate choices across all 5 rounds!";
+    }
+
+    // Calculate MRR
+    mrrChange = Math.max(5, 10 + (2 * targetCount) - (3 * session.hintsUsed));
+
+    // Calculate dynamic XP based on World/Kingdom Difficulty
+    let baseXp = 100;
+    const targetWorldId = session.worldId || 'number_kingdom';
+    switch (targetWorldId) {
+      case 'number_kingdom': baseXp = 100; break;
+      case 'arithmetic_kingdom': baseXp = 120; break;
+      case 'geometry_kingdom': baseXp = 140; break;
+      case 'algebra_kingdom': baseXp = 160; break;
+      case 'advanced_mathematics': baseXp = 180; break;
+      case 'coordinate_calculus': baseXp = 200; break;
+      case 'data_logic': baseXp = 220; break;
+      default: baseXp = 100; break;
+    }
+
+    const isReplay = user && user.levelProgress.some(lp => (lp.worldId ? lp.worldId === targetWorldId : targetWorldId === 'number_kingdom') && lp.levelNum === session.levelNum);
+    const resolvedBaseXp = isReplay ? Math.round(baseXp * 0.3) : baseXp;
+
+    // No-Hint bonus
+    const noHintBonus = session.hintsUsed === 0 ? 30 : 0;
+
+    // Win Streak logic
+    let streakBonus = 0;
+    let currentStreak = 0;
+    if (user) {
+      user.guessMindWinStreak = (user.guessMindWinStreak || 0) + 1;
+      currentStreak = user.guessMindWinStreak;
+      if (currentStreak >= 5) {
+        streakBonus = 50;
+      } else if (currentStreak === 4) {
+        streakBonus = 40;
+      } else if (currentStreak === 3) {
+        streakBonus = 30;
+      } else if (currentStreak === 2) {
+        streakBonus = 20;
+      }
+    } else {
+      currentStreak = 1; // Fallback for guest users
+    }
+
+    xpEarned = resolvedBaseXp + noHintBonus + streakBonus;
+
+    xpBreakdown = {
+      baseXp: resolvedBaseXp,
+      noHintBonus,
+      streakBonus,
+      streak: currentStreak,
+      isReplay
+    };
+  }
+
+  let finalMrr = 1000;
+  let finalXp = 0;
+  let authenticated = false;
+
+  if (user) {
+    authenticated = true;
+    if (!isCorrect && !cluesRemaining) {
+      user.guessMindWinStreak = 0; // Reset streak on level failure
+    }
+    user.mrr = Math.max(1000, (user.mrr || 1000) + mrrChange);
+    user.xp = (user.xp || 0) + xpEarned;
+
+    // Update levelProgress with worldId scope
+    const targetWorldId = session.worldId || 'number_kingdom';
+    const prevRecord = user.levelProgress.find(lp => {
+      if (lp.worldId) return lp.worldId === targetWorldId && lp.levelNum === session.levelNum;
+      return lp.levelNum === session.levelNum;
+    });
+    if (prevRecord) {
+      if (starsEarned > prevRecord.starsEarned) {
+        prevRecord.starsEarned = starsEarned;
+      }
+      prevRecord.worldId = targetWorldId;
+      prevRecord.completedAt = new Date();
+    } else {
+      user.levelProgress.push({
+        worldId: targetWorldId,
+        levelNum: session.levelNum,
+        conceptId: concept.conceptId,
+        starsEarned
+      });
+    }
+
+    // Recalculate and update worldProgress unlocks
+    for (const w of worldsConfig) {
+      if (user.xp >= w.requiredUnlockXP) {
+        const exists = user.worldProgress.find(wp => wp.worldId === w.worldId);
+        if (!exists) {
+          user.worldProgress.push({ worldId: w.worldId, unlocked: true });
+        }
+      }
+    }
+
+    if (!user.isInMemory) {
+      await user.save();
+    } else {
+      inMemoryProfiles[user.username.toLowerCase()] = user;
+    }
+
+    finalMrr = user.mrr;
+    finalXp = user.xp;
+  }
+
+  // Save telemetry event
+  const mongoose = require('mongoose');
+  if (mongoose.connection.readyState === 1) {
+    await auth.MindReaderAnalytic.create({
+      outcome: isCorrect ? 'win' : 'loss',
+      concept: concept.name,
+      questionsCount: session.clueIndex + 1, // Number of clues revealed
+      scope: 'guess_mind',
+      predictionsMade: [guess],
+      questionsAsked: [], // Not applicable here
+      hintsRequested: session.hintsUsed,
+      completionTime: Math.round((new Date() - session.createdAt) / 1000),
+      incorrectGuessesCount: isCorrect ? 0 : 1
+    }).catch(err => console.error('[GuessMind] Failed to save analytic:', err));
+  }
+
+  if (isCorrect || !cluesRemaining) {
+    guessMindSessions.delete(gameId);
+  }
+
+  console.log(`[GuessMind] Session ${gameId} guess: "${guess}" | Secret: "${concept.name}" | Correct: ${isCorrect} | Stars: ${starsEarned} | XP: ${xpEarned}`);
+
+  res.json({
+    correct: isCorrect,
+    actualConcept: isCorrect ? concept.name : null,
+    cluesRemaining,
+    starsEarned,
+    xpEarned,
+    starTip: isCorrect ? starTip : '',
+    reward: {
+      mrrChange,
+      mrr: finalMrr,
+      xp: finalXp,
+      authenticated,
+      xpBreakdown
+    },
+    educationalInfo: concept.educationalInfo
+  });
+});
+
 // LEARNING JOURNEY ENDPOINTS
 // ═══════════════════════════════════════════════════════════════════════════
 const { JOURNEY_CURRICULUM } = require('./lil/learning_journey/journeyData');

@@ -1,0 +1,1850 @@
+[
+  {
+    "id": "lvl_1_1",
+    "levelNum": 1,
+    "levelNumber": 1,
+    "worldId": "number_kingdom",
+    "levelName": "The Number Village (Number Sets)",
+    "conceptId": "whole_numbers",
+    "options": [
+      "Whole Numbers",
+      "Integers",
+      "Fractions",
+      "Decimal Numbers"
+    ],
+    "conceptPool": [
+      "whole_numbers",
+      "integers",
+      "fractions",
+      "decimal_numbers"
+    ],
+    "isBoss": false,
+    "difficultyTier": "super_easy"
+  },
+  {
+    "id": "lvl_1_2",
+    "levelNum": 2,
+    "levelNumber": 2,
+    "worldId": "number_kingdom",
+    "levelName": "The Hall of Hidden Properties",
+    "conceptId": "even_numbers",
+    "options": [
+      "Even Numbers",
+      "Odd Numbers",
+      "Prime Numbers",
+      "Composite Numbers"
+    ],
+    "conceptPool": [
+      "even_numbers",
+      "odd_numbers",
+      "prime_numbers",
+      "composite_numbers"
+    ],
+    "isBoss": false,
+    "difficultyTier": "super_easy"
+  },
+  {
+    "id": "lvl_1_3",
+    "levelNum": 3,
+    "levelNumber": 3,
+    "worldId": "number_kingdom",
+    "levelName": "The Factor Forge",
+    "conceptId": "factor",
+    "options": [
+      "Factor",
+      "Multiple",
+      "HCF (GCD)",
+      "LCM"
+    ],
+    "conceptPool": [
+      "factor",
+      "multiple",
+      "hcf",
+      "lcm"
+    ],
+    "isBoss": false,
+    "difficultyTier": "super_easy"
+  },
+  {
+    "id": "lvl_1_4",
+    "levelNum": 4,
+    "levelNumber": 4,
+    "worldId": "number_kingdom",
+    "levelName": "The Divisibility Temple",
+    "conceptId": "divisible_by_2",
+    "options": [
+      "Divisible by 2",
+      "Divisible by 3",
+      "Divisible by 5",
+      "Divisible by 9"
+    ],
+    "conceptPool": [
+      "divisible_by_2",
+      "divisible_by_3",
+      "divisible_by_5",
+      "divisible_by_9"
+    ],
+    "isBoss": false,
+    "difficultyTier": "easy"
+  },
+  {
+    "id": "lvl_1_5",
+    "levelNum": 5,
+    "levelNumber": 5,
+    "worldId": "number_kingdom",
+    "levelName": "The Place Value Palace",
+    "conceptId": "ones_place",
+    "options": [
+      "Ones",
+      "Tens",
+      "Hundreds",
+      "Thousands"
+    ],
+    "conceptPool": [
+      "ones_place",
+      "tens_place",
+      "hundreds_place",
+      "thousands_place"
+    ],
+    "isBoss": false,
+    "difficultyTier": "easy"
+  },
+  {
+    "id": "lvl_1_6",
+    "levelNum": 6,
+    "levelNumber": 6,
+    "worldId": "number_kingdom",
+    "levelName": "The Comparison Bridge",
+    "conceptId": "greater_than",
+    "options": [
+      "Greater Than (>)",
+      "Less Than (<)",
+      "Equal To (=)",
+      "Ascending Order"
+    ],
+    "conceptPool": [
+      "greater_than",
+      "less_than",
+      "equal_to",
+      "ascending_order"
+    ],
+    "isBoss": false,
+    "difficultyTier": "easy"
+  },
+  {
+    "id": "lvl_1_7",
+    "levelNum": 7,
+    "levelNumber": 7,
+    "worldId": "number_kingdom",
+    "levelName": "The Fraction Forest",
+    "conceptId": "proper_fraction",
+    "options": [
+      "Proper Fraction",
+      "Improper Fraction",
+      "Mixed Fraction",
+      "Equivalent Fraction"
+    ],
+    "conceptPool": [
+      "proper_fraction",
+      "improper_fraction",
+      "mixed_fraction",
+      "equivalent_fraction"
+    ],
+    "isBoss": false,
+    "difficultyTier": "medium"
+  },
+  {
+    "id": "lvl_1_8",
+    "levelNum": 8,
+    "levelNumber": 8,
+    "worldId": "number_kingdom",
+    "levelName": "The Decimal Dock",
+    "conceptId": "tenths",
+    "options": [
+      "Tenths",
+      "Hundredths",
+      "Thousandths",
+      "Decimal Number"
+    ],
+    "conceptPool": [
+      "tenths",
+      "hundredths",
+      "thousandths",
+      "decimal_number_concept"
+    ],
+    "isBoss": false,
+    "difficultyTier": "medium"
+  },
+  {
+    "id": "lvl_1_9",
+    "levelNum": 9,
+    "levelNumber": 9,
+    "worldId": "number_kingdom",
+    "levelName": "The Representation Market",
+    "conceptId": "fraction_form",
+    "options": [
+      "Fraction",
+      "Decimal",
+      "Percentage",
+      "Ratio"
+    ],
+    "conceptPool": [
+      "fraction_form",
+      "decimal_form",
+      "percentage_form",
+      "ratio_form"
+    ],
+    "isBoss": false,
+    "difficultyTier": "medium"
+  },
+  {
+    "id": "lvl_1_10",
+    "levelNum": 10,
+    "levelNumber": 10,
+    "worldId": "number_kingdom",
+    "levelName": "The Ancient Numeral Vault",
+    "conceptId": "roman_numerals",
+    "options": [
+      "Roman Numerals",
+      "Hindu-Arabic Numerals",
+      "Expanded Form",
+      "Standard Form"
+    ],
+    "conceptPool": [
+      "roman_numerals",
+      "hindu_arabic_numerals",
+      "expanded_form",
+      "standard_form"
+    ],
+    "isBoss": false,
+    "difficultyTier": "hard"
+  },
+  {
+    "id": "lvl_1_11",
+    "levelNum": 11,
+    "levelNumber": 11,
+    "worldId": "number_kingdom",
+    "levelName": "The Power & Root Chamber",
+    "conceptId": "square_number",
+    "options": [
+      "Square Number",
+      "Cube Number",
+      "Square Root",
+      "Cube Root"
+    ],
+    "conceptPool": [
+      "square_number",
+      "cube_number",
+      "square_root",
+      "cube_root"
+    ],
+    "isBoss": false,
+    "difficultyTier": "hard"
+  },
+  {
+    "id": "lvl_1_12",
+    "levelNum": 12,
+    "levelNumber": 12,
+    "worldId": "number_kingdom",
+    "levelName": "The Number Sovereign (Kingdom Boss)",
+    "conceptId": "perfect_number",
+    "options": [
+      "Perfect Number",
+      "Co-prime Numbers",
+      "Irrational Number",
+      "Real Numbers"
+    ],
+    "conceptPool": [
+      "perfect_number",
+      "coprime_numbers",
+      "irrational_number",
+      "real_numbers"
+    ],
+    "isBoss": true,
+    "difficultyTier": "boss"
+  },
+  {
+    "id": "lvl_2_1",
+    "levelNum": 1,
+    "levelNumber": 1,
+    "worldId": "arithmetic_kingdom",
+    "levelName": "The Basic Operation Bazaar",
+    "conceptId": "addition",
+    "options": [
+      "Addition",
+      "Subtraction",
+      "Multiplication",
+      "Division"
+    ],
+    "conceptPool": [
+      "addition",
+      "subtraction",
+      "multiplication",
+      "division"
+    ],
+    "isBoss": false,
+    "difficultyTier": "super_easy"
+  },
+  {
+    "id": "lvl_2_2",
+    "levelNum": 2,
+    "levelNumber": 2,
+    "worldId": "arithmetic_kingdom",
+    "levelName": "The Laws of Calculation",
+    "conceptId": "commutative_property",
+    "options": [
+      "Commutative Property",
+      "Associative Property",
+      "Distributive Property",
+      "Identity Property"
+    ],
+    "conceptPool": [
+      "commutative_property",
+      "associative_property",
+      "distributive_property",
+      "identity_property"
+    ],
+    "isBoss": false,
+    "difficultyTier": "super_easy"
+  },
+  {
+    "id": "lvl_2_3",
+    "levelNum": 3,
+    "levelNumber": 3,
+    "worldId": "arithmetic_kingdom",
+    "levelName": "The Unitary Station",
+    "conceptId": "unit_cost",
+    "options": [
+      "Unit Cost",
+      "Total Cost",
+      "Quantity",
+      "Proportion Rate"
+    ],
+    "conceptPool": [
+      "unit_cost",
+      "total_cost",
+      "quantity",
+      "proportion_rate"
+    ],
+    "isBoss": false,
+    "difficultyTier": "super_easy"
+  },
+  {
+    "id": "lvl_2_4",
+    "levelNum": 4,
+    "levelNumber": 4,
+    "worldId": "arithmetic_kingdom",
+    "levelName": "The Percent Citadel",
+    "conceptId": "percentage",
+    "options": [
+      "Percentage",
+      "Percentage Increase",
+      "Discount Rate",
+      "Percent Off"
+    ],
+    "conceptPool": [
+      "percentage",
+      "percentage_increase",
+      "discount_rate",
+      "percent_off"
+    ],
+    "isBoss": false,
+    "difficultyTier": "easy"
+  },
+  {
+    "id": "lvl_2_5",
+    "levelNum": 5,
+    "levelNumber": 5,
+    "worldId": "arithmetic_kingdom",
+    "levelName": "The Ratio Realm",
+    "conceptId": "ratio",
+    "options": [
+      "Ratio",
+      "Equivalent Ratio",
+      "Direct Proportion",
+      "Inverse Proportion"
+    ],
+    "conceptPool": [
+      "ratio",
+      "equivalent_ratio",
+      "direct_proportion",
+      "inverse_proportion"
+    ],
+    "isBoss": false,
+    "difficultyTier": "easy"
+  },
+  {
+    "id": "lvl_2_6",
+    "levelNum": 6,
+    "levelNumber": 6,
+    "worldId": "arithmetic_kingdom",
+    "levelName": "The Interest Exchange",
+    "conceptId": "simple_interest",
+    "options": [
+      "Principal",
+      "Interest Rate",
+      "Time Period",
+      "Simple Interest"
+    ],
+    "conceptPool": [
+      "principal",
+      "interest_rate",
+      "time_period",
+      "simple_interest"
+    ],
+    "isBoss": false,
+    "difficultyTier": "easy"
+  },
+  {
+    "id": "lvl_2_7",
+    "levelNum": 7,
+    "levelNumber": 7,
+    "worldId": "arithmetic_kingdom",
+    "levelName": "The Merchant's Guild (Profit & Loss)",
+    "conceptId": "profit_loss",
+    "options": [
+      "Cost Price",
+      "Selling Price",
+      "Profit & Loss",
+      "Loss Percentage"
+    ],
+    "conceptPool": [
+      "cost_price",
+      "selling_price",
+      "profit_loss",
+      "loss_percentage"
+    ],
+    "isBoss": false,
+    "difficultyTier": "medium"
+  },
+  {
+    "id": "lvl_2_8",
+    "levelNum": 8,
+    "levelNumber": 8,
+    "worldId": "arithmetic_kingdom",
+    "levelName": "The Velocity Valley (Speed & Distance)",
+    "conceptId": "speed_distance_time",
+    "options": [
+      "Speed",
+      "Distance",
+      "Time Taken",
+      "Speed, Distance & Time"
+    ],
+    "conceptPool": [
+      "speed",
+      "distance",
+      "time_taken",
+      "speed_distance_time"
+    ],
+    "isBoss": false,
+    "difficultyTier": "medium"
+  },
+  {
+    "id": "lvl_2_9",
+    "levelNum": 9,
+    "levelNumber": 9,
+    "worldId": "arithmetic_kingdom",
+    "levelName": "The Work & Time Workshop",
+    "conceptId": "work_rate",
+    "options": [
+      "Work Rate",
+      "Time Required",
+      "Individual Efficiency",
+      "Combined Work Rate"
+    ],
+    "conceptPool": [
+      "work_rate",
+      "time_required",
+      "individual_efficiency",
+      "combined_work_rate"
+    ],
+    "isBoss": false,
+    "difficultyTier": "medium"
+  },
+  {
+    "id": "lvl_2_10",
+    "levelNum": 10,
+    "levelNumber": 10,
+    "worldId": "arithmetic_kingdom",
+    "levelName": "The Treasury of Taxes (GST & Finance)",
+    "conceptId": "gst",
+    "options": [
+      "Gross Amount",
+      "Net Price",
+      "Goods & Services Tax (GST)",
+      "Tax Deducted"
+    ],
+    "conceptPool": [
+      "gross_amount",
+      "net_price",
+      "gst",
+      "tax_deducted"
+    ],
+    "isBoss": false,
+    "difficultyTier": "hard"
+  },
+  {
+    "id": "lvl_2_11",
+    "levelNum": 11,
+    "levelNumber": 11,
+    "worldId": "arithmetic_kingdom",
+    "levelName": "The Stock & Share Market",
+    "conceptId": "shares_dividends",
+    "options": [
+      "Face Value",
+      "Market Value",
+      "Shares & Dividends",
+      "Annual Yield"
+    ],
+    "conceptPool": [
+      "face_value",
+      "market_value",
+      "shares_dividends",
+      "annual_yield"
+    ],
+    "isBoss": false,
+    "difficultyTier": "hard"
+  },
+  {
+    "id": "lvl_2_12",
+    "levelNum": 12,
+    "levelNumber": 12,
+    "worldId": "arithmetic_kingdom",
+    "levelName": "The Commercial Master (Arithmetic Boss)",
+    "conceptId": "compound_interest",
+    "options": [
+      "Compound Interest",
+      "Discount & Markup",
+      "Work and Time",
+      "Mixture & Alligation"
+    ],
+    "conceptPool": [
+      "compound_interest",
+      "discount_markup",
+      "work_and_time",
+      "mixture_alligation"
+    ],
+    "isBoss": true,
+    "difficultyTier": "boss"
+  },
+  {
+    "id": "lvl_3_1",
+    "levelNum": 1,
+    "levelNumber": 1,
+    "worldId": "geometry_kingdom",
+    "levelName": "The Angle Assembly",
+    "conceptId": "acute_angle",
+    "options": [
+      "Acute Angle",
+      "Right Angle",
+      "Obtuse Angle",
+      "Straight Angle"
+    ],
+    "conceptPool": [
+      "acute_angle",
+      "right_angle",
+      "obtuse_angle",
+      "straight_angle"
+    ],
+    "isBoss": false,
+    "difficultyTier": "super_easy"
+  },
+  {
+    "id": "lvl_3_2",
+    "levelNum": 2,
+    "levelNumber": 2,
+    "worldId": "geometry_kingdom",
+    "levelName": "The Angle Relationship Courtyard",
+    "conceptId": "complementary_angles",
+    "options": [
+      "Complementary Angles",
+      "Supplementary Angles",
+      "Vertical Angles",
+      "Adjacent Angles"
+    ],
+    "conceptPool": [
+      "complementary_angles",
+      "supplementary_angles",
+      "vertical_angles",
+      "adjacent_angles"
+    ],
+    "isBoss": false,
+    "difficultyTier": "super_easy"
+  },
+  {
+    "id": "lvl_3_3",
+    "levelNum": 3,
+    "levelNumber": 3,
+    "worldId": "geometry_kingdom",
+    "levelName": "The Triangle Sanctuary",
+    "conceptId": "equilateral_triangle",
+    "options": [
+      "Equilateral Triangle",
+      "Isosceles Triangle",
+      "Scalene Triangle",
+      "Right Triangle"
+    ],
+    "conceptPool": [
+      "equilateral_triangle",
+      "isosceles_triangle",
+      "scalene_triangle",
+      "right_triangle"
+    ],
+    "isBoss": false,
+    "difficultyTier": "super_easy"
+  },
+  {
+    "id": "lvl_3_4",
+    "levelNum": 4,
+    "levelNumber": 4,
+    "worldId": "geometry_kingdom",
+    "levelName": "The Four-Sided Fortress",
+    "conceptId": "square_shape",
+    "options": [
+      "Square",
+      "Rectangle",
+      "Parallelogram",
+      "Rhombus"
+    ],
+    "conceptPool": [
+      "square_shape",
+      "rectangle_shape",
+      "parallelogram",
+      "rhombus"
+    ],
+    "isBoss": false,
+    "difficultyTier": "easy"
+  },
+  {
+    "id": "lvl_3_5",
+    "levelNum": 5,
+    "levelNumber": 5,
+    "worldId": "geometry_kingdom",
+    "levelName": "The Polygon Pavilion",
+    "conceptId": "pentagon",
+    "options": [
+      "Pentagon",
+      "Hexagon",
+      "Octagon",
+      "Regular Polygon"
+    ],
+    "conceptPool": [
+      "pentagon",
+      "hexagon",
+      "octagon",
+      "regular_polygon"
+    ],
+    "isBoss": false,
+    "difficultyTier": "easy"
+  },
+  {
+    "id": "lvl_3_6",
+    "levelNum": 6,
+    "levelNumber": 6,
+    "worldId": "geometry_kingdom",
+    "levelName": "The Circular Sanctum",
+    "conceptId": "radius",
+    "options": [
+      "Radius",
+      "Diameter",
+      "Circumference",
+      "Arc"
+    ],
+    "conceptPool": [
+      "radius",
+      "diameter",
+      "circumference",
+      "arc"
+    ],
+    "isBoss": false,
+    "difficultyTier": "easy"
+  },
+  {
+    "id": "lvl_3_7",
+    "levelNum": 7,
+    "levelNumber": 7,
+    "worldId": "geometry_kingdom",
+    "levelName": "The Boundary & Region Realm",
+    "conceptId": "perimeter",
+    "options": [
+      "Perimeter",
+      "Area of Rectangle",
+      "Area of Triangle",
+      "Area of Circle"
+    ],
+    "conceptPool": [
+      "perimeter",
+      "area_rectangle",
+      "area_triangle",
+      "area_circle"
+    ],
+    "isBoss": false,
+    "difficultyTier": "medium"
+  },
+  {
+    "id": "lvl_3_8",
+    "levelNum": 8,
+    "levelNumber": 8,
+    "worldId": "geometry_kingdom",
+    "levelName": "The 3D Solid Stronghold",
+    "conceptId": "cube_3d",
+    "options": [
+      "Cube",
+      "Rectangular Prism",
+      "Cylinder",
+      "Sphere"
+    ],
+    "conceptPool": [
+      "cube_3d",
+      "rectangular_prism",
+      "cylinder",
+      "sphere"
+    ],
+    "isBoss": false,
+    "difficultyTier": "medium"
+  },
+  {
+    "id": "lvl_3_9",
+    "levelNum": 9,
+    "levelNumber": 9,
+    "worldId": "geometry_kingdom",
+    "levelName": "The Volume & Surface Vault",
+    "conceptId": "surface_area",
+    "options": [
+      "Surface Area",
+      "Volume",
+      "Base Area",
+      "Curved Surface Area"
+    ],
+    "conceptPool": [
+      "surface_area",
+      "volume",
+      "base_area",
+      "curved_surface_area"
+    ],
+    "isBoss": false,
+    "difficultyTier": "medium"
+  },
+  {
+    "id": "lvl_3_10",
+    "levelNum": 10,
+    "levelNumber": 10,
+    "worldId": "geometry_kingdom",
+    "levelName": "The Pythagorean Peak",
+    "conceptId": "hypotenuse",
+    "options": [
+      "Hypotenuse",
+      "Perpendicular Leg",
+      "Base Leg",
+      "Pythagorean Triple"
+    ],
+    "conceptPool": [
+      "hypotenuse",
+      "perpendicular_leg",
+      "base_leg",
+      "pythagorean_triple"
+    ],
+    "isBoss": false,
+    "difficultyTier": "hard"
+  },
+  {
+    "id": "lvl_3_11",
+    "levelNum": 11,
+    "levelNumber": 11,
+    "worldId": "geometry_kingdom",
+    "levelName": "The Symmetry & Transformation Mirror",
+    "conceptId": "reflection",
+    "options": [
+      "Reflection",
+      "Rotation",
+      "Translation",
+      "Line Symmetry"
+    ],
+    "conceptPool": [
+      "reflection",
+      "rotation",
+      "translation",
+      "line_symmetry"
+    ],
+    "isBoss": false,
+    "difficultyTier": "hard"
+  },
+  {
+    "id": "lvl_3_12",
+    "levelNum": 12,
+    "levelNumber": 12,
+    "worldId": "geometry_kingdom",
+    "levelName": "The Geometry Architect (Kingdom Boss)",
+    "conceptId": "euler_characteristic",
+    "options": [
+      "Euler Characteristic",
+      "Inradius & Circumradius",
+      "Tessellation",
+      "Fractal Geometry"
+    ],
+    "conceptPool": [
+      "euler_characteristic",
+      "inradius_circumradius",
+      "tessellation",
+      "fractal_geometry"
+    ],
+    "isBoss": true,
+    "difficultyTier": "boss"
+  },
+  {
+    "id": "lvl_4_1",
+    "levelNum": 1,
+    "levelNumber": 1,
+    "worldId": "algebra_kingdom",
+    "levelName": "The Variable Village",
+    "conceptId": "variable",
+    "options": [
+      "Variable",
+      "Constant",
+      "Coefficient",
+      "Algebraic Term"
+    ],
+    "conceptPool": [
+      "variable",
+      "constant",
+      "coefficient",
+      "algebraic_term"
+    ],
+    "isBoss": false,
+    "difficultyTier": "super_easy"
+  },
+  {
+    "id": "lvl_4_2",
+    "levelNum": 2,
+    "levelNumber": 2,
+    "worldId": "algebra_kingdom",
+    "levelName": "The Expression Expanse",
+    "conceptId": "monomial",
+    "options": [
+      "Monomial",
+      "Binomial",
+      "Trinomial",
+      "Polynomial"
+    ],
+    "conceptPool": [
+      "monomial",
+      "binomial",
+      "trinomial",
+      "polynomial"
+    ],
+    "isBoss": false,
+    "difficultyTier": "super_easy"
+  },
+  {
+    "id": "lvl_4_3",
+    "levelNum": 3,
+    "levelNumber": 3,
+    "worldId": "algebra_kingdom",
+    "levelName": "The Combining Terms Compound",
+    "conceptId": "like_terms",
+    "options": [
+      "Like Terms",
+      "Unlike Terms",
+      "Combining Terms",
+      "Simplification"
+    ],
+    "conceptPool": [
+      "like_terms",
+      "unlike_terms",
+      "combining_terms",
+      "simplification"
+    ],
+    "isBoss": false,
+    "difficultyTier": "super_easy"
+  },
+  {
+    "id": "lvl_4_4",
+    "levelNum": 4,
+    "levelNumber": 4,
+    "worldId": "algebra_kingdom",
+    "levelName": "The Linear Balancing Scale",
+    "conceptId": "linear_equation",
+    "options": [
+      "Linear Equation",
+      "Unknown Variable",
+      "Balancing Principle",
+      "Solution"
+    ],
+    "conceptPool": [
+      "linear_equation",
+      "unknown_variable",
+      "balancing_principle",
+      "equation_solution"
+    ],
+    "isBoss": false,
+    "difficultyTier": "easy"
+  },
+  {
+    "id": "lvl_4_5",
+    "levelNum": 5,
+    "levelNumber": 5,
+    "worldId": "algebra_kingdom",
+    "levelName": "The Variable Isolation Island",
+    "conceptId": "isolation_of_variable",
+    "options": [
+      "Isolation of Variable",
+      "Transposition",
+      "Inverse Operation",
+      "Check Solution"
+    ],
+    "conceptPool": [
+      "isolation_of_variable",
+      "transposition",
+      "inverse_operation",
+      "check_solution"
+    ],
+    "isBoss": false,
+    "difficultyTier": "easy"
+  },
+  {
+    "id": "lvl_4_6",
+    "levelNum": 6,
+    "levelNumber": 6,
+    "worldId": "algebra_kingdom",
+    "levelName": "The Identity Academy",
+    "conceptId": "square_of_sum",
+    "options": [
+      "Square of Sum",
+      "Square of Difference",
+      "Difference of Squares",
+      "Expanded Product"
+    ],
+    "conceptPool": [
+      "square_of_sum",
+      "square_of_difference",
+      "difference_of_squares",
+      "expanded_product"
+    ],
+    "isBoss": false,
+    "difficultyTier": "easy"
+  },
+  {
+    "id": "lvl_4_7",
+    "levelNum": 7,
+    "levelNumber": 7,
+    "worldId": "algebra_kingdom",
+    "levelName": "The Factoring Forge",
+    "conceptId": "common_factor",
+    "options": [
+      "Common Factor",
+      "Grouping Method",
+      "Quadratic Factoring",
+      "Perfect Square Factor"
+    ],
+    "conceptPool": [
+      "common_factor",
+      "grouping_method",
+      "quadratic_factoring",
+      "perfect_square_factor"
+    ],
+    "isBoss": false,
+    "difficultyTier": "medium"
+  },
+  {
+    "id": "lvl_4_8",
+    "levelNum": 8,
+    "levelNumber": 8,
+    "worldId": "algebra_kingdom",
+    "levelName": "The Inequality Incline",
+    "conceptId": "inequality_sign",
+    "options": [
+      "Inequality Sign",
+      "Greater Than Inequality",
+      "Sign Flip Rule",
+      "Solution Interval"
+    ],
+    "conceptPool": [
+      "inequality_sign",
+      "greater_than_inequality",
+      "sign_flip_rule",
+      "solution_interval"
+    ],
+    "isBoss": false,
+    "difficultyTier": "medium"
+  },
+  {
+    "id": "lvl_4_9",
+    "levelNum": 9,
+    "levelNumber": 9,
+    "worldId": "algebra_kingdom",
+    "levelName": "The Radical & Surd Ridge",
+    "conceptId": "surd",
+    "options": [
+      "Surd",
+      "Radical Sign",
+      "Simplest Surd Form",
+      "Rationalizing Denominator"
+    ],
+    "conceptPool": [
+      "surd",
+      "radical_sign",
+      "simplest_surd_form",
+      "rationalizing_denominator"
+    ],
+    "isBoss": false,
+    "difficultyTier": "medium"
+  },
+  {
+    "id": "lvl_4_10",
+    "levelNum": 10,
+    "levelNumber": 10,
+    "worldId": "algebra_kingdom",
+    "levelName": "The Simultaneous System Station",
+    "conceptId": "substitution_method",
+    "options": [
+      "Substitution Method",
+      "Elimination Method",
+      "System of Equations",
+      "Intersection Point"
+    ],
+    "conceptPool": [
+      "substitution_method",
+      "elimination_method",
+      "system_of_equations",
+      "intersection_point"
+    ],
+    "isBoss": false,
+    "difficultyTier": "hard"
+  },
+  {
+    "id": "lvl_4_11",
+    "levelNum": 11,
+    "levelNumber": 11,
+    "worldId": "algebra_kingdom",
+    "levelName": "The Quadratic Apex",
+    "conceptId": "quadratic_equation",
+    "options": [
+      "Quadratic Equation",
+      "Discriminant",
+      "Roots of Equation",
+      "Parabola Vertex"
+    ],
+    "conceptPool": [
+      "quadratic_equation",
+      "discriminant",
+      "roots_of_equation",
+      "parabola_vertex"
+    ],
+    "isBoss": false,
+    "difficultyTier": "hard"
+  },
+  {
+    "id": "lvl_4_12",
+    "levelNum": 12,
+    "levelNumber": 12,
+    "worldId": "algebra_kingdom",
+    "levelName": "The Algebraic Overlord (Kingdom Boss)",
+    "conceptId": "vieta_formulas",
+    "options": [
+      "Vieta Formulas",
+      "Synthetic Division",
+      "Logarithmic Equation",
+      "Exponential Growth"
+    ],
+    "conceptPool": [
+      "vieta_formulas",
+      "synthetic_division",
+      "logarithmic_equation",
+      "exponential_growth"
+    ],
+    "isBoss": true,
+    "difficultyTier": "boss"
+  },
+  {
+    "id": "lvl_5_1",
+    "levelNum": 1,
+    "levelNumber": 1,
+    "worldId": "advanced_mathematics",
+    "levelName": "The Arithmetic Sequence Steps",
+    "conceptId": "arithmetic_progression",
+    "options": [
+      "Arithmetic Progression",
+      "First Term",
+      "Common Difference",
+      "nth Term"
+    ],
+    "conceptPool": [
+      "arithmetic_progression",
+      "first_term",
+      "common_difference",
+      "nth_term"
+    ],
+    "isBoss": false,
+    "difficultyTier": "super_easy"
+  },
+  {
+    "id": "lvl_5_2",
+    "levelNum": 2,
+    "levelNumber": 2,
+    "worldId": "advanced_mathematics",
+    "levelName": "The Geometric Progression Growth",
+    "conceptId": "geometric_progression",
+    "options": [
+      "Geometric Progression",
+      "Common Ratio",
+      "GP Term",
+      "Sum of Infinite GP"
+    ],
+    "conceptPool": [
+      "geometric_progression",
+      "common_ratio",
+      "gp_term",
+      "sum_infinite_gp"
+    ],
+    "isBoss": false,
+    "difficultyTier": "super_easy"
+  },
+  {
+    "id": "lvl_5_3",
+    "levelNum": 3,
+    "levelNumber": 3,
+    "worldId": "advanced_mathematics",
+    "levelName": "The Set Theory Sanctuary",
+    "conceptId": "set_element",
+    "options": [
+      "Element of Set",
+      "Subset",
+      "Empty Set",
+      "Universal Set"
+    ],
+    "conceptPool": [
+      "set_element",
+      "subset",
+      "empty_set",
+      "universal_set"
+    ],
+    "isBoss": false,
+    "difficultyTier": "super_easy"
+  },
+  {
+    "id": "lvl_5_4",
+    "levelNum": 4,
+    "levelNumber": 4,
+    "worldId": "advanced_mathematics",
+    "levelName": "The Set Operation Oasis",
+    "conceptId": "union_of_sets",
+    "options": [
+      "Union of Sets",
+      "Intersection of Sets",
+      "Difference of Sets",
+      "Complement of Set"
+    ],
+    "conceptPool": [
+      "union_of_sets",
+      "intersection_of_sets",
+      "difference_of_sets",
+      "complement_of_set"
+    ],
+    "isBoss": false,
+    "difficultyTier": "easy"
+  },
+  {
+    "id": "lvl_5_5",
+    "levelNum": 5,
+    "levelNumber": 5,
+    "worldId": "advanced_mathematics",
+    "levelName": "The Matrix Grid Foundations",
+    "conceptId": "matrix_row",
+    "options": [
+      "Row Vector",
+      "Column Vector",
+      "Square Matrix",
+      "Identity Matrix"
+    ],
+    "conceptPool": [
+      "matrix_row",
+      "column_vector",
+      "square_matrix",
+      "identity_matrix"
+    ],
+    "isBoss": false,
+    "difficultyTier": "easy"
+  },
+  {
+    "id": "lvl_5_6",
+    "levelNum": 6,
+    "levelNumber": 6,
+    "worldId": "advanced_mathematics",
+    "levelName": "The Matrix Multiplication Manor",
+    "conceptId": "matrix_multiplication",
+    "options": [
+      "Matrix Addition",
+      "Matrix Multiplication",
+      "Transpose of Matrix",
+      "Zero Matrix"
+    ],
+    "conceptPool": [
+      "matrix_addition",
+      "matrix_multiplication",
+      "transpose_matrix",
+      "zero_matrix"
+    ],
+    "isBoss": false,
+    "difficultyTier": "easy"
+  },
+  {
+    "id": "lvl_5_7",
+    "levelNum": 7,
+    "levelNumber": 7,
+    "worldId": "advanced_mathematics",
+    "levelName": "The Determinant Domain",
+    "conceptId": "determinant",
+    "options": [
+      "Determinant",
+      "Minor",
+      "Cofactor",
+      "Singular Matrix"
+    ],
+    "conceptPool": [
+      "determinant",
+      "minor",
+      "cofactor",
+      "singular_matrix"
+    ],
+    "isBoss": false,
+    "difficultyTier": "medium"
+  },
+  {
+    "id": "lvl_5_8",
+    "levelNum": 8,
+    "levelNumber": 8,
+    "worldId": "advanced_mathematics",
+    "levelName": "The Complex Number Citadel",
+    "conceptId": "complex_number",
+    "options": [
+      "Complex Number",
+      "Imaginary Unit (i)",
+      "Complex Conjugate",
+      "Modulus"
+    ],
+    "conceptPool": [
+      "complex_number",
+      "imaginary_unit",
+      "complex_conjugate",
+      "modulus"
+    ],
+    "isBoss": false,
+    "difficultyTier": "medium"
+  },
+  {
+    "id": "lvl_5_9",
+    "levelNum": 9,
+    "levelNumber": 9,
+    "worldId": "advanced_mathematics",
+    "levelName": "The Combinatorics Chamber",
+    "conceptId": "permutation",
+    "options": [
+      "Permutation (nPr)",
+      "Combination (nCr)",
+      "Factorial",
+      "Fundamental Counting Principle"
+    ],
+    "conceptPool": [
+      "permutation",
+      "combination",
+      "factorial",
+      "counting_principle"
+    ],
+    "isBoss": false,
+    "difficultyTier": "medium"
+  },
+  {
+    "id": "lvl_5_10",
+    "levelNum": 10,
+    "levelNumber": 10,
+    "worldId": "advanced_mathematics",
+    "levelName": "The Binomial Expansion Bridge",
+    "conceptId": "binomial_theorem",
+    "options": [
+      "Binomial Theorem",
+      "Pascal's Triangle",
+      "Binomial Coefficient",
+      "General Term"
+    ],
+    "conceptPool": [
+      "binomial_theorem",
+      "pascals_triangle",
+      "binomial_coefficient",
+      "general_term"
+    ],
+    "isBoss": false,
+    "difficultyTier": "hard"
+  },
+  {
+    "id": "lvl_5_11",
+    "levelNum": 11,
+    "levelNumber": 11,
+    "worldId": "advanced_mathematics",
+    "levelName": "The Vector Space Peak",
+    "conceptId": "vector_magnitude",
+    "options": [
+      "Vector Magnitude",
+      "Unit Vector",
+      "Dot Product",
+      "Cross Product"
+    ],
+    "conceptPool": [
+      "vector_magnitude",
+      "unit_vector",
+      "dot_product",
+      "cross_product"
+    ],
+    "isBoss": false,
+    "difficultyTier": "hard"
+  },
+  {
+    "id": "lvl_5_12",
+    "levelNum": 12,
+    "levelNumber": 12,
+    "worldId": "advanced_mathematics",
+    "levelName": "The Advanced Math Titan (Kingdom Boss)",
+    "conceptId": "eigenvalue",
+    "options": [
+      "Eigenvalue",
+      "Eigenvector",
+      "Cayley-Hamilton Theorem",
+      "De Moivre's Theorem"
+    ],
+    "conceptPool": [
+      "eigenvalue",
+      "eigenvector",
+      "cayley_hamilton_theorem",
+      "de_moivre_theorem"
+    ],
+    "isBoss": true,
+    "difficultyTier": "boss"
+  },
+  {
+    "id": "lvl_6_1",
+    "levelNum": 1,
+    "levelNumber": 1,
+    "worldId": "coordinate_calculus",
+    "levelName": "The Cartesian Plane",
+    "conceptId": "origin",
+    "options": [
+      "Origin (0,0)",
+      "X-Axis",
+      "Y-Axis",
+      "Quadrant"
+    ],
+    "conceptPool": [
+      "origin",
+      "x_axis",
+      "y_axis",
+      "quadrant"
+    ],
+    "isBoss": false,
+    "difficultyTier": "super_easy"
+  },
+  {
+    "id": "lvl_6_2",
+    "levelNum": 2,
+    "levelNumber": 2,
+    "worldId": "coordinate_calculus",
+    "levelName": "The Distance & Midpoint Crossing",
+    "conceptId": "distance_formula",
+    "options": [
+      "Distance Formula",
+      "Midpoint Formula",
+      "Section Formula",
+      "Slope of Line"
+    ],
+    "conceptPool": [
+      "distance_formula",
+      "midpoint_formula",
+      "section_formula",
+      "line_slope"
+    ],
+    "isBoss": false,
+    "difficultyTier": "super_easy"
+  },
+  {
+    "id": "lvl_6_3",
+    "levelNum": 3,
+    "levelNumber": 3,
+    "worldId": "coordinate_calculus",
+    "levelName": "The Straight Line Station",
+    "conceptId": "slope_intercept_form",
+    "options": [
+      "Slope-Intercept Form",
+      "Point-Slope Form",
+      "Parallel Slope",
+      "Perpendicular Slope"
+    ],
+    "conceptPool": [
+      "slope_intercept_form",
+      "point_slope_form",
+      "parallel_slope",
+      "perpendicular_slope"
+    ],
+    "isBoss": false,
+    "difficultyTier": "super_easy"
+  },
+  {
+    "id": "lvl_6_4",
+    "levelNum": 4,
+    "levelNumber": 4,
+    "worldId": "coordinate_calculus",
+    "levelName": "The Conic Section Curve",
+    "conceptId": "circle_equation",
+    "options": [
+      "Circle Equation",
+      "Parabola Focus",
+      "Ellipse Axes",
+      "Hyperbola Asymptote"
+    ],
+    "conceptPool": [
+      "circle_equation",
+      "parabola_focus",
+      "ellipse_axes",
+      "hyperbola_asymptote"
+    ],
+    "isBoss": false,
+    "difficultyTier": "easy"
+  },
+  {
+    "id": "lvl_6_5",
+    "levelNum": 5,
+    "levelNumber": 5,
+    "worldId": "coordinate_calculus",
+    "levelName": "The Limit & Continuity Gate",
+    "conceptId": "function_limit",
+    "options": [
+      "Function Limit",
+      "Left Hand Limit",
+      "Right Hand Limit",
+      "Continuity"
+    ],
+    "conceptPool": [
+      "function_limit",
+      "left_hand_limit",
+      "right_hand_limit",
+      "continuity"
+    ],
+    "isBoss": false,
+    "difficultyTier": "easy"
+  },
+  {
+    "id": "lvl_6_6",
+    "levelNum": 6,
+    "levelNumber": 6,
+    "worldId": "coordinate_calculus",
+    "levelName": "The Derivative Threshold",
+    "conceptId": "derivative",
+    "options": [
+      "Derivative (dy/dx)",
+      "Rate of Change",
+      "Secant Slope",
+      "Tangent Slope"
+    ],
+    "conceptPool": [
+      "derivative",
+      "rate_of_change",
+      "secant_slope",
+      "tangent_slope"
+    ],
+    "isBoss": false,
+    "difficultyTier": "easy"
+  },
+  {
+    "id": "lvl_6_7",
+    "levelNum": 7,
+    "levelNumber": 7,
+    "worldId": "coordinate_calculus",
+    "levelName": "The Differentiation Rules Realm",
+    "conceptId": "power_rule",
+    "options": [
+      "Power Rule",
+      "Product Rule",
+      "Quotient Rule",
+      "Chain Rule"
+    ],
+    "conceptPool": [
+      "power_rule",
+      "product_rule",
+      "quotient_rule",
+      "chain_rule"
+    ],
+    "isBoss": false,
+    "difficultyTier": "medium"
+  },
+  {
+    "id": "lvl_6_8",
+    "levelNum": 8,
+    "levelNumber": 8,
+    "worldId": "coordinate_calculus",
+    "levelName": "The Critical Point Peak (Maxima & Minima)",
+    "conceptId": "critical_point",
+    "options": [
+      "Critical Point",
+      "Local Maxima",
+      "Local Minima",
+      "Point of Inflection"
+    ],
+    "conceptPool": [
+      "critical_point",
+      "local_maxima",
+      "local_minima",
+      "point_of_inflection"
+    ],
+    "isBoss": false,
+    "difficultyTier": "medium"
+  },
+  {
+    "id": "lvl_6_9",
+    "levelNum": 9,
+    "levelNumber": 9,
+    "worldId": "coordinate_calculus",
+    "levelName": "The Integration Incline",
+    "conceptId": "indefinite_integral",
+    "options": [
+      "Indefinite Integral",
+      "Antiderivative",
+      "Integration Constant (+C)",
+      "Definite Integral"
+    ],
+    "conceptPool": [
+      "indefinite_integral",
+      "antiderivative",
+      "integration_constant",
+      "definite_integral"
+    ],
+    "isBoss": false,
+    "difficultyTier": "medium"
+  },
+  {
+    "id": "lvl_6_10",
+    "levelNum": 10,
+    "levelNumber": 10,
+    "worldId": "coordinate_calculus",
+    "levelName": "The Area Under Curve Vault",
+    "conceptId": "area_under_curve",
+    "options": [
+      "Area Under Curve",
+      "Riemann Sum",
+      "Fundamental Theorem of Calculus",
+      "Bounded Region"
+    ],
+    "conceptPool": [
+      "area_under_curve",
+      "riemann_sum",
+      "fundamental_theorem_calculus",
+      "bounded_region"
+    ],
+    "isBoss": false,
+    "difficultyTier": "hard"
+  },
+  {
+    "id": "lvl_6_11",
+    "levelNum": 11,
+    "levelNumber": 11,
+    "worldId": "coordinate_calculus",
+    "levelName": "The Differential Equation Dungeon",
+    "conceptId": "differential_equations",
+    "options": [
+      "Differential Equations",
+      "Order of DE",
+      "Degree of DE",
+      "Separable Variables"
+    ],
+    "conceptPool": [
+      "differential_equations",
+      "order_of_de",
+      "degree_of_de",
+      "separable_variables"
+    ],
+    "isBoss": false,
+    "difficultyTier": "hard"
+  },
+  {
+    "id": "lvl_6_12",
+    "levelNum": 12,
+    "levelNumber": 12,
+    "worldId": "coordinate_calculus",
+    "levelName": "The Calculus Pinnacle (Kingdom Boss)",
+    "conceptId": "lhopital_rule",
+    "options": [
+      "L'Hôpital's Rule",
+      "Taylor Series",
+      "Partial Derivative",
+      "Improper Integral"
+    ],
+    "conceptPool": [
+      "lhopital_rule",
+      "taylor_series",
+      "partial_derivative",
+      "improper_integral"
+    ],
+    "isBoss": true,
+    "difficultyTier": "boss"
+  },
+  {
+    "id": "lvl_7_1",
+    "levelNum": 1,
+    "levelNumber": 1,
+    "worldId": "data_logic",
+    "levelName": "The Central Tendency Town",
+    "conceptId": "mean",
+    "options": [
+      "Mean",
+      "Median",
+      "Mode",
+      "Range"
+    ],
+    "conceptPool": [
+      "mean",
+      "median",
+      "mode",
+      "range"
+    ],
+    "isBoss": false,
+    "difficultyTier": "super_easy"
+  },
+  {
+    "id": "lvl_7_2",
+    "levelNum": 2,
+    "levelNumber": 2,
+    "worldId": "data_logic",
+    "levelName": "The Data Representation Gallery",
+    "conceptId": "bar_graph",
+    "options": [
+      "Bar Graph",
+      "Line Graph",
+      "Pie Chart",
+      "Histogram"
+    ],
+    "conceptPool": [
+      "bar_graph",
+      "line_graph",
+      "pie_chart",
+      "histogram"
+    ],
+    "isBoss": false,
+    "difficultyTier": "super_easy"
+  },
+  {
+    "id": "lvl_7_3",
+    "levelNum": 3,
+    "levelNumber": 3,
+    "worldId": "data_logic",
+    "levelName": "The Frequency Distribution Forge",
+    "conceptId": "tally_marks",
+    "options": [
+      "Tally Marks",
+      "Frequency Table",
+      "Class Interval",
+      "Cumulative Frequency"
+    ],
+    "conceptPool": [
+      "tally_marks",
+      "frequency_table",
+      "class_interval",
+      "cumulative_frequency"
+    ],
+    "isBoss": false,
+    "difficultyTier": "super_easy"
+  },
+  {
+    "id": "lvl_7_4",
+    "levelNum": 4,
+    "levelNumber": 4,
+    "worldId": "data_logic",
+    "levelName": "The Probability Portal",
+    "conceptId": "probability",
+    "options": [
+      "Probability",
+      "Favorable Outcomes",
+      "Sample Space",
+      "Impossible Event"
+    ],
+    "conceptPool": [
+      "probability",
+      "favorable_outcomes",
+      "sample_space",
+      "impossible_event"
+    ],
+    "isBoss": false,
+    "difficultyTier": "easy"
+  },
+  {
+    "id": "lvl_7_5",
+    "levelNum": 5,
+    "levelNumber": 5,
+    "worldId": "data_logic",
+    "levelName": "The Venn Diagram Region",
+    "conceptId": "venn_diagrams",
+    "options": [
+      "Venn Diagrams",
+      "Overlapping Set",
+      "Disjoint Set",
+      "Universal Boundary"
+    ],
+    "conceptPool": [
+      "venn_diagrams",
+      "overlapping_set",
+      "disjoint_set",
+      "universal_boundary"
+    ],
+    "isBoss": false,
+    "difficultyTier": "easy"
+  },
+  {
+    "id": "lvl_7_6",
+    "levelNum": 6,
+    "levelNumber": 6,
+    "worldId": "data_logic",
+    "levelName": "The Logical Proposition Palace",
+    "conceptId": "proposition",
+    "options": [
+      "Proposition",
+      "Truth Value",
+      "Negation",
+      "Conditional Statement"
+    ],
+    "conceptPool": [
+      "proposition",
+      "truth_value",
+      "negation",
+      "conditional_statement"
+    ],
+    "isBoss": false,
+    "difficultyTier": "easy"
+  },
+  {
+    "id": "lvl_7_7",
+    "levelNum": 7,
+    "levelNumber": 7,
+    "worldId": "data_logic",
+    "levelName": "The Compound Logic Citadel",
+    "conceptId": "conjunction_and",
+    "options": [
+      "Conjunction (AND)",
+      "Disjunction (OR)",
+      "Implication (IF-THEN)",
+      "Biconditional"
+    ],
+    "conceptPool": [
+      "conjunction_and",
+      "disjunction_or",
+      "implication_if_then",
+      "biconditional"
+    ],
+    "isBoss": false,
+    "difficultyTier": "medium"
+  },
+  {
+    "id": "lvl_7_8",
+    "levelNum": 8,
+    "levelNumber": 8,
+    "worldId": "data_logic",
+    "levelName": "The Combined Probability Peak",
+    "conceptId": "independent_events",
+    "options": [
+      "Independent Events",
+      "Dependent Events",
+      "Conditional Probability",
+      "Tree Diagram"
+    ],
+    "conceptPool": [
+      "independent_events",
+      "dependent_events",
+      "conditional_probability",
+      "tree_diagram"
+    ],
+    "isBoss": false,
+    "difficultyTier": "medium"
+  },
+  {
+    "id": "lvl_7_9",
+    "levelNum": 9,
+    "levelNumber": 9,
+    "worldId": "data_logic",
+    "levelName": "The Deductive Reasoning Realm",
+    "conceptId": "valid_argument",
+    "options": [
+      "Valid Argument",
+      "Logical Fallacy",
+      "Deductive Reasoning",
+      "Inductive Reasoning"
+    ],
+    "conceptPool": [
+      "valid_argument",
+      "logical_fallacy",
+      "deductive_reasoning",
+      "inductive_reasoning"
+    ],
+    "isBoss": false,
+    "difficultyTier": "medium"
+  },
+  {
+    "id": "lvl_7_10",
+    "levelNum": 10,
+    "levelNumber": 10,
+    "worldId": "data_logic",
+    "levelName": "The Data Sufficiency Sanctuary",
+    "conceptId": "statement_sufficient",
+    "options": [
+      "Statement Sufficient",
+      "Combined Sufficiency",
+      "Neither Sufficient",
+      "Redundant Data"
+    ],
+    "conceptPool": [
+      "statement_sufficient",
+      "combined_sufficiency",
+      "neither_sufficient",
+      "redundant_data"
+    ],
+    "isBoss": false,
+    "difficultyTier": "hard"
+  },
+  {
+    "id": "lvl_7_11",
+    "levelNum": 11,
+    "levelNumber": 11,
+    "worldId": "data_logic",
+    "levelName": "The Pattern & Matrix Puzzle Chamber",
+    "conceptId": "pattern_rule",
+    "options": [
+      "Pattern Rule",
+      "Term Invariance",
+      "Matrix Logic",
+      "Sequence Completion"
+    ],
+    "conceptPool": [
+      "pattern_rule",
+      "term_invariance",
+      "matrix_logic",
+      "sequence_completion"
+    ],
+    "isBoss": false,
+    "difficultyTier": "hard"
+  },
+  {
+    "id": "lvl_7_12",
+    "levelNum": 12,
+    "levelNumber": 12,
+    "worldId": "data_logic",
+    "levelName": "The Logic & Analytics Grandmaster (Kingdom Boss)",
+    "conceptId": "bayes_theorem",
+    "options": [
+      "Bayes' Theorem",
+      "Chi-Square Test",
+      "Z-Score",
+      "Markov Chain"
+    ],
+    "conceptPool": [
+      "bayes_theorem",
+      "chi_square_test",
+      "z_score",
+      "markov_chain"
+    ],
+    "isBoss": true,
+    "difficultyTier": "boss"
+  }
+]
