@@ -17,3 +17,9 @@ server/_probe*.js
 # Backup snapshots — never commit these; use git history instead
 *.bak
 *.bak.*
+
+# Environment variables
+.env
+*.env
+server/.env
+
