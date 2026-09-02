@@ -193,20 +193,7 @@ export default function Vachana({ onBack }) {
   const [activeTab, setActiveTab] = useState(getTabFromUrl);
   const [, setConfirmModal] = useState(null);
 
-  // Theme Management (Default: dark)
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('vachana_theme') || localStorage.getItem('tenali-theme') || 'dark';
-  });
 
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    document.body.setAttribute('data-theme', theme);
-    localStorage.setItem('vachana_theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
-  };
 
   // Keep URL in sync when tab changes programmatically
   const selectTab = (id) => {
@@ -282,27 +269,6 @@ export default function Vachana({ onBack }) {
             <p className="subtitle" style={{ margin: '4px 0 0 0' }}>Learn to parse, translate, and communicate in the language of mathematics</p>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <button
-              onClick={toggleTheme}
-              title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
-              style={{
-                background: 'var(--clr-surface)',
-                border: '1px solid var(--clr-border)',
-                color: 'var(--clr-text)',
-                borderRadius: '50%',
-                width: '38px',
-                height: '38px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer',
-                fontSize: '1.1rem',
-                transition: 'all 0.18s ease',
-                boxShadow: 'var(--shadow-btn)'
-              }}
-            >
-              {theme === 'dark' ? '☀️' : '🌙'}
-            </button>
             <button className="back-button" onClick={onBack}>← Back to Home</button>
           </div>
         </div>
