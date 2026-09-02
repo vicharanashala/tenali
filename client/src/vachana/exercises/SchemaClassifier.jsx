@@ -274,20 +274,7 @@ export default function SchemaClassifier() {
   const [showSidebar, setShowSidebar] = useState(false);
   const [streak, setStreak] = useState(0);
 
-  // Theme Management with localStorage persistence
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('vachana_theme') || localStorage.getItem('tenali-theme') || 'dark';
-  });
 
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    document.body.setAttribute('data-theme', theme);
-    localStorage.setItem('vachana_theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
-  };
 
   const [isReviewMode, setIsReviewMode] = useState(false);
   const [reviewQIndex, setReviewQIndex] = useState(0);
