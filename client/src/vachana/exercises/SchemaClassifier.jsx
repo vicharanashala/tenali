@@ -25,6 +25,10 @@ const LEVEL_METADATA = {
 };
 
 // Order-independent schema comparison helper
+function pluralize(count, singular, plural = singular + 's') {
+  return `${count} ${count === 1 ? singular : plural}`;
+}
+
 function isSchemaMatch(userChoice, correctChoice) {
   if (!userChoice || !correctChoice) return false;
   const normUser = userChoice
@@ -172,14 +176,20 @@ const QUESTIONS_BY_LEVEL = {
 
 function loadProgress() {
   try {
-    if (typeof localStorage !== 'undefined') localStorage.removeItem(STORAGE_KEY);
-    if (typeof sessionStorage !== 'undefined') sessionStorage.removeItem(STORAGE_KEY);
+    if (typeof localStorage !== 'undefined') {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) return JSON.parse(saved);
+    }
   } catch (e) {}
   return { unlockedLevel: 0, completedLevels: [] };
 }
 
 function saveProgress(progress) {
-  // Ephemeral in-session progress only; refreshes reset to 0
+  try {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+    }
+  } catch (e) {}
 }
 
 function getLevelFromPath() {
@@ -1026,7 +1036,7 @@ export default function SchemaClassifier() {
                     </div>
 
                     <div style={{ color: 'var(--clr-accent)', fontWeight: 700, fontSize: '1.1rem', marginTop: '4px' }}>
-                      {l0CombineDropZone.filter(i => i.group === 'A').length} bears + {l0CombineDropZone.filter(i => i.group === 'B').length} yo-yos = {l0CombineDropZone.length} total toys
+                      {pluralize(l0CombineDropZone.filter(i => i.group === 'A').length, 'bear')} + {pluralize(l0CombineDropZone.filter(i => i.group === 'B').length, 'yo-yo')} = {pluralize(l0CombineDropZone.length, 'total toy')}
                     </div>
                   </div>
                 </div>
@@ -1285,7 +1295,7 @@ export default function SchemaClassifier() {
                 boxShadow: 'var(--shadow-card)'
               }}>
                 <div aria-live="polite" className="sr-only" style={{ position: 'absolute', width: '1px', height: '1px', padding: 0, margin: '-1px', overflow: 'hidden', clip: 'rect(0,0,0,0)', border: 0 }}>
-                  {l0ChangeCompleted ? `Change activity complete! Started with 6 balloons, changed over time, now remaining ${l0ChangeState}.` : `Current balloons: ${l0ChangeState}.`}
+                  {l0ChangeCompleted ? `Change activity complete! Started with 6 balloons, changed over time, now remaining ${l0ChangeState}.` : `Current ${l0ChangeState === 1 ? 'balloon' : 'balloons'}: ${l0ChangeState}.`}
                 </div>
 
                 <div>
@@ -1390,7 +1400,7 @@ export default function SchemaClassifier() {
                     </div>
 
                     <div style={{ color: 'var(--clr-accent)', fontWeight: 700, fontSize: '1.05rem' }}>
-                      Start: 6 balloons → Events: {l0ChangeHistory.length > 0 ? l0ChangeHistory.join(', ') : 'None'} → Current: {l0ChangeState} balloons
+                      Start: 6 balloons → Events: {l0ChangeHistory.length > 0 ? l0ChangeHistory.join(', ') : 'None'} → Current: {pluralize(l0ChangeState, 'balloon')}
                     </div>
                   </div>
                 </div>
