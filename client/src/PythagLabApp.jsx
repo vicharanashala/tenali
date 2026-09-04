@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+// eslint-disable-next-line no-unused-vars -- motion is used in JSX via <motion.div>
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 
@@ -42,9 +43,9 @@ export default function PythagLabApp({ onBack }) {
   
   // Game states
   const [currentLevel, setCurrentLevel] = useState(1);
-  const [totalLevels, setTotalLevels] = useState(5);
+  const [totalLevels, _setTotalLevels] = useState(5);
   const [xp, setXp] = useState(0);
-  const [lives, setLives] = useState(3);
+  const [_lives, setLives] = useState(3);
   const [logs, setLogs] = useState([]);
   const [ribbonPopup, setRibbonPopup] = useState(false);
   const [hintText, setHintText] = useState('');
@@ -75,15 +76,7 @@ export default function PythagLabApp({ onBack }) {
   const [podDocked, setPodDocked] = useState(false);
   const [ambulanceProgress, setAmbulanceProgress] = useState(0);
 
-  const padZero = (val) => val;
-
-  // Set default hint for active level
-  useEffect(() => {
-    if (phase === 'game') {
-      loadLevelHint(currentLevel);
-      setShowHint(false);
-    }
-  }, [phase, currentLevel, difficulty]);
+  const _padZero = (val) => val;
 
   const loadLevelHint = (lvl) => {
     if (difficulty === 'easy') {
@@ -106,6 +99,16 @@ export default function PythagLabApp({ onBack }) {
       if (lvl === 5) setHintText("Ambulance horizontal travel is 9 - 1 = 8 blocks, vertical travel is 17 - 2 = 15 blocks. D² = 8² + 15² = 64 + 225 = 289. Dispatch range is √289 = 17 blocks.");
     }
   };
+
+  // Set default hint for active level
+  useEffect(() => {
+    if (phase === 'game') {
+       
+      loadLevelHint(currentLevel);
+      setShowHint(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase, currentLevel, difficulty]);
 
   const getLevelQuestion = (lvl) => {
     if (difficulty === 'easy') {

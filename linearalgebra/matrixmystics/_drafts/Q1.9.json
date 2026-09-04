@@ -1,0 +1,436 @@
+{
+  "module": 1,
+  "topicId": "Q1.9",
+  "title": "f(x) = x² - 10, find f(5)",
+  "topic": "Function evaluation, squaring numbers.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M1Q9E1",
+        "question": "For f(x) = x² - 10, what is f(1)?",
+        "options": [
+          "A negative integer",
+          "Exactly nine below",
+          "Negative nine below",
+          "Some positive digit"
+        ],
+        "correct_option": "Some positive digit",
+        "explanation": "f(1) = 1² - 10 = 1 - 10 = -9, which is negative."
+      },
+      {
+        "id": "M1Q9E2",
+        "question": "For f(x) = x² - 10, what is f(0)?",
+        "options": [
+          "Exactly minus ten",
+          "Just positive ten",
+          "The value zero",
+          "A value of one"
+        ],
+        "correct_option": "Exactly minus ten",
+        "explanation": "f(0) = 0² - 10 = 0 - 10 = -10."
+      },
+      {
+        "id": "M1Q9E3",
+        "question": "For f(x) = x² - 10, what is f(2)?",
+        "options": [
+          "Equals positive four",
+          "Equals positive six",
+          "Negative six value",
+          "Equals positive fourteen"
+        ],
+        "correct_option": "Negative six value",
+        "explanation": "f(2) = 2² - 10 = 4 - 10 = -6."
+      },
+      {
+        "id": "M1Q9E4",
+        "question": "For f(x) = x² - 10, what is f(3)?",
+        "options": [
+          "Equals nineteen value",
+          "Equals positive three",
+          "A negative one value",
+          "Equals positive one"
+        ],
+        "correct_option": "A negative one value",
+        "explanation": "f(3) = 3² - 10 = 9 - 10 = -1."
+      },
+      {
+        "id": "M1Q9E5",
+        "question": "For f(x) = x² - 10, what is f(4)?",
+        "options": [
+          "Equals positive four",
+          "Equals fourteen value",
+          "Equals positive six",
+          "Equals twenty six"
+        ],
+        "correct_option": "Equals positive six",
+        "explanation": "f(4) = 4² - 10 = 16 - 10 = 6."
+      },
+      {
+        "id": "M1Q9E6",
+        "question": "For f(x) = x² - 10, what is f(5)?",
+        "options": [
+          "Equals twenty five",
+          "Equals fifteen value",
+          "Equals thirty five",
+          "Equals five value"
+        ],
+        "correct_option": "Equals fifteen value",
+        "explanation": "f(5) = 5² - 10 = 25 - 10 = 15."
+      },
+      {
+        "id": "M1Q9E7",
+        "question": "For f(x) = x² - 10, what is f(10)?",
+        "options": [
+          "Equals zero value",
+          "Equals ninety value",
+          "Equals one hundred",
+          "Equals ten value"
+        ],
+        "correct_option": "Equals ninety value",
+        "explanation": "f(10) = 10² - 10 = 100 - 10 = 90."
+      },
+      {
+        "id": "M1Q9E8",
+        "question": "For f(x) = x² - 10, what is f(-1)?",
+        "options": [
+          "Equals negative nine",
+          "Equals nine value",
+          "Equals negative eleven",
+          "Equals positive one"
+        ],
+        "correct_option": "Equals negative nine",
+        "explanation": "f(-1) = (-1)² - 10 = 1 - 10 = -9."
+      },
+      {
+        "id": "M1Q9E9",
+        "question": "For f(x) = x² - 10, what is f(-5)?",
+        "options": [
+          "Equals fifteen value",
+          "Equals negative fifteen",
+          "Equals twenty five",
+          "Equals thirty five"
+        ],
+        "correct_option": "Equals fifteen value",
+        "explanation": "f(-5) = (-5)² - 10 = 25 - 10 = 15."
+      },
+      {
+        "id": "M1Q9E10",
+        "question": "For f(x) = x² - 10, what is f(5) + f(-5)?",
+        "options": [
+          "Equals fifteen value",
+          "Equals zero value",
+          "Equals twenty five",
+          "Equals thirty value"
+        ],
+        "correct_option": "Equals thirty value",
+        "explanation": "f(5) = 15 and f(-5) = 15, so their sum is 30."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M1Q9M1",
+        "question": "Plugging x = 5 into f(x) = x² - 10, the middle step 5² equals:",
+        "options": [
+          "Equals twenty five",
+          "Equals fifty value",
+          "Equals twenty value",
+          "Equals ten value"
+        ],
+        "correct_option": "Equals twenty five",
+        "explanation": "5² = 5·5 = 25, then 25 - 10 = 15."
+      },
+      {
+        "id": "M1Q9M2",
+        "question": "For f(x) = x² + 10, what is f(5)?",
+        "options": [
+          "Equals fifteen value",
+          "Equals thirty five",
+          "Equals twenty five",
+          "Equals forty five"
+        ],
+        "correct_option": "Equals thirty five",
+        "explanation": "f(5) = 5² + 10 = 25 + 10 = 35."
+      },
+      {
+        "id": "M1Q9M3",
+        "question": "For f(x) = 2x² - 10, what is f(5)?",
+        "options": [
+          "Equals thirty value",
+          "Equals twenty five",
+          "Equals forty value",
+          "Equals fifty value"
+        ],
+        "correct_option": "Equals forty value",
+        "explanation": "f(5) = 2·25 - 10 = 50 - 10 = 40."
+      },
+      {
+        "id": "M1Q9M4",
+        "question": "For f(x) = x² - 5, what is f(5)?",
+        "options": [
+          "Equals fifteen value",
+          "Equals twenty value",
+          "Equals ten value",
+          "Equals twenty five"
+        ],
+        "correct_option": "Equals twenty value",
+        "explanation": "f(5) = 5² - 5 = 25 - 5 = 20."
+      },
+      {
+        "id": "M1Q9M5",
+        "question": "For f(x) = 5x² - 10, what is f(5)?",
+        "options": [
+          "Equals forty value",
+          "Equals one hundred",
+          "Equals fifteen value",
+          "Equals one fifteen"
+        ],
+        "correct_option": "Equals one fifteen",
+        "explanation": "f(5) = 5·25 - 10 = 125 - 10 = 115."
+      },
+      {
+        "id": "M1Q9M6",
+        "question": "If f(α) = 15 for f(x) = x² - 10, then α² equals:",
+        "options": [
+          "Equals fifteen value",
+          "Equals twenty five",
+          "Equals five value",
+          "Equals twenty value"
+        ],
+        "correct_option": "Equals twenty five",
+        "explanation": "α² - 10 = 15 implies α² = 25, so α = ±5."
+      },
+      {
+        "id": "M1Q9M7",
+        "question": "If f(α) = 6 for f(x) = x² - 10, then α² equals:",
+        "options": [
+          "Equals twenty six",
+          "Equals sixteen value",
+          "Equals six value",
+          "Equals four value"
+        ],
+        "correct_option": "Equals sixteen value",
+        "explanation": "α² - 10 = 6 implies α² = 16, so α = ±4."
+      },
+      {
+        "id": "M1Q9M8",
+        "question": "For f(x) = x² - 5x + 10, what is f(5)?",
+        "options": [
+          "Equals ten value",
+          "Equals five value",
+          "Equals fifteen value",
+          "Equals twenty five"
+        ],
+        "correct_option": "Equals ten value",
+        "explanation": "f(5) = 25 - 25 + 10 = 10."
+      },
+      {
+        "id": "M1Q9M9",
+        "question": "For f(x) = (x - 10)², what is f(5)?",
+        "options": [
+          "Equals fifteen value",
+          "Equals twenty five",
+          "Equals thirty five",
+          "Equals five value"
+        ],
+        "correct_option": "Equals twenty five",
+        "explanation": "f(5) = (5 - 10)² = (-5)² = 25."
+      },
+      {
+        "id": "M1Q9M10",
+        "question": "For f(x) = (x + 5)² - 10, what is f(5)?",
+        "options": [
+          "Equals ninety value",
+          "Equals one hundred",
+          "Equals one twenty",
+          "Equals one ten"
+        ],
+        "correct_option": "Equals ninety value",
+        "explanation": "f(5) = (5 + 5)² - 10 = 100 - 10 = 90."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M1Q9H1",
+        "question": "Step-by-step, f(5) for f(x) = x² - 10 simplifies to:",
+        "options": [
+          "Twenty five minus ten",
+          "Twenty five plus ten",
+          "Twenty five itself alone",
+          "Ten minus five itself"
+        ],
+        "correct_option": "Twenty five minus ten",
+        "explanation": "Square first: 5² = 25, then subtract 10 to get 15."
+      },
+      {
+        "id": "M1Q9H2",
+        "question": "For f(x) = x² - 10, the value of f(5) - f(-5) is:",
+        "options": [
+          "Exactly minus thirty",
+          "Exactly minus fifteen",
+          "Exactly zero value",
+          "Exactly fifteen value"
+        ],
+        "correct_option": "Exactly zero value",
+        "explanation": "f(5) = 15 and f(-5) = 15, so f(5) - f(-5) = 0."
+      },
+      {
+        "id": "M1Q9H3",
+        "question": "For f(x) = x² - 10, the value of f(5) · f(0) is:",
+        "options": [
+          "Exactly minus ten",
+          "Exactly one fifty",
+          "Exactly minus one fifty",
+          "Exactly fifteen value"
+        ],
+        "correct_option": "Exactly minus one fifty",
+        "explanation": "f(5) = 15 and f(0) = -10, so the product is -150."
+      },
+      {
+        "id": "M1Q9H4",
+        "question": "For f(x) = x² - 10, find x such that f(x) = f(5):",
+        "options": [
+          "Only five itself",
+          "Five or zero itself",
+          "Five or minus five",
+          "Only minus five itself"
+        ],
+        "correct_option": "Five or minus five",
+        "explanation": "f(5) = 15 = f(-5) because x² is symmetric, so x = ±5."
+      },
+      {
+        "id": "M1Q9H5",
+        "question": "The graph of f(x) = x² - 10 has which shape?",
+        "options": [
+          "A straight line shape",
+          "A downward parabola shape",
+          "An upward parabola shape",
+          "A horizontal line shape"
+        ],
+        "correct_option": "An upward parabola shape",
+        "explanation": "x² has positive leading coefficient, so the parabola opens upward with vertex at (0, -10)."
+      },
+      {
+        "id": "M1Q9H6",
+        "question": "f(5) = 15 means the point (5, 15) lies on the graph of f. True or false?",
+        "options": [
+          "Only when x negative",
+          "Only when y zero",
+          "The statement is true",
+          "The statement is false"
+        ],
+        "correct_option": "The statement is true",
+        "explanation": "The point (x, f(x)) = (5, 15) is on the graph by definition of f."
+      },
+      {
+        "id": "M1Q9H7",
+        "question": "Do f(x) = x² - 10 and y = 15 intersect at x = 5?",
+        "options": [
+          "No they never meet",
+          "Only at origin point",
+          "Yes at x is five",
+          "Only x equals zero"
+        ],
+        "correct_option": "Yes at x is five",
+        "explanation": "Setting x² - 10 = 15 gives x² = 25, so x = ±5, including x = 5."
+      },
+      {
+        "id": "M1Q9H8",
+        "question": "For f(x) = x² - 10, does f(5) equal f(-5)?",
+        "options": [
+          "The answer is no",
+          "Only for x positive",
+          "The answer is yes",
+          "Only when x zero"
+        ],
+        "correct_option": "The answer is yes",
+        "explanation": "Squaring erases the sign: 5² = (-5)², so f(5) = f(-5) = 15."
+      },
+      {
+        "id": "M1Q9H9",
+        "question": "For f(x) = 10 - x², what is f(5)?",
+        "options": [
+          "Equals fifteen value",
+          "Equals twenty five",
+          "Equals negative fifteen",
+          "Equals thirty five"
+        ],
+        "correct_option": "Equals negative fifteen",
+        "explanation": "f(5) = 10 - 25 = -15, the sign-flipped cousin of x² - 10."
+      },
+      {
+        "id": "M1Q9H10",
+        "question": "For f(x) = (x - 5)(x + 5), what is f(5)?",
+        "options": [
+          "Equals twenty five",
+          "Equals fifteen value",
+          "Equals zero value",
+          "Equals fifty value"
+        ],
+        "correct_option": "Equals zero value",
+        "explanation": "f(5) = (5-5)(5+5) = 0·10 = 0, since x = 5 is a root."
+      }
+    ],
+    "real_life_application": [
+      {
+        "id": "M1Q9R1",
+        "question": "A square plot has side x metres. Cost is x² - 10 (in thousands of ₹). For x = 5 m, the cost is:",
+        "options": [
+          "Five thousand rupees",
+          "Ten thousand rupees",
+          "Fifteen thousand rupees",
+          "Twenty-five thousand rupees"
+        ],
+        "correct_option": "Fifteen thousand rupees",
+        "explanation": "5² - 10 = 15, so the cost is fifteen thousand rupees."
+      },
+      {
+        "id": "M1Q9R2",
+        "question": "A ball's height (in m) is h = t² - 10. At t = 5 seconds, the height is:",
+        "options": [
+          "Five metres total",
+          "Ten metres total",
+          "Fifteen metres total",
+          "Twenty-five metres total"
+        ],
+        "correct_option": "Fifteen metres total",
+        "explanation": "h(5) = 5² - 10 = 25 - 10 = 15 metres."
+      },
+      {
+        "id": "M1Q9R3",
+        "question": "A delivery charge is d² - 10 rupees when d is distance in km. For d = 5 km, the charge is:",
+        "options": [
+          "Five rupees total",
+          "Ten rupees total",
+          "Fifteen rupees total",
+          "Twenty-five rupees total"
+        ],
+        "correct_option": "Fifteen rupees total",
+        "explanation": "5² - 10 = 15, so the delivery charge is fifteen rupees."
+      },
+      {
+        "id": "M1Q9R4",
+        "question": "A square tile has side x cm. Usable area is x² - 10 cm². For x = 5 cm, the usable area is:",
+        "options": [
+          "Five cm² area only",
+          "Ten cm² area only",
+          "Fifteen cm² area only",
+          "Twenty-five cm² area only"
+        ],
+        "correct_option": "Fifteen cm² area only",
+        "explanation": "5² - 10 = 15, so the usable area is 15 cm²."
+      },
+      {
+        "id": "M1Q9R5",
+        "question": "A student's score is s² - 10 for s correct answers. If s = 5, the score is:",
+        "options": [
+          "Five points total",
+          "Ten points total",
+          "Fifteen points total",
+          "Twenty-five points total"
+        ],
+        "correct_option": "Fifteen points total",
+        "explanation": "5² - 10 = 15, so the student scores 15 points."
+      }
+    ]
+  }
+}

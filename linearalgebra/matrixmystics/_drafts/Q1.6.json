@@ -1,0 +1,436 @@
+{
+  "module": 1,
+  "topicId": "Q1.6",
+  "title": "Plot y = ax + b with sliders",
+  "topic": "Exploring the role of parameters a (slope) and b (intercept) using Geogebra.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M1Q6E1",
+        "question": "In y = ax + b, which letter is the slope?",
+        "options": [
+          "the letter a",
+          "the letter b",
+          "the letter x",
+          "the letter y"
+        ],
+        "correct_option": "the letter a",
+        "explanation": "By convention y = ax + b names a as the slope and b as the y-intercept, mirroring y = mx + c."
+      },
+      {
+        "id": "M1Q6E2",
+        "question": "In y = ax + b, which letter is the y-intercept?",
+        "options": [
+          "the letter a",
+          "the letter b",
+          "the letter x",
+          "the letter y"
+        ],
+        "correct_option": "the letter b",
+        "explanation": "Substituting x = 0 gives y = b, so b is the y-intercept where the line meets the y-axis."
+      },
+      {
+        "id": "M1Q6E3",
+        "question": "If a = 0, what does y = ax + b look like geometrically?",
+        "options": [
+          "a tilted diagonal",
+          "a smooth parabola",
+          "a flat horizontal",
+          "a broken curve"
+        ],
+        "correct_option": "a flat horizontal",
+        "explanation": "Setting a = 0 collapses y = ax + b into y = b, which is the equation of a horizontal line at height b."
+      },
+      {
+        "id": "M1Q6E4",
+        "question": "If b = 0, the line y = ax + b passes through which point?",
+        "options": [
+          "the point (0, 1)",
+          "the point (1, 0)",
+          "the point (1, 1)",
+          "the origin (0, 0)"
+        ],
+        "correct_option": "the origin (0, 0)",
+        "explanation": "Plugging x = 0 with b = 0 yields y = 0, so the line crosses both axes at the origin (0, 0)."
+      },
+      {
+        "id": "M1Q6E5",
+        "question": "If a > 0, the line y = ax + b does what when x increases?",
+        "options": [
+          "rises up steadily",
+          "falls down steadily",
+          "stays flat steady",
+          "curves back left"
+        ],
+        "correct_option": "rises up steadily",
+        "explanation": "A positive slope means y grows as x grows, so the line rises steadily from lower-left to upper-right."
+      },
+      {
+        "id": "M1Q6E6",
+        "question": "If a < 0, the line y = ax + b does what when x increases?",
+        "options": [
+          "rises up steadily",
+          "falls down steadily",
+          "stays flat steady",
+          "curves back right"
+        ],
+        "correct_option": "falls down steadily",
+        "explanation": "A negative slope means y shrinks as x grows, so the line falls steadily toward lower-right."
+      },
+      {
+        "id": "M1Q6E7",
+        "question": "For y = 5x + 0, what is the y-intercept value?",
+        "options": [
+          "the value is 5",
+          "the value is 1",
+          "the value is 0",
+          "the value is x"
+        ],
+        "correct_option": "the value is 0",
+        "explanation": "The y-intercept is the constant term b = 0, so the line crosses the y-axis at (0, 0)."
+      },
+      {
+        "id": "M1Q6E8",
+        "question": "For y = 0x + 5, what is the slope value?",
+        "options": [
+          "the value is 5",
+          "the value is x",
+          "the value is 1",
+          "the value is 0"
+        ],
+        "correct_option": "the value is 0",
+        "explanation": "The slope coefficient a = 0, so the line has no steepness and is horizontal at y = 5."
+      },
+      {
+        "id": "M1Q6E9",
+        "question": "Does the line y = 3x + 4 pass through (0, 4)?",
+        "options": [
+          "yes, it does",
+          "no, never does",
+          "only sometimes yes",
+          "cannot tell at all"
+        ],
+        "correct_option": "yes, it does",
+        "explanation": "Setting x = 0 gives y = 4, so the point (0, 4) satisfies y = 3x + 4 exactly."
+      },
+      {
+        "id": "M1Q6E10",
+        "question": "Does the line y = 3x + 4 pass through (0, 3)?",
+        "options": [
+          "yes, it does",
+          "no, never does",
+          "only sometimes yes",
+          "cannot tell at all"
+        ],
+        "correct_option": "no, never does",
+        "explanation": "At x = 0 the equation forces y = 4, not 3, so (0, 3) lies off the line entirely."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M1Q6M1",
+        "question": "If the slope a is doubled, what happens to y = ax + b?",
+        "options": [
+          "becomes fully vertical",
+          "becomes slightly curved",
+          "steepens by factor 2",
+          "stays perfectly unchanged"
+        ],
+        "correct_option": "steepens by factor 2",
+        "explanation": "Doubling the slope a doubles the rate of vertical change per unit x, so the line is twice as steep."
+      },
+      {
+        "id": "M1Q6M2",
+        "question": "If the intercept b is doubled, what happens to y = ax + b?",
+        "options": [
+          "stays perfectly fixed",
+          "doubles the slope",
+          "becomes fully flat",
+          "shifts rigid upward"
+        ],
+        "correct_option": "shifts rigid upward",
+        "explanation": "Doubling b raises the y-intercept while the slope a is unchanged, so the line slides rigidly upward."
+      },
+      {
+        "id": "M1Q6M3",
+        "question": "The lines y = 2x + 3 and y = 2x + 7 are parallel. Why?",
+        "options": [
+          "they share slope a",
+          "they share intercept b",
+          "their lengths match",
+          "their x-ranges match"
+        ],
+        "correct_option": "they share slope a",
+        "explanation": "Two lines with the same slope a are parallel regardless of differing intercepts; here a = 2 for both."
+      },
+      {
+        "id": "M1Q6M4",
+        "question": "Between y = 2x + 3 and y = 5x + 3, which line is steeper?",
+        "options": [
+          "the first line",
+          "the second line",
+          "equally steep both",
+          "neither is steep"
+        ],
+        "correct_option": "the second line",
+        "explanation": "Since 5 > 2, the slope of y = 5x + 3 is larger, making it rise more sharply per unit x."
+      },
+      {
+        "id": "M1Q6M5",
+        "question": "Two lines with the same a but different b intersect how many times?",
+        "options": [
+          "exactly one time",
+          "exactly two times",
+          "zero times at all",
+          "infinitely many times"
+        ],
+        "correct_option": "zero times at all",
+        "explanation": "Same slope a means parallel lines, and distinct parallel lines never meet at all."
+      },
+      {
+        "id": "M1Q6M6",
+        "question": "Two lines with different a but same b intersect how many times?",
+        "options": [
+          "zero times at all",
+          "exactly two times",
+          "infinitely many times",
+          "exactly one time"
+        ],
+        "correct_option": "exactly one time",
+        "explanation": "Distinct slopes guarantee exactly one crossing point, which here is the shared y-intercept (0, b)."
+      },
+      {
+        "id": "M1Q6M7",
+        "question": "If a = -1, the line y = ax + b descends from where to where?",
+        "options": [
+          "from upper-left descending",
+          "from lower-left ascending",
+          "from bottom curving up",
+          "from top curving down"
+        ],
+        "correct_option": "from upper-left descending",
+        "explanation": "With slope -1 the line decreases by 1 in y for each 1 in x, sweeping from upper-left to lower-right."
+      },
+      {
+        "id": "M1Q6M8",
+        "question": "Setting a = 0 in y = ax + b reduces it to which type of line?",
+        "options": [
+          "a fully diagonal line",
+          "a fully horizontal line",
+          "a fully vertical line",
+          "a fully curved parabola"
+        ],
+        "correct_option": "a fully horizontal line",
+        "explanation": "With a = 0 the equation reduces to y = b, which is exactly a horizontal line at height b."
+      },
+      {
+        "id": "M1Q6M9",
+        "question": "The family y = ax + 1 all share which single common feature?",
+        "options": [
+          "all share slope a",
+          "all meet origin axis",
+          "all meet y=1 axis",
+          "all pass through (0,0)"
+        ],
+        "correct_option": "all meet y=1 axis",
+        "explanation": "Plugging x = 0 gives y = 1 for every line in this family, so they all cross the y-axis at (0, 1)."
+      },
+      {
+        "id": "M1Q6M10",
+        "question": "The family y = 3x + b all share which single common feature?",
+        "options": [
+          "all meet at origin",
+          "all share y-intercept",
+          "all share vertical line",
+          "all share slope 3"
+        ],
+        "correct_option": "all share slope 3",
+        "explanation": "Every line in this family has slope a = 3, so they are parallel and only differ in intercept b."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M1Q6H1",
+        "question": "For which value of a does the line y = ax + b become horizontal?",
+        "options": [
+          "a equals exactly 0",
+          "a equals exactly 1",
+          "a equals exactly b",
+          "a equals exactly -1"
+        ],
+        "correct_option": "a equals exactly 0",
+        "explanation": "A horizontal line has slope zero, so a must equal 0; the intercept b can be any constant."
+      },
+      {
+        "id": "M1Q6H2",
+        "question": "For which value of b does y = ax + b pass through the origin?",
+        "options": [
+          "b equals exactly 0",
+          "b equals exactly 1",
+          "b equals exactly a",
+          "b equals exactly -1"
+        ],
+        "correct_option": "b equals exactly 0",
+        "explanation": "Substituting (0, 0) into y = ax + b forces 0 = a·0 + b, so b = 0."
+      },
+      {
+        "id": "M1Q6H3",
+        "question": "Can a single line y = ax + b be written in more than one slope-intercept form?",
+        "options": [
+          "yes, infinitely many",
+          "only two distinct ways",
+          "no, only one way",
+          "never written at all"
+        ],
+        "correct_option": "no, only one way",
+        "explanation": "The slope a and intercept b are uniquely fixed by the line, so the form y = ax + b is unique."
+      },
+      {
+        "id": "M1Q6H4",
+        "question": "The lines y = ax + b and y = bx + a coincide only when what holds?",
+        "options": [
+          "a equals exactly 0",
+          "b equals exactly 0",
+          "a equals negative b",
+          "a equals exactly b"
+        ],
+        "correct_option": "a equals exactly b",
+        "explanation": "Equal slopes require a = b, and equal intercepts then also require a = b; both forces happen together."
+      },
+      {
+        "id": "M1Q6H5",
+        "question": "y = ax + b is parallel to y = 5x + 7 for which single value of a?",
+        "options": [
+          "a equals exactly 5",
+          "a equals exactly 7",
+          "a equals exactly 0",
+          "a equals exactly -5"
+        ],
+        "correct_option": "a equals exactly 5",
+        "explanation": "Parallel lines share slopes, so a must equal 5 regardless of the value of b."
+      },
+      {
+        "id": "M1Q6H6",
+        "question": "y = ax + b goes through (0, 0) and (1, 1). What is the pair (a, b)?",
+        "options": [
+          "a zero, b one",
+          "a one, b zero",
+          "a one, b one",
+          "a zero, b zero"
+        ],
+        "correct_option": "a one, b zero",
+        "explanation": "Through (0, 0) forces b = 0; through (1, 1) then forces a = 1, giving the line y = x."
+      },
+      {
+        "id": "M1Q6H7",
+        "question": "y = ax + b goes through (2, 5) and (4, 9). What is the pair (a, b)?",
+        "options": [
+          "a one, b three",
+          "a three, b one",
+          "a two, b one",
+          "a one, b two"
+        ],
+        "correct_option": "a two, b one",
+        "explanation": "Slope a = (9-5)/(4-2) = 2; back-substitution gives b = 1, so the line is y = 2x + 1."
+      },
+      {
+        "id": "M1Q6H8",
+        "question": "The line y = 2x + 1 shares its slope with y = mx + c for what m?",
+        "options": [
+          "m equals exactly 1",
+          "m equals exactly 0",
+          "m equals exactly -2",
+          "m equals exactly 2"
+        ],
+        "correct_option": "m equals exactly 2",
+        "explanation": "Matching slopes forces m = 2; the intercept c may then be any constant."
+      },
+      {
+        "id": "M1Q6H9",
+        "question": "When both a and b vary, which set of (a, b) pairs gives lines through (0, 0)?",
+        "options": [
+          "the b equals 0",
+          "the full plane",
+          "the a equals 0",
+          "the a equals b"
+        ],
+        "correct_option": "the b equals 0",
+        "explanation": "Through origin requires b = 0; varying a along this axis traces every line y = ax through (0, 0)."
+      },
+      {
+        "id": "M1Q6H10",
+        "question": "If a = 0 in y = ax + b, what does b represent geometrically?",
+        "options": [
+          "line's vertical height",
+          "line's slope value",
+          "line's x-intercept",
+          "line's zero length"
+        ],
+        "correct_option": "line's vertical height",
+        "explanation": "With a = 0 the line is y = b, so b names the vertical height of that horizontal line."
+      }
+    ],
+    "real_life_application": [
+      {
+        "id": "M1Q6R1",
+        "question": "A spring obeys F = kx. In y = ax + b form, what is b?",
+        "options": [
+          "the offset value 0",
+          "the slope value k",
+          "the variable input x",
+          "the output force F"
+        ],
+        "correct_option": "the offset value 0",
+        "explanation": "Hooke's law F = kx + 0 carries no constant offset, so b = 0; b ≠ 0 would mean a pre-stretched spring."
+      },
+      {
+        "id": "M1Q6R2",
+        "question": "Cell-phone billing: cost = ₹300 + ₹0.50/minute. What does a equal?",
+        "options": [
+          "₹0.50 per minute",
+          "₹300 flat setup",
+          "₹0 flat only",
+          "₹0.50 flat only"
+        ],
+        "correct_option": "₹0.50 per minute",
+        "explanation": "Cost = 0.50·minutes + 300 fits y = ax + b with slope a = 0.50 and intercept b = 300."
+      },
+      {
+        "id": "M1Q6R3",
+        "question": "A taxi charges ₹20 base plus ₹10 per km. What is the slope a?",
+        "options": [
+          "a equals 10",
+          "a equals 20",
+          "a equals 0",
+          "a equals 5"
+        ],
+        "correct_option": "a equals 10",
+        "explanation": "Fare = 10·distance + 20, so slope a equals 10 (₹ per km) and intercept b equals 20 (₹ base)."
+      },
+      {
+        "id": "M1Q6R4",
+        "question": "Celsius to Fahrenheit: F = (9/5)C + 32. What is the slope a?",
+        "options": [
+          "a equals nine",
+          "a equals nine-fifths",
+          "a equals five",
+          "a equals thirty-two"
+        ],
+        "correct_option": "a equals nine-fifths",
+        "explanation": "Matching F = (9/5)C + 32 with y = ax + b gives slope a = 9/5 and intercept b = 32."
+      },
+      {
+        "id": "M1Q6R5",
+        "question": "Subscription T = x rupees/month + y rupees setup fee. What is the slope a?",
+        "options": [
+          "the setup fee y",
+          "the total cost T",
+          "the monthly fee x",
+          "the time elapsed"
+        ],
+        "correct_option": "the monthly fee x",
+        "explanation": "T = x·months + y fits y = ax + b with slope a = x (₹ per month) and intercept b = y (setup)."
+      }
+    ]
+  }
+}

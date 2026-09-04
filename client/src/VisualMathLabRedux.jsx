@@ -13,6 +13,7 @@
 import React, {
   useState, useEffect, useRef, useCallback, useMemo, memo,
 } from 'react';
+// eslint-disable-next-line no-unused-vars -- motion is used in JSX via <motion.div>
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 
@@ -54,12 +55,22 @@ function fireConfetti() {
 
 /* ── Floating BG symbols (stable — never re-renders) ─────────────── */
 const BG_SYMS = ['×','÷','+','=','%','π','√','∑','3','5','9'];
+const generateBgItems = () => {
+  const seeds = Array.from({ length: 16 }, (_, i) => i);
+  return seeds.map((i, idx) => {
+    const x = (Math.floor(Math.random() * 100) + idx) % 100;
+    const y = (Math.floor(Math.random() * 100) + idx * 3) % 100;
+    const size = 11 + Math.floor(Math.random() * 18);
+    const delay = Math.random() * 8;
+    const dur = 12 + Math.floor(Math.random() * 10);
+    return {
+      id: i, sym: BG_SYMS[i % BG_SYMS.length],
+      x, y, size, delay, dur,
+    };
+  });
+};
 const FloatingBg = memo(function FloatingBg() {
-  const items = useRef(Array.from({ length: 16 }, (_, i) => ({
-    id: i, sym: BG_SYMS[i % BG_SYMS.length],
-    x: Math.random() * 100, y: Math.random() * 100,
-    size: 11 + Math.random() * 18, delay: Math.random() * 8, dur: 12 + Math.random() * 10,
-  }))).current;
+  const [items] = useState(generateBgItems);
   return (
     <div style={{ position: 'fixed', inset: 0, overflow: 'hidden', pointerEvents: 'none', zIndex: 0 }}>
       {items.map(s => (
@@ -117,7 +128,7 @@ const FrogSVG = memo(function FrogSVG({ size = 80, happy, sad }) {
 });
 
 /* ── Frog Jump Template ──────────────────────────────────────────── */
-export const FrogJumpTemplate = memo(function FrogJumpTemplate({ q, ans, setAns, revealed }) {
+export const FrogJumpTemplate = memo(function FrogJumpTemplate({ q, setAns, revealed }) {
   const total  = q.jumps * q.step;
   const maxNum = total + q.step;
   const nums   = useMemo(() => Array.from({ length: maxNum + 1 }, (_, i) => i), [maxNum]);
@@ -137,6 +148,7 @@ export const FrogJumpTemplate = memo(function FrogJumpTemplate({ q, ans, setAns,
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setFrogPos(0); setGhostPos(null); setJumps(0); setAnimating(false); setVisited([0]);
   }, [q.id]);
 
@@ -156,6 +168,7 @@ export const FrogJumpTemplate = memo(function FrogJumpTemplate({ q, ans, setAns,
 
   useEffect(() => {
     if (revealed) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setFrogPos(0); setJumps(0); setVisited([0]);
       const t = setTimeout(() => animateJumps(), 400);
       return () => clearTimeout(t);
@@ -302,6 +315,7 @@ export const PlantArrayTemplate = memo(function PlantArrayTemplate({ q, revealed
   const [planted, setPlanted] = useState([]);
   const total = q.rows * q.cols;
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setPlanted([]), [q.id]);
 
   const plant = useCallback(i => {
@@ -334,6 +348,7 @@ export const PlantArrayTemplate = memo(function PlantArrayTemplate({ q, revealed
 /* ── Candy Sharing (memoized, no stagger on candies) ─────────────── */
 export const CandySharingTemplate = memo(function CandySharingTemplate({ q, revealed }) {
   const [shared, setShared] = useState(0);
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setShared(0), [q.id]);
 
   const share = useCallback(() => {
@@ -651,11 +666,12 @@ export default function VisualMathLabRedux({ onBack, initialDifficulty, initialN
 
   // Handle finish condition separately to avoid re-triggering fetch
   useEffect(() => {
-    if (started && !finished && questionNumber > 0 && questionNumber > totalQ) {
+    if (started && questionNumber > 0 && questionNumber > totalQ) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setFinished(true);
       timer.reset();
     }
-  }, [questionNumber, totalQ, started, finished, timer]);
+  }, [questionNumber, totalQ, started, timer]);
 
   const submitAns = useCallback(async (optAns) => {
     if (!question || revealed) return;
@@ -713,6 +729,7 @@ export default function VisualMathLabRedux({ onBack, initialDifficulty, initialN
   const promptParts = useMemo(() => {
     if (!question) return [];
     return question.prompt.split(/(\d+)/g);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [question?.prompt]);
 
   const correctAnswerLabel = useMemo(() => question ? getEquation(question, question.answer) : '', [question]);

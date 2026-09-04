@@ -1,0 +1,436 @@
+{
+  "module": 1,
+  "topicId": "Q1.4",
+  "title": "All three lines pass through origin",
+  "topic": "Algebraic reason why y = mx passes through (0,0) — substitution of x = 0.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M1Q4E1",
+        "question": "On y = mx, the y-value at x = 0 is:",
+        "options": [
+          "the value 1",
+          "the value 2",
+          "the value 0",
+          "the value m"
+        ],
+        "correct_option": "the value 0",
+        "explanation": "Substituting x = 0 into y = mx gives y = m·0 = 0, so the point (0, 0) lies on every line y = mx."
+      },
+      {
+        "id": "M1Q4E2",
+        "question": "A line passes through the origin if its y-intercept equals:",
+        "options": [
+          "the value zero",
+          "the slope m",
+          "a nonzero scalar",
+          "the value one"
+        ],
+        "correct_option": "the value zero",
+        "explanation": "A line through (0, 0) has y-intercept 0; any nonzero intercept shifts the line away from the origin."
+      },
+      {
+        "id": "M1Q4E3",
+        "question": "On y = 5x, the y-value at x = 0 is:",
+        "options": [
+          "the value 1",
+          "the value 5",
+          "the value 2",
+          "the value 0"
+        ],
+        "correct_option": "the value 0",
+        "explanation": "At x = 0, y = 5·0 = 0, so the line y = 5x passes through the origin."
+      },
+      {
+        "id": "M1Q4E4",
+        "question": "On y = -2x, the y-value at x = 0 is:",
+        "options": [
+          "the value 1",
+          "the value 0",
+          "the value 2",
+          "the value -2"
+        ],
+        "correct_option": "the value 0",
+        "explanation": "Even with a negative slope, at x = 0 we get y = -2·0 = 0, so y = -2x still passes through the origin."
+      },
+      {
+        "id": "M1Q4E5",
+        "question": "On y = 7x, the y-value at x = 0 is:",
+        "options": [
+          "the value 0",
+          "the value 7",
+          "the value 1",
+          "the value 4"
+        ],
+        "correct_option": "the value 0",
+        "explanation": "At x = 0, y = 7·0 = 0; the size of the slope does not change that the line passes through (0, 0)."
+      },
+      {
+        "id": "M1Q4E6",
+        "question": "What is the y-intercept of the line y = mx + 0?",
+        "options": [
+          "the value m",
+          "the value one",
+          "the value zero",
+          "the slope itself"
+        ],
+        "correct_option": "the value zero",
+        "explanation": "The y-intercept is the constant term; with c = 0, the line y = mx + 0 passes through (0, 0)."
+      },
+      {
+        "id": "M1Q4E7",
+        "question": "What is the conventional name of the point (0, 0)?",
+        "options": [
+          "origin of the plane",
+          "origin of axes",
+          "midpoint of graph",
+          "first point only"
+        ],
+        "correct_option": "origin of axes",
+        "explanation": "The point (0, 0) is called the origin of axes: it is where the x-axis and y-axis meet."
+      },
+      {
+        "id": "M1Q4E8",
+        "question": "Do y = x, y = 2x, and y = 10x all pass through (0, 0)?",
+        "options": [
+          "Yes, all of them",
+          "No, only two pass",
+          "Only the y=x line",
+          "None of the three"
+        ],
+        "correct_option": "Yes, all of them",
+        "explanation": "Every line y = mx gives y = 0 at x = 0, so all three lines share the origin as a common point."
+      },
+      {
+        "id": "M1Q4E9",
+        "question": "Does the line y = 100x pass through the origin?",
+        "options": [
+          "Yes, since 100·0=0",
+          "No, slope too large",
+          "Yes, by direct check",
+          "Yes, all y=mx do"
+        ],
+        "correct_option": "Yes, all y=mx do",
+        "explanation": "A large slope does not block passage through origin; x = 0 gives y = 100·0 = 0 regardless of slope."
+      },
+      {
+        "id": "M1Q4E10",
+        "question": "Does the line y = 0·x + 0 pass through the origin?",
+        "options": [
+          "No, slope blocks it",
+          "No, c-value blocks",
+          "Yes, terms vanish",
+          "Yes, both vanish"
+        ],
+        "correct_option": "Yes, terms vanish",
+        "explanation": "At x = 0 the term 0·x is 0 and the constant 0 is 0, so y = 0; the line (the x-axis) passes through (0, 0)."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M1Q4M1",
+        "question": "Substituting x = 0 into y = mx + b gives y equal to:",
+        "options": [
+          "the value b",
+          "the value m",
+          "the value 0",
+          "the value x"
+        ],
+        "correct_option": "the value b",
+        "explanation": "When x = 0, the term m·x vanishes leaving y = b, so the y-intercept of y = mx + b is exactly b."
+      },
+      {
+        "id": "M1Q4M2",
+        "question": "A line through the origin written as y = mx + c must have:",
+        "options": [
+          "the value c=1",
+          "the value c=0",
+          "the value m=0",
+          "any constant c"
+        ],
+        "correct_option": "the value c=0",
+        "explanation": "Passing through (0, 0) forces b = c = 0 because at x = 0 the line gives y = c; hence c must equal zero."
+      },
+      {
+        "id": "M1Q4M3",
+        "question": "Does the line y = 2x - 3 pass through the origin?",
+        "options": [
+          "No, because c=-3",
+          "Yes, c-value cancels",
+          "No, slope is small",
+          "Yes, c-value vanishes"
+        ],
+        "correct_option": "No, because c=-3",
+        "explanation": "At x = 0, y = 2·0 - 3 = -3, so the line passes through (0, -3), not the origin."
+      },
+      {
+        "id": "M1Q4M4",
+        "question": "The value of c for which y = mx + c passes through origin is:",
+        "options": [
+          "c equals 1",
+          "c equals m",
+          "c equals b",
+          "c equals 0"
+        ],
+        "correct_option": "c equals 0",
+        "explanation": "Plugging x = 0, y = 0 gives 0 = m·0 + c, so c = 0 is the unique value that makes the line pass through origin."
+      },
+      {
+        "id": "M1Q4M5",
+        "question": "The y-intercept of y = mx is:",
+        "options": [
+          "the value 1",
+          "the value x",
+          "the value 0",
+          "the value m"
+        ],
+        "correct_option": "the value 0",
+        "explanation": "Since y = mx has no constant term, its y-intercept (value at x = 0) is 0."
+      },
+      {
+        "id": "M1Q4M6",
+        "question": "The y-intercept of y = mx + 5 is:",
+        "options": [
+          "the value 1",
+          "the value m",
+          "the value 5",
+          "the value 0"
+        ],
+        "correct_option": "the value 5",
+        "explanation": "The y-intercept is the constant term; for y = mx + 5 it is 5, so the line does not pass through origin."
+      },
+      {
+        "id": "M1Q4M7",
+        "question": "All lines of the form y = mx (for any m) pass through which single point?",
+        "options": [
+          "(1, 1)",
+          "(m, m)",
+          "(0, 0)",
+          "(0, m)"
+        ],
+        "correct_option": "(0, 0)",
+        "explanation": "No matter the slope m, plugging x = 0 yields y = 0, so (0, 0) is the common point of the whole family."
+      },
+      {
+        "id": "M1Q4M8",
+        "question": "A line y = mx through origin has its x-intercept equal to:",
+        "options": [
+          "the value 1",
+          "the value m",
+          "the value b",
+          "the value 0"
+        ],
+        "correct_option": "the value 0",
+        "explanation": "Setting y = mx to zero gives x = 0, so the x-intercept (and y-intercept) coincide at the origin."
+      },
+      {
+        "id": "M1Q4M9",
+        "question": "Plugging x = 0 into y = mx gives y equal to:",
+        "options": [
+          "the value 1",
+          "the value m",
+          "the value x",
+          "the value 0"
+        ],
+        "correct_option": "the value 0",
+        "explanation": "Direct substitution: y = m·0 = 0, so the point (0, 0) lies on y = mx for every slope m."
+      },
+      {
+        "id": "M1Q4M10",
+        "question": "Does y = mx + 0 reduce to a line through the origin?",
+        "options": [
+          "No, c must be nonzero",
+          "Yes, c drops out fully",
+          "Yes, c becomes zero",
+          "No, line is vertical"
+        ],
+        "correct_option": "Yes, c drops out fully",
+        "explanation": "The added +0 contributes nothing, so y = mx + 0 = y = mx, which passes through (0, 0)."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M1Q4H1",
+        "question": "Which substitution step proves y = mx passes through the origin?",
+        "options": [
+          "x=0 gives y=m",
+          "x=1 gives y=m",
+          "x=0 gives y=0",
+          "x=1 gives y=0"
+        ],
+        "correct_option": "x=0 gives y=0",
+        "explanation": "Setting x = 0 in y = mx yields y = m·0 = 0, so the point (0, 0) satisfies the equation for every m."
+      },
+      {
+        "id": "M1Q4H2",
+        "question": "If y = mx + c fails to pass through origin, the value of c must be:",
+        "options": [
+          "equal to m",
+          "equal to zero",
+          "equal to one",
+          "a nonzero scalar"
+        ],
+        "correct_option": "a nonzero scalar",
+        "explanation": "The line passes through origin exactly when c = 0; failing that means c ≠ 0, i.e. c is a nonzero scalar."
+      },
+      {
+        "id": "M1Q4H3",
+        "question": "The family of all lines through the origin can be written as:",
+        "options": [
+          "y = mx + c",
+          "y = mx",
+          "y = mx - 1",
+          "y = m + x"
+        ],
+        "correct_option": "y = mx",
+        "explanation": "Varying the slope m in y = mx gives every line through (0, 0); adding any constant c would shift the line off the origin."
+      },
+      {
+        "id": "M1Q4H4",
+        "question": "Two distinct lines y = m₁x and y = m₂x coincide when:",
+        "options": [
+          "m₁ + m₂ = 0",
+          "m₁ · m₂ = 1",
+          "m₁ plus m₂",
+          "m₁ equals m₂"
+        ],
+        "correct_option": "m₁ equals m₂",
+        "explanation": "Since y = mx is uniquely determined by its slope, equal slopes m₁ = m₂ make the two lines identical."
+      },
+      {
+        "id": "M1Q4H5",
+        "question": "If y = mx passes through (0, 0) and (2, 6), the slope m equals:",
+        "options": [
+          "the number 2",
+          "the number 3",
+          "the number 6",
+          "the number 4"
+        ],
+        "correct_option": "the number 3",
+        "explanation": "Using the slope formula m = (y - 0) / (x - 0) = 6 / 2 = 3, so the line is y = 3x."
+      },
+      {
+        "id": "M1Q4H6",
+        "question": "If y = mx passes through (3, 0), then the slope m equals:",
+        "options": [
+          "the number 1",
+          "the number 2",
+          "the number 0",
+          "the number 3"
+        ],
+        "correct_option": "the number 0",
+        "explanation": "Substituting (3, 0) gives 0 = m·3, forcing m = 0; the line is the x-axis, which still passes through origin."
+      },
+      {
+        "id": "M1Q4H7",
+        "question": "The line y = mx through (0, 0) and (5, 10) has slope m equal to:",
+        "options": [
+          "the number 1",
+          "the number 2",
+          "the number 5",
+          "the number 10"
+        ],
+        "correct_option": "the number 2",
+        "explanation": "Slope m = (10 - 0) / (5 - 0) = 10 / 5 = 2, so the line is y = 2x passing through the origin."
+      },
+      {
+        "id": "M1Q4H8",
+        "question": "The set y = mx is a linear subspace because it is closed under:",
+        "options": [
+          "scalar and vector sums",
+          "matrix inverse operations",
+          "determinant and trace",
+          "any transpose operation"
+        ],
+        "correct_option": "scalar and vector sums",
+        "explanation": "Closure under linear combinations (adding two points on the line and scaling) is what makes y = mx a 1D subspace through origin."
+      },
+      {
+        "id": "M1Q4H9",
+        "question": "The set {(x, y) : y = mx} geometrically describes a:",
+        "options": [
+          "line through origin",
+          "line away from origin",
+          "parabolic curve shape",
+          "circle around origin"
+        ],
+        "correct_option": "line through origin",
+        "explanation": "The locus of (x, y) satisfying y = mx is a straight 1D line that goes through (0, 0) for any slope m."
+      },
+      {
+        "id": "M1Q4H10",
+        "question": "At x = 0, the value m·0 in y = mx equals:",
+        "options": [
+          "the slope m",
+          "the value 1",
+          "the value 0",
+          "the value x"
+        ],
+        "correct_option": "the value 0",
+        "explanation": "Multiplication by zero always yields zero: m·0 = 0, so y = 0 at x = 0 regardless of the slope m."
+      }
+    ],
+    "real_life_application": [
+      {
+        "id": "M1Q4R1",
+        "question": "A car's fuel starts at 50 L and at t = 0 it is still 50 L. Does the fuel-time graph pass through origin?",
+        "options": [
+          "Yes, fuel level is 50",
+          "Yes, slope is 50L",
+          "Only if fuel is 0",
+          "No, intercept is 50L"
+        ],
+        "correct_option": "No, intercept is 50L",
+        "explanation": "Fuel level L(t) = 50 has y-intercept 50, so the line is parallel to the t-axis and does not pass through (0, 0)."
+      },
+      {
+        "id": "M1Q4R2",
+        "question": "If a population P = 0·t + 100 stays at 100 forever, what is the P-axis intercept?",
+        "options": [
+          "the number 0",
+          "the number 1",
+          "the number 100",
+          "the number t"
+        ],
+        "correct_option": "the number 100",
+        "explanation": "The constant term 100 is the value at t = 0, so the P-axis intercept is 100 and the line stays above the origin."
+      },
+      {
+        "id": "M1Q4R3",
+        "question": "Hooke's law F = kx says force is proportional to spring stretch. Does the F-x graph pass through origin?",
+        "options": [
+          "No, force has offset",
+          "Yes, force vanishes",
+          "Yes, no force needed",
+          "No, F intercept is k"
+        ],
+        "correct_option": "Yes, force vanishes",
+        "explanation": "At x = 0 (unstretched spring) F = k·0 = 0, so the F-x graph passes through (0, 0) — a real spring obeys this."
+      },
+      {
+        "id": "M1Q4R4",
+        "question": "Ohm's law V = IR states voltage is proportional to current. Does the V-I graph pass through origin?",
+        "options": [
+          "Yes, V intercept is 0",
+          "No, voltage is offset",
+          "Yes, I intercept is 0",
+          "No, resistance is offset"
+        ],
+        "correct_option": "Yes, V intercept is 0",
+        "explanation": "At I = 0 we get V = R·0 = 0, so a resistor obeying Ohm's law has a V-I line going through the origin."
+      },
+      {
+        "id": "M1Q4R5",
+        "question": "Tax-free income equals 0% of salary, so tax is always 0. Does the tax-salary graph pass through origin?",
+        "options": [
+          "No, tax has offset",
+          "Yes, tax is always 0",
+          "No, tax is nonzero",
+          "Yes, tax is constant"
+        ],
+        "correct_option": "Yes, tax is always 0",
+        "explanation": "Tax = 0·salary gives tax = 0 for every salary; the graph is the salary-axis, which contains the origin (0, 0)."
+      }
+    ]
+  }
+}

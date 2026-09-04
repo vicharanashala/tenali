@@ -320,7 +320,7 @@ function getLevelStars(levelId) {
 }
 
 function setLevelStars(levelId, stars) {
-  try { localStorage.setItem(`tenali_cw_stars_${levelId}`, String(stars)); } catch {}
+  try { localStorage.setItem(`tenali_cw_stars_${levelId}`, String(stars)); } catch { /* ignored */ }
 }
 
 export default function CrosswordApp({ onBack }) {
@@ -348,7 +348,7 @@ export default function CrosswordApp({ onBack }) {
     try {
       const saved = Number(localStorage.getItem('tenali_crossword_xp') || 0);
       setTotalXp(saved);
-    } catch {}
+    } catch { /* ignored */ }
   }, []);
 
   function showToast(msg, type = 'info') {
@@ -452,6 +452,7 @@ export default function CrosswordApp({ onBack }) {
     }
 
     timer.start(0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chosenLevel, puzzleIndex]);
 
   // ── Auto-focus selected cell and auto-skip solved cells ──
@@ -572,26 +573,8 @@ export default function CrosswordApp({ onBack }) {
         advanceCursor(r, c, true);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [grid, direction, puzzle]);
-
-  // ── Input Handler ──
-  const handleInput = useCallback((e, r, c) => {
-    const cell = grid[r]?.[c];
-    if (!cell?.isLetter || cell.solved) return;
-
-    const char = e.target.value.replace(/[^a-zA-Z]/g, '').slice(-1).toUpperCase();
-
-    setGrid(prev => {
-      const next = prev.map(row => row.map(cell => ({ ...cell })));
-      next[r][c].value = char;
-      return next;
-    });
-
-    if (char) {
-      checkWordCompletion(r, c, char);
-      advanceCursor(r, c, false);
-    }
-  }, [grid, direction, puzzle, solvedWords]);
 
   // ── Word Completion Check ──
   function checkWordCompletion(changedR, changedC, newChar) {
@@ -631,7 +614,7 @@ export default function CrosswordApp({ onBack }) {
         setLevelXp(x => x + xpGained);
         const newTotal = totalXp + xpGained;
         setTotalXp(newTotal);
-        try { localStorage.setItem('tenali_crossword_xp', String(newTotal)); } catch {}
+        try { localStorage.setItem('tenali_crossword_xp', String(newTotal)); } catch { /* ignored */ }
 
         showToast(`Solved: ${w.word}! +${xpGained} XP`, 'correct');
 
@@ -644,6 +627,26 @@ export default function CrosswordApp({ onBack }) {
 
     setGrid(newGrid);
   }
+
+  // ── Input Handler ──
+  const handleInput = useCallback((e, r, c) => {
+    const cell = grid[r]?.[c];
+    if (!cell?.isLetter || cell.solved) return;
+
+    const char = e.target.value.replace(/[^a-zA-Z]/g, '').slice(-1).toUpperCase();
+
+    setGrid(prev => {
+      const next = prev.map(row => row.map(cell => ({ ...cell })));
+      next[r][c].value = char;
+      return next;
+    });
+
+    if (char) {
+      checkWordCompletion(r, c, char);
+      advanceCursor(r, c, false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [grid, direction, puzzle, solvedWords]);
 
   // ── Hint: reveal one letter ──
   function handleRevealLetter() {

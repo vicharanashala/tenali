@@ -1,0 +1,85 @@
+# CompreFace — CPU-only setup for face verification
+#
+# Usage:
+#   1. Start CompreFace:  docker compose up -d compreface
+#   2. Access admin UI:   http://localhost:80 (register, create face collection, add service)
+#   3. Copy the API key into server env: COMPREFACE_API_KEY=<your-key>
+#   4. Start the app:     npm run dev  (server connects to http://localhost:8000)
+#
+# CPU budget (tuned for laptop/server):
+#   compreface-core:  2 CPUs, 4 GB RAM  (embedding/verification)
+#   compreface-api:   1 CPU,  2 GB RAM  (REST endpoints)
+#   compreface-admin: 0.5 CPU, 512 MB   (admin panel)
+#   compreface-ui:    shared (nginx)
+#   redis:            shared, no limit
+#
+# Total: ~4 CPUs, ~7 GB RAM (fits on 8GB+ machines)
+
+services:
+  compreface-api:
+    image: exadel/compreface-api:latest
+    container_name: compreface-api
+    restart: unless-stopped
+    environment:
+      - compreface_core_url=http://compreface-core:3000
+      - compreface_admin_url=http://compreface-admin:8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - compreface-core
+      - compreface-admin
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 2G
+        reservations:
+          cpus: "0.5"
+          memory: 1G
+
+  compreface-core:
+    image: exadel/compreface-core:latest
+    container_name: compreface-core
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 4G
+        reservations:
+          cpus: "1.0"
+          memory: 2G
+
+  compreface-admin:
+    image: exadel/compreface-admin:latest
+    container_name: compreface-admin
+    restart: unless-stopped
+    environment:
+      - compreface_core_url=http://compreface-core:3000
+    depends_on:
+      - compreface-core
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 512M
+
+  compreface-ui:
+    image: exadel/compreface-ui:latest
+    container_name: compreface-ui
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - compreface-api
+      - compreface-admin
+
+  redis:
+    image: redis:7-alpine
+    container_name: compreface-redis
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M

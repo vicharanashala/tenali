@@ -52,10 +52,17 @@ export default function InversionDetector() {
   const [subInput, setSubInput] = useState('');
   const [subMsg, setSubMsg] = useState('');
   const [invMcqSelected, setInvMcqSelected] = useState(null);
+  const [shuffledOptions, setShuffledOptions] = useState(() => {
+    const progress = loadMasteryProgress();
+    const currentLevel = progress['order']?.currentLevel || 1;
+    const initial = getNextQuestion(INVERSION_BANK, currentLevel, null);
+    return initial?.options ? [...initial.options].sort(() => Math.random() - 0.5) : [];
+  });
 
   const loadNextInvQuestion = (level) => {
     const next = getNextQuestion(INVERSION_BANK, level, invQuestion?.id || null);
     setInvQuestion(next);
+    setShuffledOptions(next?.options ? [...next.options].sort(() => Math.random() - 0.5) : []);
     setSubInput('');
     setSubMsg('');
     setInvMcqSelected(null);
@@ -166,7 +173,7 @@ export default function InversionDetector() {
             <strong>{invQuestion?.prompt}</strong>
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '16px' }}>
-            {invQuestion?.options?.map((opt, idx) => {
+            {(shuffledOptions.length > 0 ? shuffledOptions : (invQuestion?.options || [])).map((opt, idx) => {
               const isSelected = invMcqSelected === opt;
               return (
                 <button

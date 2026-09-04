@@ -1,0 +1,436 @@
+{
+  "module": 1,
+  "topicId": "Q1.2",
+  "title": "Houses of Bala, Chetan, Divya",
+  "topic": "Coordinate moves, identifying that a sequence of turns produces points on a single line, finding the equation of that line.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M1Q2E1",
+        "question": "Atul starts at (0,0) and walks 2 units along the x-axis. What is his new position?",
+        "options": [
+          "(0, 2)",
+          "(2, 2)",
+          "(1, 0)",
+          "(2, 0)"
+        ],
+        "correct_option": "(2, 0)",
+        "explanation": "Walking along the x-axis keeps y = 0; moving 2 right gives (2,0)."
+      },
+      {
+        "id": "M1Q2E2",
+        "question": "From (2, 0) Atul turns left and walks 1 unit. What is his new position?",
+        "options": [
+          "(3, 0)",
+          "(2, -1)",
+          "(2, 1)",
+          "(1, 1)"
+        ],
+        "correct_option": "(2, 1)",
+        "explanation": "A left turn from +x faces +y, so (2,0) becomes (2,1)."
+      },
+      {
+        "id": "M1Q2E3",
+        "question": "From (2, 1) Atul turns right and walks 1 unit. Where is he now?",
+        "options": [
+          "(1, 1)",
+          "(2, 2)",
+          "(3, 1)",
+          "(3, 0)"
+        ],
+        "correct_option": "(3, 1)",
+        "explanation": "A right turn from +y faces +x, so x increases by 1 to (3,1)."
+      },
+      {
+        "id": "M1Q2E4",
+        "question": "From (3, 1) Atul turns left and walks 1 unit. Where is he now?",
+        "options": [
+          "(4, 1)",
+          "(3, 2)",
+          "(2, 1)",
+          "(3, 0)"
+        ],
+        "correct_option": "(3, 2)",
+        "explanation": "Left turn from +x again points to +y, so (3,1) becomes (3,2)."
+      },
+      {
+        "id": "M1Q2E5",
+        "question": "In order, what are the coordinates of Bala, Chetan, Divya?",
+        "options": [
+          "(1,2),(1,3),(1,4)",
+          "(2,1),(3,1),(4,1)",
+          "(2,1),(2,2),(2,3)",
+          "(0,1),(1,1),(2,1)"
+        ],
+        "correct_option": "(2,1),(3,1),(4,1)",
+        "explanation": "After right-left turns, the houses sit at (2,1),(3,1),(4,1)."
+      },
+      {
+        "id": "M1Q2E6",
+        "question": "Which axis did Atul first walk along?",
+        "options": [
+          "the y-axis line",
+          "the origin point",
+          "y equals x line",
+          "the x-axis line"
+        ],
+        "correct_option": "the x-axis line",
+        "explanation": "From (0,0) the first move was 2 units along x, so along the x-axis."
+      },
+      {
+        "id": "M1Q2E7",
+        "question": "After the left turn from (2, 0), is Bala above or below the x-axis?",
+        "options": [
+          "on the x-axis",
+          "at the origin",
+          "above the x-axis",
+          "below the x-axis"
+        ],
+        "correct_option": "above the x-axis",
+        "explanation": "A left turn from the x-axis moves into positive y, so Bala is above."
+      },
+      {
+        "id": "M1Q2E8",
+        "question": "How many units apart are consecutive houses on the y-coordinate?",
+        "options": [
+          "two units apart",
+          "one unit apart",
+          "zero units apart",
+          "three units apart"
+        ],
+        "correct_option": "zero units apart",
+        "explanation": "All three houses share y = 1, so the y-gap between any two is zero."
+      },
+      {
+        "id": "M1Q2E9",
+        "question": "Do Bala, Chetan, and Divya all have the same x-coordinate?",
+        "options": [
+          "yes, x same",
+          "x is negative",
+          "x is zero",
+          "no, x differs"
+        ],
+        "correct_option": "no, x differs",
+        "explanation": "Bala x=2, Chetan x=3, Divya x=4, so x-coordinates differ."
+      },
+      {
+        "id": "M1Q2E10",
+        "question": "Does the line y = 1 pass through all three houses?",
+        "options": [
+          "no, y equals 0",
+          "yes, y equals 1",
+          "no, x equals 1",
+          "no, y equals 2"
+        ],
+        "correct_option": "yes, y equals 1",
+        "explanation": "All three houses have y = 1, so y = 1 contains them."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M1Q2M1",
+        "question": "What is the slope of the line through (2,1) and (3,1)?",
+        "options": [
+          "1/2",
+          "0",
+          "1",
+          "2/3"
+        ],
+        "correct_option": "0",
+        "explanation": "Equal y-values give Δy = 0, so slope = 0/1 = 0."
+      },
+      {
+        "id": "M1Q2M2",
+        "question": "What is the slope of the line through (2,1) and (4,1)?",
+        "options": [
+          "half unit",
+          "two units",
+          "zero slope",
+          "one unit"
+        ],
+        "correct_option": "zero slope",
+        "explanation": "Both points have y = 1, so rise = 0 and slope = 0."
+      },
+      {
+        "id": "M1Q2M3",
+        "question": "Are (2,1), (3,1), (4,1) collinear? On which line?",
+        "options": [
+          "y equals 1",
+          "y equals x line",
+          "y equals x+1",
+          "x equals 1 line"
+        ],
+        "correct_option": "y equals 1",
+        "explanation": "All three points share y = 1, so they lie on the horizontal line y = 1."
+      },
+      {
+        "id": "M1Q2M4",
+        "question": "If Atul had turned right at (2,0) instead of left, where would Bala be?",
+        "options": [
+          "(3, 0)",
+          "(2, -1)",
+          "(-1, 0)",
+          "(2, 1)"
+        ],
+        "correct_option": "(2, -1)",
+        "explanation": "A right turn from +x points toward -y, so (2,0) becomes (2,-1)."
+      },
+      {
+        "id": "M1Q2M5",
+        "question": "From (4,1) the pattern repeats: right 1, then up 1. What is the next house?",
+        "options": [
+          "(4, 2)",
+          "(5, 1)",
+          "(5, 2)",
+          "(3, 2)"
+        ],
+        "correct_option": "(5, 2)",
+        "explanation": "Right 1 from (4,1) gives (5,1); then up 1 gives (5,2)."
+      },
+      {
+        "id": "M1Q2M6",
+        "question": "The line through the three houses is y = 1. What is the y-intercept?",
+        "options": [
+          "just one value",
+          "the origin point",
+          "negative one value",
+          "just zero value"
+        ],
+        "correct_option": "just one value",
+        "explanation": "y = 1 meets the y-axis at (0,1), so the y-intercept is 1."
+      },
+      {
+        "id": "M1Q2M7",
+        "question": "The line through the three houses is y = 1. What is the slope?",
+        "options": [
+          "negative one slope",
+          "no slope type",
+          "positive one slope",
+          "zero slope line"
+        ],
+        "correct_option": "zero slope line",
+        "explanation": "A horizontal line has slope 0 since y never changes."
+      },
+      {
+        "id": "M1Q2M8",
+        "question": "What is the perpendicular distance from (0,0) to the line y = 1?",
+        "options": [
+          "one unit away",
+          "zero units away",
+          "half unit distance",
+          "two units away"
+        ],
+        "correct_option": "one unit away",
+        "explanation": "The shortest distance from origin to horizontal line y=1 is |1| = 1 unit."
+      },
+      {
+        "id": "M1Q2M9",
+        "question": "If Atul started at (5,0), walked 2 along x, then 1 up, where is Bala?",
+        "options": [
+          "(6, 1)",
+          "(5, 1)",
+          "(7, 0)",
+          "(7, 1)"
+        ],
+        "correct_option": "(7, 1)",
+        "explanation": "From (5,0), +2 in x gives (7,0); then +1 up gives (7,1)."
+      },
+      {
+        "id": "M1Q2M10",
+        "question": "If Atul started at (0,5), went down 2 then left 1, where is Bala?",
+        "options": [
+          "(-1, 7)",
+          "(-1, 3)",
+          "(1, 7)",
+          "(1, 3)"
+        ],
+        "correct_option": "(-1, 3)",
+        "explanation": "From (0,5), down 2 gives (0,3); then left 1 gives (-1,3)."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M1Q2H1",
+        "question": "If Atul repeats (right 2, up 3) from origin, on what line do his endpoints lie?",
+        "options": [
+          "y equals 2x",
+          "y equals 3x",
+          "y equals 4x",
+          "y equals 1.5x"
+        ],
+        "correct_option": "y equals 1.5x",
+        "explanation": "Endpoints are (2,3),(4,6),(6,9); y/x = 3/2 = 1.5, so line is y = 1.5x."
+      },
+      {
+        "id": "M1Q2H2",
+        "question": "The line y = 1 is horizontal. What type of line is x = 2?",
+        "options": [
+          "slope zero type",
+          "vertical straight line",
+          "the y-axis line",
+          "diagonal sloped line"
+        ],
+        "correct_option": "vertical straight line",
+        "explanation": "x = 2 fixes x and lets y vary freely, defining a vertical line."
+      },
+      {
+        "id": "M1Q2H3",
+        "question": "Atul repeats (right 1, up 1) from origin. What line passes through every odd-step endpoint?",
+        "options": [
+          "y equals 2x",
+          "y equals 1 line",
+          "y equals x",
+          "x equals 1 line"
+        ],
+        "correct_option": "y equals x",
+        "explanation": "After step 1 Atul is at (1,1); after step 3 at (3,3); each satisfies y = x."
+      },
+      {
+        "id": "M1Q2H4",
+        "question": "If houses (2,1),(3,1),(4,1) lie on y = 1, which horizontal line passes through (0,1)?",
+        "options": [
+          "y equals 1 line",
+          "x equals 0 line",
+          "x equals 1 line",
+          "y equals 0 line"
+        ],
+        "correct_option": "y equals 1 line",
+        "explanation": "Every point with y-coordinate 1 lies on y = 1, including (0,1)."
+      },
+      {
+        "id": "M1Q2H5",
+        "question": "If all three houses lie on y = c, what value of c fits the problem?",
+        "options": [
+          "c equals 1",
+          "c equals 2",
+          "c equals 0",
+          "c equals 3"
+        ],
+        "correct_option": "c equals 1",
+        "explanation": "Bala, Chetan, Divya have y-coordinates 1, 1, 1, so c = 1."
+      },
+      {
+        "id": "M1Q2H6",
+        "question": "What is the equation of the line through (2,1) with slope 0?",
+        "options": [
+          "x equals 2 line",
+          "y equals x line",
+          "y equals 2x line",
+          "y equals 1"
+        ],
+        "correct_option": "y equals 1",
+        "explanation": "Slope 0 means a horizontal line through (2,1), which is y = 1."
+      },
+      {
+        "id": "M1Q2H7",
+        "question": "The path Bala \u2192 Chetan \u2192 Divya is 2 units long. What is the length to the next house?",
+        "options": [
+          "two units total",
+          "four units total",
+          "one unit total",
+          "three units total"
+        ],
+        "correct_option": "three units total",
+        "explanation": "Adding Chetan \u2192 Divya (1) and Divya \u2192 next (1) to the original 2 gives length 3."
+      },
+      {
+        "id": "M1Q2H8",
+        "question": "Reflecting (2,1),(3,1),(4,1) over the x-axis, what line do they lie on?",
+        "options": [
+          "y equals -1",
+          "x equals 1 line",
+          "y equals 1 line",
+          "x equals -1 line"
+        ],
+        "correct_option": "y equals -1",
+        "explanation": "Reflection over x-axis negates y; new points (2,-1),(3,-1),(4,-1) lie on y = -1."
+      },
+      {
+        "id": "M1Q2H9",
+        "question": "The line y = 1 and the line x = 2 meet at which point?",
+        "options": [
+          "(2, 0)",
+          "(0, 0)",
+          "(1, 2)",
+          "(2, 1)"
+        ],
+        "correct_option": "(2, 1)",
+        "explanation": "x = 2 forces x = 2 and y = 1 forces y = 1; intersection is (2,1) = Bala's house."
+      },
+      {
+        "id": "M1Q2H10",
+        "question": "Repeating (right a, up b), endpoints (2a, b),(4a, 2b),\u2026 lie on what line?",
+        "options": [
+          "y equals ax",
+          "x equals by",
+          "y equals b/ax",
+          "y equals bx"
+        ],
+        "correct_option": "y equals b/ax",
+        "explanation": "Each endpoint satisfies y/x = b/a, so they lie on y = (b/a)x through origin."
+      }
+    ],
+    "real_life_application": [
+      {
+        "id": "M1Q2R1",
+        "question": "A car drives east 2 km, north 1 km, east 1 km, north 1 km. Which line of north-coordinates does it trace?",
+        "options": [
+          "x equals 1 km",
+          "y equals 1 km",
+          "y equals x km",
+          "y equals 2 km"
+        ],
+        "correct_option": "y equals 1 km",
+        "explanation": "After each north step, y = 1; positions sit on the horizontal line y = 1."
+      },
+      {
+        "id": "M1Q2R2",
+        "question": "A robot moves forward 2 m, left 1 m, right 1 m. Which 'lane' line does it follow?",
+        "options": [
+          "y equals 1 m",
+          "x equals 1 m",
+          "y equals x m",
+          "y equals 2 m"
+        ],
+        "correct_option": "y equals 1 m",
+        "explanation": "Left/right moves keep y = 1; the robot's lane is the horizontal line y = 1."
+      },
+      {
+        "id": "M1Q2R3",
+        "question": "A delivery person in a grid city moves 2 east, 1 north, 1 east, 1 north. Which avenue is he always on?",
+        "options": [
+          "1 block north",
+          "2 blocks north",
+          "0 blocks north",
+          "1 block east"
+        ],
+        "correct_option": "1 block north",
+        "explanation": "Each north step puts the person at y = 1, so he stays on the 1-block-north avenue."
+      },
+      {
+        "id": "M1Q2R4",
+        "question": "An elevator goes up 2 floors, then right 1, right 1, up 1. What floor line do the rooms lie on?",
+        "options": [
+          "the 3rd floor",
+          "the ground floor",
+          "the 2nd floor",
+          "the 1st floor"
+        ],
+        "correct_option": "the 1st floor",
+        "explanation": "After the up-1 step, y = 1; the rooms line up on the horizontal line y = 1."
+      },
+      {
+        "id": "M1Q2R5",
+        "question": "A drone flies 2 km east, 1 km north, 1 km east, 1 km north. Which latitude line does it trace?",
+        "options": [
+          "0 km north",
+          "1 km east",
+          "1 km north",
+          "2 km north"
+        ],
+        "correct_option": "1 km north",
+        "explanation": "Each north leg ends at y = 1, so the drone always sits on the latitude y = 1."
+      }
+    ]
+  }
+}

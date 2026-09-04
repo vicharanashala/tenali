@@ -1,0 +1,2490 @@
+{
+  "module": 5,
+  "topics": [
+    {
+      "topicId": "Q5.1",
+      "title": "Two 2-dim subspaces in ℝ³",
+      "topic": "Constructing two different 2D subspaces of ℝ³.",
+      "mcqs": {
+        "easy": [
+          {
+            "id": "M5Q1E1",
+            "question": "What is the dimension of ℝ³?",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "correct_option": "3",
+            "explanation": "ℝ³ is 3-dimensional, with three basis vectors (1,0,0), (0,1,0), and (0,0,1)."
+          },
+          {
+            "id": "M5Q1E2",
+            "question": "A 2D subspace of ℝ³ geometrically represents a:",
+            "options": [
+              "line through origin",
+              "plane through origin",
+              "point at origin",
+              "sphere through origin"
+            ],
+            "correct_option": "plane through origin",
+            "explanation": "A 2D subspace of ℝ³ consists of all linear combinations of two independent vectors, forming a plane through the origin."
+          },
+          {
+            "id": "M5Q1E3",
+            "question": "S₁ is described as a plane through origin in which space?",
+            "options": [
+              "ℝ²",
+              "ℝ³",
+              "ℝ⁴",
+              "ℝ⁵"
+            ],
+            "correct_option": "ℝ³",
+            "explanation": "S₁ is a 2-dimensional subspace embedded in ℝ³."
+          },
+          {
+            "id": "M5Q1E4",
+            "question": "S₂ is described as:",
+            "options": [
+              "a line through origin",
+              "another plane through origin",
+              "a point at origin",
+              "the entire space ℝ³"
+            ],
+            "correct_option": "another plane through origin",
+            "explanation": "S₂ is a second 2D subspace, a different plane through the origin in ℝ³."
+          },
+          {
+            "id": "M5Q1E5",
+            "question": "The xy-plane can be written as:",
+            "options": [
+              "{(a, 0, c) : a, c ∈ ℝ}",
+              "{(0, b, c) : b, c ∈ ℝ}",
+              "{(a, b, 0) : a, b ∈ ℝ}",
+              "{(a, a, c) : a, c ∈ ℝ}"
+            ],
+            "correct_option": "{(a, b, 0) : a, b ∈ ℝ}",
+            "explanation": "The xy-plane consists of all vectors with z-coordinate equal to zero."
+          },
+          {
+            "id": "M5Q1E6",
+            "question": "The xz-plane can be written as:",
+            "options": [
+              "{(a, b, 0) : a, b ∈ ℝ}",
+              "{(a, 0, c) : a, c ∈ ℝ}",
+              "{(0, b, c) : b, c ∈ ℝ}",
+              "{(a, b, b) : a, b ∈ ℝ}"
+            ],
+            "correct_option": "{(a, 0, c) : a, c ∈ ℝ}",
+            "explanation": "The xz-plane consists of all vectors with y-coordinate equal to zero."
+          },
+          {
+            "id": "M5Q1E7",
+            "question": "The xy-plane and xz-plane are:",
+            "options": [
+              "identical subspaces",
+              "two different 2D subspaces",
+              "one 1D and one 2D subspace",
+              "not subspaces of ℝ³"
+            ],
+            "correct_option": "two different 2D subspaces",
+            "explanation": "Both are 2D subspaces but they contain different sets of vectors."
+          },
+          {
+            "id": "M5Q1E8",
+            "question": "Both the xy-plane and xz-plane:",
+            "options": [
+              "pass through origin",
+              "do not contain origin",
+              "are parallel but not same",
+              "intersect only at origin"
+            ],
+            "correct_option": "pass through origin",
+            "explanation": "Every subspace must contain the zero vector (origin)."
+          },
+          {
+            "id": "M5Q1E9",
+            "question": "Both S₁ and S₂ have dimension:",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "correct_option": "2",
+            "explanation": "Both are 2D subspaces, so each has dimension 2."
+          },
+          {
+            "id": "M5Q1E10",
+            "question": "S₁ is the span of which pair of vectors?",
+            "options": [
+              "(1,0,0) and (0,0,1)",
+              "(1,0,0) and (0,1,0)",
+              "(0,1,0) and (0,0,1)",
+              "(1,1,0) and (0,1,1)"
+            ],
+            "correct_option": "(1,0,0) and (0,1,0)",
+            "explanation": "S₁ = xy-plane = span{(1,0,0), (0,1,0)}."
+          }
+        ],
+        "medium": [
+          {
+            "id": "M5Q1M1",
+            "question": "If S₁ = span{(1,0,0), (0,1,0)}, what plane is S₁?",
+            "options": [
+              "xz-plane",
+              "yz-plane",
+              "xy-plane",
+              "diagonal plane"
+            ],
+            "correct_option": "xy-plane",
+            "explanation": "The span of (1,0,0) and (0,1,0) gives all vectors of the form (a,b,0), which is the xy-plane."
+          },
+          {
+            "id": "M5Q1M2",
+            "question": "If S₂ = span{(1,0,0), (0,0,1)}, what plane is S₂?",
+            "options": [
+              "xy-plane",
+              "yz-plane",
+              "xz-plane",
+              "diagonal plane"
+            ],
+            "correct_option": "xz-plane",
+            "explanation": "The span of (1,0,0) and (0,0,1) gives all vectors of the form (a,0,c), which is the xz-plane."
+          },
+          {
+            "id": "M5Q1M3",
+            "question": "The intersection S₁ ∩ S₂ for S₁ = xy-plane and S₂ = xz-plane is:",
+            "options": [
+              "y-axis",
+              "z-axis",
+              "x-axis",
+              "origin only"
+            ],
+            "correct_option": "x-axis",
+            "explanation": "A vector is in both planes when y = 0 and z = 0, giving the x-axis = span{(1,0,0)}."
+          },
+          {
+            "id": "M5Q1M4",
+            "question": "By the dimension formula, dim(S₁ ∩ S₂) ≥ dim(S₁) + dim(S₂) − dim(ℝ³) = ?",
+            "options": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ],
+            "correct_option": "1",
+            "explanation": "2 + 2 − 3 = 1, so the intersection is at least 1-dimensional."
+          },
+          {
+            "id": "M5Q1M5",
+            "question": "Since dim(S₁ ∩ S₂) ≥ 1, the intersection S₁ ∩ S₂ contains at least:",
+            "options": [
+              "only the origin",
+              "a line through origin",
+              "a plane through origin",
+              "the entire ℝ³"
+            ],
+            "correct_option": "a line through origin",
+            "explanation": "A subspace of dimension ≥ 1 contains a line through the origin."
+          },
+          {
+            "id": "M5Q1M6",
+            "question": "In the example S₁ = xy-plane and S₂ = xz-plane, the intersection is exactly:",
+            "options": [
+              "the origin",
+              "the x-axis",
+              "the y-axis",
+              "the z-axis"
+            ],
+            "correct_option": "the x-axis",
+            "explanation": "The only vectors with both y = 0 and z = 0 lie along the x-axis."
+          },
+          {
+            "id": "M5Q1M7",
+            "question": "The equation of the xy-plane (S₁) can be written as:",
+            "options": [
+              "x = 0",
+              "y = 0",
+              "z = 0",
+              "x + y + z = 0"
+            ],
+            "correct_option": "z = 0",
+            "explanation": "The xy-plane consists of all vectors whose z-component is zero."
+          },
+          {
+            "id": "M5Q1M8",
+            "question": "The equation of the xz-plane (S₂) can be written as:",
+            "options": [
+              "x = 0",
+              "y = 0",
+              "z = 0",
+              "x + y = 0"
+            ],
+            "correct_option": "y = 0",
+            "explanation": "The xz-plane consists of all vectors whose y-component is zero."
+          },
+          {
+            "id": "M5Q1M9",
+            "question": "Which statement about S₁ and S₂ is correct?",
+            "options": [
+              "Only S₁ passes through origin",
+              "Only S₂ passes through origin",
+              "Both are planes through origin",
+              "Neither passes through origin"
+            ],
+            "correct_option": "Both are planes through origin",
+            "explanation": "Both S₁ and S₂ are subspaces, so both contain the origin."
+          },
+          {
+            "id": "M5Q1M10",
+            "question": "The vector (0, 0, 0) belongs to:",
+            "options": [
+              "S₁ only",
+              "S₂ only",
+              "both S₁ and S₂",
+              "neither S₁ nor S₂"
+            ],
+            "correct_option": "both S₁ and S₂",
+            "explanation": "The zero vector is in every subspace."
+          }
+        ],
+        "hard": [
+          {
+            "id": "M5Q1H1",
+            "question": "dim(S₁) + dim(S₂) = 4 and dim(ℝ³) = 3 implies dim(S₁ + S₂) ≤ ?",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "correct_option": "3",
+            "explanation": "The sum S₁ + S₂ lives in ℝ³, so its dimension cannot exceed 3."
+          },
+          {
+            "id": "M5Q1H2",
+            "question": "Using dim(S₁ + S₂) = dim(S₁) + dim(S₂) − dim(S₁ ∩ S₂), we get dim(S₁ ∩ S₂) ≥ ?",
+            "options": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ],
+            "correct_option": "1",
+            "explanation": "Rearranging: dim(S₁ ∩ S₂) ≥ 2 + 2 − 3 = 1."
+          },
+          {
+            "id": "M5Q1H3",
+            "question": "Two generic 2D subspaces of ℝ³ intersect in a subspace of dimension:",
+            "options": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ],
+            "correct_option": "1",
+            "explanation": "The generic (typical) intersection of two different 2D subspaces in ℝ³ is a line (1D)."
+          },
+          {
+            "id": "M5Q1H4",
+            "question": "If S₁ = span{(1,0,0), (0,1,0)} and S₂ = span{(1,0,0), (1,1,1)}, their intersection is:",
+            "options": [
+              "the origin",
+              "the x-axis",
+              "the y-axis",
+              "the z-axis"
+            ],
+            "correct_option": "the x-axis",
+            "explanation": "(1,0,0) is in both spans; (1,1,1) has z-component 1 so is not in S₁. The intersection is the x-axis."
+          },
+          {
+            "id": "M5Q1H5",
+            "question": "Two 2D subspaces in ℝ³ that are the same subspace have intersection dimension:",
+            "options": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ],
+            "correct_option": "2",
+            "explanation": "If S₁ = S₂, then S₁ ∩ S₂ = S₁, which has dimension 2."
+          },
+          {
+            "id": "M5Q1H6",
+            "question": "If S₁ = S₂ (both the same plane), then dim(S₁ + S₂) equals:",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "correct_option": "2",
+            "explanation": "S₁ + S₂ = S₁ = S₂ when they are the same, so dim = 2."
+          },
+          {
+            "id": "M5Q1H7",
+            "question": "Which pair of 2D subspaces in ℝ³ has the largest possible intersection?",
+            "options": [
+              "xy-plane and xz-plane",
+              "xy-plane and yz-plane",
+              "two identical planes",
+              "xy-plane and diagonal plane"
+            ],
+            "correct_option": "two identical planes",
+            "explanation": "When S₁ = S₂, the intersection is 2D, the maximum possible."
+          },
+          {
+            "id": "M5Q1H8",
+            "question": "The angle between two planes through origin equals the angle between their:",
+            "options": [
+              "spanning vectors",
+              "normal vectors",
+              "intersection line",
+              "sum vectors"
+            ],
+            "correct_option": "normal vectors",
+            "explanation": "The dihedral angle between two planes is determined by the angle between their normal vectors."
+          },
+          {
+            "id": "M5Q1H9",
+            "question": "For any two 2D subspaces of ℝ³, dim(S₁ ∩ S₂) can be:",
+            "options": [
+              "only 0",
+              "0 or 1",
+              "1 or 2",
+              "0, 1, or 2"
+            ],
+            "correct_option": "1 or 2",
+            "explanation": "By the dimension formula, dim(S₁ ∩ S₂) ≥ 1, so it is either 1 (different planes) or 2 (same plane)."
+          },
+          {
+            "id": "M5Q1H10",
+            "question": "If dim(S₁ ∩ S₂) = 1 and dim(S₁ + S₂) = 3, then dim(ℝ³) must be at least:",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "correct_option": "3",
+            "explanation": "S₁ + S₂ has dimension 3, so the ambient space must be at least 3-dimensional."
+          }
+        ],
+        "real_life_application": [
+          {
+            "id": "M5Q1R1",
+            "question": "Two walls of a room (extended through origin) are 2D subspaces. Their intersection corresponds to:",
+            "options": [
+              "the floor",
+              "the ceiling edge",
+              "the corner edge line",
+              "the door frame"
+            ],
+            "correct_option": "the corner edge line",
+            "explanation": "Two perpendicular walls through origin intersect along the corner edge, a line through origin."
+          },
+          {
+            "id": "M5Q1R2",
+            "question": "The y = 0 and z = 0 planes are perpendicular. Their intersection is the:",
+            "options": [
+              "y-axis",
+              "z-axis",
+              "x-axis",
+              "origin only"
+            ],
+            "correct_option": "x-axis",
+            "explanation": "y = 0 is the xz-plane, z = 0 is the xy-plane; their intersection is the x-axis."
+          },
+          {
+            "id": "M5Q1R3",
+            "question": "Two parallel planes in the affine sense that both pass through the origin must:",
+            "options": [
+              "intersect in a line",
+              "be distinct",
+              "coincide (be the same plane)",
+              "not be subspaces"
+            ],
+            "correct_option": "coincide (be the same plane)",
+            "explanation": "Parallel planes through origin must coincide because both contain the origin."
+          },
+          {
+            "id": "M5Q1R4",
+            "question": "Which are three obvious 2D subspaces of ℝ³?",
+            "options": [
+              "x-axis, y-axis, z-axis",
+              "xy-plane, xz-plane, yz-plane",
+              "S₁, S₂, S₃",
+              "origin, line, plane"
+            ],
+            "correct_option": "xy-plane, xz-plane, yz-plane",
+            "explanation": "The three coordinate planes are the most natural examples of 2D subspaces of ℝ³."
+          },
+          {
+            "id": "M5Q1R5",
+            "question": "In a 3D game engine, two clipping planes through the origin will always intersect in:",
+            "options": [
+              "a point",
+              "a line",
+              "a plane",
+              "the entire space"
+            ],
+            "correct_option": "a line",
+            "explanation": "Two distinct 2D subspaces of ℝ³ always intersect in at least a line (1D subspace)."
+          }
+        ]
+      },
+      "real_life_application": [
+        {
+          "id": "M5Q1R1",
+          "question": "Two room walls are 2D subspaces; their intersection represents which feature?",
+          "options": [
+            "Corner dot",
+            "Shared edge",
+            "Wall plane",
+            "Ceiling span"
+          ],
+          "correct_option": "Shared edge",
+          "explanation": "Two planes in ℝ³ meet along a line — the shared edge where the walls join."
+        },
+        {
+          "id": "M5Q1R2",
+          "question": "The xy-plane and xz-plane model which pair of surfaces?",
+          "options": [
+            "Wall, ceiling",
+            "Two walls",
+            "Floor, wall",
+            "Wall, floor"
+          ],
+          "correct_option": "Floor, wall",
+          "explanation": "xy-plane (z=0) is the floor; xz-plane (y=0) is one wall meeting it."
+        },
+        {
+          "id": "M5Q1R3",
+          "question": "Two distinct 2D subspaces in ℝ³ through origin must intersect in at least how many dimensions?",
+          "options": [
+            "Two",
+            "Three",
+            "Zero",
+            "One"
+          ],
+          "correct_option": "One",
+          "explanation": "By dim(S₁)+dim(S₂)−n = 2+2−3 = 1, so a line is guaranteed."
+        },
+        {
+          "id": "M5Q1R4",
+          "question": "A folded sheet through origin models which algebraic object?",
+          "options": [
+            "Plane subspace",
+            "Full ℝ³",
+            "Single line",
+            "Point only"
+          ],
+          "correct_option": "Plane subspace",
+          "explanation": "The flat paper is a 2D plane through origin — a 2D subspace of ℝ³."
+        },
+        {
+          "id": "M5Q1R5",
+          "question": "Ceiling plane and floor plane intersect (through origin) in which subspace?",
+          "options": [
+            "Whole plane",
+            "Edge line",
+            "Empty set",
+            "Single dot"
+          ],
+          "correct_option": "Edge line",
+          "explanation": "Two non-coincident planes in ℝ³ meet along a line through origin."
+        }
+      ]
+    },
+    {
+      "topicId": "Q5.2",
+      "title": "S₃, S₄ as perpendicular complements",
+      "topic": "Orthogonal complement of a 2D subspace in ℝ³ is 1D.",
+      "mcqs": {
+        "easy": [
+          {
+            "id": "M5Q2E1",
+            "question": "S₁ is a 2D plane in ℝ³. The orthogonal complement S₁⊥ has dimension:",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "correct_option": "1",
+            "explanation": "dim(S₁⊥) = 3 − dim(S₁) = 3 − 2 = 1."
+          },
+          {
+            "id": "M5Q2E2",
+            "question": "S₁⊥ = {vectors in ℝ³ perpendicular to every vector in S₁} is called:",
+            "options": [
+              "the column space",
+              "the null space",
+              "the orthogonal complement",
+              "the row space"
+            ],
+            "correct_option": "the orthogonal complement",
+            "explanation": "S₁⊥ is the orthogonal complement of S₁."
+          },
+          {
+            "id": "M5Q2E3",
+            "question": "Since dim(S₁⊥) = 1, S₃ = S₁⊥ is geometrically a:",
+            "options": [
+              "point",
+              "line through origin",
+              "plane through origin",
+              "sphere"
+            ],
+            "correct_option": "line through origin",
+            "explanation": "A 1D subspace is a line through the origin."
+          },
+          {
+            "id": "M5Q2E4",
+            "question": "S₃ is described as the _____ to S₁.",
+            "options": [
+              "parallel line",
+              "normal line",
+              "tangent plane",
+              "diagonal line"
+            ],
+            "correct_option": "normal line",
+            "explanation": "The orthogonal complement of a plane is the line normal (perpendicular) to it."
+          },
+          {
+            "id": "M5Q2E5",
+            "question": "If S₁ = xy-plane, then S₃ = S₁⊥ is the:",
+            "options": [
+              "x-axis",
+              "y-axis",
+              "z-axis",
+              "origin"
+            ],
+            "correct_option": "z-axis",
+            "explanation": "The z-axis is perpendicular to every vector in the xy-plane."
+          },
+          {
+            "id": "M5Q2E6",
+            "question": "The z-axis can be written as:",
+            "options": [
+              "{(c, 0, 0) : c ∈ ℝ}",
+              "{(0, c, 0) : c ∈ ℝ}",
+              "{(0, 0, c) : c ∈ ℝ}",
+              "{(c, c, 0) : c ∈ ℝ}"
+            ],
+            "correct_option": "{(0, 0, c) : c ∈ ℝ}",
+            "explanation": "The z-axis consists of all vectors whose x and y components are zero."
+          },
+          {
+            "id": "M5Q2E7",
+            "question": "S₄ = S₂⊥ is the normal line to:",
+            "options": [
+              "S₁",
+              "S₂",
+              "S₃",
+              "ℝ³"
+            ],
+            "correct_option": "S₂",
+            "explanation": "S₄ is the orthogonal complement of S₂, so it is perpendicular to S₂."
+          },
+          {
+            "id": "M5Q2E8",
+            "question": "If S₂ = xz-plane, then S₄ = S₂⊥ is the:",
+            "options": [
+              "x-axis",
+              "y-axis",
+              "z-axis",
+              "xy-plane"
+            ],
+            "correct_option": "y-axis",
+            "explanation": "The y-axis is perpendicular to every vector in the xz-plane."
+          },
+          {
+            "id": "M5Q2E9",
+            "question": "S₃ and S₄ are each 1D. How are they related?",
+            "options": [
+              "They are identical",
+              "They are different 1D lines",
+              "They are perpendicular to each other",
+              "They are parallel"
+            ],
+            "correct_option": "They are different 1D lines",
+            "explanation": "S₃ = z-axis and S₄ = y-axis are different lines through origin."
+          },
+          {
+            "id": "M5Q2E10",
+            "question": "dim(S₁) + dim(S₁⊥) always equals:",
+            "options": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ],
+            "correct_option": "3",
+            "explanation": "In ℝ³, dim(S) + dim(S⊥) = 3 for any subspace S."
+          }
+        ],
+        "medium": [
+          {
+            "id": "M5Q2M1",
+            "question": "The normal direction to S₁ is found using the:",
+            "options": [
+              "dot product",
+              "cross product",
+              "matrix inverse",
+              "eigenvalue decomposition"
+            ],
+            "correct_option": "cross product",
+            "explanation": "The cross product of two spanning vectors of S₁ gives the normal direction."
+          },
+          {
+            "id": "M5Q2M2",
+            "question": "If S₁ = span{(1,0,0), (0,1,0)}, then the normal is (1,0,0) × (0,1,0) = ?",
+            "options": [
+              "(1,1,0)",
+              "(0,1,0)",
+              "(0,0,1)",
+              "(1,0,1)"
+            ],
+            "correct_option": "(0,0,1)",
+            "explanation": "The cross product of (1,0,0) and (0,1,0) is (0,0,1), the z-direction."
+          },
+          {
+            "id": "M5Q2M3",
+            "question": "S₃ = span{(0,0,1)} is the:",
+            "options": [
+              "x-axis",
+              "y-axis",
+              "z-axis",
+              "origin"
+            ],
+            "correct_option": "z-axis",
+            "explanation": "(0,0,1) points along the z-axis."
+          },
+          {
+            "id": "M5Q2M4",
+            "question": "If S₂ = span{(1,0,0), (0,0,1)}, then the normal is (1,0,0) × (0,0,1) = ?",
+            "options": [
+              "(0,0,1)",
+              "(1,0,0)",
+              "(0,−1,0)",
+              "(0,1,0)"
+            ],
+            "correct_option": "(0,−1,0)",
+            "explanation": "The cross product gives (0,−1,0), which spans the y-axis direction."
+          },
+          {
+            "id": "M5Q2M5",
+            "question": "S₄ = span{(0,1,0)} (or equivalently span{(0,−1,0)}) is the:",
+            "options": [
+              "x-axis",
+              "y-axis",
+              "z-axis",
+              "xy-plane"
+            ],
+            "correct_option": "y-axis",
+            "explanation": "Both (0,1,0) and (0,−1,0) span the y-axis."
+          },
+          {
+            "id": "M5Q2M6",
+            "question": "To verify (0,1,0) ⊥ (1,0,0), compute the dot product:",
+            "options": [
+              "0·1 + 1·0 + 0·0 = 0",
+              "0·1 + 1·0 + 0·1 = 1",
+              "0 + 1 + 0 = 1",
+              "1 + 0 + 0 = 1"
+            ],
+            "correct_option": "0·1 + 1·0 + 0·0 = 0",
+            "explanation": "The dot product is 0, confirming perpendicularity."
+          },
+          {
+            "id": "M5Q2M7",
+            "question": "To verify (0,1,0) ⊥ (0,0,1), compute the dot product:",
+            "options": [
+              "0·0 + 1·0 + 0·1 = 0",
+              "0 + 1 + 1 = 2",
+              "1 + 0 + 0 = 1",
+              "0 + 0 + 1 = 1"
+            ],
+            "correct_option": "0·0 + 1·0 + 0·1 = 0",
+            "explanation": "The dot product is 0, confirming these vectors are perpendicular."
+          },
+          {
+            "id": "M5Q2M8",
+            "question": "The normal to the xy-plane is parallel to the:",
+            "options": [
+              "x-axis",
+              "y-axis",
+              "z-axis",
+              "diagonal line"
+            ],
+            "correct_option": "z-axis",
+            "explanation": "The xy-plane has normal vector (0,0,1), which is along the z-axis."
+          },
+          {
+            "id": "M5Q2M9",
+            "question": "S₃ is a 1D line because:",
+            "options": [
+              "S₁ is 1-dimensional",
+              "S₁ is 2-dimensional in ℝ³",
+              "ℝ³ is 3-dimensional",
+              "S₁ and S₂ are the same"
+            ],
+            "correct_option": "S₁ is 2-dimensional in ℝ³",
+            "explanation": "dim(S₁⊥) = 3 − dim(S₁) = 3 − 2 = 1."
+          },
+          {
+            "id": "M5Q2M10",
+            "question": "Which statement is true about S₃ and S₄?",
+            "options": [
+              "Both are 2D planes",
+              "Both are 1D lines through origin",
+              "S₃ is a plane and S₄ is a line",
+              "Both are the origin"
+            ],
+            "correct_option": "Both are 1D lines through origin",
+            "explanation": "Each is the orthogonal complement of a 2D subspace, so each is 1D."
+          }
+        ],
+        "hard": [
+          {
+            "id": "M5Q2H1",
+            "question": "S₃ = S₁⊥ is the null space of which matrix?",
+            "options": [
+              "a 1×3 matrix with rows spanning S₁",
+              "a 2×3 matrix with rows spanning S₁",
+              "a 3×3 identity matrix",
+              "a 3×2 matrix with columns spanning S₁"
+            ],
+            "correct_option": "a 2×3 matrix with rows spanning S₁",
+            "explanation": "If the rows of a 2×3 matrix span S₁, its null space is S₁⊥ = S₃."
+          },
+          {
+            "id": "M5Q2H2",
+            "question": "For S₁ = xy-plane, the matrix M = [[1,0,0],[0,1,0]] has N(M) = ?",
+            "options": [
+              "xy-plane",
+              "x-axis",
+              "y-axis",
+              "z-axis"
+            ],
+            "correct_option": "z-axis",
+            "explanation": "M·(x,y,z)ᵀ = (x,y)ᵀ = 0 iff x = 0 and y = 0, giving the z-axis."
+          },
+          {
+            "id": "M5Q2H3",
+            "question": "dim(S₁) + dim(S₁⊥) = 3 is a special case of:",
+            "options": [
+              "rank-nullity theorem",
+              "dimension theorem for orthogonal complements",
+              "cross product rule",
+              "inclusion-exclusion principle"
+            ],
+            "correct_option": "dimension theorem for orthogonal complements",
+            "explanation": "In ℝⁿ, dim(S) + dim(S⊥) = n for any subspace S."
+          },
+          {
+            "id": "M5Q2H4",
+            "question": "S₂ = span{(1,0,0), (0,0,1)}. The normal direction is found by:",
+            "options": [
+              "dot product of spanning vectors",
+              "cross product of spanning vectors",
+              "sum of spanning vectors",
+              "difference of spanning vectors"
+            ],
+            "correct_option": "cross product of spanning vectors",
+            "explanation": "The cross product (1,0,0) × (0,0,1) = (0,−1,0) gives the normal."
+          },
+          {
+            "id": "M5Q2H5",
+            "question": "The pair (S₁, S₃) and (S₂, S₄) are examples of:",
+            "options": [
+              "parallel subspaces",
+              "orthogonal complement pairs",
+              "direct sum decompositions",
+              "linear transformations"
+            ],
+            "correct_option": "orthogonal complement pairs",
+            "explanation": "S₃ = S₁⊥ and S₄ = S₂⊥, so each pair consists of a subspace and its orthogonal complement."
+          },
+          {
+            "id": "M5Q2H6",
+            "question": "If S₁ is a 2D subspace of ℝ³, how many linearly independent normals does it have?",
+            "options": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ],
+            "correct_option": "1",
+            "explanation": "The orthogonal complement of a 2D subspace in ℝ³ is 1D, so there is one independent normal direction."
+          },
+          {
+            "id": "M5Q2H7",
+            "question": "For any vector v ∈ S₁ and w ∈ S₃ = S₁⊥, the dot product v · w equals:",
+            "options": [
+              "1",
+              "−1",
+              "0",
+              "depends on v and w"
+            ],
+            "correct_option": "0",
+            "explanation": "By definition of orthogonal complement, every vector in S₁ is perpendicular to every vector in S₃."
+          },
+          {
+            "id": "M5Q2H8",
+            "question": "The sum S₁ + S₃ where S₃ = S₁⊥ equals:",
+            "options": [
+              "S₁",
+              "S₃",
+              "ℝ³",
+              "the origin"
+            ],
+            "correct_option": "ℝ³",
+            "explanation": "A subspace and its orthogonal complement span the entire ambient space: S ⊕ S⊥ = ℝⁿ."
+          },
+          {
+            "id": "M5Q2H9",
+            "question": "If we rotate S₁, what happens to S₃ = S₁⊥?",
+            "options": [
+              "It stays fixed",
+              "It rotates by the same angle",
+              "It remains unchanged",
+              "It becomes 2D"
+            ],
+            "correct_option": "It rotates by the same angle",
+            "explanation": "The normal to a plane rotates with the plane."
+          },
+          {
+            "id": "M5Q2H10",
+            "question": "dim(S₁) = 2 and dim(S₃) = 1 with dim(S₁) + dim(S₃) = 3 means S₁ and S₃ together:",
+            "options": [
+              "are linearly dependent",
+              "form a basis for ℝ³",
+              "span only a plane",
+              "have trivial intersection"
+            ],
+            "correct_option": "form a basis for ℝ³",
+            "explanation": "S₁ ⊕ S₃ = ℝ³ since they are orthogonal complements with complementary dimensions."
+          }
+        ],
+        "real_life_application": [
+          {
+            "id": "M5Q2R1",
+            "question": "The xy-plane and z-axis are orthogonal complements. In a room, this corresponds to:",
+            "options": [
+              "floor and wall",
+              "ceiling and vertical direction",
+              "two walls",
+              "floor and door"
+            ],
+            "correct_option": "ceiling and vertical direction",
+            "explanation": "The ceiling (horizontal plane) and the vertical (z-axis) are perpendicular complements."
+          },
+          {
+            "id": "M5Q2R2",
+            "question": "A wall (yz-plane) and the x-axis are orthogonal complements because:",
+            "options": [
+              "they are parallel",
+              "the x-axis is perpendicular to the wall",
+              "they have the same dimension",
+              "they do not intersect"
+            ],
+            "correct_option": "the x-axis is perpendicular to the wall",
+            "explanation": "The x-axis is normal to the yz-plane, so it is the orthogonal complement."
+          },
+          {
+            "id": "M5Q2R3",
+            "question": "In computer graphics, the surface normal of a polygon is the basis vector of:",
+            "options": [
+              "the surface itself",
+              "the orthogonal complement of the surface",
+              "the tangent plane",
+              "the row space"
+            ],
+            "correct_option": "the orthogonal complement of the surface",
+            "explanation": "The surface normal spans the 1D orthogonal complement of the 2D surface plane."
+          },
+          {
+            "id": "M5Q2R4",
+            "question": "A 2D subspace spanned by basis vectors e₁ and e₂ has normal e₁ × e₂ = ?",
+            "options": [
+              "e₁",
+              "e₂",
+              "e₃",
+              "the zero vector"
+            ],
+            "correct_option": "e₃",
+            "explanation": "The cross product of the first two standard basis vectors gives the third."
+          },
+          {
+            "id": "M5Q2R5",
+            "question": "In 3D physics simulations, the constraint surface and its normal force direction represent:",
+            "options": [
+              "parallel subspaces",
+              "orthogonal complements",
+              "the same subspace",
+              "linearly dependent vectors"
+            ],
+            "correct_option": "orthogonal complements",
+            "explanation": "The constraint surface (2D) and normal force (1D) are orthogonal complements in ℝ³."
+          }
+        ]
+      },
+      "real_life_application": [
+        {
+          "id": "M5Q2R1",
+          "question": "Floor and flagpole illustrate which subspace pair?",
+          "options": [
+            "Parallel planes",
+            "Skew lines",
+            "Plane, normal",
+            "Same plane"
+          ],
+          "correct_option": "Plane, normal",
+          "explanation": "The floor plane and pole line form an orthogonal complement pair in ℝ³."
+        },
+        {
+          "id": "M5Q2R2",
+          "question": "The normal vector to a tabletop lies in which subspace?",
+          "options": [
+            "S₁",
+            "Skew line",
+            "Random ray",
+            "S₁⊥"
+          ],
+          "correct_option": "S₁⊥",
+          "explanation": "Every normal to the table plane lives in S₁⊥, a 1D line."
+        },
+        {
+          "id": "M5Q2R3",
+          "question": "If S₁ is the ceiling (xy-plane), S₁⊥ is which line?",
+          "options": [
+            "Vertical z-axis",
+            "Horizontal x-axis",
+            "Floor diagonal",
+            "Wall diagonal"
+          ],
+          "correct_option": "Vertical z-axis",
+          "explanation": "S₁⊥ for the xy-plane is the z-axis — the vertical through the room."
+        },
+        {
+          "id": "M5Q2R4",
+          "question": "The dimension of S⊥ for a 2D plane S in ℝ³ equals what?",
+          "options": [
+            "Two",
+            "One",
+            "Three",
+            "Zero"
+          ],
+          "correct_option": "One",
+          "explanation": "dim(S⊥) = 3 − dim(S) = 1, so it is a line."
+        },
+        {
+          "id": "M5Q2R5",
+          "question": "Surface normals in 3D rendering form what subspace?",
+          "options": [
+            "Column space only",
+            "Null space alone",
+            "Perpendicular complement",
+            "Whole space"
+          ],
+          "correct_option": "Perpendicular complement",
+          "explanation": "Normals are perpendicular to the surface — they live in S⊥ for each face."
+        }
+      ]
+    },
+    {
+      "topicId": "Q5.3",
+      "title": "Find M with N(M) = S₃, C(M) = S₂",
+      "topic": "Constructing a matrix with prescribed null space and column space.",
+      "mcqs": {
+        "easy": [
+          {
+            "id": "M5Q3E1",
+            "question": "For an m×n matrix M, N(M) is a subspace of:",
+            "options": [
+              "ℝᵐ",
+              "ℝⁿ",
+              "ℝᵐ⁺ⁿ",
+              "the set of m×m matrices"
+            ],
+            "correct_option": "ℝⁿ",
+            "explanation": "The null space consists of vectors x ∈ ℝⁿ such that Mx = 0."
+          },
+          {
+            "id": "M5Q3E2",
+            "question": "For an m×n matrix M, C(M) is a subspace of:",
+            "options": [
+              "ℝᵐ",
+              "ℝⁿ",
+              "ℝᵐ⁺ⁿ",
+              "the set of n×n matrices"
+            ],
+            "correct_option": "ℝᵐ",
+            "explanation": "The column space consists of all linear combinations of the columns of M, which are vectors in ℝᵐ."
+          },
+          {
+            "id": "M5Q3E3",
+            "question": "We want N(M) = S₃, where S₃ is a 1D subspace. This means rank(M) = ?",
+            "options": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ],
+            "correct_option": "2",
+            "explanation": "By rank-nullity: rank(M) = n − dim(N(M)) = 3 − 1 = 2."
+          },
+          {
+            "id": "M5Q3E4",
+            "question": "We want C(M) = S₂, where S₂ is a 2D subspace. This means rank(M) = ?",
+            "options": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ],
+            "correct_option": "2",
+            "explanation": "dim(C(M)) = rank(M) = dim(S₂) = 2."
+          },
+          {
+            "id": "M5Q3E5",
+            "question": "With n = 3 and rank(M) = 2, the null space dimension is:",
+            "options": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ],
+            "correct_option": "1",
+            "explanation": "dim(N(M)) = n − rank(M) = 3 − 2 = 1."
+          },
+          {
+            "id": "M5Q3E6",
+            "question": "If N(M) = S₃ = z-axis, then M · (0,0,1)ᵀ must equal:",
+            "options": [
+              "(0,0,1)ᵀ",
+              "(1,1,1)ᵀ",
+              "(0,0,0)ᵀ",
+              "(1,0,0)ᵀ"
+            ],
+            "correct_option": "(0,0,0)ᵀ",
+            "explanation": "If (0,0,1) is in the null space, then M maps it to the zero vector."
+          },
+          {
+            "id": "M5Q3E7",
+            "question": "M · (0,0,1)ᵀ = 0 means the third column of M is:",
+            "options": [
+              "(1,0,0)ᵀ",
+              "(0,1,0)ᵀ",
+              "(0,0,1)ᵀ",
+              "(0,0,0)ᵀ"
+            ],
+            "correct_option": "(0,0,0)ᵀ",
+            "explanation": "M times the third standard basis vector gives the third column, which must be zero."
+          },
+          {
+            "id": "M5Q3E8",
+            "question": "If C(M) = xz-plane, the columns of M should span:",
+            "options": [
+              "the xy-plane",
+              "the xz-plane",
+              "the yz-plane",
+              "the z-axis"
+            ],
+            "correct_option": "the xz-plane",
+            "explanation": "The column space is exactly the xz-plane = span{(1,0,0), (0,0,1)}."
+          },
+          {
+            "id": "M5Q3E9",
+            "question": "A 3×3 matrix with rank 2 has how many linearly independent columns?",
+            "options": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ],
+            "correct_option": "2",
+            "explanation": "The rank equals the number of linearly independent columns."
+          },
+          {
+            "id": "M5Q3E10",
+            "question": "Which of the following is a valid choice for m and n when N(M) = S₃ (1D) and C(M) = S₂ (2D)?",
+            "options": [
+              "m = 2, n = 2",
+              "m = 3, n = 3",
+              "m = 1, n = 4",
+              "m = 4, n = 2"
+            ],
+            "correct_option": "m = 3, n = 3",
+            "explanation": "We need m ≥ 2 (for C(M) to be 2D) and n ≥ 3 (for N(M) to be 1D). m = n = 3 works."
+          }
+        ],
+        "medium": [
+          {
+            "id": "M5Q3M1",
+            "question": "Take S₁ = xy-plane, S₂ = xz-plane, S₃ = z-axis. N(M) = z-axis means M(0,0,1)ᵀ = ?",
+            "options": [
+              "(1,0,0)ᵀ",
+              "(0,1,0)ᵀ",
+              "(0,0,1)ᵀ",
+              "(0,0,0)ᵀ"
+            ],
+            "correct_option": "(0,0,0)ᵀ",
+            "explanation": "(0,0,1) is in the null space, so M maps it to zero."
+          },
+          {
+            "id": "M5Q3M2",
+            "question": "If the third column of M is (0,0,0)ᵀ, then M has the form:",
+            "options": [
+              "[[a,b,0],[c,d,0],[e,f,0]]",
+              "[[a,b,c],[d,e,f],[0,0,0]]",
+              "[[0,0,0],[a,b,c],[d,e,f]]",
+              "[[a,0,0],[0,b,0],[0,0,c]]"
+            ],
+            "correct_option": "[[a,b,0],[c,d,0],[e,f,0]]",
+            "explanation": "The third column being zero means the third entry in each row is zero."
+          },
+          {
+            "id": "M5Q3M3",
+            "question": "C(M) = xz-plane means the columns of M should span:",
+            "options": [
+              "span{(1,0,0), (0,1,0)}",
+              "span{(1,0,0), (0,0,1)}",
+              "span{(0,1,0), (0,0,1)}",
+              "span{(1,1,0), (0,0,1)}"
+            ],
+            "correct_option": "span{(1,0,0), (0,0,1)}",
+            "explanation": "The xz-plane is spanned by (1,0,0) and (0,0,1)."
+          },
+          {
+            "id": "M5Q3M4",
+            "question": "If the first column is (1,0,0)ᵀ and the second is (0,0,1)ᵀ, the matrix M is:",
+            "options": [
+              "[[1,0,0],[0,0,0],[0,1,0]]",
+              "[[0,0,1],[0,0,0],[1,0,0]]",
+              "[[1,0,0],[0,1,0],[0,0,0]]",
+              "[[0,1,0],[0,0,0],[1,0,0]]"
+            ],
+            "correct_option": "[[1,0,0],[0,0,0],[0,1,0]]",
+            "explanation": "First column (1,0,0)ᵀ, second column (0,0,1)ᵀ, third column (0,0,0)ᵀ."
+          },
+          {
+            "id": "M5Q3M5",
+            "question": "For M = [[1,0,0],[0,0,0],[0,1,0]], compute M·(x,y,z)ᵀ = ?",
+            "options": [
+              "(x,y,0)ᵀ",
+              "(x,0,y)ᵀ",
+              "(0,x,y)ᵀ",
+              "(y,0,x)ᵀ"
+            ],
+            "correct_option": "(x,0,y)ᵀ",
+            "explanation": "M·(x,y,z)ᵀ = (1·x+0·y+0·z, 0·x+0·y+0·z, 0·x+1·y+0·z)ᵀ = (x, 0, y)ᵀ."
+          },
+          {
+            "id": "M5Q3M6",
+            "question": "M·(x,y,z)ᵀ = (x,0,y)ᵀ = 0 requires:",
+            "options": [
+              "x = 0 only",
+              "y = 0 only",
+              "x = 0 and y = 0",
+              "z = 0"
+            ],
+            "correct_option": "x = 0 and y = 0",
+            "explanation": "(x,0,y) = (0,0,0) requires x = 0 and y = 0, leaving z free."
+          },
+          {
+            "id": "M5Q3M7",
+            "question": "With x = 0 and y = 0, the null space vectors are of the form:",
+            "options": [
+              "(x,0,0)",
+              "(0,y,0)",
+              "(0,0,z)",
+              "(x,y,0)"
+            ],
+            "correct_option": "(0,0,z)",
+            "explanation": "The null space is {(0,0,z) : z ∈ ℝ} = z-axis = S₃."
+          },
+          {
+            "id": "M5Q3M8",
+            "question": "The columns of M = [[1,0,0],[0,0,0],[0,1,0]] are:",
+            "options": [
+              "(1,0,0), (0,1,0), (0,0,0)",
+              "(1,0,0), (0,0,1), (0,0,0)",
+              "(0,0,1), (1,0,0), (0,0,0)",
+              "(1,1,0), (0,0,1), (0,0,0)"
+            ],
+            "correct_option": "(1,0,0), (0,0,1), (0,0,0)",
+            "explanation": "Reading columns: col₁ = (1,0,0)ᵀ, col₂ = (0,0,1)ᵀ, col₃ = (0,0,0)ᵀ."
+          },
+          {
+            "id": "M5Q3M9",
+            "question": "The column space C(M) = span{(1,0,0), (0,0,1)} = ?",
+            "options": [
+              "xy-plane",
+              "xz-plane",
+              "yz-plane",
+              "z-axis"
+            ],
+            "correct_option": "xz-plane",
+            "explanation": "(1,0,0) and (0,0,1) span the xz-plane."
+          },
+          {
+            "id": "M5Q3M10",
+            "question": "So M = [[1,0,0],[0,0,0],[0,1,0]] satisfies:",
+            "options": [
+              "N(M) = z-axis, C(M) = xz-plane",
+              "N(M) = x-axis, C(M) = xy-plane",
+              "N(M) = y-axis, C(M) = yz-plane",
+              "N(M) = origin, C(M) = ℝ³"
+            ],
+            "correct_option": "N(M) = z-axis, C(M) = xz-plane",
+            "explanation": "We verified N(M) = z-axis and C(M) = xz-plane."
+          }
+        ],
+        "hard": [
+          {
+            "id": "M5Q3H1",
+            "question": "The matrix M = [[1,0,0],[0,0,0],[0,1,0]] has rank:",
+            "options": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ],
+            "correct_option": "2",
+            "explanation": "Two linearly independent columns: (1,0,0) and (0,0,1)."
+          },
+          {
+            "id": "M5Q3H2",
+            "question": "If we want N(M) = x-axis instead, the first column of M must be:",
+            "options": [
+              "(1,0,0)ᵀ",
+              "(0,1,0)ᵀ",
+              "(0,0,1)ᵀ",
+              "(0,0,0)ᵀ"
+            ],
+            "correct_option": "(0,0,0)ᵀ",
+            "explanation": "M·(1,0,0)ᵀ = first column = 0 for (1,0,0) to be in the null space."
+          },
+          {
+            "id": "M5Q3H3",
+            "question": "If C(M) = yz-plane and N(M) = x-axis, one valid M is:",
+            "options": [
+              "[[0,0,0],[0,1,0],[0,0,1]]",
+              "[[1,0,0],[0,1,0],[0,0,0]]",
+              "[[0,1,0],[0,0,1],[0,0,0]]",
+              "[[1,0,0],[0,0,0],[0,0,1]]"
+            ],
+            "correct_option": "[[0,0,0],[0,1,0],[0,0,1]]",
+            "explanation": "First column is zero (N(M) contains x-axis), remaining columns span yz-plane."
+          },
+          {
+            "id": "M5Q3H4",
+            "question": "For a 4×5 matrix M with N(M) of dimension 2 and C(M) of dimension 3, rank(M) = ?",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "correct_option": "3",
+            "explanation": "rank(M) = dim(C(M)) = 3, and by rank-nullity: 3 + 2 = 5 = n."
+          },
+          {
+            "id": "M5Q3H5",
+            "question": "The construction of M requires simultaneously controlling:",
+            "options": [
+              "eigenvalues and eigenvectors",
+              "null space and column space",
+              "trace and determinant",
+              "row space and left null space"
+            ],
+            "correct_option": "null space and column space",
+            "explanation": "We design M so that N(M) = S₃ and C(M) = S₂."
+          },
+          {
+            "id": "M5Q3H6",
+            "question": "If we wanted M to be square (3×3) with N(M) = S₃ and C(M) = S₂, what is det(M)?",
+            "options": [
+              "1",
+              "−1",
+              "nonzero",
+              "0"
+            ],
+            "correct_option": "0",
+            "explanation": "rank(M) = 2 < 3, so M is singular and det(M) = 0."
+          },
+          {
+            "id": "M5Q3H7",
+            "question": "The third column of M being zero is necessary because:",
+            "options": [
+              "C(M) is 1D",
+              "(0,0,1) must be in the null space",
+              "M must be singular",
+              "S₂ is the xy-plane"
+            ],
+            "correct_option": "(0,0,1) must be in the null space",
+            "explanation": "N(M) = span{(0,0,1)} requires M·e₃ = 0, making the third column zero."
+          },
+          {
+            "id": "M5Q3H8",
+            "question": "If S₁ = span{(1,1,0),(0,1,1)}, its normal S₃ = S₁⊥ is spanned by:",
+            "options": [
+              "(1,1,0)",
+              "(1,−1,1)",
+              "(0,1,1)",
+              "(1,0,−1)"
+            ],
+            "correct_option": "(1,−1,1)",
+            "explanation": "(1,−1,1) · (1,1,0) = 0 and (1,−1,1) · (0,1,1) = 0, so it is perpendicular to both."
+          },
+          {
+            "id": "M5Q3H9",
+            "question": "Constructing M with prescribed null and column spaces is possible because:",
+            "options": [
+              "rank-nullity constrains dimensions",
+              "all matrices have these properties",
+              "subspaces are always orthogonal",
+              "M must be invertible"
+            ],
+            "correct_option": "rank-nullity constrains dimensions",
+            "explanation": "rank-nullity ensures dim(N(M)) + dim(C(M)) = n, which must match the prescribed subspaces."
+          },
+          {
+            "id": "M5Q3H10",
+            "question": "Can there exist two different 3×3 matrices M₁ and M₂ both with N(M) = z-axis and C(M) = xz-plane?",
+            "options": [
+              "No, M is unique",
+              "Yes, many such matrices exist",
+              "Only if det(M) = 0",
+              "Only if M is symmetric"
+            ],
+            "correct_option": "Yes, many such matrices exist",
+            "explanation": "The constraints fix the column space and null space, but the specific matrix entries are not uniquely determined."
+          }
+        ],
+        "real_life_application": [
+          {
+            "id": "M5Q3R1",
+            "question": "In image processing, designing a filter with a specific null band and pass band is analogous to:",
+            "options": [
+              "finding eigenvalues",
+              "constructing M with prescribed N(M) and C(M)",
+              "computing a determinant",
+              "finding the trace"
+            ],
+            "correct_option": "constructing M with prescribed N(M) and C(M)",
+            "explanation": "The null band corresponds to N(M) and the pass band to C(M)."
+          },
+          {
+            "id": "M5Q3R2",
+            "question": "In control theory, the controllable and uncontrollable subspaces correspond to:",
+            "options": [
+              "the null space and column space",
+              "the eigenvalues and eigenvectors",
+              "the trace and determinant",
+              "the row space and left null space"
+            ],
+            "correct_option": "the null space and column space",
+            "explanation": "System design involves prescribing what the system can and cannot reach, analogous to N(M) and C(M)."
+          },
+          {
+            "id": "M5Q3R3",
+            "question": "A 3×3 matrix with rank 2 maps ℝ³ onto a:",
+            "options": [
+              "point",
+              "line",
+              "plane",
+              "3D space"
+            ],
+            "correct_option": "plane",
+            "explanation": "rank(M) = 2 means C(M) is a 2D plane in ℝ³."
+          },
+          {
+            "id": "M5Q3R4",
+            "question": "In signal processing, the null space of a filter matrix represents:",
+            "options": [
+              "the amplified frequencies",
+              "the suppressed or blocked frequencies",
+              "the maximum gain",
+              "the phase shift"
+            ],
+            "correct_option": "the suppressed or blocked frequencies",
+            "explanation": "Signals in the null space are mapped to zero, meaning those frequency components are blocked."
+          },
+          {
+            "id": "M5Q3R5",
+            "question": "Constructing M with N(M) = x-axis and C(M) = yz-plane requires M's first column to be:",
+            "options": [
+              "(1,0,0)ᵀ",
+              "(0,1,0)ᵀ",
+              "(0,0,1)ᵀ",
+              "(0,0,0)ᵀ"
+            ],
+            "correct_option": "(0,0,0)ᵀ",
+            "explanation": "For x-axis to be in N(M), M·(1,0,0)ᵀ = 0, so the first column must be zero."
+          }
+        ]
+      },
+      "real_life_application": [
+        {
+          "id": "M5Q3R1",
+          "question": "Camera projection to a wall has which null-space property?",
+          "options": [
+            "Whole space",
+            "Empty only",
+            "Random axis",
+            "Vertical direction"
+          ],
+          "correct_option": "Vertical direction",
+          "explanation": "Projection to xz-plane kills the y-direction, so the y-axis is in N(M)."
+        },
+        {
+          "id": "M5Q3R2",
+          "question": "To remove only the z-component, which column is chosen?",
+          "options": [
+            "Third zero",
+            "First basis",
+            "All identity",
+            "Random entries"
+          ],
+          "correct_option": "Third zero",
+          "explanation": "Setting column 3 to zero forces M·(0,0,1)=0, killing that direction."
+        },
+        {
+          "id": "M5Q3R3",
+          "question": "A matrix whose column space is xz-plane has columns spanning which set?",
+          "options": [
+            "{(0,1,0),(1,0,0)}",
+            "{(1,0,0),(0,0,1)}",
+            "{(1,1,1),(0,0,1)}",
+            "{(0,0,1),(0,1,0)}"
+          ],
+          "correct_option": "{(1,0,0),(0,0,1)}",
+          "explanation": "Linear combinations of (1,0,0) and (0,0,1) span exactly the xz-plane."
+        },
+        {
+          "id": "M5Q3R4",
+          "question": "Rank of a 3x3 matrix with N(M)=z-axis and C(M)=xz-plane is what?",
+          "options": [
+            "Three",
+            "One",
+            "Two",
+            "Zero"
+          ],
+          "correct_option": "Two",
+          "explanation": "rank(M) = dim(C(M)) = 2, since the xz-plane is 2-dimensional."
+        },
+        {
+          "id": "M5Q3R5",
+          "question": "An image filter erasing the vertical-shadow direction uses null space equal to?",
+          "options": [
+            "Image diagonal",
+            "Image surface",
+            "Pixel origin",
+            "Vertical line"
+          ],
+          "correct_option": "Vertical line",
+          "explanation": "M·(0,0,1)=0 puts (0,0,1), the vertical line, inside N(M)."
+        }
+      ]
+    },
+    {
+      "topicId": "Q5.4",
+      "title": "What does S₁ and S₄ represent?",
+      "topic": "Connecting subspaces; four fundamental subspace relations.",
+      "mcqs": {
+        "easy": [
+          {
+            "id": "M5Q4E1",
+            "question": "S₁ is a 2D plane in ℝ³ that represents the:",
+            "options": [
+              "column space",
+              "row space",
+              "null space",
+              "left null space"
+            ],
+            "correct_option": "row space",
+            "explanation": "S₁ = R(M) is the row space of matrix M."
+          },
+          {
+            "id": "M5Q4E2",
+            "question": "S₃ = S₁⊥ is the:",
+            "options": [
+              "column space",
+              "row space",
+              "null space",
+              "left null space"
+            ],
+            "correct_option": "null space",
+            "explanation": "The orthogonal complement of the row space is the null space: R(M)⊥ = N(M)."
+          },
+          {
+            "id": "M5Q4E3",
+            "question": "S₂ represents the:",
+            "options": [
+              "row space",
+              "null space",
+              "column space",
+              "left null space"
+            ],
+            "correct_option": "column space",
+            "explanation": "S₂ = C(M) is the column space of M."
+          },
+          {
+            "id": "M5Q4E4",
+            "question": "S₄ = S₂⊥ is the:",
+            "options": [
+              "row space",
+              "null space",
+              "column space",
+              "left null space"
+            ],
+            "correct_option": "left null space",
+            "explanation": "The orthogonal complement of the column space is the left null space: C(M)⊥ = N(Mᵀ)."
+          },
+          {
+            "id": "M5Q4E5",
+            "question": "S₁ is the space of all linear combinations of:",
+            "options": [
+              "columns of M",
+              "rows of M",
+              "eigenvalues of M",
+              "entries of M"
+            ],
+            "correct_option": "rows of M",
+            "explanation": "The row space R(M) is spanned by the rows of M."
+          },
+          {
+            "id": "M5Q4E6",
+            "question": "S₂ is the space of all linear combinations of:",
+            "options": [
+              "rows of M",
+              "columns of M",
+              "diagonal entries of M",
+              "off-diagonal entries of M"
+            ],
+            "correct_option": "columns of M",
+            "explanation": "The column space C(M) is spanned by the columns of M."
+          },
+          {
+            "id": "M5Q4E7",
+            "question": "S₃ = N(M) is the set of vectors x such that:",
+            "options": [
+              "Mx = x",
+              "Mx = 0",
+              "Mᵀx = 0",
+              "xᵀM = 0"
+            ],
+            "correct_option": "Mx = 0",
+            "explanation": "The null space consists of all vectors x satisfying Mx = 0."
+          },
+          {
+            "id": "M5Q4E8",
+            "question": "S₄ = N(Mᵀ) is the set of vectors y such that:",
+            "options": [
+              "My = 0",
+              "Mᵀy = 0",
+              "yᵀM = 0",
+              "both Mᵀy = 0 and yᵀM = 0"
+            ],
+            "correct_option": "yᵀM = 0",
+            "explanation": "The left null space: yᵀM = 0 is equivalent to Mᵀy = 0. Both formulations are valid."
+          },
+          {
+            "id": "M5Q4E9",
+            "question": "S₁ ⊥ S₃ means:",
+            "options": [
+              "row space is perpendicular to null space",
+              "column space is perpendicular to null space",
+              "S₁ and S₃ are parallel",
+              "S₁ and S₃ are equal"
+            ],
+            "correct_option": "row space is perpendicular to null space",
+            "explanation": "Every vector in R(M) is perpendicular to every vector in N(M)."
+          },
+          {
+            "id": "M5Q4E10",
+            "question": "S₂ ⊥ S₄ means:",
+            "options": [
+              "row space ⊥ null space",
+              "column space ⊥ left null space",
+              "S₂ and S₄ are parallel",
+              "S₂ and S₄ are equal"
+            ],
+            "correct_option": "column space ⊥ left null space",
+            "explanation": "Every vector in C(M) is perpendicular to every vector in N(Mᵀ)."
+          }
+        ],
+        "medium": [
+          {
+            "id": "M5Q4M1",
+            "question": "S₁ = R(M) means S₁ is spanned by:",
+            "options": [
+              "the columns of M",
+              "the rows of M",
+              "the eigenvalues of M",
+              "the diagonal of M"
+            ],
+            "correct_option": "the rows of M",
+            "explanation": "The row space is the span of the row vectors of M."
+          },
+          {
+            "id": "M5Q4M2",
+            "question": "S₂ = C(M) means S₂ is spanned by:",
+            "options": [
+              "the rows of M",
+              "the columns of M",
+              "the null vectors of M",
+              "the eigenvectors of M"
+            ],
+            "correct_option": "the columns of M",
+            "explanation": "The column space is the span of the column vectors of M."
+          },
+          {
+            "id": "M5Q4M3",
+            "question": "S₃ = N(M) = R(M)⊥ means the null space is the _____ of the row space.",
+            "options": [
+              "parallel space",
+              "orthogonal complement",
+              "direct sum",
+              "intersection"
+            ],
+            "correct_option": "orthogonal complement",
+            "explanation": "N(M) = R(M)⊥ by the fundamental theorem of linear algebra."
+          },
+          {
+            "id": "M5Q4M4",
+            "question": "S₄ = N(Mᵀ) = C(M)⊥ means the left null space is the _____ of the column space.",
+            "options": [
+              "span",
+              "orthogonal complement",
+              "intersection",
+              "quotient"
+            ],
+            "correct_option": "orthogonal complement",
+            "explanation": "N(Mᵀ) = C(M)⊥ by the fundamental theorem of linear algebra."
+          },
+          {
+            "id": "M5Q4M5",
+            "question": "The null space S₃ is described as:",
+            "options": [
+              "vectors y with yᵀM = 0",
+              "vectors x with Mx = 0",
+              "vectors with Mx = x",
+              "columns of M"
+            ],
+            "correct_option": "vectors x with Mx = 0",
+            "explanation": "N(M) = {x : Mx = 0}."
+          },
+          {
+            "id": "M5Q4M6",
+            "question": "The left null space S₄ is described as:",
+            "options": [
+              "vectors x with Mx = 0",
+              "vectors y with Mᵀy = 0",
+              "columns of M",
+              "rows of M"
+            ],
+            "correct_option": "vectors y with Mᵀy = 0",
+            "explanation": "N(Mᵀ) = {y : Mᵀy = 0}, equivalently {y : yᵀM = 0}."
+          },
+          {
+            "id": "M5Q4M7",
+            "question": "The relation S₁ ⊥ S₃ means every row of M is perpendicular to:",
+            "options": [
+              "every column of M",
+              "every null space vector",
+              "every left null space vector",
+              "every eigenvector"
+            ],
+            "correct_option": "every null space vector",
+            "explanation": "If r is a row of M and x ∈ N(M), then rx = (Mx)ᵢ = 0."
+          },
+          {
+            "id": "M5Q4M8",
+            "question": "The relation S₂ ⊥ S₄ means every column of M is perpendicular to:",
+            "options": [
+              "every row of M",
+              "every null space vector",
+              "every left null space vector",
+              "every eigenvector"
+            ],
+            "correct_option": "every left null space vector",
+            "explanation": "If c is a column of M and y ∈ N(Mᵀ), then cᵀy = 0."
+          },
+          {
+            "id": "M5Q4M9",
+            "question": "S₁ (row space) and S₃ (null space) are both subspaces of:",
+            "options": [
+              "ℝᵐ",
+              "ℝⁿ",
+              "ℝᵐ⁺ⁿ",
+              "the space of m×n matrices"
+            ],
+            "correct_option": "ℝⁿ",
+            "explanation": "For an m×n matrix, both R(M) and N(M) are subspaces of ℝⁿ."
+          },
+          {
+            "id": "M5Q4M10",
+            "question": "S₂ (column space) and S₄ (left null space) are both subspaces of:",
+            "options": [
+              "ℝⁿ",
+              "ℝᵐ",
+              "ℝᵐ⁺ⁿ",
+              "the space of n×n matrices"
+            ],
+            "correct_option": "ℝᵐ",
+            "explanation": "For an m×n matrix, both C(M) and N(Mᵀ) are subspaces of ℝᵐ."
+          }
+        ],
+        "hard": [
+          {
+            "id": "M5Q4H1",
+            "question": "For M being m×n, S₁ and S₃ are subspaces of ℝⁿ, while S₂ and S₄ are subspaces of:",
+            "options": [
+              "ℝⁿ",
+              "ℝᵐ",
+              "ℝᵐ⁺ⁿ",
+              "ℝᵐˣⁿ"
+            ],
+            "correct_option": "ℝᵐ",
+            "explanation": "R(M), N(M) ⊂ ℝⁿ and C(M), N(Mᵀ) ⊂ ℝᵐ."
+          },
+          {
+            "id": "M5Q4H2",
+            "question": "dim(S₁) = dim(S₂) = rank(M) and dim(S₃) = dim(S₄) = ?",
+            "options": [
+              "rank(M)",
+              "m − rank(M)",
+              "n − rank(M)",
+              "m + n − rank(M)"
+            ],
+            "correct_option": "n − rank(M)",
+            "explanation": "dim(N(M)) = n − rank(M) and dim(N(Mᵀ)) = m − rank(M). For square matrices both equal n − rank(M)."
+          },
+          {
+            "id": "M5Q4H3",
+            "question": "S₁ ⊥ S₃ and S₁ ⊕ S₃ = ℝⁿ is known as:",
+            "options": [
+              "the spectral theorem",
+              "the fundamental theorem of linear algebra",
+              "the rank-nullity theorem",
+              "the Cayley-Hamilton theorem"
+            ],
+            "correct_option": "the fundamental theorem of linear algebra",
+            "explanation": "The fundamental theorem states that R(M) ⊕ N(M) = ℝⁿ."
+          },
+          {
+            "id": "M5Q4H4",
+            "question": "S₂ ⊥ S₄ and S₂ ⊕ S₄ = ℝᵐ is the other half of:",
+            "options": [
+              "the spectral theorem",
+              "the fundamental theorem of linear algebra",
+              "Sylvester's law",
+              "the Cauchy-Schwarz inequality"
+            ],
+            "correct_option": "the fundamental theorem of linear algebra",
+            "explanation": "C(M) ⊥ N(Mᵀ) and C(M) ⊕ N(Mᵀ) = ℝᵐ is the second part of the fundamental theorem."
+          },
+          {
+            "id": "M5Q4H5",
+            "question": "For M = [[1,0,0],[0,0,0],[0,1,0]], R(M) = span{(1,0,0),(0,1,0)} = ?",
+            "options": [
+              "xz-plane",
+              "yz-plane",
+              "xy-plane",
+              "z-axis"
+            ],
+            "correct_option": "xy-plane",
+            "explanation": "The rows of M are (1,0,0), (0,0,0), (0,1,0), spanning the xy-plane."
+          },
+          {
+            "id": "M5Q4H6",
+            "question": "For the same M, C(M) = span{(1,0,0),(0,0,1)} = ?",
+            "options": [
+              "xy-plane",
+              "xz-plane",
+              "yz-plane",
+              "y-axis"
+            ],
+            "correct_option": "xz-plane",
+            "explanation": "The columns of M are (1,0,0)ᵀ, (0,0,1)ᵀ, (0,0,0)ᵀ, spanning the xz-plane."
+          },
+          {
+            "id": "M5Q4H7",
+            "question": "For the same M, N(M) = span{(0,0,1)} = ?",
+            "options": [
+              "x-axis",
+              "y-axis",
+              "z-axis",
+              "xy-plane"
+            ],
+            "correct_option": "z-axis",
+            "explanation": "M·(0,0,1)ᵀ = 0 and N(M) is 1D, so N(M) = z-axis."
+          },
+          {
+            "id": "M5Q4H8",
+            "question": "For the same M, N(Mᵀ) = span{(0,1,0)} = ?",
+            "options": [
+              "x-axis",
+              "y-axis",
+              "z-axis",
+              "xz-plane"
+            ],
+            "correct_option": "y-axis",
+            "explanation": "Mᵀ·(0,1,0)ᵀ = 0, so N(Mᵀ) = y-axis."
+          },
+          {
+            "id": "M5Q4H9",
+            "question": "In the four fundamental subspaces, the sum of dimensions of R(M) and N(M) equals:",
+            "options": [
+              "m",
+              "n",
+              "m + n",
+              "rank(M)"
+            ],
+            "correct_option": "n",
+            "explanation": "dim(R(M)) + dim(N(M)) = rank(M) + (n − rank(M)) = n."
+          },
+          {
+            "id": "M5Q4H10",
+            "question": "The four fundamental subspaces of a 3×3 rank-2 matrix consist of:",
+            "options": [
+              "four 2D subspaces",
+              "two 2D and two 1D subspaces",
+              "four 1D subspaces",
+              "one 2D and three 1D subspaces"
+            ],
+            "correct_option": "two 2D and two 1D subspaces",
+            "explanation": "R(M) and C(M) are 2D (rank 2), while N(M) and N(Mᵀ) are 1D (3−2=1)."
+          }
+        ],
+        "real_life_application": [
+          {
+            "id": "M5Q4R1",
+            "question": "The four fundamental subspaces of M = [[1,0,0],[0,0,0],[0,1,0]] are: R = xy-plane, C = xz-plane, N = z-axis, N(Mᵀ) = y-axis. Their dimensions sum to:",
+            "options": [
+              "3",
+              "6",
+              "9",
+              "12"
+            ],
+            "correct_option": "6",
+            "explanation": "dim(R) + dim(C) + dim(N) + dim(N(Mᵀ)) = 2 + 2 + 1 + 1 = 6."
+          },
+          {
+            "id": "M5Q4R2",
+            "question": "Verifying R ⊥ N for M = [[1,0,0],[0,0,0],[0,1,0]]: every vector in xy-plane is perpendicular to:",
+            "options": [
+              "the x-axis",
+              "the y-axis",
+              "the z-axis",
+              "the origin"
+            ],
+            "correct_option": "the z-axis",
+            "explanation": "The z-axis = N(M) is orthogonal to the xy-plane = R(M)."
+          },
+          {
+            "id": "M5Q4R3",
+            "question": "Verifying C ⊥ N(Mᵀ): every vector in xz-plane is perpendicular to:",
+            "options": [
+              "the x-axis",
+              "the y-axis",
+              "the z-axis",
+              "the origin"
+            ],
+            "correct_option": "the y-axis",
+            "explanation": "The y-axis = N(Mᵀ) is orthogonal to the xz-plane = C(M)."
+          },
+          {
+            "id": "M5Q4R4",
+            "question": "dim(R) + dim(N) = 2 + 1 = 3 = dim(ℝ³) confirms:",
+            "options": [
+              "R ⊕ N = ℝ³",
+              "R ∩ N = ℝ³",
+              "R = N",
+              "R + N is 2D"
+            ],
+            "correct_option": "R ⊕ N = ℝ³",
+            "explanation": "Since R ⊥ N and their dimensions sum to 3, they form a direct sum equal to ℝ³."
+          },
+          {
+            "id": "M5Q4R5",
+            "question": "The relation C + N(Mᵀ) = ℝᵐ means the column space and left null space together:",
+            "options": [
+              "are orthogonal",
+              "span the entire codomain",
+              "have trivial intersection",
+              "have the same dimension"
+            ],
+            "correct_option": "span the entire codomain",
+            "explanation": "C(M) ⊕ N(Mᵀ) = ℝᵐ means every vector in ℝᵐ can be uniquely decomposed."
+          }
+        ]
+      },
+      "real_life_application": [
+        {
+          "id": "M5Q4R1",
+          "question": "In a 3D scanner, the row space of the projection matrix is which surface?",
+          "options": [
+            "Scanned surface",
+            "Light source",
+            "Hidden face",
+            "Shadow only"
+          ],
+          "correct_option": "Scanned surface",
+          "explanation": "Row space is the plane onto which the 3D scene gets projected."
+        },
+        {
+          "id": "M5Q4R2",
+          "question": "The left-null space N(Mᵀ) of a transformation represents which direction?",
+          "options": [
+            "Completely reachable",
+            "Unreachable ray",
+            "Every mapped point",
+            "Fixed origin only"
+          ],
+          "correct_option": "Unreachable ray",
+          "explanation": "N(Mᵀ) consists of y with yᵀM=0 — directions the map never produces."
+        },
+        {
+          "id": "M5Q4R3",
+          "question": "For a navigation map, perpendicular pairing satisfies which relation?",
+          "options": [
+            "R = N = ℝⁿ",
+            "R ∩ N = whole",
+            "R ⊕ N = ℝⁿ",
+            "R × N empty"
+          ],
+          "correct_option": "R ⊕ N = ℝⁿ",
+          "explanation": "Row space and null space are orthogonal complements summing to ℝⁿ."
+        },
+        {
+          "id": "M5Q4R4",
+          "question": "A 3x3 matrix has four canonical subspaces; what is the sum of their dimensions?",
+          "options": [
+            "Five",
+            "Four",
+            "Three",
+            "Six"
+          ],
+          "correct_option": "Six",
+          "explanation": "dim(R)+dim(N)+dim(C)+dim(N(Mᵀ)) = 2+1+2+1 = 6, equal to m+n."
+        },
+        {
+          "id": "M5Q4R5",
+          "question": "An audio equalizer's four subspaces clarify which band pair?",
+          "options": [
+            "Pass and stop",
+            "Left and right",
+            "Loud and soft",
+            "Speed and pitch"
+          ],
+          "correct_option": "Pass and stop",
+          "explanation": "Column space ↔ pass band; null space ↔ stop band for the filter."
+        }
+      ]
+    },
+    {
+      "topicId": "Q5.5",
+      "title": "Bijection from S₁ to S₂",
+      "topic": "The 2D subspaces of ℝ³ are all isomorphic to ℝ², and there are bijections between them.",
+      "mcqs": {
+        "easy": [
+          {
+            "id": "M5Q5E1",
+            "question": "S₁ is a 2D plane through origin in ℝ³. Its dimension is:",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "correct_option": "2",
+            "explanation": "S₁ is a 2-dimensional subspace."
+          },
+          {
+            "id": "M5Q5E2",
+            "question": "S₂ is another 2D plane through origin in ℝ³. Its dimension is:",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "correct_option": "2",
+            "explanation": "S₂ is also a 2-dimensional subspace."
+          },
+          {
+            "id": "M5Q5E3",
+            "question": "As vector spaces, both S₁ and S₂ are isomorphic to:",
+            "options": [
+              "ℝ¹",
+              "ℝ²",
+              "ℝ³",
+              "ℝ⁴"
+            ],
+            "correct_option": "ℝ²",
+            "explanation": "Any 2-dimensional vector space over ℝ is isomorphic to ℝ²."
+          },
+          {
+            "id": "M5Q5E4",
+            "question": "A bijection between S₁ and S₂ is a map that is:",
+            "options": [
+              "linear only",
+              "one-to-one only",
+              "onto only",
+              "one-to-one and onto"
+            ],
+            "correct_option": "one-to-one and onto",
+            "explanation": "A bijection is both injective (one-to-one) and surjective (onto)."
+          },
+          {
+            "id": "M5Q5E5",
+            "question": "To define a bijection f: S₁ → S₂, we can:",
+            "options": [
+              "map any vector to zero",
+              "map a basis of S₁ to a basis of S₂",
+              "map all vectors to (1,0,0)",
+              "ignore the basis entirely"
+            ],
+            "correct_option": "map a basis of S₁ to a basis of S₂",
+            "explanation": "Mapping basis to basis and extending linearly gives a well-defined bijection."
+          },
+          {
+            "id": "M5Q5E6",
+            "question": "If (v₁, v₂) is a basis of S₁ and (w₁, w₂) is a basis of S₂, define f(αv₁ + βv₂) = ?",
+            "options": [
+              "αv₁ + βv₂",
+              "αw₁ + βw₂",
+              "αw₂ + βw₁",
+              "w₁ + w₂"
+            ],
+            "correct_option": "αw₁ + βw₂",
+            "explanation": "The bijection maps the same linear combination of basis vectors from S₁ to S₂."
+          },
+          {
+            "id": "M5Q5E7",
+            "question": "The map f defined by mapping basis to basis is:",
+            "options": [
+              "always nonlinear",
+              "linear, one-to-one, and onto",
+              "only one-to-one",
+              "only onto"
+            ],
+            "correct_option": "linear, one-to-one, and onto",
+            "explanation": "This is the standard construction of a linear isomorphism."
+          },
+          {
+            "id": "M5Q5E8",
+            "question": "The existence of f means S₁ and S₂ have:",
+            "options": [
+              "different dimensions",
+              "the same structure as vector spaces",
+              "the same basis",
+              "the same normal vector"
+            ],
+            "correct_option": "the same structure as vector spaces",
+            "explanation": "An isomorphism means S₁ and S₂ are structurally identical as vector spaces."
+          },
+          {
+            "id": "M5Q5E9",
+            "question": "Any two 2D planes through origin in ℝ³ are:",
+            "options": [
+              "not comparable",
+              "in bijection",
+              "orthogonal",
+              "parallel"
+            ],
+            "correct_option": "in bijection",
+            "explanation": "Since both are 2D vector spaces over ℝ, there exists a linear bijection between them."
+          },
+          {
+            "id": "M5Q5E10",
+            "question": "A linear bijection preserves:",
+            "options": [
+              "distances only",
+              "angles only",
+              "linear combinations",
+              "the origin only"
+            ],
+            "correct_option": "linear combinations",
+            "explanation": "Linearity means f(αu + βv) = αf(u) + βf(v), preserving all linear structure."
+          }
+        ],
+        "medium": [
+          {
+            "id": "M5Q5M1",
+            "question": "The bijection between S₁ and S₂ can be specified by:",
+            "options": [
+              "mapping any vector to zero",
+              "mapping basis to basis",
+              "choosing random vectors",
+              "using the identity matrix"
+            ],
+            "correct_option": "mapping basis to basis",
+            "explanation": "A linear map is fully determined by its action on a basis."
+          },
+          {
+            "id": "M5Q5M2",
+            "question": "If S₁ = xy-plane and S₂ = xz-plane, with (1,0,0)→(1,0,0) and (0,1,0)→(0,0,1), then f(a,b,0) = ?",
+            "options": [
+              "(a,b,0)",
+              "(a,0,b)",
+              "(0,a,b)",
+              "(b,0,a)"
+            ],
+            "correct_option": "(a,0,b)",
+            "explanation": "f(a,b,0) = a·(1,0,0) + b·(0,0,1) = (a,0,b)."
+          },
+          {
+            "id": "M5Q5M3",
+            "question": "For f(a,b,0) = (a,0,b), we have f(1,0,0) = ?",
+            "options": [
+              "(0,0,1)",
+              "(1,0,0)",
+              "(0,1,0)",
+              "(1,1,0)"
+            ],
+            "correct_option": "(1,0,0)",
+            "explanation": "f(1,0,0) = 1·(1,0,0) + 0·(0,0,1) = (1,0,0)."
+          },
+          {
+            "id": "M5Q5M4",
+            "question": "For f(a,b,0) = (a,0,b), we have f(0,1,0) = ?",
+            "options": [
+              "(1,0,0)",
+              "(0,1,0)",
+              "(0,0,1)",
+              "(0,1,1)"
+            ],
+            "correct_option": "(0,0,1)",
+            "explanation": "f(0,1,0) = 0·(1,0,0) + 1·(0,0,1) = (0,0,1)."
+          },
+          {
+            "id": "M5Q5M5",
+            "question": "The inverse map f⁻¹: S₂ → S₁ satisfies f⁻¹(a,0,c) = ?",
+            "options": [
+              "(a,c,0)",
+              "(c,a,0)",
+              "(0,a,c)",
+              "(a,0,c)"
+            ],
+            "correct_option": "(a,c,0)",
+            "explanation": "f⁻¹ undoes f: if f(a,b,0) = (a,0,b), then f⁻¹(a,0,c) = (a,c,0)."
+          },
+          {
+            "id": "M5Q5M6",
+            "question": "Both f and f⁻¹ are:",
+            "options": [
+              "nonlinear maps",
+              "linear and bijective",
+              "constant maps",
+              "quadratic maps"
+            ],
+            "correct_option": "linear and bijective",
+            "explanation": "Both the isomorphism and its inverse are linear bijections."
+          },
+          {
+            "id": "M5Q5M7",
+            "question": "The angle between S₁ and S₂ is determined by the angle between their:",
+            "options": [
+              "spanning vectors",
+              "normal vectors",
+              "basis vectors",
+              "sum vectors"
+            ],
+            "correct_option": "normal vectors",
+            "explanation": "The dihedral angle between two planes equals the angle between their normals."
+          },
+          {
+            "id": "M5Q5M8",
+            "question": "The normal to S₁ (xy-plane) is (0,0,1) and the normal to S₂ (xz-plane) is (0,1,0). The angle between normals is:",
+            "options": [
+              "0°",
+              "45°",
+              "90°",
+              "180°"
+            ],
+            "correct_option": "90°",
+            "explanation": "(0,0,1) · (0,1,0) = 0, so the normals are perpendicular."
+          },
+          {
+            "id": "M5Q5M9",
+            "question": "For non-perpendicular planes, the bijection between them:",
+            "options": [
+              "does not exist",
+              "still exists but planes are tilted relative to each other",
+              "only exists for orthogonal planes",
+              "is always the identity map"
+            ],
+            "correct_option": "still exists but planes are tilted relative to each other",
+            "explanation": "The bijection exists regardless of the angle; only the specific mapping changes."
+          },
+          {
+            "id": "M5Q5M10",
+            "question": "The bijection f: S₁ → S₂ is an example of:",
+            "options": [
+              "a linear transformation",
+              "a homeomorphism",
+              "a group isomorphism",
+              "all of the above"
+            ],
+            "correct_option": "all of the above",
+            "explanation": "A linear bijection is simultaneously a linear transformation, a topological homeomorphism, and an algebraic isomorphism."
+          }
+        ],
+        "hard": [
+          {
+            "id": "M5Q5H1",
+            "question": "Any two vector spaces of the same finite dimension over ℝ are:",
+            "options": [
+              "orthogonal",
+              "isomorphic",
+              "identical",
+              "parallel"
+            ],
+            "correct_option": "isomorphic",
+            "explanation": "Same finite dimension implies isomorphic as vector spaces."
+          },
+          {
+            "id": "M5Q5H2",
+            "question": "The isomorphism between S₁ and S₂ is:",
+            "options": [
+              "always unique",
+              "unique up to sign",
+              "not unique; depends on basis choice",
+              "determined by the ambient space"
+            ],
+            "correct_option": "not unique; depends on basis choice",
+            "explanation": "Different choices of bases for S₁ and S₂ yield different isomorphisms."
+          },
+          {
+            "id": "M5Q5H3",
+            "question": "S₁ and S₂ are both \"copies\" of ℝ² embedded in ℝ³. This means:",
+            "options": [
+              "S₁ = S₂ = ℝ²",
+              "S₁ and S₂ have the same internal structure as ℝ²",
+              "S₁ and S₂ are subsets of ℝ²",
+              "ℝ² is a subspace of S₁"
+            ],
+            "correct_option": "S₁ and S₂ have the same internal structure as ℝ²",
+            "explanation": "Isomorphic vector spaces have identical algebraic structure, even though they live in different ambient spaces."
+          },
+          {
+            "id": "M5Q5H4",
+            "question": "If f: S₁ → S₂ is a linear isomorphism, then f preserves:",
+            "options": [
+              "only addition",
+              "only scalar multiplication",
+              "all linear combinations",
+              "only the zero vector"
+            ],
+            "correct_option": "all linear combinations",
+            "explanation": "Linearity means f(αu + βv) = αf(u) + βf(v) for all scalars α, β and vectors u, v."
+          },
+          {
+            "id": "M5Q5H5",
+            "question": "A natural bijection using rotation would map each vector in S₁ to the vector in S₂ obtained by:",
+            "options": [
+              "scaling by 2",
+              "rotating by the angle between normals",
+              "reflecting across origin",
+              "projecting onto S₂"
+            ],
+            "correct_option": "rotating by the angle between normals",
+            "explanation": "A rotation through the angle between the planes maps S₁ to S₂ isometrically."
+          },
+          {
+            "id": "M5Q5H6",
+            "question": "If n₁ and n₂ are normals to S₁ and S₂, the angle between the planes is:",
+            "options": [
+              "n₁ · n₂",
+              "the angle between n₁ and n₂ (or π minus that)",
+              "|n₁| / |n₂|",
+              "n₁ × n₂"
+            ],
+            "correct_option": "the angle between n₁ and n₂ (or π minus that)",
+            "explanation": "The dihedral angle equals the angle between normals or its supplement."
+          },
+          {
+            "id": "M5Q5H7",
+            "question": "An isometric bijection (preserving distances) between S₁ and S₂ exists when:",
+            "options": [
+              "the planes are always perpendicular",
+              "one plane is a rotated copy of the other",
+              "the planes have different dimensions",
+              "the planes share no vectors"
+            ],
+            "correct_option": "one plane is a rotated copy of the other",
+            "explanation": "An isometry preserves distances, which requires the planes to be related by rotation."
+          },
+          {
+            "id": "M5Q5H8",
+            "question": "If f is not an isometry, it is still a valid:",
+            "options": [
+              "distance-preserving map",
+              "linear bijection (isomorphism)",
+              "rotation",
+              "orthogonal transformation"
+            ],
+            "correct_option": "linear bijection (isomorphism)",
+            "explanation": "Every linear bijection is an isomorphism, even if it doesn't preserve distances."
+          },
+          {
+            "id": "M5Q5H9",
+            "question": "The fact that any two 2D subspaces of ℝ³ are isomorphic means they have:",
+            "options": [
+              "the same basis vectors",
+              "the same dimension and algebraic structure",
+              "the same normal vector",
+              "the same embedding in ℝ³"
+            ],
+            "correct_option": "the same dimension and algebraic structure",
+            "explanation": "Isomorphism means identical structure as abstract vector spaces, regardless of how they sit in ℝ³."
+          },
+          {
+            "id": "M5Q5H10",
+            "question": "The bijection f: S₁ → S₂ where f(a,b,0) = (a,0,b) maps the unit circle in S₁ to:",
+            "options": [
+              "a circle in S₂",
+              "an ellipse in S₂",
+              "a line in S₂",
+              "a point in S₂"
+            ],
+            "correct_option": "a circle in S₂",
+            "explanation": "Since f is an isometry (it preserves norms), circles map to circles."
+          }
+        ],
+        "real_life_application": [
+          {
+            "id": "M5Q5R1",
+            "question": "In computer graphics, mapping texture coordinates from one plane to another is an example of:",
+            "options": [
+              "computing eigenvalues",
+              "a linear bijection between 2D subspaces",
+              "finding the determinant",
+              "solving a linear system"
+            ],
+            "correct_option": "a linear bijection between 2D subspaces",
+            "explanation": "Texture mapping between two planes uses a linear bijection to transfer coordinates."
+          },
+          {
+            "id": "M5Q5R2",
+            "question": "In 3D modeling, rotating a 2D coordinate system from one plane to another preserves:",
+            "options": [
+              "only the area",
+              "distances and angles (isometry)",
+              "only the origin",
+              "the normal vector"
+            ],
+            "correct_option": "distances and angles (isometry)",
+            "explanation": "Rotation is an isometry, preserving all geometric properties."
+          },
+          {
+            "id": "M5Q5R3",
+            "question": "Projecting 3D data onto a 2D plane requires choosing:",
+            "options": [
+              "the projection plane",
+              "the eigenvalues",
+              "the determinant",
+              "the trace"
+            ],
+            "correct_option": "the projection plane",
+            "explanation": "You must select which 2D subspace to project onto, equivalent to choosing the target plane."
+          },
+          {
+            "id": "M5Q5R4",
+            "question": "In a 3D game, mapping content between two display screens on different planes uses:",
+            "options": [
+              "matrix inversion",
+              "a linear bijection between the screen planes",
+              "the null space",
+              "the trace of a matrix"
+            ],
+            "correct_option": "a linear bijection between the screen planes",
+            "explanation": "Each screen is a 2D subspace; transferring content requires a bijection between them."
+          },
+          {
+            "id": "M5Q5R5",
+            "question": "In robotics, transforming sensor readings from one tilted plane to a reference plane uses:",
+            "options": [
+              "random projections",
+              "an isomorphism between 2D subspaces",
+              "eigenvalue decomposition",
+              "the characteristic polynomial"
+            ],
+            "correct_option": "an isomorphism between 2D subspaces",
+            "explanation": "The sensor plane and reference plane are 2D subspaces; the transformation between them is a linear isomorphism."
+          }
+        ]
+      },
+      "real_life_application": [
+        {
+          "id": "M5Q5R1",
+          "question": "Rotating a whiteboard to an adjacent wall uses which map type?",
+          "options": [
+            "Constant map",
+            "Linear bijection",
+            "Random projection",
+            "Identity only"
+          ],
+          "correct_option": "Linear bijection",
+          "explanation": "A rigid rotation between two planes is one-to-one and onto — a bijection."
+        },
+        {
+          "id": "M5Q5R2",
+          "question": "Mapping a 2D floor plan to a 2D ceiling is which kind of map?",
+          "options": [
+            "Singular collapse",
+            "Many-to-one",
+            "Linear bijection",
+            "Always null"
+          ],
+          "correct_option": "Linear bijection",
+          "explanation": "Two 2D planes of equal dimension admit a bijective linear isomorphism."
+        },
+        {
+          "id": "M5Q5R3",
+          "question": "Two 2D subspaces of ℝ³ of the same dimension are guaranteed to be what?",
+          "options": [
+            "Orthogonal",
+            "Identical",
+            "Always skew",
+            "Isomorphic"
+          ],
+          "correct_option": "Isomorphic",
+          "explanation": "Any two 2D vector subspaces are isomorphic — both equal ℝ² up to basis."
+        },
+        {
+          "id": "M5Q5R4",
+          "question": "In a 3D game, mapping floor plane to wall plane transfers which property?",
+          "options": [
+            "Vector-space structure",
+            "Texture color only",
+            "Depth buffer",
+            "Shadow only"
+          ],
+          "correct_option": "Vector-space structure",
+          "explanation": "The bijection preserves addition and scaling — linear structure transfers cleanly."
+        },
+        {
+          "id": "M5Q5R5",
+          "question": "Choosing different bases of S₁ and S₂ gives how many distinct bijections?",
+          "options": [
+            "Exactly one",
+            "Infinitely many",
+            "At most two",
+            "None possible"
+          ],
+          "correct_option": "Infinitely many",
+          "explanation": "Every basis pair extends to a bijection; infinitely many choices exist."
+        }
+      ]
+    }
+  ]
+}

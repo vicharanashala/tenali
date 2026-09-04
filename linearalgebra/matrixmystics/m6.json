@@ -1,0 +1,1496 @@
+{
+  "module": 6,
+  "topics": [
+    {
+      "topicId": "Q6.1",
+      "title": "Recommender System",
+      "topic": "What a recommender system is, the role of linear algebra (low-rank approximation, matrix factorisation).",
+      "mcqs": {
+        "easy": [
+          {
+            "id": "M6Q1E1",
+            "question": "What does a recommender system do?",
+            "options": [
+              "Suggests items to users",
+              "Compresses image files",
+              "Sorts database records",
+              "Generates random passwords"
+            ],
+            "correct_option": "Suggests items to users",
+            "explanation": "A recommender system predicts and suggests items (movies, products, songs) that a user might like."
+          },
+          {
+            "id": "M6Q1E2",
+            "question": "Which of these is an example of a recommender system?",
+            "options": [
+              "Netflix movie suggestions",
+              "Excel spreadsheet sorting",
+              "GPS route calculation",
+              "Email spam filtering"
+            ],
+            "correct_option": "Netflix movie suggestions",
+            "explanation": "Netflix recommends movies based on viewing history and ratings — a classic recommender system."
+          },
+          {
+            "id": "M6Q1E3",
+            "question": "What type of matrix underlies a recommender system?",
+            "options": [
+              "User-item matrix",
+              "Identity matrix",
+              "Diagonal matrix",
+              "Lower triangular matrix"
+            ],
+            "correct_option": "User-item matrix",
+            "explanation": "The user-item matrix stores ratings or interactions between users and items."
+          },
+          {
+            "id": "M6Q1E4",
+            "question": "A user-item matrix can be very large because it involves:",
+            "options": [
+              "Millions of users and items",
+              "Only square matrices",
+              "Small integer values",
+              "A fixed number of rows"
+            ],
+            "correct_option": "Millions of users and items",
+            "explanation": "Platforms like Amazon have millions of users and millions of products, making the matrix enormous."
+          },
+          {
+            "id": "M6Q1E5",
+            "question": "Why is the user-item matrix typically described as sparse?",
+            "options": [
+              "Most entries are left empty",
+              "Most entries equal one",
+              "All rows are identical",
+              "The matrix is always square"
+            ],
+            "correct_option": "Most entries are left empty",
+            "explanation": "A single user interacts with only a tiny fraction of all available items, leaving most entries empty."
+          },
+          {
+            "id": "M6Q1E6",
+            "question": "What is the primary goal of a recommender system?",
+            "options": [
+              "Predict missing ratings",
+              "Delete duplicate entries",
+              "Increase matrix dimensions",
+              "Compute the matrix determinant"
+            ],
+            "correct_option": "Predict missing ratings",
+            "explanation": "The system aims to fill in the missing entries of the user-item matrix to make recommendations."
+          },
+          {
+            "id": "M6Q1E7",
+            "question": "Which linear algebra technique is central to modern recommender systems?",
+            "options": [
+              "Matrix factorisation",
+              "Gaussian elimination",
+              "Cramer's rule",
+              "LU decomposition"
+            ],
+            "correct_option": "Matrix factorisation",
+            "explanation": "Matrix factorisation decomposes the user-item matrix into low-rank factors to predict missing ratings."
+          },
+          {
+            "id": "M6Q1E8",
+            "question": "In matrix factorisation, the user-item matrix is approximated as:",
+            "options": [
+              "A product of two low-rank matrices",
+              "A sum of diagonal matrices",
+              "An upper triangular matrix",
+              "A scalar multiple of identity"
+            ],
+            "correct_option": "A product of two low-rank matrices",
+            "explanation": "R ≈ U·Vᵀ where U and V are much lower rank than the original matrix R."
+          },
+          {
+            "id": "M6Q1E9",
+            "question": "What do the hidden factors in matrix factorisation represent?",
+            "options": [
+              "User preferences and item characteristics",
+              "Matrix row indices only",
+              "Column header labels",
+              "Statistical standard deviations"
+            ],
+            "correct_option": "User preferences and item characteristics",
+            "explanation": "Latent factors capture abstract features like genre preference or item popularity."
+          },
+          {
+            "id": "M6Q1E10",
+            "question": "How does a recommender system generate a recommendation?",
+            "options": [
+              "Predicts rating using factorised matrices",
+              "Asks every user to vote",
+              "Uses random number generation",
+              "Inverts the full user-item matrix"
+            ],
+            "correct_option": "Predicts rating using factorised matrices",
+            "explanation": "The dot product of user and item factor vectors estimates the missing rating."
+          }
+        ],
+        "medium": [
+          {
+            "id": "M6Q1M1",
+            "question": "Let R be the m×n user-item matrix. What do m and n represent?",
+            "options": [
+              "Number of users and items",
+              "Number of features and labels",
+              "Rows of zeros and ones",
+              "Matrix rank and trace"
+            ],
+            "correct_option": "Number of users and items",
+            "explanation": "R has m rows (one per user) and n columns (one per item)."
+          },
+          {
+            "id": "M6Q1M2",
+            "question": "In R ≈ U·Vᵀ with U m×k and V n×k, the key assumption is:",
+            "options": [
+              "k is far smaller than m n",
+              "k equals the rank of R",
+              "k must equal m plus n",
+              "k is always equal to one"
+            ],
+            "correct_option": "k is far smaller than m n",
+            "explanation": "The key idea of low-rank approximation is k << min(m, n)."
+          },
+          {
+            "id": "M6Q1M3",
+            "question": "In the factorisation R ≈ U·Vᵀ, the columns of U are called:",
+            "options": [
+              "User features or factors",
+              "Item sparse vectors",
+              "Basis orthogonal polynomials",
+              "Singular value components"
+            ],
+            "correct_option": "User features or factors",
+            "explanation": "Each column of U represents a latent feature dimension for users."
+          },
+          {
+            "id": "M6Q1M4",
+            "question": "The (i, j)-th entry of U·Vᵀ is computed as:",
+            "options": [
+              "Dot product of user item features",
+              "Sum of all matrix entries",
+              "Product of row sums",
+              "Maximum of column values"
+            ],
+            "correct_option": "Dot product of user item features",
+            "explanation": "The predicted rating R_ij ≈ u_i · v_j, the inner product of their factor vectors."
+          },
+          {
+            "id": "M6Q1M5",
+            "question": "To predict R_ij for a missing entry, you compute:",
+            "options": [
+              "The dot product u_i · v_j",
+              "The matrix inverse of R",
+              "The determinant of U",
+              "The trace of Vᵀ"
+            ],
+            "correct_option": "The dot product u_i · v_j",
+            "explanation": "Missing ratings are predicted by taking the dot product of the corresponding user and item vectors."
+          },
+          {
+            "id": "M6Q1M6",
+            "question": "To learn U and V from observed ratings, one typically minimises:",
+            "options": [
+              "The squared error over known entries",
+              "The total number of parameters",
+              "The matrix determinant of R",
+              "The trace of the product UV"
+            ],
+            "correct_option": "The squared error over known entries",
+            "explanation": "Minimising Σ(r_ij − u_i·v_j)² over observed entries learns the best factorisation."
+          },
+          {
+            "id": "M6Q1M7",
+            "question": "Filling in missing entries of a low-rank matrix is known as:",
+            "options": [
+              "Matrix completion",
+              "Matrix inversion",
+              "Eigenvalue decomposition",
+              "Row echelon reduction"
+            ],
+            "correct_option": "Matrix completion",
+            "explanation": "Matrix completion recovers the full matrix from a subset of observed entries."
+          },
+          {
+            "id": "M6Q1M8",
+            "question": "Using SVD for recommender systems, R is approximated as:",
+            "options": [
+              "U_k · Σ_k · V_kᵀ",
+              "A₁ · A₂ · A₃",
+              "R² equals identity",
+              "The transpose of R times R"
+            ],
+            "correct_option": "U_k · Σ_k · V_kᵀ",
+            "explanation": "Truncated SVD keeps only the top k singular values and corresponding vectors."
+          },
+          {
+            "id": "M6Q1M9",
+            "question": "PCA applied to the user-item matrix helps find:",
+            "options": [
+              "The k principal components of R",
+              "The exact inverse of R",
+              "The row echelon form of R",
+              "The permanent of R"
+            ],
+            "correct_option": "The k principal components of R",
+            "explanation": "PCA identifies the directions of maximum variance, related to the factorisation approach."
+          },
+          {
+            "id": "M6Q1M10",
+            "question": "The 'cold start' problem in recommender systems refers to:",
+            "options": [
+              "New users or items lacking ratings",
+              "Matrix too large to store",
+              "The system running out of memory",
+              "The network connection being slow"
+            ],
+            "correct_option": "New users or items lacking ratings",
+            "explanation": "Without any interaction data, the system cannot make predictions for new users or items."
+          }
+        ],
+        "hard": [
+          {
+            "id": "M6Q1H1",
+            "question": "If R ≈ U·Vᵀ with k factors, what is the rank of the approximation?",
+            "options": [
+              "k",
+              "m",
+              "n",
+              "m plus n"
+            ],
+            "correct_option": "k",
+            "explanation": "The product of an m×k and a k×n matrix has rank at most k."
+          },
+          {
+            "id": "M6Q1H2",
+            "question": "To minimise ||R − U·Vᵀ||_F², one standard approach is:",
+            "options": [
+              "Gradient descent on U and V",
+              "Computing the permanent of R",
+              "Finding the characteristic polynomial",
+              "Using Gram-Schmidt on rows"
+            ],
+            "correct_option": "Gradient descent on U and V",
+            "explanation": "Gradient descent iteratively updates U and V to minimise the Frobenius norm error."
+          },
+          {
+            "id": "M6Q1H3",
+            "question": "In ALS (Alternating Least Squares), the algorithm proceeds by:",
+            "options": [
+              "Alternating between solving U and V",
+              "Solving both factors simultaneously",
+              "Computing the full SVD of R",
+              "Inverting the complete matrix R"
+            ],
+            "correct_option": "Alternating between solving U and V",
+            "explanation": "ALS alternates between fixing one factor and solving for the other via least squares."
+          },
+          {
+            "id": "M6Q1H4",
+            "question": "SGD is preferred over ALS when:",
+            "options": [
+              "Matrices are extremely large and sparse",
+              "The matrix is small and dense",
+              "One needs an exact solution",
+              "The matrix is perfectly diagonal"
+            ],
+            "correct_option": "Matrices are extremely large and sparse",
+            "explanation": "SGD processes one sample at a time, making it scalable to massive datasets."
+          },
+          {
+            "id": "M6Q1H5",
+            "question": "The k latent factors in matrix factorisation are called 'latent' because:",
+            "options": [
+              "They lack explicit interpretable meaning",
+              "They are always positive integers",
+              "They correspond to named categories",
+              "They are stored in hidden files"
+            ],
+            "correct_option": "They lack explicit interpretable meaning",
+            "explanation": "Latent factors are abstract dimensions that capture patterns without direct real-world labels."
+          },
+          {
+            "id": "M6Q1H6",
+            "question": "A factor for 'action vs romance' and another for 'mainstream vs indie' are examples of:",
+            "options": [
+              "Interpreted latent dimensions in movies",
+              "Types of matrix decomposition",
+              "Forms of linear regression",
+              "Classes of orthogonal polynomials"
+            ],
+            "correct_option": "Interpreted latent dimensions in movies",
+            "explanation": "After factorisation, some latent factors can be loosely interpreted as genre or popularity axes."
+          },
+          {
+            "id": "M6Q1H7",
+            "question": "Regularisation in matrix factorisation adds λ(||U||² + ||V||²) to prevent:",
+            "options": [
+              "Overfitting to observed ratings",
+              "Underflow in floating point",
+              "The matrix from being square",
+              "Negative eigenvalues appearing"
+            ],
+            "correct_option": "Overfitting to observed ratings",
+            "explanation": "Regularisation penalises large factor values, improving generalisation to unseen entries."
+          },
+          {
+            "id": "M6Q1H8",
+            "question": "Bias terms b_u and b_i in matrix factorisation account for:",
+            "options": [
+              "Systematic user and item rating biases",
+              "The rank of the approximation",
+              "The number of latent factors k",
+              "The sparsity pattern of the matrix"
+            ],
+            "correct_option": "Systematic user and item rating biases",
+            "explanation": "b_u captures user-specific bias and b_i captures item-specific bias in ratings."
+          },
+          {
+            "id": "M6Q1H9",
+            "question": "Time effects in recommender systems address the fact that:",
+            "options": [
+              "Ratings and preferences evolve over time",
+              "The matrix is always square",
+              "Factors must be integers only",
+              "Sparsity never changes"
+            ],
+            "correct_option": "Ratings and preferences evolve over time",
+            "explanation": "Time-dependent factors model evolving user tastes and seasonal trends."
+          },
+          {
+            "id": "M6Q1H10",
+            "question": "Implicit feedback (clicks, views) differs from explicit feedback (ratings) because:",
+            "options": [
+              "It does not reflect preference strength",
+              "It always equals integer values",
+              "It requires a square matrix",
+              "It is always perfectly accurate"
+            ],
+            "correct_option": "It does not reflect preference strength",
+            "explanation": "Implicit signals indicate engagement but not whether the user liked or disliked the item."
+          }
+        ],
+        "real_life_application": [
+          {
+            "id": "M6Q1R1",
+            "question": "The Netflix Prize competition focused on predicting movie ratings using:",
+            "options": [
+              "Matrix factorisation techniques",
+              "Convolutional neural networks",
+              "Simple nearest-neighbour lookup",
+              "Random forest classification"
+            ],
+            "correct_option": "Matrix factorisation techniques",
+            "explanation": "The winning solution in the Netflix Prize used matrix factorisation to predict user ratings."
+          },
+          {
+            "id": "M6Q1R2",
+            "question": "Amazon's product recommendation system is built on:",
+            "options": [
+              "User-item low-rank approximation",
+              "Manual editorial curation only",
+              "Alphabetical product sorting",
+              "Random product display"
+            ],
+            "correct_option": "User-item low-rank approximation",
+            "explanation": "Amazon uses collaborative filtering via user-item interactions and low-rank methods."
+          },
+          {
+            "id": "M6Q1R3",
+            "question": "Spotify's Discover Weekly playlist is powered by:",
+            "options": [
+              "Matrix factorisation on listening history",
+              "Top-10 most played songs",
+              "User-submitted manual playlists only",
+              "Random track selection algorithms"
+            ],
+            "correct_option": "Matrix factorisation on listening history",
+            "explanation": "Spotify analyses listening patterns using matrix factorisation to personalise playlists."
+          },
+          {
+            "id": "M6Q1R4",
+            "question": "YouTube's recommendation engine combines deep learning with:",
+            "options": [
+              "Matrix factorisation methods",
+              "Linear regression only",
+              "Manual content tagging",
+              "Random number generation"
+            ],
+            "correct_option": "Matrix factorisation methods",
+            "explanation": "YouTube uses a hybrid of deep learning and matrix factorisation for video suggestions."
+          },
+          {
+            "id": "M6Q1R5",
+            "question": "TikTok's 'For You' page uses matrix factorisation combined with:",
+            "options": [
+              "Engagement signals like watch time",
+              "Geographic location only",
+              "User age as the sole feature",
+              "Random content shuffling"
+            ],
+            "correct_option": "Engagement signals like watch time",
+            "explanation": "TikTok blends matrix factorisation with engagement metrics to rank content for each user."
+          }
+        ]
+      },
+      "real_life_application": [
+        {
+          "id": "M6Q1R1",
+          "question": "Which company famously used matrix factorisation in a prize competition?",
+          "options": [
+            "Netflix",
+            "Amazon",
+            "Spotify",
+            "YouTube"
+          ],
+          "correct_option": "Netflix",
+          "explanation": "Netflix's 2006 Netflix Prize challenged teams to improve movie rating predictions using matrix factorisation on a user-movie ratings matrix."
+        },
+        {
+          "id": "M6Q1R2",
+          "question": "Spotify Discover Weekly's core technique is",
+          "options": [
+            "linear regression",
+            "logistic regression",
+            "matrix factorisation",
+            "decision trees"
+          ],
+          "correct_option": "matrix factorisation",
+          "explanation": "Spotify's Discover Weekly playlist is generated by matrix factorisation on listening history, decomposing user-track interactions into latent taste factors."
+        },
+        {
+          "id": "M6Q1R3",
+          "question": "Real-world user-item ratings matrices are typically",
+          "options": [
+            "large and sparse",
+            "small and dense",
+            "narrow and full",
+            "tiny and square"
+          ],
+          "correct_option": "large and sparse",
+          "explanation": "Most users interact with only a tiny fraction of items, so the ratings matrix is enormous but mostly empty — sparse."
+        },
+        {
+          "id": "M6Q1R4",
+          "question": "TikTok's For You feed combines matrix factorisation with",
+          "options": [
+            "stock market data",
+            "weather forecasts",
+            "engagement signals",
+            "genetic sequences"
+          ],
+          "correct_option": "engagement signals",
+          "explanation": "TikTok layers watch-time, likes, and shares on top of matrix factorisation to score candidate videos for the For You feed."
+        },
+        {
+          "id": "M6Q1R5",
+          "question": "Matrix factorisation decomposes R into",
+          "options": [
+            "three full matrices",
+            "four null rows",
+            "five random blocks",
+            "two low-rank factors"
+          ],
+          "correct_option": "two low-rank factors",
+          "explanation": "R ≈ P × Q, where P and Q are much smaller matrices whose product approximates the original ratings matrix."
+        }
+      ]
+    },
+    {
+      "topicId": "Q6.2",
+      "title": "Page Ranking",
+      "topic": "PageRank algorithm, Markov chains, the role of linear algebra (eigenvector computation).",
+      "mcqs": {
+        "easy": [
+          {
+            "id": "M6Q2E1",
+            "question": "What does PageRank measure?",
+            "options": [
+              "Importance of web pages",
+              "Page loading speed",
+              "Number of images on page",
+              "Website hosting cost"
+            ],
+            "correct_option": "Importance of web pages",
+            "explanation": "PageRank assigns an importance score to each web page based on link structure."
+          },
+          {
+            "id": "M6Q2E2",
+            "question": "PageRank was developed by founders of which company?",
+            "options": [
+              "Google",
+              "Apple",
+              "Amazon",
+              "Twitter"
+            ],
+            "correct_option": "Google",
+            "explanation": "Larry Page and Sergey Brin developed PageRank at Stanford, which became Google's foundation."
+          },
+          {
+            "id": "M6Q2E3",
+            "question": "A web page is considered important if:",
+            "options": [
+              "Many important pages link to it",
+              "It has the most images",
+              "It loads the fastest",
+              "It was created first"
+            ],
+            "correct_option": "Many important pages link to it",
+            "explanation": "PageRank uses a recursive definition: importance comes from being linked by important pages."
+          },
+          {
+            "id": "M6Q2E4",
+            "question": "In the PageRank model, the web is represented as:",
+            "options": [
+              "A graph with nodes and edges",
+              "A spreadsheet table",
+              "A binary search tree",
+              "A sorted array"
+            ],
+            "correct_option": "A graph with nodes and edges",
+            "explanation": "Pages are nodes and hyperlinks are directed edges in the web graph."
+          },
+          {
+            "id": "M6Q2E5",
+            "question": "The link structure of the web defines a:",
+            "options": [
+              "Transition matrix",
+              "Identity matrix",
+              "Diagonal matrix",
+              "Zero matrix"
+            ],
+            "correct_option": "Transition matrix",
+            "explanation": "The adjacency/link structure is encoded as a column-stochastic transition matrix."
+          },
+          {
+            "id": "M6Q2E6",
+            "question": "PageRank is the steady state of:",
+            "options": [
+              "A Markov chain on the web",
+              "A linear regression model",
+              "A decision tree classifier",
+              "A convolutional neural network"
+            ],
+            "correct_option": "A Markov chain on the web",
+            "explanation": "The random surfer model is a Markov chain whose stationary distribution gives PageRank."
+          },
+          {
+            "id": "M6Q2E7",
+            "question": "In the 'random surfer' model, the steady state determines:",
+            "options": [
+              "The rank of each page",
+              "The page download speed",
+              "The number of outbound links",
+              "The page font size"
+            ],
+            "correct_option": "The rank of each page",
+            "explanation": "The probability of the surfer being on a page in the long run is its PageRank score."
+          },
+          {
+            "id": "M6Q2E8",
+            "question": "Pages with higher PageRank values are considered:",
+            "options": [
+              "More important and influential",
+              "Faster to load",
+              "Longer in content",
+              "Older in creation date"
+            ],
+            "correct_option": "More important and influential",
+            "explanation": "A higher PageRank score indicates greater importance in the web graph."
+          },
+          {
+            "id": "M6Q2E9",
+            "question": "PageRank is computed as which type of eigenvector?",
+            "options": [
+              "Dominant eigenvector of transition matrix",
+              "Smallest eigenvector of identity",
+              "Complex eigenvector of rotation",
+              "Zero eigenvector of singular matrix"
+            ],
+            "correct_option": "Dominant eigenvector of transition matrix",
+            "explanation": "The PageRank vector is the eigenvector corresponding to eigenvalue 1 of the modified matrix."
+          },
+          {
+            "id": "M6Q2E10",
+            "question": "The damping factor d (typically 0.85) ensures:",
+            "options": [
+              "Convergence of the PageRank iteration",
+              "The matrix becomes diagonal",
+              "All eigenvalues become zero",
+              "Pages are sorted alphabetically"
+            ],
+            "correct_option": "Convergence of the PageRank iteration",
+            "explanation": "The damping factor adds a teleportation probability that guarantees a unique stationary distribution."
+          }
+        ],
+        "medium": [
+          {
+            "id": "M6Q2M1",
+            "question": "In the PageRank formula, A typically represents:",
+            "options": [
+              "The web's transition matrix",
+              "The identity matrix",
+              "The inverse covariance matrix",
+              "The diagonal of eigenvalues"
+            ],
+            "correct_option": "The web's transition matrix",
+            "explanation": "A encodes the link structure between web pages."
+          },
+          {
+            "id": "M6Q2M2",
+            "question": "The PageRank vector satisfies π = d·Aᵀ·π + (1−d)·(1/N)·1. What is N?",
+            "options": [
+              "Total number of web pages",
+              "Number of edges in graph",
+              "Dimension of eigenvalues",
+              "Number of iterations needed"
+            ],
+            "correct_option": "Total number of web pages",
+            "explanation": "N is the total count of pages; (1/N)·1 is the uniform teleportation distribution."
+          },
+          {
+            "id": "M6Q2M3",
+            "question": "The PageRank equation uses G = d·Aᵀ + (1−d)·J/N. What is J?",
+            "options": [
+              "The all-ones matrix",
+              "The Jacobian matrix",
+              "The Jordan block matrix",
+              "The Jaccard similarity matrix"
+            ],
+            "correct_option": "The all-ones matrix",
+            "explanation": "J is an N×N matrix of all ones, used to model uniform random jumps."
+          },
+          {
+            "id": "M6Q2M4",
+            "question": "The teleportation term (1−d)·(1/N)·1 ensures:",
+            "options": [
+              "Irreducibility and convergence",
+              "The matrix is nilpotent",
+              "All eigenvalues are zero",
+              "The trace equals zero"
+            ],
+            "correct_option": "Irreducibility and convergence",
+            "explanation": "Teleportation allows the surfer to reach any page, preventing stuck or disconnected states."
+          },
+          {
+            "id": "M6Q2M5",
+            "question": "The matrix G = d·Aᵀ + (1−d)·J/N is known as:",
+            "options": [
+              "The Google matrix",
+              "The Gram matrix",
+              "The Green's function matrix",
+              "The Gershgorin matrix"
+            ],
+            "correct_option": "The Google matrix",
+            "explanation": "Named after Google, this modified transition matrix guarantees convergence to a unique PageRank."
+          },
+          {
+            "id": "M6Q2M6",
+            "question": "The eigenvalue corresponding to the PageRank eigenvector is:",
+            "options": [
+              "1",
+              "0",
+              "d",
+              "N"
+            ],
+            "correct_option": "1",
+            "explanation": "For a stochastic matrix, the dominant eigenvalue is always 1."
+          },
+          {
+            "id": "M6Q2M7",
+            "question": "Power iteration for PageRank starts with π₀ and iterates by:",
+            "options": [
+              "π_{k+1} = G·π_k",
+              "π_{k+1} = G⁻¹·π_k",
+              "π_{k+1} = π_k + G",
+              "π_{k+1} = G²·π_k²"
+            ],
+            "correct_option": "π_{k+1} = G·π_k",
+            "explanation": "Each iteration multiplies the current vector by the Google matrix."
+          },
+          {
+            "id": "M6Q2M8",
+            "question": "Convergence of power iteration for PageRank means:",
+            "options": [
+              "||π_{k+1} − π_k|| approaches zero",
+              "The matrix becomes diagonal",
+              "All entries become equal to 1",
+              "The determinant approaches infinity"
+            ],
+            "correct_option": "||π_{k+1} − π_k|| approaches zero",
+            "explanation": "The iteration converges when successive vectors are nearly identical."
+          },
+          {
+            "id": "M6Q2M9",
+            "question": "The convergence rate of PageRank depends on:",
+            "options": [
+              "The second eigenvalue of G",
+              "The font size on each page",
+              "Total number of images",
+              "The server response time"
+            ],
+            "correct_option": "The second eigenvalue of G",
+            "explanation": "A smaller spectral gap (second eigenvalue closer to 0) means faster convergence."
+          },
+          {
+            "id": "M6Q2M10",
+            "question": "After normalisation, each PageRank value is between:",
+            "options": [
+              "0 and 1",
+              "−1 and 1",
+              "0 and N",
+              "1 and infinity"
+            ],
+            "correct_option": "0 and 1",
+            "explanation": "PageRank values are probabilities, so they lie in the interval [0, 1]."
+          }
+        ],
+        "hard": [
+          {
+            "id": "M6Q2H1",
+            "question": "Without teleportation, a Markov chain on the web may fail because:",
+            "options": [
+              "Some pages may be unreachable",
+              "The matrix is always diagonal",
+              "Eigenvalues become complex",
+              "The damping factor equals zero"
+            ],
+            "correct_option": "Some pages may be unreachable",
+            "explanation": "Dangling nodes and disconnected components make the chain reducible without teleportation."
+          },
+          {
+            "id": "M6Q2H2",
+            "question": "A bipartite web graph without teleportation causes the chain to be:",
+            "options": [
+              "Periodic and non-convergent",
+              "Always ergodic",
+              "Irreducible and aperiodic",
+              "Diagonalizable over reals"
+            ],
+            "correct_option": "Periodic and non-convergent",
+            "explanation": "Bipartite graphs create period-2 cycles, preventing convergence to a steady state."
+          },
+          {
+            "id": "M6Q2H3",
+            "question": "With teleportation, the resulting Markov chain is always:",
+            "options": [
+              "Ergodic (irreducible and aperiodic)",
+              "Periodic with period 2",
+              "Reducible and singular",
+              "Nilpotent with index N"
+            ],
+            "correct_option": "Ergodic (irreducible and aperiodic)",
+            "explanation": "Teleportation ensures every state is reachable from every other state, with no periodicity."
+          },
+          {
+            "id": "M6Q2H4",
+            "question": "The dominant eigenvalue of the Google matrix G equals 1 due to:",
+            "options": [
+              "Perron-Frobenius theorem for stochastic matrices",
+              "The trace being zero",
+              "The matrix being symmetric",
+              "All off-diagonal entries equal"
+            ],
+            "correct_option": "Perron-Frobenius theorem for stochastic matrices",
+            "explanation": "The Perron-Frobenius theorem guarantees a largest positive eigenvalue of 1 for stochastic matrices."
+          },
+          {
+            "id": "M6Q2H5",
+            "question": "The speed of PageRank convergence is determined by:",
+            "options": [
+              "Magnitude of the second eigenvalue",
+              "Total number of web pages",
+              "Average page load time",
+              "Number of images per page"
+            ],
+            "correct_option": "Magnitude of the second eigenvalue",
+            "explanation": "The spectral gap (1 − |λ₂|) controls how quickly the iteration converges."
+          },
+          {
+            "id": "M6Q2H6",
+            "question": "The complexity of one power iteration step for PageRank is:",
+            "options": [
+              "O(|E|) for E edges sparse graph",
+              "O(N³) regardless of sparsity",
+              "O(log N) for all graphs",
+              "O(N²/2) for dense only"
+            ],
+            "correct_option": "O(|E|) for E edges sparse graph",
+            "explanation": "Each iteration multiplies the matrix by a vector, which is O(|E|) for sparse matrices."
+          },
+          {
+            "id": "M6Q2H7",
+            "question": "For very large web graphs, efficient PageRank exploits the transition matrix being:",
+            "options": [
+              "Sparse",
+              "Dense",
+              "Diagonal",
+              "Toeplitz"
+            ],
+            "correct_option": "Sparse",
+            "explanation": "Most pages link to only a few others, so the matrix has mostly zero entries."
+          },
+          {
+            "id": "M6Q2H8",
+            "question": "Personalised PageRank modifies teleportation to bias towards:",
+            "options": [
+              "A specific set of pages",
+              "Pages with most images",
+              "Newly created pages only",
+              "Pages in a single language"
+            ],
+            "correct_option": "A specific set of pages",
+            "explanation": "Instead of uniform teleportation, the surfer jumps preferentially to a personal set of pages."
+          },
+          {
+            "id": "M6Q2H9",
+            "question": "Topic-sensitive PageRank computes:",
+            "options": [
+              "Multiple PageRanks for different topics",
+              "A single global ranking for all",
+              "Only top 10 pages per query",
+              "A binary relevance score"
+            ],
+            "correct_option": "Multiple PageRanks for different topics",
+            "explanation": "Different teleportation vectors for different topics yield topic-biased rankings."
+          },
+          {
+            "id": "M6Q2H10",
+            "question": "To compute PageRank on massive graphs, distributed frameworks are used because:",
+            "options": [
+              "Single machines cannot store the graph",
+              "PageRank requires floating point only",
+              "The matrix is always diagonal",
+              "Distributed systems are slower but cheaper"
+            ],
+            "correct_option": "Single machines cannot store the graph",
+            "explanation": "Web graphs with billions of pages exceed single-machine memory; distributed computing is essential."
+          }
+        ],
+        "real_life_application": [
+          {
+            "id": "M6Q2R1",
+            "question": "Google's original search engine ranking was primarily based on:",
+            "options": [
+              "The PageRank algorithm",
+              "Number of keywords on page",
+              "Alphabetical order of URLs",
+              "The age of the domain name"
+            ],
+            "correct_option": "The PageRank algorithm",
+            "explanation": "PageRank was the core innovation behind Google's early search ranking."
+          },
+          {
+            "id": "M6Q2R2",
+            "question": "Modern Google search uses PageRank as:",
+            "options": [
+              "One of hundreds of ranking signals",
+              "The sole ranking criterion",
+              "An optional debug feature",
+              "A deprecated legacy tool"
+            ],
+            "correct_option": "One of hundreds of ranking signals",
+            "explanation": "While PageRank is still used, Google now combines it with many other signals."
+          },
+          {
+            "id": "M6Q2R3",
+            "question": "PageRank applied to social networks helps detect:",
+            "options": [
+              "Key influencers and central nodes",
+              "Fake accounts only",
+              "Inactive users",
+              "The oldest accounts"
+            ],
+            "correct_option": "Key influencers and central nodes",
+            "explanation": "The same eigenvector centrality idea identifies influential users in social graphs."
+          },
+          {
+            "id": "M6Q2R4",
+            "question": "In biology, PageRank is used to identify:",
+            "options": [
+              "Important genes in protein networks",
+              "The longest DNA sequences",
+              "Cells with most mitochondria",
+              "Proteins with highest molecular weight"
+            ],
+            "correct_option": "Important genes in protein networks",
+            "explanation": "PageRank-style analysis on biological networks highlights key regulatory genes."
+          },
+          {
+            "id": "M6Q2R5",
+            "question": "In citation analysis, PageRank helps determine:",
+            "options": [
+              "Which papers are most influential",
+              "The total number of references",
+              "The font size in publications",
+              "The journal impact factor alone"
+            ],
+            "correct_option": "Which papers are most influential",
+            "explanation": "Papers cited by many influential papers receive higher rank, mirroring the PageRank idea."
+          }
+        ]
+      },
+      "real_life_application": [
+        {
+          "id": "M6Q2R1",
+          "question": "PageRank was originally developed at",
+          "options": [
+            "Stanford University",
+            "Cornell University",
+            "Brown University",
+            "Oxford University"
+          ],
+          "correct_option": "Stanford University",
+          "explanation": "Larry Page and Sergey Brin developed PageRank as Stanford PhD students in the late 1990s."
+        },
+        {
+          "id": "M6Q2R2",
+          "question": "PageRank models the web as",
+          "options": [
+            "an undirected tree",
+            "a directed graph",
+            "a linear array",
+            "a circular queue"
+          ],
+          "correct_option": "a directed graph",
+          "explanation": "Web pages are nodes and hyperlinks are directed edges, so PageRank operates on a directed graph."
+        },
+        {
+          "id": "M6Q2R3",
+          "question": "PageRank scores come from the",
+          "options": [
+            "largest singular value",
+            "smallest eigenvalue",
+            "dominant eigenvector",
+            "a uniform random vector"
+          ],
+          "correct_option": "dominant eigenvector",
+          "explanation": "The PageRank vector is the dominant eigenvector of the Google matrix, found by iterating until convergence."
+        },
+        {
+          "id": "M6Q2R4",
+          "question": "PageRank was co-invented by",
+          "options": [
+            "Lamport and Liskov",
+            "Brin and Page",
+            "Cerf and Kahn",
+            "Saltzer and Reed"
+          ],
+          "correct_option": "Brin and Page",
+          "explanation": "Sergey Brin and Larry Page co-invented PageRank while at Stanford, founding Google on the algorithm."
+        },
+        {
+          "id": "M6Q2R5",
+          "question": "In biology, PageRank is used to rank",
+          "options": [
+            "financial markets",
+            "weather forecasts",
+            "music playlists",
+            "protein interactions"
+          ],
+          "correct_option": "protein interactions",
+          "explanation": "Protein-protein interaction networks are directed graphs where PageRank highlights the most functionally important proteins."
+        }
+      ]
+    },
+    {
+      "topicId": "Q6.3",
+      "title": "Dimensionality Reduction",
+      "topic": "Why reduce dimensions, PCA, SVD, the role of linear algebra.",
+      "mcqs": {
+        "easy": [
+          {
+            "id": "M6Q3E1",
+            "question": "Why is high-dimensional data challenging?",
+            "options": [
+              "Hard to visualise and process",
+              "Too easy to analyse",
+              "Requires less memory",
+              "Always perfectly correlated"
+            ],
+            "correct_option": "Hard to visualise and process",
+            "explanation": "High-dimensional data is difficult to visualise and computationally expensive to process."
+          },
+          {
+            "id": "M6Q3E2",
+            "question": "Dimensionality reduction maps data from:",
+            "options": [
+              "High dimensions to lower dimensions",
+              "One file to another file",
+              "Integers to floating points",
+              "Vectors to scalar values only"
+            ],
+            "correct_option": "High dimensions to lower dimensions",
+            "explanation": "The goal is to represent data with fewer features while preserving important structure."
+          },
+          {
+            "id": "M6Q3E3",
+            "question": "Which of these is NOT a dimensionality reduction method?",
+            "options": [
+              "Bubble sort algorithm",
+              "PCA",
+              "SVD",
+              "t-SNE"
+            ],
+            "correct_option": "Bubble sort algorithm",
+            "explanation": "Bubble sort is a sorting algorithm, not a dimensionality reduction technique."
+          },
+          {
+            "id": "M6Q3E4",
+            "question": "PCA and SVD are based on which branch of mathematics?",
+            "options": [
+              "Linear algebra",
+              "Number theory",
+              "Topology",
+              "Combinatorics"
+            ],
+            "correct_option": "Linear algebra",
+            "explanation": "PCA and SVD rely on eigendecomposition and matrix factorisation from linear algebra."
+          },
+          {
+            "id": "M6Q3E5",
+            "question": "PCA stands for:",
+            "options": [
+              "Principal Component Analysis",
+              "Primary Component Algorithm",
+              "Partial Covariance Assessment",
+              "Projected Coordinate Approximation"
+            ],
+            "correct_option": "Principal Component Analysis",
+            "explanation": "PCA identifies the principal components — directions of maximum variance."
+          },
+          {
+            "id": "M6Q3E6",
+            "question": "PCA finds the directions along which data has:",
+            "options": [
+              "Maximum variance",
+              "Minimum variance",
+              "Zero variance",
+              "Negative variance"
+            ],
+            "correct_option": "Maximum variance",
+            "explanation": "Principal components are the orthogonal directions that capture the most spread in the data."
+          },
+          {
+            "id": "M6Q3E7",
+            "question": "The principal components produced by PCA are always:",
+            "options": [
+              "Orthogonal to each other",
+              "Parallel to each other",
+              "Randomly oriented",
+              "Identical to each other"
+            ],
+            "correct_option": "Orthogonal to each other",
+            "explanation": "PCA ensures each component is perpendicular to all others, eliminating redundancy."
+          },
+          {
+            "id": "M6Q3E8",
+            "question": "The first k principal components capture the most:",
+            "options": [
+              "Variance in the data",
+              "Missing data points",
+              "Correlated noise",
+              "Zero entries in the matrix"
+            ],
+            "correct_option": "Variance in the data",
+            "explanation": "By construction, earlier components explain more variance than later ones."
+          },
+          {
+            "id": "M6Q3E9",
+            "question": "In dimensionality reduction, projection onto the top k components uses:",
+            "options": [
+              "Matrix multiplication with k eigenvectors",
+              "Deleting random columns",
+              "Inverting the data matrix",
+              "Adding more features"
+            ],
+            "correct_option": "Matrix multiplication with k eigenvectors",
+            "explanation": "X_reduced = X · W where W contains the top k eigenvectors as columns."
+          },
+          {
+            "id": "M6Q3E10",
+            "question": "The goal of dimensionality reduction is to:",
+            "options": [
+              "Retain max info in fewer dimensions",
+              "Increase the number of features",
+              "Make data more sparse",
+              "Remove all correlations"
+            ],
+            "correct_option": "Retain max info in fewer dimensions",
+            "explanation": "Dimensionality reduction compresses data while preserving as much structure as possible."
+          }
+        ],
+        "medium": [
+          {
+            "id": "M6Q3M1",
+            "question": "Given data matrix X, the covariance matrix is computed as:",
+            "options": [
+              "C = (1/m)·Xᵀ·X",
+              "C = X·Xᵀ·X",
+              "C = X + Xᵀ",
+              "C = X⁻¹"
+            ],
+            "correct_option": "C = (1/m)·Xᵀ·X",
+            "explanation": "The covariance matrix captures pairwise feature relationships and is symmetric positive semi-definite."
+          },
+          {
+            "id": "M6Q3M2",
+            "question": "To perform PCA, one finds eigenvalues and eigenvectors of:",
+            "options": [
+              "The covariance matrix C",
+              "The original data matrix X",
+              "The identity matrix I",
+              "The zero matrix O"
+            ],
+            "correct_option": "The covariance matrix C",
+            "explanation": "Eigendecomposition of C yields the principal components and their variances."
+          },
+          {
+            "id": "M6Q3M3",
+            "question": "In PCA, the eigenvectors of the covariance matrix are the:",
+            "options": [
+              "Principal components",
+              "Singular values",
+              "Trace of the matrix",
+              "Matrix determinants"
+            ],
+            "correct_option": "Principal components",
+            "explanation": "Each eigenvector defines a principal component direction in the feature space."
+          },
+          {
+            "id": "M6Q3M4",
+            "question": "The eigenvalues of the covariance matrix represent:",
+            "options": [
+              "Variance along each principal component",
+              "Number of samples in dataset",
+              "Correlation between samples",
+              "The matrix determinant value"
+            ],
+            "correct_option": "Variance along each principal component",
+            "explanation": "A larger eigenvalue means more variance is captured along that component."
+          },
+          {
+            "id": "M6Q3M5",
+            "question": "Before selecting the top k components, eigenvalues are sorted by:",
+            "options": [
+              "Decreasing order",
+              "Increasing order",
+              "Random order",
+              "Absolute value only"
+            ],
+            "correct_option": "Decreasing order",
+            "explanation": "Sorting in decreasing order ensures the first k components capture the most variance."
+          },
+          {
+            "id": "M6Q3M6",
+            "question": "To reduce to k dimensions, you keep the top k:",
+            "options": [
+              "Eigenvectors sorted by eigenvalue",
+              "Rows of the original matrix",
+              "Randomly selected columns",
+              "Largest entries in each row"
+            ],
+            "correct_option": "Eigenvectors sorted by eigenvalue",
+            "explanation": "The top k eigenvectors define the projection subspace for dimensionality reduction."
+          },
+          {
+            "id": "M6Q3M7",
+            "question": "The PCA projection formula is X_reduced = X·W, where W is:",
+            "options": [
+              "The n×k matrix of top eigenvectors",
+              "The k×k identity matrix",
+              "The m×m covariance matrix",
+              "The inverse of X"
+            ],
+            "correct_option": "The n×k matrix of top eigenvectors",
+            "explanation": "Multiplying X by W projects each sample onto the k-dimensional subspace."
+          },
+          {
+            "id": "M6Q3M8",
+            "question": "If X is m×n and W is n×k, the reduced data X_reduced has shape:",
+            "options": [
+              "m × k",
+              "n × m",
+              "k × n",
+              "n × k"
+            ],
+            "correct_option": "m × k",
+            "explanation": "The number of samples (m) is preserved, but features are reduced from n to k."
+          },
+          {
+            "id": "M6Q3M9",
+            "question": "The fraction of variance retained after PCA is given by:",
+            "options": [
+              "Top k eigenvalues sum over total",
+              "Product of all eigenvalues",
+              "Number of eigenvectors squared",
+              "The trace of the original matrix"
+            ],
+            "correct_option": "Top k eigenvalues sum over total",
+            "explanation": "This ratio tells you how much information is preserved in the reduced representation."
+          },
+          {
+            "id": "M6Q3M10",
+            "question": "A common threshold for choosing k in PCA is to retain:",
+            "options": [
+              "95% or 99% of total variance",
+              "50% of total variance",
+              "10% of total variance",
+              "All eigenvalues above zero"
+            ],
+            "correct_option": "95% or 99% of total variance",
+            "explanation": "Keeping 95-99% variance ensures minimal information loss while reducing dimensions."
+          }
+        ],
+        "hard": [
+          {
+            "id": "M6Q3H1",
+            "question": "SVD and PCA are closely related because:",
+            "options": [
+              "SVD on centred data gives components",
+              "They use completely different maths",
+              "PCA requires supervised labels",
+              "SVD only works on squares"
+            ],
+            "correct_option": "SVD on centred data gives components",
+            "explanation": "Applying SVD to the centred data matrix produces the same result as PCA."
+          },
+          {
+            "id": "M6Q3H2",
+            "question": "In SVD, X = U·Σ·Vᵀ, the matrix V contains:",
+            "options": [
+              "The principal component directions",
+              "The singular values only",
+              "The row means of X",
+              "The covariance of samples"
+            ],
+            "correct_option": "The principal component directions",
+            "explanation": "The columns of V are the right singular vectors, which are the eigenvectors of XᵀX."
+          },
+          {
+            "id": "M6Q3H3",
+            "question": "The columns of V in SVD are the eigenvectors of:",
+            "options": [
+              "Xᵀ·X",
+              "U·Uᵀ",
+              "Σ·Σᵀ",
+              "X + Xᵀ"
+            ],
+            "correct_option": "Xᵀ·X",
+            "explanation": "By the SVD definition, V diagonalises XᵀX, so its columns are its eigenvectors."
+          },
+          {
+            "id": "M6Q3H4",
+            "question": "The singular values in Σ are the square roots of:",
+            "options": [
+              "Eigenvalues of Xᵀ·X",
+              "Rows of the data matrix",
+              "Columns of U",
+              "The trace of X"
+            ],
+            "correct_option": "Eigenvalues of Xᵀ·X",
+            "explanation": "σ_i = √λ_i where λ_i are eigenvalues of XᵀX."
+          },
+          {
+            "id": "M6Q3H5",
+            "question": "Truncated SVD keeps the top k singular values to produce:",
+            "options": [
+              "The best rank-k approximation",
+              "A full-rank reconstruction",
+              "A random projection",
+              "The identity matrix"
+            ],
+            "correct_option": "The best rank-k approximation",
+            "explanation": "Truncated SVD discards small singular values for a compressed representation."
+          },
+          {
+            "id": "M6Q3H6",
+            "question": "The Eckart-Young theorem states X_k = U_k·Σ_k·V_kᵀ is:",
+            "options": [
+              "Best rank-k approximation in Frobenius norm",
+              "Always the exact reconstruction of X",
+              "The worst possible low-rank fit",
+              "The inverse of the original matrix"
+            ],
+            "correct_option": "Best rank-k approximation in Frobenius norm",
+            "explanation": "Eckart-Young guarantees truncated SVD minimises ||X − X_k||_F among all rank-k matrices."
+          },
+          {
+            "id": "M6Q3H7",
+            "question": "PCA for visualisation typically projects data to:",
+            "options": [
+              "2D or 3D for human viewing",
+              "100 or more dimensions",
+              "The same original dimensions",
+              "Infinite-dimensional space"
+            ],
+            "correct_option": "2D or 3D for human viewing",
+            "explanation": "Reducing to 2 or 3 dimensions allows plotting data on a screen."
+          },
+          {
+            "id": "M6Q3H8",
+            "question": "PCA for compression works by storing only:",
+            "options": [
+              "U_k Σ_k and V_k not full X",
+              "The original matrix X fully",
+              "Random subsets of the data",
+              "Only the column means"
+            ],
+            "correct_option": "U_k Σ_k and V_k not full X",
+            "explanation": "The compressed representation requires far less storage than the original matrix."
+          },
+          {
+            "id": "M6Q3H9",
+            "question": "PCA for denoising works by discarding:",
+            "options": [
+              "Small singular values as noise",
+              "The largest singular values",
+              "The mean of each column",
+              "All negative eigenvalues"
+            ],
+            "correct_option": "Small singular values as noise",
+            "explanation": "Noise tends to manifest as small singular values; discarding them cleans the data."
+          },
+          {
+            "id": "M6Q3H10",
+            "question": "Using principal components as new features is called:",
+            "options": [
+              "PCA feature extraction",
+              "Linear regression",
+              "K-nearest neighbours",
+              "Binary cross-entropy loss"
+            ],
+            "correct_option": "PCA feature extraction",
+            "explanation": "Principal components serve as decorrelated features that often improve model performance."
+          }
+        ],
+        "real_life_application": [
+          {
+            "id": "M6Q3R1",
+            "question": "Image compression using PCA or SVD works on:",
+            "options": [
+              "Image patches of pixel data",
+              "Audio waveform samples",
+              "Text character frequencies",
+              "Network packet headers"
+            ],
+            "correct_option": "Image patches of pixel data",
+            "explanation": "PCA reduces the dimensionality of pixel blocks, compressing images efficiently."
+          },
+          {
+            "id": "M6Q3R2",
+            "question": "The 'eigenfaces' technique for face recognition uses:",
+            "options": [
+              "PCA on face image matrices",
+              "Random forest classification",
+              "Simple template matching only",
+              "K-means on raw pixels"
+            ],
+            "correct_option": "PCA on face image matrices",
+            "explanation": "Eigenfaces are the principal components of a dataset of face images."
+          },
+          {
+            "id": "M6Q3R3",
+            "question": "In genomics, PCA on gene expression data helps identify:",
+            "options": [
+              "Population structure and batch effects",
+              "New DNA strands to sequence",
+              "Protein folding speed",
+              "Direct mutation rate values"
+            ],
+            "correct_option": "Population structure and batch effects",
+            "explanation": "PCA reveals hidden structure in high-dimensional gene expression datasets."
+          },
+          {
+            "id": "M6Q3R4",
+            "question": "In NLP, PCA applied to word embeddings like Word2Vec can:",
+            "options": [
+              "Reduce dimensions preserving meaning",
+              "Generate new words automatically",
+              "Translate between languages directly",
+              "Count word frequencies only"
+            ],
+            "correct_option": "Reduce dimensions preserving meaning",
+            "explanation": "PCA compresses high-dimensional word vectors while retaining semantic relationships."
+          },
+          {
+            "id": "M6Q3R5",
+            "question": "In finance, PCA on stock returns helps identify:",
+            "options": [
+              "Underlying risk factors and trends",
+              "Individual stock prices exactly",
+              "Best time to buy shares",
+              "Company revenue projections"
+            ],
+            "correct_option": "Underlying risk factors and trends",
+            "explanation": "PCA decomposes return correlations into a few latent risk factors like market, sector, and size."
+          }
+        ]
+      },
+      "real_life_application": [
+        {
+          "id": "M6Q3R1",
+          "question": "Eigenfaces for face recognition is based on",
+          "options": [
+            "Principal Component Analysis",
+            "Linear Discriminant Analysis",
+            "Factor Analysis Method",
+            "Random Projection Method"
+          ],
+          "correct_option": "Principal Component Analysis",
+          "explanation": "Eigenfaces apply PCA to face images, keeping the top eigenvectors as basis faces that capture most variance."
+        },
+        {
+          "id": "M6Q3R2",
+          "question": "PCA finds directions of",
+          "options": [
+            "smallest eigenvalue",
+            "mean-reverting axis",
+            "highest variance",
+            "orthogonal noise"
+          ],
+          "correct_option": "highest variance",
+          "explanation": "PCA's principal components are the directions along which the data has the highest variance."
+        },
+        {
+          "id": "M6Q3R3",
+          "question": "SVD compresses an image by keeping",
+          "options": [
+            "bottom singular values",
+            "top singular values",
+            "random column slices",
+            "middle diagonal blocks"
+          ],
+          "correct_option": "top singular values",
+          "explanation": "Keeping the largest singular values discards low-energy directions and yields a low-rank approximation with minimal error."
+        },
+        {
+          "id": "M6Q3R4",
+          "question": "Word embeddings can be visualised using",
+          "options": [
+            "exact string match",
+            "alphabetical sorting",
+            "random hashing",
+            "PCA projection"
+          ],
+          "correct_option": "PCA projection",
+          "explanation": "High-dimensional word vectors are often projected to 2D with PCA or t-SNE for visualisation and analysis."
+        },
+        {
+          "id": "M6Q3R5",
+          "question": "In finance, PCA on stock returns finds",
+          "options": [
+            "portfolio weights directly",
+            "common risk factors",
+            "bond maturity dates",
+            "dividend payout ratios"
+          ],
+          "correct_option": "common risk factors",
+          "explanation": "PCA on a stock-returns covariance matrix uncovers the few common factors (e.g., market, sector) that drive most variation."
+        }
+      ]
+    }
+  ]
+}

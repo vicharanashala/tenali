@@ -1,0 +1,449 @@
+{
+  "module": 4,
+  "missionId": 42,
+  "title": "Rank by Example",
+  "original_question": "Consider M : R⁴ → R⁴, a 4×4 matrix. Give one example matrix for each case: (a) rank 4, (b) rank 3, (c) rank 2, (d) rank 1, (e) rank 0. For each, explain why the range has that dimension.",
+  "core_concept": "Rank equals the dimension of the range (column space). A 4×4 matrix can have rank 0, 1, 2, 3, or 4 — each corresponding to a different dimension of output space.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M4Q6E1",
+        "question": "What is the rank of the 4×4 identity matrix I₄?",
+        "options": [
+          "0",
+          "1",
+          "2",
+          "4"
+        ],
+        "correct_option": "4",
+        "explanation": "Step 1: I₄ has 1s on the diagonal — every row (and column) is a standard basis vector. Step 2: All 4 rows are linearly independent (no row is a combination of others). Step 3: Rank = 4 (full rank), meaning the range is all of R⁴. The identity matrix maps every input to itself — it preserves all information."
+      },
+      {
+        "id": "M4Q6E2",
+        "question": "What is the rank of the 4×4 zero matrix?",
+        "options": [
+          "0",
+          "1",
+          "2",
+          "4"
+        ],
+        "correct_option": "0",
+        "explanation": "Step 1: Every entry is 0 — there are no independent rows or columns. Step 2: The zero matrix maps every vector to the zero vector. Step 3: Rank = 0, and the range is just {0}. This is the extreme opposite of the identity matrix: all information is destroyed."
+      },
+      {
+        "id": "M4Q6E3",
+        "question": "A 4×4 matrix M = [[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,0]] has rank:",
+        "options": [
+          "0",
+          "1",
+          "3",
+          "4"
+        ],
+        "correct_option": "3",
+        "explanation": "Step 1: The first three rows (1,0,0,0), (0,1,0,0), (0,0,1,0) are clearly independent. Step 2: The fourth row is all zeros. Step 3: Three independent rows → rank = 3. The range is a 3D hyperplane in R⁴ — one dimension is collapsed."
+      },
+      {
+        "id": "M4Q6E4",
+        "question": "A 4×4 matrix with exactly one nonzero entry (e.g., M = [[1,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]) has rank:",
+        "options": [
+          "0",
+          "1",
+          "2",
+          "4"
+        ],
+        "correct_option": "1",
+        "explanation": "Step 1: Only one row (and column) is nonzero. Step 2: This single nonzero direction is the only independent direction. Step 3: Rank = 1, and the range is the 1D line t(1,0,0,0). Three dimensions of output are collapsed."
+      },
+      {
+        "id": "M4Q6E5",
+        "question": "What is the rank of M = [[1,0,0,0],[0,1,0,0],[0,0,0,0],[0,0,0,0]]?",
+        "options": [
+          "0",
+          "1",
+          "2",
+          "4"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: Two independent rows: (1,0,0,0) and (0,1,0,0). Step 2: Two zero rows contribute nothing. Step 3: Rank = 2, and the range is a 2D plane in R⁴. The matrix projects R⁴ onto its first two coordinates."
+      },
+      {
+        "id": "M4Q6E6",
+        "question": "The rank of a matrix equals the dimension of which subspace?",
+        "options": [
+          "The null space",
+          "The row space",
+          "The range (column space)",
+          "The left null space"
+        ],
+        "correct_option": "The range (column space)",
+        "explanation": "Step 1: Rank = number of pivots = number of independent columns. Step 2: The column space is spanned by the columns. Step 3: dim(C(A)) = rank(A) = number of independent output directions. This is the definition of rank — it counts how many independent directions the matrix can produce."
+      },
+      {
+        "id": "M4Q6E7",
+        "question": "For a 4×4 matrix, what is the maximum possible rank?",
+        "options": [
+          "0",
+          "1",
+          "4",
+          "8"
+        ],
+        "correct_option": "4",
+        "explanation": "Step 1: A 4×4 matrix has 4 rows and 4 columns. Step 2: At most 4 rows (or columns) can be independent. Step 3: When rank = 4, the matrix is invertible and maps R⁴ onto R⁴. Rank cannot exceed min(m,n) = min(4,4) = 4."
+      },
+      {
+        "id": "M4Q6E8",
+        "question": "If a 4×4 matrix has rank 2, what is the dimension of its null space?",
+        "options": [
+          "0",
+          "2",
+          "4",
+          "6"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: By Rank-Nullity: rank + nullity = n = 4. Step 2: nullity = 4 - 2 = 2. Step 3: The null space is a 2D subspace of R⁴ — two independent input directions are collapsed to zero."
+      },
+      {
+        "id": "M4Q6E9",
+        "question": "A rank-1 4×4 matrix maps R⁴ onto:",
+        "options": [
+          "A point)",
+          "A line through the origin",
+          "A plane through the origin",
+          "All of R⁴)"
+        ],
+        "correct_option": "A line through the origin",
+        "explanation": "Step 1: Rank 1 means the column space is 1-dimensional. Step 2: The range is a line through the origin in R⁴. Step 3: Every output is a scalar multiple of one direction — three dimensions are collapsed. The matrix can only produce outputs along a single line."
+      },
+      {
+        "id": "M4Q6E10",
+        "question": "Which 4×4 matrix has rank 2: M₁ = diag(1,1,0,0) or M₂ = diag(1,0,0,0)?",
+        "options": [
+          "M₁",
+          "M₂ — t here",
+          "Both have rank 2",
+          "Neither has rank 2"
+        ],
+        "correct_option": "M₁",
+        "explanation": "Step 1: diag(1,1,0,0) has 2 nonzero diagonal entries → rank 2. Step 2: diag(1,0,0,0) has 1 nonzero diagonal entry → rank 1. Step 3: For diagonal matrices, rank equals the number of nonzero diagonal entries — a quick way to determine rank."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M4Q6M1",
+        "question": "For a 4×4 matrix of rank 3, the null space has dimension 1. What does the null space represent geometrically?",
+        "options": [
+          "A point)",
+          "A line through the origin",
+          "A plane through the origin",
+          "All of R⁴)"
+        ],
+        "correct_option": "A line through the origin",
+        "explanation": "Step 1: nullity = 4 - 3 = 1. Step 2: A 1D subspace is a line through the origin. Step 3: All vectors along this line are mapped to zero — one direction of input is lost. The matrix collapses R⁴ onto a 3D hyperplane, and this line is perpendicular to it."
+      },
+      {
+        "id": "M4Q6M2",
+        "question": "If a 4×4 matrix has rank 1, how many dimensions of the output are collapsed (lost)?",
+        "options": [
+          "0",
+          "1",
+          "3",
+          "4"
+        ],
+        "correct_option": "3",
+        "explanation": "Step 1: The input is 4D (R⁴). Step 2: The output range is 1D (rank = 1). Step 3: 4 - 1 = 3 dimensions are collapsed — the matrix maps a 4D space onto a 1D line. The null space is 3D, representing the three lost dimensions."
+      },
+      {
+        "id": "M4Q6M3",
+        "question": "Which rank gives a matrix the property that Ax = b has a unique solution for every b?",
+        "options": [
+          "Rank 0",
+          "Rank 1",
+          "Rank 2",
+          "Full rank (rank = n)"
+        ],
+        "correct_option": "Full rank (rank = n)",
+        "explanation": "Step 1: Full rank means rank = n. Step 2: nullity = n - n = 0, so the null space is trivial. Step 3: Every b in C(A) = Rⁿ has exactly one preimage x. The matrix is invertible — this is the unique scenario where Ax = b is always uniquely solvable."
+      },
+      {
+        "id": "M4Q6M4",
+        "question": "For M = diag(1,1,0,0), the range is a 2D plane. Which vectors are in this range?",
+        "options": [
+          "All vectors (a,b,0,0) for any a,b",
+          "All vectors (a,b,c,0)",
+          "All vectors (a,0,0,0)",
+          "All of R⁴)"
+        ],
+        "correct_option": "All vectors (a,b,0,0) for any a,b",
+        "explanation": "Step 1: M = diag(1,1,0,0), so M(x,y,z,w) = (x,y,0,0). Step 2: The output always has zeros in positions 3 and 4. Step 3: The range is the xy-plane in R⁴ — vectors of the form (a,b,0,0). The third and fourth coordinates are always destroyed."
+      },
+      {
+        "id": "M4Q6M5",
+        "question": "If a 4×4 matrix has rank 2, what are the dimensions of all four subspaces?",
+        "options": [
+          "R(A)=2, N(A)=2, C(A)=2, N(Aᵀ)=2",
+          "R(A)=2, N(A)=2, C(A)=4, N(Aᵀ)=0",
+          "R(A)=4, N(A)=0, C(A)=2, N(Aᵀ)=2",
+          "R(A)=2, N(A)=4, C(A)=2, N(Aᵀ)=4"
+        ],
+        "correct_option": "R(A)=2, N(A)=2, C(A)=2, N(Aᵀ)=2",
+        "explanation": "Step 1: rank = 2 → R(A) and C(A) are both 2D. Step 2: nullity(A) = 4 - 2 = 2 → N(A) is 2D. Step 3: nullity(Aᵀ) = 4 - 2 = 2 → N(Aᵀ) is 2D. All four subspaces are 2-dimensional — a perfectly balanced decomposition for a rank-2 square matrix."
+      },
+      {
+        "id": "M4Q6M6",
+        "question": "A 4×4 matrix with rank 0 maps every vector in R⁴ to:",
+        "options": [
+          "Itself)",
+          "A random vector",
+          "The zero vector",
+          "A line through the origin"
+        ],
+        "correct_option": "The zero vector",
+        "explanation": "Step 1: Rank 0 means the matrix is the zero matrix. Step 2: 0·v = 0 for any vector v. Step 3: Every input maps to the zero vector — the range is {0}. This is the complete information-loss scenario."
+      },
+      {
+        "id": "M4Q6M7",
+        "question": "Can a 4×4 matrix have rank 5?",
+        "options": [
+          "if it has eugh nzero entries",
+          "No — rank cannot exceed the number of rows or columns",
+          "Only if the matrix is 5×5",
+          "Only in special cases"
+        ],
+        "correct_option": "No — rank cannot exceed the number of rows or columns",
+        "explanation": "Step 1: The rank is the number of independent rows (or columns). Step 2: A 4×4 matrix has at most 4 independent rows and 4 independent columns. Step 3: So rank ≤ min(4,4) = 4. Rank 5 is impossible — the rank is bounded by the matrix dimensions."
+      },
+      {
+        "id": "M4Q6M8",
+        "question": "Which statement about rank and the determinant is TRUE?",
+        "options": [
+          "If det(M) ≠ 0, rank = n (full rank)",
+          "If det(M) = 0, rank = 0",
+          "det(M) always equals the rank",
+          "det(M) is unrelated to rank"
+        ],
+        "correct_option": "If det(M) ≠ 0, rank = n (full rank)",
+        "explanation": "Step 1: det(M) ≠ 0 means M is invertible. Step 2: An invertible matrix has rank = n (full rank). Step 3: det(M) = 0 means rank < n (not full rank), but rank could be anything from 0 to n-1. The determinant only tells you whether rank is full, not the exact rank."
+      },
+      {
+        "id": "M4Q6M9",
+        "question": "If M = [[1,0,0,0],[2,0,0,0],[3,0,0,0],[4,0,0,0]], what is the rank?",
+        "options": [
+          "0",
+          "1",
+          "2",
+          "4"
+        ],
+        "correct_option": "1",
+        "explanation": "Step 1: All rows are multiples of (1,0,0,0). Step 2: Only one independent direction exists. Step 3: Rank = 1. The range is the 1D line t(1,0,0,0). Despite having 16 nonzero entries, the matrix only has one independent direction."
+      },
+      {
+        "id": "M4Q6M10",
+        "question": "A 4×4 matrix M has rank 3. If you add a row of zeros to make it 5×4, what is the rank of the new matrix?",
+        "options": [
+          "3",
+          "4",
+          "5",
+          "0"
+        ],
+        "correct_option": "3",
+        "explanation": "Step 1: Adding a zero row does not add any new independent direction. Step 2: The original 3 independent rows are still independent. Step 3: Rank remains 3. Zero rows never contribute to rank — they only add null space in the left null space."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M4Q6H1",
+        "question": "For a 4×4 matrix of rank r, the null space has dimension 4-r. As r decreases from 4 to 0, how does the null space change?",
+        "options": [
+          "It shrinks from 0D to 4D",
+          "It grows from 0D to 4D",
+          "It stays constant at 2D",
+          "It oscillates"
+        ],
+        "correct_option": "It grows from 0D to 4D",
+        "explanation": "Step 1: r = 4 → nullity = 0 (null space is {0}). Step 2: r = 2 → nullity = 2 (null space is a 2D plane). Step 3: r = 0 → nullity = 4 (null space is all of R⁴). As rank decreases, more dimensions are collapsed, and the null space grows — illustrating the inverse relationship between rank and nullity."
+      },
+      {
+        "id": "M4Q6H2",
+        "question": "If A and B are both 4×4 matrices with rank 2, must AB also have rank 2?",
+        "options": [
+          "rank is preserved under multiplication",
+          "No — rank(AB) ≤ min(rank(A), rank(B)), so it could be 0, 1, or 2",
+          "— rank(AB) always equals rank(A) + rank(B)",
+          "if both are diagonal"
+        ],
+        "correct_option": "No — rank(AB) ≤ min(rank(A), rank(B)), so it could be 0, 1, or 2",
+        "explanation": "Step 1: rank(AB) ≤ min(rank(A), rank(B)) is a fundamental inequality. Step 2: rank(AB) could be less than 2 if the range of B intersects the null space of A. Step 3: For example, if B maps into A's null space, AB = 0 (rank 0). The rank can only decrease or stay the same under multiplication."
+      },
+      {
+        "id": "M4Q6H3",
+        "question": "For a 4×4 matrix, rank + nullity = 4. If the null space is a line (1D), the range is a 3D hyperplane. Can you find a vector NOT in the range?",
+        "options": [
+          "— if the range is 3D in R⁴, there are v",
+          "Yes — any vector perpendicular to the range",
+          "— the range is all of R⁴...",
+          "Only if the matrix is symmetric..."
+        ],
+        "correct_option": "Yes — any vector perpendicular to the range",
+        "explanation": "Step 1: A 3D range in R⁴ is a hyperplane — it does not fill all of R⁴. Step 2: N(Aᵀ) is 1D and perpendicular to C(A). Step 3: Any nonzero vector in N(Aᵀ) is NOT in the range — it represents an unreachable output direction. Finding such vectors is crucial for understanding what the matrix cannot do."
+      },
+      {
+        "id": "M4Q6H4",
+        "question": "A 4×4 matrix M has rank 3. The range is 3D. Project b = (1,1,1,1) onto C(M). What is the dimension of the error b - proj?",
+        "options": [
+          "0",
+          "1",
+          "2",
+          "3"
+        ],
+        "correct_option": "1",
+        "explanation": "Step 1: The error b - proj lies in N(Aᵀ), which has dimension 4 - 3 = 1. Step 2: The error is a 1D vector perpendicular to the range. Step 3: This 1D error represents the component of b that the matrix cannot reproduce — the 'unreachable' part of the output."
+      },
+      {
+        "id": "M4Q6H5",
+        "question": "For M = diag(1,1,0,0), the null space is {(0,0,z,w)}. If you perturb M by adding a tiny ε to the (3,3) entry, what happens to the rank?",
+        "options": [
+          "It stays at 2",
+          "It increases to 3",
+          "It decreases to 1",
+          "It becomes undefined"
+        ],
+        "correct_option": "It increases to 3",
+        "explanation": "Step 1: M + εE₃₃ = diag(1,1,ε,0). Step 2: For ε ≠ 0, there are now 3 nonzero diagonal entries → rank 3. Step 3: The perturbation activates a previously dead dimension, increasing the rank. This shows rank can be sensitive to small changes — a key insight for numerical stability."
+      },
+      {
+        "id": "M4Q6H6",
+        "question": "If A is 4×4 with rank 2, and B is 4×4 with rank 3, what are the possible ranks of A + B?",
+        "options": [
+          "1, 2, or 3",
+          "2 or 3 only",
+          "Exactly 2",
+          "0 through 4"
+        ],
+        "correct_option": "1, 2, or 3",
+        "explanation": "Step 1: rank(A+B) ≤ rank(A) + rank(B) = 5, but also ≤ 4 (for 4×4). Step 2: rank(A+B) ≥ |rank(A) - rank(B)| = 1. Step 3: The rank of the sum can range from max(0, r_A+r_B-n) = max(0, 1) = 1 to min(r_A+r_B, n) = min(5, 4) = 4. The precise range depends on how the row spaces overlap."
+      },
+      {
+        "id": "M4Q6H7",
+        "question": "A 4×4 matrix M has rank 4. What is the dimension of the solution set of Mx = b for any b ∈ R⁴?",
+        "options": [
+          "0 (unique solution)",
+          "1 — t here",
+          "2 — t here",
+          "4 — t here"
+        ],
+        "correct_option": "0 (unique solution)",
+        "explanation": "Step 1: Rank 4 means nullity = 0 (null space is {0}). Step 2: If a solution exists, it is unique (no null space vectors to add). Step 3: Since rank = n = 4, C(A) = R⁴, so a solution always exists and is unique. Full rank guarantees both existence and uniqueness of solutions."
+      },
+      {
+        "id": "M4Q6H8",
+        "question": "For a 4×4 matrix, if the null space is 2D, what is the rank?",
+        "options": [
+          "0",
+          "1",
+          "2",
+          "4"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: nullity = 2 means dim(N(A)) = 2. Step 2: By Rank-Nullity: rank = n - nullity = 4 - 2 = 2. Step 3: The rank is exactly 2, determined uniquely by the null space dimension — this is the Rank-Nullity Theorem working in reverse."
+      },
+      {
+        "id": "M4Q6H9",
+        "question": "Can a 4×4 matrix have rank 2 and also be idempotent (M² = M)?",
+        "options": [
+          "Yes — there exist rank-2 idempotent matrices",
+          "— idempotent matrices must have rank 0 or 4",
+          "Only if M is symmetric",
+          "Only if det(M) = 0 — does t match"
+        ],
+        "correct_option": "Yes — there exist rank-2 idempotent matrices",
+        "explanation": "Step 1: An idempotent matrix satisfies M² = M. Step 2: Its eigenvalues are 0 or 1. Step 3: A rank-2 idempotent has two eigenvalues equal to 1 and two equal to 0 (e.g., projection onto a 2D plane). M = diag(1,1,0,0) is a simple example. Idempotent matrices are projections."
+      },
+      {
+        "id": "M4Q6H10",
+        "question": "If A is 4×4 with rank 3, the range is a 3D hyperplane. What is the equation of this hyperplane in R⁴?",
+        "options": [
+          "a₁x₁ + a₂x₂ + a₃x₃ + a₄x₄ = 0 where (a₁,a₂,a₃,a₄) is the left null space direction",
+          "x₁ = 0)",
+          "x₁ + x₂ + x₃ + x₄ = 1",
+          "There is single equation for a 3D hyperplane"
+        ],
+        "correct_option": "a₁x₁ + a₂x₂ + a₃x₃ + a₄x₄ = 0 where (a₁,a₂,a₃,a₄) is the left null space direction",
+        "explanation": "Step 1: C(A) is a 3D hyperplane in R⁴. Step 2: A hyperplane through the origin is defined by one linear equation. Step 3: The normal to the hyperplane is the left null space direction (a₁,...,a₄) ∈ N(Aᵀ), giving a₁x₁ + ... + a₄x₄ = 0. This connects the left null space to the geometry of the column space."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "id": "M4Q6R1",
+      "question": "A mechanical system with 4 joints has a 4×4 stiffness matrix. If the rank is 3, how many independent degrees of freedom can the system move in?",
+      "options": [
+        "0",
+        "1",
+        "3",
+        "4"
+      ],
+      "correct_option": "3",
+      "explanation": "Step 1: Rank = 3 means the column space (range) is 3D. Step 2: Each independent direction in the range represents a movable degree of freedom. Step 3: The system can move independently in 3 directions; the 4th direction (null space) is a rigid body mode — it moves without deformation. Rank directly determines the system's mobility."
+    },
+    {
+      "id": "M4Q6R2",
+      "question": "A dataset has 100 features but the data matrix has rank 5. How many truly independent features exist?",
+      "options": [
+        "5",
+        "10",
+        "50",
+        "100"
+      ],
+      "correct_option": "5",
+      "explanation": "Step 1: Rank 5 means only 5 independent directions of variation exist. Step 2: The other 95 features are linear combinations of these 5. Step 3: The true dimensionality is 5, not 100. PCA would reduce this to 5 components — rank reveals the effective complexity of the data."
+    },
+    {
+      "id": "M4Q6R3",
+      "question": "In a social network with 4 users, the adjacency matrix has rank 1. What does this tell us about the network?",
+      "options": [
+        "All users are connected to everyone",
+        "All connection patterns are driven by a single factor",
+        "connections exist",
+        "The network is fully disconnected"
+      ],
+      "correct_option": "All connection patterns are driven by a single factor",
+      "explanation": "Step 1: Rank 1 means the adjacency matrix has only one independent direction. Step 2: All connection patterns can be explained by one common factor (like popularity). Step 3: User connectivity is entirely determined by their position along this single dimension — rank reveals the network's effective complexity."
+    },
+    {
+      "id": "M4Q6R4",
+      "question": "A manufacturing process has 4 machines producing 1 product. The production matrix has rank 1. What does this imply?",
+      "options": [
+        "All 4 machines are needed",
+        "The machines produce effectively the same output — 3 are redundant",
+        "machines are working",
+        "The product has 4 independent features"
+      ],
+      "correct_option": "The machines produce effectively the same output — 3 are redundant",
+      "explanation": "Step 1: Rank 1 means all machines produce output along the same direction. Step 2: The other 3 machines' contributions are redundant (in N(Aᵀ)). Step 3: Only one machine is truly needed — the others replicate its function. Rank quantifies the minimum resources needed."
+    },
+    {
+      "id": "M4Q6R5",
+      "question": "A camera with 4 sensors captures a 3D scene. The sensor matrix has rank 3. Can the camera fully reconstruct 3D positions?",
+      "options": [
+        "Yes — rank 3 means the range covers all 3D directions",
+        "— it needs rank 4",
+        "Only partially — rank 3 gives 3 out of 4 dimensions",
+        "Only if the sensors are orthogonal"
+      ],
+      "correct_option": "Yes — rank 3 means the range covers all 3D directions",
+      "explanation": "Step 1: 3D positions live in R³. Step 2: The sensor matrix maps 4 sensor readings to 3D space. Step 3: Rank 3 means the column space is all of R³ — every 3D direction is measurable. The 4th sensor adds redundancy (1D left null space), not new information."
+    },
+    {
+      "id": "M4Q6R6",
+      "question": "A neural network layer has a 4×4 weight matrix. If the rank drops to 1 after training, what problem might the network have?",
+      "options": [
+        "The network is learning well",
+        "The layer has collapsed — it can only output 1 dimension of information",
+        "The network needs more layers",
+        "The learning rate is too high"
+      ],
+      "correct_option": "The layer has collapsed — it can only output 1 dimension of information",
+      "explanation": "Step 1: Rank 1 means the layer maps 4D input to a 1D output line. Step 2: Three dimensions of input information are lost (null space is 3D). Step 3: This 'rank collapse' severely limits the network's representational power — it can only distinguish inputs along one direction. Monitoring rank during training helps detect this pathology."
+    }
+  ]
+}

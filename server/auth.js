@@ -3,35 +3,81 @@
  *
  * Exposes:
  *   - connectMongo(uri):       Promise that resolves once Mongo is connected.
- *   - seedUsers():             Inserts the two hardcoded users if not present.
+ *   - seedUsers():             Seeds users listed in TENALI_SEED_USERS if not present.
  *   - router (Express Router): /api/auth/login  POST {username, password}
  *                              /api/auth/me     GET  (requires Bearer token)
  *   - requireAuth (middleware): blocks if no/invalid Bearer token.
  *
  * Configuration (env):
- *   MONGO_URI  default mongodb://127.0.0.1:27017/tenali
- *   JWT_SECRET default 'tenali-dev-secret-change-me'
- *   JWT_TTL    default '14d'
+ *   MONGO_URI         default mongodb://127.0.0.1:27017/tenali
+ *   JWT_SECRET        REQUIRED in production (server refuses to start without it);
+ *                     dev-only fallback is the public default, used with a warning
+ *   JWT_TTL           default '14d'
+ *   TENALI_SEED_USERS comma-separated "username:password[:role]" entries to seed
+ *                     (no default). Use ":admin" on one entry for proctor access.
  */
 
 const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const logger = require('./lib/logger');
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/tenali';
-const JWT_SECRET = process.env.JWT_SECRET || 'tenali-dev-secret-change-me';
+const DEFAULT_DEV_SECRET = 'tenali-dev-secret-change-me';
+const JWT_SECRET = process.env.JWT_SECRET || DEFAULT_DEV_SECRET;
 const JWT_TTL = process.env.JWT_TTL || '14d';
+
+// Fail fast: never run in production on the built-in default secret — it is
+// public (in this repo), so anyone could forge valid tokens. In development we
+// fall back to the default but warn loudly.
+if (process.env.NODE_ENV === 'production' &&
+    (!process.env.JWT_SECRET || process.env.JWT_SECRET === DEFAULT_DEV_SECRET)) {
+  throw new Error('JWT_SECRET must be set to a strong, non-default value in production — refusing to start.');
+}
+if (JWT_SECRET === DEFAULT_DEV_SECRET) {
+  logger.warn(null,'[auth] WARNING: using the built-in development JWT secret. Set JWT_SECRET before deploying.');
+}
 
 // ─── Mongoose schema ─────────────────────────────────────────────────────────
 
 const UserSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true, index: true, lowercase: true, trim: true },
   passwordHash: { type: String, required: true },
+  xp: { type: Number, default: 500 },
+  hintLogs: [{
+    concept: String,
+    questionId: String,
+    level: Number,
+    unlockedAt: { type: Date, default: Date.now }
+  }],
+  lessonStats: [{
+    concept: String,
+    questionsCount: Number,
+    correctCount: { type: Number, default: 0 },
+    hintsUsed: Number,
+    bonusAwarded: Boolean,
+    perfectScoreBonusAwarded: { type: Boolean, default: false },
+    completedAt: { type: Date, default: Date.now }
+  }],
+  // Reward-system fields (v2 hint feature)
+  // lastDailyCheckin: date string 'YYYY-MM-DD' (server local) for the most recent
+  // day the user was awarded a daily check-in bonus. Compared against today
+  // before granting +5 XP.
+  lastDailyCheckin: { type: String, default: null },
+  dailyCheckinCount: { type: Number, default: 0 },
+  // correctStats: ring buffer (most recent ~200 entries) of per-correct-answer
+  // +1 XP events. Powers future analytics and the anti-cheese cap.
+  correctStats: [{
+    concept: String,
+    at: { type: Date, default: Date.now }
+  }],
+  firstMergeDone: { type: Boolean, default: false },
+  lessonsCompleted: { type: [String], default: [] },
   createdAt: { type: Date, default: Date.now },
   completedTopics: { type: [String], default: [] },
   goldMastery: { type: [String], default: [] },
-  coins: { type: Number, default: 0 },
+  coins: { type: Number, default: 500 },
   achievements: {
     completedCollections: [
       {
@@ -53,8 +99,34 @@ const UserSchema = new mongoose.Schema({
     }
   ],
   gradeLevel: { type: String, default: 'Grade 3' },
-  coinBalance: { type: Number, default: 0 },
-  xpScore: { type: Number, default: 0 }
+  coinBalance: { type: Number, default: 500 },
+  xpScore: { type: Number, default: 500 },
+  role: { type: String, default: 'user', enum: ['user', 'admin'] }
+});
+
+UserSchema.pre('save', function (next) {
+  if (this.isModified('coins')) {
+    const val = this.coins;
+    this.xp = val;
+    this.coinBalance = val;
+    this.xpScore = val;
+  } else if (this.isModified('xp')) {
+    const val = this.xp;
+    this.coins = val;
+    this.coinBalance = val;
+    this.xpScore = val;
+  } else if (this.isModified('coinBalance')) {
+    const val = this.coinBalance;
+    this.coins = val;
+    this.xp = val;
+    this.xpScore = val;
+  } else if (this.isModified('xpScore')) {
+    const val = this.xpScore;
+    this.coins = val;
+    this.xp = val;
+    this.coinBalance = val;
+  }
+  next();
 });
 
 const ProgressSchema = new mongoose.Schema({
@@ -69,8 +141,18 @@ const ProgressSchema = new mongoose.Schema({
 // Ensure a user has only one progress document per topic
 ProgressSchema.index({ userId: 1, topic: 1 }, { unique: true });
 
+const ContrastProgressSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, unique: true, index: true },
+  completedModules: { type: [String], default: [] },
+  unlockedPairs: { type: [String], default: [] },
+  seenPairs: { type: [String], default: [] },
+  completedPairs: { type: [String], default: [] },
+  updatedAt: { type: Date, default: Date.now }
+});
+
 const User = mongoose.model('User', UserSchema);
 const Progress = mongoose.model('Progress', ProgressSchema);
+const ContrastProgress = mongoose.model('ContrastProgress', ContrastProgressSchema);
 
 const StudentAttemptLogSchema = new mongoose.Schema({
   studentId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, index: true },
@@ -147,15 +229,40 @@ let connected = false;
 
 async function connectMongo(uri = MONGO_URI) {
   if (connected) return;
-  await mongoose.connect(uri, { serverSelectionTimeoutMS: 8000, family: 4 });
+  await mongoose.connect(uri, { serverSelectionTimeoutMS: 15000, family: 4 });
   connected = true;
   console.log(`[auth] Mongo connected: ${uri.replace(/\/\/.*@/, '//***@')}`);
 }
 
-const SEED_USERS = [
-  { username: 'sudarshan', password: 'sherlockholmes' },
-  { username: 'tatsavit',  password: 'taittiriya' },
-];
+// Seed users come from the TENALI_SEED_USERS env var as a comma-separated list of
+// "username:password" or "username:password:role" entries (e.g.
+// "alice:pw1,admin:pw2:admin"), so NO credentials — including the admin account —
+// are committed to source. If unset, no users are seeded and existing DB users
+// still log in. The admin entry (role "admin") gates the proctor dashboard, so a
+// deploy that needs proctor access must include one in TENALI_SEED_USERS.
+const ENV_SEED_USERS = (process.env.TENALI_SEED_USERS || '')
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean)
+  .map((entry) => {
+    const parts = entry.split(':');
+    if (parts.length < 2) return null;
+    // First field is the username; a trailing 3rd+ field is the role. Anything
+    // in between is the password (so passwords may themselves contain colons).
+    const username = parts[0].trim();
+    const role = parts.length >= 3 ? parts[parts.length - 1].trim() : undefined;
+    const password = (parts.length >= 3 ? parts.slice(1, -1) : parts.slice(1)).join(':');
+    return { username, password, role };
+  })
+  .filter((u) => u && u.username && u.password);
+
+const SEED_USERS = [...ENV_SEED_USERS];
+
+if (ENV_SEED_USERS.length === 0) {
+  logger.warn(null,'[auth] No TENALI_SEED_USERS configured — relying only on existing DB users. No admin will be seeded.');
+} else if (!ENV_SEED_USERS.some((u) => u.role === 'admin')) {
+  logger.warn(null,'[auth] No admin entry in TENALI_SEED_USERS — proctor dashboard access will be unavailable until one is added (format "user:pass:admin").');
+}
 
 // In-memory fallback used when MongoDB is unavailable.
 // Keyed by lowercase username → bcrypt hash (populated at startup).
@@ -168,9 +275,15 @@ async function seedUsers() {
 
     if (!connected) continue;
     const existing = await User.findOne({ username: u.username.toLowerCase() });
-    if (existing) continue;
-    await User.create({ username: u.username.toLowerCase(), passwordHash: hash });
-    console.log(`[auth] seeded user: ${u.username}`);
+    if (existing) {
+      if (u.role && existing.role !== u.role) {
+        existing.role = u.role;
+        await existing.save();
+      }
+      continue;
+    }
+    await User.create({ username: u.username.toLowerCase(), passwordHash: hash, role: u.role || 'user' });
+    console.log(`[auth] seeded user: ${u.username}${u.role ? ' (' + u.role + ')' : ''}`);
   }
 }
 
@@ -178,7 +291,7 @@ async function seedUsers() {
 
 function signToken(user) {
   return jwt.sign(
-    { sub: user._id ? user._id.toString() : user.username, username: user.username },
+    { sub: user._id ? user._id.toString() : user.username, username: user.username, role: user.role || 'user' },
     JWT_SECRET,
     { expiresIn: JWT_TTL }
   );
@@ -190,11 +303,16 @@ function requireAuth(req, res, next) {
   if (!m) return res.status(401).json({ error: 'missing token' });
   try {
     const payload = jwt.verify(m[1], JWT_SECRET);
-    req.user = { id: payload.sub, username: payload.username };
+    req.user = { id: payload.sub, username: payload.username, role: payload.role || 'user' };
     next();
   } catch (_e) {
     return res.status(401).json({ error: 'invalid or expired token' });
   }
+}
+
+function requireAdmin(req, res, next) {
+  if (!req.user || req.user.role !== 'admin') return res.status(403).json({ error: 'admin access required' });
+  next();
 }
 
 // ─── Router ──────────────────────────────────────────────────────────────────
@@ -212,7 +330,7 @@ router.post('/login', async (req, res) => {
     const ok = await bcrypt.compare(password, user.passwordHash);
     if (!ok) return res.status(401).json({ error: 'invalid credentials' });
     const token = signToken(user);
-    return res.json({ token, user: { username: user.username } });
+    return res.json({ token, user: { username: user.username, role: user.role || 'user' } });
   }
 
   // Fallback: check against in-memory seed users when MongoDB is unavailable.
@@ -220,12 +338,14 @@ router.post('/login', async (req, res) => {
   if (!hash) return res.status(401).json({ error: 'invalid credentials' });
   const ok = await bcrypt.compare(password, hash);
   if (!ok) return res.status(401).json({ error: 'invalid credentials' });
-  const token = signToken({ username });
-  res.json({ token, user: { username } });
+  const seedUser = SEED_USERS.find(u => u.username.toLowerCase() === username);
+  const role = seedUser?.role || 'user';
+  const token = signToken({ username, role });
+  res.json({ token, user: { username, role } });
 });
 
 router.get('/me', requireAuth, (req, res) => {
   res.json({ user: req.user });
 });
 
-module.exports = { connectMongo, seedUsers, router, requireAuth, User, Progress, StudentAttemptLog, UserStats, UserMilestone, UserTopicProgress, UserCollectionProgress };
+module.exports = { connectMongo, seedUsers, router, requireAuth, requireAdmin, JWT_SECRET, User, Progress, ContrastProgress, StudentAttemptLog, UserStats, UserMilestone, UserTopicProgress, UserCollectionProgress };

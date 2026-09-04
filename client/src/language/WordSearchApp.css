@@ -1,4 +1,7 @@
-/* WordSearchApp.css */
+/* WordSearchApp.css
+   Structural surfaces / borders / text route through the global themed
+   --clr-* variables (App.css) so the module follows the dark/light toggle;
+   orange / green / red accents stay meaningful across both themes. */
 
 .ws-container {
   display: flex;
@@ -21,22 +24,20 @@
   flex-direction: column;
   align-items: center;
   gap: 15px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
   border-radius: 16px;
   padding: 24px;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-card);
 }
 
 .ws-grid {
   display: grid;
   gap: 4px;
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--clr-input);
   padding: 10px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--clr-border);
   user-select: none;
   touch-action: none;
 }
@@ -48,7 +49,7 @@
   justify-content: center;
   font-size: 1.2rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--clr-text);
   background: rgba(230, 126, 34, 0.05);
   border-radius: 50%;
   cursor: pointer;
@@ -66,7 +67,7 @@
 .ws-cell--selected {
   background: rgba(230, 126, 34, 0.35) !important;
   border-color: rgba(230, 126, 34, 0.6) !important;
-  color: #fff !important;
+  color: var(--clr-text) !important;
   box-shadow: 0 0 10px rgba(230, 126, 34, 0.2);
 }
 
@@ -96,8 +97,8 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
   border-radius: 16px;
   padding: 24px;
   width: 100%;
@@ -110,8 +111,8 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: rgba(255, 255, 255, 0.7);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--clr-text-soft);
+  border-bottom: 1px solid var(--clr-border);
   padding-bottom: 8px;
   margin-bottom: 12px;
 }
@@ -123,14 +124,14 @@
 }
 
 .ws-word-item {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--clr-input);
+  border: 1px solid var(--clr-border);
   border-radius: 8px;
   padding: 10px;
   text-align: center;
   font-weight: 600;
   font-size: 0.95rem;
-  color: #fff;
+  color: var(--clr-text);
   transition: all 0.2s ease;
   position: relative;
   overflow: hidden;
@@ -138,7 +139,7 @@
 .ws-word-item--solved {
   background: rgba(46, 204, 113, 0.1) !important;
   border-color: rgba(46, 204, 113, 0.3) !important;
-  color: rgba(255, 255, 255, 0.4) !important;
+  color: var(--clr-text-soft) !important;
   text-decoration: line-through;
 }
 
@@ -180,14 +181,14 @@
 }
 
 .ws-btn--ghost {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.85);
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  color: var(--clr-text);
 }
 
 .ws-btn--ghost:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
+  background: var(--clr-hover-strong);
+  color: var(--clr-text);
 }
 
 .ws-btn:disabled {
@@ -237,8 +238,8 @@
 }
 
 .ws-stat-card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: var(--clr-input);
+  border: 1px solid var(--clr-border);
   border-radius: 8px;
   padding: 10px;
   text-align: center;
@@ -252,5 +253,5 @@
 
 .ws-stat-lbl {
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--clr-text-soft);
 }

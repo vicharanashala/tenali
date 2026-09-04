@@ -1,0 +1,473 @@
+{
+  "module": 3,
+  "missionId": 23,
+  "title": "3D Perpendicular & Lines",
+  "original_question": "Find (x,y,z) satisfying [1,2,3]·[x,y,z]=0 → x+2y+3z=0 (a plane through origin). Now plot T={α(1,2,1)} — a line through origin. Plot S={β(2,7,3)} — another line. Both lines lie in the plane x+2y+3z=0? Check: (1,2,1)·(1,2,3)=1+4+3=8≠0 — no! T and S are NOT in that plane.",
+  "core_concept": "In R³, one linear equation ax+by+cz=0 defines a plane through the origin. Parametric lines through the origin are 1D subspaces. A line may or may not lie in a given plane.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M3Q2E1",
+        "question": "How many unknowns does the equation x+2y+3z=0 have?",
+        "options": [
+          "3",
+          "2x",
+          "1",
+          "4"
+        ],
+        "correct_option": "3",
+        "explanation": "Step 1: The equation involves x, y, and z — three unknowns. Step 2: One equation with three unknowns defines a 2D surface (a plane) in R³, because one constraint removes one degree of freedom from three: 3 − 1 = 2. Step 3: This plane is the orthogonal complement of the normal vector [1,2,3] — every vector in the plane is perpendicular to [1,2,3]. Step 4: Understanding how one equation removes one dimension is the basis for counting degrees of freedom in systems of equations, a skill essential for solving linear systems."
+      },
+      {
+        "id": "M3Q2E2",
+        "question": "Does the point (1,2,3) satisfy the equation x+2y+3z=0?",
+        "options": [
+          "No, because 1+4+14=19≠0",
+          "— t here",
+          "Only if scaled",
+          "Cant determine"
+        ],
+        "correct_option": "No, because 1+4+14=19≠0",
+        "explanation": "Step 1: Substitute x=1, y=2, z=3: 1 + 2(2) + 3(3) = 1 + 4 + 9 = 14. Step 2: Since 14 ≠ 0, the point (1,2,3) does not satisfy the equation. Step 3: This makes geometric sense — (1,2,3) IS the normal vector to the plane, so it is perpendicular to the plane itself, not lying within it. Step 4: A non-zero vector is never in its own orthogonal complement because v·v = ‖v‖² > 0, never zero."
+      },
+      {
+        "id": "M3Q2E3",
+        "question": "Does the origin (0,0,0) satisfy x+2y+3z=0?",
+        "options": [
+          "Yes",
+          "— t here",
+          "Only approximately",
+          "Undefined"
+        ],
+        "correct_option": "Yes",
+        "explanation": "Step 1: Substitute x=0, y=0, z=0: 0 + 2(0) + 3(0) = 0. Step 2: The origin satisfies the equation, so the plane passes through the origin. Step 3: Every homogeneous linear equation (right-hand side = 0) automatically includes the origin — this is what makes the solution set a subspace rather than just an affine set. Step 4: This 'passing through the origin' property is the first requirement for any subspace and guarantees that the plane is closed under linear combinations."
+      },
+      {
+        "id": "M3Q2E4",
+        "question": "Does the point (1,-1,0) satisfy x+2y+3z=0?",
+        "options": [
+          "because 1-2+0=-1≠0... wait let me rec",
+          "No",
+          "— t here",
+          "Cant determine — does t match"
+        ],
+        "correct_option": "No",
+        "explanation": "Step 1: Substitute x=1, y=−1, z=0: 1 + 2(−1) + 3(0) = 1 − 2 + 0 = −1. Step 2: Since −1 ≠ 0, this point does not lie on the plane. Step 3: The value of the equation at a point measures how far the point is from the plane (scaled by the normal's magnitude). Step 4: Testing membership in a plane is simply evaluating the linear equation — if it equals zero, the point is on the plane; this is the fastest way to check plane membership."
+      },
+      {
+        "id": "M3Q2E5",
+        "question": "Does the point (1,1,-1) satisfy x+2y+3z=0?",
+        "options": [
+          "Yes, because 1+2-3=0",
+          "— t here",
+          "Only if z=0",
+          "Cant determine"
+        ],
+        "correct_option": "Yes, because 1+2-3=0",
+        "explanation": "Step 1: Substitute x=1, y=1, z=−1: 1 + 2(1) + 3(−1) = 1 + 2 − 3 = 0. Step 2: The point (1,1,−1) lies on the plane because it satisfies the equation. Step 3: This point is perpendicular to the normal [1,2,3] since their dot product is zero — connecting back to the 2D perpendicularity concept from Mission 22. Step 4: Finding points on a plane is equivalent to finding vectors perpendicular to its normal, linking plane membership directly to the dot product."
+      },
+      {
+        "id": "M3Q2E6",
+        "question": "The equation x+2y+3z=0 defines what geometric shape in R³?",
+        "options": [
+          "A plane through the origin",
+          "A line through the origin",
+          "A circle)",
+          "A point)"
+        ],
+        "correct_option": "A plane through the origin",
+        "explanation": "Step 1: One linear equation in 3 unknowns constrains 1 degree of freedom. Step 2: 3 − 1 = 2 dimensions remain, forming a plane through the origin. Step 3: This plane is the orthogonal complement of the normal vector [1,2,3] — every vector in the plane is perpendicular to [1,2,3]. Step 4: The dimension formula dim(W) + dim(W⊥) = 3 gives 1 + 2 = 3, confirming the normal line and the plane together account for all of R³."
+      },
+      {
+        "id": "M3Q2E7",
+        "question": "Is the vector (1,2,1) perpendicular to (1,2,3)?",
+        "options": [
+          "No, because their dot product is 8≠0",
+          "— t here",
+          "Only approximately — does t match",
+          "Cant determine — does t match"
+        ],
+        "correct_option": "No, because their dot product is 8≠0",
+        "explanation": "Step 1: (1,2,1)·(1,2,3) = 1 + 4 + 3 = 8. Step 2: Since 8 ≠ 0, these vectors are not perpendicular. Step 3: This means the line T = span{(1,2,1)} does NOT lie in the plane x+2y+3z=0. For a line to lie in a plane, its direction vector must be perpendicular to the plane's normal. Step 4: Testing line-plane containment reduces to a single dot product check — a powerful shortcut that avoids checking every point on the line."
+      },
+      {
+        "id": "M3Q2E8",
+        "question": "How many independent linear equations are needed to define a line in R³?",
+        "options": [
+          "2",
+          "1x",
+          "3",
+          "0"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: In R³, one equation reduces to a 2D plane (3 − 1 = 2). Step 2: A second independent equation intersects that plane in a 1D line (3 − 2 = 1). Step 3: Each independent equation removes one degree of freedom. A line has 1 degree of freedom, so you need exactly 3 − 1 = 2 independent constraints. Step 4: This principle — more constraints mean lower-dimensional solution sets — is the basis for solving systems of linear equations."
+      },
+      {
+        "id": "M3Q2E9",
+        "question": "Does the line T = {α(1,2,1) | α∈R} pass through the origin?",
+        "options": [
+          "Yes, when α=0",
+          "— t here",
+          "Only for positive α",
+          "Only for α=1"
+        ],
+        "correct_option": "Yes, when α=0",
+        "explanation": "Step 1: When α=0, the point is 0·(1,2,1) = (0,0,0). Step 2: The origin is always included in any span of vectors — it is the trivial linear combination with all coefficients zero. Step 3: Every span of vectors is a subspace, and every subspace contains the origin. Step 4: This is the geometric consequence of allowing the zero linear combination, which guarantees that spans (and therefore all subspaces) contain the origin."
+      },
+      {
+        "id": "M3Q2E10",
+        "question": "Is (2,7,3) perpendicular to (1,2,3)?",
+        "options": [
+          "No, because 2+14+9=25≠0",
+          "— t here",
+          "Only if scaled",
+          "Cant determine"
+        ],
+        "correct_option": "No, because 2+14+9=25≠0",
+        "explanation": "Step 1: (2,7,3)·(1,2,3) = 2 + 14 + 9 = 25. Step 2: Since 25 ≠ 0, these vectors are not perpendicular. Step 3: The large dot product (25) means these vectors point in similar directions — the angle between them is acute. For a vector to lie in the plane x+2y+3z=0, its dot product with the normal [1,2,3] must be exactly zero. Step 4: This test is the bridge between 2D perpendicularity (Mission 22) and 3D plane membership — the same dot product condition scales seamlessly."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M3Q2M1",
+        "question": "What is the dimension of the solution set of x+2y+3z=0 in R³?",
+        "options": [
+          "2 (a plane)",
+          "1 (a line)",
+          "0 (a point)",
+          "3 (all of R³)"
+        ],
+        "correct_option": "2 (a plane)",
+        "explanation": "Step 1: The equation x+2y+3z=0 is one independent constraint on 3 unknowns. Step 2: Degrees of freedom = 3 − 1 = 2, forming a 2D plane through the origin. Step 3: This is the orthogonal complement of the 1D subspace spanned by [1,2,3] — by the dimension formula, dim(W) + dim(W⊥) = 3 gives 1 + 2 = 3. Step 4: The plane is a genuine 2D subspace, not merely a 2D surface floating in space — it is closed under addition and scalar multiplication."
+      },
+      {
+        "id": "M3Q2M2",
+        "question": "Which of the following points lies on the plane x+2y+3z=0?",
+        "options": [
+          "(1,1,-1)",
+          "(1,2,3) ()",
+          "(0,0,1)",
+          "(1,0,1)"
+        ],
+        "correct_option": "(1,1,-1)",
+        "explanation": "Step 1: Check (1,1,−1): 1+2−3=0 ✓. Step 2: (1,2,3) → 1+4+9=14 ≠ 0. (0,0,1) → 3≠0. (1,0,1) → 1+0+3=4≠0. Step 3: Only (1,1,−1) satisfies the equation. Testing membership in a plane is a single computation — evaluate the left-hand side and check if it equals zero. Step 4: This efficiency is why the dot product formulation of planes (n·x = 0) is so powerful in computational geometry, graphics, and physics."
+      },
+      {
+        "id": "M3Q2M3",
+        "question": "Is the line T = span{(1,2,1)} contained in the plane x+2y+3z=0?",
+        "options": [
+          "No, because (1,2,1)·(1,2,3) = 8 ≠ 0",
+          "— t here",
+          "Only for certain α — does t match",
+          "Cant determine — does t match"
+        ],
+        "correct_option": "No, because (1,2,1)·(1,2,3) = 8 ≠ 0",
+        "explanation": "Step 1: For T to lie in the plane, every point α(1,2,1) must satisfy x+2y+3z=0. Step 2: α(1+4+3) = 8α, which is 0 only when α=0. Only the origin is in the plane — the line pierces through it. Step 3: A line lies in a plane if and only if its direction vector is perpendicular to the plane's normal. Since (1,2,1)·(1,2,3) = 8 ≠ 0, the direction is NOT perpendicular to the normal. Step 4: This dot product test is the fastest way to check line-plane containment and is widely used in 3D graphics and computational geometry."
+      },
+      {
+        "id": "M3Q2M4",
+        "question": "How many dimensions does a line through the origin in R³ have?",
+        "options": [
+          "1",
+          "2x",
+          "3",
+          "0"
+        ],
+        "correct_option": "1",
+        "explanation": "Step 1: A line through the origin is parametrized as αv for a single direction vector v. Step 2: There is one free parameter (α), so the line is 1-dimensional. Step 3: The dimension of a subspace equals the number of independent parameters needed to describe all its points — for a line, you only need one parameter (how far along the direction to go). Step 4: Lines are the simplest non-trivial subspaces and are the building blocks for understanding all higher-dimensional subspaces."
+      },
+      {
+        "id": "M3Q2M5",
+        "question": "Can two different planes through the origin in R³ intersect in a line?",
+        "options": [
+          "Yes, two planes typically intersect in a line",
+          "they always coincide",
+          "They intersect at a point only",
+          "They never intersect — does t match"
+        ],
+        "correct_option": "Yes, two planes typically intersect in a line",
+        "explanation": "Step 1: Each plane is a 2D subspace in R³. Step 2: Two independent 2D planes through the origin intersect in a 1D line (their common direction). Step 3: The intersection of subspaces is always a subspace. By the dimension formula: dim(V∩W) = dim(V) + dim(W) − dim(V+W) = 2 + 2 − 3 = 1 (assuming V+W = R³). Step 4: This intersection line is the set of vectors perpendicular to BOTH normal vectors — it can be found via the cross product of the two normals."
+      },
+      {
+        "id": "M3Q2M6",
+        "question": "What does the normal vector (1,2,3) represent for the plane x+2y+3z=0?",
+        "options": [
+          "A vector perpendicular to the plane",
+          "A vector lying in the plane",
+          "The direction of steepest descent",
+          "The origin of the plane"
+        ],
+        "correct_option": "A vector perpendicular to the plane",
+        "explanation": "Step 1: The coefficients of x, y, z in ax+by+cz=0 form the normal vector [a,b,c]. Step 2: The normal vector is perpendicular to every vector in the plane — that is exactly what the equation [a,b,c]·[x,y,z] = 0 means. Step 3: The normal vector uniquely determines the plane (up to scaling), making it the most compact and computationally efficient descriptor of the plane. Step 4: Every vector in the plane is orthogonal to the normal, connecting 3D planes back to the 2D perpendicularity concept from Mission 22."
+      },
+      {
+        "id": "M3Q2M7",
+        "question": "If a vector lies in the plane x+2y+3z=0, its dot product with (1,2,3) must be:",
+        "options": [
+          "0",
+          "1",
+          "6",
+          "Any value"
+        ],
+        "correct_option": "0",
+        "explanation": "Step 1: The plane equation x+2y+3z=0 can be written as [1,2,3]·[x,y,z] = 0. Step 2: Any vector in the plane must have dot product 0 with the normal vector (1,2,3) — this is the defining property of the plane. Step 3: The dot product condition is both necessary and sufficient for plane membership, making it a powerful computational tool for testing inclusion. Step 4: This condition is exactly the same as the 2D perpendicularity test — the idea scales seamlessly to any dimension."
+      },
+      {
+        "id": "M3Q2M8",
+        "question": "Is the set {(x,y,z) : x+2y+3z=0} closed under vector addition?",
+        "options": [
+          "Yes — if u and v satisfy the equation, so does u+v",
+          "— t here",
+          "Only for positive components",
+          "Only in R²)"
+        ],
+        "correct_option": "Yes — if u and v satisfy the equation, so does u+v",
+        "explanation": "Step 1: If [1,2,3]·u = 0 and [1,2,3]·v = 0, then [1,2,3]·(u+v) = [1,2,3]·u + [1,2,3]·v = 0+0 = 0. Step 2: The sum also satisfies the equation, so the plane is closed under addition. Step 3: This closure property is what makes the solution set a subspace — it follows directly from the linearity of the dot product. Step 4: It is also why homogeneous equations define subspaces while non-homogeneous equations (with non-zero right-hand side) define affine sets that are NOT subspaces."
+      },
+      {
+        "id": "M3Q2M9",
+        "question": "Which pair of vectors both lie on the plane x+2y+3z=0?",
+        "options": [
+          "(1,1,-1) and (3,0,-1)",
+          "(1,0,0) and (0,1,0) (x)",
+          "(1,2,3) and (2,4,6)",
+          "(0,0,1) and (1,0,0)"
+        ],
+        "correct_option": "(1,1,-1) and (3,0,-1)",
+        "explanation": "Step 1: Check (1,1,−1): 1+2−3=0 ✓. Check (3,0,−1): 3+0−3=0 ✓. Step 2: Both points satisfy x+2y+3z=0, so they lie on the plane. Step 3: These two vectors are linearly independent (neither is a scalar multiple of the other), so they form a basis for the plane. Step 4: Any other vector on the plane can be written as a linear combination of these two basis vectors — this is how we parameterize the plane using spanning vectors."
+      },
+      {
+        "id": "M3Q2M10",
+        "question": "Is the plane x+2y+3z=0 a subspace of R³?",
+        "options": [
+          "Yes — it contains the origin and is closed under addition and scalar multiplication",
+          "— it doesn't contain the origin",
+          "Only if it passes through the origin",
+          "Subspaces can't be planes"
+        ],
+        "correct_option": "Yes — it contains the origin and is closed under addition and scalar multiplication",
+        "explanation": "Step 1: The plane passes through the origin (0,0,0) since 0+0+0=0. Step 2: It is closed under addition and scalar multiplication (as verified in previous questions), satisfying all three subspace conditions. Step 3: This plane is the orthogonal complement of span{[1,2,3]} — a 2D subspace that is the perpendicular partner of the 1D normal line. Step 4: Being a subspace means we can do linear algebra within it: add vectors, scale them, and find bases, all while staying within the plane."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M3Q2H1",
+        "question": "Why does one linear equation in R³ define a plane rather than a line?",
+        "options": [
+          "One constraint removes 1 degree of freedom from 3, leaving 2D",
+          "Because planes are simpler than lines",
+          "Because R³ has 3 axes",
+          "Because coefficients are always positive"
+        ],
+        "correct_option": "One constraint removes 1 degree of freedom from 3, leaving 2D",
+        "explanation": "Step 1: R³ has 3 degrees of freedom. Step 2: One independent linear equation constrains 1 degree of freedom, leaving 3−1=2 free parameters, which sweep out a 2D plane. Step 3: The key word is 'independent' — a redundant equation (a linear combination of other equations) removes zero new degrees of freedom. The rank of the coefficient matrix determines how many effective constraints exist. Step 4: The solution dimension equals n − rank, a general formula that applies to any system of linear equations."
+      },
+      {
+        "id": "M3Q2H2",
+        "question": "What is the dimension of the intersection of two planes x+2y+3z=0 and 2x+y-z=0 in R³?",
+        "options": [
+          "1 (a line)",
+          "2 (a plane)",
+          "0 (the origin only)",
+          "3 — t here"
+        ],
+        "correct_option": "1 (a line)",
+        "explanation": "Step 1: Two independent linear equations in 3 unknowns remove 2 degrees of freedom. Step 2: 3−2=1, so the intersection is a 1D line through the origin. Step 3: The direction of this line is perpendicular to both normals [1,2,3] and [2,1,−1], which can be found via the cross product: [1,2,3]×[2,1,−1] = [−5,7,−3]. Step 4: This cross product technique directly gives the line direction from the two plane normals and is a standard method in 3D geometry."
+      },
+      {
+        "id": "M3Q2H3",
+        "question": "Can the line T = span{(1,2,1)} and the plane x+2y+3z=0 together span all of R³?",
+        "options": [
+          "Yes — T provides the missing direction not in the plane",
+          "— they only span a plane",
+          "Only if T lies in the plane",
+          "Only in R²)"
+        ],
+        "correct_option": "Yes — T provides the missing direction not in the plane",
+        "explanation": "Step 1: The plane is 2D and T is 1D. Step 2: Since T is not contained in the plane (as verified: (1,2,1)·(1,2,3) = 8 ≠ 0), the direction (1,2,1) adds a third independent direction, spanning all of R³. Step 3: This is an application of the dimension theorem: if V is a 2D subspace and w ∉ V, then span(V ∪ {w}) = R³. Step 4: The 2D plane and the 1D line outside it together account for all 3 dimensions — their direct sum is the whole space R³."
+      },
+      {
+        "id": "M3Q2H4",
+        "question": "For the plane ax+by+cz=0, the normal vector (a,b,c) is perpendicular to every vector in the plane. Why?",
+        "options": [
+          "Because the plane equation is defined as the dot product of (a,b,c) with any vector in the plane equaling 0",
+          "Because rmal vectors are always perpendicular",
+          "Because planes are flat",
+          "Because the origin is in the plane"
+        ],
+        "correct_option": "Because the plane equation is defined as the dot product of (a,b,c) with any vector in the plane equaling 0",
+        "explanation": "Step 1: The plane equation ax+by+cz=0 can be written as [a,b,c]·[x,y,z]=0. Step 2: This equation states exactly that every vector [x,y,z] in the plane has dot product 0 with the normal [a,b,c], meaning they are perpendicular. Step 3: The plane is literally DEFINED as the set of vectors perpendicular to the normal — this is the same orthogonality condition from Mission 22, generalized to R³. Step 4: The normal-to-plane relationship is just the orthogonal complement relationship: the plane is W⊥ where W = span{[a,b,c]}."
+      },
+      {
+        "id": "M3Q2H5",
+        "question": "How many independent vectors are needed to span the plane x+2y+3z=0?",
+        "options": [
+          "2",
+          "1x",
+          "3",
+          "0"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: The plane is 2-dimensional. Step 2: A basis for a 2D subspace requires exactly 2 linearly independent vectors. For example, (1,1,−1) and (3,0,−1) both lie on this plane and are independent. Step 3: The number of basis vectors equals the dimension — this is true for any subspace. Step 4: The basis provides a coordinate system within the plane: every point on the plane can be uniquely written as α(1,1,−1) + β(3,0,−1), giving each point two coordinates (α,β) within the plane."
+      },
+      {
+        "id": "M3Q2H6",
+        "question": "If a line in R³ does not pass through the origin, is it a subspace?",
+        "options": [
+          "No — it fails the zero vector condition",
+          "— all lines are subspaces",
+          "Only if it's parallel to a coordinate axis",
+          "Depends on the direction"
+        ],
+        "correct_option": "No — it fails the zero vector condition",
+        "explanation": "Step 1: A subspace must contain the zero vector. Step 2: A line that doesn't pass through the origin doesn't contain (0,0,0), so it cannot be a subspace. Step 3: This is a critical distinction: lines through the origin are subspaces, but shifted lines (affine lines) are not. The equation x+2y+3z=d with d≠0 defines a plane that does NOT pass through the origin and is therefore NOT a subspace. Step 4: Only the homogeneous version (d=0) gives a genuine subspace — this 'homogeneous vs. inhomogeneous' distinction is central to linear algebra."
+      },
+      {
+        "id": "M3Q2H7",
+        "question": "What is the geometric relationship between the normal vector (1,2,3) and the plane x+2y+3z=0?",
+        "options": [
+          "(1,2,3) is perpendicular to the plane",
+          "(1,2,3) lies in the plane",
+          "(1,2,3) is parallel to the plane",
+          "(1,2,3) is tangent to the plane"
+        ],
+        "correct_option": "(1,2,3) is perpendicular to the plane",
+        "explanation": "Step 1: The coefficients [a,b,c] in ax+by+cz=0 form the normal vector. Step 2: By definition, the normal vector is perpendicular to every vector lying in the plane. Step 3: The normal vector points 'straight out' of the plane — it defines the plane's orientation in space. Two parallel planes have proportional normals, and two perpendicular planes have perpendicular normals. Step 4: The normal vector is the most fundamental descriptor of a plane, encoding all the information needed to define it except its distance from the origin."
+      },
+      {
+        "id": "M3Q2H8",
+        "question": "Can three planes through the origin in R³ intersect in just a single point (the origin)?",
+        "options": [
+          "Yes, if the three normal vectors are linearly independent",
+          "they always intersect in at least a line",
+          "Only two planes can intersect",
+          "Only if the planes are parallel"
+        ],
+        "correct_option": "Yes, if the three normal vectors are linearly independent",
+        "explanation": "Step 1: Three independent planes give 3 independent equations in 3 unknowns. Step 2: 3−3=0 degrees of freedom, leaving only the origin (0,0,0) as the intersection. Step 3: This is a square system with full rank — the only solution is the trivial one. By the invertible matrix theorem, three independent constraints in R³ pin down a unique point (the origin). Step 4: This shows how solving systems of linear equations is geometrically equivalent to finding the intersection of hyperplanes."
+      },
+      {
+        "id": "M3Q2H9",
+        "question": "If v = (1,2,1) and the plane is x+2y+3z=0, the projection of v onto the plane's normal (1,2,3) is:",
+        "options": [
+          "[(v·n)/(n·n)]n = (8/14)(1,2,3) = (4/7, 8/7, 12/7)",
+          "(1,2,3))",
+          "(0,0,0))",
+          "(1,2,1))"
+        ],
+        "correct_option": "[(v·n)/(n·n)]n = (8/14)(1,2,3) = (4/7, 8/7, 12/7)",
+        "explanation": "Step 1: v·n = 8, n·n = 1+4+9 = 14. Step 2: The projection formula gives (8/14)(1,2,3) = (4/7, 8/7, 12/7). Step 3: This projection measures how far v is from the plane along the normal direction. The difference v − proj gives the component of v that lies IN the plane. Step 4: This decomposition (normal component + plane component) is the geometric meaning of projecting onto subspaces — a skill essential for least squares, Gram-Schmidt orthogonalization, and the Fundamental Theorem of Linear Algebra."
+      },
+      {
+        "id": "M3Q2H10",
+        "question": "Why does the line S = span{(2,7,3)} not lie in the plane x+2y+3z=0?",
+        "options": [
+          "Because (2,7,3)·(1,2,3) = 25 ≠ 0, so (2,7,3) is not perpendicular to the normal",
+          "Because 2+7+3 = 12 ≠ 0",
+          "Because S has 3 components",
+          "Because the plane has 3 coefficients"
+        ],
+        "correct_option": "Because (2,7,3)·(1,2,3) = 25 ≠ 0, so (2,7,3) is not perpendicular to the normal",
+        "explanation": "Step 1: For a line span{v} to lie in a plane n·x=0, we need n·v=0. Step 2: Here (1,2,3)·(2,7,3) = 2+14+9 = 25 ≠ 0, so the direction vector is not perpendicular to the normal, and the line is not in the plane. Step 3: The dot product test n·v = 0 is both necessary and sufficient for line-plane containment — if the test fails, the line pierces through the plane at exactly one point (the origin, since both pass through it). Step 4: This connects the perpendicularity concept from Mission 22 to the geometric relationship between lines and planes in 3D."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "emoji": "✈️",
+      "title": "Flight Paths",
+      "type": "mcq",
+      "concept": "Velocity constraints define planes in 3D",
+      "story": "An aeroplane's feasible velocity set is constrained by weather and airspace rules. When there is one linear constraint on the velocity (like a maximum crosswind component), the set of allowed velocities forms a plane in 3D space.",
+      "question": "How many linear constraints are needed to define a plane in 3D space?",
+      "options": [
+        "One equation",
+        "Two equations",
+        "Three equations",
+        "constraints needed"
+      ],
+      "correct_option": "One equation",
+      "explanation": "Step 1: In R³, one linear equation removes 1 degree of freedom. Step 2: 3−1=2 dimensions remain, forming a plane. Two equations would give a line (1D), and three would give a point. Step 3: Each additional independent constraint reduces the dimension of the feasible set by one. Step 4: Engineers use this principle to understand how constraints on velocity, force, or other vector quantities limit the range of possible configurations in design problems."
+    },
+    {
+      "emoji": "🤖",
+      "title": "Robotics",
+      "type": "mcq",
+      "concept": "Degrees of freedom from constraint equations",
+      "story": "A robot arm with two joints can reach positions satisfying one constraint — the total reach cannot exceed a certain length. The set of all reachable positions forms a surface in 3D space.",
+      "question": "If a robot arm's reachable positions satisfy one constraint in 3D, how many degrees of freedom does it have?",
+      "options": [
+        "2",
+        "1x",
+        "3",
+        "0"
+      ],
+      "correct_option": "2",
+      "explanation": "Step 1: One constraint in R³ removes 1 degree of freedom. Step 2: The remaining 3−1=2 degrees of freedom mean the robot can move in two independent directions on the constraint surface. Step 3: Understanding degrees of freedom is critical in robotics — it determines how many independent motions a robot can make. Step 4: Each joint typically adds one degree of freedom, while each constraint removes one — the balance between joints and constraints defines the robot's workspace."
+    },
+    {
+      "emoji": "🗺️",
+      "title": "GPS Positioning",
+      "type": "mcq",
+      "concept": "Satellite constraints for 3D positioning",
+      "story": "GPS determines your position by measuring distances from multiple satellites. Each satellite gives one distance constraint. To find a precise 3D position, you need enough constraints to reduce the solution to a single point.",
+      "question": "How many satellites does a GPS receiver need to determine a precise 3D position?",
+      "options": [
+        "4",
+        "2x",
+        "3",
+        "6"
+      ],
+      "correct_option": "4",
+      "explanation": "Step 1: Your 3D position has 3 unknowns (x,y,z). Step 2: Each satellite provides one constraint (a sphere). Three spheres intersect in a circle, not a point — a 4th satellite is needed to pinpoint the exact location. Step 3: The 4th satellite also resolves time ambiguity (the receiver's clock isn't perfectly synchronized). Step 4: This is why GPS requires at least 4 satellites: 3 constraints pin down a circle, and the 4th reduces it to a single point (plus resolves clock error), illustrating how constraints reduce degrees of freedom."
+    },
+    {
+      "emoji": "🏗️",
+      "title": "Structural Engineering",
+      "type": "mcq",
+      "concept": "Constraint planes for structural loads",
+      "story": "When analysing forces on a 3D structure, each equilibrium equation (sum of forces = 0 in one direction) defines a constraint plane. Multiple constraint planes together determine the allowable force configurations.",
+      "question": "If two independent force equilibrium equations are applied to a 3D structure, the allowable forces lie in:",
+      "options": [
+        "A line (1D subspace)",
+        "A plane (2D subspace)",
+        "A point (0D)",
+        "All of R³"
+      ],
+      "correct_option": "A line (1D subspace)",
+      "explanation": "Step 1: Two independent equations in 3 unknowns remove 2 degrees of freedom. Step 2: 3−2=1 dimension remains, forming a line through the origin in force space. Step 3: Structural engineers use these constraint equations to determine which force configurations are physically possible. Step 4: Each equilibrium condition (ΣFx=0, ΣFy=0, ΣFz=0) adds a constraint, progressively narrowing the space of valid force configurations."
+    },
+    {
+      "emoji": "📐",
+      "title": "Computer Graphics",
+      "type": "mcq",
+      "concept": "3D clipping planes",
+      "story": "In 3D rendering, a clipping plane is defined by one linear equation ax+by+cz=d. Objects on one side of the plane are visible, and objects on the other side are hidden. The clipping plane is a 2D surface in 3D space.",
+      "question": "In 3D rendering, a clipping plane defined by one linear equation divides space into:",
+      "options": [
+        "Two half-spaces",
+        "A line and a plane",
+        "Three regions",
+        "Four quadrants"
+      ],
+      "correct_option": "Two half-spaces",
+      "explanation": "Step 1: One linear equation ax+by+cz=d divides R³ into two regions: ax+by+cz > d and ax+by+cz < d. Step 2: These are the two half-spaces separated by the clipping plane. Step 3: Clipping planes are fundamental in computer graphics — the near clipping plane removes objects too close to the camera, and the far clipping plane removes distant objects. Step 4: The normal vector [a,b,c] determines the plane's orientation, connecting directly to the perpendicularity concept from Mission 22."
+    },
+    {
+      "emoji": "🌍",
+      "title": "Earth Science",
+      "type": "mcq",
+      "concept": "Sea level as a constraint plane",
+      "story": "The Earth's surface can be approximated as a sphere, but locally, sea level forms a roughly flat plane. Points above sea level have positive elevation, points below have negative. The equation elevation = 0 defines this plane.",
+      "question": "If sea level is modelled as the plane z=0 in a local coordinate system, what does z > 0 represent?",
+      "options": [
+        "Points above sea level",
+        "Points below sea level",
+        "Points at sea level",
+        "Points inside the Earth"
+      ],
+      "correct_option": "Points above sea level",
+      "explanation": "Step 1: The plane z=0 represents sea level. Step 2: z > 0 means the z-coordinate is positive, indicating points above sea level (like mountain peaks). Step 3: The plane z=0 is the xy-plane, which has normal vector [0,0,1] pointing straight up. Step 4: This is a simple example of how constraint planes model real-world boundaries: the normal direction [0,0,1] tells you which way is 'up,' and the equation z=0 separates above from below."
+    }
+  ]
+}

@@ -9,3 +9,11 @@ server/dictionaryCache
 ISSUE_DRAFT.md
 PR_DRAFT.md
 **/*.ps1
+
+# local scratch / debug throwaways
+scratch/
+server/_probe*.js
+
+# Backup snapshots — never commit these; use git history instead
+*.bak
+*.bak.*

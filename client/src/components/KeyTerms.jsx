@@ -79,31 +79,23 @@ export default function KeyTerms({ topicKey }) {
     if (typeof console !== 'undefined' && console.warn) {
       console.warn('Word Explorer: failed to read data, hiding.', err)
     }
-    return null
   }
 
-  if (validEntries.length === 0) return null
-
   // -------------------------------------------------------------------
-  // State
+  // State (hooks must be called unconditionally, before any early return)
   // -------------------------------------------------------------------
   const [isOpen, setIsOpen] = useState(false)
-  // selectedKey stores the canonical term name (e.g. "Midpoint") of the
-  // currently selected word. null means "nothing selected yet" (only briefly,
-  // before the auto-select effect runs on first open).
   const [selectedKey, setSelectedKey] = useState(null)
   const wrapperRef = useRef(null)
 
   // Auto-select the first curated term whenever the panel opens. Cleared
   // on close so we always reset to the default selection next time.
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen && validEntries.length > 0) {
       setSelectedKey(validEntries[0].term)
     } else {
       setSelectedKey(null)
     }
-    // We intentionally depend only on isOpen - switching word is the
-    // user's action via the dedicated handler below.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen])
 
@@ -133,6 +125,9 @@ export default function KeyTerms({ topicKey }) {
     window.addEventListener('keydown', handleKey)
     return () => window.removeEventListener('keydown', handleKey)
   }, [isOpen])
+
+  // Early return after all hooks are declared
+  if (validEntries.length === 0) return null
 
   const handleToggle = () => setIsOpen(o => !o)
 

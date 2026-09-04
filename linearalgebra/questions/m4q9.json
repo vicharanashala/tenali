@@ -1,0 +1,449 @@
+{
+  "module": 4,
+  "missionId": 45,
+  "title": "Dimension Observation",
+  "original_question": "For an m×n matrix A, the rank-nullity theorem states: rank(A) + nullity(A) = n, where rank(A) = dim(range(A)) and nullity(A) = dim(null space). This partitions the domain Rⁿ into two complementary subspaces: the row space (dim = r) and the null space (dim = n - r). Every vector in Rⁿ can be uniquely decomposed as the sum of a row space vector and a null space vector.",
+  "core_concept": "The Rank-Nullity Theorem: rank(A) + nullity(A) = n (number of columns). The domain decomposes into row space ⊕ null space, two orthogonal complements that together account for all n dimensions.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M4Q9E1",
+        "question": "For a 3×5 matrix A with rank 2, what is nullity(A)?",
+        "options": [
+          "1",
+          "2",
+          "3",
+          "5"
+        ],
+        "correct_option": "3",
+        "explanation": "Step 1: Rank-Nullity: rank + nullity = n = 5. Step 2: 2 + nullity = 5. Step 3: nullity = 3. The null space is 3D while the row space is 2D — together they fill the 5D domain."
+      },
+      {
+        "id": "M4Q9E2",
+        "question": "If A is a 4×4 matrix with rank 3, the null space is:",
+        "options": [
+          "A point (0D)",
+          "A line (1D)",
+          "A plane (2D)",
+          "A 3D subspace"
+        ],
+        "correct_option": "A line (1D)",
+        "explanation": "Step 1: Rank-Nullity: 3 + nullity = 4. Step 2: nullity = 1. Step 3: The null space is a line in R⁴. The domain decomposes into a 3D row space and a 1D null space."
+      },
+      {
+        "id": "M4Q9E3",
+        "question": "The sum rank(A) + nullity(A) equals:",
+        "options": [
+          "The number of rows (m)",
+          "The number of columns (n)",
+          "The rank of A",
+          "0 — t here"
+        ],
+        "correct_option": "The number of columns (n)",
+        "explanation": "Step 1: The rank-nullity theorem states rank + nullity = n. Step 2: n is the number of columns (dimension of the domain). Step 3: This is a fundamental theorem — the dimensions of the row space and null space add up to the domain's dimension."
+      },
+      {
+        "id": "M4Q9E4",
+        "question": "If rank(A) = 0, then nullity(A) equals:",
+        "options": [
+          "0",
+          "m",
+          "n",
+          "undefined"
+        ],
+        "correct_option": "n",
+        "explanation": "Step 1: Rank = 0 means A maps everything to zero (A = zero matrix). Step 2: nullity = n - 0 = n. Step 3: The entire domain Rⁿ is the null space — every input maps to zero. The matrix does nothing."
+      },
+      {
+        "id": "M4Q9E5",
+        "question": "For a 2×3 matrix, the maximum possible rank is:",
+        "options": [
+          "1",
+          "2",
+          "3",
+          "5"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: Rank ≤ min(m,n) = min(2,3) = 2. Step 2: Maximum rank is 2 (full row rank). Step 3: When rank = 2, nullity = 3 - 2 = 1. The null space is at least 1D for a non-square matrix."
+      },
+      {
+        "id": "M4Q9E6",
+        "question": "If A is 5×2 with rank 2, nullity(A) =:",
+        "options": [
+          "0",
+          "1x",
+          "2",
+          "3"
+        ],
+        "correct_option": "0",
+        "explanation": "Step 1: Rank-Nullity: 2 + nullity = 2 (n = 2). Step 2: nullity = 0. Step 3: The null space is just {0} — the map is injective (one-to-one). No information is lost when going from R² to R⁵."
+      },
+      {
+        "id": "M4Q9E7",
+        "question": "The rank-nullity theorem applies to matrices of size:",
+        "options": [
+          "Square only",
+          "Any m×n rectangular matrix",
+          "Only when m = n",
+          "Only when rank = n"
+        ],
+        "correct_option": "Any m×n rectangular matrix",
+        "explanation": "Step 1: The theorem states rank + nullity = n for any m×n matrix. Step 2: n is the number of columns (domain dimension). Step 3: The theorem works for square and rectangular matrices alike — it's a universal property of linear maps."
+      },
+      {
+        "id": "M4Q9E8",
+        "question": "If rank(A) = n (full column rank), the null space is:",
+        "options": [
+          "All of Rⁿ",
+          "A line",
+          "A plane",
+          "Just {0}"
+        ],
+        "correct_option": "Just {0}",
+        "explanation": "Step 1: rank + nullity = n. Step 2: n + nullity = n, so nullity = 0. Step 3: The null space contains only the zero vector — the map is injective. Every distinct input produces a distinct output."
+      },
+      {
+        "id": "M4Q9E9",
+        "question": "For a 3×3 identity matrix, rank = 3. What is nullity?",
+        "options": [
+          "0",
+          "1x",
+          "2",
+          "3"
+        ],
+        "correct_option": "0",
+        "explanation": "Step 1: Identity matrix has rank = 3. Step 2: nullity = 3 - 3 = 0. Step 3: Only the zero vector is in the null space — the identity map is injective and invertible. Every vector maps to itself."
+      },
+      {
+        "id": "M4Q9E10",
+        "question": "If rank(A) = 1 and A is 3×3, the null space is:",
+        "options": [
+          "A line (1D)",
+          "A plane (2D)",
+          "A point (0D)",
+          "All of R³ (xx)"
+        ],
+        "correct_option": "A plane (2D)",
+        "explanation": "Step 1: nullity = 3 - 1 = 2. Step 2: The null space is 2D (a plane through the origin). Step 3: Most of the domain is in the null space — only a 1D line of inputs produces non-zero outputs."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M4Q9M1",
+        "question": "For A : R⁵ → R³ with rank 3, what is dim(null space)?",
+        "options": [
+          "0",
+          "1",
+          "2",
+          "3"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: nullity = n - rank = 5 - 3 = 2. Step 2: The null space is 2D. Step 3: Of the 5 input dimensions, 3 go to the range and 2 are 'lost' to the null space."
+      },
+      {
+        "id": "M4Q9M2",
+        "question": "If A : R⁴ → R² has rank 2, what is the dimension of the null space?",
+        "options": [
+          "0",
+          "1",
+          "2",
+          "4"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: nullity = 4 - 2 = 2. Step 2: The null space is 2D. Step 3: The map compresses 4D input to 2D output, losing 2 dimensions of information. The null space captures what is lost."
+      },
+      {
+        "id": "M4Q9M3",
+        "question": "If rank(A) + rank(B) = 4 for two 3×3 matrices, what is the maximum nullity of A?",
+        "options": [
+          "0",
+          "1",
+          "2",
+          "3"
+        ],
+        "correct_option": "3",
+        "explanation": "Step 1: nullity(A) = 3 - rank(A). Step 2: To maximize nullity, minimize rank(A). Step 3: If rank(A) = 0, nullity(A) = 3. The constraint rank(A) + rank(B) = 4 doesn't prevent rank(A) = 0 (as long as rank(B) = 4, but B can't have rank > 3). Actually, the maximum nullity of A alone is 3 (if rank(A) = 0)."
+      },
+      {
+        "id": "M4Q9M4",
+        "question": "For A : R⁶ → R⁴ with rank 4, the null space is:",
+        "options": [
+          "0D",
+          "1D",
+          "2D",
+          "4D"
+        ],
+        "correct_option": "2D",
+        "explanation": "Step 1: nullity = 6 - 4 = 2. Step 2: The null space is 2D. Step 3: The rank is as large as possible (min(4,6) = 4), so the null space is as small as possible while still existing."
+      },
+      {
+        "id": "M4Q9M5",
+        "question": "If A is 3×5 and has nullity 2, what is rank(A)?",
+        "options": [
+          "1",
+          "2",
+          "3",
+          "5"
+        ],
+        "correct_option": "3",
+        "explanation": "Step 1: rank + nullity = n = 5. Step 2: rank + 2 = 5. Step 3: rank = 3. The matrix has full row rank (3 = m), meaning it is surjective — the range is all of R³."
+      },
+      {
+        "id": "M4Q9M6",
+        "question": "A matrix A : Rⁿ → Rᵐ has rank r. The range is an r-dimensional subspace of:",
+        "options": [
+          "Rⁿ",
+          "Rᵐ",
+          "Rᵐ⁺ⁿ",
+          "Rʳ"
+        ],
+        "correct_option": "Rᵐ",
+        "explanation": "Step 1: The range is a subspace of the codomain Rᵐ. Step 2: dim(range) = r ≤ min(m,n). Step 3: The range lives inside the output space — it can be at most m-dimensional. The rank is bounded by the smaller of m and n."
+      },
+      {
+        "id": "M4Q9M7",
+        "question": "For A : R³ → R³, if rank(A) = 2, how many independent vectors span the null space?",
+        "options": [
+          "0",
+          "1",
+          "2",
+          "3"
+        ],
+        "correct_option": "1",
+        "explanation": "Step 1: nullity = 3 - 2 = 1. Step 2: 1 independent vector spans the null space (it's a line). Step 3: The domain R³ decomposes into a 2D row space and a 1D null space. These are orthogonal complements."
+      },
+      {
+        "id": "M4Q9M8",
+        "question": "If rank(A) = rank(Aᵀ) for any matrix, what is the rank of Aᵀ for a 5×3 matrix with rank 3?",
+        "options": [
+          "0",
+          "2",
+          "3",
+          "5"
+        ],
+        "correct_option": "3",
+        "explanation": "Step 1: rank(A) = rank(Aᵀ) is a theorem. Step 2: rank(Aᵀ) = rank(A) = 3. Step 3: The row rank equals the column rank — this is one of the most important facts in linear algebra. Aᵀ is 3×5 with rank 3."
+      },
+      {
+        "id": "M4Q9M9",
+        "question": "For a 4×4 matrix, the maximum possible nullity is:",
+        "options": [
+          "0",
+          "2",
+          "4",
+          "8"
+        ],
+        "correct_option": "4",
+        "explanation": "Step 1: nullity = 4 - rank. Step 2: Minimum rank is 0 (zero matrix). Step 3: Maximum nullity is 4 - 0 = 4 (the entire domain is the null space). This happens when A = 0."
+      },
+      {
+        "id": "M4Q9M10",
+        "question": "If A : R² → R² has rank 1, the null space is:",
+        "options": [
+          "Just {0})",
+          "A line through the origin",
+          "All of R²)",
+          "A point other than origin"
+        ],
+        "correct_option": "A line through the origin",
+        "explanation": "Step 1: nullity = 2 - 1 = 1. Step 2: The null space is 1D (a line). Step 3: The range is also 1D (a different line). The domain decomposes into two perpendicular lines: row space ⊕ null space = R²."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M4Q9H1",
+        "question": "For A : R⁵ → R³, the rank-nullity theorem tells us rank(A) ≤ 3. If rank(A) = 3, the null space is 2D. What geometric relationship holds between the row space and null space?",
+        "options": [
+          "They are parallel — does t match",
+          "They are orthogonal complements in R⁵",
+          "They are the same subspace",
+          "They intersect in a line"
+        ],
+        "correct_option": "They are orthogonal complements in R⁵",
+        "explanation": "Step 1: row space is 3D, null space is 2D. Step 2: 3 + 2 = 5 = n. Step 3: They are orthogonal complements: row(A) ⊥ null(A) and row(A) ⊕ null(A) = R⁵. Every vector in R⁵ decomposes uniquely as a row-space part plus a null-space part."
+      },
+      {
+        "id": "M4Q9H2",
+        "question": "For A : Rⁿ → Rᵐ with rank r, the row space has dimension r and the null space has dimension n - r. Show that dim(range) + dim(null space) = n using the Rank-Nullity theorem.",
+        "options": [
+          "dim(range) = r, dim(null) = n - r, so r + (n-r) = n",
+          "dim(range) = m, dim(null) = n, so m + n = n",
+          "dim(range) = r, dim(null) = r, so r + r = n",
+          "dim(range) = n, dim(null) = 0, so n + 0 = n"
+        ],
+        "correct_option": "dim(range) = r, dim(null) = n - r, so r + (n-r) = n",
+        "explanation": "Step 1: dim(range) = rank = r. Step 2: dim(null space) = nullity = n - r. Step 3: r + (n-r) = n. This is the statement of Rank-Nullity: the output dimension (range) plus the lost dimension (null space) equals the input dimension (domain)."
+      },
+      {
+        "id": "M4Q9H3",
+        "question": "If A : R⁴ → R⁴ is a projection onto a 2D plane, what are rank(A) and nullity(A)?",
+        "options": [
+          "rank = 2, nullity = 2",
+          "rank = 4, nullity = 0x",
+          "rank = 1, nullity = 3",
+          "rank = 0, nullity = 4"
+        ],
+        "correct_option": "rank = 2, nullity = 2",
+        "explanation": "Step 1: A projects onto a 2D plane, so range(A) = the 2D plane. Step 2: The perpendicular 2D subspace is mapped to zero (the null space). Step 3: rank = 2, nullity = 2. A projection is idempotent (A² = A) and has this characteristic rank-nullity split."
+      },
+      {
+        "id": "M4Q9H4",
+        "question": "For A : R⁶ → R⁴, the maximum possible rank is 4. If rank = 4, what is the dimension of the null space?",
+        "options": [
+          "0",
+          "1",
+          "2",
+          "4"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: nullity = n - rank = 6 - 4 = 2. Step 2: The null space is 2D. Step 3: The rank is as large as possible (limited by the codomain), so the null space is as small as possible. This is the best-case scenario for information preservation."
+      },
+      {
+        "id": "M4Q9H5",
+        "question": "If A : R³ → R³ has rank 1, the range is a line and the null space is a plane. If v is in the null space and w is in the range, what is A(v + w)?",
+        "options": [
+          "v + w",
+          "w",
+          "v",
+          "0"
+        ],
+        "correct_option": "w",
+        "explanation": "Step 1: A(v) = 0 (v is in null space). Step 2: A(w) = w (w is in range). Step 3: A(v+w) = A(v)+A(w) = 0 + w = w. The null-space part is destroyed and the range part is preserved — this is the essence of a projection."
+      },
+      {
+        "id": "M4Q9H6",
+        "question": "For a matrix A, rank(A) = rank(Aᵀ). For a 3×5 matrix with rank 2, what is rank(Aᵀ)?",
+        "options": [
+          "0",
+          "2",
+          "3",
+          "5"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: rank(Aᵀ) = rank(A) by theorem. Step 2: rank(Aᵀ) = 2. Step 3: Aᵀ is 5×3 with rank 2. Row rank = column rank is a fundamental result — the rank is an intrinsic property of the linear map, not dependent on how we write it."
+      },
+      {
+        "id": "M4Q9H7",
+        "question": "If A : R⁵ → R⁵ has rank 3, can A be invertible?",
+        "options": [
+          "as long as rank > 0",
+          "No — invertible matrices must have rank = 5",
+          "Only if nullity = 0 — does t match",
+          "Only for specific entries of A"
+        ],
+        "correct_option": "No — invertible matrices must have rank = 5",
+        "explanation": "Step 1: rank = 3 means nullity = 2. Step 2: The null space contains non-zero vectors, so A(x) = 0 for some x ≠ 0. Step 3: An invertible matrix must have nullity = 0 (rank = n = 5). Since 3 < 5, A is not invertible — it loses information."
+      },
+      {
+        "id": "M4Q9H8",
+        "question": "For A : Rⁿ → Rⁿ, if rank(A) = n, then nullity = 0, and the map is both injective and surjective. What is this property called?",
+        "options": [
+          "Orthogonality",
+          "Bijectivity (invertibility)",
+          "Nilpotency)",
+          "Idempotency — does t match"
+        ],
+        "correct_option": "Bijectivity (invertibility)",
+        "explanation": "Step 1: rank = n means range = Rⁿ (surjective). Step 2: nullity = 0 means null space = {0} (injective). Step 3: A map that is both injective and surjective is bijective — invertible. Rank-Nullity shows that for square matrices, injective ⟺ surjective ⟺ invertible."
+      },
+      {
+        "id": "M4Q9H9",
+        "question": "If A : R⁶ → R² has rank 2, what fraction of the domain dimensions are 'lost' to the null space?",
+        "options": [
+          "1/3",
+          "1/2",
+          "2/3",
+          "1/6"
+        ],
+        "correct_option": "2/3",
+        "explanation": "Step 1: nullity = 6 - 2 = 4. Step 2: 4 out of 6 dimensions are in the null space. Step 3: 4/6 = 2/3 of the domain is lost. The map compresses 6D input to 2D output, destroying most of the information."
+      },
+      {
+        "id": "M4Q9H10",
+        "question": "For A : Rⁿ → Rᵐ, if rank(A) = m (full row rank), what can we say about the range?",
+        "options": [
+          "The range is a proper subspace of Rᵐ",
+          "The range is all of Rᵐ (surjective)",
+          "The range has dimension n",
+          "The null space is trivial"
+        ],
+        "correct_option": "The range is all of Rᵐ (surjective)",
+        "explanation": "Step 1: rank = m means dim(range) = m. Step 2: The range is an m-dimensional subspace of Rᵐ, which must be Rᵐ itself. Step 3: Every output vector is achievable — the map is surjective (onto). Full row rank guarantees the system Ax = b always has a solution."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "id": "M4Q9R1",
+      "question": "In data compression, a 1000-dimensional dataset is projected onto a 10-dimensional subspace. The rank is 10, nullity is 990. What does the null space represent?",
+      "options": [
+        "The 10 most important features",
+        "The 990 dimensions of redundant/noisy information that are discarded",
+        "The original data",
+        "The compressed data"
+      ],
+      "correct_option": "The 990 dimensions of redundant/noisy information that are discarded",
+      "explanation": "Step 1: rank = 10, so range = 10D (the compressed representation). Step 2: nullity = 990, so null space = 990D (the discarded information). Step 3: The null space captures what is lost in compression — redundant features, noise, and irrelevant variation. Rank-Nullity quantifies the compression ratio."
+    },
+    {
+      "id": "M4Q9R2",
+      "question": "A robot arm has 6 joints (6D input) but can only move in 3D space (3D output). If the motion matrix has rank 3, the null space is 3D. What does a null-space movement look like?",
+      "options": [
+        "The arm moves in 3D space",
+        "The arm reconfigures its joints without changing the end-effector position",
+        "The arm locks up",
+        "The arm moves to a new position"
+      ],
+      "correct_option": "The arm reconfigures its joints without changing the end-effector position",
+      "explanation": "Step 1: null space = 3D means 3 joint-motion combinations produce zero end-effector movement. Step 2: These are 'internal' motions — the arm reshapes without moving the tool. Step 3: This is called kinematic redundancy: the extra degrees of freedom (null space) allow obstacle avoidance and self-reconfiguration."
+    },
+    {
+      "id": "M4Q9R3",
+      "question": "In a communication system, a 5-channel signal is encoded into a 3-channel transmission. If the encoding matrix has rank 3, the null space is 2D. What does the null space represent?",
+      "options": [
+        "The 3 useful signal components",
+        "The 2 dimensions of signal that are lost (unrecoverable)",
+        "The ise in the system",
+        "The encoded signal"
+      ],
+      "correct_option": "The 2 dimensions of signal that are lost (unrecoverable)",
+      "explanation": "Step 1: rank = 3, nullity = 2. Step 2: The 2D null space represents information that cannot be recovered from the 3-channel output. Step 3: This is the fundamental limit of the encoding — Rank-Nullity tells us exactly how much information is irrecoverably lost."
+    },
+    {
+      "id": "M4Q9R4",
+      "question": "In machine learning, if a neural network layer has a weight matrix of rank 5 from a 20-dimensional input, the null space is 15D. What is the practical consequence?",
+      "options": [
+        "The layer captures 20 independent features",
+        "The layer only uses 5 input directions; 15 input directions are ignored",
+        "The layer is overparameterised",
+        "The layer has too few outputs"
+      ],
+      "correct_option": "The layer only uses 5 input directions; 15 input directions are ignored",
+      "explanation": "Step 1: rank = 5, nullity = 15. Step 2: Only 5 input directions affect the output; 15 are in the null space. Step 3: The layer has a 15D 'blind spot' — inputs in this direction have no effect. Rank-Nullity reveals how many input features actually matter."
+    },
+    {
+      "id": "M4Q9R5",
+      "question": "In a supply chain, a factory converts 8 raw materials (8D input) into 4 products (4D output). If the production matrix has rank 4, the null space is 4D. What does this mean?",
+      "options": [
+        "All 8 materials are essential",
+        "4 independent combinations of raw materials have no effect on output (redundancies)",
+        "The factory produces 8 products",
+        "The factory cant produce anything"
+      ],
+      "correct_option": "4 independent combinations of raw materials have no effect on output (redundancies)",
+      "explanation": "Step 1: rank = 4, nullity = 4. Step 2: 4 independent material combinations are in the null space — changing them doesn't affect the 4 products. Step 3: The factory has 4 degrees of freedom in raw material allocation that don't impact production — these are pure redundancies or waste pathways."
+    },
+    {
+      "id": "M4Q9R6",
+      "question": "In quantum computing, a 3-qubit system lives in 8D Hilbert space. If a quantum channel has rank 4, the null space is 4D. What does the null space represent?",
+      "options": [
+        "The 4 preserved quantum states",
+        "The 4-dimensional subspace of states that are annihilated by the channel",
+        "The measurement basis",
+        "The entangled states"
+      ],
+      "correct_option": "The 4-dimensional subspace of states that are annihilated by the channel",
+      "explanation": "Step 1: rank = 4, nullity = 4. Step 2: The 4D range preserves quantum information; the 4D null space represents states destroyed by the channel. Step 3: The rank-nullity split determines which quantum states survive the channel and which are irrecoverably lost."
+    }
+  ]
+}

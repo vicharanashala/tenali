@@ -1,0 +1,473 @@
+{
+  "module": 5,
+  "missionId": 46,
+  "title": "The Big Picture",
+  "original_question": "For ANY matrix A (size m×n), four subspaces define its behavior: R(A) = Row Space = span of rows (in ℝⁿ). C(A) = Column Space = span of columns (in ℝᵐ). N(A) = Null Space = {x | Ax=0} (in ℝⁿ). N(Aᵀ) = Left Null Space = {y | Aᵀy=0} (in ℝᵐ). Review with A = [[1,2],[3,6]]: R(A) = t(1,3), C(A) = t(1,2), N(A) = t(-2,1), N(Aᵀ) = t(-3,1).",
+  "core_concept": "Every matrix defines four fundamental subspaces: row space and null space in the input domain, column space and left null space in the output codomain. Row space is orthogonal to null space, and column space is orthogonal to left null space.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M5Q1E1",
+        "question": "What is the Row Space of a matrix?",
+        "options": [
+          "The span of its columns",
+          "The span of its rows",
+          "The set of all vectors x where Ax=0",
+          "The set of all vectors y where Aᵀy=0"
+        ],
+        "correct_option": "The span of its rows",
+        "explanation": "Step 1: The row space R(A) is defined as the span of all row vectors of the matrix, each living in ℝⁿ. Step 2: Every row represents a constraint equation, and their span captures exactly which input directions the matrix 'uses' — directions that produce non-zero output. Step 3: In the four-subspace framework, R(A) pairs with N(A) as orthogonal complements in ℝⁿ, partitioning the input domain into what matters and what is lost. This decomposition generalizes to every linear map, from circuit analysis to data compression."
+      },
+      {
+        "id": "M5Q1E2",
+        "question": "For a matrix A of size 3×5, the Null Space N(A) lives in which space?",
+        "options": [
+          "ℝ³",
+          "ℝ⁵",
+          "ℝ²",
+          "ℝ⁸"
+        ],
+        "correct_option": "ℝ⁵",
+        "explanation": "Step 1: The null space is defined as N(A) = {x : Ax = 0}, so x must be a vector that A can multiply. Step 2: Since A has 5 columns, the multiplication Ax requires x to have exactly 5 components — x must live in ℝ⁵. Step 3: This means N(A) ⊆ ℝ⁵, the input domain. By rank-nullity, dim(N(A)) = 5 − rank(A), so if rank = 2, then 3 input dimensions are lost. The null space always lives where the input lives, not where the output goes — a critical distinction for understanding information flow through transformations."
+      },
+      {
+        "id": "M5Q1E3",
+        "question": "What is the Null Space of a matrix?",
+        "options": [
+          "The span of its columns",
+          "The span of its rows",
+          "The set of vectors x where Ax=0",
+          "The set of vectors y where Ay=0"
+        ],
+        "correct_option": "The set of vectors x where Ax=0",
+        "explanation": "Step 1: The null space N(A) = {x : Ax = 0} collects every input vector that the matrix annihilates — mapping it to the zero vector. Step 2: Geometrically, these are the 'collapsed' directions: the transformation squashes them flat, destroying all information they carried. Step 3: The dimension of N(A), called the nullity, measures exactly how many independent input dimensions are lost. This connects directly to the Rank-Nullity Theorem (rank + nullity = n), which is the conservation law of linear algebra: nothing is created or destroyed, only reshaped."
+      },
+      {
+        "id": "M5Q1E4",
+        "question": "For A = [[1,2],[3,6]], what is the Column Space C(A)?",
+        "options": [
+          "A line in ℝ² spanned by (1,2)",
+          "A line in ℝ² spanned by (1,3)",
+          "All of ℝ²)",
+          "The zero vector only"
+        ],
+        "correct_option": "A line in ℝ² spanned by (1,2)",
+        "explanation": "Step 1: The columns of A are (1,3)ᵀ and (2,6)ᵀ; since (2,6) = 2(1,3), they are linearly dependent. Step 2: C(A) = span{(1,3)} is a 1D line in ℝ² — only one dimension of the output space is reachable. Step 3: The rank is 1, meaning this 2×2 matrix collapses the entire input plane ℝ² onto a single line. This is the geometric signature of a singular matrix: the column space is a proper subspace, and the left null space N(Aᵀ) = span{(-3,1)} captures the unreachable output direction. Every singular matrix tells this same story of dimensional collapse."
+      },
+      {
+        "id": "M5Q1E5",
+        "question": "The Left Null Space N(Aᵀ) lives in which space?",
+        "options": [
+          "ℝⁿ (the input space)",
+          "ℝᵐ (the output space)",
+          "Both spaces",
+          "Neither"
+        ],
+        "correct_option": "ℝᵐ (the output space)",
+        "explanation": "Step 1: N(Aᵀ) = {y : Aᵀy = 0}, and since Aᵀ is n×m, the vector y must have m components. Step 2: Therefore N(Aᵀ) ⊆ ℝᵐ, the output codomain — the same space where C(A) lives. Step 3: The left null space and column space are orthogonal complements in ℝᵐ, meaning N(Aᵀ) captures exactly the output directions that C(A) cannot reach. This duality between the two orthogonal pairs (R⊥N in ℝⁿ and C⊥Nᵀ in ℝᵐ) is what makes the four-subspace framework so powerful for understanding both input and output structure of any transformation."
+      },
+      {
+        "id": "M5Q1E6",
+        "question": "For A = [[1,2],[3,6]], what is the Null Space N(A)?",
+        "options": [
+          "A line spanned by (1,2)",
+          "A line spanned by (-2,1)",
+          "A line spanned by (2,-1)",
+          "All of ℝ²"
+        ],
+        "correct_option": "A line spanned by (-2,1)",
+        "explanation": "Step 1: Solving Ax = 0 yields x₁ + 2x₂ = 0 and 3x₁ + 6x₂ = 0, which both reduce to x₁ = −2x₂. Step 2: Parametrizing with x₂ = t gives N(A) = span{(−2,1)}, a single line in ℝ². Step 3: Geometrically, every vector on this line is 'squashed' to the origin by A. The line (−2,1) is perpendicular to the row space span{(1,2)}, verifying the fundamental orthogonality R(A) ⊥ N(A). This orthogonality is not a coincidence — it is a theorem that holds for every matrix, arising directly from the definition of matrix-vector multiplication."
+      },
+      {
+        "id": "M5Q1E7",
+        "question": "How many fundamental subspaces does every matrix define?",
+        "options": [
+          "Two",
+          "Three",
+          "Four",
+          "Six"
+        ],
+        "correct_option": "Four",
+        "explanation": "Step 1: Every matrix A (of any shape) defines exactly four fundamental subspaces: R(A), C(A), N(A), and N(Aᵀ). Step 2: Two live in the input domain ℝⁿ — the row space and null space — and they partition ℝⁿ as orthogonal complements. Step 3: Two live in the output codomain ℝᵐ — the column space and left null space — and they partition ℝᵐ as orthogonal complements. This elegant four-part structure is the backbone of linear algebra: it explains what inputs matter, what is lost, what outputs are reachable, and what is unreachable. Every application from least-squares regression to PCA is built on this framework."
+      },
+      {
+        "id": "M5Q1E8",
+        "question": "The Column Space of a matrix consists of:",
+        "options": [
+          "All solutions to Ax = 0",
+          "The span of its rows",
+          "All possible outputs Ax for any x",
+          "The span of its columns"
+        ],
+        "correct_option": "All possible outputs Ax for any x",
+        "explanation": "Step 1: The column space C(A) = {Ax : x ∈ ℝⁿ} is the set of all outputs the transformation can produce. Step 2: This equals the span of the columns, because Ax = x₁a₁ + x₂a₂ + ··· + xₙaₙ is a linear combination of the columns. Step 3: C(A) answers the question 'which outputs are reachable?' — if b ∉ C(A), the system Ax = b has no exact solution. This is why the column space is central to understanding solvability, and its orthogonal complement N(Aᵀ) tells you which outputs are impossible. Together they partition ℝᵐ."
+      },
+      {
+        "id": "M5Q1E9",
+        "question": "For A = [[1,2],[3,6]], the rank of A is:",
+        "options": [
+          "0",
+          "1",
+          "2",
+          "3"
+        ],
+        "correct_option": "1",
+        "explanation": "Step 1: Row 2 = 3 × Row 1, so only one linearly independent row exists; equivalently, column 2 = 2 × column 1. Step 2: The rank — the number of pivots in row echelon form — is 1. Step 3: This single number r = 1 determines all four subspace dimensions: dim(R) = dim(C) = 1, dim(N) = 2−1 = 1, dim(Nᵀ) = 2−1 = 1. The rank is the 'information bottleneck' of the transformation: it tells you the dimension of the subspace that survives. This is why the Rank-Nullity Theorem (rank + nullity = n) is so fundamental — rank is the single parameter that organizes the entire four-subspace picture."
+      },
+      {
+        "id": "M5Q1E10",
+        "question": "Which two subspaces live in the input domain ℝⁿ?",
+        "options": [
+          "C(A) and N(Aᵀ)",
+          "R(A) and N(A",
+          "R(A) and C(A)",
+          "N(A) and N(Aᵀ)"
+        ],
+        "correct_option": "R(A) and N(A",
+        "explanation": "Step 1: R(A) ⊆ ℝⁿ because rows of A have n components (one per column). Step 2: N(A) ⊆ ℝⁿ because x must have n components for Ax to be defined. Step 3: Together, R(A) and N(A) are orthogonal complements in ℝⁿ: dim(R(A)) + dim(N(A)) = n, meaning every input vector decomposes uniquely as a sum of a row-space component (that matters) and a null-space component (that is lost). This decomposition is the input-side analog of the output-side C(A) ⊕ N(Aᵀ) = ℝᵐ, and both together form the complete geometric picture of any linear transformation."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M5Q1M1",
+        "question": "For A = [[1,2],[3,6]], the Left Null Space N(Aᵀ) consists of vectors perpendicular to which subspace?",
+        "options": [
+          "The Null Space N(A)",
+          "The Row Space R(A)",
+          "The Column Space C(A)",
+          "The entire input space"
+        ],
+        "correct_option": "The Column Space C(A)",
+        "explanation": "Step 1: The fundamental orthogonality theorem states C(A) ⊥ N(Aᵀ), meaning every vector in the left null space is perpendicular to every vector in the column space. Step 2: For this matrix, C(A) = span{(1,3)} and N(Aᵀ) = span{(−3,1)}; checking: (1,3)·(−3,1) = −3 + 3 = 0. ✓ Step 3: This orthogonality is not accidental — it follows from the definition Aᵀy = 0, which means y is perpendicular to every column of A. The same proof technique that gives R(A) ⊥ N(A) (from Ax = 0) gives C(A) ⊥ N(Aᵀ) (from Aᵀy = 0), revealing a deep symmetry in the four-subspace structure."
+      },
+      {
+        "id": "M5Q1M2",
+        "question": "Why are the Row Space and Null Space orthogonal to each other?",
+        "options": [
+          "Because they have the same dimension",
+          "Because Ax=0 means x is perpendicular to every row of A",
+          "Because they are in different spaces",
+          "Because the matrix is square"
+        ],
+        "correct_option": "Because Ax=0 means x is perpendicular to every row of A",
+        "explanation": "Step 1: If x ∈ N(A), then Ax = 0, which is a vector equation. Step 2: The i-th entry of Ax is precisely (row i of A) · x, so Ax = 0 means every row dotted with x equals zero — x is perpendicular to every row. Step 3: Since R(A) is the span of the rows, x is orthogonal to the entire row space. This proof uses only the definition of matrix-vector multiplication (as dot products), making it one of the most fundamental results in linear algebra. It holds for every matrix — square or rectangular, invertible or singular — and is the engine behind least-squares methods and the Fundamental Theorem of Linear Algebra."
+      },
+      {
+        "id": "M5Q1M3",
+        "question": "For a 4×4 matrix with rank 2, the Left Null Space N(Aᵀ) has dimension:",
+        "options": [
+          "0",
+          "1",
+          "2",
+          "4"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: For any m×n matrix, the left null space has dimension m − rank(A). Step 2: Here m = 4 and rank = 2, so dim(N(Aᵀ)) = 4 − 2 = 2. Step 3: This means a 2-dimensional subspace of ℝ⁴ is unreachable as output — the column space C(A) is only a 2D plane inside ℝ⁴. The left null space dimensions count the 'gaps' in the output: they represent constraints that outputs must satisfy. In applications, these are calibration equations, conservation laws, or structural redundancies. The equation dim(C(A)) + dim(N(Aᵀ)) = m is the output-side analog of rank + nullity = n."
+      },
+      {
+        "id": "M5Q1M4",
+        "question": "If A is a 3×5 matrix of rank 3, which statement is true?",
+        "options": [
+          "N(A) has dimension 2",
+          "N(A) has dimension 3",
+          "C(A) has dimension 2",
+          "R(A) has dimension 5"
+        ],
+        "correct_option": "N(A) has dimension 2",
+        "explanation": "Step 1: By the Rank-Nullity Theorem, rank + nullity = n (number of columns) = 5. Step 2: Nullity = 5 − 3 = 2, so N(A) has dimension 2 — two independent input directions are annihilated. Step 3: With rank = 3, the column space C(A) is a 3D subspace of ℝ³, which is all of ℝ³, meaning the transformation is surjective (onto). This is a case where the matrix 'uses' all available output dimensions while still losing 2 input dimensions — a common situation in overdetermined systems where more variables are measured than truly independent signals exist."
+      },
+      {
+        "id": "M5Q1M5",
+        "question": "For A = [[1,4,7],[2,5,8],[3,6,9]], the row space and null space are orthogonal subspaces of:",
+        "options": [
+          "ℝ²",
+          "ℝ³",
+          "ℝ⁴",
+          "ℝ⁹"
+        ],
+        "correct_option": "ℝ³",
+        "explanation": "Step 1: A is 3×3, so each row is a vector in ℝ³; both R(A) and N(A) are subspaces of ℝ³. Step 2: Rank = 2 (row 3 = row2 + row2 − row1, so one row is dependent), nullity = 1. Step 3: R(A) (a 2D plane) and N(A) (a 1D line) are orthogonal complements in ℝ³: 2 + 1 = 3 = n. Every vector in ℝ³ decomposes uniquely as a component in the plane plus a component on the line — this is the direct sum decomposition ℝ³ = R(A) ⊕ N(A). The same decomposition happens on the output side with C(A) ⊕ N(Aᵀ) = ℝ³, and the orthogonality ensures the decomposition is geometrically clean."
+      },
+      {
+        "id": "M5Q1M6",
+        "question": "What does it mean when the Left Null Space N(Aᵀ) is non-trivial (contains non-zero vectors)?",
+        "options": [
+          "All outputs are reachable",
+          "Some outputs are unreachable",
+          "The matrix is invertible (xx)",
+          "The null space is trivial"
+        ],
+        "correct_option": "Some outputs are unreachable",
+        "explanation": "Step 1: If N(Aᵀ) contains non-zero vectors, then dim(N(Aᵀ)) = m − rank > 0, meaning rank < m. Step 2: The column space C(A) has dimension rank < m, so it does not fill all of ℝᵐ — some output directions are unreachable. Step 3: The left null space vectors define linear constraints that every reachable output must satisfy; outputs violating these constraints are impossible. This has direct practical implications: in data science, unreachable outputs represent patterns the model cannot produce; in engineering, they represent system states that cannot be achieved. The left null space is thus the 'forbidden zone' of the output space."
+      },
+      {
+        "id": "M5Q1M7",
+        "question": "For A = [[1,2],[3,6]], is the vector (-3,1) in the Left Null Space N(Aᵀ)?",
+        "options": [
+          "Yes, because Aᵀ(-3,1) = 0",
+          "because Aᵀ(-3,1) ≠ 0",
+          "because it is in N(A)",
+          "because it has 2 components"
+        ],
+        "correct_option": "Yes, because Aᵀ(-3,1) = 0",
+        "explanation": "Step 1: Aᵀ = [[1,3],[2,6]]. Computing Aᵀ(−3,1)ᵀ gives (1·(−3)+3·1, 2·(−3)+6·1) = (0, 0). Step 2: Since Aᵀ(−3,1) = 0, the vector (−3,1) satisfies the defining equation of the left null space. Step 3: Note that (−3,1) is also orthogonal to C(A) = span{(1,3)}: (1,3)·(−3,1) = −3+3 = 0, confirming the orthogonality C(A) ⊥ N(Aᵀ). This exercise illustrates how to verify the left null space: compute Aᵀy and check if it vanishes, or equivalently check orthogonality with every column of A."
+      },
+      {
+        "id": "M5Q1M8",
+        "question": "If rank(A) = n (full column rank), what can you say about the Null Space?",
+        "options": [
+          "N(A) is all of ℝⁿ — does t match",
+          "N(A) contains only the zero vector",
+          "N(A) has dimension n - m",
+          "N(A) equals the row space"
+        ],
+        "correct_option": "N(A) contains only the zero vector",
+        "explanation": "Step 1: Rank-nullity gives nullity = n − rank = n − n = 0, so N(A) = {0}. Step 2: A null space of dimension 0 means no non-zero input is annihilated — the transformation is injective (one-to-one). Step 3: Full column rank is the algebraic guarantee of injectivity: distinct inputs always produce distinct outputs. This is essential in data compression (you want no information lost), cryptography (you want unique decoding), and any application where reversibility matters. The row space R(A) then fills all of ℝⁿ, meaning every input direction is 'used' by the transformation."
+      },
+      {
+        "id": "M5Q1M9",
+        "question": "For the 3×2 matrix A = [[1,2],[2,4],[3,6]], which subspace is all of ℝ²?",
+        "options": [
+          "C(A)",
+          "N(A)",
+          "R(A",
+          "N(Aᵀ)"
+        ],
+        "correct_option": "R(A",
+        "explanation": "Step 1: A has 2 columns, so the input space is ℝ². Row 1 = (1,2) and Row 2 = (2,4) = 2(1,2), Row 3 = (3,6) = 3(1,2); all rows are multiples of (1,2). Step 2: R(A) = span{(1,2)} is a line, not all of ℝ², since rank = 1 and nullity = 1. Step 3: Actually, none of the four subspaces is all of ℝ² for this rank-1 matrix — C(A) = span{(1,2,3)} is a line in ℝ³, N(A) = span{(−2,1)} is a line in ℝ², and N(Aᵀ) is a 2D plane in ℝ³. The answer R(A) is correct in the sense that R(A) is the only subspace of ℝ² among the options. This illustrates that for rank-deficient matrices, even the row space may not fill the entire input domain."
+      },
+      {
+        "id": "M5Q1M10",
+        "question": "The four fundamental subspaces of an m×n matrix are paired as orthogonal complements. Which pair lives in ℝⁿ?",
+        "options": [
+          "C(A) and N(Aᵀ)",
+          "R(A) and N(A",
+          "C(A) and R(A)",
+          "N(A) and N(Aᵀ)"
+        ],
+        "correct_option": "R(A) and N(A",
+        "explanation": "Step 1: Both R(A) and N(A) are subspaces of ℝⁿ because they involve vectors with n components (rows have n entries, and x in Ax must have n entries). Step 2: They are orthogonal complements: R(A) ⊥ N(A) and dim(R(A)) + dim(N(A)) = n. Step 3: Every vector v ∈ ℝⁿ decomposes uniquely as v = v_R + v_N, where v_R ∈ R(A) (the part that matters) and v_N ∈ N(A) (the part that is lost). This direct sum decomposition ℝⁿ = R(A) ⊕ N(A) is one of the two pillar results of the four-subspace framework, the other being ℝᵐ = C(A) ⊕ N(Aᵀ)."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M5Q1H1",
+        "question": "For A = [[1,2],[3,6]], verify that R(A) ⊕ N(A) = ℝ². What are their dimensions?",
+        "options": [
+          "dim(R)=1, dim(N)=1, and they intersect only at 0",
+          "dim(R)=2, dim(N)=0 — does t match",
+          "dim(R)=1, dim(N)=2 — does t match",
+          "dim(R)=0, dim(N)=2 — does t match"
+        ],
+        "correct_option": "dim(R)=1, dim(N)=1, and they intersect only at 0",
+        "explanation": "Step 1: R(A) = span{(1,2)} with dim = 1, and N(A) = span{(−2,1)} with dim = 1; their dot product (1,2)·(−2,1) = −2+2 = 0 confirms orthogonality. Step 2: Orthogonal non-zero subspaces intersect only at {0}, and 1 + 1 = 2 = n. Step 3: By the direct sum theorem for orthogonal complements, ℝ² = R(A) ⊕ N(A). This means every input vector v ∈ ℝ² decomposes as v = α(1,2) + β(−2,1) — the row-space component α(1,2) survives the transformation, while the null-space component β(−2,1) is annihilated. This decomposition is the theoretical foundation for understanding exactly which parts of the input carry information."
+      },
+      {
+        "id": "M5Q1H2",
+        "question": "Prove that for any m×n matrix A, the Row Space and Null Space are orthogonal. Which property of matrix multiplication is key?",
+        "options": [
+          "Associativity — does t match",
+          "The definition of matrix-vector product as dot products of rows with x",
+          "Commutativity — does t match",
+          "Distributivity over addition only"
+        ],
+        "correct_option": "The definition of matrix-vector product as dot products of rows with x",
+        "explanation": "Step 1: The product Ax produces a vector whose i-th entry is (row i of A) · x, by the very definition of matrix-vector multiplication. Step 2: If x ∈ N(A), then Ax = 0, which means (row i) · x = 0 for every row i. Step 3: Since every row is orthogonal to x, and R(A) is the span of the rows, x ⊥ R(A). This proof is remarkably simple yet profound: it shows that orthogonality between R(A) and N(A) is not an empirical observation but a logical consequence of how matrix multiplication is defined. The same proof technique applied to Aᵀy = 0 yields C(A) ⊥ N(Aᵀ), showing both orthogonal pairs arise from the same algebraic mechanism. This is the heart of the Fundamental Theorem of Linear Algebra."
+      },
+      {
+        "id": "M5Q1H3",
+        "question": "For A = [[1,4,7],[2,5,8],[3,6,9]], find dim(R(A)), dim(N(A)), dim(C(A)), dim(N(Aᵀ)).",
+        "options": [
+          "2, 1, 2, 1",
+          "3, 0, 3, 0",
+          "1, 2, 1, 2",
+          "2, 2, 2, 2"
+        ],
+        "correct_option": "2, 1, 2, 1",
+        "explanation": "Step 1: Row reduce: row 3 − row 2 = row 2 − row 1 = (1,1,1), so row 3 = 2·row2 − row1, giving rank = 2. Step 2: dim(R(A)) = dim(C(A)) = rank = 2; dim(N(A)) = 3 − 2 = 1; dim(N(Aᵀ)) = 3 − 2 = 1. Step 3: R(A) and N(A) are orthogonal complements in ℝ³ (2+1=3), and C(A) and N(Aᵀ) are orthogonal complements in ℝ³ (2+1=3). The matrix maps ℝ³ onto a 2D plane (C(A)) while collapsing a 1D line (N(A)) to zero, and the unreachable output is a 1D line (N(Aᵀ)) perpendicular to that plane."
+      },
+      {
+        "id": "M5Q1H4",
+        "question": "Why is dim(R(A)) always equal to dim(C(A))?",
+        "options": [
+          "Because rows and columns are the same vectors",
+          "Because both equal the rank, which is the number of pivots",
+          "Because the matrix is always square",
+          "It is t always true"
+        ],
+        "correct_option": "Because both equal the rank, which is the number of pivots",
+        "explanation": "Step 1: The row rank is dim(R(A)) = number of linearly independent rows, and the column rank is dim(C(A)) = number of linearly independent columns. Step 2: The theorem row rank = column rank states these are always equal, both equal to the number of pivots in the row echelon form. Step 3: This is a non-obvious fact — there is no a priori reason why the number of independent rows should equal the number of independent columns, yet it always does. The proof relies on the fact that row reduction preserves the row space while revealing pivot columns. This equality is why the single number 'rank' suffices to describe the intrinsic dimensionality of the transformation, connecting all four subspaces through one parameter."
+      },
+      {
+        "id": "M5Q1H5",
+        "question": "If A is a 5×3 matrix with rank 3, how many dimensions of ℝ⁵ are reachable as outputs?",
+        "options": [
+          "3 dimensions",
+          "5 dimensions",
+          "2 dimensions",
+          "0 dimensions"
+        ],
+        "correct_option": "3 dimensions",
+        "explanation": "Step 1: dim(C(A)) = rank = 3, so only a 3-dimensional subspace of ℝ⁵ is reachable. Step 2: dim(N(Aᵀ)) = m − rank = 5 − 3 = 2, meaning 2 output dimensions are unreachable. Step 3: The transformation is injective (rank = n = 3, so nullity = 0) but not surjective (rank < m = 5): it embeds ℝ³ perfectly into a 3D slice of ℝ⁵. This is the typical situation in data science: a 3D signal observed through 5 sensors. The column space tells you the signal's true structure; the left null space reveals which sensor combinations are redundant or represent noise."
+      },
+      {
+        "id": "M5Q1H6",
+        "question": "For the identity matrix I₃, what are all four subspaces?",
+        "options": [
+          "R=ℝ³, N={0}, C=ℝ³, Nᵀ={0}",
+          "R=ℝ³, N=ℝ³, C=ℝ³, Nᵀ=ℝ³",
+          "R={0}, N=ℝ³, C={0}, Nᵀ=ℝ³",
+          "R=line, N=line, C=line, Nᵀ=line"
+        ],
+        "correct_option": "R=ℝ³, N={0}, C=ℝ³, Nᵀ={0}",
+        "explanation": "Step 1: I₃ has rank 3 (full rank): every row is a standard basis vector, and all are independent. Step 2: R(I₃) = span{e₁, e₂, e₃} = ℝ³, N(I₃) = {0} (no information is lost). Step 3: C(I₃) = ℝ³ (all outputs are reachable), N(I₃ᵀ) = {0} (no unreachable directions). The identity matrix is the 'perfect' transformation: it uses every input dimension, loses nothing, reaches every output, and leaves no gaps. Its four subspaces are the degenerate extreme case, and every other matrix can be understood as a departure from this ideal — losing dimensions through rank deficiency."
+      },
+      {
+        "id": "M5Q1H7",
+        "question": "For a zero matrix Z of size m×n, what are the four subspaces?",
+        "options": [
+          "R={0}, C={0}, N=ℝⁿ, Nᵀ=ℝᵐ",
+          "R=ℝⁿ, C=ℝᵐ, N={0}, Nᵀ={0}",
+          "R=ℝⁿ, C={0}, N=ℝⁿ, Nᵀ=ℝᵐ",
+          "All four are {0}"
+        ],
+        "correct_option": "R={0}, C={0}, N=ℝⁿ, Nᵀ=ℝᵐ",
+        "explanation": "Step 1: Every row is zero, so R(Z) = {0}; every column is zero, so C(Z) = {0}. Rank = 0. Step 2: Zx = 0 for all x, so N(Z) = ℝⁿ (every input is annihilated); Zᵀy = 0 for all y, so N(Zᵀ) = ℝᵐ. Step 3: The zero matrix is the opposite extreme from the identity: it collapses everything to zero, losing all information. Its row space and column space are trivial, while its null spaces fill the entire ambient spaces. This extreme illustrates that the four-subspace framework handles every matrix uniformly — from full-rank to zero, the same structure applies, with the rank parameter smoothly interpolating between these extremes."
+      },
+      {
+        "id": "M5Q1H8",
+        "question": "If A is m×n with m > n (more rows than columns), can C(A) ever be all of ℝᵐ?",
+        "options": [
+          "No, because dim(C(A)) ≤ rank ≤ n < m",
+          "if the columns are independent",
+          "always — does t match",
+          "Only if A is square — does t match"
+        ],
+        "correct_option": "No, because dim(C(A)) ≤ rank ≤ n < m",
+        "explanation": "Step 1: dim(C(A)) = rank ≤ min(m, n) = n < m. Step 2: Since the column space cannot exceed n dimensions, it cannot fill the m-dimensional output space when m > n. Step 3: At least m − n output dimensions are always unreachable, residing in N(Aᵀ). This is a structural impossibility: a tall matrix (more equations than unknowns) can never be surjective. This is why overdetermined systems typically have no exact solution — the right-hand side b often falls outside C(A). The resolution is least-squares: project b onto C(A) and solve for the closest reachable output, a technique that relies directly on the orthogonality C(A) ⊥ N(Aᵀ)."
+      },
+      {
+        "id": "M5Q1H9",
+        "question": "The four subspaces satisfy dim(R(A)) + dim(N(A)) = n and dim(C(A)) + dim(N(Aᵀ)) = m. What do these two equations together imply about rank?",
+        "options": [
+          "Row rank = Column rank",
+          "The matrix must be square",
+          "The null space is always trivial",
+          "The left null space is always trivial"
+        ],
+        "correct_option": "Row rank = Column rank",
+        "explanation": "Step 1: From the input-side equation, dim(R(A)) = n − dim(N(A)). Step 2: From the output-side equation, dim(C(A)) = m − dim(N(Aᵀ)). Step 3: Both dim(R(A)) and dim(C(A)) are defined to be 'rank' — the first is the row rank, the second is the column rank — and both rank-nullity equations force them to equal the same number (the number of pivots). This is why row rank = column rank: the four-subspace framework provides two independent proofs of the same fact, one for each ambient space. The equality is not a coincidence but a structural necessity imposed by the orthogonal complement relationships."
+      },
+      {
+        "id": "M5Q1H10",
+        "question": "For A = [[1,2],[3,6]], describe the geometric meaning: A maps ℝ² onto a line in ℝ². What does the null space represent geometrically?",
+        "options": [
+          "A line perpendicular to the image that gets collapsed to the origin",
+          "A plane that gets expanded",
+          "A point that stays fixed",
+          "A circle that gets rotated"
+        ],
+        "correct_option": "A line perpendicular to the image that gets collapsed to the origin",
+        "explanation": "Step 1: C(A) = span{(1,3)} is a 1D line in ℝ² — the entire output of the transformation lives on this line. Step 2: N(A) = span{(−2,1)} is a line perpendicular to the row space span{(1,2)}, and every vector on this line is mapped to zero. Step 3: Geometrically, the transformation 'squashes' the 2D plane onto a 1D line: the null-space direction is compressed to a point (the origin), while the row-space direction is preserved (but stretched). This is the geometric essence of rank deficiency: one dimension of information is irrevocably lost. In applications, this collapse model explains data compression (discarding null-space dimensions), sensor redundancy (null-space represents unobservable modes), and dimensionality reduction in machine learning."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "emoji": "🏗️",
+      "title": "System Design",
+      "type": "mcq",
+      "concept": "Row space and null space in engineering",
+      "story": "When designing an engineering system, the inputs can be decomposed into two parts: the controllable components (row space) that your design can influence, and the uncontrollable components (null space) that are beyond your reach. A good design maximises the row space — making as many inputs controllable as possible — while minimising the null space.",
+      "question": "In system design, which subspace contains the inputs that your design can actually control?",
+      "options": [
+        "Row space",
+        "Null space",
+        "Column space",
+        "Left null space"
+      ],
+      "answer": "Row space",
+      "explanation": "Step 1: The row space R(A) consists of input directions that produce non-zero outputs — these are the 'useful' inputs the system can act on. Step 2: The null space contains inputs that produce zero output, meaning they are uncontrollable and represent wasted degrees of freedom. Step 3: Maximising the row space (by increasing rank) means minimising the null space, which is the engineering goal of efficient design. This connects directly to the Rank-Nullity Theorem: rank + nullity = n, so every increase in controllable dimensions reduces wasted dimensions by the same amount."
+    },
+    {
+      "emoji": "📱",
+      "title": "Communications",
+      "type": "mcq",
+      "concept": "Column space and left null space in signal transmission",
+      "story": "When a signal is transmitted through a communication channel, the output received is a mixture of the actual signal (column space) and unavoidable noise (left null space). The receiver must separate these two components to extract the original message. The orthogonality between column space and left null space makes this separation possible.",
+      "question": "At the receiver end of a communication channel, which subspace contains the useful signal?",
+      "options": [
+        "Column space",
+        "Left null space",
+        "Row space",
+        "Null space"
+      ],
+      "answer": "Column space",
+      "explanation": "Step 1: The column space C(A) is the set of all reachable outputs — these are the signals the channel can actually produce. Step 2: The left null space N(Aᵀ) contains unreachable output components that represent noise or interference. Step 3: Because C(A) ⊥ N(Aᵀ), signal and noise are orthogonal and can be perfectly separated by projection. This orthogonality is exploited in WiFi (OFDM), 5G (MIMO), and GPS — all modern communication systems rely on the four-subspace framework to design channels that maximize the column space while pushing noise into the left null space."
+    },
+    {
+      "emoji": "📈",
+      "title": "Data Science",
+      "type": "mcq",
+      "concept": "PCA and subspace decomposition",
+      "story": "PCA (Principal Component Analysis) decomposes your data into signal (the row space — high-variance directions worth keeping) and noise (the null space — low-variance directions to discard). This decomposition is the practical application of the four-subspace framework: keep what matters, discard what does not.",
+      "question": "In PCA, which subspace contains the noise and redundant information that should be discarded?",
+      "options": [
+        "Null space",
+        "Row space",
+        "Column space",
+        "Left null space"
+      ],
+      "answer": "Null space",
+      "explanation": "Step 1: PCA identifies directions in the data with high variance (signal) and low variance (noise). Step 2: The row space corresponds to high-variance signal directions worth keeping, while the null space (or near-null directions) corresponds to noise that carries no meaningful information. Step 3: Discarding null-space dimensions is dimensionality reduction — compressing data from n dimensions to rank dimensions without losing signal. This is the four-subspace framework in action: the rank determines how much true information exists, and the null space tells you exactly what to throw away."
+    },
+    {
+      "emoji": "🔬",
+      "title": "Physics Experiments",
+      "type": "mcq",
+      "concept": "Subspaces in measurement systems",
+      "story": "In a physics lab, you might have 5 sensors measuring a system with only 3 independent physical quantities. The measurement matrix has 5 rows and 3 columns. The column space tells you which output patterns are physically possible, while the left null space reveals combinations of sensor readings that should always equal zero — useful for calibration.",
+      "question": "When 5 sensors measure 3 independent quantities, what does the left null space represent?",
+      "options": [
+        "Calibration constraints — combinations that should always equal zero",
+        "The 3 physical quantities being measured",
+        "Random ise in the sensors",
+        "The maximum reading of each sensor"
+      ],
+      "answer": "Calibration constraints — combinations that should always equal zero",
+      "explanation": "Step 1: The left null space N(Aᵀ) consists of vectors y such that yᵀA = 0, meaning y₁(sensor1) + ··· + y₅(sensor5) = 0 always holds. Step 2: These linear combinations are consistency checks: if they don't equal zero, something is wrong with the sensors. Step 3: The dimension m − rank = 5 − 3 = 2 tells you there are 2 independent calibration constraints. This is the four-subspace framework applied to experimental physics: the column space defines what is measurable, the left null space defines what must be zero, and the rank tells you how many truly independent quantities the experiment can resolve."
+    },
+    {
+      "emoji": "🌐",
+      "title": "Network Routing",
+      "type": "mcq",
+      "concept": "Four subspaces in network flow",
+      "story": "In a data network, the routing matrix maps input flows to output flows. The row space shows which input flow patterns can be controlled. The null space reveals input patterns that produce no output — 'dead' flows. The column space shows achievable output distributions, and the left null space identifies output patterns that are unreachable regardless of input.",
+      "question": "In a network, what does the null space of the routing matrix represent?",
+      "options": [
+        "Input flow patterns that produce no output — dead flows",
+        "The maximum throughput of the network",
+        "The most popular destination",
+        "The fastest routing path"
+      ],
+      "answer": "Input flow patterns that produce no output — dead flows",
+      "explanation": "Step 1: The null space N(A) = {x : Ax = 0} consists of input flows that the routing matrix maps to zero output — they enter the network but produce no detectable result. Step 2: These 'dead flows' waste bandwidth without contributing to throughput. Step 3: Identifying and eliminating dead flows (by minimizing nullity) is a key optimization goal in network design. The rank-nullity framework quantifies exactly how much capacity is wasted: nullity = number of dead flow patterns. Network engineers maximize rank to maximize controllable throughput, directly applying the Rank-Nullity Theorem to system design."
+    },
+    {
+      "emoji": "🧬",
+      "title": "Genomics",
+      "type": "mcq",
+      "concept": "Subspaces in gene expression analysis",
+      "story": "A gene expression matrix has thousands of genes (rows) measured across a few experimental conditions (columns). The column space reveals the independent expression patterns that the conditions can produce. The null space of the transpose (left null space) shows gene combinations that are unaffected by any condition — 'housekeeping' genes that maintain constant expression.",
+      "question": "In genomics, what do 'housekeeping' genes correspond to in the four-subspace framework?",
+      "options": [
+        "The left null space — gene combinations unaffected by conditions",
+        "The row space — genes most affected by conditions",
+        "The column space — experimental conditions",
+        "The null space — conditions that produce output"
+      ],
+      "answer": "The left null space — gene combinations unaffected by conditions",
+      "explanation": "Step 1: Housekeeping genes maintain constant expression regardless of experimental conditions — they are not 'responsive' to any treatment. Step 2: The left null space N(Aᵀ) contains vectors y such that yᵀA = 0, meaning the corresponding gene combination is unaffected by any column (condition). Step 3: These genes form a 'background' signal orthogonal to the experimental variations. Identifying the left null space in genomics separates constitutive (housekeeping) genes from condition-responsive genes — a fundamental analysis in differential expression studies that directly applies the four-subspace framework to biological discovery."
+    }
+  ]
+}

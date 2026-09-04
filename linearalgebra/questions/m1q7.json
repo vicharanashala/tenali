@@ -1,0 +1,462 @@
+{
+  "module": 1,
+  "missionId": 7,
+  "title": "Time Machine",
+  "original_question": "f(x) = 3x + 2. If f(a) = 17, can you find a? Is it unique? Can you REVERSE any function?",
+  "core_concept": "A function is invertible if it is one-to-one (injective) — each output comes from exactly one input. For linear functions f(x) = ax + b with a ≠ 0, the inverse exists and is f⁻¹(y) = (y - b)/a. Invertibility connects to bijective mappings and the existence of inverse matrices in linear algebra.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M1Q7E1",
+        "question": "If f(x) = 3x + 2 and f(a) = 17, what is a?",
+        "options": [
+          "5",
+          "3",
+          "17",
+          "19"
+        ],
+        "correct_option": "5",
+        "explanation": "Step 1: Set 3a + 2 = 17. Step 2: Subtract 2: 3a = 15. Step 3: Divide by 3: a = 5. Check: f(5) = 3(5) + 2 = 17 ✓."
+      },
+      {
+        "id": "M1Q7E2",
+        "question": "For f(x) = 3x + 2, what is f(0)?",
+        "options": [
+          "0",
+          "2",
+          "3",
+          "5"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: Substitute x = 0. Step 2: f(0) = 3(0) + 2 = 2. Step 3: The y-intercept of the function is 2."
+      },
+      {
+        "id": "M1Q7E3",
+        "question": "What is the slope of f(x) = 3x + 2?",
+        "options": [
+          "3",
+          "2 (x)",
+          "5 (x)",
+          "1 (x)"
+        ],
+        "correct_option": "3",
+        "explanation": "Step 1: The coefficient of x is the slope. Step 2: In f(x) = 3x + 2, the slope is 3. Step 3: This means f increases by 3 units for every 1 unit increase in x."
+      },
+      {
+        "id": "M1Q7E4",
+        "question": "Can a function with a non-zero slope be one-to-one (each output from exactly one input)?",
+        "options": [
+          "Yes — a non-zero slope means the function is strictly increasing or decreasing",
+          "never)",
+          "Only if the slope is 1",
+          "Only for positive slopes"
+        ],
+        "correct_option": "Yes — a non-zero slope means the function is strictly increasing or decreasing",
+        "explanation": "Step 1: A non-zero slope means f is strictly monotonic (always increasing or always decreasing). Step 2: Strictly monotonic functions never produce the same output from two different inputs. Step 3: Therefore they are one-to-one (injective), which is the key requirement for invertibility."
+      },
+      {
+        "id": "M1Q7E5",
+        "question": "If f(x) = 3x + 2, what is the inverse function f⁻¹(y)?",
+        "options": [
+          "(y - 2)/3",
+          "(y + 2)/3 (x)",
+          "3y + 2 (x)",
+          "3y - 2 (x)"
+        ],
+        "correct_option": "(y - 2)/3",
+        "explanation": "Step 1: Start with y = 3x + 2. Step 2: Solve for x: x = (y - 2)/3. Step 3: The inverse is f⁻¹(y) = (y - 2)/3. Check: f⁻¹(17) = (17-2)/3 = 5 ✓."
+      },
+      {
+        "id": "M1Q7E6",
+        "question": "For f(x) = 3x + 2, is the inverse function also linear?",
+        "options": [
+          "Yes, f⁻¹(y) = (1/3)y - 2/3, which is linear",
+          "the inverse is quadratic",
+          "the inverse is a constant",
+          "Only if the original slope is 1"
+        ],
+        "correct_option": "Yes, f⁻¹(y) = (1/3)y - 2/3, which is linear",
+        "explanation": "Step 1: f⁻¹(y) = (y - 2)/3 = (1/3)y - 2/3. Step 2: This is in the form y = mx + b with m = 1/3 and b = -2/3. Step 3: The inverse of a non-zero linear function is always another linear function."
+      },
+      {
+        "id": "M1Q7E7",
+        "question": "If f(a) = f(b), does it necessarily mean a = b for f(x) = 3x + 2?",
+        "options": [
+          "Yes, because f is one-to-one (3a + 2 = 3b + 2 → a = b)",
+          "always)",
+          "Only for positive values",
+          "Cant be determined — does t match"
+        ],
+        "correct_option": "Yes, because f is one-to-one (3a + 2 = 3b + 2 → a = b)",
+        "explanation": "Step 1: If 3a + 2 = 3b + 2, subtract 2 from both sides: 3a = 3b. Step 2: Divide by 3: a = b. Step 3: This proves f is one-to-one — different inputs always give different outputs."
+      },
+      {
+        "id": "M1Q7E8",
+        "question": "What happens to f(x) = 3x + 2 if you compose it with its inverse: f⁻¹(f(x))?",
+        "options": [
+          "You get back x (the original input)",
+          "You get 3x + 2 again",
+          "You get 6x + 4 — does t match",
+          "You get a constant — does t match (x)"
+        ],
+        "correct_option": "You get back x (the original input)",
+        "explanation": "Step 1: f(x) = 3x + 2. Step 2: f⁻¹(3x + 2) = (3x + 2 - 2)/3 = 3x/3 = x. Step 3: Composing a function with its inverse always returns the original input — this is what 'inverse' means."
+      },
+      {
+        "id": "M1Q7E9",
+        "question": "Can the function f(x) = 3 (a constant function) be inverted?",
+        "options": [
+          "No — multiple inputs (every x) give the same output 3, so it's not one-to-one",
+          "the inverse is f⁻¹(x) = 3",
+          "f⁻¹(x) = x/3 — does t match",
+          "Only if we restrict the domain"
+        ],
+        "correct_option": "No — multiple inputs (every x) give the same output 3, so it's not one-to-one",
+        "explanation": "Step 1: f(x) = 3 maps every x to the same output. Step 2: Given y = 3, there's no way to determine which x produced it — it could be any x. Step 3: This is the classic example of a non-invertible function due to failing the one-to-one condition."
+      },
+      {
+        "id": "M1Q7E10",
+        "question": "The inverse of f(x) = 3x + 2 can be written as f⁻¹(y) = (y - 2)/3. What is f⁻¹(11)?",
+        "options": [
+          "3",
+          "5",
+          "11",
+          "35"
+        ],
+        "correct_option": "3",
+        "explanation": "Step 1: f⁻¹(11) = (11 - 2)/3. Step 2: = 9/3 = 3. Step 3: Check: f(3) = 3(3) + 2 = 11 ✓. The inverse undoes the function."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M1Q7M1",
+        "question": "Is f(x) = 3x + 2 invertible because each x gives a unique y?",
+        "options": [
+          "Yes — one-to-one (injective) functions are invertible",
+          "invertibility requires the slope to be 1",
+          "Only if the function passes through the origin",
+          "Only for functions with b = 0"
+        ],
+        "correct_option": "Yes — one-to-one (injective) functions are invertible",
+        "explanation": "Step 1: A function is one-to-one if f(a) = f(b) implies a = b. Step 2: For f(x) = 3x + 2, different x-values always produce different y-values. Step 3: One-to-one functions can be reversed — each output uniquely determines its input."
+      },
+      {
+        "id": "M1Q7M2",
+        "question": "The inverse of f(x) = 3x + 2 is f⁻¹(y) = (y-2)/3. Why do we subtract 2 first and then divide by 3?",
+        "options": [
+          "Because we reverse the operations in opposite order: original does ×3 then +2, so inverse does -2 then ÷3",
+          "Because subtraction always comes before division",
+          "Because the slope is 3",
+          "Because the y-intercept is 2"
+        ],
+        "correct_option": "Because we reverse the operations in opposite order: original does ×3 then +2, so inverse does -2 then ÷3",
+        "explanation": "Step 1: f applies: multiply by 3, then add 2 (in that order). Step 2: To reverse, undo the last operation first: subtract 2, then divide by 3. Step 3: This 'reverse the order of operations' principle is fundamental to finding inverses."
+      },
+      {
+        "id": "M1Q7M3",
+        "question": "What graphically represents the relationship between a function and its inverse?",
+        "options": [
+          "Reflection across the line y = x",
+          "Rotation by 90° — does t match (x)",
+          "Translation upward",
+          "Reflection across the x-axis (xx)"
+        ],
+        "correct_option": "Reflection across the line y = x",
+        "explanation": "Step 1: If (a, b) is on the graph of f, then (b, a) is on the graph of f⁻¹. Step 2: Swapping x and y coordinates is equivalent to reflecting across y = x. Step 3: The function and its inverse are mirror images across the diagonal line y = x."
+      },
+      {
+        "id": "M1Q7M4",
+        "question": "For the temperature conversion F = 1.8C + 32, what is the inverse function C = f⁻¹(F)?",
+        "options": [
+          "C = (F - 32)/1.8",
+          "C = 1.8F + 32 (x)",
+          "C = F/1.8 - 32 (x)",
+          "C = 1.8(F - 32) (x)"
+        ],
+        "correct_option": "C = (F - 32)/1.8",
+        "explanation": "Step 1: Start with F = 1.8C + 32. Step 2: Solve for C: F - 32 = 1.8C, so C = (F - 32)/1.8. Step 3: This inverse converts Fahrenheit back to Celsius — the reverse transformation."
+      },
+      {
+        "id": "M1Q7M5",
+        "question": "If you convert USD to INR at a rate of 83, the function is I = 83D. What is the inverse?",
+        "options": [
+          "D = I/83 (divide rupees by 83 to get dollars)",
+          "D = 83I)",
+          "D = I - 83)",
+          "D = 83/I)"
+        ],
+        "correct_option": "D = I/83 (divide rupees by 83 to get dollars)",
+        "explanation": "Step 1: Start with I = 83D. Step 2: Solve for D: D = I/83. Step 3: The inverse takes rupees and converts back to dollars by dividing by the exchange rate."
+      },
+      {
+        "id": "M1Q7M6",
+        "question": "Can the function f(x) = x² (a parabola) be inverted over ALL real numbers?",
+        "options": [
+          "No — both x = 2 and x = -2 give f(x) = 4, so it's not one-to-one",
+          "the inverse is √x",
+          "f⁻¹(x) = x² — does t match",
+          "Only for x ≥ 0 — does t match"
+        ],
+        "correct_option": "No — both x = 2 and x = -2 give f(x) = 4, so it's not one-to-one",
+        "explanation": "Step 1: f(2) = 4 and f(-2) = 4. Step 2: Two different inputs give the same output → not one-to-one. Step 3: Without the one-to-one property, you can't uniquely reverse the function over all reals."
+      },
+      {
+        "id": "M1Q7M7",
+        "question": "If f is invertible and f(3) = 11, what is f⁻¹(11)?",
+        "options": [
+          "3",
+          "11 — t here",
+          "1/3 — t here",
+          "Cant be determined"
+        ],
+        "correct_option": "3",
+        "explanation": "Step 1: f(3) = 11 means the function maps 3 to 11. Step 2: The inverse maps 11 back to 3. Step 3: f⁻¹(11) = 3 — the inverse undoes the original mapping."
+      },
+      {
+        "id": "M1Q7M8",
+        "question": "If f(x) = 3x + 2 and g(x) = (x-2)/3, verify: what is f(g(x))?",
+        "options": [
+          "x",
+          "3x + 2",
+          "(x-2)/3",
+          "6x + 4"
+        ],
+        "correct_option": "x",
+        "explanation": "Step 1: f(g(x)) = f((x-2)/3) = 3((x-2)/3) + 2 = (x-2) + 2 = x. Step 2: This confirms g is the inverse of f. Step 3: Composing a function with its inverse always returns the identity: f(g(x)) = x."
+      },
+      {
+        "id": "M1Q7M9",
+        "question": "For a function to be invertible, must it be one-to-one (injective)?",
+        "options": [
+          "Yes — one-to-one is the essential requirement for invertibility",
+          "any function can be inverted",
+          "Only if it is also onto (surjective)",
+          "Only for linear functions"
+        ],
+        "correct_option": "Yes — one-to-one is the essential requirement for invertibility",
+        "explanation": "Step 1: Invertibility means every output can be traced back to exactly one input. Step 2: If two different inputs produce the same output, the inverse can't determine which one was the original. Step 3: One-to-one (injective) ensures this uniqueness, making it the essential condition."
+      },
+      {
+        "id": "M1Q7M10",
+        "question": "What is the slope of the inverse function f⁻¹(y) = (y-2)/3?",
+        "options": [
+          "1/3",
+          "3",
+          "2",
+          "-1/3"
+        ],
+        "correct_option": "1/3",
+        "explanation": "Step 1: f⁻¹(y) = (1/3)y - 2/3. Step 2: The coefficient of y is 1/3. Step 3: The inverse slope is the reciprocal of the original slope (3), which makes geometric sense — reflecting across y = x swaps rise and run."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M1Q7H1",
+        "question": "The inverse of f(x) = 3x + 2 is f⁻¹(x) = (x-2)/3. Is f⁻¹ also a linear function? What is its matrix representation?",
+        "options": [
+          "Yes: f⁻¹ is y = (1/3)x - 2/3, a linear (affine) map with slope 1/3",
+          "the inverse of a linear function is always quadratic",
+          "f⁻¹(x) = 3x - 2 — does t match",
+          "only f itself is linear"
+        ],
+        "correct_option": "Yes: f⁻¹ is y = (1/3)x - 2/3, a linear (affine) map with slope 1/3",
+        "explanation": "Step 1: f⁻¹(x) = (x-2)/3 = (1/3)x - 2/3. Step 2: This is a degree-1 (linear/affine) function with slope 1/3. Step 3: The inverse of a non-zero linear function is always another linear function — the slope becomes the reciprocal."
+      },
+      {
+        "id": "M1Q7H2",
+        "question": "For the linear map T(x) = 3x (no intercept), the inverse is T⁻¹(x) = x/3. In terms of matrices, if T is represented by [3], what is T⁻¹?",
+        "options": [
+          "[1/3] — the reciprocal of the scalar",
+          "[3] — t here",
+          "[-3])",
+          "[1/3] only for positive x"
+        ],
+        "correct_option": "[1/3] — the reciprocal of the scalar",
+        "explanation": "Step 1: T(x) = 3x is multiplication by the 1×1 matrix [3]. Step 2: The inverse is multiplication by [3]⁻¹ = [1/3]. Step 3: This generalizes: for an n×n matrix A, if A⁻¹ exists, then A⁻¹A = I (the identity matrix)."
+      },
+      {
+        "id": "M1Q7H3",
+        "question": "A function f: ℝ → ℝ is bijective if it is both injective (one-to-one) and surjective (onto). Is f(x) = 3x + 2 bijective?",
+        "options": [
+          "Yes: it's one-to-one (slope ≠ 0) and onto (covers all of ℝ)",
+          "it's t onto — does t match",
+          "it's t one-to-one",
+          "Only if we restrict the codomain"
+        ],
+        "correct_option": "Yes: it's one-to-one (slope ≠ 0) and onto (covers all of ℝ)",
+        "explanation": "Step 1: One-to-one: different x always give different f(x) (slope 3 ≠ 0) ✓. Step 2: Onto: for any y ∈ ℝ, we can solve x = (y-2)/3 to find a preimage ✓. Step 3: Bijective functions have well-defined inverses on the entire codomain."
+      },
+      {
+        "id": "M1Q7H4",
+        "question": "If we restrict f(x) = x² to x ≥ 0, the restricted function IS invertible with f⁻¹(x) = √x. Why does restricting the domain fix the invertibility problem?",
+        "options": [
+          "Because restricting to x ≥ 0 removes the negative inputs that caused the non-one-to-one issue",
+          "Because square roots are always defined",
+          "Because the domain restriction makes the function linear",
+          "Because the function becomes surjective"
+        ],
+        "correct_option": "Because restricting to x ≥ 0 removes the negative inputs that caused the non-one-to-one issue",
+        "explanation": "Step 1: On all of ℝ, f(x) = x² maps both 2 and -2 to 4 (not one-to-one). Step 2: Restricting to x ≥ 0: f(2) = 4 and no negative input exists to conflict. Step 3: The restricted function is one-to-one on [0,∞), so it becomes invertible."
+      },
+      {
+        "id": "M1Q7H5",
+        "question": "If a 2×2 matrix A represents a linear transformation T, and A is invertible, what can you say about the kernel of T?",
+        "options": [
+          "The kernel contains only the zero vector (trivial kernel)",
+          "The kernel is all of ℝ²",
+          "The kernel is a line through the origin",
+          "The kernel has dimension 1"
+        ],
+        "correct_option": "The kernel contains only the zero vector (trivial kernel)",
+        "explanation": "Step 1: Invertible A means det(A) ≠ 0. Step 2: Ax = 0 has only the trivial solution x = 0. Step 3: The kernel (null space) is {0} — no non-zero vector maps to the origin, which is equivalent to invertibility."
+      },
+      {
+        "id": "M1Q7H6",
+        "question": "If f(x) = 3x + 2 and g(x) = 5x + 1, what is the inverse of the composition f ∘ g (first g, then f)?",
+        "options": [
+          "(x - 7)/15 — reverse f first, then reverse g",
+          "15x + 7)",
+          "(x - 2)/3 + (x - 1)/5",
+          "(x - 1)/5 then (x - 2)/3"
+        ],
+        "correct_option": "(x - 7)/15 — reverse f first, then reverse g",
+        "explanation": "Step 1: (f ∘ g)(x) = f(g(x)) = 3(5x + 1) + 2 = 15x + 5. Step 2: Inverse: x = 15y + 5 → y = (x - 5)/15. Wait — let me recalculate: f(g(x)) = 3(5x+1)+2 = 15x+3+2 = 15x+5. Inverse: (x-5)/15. Step 3: The inverse of a composition reverses the order: (f∘g)⁻¹ = g⁻¹∘f⁻¹."
+      },
+      {
+        "id": "M1Q7H7",
+        "question": "Consider the set of all invertible 2×2 matrices. Is this set closed under matrix multiplication?",
+        "options": [
+          "Yes — the product of two invertible matrices is always invertible",
+          "— the product may have determinant zero",
+          "Only if the matrices commute",
+          "Only for diagonal matrices"
+        ],
+        "correct_option": "Yes — the product of two invertible matrices is always invertible",
+        "explanation": "Step 1: If A and B are invertible, det(A) ≠ 0 and det(B) ≠ 0. Step 2: det(AB) = det(A)×det(B) ≠ 0. Step 3: Non-zero determinant means AB is invertible. The set of invertible matrices forms a group under multiplication (the general linear group GL(n))."
+      },
+      {
+        "id": "M1Q7H8",
+        "question": "A function f has an inverse f⁻¹. If f is increasing (slope > 0), what can you say about f⁻¹?",
+        "options": [
+          "f⁻¹ is also increasing",
+          "f⁻¹ is decreasing",
+          "f⁻¹ is constant",
+          "f⁻¹ oscillates"
+        ],
+        "correct_option": "f⁻¹ is also increasing",
+        "explanation": "Step 1: If f is increasing, larger inputs give larger outputs. Step 2: The inverse reverses this: larger outputs must have come from larger inputs. Step 3: Therefore f⁻¹ is also increasing — the monotonicity is preserved."
+      },
+      {
+        "id": "M1Q7H9",
+        "question": "In terms of the rank-nullity theorem, if T: ℝ² → ℝ² is an invertible linear map, what is rank(T) + nullity(T)?",
+        "options": [
+          "2 (always, by rank-nullity), with rank = 2 and nullity = 0",
+          "0 — t here",
+          "1 — t here",
+          "4 — t here"
+        ],
+        "correct_option": "2 (always, by rank-nullity), with rank = 2 and nullity = 0",
+        "explanation": "Step 1: Rank-nullity theorem: rank(T) + nullity(T) = dim(domain) = 2. Step 2: Invertible means nullity(T) = 0 (trivial kernel). Step 3: Therefore rank(T) = 2 (full rank), and the image is all of ℝ²."
+      },
+      {
+        "id": "M1Q7H10",
+        "question": "The function f(x) = 3x + 2 restricted to integers gives f: ℤ → ℤ. Is this restriction still invertible?",
+        "options": [
+          "Yes: for every integer y, x = (y-2)/3 is also an integer when y ≡ 2 (mod 3), but NOT for all y — so it's injective but not surjective on ℤ",
+          "perfectly invertible on all of ℤ",
+          "t even injective on ℤ",
+          "Invertibility doesn't apply to discrete sets"
+        ],
+        "correct_option": "Yes: for every integer y, x = (y-2)/3 is also an integer when y ≡ 2 (mod 3), but NOT for all y — so it's injective but not surjective on ℤ",
+        "explanation": "Step 1: f is injective on ℤ: different integers map to different outputs. Step 2: But f is not surjective on ℤ: f⁻¹(y) = (y-2)/3 is not always an integer (e.g., y = 3 gives x = 1/3 ∉ ℤ). Step 3: The restriction is one-to-one but not onto ℤ, so it's injective but not bijective on ℤ."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "emoji": "📈",
+      "title": "Temperature Conversion (Celsius ↔ Fahrenheit)",
+      "equation": "F = 1.8C + 32",
+      "type": "mcq",
+      "concept": "Invertibility in Unit Conversion",
+      "story": "Converting between Celsius and Fahrenheit uses a linear function. The formula F = 1.8C + 32 tells you the Fahrenheit temperature for any Celsius value. The inverse function — going from Fahrenheit back to Celsius — reverses this calculation: C = (F - 32) / 1.8.",
+      "question": "When you use the inverse of the Celsius-to-Fahrenheit formula, what physical quantity do you get back?",
+      "options": [
+        "The temperature in Celsius",
+        "The temperature in Kelvin (x)",
+        "The temperature difference (x)",
+        "The boiling point of water (x)"
+      ],
+      "answer": "The temperature in Celsius",
+      "explanation": "Step 1: F = 1.8C + 32 converts C → F. Step 2: C = (F - 32)/1.8 converts F → C. Step 3: The inverse reverses the conversion, giving you back the original Celsius temperature from a Fahrenheit value."
+    },
+    {
+      "emoji": "💰",
+      "title": "Currency Exchange (USD ↔ INR)",
+      "equation": "INR = 83 × USD",
+      "type": "mcq",
+      "concept": "Reversible Conversion",
+      "story": "Converting US dollars to Indian rupees is a simple multiplication: multiply by 83. But what if you have rupees and want to know how many dollars that is? You need the inverse function — divide by 83.",
+      "question": "What does the inverse of the currency conversion function allow you to do?",
+      "options": [
+        "Convert rupees back to dollars",
+        "Convert dollars to rupees faster",
+        "Calculate the exchange rate",
+        "Double the amount of money"
+      ],
+      "answer": "Convert rupees back to dollars",
+      "explanation": "Step 1: Forward: INR = 83 × USD (dollars → rupees). Step 2: Inverse: USD = INR / 83 (rupees → dollars). Step 3: The inverse reverses the direction of conversion, letting you go from rupees to dollars."
+    },
+    {
+      "emoji": "🏠",
+      "title": "Tax Calculation Inverse",
+      "equation": "T = 0.3 × Income",
+      "type": "mcq",
+      "concept": "Finding Input From Output",
+      "story": "If the tax rate is 30%, your tax equals 0.3 times your income. But what if you know the tax you paid and want to figure out your original income? You need the inverse function: Income = Tax / 0.3.",
+      "question": "What does the inverse of the tax function give you?",
+      "options": [
+        "Your original income from the tax amount",
+        "Your tax rate",
+        "Your net income after tax",
+        "The total tax revenue"
+      ],
+      "answer": "Your original income from the tax amount",
+      "explanation": "Step 1: Forward: Tax = 0.3 × Income. Step 2: Inverse: Income = Tax / 0.3. Step 3: The inverse lets you work backwards from the tax paid to determine the income that produced it."
+    },
+    {
+      "emoji": "⏱️",
+      "title": "Speed and Time Conversion",
+      "equation": "d = 60t",
+      "type": "mcq",
+      "concept": "Reversing Distance-Speed-Time",
+      "story": "A car travels at 60 km/h. Distance = 60 × time. If you know the car has travelled 180 km, you can use the inverse to find how long it took: time = distance / 60 = 3 hours.",
+      "question": "What is the inverse function of d = 60t, and what does it compute?",
+      "options": [
+        "t = d/60 — it computes travel time from distance",
+        "d = 60t — it computes distance from time",
+        "t = 60d — it computes time from speed",
+        "d = t/60 — it computes speed from time"
+      ],
+      "answer": "t = d/60 — it computes travel time from distance",
+      "explanation": "Step 1: Forward: d = 60t (distance from time). Step 2: Inverse: t = d/60 (time from distance). Step 3: Given 180 km: t = 180/60 = 3 hours. The inverse reverses the calculation."
+    },
+    {
+      "emoji": "📐",
+      "title": "Scale Drawing Reversal",
+      "equation": "Actual = 100 × Drawing",
+      "type": "mcq",
+      "concept": "Inverse in Architecture",
+      "story": "An architect's scale drawing uses 1 cm = 100 cm (1 meter) in reality. Actual = 100 × Drawing. If a wall measures 3.5 cm on the drawing, it's 350 cm in reality. The inverse converts real measurements back to drawing size.",
+      "question": "What is the inverse of Actual = 100 × Drawing?",
+      "options": [
+        "Drawing = Actual / 100 — converts real measurements to drawing scale",
+        "Drawing = Actual × 100",
+        "Drawing = Actual - 100",
+        "Drawing = 100 / Actual"
+      ],
+      "answer": "Drawing = Actual / 100 — converts real measurements to drawing scale",
+      "explanation": "Step 1: Forward: Actual = 100 × Drawing. Step 2: Inverse: Drawing = Actual / 100. Step 3: A 500 cm real wall → Drawing = 500/100 = 5 cm on paper. The inverse scales down."
+    }
+  ]
+}

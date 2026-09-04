@@ -1,0 +1,473 @@
+{
+  "module": 3,
+  "missionId": 26,
+  "title": "Three Subspaces",
+  "original_question": "A = [[1,2,3],[4,5,6],[7,8,9]]. Three sets: R={α(1,2,3)+β(4,5,6)} = ROW SPACE (span of rows). C={α(1,4,7)+β(2,5,8)+γ(3,6,9)} = COLUMN SPACE (span of columns). N={(x,y,z)|Ax=0} = NULL SPACE. Observe: every vector in R is perpendicular to every vector in N! This is the FUNDAMENTAL THEOREM of linear algebra.",
+  "core_concept": "The Fundamental Theorem of Linear Algebra states that the row space and null space of any matrix are perpendicular complements. Every row vector has dot product 0 with every null space vector.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M3Q5E1",
+        "question": "What is the row space of A = [[1,2,3],[4,5,6],[7,8,9]]?",
+        "options": [
+          "span{(1,2,3),(4,5,6)}",
+          "span{(1,4,7),(2,5,8)}",
+          "span{(1,2,3),(4,5,6),(7,8,9)}",
+          "span{(7,8,9)} — does t match"
+        ],
+        "correct_option": "span{(1,2,3),(4,5,6)}",
+        "explanation": "Step 1: The row space is the span of the rows of A. Step 2: Since Row3 = 2×Row2 − Row1, it is redundant. The row space is span{(1,2,3),(4,5,6)}, a 2D plane in R³. Step 3: Recognizing redundant rows is essential for finding the row space, and the dimension of this space equals the rank of the matrix. Step 4: The row space represents all linear combinations of the rows — it captures every direction that the rows can reach."
+      },
+      {
+        "id": "M3Q5E2",
+        "question": "Is (1,2,3)·(1,-2,1) equal to 0?",
+        "options": [
+          "Yes, 1-4+3=0",
+          "— t here",
+          "Only approximately",
+          "Cant compute"
+        ],
+        "correct_option": "Yes, 1-4+3=0",
+        "explanation": "Step 1: (1,2,3)·(1,−2,1) = 1(1)+2(−2)+3(1) = 1−4+3 = 0. Step 2: This confirms the row vector (1,2,3) is perpendicular to the null space direction (1,−2,1). Step 3: This orthogonality is not a coincidence — the Fundamental Theorem of Linear Algebra guarantees that every row vector is perpendicular to every null space vector. Step 4: This perpendicularity is the algebraic reason why Ax=0: each row dot the solution equals zero, which is exactly what the system Ax=0 requires."
+      },
+      {
+        "id": "M3Q5E3",
+        "question": "Is (4,5,6)·(1,-2,1) equal to 0?",
+        "options": [
+          "Yes, 4-10+6=0",
+          "",
+          "Only if scaled",
+          "Cant compute"
+        ],
+        "correct_option": "Yes, 4-10+6=0",
+        "explanation": "Step 1: (4,5,6)·(1,−2,1) = 4−10+6 = 0. Step 2: The second row vector is also perpendicular to the null space direction. Step 3: Both row basis vectors are orthogonal to (1,−2,1), which means every linear combination of them — every vector in the row space — is perpendicular to the null space. Step 4: This extension from basis to whole subspace uses linearity: if n is perpendicular to each basis vector, it is perpendicular to all their combinations."
+      },
+      {
+        "id": "M3Q5E4",
+        "question": "What is the dimension of the row space of A = [[1,2,3],[4,5,6],[7,8,9]]?",
+        "options": [
+          "2",
+          "3 (x)",
+          "1 (x)",
+          "0 (x)"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: Two independent rows (Row1 and Row2) span the row space. Step 2: The row space is 2-dimensional (a plane in R³). Step 3: The row space dimension equals the rank, which tells you how many independent directions the rows capture. Step 4: The row space dimension is always equal to the column space dimension — both equal the rank — one of the deepest facts in linear algebra."
+      },
+      {
+        "id": "M3Q5E5",
+        "question": "What is the dimension of the null space of A?",
+        "options": [
+          "1",
+          "2 (x)",
+          "3 (x)",
+          "0 (x)"
+        ],
+        "correct_option": "1",
+        "explanation": "Step 1: By rank-nullity: rank(2) + nullity = 3. Step 2: nullity = 1, so the null space is 1-dimensional (a line). Step 3: The row space and null space are perpendicular complements — their dimensions always add up to n, the number of columns. Step 4: This dimension relationship, rank + nullity = n, is the rank-nullity theorem and is one of the most important results in linear algebra."
+      },
+      {
+        "id": "M3Q5E6",
+        "question": "What is the column space of A = [[1,2,3],[4,5,6],[7,8,9]]?",
+        "options": [
+          "span{(1,4,7),(2,5,8)}",
+          "span{(1,2,3),(4,5,6)} (x)",
+          "span{(7,8,9)}",
+          "All of R³"
+        ],
+        "correct_option": "span{(1,4,7),(2,5,8)}",
+        "explanation": "Step 1: The column space is the span of the columns of A. Step 2: Column3 = 2×Column2 − Column1, so it is redundant. Column space = span{(1,4,7),(2,5,8)}, a 2D plane in R³. Step 3: The column space has the same dimension as the row space — both equal the rank (2). Step 4: The column space is the set of all possible outputs Ax, so understanding it tells you which right-hand sides b have solutions to Ax=b."
+      },
+      {
+        "id": "M3Q5E7",
+        "question": "The Fundamental Theorem states that the row space and null space are:",
+        "options": [
+          "Perpendicular to each other",
+          "Parallel to each other",
+          "Identical)",
+          "Opposite)"
+        ],
+        "correct_option": "Perpendicular to each other",
+        "explanation": "Step 1: For any matrix A, every row vector is perpendicular to every null space vector. Step 2: This orthogonality is the Fundamental Theorem of Linear Algebra — one of the most elegant results in mathematics, connecting solutions of Ax=0 to the geometry of subspaces. Step 3: The row space and null space are not just perpendicular — they are orthogonal complements, meaning they are perpendicular and together span the entire input space. Step 4: This theorem unifies the study of linear systems with the geometry of vectors."
+      },
+      {
+        "id": "M3Q5E8",
+        "question": "Do the row space and null space together span the entire input space R³?",
+        "options": [
+          "Yes, row space (2D) + null space (1D) = 3D = R³",
+          "they miss some directions",
+          "Only if A is square — does t match",
+          "Only in R²)"
+        ],
+        "correct_option": "Yes, row space (2D) + null space (1D) = 3D = R³",
+        "explanation": "Step 1: Row space is 2D, null space is 1D, and 2+1=3. Step 2: Together they span all of R³ — every vector can be decomposed into a row space component and a null space component. Step 3: This decomposition is unique because the two subspaces are perpendicular (their intersection is only the zero vector). Step 4: This spanning property is why row space and null space are called complementary subspaces — they partition the input space perfectly."
+      },
+      {
+        "id": "M3Q5E9",
+        "question": "Is the null space vector (1,-2,1) perpendicular to both (1,2,3) and (4,5,6)?",
+        "options": [
+          "Yes — dot product with both is 0",
+          "— only perpendicular to one",
+          "— t perpendicular to either",
+          "Only perpendicular to (1,2,3) (x)"
+        ],
+        "correct_option": "Yes — dot product with both is 0",
+        "explanation": "Step 1: (1,−2,1)·(1,2,3) = 1−4+3 = 0. Step 2: (1,−2,1)·(4,5,6) = 4−10+6 = 0. Both dot products are 0. Step 3: The null space vector is perpendicular to every row basis vector, which by linearity means it is perpendicular to the entire row space plane. Step 4: This dual perpendicularity is necessary and sufficient for the null space condition: the vector must be orthogonal to all independent rows."
+      },
+      {
+        "id": "M3Q5E10",
+        "question": "How many fundamental subspaces does any m×n matrix have?",
+        "options": [
+          "Four: row space, column space, null space, left null space",
+          "Two: row space and null space",
+          "Three: row, column, and null",
+          "One: just the null space"
+        ],
+        "correct_option": "Four: row space, column space, null space, left null space",
+        "explanation": "Step 1: Any matrix has four fundamental subspaces. Step 2: Row space and null space (both in Rⁿ), column space and left null space (both in Rᵐ). Step 3: These four subspaces, paired by orthogonality (row⊥null, column⊥left null), form the complete geometric picture of any linear transformation. Step 4: The dimensions of these four subspaces (r, n−r, r, m−r) are determined entirely by the rank r, making them the essential structural elements of the matrix."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M3Q5M1",
+        "question": "Why is (1,2,3)·(1,-2,1) = 0, while (7,8,9)·(1,-2,1) = 0 as well?",
+        "options": [
+          "Because (7,8,9) is a linear combination of (1,2,3) and (4,5,6), so it inherits perpendicularity",
+          "Because all rows are perpendicular to all null vectors by coincidence",
+          "Because 7+8+9 = 24 and 1-2+1 = 0",
+          "Because Row3 is special"
+        ],
+        "correct_option": "Because (7,8,9) is a linear combination of (1,2,3) and (4,5,6), so it inherits perpendicularity",
+        "explanation": "Step 1: Row3 = 2×Row2 − Row1. Step 2: If n is perpendicular to both Row1 and Row2, then Row3·n = (2×Row2 − Row1)·n = 2(Row2·n) − (Row1·n) = 0−0 = 0. Step 3: This inheritance of perpendicularity through linear combinations is why the Fundamental Theorem works — if a null vector is perpendicular to a basis of the row space, it is perpendicular to the entire row space. Step 4: Linearity of the dot product ensures that perpendicularity extends from basis vectors to all their linear combinations without any additional checks."
+      },
+      {
+        "id": "M3Q5M2",
+        "question": "The row space and null space are perpendicular. What is the sum of their dimensions?",
+        "options": [
+          "3 (= number of columns)",
+          "2 — t here",
+          "6 — t here",
+          "9 — t here"
+        ],
+        "correct_option": "3 (= number of columns)",
+        "explanation": "Step 1: dim(row space) = rank = 2, dim(null space) = nullity = 1. Step 2: By rank-nullity, 2+1 = 3 = number of columns (n). Step 3: This equation is the rank-nullity theorem — the row space and null space are perpendicular complements whose dimensions always sum to n. Step 4: This is why the row space and null space are called 'complements': what one lacks, the other provides, and together they account for all n dimensions."
+      },
+      {
+        "id": "M3Q5M3",
+        "question": "If A = [[1,2,3],[4,5,6],[7,8,9]], what is the dimension of the column space?",
+        "options": [
+          "2",
+          "3 (x)",
+          "1 (x)",
+          "0 (x)"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: The column space has the same dimension as the row space (both equal the rank). Step 2: Rank = 2, so the column space is 2-dimensional. Step 3: This equality of row rank and column rank is a deep theorem — it holds for all matrices, square or not. Step 4: The column space dimension tells you how many independent columns exist, which is also how many pivot columns appear in Gaussian elimination."
+      },
+      {
+        "id": "M3Q5M4",
+        "question": "Can a vector be in both the row space and the null space of A (other than zero)?",
+        "options": [
+          "No — they are perpendicular complements, so only 0 is in both",
+          "always — does t match",
+          "Only if A is invertible",
+          "Only in R²)"
+        ],
+        "correct_option": "No — they are perpendicular complements, so only 0 is in both",
+        "explanation": "Step 1: If v is in both, then v·v = 0 (since v is perpendicular to everything in the row space, including itself). Step 2: v·v = ‖v‖² = 0 implies v = 0 by positive definiteness. Step 3: This proof shows the row space and null space intersect only at the origin — they are true complements. Step 4: This clean separation (W ∩ W⊥ = {0}) is what makes the orthogonal decomposition v = v_R + v_N unique."
+      },
+      {
+        "id": "M3Q5M5",
+        "question": "Why is the row space of A = [[1,2,3],[4,5,6],[7,8,9]] only 2-dimensional and not 3-dimensional?",
+        "options": [
+          "Because Row3 = 2×Row2 - Row1, reducing the rank from 3 to 2",
+          "Because 3×3 matrices always have rank 2",
+          "Because the entries are consecutive",
+          "Because the matrix is symmetric"
+        ],
+        "correct_option": "Because Row3 = 2×Row2 - Row1, reducing the rank from 3 to 2",
+        "explanation": "Step 1: Three rows would span 3D if all were independent. Step 2: But Row3 is a combination of the first two, so only 2 independent directions exist, making the row space 2D. Step 3: The lost dimension (3 − 2 = 1) goes to the null space — this trade-off between row space and null space is the essence of rank-nullity. Step 4: The rank measures how many independent row directions exist, and linear dependence among rows reduces the rank, enlarging the null space correspondingly."
+      },
+      {
+        "id": "M3Q5M6",
+        "question": "The column space of A = [[1,2,3],[4,5,6],[7,8,9]] is span{(1,4,7),(2,5,8)}. Is this a plane or a line?",
+        "options": [
+          "A plane through the origin (2D)",
+          "A line through the origin (1D) (x)",
+          "A point)",
+          "All of R³)"
+        ],
+        "correct_option": "A plane through the origin (2D)",
+        "explanation": "Step 1: (1,4,7) and (2,5,8) are linearly independent (neither is a scalar multiple of the other). Step 2: Two independent vectors span a 2D plane through the origin. Step 3: This plane is the column space — the set of all possible outputs Ax for any input x. Step 4: The column space has the same dimension as the row space (both rank 2), even though they are spanned by different vectors and are generally different planes in R³."
+      },
+      {
+        "id": "M3Q5M7",
+        "question": "What is the relationship between the rank of A and the dimension of its column space?",
+        "options": [
+          "They are always equal",
+          "Rank is always twice the column space dime",
+          "relationship — does t match",
+          "Column space is always rank+1"
+        ],
+        "correct_option": "They are always equal",
+        "explanation": "Step 1: The rank of a matrix equals both the row space dimension and the column space dimension. Step 2: rank(A) = dim(row space) = dim(column space) = 2. Step 3: This is a deep theorem: row rank always equals column rank, even for non-square matrices. Step 4: This surprising fact means rank is a property of the linear transformation itself, not of the particular matrix representation."
+      },
+      {
+        "id": "M3Q5M8",
+        "question": "If the null space of A is span{(1,-2,1)}, what is the equation that defines the row space?",
+        "options": [
+          "The row space is perpendicular to (1,-2,1)",
+          "The row space is parallel to (1,-2,1)",
+          "The row space contains (1,-2,1)",
+          "The row space equals (1,-2,1)"
+        ],
+        "correct_option": "The row space is perpendicular to (1,-2,1)",
+        "explanation": "Step 1: The null space direction (1,−2,1) is perpendicular to the row space. Step 2: The row space is the set of all vectors perpendicular to (1,−2,1), forming a plane with normal (1,−2,1). Step 3: This is the same geometry as finding the plane perpendicular to a given vector in 3D — the row space plane has equation x − 2y + z = 0. Step 4: Thus the null space uniquely determines the row space: they are orthogonal complements, and knowing one gives you the other."
+      },
+      {
+        "id": "M3Q5M9",
+        "question": "Can you find a basis for R³ from the row space and null space of A combined?",
+        "options": [
+          "Yes — e.g., {(1,2,3),(4,5,6),(1,-2,1)} forms a basis",
+          "— they don't span R³",
+          "Only if A is invertible",
+          "Only with 4 vectors — does t match"
+        ],
+        "correct_option": "Yes — e.g., {(1,2,3),(4,5,6),(1,-2,1)} forms a basis",
+        "explanation": "Step 1: Row space provides 2 independent vectors, null space provides 1. Step 2: Together (2+1=3), they form 3 independent vectors that span R³ — a basis. Step 3: This is the power of the Fundamental Theorem: the row space and null space together give you a complete coordinate system for the input space. Step 4: Since the row space and null space are perpendicular, the basis vectors are orthogonal to each other, which simplifies coordinate calculations significantly."
+      },
+      {
+        "id": "M3Q5M10",
+        "question": "The Fundamental Theorem guarantees that the null space is perpendicular to the row space. Does it say anything about the column space and null space?",
+        "options": [
+          "The column space is NOT necessarily perpendicular to the null space of A (it's perpendicular to the null space of Aᵀ)",
+          "They are always perpendicular",
+          "They are always parallel",
+          "relationship exists"
+        ],
+        "correct_option": "The column space is NOT necessarily perpendicular to the null space of A (it's perpendicular to the null space of Aᵀ)",
+        "explanation": "Step 1: The Fundamental Theorem says row space ⊥ null space and column space ⊥ left null space. Step 2: Column space is NOT generally perpendicular to N(A) — that is a different relationship. Step 3: The perpendicularity is always between subspaces in the same ambient space: row space and null space both live in Rⁿ, while column space and left null space both live in Rᵐ. Step 4: This pairing of subspaces (row↔null in domain, column↔left null in codomain) is the complete geometric picture described by the Fundamental Theorem."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M3Q5H1",
+        "question": "Prove that the row space and null space of any matrix A are perpendicular complements in Rⁿ.",
+        "options": [
+          "If r is a row of A and x is in null(A), then r·x = (rx)ᵀ = 0 since Ax=0 means each row·x=0",
+          "This is only true for square matrices",
+          "It's an axiom, t provable",
+          "Only true for singular matrices"
+        ],
+        "correct_option": "If r is a row of A and x is in null(A), then r·x = (rx)ᵀ = 0 since Ax=0 means each row·x=0",
+        "explanation": "Step 1: If Ax=0, then every row rᵢ of A satisfies rᵢ·x = 0 — this is exactly what the matrix-vector product computes. Step 2: Since the row space is spanned by the rows, any row space vector v = Σcᵢrᵢ satisfies v·x = Σcᵢ(rᵢ·x) = 0. Step 3: This proof is the foundation of the Fundamental Theorem — it works for every matrix, regardless of shape or rank. Step 4: The proof uses only the definition of matrix multiplication and linearity of the dot product, making it both simple and universal."
+      },
+      {
+        "id": "M3Q5H2",
+        "question": "For A = [[1,2,3],[4,5,6],[7,8,9]], decompose the vector (1,0,0) into row space and null space components.",
+        "options": [
+          "(1,0,0) = row space component + null space component, where each part is orthogonal",
+          "t possible — does t match",
+          "(1,0,0) is entirely in the row space",
+          "(1,0,0) is entirely in the null space"
+        ],
+        "correct_option": "(1,0,0) = row space component + null space component, where each part is orthogonal",
+        "explanation": "Step 1: Any vector can be uniquely decomposed as v = v_R + v_N where v_R is in the row space and v_N in the null space. Step 2: For (1,0,0), project onto the row space plane (perpendicular to (1,−2,1)) to get v_R, then v_N = (1,0,0) − v_R. Step 3: This orthogonal decomposition is the practical application of the Fundamental Theorem — every vector in R³ splits uniquely into a part in the row space and a part in the null space. Step 4: This decomposition is the foundation of least squares: the best approximation to a solution of Ax=b is found by projecting b onto the column space."
+      },
+      {
+        "id": "M3Q5H3",
+        "question": "Why do the row space and column space of A = [[1,2,3],[4,5,6],[7,8,9]] both have dimension 2, even though they live in different spaces?",
+        "options": [
+          "Because rank(A) = dim(row space) = dim(column space), a fundamental property of all matrices",
+          "Because the matrix is square",
+          "Because the entries are consecutive integers",
+          "By coincidence — does t match"
+        ],
+        "correct_option": "Because rank(A) = dim(row space) = dim(column space), a fundamental property of all matrices",
+        "explanation": "Step 1: The row rank equals the column rank for any matrix — this is a theorem. Step 2: Both equal the rank of A, which is 2. This holds regardless of whether the matrix is square. Step 3: The equality of row rank and column rank is one of the most important facts in linear algebra, and its proof is non-trivial. Step 4: This means the dimension of the output space (column space) equals the dimension of the 'effective' input space (row space), even though they live in different ambient spaces."
+      },
+      {
+        "id": "M3Q5H4",
+        "question": "If A is a 5×3 matrix with rank 3, what are the dimensions of its four fundamental subspaces?",
+        "options": [
+          "Row space: 3D in R³, Null space: 0D, Column space: 3D in R⁵, Left null space: 2D in R⁵",
+          "Row space: 2D, Null space: 1D, Column space: 3D, Left null space: 2D",
+          "All are 3D)",
+          "Row space: 5D, Null space: 3D"
+        ],
+        "correct_option": "Row space: 3D in R³, Null space: 0D, Column space: 3D in R⁵, Left null space: 2D in R⁵",
+        "explanation": "Step 1: For a 5×3 matrix: row space in R³, column space in R⁵. Step 2: rank=3, so row space=3D (full = R³), null space=3−3=0D, column space=3D in R⁵, left null space=5−3=2D in R⁵. Step 3: The four subspaces live in pairs: row space and null space in R³, column space and left null space in R⁵. Step 4: Their dimensions (r, n−r, r, m−r) completely describe the matrix's structure, with r=3, n=3, m=5."
+      },
+      {
+        "id": "M3Q5H5",
+        "question": "Can the row space and column space of a non-square matrix have the same dimension?",
+        "options": [
+          "Yes — the row rank always equals the column rank, even for non-square matrices",
+          "— they always differ",
+          "Only for square matrices",
+          "Only if the matrix is zero"
+        ],
+        "correct_option": "Yes — the row rank always equals the column rank, even for non-square matrices",
+        "explanation": "Step 1: Row rank = column rank is a fundamental theorem. Step 2: For a 2×5 matrix with rank 2, the row space is 2D in R⁵ and column space is 2D in R² — same dimension, different ambient spaces. Step 3: This surprising fact means rank is a property of the transformation itself, not of the shape of the matrix. Step 4: The equality of row rank and column rank is one of the deepest facts in elementary linear algebra, with a proof that requires careful reasoning about linear independence."
+      },
+      {
+        "id": "M3Q5H6",
+        "question": "Why is the null space of A perpendicular to the row space, but generally NOT perpendicular to the column space?",
+        "options": [
+          "Because null(A) lives in Rⁿ (same space as rows), while column space lives in Rᵐ (different space)",
+          "Because columns are always bigger",
+          "Because null space only relates to rows",
+          "There's difference"
+        ],
+        "correct_option": "Because null(A) lives in Rⁿ (same space as rows), while column space lives in Rᵐ (different space)",
+        "explanation": "Step 1: For an m×n matrix, rows and null space vectors are both in Rⁿ — they can be compared for perpendicularity. Step 2: Column space vectors are in Rᵐ — a different space entirely, so perpendicularity to N(A) is not directly defined. Step 3: This distinction between Rⁿ and Rᵐ is why the Fundamental Theorem pairs row space with null space (both in domain) and column space with left null space (both in codomain). Step 4: The ambient space is crucial: perpendicularity only makes sense for vectors in the same space."
+      },
+      {
+        "id": "M3Q5H7",
+        "question": "For A = [[1,2,3],[4,5,6],[7,8,9]], what is the dimension of the left null space (null space of Aᵀ)?",
+        "options": [
+          "1",
+          "2 (x)",
+          "3 (x)",
+          "0 (x)"
+        ],
+        "correct_option": "1",
+        "explanation": "Step 1: Aᵀ has rank 2 (same as A). Step 2: For a 3×3 matrix, left nullity = m − rank = 3−2 = 1. Step 3: The left null space is a line in R³, perpendicular to the column space — the transpose version of the Fundamental Theorem. Step 4: The left null space is often overlooked but is just as important as the null space: it captures the dependencies among the rows and explains which b have no solution to Ax=b."
+      },
+      {
+        "id": "M3Q5H8",
+        "question": "In the Fundamental Theorem, the row space and null space are orthogonal complements in Rⁿ. What does 'complements' mean?",
+        "options": [
+          "Every vector in Rⁿ can be uniquely written as a sum of a row space vector and a null space vector",
+          "They are inverses of each other",
+          "They add up to the identity",
+          "They are parallel — does t match"
+        ],
+        "correct_option": "Every vector in Rⁿ can be uniquely written as a sum of a row space vector and a null space vector",
+        "explanation": "Step 1: Complements means they together span the whole space and intersect only at 0. Step 2: Any v ∈ Rⁿ decomposes uniquely as v = v_row + v_null, where v_row ⊥ v_null. Step 3: This unique decomposition is the practical power of the Fundamental Theorem — it gives you a coordinate system for any vector. Step 4: The uniqueness follows from perpendicularity: if v = v_R + v_N = v'_R + v'_N, then v_R − v'_R = v'_N − v_N is in both R and N, so it must be 0."
+      },
+      {
+        "id": "M3Q5H9",
+        "question": "If A has rank n (full column rank), what is its null space?",
+        "options": [
+          "Only the zero vector {0}",
+          "A line)",
+          "A plane)",
+          "All of Rⁿ"
+        ],
+        "correct_option": "Only the zero vector {0}",
+        "explanation": "Step 1: Full column rank means rank = n. Step 2: By rank-nullity, nullity = n − n = 0. The null space is trivial — only the zero vector. Step 3: This means Ax=0 has only the trivial solution, and A is left-invertible (there exists B such that BA = I). Step 4: Full column rank implies the columns are linearly independent, so no non-zero combination of columns gives zero."
+      },
+      {
+        "id": "M3Q5H10",
+        "question": "For A = [[1,2,3],[4,5,6],[7,8,9]], verify that the row space dimension + null space dimension + column space dimension + left null space dimension accounts for all dimensions.",
+        "options": [
+          "Row(2) + Null(1) = 3 in R³; Col(2) + LNull(1) = 3 in R³ — total is 6 = m+n",
+          "They don't add up — does t match",
+          "Only row and null spaces matter",
+          "All are the same dimension"
+        ],
+        "correct_option": "Row(2) + Null(1) = 3 in R³; Col(2) + LNull(1) = 3 in R³ — total is 6 = m+n",
+        "explanation": "Step 1: In Rⁿ= R³: row space (2D) + null space (1D) = 3. In Rᵐ= R³: column space (2D) + left null space (1D) = 3. Step 2: Total: 6 = m+n = 3+3. Each pair accounts for its ambient space. Step 3: The four subspaces are the complete geometric decomposition of any linear transformation. Step 4: The dimensions always satisfy: r + (n−r) = n and r + (m−r) = m, accounting for all dimensions in both domain and codomain."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "emoji": "🏆",
+      "title": "Recommendation Systems",
+      "type": "mcq",
+      "concept": "Row space captures meaningful patterns, null space captures noise",
+      "story": "Netflix uses matrix factorisation to recommend movies. Your viewing preferences live in the row space of the rating matrix — the meaningful patterns. The null space represents irrelevant features that don't contribute to recommendations.",
+      "question": "In Netflix's recommendation algorithm, what does the null space of the rating matrix represent?",
+      "options": [
+        "Irrelevant features that don't help with recommendations",
+        "The most popular movies",
+        "User ratings",
+        "Movie genres"
+      ],
+      "correct_option": "Irrelevant features that don't help with recommendations",
+      "explanation": "Step 1: The row space contains the patterns that predict user preferences. Step 2: The null space contains directions that contribute nothing to predictions — they are noise that can be safely ignored. Step 3: This is why Netflix can compress a massive rating matrix: the meaningful structure lives in a low-dimensional row space. Step 4: By projecting the rating data onto the row space and discarding the null space, Netflix captures the essential patterns while filtering out noise."
+    },
+    {
+      "emoji": "📈",
+      "title": "Economics",
+      "type": "mcq",
+      "concept": "Null space represents equilibrium states",
+      "story": "Input-output models in economics describe how different sectors interact. The row space represents growth directions — sectors that drive expansion. The null space represents equilibrium states — flows that cancel out, producing no net change.",
+      "question": "In an economic input-output model, what does the null space represent?",
+      "options": [
+        "Equilibrium states with no net change",
+        "Maximum ecomic growth",
+        "The total GDP",
+        "Trade deficits"
+      ],
+      "correct_option": "Equilibrium states with no net change",
+      "explanation": "Step 1: Null space vectors satisfy Ax=0, meaning the economic flows balance to zero. Step 2: These represent internal cycles that don't change the overall economic output. Step 3: Economists use this decomposition to separate productive sectors (row space) from neutral redistribution (null space). Step 4: Understanding which economic activities are in the null space helps identify sectors that merely circulate resources without contributing to net growth."
+    },
+    {
+      "emoji": "🏗️",
+      "title": "Control Theory",
+      "type": "mcq",
+      "concept": "Row space = controllable states, null space = uncontrollable states",
+      "story": "In control systems, the row space of the system matrix represents controllable states — parts you can influence with inputs. The null space represents uncontrollable states — aspects your inputs cannot affect.",
+      "question": "In control theory, which subspace represents the states you can control?",
+      "options": [
+        "The row space",
+        "The null space",
+        "The column space",
+        "The left null space"
+      ],
+      "correct_option": "The row space",
+      "explanation": "Step 1: The row space contains the directions that inputs can reach. Step 2: The null space contains directions that inputs cannot influence — these states are uncontrollable. Step 3: Control engineers must check the null space of the system matrix to determine which behaviours they can and cannot regulate. Step 4: A system with a non-trivial null space has uncontrollable modes, which may lead to instability if those modes are naturally unstable."
+    },
+    {
+      "emoji": "🧬",
+      "title": "Bioinformatics",
+      "type": "mcq",
+      "concept": "Gene expression subspaces",
+      "story": "In gene expression studies, researchers form matrices where rows are genes and columns are conditions. The row space captures the main patterns of gene co-regulation, while the null space reveals genes whose expression is redundant.",
+      "question": "In gene expression analysis, what do null space directions indicate about genes?",
+      "options": [
+        "Their expression patterns are redundant (predictable from other genes)",
+        "They are the most important genes",
+        "They are turned off",
+        "They mutate frequently"
+      ],
+      "correct_option": "Their expression patterns are redundant (predictable from other genes)",
+      "explanation": "Step 1: Null space vectors represent linear dependencies among gene expression profiles. Step 2: These genes' behaviours can be perfectly predicted from combinations of other genes. Step 3: By identifying the null space, biologists can focus on the independent gene regulation patterns in the row space. Step 4: This dimensionality reduction helps researchers identify the minimal set of genes that capture the essential regulatory mechanisms."
+    },
+    {
+      "emoji": "📡",
+      "title": "Signal Processing",
+      "type": "mcq",
+      "concept": "Signal in row space, noise in null space",
+      "story": "In communications, the transmitted signal lives in the row space of the channel matrix, while interference and noise live in the null space. Because these subspaces are perpendicular, the signal and noise can be separated cleanly.",
+      "question": "In signal processing, why are the row space and null space of the channel matrix important?",
+      "options": [
+        "They cleanly separate signal from noise due to perpendicularity",
+        "They both contain the same information",
+        "They determine the signal frequency",
+        "They set the data rate"
+      ],
+      "correct_option": "They cleanly separate signal from noise due to perpendicularity",
+      "explanation": "Step 1: The signal lives in the row space, noise in the null space. Step 2: Their perpendicularity means a receiver can project incoming data onto the row space to extract the signal while discarding the null space noise. Step 3: This clean separation is why MIMO (multiple antenna) systems are so effective — they use orthogonal subspaces to multiplex multiple signals. Step 4: The orthogonality between signal and noise subspaces is the mathematical guarantee that the signal can be recovered perfectly in the absence of other impairments."
+    },
+    {
+      "emoji": "🎓",
+      "title": "Education Analytics",
+      "type": "mcq",
+      "concept": "Student performance subspaces",
+      "story": "A university analyses student performance across courses using a matrix. The row space reveals the main skill dimensions (math ability, verbal ability, etc.), while the null space reveals combinations of courses that provide no new information about student ability.",
+      "question": "In educational data analysis, what do null space directions reveal about the course matrix?",
+      "options": [
+        "Course combinations that provide redundant information about students",
+        "The most difficult courses",
+        "The best teachers",
+        "Student attendance rates"
+      ],
+      "correct_option": "Course combinations that provide redundant information about students",
+      "explanation": "Step 1: Null space directions represent linear dependencies among courses. Step 2: These course combinations don't provide new information about student ability — they are redundant for assessment purposes. Step 3: By identifying the row space, educators can design assessments that efficiently capture the true skill dimensions. Step 4: This analysis helps universities create curricula that cover all meaningful skill dimensions without redundant courses that merely test the same abilities."
+    }
+  ]
+}

@@ -1,0 +1,479 @@
+{
+  "module": 2,
+  "missionId": 19,
+  "title": "Why No Solution?",
+  "original_question": "Three lines: 3A+1C=1200, 1A+2C=1000, 1A+1C=900. In a plane, two lines intersect at one point. A third line may not pass through that point. Each equation is a constraint — too many constraints, no perfect fit! Matrix: [[3,1],[1,2],[1,1]]*[A,C] = [1200,1000,900].",
+  "core_concept": "Each linear equation defines a line in 2D. Two non-parallel lines intersect at exactly one point. A third line almost never passes through that same point, making the 3-equation system inconsistent. This geometric impossibility is why overdetermined systems usually have no exact solution.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M2Q5E1",
+        "question": "How many intersection points do two non-parallel lines in a plane have?",
+        "options": [
+          "Exactly 1",
+          "Exactly 2",
+          "Infinitely many",
+          "0"
+        ],
+        "correct_option": "Exactly 1",
+        "explanation": "Step 1: Two non-parallel lines have different slopes, so they cross at exactly one point. Step 2: This point is the unique solution to the 2-equation system. Step 3: The existence of a unique intersection is guaranteed by the fact that non-parallel lines have different directions, so they must meet — a foundational result in both geometry and linear algebra."
+      },
+      {
+        "id": "M2Q5E2",
+        "question": "What are the equations of the three lines in the problem?",
+        "options": [
+          "3A+C=1200, A+2C=1000, A+C=900",
+          "3A+C=900, A+2C=1200, A+C=1000",
+          "A+C=1200, 3A+C=1000, A+2C=900",
+          "3A+2C=1200, A+C=1000, 3A+C=900"
+        ],
+        "correct_option": "3A+C=1200, A+2C=1000, A+C=900",
+        "explanation": "Step 1: The three equations are 3A+C=1200, A+2C=1000, and A+C=900. Step 2: Each defines a line in the A-C plane. Step 3: These three lines represent three independent constraints on the two unknowns — the overdetermined nature arises because each additional line adds a constraint that the solution must satisfy simultaneously."
+      },
+      {
+        "id": "M2Q5E3",
+        "question": "The first two lines intersect at which point?",
+        "options": [
+          "(280, 360)",
+          "(300, 300)",
+          "(200, 400)",
+          "(350, 250)"
+        ],
+        "correct_option": "(280, 360)",
+        "explanation": "Step 1: From 3A+C=1200: C=1200-3A. Substitute into A+2C=1000: A+2(1200-3A)=1000 → -5A=-1400 → A=280. Step 2: C=1200-3(280)=360. Step 3: The intersection (280, 360) is the unique solution satisfying both constraints — but this point is not guaranteed to satisfy the third constraint, which is the geometric source of inconsistency."
+      },
+      {
+        "id": "M2Q5E4",
+        "question": "Does the point (280, 360) satisfy the third equation A+C=900?",
+        "options": [
+          "— 280+360=640, t 900",
+          "No — 280+360=640, not 900",
+          "— but only approximately",
+          "Cant be determined"
+        ],
+        "correct_option": "No — 280+360=640, not 900",
+        "explanation": "Step 1: 280 + 360 = 640, but the equation requires 900. Step 2: The third line doesn't pass through (280, 360). Step 3: This 260-unit gap is the geometric proof of inconsistency — the point where the first two lines meet is not on the third line, making it impossible for any single point to satisfy all three equations."
+      },
+      {
+        "id": "M2Q5E5",
+        "question": "If two lines are parallel (same slope), how many intersection points do they have?",
+        "options": [
+          "0",
+          "1",
+          "2",
+          "Infinitely many"
+        ],
+        "correct_option": "0",
+        "explanation": "Step 1: Parallel lines have the same slope but different intercepts — they never meet. Step 2: The corresponding system has no solution. Step 3: This is a different type of inconsistency from our problem: parallel lines give an inconsistent system from the start, whereas our three lines are pairwise intersecting but lack a common intersection point."
+      },
+      {
+        "id": "M2Q5E6",
+        "question": "What is the slope of the line 3A+C=1200 (with C on y-axis)?",
+        "options": [
+          "-3",
+          "3",
+          "1/3",
+          "-1/3"
+        ],
+        "correct_option": "-3",
+        "explanation": "Step 1: Rewrite as C = -3A + 1200, giving slope m = -3. Step 2: For each unit increase in A, C decreases by 3. Step 3: The slope determines the line's orientation — three lines with three different slopes (-3, -0.5, -1) will generally form a triangle (pairwise intersections at three different points), which is the geometric signature of inconsistency."
+      },
+      {
+        "id": "M2Q5E7",
+        "question": "What is the slope of the line A+C=900?",
+        "options": [
+          "-1",
+          "1",
+          "0",
+          "-900"
+        ],
+        "correct_option": "-1",
+        "explanation": "Step 1: Rewrite as C = -A + 900, giving slope m = -1. Step 2: This slope differs from the other two lines (-3 and -0.5). Step 3: Three lines with three distinct slopes almost never meet at a single point — this is the probabilistic argument for why overdetermined systems are typically inconsistent."
+      },
+      {
+        "id": "M2Q5E8",
+        "question": "Are the first two lines (3A+C=1200 and A+2C=1000) parallel?",
+        "options": [
+          "No — they have different slopes (-3 and -0.5)",
+          "— they both have slope -1",
+          "— they are the same line",
+          "Cant determine without graphing"
+        ],
+        "correct_option": "No — they have different slopes (-3 and -0.5)",
+        "explanation": "Step 1: Line 1: C = -3A + 1200 (slope = -3). Line 2: C = -0.5A + 500 (slope = -0.5). Step 2: Different slopes guarantee they intersect at exactly one point. Step 3: This intersection (280, 360) is the unique solution to the 2-equation system — the third line's failure to pass through this point is what makes the full 3-equation system inconsistent."
+      },
+      {
+        "id": "M2Q5E9",
+        "question": "If a system of 3 equations in 2 unknowns has NO solution, what is it called?",
+        "options": [
+          "Inconsistent",
+          "Consistent",
+          "Underdetermined",
+          "Homogeneous"
+        ],
+        "correct_option": "Inconsistent",
+        "explanation": "Step 1: An inconsistent system has no solution satisfying all equations simultaneously. Step 2: Our system is inconsistent — the third equation conflicts with the first two. Step 3: For inconsistent overdetermined systems, least squares provides the best approximate solution — the point that minimises the total distance to all three lines."
+      },
+      {
+        "id": "M2Q5E10",
+        "question": "How many constraints does each equation impose on the (A,C) solution?",
+        "options": [
+          "1 — each equation restricts the solution to a line",
+          "2 — each equation has two variables",
+          "0 — equations don't constrain anything",
+          "3 — because there are 3 equations"
+        ],
+        "correct_option": "1 — each equation restricts the solution to a line",
+        "explanation": "Step 1: Each linear equation in 2 unknowns defines a line — the set of all (A,C) satisfying it. Step 2: Adding an equation adds a constraint, reducing the feasible region. Step 3: 0 constraints → whole plane, 1 → a line, 2 consistent → a point, 3 → usually empty. This dimensional reduction is the geometric interpretation of how constraints narrow the solution space."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M2Q5M1",
+        "question": "Why do three random lines in a plane almost never meet at a single point?",
+        "options": [
+          "Because the third line must pass through the exact intersection of the first two — a probability-zero event for random lines",
+          "Because three lines always form a triangle",
+          "Because lines can only intersect in pairs",
+          "Because the equations are always wrong"
+        ],
+        "correct_option": "Because the third line must pass through the exact intersection of the first two — a probability-zero event for random lines",
+        "explanation": "Step 1: Two non-parallel lines intersect at a unique point. Step 2: A third random line has zero probability of passing through that specific point. Step 3: This probability argument is the fundamental reason overdetermined systems are usually inconsistent — each additional constraint must be perfectly tuned to be consistent with existing ones, which is measure-zero in the space of all possible equations."
+      },
+      {
+        "id": "M2Q5M2",
+        "question": "Geometrically, what does the 'error' in the third equation represent?",
+        "options": [
+          "The distance from the intersection point of the first two lines to the third line",
+          "The slope of the third line",
+          "The area of the triangle formed by the three lines",
+          "The angle between the first and second lines"
+        ],
+        "correct_option": "The distance from the intersection point of the first two lines to the third line",
+        "explanation": "Step 1: The first two lines intersect at (280, 360). Step 2: The third line A+C=900 doesn't pass through this point. Step 3: The perpendicular distance from (280, 360) to the third line is the geometric error — least squares minimises the total distance from the solution point to ALL three lines, not just one."
+      },
+      {
+        "id": "M2Q5M3",
+        "question": "If the third equation were A+C=640 instead of A+C=900, would the system be consistent?",
+        "options": [
+          "Yes — because (280, 360) satisfies A+C=640",
+          "— three equations are always inconsistent",
+          "Only if we remove the first equation",
+          "Only if A and C are negative"
+        ],
+        "correct_option": "Yes — because (280, 360) satisfies A+C=640",
+        "explanation": "Step 1: 280 + 360 = 640. Step 2: If the third equation is A+C=640, all three lines pass through (280, 360). Step 3: The system is consistent — but this requires the third equation to be carefully constructed as a linear combination of the first two, which is extremely unlikely with real-world data."
+      },
+      {
+        "id": "M2Q5M4",
+        "question": "What shape do three consistent lines (all passing through one point) form?",
+        "options": [
+          "Three lines meeting at a single point — like spokes of a wheel",
+          "A triangle)",
+          "A parallelogram — does t match",
+          "Three parallel lines — does t match"
+        ],
+        "correct_option": "Three lines meeting at a single point — like spokes of a wheel",
+        "explanation": "Step 1: Consistent means all three pass through the same point. Step 2: Each line has a different slope, radiating outward from the common intersection. Step 3: This 'spoke' configuration is the geometric picture of a consistent overdetermined system — rare in practice because it requires perfect alignment of all constraint lines."
+      },
+      {
+        "id": "M2Q5M5",
+        "question": "If you have 4 equations and 2 unknowns, and the first 2 equations are consistent with each other, what must happen for the system to be consistent?",
+        "options": [
+          "Both the 3rd and 4th equations must pass through the same intersection point as the first two",
+          "Only the 3rd equation needs to pass through it",
+          "All equations can be different — consistency doesn't require a common point",
+          "The unkwns must be increased to 4"
+        ],
+        "correct_option": "Both the 3rd and 4th equations must pass through the same intersection point as the first two",
+        "explanation": "Step 1: The first two lines intersect at a unique point. Step 2: For consistency, every additional line must also pass through this point. Step 3: With 4 equations, all four lines must meet at one point — the probability of this happening decreases exponentially with each added equation, making large overdetermined systems almost always inconsistent."
+      },
+      {
+        "id": "M2Q5M6",
+        "question": "What happens to the feasible region as you add more consistent equations to a 2-unknown system?",
+        "options": [
+          "It shrinks from a plane → line → point, but stays non-empty",
+          "It grows larger — does t match",
+          "It becomes a circle — does t match",
+          "It disappears immediately"
+        ],
+        "correct_option": "It shrinks from a plane → line → point, but stays non-empty",
+        "explanation": "Step 1: 0 equations → whole 2D plane. Step 2: 1 equation → a line (1D). Step 3: 2 consistent equations → a single point (0D). Each consistent equation reduces the dimension by one until we reach a point. Inconsistent equations cause the feasible region to become empty — the transition from point to empty is the geometric moment when inconsistency appears."
+      },
+      {
+        "id": "M2Q5M7",
+        "question": "Why is 'overdetermined' the right word for a system with more equations than unknowns?",
+        "options": [
+          "Because there are more constraints (equations) than degrees of freedom (unknowns) — the system is over-constrained",
+          "Because the numbers in the equations are too large",
+          "Because the matrix has too many columns",
+          "Because the solution is always too large"
+        ],
+        "correct_option": "Because there are more constraints (equations) than degrees of freedom (unknowns) — the system is over-constrained",
+        "explanation": "Step 1: Each equation constrains the solution. Step 2: With more constraints than unknowns, the system is 'over-constrained.' Step 3: The feasible region is so tightly constrained that no point satisfies all constraints — the excess constraints 'overdetermine' the solution out of existence, which is why least squares provides an approximate rather than exact answer."
+      },
+      {
+        "id": "M2Q5M8",
+        "question": "If the first two lines are parallel, what does that tell you about the system?",
+        "options": [
+          "The system is either inconsistent (no solution) or has infinitely many solutions (same line)",
+          "The system always has exactly one solution",
+          "The system has exactly two solutions",
+          "The system is underdetermined"
+        ],
+        "correct_option": "The system is either inconsistent (no solution) or has infinitely many solutions (same line)",
+        "explanation": "Step 1: Parallel lines have the same slope — they never meet (inconsistent) unless they're the same line. Step 2: Different parallel lines → no solution (empty feasible set). Step 3: Same line → infinitely many solutions (every point on the line works). This parallel case is a special type of inconsistency where the matrix rank is less than the number of equations."
+      },
+      {
+        "id": "M2Q5M9",
+        "question": "What is the relationship between the number of equations and the 'tightness' of constraints?",
+        "options": [
+          "More equations = tighter constraints = less freedom for the solution",
+          "More equations = looser constraints = more freedom",
+          "The number of equations doesn't affect constraint tightness",
+          "Only the coefficients matter, t the count"
+        ],
+        "correct_option": "More equations = tighter constraints = less freedom for the solution",
+        "explanation": "Step 1: Each equation restricts where the solution can lie. Step 2: More equations = more restrictions = smaller feasible region. Step 3: With enough independent equations, the feasible region shrinks to a point (if consistent) or the empty set (if inconsistent). This constraint-counting is the dimensional argument behind the rank-nullity theorem."
+      },
+      {
+        "id": "M2Q5M10",
+        "question": "If all three lines formed a triangle (pairwise intersections at three different points), what would that tell you about the system?",
+        "options": [
+          "The system is inconsistent — no single point satisfies all three equations",
+          "The system has three solutions",
+          "The system is consistent with infinitely many solutions",
+          "The system is underdetermined"
+        ],
+        "correct_option": "The system is inconsistent — no single point satisfies all three equations",
+        "explanation": "Step 1: A triangle means each pair of lines meets at a different point. Step 2: No single point lies on all three lines. Step 3: The system is inconsistent — the triangular configuration is the geometric proof that no (A,C) satisfies all three equations simultaneously, which is why least squares seeks the point that minimises total distance to all three lines."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M2Q5H1",
+        "question": "In R², how many independent linear equations are needed to determine a unique point (0-dimensional solution)?",
+        "options": [
+          "Exactly 2",
+          "Exactly 1",
+          "Exactly 3",
+          "At least 4"
+        ],
+        "correct_option": "Exactly 2",
+        "explanation": "Step 1: Each independent equation reduces the solution set by one dimension. Step 2: Starting from R² (2D), one equation gives a line (1D), two give a point (0D). Step 3: This is the rank-nullity theorem in action: n unknowns require n independent equations to uniquely determine a solution — the boundary between underdetermined, well-determined, and overdetermined systems."
+      },
+      {
+        "id": "M2Q5H2",
+        "question": "What is the dimension of the null space of the 3×2 matrix [[3,1],[1,2],[1,1]]?",
+        "options": [
+          "0 (trivial null space)",
+          "1 — t here",
+          "2 — t here",
+          "3 — t here"
+        ],
+        "correct_option": "0 (trivial null space)",
+        "explanation": "Step 1: The matrix is 3×2 with rank 2 (full column rank). Step 2: By rank-nullity: nullity = 2 - 2 = 0. Step 3: Only the zero vector satisfies Ax = 0 — the columns are linearly independent. A trivial null space guarantees the least squares solution is unique, connecting the rank condition to solution uniqueness."
+      },
+      {
+        "id": "M2Q5H3",
+        "question": "If the column space of A is a plane in R³, and b doesn't lie on that plane, what is the geometric interpretation of the least squares solution?",
+        "options": [
+          "It finds the point on the plane closest to b — the orthogonal projection of b onto the plane",
+          "It finds the point on b closest to the plane",
+          "It finds the midpoint between b and the plane",
+          "It finds a point equidistant from all three lines"
+        ],
+        "correct_option": "It finds the point on the plane closest to b — the orthogonal projection of b onto the plane",
+        "explanation": "Step 1: The column space is a 2D plane through the origin in R³. Step 2: b = [1200,1000,900] doesn't lie on this plane. Step 3: The least squares solution projects b perpendicularly onto the plane — this projection Ax̂ is the closest point in col(A) to b, and the projection theorem guarantees this is the unique minimum-distance point."
+      },
+      {
+        "id": "M2Q5H4",
+        "question": "Why does the least squares error vector e = b - Ax̂ have a specific geometric direction?",
+        "options": [
+          "It is perpendicular to the column space — pointing 'straight up' from the projection plane",
+          "It is parallel to the column space",
+          "It points toward the origin",
+          "It has specific direction"
+        ],
+        "correct_option": "It is perpendicular to the column space — pointing 'straight up' from the projection plane",
+        "explanation": "Step 1: The orthogonality principle states e ⊥ col(A). Step 2: e is perpendicular to every vector in the column space. Step 3: Geometrically, e points 'straight up' from the projection point — the shortest distance from b to the plane. This perpendicularity is the defining property of orthogonal projection and the foundation of the normal equations."
+      },
+      {
+        "id": "M2Q5H5",
+        "question": "For the system Ax = b with A being 3×2 and rank 2, what is the dimension of the subspace of b-vectors that give an exact solution?",
+        "options": [
+          "2 (a plane in R³)",
+          "3 (all of R³)",
+          "1 (a line)",
+          "0 (only the origin)"
+        ],
+        "correct_option": "2 (a plane in R³)",
+        "explanation": "Step 1: An exact solution exists iff b ∈ col(A). Step 2: col(A) is 2-dimensional (rank = 2). Step 3: Only b-vectors lying on this 2D plane give exact solutions — a measure-zero subset of R³. For almost all b-vectors (the typical case), least squares is necessary because b misses the column space."
+      },
+      {
+        "id": "M2Q5H6",
+        "question": "If we add a fourth equation 2A+3C=1500 to the system, what happens to the rank of the coefficient matrix?",
+        "options": [
+          "It stays at 2 (the new row is a linear combination of existing rows)",
+          "It increases to 3 — does t match",
+          "It decreases to 1 — does t match",
+          "It becomes 4 — does t match"
+        ],
+        "correct_option": "It stays at 2 (the new row is a linear combination of existing rows)",
+        "explanation": "Step 1: The original 3×2 matrix has rank 2. Step 2: A 4×2 matrix can have rank at most min(4, 2) = 2. Step 3: Adding rows to a matrix with full column rank cannot increase the rank — the column space remains the same 2D plane. This means additional equations add redundancy, not new information, which is why the least squares solution may not change significantly."
+      },
+      {
+        "id": "M2Q5H7",
+        "question": "What is the Frobenius norm of the error vector e = [0, 0, 260]?",
+        "options": [
+          "260",
+          "260²",
+          "√260",
+          "0"
+        ],
+        "correct_option": "260",
+        "explanation": "Step 1: ||e|| = √(0² + 0² + 260²) = √67600 = 260. Step 2: This is the Euclidean distance from b to the column space plane. Step 3: The Frobenius norm measures the total error magnitude — least squares minimises ||e||², which is equivalent to minimising this distance. The norm gives a single number summarising how far the best approximation is from the target."
+      },
+      {
+        "id": "M2Q5H8",
+        "question": "Can an overdetermined system have infinitely many solutions?",
+        "options": [
+          "Yes — if the extra equations are linear combinations of the first n independent equations",
+          "Never — overdetermined systems always have exactly one solution",
+          "Never — overdetermined systems always have zero solutions",
+          "Only if the matrix is square"
+        ],
+        "correct_option": "Yes — if the extra equations are linear combinations of the first n independent equations",
+        "explanation": "Step 1: If extra equations add no new information (are redundant), the system effectively has fewer independent equations. Step 2: If fewer than n independent equations exist for n unknowns, infinitely many solutions may exist. Step 3: This is actually an underdetermined system in disguise — the 'overdetermined' label refers to the total equation count, not the independent equation count, which is what determines solution behavior."
+      },
+      {
+        "id": "M2Q5H9",
+        "question": "What does the 'distance' from a point to a line measure in the context of least squares?",
+        "options": [
+          "The residual error for that particular equation — how far the solution is from satisfying it",
+          "The slope of the line",
+          "The intercept of the line",
+          "The number of unkwns"
+        ],
+        "correct_option": "The residual error for that particular equation — how far the solution is from satisfying it",
+        "explanation": "Step 1: The distance from the solution point to a line measures how badly that equation is violated. Step 2: Zero distance means the equation is exactly satisfied. Step 3: Least squares minimises the total squared distance across all equations — it finds the point that is, on average, as close as possible to all constraint lines simultaneously."
+      },
+      {
+        "id": "M2Q5H10",
+        "question": "In Rⁿ, how many independent equations are needed to uniquely determine a point?",
+        "options": [
+          "Exactly n",
+          "At most n-1",
+          "More than n",
+          "Exactly 1"
+        ],
+        "correct_option": "Exactly n",
+        "explanation": "Step 1: Each independent equation reduces the solution dimension by 1. Step 2: Starting from Rⁿ (n-dimensional), n independent equations reduce to 0 dimensions (a point). Step 3: This is why square systems (n equations, n unknowns) typically have unique solutions — the dimension-counting argument behind the invertible matrix theorem and the foundation for understanding underdetermined vs. overdetermined systems."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "emoji": "🏗️",
+      "title": "Engineering Design",
+      "equation": "",
+      "type": "mcq",
+      "concept": "Conflicting design constraints",
+      "story": "When designing a bridge, engineers must simultaneously satisfy constraints for strength (must support heavy loads), cost (must stay within budget), and weight (must not be too heavy for the foundations). These three constraints often conflict — making the bridge stronger increases cost. Since no single design perfectly satisfies all three, engineers must find the best compromise by minimising the total error.",
+      "question": "When a bridge must satisfy conflicting strength, cost, and weight constraints, what do engineers do?",
+      "options": [
+        "Find the best compromise that minimises total constraint violation",
+        "Satisfy only the strongest constraint",
+        "Igre the weaker constraints",
+        "Add more constraints to balance them"
+      ],
+      "answer": "Find the best compromise that minimises total constraint violation",
+      "explanation": "Step 1: Each constraint is a 'line' in design space. Step 2: The three constraints don't meet at one point. Step 3: Engineers use optimisation (like least squares) to find the design that comes closest to satisfying all three."
+    },
+    {
+      "emoji": "📋",
+      "title": "Survey Data",
+      "equation": "",
+      "type": "mcq",
+      "concept": "Overdetermined survey analysis",
+      "story": "A company surveys customers using multiple questions that all try to measure the same underlying satisfaction trait. Each question gives slightly different results because people interpret them differently. With more survey questions than traits to estimate, there is no perfect fit — the analysis must find the best compromise across all the questions.",
+      "question": "What does 'overdetermined' mean in the context of survey data analysis?",
+      "options": [
+        "More questions (equations) than traits (unknowns) — no perfect fit exists",
+        "The survey has too many pages",
+        "Too many people responded",
+        "The questions are too difficult"
+      ],
+      "answer": "More questions (equations) than traits (unknowns) — no perfect fit exists",
+      "explanation": "Step 1: Each question gives one equation for the satisfaction trait. Step 2: 10 questions for 1 trait → overdetermined. Step 3: No single trait value satisfies all 10 questions perfectly — least squares finds the best compromise."
+    },
+    {
+      "emoji": "🎯",
+      "title": "Target Practice",
+      "equation": "",
+      "type": "mcq",
+      "concept": "Geometric impossibility",
+      "story": "Imagine trying to hit three different targets with a single arrow. Each target requires a slightly different aim direction. Since you can only fire one arrow, you cannot hit all three — you must choose the best compromise aim that comes closest to all targets overall. This is exactly what happens with overdetermined systems.",
+      "question": "In the target practice analogy, what does firing a single arrow represent in mathematical terms?",
+      "options": [
+        "Choosing one solution (x,y) that tries to satisfy all equations",
+        "Choosing three different solutions",
+        "Igring all constraints",
+        "Adding more targets"
+      ],
+      "answer": "Choosing one solution (x,y) that tries to satisfy all equations",
+      "explanation": "Step 1: One arrow = one (A,C) pair. Step 2: Three targets = three equations. Step 3: You can't hit all three targets perfectly — you find the aim that minimises total miss distance, like least squares."
+    },
+    {
+      "emoji": "✈️",
+      "title": "Flight Scheduling",
+      "equation": "",
+      "type": "mcq",
+      "concept": "Timetable conflict resolution",
+      "story": "An airline must schedule flights to satisfy multiple constraints: passenger demand, crew availability, runway slots, and fuel stops. Each constraint is like an equation — and with more constraints than aircraft, no perfect schedule exists. Airlines use optimisation to find schedules that minimise total dissatisfaction across all constraints.",
+      "question": "When an airline has more scheduling constraints than aircraft, what mathematical approach finds the best schedule?",
+      "options": [
+        "Least squares / optimisation to minimise total constraint violation",
+        "Random scheduling",
+        "First-come-first-served assignment",
+        "Igring mir constraints"
+      ],
+      "answer": "Least squares / optimisation to minimise total constraint violation",
+      "explanation": "Step 1: Each constraint (demand, crew, slots) is an equation. Step 2: More constraints than resources → overdetermined. Step 3: Optimisation finds the schedule that best satisfies all constraints simultaneously."
+    },
+    {
+      "emoji": "🌍",
+      "title": "GPS Satellite Fix",
+      "equation": "",
+      "type": "mcq",
+      "concept": "Overdetermined positioning",
+      "story": "Your GPS receiver picks up signals from 6 satellites, but you only need 3 distances to find your 3D position. The extra 3 signals create an overdetermined system. Rather than picking any 3 satellites and ignoring the rest, GPS uses least squares to combine all 6 signals — the extra measurements reduce noise and give you a more accurate position.",
+      "question": "Why does GPS use least squares instead of solving with just 3 satellite signals?",
+      "options": [
+        "Extra signals reduce positioning error through overdetermined averaging",
+        "3 signals are never eugh for 3D position",
+        "GPS requires exactly 6 satellites to function",
+        "Least squares is faster than solving 3 equations"
+      ],
+      "answer": "Extra signals reduce positioning error through overdetermined averaging",
+      "explanation": "Step 1: 3 satellites give 3 equations for 3 unknowns — exact but noisy. Step 2: 6 satellites give 6 equations — overdetermined but more accurate. Step 3: Least squares combines all signals, averaging out noise for a better position estimate."
+    },
+    {
+      "emoji": "🤖",
+      "title": "Robot Calibration",
+      "equation": "",
+      "type": "mcq",
+      "concept": "Parameter identification from tests",
+      "story": "A factory robot arm must be calibrated by measuring its position at many test points. Each measurement gives one equation relating the arm's parameters (joint angles, link lengths) to the observed position. With more test points than parameters, the system is overdetermined — least squares finds the parameter values that best explain all measurements.",
+      "question": "When calibrating a robot arm using many test measurements for few parameters, what does the overdetermined system reveal?",
+      "options": [
+        "The best-fit calibration parameters that minimise total measurement error",
+        "The exact parameters that satisfy all measurements perfectly",
+        "That the robot is broken",
+        "That more parameters are needed"
+      ],
+      "answer": "The best-fit calibration parameters that minimise total measurement error",
+      "explanation": "Step 1: Each test point gives one equation. Step 2: More tests than parameters → overdetermined. Step 3: Least squares finds the parameters that come closest to matching all test measurements simultaneously."
+    }
+  ]
+}

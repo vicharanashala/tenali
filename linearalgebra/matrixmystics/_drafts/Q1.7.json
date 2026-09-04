@@ -1,0 +1,436 @@
+{
+  "module": 1,
+  "topicId": "Q1.7",
+  "title": "Simultaneous equations as a matrix",
+  "topic": "Rewriting 2x2 linear systems as matrix equations Ax = b, recognising matrices as compact representation.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M1Q7E1",
+        "question": "In the equations 2x + 3y = 7 and 3x + 4y = 10, what are the coefficients of x?",
+        "options": [
+          "3 and 4",
+          "2 and 3",
+          "2 and 7",
+          "7 and 10"
+        ],
+        "correct_option": "2 and 3",
+        "explanation": "The x-coefficients are 2 (from 2x) and 3 (from 3x); 7 and 10 are right-hand constants, not x-coefficients."
+      },
+      {
+        "id": "M1Q7E2",
+        "question": "In the same system, which pair gives the coefficients of y?",
+        "options": [
+          "2 and 3",
+          "4 and 3",
+          "2 and 7",
+          "3 and 4"
+        ],
+        "correct_option": "3 and 4",
+        "explanation": "The y-coefficients come from 3y and 4y, giving the pair (3, 4)."
+      },
+      {
+        "id": "M1Q7E3",
+        "question": "The equation 2x + 3y = 7 can be written as a dot product of which pair of vectors?",
+        "options": [
+          "(x,y) and (3,2)",
+          "(2,7) and (3,y)",
+          "(2,3) and (x,y)",
+          "(7,3) and (x,y)"
+        ],
+        "correct_option": "(2,3) and (x,y)",
+        "explanation": "The dot product (2,3)·(x,y) = 2x + 3y equals 7, so the pair is (2,3) and (x,y)."
+      },
+      {
+        "id": "M1Q7E4",
+        "question": "The matrix [[2, 3], [3, 4]] has how many rows and columns?",
+        "options": [
+          "2x2 square",
+          "2x3 wide",
+          "3x2 tall",
+          "1x4 row"
+        ],
+        "correct_option": "2x2 square",
+        "explanation": "The matrix has 2 rows and 2 columns, making it a 2x2 square matrix."
+      },
+      {
+        "id": "M1Q7E5",
+        "question": "In the matrix equation A·x = b, which role does A play?",
+        "options": [
+          "Unknown vector",
+          "Coefficient matrix",
+          "Constant vector",
+          "Identity matrix"
+        ],
+        "correct_option": "Coefficient matrix",
+        "explanation": "A holds the coefficients of the system, x holds the unknowns, and b holds the right-side constants."
+      },
+      {
+        "id": "M1Q7E6",
+        "question": "In the equation A·x = b, what does the vector x represent?",
+        "options": [
+          "Constant term",
+          "Output matrix",
+          "Unknown vector",
+          "Scalar value"
+        ],
+        "correct_option": "Unknown vector",
+        "explanation": "The vector x holds the variables (unknowns) such as (x, y) that we want to find."
+      },
+      {
+        "id": "M1Q7E7",
+        "question": "In the matrix equation A·x = b, what does b represent?",
+        "options": [
+          "Unknown vector",
+          "Coefficient matrix",
+          "Identity matrix",
+          "Constant vector"
+        ],
+        "correct_option": "Constant vector",
+        "explanation": "The vector b in A·x = b contains the right-side constants of the system."
+      },
+      {
+        "id": "M1Q7E8",
+        "question": "Is the matrix [[2, 3], [3, 4]] a square matrix?",
+        "options": [
+          "No, it is 1x2",
+          "No, it is 2x3",
+          "Yes, 2x2 square",
+          "Yes, 3x3 square"
+        ],
+        "correct_option": "Yes, 2x2 square",
+        "explanation": "A square matrix has equal rows and columns; [[2,3],[3,4]] is 2x2, so it is square."
+      },
+      {
+        "id": "M1Q7E9",
+        "question": "How many equations and unknowns does the matrix [[1, 2, 3], [4, 5, 6]] represent?",
+        "options": [
+          "2 eqs, 2 unknowns",
+          "3 eqs, 3 unknowns",
+          "3 eqs, 2 unknowns",
+          "2 eqs, 3 unknowns"
+        ],
+        "correct_option": "2 eqs, 3 unknowns",
+        "explanation": "Two rows mean 2 equations, and three columns mean 3 unknowns, so it represents a 2x3 system."
+      },
+      {
+        "id": "M1Q7E10",
+        "question": "For 2x + 3y = 7 and 3x + 4y = 10, which is the coefficient matrix A?",
+        "options": [
+          "[[7,10],[7,10]]",
+          "[[2,3],[3,4]]",
+          "[[2,7],[3,10]]",
+          "[[2,3],[4,3]]"
+        ],
+        "correct_option": "[[2,3],[3,4]]",
+        "explanation": "A collects the x- and y-coefficients row by row: row 1 = (2,3), row 2 = (3,4)."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M1Q7M1",
+        "question": "Which matrix equation encodes 2x + 3y = 7 and 3x + 4y = 10?",
+        "options": [
+          "[[2,3],[3,4]]·[7,10] = [x,y]",
+          "[[2,3],[3,4]]·[x,y] = [7,10]",
+          "[[7,10],[7,10]]·[x,y] = [3,4]",
+          "[[2,7],[3,10]]·[x,y] = [3,4]"
+        ],
+        "correct_option": "[[2,3],[3,4]]·[x,y] = [7,10]",
+        "explanation": "The coefficient matrix multiplies the unknown vector [x,y] to produce the constant vector [7,10]."
+      },
+      {
+        "id": "M1Q7M2",
+        "question": "Given A·x = b, multiplying both sides by A⁻¹ yields which result?",
+        "options": [
+          "x = A⁻¹·b",
+          "x = b·A⁻¹",
+          "x = A·b",
+          "x = A⁻¹·A"
+        ],
+        "correct_option": "x = A⁻¹·b",
+        "explanation": "A⁻¹·A·x = A⁻¹·b simplifies to x = A⁻¹·b since A⁻¹·A is the identity."
+      },
+      {
+        "id": "M1Q7M3",
+        "question": "For a 2x2 matrix A, when does the inverse A⁻¹ exist?",
+        "options": [
+          "Always exists",
+          "Never exists",
+          "Only when det ≠ 0",
+          "Only when det = 0"
+        ],
+        "correct_option": "Only when det ≠ 0",
+        "explanation": "A 2x2 matrix is invertible if and only if its determinant is non-zero."
+      },
+      {
+        "id": "M1Q7M4",
+        "question": "What is the determinant of A = [[2, 3], [3, 4]]?",
+        "options": [
+          "+8 value",
+          "-1 value",
+          "+1 value",
+          "+9 value"
+        ],
+        "correct_option": "-1 value",
+        "explanation": "det(A) = 2·4 − 3·3 = 8 − 9 = −1, so the determinant is −1."
+      },
+      {
+        "id": "M1Q7M5",
+        "question": "If det(A) ≠ 0 for A·x = b, how many solutions exist?",
+        "options": [
+          "Zero solutions",
+          "Exactly one",
+          "Exactly two",
+          "Infinitely many"
+        ],
+        "correct_option": "Exactly one",
+        "explanation": "When det(A) is non-zero, A is invertible, so x = A⁻¹·b yields exactly one solution."
+      },
+      {
+        "id": "M1Q7M6",
+        "question": "Solving 2x + 3y = 7 and 3x + 4y = 10 by elimination gives what x?",
+        "options": [
+          "x = 1",
+          "x = 2",
+          "x = 3",
+          "x = 4"
+        ],
+        "correct_option": "x = 2",
+        "explanation": "Eliminating y gives y = 1, and then 2x + 3 = 7, so x = 2."
+      },
+      {
+        "id": "M1Q7M7",
+        "question": "Solving 2x + 3y = 7 and 3x + 4y = 10 by elimination gives what y?",
+        "options": [
+          "y = 0",
+          "y = 1",
+          "y = 2",
+          "y = 3"
+        ],
+        "correct_option": "y = 1",
+        "explanation": "Multiplying first equation by 3 and second by 2, then subtracting gives y = 1."
+      },
+      {
+        "id": "M1Q7M8",
+        "question": "What is the inverse of the 2x2 identity matrix I?",
+        "options": [
+          "[[0,1],[1,0]] swap",
+          "[[-1,0],[0,-1]] neg",
+          "[[1,1],[1,1]] ones",
+          "I itself inverse"
+        ],
+        "correct_option": "I itself inverse",
+        "explanation": "The identity matrix is its own inverse because I·I = I."
+      },
+      {
+        "id": "M1Q7M9",
+        "question": "What is the inverse of A = [[2, 0], [0, 2]]?",
+        "options": [
+          "[[2,0],[0,2]] same",
+          "[[1/2,0],[0,1/2]]",
+          "[[0,2],[2,0]] flip",
+          "[[-2,0],[0,-2]] neg"
+        ],
+        "correct_option": "[[1/2,0],[0,1/2]]",
+        "explanation": "For a scalar matrix 2I, the inverse is (1/2)I = [[1/2,0],[0,1/2]]."
+      },
+      {
+        "id": "M1Q7M10",
+        "question": "Can the matrix [[1, 2], [2, 4]] be inverted?",
+        "options": [
+          "Yes, always",
+          "No, det zero",
+          "Yes, square root",
+          "Only its square"
+        ],
+        "correct_option": "No, det zero",
+        "explanation": "det = 1·4 − 2·2 = 0, so the matrix is singular and has no inverse."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M1Q7H1",
+        "question": "Why is the matrix form A·x = b considered compact?",
+        "options": [
+          "Hides variables",
+          "Hides equations",
+          "Hides constant terms",
+          "Hides matrix entries"
+        ],
+        "correct_option": "Hides variables",
+        "explanation": "The matrix form bundles many coefficients and equations, hiding the individual variables inside x."
+      },
+      {
+        "id": "M1Q7H2",
+        "question": "If a linear system has no solution, what is true about A·x = b?",
+        "options": [
+          "A has full rank",
+          "A equals identity",
+          "b outside Range(A)",
+          "b inside Range(A)"
+        ],
+        "correct_option": "b outside Range(A)",
+        "explanation": "A·x = b has no solution exactly when b lies outside the range (column space) of A."
+      },
+      {
+        "id": "M1Q7H3",
+        "question": "Given det([[2,3],[3,4]]) = -1, what is the matrix A⁻¹?",
+        "options": [
+          "[[4,-3],[-3,2]]",
+          "[[-2,3],[3,-4]]",
+          "[[2,3],[3,4]] same",
+          "[[-4,3],[3,-2]]"
+        ],
+        "correct_option": "[[-4,3],[3,-2]]",
+        "explanation": "A⁻¹ = (1/det)·[[d,−b],[−c,a]], so A⁻¹ = (1/−1)·[[4,−3],[−3,2]] = [[-4,3],[3,-2]]."
+      },
+      {
+        "id": "M1Q7H4",
+        "question": "Multiplying A·A⁻¹ always gives which matrix?",
+        "options": [
+          "Zero matrix",
+          "Matrix A again",
+          "Identity I",
+          "Determinant form"
+        ],
+        "correct_option": "Identity I",
+        "explanation": "By definition A·A⁻¹ = I, the 2x2 identity matrix."
+      },
+      {
+        "id": "M1Q7H5",
+        "question": "Is the map A: x ↦ A·x a linear function?",
+        "options": [
+          "No, never",
+          "Yes, always",
+          "Only if det = 0",
+          "Only for squares"
+        ],
+        "correct_option": "Yes, always",
+        "explanation": "Matrix multiplication satisfies A(αx + βy) = αA·x + βA·y, so A is always linear."
+      },
+      {
+        "id": "M1Q7H6",
+        "question": "If A is invertible, the map A: ℝ² → ℝ² is a:",
+        "options": [
+          "Constant map",
+          "Bijection 1-1",
+          "Zero map only",
+          "Projection only"
+        ],
+        "correct_option": "Bijection 1-1",
+        "explanation": "An invertible linear map is one-to-one and onto, hence a bijection of ℝ²."
+      },
+      {
+        "id": "M1Q7H7",
+        "question": "If A is not invertible, the image A·x for x ∈ ℝ² lies on:",
+        "options": [
+          "The whole plane",
+          "Empty region",
+          "A single line",
+          "Single point"
+        ],
+        "correct_option": "A single line",
+        "explanation": "A non-invertible 2x2 matrix has rank 1, so its range is a 1D line through origin."
+      },
+      {
+        "id": "M1Q7H8",
+        "question": "Why does 2x + 3y = 7, 4x + 6y = 10 have no solution?",
+        "options": [
+          "Det = 2 exactly",
+          "Det equals 1",
+          "Det zero, inconsistent",
+          "Det very large"
+        ],
+        "correct_option": "Det zero, inconsistent",
+        "explanation": "The second row is 2× the first row left-side, but 10 ≠ 2·7 = 14, so the system is inconsistent."
+      },
+      {
+        "id": "M1Q7H9",
+        "question": "How many solutions does 2x + 3y = 7, 4x + 6y = 14 have?",
+        "options": [
+          "Zero only",
+          "Infinitely many",
+          "Exactly one",
+          "Exactly two"
+        ],
+        "correct_option": "Infinitely many",
+        "explanation": "The second equation is exactly 2× the first, so the two are equivalent and yield infinitely many solutions."
+      },
+      {
+        "id": "M1Q7H10",
+        "question": "What is the rank of the matrix [[1, 2], [2, 4]]?",
+        "options": [
+          "Rank 2 full",
+          "Rank 1 one",
+          "Rank 0 zero",
+          "Rank 3 three"
+        ],
+        "correct_option": "Rank 1 one",
+        "explanation": "The second row is 2× the first, so only one row is independent, giving rank 1."
+      }
+    ],
+    "real_life_application": [
+      {
+        "id": "M1Q7R1",
+        "question": "Revenue satisfies 2A + 3B = 7000 and 3A + 4B = 10000. With A = [[2,3],[3,4]], what is b?",
+        "options": [
+          "[2, 3] row",
+          "[3, 4] row",
+          "[7000, 10000]",
+          "[10000, 7000]"
+        ],
+        "correct_option": "[7000, 10000]",
+        "explanation": "The vector b collects the right-side constants, so b = [7000, 10000]."
+      },
+      {
+        "id": "M1Q7R2",
+        "question": "Solving 2x + 3y = 7 and 3x + 4y = 10 as a mixing problem, what is x?",
+        "options": [
+          "1 unit",
+          "2 units",
+          "3 units",
+          "4 units"
+        ],
+        "correct_option": "2 units",
+        "explanation": "Solving gives x = 2 and y = 1, so the first ingredient is 2 units."
+      },
+      {
+        "id": "M1Q7R3",
+        "question": "A shop: 2 phones + 3 covers = $70, 3 phones + 4 covers = $100. What is the price of a phone?",
+        "options": [
+          "$10 each",
+          "$20 each",
+          "$30 each",
+          "$40 each"
+        ],
+        "correct_option": "$20 each",
+        "explanation": "Solving gives phones = $20 and covers = $10, so a phone costs $20."
+      },
+      {
+        "id": "M1Q7R4",
+        "question": "Beam forces satisfy 2F1 + 3F2 = 7 N and 3F1 + 4F2 = 10 N. What is F1?",
+        "options": [
+          "0 N force",
+          "1 N force",
+          "2 N force",
+          "3 N force"
+        ],
+        "correct_option": "2 N force",
+        "explanation": "Solving the system gives F1 = 2 N and F2 = 1 N."
+      },
+      {
+        "id": "M1Q7R5",
+        "question": "An investment: 2 bonds + 3 stocks = ₹7000, 3 bonds + 4 stocks = ₹10000. What is the bond value?",
+        "options": [
+          "₹1000 each",
+          "₹2000 each",
+          "₹3000 each",
+          "₹4000 each"
+        ],
+        "correct_option": "₹2000 each",
+        "explanation": "Solving the matrix equation gives bonds = ₹2000 and stocks = ₹1000 each."
+      }
+    ]
+  }
+}

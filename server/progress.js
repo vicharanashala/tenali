@@ -1,5 +1,6 @@
 const express = require('express');
 const { requireAuth, Progress } = require('./auth');
+const logger = require('./lib/logger');
 
 const router = express.Router();
 const inMemoryProgress = {};
@@ -45,30 +46,44 @@ router.post('/update', requireAuth, async (req, res) => {
       return res.json({ success: true, progress: prog });
     }
 
-    let prog = await Progress.findOne({ userId: req.user.id, topic });
-    if (!prog) {
-      prog = new Progress({ userId: req.user.id, topic, difficulty: difficulty || 'easy', score: 0, seenQuestions: [] });
-    }
+    // Atomic read-modify-write: a plain findOne() + mutate + save() has a
+    // window between the read and the write where a second concurrent
+    // request for the same user+topic (e.g. two answers submitted in quick
+    // succession) can read the same starting state and clobber the first
+    // write when it saves — a lost update. An aggregation-pipeline update
+    // computes the new score/seenQuestions server-side, inside MongoDB, in
+    // a single atomic operation, so there's no window for another request
+    // to interleave.
+    const scoreDelta = isCorrect === undefined ? 0 : (isCorrect ? 10 : -5);
+    const pipeline = [
+      {
+        $set: {
+          userId: { $ifNull: ['$userId', req.user.id] },
+          topic: { $ifNull: ['$topic', topic] },
+          difficulty: difficulty ? difficulty : { $ifNull: ['$difficulty', 'easy'] },
+          score: { $max: [0, { $add: [{ $ifNull: ['$score', 0] }, scoreDelta] }] },
+          seenQuestions: questionId
+            ? {
+                $cond: [
+                  { $in: [questionId, { $ifNull: ['$seenQuestions', []] }] },
+                  { $ifNull: ['$seenQuestions', []] },
+                  { $slice: [{ $concatArrays: [{ $ifNull: ['$seenQuestions', []] }, [questionId]] }, -50] },
+                ],
+              }
+            : { $ifNull: ['$seenQuestions', []] },
+          updatedAt: new Date(),
+        },
+      },
+    ];
 
-    if (difficulty) prog.difficulty = difficulty;
-
-    if (isCorrect !== undefined) {
-      if (isCorrect) prog.score += 10;
-      else prog.score = Math.max(0, prog.score - 5);
-    }
-
-    if (questionId) {
-      if (!prog.seenQuestions.includes(questionId)) {
-        prog.seenQuestions.push(questionId);
-        if (prog.seenQuestions.length > 50) prog.seenQuestions.shift();
-      }
-    }
-
-    prog.updatedAt = Date.now();
-    await prog.save();
+    const prog = await Progress.findOneAndUpdate(
+      { userId: req.user.id, topic },
+      pipeline,
+      { returnDocument: 'after', upsert: true, updatePipeline: true }
+    );
     res.json({ success: true, progress: prog });
   } catch (err) {
-    console.error('[progress] update error:', err);
+    logger.error(null, '[progress] update error:', err);
     res.status(500).json({ error: 'Failed to update progress' });
   }
 });

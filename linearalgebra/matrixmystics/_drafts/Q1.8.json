@@ -1,0 +1,436 @@
+{
+  "module": 1,
+  "topicId": "Q1.8",
+  "title": "Inverse of a linear function f(x) = 3x + 2",
+  "topic": "Existence and uniqueness of inverse, solving f(α) = 17.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M1Q8E1",
+        "question": "For f(x) = 3x + 2, what is f(0)?",
+        "options": [
+          "Zero",
+          "Two",
+          "Three",
+          "Five"
+        ],
+        "correct_option": "Two",
+        "explanation": "f(0) = 3(0) + 2 = 2, since the constant term alone remains when x is zero."
+      },
+      {
+        "id": "M1Q8E2",
+        "question": "For f(x) = 3x + 2, what is f(1)?",
+        "options": [
+          "Two",
+          "Three",
+          "Four",
+          "Five"
+        ],
+        "correct_option": "Five",
+        "explanation": "f(1) = 3(1) + 2 = 3 + 2 = 5."
+      },
+      {
+        "id": "M1Q8E3",
+        "question": "For f(x) = 3x + 2, what is f(2)?",
+        "options": [
+          "Six",
+          "Seven",
+          "Eight",
+          "Nine"
+        ],
+        "correct_option": "Eight",
+        "explanation": "f(2) = 3(2) + 2 = 6 + 2 = 8."
+      },
+      {
+        "id": "M1Q8E4",
+        "question": "If f(α) = 17, the equation 3α + 2 = 17 is set up using which step?",
+        "options": [
+          "Substitution of x = α",
+          "Multiplying by three",
+          "Squaring both sides",
+          "Dividing by two"
+        ],
+        "correct_option": "Substitution of x = α",
+        "explanation": "Replacing x by α in f(x) = 3x + 2 produces 3α + 2 = 17 directly."
+      },
+      {
+        "id": "M1Q8E5",
+        "question": "What is α if 3α + 2 = 17?",
+        "options": [
+          "Three",
+          "Four",
+          "Five",
+          "Six"
+        ],
+        "correct_option": "Five",
+        "explanation": "3α + 2 = 17 gives 3α = 15, so α = 5."
+      },
+      {
+        "id": "M1Q8E6",
+        "question": "Is f(x) = 3x + 2 one-to-one?",
+        "options": [
+          "Yes, always",
+          "Never one-to-one",
+          "Only at zero",
+          "Only at two"
+        ],
+        "correct_option": "Yes, always",
+        "explanation": "A non-constant linear function with nonzero slope is always one-to-one on ℝ."
+      },
+      {
+        "id": "M1Q8E7",
+        "question": "For what x is f(x) = 0, where f(x) = 3x + 2?",
+        "options": [
+          "x = -2/3",
+          "x = -1/3",
+          "x = 1/3",
+          "x = 2/3"
+        ],
+        "correct_option": "x = -2/3",
+        "explanation": "3x + 2 = 0 gives x = -2/3, the unique root of this linear function."
+      },
+      {
+        "id": "M1Q8E8",
+        "question": "For what x is f(x) = 8, where f(x) = 3x + 2?",
+        "options": [
+          "x = one",
+          "x = two",
+          "x = three",
+          "x = four"
+        ],
+        "correct_option": "x = two",
+        "explanation": "3x + 2 = 8 gives 3x = 6, so x = 2."
+      },
+      {
+        "id": "M1Q8E9",
+        "question": "Solve α: 3α = 15.",
+        "options": [
+          "α = three",
+          "α = four",
+          "α = five",
+          "α = six"
+        ],
+        "correct_option": "α = five",
+        "explanation": "Dividing both sides by 3 yields α = 15/3 = 5."
+      },
+      {
+        "id": "M1Q8E10",
+        "question": "Does f(x) = 3x + 2 have a unique inverse?",
+        "options": [
+          "Yes, one inverse",
+          "No, none",
+          "Two inverses",
+          "Many inverses"
+        ],
+        "correct_option": "Yes, one inverse",
+        "explanation": "Nonzero slope makes f bijective on ℝ, so exactly one inverse function exists."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M1Q8M1",
+        "question": "The inverse function of f(x) = 3x + 2 is f⁻¹(y) = ?",
+        "options": [
+          "(y - 2)/3",
+          "(y + 2)/3",
+          "3y + 2",
+          "3y - 2"
+        ],
+        "correct_option": "(y - 2)/3",
+        "explanation": "Solving y = 3x + 2 for x gives x = (y - 2)/3, which is f⁻¹(y)."
+      },
+      {
+        "id": "M1Q8M2",
+        "question": "Verify: what is f(f⁻¹(17))?",
+        "options": [
+          "Five",
+          "Ten",
+          "Seventeen",
+          "Twenty"
+        ],
+        "correct_option": "Seventeen",
+        "explanation": "By definition of inverse, f(f⁻¹(y)) = y, so f(f⁻¹(17)) = 17."
+      },
+      {
+        "id": "M1Q8M3",
+        "question": "Why is f(x) = 3x + 2 invertible but f(x) = x² is not, over ℝ?",
+        "options": [
+          "3x + 2 is linear",
+          "x² has slope two",
+          "3x + 2 is parabola",
+          "x² is constant"
+        ],
+        "correct_option": "3x + 2 is linear",
+        "explanation": "A nonzero-slope linear map is one-to-one, while x² maps ±x to the same value and is not."
+      },
+      {
+        "id": "M1Q8M4",
+        "question": "The graph of f(x) = 3x + 2 is a line with slope equal to which number?",
+        "options": [
+          "Two",
+          "Three",
+          "Five",
+          "Six"
+        ],
+        "correct_option": "Three",
+        "explanation": "The coefficient of x gives the slope, so the slope is 3."
+      },
+      {
+        "id": "M1Q8M5",
+        "question": "Does a horizontal line y = 17 intersect the graph of f(x) = 3x + 2 at exactly how many points?",
+        "options": [
+          "Zero points",
+          "One point",
+          "Two points",
+          "Three points"
+        ],
+        "correct_option": "One point",
+        "explanation": "A non-horizontal line meets any horizontal line in exactly one point, here at x = 5."
+      },
+      {
+        "id": "M1Q8M6",
+        "question": "Does a horizontal line y = 4 intersect f(x) = x² at how many points?",
+        "options": [
+          "Zero points",
+          "One point",
+          "Two points",
+          "Three points"
+        ],
+        "correct_option": "Two points",
+        "explanation": "x² = 4 gives x = ±2, so the parabola is crossed at two points."
+      },
+      {
+        "id": "M1Q8M7",
+        "question": "If f(x) = 3x + 2 and f(α) = 5, find α.",
+        "options": [
+          "α = one",
+          "α = two",
+          "α = three",
+          "α = four"
+        ],
+        "correct_option": "α = one",
+        "explanation": "3α + 2 = 5 gives 3α = 3, so α = 1."
+      },
+      {
+        "id": "M1Q8M8",
+        "question": "If f(α) = 11 for f(x) = 3x + 2, find α.",
+        "options": [
+          "α = two",
+          "α = three",
+          "α = four",
+          "α = five"
+        ],
+        "correct_option": "α = three",
+        "explanation": "3α + 2 = 11 gives 3α = 9, so α = 3."
+      },
+      {
+        "id": "M1Q8M9",
+        "question": "The function f(x) = 3x + 2 is called which type, because its graph is a straight line?",
+        "options": [
+          "Quadratic only",
+          "Exponential type",
+          "Linear type",
+          "Logarithmic type"
+        ],
+        "correct_option": "Linear type",
+        "explanation": "An equation of the form ax + b produces a straight line and is called linear."
+      },
+      {
+        "id": "M1Q8M10",
+        "question": "The inverse of f(x) = 3x + 2 is also which type of function?",
+        "options": [
+          "Quadratic only",
+          "Linear function",
+          "Cubic curve",
+          "Constant map"
+        ],
+        "correct_option": "Linear function",
+        "explanation": "f⁻¹(y) = (y - 2)/3 has the form ay + b, so it is also linear."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M1Q8H1",
+        "question": "Show that f(x) = mx + c is invertible for any value of m that satisfies which condition?",
+        "options": [
+          "m equals zero",
+          "m nonzero",
+          "m positive only",
+          "m negative only"
+        ],
+        "correct_option": "m nonzero",
+        "explanation": "If m ≠ 0 the slope is nonzero and the map is one-to-one, hence invertible."
+      },
+      {
+        "id": "M1Q8H2",
+        "question": "Find the inverse of f(x) = 3x + 2 in the form f⁻¹(y) = ay + b.",
+        "options": [
+          "y/3 - 2/3",
+          "y/3 + 2/3",
+          "3y - 2",
+          "3y + 2"
+        ],
+        "correct_option": "y/3 - 2/3",
+        "explanation": "Solving y = 3x + 2 gives x = y/3 - 2/3, so a = 1/3, b = -2/3."
+      },
+      {
+        "id": "M1Q8H3",
+        "question": "If f(α) = 17 has a unique solution for f(x) = 3x + 2, what does that imply about the slope?",
+        "options": [
+          "Slope equals zero",
+          "Slope nonzero",
+          "Slope undefined",
+          "Slope equals two"
+        ],
+        "correct_option": "Slope nonzero",
+        "explanation": "Uniqueness of the solution is exactly the one-to-one condition guaranteed by nonzero slope."
+      },
+      {
+        "id": "M1Q8H4",
+        "question": "Is f(x) = x² - 10 invertible over all real numbers?",
+        "options": [
+          "Yes, always",
+          "No, not invertible",
+          "Only at zero",
+          "Only at ten"
+        ],
+        "correct_option": "No, not invertible",
+        "explanation": "f(x) = x² - 10 satisfies f(3) = f(-3), so it is not one-to-one on ℝ."
+      },
+      {
+        "id": "M1Q8H5",
+        "question": "For f(x) = x³ - x² - 10x + 2, at most how many α satisfy f(α) = -22?",
+        "options": [
+          "Exactly one",
+          "Exactly two",
+          "At most three",
+          "Exactly four"
+        ],
+        "correct_option": "At most three",
+        "explanation": "A cubic polynomial has at most three real roots, so at most three α can give f(α) = -22."
+      },
+      {
+        "id": "M1Q8H6",
+        "question": "If f is linear with non-zero slope, prove f is always which of the following?",
+        "options": [
+          "Constant function",
+          "Invertible function",
+          "Quadratic only",
+          "Many-to-one map"
+        ],
+        "correct_option": "Invertible function",
+        "explanation": "Nonzero slope gives one-to-one, and a one-to-one linear function is bijective, hence invertible."
+      },
+      {
+        "id": "M1Q8H7",
+        "question": "State the inverse formula of f(x) = (1/3)(x - 2).",
+        "options": [
+          "f⁻¹(y) = 3y + 2",
+          "f⁻¹(y) = 3y - 2",
+          "f⁻¹(y) = y/3 + 2",
+          "f⁻¹(y) = y/3 - 2"
+        ],
+        "correct_option": "f⁻¹(y) = 3y + 2",
+        "explanation": "From y = (x - 2)/3 we get x = 3y + 2, so f⁻¹(y) = 3y + 2."
+      },
+      {
+        "id": "M1Q8H8",
+        "question": "For f(x) = 3x + 2, what is f(f(0))?",
+        "options": [
+          "Two",
+          "Five",
+          "Eight",
+          "Eleven"
+        ],
+        "correct_option": "Eight",
+        "explanation": "f(0) = 2, then f(2) = 3(2) + 2 = 8, so f(f(0)) = 8."
+      },
+      {
+        "id": "M1Q8H9",
+        "question": "For f(x) = 3x + 2, solve f(f(α)) = 17.",
+        "options": [
+          "α = one",
+          "α = two",
+          "α = three",
+          "α = four"
+        ],
+        "correct_option": "α = one",
+        "explanation": "f(f(α)) = 3(3α+2)+2 = 9α+8 = 17 gives 9α = 9, so α = 1."
+      },
+      {
+        "id": "M1Q8H10",
+        "question": "The condition 'f is invertible' is equivalent to 'f is bijective', meaning f is both which pair?",
+        "options": [
+          "One-to-one and onto",
+          "Constant and linear",
+          "Even and odd",
+          "Discrete and finite"
+        ],
+        "correct_option": "One-to-one and onto",
+        "explanation": "Bijectivity is the combination of injectivity (one-to-one) and surjectivity (onto)."
+      }
+    ],
+    "real_life_application": [
+      {
+        "id": "M1Q8R1",
+        "question": "Temperature conversion is C = (5/9)(F - 32). At what F is C = 100?",
+        "options": [
+          "180",
+          "200",
+          "212",
+          "232"
+        ],
+        "correct_option": "212",
+        "explanation": "100 = (5/9)(F - 32) gives F - 32 = 180, so F = 212, the boiling point of water."
+      },
+      {
+        "id": "M1Q8R2",
+        "question": "Currency conversion uses USD = 0.012 · INR. If you have $100, how much is that in INR?",
+        "options": [
+          "8000",
+          "8200",
+          "8333.33",
+          "8500"
+        ],
+        "correct_option": "8333.33",
+        "explanation": "INR = USD/0.012 = 100/0.012 = 8333.33 rupees."
+      },
+      {
+        "id": "M1Q8R3",
+        "question": "Sales: Revenue = 50 · items - 10 · discount. If Revenue = 1260 and discount = 4, find items.",
+        "options": [
+          "Twenty-four",
+          "Twenty-five",
+          "Twenty-six",
+          "Twenty-seven"
+        ],
+        "correct_option": "Twenty-six",
+        "explanation": "1260 = 50i - 40 gives 50i = 1300, so i = 26 items exactly."
+      },
+      {
+        "id": "M1Q8R4",
+        "question": "Distance = 60 · time. If distance = 240 km, what is the time in hours?",
+        "options": [
+          "Two",
+          "Three",
+          "Four",
+          "Five"
+        ],
+        "correct_option": "Four",
+        "explanation": "Inverting gives time = 240/60 = 4 hours."
+      },
+      {
+        "id": "M1Q8R5",
+        "question": "Age model: Age = 2 · (years since birth) - 5. At what years-since-birth is Age = 21?",
+        "options": [
+          "Ten",
+          "Twelve",
+          "Thirteen",
+          "Fifteen"
+        ],
+        "correct_option": "Thirteen",
+        "explanation": "21 = 2t - 5 gives 2t = 26, so t = 13 years since birth."
+      }
+    ]
+  }
+}

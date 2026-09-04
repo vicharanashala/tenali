@@ -1,0 +1,449 @@
+{
+  "module": 4,
+  "missionId": 44,
+  "title": "Range Contains Span",
+  "original_question": "If the range contains points (a,b,c) and (d,e,f), then it also contains T = { α(a,b,c) + β(d,e,f) | α,β ∈ R }. This is because if (a,b,c) = A(x) and (d,e,f) = A(y), then A(αx+βy) = αA(x) + βA(y) = α(a,b,c) + β(d,e,f). The range is closed under addition and scaling — a subspace!",
+  "core_concept": "The range of a linear transformation is closed under linear combinations: if vectors v and w are in the range, then αv + βw is also in the range for any scalars α, β. This makes the range a subspace.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M4Q8E1",
+        "question": "If (1,0,0) and (0,1,0) are both in the range of A, is (1,1,0) also in the range?",
+        "options": [
+          "Yes, because (1,1,0) = (1,0,0) + (0,1,0) and the range is closed under addition",
+          "addition is t guaranteed",
+          "Only if A is invertible",
+          "Only for positive combinations"
+        ],
+        "correct_option": "Yes, because (1,1,0) = (1,0,0) + (0,1,0) and the range is closed under addition",
+        "explanation": "Step 1: (1,0,0) = A(x) and (0,1,0) = A(y). Step 2: A(x+y) = A(x)+A(y) = (1,1,0). Step 3: Since x+y is a valid input, (1,1,0) is in the range. This is additivity — the second property (after scaling) that makes the range a subspace."
+      },
+      {
+        "id": "M4Q8E2",
+        "question": "If v and w are in the range of A, what can we say about 3v + 2w?",
+        "options": [
+          "It is in the range (by closure under linear combinations)",
+          "It is never in the range",
+          "Only if v and w are parallel",
+          "Only for specific matrices A"
+        ],
+        "correct_option": "It is in the range (by closure under linear combinations)",
+        "explanation": "Step 1: v = A(x) and w = A(y). Step 2: A(3x+2y) = 3A(x)+2A(y) = 3v+2w. Step 3: Since 3x+2y is a valid input, 3v+2w is in the range. This is closure under linear combinations — the most general closure property of subspaces."
+      },
+      {
+        "id": "M4Q8E3",
+        "question": "The property A(x+y) = A(x) + A(y) is called:",
+        "options": [
+          "Homogeneity",
+          "Additivity",
+          "Commutativity",
+          "Distributivity"
+        ],
+        "correct_option": "Additivity",
+        "explanation": "Step 1: A(x+y) = A(x)+A(y) says the map preserves vector addition. Step 2: This is the additivity property of linear maps. Step 3: Together with homogeneity A(αx) = αA(x), it defines linearity — and additivity is what makes the range closed under addition."
+      },
+      {
+        "id": "M4Q8E4",
+        "question": "If the range of A contains (1,2,3) and (4,5,6), it must also contain:",
+        "options": [
+          "Only these two vectors",
+          "All linear combinations α(1,2,3)+β(4,5,6)",
+          "Only their sum (5,7,9)",
+          "Only their difference (-3,-3,-3)"
+        ],
+        "correct_option": "All linear combinations α(1,2,3)+β(4,5,6)",
+        "explanation": "Step 1: By closure under scaling, the range contains α(1,2,3) and β(4,5,6). Step 2: By closure under addition, it contains their sum. Step 3: The entire span = {α(1,2,3)+β(4,5,6)} is in the range — closure under linear combinations builds the full subspace from known elements."
+      },
+      {
+        "id": "M4Q8E5",
+        "question": "The span of two linearly independent vectors in R³ is:",
+        "options": [
+          "A line)",
+          "A plane through the origin",
+          "A point)",
+          "All of R³)"
+        ],
+        "correct_option": "A plane through the origin",
+        "explanation": "Step 1: Two independent vectors span a 2D subspace. Step 2: A 2D subspace of R³ is a plane through the origin. Step 3: The plane contains all linear combinations of the two vectors — this is the geometric meaning of span."
+      },
+      {
+        "id": "M4Q8E6",
+        "question": "If (1,0,0) is in the range, is 5(1,0,0) = (5,0,0) in the range?",
+        "options": [
+          "Yes, by closure under scalar multiplication",
+          "only the original vector is guaranteed",
+          "Only if A is invertible",
+          "Only for integers — does t match"
+        ],
+        "correct_option": "Yes, by closure under scalar multiplication",
+        "explanation": "Step 1: (1,0,0) = A(x). Step 2: A(5x) = 5A(x) = (5,0,0). Step 3: Scalar multiplication closure ensures all multiples are in the range — combining with addition closure, the range is a full subspace."
+      },
+      {
+        "id": "M4Q8E7",
+        "question": "A subspace must be closed under:",
+        "options": [
+          "Scalar multiplication only",
+          "Addition only — does t match",
+          "Both scalar multiplication and addition",
+          "Neither)"
+        ],
+        "correct_option": "Both scalar multiplication and addition",
+        "explanation": "Step 1: Subspace axioms: (1) contains zero, (2) closed under addition, (3) closed under scalar multiplication. Step 2: The range satisfies all three: A(0)=0, A(x+y)=A(x)+A(y), A(αx)=αA(x). Step 3: These three properties are what make the range a subspace — the defining structure of linear algebra."
+      },
+      {
+        "id": "M4Q8E8",
+        "question": "If the range contains the vectors (2,1,0) and (0,1,2), it also contains:",
+        "options": [
+          "Only these two vectors (x)",
+          "(2,2,2) = (2,1,0)+(0,1,2)",
+          "Only multiples of (2,1,0) (x)",
+          "Only multiples of (0,1,2) (x)"
+        ],
+        "correct_option": "(2,2,2) = (2,1,0)+(0,1,2)",
+        "explanation": "Step 1: Both vectors are in the range. Step 2: By additivity, (2,1,0)+(0,1,2) = (2,2,2) is also in the range. Step 3: In fact, the entire span of these two vectors is in the range — addition and scaling together generate all linear combinations."
+      },
+      {
+        "id": "M4Q8E9",
+        "question": "If v is in the range of A and α is a scalar, what is A(αx) where v = A(x)?",
+        "options": [
+          "αv",
+          "v",
+          "α + v",
+          "v/α"
+        ],
+        "correct_option": "αv",
+        "explanation": "Step 1: v = A(x). Step 2: A(αx) = αA(x) = αv by homogeneity. Step 3: Scaling the input by α scales the output by α — this is the homogeneity property that ensures the range is closed under scaling."
+      },
+      {
+        "id": "M4Q8E10",
+        "question": "The range of a linear map A : R² → R² with rank 2 is:",
+        "options": [
+          "A line through the origin",
+          "The entire R²",
+          "Just the origin",
+          "A circle)"
+        ],
+        "correct_option": "The entire R²",
+        "explanation": "Step 1: Rank = 2 means dim(range) = 2. Step 2: The only 2D subspace of R² is R² itself. Step 3: The range is all of R² — every output vector is achievable. The matrix is surjective (onto)."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M4Q8M1",
+        "question": "If the range of A contains (1,0,0), (0,1,0), and (0,0,1), what is the range?",
+        "options": [
+          "A line (x)",
+          "A plane (x)",
+          "All of R³",
+          "A point (x)"
+        ],
+        "correct_option": "All of R³",
+        "explanation": "Step 1: The three standard basis vectors are in the range. Step 2: By closure under linear combinations, span{(1,0,0),(0,1,0),(0,0,1)} = R³ is in the range. Step 3: The range is all of R³ — knowing the basis vectors are in the range guarantees the entire space is the range."
+      },
+      {
+        "id": "M4Q8M2",
+        "question": "For A : R³ → R², if the range contains (1,2) and (3,4), what is the maximum possible dimension of the range?",
+        "options": [
+          "1",
+          "2",
+          "3",
+          "5"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: The range is a subspace of R² (the codomain). Step 2: The maximum dimension of a subspace of R² is 2. Step 3: Since (1,2) and (3,4) are independent in R², the range is all of R² (dimension 2). The codomain limits the maximum range dimension."
+      },
+      {
+        "id": "M4Q8M3",
+        "question": "If v₁ = (1,2,3) and v₂ = (2,4,6) are in the range of A, what is the dimension of their span?",
+        "options": [
+          "1",
+          "2 (x)",
+          "3 (x)",
+          "0 (x)"
+        ],
+        "correct_option": "1",
+        "explanation": "Step 1: v₂ = 2v₁, so the vectors are linearly dependent. Step 2: span{v₁,v₂} = span{v₁}, a line. Step 3: The dimension is 1, not 2 — adding a dependent vector doesn't increase the span. Knowing which vectors are independent is key to determining the range's true dimension."
+      },
+      {
+        "id": "M4Q8M4",
+        "question": "The range of A contains the plane x + y + z = 0. What is the dimension of the range?",
+        "options": [
+          "1",
+          "2",
+          "3",
+          "0"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: x + y + z = 0 is a 2D plane through the origin in R³. Step 2: The range contains this plane, so dim(range) ≥ 2. Step 3: If this is exactly the range, dim(range) = 2. The plane equation defines the range's boundary in R³."
+      },
+      {
+        "id": "M4Q8M5",
+        "question": "If A has range = span{(1,2,3)} and B has range = span{(4,5,6)}, what is the range of A + B?",
+        "options": [
+          "span{(1,2,3)} — does t match",
+          "span{(4,5,6)} — does t match",
+          "span{(1,2,3),(4,5,6)} — a plane (if independent)",
+          "Just the origin — does t match"
+        ],
+        "correct_option": "span{(1,2,3),(4,5,6)} — a plane (if independent)",
+        "explanation": "Step 1: (A+B)(x) = A(x) + B(x). Step 2: The range of A+B contains outputs from both A and B, plus their sums. Step 3: The range of A+B contains span{(1,2,3),(4,5,6)}, which is a plane since the vectors are independent. The sum of two rank-1 maps can have rank 2."
+      },
+      {
+        "id": "M4Q8M6",
+        "question": "If A is a 3×3 matrix with rank 2, and the range contains two independent vectors, what geometric object is the range?",
+        "options": [
+          "A line through the origin (x)",
+          "A plane through the origin",
+          "All of R³)",
+          "A point)"
+        ],
+        "correct_option": "A plane through the origin",
+        "explanation": "Step 1: Two independent vectors span a 2D subspace. Step 2: Rank 2 means the range IS 2D. Step 3: The range is exactly the plane through the origin spanned by these two vectors — rank confirms the span's dimension."
+      },
+      {
+        "id": "M4Q8M7",
+        "question": "If v is in the range and w is NOT in the range, must v + w be in the range?",
+        "options": [
+          "because v + w is always in the range",
+          "No — adding a non-range vector can leave the range",
+          "Only if w is in the null space",
+          "Only for specific matrices"
+        ],
+        "correct_option": "No — adding a non-range vector can leave the range",
+        "explanation": "Step 1: v ∈ range(A) but w ∉ range(A). Step 2: If v+w were in the range, then (v+w) - v = w would also be in the range (by closure under subtraction), contradicting w ∉ range(A). Step 3: Therefore v+w ∉ range(A). This shows the range is exactly closed — nothing more, nothing less."
+      },
+      {
+        "id": "M4Q8M8",
+        "question": "The range of a linear map is also known as:",
+        "options": [
+          "The kernel)",
+          "The column space (or image)",
+          "The null space",
+          "The domain)"
+        ],
+        "correct_option": "The column space (or image)",
+        "explanation": "Step 1: The range = {Ax : x ∈ domain}. Step 2: For a matrix, this equals the span of columns = column space. Step 3: In abstract algebra, the range is called the image of the map. These three terms (range, column space, image) are synonymous."
+      },
+      {
+        "id": "M4Q8M9",
+        "question": "If A : R³ → R³ has range = R³ (full rank), can every vector b ∈ R³ be written as b = Ax for some x?",
+        "options": [
+          "Yes — full rank means the range is all of R³",
+          "— some vectors are unreachable",
+          "Only if b has integer components",
+          "Only if A is symmetric"
+        ],
+        "correct_option": "Yes — full rank means the range is all of R³",
+        "explanation": "Step 1: Full rank (rank = 3) means dim(range) = 3 = dim(R³). Step 2: The range is a 3D subspace of R³, which must be R³ itself. Step 3: Every b ∈ R³ is in the range, so Ax = b always has a solution. Full rank guarantees solvability."
+      },
+      {
+        "id": "M4Q8M10",
+        "question": "If the range of A contains the vectors (1,0,1) and (0,1,1), what vector is NOT necessarily in the range?",
+        "options": [
+          "(1,1,2) = (1,0,1)+(0,1,1)",
+          "(1,-1,0) = (1,0,1)-(0,1,1)",
+          "(2,0,2) = 2(1,0,1)",
+          "(0,0,1)"
+        ],
+        "correct_option": "(0,0,1)",
+        "explanation": "Step 1: (1,1,2) = sum ✓, (1,-1,0) = difference ✓, (2,0,2) = scaling ✓ — all in range by closure. Step 2: (0,0,1) is NOT a linear combination of (1,0,1) and (0,1,1). Step 3: To check: α(1,0,1) + β(0,1,1) = (α, β, α+β). For this to equal (0,0,1), we need α=0, β=0, α+β=1 — impossible. So (0,0,1) may not be in the range."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M4Q8H1",
+        "question": "Prove that the range of A is a subspace by showing it satisfies all three subspace axioms.",
+        "options": [
+          "A(0)=0 (contains zero), A(x+y)=A(x)+A(y) (closed under addition), A(αx)=αA(x) (closed under scaling)",
+          "Only closure under addition is needed",
+          "The range is always a line, which is a subspace",
+          "This requires A to be invertible"
+        ],
+        "correct_option": "A(0)=0 (contains zero), A(x+y)=A(x)+A(y) (closed under addition), A(αx)=αA(x) (closed under scaling)",
+        "explanation": "Step 1: A(0) = A(0·x) = 0·A(x) = 0, so zero is in the range. Step 2: A(x+y) = A(x)+A(y), so the range is closed under addition. Step 3: A(αx) = αA(x), so the range is closed under scaling. All three axioms are satisfied — this is the complete proof that the range of any linear map is a subspace."
+      },
+      {
+        "id": "M4Q8H2",
+        "question": "If range(A) = span{v₁, v₂} (a 2D plane in R³), and b is NOT in this plane, what is the closest point in range(A) to b?",
+        "options": [
+          "The projection of b onto the plane",
+          "b itself)",
+          "The zero vector — does t match (xx)",
+          "v₁ + v₂)"
+        ],
+        "correct_option": "The projection of b onto the plane",
+        "explanation": "Step 1: The range is a 2D plane. Step 2: For b not in the plane, the closest point is the orthogonal projection onto the plane. Step 3: The error b - proj is perpendicular to the plane (in N(Aᵀ)). This projection is the foundation of least-squares approximation."
+      },
+      {
+        "id": "M4Q8H3",
+        "question": "If A : R³ → R³ has range = span{(1,0,0), (0,1,0)} (the xy-plane), what is the null space?",
+        "options": [
+          "The xy-plane",
+          "The z-axis: t(0,0,1)",
+          "All of R³",
+          "Just the origin"
+        ],
+        "correct_option": "The z-axis: t(0,0,1)",
+        "explanation": "Step 1: Rank = 2 (range is 2D). Step 2: By Rank-Nullity, nullity = 3 - 2 = 1. Step 3: The z-axis t(0,0,1) is 1D and perpendicular to the xy-plane (row space). The null space is the z-axis — the direction perpendicular to the range."
+      },
+      {
+        "id": "M4Q8H4",
+        "question": "If A : R⁴ → R³ has rank 3 (full column rank for a non-square matrix), what is the range?",
+        "options": [
+          "A line in R³",
+          "A plane in R³",
+          "All of R³",
+          "All of R⁴"
+        ],
+        "correct_option": "All of R³",
+        "explanation": "Step 1: Rank = 3 and the codomain is R³. Step 2: dim(range) = 3 = dim(R³). Step 3: The range is all of R³ — every 3D output vector is achievable. A is surjective (onto) despite being rectangular."
+      },
+      {
+        "id": "M4Q8H5",
+        "question": "For A : R³ → R², the maximum possible rank is 2. If rank = 2, the range is:",
+        "options": [
+          "A line in R²",
+          "All of R²",
+          "All of R³",
+          "A plane in R³"
+        ],
+        "correct_option": "All of R²",
+        "explanation": "Step 1: The codomain is R², so the range is at most 2D. Step 2: Rank = 2 means dim(range) = 2. Step 3: A 2D subspace of R² is R² itself. Every output in R² is reachable — the rectangular matrix is surjective."
+      },
+      {
+        "id": "M4Q8H6",
+        "question": "If range(A) = span{v₁} and range(B) = span{v₂} where v₁ and v₂ are independent, what is the range of A + B?",
+        "options": [
+          "span{v₁+v₂} — a line",
+          "span{v₁,v₂} — a plane (at minimum)",
+          "Just the origin — does t match (xx)",
+          "All of Rⁿ)"
+        ],
+        "correct_option": "span{v₁,v₂} — a plane (at minimum)",
+        "explanation": "Step 1: (A+B) maps x to A(x) + B(x). Step 2: The range contains the sum of any output from A with any output from B. Step 3: Specifically, (A+B)(x₁+x₂) can produce combinations of v₁ and v₂. The range of A+B contains span{v₁,v₂} (a plane) at minimum — the sum of two rank-1 maps has rank ≥ 1 and ≤ 2."
+      },
+      {
+        "id": "M4Q8H7",
+        "question": "For a rank-1 matrix A, the range is a line spanned by one vector. If A = [[1,2],[3,6]], what is the range?",
+        "options": [
+          "t(1,2) — spanned by the rows (x)",
+          "t(1,3) — spanned by the columns",
+          "All of R²)",
+          "Just the origin — does t match (x)"
+        ],
+        "correct_option": "t(1,3) — spanned by the columns",
+        "explanation": "Step 1: The range = column space = span of columns of A. Step 2: Columns are (1,3) and (2,6) = 2(1,3). Step 3: The range is the line t(1,3). For rank-1 matrices, the range is always a line spanned by the common column direction."
+      },
+      {
+        "id": "M4Q8H8",
+        "question": "If range(A) = span{(1,1,0), (0,1,1)}, what is the dimension of the left null space N(Aᵀ)?",
+        "options": [
+          "0",
+          "1",
+          "2",
+          "3"
+        ],
+        "correct_option": "1",
+        "explanation": "Step 1: range(A) is 2D (rank = 2). Step 2: dim(N(Aᵀ)) = m - rank = 3 - 2 = 1. Step 3: The left null space is 1D — a line perpendicular to the range plane. It represents the unreachable output direction."
+      },
+      {
+        "id": "M4Q8H9",
+        "question": "Can the range of a linear map be an open set (not containing its boundary)?",
+        "options": [
+          "No — the range is always a subspace, which is closed",
+          "if the map is t continuous",
+          "Only for infinite-dimensional spaces",
+          "Only if the range is all of Rⁿ"
+        ],
+        "correct_option": "No — the range is always a subspace, which is closed",
+        "explanation": "Step 1: Subspaces are closed under limits (in finite dimensions). Step 2: A subspace contains 0 and is closed under scaling, so it includes all boundary points (like 0 as a limit of αv as α → 0). Step 3: The range is always a closed set — subspaces cannot be open (except the trivial case of all of Rⁿ, which is both open and closed)."
+      },
+      {
+        "id": "M4Q8H10",
+        "question": "If range(A) is the plane 2x - y + z = 0 in R³, find a vector NOT in the range.",
+        "options": [
+          "(1,2,0) — check: 2(1)-2+0=0, so it IS in the range",
+          "(1,0,0) — check: 2(1)-0+0=2≠0, so NOT in range",
+          "(2,1,1) — check: 4-1+1=4≠0",
+          "(1,1,-1) — check: 2-1-1=0, so it IS in range"
+        ],
+        "correct_option": "(1,0,0) — check: 2(1)-0+0=2≠0, so NOT in range",
+        "explanation": "Step 1: The range is the plane 2x - y + z = 0. Step 2: Check (1,0,0): 2(1) - 0 + 0 = 2 ≠ 0. Step 3: So (1,0,0) is NOT in the range — it does not satisfy the plane equation. Finding vectors outside the range is useful for understanding what the transformation cannot produce."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "id": "M4Q8R1",
+      "question": "In colour mixing, if a display can produce pure red (255,0,0) and pure blue (0,0,255), what colours can it produce from just these two?",
+      "options": [
+        "Only red and blue",
+        "All colours in the span of red and blue (purples, magentas, etc.)",
+        "Only black and white",
+        "All possible colours"
+      ],
+      "correct_option": "All colours in the span of red and blue (purples, magentas, etc.)",
+      "explanation": "Step 1: Red and blue are in the range of the display system. Step 2: By closure under linear combinations, α(red) + β(blue) is also achievable. Step 3: The span includes all purple/magenta shades, plus black (α=β=0). The closure under linear combinations determines the full gamut of achievable colours."
+    },
+    {
+      "id": "M4Q8R2",
+      "question": "In sound synthesis, if a synthesiser can produce a 440Hz tone (A4) and a 554Hz tone (C#5), what sounds can it create from these two?",
+      "options": [
+        "Only the two individual tones",
+        "Any weighted combination of the two tones (chords, harmonics, etc.)",
+        "Only the sum of the two",
+        "Only the difference"
+      ],
+      "correct_option": "Any weighted combination of the two tones (chords, harmonics, etc.)",
+      "explanation": "Step 1: Both tones are in the range of the synthesiser. Step 2: By closure under scaling and addition, any combination α(A4) + β(C#5) is achievable. Step 3: The span of two frequencies gives an entire family of possible sounds — the basis for chord synthesis. Closure under linear combinations creates musical variety."
+    },
+    {
+      "id": "M4Q8R3",
+      "question": "A computer display has RGB basis vectors. The span of (1,0,0), (0,1,0), (0,0,1) covers the full colour gamut. If the display can only produce red and green (not blue), what is its colour range?",
+      "options": [
+        "Only the xy-plane of colours (no blue component)",
+        "Only the xy-plane of colours ( blue component) (x)",
+        "Only red and green",
+        "A 1D line"
+      ],
+      "correct_option": "Only the xy-plane of colours (no blue component)",
+      "explanation": "Step 1: With only red and green, the range = span{(1,0,0),(0,1,0)} = the xy-plane. Step 2: This plane contains all colours with zero blue component — yellows, oranges, browns, etc. Step 3: No colour with a blue component (purples, whites) can be produced. The range's span directly determines the achievable gamut."
+    },
+    {
+      "id": "M4Q8R4",
+      "question": "In linear regression, the range of the design matrix X is the space of all possible predictions. If X has 2 independent columns, the predictions form:",
+      "options": [
+        "A 1D line of possible predictions (x)",
+        "A 2D plane of possible predictions",
+        "All of Rⁿ",
+        "Just a single prediction"
+      ],
+      "correct_option": "A 2D plane of possible predictions",
+      "explanation": "Step 1: The design matrix X maps coefficients to predictions: ŷ = Xβ. Step 2: The range of X is the span of its columns. Step 3: With 2 independent columns, the range is a 2D plane — the set of all linearly predictable outcomes. The span determines what the model can predict."
+    },
+    {
+      "id": "M4Q8R5",
+      "question": "A robot with 3 joints can move in 3D space. If the robot's motion matrix has rank 2, it can reach positions in a 2D plane. The direction it CANNOT reach is:",
+      "options": [
+        "Any direction in the plane",
+        "The normal to the plane (null space direction)",
+        "All 3D directions",
+        "Only the origin"
+      ],
+      "correct_option": "The normal to the plane (null space direction)",
+      "explanation": "Step 1: Rank 2 means the range (reachable positions) is a 2D plane. Step 2: The null space direction is perpendicular to the row space and is unreachable. Step 3: The robot cannot move in the direction normal to its reachable plane — this fundamental limitation is determined by the null space."
+    },
+    {
+      "id": "M4Q8R6",
+      "question": "In PCA, the principal components span the range of the data covariance matrix. If you keep only the top 2 components from 10D data, the range is:",
+      "options": [
+        "10D",
+        "2D",
+        "1D",
+        "0D"
+      ],
+      "correct_option": "2D",
+      "explanation": "Step 1: The top 2 principal components span a 2D subspace. Step 2: This 2D range captures the most variance in the data. Step 3: The remaining 8 dimensions (null space) contain noise and are discarded. PCA works by identifying the range of the covariance matrix — the subspace of maximum information."
+    }
+  ]
+}

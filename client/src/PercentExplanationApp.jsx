@@ -481,7 +481,7 @@ function generateQuestion(lastTemplateIdx = -1, attempt = 0) {
 // MAIN EXPORT
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function PercentExplanationApp({ onBack, PercentApp }) {
+export default function PercentExplanationApp({ onBack, PercentApp: _PercentApp }) {
   // Views: 'LEVELS' | 'EXPLANATION_L1' | 'QUIZ'
   const [view, setView] = useState('LEVELS');
   const [initialStep, setInitialStep] = useState(null);
@@ -1422,12 +1422,14 @@ function PercentStory({ onAdvance, onBack, onContinue }) {
 
   useEffect(() => {
     if (!isRevealBeat) {
+       
       setRevealState('idle');
       return undefined;
     }
     setRevealState('animating');
     const revealTimer = window.setTimeout(() => setRevealState('complete'), 1500);
     return () => window.clearTimeout(revealTimer);
+     
   }, [isRevealBeat]);
 
   const nextBeat = () => {

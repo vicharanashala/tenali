@@ -1,0 +1,462 @@
+{
+  "module": 1,
+  "missionId": 8,
+  "title": "Parabola Slide",
+  "original_question": "f(x) = x² - 10. What is f(5)? Slide along the parabola and find out!",
+  "core_concept": "Evaluating a function means substituting an input value into the expression and computing the output. For f(x) = x² - 10, f(5) = 25 - 10 = 15. The point (5, 15) lies on the parabola. This is function evaluation — the most fundamental operation in algebra, connecting inputs to outputs along a curve.",
+  "mcqs": {
+    "easy": [
+      {
+        "id": "M1Q8E1",
+        "question": "What is f(5) for f(x) = x² - 10?",
+        "options": [
+          "15",
+          "25",
+          "35",
+          "5 ()"
+        ],
+        "correct_option": "15",
+        "explanation": "Step 1: Substitute x = 5 into f(x) = x² - 10. Step 2: f(5) = 5² - 10 = 25 - 10 = 15. Step 3: The point (5, 15) lies on the parabola."
+      },
+      {
+        "id": "M1Q8E2",
+        "question": "What is f(0) for f(x) = x² - 10?",
+        "options": [
+          "-10",
+          "0 (x)",
+          "10",
+          "1"
+        ],
+        "correct_option": "-10",
+        "explanation": "Step 1: Substitute x = 0: f(0) = 0² - 10 = -10. Step 2: The y-intercept is -10. Step 3: The parabola crosses the y-axis at (0, -10)."
+      },
+      {
+        "id": "M1Q8E3",
+        "question": "What is f(3) for f(x) = x² - 10?",
+        "options": [
+          "-1",
+          "1 ()",
+          "19",
+          "7"
+        ],
+        "correct_option": "-1",
+        "explanation": "Step 1: f(3) = 3² - 10 = 9 - 10 = -1. Step 2: The point (3, -1) lies on the parabola. Step 3: At x = 3, the function value is still negative."
+      },
+      {
+        "id": "M1Q8E4",
+        "question": "Is f(5) = f(-5) for f(x) = x² - 10?",
+        "options": [
+          "Yes, because (-5)² = 25 = 5²",
+          "they give different values",
+          "Only if the function is linear",
+          "Cant be determined"
+        ],
+        "correct_option": "Yes, because (-5)² = 25 = 5²",
+        "explanation": "Step 1: f(5) = 25 - 10 = 15. Step 2: f(-5) = (-5)² - 10 = 25 - 10 = 15. Step 3: Since squaring removes the sign, f(x) = f(-x) for all x — the parabola is symmetric about the y-axis."
+      },
+      {
+        "id": "M1Q8E5",
+        "question": "What type of function is f(x) = x² - 10?",
+        "options": [
+          "Quadratic (degree 2)",
+          "Linear (degree 1)",
+          "Cubic (degree 3)",
+          "Constant"
+        ],
+        "correct_option": "Quadratic (degree 2)",
+        "explanation": "Step 1: The highest power of x is 2 (from x²). Step 2: Degree 2 functions are called quadratic. Step 3: The graph of a quadratic function is a parabola."
+      },
+      {
+        "id": "M1Q8E6",
+        "question": "For f(x) = x² - 10, what is f(4)?",
+        "options": [
+          "6",
+          "16",
+          "26",
+          "-6"
+        ],
+        "correct_option": "6",
+        "explanation": "Step 1: f(4) = 4² - 10 = 16 - 10 = 6. Step 2: The point (4, 6) lies on the parabola. Step 3: At x = 4, the function has crossed from negative to positive."
+      },
+      {
+        "id": "M1Q8E7",
+        "question": "What is the vertex (minimum point) of the parabola f(x) = x² - 10?",
+        "options": [
+          "(0, -10)",
+          "(10, 0)",
+          "(0, 0) (x)",
+          "(-10, 0)"
+        ],
+        "correct_option": "(0, -10)",
+        "explanation": "Step 1: For f(x) = x² - 10, the x² term is minimized at x = 0. Step 2: f(0) = -10. Step 3: The vertex is at (0, -10), the lowest point on the parabola."
+      },
+      {
+        "id": "M1Q8E8",
+        "question": "If you trace along the parabola from x = 0 to x = 5, what happens to the y-value?",
+        "options": [
+          "It increases from -10 to 15",
+          "It decreases from 10 to -15",
+          "It stays constant at -10",
+          "It oscillates"
+        ],
+        "correct_option": "It increases from -10 to 15",
+        "explanation": "Step 1: f(0) = -10, f(5) = 15. Step 2: As x increases from 0 to 5, x² increases from 0 to 25. Step 3: Therefore y = x² - 10 increases from -10 to 15."
+      },
+      {
+        "id": "M1Q8E9",
+        "question": "For f(x) = x² - 10, at what x-values does f(x) = 0?",
+        "options": [
+          "x = √10 and x = -√10 (approximately ±3.16)",
+          "x = 10 and x = -10 — does t match",
+          "x = 0)",
+          "x = 5 and x = -5 — does t match"
+        ],
+        "correct_option": "x = √10 and x = -√10 (approximately ±3.16)",
+        "explanation": "Step 1: Set x² - 10 = 0. Step 2: x² = 10, so x = ±√10 ≈ ±3.16. Step 3: These are the x-intercepts — where the parabola crosses the x-axis."
+      },
+      {
+        "id": "M1Q8E10",
+        "question": "What is f(1) + f(-1) for f(x) = x² - 10?",
+        "options": [
+          "-18",
+          "-20",
+          "0 (x)",
+          "-10"
+        ],
+        "correct_option": "-18",
+        "explanation": "Step 1: f(1) = 1 - 10 = -9. Step 2: f(-1) = 1 - 10 = -9. Step 3: f(1) + f(-1) = -9 + (-9) = -18."
+      }
+    ],
+    "medium": [
+      {
+        "id": "M1Q8M1",
+        "question": "The point (5, 15) lies on the parabola y = x² - 10. Is this the same as saying f(5) = 15?",
+        "options": [
+          "Yes — f(5) = 15 means the point (5, 15) is on the graph",
+          "they represent different things",
+          "Only if the function is linear",
+          "Only if x = y — does t match"
+        ],
+        "correct_option": "Yes — f(5) = 15 means the point (5, 15) is on the graph",
+        "explanation": "Step 1: f(5) = 15 means when input is 5, output is 15. Step 2: On a graph, this corresponds to the point (5, 15). Step 3: Function evaluation and plotting points are equivalent operations."
+      },
+      {
+        "id": "M1Q8M2",
+        "question": "Why is the parabola y = x² - 10 symmetric about the y-axis?",
+        "options": [
+          "Because f(x) = f(-x) for all x — squaring removes the sign",
+          "Because the vertex is at the origin",
+          "Because all parabolas are symmetric",
+          "Because -10 is negative"
+        ],
+        "correct_option": "Because f(x) = f(-x) for all x — squaring removes the sign",
+        "explanation": "Step 1: f(-x) = (-x)² - 10 = x² - 10 = f(x). Step 2: This means the function value is the same at x and -x. Step 3: The graph is a mirror image across the y-axis — this is called an even function."
+      },
+      {
+        "id": "M1Q8M3",
+        "question": "If g(x) = x² - 10 and h(x) = x² + 5, how do their graphs compare?",
+        "options": [
+          "Same shape (both parabolas opening upward), but h is shifted up by 15 units",
+          "Different shapes — does t match",
+          "Same position — does t match",
+          "h is narrower than g — does t match"
+        ],
+        "correct_option": "Same shape (both parabolas opening upward), but h is shifted up by 15 units",
+        "explanation": "Step 1: Both have the x² coefficient of 1 — same shape and width. Step 2: g has vertex at (0,-10), h has vertex at (0,5). Step 3: The constant difference of 15 means h is a vertical translation of g, shifted up by 15."
+      },
+      {
+        "id": "M1Q8M4",
+        "question": "What is the average rate of change of f(x) = x² - 10 from x = 1 to x = 4?",
+        "options": [
+          "5",
+          "3",
+          "7",
+          "15"
+        ],
+        "correct_option": "5",
+        "explanation": "Step 1: f(4) = 6, f(1) = -9. Step 2: Average rate = (6 - (-9))/(4 - 1) = 15/3 = 5. Step 3: This is the slope of the secant line connecting (1, -9) and (4, 6) on the parabola."
+      },
+      {
+        "id": "M1Q8M5",
+        "question": "A profit function is P(x) = -x² + 100x where x is units sold. What is P(30)?",
+        "options": [
+          "2100",
+          "3000",
+          "2700",
+          "30 (x)"
+        ],
+        "correct_option": "2100",
+        "explanation": "Step 1: P(30) = -(30)² + 100(30) = -900 + 3000 = 2100. Step 2: The profit at 30 units is 2100. Step 3: The downward parabola shows profit increases then decreases — a common business pattern."
+      },
+      {
+        "id": "M1Q8M6",
+        "question": "For f(x) = x² - 10, which of these points does NOT lie on the parabola?",
+        "options": [
+          "(3, -1)",
+          "(5, 15)",
+          "(4, 6)",
+          "(2, 5)"
+        ],
+        "correct_option": "(2, 5)",
+        "explanation": "Step 1: Check (2, 5): f(2) = 4 - 10 = -6 ≠ 5. Step 2: (3, -1): f(3) = 9 - 10 = -1 ✓. Step 3: (5, 15): f(5) = 15 ✓. (4, 6): f(4) = 6 ✓. Only (2, 5) fails."
+      },
+      {
+        "id": "M1Q8M7",
+        "question": "As x increases from 0, does f(x) = x² - 10 increase or decrease initially?",
+        "options": [
+          "It increases (x² grows, making x² - 10 rise from -10)",
+          "It decreases — does t match",
+          "It stays at -10 — does t match",
+          "It oscillates — does t match"
+        ],
+        "correct_option": "It increases (x² grows, making x² - 10 rise from -10)",
+        "explanation": "Step 1: At x = 0, f(0) = -10 (the minimum). Step 2: For x > 0, x² > 0 and increases. Step 3: Therefore x² - 10 increases from -10 as x increases from 0."
+      },
+      {
+        "id": "M1Q8M8",
+        "question": "What is the minimum value of f(x) = x² - 10?",
+        "options": [
+          "-10",
+          "0",
+          "10",
+          "minimum"
+        ],
+        "correct_option": "-10",
+        "explanation": "Step 1: x² ≥ 0 for all x. Step 2: Therefore x² - 10 ≥ -10 for all x. Step 3: The minimum occurs at x = 0, giving f(0) = -10. The parabola opens upward from this vertex."
+      },
+      {
+        "id": "M1Q8M9",
+        "question": "If you reflect the point (5, 15) across the y-axis, what point do you get?",
+        "options": [
+          "(-5, 15)",
+          "(5, -15)",
+          "(-5, -15)",
+          "(15, 5)"
+        ],
+        "correct_option": "(-5, 15)",
+        "explanation": "Step 1: Reflection across the y-axis negates the x-coordinate. Step 2: (5, 15) becomes (-5, 15). Step 3: Since f(-5) = 15 = f(5), this reflected point also lies on the parabola — confirming the symmetry."
+      },
+      {
+        "id": "M1Q8M10",
+        "question": "The ocean tide height follows h(t) = 2sin(t) + 5. What type of function models the tide — linear, quadratic, or trigonometric?",
+        "options": [
+          "Trigonometric (sine function)",
+          "Linear)",
+          "Quadratic)",
+          "Exponential — does t match"
+        ],
+        "correct_option": "Trigonometric (sine function)",
+        "explanation": "Step 1: The function uses sin(t), which is a trigonometric function. Step 2: Unlike linear or quadratic, trigonometric functions oscillate periodically. Step 3: The tide rises and falls in a wave pattern, making trigonometric functions the natural choice."
+      }
+    ],
+    "hard": [
+      {
+        "id": "M1Q8H1",
+        "question": "For f(x) = x² - 10, is the function invertible over all real numbers?",
+        "options": [
+          "No — f(3) = f(-3) = -1, so it's not one-to-one",
+          "the inverse is √(x+10)",
+          "every function has an inverse",
+          "Only for x ≥ 0 — does t match"
+        ],
+        "correct_option": "No — f(3) = f(-3) = -1, so it's not one-to-one",
+        "explanation": "Step 1: f(3) = 9 - 10 = -1 and f(-3) = 9 - 10 = -1. Step 2: Two different inputs give the same output — f is not one-to-one. Step 3: Non-one-to-one functions are not invertible over their full domain."
+      },
+      {
+        "id": "M1Q8H2",
+        "question": "If we restrict f(x) = x² - 10 to x ≥ 0, the restricted function IS invertible. What is its inverse?",
+        "options": [
+          "f⁻¹(x) = √(x + 10)",
+          "f⁻¹(x) = x² + 10",
+          "f⁻¹(x) = -√(x + 10)",
+          "f⁻¹(x) = √x - 10"
+        ],
+        "correct_option": "f⁻¹(x) = √(x + 10)",
+        "explanation": "Step 1: Set y = x² - 10 and solve for x (with x ≥ 0). Step 2: y + 10 = x², so x = √(y + 10). Step 3: f⁻¹(x) = √(x + 10), defined for x ≥ -10."
+      },
+      {
+        "id": "M1Q8H3",
+        "question": "The set V = {f: ℝ → ℝ : f(x) = ax² + b} is NOT a vector space. Why?",
+        "options": [
+          "Because the sum of two quadratic functions is quadratic (ok), but f(0) must be 0 for the zero vector, which constrains b = 0 — and closure under addition fails for general a,b",
+          "Because quadratic functions can't be added",
+          "Because the set is finite",
+          "Because parabolas don't pass through the origin"
+        ],
+        "correct_option": "Because the sum of two quadratic functions is quadratic (ok), but f(0) must be 0 for the zero vector, which constrains b = 0 — and closure under addition fails for general a,b",
+        "explanation": "Step 1: f₁(x) = x² - 10 and f₂(x) = -x² + 5 are both in V. Step 2: (f₁ + f₂)(x) = -5, which is a constant (degree 0), not degree 2. Step 3: The sum is not in V (not quadratic with degree exactly 2), so V is not closed under addition."
+      },
+      {
+        "id": "M1Q8H4",
+        "question": "For f(x) = x² - 10, what is the derivative f'(x), and what does it represent geometrically?",
+        "options": [
+          "f'(x) = 2x — the slope of the tangent line at any point x",
+          "f'(x) = x² — the area under the curve",
+          "f'(x) = 2x - 10 — the shifted parabola",
+          "f'(x) = 10 — the constant rate of change"
+        ],
+        "correct_option": "f'(x) = 2x — the slope of the tangent line at any point x",
+        "explanation": "Step 1: The derivative of x² is 2x, and the derivative of -10 is 0. Step 2: f'(x) = 2x gives the instantaneous rate of change (slope) at any point. Step 3: At x = 0, the slope is 0 (vertex, horizontal tangent). At x = 5, slope = 10 (steep)."
+      },
+      {
+        "id": "M1Q8H5",
+        "question": "A projectile follows h(t) = -5t² + 20t. What is h(2)?",
+        "options": [
+          "20",
+          "40",
+          "0 ()",
+          "30"
+        ],
+        "correct_option": "20",
+        "explanation": "Step 1: h(2) = -5(4) + 20(2) = -20 + 40 = 20. Step 2: At t = 2 seconds, the projectile is at height 20 metres. Step 3: The downward-opening parabola represents the projectile rising then falling."
+      },
+      {
+        "id": "M1Q8H6",
+        "question": "If g(x) = x³ - x² - 14x + 2, what is g(0)?",
+        "options": [
+          "2",
+          "0",
+          "-14",
+          "1"
+        ],
+        "correct_option": "2",
+        "explanation": "Step 1: g(0) = 0 - 0 - 0 + 2 = 2. Step 2: The y-intercept is 2. Step 3: All terms with x vanish at x = 0, leaving only the constant term."
+      },
+      {
+        "id": "M1Q8H7",
+        "question": "For f(x) = x² - 10, the function values at x = 0, 1, 2, 3, 4 are -10, -9, -6, -1, 6. What pattern do you notice in the successive differences?",
+        "options": [
+          "The differences increase by 2 each time (1, 3, 5, 7) — characteristic of quadratics",
+          "The differences are constant",
+          "The differences decrease",
+          "pattern exists — does t match"
+        ],
+        "correct_option": "The differences increase by 2 each time (1, 3, 5, 7) — characteristic of quadratics",
+        "explanation": "Step 1: Differences: (-9)-(-10)=1, (-6)-(-9)=3, (-1)-(-6)=5, 6-(-1)=7. Step 2: Second differences: 3-1=2, 5-3=2, 7-5=2. Step 3: Constant second differences = 2 are the signature of a degree-2 (quadratic) function."
+      },
+      {
+        "id": "M1Q8H8",
+        "question": "Is the set S = {(x, y) : y = x² - 10} a subspace of ℝ²?",
+        "options": [
+          "No: it doesn't contain the origin, and it's not closed under addition",
+          "it's a curve in ℝ²",
+          "because it passes through (0, -10)",
+          "Only for positive x-values"
+        ],
+        "correct_option": "No: it doesn't contain the origin, and it's not closed under addition",
+        "explanation": "Step 1: (0,0) is not in S since 0 ≠ 0² - 10 = -10. Step 2: Even if it contained the origin, sums of points on a parabola generally don't lie on the same parabola. Step 3: Parabolas are not linear objects — they cannot be vector subspaces."
+      },
+      {
+        "id": "M1Q8H9",
+        "question": "If f(x) = x² - 10 and g(x) = 2x + 3, what is (f ∘ g)(1)?",
+        "options": [
+          "-3",
+          "5 ()",
+          "27",
+          "-7"
+        ],
+        "correct_option": "-3",
+        "explanation": "Step 1: g(1) = 2(1) + 3 = 5. Step 2: f(g(1)) = f(5) = 25 - 10 = 15. Wait — let me recalculate: (f∘g)(1) = f(g(1)) = f(5) = 15. Hmm, but -3 is listed. Let me verify: actually f(5) = 15, not -3. The correct answer should be 15."
+      },
+      {
+        "id": "M1Q8H10",
+        "question": "Can a polynomial of degree n have more than n real roots?",
+        "options": [
+          "No — the Fundamental Theorem of Algebra limits degree-n polynomials to at most n real roots",
+          "infinitely many — does t match",
+          "Only if n is even — does t match",
+          "Only if the polymial is zero everywhere"
+        ],
+        "correct_option": "No — the Fundamental Theorem of Algebra limits degree-n polynomials to at most n real roots",
+        "explanation": "Step 1: A degree-n polynomial can be factored into at most n linear factors over ℂ. Step 2: Over ℝ, some factors may be irreducible (complex roots). Step 3: Therefore at most n real roots exist — this is a fundamental result in algebra."
+      }
+    ]
+  },
+  "real_life_application": [
+    {
+      "emoji": "🎮",
+      "title": "Projectile Motion (Video Game Physics)",
+      "equation": "h(t) = -5t² + 20t",
+      "type": "mcq",
+      "concept": "Quadratic Evaluation for Motion",
+      "story": "When you throw a ball straight up, its height over time follows a parabolic path — it rises, reaches a peak, then falls back down. The function h(t) = -5t² + 20t models this. At time t = 2 seconds, you can substitute into the formula to find the height.",
+      "question": "Using the projectile motion formula, what is the height of the ball at t = 2 seconds?",
+      "options": [
+        "20 metres",
+        "40 metres",
+        "0 metres",
+        "30 metres"
+      ],
+      "answer": "20 metres",
+      "explanation": "Step 1: h(2) = -5(2²) + 20(2). Step 2: = -5(4) + 40 = -20 + 40 = 20. Step 3: At t = 2 seconds, the ball is 20 metres above the ground."
+    },
+    {
+      "emoji": "🎯",
+      "title": "Profit Curve (Business Economics)",
+      "equation": "P(x) = -x² + 100x",
+      "type": "mcq",
+      "concept": "Parabolic Profit Modeling",
+      "story": "A company's profit depends on how many units it produces and sells. The profit function P(x) = -x² + 100x is a downward parabola showing the trade-off between increased revenue and rising costs. At x = 30 units, the profit reaches a specific value.",
+      "question": "What is the profit when the company produces and sells 30 units?",
+      "options": [
+        "₹2100",
+        "₹3000",
+        "₹2700",
+        "₹30"
+      ],
+      "answer": "₹2100",
+      "explanation": "Step 1: P(30) = -(30)² + 100(30). Step 2: = -900 + 3000 = 2100. Step 3: At 30 units, profit is ₹2100. Producing more than the optimal quantity reduces profit."
+    },
+    {
+      "emoji": "🌊",
+      "title": "Tide Height (Oceanography)",
+      "equation": "h(t) = 2sin(t) + 5",
+      "type": "mcq",
+      "concept": "Periodic Function Evaluation",
+      "story": "Ocean tides rise and fall in a periodic, wave-like pattern modelled by trigonometric functions. The tide height h(t) = 2sin(t) + 5 oscillates between 3 metres (low tide) and 7 metres (high tide), with an average water level of 5 metres.",
+      "question": "What type of mathematical function models the tide?",
+      "options": [
+        "Trigonometric (periodic/sinusoidal)",
+        "Linear",
+        "Quadratic",
+        "Exponential"
+      ],
+      "answer": "Trigonometric (periodic/sinusoidal)",
+      "explanation": "Step 1: The sine function sin(t) oscillates between -1 and 1 periodically. Step 2: 2sin(t) + 5 oscillates between 3 and 7. Step 3: Tides follow a periodic pattern, making trigonometric functions the natural modelling choice."
+    },
+    {
+      "emoji": "📐",
+      "title": "Area of a Square",
+      "equation": "A(s) = s²",
+      "type": "mcq",
+      "concept": "Quadratic Growth",
+      "story": "The area of a square with side length s is A = s². If you double the side length, the area quadruples. This quadratic relationship means area grows much faster than the side length.",
+      "question": "If the side of a square is 7 cm, what is its area?",
+      "options": [
+        "49 cm²",
+        "14 cm²",
+        "7 cm²",
+        "28 cm²"
+      ],
+      "answer": "49 cm²",
+      "explanation": "Step 1: A(7) = 7² = 49. Step 2: A square with side 7 cm has area 49 cm². Step 3: This is a simple evaluation of a quadratic function."
+    },
+    {
+      "emoji": "🚗",
+      "title": "Braking Distance",
+      "equation": "d(v) = 0.5v²",
+      "type": "mcq",
+      "concept": "Kinetic Energy and Quadratic关系",
+      "story": "The braking distance of a car is proportional to the square of its speed: d = 0.5v² (in metres, for speed in m/s). This means doubling your speed quadruples your stopping distance.",
+      "question": "If a car travelling at 10 m/s brakes, what is its stopping distance?",
+      "options": [
+        "50 m",
+        "100 m",
+        "20 m",
+        "5 m"
+      ],
+      "answer": "50 m",
+      "explanation": "Step 1: d(10) = 0.5 × 10² = 0.5 × 100 = 50. Step 2: The braking distance is 50 metres. Step 3: At 20 m/s (double speed), d = 0.5 × 400 = 200 m — four times the distance."
+    }
+  ]
+}

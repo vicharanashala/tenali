@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
+// eslint-disable-next-line no-unused-vars -- motion is used in JSX via <motion.div>, <motion.line>, etc.
 import { motion, AnimatePresence } from 'framer-motion';
 // Helper to get random even numbers
 const randEven = (min, max) => {
@@ -7,38 +8,39 @@ const randEven = (min, max) => {
   return r;
 };
 
+const createInitialMission = () => {
+  let r1 = { x: randEven(-8, 8), y: randEven(-8, 8) };
+  let r2 = { x: randEven(-8, 8), y: randEven(-8, 8) };
+  while (r1.x === r2.x && r1.y === r2.y) {
+    r2 = { x: randEven(-8, 8), y: randEven(-8, 8) };
+  }
+  return {
+    rover1: r1,
+    rover2: r2,
+    pylon: { x: randEven(-8, 8), y: randEven(-8, 8) },
+    discovered: false,
+  };
+};
+
 export default function CoordGeomDiscoveryApp({ onBack }) {
   // Grid config
   const GRID_SIZE = 10; // -10 to 10
   const CELL_SIZE = 40; // 40px per unit
   const WIDTH = GRID_SIZE * 2 * CELL_SIZE;
   const HEIGHT = GRID_SIZE * 2 * CELL_SIZE;
-  
+
   // Game State
-  const [rover1, setRover1] = useState({ x: -4, y: 2 });
-  const [rover2, setRover2] = useState({ x: 6, y: -6 });
-  const [pylon, setPylon] = useState({ x: 0, y: -8 }); // Grid units
+  const [mission, setMission] = useState(createInitialMission);
+  const { rover1, rover2, pylon, discovered } = mission;
   const [isDragging, setIsDragging] = useState(false);
-  const [discovered, setDiscovered] = useState(false);
-  
+
   const svgRef = useRef(null);
 
   // Generate new mission
   const generateMission = () => {
-    let r1 = { x: randEven(-8, 8), y: randEven(-8, 8) };
-    let r2 = { x: randEven(-8, 8), y: randEven(-8, 8) };
-    while (r1.x === r2.x && r1.y === r2.y) {
-      r2 = { x: randEven(-8, 8), y: randEven(-8, 8) };
-    }
-    setRover1(r1);
-    setRover2(r2);
-    setPylon({ x: randEven(-8, 8), y: randEven(-8, 8) });
-    setDiscovered(false);
+    const next = createInitialMission();
+    setMission({ ...next, isDragging: false });
   };
-
-  useEffect(() => {
-    generateMission();
-  }, []);
 
   const midpoint = {
     x: (rover1.x + rover2.x) / 2,
@@ -67,22 +69,30 @@ export default function CoordGeomDiscoveryApp({ onBack }) {
     if (!isDragging || discovered) return;
     const coords = getGridCoords(e.clientX, e.clientY);
     if (coords) {
-      setPylon({ x: coords.x, y: coords.y });
+      setMission(prev => ({ ...prev, pylon: { x: coords.x, y: coords.y } }));
     }
   };
 
-  const handlePointerUp = (e) => {
+  const handlePointerUp = () => {
     if (!isDragging) return;
     setIsDragging(false);
-    
+
     // Snap to nearest integer coordinate
     const snappedX = Math.round(pylon.x);
     const snappedY = Math.round(pylon.y);
-    setPylon({ x: snappedX, y: snappedY });
 
     // Check if it's the midpoint
     if (snappedX === midpoint.x && snappedY === midpoint.y) {
-      setDiscovered(true);
+      setMission(prev => ({
+        ...prev,
+        pylon: { x: snappedX, y: snappedY },
+        discovered: true,
+      }));
+    } else {
+      setMission(prev => ({
+        ...prev,
+        pylon: { x: snappedX, y: snappedY },
+      }));
     }
   };
 
