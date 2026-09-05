@@ -3,6 +3,7 @@ const masteryEngine = require('./masteryEngine');
 const eventGenerator = require('./eventGenerator');
 const studentState = require('./studentState');
 const { isValidAttemptInput } = require('./utils');
+const mongoose = require('mongoose');
 
 // Lightweight Hook Registry
 const hooks = {
@@ -50,6 +51,20 @@ async function processAttempt(input) {
   }
 
   const { userId, topicId, difficulty, userAnswer, isCorrect, sessionGoal, telemetry, prompt, correctAnswer, display, options, questionData } = input;
+
+  // If MongoDB is offline or using in-memory development user, provide mock LIL response without throwing DB validation errors
+  if (mongoose.connection.readyState !== 1 || !mongoose.Types.ObjectId.isValid(userId)) {
+    return {
+      correct: isCorrect,
+      coinsEarned: isCorrect ? (sessionGoal === 'speed' ? 10 : 5) : 0,
+      xpEarned: isCorrect ? 10 : 0,
+      totalCoins: 0,
+      totalXP: 0,
+      isMastered: false,
+      events: [],
+      hookResults: {}
+    };
+  }
 
   // 1. Log Attempt
   const attemptId = await attemptLogger.log({
