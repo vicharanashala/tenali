@@ -1,0 +1,433 @@
+.alchemy-lab-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: var(--font-body, system-ui, sans-serif);
+}
+
+.setup-card {
+  background: var(--clr-card);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+  padding: 40px;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(10px);
+}
+
+.alchemy-title {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, var(--clr-accent), var(--clr-text));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+  font-family: var(--font-display, serif);
+}
+
+.alchemy-subtitle {
+  color: var(--clr-text-soft);
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+.setup-section {
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.setup-section h3 {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  color: var(--clr-text);
+}
+
+.difficulty-pills {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.diff-pill,
+.count-btn {
+  background: var(--clr-surface);
+  color: var(--clr-text);
+  border: 1px solid var(--clr-border);
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all var(--transition);
+}
+
+.diff-pill:hover,
+.count-btn:hover {
+  border-color: var(--clr-accent);
+  background: var(--clr-hover-strong);
+}
+
+.diff-pill.active,
+.count-btn.active {
+  background: var(--clr-accent);
+  color: var(--clr-bg);
+  border-color: var(--clr-accent);
+  box-shadow: 0 0 15px var(--clr-accent-soft);
+}
+
+.count-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.setup-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.btn {
+  padding: 12px 24px;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition);
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background: var(--clr-correct);
+  color: var(--clr-bg);
+  border: none;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-success {
+  background: var(--clr-correct);
+  color: var(--clr-bg);
+  border: none;
+}
+
+.btn-success:hover {
+  opacity: 0.9;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--clr-text);
+  border: 1px solid var(--clr-border);
+}
+
+.btn-outline:hover {
+  background: var(--clr-hover);
+}
+
+/* Gameplay Styles */
+.gameplay-area {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.alchemy-card {
+  background: var(--clr-card);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  padding: 21px 20px;
+  box-shadow: var(--shadow-card);
+}
+
+.target-card {
+  text-align: center;
+  border-left: 5px solid var(--clr-accent);
+}
+
+.target-label {
+  font-size: 0.85rem;
+  color: var(--clr-text-soft);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.target-math {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 2rem;
+  margin-top: 6px;
+  color: var(--clr-accent);
+  font-weight: 700;
+}
+
+/* Crucible Chamber */
+.crucible-pot-wrapper {
+  background: radial-gradient(circle at center, var(--clr-surface) 0%, var(--clr-bg) 100%);
+  border: 2px solid var(--clr-accent);
+  border-radius: var(--radius);
+  padding: 21px 20px;
+  text-align: center;
+  box-shadow: 0 0 25px var(--clr-accent-soft);
+}
+
+.crucible-header {
+  font-size: 1rem;
+  color: var(--clr-accent);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.crucible-inner {
+  min-height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  border: 1px dashed var(--clr-accent-soft);
+}
+
+.empty-pot-msg {
+  color: var(--clr-text-soft);
+  font-style: italic;
+}
+
+.crucible-blocks-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  width: 100%;
+}
+
+.crucible-block {
+  background: var(--clr-card);
+  border: 1px solid var(--clr-border);
+  border-radius: 20px;
+  padding: 12px 24px;
+  cursor: pointer;
+  user-select: none;
+  transition: all var(--transition);
+  box-shadow: var(--shadow-btn);
+}
+
+.crucible-block:hover {
+  transform: translateY(-2px);
+  border-color: var(--clr-accent);
+  box-shadow: 0 4px 12px var(--clr-accent-soft);
+}
+
+.crucible-block.selected {
+  background: var(--clr-accent-soft);
+  border: 2px solid var(--clr-accent);
+  box-shadow: 0 0 15px var(--clr-accent-soft);
+  transform: scale(1.05);
+}
+
+.block-label {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--clr-text);
+}
+
+/* Catalysts Section */
+.catalysts-card h3 {
+  font-size: 1.05rem;
+  color: var(--clr-text);
+  margin-bottom: 15px;
+}
+
+.catalyst-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.catalyst-btn {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  color: var(--clr-accent);
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  box-shadow: var(--shadow-btn);
+}
+
+.catalyst-btn:hover {
+  background: var(--clr-hover-strong);
+  transform: scale(1.08);
+}
+
+.catalyst-btn.active {
+  background: var(--clr-accent);
+  color: var(--clr-card);
+  border-color: var(--clr-accent);
+  box-shadow: 0 0 15px var(--clr-accent-soft);
+  transform: scale(1.1);
+}
+
+/* Actions Row */
+.alchemy-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+/* Feedback Styling */
+.alchemy-feedback-box {
+  background: var(--clr-card);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+  padding: 25px;
+  text-align: center;
+  animation: slideIn 0.3s ease-out;
+  box-shadow: var(--shadow-card);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.feedback-badge {
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+.feedback-badge.correct {
+  background: var(--clr-correct-bg);
+  color: var(--clr-correct);
+  border: 1px solid var(--clr-correct);
+}
+
+.feedback-badge.wrong {
+  background: var(--clr-accent-soft);
+  color: var(--clr-accent);
+  border: 1px solid var(--clr-accent);
+}
+
+.feedback-text {
+  color: var(--clr-text);
+  font-size: 1.05rem;
+  margin-bottom: 20px;
+}
+
+.next-action-row {
+  display: flex;
+  justify-content: center;
+}
+
+/* Finished Screen */
+.finished-card {
+  max-width: 700px;
+}
+
+.alchemy-score-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px 0;
+}
+
+.score-num {
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--clr-correct);
+}
+
+.score-total {
+  font-size: 2rem;
+  color: var(--clr-text-soft);
+}
+
+.score-label {
+  font-size: 1.05rem;
+  color: var(--clr-text);
+  margin-top: 10px;
+}
+
+.results-wrapper {
+  margin-bottom: 30px;
+  text-align: left;
+  width: 100%;
+}
+
+.results-wrapper h3 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: var(--clr-text);
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.results-table th,
+.results-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.results-table th {
+  background: var(--clr-surface);
+  color: var(--clr-text);
+  font-weight: 600;
+}
+
+.results-table td {
+  color: var(--clr-text-soft);
+}
+
+.row-correct {
+  background: var(--clr-correct-bg);
+}
+
+.row-correct td:nth-child(3) {
+  color: var(--clr-correct);
+  font-weight: 600;
+}
+
+.row-wrong {
+  background: var(--clr-accent-soft);
+}
+
+.row-wrong td:nth-child(3) {
+  color: var(--clr-accent);
+  font-weight: 600;
+}

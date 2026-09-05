@@ -114,6 +114,8 @@ import PlaygroundApp from './PlaygroundApp'
 import LocalCompilerApp from './LocalCompilerApp'
 import BattleApp from './BattleApp'
 import SudokuApp from './SudokuApp'
+import WaterJugLab from './WaterJugLab'
+import EquationCraftingLab from './EquationCraftingLab'
 
 // API base URL from environment variables (Vite)
 export const API = import.meta.env.VITE_API_BASE_URL || '';
@@ -43393,6 +43395,16 @@ function App() {
     return <ExtendedEuclidApp />
   }
 
+  // Route: /water-jug-lab → Water Jug GCD Lab
+  if (pathname === '/water-jug-lab') {
+    return <WaterJugLab onBack={() => { window.location.href = withBase('/') }} />
+  }
+
+  // Route: /equation-crafting-lab → Equation Crafting Lab
+  if (pathname === '/equation-crafting-lab') {
+    return <EquationCraftingLab onBack={() => { window.location.href = withBase('/') }} />
+  }
+
   // Route: /linear → Linear Algebra flashcards (proctored quiz)
   // Proctoring starts automatically on this route — no toggle needed.
   if (pathname === '/linear') {
@@ -44751,6 +44763,8 @@ function App() {
     // matrixmystics mode removed — Matrix Mystics content now embedded in LinearAlgebraApp's mission quiz
     trackProgress: null,
     riddle: RiddleApp,              // Math Riddles
+    'water-jug-lab': WaterJugLab,
+    'equation-crafting-lab': EquationCraftingLab,
   }
 
   // Get the component to render (or null if mode not set)
@@ -45037,6 +45051,8 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
     { key: 'lineqgym', name: 'LinearEquations-Gym', subtitle: 'Solve linear equations (MCQ)', color: 'blue' },
     { key: 'indicesgym', name: 'Indices-Gym', subtitle: 'Index laws (MCQ)', color: 'green' },
     { key: 'polygym', name: 'Polynomials Gym', subtitle: 'Arithmetic → monomial algebra (MCQ)', color: 'blue' },
+    { key: 'water-jug-lab', name: '🧪 Water Jug Lab', subtitle: 'GCD discovery — 13-level progression', color: 'teal' },
+    { key: 'equation-crafting-lab', name: '⚗️ Equation Crafting Lab', subtitle: 'Build expressions in the mixing pot', color: 'orange' },
   ] // end regularApps (MatrixMystics tile removed — uses LinearAlgebraApp via linearalgebra mode)
 
   // Combined list for search filtering
@@ -45292,7 +45308,7 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
           const isGold = goldMastery && goldMastery.includes(app.key)
           const isCompleted = isStage3Completed(app.key, completedTopics)
           return (
-            <button key={app.key} className={`menu-card ${isGold ? 'gold-card' : app.color}`} onClick={() => onSelect(app.key)}>
+            <button key={app.key} className={`menu-card ${isGold ? 'gold-card' : app.color}`} onClick={() => { if (app.isRedirect) { window.location.href = app.path; } else { onSelect(app.key); } }}>
               <span className="menu-title">
                 {app.name}
                 {isGold && <span className="badge-indicator">🥇</span>}
