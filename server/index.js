@@ -49,6 +49,7 @@ const rateLimit = require('express-rate-limit');
 const fs = require('fs');
 const path = require('path');
 const http = require('http');
+const { Server } = require('socket.io');
 const wordCreator = require('./wordCreator');
 const logger = require('./lib/logger');
 
