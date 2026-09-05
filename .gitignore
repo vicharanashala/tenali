@@ -1,5 +1,7 @@
 node_modules
 *.log
+*.opencode
+*lint-errors.txt
 client/dist
 server.log
 docs/
