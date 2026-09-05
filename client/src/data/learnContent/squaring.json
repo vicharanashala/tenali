@@ -1,0 +1,30 @@
+{
+  "title": "Squaring Numbers: The 2D Expansion",
+  "blocks": [
+    {
+      "icon": "🟨",
+      "title": "1. The Core Concept: Building a Square",
+      "content": "Squaring a number means multiplying it by itself: 7^2 = 7 * 7 = 49. Geometrically, if you have a square with a side length of 7cm, its area is 49cm^2. That's why we call it 'squaring'! This operation makes numbers grow very quickly and is the driving force behind parabolas and quadratic equations."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: Sign and Size",
+      "content": "• **Positive * Positive = Positive.** (3^2 = 9)\n• **Negative * Negative = Positive.** ((-3)^2 = 9)\n• A real number squared can NEVER be negative.\n• Squaring a fraction between 0 and 1 makes it SMALLER! (0.5^2 = 0.25)."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: The Ends-in-5 Trick",
+      "content": "To quickly square any two-digit number ending in 5 (like 35):\n\n1. Take the first digit (3).\n2. Multiply it by the next number up (3 * 4 = 12).\n3. Slap '25' onto the end of that result.\n4. Result: 1225. Therefore, 35^2 = 1225.\n5. Let's try 65: 6 * 7 = 42. Slap on 25. Answer: 4225."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Squaring Decimals",
+      "content": "Calculate: **0.04^2**\n\n**Step 1:** Ignore the decimals. What is 4^2? It's 16.\n**Step 2:** Count the decimal places in the original number: 0.04 has 2.\n**Step 3:** When squaring, DOUBLE the number of decimal places! So we need 4 decimal places in the answer.\n**Step 4:** Pad 16 with zeros to make 4 places: 0.0016.\n\n**Final Answer: 0.0016**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The trap of the missing brackets: -3^2 versus (-3)^2. Students think these are the same, but calculators know they aren't! (-3)^2 means (-3) * (-3) = +9. But -3^2 means -(3 * 3) = -9! The squared only applies to the number exactly touching it, not the minus sign, unless there are brackets. Always use brackets when squaring negative numbers."
+    }
+  ]
+}

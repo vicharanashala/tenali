@@ -1,0 +1,30 @@
+{
+  "title": "Heron's Formula: Area Without Height",
+  "blocks": [
+    {
+      "icon": "📐",
+      "title": "1. The Core Concept: When You Don't Know the Height",
+      "content": "The standard triangle area formula (1/2 x base x height) is great, but what if you don't know the height? **Heron's Formula** is an incredible tool that calculates the area of ANY triangle using only the three side lengths. No height, no angles, no problem. Just three sides and you're done."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: The Semi-Perimeter",
+      "content": "Heron's Formula uses a helper value called the **Semi-Perimeter (s)**:\n\n• First, find s = (a + b + c) / 2 where a, b, c are the three sides.\n• Then: **Area = sqrt[s(s-a)(s-b)(s-c)]**\n• That's it! Just plug in the three sides, compute s, and evaluate."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Using Heron's Formula",
+      "content": "1. Write down the three side lengths: a, b, c.\n2. Calculate s = (a + b + c) / 2.\n3. Calculate each bracket: (s-a), (s-b), (s-c).\n4. Multiply them all: s x (s-a) x (s-b) x (s-c).\n5. Take the square root of the result.\n6. That's your area!"
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Triangle with sides 7, 8, 9",
+      "content": "Find the area of a triangle with sides 7cm, 8cm, 9cm.\n\n**Step 1:** s = (7 + 8 + 9) / 2 = 24 / 2 = 12.\n**Step 2:** (s-a) = 12-7 = 5, (s-b) = 12-8 = 4, (s-c) = 12-9 = 3.\n**Step 3:** Product = 12 x 5 x 4 x 3 = 720.\n**Step 4:** Area = sqrt(720) = 26.83 cm^2.\n\n**Final Answer: Area = 26.83 cm^2 (2 d.p.)**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The most common mistake is forgetting to divide the perimeter by 2! Students add a+b+c and use the full perimeter instead of the SEMI-perimeter. If s is wrong, every subsequent calculation is wrong. Also, don't forget the final square root! The product s(s-a)(s-b)(s-c) gives you the area SQUARED, not the area itself."
+    }
+  ]
+}

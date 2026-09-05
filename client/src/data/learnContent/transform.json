@@ -1,0 +1,30 @@
+{
+  "title": "Transformations: The Geometry Engine",
+  "blocks": [
+    {
+      "icon": "🔄",
+      "title": "1. The Core Concept: Moving Shapes in Space",
+      "content": "In video games, when a character walks, turns, or grows, the graphics engine is performing mathematical **Transformations**. A transformation takes a 2D shape (the 'object') and moves it to a new position (the 'image'). There are four main ways to move a shape: Translation, Reflection, Rotation, and Enlargement."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: The Four Movements",
+      "content": "• **Translation:** Sliding a shape without turning it. Requires a column vector [x, y].\n• **Reflection:** Flipping a shape like a mirror. Requires a mirror line equation (like y = x).\n• **Rotation:** Turning a shape. Requires a center point, an angle, and a direction (clockwise/anti).\n• **Enlargement:** Resizing a shape. Requires a center point and a scale factor (k)."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Describing a Transformation",
+      "content": "When an exam asks 'Describe fully the single transformation...', you must state the TYPE and its specific DETAILS:\n\n1. If it's a slide: 'Translation by vector [2, -3]'.\n2. If it's a flip: 'Reflection in the line x = 4'.\n3. If it's a turn: 'Rotation, 90 degrees clockwise, center (0,0)'.\n4. If it's resized: 'Enlargement, scale factor 2, center (1,1)'."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Finding the Center of Rotation",
+      "content": "To find the center of rotation between an object and its image:\n\n**Step 1:** Pick a corner on the object and its matching corner on the image.\n**Step 2:** Draw a straight line connecting them.\n**Step 3:** Draw the perpendicular bisector of that line (cut it perfectly in half at 90 degrees).\n**Step 4:** Repeat for a different pair of matching corners.\n**Step 5:** Where the two perpendicular bisectors cross is your exact center of rotation!"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The most brutal mistake: losing marks on 'describe fully' questions because you missed one ingredient. Saying 'It's a rotation of 90 degrees' gets 1 out of 3 marks! You MUST say 'Rotation' (1 mark), '90 degrees clockwise' (1 mark), 'Center at (2,3)' (1 mark). For enlargements, you MUST give the scale factor and the center. Don't be lazy with descriptions!"
+    }
+  ]
+}

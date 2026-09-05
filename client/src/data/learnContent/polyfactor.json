@@ -1,0 +1,30 @@
+{
+  "title": "Polynomial Factoring: Cracking the Code",
+  "blocks": [
+    {
+      "icon": "🔓",
+      "title": "1. The Core Concept: Reverse Engineering",
+      "content": "Expanding brackets is easy: (x+2)(x+3) = x^2 + 5x + 6. But **Factoring** is the reverse: given x^2 + 5x + 6, can you figure out it came from (x+2)(x+3)? Factoring is like reverse-engineering a product back into its ingredients. It's essential for solving quadratic equations, simplifying expressions, and finding roots."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: The Factor Hunt",
+      "content": "For a quadratic x^2 + bx + c, you need two numbers that:\n\n• **MULTIPLY** to give c (the constant at the end).\n• **ADD** to give b (the coefficient of x).\n\nFor x^2 + 5x + 6: find two numbers that multiply to 6 and add to 5. That's 2 and 3!\nSo x^2 + 5x + 6 = (x + 2)(x + 3)."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Factoring with Negatives",
+      "content": "For x^2 - 7x + 12:\n\n1. We need two numbers that multiply to +12 and add to -7.\n2. Since they multiply to positive but add to negative, BOTH must be negative.\n3. Factors of 12: (1,12), (2,6), (3,4). Which pair adds to -7? That's -3 and -4.\n4. Answer: (x - 3)(x - 4).\n\nCheck: -3 x -4 = 12, -3 + (-4) = -7. Correct!"
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Difference of Two Squares",
+      "content": "Factorise: **x^2 - 25**.\n\n**Step 1:** Recognize the pattern: x^2 - something^2.\n**Step 2:** 25 = 5^2. So this is x^2 - 5^2.\n**Step 3:** Apply the formula: a^2 - b^2 = (a+b)(a-b).\n**Step 4:** x^2 - 25 = (x + 5)(x - 5).\n\n**Final Answer: (x + 5)(x - 5).**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "Students constantly mix up the MULTIPLY and ADD conditions. For x^2 + 5x + 6, you need numbers that MULTIPLY to 6 and ADD to 5. Students often reverse this: they look for numbers that multiply to 5 and add to 6, getting completely wrong factors. Write down 'M = c, A = b' at the top of every factoring problem to keep yourself on track."
+    }
+  ]
+}

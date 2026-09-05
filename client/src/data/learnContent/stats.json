@@ -1,0 +1,30 @@
+{
+  "title": "Statistics: The Data Detective",
+  "blocks": [
+    {
+      "icon": "📊",
+      "title": "1. The Core Concept: Making Sense of Information",
+      "content": "If you survey 1,000 people about their salary, you get a giant, confusing list of numbers. **Statistics** is the science of boiling that massive list down into a few useful numbers that tell a story. It allows companies to spot trends, doctors to test vaccines, and scientists to prove their theories."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: The Three Averages",
+      "content": "• **Mean:** The mathematical average. Add all numbers, divide by how many there are.\n• **Median:** The middle number when arranged in order (if there are two middles, average them).\n• **Mode:** The most frequent number. (There can be no mode, or multiple modes).\n• **Range:** Highest number minus lowest number (measures spread, not average)."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Mean from a Frequency Table",
+      "content": "If data is grouped in a table (e.g., Score x, Frequency f):\n\n1. Create a new column: multiply each score by its frequency (x * f).\n2. Sum the (x * f) column. This gives the total of all scores.\n3. Sum the frequency (f) column. This gives the total number of people.\n4. Mean = Sum of (x * f) / Sum of (f)."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Finding the Median",
+      "content": "Find the median of: 12, 7, 3, 14, 8, 9.\n\n**Step 1:** Order them from smallest to largest: 3, 7, 8, 9, 12, 14.\n**Step 2:** Count them. There are 6 numbers (an even amount).\n**Step 3:** The middle falls between the 3rd and 4th numbers (8 and 9).\n**Step 4:** Average the two middle numbers: (8 + 9) / 2 = 8.5.\n\n**Final Answer: The median is 8.5.**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The most common frequency table mistake: dividing by the number of ROWS instead of the total FREQUENCY. If a table has 5 rows showing scores of 20 students, the mean is the total score divided by 20. But students often divide by 5! Always divide by the sum of the frequency column, which represents the actual number of people or items."
+    }
+  ]
+}

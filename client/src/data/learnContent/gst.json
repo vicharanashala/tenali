@@ -1,0 +1,30 @@
+{
+  "title": "GST: Goods and Services Tax",
+  "blocks": [
+    {
+      "icon": "💰",
+      "title": "1. The Core Concept: Tax on Everything",
+      "content": "When you buy a phone for Rs. 10,000, the actual price of the phone might only be Rs. 8,475. The rest is **GST** - a tax collected by the government on almost every product and service. GST replaced dozens of older, confusing taxes with one unified system. Understanding GST is not just exam knowledge; it's life knowledge for every purchase you'll ever make."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: CGST and SGST",
+      "content": "• GST is split into two equal halves: **CGST** (Central) and **SGST** (State).\n• If GST is 18%, then CGST = 9% and SGST = 9%.\n• **Selling Price = Marked Price - Discount + GST**.\n• GST is always calculated on the price AFTER discount, never on the original marked price.\n• For inter-state transactions, it's called **IGST** (combined rate)."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Calculating GST",
+      "content": "To find the total cost of an item:\n\n1. Start with the Listed/Marked Price.\n2. If there's a discount, subtract it to get the discounted price.\n3. Calculate GST on the DISCOUNTED price (not the original!).\n4. Add the GST amount to the discounted price.\n5. This gives you the final amount the customer pays."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Shopping with GST",
+      "content": "A jacket costs Rs. 2000 with 20% discount and 12% GST.\n\n**Step 1:** Discount = 20% of 2000 = Rs. 400.\n**Step 2:** Discounted price = 2000 - 400 = Rs. 1600.\n**Step 3:** GST = 12% of 1600 = Rs. 192.\n**Step 4:** CGST = Rs. 96, SGST = Rs. 96.\n**Step 5:** Total = 1600 + 192 = **Rs. 1792.**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The DEADLIEST mistake: calculating GST on the marked price instead of the discounted price! If an item is Rs. 2000 with 20% discount, the GST must be calculated on Rs. 1600 (the discounted price), NOT on Rs. 2000. Calculating GST on the wrong base amount will make every number in your answer wrong."
+    }
+  ]
+}

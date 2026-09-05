@@ -1,0 +1,30 @@
+{
+  "title": "Tatsavit: The Ultimate Challenge",
+  "blocks": [
+    {
+      "icon": "👑",
+      "title": "1. The Core Concept: Mastery of All Domains",
+      "content": "Tatsavit is the final boss of the Tenali math platform. It is not a topic; it is a brutal, high-speed test of every single concept you have learned. It demands rapid context-switching, deep conceptual understanding, and perfect execution under pressure. This is where you prove you are a true math warrior."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Strategy: Mind Over Panic",
+      "content": "When facing a mix of geometry, algebra, statistics, and probability questions back-to-back, your brain will try to panic. The key is to take a 2-second breath before every question. Identify the topic first. Load the specific rules for that topic into your working memory, THEN start calculating."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. The Method: Triage",
+      "content": "In a timed, mixed exam:\n\n1. Do the immediate, 10-second questions first (like basic indices or evaluating functions).\n2. If a question looks like a 3-minute slog, flag it and move on.\n3. Secure the easy points to build a safety net.\n4. Return to the flagged monsters with the remaining time."
+    },
+    {
+      "icon": "📝",
+      "title": "4. The Ultimate Advice: Read Carefully",
+      "content": "In high-level tests, the math is often easy, but the wording is a trap. 'Find the radius' vs 'Find the diameter'. 'Nearest tenth' vs 'Nearest whole number'. 'Increase by 20%' vs 'Decrease by 20%'. Under pressure, your eyes will lie to you. Read every question twice."
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The biggest pitfall in Tatsavit is losing your confidence after one hard question. If you stare at a probability question for 2 minutes and get it wrong, you carry that frustration into the next algebra question, causing you to make a simple sign error. You must develop a goldfish memory. When a question is done, forget it instantly and attack the next one fresh."
+    }
+  ]
+}

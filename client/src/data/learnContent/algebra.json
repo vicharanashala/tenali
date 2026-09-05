@@ -1,0 +1,30 @@
+{
+  "title": "Algebra: The Language of the Unknown",
+  "blocks": [
+    {
+      "icon": "🔍",
+      "title": "1. The Core Concept: Letters Are Just Mystery Numbers",
+      "content": "Algebra is like being a detective. Someone has hidden a number inside a letter (like 'x'), and your job is to figure out what that number is. The equation is your clue. **3x + 5 = 20** is saying: 'I'm thinking of a number. I multiplied it by 3, then added 5, and I got 20. What was my number?' Algebra gives you the tools to reverse-engineer the mystery."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: The Golden Balance",
+      "content": "An equation is like a perfectly balanced seesaw. Whatever you do to one side, you MUST do to the other side to keep it balanced.\n\n• If you subtract 5 from the left, subtract 5 from the right.\n• If you multiply the left by 2, multiply the right by 2.\n• The goal is to get 'x' completely alone on one side, with just a number on the other."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Solving for x",
+      "content": "Follow this recipe to solve any basic equation:\n\n1. **Remove additions/subtractions first** by doing the opposite operation to both sides.\n2. **Then remove multiplications/divisions** by doing the opposite.\n3. Always do operations in reverse order of BODMAS (undo addition before multiplication).\n4. Check your answer by plugging it back into the original equation!"
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Solve 3x + 5 = 20",
+      "content": "**Step 1:** Subtract 5 from both sides: 3x + 5 - 5 = 20 - 5, which gives 3x = 15.\n**Step 2:** Divide both sides by 3: 3x / 3 = 15 / 3, which gives x = 5.\n**Step 3 (Check):** Plug x = 5 back in: 3(5) + 5 = 15 + 5 = 20. Correct!\n\n**Final Answer: x = 5**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The deadliest mistake is doing something to one side of the equation but forgetting to do it to the other side. If you subtract 5 from the left but not the right, the seesaw tips over and your answer is wrong. Always draw a vertical line down the middle of the equals sign to remind yourself: **both sides, every time!**"
+    }
+  ]
+}

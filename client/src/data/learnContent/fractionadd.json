@@ -1,0 +1,30 @@
+{
+  "title": "Fractions: The Art of Parts",
+  "blocks": [
+    {
+      "icon": "🍕",
+      "title": "1. The Core Concept: Slicing the Pizza",
+      "content": "A fraction represents a **part of a whole**. When you cut a pizza into 8 equal slices and eat 3, you've eaten 3/8 of the pizza. The top number (numerator) counts how many pieces you have. The bottom number (denominator) tells you how many equal pieces the whole was cut into. Fractions are everywhere: time (quarter past), money (half price), and cooking (3/4 cup)."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: Adding and Subtracting",
+      "content": "The golden rule: you can ONLY add fractions when the denominators are the same!\n\n• **Same denominator:** Just add/subtract the tops. 3/8 + 2/8 = 5/8.\n• **Different denominators:** Find the LCM, convert both fractions, then add.\n• **Mixed numbers:** Convert to improper fractions first (e.g., 2 1/3 = 7/3), then add.\n• Always simplify your final answer!"
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Multiplying and Dividing",
+      "content": "Multiplication is actually easier than addition!\n\n1. **To multiply:** Multiply the tops together, multiply the bottoms together. (2/3) * (4/5) = 8/15.\n2. **To divide:** FLIP the second fraction and multiply! (2/3) / (4/5) = (2/3) * (5/4) = 10/12 = 5/6.\n3. Always simplify by dividing top and bottom by their GCD."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Mixed Number Subtraction",
+      "content": "Calculate 3 1/4 - 1 2/3.\n\n**Step 1:** Convert to improper: 13/4 - 5/3.\n**Step 2:** Find LCM of 4 and 3 = 12.\n**Step 3:** Convert: 39/12 - 20/12.\n**Step 4:** Subtract numerators: 19/12.\n**Step 5:** Convert back: 1 7/12.\n\n**Final Answer: 1 7/12.**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The most devastating fraction mistake: adding the denominators! When students see 1/3 + 1/4, they write 2/7. **COMPLETELY WRONG!** The denominators must be made the same (LCM = 12), giving 4/12 + 3/12 = 7/12. Also, when dividing fractions, students forget to flip the SECOND fraction. You flip the one you're dividing BY, not the first one!"
+    }
+  ]
+}

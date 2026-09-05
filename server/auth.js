@@ -32,11 +32,11 @@ const JWT_TTL = process.env.JWT_TTL || '14d';
 // public (in this repo), so anyone could forge valid tokens. In development we
 // fall back to the default but warn loudly.
 if (process.env.NODE_ENV === 'production' &&
-    (!process.env.JWT_SECRET || process.env.JWT_SECRET === DEFAULT_DEV_SECRET)) {
+  (!process.env.JWT_SECRET || process.env.JWT_SECRET === DEFAULT_DEV_SECRET)) {
   throw new Error('JWT_SECRET must be set to a strong, non-default value in production — refusing to start.');
 }
 if (JWT_SECRET === DEFAULT_DEV_SECRET) {
-  logger.warn(null,'[auth] WARNING: using the built-in development JWT secret. Set JWT_SECRET before deploying.');
+  logger.warn(null, '[auth] WARNING: using the built-in development JWT secret. Set JWT_SECRET before deploying.');
 }
 
 // ─── Mongoose schema ─────────────────────────────────────────────────────────
@@ -259,9 +259,9 @@ const ENV_SEED_USERS = (process.env.TENALI_SEED_USERS || '')
 const SEED_USERS = [...ENV_SEED_USERS];
 
 if (ENV_SEED_USERS.length === 0) {
-  logger.warn(null,'[auth] No TENALI_SEED_USERS configured — relying only on existing DB users. No admin will be seeded.');
+  logger.warn(null, '[auth] No TENALI_SEED_USERS configured — relying only on existing DB users. No admin will be seeded.');
 } else if (!ENV_SEED_USERS.some((u) => u.role === 'admin')) {
-  logger.warn(null,'[auth] No admin entry in TENALI_SEED_USERS — proctor dashboard access will be unavailable until one is added (format "user:pass:admin").');
+  logger.warn(null, '[auth] No admin entry in TENALI_SEED_USERS — proctor dashboard access will be unavailable until one is added (format "user:pass:admin").');
 }
 
 // In-memory fallback used when MongoDB is unavailable.
@@ -274,7 +274,11 @@ async function seedUsers() {
     inMemoryUsers[u.username.toLowerCase()] = hash;
 
     if (!connected) continue;
-    const existing = await User.findOne({ username: u.username.toLowerCase() });
+
+    const existing = await User.findOne({
+      username: u.username.toLowerCase()
+    });
+
     if (existing) {
       if (u.role && existing.role !== u.role) {
         existing.role = u.role;
@@ -282,8 +286,16 @@ async function seedUsers() {
       }
       continue;
     }
-    await User.create({ username: u.username.toLowerCase(), passwordHash: hash, role: u.role || 'user' });
-    console.log(`[auth] seeded user: ${u.username}${u.role ? ' (' + u.role + ')' : ''}`);
+
+    await User.create({
+      username: u.username.toLowerCase(),
+      passwordHash: hash,
+      role: u.role || 'user'
+    });
+
+    console.log(
+      `[auth] seeded user: ${u.username}${u.role ? ' (' + u.role + ')' : ''}`
+    );
   }
 }
 

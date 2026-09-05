@@ -1,0 +1,30 @@
+{
+  "title": "Banking & Recurring Deposits: Growing Your Money",
+  "blocks": [
+    {
+      "icon": "🏦",
+      "title": "1. The Core Concept: Money That Makes Money",
+      "content": "When you deposit money in a bank, the bank pays you a small reward called **interest** for letting them use your money. A **Recurring Deposit (RD)** is when you deposit a fixed amount every month (like Rs. 500/month). Over time, each deposit earns interest, and the total grows much bigger than what you put in. It's like planting seeds every month and watching a forest grow."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: Simple Interest on RD",
+      "content": "For Recurring Deposits, interest is calculated using a special formula:\n\n• **Interest = P x n(n+1) / (2 x 12) x r/100**\n• P = monthly installment amount\n• n = number of months\n• r = annual rate of interest\n• **Maturity Value = Total deposits + Interest = (P x n) + Interest**"
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Calculating RD Interest",
+      "content": "Follow this process:\n\n1. Write down P (monthly deposit), n (number of months), and r (annual rate).\n2. Calculate n(n+1)/2 first. This represents the sum of months.\n3. Multiply: P x [n(n+1)/2] x (1/12) x (r/100).\n4. This gives you the total interest earned.\n5. Add the interest to total deposits (P x n) to get the Maturity Value."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: RD Calculation",
+      "content": "Rahul deposits Rs. 500 per month for 24 months at 10% per annum.\n\n**Step 1:** P = 500, n = 24, r = 10.\n**Step 2:** n(n+1)/2 = 24 x 25 / 2 = 300.\n**Step 3:** Interest = 500 x 300 x (1/12) x (10/100) = 500 x 300 x 0.00833 = Rs. 1250.\n**Step 4:** Total deposited = 500 x 24 = Rs. 12,000.\n**Step 5:** Maturity Value = 12,000 + 1,250 = **Rs. 13,250.**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The most devastating mistake is forgetting to divide by 12! The rate 'r' is given per YEAR, but the deposits are MONTHLY. If you skip the /12 step, your interest calculation will be 12 times too large. Also, students often confuse n(n+1) with n^2. They are NOT the same! For n=24, n^2 is 576 but n(n+1) is 600."
+    }
+  ]
+}

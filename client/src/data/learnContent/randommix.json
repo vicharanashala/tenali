@@ -1,0 +1,30 @@
+{
+  "title": "Random Mix: The Ultimate Test",
+  "blocks": [
+    {
+      "icon": "🌪️",
+      "title": "1. The Core Concept: Chaos Training",
+      "content": "In a normal math class, you do 20 algebra questions in a row. By question 3, your brain goes on autopilot. But in a real exam, Question 1 is geometry, Question 2 is statistics, and Question 3 is trigonometry! The **Random Mix** mode disables your autopilot. It throws completely unrelated topics at you back-to-back, training you for the chaos of a real exam."
+    },
+    {
+      "icon": "🧠",
+      "title": "2. The Strategy: Context Switching",
+      "content": "The hardest part of a Random Mix isn't the math; it's the 'Context Switch'. Your brain has to dump the geometry rules from its RAM and instantly load up the algebra rules. \n\nBefore you start calculating, take a 2-second pause. Ask yourself: 'What topic is this? What are the three golden rules of this topic?' Load the correct software into your brain before you press any buttons."
+    },
+    {
+      "icon": "🛡️",
+      "title": "3. The Method: The Flagging System",
+      "content": "When faced with 50 random questions, you will hit mental brick walls. If a question looks like an alien language, DO NOT spend 10 minutes staring at it! This causes panic. Flag it, skip it, and move on. Getting 10 easy questions right builds momentum and confidence, which actually makes the hard question easier when you circle back to it."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Mental Flexibility",
+      "content": "Question 1: Find 20% of 50. (You instantly multiply 0.2 × 50 = 10).\nQuestion 2: Factorise x² - 9. (Your brain must snap from Percentages to Algebra: Difference of two squares! Answer: (x+3)(x-3)).\n\nThis rapid switching is exhausting, but it builds incredible neurological strength."
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The biggest pitfall in Random Mix is 'Rule Bleed'. Because you just did an algebra question, you might accidentally try to apply algebra rules to a geometry question. (Like trying to solve a side length using x instead of using Pythagoras). Always mentally wipe the whiteboard clean between questions!"
+    }
+  ]
+}

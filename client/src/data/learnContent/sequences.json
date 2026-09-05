@@ -1,0 +1,30 @@
+{
+  "title": "Sequences & Series: Spotting the Pattern",
+  "blocks": [
+    {
+      "icon": "🔢",
+      "title": "1. The Core Concept: Numbers with a Hidden Rule",
+      "content": "A **sequence** is a list of numbers that follows a hidden pattern: 2, 5, 8, 11, 14... Can you spot the rule? Each number is 3 more than the previous one! A **series** is what you get when you ADD all the terms together. Sequences are the math of prediction: if you know the pattern, you can find the 100th term without listing all 100 numbers."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: Arithmetic vs Geometric",
+      "content": "• **Arithmetic Sequence:** Constant ADDITION between terms. Formula: a_n = a + (n-1)d, where a = first term, d = common difference.\n• **Geometric Sequence:** Constant MULTIPLICATION between terms. Formula: a_n = a * r^(n-1), where r = common ratio.\n• **Sum of Arithmetic Series:** S_n = n/2 * (2a + (n-1)d) or S_n = n/2 * (first + last)."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Finding the nth Term",
+      "content": "For the arithmetic sequence 3, 7, 11, 15...:\n\n1. Find the common difference: d = 7 - 3 = 4.\n2. Identify the first term: a = 3.\n3. Use the formula: a_n = a + (n-1)d.\n4. For the 50th term: a_50 = 3 + (49)(4) = 3 + 196 = 199."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Sum of First 20 Terms",
+      "content": "Find the sum of the first 20 terms of 5, 8, 11, 14...\n\n**Step 1:** a = 5, d = 3, n = 20.\n**Step 2:** Last term: a_20 = 5 + 19(3) = 5 + 57 = 62.\n**Step 3:** Sum = n/2 * (first + last) = 20/2 * (5 + 62) = 10 * 67 = 670.\n\n**Final Answer: S_20 = 670.**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The most common sequence mistake: using 'n' instead of '(n-1)' in the formula. For the 50th term, you multiply d by 49 (which is n-1), not by 50. If d = 4, using 50 gives 200 instead of 196. You're always one step off! Remember: the first term has ZERO d's added to it, the second has ONE d, the third has TWO d's... so the nth has (n-1) d's."
+    }
+  ]
+}

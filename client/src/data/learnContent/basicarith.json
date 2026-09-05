@@ -1,0 +1,30 @@
+{
+  "title": "Basic Arithmetic: The Four Pillars",
+  "blocks": [
+    {
+      "icon": "🧱",
+      "title": "1. The Core Concept: The Foundation of Everything",
+      "content": "All of mathematics, from simple shopping bills to rocket science, is built on just four operations: **Addition (+), Subtraction (-), Multiplication (x), and Division (/)**. These are the four pillars. If your arithmetic is fast and accurate, everything else in math becomes easier. If it's shaky, every future topic will feel ten times harder."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: BODMAS/PEMDAS",
+      "content": "When a problem has multiple operations, you MUST follow the correct order:\n\n• **B**rackets first\n• **O**rders (powers and roots)\n• **D**ivision and **M**ultiplication (left to right)\n• **A**ddition and **S**ubtraction (left to right)\n\nThis is called BODMAS (or PEMDAS). Without it, 3 + 2 x 4 could give you 20 (wrong!) instead of 11 (correct!)."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Working with Negatives",
+      "content": "Negative number rules are critical:\n\n1. **Positive x Positive = Positive** (3 x 4 = 12)\n2. **Negative x Negative = Positive** (-3 x -4 = 12)\n3. **Positive x Negative = Negative** (3 x -4 = -12)\n4. **Subtracting a negative = Adding** (5 - (-3) = 5 + 3 = 8)\n\nRemember: same signs multiply to positive, different signs multiply to negative."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: BODMAS in Action",
+      "content": "Evaluate: **8 + 4 x (6 - 2)^2 / 8**\n\n**Step 1 (Brackets):** (6 - 2) = 4\n**Step 2 (Orders):** 4^2 = 16\n**Step 3 (Multiply):** 4 x 16 = 64\n**Step 4 (Divide):** 64 / 8 = 8\n**Step 5 (Add):** 8 + 8 = 16\n\n**Final Answer: 16**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The most catastrophic error: doing operations LEFT TO RIGHT instead of following BODMAS! In 3 + 2 x 4, students add 3+2 first to get 5, then multiply by 4 to get 20. **WRONG!** Multiplication comes before addition in BODMAS. The correct answer is 3 + 8 = 11. Always scan the entire expression for higher-priority operations before you start calculating!"
+    }
+  ]
+}

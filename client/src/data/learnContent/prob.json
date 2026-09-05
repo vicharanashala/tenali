@@ -1,0 +1,30 @@
+{
+  "title": "Probability: Predicting the Future",
+  "blocks": [
+    {
+      "icon": "🎲",
+      "title": "1. The Core Concept: Measuring Chance",
+      "content": "Will it rain tomorrow? Will you roll a 6? Will your team win? **Probability** assigns a number between 0 and 1 to every possible event. 0 means impossible, 1 means certain, and 0.5 means a coin-flip chance. It's the math behind gambling, weather forecasting, insurance, and even medical diagnosis."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: The Basic Formula",
+      "content": "• **P(event) = favorable outcomes / total outcomes.**\n• All probabilities must be between 0 and 1 (inclusive).\n• **P(not A)** = 1 - P(A). The probability of something NOT happening.\n• **Independent events (AND):** P(A and B) = P(A) x P(B).\n• **Mutually exclusive events (OR):** P(A or B) = P(A) + P(B)."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Tree Diagrams",
+      "content": "For multi-stage experiments (like flipping a coin twice):\n\n1. Draw branches for each outcome of stage 1.\n2. From each branch, draw branches for each outcome of stage 2.\n3. Multiply probabilities along each path to get the probability of that combination.\n4. Add probabilities of all desired paths to get the final answer."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Drawing Cards",
+      "content": "A bag has 3 red and 7 blue balls. You pick one ball. What's P(red)?\n\n**Step 1:** Total balls = 3 + 7 = 10.\n**Step 2:** Favorable (red) = 3.\n**Step 3:** P(red) = 3/10 = 0.3.\n**Step 4:** P(NOT red) = 1 - 0.3 = 0.7.\n\n**Final Answer: P(red) = 3/10 or 0.3 (30%).**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The biggest probability trap: confusing AND with OR. 'What's the probability of rolling a 3 AND then a 5?' = multiply. 'What's the probability of rolling a 3 OR a 5 in one roll?' = add. Also, students often forget to check if events are independent or dependent. If you draw a card and don't replace it, the second draw has different probabilities!"
+    }
+  ]
+}

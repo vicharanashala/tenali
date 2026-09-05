@@ -1,0 +1,30 @@
+{
+  "title": "Line Equations: Drawing with Algebra",
+  "blocks": [
+    {
+      "icon": "📉",
+      "title": "1. The Core Concept: Every Line Has an Equation",
+      "content": "Every straight line on a graph can be described by an equation of the form **y = mx + c**, where **m** is the gradient (steepness) and **c** is the y-intercept (where the line crosses the y-axis). If you know two points on a line, you can find its exact equation. If you know the equation, you can draw the exact line. Algebra and geometry become one."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: Gradient and Y-Intercept",
+      "content": "• **Gradient (m):** m = (y2 - y1) / (x2 - x1). It measures the steepness and direction.\n• Positive m = line goes uphill (left to right). Negative m = downhill.\n• **Y-intercept (c):** The value of y when x = 0. It's where the line hits the y-axis.\n• **Parallel lines** have the same gradient. **Perpendicular lines** have gradients that multiply to -1."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Finding the Equation from Two Points",
+      "content": "Given two points (x1, y1) and (x2, y2):\n\n1. Calculate m = (y2 - y1) / (x2 - x1).\n2. Substitute m and one point into y = mx + c.\n3. Solve for c.\n4. Write the final equation y = mx + c."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Points (1, 5) and (3, 9)",
+      "content": "**Step 1:** m = (9 - 5) / (3 - 1) = 4 / 2 = 2.\n**Step 2:** Use point (1, 5): 5 = 2(1) + c.\n**Step 3:** 5 = 2 + c, so c = 3.\n**Step 4:** y = 2x + 3.\n\n**Final Answer: y = 2x + 3.** (Gradient 2, y-intercept 3.)"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The classic gradient error: putting the x-difference on top instead of the y-difference. The gradient formula is RISE (y-change) over RUN (x-change), not the other way around. Also, be careful with negative gradients: (3-7)/(2-1) = -4/1 = -4. Don't lose the negative sign, or your line will slope in the wrong direction!"
+    }
+  ]
+}

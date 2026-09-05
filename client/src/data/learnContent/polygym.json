@@ -1,0 +1,30 @@
+{
+  "title": "Polynomials Gym: Algebra Workout",
+  "blocks": [
+    {
+      "icon": "🏋️",
+      "title": "1. The Core Concept: Algebraic Fitness",
+      "content": "The Polynomials Gym tests your ability to perform basic algebraic operations with monomials and polynomials under time pressure. You'll practice adding, subtracting, and multiplying terms with variables. This builds the fundamental algebra muscle needed for every advanced topic."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: Like Terms",
+      "content": "• You can only add/subtract **like terms** (same variable, same power).\n• 3x^2 + 5x^2 = 8x^2 (like terms, add coefficients).\n• 3x^2 + 5x = cannot be simplified (different powers).\n• When multiplying: multiply coefficients AND add powers. 2x^3 * 3x^2 = 6x^5."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. The Method: Speed Tips",
+      "content": "For fast polynomial arithmetic:\n\n1. Group like terms together first.\n2. Add coefficients of like terms.\n3. When multiplying, use the law of indices: x^a * x^b = x^(a+b).\n4. Keep terms in order of descending power for neatness.\n5. Double-check signs, especially with subtraction."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Simplify 3x^2 + 5x - 2x^2 + 7",
+      "content": "**Step 1:** Group like terms: (3x^2 - 2x^2) + 5x + 7.\n**Step 2:** Combine: x^2 + 5x + 7.\n\n**Final Answer: x^2 + 5x + 7.**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The most common gym mistake: treating 2x and 2x^2 as like terms. They are NOT! 2x is degree 1, 2x^2 is degree 2. You can only combine terms with the exact same variable AND the exact same power. Also, don't confuse adding coefficients (for addition) with multiplying coefficients (for multiplication). 2x + 3x = 5x, but 2x * 3x = 6x^2."
+    }
+  ]
+}

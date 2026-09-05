@@ -7093,3 +7093,148 @@ mark.nudge-keyword {
   background: rgba(224,123,57,0.12);
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+ * LEARN / TEST SELECTION — Two-card pathway chooser
+ * ═══════════════════════════════════════════════════════════════════════════
+ * Displayed when a student clicks a lesson. Two cards side-by-side:
+ * "Learn" (concept-first) and "Test" (quiz-first).
+ */
+
+.learn-test-selection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+@media (max-width: 520px) {
+  .learn-test-selection {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+.learn-test-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 28px 20px 24px;
+  border-radius: 14px;
+  border: 2px solid var(--clr-border, #444);
+  background: var(--clr-surface, #1c1c1f);
+  color: var(--clr-text);
+  cursor: pointer;
+  transition: transform 0.18s, border-color 0.18s, box-shadow 0.18s, background 0.18s;
+  text-align: center;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.learn-test-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
+}
+
+.learn-test-card.learn-card:hover {
+  border-color: #388bfd;
+  background: rgba(56, 139, 253, 0.08);
+}
+
+.learn-test-card.test-card:hover {
+  border-color: #2ea043;
+  background: rgba(46, 160, 67, 0.08);
+}
+
+.learn-test-icon {
+  font-size: 2.6rem;
+  line-height: 1;
+}
+
+.learn-test-label {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.learn-test-desc {
+  font-size: 0.88rem;
+  opacity: 0.75;
+  line-height: 1.5;
+  max-width: 220px;
+}
+
+/* Learn placeholder area — shown in the teach view for future content */
+.learn-placeholder {
+  margin-top: 20px;
+  padding: 20px 24px;
+  border-radius: 10px;
+  border: 1.5px dashed var(--clr-border, #444);
+  background: rgba(108, 206, 255, 0.04);
+  text-align: center;
+  color: var(--clr-text-soft, #999);
+}
+
+.learn-placeholder-icon {
+  font-size: 2rem;
+  margin-bottom: 8px;
+  opacity: 0.6;
+}
+
+.learn-placeholder-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+.learn-placeholder-body {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  line-height: 1.5;
+}
+
+/* Test results — pass/fail banners */
+.test-result-banner {
+  padding: 24px;
+  border-radius: 12px;
+  text-align: center;
+  margin: 16px 0;
+}
+
+.test-result-banner.pass {
+  background: rgba(46, 160, 67, 0.12);
+  border: 1.5px solid rgba(46, 160, 67, 0.45);
+}
+
+.test-result-banner.fail {
+  background: rgba(248, 81, 73, 0.12);
+  border: 1.5px solid rgba(248, 81, 73, 0.45);
+}
+
+.test-result-score {
+  font-size: 2.4rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.test-result-banner.pass .test-result-score {
+  color: #2ea043;
+}
+
+.test-result-banner.fail .test-result-score {
+  color: #f85149;
+}
+
+.test-result-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.test-result-detail {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  line-height: 1.5;
+}
+

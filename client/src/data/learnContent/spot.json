@@ -1,0 +1,30 @@
+{
+  "title": "Spot the Error: The Code Review",
+  "blocks": [
+    {
+      "icon": "🕵️",
+      "title": "1. The Core Concept: The Teacher's Perspective",
+      "content": "The highest level of mathematical mastery is not just solving a problem, but being able to read someone else's messy work, spot the invisible mistake, and explain exactly why they failed. This is called 'Code Review' in the software industry! The **Spot the Error** mode forces you to become the teacher, diagnosing diseases in broken algebraic logic."
+    },
+    {
+      "icon": "🔍",
+      "title": "2. The Strategy: Line by Line Execution",
+      "content": "Do not just look at the final answer and say 'It's wrong'. The error happens in the journey.\n\nRead the working out Line by Line. Treat each line transition as an independent step. \nDid they expand the bracket correctly? (Line 1 to 2).\nDid they move the numbers correctly? (Line 2 to 3).\nWhen the logic breaks, you've found the bug."
+    },
+    {
+      "icon": "🚨",
+      "title": "3. The Method: The Big Three Suspects",
+      "content": "95% of all mathematical errors fall into three specific categories. Hunt for these first:\n\n1. **The Minus Sign Drop:** They expanded -2(x - 4) and wrote -2x - 8 instead of +8.\n2. **The Order of Operations Crash:** They calculated 5 + 2 × 3 as 21 instead of 11.\n3. **The Invisible One Trap:** They divided (2x² + 2) by 2 and wrote x² instead of x² + 1."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Finding the Bug",
+      "content": "Spot the error in this student's work:\nLine 1: 3(x + 2) = 15\nLine 2: 3x + 2 = 15\nLine 3: 3x = 13\nLine 4: x = 13/3\n\n• **Analysis:** Look at Line 1 to Line 2. The student expanded the bracket. 3 times x is 3x. 3 times 2 is 6. But they wrote 2!\n• **The Bug:** The student failed to distribute the 3 to the second term inside the bracket. Line 2 should be 3x + 6 = 15."
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The biggest pitfall when spotting errors is 'Correction Bias'. Because you are a good math student, your brain will often autocorrect a mistake when reading someone else's work, making you completely blind to it! You will read '3x + 2' but your brain processes it as '3x + 6' because you know that's what it *should* be. You must read the math literally character-by-character to beat your own autocorrect!"
+    }
+  ]
+}

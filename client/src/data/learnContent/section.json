@@ -1,0 +1,30 @@
+{
+  "title": "Section Formula: Slicing the Line",
+  "blocks": [
+    {
+      "icon": "🔪",
+      "title": "1. The Core Concept: The Uneven Cut",
+      "content": "The Midpoint formula is great if you want to slice a line exactly in half (a 1:1 ratio). But what if you want to place a dot on a line exactly one-third of the way across? Or split it in a 3:2 ratio? The **Section Formula** is an advanced coordinate geometry tool that lets you perfectly slice any line on a grid in any ratio you choose."
+    },
+    {
+      "icon": "⚖️",
+      "title": "2. The Rules: The Cross-Multiply Magic",
+      "content": "The formula looks terrifying: **x = (m₁x₂ + m₂x₁) / (m₁ + m₂)**. But it's actually incredibly simple if you look at the pattern.\n\n• The ratio is m₁ : m₂. (e.g., 3:2).\n• You take the left ratio number (m₁) and multiply it by the RIGHT coordinate (x₂).\n• You take the right ratio number (m₂) and multiply it by the LEFT coordinate (x₁).\n• You 'cross the streams'! Then divide the whole thing by the total parts of the ratio added together."
+    },
+    {
+      "icon": "🗺️",
+      "title": "3. Step-by-Step: Finding the Cut Point",
+      "content": "How to split the line between Point A(x₁, y₁) and Point B(x₂, y₂) in the ratio m₁:m₂.\n\n1. **Set up the X:** Cross multiply the ratio numbers with the X coordinates. Add them up. Divide by the total ratio (m₁ + m₂).\n2. **Set up the Y:** Do the exact same cross-multiplication, but this time use the Y coordinates.\n3. **Combine:** Put your new X and new Y together in brackets (x, y). You have found the exact coordinate of the cut!"
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: The 2:1 Split",
+      "content": "Find the point P that splits the line from A(2, 4) to B(5, 10) in the ratio 2:1.\n\n• **Step 1 (The Ratio):** m₁ = 2, m₂ = 1. Total ratio = 3.\n• **Step 2 (The X cut):** Cross multiply: (2 × 5) + (1 × 2). That's 10 + 2 = 12. Divide by total ratio: 12 ÷ 3 = **4**.\n• **Step 3 (The Y cut):** Cross multiply: (2 × 10) + (1 × 4). That's 20 + 4 = 24. Divide by total ratio: 24 ÷ 3 = **8**.\n\n**Final Answer: Point P is at (4, 8).**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "A lethal mistake is mixing up the order of the ratio. The formula only works if Point A is the start, Point B is the end, and the ratio matches that direction. If you swap x₁ and x₂ but don't swap the ratio numbers, you will find the point that is 2:1 starting from the WRONG end of the line! Always draw a quick sketch to ensure the 'm₁' matches the starting point!"
+    }
+  ]
+}

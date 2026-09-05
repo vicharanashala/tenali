@@ -1,0 +1,30 @@
+{
+  "title": "Differential Equations: The Language of Nature",
+  "blocks": [
+    {
+      "icon": "🌍",
+      "title": "1. The Core Concept: Equations with Derivatives",
+      "content": "A regular equation gives you a number: x + 3 = 7, so x = 4. A **Differential Equation** gives you a function! It contains derivatives (like dy/dx) and your job is to find the original function y. Differential equations describe how things change: population growth, radioactive decay, electrical circuits, even the spread of diseases."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Rules: Order and Degree",
+      "content": "• The **Order** of a DE is the highest derivative present. If it contains dy/dx, it's 1st order. If it contains d^2y/dx^2, it's 2nd order.\n• The **Degree** is the power of the highest derivative (after removing fractions and roots).\n• A **General Solution** contains an arbitrary constant C.\n• A **Particular Solution** uses initial conditions to find the exact value of C."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. Step-by-Step: Solving by Separation of Variables",
+      "content": "For equations where you can separate x and y:\n\n1. Move all y terms and dy to one side.\n2. Move all x terms and dx to the other side.\n3. Integrate both sides.\n4. Don't forget to add the constant of integration C!\n5. If given initial conditions (like y=2 when x=0), substitute to find C."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Worked Example: Separable DE",
+      "content": "Solve dy/dx = 2x, given y = 3 when x = 0.\n\n**Step 1:** Separate: dy = 2x dx.\n**Step 2:** Integrate both sides: integral of dy = integral of 2x dx.\n**Step 3:** y = x^2 + C.\n**Step 4:** Use initial condition: 3 = 0^2 + C, so C = 3.\n\n**Final Answer: y = x^2 + 3.**"
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The most common mistake is forgetting the constant of integration C. Every time you integrate, you MUST add + C. Without it, your general solution is incomplete and you'll lose marks. Also, when separating variables, make sure dy goes with the y terms and dx goes with the x terms. Mixing them up makes the equation unsolvable."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "title": "Custom Lesson: Your Own Challenge",
+  "blocks": [
+    {
+      "icon": "🎯",
+      "title": "1. The Core Concept: Design Your Own Drill",
+      "content": "The **Custom Lesson** mode puts YOU in the teacher's seat. Instead of following a preset quiz, you get to design your own practice session by choosing which topics to include, how many questions to attempt, and what difficulty level suits you. This is perfect for targeted revision before exams."
+    },
+    {
+      "icon": "📚",
+      "title": "2. The Strategy: Focus on Weaknesses",
+      "content": "Don't just pick the topics you're already good at! The whole point of Custom Lessons is to identify and attack your weak spots.\n\n• Check your past quiz scores.\n• Find the topics where you scored below 70%.\n• Build a custom session focused entirely on those problem areas."
+    },
+    {
+      "icon": "🛠️",
+      "title": "3. The Method: Building an Effective Session",
+      "content": "For maximum learning:\n\n1. Pick 2-3 related topics (not 10 random ones).\n2. Start with easier questions to build confidence.\n3. Gradually increase difficulty.\n4. Take notes on any question you get wrong.\n5. Repeat the custom session until you can score 90%+."
+    },
+    {
+      "icon": "📝",
+      "title": "4. Pro Tip: Spaced Repetition",
+      "content": "Don't cram all your practice into one day. Research shows that spreading practice over multiple days (spaced repetition) makes your brain remember things 3x longer than cramming. Do your custom lesson today, then again in 3 days, then again in a week."
+    },
+    {
+      "icon": "⚠️",
+      "title": "5. Common Pitfalls",
+      "content": "The biggest trap is making your custom lesson too easy or too comfortable. If you're scoring 100% every time, you're not learning anything new. Push yourself into uncomfortable territory. Also, don't skip the review phase. Looking at your mistakes is where the real learning happens!"
+    }
+  ]
+}
