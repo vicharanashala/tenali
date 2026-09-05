@@ -1,0 +1,22 @@
+{
+  "id": 1002,
+  "topic": "fractionadd",
+  "op": "+",
+  "question": "What fraction of the circle is shaded blue?",
+  "visualType": "fraction-pie",
+  "visualData": {
+    "numerator": 3,
+    "denominator": 4,
+    "shadedColor": "#3B82F6"
+  },
+  "options": [
+    "1 / 4",
+    "3 / 4",
+    "4 / 3",
+    "2 / 4"
+  ],
+  "answerOption": "B",
+  "answerText": "3 / 4",
+  "explanation": "3 out of 4 slices are shaded blue, so the fraction is 3/4.",
+  "kidExplanation": "3 out of 4 slices are shaded blue, so the fraction is 3/4."
+}

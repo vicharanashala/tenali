@@ -1,0 +1,14 @@
+{
+  "id": 1006,
+  "topic": "qformula",
+  "question": "In the quadratic formula x = (-b ± √(b² - 4ac)) / 2a, what is the term under the square root (b² - 4ac) called?",
+  "options": [
+    "The numerator",
+    "The discriminant",
+    "The multiplier",
+    "The linear coefficient"
+  ],
+  "answerOption": "B",
+  "answerText": "The discriminant",
+  "explanation": "The term b² - 4ac is called the discriminant because it discriminates (distinguishes) between the different types of roots the equation can have: two real roots, one real root, or complex roots."
+}

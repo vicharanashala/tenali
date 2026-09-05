@@ -1,0 +1,15 @@
+{
+  "id": 1003,
+  "topic": "indices",
+  "question": "What is 5⁰ equal to?",
+  "options": [
+    "0",
+    "1",
+    "5",
+    "10"
+  ],
+  "answerOption": "B",
+  "answerText": "1",
+  "explanation": "Any number raised to the power of 0 always equals 1!",
+  "kidExplanation": "Any number raised to the power of 0 always equals 1!"
+}

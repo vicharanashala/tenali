@@ -1,0 +1,45 @@
+[
+  {
+    "id": 3001,
+    "topic": "lineareq",
+    "question": "If 2 identical boxes weigh the same as 6 single weights, how much does 1 box weigh?",
+    "visualType": "fraction-bar",
+    "visualData": {
+      "numerator": 3,
+      "denominator": 6,
+      "shadedColor": "#6366F1"
+    },
+    "options": [
+      "2",
+      "3",
+      "4",
+      "6"
+    ],
+    "answerOption": "B",
+    "answerText": "3",
+    "explanation": "If 2x = 6, then x = 6 / 2 = 3.",
+    "kidExplanation": "If 2 boxes weigh 6, each box weighs 3!"
+  },
+  {
+    "id": 3002,
+    "topic": "lineareq",
+    "question": "A mystery box + 3 blocks balance 8 blocks on a scale. What is inside the mystery box?",
+    "visualType": "number-line",
+    "visualData": {
+      "start": 0,
+      "end": 10,
+      "step": 1,
+      "mark": 5
+    },
+    "options": [
+      "3",
+      "4",
+      "5",
+      "11"
+    ],
+    "answerOption": "C",
+    "answerText": "5",
+    "explanation": "Subtract 3 blocks from both sides: x + 3 = 8 => x = 5.",
+    "kidExplanation": "Subtract 3 from 8 to find x = 5!"
+  }
+]

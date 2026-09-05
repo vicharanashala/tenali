@@ -1,0 +1,14 @@
+{
+  "id": 1004,
+  "topic": "indices",
+  "question": "What is the mathematical meaning of a negative exponent like x⁻ⁿ?",
+  "options": [
+    "A negative value",
+    "The reciprocal of the base raised to the positive power (1 / xⁿ)",
+    "A value less than zero but positive",
+    "The square root of x raised to the power of n"
+  ],
+  "answerOption": "B",
+  "answerText": "The reciprocal of the base raised to the positive power (1 / xⁿ)",
+  "explanation": "A negative exponent represents division, not a negative value. Thus, x⁻ⁿ = 1 / xⁿ. For example, 2⁻³ = 1 / (2³) = 1/8."
+}

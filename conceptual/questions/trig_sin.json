@@ -1,0 +1,14 @@
+{
+  "id": 1009,
+  "topic": "trig",
+  "question": "In a right-angled triangle, which ratio defines the Sine (sin) of a reference angle?",
+  "options": [
+    "Adjacent side divided by Hypotenuse",
+    "Opposite side divided by Hypotenuse",
+    "Opposite side divided by Adjacent side",
+    "Hypotenuse divided by Opposite side"
+  ],
+  "answerOption": "B",
+  "answerText": "Opposite side divided by Hypotenuse",
+  "explanation": "According to the SOHCAHTOA mnemonic, Sine = Opposite / Hypotenuse (SOH), Cosine = Adjacent / Hypotenuse (CAH), and Tangent = Opposite / Adjacent (TOA)."
+}

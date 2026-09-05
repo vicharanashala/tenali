@@ -1,0 +1,90 @@
+[
+  {
+    "id": 2001,
+    "topic": "basicarith",
+    "question": "There are 3 groups of 4 stars each. How many stars in total?",
+    "visualType": "group-counting",
+    "visualData": {
+      "totalItems": 12,
+      "itemsPerGroup": 4,
+      "itemType": "star",
+      "groupColor": "#F59E0B"
+    },
+    "options": [
+      "7",
+      "12",
+      "16",
+      "8"
+    ],
+    "answerOption": "B",
+    "answerText": "12",
+    "explanation": "3 groups × 4 stars = 12 stars altogether.",
+    "kidExplanation": "3 groups × 4 stars = 12 stars altogether."
+  },
+  {
+    "id": 2002,
+    "topic": "basicarith",
+    "question": "Start at 2 and move 3 steps to the right on the number line. Where do you land?",
+    "visualType": "number-line",
+    "visualData": {
+      "start": 0,
+      "end": 10,
+      "step": 1,
+      "mark": 5
+    },
+    "options": [
+      "4",
+      "5",
+      "6",
+      "3"
+    ],
+    "answerOption": "B",
+    "answerText": "5",
+    "explanation": "2 + 3 = 5 on the number line.",
+    "kidExplanation": "2 + 3 = 5 on the number line."
+  },
+  {
+    "id": 2003,
+    "topic": "basicarith",
+    "question": "15 apples are divided equally into 3 baskets. How many apples in each basket?",
+    "visualType": "group-counting",
+    "visualData": {
+      "totalItems": 15,
+      "itemsPerGroup": 5,
+      "itemType": "apple",
+      "groupColor": "#10B981"
+    },
+    "options": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "answerOption": "C",
+    "answerText": "5",
+    "explanation": "15 ÷ 3 = 5 apples per basket.",
+    "kidExplanation": "15 ÷ 3 = 5 apples per basket."
+  },
+  {
+    "id": 2004,
+    "topic": "basicarith",
+    "question": "Which sign makes the equation true: 7 __ 3 = 10?",
+    "visualType": "number-line",
+    "visualData": {
+      "start": 0,
+      "end": 10,
+      "step": 1,
+      "mark": 7
+    },
+    "options": [
+      "+",
+      "-",
+      "×",
+      "÷"
+    ],
+    "answerOption": "A",
+    "answerText": "+",
+    "explanation": "7 + 3 = 10.",
+    "kidExplanation": "7 + 3 = 10."
+  }
+]

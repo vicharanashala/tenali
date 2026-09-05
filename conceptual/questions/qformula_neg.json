@@ -1,0 +1,14 @@
+{
+  "id": 1007,
+  "topic": "qformula",
+  "question": "What kind of roots does a quadratic equation have if the discriminant (b² - 4ac) is less than zero (negative)?",
+  "options": [
+    "Two distinct real roots",
+    "Two complex (imaginary) roots",
+    "Exactly one repeated real root",
+    "No roots at all (equation is unsolvable)"
+  ],
+  "answerOption": "B",
+  "answerText": "Two complex (imaginary) roots",
+  "explanation": "If b² - 4ac < 0, the term under the square root in the quadratic formula is negative. Since the square root of a negative number is not real, the equation has two complex (imaginary conjugate) roots."
+}

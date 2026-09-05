@@ -1,0 +1,22 @@
+{
+  "id": 1003,
+  "topic": "fractionadd",
+  "op": "/",
+  "question": "What fraction of the bar is shaded green?",
+  "visualType": "fraction-bar",
+  "visualData": {
+    "numerator": 2,
+    "denominator": 5,
+    "shadedColor": "#10B981"
+  },
+  "options": [
+    "5 / 2",
+    "2 / 5",
+    "3 / 5",
+    "1 / 5"
+  ],
+  "answerOption": "B",
+  "answerText": "2 / 5",
+  "explanation": "2 out of 5 equal bar segments are green, so the fraction is 2/5.",
+  "kidExplanation": "2 out of 5 equal bar segments are green, so the fraction is 2/5."
+}

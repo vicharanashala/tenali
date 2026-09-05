@@ -1,0 +1,180 @@
+[
+  {
+    "id": 1001,
+    "topic": "fractionadd",
+    "op": "+",
+    "question": "What fraction of the circle is shaded blue?",
+    "visualType": "fraction-pie",
+    "visualData": {
+      "numerator": 3,
+      "denominator": 4,
+      "shadedColor": "#3B82F6"
+    },
+    "options": [
+      "1 / 4",
+      "3 / 4",
+      "4 / 3",
+      "2 / 4"
+    ],
+    "answerOption": "B",
+    "answerText": "3 / 4",
+    "explanation": "3 of the 4 equal pie slices are blue, so the fraction is 3/4.",
+    "kidExplanation": "3 of the 4 equal pie slices are blue, so the fraction is 3/4."
+  },
+  {
+    "id": 1002,
+    "topic": "fractionadd",
+    "op": "+",
+    "question": "What fraction of the circle is shaded red?",
+    "visualType": "fraction-pie",
+    "visualData": {
+      "numerator": 2,
+      "denominator": 6,
+      "shadedColor": "#EF4444"
+    },
+    "options": [
+      "2 / 6",
+      "4 / 6",
+      "1 / 2",
+      "5 / 6"
+    ],
+    "answerOption": "A",
+    "answerText": "2 / 6",
+    "explanation": "2 out of 6 slices are red, which is 2/6.",
+    "kidExplanation": "2 out of 6 slices are red, which is 2/6."
+  },
+  {
+    "id": 1003,
+    "topic": "fractionadd",
+    "op": "/",
+    "question": "What fraction of the bar is shaded green?",
+    "visualType": "fraction-bar",
+    "visualData": {
+      "numerator": 2,
+      "denominator": 5,
+      "shadedColor": "#10B981"
+    },
+    "options": [
+      "5 / 2",
+      "2 / 5",
+      "3 / 5",
+      "1 / 5"
+    ],
+    "answerOption": "B",
+    "answerText": "2 / 5",
+    "explanation": "2 out of 5 equal bar segments are green, so the fraction is 2/5.",
+    "kidExplanation": "2 out of 5 equal bar segments are green, so the fraction is 2/5."
+  },
+  {
+    "id": 1004,
+    "topic": "fractionadd",
+    "op": "+",
+    "question": "What fraction of the circle is shaded purple?",
+    "visualType": "fraction-pie",
+    "visualData": {
+      "numerator": 5,
+      "denominator": 8,
+      "shadedColor": "#8B5CF6"
+    },
+    "options": [
+      "3 / 8",
+      "5 / 8",
+      "8 / 5",
+      "1 / 2"
+    ],
+    "answerOption": "B",
+    "answerText": "5 / 8",
+    "explanation": "5 of 8 equal slices are colored purple, making 5/8.",
+    "kidExplanation": "5 of 8 equal slices are colored purple, making 5/8."
+  },
+  {
+    "id": 1005,
+    "topic": "fractionadd",
+    "op": "+",
+    "question": "What fraction of the tape model is shaded orange?",
+    "visualType": "fraction-bar",
+    "visualData": {
+      "numerator": 4,
+      "denominator": 7,
+      "shadedColor": "#F59E0B"
+    },
+    "options": [
+      "4 / 7",
+      "3 / 7",
+      "7 / 4",
+      "2 / 7"
+    ],
+    "answerOption": "A",
+    "answerText": "4 / 7",
+    "explanation": "4 out of 7 equal boxes are shaded orange, giving 4/7.",
+    "kidExplanation": "4 out of 7 equal boxes are shaded orange, giving 4/7."
+  },
+  {
+    "id": 1006,
+    "topic": "fractionadd",
+    "op": "+",
+    "question": "Which fraction is marked by the star on the number line?",
+    "visualType": "number-line",
+    "visualData": {
+      "start": 0,
+      "end": 1,
+      "step": 0.25,
+      "mark": 0.75
+    },
+    "options": [
+      "1 / 4",
+      "2 / 4",
+      "3 / 4",
+      "1 / 2"
+    ],
+    "answerOption": "C",
+    "answerText": "3 / 4",
+    "explanation": "The star is 3 steps out of 4 from 0 to 1, which equals 3/4.",
+    "kidExplanation": "The star is 3 steps out of 4 from 0 to 1, which equals 3/4."
+  },
+  {
+    "id": 1007,
+    "topic": "fractionadd",
+    "op": "+",
+    "question": "What fraction of the total apples are highlighted red?",
+    "visualType": "group-counting",
+    "visualData": {
+      "totalItems": 6,
+      "itemsPerGroup": 2,
+      "itemType": "apple",
+      "groupColor": "#EF4444"
+    },
+    "options": [
+      "2 / 6",
+      "4 / 6",
+      "1 / 2",
+      "3 / 6"
+    ],
+    "answerOption": "A",
+    "answerText": "2 / 6",
+    "explanation": "2 out of 6 total apples are red, which is 2/6.",
+    "kidExplanation": "2 out of 6 total apples are red, which is 2/6."
+  },
+  {
+    "id": 1008,
+    "topic": "fractionadd",
+    "op": "+",
+    "question": "What fraction of the bar is shaded teal?",
+    "visualType": "fraction-bar",
+    "visualData": {
+      "numerator": 1,
+      "denominator": 3,
+      "shadedColor": "#0EA5E9"
+    },
+    "options": [
+      "1 / 3",
+      "2 / 3",
+      "3 / 1",
+      "1 / 2"
+    ],
+    "answerOption": "A",
+    "answerText": "1 / 3",
+    "explanation": "1 out of 3 equal bar segments is teal, giving 1/3.",
+    "kidExplanation": "1 out of 3 equal bar segments is teal, giving 1/3."
+  }
+]
