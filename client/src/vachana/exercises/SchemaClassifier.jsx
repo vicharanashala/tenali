@@ -598,36 +598,36 @@ export default function SchemaClassifier() {
         id: 'q1',
         title: 'Question 1',
         icon: '🎁',
-        text: '🎁 Meera has 3 🎁 gifts. Her friend gives her 2 more 🎁 gifts. Which schema is this?',
+        text: '🎁 Meera has 3 gifts. Her friend gives 2 more gifts. Which schema is this?',
         correctType: 'Combine',
         hints: {
-          Combine: 'Are two groups coming together? 🤔',
-          Compare: 'Are we looking at two groups to see which has more or less? 🤔',
-          Change: 'Did something happen that changed the amount? 🤔'
+          Combine: 'Are things coming together? 🤔',
+          Compare: 'Are we finding which group has more? 🤔',
+          Change: 'Did the amount grow or shrink? 🤔'
         }
       },
       {
         id: 'q2',
         title: 'Question 2',
         icon: '🧸',
-        text: '🧸 Aarav has 6 🧸 toys. Riya has 4 🧸 toys. Who has more toys? Which schema is this?',
+        text: '🧸 Aarav has 6 toys. Riya has 4 toys. Who has more toys? Which schema is this?',
         correctType: 'Compare',
         hints: {
-          Combine: 'Are two groups coming together? 🤔',
-          Compare: 'Are we looking at two groups to see which has more or less? 🤔',
-          Change: 'Did something happen that changed the amount? 🤔'
+          Combine: 'Are things coming together? 🤔',
+          Compare: 'Are we finding which group has more? 🤔',
+          Change: 'Did the amount grow or shrink? 🤔'
         }
       },
       {
         id: 'q3',
         title: 'Question 3',
         icon: '🎈',
-        text: '🎈 Kabir has 5 🎈 balloons. 2 balloons pop 💥. How many balloons does he have now? Which schema is this?',
+        text: '🎈 Kabir has 5 balloons. 2 balloons pop. How many now? Which schema is this?',
         correctType: 'Change',
         hints: {
-          Combine: 'Are two groups coming together? 🤔',
-          Compare: 'Are we looking at two groups to see which has more or less? 🤔',
-          Change: 'Did something happen that changed the amount? 🤔'
+          Combine: 'Are things coming together? 🤔',
+          Compare: 'Are we finding which group has more? 🤔',
+          Change: 'Did the amount grow or shrink? 🤔'
         }
       }
     ];
@@ -641,7 +641,7 @@ export default function SchemaClassifier() {
 
       const hintMsg = isCorrect
         ? 'Correct!'
-        : `Not quite — try again! ${q.hints[choice] || 'Think carefully about the schema definition.'}`;
+        : `Not quite. Try again! ${q.hints[choice] || 'Think about what happens.'}`;
 
       setL0Feedback(prev => ({
         ...prev,
@@ -839,7 +839,7 @@ export default function SchemaClassifier() {
             boxShadow: 'var(--shadow-card)'
           }}>
             <h1 style={{ margin: 0, fontSize: '1.75rem', fontWeight: 700, color: 'var(--clr-text)', letterSpacing: '-0.01em' }}>
-              Learn the 3 simple schema structures below, then practice!
+              3 ways numbers work. Learn each one.
             </h1>
           </div>
 
@@ -885,8 +885,11 @@ export default function SchemaClassifier() {
                       ↺ Reset
                     </button>
                   </div>
+                  <p style={{ margin: '0 0 4px 0', fontSize: '1.05rem', color: 'var(--clr-text)', lineHeight: 1.5, fontWeight: 700 }}>
+                    Combine means put things together.
+                  </p>
                   <p style={{ margin: '0 0 16px 0', fontSize: '1rem', color: 'var(--clr-text-soft)', lineHeight: 1.5, fontWeight: 400 }}>
-                    <strong style={{ color: 'var(--clr-text)' }}>Putting quantities together</strong> to form a whole total. Drag or tap all toys into the gift box!
+                    Tap the toys into the box.
                   </p>
 
                   <div style={{
@@ -1052,7 +1055,7 @@ export default function SchemaClassifier() {
                   textAlign: 'center',
                   transition: 'all 0.2s ease'
                 }}>
-                  {l0CombineCompleted ? '🎉 Perfect! Things came together → COMBINE' : '👉 Drag or click toys into the gift box → COMBINE'}
+                  {l0CombineCompleted ? '🎉 Correct! That is COMBINE.' : '👉 Tap the toys into the box.'}
                 </div>
               </div>
 
@@ -1074,7 +1077,7 @@ export default function SchemaClassifier() {
                   alignItems: 'center',
                   gap: '8px'
                 }}>
-                  <span>Up next: Compare — see who has more!</span>
+                  <span>Next: Compare — find which group has more.</span>
                 </div>
 
                 <button
@@ -1143,8 +1146,8 @@ export default function SchemaClassifier() {
                       ↺ Reset
                     </button>
                   </div>
-                  <p style={{ margin: '0 0 16px 0', fontSize: '1rem', color: 'var(--clr-text-soft)', lineHeight: 1.5, fontWeight: 400 }}>
-                    <strong style={{ color: 'var(--clr-text)' }}>Comparing two quantities</strong> to see which group has more!
+                  <p style={{ margin: '0 0 16px 0', fontSize: '1.05rem', color: 'var(--clr-text)', lineHeight: 1.5, fontWeight: 700 }}>
+                    Compare means find which group has more.
                   </p>
 
                   <div style={{
@@ -1232,7 +1235,7 @@ export default function SchemaClassifier() {
                   textAlign: 'center',
                   transition: 'all 0.2s ease'
                 }}>
-                  {l0CompareCompleted ? '🎉 Spot on! Comparing to see the difference → COMPARE' : '👉 Select the group with more puzzles → COMPARE'}
+                  {l0CompareCompleted ? '🎉 Correct! That is COMPARE.' : '👉 Tap the group with more puzzles.'}
                 </div>
               </div>
 
@@ -1254,7 +1257,7 @@ export default function SchemaClassifier() {
                   alignItems: 'center',
                   gap: '8px'
                 }}>
-                  <span>Up next: Change — see quantities increase & decrease over time!</span>
+                  <span>Next: Change — when an amount grows or shrinks.</span>
                 </div>
 
                 <button
@@ -1324,8 +1327,11 @@ export default function SchemaClassifier() {
                       ↺ Reset
                     </button>
                   </div>
+                  <p style={{ margin: '0 0 4px 0', fontSize: '1.05rem', color: 'var(--clr-text)', lineHeight: 1.5, fontWeight: 700 }}>
+                    Change means an amount grows or shrinks.
+                  </p>
                   <p style={{ margin: '0 0 16px 0', fontSize: '1rem', color: 'var(--clr-text-soft)', lineHeight: 1.5, fontWeight: 400 }}>
-                    <strong style={{ color: 'var(--clr-text)' }}>A quantity increases or decreases</strong> when events happen over time. Trigger events below to watch quantity change!
+                    Tap a button to change the balloons.
                   </p>
 
                   <div style={{
@@ -1400,7 +1406,7 @@ export default function SchemaClassifier() {
                     </div>
 
                     <div style={{ color: 'var(--clr-accent)', fontWeight: 700, fontSize: '1.05rem' }}>
-                      Start: 6 balloons → Events: {l0ChangeHistory.length > 0 ? l0ChangeHistory.join(', ') : 'None'} → Current: {pluralize(l0ChangeState, 'balloon')}
+                      Start: 6 balloons. Events: {l0ChangeHistory.length > 0 ? l0ChangeHistory.join(', ') : 'None'}. Current: {pluralize(l0ChangeState, 'balloon')}
                     </div>
                   </div>
                 </div>
@@ -1416,7 +1422,7 @@ export default function SchemaClassifier() {
                   textAlign: 'center',
                   transition: 'all 0.2s ease'
                 }}>
-                  {l0ChangeCompleted ? '🎉 Awesome! Quantity changes over time → CHANGE' : '👉 Trigger an event button to change the balloon count → CHANGE'}
+                  {l0ChangeCompleted ? '🎉 Correct! That is CHANGE.' : '👉 Tap a button to change the balloons.'}
                 </div>
               </div>
 
@@ -1438,7 +1444,7 @@ export default function SchemaClassifier() {
                   alignItems: 'center',
                   gap: '8px'
                 }}>
-                  <span>Up next: Time to practice what you learned!</span>
+                  <span>Next: Practice what you learned!</span>
                 </div>
 
                 <button
@@ -1485,11 +1491,11 @@ export default function SchemaClassifier() {
                 </div>
 
                 <h2 style={{ margin: 0, fontSize: '1.8rem', fontWeight: 700, color: 'var(--clr-text)' }}>
-                  You've learned all 3 patterns!
+                  You learned all 3 ways!
                 </h2>
 
                 <p style={{ margin: 0, fontSize: '1.05rem', color: 'var(--clr-text-soft)', lineHeight: 1.5, maxWidth: '480px' }}>
-                  Let's see if you can spot them 👀
+                  Now try to find them!
                 </p>
 
                 <div style={{
@@ -1519,7 +1525,7 @@ export default function SchemaClassifier() {
                   gap: '8px',
                   marginTop: '4px'
                 }}>
-                  <span>Up next: Level 1 begins!</span>
+                  <span>Next: Level 1 begins!</span>
                 </div>
 
                 <button
@@ -1574,7 +1580,7 @@ export default function SchemaClassifier() {
                 </h2>
 
                 <p style={{ margin: '0 0 24px 0', fontSize: '1.05rem', color: 'var(--clr-text-soft)', lineHeight: 1.5, fontWeight: 400 }}>
-                  You have learned all three. Great job! Now identify the schema in each question.
+                  Great job! Pick the right way for each question.
                 </p>
 
                 {/* ONE-QUESTION-AT-A-TIME PRACTICE WORKSPACE */}
@@ -1754,10 +1760,10 @@ export default function SchemaClassifier() {
                   }}>
                     <div style={{ fontSize: '36px' }}>🎉</div>
                     <h3 style={{ margin: 0, fontSize: '1.6rem', fontWeight: 700, color: 'var(--clr-text)' }}>
-                      Great job! You've completed practice.
+                      Great job! You finished practice.
                     </h3>
                     <p style={{ margin: 0, fontSize: '1rem', color: 'var(--clr-text-soft)' }}>
-                      You know all three basic schemas! Level 1 is now unlocked. Ready to try real word problems?
+                      You know all 3 ways! Level 1 is ready.
                     </p>
 
                     <button
