@@ -17,6 +17,7 @@ export function getPathname() {
 }
 
 export function navigate(path) {
+  // eslint-disable-next-line no-restricted-syntax
   window.location.href = BASE + path;
 }
 
