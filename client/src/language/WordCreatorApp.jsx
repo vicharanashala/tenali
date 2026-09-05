@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useTimer, QuizLayout } from '../App';
+import { useTimer } from '../hooks/useTimer';
+import { QuizLayout } from '../components/QuizLayout';
 
 // Anchor /wordcreator-api fetches to the current sub-path so they reach
 // /summership/wordcreator-api on the sub-path deployment (where the route

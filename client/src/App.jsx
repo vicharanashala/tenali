@@ -99,6 +99,13 @@ import ContrastChallengeApp, { QuizLayoutExtension } from './ContrastChallengeAp
 import { VOCAB_CORPUS } from './vocabCorpus'
 import PercentExplanationApp from './PercentExplanationApp'
 import { playSound } from './audioContext'
+import { installMonstersInterceptor } from './monsters/fetchInterceptor.js';
+import MonsterToast from './monsters/MonsterToast.jsx';
+import HallPanel from './monsters/HallPanel.jsx';
+import CureFlow from './monsters/CureFlow.jsx';
+import GuidedSolver from './monsters/GuidedSolver.jsx';
+import { load as loadMonsterLog, getMonsterHealedState } from './monsters/monsterStore.js';
+import MonsterAvatar from './monsters/MonsterAvatar.jsx';
 import GeometryApp from './GeometryApp';
 import EquationSandboxApp from './lib/EquationSandboxApp.jsx';
 import QFormulaConceptApp from './lib/concept/QFormulaConceptApp.jsx';
@@ -42407,6 +42414,95 @@ function App() {
     }
   })
 
+  // Install monsters interceptor once on mount.
+  // It wraps window.fetch to detect wrong answers and dispatch a CustomEvent
+  // for MonsterToast (and Hall, when added). Spec §5.
+  useEffect(() => {
+    try { installMonstersInterceptor() } catch (_e) { /* never break the app */ }
+  }, [])
+
+  // Misconception Monsters — Hall modal state. Spec §6.5.
+  // The monsterLog is hydrated from localStorage on mount. Toast CTA / future
+  // header icon can flip hallOpen; HallPanel reads from monsterLog snapshot.
+  const [monsterLog, setMonsterLog] = useState(() => {
+    try { return loadMonsterLog() } catch { return null }
+  })
+  const [hallOpen, setHallOpen] = useState(false)
+  const [activeCure, setActiveCure] = useState(null)
+  const [guidedSolverMonsterId, setGuidedSolverMonsterId] = useState(null)
+  const [activeInterruption, setActiveInterruption] = useState(null)
+
+  // Track monsters triggered during the active play session
+  const sessionMonstersRef = useRef(new Set())
+  const previousModeRef = useRef(null)
+
+  // Dispatch session summary when returning to menu from active quiz
+  useEffect(() => {
+    if (previousModeRef.current && !mode) {
+      if (sessionMonstersRef.current.size > 0) {
+        const monsterIds = Array.from(sessionMonstersRef.current)
+        window.dispatchEvent(new CustomEvent('tenali:sessionSummary', {
+          detail: { monsterIds }
+        }))
+      }
+    }
+    if (mode) {
+      sessionMonstersRef.current.clear()
+    }
+    previousModeRef.current = mode
+  }, [mode])
+
+  // Listen to wrong answer events for inline card interruptions and session tracking
+  useEffect(() => {
+    function handle(e) {
+      const detail = e.detail || {}
+      if (!detail.monsterId) return
+
+      // Track this trigger for the post-game summary
+      sessionMonstersRef.current.add(detail.monsterId)
+
+      const healedState = getMonsterHealedState(detail.monsterId)
+      setActiveInterruption({
+        monsterId: detail.monsterId,
+        state: healedState,
+        isIntro: detail.isNew === true
+      })
+
+      setTimeout(() => {
+        setActiveInterruption(null)
+      }, 2500)
+    }
+    window.addEventListener('tenali:wrongAnswer', handle)
+    return () => window.removeEventListener('tenali:wrongAnswer', handle)
+  }, [])
+
+  // Keep monsterLog in sync with localStorage. The fetchInterceptor's
+  // monsterStore.append() writes to localStorage; we re-hydrate when the
+  // browser fires a 'storage' event (e.g. another tab). For same-tab writes
+  // we expose a small global hook that the interceptor can call; fallback is
+  // a window event.
+  useEffect(() => {
+    function onStorage(e) {
+      if (e && e.key === 'tenali.monsterLog.v1') {
+        try { setMonsterLog(loadMonsterLog()) } catch { }
+      }
+    }
+    function onMonsterLogChanged() {
+      try { setMonsterLog(loadMonsterLog()) } catch { }
+    }
+    function onOpenHall() {
+      setHallOpen(true)
+    }
+    window.addEventListener('storage', onStorage)
+    window.addEventListener('tenali:monsterLogChanged', onMonsterLogChanged)
+    window.addEventListener('tenali:openHall', onOpenHall)
+    return () => {
+      window.removeEventListener('storage', onStorage)
+      window.removeEventListener('tenali:monsterLogChanged', onMonsterLogChanged)
+      window.removeEventListener('tenali:openHall', onOpenHall)
+    }
+  }, [])
+
   // Synchronize browser URL query parameters dynamically with the active mode state
   useEffect(() => {
     try {
@@ -44898,6 +44994,49 @@ function App() {
       <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
         {theme === 'dark' ? '☀️' : '🌙'}
       </button>
+      <style>{`
+        .monster-interruption-popup {
+          position: fixed;
+          bottom: 24px;
+          left: 24px;
+          z-index: 1000000;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          pointer-events: none;
+          animation: inline-slide-wobble 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        .monster-interruption-bubble {
+          background: var(--clr-card, #2c2622);
+          color: var(--clr-text, #ede8e3);
+          border: 1.5px solid var(--clr-border, rgba(255,245,230,0.18));
+          border-radius: 12px;
+          padding: 8px 12px;
+          font-size: 12px;
+          font-weight: 700;
+          margin-top: 6px;
+          box-shadow: var(--shadow-card);
+          white-space: nowrap;
+        }
+        @keyframes inline-slide-wobble {
+          0% { transform: translateY(60px) scale(0.5); opacity: 0; }
+          70% { transform: translateY(-5px) scale(1.05); opacity: 0.9; }
+          100% { transform: translateY(0) scale(1); opacity: 1; }
+        }
+      `}</style>
+
+      {activeInterruption && (
+        <div className="monster-interruption-popup">
+          <MonsterAvatar monsterId={activeInterruption.monsterId} size={90} state={activeInterruption.state} />
+          <div className="monster-interruption-bubble">
+            {activeInterruption.isIntro
+              ? 'A new monster has breached!'
+              : activeInterruption.state === 'warning'
+                ? '⚠️ Grrr... I am stirring!'
+                : 'Struck again!'}
+          </div>
+        </div>
+      )}
       <div>
         {mode === 'vachana' ? (
           <Vachana onBack={() => setMode(null)} initialAdaptScore={diagnosticState[mode] || 0} />
@@ -44908,6 +45047,49 @@ function App() {
         )}
       </div>
       {renderCelebrationModal()}
+      {/* Misconception Monsters — toast overlay (portals to body) + Hall modal. Spec §6. */}
+      <MonsterToast
+        onOpenHall={() => setHallOpen(true)}
+        onTap={() => setHallOpen(true)}
+      />
+      <HallPanel
+        open={hallOpen}
+        onClose={() => {
+          setHallOpen(false)
+          setGuidedSolverMonsterId(null)
+        }}
+        monsterLog={monsterLog}
+        initialSelectedId={guidedSolverMonsterId}
+        initialGuidedSolver={!!guidedSolverMonsterId}
+        onStartCure={(monsterId, topic) => {
+          setHallOpen(false)
+          setGuidedSolverMonsterId(null)
+          setActiveCure({ monsterId, topic })
+        }}
+        onOpenGuidedSolver={(monsterId) => {
+          setGuidedSolverMonsterId(monsterId)
+        }}
+        onCloseSolver={() => {
+          // Clear the flag so the next Hall open (from toast, header, etc.)
+          // lands on the grid instead of reopening the same solver.
+          setGuidedSolverMonsterId(null)
+        }}
+      />
+      {activeCure && <CureFlow
+        monsterId={activeCure.monsterId}
+        topic={activeCure.topic}
+        onCancel={() => setActiveCure(null)}
+        onComplete={() => {
+          try { setMonsterLog(loadMonsterLog()) } catch { }
+          setActiveCure(null)
+          setHallOpen(true)
+        }}
+        onOpenGuidedSolver={(monsterId) => {
+          setActiveCure(null)
+          setGuidedSolverMonsterId(monsterId)
+          setHallOpen(true)
+        }}
+      />}
       <ReflectionJournal />
     </div>
   )
@@ -45239,6 +45421,16 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
                onMouseLeave={e => e.target.style.background = 'none'}>
               <strong style={{ color: 'var(--clr-accent)' }}>Language Puzzles</strong>
               <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>Fill in the blanks to create new words</span>
+            </button>
+
+            <button onClick={() => { setMenuOpen(false); window.dispatchEvent(new CustomEvent('tenali:openHall')) }} style={{
+              display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
+              background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
+              fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)'
+            }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
+              onMouseLeave={e => e.target.style.background = 'none'}>
+              <strong style={{ color: 'var(--clr-accent)' }}>{'\uD83D\uDC7E'} Hall of Silly Mistakes</strong>
+              <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>Review your misconception monsters</span>
             </button>
             </div>}
           </div>
@@ -47501,7 +47693,7 @@ function GKApp({ onBack, markTopicCompleted, isGoalMode = false }) {
     const res = await fetch(`${API}/gk-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  id: question.id, answerOption: option, sessionGoal }) })
     const data = await res.json()
     setIsCorrect(data.correct)
-    if (data.correct) setScore((s) => s + 1)
+    if (data.correct) setScore((s) => s + 1);
     // Show feedback with explanation
     (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
@@ -51788,7 +51980,7 @@ const fetchQuestion = async () => {
       const res = await fetch(`${API}/basicarith-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  a: question.a, b: question.b, op: question.op, answer: Number(answer), sessionGoal }) })
       const data = await res.json()
       setIsCorrect(data.correct)
-      if (data.correct) setScore(s => s + 1)
+      if (data.correct) setScore(s => s + 1);
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
@@ -52105,7 +52297,7 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
       const termA = a * xSq
       const termB = b * x
       const sign = (v) => v >= 0 ? `+ ${v}` : `− ${Math.abs(v)}`
-      const reasoning = `y = ${a}(${x})² ${sign(b)}(${x}) ${sign(c)}\n= ${a}(${xSq}) ${sign(termB)} ${sign(c)}\n= ${termA} ${sign(termB)} ${sign(c)}\n= ${data.correctAnswer}`
+      const reasoning = `y = ${a}(${x})² ${sign(b)}(${x}) ${sign(c)}\n= ${a}(${xSq}) ${sign(termB)} ${sign(c)}\n= ${termA} ${sign(termB)} ${sign(c)}\n= ${data.correctAnswer}`;
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
@@ -53670,7 +53862,7 @@ const loadQuestion = async (excludeIds) => {
     const res = await fetch(`${API}/vocab-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  id: question.id, answerOption: option, sessionGoal }) })
     const data = await res.json()
     setIsCorrect(data.correct)
-    if (data.correct) setScore((s) => s + 1)
+    if (data.correct) setScore((s) => s + 1);
     // Show feedback with correct answer text
     (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
@@ -55230,7 +55422,7 @@ const loadQuestion = async () => {
       const r = await fetch(`${API}/dotprod-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ ...payload, sessionGoal }) })
       const data = await r.json()
       setIsCorrect(data.correct); setRevealed(true)
-      if (data.correct) setScore(s => s + 1)
+      if (data.correct) setScore(s => s + 1);
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
@@ -57215,7 +57407,7 @@ const loadQuestion = async () => {
       const r = await fetch(`${API}/squaring-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  ...question, userAnswer, sessionGoal }) })
       const data = await r.json()
       setIsCorrect(data.correct); setRevealed(true)
-      if (data.correct) setScore(s => s + 1)
+      if (data.correct) setScore(s => s + 1);
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
@@ -58227,7 +58419,7 @@ const loadQuestion = async () => {
       const r = await fetch(`${API}/sets-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ ...payload, sessionGoal }) })
       const data = await r.json()
       setIsCorrect(data.correct); setRevealed(true)
-      if (data.correct) setScore(s => s + 1)
+      if (data.correct) setScore(s => s + 1);
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
@@ -58457,7 +58649,7 @@ const loadQuestion = async () => {
       const r = await fetch(`${API}/sequences-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ ...payload, sessionGoal }) })
       const data = await r.json()
       setIsCorrect(data.correct); setRevealed(true)
-      if (data.correct) setScore(s => s + 1)
+      if (data.correct) setScore(s => s + 1);
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
@@ -58710,7 +58902,7 @@ const loadQuestion = async () => {
       const data = await r.json()
       setIsCorrect(data.correct)
       setRevealed(true)
-      if (data.correct) setScore(s => s + 1)
+      if (data.correct) setScore(s => s + 1);
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
@@ -59994,9 +60186,9 @@ const loadQuestion = async () => {
       const data = await r.json()
       setIsCorrect(data.correct)
       setRevealed(true)
-      if (data.correct) setScore(s => s + 1)
+      if (data.correct) setScore(s => s + 1);
 
-      const prompt = question.prompt
+      const prompt = question.prompt;
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
@@ -60319,9 +60511,9 @@ const loadQuestion = async () => {
       const data = await r.json()
       setIsCorrect(data.correct)
       setRevealed(true)
-      if (data.correct) setScore(s => s + 1)
+      if (data.correct) setScore(s => s + 1);
 
-      const prompt = getPrompt(question)
+      const prompt = getPrompt(question);
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
@@ -60690,11 +60882,11 @@ const loadQuestion = async () => {
 
       setIsCorrect(data.correct)
       setRevealed(true)
-      if (data.correct) setScore(s => s + 1)
+      if (data.correct) setScore(s => s + 1);
 
       const prompt = question.mixed
         ? `${question.w1} ${question.n1}/${question.d1} ${op} ${question.w2} ${question.n2}/${question.d2}`
-        : `${question.n1}/${question.d1} ${op} ${question.n2}/${question.d2}`
+        : `${question.n1}/${question.d1} ${op} ${question.n2}/${question.d2}`;
 
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
@@ -61604,6 +61796,25 @@ const fetchQuestion = async (step) => {
   )
 }
 
+function coeffsToPolyStr(coeffs) {
+  const parts = [];
+  const numCoeffs = coeffs.map(Number);
+  for (let i = numCoeffs.length - 1; i >= 0; i--) {
+    const c = numCoeffs[i];
+    if (c === 0 && numCoeffs.length > 1) continue;
+    const sup = (n) => String(n).split('').map(d => '⁰¹²³⁴⁵⁶⁷⁸⁹'[d]).join('');
+    const varPart = i === 0 ? '' : i === 1 ? 'x' : `x${sup(i)}`;
+    if (parts.length === 0) {
+      parts.push(c === 1 && i > 0 ? varPart : c === -1 && i > 0 ? `-${varPart}` : `${c}${varPart}`);
+    } else {
+      const sign = c > 0 ? '+' : '-';
+      const abs = Math.abs(c);
+      parts.push(`${sign} ${abs === 1 && i > 0 ? varPart : `${abs}${varPart}`}`);
+    }
+  }
+  return parts.join(' ') || '0';
+}
+
 /* ── Polynomial Multiplication App ──────────────────── */
 /**
  * PolyMulApp Component
@@ -61729,11 +61940,14 @@ const loadQuestion = async () => {
     // Require all coefficient fields to be filled
     if (userCoeffs.some(c => c === '')) return
     const timeTaken = timer.stop()
+    // Build polynomial string from user's coefficients for the monster interceptor
+    // e.g. userCoeffs=['2','3'] => '3x + 2' (sent as userAnswer, read by Bracketeer classifier)
+    const userAnswerStr = coeffsToPolyStr(userCoeffs)
     // POST to backend to validate polynomial multiplication result
-    const res = await fetch(`${API}/polymul-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  p1: question.p1, p2: question.p2, userCoeffs: userCoeffs.map(Number), sessionGoal }) })
+    const res = await fetch(`${API}/polymul-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  p1: question.p1, p2: question.p2, userCoeffs: userCoeffs.map(Number), userAnswer: userAnswerStr, sessionGoal }) })
     const data = await res.json()
     setIsCorrect(data.correct)
-    if (data.correct) setScore(s => s + 1)
+    if (data.correct) setScore(s => s + 1);
     (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
