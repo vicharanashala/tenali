@@ -581,15 +581,30 @@ function bandForStep(step) {
  * Each file should contain a question object with id, question, options, answerOption, answerText
  * @returns {Array<object>} Array of question objects
  */
-// Reads all JSON files in `dir` concurrently (fs.promises.readFile lets libuv's
-// thread pool overlap the I/O instead of doing 991+ sequential blocking
-// syscalls) and parses each one. Order is not significant to any caller here.
-async function loadJsonDir(dir) {
+// Reads JSON files in `dir` concurrently in bounded batches to avoid EMFILE
+// file-descriptor exhaustion when scanning directories with thousands of files.
+async function loadJsonDir(dir, batchSize = 100) {
+  if (!fs.existsSync(dir)) return [];
   const files = fs.readdirSync(dir).filter((file) => file.endsWith('.json'));
-  const contents = await Promise.all(
-    files.map((file) => fs.promises.readFile(path.join(dir, file), 'utf8'))
-  );
-  return contents.map((raw) => JSON.parse(raw));
+  const results = [];
+  for (let i = 0; i < files.length; i += batchSize) {
+    const chunk = files.slice(i, i + batchSize);
+    const chunkContents = await Promise.all(
+      chunk.map(async (file) => {
+        try {
+          const raw = await fs.promises.readFile(path.join(dir, file), 'utf8');
+          return JSON.parse(raw);
+        } catch (err) {
+          logger.error('loadJsonDir', `Failed to read/parse ${file} in ${dir}:`, err.message);
+          return null;
+        }
+      })
+    );
+    for (const item of chunkContents) {
+      if (item) results.push(item);
+    }
+  }
+  return results;
 }
 
 // Populated by initData() before the server starts listening (see bottom of
@@ -1558,8 +1573,13 @@ const conceptDir = path.join(__dirname, '..', 'concept', 'questions');
 // time. Concepts is tiny (~15 files); left synchronous, not worth the churn.
 async function loadVocabAsync() {
   try {
-    return await loadJsonDir(vocabDir);
+    const list = await loadJsonDir(vocabDir);
+    // Assign unique integer IDs (1..N) so duplicate IDs across files do not collide
+    const uniqueList = list.map((q, idx) => ({ ...q, id: idx + 1 }));
+    console.log(`[vocab] Loaded ${uniqueList.length} vocabulary questions from ${vocabDir}`);
+    return uniqueList;
   } catch (e) {
+    logger.error('vocab', 'Failed to load vocabulary questions:', e);
     return [];
   }
 }
@@ -1625,7 +1645,22 @@ app.get('/vocab-api/question', (req, res) => {
   const exclude = req.query.exclude ? req.query.exclude.split(',').map(Number) : [];
   let pool = vocabQuestions.filter((q) => q.difficulty === difficulty);
   if (!pool.length) {
-    return res.status(404).json({ error: `No vocab questions for difficulty: ${difficulty}` });
+    if (vocabQuestions.length > 0) {
+      logger.warn('vocab-api', `No vocab questions for difficulty '${difficulty}'. Falling back to available questions.`);
+      const fallbackOrder = ['easy', 'medium', 'hard', 'extra-hard', 'hardest'];
+      for (const fb of fallbackOrder) {
+        const fbPool = vocabQuestions.filter((q) => q.difficulty === fb);
+        if (fbPool.length > 0) {
+          pool = fbPool;
+          break;
+        }
+      }
+      if (!pool.length) {
+        pool = vocabQuestions;
+      }
+    } else {
+      return res.status(404).json({ error: `No vocab questions for difficulty: ${difficulty}` });
+    }
   }
   // Filter to unseen questions first, allowing repeats only when exhausted
   const unseen = pool.filter((q) => !exclude.includes(q.id));
@@ -3055,14 +3090,21 @@ app.get('/basicarith-api/question', (req, res) => {
 app.post('/basicarith-api/check', (req, res) => {
   const { a, b, op, answer } = req.body || {};
   let correctAnswer;
-  if (op === '+') correctAnswer = Number(a) + Number(b);
-  else if (op === '−') correctAnswer = Number(a) - Number(b);
-  else if (op === '×') correctAnswer = Number(a) * Number(b);
-  else if (op === '÷') {
-    // Defensive: never divide by zero. Questions are generated with b != 0,
-    // so this is just a safety net.
-    correctAnswer = Number(b) === 0 ? NaN : Number(a) / Number(b);
-  } else correctAnswer = NaN;
+  const numA = Number(a);
+  const numB = Number(b);
+  const cleanOp = typeof op === 'string' ? op.trim() : '';
+
+  if (cleanOp === '+' || cleanOp === 'add') {
+    correctAnswer = numA + numB;
+  } else if (cleanOp === '−' || cleanOp === '-' || cleanOp === 'sub') {
+    correctAnswer = numA - numB;
+  } else if (cleanOp === '×' || cleanOp === '*' || cleanOp === 'x' || cleanOp === 'X' || cleanOp === 'mul') {
+    correctAnswer = numA * numB;
+  } else if (cleanOp === '÷' || cleanOp === '/' || cleanOp === 'div') {
+    correctAnswer = numB === 0 ? NaN : numA / numB;
+  } else {
+    correctAnswer = NaN;
+  }
   const correct = Number(answer) === correctAnswer;
   res.json({ correct, correctAnswer, message: correct ? 'Correct' : 'Incorrect' });
 });
@@ -10463,9 +10505,21 @@ app.post('/api/progress', express.json(), async (req, res) => {
       }
     });
 
+    let streakMilestoneData = null;
     const streakMilestones = [3, 7, 15, 30];
     streakMilestones.forEach(days => {
       if (oldStreak < days && (user.streak || 0) >= days) {
+        let bonusCoins = 0;
+        if (days === 3) bonusCoins = 50;
+        else if (days === 7) bonusCoins = 150;
+        else if (days === 15) bonusCoins = 300;
+        else if (days === 30) bonusCoins = 500;
+        
+        if (bonusCoins > 0) {
+          user.coins = (user.coins || 0) + bonusCoins;
+          streakMilestoneData = { days, bonusCoins };
+        }
+
         const eventName = `Reached a ${days}-Day Streak!`;
         const hasStreak = user.milestones.some(m => m.event === eventName);
         if (!hasStreak) {
@@ -10488,7 +10542,8 @@ app.post('/api/progress', express.json(), async (req, res) => {
       coins: user.coins,
       streak: user.streak || 0,
       totalSolved: user.totalSolved || 0,
-      newlyCompleted
+      newlyCompleted,
+      streakMilestoneData
     });
   } catch (err) {
     res.status(500).json({ error: err.message });

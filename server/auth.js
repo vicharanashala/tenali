@@ -240,7 +240,9 @@ async function connectMongo(uri = MONGO_URI) {
 // are committed to source. If unset, no users are seeded and existing DB users
 // still log in. The admin entry (role "admin") gates the proctor dashboard, so a
 // deploy that needs proctor access must include one in TENALI_SEED_USERS.
-const ENV_SEED_USERS = (process.env.TENALI_SEED_USERS || '')
+const DEFAULT_DEV_SEED_USERS = 'user1:pass1,user2:pass2,admin:adminpass:admin';
+const SEED_USERS_STR = process.env.TENALI_SEED_USERS || (process.env.NODE_ENV !== 'production' ? DEFAULT_DEV_SEED_USERS : '');
+const ENV_SEED_USERS = SEED_USERS_STR
   .split(',')
   .map((s) => s.trim())
   .filter(Boolean)
