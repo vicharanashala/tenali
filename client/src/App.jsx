@@ -45248,20 +45248,34 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
         />
       </div>
       <div id="tour-home-grid" className="menu-grid" ref={gridRef}>
-        {displayGridApps.map((app) => {
-          const isGold = goldMastery && goldMastery.includes(app.key)
-          const isCompleted = isStage3Completed(app.key, completedTopics)
-          return (
-            <button key={app.key} className={`menu-card ${isGold ? 'gold-card' : app.color}`} onClick={() => onSelect(app.key)}>
-              <span className="menu-title">
-                {app.name}
-                {isGold && <span className="badge-indicator">🥇</span>}
-                {!isGold && isCompleted && <span className="badge-indicator">✅</span>}
-              </span>
-              <span className="menu-subtitle">{app.subtitle}</span>
-            </button>
-          )
-        })}
+        {displayGridApps.length === 0 && isSearching ? (
+          <div
+            className="empty-section-card"
+            style={{
+              gridColumn: '1 / -1',
+              width: '100%',
+              textAlign: 'center',
+              padding: '32px'
+            }}
+          >
+            🔍 No puzzles found for "{search}". Try a different search term.
+          </div>
+        ) : (
+          displayGridApps.map((app) => {
+            const isGold = goldMastery && goldMastery.includes(app.key)
+            const isCompleted = isStage3Completed(app.key, completedTopics)
+            return (
+              <button key={app.key} className={`menu-card ${isGold ? 'gold-card' : app.color}`} onClick={() => onSelect(app.key)}>
+                <span className="menu-title">
+                  {app.name}
+                  {isGold && <span className="badge-indicator">🥇</span>}
+                  {!isGold && isCompleted && <span className="badge-indicator">✅</span>}
+                </span>
+                <span className="menu-subtitle">{app.subtitle}</span>
+              </button>
+            )
+          })
+        )}
       </div>
       <div className="grid-dimension">{rows} × {cols}</div>
     </>
