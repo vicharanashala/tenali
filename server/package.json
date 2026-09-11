@@ -6,7 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "start": "node index.js",
-    "test": "vitest run --reporter=verbose",
+    "test": "set NODE_ENV=test&& vitest run --reporter=verbose",
     "test:bkt": "node lib/bkt.test.js"
   },
   "dependencies": {
