@@ -537,7 +537,6 @@ app.use(async (req, res, next) => {
 
 
 const { generateExplanation } = require('./explanations');
-global.generateExplanation = generateExplanation;
 
 // ── Extracted topic routers (Phase 2) ────────────────────────────────────────
 const arithmeticRouter = require('./routes/arithmetic');
