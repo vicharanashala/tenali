@@ -39,6 +39,20 @@ import CrossSectionApp from './CrossSectionApp';
 window.React = React;
 console.log("React version:", React.version);
 import LinearAlgebraApp from './LinearAlgebraApp'
+import PathMap, {
+  pmTrackAnswer,
+  PmSuggestIcon,
+  setPmNavigateFn,
+  usePmGraphData,
+  pmGetCurrentSuggestedModule,
+  pmComputePath,
+  pmNodeById,
+  PmCongratsModal,
+  PmHomePath,
+  PmGoalPicker,
+  PmStatsBar,
+  PmSnakePath,
+} from './PathMap';
 
 
 /**
@@ -41670,6 +41684,7 @@ function CoordGeomInteractiveApp({ onBack }) {
       setIsCorrect(correct);
       setFeedback(data.message + (correct ? ` ${data.display} is correct!` : ` The answer was ${data.display}.`));
       if (correct) setScore(s => s + 1);
+      pmTrackAnswer('coordgeom', difficulty || 'easy', correct)
 
       setResults(prev => [...prev, {
         question: currentQ.prompt,
@@ -41782,7 +41797,7 @@ function CoordGeomInteractiveApp({ onBack }) {
   }
 
   return (
-    <QuizLayout title="Coordinate Geometry" onBack={onBack}>
+    <QuizLayout title="Coordinate Geometry" onBack={onBack} moduleId="coordgeom">
       <div style={{ textAlign: 'center' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, padding: '0 4px' }}>
           <span style={{ color: 'var(--clr-muted)', fontSize: '0.85rem' }}>Round {round} / {numQuestions}</span>
@@ -42528,6 +42543,13 @@ function App() {
       console.error('Failed to sync URL mode:', e);
     }
   }, [mode]);
+
+  // Let any nested quiz component navigate straight to a module (used by
+  // the PmSuggestIcon "next module" button) via setMode, without prop-drilling.
+  useEffect(() => {
+    setPmNavigateFn((moduleId) => setMode(moduleId))
+    return () => { setPmNavigateFn(null) }
+  }, [])
 
   const { user } = useAuth()
   const [completedTopics, setCompletedTopics] = useState(() => {
@@ -44866,6 +44888,7 @@ function App() {
     riddle: RiddleApp,              // Math Riddles
     'water-jug-lab': WaterJugLab,
     'equation-crafting-lab': EquationCraftingLab,
+    pathmap: PathMap, // Learning Path (prerequisite graph & personalized path)
   }
 
   // Get the component to render (or null if mode not set)
@@ -45530,6 +45553,7 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
   const [showAbout, setShowAbout] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [search, setSearch] = useState('')
+
   const featuredApps = [
     { key: 'randommix', name: 'Random Mix', subtitle: 'Adaptive cross-topic quiz', color: 'featured' },
     { key: 'custom', name: 'Custom Lesson', subtitle: 'Build your own mixed quiz', color: 'featured' },
@@ -45538,6 +45562,38 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
     { key: 'contrastlist', name: 'Contrast Challenge', subtitle: 'Distinguish similar concepts', color: 'featured' },
     { key: 'vachana', name: 'Vachana', subtitle: 'Mathematical Literacy Lab', color: 'featured' },
   ]
+
+  // ── PathMap state (re-integrated from the previous version) ────────────
+  const pmStatus = usePmGraphData()
+  const suggestedModule = pmStatus === 'ready' ? pmGetCurrentSuggestedModule() : null
+  const [pmOpen, setPmOpen] = useState(false)
+  const [pmGoalIds, setPmGoalIds] = useState(() => {
+    try { const r = localStorage.getItem('tenali_pathmap_goal'); return r ? JSON.parse(r) : [] } catch { return [] }
+  })
+  const [pmKnown, setPmKnown] = useState(() => {
+    try { const r = localStorage.getItem('tenali_pathmap_known'); return new Set(r ? JSON.parse(r) : []) } catch { return new Set() }
+  })
+  useEffect(() => { localStorage.setItem('tenali_pathmap_goal', JSON.stringify(pmGoalIds)) }, [pmGoalIds])
+  useEffect(() => { localStorage.setItem('tenali_pathmap_known', JSON.stringify([...pmKnown])) }, [pmKnown])
+
+  const pmPath = useMemo(() => (pmStatus === 'ready' ? pmComputePath(pmGoalIds) : []), [pmGoalIds, pmStatus])
+  const pmPathIndex = useMemo(() => Object.fromEntries(pmPath.map((id, i) => [id, i + 1])), [pmPath])
+
+  const pmToggleKnown = useCallback((id) => {
+    setPmKnown(prev => { const n = new Set(prev); n.has(id) ? n.delete(id) : n.add(id); return n })
+  }, [])
+
+  const pmStepsLeft = pmPath.filter(id => !pmKnown.has(id) && !pmGoalIds.includes(id)).length
+  const pmGoalNode = pmGoalIds.length > 0 ? pmNodeById[pmGoalIds[0]] : null
+
+  const [pmShowCongrats, setPmShowCongrats] = useState(false)
+  const pmAllDone = pmPath.length > 0 && pmPath.every(id => pmKnown.has(id))
+  const prevAllDone = useRef(false)
+  useEffect(() => {
+    if (pmAllDone && !prevAllDone.current) setPmShowCongrats(true)
+    prevAllDone.current = pmAllDone
+  }, [pmAllDone])
+  // ───────────────────────────────────────────────────────────────────────
   // Visual Learning Universe lives only in the hamburger menu
   const mathLabEntry = { key: 'math-lab', name: '🔬 Visual Learning Universe', subtitle: 'Visual, Mensuration & Addition labs', color: 'orange' }
   const geocraftEntry = { key: 'geocraft', name: '📐 GeoCraft', subtitle: 'Interactive Geometry Lab', color: 'featured', isRedirect: true, path: '/geocraft' }
@@ -45645,47 +45701,36 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
     { key: 'water-jug-lab', name: '🧪 Water Jug Lab', subtitle: 'GCD discovery — 13-level progression', color: 'teal' },
     { key: 'equation-crafting-lab', name: '⚗️ Equation Crafting Lab', subtitle: 'Build expressions in the mixing pot', color: 'orange' },
   ] // end regularApps (MatrixMystics tile removed — uses LinearAlgebraApp via linearalgebra mode)
-
   // Combined list for search filtering
   const allApps = [...hamburgerApps, ...regularApps]
 
   // Hamburger menu open state
   const menuRef = useRef(null)
-
-  // Close menu when clicking outside
   useEffect(() => {
     if (!menuOpen) return
     const handleClick = (e) => { if (menuRef.current && !menuRef.current.contains(e.target)) setMenuOpen(false) }
     document.addEventListener('mousedown', handleClick)
     return () => document.removeEventListener('mousedown', handleClick)
   }, [menuOpen])
-
-  // Search term for filtering apps
-
-  // Filtered lists
+ 
   const isSearching = search.trim() !== ''
   const matchFilter = (a) => a.name.toLowerCase().includes(search.toLowerCase()) || a.subtitle.toLowerCase().includes(search.toLowerCase())
-  
-  // Under Goal Practice mode, we include Random Mix & Custom Lesson at the top of the grid list (omitting Gym since it does not support goals)
+ 
   const goalFeatured = [
     { key: 'randommix', name: 'Random Mix', subtitle: 'Adaptive cross-topic quiz', color: 'featured' },
     { key: 'custom', name: 'Custom Lesson', subtitle: 'Build your own mixed quiz', color: 'featured' },
   ]
-  
+ 
   const filteredGoalFeatured = isSearching ? goalFeatured.filter(matchFilter) : goalFeatured
   const filteredFeatured = isSearching ? featuredApps.filter(matchFilter) : featuredApps
   const filteredRegular = isSearching ? regularApps.filter(matchFilter) : regularApps
-  
-  // Decide which items to show on the main grid list
+ 
   const displayGridApps = isGoalSelection ? filteredRegular : [...filteredRegular]
   const filteredHamburgerApps = isSearching ? hamburgerApps.filter(matchFilter) : hamburgerApps
 
   // Grid layout tracking (for responsive display)
   const gridRef = useRef(null)
-  // Number of columns currently displayed (responsive)
   const [cols, setCols] = useState(4)
-
-  // Update grid dimensions on resize (for responsive grid calculation)
   useEffect(() => {
     const updateCols = () => {
       if (!gridRef.current) return
@@ -45697,10 +45742,9 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
     window.addEventListener('resize', updateCols)
     return () => window.removeEventListener('resize', updateCols)
   }, [])
-
-  // Calculate number of rows for display (for grid dimension label at bottom)
+ 
   const rows = Math.ceil(displayGridApps.length / (cols || 1))
-
+ 
   return (
     <>
       <div style={{ position: 'relative' }}>
@@ -45726,29 +45770,44 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
         </div>
         {/* Hamburger menu — top right */}
         <div ref={menuRef} style={{ position: 'absolute', top: '8px', right: '0' }}>
-          <button onClick={() => setMenuOpen(o => !o)} style={{
-            background: 'none', border: 'none', cursor: 'pointer', padding: '8px',
-            display: 'flex', flexDirection: 'column', gap: '4px', alignItems: 'center'
-          }} aria-label="Menu">
-            <span style={{ display: 'block', width: '22px', height: '2.5px', background: 'var(--clr-text)', borderRadius: '2px', transition: 'transform 0.2s, opacity 0.2s', transform: menuOpen ? 'rotate(45deg) translate(4.5px, 4.5px)' : 'none' }} />
-            <span style={{ display: 'block', width: '22px', height: '2.5px', background: 'var(--clr-text)', borderRadius: '2px', transition: 'opacity 0.2s', opacity: menuOpen ? 0 : 1 }} />
-            <span style={{ display: 'block', width: '22px', height: '2.5px', background: 'var(--clr-text)', borderRadius: '2px', transition: 'transform 0.2s, opacity 0.2s', transform: menuOpen ? 'rotate(-45deg) translate(4.5px, -4.5px)' : 'none' }} />
-          </button>
-          {menuOpen && <div style={{
-            position: 'absolute', top: '100%', right: 0, zIndex: 50,
-            background: 'var(--clr-card)', border: '1.5px solid var(--clr-border)',
-            borderRadius: 'var(--radius-sm)', boxShadow: 'var(--shadow-card)',
-            padding: '6px 0', minWidth: '200px', overflow: 'hidden'
-          }}>
-            <button onClick={() => { setMenuOpen(false); setShowAbout(true) }} style={{
-              display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
-              background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
-              fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)',
-              borderBottom: '1px solid var(--clr-border)'
-            }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
-              onMouseLeave={e => e.target.style.background = 'none'}>
-              <strong style={{ color: 'var(--clr-accent)' }}>ℹ️ About Tenali</strong>
+            <button onClick={() => setMenuOpen(o => !o)} style={{
+              background: 'none', border: 'none', cursor: 'pointer', padding: '8px',
+              display: 'flex', flexDirection: 'column', gap: '4px', alignItems: 'center'
+            }} aria-label="Menu">
+              <span style={{ display: 'block', width: '22px', height: '2.5px', background: 'var(--clr-text)', borderRadius: '2px', transition: 'transform 0.2s, opacity 0.2s', transform: menuOpen ? 'rotate(45deg) translate(4.5px, 4.5px)' : 'none' }} />
+              <span style={{ display: 'block', width: '22px', height: '2.5px', background: 'var(--clr-text)', borderRadius: '2px', transition: 'opacity 0.2s', opacity: menuOpen ? 0 : 1 }} />
+              <span style={{ display: 'block', width: '22px', height: '2.5px', background: 'var(--clr-text)', borderRadius: '2px', transition: 'transform 0.2s, opacity 0.2s', transform: menuOpen ? 'rotate(-45deg) translate(4.5px, -4.5px)' : 'none' }} />
             </button>
+            {menuOpen && <div style={{
+              position: 'absolute', top: '100%', right: 0, zIndex: 50,
+              background: 'var(--clr-card)', border: '1.5px solid var(--clr-border)',
+              borderRadius: 'var(--radius-sm)', boxShadow: 'var(--shadow-card)',
+              padding: '6px 0', minWidth: '200px', overflow: 'hidden'
+            }}>
+              <button onClick={() => { setMenuOpen(false); setShowAbout(true) }} style={{
+                display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
+                background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
+                fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)',
+                borderBottom: '1px solid var(--clr-border)'
+              }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
+                onMouseLeave={e => e.target.style.background = 'none'}>
+                <strong style={{ color: 'var(--clr-accent)' }}>ℹ️ About Tenali</strong>
+              </button>
+              <button onClick={() => { setMenuOpen(false); setPmOpen(true) }} disabled={pmStatus !== 'ready'} style={{
+                display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
+                background: 'none', border: 'none', cursor: pmStatus === 'ready' ? 'pointer' : 'not-allowed',
+                opacity: pmStatus === 'ready' ? 1 : 0.6,
+                color: 'var(--clr-text)', fontFamily: 'var(--font-body)', fontSize: '0.95rem',
+                transition: 'background var(--transition)', borderBottom: '1px solid var(--clr-border)'
+              }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
+                onMouseLeave={e => e.target.style.background = 'none'}>
+                <strong style={{ color: 'var(--clr-accent)' }}>
+                  {pmStatus !== 'ready' ? '📍 Loading…' : pmGoalIds.length > 0 ? `📍 Path (${pmStepsLeft} left)` : '📍 Level Map'}
+                </strong>
+                <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>
+                  Learn by prerequisite path
+                </span>
+              </button>
             {/* Visual Learning Universe & GeoCraft pinned at top of hamburger menu */}
             {[mathLabEntry, geocraftEntry].map(app => (
               <button key={app.key} onClick={() => {
@@ -45860,8 +45919,8 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
             </button>
             </div>}
           </div>
-      </div>
-
+        </div>
+ 
       {showAbout && (
         <>
           <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', zIndex: 99999 }} onClick={() => setShowAbout(false)} />
@@ -45879,6 +45938,7 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
           </div>
         </>
       )}
+
       {!search && !isGoalSelection && (
         <div className="journey-banner-row">
           <button className="journey-banner-btn" onClick={() => onSelect('learning_journey')}>
@@ -45895,6 +45955,27 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
           </button>
         </div>
       )}
+
+      {!search && !isGoalSelection && suggestedModule && (
+        <div className="quest-banner-row">
+          <button className="quest-banner-btn" onClick={() => onSelect(suggestedModule.id)}>
+            <div className="quest-banner-content">
+              <div className="quest-banner-header">
+                <span>🚀</span>
+                <span className="quest-banner-tag">Today's Quest</span>
+              </div>
+              <h3 className="quest-banner-title">
+                {suggestedModule.label}
+              </h3>
+              <p className="quest-banner-subtitle">
+                {suggestedModule.sub || 'Embark on your next learning step!'}
+              </p>
+            </div>
+            <div className="quest-banner-arrow">➔</div>
+          </button>
+        </div>
+      )}
+
       <div className="search-bar-row">
         <input
           id="tour-search-bar"
@@ -45905,12 +45986,141 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
           onChange={e => setSearch(e.target.value)}
         />
       </div>
+
+      {/* ── Gamified PathMap panel — dashboard view only, hidden while searching ── */}
+      {!isGoalSelection && !search && pmStatus === 'ready' && pmPath.length > 0 && (
+        <div className="pmh-panel" style={{
+          margin: '22px 0 30px',
+          padding: '20px 18px 10px',
+          background: 'var(--clr-card)',
+          border: '1.5px solid var(--clr-border)',
+          borderRadius: 18,
+        }}>
+          <div style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            flexWrap: 'wrap', gap: 12, marginBottom: 6, paddingBottom: 14,
+            borderBottom: '1px solid var(--clr-border)',
+          }}>
+            <div>
+              <div style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.6px', color: 'var(--clr-text-soft)', textTransform: 'uppercase' }}>
+                Your path to
+              </div>
+              <div style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--clr-accent, #e8864a)' }}>
+                {pmGoalNode?.label}
+              </div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '1.15rem', fontWeight: 800 }}>{pmPath.length}</div>
+                <div style={{ fontSize: '0.65rem', color: 'var(--clr-text-soft)' }}>steps</div>
+              </div>
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#5cb87a' }}>{pmPath.length - pmStepsLeft}</div>
+                <div style={{ fontSize: '0.65rem', color: 'var(--clr-text-soft)' }}>done</div>
+              </div>
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--clr-accent, #e8864a)' }}>{pmStepsLeft}</div>
+                <div style={{ fontSize: '0.65rem', color: 'var(--clr-text-soft)' }}>to go</div>
+              </div>
+              <button
+                onClick={() => { setPmGoalIds([]) }}
+                title="Clear current goal (known nodes kept)"
+                style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text-soft)', fontSize: '0.78rem' }}
+              >
+                ✕ Clear
+              </button>
+            </div>
+          </div>
+
+          {pmAllDone ? (
+            <div style={{
+              margin: '14px 0 8px',
+              padding: '14px 16px',
+              background: 'rgba(92, 184, 122, 0.12)',
+              border: '1.5px solid rgba(92, 184, 122, 0.35)',
+              borderRadius: 12,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: 12,
+              flexWrap: 'wrap',
+            }}>
+              <div>
+                <div style={{ fontSize: '0.92rem', fontWeight: 800, color: '#5cb87a', fontFamily: 'var(--font-body)' }}>
+                  🎉 All done — path complete!
+                </div>
+                <div style={{ fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: 3, fontFamily: 'var(--font-body)' }}>
+                  Every step mastered. Tap below to see what's next.
+                </div>
+              </div>
+              <button
+                onClick={() => setPmShowCongrats(true)}
+                style={{
+                  background: 'var(--clr-accent, #e8864a)',
+                  border: 'none',
+                  borderRadius: 20,
+                  color: '#fff',
+                  fontFamily: 'var(--font-body)',
+                  fontSize: '0.78rem',
+                  fontWeight: 700,
+                  padding: '6px 14px',
+                  cursor: 'pointer',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                What's next? →
+              </button>
+            </div>
+          ) : (
+            <p style={{ fontSize: '0.78rem', color: 'var(--clr-text-soft)', margin: '10px 0 4px' }}>
+              Tap a stop to practice it. Tap the small check to mark it as already known.
+            </p>
+          )}
+
+          <PmHomePath
+            path={pmPath}
+            known={pmKnown}
+            goalIds={pmGoalIds}
+            onToggleKnown={pmToggleKnown}
+            onSelect={onSelect}
+          />
+        </div>
+      )}
+
+      {/* ── Browse grid — badges from both features layered without collision:
+           PM step/goal badge = absolute top-right pill; gold/completed badge =
+           inline icon next to the title (unchanged doc2 behavior) ── */}
       <div id="tour-home-grid" className="menu-grid" ref={gridRef}>
         {displayGridApps.map((app) => {
           const isGold = goldMastery && goldMastery.includes(app.key)
           const isCompleted = isStage3Completed(app.key, completedTopics)
+
+          const stepNum = pmPathIndex[app.key]
+          const isKnownPm = pmKnown.has(app.key)
+          const isGoalPm = pmGoalIds.includes(app.key)
+          const onPmPath = stepNum !== undefined
+          const dimmed = !isGoalSelection && pmGoalIds.length > 0 && !onPmPath
+
           return (
-            <button key={app.key} className={`menu-card ${isGold ? 'gold-card' : app.color}`} onClick={() => { if (app.isRedirect) { window.location.href = app.path; } else { onSelect(app.key); } }}>
+            <button
+              key={app.key}
+              className={`menu-card ${isGold ? 'gold-card' : app.color}`}
+              onClick={() => { if (app.isRedirect) { window.location.href = app.path; } else { onSelect(app.key); } }}
+              style={{ position: 'relative', opacity: dimmed ? 0.45 : 1, transition: 'opacity 0.2s' }}
+            >
+              {!isGoalSelection && isGoalPm && (
+                <span style={{ position: 'absolute', top: 6, right: 8, fontSize: '0.62rem', fontWeight: 700, background: 'var(--clr-accent, #e8864a)', color: '#fff', borderRadius: 10, padding: '2px 7px' }}>GOAL</span>
+              )}
+              {!isGoalSelection && !isGoalPm && onPmPath && (
+                <span style={{
+                  position: 'absolute', top: 6, right: 8, fontSize: '0.62rem', fontWeight: 700,
+                  background: isKnownPm ? '#5cb87a' : 'rgba(255,255,255,0.15)',
+                  color: isKnownPm ? '#fff' : 'var(--clr-text)',
+                  borderRadius: 10, padding: '2px 7px',
+                }}>
+                  {isKnownPm ? '✓' : `#${stepNum}`}
+                </span>
+              )}
               <span className="menu-title">
                 {app.name}
                 {isGold && <span className="badge-indicator">🥇</span>}
@@ -45922,6 +46132,138 @@ function Home({ onSelect, completedTopics = [], goldMastery = [], coins = 0, isG
         })}
       </div>
       <div className="grid-dimension">{rows} × {cols}</div>
+
+      {/* ── PathMap goal-picker modal ── */}
+      {pmOpen && (
+        <div
+          onClick={e => { if (e.target === e.currentTarget) setPmOpen(false) }}
+          style={{
+            position: 'fixed', inset: 0, zIndex: 200,
+            background: 'rgba(0,0,0,0.75)',
+            display: 'flex', alignItems: 'flex-start', justifyContent: 'center',
+            padding: '24px 16px', overflowY: 'auto',
+          }}
+        >
+          <div style={{
+            background: 'var(--clr-bg)', borderRadius: 16, width: '100%', maxWidth: 660,
+            padding: '28px 24px', position: 'relative', boxShadow: '0 8px 40px rgba(0,0,0,0.5)',
+          }}>
+            <button onClick={() => setPmOpen(false)} style={{
+              position: 'absolute', top: 14, right: 16, background: 'none', border: 'none',
+              fontSize: '1.4rem', cursor: 'pointer', color: 'var(--clr-text-soft)', lineHeight: 1,
+            }}>✕</button>
+
+            <h2 style={{ margin: '0 0 4px', fontSize: '1.2rem' }}>🗺 Learn by Path</h2>
+            <p style={{ margin: '0 0 20px', fontSize: '0.83rem', color: 'var(--clr-text-soft)' }}>
+              Pick a goal topic — we'll build your path below the search bar on the home screen.
+            </p>
+
+            {pmStatus !== 'ready' ? (
+              <div style={{ padding: '20px 0', color: 'var(--clr-text-soft)', fontFamily: 'var(--font-body)', fontSize: '0.9rem' }}>
+                {pmStatus === 'error' ? "Couldn't load topic data. Please refresh and try again." : 'Loading topics…'}
+              </div>
+            ) : (
+              <PmGoalPicker
+                goalIds={pmGoalIds}
+                onSetGoal={ids => setPmGoalIds(ids)}
+                onClear={() => { setPmGoalIds([]) }}
+              />
+            )}
+
+            {pmStatus === 'ready' && pmPath.length > 0 && (
+              <>
+                <PmStatsBar path={pmPath} known={pmKnown} />
+
+                <p style={{ fontSize: '0.78rem', color: 'var(--clr-text-soft)', margin: '16px 0 10px' }}>
+                  Click a chip to mark it as already known — it'll skip ahead on your path.
+                </p>
+                <PmSnakePath path={pmPath} known={pmKnown} goalIds={pmGoalIds} onToggleNode={pmToggleKnown} />
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 20 }}>
+                  {pmPath.map((id, i) => {
+                    const node = pmNodeById[id]
+                    const isDone = pmKnown.has(id)
+                    const isGoal = pmGoalIds.includes(id)
+                    return (
+                      <button
+                        key={id}
+                        onClick={() => pmToggleKnown(id)}
+                        title={isDone ? 'Click to unmark' : 'Click to mark as already known'}
+                        style={{
+                          background: isDone ? '#5cb87a' : isGoal ? 'var(--clr-accent, #e8864a)' : 'var(--clr-card)',
+                          border: '1.5px solid var(--clr-border)',
+                          borderRadius: 20,
+                          color: isDone || isGoal ? '#fff' : 'var(--clr-text)',
+                          cursor: 'pointer',
+                          fontSize: '0.78rem',
+                          fontFamily: 'var(--font-body)',
+                          fontWeight: 600,
+                          padding: '4px 12px',
+                          display: 'flex', alignItems: 'center', gap: 5,
+                          transition: 'background 0.15s',
+                        }}
+                      >
+                        <span style={{ opacity: 0.6, fontSize: '0.7rem' }}>{i + 1}.</span>
+                        {isDone ? '✓ ' : ''}{node.label}
+                        {isGoal ? ' ★' : ''}
+                      </button>
+                    )
+                  })}
+                </div>
+
+                <button
+                  onClick={() => setPmOpen(false)}
+                  style={{
+                    width: '100%', padding: '11px',
+                    background: 'var(--clr-accent, #e8864a)', border: 'none', borderRadius: 10,
+                    color: '#fff', fontWeight: 700, fontSize: '0.95rem', cursor: 'pointer',
+                    fontFamily: 'var(--font-body)',
+                  }}
+                >
+                  Show my path →
+                </button>
+                {pmKnown.size > 0 && (
+                  <button
+                    onClick={() => {
+                      if (window.confirm('Reset all progress? This will clear all nodes you marked as known.')) {
+                        setPmKnown(new Set())
+                      }
+                    }}
+                    style={{
+                      width: '100%', marginTop: 8, padding: '8px',
+                      background: 'none',
+                      border: '1px solid var(--clr-border)',
+                      borderRadius: 10,
+                      color: 'var(--clr-text-soft)',
+                      fontSize: '0.78rem', cursor: 'pointer',
+                      fontFamily: 'var(--font-body)',
+                    }}
+                  >
+                    🔄 Reset all progress ({pmKnown.size} known nodes)
+                  </button>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* ── Congrats modal ── */}
+      {pmShowCongrats && (
+        <PmCongratsModal
+          goalIds={pmGoalIds}
+          path={pmPath}
+          onClose={() => setPmShowCongrats(false)}
+          onNewGoal={() => {
+            setPmShowCongrats(false)
+            setPmOpen(true)
+          }}
+          onSetGoal={(ids) => {
+            setPmGoalIds(ids)
+            setPmShowCongrats(false)
+          }}
+        />
+      )}
+ 
     </>
   )
 }
@@ -48120,6 +48462,7 @@ function GKApp({ onBack, markTopicCompleted, isGoalMode = false }) {
     const data = await res.json()
     setIsCorrect(data.correct)
     if (data.correct) setScore((s) => s + 1);
+    pmTrackAnswer('gk', 'easy', data.correct);
     // Show feedback with explanation
     (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
@@ -48211,7 +48554,7 @@ function GKApp({ onBack, markTopicCompleted, isGoalMode = false }) {
   }, [revealed, loading, question])
 
   return (
-    <QuizLayout title="General Knowledge" subtitle="Random question picker" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="General Knowledge" subtitle="Random question picker" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="gk">
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Test your general knowledge with random questions!</p>
 
@@ -50908,6 +51251,7 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
       const data = await res.json()
       setIsCorrect(data.correct)
       const newScore = score + (data.correct ? 1 : 0)
+      pmTrackAnswer('addition', difficulty, data.correct)
       setScore(newScore)
 
       const reasoning = `${question.a} + ${question.b} = ${data.correctAnswer}`
@@ -51108,7 +51452,7 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
   }
 
   return (
-    <QuizLayout title="Addition" onBack={onBack} timer={timer}>
+    <QuizLayout title="Addition" onBack={onBack} timer={timer} moduleId="addition">
       {started && !finished && <>
         {/* Progress Display */}
         <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.3rem' }}>
@@ -52406,7 +52750,8 @@ const fetchQuestion = async () => {
       const res = await fetch(`${API}/basicarith-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  a: question.a, b: question.b, op: question.op, answer: Number(answer), sessionGoal }) })
       const data = await res.json()
       setIsCorrect(data.correct)
-      if (data.correct) setScore(s => s + 1);
+    if (data.correct) setScore(s => s + 1);
+    pmTrackAnswer('basicarith', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct);
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
@@ -52474,7 +52819,7 @@ const fetchQuestion = async () => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Origin" subtitle="Add, subtract, multiply & divide positive & negative numbers" onBack={onBack} timer={started && !finished ? timer : null}>
+    <QuizLayout title="Origin" subtitle="Add, subtract, multiply & divide positive & negative numbers" onBack={onBack} timer={started && !finished ? timer : null} moduleId="basicarith">
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
           <span>Practice basic arithmetic!</span>
@@ -52716,6 +53061,7 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
       const data = await res.json()
       setIsCorrect(data.correct)
       if (data.correct) setScore((s) => s + 1)
+      pmTrackAnswer('quadratic', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct)
 
       // Generate step-by-step working for feedback
       const { a, b, c, x } = question
@@ -52801,7 +53147,7 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Quadratic" subtitle="Given x, find y = ax² + bx + c" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Quadratic" subtitle="Given x, find y = ax² + bx + c" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="quadratic">
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice quadratic substitution!</p>
         <KeyTerms topicKey="quadratics" />
@@ -53859,7 +54205,7 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
     const correct = Number(answer) === correctAnswer
     if (correct) setScore(s => s + 1)
     else setAllCorrectInRound(false)
-    setRoundTotalTime(t => t + timeTaken)
+    pmTrackAnswer('multiply', 'easy', correct)
     setRoundQuestionsCount(c => c + 1)
     setIsCorrect(correct); setRevealed(true)
     setFeedback(correct ? `Correct! ${question.table} × ${question.multiplier} = ${correctAnswer}`
@@ -53992,7 +54338,7 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
   )
 
   return (
-    <QuizLayout title="Multiplication" subtitle="Three-level progressive trainer" onBack={onBack}>
+    <QuizLayout title="Multiplication" subtitle="Three-level progressive trainer" onBack={onBack} moduleId="multiply">
       <div className="top-mini-row">
         {phase === 'quiz' && level !== 3 && !revealed && <div className="timer-pill">{timer.elapsed}s</div>}
         {phase === 'quiz' && level === 3 && <div className="timer-pill" style={l3TimeRemaining <= 3 ? { background: 'var(--clr-wrong)', color: '#fff' } : {}}>⏱ {l3TimeRemaining}s</div>}
@@ -54289,6 +54635,7 @@ const loadQuestion = async (excludeIds) => {
     const data = await res.json()
     setIsCorrect(data.correct)
     if (data.correct) setScore((s) => s + 1);
+    pmTrackAnswer('vocab', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct);
     // Show feedback with correct answer text
     (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
@@ -54404,7 +54751,7 @@ const loadQuestion = async (excludeIds) => {
   }, [started, finished, revealed, loading, question])
 
   return (
-    <QuizLayout title="Concept Matching" subtitle="Pick the correct definition for the concept" onBack={onBack} timer={started && !finished ? timer : null}>
+    <QuizLayout title="Concept Matching" subtitle="Pick the correct definition for the concept" onBack={onBack} timer={started && !finished ? timer : null} moduleId="vocab">
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Match concepts to their definitions!</p>
         <div className="checkbox-group" style={{ marginBottom: '12px' }}>
@@ -55331,6 +55678,9 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
     // Feature CR: a just-earned Road License pre-selects the earned difficulty (one-shot; student can change it)
     const [difficulty, setDifficulty] = useState(() => initialDifficulty || cjTakeReco(customTopicKey || apiPath.replace('-api', ''), diffs) || diffs[0])
     const topicKey = customTopicKey || apiPath.replace('-api', '')
+    // graph-data.json node id for this app — apiPath minus '-api' matches it
+    // in every case except circle theorems, which uses 'circle-api' → 'circleth'
+    const pmModuleId = ({ circle: 'circleth' })[apiPath.replace('-api', '')] || apiPath.replace('-api', '')
     const [isAdaptive, setIsAdaptive] = useState(false)
     const [adaptScore, setAdaptScore] = useState(0) // 0.0 (easy) → 3.0 (extrahard)
     const [reportAck, setReportAck] = useState('')
@@ -55481,6 +55831,7 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
         })
         const data = await r.json()
         setIsCorrect(data.correct); setRevealed(true)
+        pmTrackAnswer(pmModuleId, isAdaptive ? effectiveDifficulty() : difficulty, data.correct)
         if (data.correct) setScore(s => s + 1)
         const coinMsg = (data.lil?.coinsEarned ?? 0) > 0 ? ` (+${data.lil.coinsEarned}🪙)` : ''
         if (!data.correct && sessionGoal === 'perfect') {
@@ -55649,7 +56000,7 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
     }
 
     return (
-      <QuizLayout title={title} subtitle={subtitle} onBack={onBack} timer={timer}>
+      <QuizLayout title={title} subtitle={subtitle} onBack={onBack} timer={timer} moduleId={pmModuleId}>
         {started && !finished && <>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.3rem' }}>
             <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
@@ -55918,7 +56269,8 @@ const loadQuestion = async () => {
       const r = await fetch(`${API}/dotprod-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ ...payload, sessionGoal }) })
       const data = await r.json()
       setIsCorrect(data.correct); setRevealed(true)
-      if (data.correct) setScore(s => s + 1);
+    if (data.correct) setScore(s => s + 1);
+    pmTrackAnswer('dotprod', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct);
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
@@ -56061,7 +56413,7 @@ const loadQuestion = async () => {
   }
 
   return (
-    <QuizLayout title="Dot Products" subtitle="Vectors, matrix multiply, fill blanks" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Dot Products" subtitle="Vectors, matrix multiply, fill blanks" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="dotprod">
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice dot products & matrix multiplication!</p>
         <KeyTerms topicKey="dot-products" />
@@ -57973,7 +58325,8 @@ const loadQuestion = async () => {
       const r = await fetch(`${API}/squaring-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({  ...question, userAnswer, sessionGoal }) })
       const data = await r.json()
       setIsCorrect(data.correct); setRevealed(true)
-      if (data.correct) setScore(s => s + 1);
+    if (data.correct) setScore(s => s + 1);
+    pmTrackAnswer('squaring', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct);
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
@@ -58039,7 +58392,7 @@ const loadQuestion = async () => {
   )
 
   return (
-    <QuizLayout title="Squaring" subtitle="(a + b)² = a² + 2ab + b²" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Squaring" subtitle="(a + b)² = a² + 2ab + b²" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="squaring">
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Square numbers quickly using the identity (a + b)² = a² + 2ab + b²</p>
         <KeyTerms topicKey="squaring" />
@@ -58985,7 +59338,8 @@ const loadQuestion = async () => {
       const r = await fetch(`${API}/sets-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ ...payload, sessionGoal }) })
       const data = await r.json()
       setIsCorrect(data.correct); setRevealed(true)
-      if (data.correct) setScore(s => s + 1);
+    if (data.correct) setScore(s => s + 1);
+    pmTrackAnswer('sets', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct);
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
@@ -59027,7 +59381,7 @@ const loadQuestion = async () => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Sets" subtitle="Union, intersection, Venn diagrams" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Sets" subtitle="Union, intersection, Venn diagrams" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="sets">
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice sets and Venn diagrams!</p>
         <KeyTerms topicKey="sets" />
@@ -59215,7 +59569,8 @@ const loadQuestion = async () => {
       const r = await fetch(`${API}/sequences-api/check`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' }, body: JSON.stringify({ ...payload, sessionGoal }) })
       const data = await r.json()
       setIsCorrect(data.correct); setRevealed(true)
-      if (data.correct) setScore(s => s + 1);
+    if (data.correct) setScore(s => s + 1);
+    pmTrackAnswer('sequences', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct);
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
@@ -59257,7 +59612,7 @@ const loadQuestion = async () => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Sequences & Series" subtitle="Arithmetic & geometric" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Sequences & Series" subtitle="Arithmetic & geometric" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="sequences">
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice sequences and series!</p>
         <KeyTerms topicKey="sequences" />
@@ -59468,7 +59823,8 @@ const loadQuestion = async () => {
       const data = await r.json()
       setIsCorrect(data.correct)
       setRevealed(true)
-      if (data.correct) setScore(s => s + 1);
+    if (data.correct) setScore(s => s + 1);
+    pmTrackAnswer('ratio', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct);
       (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
@@ -59512,7 +59868,7 @@ const loadQuestion = async () => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Ratio & Proportion" subtitle="Simplify, divide, direct & inverse" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Ratio & Proportion" subtitle="Simplify, divide, direct & inverse" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="ratio">
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice ratio and proportion!</p>
         <KeyTerms topicKey="ratios" />
@@ -60752,7 +61108,8 @@ const loadQuestion = async () => {
       const data = await r.json()
       setIsCorrect(data.correct)
       setRevealed(true)
-      if (data.correct) setScore(s => s + 1);
+    if (data.correct) setScore(s => s + 1);
+    pmTrackAnswer('indices', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct);
 
       const prompt = question.prompt;
       (() => {
@@ -60811,7 +61168,7 @@ const loadQuestion = async () => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Indices" subtitle="Laws of exponents" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Indices" subtitle="Laws of exponents" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="indices">
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice laws of indices!</p>
         <KeyTerms topicKey="indices" />
@@ -61077,7 +61434,8 @@ const loadQuestion = async () => {
       const data = await r.json()
       setIsCorrect(data.correct)
       setRevealed(true)
-      if (data.correct) setScore(s => s + 1);
+    if (data.correct) setScore(s => s + 1);
+    pmTrackAnswer('surds', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct);
 
       const prompt = getPrompt(question);
       (() => {
@@ -61136,7 +61494,7 @@ const loadQuestion = async () => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Surds" subtitle="Simplify, add, multiply, rationalise" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Surds" subtitle="Simplify, add, multiply, rationalise" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="surds">
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice working with surds!</p>
         <KeyTerms topicKey="surds" />
@@ -61448,7 +61806,8 @@ const loadQuestion = async () => {
 
       setIsCorrect(data.correct)
       setRevealed(true)
-      if (data.correct) setScore(s => s + 1);
+    if (data.correct) setScore(s => s + 1);
+    pmTrackAnswer('fractionadd', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct);
 
       const prompt = question.mixed
         ? `${question.w1} ${question.n1}/${question.d1} ${op} ${question.w2} ${question.n2}/${question.d2}`
@@ -61537,7 +61896,7 @@ const loadQuestion = async () => {
 
   // ── Render ─────────────────────────────────────────────────────────────
   return (
-    <QuizLayout title="Fractions" subtitle="Add, subtract, multiply & divide fractions" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Fractions" subtitle="Add, subtract, multiply & divide fractions" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="fractionadd">
       {/* ── Setup Phase ── */}
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice adding fractions!</p>
@@ -61901,6 +62260,7 @@ const generateRound = (n) => {
     const timeTaken = timer.stop()
     const correct = symbol === commonSymbol
     if (correct) setScore((s) => s + 1)
+    pmTrackAnswer('spot', 'easy', correct)
     setIsCorrect(correct)
     setFeedback(correct
       ? `Correct! ${commonSymbol} was the match.`
@@ -61935,7 +62295,7 @@ const generateRound = (n) => {
   useAutoAdvance(revealed, advanceRef, isCorrect)
 
   return (
-    <QuizLayout title="Twin Hunt" subtitle="Find the common object in both panels" onBack={onBack} sessionGoal={sessionGoal}>
+    <QuizLayout title="Twin Hunt" subtitle="Find the common object in both panels" onBack={onBack} sessionGoal={sessionGoal} moduleId="spot">
       <div className="top-mini-row">
         {started && !finished && !revealed && <div className="timer-pill">{timer.elapsed}s</div>}
         <div className="score-pill">Score: {score}</div>
@@ -62210,6 +62570,7 @@ const fetchQuestion = async (step) => {
       const data = await res.json()
       setIsCorrect(data.correct)
       if (data.correct) setScore((s) => s + 1)
+      pmTrackAnswer('sqrt', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct)
       // Show floor and ceiling values for reference
       const reasoning = `√${question.q} = ${data.sqrtRounded}\n⌊${data.sqrtRounded}⌋ = ${data.floorAnswer}, ⌈${data.sqrtRounded}⌉ = ${data.ceilAnswer}`
       (() => {
@@ -62270,7 +62631,7 @@ const fetchQuestion = async (step) => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Square Root" subtitle="Floor or ceiling is accepted" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Square Root" subtitle="Floor or ceiling is accepted" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="sqrt">
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice square roots!</p>
         <KeyTerms topicKey="square-roots" />
@@ -62514,6 +62875,7 @@ const loadQuestion = async () => {
     const data = await res.json()
     setIsCorrect(data.correct)
     if (data.correct) setScore(s => s + 1);
+    pmTrackAnswer('polymul', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct);
     (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
         if (data.correct) {
@@ -62590,7 +62952,7 @@ const loadQuestion = async () => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Poly Multiply" subtitle="Multiply two polynomials and enter the coefficients" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Poly Multiply" subtitle="Multiply two polynomials and enter the coefficients" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="polymul">
       {!started && !finished && <div className="welcome-box">
         <p className="welcome-text">Practice polynomial multiplication!</p>
         <KeyTerms topicKey="polynomial-multiplication" />
@@ -62835,6 +63197,7 @@ const loadQuestion = async () => {
     setIsCorrect(data.correct)
     // Increment score if correct
     if (data.correct) setScore(s => s + 1)
+    pmTrackAnswer('polyfactor', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct)
     // Format feedback message using correct factors (p, q, r, s from question.factors)
     const { p, q, r, s } = question.factors
     (() => {
@@ -62903,7 +63266,7 @@ const loadQuestion = async () => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Poly Factor" subtitle="Factor the quadratic into (px + q)(rx + s)" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Poly Factor" subtitle="Factor the quadratic into (px + q)(rx + s)" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="polyfactor">
       {!started && !finished && <div className="welcome-box">
           <p className="welcome-text">Factor ax² + bx + c into (px + q)(rx + s).</p>
           <KeyTerms topicKey="polynomial-factorisation" />
@@ -63169,6 +63532,7 @@ const loadQuestion = async () => {
       const correct = question.factors.length === sorted.length && question.factors.every((v, i) => v === sorted[i])
       setIsCorrect(correct)
       if (correct) setScore(s => s + 1)
+      pmTrackAnswer('primefactor', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct)
       setFeedback(correct ? `Correct! ${question.number} = ${question.factors.join(' × ')}` : `Incorrect. ${question.number} = ${question.factors.join(' × ')}`)
       // Add result to history for results table
       setResults(prev => [...prev, {
@@ -63247,7 +63611,7 @@ const loadQuestion = async () => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Prime Factors" subtitle="Break the number into its prime factors" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Prime Factors" subtitle="Break the number into its prime factors" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="primefactor">
       {!started && !finished && <div className="welcome-box">
           <p className="welcome-text">Enter prime factors one at a time. Watch the remaining number shrink!</p>
           <KeyTerms topicKey="prime-factors" />
@@ -63483,6 +63847,7 @@ const loadQuestion = async () => {
     const data = await res.json()
     setIsCorrect(data.correct)
     if (data.correct) setScore(s => s + 1)
+    pmTrackAnswer('qformula', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct)
     // Format correct answer display based on root type
     let correctStr = ''
     if (data.roots.type === 'real_distinct') correctStr = `Roots: ${data.roots.r1} and ${data.roots.r2}`
@@ -63557,7 +63922,7 @@ const loadQuestion = async () => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Quadratic Formula" subtitle="Find the roots of ax² + bx + c = 0" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Quadratic Formula" subtitle="Find the roots of ax² + bx + c = 0" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="qformula">
       {!started && !finished && <div className="welcome-box">
           <p className="welcome-text">Use the quadratic formula to find roots of ax² + bx + c = 0</p>
           <KeyTerms topicKey="quadratic-formula" />
@@ -63808,6 +64173,7 @@ const loadQuestion = async () => {
     const data = await res.json()
     setIsCorrect(data.correct)
     if (data.correct) setScore(s => s + 1)
+    pmTrackAnswer('simul', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct)
     // Format feedback message and result based on system size
     const s = question.solution
     if (is3x3) {
@@ -63896,7 +64262,7 @@ const loadQuestion = async () => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Simultaneous Eq." subtitle={`Solve ${isAdaptive ? 'adaptive' : (effectiveDiff() === 'easy' ? '2×2' : '3×3')} systems`} onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Simultaneous Eq." subtitle={`Solve ${isAdaptive ? 'adaptive' : (effectiveDiff() === 'easy' ? '2×2' : '3×3')} systems`} onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="simul">
       {!started && !finished && <div className="welcome-box">
           <p className="welcome-text">Solve systems of linear equations</p>
           <KeyTerms topicKey="simultaneous-equations" />
@@ -64123,6 +64489,7 @@ const loadQuestion = async () => {
     const data = await res.json()
     setIsCorrect(data.correct)
     if (data.correct) setScore(s => s + 1)
+    pmTrackAnswer('funceval', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct)
     // Format variable string for feedback (e.g., "x=2, y=3")
     const varStr = Object.entries(question.vars).map(([k, v]) => `${k}=${v}`).join(', ')
     (() => {
@@ -64185,7 +64552,7 @@ const loadQuestion = async () => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Functions" subtitle="Evaluate the function at the given values" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Functions" subtitle="Evaluate the function at the given values" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="funceval">
       {!started && !finished && <div className="welcome-box">
           <p className="welcome-text">Evaluate linear functions</p>
           <KeyTerms topicKey="functions" />
@@ -64414,6 +64781,7 @@ const loadQuestion = async () => {
     const data = await res.json()
     setIsCorrect(data.correct)
     if (data.correct) setScore(s => s + 1)
+    pmTrackAnswer('lineq', isAdaptive ? ['easy','medium','hard','extrahard'][Math.min(3,Math.floor(adaptScoreRef.current))] : difficulty, data.correct)
     // Format feedback message with correct m and c values
     (() => {
         const _ci = data.lil?.coinsEarned > 0 ? ` (+${data.lil.coinsEarned} coins!)` : ''
@@ -64479,7 +64847,7 @@ const loadQuestion = async () => {
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
   return (
-    <QuizLayout title="Line Equation" subtitle="Find m and c in y = mx + c from two points" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+    <QuizLayout title="Line Equation" subtitle="Find m and c in y = mx + c from two points" onBack={onBack} timer={started && !finished && sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId="lineq">
       {!started && !finished && <div className="welcome-box">
           <p className="welcome-text">Given two points, find the slope m and intercept c.</p>
           <KeyTerms topicKey="line-equation" />
@@ -65494,6 +65862,7 @@ const startQuiz = async () => {
 
     // Update score, feedback, and results (common for all puzzle types)
     setIsCorrect(correct)
+    pmTrackAnswer(curType, difficulty, correct)
     if (correct) setScore(s => s + 1)
     // Get puzzle type name for results display
     const typeName = CUSTOM_PUZZLES.find(p => p.key === curType)?.name || curType
@@ -65851,7 +66220,7 @@ const startQuiz = async () => {
   // ─── Quiz Phase ──────────────────────────────────────
   if (phase === 'quiz') {
     return (
-      <QuizLayout title="Custom Lesson" subtitle={`${selected.length} puzzle types · ${difficulty}`} onBack={onBack} timer={sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal}>
+      <QuizLayout title="Custom Lesson" subtitle={`${selected.length} puzzle types · ${difficulty}`} onBack={onBack} timer={sessionGoal !== 'perfect' ? timer : null} sessionGoal={sessionGoal} moduleId={curType}>
         <div className="top-mini-row">
           {!revealed && sessionGoal !== 'perfect' && <div className="timer-pill">{timer.elapsed}s</div>}
           <div className="score-pill">Score: {score}</div>
@@ -68913,7 +69282,7 @@ function TatsavitLineApp({ onBack }) {
  * @param {Function} props.onBack - Callback when back button is clicked
  * @param {React.ReactNode} props.children - Quiz content to display
  */
-export function QuizLayout({ title, subtitle, onBack, children, timer, sessionGoal }) {
+export function QuizLayout({ title, subtitle, onBack, children, timer, sessionGoal, moduleId }) {
   // Derive display values from the timer object
   const isSpeed   = timer && (timer.mode === 'speed'   || sessionGoal === 'speed')
   const isPerfect = sessionGoal === 'perfect'
@@ -68988,6 +69357,7 @@ export function QuizLayout({ title, subtitle, onBack, children, timer, sessionGo
       {subtitle && <p className="subtitle">{subtitle}</p>}
       {processedChildren}
       <QuizLayoutExtension children={children} />
+      {moduleId && <PmSuggestIcon moduleId={moduleId} />}
     </>
   )
 }
@@ -69892,7 +70262,7 @@ function ProgressTrackerApp({ onBack }) {
 
 // Named export so main.jsx can render the global hamburger menu next to <App />
 
-function GenericLabApp({ title, subtitle, endpoint, onBack, renderQuestionCustom, customGenerate, initialDifficulty, initialNumQuestions, initialStarted }) {
+function GenericLabApp({ title, subtitle, endpoint, onBack, renderQuestionCustom, customGenerate, initialDifficulty, initialNumQuestions, initialStarted, moduleId }) {
   const [difficulty, setDifficulty] = useState(initialDifficulty || 'easy');
   const [numQuestions, setNumQuestions] = useState(initialNumQuestions || '5');
   const [started, setStarted] = useState(initialStarted || false);
@@ -69980,6 +70350,7 @@ function GenericLabApp({ title, subtitle, endpoint, onBack, renderQuestionCustom
     const data = await res.json();
 
     setIsCorrect(data.correct);
+    pmTrackAnswer(moduleId, difficulty, data.correct);
     if (data.correct) setScore(s => s + 1);
 
     const explanationText = question.hint ? ` (${question.hint})` : '';
@@ -70118,6 +70489,7 @@ function GenericLabApp({ title, subtitle, endpoint, onBack, renderQuestionCustom
 
   return (
     <div className="kid-zone">
+      {moduleId && <PmSuggestIcon moduleId={moduleId} />}
       {started && !finished && (
         <div className="kid-card">
           <div className="kid-status-row">
@@ -70238,7 +70610,7 @@ function BasicArithmeticLabApp({ onBack }) {
       </div>
     );
   };
-  return <GenericLabApp title="Origin" subtitle="Mixed multiplication & division templates" endpoint="/api/basic-arithmetic-lab" onBack={onBack} renderQuestionCustom={renderCustom} />;
+  return <GenericLabApp title="Origin" subtitle="Mixed multiplication & division templates" endpoint="/api/basic-arithmetic-lab" onBack={onBack} renderQuestionCustom={renderCustom} moduleId="basicarith" />;
 }
 
 
@@ -70576,7 +70948,7 @@ function MensurationLabApp({ onBack, initialDifficulty, initialNumQuestions, ini
     return null;
   };
 
-  return <GenericLabApp title="Mensuration" subtitle="Geometry & Shape Puzzles" endpoint="/api/mensuration-lab" onBack={onBack} renderQuestionCustom={renderCustom} initialDifficulty={initialDifficulty} initialNumQuestions={initialNumQuestions} initialStarted={initialStarted} />;
+  return <GenericLabApp title="Mensuration" subtitle="Geometry & Shape Puzzles" endpoint="/api/mensuration-lab" onBack={onBack} renderQuestionCustom={renderCustom} initialDifficulty={initialDifficulty} initialNumQuestions={initialNumQuestions} initialStarted={initialStarted} moduleId="mensur" />;
 }
 
 

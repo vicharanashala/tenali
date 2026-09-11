@@ -1,4 +1,4 @@
-﻿/**
+/**
  * TENALI - Educational Quiz Platform Server
  *
  * A comprehensive Node.js/Express server that powers an educational quiz and math problem-solving platform.
@@ -1129,7 +1129,12 @@ app.get('/enhanced', (_req, res) => {
   res.sendFile(path.join(__dirname, '..', 'enhanced', 'index.html'));
 });
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// serves the shared node/edge data used by PathMap
+app.get('/graph-data.json', (_req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'graph', 'graph-data.json'));
+});
+
+// ═══════════════════════════════════════════════════════════════════════════
 // LEARNING TRANSFER CHALLENGES & PROGRESS SYNC API
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 

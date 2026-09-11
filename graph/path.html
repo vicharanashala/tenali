@@ -241,187 +241,12 @@ select option.none-opt { color: #ef5350; font-weight: 600; }
 <div id="quizOverlay"></div>
 
 <script>
-// ═══════════════════════════════════════════════════════════════
-// Same node + edge data as the main graph
-// ═══════════════════════════════════════════════════════════════
-const nodes = [
-  { id: 'basicarith',   label: 'Basic Arithmetic',   sub: '+, −, ×  single→4-digit',         cat: 'Arithmetic' },
-  { id: 'addition',     label: 'Addition',            sub: 'Multi-digit addition drill',       cat: 'Arithmetic' },
-  { id: 'multiply',     label: 'Multiplication',      sub: 'Times tables 2-19',                cat: 'Arithmetic' },
-  { id: 'rounding',     label: 'Rounding',            sub: 'D.P., sig. figs, estimation',      cat: 'Arithmetic' },
-  { id: 'fractionadd',  label: 'Fractions (Add)',     sub: 'LCD, mixed numbers',               cat: 'Arithmetic' },
-  { id: 'percent',      label: 'Percentages',         sub: 'Find %, increase, reverse',        cat: 'Arithmetic' },
-  { id: 'profitloss',   label: 'Profit & Loss',       sub: 'CP, SP, discounts, markup',        cat: 'Arithmetic' },
-  { id: 'ratio',        label: 'Ratio',               sub: 'Simplify, divide, proportion',     cat: 'Arithmetic' },
-  { id: 'sdt',          label: 'Speed / Dist / Time', sub: 'd=st, average speed, units',       cat: 'Arithmetic' },
-  { id: 'squaring',     label: 'Squaring',            sub: '(a+b)² identity drill',            cat: 'Arithmetic' },
-  { id: 'hcflcm',       label: 'HCF & LCM',          sub: 'Euclidean algorithm, word probs',  cat: 'Number Theory' },
-  { id: 'primefactor',  label: 'Prime Factors',       sub: 'Prime decomposition',              cat: 'Number Theory' },
-  { id: 'bases',        label: 'Number Bases',        sub: 'Binary, hex, conversions',         cat: 'Number Theory' },
-  { id: 'indices',      label: 'Indices',             sub: 'Laws, negative, fractional exp',   cat: 'Algebra' },
-  { id: 'surds',        label: 'Surds',               sub: 'Simplify, add, rationalise',       cat: 'Algebra' },
-  { id: 'stdform',      label: 'Standard Form',       sub: 'Scientific notation ops',          cat: 'Algebra' },
-  { id: 'log',          label: 'Logarithms',          sub: 'Evaluate, laws, solve equations',  cat: 'Algebra' },
-  { id: 'sqrt',         label: 'Square Root',         sub: 'Nearest-integer √ drill',          cat: 'Algebra' },
-  { id: 'quadratic',    label: 'Quadratic (eval)',    sub: 'y = ax²+bx+c  substitution',      cat: 'Algebra' },
-  { id: 'funceval',     label: 'Functions',           sub: 'Evaluate f(x), f(x,y), f(x,y,z)', cat: 'Algebra' },
-  { id: 'polymul',      label: 'Poly Multiply',       sub: 'Expand products of polys',         cat: 'Algebra' },
-  { id: 'polyfactor',   label: 'Poly Factor',         sub: 'Factorise quadratics',             cat: 'Algebra' },
-  { id: 'qformula',     label: 'Quadratic Formula',   sub: 'Find roots of ax²+bx+c = 0',      cat: 'Algebra' },
-  { id: 'simul',        label: 'Simultaneous Eq.',    sub: '2×2 and 3×3 linear systems',       cat: 'Algebra' },
-  { id: 'ineq',         label: 'Inequalities',        sub: 'Linear & quadratic inequalities',  cat: 'Algebra' },
-  { id: 'sequences',    label: 'Sequences',           sub: 'AP & GP: nth term, sum',           cat: 'Algebra' },
-  { id: 'variation',    label: 'Variation',            sub: 'Direct & inverse proportion',      cat: 'Algebra' },
-  { id: 'binomial',     label: 'Binomial Theorem',    sub: 'nCr, expansion, coefficients',     cat: 'Algebra' },
-  { id: 'complex',      label: 'Complex Numbers',     sub: 'Add, multiply, modulus',           cat: 'Algebra' },
-  { id: 'bounds',       label: 'Bounds',              sub: 'Error intervals, propagation',     cat: 'Algebra' },
-  { id: 'angles',       label: 'Angles',              sub: 'Straight line, point, parallel',   cat: 'Geometry' },
-  { id: 'triangles',    label: 'Triangles',           sub: 'Angle sum, isosceles, exterior',   cat: 'Geometry' },
-  { id: 'polygons',     label: 'Polygons',            sub: 'Interior / exterior angles',       cat: 'Geometry' },
-  { id: 'congruence',   label: 'Congruence',          sub: 'SSS, SAS, ASA conditions',         cat: 'Geometry' },
-  { id: 'similarity',   label: 'Similarity',          sub: 'Scale factor, area/vol ratios',    cat: 'Geometry' },
-  { id: 'pythag',       label: "Pythagoras' Theorem", sub: 'Hypotenuse, legs, 3D',             cat: 'Geometry' },
-  { id: 'circleth',     label: 'Circle Theorems',     sub: 'Semicircle, cyclic quad, tangent', cat: 'Geometry' },
-  { id: 'mensur',       label: 'Mensuration',         sub: 'Area, perimeter, volume, SA',      cat: 'Geometry' },
-  { id: 'transform',    label: 'Transformations',     sub: 'Reflect, rotate, translate',       cat: 'Geometry' },
-  { id: 'bearings',     label: 'Bearings',            sub: '3-figure bearings, back bearing',  cat: 'Geometry' },
-  { id: 'coordgeom',    label: 'Coord. Geometry',     sub: 'Midpoint, distance, gradient',     cat: 'Geometry' },
-  { id: 'lineq',        label: 'Line Equation',       sub: 'y = mx + c from two points',       cat: 'Geometry' },
-  { id: 'trig',         label: 'Trigonometry',        sub: 'SOH-CAH-TOA, sine/cosine rule',   cat: 'Geometry' },
-  { id: 'diff',         label: 'Differentiation',     sub: 'Power rule, turning points',       cat: 'Calculus' },
-  { id: 'integ',        label: 'Integration',         sub: 'Antiderivatives, definite integral', cat: 'Calculus' },
-  { id: 'stats',        label: 'Statistics',           sub: 'Mean, median, mode, range',        cat: 'Statistics' },
-  { id: 'prob',         label: 'Probability',          sub: 'Simple, combined, conditional',    cat: 'Statistics' },
-  { id: 'sets',         label: 'Sets',                 sub: 'Union, intersection, Venn',        cat: 'Statistics' },
-  { id: 'vectors',      label: 'Vectors',              sub: 'Add, scale, magnitude',            cat: 'Vectors & Matrices' },
-  { id: 'dotprod',      label: 'Dot Products',         sub: 'Dot product, matrix multiply',     cat: 'Vectors & Matrices' },
-  { id: 'matrix',       label: 'Matrices',             sub: 'Add, scalar ×, det, multiply',     cat: 'Vectors & Matrices' },
-  { id: 'gk',           label: 'General Knowledge',    sub: 'Multiple-choice trivia',           cat: 'Other' },
-  { id: 'vocab',        label: 'Vocabulary',            sub: 'Word definitions',                 cat: 'Other' },
-  { id: 'spot',         label: 'Twin Hunt',             sub: 'Find the common object',           cat: 'Other' },
-  { id: 'lineareq',     label: 'Linear Equations',     sub: 'Solve ax + b = c',                 cat: 'Algebra' },
-  { id: 'decimals',     label: 'Decimals',             sub: '+, −, ×, ÷ with decimal places',   cat: 'Arithmetic' },
-  { id: 'permcomb',     label: 'Perm. & Comb.',        sub: 'nPr, nCr, counting principles',    cat: 'Statistics' },
-  { id: 'limits',       label: 'Limits',               sub: 'Limits at a point, infinity',      cat: 'Calculus' },
-  { id: 'invtrig',      label: 'Inverse Trig',         sub: 'arcsin, arccos, arctan',           cat: 'Geometry' },
-  { id: 'remfactor',    label: 'Remainder Theorem',    sub: 'Polynomial division, roots',       cat: 'Algebra' },
-  { id: 'heron',        label: "Heron's Formula",      sub: 'Area from three sides',            cat: 'Geometry' },
-  { id: 'shares',       label: 'Shares & Dividends',   sub: 'Stock, dividends, returns',        cat: 'Arithmetic' },
-  { id: 'banking',      label: 'Banking (RD)',         sub: 'Recurring deposits, interest',     cat: 'Arithmetic' },
-  { id: 'gst',          label: 'GST',                  sub: 'Goods and Services Tax',           cat: 'Arithmetic' },
-  { id: 'section',      label: 'Section Formula',      sub: 'Internal & external division',     cat: 'Geometry' },
-  { id: 'linprog',      label: 'Linear Programming',   sub: 'Optimise linear objective',        cat: 'Algebra' },
-  { id: 'circmeasure',  label: 'Circular Measure',     sub: 'Radians, arc length, area',        cat: 'Geometry' },
-  { id: 'conics',       label: 'Conic Sections',       sub: 'Circle, parabola, ellipse',        cat: 'Geometry' },
-  { id: 'diffeq',       label: 'Differential Eq.',     sub: 'Solve dy/dx = f(x)',               cat: 'Calculus' },
-]
+async function boot() {
+  const res = await fetch('./graph-data.json')
+  const { categories, nodes, edges } = await res.json()
 
-const edges = [
-  ['basicarith', 'addition'],
-  ['basicarith', 'multiply'],
-  ['basicarith', 'rounding'],
-  ['multiply',   'squaring'],
-  ['addition',   'squaring'],
-  ['multiply',   'fractionadd'],
-  ['fractionadd','percent'],
-  ['percent',    'profitloss'],
-  ['ratio',      'percent'],
-  ['basicarith', 'ratio'],
-  ['multiply',   'sdt'],
-  ['ratio',      'sdt'],
-  ['multiply',    'hcflcm'],
-  ['hcflcm',      'primefactor'],
-  ['basicarith',  'bases'],
-  ['multiply',   'indices'],
-  ['indices',    'surds'],
-  ['indices',    'log'],
-  ['indices',    'stdform'],
-  ['multiply',   'sqrt'],
-  ['squaring',   'sqrt'],
-  ['basicarith', 'funceval'],
-  ['multiply',   'quadratic'],
-  ['indices',    'quadratic'],
-  ['multiply',   'polymul'],
-  ['indices',    'polymul'],
-  ['polymul',    'polyfactor'],
-  ['polyfactor', 'qformula'],
-  ['sqrt',       'qformula'],
-  ['basicarith', 'simul'],
-  ['funceval',   'simul'],
-  ['basicarith', 'ineq'],
-  ['polyfactor', 'ineq'],
-  ['basicarith', 'sequences'],
-  ['multiply',   'sequences'],
-  ['indices',    'sequences'],
-  ['ratio',      'variation'],
-  ['indices',    'variation'],
-  ['indices',    'binomial'],
-  ['polymul',    'binomial'],
-  ['sqrt',       'complex'],
-  ['qformula',   'complex'],
-  ['rounding',   'bounds'],
-  ['basicarith', 'angles'],
-  ['angles',     'triangles'],
-  ['angles',     'polygons'],
-  ['triangles',  'polygons'],
-  ['triangles',  'congruence'],
-  ['triangles',  'similarity'],
-  ['ratio',      'similarity'],
-  ['triangles',  'pythag'],
-  ['squaring',   'pythag'],
-  ['angles',     'circleth'],
-  ['triangles',  'circleth'],
-  ['multiply',   'mensur'],
-  ['squaring',   'mensur'],
-  ['polygons',   'mensur'],
-  ['angles',     'transform'],
-  ['coordgeom',  'transform'],
-  ['angles',     'bearings'],
-  ['basicarith', 'coordgeom'],
-  ['pythag',     'coordgeom'],
-  ['coordgeom',  'lineq'],
-  ['fractionadd','lineq'],
-  ['pythag',     'trig'],
-  ['angles',     'trig'],
-  ['ratio',      'trig'],
-  ['indices',    'diff'],
-  ['polymul',    'diff'],
-  ['quadratic',  'diff'],
-  ['diff',       'integ'],
-  ['basicarith', 'stats'],
-  ['fractionadd','prob'],
-  ['basicarith', 'prob'],
-  ['basicarith', 'sets'],
-  ['basicarith', 'vectors'],
-  ['vectors',    'dotprod'],
-  ['multiply',   'matrix'],
-  ['basicarith', 'matrix'],
-  ['matrix',     'dotprod'],
-  ['basicarith', 'decimals'],
-  ['basicarith', 'lineareq'],
-  ['lineareq',   'simul'],
-  ['basicarith', 'shares'],
-  ['basicarith', 'banking'],
-  ['percent',    'gst'],
-  ['percent',    'shares'],
-  ['percent',    'banking'],
-  ['basicarith', 'permcomb'],
-  ['sequences',  'limits'],
-  ['limits',     'diff'],
-  ['trig',       'invtrig'],
-  ['trig',       'circmeasure'],
-  ['coordgeom',  'section'],
-  ['coordgeom',  'conics'],
-  ['polyfactor', 'remfactor'],
-  ['polymul',    'remfactor'],
-  ['pythag',     'heron'],
-  ['triangles',  'heron'],
-  ['mensur',     'heron'],
-  ['lineareq',   'linprog'],
-  ['ineq',       'linprog'],
-  ['diff',       'diffeq'],
-  ['integ',      'diffeq'],
-]
+  const catLabel = Object.fromEntries(Object.entries(categories).map(([id, c]) => [id, c.label]))
+
 
 // ═══════════════════════════════════════════════════════════════
 // Build adjacency + BFS shortest path
@@ -603,7 +428,7 @@ function renderPath(path, result) {
     html += `<div class="path-node ${cls}">
       <div class="node-label">${n.label}</div>
       <div class="node-sub">${n.sub}</div>
-      <div class="node-cat">${n.cat}</div>
+      <div class="node-cat">${catLabel[n.cat] || n.cat}</div>
     </div>`
     if (i < path.length - 1) {
       html += `<div class="path-arrow">
@@ -1012,6 +837,20 @@ function escHtml(s) {
 
 // Run on load with defaults
 findPath()
+
+window.findPath = findPath
+window.startJourney = startJourney
+window.handleQuizKey = handleQuizKey
+window.numpadPress = numpadPress
+window.reportJourneyDifficulty = reportJourneyDifficulty
+window.submitJourneyAnswer = submitJourneyAnswer
+window.solveJourneyQuestion = solveJourneyQuestion
+window.skipJourneyQuestion = skipJourneyQuestion
+window.advanceStep = advanceStep
+window.journeyNext = journeyNext
+window.quitJourney = quitJourney
+}
+boot()
 </script>
 </body>
 </html>
