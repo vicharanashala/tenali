@@ -26,7 +26,7 @@
 
 ---
 
-### ✨ **69 math topics · Algorithmically generated · Adaptive difficulty · Live multiplayer · Step-by-step solutions**
+### ✨ **93 `*-api` routes · 92 home-grid tiles · Algorithmically generated · Adaptive difficulty · Live multiplayer · Step-by-step solutions**
 
 </div>
 ## 🧠 Pedagogical Features: Progressive & Interactive Learning
@@ -102,7 +102,7 @@ Learning JSON → learnContent.js → Learning Page → Interactive Components
 
 **🧠 Capabilities**
 - [🚀 Features in Depth](#-features-in-depth)
-- [🛠️ The 69 Puzzle Types](#-the-69-puzzle-types)
+- [🛠️ The 93 API Routes](#-the-93-api-routes)
 - [🏗️ Architecture](#-architecture)
 
 </td>
@@ -122,7 +122,7 @@ Learning JSON → learnContent.js → Learning Page → Interactive Components
 
 ## 🌟 What is Tenali?
 
-Tenali (named after the legendary **Tenali Raman** — the witty Indian scholar who outwitted entire courts with logic) is an **adaptive math learning platform** featuring 69 algorithmically-generated puzzle types, real-time multiplayer battles, and step-by-step solutions for every problem. Every question is generated on the fly — there is no question database — so practice is infinite and never repeats. Difficulty adapts to each learner in real time.
+Tenali (named after the legendary **Tenali Raman** — the witty Indian scholar who outwitted entire courts with logic) is an **adaptive math learning platform** featuring **93** server `*-api` route prefixes (algorithmically-generated questions), **92** home-grid tiles in `client/src/features/tiles.js`, and a **69**-node prerequisite graph at `/graph` — real-time multiplayer battles and step-by-step solutions for every problem. Every question is generated on the fly — there is no question database — so practice is infinite and never repeats. Difficulty adapts to each learner in real time.
 
 It is built to run on a single VPS — `tenali.fun` — with one Node process serving the React app, the puzzle APIs, the JWT auth, the Socket.IO Battle Arena, and the multi-language code playground.
 
@@ -268,12 +268,14 @@ JWT auth with **fail-fast** in production, `express-rate-limit`, CORS allowlist,
 
 ---
 
-## 🛠️ The 69 Puzzle Types
+## 🛠️ The 93 API Routes
 
-> Every puzzle has the same two-route contract: `GET /<type>-api/question` and `POST /<type>-api/check`. To fetch a step-by-step explanation, set `{ solve: true }` in the POST body.
+> **What we count:** **93** unique `*-api` route prefixes in `server/` (table below); **92** home-grid tiles in `client/src/features/tiles.js` (not every route has a tile); **69** prerequisite-graph nodes in `graph/index.html` (curriculum DAG — fewer than routes).
+>
+> Every route has the same two-endpoint contract: `GET /<type>-api/question` and `POST /<type>-api/check`. To fetch a step-by-step explanation, set `{ solve: true }` in the POST body.
 
 <details>
-<summary><b>➕ Arithmetic & Number (20 types)</b></summary>
+<summary><b>➕ Arithmetic & Number</b></summary>
 
 | | Type | Endpoint |
 |:-:|-------|----------|
@@ -301,7 +303,7 @@ JWT auth with **fail-fast** in production, `express-rate-limit`, CORS allowlist,
 </details>
 
 <details>
-<summary><b>💰 Commerce & Statistics (8 types)</b></summary>
+<summary><b>💰 Commerce & Statistics</b></summary>
 
 | | Type | Endpoint |
 |:-:|-------|----------|
@@ -317,7 +319,7 @@ JWT auth with **fail-fast** in production, `express-rate-limit`, CORS allowlist,
 </details>
 
 <details>
-<summary><b>📐 Algebra (15 types)</b></summary>
+<summary><b>📐 Algebra</b></summary>
 
 | | Type | Endpoint |
 |:-:|-------|----------|
@@ -335,79 +337,81 @@ JWT auth with **fail-fast** in production, `express-rate-limit`, CORS allowlist,
 | 40 | Binomial Theorem | `/binomial-api` |
 | 41 | Functions Evaluation | `/funceval-api` |
 | 42 | Functions Gym (MCQ) | `/funcgym-api` |
-| 43 | Variation Direct/Indirect | `/variation-api` |
 
 </details>
 
 <details>
-<summary><b>📊 Geometry & Trig (14 types)</b></summary>
+<summary><b>📊 Geometry & Trig</b></summary>
 
 | | Type | Endpoint |
 |:-:|-------|----------|
-| 44 | Trig (SOH-CAH-TOA) | `/trig-api` |
-| 45 | Inverse Trig | `/invtrig-api` |
-| 46 | Circular Measure | `/circmeasure-api` |
-| 47 | Inequalities | `/ineq-api` |
-| 48 | Coordinate Geometry | `/coordgeom-api` |
-| 49 | Section Formula | `/section-api` |
-| 50 | Linear Programming | `/linprog-api` |
-| 51 | Probability | `/prob-api` |
-| 52 | Permutations & Combinations | `/permcomb-api` |
-| 53 | Statistics | `/stats-api` |
-| 54 | Sets | `/sets-api` |
-| 55 | Bearings | `/bearings-api` |
-| 56 | Matrices | `/matrix-api` |
-| 57 | Linear Algebra (56 missions) | `/linearalgebra-api` |
+| 43 | Trig (SOH-CAH-TOA) | `/trig-api` |
+| 44 | Inverse Trig | `/invtrig-api` |
+| 45 | Circular Measure | `/circmeasure-api` |
+| 46 | Inequalities | `/ineq-api` |
+| 47 | Coordinate Geometry | `/coordgeom-api` |
+| 48 | Section Formula | `/section-api` |
+| 49 | Linear Programming | `/linprog-api` |
+| 50 | Probability | `/prob-api` |
+| 51 | Permutations & Combinations | `/permcomb-api` |
+| 52 | Statistics | `/stats-api` |
+| 53 | Sets | `/sets-api` |
+| 54 | Bearings | `/bearings-api` |
+| 55 | Matrices | `/matrix-api` |
+| 56 | Linear Algebra (56 missions) | `/linearalgebra-api` |
 
 </details>
 
 <details>
-<summary><b>🧮 Linear Algebra & Vectors (6 types)</b></summary>
+<summary><b>🧮 Linear Algebra & Vectors</b></summary>
 
 | | Type | Endpoint |
 |:-:|-------|----------|
-| 58 | LA Mission Quiz | `/la-mission-quiz-api` |
-| 59 | Vectors | `/vectors-api` |
-| 60 | Dot Products | `/dotprod-api` |
-| 61 | Dot Products Gym (MCQ) | `/dotprodgym-api` |
-| 62 | Transformations | `/transform-api` |
-| 63 | Mensuration | `/mensur-api` |
+| 57 | LA Mission Quiz | `/la-mission-quiz-api` |
+| 58 | Vectors | `/vectors-api` |
+| 59 | Dot Products | `/dotprod-api` |
+| 60 | Dot Products Gym (MCQ) | `/dotprodgym-api` |
+| 61 | Transformations | `/transform-api` |
+| 62 | Mensuration | `/mensur-api` |
 
 </details>
 
 <details>
-<summary><b>🎯 Calculus, Puzzles & Games (15+ types)</b></summary>
+<summary><b>🎯 Calculus, Puzzles & Games</b></summary>
 
 | | Type | Endpoint |
 |:-:|-------|----------|
-| 64 | Pythagoras' Theorem | `/pythag-api` |
-| 65 | Heron's Formula | `/heron-api` |
-| 66 | Circle Theorems | `/circleth-api` |
-| 67 | Circle Geometry | `/circle-api` |
-| 68 | Logarithms | `/log-api` |
-| 69 | Differentiation | `/diff-api` |
-| 70 | Differential Equations | `/diffeq-api` |
-| 71 | Integration | `/integ-api` |
-| 72 | Limits | `/limits-api` |
-| 73 | Conic Sections | `/conics-api` |
-| 74 | Complex Numbers | `/complex-api` |
-| 75 | Angles | `/angles-api` |
-| 76 | Triangles | `/triangles-api` |
-| 77 | Polygons | `/polygons-api` |
-| 78 | Congruence | `/congruence-api` |
-| 79 | Similarity | `/similarity-api` |
-| 80 | Visual Math | `/visual-math-api` |
-| 81 | Conceptual | `/concept-api` |
-| 82 | Vocabulary (7,662 words) | `/vocab-api` |
-| 83 | GK (991 questions) | `/gk-api` |
-| 84 | Tatsavit | `/tatsavit-api` |
-| 85 | Sudoku | `/sudoku-api` |
-| 86 | Transfer scenarios | `/transfer-api` |
-| 87 | Darts | `/darts-api` |
-| 88 | Riddles | `/riddle-api` |
-| 89 | Square Root | `/sqrt-api` |
-| 90 | Squaring | `/squaring-api` |
-| 91 | Curiosity | `/curiosity-api` |
+| 63 | Pythagoras' Theorem | `/pythag-api` |
+| 64 | Heron's Formula | `/heron-api` |
+| 65 | Circle Theorems | `/circle-api` |
+| 66 | Logarithms | `/log-api` |
+| 67 | Differentiation | `/diff-api` |
+| 68 | Differential Equations | `/diffeq-api` |
+| 69 | Integration | `/integ-api` |
+| 70 | Limits | `/limits-api` |
+| 71 | Conic Sections | `/conics-api` |
+| 72 | Complex Numbers | `/complex-api` |
+| 73 | Angles | `/angles-api` |
+| 74 | Triangles | `/triangles-api` |
+| 75 | Polygons | `/polygons-api` |
+| 76 | Congruence | `/congruence-api` |
+| 77 | Similarity | `/similarity-api` |
+| 78 | Visual Math | `/visual-math-api` |
+| 79 | Conceptual | `/concept-api` |
+| 80 | Vocabulary (7,662 words) | `/vocab-api` |
+| 81 | GK (991 questions) | `/gk-api` |
+| 82 | Tatsavit | `/tatsavit-api` |
+| 83 | Sudoku | `/sudoku-api` |
+| 84 | Transfer scenarios | `/transfer-api` |
+| 85 | Darts | `/darts-api` |
+| 86 | Riddles | `/riddle-api` |
+| 87 | Square Root | `/sqrt-api` |
+| 88 | Squaring | `/squaring-api` |
+| 89 | Curiosity | `/curiosity-api` |
+| 90 | Contrast Challenge | `/contrast-api` |
+| 91 | Matrix Mystics | `/matrixmystics-api` |
+| 92 | Treasure Hunt | `/treasurehunt-api` |
+| 93 | Word Creator | `/wordcreator-api` |
 
 </details>
 
@@ -440,7 +444,7 @@ JWT auth with **fail-fast** in production, `express-rate-limit`, CORS allowlist,
 │         └────────────┬────┴────────────┬────┘                   │
 │                      ▼                 ▼                         │
 │  ┌──────────────────────────────────────────────────────┐        │
-│  │   69 puzzle routers (GET ?question, POST ?check)     │        │
+│  │   93 *-api route prefixes (GET ?question, POST ?check)│        │
 │  └──────┬───────────────────────────────────────────────┘        │
 │         │                                                        │
 │  ┌──────▼───────────────────────────────────────────────┐        │
@@ -586,7 +590,7 @@ Go beyond the mission statement. Describe Tenali as a system: the users (student
 **3. Current State of the Repository — What Has Been Done So Far**
 Walk through the repository and describe what already exists:
 - Tech stack (frontend, backend, database, auth, deployment).
-- Implemented features (the 69 puzzle types, adaptive difficulty, Battle Arena multiplayer, step-by-step explanations, the code playground, auth, etc.).
+- Implemented features (93 `*-api` routes, 92 home-grid tiles, 69-node prerequisite graph, adaptive difficulty, Battle Arena multiplayer, step-by-step explanations, the code playground, auth, etc.).
 
 **4. Gaps Observed in the Code**
 This is the most important section. List concrete weaknesses, bugs, missing features, or design problems you found while reading the code. You can also pick issues stated on the Tenali GitHub repo and solve them. For each gap, include:
@@ -652,9 +656,9 @@ tenali.fun (DNS → <production IP — redacted from public docs>)
 ### 📊 Repo at a glance
 
 <!-- live-snapshot:start -->
-| 🏆 Commits | 🔀 Merged PRs | 👥 Contributors | 🧩 Puzzles | 📚 Vocab | 🌍 GK |
-|----------:|------------:|--------------:|---------:|-------:|----:|
-| **1008** | **93** | **37** | **69** | **7,662** | **991** |
+| 🏆 Commits | 🔀 Merged PRs | 👥 Contributors | 🧩 API routes | 📚 Vocab | 🌍 GK |
+|----------:|------------:|--------------:|-------------:|-------:|----:|
+| **1008** | **93** | **37** | **93** | **7,662** | **991** |
 <!-- live-snapshot:end -->
 
 ### 🥇 Leaderboard
