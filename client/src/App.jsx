@@ -55232,7 +55232,7 @@ function TransferChallengeApp({ topicKey, onBack, completedTopics, goldMastery, 
 }
 
 function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, answerField, topicKey: customTopicKey }) {
-  return function GeneratedQuizApp({ onBack, completedTopics = [], goldMastery = [], markTopicCompleted, markGoldMastery, updateCoins, setMode, setTransferTopic, initialDifficulty, initialNumQuestions, initialStarted, isGoalMode = false }) {
+  return function GeneratedQuizApp({ onBack, completedTopics = [], goldMastery = [], markTopicCompleted, markGoldMastery, updateCoins, setMode, setTransferTopic, initialDifficulty, initialNumQuestions, initialStarted, isGoalMode = false, setupExtraButtons }) {
     const diffs = Object.keys(diffLabels)
     // Feature CR: a just-earned Road License pre-selects the earned difficulty (one-shot; student can change it)
     const [difficulty, setDifficulty] = useState(() => initialDifficulty || cjTakeReco(customTopicKey || apiPath.replace('-api', ''), diffs) || diffs[0])
@@ -55524,6 +55524,15 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
             }}>
               Start Quiz
             </button>
+
+            {setupExtraButtons?.map((btn, i) => (
+              <button key={i} type="button" onClick={btn.onClick} style={{
+                marginTop: '16px', background: 'transparent', border: '1px solid #5B5048', borderRadius: '6px',
+                padding: '10px 24px', color: '#C9BFB6', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer'
+              }}>
+                {btn.label}
+              </button>
+            ))}
           </div>
         {isStage3Completed(topicKey, completedTopics) && (
           <div className="transfer-cta-box" style={{ marginTop: '20px', padding: '16px', background: 'var(--clr-hover, rgba(255,255,255,0.03))', borderRadius: '10px', border: '1px solid var(--clr-border)', textAlign: 'center' }}>
@@ -56092,7 +56101,7 @@ const DiffApp = makeQuizApp({
   placeholders: 'e.g. 12 or -3/2',
 })
 
-const BasesApp = makeQuizApp({
+const BasesCoreApp = makeQuizApp({
   title: 'Number Bases', subtitle: 'Binary, decimal, hexadecimal', apiPath: 'bases-api', topicKey: 'number-bases',
   diffLabels: { easy: 'Easy — Dec→Bin', medium: 'Medium — Bin→Dec', hard: 'Hard — Dec→Hex', extrahard: 'Extra Hard — Bin add / Hex→Bin' },
   placeholders: (q, d) => d === 'medium' ? 'e.g. 42' : d === 'hard' ? 'e.g. FF' : 'e.g. 101010',
@@ -58231,6 +58240,19 @@ function GuessNumberApp({ onBack }) {
         </div>
       )}
     </>
+  )
+}
+
+function BasesApp(props) {
+  const [showGuessNumber, setShowGuessNumber] = useState(false)
+  if (showGuessNumber) {
+    return <GuessNumberApp onBack={() => setShowGuessNumber(false)} />
+  }
+  return (
+    <BasesCoreApp
+      {...props}
+      setupExtraButtons={[{ label: 'Guess the Number — Binary magic trick', onClick: () => setShowGuessNumber(true) }]}
+    />
   )
 }
 
