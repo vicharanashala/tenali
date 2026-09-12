@@ -52139,6 +52139,7 @@ function GymQuiz({ title, subtitle, typeKeys, welcomeText, algebraInput, onBack 
  * @param {Function} props.onBack - Callback to return to home menu
  */
 function BasicArithApp({ onBack, completedTopics = [], goldMastery = [], markTopicCompleted, setTransferTopic, setMode, isGoalMode = false }) {
+  const [showCarJourney, setShowCarJourney] = useState(false)
   // Difficulty level: 'easy', 'medium', 'hard', 'extrahard'
   const [difficulty, setDifficulty] = useState(() => cjTakeReco('basicarith', CJ_RECO_DIFFS) || 'easy')
   // Adaptive mode enabled?
@@ -52379,6 +52380,10 @@ const fetchQuestion = async () => {
   const diffLabels = { easy: 'Easy — 1 digit', medium: 'Medium — 2 digits', hard: 'Hard — 3 digits', extrahard: 'Extra Hard — 4 digits' }
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
+  if (showCarJourney) {
+    return <CarJourneyApp onBack={() => setShowCarJourney(false)} setMode={setMode} />
+  }
+
   return (
     <QuizLayout title="Origin" subtitle="Add, subtract, multiply & divide positive & negative numbers" onBack={onBack} timer={started && !finished ? timer : null}>
       {!started && !finished && <div className="welcome-box">
@@ -52445,6 +52450,12 @@ const fetchQuestion = async () => {
           <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={e => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} />
         </div>
         <div className="button-row"><button onClick={startQuiz}>Start Quiz</button></div>
+        <button type="button" onClick={() => setShowCarJourney(true)} style={{
+          marginTop: '16px', background: 'transparent', border: '1px solid var(--clr-border)', borderRadius: '6px',
+          padding: '10px 24px', color: 'var(--clr-text-soft)', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer'
+        }}>
+          The Car Journey — 16-stop math road trip
+        </button>
       </div>}
       {started && !finished && <>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.3rem' }}>
@@ -54416,7 +54427,8 @@ const loadQuestion = async (excludeIds) => {
 /* ── Fraction Addition App ────────────────────────────────────── */
 function FractionsPage(props) {
   const [learningPhase, setLearningPhase] = useState('select'); // 'select', 'learn', 'test'
-  
+  const [showIdliVada, setShowIdliVada] = useState(false);
+
   const [showQuizBelow, setShowQuizBelow] = useState(false);
   const quizRef = useRef(null);
 
@@ -54426,6 +54438,10 @@ function FractionsPage(props) {
       quizRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 100);
   };
+
+  if (showIdliVada) {
+    return <IdliVadaSambharApp onBack={() => setShowIdliVada(false)} />
+  }
 
   if (learningPhase === 'select') {
     return (
@@ -54454,6 +54470,12 @@ function FractionsPage(props) {
               <span style={{ color: 'var(--clr-text-soft)' }}>Test what you know</span>
             </button>
           </div>
+          <button type="button" onClick={() => setShowIdliVada(true)} style={{
+            marginTop: '28px', background: 'transparent', border: '1px solid #d99b2b', borderRadius: '12px',
+            padding: '12px 24px', color: 'var(--clr-text)', fontWeight: 600, fontSize: '0.95rem', cursor: 'pointer'
+          }}>
+            Idli Vada Sambhar — multiples & LCM game
+          </button>
         </div>
       </div>
     );
