@@ -231,7 +231,7 @@ Linear curriculum with concept checkpoints. Completing one unlocks the next. Ser
 Wrap any `POST *-api/check` call with `{ solve: true }` and the server returns a step-by-step walkthrough from `generateExplanation()` — covers 50+ puzzle types.
 
 ### 🧠 7. Spaced Repetition
-`lib/spacingLadder.js` promotes recently-missed questions back into rotation, driven by BKT (Bayesian Knowledge Tracing — `lib/bkt.js`).
+`lib/spacingLadder.js` promotes recently-missed questions back into rotation. A concept review is treated as having held up at 70% accuracy or better, and the rung advances or resets accordingly. (`server/lib/bkt.js` is not wired into this flow; see [#289](https://github.com/vicharanashala/tenali/issues/289).)
 
 ### 🛡️ 8. Proctoring System
 Optional exam-mode supervision with webcam + face-api.js emotion detection, focus / tab-switch event logging, and an admin-only `/api/proctor/sessions` dashboard.

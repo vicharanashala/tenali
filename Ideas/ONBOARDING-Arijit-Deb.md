@@ -43,7 +43,7 @@ Walking through the repository is how I learnt the system, so this section refle
 
 **Backend**
 - `server/index.js` is a single monolithic file of **14,347 lines** (CLAUDE.md's "~9000 lines" is outdated). It contains the question/check endpoint pairs, static file serving, and the solve middleware. I counted **88** distinct `GET ...-api/question` and **88** `POST ...-api/check` routes within it.
-- Supporting modules: `server/auth.js` (JWT + Mongo/memory auth), `server/explanations.js` (the ~700-line per-type explanation engine), `server/progress.js` (user progress), `server/proctorSchema.js` (exam supervision), `server/routes/` and `server/lib/` (a small in-progress extraction into routers and shared utilities, e.g. `lib/bkt.js` for Bayesian Knowledge Tracing and `lib/spacingLadder.js` for spaced repetition).
+- Supporting modules: `server/auth.js` (JWT + Mongo/memory auth), `server/explanations.js` (the ~700-line per-type explanation engine), `server/progress.js` (user progress), `server/proctorSchema.js` (exam supervision), `server/routes/` and `server/lib/` (a small in-progress extraction into routers and helpers, e.g. `lib/spacingLadder.js` for concept-session spaced-repetition rungs; `lib/bkt.js` mirrors the client BKT logic but is only exercised by its unit tests today, not by running server code).
 - Answer/explanation helpers live inline (e.g., `gcd`, `lcm`, `simplifyFraction`, `randomInt`).
 - Two secondary datasets are loaded at startup: `chitragupta/questions/` (991 GK JSONs) and `vocab/questions/` (7,662 vocab JSONs).
 
