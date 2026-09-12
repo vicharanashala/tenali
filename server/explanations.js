@@ -1,3 +1,26 @@
+const fs = require('fs');
+const path = require('path');
+
+// Directory containing conceptual questions
+const conceptualDir = path.join(__dirname, '..', 'conceptual', 'questions');
+
+// Load all conceptual questions from JSON files
+function loadConceptual() {
+  if (!fs.existsSync(conceptualDir)) {
+    return [];
+  }
+  const files = fs.readdirSync(conceptualDir).filter((file) => file.endsWith('.json'));
+  return files.flatMap((file) => {
+    const fullPath = path.join(conceptualDir, file);
+    try {
+      const parsed = JSON.parse(fs.readFileSync(fullPath, 'utf8'));
+      return Array.isArray(parsed) ? parsed : [parsed];
+    } catch (e) {
+      return [];
+    }
+  });
+}
+
 module.exports = { generateExplanation };
 
 function gcd(a, b) {
@@ -789,6 +812,17 @@ function generateExplanation(req, data) {
     return `The correct answer is: ${correctText}\n\nTip: Read all options carefully before choosing.`;
   }
 
+  // ── Conceptual MCQ Questions ──────────────────────────────────
+  if (p.includes('conceptual-api')) {
+    const q = loadConceptual().find((item) => String(item.id) === String(b.id));
+    if (q && q.explanation) {
+      return q.explanation;
+    }
+    const correctText = d.correctAnswerText || d.correctAnswer || ans;
+    return `The correct answer is: ${correctText}`;
+  }
+
+
   // ── Linear Equations (solve ax + b = c) ───────────────────────
   if (p.includes('lineareq-api')) {
     let s = `Problem: ${b.prompt || b.display || 'Solve the linear equation'}\n\n`;
@@ -1014,6 +1048,12 @@ function generateExplanation(req, data) {
     }
     s += `Answer: Place the dart at (${x}, ${y}).`;
     return s;
+  }
+
+  // ── Conceptual MCQ Questions ──────────────────────────────────
+  if (p.includes('conceptual-api')) {
+    const correctText = d.correctAnswerText || d.correctAnswer || ans;
+    return `The correct answer is: ${correctText}`;
   }
 
   // ── Generic fallback with prompt ──────────────────────────────
