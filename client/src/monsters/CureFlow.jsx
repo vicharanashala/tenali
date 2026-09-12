@@ -7,7 +7,7 @@
  * local cure history.
  */
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { load, recordCure, getCureHistory } from './monsterStore.js';
 import { getMonsterName } from './monsterExplanations.js';
@@ -227,8 +227,6 @@ export function CureFlow({ monsterId, topic, onComplete, onCancel, onOpenGuidedS
   const [error, setError] = useState('');
   const [finished, setFinished] = useState(false);
   const [poofActive, setPoofActive] = useState(false);
-  const startedAt = useMemo(() => Date.now(), []);
-
   useEffect(() => {
     injectStyles();
     const prepared = historyQuestions(monsterId, topic);

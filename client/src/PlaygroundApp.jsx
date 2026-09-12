@@ -483,7 +483,7 @@ function detectTsIssues(code) {
 /* ═══════════════════════════════════════════════════════════════════════════ */
 /* Code Visualizer — line-by-line execution trace like Python Tutor          */
 /* ═══════════════════════════════════════════════════════════════════════════ */
-function generateVizSteps(code, langId) {
+function generateVizSteps(code) {
   const lines = code.split('\n')
   const nonEmpty = lines.map((l, i) => ({ text: l, origIdx: i })).filter(l => l.text.trim())
   if (nonEmpty.length === 0) return []
@@ -666,7 +666,6 @@ function generateVizSteps(code, langId) {
 
       snap(lineNum, `while (${cond})`, '⟳')
       let safety = 0
-      let condVal = true
       while (safety < 50) {
         for (const bl of body) {
           const blLine = bl.origIdx + 1
@@ -682,7 +681,7 @@ function generateVizSteps(code, langId) {
         if (matchOp) {
           const lv = vars[matchOp[1]] !== undefined ? vars[matchOp[1]] : parseInt(matchOp[1])
           const rv = parseInt(matchOp[2])
-          if (!(parseInt(lv) < rv)) { condVal = false; break }
+          if (!(parseInt(lv) < rv)) break
         } else break
       }
       i = bodyEnd
@@ -763,7 +762,7 @@ function generateVizSteps(code, langId) {
         const arr = arrInit[2].split(',').map(s => resolveVal(s.trim()))
         setVar(arrInit[1], arr)
         snap(lineNum, `${arrInit[1]} = [${arr.join(', ')}]`, '→')
-      } catch {}
+      } catch { /* ignore malformed array literal */ }
       i++; continue
     }
 

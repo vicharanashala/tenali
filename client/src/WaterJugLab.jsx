@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { QuizLayout } from './App';
 import './WaterJugLab.css';
 
@@ -38,9 +38,6 @@ function IntroJourney({ onComplete }) {
     setJugA(0);
     setJugB(0);
   }, [level]);
-
-  /* Level 16 State (Puzzle) */
-  const [puzzleStep, setPuzzleStep] = useState(0);
 
   /* Level 17 State (Impossible) */
   const [impTried, setImpTried] = useState(false);
@@ -547,7 +544,7 @@ function TheoryAutoDemo() {
   );
 }
 
-export default function WaterJugLab({ onBack, setMode }) {
+export default function WaterJugLab({ onBack }) {
   const [difficulty, setDifficulty] = useState(0); // 0: Kids Mode, 1: Coprime Basics, 2: Larger Coprimes, 3: GCD Multiples, 4: Optimization, 5: Insolvability Trap, 6: Grandmaster Challenge
   const [phase, setPhase] = useState('setup'); // 'setup' | 'playing' | 'finished'
   const [questionCount, setQuestionCount] = useState(5);
@@ -566,7 +563,7 @@ export default function WaterJugLab({ onBack, setMode }) {
   const [gcdVal, setGcdVal] = useState(1);
 
   const [setupTab, setSetupTab] = useState('concepts'); // 'play' | 'concepts' | 'theory'
-  const [journeyDone, setJourneyDone] = useState(false);
+  const [, setJourneyDone] = useState(false);
   const [showTheoryModal, setShowTheoryModal] = useState(false);
 
   const [loading, setLoading] = useState(false);
@@ -655,7 +652,7 @@ export default function WaterJugLab({ onBack, setMode }) {
         setLoading(false);
         return;
       }
-    } catch (err) {
+    } catch {
       // Fallback silently to local generator
     }
 

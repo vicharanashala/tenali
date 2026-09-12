@@ -180,7 +180,9 @@ function loadProgress() {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) return JSON.parse(saved);
     }
-  } catch (e) {}
+  } catch {
+    // ignore — progress load is best-effort
+  }
   return { unlockedLevel: 0, completedLevels: [] };
 }
 
@@ -189,7 +191,9 @@ function saveProgress(progress) {
     if (typeof localStorage !== 'undefined') {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
     }
-  } catch (e) {}
+  } catch {
+    // ignore — progress save is best-effort
+  }
 }
 
 function getLevelFromPath() {
@@ -201,7 +205,7 @@ function getLevelFromPath() {
   return null; // Landing / overview page
 }
 
-function getSchemaColorInfo(opt) {
+function getSchemaColorInfo() {
   const baseInfo = { defaultBg: 'var(--clr-card)', defaultBorder: 'var(--clr-border)', selectedBg: 'var(--clr-surface)', glow: '0 4px 16px rgba(232, 134, 74, 0.2)' };
   return { ...baseInfo, mainColor: 'var(--clr-accent, #F97316)' };
 }
@@ -247,15 +251,15 @@ export default function SchemaClassifier() {
       setOptionsByQuestion({});
     }
   }, [activeLevel]);
-  const [msg, setMsg] = useState('');
+  const [, setMsg] = useState('');
   const [levelPassed, setLevelPassed] = useState(false);
   const [questionAttempts, setQuestionAttempts] = useState({});
-  const [hasVerified, setHasVerified] = useState(false);
+  const [, setHasVerified] = useState(false);
   const [verifiedQuestions, setVerifiedQuestions] = useState({});
   const [currentQIndex, setCurrentQIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
-  const [quickCheckChoice, setQuickCheckChoice] = useState(null);
-  const [quickCheckFeedback, setQuickCheckFeedback] = useState(null);
+  const [, setQuickCheckChoice] = useState(null);
+  const [, setQuickCheckFeedback] = useState(null);
   const [l0Answers, setL0Answers] = useState({ q1: null, q2: null, q3: null });
   const [l0Feedback, setL0Feedback] = useState({ q1: null, q2: null, q3: null });
   const [l0ActiveIndex, setL0ActiveIndex] = useState(0);
@@ -263,21 +267,21 @@ export default function SchemaClassifier() {
   const [l0Transitioning, setL0Transitioning] = useState(false);
 
   // Level 0 Interactive Steps State
-  const [l0CombineItems, setL0CombineItems] = useState([
+  const l0CombineItems = [
     { id: 'item-1', group: 'A', emoji: '🧸' },
     { id: 'item-2', group: 'A', emoji: '🧸' },
     { id: 'item-3', group: 'B', emoji: '🪀' },
     { id: 'item-4', group: 'B', emoji: '🪀' }
-  ]);
+  ];
   const [l0CombineDropZone, setL0CombineDropZone] = useState([]);
   const [l0CombineCompleted, setL0CombineCompleted] = useState(false);
 
   const [l0CompareChoice, setL0CompareChoice] = useState(null); // 'A', 'B', 'equal'
-  const [l0CompareDiffInput, setL0CompareDiffInput] = useState('');
+  const [, setL0CompareDiffInput] = useState('');
   const [l0CompareCompleted, setL0CompareCompleted] = useState(false);
 
   const [l0ChangeState, setL0ChangeState] = useState(6); // Initial candies count
-  const [l0ChangeDiff, setL0ChangeDiff] = useState(0);
+  const [, setL0ChangeDiff] = useState(0);
   const [l0ChangeHistory, setL0ChangeHistory] = useState([]);
   const [l0ChangeCompleted, setL0ChangeCompleted] = useState(false);
 
@@ -429,32 +433,6 @@ export default function SchemaClassifier() {
     setMsg('');
 
     checkOverallLevelPass(answers, updatedVerified);
-  };
-
-  const handleVerify = () => {
-    if (!activeLevel) return;
-    const questions = QUESTIONS_BY_LEVEL[activeLevel];
-    if (!questions) return;
-
-    const allAnswered = questions.every(q => answers[q.id]);
-    if (!allAnswered) {
-      setMsg(`⚠️ Please select a schema classification for all ${questions.length} questions before verifying.`);
-      return;
-    }
-
-    setHasVerified(true);
-    const updatedVerified = {};
-    questions.forEach(q => { updatedVerified[q.id] = true; });
-    setVerifiedQuestions(updatedVerified);
-
-    checkOverallLevelPass(answers, updatedVerified);
-  };
-
-  const handleReset = () => {
-    const resetProg = { unlockedLevel: 0, completedLevels: [] };
-    setProgress(resetProg);
-    saveProgress(resetProg);
-    navigateToLevel(null);
   };
 
   if (activeLevel === null) {
@@ -1799,14 +1777,11 @@ export default function SchemaClassifier() {
   const safeQIndex = Math.min(currentQIndex, Math.max(0, currentQuestions.length - 1));
   const prob = currentQuestions[safeQIndex] || { id: '', text: '', type: '' };
 
-  const answeredCount = currentQuestions.filter(q => Boolean(answers[q.id])).length;
   const correctCount = currentQuestions.filter(q => verifiedQuestions[q.id] && isSchemaMatch(answers[q.id], q.type)).length;
 
   const isProbVerified = Boolean(prob.id && verifiedQuestions[prob.id]);
   const isProbCorrect = isProbVerified && isSchemaMatch(answers[prob.id], prob.type);
   const isProbWrong = isProbVerified && !isProbCorrect;
-  const qAttempts = prob.id ? (questionAttempts[prob.id] || 0) : 0;
-
   // Schema Mastery calculations
   const totalCombine = currentQuestions.filter(q => q.type.includes('Combine')).length;
   const correctCombine = currentQuestions.filter(q => q.type.includes('Combine') && verifiedQuestions[q.id] && isSchemaMatch(answers[q.id], q.type)).length;

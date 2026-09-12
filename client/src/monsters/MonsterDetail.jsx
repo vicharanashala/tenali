@@ -26,12 +26,7 @@
  */
 
 import { useEffect, useMemo, useState } from 'react';
-import {
-  getMonsterExplanation,
-  getMonsterName,
-  getMonsterTagline,
-} from './monsterExplanations.js';
-import { load } from './monsterStore.js';
+import { getMonsterExplanation } from './monsterExplanations.js';
 
 // Color per monster (matches MonsterCard and MonsterToast)
 const MONSTER_COLORS = {
@@ -285,44 +280,6 @@ function injectDetailStyles() {
   style.setAttribute('data-monster-detail', '');
   style.textContent = css;
   document.head.appendChild(style);
-}
-
-/**
- * Find the most common topic this monster has been triggered on.
- * Falls back to first seen topic, or null.
- */
-function getSuggestedTopic(monsterId) {
-  const state = load();
-  if (!state || !Array.isArray(state.log)) return null;
-  const counts = {};
-  for (const e of state.log) {
-    if (e.monsterId === monsterId && e.topic) {
-      counts[e.topic] = (counts[e.topic] || 0) + 1;
-    }
-  }
-  const entries = Object.entries(counts);
-  if (entries.length === 0) return null;
-  entries.sort((a, b) => b[1] - a[1]);
-  return entries[0][0];
-}
-
-/**
- * Return all unique topics this monster has been triggered on,
- * sorted by frequency (most breached topic first).
- * Used to populate the cure topic selector with real choices.
- */
-function getAllTopics(monsterId) {
-  const state = load();
-  if (!state || !Array.isArray(state.log)) return [];
-  const counts = {};
-  for (const e of state.log) {
-    if (e.monsterId === monsterId && e.topic) {
-      counts[e.topic] = (counts[e.topic] || 0) + 1;
-    }
-  }
-  return Object.entries(counts)
-    .sort((a, b) => b[1] - a[1])
-    .map(([topic]) => topic);
 }
 
 function InteractiveMonsterDemo({ monsterId, colors }) {

@@ -93,7 +93,7 @@ const AnglesLearnPage = ({ onStartTest, onBack }) => {
       if (stepIndex + 1 === 5) { // Reached the end
         try {
           localStorage.setItem('tenali_angles_learned', 'true');
-        } catch (e) {}
+        } catch { /* localStorage unavailable */ }
       }
     }
   };

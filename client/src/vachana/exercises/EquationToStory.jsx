@@ -1187,7 +1187,7 @@ function gen4() {
   const a = ri(2, 7), b = ri(2, 10) * 10, x = ri(Math.floor(b / 10) + 3, 30) * 10;
   const c = a * (x - b);
   if (c <= 0) return gen4();
-  const nm = gp(GN), it = gp(GI), di = gp(GD), fe = gp(GF);
+  const nm = gp(GN), it = gp(GI), di = gp(GD);
   return {
     equation: `${a}(x - ${b}) = ${c}`,
     options: shuffle([
@@ -1396,8 +1396,6 @@ function getInteractiveQuestion(rawQ, qIdx = 0) {
   let parts = [];
   let story = [];
   let chips = [];
-
-  const correctOpt = rawQ.options?.find(o => o.correct) || rawQ.options?.[0];
 
   if (stdMatch) {
     const [, term1, op, term2, total] = stdMatch;
@@ -1911,7 +1909,7 @@ export default function EquationToStory() {
   const [answered, setAnswered] = useState(false);
   const [score, setScore] = useState(0);
   const [finished, setFinished] = useState(false);
-  const [wrongCount, setWrongCount] = useState(0);
+  const [, setWrongCount] = useState(0);
   const [shuffledQuestions, setShuffledQuestions] = useState([]);
   // Custom-test state
   const [customCount, setCustomCount] = useState(20);
@@ -1939,7 +1937,7 @@ export default function EquationToStory() {
   const [usedChips, setUsedChips] = useState(new Set());
   const [selectedChip, setSelectedChip] = useState(null);
   const [storyCompleted, setStoryCompleted] = useState(false);
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [, setSelectedAnswer] = useState(null);
   const [wrongAnswers, setWrongAnswers] = useState(new Set());
 
   const currentQ = useMemo(() => getInteractiveQuestion(shuffledQuestions[qIndex], qIndex), [shuffledQuestions, qIndex]);
@@ -2596,7 +2594,9 @@ export default function EquationToStory() {
               <span key={i}
                 onDragOver={e => {
                   e.preventDefault();
-                  try { e.dataTransfer.dropEffect = 'move'; } catch (err) { }
+                  try { e.dataTransfer.dropEffect = 'move'; } catch {
+                    // ignore — dropEffect is best-effort
+                  }
                   e.currentTarget.style.borderColor = PAL.sky;
                   e.currentTarget.style.transform = 'scale(1.05)';
                 }}
@@ -2609,7 +2609,9 @@ export default function EquationToStory() {
                   e.currentTarget.style.borderColor = isFilled ? slotColor : 'var(--clr-border)';
                   e.currentTarget.style.transform = 'none';
                   let val = '';
-                  try { val = e.dataTransfer.getData('text/plain'); } catch (err) { }
+                  try { val = e.dataTransfer.getData('text/plain'); } catch {
+                    // ignore — read drag data from ref fallback
+                  }
                   if (!val) val = dragValRef.current || selectedChip?.v;
                   handleSlotFill(s.need, s.fill, val);
                   dragValRef.current = null;
@@ -2647,7 +2649,9 @@ export default function EquationToStory() {
                     try {
                       e.dataTransfer.setData('text/plain', chip.v);
                       e.dataTransfer.effectAllowed = 'move';
-                    } catch (err) { }
+                    } catch {
+                      // ignore — setData may be restricted in some browsers
+                    }
                     setSelectedChip(chip);
                   }}
                   onClick={() => {

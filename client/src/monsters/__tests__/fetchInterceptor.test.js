@@ -86,7 +86,7 @@ const _lastRequestBody = new Map();
 function parseRequestBody(init) {
   if (!init || !init.body) return null;
   if (typeof init.body !== 'string') return null;
-  try { return JSON.parse(init.body); } catch (_e) { return null; }
+  try { return JSON.parse(init.body); } catch { return null; }
 }
 
 function extractNormalized(data, url) {

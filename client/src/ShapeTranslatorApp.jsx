@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import ThreeDViewer from './components/ThreeDViewer'
 import ScribbleCanvas from './components/ScribbleCanvas'
 
@@ -51,7 +51,7 @@ function renderProjection2D(type, w, h, size = 110) {
   }
 }
 
-function validateDrawing(elements, expectedType, expectedDims) {
+function validateDrawing(elements, expectedType) {
   if (!elements || elements.length === 0) return { score: 0, feedback: 'Draw something first!' }
   const points = []
   elements.forEach(el => {
@@ -145,7 +145,7 @@ export default function ShapeTranslatorApp({ onBack }) {
     if (!q) return
     if (q.mode === '3dto2d') {
       const data = canvasRef.current?.getElements()
-      const result = validateDrawing(data, q.correctType, q.shapeDef.dims)
+      const result = validateDrawing(data, q.correctType)
       setResultData(result)
       setScore(prev => prev + (result.score >= 60 ? 1 : 0))
     } else {

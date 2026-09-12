@@ -8,7 +8,9 @@ export function getLocalXp() {
 }
 
 export function setLocalXp(val) {
-  try { localStorage.setItem('tenali_xp', val.toString()); } catch {}
+  try { localStorage.setItem('tenali_xp', val.toString()); } catch {
+    // ignore — XP persistence is best-effort
+  }
 }
 
 export function changeXp(delta) {

@@ -98,7 +98,9 @@ export default function ProctoredQuiz({ children, quizType, onBack, autoStartCon
         const tl = JSON.parse(sessionStorage.getItem('tenali_emotion_timeline') || '[]')
         setEmotionTimeline(tl)
         sessionStorage.removeItem('tenali_emotion_timeline')
-      } catch {}
+      } catch {
+        // ignore — emotion timeline is optional
+      }
       setShowEmotion(true)
     }
   }, [quizFinished, phase, sessionId, setShowEmotion])

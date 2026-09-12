@@ -1,12 +1,11 @@
 import React, { useRef, useMemo, useEffect } from 'react'
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { Canvas, useThree } from '@react-three/fiber'
 import { OrbitControls, Text, Html } from '@react-three/drei'
 import * as THREE from 'three'
 
-function ShapeMesh({ type, dimensions = {}, highlightFaces = [], cuttingPlane, showWireframe = false, showDimensions = false, color = '#4dabf7', opacity = 1 }) {
+function ShapeMesh({ type, dimensions = {}, cuttingPlane, showWireframe = false, showDimensions = false, color = '#4dabf7', opacity = 1 }) {
   const meshRef = useRef()
   const { w = 1, h = 1, d = 1, r = 0.5, sides = 3, height = 1 } = dimensions
-  const hlSet = useMemo(() => new Set(highlightFaces), [highlightFaces])
 
   const geometry = useMemo(() => {
     switch (type) {

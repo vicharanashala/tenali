@@ -5,7 +5,7 @@ import React from 'react';
  * Wrapper layout for quiz apps (WordCreatorApp, WordSearchApp, CrosswordApp, etc.)
  * Provides consistent header with back button and title section
  */
-export function QuizLayout({ title, subtitle, onBack, children, timer, sessionGoal, enhanceFinishedScreen }) {
+export function QuizLayout({ title, onBack, children, timer, sessionGoal, enhanceFinishedScreen }) {
   const isSpeed = timer && (timer.mode === 'speed' || sessionGoal === 'speed');
   const isPerfect = sessionGoal === 'perfect';
 
