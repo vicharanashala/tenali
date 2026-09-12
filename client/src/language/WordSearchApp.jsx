@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTimer } from '../hooks/useTimer';
 import { QuizLayout } from '../components/QuizLayout';
 // eslint-disable-next-line no-unused-vars -- motion is used as <motion.div> in JSX
