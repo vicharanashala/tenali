@@ -26,8 +26,8 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { getMonsterName, getMonsterTagline } from './monsterExplanations.js';
-import { isMonsterSeen, getSlipsSinceLastCure, getMonsterHealedState } from './monsterStore.js';
+import { getMonsterName } from './monsterExplanations.js';
+import { getMonsterHealedState } from './monsterStore.js';
 import MonsterAvatar from './MonsterAvatar.jsx';
 
 const EVENT_NAME = 'tenali:wrongAnswer';

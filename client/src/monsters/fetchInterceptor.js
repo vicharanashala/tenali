@@ -133,7 +133,7 @@ function parseRequestBody(init) {
   if (typeof init.body !== 'string') return null;
   try {
     return JSON.parse(init.body);
-  } catch (_e) {
+  } catch {
     return null;
   }
 }
@@ -142,7 +142,7 @@ function readBoolFlag(key, fallback = false) {
   try {
     const value = window.localStorage.getItem(key);
     return value == null ? fallback : value === 'true';
-  } catch (_e) {
+  } catch {
     return fallback;
   }
 }
@@ -151,7 +151,7 @@ function writeBoolFlag(key, val) {
   try {
     if (val) window.localStorage.setItem(key, 'true');
     else window.localStorage.removeItem(key);
-  } catch (_e) {
+  } catch {
     // ignore — flag persistence is best-effort
   }
 }
@@ -207,22 +207,6 @@ function extractNormalized(data, url) {
 }
 
 /**
- * Serialize append() calls so concurrent wrong-answer fires don't race
- * on localStorage load -> modify -> save.
- */
-function enqueueAppend(entry) {
-  _appendQueue = _appendQueue.then(() => {
-    try {
-      const ok = monsterStore.append(entry);
-      if (ok) notifyMonsterLogChanged();
-    } catch (e) {
-      console.warn('[monsters] append failed:', e.message);
-    }
-  });
-  return _appendQueue;
-}
-
-/**
  * Fire a same-tab CustomEvent so App.jsx can re-hydrate monsterLog state.
  * The `storage` event only fires across tabs, not within the same tab —
  * so this bridge is required for the Hall panel to update in real time.
@@ -231,7 +215,7 @@ function notifyMonsterLogChanged() {
   try {
     if (typeof window === 'undefined') return;
     window.dispatchEvent(new CustomEvent('tenali:monsterLogChanged'));
-  } catch (_e) { /* never break the interceptor */ }
+  } catch { /* never break the interceptor */ }
 }
 
 // ─── Public API ──────────────────────────────────────────────────────────────
@@ -259,14 +243,6 @@ export function installMonstersInterceptor() {
   _debug = readBoolFlag(DEBUG_FLAG_KEY);
   installActiveInterceptor();
   _installed = true;
-}
-
-/**
- * No-op interceptor: every fetch goes through unchanged. Used when the
- * feature is disabled via the localStorage flag.
- */
-function installNoopInterceptor() {
-  // No wrapping; original window.fetch remains untouched.
 }
 
 /**
@@ -303,7 +279,7 @@ function installActiveInterceptor() {
               if (qData && typeof qData === 'object') {
                 _questionCache.set(qTopic, qData);
               }
-            } catch (_e) { /* best effort */ }
+            } catch { /* best effort */ }
           }
           return response;
         }
@@ -321,7 +297,7 @@ function installActiveInterceptor() {
             normalized,
           });
           if (_eventLog.length > _eventLogMax) _eventLog.shift();
-        } catch {}
+        } catch { /* debug log is best-effort */ }
         if (!normalized) return response;
 
         // Run the classifier

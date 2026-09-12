@@ -19,7 +19,7 @@ export default function EquationCraftingLab({ onBack }) {
   const [revealed, setRevealed] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [feedback, setFeedback] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [_loading, setLoading] = useState(false);
   const [results, setResults] = useState([]);
   const [submittedLabel, setSubmittedLabel] = useState('');
 
@@ -127,7 +127,7 @@ export default function EquationCraftingLab({ onBack }) {
         .replace(/\)([a-zA-Z0-9])/g, ')*$1');
       const fn = new Function('x', 'a', 'b', `return (${js});`);
       return fn(xVal, aVal, bVal);
-    } catch (e) {
+    } catch {
       return NaN;
     }
   };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import ScribbleCanvas from './components/ScribbleCanvas'
 
 const C = {
@@ -29,14 +29,6 @@ function angleBetween(p1, vertex, p2) {
   if (a < 1e-6 || b < 1e-6) return 0
   const cos = (a * a + b * b - c * c) / (2 * a * b)
   return Math.acos(Math.max(-1, Math.min(1, cos))) * (180 / Math.PI)
-}
-
-function lineThrough(p1, p2) {
-  const dx = p2.x - p1.x
-  const dy = p2.y - p1.y
-  if (Math.abs(dx) < 1e-6) return { slope: Infinity, intercept: p1.x }
-  const slope = dy / dx
-  return { slope, intercept: p1.y - slope * p1.x }
 }
 
 function fitLine(points) {
@@ -88,14 +80,6 @@ function fitCircle(points) {
   return { cx, cy, r }
 }
 
-function isCircle(points) {
-  if (points.length < 10) return false
-  const circle = fitCircle(points)
-  if (!circle) return false
-  const err = points.reduce((s, p) => s + Math.abs(dist(p, { x: circle.cx, y: circle.cy }) - circle.r), 0) / points.length
-  return err / (circle.r + 1) < 0.2
-}
-
 function isClosed(points, threshold = 30) {
   if (points.length < 4) return false
   return dist(points[0], points[points.length - 1]) < threshold
@@ -134,21 +118,6 @@ function computeCorners(points, angleThreshold = 30, minDist = 15) {
   return corners
 }
 
-function countCorners(points, angleThreshold = 30) {
-  if (points.length < 3) return 0
-  let count = 0
-  const simplified = simplify(points, 3)
-  const n = simplified.length
-  if (n < 3) return 0
-  for (let i = 1; i < n - 1; i++) {
-    const p0 = simplified[i - 1], p1 = simplified[i], p2 = simplified[i + 1]
-    if (dist(p0, p1) < 10 || dist(p1, p2) < 10) continue
-    const angle = angleBetween(p0, p1, p2)
-    if (angle < 180 - angleThreshold) count++
-  }
-  return count
-}
-
 function getSideLengths(points, corners) {
   const simplified = simplify(points, 3)
   const idx = corners.length > 0 ? corners : [0, simplified.length - 1]
@@ -167,20 +136,6 @@ function areSidesEqual(lengths, tolerance = 0.3) {
 
 function normalizeAngle(a) {
   return ((a % 360) + 360) % 360
-}
-
-function isVertical(points) {
-  if (points.length < 2) return false
-  const line = fitLine(points)
-  if (!line) return false
-  return Math.abs(line.slope) > 5
-}
-
-function isHorizontal(points) {
-  if (points.length < 2) return false
-  const line = fitLine(points)
-  if (!line) return false
-  return Math.abs(line.slope) < 0.2
 }
 
 function pathLength(points) {
@@ -202,23 +157,6 @@ function arcCoverage(points) {
   for (let i = 1; i < sorted.length; i++) maxGap = Math.max(maxGap, sorted[i] - sorted[i - 1])
   maxGap = Math.max(maxGap, 360 - sorted[sorted.length - 1] + sorted[0])
   return 1 - maxGap / 360
-}
-
-function countIntersections(points) {
-  let count = 0
-  const simplified = simplify(points, 5)
-  for (let i = 1; i < simplified.length - 2; i++) {
-    for (let j = i + 2; j < simplified.length - 1; j++) {
-      const a1 = simplified[i - 1], a2 = simplified[i]
-      const b1 = simplified[j - 1], b2 = simplified[j]
-      const denom = (a1.x - a2.x) * (b1.y - b2.y) - (a1.y - a2.y) * (b1.x - b2.x)
-      if (Math.abs(denom) < 1e-8) continue
-      const t = ((a1.x - b1.x) * (b1.y - b2.y) - (a1.y - b1.y) * (b1.x - b2.x)) / denom
-      const u = -((a1.x - a2.x) * (a1.y - b1.y) - (a1.y - a2.y) * (a1.x - b1.x)) / denom
-      if (t > 0 && t < 1 && u > 0 && u < 1) count++
-    }
-  }
-  return count
 }
 
 /* ── Challenges ─────────────────────────────────────────────────── */
@@ -284,7 +222,6 @@ const CHALLENGES = {
       if (!isLine(pts, 0.12)) return { score: 20, feedback: 'Not straight enough' }
       const line = fitLine(pts)
       if (!line) return { score: 10, feedback: 'Could not analyze' }
-      const deviation = Math.abs(line.slope) < 5 ? Math.abs(line.slope) : 1 / Math.abs(line.slope)
       const slopeVal = Math.abs(line.slope)
       if (slopeVal < 2 && slopeVal > 0.5) return { score: 30, feedback: 'Line is not vertical enough' }
       const quality = Math.max(0, 1 - (slopeVal < 1 ? slopeVal : 1 / slopeVal) / 0.3)
@@ -546,7 +483,7 @@ function SetupScreen({ difficulty, setDifficulty, questionCount, setQuestionCoun
   )
 }
 
-function ResultScreen({ score, total, correct, accuracy, bestStreak, time, difficulty, challenges, onRestart, onBack }) {
+function ResultScreen({ score, total, correct, accuracy, bestStreak, time, difficulty, onRestart, onBack }) {
   const passed = score >= 60
   const pct = Math.round(accuracy)
 

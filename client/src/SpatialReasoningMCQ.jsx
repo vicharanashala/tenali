@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
+import React, { useState, useEffect } from 'react'
 import ThreeDViewer, { SHAPE_TYPES } from './components/ThreeDViewer'
 
 const C = { bg: '#0b0e14', card: '#141820', surface: '#1c2028', accent: '#4dabf7', green: '#51cf66', red: '#ff6b6b', text: '#e8e8e8', muted: '#8b949e', border: '#2d333b' }
@@ -31,7 +31,7 @@ const SHAPES = {
 }
 
 function renderProjection(type, size = 100) {
-  const s = size, h = s / 2, cx = s / 2, cy = s / 2
+  const s = size, cx = s / 2, cy = s / 2
   const sw = 2
   switch (type) {
     case 'square':
@@ -106,7 +106,7 @@ export default function SpatialReasoningMCQ({ onBack }) {
   const [score, setScore] = useState(0)
   const [streak, setStreak] = useState(0)
   const [maxStreak, setMaxStreak] = useState(0)
-  const [answers, setAnswers] = useState([])
+  const [, setAnswers] = useState([])
   const [startTime, setStartTime] = useState(0)
   const [elapsed, setElapsed] = useState(0)
   const [showResult, setShowResult] = useState(false)
