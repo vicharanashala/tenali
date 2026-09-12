@@ -8,7 +8,7 @@ export function getLocalXp() {
 }
 
 export function setLocalXp(val) {
-  try { localStorage.setItem('tenali_xp', val.toString()); } catch {}
+  try { localStorage.setItem('tenali_xp', val.toString()); } catch { /* quota / private mode */ }
 }
 
 export function changeXp(delta) {

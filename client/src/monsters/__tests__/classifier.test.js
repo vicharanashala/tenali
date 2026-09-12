@@ -1,3 +1,4 @@
+/* global process */
 // Quick validation script for classifier.js. Run with: node classifier.test.js
 //
 // This file is NOT shipped to the browser. It's a smoke test during development.

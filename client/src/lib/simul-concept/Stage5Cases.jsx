@@ -10,11 +10,6 @@ export default function Stage5Cases({ onComplete }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!explanation.trim()) return;
-    
-    // Lightweight keyword match
-    const keywords = ['parallel', 'never', 'meet', 'intersect', 'cross', 'same slope', 'different'];
-    const lowerExp = explanation.toLowerCase();
-    const keywordMatch = keywords.some(kw => lowerExp.includes(kw));
 
     setSubmitted(true);
     

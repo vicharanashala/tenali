@@ -89,7 +89,7 @@ function parseCoeff(s) {
   return parseInt(s, 10);
 }
 
-function isBracketeerSlip(question, userAnswer, correctAnswer) {
+function isBracketeerSlip(question, userAnswer) {
   if (typeof question !== 'string') return false;
   const qNorm = normalizeAlgebra(question);
   const uaNorm = normalizeAlgebra(userAnswer);
@@ -246,12 +246,9 @@ const RULES = [
  * @param {string|undefined} input.question       question text
  * @param {string|number|undefined} input.userAnswer   what the student submitted
  * @param {string|number|undefined} input.correctAnswer  the correct value
- * @param {string|undefined} input.topic            module slug (unused for now,
- *                                                 kept in the signature for v2
- *                                                 tag-driven gating)
  * @returns {string|null}  one of MONSTER_IDS or null
  */
-export function classifyMonster({ question, userAnswer, correctAnswer, topic } = {}) {
+export function classifyMonster({ question, userAnswer, correctAnswer } = {}) {
   for (const { id, matches } of RULES) {
     if (!MONSTERS_ENABLED[id]) continue;
     if (matches(question, userAnswer, correctAnswer)) return id;

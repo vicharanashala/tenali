@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useMemo } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import ThreeDViewer from './components/ThreeDViewer'
 import ScribbleCanvas from './components/ScribbleCanvas'
 
@@ -67,7 +67,6 @@ function validateCrossSection(elements, expected) {
   let score = 20
   if (closed) score += 15
   if (expected.type === 'circle') {
-    const rAvg = (dw + dh) / 4
     const roundness = Math.abs(aspect - 1)
     score += roundness < 0.15 ? 35 : roundness < 0.3 ? 20 : 5
     score += closed ? 15 : 5

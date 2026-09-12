@@ -5,7 +5,6 @@ import 'mafs/font.css';
 
 export default function Stage4Elimination({ onComplete }) {
   const [step, setStep] = useState(0);
-  const [prediction, setPrediction] = useState(null);
   const [completed, setCompleted] = useState(false);
 
   const handleNext = () => {
@@ -22,8 +21,7 @@ export default function Stage4Elimination({ onComplete }) {
     if (step > 0) setStep(step - 1);
   };
 
-  const handlePredict = (answer) => {
-    setPrediction(answer);
+  const handlePredict = () => {
     setStep(2); // move to the multiply step
   };
 
