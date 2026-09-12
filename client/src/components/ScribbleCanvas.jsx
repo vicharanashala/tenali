@@ -8,7 +8,6 @@ const ScribbleCanvas = forwardRef(function ScribbleCanvas(
   ref
 ) {
   const canvasRef = useRef(null)
-  const overlayRef = useRef(null)
   const [tool, setTool] = useState('pen')
   const [color, setColor] = useState('#1e1e1e')
   const [strokeWidth, setStrokeWidth] = useState(2)
