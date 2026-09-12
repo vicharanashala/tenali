@@ -812,9 +812,9 @@ function renderLeaderboard(rows, totals) {
 function renderSnapshot(totals) {
   const byLogin = totals.byLogin || {};
   return [
-    '| 🏆 Commits | 🔀 Merged PRs | 👥 Contributors | 🧩 Puzzles | 📚 Vocab | 🌍 GK |',
-    '|----------:|------------:|--------------:|---------:|-------:|----:|',
-    `| **${totals.totalCommits}** | **${totals.totalPRs}** | **${Object.keys(byLogin).length || 16}** | **69** | **7,662** | **991** |`,
+    '| 🏆 Commits | 🔀 Merged PRs | 👥 Contributors | 🧩 API routes | 📚 Vocab | 🌍 GK |',
+    '|----------:|------------:|--------------:|-------------:|-------:|----:|',
+    `| **${totals.totalCommits}** | **${totals.totalPRs}** | **${Object.keys(byLogin).length || 16}** | **93** | **7,662** | **991** |`,
   ].join('\n');
 }
 
