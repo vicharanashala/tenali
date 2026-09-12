@@ -15,7 +15,6 @@ export const CJ_SHOW_GRID_CARD = true
 export const TILES = [
     { key: 'battle', name: '⚔️ Battle Arena', subtitle: 'Live fastest-finger duels', color: 'red', category: 'shelf' },
     { key: 'detective', name: '🔍 Detective Agency', subtitle: 'Solve math mysteries and crack cases!', color: 'indigo', category: 'shelf' },
-    { key: 'comic-addition', name: 'Comic Addition', subtitle: 'Story Mode', color: 'purple', category: 'number-foundations', foldInto: 'addition' },
     { key: 'addition', name: 'Addition', subtitle: '20-question addition practice', color: 'blue', category: 'number-foundations' },
     { key: 'column-addition', name: 'Column Addition', subtitle: 'Vertical addition with carrying', color: 'blue', category: 'number-foundations', foldInto: 'basicarith' },
     { key: 'column-division', name: 'Column Division', subtitle: 'Vertical division with long division', color: 'blue', category: 'number-foundations', foldInto: 'basicarith' },

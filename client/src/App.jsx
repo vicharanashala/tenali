@@ -50523,6 +50523,7 @@ function ColumnSubtractionApp({ onBack, initialDifficulty, initialNumQuestions, 
  * @param {Function} props.onBack - Callback to return to home menu
  */
 function AdditionApp({ onBack, completedTopics = [], goldMastery = [], markTopicCompleted, setTransferTopic, setMode, initialMode, initialDifficulty, initialNumQuestions, initialStarted, isGoalMode = false }) {
+  const [showComicAddition, setShowComicAddition] = useState(false)
   // Mode selection: 'standard' (default), 'counting' (Visual Counting), 'scale' (Balance Scale)
   const [additionMode, setAdditionMode] = useState(initialMode || 'standard')
   // Difficulty level: 'easy' (1-digit), 'medium' (2-digit), 'hard' (3-digit), 'extrahard' (4-digit)
@@ -50904,6 +50905,10 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
   const diffLabels = { easy: 'Easy — 1 digit', medium: 'Medium — 2 digits', hard: 'Hard — 3 digits', extrahard: 'Extra Hard — 4 digits' }
   const curAdaptLevel = adaptiveLevel(adaptScore)
 
+  if (showComicAddition) {
+    return <ComicAdditionApp onBack={() => setShowComicAddition(false)} />
+  }
+
   if (!started && !finished) {
     return (
       <div style={{ minHeight: '100vh', background: '#181512', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
@@ -50972,6 +50977,13 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
             padding: '10px 24px', color: '#FFF', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer'
           }}>
             Start Quiz
+          </button>
+
+          <button type="button" onClick={() => setShowComicAddition(true)} style={{
+            marginTop: '16px', background: 'transparent', border: '1px solid #5B5048', borderRadius: '6px',
+            padding: '10px 24px', color: '#C9BFB6', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer'
+          }}>
+            Comic Addition — Story Mode
           </button>
         </div>
         {isStage3Completed('addition', completedTopics) && (
