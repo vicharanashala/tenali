@@ -19,17 +19,63 @@
 ---
 
 <!-- live-changelog:start -->
-### 📊 Total: 1008 commits · 73 active days · 37 unique authors
+### 📊 Total: 1031 commits · 74 active days · 41 unique authors
 
 > **📖 How to read this:** Each entry shows a clickable SHA, the author, and a one-line subject. Sub-bullets show the **exact files touched** with per-file `+additions −deletions`, the **total line stats**, and (when present) the **commit body** explaining what & why.
 
-#### 📅 2026-09-11  <sub>(5 commits)</sub>
+#### 📅 2026-09-12  <sub>(16 commits)</sub>
 
+- 📌 [`e9f69cf5`](https://github.com/vicharanashala/tenali/commit/e9f69cf5555a30545a89def7dd76f75ef379b47d) — **jgupta05072003-code** — 🔀 PR [#297](https://github.com/vicharanashala/tenali/pull/297) from `vicharanashala` — ci/client-lint-non-blocking
+- 📌 [`79b316be`](https://github.com/vicharanashala/tenali/commit/79b316be1905dd568d0f6e5cf569257740df52c4) — **jgupta05072003-code** — 🔀 PR [#175](https://github.com/vicharanashala/tenali/pull/175) from `LalithaSriHarshitha` — rfc/weekly-mastery-spaced-review
+- 📌 [`eedac5b5`](https://github.com/vicharanashala/tenali/commit/eedac5b5b8dc4fc9b09fb9ab674c7245068ea7bf) — **jgupta05072003-code** — 🔀 PR [#253](https://github.com/vicharanashala/tenali/pull/253) from `DYNOSuprovo` — refactor/remove-global-generate-explanation
+- 👷 [`88b3d695`](https://github.com/vicharanashala/tenali/commit/88b3d6950c3647e66574d72277488e83ddb0bddf) — **Jinal Gupta** — make the client lint job non-blocking until App.jsx is split
+    - 📁 **1 file:** `.github/workflows/test.yml` `+14 −0`
+    - 📊 **`+14 −0`** · 1 file
+- 📌 [`7b731b0e`](https://github.com/vicharanashala/tenali/commit/7b731b0efbef80ce0969ca945695daca4bac713f) — **jgupta05072003-code** — 🔀 PR [#281](https://github.com/vicharanashala/tenali/pull/281) from `sharadvc` — cursor/fix-circleth-api-alignment-fbd6
+- 📌 [`b643bc63`](https://github.com/vicharanashala/tenali/commit/b643bc6336c2e619a7d5d4c0555be113d53cde1e) — **jgupta05072003-code** — 🔀 PR [#280](https://github.com/vicharanashala/tenali/pull/280) from `sharadvc` — cursor/remove-dead-home-filter-vars-f042
+- 📌 [`695326ed`](https://github.com/vicharanashala/tenali/commit/695326ed999ffca979acda2c1d9526ef4374ae5a) — **jgupta05072003-code** — 🔀 PR [#287](https://github.com/vicharanashala/tenali/pull/287) from `sharadvc` — cursor/fix-track-progress-mode-d596
+- 📌 [`2858db1d`](https://github.com/vicharanashala/tenali/commit/2858db1d8db2d82e914c65ee59384f37936eb2e4) — **jgupta05072003-code** — 🔀 PR [#286](https://github.com/vicharanashala/tenali/pull/286) from `sharadvc` — cursor/math-lab-home-tile-c8f4
+- 📌 [`3a911fd7`](https://github.com/vicharanashala/tenali/commit/3a911fd718308f9a8126dcca845f9d6f87b80453) — **jgupta05072003-code** — 🔀 PR [#278](https://github.com/vicharanashala/tenali/pull/278) from `Nirmal0804` — fix/eslint-quizlayout
+- 📌 [`c90c9b82`](https://github.com/vicharanashala/tenali/commit/c90c9b825b622c96cf558f94136538f7aca7f677) — **jgupta05072003-code** — 🔀 PR [#282](https://github.com/vicharanashala/tenali/pull/282) from `sharadvc` — cursor/fix-spatial-reasoning-eslint-5e3c
+- 📌 [`85dec1da`](https://github.com/vicharanashala/tenali/commit/85dec1daa9aeb2d230327860e617a2664f3964aa) — **jgupta05072003-code** — 🔀 PR [#296](https://github.com/vicharanashala/tenali/pull/296) from `vicharanashala` — feat/concept-playgrounds-wiring
+- 👷 [`6e34ff00`](https://github.com/vicharanashala/tenali/commit/6e34ff00a986c9e15d841fee0ff99d2c7603a0df) — **Jinal Gupta** — run MongoDB alongside the server contract job
+    - 📁 **1 file:** `.github/workflows/test.yml` `+13 −0`
+    - 📊 **`+13 −0`** · 1 file
+- ✨ [`eb1152d0`](https://github.com/vicharanashala/tenali/commit/eb1152d085ad8a9f5ea45aec37bbb05fa38376ac) — **Jinal Gupta** — wire the 5-stage loop end to end
+    - 📁 **18 files:** `Ideas/ONBOARDING-Arijit-Deb.md` `+1 −1`, `README.md` `+40 −3`, `client/src/App.jsx` `+25 −0`, `client/src/features/tiles.js` `+2 −0`, `client/src/lib/EquationSandboxApp.jsx` `+28 −22`, `client/src/lib/concept/CompletionScreen.jsx` `+37 −11`, `client/src/lib/concept/QFormulaConceptApp.jsx` `+98 −72`, `client/src/lib/concept/conceptApi.js` `+77 −0` *(+10 more in [`eb1152d0`](https://github.com/vicharanashala/tenali/commit/eb1152d085ad8a9f5ea45aec37bbb05fa38376ac))*
+    - 📊 **`+1199 −305`** · 18 files
+- 📌 [`db10a64f`](https://github.com/vicharanashala/tenali/commit/db10a64f8da80a3fefff27b02ade894d39bdca34) — **Nirmal_np** — Fix made on quizlayout
+    - 📁 **1 file:** `client/src/components/QuizLayout.jsx` `+1 −0`
+    - 📊 **`+1 −0`** · 1 file
+- 📌 [`c28ee16a`](https://github.com/vicharanashala/tenali/commit/c28ee16a2d46c734704217280d3f3fe35ce0c5ca) — **Cursor Agent** — Wire trackProgress mode to ProgressTrackerApp
+    - 📁 **1 file:** `client/src/App.jsx` `+1 −5`
+    - 📊 **`+1 −5`** · 1 file
+- 📌 [`f1338880`](https://github.com/vicharanashala/tenali/commit/f1338880d2c081359427af34eb5dbe191e223d53) — **Cursor Agent** — Add Math Lab tile to home grid under Shape & Space
+    - 📁 **1 file:** `client/src/features/tiles.js` `+2 −1`
+    - 📊 **`+2 −1`** · 1 file
+
+#### 📅 2026-09-11  <sub>(10 commits)</sub>
+
+- 🐛 [`9519d6f5`](https://github.com/vicharanashala/tenali/commit/9519d6f58826b04d1829b21c73a27d12dc0afab1) — **Cursor Agent** — clear ESLint errors in SpatialReasoningMCQ.jsx
+    - 📁 **1 file:** `client/src/SpatialReasoningMCQ.jsx` `+2 −5`
+    - 📊 **`+2 −5`** · 1 file
+- 🐛 [`75996976`](https://github.com/vicharanashala/tenali/commit/75996976c6e50a15c2374c42cb8ed34999ef1c7f) — **Cursor Agent** — align circleth tile key with circleth-api route
+    - 📁 **10 files:** `client/src/App.jsx` `+4 −5`, `client/src/lib/misconceptions.js` `+1 −1`, `client/src/lib/prerequisiteGraph.js` `+0 −1`, `client/vite.config.js` `+1 −1`, `graph/path.html` `+1 −1`, `server/explanations.js` `+1 −1`, `server/index.js` `+1 −1`, `server/lil/learning_journey/controllers.js` `+1 −3` *(+2 more in [`75996976`](https://github.com/vicharanashala/tenali/commit/75996976c6e50a15c2374c42cb8ed34999ef1c7f))*
+    - 📊 **`+12 −16`** · 10 files
+- 📌 [`424f305c`](https://github.com/vicharanashala/tenali/commit/424f305cef61b6715d6225b0658539eb1012b2c7) — **Cursor Agent** — Remove dead Home filter variables (fixes #211)
+    - 📁 **1 file:** `client/src/App.jsx` `+2 −13`
+    - 📊 **`+2 −13`** · 1 file
+- 📌 [`3bc1c4fd`](https://github.com/vicharanashala/tenali/commit/3bc1c4fda6d4feaf52406c073c6ada39055a1ccd) — **Nirmal_np** — Fix no-unused-vars: render subtitle prop in QuizLayout
+    - 📁 **1 file:** `client/src/components/QuizLayout.jsx` `+1 −0`
+    - 📊 **`+1 −0`** · 1 file
 - 📌 [`d260a95e`](https://github.com/vicharanashala/tenali/commit/d260a95e2809b85bb0c48e3eefaf37d5ee11f8ab) — **jgupta05072003-code** — 🔀 PR [#200](https://github.com/vicharanashala/tenali/pull/200) from `vicharanashala` — feat/extract-tiles-registry
 - 📌 [`1e08dc75`](https://github.com/vicharanashala/tenali/commit/1e08dc752e959e7e8d32b57ad07a9f00f15a8a28) — **jgupta05072003-code** — 🔀 PR [#254](https://github.com/vicharanashala/tenali/pull/254) from `vicharanashala` — fix/lockfile-sync
 - 📌 [`232f33c2`](https://github.com/vicharanashala/tenali/commit/232f33c21fb897a7070c3616cef0eb4a27a0ecd9) — **Jinal Gupta** — Resync client and server lockfiles so npm ci works again
     - 📁 **2 files:** `client/package-lock.json` `+64 −20`, `server/package-lock.json` `+17 −43`
     - 📊 **`+81 −63`** · 2 files
+- ♻️ [`528162a6`](https://github.com/vicharanashala/tenali/commit/528162a68fa8809d3efe565e7d15d9a689a857b3) — **DYNOSuprovo** — remove global.generateExplanation assignment (#251)
+    - 📁 **3 files:** `server/hints/__tests__/hintsExplanation.test.js` `+46 −0`, `server/hints/index.js` `+5 −5`, `server/index.js` `+2 −4`
+    - 📊 **`+53 −9`** · 3 files
 - 📌 [`4882bd49`](https://github.com/vicharanashala/tenali/commit/4882bd491358a58b09728d12edc36f7be63c420f) — **Jinal Gupta** — Complete the tile registry: hamburger entries, categories, foldInto
     - 📁 **2 files:** `client/src/App.jsx` `+4 −12`, `client/src/features/tiles.js` `+110 −92`
     - 📊 **`+114 −104`** · 2 files
@@ -138,14 +184,20 @@
     - 📊 **`+0 −34`** · 1 file
 - 📌 [`57ec2ace`](https://github.com/vicharanashala/tenali/commit/57ec2ace6d1bcd0c23f86b88d60bdd0e3969c0f2) — **jgupta05072003-code** — 🔀 PR [#165](https://github.com/vicharanashala/tenali/pull/165) from `Garvarora15` — main
 
-#### 📅 2026-09-01  <sub>(1 commit)</sub>
+#### 📅 2026-09-01  <sub>(2 commits)</sub>
 
+- 📝 [`9a05fcd4`](https://github.com/vicharanashala/tenali/commit/9a05fcd424ac3fc1b0ccdd07d6db9e40f4a17b41) — **LalithaSriHarshitha** — add contributor onboarding document for Lalitha Sri Harshitha
+    - 📁 **1 file:** `Ideas/ONBOARDING-LalithaSriHarshitha.md` `+190 −0`
+    - 📊 **`+190 −0`** · 1 file
 - 📝 [`b6454993`](https://github.com/vicharanashala/tenali/commit/b6454993ae251680ebea2748e463384ddb4e3a53) — **Krishna009-pro** — add contributor onboarding document for Krishna
     - 📁 **1 file:** `Ideas/ONBOARDING-Krishna009-pro.md` `+446 −0`
     - 📊 **`+446 −0`** · 1 file
 
-#### 📅 2026-08-30  <sub>(1 commit)</sub>
+#### 📅 2026-08-30  <sub>(2 commits)</sub>
 
+- 📝 [`614a4db6`](https://github.com/vicharanashala/tenali/commit/614a4db6a22c00d8f178e63d5f3623b7564b314a) — **LalithaSriHarshitha** — add RFC 0001 for flexible weekly mastery and smart spaced review
+    - 📁 **1 file:** `docs/rfcs/engagement/0001-flexible-weekly-mastery-and-smart-spaced-review.md` `+148 −0`
+    - 📊 **`+148 −0`** · 1 file
 - 📌 [`c1400d19`](https://github.com/vicharanashala/tenali/commit/c1400d19a3d18cd0a24e244625243049e11f21b6) — **priyanshu7725** — Merge remote-tracking branch 'upstream/main' into feature/monster-misconceptions
 
 #### 📅 2026-08-27  <sub>(1 commit)</sub>
