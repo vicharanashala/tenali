@@ -1,8 +1,8 @@
-\# Contributor Onboarding — Tarang Rajvanshi
+﻿# Contributor Onboarding â€” Tarang Rajvanshi
 
 
 
-\## 1. What is Tenali?
+## 1. What is Tenali?
 
 
 
@@ -20,7 +20,7 @@ From a technical point of view, the project has a React/Vite frontend and a Node
 
 
 
-\## 2. What do you understand by Tenali (as a system)?
+## 2. What do you understand by Tenali (as a system)?
 
 
 
@@ -40,7 +40,7 @@ For my contribution, I focused on the server-side basic arithmetic lab. In this 
 
 
 
-\## 3. Current State of Repository
+## 3. Current State of Repository
 
 
 
@@ -60,11 +60,11 @@ While investigating the repository, I found that the true/false generator had a 
 
 
 
-\## 4. Gaps Observed in Code
+## 4. Gaps Observed in Code
 
 
 
-\### Gap 1: True/False question generation could produce an incorrect False question
+### Gap 1: True/False question generation could produce an incorrect False question
 
 
 
@@ -72,7 +72,7 @@ While investigating the repository, I found that the true/false generator had a 
 
 
 
-\*\*Area:\*\* Basic Arithmetic Lab → `true\_false` question generation.
+\*\*Area:\*\* Basic Arithmetic Lab â†’ `true\_false` question generation.
 
 
 
@@ -100,7 +100,7 @@ For example, if the product is `6` and the random offset is `0`, the generated v
 
 
 
-`Is 3 × 2 = 6?`
+`Is 3 Ã— 2 = 6?`
 
 
 
@@ -116,7 +116,7 @@ The same type of random-offset logic was also present in the division branch, so
 
 
 
-\### Gap 2: The edge case was not covered by a regression test
+### Gap 2: The edge case was not covered by a regression test
 
 
 
@@ -136,7 +136,7 @@ A regression test is useful here because it checks the externally visible API be
 
 
 
-\## 5. Ideas for Project
+## 5. Ideas for Project
 
 
 
@@ -144,7 +144,7 @@ Based on my initial investigation, I think Tenali could benefit from stronger va
 
 
 
-\### 1. Add invariant-based tests for generated questions
+### 1. Add invariant-based tests for generated questions
 
 
 
@@ -152,7 +152,7 @@ Generated questions should always satisfy basic mathematical invariants. For exa
 
 
 
-\### 2. Expand regression tests for edge cases
+### 2. Expand regression tests for edge cases
 
 
 
@@ -160,7 +160,7 @@ Randomized question generators can have edge cases that do not appear during nor
 
 
 
-\### 3. Separate question-generation logic from route handling
+### 3. Separate question-generation logic from route handling
 
 
 
@@ -168,7 +168,7 @@ Some generation logic is currently located directly inside route handlers. Movin
 
 
 
-\### 4. Continue auditing generated math questions
+### 4. Continue auditing generated math questions
 
 
 
@@ -176,11 +176,11 @@ The same approach used for TEN-MATH-015 could be applied to other puzzle generat
 
 
 
-\## 6. Your Contribution
+## 6. Your Contribution
 
 
 
-I worked on \*\*TEN-MATH-015 — True Statement Can Be Marked as False\*\* in the Basic Arithmetic Lab.
+I worked on \*\*TEN-MATH-015 â€” True Statement Can Be Marked as False\*\* in the Basic Arithmetic Lab.
 
 
 
@@ -215,10 +215,4 @@ I verified the new regression test with Vitest and it passed successfully:
 
 
 This contribution helped me understand the backend route structure, generated-question logic, API-level testing, Git workflow, and the importance of testing edge cases in randomized code.
-
-
-
-
-
-
 
