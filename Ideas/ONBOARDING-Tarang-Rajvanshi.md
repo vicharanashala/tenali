@@ -1,4 +1,4 @@
-﻿# Contributor Onboarding â€” Tarang Rajvanshi
+# Contributor Onboarding - Tarang Rajvanshi
 
 
 
@@ -180,7 +180,7 @@ The same approach used for TEN-MATH-015 could be applied to other puzzle generat
 
 
 
-I worked on \*\*TEN-MATH-015 â€” True Statement Can Be Marked as False\*\* in the Basic Arithmetic Lab.
+I worked on \*\*TEN-MATH-015 - True Statement Can Be Marked as False\*\* in the Basic Arithmetic Lab.
 
 
 
@@ -215,4 +215,3 @@ I verified the new regression test with Vitest and it passed successfully:
 
 
 This contribution helped me understand the backend route structure, generated-question logic, API-level testing, Git workflow, and the importance of testing edge cases in randomized code.
-
