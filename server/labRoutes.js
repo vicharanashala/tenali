@@ -2,6 +2,18 @@ const express = require('express');
 const router = express.Router();
 
 const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+const randomNonZeroInt = (min, max) => {
+  const values = [];
+
+  for (let value = min; value <= max; value++) {
+    if (value !== 0) {
+      values.push(value);
+    }
+  }
+
+  return randomChoice(values);
+};
 const randomChoice = (arr) => arr[Math.floor(Math.random() * arr.length)];
 const emojis = ['⭐','🍎','🍕','🚗','🚀','🎈','🌻','🐶','🧸','💎','🍩','⚽','📚'];
 
@@ -31,12 +43,12 @@ router.get('/basic-arithmetic-lab/generate', (req, res) => {
   } else if (template === 'true_false') {
     const isCorrect = Math.random() > 0.5;
     const prod = a * b;
-    const fakeProd = isCorrect ? prod : prod + randomInt(-2, 2) || (prod + 1);
+    const fakeProd = isCorrect ? prod : prod + randomNonZeroInt(-2, 2);
     if (op === 'x') {
       q.prompt = `Is ${a} × ${b} = ${fakeProd} ?`;
       q.answer = isCorrect ? 'True' : 'False';
     } else {
-      q.prompt = `Is ${prod} ÷ ${a} = ${isCorrect ? b : b + randomInt(-2, 2) || (b + 1)} ?`;
+      q.prompt = `Is ${prod} ÷ ${a} = ${isCorrect ? b : b + randomNonZeroInt(-2, 2)} ?`;
       q.answer = isCorrect ? 'True' : 'False';
     }
   } else if (template === 'match_expression') {
@@ -305,3 +317,4 @@ router.post('/visual-math-lab-redux/check', (req, res) => {
 });
 
 module.exports = router;
+
