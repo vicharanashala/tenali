@@ -46,6 +46,16 @@ assert.throws(
   assert.ok(pMasteryNext >= posterior, 'transit step never lowers pMasteryNext below posterior');
 }
 
+// ── Concept playground level solve (#290) ────────────────────────────────────
+// handleVictory must pass isCorrect=true; false on the success path lowers mastery.
+{
+  const prior = 0.3;
+  const { pMasteryNext: afterSolve } = bktUpdate(prior, true);
+  const { pMasteryNext: afterWrongFlag } = bktUpdate(prior, false);
+  assert.ok(afterSolve > prior, 'level solve (isCorrect=true) raises mastery');
+  assert.ok(afterSolve > afterWrongFlag, 'solve raises mastery more than isCorrect=false at same prior');
+}
+
 // ── bktUpdate — smoothing factor keeps jump small ────────────────────────────
 {
   // A single correct answer from p=0.01 should not jump dramatically

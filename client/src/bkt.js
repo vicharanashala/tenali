@@ -41,10 +41,10 @@ function bktUpdate(pMastery, isCorrect, params = DEFAULT_PARAMS) {
 
 /**
  * Convenience wrapper used by Concept Playgrounds.
- * Accepts (currentScore, isCorrect, params?, meta?) and returns the new numeric mastery.
+ * Accepts (currentScore, isCorrect, params?) and returns the new numeric mastery.
+ * Victory paths must pass isCorrect=true (#290).
  */
-// eslint-disable-next-line no-unused-vars
-function updateBKT(currentScore, isCorrect, params, _meta) {
+function updateBKT(currentScore, isCorrect, params) {
   const { pMasteryNext } = bktUpdate(currentScore, isCorrect, params || DEFAULT_PARAMS);
   return pMasteryNext;
 }
