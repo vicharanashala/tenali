@@ -2585,6 +2585,15 @@ function _genericExplanation(t, d, s, step, ans) {
   }
 }
 
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 /* ── LinearAlgebraApp component ────────────────────── */
 function LinearAlgebraApp({ onBack }) {
   const [currentMission, setCurrentMission] = useState(() => {
@@ -2639,7 +2648,7 @@ function LinearAlgebraApp({ onBack }) {
   const [mqAdaptiveLevel, setMqAdaptiveLevel] = useState(0);
   const [mqTimer, setMqTimer] = useState(0);
   const mqTimerRef = useRef(null);
-  const mqTimerStartRef = useRef(Date.now());
+  const mqTimerStartRef = useRef(0);
   const ADAPTIVE_LEVELS = ['easy', 'medium', 'hard'];
   const effectiveMqDifficulty = mqDifficulty === 'adaptive' ? ADAPTIVE_LEVELS[Math.min(mqAdaptiveLevel, 2)] : mqDifficulty;
   const mqSubmittedRef = useRef(false);
@@ -2647,15 +2656,6 @@ function LinearAlgebraApp({ onBack }) {
   const mqAdvanceRef = useRef(null);
   const mqSeenRef = useRef(new Set());
   const [mqExplanation, setMqExplanation] = useState([]);
-
-  function shuffle(arr) {
-    const a = [...arr];
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-  }
 
   function shuffleQuiz(qs) {
     return shuffle(qs).map(q => {
@@ -2823,9 +2823,14 @@ function LinearAlgebraApp({ onBack }) {
     mqAdvancedRef.current = true;
     if (mqQNum >= mqTotal) setMqFinished(true); else setMqQNum(n => n + 1);
   };
-  mqAdvanceRef.current = mqAdvance;
+  useEffect(() => { mqAdvanceRef.current = mqAdvance; });
 
-  useEffect(() => { if (phase === 'missionquiz' && mqStarted && !mqFinished && mqQNum > 0) loadMqQuestion(); }, [phase, mqStarted, mqQNum, mqFinished]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (phase === 'missionquiz' && mqStarted && !mqFinished && mqQNum > 0) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      loadMqQuestion();
+    }
+  }, [phase, mqStarted, mqQNum, mqFinished]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const mqSubmit = async (overrideAnswer) => {
     const ans = overrideAnswer || mqAnswer;
