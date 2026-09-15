@@ -110,6 +110,7 @@ export default function InteractiveLcmHcfApp({ onBack }) {
 
   // Reset slide index and initialize dynamic activity values when step or level changes
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- reset UI when step/level changes
     setCurrentSlide(0);
     setWhyOpen(false);
     setWhyAnswer('');
@@ -304,6 +305,7 @@ export default function InteractiveLcmHcfApp({ onBack }) {
   // Reset progression when level changes
   useEffect(() => {
     if (level === null) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- clear progression when leaving level select
       setMaxStepReached(1);
       setRevealedExamples({});
       setActivityPopup(null);
@@ -319,6 +321,7 @@ export default function InteractiveLcmHcfApp({ onBack }) {
     if (quizFinished) {
       if (confidence === 'not') {
         if (quizScore >= 4) {
+          // eslint-disable-next-line react-hooks/set-state-in-effect -- unlock tier after quiz completes
           setUnlockedQuizLevels(prev => ({ ...prev, champion: true }));
         }
       } else if (confidence === 'mod') {
@@ -431,6 +434,7 @@ export default function InteractiveLcmHcfApp({ onBack }) {
 
   useEffect(() => {
     if (isActivityCompleted(currentStep)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- advance max step when activity done
       setMaxStepReached(prev => Math.max(prev, currentStep + 1));
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
