@@ -26,12 +26,12 @@
  */
 
 import { useEffect, useMemo, useState } from 'react';
+import MonsterAvatar from './MonsterAvatar.jsx';
+import GuidedSolver from './GuidedSolver.jsx';
 import {
   getMonsterExplanation,
-  getMonsterName,
-  getMonsterTagline,
 } from './monsterExplanations.js';
-import { load } from './monsterStore.js';
+import { getMonsterHealedState } from './monsterStore.js';
 
 // Color per monster (matches MonsterCard and MonsterToast)
 const MONSTER_COLORS = {
@@ -287,79 +287,30 @@ function injectDetailStyles() {
   document.head.appendChild(style);
 }
 
-/**
- * Find the most common topic this monster has been triggered on.
- * Falls back to first seen topic, or null.
- */
-function getSuggestedTopic(monsterId) {
-  const state = load();
-  if (!state || !Array.isArray(state.log)) return null;
-  const counts = {};
-  for (const e of state.log) {
-    if (e.monsterId === monsterId && e.topic) {
-      counts[e.topic] = (counts[e.topic] || 0) + 1;
-    }
-  }
-  const entries = Object.entries(counts);
-  if (entries.length === 0) return null;
-  entries.sort((a, b) => b[1] - a[1]);
-  return entries[0][0];
-}
-
-/**
- * Return all unique topics this monster has been triggered on,
- * sorted by frequency (most breached topic first).
- * Used to populate the cure topic selector with real choices.
- */
-function getAllTopics(monsterId) {
-  const state = load();
-  if (!state || !Array.isArray(state.log)) return [];
-  const counts = {};
-  for (const e of state.log) {
-    if (e.monsterId === monsterId && e.topic) {
-      counts[e.topic] = (counts[e.topic] || 0) + 1;
-    }
-  }
-  return Object.entries(counts)
-    .sort((a, b) => b[1] - a[1])
-    .map(([topic]) => topic);
-}
-
 function InteractiveMonsterDemo({ monsterId, colors }) {
   const [bracketeerMode, setBracketeerMode] = useState('correct');
   const [signSwapperStep, setSignSwapperStep] = useState(0);
   const [decimalPlace, setDecimalPlace] = useState(0);
   const [carryCrasherMode, setCarryCrasherMode] = useState('save');
   const [frogValue, setFrogValue] = useState(0);
-  const [isHopping, setIsHopping] = useState(false);
 
   const stepPositions = useMemo(() => [0, -3, 2, -2], []);
 
   useEffect(() => {
     if (monsterId !== 'sign-swapper') return;
+    // Step 3 uses render-time position (ZAP); only animate hops for steps 0–2.
+    if (signSwapperStep === 3) return;
 
     const target = stepPositions[signSwapperStep];
 
-    if (signSwapperStep === 3) {
-      // Instant switch for the Sign Swapper ZAP!
-      setFrogValue(target);
-      setIsHopping(false);
-      return;
-    }
-
-    setIsHopping(true);
     const interval = setInterval(() => {
       setFrogValue((prev) => {
         if (prev === target) {
           clearInterval(interval);
-          setIsHopping(false);
           return prev;
         }
         const nextVal = prev < target ? prev + 1 : prev - 1;
-        if (nextVal === target) {
-          clearInterval(interval);
-          setIsHopping(false);
-        }
+        if (nextVal === target) clearInterval(interval);
         return nextVal;
       });
     }, 200); // 200ms per hop for snappy but visible steps
@@ -449,7 +400,9 @@ function InteractiveMonsterDemo({ monsterId, colors }) {
   // ─── 2. THE SIGN SWAPPER DEMO ───
   if (monsterId === 'sign-swapper') {
     const numberLineNodes = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5];
-    const frogIndex = numberLineNodes.indexOf(frogValue);
+    const frogDisplayValue = signSwapperStep === 3 ? stepPositions[3] : frogValue;
+    const isHopping = signSwapperStep < 3 && frogValue !== stepPositions[signSwapperStep];
+    const frogIndex = numberLineNodes.indexOf(frogDisplayValue);
     const frogLeftPercent = (frogIndex / (numberLineNodes.length - 1)) * 100;
 
     const stepTexts = [
@@ -461,7 +414,9 @@ function InteractiveMonsterDemo({ monsterId, colors }) {
 
     const nextStep = () => {
       if (isHopping) return;
-      setSignSwapperStep((prev) => (prev + 1) % 4);
+      const next = (signSwapperStep + 1) % 4;
+      if (next === 0) setFrogValue(0);
+      setSignSwapperStep(next);
     };
 
     return (
@@ -637,10 +592,6 @@ function InteractiveMonsterDemo({ monsterId, colors }) {
 
   return null;
 }
-
-import MonsterAvatar from './MonsterAvatar.jsx';
-import { getMonsterHealedState } from './monsterStore.js';
-import GuidedSolver from './GuidedSolver.jsx';
 
 export function MonsterDetail({ monsterId, breachCount, lastAttempt, cureHistory, onBack, onStartCure, onOpenGuidedSolver, onCloseSolver, initialGuidedSolver }) {
   const [showGuidedSolver, setShowGuidedSolver] = useState(initialGuidedSolver || false);
