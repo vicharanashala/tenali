@@ -35,7 +35,9 @@ export function getUsernameNamespace() {
         return authUser.username;
       }
     }
-  } catch (e) { }
+  } catch {
+    // ignore — auth username lookup is best-effort
+  }
   return 'guest';
 }
 
@@ -64,7 +66,9 @@ function saveProgress(progress) {
   try {
     const keys = getStorageKeys();
     localStorage.setItem(keys.seen, JSON.stringify(progress));
-  } catch { }
+  } catch {
+    // ignore — progress save is best-effort
+  }
 }
 
 // Bidirectional progress sync with the server database
@@ -80,7 +84,9 @@ export async function syncContrastProgress(token) {
       try {
         const authUser = JSON.parse(authUserStr);
         currentUsername = authUser ? authUser.username : null;
-      } catch { }
+      } catch {
+        // ignore — auth parse is best-effort
+      }
     }
     if (!currentUsername) return;
 
@@ -226,11 +232,11 @@ const CheckIcon = () => (
   </svg>
 );
 
-export default function ContrastChallengeApp({ studentName, onBack }) {
+export default function ContrastChallengeApp({ onBack }) {
   const [phase, setPhase] = useState('list'); // list, activity
   const [currentPair, setCurrentPair] = useState(null);
   const [progress, setProgress] = useState(loadProgress());
-  const [unlockedPairs, setUnlockedPairs] = useState(() => {
+  const [, setUnlockedPairs] = useState(() => {
     try {
       const keys = getStorageKeys();
       const data = localStorage.getItem(keys.unlocked);
@@ -250,7 +256,9 @@ export default function ContrastChallengeApp({ studentName, onBack }) {
           const keys = getStorageKeys();
           const data = localStorage.getItem(keys.unlocked);
           setUnlockedPairs(data ? JSON.parse(data) : []);
-        } catch { }
+        } catch {
+          // ignore — unlocked list reload is best-effort
+        }
       });
     }
   }, []);
@@ -265,7 +273,9 @@ export default function ContrastChallengeApp({ studentName, onBack }) {
         const keys = getStorageKeys();
         const data = localStorage.getItem(keys.unlocked);
         setUnlockedPairs(data ? JSON.parse(data) : []);
-      } catch { }
+      } catch {
+        // ignore — unlocked list reload is best-effort
+      }
 
       if (token) {
         // User logged in: trigger sync
@@ -275,7 +285,9 @@ export default function ContrastChallengeApp({ studentName, onBack }) {
             const keys = getStorageKeys();
             const data = localStorage.getItem(keys.unlocked);
             setUnlockedPairs(data ? JSON.parse(data) : []);
-          } catch { }
+          } catch {
+            // ignore — unlocked list reload is best-effort
+          }
         });
       }
     };
@@ -302,7 +314,9 @@ export default function ContrastChallengeApp({ studentName, onBack }) {
         const keys = getStorageKeys();
         const data = localStorage.getItem(keys.unlocked);
         setUnlockedPairs(data ? JSON.parse(data) : []);
-      } catch { }
+      } catch {
+        // ignore — unlocked list reload is best-effort
+      }
     }
   }, [phase]);
 
@@ -611,8 +625,8 @@ export default function ContrastChallengeApp({ studentName, onBack }) {
 
 export function QuizLayoutExtension({ children }) {
   const [currentMode, setCurrentMode] = useState(null);
-  const [unlockedList, setUnlockedList] = useState([]);
-  const [completedModulesList, setCompletedModulesList] = useState([]);
+  const [, setUnlockedList] = useState([]);
+  const [, setCompletedModulesList] = useState([]);
   const [completedPairsList, setCompletedPairsList] = useState([]);
 
   useEffect(() => {
@@ -646,7 +660,7 @@ export function QuizLayoutExtension({ children }) {
 
   // Get all associated contrast challenges for the current mode
   const associatedContrasts = Object.entries(CONTRAST_MAPPING)
-    .filter(([_, modes]) => modes.includes(currentMode))
+    .filter(([, modes]) => modes.includes(currentMode))
     .map(([id]) => {
       const keys = getStorageKeys();
       const completedPairs = completedPairsList.length > 0
@@ -875,44 +889,6 @@ export function unlockContrastChallengeForMode(mode) {
     console.error('Error unlocking contrast challenge:', e);
   }
 }
-
-const styles = {
-  loadingSpinner: {
-    display: 'flex',
-    justifyContent: 'center',
-    padding: '40px',
-  },
-  label: {
-    display: 'block',
-    fontSize: '0.85rem',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px',
-    color: 'var(--clr-text-soft)',
-    marginBottom: '4px',
-  },
-  conceptText: {
-    margin: 0,
-    fontSize: '1rem',
-    lineHeight: '1.4',
-  },
-  conceptFormula: {
-    margin: 0,
-    fontSize: '1rem',
-    fontFamily: 'monospace',
-    color: 'var(--clr-text)',
-  },
-  conceptExample: {
-    margin: 0,
-    fontSize: '1rem',
-    fontStyle: 'italic',
-    color: 'var(--clr-text-soft)',
-  },
-  conceptSignal: {
-    margin: 0,
-    fontSize: '1rem',
-    color: 'var(--clr-accent)',
-  },
-};
 
 function AreaPerimeterChallenge({ onBack, onComplete, onMarkComplete }) {
   const [subStep, setSubStep] = useState('vd-area'); // vd-area, vd-perimeter, intro, r1, r2, r3_1, r3_2, comparison, q1, q2, q3, q4, practice-redirect
@@ -1792,11 +1768,7 @@ function RadiusDiameterChallenge({ onBack, onComplete, onMarkComplete }) {
   const [feedbackText, setFeedbackText] = useState('');
   const [hintText, setHintText] = useState('');
   const [revealedConcept, setRevealedConcept] = useState('');
-  const [wrongAttempts, setWrongAttempts] = useState(0);
-
-  // Layer 2
-  const [comparisonMode, setComparisonMode] = useState('both'); // radius, diameter, both
-
+  const [, setWrongAttempts] = useState(0);
 
   // Helper to determine step index (0-3)
   const getActiveStepIndex = () => {
@@ -1909,21 +1881,6 @@ function RadiusDiameterChallenge({ onBack, onComplete, onMarkComplete }) {
       </div>
     );
   };
-
-  // R3 animation stages
-  const [r3Stage, setR3Stage] = useState('stage1');
-
-  useEffect(() => {
-    if (subStep === 'r3') {
-      setR3Stage('stage1');
-      const t1 = setTimeout(() => setR3Stage('stage2'), 1500);
-      const t2 = setTimeout(() => setR3Stage('stage3'), 3200);
-      return () => {
-        clearTimeout(t1);
-        clearTimeout(t2);
-      };
-    }
-  }, [subStep]);
 
   useEffect(() => {
     // Reset drawing state when moving to a drawing step
@@ -3710,12 +3667,12 @@ function FactorsMultiplesChallenge({ onBack, onComplete, onMarkComplete }) {
   const [isGeneratingMultiples, setIsGeneratingMultiples] = useState(false);
 
   // Discovery
-  const [discoverySelection, setDiscoverySelection] = useState(null);
+  const [, setDiscoverySelection] = useState(null);
 
-  const [selectedQ1Option, setSelectedQ1Option] = useState(null);
+  const [, setSelectedQ1Option] = useState(null);
 
   // Q2: Sorting Game checkboxes for number 10
-  const [studentSelections, setStudentSelections] = useState({
+  const [, setStudentSelections] = useState({
     2: { factor: false, multiple: false },
     5: { factor: false, multiple: false },
     10: { factor: false, multiple: false },
@@ -4693,12 +4650,12 @@ function CongruenceSimilarityChallenge({ onBack, onComplete, onMarkComplete }) {
   const [showOverlay, setShowOverlay] = useState(false);
   const [inspectorSolved, setInspectorSolved] = useState(false);
   const [discoverQAnswered, setDiscoverQAnswered] = useState(false);
-  const [selectedDiscoveryOption, setSelectedDiscoveryOption] = useState(null);
+  const [, setSelectedDiscoveryOption] = useState(null);
 
-  const [selectedQ1Option, setSelectedQ1Option] = useState(null);
+  const [, setSelectedQ1Option] = useState(null);
 
   // Classification Grid Game
-  const [classifications, setClassifications] = useState({
+  const [, setClassifications] = useState({
     'Rotated square': null,
     'Enlarged triangle': null,
     'Mirror-image rectangle': null,
@@ -5517,10 +5474,10 @@ function MatricesDeterminantsChallenge({ onBack, onComplete, onMarkComplete }) {
     '12': null
   });
 
-  const [selectedQ1Option, setSelectedQ1Option] = useState(null);
+  const [, setSelectedQ1Option] = useState(null);
 
   // Q2 dimensions tapping challenge
-  const [tappedDimensions, setTappedDimensions] = useState({
+  const [, setTappedDimensions] = useState({
     '2x2': false,
     '3x2': false,
     '4x4': false,
@@ -7430,14 +7387,13 @@ function MeanMedianModeChallenge({ onBack, onComplete, onMarkComplete }) {
 function LimitsDifferentiationChallenge({ onBack, onComplete, onMarkComplete }) {
   const [subStep, setSubStep] = useState('vd-limits'); // vd-limits, vd-differentiation, intro, r1, r2, r3, comparison, q1, q2, practice-redirect
   const [pointX, setPointX] = useState(150);
-  const [selectedTool, setSelectedTool] = useState(null); // magnifying, tangent
+  const [, setSelectedTool] = useState(null); // magnifying, tangent
   const [selectedOption, setSelectedOption] = useState(null);
   const [answerState, setAnswerState] = useState('unanswered'); // unanswered, correct, wrong
   const [feedbackText, setFeedbackText] = useState('');
   const [hintText, setHintText] = useState('');
 
   // Round 3 sub-scenarios
-  const [r3Scenario, setR3Scenario] = useState('A'); // A, B
   const [r3AAnswer, setR3AAnswer] = useState(null);
   const [r3BAnswer, setR3BAnswer] = useState(null);
 
@@ -7659,16 +7615,6 @@ function LimitsDifferentiationChallenge({ onBack, onComplete, onMarkComplete }) 
 
   // Calculate dynamic camera viewBox zoom near the hole at x = 250, y = 200
   const dist = Math.abs(pointX - 250);
-  let viewBoxVal = "0 0 500 300";
-  if (subStep === 'r1' && dist < 80) {
-    const ratio = (80 - dist) / 80; // 0 to 1
-    const minX = 0 + ratio * 180;
-    const minY = 0 + ratio * 130;
-    const w = 500 - ratio * 360;
-    const h = 300 - ratio * 210;
-    viewBoxVal = `${minX} ${minY} ${w} ${h}`;
-  }
-
   const currentY = getGraphY(pointX);
   const currentSlope = getGraphSlope(pointX);
 
@@ -9446,20 +9392,9 @@ function DecimalsFractionsChallenge({ onBack, onComplete, onMarkComplete }) {
   `;
 
   // Layer 3 Q1 Connections Game
-  const [selectedLeft, setSelectedLeft] = useState(null);
-  const [matchedPairs, setMatchedPairs] = useState([]); // Array of strings like '1/2-0.5'
-  const [q1Finished, setQ1Finished] = useState(false);
-
-  // Layer 3 Q2 MCQ
-
-  const leftOptions = ['1/2', '3/4', '1/5'];
-  const rightOptions = ['0.75', '0.2', '0.5'];
-
-  const matches = {
-    '1/2': '0.5',
-    '3/4': '0.75',
-    '1/5': '0.2'
-  };
+  const [, setSelectedLeft] = useState(null);
+  const [, setMatchedPairs] = useState([]);
+  const [, setQ1Finished] = useState(false);
 
   // Reset states on subStep changes
   useEffect(() => {
@@ -9526,32 +9461,6 @@ function DecimalsFractionsChallenge({ onBack, onComplete, onMarkComplete }) {
       setHintText("A number line point represents a unique quantity. If it doesn't move, what does that say about the two values?");
     }
   };
-
-  const handleLeftSelect = (leftVal) => {
-    if (q1Finished) return;
-    setSelectedLeft(leftVal);
-  };
-
-  const handleRightSelect = (rightVal) => {
-    if (!selectedLeft || q1Finished) return;
-
-    // Check match
-    if (matches[selectedLeft] === rightVal) {
-      const newMatched = [...matchedPairs, `${selectedLeft}-${rightVal}`];
-      setMatchedPairs(newMatched);
-      setSelectedLeft(null);
-
-      if (newMatched.length === 3) {
-        setQ1Finished(true);
-        setAnswerState('correct');
-        setFeedbackText("Excellent! All equivalent fractions and decimals matched perfectly!");
-      }
-    } else {
-      // Incorrect match flash
-      setSelectedLeft(null);
-    }
-  };
-
 
   return (
     <div style={{ maxWidth: '880px', margin: '0 auto', padding: '10px 10px 30px 10px', minHeight: '660px' }}>

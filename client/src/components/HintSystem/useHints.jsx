@@ -64,7 +64,7 @@ export function useQuizHintsAndXp(concept, finished, score, totalQ, wasSolved = 
               setLocalXp(data.balance);
               try {
                 window.dispatchEvent(new CustomEvent('tenali-xp-float', { detail: { diff: data.totalAward } }));
-              } catch {}
+              } catch { /* dispatch may fail in restricted contexts */ }
             }
           }
         }

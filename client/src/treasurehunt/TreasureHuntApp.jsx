@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Plus, X, Calculator, CircleDot, PieChart, Percent, Scale, ArrowLeftRight,
   TrendingUp, Landmark, Receipt, LineChart, Gauge, FunctionSquare, Hash,
@@ -53,7 +53,7 @@ function saveWorldProgress(worldId, topicTiers, hasPlayed) {
   }
   try {
     localStorage.setItem(getProgressKey(), JSON.stringify(all))
-  } catch { }
+  } catch { /* quota / private mode */ }
 }
 
 function getWorldProgress(worldId) {
@@ -268,8 +268,6 @@ export default function TreasureHuntApp({ onBack }) {
   const [hintCell, setHintCell] = useState(null)
   const [hasTappedOnce, setHasTappedOnce] = useState(false)
   const [statusBarBreaking, setStatusBarBreaking] = useState(null)
-  const prevLivesRef = useRef(3)
-
   const dismissHowToPlay = () => {
     sessionStorage.setItem('th-how-to-play-seen', '1')
     setShowHowToPlay(false)

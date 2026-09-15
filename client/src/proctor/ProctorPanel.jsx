@@ -255,7 +255,9 @@ export default function ProctorPanel() {
       emotion={emotion}
       struggling={struggling}
       onDismissStruggling={() => {
-        try { sessionStorage.setItem('tenali_struggling_dismissed', String(Date.now())) } catch {}
+        try { sessionStorage.setItem('tenali_struggling_dismissed', String(Date.now())) } catch {
+          // ignore — dismiss flag is best-effort
+        }
       }}
     />
   )

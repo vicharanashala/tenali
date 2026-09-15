@@ -201,7 +201,6 @@ export function HallPanel({ open, onClose, monsterLog, onStartCure, onOpenGuided
 
   // Detail view replaces the grid
   if (selectedId) {
-    const detailEntry = MONSTER_EXPLANATIONS[selectedId];
     const breachCount = getMonsterBreachCount(selectedId);
     const lastAttempt = getMonsterLastAttempt(selectedId);
     const cureHistory = getCureHistory(selectedId);

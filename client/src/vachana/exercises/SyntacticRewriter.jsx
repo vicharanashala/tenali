@@ -1040,8 +1040,6 @@ export default function SyntacticRewriter() {
   // Active level state (0 through 9)
   const [level, setLevel] = useState(0);
 
-  // Level 0 Concept Guide Hub state
-  const [conceptGuideOpen, setConceptGuideOpen] = useState(true);
   const [activeConceptTab, setActiveConceptTab] = useState('first');
   const [level0ConceptCompleted, setLevel0ConceptCompleted] = useState(false);
 
@@ -1075,12 +1073,14 @@ export default function SyntacticRewriter() {
       localStorage.removeItem('vachana_rewrite_streak_v3');
       localStorage.removeItem('vachana_rewrite_attempts_v3');
       localStorage.removeItem('vachana_rewrite_correct_v3');
-    } catch {}
+    } catch {
+      // ignore — clearing legacy storage keys is best-effort
+    }
   }, []);
 
   // Level Lock & Unlock Tracking (initially only Level 0 & Level 1 unlocked on refresh)
   const [unlockedMaxLevel, setUnlockedMaxLevel] = useState(1);
-  const [recentlyUnlockedLevel, setRecentlyUnlockedLevel] = useState(null);
+  const [, setRecentlyUnlockedLevel] = useState(null);
   const [lockedToast, setLockedToast] = useState(null);
 
   // Completed Levels Tracking (starts empty on refresh)
@@ -1092,7 +1092,9 @@ export default function SyntacticRewriter() {
       const next = prev.includes(lvl) ? prev : [...prev, lvl];
       try {
         localStorage.setItem('vachana_rewrite_completed_v3', JSON.stringify(next));
-      } catch {}
+      } catch {
+        // ignore — progress persistence is best-effort
+      }
       return next;
     });
 
@@ -1101,7 +1103,9 @@ export default function SyntacticRewriter() {
         const updated = Math.max(prev, nextLvl);
         try {
           localStorage.setItem('vachana_rewrite_unlocked_v3', String(updated));
-        } catch {}
+        } catch {
+          // ignore — unlock persistence is best-effort
+        }
         return updated;
       });
       setRecentlyUnlockedLevel(nextLvl);
@@ -1350,7 +1354,9 @@ export default function SyntacticRewriter() {
           const nextPts = prev + 20;
           try {
             localStorage.setItem('vachana_rewrite_points_v3', String(nextPts));
-          } catch {}
+          } catch {
+            // ignore — points persistence is best-effort
+          }
           return nextPts;
         });
       }
@@ -1360,7 +1366,9 @@ export default function SyntacticRewriter() {
         // Level 0 completed! Award 10 pts
         setTotalPoints(prev => {
           const next = prev + 10;
-          try { localStorage.setItem('vachana_rewrite_points_v3', String(next)); } catch {}
+          try { localStorage.setItem('vachana_rewrite_points_v3', String(next)); } catch {
+            // ignore — points persistence is best-effort
+          }
           return next;
         });
         // Level 0 completed! Mark tutorial done and unlock level 1
@@ -1384,7 +1392,9 @@ export default function SyntacticRewriter() {
         } else {
           setTotalPoints(prev => {
             const next = prev + 10;
-            try { localStorage.setItem('vachana_rewrite_points_v3', String(next)); } catch {}
+            try { localStorage.setItem('vachana_rewrite_points_v3', String(next)); } catch {
+              // ignore — points persistence is best-effort
+            }
             return next;
           });
           markLevelCompleted(9);
@@ -1398,7 +1408,9 @@ export default function SyntacticRewriter() {
         } else {
           setTotalPoints(prev => {
             const next = prev + 10;
-            try { localStorage.setItem('vachana_rewrite_points_v3', String(next)); } catch {}
+            try { localStorage.setItem('vachana_rewrite_points_v3', String(next)); } catch {
+              // ignore — points persistence is best-effort
+            }
             return next;
           });
           markLevelCompleted(level);
@@ -1408,7 +1420,9 @@ export default function SyntacticRewriter() {
             setRecentlyUnlockedLevel(targetNext);
             try {
               localStorage.setItem('vachana_unlocked_max_rewrite_v2', String(targetNext));
-            } catch {}
+            } catch {
+              // ignore — unlock persistence is best-effort
+            }
             const progress = loadMasteryProgress();
             progress['rewrite'] = {
               ...(progress['rewrite'] || {}),
@@ -1441,21 +1455,6 @@ export default function SyntacticRewriter() {
     startLevelRound(level);
   };
 
-  // Restart / Reset Accuracy and Streak stats
-  const handleRestartStats = () => {
-    setSessionStreak(0);
-    setTotalAttempts(0);
-    setTotalCorrect(0);
-    setRoundCorrectCount(0);
-    setRoundIndex(0);
-    try {
-      localStorage.removeItem('vachana_rewrite_streak_v3');
-      localStorage.removeItem('vachana_rewrite_attempts_v3');
-      localStorage.removeItem('vachana_rewrite_correct_v3');
-    } catch {}
-    startLevelRound(level);
-  };
-
   // Retry / Reset current question cards and feedback
   const handleRetryQuestion = () => {
     if (!currentQuestion) return;
@@ -1467,35 +1466,6 @@ export default function SyntacticRewriter() {
     setPlacedSlots(new Array(targetOrder.length).fill(null));
     setFeedbackMsg(null);
     setIsCorrect(false);
-  };
-
-  // Reset exercise
-  const handleReset = () => {
-    setSessionStreak(0);
-    setTotalAttempts(0);
-    setTotalCorrect(0);
-    setTotalPoints(0);
-    setUnlockedMaxLevel(1);
-    setRecentlyUnlockedLevel(null);
-    setCompletedLevels([]);
-    try {
-      localStorage.removeItem('vachana_completed_levels_rewrite');
-      localStorage.removeItem('vachana_completed_levels_rewrite_v2');
-      localStorage.removeItem('vachana_unlocked_max_rewrite_v2');
-      localStorage.removeItem('vachana_rewrite_completed_v3');
-      localStorage.removeItem('vachana_rewrite_unlocked_v3');
-      localStorage.removeItem('vachana_rewrite_points_v3');
-      localStorage.removeItem('vachana_rewrite_streak_v3');
-      localStorage.removeItem('vachana_rewrite_attempts_v3');
-      localStorage.removeItem('vachana_rewrite_correct_v3');
-    } catch {}
-    const progress = loadMasteryProgress();
-    if (progress['rewrite']) {
-      delete progress['rewrite'].level0Done;
-      progress['rewrite'].highestLevel = 1;
-      saveMasteryProgress(progress);
-    }
-    setLevel(0);
   };
 
   const handleSelectLevelFromMenu = (lvl) => {

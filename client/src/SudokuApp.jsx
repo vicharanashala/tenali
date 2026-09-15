@@ -14,7 +14,7 @@ const NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 export default function SudokuApp({ onBack }) {
   const [phase, setPhase] = useState('setup')
   const [difficulty, setDifficulty] = useState('easy')
-  const [puzzle, setPuzzle] = useState(null)
+  const [, setPuzzle] = useState(null)
   const [solution, setSolution] = useState(null)
   const [grid, setGrid] = useState([])
   const [initial, setInitial] = useState([])
@@ -75,7 +75,6 @@ export default function SudokuApp({ onBack }) {
     const [r, c] = selected
     if (initial[r][c]) return
     const newGrid = grid.map(row => [...row])
-    const prev = newGrid[r][c]
     newGrid[r][c] = num
     setGrid(newGrid)
     if (num !== 0 && solution && num !== solution[r][c]) {

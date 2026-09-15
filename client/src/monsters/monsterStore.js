@@ -46,7 +46,7 @@ let _lsAvailable = (() => {
     window.localStorage.setItem(k, '1');
     window.localStorage.removeItem(k);
     return true;
-  } catch (_e) {
+  } catch {
     return false;
   }
 })();
