@@ -104,7 +104,7 @@ const UserSchema = new mongoose.Schema({
   role: { type: String, default: 'user', enum: ['user', 'admin'] }
 });
 
-UserSchema.pre('save', function (next) {
+UserSchema.pre('save', function () {
   if (this.isModified('coins')) {
     const val = this.coins;
     this.xp = val;
@@ -126,7 +126,6 @@ UserSchema.pre('save', function (next) {
     this.xp = val;
     this.coinBalance = val;
   }
-  next();
 });
 
 const ProgressSchema = new mongoose.Schema({
