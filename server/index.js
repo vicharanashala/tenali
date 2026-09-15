@@ -161,7 +161,10 @@ app.get('/test-12345', (req, res) => {
     message: "THIS IS THE SERVER YOU ARE EDITING"
   });
 });
-auth.seedUsers().catch(() => {});  // always populate in-memory fallback
+// Always populate the in-memory fallback, even before Mongo is up.
+auth.seedUsers().catch((err) => {
+  logger.error(null, '[auth] in-memory seeding failed:', err.message);
+});
 
 async function connectAuthMongoWithRetry(attempt = 1) {
   const maxAttempts = Number(process.env.MONGO_CONNECT_ATTEMPTS || 10);
@@ -169,7 +172,6 @@ async function connectAuthMongoWithRetry(attempt = 1) {
 
   try {
     await auth.connectMongo();
-    await auth.seedUsers();
   } catch (err) {
     if (attempt >= maxAttempts) {
       logger.error(null,'[auth] Mongo connect failed - using in-memory auth:', err.message);
@@ -181,6 +183,16 @@ async function connectAuthMongoWithRetry(attempt = 1) {
       `(${attempt}/${maxAttempts})`
     );
     setTimeout(() => connectAuthMongoWithRetry(attempt + 1), retryDelayMs);
+    return;
+  }
+
+  // Mongo is up. Seeding is a separate concern: a failure here must be reported
+  // as a seeding failure and must not re-enter the connection retry loop or
+  // make the log blame an unreachable database (#295).
+  try {
+    await auth.seedUsers();
+  } catch (err) {
+    logger.error(null, '[auth] Mongo connected, but seeding users failed:', err.message);
   }
 }
 
