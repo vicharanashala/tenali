@@ -9,9 +9,6 @@
 // inline throughout App.jsx, so extracting it needs component extraction first.
 // See #199.
 
-// Set false to remove the Car Journey card from the home grid (hamburger-only mode).
-export const CJ_SHOW_GRID_CARD = true
-
 export const TILES = [
     { key: 'battle', name: '⚔️ Battle Arena', subtitle: 'Live fastest-finger duels', color: 'red', category: 'shelf' },
     { key: 'detective', name: '🔍 Detective Agency', subtitle: 'Solve math mysteries and crack cases!', color: 'indigo', category: 'shelf' },
@@ -42,7 +39,6 @@ export const TILES = [
     { key: 'gk', name: 'GK', subtitle: 'General Knowledge questions', color: 'purple', category: 'shelf' },
     { key: 'gst', name: 'GST', subtitle: 'Goods & Services Tax', color: 'purple', category: 'everyday-maths' },
     { key: 'hcflcm', name: 'HCF & LCM', subtitle: 'Highest common factor & LCM', color: 'blue', category: 'number-foundations' },
-    { key: 'idlivada', name: 'Idli Vada Sambhar', subtitle: 'Multiples, common multiples & LCM game', color: 'orange', category: 'number-foundations', foldInto: 'fractionadd' },
     { key: 'heron', name: "Heron's Formula", subtitle: 'Triangle area from sides', color: 'blue', category: 'shape-space' },
     { key: 'indices', name: 'Indices', subtitle: 'Laws of exponents', color: 'purple', category: 'algebra' },
     { key: 'ineq', name: 'Inequalities', subtitle: 'Linear & quadratic inequalities', color: 'green', category: 'algebra' },
@@ -90,7 +86,6 @@ export const TILES = [
     { key: 'sudoku', name: 'Sudoku', subtitle: '9x9 number puzzle — fill every row, column & box', color: 'teal', category: 'shelf' },
     { key: 'surds', name: 'Surds', subtitle: 'Simplify, add, multiply, rationalise', color: 'green', category: 'algebra' },
     { key: 'tatsavit', name: 'Tatsavit', subtitle: 'Algebra simplification drill', color: 'blue', category: 'algebra' },
-    ...(CJ_SHOW_GRID_CARD ? [{ key: 'carjourney', name: 'The Car Journey', subtitle: '16-stop math road trip — counting to calculus', color: 'orange', category: 'number-foundations', foldInto: 'basicarith' }] : []),
     { key: 'transform', name: 'Transformations', subtitle: 'Reflect, rotate, translate, enlarge', color: 'purple', category: 'shape-space' },
     { key: 'triangles', name: 'Triangles', subtitle: 'Angle sum, isosceles, exterior', color: 'blue', category: 'shape-space' },
     { key: 'trig', name: 'Trigonometry', subtitle: 'SOH-CAH-TOA, sine/cosine rule', color: 'green', category: 'shape-space' },
