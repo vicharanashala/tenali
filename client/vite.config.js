@@ -46,6 +46,8 @@ export default defineConfig({
     proxy: {
       // Primary API endpoint - routes to main quiz service
       '/api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
+      // Conceptual MCQ quiz API
+      '/conceptual-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
       // Transfer challenge API
       '/transfer-api': { target: 'http://127.0.0.1:4000', changeOrigin: true },
       // Squaring quiz API (was missing from proxy list — broke Monsters feature on decimals/squaring/lineareq topics)

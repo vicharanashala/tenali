@@ -544,7 +544,6 @@ app.use(async (req, res, next) => {
   next();
 });
 
-
 // ── Extracted topic routers (Phase 2) ────────────────────────────────────────
 const arithmeticRouter = require('./routes/arithmetic');
 app.use('/addition-api',  arithmeticRouter);
@@ -672,13 +671,12 @@ function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
 
 /**
- * Load all GK questions from JSON files in the questions directory
- * Each file should contain a question object with id, question, options, answerOption, answerText
- * @returns {Array<object>} Array of question objects
+ * Reads all JSON files in `dir` concurrently (fs.promises.readFile lets libuv's
+ * thread pool overlap the I/O instead of doing sequential blocking syscalls)
+ * and parses each one.
+ * @param {string} dir - Directory containing JSON files
+ * @returns {Promise<Array<object>>} Array of parsed objects
  */
-// Reads all JSON files in `dir` concurrently (fs.promises.readFile lets libuv's
-// thread pool overlap the I/O instead of doing 991+ sequential blocking
-// syscalls) and parses each one. Order is not significant to any caller here.
 async function loadJsonDir(dir) {
   const files = fs.readdirSync(dir).filter((file) => file.endsWith('.json'));
   const contents = await Promise.all(
@@ -687,11 +685,379 @@ async function loadJsonDir(dir) {
   return contents.map((raw) => JSON.parse(raw));
 }
 
-// Populated by initData() before the server starts listening (see bottom of
-// file) — declared here as `let` so the many closures throughout this file
-// that reference `questions` by name see the loaded data once ready.
-let questions = [];
+// Directory containing conceptual questions
+const conceptualDir = path.join(__dirname, '..', 'conceptual', 'questions');
 
+// Load all conceptual questions from JSON files (deduplicated by composite topic_id key)
+function loadConceptual() {
+  if (!fs.existsSync(conceptualDir)) {
+    return [];
+  }
+  const files = fs.readdirSync(conceptualDir).filter((file) => file.endsWith('.json'));
+  const map = new Map();
+  files.forEach((file) => {
+    const fullPath = path.join(conceptualDir, file);
+    try {
+      const parsed = JSON.parse(fs.readFileSync(fullPath, 'utf8'));
+      const items = Array.isArray(parsed) ? parsed : [parsed];
+      items.forEach((item) => {
+        if (item && item.id) {
+          const key = `${item.topic || ''}_${item.id}`;
+          map.set(key, item);
+        }
+      });
+    } catch (e) {
+      console.error(`Failed to parse conceptual question file ${file}:`, e);
+    }
+  });
+  return Array.from(map.values());
+}
+
+// Load all conceptual questions at server startup
+const conceptualQuestions = loadConceptual();
+
+/**
+ * CONCEPTUAL MCQ API
+ * ═══════════════════════════════════════════════════════════════════════════
+ */
+
+/**
+ * GET /conceptual-api/question
+ * Fetch a random conceptual multiple-choice question for a given topic
+ */
+app.get('/conceptual-api/question', (req, res) => {
+  const { topic, exclude } = req.query || {};
+  if (!topic) {
+    return res.status(400).json({ error: 'Missing topic parameter' });
+  }
+
+  const allConceptual = loadConceptual();
+  let pool = allConceptual.filter((q) => q.topic === topic);
+  if (!pool.length) {
+    return res.status(404).json({ error: `No conceptual questions for topic: ${topic}` });
+  }
+
+  // Validate options (400 Bad Request if empty or missing)
+  const invalidQuestion = pool.find(q => !q.options || !q.options.length);
+  if (invalidQuestion) {
+    return res.status(400).json({ error: 'Options array parameter is missing or empty' });
+  }
+
+  const excludeList = exclude ? exclude.split(',') : [];
+  const unseen = pool.filter((q) => !excludeList.includes(String(q.id)));
+  if (unseen.length > 0) {
+    pool = unseen;
+  }
+
+  const q = pool[Math.floor(Math.random() * pool.length)];
+
+  res.json({
+    id: q.id,
+    topic: q.topic,
+    question: q.question,
+    options: q.options,
+    visualType: q.visualType,
+    visualData: q.visualData,
+    isConceptual: true
+  });
+});
+
+/**
+ * POST /conceptual-api/check
+ * Verify the user's selected option for a conceptual MCQ
+ */
+app.post('/conceptual-api/check', (req, res) => {
+  const { id, topic, answerOption } = req.body || {};
+  if (!id) {
+    return res.status(400).json({ error: 'Missing question ID' });
+  }
+
+  const allConceptual = loadConceptual();
+  const q = allConceptual.find((item) => String(item.id) === String(id) && (!topic || item.topic === topic));
+  if (!q) {
+    return res.status(404).json({ error: 'Question not found' });
+  }
+
+  const correct = String(answerOption || '').toUpperCase() === String(q.answerOption || '').toUpperCase();
+  const display = `${q.answerOption}) ${q.answerText}`;
+
+  res.json({
+    correct,
+    correctAnswer: q.answerOption,
+    correctAnswerText: q.answerText,
+    display,
+    explanation: q.kidExplanation || q.explanation || '',
+    message: correct ? 'Correct! 🎉' : 'Wrong ❌'
+  });
+});
+
+/**
+ * QUADRATIC EVALUATION API
+ * ═══════════════════════════════════════════════════════════════════════════
+ */
+
+/**
+ * Generate a random integer from -9 to 9 (excluding 0)
+ * Used internally for quadratic coefficient generation
+ * @returns {number} Signed integer in range [-9, 9]
+ */
+function randomSignedDigit() {
+  return randomInt(-9, 9);
+}
+
+/**
+ * Map quadratic difficulty level to coefficient range
+ * Higher difficulty = larger coefficients in the polynomial
+ * @param {string} difficulty - 'easy', 'medium', or 'hard'
+ * @returns {object} {min, max} coefficient range
+ */
+function quadraticRange(difficulty) {
+  if (difficulty === 'easy') return { min: -3, max: 3 };
+  if (difficulty === 'medium') return { min: -6, max: 6 };
+  if (difficulty === 'hard') return { min: -9, max: 9 };
+  if (difficulty === 'extrahard') return { min: -15, max: 15 };
+  return { min: -3, max: 3 };
+}
+
+/**
+ * Generate a random integer within a given range
+ * (Wrapper for consistency in quadratic module)
+ * @param {number} min
+ * @param {number} max
+ * @returns {number}
+ */
+function randomInRange(min, max) {
+  return randomInt(min, max);
+}
+
+/**
+ * Format a polynomial term with proper mathematical notation
+ * Handles signs, coefficients, and variable exponents
+ *
+ * Examples:
+ *   formatSignedTerm(-5, 'x²', true) → "-5x²"
+ *   formatSignedTerm(3, 'x') → "+ 3x"
+ *   formatSignedTerm(0, '') → "+ 0" or "0" if first
+ *
+ * @param {number} value - Coefficient value
+ * @param {string} variablePart - Variable part (e.g., 'x', 'x²', '')
+ * @param {boolean} isFirst - True if this is the first term (affects sign)
+ * @returns {string} Formatted term
+ */
+function formatSignedTerm(value, variablePart, isFirst = false) {
+  if (value === 0) {
+    return isFirst ? `0${variablePart}` : `+ 0${variablePart}`;
+  }
+
+  const sign = value < 0 ? '-' : '+';
+  const absValue = Math.abs(value);
+  if (isFirst) {
+    return `${value}${variablePart}`;
+  }
+  return `${sign} ${absValue}${variablePart}`;
+}
+
+/**
+ * Build a human-readable prompt for quadratic evaluation
+ * Formats the equation y = ax² + bx + c with proper mathematical notation
+ *
+ * @param {number} a - Coefficient of x²
+ * @param {number} b - Coefficient of x
+ * @param {number} c - Constant term
+ * @param {number} x - The x value to evaluate at
+ * @returns {string} Prompt text (e.g., "If x = 2, find y for y = 2x² - 3x + 5")
+ */
+function buildQuadraticPrompt(a, b, c, x, opAB = '+', opBC = '+') {
+  // Build each term without leading sign (we control signs via opAB/opBC)
+  const first = `${a}${'x²'}`;
+  const second = `${Math.abs(b)}${'x'}`;
+  const third = `${Math.abs(c)}`;
+
+  const opStr = (op) => (op === '-' ? '-' : '+');
+
+  const expression = `${first} ${opStr(opAB)} ${second} ${opStr(opBC)} ${third}`;
+  return `If x = ${x}, find y for y = ${expression}`;
+}
+
+/**
+ * GET /quadratic-api/question
+ * Generate a quadratic function evaluation problem
+ * Task: Evaluate y = ax² + bx + c at a given x value
+ *
+ * Query Parameters:
+ *   - difficulty (optional): 'easy', 'medium', or 'hard' (default: 'hard')
+ *                            Controls coefficient ranges
+ *
+ * Response:
+ * {
+ *   id: string,             // Unique problem ID
+ *   a: number,              // x² coefficient
+ *   b: number,              // x coefficient
+ *   c: number,              // Constant term
+ *   x: number,              // Value of x to evaluate at
+ *   prompt: string,         // Display text (formatted equation)
+ *   answer: number          // Correct y value (a*x² + b*x + c)
+ * }
+ */
+app.get('/quadratic-api/question', (req, res) => {
+  const difficulty = req.query.difficulty || 'hard';
+  const range = quadraticRange(difficulty);
+  // Ensure a ≠ 0 (otherwise it's not truly quadratic)
+  let a = 0;
+  while (a === 0) a = randomInRange(range.min, range.max);
+  const b = randomInRange(range.min, range.max);
+  const c = randomInRange(range.min, range.max);
+  const x = randomInRange(range.min, range.max);
+  const answer = a * x * x + b * x + c;
+
+  res.json({
+    id: `quadratic-${Date.now()}-${Math.random()}`,
+    a,
+    b,
+    c,
+    x,
+    prompt: buildQuadraticPrompt(a, b, c, x),
+    answer,
+  });
+});
+
+/**
+ * POST /quadratic-api/check
+ * Verify if user correctly evaluated the quadratic function
+ *
+ * Request Body:
+ * {
+ *   a: number,              // x² coefficient
+ *   b: number,              // x coefficient
+ *   c: number,              // Constant term
+ *   x: number,              // x value to evaluate at
+ *   answer: number          // User's calculated y value
+ * }
+ *
+ * Response:
+ * {
+ *   correct: boolean,
+ *   correctAnswer: number,
+ *   message: string
+ * }
+ */
+app.post('/quadratic-api/check', (req, res) => {
+  const { a, b, c, x, answer, opAB, opBC } = req.body || {};
+  // Compute in sequence applying provided operators (default to +)
+  const A = Number(a);
+  const B = Number(b);
+  const C = Number(c);
+  const X = Number(x);
+  const left = A * X * X;
+  const mid = B * X;
+  const third = C;
+  const applyOp = (lhs, op, rhs) => op === '-' ? lhs - rhs : lhs + rhs;
+  const afterMid = applyOp(left, (opAB || '+').toString(), mid);
+  const correctAnswer = applyOp(afterMid, (opBC || '+').toString(), third);
+  const correct = Number(answer) === correctAnswer;
+  res.json({ correct, correctAnswer, message: correct ? 'Correct' : 'Incorrect' });
+});
+
+/**
+ * SQUARE ROOT APPROXIMATION API
+ * ═══════════════════════════════════════════════════════════════════════════
+ */
+
+/**
+ * GET /sqrt-api/question
+ * Generate a square root approximation problem
+ * Task: Estimate the integer square root (floor or ceiling) of a number
+ *
+ * Difficulty progression: Higher step numbers = larger radicands
+ * Steps 1-10: √2 to √50
+ * Steps 11-20: √51 to √150
+ * Steps 21-35: √151 to √350
+ * Steps 36-60: √351 to √700
+ * Steps 61+: √701 to √999
+ *
+ * Query Parameters:
+ *   - step (optional): Difficulty level (1-100+; default: 1)
+ *
+ * Response:
+ * {
+ *   id: string,             // Unique problem ID
+ *   q: number,              // The number under the radical
+ *   step: number,           // Difficulty level
+ *   prompt: string,         // Display text (e.g., "√42")
+ *   floorAnswer: number,    // Floor of the square root
+ *   ceilAnswer: number,     // Ceiling of the square root
+ *   sqrtRounded: string     // Exact sqrt rounded to 2 decimals (for reference)
+ * }
+ */
+app.get('/sqrt-api/question', (req, res) => {
+  // Support both 'step' (legacy) and 'difficulty' parameters
+  // If difficulty is provided, map it to a step range
+  let step;
+  if (req.query.difficulty) {
+    const difficulty = req.query.difficulty;
+    if (difficulty === 'easy') step = randomInt(1, 5);
+    else if (difficulty === 'medium') step = randomInt(6, 10);
+    else if (difficulty === 'hard') step = randomInt(11, 20);
+    else if (difficulty === 'extrahard') step = randomInt(21, 50);
+    else step = randomInt(1, 5); // Default to easy
+  } else {
+    step = Math.max(1, Number(req.query.step || 1));
+  }
+
+  const band = bandForStep(step);
+  const q = randomInt(band.min, band.max);
+  const sqrt = Math.sqrt(q);
+  const floorAnswer = Math.floor(sqrt);
+  const ceilAnswer = Math.ceil(sqrt);
+
+  res.json({
+    id: `${step}-${Date.now()}-${Math.random()}`,
+    q,
+    step,
+    prompt: `√${q}`,
+    floorAnswer,
+    ceilAnswer,
+    sqrtRounded: sqrt.toFixed(2),
+  });
+});
+
+/**
+ * POST /sqrt-api/check
+ * Verify if user's square root approximation is correct
+ * Accepts either floor or ceiling as valid (since exact sqrt is non-integer)
+ *
+ * Request Body:
+ * {
+ *   q: number,              // The number that was under the radical
+ *   answer: number          // User's estimated integer square root
+ * }
+ *
+ * Response:
+ * {
+ *   correct: boolean,       // True if answer ∈ {floor(√q), ceil(√q)}
+ *   floorAnswer: number,
+ *   ceilAnswer: number,
+ *   sqrtRounded: string,    // Exact value for learning
+ *   message: string
+ * }
+ */
+app.post('/sqrt-api/check', (req, res) => {
+  const { q, answer } = req.body || {};
+  const sqrt = Math.sqrt(Number(q));
+  const floorAnswer = Math.floor(sqrt);
+  const ceilAnswer = Math.ceil(sqrt);
+  const numericAnswer = Number(answer);
+  // Accept either floor or ceiling as correct
+  const correct = numericAnswer === floorAnswer || numericAnswer === ceilAnswer;
+
+  res.json({
+    correct,
+    floorAnswer,
+    ceilAnswer,
+    sqrtRounded: sqrt.toFixed(2),
+    message: correct ? 'Correct' : 'Incorrect',
+  });
+});
 
 /**
  * VOCABULARY BUILDER API
