@@ -99,7 +99,6 @@ export const TILES = [
     { key: 'vocab', name: 'Vocabulary', subtitle: 'Match words to definitions', color: 'green', category: 'shelf' },
     { key: 'spot', name: 'Twin Hunt', subtitle: 'Find the common object', color: 'purple', category: 'shelf' },
     { key: 'gymdecimals', name: 'Gym Decimals', subtitle: 'Signed decimal × decimal — 1-digit MCQ', color: 'purple', category: 'number-foundations', foldInto: 'decimals' },
-    { key: 'guess', name: 'Guess the Number', subtitle: 'Binary magic trick — mind-reading game', color: 'blue', category: 'number-foundations', foldInto: 'bases' },
     { key: 'funcgym', name: 'Functions Gym', subtitle: 'Evaluate small polynomials (MCQ)', color: 'blue', category: 'algebra', foldInto: 'funceval' },
     { key: 'dotprodgym', name: 'DotProducts Gym', subtitle: '2D/3D dot products (MCQ)', color: 'green', category: 'linear-algebra', foldInto: 'dotprod' },
     { key: 'fracaddgym', name: 'Fractions-add-gym', subtitle: 'Add single-digit fractions (MCQ)', color: 'purple', category: 'number-foundations', foldInto: 'fractionadd' },
