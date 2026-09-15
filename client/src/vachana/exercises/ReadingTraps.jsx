@@ -776,7 +776,6 @@ export default function ReadingTraps() {
   const [hoveredLevel, setHoveredLevel] = useState(null);
   const [checked, setChecked] = useState(false);
   const [score, setScore] = useState(0);
-  const [selectedTap, setSelectedTap] = useState(null);
   const [selectedLeft, setSelectedLeft] = useState(null);
   const [matchedPairs, setMatchedPairs] = useState([]);
   const [orderSelection, setOrderSelection] = useState([]);
@@ -1881,7 +1880,6 @@ if (currentScreen === "quiz") {
           setAns(null);
           setMsg("");
           setChecked(false);
-          setSelectedTap(null);
           setMatchedPairs([]);      
           setOrderSelection([]);   
           setDropAnswer('');
