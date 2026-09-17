@@ -42634,6 +42634,23 @@ function App() {
   const [progressData, setProgressData] = useState(null)
   const [showTour, setShowTour] = useState(() => localStorage.getItem('tenali_tour_seen') !== 'true')
 
+  // Keep daily practice streak in sync with events & localStorage
+  useEffect(() => {
+    const handleStreak = (e) => {
+      if (e?.detail?.streak !== undefined) {
+        setStreak(e.detail.streak);
+      } else {
+        try { setStreak(parseInt(localStorage.getItem('tenali-streak') || '0', 10)); } catch {}
+      }
+    };
+    window.addEventListener('tenali-streak-change', handleStreak);
+    window.addEventListener('storage', handleStreak);
+    return () => {
+      window.removeEventListener('tenali-streak-change', handleStreak);
+      window.removeEventListener('storage', handleStreak);
+    };
+  }, []);
+
   // Sync progress with backend on mount & whenever user changes
   useEffect(() => {
     const fetchProgress = async () => {
