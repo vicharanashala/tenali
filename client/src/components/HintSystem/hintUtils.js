@@ -8,7 +8,7 @@ export function getLocalXp() {
 }
 
 export function setLocalXp(val) {
-  try { localStorage.setItem('tenali_xp', val.toString()); } catch {}
+  try { localStorage.setItem('tenali_xp', val.toString()); } catch { /* ignore */ }
 }
 
 export function changeXp(delta) {
@@ -45,7 +45,7 @@ export function recordDailyStreak() {
     try {
       window.dispatchEvent(new CustomEvent('tenali-streak-change', { detail: { streak: currentStreak } }));
       window.dispatchEvent(new Event('storage'));
-    } catch {}
+    } catch { /* ignore */ }
     return currentStreak;
   } catch (e) {
     console.error('Error recording streak:', e);
