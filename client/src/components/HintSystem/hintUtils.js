@@ -47,7 +47,7 @@ export function recordDailyStreak() {
     try {
       window.dispatchEvent(new CustomEvent('tenali-streak-change', { detail: { streak: currentStreak } }));
       window.dispatchEvent(new Event('storage'));
-    } catch {}
+    } catch { /* ignore */ }
     return currentStreak;
   } catch (e) {
     console.error('Error recording streak:', e);

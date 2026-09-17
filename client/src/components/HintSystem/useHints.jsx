@@ -64,7 +64,7 @@ export function useQuizHintsAndXp(concept, finished, score, totalQ, wasSolved = 
             localStorage.setItem('tenali-streak', String(data.streak));
             try {
               window.dispatchEvent(new CustomEvent('tenali-streak-change', { detail: { streak: data.streak } }));
-            } catch { /* dispatch may fail */ }
+            } catch { /* ignore */ }
           }
           if (data.totalAward > 0) {
             if (data.guest) {
@@ -73,7 +73,7 @@ export function useQuizHintsAndXp(concept, finished, score, totalQ, wasSolved = 
               setLocalXp(data.balance);
               try {
                 window.dispatchEvent(new CustomEvent('tenali-xp-float', { detail: { diff: data.totalAward } }));
-              } catch { /* dispatch may fail */ }
+              } catch { /* ignore */ }
             }
           }
         }
