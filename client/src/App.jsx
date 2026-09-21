@@ -23,6 +23,8 @@
 
 import { useEffect, useState, useRef, useMemo } from 'react'
 import './App.css'
+import LandingPage from './components/LandingPage/LandingPage'
+import LandingNavbar from './components/LandingPage/LandingNavbar'
 
 // API base URL from environment variables (Vite)
 const API = import.meta.env.VITE_API_BASE_URL || '';
@@ -35521,6 +35523,16 @@ function App() {
   // Currently selected quiz mode (null = home menu, or key like 'gk', 'addition', etc.)
   const [mode, setMode] = useState(null)
 
+  // Current view: 'landing' or 'puzzles'
+  const [currentView, setCurrentView] = useState(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('view') === 'puzzles' ? 'puzzles' : 'landing';
+    } catch {
+      return 'landing';
+    }
+  })
+
   // Listen for navigation events from AuthMenu
   useEffect(() => {
     const onNav = (e) => { setMode(e.detail.mode) }
@@ -36120,21 +36132,56 @@ function App() {
   const ActiveApp = mode && modeMap[mode] ? modeMap[mode] : null
   const showProgress = mode === 'trackProgress'
 
+  // When no mode is selected, check whether to render LandingPage or Home puzzle grid
+  if (!mode && currentView === 'landing') {
+    return (
+      <LandingPage
+        currentView="landing"
+        onViewChange={setCurrentView}
+        onExplorePuzzles={() => setCurrentView('puzzles')}
+        onSelectTopic={(topicKey) => setMode(topicKey)}
+        theme={theme}
+        toggleTheme={toggleTheme}
+      />
+    )
+  }
+
   return (
-    <div className="app-shell">
-      <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-        {theme === 'dark' ? '☀️' : '🌙'}
-      </button>
-      <div className="card">
-        {!mode ? (
-          <Home onSelect={setMode} />
-        ) : showProgress ? (
-          <ProgressTrackerApp onBack={() => setMode(null)} />
-        ) : ActiveApp ? (
-          <ActiveApp onBack={() => setMode(null)} />
-        ) : (
-          <Home onSelect={setMode} />
+    <div style={{ width: '100%', minHeight: '100vh', background: 'var(--clr-bg)' }}>
+      {mode === null && (
+        <LandingNavbar
+          currentView={currentView}
+          onViewChange={(v) => {
+            setCurrentView(v);
+            try {
+              if (v === 'puzzles') {
+                window.history.replaceState({}, '', `/?view=puzzles`);
+              } else {
+                window.history.replaceState({}, '', `/`);
+              }
+            } catch (e) {}
+          }}
+          theme={theme}
+          toggleTheme={toggleTheme}
+        />
+      )}
+      <div className="app-shell" style={{ paddingTop: mode === null ? 24 : undefined }}>
+        {mode !== null && (
+          <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+            {theme === 'dark' ? '☀️' : '🌙'}
+          </button>
         )}
+        <div className="card">
+          {!mode ? (
+            <Home onSelect={setMode} />
+          ) : showProgress ? (
+            <ProgressTrackerApp onBack={() => setMode(null)} />
+          ) : ActiveApp ? (
+            <ActiveApp onBack={() => setMode(null)} />
+          ) : (
+            <Home onSelect={setMode} />
+          )}
+        </div>
       </div>
     </div>
   )

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <!-- Minimal Dark Background -->
+  <rect width="600" height="600" fill="#332d29" />
+
+  <!-- Geometrically Exact 30° Right Triangle:
+       Base = 420px (from x=60 to x=480)
+       Height = 420 * tan(30°) = 420 * 0.57735 = 242.5px ≈ 243px (from y=360 to y=117)
+       tan(30°) = 242.5 / 420 = 0.5774 (Exact 30.00°)
+  -->
+  <polygon points="60,360 480,360 480,117" fill="none" stroke="#9e9790" stroke-width="4.5" stroke-linejoin="round" />
+
+  <!-- Perpendicular 90° Square at Bottom-Right Vertex (480, 360) -->
+  <path d="M 444 360 L 444 324 L 480 324" fill="none" stroke="#9e9790" stroke-width="3" />
+
+  <!-- Exact 30° Angle Arc at Vertex (60, 360) with radius 70 -->
+  <path d="M 130 360 A 70 70 0 0 0 121 325" fill="none" stroke="#f37d36" stroke-width="4" stroke-linecap="round" />
+  <text x="142" y="344" fill="#f37d36" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="800">30°</text>
+
+  <!-- Bent Arrow: Inside triangle at (210, 335), up to (210, 275), right to (330, 275), down through base to (330, 412) -->
+  <path d="M 210 335 L 210 275 L 330 275 L 330 412" fill="none" stroke="#f3f1ee" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+  <polygon points="330,424 322,408 338,408" fill="#f3f1ee" />
+
+  <!-- Annotation on Bent Arrow -->
+  <text x="270" y="260" fill="#9e9790" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="700" text-anchor="middle">angle to ratio</text>
+
+  <!-- Final Exact Trigonometric Ratio in Signature Orange -->
+  <text x="330" y="490" fill="#f37d36" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="46" font-weight="800" text-anchor="middle">sin(30°) = 0.5</text>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <!-- Minimal Dark Background -->
+  <rect width="600" height="600" fill="#332d29" />
+
+  <!-- Top Annotation -->
+  <text x="300" y="88" fill="#9e9790" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="23" font-weight="700" text-anchor="middle">two equations together</text>
+
+  <!-- Left Bracket '[' -->
+  <path d="M 165 142 L 138 142 L 138 292 L 165 292" fill="none" stroke="#9e9790" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Equations -->
+  <text x="300" y="198" fill="#f3f1ee" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="46" font-weight="700" text-anchor="middle">2a+b = 9</text>
+  <text x="300" y="270" fill="#f3f1ee" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="46" font-weight="700" text-anchor="middle">a-b = 0</text>
+
+  <!-- Right Closing Bracket ']' (Fixed: fully closed and symmetric) -->
+  <path d="M 435 142 L 462 142 L 462 292 L 435 292" fill="none" stroke="#9e9790" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Clean Downward Arrow -->
+  <line x1="300" y1="316" x2="300" y2="348" stroke="#f3f1ee" stroke-width="4" stroke-linecap="round" />
+  <polygon points="300,362 291,346 309,346" fill="#f3f1ee" />
+
+  <!-- Resolution Annotation -->
+  <text x="300" y="402" fill="#9e9790" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="23" font-weight="700" text-anchor="middle">common values found!</text>
+
+  <!-- Solved Common Values in Signature Orange -->
+  <text x="300" y="472" fill="#f37d36" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="56" font-weight="800" text-anchor="middle">a = 3</text>
+  <text x="300" y="542" fill="#f37d36" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="56" font-weight="800" text-anchor="middle">b = 3</text>
+</svg>

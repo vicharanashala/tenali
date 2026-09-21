@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <!-- Minimal Dark Background -->
+  <rect width="600" height="600" fill="#332d29" />
+
+  <!-- Top Prime Number Circle Node '11' -->
+  <circle cx="300" cy="175" r="58" fill="none" stroke="#f37d36" stroke-width="4.5" />
+  <text x="300" y="190" fill="#f3f1ee" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="44" font-weight="700" text-anchor="middle">11</text>
+
+  <!-- Left Branch Arrow: Clean geometry from top node to left factor node -->
+  <line x1="262" y1="220" x2="198" y2="295" stroke="#9e9790" stroke-width="3.5" stroke-linecap="round" />
+  <polygon points="190,305 204,297 197,288" fill="#9e9790" />
+
+  <!-- Right Branch Arrow: Clean geometry from top node to right factor node -->
+  <line x1="338" y1="220" x2="402" y2="295" stroke="#9e9790" stroke-width="3.5" stroke-linecap="round" />
+  <polygon points="410,305 403,288 396,297" fill="#9e9790" />
+
+  <!-- Factor Node '1' -->
+  <circle cx="160" cy="365" r="58" fill="none" stroke="#f37d36" stroke-width="4.5" />
+  <text x="160" y="380" fill="#f3f1ee" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="44" font-weight="700" text-anchor="middle">1</text>
+
+  <!-- Factor Node '11' -->
+  <circle cx="440" cy="365" r="58" fill="none" stroke="#f37d36" stroke-width="4.5" />
+  <text x="440" y="380" fill="#f3f1ee" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="44" font-weight="700" text-anchor="middle">11</text>
+
+  <!-- Prime Definition Annotation in Signature Green -->
+  <text x="300" y="495" fill="#62ba4e" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="42" font-weight="800" text-anchor="middle">Only 2 factors</text>
+</svg>
