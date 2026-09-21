@@ -4,7 +4,7 @@ import React from 'react';
  * LandingHero Component
  * Hero presentation introducing the Tenali platform with core value proposition,
  * quick action buttons, platform statistics, and clean mascot visual.
- * Cleaned up with no pop-up cards obscuring Tenali.
+ * Conveys honest, grounded information in a humble tone.
  */
 export default function LandingHero({ onExplorePuzzles = () => {} }) {
   const scrollToDemo = () => {
@@ -19,15 +19,15 @@ export default function LandingHero({ onExplorePuzzles = () => {} }) {
         <div className="hero-content-col">
           <div className="hero-pill-badge">
             <span className="hero-pill-sparkle">✨</span>
-            <span>Intelligent, Adaptive Math & Reasoning Engine</span>
+            <span>Interactive Mathematics Practice & Drills</span>
           </div>
 
           <h1 className="hero-heading">
-            Master Mathematics Through <span className="hero-highlight">Play & Logic</span>
+            Master Mathematics Through <span className="hero-highlight">Practice & Understanding</span>
           </h1>
 
           <p className="hero-description">
-            Named after the legendary wit <strong>Tenali Raman</strong>, Tenali turns math practice into an interactive adventure. With <strong>40+ algorithmic practice apps</strong>, high-intensity Gym workouts, and dynamic step solvers, every problem is synthesized on the fly—ensuring practice is never repetitive.
+            Named after the witty scholar <strong>Tenali Raman</strong>, Tenali is an educational math tool developed at the Vicharanashala Lab for Education Design, IIT Ropar. Offering <strong>40+ practice modules</strong>, mental arithmetic drills, and step-by-step solutions, problems are generated on the fly with varied parameters to support conceptual understanding.
           </p>
 
           <div className="hero-cta-group">
@@ -53,19 +53,19 @@ export default function LandingHero({ onExplorePuzzles = () => {} }) {
           <div className="hero-stats-row">
             <div className="hero-stat-card">
               <span className="hero-stat-number">40+</span>
-              <span className="hero-stat-label">Algorithmic Puzzles</span>
+              <span className="hero-stat-label">Math Practice Topics</span>
             </div>
             <div className="hero-stat-card">
               <span className="hero-stat-number">7</span>
-              <span className="hero-stat-label">Adaptive Gym Drills</span>
-            </div>
-            <div className="hero-stat-card">
-              <span className="hero-stat-number">0</span>
-              <span className="hero-stat-label">Repetition (Dynamic)</span>
+              <span className="hero-stat-label">Arithmetic Gym Drills</span>
             </div>
             <div className="hero-stat-card">
               <span className="hero-stat-number">100%</span>
               <span className="hero-stat-label">Free & Open Source</span>
+            </div>
+            <div className="hero-stat-card">
+              <span className="hero-stat-number">No Ads</span>
+              <span className="hero-stat-label">Free for Everyone</span>
             </div>
           </div>
         </div>

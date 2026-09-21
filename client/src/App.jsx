@@ -36132,20 +36132,6 @@ function App() {
   const ActiveApp = mode && modeMap[mode] ? modeMap[mode] : null
   const showProgress = mode === 'trackProgress'
 
-  // When no mode is selected, check whether to render LandingPage or Home puzzle grid
-  if (!mode && currentView === 'landing') {
-    return (
-      <LandingPage
-        currentView="landing"
-        onViewChange={setCurrentView}
-        onExplorePuzzles={() => setCurrentView('puzzles')}
-        onSelectTopic={(topicKey) => setMode(topicKey)}
-        theme={theme}
-        toggleTheme={toggleTheme}
-      />
-    )
-  }
-
   return (
     <div style={{ width: '100%', minHeight: '100vh', background: 'var(--clr-bg)' }}>
       {mode === null && (
@@ -36165,24 +36151,35 @@ function App() {
           toggleTheme={toggleTheme}
         />
       )}
-      <div className="app-shell" style={{ paddingTop: mode === null ? 24 : undefined }}>
-        {mode !== null && (
-          <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-            {theme === 'dark' ? '☀️' : '🌙'}
-          </button>
-        )}
-        <div className="card">
-          {!mode ? (
-            <Home onSelect={setMode} />
-          ) : showProgress ? (
-            <ProgressTrackerApp onBack={() => setMode(null)} />
-          ) : ActiveApp ? (
-            <ActiveApp onBack={() => setMode(null)} />
-          ) : (
-            <Home onSelect={setMode} />
+
+      {mode === null && currentView === 'landing' ? (
+        <LandingPage
+          onExplorePuzzles={() => {
+            setCurrentView('puzzles');
+            try { window.history.replaceState({}, '', `/?view=puzzles`); } catch (e) {}
+          }}
+          onSelectTopic={(topicKey) => setMode(topicKey)}
+        />
+      ) : (
+        <div className="app-shell" style={{ paddingTop: mode === null ? 24 : undefined }}>
+          {mode !== null && (
+            <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+              {theme === 'dark' ? '☀️' : '🌙'}
+            </button>
           )}
+          <div className="card">
+            {!mode ? (
+              <Home onSelect={setMode} />
+            ) : showProgress ? (
+              <ProgressTrackerApp onBack={() => setMode(null)} />
+            ) : ActiveApp ? (
+              <ActiveApp onBack={() => setMode(null)} />
+            ) : (
+              <Home onSelect={setMode} />
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }

@@ -9,7 +9,6 @@
   background: var(--clr-bg);
   font-family: var(--font-body);
   position: relative;
-  overflow-x: hidden;
 }
 
 /* Ambient glow background accents */
@@ -1445,4 +1444,112 @@ body:has(.landing-navbar) button[aria-label="Menu"][style*="position: fixed"] {
     flex-direction: column;
     text-align: center;
   }
+}
+
+/* ============================================================================
+   ACCOUNT & PERSONALIZATION NOTICE MODAL
+   ============================================================================ */
+.landing-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: landingFadeIn 0.2s ease-out;
+}
+
+.landing-modal-card {
+  background: var(--clr-card);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+  max-width: 480px;
+  width: 100%;
+  padding: 28px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  position: relative;
+  animation: landingScaleUp 0.2s ease-out;
+}
+
+.landing-modal-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.landing-modal-icon {
+  font-size: 2rem;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.landing-modal-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--clr-text);
+  margin: 0 0 4px 0;
+}
+
+.landing-modal-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(232, 134, 74, 0.15);
+  color: var(--clr-accent);
+  border: 1px solid rgba(232, 134, 74, 0.3);
+}
+
+.landing-modal-close {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--clr-text-soft);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all var(--transition);
+}
+
+.landing-modal-close:hover {
+  background: var(--clr-hover-strong);
+  color: var(--clr-text);
+}
+
+.landing-modal-body {
+  color: var(--clr-text-soft);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.landing-modal-body strong {
+  color: var(--clr-text);
+}
+
+@keyframes landingFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes landingScaleUp {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
 }

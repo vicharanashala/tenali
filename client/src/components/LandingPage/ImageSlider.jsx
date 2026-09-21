@@ -74,7 +74,7 @@ const SLIDES = [
     highlights: [
       'Visual triangles with proportional side labeling (1:2 ratio)',
       'Angle-Angle (AA) similarity condition verification',
-      'Prepares students for Cambridge IGCSE geometry',
+      'Prepares students for secondary school geometry',
     ],
     imageSrc: '/contrast/similarity-accurate.svg',
     fallbackImg: '/contrast/similarity-middle.png',

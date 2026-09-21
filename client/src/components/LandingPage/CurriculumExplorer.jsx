@@ -100,11 +100,11 @@ export default function CurriculumExplorer({
     <section id="curriculum" className="landing-section">
       <div className="section-header-center">
         <div className="section-tag">
-          <span>📚 Curriculum Architecture</span>
+          <span>📚 Mathematics Topics</span>
         </div>
-        <h2 className="section-title">Comprehensive Mathematical Coverage</h2>
+        <h2 className="section-title">Structured Mathematical Topics</h2>
         <p className="section-subtitle">
-          Explore structured modules spanning elementary numeracy, secondary school geometry, Cambridge IGCSE topics, and advanced calculus.
+          Explore structured practice modules spanning foundational arithmetic, geometry, algebra, everyday math, and calculus basics.
         </p>
       </div>
 

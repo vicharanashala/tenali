@@ -1,10 +1,8 @@
 import React from 'react';
-import LandingNavbar from './LandingNavbar';
 import LandingHero from './LandingHero';
 import ImageSlider from './ImageSlider';
 import AppVideoDemo from './AppVideoDemo';
 import FeaturesOverview from './FeaturesOverview';
-import WorkflowSection from './WorkflowSection';
 import CurriculumExplorer from './CurriculumExplorer';
 import LandingFooter from './LandingFooter';
 import './LandingPage.css';
@@ -12,15 +10,11 @@ import './LandingPage.css';
 /**
  * LandingPage Component
  * Main landing page for Tenali introducing the platform, showcasing key features,
- * sliding carousel, video/animated demo, curriculum explorer, and navigation to puzzles.
+ * sliding carousel, interactive demo, curriculum explorer, and footer.
  */
 export default function LandingPage({
   onExplorePuzzles = () => {},
   onSelectTopic = () => {},
-  currentView = 'landing',
-  onViewChange = () => {},
-  theme = 'dark',
-  toggleTheme = () => {},
 }) {
   return (
     <div className="landing-container">
@@ -31,14 +25,6 @@ export default function LandingPage({
         <div className="landing-glow-circle-3" />
       </div>
 
-      {/* Sticky Navigation Bar */}
-      <LandingNavbar
-        currentView={currentView}
-        onViewChange={onViewChange}
-        theme={theme}
-        toggleTheme={toggleTheme}
-      />
-
       {/* Hero Section */}
       <LandingHero onExplorePuzzles={onExplorePuzzles} />
 
@@ -48,11 +34,8 @@ export default function LandingPage({
       {/* Video & Interactive Demo Showcase */}
       <AppVideoDemo onSelectTopic={onSelectTopic} />
 
-      {/* 6 Core Pedagogical Features */}
+      {/* Normalized Platform Capabilities */}
       <FeaturesOverview />
-
-      {/* Four-Stage Learner Workflow */}
-      <WorkflowSection onExplorePuzzles={onExplorePuzzles} />
 
       {/* Curriculum Topic Domain Explorer */}
       <CurriculumExplorer

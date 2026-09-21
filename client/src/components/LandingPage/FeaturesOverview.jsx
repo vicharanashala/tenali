@@ -1,53 +1,52 @@
 import React from 'react';
 
-const FEATURES = [
+/**
+ * FeaturesOverview Component
+ * Grounded presentation of the core educational capabilities present in Tenali.
+ * Conveys honest, accurate, and humble information without exaggeration.
+ */
+const CAPABILITIES = [
   {
+    id: 'algorithmic',
     icon: '🧮',
-    title: 'Infinite Algorithmic Generation',
-    description: 'There is no static database of questions. Every single problem, polynomial, and matrix is synthesized on the fly with strict mathematical parameters, guaranteeing that no two practice sessions are ever identical.',
-    tag: 'Zero Repetition',
-    bg: 'rgba(232, 134, 74, 0.15)',
-    border: 'rgba(232, 134, 74, 0.4)',
+    tag: 'Dynamic Practice',
+    title: 'Algorithmic Problem Generation',
+    desc: 'Problems are generated algorithmically with varied numerical parameters rather than drawn from static lists. This helps learners focus on solving methods rather than memorizing answers.',
   },
   {
-    icon: '⚡',
-    title: 'Adaptive Gym & Speed Drills',
-    description: 'High-intensity workouts across 7 targeted gym modules (polynomials, dot products, fractions, linear equations, indices, and decimals). Push mental agility with live speed and accuracy tracking.',
-    tag: 'Mental Agility',
-    bg: 'rgba(92, 184, 122, 0.15)',
-    border: 'rgba(92, 184, 122, 0.4)',
-  },
-  {
-    icon: '📖',
-    title: 'Cambridge IGCSE Curriculum',
-    description: '24 complete textbook chapters paired with 27 scaffolded concept bridge modules. Structured pathways transition learners seamlessly from elementary arithmetic to advanced secondary mathematics.',
-    tag: '24 Full Chapters',
-    bg: 'rgba(59, 130, 246, 0.15)',
-    border: 'rgba(59, 130, 246, 0.4)',
-  },
-  {
+    id: 'hints',
     icon: '💡',
-    title: 'Instant Step-by-Step Solvers',
-    description: 'Never stay stuck. One-tap guided step-by-step explanations deconstruct solutions into transparent logical steps, showing intermediate factorizations, bracket operations, and algebraic substitutions.',
-    tag: 'Guided Solvers',
-    bg: 'rgba(224, 90, 74, 0.15)',
-    border: 'rgba(224, 90, 74, 0.4)',
+    tag: 'Step-by-Step Support',
+    title: 'Guided Hints & Solutions',
+    desc: 'When stuck on a problem, learners can reveal step-by-step explanations showing the intermediate steps, formulas, and reasoning needed to reach the solution.',
   },
   {
+    id: 'gym',
+    icon: '⚡',
+    tag: 'Speed & Fluency',
+    title: 'Mental Math & Arithmetic Gym',
+    desc: 'Dedicated practice drills for foundational arithmetic, fractions, linear equations, polynomials, and index laws to help students build calculation fluency.',
+  },
+  {
+    id: 'topics',
+    icon: '📚',
+    tag: 'Topic Coverage',
+    title: '40+ School Mathematics Topics',
+    desc: 'Organized topic modules spanning number basics, fractions, algebra, coordinate geometry, trigonometry, statistics, and introductory calculus.',
+  },
+  {
+    id: 'custom',
     icon: '🎛️',
-    title: 'Custom Lessons & Random Mix',
-    description: 'Tailor your own learning session. Select multiple specific topic apps to create a personalized mixed workout, or launch the adaptive Random Mix for comprehensive cross-topic revision.',
-    tag: 'Personalized Practice',
-    bg: 'rgba(139, 92, 246, 0.15)',
-    border: 'rgba(139, 92, 246, 0.4)',
+    tag: 'Flexible Practice',
+    title: 'Custom Practice & Random Mix',
+    desc: 'Choose specific topics to practice together in a personalized lesson, or use the Random Mix feature to test your problem-solving across multiple areas.',
   },
   {
-    icon: '📊',
-    title: 'Session Analytics & Speed Graphs',
-    description: 'Track long-term mastery with integrated accuracy and speed graphs. Visualize correct answers per minute and session-by-session historical performance curves.',
-    tag: 'Data-Driven Progress',
-    bg: 'rgba(236, 72, 153, 0.15)',
-    border: 'rgba(236, 72, 153, 0.4)',
+    id: 'open',
+    icon: '🏛️',
+    tag: 'Community & Education',
+    title: 'Free & Open-Source Initiative',
+    desc: 'Developed as an educational initiative at the Vicharanashala Lab for Education Design, IIT Ropar. Openly accessible for all learners with zero fees or advertisements.',
   },
 ];
 
@@ -58,24 +57,23 @@ export default function FeaturesOverview() {
         <div className="section-tag">
           <span>⚡ Platform Capabilities</span>
         </div>
-        <h2 className="section-title">Built for Deep Understanding & Delight</h2>
+        <h2 className="section-title">How Tenali Supports Your Math Practice</h2>
         <p className="section-subtitle">
-          Tenali pairs rigorous mathematical algorithms with responsive pacing and pedagogical insight, creating an engaging environment for learners of all ages.
+          A clean, focused environment built to help students practice and understand mathematical concepts at their own pace.
         </p>
       </div>
 
       <div className="features-grid">
-        {FEATURES.map((feat, idx) => (
-          <div key={idx} className="feature-card">
-            <div
-              className="feature-icon-box"
-              style={{ background: feat.bg, border: `1px solid ${feat.border}` }}
-            >
-              <span>{feat.icon}</span>
+        {CAPABILITIES.map((feat) => (
+          <div key={feat.id} className="feature-card">
+            <div className="feature-card-header">
+              <span className="feature-icon" aria-hidden="true">
+                {feat.icon}
+              </span>
+              <span className="feature-tag">{feat.tag}</span>
             </div>
-            <h3 className="feature-card-title">{feat.title}</h3>
-            <p className="feature-card-desc">{feat.description}</p>
-            <span className="feature-card-tag">{feat.tag}</span>
+            <h3 className="feature-title">{feat.title}</h3>
+            <p className="feature-desc">{feat.desc}</p>
           </div>
         ))}
       </div>

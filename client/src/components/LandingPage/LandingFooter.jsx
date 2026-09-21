@@ -27,7 +27,7 @@ export default function LandingFooter({
             </div>
 
             <p className="footer-brand-desc">
-              An intelligent, adaptive mathematics learning platform pairing rigorous algorithmic question generation with Cambridge IGCSE curriculum chapters, high-intensity gym drills, and step-by-step solvers.
+              An interactive math practice platform offering algorithmic problem generation, mental arithmetic drills, and step-by-step solutions across 40+ school math topics.
             </p>
 
             <div className="footer-motto-quote">
