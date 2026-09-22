@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <!-- Minimal Dark Background -->
+  <rect width="600" height="600" fill="#332d29" />
+
+  <!-- Small Right Triangle (Solid Blue) -->
+  <polygon points="90,390 210,390 90,300" fill="#4688d0" />
+  
+  <!-- Right Angle Square at (90, 390) -->
+  <path d="M 90 372 L 108 372 L 108 390" fill="none" stroke="#f3f1ee" stroke-width="2" />
+  
+  <!-- Angle Arc θ at (210, 390) -->
+  <path d="M 182 390 A 28 28 0 0 1 188 373" fill="none" stroke="#f37d36" stroke-width="3" />
+  <text x="178" y="366" fill="#f37d36" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700">θ</text>
+
+  <!-- Large Right Triangle (Dashed Outline) -->
+  <polygon points="280,390 490,390 280,232" fill="none" stroke="#9e9790" stroke-width="4" stroke-dasharray="9 6" />
+
+  <!-- Right Angle Square at (280, 390) -->
+  <path d="M 280 364 L 306 364 L 306 390" fill="none" stroke="#9e9790" stroke-width="2.5" />
+
+  <!-- Angle Arc θ at (490, 390) -->
+  <path d="M 448 390 A 42 42 0 0 1 456 365" fill="none" stroke="#f37d36" stroke-width="3" />
+  <text x="444" y="356" fill="#f37d36" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="700">θ</text>
+
+  <!-- Bottom Annotations -->
+  <text x="300" y="468" fill="#f3f1ee" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="30" font-weight="700" text-anchor="middle">Similar Triangles</text>
+  <text x="300" y="510" fill="#9e9790" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="600" text-anchor="middle">Same angles • Proportional sides</text>
+</svg>

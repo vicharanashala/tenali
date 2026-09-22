@@ -19,3 +19,5 @@ server/_probe*.js
 # Backup snapshots — never commit these; use git history instead
 *.bak
 *.bak.*
+__pycache__/
+*.pyc

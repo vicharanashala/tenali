@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <!-- Minimal Dark Background -->
+  <rect width="600" height="600" fill="#332d29" />
+
+  <!-- Left Matrix Bracket '[' -->
+  <path d="M 215 160 L 175 160 L 175 440 L 215 440" fill="none" stroke="#f3f1ee" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Matrix Elements Row 1 -->
+  <text x="245" y="260" fill="#f3f1ee" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="68" font-weight="700" text-anchor="middle">2</text>
+  <text x="355" y="260" fill="#f3f1ee" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="68" font-weight="700" text-anchor="middle">1</text>
+
+  <!-- Matrix Elements Row 2 -->
+  <text x="245" y="385" fill="#f3f1ee" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="68" font-weight="700" text-anchor="middle">3</text>
+  <text x="355" y="385" fill="#f3f1ee" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="68" font-weight="700" text-anchor="middle">4</text>
+
+  <!-- Right Matrix Bracket ']' (Fully closed and symmetric) -->
+  <path d="M 385 160 L 425 160 L 425 440 L 385 440" fill="none" stroke="#f3f1ee" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

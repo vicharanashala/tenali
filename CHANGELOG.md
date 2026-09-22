@@ -25,3001 +25,3001 @@
 
 #### 📅 2026-09-21  <sub>(1 commit)</sub>
 
-- 📌 [`c00ab111`](https://github.com/Jatin-nicon/tenali/commit/c00ab11178a266cd4eab82863cd675ffccfab66a) — **Jatin Kumar** — Merge remote-tracking branch 'upstream/main' and sync canonical docs
+- 📌 [`c00ab111`](https://github.com/vicharanashala/tenali/commit/c00ab11178a266cd4eab82863cd675ffccfab66a) — **Jatin Kumar** — Merge remote-tracking branch 'upstream/main' and sync canonical docs
 
 #### 📅 2026-09-19  <sub>(3 commits)</sub>
 
-- 📌 [`9a47992c`](https://github.com/Jatin-nicon/tenali/commit/9a47992c7c8d20dd5f97748219acb0e3dfcdda4b) — **Jatin Kumar** — Merge remote-tracking branch 'upstream/main' and sync canonical docs
-- 📌 [`5ad0ea19`](https://github.com/Jatin-nicon/tenali/commit/5ad0ea1919d7e5dc44b76a1f99f7cb42da0937de) — **Jatin Kumar** — Merge remote-tracking branch 'origin/main'
-- ✨ [`42fdb88b`](https://github.com/Jatin-nicon/tenali/commit/42fdb88b6c343954902b0f5f553a2971cd9bb464) — **Jatin Kumar** — complete 11-question discovery flow, GeoGebra point plotter integration, and option shuffling
-    - 📁 **10 files:** `client/src/App.jsx` `+7 −4`, `client/src/data/geogebraQuestions.js` `+17 −1`, `client/src/features/tiles.js` `+1 −1`, `client/src/modules/LinearAlgebra/GeoGebraPointPlotter.css` `+330 −0`, `client/src/modules/LinearAlgebra/GeoGebraPointPlotter.jsx` `+351 −0`, `client/src/modules/LinearAlgebra/LinearAlgebraModule.css` `+75 −0`, `client/src/modules/LinearAlgebra/LinearAlgebraModule.jsx` `+572 −403`, `client/src/modules/LinearAlgebra/answerEvaluator.js` `+245 −0` *(+2 more in [`42fdb88b`](https://github.com/Jatin-nicon/tenali/commit/42fdb88b6c343954902b0f5f553a2971cd9bb464))*
+- 📌 [`9a47992c`](https://github.com/vicharanashala/tenali/commit/9a47992c7c8d20dd5f97748219acb0e3dfcdda4b) — **Jatin Kumar** — Merge remote-tracking branch 'upstream/main' and sync canonical docs
+- 📌 [`5ad0ea19`](https://github.com/vicharanashala/tenali/commit/5ad0ea1919d7e5dc44b76a1f99f7cb42da0937de) — **Jatin Kumar** — Merge remote-tracking branch 'origin/main'
+- ✨ [`42fdb88b`](https://github.com/vicharanashala/tenali/commit/42fdb88b6c343954902b0f5f553a2971cd9bb464) — **Jatin Kumar** — complete 11-question discovery flow, GeoGebra point plotter integration, and option shuffling
+    - 📁 **10 files:** `client/src/App.jsx` `+7 −4`, `client/src/data/geogebraQuestions.js` `+17 −1`, `client/src/features/tiles.js` `+1 −1`, `client/src/modules/LinearAlgebra/GeoGebraPointPlotter.css` `+330 −0`, `client/src/modules/LinearAlgebra/GeoGebraPointPlotter.jsx` `+351 −0`, `client/src/modules/LinearAlgebra/LinearAlgebraModule.css` `+75 −0`, `client/src/modules/LinearAlgebra/LinearAlgebraModule.jsx` `+572 −403`, `client/src/modules/LinearAlgebra/answerEvaluator.js` `+245 −0` *(+2 more in [`42fdb88b`](https://github.com/vicharanashala/tenali/commit/42fdb88b6c343954902b0f5f553a2971cd9bb464))*
     - 📊 **`+1798 −459`** · 10 files
 
 #### 📅 2026-09-18  <sub>(3 commits)</sub>
 
-- 📝 [`df03233c`](https://github.com/Jatin-nicon/tenali/commit/df03233c92499682f3921493e64c7281198566fd) — **Jatin Kumar** — sync CONTRIBUTORS.md and CHANGELOG.md with upstream
+- 📝 [`df03233c`](https://github.com/vicharanashala/tenali/commit/df03233c92499682f3921493e64c7281198566fd) — **Jatin Kumar** — sync CONTRIBUTORS.md and CHANGELOG.md with upstream
     - 📁 **2 files:** `CHANGELOG.md` `+1117 −1137`, `CONTRIBUTORS.md` `+49 −72`
     - 📊 **`+1166 −1209`** · 2 files
-- 📌 [`c381c2ff`](https://github.com/Jatin-nicon/tenali/commit/c381c2ff885739d26d63d0998943e4e0bff0824a) — **Jatin Kumar** — Merge remote-tracking branch 'upstream/main' and sync README with upstream
-- ✨ [`66c745c2`](https://github.com/Jatin-nicon/tenali/commit/66c745c2d85b75d6326f33838a38ac3b690d1923) — **Jatin Kumar** — unify Understanding the Point 13-question linear flow and remove pre-selected answers
+- 📌 [`c381c2ff`](https://github.com/vicharanashala/tenali/commit/c381c2ff885739d26d63d0998943e4e0bff0824a) — **Jatin Kumar** — Merge remote-tracking branch 'upstream/main' and sync README with upstream
+- ✨ [`66c745c2`](https://github.com/vicharanashala/tenali/commit/66c745c2d85b75d6326f33838a38ac3b690d1923) — **Jatin Kumar** — unify Understanding the Point 13-question linear flow and remove pre-selected answers
     - 📁 **3 files:** `client/src/modules/LinearAlgebra/LinearAlgebraModule.css` `+522 −421`, `client/src/modules/LinearAlgebra/LinearAlgebraModule.jsx` `+1331 −1054`, `client/src/modules/LinearAlgebra/questions.js` `+173 −291`
     - 📊 **`+2026 −1766`** · 3 files
 
 #### 📅 2026-09-17  <sub>(4 commits)</sub>
 
-- ✨ [`57512ba3`](https://github.com/Jatin-nicon/tenali/commit/57512ba3e2a94ca8f3b57d9152401a4b1406f4c2) — **Jatin Kumar** — add 16 conceptual questions, interactive activities, and typed observation workflows
+- ✨ [`57512ba3`](https://github.com/vicharanashala/tenali/commit/57512ba3e2a94ca8f3b57d9152401a4b1406f4c2) — **Jatin Kumar** — add 16 conceptual questions, interactive activities, and typed observation workflows
     - 📁 **3 files:** `client/src/modules/LinearAlgebra/LinearAlgebraModule.css` `+392 −0`, `client/src/modules/LinearAlgebra/LinearAlgebraModule.jsx` `+1119 −328`, `client/src/modules/LinearAlgebra/questions.js` `+311 −87`
     - 📊 **`+1822 −415`** · 3 files
-- ✨ [`f50a6863`](https://github.com/Jatin-nicon/tenali/commit/f50a68635485cbbd7c42d3c5ea5beeb29098452c) — **Jatin Kumar** — create new LinearAlgebra studio module with visual vector canvas and question runner
+- ✨ [`f50a6863`](https://github.com/vicharanashala/tenali/commit/f50a68635485cbbd7c42d3c5ea5beeb29098452c) — **Jatin Kumar** — create new LinearAlgebra studio module with visual vector canvas and question runner
     - 📁 **6 files:** `client/src/App.jsx` `+12 −1`, `client/src/features/tiles.js` `+1 −0`, `client/src/modules/LinearAlgebra/LinearAlgebraModule.css` `+418 −0`, `client/src/modules/LinearAlgebra/LinearAlgebraModule.jsx` `+561 −0`, `client/src/modules/LinearAlgebra/index.js` `+3 −0`, `client/src/modules/LinearAlgebra/questions.js` `+114 −0`
     - 📊 **`+1109 −1`** · 6 files
-- 📌 [`e06f57a6`](https://github.com/Jatin-nicon/tenali/commit/e06f57a652f43ce74462399f2f4a35d95b407172) — **Jatin Kumar** — Merge remote-tracking branch 'upstream/main' and sync contributor docs
-- 🐛 [`0fcdf9af`](https://github.com/Jatin-nicon/tenali/commit/0fcdf9af22b1f5a187be0075d7c964ef628b7696) — **Jatin Kumar** — remove color mixing module and clean up kernel navigation
+- 📌 [`e06f57a6`](https://github.com/vicharanashala/tenali/commit/e06f57a652f43ce74462399f2f4a35d95b407172) — **Jatin Kumar** — Merge remote-tracking branch 'upstream/main' and sync contributor docs
+- 🐛 [`0fcdf9af`](https://github.com/vicharanashala/tenali/commit/0fcdf9af22b1f5a187be0075d7c964ef628b7696) — **Jatin Kumar** — remove color mixing module and clean up kernel navigation
     - 📁 **6 files:** `client/src/App.jsx` `+2 −15`, `client/src/features/tiles.js` `+0 −1`, `client/src/modules/KernelPlayground/KernelPlayground.jsx` `+14 −18`, `client/src/modules/PaintMixingPlayground/PaintMixingPlayground.css` `+0 −759`, `client/src/modules/PaintMixingPlayground/PaintMixingPlayground.jsx` `+0 −578`, `client/src/modules/PaintMixingPlayground/index.js` `+0 −2`
     - 📊 **`+16 −1373`** · 6 files
 
 #### 📅 2026-09-16  <sub>(3 commits)</sub>
 
-- 🐛 [`df7b7b10`](https://github.com/Jatin-nicon/tenali/commit/df7b7b1061b66eb9b77d1c5b4c8a2d3f5ec2bd7b) — **Jatin Kumar** — integrate Paint Mixer and Zero Balance as native dashboard modules and restore pristine UI
+- 🐛 [`df7b7b10`](https://github.com/vicharanashala/tenali/commit/df7b7b1061b66eb9b77d1c5b4c8a2d3f5ec2bd7b) — **Jatin Kumar** — integrate Paint Mixer and Zero Balance as native dashboard modules and restore pristine UI
     - 📁 **3 files:** `client/src/App.jsx` `+24 −1`, `client/src/features/tiles.js` `+2 −0`, `client/src/main.jsx` `+2 −122`
     - 📊 **`+28 −123`** · 3 files
-- 📌 [`b024b166`](https://github.com/Jatin-nicon/tenali/commit/b024b166ec63c53c8ee45a9352b31afb61f7820a) — **Jatin Kumar** — Merge remote-tracking branch 'upstream/main' and resolve App.jsx tiles conflict
-- 📌 [`fd148133`](https://github.com/Jatin-nicon/tenali/commit/fd148133c70561df066746822b98c462b1e7d796) — **jgupta05072003-code** — 🔀 PR [#307](https://github.com/Jatin-nicon/tenali/pull/307) from `sharadvc` — cursor/fix-utf16-hint-modal-276-1f13
+- 📌 [`b024b166`](https://github.com/vicharanashala/tenali/commit/b024b166ec63c53c8ee45a9352b31afb61f7820a) — **Jatin Kumar** — Merge remote-tracking branch 'upstream/main' and resolve App.jsx tiles conflict
+- 📌 [`fd148133`](https://github.com/vicharanashala/tenali/commit/fd148133c70561df066746822b98c462b1e7d796) — **jgupta05072003-code** — 🔀 PR [#307](https://github.com/vicharanashala/tenali/pull/307) from `sharadvc` — cursor/fix-utf16-hint-modal-276-1f13
 
 #### 📅 2026-09-15  <sub>(17 commits)</sub>
 
-- 📌 [`749cde07`](https://github.com/Jatin-nicon/tenali/commit/749cde07749ee3b0956b4bf327016a699da7a606) — **jgupta05072003-code** — 🔀 PR [#319](https://github.com/Jatin-nicon/tenali/pull/319) from `vicharanashala` — fix/stale-check-mergeable-null
-- 🐛 [`b2a9a5aa`](https://github.com/Jatin-nicon/tenali/commit/b2a9a5aa252fe64b78835553c7fa44e7d68df84a) — **JINAL GUPTA** — don't silently treat unresolved mergeable status as no-conflict
+- 📌 [`749cde07`](https://github.com/vicharanashala/tenali/commit/749cde07749ee3b0956b4bf327016a699da7a606) — **jgupta05072003-code** — 🔀 PR [#319](https://github.com/vicharanashala/tenali/pull/319) from `vicharanashala` — fix/stale-check-mergeable-null
+- 🐛 [`b2a9a5aa`](https://github.com/vicharanashala/tenali/commit/b2a9a5aa252fe64b78835553c7fa44e7d68df84a) — **JINAL GUPTA** — don't silently treat unresolved mergeable status as no-conflict
     - 📁 **1 file:** `.github/scripts/parikshak-stale-check.js` `+25 −4`
     - 📊 **`+25 −4`** · 1 file
-- 📌 [`dac89c14`](https://github.com/Jatin-nicon/tenali/commit/dac89c143775f12eb4cbbe06159ebc11cee5f2e1) — **jgupta05072003-code** — 🔀 PR [#318](https://github.com/Jatin-nicon/tenali/pull/318) from `vicharanashala` — feat/pr-gate-check-bot
-- ✨ [`e9afa0f8`](https://github.com/Jatin-nicon/tenali/commit/e9afa0f88f605a56a5c7f9794790761ae03336f0) — **JINAL GUPTA** — detailed, per-check logging in the Actions run for both workflows
+- 📌 [`dac89c14`](https://github.com/vicharanashala/tenali/commit/dac89c143775f12eb4cbbe06159ebc11cee5f2e1) — **jgupta05072003-code** — 🔀 PR [#318](https://github.com/vicharanashala/tenali/pull/318) from `vicharanashala` — feat/pr-gate-check-bot
+- ✨ [`e9afa0f8`](https://github.com/vicharanashala/tenali/commit/e9afa0f88f605a56a5c7f9794790761ae03336f0) — **JINAL GUPTA** — detailed, per-check logging in the Actions run for both workflows
     - 📁 **2 files:** `.github/scripts/parikshak-stale-check.js` `+26 −11`, `.github/scripts/pr-gate-check.js` `+23 −1`
     - 📊 **`+49 −12`** · 2 files
-- 📌 [`35864bcf`](https://github.com/Jatin-nicon/tenali/commit/35864bcf09bbdbcf71338e45c8cee94bb751bafd) — **jgupta05072003-code** — 🔀 PR [#317](https://github.com/Jatin-nicon/tenali/pull/317) from `vicharanashala` — feat/pr-gate-check-bot
-- ✨ [`dd494109`](https://github.com/Jatin-nicon/tenali/commit/dd4941094f726a061c02c0b71527f1f960057504) — **JINAL GUPTA** — log a per-PR summary line on every stale-check run
+- 📌 [`35864bcf`](https://github.com/vicharanashala/tenali/commit/35864bcf09bbdbcf71338e45c8cee94bb751bafd) — **jgupta05072003-code** — 🔀 PR [#317](https://github.com/vicharanashala/tenali/pull/317) from `vicharanashala` — feat/pr-gate-check-bot
+- ✨ [`dd494109`](https://github.com/vicharanashala/tenali/commit/dd4941094f726a061c02c0b71527f1f960057504) — **JINAL GUPTA** — log a per-PR summary line on every stale-check run
     - 📁 **1 file:** `.github/scripts/parikshak-stale-check.js` `+28 −2`
     - 📊 **`+28 −2`** · 1 file
-- ✨ [`50acba6e`](https://github.com/Jatin-nicon/tenali/commit/50acba6e65297cc619fee7668758c8caf9766fa5) — **JINAL GUPTA** — allow manual testing of pr-gate-check via workflow_dispatch
+- ✨ [`50acba6e`](https://github.com/vicharanashala/tenali/commit/50acba6e65297cc619fee7668758c8caf9766fa5) — **JINAL GUPTA** — allow manual testing of pr-gate-check via workflow_dispatch
     - 📁 **2 files:** `.github/scripts/pr-gate-check.js` `+14 −2`, `.github/workflows/pr-gate-check.yml` `+5 −0`
     - 📊 **`+19 −2`** · 2 files
-- 📌 [`4cb4a6f9`](https://github.com/Jatin-nicon/tenali/commit/4cb4a6f9323d11397b6d8650bab1ea76fd89b576) — **jgupta05072003-code** — 🔀 PR [#316](https://github.com/Jatin-nicon/tenali/pull/316) from `vicharanashala` — feat/pr-gate-check-bot
-- 📌 [`f13c6fa2`](https://github.com/Jatin-nicon/tenali/commit/f13c6fa2b17b9c3bed1e0a8cf12f0dd36f96cd0b) — **jgupta05072003-code** — 🔀 PR [#315](https://github.com/Jatin-nicon/tenali/pull/315) from `vicharanashala` — docs/pr-sop-rules-252
-- ✨ [`478929d9`](https://github.com/Jatin-nicon/tenali/commit/478929d9a8f9ab6f3c090a5dbdaa136ebab7fd0e) — **JINAL GUPTA** — add Parikshak's 48-hour stale-PR auto-close job
+- 📌 [`4cb4a6f9`](https://github.com/vicharanashala/tenali/commit/4cb4a6f9323d11397b6d8650bab1ea76fd89b576) — **jgupta05072003-code** — 🔀 PR [#316](https://github.com/vicharanashala/tenali/pull/316) from `vicharanashala` — feat/pr-gate-check-bot
+- 📌 [`f13c6fa2`](https://github.com/vicharanashala/tenali/commit/f13c6fa2b17b9c3bed1e0a8cf12f0dd36f96cd0b) — **jgupta05072003-code** — 🔀 PR [#315](https://github.com/vicharanashala/tenali/pull/315) from `vicharanashala` — docs/pr-sop-rules-252
+- ✨ [`478929d9`](https://github.com/vicharanashala/tenali/commit/478929d9a8f9ab6f3c090a5dbdaa136ebab7fd0e) — **JINAL GUPTA** — add Parikshak's 48-hour stale-PR auto-close job
     - 📁 **3 files:** `.github/scripts/parikshak-stale-check.js` `+135 −0`, `.github/scripts/pr-gate-check.js` `+8 −5`, `.github/workflows/parikshak-stale-check.yml` `+31 −0`
     - 📊 **`+174 −5`** · 3 files
-- 📝 [`07be87fe`](https://github.com/Jatin-nicon/tenali/commit/07be87fe1c3ea7933ff3fe5ed7b394ec14dec8de) — **JINAL GUPTA** — rename the bot to Parikshak
+- 📝 [`07be87fe`](https://github.com/vicharanashala/tenali/commit/07be87fe1c3ea7933ff3fe5ed7b394ec14dec8de) — **JINAL GUPTA** — rename the bot to Parikshak
     - 📁 **2 files:** `.github/scripts/pr-gate-check.js` `+7 −7`, `.github/workflows/pr-gate-check.yml` `+1 −1`
     - 📊 **`+8 −8`** · 2 files
-- 📝 [`6b162705`](https://github.com/Jatin-nicon/tenali/commit/6b162705a6b2b7c3c11d5bdc3d6d84c934fd343b) — **JINAL GUPTA** — name the bot Sipmap
+- 📝 [`6b162705`](https://github.com/vicharanashala/tenali/commit/6b162705a6b2b7c3c11d5bdc3d6d84c934fd343b) — **JINAL GUPTA** — name the bot Sipmap
     - 📁 **2 files:** `.github/scripts/pr-gate-check.js` `+7 −7`, `.github/workflows/pr-gate-check.yml` `+1 −1`
     - 📊 **`+8 −8`** · 2 files
-- ✨ [`30382e63`](https://github.com/Jatin-nicon/tenali/commit/30382e63fd3ec1b3c21908e16a201f3d0ccb2ee5) — **JINAL GUPTA** — add comment-only PR gate check bot (v1, deterministic checks only)
+- ✨ [`30382e63`](https://github.com/vicharanashala/tenali/commit/30382e63fd3ec1b3c21908e16a201f3d0ccb2ee5) — **JINAL GUPTA** — add comment-only PR gate check bot (v1, deterministic checks only)
     - 📁 **2 files:** `.github/scripts/pr-gate-check.js` `+144 −0`, `.github/workflows/pr-gate-check.yml` `+36 −0`
     - 📊 **`+180 −0`** · 2 files
-- 📝 [`a271ec6b`](https://github.com/Jatin-nicon/tenali/commit/a271ec6b99880b9d973477d06611bedc19e0f40c) — **JINAL GUPTA** — state the agreed contribution rules in CONTRIBUTING.md and README
+- 📝 [`a271ec6b`](https://github.com/vicharanashala/tenali/commit/a271ec6b99880b9d973477d06611bedc19e0f40c) — **JINAL GUPTA** — state the agreed contribution rules in CONTRIBUTING.md and README
     - 📁 **2 files:** `CONTRIBUTING.md` `+6 −3`, `README.md` `+6 −0`
     - 📊 **`+12 −3`** · 2 files
-- 📌 [`4d93328a`](https://github.com/Jatin-nicon/tenali/commit/4d93328abeac5ca3aca3f971edc3b8f509e30afd) — **jgupta05072003-code** — 🔀 PR [#314](https://github.com/Jatin-nicon/tenali/pull/314) from `vicharanashala` — docs/readme-contributing-accuracy-refresh
-- 📝 [`44efdba8`](https://github.com/Jatin-nicon/tenali/commit/44efdba88f61347c8c342f9727e973a2556fc646) — **JINAL GUPTA** — state the modular-file requirement explicitly, not just for puzzles
+- 📌 [`4d93328a`](https://github.com/vicharanashala/tenali/commit/4d93328abeac5ca3aca3f971edc3b8f509e30afd) — **jgupta05072003-code** — 🔀 PR [#314](https://github.com/vicharanashala/tenali/pull/314) from `vicharanashala` — docs/readme-contributing-accuracy-refresh
+- 📝 [`44efdba8`](https://github.com/vicharanashala/tenali/commit/44efdba88f61347c8c342f9727e973a2556fc646) — **JINAL GUPTA** — state the modular-file requirement explicitly, not just for puzzles
     - 📁 **1 file:** `README.md` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📝 [`57b55a53`](https://github.com/Jatin-nicon/tenali/commit/57b55a537c0d739a48619470b8617c39bfa40e44) — **JINAL GUPTA** — fix README/CONTRIBUTING inaccuracies and stale puzzle counts
+- 📝 [`57b55a53`](https://github.com/vicharanashala/tenali/commit/57b55a537c0d739a48619470b8617c39bfa40e44) — **JINAL GUPTA** — fix README/CONTRIBUTING inaccuracies and stale puzzle counts
     - 📁 **3 files:** `CONTRIBUTING.md` `+9 −7`, `README.md` `+27 −30`, `scripts/update-readme-contributors.js` `+1 −1`
     - 📊 **`+37 −38`** · 3 files
 
 #### 📅 2026-09-13  <sub>(1 commit)</sub>
 
-- 📌 [`350ccfaa`](https://github.com/Jatin-nicon/tenali/commit/350ccfaa55dcc375db0e22bb86138d0dda0afb46) — **Sharad** — Remove dead UTF-16 currentHintModal.jsx blocking ESLint
+- 📌 [`350ccfaa`](https://github.com/vicharanashala/tenali/commit/350ccfaa55dcc375db0e22bb86138d0dda0afb46) — **Sharad** — Remove dead UTF-16 currentHintModal.jsx blocking ESLint
 
 #### 📅 2026-09-12  <sub>(17 commits)</sub>
 
-- ✨ [`fd616cce`](https://github.com/Jatin-nicon/tenali/commit/fd616cce7afde2b6010c71ca1b9e401cd4207697) — **Jatin Kumar** — add Paint Mixing and Zero Balance (Kernel) GeoGebra interactive studios
-    - 📁 **12 files:** `client/src/App.jsx` `+5 −0`, `client/src/GeoGebraLabApp.css` `+1334 −0`, `client/src/GeoGebraLabApp.jsx` `+1056 −0`, `client/src/data/geogebraQuestions.js` `+26 −0`, `client/src/data/geogebraValidator.js` `+1613 −0`, `client/src/main.jsx` `+121 −1`, `client/src/modules/KernelPlayground/KernelPlayground.css` `+971 −0`, `client/src/modules/KernelPlayground/KernelPlayground.jsx` `+1102 −0` *(+4 more in [`fd616cce`](https://github.com/Jatin-nicon/tenali/commit/fd616cce7afde2b6010c71ca1b9e401cd4207697))*
+- ✨ [`fd616cce`](https://github.com/vicharanashala/tenali/commit/fd616cce7afde2b6010c71ca1b9e401cd4207697) — **Jatin Kumar** — add Paint Mixing and Zero Balance (Kernel) GeoGebra interactive studios
+    - 📁 **12 files:** `client/src/App.jsx` `+5 −0`, `client/src/GeoGebraLabApp.css` `+1334 −0`, `client/src/GeoGebraLabApp.jsx` `+1056 −0`, `client/src/data/geogebraQuestions.js` `+26 −0`, `client/src/data/geogebraValidator.js` `+1613 −0`, `client/src/main.jsx` `+121 −1`, `client/src/modules/KernelPlayground/KernelPlayground.css` `+971 −0`, `client/src/modules/KernelPlayground/KernelPlayground.jsx` `+1102 −0` *(+4 more in [`fd616cce`](https://github.com/vicharanashala/tenali/commit/fd616cce7afde2b6010c71ca1b9e401cd4207697))*
     - 📊 **`+7569 −1`** · 12 files
-- 📌 [`e9f69cf5`](https://github.com/Jatin-nicon/tenali/commit/e9f69cf5555a30545a89def7dd76f75ef379b47d) — **jgupta05072003-code** — 🔀 PR [#297](https://github.com/Jatin-nicon/tenali/pull/297) from `vicharanashala` — ci/client-lint-non-blocking
-- 📌 [`79b316be`](https://github.com/Jatin-nicon/tenali/commit/79b316be1905dd568d0f6e5cf569257740df52c4) — **jgupta05072003-code** — 🔀 PR [#175](https://github.com/Jatin-nicon/tenali/pull/175) from `LalithaSriHarshitha` — rfc/weekly-mastery-spaced-review
-- 📌 [`eedac5b5`](https://github.com/Jatin-nicon/tenali/commit/eedac5b5b8dc4fc9b09fb9ab674c7245068ea7bf) — **jgupta05072003-code** — 🔀 PR [#253](https://github.com/Jatin-nicon/tenali/pull/253) from `DYNOSuprovo` — refactor/remove-global-generate-explanation
-- 👷 [`88b3d695`](https://github.com/Jatin-nicon/tenali/commit/88b3d6950c3647e66574d72277488e83ddb0bddf) — **Jinal Gupta** — make the client lint job non-blocking until App.jsx is split
+- 📌 [`e9f69cf5`](https://github.com/vicharanashala/tenali/commit/e9f69cf5555a30545a89def7dd76f75ef379b47d) — **jgupta05072003-code** — 🔀 PR [#297](https://github.com/vicharanashala/tenali/pull/297) from `vicharanashala` — ci/client-lint-non-blocking
+- 📌 [`79b316be`](https://github.com/vicharanashala/tenali/commit/79b316be1905dd568d0f6e5cf569257740df52c4) — **jgupta05072003-code** — 🔀 PR [#175](https://github.com/vicharanashala/tenali/pull/175) from `LalithaSriHarshitha` — rfc/weekly-mastery-spaced-review
+- 📌 [`eedac5b5`](https://github.com/vicharanashala/tenali/commit/eedac5b5b8dc4fc9b09fb9ab674c7245068ea7bf) — **jgupta05072003-code** — 🔀 PR [#253](https://github.com/vicharanashala/tenali/pull/253) from `DYNOSuprovo` — refactor/remove-global-generate-explanation
+- 👷 [`88b3d695`](https://github.com/vicharanashala/tenali/commit/88b3d6950c3647e66574d72277488e83ddb0bddf) — **Jinal Gupta** — make the client lint job non-blocking until App.jsx is split
     - 📁 **1 file:** `.github/workflows/test.yml` `+14 −0`
     - 📊 **`+14 −0`** · 1 file
-- 📌 [`7b731b0e`](https://github.com/Jatin-nicon/tenali/commit/7b731b0efbef80ce0969ca945695daca4bac713f) — **jgupta05072003-code** — 🔀 PR [#281](https://github.com/Jatin-nicon/tenali/pull/281) from `sharadvc` — cursor/fix-circleth-api-alignment-fbd6
-- 📌 [`b643bc63`](https://github.com/Jatin-nicon/tenali/commit/b643bc6336c2e619a7d5d4c0555be113d53cde1e) — **jgupta05072003-code** — 🔀 PR [#280](https://github.com/Jatin-nicon/tenali/pull/280) from `sharadvc` — cursor/remove-dead-home-filter-vars-f042
-- 📌 [`695326ed`](https://github.com/Jatin-nicon/tenali/commit/695326ed999ffca979acda2c1d9526ef4374ae5a) — **jgupta05072003-code** — 🔀 PR [#287](https://github.com/Jatin-nicon/tenali/pull/287) from `sharadvc` — cursor/fix-track-progress-mode-d596
-- 📌 [`2858db1d`](https://github.com/Jatin-nicon/tenali/commit/2858db1d8db2d82e914c65ee59384f37936eb2e4) — **jgupta05072003-code** — 🔀 PR [#286](https://github.com/Jatin-nicon/tenali/pull/286) from `sharadvc` — cursor/math-lab-home-tile-c8f4
-- 📌 [`3a911fd7`](https://github.com/Jatin-nicon/tenali/commit/3a911fd718308f9a8126dcca845f9d6f87b80453) — **jgupta05072003-code** — 🔀 PR [#278](https://github.com/Jatin-nicon/tenali/pull/278) from `Nirmal0804` — fix/eslint-quizlayout
-- 📌 [`c90c9b82`](https://github.com/Jatin-nicon/tenali/commit/c90c9b825b622c96cf558f94136538f7aca7f677) — **jgupta05072003-code** — 🔀 PR [#282](https://github.com/Jatin-nicon/tenali/pull/282) from `sharadvc` — cursor/fix-spatial-reasoning-eslint-5e3c
-- 📌 [`85dec1da`](https://github.com/Jatin-nicon/tenali/commit/85dec1daa9aeb2d230327860e617a2664f3964aa) — **jgupta05072003-code** — 🔀 PR [#296](https://github.com/Jatin-nicon/tenali/pull/296) from `vicharanashala` — feat/concept-playgrounds-wiring
-- 👷 [`6e34ff00`](https://github.com/Jatin-nicon/tenali/commit/6e34ff00a986c9e15d841fee0ff99d2c7603a0df) — **Jinal Gupta** — run MongoDB alongside the server contract job
+- 📌 [`7b731b0e`](https://github.com/vicharanashala/tenali/commit/7b731b0efbef80ce0969ca945695daca4bac713f) — **jgupta05072003-code** — 🔀 PR [#281](https://github.com/vicharanashala/tenali/pull/281) from `sharadvc` — cursor/fix-circleth-api-alignment-fbd6
+- 📌 [`b643bc63`](https://github.com/vicharanashala/tenali/commit/b643bc6336c2e619a7d5d4c0555be113d53cde1e) — **jgupta05072003-code** — 🔀 PR [#280](https://github.com/vicharanashala/tenali/pull/280) from `sharadvc` — cursor/remove-dead-home-filter-vars-f042
+- 📌 [`695326ed`](https://github.com/vicharanashala/tenali/commit/695326ed999ffca979acda2c1d9526ef4374ae5a) — **jgupta05072003-code** — 🔀 PR [#287](https://github.com/vicharanashala/tenali/pull/287) from `sharadvc` — cursor/fix-track-progress-mode-d596
+- 📌 [`2858db1d`](https://github.com/vicharanashala/tenali/commit/2858db1d8db2d82e914c65ee59384f37936eb2e4) — **jgupta05072003-code** — 🔀 PR [#286](https://github.com/vicharanashala/tenali/pull/286) from `sharadvc` — cursor/math-lab-home-tile-c8f4
+- 📌 [`3a911fd7`](https://github.com/vicharanashala/tenali/commit/3a911fd718308f9a8126dcca845f9d6f87b80453) — **jgupta05072003-code** — 🔀 PR [#278](https://github.com/vicharanashala/tenali/pull/278) from `Nirmal0804` — fix/eslint-quizlayout
+- 📌 [`c90c9b82`](https://github.com/vicharanashala/tenali/commit/c90c9b825b622c96cf558f94136538f7aca7f677) — **jgupta05072003-code** — 🔀 PR [#282](https://github.com/vicharanashala/tenali/pull/282) from `sharadvc` — cursor/fix-spatial-reasoning-eslint-5e3c
+- 📌 [`85dec1da`](https://github.com/vicharanashala/tenali/commit/85dec1daa9aeb2d230327860e617a2664f3964aa) — **jgupta05072003-code** — 🔀 PR [#296](https://github.com/vicharanashala/tenali/pull/296) from `vicharanashala` — feat/concept-playgrounds-wiring
+- 👷 [`6e34ff00`](https://github.com/vicharanashala/tenali/commit/6e34ff00a986c9e15d841fee0ff99d2c7603a0df) — **Jinal Gupta** — run MongoDB alongside the server contract job
     - 📁 **1 file:** `.github/workflows/test.yml` `+13 −0`
     - 📊 **`+13 −0`** · 1 file
-- ✨ [`eb1152d0`](https://github.com/Jatin-nicon/tenali/commit/eb1152d085ad8a9f5ea45aec37bbb05fa38376ac) — **Jinal Gupta** — wire the 5-stage loop end to end
-    - 📁 **18 files:** `Ideas/ONBOARDING-Arijit-Deb.md` `+1 −1`, `README.md` `+40 −3`, `client/src/App.jsx` `+25 −0`, `client/src/features/tiles.js` `+2 −0`, `client/src/lib/EquationSandboxApp.jsx` `+28 −22`, `client/src/lib/concept/CompletionScreen.jsx` `+37 −11`, `client/src/lib/concept/QFormulaConceptApp.jsx` `+98 −72`, `client/src/lib/concept/conceptApi.js` `+77 −0` *(+10 more in [`eb1152d0`](https://github.com/Jatin-nicon/tenali/commit/eb1152d085ad8a9f5ea45aec37bbb05fa38376ac))*
+- ✨ [`eb1152d0`](https://github.com/vicharanashala/tenali/commit/eb1152d085ad8a9f5ea45aec37bbb05fa38376ac) — **Jinal Gupta** — wire the 5-stage loop end to end
+    - 📁 **18 files:** `Ideas/ONBOARDING-Arijit-Deb.md` `+1 −1`, `README.md` `+40 −3`, `client/src/App.jsx` `+25 −0`, `client/src/features/tiles.js` `+2 −0`, `client/src/lib/EquationSandboxApp.jsx` `+28 −22`, `client/src/lib/concept/CompletionScreen.jsx` `+37 −11`, `client/src/lib/concept/QFormulaConceptApp.jsx` `+98 −72`, `client/src/lib/concept/conceptApi.js` `+77 −0` *(+10 more in [`eb1152d0`](https://github.com/vicharanashala/tenali/commit/eb1152d085ad8a9f5ea45aec37bbb05fa38376ac))*
     - 📊 **`+1199 −305`** · 18 files
-- 📌 [`db10a64f`](https://github.com/Jatin-nicon/tenali/commit/db10a64f8da80a3fefff27b02ade894d39bdca34) — **Nirmal_np** — Fix made on quizlayout
+- 📌 [`db10a64f`](https://github.com/vicharanashala/tenali/commit/db10a64f8da80a3fefff27b02ade894d39bdca34) — **Nirmal_np** — Fix made on quizlayout
     - 📁 **1 file:** `client/src/components/QuizLayout.jsx` `+1 −0`
     - 📊 **`+1 −0`** · 1 file
-- 📌 [`c28ee16a`](https://github.com/Jatin-nicon/tenali/commit/c28ee16a2d46c734704217280d3f3fe35ce0c5ca) — **Cursor Agent** — Wire trackProgress mode to ProgressTrackerApp
+- 📌 [`c28ee16a`](https://github.com/vicharanashala/tenali/commit/c28ee16a2d46c734704217280d3f3fe35ce0c5ca) — **Cursor Agent** — Wire trackProgress mode to ProgressTrackerApp
     - 📁 **1 file:** `client/src/App.jsx` `+1 −5`
     - 📊 **`+1 −5`** · 1 file
-- 📌 [`f1338880`](https://github.com/Jatin-nicon/tenali/commit/f1338880d2c081359427af34eb5dbe191e223d53) — **Cursor Agent** — Add Math Lab tile to home grid under Shape & Space
+- 📌 [`f1338880`](https://github.com/vicharanashala/tenali/commit/f1338880d2c081359427af34eb5dbe191e223d53) — **Cursor Agent** — Add Math Lab tile to home grid under Shape & Space
     - 📁 **1 file:** `client/src/features/tiles.js` `+2 −1`
     - 📊 **`+2 −1`** · 1 file
 
 #### 📅 2026-09-11  <sub>(10 commits)</sub>
 
-- 🐛 [`9519d6f5`](https://github.com/Jatin-nicon/tenali/commit/9519d6f58826b04d1829b21c73a27d12dc0afab1) — **Cursor Agent** — clear ESLint errors in SpatialReasoningMCQ.jsx
+- 🐛 [`9519d6f5`](https://github.com/vicharanashala/tenali/commit/9519d6f58826b04d1829b21c73a27d12dc0afab1) — **Cursor Agent** — clear ESLint errors in SpatialReasoningMCQ.jsx
     - 📁 **1 file:** `client/src/SpatialReasoningMCQ.jsx` `+2 −5`
     - 📊 **`+2 −5`** · 1 file
-- 🐛 [`75996976`](https://github.com/Jatin-nicon/tenali/commit/75996976c6e50a15c2374c42cb8ed34999ef1c7f) — **Cursor Agent** — align circleth tile key with circleth-api route
-    - 📁 **10 files:** `client/src/App.jsx` `+4 −5`, `client/src/lib/misconceptions.js` `+1 −1`, `client/src/lib/prerequisiteGraph.js` `+0 −1`, `client/vite.config.js` `+1 −1`, `graph/path.html` `+1 −1`, `server/explanations.js` `+1 −1`, `server/index.js` `+1 −1`, `server/lil/learning_journey/controllers.js` `+1 −3` *(+2 more in [`75996976`](https://github.com/Jatin-nicon/tenali/commit/75996976c6e50a15c2374c42cb8ed34999ef1c7f))*
+- 🐛 [`75996976`](https://github.com/vicharanashala/tenali/commit/75996976c6e50a15c2374c42cb8ed34999ef1c7f) — **Cursor Agent** — align circleth tile key with circleth-api route
+    - 📁 **10 files:** `client/src/App.jsx` `+4 −5`, `client/src/lib/misconceptions.js` `+1 −1`, `client/src/lib/prerequisiteGraph.js` `+0 −1`, `client/vite.config.js` `+1 −1`, `graph/path.html` `+1 −1`, `server/explanations.js` `+1 −1`, `server/index.js` `+1 −1`, `server/lil/learning_journey/controllers.js` `+1 −3` *(+2 more in [`75996976`](https://github.com/vicharanashala/tenali/commit/75996976c6e50a15c2374c42cb8ed34999ef1c7f))*
     - 📊 **`+12 −16`** · 10 files
-- 📌 [`424f305c`](https://github.com/Jatin-nicon/tenali/commit/424f305cef61b6715d6225b0658539eb1012b2c7) — **Cursor Agent** — Remove dead Home filter variables (fixes #211)
+- 📌 [`424f305c`](https://github.com/vicharanashala/tenali/commit/424f305cef61b6715d6225b0658539eb1012b2c7) — **Cursor Agent** — Remove dead Home filter variables (fixes #211)
     - 📁 **1 file:** `client/src/App.jsx` `+2 −13`
     - 📊 **`+2 −13`** · 1 file
-- 📌 [`3bc1c4fd`](https://github.com/Jatin-nicon/tenali/commit/3bc1c4fda6d4feaf52406c073c6ada39055a1ccd) — **Nirmal_np** — Fix no-unused-vars: render subtitle prop in QuizLayout
+- 📌 [`3bc1c4fd`](https://github.com/vicharanashala/tenali/commit/3bc1c4fda6d4feaf52406c073c6ada39055a1ccd) — **Nirmal_np** — Fix no-unused-vars: render subtitle prop in QuizLayout
     - 📁 **1 file:** `client/src/components/QuizLayout.jsx` `+1 −0`
     - 📊 **`+1 −0`** · 1 file
-- 📌 [`d260a95e`](https://github.com/Jatin-nicon/tenali/commit/d260a95e2809b85bb0c48e3eefaf37d5ee11f8ab) — **jgupta05072003-code** — 🔀 PR [#200](https://github.com/Jatin-nicon/tenali/pull/200) from `vicharanashala` — feat/extract-tiles-registry
-- 📌 [`1e08dc75`](https://github.com/Jatin-nicon/tenali/commit/1e08dc752e959e7e8d32b57ad07a9f00f15a8a28) — **jgupta05072003-code** — 🔀 PR [#254](https://github.com/Jatin-nicon/tenali/pull/254) from `vicharanashala` — fix/lockfile-sync
-- 📌 [`232f33c2`](https://github.com/Jatin-nicon/tenali/commit/232f33c21fb897a7070c3616cef0eb4a27a0ecd9) — **Jinal Gupta** — Resync client and server lockfiles so npm ci works again
+- 📌 [`d260a95e`](https://github.com/vicharanashala/tenali/commit/d260a95e2809b85bb0c48e3eefaf37d5ee11f8ab) — **jgupta05072003-code** — 🔀 PR [#200](https://github.com/vicharanashala/tenali/pull/200) from `vicharanashala` — feat/extract-tiles-registry
+- 📌 [`1e08dc75`](https://github.com/vicharanashala/tenali/commit/1e08dc752e959e7e8d32b57ad07a9f00f15a8a28) — **jgupta05072003-code** — 🔀 PR [#254](https://github.com/vicharanashala/tenali/pull/254) from `vicharanashala` — fix/lockfile-sync
+- 📌 [`232f33c2`](https://github.com/vicharanashala/tenali/commit/232f33c21fb897a7070c3616cef0eb4a27a0ecd9) — **Jinal Gupta** — Resync client and server lockfiles so npm ci works again
     - 📁 **2 files:** `client/package-lock.json` `+64 −20`, `server/package-lock.json` `+17 −43`
     - 📊 **`+81 −63`** · 2 files
-- ♻️ [`528162a6`](https://github.com/Jatin-nicon/tenali/commit/528162a68fa8809d3efe565e7d15d9a689a857b3) — **DYNOSuprovo** — remove global.generateExplanation assignment (#251)
+- ♻️ [`528162a6`](https://github.com/vicharanashala/tenali/commit/528162a68fa8809d3efe565e7d15d9a689a857b3) — **DYNOSuprovo** — remove global.generateExplanation assignment (#251)
     - 📁 **3 files:** `server/hints/__tests__/hintsExplanation.test.js` `+46 −0`, `server/hints/index.js` `+5 −5`, `server/index.js` `+2 −4`
     - 📊 **`+53 −9`** · 3 files
-- 📌 [`4882bd49`](https://github.com/Jatin-nicon/tenali/commit/4882bd491358a58b09728d12edc36f7be63c420f) — **Jinal Gupta** — Complete the tile registry: hamburger entries, categories, foldInto
+- 📌 [`4882bd49`](https://github.com/vicharanashala/tenali/commit/4882bd491358a58b09728d12edc36f7be63c420f) — **Jinal Gupta** — Complete the tile registry: hamburger entries, categories, foldInto
     - 📁 **2 files:** `client/src/App.jsx` `+4 −12`, `client/src/features/tiles.js` `+110 −92`
     - 📊 **`+114 −104`** · 2 files
-- 📌 [`32e7af6d`](https://github.com/Jatin-nicon/tenali/commit/32e7af6da25a339bfbc8c23c18e9368385fc256a) — **Jinal Gupta** — Extract the home-screen tile registry out of App.jsx
+- 📌 [`32e7af6d`](https://github.com/vicharanashala/tenali/commit/32e7af6da25a339bfbc8c23c18e9368385fc256a) — **Jinal Gupta** — Extract the home-screen tile registry out of App.jsx
     - 📁 **2 files:** `client/src/App.jsx` `+2 −98`, `client/src/features/tiles.js` `+110 −0`
     - 📊 **`+112 −98`** · 2 files
 
 #### 📅 2026-09-10  <sub>(4 commits)</sub>
 
-- 📌 [`30756d70`](https://github.com/Jatin-nicon/tenali/commit/30756d700626c7aaf80ceff33a6e011111611ddd) — **jgupta05072003-code** — 🔀 PR [#104](https://github.com/Jatin-nicon/tenali/pull/104) from `Vaibhav-sa30` — feature/docs
-- 📌 [`f3e2df4a`](https://github.com/Jatin-nicon/tenali/commit/f3e2df4a45fc8f4f0715e5a42c057ee18c0bc16e) — **jgupta05072003-code** — 🔀 PR [#183](https://github.com/Jatin-nicon/tenali/pull/183) from `Code-Zero07` — docs/onboarding-arijit
-- 📌 [`b3ad3119`](https://github.com/Jatin-nicon/tenali/commit/b3ad31194a23effab3080226333107f89021e96e) — **Krishna Gelra** — 🔀 PR [#187](https://github.com/Jatin-nicon/tenali/pull/187) from `lucky-pluton` — fix/185c-question-punctuation
-- 📌 [`b3f85b36`](https://github.com/Jatin-nicon/tenali/commit/b3f85b36c18ebc15c2f697076e50ba2e7d2972ba) — **Krishna Gelra** — 🔀 PR [#186](https://github.com/Jatin-nicon/tenali/pull/186) from `lucky-pluton` — fix/180-coordinate-convention
+- 📌 [`30756d70`](https://github.com/vicharanashala/tenali/commit/30756d700626c7aaf80ceff33a6e011111611ddd) — **jgupta05072003-code** — 🔀 PR [#104](https://github.com/vicharanashala/tenali/pull/104) from `Vaibhav-sa30` — feature/docs
+- 📌 [`f3e2df4a`](https://github.com/vicharanashala/tenali/commit/f3e2df4a45fc8f4f0715e5a42c057ee18c0bc16e) — **jgupta05072003-code** — 🔀 PR [#183](https://github.com/vicharanashala/tenali/pull/183) from `Code-Zero07` — docs/onboarding-arijit
+- 📌 [`b3ad3119`](https://github.com/vicharanashala/tenali/commit/b3ad31194a23effab3080226333107f89021e96e) — **Krishna Gelra** — 🔀 PR [#187](https://github.com/vicharanashala/tenali/pull/187) from `lucky-pluton` — fix/185c-question-punctuation
+- 📌 [`b3f85b36`](https://github.com/vicharanashala/tenali/commit/b3f85b36c18ebc15c2f697076e50ba2e7d2972ba) — **Krishna Gelra** — 🔀 PR [#186](https://github.com/vicharanashala/tenali/pull/186) from `lucky-pluton` — fix/180-coordinate-convention
 
 #### 📅 2026-09-08  <sub>(2 commits)</sub>
 
-- 📌 [`d0ab1849`](https://github.com/Jatin-nicon/tenali/commit/d0ab18495da59a63c8ce2d54fb755a646900c0dc) — **Disha Singh** — Fix duplicate punctuation in addition word problems
+- 📌 [`d0ab1849`](https://github.com/vicharanashala/tenali/commit/d0ab18495da59a63c8ce2d54fb755a646900c0dc) — **Disha Singh** — Fix duplicate punctuation in addition word problems
     - 📁 **1 file:** `client/src/App.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`3d6ca540`](https://github.com/Jatin-nicon/tenali/commit/3d6ca5403ca37d705f86c66379258656e2c136b1) — **Disha Singh** — Fix coordinate convention in Piggy Bank Detectives
+- 📌 [`3d6ca540`](https://github.com/vicharanashala/tenali/commit/3d6ca5403ca37d705f86c66379258656e2c136b1) — **Disha Singh** — Fix coordinate convention in Piggy Bank Detectives
     - 📁 **1 file:** `client/src/LinearAlgebraApp.jsx` `+5 −5`
     - 📊 **`+5 −5`** · 1 file
 
 #### 📅 2026-09-07  <sub>(8 commits)</sub>
 
-- 📌 [`57c0f575`](https://github.com/Jatin-nicon/tenali/commit/57c0f5759bb05430d99eb979ac6b5f35122043ea) — **jgupta05072003-code** — 🔀 PR [#173](https://github.com/Jatin-nicon/tenali/pull/173) from `tanvishdesai` — I21-T142/backend-modularization
-- 🐛 [`073effda`](https://github.com/Jatin-nicon/tenali/commit/073effda7f63e675802aef8a1b81bf1d40bbb431) — **JINAL GUPTA** — repair remaining cp1252 mojibake in glossaryTerms.json
+- 📌 [`57c0f575`](https://github.com/vicharanashala/tenali/commit/57c0f5759bb05430d99eb979ac6b5f35122043ea) — **jgupta05072003-code** — 🔀 PR [#173](https://github.com/vicharanashala/tenali/pull/173) from `tanvishdesai` — I21-T142/backend-modularization
+- 🐛 [`073effda`](https://github.com/vicharanashala/tenali/commit/073effda7f63e675802aef8a1b81bf1d40bbb431) — **JINAL GUPTA** — repair remaining cp1252 mojibake in glossaryTerms.json
     - 📁 **1 file:** `client/src/data/glossaryTerms.json` `+12 −12`
     - 📊 **`+12 −12`** · 1 file
-- 📌 [`f82ddfd6`](https://github.com/Jatin-nicon/tenali/commit/f82ddfd6408b1a1981f55df7ea003f90403652ec) — **jgupta05072003-code** — 🔀 PR [#164](https://github.com/Jatin-nicon/tenali/pull/164) from `AYUSHKOCHHAR` — main
-- 📌 [`661ab159`](https://github.com/Jatin-nicon/tenali/commit/661ab159fd20164e8b2b0e9cdf5bd3c745559cb2) — **jgupta05072003-code** — 🔀 PR [#159](https://github.com/Jatin-nicon/tenali/pull/159) from `Pradeep-Gupta7` — main
-- 📌 [`a27563fc`](https://github.com/Jatin-nicon/tenali/commit/a27563fc3b844facf225600fa291bf878f836c2a) — **jgupta05072003-code** — 🔀 PR [#138](https://github.com/Jatin-nicon/tenali/pull/138) from `Athiraa1804` — feature/domain-learning-flow
-- 🐛 [`207075bd`](https://github.com/Jatin-nicon/tenali/commit/207075bd1238afbde2a665ad2351b27934be0ab6) — **Athira** — restore interactive angles learning flow
+- 📌 [`f82ddfd6`](https://github.com/vicharanashala/tenali/commit/f82ddfd6408b1a1981f55df7ea003f90403652ec) — **jgupta05072003-code** — 🔀 PR [#164](https://github.com/vicharanashala/tenali/pull/164) from `AYUSHKOCHHAR` — main
+- 📌 [`661ab159`](https://github.com/vicharanashala/tenali/commit/661ab159fd20164e8b2b0e9cdf5bd3c745559cb2) — **jgupta05072003-code** — 🔀 PR [#159](https://github.com/vicharanashala/tenali/pull/159) from `Pradeep-Gupta7` — main
+- 📌 [`a27563fc`](https://github.com/vicharanashala/tenali/commit/a27563fc3b844facf225600fa291bf878f836c2a) — **jgupta05072003-code** — 🔀 PR [#138](https://github.com/vicharanashala/tenali/pull/138) from `Athiraa1804` — feature/domain-learning-flow
+- 🐛 [`207075bd`](https://github.com/vicharanashala/tenali/commit/207075bd1238afbde2a665ad2351b27934be0ab6) — **Athira** — restore interactive angles learning flow
     - 📁 **1 file:** `client/src/App.jsx` `+14 −0`
     - 📊 **`+14 −0`** · 1 file
-- 📌 [`8cb1e2e4`](https://github.com/Jatin-nicon/tenali/commit/8cb1e2e47868875938d601ba63501d56ac6d5283) — **jgupta05072003-code** — 🔀 PR [#69](https://github.com/Jatin-nicon/tenali/pull/69) from `priyanshu7725` — feature/monster-misconceptions
-- 📌 [`fcd74618`](https://github.com/Jatin-nicon/tenali/commit/fcd746185d0e98b8045a238c08ecf014c186fbf9) — **jgupta05072003-code** — 🔀 PR [#131](https://github.com/Jatin-nicon/tenali/pull/131) from `Krishna009-pro` — feat/water-jug-and-equation-crafting-labs
+- 📌 [`8cb1e2e4`](https://github.com/vicharanashala/tenali/commit/8cb1e2e47868875938d601ba63501d56ac6d5283) — **jgupta05072003-code** — 🔀 PR [#69](https://github.com/vicharanashala/tenali/pull/69) from `priyanshu7725` — feature/monster-misconceptions
+- 📌 [`fcd74618`](https://github.com/vicharanashala/tenali/commit/fcd746185d0e98b8045a238c08ecf014c186fbf9) — **jgupta05072003-code** — 🔀 PR [#131](https://github.com/vicharanashala/tenali/pull/131) from `Krishna009-pro` — feat/water-jug-and-equation-crafting-labs
 
 #### 📅 2026-09-06  <sub>(6 commits)</sub>
 
-- 🐛 [`41277fe9`](https://github.com/Jatin-nicon/tenali/commit/41277fe949d0a2cd3ce312929a4394df47c763e4) — **tanvishdesai** — repair cp1252 mojibake in 4 router files, add encoding guard to contract tests
+- 🐛 [`41277fe9`](https://github.com/vicharanashala/tenali/commit/41277fe949d0a2cd3ce312929a4394df47c763e4) — **tanvishdesai** — repair cp1252 mojibake in 4 router files, add encoding guard to contract tests
     - 📁 **5 files:** `server/index.js` `+97 −97`, `server/routes/__tests__/apiContract.test.js` `+2 −0`, `server/routes/la-mission-quiz.js` `+134 −134`, `server/routes/misc.js` `+4 −4`, `server/routes/visual-math.js` `+12 −12`
     - 📊 **`+249 −247`** · 5 files
-- 🐛 [`6408d499`](https://github.com/Jatin-nicon/tenali/commit/6408d49919e3c2ebd07361fa0beabfd25e1ec617) — **Athira** — restore angles learning components
+- 🐛 [`6408d499`](https://github.com/vicharanashala/tenali/commit/6408d49919e3c2ebd07361fa0beabfd25e1ec617) — **Athira** — restore angles learning components
     - 📁 **6 files:** `client/src/components/learning/AngleChallenge.jsx` `+163 −0`, `client/src/components/learning/AngleDetective.jsx` `+89 −0`, `client/src/components/learning/AnglesLearnPage.jsx` `+234 −0`, `client/src/components/learning/DragAngle.jsx` `+152 −0`, `client/src/components/learning/angles-learn.css` `+398 −0`, `client/src/data/learnContent/gst.json` `+0 −32`
     - 📊 **`+1036 −32`** · 6 files
-- 🐛 [`84d3dba7`](https://github.com/Jatin-nicon/tenali/commit/84d3dba7293536b28adf543cf4f5bde53156c654) — **Athira** — address PR review feedback
+- 🐛 [`84d3dba7`](https://github.com/vicharanashala/tenali/commit/84d3dba7293536b28adf543cf4f5bde53156c654) — **Athira** — address PR review feedback
     - 📁 **4 files:** `client/src/App.css` `+5 −6`, `client/src/App.jsx` `+1 −0`, `client/src/components/learning/FractionsLearnPage.jsx` `+1 −0`, `client/src/components/learning/GSTLearnPage.jsx` `+1 −0`
     - 📊 **`+8 −6`** · 4 files
-- 🐛 [`fe71b2fc`](https://github.com/Jatin-nicon/tenali/commit/fe71b2fcf9ac6ccc8f52d85bff0a580d9b7d4c99) — **Athira** — enforce learn test gateway for direct angles URLs
+- 🐛 [`fe71b2fc`](https://github.com/vicharanashala/tenali/commit/fe71b2fcf9ac6ccc8f52d85bff0a580d9b7d4c99) — **Athira** — enforce learn test gateway for direct angles URLs
     - 📁 **1 file:** `client/src/App.jsx` `+8 −1`
     - 📊 **`+8 −1`** · 1 file
-- 🐛 [`3e2e4649`](https://github.com/Jatin-nicon/tenali/commit/3e2e4649fedc7d5af04006a320e09ce4d97c42a1) — **Athira** — render learning visuals from content blocks
+- 🐛 [`3e2e4649`](https://github.com/vicharanashala/tenali/commit/3e2e4649fedc7d5af04006a320e09ce4d97c42a1) — **Athira** — render learning visuals from content blocks
     - 📁 **1 file:** `client/src/App.jsx` `+3 −3`
     - 📊 **`+3 −3`** · 1 file
-- 🔧 [`a5443997`](https://github.com/Jatin-nicon/tenali/commit/a54439972f219b0e0959b74c6ae3686b8908f972) — **Athira** — move data generation scripts to scripts
-    - 📁 **17 files:** `{client/src/data => scripts}/fix_batch_a.cjs`, `{client/src/data => scripts}/fix_batch_b.cjs`, `{client/src/data => scripts}/fix_batch_c.cjs`, `{client/src/data => scripts}/fix_batch_d.cjs`, `{client/src/data => scripts}/fix_batch_e.cjs`, `{client/src/data => scripts}/fix_batch_f.cjs`, `{client/src/data => scripts}/fix_batch_g.cjs`, `{client/src/data => scripts}/split.cjs` *(+9 more in [`a5443997`](https://github.com/Jatin-nicon/tenali/commit/a54439972f219b0e0959b74c6ae3686b8908f972))*
+- 🔧 [`a5443997`](https://github.com/vicharanashala/tenali/commit/a54439972f219b0e0959b74c6ae3686b8908f972) — **Athira** — move data generation scripts to scripts
+    - 📁 **17 files:** `{client/src/data => scripts}/fix_batch_a.cjs`, `{client/src/data => scripts}/fix_batch_b.cjs`, `{client/src/data => scripts}/fix_batch_c.cjs`, `{client/src/data => scripts}/fix_batch_d.cjs`, `{client/src/data => scripts}/fix_batch_e.cjs`, `{client/src/data => scripts}/fix_batch_f.cjs`, `{client/src/data => scripts}/fix_batch_g.cjs`, `{client/src/data => scripts}/split.cjs` *(+9 more in [`a5443997`](https://github.com/vicharanashala/tenali/commit/a54439972f219b0e0959b74c6ae3686b8908f972))*
     - 📊 **`+0 −0`** · 17 files
 
 #### 📅 2026-09-05  <sub>(1 commit)</sub>
 
-- 📌 [`1686e788`](https://github.com/Jatin-nicon/tenali/commit/1686e788ac9d4b4a585ad7c277153ab071d737aa) — **AYUSHKOCHHAR** — Simplify Level 0 copy for young readers per review feedback
+- 📌 [`1686e788`](https://github.com/vicharanashala/tenali/commit/1686e788ac9d4b4a585ad7c277153ab071d737aa) — **AYUSHKOCHHAR** — Simplify Level 0 copy for young readers per review feedback
     - 📁 **1 file:** `client/src/vachana/exercises/SchemaClassifier.jsx` `+37 −31`
     - 📊 **`+37 −31`** · 1 file
 
 #### 📅 2026-09-04  <sub>(2 commits)</sub>
 
-- 🐛 [`a887ed6a`](https://github.com/Jatin-nicon/tenali/commit/a887ed6adece7aa23b576f310dcccbb7a0ec096f) — **priyanshu7725** — add missing semicolons before IIFEs across all apps in App.jsx to prevent ASI TypeError
+- 🐛 [`a887ed6a`](https://github.com/vicharanashala/tenali/commit/a887ed6adece7aa23b576f310dcccbb7a0ec096f) — **priyanshu7725** — add missing semicolons before IIFEs across all apps in App.jsx to prevent ASI TypeError
     - 📁 **1 file:** `client/src/App.jsx` `+16 −16`
     - 📊 **`+16 −16`** · 1 file
-- 📝 [`f433565c`](https://github.com/Jatin-nicon/tenali/commit/f433565c1c95ce6c443ce66b0a66af149b902160) — **Code-Zero07** — add onboarding document for Arijit Deb
+- 📝 [`f433565c`](https://github.com/vicharanashala/tenali/commit/f433565c1c95ce6c443ce66b0a66af149b902160) — **Code-Zero07** — add onboarding document for Arijit Deb
     - 📁 **1 file:** `Ideas/ONBOARDING-Arijit-Deb.md` `+184 −0`
     - 📊 **`+184 −0`** · 1 file
 
 #### 📅 2026-09-03  <sub>(7 commits)</sub>
 
-- 🐛 [`d101764e`](https://github.com/Jatin-nicon/tenali/commit/d101764e19d1e335580a9c2af872695e4d6fc93b) — **priyanshu7725** — use signed arithmetic questions for Sign Swapper cure and tighten float tolerance
+- 🐛 [`d101764e`](https://github.com/vicharanashala/tenali/commit/d101764e19d1e335580a9c2af872695e4d6fc93b) — **priyanshu7725** — use signed arithmetic questions for Sign Swapper cure and tighten float tolerance
     - 📁 **1 file:** `client/src/monsters/CureFlow.jsx` `+6 −6`
     - 📊 **`+6 −6`** · 1 file
-- 🐛 [`81c6bc1f`](https://github.com/Jatin-nicon/tenali/commit/81c6bc1f6aebd2b7fe053d204cc1480504dc4021) — **priyanshu7725** — use CSS grid and synchronized step states in Carry Crasher guided solver
+- 🐛 [`81c6bc1f`](https://github.com/vicharanashala/tenali/commit/81c6bc1f6aebd2b7fe053d204cc1480504dc4021) — **priyanshu7725** — use CSS grid and synchronized step states in Carry Crasher guided solver
     - 📁 **1 file:** `client/src/monsters/GuidedSolver.jsx` `+74 −28`
     - 📊 **`+74 −28`** · 1 file
-- ♻️ [`27df2139`](https://github.com/Jatin-nicon/tenali/commit/27df2139a738d5e3193aec587e8d80488fa3f75c) — **priyanshu7725** — isolate monster integration in App.jsx and strip unrelated formatting
+- ♻️ [`27df2139`](https://github.com/vicharanashala/tenali/commit/27df2139a738d5e3193aec587e8d80488fa3f75c) — **priyanshu7725** — isolate monster integration in App.jsx and strip unrelated formatting
     - 📁 **1 file:** `client/src/App.jsx` `+1611 −1633`
     - 📊 **`+1611 −1633`** · 1 file
-- ⏪ [`4f7d71f8`](https://github.com/Jatin-nicon/tenali/commit/4f7d71f8ed6fe076c62834afabc3501e8b5af5ad) — **Pradeep-gupta7** — restore server/node_modules/.package-lock.json to remove PR diff noise
+- ⏪ [`4f7d71f8`](https://github.com/vicharanashala/tenali/commit/4f7d71f8ed6fe076c62834afabc3501e8b5af5ad) — **Pradeep-gupta7** — restore server/node_modules/.package-lock.json to remove PR diff noise
     - 📁 **1 file:** `server/node_modules/.package-lock.json` `+106 −68`
     - 📊 **`+106 −68`** · 1 file
-- 🐛 [`9ef72e45`](https://github.com/Jatin-nicon/tenali/commit/9ef72e45e79d4a2d8ec7719c7564c431fde426ab) — **Pradeep-gupta7** — rupee pricing, 15-question UI, timer updates & progression
+- 🐛 [`9ef72e45`](https://github.com/vicharanashala/tenali/commit/9ef72e45e79d4a2d8ec7719c7564c431fde426ab) — **Pradeep-gupta7** — rupee pricing, 15-question UI, timer updates & progression
     - 📁 **1 file:** `client/src/vachana/exercises/EquationToStory.jsx` `+1104 −834`
     - 📊 **`+1104 −834`** · 1 file
-- 🐛 [`0accfb6b`](https://github.com/Jatin-nicon/tenali/commit/0accfb6bc8d4e4dc3275d88c054eddd7cd672676) — **AYUSHKOCHHAR** — fix Level 0 pluralization bug and revert progress persistence to localStorage
+- 🐛 [`0accfb6b`](https://github.com/vicharanashala/tenali/commit/0accfb6bc8d4e4dc3275d88c054eddd7cd672676) — **AYUSHKOCHHAR** — fix Level 0 pluralization bug and revert progress persistence to localStorage
     - 📁 **1 file:** `client/src/vachana/exercises/SchemaClassifier.jsx` `+16 −6`
     - 📊 **`+16 −6`** · 1 file
-- 📌 [`ae664253`](https://github.com/Jatin-nicon/tenali/commit/ae664253046cc3f5490a5af69fd114894abce78c) — **Krishna009-pro** — address maintainer review feedback on PR 131
+- 📌 [`ae664253`](https://github.com/vicharanashala/tenali/commit/ae664253046cc3f5490a5af69fd114894abce78c) — **Krishna009-pro** — address maintainer review feedback on PR 131
     - 📁 **6 files:** `client/package-lock.json` `+83 −1`, `client/package.json` `+2 −1`, `client/src/WaterJugLab.jsx` `+8 −1`, `server/index.js` `+2 −9`, `server/package-lock.json` `+98 −0`, `server/package.json` `+1 −0`
     - 📊 **`+194 −12`** · 6 files
 
 #### 📅 2026-09-02  <sub>(3 commits)</sub>
 
-- 📌 [`49f4ec69`](https://github.com/Jatin-nicon/tenali/commit/49f4ec69b7fbf583913f6cc6568d8eb4eed6f179) — **AYUSHKOCHHAR** — Remove theme logic from SchemaClassifier.jsx as well, per review feedback
+- 📌 [`49f4ec69`](https://github.com/vicharanashala/tenali/commit/49f4ec69b7fbf583913f6cc6568d8eb4eed6f179) — **AYUSHKOCHHAR** — Remove theme logic from SchemaClassifier.jsx as well, per review feedback
     - 📁 **1 file:** `client/src/vachana/exercises/SchemaClassifier.jsx` `+0 −13`
     - 📊 **`+0 −13`** · 1 file
-- 📌 [`4e1f88d3`](https://github.com/Jatin-nicon/tenali/commit/4e1f88d3f97c71429e42125abda60ada9677646c) — **AYUSHKOCHHAR** — Remove theme toggle from index.jsx per review feedback; will propose separately
+- 📌 [`4e1f88d3`](https://github.com/vicharanashala/tenali/commit/4e1f88d3f97c71429e42125abda60ada9677646c) — **AYUSHKOCHHAR** — Remove theme toggle from index.jsx per review feedback; will propose separately
     - 📁 **1 file:** `client/src/vachana/index.jsx` `+0 −34`
     - 📊 **`+0 −34`** · 1 file
-- 📌 [`57ec2ace`](https://github.com/Jatin-nicon/tenali/commit/57ec2ace6d1bcd0c23f86b88d60bdd0e3969c0f2) — **jgupta05072003-code** — 🔀 PR [#165](https://github.com/Jatin-nicon/tenali/pull/165) from `Garvarora15` — main
+- 📌 [`57ec2ace`](https://github.com/vicharanashala/tenali/commit/57ec2ace6d1bcd0c23f86b88d60bdd0e3969c0f2) — **jgupta05072003-code** — 🔀 PR [#165](https://github.com/vicharanashala/tenali/pull/165) from `Garvarora15` — main
 
 #### 📅 2026-09-01  <sub>(2 commits)</sub>
 
-- 📝 [`9a05fcd4`](https://github.com/Jatin-nicon/tenali/commit/9a05fcd424ac3fc1b0ccdd07d6db9e40f4a17b41) — **LalithaSriHarshitha** — add contributor onboarding document for Lalitha Sri Harshitha
+- 📝 [`9a05fcd4`](https://github.com/vicharanashala/tenali/commit/9a05fcd424ac3fc1b0ccdd07d6db9e40f4a17b41) — **LalithaSriHarshitha** — add contributor onboarding document for Lalitha Sri Harshitha
     - 📁 **1 file:** `Ideas/ONBOARDING-LalithaSriHarshitha.md` `+190 −0`
     - 📊 **`+190 −0`** · 1 file
-- 📝 [`b6454993`](https://github.com/Jatin-nicon/tenali/commit/b6454993ae251680ebea2748e463384ddb4e3a53) — **Krishna009-pro** — add contributor onboarding document for Krishna
+- 📝 [`b6454993`](https://github.com/vicharanashala/tenali/commit/b6454993ae251680ebea2748e463384ddb4e3a53) — **Krishna009-pro** — add contributor onboarding document for Krishna
     - 📁 **1 file:** `Ideas/ONBOARDING-Krishna009-pro.md` `+446 −0`
     - 📊 **`+446 −0`** · 1 file
 
 #### 📅 2026-08-30  <sub>(2 commits)</sub>
 
-- 📝 [`614a4db6`](https://github.com/Jatin-nicon/tenali/commit/614a4db6a22c00d8f178e63d5f3623b7564b314a) — **LalithaSriHarshitha** — add RFC 0001 for flexible weekly mastery and smart spaced review
+- 📝 [`614a4db6`](https://github.com/vicharanashala/tenali/commit/614a4db6a22c00d8f178e63d5f3623b7564b314a) — **LalithaSriHarshitha** — add RFC 0001 for flexible weekly mastery and smart spaced review
     - 📁 **1 file:** `docs/rfcs/engagement/0001-flexible-weekly-mastery-and-smart-spaced-review.md` `+148 −0`
     - 📊 **`+148 −0`** · 1 file
-- 📌 [`c1400d19`](https://github.com/Jatin-nicon/tenali/commit/c1400d19a3d18cd0a24e244625243049e11f21b6) — **priyanshu7725** — Merge remote-tracking branch 'upstream/main' into feature/monster-misconceptions
+- 📌 [`c1400d19`](https://github.com/vicharanashala/tenali/commit/c1400d19a3d18cd0a24e244625243049e11f21b6) — **priyanshu7725** — Merge remote-tracking branch 'upstream/main' into feature/monster-misconceptions
 
 #### 📅 2026-08-27  <sub>(1 commit)</sub>
 
-- ✨ [`a79b2635`](https://github.com/Jatin-nicon/tenali/commit/a79b2635ab933034833f37a7e1e546031e993bbd) — **tanvishdesai** — complete extraction of all topic routes into router files
-    - 📁 **17 files:** `server/index.js` `+1005 −10518`, `server/lib/question-banks.js` `+5 −0`, `server/lib/sudoku.js` `+52 −0`, `server/routes/__tests__/apiContract.test.js` `+2 −15`, `server/routes/advanced.js` `+252 −0`, `server/routes/algebra.js` `+1319 −1`, `server/routes/arithmetic.js` `+528 −0`, `server/routes/financial.js` `+137 −0` *(+9 more in [`a79b2635`](https://github.com/Jatin-nicon/tenali/commit/a79b2635ab933034833f37a7e1e546031e993bbd))*
+- ✨ [`a79b2635`](https://github.com/vicharanashala/tenali/commit/a79b2635ab933034833f37a7e1e546031e993bbd) — **tanvishdesai** — complete extraction of all topic routes into router files
+    - 📁 **17 files:** `server/index.js` `+1005 −10518`, `server/lib/question-banks.js` `+5 −0`, `server/lib/sudoku.js` `+52 −0`, `server/routes/__tests__/apiContract.test.js` `+2 −15`, `server/routes/advanced.js` `+252 −0`, `server/routes/algebra.js` `+1319 −1`, `server/routes/arithmetic.js` `+528 −0`, `server/routes/financial.js` `+137 −0` *(+9 more in [`a79b2635`](https://github.com/vicharanashala/tenali/commit/a79b2635ab933034833f37a7e1e546031e993bbd))*
     - 📊 **`+8166 −10537`** · 17 files
 
 #### 📅 2026-08-24  <sub>(2 commits)</sub>
 
-- ♻️ [`4b2510f0`](https://github.com/Jatin-nicon/tenali/commit/4b2510f05049cef8ffef06fb174903429b3aee5a) — **tanvishdesai** — remove dead inline handlers superseded by router files
+- ♻️ [`4b2510f0`](https://github.com/vicharanashala/tenali/commit/4b2510f05049cef8ffef06fb174903429b3aee5a) — **tanvishdesai** — remove dead inline handlers superseded by router files
     - 📁 **1 file:** `server/index.js` `+15 −2135`
     - 📊 **`+15 −2135`** · 1 file
-- ✨ [`59d602f3`](https://github.com/Jatin-nicon/tenali/commit/59d602f395652463d6a520a3c4bae3e48c1c48d7) — **tanvishdesai** — extract 43 topic routes into grouped router files (Phase 2)
-    - 📁 **9 files:** `server/index.js` `+68 −233`, `server/routes/advanced.js` `+464 −0`, `server/routes/algebra.js` `+62 −0`, `server/routes/arithmetic.js` `+281 −0`, `server/routes/calculus.js` `+310 −0`, `server/routes/financial.js` `+269 −0`, `server/routes/geometry.js` `+386 −0`, `server/routes/misc.js` `+396 −0` *(+1 more in [`59d602f3`](https://github.com/Jatin-nicon/tenali/commit/59d602f395652463d6a520a3c4bae3e48c1c48d7))*
+- ✨ [`59d602f3`](https://github.com/vicharanashala/tenali/commit/59d602f395652463d6a520a3c4bae3e48c1c48d7) — **tanvishdesai** — extract 43 topic routes into grouped router files (Phase 2)
+    - 📁 **9 files:** `server/index.js` `+68 −233`, `server/routes/advanced.js` `+464 −0`, `server/routes/algebra.js` `+62 −0`, `server/routes/arithmetic.js` `+281 −0`, `server/routes/calculus.js` `+310 −0`, `server/routes/financial.js` `+269 −0`, `server/routes/geometry.js` `+386 −0`, `server/routes/misc.js` `+396 −0` *(+1 more in [`59d602f3`](https://github.com/vicharanashala/tenali/commit/59d602f395652463d6a520a3c4bae3e48c1c48d7))*
     - 📊 **`+2395 −233`** · 9 files
 
 #### 📅 2026-08-23  <sub>(3 commits)</sub>
 
-- 📌 [`4e3690ab`](https://github.com/Jatin-nicon/tenali/commit/4e3690abbd8e4434f78ea29ef1607c5588f063d0) — **AYUSHKOCHHAR** — Revert unrelated changes in lab and language apps
-    - 📁 **10 files:** `client/src/App.css` `+57 −92`, `client/src/App.jsx` `+3 −3`, `client/src/BearingsLabApp.jsx` `+2 −2`, `client/src/ProbLabApp.jsx` `+1 −1`, `client/src/PythagLabApp.jsx` `+1 −1`, `client/src/VisualMathLabRedux.jsx` `+1 −1`, `client/src/detective-app.jsx` `+6 −6`, `client/src/language/CrosswordApp.jsx` `+4 −4` *(+2 more in [`4e3690ab`](https://github.com/Jatin-nicon/tenali/commit/4e3690abbd8e4434f78ea29ef1607c5588f063d0))*
+- 📌 [`4e3690ab`](https://github.com/vicharanashala/tenali/commit/4e3690abbd8e4434f78ea29ef1607c5588f063d0) — **AYUSHKOCHHAR** — Revert unrelated changes in lab and language apps
+    - 📁 **10 files:** `client/src/App.css` `+57 −92`, `client/src/App.jsx` `+3 −3`, `client/src/BearingsLabApp.jsx` `+2 −2`, `client/src/ProbLabApp.jsx` `+1 −1`, `client/src/PythagLabApp.jsx` `+1 −1`, `client/src/VisualMathLabRedux.jsx` `+1 −1`, `client/src/detective-app.jsx` `+6 −6`, `client/src/language/CrosswordApp.jsx` `+4 −4` *(+2 more in [`4e3690ab`](https://github.com/vicharanashala/tenali/commit/4e3690abbd8e4434f78ea29ef1607c5588f063d0))*
     - 📊 **`+84 −119`** · 10 files
-- ✨ [`74591af6`](https://github.com/Jatin-nicon/tenali/commit/74591af67a3b773cc863b7b0d3aee42472b9f98b) — **Garv Arora** — enhance mastery header, inversion detector, and syntactic rewriter
+- ✨ [`74591af6`](https://github.com/vicharanashala/tenali/commit/74591af67a3b773cc863b7b0d3aee42472b9f98b) — **Garv Arora** — enhance mastery header, inversion detector, and syntactic rewriter
     - 📁 **3 files:** `client/src/vachana/MasteryLevelHeader.jsx` `+85 −34`, `client/src/vachana/exercises/InversionDetector.jsx` `+8 −1`, `client/src/vachana/exercises/SyntacticRewriter.jsx` `+2878 −21`
     - 📊 **`+2971 −56`** · 3 files
-- 📌 [`3efb7381`](https://github.com/Jatin-nicon/tenali/commit/3efb7381da390622a029df404a556892abb28c86) — **AYUSHKOCHHAR** — Update lab components and vachana SchemaClassifier exercise
-    - 📁 **12 files:** `client/src/App.css` `+92 −57`, `client/src/App.jsx` `+3 −3`, `client/src/BearingsLabApp.jsx` `+2 −2`, `client/src/ProbLabApp.jsx` `+1 −1`, `client/src/PythagLabApp.jsx` `+1 −1`, `client/src/VisualMathLabRedux.jsx` `+1 −1`, `client/src/detective-app.jsx` `+6 −6`, `client/src/language/CrosswordApp.jsx` `+4 −4` *(+4 more in [`3efb7381`](https://github.com/Jatin-nicon/tenali/commit/3efb7381da390622a029df404a556892abb28c86))*
+- 📌 [`3efb7381`](https://github.com/vicharanashala/tenali/commit/3efb7381da390622a029df404a556892abb28c86) — **AYUSHKOCHHAR** — Update lab components and vachana SchemaClassifier exercise
+    - 📁 **12 files:** `client/src/App.css` `+92 −57`, `client/src/App.jsx` `+3 −3`, `client/src/BearingsLabApp.jsx` `+2 −2`, `client/src/ProbLabApp.jsx` `+1 −1`, `client/src/PythagLabApp.jsx` `+1 −1`, `client/src/VisualMathLabRedux.jsx` `+1 −1`, `client/src/detective-app.jsx` `+6 −6`, `client/src/language/CrosswordApp.jsx` `+4 −4` *(+4 more in [`3efb7381`](https://github.com/vicharanashala/tenali/commit/3efb7381da390622a029df404a556892abb28c86))*
     - 📊 **`+2974 −116`** · 12 files
 
 #### 📅 2026-08-22  <sub>(3 commits)</sub>
 
-- 📌 [`93dc9ead`](https://github.com/Jatin-nicon/tenali/commit/93dc9ead4b4104ffb0b08920cc7112e133795756) — **Krishna009-pro** — Merge branch 'main' into feat/water-jug-and-equation-crafting-labs
-- 📌 [`99bfb421`](https://github.com/Jatin-nicon/tenali/commit/99bfb421f3734401f59f79d74a4d79617604377b) — **muditagrawal2007** — 🔀 PR [#163](https://github.com/Jatin-nicon/tenali/pull/163) from `muditagrawal2007` — fix/exclude-bot-commits-from-leaderboard
-- 🐛 [`0ac0c5c4`](https://github.com/Jatin-nicon/tenali/commit/0ac0c5c48597ee6b7ad3b4a9c35a0fd035a99906) — **muditagrawal2007** — exclude bot commits from leaderboard
+- 📌 [`93dc9ead`](https://github.com/vicharanashala/tenali/commit/93dc9ead4b4104ffb0b08920cc7112e133795756) — **Krishna009-pro** — Merge branch 'main' into feat/water-jug-and-equation-crafting-labs
+- 📌 [`99bfb421`](https://github.com/vicharanashala/tenali/commit/99bfb421f3734401f59f79d74a4d79617604377b) — **muditagrawal2007** — 🔀 PR [#163](https://github.com/vicharanashala/tenali/pull/163) from `muditagrawal2007` — fix/exclude-bot-commits-from-leaderboard
+- 🐛 [`0ac0c5c4`](https://github.com/vicharanashala/tenali/commit/0ac0c5c48597ee6b7ad3b4a9c35a0fd035a99906) — **muditagrawal2007** — exclude bot commits from leaderboard
     - 📁 **1 file:** `scripts/update-readme-contributors.js` `+73 −8`
     - 📊 **`+73 −8`** · 1 file
 
 #### 📅 2026-08-20  <sub>(1 commit)</sub>
 
-- 📌 [`50ba32f2`](https://github.com/Jatin-nicon/tenali/commit/50ba32f2398ef9a7a877015a0d2e82cce86353b2) — **Pradeep Gupta** — Merge branch 'main' into main
+- 📌 [`50ba32f2`](https://github.com/vicharanashala/tenali/commit/50ba32f2398ef9a7a877015a0d2e82cce86353b2) — **Pradeep Gupta** — Merge branch 'main' into main
 
 #### 📅 2026-08-19  <sub>(1 commit)</sub>
 
-- ✨ [`04af459f`](https://github.com/Jatin-nicon/tenali/commit/04af459f4b9e6b532d29a1ca03d293169b204ff2) — **Athira** — add interactive GST and Fractions learning
-    - 📁 **17 files:** `client/src/App.jsx` `+145 −2`, `client/src/components/learning/FractionChallenge.jsx` `+181 −0`, `client/src/components/learning/FractionDetective.jsx` `+99 −0`, `client/src/components/learning/FractionPartsInteractive.jsx` `+95 −0`, `client/src/components/learning/FractionTypesInteractive.jsx` `+117 −0`, `client/src/components/learning/FractionVisualizer.jsx` `+97 −0`, `client/src/components/learning/FractionsLearnPage.jsx` `+180 −0`, `client/src/components/learning/GSTLearnPage.jsx` `+181 −0` *(+9 more in [`04af459f`](https://github.com/Jatin-nicon/tenali/commit/04af459f4b9e6b532d29a1ca03d293169b204ff2))*
+- ✨ [`04af459f`](https://github.com/vicharanashala/tenali/commit/04af459f4b9e6b532d29a1ca03d293169b204ff2) — **Athira** — add interactive GST and Fractions learning
+    - 📁 **17 files:** `client/src/App.jsx` `+145 −2`, `client/src/components/learning/FractionChallenge.jsx` `+181 −0`, `client/src/components/learning/FractionDetective.jsx` `+99 −0`, `client/src/components/learning/FractionPartsInteractive.jsx` `+95 −0`, `client/src/components/learning/FractionTypesInteractive.jsx` `+117 −0`, `client/src/components/learning/FractionVisualizer.jsx` `+97 −0`, `client/src/components/learning/FractionsLearnPage.jsx` `+180 −0`, `client/src/components/learning/GSTLearnPage.jsx` `+181 −0` *(+9 more in [`04af459f`](https://github.com/vicharanashala/tenali/commit/04af459f4b9e6b532d29a1ca03d293169b204ff2))*
     - 📊 **`+1980 −3`** · 17 files
 
 #### 📅 2026-08-18  <sub>(8 commits)</sub>
 
-- ✨ [`14207d4f`](https://github.com/Jatin-nicon/tenali/commit/14207d4faffff57c77d114d747780d0c44b7729b) — **tanvishdesai** — add test workflow, API contract tests, ESLint href rule, and PR auto-labeler
-    - 📁 **10 files:** `.github/labeler.yml` `+23 −0`, `.github/workflows/label.yml` `+18 −0`, `.github/workflows/test.yml` `+59 −0`, `client/eslint.config.js` `+10 −0`, `client/src/App.jsx` `+1 −0`, `client/src/lib/router.js` `+1 −0`, `server/package-lock.json` `+1529 −61`, `server/package.json` `+7 −1` *(+2 more in [`14207d4f`](https://github.com/Jatin-nicon/tenali/commit/14207d4faffff57c77d114d747780d0c44b7729b))*
+- ✨ [`14207d4f`](https://github.com/vicharanashala/tenali/commit/14207d4faffff57c77d114d747780d0c44b7729b) — **tanvishdesai** — add test workflow, API contract tests, ESLint href rule, and PR auto-labeler
+    - 📁 **10 files:** `.github/labeler.yml` `+23 −0`, `.github/workflows/label.yml` `+18 −0`, `.github/workflows/test.yml` `+59 −0`, `client/eslint.config.js` `+10 −0`, `client/src/App.jsx` `+1 −0`, `client/src/lib/router.js` `+1 −0`, `server/package-lock.json` `+1529 −61`, `server/package.json` `+7 −1` *(+2 more in [`14207d4f`](https://github.com/vicharanashala/tenali/commit/14207d4faffff57c77d114d747780d0c44b7729b))*
     - 📊 **`+1679 −66`** · 10 files
-- 🔀 [`5a9f0474`](https://github.com/Jatin-nicon/tenali/commit/5a9f0474c8fc84adac37624bec25d67d0d716256) — **priyanshu7725** — sync upstream/main into feature/monster-misconceptions and resolve App.jsx conflict
-- 📌 [`898048b2`](https://github.com/Jatin-nicon/tenali/commit/898048b26181c5e53d64b65ce9b87fad94f20726) — **jgupta05072003-code** — 🔀 PR [#160](https://github.com/Jatin-nicon/tenali/pull/160) from `tanvishdesai` — I21-T140/codebase-cleanup
-- 📌 [`06d6f96a`](https://github.com/Jatin-nicon/tenali/commit/06d6f96a39647c09ed87af97aee5dd19f1f9a91e) — **jgupta05072003-code** — 🔀 PR [#155](https://github.com/Jatin-nicon/tenali/pull/155) from `harshguptaa26` — feature/treasure-hunt
-- 🐛 [`3349d1ee`](https://github.com/Jatin-nicon/tenali/commit/3349d1eed385ba7bdf5178eb31df207d72bf73e1) — **tanvishdesai** — use withBase() for AuthGate back-to-home navigation
+- 🔀 [`5a9f0474`](https://github.com/vicharanashala/tenali/commit/5a9f0474c8fc84adac37624bec25d67d0d716256) — **priyanshu7725** — sync upstream/main into feature/monster-misconceptions and resolve App.jsx conflict
+- 📌 [`898048b2`](https://github.com/vicharanashala/tenali/commit/898048b26181c5e53d64b65ce9b87fad94f20726) — **jgupta05072003-code** — 🔀 PR [#160](https://github.com/vicharanashala/tenali/pull/160) from `tanvishdesai` — I21-T140/codebase-cleanup
+- 📌 [`06d6f96a`](https://github.com/vicharanashala/tenali/commit/06d6f96a39647c09ed87af97aee5dd19f1f9a91e) — **jgupta05072003-code** — 🔀 PR [#155](https://github.com/vicharanashala/tenali/pull/155) from `harshguptaa26` — feature/treasure-hunt
+- 🐛 [`3349d1ee`](https://github.com/vicharanashala/tenali/commit/3349d1eed385ba7bdf5178eb31df207d72bf73e1) — **tanvishdesai** — use withBase() for AuthGate back-to-home navigation
     - 📁 **1 file:** `client/src/App.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 🔧 [`d9ad02fa`](https://github.com/Jatin-nicon/tenali/commit/d9ad02fa4c81a16fd515b528486c1af98adf8414) — **tanvishdesai** — ignore .bak and .bak.* files in .gitignore
+- 🔧 [`d9ad02fa`](https://github.com/vicharanashala/tenali/commit/d9ad02fa4c81a16fd515b528486c1af98adf8414) — **tanvishdesai** — ignore .bak and .bak.* files in .gitignore
     - 📁 **1 file:** `.gitignore` `+4 −0`
     - 📊 **`+4 −0`** · 1 file
-- 🔧 [`c9308509`](https://github.com/Jatin-nicon/tenali/commit/c93085095ffe6245682db8aec00d0a5fc0af5a54) — **tanvishdesai** — remove committed .bak files and dead CSS duplicates
-    - 📁 **26 files:** `client/src/App 2.css` `+0 −1589`, `client/src/App 3.css` `+0 −1788`, `client/src/App 4.css` `+0 −1842`, `client/src/App.jsx.bak`, `client/src/App.jsx.bak.preCh10` `+0 −24927`, `client/src/App.jsx.bak.preCh11` `+0 −26304`, `client/src/App.jsx.bak.preCh12` `+0 −27580`, `client/src/App.jsx.bak.preCh1234` `+0 −43275` *(+18 more in [`c9308509`](https://github.com/Jatin-nicon/tenali/commit/c93085095ffe6245682db8aec00d0a5fc0af5a54))*
+- 🔧 [`c9308509`](https://github.com/vicharanashala/tenali/commit/c93085095ffe6245682db8aec00d0a5fc0af5a54) — **tanvishdesai** — remove committed .bak files and dead CSS duplicates
+    - 📁 **26 files:** `client/src/App 2.css` `+0 −1589`, `client/src/App 3.css` `+0 −1788`, `client/src/App 4.css` `+0 −1842`, `client/src/App.jsx.bak`, `client/src/App.jsx.bak.preCh10` `+0 −24927`, `client/src/App.jsx.bak.preCh11` `+0 −26304`, `client/src/App.jsx.bak.preCh12` `+0 −27580`, `client/src/App.jsx.bak.preCh1234` `+0 −43275` *(+18 more in [`c9308509`](https://github.com/vicharanashala/tenali/commit/c93085095ffe6245682db8aec00d0a5fc0af5a54))*
     - 📊 **`+0 −705262`** · 26 files
-- 🔧 [`9b22b43d`](https://github.com/Jatin-nicon/tenali/commit/9b22b43d646825bf618a842b89526ecd88bfc382) — **tanvishdesai** — add reference test files and router utility
+- 🔧 [`9b22b43d`](https://github.com/vicharanashala/tenali/commit/9b22b43d646825bf618a842b89526ecd88bfc382) — **tanvishdesai** — add reference test files and router utility
     - 📁 **5 files:** `client/src/lib/router.js` `+30 −0`, `server/lib/bkt.test.js` `+79 −0`, `server/routes/__tests__/apiContract.test.js` `+59 −0`, `server/routes/__tests__/trig.test.js` `+95 −0`, `server/routes/trig.js` `+99 −0`
     - 📊 **`+362 −0`** · 5 files
 
 #### 📅 2026-08-17  <sub>(3 commits)</sub>
 
-- 📌 [`068e909b`](https://github.com/Jatin-nicon/tenali/commit/068e909bf37688fa17b95260f2d5205873d29c75) — **Athira Kv** — Revise pedagogical features for improved learning approach
+- 📌 [`068e909b`](https://github.com/vicharanashala/tenali/commit/068e909bf37688fa17b95260f2d5205873d29c75) — **Athira Kv** — Revise pedagogical features for improved learning approach
     - 📁 **1 file:** `README.md` `+50 −13`
     - 📊 **`+50 −13`** · 1 file
-- 📌 [`486fcff6`](https://github.com/Jatin-nicon/tenali/commit/486fcff69554d99a324b17f27bba799eb851f986) — **jgupta05072003-code** — 🔀 PR [#97](https://github.com/Jatin-nicon/tenali/pull/97) from `remy-baastin` — feat/ct-and-cr
-- 📌 [`99c062e8`](https://github.com/Jatin-nicon/tenali/commit/99c062e88882837520c980c620b1af56fcb48ddf) — **jgupta05072003-code** — 🔀 PR [#74](https://github.com/Jatin-nicon/tenali/pull/74) from `bangerashreejal-cs` — feature/reading-traps-levels
+- 📌 [`486fcff6`](https://github.com/vicharanashala/tenali/commit/486fcff69554d99a324b17f27bba799eb851f986) — **jgupta05072003-code** — 🔀 PR [#97](https://github.com/vicharanashala/tenali/pull/97) from `remy-baastin` — feat/ct-and-cr
+- 📌 [`99c062e8`](https://github.com/vicharanashala/tenali/commit/99c062e88882837520c980c620b1af56fcb48ddf) — **jgupta05072003-code** — 🔀 PR [#74](https://github.com/vicharanashala/tenali/pull/74) from `bangerashreejal-cs` — feature/reading-traps-levels
 
 #### 📅 2026-08-15  <sub>(2 commits)</sub>
 
-- 📌 [`a277b825`](https://github.com/Jatin-nicon/tenali/commit/a277b825cb3ef060b64409cf49978ef6756c5664) — **Priyanshu Kumar** — Merge branch 'vicharanashala:main' into feature/monster-misconceptions
-- 📌 [`c977ab32`](https://github.com/Jatin-nicon/tenali/commit/c977ab3219089338ec53a988389a88f9cc13f2fa) — **Pradeep-gupta7** — feat(Tenali) : Equation To story Quiz
+- 📌 [`a277b825`](https://github.com/vicharanashala/tenali/commit/a277b825cb3ef060b64409cf49978ef6756c5664) — **Priyanshu Kumar** — Merge branch 'vicharanashala:main' into feature/monster-misconceptions
+- 📌 [`c977ab32`](https://github.com/vicharanashala/tenali/commit/c977ab3219089338ec53a988389a88f9cc13f2fa) — **Pradeep-gupta7** — feat(Tenali) : Equation To story Quiz
     - 📁 **4 files:** `.gitignore` `+2 −0`, `client/package-lock.json` `+0 −2`, `client/src/vachana/exercises/EquationToStory.jsx` `+2495 −15`, `server/node_modules/.package-lock.json` `+68 −106`
     - 📊 **`+2565 −123`** · 4 files
 
 #### 📅 2026-08-14  <sub>(1 commit)</sub>
 
-- 💄 [`7841f75e`](https://github.com/Jatin-nicon/tenali/commit/7841f75e77e16be803f3c7b95227c83ac8963c31) — **disha01bansal** — refine treasure hunt interface
+- 💄 [`7841f75e`](https://github.com/vicharanashala/tenali/commit/7841f75e77e16be803f3c7b95227c83ac8963c31) — **disha01bansal** — refine treasure hunt interface
     - 📁 **2 files:** `client/src/treasurehunt/TreasureHuntApp.jsx` `+121 −12`, `client/src/treasurehunt/treasurehunt.css` `+102 −14`
     - 📊 **`+223 −26`** · 2 files
 
 #### 📅 2026-08-13  <sub>(6 commits)</sub>
 
-- 🐛 [`14d8e77d`](https://github.com/Jatin-nicon/tenali/commit/14d8e77de192bc8e6d95d0dfae4a3df30ac47e0c) — **Athira** — improve angles learning visual alignment
+- 🐛 [`14d8e77d`](https://github.com/vicharanashala/tenali/commit/14d8e77de192bc8e6d95d0dfae4a3df30ac47e0c) — **Athira** — improve angles learning visual alignment
     - 📁 **1 file:** `client/src/components/LearningVisual.jsx` `+38 −30`
     - 📊 **`+38 −30`** · 1 file
-- 📌 [`6a5cf3e6`](https://github.com/Jatin-nicon/tenali/commit/6a5cf3e6d948e5a3387d48f9ee2193114d02b36c) — **jgupta05072003-code** — 🔀 PR [#158](https://github.com/Jatin-nicon/tenali/pull/158) from `vicharanashala` — add-contributor-onboarding-rules
-- 📌 [`115a5405`](https://github.com/Jatin-nicon/tenali/commit/115a5405ab52c8eae0ebedf056501b848b085f24) — **Jinal Gupta** — Clarify onboarding PRs must target the Ideas/ folder
+- 📌 [`6a5cf3e6`](https://github.com/vicharanashala/tenali/commit/6a5cf3e6d948e5a3387d48f9ee2193114d02b36c) — **jgupta05072003-code** — 🔀 PR [#158](https://github.com/vicharanashala/tenali/pull/158) from `vicharanashala` — add-contributor-onboarding-rules
+- 📌 [`115a5405`](https://github.com/vicharanashala/tenali/commit/115a5405ab52c8eae0ebedf056501b848b085f24) — **Jinal Gupta** — Clarify onboarding PRs must target the Ideas/ folder
     - 📁 **1 file:** `README.md` `+2 −0`
     - 📊 **`+2 −0`** · 1 file
-- 📌 [`12a58277`](https://github.com/Jatin-nicon/tenali/commit/12a582774218c3534885aac8bb17de2188f23ac5) — **Jinal Gupta** — Add mandatory Contributor Onboarding Document rules to README
+- 📌 [`12a58277`](https://github.com/vicharanashala/tenali/commit/12a582774218c3534885aac8bb17de2188f23ac5) — **Jinal Gupta** — Add mandatory Contributor Onboarding Document rules to README
     - 📁 **1 file:** `README.md` `+73 −0`
     - 📊 **`+73 −0`** · 1 file
-- 📌 [`315bd836`](https://github.com/Jatin-nicon/tenali/commit/315bd8369b75d0ed2374b3c6bebd1b397c975db2) — **jgupta05072003-code** — 🔀 PR [#157](https://github.com/Jatin-nicon/tenali/pull/157) from `vicharanashala` — add-ideas-folder
-- 📌 [`148f423e`](https://github.com/Jatin-nicon/tenali/commit/148f423ee006ce9b461913af265face5ceb535f6) — **Jinal Gupta** — Add Ideas folder
+- 📌 [`315bd836`](https://github.com/vicharanashala/tenali/commit/315bd8369b75d0ed2374b3c6bebd1b397c975db2) — **jgupta05072003-code** — 🔀 PR [#157](https://github.com/vicharanashala/tenali/pull/157) from `vicharanashala` — add-ideas-folder
+- 📌 [`148f423e`](https://github.com/vicharanashala/tenali/commit/148f423ee006ce9b461913af265face5ceb535f6) — **Jinal Gupta** — Add Ideas folder
     - 📁 **1 file:** `Ideas/README.md` `+3 −0`
     - 📊 **`+3 −0`** · 1 file
 
 #### 📅 2026-08-12  <sub>(2 commits)</sub>
 
-- 🔀 [`d98dd737`](https://github.com/Jatin-nicon/tenali/commit/d98dd737f980ba6c55154562e30ef2a6361f45fa) — **disha01bansal** — sync feature branch with upstream main
-- 📌 [`176ec5b2`](https://github.com/Jatin-nicon/tenali/commit/176ec5b2718cdb393d459576fab309c4e2ac4d12) — **disha01bansal** — Merge remote-tracking branch 'upstream/main' into feature/treasure-hunt
+- 🔀 [`d98dd737`](https://github.com/vicharanashala/tenali/commit/d98dd737f980ba6c55154562e30ef2a6361f45fa) — **disha01bansal** — sync feature branch with upstream main
+- 📌 [`176ec5b2`](https://github.com/vicharanashala/tenali/commit/176ec5b2718cdb393d459576fab309c4e2ac4d12) — **disha01bansal** — Merge remote-tracking branch 'upstream/main' into feature/treasure-hunt
 
 #### 📅 2026-08-11  <sub>(1 commit)</sub>
 
-- 🐛 [`c8aa0202`](https://github.com/Jatin-nicon/tenali/commit/c8aa020229a1ed420af303275c562d7f4a16c62c) — **Athira** — resolve auth server syntax error
+- 🐛 [`c8aa0202`](https://github.com/vicharanashala/tenali/commit/c8aa020229a1ed420af303275c562d7f4a16c62c) — **Athira** — resolve auth server syntax error
     - 📁 **1 file:** `server/auth.js` `+19 −7`
     - 📊 **`+19 −7`** · 1 file
 
 #### 📅 2026-08-08  <sub>(1 commit)</sub>
 
-- 📌 [`758ddf2f`](https://github.com/Jatin-nicon/tenali/commit/758ddf2f982db6b3e5cd92ebb1164793cce21c1c) — **Harsh** — Merge upstream/main into feature/treasure-hunt — resolved conflicts in index.js, auth.js, App.jsx, vite.config.js, package-lock.json
+- 📌 [`758ddf2f`](https://github.com/vicharanashala/tenali/commit/758ddf2f982db6b3e5cd92ebb1164793cce21c1c) — **Harsh** — Merge upstream/main into feature/treasure-hunt — resolved conflicts in index.js, auth.js, App.jsx, vite.config.js, package-lock.json
 
 #### 📅 2026-08-06  <sub>(27 commits)</sub>
 
-- ✨ [`f2ee48c8`](https://github.com/Jatin-nicon/tenali/commit/f2ee48c84186e2f2de703736f848bc7e405248b2) — **Athira** — refine Angles learning workflow and reduce timer to 40s
+- ✨ [`f2ee48c8`](https://github.com/vicharanashala/tenali/commit/f2ee48c84186e2f2de703736f848bc7e405248b2) — **Athira** — refine Angles learning workflow and reduce timer to 40s
     - 📁 **5 files:** `client/package-lock.json` `+8 −24`, `client/src/App.jsx` `+52 −36`, `client/src/data/learnContent/angles.json` `+5 −5`, `server/node_modules/.package-lock.json` `+1 −0`, `server/package-lock.json` `+1 −0`
     - 📊 **`+67 −65`** · 5 files
-- 🐛 [`34f618d9`](https://github.com/Jatin-nicon/tenali/commit/34f618d9435e7d3b7a3f55b864d2ff149078d3bf) — **muditagrawal2007** — bot only commits README.md — collapse multi-line file_pattern
+- 🐛 [`34f618d9`](https://github.com/vicharanashala/tenali/commit/34f618d9435e7d3b7a3f55b864d2ff149078d3bf) — **muditagrawal2007** — bot only commits README.md — collapse multi-line file_pattern
     - 📁 **1 file:** `.github/workflows/update-readme.yml` `+2 −5`
     - 📊 **`+2 −5`** · 1 file
-- 📌 [`264cbc53`](https://github.com/Jatin-nicon/tenali/commit/264cbc53c1adf6abd7b33564f61ba5b1dd3dc5d7) — **muditagrawal2007** — 🔀 PR [#150](https://github.com/Jatin-nicon/tenali/pull/150) from `muditagrawal2007` — fix/server-error-message-mapping
-- 🐛 [`edff518f`](https://github.com/Jatin-nicon/tenali/commit/edff518ffdb9815156844ecc886fc0465ae48de5) — **muditagrawal2007** — map body-parser errors to useful 400 messages, not 'Internal server error'
+- 📌 [`264cbc53`](https://github.com/vicharanashala/tenali/commit/264cbc53c1adf6abd7b33564f61ba5b1dd3dc5d7) — **muditagrawal2007** — 🔀 PR [#150](https://github.com/vicharanashala/tenali/pull/150) from `muditagrawal2007` — fix/server-error-message-mapping
+- 🐛 [`edff518f`](https://github.com/vicharanashala/tenali/commit/edff518ffdb9815156844ecc886fc0465ae48de5) — **muditagrawal2007** — map body-parser errors to useful 400 messages, not 'Internal server error'
     - 📁 **1 file:** `server/index.js` `+16 −1`
     - 📊 **`+16 −1`** · 1 file
-- 📌 [`51d5cd1b`](https://github.com/Jatin-nicon/tenali/commit/51d5cd1b7464015621028754dbc8f4d005b90d1e) — **muditagrawal2007** — 🔀 PR [#147](https://github.com/Jatin-nicon/tenali/pull/147) from `muditagrawal2007` — fix/voice-assistant-auth-user-key
-- 📌 [`2710aa98`](https://github.com/Jatin-nicon/tenali/commit/2710aa98f51ab2adcd20090198e51ee2660495e2) — **muditagrawal2007** — 🔀 PR [#148](https://github.com/Jatin-nicon/tenali/pull/148) from `muditagrawal2007` — fix/lcmhcf-api-base-path
-- 📌 [`65854370`](https://github.com/Jatin-nicon/tenali/commit/65854370349d8a447ad3b3d5d4a6f3d263d75652) — **muditagrawal2007** — 🔀 PR [#149](https://github.com/Jatin-nicon/tenali/pull/149) from `muditagrawal2007` — fix/la-mission-quiz-check-validation
-- 🐛 [`860c2f39`](https://github.com/Jatin-nicon/tenali/commit/860c2f39d943be67b851ab7b25afeb5159df01ac) — **muditagrawal2007** — validate answer in /la-mission-quiz-api/check
+- 📌 [`51d5cd1b`](https://github.com/vicharanashala/tenali/commit/51d5cd1b7464015621028754dbc8f4d005b90d1e) — **muditagrawal2007** — 🔀 PR [#147](https://github.com/vicharanashala/tenali/pull/147) from `muditagrawal2007` — fix/voice-assistant-auth-user-key
+- 📌 [`2710aa98`](https://github.com/vicharanashala/tenali/commit/2710aa98f51ab2adcd20090198e51ee2660495e2) — **muditagrawal2007** — 🔀 PR [#148](https://github.com/vicharanashala/tenali/pull/148) from `muditagrawal2007` — fix/lcmhcf-api-base-path
+- 📌 [`65854370`](https://github.com/vicharanashala/tenali/commit/65854370349d8a447ad3b3d5d4a6f3d263d75652) — **muditagrawal2007** — 🔀 PR [#149](https://github.com/vicharanashala/tenali/pull/149) from `muditagrawal2007` — fix/la-mission-quiz-check-validation
+- 🐛 [`860c2f39`](https://github.com/vicharanashala/tenali/commit/860c2f39d943be67b851ab7b25afeb5159df01ac) — **muditagrawal2007** — validate answer in /la-mission-quiz-api/check
     - 📁 **1 file:** `server/index.js` `+8 −1`
     - 📊 **`+8 −1`** · 1 file
-- 🐛 [`e6da2f25`](https://github.com/Jatin-nicon/tenali/commit/e6da2f25eba1909457e27300743c1dd93f93bd0f) — **muditagrawal2007** — anchor /hcflcm-api fetches to the current sub-path
+- 🐛 [`e6da2f25`](https://github.com/vicharanashala/tenali/commit/e6da2f25eba1909457e27300743c1dd93f93bd0f) — **muditagrawal2007** — anchor /hcflcm-api fetches to the current sub-path
     - 📁 **1 file:** `client/src/LcmHcfApp.jsx` `+9 −2`
     - 📊 **`+9 −2`** · 1 file
-- 🐛 [`c4c8c18e`](https://github.com/Jatin-nicon/tenali/commit/c4c8c18e12cb40678fe5b58a4710947438eb662e) — **muditagrawal2007** — read correct localStorage key 'tenali-auth-user' in VoiceAssistant
+- 🐛 [`c4c8c18e`](https://github.com/vicharanashala/tenali/commit/c4c8c18e12cb40678fe5b58a4710947438eb662e) — **muditagrawal2007** — read correct localStorage key 'tenali-auth-user' in VoiceAssistant
     - 📁 **1 file:** `client/src/components/VoiceAssistant.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`5177fe25`](https://github.com/Jatin-nicon/tenali/commit/5177fe25241558abf96db7b5144b13a038ff79f3) — **muditagrawal2007** — 🔀 PR [#145](https://github.com/Jatin-nicon/tenali/pull/145) from `muditagrawal2007` — fix/navigation-drop-subpath
-- 📌 [`ba44f04e`](https://github.com/Jatin-nicon/tenali/commit/ba44f04e46f2651e33ba6dbd7c3d6fd08834394d) — **muditagrawal2007** — 🔀 PR [#146](https://github.com/Jatin-nicon/tenali/pull/146) from `muditagrawal2007` — fix/wordcreator-api-base-path
-- 🐛 [`9d8cd330`](https://github.com/Jatin-nicon/tenali/commit/9d8cd330522c9cc623559146089578b43a93797e) — **muditagrawal2007** — anchor /wordcreator-api fetches to the current sub-path
+- 📌 [`5177fe25`](https://github.com/vicharanashala/tenali/commit/5177fe25241558abf96db7b5144b13a038ff79f3) — **muditagrawal2007** — 🔀 PR [#145](https://github.com/vicharanashala/tenali/pull/145) from `muditagrawal2007` — fix/navigation-drop-subpath
+- 📌 [`ba44f04e`](https://github.com/vicharanashala/tenali/commit/ba44f04e46f2651e33ba6dbd7c3d6fd08834394d) — **muditagrawal2007** — 🔀 PR [#146](https://github.com/vicharanashala/tenali/pull/146) from `muditagrawal2007` — fix/wordcreator-api-base-path
+- 🐛 [`9d8cd330`](https://github.com/vicharanashala/tenali/commit/9d8cd330522c9cc623559146089578b43a93797e) — **muditagrawal2007** — anchor /wordcreator-api fetches to the current sub-path
     - 📁 **1 file:** `client/src/language/WordCreatorApp.jsx` `+9 −4`
     - 📊 **`+9 −4`** · 1 file
-- 🐛 [`aef724a2`](https://github.com/Jatin-nicon/tenali/commit/aef724a2726424279ec05c49432ed074da83b494) — **muditagrawal2007** — stop dropping the /summership/ sub-path in 13 places
+- 🐛 [`aef724a2`](https://github.com/vicharanashala/tenali/commit/aef724a2726424279ec05c49432ed074da83b494) — **muditagrawal2007** — stop dropping the /summership/ sub-path in 13 places
     - 📁 **1 file:** `client/src/App.jsx` `+13 −13`
     - 📊 **`+13 −13`** · 1 file
-- 📌 [`978a9fb5`](https://github.com/Jatin-nicon/tenali/commit/978a9fb50dbe071eab8000ee43a5604540962627) — **muditagrawal2007** — 🔀 PR [#140](https://github.com/Jatin-nicon/tenali/pull/140) from `muditagrawal2007` — fix/auth-token-key-mismatch
-- 📌 [`dc1a7bf2`](https://github.com/Jatin-nicon/tenali/commit/dc1a7bf2a933d1fa855f0c5936685e79c9f7a90d) — **muditagrawal2007** — 🔀 PR [#141](https://github.com/Jatin-nicon/tenali/pull/141) from `muditagrawal2007` — fix/deployment-root-summership-split
-- 📌 [`a55cc070`](https://github.com/Jatin-nicon/tenali/commit/a55cc070928567e4b4a2360f280b181282d28d0a) — **muditagrawal2007** — 🔀 PR [#142](https://github.com/Jatin-nicon/tenali/pull/142) from `muditagrawal2007` — fix/impure-render-body-random-values
-- 📌 [`8d87037e`](https://github.com/Jatin-nicon/tenali/commit/8d87037edc24ae60eee16833048659648deb6229) — **muditagrawal2007** — 🔀 PR [#143](https://github.com/Jatin-nicon/tenali/pull/143) from `muditagrawal2007` — fix/battle-socket-and-room
-- 📌 [`57a04cae`](https://github.com/Jatin-nicon/tenali/commit/57a04caefaae700ed586c30ca03bd65d45fd2135) — **muditagrawal2007** — 🔀 PR [#144](https://github.com/Jatin-nicon/tenali/pull/144) from `muditagrawal2007` — fix/playground-api-base-path
-- 🔀 [`b58251b5`](https://github.com/Jatin-nicon/tenali/commit/b58251b5b404da1d6378510033ed204f6055f19a) — **priyanshu7725** — sync upstream/main into feature/monster-misconceptions and resolve App.jsx imports
-- 🐛 [`2bd8688e`](https://github.com/Jatin-nicon/tenali/commit/2bd8688ea6e6cf019be968199b1dd5300683f454) — **muditagrawal2007** — socket.io path + room deletion on opponent leave
+- 📌 [`978a9fb5`](https://github.com/vicharanashala/tenali/commit/978a9fb50dbe071eab8000ee43a5604540962627) — **muditagrawal2007** — 🔀 PR [#140](https://github.com/vicharanashala/tenali/pull/140) from `muditagrawal2007` — fix/auth-token-key-mismatch
+- 📌 [`dc1a7bf2`](https://github.com/vicharanashala/tenali/commit/dc1a7bf2a933d1fa855f0c5936685e79c9f7a90d) — **muditagrawal2007** — 🔀 PR [#141](https://github.com/vicharanashala/tenali/pull/141) from `muditagrawal2007` — fix/deployment-root-summership-split
+- 📌 [`a55cc070`](https://github.com/vicharanashala/tenali/commit/a55cc070928567e4b4a2360f280b181282d28d0a) — **muditagrawal2007** — 🔀 PR [#142](https://github.com/vicharanashala/tenali/pull/142) from `muditagrawal2007` — fix/impure-render-body-random-values
+- 📌 [`8d87037e`](https://github.com/vicharanashala/tenali/commit/8d87037edc24ae60eee16833048659648deb6229) — **muditagrawal2007** — 🔀 PR [#143](https://github.com/vicharanashala/tenali/pull/143) from `muditagrawal2007` — fix/battle-socket-and-room
+- 📌 [`57a04cae`](https://github.com/vicharanashala/tenali/commit/57a04caefaae700ed586c30ca03bd65d45fd2135) — **muditagrawal2007** — 🔀 PR [#144](https://github.com/vicharanashala/tenali/pull/144) from `muditagrawal2007` — fix/playground-api-base-path
+- 🔀 [`b58251b5`](https://github.com/vicharanashala/tenali/commit/b58251b5b404da1d6378510033ed204f6055f19a) — **priyanshu7725** — sync upstream/main into feature/monster-misconceptions and resolve App.jsx imports
+- 🐛 [`2bd8688e`](https://github.com/vicharanashala/tenali/commit/2bd8688ea6e6cf019be968199b1dd5300683f454) — **muditagrawal2007** — socket.io path + room deletion on opponent leave
     - 📁 **2 files:** `client/src/BattleApp.jsx` `+10 −1`, `server/index.js` `+22 −5`
     - 📊 **`+32 −6`** · 2 files
-- 🐛 [`fa01db5a`](https://github.com/Jatin-nicon/tenali/commit/fa01db5aba7a596576192a75e02a755917fe922f) — **muditagrawal2007** — anchor /api/playground* fetches to the current sub-path
+- 🐛 [`fa01db5a`](https://github.com/vicharanashala/tenali/commit/fa01db5aba7a596576192a75e02a755917fe922f) — **muditagrawal2007** — anchor /api/playground* fetches to the current sub-path
     - 📁 **2 files:** `client/src/LocalCompilerApp.jsx` `+11 −2`, `client/src/PlaygroundApp.jsx` `+10 −1`
     - 📊 **`+21 −3`** · 2 files
-- 🐛 [`6ca43b52`](https://github.com/Jatin-nicon/tenali/commit/6ca43b520bf17ac824701491211ce52e06daebee) — **muditagrawal2007** — redirect root / to /summership/ + nginx template + deployment docs
+- 🐛 [`6ca43b52`](https://github.com/vicharanashala/tenali/commit/6ca43b520bf17ac824701491211ce52e06daebee) — **muditagrawal2007** — redirect root / to /summership/ + nginx template + deployment docs
     - 📁 **3 files:** `DEPLOYMENT.md` `+88 −0`, `server/deploy/tenali-nginx.conf` `+80 −0`, `server/index.js` `+10 −0`
     - 📊 **`+178 −0`** · 3 files
-- 🐛 [`6fa596bf`](https://github.com/Jatin-nicon/tenali/commit/6fa596bf4ca14e65f0e56f5c2ff244629d498684) — **muditagrawal2007** — lock impure Math.random values that ran during render
+- 🐛 [`6fa596bf`](https://github.com/vicharanashala/tenali/commit/6fa596bf4ca14e65f0e56f5c2ff244629d498684) — **muditagrawal2007** — lock impure Math.random values that ran during render
     - 📁 **1 file:** `client/src/App.jsx` `+37 −26`
     - 📊 **`+37 −26`** · 1 file
-- 🐛 [`07a2ae4f`](https://github.com/Jatin-nicon/tenali/commit/07a2ae4f7a6e0af68ecb0085a3a9e9005586499c) — **muditagrawal2007** — use correct localStorage key 'tenali-auth-token' in progress hooks
+- 🐛 [`07a2ae4f`](https://github.com/vicharanashala/tenali/commit/07a2ae4f7a6e0af68ecb0085a3a9e9005586499c) — **muditagrawal2007** — use correct localStorage key 'tenali-auth-token' in progress hooks
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`e7d3f649`](https://github.com/Jatin-nicon/tenali/commit/e7d3f649206b95685750170975952c3709825ca3) — **jgupta05072003-code** — 🔀 PR [#21](https://github.com/Jatin-nicon/tenali/pull/21) from `harshyy07` — feat-hints
-- 💄 [`df8d1a2f`](https://github.com/Jatin-nicon/tenali/commit/df8d1a2fd0c83dfc86ce978544d4778ef79b3ba3) — **priyanshu7725** — standardize button colors, typography fallbacks, and font scaling to match Tenali platform design system
+- 📌 [`e7d3f649`](https://github.com/vicharanashala/tenali/commit/e7d3f649206b95685750170975952c3709825ca3) — **jgupta05072003-code** — 🔀 PR [#21](https://github.com/vicharanashala/tenali/pull/21) from `harshyy07` — feat-hints
+- 💄 [`df8d1a2f`](https://github.com/vicharanashala/tenali/commit/df8d1a2fd0c83dfc86ce978544d4778ef79b3ba3) — **priyanshu7725** — standardize button colors, typography fallbacks, and font scaling to match Tenali platform design system
     - 📁 **6 files:** `client/src/monsters/CureFlow.jsx` `+9 −7`, `client/src/monsters/GuidedSolver.jsx` `+9 −9`, `client/src/monsters/HallPanel.jsx` `+3 −3`, `client/src/monsters/MonsterCard.jsx` `+7 −6`, `client/src/monsters/MonsterDetail.jsx` `+10 −9`, `client/src/monsters/MonsterToast.jsx` `+12 −7`
     - 📊 **`+50 −41`** · 6 files
 
 #### 📅 2026-08-05  <sub>(4 commits)</sub>
 
-- 📌 [`f8026169`](https://github.com/Jatin-nicon/tenali/commit/f8026169b8acbd7d3a2bbad12671ccd59b666b1d) — **harshyy07** — Merge branch 'main' into feat-hints
-- 📌 [`fcf92744`](https://github.com/Jatin-nicon/tenali/commit/fcf92744bfab006cd2463fb1b54b9fc446421891) — **Shreejal Bangera** — Modified interaction in level 5,6,7 and improved overall quiz flow
+- 📌 [`f8026169`](https://github.com/vicharanashala/tenali/commit/f8026169b8acbd7d3a2bbad12671ccd59b666b1d) — **harshyy07** — Merge branch 'main' into feat-hints
+- 📌 [`fcf92744`](https://github.com/vicharanashala/tenali/commit/fcf92744bfab006cd2463fb1b54b9fc446421891) — **Shreejal Bangera** — Modified interaction in level 5,6,7 and improved overall quiz flow
     - 📁 **1 file:** `client/src/vachana/exercises/ReadingTraps.jsx` `+270 −145`
     - 📊 **`+270 −145`** · 1 file
-- 📌 [`9e736b9c`](https://github.com/Jatin-nicon/tenali/commit/9e736b9c6c01a24a6e50031b632a25adbe0af22f) — **harshyy07** — Merge branch 'main' into feat-hints
-- ✨ [`8d6c936a`](https://github.com/Jatin-nicon/tenali/commit/8d6c936a68430485049e97133320237ddb06a900) — **disha01bansal** — add treasure hunt gameplay and session support
-    - 📁 **10 files:** `client/src/anonId.js` `+13 −0`, `client/src/treasurehunt/EquationGate.jsx` `+87 −13`, `client/src/treasurehunt/LifeHearts.jsx` `+30 −0`, `client/src/treasurehunt/TreasureHuntApp.jsx` `+419 −58`, `client/src/treasurehunt/equationgate.css` `+164 −13`, `client/src/treasurehunt/lifehearts.css` `+57 −0`, `client/src/treasurehunt/treasurehunt.css` `+340 −11`, `server/auth.js` `+1 −1` *(+2 more in [`8d6c936a`](https://github.com/Jatin-nicon/tenali/commit/8d6c936a68430485049e97133320237ddb06a900))*
+- 📌 [`9e736b9c`](https://github.com/vicharanashala/tenali/commit/9e736b9c6c01a24a6e50031b632a25adbe0af22f) — **harshyy07** — Merge branch 'main' into feat-hints
+- ✨ [`8d6c936a`](https://github.com/vicharanashala/tenali/commit/8d6c936a68430485049e97133320237ddb06a900) — **disha01bansal** — add treasure hunt gameplay and session support
+    - 📁 **10 files:** `client/src/anonId.js` `+13 −0`, `client/src/treasurehunt/EquationGate.jsx` `+87 −13`, `client/src/treasurehunt/LifeHearts.jsx` `+30 −0`, `client/src/treasurehunt/TreasureHuntApp.jsx` `+419 −58`, `client/src/treasurehunt/equationgate.css` `+164 −13`, `client/src/treasurehunt/lifehearts.css` `+57 −0`, `client/src/treasurehunt/treasurehunt.css` `+340 −11`, `server/auth.js` `+1 −1` *(+2 more in [`8d6c936a`](https://github.com/vicharanashala/tenali/commit/8d6c936a68430485049e97133320237ddb06a900))*
     - 📊 **`+1547 −136`** · 10 files
 
 #### 📅 2026-08-04  <sub>(4 commits)</sub>
 
-- 🔀 [`3d333280`](https://github.com/Jatin-nicon/tenali/commit/3d3332806b698b0ea4a762e23b23e5bf51d8c163) — **priyanshu7725** — sync upstream/main into feature/monster-misconceptions and resolve App.jsx conflicts
-- 📌 [`f2f81c79`](https://github.com/Jatin-nicon/tenali/commit/f2f81c79ca050b46dd4858738a0dac24527139cb) — **Shreejal Bangera** — Improve level 3 and level 4 interactions and visuals
+- 🔀 [`3d333280`](https://github.com/vicharanashala/tenali/commit/3d3332806b698b0ea4a762e23b23e5bf51d8c163) — **priyanshu7725** — sync upstream/main into feature/monster-misconceptions and resolve App.jsx conflicts
+- 📌 [`f2f81c79`](https://github.com/vicharanashala/tenali/commit/f2f81c79ca050b46dd4858738a0dac24527139cb) — **Shreejal Bangera** — Improve level 3 and level 4 interactions and visuals
     - 📁 **1 file:** `client/src/vachana/exercises/ReadingTraps.jsx` `+363 −133`
     - 📊 **`+363 −133`** · 1 file
-- 📌 [`3120192d`](https://github.com/Jatin-nicon/tenali/commit/3120192df6e0c919d86d0167587bf2abf7b3956b) — **harshyy07** — Merge branch 'main' into feat-hints
-- 📌 [`d97bc378`](https://github.com/Jatin-nicon/tenali/commit/d97bc378271108e2ffcde2444739d3f6c7042b47) — **Shreejal Bangera** — Improve Level 1 and 2 visual math interactions and question rendering
+- 📌 [`3120192d`](https://github.com/vicharanashala/tenali/commit/3120192df6e0c919d86d0167587bf2abf7b3956b) — **harshyy07** — Merge branch 'main' into feat-hints
+- 📌 [`d97bc378`](https://github.com/vicharanashala/tenali/commit/d97bc378271108e2ffcde2444739d3f6c7042b47) — **Shreejal Bangera** — Improve Level 1 and 2 visual math interactions and question rendering
     - 📁 **1 file:** `client/src/vachana/exercises/ReadingTraps.jsx` `+822 −143`
     - 📊 **`+822 −143`** · 1 file
 
 #### 📅 2026-08-03  <sub>(39 commits)</sub>
 
-- ✨ [`a4ea7c80`](https://github.com/Jatin-nicon/tenali/commit/a4ea7c8017ea4f58a43fb72f6693ae1f5d43ba16) — **Athira** — add Angles-only Learn-Test prototype with visual learning
+- ✨ [`a4ea7c80`](https://github.com/vicharanashala/tenali/commit/a4ea7c8017ea4f58a43fb72f6693ae1f5d43ba16) — **Athira** — add Angles-only Learn-Test prototype with visual learning
     - 📁 **3 files:** `client/src/App.jsx` `+57 −27`, `client/src/components/LearningVisual.jsx` `+157 −0`, `client/src/data/learnContent/angles.json` `+18 −13`
     - 📊 **`+232 −40`** · 3 files
-- 📌 [`9ff9ac5e`](https://github.com/Jatin-nicon/tenali/commit/9ff9ac5e78c578ceec2b053bfd9f2074c5d9e192) — **Athira** — Save work before syncing with upstream
+- 📌 [`9ff9ac5e`](https://github.com/vicharanashala/tenali/commit/9ff9ac5e78c578ceec2b053bfd9f2074c5d9e192) — **Athira** — Save work before syncing with upstream
     - 📁 **1 file:** `client/package-lock.json` `+9 −0`
     - 📊 **`+9 −0`** · 1 file
-- 📌 [`70d3fce5`](https://github.com/Jatin-nicon/tenali/commit/70d3fce5a5fbb2cf4d3d6aa6e329ef5ffba53342) — **Athira** — added time-bounded learning sections
+- 📌 [`70d3fce5`](https://github.com/vicharanashala/tenali/commit/70d3fce5a5fbb2cf4d3d6aa6e329ef5ffba53342) — **Athira** — added time-bounded learning sections
     - 📁 **2 files:** `README.md` `+17 −0`, `client/src/App.jsx` `+168 −87`
     - 📊 **`+185 −87`** · 2 files
-- 📌 [`0ccbd08d`](https://github.com/Jatin-nicon/tenali/commit/0ccbd08d512368018e5f89e7f47f0f6090397e51) — **Athira** — Improved the UI of Learn section
-    - 📁 **80 files:** `client/src/data/fix_batch_a.cjs` `+113 −0`, `client/src/data/fix_batch_b.cjs` `+113 −0`, `client/src/data/fix_batch_c.cjs` `+113 −0`, `client/src/data/fix_batch_d.cjs` `+113 −0`, `client/src/data/fix_batch_e.cjs` `+113 −0`, `client/src/data/fix_batch_f.cjs` `+113 −0`, `client/src/data/fix_batch_g.cjs` `+123 −0`, `client/src/data/learnContent.js` `+3 −2` *(+72 more in [`0ccbd08d`](https://github.com/Jatin-nicon/tenali/commit/0ccbd08d512368018e5f89e7f47f0f6090397e51))*
+- 📌 [`0ccbd08d`](https://github.com/vicharanashala/tenali/commit/0ccbd08d512368018e5f89e7f47f0f6090397e51) — **Athira** — Improved the UI of Learn section
+    - 📁 **80 files:** `client/src/data/fix_batch_a.cjs` `+113 −0`, `client/src/data/fix_batch_b.cjs` `+113 −0`, `client/src/data/fix_batch_c.cjs` `+113 −0`, `client/src/data/fix_batch_d.cjs` `+113 −0`, `client/src/data/fix_batch_e.cjs` `+113 −0`, `client/src/data/fix_batch_f.cjs` `+113 −0`, `client/src/data/fix_batch_g.cjs` `+123 −0`, `client/src/data/learnContent.js` `+3 −2` *(+72 more in [`0ccbd08d`](https://github.com/vicharanashala/tenali/commit/0ccbd08d512368018e5f89e7f47f0f6090397e51))*
     - 📊 **`+1843 −1040`** · 80 files
-- ✨ [`fdae9251`](https://github.com/Jatin-nicon/tenali/commit/fdae925176cbe74ca783bc6653794f042c4eeabd) — **Athira** — add learn content architecture and learn/test workflow
-    - 📁 **96 files:** `client/src/App.css` `+145 −0`, `client/src/App.jsx` `+257 −0`, `client/src/data/learnContent.js` `+42 −0`, `client/src/data/learnContent/addition.json` `+30 −0`, `client/src/data/learnContent/algebra.json` `+30 −0`, `client/src/data/learnContent/angles.json` `+30 −0`, `client/src/data/learnContent/banking.json` `+30 −0`, `client/src/data/learnContent/bases.json` `+30 −0` *(+88 more in [`fdae9251`](https://github.com/Jatin-nicon/tenali/commit/fdae925176cbe74ca783bc6653794f042c4eeabd))*
+- ✨ [`fdae9251`](https://github.com/vicharanashala/tenali/commit/fdae925176cbe74ca783bc6653794f042c4eeabd) — **Athira** — add learn content architecture and learn/test workflow
+    - 📁 **96 files:** `client/src/App.css` `+145 −0`, `client/src/App.jsx` `+257 −0`, `client/src/data/learnContent.js` `+42 −0`, `client/src/data/learnContent/addition.json` `+30 −0`, `client/src/data/learnContent/algebra.json` `+30 −0`, `client/src/data/learnContent/angles.json` `+30 −0`, `client/src/data/learnContent/banking.json` `+30 −0`, `client/src/data/learnContent/bases.json` `+30 −0` *(+88 more in [`fdae9251`](https://github.com/vicharanashala/tenali/commit/fdae925176cbe74ca783bc6653794f042c4eeabd))*
     - 📊 **`+5480 −0`** · 96 files
-- 📌 [`5ecb94c1`](https://github.com/Jatin-nicon/tenali/commit/5ecb94c1ef5c002f317f319fba9e07655f43a837) — **jgupta05072003-code** — 🔀 PR [#36](https://github.com/Jatin-nicon/tenali/pull/36) from `SaniyaJos` — feat/contrast-challenge-enhancement
-- 📌 [`270bb2b6`](https://github.com/Jatin-nicon/tenali/commit/270bb2b66f9d793af35a85364d20dd8a5037785e) — **harshyy07** — Merge branch 'main' into feat-hints
-- 📌 [`67da084a`](https://github.com/Jatin-nicon/tenali/commit/67da084abc99e4f062fa86c61982e1573fb8cb99) — **harshyy07** — Merge upstream main, resolving README.md stats conflict
-- ✨ [`cbb2bc03`](https://github.com/Jatin-nicon/tenali/commit/cbb2bc03ef0dabaa8b21cf005728e99ed3712409) — **Mudit Agrawal** — deep per-commit details — files + stats + body
+- 📌 [`5ecb94c1`](https://github.com/vicharanashala/tenali/commit/5ecb94c1ef5c002f317f319fba9e07655f43a837) — **jgupta05072003-code** — 🔀 PR [#36](https://github.com/vicharanashala/tenali/pull/36) from `SaniyaJos` — feat/contrast-challenge-enhancement
+- 📌 [`270bb2b6`](https://github.com/vicharanashala/tenali/commit/270bb2b66f9d793af35a85364d20dd8a5037785e) — **harshyy07** — Merge branch 'main' into feat-hints
+- 📌 [`67da084a`](https://github.com/vicharanashala/tenali/commit/67da084abc99e4f062fa86c61982e1573fb8cb99) — **harshyy07** — Merge upstream main, resolving README.md stats conflict
+- ✨ [`cbb2bc03`](https://github.com/vicharanashala/tenali/commit/cbb2bc03ef0dabaa8b21cf005728e99ed3712409) — **Mudit Agrawal** — deep per-commit details — files + stats + body
     - 📁 **4 files:** `CHANGELOG.md` `+1397 −278`, `CONTRIBUTORS.md` `+30 −30`, `README.md` `+10 −10`, `scripts/update-readme-contributors.js` `+137 −67`
     - 📊 **`+1574 −385`** · 4 files
-- ✨ [`8660e3fa`](https://github.com/Jatin-nicon/tenali/commit/8660e3fa7ee5ba614d50519c8d369774bb0db9cc) — **Mudit Agrawal** — add per-day 'What changed today' summary block
+- ✨ [`8660e3fa`](https://github.com/vicharanashala/tenali/commit/8660e3fa7ee5ba614d50519c8d369774bb0db9cc) — **Mudit Agrawal** — add per-day 'What changed today' summary block
     - 📁 **4 files:** `CHANGELOG.md` `+227 −6`, `CONTRIBUTORS.md` `+38 −39`, `README.md` `+10 −10`, `scripts/update-readme-contributors.js` `+73 −2`
     - 📊 **`+348 −57`** · 4 files
-- 📌 [`8a2c3919`](https://github.com/Jatin-nicon/tenali/commit/8a2c3919b04c426d6399f7bda84946c07839747a) — **muditagrawal2007** — Update README.md
+- 📌 [`8a2c3919`](https://github.com/vicharanashala/tenali/commit/8a2c3919b04c426d6399f7bda84946c07839747a) — **muditagrawal2007** — Update README.md
     - 📁 **1 file:** `README.md` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 🔀 [`b18d55bf`](https://github.com/Jatin-nicon/tenali/commit/b18d55bf9b79bfda75dec75f76b4279f2b798de8) — **harshyy07** — resolve conflicts with main, keeping progressive hints and translation features
-- ♻️ [`32735bf0`](https://github.com/Jatin-nicon/tenali/commit/32735bf0ff1a4c167a05032c200bb859c10271e5) — **Mudit Agrawal** — bot now fires only on cron + manual dispatch
+- 🔀 [`b18d55bf`](https://github.com/vicharanashala/tenali/commit/b18d55bf9b79bfda75dec75f76b4279f2b798de8) — **harshyy07** — resolve conflicts with main, keeping progressive hints and translation features
+- ♻️ [`32735bf0`](https://github.com/vicharanashala/tenali/commit/32735bf0ff1a4c167a05032c200bb859c10271e5) — **Mudit Agrawal** — bot now fires only on cron + manual dispatch
     - 📁 **3 files:** `.github/workflows/update-readme.yml` `+7 −13`, `CONTRIBUTORS.md` `+13 −1`, `README.md` `+5 −3`
     - 📊 **`+25 −17`** · 3 files
-- ✨ [`2f21f413`](https://github.com/Jatin-nicon/tenali/commit/2f21f413766da1609e3ac573fcfb16547576b242) — **Mudit Agrawal** — make commit SHAs and PR numbers clickable
+- ✨ [`2f21f413`](https://github.com/vicharanashala/tenali/commit/2f21f413766da1609e3ac573fcfb16547576b242) — **Mudit Agrawal** — make commit SHAs and PR numbers clickable
     - 📁 **4 files:** `CHANGELOG.md` `+790 −788`, `CONTRIBUTORS.md` `+30 −30`, `README.md` `+8 −8`, `scripts/update-readme-contributors.js` `+12 −3`
     - 📊 **`+840 −829`** · 4 files
-- ✨ [`7ece7dc4`](https://github.com/Jatin-nicon/tenali/commit/7ece7dc45f4ba1d08e25aa452a2605cfa71c1468) — **Mudit Agrawal** — auto-generated point-wise commit log (bot-managed)
+- ✨ [`7ece7dc4`](https://github.com/vicharanashala/tenali/commit/7ece7dc45f4ba1d08e25aa452a2605cfa71c1468) — **Mudit Agrawal** — auto-generated point-wise commit log (bot-managed)
     - 📁 **5 files:** `.github/workflows/update-readme.yml` `+7 −3`, `CHANGELOG.md` `+930 −910`, `CONTRIBUTORS.md` `+32 −9`, `README.md` `+4 −4`, `scripts/update-readme-contributors.js` `+105 −1`
     - 📊 **`+1078 −927`** · 5 files
-- 📝 [`5ef467c9`](https://github.com/Jatin-nicon/tenali/commit/5ef467c9dd475facd790c74f4d859c523de1e401) — **Mudit Agrawal** — reframe tagline around math strengths (drop GK/vocab/Logic)
+- 📝 [`5ef467c9`](https://github.com/vicharanashala/tenali/commit/5ef467c9dd475facd790c74f4d859c523de1e401) — **Mudit Agrawal** — reframe tagline around math strengths (drop GK/vocab/Logic)
     - 📁 **1 file:** `README.md` `+7 −7`
     - 📊 **`+7 −7`** · 1 file
-- 🐛 [`6f4a54a8`](https://github.com/Jatin-nicon/tenali/commit/6f4a54a8912478b95630891694a7bfc4026b67ec) — **Mudit Agrawal** — use pull_request_target so bot can push on merged PRs
+- 🐛 [`6f4a54a8`](https://github.com/vicharanashala/tenali/commit/6f4a54a8912478b95630891694a7bfc4026b67ec) — **Mudit Agrawal** — use pull_request_target so bot can push on merged PRs
     - 📁 **1 file:** `.github/workflows/update-readme.yml` `+13 −7`
     - 📊 **`+13 −7`** · 1 file
-- 📌 [`e99ff854`](https://github.com/Jatin-nicon/tenali/commit/e99ff854d39e04bdf0246bb60e1c1dffc80b8371) — **muditagrawal2007** — 🔀 PR [#136](https://github.com/Jatin-nicon/tenali/pull/136) from `muditagrawal2007` — new
-- ✨ [`a2620a7d`](https://github.com/Jatin-nicon/tenali/commit/a2620a7d63865d41958338fa8ce2fbf880f034e2) — **Mudit Agrawal** — auto-add any new git author to the leaderboard
+- 📌 [`e99ff854`](https://github.com/vicharanashala/tenali/commit/e99ff854d39e04bdf0246bb60e1c1dffc80b8371) — **muditagrawal2007** — 🔀 PR [#136](https://github.com/vicharanashala/tenali/pull/136) from `muditagrawal2007` — new
+- ✨ [`a2620a7d`](https://github.com/vicharanashala/tenali/commit/a2620a7d63865d41958338fa8ce2fbf880f034e2) — **Mudit Agrawal** — auto-add any new git author to the leaderboard
     - 📁 **3 files:** `CONTRIBUTORS.md` `+27 −6`, `README.md` `+6 −5`, `scripts/update-readme-contributors.js` `+42 −7`
     - 📊 **`+75 −18`** · 3 files
-- 📌 [`1e6c5eec`](https://github.com/Jatin-nicon/tenali/commit/1e6c5eec52904863af1bba0f4141ef3b735ee31f) — **muditagrawal2007** — Merge branch 'vicharanashala:main' into new
-- 🐛 [`9a489072`](https://github.com/Jatin-nicon/tenali/commit/9a4890727c10eb62ad8e2d189f36bd72b4c2f12e) — **Mudit Agrawal** — point stars/forks badges at canonical upstream (vicharanashala/tenali)
+- 📌 [`1e6c5eec`](https://github.com/vicharanashala/tenali/commit/1e6c5eec52904863af1bba0f4141ef3b735ee31f) — **muditagrawal2007** — Merge branch 'vicharanashala:main' into new
+- 🐛 [`9a489072`](https://github.com/vicharanashala/tenali/commit/9a4890727c10eb62ad8e2d189f36bd72b4c2f12e) — **Mudit Agrawal** — point stars/forks badges at canonical upstream (vicharanashala/tenali)
     - 📁 **2 files:** `CONTRIBUTORS.md` `+3 −3`, `README.md` `+6 −5`
     - 📊 **`+9 −8`** · 2 files
-- ✨ [`7ba7054a`](https://github.com/Jatin-nicon/tenali/commit/7ba7054acda531e50a1186cc2e8e6bfd27992598) — **Mudit Agrawal** — show live ⭐ stars, 🍴 forks, 🐛 open issues in at-a-glance
+- ✨ [`7ba7054a`](https://github.com/vicharanashala/tenali/commit/7ba7054acda531e50a1186cc2e8e6bfd27992598) — **Mudit Agrawal** — show live ⭐ stars, 🍴 forks, 🐛 open issues in at-a-glance
     - 📁 **3 files:** `CONTRIBUTORS.md` `+1 −1`, `README.md` `+5 −4`, `scripts/update-readme-contributors.js` `+29 −5`
     - 📊 **`+35 −10`** · 3 files
-- 📌 [`7b2e9715`](https://github.com/Jatin-nicon/tenali/commit/7b2e971508c82c739782c8c725e1a65c5fa4620e) — **muditagrawal2007** — 🔀 PR [#135](https://github.com/Jatin-nicon/tenali/pull/135) from `muditagrawal2007` — new
-- 🐛 [`286a1da0`](https://github.com/Jatin-nicon/tenali/commit/286a1da0cde6794aa912c244c1d04465096e68e7) — **Mudit Agrawal** — make rank emoji dynamic — single source of truth
+- 📌 [`7b2e9715`](https://github.com/vicharanashala/tenali/commit/7b2e971508c82c739782c8c725e1a65c5fa4620e) — **muditagrawal2007** — 🔀 PR [#135](https://github.com/vicharanashala/tenali/pull/135) from `muditagrawal2007` — new
+- 🐛 [`286a1da0`](https://github.com/vicharanashala/tenali/commit/286a1da0cde6794aa912c244c1d04465096e68e7) — **Mudit Agrawal** — make rank emoji dynamic — single source of truth
     - 📁 **3 files:** `CONTRIBUTORS.md` `+48 −47`, `README.md` `+19 −19`, `scripts/update-readme-contributors.js` `+41 −25`
     - 📊 **`+108 −91`** · 3 files
-- ♻️ [`a45a8ea1`](https://github.com/Jatin-nicon/tenali/commit/a45a8ea187ab8b70ca9d0a9add062aea191a64e3) — **Mudit Agrawal** — split detailed cards into CONTRIBUTORS.md
+- ♻️ [`a45a8ea1`](https://github.com/vicharanashala/tenali/commit/a45a8ea187ab8b70ca9d0a9add062aea191a64e3) — **Mudit Agrawal** — split detailed cards into CONTRIBUTORS.md
     - 📁 **4 files:** `.github/workflows/update-readme.yml` `+9 −4`, `CONTRIBUTORS.md` `+580 −0`, `README.md` `+9 −441`, `scripts/update-readme-contributors.js` `+10 −2`
     - 📊 **`+608 −447`** · 4 files
-- 📝 [`897c2e3b`](https://github.com/Jatin-nicon/tenali/commit/897c2e3b85959d2b864424a63b53108d677e93d2) — **Mudit Agrawal** — re-label Mudit as 'Maintainer' (drop ambiguous 'Repo Owner')
+- 📝 [`897c2e3b`](https://github.com/vicharanashala/tenali/commit/897c2e3b85959d2b864424a63b53108d677e93d2) — **Mudit Agrawal** — re-label Mudit as 'Maintainer' (drop ambiguous 'Repo Owner')
     - 📁 **2 files:** `README.md` `+4 −4`, `scripts/update-readme-contributors.js` `+1 −1`
     - 📊 **`+5 −5`** · 2 files
-- 📝 [`d9ecb3b8`](https://github.com/Jatin-nicon/tenali/commit/d9ecb3b856ca7af600889412ce2cade81161e517) — **Mudit Agrawal** — expand Sudarshan's profile with his 7 custom routes + 30+ puzzle families
+- 📝 [`d9ecb3b8`](https://github.com/vicharanashala/tenali/commit/d9ecb3b856ca7af600889412ce2cade81161e517) — **Mudit Agrawal** — expand Sudarshan's profile with his 7 custom routes + 30+ puzzle families
     - 📁 **2 files:** `README.md` `+17 −9`, `scripts/update-readme-contributors.js` `+14 −6`
     - 📊 **`+31 −15`** · 2 files
-- 📝 [`53a60fc0`](https://github.com/Jatin-nicon/tenali/commit/53a60fc0c8d1bf9ad44767e375e35623f4f0a7b7) — **Mudit Agrawal** — expand Mudit Agrawal's profile with Sudoku + Playground features
+- 📝 [`53a60fc0`](https://github.com/vicharanashala/tenali/commit/53a60fc0c8d1bf9ad44767e375e35623f4f0a7b7) — **Mudit Agrawal** — expand Mudit Agrawal's profile with Sudoku + Playground features
     - 📁 **2 files:** `README.md` `+10 −5`, `scripts/update-readme-contributors.js` `+7 −2`
     - 📊 **`+17 −7`** · 2 files
-- 📌 [`1d670d03`](https://github.com/Jatin-nicon/tenali/commit/1d670d034dbef287f1accaa7b2c291a264d514f8) — **Mudit Agrawal** — stop rendering contributor email addresses
+- 📌 [`1d670d03`](https://github.com/vicharanashala/tenali/commit/1d670d034dbef287f1accaa7b2c291a264d514f8) — **Mudit Agrawal** — stop rendering contributor email addresses
     - 📁 **2 files:** `README.md` `+10 −27`, `scripts/update-readme-contributors.js` `+7 −15`
     - 📊 **`+17 −42`** · 2 files
-- 📌 [`cf68af6f`](https://github.com/Jatin-nicon/tenali/commit/cf68af6ff7c3ca604e4094e483cc1238c22ad121) — **muditagrawal2007** — added the readme.md
+- 📌 [`cf68af6f`](https://github.com/vicharanashala/tenali/commit/cf68af6ff7c3ca604e4094e483cc1238c22ad121) — **muditagrawal2007** — added the readme.md
     - 📁 **1 file:** `README.md` `+3 −3`
     - 📊 **`+3 −3`** · 1 file
-- 🐛 [`693c4b9e`](https://github.com/Jatin-nicon/tenali/commit/693c4b9e9b2dca7935050ffa5b2928c4b1454c5d) — **Mudit Agrawal** — preserve fallback real name when API returns login-as-name
+- 🐛 [`693c4b9e`](https://github.com/vicharanashala/tenali/commit/693c4b9e9b2dca7935050ffa5b2928c4b1454c5d) — **Mudit Agrawal** — preserve fallback real name when API returns login-as-name
     - 📁 **2 files:** `README.md` `+28 −29`, `scripts/update-readme-contributors.js` `+7 −2`
     - 📊 **`+35 −31`** · 2 files
-- ✨ [`98da836e`](https://github.com/Jatin-nicon/tenali/commit/98da836e8aff339fe5f546e9be9658ba75f4333b) — **Mudit Agrawal** — full bot-generated contributor section + '+' merge indicator
+- ✨ [`98da836e`](https://github.com/vicharanashala/tenali/commit/98da836e8aff339fe5f546e9be9658ba75f4333b) — **Mudit Agrawal** — full bot-generated contributor section + '+' merge indicator
     - 📁 **2 files:** `README.md` `+122 −99`, `scripts/update-readme-contributors.js` `+343 −66`
     - 📊 **`+465 −165`** · 2 files
-- 📌 [`a232fdc4`](https://github.com/Jatin-nicon/tenali/commit/a232fdc44eea1a9102c268e9362bf14403b5a1ee) — **muditagrawal2007** — 🔀 PR [#134](https://github.com/Jatin-nicon/tenali/pull/134) from `muditagrawal2007` — new
-- 📌 [`aa9eb2d6`](https://github.com/Jatin-nicon/tenali/commit/aa9eb2d62c7a0d7da8b54d08f0d65bc7ddf0c0bb) — **muditagrawal2007** — added the readme.md
+- 📌 [`a232fdc4`](https://github.com/vicharanashala/tenali/commit/a232fdc44eea1a9102c268e9362bf14403b5a1ee) — **muditagrawal2007** — 🔀 PR [#134](https://github.com/vicharanashala/tenali/pull/134) from `muditagrawal2007` — new
+- 📌 [`aa9eb2d6`](https://github.com/vicharanashala/tenali/commit/aa9eb2d62c7a0d7da8b54d08f0d65bc7ddf0c0bb) — **muditagrawal2007** — added the readme.md
     - 📁 **1 file:** `README.md` `+2 −8`
     - 📊 **`+2 −8`** · 1 file
-- 📌 [`101f75d3`](https://github.com/Jatin-nicon/tenali/commit/101f75d3c95b397d44635cff3c50aaa57a5c0e24) — **Mudit Agrawal** — redact production droplet IP from deployment topology
+- 📌 [`101f75d3`](https://github.com/vicharanashala/tenali/commit/101f75d3c95b397d44635cff3c50aaa57a5c0e24) — **Mudit Agrawal** — redact production droplet IP from deployment topology
     - 📁 **1 file:** `CLAUDE.md` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`bdb434bf`](https://github.com/Jatin-nicon/tenali/commit/bdb434bfa9a657873ad7ea7f3ae03d899b629688) — **Mudit Agrawal** — redact production droplet IP from public docs
+- 📌 [`bdb434bf`](https://github.com/vicharanashala/tenali/commit/bdb434bfa9a657873ad7ea7f3ae03d899b629688) — **Mudit Agrawal** — redact production droplet IP from public docs
     - 📁 **1 file:** `README.md` `+5 −3`
     - 📊 **`+5 −3`** · 1 file
-- 📌 [`7e7e1e48`](https://github.com/Jatin-nicon/tenali/commit/7e7e1e48c82d36413cccfb37b3e7dbcb23603faf) — **muditagrawal2007** — added the readme.md
+- 📌 [`7e7e1e48`](https://github.com/vicharanashala/tenali/commit/7e7e1e48c82d36413cccfb37b3e7dbcb23603faf) — **muditagrawal2007** — added the readme.md
     - 📁 **1 file:** `README.md` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📝 [`397e298f`](https://github.com/Jatin-nicon/tenali/commit/397e298fff2c887035536a3bf130183d4872b70b) — **Mudit Agrawal** — simplify user workflow, fix fork-chain docs, auto-refresh contributor stats
+- 📝 [`397e298f`](https://github.com/vicharanashala/tenali/commit/397e298fff2c887035536a3bf130183d4872b70b) — **Mudit Agrawal** — simplify user workflow, fix fork-chain docs, auto-refresh contributor stats
     - 📁 **1 file:** `README.md` `+44 −38`
     - 📊 **`+44 −38`** · 1 file
-- 📌 [`3326d15e`](https://github.com/Jatin-nicon/tenali/commit/3326d15e0d75ccb9184e9be1eb5681013ea2b39e) — **muditagrawal2007** — added the readme.md
-    - 📁 **49 files:** `.github/workflows/update-readme.yml` `+88 −0`, `README.md` `+1051 −0`, `package.json` `+11 −0`, `scripts/update-readme-contributors.js` `+455 −0`, `server/node_modules/.package-lock.json` `+131 −65`, `server/node_modules/body-parser/README.md` `+16 −1`, `server/node_modules/body-parser/index.js` `+4 −20`, `server/node_modules/body-parser/lib/read.js` `+17 −17` *(+41 more in [`3326d15e`](https://github.com/Jatin-nicon/tenali/commit/3326d15e0d75ccb9184e9be1eb5681013ea2b39e))*
+- 📌 [`3326d15e`](https://github.com/vicharanashala/tenali/commit/3326d15e0d75ccb9184e9be1eb5681013ea2b39e) — **muditagrawal2007** — added the readme.md
+    - 📁 **49 files:** `.github/workflows/update-readme.yml` `+88 −0`, `README.md` `+1051 −0`, `package.json` `+11 −0`, `scripts/update-readme-contributors.js` `+455 −0`, `server/node_modules/.package-lock.json` `+131 −65`, `server/node_modules/body-parser/README.md` `+16 −1`, `server/node_modules/body-parser/index.js` `+4 −20`, `server/node_modules/body-parser/lib/read.js` `+17 −17` *(+41 more in [`3326d15e`](https://github.com/vicharanashala/tenali/commit/3326d15e0d75ccb9184e9be1eb5681013ea2b39e))*
     - 📊 **`+3351 −627`** · 49 files
 
 #### 📅 2026-08-01  <sub>(1 commit)</sub>
 
-- 🐛 [`c2d0db6b`](https://github.com/Jatin-nicon/tenali/commit/c2d0db6b8536a2b57c4cd769f757f46706c97dbe) — **Krishna009-pro** — sanitize math expressions against RCE vulnerability and implement /jug-api endpoints
+- 🐛 [`c2d0db6b`](https://github.com/vicharanashala/tenali/commit/c2d0db6b8536a2b57c4cd769f757f46706c97dbe) — **Krishna009-pro** — sanitize math expressions against RCE vulnerability and implement /jug-api endpoints
     - 📁 **4 files:** `client/src/EquationCraftingLab.jsx` `+26 −4`, `client/src/WaterJugLab.jsx` `+9 −0`, `client/vite.config.js` `+2 −0`, `server/index.js` `+90 −4`
     - 📊 **`+127 −8`** · 4 files
 
 #### 📅 2026-07-31  <sub>(2 commits)</sub>
 
-- 🐛 [`01bd9236`](https://github.com/Jatin-nicon/tenali/commit/01bd92363011c6c88155843e97e2651fb485f3a5) — **Krishna009-pro** — register lab routes, resolve non-JSON API errors, and add offline fallback
+- 🐛 [`01bd9236`](https://github.com/vicharanashala/tenali/commit/01bd92363011c6c88155843e97e2651fb485f3a5) — **Krishna009-pro** — register lab routes, resolve non-JSON API errors, and add offline fallback
     - 📁 **4 files:** `client/package-lock.json` `+2 −0`, `client/src/App.jsx` `+5 −3`, `client/src/EquationCraftingLab.jsx` `+159 −58`, `server/index.js` `+94 −0`
     - 📊 **`+260 −61`** · 4 files
-- ✨ [`6d8c96f6`](https://github.com/Jatin-nicon/tenali/commit/6d8c96f63bdd49585aae7bf799fed49768b07911) — **Krishna009-pro** — implement Water Jug and Equation Crafting lab features, 13-level difficulty progression, and UI layout refinements
+- ✨ [`6d8c96f6`](https://github.com/vicharanashala/tenali/commit/6d8c96f63bdd49585aae7bf799fed49768b07911) — **Krishna009-pro** — implement Water Jug and Equation Crafting lab features, 13-level difficulty progression, and UI layout refinements
     - 📁 **6 files:** `client/package-lock.json` `+0 −32`, `client/src/App.jsx` `+14 −0`, `client/src/EquationCraftingLab.css` `+433 −0`, `client/src/EquationCraftingLab.jsx` `+496 −0`, `client/src/WaterJugLab.css` `+1088 −0`, `client/src/WaterJugLab.jsx` `+1470 −0`
     - 📊 **`+3501 −32`** · 6 files
 
 #### 📅 2026-07-30  <sub>(4 commits)</sub>
 
-- 📌 [`5a552d3f`](https://github.com/Jatin-nicon/tenali/commit/5a552d3faa0f1cef154bb1c6facc57780d468230) — **jgupta05072003-code** — 🔀 PR [#128](https://github.com/Jatin-nicon/tenali/pull/128) from `vicharanashala` — refactor/extract-darts-route
-- ♻️ [`86cb13ee`](https://github.com/Jatin-nicon/tenali/commit/86cb13ee14af7a08e3d4ad6ba05fc8d195bd164c) — **Jinal Gupta** — extract /darts-api into its own route module
+- 📌 [`5a552d3f`](https://github.com/vicharanashala/tenali/commit/5a552d3faa0f1cef154bb1c6facc57780d468230) — **jgupta05072003-code** — 🔀 PR [#128](https://github.com/vicharanashala/tenali/pull/128) from `vicharanashala` — refactor/extract-darts-route
+- ♻️ [`86cb13ee`](https://github.com/vicharanashala/tenali/commit/86cb13ee14af7a08e3d4ad6ba05fc8d195bd164c) — **Jinal Gupta** — extract /darts-api into its own route module
     - 📁 **2 files:** `server/index.js` `+2 −48`, `server/routes/darts.js` `+59 −0`
     - 📊 **`+61 −48`** · 2 files
-- 📌 [`a28bb921`](https://github.com/Jatin-nicon/tenali/commit/a28bb9210b20956da79461780819aea890206958) — **jgupta05072003-code** — 🔀 PR [#115](https://github.com/Jatin-nicon/tenali/pull/115) from `vicharanashala` — fix/frontend-api-base-url
-- 🐛 [`2d96c80a`](https://github.com/Jatin-nicon/tenali/commit/2d96c80a8fadc5fddafaf494f9a35c06125bdcda) — **Jinal Gupta** — use API base URL for coordgeom/darts/riddle/visual-math fetch calls
+- 📌 [`a28bb921`](https://github.com/vicharanashala/tenali/commit/a28bb9210b20956da79461780819aea890206958) — **jgupta05072003-code** — 🔀 PR [#115](https://github.com/vicharanashala/tenali/pull/115) from `vicharanashala` — fix/frontend-api-base-url
+- 🐛 [`2d96c80a`](https://github.com/vicharanashala/tenali/commit/2d96c80a8fadc5fddafaf494f9a35c06125bdcda) — **Jinal Gupta** — use API base URL for coordgeom/darts/riddle/visual-math fetch calls
     - 📁 **1 file:** `client/src/App.jsx` `+9 −9`
     - 📊 **`+9 −9`** · 1 file
 
 #### 📅 2026-07-29  <sub>(21 commits)</sub>
 
-- 📌 [`60732b13`](https://github.com/Jatin-nicon/tenali/commit/60732b132ee47ecbc9742e354e86687d750ca6d8) — **jgupta05072003-code** — 🔀 PR [#114](https://github.com/Jatin-nicon/tenali/pull/114) from `vicharanashala` — fix/quiz-custom-components-request-cancellation
-- 🐛 [`8d687982`](https://github.com/Jatin-nicon/tenali/commit/8d6879823b827fd1ea4520dc61e7c3ec4c8fae0f) — **Jinal Gupta** — add request cancellation to the 6 highest-traffic custom quiz components
+- 📌 [`60732b13`](https://github.com/vicharanashala/tenali/commit/60732b132ee47ecbc9742e354e86687d750ca6d8) — **jgupta05072003-code** — 🔀 PR [#114](https://github.com/vicharanashala/tenali/pull/114) from `vicharanashala` — fix/quiz-custom-components-request-cancellation
+- 🐛 [`8d687982`](https://github.com/vicharanashala/tenali/commit/8d6879823b827fd1ea4520dc61e7c3ec4c8fae0f) — **Jinal Gupta** — add request cancellation to the 6 highest-traffic custom quiz components
     - 📁 **1 file:** `client/src/App.jsx` `+144 −54`
     - 📊 **`+144 −54`** · 1 file
-- 📌 [`b571fec9`](https://github.com/Jatin-nicon/tenali/commit/b571fec9bf1273d080e8b144b80f558771b421b9) — **jgupta05072003-code** — 🔀 PR [#113](https://github.com/Jatin-nicon/tenali/pull/113) from `vicharanashala` — fix/quiz-factory-request-cancellation
-- 🐛 [`960ff721`](https://github.com/Jatin-nicon/tenali/commit/960ff7214ac78fb0e73a13d92884cd969b1c6904) — **Jinal Gupta** — cancel in-flight question fetches in makeQuizApp
+- 📌 [`b571fec9`](https://github.com/vicharanashala/tenali/commit/b571fec9bf1273d080e8b144b80f558771b421b9) — **jgupta05072003-code** — 🔀 PR [#113](https://github.com/vicharanashala/tenali/pull/113) from `vicharanashala` — fix/quiz-factory-request-cancellation
+- 🐛 [`960ff721`](https://github.com/vicharanashala/tenali/commit/960ff7214ac78fb0e73a13d92884cd969b1c6904) — **Jinal Gupta** — cancel in-flight question fetches in makeQuizApp
     - 📁 **1 file:** `client/src/App.jsx` `+18 −1`
     - 📊 **`+18 −1`** · 1 file
-- 📌 [`4cf776d0`](https://github.com/Jatin-nicon/tenali/commit/4cf776d024ec14332e76ce0b031f6272fd936792) — **jgupta05072003-code** — 🔀 PR [#112](https://github.com/Jatin-nicon/tenali/pull/112) from `vicharanashala` — fix/progress-update-race-condition
-- 📌 [`17b86dfb`](https://github.com/Jatin-nicon/tenali/commit/17b86dfb2a24189252719bcb669c23405d750bb0) — **jgupta05072003-code** — 🔀 PR [#111](https://github.com/Jatin-nicon/tenali/pull/111) from `vicharanashala` — perf/parallelize-question-vocab-loading
-- 🐛 [`db2a3d50`](https://github.com/Jatin-nicon/tenali/commit/db2a3d50b92e8cf84905a9d050f81e13082499f6) — **Jinal Gupta** — make progress updates atomic to prevent lost-update races
+- 📌 [`4cf776d0`](https://github.com/vicharanashala/tenali/commit/4cf776d024ec14332e76ce0b031f6272fd936792) — **jgupta05072003-code** — 🔀 PR [#112](https://github.com/vicharanashala/tenali/pull/112) from `vicharanashala` — fix/progress-update-race-condition
+- 📌 [`17b86dfb`](https://github.com/vicharanashala/tenali/commit/17b86dfb2a24189252719bcb669c23405d750bb0) — **jgupta05072003-code** — 🔀 PR [#111](https://github.com/vicharanashala/tenali/pull/111) from `vicharanashala` — perf/parallelize-question-vocab-loading
+- 🐛 [`db2a3d50`](https://github.com/vicharanashala/tenali/commit/db2a3d50b92e8cf84905a9d050f81e13082499f6) — **Jinal Gupta** — make progress updates atomic to prevent lost-update races
     - 📁 **1 file:** `server/progress.js` `+34 −20`
     - 📊 **`+34 −20`** · 1 file
-- ⚡ [`3c4877b3`](https://github.com/Jatin-nicon/tenali/commit/3c4877b36617412034e7e529d0e661db494c8454) — **Jinal Gupta** — parallelize question/vocabulary loading at startup
+- ⚡ [`3c4877b3`](https://github.com/vicharanashala/tenali/commit/3c4877b36617412034e7e529d0e661db494c8454) — **Jinal Gupta** — parallelize question/vocabulary loading at startup
     - 📁 **1 file:** `server/index.js` `+51 −18`
     - 📊 **`+51 −18`** · 1 file
-- 📌 [`ef0ba1ae`](https://github.com/Jatin-nicon/tenali/commit/ef0ba1aebbb3c19ffbb86b217caa05d04aedd9ed) — **jgupta05072003-code** — 🔀 PR [#110](https://github.com/Jatin-nicon/tenali/pull/110) from `vicharanashala` — fix/server-error-logging
-- 🐛 [`cb687d07`](https://github.com/Jatin-nicon/tenali/commit/cb687d079bf44263b665b553f874eaa09ab796bd) — **Jinal Gupta** — add structured logging, global error handler, crash logging
+- 📌 [`ef0ba1ae`](https://github.com/vicharanashala/tenali/commit/ef0ba1aebbb3c19ffbb86b217caa05d04aedd9ed) — **jgupta05072003-code** — 🔀 PR [#110](https://github.com/vicharanashala/tenali/pull/110) from `vicharanashala` — fix/server-error-logging
+- 🐛 [`cb687d07`](https://github.com/vicharanashala/tenali/commit/cb687d079bf44263b665b553f874eaa09ab796bd) — **Jinal Gupta** — add structured logging, global error handler, crash logging
     - 📁 **5 files:** `server/auth.js` `+4 −3`, `server/index.js` `+58 −33`, `server/lib/logger.js` `+69 −0`, `server/progress.js` `+2 −1`, `server/translate.js` `+3 −2`
     - 📊 **`+136 −39`** · 5 files
-- 📌 [`1ae25a8a`](https://github.com/Jatin-nicon/tenali/commit/1ae25a8a29a4a5c961e33600ff2c8972896b7d38) — **jgupta05072003-code** — 🔀 PR [#109](https://github.com/Jatin-nicon/tenali/pull/109) from `vicharanashala` — fix/accessibility-audit-round1
-- 🐛 [`1091bf9f`](https://github.com/Jatin-nicon/tenali/commit/1091bf9fbf4b51d70c500d30da93ced972c92820) — **Jinal Gupta** — make the accessibility settings panel itself accessible; label icon-only buttons
+- 📌 [`1ae25a8a`](https://github.com/vicharanashala/tenali/commit/1ae25a8a29a4a5c961e33600ff2c8972896b7d38) — **jgupta05072003-code** — 🔀 PR [#109](https://github.com/vicharanashala/tenali/pull/109) from `vicharanashala` — fix/accessibility-audit-round1
+- 🐛 [`1091bf9f`](https://github.com/vicharanashala/tenali/commit/1091bf9fbf4b51d70c500d30da93ced972c92820) — **Jinal Gupta** — make the accessibility settings panel itself accessible; label icon-only buttons
     - 📁 **2 files:** `client/src/App.jsx` `+3 −3`, `client/src/lib/AccessibilityProvider.jsx` `+56 −5`
     - 📊 **`+59 −8`** · 2 files
-- 📌 [`1f6afa7b`](https://github.com/Jatin-nicon/tenali/commit/1f6afa7ba369bdff5722e08e377570229d01b38d) — **jgupta05072003-code** — 🔀 PR [#108](https://github.com/Jatin-nicon/tenali/pull/108) from `vicharanashala` — fix/translation-server-proxy
-- 🐛 [`b55f8c4d`](https://github.com/Jatin-nicon/tenali/commit/b55f8c4dbc75e94af8415c4f3e53abe2bfd5d665) — **Jinal Gupta** — replace unofficial gtx endpoint with server-side translation proxy
+- 📌 [`1f6afa7b`](https://github.com/vicharanashala/tenali/commit/1f6afa7ba369bdff5722e08e377570229d01b38d) — **jgupta05072003-code** — 🔀 PR [#108](https://github.com/vicharanashala/tenali/pull/108) from `vicharanashala` — fix/translation-server-proxy
+- 🐛 [`b55f8c4d`](https://github.com/vicharanashala/tenali/commit/b55f8c4dbc75e94af8415c4f3e53abe2bfd5d665) — **Jinal Gupta** — replace unofficial gtx endpoint with server-side translation proxy
     - 📁 **4 files:** `.env.example` `+5 −0`, `client/src/lib/AutoTranslator.jsx` `+14 −11`, `server/index.js` `+2 −0`, `server/translate.js` `+99 −0`
     - 📊 **`+120 −11`** · 4 files
-- 📌 [`f9891d7a`](https://github.com/Jatin-nicon/tenali/commit/f9891d7a4095e5b2e777f7a8bd82a0cc5f3a431d) — **jgupta05072003-code** — 🔀 PR [#107](https://github.com/Jatin-nicon/tenali/pull/107) from `vicharanashala` — fix/move-admin-cred-to-env
-- 🐛 [`563d8391`](https://github.com/Jatin-nicon/tenali/commit/563d83911011b3ab5cf96ecfe6c1cc58574e206e) — **Jinal Gupta** — move admin seed credential out of source into env
+- 📌 [`f9891d7a`](https://github.com/vicharanashala/tenali/commit/f9891d7a4095e5b2e777f7a8bd82a0cc5f3a431d) — **jgupta05072003-code** — 🔀 PR [#107](https://github.com/vicharanashala/tenali/pull/107) from `vicharanashala` — fix/move-admin-cred-to-env
+- 🐛 [`563d8391`](https://github.com/vicharanashala/tenali/commit/563d83911011b3ab5cf96ecfe6c1cc58574e206e) — **Jinal Gupta** — move admin seed credential out of source into env
     - 📁 **2 files:** `.env.example` `+5 −0`, `server/auth.js` `+21 −15`
     - 📊 **`+26 −15`** · 2 files
-- 📝 [`578f9c44`](https://github.com/Jatin-nicon/tenali/commit/578f9c445be906c46665cb0539936784501d7943) — **Vaibhav** — add ui-guidelines.md and link it in orientation.md
+- 📝 [`578f9c44`](https://github.com/vicharanashala/tenali/commit/578f9c445be906c46665cb0539936784501d7943) — **Vaibhav** — add ui-guidelines.md and link it in orientation.md
     - 📁 **2 files:** `docs/orientation.md` `+3 −2`, `docs/ui-guidelines.md` `+63 −0`
     - 📊 **`+66 −2`** · 2 files
-- 📝 [`eb25882f`](https://github.com/Jatin-nicon/tenali/commit/eb25882f94a7e598823c37398a2ad20b738826e4) — **Vaibhav** — consolidate presentation guide into orientation doc
+- 📝 [`eb25882f`](https://github.com/vicharanashala/tenali/commit/eb25882f94a7e598823c37398a2ad20b738826e4) — **Vaibhav** — consolidate presentation guide into orientation doc
     - 📁 **1 file:** `docs/orientation.md` `+5 −4`
     - 📊 **`+5 −4`** · 1 file
-- 📝 [`f81b2b97`](https://github.com/Jatin-nicon/tenali/commit/f81b2b977cb17d2ba4fb18a18c33b961cdfb8ee5) — **Vaibhav** — finalize feature issue template with generic problem statement comment
+- 📝 [`f81b2b97`](https://github.com/vicharanashala/tenali/commit/f81b2b977cb17d2ba4fb18a18c33b961cdfb8ee5) — **Vaibhav** — finalize feature issue template with generic problem statement comment
     - 📁 **1 file:** `docs/templates/feat-issue-temp.md` `+2 −4`
     - 📊 **`+2 −4`** · 1 file
-- 📝 [`2f16735b`](https://github.com/Jatin-nicon/tenali/commit/2f16735bb3ef1a8f77ddba5c9da713d5d94fdb15) — **Vaibhav** — simplify feature issue template and remove frontmatter
+- 📝 [`2f16735b`](https://github.com/vicharanashala/tenali/commit/2f16735bb3ef1a8f77ddba5c9da713d5d94fdb15) — **Vaibhav** — simplify feature issue template and remove frontmatter
     - 📁 **1 file:** `docs/templates/feat-issue-temp.md` `+1 −10`
     - 📊 **`+1 −10`** · 1 file
-- 📝 [`5e1026cb`](https://github.com/Jatin-nicon/tenali/commit/5e1026cb5193e8ac4a3db8b12e8c6298edf3c689) — **Vaibhav** — use generic examples and sync problem statement count in templates
+- 📝 [`5e1026cb`](https://github.com/vicharanashala/tenali/commit/5e1026cb5193e8ac4a3db8b12e8c6298edf3c689) — **Vaibhav** — use generic examples and sync problem statement count in templates
     - 📁 **2 files:** `docs/templates/0000-rfc-template.md` `+3 −3`, `docs/templates/feat-issue-temp.md` `+1 −1`
     - 📊 **`+4 −4`** · 2 files
 
 #### 📅 2026-07-28  <sub>(16 commits)</sub>
 
-- 📌 [`d5f3dd7b`](https://github.com/Jatin-nicon/tenali/commit/d5f3dd7b5391c81e348ea04a958148ec6cb0cd93) — **jgupta05072003-code** — 🔀 PR [#106](https://github.com/Jatin-nicon/tenali/pull/106) from `vicharanashala` — fix/translation-api-resilience
-- 📌 [`c748a8dd`](https://github.com/Jatin-nicon/tenali/commit/c748a8ddfc2ea5dbb18f02eea1aa56dff834be77) — **jgupta05072003-code** — 🔀 PR [#105](https://github.com/Jatin-nicon/tenali/pull/105) from `vicharanashala` — fix/vite-base-env
-- 🐛 [`bab87f0e`](https://github.com/Jatin-nicon/tenali/commit/bab87f0e2d94f00f96ebde90c5d5d18b9374cc07) — **Jinal Gupta** — make AutoTranslator translation fetches resilient
+- 📌 [`d5f3dd7b`](https://github.com/vicharanashala/tenali/commit/d5f3dd7b5391c81e348ea04a958148ec6cb0cd93) — **jgupta05072003-code** — 🔀 PR [#106](https://github.com/vicharanashala/tenali/pull/106) from `vicharanashala` — fix/translation-api-resilience
+- 📌 [`c748a8dd`](https://github.com/vicharanashala/tenali/commit/c748a8ddfc2ea5dbb18f02eea1aa56dff834be77) — **jgupta05072003-code** — 🔀 PR [#105](https://github.com/vicharanashala/tenali/pull/105) from `vicharanashala` — fix/vite-base-env
+- 🐛 [`bab87f0e`](https://github.com/vicharanashala/tenali/commit/bab87f0e2d94f00f96ebde90c5d5d18b9374cc07) — **Jinal Gupta** — make AutoTranslator translation fetches resilient
     - 📁 **1 file:** `client/src/lib/AutoTranslator.jsx` `+39 −22`
     - 📊 **`+39 −22`** · 1 file
-- 🐛 [`756a1de9`](https://github.com/Jatin-nicon/tenali/commit/756a1de947743bb68ec039a53e308bf49d78c901) — **Jinal Gupta** — read Vite base path from VITE_BASE_PATH env
+- 🐛 [`756a1de9`](https://github.com/vicharanashala/tenali/commit/756a1de947743bb68ec039a53e308bf49d78c901) — **Jinal Gupta** — read Vite base path from VITE_BASE_PATH env
     - 📁 **1 file:** `client/vite.config.js` `+5 −2`
     - 📊 **`+5 −2`** · 1 file
-- ✨ [`5a357544`](https://github.com/Jatin-nicon/tenali/commit/5a35754431ca93d67d95ed14ff6525e440d1ebdd) — **SaniyaJos** — style card headers, align module title, add mission icon, and remove start/done buttons
+- ✨ [`5a357544`](https://github.com/vicharanashala/tenali/commit/5a35754431ca93d67d95ed14ff6525e440d1ebdd) — **SaniyaJos** — style card headers, align module title, add mission icon, and remove start/done buttons
     - 📁 **2 files:** `client/public/contrast/mission.svg` `+9 −0`, `client/src/ContrastChallengeApp.jsx` `+1279 −341`
     - 📊 **`+1288 −341`** · 2 files
-- 📌 [`1fa0f000`](https://github.com/Jatin-nicon/tenali/commit/1fa0f0006164347cbe5ba2e70dee44e56b7f5856) — **SaniyaJos** — Merge branch 'main' into feat/contrast-challenge-enhancement
-- 📝 [`14cada5c`](https://github.com/Jatin-nicon/tenali/commit/14cada5cfaa61ee05da3aa5c007f563320e2ae1a) — **Jinal Gupta** — append Jul 17–27 commit history to CHANGELOG.md
+- 📌 [`1fa0f000`](https://github.com/vicharanashala/tenali/commit/1fa0f0006164347cbe5ba2e70dee44e56b7f5856) — **SaniyaJos** — Merge branch 'main' into feat/contrast-challenge-enhancement
+- 📝 [`14cada5c`](https://github.com/vicharanashala/tenali/commit/14cada5cfaa61ee05da3aa5c007f563320e2ae1a) — **Jinal Gupta** — append Jul 17–27 commit history to CHANGELOG.md
     - 📁 **1 file:** `CHANGELOG.md` `+196 −0`
     - 📊 **`+196 −0`** · 1 file
-- 📝 [`66232e44`](https://github.com/Jatin-nicon/tenali/commit/66232e4405048a545661b315785b91b30332bf22) — **Vaibhav** — remove key benefits section
+- 📝 [`66232e44`](https://github.com/vicharanashala/tenali/commit/66232e4405048a545661b315785b91b30332bf22) — **Vaibhav** — remove key benefits section
     - 📁 **1 file:** `docs/rfc-based-proposal-review.md` `+0 −5`
     - 📊 **`+0 −5`** · 1 file
-- 📝 [`7ddfaeab`](https://github.com/Jatin-nicon/tenali/commit/7ddfaeab041edeb8a58c6d72c20c2a7e058dfe00) — **Vaibhav** — remove internal rationale from proposal review process
+- 📝 [`7ddfaeab`](https://github.com/vicharanashala/tenali/commit/7ddfaeab041edeb8a58c6d72c20c2a7e058dfe00) — **Vaibhav** — remove internal rationale from proposal review process
     - 📁 **1 file:** `docs/rfc-based-proposal-review.md` `+0 −1`
     - 📊 **`+0 −1`** · 1 file
-- 📝 [`c19761a4`](https://github.com/Jatin-nicon/tenali/commit/c19761a4adc0c7b852cec4d3d6453f80003c7332) — **Vaibhav** — update workflow to Issue-to-PR funnel for interns
+- 📝 [`c19761a4`](https://github.com/vicharanashala/tenali/commit/c19761a4adc0c7b852cec4d3d6453f80003c7332) — **Vaibhav** — update workflow to Issue-to-PR funnel for interns
     - 📁 **1 file:** `docs/rfc-based-proposal-review.md` `+28 −32`
     - 📊 **`+28 −32`** · 1 file
-- 📝 [`9e7673c1`](https://github.com/Jatin-nicon/tenali/commit/9e7673c1aac0b6fc00f7c1495b1ff9d294f61aec) — **Vaibhav** — add Research Reference section and update workflow note
+- 📝 [`9e7673c1`](https://github.com/vicharanashala/tenali/commit/9e7673c1aac0b6fc00f7c1495b1ff9d294f61aec) — **Vaibhav** — add Research Reference section and update workflow note
     - 📁 **1 file:** `docs/templates/feat-issue-temp.md` `+4 −1`
     - 📊 **`+4 −1`** · 1 file
-- 📝 [`9d1040e3`](https://github.com/Jatin-nicon/tenali/commit/9d1040e34a164f708cf07dee728525aeacfe7abb) — **Vaibhav** — restructure feature issue template
+- 📝 [`9d1040e3`](https://github.com/vicharanashala/tenali/commit/9d1040e34a164f708cf07dee728525aeacfe7abb) — **Vaibhav** — restructure feature issue template
     - 📁 **1 file:** `docs/templates/feat-issue-temp.md` `+22 −0`
     - 📊 **`+22 −0`** · 1 file
-- 📝 [`c97c29e4`](https://github.com/Jatin-nicon/tenali/commit/c97c29e4861ca8042903f0b6cacdf777f0f391d2) — **Vaibhav** — simplify CONTRIBUTING.md for general open source contributors
+- 📝 [`c97c29e4`](https://github.com/vicharanashala/tenali/commit/c97c29e4861ca8042903f0b6cacdf777f0f391d2) — **Vaibhav** — simplify CONTRIBUTING.md for general open source contributors
     - 📁 **1 file:** `CONTRIBUTING.md` `+34 −0`
     - 📊 **`+34 −0`** · 1 file
-- 📝 [`69c02226`](https://github.com/Jatin-nicon/tenali/commit/69c02226f23efb91af8a908ba7888b30623ec1c1) — **Vaibhav** — rename PR template to pr-template.md
+- 📝 [`69c02226`](https://github.com/vicharanashala/tenali/commit/69c02226f23efb91af8a908ba7888b30623ec1c1) — **Vaibhav** — rename PR template to pr-template.md
     - 📁 **1 file:** `docs/templates/{PULL_REQUEST_TEMPLATE.md => pr-template.md}`
     - 📊 **`+0 −0`** · 1 file
-- 📝 [`6002500e`](https://github.com/Jatin-nicon/tenali/commit/6002500e7e2eaaae756c2d981a098f185fa3efb6) — **Vaibhav** — add documentation directory structure and templates
+- 📝 [`6002500e`](https://github.com/vicharanashala/tenali/commit/6002500e7e2eaaae756c2d981a098f185fa3efb6) — **Vaibhav** — add documentation directory structure and templates
     - 📁 **7 files:** `.gitignore` `+1 −1`, `docs/case-studies/duolingo.md` `+111 −0`, `docs/orientation.md` `+97 −0`, `docs/problem-statements.md` `+75 −0`, `docs/rfc-based-proposal-review.md` `+44 −0`, `docs/templates/0000-rfc-template.md` `+108 −0`, `docs/templates/PULL_REQUEST_TEMPLATE.md` `+18 −0`
     - 📊 **`+454 −1`** · 7 files
-- 📝 [`209a51f2`](https://github.com/Jatin-nicon/tenali/commit/209a51f247b8bddb0e1f19b7c732feb0b6173947) — **priyanshu7725** — update CHANGELOG.md for v0.1.2
+- 📝 [`209a51f2`](https://github.com/vicharanashala/tenali/commit/209a51f247b8bddb0e1f19b7c732feb0b6173947) — **priyanshu7725** — update CHANGELOG.md for v0.1.2
     - 📁 **1 file:** `client/src/monsters/CHANGELOG.md` `+29 −0`
     - 📊 **`+29 −0`** · 1 file
 
 #### 📅 2026-07-27  <sub>(26 commits)</sub>
 
-- 📌 [`4f9b1af1`](https://github.com/Jatin-nicon/tenali/commit/4f9b1af10eed2ba70c61650c7c12e073543dfcf4) — **Shreejal Bangera** — minor UI changes
+- 📌 [`4f9b1af1`](https://github.com/vicharanashala/tenali/commit/4f9b1af10eed2ba70c61650c7c12e073543dfcf4) — **Shreejal Bangera** — minor UI changes
     - 📁 **1 file:** `client/src/vachana/exercises/ReadingTraps.jsx` `+5 −5`
     - 📊 **`+5 −5`** · 1 file
-- 📌 [`c9fb582d`](https://github.com/Jatin-nicon/tenali/commit/c9fb582d12e9cc1aec7a9bfdd522b03e3a5c4385) — **priyanshu7725** — Merge upstream/main into feature/monster-misconceptions
-- 🐛 [`c81c73cc`](https://github.com/Jatin-nicon/tenali/commit/c81c73cc9b583b0552cbfa74da7fc4925079a930) — **priyanshu7725** — correct decimal drifter step progression and add css transitions
+- 📌 [`c9fb582d`](https://github.com/vicharanashala/tenali/commit/c9fb582d12e9cc1aec7a9bfdd522b03e3a5c4385) — **priyanshu7725** — Merge upstream/main into feature/monster-misconceptions
+- 🐛 [`c81c73cc`](https://github.com/vicharanashala/tenali/commit/c81c73cc9b583b0552cbfa74da7fc4925079a930) — **priyanshu7725** — correct decimal drifter step progression and add css transitions
     - 📁 **1 file:** `client/src/monsters/GuidedSolver.jsx` `+33 −6`
     - 📊 **`+33 −6`** · 1 file
-- 📌 [`7e9db00c`](https://github.com/Jatin-nicon/tenali/commit/7e9db00c273cc4953658fb7f1fe50dc1e8e3358c) — **muditagrawal2007** — 🔀 PR [#103](https://github.com/Jatin-nicon/tenali/pull/103) from `muditagrawal2007` — merge-newf-into-main
-- 🔀 [`8b505d31`](https://github.com/Jatin-nicon/tenali/commit/8b505d312e42bb2c84b3959cb1eccfc85f42a3aa) — **muditagrawal2007** — sync new_f into main — LA quiz length-bias fix + conflict resolution
-- 🐛 [`ac8d48b0`](https://github.com/Jatin-nicon/tenali/commit/ac8d48b0f619a4074106f7cb0d4d44c6f410408b) — **muditagrawal2007** — strip trailing noise from MCQ options + use middle-dot padding
-    - 📁 **57 files:** `linearalgebra/questions/m1q1.json` `+36 −36`, `linearalgebra/questions/m1q10.json` `+37 −37`, `linearalgebra/questions/m1q11.json` `+40 −40`, `linearalgebra/questions/m1q12.json` `+68 −68`, `linearalgebra/questions/m1q13.json` `+46 −46`, `linearalgebra/questions/m1q14.json` `+46 −46`, `linearalgebra/questions/m1q2.json` `+22 −22`, `linearalgebra/questions/m1q3.json` `+57 −57` *(+49 more in [`ac8d48b0`](https://github.com/Jatin-nicon/tenali/commit/ac8d48b0f619a4074106f7cb0d4d44c6f410408b))*
+- 📌 [`7e9db00c`](https://github.com/vicharanashala/tenali/commit/7e9db00c273cc4953658fb7f1fe50dc1e8e3358c) — **muditagrawal2007** — 🔀 PR [#103](https://github.com/vicharanashala/tenali/pull/103) from `muditagrawal2007` — merge-newf-into-main
+- 🔀 [`8b505d31`](https://github.com/vicharanashala/tenali/commit/8b505d312e42bb2c84b3959cb1eccfc85f42a3aa) — **muditagrawal2007** — sync new_f into main — LA quiz length-bias fix + conflict resolution
+- 🐛 [`ac8d48b0`](https://github.com/vicharanashala/tenali/commit/ac8d48b0f619a4074106f7cb0d4d44c6f410408b) — **muditagrawal2007** — strip trailing noise from MCQ options + use middle-dot padding
+    - 📁 **57 files:** `linearalgebra/questions/m1q1.json` `+36 −36`, `linearalgebra/questions/m1q10.json` `+37 −37`, `linearalgebra/questions/m1q11.json` `+40 −40`, `linearalgebra/questions/m1q12.json` `+68 −68`, `linearalgebra/questions/m1q13.json` `+46 −46`, `linearalgebra/questions/m1q14.json` `+46 −46`, `linearalgebra/questions/m1q2.json` `+22 −22`, `linearalgebra/questions/m1q3.json` `+57 −57` *(+49 more in [`ac8d48b0`](https://github.com/vicharanashala/tenali/commit/ac8d48b0f619a4074106f7cb0d4d44c6f410408b))*
     - 📊 **`+2694 −2693`** · 57 files
-- 🐛 [`cebf191e`](https://github.com/Jatin-nicon/tenali/commit/cebf191e2d91d3f5aeb64f3987031927cd7145da) — **muditagrawal2007** — length-normalize MCQ options across all 56 mission files
-    - 📁 **56 files:** `linearalgebra/questions/m1q1.json` `+20 −20`, `linearalgebra/questions/m1q10.json` `+26 −26`, `linearalgebra/questions/m1q11.json` `+21 −21`, `linearalgebra/questions/m1q12.json` `+91 −91`, `linearalgebra/questions/m1q13.json` `+26 −26`, `linearalgebra/questions/m1q14.json` `+31 −31`, `linearalgebra/questions/m1q2.json` `+12 −12`, `linearalgebra/questions/m1q3.json` `+67 −67` *(+48 more in [`cebf191e`](https://github.com/Jatin-nicon/tenali/commit/cebf191e2d91d3f5aeb64f3987031927cd7145da))*
+- 🐛 [`cebf191e`](https://github.com/vicharanashala/tenali/commit/cebf191e2d91d3f5aeb64f3987031927cd7145da) — **muditagrawal2007** — length-normalize MCQ options across all 56 mission files
+    - 📁 **56 files:** `linearalgebra/questions/m1q1.json` `+20 −20`, `linearalgebra/questions/m1q10.json` `+26 −26`, `linearalgebra/questions/m1q11.json` `+21 −21`, `linearalgebra/questions/m1q12.json` `+91 −91`, `linearalgebra/questions/m1q13.json` `+26 −26`, `linearalgebra/questions/m1q14.json` `+31 −31`, `linearalgebra/questions/m1q2.json` `+12 −12`, `linearalgebra/questions/m1q3.json` `+67 −67` *(+48 more in [`cebf191e`](https://github.com/vicharanashala/tenali/commit/cebf191e2d91d3f5aeb64f3987031927cd7145da))*
     - 📊 **`+2260 −2260`** · 56 files
-- 🐛 [`197f6c58`](https://github.com/Jatin-nicon/tenali/commit/197f6c5851aac1fd7d22b3a0438079feb53c48a2) — **muditagrawal2007** — pad short distractors so the correct option isn't length-guessable
+- 🐛 [`197f6c58`](https://github.com/vicharanashala/tenali/commit/197f6c5851aac1fd7d22b3a0438079feb53c48a2) — **muditagrawal2007** — pad short distractors so the correct option isn't length-guessable
     - 📁 **1 file:** `server/index.js` `+127 −3`
     - 📊 **`+127 −3`** · 1 file
-- 📌 [`87b02e3c`](https://github.com/Jatin-nicon/tenali/commit/87b02e3c0ba52842aa113676862f2456b6f726e5) — **harshyy07** — Merge origin/main into feat-hints: resolve CSS, App.jsx, main.jsx, auth.js conflicts cleanly
-- 🐛 [`a2194f8e`](https://github.com/Jatin-nicon/tenali/commit/a2194f8ed5cd41e3bde861ee6cc173f9ae469eaa) — **muditagrawal2007** — ensure correct_option is always present in options array
-    - 📁 **56 files:** `linearalgebra/questions/m1q1.json` `+8 −8`, `linearalgebra/questions/m1q10.json` `+9 −9`, `linearalgebra/questions/m1q11.json` `+6 −6`, `linearalgebra/questions/m1q12.json` `+5 −5`, `linearalgebra/questions/m1q13.json` `+6 −6`, `linearalgebra/questions/m1q14.json` `+7 −7`, `linearalgebra/questions/m1q2.json` `+9 −9`, `linearalgebra/questions/m1q3.json` `+7 −7` *(+48 more in [`a2194f8e`](https://github.com/Jatin-nicon/tenali/commit/a2194f8ed5cd41e3bde861ee6cc173f9ae469eaa))*
+- 📌 [`87b02e3c`](https://github.com/vicharanashala/tenali/commit/87b02e3c0ba52842aa113676862f2456b6f726e5) — **harshyy07** — Merge origin/main into feat-hints: resolve CSS, App.jsx, main.jsx, auth.js conflicts cleanly
+- 🐛 [`a2194f8e`](https://github.com/vicharanashala/tenali/commit/a2194f8ed5cd41e3bde861ee6cc173f9ae469eaa) — **muditagrawal2007** — ensure correct_option is always present in options array
+    - 📁 **56 files:** `linearalgebra/questions/m1q1.json` `+8 −8`, `linearalgebra/questions/m1q10.json` `+9 −9`, `linearalgebra/questions/m1q11.json` `+6 −6`, `linearalgebra/questions/m1q12.json` `+5 −5`, `linearalgebra/questions/m1q13.json` `+6 −6`, `linearalgebra/questions/m1q14.json` `+7 −7`, `linearalgebra/questions/m1q2.json` `+9 −9`, `linearalgebra/questions/m1q3.json` `+7 −7` *(+48 more in [`a2194f8e`](https://github.com/vicharanashala/tenali/commit/a2194f8ed5cd41e3bde861ee6cc173f9ae469eaa))*
     - 📊 **`+415 −415`** · 56 files
-- ✨ [`c18b01a2`](https://github.com/Jatin-nicon/tenali/commit/c18b01a27396d277292ff13407b4ef4c66a28cee) — **muditagrawal2007** — randomize option order in LA mission quiz + clean option text
-    - 📁 **61 files:** `.hermes/plans/2026-07-27-la-quiz-2phase.md` `+140 −0`, `linearalgebra/questions/m1q1.json` `+56 −56`, `linearalgebra/questions/m1q10.json` `+61 −61`, `linearalgebra/questions/m1q11.json` `+52 −52`, `linearalgebra/questions/m1q12.json` `+52 −52`, `linearalgebra/questions/m1q13.json` `+68 −68`, `linearalgebra/questions/m1q14.json` `+71 −71`, `linearalgebra/questions/m1q2.json` `+46 −46` *(+53 more in [`c18b01a2`](https://github.com/Jatin-nicon/tenali/commit/c18b01a27396d277292ff13407b4ef4c66a28cee))*
+- ✨ [`c18b01a2`](https://github.com/vicharanashala/tenali/commit/c18b01a27396d277292ff13407b4ef4c66a28cee) — **muditagrawal2007** — randomize option order in LA mission quiz + clean option text
+    - 📁 **61 files:** `.hermes/plans/2026-07-27-la-quiz-2phase.md` `+140 −0`, `linearalgebra/questions/m1q1.json` `+56 −56`, `linearalgebra/questions/m1q10.json` `+61 −61`, `linearalgebra/questions/m1q11.json` `+52 −52`, `linearalgebra/questions/m1q12.json` `+52 −52`, `linearalgebra/questions/m1q13.json` `+68 −68`, `linearalgebra/questions/m1q14.json` `+71 −71`, `linearalgebra/questions/m1q2.json` `+46 −46` *(+53 more in [`c18b01a2`](https://github.com/vicharanashala/tenali/commit/c18b01a27396d277292ff13407b4ef4c66a28cee))*
     - 📊 **`+3650 −3363`** · 61 files
-- ✨ [`a19bedd1`](https://github.com/Jatin-nicon/tenali/commit/a19bedd13c5394641bc713fdc465e3f5a32d5045) — **muditagrawal2007** — remove Phase 2 RLA quiz section from mission quiz
+- ✨ [`a19bedd1`](https://github.com/vicharanashala/tenali/commit/a19bedd13c5394641bc713fdc465e3f5a32d5045) — **muditagrawal2007** — remove Phase 2 RLA quiz section from mission quiz
     - 📁 **1 file:** `client/src/LinearAlgebraApp.jsx` `+3 −174`
     - 📊 **`+3 −174`** · 1 file
-- 🔀 [`133b2a5a`](https://github.com/Jatin-nicon/tenali/commit/133b2a5a26afff9207b03a0d089bf397f5cf348e) — **muditagrawal2007** — sync origin/new into new_f — Battle, Column Division, Riddles, Playground, Sudoku, Proctor
-- 🐛 [`9d03e0e1`](https://github.com/Jatin-nicon/tenali/commit/9d03e0e1e7f1179d07f1ed6486a724ed63f90394) — **muditagrawal2007** — typo in modeMap — lineqgym referenced undefined LineEqGymApp
+- 🔀 [`133b2a5a`](https://github.com/vicharanashala/tenali/commit/133b2a5a26afff9207b03a0d089bf397f5cf348e) — **muditagrawal2007** — sync origin/new into new_f — Battle, Column Division, Riddles, Playground, Sudoku, Proctor
+- 🐛 [`9d03e0e1`](https://github.com/vicharanashala/tenali/commit/9d03e0e1e7f1179d07f1ed6486a724ed63f90394) — **muditagrawal2007** — typo in modeMap — lineqgym referenced undefined LineEqGymApp
     - 📁 **1 file:** `client/src/App.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- ✨ [`5e04f4b4`](https://github.com/Jatin-nicon/tenali/commit/5e04f4b485e851cd347c9cd414edbf0fd013dc56) — **muditagrawal2007** — 2-phase mission quiz (adaptive → real-life MCQs)
+- ✨ [`5e04f4b4`](https://github.com/vicharanashala/tenali/commit/5e04f4b485e851cd347c9cd414edbf0fd013dc56) — **muditagrawal2007** — 2-phase mission quiz (adaptive → real-life MCQs)
     - 📁 **2 files:** `client/src/LinearAlgebraApp.jsx` `+175 −12`, `server/index.js` `+20 −2`
     - 📊 **`+195 −14`** · 2 files
-- ✨ [`03445c1d`](https://github.com/Jatin-nicon/tenali/commit/03445c1dc56543f7e1d5d6f4b6224d17b7ae0a8b) — **SaniyaJos** — enhance contrast challenge visual discovery headers and fix JSX duplicate style property
+- ✨ [`03445c1d`](https://github.com/vicharanashala/tenali/commit/03445c1dc56543f7e1d5d6f4b6224d17b7ae0a8b) — **SaniyaJos** — enhance contrast challenge visual discovery headers and fix JSX duplicate style property
     - 📁 **3 files:** `client/package-lock.json` `+0 −30`, `client/src/App.jsx` `+2 −2`, `client/src/ContrastChallengeApp.jsx` `+956 −4982`
     - 📊 **`+958 −5014`** · 3 files
-- 📌 [`a42d63ac`](https://github.com/Jatin-nicon/tenali/commit/a42d63acb39a080197bd10a1cf6f9a20d1b2fde7) — **SaniyaJos** — Merge branch 'main' into feat/contrast-challenge-enhancement
-- 📌 [`96d26f2c`](https://github.com/Jatin-nicon/tenali/commit/96d26f2c4d211d1a8797579f98992ddad710f4aa) — **muditagrawal2007** — Revert "feat(matrixmystics): single-button 2-phase test flow (no setup, no difficulty picker)"
+- 📌 [`a42d63ac`](https://github.com/vicharanashala/tenali/commit/a42d63acb39a080197bd10a1cf6f9a20d1b2fde7) — **SaniyaJos** — Merge branch 'main' into feat/contrast-challenge-enhancement
+- 📌 [`96d26f2c`](https://github.com/vicharanashala/tenali/commit/96d26f2c4d211d1a8797579f98992ddad710f4aa) — **muditagrawal2007** — Revert "feat(matrixmystics): single-button 2-phase test flow (no setup, no difficulty picker)"
     - 📁 **2 files:** `client/src/App.jsx` `+13 −431`, `server/index.js` `+2 −15`
     - 📊 **`+15 −446`** · 2 files
-- 📌 [`d01a7686`](https://github.com/Jatin-nicon/tenali/commit/d01a7686aac574da5b534bd5daa891b3b31b24f5) — **muditagrawal2007** — revert matrixmystics home tile and modeMap entry
+- 📌 [`d01a7686`](https://github.com/vicharanashala/tenali/commit/d01a7686aac574da5b534bd5daa891b3b31b24f5) — **muditagrawal2007** — revert matrixmystics home tile and modeMap entry
     - 📁 **1 file:** `client/src/App.jsx` `+3 −4`
     - 📊 **`+3 −4`** · 1 file
-- ✨ [`2b52b38e`](https://github.com/Jatin-nicon/tenali/commit/2b52b38e7218c0c351d8156d80e5a5fe981d05f1) — **muditagrawal2007** — single-button 2-phase test flow (no setup, no difficulty picker)
+- ✨ [`2b52b38e`](https://github.com/vicharanashala/tenali/commit/2b52b38e7218c0c351d8156d80e5a5fe981d05f1) — **muditagrawal2007** — single-button 2-phase test flow (no setup, no difficulty picker)
     - 📁 **2 files:** `client/src/App.jsx` `+431 −13`, `server/index.js` `+15 −2`
     - 📊 **`+446 −15`** · 2 files
-- ✨ [`90a29b80`](https://github.com/Jatin-nicon/tenali/commit/90a29b8011750e40f706daebe2c58ba889bab4c3) — **muditagrawal2007** — add Real Application tier — 265 MCQs across all 53 topics
-    - 📁 **12 files:** `linearalgebra/matrixmystics/_drafts/Q1_realapp.json` `+1061 −0`, `linearalgebra/matrixmystics/_drafts/Q2_realapp.json` `+467 −0`, `linearalgebra/matrixmystics/_drafts/Q3_realapp.json` `+995 −0`, `linearalgebra/matrixmystics/_drafts/Q4_realapp.json` `+292 −0`, `linearalgebra/matrixmystics/_drafts/Q5_realapp.json` `+210 −0`, `linearalgebra/matrixmystics/_drafts/Q6_realapp.json` `+203 −0`, `linearalgebra/matrixmystics/m1.json` `+1008 −16`, `linearalgebra/matrixmystics/m2.json` `+1912 −253` *(+4 more in [`90a29b80`](https://github.com/Jatin-nicon/tenali/commit/90a29b8011750e40f706daebe2c58ba889bab4c3))*
+- ✨ [`90a29b80`](https://github.com/vicharanashala/tenali/commit/90a29b8011750e40f706daebe2c58ba889bab4c3) — **muditagrawal2007** — add Real Application tier — 265 MCQs across all 53 topics
+    - 📁 **12 files:** `linearalgebra/matrixmystics/_drafts/Q1_realapp.json` `+1061 −0`, `linearalgebra/matrixmystics/_drafts/Q2_realapp.json` `+467 −0`, `linearalgebra/matrixmystics/_drafts/Q3_realapp.json` `+995 −0`, `linearalgebra/matrixmystics/_drafts/Q4_realapp.json` `+292 −0`, `linearalgebra/matrixmystics/_drafts/Q5_realapp.json` `+210 −0`, `linearalgebra/matrixmystics/_drafts/Q6_realapp.json` `+203 −0`, `linearalgebra/matrixmystics/m1.json` `+1008 −16`, `linearalgebra/matrixmystics/m2.json` `+1912 −253` *(+4 more in [`90a29b80`](https://github.com/vicharanashala/tenali/commit/90a29b8011750e40f706daebe2c58ba889bab4c3))*
     - 📊 **`+9738 −599`** · 12 files
-- ✨ [`6217875e`](https://github.com/Jatin-nicon/tenali/commit/6217875e08b1b3b1a236aa7566f7b3d86c884159) — **muditagrawal2007** — refresh module 1 + Q4.7 questions with short-option MCQ style
-    - 📁 **12 files:** `linearalgebra/matrixmystics/_drafts/Q1.1.json` `+436 −0`, `linearalgebra/matrixmystics/_drafts/Q1.2.json` `+436 −0`, `linearalgebra/matrixmystics/_drafts/Q1.3.json` `+436 −0`, `linearalgebra/matrixmystics/_drafts/Q1.4.json` `+436 −0`, `linearalgebra/matrixmystics/_drafts/Q1.5.json` `+436 −0`, `linearalgebra/matrixmystics/_drafts/Q1.6.json` `+436 −0`, `linearalgebra/matrixmystics/_drafts/Q1.7.json` `+436 −0`, `linearalgebra/matrixmystics/_drafts/Q1.8.json` `+436 −0` *(+4 more in [`6217875e`](https://github.com/Jatin-nicon/tenali/commit/6217875e08b1b3b1a236aa7566f7b3d86c884159))*
+- ✨ [`6217875e`](https://github.com/vicharanashala/tenali/commit/6217875e08b1b3b1a236aa7566f7b3d86c884159) — **muditagrawal2007** — refresh module 1 + Q4.7 questions with short-option MCQ style
+    - 📁 **12 files:** `linearalgebra/matrixmystics/_drafts/Q1.1.json` `+436 −0`, `linearalgebra/matrixmystics/_drafts/Q1.2.json` `+436 −0`, `linearalgebra/matrixmystics/_drafts/Q1.3.json` `+436 −0`, `linearalgebra/matrixmystics/_drafts/Q1.4.json` `+436 −0`, `linearalgebra/matrixmystics/_drafts/Q1.5.json` `+436 −0`, `linearalgebra/matrixmystics/_drafts/Q1.6.json` `+436 −0`, `linearalgebra/matrixmystics/_drafts/Q1.7.json` `+436 −0`, `linearalgebra/matrixmystics/_drafts/Q1.8.json` `+436 −0` *(+4 more in [`6217875e`](https://github.com/vicharanashala/tenali/commit/6217875e08b1b3b1a236aa7566f7b3d86c884159))*
     - 📊 **`+6733 −2363`** · 12 files
-- 🔧 [`0cc4523c`](https://github.com/Jatin-nicon/tenali/commit/0cc4523c3b1f5270990efc2606a645fe3080915f) — **muditagrawal2007** — bump express-rate-limit to ^8.6.1 (npm install reconciled lockfile)
+- 🔧 [`0cc4523c`](https://github.com/vicharanashala/tenali/commit/0cc4523c3b1f5270990efc2606a645fe3080915f) — **muditagrawal2007** — bump express-rate-limit to ^8.6.1 (npm install reconciled lockfile)
     - 📁 **2 files:** `server/package-lock.json` `+4 −4`, `server/package.json` `+1 −1`
     - 📊 **`+5 −5`** · 2 files
-- 🐛 [`65f8e08f`](https://github.com/Jatin-nicon/tenali/commit/65f8e08fc0b3c6c0444054e8aafd380660c9d3e1) — **muditagrawal2007** — remove duplicate JWT_SECRET declarations from broken merge
+- 🐛 [`65f8e08f`](https://github.com/vicharanashala/tenali/commit/65f8e08fc0b3c6c0444054e8aafd380660c9d3e1) — **muditagrawal2007** — remove duplicate JWT_SECRET declarations from broken merge
     - 📁 **2 files:** `server/auth.js` `+0 −1`, `server/index.js` `+0 −3`
     - 📊 **`+0 −4`** · 2 files
-- ✨ [`428cdbfb`](https://github.com/Jatin-nicon/tenali/commit/428cdbfb801e5740b87eeea344e13172ac082fa7) — **muditagrawal2007** — add Matrix Mystics — 6 modules, 53 topics, 1590 curated MCQs
-    - 📁 **9 files:** `client/src/App.jsx` `+21 −0`, `client/vite.config.js` `+1 −0`, `linearalgebra/matrixmystics/m1.json` `+6965 −0`, `linearalgebra/matrixmystics/m2.json` `+1825 −0`, `linearalgebra/matrixmystics/m3.json` `+6530 −0`, `linearalgebra/matrixmystics/m4.json` `+3050 −0`, `linearalgebra/matrixmystics/m5.json` `+1305 −0`, `linearalgebra/matrixmystics/m6.json` `+785 −0` *(+1 more in [`428cdbfb`](https://github.com/Jatin-nicon/tenali/commit/428cdbfb801e5740b87eeea344e13172ac082fa7))*
+- ✨ [`428cdbfb`](https://github.com/vicharanashala/tenali/commit/428cdbfb801e5740b87eeea344e13172ac082fa7) — **muditagrawal2007** — add Matrix Mystics — 6 modules, 53 topics, 1590 curated MCQs
+    - 📁 **9 files:** `client/src/App.jsx` `+21 −0`, `client/vite.config.js` `+1 −0`, `linearalgebra/matrixmystics/m1.json` `+6965 −0`, `linearalgebra/matrixmystics/m2.json` `+1825 −0`, `linearalgebra/matrixmystics/m3.json` `+6530 −0`, `linearalgebra/matrixmystics/m4.json` `+3050 −0`, `linearalgebra/matrixmystics/m5.json` `+1305 −0`, `linearalgebra/matrixmystics/m6.json` `+785 −0` *(+1 more in [`428cdbfb`](https://github.com/vicharanashala/tenali/commit/428cdbfb801e5740b87eeea344e13172ac082fa7))*
     - 📊 **`+20650 −7`** · 9 files
-- 🐛 [`f2bab068`](https://github.com/Jatin-nicon/tenali/commit/f2bab068e77b33405cefed6549f25bd85515ef20) — **muditagrawal2007** — resolve React hook violations in 3 components
+- 🐛 [`f2bab068`](https://github.com/vicharanashala/tenali/commit/f2bab068e77b33405cefed6549f25bd85515ef20) — **muditagrawal2007** — resolve React hook violations in 3 components
     - 📁 **3 files:** `client/src/CoordGeomDiscoveryApp.jsx` `+36 −27`, `client/src/GeometryApp.jsx` `+96 −24`, `client/src/VisualMathLabRedux.jsx` `+19 −16`
     - 📊 **`+151 −67`** · 3 files
 
 #### 📅 2026-07-24  <sub>(5 commits)</sub>
 
-- ✨ [`529e63de`](https://github.com/Jatin-nicon/tenali/commit/529e63ded6505cbff75c0bb3e120c55e1165349a) — **remy-baastin** — CR real-world math pathways — The Car Journey
+- ✨ [`529e63de`](https://github.com/vicharanashala/tenali/commit/529e63ded6505cbff75c0bb3e120c55e1165349a) — **remy-baastin** — CR real-world math pathways — The Car Journey
     - 📁 **7 files:** `PR_CT_CR.md` `+125 −0`, `client/src/App.jsx` `+30 −7`, `client/src/CarJourneyApp.css` `+525 −0`, `client/src/CarJourneyApp.jsx` `+2173 −0`, `client/src/CjChallenge.jsx` `+507 −0`, `client/src/RealWorldHub.jsx` `+94 −0`, `client/src/cjReco.js` `+36 −0`
     - 📊 **`+3490 −7`** · 7 files
-- ✨ [`d8513673`](https://github.com/Jatin-nicon/tenali/commit/d8513673f59e5d63bf992819d0d3c9d5b94f7a33) — **remy-baastin** — CT platform-wide reflection journal
+- ✨ [`d8513673`](https://github.com/vicharanashala/tenali/commit/d8513673f59e5d63bf992819d0d3c9d5b94f7a33) — **remy-baastin** — CT platform-wide reflection journal
     - 📁 **3 files:** `client/src/App.jsx` `+2 −0`, `client/src/ReflectionJournal.css` `+252 −0`, `client/src/ReflectionJournal.jsx` `+329 −0`
     - 📊 **`+583 −0`** · 3 files
-- 📌 [`f490e544`](https://github.com/Jatin-nicon/tenali/commit/f490e544fee7de56fb632e3939981b2218574be6) — **muditagrawal2007** — 🔀 PR [#98](https://github.com/Jatin-nicon/tenali/pull/98) from `muditagrawal2007` — new
-- 🔀 [`20573832`](https://github.com/Jatin-nicon/tenali/commit/205738326afa2327e1bb5eb1c437d8d4813a694a) — **muditagrawal2007** — resolve conflicts from origin/main sync
-- ✨ [`82f3d624`](https://github.com/Jatin-nicon/tenali/commit/82f3d624340373b24f82eba9e89ff9f8593eded0) — **muditagrawal2007** — sync origin/main, secure proctor endpoints with admin-only access, add BattleApp features
+- 📌 [`f490e544`](https://github.com/vicharanashala/tenali/commit/f490e544fee7de56fb632e3939981b2218574be6) — **muditagrawal2007** — 🔀 PR [#98](https://github.com/vicharanashala/tenali/pull/98) from `muditagrawal2007` — new
+- 🔀 [`20573832`](https://github.com/vicharanashala/tenali/commit/205738326afa2327e1bb5eb1c437d8d4813a694a) — **muditagrawal2007** — resolve conflicts from origin/main sync
+- ✨ [`82f3d624`](https://github.com/vicharanashala/tenali/commit/82f3d624340373b24f82eba9e89ff9f8593eded0) — **muditagrawal2007** — sync origin/main, secure proctor endpoints with admin-only access, add BattleApp features
 
 #### 📅 2026-07-23  <sub>(20 commits)</sub>
 
-- 📌 [`7b1a0dfe`](https://github.com/Jatin-nicon/tenali/commit/7b1a0dfe639b5a0074ec569963ce2aef33bf293a) — **jgupta05072003-code** — 🔀 PR [#96](https://github.com/Jatin-nicon/tenali/pull/96) from `vicharanashala` — fix/duplicate-jwt-secret-merge
-- 🐛 [`83bd400f`](https://github.com/Jatin-nicon/tenali/commit/83bd400fa52fc57cded76a3734e38c69f694b68b) — **Jinal Gupta** — remove duplicate JWT_SECRET declarations that break the build
+- 📌 [`7b1a0dfe`](https://github.com/vicharanashala/tenali/commit/7b1a0dfe639b5a0074ec569963ce2aef33bf293a) — **jgupta05072003-code** — 🔀 PR [#96](https://github.com/vicharanashala/tenali/pull/96) from `vicharanashala` — fix/duplicate-jwt-secret-merge
+- 🐛 [`83bd400f`](https://github.com/vicharanashala/tenali/commit/83bd400fa52fc57cded76a3734e38c69f694b68b) — **Jinal Gupta** — remove duplicate JWT_SECRET declarations that break the build
     - 📁 **2 files:** `server/auth.js` `+1 −10`, `server/index.js` `+0 −3`
     - 📊 **`+1 −13`** · 2 files
-- 📌 [`c7d7753f`](https://github.com/Jatin-nicon/tenali/commit/c7d7753f83edd56c6f252cd61eb165b3580857c3) — **muditagrawal2007** — 🔀 PR [#84](https://github.com/Jatin-nicon/tenali/pull/84) from `muditagrawal2007` — new_f
-- 📌 [`3502aba1`](https://github.com/Jatin-nicon/tenali/commit/3502aba13b3ee82232e8d6f0979a41cec39fa9bf) — **muditagrawal2007** — Merge branch 'main' into new_f
-- 📌 [`df064f19`](https://github.com/Jatin-nicon/tenali/commit/df064f1994822993c07d388db04c52f633ac68e7) — **jgupta05072003-code** — 🔀 PR [#86](https://github.com/Jatin-nicon/tenali/pull/86) from `vicharanashala` — fix/summership-jwt-fail-fast
-- 🐛 [`7ccb369e`](https://github.com/Jatin-nicon/tenali/commit/7ccb369e4d7135747c86373a8586ad4f76b67103) — **Jinal Gupta** — centralize JWT secret and fail-fast in production
+- 📌 [`c7d7753f`](https://github.com/vicharanashala/tenali/commit/c7d7753f83edd56c6f252cd61eb165b3580857c3) — **muditagrawal2007** — 🔀 PR [#84](https://github.com/vicharanashala/tenali/pull/84) from `muditagrawal2007` — new_f
+- 📌 [`3502aba1`](https://github.com/vicharanashala/tenali/commit/3502aba13b3ee82232e8d6f0979a41cec39fa9bf) — **muditagrawal2007** — Merge branch 'main' into new_f
+- 📌 [`df064f19`](https://github.com/vicharanashala/tenali/commit/df064f1994822993c07d388db04c52f633ac68e7) — **jgupta05072003-code** — 🔀 PR [#86](https://github.com/vicharanashala/tenali/pull/86) from `vicharanashala` — fix/summership-jwt-fail-fast
+- 🐛 [`7ccb369e`](https://github.com/vicharanashala/tenali/commit/7ccb369e4d7135747c86373a8586ad4f76b67103) — **Jinal Gupta** — centralize JWT secret and fail-fast in production
     - 📁 **2 files:** `server/auth.js` `+16 −3`, `server/index.js` `+3 −3`
     - 📊 **`+19 −6`** · 2 files
-- 📌 [`a8f6870b`](https://github.com/Jatin-nicon/tenali/commit/a8f6870b3cb61cf5c4a78bd9fe69464eb2e9309e) — **jgupta05072003-code** — 🔀 PR [#85](https://github.com/Jatin-nicon/tenali/pull/85) from `vicharanashala` — fix/summership-ratelimit-cors
-- 🐛 [`e5fba3c4`](https://github.com/Jatin-nicon/tenali/commit/e5fba3c400aaa985a0adda24128eea7db1057295) — **Jinal Gupta** — add rate limiting and CORS allowlist
+- 📌 [`a8f6870b`](https://github.com/vicharanashala/tenali/commit/a8f6870b3cb61cf5c4a78bd9fe69464eb2e9309e) — **jgupta05072003-code** — 🔀 PR [#85](https://github.com/vicharanashala/tenali/pull/85) from `vicharanashala` — fix/summership-ratelimit-cors
+- 🐛 [`e5fba3c4`](https://github.com/vicharanashala/tenali/commit/e5fba3c400aaa985a0adda24128eea7db1057295) — **Jinal Gupta** — add rate limiting and CORS allowlist
     - 📁 **3 files:** `server/index.js` `+37 −2`, `server/package-lock.json` `+29 −0`, `server/package.json` `+1 −0`
     - 📊 **`+67 −2`** · 3 files
-- 📌 [`845cf82c`](https://github.com/Jatin-nicon/tenali/commit/845cf82c1605e6d18a7a35e36f958ff18cd4ccc0) — **muditagrawal2007** — Merge branch 'vicharanashala:main' into new_f
-- ✨ [`c4499d07`](https://github.com/Jatin-nicon/tenali/commit/c4499d07d5965d1bae33b009e134de3c51d4acc2) — **muditagrawal2007** — replace algorithmic quiz with curated JSON MCQs for all 56 missions
-    - 📁 **56 files:** `linearalgebra/questions/m1q1.json` `+449 −0`, `linearalgebra/questions/m1q10.json` `+462 −0`, `linearalgebra/questions/m1q11.json` `+479 −0`, `linearalgebra/questions/m1q12.json` `+479 −0`, `linearalgebra/questions/m1q13.json` `+462 −0`, `linearalgebra/questions/m1q14.json` `+462 −0`, `linearalgebra/questions/m1q2.json` `+479 −0`, `linearalgebra/questions/m1q3.json` `+479 −0` *(+48 more in [`c4499d07`](https://github.com/Jatin-nicon/tenali/commit/c4499d07d5965d1bae33b009e134de3c51d4acc2))*
+- 📌 [`845cf82c`](https://github.com/vicharanashala/tenali/commit/845cf82c1605e6d18a7a35e36f958ff18cd4ccc0) — **muditagrawal2007** — Merge branch 'vicharanashala:main' into new_f
+- ✨ [`c4499d07`](https://github.com/vicharanashala/tenali/commit/c4499d07d5965d1bae33b009e134de3c51d4acc2) — **muditagrawal2007** — replace algorithmic quiz with curated JSON MCQs for all 56 missions
+    - 📁 **56 files:** `linearalgebra/questions/m1q1.json` `+449 −0`, `linearalgebra/questions/m1q10.json` `+462 −0`, `linearalgebra/questions/m1q11.json` `+479 −0`, `linearalgebra/questions/m1q12.json` `+479 −0`, `linearalgebra/questions/m1q13.json` `+462 −0`, `linearalgebra/questions/m1q14.json` `+462 −0`, `linearalgebra/questions/m1q2.json` `+479 −0`, `linearalgebra/questions/m1q3.json` `+479 −0` *(+48 more in [`c4499d07`](https://github.com/vicharanashala/tenali/commit/c4499d07d5965d1bae33b009e134de3c51d4acc2))*
     - 📊 **`+26158 −0`** · 56 files
-- 🐛 [`506a82d8`](https://github.com/Jatin-nicon/tenali/commit/506a82d8feeec973da7d9946b7c9353ee8b61eb5) — **muditagrawal2007** — resolve React hook violations in main App component
+- 🐛 [`506a82d8`](https://github.com/vicharanashala/tenali/commit/506a82d8feeec973da7d9946b7c9353ee8b61eb5) — **muditagrawal2007** — resolve React hook violations in main App component
     - 📁 **3 files:** `client/package-lock.json` `+544 −0`, `client/src/LinearAlgebraApp.css` `+20 −20`, `client/src/LinearAlgebraApp.jsx` `+51 −2`
     - 📊 **`+615 −22`** · 3 files
-- 📌 [`2fe75688`](https://github.com/Jatin-nicon/tenali/commit/2fe75688ec04f13958bde5ec62e43692b8695484) — **muditagrawal2007** — Fix CoordGeomDiscoveryApp component lint issues
+- 📌 [`2fe75688`](https://github.com/vicharanashala/tenali/commit/2fe75688ec04f13958bde5ec62e43692b8695484) — **muditagrawal2007** — Fix CoordGeomDiscoveryApp component lint issues
     - 📁 **5 files:** `check_errors.sh` `+12 −0`, `client/src/App.jsx` `+4 −1`, `client/src/VisualMathLabRedux.jsx` `+7 −3`, `server/auth.js` `+9 −1`, `server/index.js` `+53 −4`
     - 📊 **`+85 −9`** · 5 files
-- 📌 [`6054ee44`](https://github.com/Jatin-nicon/tenali/commit/6054ee4445ab33e6086fd0d05af0d5644473fc4d) — **jgupta05072003-code** — 🔀 PR [#83](https://github.com/Jatin-nicon/tenali/pull/83) from `vicharanashala` — fix/summership-repo-cleanup
-- 🔧 [`b562d857`](https://github.com/Jatin-nicon/tenali/commit/b562d857d13bfc1a129d0577de1da461522d249e) — **Jinal Gupta** — remove committed debug/scratch junk files
-    - 📁 **18 files:** `.gitignore` `+4 −0`, `pr_body.md` `+0 −22`, `scratch/generate_puzzles.js` `+0 −228`, `scratch/scratch/find_addition.js` `+0 −8`, `scratch/scratch/find_button_styles.js` `+0 −8`, `scratch/scratch/find_missing_revealed.js` `+0 −22`, `scratch/scratch/find_revealed_in_addition.js` `+0 −9`, `scratch/scratch/find_submitans.js` `+0 −9` *(+10 more in [`b562d857`](https://github.com/Jatin-nicon/tenali/commit/b562d857d13bfc1a129d0577de1da461522d249e))*
+- 📌 [`6054ee44`](https://github.com/vicharanashala/tenali/commit/6054ee4445ab33e6086fd0d05af0d5644473fc4d) — **jgupta05072003-code** — 🔀 PR [#83](https://github.com/vicharanashala/tenali/pull/83) from `vicharanashala` — fix/summership-repo-cleanup
+- 🔧 [`b562d857`](https://github.com/vicharanashala/tenali/commit/b562d857d13bfc1a129d0577de1da461522d249e) — **Jinal Gupta** — remove committed debug/scratch junk files
+    - 📁 **18 files:** `.gitignore` `+4 −0`, `pr_body.md` `+0 −22`, `scratch/generate_puzzles.js` `+0 −228`, `scratch/scratch/find_addition.js` `+0 −8`, `scratch/scratch/find_button_styles.js` `+0 −8`, `scratch/scratch/find_missing_revealed.js` `+0 −22`, `scratch/scratch/find_revealed_in_addition.js` `+0 −9`, `scratch/scratch/find_submitans.js` `+0 −9` *(+10 more in [`b562d857`](https://github.com/vicharanashala/tenali/commit/b562d857d13bfc1a129d0577de1da461522d249e))*
     - 📊 **`+4 −1945`** · 18 files
-- 📌 [`ea64920d`](https://github.com/Jatin-nicon/tenali/commit/ea64920d1a748fcbfb77cf0cd7eb38f23d50445c) — **jgupta05072003-code** — 🔀 PR [#81](https://github.com/Jatin-nicon/tenali/pull/81) from `muditagrawal2007` — new_f
-- 📌 [`2b498cfb`](https://github.com/Jatin-nicon/tenali/commit/2b498cfb46061dcd46969464a241d2d816811484) — **jgupta05072003-code** — 🔀 PR [#82](https://github.com/Jatin-nicon/tenali/pull/82) from `vicharanashala` — fix/summership-seed-users-env
-- ♻️ [`884bbcb0`](https://github.com/Jatin-nicon/tenali/commit/884bbcb03d2d8533709dbb09795e69ec9cd7a1f5) — **Jinal Gupta** — load seed users from env, not hardcoded source
+- 📌 [`ea64920d`](https://github.com/vicharanashala/tenali/commit/ea64920d1a748fcbfb77cf0cd7eb38f23d50445c) — **jgupta05072003-code** — 🔀 PR [#81](https://github.com/vicharanashala/tenali/pull/81) from `muditagrawal2007` — new_f
+- 📌 [`2b498cfb`](https://github.com/vicharanashala/tenali/commit/2b498cfb46061dcd46969464a241d2d816811484) — **jgupta05072003-code** — 🔀 PR [#82](https://github.com/vicharanashala/tenali/pull/82) from `vicharanashala` — fix/summership-seed-users-env
+- ♻️ [`884bbcb0`](https://github.com/vicharanashala/tenali/commit/884bbcb03d2d8533709dbb09795e69ec9cd7a1f5) — **Jinal Gupta** — load seed users from env, not hardcoded source
     - 📁 **2 files:** `CLAUDE.md` `+1 −1`, `server/auth.js` `+22 −7`
     - 📊 **`+23 −8`** · 2 files
-- 📌 [`be1a974a`](https://github.com/Jatin-nicon/tenali/commit/be1a974ad72e2fc03c0c74449484cfd0f70ae444) — **muditagrawal2007** — Merge branch 'vicharanashala:main' into new_f
-- 📌 [`3ef48c55`](https://github.com/Jatin-nicon/tenali/commit/3ef48c55e929e3d5d7cde41cebe94387e881d491) — **jgupta05072003-code** — 🔀 PR [#80](https://github.com/Jatin-nicon/tenali/pull/80) from `vicharanashala` — fix/summership-base-aware-routing
-- 🐛 [`bf8c3477`](https://github.com/Jatin-nicon/tenali/commit/bf8c347791a1cf6ddb312240bbd6649ff607928d) — **Jinal Gupta** — base-path-aware routing so /summership routes work
+- 📌 [`be1a974a`](https://github.com/vicharanashala/tenali/commit/be1a974ad72e2fc03c0c74449484cfd0f70ae444) — **muditagrawal2007** — Merge branch 'vicharanashala:main' into new_f
+- 📌 [`3ef48c55`](https://github.com/vicharanashala/tenali/commit/3ef48c55e929e3d5d7cde41cebe94387e881d491) — **jgupta05072003-code** — 🔀 PR [#80](https://github.com/vicharanashala/tenali/pull/80) from `vicharanashala` — fix/summership-base-aware-routing
+- 🐛 [`bf8c3477`](https://github.com/vicharanashala/tenali/commit/bf8c347791a1cf6ddb312240bbd6649ff607928d) — **Jinal Gupta** — base-path-aware routing so /summership routes work
     - 📁 **1 file:** `client/src/App.jsx` `+83 −69`
     - 📊 **`+83 −69`** · 1 file
 
 #### 📅 2026-07-22  <sub>(40 commits)</sub>
 
-- 📌 [`d248b044`](https://github.com/Jatin-nicon/tenali/commit/d248b04444275b5c94c499d9ce97148ebe126b12) — **muditagrawal2007** — auto-fix lint issues
+- 📌 [`d248b044`](https://github.com/vicharanashala/tenali/commit/d248b04444275b5c94c499d9ce97148ebe126b12) — **muditagrawal2007** — auto-fix lint issues
     - 📁 **1 file:** `client/src/vachana/exercises/NoiseFilter.jsx` `+38 −69`
     - 📊 **`+38 −69`** · 1 file
-- 📌 [`67092bed`](https://github.com/Jatin-nicon/tenali/commit/67092bed38e270f5cb4ea6387bf981476a3b02b0) — **muditagrawal2007** — fix lint issues
+- 📌 [`67092bed`](https://github.com/vicharanashala/tenali/commit/67092bed38e270f5cb4ea6387bf981476a3b02b0) — **muditagrawal2007** — fix lint issues
     - 📁 **1 file:** `client/src/bkt.js` `+1 −0`
     - 📊 **`+1 −0`** · 1 file
-- 📌 [`74469137`](https://github.com/Jatin-nicon/tenali/commit/744691373587aa08110cf3a8341babf302280c12) — **muditagrawal2007** — fix lint issues
+- 📌 [`74469137`](https://github.com/vicharanashala/tenali/commit/744691373587aa08110cf3a8341babf302280c12) — **muditagrawal2007** — fix lint issues
     - 📁 **1 file:** `client/src/language/CrosswordApp.jsx` `+22 −19`
     - 📊 **`+22 −19`** · 1 file
-- 📌 [`0cf59a70`](https://github.com/Jatin-nicon/tenali/commit/0cf59a70bfcf6a05a7e02113e639c46e857d66c1) — **muditagrawal2007** — fix unused variables
+- 📌 [`0cf59a70`](https://github.com/vicharanashala/tenali/commit/0cf59a70bfcf6a05a7e02113e639c46e857d66c1) — **muditagrawal2007** — fix unused variables
     - 📁 **1 file:** `client/src/components/GlossaryText.jsx` `+4 −3`
     - 📊 **`+4 −3`** · 1 file
-- 📌 [`361fca93`](https://github.com/Jatin-nicon/tenali/commit/361fca9395cf5a92a1f875b98fd79a5c758c4c4e) — **muditagrawal2007** — fix lint issues
+- 📌 [`361fca93`](https://github.com/vicharanashala/tenali/commit/361fca9395cf5a92a1f875b98fd79a5c758c4c4e) — **muditagrawal2007** — fix lint issues
     - 📁 **1 file:** `client/src/components/OnboardingTour.jsx` `+4 −1`
     - 📊 **`+4 −1`** · 1 file
-- 📌 [`bcc3f07f`](https://github.com/Jatin-nicon/tenali/commit/bcc3f07fe9e8079df449c682b9d49c4b82148faa) — **muditagrawal2007** — fix unused variables
+- 📌 [`bcc3f07f`](https://github.com/vicharanashala/tenali/commit/bcc3f07fe9e8079df449c682b9d49c4b82148faa) — **muditagrawal2007** — fix unused variables
     - 📁 **1 file:** `client/src/components/concept/EquationSandbox.jsx` `+3 −3`
     - 📊 **`+3 −3`** · 1 file
-- 📌 [`febc6e37`](https://github.com/Jatin-nicon/tenali/commit/febc6e37c97a19f575caa019fb1a662870c1c3c9) — **muditagrawal2007** — Stage2Grid: fix lint issues
+- 📌 [`febc6e37`](https://github.com/vicharanashala/tenali/commit/febc6e37c97a19f575caa019fb1a662870c1c3c9) — **muditagrawal2007** — Stage2Grid: fix lint issues
     - 📁 **1 file:** `client/src/lib/simul-concept/Stage2Grid.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`543d9255`](https://github.com/Jatin-nicon/tenali/commit/543d9255d961f734127dce19e6e2f4c2f77167a7) — **muditagrawal2007** — fix lint issues
+- 📌 [`543d9255`](https://github.com/vicharanashala/tenali/commit/543d9255d961f734127dce19e6e2f4c2f77167a7) — **muditagrawal2007** — fix lint issues
     - 📁 **1 file:** `client/src/lib/simul-concept/SimulConceptApp.jsx` `+2 −1`
     - 📊 **`+2 −1`** · 1 file
-- 📌 [`32e13252`](https://github.com/Jatin-nicon/tenali/commit/32e13252955c7207d5d5e2a41aef17da55466a8f) — **muditagrawal2007** — fix lint issues
+- 📌 [`32e13252`](https://github.com/vicharanashala/tenali/commit/32e13252955c7207d5d5e2a41aef17da55466a8f) — **muditagrawal2007** — fix lint issues
     - 📁 **1 file:** `client/src/lib/concept/CompletionScreen.jsx` `+1 −0`
     - 📊 **`+1 −0`** · 1 file
-- 📌 [`9bc086f4`](https://github.com/Jatin-nicon/tenali/commit/9bc086f442bbbedd3524530595c3dffafb37a422) — **muditagrawal2007** — Stage5Review: fix lint issues
+- 📌 [`9bc086f4`](https://github.com/vicharanashala/tenali/commit/9bc086f442bbbedd3524530595c3dffafb37a422) — **muditagrawal2007** — Stage5Review: fix lint issues
     - 📁 **1 file:** `client/src/lib/concept/Stage5Review.jsx` `+8 −12`
     - 📊 **`+8 −12`** · 1 file
-- 📌 [`7dbe6e76`](https://github.com/Jatin-nicon/tenali/commit/7dbe6e76190968fa3c4dcd9cbaae6a3640fd8d66) — **muditagrawal2007** — Stage4Independent: fix lint issues
+- 📌 [`7dbe6e76`](https://github.com/vicharanashala/tenali/commit/7dbe6e76190968fa3c4dcd9cbaae6a3640fd8d66) — **muditagrawal2007** — Stage4Independent: fix lint issues
     - 📁 **1 file:** `client/src/lib/concept/Stage4Independent.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`c5b02c31`](https://github.com/Jatin-nicon/tenali/commit/c5b02c31fb06a4b54af9d8f086988664454a9e51) — **muditagrawal2007** — Stage3Guided: fix unused variables
+- 📌 [`c5b02c31`](https://github.com/vicharanashala/tenali/commit/c5b02c31fb06a4b54af9d8f086988664454a9e51) — **muditagrawal2007** — Stage3Guided: fix unused variables
     - 📁 **1 file:** `client/src/lib/concept/Stage3Guided.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`44433d1b`](https://github.com/Jatin-nicon/tenali/commit/44433d1b0a6a7f0370c7df6ec80a6d9fade2b5e1) — **muditagrawal2007** — Stage1Predict: fix unused variables
+- 📌 [`44433d1b`](https://github.com/vicharanashala/tenali/commit/44433d1b0a6a7f0370c7df6ec80a6d9fade2b5e1) — **muditagrawal2007** — Stage1Predict: fix unused variables
     - 📁 **1 file:** `client/src/lib/concept/Stage1Predict.jsx` `+0 −1`
     - 📊 **`+0 −1`** · 1 file
-- 📌 [`054abeac`](https://github.com/Jatin-nicon/tenali/commit/054abeac588bdd949a94c06d0e119f6326bcd393) — **muditagrawal2007** — fix lint issues - remove unused vars
+- 📌 [`054abeac`](https://github.com/vicharanashala/tenali/commit/054abeac588bdd949a94c06d0e119f6326bcd393) — **muditagrawal2007** — fix lint issues - remove unused vars
     - 📁 **1 file:** `client/src/lib/concept/QFormulaConceptApp.jsx` `+3 −2`
     - 📊 **`+3 −2`** · 1 file
-- 📌 [`ae8df1aa`](https://github.com/Jatin-nicon/tenali/commit/ae8df1aa1b258e8dd9b9792a19b98145b627ede3) — **muditagrawal2007** — fix lint issues
+- 📌 [`ae8df1aa`](https://github.com/vicharanashala/tenali/commit/ae8df1aa1b258e8dd9b9792a19b98145b627ede3) — **muditagrawal2007** — fix lint issues
     - 📁 **1 file:** `client/src/lib/questionFormatters.js` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`38ae96d9`](https://github.com/Jatin-nicon/tenali/commit/38ae96d9d987b606efa5579790c7475c9b6486f0) — **muditagrawal2007** — fix lint issues
+- 📌 [`38ae96d9`](https://github.com/vicharanashala/tenali/commit/38ae96d9d987b606efa5579790c7475c9b6486f0) — **muditagrawal2007** — fix lint issues
     - 📁 **1 file:** `client/src/lib/MasteryBadge.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`b25bd527`](https://github.com/Jatin-nicon/tenali/commit/b25bd527d9f888013bd893f4d41bcc8559799c62) — **muditagrawal2007** — fix lint issues - remove unused exports and imports
+- 📌 [`b25bd527`](https://github.com/vicharanashala/tenali/commit/b25bd527d9f888013bd893f4d41bcc8559799c62) — **muditagrawal2007** — fix lint issues - remove unused exports and imports
     - 📁 **1 file:** `client/src/lib/DiagnosticQuiz.jsx` `+19 −10`
     - 📊 **`+19 −10`** · 1 file
-- 📌 [`dbc0e084`](https://github.com/Jatin-nicon/tenali/commit/dbc0e08432371fa800dfb5b501058c1e86deb998) — **muditagrawal2007** — fix lint issues - unused vars, suppress set-state-in-effect
+- 📌 [`dbc0e084`](https://github.com/vicharanashala/tenali/commit/dbc0e08432371fa800dfb5b501058c1e86deb998) — **muditagrawal2007** — fix lint issues - unused vars, suppress set-state-in-effect
     - 📁 **1 file:** `client/src/lib/AutoTranslator.jsx` `+3 −6`
     - 📊 **`+3 −6`** · 1 file
-- 📌 [`110dd6d3`](https://github.com/Jatin-nicon/tenali/commit/110dd6d3f2c2865273f2a67fec6a82dc109ed474) — **muditagrawal2007** — fix lint issues - empty blocks, unused vars, suppress set-state-in-effect
+- 📌 [`110dd6d3`](https://github.com/vicharanashala/tenali/commit/110dd6d3f2c2865273f2a67fec6a82dc109ed474) — **muditagrawal2007** — fix lint issues - empty blocks, unused vars, suppress set-state-in-effect
     - 📁 **1 file:** `client/src/lib/AccessibilityProvider.jsx` `+17 −25`
     - 📊 **`+17 −25`** · 1 file
-- 📌 [`442a4810`](https://github.com/Jatin-nicon/tenali/commit/442a4810bd7a09d0cea5be6962ea631c016b89b1) — **muditagrawal2007** — i18n: fix lint issues - remove unused vars, suppress react-refresh
+- 📌 [`442a4810`](https://github.com/vicharanashala/tenali/commit/442a4810bd7a09d0cea5be6962ea631c016b89b1) — **muditagrawal2007** — i18n: fix lint issues - remove unused vars, suppress react-refresh
     - 📁 **1 file:** `client/src/lib/i18n.jsx` `+10 −8`
     - 📊 **`+10 −8`** · 1 file
-- 📌 [`1ecce95c`](https://github.com/Jatin-nicon/tenali/commit/1ecce95c3e054a6bf48d30d06c5904203e4a4a37) — **muditagrawal2007** — fix lint issues
+- 📌 [`1ecce95c`](https://github.com/vicharanashala/tenali/commit/1ecce95c3e054a6bf48d30d06c5904203e4a4a37) — **muditagrawal2007** — fix lint issues
     - 📁 **1 file:** `client/src/IdliVadaSambharApp.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`8046091a`](https://github.com/Jatin-nicon/tenali/commit/8046091a2bed6860b1d85f58ff3ac4e33ddd7e00) — **muditagrawal2007** — fix lint issues
+- 📌 [`8046091a`](https://github.com/vicharanashala/tenali/commit/8046091a2bed6860b1d85f58ff3ac4e33ddd7e00) — **muditagrawal2007** — fix lint issues
     - 📁 **1 file:** `client/src/LcmHcfApp.jsx` `+1 −0`
     - 📊 **`+1 −0`** · 1 file
-- 📌 [`d0a803bc`](https://github.com/Jatin-nicon/tenali/commit/d0a803bcb2c09129e07f52313ebe578f842da160) — **muditagrawal2007** — fix lint issues
+- 📌 [`d0a803bc`](https://github.com/vicharanashala/tenali/commit/d0a803bcb2c09129e07f52313ebe578f842da160) — **muditagrawal2007** — fix lint issues
     - 📁 **1 file:** `client/src/PercentExplanationApp.jsx` `+3 −1`
     - 📊 **`+3 −1`** · 1 file
-- 📌 [`bc0d5223`](https://github.com/Jatin-nicon/tenali/commit/bc0d5223452792375c5a68a5d7a5f9228ea714dc) — **muditagrawal2007** — fix lint issues - remove unused imports
+- 📌 [`bc0d5223`](https://github.com/vicharanashala/tenali/commit/bc0d5223452792375c5a68a5d7a5f9228ea714dc) — **muditagrawal2007** — fix lint issues - remove unused imports
     - 📁 **1 file:** `client/src/CoordGeomDiscoveryApp.jsx` `+3 −2`
     - 📊 **`+3 −2`** · 1 file
-- 📌 [`593c1836`](https://github.com/Jatin-nicon/tenali/commit/593c18369eb8a2d829be5ce1fb1aab897aff4315) — **muditagrawal2007** — fix lint issues - remove unused variables
+- 📌 [`593c1836`](https://github.com/vicharanashala/tenali/commit/593c18369eb8a2d829be5ce1fb1aab897aff4315) — **muditagrawal2007** — fix lint issues - remove unused variables
     - 📁 **1 file:** `client/src/GeometryApp.jsx` `+4 −2`
     - 📊 **`+4 −2`** · 1 file
-- 📌 [`6f5c6a9d`](https://github.com/Jatin-nicon/tenali/commit/6f5c6a9dc095681a61f738d406703fd0b4244bf1) — **muditagrawal2007** — fix lint issues - prefix unused, suppress purity warnings
+- 📌 [`6f5c6a9d`](https://github.com/vicharanashala/tenali/commit/6f5c6a9dc095681a61f738d406703fd0b4244bf1) — **muditagrawal2007** — fix lint issues - prefix unused, suppress purity warnings
     - 📁 **1 file:** `client/src/VisualMathLabRedux.jsx` `+16 −6`
     - 📊 **`+16 −6`** · 1 file
-- 📌 [`d10efd9f`](https://github.com/Jatin-nicon/tenali/commit/d10efd9fc092cf9b117a632eb452d22550a8e33b) — **muditagrawal2007** — fix lint issues - remove unused imports/refs, prefix dead vars
+- 📌 [`d10efd9f`](https://github.com/vicharanashala/tenali/commit/d10efd9fc092cf9b117a632eb452d22550a8e33b) — **muditagrawal2007** — fix lint issues - remove unused imports/refs, prefix dead vars
     - 📁 **1 file:** `client/src/PythagLabApp.jsx` `+2 −0`
     - 📊 **`+2 −0`** · 1 file
-- 📌 [`c15a4522`](https://github.com/Jatin-nicon/tenali/commit/c15a45228cc36771e6832d99bbc2f18f7174d264) — **muditagrawal2007** — fix lint issues - prefix unused vars, reorder function declarations
+- 📌 [`c15a4522`](https://github.com/vicharanashala/tenali/commit/c15a45228cc36771e6832d99bbc2f18f7174d264) — **muditagrawal2007** — fix lint issues - prefix unused vars, reorder function declarations
     - 📁 **1 file:** `client/src/BearingsLabApp.jsx` `+2 −0`
     - 📊 **`+2 −0`** · 1 file
-- 📌 [`f8f77d14`](https://github.com/Jatin-nicon/tenali/commit/f8f77d14576956664e9140d1c50e344a9ea7a7a7) — **muditagrawal2007** — fix lint issues - prefix unused vars, remove unused refs
+- 📌 [`f8f77d14`](https://github.com/vicharanashala/tenali/commit/f8f77d14576956664e9140d1c50e344a9ea7a7a7) — **muditagrawal2007** — fix lint issues - prefix unused vars, remove unused refs
     - 📁 **1 file:** `client/src/ProbLabApp.jsx` `+3 −0`
     - 📊 **`+3 −0`** · 1 file
-- 📌 [`0bdc55ff`](https://github.com/Jatin-nicon/tenali/commit/0bdc55ff39c9e6b4058eb825b4f5a13f2d6a34e2) — **muditagrawal2007** — fix lint issues - unused vars, empty blocks, useless escapes
+- 📌 [`0bdc55ff`](https://github.com/vicharanashala/tenali/commit/0bdc55ff39c9e6b4058eb825b4f5a13f2d6a34e2) — **muditagrawal2007** — fix lint issues - unused vars, empty blocks, useless escapes
     - 📁 **1 file:** `client/src/LinearAlgebraApp.jsx` `+1 −0`
     - 📊 **`+1 −0`** · 1 file
-- 📌 [`92d8533d`](https://github.com/Jatin-nicon/tenali/commit/92d8533d5a82e33cb6546ad16e28ab1196793463) — **muditagrawal2007** — remove useless backslash escapes and disable no-control-regex for intentional control chars
+- 📌 [`92d8533d`](https://github.com/vicharanashala/tenali/commit/92d8533d5a82e33cb6546ad16e28ab1196793463) — **muditagrawal2007** — remove useless backslash escapes and disable no-control-regex for intentional control chars
     - 📁 **1 file:** `client/src/lib/QuestionTranslator.js` `+110 −70`
     - 📊 **`+110 −70`** · 1 file
-- 📌 [`5e315ef5`](https://github.com/Jatin-nicon/tenali/commit/5e315ef59446dd7faf30acfd33e6387e34e63519) — **muditagrawal2007** — vite.config.js: remove duplicate keys, update proxy targets to port 4000
+- 📌 [`5e315ef5`](https://github.com/vicharanashala/tenali/commit/5e315ef59446dd7faf30acfd33e6387e34e63519) — **muditagrawal2007** — vite.config.js: remove duplicate keys, update proxy targets to port 4000
     - 📁 **1 file:** `client/vite.config.js` `+0 −7`
     - 📊 **`+0 −7`** · 1 file
-- 📌 [`8f6eab2a`](https://github.com/Jatin-nicon/tenali/commit/8f6eab2a3707ca965b304df346b8710bd4781bda) — **muditagrawal2007** — detective-app: fix Math.random in render and unused useMemo
+- 📌 [`8f6eab2a`](https://github.com/vicharanashala/tenali/commit/8f6eab2a3707ca965b304df346b8710bd4781bda) — **muditagrawal2007** — detective-app: fix Math.random in render and unused useMemo
     - 📁 **1 file:** `client/src/detective-app.jsx` `+55 −55`
     - 📊 **`+55 −55`** · 1 file
-- 📌 [`7a081087`](https://github.com/Jatin-nicon/tenali/commit/7a0810875a006161524616e3a541a3cae51b6781) — **muditagrawal2007** — misconceptions.js: add missing isPrime function
+- 📌 [`7a081087`](https://github.com/vicharanashala/tenali/commit/7a0810875a006161524616e3a541a3cae51b6781) — **muditagrawal2007** — misconceptions.js: add missing isPrime function
     - 📁 **1 file:** `client/src/lib/misconceptions.js` `+29 −19`
     - 📊 **`+29 −19`** · 1 file
-- 🐛 [`fe3de177`](https://github.com/Jatin-nicon/tenali/commit/fe3de177208be0df85d6b9ef01c134fe1884a402) — **priyanshu7725** — resolve duplicate style attribute syntax error in App.jsx
+- 🐛 [`fe3de177`](https://github.com/vicharanashala/tenali/commit/fe3de177208be0df85d6b9ef01c134fe1884a402) — **priyanshu7725** — resolve duplicate style attribute syntax error in App.jsx
     - 📁 **1 file:** `client/src/App.jsx` `+2 −3`
     - 📊 **`+2 −3`** · 1 file
-- 📌 [`c1bb5006`](https://github.com/Jatin-nicon/tenali/commit/c1bb50062be3b9511788e9fc8d1b2aee2547af93) — **priyanshu7725** — Merge upstream/main into feature/monster-misconceptions
-- 📌 [`0b62128e`](https://github.com/Jatin-nicon/tenali/commit/0b62128ee971ff4a685c223ad2b0a35a19faca18) — **muditagrawal2007** — Merge branch 'new_f' of https://github.com/muditagrawal2007/Tenali_123 into new_f
-- 📌 [`eecea2c0`](https://github.com/Jatin-nicon/tenali/commit/eecea2c085ad3f52ef6723470b9a5a1e24a86d6a) — **muditagrawal2007** — Fix lint errors: remove duplicate App files, fix unused vars, empty blocks, duplicate keys, hooks violations, and correct vite proxy port
-    - 📁 **21 files:** `client/src/App 2.jsx` `+0 −4331`, `client/src/App 3.jsx` `+0 −4411`, `client/src/App 4.jsx` `+0 −5001`, `client/src/App 5.jsx` `+0 −5095`, `client/src/App 6.jsx` `+0 −5189`, `client/src/BearingsLabApp.jsx` `+12 −11`, `client/src/LinearAlgebraApp.jsx` `+103 −35`, `client/src/ProbLabApp.jsx` `+28 −27` *(+13 more in [`eecea2c0`](https://github.com/Jatin-nicon/tenali/commit/eecea2c085ad3f52ef6723470b9a5a1e24a86d6a))*
+- 📌 [`c1bb5006`](https://github.com/vicharanashala/tenali/commit/c1bb50062be3b9511788e9fc8d1b2aee2547af93) — **priyanshu7725** — Merge upstream/main into feature/monster-misconceptions
+- 📌 [`0b62128e`](https://github.com/vicharanashala/tenali/commit/0b62128ee971ff4a685c223ad2b0a35a19faca18) — **muditagrawal2007** — Merge branch 'new_f' of https://github.com/muditagrawal2007/Tenali_123 into new_f
+- 📌 [`eecea2c0`](https://github.com/vicharanashala/tenali/commit/eecea2c085ad3f52ef6723470b9a5a1e24a86d6a) — **muditagrawal2007** — Fix lint errors: remove duplicate App files, fix unused vars, empty blocks, duplicate keys, hooks violations, and correct vite proxy port
+    - 📁 **21 files:** `client/src/App 2.jsx` `+0 −4331`, `client/src/App 3.jsx` `+0 −4411`, `client/src/App 4.jsx` `+0 −5001`, `client/src/App 5.jsx` `+0 −5095`, `client/src/App 6.jsx` `+0 −5189`, `client/src/BearingsLabApp.jsx` `+12 −11`, `client/src/LinearAlgebraApp.jsx` `+103 −35`, `client/src/ProbLabApp.jsx` `+28 −27` *(+13 more in [`eecea2c0`](https://github.com/vicharanashala/tenali/commit/eecea2c085ad3f52ef6723470b9a5a1e24a86d6a))*
     - 📊 **`+217 −24180`** · 21 files
-- 🐛 [`db24b60d`](https://github.com/Jatin-nicon/tenali/commit/db24b60d4f7fce80226e71f0b63b64de80702fd7) — **muditagrawal2007** — Battle feature - add missing client definitions, fix GK recursion, streaks, and topic mismatch
-    - 📁 **19 files:** `client/package-lock.json` `+86 −0`, `client/package.json` `+1 −0`, `client/public/models/face_expression_model-weights_manifest.json` `+1 −0`, `client/src/App.jsx` `+202 −20`, `client/src/BattleApp.jsx` `+845 −0`, `client/src/LocalCompilerApp.jsx` `+711 −0`, `client/src/PlaygroundApp.jsx` `+38 −1`, `client/src/SudokuApp.jsx` `+256 −0` *(+11 more in [`db24b60d`](https://github.com/Jatin-nicon/tenali/commit/db24b60d4f7fce80226e71f0b63b64de80702fd7))*
+- 🐛 [`db24b60d`](https://github.com/vicharanashala/tenali/commit/db24b60d4f7fce80226e71f0b63b64de80702fd7) — **muditagrawal2007** — Battle feature - add missing client definitions, fix GK recursion, streaks, and topic mismatch
+    - 📁 **19 files:** `client/package-lock.json` `+86 −0`, `client/package.json` `+1 −0`, `client/public/models/face_expression_model-weights_manifest.json` `+1 −0`, `client/src/App.jsx` `+202 −20`, `client/src/BattleApp.jsx` `+845 −0`, `client/src/LocalCompilerApp.jsx` `+711 −0`, `client/src/PlaygroundApp.jsx` `+38 −1`, `client/src/SudokuApp.jsx` `+256 −0` *(+11 more in [`db24b60d`](https://github.com/vicharanashala/tenali/commit/db24b60d4f7fce80226e71f0b63b64de80702fd7))*
     - 📊 **`+4397 −34`** · 19 files
-- 📌 [`8aca1f76`](https://github.com/Jatin-nicon/tenali/commit/8aca1f7688d12917e62ba58db6e061f56d86eb5a) — **muditagrawal2007** — Merge branch 'vicharanashala:main' into new_f
+- 📌 [`8aca1f76`](https://github.com/vicharanashala/tenali/commit/8aca1f7688d12917e62ba58db6e061f56d86eb5a) — **muditagrawal2007** — Merge branch 'vicharanashala:main' into new_f
 
 #### 📅 2026-07-21  <sub>(15 commits)</sub>
 
-- 📝 [`27e480e5`](https://github.com/Jatin-nicon/tenali/commit/27e480e573bbf5f67ad07ec65df17cbdae94f03c) — **priyanshu7725** — changelog v0.1.1 - Guided Solver copy reframing
+- 📝 [`27e480e5`](https://github.com/vicharanashala/tenali/commit/27e480e573bbf5f67ad07ec65df17cbdae94f03c) — **priyanshu7725** — changelog v0.1.1 - Guided Solver copy reframing
     - 📁 **1 file:** `client/src/monsters/CHANGELOG.md` `+25 −0`
     - 📊 **`+25 −0`** · 1 file
-- 💄 [`0d1ea63c`](https://github.com/Jatin-nicon/tenali/commit/0d1ea63c4ae8514f7ea29d56f77260deb574af03) — **priyanshu7725** — reframe Guided Solver button copy as invitation, drop failure language
+- 💄 [`0d1ea63c`](https://github.com/vicharanashala/tenali/commit/0d1ea63c4ae8514f7ea29d56f77260deb574af03) — **priyanshu7725** — reframe Guided Solver button copy as invitation, drop failure language
     - 📁 **1 file:** `client/src/monsters/CureFlow.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📝 [`41d2c72b`](https://github.com/Jatin-nicon/tenali/commit/41d2c72b9e6766f52da44c75821174ae3ced07cf) — **priyanshu7725** — changelog v0.1.0 - Guided Solver layer and audit fixes
+- 📝 [`41d2c72b`](https://github.com/vicharanashala/tenali/commit/41d2c72b9e6766f52da44c75821174ae3ced07cf) — **priyanshu7725** — changelog v0.1.0 - Guided Solver layer and audit fixes
     - 📁 **1 file:** `client/src/monsters/CHANGELOG.md` `+110 −0`
     - 📊 **`+110 −0`** · 1 file
-- ✨ [`4e333718`](https://github.com/Jatin-nicon/tenali/commit/4e3337183564339c9da104262eb9452133ea073b) — **priyanshu7725** — add Guided Solver step-by-step walkthrough with cure-fail escalation
+- ✨ [`4e333718`](https://github.com/vicharanashala/tenali/commit/4e3337183564339c9da104262eb9452133ea073b) — **priyanshu7725** — add Guided Solver step-by-step walkthrough with cure-fail escalation
     - 📁 **5 files:** `client/src/App.jsx` `+23 −1`, `client/src/monsters/GuidedSolver.jsx` `+554 −0`, `client/src/monsters/HallPanel.jsx` `+12 −5`, `client/src/monsters/MonsterDetail.jsx` `+34 −1`, `client/src/monsters/__tests__/guidedSolver.test.cjs` `+29 −0`
     - 📊 **`+652 −7`** · 5 files
-- 🐛 [`60dd8d81`](https://github.com/Jatin-nicon/tenali/commit/60dd8d81808a65a2243298782aad86a9c9fdf013) — **priyanshu7725** — import getCureHistory in CureFlow and fix CSS stroke-width in MonsterAvatar
+- 🐛 [`60dd8d81`](https://github.com/vicharanashala/tenali/commit/60dd8d81808a65a2243298782aad86a9c9fdf013) — **priyanshu7725** — import getCureHistory in CureFlow and fix CSS stroke-width in MonsterAvatar
     - 📁 **2 files:** `client/src/monsters/CureFlow.jsx` `+48 −3`, `client/src/monsters/MonsterAvatar.jsx` `+1 −1`
     - 📊 **`+49 −4`** · 2 files
-- 📌 [`14cfd2ad`](https://github.com/Jatin-nicon/tenali/commit/14cfd2ad3c1c2ea140200ebd86b06dbaa5ada572) — **jgupta05072003-code** — 🔀 PR [#79](https://github.com/Jatin-nicon/tenali/pull/79) from `vicharanashala` — fix/chartjs-dependency
-- 🐛 [`5885fe94`](https://github.com/Jatin-nicon/tenali/commit/5885fe94becccb54be99e04c0e243555ee0ba4b2) — **Jinal Gupta** — add missing chart.js peer dependency for user progress tracking
+- 📌 [`14cfd2ad`](https://github.com/vicharanashala/tenali/commit/14cfd2ad3c1c2ea140200ebd86b06dbaa5ada572) — **jgupta05072003-code** — 🔀 PR [#79](https://github.com/vicharanashala/tenali/pull/79) from `vicharanashala` — fix/chartjs-dependency
+- 🐛 [`5885fe94`](https://github.com/vicharanashala/tenali/commit/5885fe94becccb54be99e04c0e243555ee0ba4b2) — **Jinal Gupta** — add missing chart.js peer dependency for user progress tracking
     - 📁 **2 files:** `client/package-lock.json` `+6 −531`, `client/package.json` `+1 −0`
     - 📊 **`+7 −531`** · 2 files
-- 📌 [`4ddecce4`](https://github.com/Jatin-nicon/tenali/commit/4ddecce46fc2bb7abef0f051126026ae553de7a1) — **jgupta05072003-code** — 🔀 PR [#77](https://github.com/Jatin-nicon/tenali/pull/77) from `S-Hamsalekha-annamai` — feat/track_user_progress
-- 📌 [`9951b023`](https://github.com/Jatin-nicon/tenali/commit/9951b023783445952d2bf1ad3bd937a02c0f598d) — **jgupta05072003-code** — 🔀 PR [#78](https://github.com/Jatin-nicon/tenali/pull/78) from `vicharanashala` — fix/authgate-home-button
-- 🐛 [`2f709a42`](https://github.com/Jatin-nicon/tenali/commit/2f709a42af7cc40e53b81b7b70c5eda93d81f61b) — **Jinal Gupta** — add 'Back to home' button on the Login-required (AuthGate) screen
+- 📌 [`4ddecce4`](https://github.com/vicharanashala/tenali/commit/4ddecce46fc2bb7abef0f051126026ae553de7a1) — **jgupta05072003-code** — 🔀 PR [#77](https://github.com/vicharanashala/tenali/pull/77) from `S-Hamsalekha-annamai` — feat/track_user_progress
+- 📌 [`9951b023`](https://github.com/vicharanashala/tenali/commit/9951b023783445952d2bf1ad3bd937a02c0f598d) — **jgupta05072003-code** — 🔀 PR [#78](https://github.com/vicharanashala/tenali/pull/78) from `vicharanashala` — fix/authgate-home-button
+- 🐛 [`2f709a42`](https://github.com/vicharanashala/tenali/commit/2f709a42af7cc40e53b81b7b70c5eda93d81f61b) — **Jinal Gupta** — add 'Back to home' button on the Login-required (AuthGate) screen
     - 📁 **1 file:** `client/src/App.jsx` `+5 −0`
     - 📊 **`+5 −0`** · 1 file
-- 📌 [`ee10bda0`](https://github.com/Jatin-nicon/tenali/commit/ee10bda0d7f2ce7c506c2668c4aa6f732e3c58a9) — **S-Hamsalekha-annamai** — Merge branch 'main' into feat/track_user_progress
-- 📌 [`879fe8ff`](https://github.com/Jatin-nicon/tenali/commit/879fe8ff42127377030249844cf665bf5eb10391) — **jgupta05072003-code** — 🔀 PR [#76](https://github.com/Jatin-nicon/tenali/pull/76) from `vicharanashala` — fix/restore-journey-banner
-- 🐛 [`0e3b39c3`](https://github.com/Jatin-nicon/tenali/commit/0e3b39c30e5ef8f41d854aa007b684edfc91c784) — **Jinal Gupta** — restore Guided Learning Journey banner on home screen
+- 📌 [`ee10bda0`](https://github.com/vicharanashala/tenali/commit/ee10bda0d7f2ce7c506c2668c4aa6f732e3c58a9) — **S-Hamsalekha-annamai** — Merge branch 'main' into feat/track_user_progress
+- 📌 [`879fe8ff`](https://github.com/vicharanashala/tenali/commit/879fe8ff42127377030249844cf665bf5eb10391) — **jgupta05072003-code** — 🔀 PR [#76](https://github.com/vicharanashala/tenali/pull/76) from `vicharanashala` — fix/restore-journey-banner
+- 🐛 [`0e3b39c3`](https://github.com/vicharanashala/tenali/commit/0e3b39c30e5ef8f41d854aa007b684edfc91c784) — **Jinal Gupta** — restore Guided Learning Journey banner on home screen
     - 📁 **1 file:** `client/src/App.jsx` `+16 −0`
     - 📊 **`+16 −0`** · 1 file
-- 📌 [`1e58db3b`](https://github.com/Jatin-nicon/tenali/commit/1e58db3b1c5f4363a4d9b33dd55b6e4c0e914f12) — **jgupta05072003-code** — 🔀 PR [#75](https://github.com/Jatin-nicon/tenali/pull/75) from `vicharanashala` — fix/mafs-dependency
-- 🐛 [`0bdadeaa`](https://github.com/Jatin-nicon/tenali/commit/0bdadeaa31f5bee3de77b08179da884293dd5db3) — **Jinal Gupta** — add missing mafs dependency for concept playgrounds
+- 📌 [`1e58db3b`](https://github.com/vicharanashala/tenali/commit/1e58db3b1c5f4363a4d9b33dd55b6e4c0e914f12) — **jgupta05072003-code** — 🔀 PR [#75](https://github.com/vicharanashala/tenali/pull/75) from `vicharanashala` — fix/mafs-dependency
+- 🐛 [`0bdadeaa`](https://github.com/vicharanashala/tenali/commit/0bdadeaa31f5bee3de77b08179da884293dd5db3) — **Jinal Gupta** — add missing mafs dependency for concept playgrounds
     - 📁 **2 files:** `client/package-lock.json` `+95 −0`, `client/package.json` `+1 −0`
     - 📊 **`+96 −0`** · 2 files
 
 #### 📅 2026-07-20  <sub>(34 commits)</sub>
 
-- ✨ [`cd026f37`](https://github.com/Jatin-nicon/tenali/commit/cd026f37d4b4af3185f226595d6de2004edea1df) — **S Hamsalekha** — Add support for tracking  user progress .
+- ✨ [`cd026f37`](https://github.com/vicharanashala/tenali/commit/cd026f37d4b4af3185f226595d6de2004edea1df) — **S Hamsalekha** — Add support for tracking  user progress .
     - 📁 **3 files:** `client/package-lock.json` `+65 −23`, `client/package.json` `+1 −0`, `client/src/App.jsx` `+368 −1`
     - 📊 **`+434 −24`** · 3 files
-- 🐛 [`7eb5580e`](https://github.com/Jatin-nicon/tenali/commit/7eb5580e7c8f3c242860bc1541593a5685a540e3) — **S Hamsalekha** — Enable Vite dev server proxying for all the seven Gym APIs
+- 🐛 [`7eb5580e`](https://github.com/vicharanashala/tenali/commit/7eb5580e7c8f3c242860bc1541593a5685a540e3) — **S Hamsalekha** — Enable Vite dev server proxying for all the seven Gym APIs
     - 📁 **1 file:** `client/vite.config.js` `+7 −0`
     - 📊 **`+7 −0`** · 1 file
-- 📌 [`9e2114e2`](https://github.com/Jatin-nicon/tenali/commit/9e2114e24025082e1274af9f92d6efb87a8b95c6) — **Shreejal Bangera** — Restructure Reading Traps module with revised levels, question flow, and assessments
+- 📌 [`9e2114e2`](https://github.com/vicharanashala/tenali/commit/9e2114e24025082e1274af9f92d6efb87a8b95c6) — **Shreejal Bangera** — Restructure Reading Traps module with revised levels, question flow, and assessments
     - 📁 **1 file:** `client/src/vachana/exercises/ReadingTraps.jsx` `+347 −207`
     - 📊 **`+347 −207`** · 1 file
-- 📌 [`d1ffff18`](https://github.com/Jatin-nicon/tenali/commit/d1ffff18f240f4ac3c7f6728e3c82258cf263274) — **jgupta05072003-code** — 🔀 PR [#52](https://github.com/Jatin-nicon/tenali/pull/52) from `24F3005086` — feature/concept-playgrounds
-- 📌 [`1d4d224a`](https://github.com/Jatin-nicon/tenali/commit/1d4d224a4ce3c41d0742b8d9e6b38e15270401f8) — **jgupta05072003-code** — 🔀 PR [#51](https://github.com/Jatin-nicon/tenali/pull/51) from `24F3005086` — feature/i18n
-- 📌 [`7b0b0002`](https://github.com/Jatin-nicon/tenali/commit/7b0b0002079ad06578c1ee687c0f792608bed39e) — **jgupta05072003-code** — 🔀 PR [#58](https://github.com/Jatin-nicon/tenali/pull/58) from `diptosubhro-ctrl` — tenali_main
-- 🐛 [`97ea9e0a`](https://github.com/Jatin-nicon/tenali/commit/97ea9e0a09cd25d9f781bc4b548894e4815cdd11) — **harshyy07** — remove stray extra closing brace from App.css merge artifact
+- 📌 [`d1ffff18`](https://github.com/vicharanashala/tenali/commit/d1ffff18f240f4ac3c7f6728e3c82258cf263274) — **jgupta05072003-code** — 🔀 PR [#52](https://github.com/vicharanashala/tenali/pull/52) from `24F3005086` — feature/concept-playgrounds
+- 📌 [`1d4d224a`](https://github.com/vicharanashala/tenali/commit/1d4d224a4ce3c41d0742b8d9e6b38e15270401f8) — **jgupta05072003-code** — 🔀 PR [#51](https://github.com/vicharanashala/tenali/pull/51) from `24F3005086` — feature/i18n
+- 📌 [`7b0b0002`](https://github.com/vicharanashala/tenali/commit/7b0b0002079ad06578c1ee687c0f792608bed39e) — **jgupta05072003-code** — 🔀 PR [#58](https://github.com/vicharanashala/tenali/pull/58) from `diptosubhro-ctrl` — tenali_main
+- 🐛 [`97ea9e0a`](https://github.com/vicharanashala/tenali/commit/97ea9e0a09cd25d9f781bc4b548894e4815cdd11) — **harshyy07** — remove stray extra closing brace from App.css merge artifact
     - 📁 **1 file:** `client/src/App.css` `+1 −2`
     - 📊 **`+1 −2`** · 1 file
-- 📌 [`f60d4349`](https://github.com/Jatin-nicon/tenali/commit/f60d434987f77c3ecb4416d0fa6fd97a35a87870) — **harshyy07** — Merge origin/main into feat-hints: resolve CSS, App.jsx, main.jsx conflicts cleanly
-- 📌 [`bed204df`](https://github.com/Jatin-nicon/tenali/commit/bed204dffd1d86125dc3895dfbcb6385054070a5) — **24F3005086** — Resolve merge conflicts
-- 📌 [`4ee9e0b4`](https://github.com/Jatin-nicon/tenali/commit/4ee9e0b4e8ae8c81476e704d08367d9225e96f76) — **24F3005086** — Merge remote-tracking branch 'origin/main' into feature/i18n
-- 📌 [`fb24b992`](https://github.com/Jatin-nicon/tenali/commit/fb24b99293f66911aa9f9aaabeb43d04b6f2387c) — **jgupta05072003-code** — 🔀 PR [#49](https://github.com/Jatin-nicon/tenali/pull/49) from `24F3005086` — feature/bkt-prereqs
-- 📌 [`f8b7e48f`](https://github.com/Jatin-nicon/tenali/commit/f8b7e48f458fcaf8f508cb77a0d569e225a940a9) — **24F3005086** — Merge remote-tracking branch 'origin/main' into feature/concept-playgrounds
-- 📌 [`22193e0a`](https://github.com/Jatin-nicon/tenali/commit/22193e0ae79c78edb4b3c27dd643bd1381d64eba) — **24F3005086** — Merge remote-tracking branch 'origin/main' into feature/bkt-prereqs
-- 📌 [`ac598932`](https://github.com/Jatin-nicon/tenali/commit/ac598932a3440fe45e6f35266792fc059f4d5c23) — **24F3005086** — Merge main into feature/i18n
-- 📌 [`265a9237`](https://github.com/Jatin-nicon/tenali/commit/265a92371bd35af786ae1313f0227c5cad1187ae) — **jgupta05072003-code** — 🔀 PR [#50](https://github.com/Jatin-nicon/tenali/pull/50) from `24F3005086` — feature/accessibility
-- 📌 [`06bbd040`](https://github.com/Jatin-nicon/tenali/commit/06bbd04040a3968dabfef8947f5f3ba0a576e81d) — **jgupta05072003-code** — 🔀 PR [#56](https://github.com/Jatin-nicon/tenali/pull/56) from `RukmenderT` — feature/curiosity
-- 🐛 [`f1ab5b6e`](https://github.com/Jatin-nicon/tenali/commit/f1ab5b6ed6349bba4697876ffc6ac5459d9ddea8) — **RukmenderT** — remove duplicate hover tooltip and left-side variation label in Curiosity Mode
+- 📌 [`f60d4349`](https://github.com/vicharanashala/tenali/commit/f60d434987f77c3ecb4416d0fa6fd97a35a87870) — **harshyy07** — Merge origin/main into feat-hints: resolve CSS, App.jsx, main.jsx conflicts cleanly
+- 📌 [`bed204df`](https://github.com/vicharanashala/tenali/commit/bed204dffd1d86125dc3895dfbcb6385054070a5) — **24F3005086** — Resolve merge conflicts
+- 📌 [`4ee9e0b4`](https://github.com/vicharanashala/tenali/commit/4ee9e0b4e8ae8c81476e704d08367d9225e96f76) — **24F3005086** — Merge remote-tracking branch 'origin/main' into feature/i18n
+- 📌 [`fb24b992`](https://github.com/vicharanashala/tenali/commit/fb24b99293f66911aa9f9aaabeb43d04b6f2387c) — **jgupta05072003-code** — 🔀 PR [#49](https://github.com/vicharanashala/tenali/pull/49) from `24F3005086` — feature/bkt-prereqs
+- 📌 [`f8b7e48f`](https://github.com/vicharanashala/tenali/commit/f8b7e48f458fcaf8f508cb77a0d569e225a940a9) — **24F3005086** — Merge remote-tracking branch 'origin/main' into feature/concept-playgrounds
+- 📌 [`22193e0a`](https://github.com/vicharanashala/tenali/commit/22193e0ae79c78edb4b3c27dd643bd1381d64eba) — **24F3005086** — Merge remote-tracking branch 'origin/main' into feature/bkt-prereqs
+- 📌 [`ac598932`](https://github.com/vicharanashala/tenali/commit/ac598932a3440fe45e6f35266792fc059f4d5c23) — **24F3005086** — Merge main into feature/i18n
+- 📌 [`265a9237`](https://github.com/vicharanashala/tenali/commit/265a92371bd35af786ae1313f0227c5cad1187ae) — **jgupta05072003-code** — 🔀 PR [#50](https://github.com/vicharanashala/tenali/pull/50) from `24F3005086` — feature/accessibility
+- 📌 [`06bbd040`](https://github.com/vicharanashala/tenali/commit/06bbd04040a3968dabfef8947f5f3ba0a576e81d) — **jgupta05072003-code** — 🔀 PR [#56](https://github.com/vicharanashala/tenali/pull/56) from `RukmenderT` — feature/curiosity
+- 🐛 [`f1ab5b6e`](https://github.com/vicharanashala/tenali/commit/f1ab5b6ed6349bba4697876ffc6ac5459d9ddea8) — **RukmenderT** — remove duplicate hover tooltip and left-side variation label in Curiosity Mode
     - 📁 **1 file:** `client/src/Curiosity.jsx` `+0 −4`
     - 📊 **`+0 −4`** · 1 file
-- 📌 [`74e57a42`](https://github.com/Jatin-nicon/tenali/commit/74e57a4263b6406c6cf6828c88e386f907da2cd6) — **SaniyaJos** — fixed radius vs diameter challenge
+- 📌 [`74e57a42`](https://github.com/vicharanashala/tenali/commit/74e57a4263b6406c6cf6828c88e386f907da2cd6) — **SaniyaJos** — fixed radius vs diameter challenge
     - 📁 **1 file:** `client/src/ContrastChallengeApp.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- ✨ [`7669413d`](https://github.com/Jatin-nicon/tenali/commit/7669413df6aa796ac1bd894bc0cb79834b2257c4) — **priyanshu7725** — add MonsterDetail component and supporting UI for monitoring and curing monster breaches
+- ✨ [`7669413d`](https://github.com/vicharanashala/tenali/commit/7669413df6aa796ac1bd894bc0cb79834b2257c4) — **priyanshu7725** — add MonsterDetail component and supporting UI for monitoring and curing monster breaches
     - 📁 **4 files:** `client/src/monsters/CureFlow.jsx` `+1 −1`, `client/src/monsters/HallPanel.jsx` `+0 −7`, `client/src/monsters/MonsterDetail.jsx` `+6 −35`, `client/src/monsters/__tests__/hallPanel.test.cjs` `+3 −7`
     - 📊 **`+10 −50`** · 4 files
-- 📌 [`aacee659`](https://github.com/Jatin-nicon/tenali/commit/aacee659eb5c2095cc77432b455c7819fb7fa9c5) — **jgupta05072003-code** — 🔀 PR [#46](https://github.com/Jatin-nicon/tenali/pull/46) from `patnaikArpita` — main
-- 📌 [`aa167530`](https://github.com/Jatin-nicon/tenali/commit/aa1675307824ff393b72fd337a452de99c330bfc) — **jgupta05072003-code** — 🔀 PR [#65](https://github.com/Jatin-nicon/tenali/pull/65) from `vicharanashala` — fix/module-theming
-- 📌 [`96983bba`](https://github.com/Jatin-nicon/tenali/commit/96983bba9f773af9d398f438d7831b8b911af4aa) — **Anshul Kanodia** — 🔀 PR [#8](https://github.com/Jatin-nicon/tenali/pull/8) from `patnaikArpita` — Re-added-geometry-game-20July
-- 📌 [`5aa05b48`](https://github.com/Jatin-nicon/tenali/commit/5aa05b48f3bfe779c6d4fce28c4ed2fbf02932be) — **AnshulKanodia** — added MVP , enchancements , suggestion
+- 📌 [`aacee659`](https://github.com/vicharanashala/tenali/commit/aacee659eb5c2095cc77432b455c7819fb7fa9c5) — **jgupta05072003-code** — 🔀 PR [#46](https://github.com/vicharanashala/tenali/pull/46) from `patnaikArpita` — main
+- 📌 [`aa167530`](https://github.com/vicharanashala/tenali/commit/aa1675307824ff393b72fd337a452de99c330bfc) — **jgupta05072003-code** — 🔀 PR [#65](https://github.com/vicharanashala/tenali/pull/65) from `vicharanashala` — fix/module-theming
+- 📌 [`96983bba`](https://github.com/vicharanashala/tenali/commit/96983bba9f773af9d398f438d7831b8b911af4aa) — **Anshul Kanodia** — 🔀 PR [#8](https://github.com/vicharanashala/tenali/pull/8) from `patnaikArpita` — Re-added-geometry-game-20July
+- 📌 [`5aa05b48`](https://github.com/vicharanashala/tenali/commit/5aa05b48f3bfe779c6d4fce28c4ed2fbf02932be) — **AnshulKanodia** — added MVP , enchancements , suggestion
     - 📁 **3 files:** `client/src/App.jsx` `+76 −23`, `client/src/GeometryApp.jsx` `+1692 −0`, `client/src/geometry.json` `+422 −0`
     - 📊 **`+2190 −23`** · 3 files
-- 📌 [`f336fec5`](https://github.com/Jatin-nicon/tenali/commit/f336fec540dc0fc9b511932391c8fa08ea26b788) — **muditagrawal2007** — Fix riddle: add /riddle pathname route, remove double app-shell/card nesting
+- 📌 [`f336fec5`](https://github.com/vicharanashala/tenali/commit/f336fec540dc0fc9b511932391c8fa08ea26b788) — **muditagrawal2007** — Fix riddle: add /riddle pathname route, remove double app-shell/card nesting
     - 📁 **1 file:** `client/src/App.jsx` `+15 −4`
     - 📊 **`+15 −4`** · 1 file
-- 📌 [`073696d3`](https://github.com/Jatin-nicon/tenali/commit/073696d390f9bb0b845513cfa0db3112c14bd1c3) — **muditagrawal2007** — Math Riddles: 48 riddles (find-rule, sequence, logic, image) + playground preview fix
+- 📌 [`073696d3`](https://github.com/vicharanashala/tenali/commit/073696d390f9bb0b845513cfa0db3112c14bd1c3) — **muditagrawal2007** — Math Riddles: 48 riddles (find-rule, sequence, logic, image) + playground preview fix
     - 📁 **5 files:** `client/src/App.jsx` `+317 −0`, `client/src/PlaygroundApp.jsx` `+5 −11`, `client/vite.config.js` `+2 −0`, `server/index.js` `+22 −0`, `server/riddles/riddles.json` `+533 −0`
     - 📊 **`+879 −11`** · 5 files
-- 📌 [`243973c9`](https://github.com/Jatin-nicon/tenali/commit/243973c9c0f9a1ca863bea13d73b3b4f0d82a41d) — **muditagrawal2007** — Playground visualizer: Python Tutor style with code+arrow | memory boxes
+- 📌 [`243973c9`](https://github.com/vicharanashala/tenali/commit/243973c9c0f9a1ca863bea13d73b3b4f0d82a41d) — **muditagrawal2007** — Playground visualizer: Python Tutor style with code+arrow | memory boxes
     - 📁 **1 file:** `client/src/PlaygroundApp.jsx` `+468 −281`
     - 📊 **`+468 −281`** · 1 file
-- 📌 [`93b3f235`](https://github.com/Jatin-nicon/tenali/commit/93b3f235481f2f407989250eb79109a0f8ae59f6) — **muditagrawal2007** — add live preview for HTML/CSS/JS and code visualizer
+- 📌 [`93b3f235`](https://github.com/vicharanashala/tenali/commit/93b3f235481f2f407989250eb79109a0f8ae59f6) — **muditagrawal2007** — add live preview for HTML/CSS/JS and code visualizer
     - 📁 **1 file:** `client/src/PlaygroundApp.jsx` `+682 −244`
     - 📊 **`+682 −244`** · 1 file
-- 📌 [`202c2281`](https://github.com/Jatin-nicon/tenali/commit/202c22813a6ca85709c2144ac1fdcdd323409abe) — **muditagrawal2007** — Add View Code and Load buttons to playground history
+- 📌 [`202c2281`](https://github.com/vicharanashala/tenali/commit/202c22813a6ca85709c2144ac1fdcdd323409abe) — **muditagrawal2007** — Add View Code and Load buttons to playground history
     - 📁 **1 file:** `client/src/PlaygroundApp.jsx` `+119 −4`
     - 📊 **`+119 −4`** · 1 file
-- 📌 [`73cc0b50`](https://github.com/Jatin-nicon/tenali/commit/73cc0b5018977e641dc55ba78be07bbbc4225ac6) — **muditagrawal2007** — Fix playground: proper default code for all languages, dark terminal output, language categories
+- 📌 [`73cc0b50`](https://github.com/vicharanashala/tenali/commit/73cc0b5018977e641dc55ba78be07bbbc4225ac6) — **muditagrawal2007** — Fix playground: proper default code for all languages, dark terminal output, language categories
     - 📁 **2 files:** `client/src/PlaygroundApp.jsx` `+725 −159`, `server/index.js` `+9 −2`
     - 📊 **`+734 −161`** · 2 files
-- ✨ [`8ef012ee`](https://github.com/Jatin-nicon/tenali/commit/8ef012ee5e0071a05ba97878c0e15a07b5a267f3) — **muditagrawal2007** — Code Playground — run code in 50+ languages via Judge0 CE
+- ✨ [`8ef012ee`](https://github.com/vicharanashala/tenali/commit/8ef012ee5e0071a05ba97878c0e15a07b5a267f3) — **muditagrawal2007** — Code Playground — run code in 50+ languages via Judge0 CE
     - 📁 **3 files:** `client/src/App.jsx` `+23 −0`, `client/src/PlaygroundApp.jsx` `+440 −0`, `server/index.js` `+31 −0`
     - 📊 **`+494 −0`** · 3 files
-- 📌 [`2fa1a213`](https://github.com/Jatin-nicon/tenali/commit/2fa1a21398071bfb5ca91ffb4b5ff2c78e055068) — **muditagrawal2007** — fix proctoring: face detection model URL + faster interval, add speech-to-text transcript for voice events, display transcripts in dashboard
+- 📌 [`2fa1a213`](https://github.com/vicharanashala/tenali/commit/2fa1a21398071bfb5ca91ffb4b5ff2c78e055068) — **muditagrawal2007** — fix proctoring: face detection model URL + faster interval, add speech-to-text transcript for voice events, display transcripts in dashboard
     - 📁 **8 files:** `client/src/proctor/FloatingVideo.jsx` `+6 −0`, `client/src/proctor/ProctorDashboard.jsx` `+10 −2`, `client/src/proctor/ProctorPanel.jsx` `+10 −3`, `client/src/proctor/proctorEvents.js` `+2 −2`, `client/src/proctor/useFaceDetector.js` `+7 −6`, `client/src/proctor/useSpeechTranscript.js` `+99 −0`, `server/index.js` `+2 −1`, `server/proctorSchema.js` `+1 −0`
     - 📊 **`+137 −14`** · 8 files
-- 🐛 [`ce39d6f0`](https://github.com/Jatin-nicon/tenali/commit/ce39d6f08e6c3cd37fb0618c0b2dd3d91aa030eb) — **muditagrawal2007** — face detection — accept onFaceCount callback, lower threshold to 0.3, increase inputSize to 320
+- 🐛 [`ce39d6f0`](https://github.com/vicharanashala/tenali/commit/ce39d6f08e6c3cd37fb0618c0b2dd3d91aa030eb) — **muditagrawal2007** — face detection — accept onFaceCount callback, lower threshold to 0.3, increase inputSize to 320
     - 📁 **1 file:** `client/src/proctor/useFaceDetector.js` `+6 −3`
     - 📊 **`+6 −3`** · 1 file
-- 📌 [`726393bc`](https://github.com/Jatin-nicon/tenali/commit/726393bc2dc58717611066b8e5aa17acc46fae32) — **muditagrawal2007** — remove flashcard apps: Cross-Section Explorer, Spatial Reasoning, 2D↔3D Translator, Shape Slicer 3D, Net Builder, Scribble Guess
-    - 📁 **17 files:** `client/package-lock.json` `+611 −11`, `client/package.json` `+4 −1`, `client/src/App.css` `+227 −19`, `client/src/App.jsx` `+659 −63`, `client/src/CrossSectionApp.jsx` `+241 −0`, `client/src/NetBuilderApp.jsx` `+266 −0`, `client/src/ScribbleGuessApp.jsx` `+811 −0`, `client/src/ShapeSlicer3D.jsx` `+240 −0` *(+9 more in [`726393bc`](https://github.com/Jatin-nicon/tenali/commit/726393bc2dc58717611066b8e5aa17acc46fae32))*
+- 📌 [`726393bc`](https://github.com/vicharanashala/tenali/commit/726393bc2dc58717611066b8e5aa17acc46fae32) — **muditagrawal2007** — remove flashcard apps: Cross-Section Explorer, Spatial Reasoning, 2D↔3D Translator, Shape Slicer 3D, Net Builder, Scribble Guess
+    - 📁 **17 files:** `client/package-lock.json` `+611 −11`, `client/package.json` `+4 −1`, `client/src/App.css` `+227 −19`, `client/src/App.jsx` `+659 −63`, `client/src/CrossSectionApp.jsx` `+241 −0`, `client/src/NetBuilderApp.jsx` `+266 −0`, `client/src/ScribbleGuessApp.jsx` `+811 −0`, `client/src/ShapeSlicer3D.jsx` `+240 −0` *(+9 more in [`726393bc`](https://github.com/vicharanashala/tenali/commit/726393bc2dc58717611066b8e5aa17acc46fae32))*
     - 📊 **`+4882 −257`** · 17 files
-- ✨ [`326b5f38`](https://github.com/Jatin-nicon/tenali/commit/326b5f38d4430d7b350b69c30f604bc85c861a54) — **priyanshu7725** — implement static monster explanations, detail UI, and update changelog.
+- ✨ [`326b5f38`](https://github.com/vicharanashala/tenali/commit/326b5f38d4430d7b350b69c30f604bc85c861a54) — **priyanshu7725** — implement static monster explanations, detail UI, and update changelog.
     - 📁 **3 files:** `client/src/monsters/CHANGELOG.md` `+3 −4`, `client/src/monsters/MonsterDetail.jsx` `+37 −96`, `client/src/monsters/monsterExplanations.js` `+0 −17`
     - 📊 **`+40 −117`** · 3 files
 
 #### 📅 2026-07-19  <sub>(5 commits)</sub>
 
-- ✨ [`99c4fc4d`](https://github.com/Jatin-nicon/tenali/commit/99c4fc4dc6f64efdaf2d10e665f1bd51cd5926ec) — **priyanshu7725** — make Sign Swapper zap teleport instant without slide animation
+- ✨ [`99c4fc4d`](https://github.com/vicharanashala/tenali/commit/99c4fc4dc6f64efdaf2d10e665f1bd51cd5926ec) — **priyanshu7725** — make Sign Swapper zap teleport instant without slide animation
     - 📁 **1 file:** `client/src/monsters/MonsterDetail.jsx` `+8 −1`
     - 📊 **`+8 −1`** · 1 file
-- ✨ [`958b2ca2`](https://github.com/Jatin-nicon/tenali/commit/958b2ca2e62d5651fcf2dda58f31f10f26aa3996) — **priyanshu7725** — improve tips descriptions and implement step-by-step frog hopping animations
+- ✨ [`958b2ca2`](https://github.com/vicharanashala/tenali/commit/958b2ca2e62d5651fcf2dda58f31f10f26aa3996) — **priyanshu7725** — improve tips descriptions and implement step-by-step frog hopping animations
     - 📁 **2 files:** `client/src/monsters/MonsterDetail.jsx` `+38 −9`, `client/src/monsters/monsterExplanations.js` `+8 −8`
     - 📊 **`+46 −17`** · 2 files
-- ✨ [`1e596ad9`](https://github.com/Jatin-nicon/tenali/commit/1e596ad917b1acca0578162ddceb920f30461f83) — **priyanshu7725** — implement kid-friendly interactive visual monster detail views
+- ✨ [`1e596ad9`](https://github.com/vicharanashala/tenali/commit/1e596ad917b1acca0578162ddceb920f30461f83) — **priyanshu7725** — implement kid-friendly interactive visual monster detail views
     - 📁 **2 files:** `client/src/monsters/MonsterDetail.jsx` `+405 −4`, `client/src/monsters/monsterExplanations.js` `+12 −26`
     - 📊 **`+417 −30`** · 2 files
-- 📌 [`750aaa1d`](https://github.com/Jatin-nicon/tenali/commit/750aaa1d26423d0d533cb2f4002a46bf969858e5) — **Shreejal Bangera** — Add progress tracking and results screen to Reading Traps
+- 📌 [`750aaa1d`](https://github.com/vicharanashala/tenali/commit/750aaa1d26423d0d533cb2f4002a46bf969858e5) — **Shreejal Bangera** — Add progress tracking and results screen to Reading Traps
     - 📁 **1 file:** `client/src/vachana/exercises/ReadingTraps.jsx` `+189 −39`
     - 📊 **`+189 −39`** · 1 file
-- 🐛 [`f0370287`](https://github.com/Jatin-nicon/tenali/commit/f0370287d1940e3e24032d7a3e2ab16221c4d4b4) — **24F3005086** — add missing locales files for i18n
+- 🐛 [`f0370287`](https://github.com/vicharanashala/tenali/commit/f0370287d1940e3e24032d7a3e2ab16221c4d4b4) — **24F3005086** — add missing locales files for i18n
     - 📁 **6 files:** `client/src/locales/bn.json` `+218 −0`, `client/src/locales/en.json` `+230 −0`, `client/src/locales/hi.json` `+242 −0`, `client/src/locales/mr.json` `+218 −0`, `client/src/locales/ta.json` `+218 −0`, `client/src/locales/te.json` `+218 −0`
     - 📊 **`+1344 −0`** · 6 files
 
 #### 📅 2026-07-18  <sub>(18 commits)</sub>
 
-- ✨ [`f3232157`](https://github.com/Jatin-nicon/tenali/commit/f3232157dcc43a535c08143d797f2b955c199096) — **SaniyaJos** — enhance contrast challenge with discovery steps and unified flow
+- ✨ [`f3232157`](https://github.com/vicharanashala/tenali/commit/f3232157dcc43a535c08143d797f2b955c199096) — **SaniyaJos** — enhance contrast challenge with discovery steps and unified flow
     - 📁 **1 file:** `client/src/ContrastChallengeApp.jsx` `+6636 −1156`
     - 📊 **`+6636 −1156`** · 1 file
-- 📌 [`d5a95e17`](https://github.com/Jatin-nicon/tenali/commit/d5a95e172bbae5e63ada11ab88bd11d8024dca0d) — **SaniyaJos** — Merge remote-tracking branch 'upstream/main' into feat/contrast-challenge-enhancement
-- 📌 [`ab9339a0`](https://github.com/Jatin-nicon/tenali/commit/ab9339a0ad95694f597c530e12b82efecff272b6) — **Shreejal Bangera** — Add Reading Traps multi-level exercise and gameplay improvements
+- 📌 [`d5a95e17`](https://github.com/vicharanashala/tenali/commit/d5a95e172bbae5e63ada11ab88bd11d8024dca0d) — **SaniyaJos** — Merge remote-tracking branch 'upstream/main' into feat/contrast-challenge-enhancement
+- 📌 [`ab9339a0`](https://github.com/vicharanashala/tenali/commit/ab9339a0ad95694f597c530e12b82efecff272b6) — **Shreejal Bangera** — Add Reading Traps multi-level exercise and gameplay improvements
     - 📁 **2 files:** `client/src/vachana/exercises/ReadingTraps.jsx` `+537 −55`, `client/src/vachana/exercises/changelog.md` `+63 −0`
     - 📊 **`+600 −55`** · 2 files
-- 🐛 [`24108cee`](https://github.com/Jatin-nicon/tenali/commit/24108ceec15b7b85e32e0226c46ab42bd65ef518) — **priyanshu7725** — decouple useTimer and QuizLayout imports in language apps to resolve circular dependency
+- 🐛 [`24108cee`](https://github.com/vicharanashala/tenali/commit/24108ceec15b7b85e32e0226c46ab42bd65ef518) — **priyanshu7725** — decouple useTimer and QuizLayout imports in language apps to resolve circular dependency
     - 📁 **5 files:** `client/src/components/QuizLayout.jsx` `+80 −0`, `client/src/hooks/useTimer.js` `+69 −0`, `client/src/language/CrosswordApp.jsx` `+2 −1`, `client/src/language/WordCreatorApp.jsx` `+2 −1`, `client/src/language/WordSearchApp.jsx` `+2 −1`
     - 📊 **`+155 −3`** · 5 files
-- 🐛 [`1bf33e0c`](https://github.com/Jatin-nicon/tenali/commit/1bf33e0cae976e7232c52308e3c05799fbcacaea) — **priyanshu7725** — resolve load-time circular dependency with App.jsx using React.lazy and Suspense for LanguageDashboard
+- 🐛 [`1bf33e0c`](https://github.com/vicharanashala/tenali/commit/1bf33e0cae976e7232c52308e3c05799fbcacaea) — **priyanshu7725** — resolve load-time circular dependency with App.jsx using React.lazy and Suspense for LanguageDashboard
     - 📁 **1 file:** `client/src/App.jsx` `+5 −3`
     - 📊 **`+5 −3`** · 1 file
-- 🐛 [`a20f15f2`](https://github.com/Jatin-nicon/tenali/commit/a20f15f23b11aae42f82f76b57b452bd0d751702) — **24F3005086** — remove MasteryBadge usage from concept playgrounds since it belongs to BKT branch
+- 🐛 [`a20f15f2`](https://github.com/vicharanashala/tenali/commit/a20f15f23b11aae42f82f76b57b452bd0d751702) — **24F3005086** — remove MasteryBadge usage from concept playgrounds since it belongs to BKT branch
     - 📁 **2 files:** `client/src/lib/concept/QFormulaConceptApp.jsx` `+1 −2`, `client/src/lib/simul-concept/SimulConceptApp.jsx` `+1 −2`
     - 📊 **`+2 −4`** · 2 files
-- 🐛 [`dc7673c4`](https://github.com/Jatin-nicon/tenali/commit/dc7673c4936fdd5ec5d3cf5024c1cb3679f61052) — **24F3005086** — add missing i18n dependencies for accessibility panel
+- 🐛 [`dc7673c4`](https://github.com/vicharanashala/tenali/commit/dc7673c4936fdd5ec5d3cf5024c1cb3679f61052) — **24F3005086** — add missing i18n dependencies for accessibility panel
     - 📁 **3 files:** `client/src/lib/AutoTranslator.jsx` `+525 −0`, `client/src/lib/QuestionTranslator.js` `+217 −0`, `client/src/lib/i18n.jsx` `+155 −0`
     - 📊 **`+897 −0`** · 3 files
-- 🐛 [`12c0162a`](https://github.com/Jatin-nicon/tenali/commit/12c0162aab857e4e13afbae330e11f980d0fcb3e) — **24F3005086** — concept playgrounds localization bugs from afternoon session
+- 🐛 [`12c0162a`](https://github.com/vicharanashala/tenali/commit/12c0162aab857e4e13afbae330e11f980d0fcb3e) — **24F3005086** — concept playgrounds localization bugs from afternoon session
     - 📁 **2 files:** `client/src/lib/concept/QFormulaConceptApp.jsx` `+9 −1`, `client/src/lib/simul-concept/SimulConceptApp.jsx` `+9 −1`
     - 📊 **`+18 −2`** · 2 files
-- 🐛 [`94ca4a2c`](https://github.com/Jatin-nicon/tenali/commit/94ca4a2c96e5eaf3fe80c2cdd91ca6a4e9856ca1) — **24F3005086** — dark/light theme bugs from afternoon session
+- 🐛 [`94ca4a2c`](https://github.com/vicharanashala/tenali/commit/94ca4a2c96e5eaf3fe80c2cdd91ca6a4e9856ca1) — **24F3005086** — dark/light theme bugs from afternoon session
     - 📁 **1 file:** `client/src/index.css` `+87 −54`
     - 📊 **`+87 −54`** · 1 file
-- 🐛 [`013d26ca`](https://github.com/Jatin-nicon/tenali/commit/013d26caa812924d831cf62c2dcbe73cf157e6e3) — **24F3005086** — mastery badge UI bugs from afternoon session
+- 🐛 [`013d26ca`](https://github.com/vicharanashala/tenali/commit/013d26caa812924d831cf62c2dcbe73cf157e6e3) — **24F3005086** — mastery badge UI bugs from afternoon session
     - 📁 **1 file:** `client/src/lib/MasteryBadge.jsx` `+75 −0`
     - 📊 **`+75 −0`** · 1 file
-- 🐛 [`83060994`](https://github.com/Jatin-nicon/tenali/commit/83060994a46c8dd1d4b4e644226811c1269919f0) — **24F3005086** — translation bugs from afternoon session
+- 🐛 [`83060994`](https://github.com/vicharanashala/tenali/commit/83060994a46c8dd1d4b4e644226811c1269919f0) — **24F3005086** — translation bugs from afternoon session
     - 📁 **3 files:** `client/src/lib/AutoTranslator.jsx` `+462 −98`, `client/src/lib/QuestionTranslator.js` `+176 −19`, `client/src/lib/i18n.jsx` `+15 −27`
     - 📊 **`+653 −144`** · 3 files
-- 📌 [`9ff1128b`](https://github.com/Jatin-nicon/tenali/commit/9ff1128b00e3b097a0595fe2bad3f533758f6830) — **Dipto Subhro** — remove settings_icon.svg and update tutorial/reset layout logic
+- 📌 [`9ff1128b`](https://github.com/vicharanashala/tenali/commit/9ff1128b00e3b097a0595fe2bad3f533758f6830) — **Dipto Subhro** — remove settings_icon.svg and update tutorial/reset layout logic
     - 📁 **3 files:** `client/public/settings_icon.svg` `+0 −29`, `client/src/vachana/exercises/NoiseFilter.jsx` `+89 −43`, `client/src/vachana/index.jsx` `+2 −1`
     - 📊 **`+91 −73`** · 3 files
-- 🔧 [`50a1790f`](https://github.com/Jatin-nicon/tenali/commit/50a1790f7d7475f31e342c56f3c4f8ccfeaf71e2) — **priyanshu7725** — updated CHANGELOG.md
+- 🔧 [`50a1790f`](https://github.com/vicharanashala/tenali/commit/50a1790f7d7475f31e342c56f3c4f8ccfeaf71e2) — **priyanshu7725** — updated CHANGELOG.md
     - 📁 **1 file:** `client/src/monsters/CHANGELOG.md` `+0 −18`
     - 📊 **`+0 −18`** · 1 file
-- 📌 [`4bfa35f5`](https://github.com/Jatin-nicon/tenali/commit/4bfa35f5cb7b6961afb7b89129444d1bd57f4a83) — **muditagrawal2007** — Merge branch 'vicharanashala:main' into new_f
-- ✨ [`b1b2c528`](https://github.com/Jatin-nicon/tenali/commit/b1b2c528a2ffa55588d075fb2fe2a44addc44852) — **priyanshu7725** — expand Bracketeer to support linear and double-bracket distribution
+- 📌 [`4bfa35f5`](https://github.com/vicharanashala/tenali/commit/4bfa35f5cb7b6961afb7b89129444d1bd57f4a83) — **muditagrawal2007** — Merge branch 'vicharanashala:main' into new_f
+- ✨ [`b1b2c528`](https://github.com/vicharanashala/tenali/commit/b1b2c528a2ffa55588d075fb2fe2a44addc44852) — **priyanshu7725** — expand Bracketeer to support linear and double-bracket distribution
     - 📁 **3 files:** `client/src/monsters/CureFlow.jsx` `+7 −1`, `client/src/monsters/__tests__/classifier.test.js` `+9 −0`, `client/src/monsters/classifier.js` `+90 −26`
     - 📊 **`+106 −27`** · 3 files
-- ✨ [`9b143ea8`](https://github.com/Jatin-nicon/tenali/commit/9b143ea89faddc15f34396feb8c29e90ce1ce8ae) — **priyanshu7725** — implement monster misconceptions framework
+- ✨ [`9b143ea8`](https://github.com/vicharanashala/tenali/commit/9b143ea89faddc15f34396feb8c29e90ce1ce8ae) — **priyanshu7725** — implement monster misconceptions framework
     - 📁 **5 files:** `client/src/App.jsx` `+106 −87`, `client/src/components/OnboardingTour.jsx` `+6 −1`, `client/src/monsters/__tests__/classifier.test.js` `+2 −2`, `client/src/monsters/__tests__/fetchInterceptor.test.js` `+24 −4`, `client/src/monsters/fetchInterceptor.js` `+9 −2`
     - 📊 **`+147 −96`** · 5 files
-- ✨ [`1433f631`](https://github.com/Jatin-nicon/tenali/commit/1433f631156c7c611e9813d8dbb5ad1743129061) — **priyanshu7725** — implement monster-related components and state management for tracking, details, and curing flows
+- ✨ [`1433f631`](https://github.com/vicharanashala/tenali/commit/1433f631156c7c611e9813d8dbb5ad1743129061) — **priyanshu7725** — implement monster-related components and state management for tracking, details, and curing flows
     - 📁 **8 files:** `client/src/App.jsx` `+128 −12`, `client/src/monsters/CureFlow.jsx` `+93 −34`, `client/src/monsters/MonsterAvatar.jsx` `+61 −37`, `client/src/monsters/MonsterCard.jsx` `+14 −4`, `client/src/monsters/MonsterDetail.jsx` `+30 −6`, `client/src/monsters/MonsterToast.jsx` `+77 −59`, `client/src/monsters/fetchInterceptor.js` `+14 −9`, `client/src/monsters/monsterStore.js` `+32 −0`
     - 📊 **`+449 −161`** · 8 files
-- 📌 [`2cf35360`](https://github.com/Jatin-nicon/tenali/commit/2cf353600671734e630fb4e697e189c0396a1a93) — **Shreejal Bangera** — Implement Reading Traps overview and level navigation
+- 📌 [`2cf35360`](https://github.com/vicharanashala/tenali/commit/2cf353600671734e630fb4e697e189c0396a1a93) — **Shreejal Bangera** — Implement Reading Traps overview and level navigation
     - 📁 **1 file:** `client/src/vachana/exercises/ReadingTraps.jsx` `+184 −0`
     - 📊 **`+184 −0`** · 1 file
 
 #### 📅 2026-07-17  <sub>(65 commits)</sub>
 
-- ✨ [`f91a8578`](https://github.com/Jatin-nicon/tenali/commit/f91a8578a14b87b20d13fb6f99015446c66e0326) — **priyanshu7725** — add Monster collection system including UI components, API interceptors, and progress tracking
-    - 📁 **11 files:** `client/src/App.jsx` `+1598 −1594`, `client/src/monsters/CHANGELOG.md` `+70 −0`, `client/src/monsters/CureFlow.jsx` `+127 −18`, `client/src/monsters/HallPanel.jsx` `+11 −9`, `client/src/monsters/MonsterAvatar.jsx` `+265 −0`, `client/src/monsters/MonsterCard.jsx` `+13 −6`, `client/src/monsters/MonsterDetail.jsx` `+49 −17`, `client/src/monsters/MonsterToast.jsx` `+4 −20` *(+3 more in [`f91a8578`](https://github.com/Jatin-nicon/tenali/commit/f91a8578a14b87b20d13fb6f99015446c66e0326))*
+- ✨ [`f91a8578`](https://github.com/vicharanashala/tenali/commit/f91a8578a14b87b20d13fb6f99015446c66e0326) — **priyanshu7725** — add Monster collection system including UI components, API interceptors, and progress tracking
+    - 📁 **11 files:** `client/src/App.jsx` `+1598 −1594`, `client/src/monsters/CHANGELOG.md` `+70 −0`, `client/src/monsters/CureFlow.jsx` `+127 −18`, `client/src/monsters/HallPanel.jsx` `+11 −9`, `client/src/monsters/MonsterAvatar.jsx` `+265 −0`, `client/src/monsters/MonsterCard.jsx` `+13 −6`, `client/src/monsters/MonsterDetail.jsx` `+49 −17`, `client/src/monsters/MonsterToast.jsx` `+4 −20` *(+3 more in [`f91a8578`](https://github.com/vicharanashala/tenali/commit/f91a8578a14b87b20d13fb6f99015446c66e0326))*
     - 📊 **`+2172 −1675`** · 11 files
-- ✨ [`151f3aac`](https://github.com/Jatin-nicon/tenali/commit/151f3aac9ddc154221ef65d0088439f2100802c0) — **priyanshu7725** — add debug monster seeding
+- ✨ [`151f3aac`](https://github.com/vicharanashala/tenali/commit/151f3aac9ddc154221ef65d0088439f2100802c0) — **priyanshu7725** — add debug monster seeding
     - 📁 **2 files:** `client/src/monsters/__tests__/fetchInterceptor.test.js` `+14 −0`, `client/src/monsters/fetchInterceptor.js` `+37 −1`
     - 📊 **`+51 −1`** · 2 files
-- 🐛 [`29454f93`](https://github.com/Jatin-nicon/tenali/commit/29454f93d37c3a73699eb48e36bd848bf58fa041) — **priyanshu7725** — open hall from repeat toast
+- 🐛 [`29454f93`](https://github.com/vicharanashala/tenali/commit/29454f93d37c3a73699eb48e36bd848bf58fa041) — **priyanshu7725** — open hall from repeat toast
     - 📁 **2 files:** `client/src/App.jsx` `+4 −1`, `client/src/monsters/__tests__/hallPanel.test.cjs` `+4 −1`
     - 📊 **`+8 −2`** · 2 files
-- ✨ [`2ba93a04`](https://github.com/Jatin-nicon/tenali/commit/2ba93a040d01247a283e2c477a0f721a949ace0a) — **priyanshu7725** — add five-question cure flow
+- ✨ [`2ba93a04`](https://github.com/vicharanashala/tenali/commit/2ba93a040d01247a283e2c477a0f721a949ace0a) — **priyanshu7725** — add five-question cure flow
     - 📁 **3 files:** `client/src/App.jsx` `+13 −4`, `client/src/monsters/CureFlow.jsx` `+170 −0`, `client/src/monsters/__tests__/monsterToast.parse.cjs` `+1 −0`
     - 📊 **`+184 −4`** · 3 files
-- 🐛 [`b901d719`](https://github.com/Jatin-nicon/tenali/commit/b901d719b1f32bdbd74baa1f1d4231fef7a7f30e) — **priyanshu7725** — normalize generic quiz answers
+- 🐛 [`b901d719`](https://github.com/vicharanashala/tenali/commit/b901d719b1f32bdbd74baa1f1d4231fef7a7f30e) — **priyanshu7725** — normalize generic quiz answers
     - 📁 **3 files:** `client/src/monsters/MonsterToast.jsx` `+7 −4`, `client/src/monsters/__tests__/fetchInterceptor.test.js` `+28 −2`, `client/src/monsters/fetchInterceptor.js` `+49 −22`
     - 📊 **`+84 −28`** · 3 files
-- 📌 [`dcd8bbe1`](https://github.com/Jatin-nicon/tenali/commit/dcd8bbe1a5e8f3d78a478f6164c9718effb4eaff) — **Harsh** — Treasure hunt:- solve and seek
-    - 📁 **12 files:** `client/src/App.jsx` `+3 −0`, `client/src/treasurehunt/EquationGate.jsx` `+164 −0`, `client/src/treasurehunt/TreasureHuntApp.jsx` `+587 −0`, `client/src/treasurehunt/equationgate.css` `+184 −0`, `client/src/treasurehunt/treasurehunt.css` `+323 −0`, `client/vite.config.js` `+2 −0`, `package-lock.json` `+1 −1`, `server/index.js` `+17 −0` *(+4 more in [`dcd8bbe1`](https://github.com/Jatin-nicon/tenali/commit/dcd8bbe1a5e8f3d78a478f6164c9718effb4eaff))*
+- 📌 [`dcd8bbe1`](https://github.com/vicharanashala/tenali/commit/dcd8bbe1a5e8f3d78a478f6164c9718effb4eaff) — **Harsh** — Treasure hunt:- solve and seek
+    - 📁 **12 files:** `client/src/App.jsx` `+3 −0`, `client/src/treasurehunt/EquationGate.jsx` `+164 −0`, `client/src/treasurehunt/TreasureHuntApp.jsx` `+587 −0`, `client/src/treasurehunt/equationgate.css` `+184 −0`, `client/src/treasurehunt/treasurehunt.css` `+323 −0`, `client/vite.config.js` `+2 −0`, `package-lock.json` `+1 −1`, `server/index.js` `+17 −0` *(+4 more in [`dcd8bbe1`](https://github.com/vicharanashala/tenali/commit/dcd8bbe1a5e8f3d78a478f6164c9718effb4eaff))*
     - 📊 **`+2731 −1`** · 12 files
-- ✨ [`4d88e05d`](https://github.com/Jatin-nicon/tenali/commit/4d88e05d64b8b8a1089a7fc58c726d31ea92df52) — **muditagrawal2007** — inline proctor dashboard on /linear, no-auth endpoints, localStorage persistence
+- ✨ [`4d88e05d`](https://github.com/vicharanashala/tenali/commit/4d88e05d64b8b8a1089a7fc58c726d31ea92df52) — **muditagrawal2007** — inline proctor dashboard on /linear, no-auth endpoints, localStorage persistence
     - 📁 **4 files:** `client/src/App.jsx` `+33 −38`, `client/src/proctor/ProctorDashboard.jsx` `+93 −45`, `client/src/proctor/ProctoredQuiz.jsx` `+26 −5`, `server/index.js` `+34 −32`
     - 📊 **`+186 −120`** · 4 files
-- 📌 [`6f0a1bec`](https://github.com/Jatin-nicon/tenali/commit/6f0a1bec16d2b98a440801b4eb4ce6ec661a5652) — **Dipto Subhro** — Optimize Level 1 token boundaries to prevent mismatch confusion
+- 📌 [`6f0a1bec`](https://github.com/vicharanashala/tenali/commit/6f0a1bec16d2b98a440801b4eb4ce6ec661a5652) — **Dipto Subhro** — Optimize Level 1 token boundaries to prevent mismatch confusion
     - 📁 **1 file:** `client/src/vachana/noiseCorpus.js` `+9 −11`
     - 📊 **`+9 −11`** · 1 file
-- 📌 [`537b9443`](https://github.com/Jatin-nicon/tenali/commit/537b94434b455c71a8f38e59b69ce600d24240ba) — **Dipto Subhro** — Remove subject introductions and names from Level 1 questions
+- 📌 [`537b9443`](https://github.com/vicharanashala/tenali/commit/537b94434b455c71a8f38e59b69ce600d24240ba) — **Dipto Subhro** — Remove subject introductions and names from Level 1 questions
     - 📁 **1 file:** `client/src/vachana/noiseCorpus.js` `+15 −25`
     - 📊 **`+15 −25`** · 1 file
-- 📌 [`fbc58317`](https://github.com/Jatin-nicon/tenali/commit/fbc583176d4ad793cbda91d0cd5b0c374f959dd9) — **Dipto Subhro** — Shorten all Level 1 questions in the corpus
+- 📌 [`fbc58317`](https://github.com/vicharanashala/tenali/commit/fbc583176d4ad793cbda91d0cd5b0c374f959dd9) — **Dipto Subhro** — Shorten all Level 1 questions in the corpus
     - 📁 **1 file:** `client/src/vachana/noiseCorpus.js` `+50 −66`
     - 📊 **`+50 −66`** · 1 file
-- 📌 [`fff4c8db`](https://github.com/Jatin-nicon/tenali/commit/fff4c8db39d6939f964de026f824a7d36e60323e) — **Dipto Subhro** — Move Reset Progress button to inside the levels workspace next to Exit button
+- 📌 [`fff4c8db`](https://github.com/vicharanashala/tenali/commit/fff4c8db39d6939f964de026f824a7d36e60323e) — **Dipto Subhro** — Move Reset Progress button to inside the levels workspace next to Exit button
     - 📁 **1 file:** `client/src/vachana/exercises/NoiseFilter.jsx` `+47 −46`
     - 📊 **`+47 −46`** · 1 file
-- 📌 [`ae369b83`](https://github.com/Jatin-nicon/tenali/commit/ae369b83d193f4a350d58e0b50b89c0776702d51) — **Dipto Subhro** — Add Reset Progress button inside each Level card on main dashboard
+- 📌 [`ae369b83`](https://github.com/vicharanashala/tenali/commit/ae369b83d193f4a350d58e0b50b89c0776702d51) — **Dipto Subhro** — Add Reset Progress button inside each Level card on main dashboard
     - 📁 **1 file:** `client/src/vachana/exercises/NoiseFilter.jsx` `+35 −0`
     - 📊 **`+35 −0`** · 1 file
-- 📌 [`26753117`](https://github.com/Jatin-nicon/tenali/commit/267531176e2e4beeb14a23f302c9714ace106257) — **Dipto Subhro** — Enable Tutorial Reference button for Level 1 questions
+- 📌 [`26753117`](https://github.com/vicharanashala/tenali/commit/267531176e2e4beeb14a23f302c9714ace106257) — **Dipto Subhro** — Enable Tutorial Reference button for Level 1 questions
     - 📁 **1 file:** `client/src/vachana/exercises/NoiseFilter.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`4f37c1f1`](https://github.com/Jatin-nicon/tenali/commit/4f37c1f1dd745f2a96bcc1821b1cc895c12cb784) — **Dipto Subhro** — Bypass Session Complete screen after tutorial to start practice immediately
+- 📌 [`4f37c1f1`](https://github.com/vicharanashala/tenali/commit/4f37c1f1dd745f2a96bcc1821b1cc895c12cb784) — **Dipto Subhro** — Bypass Session Complete screen after tutorial to start practice immediately
     - 📁 **1 file:** `client/src/vachana/exercises/NoiseFilter.jsx` `+3 −7`
     - 📊 **`+3 −7`** · 1 file
-- 📌 [`d10a0528`](https://github.com/Jatin-nicon/tenali/commit/d10a0528c80f3c5c9ab419b39b46cc77b25d0dfe) — **Dipto Subhro** — Remove details sub-view and reset button, making all levels directly start questions
+- 📌 [`d10a0528`](https://github.com/vicharanashala/tenali/commit/d10a0528c80f3c5c9ab419b39b46cc77b25d0dfe) — **Dipto Subhro** — Remove details sub-view and reset button, making all levels directly start questions
     - 📁 **1 file:** `client/src/vachana/exercises/NoiseFilter.jsx` `+2 −104`
     - 📊 **`+2 −104`** · 1 file
-- 📌 [`f883f300`](https://github.com/Jatin-nicon/tenali/commit/f883f300b6bcf1c6a73185cfae06e44aedcfd549) — **Dipto Subhro** — Remove Key Math Fact box from tutorial reference modal
+- 📌 [`f883f300`](https://github.com/vicharanashala/tenali/commit/f883f300b6bcf1c6a73185cfae06e44aedcfd549) — **Dipto Subhro** — Remove Key Math Fact box from tutorial reference modal
     - 📁 **1 file:** `client/src/vachana/exercises/NoiseFilter.jsx` `+1 −11`
     - 📊 **`+1 −11`** · 1 file
-- 📌 [`5e67a0c7`](https://github.com/Jatin-nicon/tenali/commit/5e67a0c742a0a6e43837d03f7b426c55eabe009a) — **Dipto Subhro** — Remove strand tag labels from exercise workspace
+- 📌 [`5e67a0c7`](https://github.com/vicharanashala/tenali/commit/5e67a0c742a0a6e43837d03f7b426c55eabe009a) — **Dipto Subhro** — Remove strand tag labels from exercise workspace
     - 📁 **1 file:** `client/src/vachana/exercises/NoiseFilter.jsx` `+1 −6`
     - 📊 **`+1 −6`** · 1 file
-- 📌 [`568a201a`](https://github.com/Jatin-nicon/tenali/commit/568a201aef13f057e1fab3783dd9e974cf56a5ec) — **Dipto Subhro** — Remove Reveal 1 Noise Phrase button from active exercise card
+- 📌 [`568a201a`](https://github.com/vicharanashala/tenali/commit/568a201aef13f057e1fab3783dd9e974cf56a5ec) — **Dipto Subhro** — Remove Reveal 1 Noise Phrase button from active exercise card
     - 📁 **1 file:** `client/src/vachana/exercises/NoiseFilter.jsx` `+1 −27`
     - 📊 **`+1 −27`** · 1 file
-- 📌 [`545b418e`](https://github.com/Jatin-nicon/tenali/commit/545b418e7952a9702bd5581aa01e2004cae1a5cc) — **Dipto Subhro** — Add Tutorial Reference popout button and modal overlay for levels above 1
+- 📌 [`545b418e`](https://github.com/vicharanashala/tenali/commit/545b418e7952a9702bd5581aa01e2004cae1a5cc) — **Dipto Subhro** — Add Tutorial Reference popout button and modal overlay for levels above 1
     - 📁 **1 file:** `client/src/vachana/exercises/NoiseFilter.jsx` `+140 −3`
     - 📊 **`+140 −3`** · 1 file
-- 📌 [`ce132ad6`](https://github.com/Jatin-nicon/tenali/commit/ce132ad60621ef7062f5706a82761d445f96746e) — **Dipto Subhro** — Directly start questions on levels after Level 1 instead of opening stages sub-view
+- 📌 [`ce132ad6`](https://github.com/vicharanashala/tenali/commit/ce132ad60621ef7062f5706a82761d445f96746e) — **Dipto Subhro** — Directly start questions on levels after Level 1 instead of opening stages sub-view
     - 📁 **1 file:** `client/src/vachana/exercises/NoiseFilter.jsx` `+8 −1`
     - 📊 **`+8 −1`** · 1 file
-- 📌 [`dc15de57`](https://github.com/Jatin-nicon/tenali/commit/dc15de57289bc8f90d47b08d8dda099d034f7dd9) — **Dipto Subhro** — Add Reset Level Progress button inside each level details sub-view
+- 📌 [`dc15de57`](https://github.com/vicharanashala/tenali/commit/dc15de57289bc8f90d47b08d8dda099d034f7dd9) — **Dipto Subhro** — Add Reset Level Progress button inside each level details sub-view
     - 📁 **1 file:** `client/src/vachana/exercises/NoiseFilter.jsx` `+35 −0`
     - 📊 **`+35 −0`** · 1 file
-- 📌 [`6925c087`](https://github.com/Jatin-nicon/tenali/commit/6925c087ab2508131f3d2cc95d8efc83bb80465b) — **Dipto Subhro** — Keep one tutorial stage for Level 1 and remove tutorial stages from all other Levels
+- 📌 [`6925c087`](https://github.com/vicharanashala/tenali/commit/6925c087ab2508131f3d2cc95d8efc83bb80465b) — **Dipto Subhro** — Keep one tutorial stage for Level 1 and remove tutorial stages from all other Levels
     - 📁 **1 file:** `client/src/vachana/exercises/NoiseFilter.jsx` `+33 −14`
     - 📊 **`+33 −14`** · 1 file
-- 📌 [`8a41af8b`](https://github.com/Jatin-nicon/tenali/commit/8a41af8b1e4c3b75a978f689915ab6fab270e6cd) — **Dipto Subhro** — Remove level and name card from the level details view
+- 📌 [`8a41af8b`](https://github.com/vicharanashala/tenali/commit/8a41af8b1e4c3b75a978f689915ab6fab270e6cd) — **Dipto Subhro** — Remove level and name card from the level details view
     - 📁 **1 file:** `client/src/vachana/exercises/NoiseFilter.jsx` `+1 −17`
     - 📊 **`+1 −17`** · 1 file
-- 📌 [`809bbd87`](https://github.com/Jatin-nicon/tenali/commit/809bbd87e2aaad40d2c77fc889d05b6c934df5cb) — **Dipto Subhro** — Remove Open Level text indicator from dashboard level cards
+- 📌 [`809bbd87`](https://github.com/vicharanashala/tenali/commit/809bbd87e2aaad40d2c77fc889d05b6c934df5cb) — **Dipto Subhro** — Remove Open Level text indicator from dashboard level cards
     - 📁 **1 file:** `client/src/vachana/exercises/NoiseFilter.jsx` `+1 −4`
     - 📊 **`+1 −4`** · 1 file
-- 📌 [`f46e1956`](https://github.com/Jatin-nicon/tenali/commit/f46e19560d85aa8046e43418cf58ae522eece3c2) — **Dipto Subhro** — Redirect level clicks to a dedicated stages sub-view with back navigation
+- 📌 [`f46e1956`](https://github.com/vicharanashala/tenali/commit/f46e19560d85aa8046e43418cf58ae522eece3c2) — **Dipto Subhro** — Redirect level clicks to a dedicated stages sub-view with back navigation
     - 📁 **1 file:** `client/src/vachana/exercises/NoiseFilter.jsx` `+108 −67`
     - 📊 **`+108 −67`** · 1 file
-- 📌 [`192ccc33`](https://github.com/Jatin-nicon/tenali/commit/192ccc3396eee7d8ff9bd4ccb401b3f6bc02ccd5) — **Dipto Subhro** — Remove Active label from Noise Filter levels
+- 📌 [`192ccc33`](https://github.com/vicharanashala/tenali/commit/192ccc3396eee7d8ff9bd4ccb401b3f6bc02ccd5) — **Dipto Subhro** — Remove Active label from Noise Filter levels
     - 📁 **1 file:** `client/src/vachana/exercises/NoiseFilter.jsx` `+0 −1`
     - 📊 **`+0 −1`** · 1 file
-- 📌 [`1ed0ea77`](https://github.com/Jatin-nicon/tenali/commit/1ed0ea776c5b9b8e321405eef1da5eedc7200f5e) — **Dipto Subhro** — Make level cards on Noise Filter dashboard collapsible
+- 📌 [`1ed0ea77`](https://github.com/vicharanashala/tenali/commit/1ed0ea776c5b9b8e321405eef1da5eedc7200f5e) — **Dipto Subhro** — Make level cards on Noise Filter dashboard collapsible
     - 📁 **1 file:** `client/src/vachana/exercises/NoiseFilter.jsx` `+53 −41`
     - 📊 **`+53 −41`** · 1 file
-- 📌 [`b497c6c3`](https://github.com/Jatin-nicon/tenali/commit/b497c6c3aa64f03dd2bb6598ca57d8057d82d58a) — **Dipto Subhro** — Remove Noise Filter header box and description card
+- 📌 [`b497c6c3`](https://github.com/vicharanashala/tenali/commit/b497c6c3aa64f03dd2bb6598ca57d8057d82d58a) — **Dipto Subhro** — Remove Noise Filter header box and description card
     - 📁 **1 file:** `client/src/vachana/exercises/NoiseFilter.jsx` `+0 −33`
     - 📊 **`+0 −33`** · 1 file
-- 🐛 [`be5117f7`](https://github.com/Jatin-nicon/tenali/commit/be5117f7bd9cdc3fd2ba438a71873a60a48d65c7) — **24F3005086** — Add CSS styling for accessibility panel and toggle button
+- 🐛 [`be5117f7`](https://github.com/vicharanashala/tenali/commit/be5117f7bd9cdc3fd2ba438a71873a60a48d65c7) — **24F3005086** — Add CSS styling for accessibility panel and toggle button
     - 📁 **1 file:** `client/src/index.css` `+138 −0`
     - 📊 **`+138 −0`** · 1 file
-- 🐛 [`ce7cc1c6`](https://github.com/Jatin-nicon/tenali/commit/ce7cc1c61e3364d59ebdde765fa06295a236e875) — **muditagrawal2007** — dashboard loading stuck, useState null, screen capture clarity, hanging
+- 🐛 [`ce7cc1c6`](https://github.com/vicharanashala/tenali/commit/ce7cc1c61e3364d59ebdde765fa06295a236e875) — **muditagrawal2007** — dashboard loading stuck, useState null, screen capture clarity, hanging
     - 📁 **5 files:** `client/src/proctor/ProctorDashboard.jsx` `+3 −1`, `client/src/proctor/proctorEvents.js` `+2 −2`, `client/src/proctor/useCamera.js` `+3 −3`, `client/src/proctor/useVoiceDetection.js` `+3 −2`, `client/vite.config.js` `+3 −0`
     - 📊 **`+14 −8`** · 5 files
-- 🐛 [`dde3b3d4`](https://github.com/Jatin-nicon/tenali/commit/dde3b3d4ba5043a51eb6af2a62c122c1d0ca2d5d) — **24F3005086** — restore scratch/generate_puzzles.js accidentally removed in accessibility branch
+- 🐛 [`dde3b3d4`](https://github.com/vicharanashala/tenali/commit/dde3b3d4ba5043a51eb6af2a62c122c1d0ca2d5d) — **24F3005086** — restore scratch/generate_puzzles.js accidentally removed in accessibility branch
     - 📁 **1 file:** `scratch/generate_puzzles.js` `+228 −0`
     - 📊 **`+228 −0`** · 1 file
-- 🐛 [`a9284472`](https://github.com/Jatin-nicon/tenali/commit/a92844721362397b1c3ff94e36fde31eed45b42b) — **24F3005086** — replace updateBKT stub with proper import from bkt.js
+- 🐛 [`a9284472`](https://github.com/vicharanashala/tenali/commit/a92844721362397b1c3ff94e36fde31eed45b42b) — **24F3005086** — replace updateBKT stub with proper import from bkt.js
     - 📁 **3 files:** `client/src/App.jsx` `+0 −4`, `client/src/bkt.js` `+10 −1`, `client/src/lib/EquationSandboxApp.jsx` `+1 −1`
     - 📊 **`+11 −6`** · 3 files
-- 🐛 [`6e649802`](https://github.com/Jatin-nicon/tenali/commit/6e64980269242402873ef868a4bdb77a4db4d5b4) — **RukmenderT** — remove ?v=2 cache-buster from App.jsx import to prevent duplicate React instance
+- 🐛 [`6e649802`](https://github.com/vicharanashala/tenali/commit/6e64980269242402873ef868a4bdb77a4db4d5b4) — **RukmenderT** — remove ?v=2 cache-buster from App.jsx import to prevent duplicate React instance
     - 📁 **1 file:** `client/src/main.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 🐛 [`210298a6`](https://github.com/Jatin-nicon/tenali/commit/210298a6bce9ba2f4b07aeed6f8edf2e27337871) — **24F3005086** — add updateBKT wrapper export in bkt.js for concept playground compatibility
+- 🐛 [`210298a6`](https://github.com/vicharanashala/tenali/commit/210298a6bce9ba2f4b07aeed6f8edf2e27337871) — **24F3005086** — add updateBKT wrapper export in bkt.js for concept playground compatibility
     - 📁 **1 file:** `client/src/bkt.js` `+11 −1`
     - 📊 **`+11 −1`** · 1 file
-- 📌 [`55b4062e`](https://github.com/Jatin-nicon/tenali/commit/55b4062e30d3e56501a79deeed8903c812345a60) — **RukmenderT** — Merge branch 'upstream/main' into feature/curiosity
-- 📌 [`a39a905e`](https://github.com/Jatin-nicon/tenali/commit/a39a905e56220e6b10e7ae32004e3dd48af7372c) — **24F3005086** — Merge feature/bkt-prereqs into feature/concept-playgrounds and replace updateBKT stub
-- 🔧 [`ae989538`](https://github.com/Jatin-nicon/tenali/commit/ae989538814d3f570b8ae6a6fb5f354beb714fc7) — **24F3005086** — remove stray scratch folder
+- 📌 [`55b4062e`](https://github.com/vicharanashala/tenali/commit/55b4062e30d3e56501a79deeed8903c812345a60) — **RukmenderT** — Merge branch 'upstream/main' into feature/curiosity
+- 📌 [`a39a905e`](https://github.com/vicharanashala/tenali/commit/a39a905e56220e6b10e7ae32004e3dd48af7372c) — **24F3005086** — Merge feature/bkt-prereqs into feature/concept-playgrounds and replace updateBKT stub
+- 🔧 [`ae989538`](https://github.com/vicharanashala/tenali/commit/ae989538814d3f570b8ae6a6fb5f354beb714fc7) — **24F3005086** — remove stray scratch folder
     - 📁 **1 file:** `scratch/generate_puzzles.js` `+0 −228`
     - 📊 **`+0 −228`** · 1 file
-- 🐛 [`fafb069f`](https://github.com/Jatin-nicon/tenali/commit/fafb069fa37b4e9c8351c70539f4d27620a45ddf) — **muditagrawal2007** — dashboard broken + compulsory monitoring + auto-collapse alerts
+- 🐛 [`fafb069f`](https://github.com/vicharanashala/tenali/commit/fafb069fa37b4e9c8351c70539f4d27620a45ddf) — **muditagrawal2007** — dashboard broken + compulsory monitoring + auto-collapse alerts
     - 📁 **4 files:** `client/src/proctor/ProctorContext.jsx` `+13 −3`, `client/src/proctor/ProctorPanel.jsx` `+66 −25`, `client/src/proctor/useTabSwitch.js` `+12 −9`, `server/proctorSchema.js` `+1 −0`
     - 📊 **`+92 −37`** · 4 files
-- 📌 [`171f53db`](https://github.com/Jatin-nicon/tenali/commit/171f53db9ccf5a2465d296406db90cabe5f8eb51) — **harshyy07** — resolved merge conflicts
-- 📌 [`4e4d3eaf`](https://github.com/Jatin-nicon/tenali/commit/4e4d3eaf8e94050a4bfb920f97b16d69a8527455) — **24F3005086** — Restore scratch folder from main
+- 📌 [`171f53db`](https://github.com/vicharanashala/tenali/commit/171f53db9ccf5a2465d296406db90cabe5f8eb51) — **harshyy07** — resolved merge conflicts
+- 📌 [`4e4d3eaf`](https://github.com/vicharanashala/tenali/commit/4e4d3eaf8e94050a4bfb920f97b16d69a8527455) — **24F3005086** — Restore scratch folder from main
     - 📁 **1 file:** `scratch/generate_puzzles.js` `+228 −0`
     - 📊 **`+228 −0`** · 1 file
-- 📌 [`22a3dc01`](https://github.com/Jatin-nicon/tenali/commit/22a3dc01c538f3afd6eb291d5f48649f8f782307) — **24F3005086** — Restore scratch folder from main
+- 📌 [`22a3dc01`](https://github.com/vicharanashala/tenali/commit/22a3dc01c538f3afd6eb291d5f48649f8f782307) — **24F3005086** — Restore scratch folder from main
     - 📁 **1 file:** `scratch/generate_puzzles.js` `+228 −0`
     - 📊 **`+228 −0`** · 1 file
-- 📌 [`b39bf4c0`](https://github.com/Jatin-nicon/tenali/commit/b39bf4c0f6ed63844cb0fa8418e728536fd9ea3b) — **24F3005086** — Restore scratch folder from main
+- 📌 [`b39bf4c0`](https://github.com/vicharanashala/tenali/commit/b39bf4c0f6ed63844cb0fa8418e728536fd9ea3b) — **24F3005086** — Restore scratch folder from main
     - 📁 **1 file:** `scratch/generate_puzzles.js` `+228 −0`
     - 📊 **`+228 −0`** · 1 file
-- ⚡ [`08fb8167`](https://github.com/Jatin-nicon/tenali/commit/08fb8167fd36d8723b1fb5aebcce6eb6a312f9a1) — **muditagrawal2007** — add willReadFrequently to Canvas2D contexts in detection hooks
+- ⚡ [`08fb8167`](https://github.com/vicharanashala/tenali/commit/08fb8167fd36d8723b1fb5aebcce6eb6a312f9a1) — **muditagrawal2007** — add willReadFrequently to Canvas2D contexts in detection hooks
     - 📁 **3 files:** `client/src/proctor/useBlurDetector.js` `+2 −2`, `client/src/proctor/useFaceDetection.js` `+1 −1`, `client/src/proctor/useMotionDetector.js` `+1 −1`
     - 📊 **`+4 −4`** · 3 files
-- 🐛 [`b41ca8fd`](https://github.com/Jatin-nicon/tenali/commit/b41ca8fd867563569b87202618838fd443bc7000) — **muditagrawal2007** — rewrite proctoring detection flow — all hooks now report anomalies directly
+- 🐛 [`b41ca8fd`](https://github.com/vicharanashala/tenali/commit/b41ca8fd867563569b87202618838fd443bc7000) — **muditagrawal2007** — rewrite proctoring detection flow — all hooks now report anomalies directly
     - 📁 **6 files:** `client/src/proctor/FloatingVideo.jsx` `+65 −21`, `client/src/proctor/ProctorDashboard.jsx` `+17 −2`, `client/src/proctor/ProctorPanel.jsx` `+55 −89`, `client/src/proctor/proctorEvents.js` `+9 −5`, `client/src/proctor/useCamera.js` `+3 −5`, `client/src/proctor/useVoiceDetection.js` `+41 −40`
     - 📊 **`+190 −162`** · 6 files
-- 🐛 [`987233da`](https://github.com/Jatin-nicon/tenali/commit/987233da47dbd8a8c62eac4700b34c66e8e24ccf) — **muditagrawal2007** — add face-api.js to optimizeDeps.include to fix Vite dev server 500
+- 🐛 [`987233da`](https://github.com/vicharanashala/tenali/commit/987233da47dbd8a8c62eac4700b34c66e8e24ccf) — **muditagrawal2007** — add face-api.js to optimizeDeps.include to fix Vite dev server 500
     - 📁 **1 file:** `client/vite.config.js` `+3 −0`
     - 📊 **`+3 −0`** · 1 file
-- 🐛 [`880cc73b`](https://github.com/Jatin-nicon/tenali/commit/880cc73b6d80eb63d4707a9c7a92a65fe39a399a) — **Jinal Gupta** — make Idli-Vada-Sambhar, Crossword & Word Search follow the dark/light theme
+- 🐛 [`880cc73b`](https://github.com/vicharanashala/tenali/commit/880cc73b6d80eb63d4707a9c7a92a65fe39a399a) — **Jinal Gupta** — make Idli-Vada-Sambhar, Crossword & Word Search follow the dark/light theme
     - 📁 **3 files:** `client/src/IdliVadaSambharApp.css` `+60 −52`, `client/src/language/CrosswordApp.css` `+36 −33`, `client/src/language/WordSearchApp.css` `+27 −26`
     - 📊 **`+123 −111`** · 3 files
-- ✨ [`c21c1a47`](https://github.com/Jatin-nicon/tenali/commit/c21c1a47bd2c87f04c3ea1a33f8be44bcab0920e) — **muditagrawal2007** — add CompreFace Docker setup and face-api.js dependency
+- ✨ [`c21c1a47`](https://github.com/vicharanashala/tenali/commit/c21c1a47bd2c87f04c3ea1a33f8be44bcab0920e) — **muditagrawal2007** — add CompreFace Docker setup and face-api.js dependency
     - 📁 **5 files:** `.env.example` `+12 −0`, `client/package-lock.json` `+73 −0`, `client/package.json` `+1 −0`, `docker-compose.override.yml` `+85 −0`, `package-lock.json` `+1 −1`
     - 📊 **`+172 −1`** · 5 files
-- ✨ [`408e5c76`](https://github.com/Jatin-nicon/tenali/commit/408e5c76d47e2930bbb8e6bdb4851be841089499) — **muditagrawal2007** — complete proctoring suite — Dashboard, FloatingVideo, PiP, CSS, lint fixes
-    - 📁 **14 files:** `client/public/models/tiny_face_detector_model-weights_manifest.json` `+1 −0`, `client/src/App.css` `+215 −43`, `client/src/proctor/FloatingVideo.jsx` `+190 −197`, `client/src/proctor/ProctorContext.jsx` `+3 −1`, `client/src/proctor/ProctorDashboard.jsx` `+170 −37`, `client/src/proctor/ProctorPanel.jsx` `+88 −41`, `client/src/proctor/proctorEvents.js` `+92 −8`, `client/src/proctor/useAntiCheat.js` `+37 −1` *(+6 more in [`408e5c76`](https://github.com/Jatin-nicon/tenali/commit/408e5c76d47e2930bbb8e6bdb4851be841089499))*
+- ✨ [`408e5c76`](https://github.com/vicharanashala/tenali/commit/408e5c76d47e2930bbb8e6bdb4851be841089499) — **muditagrawal2007** — complete proctoring suite — Dashboard, FloatingVideo, PiP, CSS, lint fixes
+    - 📁 **14 files:** `client/public/models/tiny_face_detector_model-weights_manifest.json` `+1 −0`, `client/src/App.css` `+215 −43`, `client/src/proctor/FloatingVideo.jsx` `+190 −197`, `client/src/proctor/ProctorContext.jsx` `+3 −1`, `client/src/proctor/ProctorDashboard.jsx` `+170 −37`, `client/src/proctor/ProctorPanel.jsx` `+88 −41`, `client/src/proctor/proctorEvents.js` `+92 −8`, `client/src/proctor/useAntiCheat.js` `+37 −1` *(+6 more in [`408e5c76`](https://github.com/vicharanashala/tenali/commit/408e5c76d47e2930bbb8e6bdb4851be841089499))*
     - 📊 **`+1314 −338`** · 14 files
-- 📌 [`ceea26b6`](https://github.com/Jatin-nicon/tenali/commit/ceea26b65c92b62c79929b79a3185831d735fb58) — **muditagrawal2007** — Rewrite proctoring to match vibe architecture
+- 📌 [`ceea26b6`](https://github.com/vicharanashala/tenali/commit/ceea26b65c92b62c79929b79a3185831d735fb58) — **muditagrawal2007** — Rewrite proctoring to match vibe architecture
     - 📁 **5 files:** `client/src/proctor/FloatingVideo.jsx` `+194 −406`, `client/src/proctor/ProctorPanel.jsx` `+110 −49`, `client/src/proctor/useBlurDetector.js` `+16 −25`, `client/src/proctor/useCamera.js` `+23 −34`, `client/src/proctor/useVoiceDetection.js` `+9 −18`
     - 📊 **`+352 −532`** · 5 files
-- 🔧 [`19d67d72`](https://github.com/Jatin-nicon/tenali/commit/19d67d724931f9ad856ec81933d7d4ca33fc08c5) — **24F3005086** — remove stray scratch files
+- 🔧 [`19d67d72`](https://github.com/vicharanashala/tenali/commit/19d67d724931f9ad856ec81933d7d4ca33fc08c5) — **24F3005086** — remove stray scratch files
     - 📁 **1 file:** `scratch/generate_puzzles.js` `+0 −228`
     - 📊 **`+0 −228`** · 1 file
-- 🔧 [`2b93db0e`](https://github.com/Jatin-nicon/tenali/commit/2b93db0e671e10d4f39ece61489a3b5341d78cfe) — **24F3005086** — remove stray scratch folder
+- 🔧 [`2b93db0e`](https://github.com/vicharanashala/tenali/commit/2b93db0e671e10d4f39ece61489a3b5341d78cfe) — **24F3005086** — remove stray scratch folder
     - 📁 **1 file:** `scratch/generate_puzzles.js` `+0 −228`
     - 📊 **`+0 −228`** · 1 file
-- 🔧 [`1ebba997`](https://github.com/Jatin-nicon/tenali/commit/1ebba9976df95bad608b1a40a8d2c1bbdcc3c320) — **24F3005086** — remove stray scratch files
+- 🔧 [`1ebba997`](https://github.com/vicharanashala/tenali/commit/1ebba9976df95bad608b1a40a8d2c1bbdcc3c320) — **24F3005086** — remove stray scratch files
     - 📁 **1 file:** `scratch/generate_puzzles.js` `+0 −228`
     - 📊 **`+0 −228`** · 1 file
-- 📌 [`2e14656d`](https://github.com/Jatin-nicon/tenali/commit/2e14656de13217916c1aa2863767b75c94364b0d) — **muditagrawal2007** — Beautiful proctor error display + screen activity monitoring
+- 📌 [`2e14656d`](https://github.com/vicharanashala/tenali/commit/2e14656de13217916c1aa2863767b75c94364b0d) — **muditagrawal2007** — Beautiful proctor error display + screen activity monitoring
     - 📁 **4 files:** `client/src/App.css` `+20 −0`, `client/src/proctor/FloatingVideo.jsx` `+431 −125`, `client/src/proctor/ProctorPanel.jsx` `+7 −0`, `client/src/proctor/useScreenActivity.js` `+72 −0`
     - 📊 **`+530 −125`** · 4 files
-- 📌 [`68d97495`](https://github.com/Jatin-nicon/tenali/commit/68d97495eae7ccf2cfb09d94269e95fa914bd979) — **muditagrawal2007** — Add full proctoring suite with left-side webcam panel
-    - 📁 **24 files:** `client/src/App.css` `+330 −0`, `client/src/App.jsx` `+118 −8`, `client/src/main.jsx` `+6 −3`, `client/src/proctor/EmotionPicker.jsx` `+81 −0`, `client/src/proctor/EthicsConsent.jsx` `+103 −0`, `client/src/proctor/FloatingVideo.jsx` `+160 −0`, `client/src/proctor/ProctorContext.jsx` `+92 −0`, `client/src/proctor/ProctorDashboard.jsx` `+137 −0` *(+16 more in [`68d97495`](https://github.com/Jatin-nicon/tenali/commit/68d97495eae7ccf2cfb09d94269e95fa914bd979))*
+- 📌 [`68d97495`](https://github.com/vicharanashala/tenali/commit/68d97495eae7ccf2cfb09d94269e95fa914bd979) — **muditagrawal2007** — Add full proctoring suite with left-side webcam panel
+    - 📁 **24 files:** `client/src/App.css` `+330 −0`, `client/src/App.jsx` `+118 −8`, `client/src/main.jsx` `+6 −3`, `client/src/proctor/EmotionPicker.jsx` `+81 −0`, `client/src/proctor/EthicsConsent.jsx` `+103 −0`, `client/src/proctor/FloatingVideo.jsx` `+160 −0`, `client/src/proctor/ProctorContext.jsx` `+92 −0`, `client/src/proctor/ProctorDashboard.jsx` `+137 −0` *(+16 more in [`68d97495`](https://github.com/vicharanashala/tenali/commit/68d97495eae7ccf2cfb09d94269e95fa914bd979))*
     - 📊 **`+2424 −14`** · 24 files
-- 📌 [`8c57d8fa`](https://github.com/Jatin-nicon/tenali/commit/8c57d8fa3d21a3562acfe893383a27c9bb4083fc) — **24F3005086** — Merge origin/main into feature/concept-playgrounds, resolve App.jsx conflict
-- 📌 [`17a12e26`](https://github.com/Jatin-nicon/tenali/commit/17a12e26b87258e69dbeb2ef438ae8299aeb41ec) — **24F3005086** — Merge remote-tracking branch 'origin/main' into feature/accessibility
-- 📌 [`2b564478`](https://github.com/Jatin-nicon/tenali/commit/2b56447894115759f4ce6b7a4958334d39ba6e46) — **24F3005086** — Merge remote-tracking branch 'myfork/main' into feature/i18n
-- 📌 [`d1bfa4b1`](https://github.com/Jatin-nicon/tenali/commit/d1bfa4b1748176787887f64027f57944144111c0) — **24F3005086** — Resolve merge conflicts in App.jsx
-- 📌 [`cbbc3945`](https://github.com/Jatin-nicon/tenali/commit/cbbc3945ec68fc83cb4f5c6cc28eeeba3c04ed08) — **Dipto Subhro** — Merge upstream/main and resolve conflicts in App.jsx
-- 📌 [`955f779e`](https://github.com/Jatin-nicon/tenali/commit/955f779e7d9cc8c6130cca64a9a23825f3169ed9) — **Dipto Subhro** — Simplify cognitive load in Noise Filter feature
-    - 📁 **10 files:** `client/src/vachana/exercises/NoiseFilter.jsx` `+70 −12`, `scratch/scratch/find_addition.js` `+8 −0`, `scratch/scratch/find_button_styles.js` `+8 −0`, `scratch/scratch/find_missing_revealed.js` `+22 −0`, `scratch/scratch/find_revealed_in_addition.js` `+9 −0`, `scratch/scratch/find_submitans.js` `+9 −0`, `scratch/scratch/find_submits.js` `+8 −0`, `scratch/scratch/generate_puzzles.js` `+228 −0` *(+2 more in [`955f779e`](https://github.com/Jatin-nicon/tenali/commit/955f779e7d9cc8c6130cca64a9a23825f3169ed9))*
+- 📌 [`8c57d8fa`](https://github.com/vicharanashala/tenali/commit/8c57d8fa3d21a3562acfe893383a27c9bb4083fc) — **24F3005086** — Merge origin/main into feature/concept-playgrounds, resolve App.jsx conflict
+- 📌 [`17a12e26`](https://github.com/vicharanashala/tenali/commit/17a12e26b87258e69dbeb2ef438ae8299aeb41ec) — **24F3005086** — Merge remote-tracking branch 'origin/main' into feature/accessibility
+- 📌 [`2b564478`](https://github.com/vicharanashala/tenali/commit/2b56447894115759f4ce6b7a4958334d39ba6e46) — **24F3005086** — Merge remote-tracking branch 'myfork/main' into feature/i18n
+- 📌 [`d1bfa4b1`](https://github.com/vicharanashala/tenali/commit/d1bfa4b1748176787887f64027f57944144111c0) — **24F3005086** — Resolve merge conflicts in App.jsx
+- 📌 [`cbbc3945`](https://github.com/vicharanashala/tenali/commit/cbbc3945ec68fc83cb4f5c6cc28eeeba3c04ed08) — **Dipto Subhro** — Merge upstream/main and resolve conflicts in App.jsx
+- 📌 [`955f779e`](https://github.com/vicharanashala/tenali/commit/955f779e7d9cc8c6130cca64a9a23825f3169ed9) — **Dipto Subhro** — Simplify cognitive load in Noise Filter feature
+    - 📁 **10 files:** `client/src/vachana/exercises/NoiseFilter.jsx` `+70 −12`, `scratch/scratch/find_addition.js` `+8 −0`, `scratch/scratch/find_button_styles.js` `+8 −0`, `scratch/scratch/find_missing_revealed.js` `+22 −0`, `scratch/scratch/find_revealed_in_addition.js` `+9 −0`, `scratch/scratch/find_submitans.js` `+9 −0`, `scratch/scratch/find_submits.js` `+8 −0`, `scratch/scratch/generate_puzzles.js` `+228 −0` *(+2 more in [`955f779e`](https://github.com/vicharanashala/tenali/commit/955f779e7d9cc8c6130cca64a9a23825f3169ed9))*
     - 📊 **`+378 −12`** · 10 files
-- 📌 [`669ca833`](https://github.com/Jatin-nicon/tenali/commit/669ca833a8cc09567a74b02412e1e766426c4322) — **jgupta05072003-code** — 🔀 PR [#63](https://github.com/Jatin-nicon/tenali/pull/63) from `vicharanashala` — fix/appcss-bom
-- 🐛 [`57e653ae`](https://github.com/Jatin-nicon/tenali/commit/57e653aea6fb95fa676fb825aed30d550dd170a5) — **Jinal Gupta** — strip stray UTF-8 BOM from App.css breaking production build
+- 📌 [`669ca833`](https://github.com/vicharanashala/tenali/commit/669ca833a8cc09567a74b02412e1e766426c4322) — **jgupta05072003-code** — 🔀 PR [#63](https://github.com/vicharanashala/tenali/pull/63) from `vicharanashala` — fix/appcss-bom
+- 🐛 [`57e653ae`](https://github.com/vicharanashala/tenali/commit/57e653aea6fb95fa676fb825aed30d550dd170a5) — **Jinal Gupta** — strip stray UTF-8 BOM from App.css breaking production build
     - 📁 **1 file:** `client/src/App.css` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`746d96fc`](https://github.com/Jatin-nicon/tenali/commit/746d96fc6b807e205ca34b761cc6933f39aa15cf) — **jgupta05072003-code** — 🔀 PR [#54](https://github.com/Jatin-nicon/tenali/pull/54) from `sharonyamita-spec` — feature/math-detective-agency
-- 📌 [`3b992825`](https://github.com/Jatin-nicon/tenali/commit/3b992825667d4226d1d66a38c0076c755bdc5745) — **Sharonya Banerjee** — Merge upstream/main into feature/math-detective-agency, resolve client/package-lock.json conflict
-- 📌 [`cde80697`](https://github.com/Jatin-nicon/tenali/commit/cde80697ab8d4bcb2049a999a47d76ffb54dc902) — **jgupta05072003-code** — 🔀 PR [#9](https://github.com/Jatin-nicon/tenali/pull/9) from `Ritish007-svg` — feature/level-wise-explanation
+- 📌 [`746d96fc`](https://github.com/vicharanashala/tenali/commit/746d96fc6b807e205ca34b761cc6933f39aa15cf) — **jgupta05072003-code** — 🔀 PR [#54](https://github.com/vicharanashala/tenali/pull/54) from `sharonyamita-spec` — feature/math-detective-agency
+- 📌 [`3b992825`](https://github.com/vicharanashala/tenali/commit/3b992825667d4226d1d66a38c0076c755bdc5745) — **Sharonya Banerjee** — Merge upstream/main into feature/math-detective-agency, resolve client/package-lock.json conflict
+- 📌 [`cde80697`](https://github.com/vicharanashala/tenali/commit/cde80697ab8d4bcb2049a999a47d76ffb54dc902) — **jgupta05072003-code** — 🔀 PR [#9](https://github.com/vicharanashala/tenali/pull/9) from `Ritish007-svg` — feature/level-wise-explanation
 
 #### 📅 2026-07-16  <sub>(54 commits)</sub>
 
-- 📌 [`3e5716f8`](https://github.com/Jatin-nicon/tenali/commit/3e5716f8c5bc8b9f7e94bf779a638b5785579213) — **Ritish Karmakar** — Merge upstream/main and resolve conflicts with level-wise explanation feature
-- 📌 [`88f107f3`](https://github.com/Jatin-nicon/tenali/commit/88f107f3a670925aa6e27bbb322e59d6b1358cb0) — **Ritish Karmakar** — Replace CHANGELOG with cleaned-up Versions 1-4 summary
+- 📌 [`3e5716f8`](https://github.com/vicharanashala/tenali/commit/3e5716f8c5bc8b9f7e94bf779a638b5785579213) — **Ritish Karmakar** — Merge upstream/main and resolve conflicts with level-wise explanation feature
+- 📌 [`88f107f3`](https://github.com/vicharanashala/tenali/commit/88f107f3a670925aa6e27bbb322e59d6b1358cb0) — **Ritish Karmakar** — Replace CHANGELOG with cleaned-up Versions 1-4 summary
     - 📁 **1 file:** `CHANGELOG.md` `+39 −4`
     - 📊 **`+39 −4`** · 1 file
-- 🐛 [`df68cb98`](https://github.com/Jatin-nicon/tenali/commit/df68cb98798995a5c0cfdec6b01bc17dcc56b76a) — **24F3005086** — place AuthMenu inside I18nProvider and consume translations in deeper modules
+- 🐛 [`df68cb98`](https://github.com/vicharanashala/tenali/commit/df68cb98798995a5c0cfdec6b01bc17dcc56b76a) — **24F3005086** — place AuthMenu inside I18nProvider and consume translations in deeper modules
     - 📁 **2 files:** `client/src/IdliVadaSambharApp.jsx` `+4 −2`, `client/src/main.jsx` `+5 −3`
     - 📊 **`+9 −5`** · 2 files
-- 🐛 [`ccd742bb`](https://github.com/Jatin-nicon/tenali/commit/ccd742bb2c926e22cec2d03136ed176e7744b198) — **24F3005086** — add CSS rules to actually apply dyslexia font
+- 🐛 [`ccd742bb`](https://github.com/vicharanashala/tenali/commit/ccd742bb2c926e22cec2d03136ed176e7744b198) — **24F3005086** — add CSS rules to actually apply dyslexia font
     - 📁 **1 file:** `client/src/index.css` `+6 −0`
     - 📊 **`+6 −0`** · 1 file
-- 🐛 [`62aa41a6`](https://github.com/Jatin-nicon/tenali/commit/62aa41a61b600814df816aa28b2439e5a16790a4) — **24F3005086** — apply smoothing layer to BKT mastery updates to fix 43% jump bug
+- 🐛 [`62aa41a6`](https://github.com/vicharanashala/tenali/commit/62aa41a61b600814df816aa28b2439e5a16790a4) — **24F3005086** — apply smoothing layer to BKT mastery updates to fix 43% jump bug
     - 📁 **2 files:** `client/src/bkt.js` `+12 −4`, `server/lib/bkt.js` `+12 −4`
     - 📊 **`+24 −8`** · 2 files
-- 🔧 [`09287644`](https://github.com/Jatin-nicon/tenali/commit/09287644b7a794c9bb128e5d0288c628fe28e0f9) — **Dipto Subhro** — rename Teach stages to Tutorial
+- 🔧 [`09287644`](https://github.com/vicharanashala/tenali/commit/09287644b7a794c9bb128e5d0288c628fe28e0f9) — **Dipto Subhro** — rename Teach stages to Tutorial
     - 📁 **1 file:** `client/src/vachana/exercises/NoiseFilter.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`a2ecd4ad`](https://github.com/Jatin-nicon/tenali/commit/a2ecd4ad3df018d3db04e04e0122da4370232858) — **SaniyaJos** — Render contrast challenge status badges as interactive-looking button pills
+- 📌 [`a2ecd4ad`](https://github.com/vicharanashala/tenali/commit/a2ecd4ad3df018d3db04e04e0122da4370232858) — **SaniyaJos** — Render contrast challenge status badges as interactive-looking button pills
     - 📁 **1 file:** `client/src/ContrastChallengeApp.jsx` `+24 −3`
     - 📊 **`+24 −3`** · 1 file
-- 📌 [`853ad346`](https://github.com/Jatin-nicon/tenali/commit/853ad346ce03a4de09854231373219fd2e970e1a) — **SaniyaJos** — Update contrast challenge status labels to Start and Done
+- 📌 [`853ad346`](https://github.com/vicharanashala/tenali/commit/853ad346ce03a4de09854231373219fd2e970e1a) — **SaniyaJos** — Update contrast challenge status labels to Start and Done
     - 📁 **1 file:** `client/src/ContrastChallengeApp.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`d730b94a`](https://github.com/Jatin-nicon/tenali/commit/d730b94aa37c4c45ebcfcb47c8c359b5e2fa8b0c) — **SaniyaJos** — Unlock all contrast challenges by default and simplify post-quiz recommendations
+- 📌 [`d730b94a`](https://github.com/vicharanashala/tenali/commit/d730b94aa37c4c45ebcfcb47c8c359b5e2fa8b0c) — **SaniyaJos** — Unlock all contrast challenges by default and simplify post-quiz recommendations
     - 📁 **1 file:** `client/src/ContrastChallengeApp.jsx` `+7 −91`
     - 📊 **`+7 −91`** · 1 file
-- 📌 [`7407dc15`](https://github.com/Jatin-nicon/tenali/commit/7407dc1586fd0073871224562c19f5e91f285697) — **Dipto Subhro** — Merge upstream/main and resolve conflicts in App.jsx
-- 📌 [`e5a7fb5d`](https://github.com/Jatin-nicon/tenali/commit/e5a7fb5da31040b5b1b70b0588124149452ef049) — **harshyy07** — universal xp bank enhanced and cleanup
+- 📌 [`7407dc15`](https://github.com/vicharanashala/tenali/commit/7407dc1586fd0073871224562c19f5e91f285697) — **Dipto Subhro** — Merge upstream/main and resolve conflicts in App.jsx
+- 📌 [`e5a7fb5d`](https://github.com/vicharanashala/tenali/commit/e5a7fb5da31040b5b1b70b0588124149452ef049) — **harshyy07** — universal xp bank enhanced and cleanup
     - 📁 **3 files:** `client/scratch/fix_api.cjs` `+0 −20`, `client/scratch/fix_exports.cjs` `+0 −29`, `server/hints/index.js` `+3 −3`
     - 📊 **`+3 −52`** · 3 files
-- 📌 [`b9f22259`](https://github.com/Jatin-nicon/tenali/commit/b9f2225972d0ea2aed5f3d472d5e0cf45f9bb869) — **Sharonya Banerjee** — Resolve merge conflict in client/src/App.css: keep feature/math-detective-agency version as base, append badge-detail modal CSS from upstream/main
-- 🐛 [`bf5c05c9`](https://github.com/Jatin-nicon/tenali/commit/bf5c05c98d751f82ab7af5d0fa969328d306dc15) — **RukmenderT** — resolve merge conflicts and restore Curiosity Mode in hamburger menu
+- 📌 [`b9f22259`](https://github.com/vicharanashala/tenali/commit/b9f2225972d0ea2aed5f3d472d5e0cf45f9bb869) — **Sharonya Banerjee** — Resolve merge conflict in client/src/App.css: keep feature/math-detective-agency version as base, append badge-detail modal CSS from upstream/main
+- 🐛 [`bf5c05c9`](https://github.com/vicharanashala/tenali/commit/bf5c05c98d751f82ab7af5d0fa969328d306dc15) — **RukmenderT** — resolve merge conflicts and restore Curiosity Mode in hamburger menu
     - 📁 **2 files:** `client/src/App.jsx` `+1 −1`, `server/index.js` `+27 −22`
     - 📊 **`+28 −23`** · 2 files
-- 📌 [`d05b230d`](https://github.com/Jatin-nicon/tenali/commit/d05b230d5fd6a3f6e498e3155b0fceaca0466286) — **SaniyaJos** — Optimize all 15 comparison card descriptions to be concise and scan-friendly
+- 📌 [`d05b230d`](https://github.com/vicharanashala/tenali/commit/d05b230d5fd6a3f6e498e3155b0fceaca0466286) — **SaniyaJos** — Optimize all 15 comparison card descriptions to be concise and scan-friendly
     - 📁 **1 file:** `client/src/ContrastChallengeApp.jsx` `+264 −691`
     - 📊 **`+264 −691`** · 1 file
-- 📌 [`f3dcd572`](https://github.com/Jatin-nicon/tenali/commit/f3dcd5721161d9108f148984dae433b11bace6df) — **harshyy07** — unify user coin and xp balances
+- 📌 [`f3dcd572`](https://github.com/vicharanashala/tenali/commit/f3dcd5721161d9108f148984dae433b11bace6df) — **harshyy07** — unify user coin and xp balances
     - 📁 **2 files:** `server/auth.js` `+28 −3`, `server/hints/index.js` `+3 −3`
     - 📊 **`+31 −6`** · 2 files
-- 💄 [`ca1a9869`](https://github.com/Jatin-nicon/tenali/commit/ca1a98691bf4bf2848d1e4e491ea7bed27eee51e) — **SaniyaJos** — shorten comparison card descriptions to be concise and scannable
+- 💄 [`ca1a9869`](https://github.com/vicharanashala/tenali/commit/ca1a98691bf4bf2848d1e4e491ea7bed27eee51e) — **SaniyaJos** — shorten comparison card descriptions to be concise and scannable
     - 📁 **1 file:** `client/src/ContrastChallengeApp.jsx` `+96 −193`
     - 📊 **`+96 −193`** · 1 file
-- 📌 [`34eed345`](https://github.com/Jatin-nicon/tenali/commit/34eed3455243623e710d723197408f77d74c8b9d) — **harshyy07** — improved functionality and resolved conflicts
+- 📌 [`34eed345`](https://github.com/vicharanashala/tenali/commit/34eed3455243623e710d723197408f77d74c8b9d) — **harshyy07** — improved functionality and resolved conflicts
     - 📁 **1 file:** `client/src/App.css` `+11 −205`
     - 📊 **`+11 −205`** · 1 file
-- 📌 [`ed9b657a`](https://github.com/Jatin-nicon/tenali/commit/ed9b657a8ab29dc5015d32c240649ce6e3d27729) — **harshyy07** — resolved conflicts
-- 🔧 [`ca6a01cf`](https://github.com/Jatin-nicon/tenali/commit/ca6a01cf644c31d050bb925ee41994b0560b5a99) — **Dipto Subhro** — remove empty settings_icon.png
+- 📌 [`ed9b657a`](https://github.com/vicharanashala/tenali/commit/ed9b657a8ab29dc5015d32c240649ce6e3d27729) — **harshyy07** — resolved conflicts
+- 🔧 [`ca6a01cf`](https://github.com/vicharanashala/tenali/commit/ca6a01cf644c31d050bb925ee41994b0560b5a99) — **Dipto Subhro** — remove empty settings_icon.png
     - 📁 **1 file:** `client/public/settings_icon.png`
     - 📊 **`+0 −0`** · 1 file
-- 📌 [`2b01f5af`](https://github.com/Jatin-nicon/tenali/commit/2b01f5af2555655979e0db6c87a73991f966bd34) — **harshyy07** — resolved conflicts
-- 📌 [`b1be62c2`](https://github.com/Jatin-nicon/tenali/commit/b1be62c20eb6cf831667e140ac0d03ca8f3099a4) — **SaniyaJos** — Merge upstream/main and resolve conflicts in client/src/App.jsx and server/auth.js
-- 🔧 [`d9cba15c`](https://github.com/Jatin-nicon/tenali/commit/d9cba15c41292f45c3e83abe6c046f4ee0eecee6) — **Dipto Subhro** — completely remove voice narration context, button, and audio assets
+- 📌 [`2b01f5af`](https://github.com/vicharanashala/tenali/commit/2b01f5af2555655979e0db6c87a73991f966bd34) — **harshyy07** — resolved conflicts
+- 📌 [`b1be62c2`](https://github.com/vicharanashala/tenali/commit/b1be62c20eb6cf831667e140ac0d03ca8f3099a4) — **SaniyaJos** — Merge upstream/main and resolve conflicts in client/src/App.jsx and server/auth.js
+- 🔧 [`d9cba15c`](https://github.com/vicharanashala/tenali/commit/d9cba15c41292f45c3e83abe6c046f4ee0eecee6) — **Dipto Subhro** — completely remove voice narration context, button, and audio assets
     - 📁 **8 files:** `client/src/App.jsx` `+0 −137`, `client/src/main.jsx` `+3 −6`, `client/src/narration/AudioCatalog.js` `+0 −132`, `client/src/narration/NarrationButton.jsx` `+0 −7`, `client/src/narration/NarrationContext.jsx` `+0 −433`, `client/src/narration/NarrationSettings.jsx` `+0 −197`, `client/src/narration/generate_mock_audio.js` `+0 −146`, `client/src/vachana/exercises/NoiseFilter.jsx` `+1 −4`
     - 📊 **`+4 −1062`** · 8 files
-- 📌 [`e35be03f`](https://github.com/Jatin-nicon/tenali/commit/e35be03fb111d7aa6f0073ba8fc5b4d5d6f2e1ad) — **jgupta05072003-code** — 🔀 PR [#59](https://github.com/Jatin-nicon/tenali/pull/59) from `varshini-nandula` — feat/profile-achievement-showcase
-- 📌 [`1a8ae4c6`](https://github.com/Jatin-nicon/tenali/commit/1a8ae4c6a4bbcc6ea2b806f06d6b79330d2f3d1d) — **SaniyaJos** — Merge remote-tracking branch 'upstream/main' into feat/contrast-challenge-enhancement
-- 💄 [`b6af5e23`](https://github.com/Jatin-nicon/tenali/commit/b6af5e2356352561c6e288944fbbc945f9d03578) — **varshini-nandula** — remove Tenali header and view achievements label from profile page
+- 📌 [`e35be03f`](https://github.com/vicharanashala/tenali/commit/e35be03fb111d7aa6f0073ba8fc5b4d5d6f2e1ad) — **jgupta05072003-code** — 🔀 PR [#59](https://github.com/vicharanashala/tenali/pull/59) from `varshini-nandula` — feat/profile-achievement-showcase
+- 📌 [`1a8ae4c6`](https://github.com/vicharanashala/tenali/commit/1a8ae4c6a4bbcc6ea2b806f06d6b79330d2f3d1d) — **SaniyaJos** — Merge remote-tracking branch 'upstream/main' into feat/contrast-challenge-enhancement
+- 💄 [`b6af5e23`](https://github.com/vicharanashala/tenali/commit/b6af5e2356352561c6e288944fbbc945f9d03578) — **varshini-nandula** — remove Tenali header and view achievements label from profile page
     - 📁 **1 file:** `client/src/App.jsx` `+0 −7`
     - 📊 **`+0 −7`** · 1 file
-- 📌 [`cd7aa36b`](https://github.com/Jatin-nicon/tenali/commit/cd7aa36b09c387dbb13b2c92719c3702e8606b91) — **varshini-nandula** — Merge branch 'upstream/main' into feat/profile-achievement-showcase
-- 📌 [`65db0d9f`](https://github.com/Jatin-nicon/tenali/commit/65db0d9f57cdbdba9c08c718f53e5a22f1166d77) — **Sharonya Banerjee** — Merge remote-tracking branch 'upstream/main' into feature/math-detective-agency
-- 📌 [`8fa8ab16`](https://github.com/Jatin-nicon/tenali/commit/8fa8ab164fea08b3b01766b39b0e2aa7c0be8674) — **jgupta05072003-code** — 🔀 PR [#57](https://github.com/Jatin-nicon/tenali/pull/57) from `Vaibhav-sa30` — feature/notation-literacy
-- 📌 [`679eb4c8`](https://github.com/Jatin-nicon/tenali/commit/679eb4c86a472a7efb98f8501bfdd6b8dc5a0ed1) — **jgupta05072003-code** — 🔀 PR [#53](https://github.com/Jatin-nicon/tenali/pull/53) from `Shubhdix9` — feat/guide-vlu-performance-overhaul
-- 📌 [`71b1ea6d`](https://github.com/Jatin-nicon/tenali/commit/71b1ea6dadc7e4813cd4bd1a987e4ca40c5509cb) — **jgupta05072003-code** — 🔀 PR [#20](https://github.com/Jatin-nicon/tenali/pull/20) from `KCDharshan9` — feat/tap-to-define-word-glossary
-- 🐛 [`8b115a93`](https://github.com/Jatin-nicon/tenali/commit/8b115a936a27dc41406e330a82331aeb5f81cbc7) — **muditagrawal2007** — show Guide button and OnboardingTour only on home page
+- 📌 [`cd7aa36b`](https://github.com/vicharanashala/tenali/commit/cd7aa36b09c387dbb13b2c92719c3702e8606b91) — **varshini-nandula** — Merge branch 'upstream/main' into feat/profile-achievement-showcase
+- 📌 [`65db0d9f`](https://github.com/vicharanashala/tenali/commit/65db0d9f57cdbdba9c08c718f53e5a22f1166d77) — **Sharonya Banerjee** — Merge remote-tracking branch 'upstream/main' into feature/math-detective-agency
+- 📌 [`8fa8ab16`](https://github.com/vicharanashala/tenali/commit/8fa8ab164fea08b3b01766b39b0e2aa7c0be8674) — **jgupta05072003-code** — 🔀 PR [#57](https://github.com/vicharanashala/tenali/pull/57) from `Vaibhav-sa30` — feature/notation-literacy
+- 📌 [`679eb4c8`](https://github.com/vicharanashala/tenali/commit/679eb4c86a472a7efb98f8501bfdd6b8dc5a0ed1) — **jgupta05072003-code** — 🔀 PR [#53](https://github.com/vicharanashala/tenali/pull/53) from `Shubhdix9` — feat/guide-vlu-performance-overhaul
+- 📌 [`71b1ea6d`](https://github.com/vicharanashala/tenali/commit/71b1ea6dadc7e4813cd4bd1a987e4ca40c5509cb) — **jgupta05072003-code** — 🔀 PR [#20](https://github.com/vicharanashala/tenali/pull/20) from `KCDharshan9` — feat/tap-to-define-word-glossary
+- 🐛 [`8b115a93`](https://github.com/vicharanashala/tenali/commit/8b115a936a27dc41406e330a82331aeb5f81cbc7) — **muditagrawal2007** — show Guide button and OnboardingTour only on home page
     - 📁 **1 file:** `client/src/App.jsx` `+6 −4`
     - 📊 **`+6 −4`** · 1 file
-- 📌 [`c12efcb4`](https://github.com/Jatin-nicon/tenali/commit/c12efcb48279d4bb831fa989e6504a8bb9689b36) — **jgupta05072003-code** — 🔀 PR [#48](https://github.com/Jatin-nicon/tenali/pull/48) from `muditagrawal2007` — new_f
-- 🐛 [`2334265d`](https://github.com/Jatin-nicon/tenali/commit/2334265d4a3121eaed960c2df96a98b93a0a2039) — **24F3005086** — add I18nProvider to main.jsx
+- 📌 [`c12efcb4`](https://github.com/vicharanashala/tenali/commit/c12efcb48279d4bb831fa989e6504a8bb9689b36) — **jgupta05072003-code** — 🔀 PR [#48](https://github.com/vicharanashala/tenali/pull/48) from `muditagrawal2007` — new_f
+- 🐛 [`2334265d`](https://github.com/vicharanashala/tenali/commit/2334265d4a3121eaed960c2df96a98b93a0a2039) — **24F3005086** — add I18nProvider to main.jsx
     - 📁 **1 file:** `client/src/main.jsx` `+2 −1`
     - 📊 **`+2 −1`** · 1 file
-- 🐛 [`c5f93b95`](https://github.com/Jatin-nicon/tenali/commit/c5f93b95231446269420cf8f313062221c35a3b7) — **muditagrawal2007** — GymApp crash — add missing sessionGoal, isAdaptive, handleTimeout; fix difficulty → currentDifficulty
+- 🐛 [`c5f93b95`](https://github.com/vicharanashala/tenali/commit/c5f93b95231446269420cf8f313062221c35a3b7) — **muditagrawal2007** — GymApp crash — add missing sessionGoal, isAdaptive, handleTimeout; fix difficulty → currentDifficulty
     - 📁 **1 file:** `client/src/App.jsx` `+14 −1`
     - 📊 **`+14 −1`** · 1 file
-- 📌 [`ae7d508d`](https://github.com/Jatin-nicon/tenali/commit/ae7d508dc124589555f52a3c9e5ec582c6441c78) — **muditagrawal2007** — Restore Tenali Guide (OnboardingTour) lost during merge conflict resolution - add back OnboardingTour render, Guide button, and tour-home-grid id
+- 📌 [`ae7d508d`](https://github.com/vicharanashala/tenali/commit/ae7d508dc124589555f52a3c9e5ec582c6441c78) — **muditagrawal2007** — Restore Tenali Guide (OnboardingTour) lost during merge conflict resolution - add back OnboardingTour render, Guide button, and tour-home-grid id
     - 📁 **1 file:** `client/src/App.jsx` `+5 −1`
     - 📊 **`+5 −1`** · 1 file
-- 📌 [`3aa146ad`](https://github.com/Jatin-nicon/tenali/commit/3aa146ad24ddcaa01aa861e054eba091fe40ae8c) — **muditagrawal2007** — Column apps: ResultsTable shows carries/borrows (user vs correct) and always shows correct answer
+- 📌 [`3aa146ad`](https://github.com/vicharanashala/tenali/commit/3aa146ad24ddcaa01aa861e054eba091fe40ae8c) — **muditagrawal2007** — Column apps: ResultsTable shows carries/borrows (user vs correct) and always shows correct answer
     - 📁 **1 file:** `client/src/App.jsx` `+41 −14`
     - 📊 **`+41 −14`** · 1 file
-- 📌 [`3e069518`](https://github.com/Jatin-nicon/tenali/commit/3e069518aa34df0a34b139b02e32ebf7e0028013) — **muditagrawal2007** — Column apps: make feedback box visibly red/green with 25% opacity bg + colored border
+- 📌 [`3e069518`](https://github.com/vicharanashala/tenali/commit/3e069518aa34df0a34b139b02e32ebf7e0028013) — **muditagrawal2007** — Column apps: make feedback box visibly red/green with 25% opacity bg + colored border
     - 📁 **1 file:** `client/src/App.jsx` `+6 −6`
     - 📊 **`+6 −6`** · 1 file
-- 📌 [`c186cef9`](https://github.com/Jatin-nicon/tenali/commit/c186cef9048f98cb3853734acb7106b34956a7eb) — **muditagrawal2007** — Column apps: feedback box always red when wrong, always green when correct
+- 📌 [`c186cef9`](https://github.com/vicharanashala/tenali/commit/c186cef9048f98cb3853734acb7106b34956a7eb) — **muditagrawal2007** — Column apps: feedback box always red when wrong, always green when correct
     - 📁 **1 file:** `client/src/App.jsx` `+12 −12`
     - 📊 **`+12 −12`** · 1 file
-- 📌 [`755f4686`](https://github.com/Jatin-nicon/tenali/commit/755f4686ae0513df251b288c446ee14e59051b34) — **muditagrawal2007** — Multi-digit multiplication: cursor flows carry→digit per column (right to left) instead of all carries then all digits
+- 📌 [`755f4686`](https://github.com/vicharanashala/tenali/commit/755f4686ae0513df251b288c446ee14e59051b34) — **muditagrawal2007** — Multi-digit multiplication: cursor flows carry→digit per column (right to left) instead of all carries then all digits
     - 📁 **1 file:** `client/src/App.jsx` `+10 −9`
     - 📊 **`+10 −9`** · 1 file
-- 📌 [`127101fb`](https://github.com/Jatin-nicon/tenali/commit/127101fb8c3040b49c292791c33fd64eed5cab0e) — **Dipto Subhro** — Update App.jsx home menu and UI layout
+- 📌 [`127101fb`](https://github.com/vicharanashala/tenali/commit/127101fb8c3040b49c292791c33fd64eed5cab0e) — **Dipto Subhro** — Update App.jsx home menu and UI layout
     - 📁 **1 file:** `client/src/App.jsx` `+2 −18`
     - 📊 **`+2 −18`** · 1 file
-- 🐛 [`5dc7ebda`](https://github.com/Jatin-nicon/tenali/commit/5dc7ebdade64fc38c9d8f734e6a3b2bf924cce8a) — **muditagrawal2007** — trailing carry in multi-digit multiplication initialized as null (not 0) to match hidden UI position
+- 🐛 [`5dc7ebda`](https://github.com/vicharanashala/tenali/commit/5dc7ebdade64fc38c9d8f734e6a3b2bf924cce8a) — **muditagrawal2007** — trailing carry in multi-digit multiplication initialized as null (not 0) to match hidden UI position
     - 📁 **1 file:** `server/index.js` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`9dfbe41c`](https://github.com/Jatin-nicon/tenali/commit/9dfbe41ca66150ece105442849ee7998cc120e36) — **Dipto Subhro** — Remove voice narration, rename boss level to Hero's Challenge, and simplify teaching parts in NoiseFilter
+- 📌 [`9dfbe41c`](https://github.com/vicharanashala/tenali/commit/9dfbe41ca66150ece105442849ee7998cc120e36) — **Dipto Subhro** — Remove voice narration, rename boss level to Hero's Challenge, and simplify teaching parts in NoiseFilter
     - 📁 **5 files:** `client/src/main.jsx` `+0 −4`, `client/src/narration/NarrationButton.jsx` `+1 −75`, `client/src/narration/NarrationContext.jsx` `+12 −14`, `client/src/vachana/exercises/NoiseFilter.jsx` `+1005 −22`, `client/src/vachana/noiseCorpus.js` `+1381 −0`
     - 📊 **`+2399 −115`** · 5 files
-- 🐛 [`0005b992`](https://github.com/Jatin-nicon/tenali/commit/0005b9928dd2ed6a4bc4cfafed31f8bd66f2a82b) — **muditagrawal2007** — auto-focus answer row after last PP by setting allDone before focusing
+- 🐛 [`0005b992`](https://github.com/vicharanashala/tenali/commit/0005b9928dd2ed6a4bc4cfafed31f8bd66f2a82b) — **muditagrawal2007** — auto-focus answer row after last PP by setting allDone before focusing
     - 📁 **1 file:** `client/src/App.jsx` `+2 −3`
     - 📊 **`+2 −3`** · 1 file
-- 📌 [`3b4f49b8`](https://github.com/Jatin-nicon/tenali/commit/3b4f49b8cbba36d6525fdfde41bb5892b0bf2b11) — **muditagrawal2007** — Merge branch 'vicharanashala:main' into new_f
-- 📌 [`2b04d884`](https://github.com/Jatin-nicon/tenali/commit/2b04d8841b05a348ac9d19173dcf56b92e4f5cfe) — **muditagrawal2007** — Column multiplication: always show answer row separator line, disable inputs until all PPs done
+- 📌 [`3b4f49b8`](https://github.com/vicharanashala/tenali/commit/3b4f49b8cbba36d6525fdfde41bb5892b0bf2b11) — **muditagrawal2007** — Merge branch 'vicharanashala:main' into new_f
+- 📌 [`2b04d884`](https://github.com/vicharanashala/tenali/commit/2b04d8841b05a348ac9d19173dcf56b92e4f5cfe) — **muditagrawal2007** — Column multiplication: always show answer row separator line, disable inputs until all PPs done
     - 📁 **1 file:** `client/src/App.jsx` `+28 −31`
     - 📊 **`+28 −31`** · 1 file
-- 📌 [`70ae2d23`](https://github.com/Jatin-nicon/tenali/commit/70ae2d23e89adebaf6c0a96b869a3303e794ae5e) — **muditagrawal2007** — Column multiplication: better PP visual states - green tint for done, accent border for active
+- 📌 [`70ae2d23`](https://github.com/vicharanashala/tenali/commit/70ae2d23e89adebaf6c0a96b869a3303e794ae5e) — **muditagrawal2007** — Column multiplication: better PP visual states - green tint for done, accent border for active
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`39f3c429`](https://github.com/Jatin-nicon/tenali/commit/39f3c429e80b7e83aafb234d152c282dcfbe4167) — **muditagrawal2007** — Column multiplication: add help panel, multiplier highlight, step indicator, operation hint
+- 📌 [`39f3c429`](https://github.com/vicharanashala/tenali/commit/39f3c429e80b7e83aafb234d152c282dcfbe4167) — **muditagrawal2007** — Column multiplication: add help panel, multiplier highlight, step indicator, operation hint
     - 📁 **1 file:** `client/src/App.jsx` `+89 −1`
     - 📊 **`+89 −1`** · 1 file
-- 📌 [`b8c50a90`](https://github.com/Jatin-nicon/tenali/commit/b8c50a90d3a4cda4495d60c4b1fbe29e86d43f84) — **muditagrawal2007** — added the 2*3 as well as the 3*3 multiplication
+- 📌 [`b8c50a90`](https://github.com/vicharanashala/tenali/commit/b8c50a90d3a4cda4495d60c4b1fbe29e86d43f84) — **muditagrawal2007** — added the 2*3 as well as the 3*3 multiplication
     - 📁 **3 files:** `client/src/App.jsx` `+532 −90`, `server/explanations.js` `+38 −10`, `server/index.js` `+118 −25`
     - 📊 **`+688 −125`** · 3 files
-- 📌 [`656be26d`](https://github.com/Jatin-nicon/tenali/commit/656be26d1f4bbacd090fd55771bd36113e4f30de) — **Ritish Karmakar** — Replace CHANGELOG with cleaned-up Versions 1-4 summary
+- 📌 [`656be26d`](https://github.com/vicharanashala/tenali/commit/656be26d1f4bbacd090fd55771bd36113e4f30de) — **Ritish Karmakar** — Replace CHANGELOG with cleaned-up Versions 1-4 summary
     - 📁 **1 file:** `CHANGELOG.md` `+30 −230`
     - 📊 **`+30 −230`** · 1 file
-- 📌 [`787aa255`](https://github.com/Jatin-nicon/tenali/commit/787aa255634791f45cbd97856383b3bf2e72723b) — **Ritish Karmakar** — Restore feature work lost during merge with main
+- 📌 [`787aa255`](https://github.com/vicharanashala/tenali/commit/787aa255634791f45cbd97856383b3bf2e72723b) — **Ritish Karmakar** — Restore feature work lost during merge with main
     - 📁 **2 files:** `client/src/App.css` `+7 −505`, `client/src/App.jsx` `+8974 −20983`
     - 📊 **`+8981 −21488`** · 2 files
-- 🔧 [`d6401ce2`](https://github.com/Jatin-nicon/tenali/commit/d6401ce26cac1f1a2d13c9cb56f2cd23ce197487) — **Vaibhav** — Resolve merge conflicts with upstream main
-- ✨ [`03f79272`](https://github.com/Jatin-nicon/tenali/commit/03f79272b5181c03604c6ff2d4985835f06df6c6) — **Vaibhav** — Add Notation Literacy exercise
+- 🔧 [`d6401ce2`](https://github.com/vicharanashala/tenali/commit/d6401ce26cac1f1a2d13c9cb56f2cd23ce197487) — **Vaibhav** — Resolve merge conflicts with upstream main
+- ✨ [`03f79272`](https://github.com/vicharanashala/tenali/commit/03f79272b5181c03604c6ff2d4985835f06df6c6) — **Vaibhav** — Add Notation Literacy exercise
     - 📁 **3 files:** `client/src/vachana/VachanaIcons.jsx` `+167 −0`, `client/src/vachana/exercises/NotationLiteracy.jsx` `+261 −0`, `client/src/vachana/index.jsx` `+344 −0`
     - 📊 **`+772 −0`** · 3 files
-- 🐛 [`731d3f6a`](https://github.com/Jatin-nicon/tenali/commit/731d3f6a170724306df4fcc34fc5efcf04f46398) — **KCDharshan9** — remove version and build date behind hamburger
+- 🐛 [`731d3f6a`](https://github.com/vicharanashala/tenali/commit/731d3f6a170724306df4fcc34fc5efcf04f46398) — **KCDharshan9** — remove version and build date behind hamburger
     - 📁 **1 file:** `client/src/App.jsx` `+0 −21`
     - 📊 **`+0 −21`** · 1 file
-- 🐛 [`8f4f0316`](https://github.com/Jatin-nicon/tenali/commit/8f4f0316d783d0567ff367189820abc05460b961) — **KCDharshan9** — fix bugs & issues causing errors
+- 🐛 [`8f4f0316`](https://github.com/vicharanashala/tenali/commit/8f4f0316d783d0567ff367189820abc05460b961) — **KCDharshan9** — fix bugs & issues causing errors
     - 📁 **2 files:** `client/src/App.jsx` `+3 −5`, `server/index.js` `+12 −9`
     - 📊 **`+15 −14`** · 2 files
 
 #### 📅 2026-07-15  <sub>(50 commits)</sub>
 
-- 📌 [`53cd78e5`](https://github.com/Jatin-nicon/tenali/commit/53cd78e5bcfd4f8bd6b793cff29d81003f6655aa) — **Ritish Karmakar** — Update lockfile after clean reinstall
+- 📌 [`53cd78e5`](https://github.com/vicharanashala/tenali/commit/53cd78e5bcfd4f8bd6b793cff29d81003f6655aa) — **Ritish Karmakar** — Update lockfile after clean reinstall
     - 📁 **1 file:** `client/package-lock.json` `+398 −328`
     - 📊 **`+398 −328`** · 1 file
-- 📌 [`04a092e5`](https://github.com/Jatin-nicon/tenali/commit/04a092e52a5159faca09e1ab6fb6ef4bfeabe5b2) — **Ritish Karmakar** — Document latest UI and explanation changes
+- 📌 [`04a092e5`](https://github.com/vicharanashala/tenali/commit/04a092e52a5159faca09e1ab6fb6ef4bfeabe5b2) — **Ritish Karmakar** — Document latest UI and explanation changes
     - 📁 **1 file:** `CHANGELOG.md` `+25 −0`
     - 📊 **`+25 −0`** · 1 file
-- 📌 [`d0001c51`](https://github.com/Jatin-nicon/tenali/commit/d0001c51d920fe4e1b5b2a6e81fd9cfea6dcb8d9) — **Ritish Karmakar** — Update app styling and UI
+- 📌 [`d0001c51`](https://github.com/vicharanashala/tenali/commit/d0001c51d920fe4e1b5b2a6e81fd9cfea6dcb8d9) — **Ritish Karmakar** — Update app styling and UI
     - 📁 **2 files:** `client/src/App.css` `+1009 −312`, `client/src/App.jsx` `+18 −1`
     - 📊 **`+1027 −313`** · 2 files
-- 📌 [`f853c420`](https://github.com/Jatin-nicon/tenali/commit/f853c420a5ad772389543aa3f37451f6cb3a0635) — **Ritish Karmakar** — Improve percentage explanation step layout
+- 📌 [`f853c420`](https://github.com/vicharanashala/tenali/commit/f853c420a5ad772389543aa3f37451f6cb3a0635) — **Ritish Karmakar** — Improve percentage explanation step layout
     - 📁 **2 files:** `client/src/PercentExplanationApp.css` `+3 −3`, `client/src/PercentExplanationApp.jsx` `+80 −37`
     - 📊 **`+83 −40`** · 2 files
-- 📌 [`486e518c`](https://github.com/Jatin-nicon/tenali/commit/486e518c0f31a788d5ee42c2a8e54dd110967123) — **Ritish Karmakar** — Update CHANGELOG with Version 3: Percent Story redesign, AI prompt removal, background fixes
+- 📌 [`486e518c`](https://github.com/vicharanashala/tenali/commit/486e518c0f31a788d5ee42c2a8e54dd110967123) — **Ritish Karmakar** — Update CHANGELOG with Version 3: Percent Story redesign, AI prompt removal, background fixes
     - 📁 **1 file:** `CHANGELOG.md` `+129 −89`
     - 📊 **`+129 −89`** · 1 file
-- 📌 [`d5af4723`](https://github.com/Jatin-nicon/tenali/commit/d5af472352333f12b3af160fc226812e7b714a0a) — **Ritish Karmakar** — Refine Level 1 explanation: hover info popup, boxed theory cards, mobile responsive fixes
+- 📌 [`d5af4723`](https://github.com/vicharanashala/tenali/commit/d5af472352333f12b3af160fc226812e7b714a0a) — **Ritish Karmakar** — Refine Level 1 explanation: hover info popup, boxed theory cards, mobile responsive fixes
     - 📁 **2 files:** `client/src/PercentExplanationApp.css` `+1595 −1542`, `client/src/PercentExplanationApp.jsx` `+504 −142`
     - 📊 **`+2099 −1684`** · 2 files
-- ✨ [`d4128001`](https://github.com/Jatin-nicon/tenali/commit/d41280010314e13a5b30300b282b2ddf44f3f46d) — **RukmenderT** — add curiosity
+- ✨ [`d4128001`](https://github.com/vicharanashala/tenali/commit/d41280010314e13a5b30300b282b2ddf44f3f46d) — **RukmenderT** — add curiosity
     - 📁 **5 files:** `client/src/App.css` `+811 −1`, `client/src/App.jsx` `+9 −1`, `client/src/Curiosity.jsx` `+900 −0`, `client/vite.config.js` `+2 −0`, `server/index.js` `+693 −13`
     - 📊 **`+2415 −15`** · 5 files
-- ✨ [`6ce4d592`](https://github.com/Jatin-nicon/tenali/commit/6ce4d592c6d10f98bef21aa056fc904c072e61a6) — **24F3005086** — Add Accessibility Provider and aria-labels
+- ✨ [`6ce4d592`](https://github.com/vicharanashala/tenali/commit/6ce4d592c6d10f98bef21aa056fc904c072e61a6) — **24F3005086** — Add Accessibility Provider and aria-labels
     - 📁 **2 files:** `client/src/lib/AccessibilityProvider.jsx` `+217 −0`, `client/src/main.jsx` `+4 −1`
     - 📊 **`+221 −1`** · 2 files
-- ✨ [`091fda00`](https://github.com/Jatin-nicon/tenali/commit/091fda006cf2be06e0f9aa9277e2de52b244a7dc) — **harshyy07** — implementation of progressive hints with collision-safe resolvers and safe state management
-    - 📁 **30 files:** `client/injectHint.cjs` `+17 −0`, `client/scratch/fix_api.cjs` `+20 −0`, `client/scratch/fix_exports.cjs` `+29 −0`, `client/src/App.css` `+264 −0`, `client/src/App.jsx` `+762 −37`, `client/src/components/HintSystem/HintModal.jsx` `+671 −0`, `client/src/components/HintSystem/hintUtils.js` `+19 −0`, `client/src/components/HintSystem/useHints.jsx` `+82 −0` *(+22 more in [`091fda00`](https://github.com/Jatin-nicon/tenali/commit/091fda006cf2be06e0f9aa9277e2de52b244a7dc))*
+- ✨ [`091fda00`](https://github.com/vicharanashala/tenali/commit/091fda006cf2be06e0f9aa9277e2de52b244a7dc) — **harshyy07** — implementation of progressive hints with collision-safe resolvers and safe state management
+    - 📁 **30 files:** `client/injectHint.cjs` `+17 −0`, `client/scratch/fix_api.cjs` `+20 −0`, `client/scratch/fix_exports.cjs` `+29 −0`, `client/src/App.css` `+264 −0`, `client/src/App.jsx` `+762 −37`, `client/src/components/HintSystem/HintModal.jsx` `+671 −0`, `client/src/components/HintSystem/hintUtils.js` `+19 −0`, `client/src/components/HintSystem/useHints.jsx` `+82 −0` *(+22 more in [`091fda00`](https://github.com/vicharanashala/tenali/commit/091fda006cf2be06e0f9aa9277e2de52b244a7dc))*
     - 📊 **`+6393 −98`** · 30 files
-- 📌 [`4bcb7b54`](https://github.com/Jatin-nicon/tenali/commit/4bcb7b54423768ae9b289377ec08e4a84128b3e5) — **Ritish Karmakar** — Update lockfile after clean reinstall
+- 📌 [`4bcb7b54`](https://github.com/vicharanashala/tenali/commit/4bcb7b54423768ae9b289377ec08e4a84128b3e5) — **Ritish Karmakar** — Update lockfile after clean reinstall
     - 📁 **1 file:** `client/package-lock.json` `+398 −328`
     - 📊 **`+398 −328`** · 1 file
-- 📌 [`ac85f652`](https://github.com/Jatin-nicon/tenali/commit/ac85f65230453215cfff6bb61c084a56968d642b) — **Dipto Subhro** — Merge remote-tracking branch 'upstream/main' into add-timer
-- ✨ [`c19e1412`](https://github.com/Jatin-nicon/tenali/commit/c19e14125838c07273623063d26caa98d7d05c85) — **varshini-nandula** — introduce 15-day streak milestone badge and image asset
+- 📌 [`ac85f652`](https://github.com/vicharanashala/tenali/commit/ac85f65230453215cfff6bb61c084a56968d642b) — **Dipto Subhro** — Merge remote-tracking branch 'upstream/main' into add-timer
+- ✨ [`c19e1412`](https://github.com/vicharanashala/tenali/commit/c19e14125838c07273623063d26caa98d7d05c85) — **varshini-nandula** — introduce 15-day streak milestone badge and image asset
     - 📁 **2 files:** `client/src/App.jsx` `+9 −0`, `server/index.js` `+2 −2`
     - 📊 **`+11 −2`** · 2 files
-- 📌 [`1a7c792c`](https://github.com/Jatin-nicon/tenali/commit/1a7c792cddc7ea351ad41c0157ffa32d6d1e4581) — **Ritish Karmakar** — Merge branch 'main' into feature/level-wise-explanation
-- 📌 [`d8091fad`](https://github.com/Jatin-nicon/tenali/commit/d8091fadb1e40c8e0258580e59b277d63167c5c1) — **muditagrawal2007** — made the UI work in light as well as dark mode
+- 📌 [`1a7c792c`](https://github.com/vicharanashala/tenali/commit/1a7c792cddc7ea351ad41c0157ffa32d6d1e4581) — **Ritish Karmakar** — Merge branch 'main' into feature/level-wise-explanation
+- 📌 [`d8091fad`](https://github.com/vicharanashala/tenali/commit/d8091fadb1e40c8e0258580e59b277d63167c5c1) — **muditagrawal2007** — made the UI work in light as well as dark mode
     - 📁 **1 file:** `client/src/App.jsx` `+159 −73`
     - 📊 **`+159 −73`** · 1 file
-- 📌 [`27ab01b8`](https://github.com/Jatin-nicon/tenali/commit/27ab01b8fc619dfcd99b4c40a87f206f72aa36f2) — **muditagrawal2007** — fixed the subtraction
+- 📌 [`27ab01b8`](https://github.com/vicharanashala/tenali/commit/27ab01b8fc619dfcd99b4c40a87f206f72aa36f2) — **muditagrawal2007** — fixed the subtraction
     - 📁 **3 files:** `client/src/App.jsx` `+140 −95`, `server/explanations.js` `+44 −12`, `server/index.js` `+37 −21`
     - 📊 **`+221 −128`** · 3 files
-- 📌 [`391e8c07`](https://github.com/Jatin-nicon/tenali/commit/391e8c073bb13491c0ef44af2f35f56bba957523) — **SaniyaJos** — Make guest progress and user account progress completely independent and isolated (no merging)
+- 📌 [`391e8c07`](https://github.com/vicharanashala/tenali/commit/391e8c073bb13491c0ef44af2f35f56bba957523) — **SaniyaJos** — Make guest progress and user account progress completely independent and isolated (no merging)
     - 📁 **1 file:** `client/src/ContrastChallengeApp.jsx` `+2 −18`
     - 📊 **`+2 −18`** · 1 file
-- 📌 [`e4587639`](https://github.com/Jatin-nicon/tenali/commit/e4587639903b6b5053d079d18104598f3517269c) — **SaniyaJos** — Implement namespaces for localStorage keys to resolve guest/user login/logout session reset bug
+- 📌 [`e4587639`](https://github.com/vicharanashala/tenali/commit/e4587639903b6b5053d079d18104598f3517269c) — **SaniyaJos** — Implement namespaces for localStorage keys to resolve guest/user login/logout session reset bug
     - 📁 **5 files:** `client/src/ContrastChallengeApp.jsx` `+197 −17`, `client/vite.config.js` `+2 −0`, `server/auth.js` `+11 −1`, `server/index.js` `+5 −0`, `server/routes/contrast.js` `+47 −0`
     - 📊 **`+262 −18`** · 5 files
-- 📌 [`99549f65`](https://github.com/Jatin-nicon/tenali/commit/99549f6581c5500d4ba41097b6751a831acfbfd7) — **Sharonya Banerjee** — Merge remote-tracking branch 'upstream/main' into feature/math-detective-agency
+- 📌 [`99549f65`](https://github.com/vicharanashala/tenali/commit/99549f6581c5500d4ba41097b6751a831acfbfd7) — **Sharonya Banerjee** — Merge remote-tracking branch 'upstream/main' into feature/math-detective-agency
     - 📁 **1 file:** `pr_body.md` `+22 −0`
     - 📊 **`+22 −0`** · 1 file
-- 📌 [`6fc21332`](https://github.com/Jatin-nicon/tenali/commit/6fc21332180b09b1a719c1b3f07543f455458500) — **Sharonya Banerjee** — Resolve merge conflicts in App.css and App.jsx
-- ✨ [`9247ff8a`](https://github.com/Jatin-nicon/tenali/commit/9247ff8af6afe2b2341796304ffe8aa74236cddc) — **Sharonya Banerjee** — add Math Detective Agency - story-based mystery math cases
-    - 📁 **9 files:** `.vscode/launch.json` `+15 −0`, `client/package-lock.json` `+523 −0`, `client/package.json` `+1 −0`, `client/src/App.css` `+1 −0`, `client/src/App.jsx` `+3 −0`, `client/src/detective-app.jsx` `+1770 −0`, `client/src/detective-stories.js` `+1409 −0`, `client/src/detective.test.jsx` `+337 −0` *(+1 more in [`9247ff8a`](https://github.com/Jatin-nicon/tenali/commit/9247ff8af6afe2b2341796304ffe8aa74236cddc))*
+- 📌 [`6fc21332`](https://github.com/vicharanashala/tenali/commit/6fc21332180b09b1a719c1b3f07543f455458500) — **Sharonya Banerjee** — Resolve merge conflicts in App.css and App.jsx
+- ✨ [`9247ff8a`](https://github.com/vicharanashala/tenali/commit/9247ff8af6afe2b2341796304ffe8aa74236cddc) — **Sharonya Banerjee** — add Math Detective Agency - story-based mystery math cases
+    - 📁 **9 files:** `.vscode/launch.json` `+15 −0`, `client/package-lock.json` `+523 −0`, `client/package.json` `+1 −0`, `client/src/App.css` `+1 −0`, `client/src/App.jsx` `+3 −0`, `client/src/detective-app.jsx` `+1770 −0`, `client/src/detective-stories.js` `+1409 −0`, `client/src/detective.test.jsx` `+337 −0` *(+1 more in [`9247ff8a`](https://github.com/vicharanashala/tenali/commit/9247ff8af6afe2b2341796304ffe8aa74236cddc))*
     - 📊 **`+4071 −0`** · 9 files
-- ✨ [`bf1f4c0e`](https://github.com/Jatin-nicon/tenali/commit/bf1f4c0ed42815415dc6be529bade4cc7ab78c0c) — **varshini-nandula** — define scalable MongoDB collections and fix route collision for offline/in-memory fallback
+- ✨ [`bf1f4c0e`](https://github.com/vicharanashala/tenali/commit/bf1f4c0ed42815415dc6be529bade4cc7ab78c0c) — **varshini-nandula** — define scalable MongoDB collections and fix route collision for offline/in-memory fallback
     - 📁 **2 files:** `server/auth.js` `+50 −1`, `server/progress.js` `+29 −1`
     - 📊 **`+79 −2`** · 2 files
-- 💄 [`3a3c9ba8`](https://github.com/Jatin-nicon/tenali/commit/3a3c9ba8e0259fc2e7377f8ad7578e93a64f51fa) — **varshini-nandula** — update celebration modal subtext since pinned badges feature is removed
+- 💄 [`3a3c9ba8`](https://github.com/vicharanashala/tenali/commit/3a3c9ba8e0259fc2e7377f8ad7578e93a64f51fa) — **varshini-nandula** — update celebration modal subtext since pinned badges feature is removed
     - 📁 **1 file:** `client/src/App.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`99429d4b`](https://github.com/Jatin-nicon/tenali/commit/99429d4bc609bbe867c4d622c58ba7e07f863b78) — **SaniyaJos** — Fix Tenth route by restoring TENTH_UNITS constant definition
+- 📌 [`99429d4b`](https://github.com/vicharanashala/tenali/commit/99429d4bc609bbe867c4d622c58ba7e07f863b78) — **SaniyaJos** — Fix Tenth route by restoring TENTH_UNITS constant definition
     - 📁 **1 file:** `client/src/App.jsx` `+57 −0`
     - 📊 **`+57 −0`** · 1 file
-- 📌 [`26b56e92`](https://github.com/Jatin-nicon/tenali/commit/26b56e92dccff947c6e517c2d0e0bd250de3d295) — **SaniyaJos** — Merge upstream/main and resolve conflicts
-- 📌 [`3ec995e5`](https://github.com/Jatin-nicon/tenali/commit/3ec995e5676315a8085973ecab9fa51320634635) — **24F3005086** — Feature/concept playgrounds
-    - 📁 **20 files:** `client/src/App.jsx` `+5 −0`, `client/src/components/concept/EquationSandbox.jsx` `+223 −0`, `client/src/lib/EquationSandboxApp.jsx` `+181 −0`, `client/src/lib/concept/CompletionScreen.jsx` `+32 −0`, `client/src/lib/concept/QFormulaConceptApp.jsx` `+107 −0`, `client/src/lib/concept/Stage1Predict.jsx` `+93 −0`, `client/src/lib/concept/Stage2Derivation.jsx` `+189 −0`, `client/src/lib/concept/Stage3Guided.jsx` `+78 −0` *(+12 more in [`3ec995e5`](https://github.com/Jatin-nicon/tenali/commit/3ec995e5676315a8085973ecab9fa51320634635))*
+- 📌 [`26b56e92`](https://github.com/vicharanashala/tenali/commit/26b56e92dccff947c6e517c2d0e0bd250de3d295) — **SaniyaJos** — Merge upstream/main and resolve conflicts
+- 📌 [`3ec995e5`](https://github.com/vicharanashala/tenali/commit/3ec995e5676315a8085973ecab9fa51320634635) — **24F3005086** — Feature/concept playgrounds
+    - 📁 **20 files:** `client/src/App.jsx` `+5 −0`, `client/src/components/concept/EquationSandbox.jsx` `+223 −0`, `client/src/lib/EquationSandboxApp.jsx` `+181 −0`, `client/src/lib/concept/CompletionScreen.jsx` `+32 −0`, `client/src/lib/concept/QFormulaConceptApp.jsx` `+107 −0`, `client/src/lib/concept/Stage1Predict.jsx` `+93 −0`, `client/src/lib/concept/Stage2Derivation.jsx` `+189 −0`, `client/src/lib/concept/Stage3Guided.jsx` `+78 −0` *(+12 more in [`3ec995e5`](https://github.com/vicharanashala/tenali/commit/3ec995e5676315a8085973ecab9fa51320634635))*
     - 📊 **`+2139 −0`** · 20 files
-- ✨ [`8ec90e12`](https://github.com/Jatin-nicon/tenali/commit/8ec90e12d7c719a75c1fe415e4384d79575cb451) — **24F3005086** — Implement BKT Algorithm, Class Routing, and Diagnostic
-    - 📁 **13 files:** `client/src/App.jsx` `+4 −1`, `client/src/bkt.js` `+34 −0`, `client/src/displayedMastery.js` `+14 −0`, `client/src/lib/ClassSelection.jsx` `+57 −0`, `client/src/lib/DiagnosticQuiz.jsx` `+370 −0`, `client/src/lib/RequestCache.js` `+15 −0`, `client/src/lib/misconceptions.js` `+555 −0`, `client/src/lib/prerequisiteGraph.js` `+285 −0` *(+5 more in [`8ec90e12`](https://github.com/Jatin-nicon/tenali/commit/8ec90e12d7c719a75c1fe415e4384d79575cb451))*
+- ✨ [`8ec90e12`](https://github.com/vicharanashala/tenali/commit/8ec90e12d7c719a75c1fe415e4384d79575cb451) — **24F3005086** — Implement BKT Algorithm, Class Routing, and Diagnostic
+    - 📁 **13 files:** `client/src/App.jsx` `+4 −1`, `client/src/bkt.js` `+34 −0`, `client/src/displayedMastery.js` `+14 −0`, `client/src/lib/ClassSelection.jsx` `+57 −0`, `client/src/lib/DiagnosticQuiz.jsx` `+370 −0`, `client/src/lib/RequestCache.js` `+15 −0`, `client/src/lib/misconceptions.js` `+555 −0`, `client/src/lib/prerequisiteGraph.js` `+285 −0` *(+5 more in [`8ec90e12`](https://github.com/vicharanashala/tenali/commit/8ec90e12d7c719a75c1fe415e4384d79575cb451))*
     - 📊 **`+1463 −1`** · 13 files
-- ✨ [`baf249f3`](https://github.com/Jatin-nicon/tenali/commit/baf249f3e93746ae676e61c42fa2b8b4dac189ea) — **24F3005086** — Add multilingual support and translations
-    - 📁 **10 files:** `client/src/App.jsx` `+4 −1`, `client/src/lib/AutoTranslator.jsx` `+161 −0`, `client/src/lib/QuestionTranslator.js` `+60 −0`, `client/src/lib/i18n.jsx` `+167 −0`, `client/src/locales/bn.json` `+218 −0`, `client/src/locales/en.json` `+230 −0`, `client/src/locales/hi.json` `+242 −0`, `client/src/locales/mr.json` `+218 −0` *(+2 more in [`baf249f3`](https://github.com/Jatin-nicon/tenali/commit/baf249f3e93746ae676e61c42fa2b8b4dac189ea))*
+- ✨ [`baf249f3`](https://github.com/vicharanashala/tenali/commit/baf249f3e93746ae676e61c42fa2b8b4dac189ea) — **24F3005086** — Add multilingual support and translations
+    - 📁 **10 files:** `client/src/App.jsx` `+4 −1`, `client/src/lib/AutoTranslator.jsx` `+161 −0`, `client/src/lib/QuestionTranslator.js` `+60 −0`, `client/src/lib/i18n.jsx` `+167 −0`, `client/src/locales/bn.json` `+218 −0`, `client/src/locales/en.json` `+230 −0`, `client/src/locales/hi.json` `+242 −0`, `client/src/locales/mr.json` `+218 −0` *(+2 more in [`baf249f3`](https://github.com/vicharanashala/tenali/commit/baf249f3e93746ae676e61c42fa2b8b4dac189ea))*
     - 📊 **`+1736 −1`** · 10 files
-- 📌 [`6feb7420`](https://github.com/Jatin-nicon/tenali/commit/6feb742051f6e62be35cd593a3aa29e3de0a52cf) — **Ritish Karmakar** — Document latest UI and explanation changes
+- 📌 [`6feb7420`](https://github.com/vicharanashala/tenali/commit/6feb742051f6e62be35cd593a3aa29e3de0a52cf) — **Ritish Karmakar** — Document latest UI and explanation changes
     - 📁 **1 file:** `CHANGELOG.md` `+24 −1`
     - 📊 **`+24 −1`** · 1 file
-- 📌 [`7610dd78`](https://github.com/Jatin-nicon/tenali/commit/7610dd7837f79428810e50f68b764d3eaa005d18) — **KCDharshan9** — Merge branch 'main' into feat/tap-to-define-word-glossary
-- 📌 [`82f1cae4`](https://github.com/Jatin-nicon/tenali/commit/82f1cae4d4a5f4814ec6369d9921a07e0c90e80c) — **Ritish Karmakar** — Update app styling and UI
+- 📌 [`7610dd78`](https://github.com/vicharanashala/tenali/commit/7610dd7837f79428810e50f68b764d3eaa005d18) — **KCDharshan9** — Merge branch 'main' into feat/tap-to-define-word-glossary
+- 📌 [`82f1cae4`](https://github.com/vicharanashala/tenali/commit/82f1cae4d4a5f4814ec6369d9921a07e0c90e80c) — **Ritish Karmakar** — Update app styling and UI
     - 📁 **2 files:** `client/src/App.css` `+1009 −312`, `client/src/App.jsx` `+15 −1`
     - 📊 **`+1024 −313`** · 2 files
-- 📌 [`044a03ae`](https://github.com/Jatin-nicon/tenali/commit/044a03ae939c3429c813a88e4ca026a5fa04e8a9) — **Ritish Karmakar** — Improve percentage explanation step layout
+- 📌 [`044a03ae`](https://github.com/vicharanashala/tenali/commit/044a03ae939c3429c813a88e4ca026a5fa04e8a9) — **Ritish Karmakar** — Improve percentage explanation step layout
     - 📁 **2 files:** `client/src/PercentExplanationApp.css` `+3 −3`, `client/src/PercentExplanationApp.jsx` `+80 −37`
     - 📊 **`+83 −40`** · 2 files
-- 📌 [`754f5667`](https://github.com/Jatin-nicon/tenali/commit/754f56673fb0b0fcd8114f6a0652ab970aecb4d2) — **KCDharshan9** — Merge remote-tracking branch 'upstream/main' resolve conflicts
-- 📌 [`d5f40199`](https://github.com/Jatin-nicon/tenali/commit/d5f401994100e9ab3baff69a88f1875b8e29a248) — **jgupta05072003-code** — 🔀 PR [#18](https://github.com/Jatin-nicon/tenali/pull/18) from `Vaibhav-sa30` — feature/vachana-literacy-module
-- ✨ [`050e1baf`](https://github.com/Jatin-nicon/tenali/commit/050e1bafda98e50b79f5b1646b65037681ea7beb) — **Shubh dixit** — implement organic crossword and premium word search games
+- 📌 [`754f5667`](https://github.com/vicharanashala/tenali/commit/754f56673fb0b0fcd8114f6a0652ab970aecb4d2) — **KCDharshan9** — Merge remote-tracking branch 'upstream/main' resolve conflicts
+- 📌 [`d5f40199`](https://github.com/vicharanashala/tenali/commit/d5f401994100e9ab3baff69a88f1875b8e29a248) — **jgupta05072003-code** — 🔀 PR [#18](https://github.com/vicharanashala/tenali/pull/18) from `Vaibhav-sa30` — feature/vachana-literacy-module
+- ✨ [`050e1baf`](https://github.com/vicharanashala/tenali/commit/050e1bafda98e50b79f5b1646b65037681ea7beb) — **Shubh dixit** — implement organic crossword and premium word search games
     - 📁 **6 files:** `client/index.html` `+1 −1`, `client/src/language/CrosswordApp.css` `+449 −0`, `client/src/language/CrosswordApp.jsx` `+1004 −0`, `client/src/language/LanguageDashboard.jsx` `+32 −16`, `client/src/language/WordSearchApp.css` `+256 −0`, `client/src/language/WordSearchApp.jsx` `+518 −0`
     - 📊 **`+2260 −17`** · 6 files
-- ✨ [`167e54fe`](https://github.com/Jatin-nicon/tenali/commit/167e54fec6125252f3b3f0a2541c85e48368aeac) — **KCDharshan9** — update visuals of missing terms
+- ✨ [`167e54fe`](https://github.com/vicharanashala/tenali/commit/167e54fec6125252f3b3f0a2541c85e48368aeac) — **KCDharshan9** — update visuals of missing terms
     - 📁 **4 files:** `client/src/App.css` `+153 −138`, `client/src/components/KeyTerms.jsx` `+24 −22`, `client/src/data/glossaryTerms.json` `+30 −18`, `client/src/data/glossaryVisuals.jsx` `+488 −420`
     - 📊 **`+695 −598`** · 4 files
-- 📌 [`e319407a`](https://github.com/Jatin-nicon/tenali/commit/e319407aa434f9abfa317e21562c8c40415d1d47) — **Vaibhav** — Resolve merge conflict with upstream main in App.jsx
-- 📌 [`de84fb93`](https://github.com/Jatin-nicon/tenali/commit/de84fb93d7c67be7393b2c95b6a0458de9383eb3) — **Vaibhav** — Fix App.jsx formatting
+- 📌 [`e319407a`](https://github.com/vicharanashala/tenali/commit/e319407aa434f9abfa317e21562c8c40415d1d47) — **Vaibhav** — Resolve merge conflict with upstream main in App.jsx
+- 📌 [`de84fb93`](https://github.com/vicharanashala/tenali/commit/de84fb93d7c67be7393b2c95b6a0458de9383eb3) — **Vaibhav** — Fix App.jsx formatting
     - 📁 **1 file:** `client/src/App.jsx` `+0 −10`
     - 📊 **`+0 −10`** · 1 file
-- 📌 [`597c2cbb`](https://github.com/Jatin-nicon/tenali/commit/597c2cbb91212d630adc017322800cf0b4884237) — **Vaibhav** — Merge remote-tracking branch 'origin/feature/vachana-literacy-module' into feature/vachana-literacy-module
-- 🐛 [`f177ea8a`](https://github.com/Jatin-nicon/tenali/commit/f177ea8a04a337f7bfc078adb1f9e47c0085e6c6) — **varshini-nandula** — restore window.tenaliIncrementSolved hook and server collections completion celebrations
+- 📌 [`597c2cbb`](https://github.com/vicharanashala/tenali/commit/597c2cbb91212d630adc017322800cf0b4884237) — **Vaibhav** — Merge remote-tracking branch 'origin/feature/vachana-literacy-module' into feature/vachana-literacy-module
+- 🐛 [`f177ea8a`](https://github.com/vicharanashala/tenali/commit/f177ea8a04a337f7bfc078adb1f9e47c0085e6c6) — **varshini-nandula** — restore window.tenaliIncrementSolved hook and server collections completion celebrations
     - 📁 **1 file:** `client/src/App.jsx` `+65 −1`
     - 📊 **`+65 −1`** · 1 file
-- 🐛 [`de3fe37b`](https://github.com/Jatin-nicon/tenali/commit/de3fe37b5ef4f717bbf775369152fe75bb876822) — **varshini-nandula** — restore real-time badge unlock and celebration queue logic
+- 🐛 [`de3fe37b`](https://github.com/vicharanashala/tenali/commit/de3fe37b5ef4f717bbf775369152fe75bb876822) — **varshini-nandula** — restore real-time badge unlock and celebration queue logic
     - 📁 **1 file:** `client/src/App.jsx` `+104 −0`
     - 📊 **`+104 −0`** · 1 file
-- 🐛 [`c6cd7ce2`](https://github.com/Jatin-nicon/tenali/commit/c6cd7ce23cef86eccc6b506aaa2e5a1748dab060) — **varshini-nandula** — resolve reference errors (additionMode, difficulty, topicKey) in AdditionApp and makeQuizApp factory
+- 🐛 [`c6cd7ce2`](https://github.com/vicharanashala/tenali/commit/c6cd7ce23cef86eccc6b506aaa2e5a1748dab060) — **varshini-nandula** — resolve reference errors (additionMode, difficulty, topicKey) in AdditionApp and makeQuizApp factory
     - 📁 **1 file:** `client/src/App.jsx` `+5 −0`
     - 📊 **`+5 −0`** · 1 file
-- 📌 [`23dfc1ec`](https://github.com/Jatin-nicon/tenali/commit/23dfc1ec74d0c49e82b59e9e428d134a3fdf5b43) — **Ritish Karmakar** — Update CHANGELOG with Version 3: Percent Story redesign, AI prompt removal, background fixes
+- 📌 [`23dfc1ec`](https://github.com/vicharanashala/tenali/commit/23dfc1ec74d0c49e82b59e9e428d134a3fdf5b43) — **Ritish Karmakar** — Update CHANGELOG with Version 3: Percent Story redesign, AI prompt removal, background fixes
     - 📁 **1 file:** `CHANGELOG.md` `+200 −134`
     - 📊 **`+200 −134`** · 1 file
-- 📌 [`9cfe858c`](https://github.com/Jatin-nicon/tenali/commit/9cfe858c71b1da908e62509a0aec3657652eb655) — **muditagrawal2007** — added the column addtion , mulitplication and the substraction
+- 📌 [`9cfe858c`](https://github.com/vicharanashala/tenali/commit/9cfe858c71b1da908e62509a0aec3657652eb655) — **muditagrawal2007** — added the column addtion , mulitplication and the substraction
     - 📁 **4 files:** `client/src/App.jsx` `+621 −2`, `client/vite.config.js` `+4 −0`, `server/explanations.js` `+42 −0`, `server/index.js` `+152 −0`
     - 📊 **`+819 −2`** · 4 files
-- 📌 [`3af3bd97`](https://github.com/Jatin-nicon/tenali/commit/3af3bd972ff49ca9e96700a9b91a8cad1d168418) — **Ritish Karmakar** — Refine Level 1 explanation: hover info popup, boxed theory cards, mobile responsive fixes
+- 📌 [`3af3bd97`](https://github.com/vicharanashala/tenali/commit/3af3bd972ff49ca9e96700a9b91a8cad1d168418) — **Ritish Karmakar** — Refine Level 1 explanation: hover info popup, boxed theory cards, mobile responsive fixes
     - 📁 **2 files:** `client/src/PercentExplanationApp.css` `+1595 −1542`, `client/src/PercentExplanationApp.jsx` `+504 −142`
     - 📊 **`+2099 −1684`** · 2 files
-- 🔧 [`311111ff`](https://github.com/Jatin-nicon/tenali/commit/311111ff5ad317c4b49c41fb23abbb4230f6827d) — **varshini-nandula** — export app from index.js and ignore local in-memory journey database
+- 🔧 [`311111ff`](https://github.com/vicharanashala/tenali/commit/311111ff5ad317c4b49c41fb23abbb4230f6827d) — **varshini-nandula** — export app from index.js and ignore local in-memory journey database
     - 📁 **2 files:** `.gitignore` `+1 −0`, `server/index.js` `+7 −3`
     - 📊 **`+8 −3`** · 2 files
-- 🐛 [`31c47b27`](https://github.com/Jatin-nicon/tenali/commit/31c47b277c7d032d5d1abcc70ec0f5af513e17fb) — **varshini-nandula** — restore missing journey-banner styling rules in App.css
+- 🐛 [`31c47b27`](https://github.com/vicharanashala/tenali/commit/31c47b277c7d032d5d1abcc70ec0f5af513e17fb) — **varshini-nandula** — restore missing journey-banner styling rules in App.css
     - 📁 **1 file:** `client/src/App.css` `+61 −0`
     - 📊 **`+61 −0`** · 1 file
-- 🐛 [`256bfc04`](https://github.com/Jatin-nicon/tenali/commit/256bfc0412f05639f2fecad2f0c40f298bb3792b) — **varshini-nandula** — add in-memory fallback for Guided Learning Journey progress when MongoDB is unavailable
+- 🐛 [`256bfc04`](https://github.com/vicharanashala/tenali/commit/256bfc0412f05639f2fecad2f0c40f298bb3792b) — **varshini-nandula** — add in-memory fallback for Guided Learning Journey progress when MongoDB is unavailable
     - 📁 **1 file:** `server/lil/learning_journey/controllers.js` `+73 −0`
     - 📊 **`+73 −0`** · 1 file
-- 🐛 [`2d8e2ac3`](https://github.com/Jatin-nicon/tenali/commit/2d8e2ac3bb4e8a039b2afbcec7be393ab001ffb8) — **varshini-nandula** — restore missing showAbout, menuOpen, and search states in Home component
+- 🐛 [`2d8e2ac3`](https://github.com/vicharanashala/tenali/commit/2d8e2ac3bb4e8a039b2afbcec7be393ab001ffb8) — **varshini-nandula** — restore missing showAbout, menuOpen, and search states in Home component
     - 📁 **1 file:** `client/src/App.jsx` `+3 −0`
     - 📊 **`+3 −0`** · 1 file
-- 🐛 [`74af3400`](https://github.com/Jatin-nicon/tenali/commit/74af3400b6fe0b55bb24df2171e5bc48cbe8643e) — **varshini-nandula** — resolve duplicate identifier declarations in App.jsx
+- 🐛 [`74af3400`](https://github.com/vicharanashala/tenali/commit/74af3400b6fe0b55bb24df2171e5bc48cbe8643e) — **varshini-nandula** — resolve duplicate identifier declarations in App.jsx
     - 📁 **1 file:** `client/src/App.jsx` `+0 −3`
     - 📊 **`+0 −3`** · 1 file
-- 📌 [`fc9dd2a3`](https://github.com/Jatin-nicon/tenali/commit/fc9dd2a3e0cba32e95b24bd430b85c305fcb7bde) — **varshini-nandula** — Merge branch 'upstream/main' into feat/profile-achievement-showcase
+- 📌 [`fc9dd2a3`](https://github.com/vicharanashala/tenali/commit/fc9dd2a3e0cba32e95b24bd430b85c305fcb7bde) — **varshini-nandula** — Merge branch 'upstream/main' into feat/profile-achievement-showcase
 
 #### 📅 2026-07-14  <sub>(57 commits)</sub>
 
-- 🐛 [`79a9c716`](https://github.com/Jatin-nicon/tenali/commit/79a9c71679fb90ce18709b112ebc8274948d242c) — **KCDharshan9** — resolve submit button issue in addition app
+- 🐛 [`79a9c716`](https://github.com/vicharanashala/tenali/commit/79a9c71679fb90ce18709b112ebc8274948d242c) — **KCDharshan9** — resolve submit button issue in addition app
     - 📁 **1 file:** `client/src/App.jsx` `+1 −0`
     - 📊 **`+1 −0`** · 1 file
-- 📌 [`3edd6cac`](https://github.com/Jatin-nicon/tenali/commit/3edd6cac6e8cb8fed693a49b7a702e7d3e5b6b54) — **Dipto Subhro** — Merge branch 'main' into add-timer
-- 📌 [`34f729b6`](https://github.com/Jatin-nicon/tenali/commit/34f729b6ff879be0aa3fa513592150168abeac4e) — **muditagrawal2007** — added the column addtion
+- 📌 [`3edd6cac`](https://github.com/vicharanashala/tenali/commit/3edd6cac6e8cb8fed693a49b7a702e7d3e5b6b54) — **Dipto Subhro** — Merge branch 'main' into add-timer
+- 📌 [`34f729b6`](https://github.com/vicharanashala/tenali/commit/34f729b6ff879be0aa3fa513592150168abeac4e) — **muditagrawal2007** — added the column addtion
     - 📁 **4 files:** `client/src/App.jsx` `+335 −0`, `client/vite.config.js` `+2 −0`, `server/explanations.js` `+22 −0`, `server/index.js` `+75 −0`
     - 📊 **`+434 −0`** · 4 files
-- ✨ [`ddd92b37`](https://github.com/Jatin-nicon/tenali/commit/ddd92b37dc043b8894edcb5b31b5b706fe0794b5) — **Dipto Subhro** — add narration settings menu with custom gradient gear icon and voice selection
+- ✨ [`ddd92b37`](https://github.com/vicharanashala/tenali/commit/ddd92b37dc043b8894edcb5b31b5b706fe0794b5) — **Dipto Subhro** — add narration settings menu with custom gradient gear icon and voice selection
     - 📁 **8 files:** `client/public/settings_icon.svg` `+29 −0`, `client/src/App.jsx` `+179 −11`, `client/src/main.jsx` `+10 −3`, `client/src/narration/AudioCatalog.js` `+132 −0`, `client/src/narration/NarrationButton.jsx` `+81 −0`, `client/src/narration/NarrationContext.jsx` `+435 −0`, `client/src/narration/NarrationSettings.jsx` `+197 −0`, `client/src/narration/generate_mock_audio.js` `+146 −0`
     - 📊 **`+1209 −14`** · 8 files
-- 📌 [`e9cccb04`](https://github.com/Jatin-nicon/tenali/commit/e9cccb048d7040d1d1cd6576596544e029b1ce1f) — **KCDharshan9** — Merge branch 'main' into feat/tap-to-define-word-glossary
-- 📌 [`ca0037b1`](https://github.com/Jatin-nicon/tenali/commit/ca0037b1ba2a945094d16fd0b6ca6f107644a308) — **KCDharshan9** — Merge remote-tracking branch 'upstream/main' Resolve conflicts
-- 📝 [`f5d41670`](https://github.com/Jatin-nicon/tenali/commit/f5d416709ce3d88688be1ae78669e98d97e9b1c3) — **Jinal Gupta** — add curated CHANGELOG.md
+- 📌 [`e9cccb04`](https://github.com/vicharanashala/tenali/commit/e9cccb048d7040d1d1cd6576596544e029b1ce1f) — **KCDharshan9** — Merge branch 'main' into feat/tap-to-define-word-glossary
+- 📌 [`ca0037b1`](https://github.com/vicharanashala/tenali/commit/ca0037b1ba2a945094d16fd0b6ca6f107644a308) — **KCDharshan9** — Merge remote-tracking branch 'upstream/main' Resolve conflicts
+- 📝 [`f5d41670`](https://github.com/vicharanashala/tenali/commit/f5d416709ce3d88688be1ae78669e98d97e9b1c3) — **Jinal Gupta** — add curated CHANGELOG.md
     - 📁 **1 file:** `CHANGELOG.md` `+434 −0`
     - 📊 **`+434 −0`** · 1 file
-- 📌 [`0845eb3f`](https://github.com/Jatin-nicon/tenali/commit/0845eb3f4669dff691f73fa1fa25519973431c8d) — **SaniyaJos** — Merge upstream/main and resolve conflicts
-- ♻️ [`fdea52e0`](https://github.com/Jatin-nicon/tenali/commit/fdea52e06ba15efca82f4829b0a401c3f3ed2843) — **Vaibhav** — move CHANGELOG and exercise-references into vachana folder
+- 📌 [`0845eb3f`](https://github.com/vicharanashala/tenali/commit/0845eb3f4669dff691f73fa1fa25519973431c8d) — **SaniyaJos** — Merge upstream/main and resolve conflicts
+- ♻️ [`fdea52e0`](https://github.com/vicharanashala/tenali/commit/fdea52e06ba15efca82f4829b0a401c3f3ed2843) — **Vaibhav** — move CHANGELOG and exercise-references into vachana folder
     - 📁 **5 files:** `CHANGELOG.md` `+0 −87`, `client/src/App.css` `+2 −0`, `exercise-references.md => client/src/vachana/exercise-references.md`, `client/src/vachana/exercises/VocabExplorer.jsx` `+732 −339`, `client/src/vachana/index.jsx` `+113 −2`
     - 📊 **`+847 −428`** · 5 files
-- ✨ [`85d51540`](https://github.com/Jatin-nicon/tenali/commit/85d515409b0964d2ec5fc9925e32894756f1c25a) — **Vaibhav** — remove reset button from quiz header, place at session complete screen, and optimize definition question formatting
+- ✨ [`85d51540`](https://github.com/vicharanashala/tenali/commit/85d515409b0964d2ec5fc9925e32894756f1c25a) — **Vaibhav** — remove reset button from quiz header, place at session complete screen, and optimize definition question formatting
     - 📁 **1 file:** `client/src/vachana/exercises/VocabExplorer.jsx` `+137 −90`
     - 📊 **`+137 −90`** · 1 file
-- 🐛 [`3f2deb62`](https://github.com/Jatin-nicon/tenali/commit/3f2deb62ee87c1fc9c824bc49714a58521a65f90) — **Vaibhav** — resolve history view state overlap bug in placement test, add previous button, and hide redundant headers
+- 🐛 [`3f2deb62`](https://github.com/vicharanashala/tenali/commit/3f2deb62ee87c1fc9c824bc49714a58521a65f90) — **Vaibhav** — resolve history view state overlap bug in placement test, add previous button, and hide redundant headers
     - 📁 **2 files:** `client/src/vachana/exercises/VocabExplorer.jsx` `+3 −2`, `client/src/vachana/index.jsx` `+2 −11`
     - 📊 **`+5 −13`** · 2 files
-- ✨ [`60051fe3`](https://github.com/Jatin-nicon/tenali/commit/60051fe3bb342ed15795dcdff4556dccb88aeadc) — **Vaibhav** — implement numeric shortcuts, color-coded submission feedback, manual submit controls, and previous question navigation
+- ✨ [`60051fe3`](https://github.com/vicharanashala/tenali/commit/60051fe3bb342ed15795dcdff4556dccb88aeadc) — **Vaibhav** — implement numeric shortcuts, color-coded submission feedback, manual submit controls, and previous question navigation
     - 📁 **1 file:** `client/src/vachana/exercises/VocabExplorer.jsx` `+235 −148`
     - 📊 **`+235 −148`** · 1 file
-- 🐛 [`315054fd`](https://github.com/Jatin-nicon/tenali/commit/315054fd709f967251c0fb98cc5834edd4b2f54b) — **Vaibhav** — ensure URL is in sync on initial dashboard entry and support direct sub-route loads
+- 🐛 [`315054fd`](https://github.com/vicharanashala/tenali/commit/315054fd709f967251c0fb98cc5834edd4b2f54b) — **Vaibhav** — ensure URL is in sync on initial dashboard entry and support direct sub-route loads
     - 📁 **2 files:** `client/src/App.jsx` `+1 −1`, `client/src/vachana/index.jsx` `+4 −1`
     - 📊 **`+5 −2`** · 2 files
-- ♻️ [`ed17a3ea`](https://github.com/Jatin-nicon/tenali/commit/ed17a3ea71c2a5399d16a50580e13cc50fbe0c46) — **Vaibhav** — modularize Vachana Literacy Lab into separate component files and clean up App.jsx
-    - 📁 **26 files:** `client/src/App.jsx` `+13 −3940`, `client/src/vachana/MasteryLevelHeader.jsx` `+70 −0`, `client/src/vachana/VachanaIcons.jsx` `+162 −0`, `client/src/vachana/VachanaMastery.js` `+188 −0`, `client/src/vachana/exercises/ConceptSimplification.jsx` `+23 −0`, `client/src/vachana/exercises/DependencyGraph.jsx` `+37 −0`, `client/src/vachana/exercises/EquationToStory.jsx` `+22 −0`, `client/src/vachana/exercises/GoalStatePredictor.jsx` `+26 −0` *(+18 more in [`ed17a3ea`](https://github.com/Jatin-nicon/tenali/commit/ed17a3ea71c2a5399d16a50580e13cc50fbe0c46))*
+- ♻️ [`ed17a3ea`](https://github.com/vicharanashala/tenali/commit/ed17a3ea71c2a5399d16a50580e13cc50fbe0c46) — **Vaibhav** — modularize Vachana Literacy Lab into separate component files and clean up App.jsx
+    - 📁 **26 files:** `client/src/App.jsx` `+13 −3940`, `client/src/vachana/MasteryLevelHeader.jsx` `+70 −0`, `client/src/vachana/VachanaIcons.jsx` `+162 −0`, `client/src/vachana/VachanaMastery.js` `+188 −0`, `client/src/vachana/exercises/ConceptSimplification.jsx` `+23 −0`, `client/src/vachana/exercises/DependencyGraph.jsx` `+37 −0`, `client/src/vachana/exercises/EquationToStory.jsx` `+22 −0`, `client/src/vachana/exercises/GoalStatePredictor.jsx` `+26 −0` *(+18 more in [`ed17a3ea`](https://github.com/vicharanashala/tenali/commit/ed17a3ea71c2a5399d16a50580e13cc50fbe0c46))*
     - 📊 **`+3201 −3940`** · 26 files
-- 📌 [`19a79656`](https://github.com/Jatin-nicon/tenali/commit/19a79656b3ed98a5dd5c64a388d0485d985656f5) — **jgupta05072003-code** — 🔀 PR [#34](https://github.com/Jatin-nicon/tenali/pull/34) from `ahana4banerjee` — feature/AL-learning-checkpoints
-- 📌 [`74c02142`](https://github.com/Jatin-nicon/tenali/commit/74c0214253f38eaf5ba00bd339b81778c87dbc29) — **Ahana Banerjee** — Merge remote-tracking branch 'origin/main' into feature/AL-learning-checkpoints
-- ♻️ [`e13ff3f4`](https://github.com/Jatin-nicon/tenali/commit/e13ff3f4149a4437b2cd6e04e15b53268274f065) — **Vaibhav** — move CHANGELOG and exercise-references into vachana folder
+- 📌 [`19a79656`](https://github.com/vicharanashala/tenali/commit/19a79656b3ed98a5dd5c64a388d0485d985656f5) — **jgupta05072003-code** — 🔀 PR [#34](https://github.com/vicharanashala/tenali/pull/34) from `ahana4banerjee` — feature/AL-learning-checkpoints
+- 📌 [`74c02142`](https://github.com/vicharanashala/tenali/commit/74c0214253f38eaf5ba00bd339b81778c87dbc29) — **Ahana Banerjee** — Merge remote-tracking branch 'origin/main' into feature/AL-learning-checkpoints
+- ♻️ [`e13ff3f4`](https://github.com/vicharanashala/tenali/commit/e13ff3f4149a4437b2cd6e04e15b53268274f065) — **Vaibhav** — move CHANGELOG and exercise-references into vachana folder
     - 📁 **5 files:** `CHANGELOG.md` `+0 −87`, `client/src/App.css` `+2 −0`, `exercise-references.md => client/src/vachana/exercise-references.md`, `client/src/vachana/exercises/VocabExplorer.jsx` `+732 −339`, `client/src/vachana/index.jsx` `+113 −2`
     - 📊 **`+847 −428`** · 5 files
-- 📌 [`c724f4d0`](https://github.com/Jatin-nicon/tenali/commit/c724f4d0305f629714b25c5ca548e6a391ab0836) — **jgupta05072003-code** — 🔀 PR [#44](https://github.com/Jatin-nicon/tenali/pull/44) from `muditagrawal2007` — new_f
-- 📌 [`fac08b40`](https://github.com/Jatin-nicon/tenali/commit/fac08b40e3c72d52be5f639663d7a1c39120737d) — **muditagrawal2007** — Fix submission delay: cache tatsavit userId + fire-and-forget LIL processAttempt to unblock responses
+- 📌 [`c724f4d0`](https://github.com/vicharanashala/tenali/commit/c724f4d0305f629714b25c5ca548e6a391ab0836) — **jgupta05072003-code** — 🔀 PR [#44](https://github.com/vicharanashala/tenali/pull/44) from `muditagrawal2007` — new_f
+- 📌 [`fac08b40`](https://github.com/vicharanashala/tenali/commit/fac08b40e3c72d52be5f639663d7a1c39120737d) — **muditagrawal2007** — Fix submission delay: cache tatsavit userId + fire-and-forget LIL processAttempt to unblock responses
     - 📁 **1 file:** `server/index.js` `+19 −27`
     - 📊 **`+19 −27`** · 1 file
-- 📌 [`3271c4fc`](https://github.com/Jatin-nicon/tenali/commit/3271c4fcd8aa8a2cb423950508087ddcda3d0192) — **KCDharshan9** — Merge remote-tracking branch 'upstream/main' To resolve conflicts
-- 📌 [`97eb1012`](https://github.com/Jatin-nicon/tenali/commit/97eb1012805aed9aeb6ac5ba8a94904c3d57fed3) — **muditagrawal2007** — Merge branch 'vicharanashala:main' into new_f
-- 📌 [`e717fe49`](https://github.com/Jatin-nicon/tenali/commit/e717fe49b7922021bcb42ead2d8c5d8aa81d7efa) — **jgupta05072003-code** — 🔀 PR [#43](https://github.com/Jatin-nicon/tenali/pull/43) from `vicharanashala` — fix/mathlab-api-base
-- 🐛 [`e8aca58e`](https://github.com/Jatin-nicon/tenali/commit/e8aca58eedf96c5dc379af50be3d71debc893091) — **Jinal Gupta** — remove double API-base prefix in Visual Learning Universe
+- 📌 [`3271c4fc`](https://github.com/vicharanashala/tenali/commit/3271c4fcd8aa8a2cb423950508087ddcda3d0192) — **KCDharshan9** — Merge remote-tracking branch 'upstream/main' To resolve conflicts
+- 📌 [`97eb1012`](https://github.com/vicharanashala/tenali/commit/97eb1012805aed9aeb6ac5ba8a94904c3d57fed3) — **muditagrawal2007** — Merge branch 'vicharanashala:main' into new_f
+- 📌 [`e717fe49`](https://github.com/vicharanashala/tenali/commit/e717fe49b7922021bcb42ead2d8c5d8aa81d7efa) — **jgupta05072003-code** — 🔀 PR [#43](https://github.com/vicharanashala/tenali/pull/43) from `vicharanashala` — fix/mathlab-api-base
+- 🐛 [`e8aca58e`](https://github.com/vicharanashala/tenali/commit/e8aca58eedf96c5dc379af50be3d71debc893091) — **Jinal Gupta** — remove double API-base prefix in Visual Learning Universe
     - 📁 **1 file:** `client/src/App.jsx` `+6 −3`
     - 📊 **`+6 −3`** · 1 file
-- 📌 [`9372b712`](https://github.com/Jatin-nicon/tenali/commit/9372b712c9082dda7792837bdb25e5ab29990fe2) — **muditagrawal2007** — Restore Addition, Arithmetic, Coord. Geometry & Mensuration flashcards to home grid
+- 📌 [`9372b712`](https://github.com/vicharanashala/tenali/commit/9372b712c9082dda7792837bdb25e5ab29990fe2) — **muditagrawal2007** — Restore Addition, Arithmetic, Coord. Geometry & Mensuration flashcards to home grid
     - 📁 **1 file:** `client/src/App.jsx` `+4 −0`
     - 📊 **`+4 −0`** · 1 file
-- 🔧 [`58b4616d`](https://github.com/Jatin-nicon/tenali/commit/58b4616dd779e0a8c55febbd88ca5be5f8a3010f) — **KCDharshan9** — ignore all PowerShell script files in .gitignore
+- 🔧 [`58b4616d`](https://github.com/vicharanashala/tenali/commit/58b4616dd779e0a8c55febbd88ca5be5f8a3010f) — **KCDharshan9** — ignore all PowerShell script files in .gitignore
     - 📁 **1 file:** `.gitignore` `+1 −0`
     - 📊 **`+1 −0`** · 1 file
-- 📌 [`93e556a7`](https://github.com/Jatin-nicon/tenali/commit/93e556a7e2cfa33f1132f1f013e041d4c5570832) — **muditagrawal2007** — Guard generateMqExplanation with try-catch to prevent crash on questions with empty data
+- 📌 [`93e556a7`](https://github.com/vicharanashala/tenali/commit/93e556a7e2cfa33f1132f1f013e041d4c5570832) — **muditagrawal2007** — Guard generateMqExplanation with try-catch to prevent crash on questions with empty data
     - 📁 **1 file:** `client/src/LinearAlgebraApp.jsx` `+4 −0`
     - 📊 **`+4 −0`** · 1 file
-- 📌 [`8e36bde5`](https://github.com/Jatin-nicon/tenali/commit/8e36bde5d361bf4a01db13cfe2519a161babb55e) — **jgupta05072003-code** — 🔀 PR [#41](https://github.com/Jatin-nicon/tenali/pull/41) from `muditagrawal2007` — new_f
-- 🐛 [`c54726b5`](https://github.com/Jatin-nicon/tenali/commit/c54726b55d0854133fed605a8b90d02d778afa5a) — **muditagrawal2007** — Remove auto-submit on MCQ selection in LinearAlgebra mission quiz
+- 📌 [`8e36bde5`](https://github.com/vicharanashala/tenali/commit/8e36bde5d361bf4a01db13cfe2519a161babb55e) — **jgupta05072003-code** — 🔀 PR [#41](https://github.com/vicharanashala/tenali/pull/41) from `muditagrawal2007` — new_f
+- 🐛 [`c54726b5`](https://github.com/vicharanashala/tenali/commit/c54726b55d0854133fed605a8b90d02d778afa5a) — **muditagrawal2007** — Remove auto-submit on MCQ selection in LinearAlgebra mission quiz
     - 📁 **1 file:** `client/src/LinearAlgebraApp.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`1f54bae1`](https://github.com/Jatin-nicon/tenali/commit/1f54bae1885c558ed26c2039384e0eb3dabac5fd) — **muditagrawal2007** — Merge branch 'vicharanashala:main' into new_f
-- 📌 [`b7f0069a`](https://github.com/Jatin-nicon/tenali/commit/b7f0069a3120d6b1e8bce9cf2f4115a97bd3d89b) — **muditagrawal2007** — Remove language puzzle from home grid, wildcard /language route, guide button home-only, hamburger appends /language
+- 📌 [`1f54bae1`](https://github.com/vicharanashala/tenali/commit/1f54bae1885c558ed26c2039384e0eb3dabac5fd) — **muditagrawal2007** — Merge branch 'vicharanashala:main' into new_f
+- 📌 [`b7f0069a`](https://github.com/vicharanashala/tenali/commit/b7f0069a3120d6b1e8bce9cf2f4115a97bd3d89b) — **muditagrawal2007** — Remove language puzzle from home grid, wildcard /language route, guide button home-only, hamburger appends /language
     - 📁 **1 file:** `client/src/App.jsx` `+5 −6`
     - 📊 **`+5 −6`** · 1 file
-- 📌 [`ca2f1fee`](https://github.com/Jatin-nicon/tenali/commit/ca2f1fee3e406b0e9e9956508a1b57aa888ea377) — **jgupta05072003-code** — 🔀 PR [#39](https://github.com/Jatin-nicon/tenali/pull/39) from `muditagrawal2007` — new_f
-- 📌 [`05fea030`](https://github.com/Jatin-nicon/tenali/commit/05fea03020ca632cee67132c30ce25512cfa6783) — **jgupta05072003-code** — 🔀 PR [#40](https://github.com/Jatin-nicon/tenali/pull/40) from `vicharanashala` — fix/linalg-api-base
-- 🐛 [`915d3c81`](https://github.com/Jatin-nicon/tenali/commit/915d3c81c1499d9562a98abc69c6a5f966c75b1f) — **Jinal Gupta** — route quiz API through VITE_API_BASE_URL
+- 📌 [`ca2f1fee`](https://github.com/vicharanashala/tenali/commit/ca2f1fee3e406b0e9e9956508a1b57aa888ea377) — **jgupta05072003-code** — 🔀 PR [#39](https://github.com/vicharanashala/tenali/pull/39) from `muditagrawal2007` — new_f
+- 📌 [`05fea030`](https://github.com/vicharanashala/tenali/commit/05fea03020ca632cee67132c30ce25512cfa6783) — **jgupta05072003-code** — 🔀 PR [#40](https://github.com/vicharanashala/tenali/pull/40) from `vicharanashala` — fix/linalg-api-base
+- 🐛 [`915d3c81`](https://github.com/vicharanashala/tenali/commit/915d3c81c1499d9562a98abc69c6a5f966c75b1f) — **Jinal Gupta** — route quiz API through VITE_API_BASE_URL
     - 📁 **1 file:** `client/src/LinearAlgebraApp.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`a58c691c`](https://github.com/Jatin-nicon/tenali/commit/a58c691c8092cd97b5c17a1c4de0d49fbfc8b17e) — **muditagrawal2007** — Merge branch 'vicharanashala:main' into new_f
-- 🐛 [`e8b6469e`](https://github.com/Jatin-nicon/tenali/commit/e8b6469ec94b28fca04d3f878da22c1de78c3ac3) — **muditagrawal2007** — remove Random Mix, Custom Lesson, Gym from regularApps (grid cards) - kept in hamburger only
+- 📌 [`a58c691c`](https://github.com/vicharanashala/tenali/commit/a58c691c8092cd97b5c17a1c4de0d49fbfc8b17e) — **muditagrawal2007** — Merge branch 'vicharanashala:main' into new_f
+- 🐛 [`e8b6469e`](https://github.com/vicharanashala/tenali/commit/e8b6469ec94b28fca04d3f878da22c1de78c3ac3) — **muditagrawal2007** — remove Random Mix, Custom Lesson, Gym from regularApps (grid cards) - kept in hamburger only
     - 📁 **1 file:** `client/src/App.jsx` `+0 −3`
     - 📊 **`+0 −3`** · 1 file
-- 🐛 [`acefa1d1`](https://github.com/Jatin-nicon/tenali/commit/acefa1d1ba6d31f4253ff642105135cba655a6e9) — **muditagrawal2007** — remove Random Mix, Custom Lesson, Gym from flashcard grid (kept in hamburger)
+- 🐛 [`acefa1d1`](https://github.com/vicharanashala/tenali/commit/acefa1d1ba6d31f4253ff642105135cba655a6e9) — **muditagrawal2007** — remove Random Mix, Custom Lesson, Gym from flashcard grid (kept in hamburger)
     - 📁 **1 file:** `client/src/App.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`0f5e3c25`](https://github.com/Jatin-nicon/tenali/commit/0f5e3c25f1fa430b3a04716ba29a7f15957bf6fd) — **muditagrawal2007** — Merge branch 'new_f' of https://github.com/muditagrawal2007/Tenali_123 into new_f
-- 🐛 [`fd16a1cc`](https://github.com/Jatin-nicon/tenali/commit/fd16a1cc99b341e500af1c43fb164589d97f8042) — **muditagrawal2007** — restore Random Mix, Custom Lesson, Gym, and Goal Practice to hamburger menu
+- 📌 [`0f5e3c25`](https://github.com/vicharanashala/tenali/commit/0f5e3c25f1fa430b3a04716ba29a7f15957bf6fd) — **muditagrawal2007** — Merge branch 'new_f' of https://github.com/muditagrawal2007/Tenali_123 into new_f
+- 🐛 [`fd16a1cc`](https://github.com/vicharanashala/tenali/commit/fd16a1cc99b341e500af1c43fb164589d97f8042) — **muditagrawal2007** — restore Random Mix, Custom Lesson, Gym, and Goal Practice to hamburger menu
     - 📁 **1 file:** `client/src/App.jsx` `+27 −4`
     - 📊 **`+27 −4`** · 1 file
-- 📌 [`80f59206`](https://github.com/Jatin-nicon/tenali/commit/80f59206a6aa93ac276df5c79ea64320c726764c) — **Ahana Banerjee** — Merge remote-tracking branch 'origin/main' into feature/AL-learning-checkpoints
-- 📌 [`d2100a5f`](https://github.com/Jatin-nicon/tenali/commit/d2100a5fccf7dca930dd01d82c550b867ba69bb2) — **Ahana Banerjee** — Merge remote-tracking branch 'origin/main' into feature/AL-learning-checkpoints
-- 📌 [`6742b361`](https://github.com/Jatin-nicon/tenali/commit/6742b3615f5e986d73d5a0e43b73f9c6b82844be) — **jgupta05072003-code** — 🔀 PR [#19](https://github.com/Jatin-nicon/tenali/pull/19) from `muditagrawal2007` — new_f
-- 📌 [`1de6d4e4`](https://github.com/Jatin-nicon/tenali/commit/1de6d4e4cda6a260e4b75e48ab79d985dc984530) — **muditagrawal2007** — Merge branch 'vicharanashala:main' into new_f
-- 🐛 [`3c59513e`](https://github.com/Jatin-nicon/tenali/commit/3c59513eb3d92449dfab490dc4b679a8a7ceebd3) — **muditagrawal2007** — add isGoalMode prop to GeneratedQuizApp and fix broken comment syntax
+- 📌 [`80f59206`](https://github.com/vicharanashala/tenali/commit/80f59206a6aa93ac276df5c79ea64320c726764c) — **Ahana Banerjee** — Merge remote-tracking branch 'origin/main' into feature/AL-learning-checkpoints
+- 📌 [`d2100a5f`](https://github.com/vicharanashala/tenali/commit/d2100a5fccf7dca930dd01d82c550b867ba69bb2) — **Ahana Banerjee** — Merge remote-tracking branch 'origin/main' into feature/AL-learning-checkpoints
+- 📌 [`6742b361`](https://github.com/vicharanashala/tenali/commit/6742b3615f5e986d73d5a0e43b73f9c6b82844be) — **jgupta05072003-code** — 🔀 PR [#19](https://github.com/vicharanashala/tenali/pull/19) from `muditagrawal2007` — new_f
+- 📌 [`1de6d4e4`](https://github.com/vicharanashala/tenali/commit/1de6d4e4cda6a260e4b75e48ab79d985dc984530) — **muditagrawal2007** — Merge branch 'vicharanashala:main' into new_f
+- 🐛 [`3c59513e`](https://github.com/vicharanashala/tenali/commit/3c59513eb3d92449dfab490dc4b679a8a7ceebd3) — **muditagrawal2007** — add isGoalMode prop to GeneratedQuizApp and fix broken comment syntax
     - 📁 **3 files:** `client/package-lock.json` `+0 −9`, `client/src/App.jsx` `+1 −1`, `server/index.js` `+3 −1`
     - 📊 **`+4 −11`** · 3 files
-- ✨ [`b0fb976d`](https://github.com/Jatin-nicon/tenali/commit/b0fb976d7ecc229199f85a1dde995ac4b6688702) — **Jinal Gupta** — add Idli–Vada–Sambhar multiples & LCM game
+- ✨ [`b0fb976d`](https://github.com/vicharanashala/tenali/commit/b0fb976d7ecc229199f85a1dde995ac4b6688702) — **Jinal Gupta** — add Idli–Vada–Sambhar multiples & LCM game
     - 📁 **3 files:** `client/src/App.jsx` `+3 −0`, `client/src/IdliVadaSambharApp.css` `+243 −0`, `client/src/IdliVadaSambharApp.jsx` `+388 −0`
     - 📊 **`+634 −0`** · 3 files
-- ✨ [`ecef2958`](https://github.com/Jatin-nicon/tenali/commit/ecef2958479fa9215d8b105b71242ea5830fc6db) — **Ahana Banerjee** — resolved merge conflicts and restored the feature functionality
+- ✨ [`ecef2958`](https://github.com/vicharanashala/tenali/commit/ecef2958479fa9215d8b105b71242ea5830fc6db) — **Ahana Banerjee** — resolved merge conflicts and restored the feature functionality
     - 📁 **2 files:** `client/package-lock.json` `+0 −9`, `client/src/App.jsx` `+135 −49`
     - 📊 **`+135 −58`** · 2 files
-- 📌 [`09dc04cb`](https://github.com/Jatin-nicon/tenali/commit/09dc04cb5457bdfdc650d737e0c35d7bb0eb6325) — **muditagrawal2007** — Merge remote-tracking branch 'origin/main' into new_f
-- 📌 [`b5ad0e33`](https://github.com/Jatin-nicon/tenali/commit/b5ad0e33a404c16008fec7415a9039641640c45d) — **KCDharshan9** — Remove ps1 scripts from tracking and apply gitignore
-- 📌 [`8c2925b6`](https://github.com/Jatin-nicon/tenali/commit/8c2925b60cd2265deb66d928f288fcbb4828903f) — **Ahana Banerjee** — Merge remote-tracking branch 'origin/main' into feature/AL-learning-checkpoints
-- 📌 [`d43b0d8c`](https://github.com/Jatin-nicon/tenali/commit/d43b0d8c91673f22f7f187d99ec8a5a32dd3a6ca) — **jgupta05072003-code** — 🔀 PR [#33](https://github.com/Jatin-nicon/tenali/pull/33) from `Shubhdix9` — feat/guide-vlu-performance-overhaul
-- ✨ [`ece308a0`](https://github.com/Jatin-nicon/tenali/commit/ece308a0571d6b6ec7cadda5402245ba79233df8) — **Vaibhav** — remove reset button from quiz header, place at session complete screen, and optimize definition question formatting
+- 📌 [`09dc04cb`](https://github.com/vicharanashala/tenali/commit/09dc04cb5457bdfdc650d737e0c35d7bb0eb6325) — **muditagrawal2007** — Merge remote-tracking branch 'origin/main' into new_f
+- 📌 [`b5ad0e33`](https://github.com/vicharanashala/tenali/commit/b5ad0e33a404c16008fec7415a9039641640c45d) — **KCDharshan9** — Remove ps1 scripts from tracking and apply gitignore
+- 📌 [`8c2925b6`](https://github.com/vicharanashala/tenali/commit/8c2925b60cd2265deb66d928f288fcbb4828903f) — **Ahana Banerjee** — Merge remote-tracking branch 'origin/main' into feature/AL-learning-checkpoints
+- 📌 [`d43b0d8c`](https://github.com/vicharanashala/tenali/commit/d43b0d8c91673f22f7f187d99ec8a5a32dd3a6ca) — **jgupta05072003-code** — 🔀 PR [#33](https://github.com/vicharanashala/tenali/pull/33) from `Shubhdix9` — feat/guide-vlu-performance-overhaul
+- ✨ [`ece308a0`](https://github.com/vicharanashala/tenali/commit/ece308a0571d6b6ec7cadda5402245ba79233df8) — **Vaibhav** — remove reset button from quiz header, place at session complete screen, and optimize definition question formatting
     - 📁 **1 file:** `client/src/vachana/exercises/VocabExplorer.jsx` `+137 −90`
     - 📊 **`+137 −90`** · 1 file
-- 🐛 [`bcc9d2cf`](https://github.com/Jatin-nicon/tenali/commit/bcc9d2cf86456659236dc892e7e6cb514e649676) — **Vaibhav** — resolve history view state overlap bug in placement test, add previous button, and hide redundant headers
+- 🐛 [`bcc9d2cf`](https://github.com/vicharanashala/tenali/commit/bcc9d2cf86456659236dc892e7e6cb514e649676) — **Vaibhav** — resolve history view state overlap bug in placement test, add previous button, and hide redundant headers
     - 📁 **2 files:** `client/src/vachana/exercises/VocabExplorer.jsx` `+3 −2`, `client/src/vachana/index.jsx` `+2 −11`
     - 📊 **`+5 −13`** · 2 files
-- ✨ [`b5774cc7`](https://github.com/Jatin-nicon/tenali/commit/b5774cc75ee1bbf0672eff4ee16ec0764f84b0a8) — **Vaibhav** — implement numeric shortcuts, color-coded submission feedback, manual submit controls, and previous question navigation
+- ✨ [`b5774cc7`](https://github.com/vicharanashala/tenali/commit/b5774cc75ee1bbf0672eff4ee16ec0764f84b0a8) — **Vaibhav** — implement numeric shortcuts, color-coded submission feedback, manual submit controls, and previous question navigation
     - 📁 **1 file:** `client/src/vachana/exercises/VocabExplorer.jsx` `+235 −148`
     - 📊 **`+235 −148`** · 1 file
-- 🐛 [`48bd6d09`](https://github.com/Jatin-nicon/tenali/commit/48bd6d09bc821da200ec014dea037be7c303c296) — **Vaibhav** — ensure URL is in sync on initial dashboard entry and support direct sub-route loads
+- 🐛 [`48bd6d09`](https://github.com/vicharanashala/tenali/commit/48bd6d09bc821da200ec014dea037be7c303c296) — **Vaibhav** — ensure URL is in sync on initial dashboard entry and support direct sub-route loads
     - 📁 **2 files:** `client/src/App.jsx` `+2 −2`, `client/src/vachana/index.jsx` `+4 −1`
     - 📊 **`+6 −3`** · 2 files
-- 📌 [`08c714b9`](https://github.com/Jatin-nicon/tenali/commit/08c714b98d986ac6bab6cbc59104275487f1bb6b) — **Vaibhav** — Merge upstream/main into feature branch and resolve conflicts
-- ♻️ [`6fdf46d5`](https://github.com/Jatin-nicon/tenali/commit/6fdf46d5d88c09aa70e83603d0c52e89fa231862) — **Vaibhav** — modularize Vachana Literacy Lab into separate component files and clean up App.jsx
-    - 📁 **26 files:** `client/src/App.jsx` `+3 −3941`, `client/src/vachana/MasteryLevelHeader.jsx` `+70 −0`, `client/src/vachana/VachanaIcons.jsx` `+162 −0`, `client/src/vachana/VachanaMastery.js` `+188 −0`, `client/src/vachana/exercises/ConceptSimplification.jsx` `+23 −0`, `client/src/vachana/exercises/DependencyGraph.jsx` `+37 −0`, `client/src/vachana/exercises/EquationToStory.jsx` `+22 −0`, `client/src/vachana/exercises/GoalStatePredictor.jsx` `+26 −0` *(+18 more in [`6fdf46d5`](https://github.com/Jatin-nicon/tenali/commit/6fdf46d5d88c09aa70e83603d0c52e89fa231862))*
+- 📌 [`08c714b9`](https://github.com/vicharanashala/tenali/commit/08c714b98d986ac6bab6cbc59104275487f1bb6b) — **Vaibhav** — Merge upstream/main into feature branch and resolve conflicts
+- ♻️ [`6fdf46d5`](https://github.com/vicharanashala/tenali/commit/6fdf46d5d88c09aa70e83603d0c52e89fa231862) — **Vaibhav** — modularize Vachana Literacy Lab into separate component files and clean up App.jsx
+    - 📁 **26 files:** `client/src/App.jsx` `+3 −3941`, `client/src/vachana/MasteryLevelHeader.jsx` `+70 −0`, `client/src/vachana/VachanaIcons.jsx` `+162 −0`, `client/src/vachana/VachanaMastery.js` `+188 −0`, `client/src/vachana/exercises/ConceptSimplification.jsx` `+23 −0`, `client/src/vachana/exercises/DependencyGraph.jsx` `+37 −0`, `client/src/vachana/exercises/EquationToStory.jsx` `+22 −0`, `client/src/vachana/exercises/GoalStatePredictor.jsx` `+26 −0` *(+18 more in [`6fdf46d5`](https://github.com/vicharanashala/tenali/commit/6fdf46d5d88c09aa70e83603d0c52e89fa231862))*
     - 📊 **`+3191 −3941`** · 26 files
-- 📌 [`c30b976b`](https://github.com/Jatin-nicon/tenali/commit/c30b976ba54ce0080a4302cf0620e6f87770083a) — **Vaibhav** — Merge upstream/main into feature branch
-- 📌 [`9b865779`](https://github.com/Jatin-nicon/tenali/commit/9b865779f3a54c63c684c737fce0acbe80a9026f) — **Ahana Banerjee** — Merge remote-tracking branch 'origin/main' into feature/AL-learning-checkpoints
+- 📌 [`c30b976b`](https://github.com/vicharanashala/tenali/commit/c30b976ba54ce0080a4302cf0620e6f87770083a) — **Vaibhav** — Merge upstream/main into feature branch
+- 📌 [`9b865779`](https://github.com/vicharanashala/tenali/commit/9b865779f3a54c63c684c737fce0acbe80a9026f) — **Ahana Banerjee** — Merge remote-tracking branch 'origin/main' into feature/AL-learning-checkpoints
 
 #### 📅 2026-07-13  <sub>(44 commits)</sub>
 
-- ✨ [`4f4a40f8`](https://github.com/Jatin-nicon/tenali/commit/4f4a40f8cb94a570eec5390a0a4b9615897d0341) — **Vaibhav** — implement adaptive placement check, MCQ auto-submit, and guided exploration
+- ✨ [`4f4a40f8`](https://github.com/vicharanashala/tenali/commit/4f4a40f8cb94a570eec5390a0a4b9615897d0341) — **Vaibhav** — implement adaptive placement check, MCQ auto-submit, and guided exploration
     - 📁 **3 files:** `CHANGELOG.md` `+27 −0`, `client/src/App.jsx` `+2198 −180`, `client/src/vocabCorpus.js` `+782 −0`
     - 📊 **`+3007 −180`** · 3 files
-- 💄 [`e8c1b77e`](https://github.com/Jatin-nicon/tenali/commit/e8c1b77ea729f78e9f3d9b5580134db3cbf86c8d) — **Shubh dixit** — remove addition, mensuration, and coordinate geometry from hamburger menu
+- 💄 [`e8c1b77e`](https://github.com/vicharanashala/tenali/commit/e8c1b77ea729f78e9f3d9b5580134db3cbf86c8d) — **Shubh dixit** — remove addition, mensuration, and coordinate geometry from hamburger menu
     - 📁 **1 file:** `client/src/App.jsx` `+0 −13`
     - 📊 **`+0 −13`** · 1 file
-- ✨ [`354f05f0`](https://github.com/Jatin-nicon/tenali/commit/354f05f094674ba7b89d3f4ea50416be86bb1f2e) — **varshini-nandula** — sort badges showcase by category priority and fix hooks ordering rules
+- ✨ [`354f05f0`](https://github.com/vicharanashala/tenali/commit/354f05f094674ba7b89d3f4ea50416be86bb1f2e) — **varshini-nandula** — sort badges showcase by category priority and fix hooks ordering rules
     - 📁 **1 file:** `client/src/App.jsx` `+109 −67`
     - 📊 **`+109 −67`** · 1 file
-- 📌 [`243a3fdc`](https://github.com/Jatin-nicon/tenali/commit/243a3fdc271d01c7400c23673b272ffa699c35f7) — **Shubh dixit** — Merge remote-tracking branch 'upstream/main' into feat/guide-vlu-performance-overhaul
-- 🐛 [`23a7be59`](https://github.com/Jatin-nicon/tenali/commit/23a7be597a4cea5dc1805449a4e448539c9a71bf) — **Shubh dixit** — fix addition screen crash and remove extra modes
+- 📌 [`243a3fdc`](https://github.com/vicharanashala/tenali/commit/243a3fdc271d01c7400c23673b272ffa699c35f7) — **Shubh dixit** — Merge remote-tracking branch 'upstream/main' into feat/guide-vlu-performance-overhaul
+- 🐛 [`23a7be59`](https://github.com/vicharanashala/tenali/commit/23a7be597a4cea5dc1805449a4e448539c9a71bf) — **Shubh dixit** — fix addition screen crash and remove extra modes
     - 📁 **1 file:** `client/src/App.jsx` `+4 −20`
     - 📊 **`+4 −20`** · 1 file
-- 🔧 [`a6763361`](https://github.com/Jatin-nicon/tenali/commit/a67633616d5053f35f76000a97e07beab037dda5) — **SaniyaJos** — apply copilot suggestions
+- 🔧 [`a6763361`](https://github.com/vicharanashala/tenali/commit/a67633616d5053f35f76000a97e07beab037dda5) — **SaniyaJos** — apply copilot suggestions
     - 📁 **2 files:** `client/src/App.jsx` `+1 −1`, `client/vite.config.js` `+0 −2`
     - 📊 **`+1 −3`** · 2 files
-- 📌 [`07c39890`](https://github.com/Jatin-nicon/tenali/commit/07c39890795fbf34e01cf9bd0e85dbcf5e0af9b8) — **SaniyaJos** — Merge branch 'main' of https://github.com/vicharanashala/tenali into feat/contrast-challenge-enhancement
-- 📌 [`80d52fc4`](https://github.com/Jatin-nicon/tenali/commit/80d52fc41b777489ad3c4fff74624ec943f84799) — **jgupta05072003-code** — 🔀 PR [#35](https://github.com/Jatin-nicon/tenali/pull/35) from `KrishnaG-101` — language_integration
-- 🐛 [`21e10b43`](https://github.com/Jatin-nicon/tenali/commit/21e10b43614f3e96fe1d61bcb5f66ffd8c839ae4) — **Ahana Banerjee** — hide the Guided Learning Journey banner from the Goal Selection view
+- 📌 [`07c39890`](https://github.com/vicharanashala/tenali/commit/07c39890795fbf34e01cf9bd0e85dbcf5e0af9b8) — **SaniyaJos** — Merge branch 'main' of https://github.com/vicharanashala/tenali into feat/contrast-challenge-enhancement
+- 📌 [`80d52fc4`](https://github.com/vicharanashala/tenali/commit/80d52fc41b777489ad3c4fff74624ec943f84799) — **jgupta05072003-code** — 🔀 PR [#35](https://github.com/vicharanashala/tenali/pull/35) from `KrishnaG-101` — language_integration
+- 🐛 [`21e10b43`](https://github.com/vicharanashala/tenali/commit/21e10b43614f3e96fe1d61bcb5f66ffd8c839ae4) — **Ahana Banerjee** — hide the Guided Learning Journey banner from the Goal Selection view
     - 📁 **1 file:** `client/src/App.jsx` `+38 −45`
     - 📊 **`+38 −45`** · 1 file
-- ✨ [`3600fe0e`](https://github.com/Jatin-nicon/tenali/commit/3600fe0ebf088e74e260765983b3b8a95530341d) — **SaniyaJos** — Implemented Contrast Challenges
+- ✨ [`3600fe0e`](https://github.com/vicharanashala/tenali/commit/3600fe0ebf088e74e260765983b3b8a95530341d) — **SaniyaJos** — Implemented Contrast Challenges
     - 📁 **4 files:** `client/src/App.jsx` `+22 −2`, `client/src/ContrastChallengeApp.jsx` `+12324 −0`, `client/vite.config.js` `+2 −0`, `server/index.js` `+3 −0`
     - 📊 **`+12351 −2`** · 4 files
-- ✨ [`1cfebc2e`](https://github.com/Jatin-nicon/tenali/commit/1cfebc2e3dd3b73ec1ebb7da6076e2fdbe199a27) — **Krishna Gelra** — optimize wordCreator verification latency and restore original layout
+- ✨ [`1cfebc2e`](https://github.com/vicharanashala/tenali/commit/1cfebc2e3dd3b73ec1ebb7da6076e2fdbe199a27) — **Krishna Gelra** — optimize wordCreator verification latency and restore original layout
     - 📁 **2 files:** `client/src/App.jsx` `+3 −1`, `server/routes/wordCreator.js` `+28 −2`
     - 📊 **`+31 −3`** · 2 files
-- 🔧 [`62e71b57`](https://github.com/Jatin-nicon/tenali/commit/62e71b57d3a2c2c1421f5745a96c089d15f9c932) — **KCDharshan9** — resolve merge conflicts and update branch
-- 📌 [`a53dfeb5`](https://github.com/Jatin-nicon/tenali/commit/a53dfeb5d70e4a7df31cc4d47c46788c06c320d6) — **Ahana Banerjee** — Merge remote-tracking branch 'origin/main' into feature/AL-learning-checkpoints
-- 📌 [`81ff9ae7`](https://github.com/Jatin-nicon/tenali/commit/81ff9ae71dd1c6e93efe68170ce7d2c662fa7d07) — **Shubh dixit** — Fix ReferenceError: setIsGoalMode is not defined in App state
+- 🔧 [`62e71b57`](https://github.com/vicharanashala/tenali/commit/62e71b57d3a2c2c1421f5745a96c089d15f9c932) — **KCDharshan9** — resolve merge conflicts and update branch
+- 📌 [`a53dfeb5`](https://github.com/vicharanashala/tenali/commit/a53dfeb5d70e4a7df31cc4d47c46788c06c320d6) — **Ahana Banerjee** — Merge remote-tracking branch 'origin/main' into feature/AL-learning-checkpoints
+- 📌 [`81ff9ae7`](https://github.com/vicharanashala/tenali/commit/81ff9ae71dd1c6e93efe68170ce7d2c662fa7d07) — **Shubh dixit** — Fix ReferenceError: setIsGoalMode is not defined in App state
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- ✨ [`36f71d7c`](https://github.com/Jatin-nicon/tenali/commit/36f71d7c047431d48f7124acd50285f09670d3fe) — **Ahana Banerjee** — place the feature button on the main page below the search bar
+- ✨ [`36f71d7c`](https://github.com/vicharanashala/tenali/commit/36f71d7c047431d48f7124acd50285f09670d3fe) — **Ahana Banerjee** — place the feature button on the main page below the search bar
     - 📁 **2 files:** `client/src/App.css` `+62 −0`, `client/src/App.jsx` `+16 −10`
     - 📊 **`+78 −10`** · 2 files
-- 📌 [`6f83f149`](https://github.com/Jatin-nicon/tenali/commit/6f83f149baafb5d7ca6c57c348b92083bf942c56) — **Shubh dixit** — Fix isGoalSelection reference error in Home component
+- 📌 [`6f83f149`](https://github.com/vicharanashala/tenali/commit/6f83f149baafb5d7ca6c57c348b92083bf942c56) — **Shubh dixit** — Fix isGoalSelection reference error in Home component
     - 📁 **1 file:** `client/src/App.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`fbd45024`](https://github.com/Jatin-nicon/tenali/commit/fbd450242c833a2f34c149f25f9eb97091698808) — **Shubh dixit** — Fix missing InteractiveLcmHcfApp import from upstream merge
+- 📌 [`fbd45024`](https://github.com/vicharanashala/tenali/commit/fbd450242c833a2f34c149f25f9eb97091698808) — **Shubh dixit** — Fix missing InteractiveLcmHcfApp import from upstream merge
     - 📁 **1 file:** `client/src/App.jsx` `+1 −0`
     - 📊 **`+1 −0`** · 1 file
-- 📌 [`e004443f`](https://github.com/Jatin-nicon/tenali/commit/e004443fa23e86a80b1eebdea19b86ce903d3faf) — **muditagrawal2007** — Merge remote-tracking branch 'origin/new_f' into new_f
-- 📌 [`3af50a57`](https://github.com/Jatin-nicon/tenali/commit/3af50a57d80b7c9664cbff8becf9b2a6f74b9f8e) — **Krishna Gelra** — Merge remote main into language_integration and resolve conflicts
-- 📌 [`bee657a9`](https://github.com/Jatin-nicon/tenali/commit/bee657a9e7c16915fb97e194e1f2b1d2f8df11f6) — **Shubh dixit** — Resolve merge conflicts with upstream main and fix syntax errors
+- 📌 [`e004443f`](https://github.com/vicharanashala/tenali/commit/e004443fa23e86a80b1eebdea19b86ce903d3faf) — **muditagrawal2007** — Merge remote-tracking branch 'origin/new_f' into new_f
+- 📌 [`3af50a57`](https://github.com/vicharanashala/tenali/commit/3af50a57d80b7c9664cbff8becf9b2a6f74b9f8e) — **Krishna Gelra** — Merge remote main into language_integration and resolve conflicts
+- 📌 [`bee657a9`](https://github.com/vicharanashala/tenali/commit/bee657a9e7c16915fb97e194e1f2b1d2f8df11f6) — **Shubh dixit** — Resolve merge conflicts with upstream main and fix syntax errors
     - 📁 **1 file:** `client/src/App.jsx` `+2 −14`
     - 📊 **`+2 −14`** · 1 file
-- 📌 [`7192ab79`](https://github.com/Jatin-nicon/tenali/commit/7192ab79b6305c840cd2bf26c1e50edccd635a4a) — **muditagrawal2007** — Merge origin/main into new_f - resolve import conflict
-- 📌 [`9ba6094c`](https://github.com/Jatin-nicon/tenali/commit/9ba6094c34c03c2fbb615228635370277f899df0) — **Shubh dixit** — Merge remote-tracking branch 'upstream/main' into feat/guide-vlu-performance-overhaul
-- 📌 [`26a8fea4`](https://github.com/Jatin-nicon/tenali/commit/26a8fea43779fcb54c2b00507ea85994aead3e74) — **jgupta05072003-code** — 🔀 PR [#12](https://github.com/Jatin-nicon/tenali/pull/12) from `poorvipravallika06` — feature/new-feature
-- 📌 [`32ff9625`](https://github.com/Jatin-nicon/tenali/commit/32ff96255747e78be4ba6bc0fd9fe68cab47db43) — **jgupta05072003-code** — 🔀 PR [#11](https://github.com/Jatin-nicon/tenali/pull/11) from `ahana4banerjee` — feature/AN-goal-based-practice-sessions
-- 📌 [`cacc90b0`](https://github.com/Jatin-nicon/tenali/commit/cacc90b016ead928427bd337f3b700afd3d906a4) — **muditagrawal2007** — Merge branch 'vicharanashala:main' into new_f
-- 📌 [`001f1904`](https://github.com/Jatin-nicon/tenali/commit/001f1904887b4090022ec8e6a8801ecdecc1a702) — **muditagrawal2007** — removed the route laquiz and correct the answers
+- 📌 [`7192ab79`](https://github.com/vicharanashala/tenali/commit/7192ab79b6305c840cd2bf26c1e50edccd635a4a) — **muditagrawal2007** — Merge origin/main into new_f - resolve import conflict
+- 📌 [`9ba6094c`](https://github.com/vicharanashala/tenali/commit/9ba6094c34c03c2fbb615228635370277f899df0) — **Shubh dixit** — Merge remote-tracking branch 'upstream/main' into feat/guide-vlu-performance-overhaul
+- 📌 [`26a8fea4`](https://github.com/vicharanashala/tenali/commit/26a8fea43779fcb54c2b00507ea85994aead3e74) — **jgupta05072003-code** — 🔀 PR [#12](https://github.com/vicharanashala/tenali/pull/12) from `poorvipravallika06` — feature/new-feature
+- 📌 [`32ff9625`](https://github.com/vicharanashala/tenali/commit/32ff96255747e78be4ba6bc0fd9fe68cab47db43) — **jgupta05072003-code** — 🔀 PR [#11](https://github.com/vicharanashala/tenali/pull/11) from `ahana4banerjee` — feature/AN-goal-based-practice-sessions
+- 📌 [`cacc90b0`](https://github.com/vicharanashala/tenali/commit/cacc90b016ead928427bd337f3b700afd3d906a4) — **muditagrawal2007** — Merge branch 'vicharanashala:main' into new_f
+- 📌 [`001f1904`](https://github.com/vicharanashala/tenali/commit/001f1904887b4090022ec8e6a8801ecdecc1a702) — **muditagrawal2007** — removed the route laquiz and correct the answers
     - 📁 **2 files:** `client/src/App.jsx` `+0 −17`, `client/src/LinearAlgebraApp.jsx` `+1 −1`
     - 📊 **`+1 −18`** · 2 files
-- ⚡ [`60cf1636`](https://github.com/Jatin-nicon/tenali/commit/60cf1636d17f0b9a51457a60c8594c40737ac676) — **Shubh dixit** — instant question transitions + visual counting caps
+- ⚡ [`60cf1636`](https://github.com/vicharanashala/tenali/commit/60cf1636d17f0b9a51457a60c8594c40737ac676) — **Shubh dixit** — instant question transitions + visual counting caps
     - 📁 **3 files:** `client/src/App.jsx` `+5 −1`, `client/src/VisualMathLabRedux.jsx` `+456 −513`, `server/index.js` `+16 −6`
     - 📊 **`+477 −520`** · 3 files
-- ✨ [`7af9af56`](https://github.com/Jatin-nicon/tenali/commit/7af9af56a93129e99d2d9e27e6701ad209d430b2) — **Vaibhav** — implement adaptive placement check, MCQ auto-submit, and guided exploration
+- ✨ [`7af9af56`](https://github.com/vicharanashala/tenali/commit/7af9af56a93129e99d2d9e27e6701ad209d430b2) — **Vaibhav** — implement adaptive placement check, MCQ auto-submit, and guided exploration
     - 📁 **3 files:** `CHANGELOG.md` `+27 −0`, `client/src/App.jsx` `+2199 −181`, `client/src/vocabCorpus.js` `+782 −0`
     - 📊 **`+3008 −181`** · 3 files
-- 📌 [`30222973`](https://github.com/Jatin-nicon/tenali/commit/302229730b03d30cf500b4c22b87347c33732f5e) — **muditagrawal2007** — added the timer in the quiz and fix the solution part
+- 📌 [`30222973`](https://github.com/vicharanashala/tenali/commit/302229730b03d30cf500b4c22b87347c33732f5e) — **muditagrawal2007** — added the timer in the quiz and fix the solution part
     - 📁 **2 files:** `client/src/LinearAlgebraApp.jsx` `+49 −4`, `server/index.js` `+9 −4`
     - 📊 **`+58 −8`** · 2 files
-- 🐛 [`aded1dad`](https://github.com/Jatin-nicon/tenali/commit/aded1dad03c5e8f0c89e6797f91157bdf988a792) — **KCDharshan9** — fix alignment and svg based on word
+- 🐛 [`aded1dad`](https://github.com/vicharanashala/tenali/commit/aded1dad03c5e8f0c89e6797f91157bdf988a792) — **KCDharshan9** — fix alignment and svg based on word
     - 📁 **3 files:** `client/src/data/glossaryTerms.json` `+2847 −2952`, `client/src/data/glossaryVisuals.jsx` `+37 −28`, `client/src/data/topicGlossaryMap.json` `+573 −573`
     - 📊 **`+3457 −3553`** · 3 files
-- ✨ [`0b6b158c`](https://github.com/Jatin-nicon/tenali/commit/0b6b158ca70064f6a05b621ac6576485d1494a13) — **Ahana Banerjee** — add confetti animations
+- ✨ [`0b6b158c`](https://github.com/vicharanashala/tenali/commit/0b6b158ca70064f6a05b621ac6576485d1494a13) — **Ahana Banerjee** — add confetti animations
     - 📁 **2 files:** `client/src/App.css` `+30 −1`, `client/src/App.jsx` `+21 −18`
     - 📊 **`+51 −19`** · 2 files
-- ✨ [`fba34e44`](https://github.com/Jatin-nicon/tenali/commit/fba34e44041614204e152544b5af53a7fc7eac5f) — **Ahana Banerjee** — add confetti animation
+- ✨ [`fba34e44`](https://github.com/vicharanashala/tenali/commit/fba34e44041614204e152544b5af53a7fc7eac5f) — **Ahana Banerjee** — add confetti animation
     - 📁 **2 files:** `client/src/App.css` `+109 −0`, `client/src/App.jsx` `+364 −5`
     - 📊 **`+473 −5`** · 2 files
-- 📌 [`05f94449`](https://github.com/Jatin-nicon/tenali/commit/05f94449f1598fdbdc417f899556b4b6aea40ea7) — **muditagrawal2007** — added feature in the quiz
+- 📌 [`05f94449`](https://github.com/vicharanashala/tenali/commit/05f94449f1598fdbdc417f899556b4b6aea40ea7) — **muditagrawal2007** — added feature in the quiz
     - 📁 **3 files:** `client/src/LinearAlgebraApp.css` `+3 −1`, `client/src/LinearAlgebraApp.jsx` `+28 −16`, `server/index.js` `+14 −1`
     - 📊 **`+45 −18`** · 3 files
-- 📌 [`5f17c857`](https://github.com/Jatin-nicon/tenali/commit/5f17c85770657f6bc3d1fe71f95028b42471ca2d) — **muditagrawal2007** — added feature in the quiz
+- 📌 [`5f17c857`](https://github.com/vicharanashala/tenali/commit/5f17c85770657f6bc3d1fe71f95028b42471ca2d) — **muditagrawal2007** — added feature in the quiz
     - 📁 **4 files:** `client/src/App.jsx` `+1 −1`, `client/src/LinearAlgebraApp.css` `+45 −1`, `client/src/LinearAlgebraApp.jsx` `+683 −125`, `server/index.js` `+22 −5`
     - 📊 **`+751 −132`** · 4 files
-- ✨ [`f354aa87`](https://github.com/Jatin-nicon/tenali/commit/f354aa87585c5c43730cbf45bd8b59fafb52aa96) — **varshini-nandula** — implement profile topic navigation with URL mode sync and sync progress race condition fix
+- ✨ [`f354aa87`](https://github.com/vicharanashala/tenali/commit/f354aa87585c5c43730cbf45bd8b59fafb52aa96) — **varshini-nandula** — implement profile topic navigation with URL mode sync and sync progress race condition fix
     - 📁 **1 file:** `client/src/App.jsx` `+219 −162`
     - 📊 **`+219 −162`** · 1 file
-- ✨ [`083d879c`](https://github.com/Jatin-nicon/tenali/commit/083d879c2f2ddf612732ce9720d7b36a1575a8bc) — **varshini-nandula** — implement persistent JSON fallback database and student attempt logging
+- ✨ [`083d879c`](https://github.com/vicharanashala/tenali/commit/083d879c2f2ddf612732ce9720d7b36a1575a8bc) — **varshini-nandula** — implement persistent JSON fallback database and student attempt logging
     - 📁 **4 files:** `.gitignore` `+1 −0`, `client/src/App.jsx` `+34 −1`, `server/auth.js` `+9 −1`, `server/index.js` `+338 −19`
     - 📊 **`+382 −21`** · 4 files
-- 💄 [`7cbadd0c`](https://github.com/Jatin-nicon/tenali/commit/7cbadd0c48b3b058d928b00630cf81f9797fc3fd) — **varshini-nandula** — make category selector dropdown text white on hover/open for contrast
+- 💄 [`7cbadd0c`](https://github.com/vicharanashala/tenali/commit/7cbadd0c48b3b058d928b00630cf81f9797fc3fd) — **varshini-nandula** — make category selector dropdown text white on hover/open for contrast
     - 📁 **1 file:** `client/src/App.css` `+30 −13`
     - 📊 **`+30 −13`** · 1 file
-- 📌 [`5633febd`](https://github.com/Jatin-nicon/tenali/commit/5633febd98686f10de588e99546b7d02baf9b0c1) — **muditagrawal2007** — added feature in the quiz
+- 📌 [`5633febd`](https://github.com/vicharanashala/tenali/commit/5633febd98686f10de588e99546b7d02baf9b0c1) — **muditagrawal2007** — added feature in the quiz
     - 📁 **2 files:** `client/src/LinearAlgebraApp.jsx` `+67 −46`, `server/index.js` `+220 −72`
     - 📊 **`+287 −118`** · 2 files
-- 📌 [`d5ff0017`](https://github.com/Jatin-nicon/tenali/commit/d5ff0017f3dd64015d39b8c396168c13a0a1ca5f) — **muditagrawal2007** — added the quiz seciotn in the linear algebra
+- 📌 [`d5ff0017`](https://github.com/vicharanashala/tenali/commit/d5ff0017f3dd64015d39b8c396168c13a0a1ca5f) — **muditagrawal2007** — added the quiz seciotn in the linear algebra
     - 📁 **5 files:** `client/src/App.jsx` `+695 −0`, `client/src/LinearAlgebraApp.css` `+13 −8`, `client/src/LinearAlgebraApp.jsx` `+765 −717`, `client/vite.config.js` `+1 −0`, `server/index.js` `+1311 −33`
     - 📊 **`+2785 −758`** · 5 files
-- ✨ [`dabfebd8`](https://github.com/Jatin-nicon/tenali/commit/dabfebd8141a93203f44399e835433ffdd292e20) — **Ahana Banerjee** — implement a targeted concept revision loop
+- ✨ [`dabfebd8`](https://github.com/vicharanashala/tenali/commit/dabfebd8141a93203f44399e835433ffdd292e20) — **Ahana Banerjee** — implement a targeted concept revision loop
     - 📁 **3 files:** `client/src/App.jsx` `+18 −11`, `server/lil/learning_journey/controllers.js` `+82 −6`, `server/lil/learning_journey/models.js` `+2 −1`
     - 📊 **`+102 −18`** · 3 files
-- ✨ [`fd7f4648`](https://github.com/Jatin-nicon/tenali/commit/fd7f4648f4b48d6a5b9fd887f4a76d0aa62d30a1) — **Ahana Banerjee** — Replaced "❌ Try Again" with "Oh no, it's okay" rendered in theme-compliant warning/wrong color
+- ✨ [`fd7f4648`](https://github.com/vicharanashala/tenali/commit/fd7f4648f4b48d6a5b9fd887f4a76d0aa62d30a1) — **Ahana Banerjee** — Replaced "❌ Try Again" with "Oh no, it's okay" rendered in theme-compliant warning/wrong color
     - 📁 **1 file:** `client/src/App.jsx` `+23 −3`
     - 📊 **`+23 −3`** · 1 file
-- ✨ [`6b864dfa`](https://github.com/Jatin-nicon/tenali/commit/6b864dfa0cf899d5876eba093ddddbf14925eafb) — **Ahana Banerjee** — add a confetti animation upon clearing a checkpoint quiz
+- ✨ [`6b864dfa`](https://github.com/vicharanashala/tenali/commit/6b864dfa0cf899d5876eba093ddddbf14925eafb) — **Ahana Banerjee** — add a confetti animation upon clearing a checkpoint quiz
     - 📁 **1 file:** `client/src/App.jsx` `+56 −0`
     - 📊 **`+56 −0`** · 1 file
-- ✨ [`5796f401`](https://github.com/Jatin-nicon/tenali/commit/5796f401c3862e9386e2cd701b6fbe65d45e9abe) — **Ahana Banerjee** — block access to succesive topics in learning journey
+- ✨ [`5796f401`](https://github.com/vicharanashala/tenali/commit/5796f401c3862e9386e2cd701b6fbe65d45e9abe) — **Ahana Banerjee** — block access to succesive topics in learning journey
     - 📁 **1 file:** `client/src/App.jsx` `+13 −10`
     - 📊 **`+13 −10`** · 1 file
-- 📌 [`d42b5b6c`](https://github.com/Jatin-nicon/tenali/commit/d42b5b6c3a4e3ec993cebf4773dc8c301b540af6) — **Ahana Banerjee** — integrated the new Learning Journey feature, enabling structured learning with sequential unlock rules, automatic integration with existing concept quiz modules, and cumulative 15-question topic checkpoints.
+- 📌 [`d42b5b6c`](https://github.com/vicharanashala/tenali/commit/d42b5b6c3a4e3ec993cebf4773dc8c301b540af6) — **Ahana Banerjee** — integrated the new Learning Journey feature, enabling structured learning with sequential unlock rules, automatic integration with existing concept quiz modules, and cumulative 15-question topic checkpoints.
     - 📁 **7 files:** `client/src/App.css` `+33 −0`, `client/src/App.jsx` `+622 −7`, `server/auth.js` `+2 −1`, `server/index.js` `+90 −1`, `server/lil/learning_journey/controllers.js` `+279 −0`, `server/lil/learning_journey/journeyData.js` `+149 −0`, `server/lil/learning_journey/models.js` `+35 −0`
     - 📊 **`+1210 −9`** · 7 files
 
 #### 📅 2026-07-12  <sub>(2 commits)</sub>
 
-- 📌 [`4c5096b9`](https://github.com/Jatin-nicon/tenali/commit/4c5096b9bcf4bf55bceddff875510331ac952dce) — **Ahana Banerjee** — Merge remote-tracking branch 'origin/main' into feature/AN-goal-based-practice-sessions
-- ✨ [`db31c33b`](https://github.com/Jatin-nicon/tenali/commit/db31c33b3b9884fe8d65db7f25d4b68dbb6834e1) — **Krishna Gelra** — modular language puzzles framework & word creator
-    - 📁 **10 files:** `.gitignore` `+3 −0`, `client/src/App.jsx` `+31 −6`, `client/src/language/LanguageDashboard.jsx` `+68 −0`, `client/src/language/WordCreatorApp.jsx` `+765 −0`, `client/vite.config.js` `+2 −0`, `scratch/generate_puzzles.js` `+228 −0`, `server/index.js` `+7 −0`, `server/routes/wordCreator.js` `+131 −0` *(+2 more in [`db31c33b`](https://github.com/Jatin-nicon/tenali/commit/db31c33b3b9884fe8d65db7f25d4b68dbb6834e1))*
+- 📌 [`4c5096b9`](https://github.com/vicharanashala/tenali/commit/4c5096b9bcf4bf55bceddff875510331ac952dce) — **Ahana Banerjee** — Merge remote-tracking branch 'origin/main' into feature/AN-goal-based-practice-sessions
+- ✨ [`db31c33b`](https://github.com/vicharanashala/tenali/commit/db31c33b3b9884fe8d65db7f25d4b68dbb6834e1) — **Krishna Gelra** — modular language puzzles framework & word creator
+    - 📁 **10 files:** `.gitignore` `+3 −0`, `client/src/App.jsx` `+31 −6`, `client/src/language/LanguageDashboard.jsx` `+68 −0`, `client/src/language/WordCreatorApp.jsx` `+765 −0`, `client/vite.config.js` `+2 −0`, `scratch/generate_puzzles.js` `+228 −0`, `server/index.js` `+7 −0`, `server/routes/wordCreator.js` `+131 −0` *(+2 more in [`db31c33b`](https://github.com/vicharanashala/tenali/commit/db31c33b3b9884fe8d65db7f25d4b68dbb6834e1))*
     - 📊 **`+25537 −6`** · 10 files
 
 #### 📅 2026-07-11  <sub>(11 commits)</sub>
 
-- ✨ [`2b26b4d3`](https://github.com/Jatin-nicon/tenali/commit/2b26b4d35ff129ac6061bb7375a7dde258ce7cca) — **KCDharshan9** — implement Word Explorer and enriched definition popovers with SVG visuals
-    - 📁 **9 files:** `client/src/App.css` `+75 −2`, `client/src/components/KeyTerms.jsx` `+56 −23`, `client/src/data/glossaryEnrichments.json` `+1317 −0`, `client/src/data/glossaryTerms.json` `+2955 −268`, `client/src/data/glossaryVisuals.jsx` `+1846 −0`, `client/src/data/merge_enrichments.ps1` `+48 −0`, `client/src/data/phase2_new_entries.ps1` `+289 −0`, `client/src/data/rewrite_topic_map.ps1` `+139 −0` *(+1 more in [`2b26b4d3`](https://github.com/Jatin-nicon/tenali/commit/2b26b4d35ff129ac6061bb7375a7dde258ce7cca))*
+- ✨ [`2b26b4d3`](https://github.com/vicharanashala/tenali/commit/2b26b4d35ff129ac6061bb7375a7dde258ce7cca) — **KCDharshan9** — implement Word Explorer and enriched definition popovers with SVG visuals
+    - 📁 **9 files:** `client/src/App.css` `+75 −2`, `client/src/components/KeyTerms.jsx` `+56 −23`, `client/src/data/glossaryEnrichments.json` `+1317 −0`, `client/src/data/glossaryTerms.json` `+2955 −268`, `client/src/data/glossaryVisuals.jsx` `+1846 −0`, `client/src/data/merge_enrichments.ps1` `+48 −0`, `client/src/data/phase2_new_entries.ps1` `+289 −0`, `client/src/data/rewrite_topic_map.ps1` `+139 −0` *(+1 more in [`2b26b4d3`](https://github.com/vicharanashala/tenali/commit/2b26b4d35ff129ac6061bb7375a7dde258ce7cca))*
     - 📊 **`+7298 −747`** · 9 files
-- ✨ [`208cc640`](https://github.com/Jatin-nicon/tenali/commit/208cc640f443caba4bd7491ed3a116677c340c7b) — **varshini-nandula** — implement unified profile showcase with category dropdown, collapsible cabinet layout, circular close buttons and polished visual cards
+- ✨ [`208cc640`](https://github.com/vicharanashala/tenali/commit/208cc640f443caba4bd7491ed3a116677c340c7b) — **varshini-nandula** — implement unified profile showcase with category dropdown, collapsible cabinet layout, circular close buttons and polished visual cards
     - 📁 **3 files:** `client/src/App.css` `+5417 −4862`, `client/src/App.jsx` `+258 −350`, `server/index.js` `+15 −3`
     - 📊 **`+5690 −5215`** · 3 files
-- 💄 [`ddbb64a4`](https://github.com/Jatin-nicon/tenali/commit/ddbb64a4b2845f0689eaa243c8d149eba76640d1) — **varshini-nandula** — update bronze, gold, and silver topic badge designs
-- ✨ [`aa75fab3`](https://github.com/Jatin-nicon/tenali/commit/aa75fab335c76260a71c2a9bb2f6452799bdd518) — **varshini-nandula** — implement real-time badge unlock celebration modal with CSS confetti
+- 💄 [`ddbb64a4`](https://github.com/vicharanashala/tenali/commit/ddbb64a4b2845f0689eaa243c8d149eba76640d1) — **varshini-nandula** — update bronze, gold, and silver topic badge designs
+- ✨ [`aa75fab3`](https://github.com/vicharanashala/tenali/commit/aa75fab335c76260a71c2a9bb2f6452799bdd518) — **varshini-nandula** — implement real-time badge unlock celebration modal with CSS confetti
     - 📁 **2 files:** `client/src/App.css` `+29 −7`, `client/src/App.jsx` `+152 −34`
     - 📊 **`+181 −41`** · 2 files
-- ✨ [`aafeae59`](https://github.com/Jatin-nicon/tenali/commit/aafeae593c44812e126ae884fcda85a48b36cc48) — **Shubh dixit** — Visual Learning Universe title size fix, Guide & UI tweaks
+- ✨ [`aafeae59`](https://github.com/vicharanashala/tenali/commit/aafeae593c44812e126ae884fcda85a48b36cc48) — **Shubh dixit** — Visual Learning Universe title size fix, Guide & UI tweaks
     - 📁 **7 files:** `client/src/App.css` `+39 −27`, `client/src/App.jsx` `+13429 −6332`, `client/src/VisualMathLabRedux.jsx` `+39 −36`, `client/src/components/OnboardingTour.css` `+59 −44`, `client/src/components/OnboardingTour.jsx` `+2 −2`, `client/src/components/VoiceAssistant.jsx` `+0 −12`, `client/src/kid-zone.css` `+15 −15`
     - 📊 **`+13583 −6468`** · 7 files
-- ✨ [`675d4852`](https://github.com/Jatin-nicon/tenali/commit/675d4852aa324b79cd9a4cdecbdf12ad04ffb4d4) — **poorvipravallika06** — implement progressive gamified levels and retry flow for HCF/LCM quiz
+- ✨ [`675d4852`](https://github.com/vicharanashala/tenali/commit/675d4852aa324b79cd9a4cdecbdf12ad04ffb4d4) — **poorvipravallika06** — implement progressive gamified levels and retry flow for HCF/LCM quiz
     - 📁 **2 files:** `client/src/LcmHcfApp.css` `+63 −7`, `client/src/LcmHcfApp.jsx` `+116 −34`
     - 📊 **`+179 −41`** · 2 files
-- ✨ [`c821e515`](https://github.com/Jatin-nicon/tenali/commit/c821e515762caf01712c357daab74388b08f64e0) — **varshini-nandula** — improve badge visibility, fix badge image path resolutions, and unify locked state with disabled Keep Practicing! button
+- ✨ [`c821e515`](https://github.com/vicharanashala/tenali/commit/c821e515762caf01712c357daab74388b08f64e0) — **varshini-nandula** — improve badge visibility, fix badge image path resolutions, and unify locked state with disabled Keep Practicing! button
     - 📁 **2 files:** `client/src/App.css` `+6 −5`, `client/src/App.jsx` `+8 −15`
     - 📊 **`+14 −20`** · 2 files
-- ✨ [`fe29397c`](https://github.com/Jatin-nicon/tenali/commit/fe29397cd5e47b5c897a2695bfb6688c8710346b) — **varshini-nandula** — implement gamified profile achievement showcase with badge selector modal
+- ✨ [`fe29397c`](https://github.com/vicharanashala/tenali/commit/fe29397cd5e47b5c897a2695bfb6688c8710346b) — **varshini-nandula** — implement gamified profile achievement showcase with badge selector modal
     - 📁 **3 files:** `client/src/App.css` `+1570 −283`, `client/src/App.jsx` `+11997 −6220`, `server/index.js` `+76 −9`
     - 📊 **`+13643 −6512`** · 3 files
-- ✨ [`1c2d6c7b`](https://github.com/Jatin-nicon/tenali/commit/1c2d6c7b3968482892446cc41ddd8cd93921952a) — **varshini-nandula** — implement achievement collections and profile showcase with streak tracking
+- ✨ [`1c2d6c7b`](https://github.com/vicharanashala/tenali/commit/1c2d6c7b3968482892446cc41ddd8cd93921952a) — **varshini-nandula** — implement achievement collections and profile showcase with streak tracking
     - 📁 **6 files:** `.gitignore` `+0 −2`, `client/src/App.css` `+817 −0`, `client/src/App.jsx` `+773 −4`, `server/auth.js` `+12 −0`, `server/collections.json` `+92 −0`, `server/index.js` `+251 −4`
     - 📊 **`+1945 −10`** · 6 files
-- 📌 [`09cdd5a2`](https://github.com/Jatin-nicon/tenali/commit/09cdd5a2edd3d96cf6a69d6bca30706a1d5a8356) — **varshini-nandula** — Merge branch 'main' of https://github.com/vicharanashala/tenali into feat/profile-achievement-showcase
-- 🔧 [`fe8377d9`](https://github.com/Jatin-nicon/tenali/commit/fe8377d99620136c4f6ad0470866a0ae679d6c41) — **varshini-nandula** — remove docs from directory
+- 📌 [`09cdd5a2`](https://github.com/vicharanashala/tenali/commit/09cdd5a2edd3d96cf6a69d6bca30706a1d5a8356) — **varshini-nandula** — Merge branch 'main' of https://github.com/vicharanashala/tenali into feat/profile-achievement-showcase
+- 🔧 [`fe8377d9`](https://github.com/vicharanashala/tenali/commit/fe8377d99620136c4f6ad0470866a0ae679d6c41) — **varshini-nandula** — remove docs from directory
     - 📁 **1 file:** `docs/feature_walkthrough/learning-transfer-challenges-walkthrough.md` `+0 −247`
     - 📊 **`+0 −247`** · 1 file
 
 #### 📅 2026-07-10  <sub>(23 commits)</sub>
 
-- 📌 [`97ed83da`](https://github.com/Jatin-nicon/tenali/commit/97ed83dacba6a2110595c28437337ee60361b4e4) — **Vaibhav** — Fix PR #18 review findings: simplify word problem, resolve ESLint warnings, and update pedagogical references
+- 📌 [`97ed83da`](https://github.com/vicharanashala/tenali/commit/97ed83dacba6a2110595c28437337ee60361b4e4) — **Vaibhav** — Fix PR #18 review findings: simplify word problem, resolve ESLint warnings, and update pedagogical references
     - 📁 **2 files:** `client/src/App.jsx` `+77 −8`, `exercise-references.md` `+5 −5`
     - 📊 **`+82 −13`** · 2 files
-- 📌 [`cf3ae059`](https://github.com/Jatin-nicon/tenali/commit/cf3ae059c059fb505ec1c0fc2a8cd6db2ac345b4) — **Vaibhav** — Replace Error Communication with Root Decoder & update etymology references
+- 📌 [`cf3ae059`](https://github.com/vicharanashala/tenali/commit/cf3ae059c059fb505ec1c0fc2a8cd6db2ac345b4) — **Vaibhav** — Replace Error Communication with Root Decoder & update etymology references
     - 📁 **2 files:** `client/src/App.jsx` `+171 −89`, `exercise-references.md` `+16 −0`
     - 📊 **`+187 −89`** · 2 files
-- 📝 [`6f9c4989`](https://github.com/Jatin-nicon/tenali/commit/6f9c49899363c5e25ab978d2125b59d23347b432) — **Vaibhav** — create exercise research references document
+- 📝 [`6f9c4989`](https://github.com/vicharanashala/tenali/commit/6f9c49899363c5e25ab978d2125b59d23347b432) — **Vaibhav** — create exercise research references document
     - 📁 **1 file:** `exercise-references.md` `+159 −0`
     - 📊 **`+159 −0`** · 1 file
-- ✨ [`3e6d0453`](https://github.com/Jatin-nicon/tenali/commit/3e6d0453530b4386ed7a386895847eea5934fba7) — **Vaibhav** — implement minimalist grid dashboard layout to reduce cognitive load in v0.1.3
+- ✨ [`3e6d0453`](https://github.com/vicharanashala/tenali/commit/3e6d0453530b4386ed7a386895847eea5934fba7) — **Vaibhav** — implement minimalist grid dashboard layout to reduce cognitive load in v0.1.3
     - 📁 **2 files:** `CHANGELOG.md` `+9 −0`, `client/src/App.jsx` `+65 −33`
     - 📊 **`+74 −33`** · 2 files
-- ✨ [`1140312c`](https://github.com/Jatin-nicon/tenali/commit/1140312c3f371d86307479fd524dbc2d6f818d32) — **Vaibhav** — add 3 new general math literacy exercises for v0.1.2
+- ✨ [`1140312c`](https://github.com/vicharanashala/tenali/commit/1140312c3f371d86307479fd524dbc2d6f818d32) — **Vaibhav** — add 3 new general math literacy exercises for v0.1.2
     - 📁 **2 files:** `CHANGELOG.md` `+8 −0`, `client/src/App.jsx` `+211 −1`
     - 📊 **`+219 −1`** · 2 files
-- ✨ [`3506c26b`](https://github.com/Jatin-nicon/tenali/commit/3506c26b7e754f4dfbb3227fb2e490392a5d65a9) — **Vaibhav** — add 5 new literacy exercises to Vachana module
+- ✨ [`3506c26b`](https://github.com/vicharanashala/tenali/commit/3506c26b7e754f4dfbb3227fb2e490392a5d65a9) — **Vaibhav** — add 5 new literacy exercises to Vachana module
     - 📁 **2 files:** `CHANGELOG.md` `+43 −0`, `client/src/App.jsx` `+399 −1`
     - 📊 **`+442 −1`** · 2 files
-- 📌 [`ea55e5a6`](https://github.com/Jatin-nicon/tenali/commit/ea55e5a60bb1e50a4807cf9a9593aa4414cbaebf) — **Vaibhav** — Fix PR #18 review findings: simplify word problem, resolve ESLint warnings, and update pedagogical references
+- 📌 [`ea55e5a6`](https://github.com/vicharanashala/tenali/commit/ea55e5a60bb1e50a4807cf9a9593aa4414cbaebf) — **Vaibhav** — Fix PR #18 review findings: simplify word problem, resolve ESLint warnings, and update pedagogical references
     - 📁 **2 files:** `client/src/App.jsx` `+77 −8`, `exercise-references.md` `+5 −5`
     - 📊 **`+82 −13`** · 2 files
-- 📌 [`6fa50ade`](https://github.com/Jatin-nicon/tenali/commit/6fa50ade6e60a3771ba63b21606ba16d34bd3646) — **poorvipravallika06** — Implement confidence-based quiz progression flow (sequential redirection)
+- 📌 [`6fa50ade`](https://github.com/vicharanashala/tenali/commit/6fa50ade6e60a3771ba63b21606ba16d34bd3646) — **poorvipravallika06** — Implement confidence-based quiz progression flow (sequential redirection)
     - 📁 **1 file:** `client/src/LcmHcfApp.jsx` `+16 −9`
     - 📊 **`+16 −9`** · 1 file
-- 📌 [`18c89c1e`](https://github.com/Jatin-nicon/tenali/commit/18c89c1e25de203e0e27029c80edb3814462ecc8) — **Vaibhav** — Replace Error Communication with Root Decoder & update etymology references
+- 📌 [`18c89c1e`](https://github.com/vicharanashala/tenali/commit/18c89c1e25de203e0e27029c80edb3814462ecc8) — **Vaibhav** — Replace Error Communication with Root Decoder & update etymology references
     - 📁 **2 files:** `client/src/App.jsx` `+140 −58`, `exercise-references.md` `+16 −0`
     - 📊 **`+156 −58`** · 2 files
-- 📌 [`de4f3882`](https://github.com/Jatin-nicon/tenali/commit/de4f3882d00e233a547cc6c621fd352058a22a51) — **poorvipravallika06** — Remove unused variables in LcmHcfApp.jsx to pass eslint checks
+- 📌 [`de4f3882`](https://github.com/vicharanashala/tenali/commit/de4f3882d00e233a547cc6c621fd352058a22a51) — **poorvipravallika06** — Remove unused variables in LcmHcfApp.jsx to pass eslint checks
     - 📁 **1 file:** `client/src/LcmHcfApp.jsx` `+1 −7`
     - 📊 **`+1 −7`** · 1 file
-- 📌 [`3dd1cc47`](https://github.com/Jatin-nicon/tenali/commit/3dd1cc470681b463e57bb28acfb9e55f5efc8005) — **poorvipravallika06** — Refine HCF Venn circles padding, cap LCM jump height, and implement progressive quiz tiers
+- 📌 [`3dd1cc47`](https://github.com/vicharanashala/tenali/commit/3dd1cc470681b463e57bb28acfb9e55f5efc8005) — **poorvipravallika06** — Refine HCF Venn circles padding, cap LCM jump height, and implement progressive quiz tiers
     - 📁 **3 files:** `client/src/LcmHcfApp.css` `+152 −35`, `client/src/LcmHcfApp.jsx` `+514 −222`, `server/index.js` `+147 −26`
     - 📊 **`+813 −283`** · 3 files
-- 📝 [`046ee1dc`](https://github.com/Jatin-nicon/tenali/commit/046ee1dc5ffe8f23330d86fadf5799757b182a7e) — **Vaibhav** — create exercise research references document
+- 📝 [`046ee1dc`](https://github.com/vicharanashala/tenali/commit/046ee1dc5ffe8f23330d86fadf5799757b182a7e) — **Vaibhav** — create exercise research references document
     - 📁 **1 file:** `exercise-references.md` `+159 −0`
     - 📊 **`+159 −0`** · 1 file
-- ✨ [`4437380c`](https://github.com/Jatin-nicon/tenali/commit/4437380c31e3af03463e9451cca2a234b98d44da) — **Vaibhav** — implement minimalist grid dashboard layout to reduce cognitive load in v0.1.3
+- ✨ [`4437380c`](https://github.com/vicharanashala/tenali/commit/4437380c31e3af03463e9451cca2a234b98d44da) — **Vaibhav** — implement minimalist grid dashboard layout to reduce cognitive load in v0.1.3
     - 📁 **2 files:** `CHANGELOG.md` `+9 −0`, `client/src/App.jsx` `+65 −33`
     - 📊 **`+74 −33`** · 2 files
-- ♻️ [`37daf1d0`](https://github.com/Jatin-nicon/tenali/commit/37daf1d0de8c24de563f228ff8669ab4c6b0386a) — **varshini-nandula** — standardize hints formatting for first 5 modules to match exact prefixes without emojis
+- ♻️ [`37daf1d0`](https://github.com/vicharanashala/tenali/commit/37daf1d0de8c24de563f228ff8669ab4c6b0386a) — **varshini-nandula** — standardize hints formatting for first 5 modules to match exact prefixes without emojis
     - 📁 **1 file:** `server/transferScenarios.js` `+54 −51`
     - 📊 **`+54 −51`** · 1 file
-- 💄 [`57ae244b`](https://github.com/Jatin-nicon/tenali/commit/57ae244b3410a5bff7f94748ea37b1de9665d5b3) — **varshini-nandula** — normalize indentation in transferScenarios.js
+- 💄 [`57ae244b`](https://github.com/vicharanashala/tenali/commit/57ae244b3410a5bff7f94748ea37b1de9665d5b3) — **varshini-nandula** — normalize indentation in transferScenarios.js
     - 📁 **1 file:** `server/transferScenarios.js` `+122 −124`
     - 📊 **`+122 −124`** · 1 file
-- ♻️ [`bb681ce0`](https://github.com/Jatin-nicon/tenali/commit/bb681ce002da367539486baa38328cebd2232caa) — **varshini-nandula** — apply Tenali Question & Hint Design Guide Part 1 to percentage, ratio, fractionadd, addition, and decimals modules
+- ♻️ [`bb681ce0`](https://github.com/vicharanashala/tenali/commit/bb681ce002da367539486baa38328cebd2232caa) — **varshini-nandula** — apply Tenali Question & Hint Design Guide Part 1 to percentage, ratio, fractionadd, addition, and decimals modules
     - 📁 **1 file:** `server/transferScenarios.js` `+52 −50`
     - 📊 **`+52 −50`** · 1 file
-- ✨ [`0c3094aa`](https://github.com/Jatin-nicon/tenali/commit/0c3094aa4955245f28d5a4a1413fbbb8b698fa28) — **Vaibhav** — add 3 new general math literacy exercises for v0.1.2
+- ✨ [`0c3094aa`](https://github.com/vicharanashala/tenali/commit/0c3094aa4955245f28d5a4a1413fbbb8b698fa28) — **Vaibhav** — add 3 new general math literacy exercises for v0.1.2
     - 📁 **2 files:** `CHANGELOG.md` `+8 −0`, `client/src/App.jsx` `+211 −1`
     - 📊 **`+219 −1`** · 2 files
-- 📌 [`9dbfa2c6`](https://github.com/Jatin-nicon/tenali/commit/9dbfa2c6769a035775cc3efcb24556474144f83c) — **Shubh dixit** — Resolve merge conflicts with main
-- 📌 [`e408a793`](https://github.com/Jatin-nicon/tenali/commit/e408a793accba9080ac3cf52722cf8ecd10845b2) — **Shubh dixit** — UI standardization, premium dark theme updates, and module layout improvements
-    - 📁 **13 files:** `client/src/App.css` `+1 −1`, `client/src/App.jsx` `+522 −156`, `client/src/BearingsLabApp.jsx` `+913 −0`, `client/src/CoordGeomDiscoveryApp.jsx` `+263 −0`, `client/src/ProbLabApp.jsx` `+1454 −0`, `client/src/PythagLabApp.jsx` `+1431 −0`, `client/src/VisualMathLabRedux.jsx` `+147 −115`, `client/src/components/CoordinateGrid.jsx` `+139 −0` *(+5 more in [`e408a793`](https://github.com/Jatin-nicon/tenali/commit/e408a793accba9080ac3cf52722cf8ecd10845b2))*
+- 📌 [`9dbfa2c6`](https://github.com/vicharanashala/tenali/commit/9dbfa2c6769a035775cc3efcb24556474144f83c) — **Shubh dixit** — Resolve merge conflicts with main
+- 📌 [`e408a793`](https://github.com/vicharanashala/tenali/commit/e408a793accba9080ac3cf52722cf8ecd10845b2) — **Shubh dixit** — UI standardization, premium dark theme updates, and module layout improvements
+    - 📁 **13 files:** `client/src/App.css` `+1 −1`, `client/src/App.jsx` `+522 −156`, `client/src/BearingsLabApp.jsx` `+913 −0`, `client/src/CoordGeomDiscoveryApp.jsx` `+263 −0`, `client/src/ProbLabApp.jsx` `+1454 −0`, `client/src/PythagLabApp.jsx` `+1431 −0`, `client/src/VisualMathLabRedux.jsx` `+147 −115`, `client/src/components/CoordinateGrid.jsx` `+139 −0` *(+5 more in [`e408a793`](https://github.com/vicharanashala/tenali/commit/e408a793accba9080ac3cf52722cf8ecd10845b2))*
     - 📊 **`+5035 −340`** · 13 files
-- ✨ [`15e55762`](https://github.com/Jatin-nicon/tenali/commit/15e557623463bb0cb82c39ec646e2ea8e95d5107) — **Vaibhav** — add 5 new literacy exercises to Vachana module
+- ✨ [`15e55762`](https://github.com/vicharanashala/tenali/commit/15e557623463bb0cb82c39ec646e2ea8e95d5107) — **Vaibhav** — add 5 new literacy exercises to Vachana module
     - 📁 **3 files:** `CHANGELOG.md` `+43 −0`, `client/src/App.jsx` `+399 −1`, `package-lock.json` `+1 −1`
     - 📊 **`+443 −2`** · 3 files
-- ♻️ [`86c0c1c2`](https://github.com/Jatin-nicon/tenali/commit/86c0c1c29d2b62f492869e88a536ddcaf50bafe9) — **varshini-nandula** — update prompt and hints for remaining learning transfer challenges according to design guide
+- ♻️ [`86c0c1c2`](https://github.com/vicharanashala/tenali/commit/86c0c1c29d2b62f492869e88a536ddcaf50bafe9) — **varshini-nandula** — update prompt and hints for remaining learning transfer challenges according to design guide
     - 📁 **1 file:** `server/transferScenarios.js` `+224 −223`
     - 📊 **`+224 −223`** · 1 file
-- 📌 [`717bd0f1`](https://github.com/Jatin-nicon/tenali/commit/717bd0f14ef8bc128552e287db1febfa1427af00) — **muditagrawal2007** — change
+- 📌 [`717bd0f1`](https://github.com/vicharanashala/tenali/commit/717bd0f14ef8bc128552e287db1febfa1427af00) — **muditagrawal2007** — change
     - 📁 **2 files:** `client/src/LinearAlgebraApp.css` `+11 −1`, `client/src/LinearAlgebraApp.jsx` `+1850 −249`
     - 📊 **`+1861 −250`** · 2 files
-- 📌 [`88fb6fc6`](https://github.com/Jatin-nicon/tenali/commit/88fb6fc6b6d22a60ef38962144b4d020e4f8fd1b) — **jgupta05072003-code** — 🔀 PR [#10](https://github.com/Jatin-nicon/tenali/pull/10) from `muditagrawal2007` — new
+- 📌 [`88fb6fc6`](https://github.com/vicharanashala/tenali/commit/88fb6fc6b6d22a60ef38962144b4d020e4f8fd1b) — **jgupta05072003-code** — 🔀 PR [#10](https://github.com/vicharanashala/tenali/pull/10) from `muditagrawal2007` — new
 
 #### 📅 2026-07-09  <sub>(46 commits)</sub>
 
-- ✨ [`b3573e4c`](https://github.com/Jatin-nicon/tenali/commit/b3573e4c77e47e878b38f15b3c51ae148148f22d) — **priyanshu7725** — add tenali:openHall event for programmatic Hall opening
+- ✨ [`b3573e4c`](https://github.com/vicharanashala/tenali/commit/b3573e4c77e47e878b38f15b3c51ae148148f22d) — **priyanshu7725** — add tenali:openHall event for programmatic Hall opening
     - 📁 **1 file:** `client/src/App.jsx` `+5 −0`
     - 📊 **`+5 −0`** · 1 file
-- ✨ [`e111ada8`](https://github.com/Jatin-nicon/tenali/commit/e111ada8b7b91964e67218e4fe8fdf536ad2fca2) — **priyanshu7725** — expose event history in debug surface via _monstersDebug.eventLog()
+- ✨ [`e111ada8`](https://github.com/vicharanashala/tenali/commit/e111ada8b7b91964e67218e4fe8fdf536ad2fca2) — **priyanshu7725** — expose event history in debug surface via _monstersDebug.eventLog()
     - 📁 **1 file:** `client/src/monsters/fetchInterceptor.js` `+32 −1`
     - 📊 **`+32 −1`** · 1 file
-- 🐛 [`bc54a288`](https://github.com/Jatin-nicon/tenali/commit/bc54a288cfe8954a3927177f01dd6117005c1695) — **priyanshu7725** — add 22 missing topic API proxy entries discovered in audit
+- 🐛 [`bc54a288`](https://github.com/vicharanashala/tenali/commit/bc54a288cfe8954a3927177f01dd6117005c1695) — **priyanshu7725** — add 22 missing topic API proxy entries discovered in audit
     - 📁 **1 file:** `client/vite.config.js` `+30 −0`
     - 📊 **`+30 −0`** · 1 file
-- 🐛 [`6feace80`](https://github.com/Jatin-nicon/tenali/commit/6feace8031f0a8214426a46ebc14e78f276cbfd7) — **priyanshu7725** — add proxy entries for decimals, squaring, lineareq topic APIs
+- 🐛 [`6feace80`](https://github.com/vicharanashala/tenali/commit/6feace8031f0a8214426a46ebc14e78f276cbfd7) — **priyanshu7725** — add proxy entries for decimals, squaring, lineareq topic APIs
     - 📁 **1 file:** `client/vite.config.js` `+6 −0`
     - 📊 **`+6 −0`** · 1 file
-- 🐛 [`8e9d478f`](https://github.com/Jatin-nicon/tenali/commit/8e9d478f6b65b074dfe54709aea6ce24d25a7995) — **priyanshu7725** — capture /question response + /check request body to classify wrong answers
+- 🐛 [`8e9d478f`](https://github.com/vicharanashala/tenali/commit/8e9d478f6b65b074dfe54709aea6ce24d25a7995) — **priyanshu7725** — capture /question response + /check request body to classify wrong answers
     - 📁 **2 files:** `client/src/monsters/__tests__/fetchInterceptor.test.js` `+62 −5`, `client/src/monsters/fetchInterceptor.js` `+85 −14`
     - 📊 **`+147 −19`** · 2 files
-- 📝 [`f13e48f6`](https://github.com/Jatin-nicon/tenali/commit/f13e48f651d7c6c7ba6f9eb263294a21cd4878f8) — **priyanshu7725** — CHANGELOG entry for step 6
+- 📝 [`f13e48f6`](https://github.com/vicharanashala/tenali/commit/f13e48f651d7c6c7ba6f9eb263294a21cd4878f8) — **priyanshu7725** — CHANGELOG entry for step 6
     - 📁 **1 file:** `client/src/monsters/CHANGELOG.md` `+84 −0`
     - 📊 **`+84 −0`** · 1 file
-- ✨ [`1761b4d0`](https://github.com/Jatin-nicon/tenali/commit/1761b4d0c281c1c981872eb0a9d0f3b2cb95c14e) — **priyanshu7725** — HallPanel + MonsterCard + MonsterDetail (step 6)
+- ✨ [`1761b4d0`](https://github.com/vicharanashala/tenali/commit/1761b4d0c281c1c981872eb0a9d0f3b2cb95c14e) — **priyanshu7725** — HallPanel + MonsterCard + MonsterDetail (step 6)
     - 📁 **7 files:** `client/src/App.jsx` `+46 −2`, `client/src/monsters/HallPanel.jsx` `+285 −0`, `client/src/monsters/MonsterCard.jsx` `+167 −0`, `client/src/monsters/MonsterDetail.jsx` `+310 −0`, `client/src/monsters/__tests__/hallPanel.test.cjs` `+129 −0`, `client/src/monsters/__tests__/monsterToast.parse.cjs` `+3 −0`, `client/src/monsters/fetchInterceptor.js` `+16 −2`
     - 📊 **`+956 −4`** · 7 files
-- 📝 [`cf3ad92c`](https://github.com/Jatin-nicon/tenali/commit/cf3ad92cfa182f85738b9e108914a101faabce87) — **priyanshu7725** — CHANGELOG entry for step 5
+- 📝 [`cf3ad92c`](https://github.com/vicharanashala/tenali/commit/cf3ad92cfa182f85738b9e108914a101faabce87) — **priyanshu7725** — CHANGELOG entry for step 5
     - 📁 **1 file:** `client/src/monsters/CHANGELOG.md` `+64 −0`
     - 📊 **`+64 −0`** · 1 file
-- ✨ [`92b611b6`](https://github.com/Jatin-nicon/tenali/commit/92b611b697e2e707cbe6e7175eefa90a14829500) — **priyanshu7725** — toast component + App.jsx mount (step 5)
+- ✨ [`92b611b6`](https://github.com/vicharanashala/tenali/commit/92b611b697e2e707cbe6e7175eefa90a14829500) — **priyanshu7725** — toast component + App.jsx mount (step 5)
     - 📁 **4 files:** `client/src/App.jsx` `+11 −0`, `client/src/monsters/MonsterToast.jsx` `+271 −0`, `client/src/monsters/__tests__/monsterToast.parse.cjs` `+40 −0`, `client/src/monsters/__tests__/monsterToast.test.cjs` `+193 −0`
     - 📊 **`+515 −0`** · 4 files
-- 📝 [`ae0f86b6`](https://github.com/Jatin-nicon/tenali/commit/ae0f86b6033af4452fa7af9c7270f4b4c3a994c9) — **priyanshu7725** — CHANGELOG entry for step 4
+- 📝 [`ae0f86b6`](https://github.com/vicharanashala/tenali/commit/ae0f86b6033af4452fa7af9c7270f4b4c3a994c9) — **priyanshu7725** — CHANGELOG entry for step 4
     - 📁 **1 file:** `client/src/monsters/CHANGELOG.md` `+66 −0`
     - 📊 **`+66 −0`** · 1 file
-- ✨ [`b4b3e101`](https://github.com/Jatin-nicon/tenali/commit/b4b3e101a58a5d413f92243553dd53ead2c84939) — **priyanshu7725** — fetch interceptor with topic allow-list + debug surface + atomic append (step 4)
+- ✨ [`b4b3e101`](https://github.com/vicharanashala/tenali/commit/b4b3e101a58a5d413f92243553dd53ead2c84939) — **priyanshu7725** — fetch interceptor with topic allow-list + debug surface + atomic append (step 4)
     - 📁 **2 files:** `client/src/monsters/__tests__/fetchInterceptor.test.js` `+202 −0`, `client/src/monsters/fetchInterceptor.js` `+394 −0`
     - 📊 **`+596 −0`** · 2 files
-- 📝 [`580633d6`](https://github.com/Jatin-nicon/tenali/commit/580633d6ac474c956e96577d70a8ba471422871c) — **priyanshu7725** — CHANGELOG entry for step 3
+- 📝 [`580633d6`](https://github.com/vicharanashala/tenali/commit/580633d6ac474c956e96577d70a8ba471422871c) — **priyanshu7725** — CHANGELOG entry for step 3
     - 📁 **1 file:** `client/src/monsters/CHANGELOG.md` `+51 −0`
     - 📊 **`+51 −0`** · 1 file
-- 🐛 [`1a81ec55`](https://github.com/Jatin-nicon/tenali/commit/1a81ec55251d6eab339a3d449ca202042f77afa8) — **priyanshu7725** — broaden Bracketeer regex, fix Decimal Drifter ratio threshold
+- 🐛 [`1a81ec55`](https://github.com/vicharanashala/tenali/commit/1a81ec55251d6eab339a3d449ca202042f77afa8) — **priyanshu7725** — broaden Bracketeer regex, fix Decimal Drifter ratio threshold
     - 📁 **2 files:** `client/src/monsters/__tests__/classifier.test.js` `+55 −0`, `client/src/monsters/classifier.js` `+21 −12`
     - 📊 **`+76 −12`** · 2 files
-- ✨ [`a82ba1f6`](https://github.com/Jatin-nicon/tenali/commit/a82ba1f61b36514aac801efb5b3b997345d95028) — **priyanshu7725** — 4-rule classifier with first-match-wins (step 3)
+- ✨ [`a82ba1f6`](https://github.com/vicharanashala/tenali/commit/a82ba1f61b36514aac801efb5b3b997345d95028) — **priyanshu7725** — 4-rule classifier with first-match-wins (step 3)
     - 📁 **1 file:** `client/src/monsters/classifier.js` `+196 −0`
     - 📊 **`+196 −0`** · 1 file
-- 📝 [`3081a602`](https://github.com/Jatin-nicon/tenali/commit/3081a6026af40eae45ada686d34895b848b23800) — **priyanshu7725** — CHANGELOG entry for step 2
+- 📝 [`3081a602`](https://github.com/vicharanashala/tenali/commit/3081a6026af40eae45ada686d34895b848b23800) — **priyanshu7725** — CHANGELOG entry for step 2
     - 📁 **1 file:** `client/src/monsters/CHANGELOG.md` `+42 −0`
     - 📊 **`+42 −0`** · 1 file
-- ✨ [`90757819`](https://github.com/Jatin-nicon/tenali/commit/90757819012e341c71b5d05d6d5a8ad405eb074d) — **priyanshu7725** — localStorage abstraction (step 2)
+- ✨ [`90757819`](https://github.com/vicharanashala/tenali/commit/90757819012e341c71b5d05d6d5a8ad405eb074d) — **priyanshu7725** — localStorage abstraction (step 2)
     - 📁 **1 file:** `client/src/monsters/monsterStore.js` `+276 −0`
     - 📊 **`+276 −0`** · 1 file
-- 📝 [`7daadc79`](https://github.com/Jatin-nicon/tenali/commit/7daadc790c4358cee3b2909a6f2d44f57c5ec7ce) — **priyanshu7725** — CHANGELOG entry for step 1
+- 📝 [`7daadc79`](https://github.com/vicharanashala/tenali/commit/7daadc790c4358cee3b2909a6f2d44f57c5ec7ce) — **priyanshu7725** — CHANGELOG entry for step 1
     - 📁 **1 file:** `client/src/monsters/CHANGELOG.md` `+24 −0`
     - 📊 **`+24 −0`** · 1 file
-- ✨ [`a655d4cb`](https://github.com/Jatin-nicon/tenali/commit/a655d4cbb9d5622b8b926896d921765c406e7b8d) — **priyanshu7725** — add static explanations (step 1)
+- ✨ [`a655d4cb`](https://github.com/vicharanashala/tenali/commit/a655d4cbb9d5622b8b926896d921765c406e7b8d) — **priyanshu7725** — add static explanations (step 1)
     - 📁 **1 file:** `client/src/monsters/monsterExplanations.js` `+100 −0`
     - 📊 **`+100 −0`** · 1 file
-- ✨ [`34562992`](https://github.com/Jatin-nicon/tenali/commit/34562992781d8de1539d79dfa11c062c15a15843) — **priyanshu7725** — create feature branch, scaffold CHANGELOG
+- ✨ [`34562992`](https://github.com/vicharanashala/tenali/commit/34562992781d8de1539d79dfa11c062c15a15843) — **priyanshu7725** — create feature branch, scaffold CHANGELOG
     - 📁 **1 file:** `client/src/monsters/CHANGELOG.md` `+49 −0`
     - 📊 **`+49 −0`** · 1 file
-- 📌 [`5356ef99`](https://github.com/Jatin-nicon/tenali/commit/5356ef991acced2616f057f5f17df454edf4287a) — **Ritish Karmakar** — Refactor Percentages layout to one-card-at-a-time and fix AudioContext singleton; update changelog
+- 📌 [`5356ef99`](https://github.com/vicharanashala/tenali/commit/5356ef991acced2616f057f5f17df454edf4287a) — **Ritish Karmakar** — Refactor Percentages layout to one-card-at-a-time and fix AudioContext singleton; update changelog
     - 📁 **6 files:** `CHANGELOG.md` `+49 −1`, `client/src/App.css` `+15 −0`, `client/src/App.jsx` `+109 −128`, `client/src/PercentExplanationApp.css` `+1542 −654`, `client/src/PercentExplanationApp.jsx` `+400 −228`, `client/src/audioContext.js` `+46 −0`
     - 📊 **`+2161 −1011`** · 6 files
-- ✨ [`129f48cc`](https://github.com/Jatin-nicon/tenali/commit/129f48cc3f3f197147690c7da622e19b1c72202e) — **Vaibhav** — implement Vachana Mathematical Literacy Lab
+- ✨ [`129f48cc`](https://github.com/vicharanashala/tenali/commit/129f48cc3f3f197147690c7da622e19b1c72202e) — **Vaibhav** — implement Vachana Mathematical Literacy Lab
     - 📁 **1 file:** `client/src/App.jsx` `+1141 −0`
     - 📊 **`+1141 −0`** · 1 file
-- 📌 [`dce3d1f0`](https://github.com/Jatin-nicon/tenali/commit/dce3d1f033e37b24060f9bbc6a2cd2881c05ed03) — **poorvipravallika06** — Refactor HCF & LCM module with dynamic quiz, stepper locks, validation popups, accordion examples, and mistake redirection
+- 📌 [`dce3d1f0`](https://github.com/vicharanashala/tenali/commit/dce3d1f033e37b24060f9bbc6a2cd2881c05ed03) — **poorvipravallika06** — Refactor HCF & LCM module with dynamic quiz, stepper locks, validation popups, accordion examples, and mistake redirection
     - 📁 **5 files:** `client/package-lock.json` `+9 −0`, `client/src/LcmHcfApp.css` `+275 −0`, `client/src/LcmHcfApp.jsx` `+803 −286`, `package-lock.json` `+2 −1`, `server/index.js` `+83 −0`
     - 📊 **`+1172 −287`** · 5 files
-- 🐛 [`88878952`](https://github.com/Jatin-nicon/tenali/commit/88878952b3bff6317ea5e69983c9e277e40b1cae) — **KCDharshan9** — restore Vite proxy configuration
+- 🐛 [`88878952`](https://github.com/vicharanashala/tenali/commit/88878952b3bff6317ea5e69983c9e277e40b1cae) — **KCDharshan9** — restore Vite proxy configuration
     - 📁 **1 file:** `client/vite.config.js` `+26 −0`
     - 📊 **`+26 −0`** · 1 file
-- 🔧 [`1e09021a`](https://github.com/Jatin-nicon/tenali/commit/1e09021a5091a818ad6fd356911acbb519b9769c) — **KCDharshan9** — restore unrelated project files
+- 🔧 [`1e09021a`](https://github.com/vicharanashala/tenali/commit/1e09021a5091a818ad6fd356911acbb519b9769c) — **KCDharshan9** — restore unrelated project files
     - 📁 **3 files:** `.gitignore` `+1 −1`, `client/vite.config.js` `+0 −26`, `package-lock.json` `+1 −1`
     - 📊 **`+2 −28`** · 3 files
-- 🔧 [`17822610`](https://github.com/Jatin-nicon/tenali/commit/17822610674e6af37d954454d813a55047b2674f) — **KCDharshan9** — remove internal documentation from repository tracking
+- 🔧 [`17822610`](https://github.com/vicharanashala/tenali/commit/17822610674e6af37d954454d813a55047b2674f) — **KCDharshan9** — remove internal documentation from repository tracking
     - 📁 **8 files:** `AI_HANDOVER.md` `+0 −339`, `LLM_GUIDELINES.md` `+0 −191`, `context.md` `+0 −146`, `docs_and_implementation_plans/Tenali-SRS.md` `+0 −3410`, `docs_and_implementation_plans/attribution_matrix.md` `+0 −153`, `docs_and_implementation_plans/feature-aq.md` `+0 −531`, `docs_and_implementation_plans/tap-to-define-glossary-implementation-plan.md` `+0 −297`, `documentation.md` `+0 −535`
     - 📊 **`+0 −5602`** · 8 files
-- 📌 [`8a493a7d`](https://github.com/Jatin-nicon/tenali/commit/8a493a7dd2ddf2456d791e83629b3fb7a2fde2fc) — **muditagrawal2007** — change
+- 📌 [`8a493a7d`](https://github.com/vicharanashala/tenali/commit/8a493a7dd2ddf2456d791e83629b3fb7a2fde2fc) — **muditagrawal2007** — change
     - 📁 **2 files:** `client/src/LinearAlgebraApp.css` `+7 −0`, `client/src/LinearAlgebraApp.jsx` `+19 −7`
     - 📊 **`+26 −7`** · 2 files
-- ✨ [`d6d932da`](https://github.com/Jatin-nicon/tenali/commit/d6d932da3337cce452a367e0c9c623ad5eb4450d) — **KCDharshan9** — add new question datasets and update server dependencies
+- ✨ [`d6d932da`](https://github.com/vicharanashala/tenali/commit/d6d932da3337cce452a367e0c9c623ad5eb4450d) — **KCDharshan9** — add new question datasets and update server dependencies
     - 📁 **3 files:** `client/src/App.css` `+60 −28`, `client/src/data/glossaryTerms.json` `+16 −16`, `documentation.md` `+4 −11`
     - 📊 **`+80 −55`** · 3 files
-- 📌 [`a386c49c`](https://github.com/Jatin-nicon/tenali/commit/a386c49c7d1bb9027ab1b09796f734f2cd481901) — **muditagrawal2007** — change
+- 📌 [`a386c49c`](https://github.com/vicharanashala/tenali/commit/a386c49c7d1bb9027ab1b09796f734f2cd481901) — **muditagrawal2007** — change
     - 📁 **2 files:** `client/src/LinearAlgebraApp.css` `+3 −0`, `client/src/LinearAlgebraApp.jsx` `+180 −15`
     - 📊 **`+183 −15`** · 2 files
-- ✨ [`51b7510f`](https://github.com/Jatin-nicon/tenali/commit/51b7510f0f6dc0dc2973a24a55acc0288a869be1) — **KCDharshan9** — add multiple vocabulary and question data files and update project dependencies
+- ✨ [`51b7510f`](https://github.com/vicharanashala/tenali/commit/51b7510f0f6dc0dc2973a24a55acc0288a869be1) — **KCDharshan9** — add multiple vocabulary and question data files and update project dependencies
     - 📁 **4 files:** `.gitignore` `+1 −4`, `client/src/App.css` `+159 −44`, `client/src/components/KeyTerms.jsx` `+171 −61`, `documentation.md` `+151 −1`
     - 📊 **`+482 −110`** · 4 files
-- 📌 [`26a3306c`](https://github.com/Jatin-nicon/tenali/commit/26a3306c37c4a4949cce7ccc6e86d8e78c7c4293) — **muditagrawal2007** — change
+- 📌 [`26a3306c`](https://github.com/vicharanashala/tenali/commit/26a3306c37c4a4949cce7ccc6e86d8e78c7c4293) — **muditagrawal2007** — change
     - 📁 **2 files:** `client/src/LinearAlgebraApp.css` `+1 −1`, `client/src/LinearAlgebraApp.jsx` `+23 −5`
     - 📊 **`+24 −6`** · 2 files
-- 📌 [`a45075ee`](https://github.com/Jatin-nicon/tenali/commit/a45075ee170e86ef1800c5297fce6497089764e4) — **muditagrawal2007** — change
+- 📌 [`a45075ee`](https://github.com/vicharanashala/tenali/commit/a45075ee170e86ef1800c5297fce6497089764e4) — **muditagrawal2007** — change
     - 📁 **7 files:** `client/index.html` `+1 −0`, `client/src/App.css` `+2 −0`, `client/src/App.jsx` `+17 −0`, `client/src/LinearAlgebraApp.css` `+146 −0`, `client/src/LinearAlgebraApp.jsx` `+878 −0`, `client/vite.config.js` `+1 −0`, `server/index.js` `+42 −0`
     - 📊 **`+1087 −0`** · 7 files
-- ✨ [`3103083c`](https://github.com/Jatin-nicon/tenali/commit/3103083c6d187700473c80014da4ca55847a11c8) — **varshini-nandula** — implement customized learning transfer templates for all remaining modules and update walkthrough documentation
+- ✨ [`3103083c`](https://github.com/vicharanashala/tenali/commit/3103083c6d187700473c80014da4ca55847a11c8) — **varshini-nandula** — implement customized learning transfer templates for all remaining modules and update walkthrough documentation
     - 📁 **2 files:** `docs/feature_walkthrough/learning-transfer-challenges-walkthrough.md` `+247 −0`, `server/transferScenarios.js` `+1892 −0`
     - 📊 **`+2139 −0`** · 2 files
-- ✨ [`8870d089`](https://github.com/Jatin-nicon/tenali/commit/8870d08978e4ba84103fb284bbb10fba7b36a6bd) — **Vaibhav** — implement Vachana Mathematical Literacy Lab
+- ✨ [`8870d089`](https://github.com/vicharanashala/tenali/commit/8870d08978e4ba84103fb284bbb10fba7b36a6bd) — **Vaibhav** — implement Vachana Mathematical Literacy Lab
     - 📁 **1 file:** `client/src/App.jsx` `+1141 −0`
     - 📊 **`+1141 −0`** · 1 file
-- ✨ [`8cbe4ea3`](https://github.com/Jatin-nicon/tenali/commit/8cbe4ea3130588bed9b41de1200b545a2de93553) — **KCDharshan9** — Learn These Words pre-quiz section (Feature AQ)
-    - 📁 **10 files:** `.gitignore` `+3 −0`, `AI_HANDOVER.md` `+234 −1`, `client/src/App.css` `+86 −0`, `client/src/App.jsx` `+80 −56`, `client/src/components/GlossaryText.jsx` `+7 −4`, `client/src/components/KeyTerms.jsx` `+80 −0`, `client/src/data/glossaryTerms.json` `+241 −12`, `client/src/data/topicGlossaryMap.json` `+456 −0` *(+2 more in [`8cbe4ea3`](https://github.com/Jatin-nicon/tenali/commit/8cbe4ea3130588bed9b41de1200b545a2de93553))*
+- ✨ [`8cbe4ea3`](https://github.com/vicharanashala/tenali/commit/8cbe4ea3130588bed9b41de1200b545a2de93553) — **KCDharshan9** — Learn These Words pre-quiz section (Feature AQ)
+    - 📁 **10 files:** `.gitignore` `+3 −0`, `AI_HANDOVER.md` `+234 −1`, `client/src/App.css` `+86 −0`, `client/src/App.jsx` `+80 −56`, `client/src/components/GlossaryText.jsx` `+7 −4`, `client/src/components/KeyTerms.jsx` `+80 −0`, `client/src/data/glossaryTerms.json` `+241 −12`, `client/src/data/topicGlossaryMap.json` `+456 −0` *(+2 more in [`8cbe4ea3`](https://github.com/vicharanashala/tenali/commit/8cbe4ea3130588bed9b41de1200b545a2de93553))*
     - 📊 **`+1432 −116`** · 10 files
-- ✨ [`3f54facf`](https://github.com/Jatin-nicon/tenali/commit/3f54facfa1f6394d708bf66cf1b4a121d9b6f771) — **Ahana Banerjee** — remove standard mode from the goal selector pills in the goal based practice app
+- ✨ [`3f54facf`](https://github.com/vicharanashala/tenali/commit/3f54facfa1f6394d708bf66cf1b4a121d9b6f771) — **Ahana Banerjee** — remove standard mode from the goal selector pills in the goal based practice app
     - 📁 **1 file:** `client/src/App.jsx` `+59 −87`
     - 📊 **`+59 −87`** · 1 file
-- 🔧 [`7ef1a9d8`](https://github.com/Jatin-nicon/tenali/commit/7ef1a9d86a35651383a5771fa2c14d9081bc2ae2) — **varshini-nandula** — remove developer debug controls and reset progress button from dashboard
+- 🔧 [`7ef1a9d8`](https://github.com/vicharanashala/tenali/commit/7ef1a9d86a35651383a5771fa2c14d9081bc2ae2) — **varshini-nandula** — remove developer debug controls and reset progress button from dashboard
     - 📁 **1 file:** `client/src/App.jsx` `+0 −44`
     - 📊 **`+0 −44`** · 1 file
-- ✨ [`73cb6e80`](https://github.com/Jatin-nicon/tenali/commit/73cb6e8068463b354e221e6956b4615e6fa65741) — **Ahana Banerjee** — implement goal-based practice session as a standalone and isolate it from the main diagnostic and learning module
+- ✨ [`73cb6e80`](https://github.com/vicharanashala/tenali/commit/73cb6e8068463b354e221e6956b4615e6fa65741) — **Ahana Banerjee** — implement goal-based practice session as a standalone and isolate it from the main diagnostic and learning module
     - 📁 **1 file:** `client/src/App.jsx` `+1367 −1034`
     - 📊 **`+1367 −1034`** · 1 file
-- 📌 [`c190b1a1`](https://github.com/Jatin-nicon/tenali/commit/c190b1a15679cb9a4c78495ff31cb553b281e1fe) — **Ritish Karmakar** — Refactor Percentages layout to one-card-at-a-time and fix AudioContext singleton; update changelog
+- 📌 [`c190b1a1`](https://github.com/vicharanashala/tenali/commit/c190b1a15679cb9a4c78495ff31cb553b281e1fe) — **Ritish Karmakar** — Refactor Percentages layout to one-card-at-a-time and fix AudioContext singleton; update changelog
     - 📁 **6 files:** `CHANGELOG.md` `+45 −0`, `client/src/App.css` `+15 −0`, `client/src/App.jsx` `+109 −128`, `client/src/PercentExplanationApp.css` `+1542 −654`, `client/src/PercentExplanationApp.jsx` `+400 −228`, `client/src/audioContext.js` `+46 −0`
     - 📊 **`+2157 −1010`** · 6 files
-- ✨ [`789be663`](https://github.com/Jatin-nicon/tenali/commit/789be663e2c480197a2aded6298d35c4aceeeb0b) — **varshini-nandula** — gate transfer challenge unlocking on completing easy medium and hard levels
+- ✨ [`789be663`](https://github.com/vicharanashala/tenali/commit/789be663e2c480197a2aded6298d35c4aceeeb0b) — **varshini-nandula** — gate transfer challenge unlocking on completing easy medium and hard levels
     - 📁 **1 file:** `client/src/App.jsx` `+30 −17`
     - 📊 **`+30 −17`** · 1 file
-- 🐛 [`a7297e4c`](https://github.com/Jatin-nicon/tenali/commit/a7297e4c171f4492560d25a9f9debb8f3bc87f3d) — **varshini-nandula** — update completion screen to encourage student to try again
+- 🐛 [`a7297e4c`](https://github.com/vicharanashala/tenali/commit/a7297e4c171f4492560d25a9f9debb8f3bc87f3d) — **varshini-nandula** — update completion screen to encourage student to try again
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- ✨ [`613278e5`](https://github.com/Jatin-nicon/tenali/commit/613278e54b9e3c8218f6e0507bcebbdf222dde30) — **Shubh dixit** — replace emojis with standard lucide-react icons
+- ✨ [`613278e5`](https://github.com/vicharanashala/tenali/commit/613278e54b9e3c8218f6e0507bcebbdf222dde30) — **Shubh dixit** — replace emojis with standard lucide-react icons
     - 📁 **5 files:** `client/package-lock.json` `+12 −2`, `client/package.json` `+1 −0`, `client/src/VisualMathLabRedux.jsx` `+27 −26`, `client/src/components/OnboardingTour.jsx` `+2 −1`, `client/src/components/VoiceAssistant.jsx` `+6 −5`
     - 📊 **`+48 −34`** · 5 files
-- 🔧 [`fa621693`](https://github.com/Jatin-nicon/tenali/commit/fa62169342fbbf26fd3aa06f92549c9bd4424010) — **Shubh dixit** — remove unused script files from root
+- 🔧 [`fa621693`](https://github.com/vicharanashala/tenali/commit/fa62169342fbbf26fd3aa06f92549c9bd4424010) — **Shubh dixit** — remove unused script files from root
     - 📁 **5 files:** `duplicate_app.js` `+0 −25`, `extract.js` `+0 −22`, `generate_concepts.js` `+0 −223`, `inject.js` `+0 −3`, `update_render.js` `+0 −17`
     - 📊 **`+0 −290`** · 5 files
-- ✨ [`14413c0e`](https://github.com/Jatin-nicon/tenali/commit/14413c0ea7e08b58a00e32a04a4c1a80ae7e2518) — **varshini-nandula** — implement step-by-step explanations and fix grading for generic transfer challenges
+- ✨ [`14413c0e`](https://github.com/vicharanashala/tenali/commit/14413c0ea7e08b58a00e32a04a4c1a80ae7e2518) — **varshini-nandula** — implement step-by-step explanations and fix grading for generic transfer challenges
     - 📁 **1 file:** `server/index.js` `+68 −23`
     - 📊 **`+68 −23`** · 1 file
-- 🐛 [`384b007e`](https://github.com/Jatin-nicon/tenali/commit/384b007ec96486f050ea332a086bbea03fe4eea7) — **varshini-nandula** — resolve temporal dead zone error and enhance transfer challenge UI
+- 🐛 [`384b007e`](https://github.com/vicharanashala/tenali/commit/384b007ec96486f050ea332a086bbea03fe4eea7) — **varshini-nandula** — resolve temporal dead zone error and enhance transfer challenge UI
     - 📁 **2 files:** `client/src/App.css` `+30 −0`, `client/src/App.jsx` `+82 −77`
     - 📊 **`+112 −77`** · 2 files
-- 🐛 [`05953e6b`](https://github.com/Jatin-nicon/tenali/commit/05953e6b045b756fce8e1e021789fcc44ad0b9a7) — **varshini-nandula** — add missing learning modules to vite proxy config
+- 🐛 [`05953e6b`](https://github.com/vicharanashala/tenali/commit/05953e6b045b756fce8e1e021789fcc44ad0b9a7) — **varshini-nandula** — add missing learning modules to vite proxy config
     - 📁 **1 file:** `client/vite.config.js` `+18 −0`
     - 📊 **`+18 −0`** · 1 file
-- 📝 [`8fd68adc`](https://github.com/Jatin-nicon/tenali/commit/8fd68adce338a0113b270d98ceac0e2e54c89a02) — **varshini-nandula** — add docs directory to .gitignore
+- 📝 [`8fd68adc`](https://github.com/vicharanashala/tenali/commit/8fd68adce338a0113b270d98ceac0e2e54c89a02) — **varshini-nandula** — add docs directory to .gitignore
     - 📁 **3 files:** `.gitignore` `+2 −0`, `docs/feature_walkthrough/learning-transfer-challenges-walkthrough.md` `+0 −164`, `docs/implementation_plans/learning_transfer_challenges_plan` `+0 −201`
     - 📊 **`+2 −365`** · 3 files
 
 #### 📅 2026-07-08  <sub>(13 commits)</sub>
 
-- 📌 [`61997df5`](https://github.com/Jatin-nicon/tenali/commit/61997df5f7447b280b558678ee8c3f8f5ffe582a) — **Ritish Karmakar** — Add comprehensive changelog for Percentages Level 1 feature
+- 📌 [`61997df5`](https://github.com/vicharanashala/tenali/commit/61997df5f7447b280b558678ee8c3f8f5ffe582a) — **Ritish Karmakar** — Add comprehensive changelog for Percentages Level 1 feature
     - 📁 **1 file:** `CHANGELOG.md` `+100 −1`
     - 📊 **`+100 −1`** · 1 file
-- 📌 [`eed3ad86`](https://github.com/Jatin-nicon/tenali/commit/eed3ad86a1c433ef500c736dd654f148a4a705c6) — **Ritish Karmakar** — Implement step-wise diagnostic quiz for Percentages with kid-friendly UI
+- 📌 [`eed3ad86`](https://github.com/vicharanashala/tenali/commit/eed3ad86a1c433ef500c736dd654f148a4a705c6) — **Ritish Karmakar** — Implement step-wise diagnostic quiz for Percentages with kid-friendly UI
     - 📁 **3 files:** `client/src/App.css` `+713 −0`, `client/src/App.jsx` `+994 −248`, `client/src/PercentExplanationApp.jsx` `+780 −101`
     - 📊 **`+2487 −349`** · 3 files
-- ✨ [`1a54b571`](https://github.com/Jatin-nicon/tenali/commit/1a54b571d1875c1329ece0511bd11ee80baa46f4) — **KCDharshan9** — implement initial tap-to-define word glossary
-    - 📁 **14 files:** `AI_HANDOVER.md` `+106 −0`, `LLM_GUIDELINES.md` `+191 −0`, `client/src/App.css` `+105 −0`, `client/src/App.jsx` `+12 −11`, `client/src/components/GlossaryText.jsx` `+224 −0`, `client/src/data/glossaryTerms.json` `+40 −0`, `client/vite.config.js` `+26 −0`, `context.md` `+90 −0` *(+6 more in [`1a54b571`](https://github.com/Jatin-nicon/tenali/commit/1a54b571d1875c1329ece0511bd11ee80baa46f4))*
+- ✨ [`1a54b571`](https://github.com/vicharanashala/tenali/commit/1a54b571d1875c1329ece0511bd11ee80baa46f4) — **KCDharshan9** — implement initial tap-to-define word glossary
+    - 📁 **14 files:** `AI_HANDOVER.md` `+106 −0`, `LLM_GUIDELINES.md` `+191 −0`, `client/src/App.css` `+105 −0`, `client/src/App.jsx` `+12 −11`, `client/src/components/GlossaryText.jsx` `+224 −0`, `client/src/data/glossaryTerms.json` `+40 −0`, `client/vite.config.js` `+26 −0`, `context.md` `+90 −0` *(+6 more in [`1a54b571`](https://github.com/vicharanashala/tenali/commit/1a54b571d1875c1329ece0511bd11ee80baa46f4))*
     - 📊 **`+5432 −12`** · 14 files
-- ✨ [`8108475e`](https://github.com/Jatin-nicon/tenali/commit/8108475e892dbf4e4ffac166909a561df5cdaca8) — **poorvipravallika06** — implement interactive LCM & HCF module with curiosity and confidence meter
+- ✨ [`8108475e`](https://github.com/vicharanashala/tenali/commit/8108475e892dbf4e4ffac166909a561df5cdaca8) — **poorvipravallika06** — implement interactive LCM & HCF module with curiosity and confidence meter
     - 📁 **3 files:** `client/src/App.jsx` `+2 −1`, `client/src/LcmHcfApp.css` `+1179 −0`, `client/src/LcmHcfApp.jsx` `+1877 −0`
     - 📊 **`+3058 −1`** · 3 files
-- 📌 [`7636bf44`](https://github.com/Jatin-nicon/tenali/commit/7636bf448f2518881818a7aa51ae2155e63cae13) — **muditagrawal2007** — added the limit to the number of the questions to visible
+- 📌 [`7636bf44`](https://github.com/vicharanashala/tenali/commit/7636bf448f2518881818a7aa51ae2155e63cae13) — **muditagrawal2007** — added the limit to the number of the questions to visible
     - 📁 **1 file:** `client/src/App.jsx` `+54 −54`
     - 📊 **`+54 −54`** · 1 file
-- 📌 [`13e0a27f`](https://github.com/Jatin-nicon/tenali/commit/13e0a27f38d192970764f8eb4aac436bae68a22b) — **Ritish Karmakar** — Add comprehensive changelog for Percentages Level 1 feature
+- 📌 [`13e0a27f`](https://github.com/vicharanashala/tenali/commit/13e0a27f38d192970764f8eb4aac436bae68a22b) — **Ritish Karmakar** — Add comprehensive changelog for Percentages Level 1 feature
     - 📁 **1 file:** `CHANGELOG.md` `+102 −0`
     - 📊 **`+102 −0`** · 1 file
-- 📌 [`412a788b`](https://github.com/Jatin-nicon/tenali/commit/412a788b2842c655a9c266e1bbe3d72d4855d0ad) — **Ritish Karmakar** — Implement step-wise diagnostic quiz for Percentages with kid-friendly UI
+- 📌 [`412a788b`](https://github.com/vicharanashala/tenali/commit/412a788b2842c655a9c266e1bbe3d72d4855d0ad) — **Ritish Karmakar** — Implement step-wise diagnostic quiz for Percentages with kid-friendly UI
     - 📁 **3 files:** `client/src/App.css` `+713 −0`, `client/src/App.jsx` `+998 −151`, `client/src/PercentExplanationApp.jsx` `+780 −101`
     - 📊 **`+2491 −252`** · 3 files
-- ✨ [`c65bcde2`](https://github.com/Jatin-nicon/tenali/commit/c65bcde21a5ce797cf7158f34144061354310b28) — **Ahana Banerjee** — implement Learning Intelligence Layer (LIL) architecture with goal based practise sessions functionality across all apps and question topic cards
-    - 📁 **12 files:** `client/src/App.css` `+31 −0`, `client/src/App.jsx` `+2619 −518`, `server/auth.js` `+5 −1`, `server/index.js` `+181 −0`, `server/lil/attemptLogger.js` `+36 −0`, `server/lil/constants.js` `+95 −0`, `server/lil/eventGenerator.js` `+32 −0`, `server/lil/masteryEngine.js` `+54 −0` *(+4 more in [`c65bcde2`](https://github.com/Jatin-nicon/tenali/commit/c65bcde21a5ce797cf7158f34144061354310b28))*
+- ✨ [`c65bcde2`](https://github.com/vicharanashala/tenali/commit/c65bcde21a5ce797cf7158f34144061354310b28) — **Ahana Banerjee** — implement Learning Intelligence Layer (LIL) architecture with goal based practise sessions functionality across all apps and question topic cards
+    - 📁 **12 files:** `client/src/App.css` `+31 −0`, `client/src/App.jsx` `+2619 −518`, `server/auth.js` `+5 −1`, `server/index.js` `+181 −0`, `server/lil/attemptLogger.js` `+36 −0`, `server/lil/constants.js` `+95 −0`, `server/lil/eventGenerator.js` `+32 −0`, `server/lil/masteryEngine.js` `+54 −0` *(+4 more in [`c65bcde2`](https://github.com/vicharanashala/tenali/commit/c65bcde21a5ce797cf7158f34144061354310b28))*
     - 📊 **`+3306 −519`** · 12 files
-- 🐛 [`7e9aea77`](https://github.com/Jatin-nicon/tenali/commit/7e9aea772154522a744526ed0fc015284f380dd5) — **varshini-nandula** — fix ReferenceError and implement Stage 3 completion hook and Stage 4 Transfer CTA for AdditionApp
+- 🐛 [`7e9aea77`](https://github.com/vicharanashala/tenali/commit/7e9aea772154522a744526ed0fc015284f380dd5) — **varshini-nandula** — fix ReferenceError and implement Stage 3 completion hook and Stage 4 Transfer CTA for AdditionApp
     - 📁 **1 file:** `client/src/App.jsx` `+28 −1`
     - 📊 **`+28 −1`** · 1 file
-- ✨ [`2e4d1270`](https://github.com/Jatin-nicon/tenali/commit/2e4d12700e6b1ff78af1b8e2490ebec9aa2061af) — **Shubh dixit** — Premium Core Educational Suite & UI Standardization (4 core features)
-    - 📁 **39 files:** `client/index.html` `+1 −1`, `client/package-lock.json` `+70 −3`, `client/package.json` `+4 −1`, `client/src/App.css` `+377 −3`, `client/src/App.jsx` `+2711 −2467`, `client/src/VisualMathLabRedux.jsx` `+904 −0`, `client/src/components/OnboardingTour.css` `+199 −0`, `client/src/components/OnboardingTour.jsx` `+226 −0` *(+31 more in [`2e4d1270`](https://github.com/Jatin-nicon/tenali/commit/2e4d12700e6b1ff78af1b8e2490ebec9aa2061af))*
+- ✨ [`2e4d1270`](https://github.com/vicharanashala/tenali/commit/2e4d12700e6b1ff78af1b8e2490ebec9aa2061af) — **Shubh dixit** — Premium Core Educational Suite & UI Standardization (4 core features)
+    - 📁 **39 files:** `client/index.html` `+1 −1`, `client/package-lock.json` `+70 −3`, `client/package.json` `+4 −1`, `client/src/App.css` `+377 −3`, `client/src/App.jsx` `+2711 −2467`, `client/src/VisualMathLabRedux.jsx` `+904 −0`, `client/src/components/OnboardingTour.css` `+199 −0`, `client/src/components/OnboardingTour.jsx` `+226 −0` *(+31 more in [`2e4d1270`](https://github.com/vicharanashala/tenali/commit/2e4d12700e6b1ff78af1b8e2490ebec9aa2061af))*
     - 📊 **`+7839 −3362`** · 39 files
-- ✨ [`c8a88952`](https://github.com/Jatin-nicon/tenali/commit/c8a88952edad0652d60b0c429960308388af19b5) — **varshini-nandula** — implement dynamic fallback to support transfer challenges for all modules (Version 2)
+- ✨ [`c8a88952`](https://github.com/vicharanashala/tenali/commit/c8a88952edad0652d60b0c429960308388af19b5) — **varshini-nandula** — implement dynamic fallback to support transfer challenges for all modules (Version 2)
     - 📁 **4 files:** `client/src/App.jsx` `+8 −2`, `docs/feature_walkthrough/learning-transfer-challenges-walkthrough.md` `+22 −2`, `docs/implementation_plans/learning_transfer_challenges_plan` `+201 −0`, `server/index.js` `+164 −16`
     - 📊 **`+395 −20`** · 4 files
-- 🐛 [`1a00ce0b`](https://github.com/Jatin-nicon/tenali/commit/1a00ce0b48c2aba7e6a597d1b628a3868117ec26) — **varshini-nandula** — correct topic key alignment to fix empty transfer questions
+- 🐛 [`1a00ce0b`](https://github.com/vicharanashala/tenali/commit/1a00ce0b48c2aba7e6a597d1b628a3868117ec26) — **varshini-nandula** — correct topic key alignment to fix empty transfer questions
     - 📁 **2 files:** `client/src/App.jsx` `+3 −3`, `docs/feature_walkthrough/learning-transfer-challenges-walkthrough.md` `+1 −1`
     - 📊 **`+4 −4`** · 2 files
-- ✨ [`86ddece6`](https://github.com/Jatin-nicon/tenali/commit/86ddece6804e27ae0b2be9f623f70972912bb579) — **varshini-nandula** — add Stage 4 learning transfer challenges for percentages, ratios, and fractions
+- ✨ [`86ddece6`](https://github.com/vicharanashala/tenali/commit/86ddece6804e27ae0b2be9f623f70972912bb579) — **varshini-nandula** — add Stage 4 learning transfer challenges for percentages, ratios, and fractions
     - 📁 **7 files:** `client/src/App.css` `+185 −0`, `client/src/App.jsx` `+662 −14`, `client/vite.config.js` `+2 −0`, `docs/feature_walkthrough/learning-transfer-challenges-walkthrough.md` `+144 −0`, `server/auth.js` `+24 −1`, `server/index.js` `+195 −0`, `server/transferScenarios.js` `+434 −0`
     - 📊 **`+1646 −15`** · 7 files
 
 #### 📅 2026-07-06  <sub>(1 commit)</sub>
 
-- 🔧 [`2fbd8bb6`](https://github.com/Jatin-nicon/tenali/commit/2fbd8bb6ad8e22bdb504d50896f2c75203b33779) — **varshini-nandula** — add docs directory to gitignore
+- 🔧 [`2fbd8bb6`](https://github.com/vicharanashala/tenali/commit/2fbd8bb6ad8e22bdb504d50896f2c75203b33779) — **varshini-nandula** — add docs directory to gitignore
     - 📁 **1 file:** `.gitignore` `+1 −0`
     - 📊 **`+1 −0`** · 1 file
 
 #### 📅 2026-06-30  <sub>(4 commits)</sub>
 
-- 📌 [`85f4ac9a`](https://github.com/Jatin-nicon/tenali/commit/85f4ac9a4261a1d47ca291da83d1b66c01ebfa82) — **Ritish Karmakar** — Add level-wise explanation: Percentages Level 1 (Find) 1st change
+- 📌 [`85f4ac9a`](https://github.com/vicharanashala/tenali/commit/85f4ac9a4261a1d47ca291da83d1b66c01ebfa82) — **Ritish Karmakar** — Add level-wise explanation: Percentages Level 1 (Find) 1st change
     - 📁 **3 files:** `client/src/App.jsx` `+2 −1`, `client/src/PercentExplanationApp.css` `+654 −0`, `client/src/PercentExplanationApp.jsx` `+358 −0`
     - 📊 **`+1014 −1`** · 3 files
-- 📌 [`c3fcfe07`](https://github.com/Jatin-nicon/tenali/commit/c3fcfe07314fcedb5e4f34acf09a1191c1259cd7) — **Ritish Karmakar** — Update package-lock
+- 📌 [`c3fcfe07`](https://github.com/vicharanashala/tenali/commit/c3fcfe07314fcedb5e4f34acf09a1191c1259cd7) — **Ritish Karmakar** — Update package-lock
     - 📁 **1 file:** `package-lock.json` `+1 −2`
     - 📊 **`+1 −2`** · 1 file
-- 📌 [`5e6c7473`](https://github.com/Jatin-nicon/tenali/commit/5e6c747354378887395c8d617e955c6e81086ac3) — **Ritish Karmakar** — Add level-wise explanation: Percentages Level 1 (Find) 1st change
+- 📌 [`5e6c7473`](https://github.com/vicharanashala/tenali/commit/5e6c747354378887395c8d617e955c6e81086ac3) — **Ritish Karmakar** — Add level-wise explanation: Percentages Level 1 (Find) 1st change
     - 📁 **3 files:** `client/src/App.jsx` `+2 −1`, `client/src/PercentExplanationApp.css` `+654 −0`, `client/src/PercentExplanationApp.jsx` `+358 −0`
     - 📊 **`+1014 −1`** · 3 files
-- 📌 [`8f8653c1`](https://github.com/Jatin-nicon/tenali/commit/8f8653c15c2d18d2369f9215bcb5bcd93443cb6b) — **Ritish Karmakar** — Update package-lock
+- 📌 [`8f8653c1`](https://github.com/vicharanashala/tenali/commit/8f8653c15c2d18d2369f9215bcb5bcd93443cb6b) — **Ritish Karmakar** — Update package-lock
     - 📁 **1 file:** `package-lock.json` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
 
 #### 📅 2026-05-11  <sub>(1 commit)</sub>
 
-- ✨ [`6d4e9ad4`](https://github.com/Jatin-nicon/tenali/commit/6d4e9ad4a6b4f71f1ce070431534ad5cf2c60dee) — **Vasuki** — add Guess the Number (binary magic card trick)
+- ✨ [`6d4e9ad4`](https://github.com/vicharanashala/tenali/commit/6d4e9ad4a6b4f71f1ce070431534ad5cf2c60dee) — **Vasuki** — add Guess the Number (binary magic card trick)
     - 📁 **1 file:** `client/src/App.jsx` `+181 −0`
     - 📊 **`+181 −0`** · 1 file
 
 #### 📅 2026-05-03  <sub>(21 commits)</sub>
 
-- 📌 [`8ffb66e1`](https://github.com/Jatin-nicon/tenali/commit/8ffb66e116509b0ac8c65295490d27e577729752) — **Sudarshan** — Add session summary doc
+- 📌 [`8ffb66e1`](https://github.com/vicharanashala/tenali/commit/8ffb66e116509b0ac8c65295490d27e577729752) — **Sudarshan** — Add session summary doc
     - 📁 **1 file:** `SESSION_SUMMARY.md` `+94 −0`
     - 📊 **`+94 −0`** · 1 file
-- 📌 [`408c4f2c`](https://github.com/Jatin-nicon/tenali/commit/408c4f2c8c071283a4219eb22cb76760ed5fd12a) — **Sudarshan** — Add L17 bridge 27 (+ − in Standard Form). Chapter 5 fully bridged.
+- 📌 [`408c4f2c`](https://github.com/vicharanashala/tenali/commit/408c4f2c8c071283a4219eb22cb76760ed5fd12a) — **Sudarshan** — Add L17 bridge 27 (+ − in Standard Form). Chapter 5 fully bridged.
     - 📁 **1 file:** `client/src/App.jsx` `+76 −0`
     - 📊 **`+76 −0`** · 1 file
-- 📌 [`e6ee1ac3`](https://github.com/Jatin-nicon/tenali/commit/e6ee1ac39265ad291b65e3d4acdcde315867821c) — **Sudarshan** — Add L16 bridge 26 (× ÷ in Standard Form)
+- 📌 [`e6ee1ac3`](https://github.com/vicharanashala/tenali/commit/e6ee1ac39265ad291b65e3d4acdcde315867821c) — **Sudarshan** — Add L16 bridge 26 (× ÷ in Standard Form)
     - 📁 **1 file:** `client/src/App.jsx` `+84 −0`
     - 📊 **`+84 −0`** · 1 file
-- 📌 [`805fe785`](https://github.com/Jatin-nicon/tenali/commit/805fe7858c21583a4845373fc9d449cab36e8803) — **Sudarshan** — Add L15 bridge 25 (Standard Form Basics)
+- 📌 [`805fe785`](https://github.com/vicharanashala/tenali/commit/805fe7858c21583a4845373fc9d449cab36e8803) — **Sudarshan** — Add L15 bridge 25 (Standard Form Basics)
     - 📁 **1 file:** `client/src/App.jsx` `+95 −0`
     - 📊 **`+95 −0`** · 1 file
-- 📌 [`6aecb9e9`](https://github.com/Jatin-nicon/tenali/commit/6aecb9e9110a9ec24bc4e80af16d484674b9efed) — **Sudarshan** — Add L14 bridge 24 (Successive % Changes)
+- 📌 [`6aecb9e9`](https://github.com/vicharanashala/tenali/commit/6aecb9e9110a9ec24bc4e80af16d484674b9efed) — **Sudarshan** — Add L14 bridge 24 (Successive % Changes)
     - 📁 **1 file:** `client/src/App.jsx` `+64 −0`
     - 📊 **`+64 −0`** · 1 file
-- 📌 [`c1b86502`](https://github.com/Jatin-nicon/tenali/commit/c1b86502e60f42269fa694a2f5d6daea0fe41dd7) — **Sudarshan** — Add L13 bridge 23 (Reverse Percentages)
+- 📌 [`c1b86502`](https://github.com/vicharanashala/tenali/commit/c1b86502e60f42269fa694a2f5d6daea0fe41dd7) — **Sudarshan** — Add L13 bridge 23 (Reverse Percentages)
     - 📁 **1 file:** `client/src/App.jsx` `+61 −0`
     - 📊 **`+61 −0`** · 1 file
-- 📌 [`be689945`](https://github.com/Jatin-nicon/tenali/commit/be6899451b211780396952e2e5dfb38b2b22bcdf) — **Sudarshan** — Add L12 bridge 22 (Multiplier Method)
+- 📌 [`be689945`](https://github.com/vicharanashala/tenali/commit/be6899451b211780396952e2e5dfb38b2b22bcdf) — **Sudarshan** — Add L12 bridge 22 (Multiplier Method)
     - 📁 **1 file:** `client/src/App.jsx` `+58 −0`
     - 📊 **`+58 −0`** · 1 file
-- 📌 [`33159319`](https://github.com/Jatin-nicon/tenali/commit/33159319683fddea5a6c0992681c1b7eca8a66b4) — **Sudarshan** — Add L11 bridge 21 (% Increase/Decrease)
+- 📌 [`33159319`](https://github.com/vicharanashala/tenali/commit/33159319683fddea5a6c0992681c1b7eca8a66b4) — **Sudarshan** — Add L11 bridge 21 (% Increase/Decrease)
     - 📁 **1 file:** `client/src/App.jsx` `+61 −0`
     - 📊 **`+61 −0`** · 1 file
-- 📌 [`0e4376e3`](https://github.com/Jatin-nicon/tenali/commit/0e4376e37340eb8f8c80e018a10fea515da004d2) — **Sudarshan** — Add L10 bridge 20 (X as a percentage of Y)
+- 📌 [`0e4376e3`](https://github.com/vicharanashala/tenali/commit/0e4376e37340eb8f8c80e018a10fea515da004d2) — **Sudarshan** — Add L10 bridge 20 (X as a percentage of Y)
     - 📁 **1 file:** `client/src/App.jsx` `+79 −0`
     - 📊 **`+79 −0`** · 1 file
-- 📌 [`76d2e9ac`](https://github.com/Jatin-nicon/tenali/commit/76d2e9acf2df47b8268ba8ccd9b1b4cbce97c2ea) — **Sudarshan** — Add L9 bridge 19 (X% of Y)
+- 📌 [`76d2e9ac`](https://github.com/vicharanashala/tenali/commit/76d2e9acf2df47b8268ba8ccd9b1b4cbce97c2ea) — **Sudarshan** — Add L9 bridge 19 (X% of Y)
     - 📁 **1 file:** `client/src/App.jsx` `+63 −0`
     - 📊 **`+63 −0`** · 1 file
-- 📌 [`735aef8f`](https://github.com/Jatin-nicon/tenali/commit/735aef8f8718dbfa84466c9c2b2e186b6d2fd4f2) — **Sudarshan** — Add L8 bridges 17-18 (% Decimal, % Fraction conversions)
+- 📌 [`735aef8f`](https://github.com/vicharanashala/tenali/commit/735aef8f8718dbfa84466c9c2b2e186b6d2fd4f2) — **Sudarshan** — Add L8 bridges 17-18 (% Decimal, % Fraction conversions)
     - 📁 **1 file:** `client/src/App.jsx` `+168 −0`
     - 📊 **`+168 −0`** · 1 file
-- 📌 [`944a78a5`](https://github.com/Jatin-nicon/tenali/commit/944a78a527dc17dd83af9b0f348147c17184cc1f) — **Sudarshan** — Add L7 bridge 16 (Fraction OF / What fraction is M of N)
+- 📌 [`944a78a5`](https://github.com/vicharanashala/tenali/commit/944a78a527dc17dd83af9b0f348147c17184cc1f) — **Sudarshan** — Add L7 bridge 16 (Fraction OF / What fraction is M of N)
     - 📁 **1 file:** `client/src/App.jsx` `+79 −0`
     - 📊 **`+79 −0`** · 1 file
-- 📌 [`cae5b23c`](https://github.com/Jatin-nicon/tenali/commit/cae5b23ca5dde09a4e709829051333ead90a017c) — **Sudarshan** — Add L6 bridge 15 (Clear Decimals from Fractions)
+- 📌 [`cae5b23c`](https://github.com/vicharanashala/tenali/commit/cae5b23ca5dde09a4e709829051333ead90a017c) — **Sudarshan** — Add L6 bridge 15 (Clear Decimals from Fractions)
     - 📁 **1 file:** `client/src/App.jsx` `+87 −0`
     - 📊 **`+87 −0`** · 1 file
-- 📌 [`c9deb84f`](https://github.com/Jatin-nicon/tenali/commit/c9deb84fa76681cdbaf5c1fb0ab80dad81b07186) — **Sudarshan** — Add L5 bridges 13-14 (Reciprocals + Divide Fractions/KCF)
+- 📌 [`c9deb84f`](https://github.com/vicharanashala/tenali/commit/c9deb84fa76681cdbaf5c1fb0ab80dad81b07186) — **Sudarshan** — Add L5 bridges 13-14 (Reciprocals + Divide Fractions/KCF)
     - 📁 **1 file:** `client/src/App.jsx` `+195 −0`
     - 📊 **`+195 −0`** · 1 file
-- 📌 [`9ad3eb83`](https://github.com/Jatin-nicon/tenali/commit/9ad3eb83d58dad0c2ca39c27d8593d6031cd9b59) — **Sudarshan** — Add Lesson 4 bridges (Bridges 9-12) for Add/Subtract Fractions
+- 📌 [`9ad3eb83`](https://github.com/vicharanashala/tenali/commit/9ad3eb83d58dad0c2ca39c27d8593d6031cd9b59) — **Sudarshan** — Add Lesson 4 bridges (Bridges 9-12) for Add/Subtract Fractions
     - 📁 **1 file:** `client/src/App.jsx` `+257 −1`
     - 📊 **`+257 −1`** · 1 file
-- 📌 [`3ae971ea`](https://github.com/Jatin-nicon/tenali/commit/3ae971eaacd0b75ee8e628ee33a1bdc63ac6caab) — **Sudarshan** — Add 8 Lesson-prerequisite bridges + LaTeX-typeset fractions
+- 📌 [`3ae971ea`](https://github.com/vicharanashala/tenali/commit/3ae971eaacd0b75ee8e628ee33a1bdc63ac6caab) — **Sudarshan** — Add 8 Lesson-prerequisite bridges + LaTeX-typeset fractions
     - 📁 **2 files:** `CLAUDE.md` `+82 −0`, `client/src/App.jsx` `+1037 −3`
     - 📊 **`+1119 −3`** · 2 files
-- 📌 [`9767e6cf`](https://github.com/Jatin-nicon/tenali/commit/9767e6cfe7169423ecee712f231b5df42e60a7c9) — **Sudarshan** — Add in-memory auth fallback when MongoDB is unavailable
+- 📌 [`9767e6cf`](https://github.com/vicharanashala/tenali/commit/9767e6cfe7169423ecee712f231b5df42e60a7c9) — **Sudarshan** — Add in-memory auth fallback when MongoDB is unavailable
     - 📁 **2 files:** `server/auth.js` `+25 −10`, `server/index.js` `+2 −1`
     - 📊 **`+27 −11`** · 2 files
-- 📌 [`c21625e3`](https://github.com/Jatin-nicon/tenali/commit/c21625e391fafbbc123819be0267743b05184903) — **Sudarshan** — auto-commit 2026-05-03 18:28:32
+- 📌 [`c21625e3`](https://github.com/vicharanashala/tenali/commit/c21625e391fafbbc123819be0267743b05184903) — **Sudarshan** — auto-commit 2026-05-03 18:28:32
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`8a127a07`](https://github.com/Jatin-nicon/tenali/commit/8a127a07d72920a244cd2ad5d4b0003e6b0d9d98) — **Sudarshan** — auto-commit 2026-05-03 18:18:58
+- 📌 [`8a127a07`](https://github.com/vicharanashala/tenali/commit/8a127a07d72920a244cd2ad5d4b0003e6b0d9d98) — **Sudarshan** — auto-commit 2026-05-03 18:18:58
     - 📁 **8 files:** `client/src/App.jsx` `+249 −32`, `client/src/main.jsx` `+3 −1`, `server/auth.js` `+108 −0`, `server/index.js` `+10 −0`, `server/node_modules/.package-lock.json` `+345 −0`, `server/package-lock.json` `+349 −1`, `server/package.json` `+4 −1`, `setup_mongo.sh` `+47 −0`
     - 📊 **`+1115 −35`** · 8 files
-- 📌 [`3f49a2d1`](https://github.com/Jatin-nicon/tenali/commit/3f49a2d18a98f0be0a6423e6f9ac02c67e9eb7a3) — **Sudarshan** — auto-commit 2026-05-03 17:10:36
+- 📌 [`3f49a2d1`](https://github.com/vicharanashala/tenali/commit/3f49a2d18a98f0be0a6423e6f9ac02c67e9eb7a3) — **Sudarshan** — auto-commit 2026-05-03 17:10:36
     - 📁 **4 files:** `client/src/App.jsx` `+5853 −2`, `client/src/App.jsx.bak.preCh1234` `+43275 −0`, `client/src/App.jsx.bak.preCh23` `+40868 −0`, `client/src/App.jsx.bak.preCh24` `+42094 −0`
     - 📊 **`+132090 −2`** · 4 files
-- 📌 [`8dbe6f6c`](https://github.com/Jatin-nicon/tenali/commit/8dbe6f6c1f7fb2497038a7d089b542634f049963) — **Sudarshan** — auto-commit 2026-05-03 14:19:32
+- 📌 [`8dbe6f6c`](https://github.com/vicharanashala/tenali/commit/8dbe6f6c1f7fb2497038a7d089b542634f049963) — **Sudarshan** — auto-commit 2026-05-03 14:19:32
     - 📁 **5 files:** `client/src/App.jsx` `+2880 −392`, `client/src/App.jsx.bak.preCh21` `+38481 −0`, `client/src/App.jsx.bak.preCh22` `+39740 −0`, `client/src/App.jsx.bak.preSubOpsFix` `+38380 −0`, `skills/igcse-chapter/SKILL.md` `+12 −1`
     - 📊 **`+119493 −393`** · 5 files
 
 #### 📅 2026-05-02  <sub>(7 commits)</sub>
 
-- 📌 [`8ba9205b`](https://github.com/Jatin-nicon/tenali/commit/8ba9205b7253b6bdbc991593f63abbe24ef1c320) — **Sudarshan** — auto-commit 2026-05-02 04:12:35
+- 📌 [`8ba9205b`](https://github.com/vicharanashala/tenali/commit/8ba9205b7253b6bdbc991593f63abbe24ef1c320) — **Sudarshan** — auto-commit 2026-05-02 04:12:35
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`96e8fb39`](https://github.com/Jatin-nicon/tenali/commit/96e8fb393d22b15c6e547c4387379b90f28b2eda) — **Sudarshan** — auto-commit 2026-05-02 04:11:25
-    - 📁 **12 files:** `client/src/App.jsx` `+13455 −2`, `client/src/App.jsx.bak.preCh10` `+24927 −0`, `client/src/App.jsx.bak.preCh11` `+26304 −0`, `client/src/App.jsx.bak.preCh12` `+27580 −0`, `client/src/App.jsx.bak.preCh13` `+28862 −0`, `client/src/App.jsx.bak.preCh14` `+30019 −0`, `client/src/App.jsx.bak.preCh15` `+31285 −0`, `client/src/App.jsx.bak.preCh16` `+32642 −0` *(+4 more in [`96e8fb39`](https://github.com/Jatin-nicon/tenali/commit/96e8fb393d22b15c6e547c4387379b90f28b2eda))*
+- 📌 [`96e8fb39`](https://github.com/vicharanashala/tenali/commit/96e8fb393d22b15c6e547c4387379b90f28b2eda) — **Sudarshan** — auto-commit 2026-05-02 04:11:25
+    - 📁 **12 files:** `client/src/App.jsx` `+13455 −2`, `client/src/App.jsx.bak.preCh10` `+24927 −0`, `client/src/App.jsx.bak.preCh11` `+26304 −0`, `client/src/App.jsx.bak.preCh12` `+27580 −0`, `client/src/App.jsx.bak.preCh13` `+28862 −0`, `client/src/App.jsx.bak.preCh14` `+30019 −0`, `client/src/App.jsx.bak.preCh15` `+31285 −0`, `client/src/App.jsx.bak.preCh16` `+32642 −0` *(+4 more in [`96e8fb39`](https://github.com/vicharanashala/tenali/commit/96e8fb393d22b15c6e547c4387379b90f28b2eda))*
     - 📊 **`+356946 −2`** · 12 files
-- 📌 [`2fdc3c0c`](https://github.com/Jatin-nicon/tenali/commit/2fdc3c0c9ebe898242e5a1a14f3a38b08591fcef) — **S. R. S. Iyengar** — Format deploy.yml for consistency and clarity
+- 📌 [`2fdc3c0c`](https://github.com/vicharanashala/tenali/commit/2fdc3c0c9ebe898242e5a1a14f3a38b08591fcef) — **S. R. S. Iyengar** — Format deploy.yml for consistency and clarity
     - 📁 **1 file:** `.github/workflows/deploy.yml` `+24 −24`
     - 📊 **`+24 −24`** · 1 file
-- 📌 [`3ca635b1`](https://github.com/Jatin-nicon/tenali/commit/3ca635b1e81be89ecc7a376641d4fb9367d0de99) — **S. R. S. Iyengar** — Change deployment from GitHub Pages to droplet
+- 📌 [`3ca635b1`](https://github.com/vicharanashala/tenali/commit/3ca635b1e81be89ecc7a376641d4fb9367d0de99) — **S. R. S. Iyengar** — Change deployment from GitHub Pages to droplet
     - 📁 **1 file:** `.github/workflows/deploy.yml` `+28 −53`
     - 📊 **`+28 −53`** · 1 file
-- 📌 [`2ebb0ac1`](https://github.com/Jatin-nicon/tenali/commit/2ebb0ac1ce106e34cca83664c0f55f6b2d212c30) — **Sudarshan** — auto-commit 2026-05-02 01:12:09
+- 📌 [`2ebb0ac1`](https://github.com/vicharanashala/tenali/commit/2ebb0ac1ce106e34cca83664c0f55f6b2d212c30) — **Sudarshan** — auto-commit 2026-05-02 01:12:09
     - 📁 **5 files:** `client/src/App.jsx` `+1602 −170`, `client/src/App.jsx.bak.preCh9` `+23552 −0`, `client/src/App.jsx.bak.preProp` `+23498 −0`, `client/src/App.jsx.bak.preTitleFix` `+23495 −0`, `skills/igcse-chapter/SKILL.md` `+4 −3`
     - 📊 **`+72151 −173`** · 5 files
-- 📌 [`812a6d51`](https://github.com/Jatin-nicon/tenali/commit/812a6d518f050154e9f8c7353c959dcd34bd3858) — **Sudarshan** — auto-commit 2026-05-02 00:40:59
+- 📌 [`812a6d51`](https://github.com/vicharanashala/tenali/commit/812a6d518f050154e9f8c7353c959dcd34bd3858) — **Sudarshan** — auto-commit 2026-05-02 00:40:59
     - 📁 **2 files:** `client/src/App.jsx` `+1239 −2`, `client/src/App.jsx.bak.preCh8` `+22258 −0`
     - 📊 **`+23497 −2`** · 2 files
-- 📌 [`4e021b4d`](https://github.com/Jatin-nicon/tenali/commit/4e021b4d5dd3913b5e2c7fca5bb6784b2903d7cf) — **Sudarshan** — auto-commit 2026-05-02 00:22:40
-    - 📁 **21 files:** `client/src/App.jsx` `+1349 −2`, `client/src/App.jsx.bak.preCh7` `+20911 −0`, `vocab/questions/0181.json` `+15 −0`, `vocab/questions/0599.json` `+15 −0`, `vocab/questions/2070.json` `+15 −0`, `vocab/questions/2144.json` `+15 −0`, `vocab/questions/2238.json` `+15 −0`, `vocab/questions/2778.json` `+15 −0` *(+13 more in [`4e021b4d`](https://github.com/Jatin-nicon/tenali/commit/4e021b4d5dd3913b5e2c7fca5bb6784b2903d7cf))*
+- 📌 [`4e021b4d`](https://github.com/vicharanashala/tenali/commit/4e021b4d5dd3913b5e2c7fca5bb6784b2903d7cf) — **Sudarshan** — auto-commit 2026-05-02 00:22:40
+    - 📁 **21 files:** `client/src/App.jsx` `+1349 −2`, `client/src/App.jsx.bak.preCh7` `+20911 −0`, `vocab/questions/0181.json` `+15 −0`, `vocab/questions/0599.json` `+15 −0`, `vocab/questions/2070.json` `+15 −0`, `vocab/questions/2144.json` `+15 −0`, `vocab/questions/2238.json` `+15 −0`, `vocab/questions/2778.json` `+15 −0` *(+13 more in [`4e021b4d`](https://github.com/vicharanashala/tenali/commit/4e021b4d5dd3913b5e2c7fca5bb6784b2903d7cf))*
     - 📊 **`+22545 −2`** · 21 files
 
 #### 📅 2026-05-01  <sub>(11 commits)</sub>
 
-- 📌 [`f9a9c423`](https://github.com/Jatin-nicon/tenali/commit/f9a9c423f2feca537ceb38a8cfaec37a1e9fcabb) — **Sudarshan** — auto-commit 2026-05-01 21:48:39
+- 📌 [`f9a9c423`](https://github.com/vicharanashala/tenali/commit/f9a9c423f2feca537ceb38a8cfaec37a1e9fcabb) — **Sudarshan** — auto-commit 2026-05-01 21:48:39
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`c79778e6`](https://github.com/Jatin-nicon/tenali/commit/c79778e6979a84b620af5cece4498e4a1c3a4844) — **Sudarshan** — auto-commit 2026-05-01 21:40:10
+- 📌 [`c79778e6`](https://github.com/vicharanashala/tenali/commit/c79778e6979a84b620af5cece4498e4a1c3a4844) — **Sudarshan** — auto-commit 2026-05-01 21:40:10
     - 📁 **1 file:** `client/src/App.jsx` `+910 −2`
     - 📊 **`+910 −2`** · 1 file
-- 📌 [`8746120e`](https://github.com/Jatin-nicon/tenali/commit/8746120ec7823576d7bb32aee2fd35ce378e46d8) — **Sudarshan** — auto-commit 2026-05-01 19:26:47
+- 📌 [`8746120e`](https://github.com/vicharanashala/tenali/commit/8746120ec7823576d7bb32aee2fd35ce378e46d8) — **Sudarshan** — auto-commit 2026-05-01 19:26:47
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`3d56ee00`](https://github.com/Jatin-nicon/tenali/commit/3d56ee00e0e4ed48672f4e059b1c6caef55f1f08) — **Sudarshan** — auto-commit 2026-05-01 16:16:46
+- 📌 [`3d56ee00`](https://github.com/vicharanashala/tenali/commit/3d56ee00e0e4ed48672f4e059b1c6caef55f1f08) — **Sudarshan** — auto-commit 2026-05-01 16:16:46
     - 📁 **2 files:** `client/src/App.jsx` `+67 −23`, `skills/igcse-chapter/SKILL.md` `+1 −0`
     - 📊 **`+68 −23`** · 2 files
-- 📌 [`02c7a33c`](https://github.com/Jatin-nicon/tenali/commit/02c7a33c6a5dbaf73cc4b27f95783506568cdae2) — **Sudarshan** — auto-commit 2026-05-01 16:09:32
+- 📌 [`02c7a33c`](https://github.com/vicharanashala/tenali/commit/02c7a33c6a5dbaf73cc4b27f95783506568cdae2) — **Sudarshan** — auto-commit 2026-05-01 16:09:32
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`3bda941e`](https://github.com/Jatin-nicon/tenali/commit/3bda941edb0b4a67e3cb8c11a6de1db1528937ff) — **Sudarshan** — auto-commit 2026-05-01 16:00:50
+- 📌 [`3bda941e`](https://github.com/vicharanashala/tenali/commit/3bda941edb0b4a67e3cb8c11a6de1db1528937ff) — **Sudarshan** — auto-commit 2026-05-01 16:00:50
     - 📁 **2 files:** `client/src/App.jsx` `+21 −6`, `skills/igcse-chapter/SKILL.md` `+8 −2`
     - 📊 **`+29 −8`** · 2 files
-- 📌 [`df7a4bca`](https://github.com/Jatin-nicon/tenali/commit/df7a4bca10ca842fafe8a0fa8c68d3428a21af89) — **Sudarshan** — auto-commit 2026-05-01 15:55:22
+- 📌 [`df7a4bca`](https://github.com/vicharanashala/tenali/commit/df7a4bca10ca842fafe8a0fa8c68d3428a21af89) — **Sudarshan** — auto-commit 2026-05-01 15:55:22
     - 📁 **2 files:** `client/src/App.jsx` `+40 −13`, `skills/igcse-chapter/SKILL.md` `+177 −0`
     - 📊 **`+217 −13`** · 2 files
-- 📌 [`9c134862`](https://github.com/Jatin-nicon/tenali/commit/9c134862abe43a5dffeddc91d85707176fe32e82) — **Sudarshan** — auto-commit 2026-05-01 11:03:48
+- 📌 [`9c134862`](https://github.com/vicharanashala/tenali/commit/9c134862abe43a5dffeddc91d85707176fe32e82) — **Sudarshan** — auto-commit 2026-05-01 11:03:48
     - 📁 **1 file:** `client/src/App.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`c3a95ae9`](https://github.com/Jatin-nicon/tenali/commit/c3a95ae9ec182b89eb4abafb39c683711dd8a138) — **Sudarshan** — auto-commit 2026-05-01 11:03:37
+- 📌 [`c3a95ae9`](https://github.com/vicharanashala/tenali/commit/c3a95ae9ec182b89eb4abafb39c683711dd8a138) — **Sudarshan** — auto-commit 2026-05-01 11:03:37
     - 📁 **2 files:** `client/src/App.jsx` `+148 −49`, `client/src/App.jsx.bak`
     - 📊 **`+148 −49`** · 2 files
-- 📌 [`1971271a`](https://github.com/Jatin-nicon/tenali/commit/1971271ad61481ea18b270bb6746befd867176a6) — **Sudarshan** — auto-commit 2026-05-01 10:52:56
+- 📌 [`1971271a`](https://github.com/vicharanashala/tenali/commit/1971271ad61481ea18b270bb6746befd867176a6) — **Sudarshan** — auto-commit 2026-05-01 10:52:56
     - 📁 **1 file:** `client/src/App.jsx` `+646 −469`
     - 📊 **`+646 −469`** · 1 file
-- 📌 [`412ef5ee`](https://github.com/Jatin-nicon/tenali/commit/412ef5ee76c408c68b354482309439b0ec894f19) — **Sudarshan** — auto-commit 2026-05-01 10:37:37
+- 📌 [`412ef5ee`](https://github.com/vicharanashala/tenali/commit/412ef5ee76c408c68b354482309439b0ec894f19) — **Sudarshan** — auto-commit 2026-05-01 10:37:37
     - 📁 **1 file:** `client/src/App.jsx` `+859 −2`
     - 📊 **`+859 −2`** · 1 file
 
 #### 📅 2026-04-30  <sub>(21 commits)</sub>
 
-- 📌 [`f393751a`](https://github.com/Jatin-nicon/tenali/commit/f393751a2dd2684fe28715a55b40879dce11c8a3) — **Sudarshan** — auto-commit 2026-04-30 10:16:00
+- 📌 [`f393751a`](https://github.com/vicharanashala/tenali/commit/f393751a2dd2684fe28715a55b40879dce11c8a3) — **Sudarshan** — auto-commit 2026-04-30 10:16:00
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`c65c7c1c`](https://github.com/Jatin-nicon/tenali/commit/c65c7c1cef287f19b124a3a87bfc9ec7d0df346d) — **Sudarshan** — auto-commit 2026-04-30 09:57:46
+- 📌 [`c65c7c1c`](https://github.com/vicharanashala/tenali/commit/c65c7c1cef287f19b124a3a87bfc9ec7d0df346d) — **Sudarshan** — auto-commit 2026-04-30 09:57:46
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`71d189c0`](https://github.com/Jatin-nicon/tenali/commit/71d189c0e910eb1609510fc9e5c4824f66cbb66c) — **Sudarshan** — auto-commit 2026-04-30 09:47:25
+- 📌 [`71d189c0`](https://github.com/vicharanashala/tenali/commit/71d189c0e910eb1609510fc9e5c4824f66cbb66c) — **Sudarshan** — auto-commit 2026-04-30 09:47:25
     - 📁 **2 files:** `client/src/App.jsx` `+84 −17`, `server/index.js` `+204 −0`
     - 📊 **`+288 −17`** · 2 files
-- 📌 [`0b309ec0`](https://github.com/Jatin-nicon/tenali/commit/0b309ec078b26764d09c9c2a0e178e4d211f4f23) — **Sudarshan** — auto-commit 2026-04-30 09:12:34
+- 📌 [`0b309ec0`](https://github.com/vicharanashala/tenali/commit/0b309ec078b26764d09c9c2a0e178e4d211f4f23) — **Sudarshan** — auto-commit 2026-04-30 09:12:34
     - 📁 **1 file:** `client/src/App.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`29c2227a`](https://github.com/Jatin-nicon/tenali/commit/29c2227a6948c077f5c2c4c4e2686c614a1865b7) — **Sudarshan** — auto-commit 2026-04-30 09:12:31
+- 📌 [`29c2227a`](https://github.com/vicharanashala/tenali/commit/29c2227a6948c077f5c2c4c4e2686c614a1865b7) — **Sudarshan** — auto-commit 2026-04-30 09:12:31
     - 📁 **1 file:** `client/src/App.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`4d03baa8`](https://github.com/Jatin-nicon/tenali/commit/4d03baa88fd10f457570b8fb39a26ecca817bf6a) — **Sudarshan** — auto-commit 2026-04-30 09:12:28
+- 📌 [`4d03baa8`](https://github.com/vicharanashala/tenali/commit/4d03baa88fd10f457570b8fb39a26ecca817bf6a) — **Sudarshan** — auto-commit 2026-04-30 09:12:28
     - 📁 **1 file:** `client/src/App.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`12e40cee`](https://github.com/Jatin-nicon/tenali/commit/12e40ceed8e1782b5bb55fa04fc8a203566c32a1) — **Sudarshan** — auto-commit 2026-04-30 09:12:26
+- 📌 [`12e40cee`](https://github.com/vicharanashala/tenali/commit/12e40ceed8e1782b5bb55fa04fc8a203566c32a1) — **Sudarshan** — auto-commit 2026-04-30 09:12:26
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`ebb8de4f`](https://github.com/Jatin-nicon/tenali/commit/ebb8de4f82e8705cdd87cd01ba91286ec198ab46) — **Sudarshan** — auto-commit 2026-04-30 09:11:50
+- 📌 [`ebb8de4f`](https://github.com/vicharanashala/tenali/commit/ebb8de4f82e8705cdd87cd01ba91286ec198ab46) — **Sudarshan** — auto-commit 2026-04-30 09:11:50
     - 📁 **1 file:** `client/src/App.jsx` `+69 −9`
     - 📊 **`+69 −9`** · 1 file
-- 📌 [`30a4fea9`](https://github.com/Jatin-nicon/tenali/commit/30a4fea9a0738f59484e3256a8fe09f14e595c4e) — **Sudarshan** — auto-commit 2026-04-30 09:08:49
+- 📌 [`30a4fea9`](https://github.com/vicharanashala/tenali/commit/30a4fea9a0738f59484e3256a8fe09f14e595c4e) — **Sudarshan** — auto-commit 2026-04-30 09:08:49
     - 📁 **1 file:** `client/src/App.jsx` `+84 −28`
     - 📊 **`+84 −28`** · 1 file
-- 📌 [`dbf8c68f`](https://github.com/Jatin-nicon/tenali/commit/dbf8c68fd7903f82db24c297d2de34acb04b3d72) — **Sudarshan** — auto-commit 2026-04-30 09:06:41
+- 📌 [`dbf8c68f`](https://github.com/vicharanashala/tenali/commit/dbf8c68fd7903f82db24c297d2de34acb04b3d72) — **Sudarshan** — auto-commit 2026-04-30 09:06:41
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`5bebedc4`](https://github.com/Jatin-nicon/tenali/commit/5bebedc45aaefa328364d3e8a6851c4da2f09e03) — **Sudarshan** — auto-commit 2026-04-30 09:02:35
+- 📌 [`5bebedc4`](https://github.com/vicharanashala/tenali/commit/5bebedc45aaefa328364d3e8a6851c4da2f09e03) — **Sudarshan** — auto-commit 2026-04-30 09:02:35
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`a1975c39`](https://github.com/Jatin-nicon/tenali/commit/a1975c3978f0491e39e146d63c633b2acda953be) — **Sudarshan** — auto-commit 2026-04-30 09:01:01
+- 📌 [`a1975c39`](https://github.com/vicharanashala/tenali/commit/a1975c3978f0491e39e146d63c633b2acda953be) — **Sudarshan** — auto-commit 2026-04-30 09:01:01
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`0987d804`](https://github.com/Jatin-nicon/tenali/commit/0987d804e64c144705c0b7e8c830839a5983c0f9) — **Sudarshan** — auto-commit 2026-04-30 08:44:29
+- 📌 [`0987d804`](https://github.com/vicharanashala/tenali/commit/0987d804e64c144705c0b7e8c830839a5983c0f9) — **Sudarshan** — auto-commit 2026-04-30 08:44:29
     - 📁 **1 file:** `client/src/App.jsx` `+9 −12`
     - 📊 **`+9 −12`** · 1 file
-- 📌 [`bc4da922`](https://github.com/Jatin-nicon/tenali/commit/bc4da9227c9dad30cf2a58667d2bb4caf83c8d5a) — **Sudarshan** — auto-commit 2026-04-30 08:40:43
+- 📌 [`bc4da922`](https://github.com/vicharanashala/tenali/commit/bc4da9227c9dad30cf2a58667d2bb4caf83c8d5a) — **Sudarshan** — auto-commit 2026-04-30 08:40:43
     - 📁 **1 file:** `client/src/App.jsx` `+116 −29`
     - 📊 **`+116 −29`** · 1 file
-- 📌 [`d64ddff5`](https://github.com/Jatin-nicon/tenali/commit/d64ddff518b18d26238b83967bb984a162a2dfab) — **Sudarshan** — auto-commit 2026-04-30 07:58:49
+- 📌 [`d64ddff5`](https://github.com/vicharanashala/tenali/commit/d64ddff518b18d26238b83967bb984a162a2dfab) — **Sudarshan** — auto-commit 2026-04-30 07:58:49
     - 📁 **1 file:** `client/src/App.jsx` `+4 −4`
     - 📊 **`+4 −4`** · 1 file
-- 📌 [`d7b4a58e`](https://github.com/Jatin-nicon/tenali/commit/d7b4a58ed8ce4493c5c4389e88a420dfe3ae25ee) — **Sudarshan** — auto-commit 2026-04-30 07:54:49
+- 📌 [`d7b4a58e`](https://github.com/vicharanashala/tenali/commit/d7b4a58ed8ce4493c5c4389e88a420dfe3ae25ee) — **Sudarshan** — auto-commit 2026-04-30 07:54:49
     - 📁 **1 file:** `client/src/App.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`e0989dc5`](https://github.com/Jatin-nicon/tenali/commit/e0989dc566a251c26bba5a736e06835589e5265d) — **Sudarshan** — auto-commit 2026-04-30 07:54:45
+- 📌 [`e0989dc5`](https://github.com/vicharanashala/tenali/commit/e0989dc566a251c26bba5a736e06835589e5265d) — **Sudarshan** — auto-commit 2026-04-30 07:54:45
     - 📁 **1 file:** `client/src/App.jsx` `+16 −8`
     - 📊 **`+16 −8`** · 1 file
-- 📌 [`cdbb34b5`](https://github.com/Jatin-nicon/tenali/commit/cdbb34b5c2e18fffb685b51079c09fcaab22fdd4) — **Sudarshan** — auto-commit 2026-04-30 07:42:12
+- 📌 [`cdbb34b5`](https://github.com/vicharanashala/tenali/commit/cdbb34b5c2e18fffb685b51079c09fcaab22fdd4) — **Sudarshan** — auto-commit 2026-04-30 07:42:12
     - 📁 **1 file:** `client/src/App.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`5dd13203`](https://github.com/Jatin-nicon/tenali/commit/5dd1320353a3f05cfb3ca379f52f0140bce80f11) — **Sudarshan** — auto-commit 2026-04-30 07:42:01
+- 📌 [`5dd13203`](https://github.com/vicharanashala/tenali/commit/5dd1320353a3f05cfb3ca379f52f0140bce80f11) — **Sudarshan** — auto-commit 2026-04-30 07:42:01
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`330cffec`](https://github.com/Jatin-nicon/tenali/commit/330cffec07f11389b55062000fe7669112cfa51f) — **Sudarshan** — auto-commit 2026-04-30 07:41:05
+- 📌 [`330cffec`](https://github.com/vicharanashala/tenali/commit/330cffec07f11389b55062000fe7669112cfa51f) — **Sudarshan** — auto-commit 2026-04-30 07:41:05
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`1a2e6e5d`](https://github.com/Jatin-nicon/tenali/commit/1a2e6e5dbf46b62b613b08e4a0de0ea5212251af) — **Sudarshan** — auto-commit 2026-04-30 07:35:45
+- 📌 [`1a2e6e5d`](https://github.com/vicharanashala/tenali/commit/1a2e6e5dbf46b62b613b08e4a0de0ea5212251af) — **Sudarshan** — auto-commit 2026-04-30 07:35:45
     - 📁 **5 files:** `client/src/App.jsx` `+3 −3`, `server/_probe.js` `+108 −0`, `server/_probe2.js` `+68 −0`, `server/_probe3.js` `+31 −0`, `server/index.js` `+803 −210`
     - 📊 **`+1013 −213`** · 5 files
 
 #### 📅 2026-04-29  <sub>(12 commits)</sub>
 
-- 📌 [`08923809`](https://github.com/Jatin-nicon/tenali/commit/08923809270ae38436d2d246c67525476b6a0d5d) — **Sudarshan** — auto-commit 2026-04-29 12:42:25
+- 📌 [`08923809`](https://github.com/vicharanashala/tenali/commit/08923809270ae38436d2d246c67525476b6a0d5d) — **Sudarshan** — auto-commit 2026-04-29 12:42:25
     - 📁 **2 files:** `client/src/App.jsx` `+5 −5`, `server/index.js` `+31 −6`
     - 📊 **`+36 −11`** · 2 files
-- 📌 [`8f32df94`](https://github.com/Jatin-nicon/tenali/commit/8f32df94c58dad290a8aea0d0e0d6550a1e8daef) — **Sudarshan** — auto-commit 2026-04-29 12:13:17
+- 📌 [`8f32df94`](https://github.com/vicharanashala/tenali/commit/8f32df94c58dad290a8aea0d0e0d6550a1e8daef) — **Sudarshan** — auto-commit 2026-04-29 12:13:17
     - 📁 **2 files:** `client/src/App.jsx` `+2 −2`, `server/index.js` `+92 −9`
     - 📊 **`+94 −11`** · 2 files
-- 📌 [`3b054e2a`](https://github.com/Jatin-nicon/tenali/commit/3b054e2a1504b805963f5226fc49189db1569d68) — **Sudarshan** — auto-commit 2026-04-29 09:28:52
+- 📌 [`3b054e2a`](https://github.com/vicharanashala/tenali/commit/3b054e2a1504b805963f5226fc49189db1569d68) — **Sudarshan** — auto-commit 2026-04-29 09:28:52
     - 📁 **1 file:** `client/src/App.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`0cf45b8b`](https://github.com/Jatin-nicon/tenali/commit/0cf45b8b0f56a0d6be036749bad842e6fa63b3bc) — **Sudarshan** — auto-commit 2026-04-29 09:28:50
+- 📌 [`0cf45b8b`](https://github.com/vicharanashala/tenali/commit/0cf45b8b0f56a0d6be036749bad842e6fa63b3bc) — **Sudarshan** — auto-commit 2026-04-29 09:28:50
     - 📁 **1 file:** `client/src/App.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`27d1bcc5`](https://github.com/Jatin-nicon/tenali/commit/27d1bcc5f7c7afea4a05210da9fa8282b9e04552) — **Sudarshan** — auto-commit 2026-04-29 09:28:47
+- 📌 [`27d1bcc5`](https://github.com/vicharanashala/tenali/commit/27d1bcc5f7c7afea4a05210da9fa8282b9e04552) — **Sudarshan** — auto-commit 2026-04-29 09:28:47
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`156aa0d8`](https://github.com/Jatin-nicon/tenali/commit/156aa0d8530b829dc8cd6f04480293bee5428465) — **Sudarshan** — auto-commit 2026-04-29 09:19:15
+- 📌 [`156aa0d8`](https://github.com/vicharanashala/tenali/commit/156aa0d8530b829dc8cd6f04480293bee5428465) — **Sudarshan** — auto-commit 2026-04-29 09:19:15
     - 📁 **1 file:** `client/src/App.jsx` `+32 −15`
     - 📊 **`+32 −15`** · 1 file
-- 📌 [`9ef2e59c`](https://github.com/Jatin-nicon/tenali/commit/9ef2e59c64b2c29b8114485b3c8c96f224b29d49) — **Sudarshan** — auto-commit 2026-04-29 09:05:51
+- 📌 [`9ef2e59c`](https://github.com/vicharanashala/tenali/commit/9ef2e59c64b2c29b8114485b3c8c96f224b29d49) — **Sudarshan** — auto-commit 2026-04-29 09:05:51
     - 📁 **1 file:** `client/src/App.jsx` `+7 −4`
     - 📊 **`+7 −4`** · 1 file
-- 📌 [`7ad79643`](https://github.com/Jatin-nicon/tenali/commit/7ad79643975dd898321e31a5ff7da73d6a91e2a4) — **Sudarshan** — auto-commit 2026-04-29 08:53:34
+- 📌 [`7ad79643`](https://github.com/vicharanashala/tenali/commit/7ad79643975dd898321e31a5ff7da73d6a91e2a4) — **Sudarshan** — auto-commit 2026-04-29 08:53:34
     - 📁 **1 file:** `client/src/App.jsx` `+19 −9`
     - 📊 **`+19 −9`** · 1 file
-- 📌 [`0136b75f`](https://github.com/Jatin-nicon/tenali/commit/0136b75f21f56928fecae4bc9967517b83a18d08) — **Sudarshan** — auto-commit 2026-04-29 08:34:32
+- 📌 [`0136b75f`](https://github.com/vicharanashala/tenali/commit/0136b75f21f56928fecae4bc9967517b83a18d08) — **Sudarshan** — auto-commit 2026-04-29 08:34:32
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`2a5772ce`](https://github.com/Jatin-nicon/tenali/commit/2a5772ce351cbc699de56d24a5d83fa39dd61735) — **Sudarshan** — auto-commit 2026-04-29 08:31:44
+- 📌 [`2a5772ce`](https://github.com/vicharanashala/tenali/commit/2a5772ce351cbc699de56d24a5d83fa39dd61735) — **Sudarshan** — auto-commit 2026-04-29 08:31:44
     - 📁 **1 file:** `client/src/App.jsx` `+10 −9`
     - 📊 **`+10 −9`** · 1 file
-- 📌 [`610c314a`](https://github.com/Jatin-nicon/tenali/commit/610c314a96ace2fbcbad1d5c06c8a0649e081ded) — **Sudarshan** — auto-commit 2026-04-29 08:23:14
+- 📌 [`610c314a`](https://github.com/vicharanashala/tenali/commit/610c314a96ace2fbcbad1d5c06c8a0649e081ded) — **Sudarshan** — auto-commit 2026-04-29 08:23:14
     - 📁 **1 file:** `client/src/App.jsx` `+392 −62`
     - 📊 **`+392 −62`** · 1 file
-- 📌 [`6a321dee`](https://github.com/Jatin-nicon/tenali/commit/6a321dee6db70af2a0123b59b607f2e2e8959997) — **Sudarshan** — auto-commit 2026-04-29 08:15:18
+- 📌 [`6a321dee`](https://github.com/vicharanashala/tenali/commit/6a321dee6db70af2a0123b59b607f2e2e8959997) — **Sudarshan** — auto-commit 2026-04-29 08:15:18
     - 📁 **2 files:** `client/src/App.jsx` `+872 −248`, `server/index.js` `+881 −40`
     - 📊 **`+1753 −288`** · 2 files
 
 #### 📅 2026-04-27  <sub>(4 commits)</sub>
 
-- 📌 [`8e7559d4`](https://github.com/Jatin-nicon/tenali/commit/8e7559d4cef3e5e4ecfeaf21c3483f69961a9576) — **Sudarshan** — auto-commit 2026-04-27 08:24:40
+- 📌 [`8e7559d4`](https://github.com/vicharanashala/tenali/commit/8e7559d4cef3e5e4ecfeaf21c3483f69961a9576) — **Sudarshan** — auto-commit 2026-04-27 08:24:40
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`2b9ca8a3`](https://github.com/Jatin-nicon/tenali/commit/2b9ca8a3845d112b5f7a028eb344ada7bae5a2ed) — **Sudarshan** — auto-commit 2026-04-27 08:02:11
+- 📌 [`2b9ca8a3`](https://github.com/vicharanashala/tenali/commit/2b9ca8a3845d112b5f7a028eb344ada7bae5a2ed) — **Sudarshan** — auto-commit 2026-04-27 08:02:11
     - 📁 **1 file:** `client/src/App.jsx` `+4 −4`
     - 📊 **`+4 −4`** · 1 file
-- 📌 [`b81b97b9`](https://github.com/Jatin-nicon/tenali/commit/b81b97b931fbe76d0ecd2bad80a84988ca505233) — **Sudarshan** — auto-commit 2026-04-27 07:45:44
+- 📌 [`b81b97b9`](https://github.com/vicharanashala/tenali/commit/b81b97b931fbe76d0ecd2bad80a84988ca505233) — **Sudarshan** — auto-commit 2026-04-27 07:45:44
     - 📁 **1 file:** `client/src/App.jsx` `+323 −96`
     - 📊 **`+323 −96`** · 1 file
-- 📌 [`14d5c266`](https://github.com/Jatin-nicon/tenali/commit/14d5c26690fb06a4f1a47ceebe899ff244ed363c) — **Sudarshan** — auto-commit 2026-04-27 07:01:36
+- 📌 [`14d5c266`](https://github.com/vicharanashala/tenali/commit/14d5c26690fb06a4f1a47ceebe899ff244ed363c) — **Sudarshan** — auto-commit 2026-04-27 07:01:36
     - 📁 **1 file:** `client/src/App.jsx` `+743 −5`
     - 📊 **`+743 −5`** · 1 file
 
 #### 📅 2026-04-24  <sub>(8 commits)</sub>
 
-- 📌 [`bca8cbdc`](https://github.com/Jatin-nicon/tenali/commit/bca8cbdc9fa3bb3812591ed51b9e92652f183777) — **Sudarshan** — auto-commit 2026-04-24 10:32:06
+- 📌 [`bca8cbdc`](https://github.com/vicharanashala/tenali/commit/bca8cbdc9fa3bb3812591ed51b9e92652f183777) — **Sudarshan** — auto-commit 2026-04-24 10:32:06
     - 📁 **1 file:** `client/src/App.jsx` `+147 −29`
     - 📊 **`+147 −29`** · 1 file
-- 📌 [`238edbed`](https://github.com/Jatin-nicon/tenali/commit/238edbed1c81ad393ce425ea3f58653221d0475c) — **Sudarshan** — shuffle MCQ options and add keyboard navigation (arrows, Enter, A-D/1-4)
+- 📌 [`238edbed`](https://github.com/vicharanashala/tenali/commit/238edbed1c81ad393ce425ea3f58653221d0475c) — **Sudarshan** — shuffle MCQ options and add keyboard navigation (arrows, Enter, A-D/1-4)
     - 📁 **1 file:** `client/src/App.jsx` `+111 −16`
     - 📊 **`+111 −16`** · 1 file
-- 📌 [`afd1562c`](https://github.com/Jatin-nicon/tenali/commit/afd1562cbdac9e4c7feb8170ccacaec65d30be7a) — **Sudarshan** — auto-commit 2026-04-24 09:56:03
+- 📌 [`afd1562c`](https://github.com/vicharanashala/tenali/commit/afd1562cbdac9e4c7feb8170ccacaec65d30be7a) — **Sudarshan** — auto-commit 2026-04-24 09:56:03
     - 📁 **1 file:** `client/src/App.jsx` `+138 −23`
     - 📊 **`+138 −23`** · 1 file
-- 📌 [`8608f542`](https://github.com/Jatin-nicon/tenali/commit/8608f542f4ae677876911642eb8725bf9ee20d06) — **Sudarshan** — add zoom to line-fitter (+/−/1:1/Fit buttons + mouse wheel)
+- 📌 [`8608f542`](https://github.com/vicharanashala/tenali/commit/8608f542f4ae677876911642eb8725bf9ee20d06) — **Sudarshan** — add zoom to line-fitter (+/−/1:1/Fit buttons + mouse wheel)
     - 📁 **1 file:** `client/src/App.jsx` `+85 −6`
     - 📊 **`+85 −6`** · 1 file
-- 📌 [`31c24205`](https://github.com/Jatin-nicon/tenali/commit/31c242054e2e54dccacb2ae87d405f1bd36d869a) — **Sudarshan** — auto-commit 2026-04-24 09:34:47
+- 📌 [`31c24205`](https://github.com/vicharanashala/tenali/commit/31c242054e2e54dccacb2ae87d405f1bd36d869a) — **Sudarshan** — auto-commit 2026-04-24 09:34:47
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`cfbb1ccf`](https://github.com/Jatin-nicon/tenali/commit/cfbb1ccfab99fa65652b61284a55f16376e00bfd) — **Sudarshan** — replace drill with interactive line-fitter (random points, live y=mx+C)
+- 📌 [`cfbb1ccf`](https://github.com/vicharanashala/tenali/commit/cfbb1ccfab99fa65652b61284a55f16376e00bfd) — **Sudarshan** — replace drill with interactive line-fitter (random points, live y=mx+C)
     - 📁 **1 file:** `client/src/App.jsx` `+277 −3`
     - 📊 **`+277 −3`** · 1 file
-- 📌 [`163508c7`](https://github.com/Jatin-nicon/tenali/commit/163508c71f81d3a155ab80b5d637331e6650f819) — **Sudarshan** — auto-commit 2026-04-24 09:14:38
+- 📌 [`163508c7`](https://github.com/vicharanashala/tenali/commit/163508c71f81d3a155ab80b5d637331e6650f819) — **Sudarshan** — auto-commit 2026-04-24 09:14:38
     - 📁 **1 file:** `client/src/App.jsx` `+473 −487`
     - 📊 **`+473 −487`** · 1 file
-- 📌 [`1fd6fa57`](https://github.com/Jatin-nicon/tenali/commit/1fd6fa578af3623b817b6e868400d9570d4ef8bd) — **Sudarshan** — Add /riya: IGCSE Add Math 0606 practice bank (65 MCQs across 14 topics)
+- 📌 [`1fd6fa57`](https://github.com/vicharanashala/tenali/commit/1fd6fa578af3623b817b6e868400d9570d4ef8bd) — **Sudarshan** — Add /riya: IGCSE Add Math 0606 practice bank (65 MCQs across 14 topics)
     - 📁 **1 file:** `client/src/App.jsx` `+597 −4`
     - 📊 **`+597 −4`** · 1 file
 
 #### 📅 2026-04-20  <sub>(2 commits)</sub>
 
-- 📌 [`aecf6036`](https://github.com/Jatin-nicon/tenali/commit/aecf60368f87d9843fcdf9a0b125182f1cbe0d00) — **Sudarshan** — auto-commit 2026-04-20 14:18:48
+- 📌 [`aecf6036`](https://github.com/vicharanashala/tenali/commit/aecf60368f87d9843fcdf9a0b125182f1cbe0d00) — **Sudarshan** — auto-commit 2026-04-20 14:18:48
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`555cbb29`](https://github.com/Jatin-nicon/tenali/commit/555cbb2999e8d0ff17ab7d9dae916bafd80dc657) — **Sudarshan** — ensure all four MCQ choices are unique
+- 📌 [`555cbb29`](https://github.com/vicharanashala/tenali/commit/555cbb2999e8d0ff17ab7d9dae916bafd80dc657) — **Sudarshan** — ensure all four MCQ choices are unique
     - 📁 **1 file:** `client/src/App.jsx` `+54 −4`
     - 📊 **`+54 −4`** · 1 file
 
 #### 📅 2026-04-18  <sub>(26 commits)</sub>
 
-- 📌 [`9707001b`](https://github.com/Jatin-nicon/tenali/commit/9707001b047296e47fe9395b4db44040dbad0c84) — **Sudarshan** — auto-commit 2026-04-18 21:00:22
+- 📌 [`9707001b`](https://github.com/vicharanashala/tenali/commit/9707001b047296e47fe9395b4db44040dbad0c84) — **Sudarshan** — auto-commit 2026-04-18 21:00:22
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`2a0c7d5a`](https://github.com/Jatin-nicon/tenali/commit/2a0c7d5a6b3caedc83c465e9cad6412f92bc7959) — **Sudarshan** — auto-commit 2026-04-18 20:34:21
+- 📌 [`2a0c7d5a`](https://github.com/vicharanashala/tenali/commit/2a0c7d5a6b3caedc83c465e9cad6412f92bc7959) — **Sudarshan** — auto-commit 2026-04-18 20:34:21
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`6a04d2ce`](https://github.com/Jatin-nicon/tenali/commit/6a04d2ce85c60546b6a9f34596bb8bbd629a5f2f) — **Sudarshan** — auto-commit 2026-04-18 20:28:24
+- 📌 [`6a04d2ce`](https://github.com/vicharanashala/tenali/commit/6a04d2ce85c60546b6a9f34596bb8bbd629a5f2f) — **Sudarshan** — auto-commit 2026-04-18 20:28:24
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`616edd1a`](https://github.com/Jatin-nicon/tenali/commit/616edd1ac384747c79b0d8e0bb6f39be7762d7a8) — **Sudarshan** — auto-commit 2026-04-18 20:26:54
+- 📌 [`616edd1a`](https://github.com/vicharanashala/tenali/commit/616edd1ac384747c79b0d8e0bb6f39be7762d7a8) — **Sudarshan** — auto-commit 2026-04-18 20:26:54
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`0fb1759e`](https://github.com/Jatin-nicon/tenali/commit/0fb1759e9fa6ceb929da5e96122419882d0ce320) — **Sudarshan** — auto-commit 2026-04-18 20:25:33
+- 📌 [`0fb1759e`](https://github.com/vicharanashala/tenali/commit/0fb1759e9fa6ceb929da5e96122419882d0ce320) — **Sudarshan** — auto-commit 2026-04-18 20:25:33
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`a6688c7a`](https://github.com/Jatin-nicon/tenali/commit/a6688c7adb4823bc3ea292fb9c8b09d1089d0888) — **Sudarshan** — auto-commit 2026-04-18 20:24:01
-    - 📁 **20 files:** `client/src/App.jsx` `+611 −2`, `vocab/questions/0181.json` `+0 −15`, `vocab/questions/0599.json` `+0 −15`, `vocab/questions/2070.json` `+0 −15`, `vocab/questions/2144.json` `+0 −15`, `vocab/questions/2238.json` `+0 −15`, `vocab/questions/2778.json` `+0 −15`, `vocab/questions/2849.json` `+0 −15` *(+12 more in [`a6688c7a`](https://github.com/Jatin-nicon/tenali/commit/a6688c7adb4823bc3ea292fb9c8b09d1089d0888))*
+- 📌 [`a6688c7a`](https://github.com/vicharanashala/tenali/commit/a6688c7adb4823bc3ea292fb9c8b09d1089d0888) — **Sudarshan** — auto-commit 2026-04-18 20:24:01
+    - 📁 **20 files:** `client/src/App.jsx` `+611 −2`, `vocab/questions/0181.json` `+0 −15`, `vocab/questions/0599.json` `+0 −15`, `vocab/questions/2070.json` `+0 −15`, `vocab/questions/2144.json` `+0 −15`, `vocab/questions/2238.json` `+0 −15`, `vocab/questions/2778.json` `+0 −15`, `vocab/questions/2849.json` `+0 −15` *(+12 more in [`a6688c7a`](https://github.com/vicharanashala/tenali/commit/a6688c7adb4823bc3ea292fb9c8b09d1089d0888))*
     - 📊 **`+611 −287`** · 20 files
-- 📌 [`7d348151`](https://github.com/Jatin-nicon/tenali/commit/7d3481518f0357748d67cfbd14eeae32a5f249c5) — **Sudarshan** — Add version badge + auto-increment on push
+- 📌 [`7d348151`](https://github.com/vicharanashala/tenali/commit/7d3481518f0357748d67cfbd14eeae32a5f249c5) — **Sudarshan** — Add version badge + auto-increment on push
     - 📁 **1 file:** `client/src/App.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`7c11afc9`](https://github.com/Jatin-nicon/tenali/commit/7c11afc9ca151f30e790090f0f5fd618b8ade1ec) — **Sudarshan** — Add version badge + auto-increment on push
+- 📌 [`7c11afc9`](https://github.com/vicharanashala/tenali/commit/7c11afc9ca151f30e790090f0f5fd618b8ade1ec) — **Sudarshan** — Add version badge + auto-increment on push
     - 📁 **1 file:** `client/src/App.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`0977d37b`](https://github.com/Jatin-nicon/tenali/commit/0977d37b5206a1df20113fd5d72dde8565fdb881) — **Sudarshan** — Add version badge + auto-increment on push
+- 📌 [`0977d37b`](https://github.com/vicharanashala/tenali/commit/0977d37b5206a1df20113fd5d72dde8565fdb881) — **Sudarshan** — Add version badge + auto-increment on push
     - 📁 **1 file:** `client/src/App.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`5df8f557`](https://github.com/Jatin-nicon/tenali/commit/5df8f557df00d323b41df089fb3ac372f371d853) — **Sudarshan** — Add version badge + auto-increment on push
+- 📌 [`5df8f557`](https://github.com/vicharanashala/tenali/commit/5df8f557df00d323b41df089fb3ac372f371d853) — **Sudarshan** — Add version badge + auto-increment on push
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`f7f4737c`](https://github.com/Jatin-nicon/tenali/commit/f7f4737c14a1e687f29a44b03844abbaeb6df389) — **Sudarshan** — Add version badge + auto-increment on push
+- 📌 [`f7f4737c`](https://github.com/vicharanashala/tenali/commit/f7f4737c14a1e687f29a44b03844abbaeb6df389) — **Sudarshan** — Add version badge + auto-increment on push
     - 📁 **2 files:** `client/src/App.jsx` `+20 −0`, `git-push.sh` `+24 −3`
     - 📊 **`+44 −3`** · 2 files
-- 📌 [`c2c864c4`](https://github.com/Jatin-nicon/tenali/commit/c2c864c471925f425b0dfc8aaa712aadd4c7997a) — **Sudarshan** — Render fractions as stacked LaTeX-style (no / sign), fix level 7 math
+- 📌 [`c2c864c4`](https://github.com/vicharanashala/tenali/commit/c2c864c471925f425b0dfc8aaa712aadd4c7997a) — **Sudarshan** — Render fractions as stacked LaTeX-style (no / sign), fix level 7 math
     - 📁 **2 files:** `client/src/App.jsx` `+31 −19`, `git-push.sh` `+9 −14`
     - 📊 **`+40 −33`** · 2 files
-- 📌 [`f96a02c5`](https://github.com/Jatin-nicon/tenali/commit/f96a02c55403ab4535958ee4628020399c9cb435) — **Sudarshan** — Replace Tatsavit with algebra simplification drill
+- 📌 [`f96a02c5`](https://github.com/vicharanashala/tenali/commit/f96a02c55403ab4535958ee4628020399c9cb435) — **Sudarshan** — Replace Tatsavit with algebra simplification drill
     - 📁 **1 file:** `client/src/App.jsx` `+535 −307`
     - 📊 **`+535 −307`** · 1 file
-- 📌 [`34499ee6`](https://github.com/Jatin-nicon/tenali/commit/34499ee63c386f1326004e16040d381e0f986e98) — **Sudarshan** — auto-commit 2026-04-18 08:33:10
+- 📌 [`34499ee6`](https://github.com/vicharanashala/tenali/commit/34499ee63c386f1326004e16040d381e0f986e98) — **Sudarshan** — auto-commit 2026-04-18 08:33:10
     - 📁 **3 files:** `client/src/App.jsx` `+55 −105`, `test.sh` `+35 −111`, `test_quick.js` `+113 −128`
     - 📊 **`+203 −344`** · 3 files
-- 📌 [`f829f9ce`](https://github.com/Jatin-nicon/tenali/commit/f829f9ce1bda7a4e5945f4ed25c5b7812d4045e5) — **Sudarshan** — auto-commit 2026-04-18 08:24:37
+- 📌 [`f829f9ce`](https://github.com/vicharanashala/tenali/commit/f829f9ce1bda7a4e5945f4ed25c5b7812d4045e5) — **Sudarshan** — auto-commit 2026-04-18 08:24:37
     - 📁 **3 files:** `client/src/App.jsx` `+36 −48`, `test.sh` `+71 −79`, `test_quick.js` `+146 −0`
     - 📊 **`+253 −127`** · 3 files
-- 📌 [`a6fdb672`](https://github.com/Jatin-nicon/tenali/commit/a6fdb6726c607e1ddecfc7c0c5280d35489ee76c) — **Sudarshan** — auto-commit 2026-04-18 08:18:48
+- 📌 [`a6fdb672`](https://github.com/vicharanashala/tenali/commit/a6fdb6726c607e1ddecfc7c0c5280d35489ee76c) — **Sudarshan** — auto-commit 2026-04-18 08:18:48
     - 📁 **1 file:** `client/src/App.jsx` `+62 −69`
     - 📊 **`+62 −69`** · 1 file
-- 📌 [`b9846128`](https://github.com/Jatin-nicon/tenali/commit/b9846128759c6918c12a85fdc828150a1a7e857e) — **Sudarshan** — auto-commit 2026-04-18 07:53:54
+- 📌 [`b9846128`](https://github.com/vicharanashala/tenali/commit/b9846128759c6918c12a85fdc828150a1a7e857e) — **Sudarshan** — auto-commit 2026-04-18 07:53:54
     - 📁 **1 file:** `client/src/App.jsx` `+10 −16`
     - 📊 **`+10 −16`** · 1 file
-- 📌 [`05c42adc`](https://github.com/Jatin-nicon/tenali/commit/05c42adc1a9e5ee6a840765922dcbbb2d8fa84fd) — **Sudarshan** — auto-commit 2026-04-18 07:52:41
+- 📌 [`05c42adc`](https://github.com/vicharanashala/tenali/commit/05c42adc1a9e5ee6a840765922dcbbb2d8fa84fd) — **Sudarshan** — auto-commit 2026-04-18 07:52:41
     - 📁 **1 file:** `client/src/App.jsx` `+3 −2`
     - 📊 **`+3 −2`** · 1 file
-- 📌 [`adb42882`](https://github.com/Jatin-nicon/tenali/commit/adb4288296791de5b153882ac4b12287f884cabd) — **Sudarshan** — auto-commit 2026-04-18 07:48:54
+- 📌 [`adb42882`](https://github.com/vicharanashala/tenali/commit/adb4288296791de5b153882ac4b12287f884cabd) — **Sudarshan** — auto-commit 2026-04-18 07:48:54
     - 📁 **1 file:** `test.sh` `+83 −201`
     - 📊 **`+83 −201`** · 1 file
-- 📌 [`95112a6c`](https://github.com/Jatin-nicon/tenali/commit/95112a6c5e92c26f2b9fe216dfb7249eb64b8252) — **Sudarshan** — auto-commit 2026-04-18 07:46:12
+- 📌 [`95112a6c`](https://github.com/vicharanashala/tenali/commit/95112a6c5e92c26f2b9fe216dfb7249eb64b8252) — **Sudarshan** — auto-commit 2026-04-18 07:46:12
     - 📁 **2 files:** `client/src/App.jsx` `+14 −14`, `test.sh` `+333 −0`
     - 📊 **`+347 −14`** · 2 files
-- 📌 [`b52b65c0`](https://github.com/Jatin-nicon/tenali/commit/b52b65c00f921d1d31c51a361730b02494aa855e) — **Sudarshan** — auto-commit 2026-04-18 07:41:25
+- 📌 [`b52b65c0`](https://github.com/vicharanashala/tenali/commit/b52b65c00f921d1d31c51a361730b02494aa855e) — **Sudarshan** — auto-commit 2026-04-18 07:41:25
     - 📁 **1 file:** `client/src/App.jsx` `+4 −0`
     - 📊 **`+4 −0`** · 1 file
-- 📌 [`98ee2c87`](https://github.com/Jatin-nicon/tenali/commit/98ee2c879cee8b4a5fb307eb346de24d32bb65ba) — **Sudarshan** — auto-commit 2026-04-18 07:40:57
+- 📌 [`98ee2c87`](https://github.com/vicharanashala/tenali/commit/98ee2c879cee8b4a5fb307eb346de24d32bb65ba) — **Sudarshan** — auto-commit 2026-04-18 07:40:57
     - 📁 **1 file:** `client/src/App.jsx` `+7 −3`
     - 📊 **`+7 −3`** · 1 file
-- 📌 [`b76d6b57`](https://github.com/Jatin-nicon/tenali/commit/b76d6b57e96ee169da2419ac054c8a915798ac82) — **Sudarshan** — auto-commit 2026-04-18 07:37:42
+- 📌 [`b76d6b57`](https://github.com/vicharanashala/tenali/commit/b76d6b57e96ee169da2419ac054c8a915798ac82) — **Sudarshan** — auto-commit 2026-04-18 07:37:42
     - 📁 **1 file:** `client/src/App.jsx` `+26 −18`
     - 📊 **`+26 −18`** · 1 file
-- 📌 [`ebe80c2a`](https://github.com/Jatin-nicon/tenali/commit/ebe80c2a7b72bcf9df01e0b6e52ab186e3eb04ea) — **Sudarshan** — auto-commit 2026-04-18 07:36:08
+- 📌 [`ebe80c2a`](https://github.com/vicharanashala/tenali/commit/ebe80c2a7b72bcf9df01e0b6e52ab186e3eb04ea) — **Sudarshan** — auto-commit 2026-04-18 07:36:08
     - 📁 **1 file:** `client/src/App.jsx` `+22 −23`
     - 📊 **`+22 −23`** · 1 file
-- 📌 [`38dff87f`](https://github.com/Jatin-nicon/tenali/commit/38dff87f4f8a63eb3048d68f213ffcddf6664a0d) — **Sudarshan** — auto-commit 2026-04-18 07:34:22
+- 📌 [`38dff87f`](https://github.com/vicharanashala/tenali/commit/38dff87f4f8a63eb3048d68f213ffcddf6664a0d) — **Sudarshan** — auto-commit 2026-04-18 07:34:22
     - 📁 **1 file:** `client/src/App.jsx` `+22 −4`
     - 📊 **`+22 −4`** · 1 file
-- 📌 [`0f63e884`](https://github.com/Jatin-nicon/tenali/commit/0f63e8847c8941f80683f37fbf493d37b8073a3d) — **Sudarshan** — auto-commit 2026-04-18 07:30:48
+- 📌 [`0f63e884`](https://github.com/vicharanashala/tenali/commit/0f63e8847c8941f80683f37fbf493d37b8073a3d) — **Sudarshan** — auto-commit 2026-04-18 07:30:48
     - 📁 **1 file:** `client/src/App.jsx` `+16 −5`
     - 📊 **`+16 −5`** · 1 file
 
 #### 📅 2026-04-17  <sub>(20 commits)</sub>
 
-- 📌 [`3c0a7d38`](https://github.com/Jatin-nicon/tenali/commit/3c0a7d3865d2069a066c04baf156b232abada6e2) — **Sudarshan** — auto-commit 2026-04-17 23:49:18
+- 📌 [`3c0a7d38`](https://github.com/vicharanashala/tenali/commit/3c0a7d3865d2069a066c04baf156b232abada6e2) — **Sudarshan** — auto-commit 2026-04-17 23:49:18
     - 📁 **1 file:** `client/src/App.jsx` `+9 −3`
     - 📊 **`+9 −3`** · 1 file
-- 📌 [`6b37d341`](https://github.com/Jatin-nicon/tenali/commit/6b37d3414ecc5282e4e99012a4deb253fa9b221c) — **Sudarshan** — auto-commit 2026-04-17 23:46:04
+- 📌 [`6b37d341`](https://github.com/vicharanashala/tenali/commit/6b37d3414ecc5282e4e99012a4deb253fa9b221c) — **Sudarshan** — auto-commit 2026-04-17 23:46:04
     - 📁 **1 file:** `client/src/App.jsx` `+7 −2`
     - 📊 **`+7 −2`** · 1 file
-- 📌 [`ae1aa7ec`](https://github.com/Jatin-nicon/tenali/commit/ae1aa7ec2bc96c355695b827905ab3ba5f959365) — **Sudarshan** — auto-commit 2026-04-17 23:42:52
+- 📌 [`ae1aa7ec`](https://github.com/vicharanashala/tenali/commit/ae1aa7ec2bc96c355695b827905ab3ba5f959365) — **Sudarshan** — auto-commit 2026-04-17 23:42:52
     - 📁 **1 file:** `client/src/App.jsx` `+45 −31`
     - 📊 **`+45 −31`** · 1 file
-- 📌 [`5fb06840`](https://github.com/Jatin-nicon/tenali/commit/5fb06840cac5e3427770cd4a92db17d247c26336) — **Sudarshan** — auto-commit 2026-04-17 23:37:40
+- 📌 [`5fb06840`](https://github.com/vicharanashala/tenali/commit/5fb06840cac5e3427770cd4a92db17d247c26336) — **Sudarshan** — auto-commit 2026-04-17 23:37:40
     - 📁 **1 file:** `client/src/App.jsx` `+27 −8`
     - 📊 **`+27 −8`** · 1 file
-- 📌 [`af4459fc`](https://github.com/Jatin-nicon/tenali/commit/af4459fca0e276e8876351d2133024233acaf89c) — **Sudarshan** — auto-commit 2026-04-17 23:34:50
+- 📌 [`af4459fc`](https://github.com/vicharanashala/tenali/commit/af4459fca0e276e8876351d2133024233acaf89c) — **Sudarshan** — auto-commit 2026-04-17 23:34:50
     - 📁 **1 file:** `client/src/App.jsx` `+27 −7`
     - 📊 **`+27 −7`** · 1 file
-- 🐛 [`90e78a42`](https://github.com/Jatin-nicon/tenali/commit/90e78a42b54e4d5299cb8752c91edcba42d314dc) — **Sudarshan** — randomly focus on 2 or 3 slowest facts (uniform)
+- 🐛 [`90e78a42`](https://github.com/vicharanashala/tenali/commit/90e78a42b54e4d5299cb8752c91edcba42d314dc) — **Sudarshan** — randomly focus on 2 or 3 slowest facts (uniform)
     - 📁 **1 file:** `client/src/App.jsx` `+23 −18`
     - 📊 **`+23 −18`** · 1 file
-- 🐛 [`a3bc937b`](https://github.com/Jatin-nicon/tenali/commit/a3bc937b747b0a11caba71ed02107b67795f75b8) — **Sudarshan** — no auto Phase 2 — add manual Phase 2 button
+- 🐛 [`a3bc937b`](https://github.com/vicharanashala/tenali/commit/a3bc937b747b0a11caba71ed02107b67795f75b8) — **Sudarshan** — no auto Phase 2 — add manual Phase 2 button
     - 📁 **1 file:** `client/src/App.jsx` `+22 −7`
     - 📊 **`+22 −7`** · 1 file
-- 🐛 [`744d4ca8`](https://github.com/Jatin-nicon/tenali/commit/744d4ca8885c07fcdadac0d9a67ff74868a4193b) — **Sudarshan** — show lookup table in order (no shuffle), split into 2 rows of 5
+- 🐛 [`744d4ca8`](https://github.com/vicharanashala/tenali/commit/744d4ca8885c07fcdadac0d9a67ff74868a4193b) — **Sudarshan** — show lookup table in order (no shuffle), split into 2 rows of 5
     - 📁 **1 file:** `client/src/App.jsx` `+30 −32`
     - 📊 **`+30 −32`** · 1 file
-- ✨ [`62fae991`](https://github.com/Jatin-nicon/tenali/commit/62fae99163e773d75630a2633fec9d37636766bd) — **Sudarshan** — add /supertables1 — adaptive 2-phase speed drill with rolling window
+- ✨ [`62fae991`](https://github.com/vicharanashala/tenali/commit/62fae99163e773d75630a2633fec9d37636766bd) — **Sudarshan** — add /supertables1 — adaptive 2-phase speed drill with rolling window
     - 📁 **1 file:** `client/src/App.jsx` `+427 −0`
     - 📊 **`+427 −0`** · 1 file
-- 🐛 [`34a9ad9d`](https://github.com/Jatin-nicon/tenali/commit/34a9ad9dd0ea6909ae2e997248cd06c5edef2965) — **Sudarshan** — exclude incorrect answers from timing data and attempt count
+- 🐛 [`34a9ad9d`](https://github.com/vicharanashala/tenali/commit/34a9ad9dd0ea6909ae2e997248cd06c5edef2965) — **Sudarshan** — exclude incorrect answers from timing data and attempt count
     - 📁 **1 file:** `client/src/App.jsx` `+8 −2`
     - 📊 **`+8 −2`** · 1 file
-- ✨ [`64fabd4e`](https://github.com/Jatin-nicon/tenali/commit/64fabd4ee708c564d14b8d6d36e0285fd3bf395b) — **Sudarshan** — trimmed mean (drop top/bottom 10%) for chart and adaptive logic
+- ✨ [`64fabd4e`](https://github.com/vicharanashala/tenali/commit/64fabd4ee708c564d14b8d6d36e0285fd3bf395b) — **Sudarshan** — trimmed mean (drop top/bottom 10%) for chart and adaptive logic
     - 📁 **1 file:** `client/src/App.jsx` `+23 −5`
     - 📊 **`+23 −5`** · 1 file
-- ✨ [`4393f77c`](https://github.com/Jatin-nicon/tenali/commit/4393f77c6f0c35990b4201f4e535fc91c6d22d86) — **Sudarshan** — make all 10 levels adaptive using session performance data
+- ✨ [`4393f77c`](https://github.com/vicharanashala/tenali/commit/4393f77c6f0c35990b4201f4e535fc91c6d22d86) — **Sudarshan** — make all 10 levels adaptive using session performance data
     - 📁 **1 file:** `client/src/App.jsx` `+60 −9`
     - 📊 **`+60 −9`** · 1 file
-- ✨ [`5d9fe1a3`](https://github.com/Jatin-nicon/tenali/commit/5d9fe1a37c6aa2e6d2cddbdbc1c4a54e67f052a8) — **Sudarshan** — add live performance chart + record timing on all levels
+- ✨ [`5d9fe1a3`](https://github.com/vicharanashala/tenali/commit/5d9fe1a37c6aa2e6d2cddbdbc1c4a54e67f052a8) — **Sudarshan** — add live performance chart + record timing on all levels
     - 📁 **1 file:** `client/src/App.jsx` `+66 −4`
     - 📊 **`+66 −4`** · 1 file
-- ✨ [`76bba2d8`](https://github.com/Jatin-nicon/tenali/commit/76bba2d8ff08c3eb0f99b6d6433d535e600f2c57) — **Sudarshan** — expand table selection from 20 to 50
+- ✨ [`76bba2d8`](https://github.com/vicharanashala/tenali/commit/76bba2d8ff08c3eb0f99b6d6433d535e600f2c57) — **Sudarshan** — expand table selection from 20 to 50
     - 📁 **1 file:** `client/src/App.jsx` `+14 −5`
     - 📊 **`+14 −5`** · 1 file
-- 🐛 [`404527d4`](https://github.com/Jatin-nicon/tenali/commit/404527d4ea3a629bcf46c744f58bfbe56f02e9ae) — **Sudarshan** — fix grid overflow + Enter key advances on feedback
+- 🐛 [`404527d4`](https://github.com/vicharanashala/tenali/commit/404527d4ea3a629bcf46c744f58bfbe56f02e9ae) — **Sudarshan** — fix grid overflow + Enter key advances on feedback
     - 📁 **2 files:** `client/src/App.jsx` `+17 −5`, `git-push.sh` `+39 −0`
     - 📊 **`+56 −5`** · 2 files
-- 🐛 [`d29342a7`](https://github.com/Jatin-nicon/tenali/commit/d29342a7656f1cd3f717dfd45f68c09dbc767f26) — **Sudarshan** — improve contrast and formatting across dark/light themes
+- 🐛 [`d29342a7`](https://github.com/vicharanashala/tenali/commit/d29342a7656f1cd3f717dfd45f68c09dbc767f26) — **Sudarshan** — improve contrast and formatting across dark/light themes
     - 📁 **2 files:** `client/src/App.css` `+4 −4`, `client/src/App.jsx` `+12 −12`
     - 📊 **`+16 −16`** · 2 files
-- ✨ [`88378bdf`](https://github.com/Jatin-nicon/tenali/commit/88378bdfd7f75c9ca93604b18194f1aafda3b3ac) — **Sudarshan** — sequential level progression + high-contrast theme
+- ✨ [`88378bdf`](https://github.com/vicharanashala/tenali/commit/88378bdfd7f75c9ca93604b18194f1aafda3b3ac) — **Sudarshan** — sequential level progression + high-contrast theme
     - 📁 **2 files:** `client/src/App.jsx` `+204 −138`, `supertables.jsx` `+517 −160`
     - 📊 **`+721 −298`** · 2 files
-- 📌 [`c5bcd18f`](https://github.com/Jatin-nicon/tenali/commit/c5bcd18fc9ef1c153785d212beeb18bd5b1c06fd) — **Sudarshan** — Add /supertables route with 10-level multiplication learning app
+- 📌 [`c5bcd18f`](https://github.com/vicharanashala/tenali/commit/c5bcd18fc9ef1c153785d212beeb18bd5b1c06fd) — **Sudarshan** — Add /supertables route with 10-level multiplication learning app
     - 📁 **1 file:** `client/src/App.jsx` `+429 −0`
     - 📊 **`+429 −0`** · 1 file
-- 📌 [`bb8db965`](https://github.com/Jatin-nicon/tenali/commit/bb8db9654f0572116c5ae86283e7a463f195fc34) — **Sudarshan** — Add SuperTables: 10-level multiplication learning app
+- 📌 [`bb8db965`](https://github.com/vicharanashala/tenali/commit/bb8db9654f0572116c5ae86283e7a463f195fc34) — **Sudarshan** — Add SuperTables: 10-level multiplication learning app
     - 📁 **1 file:** `supertables.jsx` `+688 −0`
     - 📊 **`+688 −0`** · 1 file
-- ✨ [`b01e72be`](https://github.com/Jatin-nicon/tenali/commit/b01e72bea145873a6dc45513b0dd4707177f9411) — **Sudarshan** — add /lakshya route + spaced repetition for slow multipliers in /tables
+- ✨ [`b01e72be`](https://github.com/vicharanashala/tenali/commit/b01e72bea145873a6dc45513b0dd4707177f9411) — **Sudarshan** — add /lakshya route + spaced repetition for slow multipliers in /tables
     - 📁 **1 file:** `client/src/App.jsx` `+41 −1`
     - 📊 **`+41 −1`** · 1 file
 
 #### 📅 2026-04-16  <sub>(16 commits)</sub>
 
-- ✨ [`209276d3`](https://github.com/Jatin-nicon/tenali/commit/209276d3c396ad90c865ff5b1df8e638e5cca957) — **Sudarshan** — add /lakshya route with mastery multiplication program
+- ✨ [`209276d3`](https://github.com/vicharanashala/tenali/commit/209276d3c396ad90c865ff5b1df8e638e5cca957) — **Sudarshan** — add /lakshya route with mastery multiplication program
     - 📁 **1 file:** `client/src/App.jsx` `+613 −0`
     - 📊 **`+613 −0`** · 1 file
-- ✨ [`dac69e84`](https://github.com/Jatin-nicon/tenali/commit/dac69e849adc99584df2f50006e5acd6cc8fbda9) — **Sudarshan** — add /jatin route with 10-level table learning strategy
+- ✨ [`dac69e84`](https://github.com/vicharanashala/tenali/commit/dac69e849adc99584df2f50006e5acd6cc8fbda9) — **Sudarshan** — add /jatin route with 10-level table learning strategy
     - 📁 **1 file:** `client/src/App.jsx` `+648 −0`
     - 📊 **`+648 −0`** · 1 file
-- 🐛 [`9ea5f871`](https://github.com/Jatin-nicon/tenali/commit/9ea5f8716f719baa26f5123f832c881042a487c1) — **Sudarshan** — theme-aware colors + Yazdan's Levels heading
+- 🐛 [`9ea5f871`](https://github.com/vicharanashala/tenali/commit/9ea5f8716f719baa26f5123f832c881042a487c1) — **Sudarshan** — theme-aware colors + Yazdan's Levels heading
     - 📁 **1 file:** `client/src/App.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 🐛 [`4076eb07`](https://github.com/Jatin-nicon/tenali/commit/4076eb070d38ca65136a2b7f5d45a48772802760) — **Sudarshan** — replace hardcoded dark colors with theme-aware CSS variables
+- 🐛 [`4076eb07`](https://github.com/vicharanashala/tenali/commit/4076eb070d38ca65136a2b7f5d45a48772802760) — **Sudarshan** — replace hardcoded dark colors with theme-aware CSS variables
     - 📁 **1 file:** `client/src/App.jsx` `+6 −6`
     - 📊 **`+6 −6`** · 1 file
-- ✨ [`17e10a1d`](https://github.com/Jatin-nicon/tenali/commit/17e10a1dd86bfb965c5f3feb5e9c9108efe9b956) — **Sudarshan** — add /yazdan route with 10-level progressive tables mastery
+- ✨ [`17e10a1d`](https://github.com/vicharanashala/tenali/commit/17e10a1dd86bfb965c5f3feb5e9c9108efe9b956) — **Sudarshan** — add /yazdan route with 10-level progressive tables mastery
     - 📁 **1 file:** `client/src/App.jsx` `+698 −0`
     - 📊 **`+698 −0`** · 1 file
-- 📌 [`c9e10cf3`](https://github.com/Jatin-nicon/tenali/commit/c9e10cf3d9ccf5d9f6e98a116f25d47552af8f4c) — **Sudarshan** — Enter key accepts Level Up on promotion prompt
+- 📌 [`c9e10cf3`](https://github.com/vicharanashala/tenali/commit/c9e10cf3d9ccf5d9f6e98a116f25d47552af8f4c) — **Sudarshan** — Enter key accepts Level Up on promotion prompt
     - 📁 **1 file:** `client/src/App.jsx` `+10 −0`
     - 📊 **`+10 −0`** · 1 file
-- 📌 [`7f71ee06`](https://github.com/Jatin-nicon/tenali/commit/7f71ee06e4bb1288ab907bfd9663b82b7c047f77) — **Sudarshan** — Rename landing page title to Tenali's Tables Desk
+- 📌 [`7f71ee06`](https://github.com/vicharanashala/tenali/commit/7f71ee06e4bb1288ab907bfd9663b82b7c047f77) — **Sudarshan** — Rename landing page title to Tenali's Tables Desk
     - 📁 **1 file:** `client/src/App.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`cf73ca0f`](https://github.com/Jatin-nicon/tenali/commit/cf73ca0f39eaf06e2c8e93ba9a5a02695ad1408e) — **Sudarshan** — Add /tables route — generic version of the scaffolded tables app
+- 📌 [`cf73ca0f`](https://github.com/vicharanashala/tenali/commit/cf73ca0f39eaf06e2c8e93ba9a5a02695ad1408e) — **Sudarshan** — Add /tables route — generic version of the scaffolded tables app
     - 📁 **1 file:** `client/src/App.jsx` `+13 −2`
     - 📊 **`+13 −2`** · 1 file
-- 📌 [`13b35759`](https://github.com/Jatin-nicon/tenali/commit/13b357596ecc76eeb9b3397435e3f3c01e52d169) — **Sudarshan** — Fix See Results, confetti, Level 2 single-column layout, Level 1 dimming answer
+- 📌 [`13b35759`](https://github.com/vicharanashala/tenali/commit/13b357596ecc76eeb9b3397435e3f3c01e52d169) — **Sudarshan** — Fix See Results, confetti, Level 2 single-column layout, Level 1 dimming answer
     - 📁 **1 file:** `client/src/App.jsx` `+45 −21`
     - 📊 **`+45 −21`** · 1 file
-- 📌 [`eecfd456`](https://github.com/Jatin-nicon/tenali/commit/eecfd456a3e6f6514352dad36e777b0edcfef16a) — **Sudarshan** — 5-level progression: show answer, partial table, shuffled, reverse+products, no table
+- 📌 [`eecfd456`](https://github.com/vicharanashala/tenali/commit/eecfd456a3e6f6514352dad36e777b0edcfef16a) — **Sudarshan** — 5-level progression: show answer, partial table, shuffled, reverse+products, no table
     - 📁 **1 file:** `client/src/App.jsx` `+229 −75`
     - 📊 **`+229 −75`** · 1 file
-- 📌 [`4556cae7`](https://github.com/Jatin-nicon/tenali/commit/4556cae753d19e148e82019dedf4304bf8d93e1c) — **Sudarshan** — Phase 2: show only 5 shuffled rows instead of all 10
+- 📌 [`4556cae7`](https://github.com/vicharanashala/tenali/commit/4556cae753d19e148e82019dedf4304bf8d93e1c) — **Sudarshan** — Phase 2: show only 5 shuffled rows instead of all 10
     - 📁 **1 file:** `client/src/App.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`692aac0d`](https://github.com/Jatin-nicon/tenali/commit/692aac0daaf48ba82dea17b897e42916b228e714) — **Sudarshan** — Fix table readability: larger monospace font, aligned numbers, darker colors
+- 📌 [`692aac0d`](https://github.com/vicharanashala/tenali/commit/692aac0daaf48ba82dea17b897e42916b228e714) — **Sudarshan** — Fix table readability: larger monospace font, aligned numbers, darker colors
     - 📁 **1 file:** `client/src/App.jsx` `+26 −30`
     - 📊 **`+26 −30`** · 1 file
-- 📌 [`7577ba26`](https://github.com/Jatin-nicon/tenali/commit/7577ba26622432ce6e046e2263921ca698fc029d) — **Sudarshan** — Extend table chooser from 2-9 to 2-19
+- 📌 [`7577ba26`](https://github.com/vicharanashala/tenali/commit/7577ba26622432ce6e046e2263921ca698fc029d) — **Sudarshan** — Extend table chooser from 2-9 to 2-19
     - 📁 **1 file:** `client/src/App.jsx` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`4c0ae22f`](https://github.com/Jatin-nicon/tenali/commit/4c0ae22f69933c32514ee70f4f5cc33764cf4160) — **Sudarshan** — Fix lookup table spacing: use tight gap instead of space-between
+- 📌 [`4c0ae22f`](https://github.com/vicharanashala/tenali/commit/4c0ae22f69933c32514ee70f4f5cc33764cf4160) — **Sudarshan** — Fix lookup table spacing: use tight gap instead of space-between
     - 📁 **1 file:** `client/src/App.jsx` `+4 −4`
     - 📊 **`+4 −4`** · 1 file
-- 📌 [`f5d02940`](https://github.com/Jatin-nicon/tenali/commit/f5d029408c8321b29478f68670b8f3cec3f21368) — **Sudarshan** — Minimalist mobile-first layout for /taittiriya playing phase
+- 📌 [`f5d02940`](https://github.com/vicharanashala/tenali/commit/f5d029408c8321b29478f68670b8f3cec3f21368) — **Sudarshan** — Minimalist mobile-first layout for /taittiriya playing phase
     - 📁 **1 file:** `client/src/App.jsx` `+95 −53`
     - 📊 **`+95 −53`** · 1 file
-- 📌 [`35bcd862`](https://github.com/Jatin-nicon/tenali/commit/35bcd862c1206c676627b142dd4992cb2c5a2860) — **Sudarshan** — Redesign /taittiriya: 3-phase scaffolded tables with table chooser
-    - 📁 **3711 files:** `addition/client/src/App 2.jsx` `+126 −0`, `client/src/App 2.css` `+1589 −0`, `client/src/App 2.jsx` `+4331 −0`, `client/src/App 3.css` `+1788 −0`, `client/src/App 3.jsx` `+4411 −0`, `client/src/App 4.css` `+1842 −0`, `client/src/App 4.jsx` `+5001 −0`, `client/src/App 5.jsx` `+5095 −0` *(+3703 more in [`35bcd862`](https://github.com/Jatin-nicon/tenali/commit/35bcd862c1206c676627b142dd4992cb2c5a2860))*
+- 📌 [`35bcd862`](https://github.com/vicharanashala/tenali/commit/35bcd862c1206c676627b142dd4992cb2c5a2860) — **Sudarshan** — Redesign /taittiriya: 3-phase scaffolded tables with table chooser
+    - 📁 **3711 files:** `addition/client/src/App 2.jsx` `+126 −0`, `client/src/App 2.css` `+1589 −0`, `client/src/App 2.jsx` `+4331 −0`, `client/src/App 3.css` `+1788 −0`, `client/src/App 3.jsx` `+4411 −0`, `client/src/App 4.css` `+1842 −0`, `client/src/App 4.jsx` `+5001 −0`, `client/src/App 5.jsx` `+5095 −0` *(+3703 more in [`35bcd862`](https://github.com/vicharanashala/tenali/commit/35bcd862c1206c676627b142dd4992cb2c5a2860))*
     - 📊 **`+85151 −170`** · 3711 files
 
 #### 📅 2026-04-05  <sub>(27 commits)</sub>
 
-- 📌 [`e0a58510`](https://github.com/Jatin-nicon/tenali/commit/e0a58510058ded7966ec003649451c8c522a936f) — **Sudarshan** — Update SRS.md to v4.0 with comprehensive project documentation
+- 📌 [`e0a58510`](https://github.com/vicharanashala/tenali/commit/e0a58510058ded7966ec003649451c8c522a936f) — **Sudarshan** — Update SRS.md to v4.0 with comprehensive project documentation
     - 📁 **1 file:** `SRS.md` `+537 −1175`
     - 📊 **`+537 −1175`** · 1 file
-- 📌 [`e79b546a`](https://github.com/Jatin-nicon/tenali/commit/e79b546acb37963838a3473cbbc99629ee3962a1) — **Sudarshan** — Redesign solve card with stepped timeline layout
+- 📌 [`e79b546a`](https://github.com/vicharanashala/tenali/commit/e79b546acb37963838a3473cbbc99629ee3962a1) — **Sudarshan** — Redesign solve card with stepped timeline layout
     - 📁 **2 files:** `client/src/App.css` `+85 −18`, `client/src/App.jsx` `+29 −3`
     - 📊 **`+114 −21`** · 2 files
-- 📌 [`d0779281`](https://github.com/Jatin-nicon/tenali/commit/d0779281a0c9b8c4f364f160dd4e13dd579e694f) — **Sudarshan** — Add interactive difficulty slider and per-topic difficulty tracking
+- 📌 [`d0779281`](https://github.com/vicharanashala/tenali/commit/d0779281a0c9b8c4f364f160dd4e13dd579e694f) — **Sudarshan** — Add interactive difficulty slider and per-topic difficulty tracking
     - 📁 **1 file:** `client/src/App.jsx` `+57 −36`
     - 📊 **`+57 −36`** · 1 file
-- 📌 [`375ad773`](https://github.com/Jatin-nicon/tenali/commit/375ad773e8bdb3cde65826282c95ac62b3eeeb42) — **Sudarshan** — Add draggable seeker to adaptive difficulty bar across all puzzles
+- 📌 [`375ad773`](https://github.com/vicharanashala/tenali/commit/375ad773e8bdb3cde65826282c95ac62b3eeeb42) — **Sudarshan** — Add draggable seeker to adaptive difficulty bar across all puzzles
     - 📁 **1 file:** `client/src/App.jsx` `+63 −35`
     - 📊 **`+63 −35`** · 1 file
-- 📌 [`44912094`](https://github.com/Jatin-nicon/tenali/commit/4491209459f613b3011cf821ad16afa9e515a872) — **Sudarshan** — Add Skip button, center-align feedback, and visual ack for self-report
+- 📌 [`44912094`](https://github.com/vicharanashala/tenali/commit/4491209459f613b3011cf821ad16afa9e515a872) — **Sudarshan** — Add Skip button, center-align feedback, and visual ack for self-report
     - 📁 **2 files:** `client/src/App.css` `+1 −1`, `client/src/App.jsx` `+41 −6`
     - 📊 **`+42 −7`** · 2 files
-- 📌 [`c7f7b6c3`](https://github.com/Jatin-nicon/tenali/commit/c7f7b6c339f742fe0c5783936fd00a780830e227) — **Sudarshan** — Add visual feedback for Too Hard/Too Easy self-report buttons
+- 📌 [`c7f7b6c3`](https://github.com/vicharanashala/tenali/commit/c7f7b6c339f742fe0c5783936fd00a780830e227) — **Sudarshan** — Add visual feedback for Too Hard/Too Easy self-report buttons
     - 📁 **1 file:** `client/src/App.jsx` `+12 −0`
     - 📊 **`+12 −0`** · 1 file
-- 📌 [`fef7d3e0`](https://github.com/Jatin-nicon/tenali/commit/fef7d3e0837b70e19e70a284defe8c05fbacdb8a) — **Sudarshan** — Redesign solve feedback: centered card with highlighted answer and styled explanation
+- 📌 [`fef7d3e0`](https://github.com/vicharanashala/tenali/commit/fef7d3e0837b70e19e70a284defe8c05fbacdb8a) — **Sudarshan** — Redesign solve feedback: centered card with highlighted answer and styled explanation
     - 📁 **3 files:** `client/src/App.css` `+30 −4`, `client/src/App.jsx` `+55 −41`, `graph/path.html` `+26 −3`
     - 📊 **`+111 −48`** · 3 files
-- 📌 [`fccdbbaf`](https://github.com/Jatin-nicon/tenali/commit/fccdbbaf86a37160035172f53ffc8349c2d0e2a6) — **Sudarshan** — Rewrite solve explanations with detailed step-by-step teaching for all puzzle types
+- 📌 [`fccdbbaf`](https://github.com/vicharanashala/tenali/commit/fccdbbaf86a37160035172f53ffc8349c2d0e2a6) — **Sudarshan** — Rewrite solve explanations with detailed step-by-step teaching for all puzzle types
     - 📁 **1 file:** `server/index.js` `+722 −31`
     - 📊 **`+722 −31`** · 1 file
-- 📌 [`f3055a70`](https://github.com/Jatin-nicon/tenali/commit/f3055a7078a65e6659871ffc7b26830a21aa3efc) — **Sudarshan** — Update SRS.md v3.0: document Solve button, self-report buttons, and Journey fixes
+- 📌 [`f3055a70`](https://github.com/vicharanashala/tenali/commit/f3055a7078a65e6659871ffc7b26830a21aa3efc) — **Sudarshan** — Update SRS.md v3.0: document Solve button, self-report buttons, and Journey fixes
     - 📁 **1 file:** `SRS.md` `+80 −5`
     - 📊 **`+80 −5`** · 1 file
-- 📌 [`d64045c2`](https://github.com/Jatin-nicon/tenali/commit/d64045c25d4bab40da4e600e230c8a2d9ea55330) — **Sudarshan** — Add Solve button across all puzzles with step-by-step explanations
+- 📌 [`d64045c2`](https://github.com/vicharanashala/tenali/commit/d64045c25d4bab40da4e600e230c8a2d9ea55330) — **Sudarshan** — Add Solve button across all puzzles with step-by-step explanations
     - 📁 **4 files:** `client/src/App.css` `+8 −0`, `client/src/App.jsx` `+660 −62`, `graph/path.html` `+31 −2`, `server/index.js` `+98 −0`
     - 📊 **`+797 −64`** · 4 files
-- 📌 [`61896d6f`](https://github.com/Jatin-nicon/tenali/commit/61896d6fa3af7059dc480ec96684e4d11c893d46) — **Sudarshan** — Journey quiz: fix Enter key, fix undefined feedback, add Skip + self-report buttons
+- 📌 [`61896d6f`](https://github.com/vicharanashala/tenali/commit/61896d6fa3af7059dc480ec96684e4d11c893d46) — **Sudarshan** — Journey quiz: fix Enter key, fix undefined feedback, add Skip + self-report buttons
     - 📁 **1 file:** `graph/path.html` `+44 −3`
     - 📊 **`+44 −3`** · 1 file
-- 📌 [`a0852b1d`](https://github.com/Jatin-nicon/tenali/commit/a0852b1d1bbe968a9fe45d1dd7bd552c91bb708c) — **Sudarshan** — Add self-report difficulty buttons to all adaptive puzzles; add SRS.md
+- 📌 [`a0852b1d`](https://github.com/vicharanashala/tenali/commit/a0852b1d1bbe968a9fe45d1dd7bd552c91bb708c) — **Sudarshan** — Add self-report difficulty buttons to all adaptive puzzles; add SRS.md
     - 📁 **2 files:** `SRS.md` `+1352 −0`, `client/src/App.jsx` `+31 −0`
     - 📊 **`+1383 −0`** · 2 files
-- 📌 [`55895815`](https://github.com/Jatin-nicon/tenali/commit/558958157c910c8f60dcb1938f93ccbe08957a36) — **Sudarshan** — add always-visible Easy/Hard self-report buttons below Submit
+- 📌 [`55895815`](https://github.com/vicharanashala/tenali/commit/558958157c910c8f60dcb1938f93ccbe08957a36) — **Sudarshan** — add always-visible Easy/Hard self-report buttons below Submit
     - 📁 **1 file:** `client/src/App.jsx` `+6 −0`
     - 📊 **`+6 −0`** · 1 file
-- 📌 [`7c14d56d`](https://github.com/Jatin-nicon/tenali/commit/7c14d56d183a124e12a3bf09b3803e001eafbed4) — **Sudarshan** — Add ^, x keys to Tatsavit numpad; accept full expression answers for monomials
+- 📌 [`7c14d56d`](https://github.com/vicharanashala/tenali/commit/7c14d56d183a124e12a3bf09b3803e001eafbed4) — **Sudarshan** — Add ^, x keys to Tatsavit numpad; accept full expression answers for monomials
     - 📁 **2 files:** `client/src/App.jsx` `+10 −2`, `server/index.js` `+16 −4`
     - 📊 **`+26 −6`** · 2 files
-- 📌 [`d14ff189`](https://github.com/Jatin-nicon/tenali/commit/d14ff189d56d200152b15e62026f555335c0cd5d) — **Sudarshan** — Add 'Start the Journey' adaptive quiz to path page
+- 📌 [`d14ff189`](https://github.com/vicharanashala/tenali/commit/d14ff189d56d200152b15e62026f555335c0cd5d) — **Sudarshan** — Add 'Start the Journey' adaptive quiz to path page
     - 📁 **1 file:** `graph/path.html` `+429 −0`
     - 📊 **`+429 −0`** · 1 file
-- 📌 [`99a4134e`](https://github.com/Jatin-nicon/tenali/commit/99a4134eac74974b3f5e20c274685b06ad5aa2d7) — **Sudarshan** — per-type slow thresholds instead of flat 15s
+- 📌 [`99a4134e`](https://github.com/vicharanashala/tenali/commit/99a4134eac74974b3f5e20c274685b06ad5aa2d7) — **Sudarshan** — per-type slow thresholds instead of flat 15s
     - 📁 **1 file:** `client/src/App.jsx` `+30 −6`
     - 📊 **`+30 −6`** · 1 file
-- 📌 [`8a96f06b`](https://github.com/Jatin-nicon/tenali/commit/8a96f06ba92613d3f9733cf7ecb6879e94a7da50) — **Sudarshan** — ask 'easy or difficult?' when student takes >15s on any question
+- 📌 [`8a96f06b`](https://github.com/vicharanashala/tenali/commit/8a96f06ba92613d3f9733cf7ecb6879e94a7da50) — **Sudarshan** — ask 'easy or difficult?' when student takes >15s on any question
     - 📁 **1 file:** `client/src/App.jsx` `+16 −13`
     - 📊 **`+16 −13`** · 1 file
-- 📌 [`94715eac`](https://github.com/Jatin-nicon/tenali/commit/94715eac6ea891d13e6caeb8466100cddb6f9fde) — **Sudarshan** — Fix new puzzles (uuid→Date.now), add Tatsavit numpad + time-based hints, persist GK/Vocab seen IDs
+- 📌 [`94715eac`](https://github.com/vicharanashala/tenali/commit/94715eac6ea891d13e6caeb8466100cddb6f9fde) — **Sudarshan** — Fix new puzzles (uuid→Date.now), add Tatsavit numpad + time-based hints, persist GK/Vocab seen IDs
     - 📁 **2 files:** `client/src/App.jsx` `+66 −39`, `server/index.js` `+15 −15`
     - 📊 **`+81 −54`** · 2 files
-- 📌 [`2f2ca88b`](https://github.com/Jatin-nicon/tenali/commit/2f2ca88b3a052e73150843920583ceefd8666e97) — **Sudarshan** — Add enhanced landing page preview at /enhanced
+- 📌 [`2f2ca88b`](https://github.com/vicharanashala/tenali/commit/2f2ca88b3a052e73150843920583ceefd8666e97) — **Sudarshan** — Add enhanced landing page preview at /enhanced
     - 📁 **2 files:** `enhanced/index.html` `+589 −0`, `server/index.js` `+4 −0`
     - 📊 **`+593 −0`** · 2 files
-- 📌 [`f65b9710`](https://github.com/Jatin-nicon/tenali/commit/f65b971047a38e179f60c22d697c9056e8f27cd9) — **Sudarshan** — Add 15 new puzzles, fix Tatsavit wrong-answer counting & sqrt prompt
+- 📌 [`f65b9710`](https://github.com/vicharanashala/tenali/commit/f65b971047a38e179f60c22d697c9056e8f27cd9) — **Sudarshan** — Add 15 new puzzles, fix Tatsavit wrong-answer counting & sqrt prompt
     - 📁 **4 files:** `client/src/App.jsx` `+185 −12`, `graph/index.html` `+43 −0`, `graph/path.html` `+39 −0`, `server/index.js` `+910 −6`
     - 📊 **`+1177 −18`** · 4 files
-- 📌 [`95739578`](https://github.com/Jatin-nicon/tenali/commit/95739578c69a14bc277066c3a89899ff6e97cd1b) — **Sudarshan** — Style NONE option in red on /path dropdown
+- 📌 [`95739578`](https://github.com/vicharanashala/tenali/commit/95739578c69a14bc277066c3a89899ff6e97cd1b) — **Sudarshan** — Style NONE option in red on /path dropdown
     - 📁 **1 file:** `graph/path.html` `+10 −0`
     - 📊 **`+10 −0`** · 1 file
-- 📌 [`d457a07b`](https://github.com/Jatin-nicon/tenali/commit/d457a07b1b7389037f01a7d1ae12a4cb3c0b80f4) — **Sudarshan** — Add NONE source default for longest path, remove tatsavit from graph
+- 📌 [`d457a07b`](https://github.com/vicharanashala/tenali/commit/d457a07b1b7389037f01a7d1ae12a4cb3c0b80f4) — **Sudarshan** — Add NONE source default for longest path, remove tatsavit from graph
     - 📁 **2 files:** `graph/index.html` `+0 −10`, `graph/path.html` `+43 −10`
     - 📊 **`+43 −20`** · 2 files
-- 📌 [`f1e5f12c`](https://github.com/Jatin-nicon/tenali/commit/f1e5f12c5d34a676f2fe49e8c1386b17c46c48ee) — **Sudarshan** — Route /tatsavit URL to new TatsavitApp instead of old AdaptiveMixedApp
+- 📌 [`f1e5f12c`](https://github.com/vicharanashala/tenali/commit/f1e5f12c5d34a676f2fe49e8c1386b17c46c48ee) — **Sudarshan** — Route /tatsavit URL to new TatsavitApp instead of old AdaptiveMixedApp
     - 📁 **1 file:** `client/src/App.jsx` `+2 −3`
     - 📊 **`+2 −3`** · 1 file
-- 📌 [`d9c40f49`](https://github.com/Jatin-nicon/tenali/commit/d9c40f4961cbb7940ce6c60298f434f7d88b3253) — **Sudarshan** — Add /path — prerequisite path finder with dropdown menus
+- 📌 [`d9c40f49`](https://github.com/vicharanashala/tenali/commit/d9c40f4961cbb7940ce6c60298f434f7d88b3253) — **Sudarshan** — Add /path — prerequisite path finder with dropdown menus
     - 📁 **2 files:** `graph/path.html` `+413 −0`, `server/index.js` `+4 −0`
     - 📊 **`+417 −0`** · 2 files
-- 📌 [`2253c628`](https://github.com/Jatin-nicon/tenali/commit/2253c6288fb39444ba06f4f72330b20a58bf2e53) — **Sudarshan** — Serve prerequisite graph at /graph route
+- 📌 [`2253c628`](https://github.com/vicharanashala/tenali/commit/2253c6288fb39444ba06f4f72330b20a58bf2e53) — **Sudarshan** — Serve prerequisite graph at /graph route
     - 📁 **1 file:** `server/index.js` `+7 −0`
     - 📊 **`+7 −0`** · 1 file
-- 📌 [`63443958`](https://github.com/Jatin-nicon/tenali/commit/63443958829b90ecb58d56a185e817dd1ea490dd) — **Sudarshan** — Fix TatsavitApp + add prerequisite graph + fix server type bug
+- 📌 [`63443958`](https://github.com/vicharanashala/tenali/commit/63443958829b90ecb58d56a185e817dd1ea490dd) — **Sudarshan** — Fix TatsavitApp + add prerequisite graph + fix server type bug
     - 📁 **3 files:** `client/src/App.jsx` `+75 −29`, `graph/index.html` `+561 −0`, `server/index.js` `+1 −1`
     - 📊 **`+637 −30`** · 3 files
-- 📌 [`eb013ebb`](https://github.com/Jatin-nicon/tenali/commit/eb013ebbc99a28a99c5d2ad312a86ee6fcd31e8e) — **Sudarshan** — Add Tatsavit progressive drill + limit Squaring to 2-digit (11-99)
+- 📌 [`eb013ebb`](https://github.com/vicharanashala/tenali/commit/eb013ebbc99a28a99c5d2ad312a86ee6fcd31e8e) — **Sudarshan** — Add Tatsavit progressive drill + limit Squaring to 2-digit (11-99)
     - 📁 **2 files:** `client/src/App.jsx` `+187 −3`, `server/index.js` `+179 −4`
     - 📊 **`+366 −7`** · 2 files
 
 #### 📅 2026-04-04  <sub>(11 commits)</sub>
 
-- 📌 [`0145abd6`](https://github.com/Jatin-nicon/tenali/commit/0145abd6980476bc1ffe4578814883170de4eba5) — **Sudarshan** — Add Squaring puzzle — (a+b)² = a² + 2ab + b²
+- 📌 [`0145abd6`](https://github.com/vicharanashala/tenali/commit/0145abd6980476bc1ffe4578814883170de4eba5) — **Sudarshan** — Add Squaring puzzle — (a+b)² = a² + 2ab + b²
     - 📁 **2 files:** `client/src/App.jsx` `+202 −3`, `server/index.js` `+46 −0`
     - 📊 **`+248 −3`** · 2 files
-- 📌 [`90595e44`](https://github.com/Jatin-nicon/tenali/commit/90595e44409118ff19c7f0952650c08c6e677ce2) — **Sudarshan** — Keep multiplier range 1-10 for multiplication tables
+- 📌 [`90595e44`](https://github.com/vicharanashala/tenali/commit/90595e44409118ff19c7f0952650c08c6e677ce2) — **Sudarshan** — Keep multiplier range 1-10 for multiplication tables
     - 📁 **2 files:** `client/src/App.jsx` `+3 −3`, `server/index.js` `+1 −1`
     - 📊 **`+4 −4`** · 2 files
-- 📌 [`117c6a1d`](https://github.com/Jatin-nicon/tenali/commit/117c6a1d9358485ec8da0b889411430202d6a966) — **Sudarshan** — Fix Random Mix missing prompts, extend Multiplication to 19
+- 📌 [`117c6a1d`](https://github.com/vicharanashala/tenali/commit/117c6a1d9358485ec8da0b889411430202d6a966) — **Sudarshan** — Fix Random Mix missing prompts, extend Multiplication to 19
     - 📁 **2 files:** `client/src/App.jsx` `+22 −14`, `server/index.js` `+1 −1`
     - 📊 **`+23 −15`** · 2 files
-- 📌 [`21c05f8c`](https://github.com/Jatin-nicon/tenali/commit/21c05f8ca005b357de9cc036c9713762a2eeb1ee) — **Sudarshan** — Fix Random Mix submit button — timer.elapsed() TypeError
+- 📌 [`21c05f8c`](https://github.com/vicharanashala/tenali/commit/21c05f8ca005b357de9cc036c9713762a2eeb1ee) — **Sudarshan** — Fix Random Mix submit button — timer.elapsed() TypeError
     - 📁 **1 file:** `client/src/App.jsx` `+13 −5`
     - 📊 **`+13 −5`** · 1 file
-- 📌 [`1cd053b0`](https://github.com/Jatin-nicon/tenali/commit/1cd053b0f1e271bca10f5d88515f2cac31f88c25) — **Sudarshan** — Show error feedback when wrong factor entered in Prime Factors
+- 📌 [`1cd053b0`](https://github.com/vicharanashala/tenali/commit/1cd053b0f1e271bca10f5d88515f2cac31f88c25) — **Sudarshan** — Show error feedback when wrong factor entered in Prime Factors
     - 📁 **2 files:** `client/src/App.css` `+12 −0`, `client/src/App.jsx` `+19 −4`
     - 📊 **`+31 −4`** · 2 files
-- 📌 [`4cde0171`](https://github.com/Jatin-nicon/tenali/commit/4cde017126e9e0ad117a5e50cbcbe139ae60fdfa) — **Sudarshan** — Fix question skipping, score bugs, and Bearings repetition
+- 📌 [`4cde0171`](https://github.com/vicharanashala/tenali/commit/4cde017126e9e0ad117a5e50cbcbe139ae60fdfa) — **Sudarshan** — Fix question skipping, score bugs, and Bearings repetition
     - 📁 **2 files:** `client/src/App.jsx` `+67 −14`, `server/index.js` `+28 −7`
     - 📊 **`+95 −21`** · 2 files
-- 📌 [`37e1e608`](https://github.com/Jatin-nicon/tenali/commit/37e1e608bf962d45487d4326d11c473b0b798554) — **Sudarshan** — Fix Dot Products submit button and restyle with CSS classes
+- 📌 [`37e1e608`](https://github.com/vicharanashala/tenali/commit/37e1e608bf962d45487d4326d11c473b0b798554) — **Sudarshan** — Fix Dot Products submit button and restyle with CSS classes
     - 📁 **2 files:** `client/src/App.css` `+150 −0`, `client/src/App.jsx` `+40 −94`
     - 📊 **`+190 −94`** · 2 files
-- 📌 [`ca0d8fb9`](https://github.com/Jatin-nicon/tenali/commit/ca0d8fb98e26f7da13522f3187dae69665878886) — **Sudarshan** — Overhaul Extended Euclidean: BigInt for 20+ digit numbers, wider inputs, proper subscripts
+- 📌 [`ca0d8fb9`](https://github.com/vicharanashala/tenali/commit/ca0d8fb98e26f7da13522f3187dae69665878886) — **Sudarshan** — Overhaul Extended Euclidean: BigInt for 20+ digit numbers, wider inputs, proper subscripts
     - 📁 **2 files:** `client/src/App.css` `+4 −3`, `client/src/App.jsx` `+50 −45`
     - 📊 **`+54 −48`** · 2 files
-- 📌 [`ed7e0f87`](https://github.com/Jatin-nicon/tenali/commit/ed7e0f87529e090d0433feb305aa42a13c31111b) — **Sudarshan** — Fix Extended Euclidean compute button — rows array was inside comment
+- 📌 [`ed7e0f87`](https://github.com/vicharanashala/tenali/commit/ed7e0f87529e090d0433feb305aa42a13c31111b) — **Sudarshan** — Fix Extended Euclidean compute button — rows array was inside comment
     - 📁 **1 file:** `client/src/App.jsx` `+2 −1`
     - 📊 **`+2 −1`** · 1 file
-- 📌 [`16186e50`](https://github.com/Jatin-nicon/tenali/commit/16186e50211069797956fe623400ca36ebad71ec) — **Sudarshan** — Fix double-submit causing inflated score in Dot Products
+- 📌 [`16186e50`](https://github.com/vicharanashala/tenali/commit/16186e50211069797956fe623400ca36ebad71ec) — **Sudarshan** — Fix double-submit causing inflated score in Dot Products
     - 📁 **1 file:** `client/src/App.jsx` `+4 −1`
     - 📊 **`+4 −1`** · 1 file
-- 📌 [`0ba22527`](https://github.com/Jatin-nicon/tenali/commit/0ba22527fc12055a1c8561b1ab568e9fbb481871) — **Sudarshan** — Fix Dot Products: remove auto-tab, show proper vector dimensions
+- 📌 [`0ba22527`](https://github.com/vicharanashala/tenali/commit/0ba22527fc12055a1c8561b1ab568e9fbb481871) — **Sudarshan** — Fix Dot Products: remove auto-tab, show proper vector dimensions
     - 📁 **1 file:** `client/src/App.jsx` `+6 −19`
     - 📊 **`+6 −19`** · 1 file
 
 #### 📅 2026-04-03  <sub>(31 commits)</sub>
 
-- 📌 [`b53512eb`](https://github.com/Jatin-nicon/tenali/commit/b53512eb3be4b40dbbc98129e533f843cc6a2673) — **Sudarshan** — Replace text inputs with visual matrix/vector grid boxes in Dot Products
+- 📌 [`b53512eb`](https://github.com/vicharanashala/tenali/commit/b53512eb3be4b40dbbc98129e533f843cc6a2673) — **Sudarshan** — Replace text inputs with visual matrix/vector grid boxes in Dot Products
     - 📁 **1 file:** `client/src/App.jsx` `+136 −18`
     - 📊 **`+136 −18`** · 1 file
-- 📌 [`41404455`](https://github.com/Jatin-nicon/tenali/commit/414044552ace4e77bf1b6ed8cd997f1248d6b5b1) — **Sudarshan** — Render matrices with proper bracket formatting in Dot Products
+- 📌 [`41404455`](https://github.com/vicharanashala/tenali/commit/414044552ace4e77bf1b6ed8cd997f1248d6b5b1) — **Sudarshan** — Render matrices with proper bracket formatting in Dot Products
     - 📁 **2 files:** `client/src/App.jsx` `+259 −6`, `server/index.js` `+13 −21`
     - 📊 **`+272 −27`** · 2 files
-- 📌 [`77f453cb`](https://github.com/Jatin-nicon/tenali/commit/77f453cb8b0532e7b14f87af82fb423bef1826db) — **Sudarshan** — Fix Dot Products medium: use 2D and 3D dot products instead of sum variant
+- 📌 [`77f453cb`](https://github.com/vicharanashala/tenali/commit/77f453cb8b0532e7b14f87af82fb423bef1826db) — **Sudarshan** — Fix Dot Products medium: use 2D and 3D dot products instead of sum variant
     - 📁 **1 file:** `server/index.js` `+8 −14`
     - 📊 **`+8 −14`** · 1 file
-- 📌 [`0142bb51`](https://github.com/Jatin-nicon/tenali/commit/0142bb511234c40c421d4078d96e6660cf7cbea3) — **Sudarshan** — Add Dot Products puzzle with 4 difficulty levels
+- 📌 [`0142bb51`](https://github.com/vicharanashala/tenali/commit/0142bb511234c40c421d4078d96e6660cf7cbea3) — **Sudarshan** — Add Dot Products puzzle with 4 difficulty levels
     - 📁 **2 files:** `client/src/App.jsx` `+17 −5`, `server/index.js` `+152 −0`
     - 📊 **`+169 −5`** · 2 files
-- 📌 [`82d10f4e`](https://github.com/Jatin-nicon/tenali/commit/82d10f4e55783526a3fd85c6fa6316cb9e133805) — **Sudarshan** — Move Random Mix + Custom Lesson into hamburger menu
+- 📌 [`82d10f4e`](https://github.com/vicharanashala/tenali/commit/82d10f4e55783526a3fd85c6fa6316cb9e133805) — **Sudarshan** — Move Random Mix + Custom Lesson into hamburger menu
     - 📁 **1 file:** `client/src/App.jsx` `+48 −14`
     - 📊 **`+48 −14`** · 1 file
-- 📌 [`c0e6059e`](https://github.com/Jatin-nicon/tenali/commit/c0e6059e8953b3ae814cc1b5ad0b102464d3f03d) — **Sudarshan** — Sort puzzles alphabetically, feature Random Mix + Custom in top row
+- 📌 [`c0e6059e`](https://github.com/vicharanashala/tenali/commit/c0e6059e8953b3ae814cc1b5ad0b102464d3f03d) — **Sudarshan** — Sort puzzles alphabetically, feature Random Mix + Custom in top row
     - 📁 **2 files:** `client/src/App.css` `+2 −0`, `client/src/App.jsx` `+72 −57`
     - 📊 **`+74 −57`** · 2 files
-- 📌 [`c9a4ea62`](https://github.com/Jatin-nicon/tenali/commit/c9a4ea62be012e5dae69585354e8cf75acd4f09f) — **Sudarshan** — Fix Enter key not advancing after wrong answer in QFormula, Simul, FuncEval, LineEq
+- 📌 [`c9a4ea62`](https://github.com/vicharanashala/tenali/commit/c9a4ea62be012e5dae69585354e8cf75acd4f09f) — **Sudarshan** — Fix Enter key not advancing after wrong answer in QFormula, Simul, FuncEval, LineEq
     - 📁 **1 file:** `client/src/App.jsx` `+24 −0`
     - 📊 **`+24 −0`** · 1 file
-- 📌 [`7b847796`](https://github.com/Jatin-nicon/tenali/commit/7b8477960694de4a750f86970e169a3fe2a3c07f) — **Sudarshan** — Fix Enter key not advancing after wrong answer in Prime Factors
+- 📌 [`7b847796`](https://github.com/vicharanashala/tenali/commit/7b8477960694de4a750f86970e169a3fe2a3c07f) — **Sudarshan** — Fix Enter key not advancing after wrong answer in Prime Factors
     - 📁 **1 file:** `client/src/App.jsx` `+7 −0`
     - 📊 **`+7 −0`** · 1 file
-- 📌 [`2c4fa308`](https://github.com/Jatin-nicon/tenali/commit/2c4fa308c9b1507b66745908b3d49453c355c825) — **Sudarshan** — Add Tenali Raman mascot to landing page
+- 📌 [`2c4fa308`](https://github.com/vicharanashala/tenali/commit/2c4fa308c9b1507b66745908b3d49453c355c825) — **Sudarshan** — Add Tenali Raman mascot to landing page
     - 📁 **1 file:** `client/src/App.jsx` `+7 −2`
     - 📊 **`+7 −2`** · 1 file
-- 📌 [`4b3322d4`](https://github.com/Jatin-nicon/tenali/commit/4b3322d4be1e3d0ed2aeb5abc45ec6b515c0d3d8) — **Sudarshan** — Retrofit all hand-written quiz apps for visual uniformity
+- 📌 [`4b3322d4`](https://github.com/vicharanashala/tenali/commit/4b3322d4be1e3d0ed2aeb5abc45ec6b515c0d3d8) — **Sudarshan** — Retrofit all hand-written quiz apps for visual uniformity
     - 📁 **2 files:** `client/src/App.jsx` `+670 −317`, `server/index.js` `+101 −17`
     - 📊 **`+771 −334`** · 2 files
-- 📌 [`014593fb`](https://github.com/Jatin-nicon/tenali/commit/014593fb3dd7b64ae1bd5a1e6d6d94b38369313c) — **Sudarshan** — Update all 37 SKILL.md files to comprehensive formal specifications
-    - 📁 **37 files:** `supermarket/SKILL.md` `+169 −80`, `supermarket/angles/SKILL.md` `+239 −20`, `supermarket/bases/SKILL.md` `+149 −20`, `supermarket/bearings/SKILL.md` `+144 −20`, `supermarket/binomial/SKILL.md` `+236 −18`, `supermarket/bounds/SKILL.md` `+231 −21`, `supermarket/circleth/SKILL.md` `+160 −20`, `supermarket/complex/SKILL.md` `+246 −25` *(+29 more in [`014593fb`](https://github.com/Jatin-nicon/tenali/commit/014593fb3dd7b64ae1bd5a1e6d6d94b38369313c))*
+- 📌 [`014593fb`](https://github.com/vicharanashala/tenali/commit/014593fb3dd7b64ae1bd5a1e6d6d94b38369313c) — **Sudarshan** — Update all 37 SKILL.md files to comprehensive formal specifications
+    - 📁 **37 files:** `supermarket/SKILL.md` `+169 −80`, `supermarket/angles/SKILL.md` `+239 −20`, `supermarket/bases/SKILL.md` `+149 −20`, `supermarket/bearings/SKILL.md` `+144 −20`, `supermarket/binomial/SKILL.md` `+236 −18`, `supermarket/bounds/SKILL.md` `+231 −21`, `supermarket/circleth/SKILL.md` `+160 −20`, `supermarket/complex/SKILL.md` `+246 −25` *(+29 more in [`014593fb`](https://github.com/vicharanashala/tenali/commit/014593fb3dd7b64ae1bd5a1e6d6d94b38369313c))*
     - 📊 **`+8752 −874`** · 37 files
-- 📌 [`85c4a188`](https://github.com/Jatin-nicon/tenali/commit/85c4a188b07dec5268662d2d39cd6ed9ee676b6e) — **Sudarshan** — Add Adaptive difficulty mode to all puzzle apps
+- 📌 [`85c4a188`](https://github.com/vicharanashala/tenali/commit/85c4a188b07dec5268662d2d39cd6ed9ee676b6e) — **Sudarshan** — Add Adaptive difficulty mode to all puzzle apps
     - 📁 **1 file:** `client/src/App.jsx` `+212 −55`
     - 📊 **`+212 −55`** · 1 file
-- 📌 [`953511bc`](https://github.com/Jatin-nicon/tenali/commit/953511bcbaba0d1f17728c95cad72ad71eb70703) — **Sudarshan** — Add Random Mix — adaptive cross-topic quiz with progressive difficulty
+- 📌 [`953511bc`](https://github.com/vicharanashala/tenali/commit/953511bcbaba0d1f17728c95cad72ad71eb70703) — **Sudarshan** — Add Random Mix — adaptive cross-topic quiz with progressive difficulty
     - 📁 **1 file:** `client/src/App.jsx` `+394 −0`
     - 📊 **`+394 −0`** · 1 file
-- 📌 [`2bd177e1`](https://github.com/Jatin-nicon/tenali/commit/2bd177e1cf3e3c4b8594f076667dbf4568588dc2) — **Sudarshan** — Add 6 geometry puzzles: Angles, Triangles, Congruence, Pythagoras, Polygons, Similarity
-    - 📁 **9 files:** `client/src/App.jsx` `+65 −2`, `client/vite.config.js` `+6 −0`, `server/index.js` `+382 −0`, `supermarket/angles/SKILL.md` `+22 −0`, `supermarket/congruence/SKILL.md` `+22 −0`, `supermarket/polygons/SKILL.md` `+22 −0`, `supermarket/pythag/SKILL.md` `+26 −0`, `supermarket/similarity/SKILL.md` `+22 −0` *(+1 more in [`2bd177e1`](https://github.com/Jatin-nicon/tenali/commit/2bd177e1cf3e3c4b8594f076667dbf4568588dc2))*
+- 📌 [`2bd177e1`](https://github.com/vicharanashala/tenali/commit/2bd177e1cf3e3c4b8594f076667dbf4568588dc2) — **Sudarshan** — Add 6 geometry puzzles: Angles, Triangles, Congruence, Pythagoras, Polygons, Similarity
+    - 📁 **9 files:** `client/src/App.jsx` `+65 −2`, `client/vite.config.js` `+6 −0`, `server/index.js` `+382 −0`, `supermarket/angles/SKILL.md` `+22 −0`, `supermarket/congruence/SKILL.md` `+22 −0`, `supermarket/polygons/SKILL.md` `+22 −0`, `supermarket/pythag/SKILL.md` `+26 −0`, `supermarket/similarity/SKILL.md` `+22 −0` *(+1 more in [`2bd177e1`](https://github.com/vicharanashala/tenali/commit/2bd177e1cf3e3c4b8594f076667dbf4568588dc2))*
     - 📊 **`+589 −2`** · 9 files
-- 📌 [`5727703b`](https://github.com/Jatin-nicon/tenali/commit/5727703bbd030bbd266882a2ea65ba10017c330b) — **Sudarshan** — Add final 10 puzzles to reach 50 total: Integration, Standard Form, Bounds, Speed/Distance/Time, Variation, HCF & LCM, Profit & Loss, Rounding, Binomial Theorem, Complex Numbers
-    - 📁 **13 files:** `client/src/App.jsx` `+109 −2`, `client/vite.config.js` `+10 −0`, `server/index.js` `+625 −0`, `supermarket/binomial/SKILL.md` `+25 −0`, `supermarket/bounds/SKILL.md` `+23 −0`, `supermarket/complex/SKILL.md` `+27 −0`, `supermarket/hcflcm/SKILL.md` `+26 −0`, `supermarket/integ/SKILL.md` `+23 −0` *(+5 more in [`5727703b`](https://github.com/Jatin-nicon/tenali/commit/5727703bbd030bbd266882a2ea65ba10017c330b))*
+- 📌 [`5727703b`](https://github.com/vicharanashala/tenali/commit/5727703bbd030bbd266882a2ea65ba10017c330b) — **Sudarshan** — Add final 10 puzzles to reach 50 total: Integration, Standard Form, Bounds, Speed/Distance/Time, Variation, HCF & LCM, Profit & Loss, Rounding, Binomial Theorem, Complex Numbers
+    - 📁 **13 files:** `client/src/App.jsx` `+109 −2`, `client/vite.config.js` `+10 −0`, `server/index.js` `+625 −0`, `supermarket/binomial/SKILL.md` `+25 −0`, `supermarket/bounds/SKILL.md` `+23 −0`, `supermarket/complex/SKILL.md` `+27 −0`, `supermarket/hcflcm/SKILL.md` `+26 −0`, `supermarket/integ/SKILL.md` `+23 −0` *(+5 more in [`5727703b`](https://github.com/vicharanashala/tenali/commit/5727703bbd030bbd266882a2ea65ba10017c330b))*
     - 📊 **`+981 −2`** · 13 files
-- 📌 [`7502b431`](https://github.com/Jatin-nicon/tenali/commit/7502b431d49ee83f9a4637e2fb4f53208a3c90a2) — **Sudarshan** — Add 14 new puzzles: Trig, Inequalities, Coord Geom, Probability, Statistics, Matrices, Vectors, Transformations, Mensuration, Bearings, Logarithms, Differentiation, Number Bases, Circle Theorems
-    - 📁 **17 files:** `client/src/App.jsx` `+281 −0`, `client/vite.config.js` `+14 −0`, `server/index.js` `+1124 −0`, `supermarket/bases/SKILL.md` `+22 −0`, `supermarket/bearings/SKILL.md` `+22 −0`, `supermarket/circleth/SKILL.md` `+22 −0`, `supermarket/coordgeom/SKILL.md` `+22 −0`, `supermarket/diff/SKILL.md` `+22 −0` *(+9 more in [`7502b431`](https://github.com/Jatin-nicon/tenali/commit/7502b431d49ee83f9a4637e2fb4f53208a3c90a2))*
+- 📌 [`7502b431`](https://github.com/vicharanashala/tenali/commit/7502b431d49ee83f9a4637e2fb4f53208a3c90a2) — **Sudarshan** — Add 14 new puzzles: Trig, Inequalities, Coord Geom, Probability, Statistics, Matrices, Vectors, Transformations, Mensuration, Bearings, Logarithms, Differentiation, Number Bases, Circle Theorems
+    - 📁 **17 files:** `client/src/App.jsx` `+281 −0`, `client/vite.config.js` `+14 −0`, `server/index.js` `+1124 −0`, `supermarket/bases/SKILL.md` `+22 −0`, `supermarket/bearings/SKILL.md` `+22 −0`, `supermarket/circleth/SKILL.md` `+22 −0`, `supermarket/coordgeom/SKILL.md` `+22 −0`, `supermarket/diff/SKILL.md` `+22 −0` *(+9 more in [`7502b431`](https://github.com/vicharanashala/tenali/commit/7502b431d49ee83f9a4637e2fb4f53208a3c90a2))*
     - 📊 **`+1727 −0`** · 17 files
-- 📌 [`a94b0168`](https://github.com/Jatin-nicon/tenali/commit/a94b016851570bc75fd5c01c9f303f81886f0e7a) — **Sudarshan** — Add Sets puzzle — union, intersection, Venn diagrams
+- 📌 [`a94b0168`](https://github.com/vicharanashala/tenali/commit/a94b016851570bc75fd5c01c9f303f81886f0e7a) — **Sudarshan** — Add Sets puzzle — union, intersection, Venn diagrams
     - 📁 **4 files:** `client/src/App.jsx` `+133 −0`, `client/vite.config.js` `+2 −0`, `server/index.js` `+172 −0`, `supermarket/sets/SKILL.md` `+31 −0`
     - 📊 **`+338 −0`** · 4 files
-- 📌 [`a72a7703`](https://github.com/Jatin-nicon/tenali/commit/a72a7703cd59d40e51162bebd27e8118bd3470c0) — **Sudarshan** — Add Sequences, Ratio & Proportion, and Percentages puzzles
+- 📌 [`a72a7703`](https://github.com/vicharanashala/tenali/commit/a72a7703cd59d40e51162bebd27e8118bd3470c0) — **Sudarshan** — Add Sequences, Ratio & Proportion, and Percentages puzzles
     - 📁 **6 files:** `client/src/App.jsx` `+398 −0`, `client/vite.config.js` `+6 −0`, `server/index.js` `+367 −0`, `supermarket/percent/SKILL.md` `+24 −0`, `supermarket/ratio/SKILL.md` `+25 −0`, `supermarket/sequences/SKILL.md` `+23 −0`
     - 📊 **`+843 −0`** · 6 files
-- 📌 [`7de490e4`](https://github.com/Jatin-nicon/tenali/commit/7de490e4259e5a9eee790e8a4a142209bd8d1f0d) — **Sudarshan** — Add Surds and Indices puzzles with full IGCSE coverage
+- 📌 [`7de490e4`](https://github.com/vicharanashala/tenali/commit/7de490e4259e5a9eee790e8a4a142209bd8d1f0d) — **Sudarshan** — Add Surds and Indices puzzles with full IGCSE coverage
     - 📁 **5 files:** `client/src/App.jsx` `+427 −0`, `client/vite.config.js` `+4 −0`, `server/index.js` `+539 −0`, `supermarket/indices/SKILL.md` `+105 −0`, `supermarket/surds/SKILL.md` `+183 −0`
     - 📊 **`+1258 −0`** · 5 files
-- 📌 [`87ad0575`](https://github.com/Jatin-nicon/tenali/commit/87ad05753b9be4301a65349a5b4a87f93431ba22) — **Sudarshan** — replace stacked num/den inputs with single text input
+- 📌 [`87ad0575`](https://github.com/vicharanashala/tenali/commit/87ad05753b9be4301a65349a5b4a87f93431ba22) — **Sudarshan** — replace stacked num/den inputs with single text input
     - 📁 **1 file:** `client/src/App.jsx` `+42 −62`
     - 📊 **`+42 −62`** · 1 file
-- 📌 [`ae24a41f`](https://github.com/Jatin-nicon/tenali/commit/ae24a41f24f49003268b6762ac0c98a711de2bc1) — **Sudarshan** — Fix Fractions (Add) setup screen to match standard puzzle layout
+- 📌 [`ae24a41f`](https://github.com/vicharanashala/tenali/commit/ae24a41f24f49003268b6762ac0c98a711de2bc1) — **Sudarshan** — Fix Fractions (Add) setup screen to match standard puzzle layout
     - 📁 **1 file:** `client/src/App.jsx` `+16 −23`
     - 📊 **`+16 −23`** · 1 file
-- 📌 [`c3cfb935`](https://github.com/Jatin-nicon/tenali/commit/c3cfb93541b5e2c8a94d35c8c54a4107a068ebf6) — **Sudarshan** — increase to 100 questions per session
+- 📌 [`c3cfb935`](https://github.com/vicharanashala/tenali/commit/c3cfb93541b5e2c8a94d35c8c54a4107a068ebf6) — **Sudarshan** — increase to 100 questions per session
     - 📁 **1 file:** `client/src/App.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`b17839de`](https://github.com/Jatin-nicon/tenali/commit/b17839de3132a3a31c3d720a35a0a5a2d719f9fa) — **Sudarshan** — Set Taittiriya to start on 3× table (mastered 2×)
+- 📌 [`b17839de`](https://github.com/vicharanashala/tenali/commit/b17839de3132a3a31c3d720a35a0a5a2d719f9fa) — **Sudarshan** — Set Taittiriya to start on 3× table (mastered 2×)
     - 📁 **1 file:** `client/src/App.jsx` `+3 −3`
     - 📊 **`+3 −3`** · 1 file
-- 📌 [`1f8a07e3`](https://github.com/Jatin-nicon/tenali/commit/1f8a07e30aea27abdf1df1dfb5c485a5e0fdaa6b) — **Sudarshan** — Fix double plus sign in monomial addition prompts
+- 📌 [`1f8a07e3`](https://github.com/vicharanashala/tenali/commit/1f8a07e30aea27abdf1df1dfb5c485a5e0fdaa6b) — **Sudarshan** — Fix double plus sign in monomial addition prompts
     - 📁 **1 file:** `client/src/App.jsx` `+6 −6`
     - 📊 **`+6 −6`** · 1 file
-- 📌 [`013386bd`](https://github.com/Jatin-nicon/tenali/commit/013386bd08ea019f6c6836fd88d110f64c4faf5a) — **Sudarshan** — Add table advancement to Taittiriya: auto-advance on mastery
+- 📌 [`013386bd`](https://github.com/vicharanashala/tenali/commit/013386bd08ea019f6c6836fd88d110f64c4faf5a) — **Sudarshan** — Add table advancement to Taittiriya: auto-advance on mastery
     - 📁 **1 file:** `client/src/App.jsx` `+12 −1`
     - 📊 **`+12 −1`** · 1 file
-- 📌 [`248201c5`](https://github.com/Jatin-nicon/tenali/commit/248201c59bc684cba1560b59c047e5420f367b04) — **Sudarshan** — Remove setup phase from Tatsavit — auto-starts immediately
+- 📌 [`248201c5`](https://github.com/vicharanashala/tenali/commit/248201c59bc684cba1560b59c047e5420f367b04) — **Sudarshan** — Remove setup phase from Tatsavit — auto-starts immediately
     - 📁 **1 file:** `client/src/App.jsx` `+22 −29`
     - 📊 **`+22 −29`** · 1 file
-- 📌 [`d4e3a65a`](https://github.com/Jatin-nicon/tenali/commit/d4e3a65ab2ff69ca04c538f9a3ccc372b8318e56) — **Sudarshan** — Fix Taittiriya: show only the current table, not neighbors
+- 📌 [`d4e3a65a`](https://github.com/vicharanashala/tenali/commit/d4e3a65ab2ff69ca04c538f9a3ccc372b8318e56) — **Sudarshan** — Fix Taittiriya: show only the current table, not neighbors
     - 📁 **1 file:** `client/src/App.jsx` `+37 −72`
     - 📊 **`+37 −72`** · 1 file
-- 📌 [`16bf1b69`](https://github.com/Jatin-nicon/tenali/commit/16bf1b6920462fbe5b9ad6b620955d0d4fae4ebd) — **Sudarshan** — Remove setup phase from Taittiriya — auto-starts immediately
+- 📌 [`16bf1b69`](https://github.com/vicharanashala/tenali/commit/16bf1b6920462fbe5b9ad6b620955d0d4fae4ebd) — **Sudarshan** — Remove setup phase from Taittiriya — auto-starts immediately
     - 📁 **1 file:** `client/src/App.jsx` `+35 −45`
     - 📊 **`+35 −45`** · 1 file
-- 📌 [`39620ce4`](https://github.com/Jatin-nicon/tenali/commit/39620ce45a95c4cf42cd5928e3660794c605bb85) — **Sudarshan** — Add Fractions (Add) puzzle, scaffolded tables for Taittiriya, adaptive mixed quiz for Tatsavit
+- 📌 [`39620ce4`](https://github.com/vicharanashala/tenali/commit/39620ce45a95c4cf42cd5928e3660794c605bb85) — **Sudarshan** — Add Fractions (Add) puzzle, scaffolded tables for Taittiriya, adaptive mixed quiz for Tatsavit
     - 📁 **5 files:** `client/src/App.css` `+224 −0`, `client/src/App.jsx` `+1345 −5`, `client/vite.config.js` `+2 −0`, `server/index.js` `+207 −0`, `supermarket/fractionadd/SKILL.md` `+242 −0`
     - 📊 **`+2020 −5`** · 5 files
-- 📌 [`e97a032b`](https://github.com/Jatin-nicon/tenali/commit/e97a032b64d594dc7e67855ad272e59347636877) — **Sudarshan** — Add extensive code comments and rewrite all SKILL.md as formal specs
-    - 📁 **28 files:** `addition/client/src/App.css` `+225 −23`, `addition/client/src/App.jsx` `+85 −0`, `addition/server/index.js` `+83 −0`, `chitragupta/client/src/App.css` `+215 −22`, `chitragupta/client/src/App.jsx` `+99 −7`, `chitragupta/server/index.js` `+93 −0`, `client/src/App.css` `+618 −177`, `client/src/App.jsx` `+1720 −107` *(+20 more in [`e97a032b`](https://github.com/Jatin-nicon/tenali/commit/e97a032b64d594dc7e67855ad272e59347636877))*
+- 📌 [`e97a032b`](https://github.com/vicharanashala/tenali/commit/e97a032b64d594dc7e67855ad272e59347636877) — **Sudarshan** — Add extensive code comments and rewrite all SKILL.md as formal specs
+    - 📁 **28 files:** `addition/client/src/App.css` `+225 −23`, `addition/client/src/App.jsx` `+85 −0`, `addition/server/index.js` `+83 −0`, `chitragupta/client/src/App.css` `+215 −22`, `chitragupta/client/src/App.jsx` `+99 −7`, `chitragupta/server/index.js` `+93 −0`, `client/src/App.css` `+618 −177`, `client/src/App.jsx` `+1720 −107` *(+20 more in [`e97a032b`](https://github.com/vicharanashala/tenali/commit/e97a032b64d594dc7e67855ad272e59347636877))*
     - 📊 **`+10059 −1574`** · 28 files
-- 📌 [`b6d4b61f`](https://github.com/Jatin-nicon/tenali/commit/b6d4b61f58da3175c6164dbcebaca08d6561e7de) — **Sudarshan** — Fix vocab repetition: add dedup to vocab + GK, expand to ~4000 questions
-    - 📁 **3966 files:** `client/src/App.jsx` `+15 −6`, `server/index.js` `+12 −3`, `vocab/questions/0001.json` `+4 −4`, `vocab/questions/0002.json` `+7 −7`, `vocab/questions/0003.json` `+8 −8`, `vocab/questions/0004.json` `+8 −8`, `vocab/questions/0005.json` `+8 −8`, `vocab/questions/0006.json` `+8 −8` *(+3958 more in [`b6d4b61f`](https://github.com/Jatin-nicon/tenali/commit/b6d4b61f58da3175c6164dbcebaca08d6561e7de))*
+- 📌 [`b6d4b61f`](https://github.com/vicharanashala/tenali/commit/b6d4b61f58da3175c6164dbcebaca08d6561e7de) — **Sudarshan** — Fix vocab repetition: add dedup to vocab + GK, expand to ~4000 questions
+    - 📁 **3966 files:** `client/src/App.jsx` `+15 −6`, `server/index.js` `+12 −3`, `vocab/questions/0001.json` `+4 −4`, `vocab/questions/0002.json` `+7 −7`, `vocab/questions/0003.json` `+8 −8`, `vocab/questions/0004.json` `+8 −8`, `vocab/questions/0005.json` `+8 −8`, `vocab/questions/0006.json` `+8 −8` *(+3958 more in [`b6d4b61f`](https://github.com/vicharanashala/tenali/commit/b6d4b61f58da3175c6164dbcebaca08d6561e7de))*
     - 📊 **`+59008 −655`** · 3966 files
 
 #### 📅 2026-04-02  <sub>(43 commits)</sub>
 
-- 📌 [`ce262f9d`](https://github.com/Jatin-nicon/tenali/commit/ce262f9d6d2c11e5a13a9fd4f4dc09239a23eb21) — **Sudarshan** — Add interval scheduling & extended Euclid pages, fix Custom Lesson crash
+- 📌 [`ce262f9d`](https://github.com/vicharanashala/tenali/commit/ce262f9d6d2c11e5a13a9fd4f4dc09239a23eb21) — **Sudarshan** — Add interval scheduling & extended Euclid pages, fix Custom Lesson crash
     - 📁 **2 files:** `client/src/App.css` `+418 −0`, `client/src/App.jsx` `+538 −3`
     - 📊 **`+956 −3`** · 2 files
-- 📌 [`58ca1fd8`](https://github.com/Jatin-nicon/tenali/commit/58ca1fd8b4d73df282a1dcd3f192a9c93970cd50) — **Sudarshan** — Rename GK subtitle to 'General Knowledge questions'
+- 📌 [`58ca1fd8`](https://github.com/vicharanashala/tenali/commit/58ca1fd8b4d73df282a1dcd3f192a9c93970cd50) — **Sudarshan** — Rename GK subtitle to 'General Knowledge questions'
     - 📁 **1 file:** `client/src/App.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`46582abd`](https://github.com/Jatin-nicon/tenali/commit/46582abdcd5c6a6540467659ffa8e21537cfbcd6) — **Sudarshan** — Enable keyboard input for Arithmetic puzzle
+- 📌 [`46582abd`](https://github.com/vicharanashala/tenali/commit/46582abdcd5c6a6540467659ffa8e21537cfbcd6) — **Sudarshan** — Enable keyboard input for Arithmetic puzzle
     - 📁 **1 file:** `client/src/App.jsx` `+18 −3`
     - 📊 **`+18 −3`** · 1 file
-- 📌 [`13cd0ac3`](https://github.com/Jatin-nicon/tenali/commit/13cd0ac395356b68227f96abfcfb9f820a9b021c) — **Sudarshan** — Fix desktop adaptive tables layout: balanced spacing and alignment
+- 📌 [`13cd0ac3`](https://github.com/vicharanashala/tenali/commit/13cd0ac395356b68227f96abfcfb9f820a9b021c) — **Sudarshan** — Fix desktop adaptive tables layout: balanced spacing and alignment
     - 📁 **1 file:** `client/src/App.css` `+6 −3`
     - 📊 **`+6 −3`** · 1 file
-- 📌 [`ef5aa950`](https://github.com/Jatin-nicon/tenali/commit/ef5aa9509bd62dec71bd50f64720db91e1648af0) — **Sudarshan** — Allow Enter key to advance after wrong answers in adaptive tables
+- 📌 [`ef5aa950`](https://github.com/vicharanashala/tenali/commit/ef5aa9509bd62dec71bd50f64720db91e1648af0) — **Sudarshan** — Allow Enter key to advance after wrong answers in adaptive tables
     - 📁 **1 file:** `client/src/App.jsx` `+10 −0`
     - 📊 **`+10 −0`** · 1 file
-- 📌 [`6894bb50`](https://github.com/Jatin-nicon/tenali/commit/6894bb50b62eab9fe63b22bf432ac56363118fd2) — **Sudarshan** — Improve mobile adaptive tables: quiz on top, compact 3-col ref table
+- 📌 [`6894bb50`](https://github.com/vicharanashala/tenali/commit/6894bb50b62eab9fe63b22bf432ac56363118fd2) — **Sudarshan** — Improve mobile adaptive tables: quiz on top, compact 3-col ref table
     - 📁 **1 file:** `client/src/App.css` `+14 −9`
     - 📊 **`+14 −9`** · 1 file
-- 📌 [`b653f5a7`](https://github.com/Jatin-nicon/tenali/commit/b653f5a7000a06b87ec3b3018ecb883a186a2743) — **Sudarshan** — Add Next button after wrong answers in adaptive tables
+- 📌 [`b653f5a7`](https://github.com/vicharanashala/tenali/commit/b653f5a7000a06b87ec3b3018ecb883a186a2743) — **Sudarshan** — Add Next button after wrong answers in adaptive tables
     - 📁 **1 file:** `client/src/App.jsx` `+5 −0`
     - 📊 **`+5 −0`** · 1 file
-- 📌 [`0bf8a8c4`](https://github.com/Jatin-nicon/tenali/commit/0bf8a8c4c130657f86d395cad66d3df787dd1360) — **Sudarshan** — Fix mobile layout for reference table in /tatsavit and /taittiriya
+- 📌 [`0bf8a8c4`](https://github.com/vicharanashala/tenali/commit/0bf8a8c4c130657f86d395cad66d3df787dd1360) — **Sudarshan** — Fix mobile layout for reference table in /tatsavit and /taittiriya
     - 📁 **2 files:** `client/src/App.css` `+18 −2`, `client/src/App.jsx` `+8 −6`
     - 📊 **`+26 −8`** · 2 files
-- 📌 [`70eb5755`](https://github.com/Jatin-nicon/tenali/commit/70eb5755a234dc9049632a3ccde43454c6d51d0e) — **Sudarshan** — Fix keyboard shortcuts: pass letter directly instead of relying on state
+- 📌 [`70eb5755`](https://github.com/vicharanashala/tenali/commit/70eb5755a234dc9049632a3ccde43454c6d51d0e) — **Sudarshan** — Fix keyboard shortcuts: pass letter directly instead of relying on state
     - 📁 **1 file:** `client/src/App.jsx` `+85 −101`
     - 📊 **`+85 −101`** · 1 file
-- 📌 [`347a148a`](https://github.com/Jatin-nicon/tenali/commit/347a148a96947492babc21b7d807e34355179e0e) — **Sudarshan** — Fix card layout: subtitle sits right below badge, both centered
+- 📌 [`347a148a`](https://github.com/vicharanashala/tenali/commit/347a148a96947492babc21b7d807e34355179e0e) — **Sudarshan** — Fix card layout: subtitle sits right below badge, both centered
     - 📁 **1 file:** `client/src/App.css` `+2 −2`
     - 📊 **`+2 −2`** · 1 file
-- 📌 [`b07f230d`](https://github.com/Jatin-nicon/tenali/commit/b07f230d931ae9b27f0b1396fe56ed9cb4b9f364) — **Sudarshan** — Add keyboard shortcuts (1-4 / a-d) for multiple-choice questions
+- 📌 [`b07f230d`](https://github.com/vicharanashala/tenali/commit/b07f230d931ae9b27f0b1396fe56ed9cb4b9f364) — **Sudarshan** — Add keyboard shortcuts (1-4 / a-d) for multiple-choice questions
     - 📁 **1 file:** `client/src/App.jsx` `+66 −8`
     - 📊 **`+66 −8`** · 1 file
-- 📌 [`e2b4f649`](https://github.com/Jatin-nicon/tenali/commit/e2b4f649573a4e14446de34a5431374a6e845a5d) — **Sudarshan** — Pin card badges to top: consistent alignment regardless of subtitle length
+- 📌 [`e2b4f649`](https://github.com/vicharanashala/tenali/commit/e2b4f649573a4e14446de34a5431374a6e845a5d) — **Sudarshan** — Pin card badges to top: consistent alignment regardless of subtitle length
     - 📁 **1 file:** `client/src/App.css` `+6 −5`
     - 📊 **`+6 −5`** · 1 file
-- 📌 [`964ba8a2`](https://github.com/Jatin-nicon/tenali/commit/964ba8a23951761fcd6c741a1edbd111a6a8fd0b) — **Sudarshan** — Redesign adaptive tables: starting table picker + speed-based adaptation
+- 📌 [`964ba8a2`](https://github.com/vicharanashala/tenali/commit/964ba8a23951761fcd6c741a1edbd111a6a8fd0b) — **Sudarshan** — Redesign adaptive tables: starting table picker + speed-based adaptation
     - 📁 **1 file:** `client/src/App.jsx` `+173 −124`
     - 📊 **`+173 −124`** · 1 file
-- 📌 [`fc5404d2`](https://github.com/Jatin-nicon/tenali/commit/fc5404d2b0bce343be4d0793e7d3fdcbe183a692) — **Sudarshan** — Fix /taittiriya and /tatsavit: change Vite base from './' to '/'
+- 📌 [`fc5404d2`](https://github.com/vicharanashala/tenali/commit/fc5404d2b0bce343be4d0793e7d3fdcbe183a692) — **Sudarshan** — Fix /taittiriya and /tatsavit: change Vite base from './' to '/'
     - 📁 **1 file:** `client/vite.config.js` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`917b8c36`](https://github.com/Jatin-nicon/tenali/commit/917b8c36ede17bd4c431fe5ca4b05c984b0b8883) — **Sudarshan** — Make title badges uniform: fixed 140x38px with centered text
+- 📌 [`917b8c36`](https://github.com/vicharanashala/tenali/commit/917b8c36ede17bd4c431fe5ca4b05c984b0b8883) — **Sudarshan** — Make title badges uniform: fixed 140x38px with centered text
     - 📁 **1 file:** `client/src/App.css` `+8 −5`
     - 📊 **`+8 −5`** · 1 file
-- 📌 [`fd27bc3e`](https://github.com/Jatin-nicon/tenali/commit/fd27bc3ea9500014240986dabe350017758ab162) — **Sudarshan** — Fix GK badge alignment: add min-width to menu-title badges
+- 📌 [`fd27bc3e`](https://github.com/vicharanashala/tenali/commit/fd27bc3ea9500014240986dabe350017758ab162) — **Sudarshan** — Fix GK badge alignment: add min-width to menu-title badges
     - 📁 **1 file:** `client/src/App.css` `+2 −0`
     - 📊 **`+2 −0`** · 1 file
-- 📌 [`1fc2cbd7`](https://github.com/Jatin-nicon/tenali/commit/1fc2cbd767a13ebf2a8388cfe56db2417312381f) — **Sudarshan** — Add adaptive multiplication tables for /taittiriya and /tatsavit
+- 📌 [`1fc2cbd7`](https://github.com/vicharanashala/tenali/commit/1fc2cbd767a13ebf2a8388cfe56db2417312381f) — **Sudarshan** — Add adaptive multiplication tables for /taittiriya and /tatsavit
     - 📁 **2 files:** `client/src/App.css` `+51 −0`, `client/src/App.jsx` `+273 −0`
     - 📊 **`+324 −0`** · 2 files
-- 📌 [`51859fff`](https://github.com/Jatin-nicon/tenali/commit/51859fff1eaddc9a69dcb7f74ab08689bb3638ad) — **Sudarshan** — Complete dark/light theme: all components use CSS variables
+- 📌 [`51859fff`](https://github.com/vicharanashala/tenali/commit/51859fff1eaddc9a69dcb7f74ab08689bb3638ad) — **Sudarshan** — Complete dark/light theme: all components use CSS variables
     - 📁 **1 file:** `client/src/App.css` `+80 −54`
     - 📊 **`+80 −54`** · 1 file
-- 📌 [`bb9ce737`](https://github.com/Jatin-nicon/tenali/commit/bb9ce73755ab113faa8223aeeb7576583140bab0) — **Sudarshan** — Shorten puzzle card names: GK, Vocabulary, Quadratics, Sim. Eq., Arithmetic
+- 📌 [`bb9ce737`](https://github.com/vicharanashala/tenali/commit/bb9ce73755ab113faa8223aeeb7576583140bab0) — **Sudarshan** — Shorten puzzle card names: GK, Vocabulary, Quadratics, Sim. Eq., Arithmetic
     - 📁 **1 file:** `client/src/App.jsx` `+5 −5`
     - 📊 **`+5 −5`** · 1 file
-- 📌 [`d0ec86f3`](https://github.com/Jatin-nicon/tenali/commit/d0ec86f3280f81d237229cd167ddff95316f17b3) — **Sudarshan** — Add Custom Lesson puzzle, dark/light theme toggle, search bar, uniform cards
+- 📌 [`d0ec86f3`](https://github.com/vicharanashala/tenali/commit/d0ec86f3280f81d237229cd167ddff95316f17b3) — **Sudarshan** — Add Custom Lesson puzzle, dark/light theme toggle, search bar, uniform cards
     - 📁 **4 files:** `client/src/App.css` `+188 −9`, `client/src/App.jsx` `+561 −38`, `supermarket/SKILL.md` `+11 −7`, `supermarket/custom/SKILL.md` `+43 −0`
     - 📊 **`+803 −54`** · 4 files
-- 📌 [`b0ae5ea7`](https://github.com/Jatin-nicon/tenali/commit/b0ae5ea7003e2e174f335deb87d4e94abd0aa066) — **Sudarshan** — Lighten title badge to silver grey, center-align all card content
+- 📌 [`b0ae5ea7`](https://github.com/vicharanashala/tenali/commit/b0ae5ea7003e2e174f335deb87d4e94abd0aa066) — **Sudarshan** — Lighten title badge to silver grey, center-align all card content
     - 📁 **1 file:** `client/src/App.css` `+4 −4`
     - 📊 **`+4 −4`** · 1 file
-- 📌 [`b5dcb1f9`](https://github.com/Jatin-nicon/tenali/commit/b5dcb1f990986ff5b0e9382a1c521712b8149400) — **Sudarshan** — Style menu card titles with greyscale badge rectangles
+- 📌 [`b5dcb1f9`](https://github.com/vicharanashala/tenali/commit/b5dcb1f990986ff5b0e9382a1c521712b8149400) — **Sudarshan** — Style menu card titles with greyscale badge rectangles
     - 📁 **1 file:** `client/src/App.css` `+11 −4`
     - 📊 **`+11 −4`** · 1 file
-- 📌 [`3c9773ff`](https://github.com/Jatin-nicon/tenali/commit/3c9773ffa86a3420b9094e5f25b3e81568cd56a9) — **Sudarshan** — Merge linear/simul, add Basic Arithmetic, restructure polymul, fix alignment
-    - 📁 **22 files:** `client/package-lock.json` `+0 −30`, `client/src/App.css` `+8 −0`, `client/src/App.jsx` `+152 −147`, `client/vite.config.js` `+1 −1`, `server/index.js` `+150 −108`, `supermarket/SKILL.md` `+23 −23`, `supermarket/addition/SKILL.md` `+3 −3`, `supermarket/basicarith/SKILL.md` `+159 −0` *(+14 more in [`3c9773ff`](https://github.com/Jatin-nicon/tenali/commit/3c9773ffa86a3420b9094e5f25b3e81568cd56a9))*
+- 📌 [`3c9773ff`](https://github.com/vicharanashala/tenali/commit/3c9773ffa86a3420b9094e5f25b3e81568cd56a9) — **Sudarshan** — Merge linear/simul, add Basic Arithmetic, restructure polymul, fix alignment
+    - 📁 **22 files:** `client/package-lock.json` `+0 −30`, `client/src/App.css` `+8 −0`, `client/src/App.jsx` `+152 −147`, `client/vite.config.js` `+1 −1`, `server/index.js` `+150 −108`, `supermarket/SKILL.md` `+23 −23`, `supermarket/addition/SKILL.md` `+3 −3`, `supermarket/basicarith/SKILL.md` `+159 −0` *(+14 more in [`3c9773ff`](https://github.com/vicharanashala/tenali/commit/3c9773ffa86a3420b9094e5f25b3e81568cd56a9))*
     - 📊 **`+594 −750`** · 22 files
-- 📌 [`7e568fef`](https://github.com/Jatin-nicon/tenali/commit/7e568fef73019ca65d0699a6743564f4aed70db1) — **Sudarshan** — Use proper Unicode superscripts instead of ^ for exponents
+- 📌 [`7e568fef`](https://github.com/vicharanashala/tenali/commit/7e568fef73019ca65d0699a6743564f4aed70db1) — **Sudarshan** — Use proper Unicode superscripts instead of ^ for exponents
     - 📁 **2 files:** `client/src/App.jsx` `+2 −1`, `server/index.js` `+2 −1`
     - 📊 **`+4 −2`** · 2 files
-- 📌 [`7806cc90`](https://github.com/Jatin-nicon/tenali/commit/7806cc90bb3a3617dafbb2fc677f68080695504b) — **Sudarshan** — Fix missing isCorrect state in Addition, Quadratic, Multiply, Sqrt
+- 📌 [`7806cc90`](https://github.com/vicharanashala/tenali/commit/7806cc90bb3a3617dafbb2fc677f68080695504b) — **Sudarshan** — Fix missing isCorrect state in Addition, Quadratic, Multiply, Sqrt
     - 📁 **1 file:** `client/src/App.jsx` `+16 −4`
     - 📊 **`+16 −4`** · 1 file
-- 📌 [`55ee5e15`](https://github.com/Jatin-nicon/tenali/commit/55ee5e159581894de84b390b1c0bc5b2ea9d4c06) — **Sudarshan** — Rename Spot It to Twin Hunt everywhere
+- 📌 [`55ee5e15`](https://github.com/vicharanashala/tenali/commit/55ee5e159581894de84b390b1c0bc5b2ea9d4c06) — **Sudarshan** — Rename Spot It to Twin Hunt everywhere
     - 📁 **4 files:** `client/src/App.css` `+12 −12`, `client/src/App.jsx` `+15 −15`, `supermarket/SKILL.md` `+3 −3`, `supermarket/{spotit => twinhunt}/SKILL.md` `+21 −21`
     - 📊 **`+51 −51`** · 4 files
-- 📌 [`bb9140c7`](https://github.com/Jatin-nicon/tenali/commit/bb9140c776e47ff94cfd6225a419719617ebda20) — **Sudarshan** — Only auto-advance on correct answers; wait on wrong answers
+- 📌 [`bb9140c7`](https://github.com/vicharanashala/tenali/commit/bb9140c776e47ff94cfd6225a419719617ebda20) — **Sudarshan** — Only auto-advance on correct answers; wait on wrong answers
     - 📁 **1 file:** `client/src/App.jsx` `+18 −18`
     - 📊 **`+18 −18`** · 1 file
-- 📌 [`e04efdc1`](https://github.com/Jatin-nicon/tenali/commit/e04efdc14037fed670944c81945ae79bfd4c4ec1) — **Sudarshan** — Ensure prime factorization never generates prime numbers
+- 📌 [`e04efdc1`](https://github.com/vicharanashala/tenali/commit/e04efdc14037fed670944c81945ae79bfd4c4ec1) — **Sudarshan** — Ensure prime factorization never generates prime numbers
     - 📁 **1 file:** `server/index.js` `+2 −4`
     - 📊 **`+2 −4`** · 1 file
-- 📌 [`84df47e5`](https://github.com/Jatin-nicon/tenali/commit/84df47e59bf968c31f4c75435267be1ae65d3cbe) — **Sudarshan** — Add SKILL.md specs for all 8 new math puzzles
-    - 📁 **9 files:** `supermarket/SKILL.md` `+42 −2`, `supermarket/funceval/SKILL.md` `+287 −0`, `supermarket/linear/SKILL.md` `+224 −0`, `supermarket/lineq/SKILL.md` `+213 −0`, `supermarket/polyfactor/SKILL.md` `+203 −0`, `supermarket/polymul/SKILL.md` `+203 −0`, `supermarket/primefactor/SKILL.md` `+248 −0`, `supermarket/qformula/SKILL.md` `+272 −0` *(+1 more in [`84df47e5`](https://github.com/Jatin-nicon/tenali/commit/84df47e59bf968c31f4c75435267be1ae65d3cbe))*
+- 📌 [`84df47e5`](https://github.com/vicharanashala/tenali/commit/84df47e59bf968c31f4c75435267be1ae65d3cbe) — **Sudarshan** — Add SKILL.md specs for all 8 new math puzzles
+    - 📁 **9 files:** `supermarket/SKILL.md` `+42 −2`, `supermarket/funceval/SKILL.md` `+287 −0`, `supermarket/linear/SKILL.md` `+224 −0`, `supermarket/lineq/SKILL.md` `+213 −0`, `supermarket/polyfactor/SKILL.md` `+203 −0`, `supermarket/polymul/SKILL.md` `+203 −0`, `supermarket/primefactor/SKILL.md` `+248 −0`, `supermarket/qformula/SKILL.md` `+272 −0` *(+1 more in [`84df47e5`](https://github.com/vicharanashala/tenali/commit/84df47e59bf968c31f4c75435267be1ae65d3cbe))*
     - 📊 **`+1940 −2`** · 9 files
-- 📌 [`33a9fb36`](https://github.com/Jatin-nicon/tenali/commit/33a9fb36aaaac8b9eda767d8f326e4f98bb29896) — **Sudarshan** — Add 8 new math puzzles to Tenali
+- 📌 [`33a9fb36`](https://github.com/vicharanashala/tenali/commit/33a9fb36aaaac8b9eda767d8f326e4f98bb29896) — **Sudarshan** — Add 8 new math puzzles to Tenali
     - 📁 **4 files:** `client/src/App.css` `+104 −0`, `client/src/App.jsx` `+1057 −1`, `client/vite.config.js` `+8 −0`, `server/index.js` `+409 −0`
     - 📊 **`+1578 −1`** · 4 files
-- 📌 [`b5c95530`](https://github.com/Jatin-nicon/tenali/commit/b5c95530bbe53cb9c2f8d7c8dc50e3ebfd3b355b) — **Sudarshan** — Update all SKILL.md specs to reflect current state of all 7 apps
+- 📌 [`b5c95530`](https://github.com/vicharanashala/tenali/commit/b5c95530bbe53cb9c2f8d7c8dc50e3ebfd3b355b) — **Sudarshan** — Update all SKILL.md specs to reflect current state of all 7 apps
     - 📁 **8 files:** `supermarket/SKILL.md` `+37 −5`, `supermarket/addition/SKILL.md` `+57 −13`, `supermarket/gk/SKILL.md` `+12 −3`, `supermarket/multiply/SKILL.md` `+132 −0`, `supermarket/quadratic/SKILL.md` `+37 −14`, `supermarket/spotit/SKILL.md` `+248 −0`, `supermarket/sqrt/SKILL.md` `+24 −9`, `supermarket/vocab/SKILL.md` `+170 −0`
     - 📊 **`+717 −44`** · 8 files
-- 📌 [`0d2ab690`](https://github.com/Jatin-nicon/tenali/commit/0d2ab69086ff2f67b522b32cfcb295bd55598877) — **Sudarshan** — Reverse Vocab Builder: show word, pick the correct definition
-    - 📁 **77 files:** `client/src/App.css` `+5 −2`, `client/src/App.jsx` `+9 −7`, `vocab/questions/0001.json` `+9 −8`, `vocab/questions/0002.json` `+8 −7`, `vocab/questions/0003.json` `+8 −7`, `vocab/questions/0004.json` `+9 −8`, `vocab/questions/0005.json` `+9 −8`, `vocab/questions/0006.json` `+9 −8` *(+69 more in [`0d2ab690`](https://github.com/Jatin-nicon/tenali/commit/0d2ab69086ff2f67b522b32cfcb295bd55598877))*
+- 📌 [`0d2ab690`](https://github.com/vicharanashala/tenali/commit/0d2ab69086ff2f67b522b32cfcb295bd55598877) — **Sudarshan** — Reverse Vocab Builder: show word, pick the correct definition
+    - 📁 **77 files:** `client/src/App.css` `+5 −2`, `client/src/App.jsx` `+9 −7`, `vocab/questions/0001.json` `+9 −8`, `vocab/questions/0002.json` `+8 −7`, `vocab/questions/0003.json` `+8 −7`, `vocab/questions/0004.json` `+9 −8`, `vocab/questions/0005.json` `+9 −8`, `vocab/questions/0006.json` `+9 −8` *(+69 more in [`0d2ab690`](https://github.com/vicharanashala/tenali/commit/0d2ab69086ff2f67b522b32cfcb295bd55598877))*
     - 📊 **`+665 −585`** · 77 files
-- 📌 [`0800f572`](https://github.com/Jatin-nicon/tenali/commit/0800f57206550ca83e18bc82fd9fe58f6966dbec) — **Sudarshan** — Add Vocab Builder quiz and scatter Spot It items in circles
-    - 📁 **79 files:** `client/src/App.css` `+38 −18`, `client/src/App.jsx` `+208 −14`, `client/vite.config.js` `+1 −0`, `server/index.js` `+44 −0`, `vocab/questions/0001.json` `+14 −0`, `vocab/questions/0002.json` `+14 −0`, `vocab/questions/0003.json` `+14 −0`, `vocab/questions/0004.json` `+14 −0` *(+71 more in [`0800f572`](https://github.com/Jatin-nicon/tenali/commit/0800f57206550ca83e18bc82fd9fe58f6966dbec))*
+- 📌 [`0800f572`](https://github.com/vicharanashala/tenali/commit/0800f57206550ca83e18bc82fd9fe58f6966dbec) — **Sudarshan** — Add Vocab Builder quiz and scatter Spot It items in circles
+    - 📁 **79 files:** `client/src/App.css` `+38 −18`, `client/src/App.jsx` `+208 −14`, `client/vite.config.js` `+1 −0`, `server/index.js` `+44 −0`, `vocab/questions/0001.json` `+14 −0`, `vocab/questions/0002.json` `+14 −0`, `vocab/questions/0003.json` `+14 −0`, `vocab/questions/0004.json` `+14 −0` *(+71 more in [`0800f572`](https://github.com/vicharanashala/tenali/commit/0800f57206550ca83e18bc82fd9fe58f6966dbec))*
     - 📊 **`+1341 −32`** · 79 files
-- 📌 [`a0354558`](https://github.com/Jatin-nicon/tenali/commit/a03545588e3ff6dd4d8e72320990ef05e2b9fec2) — **Sudarshan** — Add Spot It puzzle — find the common object in two panels
+- 📌 [`a0354558`](https://github.com/vicharanashala/tenali/commit/a03545588e3ff6dd4d8e72320990ef05e2b9fec2) — **Sudarshan** — Add Spot It puzzle — find the common object in two panels
     - 📁 **2 files:** `client/src/App.css` `+67 −0`, `client/src/App.jsx` `+156 −0`
     - 📊 **`+223 −0`** · 2 files
-- 📌 [`f510a622`](https://github.com/Jatin-nicon/tenali/commit/f510a6222892dad34e4bd31e17738bc94cbb937e) — **Sudarshan** — Auto-advance to next question after 1.5s feedback display
+- 📌 [`f510a622`](https://github.com/vicharanashala/tenali/commit/f510a6222892dad34e4bd31e17738bc94cbb937e) — **Sudarshan** — Auto-advance to next question after 1.5s feedback display
     - 📁 **1 file:** `client/src/App.jsx` `+31 −1`
     - 📊 **`+31 −1`** · 1 file
-- 📌 [`7ac63003`](https://github.com/Jatin-nicon/tenali/commit/7ac63003319a92527399dc73125fbb26c9baf3c3) — **Sudarshan** — Add Multiplication Tables quiz and configurable question count
+- 📌 [`7ac63003`](https://github.com/vicharanashala/tenali/commit/7ac63003319a92527399dc73125fbb26c9baf3c3) — **Sudarshan** — Add Multiplication Tables quiz and configurable question count
     - 📁 **4 files:** `client/src/App.css` `+61 −0`, `client/src/App.jsx` `+248 −22`, `client/vite.config.js` `+1 −0`, `server/index.js` `+22 −0`
     - 📊 **`+332 −22`** · 4 files
-- 📌 [`fd1951b4`](https://github.com/Jatin-nicon/tenali/commit/fd1951b4bcf244ed7caf3e4f40b27407559c8c05) — **Sudarshan** — Fix numpad: enable physical keyboard alongside on-screen keypad
+- 📌 [`fd1951b4`](https://github.com/vicharanashala/tenali/commit/fd1951b4bcf244ed7caf3e4f40b27407559c8c05) — **Sudarshan** — Fix numpad: enable physical keyboard alongside on-screen keypad
     - 📁 **1 file:** `client/src/App.jsx` `+3 −3`
     - 📊 **`+3 −3`** · 1 file
-- 📌 [`71850576`](https://github.com/Jatin-nicon/tenali/commit/7185057674ca32e7382d4775e74a640b3bf59fc4) — **Sudarshan** — Add elegant on-screen numeric keypad to all math quizzes
+- 📌 [`71850576`](https://github.com/vicharanashala/tenali/commit/7185057674ca32e7382d4775e74a640b3bf59fc4) — **Sudarshan** — Add elegant on-screen numeric keypad to all math quizzes
     - 📁 **2 files:** `client/src/App.css` `+61 −0`, `client/src/App.jsx` `+45 −3`
     - 📊 **`+106 −3`** · 2 files
-- 📌 [`7a6fa71a`](https://github.com/Jatin-nicon/tenali/commit/7a6fa71a989d45fcb03f53f0f6ad4d28c77617f9) — **Sudarshan** — Show running results table during Addition and Quadratic quizzes
+- 📌 [`7a6fa71a`](https://github.com/vicharanashala/tenali/commit/7a6fa71a989d45fcb03f53f0f6ad4d28c77617f9) — **Sudarshan** — Show running results table during Addition and Quadratic quizzes
     - 📁 **1 file:** `client/src/App.jsx` `+2 −0`
     - 📊 **`+2 −0`** · 1 file
-- 🐛 [`862e31a0`](https://github.com/Jatin-nicon/tenali/commit/862e31a043af1a42563477812b8d1a54348da8c9) — **Sudarshan** — prevent a=0 in quadratic and allow minus sign on mobile keyboard
+- 🐛 [`862e31a0`](https://github.com/vicharanashala/tenali/commit/862e31a043af1a42563477812b8d1a54348da8c9) — **Sudarshan** — prevent a=0 in quadratic and allow minus sign on mobile keyboard
     - 📁 **2 files:** `client/src/App.jsx` `+3 −3`, `server/index.js` `+2 −1`
     - 📊 **`+5 −4`** · 2 files
-- 📌 [`ce04be13`](https://github.com/Jatin-nicon/tenali/commit/ce04be139822bb11443a5e2527ef9daf068c8c83) — **Sudarshan** — Upgrade typography, responsive grid, and finish screen spacing
+- 📌 [`ce04be13`](https://github.com/vicharanashala/tenali/commit/ce04be139822bb11443a5e2527ef9daf068c8c83) — **Sudarshan** — Upgrade typography, responsive grid, and finish screen spacing
     - 📁 **8 files:** `client/index.html` `+1 −1`, `client/src/App.css` `+100 −25`, `client/src/App.jsx` `+174 −9`, `supermarket/SKILL.md` `+197 −93`, `supermarket/addition/SKILL.md` `+143 −90`, `supermarket/gk/SKILL.md` `+125 −79`, `supermarket/quadratic/SKILL.md` `+143 −132`, `supermarket/sqrt/SKILL.md` `+165 −121`
     - 📊 **`+1048 −550`** · 8 files
-- 📌 [`6a7ddcfd`](https://github.com/Jatin-nicon/tenali/commit/6a7ddcfdc22cb1164b3b7d0e150fa4bbfe4731c9) — **Sudarshan** — Add supermarket documentation hub and clean up old app docs
-    - 📁 **10 files:** `client/src/App.jsx` `+1 −1`, `client/src/apps/addition/SKILL.md` `+0 −22`, `client/src/apps/gk/SKILL.md` `+0 −25`, `client/src/apps/quadratic/SKILL.md` `+0 −34`, `client/src/apps/sqrt/SKILL.md` `+0 −35`, `supermarket/SKILL.md` `+123 −0`, `supermarket/addition/SKILL.md` `+132 −0`, `supermarket/gk/SKILL.md` `+127 −0` *(+2 more in [`6a7ddcfd`](https://github.com/Jatin-nicon/tenali/commit/6a7ddcfdc22cb1164b3b7d0e150fa4bbfe4731c9))*
+- 📌 [`6a7ddcfd`](https://github.com/vicharanashala/tenali/commit/6a7ddcfdc22cb1164b3b7d0e150fa4bbfe4731c9) — **Sudarshan** — Add supermarket documentation hub and clean up old app docs
+    - 📁 **10 files:** `client/src/App.jsx` `+1 −1`, `client/src/apps/addition/SKILL.md` `+0 −22`, `client/src/apps/gk/SKILL.md` `+0 −25`, `client/src/apps/quadratic/SKILL.md` `+0 −34`, `client/src/apps/sqrt/SKILL.md` `+0 −35`, `supermarket/SKILL.md` `+123 −0`, `supermarket/addition/SKILL.md` `+132 −0`, `supermarket/gk/SKILL.md` `+127 −0` *(+2 more in [`6a7ddcfd`](https://github.com/vicharanashala/tenali/commit/6a7ddcfdc22cb1164b3b7d0e150fa4bbfe4731c9))*
     - 📊 **`+742 −117`** · 10 files
-- 📌 [`36a484e8`](https://github.com/Jatin-nicon/tenali/commit/36a484e8b29754226414b96b3c7f934ba7285717) — **Sudarshan** — Redesign UI, add step-by-step feedback, quadratic difficulty levels, and 4x4 home grid
-    - 📁 **11 files:** `client/.env.production` `+1 −1`, `client/index.html` `+1 −1`, `client/src/App.css` `+381 −135`, `client/src/App.jsx` `+49 −9`, `client/src/apps/addition/SKILL.md` `+22 −0`, `client/src/apps/gk/SKILL.md` `+25 −0`, `client/src/apps/quadratic/SKILL.md` `+34 −0`, `client/src/apps/sqrt/SKILL.md` `+35 −0` *(+3 more in [`36a484e8`](https://github.com/Jatin-nicon/tenali/commit/36a484e8b29754226414b96b3c7f934ba7285717))*
+- 📌 [`36a484e8`](https://github.com/vicharanashala/tenali/commit/36a484e8b29754226414b96b3c7f934ba7285717) — **Sudarshan** — Redesign UI, add step-by-step feedback, quadratic difficulty levels, and 4x4 home grid
+    - 📁 **11 files:** `client/.env.production` `+1 −1`, `client/index.html` `+1 −1`, `client/src/App.css` `+381 −135`, `client/src/App.jsx` `+49 −9`, `client/src/apps/addition/SKILL.md` `+22 −0`, `client/src/apps/gk/SKILL.md` `+25 −0`, `client/src/apps/quadratic/SKILL.md` `+34 −0`, `client/src/apps/sqrt/SKILL.md` `+35 −0` *(+3 more in [`36a484e8`](https://github.com/vicharanashala/tenali/commit/36a484e8b29754226414b96b3c7f934ba7285717))*
     - 📊 **`+574 −266`** · 11 files
 
 #### 📅 2026-04-01  <sub>(3 commits)</sub>
 
-- 📌 [`a1f10d68`](https://github.com/Jatin-nicon/tenali/commit/a1f10d6834dfaeafe4b434f46ff5b4122ae15c7a) — **S. R. S. Iyengar** — Add GitHub Pages deployment workflow with relative asset paths
+- 📌 [`a1f10d68`](https://github.com/vicharanashala/tenali/commit/a1f10d6834dfaeafe4b434f46ff5b4122ae15c7a) — **S. R. S. Iyengar** — Add GitHub Pages deployment workflow with relative asset paths
     - 📁 **5 files:** `.github/workflows/deploy.yml` `+53 −0`, `client/.env.production` `+1 −0`, `client/src/App.jsx` `+10 −8`, `client/vite.config.js` `+1 −0`, `render.yaml` `+1 −0`
     - 📊 **`+66 −8`** · 5 files
-- 📌 [`e52f864c`](https://github.com/Jatin-nicon/tenali/commit/e52f864c07c8975d8286afeff88b0c4aaafb5a57) — **S. R. S. Iyengar** — Fix render.yaml: use node env, build client, start server
+- 📌 [`e52f864c`](https://github.com/vicharanashala/tenali/commit/e52f864c07c8975d8286afeff88b0c4aaafb5a57) — **S. R. S. Iyengar** — Fix render.yaml: use node env, build client, start server
     - 📁 **1 file:** `render.yaml` `+4 −7`
     - 📊 **`+4 −7`** · 1 file
-- 📌 [`100334e8`](https://github.com/Jatin-nicon/tenali/commit/100334e8a3313d570918fa4e182196b504fd9296) — **S. R. S. Iyengar** — Add render.yaml for static site deployment
+- 📌 [`100334e8`](https://github.com/vicharanashala/tenali/commit/100334e8a3313d570918fa4e182196b504fd9296) — **S. R. S. Iyengar** — Add render.yaml for static site deployment
     - 📁 **1 file:** `render.yaml` `+10 −0`
     - 📊 **`+10 −0`** · 1 file
 
 #### 📅 2026-03-31  <sub>(1 commit)</sub>
 
-- 📌 [`b3b7e5d3`](https://github.com/Jatin-nicon/tenali/commit/b3b7e5d3634b09bbda0398b80b0fcf361bf87461) — **sudarshan** — Add quadratic lesson and sync current Tenali working tree
-    - 📁 **29 files:** `addition/client 2/dist/assets/index-dPN7XKnt.css` `+1 −0`, `addition/client 2/dist/assets/index-vJwuHESb.js` `+9 −0`, `addition/client 2/dist/favicon.svg` `+1 −0`, `addition/client 2/dist/icons.svg` `+24 −0`, `addition/client 2/dist/index.html` `+14 −0`, `addition/client 2/public/favicon.svg` `+1 −0`, `addition/client 2/public/icons.svg` `+24 −0`, `addition/client 2/src/App.css` `+37 −0` *(+21 more in [`b3b7e5d3`](https://github.com/Jatin-nicon/tenali/commit/b3b7e5d3634b09bbda0398b80b0fcf361bf87461))*
+- 📌 [`b3b7e5d3`](https://github.com/vicharanashala/tenali/commit/b3b7e5d3634b09bbda0398b80b0fcf361bf87461) — **sudarshan** — Add quadratic lesson and sync current Tenali working tree
+    - 📁 **29 files:** `addition/client 2/dist/assets/index-dPN7XKnt.css` `+1 −0`, `addition/client 2/dist/assets/index-vJwuHESb.js` `+9 −0`, `addition/client 2/dist/favicon.svg` `+1 −0`, `addition/client 2/dist/icons.svg` `+24 −0`, `addition/client 2/dist/index.html` `+14 −0`, `addition/client 2/public/favicon.svg` `+1 −0`, `addition/client 2/public/icons.svg` `+24 −0`, `addition/client 2/src/App.css` `+37 −0` *(+21 more in [`b3b7e5d3`](https://github.com/vicharanashala/tenali/commit/b3b7e5d3634b09bbda0398b80b0fcf361bf87461))*
     - 📊 **`+1014 −1`** · 29 files
 
 #### 📅 2026-03-14  <sub>(17 commits)</sub>
 
-- 📌 [`4185a9fc`](https://github.com/Jatin-nicon/tenali/commit/4185a9fc8a46fdce275e9e540cc79e561623cf37) — **S. R. S. Iyengar** — Vendor nested quiz apps into main repo
-    - 📁 **1048 files:** `addition` `+0 −1`, `addition/client/.gitignore` `+24 −0`, `addition/client/README.md` `+16 −0`, `addition/client/eslint.config.js` `+29 −0`, `addition/client/index.html` `+13 −0`, `addition/client/package-lock.json` `+2640 −0`, `addition/client/package.json` `+27 −0`, `addition/client/public/favicon.svg` `+1 −0` *(+1040 more in [`4185a9fc`](https://github.com/Jatin-nicon/tenali/commit/4185a9fc8a46fdce275e9e540cc79e561623cf37))*
+- 📌 [`4185a9fc`](https://github.com/vicharanashala/tenali/commit/4185a9fc8a46fdce275e9e540cc79e561623cf37) — **S. R. S. Iyengar** — Vendor nested quiz apps into main repo
+    - 📁 **1048 files:** `addition` `+0 −1`, `addition/client/.gitignore` `+24 −0`, `addition/client/README.md` `+16 −0`, `addition/client/eslint.config.js` `+29 −0`, `addition/client/index.html` `+13 −0`, `addition/client/package-lock.json` `+2640 −0`, `addition/client/package.json` `+27 −0`, `addition/client/public/favicon.svg` `+1 −0` *(+1040 more in [`4185a9fc`](https://github.com/vicharanashala/tenali/commit/4185a9fc8a46fdce275e9e540cc79e561623cf37))*
     - 📊 **`+25849 −3`** · 1048 files
-- 📌 [`9e200031`](https://github.com/Jatin-nicon/tenali/commit/9e20003197e12075e70f3859238d937e5d66f6a2) — **S. R. S. Iyengar** — Add missing Tenali app content for deployment
+- 📌 [`9e200031`](https://github.com/vicharanashala/tenali/commit/9e20003197e12075e70f3859238d937e5d66f6a2) — **S. R. S. Iyengar** — Add missing Tenali app content for deployment
     - 📁 **4 files:** `.gitignore` `+4 −0`, `addition` `+1 −0`, `chitragupta` `+1 −0`, `squareroot` `+1 −0`
     - 📊 **`+7 −0`** · 4 files
-- 📌 [`7ff9e96b`](https://github.com/Jatin-nicon/tenali/commit/7ff9e96b25488a84f5a291132aeb8d998aaa0687) — **S. R. S. Iyengar** — Prepare Tenali for single-service Render deploy
+- 📌 [`7ff9e96b`](https://github.com/vicharanashala/tenali/commit/7ff9e96b25488a84f5a291132aeb8d998aaa0687) — **S. R. S. Iyengar** — Prepare Tenali for single-service Render deploy
     - 📁 **2 files:** `client/src/App.jsx` `+6 −7`, `server/index.js` `+112 −24`
     - 📊 **`+118 −31`** · 2 files
-- 📌 [`f02d086d`](https://github.com/Jatin-nicon/tenali/commit/f02d086dffba304815977d52ae806967467aa9b7) — **S. R. S. Iyengar** — Make all controls fully greyscale
+- 📌 [`f02d086d`](https://github.com/vicharanashala/tenali/commit/f02d086dffba304815977d52ae806967467aa9b7) — **S. R. S. Iyengar** — Make all controls fully greyscale
     - 📁 **1 file:** `client/src/App.css` `+4 −1`
     - 📊 **`+4 −1`** · 1 file
-- 📌 [`d3210e9f`](https://github.com/Jatin-nicon/tenali/commit/d3210e9fafc84b6fc97864743f25353ac166e47a) — **S. R. S. Iyengar** — Restyle Tenali with monochrome pencil theme
+- 📌 [`d3210e9f`](https://github.com/vicharanashala/tenali/commit/d3210e9fafc84b6fc97864743f25353ac166e47a) — **S. R. S. Iyengar** — Restyle Tenali with monochrome pencil theme
     - 📁 **2 files:** `client/index.html` `+4 −1`, `client/src/App.css` `+209 −29`
     - 📊 **`+213 −30`** · 2 files
-- 📌 [`5a552c4a`](https://github.com/Jatin-nicon/tenali/commit/5a552c4a5156a297e0e1267ac07e2da278a26f9f) — **S. R. S. Iyengar** — Unify GK enter and next flow
+- 📌 [`5a552c4a`](https://github.com/vicharanashala/tenali/commit/5a552c4a5156a297e0e1267ac07e2da278a26f9f) — **S. R. S. Iyengar** — Unify GK enter and next flow
     - 📁 **1 file:** `client/src/App.jsx` `+27 −22`
     - 📊 **`+27 −22`** · 1 file
-- 📌 [`7249d29a`](https://github.com/Jatin-nicon/tenali/commit/7249d29a614837efc74badf2e2efcd3af97bb5d7) — **S. R. S. Iyengar** — Add Enter key handling across quiz modes
+- 📌 [`7249d29a`](https://github.com/vicharanashala/tenali/commit/7249d29a614837efc74badf2e2efcd3af97bb5d7) — **S. R. S. Iyengar** — Add Enter key handling across quiz modes
     - 📁 **1 file:** `client/src/App.jsx` `+34 −0`
     - 📊 **`+34 −0`** · 1 file
-- 📌 [`b26e6a15`](https://github.com/Jatin-nicon/tenali/commit/b26e6a1597ee4daf7a4d44e7352cf124ad7f2b6e) — **S. R. S. Iyengar** — Make addition flow explicit with next button
+- 📌 [`b26e6a15`](https://github.com/vicharanashala/tenali/commit/b26e6a1597ee4daf7a4d44e7352cf124ad7f2b6e) — **S. R. S. Iyengar** — Make addition flow explicit with next button
     - 📁 **1 file:** `client/src/App.jsx` `+29 −22`
     - 📊 **`+29 −22`** · 1 file
-- 📌 [`98f498b9`](https://github.com/Jatin-nicon/tenali/commit/98f498b91dd9ccad4a2fb2e383076f86aa885a88) — **S. R. S. Iyengar** — Show score in GK mode
+- 📌 [`98f498b9`](https://github.com/vicharanashala/tenali/commit/98f498b91dd9ccad4a2fb2e383076f86aa885a88) — **S. R. S. Iyengar** — Show score in GK mode
     - 📁 **1 file:** `client/src/App.jsx` `+3 −0`
     - 📊 **`+3 −0`** · 1 file
-- 📌 [`d2242fcc`](https://github.com/Jatin-nicon/tenali/commit/d2242fcc942b7e76051045cd2c89c97d5f7acdb4) — **S. R. S. Iyengar** — Fix Tenali launcher API calls
+- 📌 [`d2242fcc`](https://github.com/vicharanashala/tenali/commit/d2242fcc942b7e76051045cd2c89c97d5f7acdb4) — **S. R. S. Iyengar** — Fix Tenali launcher API calls
     - 📁 **1 file:** `client/src/App.jsx` `+10 −9`
     - 📊 **`+10 −9`** · 1 file
-- 📌 [`714feca8`](https://github.com/Jatin-nicon/tenali/commit/714feca8c143245a134e79e9885c7473b39f33f8) — **S. R. S. Iyengar** — Integrate Tenali apps into single UI
+- 📌 [`714feca8`](https://github.com/vicharanashala/tenali/commit/714feca8c143245a134e79e9885c7473b39f33f8) — **S. R. S. Iyengar** — Integrate Tenali apps into single UI
     - 📁 **3 files:** `client/src/App.css` `+35 −59`, `client/src/App.jsx` `+247 −37`, `server/index.js` `+7 −7`
     - 📊 **`+289 −103`** · 3 files
-- 📌 [`36ab1b7e`](https://github.com/Jatin-nicon/tenali/commit/36ab1b7e867f66c2de4979b2f6d4d1ecd0de6540) — **S. R. S. Iyengar** — Proxy Tenali launcher apps through root server
+- 📌 [`36ab1b7e`](https://github.com/vicharanashala/tenali/commit/36ab1b7e867f66c2de4979b2f6d4d1ecd0de6540) — **S. R. S. Iyengar** — Proxy Tenali launcher apps through root server
     - 📁 **4 files:** `client/src/App.jsx` `+3 −6`, `server/index.js` `+22 −42`, `server/package-lock.json` `+192 −5`, `server/package.json` `+2 −1`
     - 📊 **`+219 −54`** · 4 files
-- 📌 [`df552443`](https://github.com/Jatin-nicon/tenali/commit/df5524432b86a61fac425dcbc0af4c8b7826eba1) — **S. R. S. Iyengar** — Turn Tenali root into app launcher
+- 📌 [`df552443`](https://github.com/vicharanashala/tenali/commit/df5524432b86a61fac425dcbc0af4c8b7826eba1) — **S. R. S. Iyengar** — Turn Tenali root into app launcher
     - 📁 **2 files:** `client/src/App.css` `+42 −121`, `client/src/App.jsx` `+41 −82`
     - 📊 **`+83 −203`** · 2 files
-- 📌 [`e19f8bae`](https://github.com/Jatin-nicon/tenali/commit/e19f8bae29fe3c2500955ed89d948dee8c54afe6) — **S. R. S. Iyengar** — Serve built client from Express on single port
+- 📌 [`e19f8bae`](https://github.com/vicharanashala/tenali/commit/e19f8bae29fe3c2500955ed89d948dee8c54afe6) — **S. R. S. Iyengar** — Serve built client from Express on single port
     - 📁 **1 file:** `server/index.js` `+7 −0`
     - 📊 **`+7 −0`** · 1 file
-- 📌 [`caed3e80`](https://github.com/Jatin-nicon/tenali/commit/caed3e805589775bba98dd4ed7ea3c944c56eb38) — **S. R. S. Iyengar** — Proxy API through Vite for LAN clients
+- 📌 [`caed3e80`](https://github.com/vicharanashala/tenali/commit/caed3e805589775bba98dd4ed7ea3c944c56eb38) — **S. R. S. Iyengar** — Proxy API through Vite for LAN clients
     - 📁 **2 files:** `client/src/App.jsx` `+1 −1`, `client/vite.config.js` `+6 −0`
     - 📊 **`+7 −1`** · 2 files
-- 📌 [`dce76e00`](https://github.com/Jatin-nicon/tenali/commit/dce76e001c08ee20a4bd96a87d4deb0af8782ab6) — **S. R. S. Iyengar** — Fix client API host for LAN access
+- 📌 [`dce76e00`](https://github.com/vicharanashala/tenali/commit/dce76e001c08ee20a4bd96a87d4deb0af8782ab6) — **S. R. S. Iyengar** — Fix client API host for LAN access
     - 📁 **1 file:** `client/src/App.jsx` `+1 −1`
     - 📊 **`+1 −1`** · 1 file
-- 📌 [`0182e4bf`](https://github.com/Jatin-nicon/tenali/commit/0182e4bf5cb304a381a5143d49e04d6843b2a7b1) — **S. R. S. Iyengar** — Scaffold Aryabhata kids addition app v1
-    - 📁 **611 files:** `client/.env` `+1 −0`, `client/.gitignore` `+24 −0`, `client/README.md` `+16 −0`, `client/eslint.config.js` `+29 −0`, `client/index.html` `+13 −0`, `client/package-lock.json` `+2920 −0`, `client/package.json` `+28 −0`, `client/public/favicon.svg` `+1 −0` *(+603 more in [`0182e4bf`](https://github.com/Jatin-nicon/tenali/commit/0182e4bf5cb304a381a5143d49e04d6843b2a7b1))*
+- 📌 [`0182e4bf`](https://github.com/vicharanashala/tenali/commit/0182e4bf5cb304a381a5143d49e04d6843b2a7b1) — **S. R. S. Iyengar** — Scaffold Aryabhata kids addition app v1
+    - 📁 **611 files:** `client/.env` `+1 −0`, `client/.gitignore` `+24 −0`, `client/README.md` `+16 −0`, `client/eslint.config.js` `+29 −0`, `client/index.html` `+13 −0`, `client/package-lock.json` `+2920 −0`, `client/package.json` `+28 −0`, `client/public/favicon.svg` `+1 −0` *(+603 more in [`0182e4bf`](https://github.com/vicharanashala/tenali/commit/0182e4bf5cb304a381a5143d49e04d6843b2a7b1))*
     - 📊 **`+66399 −0`** · 611 files
 
 <!-- live-changelog:end -->

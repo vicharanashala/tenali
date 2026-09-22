@@ -65,7 +65,7 @@ _Live data — last regenerated 2026-09-22 · auto-refreshed by [`github-actions
 | 🥉 | **Jinal Gupta** | [jgupta05072003-code](https://github.com/jgupta05072003-code) | **127** | 0  | Upstream Repo Maintainer & PR Reviewer |
 | 4. | **Priyanshu Kumar** | [priyanshu7725](https://github.com/priyanshu7725) | **54** | 1  | — |
 | 5. | **Vaibhav Satish**<br/><sub>↳ also commits as <b>Vaibhav</b></sub> | [Vaibhav-sa30](https://github.com/Vaibhav-sa30) | **48** | 3  | Vachana Literacy Lab & Vocabulary |
-| 6. | **Lakshmi Varshini Nandula ** | [varshini-nandula](https://github.com/varshini-nandula) | **43** | 1  | Profile Showcase & Offline Storage |
+| 6. | **Lakshmi Varshini Nandula** | [varshini-nandula](https://github.com/varshini-nandula) | **43** | 1  | Profile Showcase & Offline Storage |
 | 7. | **Sameer Mishra** | [24F3005086](https://github.com/24F3005086) | **36** | 4  | i18n · Accessibility · Concept Labs |
 | 8. | **DIPTOSUBHRO DATTA**<br/><sub>↳ also commits as <b>Dipto Subhro</b></sub> | [diptosubhro-ctrl](https://github.com/diptosubhro-ctrl) | **33** | 1  | Tutorial System + Noise Filter Refactor |
 | 9. | **Ritish Karmakar** | [Ritish007-svg](https://github.com/Ritish007-svg) | **27** | 1  | Percentages Level-wise Explanation |
@@ -77,7 +77,7 @@ _Live data — last regenerated 2026-09-22 · auto-refreshed by [`github-actions
 | 15. | **athira**<br/><sub>↳ also commits as <b>Athira</b></sub> | [athira](https://github.com/athira) | **15** | 0  | — |
 | 16. | **jatin-kumar**<br/><sub>↳ also commits as <b>Jatin Kumar</b></sub> | [jatin-kumar](https://github.com/jatin-kumar) | **14** | 0  | — |
 | 17. | **jinal-gupta**<br/><sub>↳ also commits as <b>JINAL GUPTA</b></sub> | [jinal-gupta](https://github.com/jinal-gupta) | **12** | 0  | — |
-| 18. | **tanvish desai** | [tanvishdesai](https://github.com/tanvishdesai) | **9** | 2  | — |
+| 18. | **tanvishdesai** | [tanvishdesai](https://github.com/tanvishdesai) | **9** | 2  | — |
 | 19. | **shreejal-bangera**<br/><sub>↳ also commits as <b>Shreejal Bangera</b></sub> | [shreejal-bangera](https://github.com/shreejal-bangera) | **8** | 0  | — |
 | 20. | **ayushkochhar**<br/><sub>↳ also commits as <b>AYUSHKOCHHAR</b></sub> | [ayushkochhar](https://github.com/ayushkochhar) | **6** | 0  | — |
 | 21. | **krishna009-pro**<br/><sub>↳ also commits as <b>Krishna009-pro</b></sub> | [krishna009-pro](https://github.com/krishna009-pro) | **6** | 0  | — |
@@ -86,13 +86,13 @@ _Live data — last regenerated 2026-09-22 · auto-refreshed by [`github-actions
 | 24. | **cursor-agent**<br/><sub>↳ also commits as <b>Cursor Agent</b></sub> | [cursor-agent](https://github.com/cursor-agent) | **5** | 0  | — |
 | 25. | **Krishna Gelra** | [KrishnaG-101](https://github.com/KrishnaG-101) | **5** | 1  | Language Puzzles Framework |
 | 26. | **Rukmender T** | [RukmenderT](https://github.com/RukmenderT) | **5** | 1  | Curiosity Mode |
-| 27. | **Disha Bansal** | [disha01bansal](https://github.com/disha01bansal) | **4** | 0  | — |
+| 27. | **disha01bansal** | [disha01bansal](https://github.com/disha01bansal) | **4** | 0  | — |
 | 28. | **pradeep-gupta7**<br/><sub>↳ also commits as <b>Pradeep-gupta7</b></sub> | [pradeep-gupta7](https://github.com/pradeep-gupta7) | **3** | 0  | — |
 | 29. | **S. Hamsalekha**<br/><sub>↳ also commits as <b>S Hamsalekha</b></sub> | [S-Hamsalekha-annamai](https://github.com/S-Hamsalekha-annamai) | **3** | 1  | Track User Progress |
 | 30. | **nirmal-np**<br/><sub>↳ also commits as <b>Nirmal_np</b></sub> | [nirmal-np](https://github.com/nirmal-np) | **2** | 0  | — |
 | 31. | **lalithasriharshitha**<br/><sub>↳ also commits as <b>LalithaSriHarshitha</b></sub> | [lalithasriharshitha](https://github.com/lalithasriharshitha) | **2** | 0  | — |
 | 32. | **disha-singh**<br/><sub>↳ also commits as <b>Disha Singh</b></sub> | [disha-singh](https://github.com/disha-singh) | **2** | 0  | — |
-| 33. | **Remy baastin rayappan** | [remy-baastin](https://github.com/remy-baastin) | **2** | 1  | — |
+| 33. | **remy-baastin** | [remy-baastin](https://github.com/remy-baastin) | **2** | 1  | — |
 | 34. | **harsh**<br/><sub>↳ also commits as <b>Harsh</b></sub> | [harsh](https://github.com/harsh) | **2** | 0  | — |
 | 35. | **Anshul Kanodia** | [AnshulKanodia](https://github.com/AnshulKanodia) | **2** | 0  | Geometry Game Restoration |
 | 36. | **sharad**<br/><sub>↳ also commits as <b>Sharad</b></sub> | [sharad](https://github.com/sharad) | **1** | 0  | — |
@@ -255,8 +255,8 @@ _Live data — last regenerated 2026-09-22 · auto-refreshed by [`github-actions
   <table>
     <tr>
       <td align="center" width="220">
-        <a href="https://github.com/varshini-nandula"><img src="https://avatars.githubusercontent.com/u/174730796?v=4&s=120" width="120" style="border-radius:50%; border:3px solid #CD7F32;" alt="Lakshmi Varshini Nandula "/></a>
-        <br/><b>Lakshmi Varshini Nandula </b>
+        <a href="https://github.com/varshini-nandula"><img src="https://avatars.githubusercontent.com/u/174730796?v=4&s=120" width="120" style="border-radius:50%; border:3px solid #CD7F32;" alt="Lakshmi Varshini Nandula"/></a>
+        <br/><b>Lakshmi Varshini Nandula</b>
         <br/><a href="https://github.com/varshini-nandula">@varshini-nandula</a>
         <br/><sub>🏆 43 commits · 1 PR merged</sub>
       </td>
@@ -547,8 +547,8 @@ _Live data — last regenerated 2026-09-22 · auto-refreshed by [`github-actions
   <table>
     <tr>
       <td align="center" width="220">
-        <a href="https://github.com/tanvishdesai"><img src="https://avatars.githubusercontent.com/u/143877933?v=4&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="tanvish desai"/></a>
-        <br/><b>tanvish desai</b>
+        <a href="https://github.com/tanvishdesai"><img src="https://avatars.githubusercontent.com/u/143877933?v=4&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="tanvishdesai"/></a>
+        <br/><b>tanvishdesai</b>
         <br/><a href="https://github.com/tanvishdesai">@tanvishdesai</a>
         <br/><sub>🏆 9 commits · 2 PRs merged</sub>
       </td>
@@ -747,8 +747,8 @@ _Live data — last regenerated 2026-09-22 · auto-refreshed by [`github-actions
   <table>
     <tr>
       <td align="center" width="220">
-        <a href="https://github.com/disha01bansal"><img src="https://avatars.githubusercontent.com/u/225586014?v=4&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="Disha Bansal"/></a>
-        <br/><b>Disha Bansal</b>
+        <a href="https://github.com/disha01bansal"><img src="https://avatars.githubusercontent.com/u/225586014?v=4&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="disha01bansal"/></a>
+        <br/><b>disha01bansal</b>
         <br/><a href="https://github.com/disha01bansal">@disha01bansal</a>
         <br/><sub>🏆 4 commits · 0 PRs merged</sub>
       </td>
@@ -878,8 +878,8 @@ _Live data — last regenerated 2026-09-22 · auto-refreshed by [`github-actions
   <table>
     <tr>
       <td align="center" width="220">
-        <a href="https://github.com/remy-baastin"><img src="https://avatars.githubusercontent.com/u/150592195?v=4&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="Remy baastin rayappan"/></a>
-        <br/><b>Remy baastin rayappan</b>
+        <a href="https://github.com/remy-baastin"><img src="https://avatars.githubusercontent.com/u/150592195?v=4&s=120" width="120" style="border-radius:50%; border:3px solid #888888;" alt="remy-baastin"/></a>
+        <br/><b>remy-baastin</b>
         <br/><a href="https://github.com/remy-baastin">@remy-baastin</a>
         <br/><sub>🏆 2 commits · 1 PR merged</sub>
       </td>

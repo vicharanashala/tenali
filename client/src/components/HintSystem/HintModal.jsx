@@ -651,6 +651,36 @@ export function HintModal({ concept, questionId, questionData, answerData, revea
 
 export function GlobalXpPanel() {
   const [xp, setXp] = useState(getLocalXp());
+  const [activeMode, setActiveMode] = useState(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('mode');
+    } catch {
+      return null;
+    }
+  });
+
+  useEffect(() => {
+    const checkMode = () => {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        setActiveMode(params.get('mode'));
+      } catch {
+        setActiveMode(null);
+      }
+    };
+    window.addEventListener('popstate', checkMode);
+    window.addEventListener('tenali-navigate', checkMode);
+    window.addEventListener('tenali-change-mode', checkMode);
+    const interval = setInterval(checkMode, 800);
+    return () => {
+      window.removeEventListener('popstate', checkMode);
+      window.removeEventListener('tenali-navigate', checkMode);
+      window.removeEventListener('tenali-change-mode', checkMode);
+      clearInterval(interval);
+    };
+  }, []);
+
   useEffect(() => {
     const handleStorage = () => setXp(getLocalXp());
     window.addEventListener('storage', handleStorage);
@@ -663,6 +693,12 @@ export function GlobalXpPanel() {
       clearInterval(interval);
     };
   }, [xp]);
+
+  // Only render during an active quiz session, never on landing page or main home menu
+  if (!activeMode) {
+    return null;
+  }
+
   return (
     <div style={{ position: 'fixed', top: '64px', left: '16px', zIndex: 10000, background: 'var(--clr-surface, #1e1e2f)', padding: '8px 16px', borderRadius: '20px', color: '#f5b041', fontWeight: 'bold', boxShadow: '0 4px 6px rgba(0,0,0,0.3)', border: '1px solid var(--clr-border, #333)', display: 'flex', alignItems: 'center', gap: '6px' }}>
       <span>{xp} 🪙</span>
