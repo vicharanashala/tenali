@@ -29,4 +29,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       </AccessibilityProvider>
     </I18nProvider>
   </React.StrictMode>,
-)
+);

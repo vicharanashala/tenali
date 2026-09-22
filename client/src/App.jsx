@@ -85,6 +85,9 @@ import KeyTerms from './components/KeyTerms'
 import InteractiveLcmHcfApp from './LcmHcfApp';
 import IdliVadaSambharApp from './IdliVadaSambharApp';
 import CarJourneyApp from './CarJourneyApp';
+import GeoGebraLabApp from './GeoGebraLabApp';
+import KernelPlayground from './modules/KernelPlayground';
+import LinearAlgebraModule from './modules/LinearAlgebra';
 import RealWorldHubApp from './RealWorldHub';
 import { cjTakeReco } from './cjReco'; // Feature CR — Road License difficulty hand-off
 const CJ_RECO_DIFFS = ['easy', 'medium', 'hard', 'extrahard'];
@@ -44871,7 +44874,11 @@ function App() {
     hcflcm: InteractiveLcmHcfApp,  // HCF & LCM
     idlivada: IdliVadaSambharApp,  // Idli–Vada–Sambhar (Multiples, Common Multiples & LCM)
     carjourney: CarJourneyApp,     // The Car Journey (Feature CR — 16-stop math road trip)
-    realworld: RealWorldHubApp,    // Real-World hub (Feature CR) — phenomenon pathway cards
+    geogebra: GeoGebraLabApp,      // GeoGebra Lab (Level 1: 33 hands-on practical challenges)
+    kernel: KernelPlayground,      // The Zero Balance Studio (Null space & kernel equilibrium)
+    'linear-algebra-studio': LinearAlgebraModule, // Visual intuition & interactive challenges
+    'point-studio': LinearAlgebraModule,
+    point: LinearAlgebraModule,
     profitloss: ProfitLossApp,     // Profit & Loss
     rounding: RoundingApp,         // Rounding
     binomial: BinomialApp,         // Binomial Theorem
@@ -44978,6 +44985,21 @@ function App() {
             onBack={() => setMode('learning_journey_topic')}
           />
         </AuthGate>
+      );
+    }
+    if (mode === 'linear-algebra-studio' || mode === 'point-studio' || mode === 'point') {
+      return (
+        <LinearAlgebraModule
+          onBack={() => setMode(null)}
+        />
+      );
+    }
+
+    if (mode === 'kernel') {
+      return (
+        <KernelPlayground
+          onBack={() => setMode(null)}
+        />
       );
     }
 
@@ -45117,6 +45139,10 @@ function App() {
       gymdecimals: 'Gym Decimals', funcgym: 'Functions Gym', dotprodgym: 'Dot Products Gym',
       fracaddgym: 'Fractions Gym', lineqgym: 'Linear Equations Gym',
       indicesgym: 'Indices Gym', polygym: 'Polynomials Gym',
+      kernel: 'The Zero Balance (Kernel)',
+      'linear-algebra-studio': 'Point Studio',
+      'point-studio': 'Point Studio',
+      point: 'Point Studio',
     }
     return labels[key] || key
   }
@@ -45622,6 +45648,8 @@ function App() {
       <div>
         {mode === 'vachana' ? (
           <Vachana onBack={() => setMode(null)} initialAdaptScore={diagnosticState[mode] || 0} />
+        ) : mode === 'geogebra' || mode === 'kernel' || mode === 'linear-algebra-studio' || mode === 'point-studio' || mode === 'point' ? (
+          renderContent()
         ) : (
           <div className={`card ${mode === 'contrastlist' ? 'is-wide' : ''}`}>
             {renderContent()}

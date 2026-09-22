@@ -19,19 +19,51 @@
 ---
 
 <!-- live-changelog:start -->
-### 📊 Total: 1052 commits · 78 active days · 42 unique authors
+### 📊 Total: 1064 commits · 81 active days · 43 unique authors
 
 > **📖 How to read this:** Each entry shows a clickable SHA, the author, and a one-line subject. Sub-bullets show the **exact files touched** with per-file `+additions −deletions`, the **total line stats**, and (when present) the **commit body** explaining what & why.
 
-#### 📅 2026-09-21  <sub>(2 commits)</sub>
+#### 📅 2026-09-21  <sub>(1 commit)</sub>
 
-- 📌 [`07a8dae7`](https://github.com/vicharanashala/tenali/commit/07a8dae72b169e5189b5ce679eed1c52b2e4c0b5) — **Krishna Gelra** — 🔀 PR [#331](https://github.com/vicharanashala/tenali/pull/331) from `KrishnaG-101` — feat/landing-page-and-showcase
-- ✨ [`160f58b9`](https://github.com/vicharanashala/tenali/commit/160f58b9ec96533c5c4e60526f528e76dcb1b4a6) — **Krishna Gelra** — add modern landing page and accurate showcase graphics
-    - 📁 **19 files:** `.gitignore` `+2 −0`, `client/public/contrast/determinants-accurate.svg` `+36 −0`, `client/public/contrast/matrix-accurate.svg` `+18 −0`, `client/public/contrast/prime-accurate.svg` `+27 −0`, `client/public/contrast/similarity-accurate.svg` `+28 −0`, `client/public/contrast/simultaneous-accurate.svg` `+28 −0`, `client/public/contrast/trigonometry-accurate.svg` `+28 −0`, `client/src/App.jsx` `+161 −13` *(+11 more in [`160f58b9`](https://github.com/vicharanashala/tenali/commit/160f58b9ec96533c5c4e60526f528e76dcb1b4a6))*
-    - 📊 **`+3275 −13`** · 19 files
+- 📌 [`c00ab111`](https://github.com/vicharanashala/tenali/commit/c00ab11178a266cd4eab82863cd675ffccfab66a) — **Jatin Kumar** — Merge remote-tracking branch 'upstream/main' and sync canonical docs
 
-#### 📅 2026-09-16  <sub>(1 commit)</sub>
+#### 📅 2026-09-19  <sub>(3 commits)</sub>
 
+- 📌 [`9a47992c`](https://github.com/vicharanashala/tenali/commit/9a47992c7c8d20dd5f97748219acb0e3dfcdda4b) — **Jatin Kumar** — Merge remote-tracking branch 'upstream/main' and sync canonical docs
+- 📌 [`5ad0ea19`](https://github.com/vicharanashala/tenali/commit/5ad0ea1919d7e5dc44b76a1f99f7cb42da0937de) — **Jatin Kumar** — Merge remote-tracking branch 'origin/main'
+- ✨ [`42fdb88b`](https://github.com/vicharanashala/tenali/commit/42fdb88b6c343954902b0f5f553a2971cd9bb464) — **Jatin Kumar** — complete 11-question discovery flow, GeoGebra point plotter integration, and option shuffling
+    - 📁 **10 files:** `client/src/App.jsx` `+7 −4`, `client/src/data/geogebraQuestions.js` `+17 −1`, `client/src/features/tiles.js` `+1 −1`, `client/src/modules/LinearAlgebra/GeoGebraPointPlotter.css` `+330 −0`, `client/src/modules/LinearAlgebra/GeoGebraPointPlotter.jsx` `+351 −0`, `client/src/modules/LinearAlgebra/LinearAlgebraModule.css` `+75 −0`, `client/src/modules/LinearAlgebra/LinearAlgebraModule.jsx` `+572 −403`, `client/src/modules/LinearAlgebra/answerEvaluator.js` `+245 −0` *(+2 more in [`42fdb88b`](https://github.com/vicharanashala/tenali/commit/42fdb88b6c343954902b0f5f553a2971cd9bb464))*
+    - 📊 **`+1798 −459`** · 10 files
+
+#### 📅 2026-09-18  <sub>(3 commits)</sub>
+
+- 📝 [`df03233c`](https://github.com/vicharanashala/tenali/commit/df03233c92499682f3921493e64c7281198566fd) — **Jatin Kumar** — sync CONTRIBUTORS.md and CHANGELOG.md with upstream
+    - 📁 **2 files:** `CHANGELOG.md` `+1117 −1137`, `CONTRIBUTORS.md` `+49 −72`
+    - 📊 **`+1166 −1209`** · 2 files
+- 📌 [`c381c2ff`](https://github.com/vicharanashala/tenali/commit/c381c2ff885739d26d63d0998943e4e0bff0824a) — **Jatin Kumar** — Merge remote-tracking branch 'upstream/main' and sync README with upstream
+- ✨ [`66c745c2`](https://github.com/vicharanashala/tenali/commit/66c745c2d85b75d6326f33838a38ac3b690d1923) — **Jatin Kumar** — unify Understanding the Point 13-question linear flow and remove pre-selected answers
+    - 📁 **3 files:** `client/src/modules/LinearAlgebra/LinearAlgebraModule.css` `+522 −421`, `client/src/modules/LinearAlgebra/LinearAlgebraModule.jsx` `+1331 −1054`, `client/src/modules/LinearAlgebra/questions.js` `+173 −291`
+    - 📊 **`+2026 −1766`** · 3 files
+
+#### 📅 2026-09-17  <sub>(4 commits)</sub>
+
+- ✨ [`57512ba3`](https://github.com/vicharanashala/tenali/commit/57512ba3e2a94ca8f3b57d9152401a4b1406f4c2) — **Jatin Kumar** — add 16 conceptual questions, interactive activities, and typed observation workflows
+    - 📁 **3 files:** `client/src/modules/LinearAlgebra/LinearAlgebraModule.css` `+392 −0`, `client/src/modules/LinearAlgebra/LinearAlgebraModule.jsx` `+1119 −328`, `client/src/modules/LinearAlgebra/questions.js` `+311 −87`
+    - 📊 **`+1822 −415`** · 3 files
+- ✨ [`f50a6863`](https://github.com/vicharanashala/tenali/commit/f50a68635485cbbd7c42d3c5ea5beeb29098452c) — **Jatin Kumar** — create new LinearAlgebra studio module with visual vector canvas and question runner
+    - 📁 **6 files:** `client/src/App.jsx` `+12 −1`, `client/src/features/tiles.js` `+1 −0`, `client/src/modules/LinearAlgebra/LinearAlgebraModule.css` `+418 −0`, `client/src/modules/LinearAlgebra/LinearAlgebraModule.jsx` `+561 −0`, `client/src/modules/LinearAlgebra/index.js` `+3 −0`, `client/src/modules/LinearAlgebra/questions.js` `+114 −0`
+    - 📊 **`+1109 −1`** · 6 files
+- 📌 [`e06f57a6`](https://github.com/vicharanashala/tenali/commit/e06f57a652f43ce74462399f2f4a35d95b407172) — **Jatin Kumar** — Merge remote-tracking branch 'upstream/main' and sync contributor docs
+- 🐛 [`0fcdf9af`](https://github.com/vicharanashala/tenali/commit/0fcdf9af22b1f5a187be0075d7c964ef628b7696) — **Jatin Kumar** — remove color mixing module and clean up kernel navigation
+    - 📁 **6 files:** `client/src/App.jsx` `+2 −15`, `client/src/features/tiles.js` `+0 −1`, `client/src/modules/KernelPlayground/KernelPlayground.jsx` `+14 −18`, `client/src/modules/PaintMixingPlayground/PaintMixingPlayground.css` `+0 −759`, `client/src/modules/PaintMixingPlayground/PaintMixingPlayground.jsx` `+0 −578`, `client/src/modules/PaintMixingPlayground/index.js` `+0 −2`
+    - 📊 **`+16 −1373`** · 6 files
+
+#### 📅 2026-09-16  <sub>(3 commits)</sub>
+
+- 🐛 [`df7b7b10`](https://github.com/vicharanashala/tenali/commit/df7b7b1061b66eb9b77d1c5b4c8a2d3f5ec2bd7b) — **Jatin Kumar** — integrate Paint Mixer and Zero Balance as native dashboard modules and restore pristine UI
+    - 📁 **3 files:** `client/src/App.jsx` `+24 −1`, `client/src/features/tiles.js` `+2 −0`, `client/src/main.jsx` `+2 −122`
+    - 📊 **`+28 −123`** · 3 files
+- 📌 [`b024b166`](https://github.com/vicharanashala/tenali/commit/b024b166ec63c53c8ee45a9352b31afb61f7820a) — **Jatin Kumar** — Merge remote-tracking branch 'upstream/main' and resolve App.jsx tiles conflict
 - 📌 [`fd148133`](https://github.com/vicharanashala/tenali/commit/fd148133c70561df066746822b98c462b1e7d796) — **jgupta05072003-code** — 🔀 PR [#307](https://github.com/vicharanashala/tenali/pull/307) from `sharadvc` — cursor/fix-utf16-hint-modal-276-1f13
 
 #### 📅 2026-09-15  <sub>(17 commits)</sub>
@@ -80,8 +112,11 @@
 
 - 📌 [`350ccfaa`](https://github.com/vicharanashala/tenali/commit/350ccfaa55dcc375db0e22bb86138d0dda0afb46) — **Sharad** — Remove dead UTF-16 currentHintModal.jsx blocking ESLint
 
-#### 📅 2026-09-12  <sub>(16 commits)</sub>
+#### 📅 2026-09-12  <sub>(17 commits)</sub>
 
+- ✨ [`fd616cce`](https://github.com/vicharanashala/tenali/commit/fd616cce7afde2b6010c71ca1b9e401cd4207697) — **Jatin Kumar** — add Paint Mixing and Zero Balance (Kernel) GeoGebra interactive studios
+    - 📁 **12 files:** `client/src/App.jsx` `+5 −0`, `client/src/GeoGebraLabApp.css` `+1334 −0`, `client/src/GeoGebraLabApp.jsx` `+1056 −0`, `client/src/data/geogebraQuestions.js` `+26 −0`, `client/src/data/geogebraValidator.js` `+1613 −0`, `client/src/main.jsx` `+121 −1`, `client/src/modules/KernelPlayground/KernelPlayground.css` `+971 −0`, `client/src/modules/KernelPlayground/KernelPlayground.jsx` `+1102 −0` *(+4 more in [`fd616cce`](https://github.com/vicharanashala/tenali/commit/fd616cce7afde2b6010c71ca1b9e401cd4207697))*
+    - 📊 **`+7569 −1`** · 12 files
 - 📌 [`e9f69cf5`](https://github.com/vicharanashala/tenali/commit/e9f69cf5555a30545a89def7dd76f75ef379b47d) — **jgupta05072003-code** — 🔀 PR [#297](https://github.com/vicharanashala/tenali/pull/297) from `vicharanashala` — ci/client-lint-non-blocking
 - 📌 [`79b316be`](https://github.com/vicharanashala/tenali/commit/79b316be1905dd568d0f6e5cf569257740df52c4) — **jgupta05072003-code** — 🔀 PR [#175](https://github.com/vicharanashala/tenali/pull/175) from `LalithaSriHarshitha` — rfc/weekly-mastery-spaced-review
 - 📌 [`eedac5b5`](https://github.com/vicharanashala/tenali/commit/eedac5b5b8dc4fc9b09fb9ab674c7245068ea7bf) — **jgupta05072003-code** — 🔀 PR [#253](https://github.com/vicharanashala/tenali/pull/253) from `DYNOSuprovo` — refactor/remove-global-generate-explanation

@@ -40,6 +40,7 @@ export const TILES = [
     { key: 'fractionadd', name: 'Fractions', subtitle: 'Add, subtract, multiply & divide', color: 'green', category: 'number-foundations' },
     { key: 'funceval', name: 'Functions', subtitle: 'Evaluate f(x), f(x,y), f(x,y,z)', color: 'green', category: 'algebra' },
     { key: 'gk', name: 'GK', subtitle: 'General Knowledge questions', color: 'purple', category: 'shelf' },
+    { key: 'geogebra', name: '📐 GeoGebra Lab', subtitle: 'Level 1: 33 hands-on practical challenges', color: 'green', category: 'shape-space' },
     { key: 'gst', name: 'GST', subtitle: 'Goods & Services Tax', color: 'purple', category: 'everyday-maths' },
     { key: 'hcflcm', name: 'HCF & LCM', subtitle: 'Highest common factor & LCM', color: 'blue', category: 'number-foundations' },
     { key: 'idlivada', name: 'Idli Vada Sambhar', subtitle: 'Multiples, common multiples & LCM game', color: 'orange', category: 'number-foundations', foldInto: 'fractionadd' },
@@ -108,6 +109,8 @@ export const TILES = [
     { key: 'polygym', name: 'Polynomials Gym', subtitle: 'Arithmetic → monomial algebra (MCQ)', color: 'blue', category: 'algebra', foldInto: 'polymul' },
     { key: 'water-jug-lab', name: '🧪 Water Jug Lab', subtitle: 'GCD discovery — 13-level progression', color: 'teal', category: 'shelf' },
     { key: 'equation-crafting-lab', name: '⚗️ Equation Crafting Lab', subtitle: 'Build expressions in the mixing pot', color: 'orange', category: 'algebra' },
+    { key: 'kernel', name: '⚖️ The Zero Balance', subtitle: 'Null space & equilibrium discovery in 2D & 3D', color: 'teal', category: 'linear-algebra' },
+    { key: 'point-studio', name: '📍 Point Studio', subtitle: 'Visual intuition: From physical spot to pure location', color: 'orange', category: 'linear-algebra' },
 ]
 
 // Hamburger-only entries (#190). Data only -- composition stays in App.jsx.
