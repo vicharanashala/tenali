@@ -52,6 +52,7 @@ const path = require('path');
 const http = require('http');
 const wordCreator = require('./wordCreator');
 const logger = require('./lib/logger');
+const { randomInt, digitRange, gcd, lcm, simplifyFraction, pick } = require('./lib/mathHelpers');
 const { generateExplanation } = require('./explanations');
 
 // Catch what would otherwise be a silent crash (or, for unhandled promise
@@ -675,17 +676,19 @@ app.use('/dotprodgym-api', advancedRouter);
 const { sudokuIsValid, sudokuSolve, sudokuGenerate } = require('./lib/sudoku');
 
 /**
- * Generate a random integer between min and max (inclusive)
- * @param {number} min - Minimum value (inclusive)
- * @param {number} max - Maximum value (inclusive)
- * @returns {number} Random integer in range [min, max]
+ * Map square root approximation step level to a numeric band
+ * Higher steps = larger numbers to approximate square roots for
+ * Used for progressive difficulty in sqrt-api
+ * @param {number} step - Step number (1 to 100+)
+ * @returns {object} {min, max} range of numbers for sqrt estimation
  */
-function randomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+function bandForStep(step) {
+  if (step <= 10) return { min: 2, max: 50 };
+  if (step <= 20) return { min: 51, max: 150 };
+  if (step <= 35) return { min: 151, max: 350 };
+  if (step <= 60) return { min: 351, max: 700 };
+  return { min: 701, max: 999 };
 }
-function gcd(a, b) { a = Math.abs(a); b = Math.abs(b); while (b) { const t = b; b = a % b; a = t; } return a; }
-function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
-
 
 /**
  * Reads all JSON files in `dir` concurrently (fs.promises.readFile lets libuv's
@@ -1119,7 +1122,6 @@ const conceptQuestions = loadConcepts();
 const banks = require('./lib/question-banks');
 banks.concepts = conceptQuestions;
 
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // LEARNING JOURNEY ENDPOINTS
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 const { JOURNEY_CURRICULUM } = require('./lil/learning_journey/journeyData');

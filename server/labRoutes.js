@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+const { randomInt, pick } = require('./lib/mathHelpers');
+const randomChoice = pick;
 
 const randomNonZeroInt = (min, max) => {
   const values = [];
@@ -14,7 +15,6 @@ const randomNonZeroInt = (min, max) => {
 
   return randomChoice(values);
 };
-const randomChoice = (arr) => arr[Math.floor(Math.random() * arr.length)];
 const emojis = ['⭐','🍎','🍕','🚗','🚀','🎈','🌻','🐶','🧸','💎','🍩','⚽','📚'];
 
 // 1. Basic Arithmetic Lab

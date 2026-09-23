@@ -9,10 +9,10 @@
 
 const router = require('express').Router();
 
+const { pick } = require('../lib/mathHelpers');
 function rand(lo, hi) { return lo + Math.floor(Math.random() * (hi - lo + 1)); }
-function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
-const TRIPLES = [[3,4,5],[5,12,13],[8,15,17],[7,24,25],[6,8,10],[9,12,15],[10,24,26],[20,21,29]];
+const TRIPLES = [[3, 4, 5], [5, 12, 13], [8, 15, 17], [7, 24, 25], [6, 8, 10], [9, 12, 15], [10, 24, 26], [20, 21, 29]];
 
 router.get('/question', (req, res) => {
   const difficulty = req.query.difficulty || 'easy';
@@ -21,13 +21,17 @@ router.get('/question', (req, res) => {
   if (difficulty === 'easy') {
     const [a, b, c] = pick(TRIPLES);
     if (pick([true, false])) {
-      res.json({ id, difficulty, type: 'pythagoras',
+      res.json({
+        id, difficulty, type: 'pythagoras',
         prompt: `Right triangle: legs = ${a} and ${b}. Find the hypotenuse.`,
-        answer: c, answerDen: 1 });
+        answer: c, answerDen: 1
+      });
     } else {
-      res.json({ id, difficulty, type: 'pythagoras',
+      res.json({
+        id, difficulty, type: 'pythagoras',
         prompt: `Right triangle: hypotenuse = ${c}, one leg = ${a}. Find the other leg.`,
-        answer: b, answerDen: 1 });
+        answer: b, answerDen: 1
+      });
     }
     return;
   }
@@ -60,13 +64,17 @@ router.get('/question', (req, res) => {
     const a = rand(5, 20);
     const b = Math.round(a * Math.sin(radB) / Math.sin(radA) * 10) / 10;
     if (pick([true, false])) {
-      res.json({ id, difficulty, type: 'sine_rule',
+      res.json({
+        id, difficulty, type: 'sine_rule',
         prompt: `Triangle: a = ${a}, angle A = ${A}°, angle B = ${B}°. Find side b (1 d.p.).`,
-        answer: b, answerDen: 1 });
+        answer: b, answerDen: 1
+      });
     } else {
-      res.json({ id, difficulty, type: 'sine_rule',
+      res.json({
+        id, difficulty, type: 'sine_rule',
         prompt: `Triangle: a = ${a}, b = ${b}, angle A = ${A}°. Find angle B (degrees).`,
-        answer: B, answerDen: 1 });
+        answer: B, answerDen: 1
+      });
     }
     return;
   }
@@ -77,15 +85,19 @@ router.get('/question', (req, res) => {
   const C = rand(30, 120);
   const radC = C * Math.PI / 180;
   if (pick([true, false])) {
-    const c = Math.round(Math.sqrt(a*a + b*b - 2*a*b*Math.cos(radC)) * 10) / 10;
-    res.json({ id, difficulty, type: 'cosine_rule',
+    const c = Math.round(Math.sqrt(a * a + b * b - 2 * a * b * Math.cos(radC)) * 10) / 10;
+    res.json({
+      id, difficulty, type: 'cosine_rule',
       prompt: `Triangle: a = ${a}, b = ${b}, angle C = ${C}°. Find side c (1 d.p.).`,
-      answer: c, answerDen: 1 });
+      answer: c, answerDen: 1
+    });
   } else {
     const area = Math.round(0.5 * a * b * Math.sin(radC) * 10) / 10;
-    res.json({ id, difficulty, type: 'area',
+    res.json({
+      id, difficulty, type: 'area',
       prompt: `Triangle: a = ${a}, b = ${b}, angle C = ${C}°. Find the area (1 d.p.).`,
-      answer: area, answerDen: 1 });
+      answer: area, answerDen: 1
+    });
   }
 });
 

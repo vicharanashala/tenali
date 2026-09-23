@@ -1,9 +1,8 @@
 'use strict';
 const router = require('express').Router();
 
-function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+const { randomInt, pick, triPick, seqPick, idxPick, gcd, simplifyFraction } = require('../lib/mathHelpers');
 function randInt(lo, hi) { return lo + Math.floor(Math.random() * (hi - lo + 1)); }
-function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
 function quadraticRange(difficulty) {
   if (difficulty === 'easy') return { min: -3, max: 3 };
@@ -22,23 +21,8 @@ function buildQuadraticPrompt(a, b, c, x, opAB = '+', opBC = '+') {
   return `If x = ${x}, find y for y = ${expression}`;
 }
 
-function gcd(a, b) {
-  a = Math.abs(a);
-  b = Math.abs(b);
-  while (b) { [a, b] = [b, a % b]; }
-  return a;
-}
-
-function simplifyFraction(num, den) {
-  if (den < 0) { num = -num; den = -den; }
-  const g = gcd(Math.abs(num), den);
-  return { num: num / g, den: den / g };
-}
-
 function triRand(lo, hi) { return lo + Math.floor(Math.random() * (hi - lo + 1)); }
-function triPick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 function seqRand(lo, hi) { return lo + Math.floor(Math.random() * (hi - lo + 1)); }
-function seqPick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
 // ── polymul helpers ──
 function polyCoeffRange(difficulty) {
@@ -98,10 +82,10 @@ function factorCoeffRange(difficulty) {
 }
 
 const POLYFACTOR_TIERS = {
-  1: { aChoices: [1],          qMax: 10, qMin: 1 },
-  2: { aChoices: [1],          qMax: 12, qMin: 1 },
-  3: { aChoices: [2, 3],       qMax: 6,  qMin: 1 },
-  4: { aChoices: [2, 3, 4, 5], qMax: 6,  qMin: 1 },
+  1: { aChoices: [1], qMax: 10, qMin: 1 },
+  2: { aChoices: [1], qMax: 12, qMin: 1 },
+  3: { aChoices: [2, 3], qMax: 6, qMin: 1 },
+  4: { aChoices: [2, 3, 4, 5], qMax: 6, qMin: 1 },
 };
 
 function polyfactorPickFactors(tier) {
@@ -230,10 +214,9 @@ function simpleSurd(n) {
   return { outer, inner };
 }
 
-const SQUARE_FREE = [2,3,5,6,7,10,11,13,14,15,17,19,21,22,23,26,29,30];
+const SQUARE_FREE = [2, 3, 5, 6, 7, 10, 11, 13, 14, 15, 17, 19, 21, 22, 23, 26, 29, 30];
 
 // ── indices helpers ──
-function idxPick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 function idxRand(lo, hi) { return lo + Math.floor(Math.random() * (hi - lo + 1)); }
 
 function sup(n) {
@@ -518,7 +501,7 @@ const generators = {
         const u1 = parseFloat(Number(userR1).toFixed(2));
         const u2 = parseFloat(Number(userR2).toFixed(2));
         correct = (Math.abs(u1 - roots.r1) < 0.05 && Math.abs(u2 - roots.r2) < 0.05) ||
-                  (Math.abs(u1 - roots.r2) < 0.05 && Math.abs(u2 - roots.r1) < 0.05);
+          (Math.abs(u1 - roots.r2) < 0.05 && Math.abs(u2 - roots.r1) < 0.05);
       } else if (disc === 0) {
         roots.type = 'real_equal';
         roots.r1 = parseFloat((-B / (2 * A)).toFixed(2));
@@ -578,8 +561,8 @@ const generators = {
             eqs.push({ a, b, c, d: a * x + b * y + c * z });
           }
           const det = eqs[0].a * (eqs[1].b * eqs[2].c - eqs[1].c * eqs[2].b)
-                    - eqs[0].b * (eqs[1].a * eqs[2].c - eqs[1].c * eqs[2].a)
-                    + eqs[0].c * (eqs[1].a * eqs[2].b - eqs[1].b * eqs[2].a);
+            - eqs[0].b * (eqs[1].a * eqs[2].c - eqs[1].c * eqs[2].a)
+            + eqs[0].c * (eqs[1].a * eqs[2].b - eqs[1].b * eqs[2].a);
           if (det !== 0) break;
           attempts++;
         } while (attempts < 50);
@@ -891,8 +874,8 @@ const generators = {
       if (userParsed && cDen === 1) {
         const userNorm = normalizeSurd(userParsed.rational, userParsed.coeff, userParsed.radicand);
         correct = userNorm.rational === correctRational
-               && userNorm.coeff === correctCoeff
-               && (correctCoeff === 0 || userNorm.radicand === correctRadicand);
+          && userNorm.coeff === correctCoeff
+          && (correctCoeff === 0 || userNorm.radicand === correctRadicand);
       } else if (userParsed && cDen !== 1) {
         const fracMatch = (body.answer || '').replace(/\s+/g, '').match(/^\(?(.+?)\)?\/(\d+)$/);
         if (fracMatch) {
@@ -901,8 +884,8 @@ const generators = {
           if (numParsed) {
             const numNorm = normalizeSurd(numParsed.rational, numParsed.coeff, numParsed.radicand);
             correct = numNorm.rational * cDen === correctRational * userDen
-                   && numNorm.coeff * cDen === correctCoeff * userDen
-                   && (correctCoeff === 0 || numNorm.radicand === correctRadicand);
+              && numNorm.coeff * cDen === correctCoeff * userDen
+              && (correctCoeff === 0 || numNorm.radicand === correctRadicand);
           }
         }
       }
@@ -1123,7 +1106,7 @@ const generators = {
       }
       else if (difficulty === 'hard') {
         const a = seqPick([1, 2, 3, 4, 5, -1, -2, -3]);
-        const r = seqPick([2, 3, -2, -3, 1/2, 1/3, -1/2]);
+        const r = seqPick([2, 3, -2, -3, 1 / 2, 1 / 3, -1 / 2]);
         const n = seqRand(3, 8);
         const terms = [a, a * r, a * r * r, a * r * r * r];
         const answer = a * Math.pow(r, n - 1);
@@ -1133,7 +1116,7 @@ const generators = {
         if (Number.isInteger(answer)) {
           ansNum = answer; ansDen = 1;
         } else {
-          const rFrac = r === 1/2 ? { n: 1, d: 2 } : r === 1/3 ? { n: 1, d: 3 } : r === -1/2 ? { n: -1, d: 2 } : { n: r, d: 1 };
+          const rFrac = r === 1 / 2 ? { n: 1, d: 2 } : r === 1 / 3 ? { n: 1, d: 3 } : r === -1 / 2 ? { n: -1, d: 2 } : { n: r, d: 1 };
           let num = a * Math.pow(rFrac.n, n - 1);
           let den = Math.pow(rFrac.d, n - 1);
           const g = gcd(Math.abs(num), Math.abs(den));
@@ -1144,7 +1127,7 @@ const generators = {
       }
       else {
         const a = seqPick([1, 2, 3, 4, 5]);
-        const r = seqPick([2, 3, -2, 1/2]);
+        const r = seqPick([2, 3, -2, 1 / 2]);
         const n = seqRand(3, 7);
         const terms = [a, a * r, a * r * r];
         const fmtNum = (x) => Number.isInteger(x) ? String(x) : x.toFixed(4).replace(/0+$/, '').replace(/\.$/, '');
@@ -1154,7 +1137,7 @@ const generators = {
           const sn = a * (Math.pow(r, n) - 1) / (r - 1);
           ansNum = Math.round(sn); ansDen = 1;
         } else {
-          const rFrac = r === 1/2 ? { n: 1, d: 2 } : { n: r, d: 1 };
+          const rFrac = r === 1 / 2 ? { n: 1, d: 2 } : { n: r, d: 1 };
           const rn_num = Math.pow(rFrac.n, n);
           const rn_den = Math.pow(rFrac.d, n);
           let num = a * (rn_den - rn_num) * rFrac.d;

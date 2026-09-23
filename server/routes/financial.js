@@ -1,25 +1,10 @@
 'use strict';
 const router = require('express').Router();
 
-function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+const { randomInt, pick, seqPick, gcd, simplifyFraction } = require('../lib/mathHelpers');
 const randInt = randomInt;
-function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
-
-function gcd(a, b) {
-  a = Math.abs(a);
-  b = Math.abs(b);
-  while (b) { [a, b] = [b, a % b]; }
-  return a;
-}
-
-function simplifyFraction(num, den) {
-  if (den < 0) { num = -num; den = -den; }
-  const g = gcd(Math.abs(num), den);
-  return { num: num / g, den: den / g };
-}
 
 function seqRand(lo, hi) { return lo + Math.floor(Math.random() * (hi - lo + 1)); }
-function seqPick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
 function percentType1(pct, base) {
   const templates = [
@@ -32,9 +17,9 @@ function percentType1(pct, base) {
 }
 
 const PERCENT_TIERS = {
-  1: { pcts: [10, 25, 50, 100],         lo: 10,   hi: 100,   label: 'Tier 1' },
-  2: { pcts: [20, 30, 75],              lo: 100,  hi: 500,   label: 'Tier 2' },
-  3: { pcts: [15, 35, 60, 80],          lo: 500,  hi: 2000,  label: 'Tier 3' },
+  1: { pcts: [10, 25, 50, 100], lo: 10, hi: 100, label: 'Tier 1' },
+  2: { pcts: [20, 30, 75], lo: 100, hi: 500, label: 'Tier 2' },
+  3: { pcts: [15, 35, 60, 80], lo: 500, hi: 2000, label: 'Tier 3' },
   4: { pcts: [12.5, 17.5, 22.5, 37.5, 47.5, 62.5, 87.5], lo: 2000, hi: 10000, label: 'Tier 4' },
 };
 
