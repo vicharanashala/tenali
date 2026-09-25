@@ -675,13 +675,23 @@ const generators = {
       return { id: `arith-${Date.now()}-${Math.random()}`, a, b, op, prompt, answer };
     },
     check(body) {
-      const { a, b, op, answer } = body;
+      const { a, b, op, answer } = body || {};
       let correctAnswer;
-      if (op === '+') correctAnswer = Number(a) + Number(b);
-      else if (op === '−') correctAnswer = Number(a) - Number(b);
-      else if (op === '×') correctAnswer = Number(a) * Number(b);
-      else if (op === '÷') correctAnswer = Number(b) === 0 ? NaN : Number(a) / Number(b);
-      else correctAnswer = NaN;
+      const numA = Number(a);
+      const numB = Number(b);
+      const cleanOp = typeof op === 'string' ? op.trim() : '';
+
+      if (cleanOp === '+' || cleanOp === 'add') {
+        correctAnswer = numA + numB;
+      } else if (cleanOp === '−' || cleanOp === '-' || cleanOp === 'sub') {
+        correctAnswer = numA - numB;
+      } else if (cleanOp === '×' || cleanOp === '*' || cleanOp === 'x' || cleanOp === 'X' || cleanOp === 'mul') {
+        correctAnswer = numA * numB;
+      } else if (cleanOp === '÷' || cleanOp === '/' || cleanOp === 'div') {
+        correctAnswer = numB === 0 ? NaN : numA / numB;
+      } else {
+        correctAnswer = NaN;
+      }
       const correct = Number(answer) === correctAnswer;
       return { correct, correctAnswer, message: correct ? 'Correct' : 'Incorrect' };
     },

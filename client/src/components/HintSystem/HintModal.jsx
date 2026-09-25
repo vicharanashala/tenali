@@ -644,6 +644,7 @@ export function GlobalXpPanel() {
       return null;
     }
   });
+  const [streak, setStreak] = useState(() => parseInt(localStorage.getItem('tenali-streak') || '0', 10));
 
   useEffect(() => {
     const checkMode = () => {
@@ -667,17 +668,36 @@ export function GlobalXpPanel() {
   }, []);
 
   useEffect(() => {
-    const handleStorage = () => setXp(getLocalXp());
+    const handleStorage = () => {
+      setXp(getLocalXp());
+      setStreak(parseInt(localStorage.getItem('tenali-streak') || '0', 10));
+    };
+    const handleStreakChange = (e) => {
+      if (e.detail && e.detail.streak !== undefined) {
+        setStreak(e.detail.streak);
+      } else {
+        setStreak(parseInt(localStorage.getItem('tenali-streak') || '0', 10));
+      }
+    };
+    const handleXpFloat = () => {
+      setXp(getLocalXp());
+    };
     window.addEventListener('storage', handleStorage);
+    window.addEventListener('tenali-streak-change', handleStreakChange);
+    window.addEventListener('tenali-xp-float', handleXpFloat);
     const interval = setInterval(() => {
-      const current = getLocalXp();
-      if (current !== xp) setXp(current);
+      const currentXp = getLocalXp();
+      if (currentXp !== xp) setXp(currentXp);
+      const currentStreak = parseInt(localStorage.getItem('tenali-streak') || '0', 10);
+      if (currentStreak !== streak) setStreak(currentStreak);
     }, 1000);
     return () => {
       window.removeEventListener('storage', handleStorage);
+      window.removeEventListener('tenali-streak-change', handleStreakChange);
+      window.removeEventListener('tenali-xp-float', handleXpFloat);
       clearInterval(interval);
     };
-  }, [xp]);
+  }, [xp, streak]);
 
   // Only render during an active quiz session, never on landing page or main home menu
   if (!activeMode) {
@@ -685,8 +705,11 @@ export function GlobalXpPanel() {
   }
 
   return (
-    <div style={{ position: 'fixed', top: '64px', left: '16px', zIndex: 10000, background: 'var(--clr-surface, #1e1e2f)', padding: '8px 16px', borderRadius: '20px', color: '#f5b041', fontWeight: 'bold', boxShadow: '0 4px 6px rgba(0,0,0,0.3)', border: '1px solid var(--clr-border, #333)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-      <span>{xp} 🪙</span>
+    <div style={{ position: 'fixed', top: '64px', left: '16px', zIndex: 10000, background: 'var(--clr-surface, #1e1e2f)', padding: '8px 16px', borderRadius: '20px', color: '#f5b041', fontWeight: 'bold', boxShadow: '0 4px 6px rgba(0,0,0,0.3)', border: '1px solid var(--clr-border, #333)', display: 'flex', alignItems: 'center', gap: '12px' }}>
+      <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>{xp} 🪙</span>
+      <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#ff6b6b' }} title={`${streak} Day Streak!`}>
+        <span>🔥</span> {streak}
+      </span>
     </div>
   );
 }
