@@ -673,6 +673,10 @@ export default function WaterJugLab({ onBack }) {
       }, 100);
       return () => clearTimeout(timer);
     }
+    // askMentorHint is intentionally excluded: it is a plain function recreated
+    // each render, so adding it would re-fire this effect on every render and
+    // restart the timeout indefinitely.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [jugAVal, jugBVal, solvable, loading, revealed, phase, difficulty]);
 
   const startGame = () => {
