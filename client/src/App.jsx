@@ -35,7 +35,6 @@ import ShapeSlicer3D from './ShapeSlicer3D';
 import ShapeTranslatorApp from './ShapeTranslatorApp';
 import NetBuilderApp from './NetBuilderApp';
 import CrossSectionApp from './CrossSectionApp';
-
 window.React = React;
 console.log("React version:", React.version);
 import LinearAlgebraApp from './LinearAlgebraApp'
