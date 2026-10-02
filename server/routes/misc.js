@@ -12,6 +12,11 @@ function simplifyFraction(num, den) {
   return { num: num / g, den: den / g };
 }
 
+function roundHalfUp(val, decimals = 2) {
+  const p = Math.pow(10, decimals);
+  return Math.round((val + Number.EPSILON) * p) / p;
+}
+
 function toMixed(num, den) {
   const s = simplifyFraction(num, den);
   const whole = Math.trunc(s.num / s.den);
@@ -66,16 +71,28 @@ function buildOptions(correctText, distractors) {
   const seen = new Set([String(correctText)]);
   const cleaned = [];
   for (const d of distractors) {
+    if (d === undefined || d === null) continue;
     const s = String(d);
     if (!seen.has(s)) { seen.add(s); cleaned.push(s); }
     if (cleaned.length >= 3) break;
   }
   let pad = 1;
+  const numVal = parseFloat(correctText);
+  const isNumeric = !isNaN(numVal) && String(numVal) === String(correctText).trim();
+
   while (cleaned.length < 3) {
-    const filler = `${correctText}_${pad++}`;
+    let filler;
+    if (isNumeric) {
+      const offset = (pad % 2 === 1 ? Math.ceil(pad / 2) : -Math.ceil(pad / 2));
+      filler = String(numVal + offset);
+    } else {
+      const fallbacks = ["0", "1", "Undefined", "Cannot be determined", "None of these"];
+      filler = fallbacks[(pad - 1) % fallbacks.length];
+    }
+    pad++;
     if (!seen.has(filler)) { seen.add(filler); cleaned.push(filler); }
   }
-  const all = shuffleArray([{ text: String(correctText), correct: true }, ...cleaned.slice(0, 3).map(t => ({ text: t, correct: false }))]);
+  const all = deBiasShuffle([{ text: String(correctText), correct: true }, ...cleaned.slice(0, 3).map(t => ({ text: t, correct: false }))], 0);
   const labels = ['A', 'B', 'C', 'D'];
   const options = all.map((o, i) => ({ option: labels[i], text: o.text }));
   const correctOption = labels[all.findIndex(o => o.correct)];
@@ -1134,7 +1151,7 @@ const generators = {
         const val = randInt(10, 99); const dp1 = randInt(1, 9);
         const num = val + dp1 / 10;
         prompt = `${num} is rounded to 1 decimal place. What is the lower bound?`;
-        answer = num - 0.05; display = String(answer);
+        answer = Number((num - 0.05).toFixed(2)); display = String(answer);
       } else if (diff === 'medium') {
         const base = randInt(3, 15) * 10;
         prompt = `A length is ${base} cm, rounded to the nearest 10 cm. What is the upper bound?`;
@@ -1142,11 +1159,11 @@ const generators = {
       } else if (diff === 'hard') {
         const a = randInt(20, 50) / 10; const b = randInt(20, 50) / 10;
         prompt = `a = ${a} (1 d.p.) and b = ${b} (1 d.p.). Find the upper bound of a + b.`;
-        answer = Math.round((a + 0.05 + b + 0.05) * 100) / 100; display = String(answer);
+        answer = Number((a + 0.05 + b + 0.05).toFixed(2)); display = String(answer);
       } else {
         const a = randInt(30, 80) / 10; const b = randInt(20, 40) / 10;
         const upperA = a + 0.05; const lowerB = b - 0.05;
-        const result = Math.round((upperA / lowerB) * 1000) / 1000;
+        const result = Number((upperA / lowerB).toFixed(3));
         prompt = `a = ${a} (1 d.p.) and b = ${b} (1 d.p.). Find the upper bound of a ÷ b. Give answer to 3 d.p.`;
         answer = result; display = String(answer);
       }
@@ -1179,12 +1196,12 @@ const generators = {
         const ansNum = totalD * timeDen; const ansDen = timeNum;
         const g = gcd(Math.abs(ansNum), Math.abs(ansDen));
         const rn = ansNum / g; const rd = ansDen / g;
-        answer = rd === 1 ? rn : Math.round((rn / rd) * 100) / 100;
+        answer = rd === 1 ? rn : roundHalfUp(rn / rd, 2);
         display = answer + ' km/h';
         prompt = `A cyclist rides ${d1} km at ${s1} km/h then ${d2} km at ${s2} km/h. Find the average speed (to 2 d.p. if needed).`;
       } else {
         const ms = randInt(5, 30);
-        answer = Math.round(ms * 3.6 * 100) / 100; display = answer + ' km/h';
+        answer = roundHalfUp(ms * 3.6, 2); display = answer + ' km/h';
         prompt = `Convert ${ms} m/s to km/h.`;
       }
       return { prompt, answer, display, difficulty: diff };
@@ -1239,7 +1256,9 @@ const generators = {
       const type = randInt(1, 4);
       if (diff === 'easy') {
         if (type === 1) {
-          const g = randInt(2, 8); const a = g * randInt(2, 5); const b = g * randInt(2, 5);
+          const g = randInt(2, 8); const multA = randInt(2, 5); let multB = randInt(2, 5);
+          while (multB === multA) { multB = randInt(2, 5); }
+          const a = g * multA; const b = g * multB;
           answer = gcd(a, b); display = String(answer);
           prompt = `Find the HCF (Highest Common Factor) of ${a} and ${b}.`;
         } else if (type === 2) {
@@ -1262,7 +1281,8 @@ const generators = {
         }
       } else if (diff === 'medium') {
         if (type === 1) {
-          const a = randInt(4, 12); const b = randInt(4, 12);
+          const a = randInt(4, 12); let b = randInt(4, 12);
+          while (a === b) { b = randInt(4, 12); }
           answer = lcm(a, b); display = String(answer);
           prompt = `Find the LCM (Lowest Common Multiple) of ${a} and ${b}.`;
         } else if (type === 2) {
@@ -1286,11 +1306,18 @@ const generators = {
         }
       } else if (diff === 'hard') {
         if (type === 1) {
-          const a = randInt(3, 8); const b = randInt(3, 8); const c = randInt(3, 8);
+          const a = randInt(3, 8); let b = randInt(3, 8);
+          while (a === b) { b = randInt(3, 8); }
+          let c = randInt(3, 8);
+          while (c === a || c === b) { c = randInt(3, 8); }
           answer = lcm(lcm(a, b), c); display = String(answer);
           prompt = `Find the LCM of ${a}, ${b}, and ${c}.`;
         } else if (type === 2) {
-          const g = randInt(2, 6); const a = g * randInt(2, 4); const b = g * randInt(2, 4); const c = g * randInt(2, 4);
+          const g = randInt(2, 6); const m1 = randInt(2, 4); let m2 = randInt(2, 4);
+          while (m2 === m1) { m2 = randInt(2, 4); }
+          let m3 = randInt(2, 4);
+          while (m3 === m1 || m3 === m2) { m3 = randInt(2, 4); }
+          const a = g * m1; const b = g * m2; const c = g * m3;
           answer = gcd(gcd(a, b), c); display = String(answer);
           prompt = `Find the Highest Common Factor (HCF) of ${a}, ${b}, and ${c}.`;
         } else if (type === 3) {
