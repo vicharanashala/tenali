@@ -535,6 +535,44 @@ function getSpeedRunLimit(difficulty, isAdaptive) {
 }
 
 /**
+ * Build a set of weight blocks (denomination × count) large enough to reach
+ * a target total. Used by balance-scale addition puzzles across BalanceScaleApp,
+ * MixedLabApp and AdditionApp — see issue #256 for why it lives at module scope.
+ */
+function createDynamicWeightBank(target) {
+  let denominations = []
+  if (target >= 500) {
+    denominations = [500, 100, 50, 10, 5, 1]
+  } else if (target >= 100) {
+    denominations = [100, 50, 10, 5, 1]
+  } else if (target >= 15) {
+    denominations = [50, 10, 5, 1]
+  } else {
+    denominations = [5, 1]
+  }
+
+  const bank = []
+  denominations.forEach(d => {
+    let count = 4
+    if (d === 100) count = 10
+    if (d === 50) count = 6
+    if (d === 10) count = 15
+    if (d === 5) count = 8
+    if (d === 1) count = 15
+
+    const needed = Math.ceil(target / d) + 2
+    if (needed > count) {
+      count = needed
+    }
+
+    for (let i = 0; i < count; i++) {
+      bank.push({ id: `bank-${d}-${i}-${Math.random()}`, val: d })
+    }
+  })
+  return bank
+}
+
+/**
  * useTimer Hook
  * Supports three modes driven by the sessionGoal:
  *   'speed'    — countdown from limitSeconds → 0; fires onTimeout when it hits 0
@@ -42173,39 +42211,6 @@ function BalanceScaleApp({ onBack }) {
   const targetTotal = question ? (Number(question.a) + Number(question.b)) : 0
   const rightTotal = rightBlocks.reduce((acc, b) => acc + b.val, 0)
 
-  const createDynamicWeightBank = (target) => {
-    let denominations = [];
-    if (target >= 500) {
-      denominations = [500, 100, 50, 10, 5, 1];
-    } else if (target >= 100) {
-      denominations = [100, 50, 10, 5, 1];
-    } else if (target >= 15) {
-      denominations = [50, 10, 5, 1];
-    } else {
-      denominations = [5, 1];
-    }
-
-    let bank = [];
-    denominations.forEach(d => {
-      let count = 4;
-      if (d === 100) count = 10;
-      if (d === 50) count = 6;
-      if (d === 10) count = 15;
-      if (d === 5) count = 8;
-      if (d === 1) count = 15;
-
-      const needed = Math.ceil(target / d) + 2;
-      if (needed > count) {
-        count = needed;
-      }
-
-      for (let i = 0; i < count; i++) {
-        bank.push({ id: `bank-${d}-${i}-${Math.random()}`, val: d });
-      }
-    });
-    return bank;
-  };
-
   const fetchQuestion = async (selectedLevel) => {
     setLoading(true)
     setFeedback('')
@@ -51935,363 +51940,6 @@ function gymCheckAnswer(q, raw) {
 }
 
 /**
- * GymQuiz Component
- * Shared quiz engine used by GymArithmetic, GymAlgebra, and BasicGym.
- * Provides ordering selection (random | sequential), question planning,
- * lifecycle, keyboard shortcuts (digits, sign, decimal, slash, x, ^, Backspace, Enter),
- * and rendering.
- *
- * @param {Object} props
- * @param {string} props.title - Layout title
- * @param {string} props.subtitle - Layout subtitle
- * @param {string[]} props.typeKeys - Keys into GYM_TYPES that this puzzle draws from
- * @param {string} props.welcomeText - Intro paragraph on the welcome screen
- * @param {boolean} props.algebraInput - When true, accept x/X and ^ in answers
- * @param {Function} props.onBack - Return to home menu
- */
-function GymQuiz({ title, subtitle, typeKeys, welcomeText, algebraInput, onBack }) {
-  const [ordering, setOrdering] = useState('random')          // 'random' | 'sequential'
-  const [numQuestions, setNumQuestions] = useState(String(DEFAULT_TOTAL))
-  const [started, setStarted] = useState(false)
-  const [finished, setFinished] = useState(false)
-  const [adaptive, setAdaptive] = useState(false)             // Adaptive mode: infinite stream until Stop
-  // plan is an array of { type, difficulty }. Empty in adaptive mode.
-  const [plan, setPlan] = useState([])
-  const [questionNumber, setQuestionNumber] = useState(0)
-  const [totalQ, setTotalQ] = useState(DEFAULT_TOTAL)         // Infinity in adaptive mode
-  const [question, setQuestion] = useState(null)
-  const [answer, setAnswer] = useState('')
-  const [score, setScore] = useState(0)
-  const [feedback, setFeedback] = useState('')
-  const [isCorrect, setIsCorrect] = useState(null)
-  const [revealed, setRevealed] = useState(false)
-  const [results, setResults] = useState([])
-  const timer = useTimer()
-
-  // Adaptive difficulty: 0 (easy) → 1 (hard). Updated after each answer.
-  // Use a ref so the very next loadQuestion call picks up the latest value
-  // without waiting for state to flush.
-  const [adaptDiff, setAdaptDiff] = useState(0.3)
-  const adaptDiffRef = useRef(0.3)
-
-  // Build the plan: each slot gets a (type, difficulty) pair.
-  // Difficulty grows linearly from ~0 at the first slot to ~1 at the last slot,
-  // so the user sees increasing difficulty over the session.
-  const buildPlan = (count) => {
-    const types = []
-    if (ordering === 'sequential') {
-      const per = Math.floor(count / typeKeys.length)
-      const rem = count % typeKeys.length
-      typeKeys.forEach((t, i) => {
-        const n = per + (i < rem ? 1 : 0)
-        for (let j = 0; j < n; j++) types.push(t)
-      })
-    } else {
-      const per = Math.floor(count / typeKeys.length)
-      const rem = count % typeKeys.length
-      typeKeys.forEach((t, i) => {
-        const n = per + (i < rem ? 1 : 0)
-        for (let j = 0; j < n; j++) types.push(t)
-      })
-      // Fisher-Yates shuffle
-      for (let i = types.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [types[i], types[j]] = [types[j], types[i]];
-      }
-    }
-    return types.map((t, i) => ({
-      type: t,
-      difficulty: count > 1 ? i / (count - 1) : 0.5,
-    }))
-  }
-
-  const startQuiz = () => {
-    const count = numQuestions !== '' && Number(numQuestions) > 0 ? Number(numQuestions) : DEFAULT_TOTAL
-    const p = buildPlan(count)
-    setPlan(p)
-    setTotalQ(p.length)
-    setAdaptive(false)
-    setStarted(true)
-    setFinished(false)
-    setScore(0)
-    setQuestionNumber(1)
-    setResults([])
-    loadQuestion(p, 0, false)
-  }
-
-  // Adaptive: skip the count input and start an infinite stream of questions whose
-  // difficulty floats between 0 and 1 based on user performance. Stop ends it.
-  const startAdaptive = () => {
-    setPlan([])
-    setTotalQ(Infinity)
-    setAdaptive(true)
-    setStarted(true)
-    setFinished(false)
-    setScore(0)
-    setQuestionNumber(1)
-    setResults([])
-    setAdaptDiff(0.3)
-    adaptDiffRef.current = 0.3
-    loadQuestion(null, 0, true)
-  }
-
-  const loadQuestion = (planArr, idx, forceAdaptive) => {
-    setAnswer('')
-    setFeedback('')
-    setIsCorrect(null)
-    setRevealed(false)
-    const useAdaptive = forceAdaptive !== undefined ? forceAdaptive : adaptive
-    let t, d
-    if (useAdaptive) {
-      t = typeKeys[Math.floor(Math.random() * typeKeys.length)]
-      d = adaptDiffRef.current
-    } else {
-      const slot = planArr ? planArr[idx] : null
-      t = slot ? slot.type : typeKeys[0]
-      d = slot ? slot.difficulty : 0.5
-    }
-    const gen = GYM_TYPES[t]?.generator
-    setQuestion(gen ? gen(d) : null)
-    timer.start(sessionGoal, handleTimeout, getSpeedRunLimit(difficulty ?? 'easy', isAdaptive ?? false))
-  }
-
-  // Stop button (adaptive mode only): end the session and show the results screen.
-  const handleStop = () => {
-    setFinished(true)
-    setQuestion(null)
-    timer.reset()
-  }
-
-  // Adaptive difficulty update: rewards correctness AND speed; penalises wrong answers more strongly.
-  const updateAdaptDiff = (correct, timeSec) => {
-    let delta
-    if (correct) {
-      // Faster answers are weighted higher: < 4s → +0.07, 4-10s → +0.04, > 10s → +0.015
-      if (timeSec < 4) delta = 0.07
-      else if (timeSec < 10) delta = 0.04
-      else delta = 0.015
-    } else {
-      // Wrong answers drop difficulty more aggressively
-      delta = -0.10
-    }
-    const next = Math.min(1, Math.max(0, adaptDiffRef.current + delta))
-    adaptDiffRef.current = next
-    setAdaptDiff(next)
-  }
-
-  const handleSubmitOrNext = () => {
-    if (!question) return
-    if (!revealed) {
-      const trimmed = String(answer).trim()
-      if (!trimmed || trimmed === '-' || trimmed === '.' || trimmed === '/') return
-      const correct = gymCheckAnswer(question, trimmed)
-      const timeTaken = timer.stop()
-      setIsCorrect(correct)
-      if (correct) setScore(s => s + 1)
-      if (adaptive) updateAdaptDiff(correct, timeTaken)
-      const corrStr = gymFormatAnswer(question)
-      const promptStem = question.prompt.replace(/\s*=\s*\?\s*$/, '')
-      setFeedback(correct
-        ? `Correct! ${promptStem} = ${corrStr}`
-        : `Incorrect. ${promptStem} = ${corrStr}`)
-      setResults(prev => [...prev, {
-        question: `[${question.type}] ${mathToPlain(question.prompt)}`,
-        userAnswer: answer,
-        correctAnswer: mathToPlain(corrStr),
-        correct,
-        time: timeTaken,
-      }])
-      setRevealed(true)
-      return
-    }
-    // Advancing past a revealed question. In fixed-length mode we can finish naturally.
-    // In adaptive mode totalQ is Infinity so this branch never fires — only Stop ends it.
-    if (!adaptive && questionNumber >= totalQ) {
-      setFinished(true)
-      setQuestion(null)
-      timer.reset()
-      return
-    }
-    setQuestionNumber(n => n + 1)
-    loadQuestion(plan, questionNumber)        // questionNumber is current (1-based); plan[questionNumber] is the next 0-based slot
-  }
-
-  const handleSolve = () => {
-    if (revealed) return
-    const timeTaken = timer.stop()
-    const corrStr = gymFormatAnswer(question)
-    const promptStem = question.prompt.replace(/\s*=\s*\?\s*$/, '')
-    setIsCorrect(false)
-    setFeedback(`Solution: ${promptStem} = ${corrStr}`)
-    setResults(prev => [...prev, {
-      question: `[${question.type}] ${mathToPlain(question.prompt)}`,
-      userAnswer: '—',
-      correctAnswer: mathToPlain(corrStr),
-      correct: false,
-      time: timeTaken,
-    }])
-    if (adaptive) updateAdaptDiff(false, timeTaken)
-    setRevealed(true)
-  }
-
-  // Keyboard shortcuts. Algebra mode also accepts 'x'/'X', '^', and '+'.
-  useEffect(() => {
-    const onKeyDown = (event) => {
-      if (!started || finished) return
-      if (event.key === 'Enter') {
-        event.preventDefault()
-        handleSubmitOrNext()
-        return
-      }
-      if (revealed) return
-      if (/^[0-9]$/.test(event.key)) {
-        event.preventDefault()
-        setAnswer(prev => prev + event.key)
-      } else if (event.key === '-') {
-        event.preventDefault()
-        // Algebra mode: append minus (used as separator); arithmetic mode: toggle leading sign
-        if (algebraInput) setAnswer(prev => prev + '-')
-        else setAnswer(prev => prev.startsWith('-') ? prev.slice(1) : '-' + prev)
-      } else if (event.key === '+' && algebraInput) {
-        event.preventDefault()
-        setAnswer(prev => prev + '+')
-      } else if (event.key === '.') {
-        event.preventDefault()
-        setAnswer(prev => prev + '.')
-      } else if (event.key === '/') {
-        event.preventDefault()
-        setAnswer(prev => prev.includes('/') && !algebraInput ? prev : prev + '/')
-      } else if ((event.key === 'x' || event.key === 'X') && algebraInput) {
-        event.preventDefault()
-        setAnswer(prev => prev + 'x')
-      } else if (event.key === '^' && algebraInput) {
-        event.preventDefault()
-        setAnswer(prev => prev + '^')
-      } else if (event.key === 'Backspace') {
-        event.preventDefault()
-        setAnswer(prev => prev.slice(0, -1))
-      }
-    }
-    window.addEventListener('keydown', onKeyDown)
-    return () => window.removeEventListener('keydown', onKeyDown)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [started, finished, question, answer, revealed, score, questionNumber, plan, totalQ, algebraInput])
-
-  const inputCharRegex = algebraInput ? /^[\dxX^+\-./\s]*$/ : /^[\d./\-]*$/
-  const inputPlaceholder = algebraInput ? 'integer, decimal, fraction, or polynomial (e.g. 6x^2-3x+1)' : 'integer, decimal, or a/b'
-  const orderingFieldName = `${title.replace(/\s+/g, '')}-order`
-
-  // Average time per answered question (used in the finish summary).
-  const avgTime = results.length > 0 ? (results.reduce((s, r) => s + r.time, 0) / results.length).toFixed(1) : '—'
-
-  return (
-    <div className="kid-zone">
-      {!started && !finished && (
-        <div className="kid-card" style={{ marginTop: '5vh' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <h1>{title}</h1>
-            <button className="kid-back-btn" onClick={onBack}>← Home</button>
-          </div>
-          <p className="subtitle">{subtitle}</p>
-
-          <p className="welcome-text">{welcomeText}</p>
-          <div className="checkbox-group" style={{ marginBottom: '12px' }}>
-            <label className={`checkbox-pill${ordering === 'random' ? ' active' : ''}`}>
-              <input type="radio" name={orderingFieldName} checked={ordering === 'random'} onChange={() => setOrdering('random')} />
-              Random Mix
-            </label>
-            <label className={`checkbox-pill${ordering === 'sequential' ? ' active' : ''}`}>
-              <input type="radio" name={orderingFieldName} checked={ordering === 'sequential'} onChange={() => setOrdering('sequential')} />
-              Sequential (≈ n/{typeKeys.length} of each)
-            </label>
-          </div>
-          <div className="question-count-row">
-            <label className="question-count-label">How many questions? (max 100)</label>
-            <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={(e) => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 100)) setNumQuestions(v) }} placeholder={String(DEFAULT_TOTAL)} />
-          </div>
-          <p style={{ fontSize: '0.85rem', color: 'var(--clr-dim)', textAlign: 'center', margin: '0 0 8px' }}>
-            Questions are sorted easy → hard across the session.
-          </p>
-          <div className="button-row" style={{ gap: '0.6rem' }}>
-            <button onClick={startQuiz}>Start Workout</button>
-            <button
-              onClick={startAdaptive}
-              style={{ background: 'linear-gradient(135deg, #4caf50, #ff9800, #f44336, #9c27b0)', color: '#fff', border: 'none' }}
-            >
-              Adaptive
-            </button>
-          </div>
-          <p style={{ fontSize: '0.78rem', color: 'var(--clr-dim)', textAlign: 'center', margin: '8px 0 0' }}>
-            Adaptive: infinite stream that adjusts to your performance. Stop anytime.
-          </p>
-        </div>
-      )}
-      {started && !finished && (
-        <>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '20px' }}>
-            <div className="progress-pill">
-              Question {questionNumber}{adaptive ? '' : `/${totalQ}`}
-            </div>
-            {question && <div className="progress-pill">{question.type}</div>}
-          </div>
-          {adaptive && (
-            <DifficultySlider
-              pct={adaptDiff * 100}
-              onChange={(p) => { const v = p / 100; adaptDiffRef.current = v; setAdaptDiff(v) }}
-            />
-          )}
-          <div className="question-box">{question ? renderMath(question.prompt) : 'Loading…'}</div>
-          <input className="answer-input" type="text" value={answer}
-            onChange={(e) => { if (!revealed) { const v = e.target.value; if (v === '' || inputCharRegex.test(v)) setAnswer(v) } }}
-            disabled={revealed}
-            placeholder={inputPlaceholder}
-          />
-          <NumPad value={answer} onChange={(v) => !revealed && setAnswer(v)} disabled={revealed} showDecimal showSlash showCaret={!!algebraInput} showX={!!algebraInput} />
-          {feedback && (
-            <div className={`feedback ${isCorrect ? 'correct' : 'wrong'}`}>{renderMath(feedback)}</div>
-          )}
-          <div className="button-row" style={{ flexWrap: 'wrap', gap: '0.5rem' }}>
-            {!revealed ? (
-              <>
-                <button onClick={handleSubmitOrNext} disabled={String(answer).trim() === '' || answer === '-' || answer === '.' || answer === '/'}>Submit</button>
-                <button onClick={handleSolve} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>
-                {adaptive && (
-                  <button onClick={handleStop} style={{ background: 'transparent', border: '1px solid #d32f2f', color: '#d32f2f' }}>Stop</button>
-                )}
-              </>
-            ) : (
-              <>
-                <button onClick={handleSubmitOrNext}>{!adaptive && questionNumber >= totalQ ? 'Finish Quiz' : 'Next Question'}</button>
-                {adaptive && (
-                  <button onClick={handleStop} style={{ background: 'transparent', border: '1px solid #d32f2f', color: '#d32f2f' }}>Stop</button>
-                )}
-              </>
-            )}
-          </div>
-          {results.length > 0 && <ResultsTable results={results} />}
-        </>
-      )}
-      {finished && (
-        <div className="welcome-box">
-          <p className="welcome-text">{adaptive ? 'Adaptive workout stopped.' : 'Workout complete.'}</p>
-          {adaptive
-            ? <p className="final-score">Score: {score}/{results.length}</p>
-            : <p className="final-score">Final score: {score}/{totalQ}</p>}
-          <p className="final-score" style={{ fontSize: '0.95rem' }}>
-            Average time per question: {avgTime}s
-          </p>
-          <ResultsTable results={results} />
-          <div className="button-row" style={{ gap: '0.5rem' }}>
-            <button onClick={() => { setStarted(false); setFinished(false); setAdaptive(false) }}>Play Again</button>
-            <button onClick={onBack} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Back to Home</button>
-          </div>
-        </div>
-      )}
-    </div>
-  )
-}
-
-/**
  * BasicArithApp Component
  * Basic arithmetic (+, −, ×, ÷) with positive and negative numbers.
  * Difficulty levels: easy (1-digit), medium (2-digit), hard (3-digit)
@@ -53812,6 +53460,14 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
   const l3TimerRef = useRef(null)
   const l3DeadlineRef = useRef(0)
   const timer = useTimer()
+
+  // Derived values + stub handler to satisfy the speed-run `timer.start(...)`
+  // call shape used by every other app. MultiplyApp drives per-question
+  // timing with `l3TimerRef` in Level 3, so the auto-timeout callback is a
+  // deliberate no-op here — the Level-3 interval handles missed questions.
+  const difficulty = level === 3 ? 'hard' : level === 2 ? 'medium' : 'easy'
+  const isAdaptive = false
+  const handleTimeout = async () => {}
 
   useEffect(() => {
     if (phase === 'finished') {
@@ -56885,7 +56541,7 @@ function GymApp({ onBack }) {
   const [loading, setLoading] = useState(false)
   const [loadError, setLoadError] = useState('')
   const timer = useTimer()
-  const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('gym', finished, score, totalQ, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
+  const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('gym', phase === 'finished', score, totalQ, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
   const sessionGoal = 'standard'
   const isAdaptive = true
   const handleTimeout = async () => {
@@ -58631,7 +58287,7 @@ function RandomMixApp({ onBack, isGoalMode = false }) {
     }
   }, [isGoalMode]);
   const timer = useTimer()
-  const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('mix', finished, score, totalQ, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
+  const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('mix', phase === 'finished', score, totalQuestions, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
   const advanceFnRef = useRef(null)
   const submittedRef = useRef(false)
   const advancedRef = useRef(false)
@@ -62227,7 +61883,7 @@ function TwinHuntApp({ onBack, isGoalMode = false }) {
     }
   }, [isGoalMode]);
 
-  /**
+/**
    * generateRound(n): Generate a new round with n symbols per panel
    * Algorithm:
    *   1. Shuffle TWIN_SYMBOLS pool and select 2n-1 unique symbols
@@ -62236,39 +61892,12 @@ function TwinHuntApp({ onBack, isGoalMode = false }) {
    *   4. Next n-1 symbols are unique to right panel
    *   5. Shuffle each panel's list independently for visual variety
    *   6. Generate random scattered positions for each panel
-   * Resets feedback/reveal and starts timer for the round
+   * Resets feedback/reveal and starts the per-round timer. Round timing is
+   * recorded by handlePick (which calls timer.stop()); there is no auto-
+   * timeout path — the speed-run `handleTimeout` template this used to
+   * carry referenced undefined state and a non-existent /twinhunt-api/check
+   * endpoint, so it was deleted as dead code (issue #256).
    */
-  
-  const handleTimeout = async () => {
-    if (typeof revealed !== 'undefined' && revealed) return
-    if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
-    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
-    const timeTaken = timer.stop ? timer.stop() : 0
-    const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
-    try {
-      const r = await fetch(`${API}/twinhunt-api/check`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-        body: JSON.stringify({ ...(typeof question !== 'undefined' ? question : {}), userAnswer: '', answer: '', sessionGoal })
-      })
-      const d = await r.json()
-      const corrAns = d.display || d.correctAnswer || d.answer || '—'
-      if (typeof setResults === 'function') {
-        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
-      }
-      if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
-      }
-    } catch(e) {
-      console.error('handleTimeout error:', e)
-      if (typeof setResults === 'function') {
-        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
-      }
-    }
-  }
 
 const generateRound = (n) => {
     // Shuffle symbol pool and select 2n-1 unique symbols
@@ -62298,7 +61927,7 @@ const generateRound = (n) => {
     setFeedback('')
     setIsCorrect(null)
     setRevealed(false)
-    timer.start(sessionGoal, handleTimeout, getSpeedRunLimit(difficulty ?? 'easy', isAdaptive ?? false))
+    timer.start(sessionGoal, undefined, undefined)
   }
 
   /**
@@ -62565,7 +62194,6 @@ function SqrtApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
@@ -62583,7 +62211,7 @@ function SqrtApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true) ; timer.reset() } catch(_) {}
       }
     } catch(e) {
       console.error('handleTimeout error:', e)
@@ -62899,7 +62527,6 @@ function PolyMulApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
@@ -62917,7 +62544,7 @@ function PolyMulApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true) ; timer.reset() } catch(_) {}
       }
     } catch(e) {
       console.error('handleTimeout error:', e)
@@ -63232,7 +62859,6 @@ function PolyFactorApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
@@ -63250,7 +62876,7 @@ function PolyFactorApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true) ; timer.reset() } catch(_) {}
       }
     } catch(e) {
       console.error('handleTimeout error:', e)
@@ -63547,7 +63173,6 @@ function PrimeFactorApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
@@ -63565,7 +63190,7 @@ function PrimeFactorApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true) ; timer.reset() } catch(_) {}
       }
     } catch(e) {
       console.error('handleTimeout error:', e)
@@ -63906,7 +63531,6 @@ function QFormulaApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
@@ -63924,7 +63548,7 @@ function QFormulaApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true) ; timer.reset() } catch(_) {}
       }
     } catch(e) {
       console.error('handleTimeout error:', e)
@@ -64242,7 +63866,6 @@ function SimulApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
@@ -64260,7 +63883,7 @@ function SimulApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true) ; timer.reset() } catch(_) {}
       }
     } catch(e) {
       console.error('handleTimeout error:', e)
@@ -64577,7 +64200,6 @@ function FuncEvalApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
@@ -64595,7 +64217,7 @@ function FuncEvalApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true) ; timer.reset() } catch(_) {}
       }
     } catch(e) {
       console.error('handleTimeout error:', e)
@@ -64879,7 +64501,6 @@ function LineEqApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
@@ -64897,7 +64518,7 @@ function LineEqApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true) ; timer.reset() } catch(_) {}
       }
     } catch(e) {
       console.error('handleTimeout error:', e)
@@ -65458,37 +65079,6 @@ function CustomApp({ onBack, isGoalMode = false }) {
    *   - 'random': pick random puzzles from selected, questions appear in random order
    * Transition to 'quiz' phase and load first question
    */
-  
-  const handleTimeout = async () => {
-    if (typeof revealed !== 'undefined' && revealed) return
-    if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
-    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
-    const timeTaken = timer.stop ? timer.stop() : 0
-    const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
-    try {
-      const r = await fetch(`${API}/${apiPath}/check`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-        body: JSON.stringify({ ...(typeof question !== 'undefined' ? question : {}), userAnswer: '', answer: '', sessionGoal })
-      })
-      const d = await r.json()
-      const corrAns = d.display || d.correctAnswer || d.answer || '—'
-      if (typeof setResults === 'function') {
-        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
-      }
-      if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
-      }
-    } catch(e) {
-      console.error('handleTimeout error:', e)
-      if (typeof setResults === 'function') {
-        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
-      }
-    }
-  }
 
 const startQuiz = async () => {
     const count = numQuestions !== '' && Number(numQuestions) > 0 ? Number(numQuestions) : 20
@@ -65562,7 +65152,7 @@ const startQuiz = async () => {
       setQuestion(null)
     }
     setLoading(false)
-    timer.start(sessionGoal, handleTimeout, getSpeedRunLimit(difficulty ?? 'easy', false))
+    timer.start(sessionGoal, undefined, getSpeedRunLimit(difficulty ?? 'easy', false))
   }
 
   /**
@@ -68651,37 +68241,6 @@ function RiyaApp({ onBack, isGoalMode = false }) {
   }, [phase, revealed, selected, optionOrder, quizIdx, unitIdx, perQuestion, activeIndices])
 
   // ── Helpers ─────────────────────────────────────────────────────
-  
-  const handleTimeout = async () => {
-    if (typeof revealed !== 'undefined' && revealed) return
-    if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
-    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
-    const timeTaken = timer.stop ? timer.stop() : 0
-    const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
-    try {
-      const r = await fetch(`${API}/riya-api/check`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-        body: JSON.stringify({ ...(typeof question !== 'undefined' ? question : {}), userAnswer: '', answer: '', sessionGoal })
-      })
-      const d = await r.json()
-      const corrAns = d.display || d.correctAnswer || d.answer || '—'
-      if (typeof setResults === 'function') {
-        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
-      }
-      if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
-      }
-    } catch(e) {
-      console.error('handleTimeout error:', e)
-      if (typeof setResults === 'function') {
-        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
-      }
-    }
-  }
 
 const startQuiz = () => {
     setPhase('quiz')
@@ -68997,7 +68556,7 @@ const startQuiz = () => {
  *     y = mx + C for each. If either y is out of the plot window [-7, 7],
  *     retry. This guarantees a tidy integer answer and visible points.
  */
-function TatsavitLineApp({ onBack }) {
+function TatsavitLineApp({ onBack, isGoalMode = false }) {
   // `round` is just a counter that forces regeneration on Next
   const [round, setRound] = useState(0)
   // Point coordinates are stored as strings so the inputs stay editable

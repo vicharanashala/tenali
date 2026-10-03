@@ -1,22 +1,19 @@
 {
   "src/App.jsx": {
     "no-empty": {
-      "count": 150
+      "count": 143
     },
     "no-restricted-syntax": {
       "count": 1
-    },
-    "no-undef": {
-      "count": 24
     },
     "no-unexpected-multiline": {
       "count": 5
     },
     "no-unused-vars": {
-      "count": 226
+      "count": 210
     },
     "no-useless-escape": {
-      "count": 4
+      "count": 3
     },
     "react-hooks/immutability": {
       "count": 22
