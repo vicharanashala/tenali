@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { parseExcludeList, generateUnique } = require('./lib/questionDedup');
 
 const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
@@ -108,8 +109,7 @@ const mensurationTemplates = [
   'shape_name', 'triangle_area', 'angle_type', 'circle_q', 'missing_side'
 ];
 
-router.get('/mensuration-lab/generate', (req, res) => {
-  const diff = req.query.difficulty || 'easy';
+function generateMensurationQuestion(diff) {
   // Restrict to simpler templates on easy
   const easyTemplates = ['rect_vs_square', 'shape_name', 'angle_type'];
   const mediumTemplates = ['perimeter_blocks', 'compare_area', 'shape_name', 'triangle_area', 'missing_side'];
@@ -122,6 +122,7 @@ router.get('/mensuration-lab/generate', (req, res) => {
   if (template === 'perimeter_blocks') {
     const w = randomInt(2, max);
     const h = randomInt(2, max);
+    q._key = `${template}:${w}x${h}`;
     q.prompt = `🏃 Walk all the way around! What is the perimeter?`;
     q.w = w; q.h = h;
     q.answer = 2 * (w + h);
@@ -132,6 +133,7 @@ router.get('/mensuration-lab/generate', (req, res) => {
     let w2 = randomInt(2, max), h2 = randomInt(2, max);
     // Ensure they are different for more interesting questions
     while (w1*h1 === w2*h2) { w2 = randomInt(2, max); h2 = randomInt(2, max); }
+    q._key = `${template}:${w1}x${h1}:${w2}x${h2}`;
     q.prompt = `🤔 Which shape has the BIGGER area?`;
     q.shape1 = {w: w1, h: h1, label: 'A', color: '#FF7E67'};
     q.shape2 = {w: w2, h: h2, label: 'B', color: '#FFD166'};
@@ -145,6 +147,7 @@ router.get('/mensuration-lab/generate', (req, res) => {
     const isSquare = Math.random() > 0.5;
     const w = randomInt(2, max);
     const h = isSquare ? w : (w + randomInt(1, 3));
+    q._key = `${template}:${w}x${h}`;
     q.prompt = `🔍 Look carefully! Is this shape a Rectangle or a Square?`;
     q.w = w; q.h = h;
     q.options = ['Rectangle', 'Square'];
@@ -153,18 +156,20 @@ router.get('/mensuration-lab/generate', (req, res) => {
   } else if (template === 'shape_name') {
     const sides = randomInt(3, 8);
     const name = shapeNames[sides];
+    q._key = `${template}:${sides}`;
     q.prompt = `🌟 What is the name of this shape?`;
     q.sides = sides;
     q.answer = name;
     q.hint = `A polygon with ${sides} sides is a ${name}`;
     const wrongSides = Object.keys(shapeNames).map(Number).filter(s => s !== sides);
     const picks = wrongSides.sort(() => Math.random()-0.5).slice(0, 3).map(s => shapeNames[s]);
-    q.options = [...picks, name].sort(() => Math.random()-0.5);
+    q.options = [...picks, name].sort(()=>Math.random()-0.5);
     q.color = randomChoice(['#FF6B6B','#4ECDC4','#45B7D1','#FFEAA7','#DDA0DD','#96CEB4']);
   } else if (template === 'triangle_area') {
     const base = randomInt(2, max);
     const height = randomInt(2, max);
     const area = base * height / 2;
+    q._key = `${template}:${base}x${height}`;
     q.prompt = `📐 What is the area of this triangle? (Area = ½ × base × height)`;
     q.base = base; q.height = height;
     q.answer = area;
@@ -177,6 +182,7 @@ router.get('/mensuration-lab/generate', (req, res) => {
     if (type === 'acute') degrees = randomInt(10, 89);
     else if (type === 'right') degrees = 90;
     else degrees = randomInt(91, 170);
+    q._key = `${template}:${type}:${degrees}`;
     q.prompt = `📏 Is this angle ACUTE, RIGHT, or OBTUSE?`;
     q.degrees = degrees;
     q.answer = type.charAt(0).toUpperCase() + type.slice(1);
@@ -185,6 +191,8 @@ router.get('/mensuration-lab/generate', (req, res) => {
   } else if (template === 'circle_q') {
     const r = randomInt(2, 8);
     const isCircumference = Math.random() > 0.5;
+    const subtype = isCircumference ? 'circumference' : 'area';
+    q._key = `${template}:${subtype}:${r}`;
     if (isCircumference) {
       const val = Math.round(2 * Math.PI * r * 10) / 10;
       q.prompt = `⭕ Find the circumference of a circle with radius ${r}. (Use π ≈ 3.14)`;
@@ -211,6 +219,7 @@ router.get('/mensuration-lab/generate', (req, res) => {
       const h = randomInt(2, max);
       const area = w * h;
       const missingW = Math.random() > 0.5;
+      q._key = `${template}:rect:${w}x${h}:${missingW ? 'w' : 'h'}`;
       q.prompt = missingW
         ? `🔎 A rectangle has area ${area} and height ${h}. What is the missing width?`
         : `🔎 A rectangle has area ${area} and width ${w}. What is the missing height?`;
@@ -225,6 +234,7 @@ router.get('/mensuration-lab/generate', (req, res) => {
     } else {
       const side = randomInt(2, max);
       const perim = 4 * side;
+      q._key = `${template}:square:${side}`;
       q.prompt = `🔎 A square has perimeter ${perim}. What is its side length?`;
       q.answer = side;
       q.perim = perim;
@@ -234,7 +244,23 @@ router.get('/mensuration-lab/generate', (req, res) => {
       q.options = opts;
     }
   }
-  res.json(q);
+  return q;
+}
+
+router.get('/mensuration-lab/generate', (req, res) => {
+  const diff = req.query.difficulty || 'easy';
+  // TEN-MATH-023: client-side `?exclude=key1,key2,...` is a list of content
+  // keys the learner has already seen this session. Regenerate until the new
+  // key is not in the set, capped at MAX_ATTEMPTS. Stateless — no server-side
+  // session storage.
+  const exclude = parseExcludeList(req);
+  const { question, key } = generateUnique(
+    () => generateMensurationQuestion(diff),
+    q => q._key,
+    exclude
+  );
+  question._key = key;
+  res.json(question);
 });
 
 router.post('/mensuration-lab/check', (req, res) => {
