@@ -7,7 +7,7 @@
  * local cure history.
  */
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { load, recordCure, getCureHistory } from './monsterStore.js';
 import { getMonsterName } from './monsterExplanations.js';
@@ -15,7 +15,6 @@ import MonsterAvatar from './MonsterAvatar.jsx';
 
 const REQUIRED_CORRECT = 4;
 const QUESTION_COUNT = 5;
-const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
 
 function normalise(value) {
   return String(value ?? '')
@@ -88,6 +87,51 @@ function getHardcodedFallbackQuestion(monsterId, index) {
   const list = HARDCODED_FALLBACKS[monsterId] || HARDCODED_FALLBACKS['bracketeer'];
   const q = list[index % list.length];
   return { id: `fallback-${monsterId}-${index}`, prompt: q.prompt, correctAnswer: q.correctAnswer };
+}
+
+function prepareQuestions(monsterId, topic) {
+  const prepared = historyQuestions(monsterId, topic);
+  for (let i = prepared.length; i < QUESTION_COUNT; i += 1) {
+    prepared.push(getHardcodedFallbackQuestion(monsterId, i));
+  }
+  while (prepared.length < QUESTION_COUNT && prepared.length > 0) {
+    prepared.push({ ...prepared[0], id: `repeat-${prepared.length}` });
+  }
+  if (prepared.length < QUESTION_COUNT) {
+    return { questions: [], error: 'Not enough questions are available for this cure yet.' };
+  }
+  return { questions: prepared.slice(0, QUESTION_COUNT), error: '' };
+}
+
+function triggerCelebration(setPoofActive) {
+  setPoofActive(true);
+  setTimeout(() => setPoofActive(false), 1100);
+
+  // Trigger themed healing explosion
+  const chars = ['❤️', '🧪', '✨', '🟢', '🟡', '🛡️'];
+  const colors = ['#5cb87a', '#ffd700', '#ff6b6b', '#fff'];
+
+  // Particle explosion from the center card
+  for (let i = 0; i < 45; i++) {
+    const p = document.createElement('div');
+    p.className = 'cure-particle';
+    p.innerText = chars[Math.floor(Math.random() * chars.length)];
+    p.style.color = colors[Math.floor(Math.random() * colors.length)];
+    const angle = Math.random() * Math.PI * 2;
+    const dist = 80 + Math.random() * 200;
+    const tx = Math.cos(angle) * dist;
+    const ty = Math.sin(angle) * dist;
+
+    p.style.setProperty('--tx', `${tx}px`);
+    p.style.setProperty('--ty', `${ty}px`);
+
+    // Spawn around the screen center
+    p.style.left = '50%';
+    p.style.top = '30%';
+
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 1200);
+  }
 }
 
 function injectStyles() {
@@ -218,66 +262,21 @@ function injectStyles() {
 }
 
 export function CureFlow({ monsterId, topic, onComplete, onCancel, onOpenGuidedSolver }) {
-  const [questions, setQuestions] = useState([]);
   const [index, setIndex] = useState(0);
   const [answer, setAnswer] = useState('');
   const [correctCount, setCorrectCount] = useState(0);
   const [feedback, setFeedback] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
   const [finished, setFinished] = useState(false);
   const [poofActive, setPoofActive] = useState(false);
+
   useEffect(() => {
     injectStyles();
-    const prepared = historyQuestions(monsterId, topic);
-    for (let i = prepared.length; i < QUESTION_COUNT; i += 1) {
-      prepared.push(getHardcodedFallbackQuestion(monsterId, i));
-    }
-    while (prepared.length < QUESTION_COUNT && prepared.length > 0) {
-      prepared.push({ ...prepared[0], id: `repeat-${prepared.length}` });
-    }
-    if (prepared.length < QUESTION_COUNT) {
-      setError('Not enough questions are available for this cure yet.');
-    } else {
-      setQuestions(prepared.slice(0, QUESTION_COUNT));
-    }
-    setLoading(false);
-  }, [monsterId, topic]);
+  }, []);
 
-  // Spark Celebration Trigger
-  useEffect(() => {
-    if (finished && correctCount >= REQUIRED_CORRECT) {
-      setPoofActive(true);
-      setTimeout(() => setPoofActive(false), 1100);
-
-      // Trigger themed healing explosion
-      const chars = ['❤️', '🧪', '✨', '🟢', '🟡', '🛡️'];
-      const colors = ['#5cb87a', '#ffd700', '#ff6b6b', '#fff'];
-
-      // Particle explosion from the center card
-      for (let i = 0; i < 45; i++) {
-        const p = document.createElement('div');
-        p.className = 'cure-particle';
-        p.innerText = chars[Math.floor(Math.random() * chars.length)];
-        p.style.color = colors[Math.floor(Math.random() * colors.length)];
-        
-        const angle = Math.random() * Math.PI * 2;
-        const dist = 80 + Math.random() * 200;
-        const tx = Math.cos(angle) * dist;
-        const ty = Math.sin(angle) * dist;
-        
-        p.style.setProperty('--tx', `${tx}px`);
-        p.style.setProperty('--ty', `${ty}px`);
-        
-        // Spawn around the screen center
-        p.style.left = '50%';
-        p.style.top = '30%';
-
-        document.body.appendChild(p);
-        setTimeout(() => p.remove(), 1200);
-      }
-    }
-  }, [finished, correctCount]);
+  const { questions, error } = useMemo(
+    () => prepareQuestions(monsterId, topic),
+    [monsterId, topic]
+  );
 
   function submit() {
     if (!answer.trim() || feedback || !questions[index]) return;
@@ -297,6 +296,9 @@ export function CureFlow({ monsterId, topic, onComplete, onCancel, onOpenGuidedS
     }
     const success = correctCount >= REQUIRED_CORRECT;
     recordCure(monsterId, { startedAt: Date.now(), success, correctCount });
+    if (success) {
+      triggerCelebration(setPoofActive);
+    }
     setFinished(true);
   }
 
@@ -321,9 +323,8 @@ export function CureFlow({ monsterId, topic, onComplete, onCancel, onOpenGuidedS
 
         <p className="monster-cure-kicker">Cure run · {getMonsterName(monsterId)}</p>
         <h2 className="monster-cure-title">Practice the pattern, not the panic.</h2>
-        {loading && <p>Preparing five questions…</p>}
-        {!loading && error && <><p>{error}</p><div className="monster-cure-actions"><button className="monster-cure-secondary" onClick={onCancel}>Back to Hall</button></div></>}
-        {!loading && !error && !finished && questions[index] && <>
+        {error && <><p>{error}</p><div className="monster-cure-actions"><button className="monster-cure-secondary" onClick={onCancel}>Back to Hall</button></div></>}
+        {!error && !finished && questions[index] && <>
           <div className="monster-cure-progress">Question {index + 1} of {QUESTION_COUNT} · {correctCount} correct</div>
           <div className="monster-cure-track"><span style={{ width: `${((index + 1) / QUESTION_COUNT) * 100}%` }} /></div>
           <div className="monster-cure-question">{questions[index].prompt}</div>
