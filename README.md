@@ -267,11 +267,9 @@ Wrap any `POST *-api/check` call with `{ solve: true }` and the server returns a
 
 ### 🧠 7. Spaced Repetition
 `lib/spacingLadder.js` schedules Concept Playground reviews on a `[1, 3, 7, 14, 30]`-day
-ladder. A review that is passed moves the learner one rung up, a failed one moves them
-one rung down, and the next review is scheduled that many days out.
+ladder. A concept review is treated as having held up at 70% accuracy or better (or explicit review status), and the rung advances or resets accordingly.
 
-This is **not** BKT-driven. `lib/bkt.js` exists but is not yet wired into the session
-flow; see issue #289.
+This is **not** BKT-driven. The spacing ladder is driven by the 70% accuracy threshold; Bayesian Knowledge Tracing (`server/lib/bkt.js`) is used separately by `server/lil/masteryEngine.js` for concept mastery tracking.
 
 ### 🛡️ 8. Proctoring System
 Optional exam-mode supervision with webcam + face-api.js emotion detection, focus / tab-switch event logging, and an admin-only `/api/proctor/sessions` dashboard.
