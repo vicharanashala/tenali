@@ -1,11 +1,9 @@
 'use strict';
 const router = require('express').Router();
 
-function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+const { randomInt, pick, triPick, gcd } = require('../lib/mathHelpers');
 const randInt = randomInt;
 function rand(lo, hi) { return lo + Math.floor(Math.random() * (hi - lo + 1)); }
-function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
-function gcd(a, b) { a = Math.abs(a); b = Math.abs(b); while (b) { const t = b; b = a % b; a = t; } return a; }
 function nCr(n, r) {
   if (r > n || r < 0) return 0;
   if (r === 0 || r === n) return 1;
@@ -27,7 +25,7 @@ function matMul(A, B) {
 }
 function fmtMat(M) { return '[' + M.map(row => row.join(',')).join(';') + ']'; }
 function triRand(lo, hi) { return lo + Math.floor(Math.random() * (hi - lo + 1)); }
-function triPick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
 
 function shuffleArray(arr) {
   const a = arr.slice();
@@ -72,31 +70,31 @@ const generators = {
       const id = Date.now();
 
       if (difficulty === 'easy') {
-        const a = [triRand(-8,8), triRand(-8,8)];
-        const b = [triRand(-8,8), triRand(-8,8)];
-        const ans = [a[0]+b[0], a[1]+b[1]];
+        const a = [triRand(-8, 8), triRand(-8, 8)];
+        const b = [triRand(-8, 8), triRand(-8, 8)];
+        const ans = [a[0] + b[0], a[1] + b[1]];
         const prompt = `a = (${a[0]}, ${a[1]}), b = (${b[0]}, ${b[1]}). Find a + b.`;
         return { id, difficulty, type: 'add', prompt, ansX: ans[0], ansY: ans[1], display: `(${ans[0]}, ${ans[1]})`, answer: `(${ans[0]}, ${ans[1]})` };
       }
       else if (difficulty === 'medium') {
         let k = triRand(-3, 5); if (k === 0) k = 2;
-        const a = [triRand(-6,6), triRand(-6,6)];
-        const ans = [k*a[0], k*a[1]];
+        const a = [triRand(-6, 6), triRand(-6, 6)];
+        const ans = [k * a[0], k * a[1]];
         const prompt = `a = (${a[0]}, ${a[1]}). Find ${k}a.`;
         return { id, difficulty, type: 'scalar', prompt, ansX: ans[0], ansY: ans[1], display: `(${ans[0]}, ${ans[1]})`, answer: `(${ans[0]}, ${ans[1]})` };
       }
       else if (difficulty === 'hard') {
-        const triples = [[3,4,5],[5,12,13],[8,15,17],[6,8,10]];
+        const triples = [[3, 4, 5], [5, 12, 13], [8, 15, 17], [6, 8, 10]];
         const [x, y, mag] = triPick(triples);
-        const sx = triPick([1,-1]); const sy = triPick([1,-1]);
-        const prompt = `Find |v| where v = (${sx*x}, ${sy*y})`;
+        const sx = triPick([1, -1]); const sy = triPick([1, -1]);
+        const prompt = `Find |v| where v = (${sx * x}, ${sy * y})`;
         return { id, difficulty, type: 'magnitude', prompt, answer: mag, display: String(mag) };
       }
       else {
-        const x1 = triRand(-8,8); const y1 = triRand(-8,8);
-        const x2 = triRand(-8,8); const y2 = triRand(-8,8);
+        const x1 = triRand(-8, 8); const y1 = triRand(-8, 8);
+        const x2 = triRand(-8, 8); const y2 = triRand(-8, 8);
         const prompt = `A = (${x1}, ${y1}), B = (${x2}, ${y2}). Find vector AB.`;
-        return { id, difficulty, type: 'position', prompt, ansX: x2-x1, ansY: y2-y1, display: `(${x2-x1}, ${y2-y1})`, answer: `(${x2-x1}, ${y2-y1})` };
+        return { id, difficulty, type: 'position', prompt, ansX: x2 - x1, ansY: y2 - y1, display: `(${x2 - x1}, ${y2 - y1})`, answer: `(${x2 - x1}, ${y2 - y1})` };
       }
     },
     check(body) {
@@ -134,7 +132,7 @@ const generators = {
       else if (difficulty === 'medium') {
         const dx = triRand(-6, 6); const dy = triRand(-6, 6);
         const prompt = `Translate (${x}, ${y}) by vector (${dx}, ${dy})`;
-        return { id, difficulty, type: 'translate', prompt, ansX: x + dx, ansY: y + dy, display: `(${x+dx}, ${y+dy})`, answer: `(${x+dx}, ${y+dy})` };
+        return { id, difficulty, type: 'translate', prompt, ansX: x + dx, ansY: y + dy, display: `(${x + dx}, ${y + dy})`, answer: `(${x + dx}, ${y + dy})` };
       }
       else if (difficulty === 'hard') {
         const angle = triPick([90, 180, 270]);
@@ -169,50 +167,49 @@ const generators = {
       difficulty = difficulty || 'easy';
       const id = Date.now();
       const ri = (lo, hi) => randomInt(lo, hi);
-      const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
       const fv = (...c) => `(${c.join(', ')})`;
       const fm = (m) => `[${m[0][0]},${m[0][1]};${m[1][0]},${m[1][1]}]`;
       const rnd2 = (x) => Math.round(x * 100) / 100;
       let q;
 
       const easyGens = [
-        () => { const u=[ri(-9,9),ri(-9,9)],v=[ri(-9,9),ri(-9,9)],r=[u[0]+v[0],u[1]+v[1]]; return {type:'vec_add',answerType:'vector',prompt:`Find u + v where u = ${fv(...u)} and v = ${fv(...v)}`,answer:fv(...r),display:fv(...r),data:{u,v}}; },
-        () => { const u=[ri(-9,9),ri(-9,9)],v=[ri(-9,9),ri(-9,9)],r=[u[0]-v[0],u[1]-v[1]]; return {type:'vec_sub',answerType:'vector',prompt:`Find u − v where u = ${fv(...u)} and v = ${fv(...v)}`,answer:fv(...r),display:fv(...r),data:{u,v}}; },
-        () => { let k=ri(-5,5); if(k===0)k=2; const v=[ri(-9,9),ri(-9,9)],r=[k*v[0],k*v[1]]; return {type:'vec_scale',answerType:'vector',prompt:`Find ${k}v where v = ${fv(...v)}`,answer:fv(...r),display:fv(...r),data:{k,v}}; },
-        () => { const v=[ri(-9,9),ri(-9,9)],r=[-v[0],-v[1]]; return {type:'vec_neg',answerType:'vector',prompt:`Find −v where v = ${fv(...v)}`,answer:fv(...r),display:fv(...r),data:{v}}; },
-        () => { const v=[ri(1,9),ri(1,9)],m=rnd2(Math.sqrt(v[0]*v[0]+v[1]*v[1])); return {type:'vec_mag',answerType:'scalar',prompt:`Find |v| where v = ${fv(...v)} (round to 2 d.p.)`,answer:String(m),display:String(m),data:{v}}; },
-        () => { const u=[ri(-9,9),ri(-9,9)],v=[ri(-9,9),ri(-9,9)],d=u[0]*v[0]+u[1]*v[1]; return {type:'vec_dot',answerType:'scalar',prompt:`Find u · v where u = ${fv(...u)} and v = ${fv(...v)}`,answer:String(d),display:String(d),data:{u,v}}; },
-        () => { const A=[[ri(-9,9),ri(-9,9)],[ri(-9,9),ri(-9,9)]],B=[[ri(-9,9),ri(-9,9)],[ri(-9,9),ri(-9,9)]],R=[[A[0][0]+B[0][0],A[0][1]+B[0][1]],[A[1][0]+B[1][0],A[1][1]+B[1][1]]]; return {type:'mat_add',answerType:'matrix',prompt:`Find A + B where A = ${fm(A)} and B = ${fm(B)}`,answer:fm(R),display:fm(R),data:{A,B}}; },
-        () => { let k=ri(-5,5); if(k===0)k=2; const A=[[ri(-9,9),ri(-9,9)],[ri(-9,9),ri(-9,9)]],R=[[k*A[0][0],k*A[0][1]],[k*A[1][0],k*A[1][1]]]; return {type:'mat_scale',answerType:'matrix',prompt:`Find ${k}A where A = ${fm(A)}`,answer:fm(R),display:fm(R),data:{k,A}}; },
-        () => { const A=[[ri(-9,9),ri(-9,9)],[ri(-9,9),ri(-9,9)]],det=A[0][0]*A[1][1]-A[0][1]*A[1][0]; return {type:'mat_det2',answerType:'scalar',prompt:`Find det(A) where A = ${fm(A)}`,answer:String(det),display:String(det),data:{A}}; },
-        () => { const A=[[ri(-9,9),ri(-9,9)],[ri(-9,9),ri(-9,9)]],R=[[A[0][0],A[1][0]],[A[0][1],A[1][1]]]; return {type:'mat_transpose',answerType:'matrix',prompt:`Find Aᵀ where A = ${fm(A)}`,answer:fm(R),display:fm(R),data:{A}}; },
-        () => { const A=[ri(-9,9),ri(-9,9)],B=[ri(-9,9),ri(-9,9)],r=[B[0]-A[0],B[1]-A[1]]; return {type:'vec_points',answerType:'vector',prompt:`Find vector AB where A = ${fv(...A)} and B = ${fv(...B)}`,answer:fv(...r),display:fv(...r),data:{A,B}}; },
+        () => { const u = [ri(-9, 9), ri(-9, 9)], v = [ri(-9, 9), ri(-9, 9)], r = [u[0] + v[0], u[1] + v[1]]; return { type: 'vec_add', answerType: 'vector', prompt: `Find u + v where u = ${fv(...u)} and v = ${fv(...v)}`, answer: fv(...r), display: fv(...r), data: { u, v } }; },
+        () => { const u = [ri(-9, 9), ri(-9, 9)], v = [ri(-9, 9), ri(-9, 9)], r = [u[0] - v[0], u[1] - v[1]]; return { type: 'vec_sub', answerType: 'vector', prompt: `Find u − v where u = ${fv(...u)} and v = ${fv(...v)}`, answer: fv(...r), display: fv(...r), data: { u, v } }; },
+        () => { let k = ri(-5, 5); if (k === 0) k = 2; const v = [ri(-9, 9), ri(-9, 9)], r = [k * v[0], k * v[1]]; return { type: 'vec_scale', answerType: 'vector', prompt: `Find ${k}v where v = ${fv(...v)}`, answer: fv(...r), display: fv(...r), data: { k, v } }; },
+        () => { const v = [ri(-9, 9), ri(-9, 9)], r = [-v[0], -v[1]]; return { type: 'vec_neg', answerType: 'vector', prompt: `Find −v where v = ${fv(...v)}`, answer: fv(...r), display: fv(...r), data: { v } }; },
+        () => { const v = [ri(1, 9), ri(1, 9)], m = rnd2(Math.sqrt(v[0] * v[0] + v[1] * v[1])); return { type: 'vec_mag', answerType: 'scalar', prompt: `Find |v| where v = ${fv(...v)} (round to 2 d.p.)`, answer: String(m), display: String(m), data: { v } }; },
+        () => { const u = [ri(-9, 9), ri(-9, 9)], v = [ri(-9, 9), ri(-9, 9)], d = u[0] * v[0] + u[1] * v[1]; return { type: 'vec_dot', answerType: 'scalar', prompt: `Find u · v where u = ${fv(...u)} and v = ${fv(...v)}`, answer: String(d), display: String(d), data: { u, v } }; },
+        () => { const A = [[ri(-9, 9), ri(-9, 9)], [ri(-9, 9), ri(-9, 9)]], B = [[ri(-9, 9), ri(-9, 9)], [ri(-9, 9), ri(-9, 9)]], R = [[A[0][0] + B[0][0], A[0][1] + B[0][1]], [A[1][0] + B[1][0], A[1][1] + B[1][1]]]; return { type: 'mat_add', answerType: 'matrix', prompt: `Find A + B where A = ${fm(A)} and B = ${fm(B)}`, answer: fm(R), display: fm(R), data: { A, B } }; },
+        () => { let k = ri(-5, 5); if (k === 0) k = 2; const A = [[ri(-9, 9), ri(-9, 9)], [ri(-9, 9), ri(-9, 9)]], R = [[k * A[0][0], k * A[0][1]], [k * A[1][0], k * A[1][1]]]; return { type: 'mat_scale', answerType: 'matrix', prompt: `Find ${k}A where A = ${fm(A)}`, answer: fm(R), display: fm(R), data: { k, A } }; },
+        () => { const A = [[ri(-9, 9), ri(-9, 9)], [ri(-9, 9), ri(-9, 9)]], det = A[0][0] * A[1][1] - A[0][1] * A[1][0]; return { type: 'mat_det2', answerType: 'scalar', prompt: `Find det(A) where A = ${fm(A)}`, answer: String(det), display: String(det), data: { A } }; },
+        () => { const A = [[ri(-9, 9), ri(-9, 9)], [ri(-9, 9), ri(-9, 9)]], R = [[A[0][0], A[1][0]], [A[0][1], A[1][1]]]; return { type: 'mat_transpose', answerType: 'matrix', prompt: `Find Aᵀ where A = ${fm(A)}`, answer: fm(R), display: fm(R), data: { A } }; },
+        () => { const A = [ri(-9, 9), ri(-9, 9)], B = [ri(-9, 9), ri(-9, 9)], r = [B[0] - A[0], B[1] - A[1]]; return { type: 'vec_points', answerType: 'vector', prompt: `Find vector AB where A = ${fv(...A)} and B = ${fv(...B)}`, answer: fv(...r), display: fv(...r), data: { A, B } }; },
       ];
 
       const mediumGens = [
-        () => { const A=[[ri(-5,5),ri(-5,5)],[ri(-5,5),ri(-5,5)]],B=[[ri(-5,5),ri(-5,5)],[ri(-5,5),ri(-5,5)]],R=[[A[0][0]*B[0][0]+A[0][1]*B[1][0],A[0][0]*B[0][1]+A[0][1]*B[1][1]],[A[1][0]*B[0][0]+A[1][1]*B[1][0],A[1][0]*B[0][1]+A[1][1]*B[1][1]]]; return {type:'mat_mul2',answerType:'matrix',prompt:`Find AB where A = ${fm(A)} and B = ${fm(B)}`,answer:fm(R),display:fm(R),data:{A,B}}; },
-        () => { const x=ri(-5,5),y=ri(-5,5); const a1=ri(1,5),b1=ri(1,5),c1=a1*x+b1*y; let a2,b2,c2; do { a2=ri(1,5); b2=ri(1,5); } while(a1*b2===a2*b1); c2=a2*x+b2*y; return {type:'solve_2x2',answerType:'scalar',prompt:`Solve: ${a1}x + ${b1}y = ${c1} and ${a2}x + ${b2}y = ${c2}. Find x.`,answer:String(x),display:String(x),data:{a1,b1,c1,a2,b2,c2,x,y}}; },
-        () => { const x=ri(-5,5),y=ri(-5,5); const a1=ri(1,5),b1=ri(1,5),c1=a1*x+b1*y; let a2,b2,c2; do { a2=ri(1,5); b2=ri(1,5); } while(a1*b2===a2*b1); c2=a2*x+b2*y; return {type:'solve_2x2_y',answerType:'scalar',prompt:`Solve: ${a1}x + ${b1}y = ${c1} and ${a2}x + ${b2}y = ${c2}. Find y.`,answer:String(y),display:String(y),data:{a1,b1,c1,a2,b2,c2,x,y}}; },
-        () => { const A=[[ri(-9,9),ri(-9,9)],[ri(-9,9),ri(-9,9)]],t=A[0][0]+A[1][1]; return {type:'mat_trace',answerType:'scalar',prompt:`Find tr(A) where A = ${fm(A)}`,answer:String(t),display:String(t),data:{A}}; },
-        () => { const u=[ri(-9,9),ri(-9,9)],v=[ri(-9,9),ri(-9,9)],c=u[0]*v[1]-u[1]*v[0]; return {type:'vec_cross',answerType:'scalar',prompt:`Find u × v where u = ${fv(...u)} and v = ${fv(...v)} (2D cross product: u₁v₂ − u₂v₁)`,answer:String(c),display:String(c),data:{u,v}}; },
-        () => { const A=[[ri(-5,5),ri(-5,5)],[ri(-5,5),ri(-5,5)]],v=[ri(-5,5),ri(-5,5)],r=[A[0][0]*v[0]+A[0][1]*v[1],A[1][0]*v[0]+A[1][1]*v[1]]; return {type:'mat_vec',answerType:'vector',prompt:`Find Av where A = ${fm(A)} and v = ${fv(...v)}`,answer:fv(...r),display:fv(...r),data:{A,v}}; },
-        () => { const u=[ri(1,9),ri(1,9)],v=[ri(1,9),ri(1,9)]; const dot=u[0]*v[0]+u[1]*v[1]; const magU=Math.sqrt(u[0]*u[0]+u[1]*u[1]),magV=Math.sqrt(v[0]*v[0]+v[1]*v[1]); const cosA=Math.max(-1,Math.min(1,dot/(magU*magV))); const angle=Math.round(Math.acos(cosA)*180/Math.PI); return {type:'vec_angle',answerType:'scalar',prompt:`Find the angle (nearest degree) between u = ${fv(...u)} and v = ${fv(...v)}`,answer:String(angle),display:String(angle)+'°',data:{u,v}}; },
-        () => { const A=[[ri(-5,5),ri(-5,5)],[ri(-5,5),ri(-5,5)]]; const det=A[0][0]*A[1][1]-A[0][1]*A[1][0]; const rank=(det!==0)?2:((A[0][0]!==0||A[0][1]!==0||A[1][0]!==0||A[1][1]!==0)?1:0); return {type:'mat_rank',answerType:'scalar',prompt:`Find rank(A) where A = ${fm(A)}`,answer:String(rank),display:String(rank),data:{A}}; },
-        () => { const u=[ri(1,9),ri(1,9)],v=[ri(1,9),ri(1,9)]; const dot=u[0]*v[0]+u[1]*v[1]; const magV=Math.sqrt(v[0]*v[0]+v[1]*v[1]); const proj=rnd2(dot/magV); return {type:'vec_proj',answerType:'scalar',prompt:`Find the scalar projection of u onto v where u = ${fv(...u)} and v = ${fv(...v)} (round to 2 d.p.)`,answer:String(proj),display:String(proj),data:{u,v}}; },
-        () => { let v=[ri(1,9),ri(1,9)]; if(Math.random()<0.5)v[0]=-v[0]; if(Math.random()<0.5)v[1]=-v[1]; const mag=Math.sqrt(v[0]*v[0]+v[1]*v[1]); const u1=rnd2(v[0]/mag); return {type:'vec_unit',answerType:'scalar',prompt:`Find the x-component of the unit vector in the direction of v = ${fv(...v)} (round to 2 d.p.)`,answer:String(u1),display:String(u1),data:{v}}; },
+        () => { const A = [[ri(-5, 5), ri(-5, 5)], [ri(-5, 5), ri(-5, 5)]], B = [[ri(-5, 5), ri(-5, 5)], [ri(-5, 5), ri(-5, 5)]], R = [[A[0][0] * B[0][0] + A[0][1] * B[1][0], A[0][0] * B[0][1] + A[0][1] * B[1][1]], [A[1][0] * B[0][0] + A[1][1] * B[1][0], A[1][0] * B[0][1] + A[1][1] * B[1][1]]]; return { type: 'mat_mul2', answerType: 'matrix', prompt: `Find AB where A = ${fm(A)} and B = ${fm(B)}`, answer: fm(R), display: fm(R), data: { A, B } }; },
+        () => { const x = ri(-5, 5), y = ri(-5, 5); const a1 = ri(1, 5), b1 = ri(1, 5), c1 = a1 * x + b1 * y; let a2, b2, c2; do { a2 = ri(1, 5); b2 = ri(1, 5); } while (a1 * b2 === a2 * b1); c2 = a2 * x + b2 * y; return { type: 'solve_2x2', answerType: 'scalar', prompt: `Solve: ${a1}x + ${b1}y = ${c1} and ${a2}x + ${b2}y = ${c2}. Find x.`, answer: String(x), display: String(x), data: { a1, b1, c1, a2, b2, c2, x, y } }; },
+        () => { const x = ri(-5, 5), y = ri(-5, 5); const a1 = ri(1, 5), b1 = ri(1, 5), c1 = a1 * x + b1 * y; let a2, b2, c2; do { a2 = ri(1, 5); b2 = ri(1, 5); } while (a1 * b2 === a2 * b1); c2 = a2 * x + b2 * y; return { type: 'solve_2x2_y', answerType: 'scalar', prompt: `Solve: ${a1}x + ${b1}y = ${c1} and ${a2}x + ${b2}y = ${c2}. Find y.`, answer: String(y), display: String(y), data: { a1, b1, c1, a2, b2, c2, x, y } }; },
+        () => { const A = [[ri(-9, 9), ri(-9, 9)], [ri(-9, 9), ri(-9, 9)]], t = A[0][0] + A[1][1]; return { type: 'mat_trace', answerType: 'scalar', prompt: `Find tr(A) where A = ${fm(A)}`, answer: String(t), display: String(t), data: { A } }; },
+        () => { const u = [ri(-9, 9), ri(-9, 9)], v = [ri(-9, 9), ri(-9, 9)], c = u[0] * v[1] - u[1] * v[0]; return { type: 'vec_cross', answerType: 'scalar', prompt: `Find u × v where u = ${fv(...u)} and v = ${fv(...v)} (2D cross product: u₁v₂ − u₂v₁)`, answer: String(c), display: String(c), data: { u, v } }; },
+        () => { const A = [[ri(-5, 5), ri(-5, 5)], [ri(-5, 5), ri(-5, 5)]], v = [ri(-5, 5), ri(-5, 5)], r = [A[0][0] * v[0] + A[0][1] * v[1], A[1][0] * v[0] + A[1][1] * v[1]]; return { type: 'mat_vec', answerType: 'vector', prompt: `Find Av where A = ${fm(A)} and v = ${fv(...v)}`, answer: fv(...r), display: fv(...r), data: { A, v } }; },
+        () => { const u = [ri(1, 9), ri(1, 9)], v = [ri(1, 9), ri(1, 9)]; const dot = u[0] * v[0] + u[1] * v[1]; const magU = Math.sqrt(u[0] * u[0] + u[1] * u[1]), magV = Math.sqrt(v[0] * v[0] + v[1] * v[1]); const cosA = Math.max(-1, Math.min(1, dot / (magU * magV))); const angle = Math.round(Math.acos(cosA) * 180 / Math.PI); return { type: 'vec_angle', answerType: 'scalar', prompt: `Find the angle (nearest degree) between u = ${fv(...u)} and v = ${fv(...v)}`, answer: String(angle), display: String(angle) + '°', data: { u, v } }; },
+        () => { const A = [[ri(-5, 5), ri(-5, 5)], [ri(-5, 5), ri(-5, 5)]]; const det = A[0][0] * A[1][1] - A[0][1] * A[1][0]; const rank = (det !== 0) ? 2 : ((A[0][0] !== 0 || A[0][1] !== 0 || A[1][0] !== 0 || A[1][1] !== 0) ? 1 : 0); return { type: 'mat_rank', answerType: 'scalar', prompt: `Find rank(A) where A = ${fm(A)}`, answer: String(rank), display: String(rank), data: { A } }; },
+        () => { const u = [ri(1, 9), ri(1, 9)], v = [ri(1, 9), ri(1, 9)]; const dot = u[0] * v[0] + u[1] * v[1]; const magV = Math.sqrt(v[0] * v[0] + v[1] * v[1]); const proj = rnd2(dot / magV); return { type: 'vec_proj', answerType: 'scalar', prompt: `Find the scalar projection of u onto v where u = ${fv(...u)} and v = ${fv(...v)} (round to 2 d.p.)`, answer: String(proj), display: String(proj), data: { u, v } }; },
+        () => { let v = [ri(1, 9), ri(1, 9)]; if (Math.random() < 0.5) v[0] = -v[0]; if (Math.random() < 0.5) v[1] = -v[1]; const mag = Math.sqrt(v[0] * v[0] + v[1] * v[1]); const u1 = rnd2(v[0] / mag); return { type: 'vec_unit', answerType: 'scalar', prompt: `Find the x-component of the unit vector in the direction of v = ${fv(...v)} (round to 2 d.p.)`, answer: String(u1), display: String(u1), data: { v } }; },
       ];
 
       const hardGens = [
-        () => { const M=Array.from({length:3},()=>[ri(-5,5),ri(-5,5),ri(-5,5)]); const det=M[0][0]*(M[1][1]*M[2][2]-M[1][2]*M[2][1])-M[0][1]*(M[1][0]*M[2][2]-M[1][2]*M[2][0])+M[0][2]*(M[1][0]*M[2][1]-M[1][1]*M[2][0]); const fmt=(m)=>`[${m[0].join(',')};${m[1].join(',')};${m[2].join(',')}]`; return {type:'det_3x3',answerType:'scalar',prompt:`Find det(A) where A = ${fmt(M)}`,answer:String(det),display:String(det),data:{M}}; },
-        () => { const A=[[ri(-5,5),ri(-5,5)],[ri(-5,5),ri(-5,5)]]; const t=A[0][0]+A[1][1]; return {type:'eigen_sum',answerType:'scalar',prompt:`Find the sum of eigenvalues of A = ${fm(A)} (hint: sum = trace)`,answer:String(t),display:String(t),data:{A}}; },
-        () => { const A=[[ri(-5,5),ri(-5,5)],[ri(-5,5),ri(-5,5)]]; const det=A[0][0]*A[1][1]-A[0][1]*A[1][0]; return {type:'eigen_prod',answerType:'scalar',prompt:`Find the product of eigenvalues of A = ${fm(A)} (hint: product = det)`,answer:String(det),display:String(det),data:{A}}; },
-        () => { const x=ri(-3,3),y=ri(-3,3),z=ri(-3,3); const a1=ri(1,3),b1=ri(1,3),c1=ri(1,3),d1=a1*x+b1*y+c1*z; const a2=ri(1,3),b2=ri(1,3),c2=ri(1,3),d2=a2*x+b2*y+c2*z; const a3=ri(1,3),b3=ri(1,3),c3=ri(1,3),d3=a3*x+b3*y+c3*z; return {type:'solve_3x3',answerType:'scalar',prompt:`Solve: ${a1}x+${b1}y+${c1}z=${d1}, ${a2}x+${b2}y+${c2}z=${d2}, ${a3}x+${b3}y+${c3}z=${d3}. Find x.`,answer:String(x),display:String(x),data:{a1,b1,c1,d1,a2,b2,c2,d2,a3,b3,c3,d3,x,y,z}}; },
-        () => { const A=[[ri(-5,5),ri(-5,5)],[ri(-5,5),ri(-5,5)]]; const det=A[0][0]*A[1][1]-A[0][1]*A[1][0]; return {type:'char_const',answerType:'scalar',prompt:`Find the constant term of the characteristic polynomial of A = ${fm(A)} (hint: = det(A))`,answer:String(det),display:String(det),data:{A}}; },
-        () => { const A=[[ri(-5,5),ri(-5,5)],[ri(-5,5),ri(-5,5)]]; const A2=[[A[0][0]*A[0][0]+A[0][1]*A[1][0],A[0][0]*A[0][1]+A[0][1]*A[1][1]],[A[1][0]*A[0][0]+A[1][1]*A[1][0],A[1][0]*A[0][1]+A[1][1]*A[1][1]]]; const t=A2[0][0]+A2[1][1]; return {type:'mat_sq_trace',answerType:'scalar',prompt:`Find tr(A²) where A = ${fm(A)}`,answer:String(t),display:String(t),data:{A}}; },
-        () => { const A=[[ri(-5,5),ri(-5,5)],[ri(-5,5),ri(-5,5)]]; const det=A[0][0]*A[1][1]-A[0][1]*A[1][0]; return {type:'adj_det',answerType:'scalar',prompt:`Find det(adj(A)) where A = ${fm(A)} (hint: for 2x2, det(adj(A)) = det(A))`,answer:String(det),display:String(det),data:{A}}; },
-        () => { const A=[[ri(-5,5),ri(-5,5)],[ri(-5,5),ri(-5,5)]]; const det=A[0][0]*A[1][1]-A[0][1]*A[1][0]; const rank=(det!==0)?2:((A[0][0]!==0||A[0][1]!==0||A[1][0]!==0||A[1][1]!==0)?1:0); const nullity=2-rank; return {type:'nullity',answerType:'scalar',prompt:`Find the nullity of A = ${fm(A)}`,answer:String(nullity),display:String(nullity),data:{A}}; },
-        () => { const x=ri(-5,5),y=ri(-5,5); const a1=ri(1,5),b1=ri(1,5),c1=a1*x+b1*y; let a2,b2,c2; do{a2=ri(1,5);b2=ri(1,5);}while(a1*b2===a2*b1); c2=a2*x+b2*y; const detD=a1*b2-a2*b1; const detDx=c1*b2-c2*b1; const xC=rnd2(detDx/detD); return {type:'cramer_x',answerType:'scalar',prompt:`Use Cramer's rule to find x: ${a1}x+${b1}y=${c1}, ${a2}x+${b2}y=${c2}`,answer:String(xC),display:String(xC),data:{a1,b1,c1,a2,b2,c2}}; },
-        () => { const A=[[ri(-3,3),ri(-3,3)],[ri(-3,3),ri(-3,3)]]; const A2=[[A[0][0]*A[0][0]+A[0][1]*A[1][0],A[0][0]*A[0][1]+A[0][1]*A[1][1]],[A[1][0]*A[0][0]+A[1][1]*A[1][0],A[1][0]*A[0][1]+A[1][1]*A[1][1]]]; const A3=[[A2[0][0]*A[0][0]+A2[0][1]*A[1][0],A2[0][0]*A[0][1]+A2[0][1]*A[1][1]],[A2[1][0]*A[0][0]+A2[1][1]*A[1][0],A2[1][0]*A[0][1]+A2[1][1]*A[1][1]]]; const t=A3[0][0]+A3[1][1]; return {type:'mat_cube_trace',answerType:'scalar',prompt:`Find tr(A3) where A = ${fm(A)}`,answer:String(t),display:String(t),data:{A}}; },
+        () => { const M = Array.from({ length: 3 }, () => [ri(-5, 5), ri(-5, 5), ri(-5, 5)]); const det = M[0][0] * (M[1][1] * M[2][2] - M[1][2] * M[2][1]) - M[0][1] * (M[1][0] * M[2][2] - M[1][2] * M[2][0]) + M[0][2] * (M[1][0] * M[2][1] - M[1][1] * M[2][0]); const fmt = (m) => `[${m[0].join(',')};${m[1].join(',')};${m[2].join(',')}]`; return { type: 'det_3x3', answerType: 'scalar', prompt: `Find det(A) where A = ${fmt(M)}`, answer: String(det), display: String(det), data: { M } }; },
+        () => { const A = [[ri(-5, 5), ri(-5, 5)], [ri(-5, 5), ri(-5, 5)]]; const t = A[0][0] + A[1][1]; return { type: 'eigen_sum', answerType: 'scalar', prompt: `Find the sum of eigenvalues of A = ${fm(A)} (hint: sum = trace)`, answer: String(t), display: String(t), data: { A } }; },
+        () => { const A = [[ri(-5, 5), ri(-5, 5)], [ri(-5, 5), ri(-5, 5)]]; const det = A[0][0] * A[1][1] - A[0][1] * A[1][0]; return { type: 'eigen_prod', answerType: 'scalar', prompt: `Find the product of eigenvalues of A = ${fm(A)} (hint: product = det)`, answer: String(det), display: String(det), data: { A } }; },
+        () => { const x = ri(-3, 3), y = ri(-3, 3), z = ri(-3, 3); const a1 = ri(1, 3), b1 = ri(1, 3), c1 = ri(1, 3), d1 = a1 * x + b1 * y + c1 * z; const a2 = ri(1, 3), b2 = ri(1, 3), c2 = ri(1, 3), d2 = a2 * x + b2 * y + c2 * z; const a3 = ri(1, 3), b3 = ri(1, 3), c3 = ri(1, 3), d3 = a3 * x + b3 * y + c3 * z; return { type: 'solve_3x3', answerType: 'scalar', prompt: `Solve: ${a1}x+${b1}y+${c1}z=${d1}, ${a2}x+${b2}y+${c2}z=${d2}, ${a3}x+${b3}y+${c3}z=${d3}. Find x.`, answer: String(x), display: String(x), data: { a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3, x, y, z } }; },
+        () => { const A = [[ri(-5, 5), ri(-5, 5)], [ri(-5, 5), ri(-5, 5)]]; const det = A[0][0] * A[1][1] - A[0][1] * A[1][0]; return { type: 'char_const', answerType: 'scalar', prompt: `Find the constant term of the characteristic polynomial of A = ${fm(A)} (hint: = det(A))`, answer: String(det), display: String(det), data: { A } }; },
+        () => { const A = [[ri(-5, 5), ri(-5, 5)], [ri(-5, 5), ri(-5, 5)]]; const A2 = [[A[0][0] * A[0][0] + A[0][1] * A[1][0], A[0][0] * A[0][1] + A[0][1] * A[1][1]], [A[1][0] * A[0][0] + A[1][1] * A[1][0], A[1][0] * A[0][1] + A[1][1] * A[1][1]]]; const t = A2[0][0] + A2[1][1]; return { type: 'mat_sq_trace', answerType: 'scalar', prompt: `Find tr(A²) where A = ${fm(A)}`, answer: String(t), display: String(t), data: { A } }; },
+        () => { const A = [[ri(-5, 5), ri(-5, 5)], [ri(-5, 5), ri(-5, 5)]]; const det = A[0][0] * A[1][1] - A[0][1] * A[1][0]; return { type: 'adj_det', answerType: 'scalar', prompt: `Find det(adj(A)) where A = ${fm(A)} (hint: for 2x2, det(adj(A)) = det(A))`, answer: String(det), display: String(det), data: { A } }; },
+        () => { const A = [[ri(-5, 5), ri(-5, 5)], [ri(-5, 5), ri(-5, 5)]]; const det = A[0][0] * A[1][1] - A[0][1] * A[1][0]; const rank = (det !== 0) ? 2 : ((A[0][0] !== 0 || A[0][1] !== 0 || A[1][0] !== 0 || A[1][1] !== 0) ? 1 : 0); const nullity = 2 - rank; return { type: 'nullity', answerType: 'scalar', prompt: `Find the nullity of A = ${fm(A)}`, answer: String(nullity), display: String(nullity), data: { A } }; },
+        () => { const x = ri(-5, 5), y = ri(-5, 5); const a1 = ri(1, 5), b1 = ri(1, 5), c1 = a1 * x + b1 * y; let a2, b2, c2; do { a2 = ri(1, 5); b2 = ri(1, 5); } while (a1 * b2 === a2 * b1); c2 = a2 * x + b2 * y; const detD = a1 * b2 - a2 * b1; const detDx = c1 * b2 - c2 * b1; const xC = rnd2(detDx / detD); return { type: 'cramer_x', answerType: 'scalar', prompt: `Use Cramer's rule to find x: ${a1}x+${b1}y=${c1}, ${a2}x+${b2}y=${c2}`, answer: String(xC), display: String(xC), data: { a1, b1, c1, a2, b2, c2 } }; },
+        () => { const A = [[ri(-3, 3), ri(-3, 3)], [ri(-3, 3), ri(-3, 3)]]; const A2 = [[A[0][0] * A[0][0] + A[0][1] * A[1][0], A[0][0] * A[0][1] + A[0][1] * A[1][1]], [A[1][0] * A[0][0] + A[1][1] * A[1][0], A[1][0] * A[0][1] + A[1][1] * A[1][1]]]; const A3 = [[A2[0][0] * A[0][0] + A2[0][1] * A[1][0], A2[0][0] * A[0][1] + A2[0][1] * A[1][1]], [A2[1][0] * A[0][0] + A2[1][1] * A[1][0], A2[1][0] * A[0][1] + A2[1][1] * A[1][1]]]; const t = A3[0][0] + A3[1][1]; return { type: 'mat_cube_trace', answerType: 'scalar', prompt: `Find tr(A3) where A = ${fm(A)}`, answer: String(t), display: String(t), data: { A } }; },
       ];
 
       if (difficulty === 'easy') {
@@ -238,7 +235,7 @@ const generators = {
       } else if (answerType === 'vector') {
         const m = n.match(/\(?([-\d.]+),([-\d.]+)\)?/);
         const e = norm(expected).match(/\(?([-\d.]+),([-\d.]+)\)?/);
-        correct = m && e && Math.abs(parseFloat(m[1])-parseFloat(e[1])) < 0.01 && Math.abs(parseFloat(m[2])-parseFloat(e[2])) < 0.01;
+        correct = m && e && Math.abs(parseFloat(m[1]) - parseFloat(e[1])) < 0.01 && Math.abs(parseFloat(m[2]) - parseFloat(e[2])) < 0.01;
       } else if (answerType === 'matrix') {
         const parseMat = (s) => {
           const cleaned = s.replace(/[\[\]]/g, '');
@@ -251,7 +248,7 @@ const generators = {
         };
         const um = parseMat(n);
         const em = parseMat(norm(expected));
-        correct = um && em && um[0][0]===em[0][0] && um[0][1]===em[0][1] && um[1][0]===em[1][0] && um[1][1]===em[1][1];
+        correct = um && em && um[0][0] === em[0][0] && um[0][1] === em[0][1] && um[1][0] === em[1][0] && um[1][1] === em[1][1];
       }
       return { correct, display: expected, message: correct ? 'Correct!' : 'Incorrect' };
     },
@@ -262,27 +259,27 @@ const generators = {
       const diff = difficulty || 'easy';
       const id = Date.now();
       if (diff === 'easy') {
-        const A = [[rand(-5,9), rand(-5,9)], [rand(-5,9), rand(-5,9)]];
-        const B = [[rand(-5,9), rand(-5,9)], [rand(-5,9), rand(-5,9)]];
-        const R = [[A[0][0]+B[0][0], A[0][1]+B[0][1]], [A[1][0]+B[1][0], A[1][1]+B[1][1]]];
+        const A = [[rand(-5, 9), rand(-5, 9)], [rand(-5, 9), rand(-5, 9)]];
+        const B = [[rand(-5, 9), rand(-5, 9)], [rand(-5, 9), rand(-5, 9)]];
+        const R = [[A[0][0] + B[0][0], A[0][1] + B[0][1]], [A[1][0] + B[1][0], A[1][1] + B[1][1]]];
         const fmtM = (m) => `[${m[0][0]},${m[0][1]};${m[1][0]},${m[1][1]}]`;
         return { id, difficulty: diff, type: 'add', prompt: `A = ${fmtM(A)}, B = ${fmtM(B)}. Find A + B.`, answer: R, display: fmtM(R) };
       } else if (diff === 'medium') {
         let k = rand(-3, 5); if (k === 0) k = 2;
-        const A = [[rand(-5,9), rand(-5,9)], [rand(-5,9), rand(-5,9)]];
-        const R = [[k*A[0][0], k*A[0][1]], [k*A[1][0], k*A[1][1]]];
+        const A = [[rand(-5, 9), rand(-5, 9)], [rand(-5, 9), rand(-5, 9)]];
+        const R = [[k * A[0][0], k * A[0][1]], [k * A[1][0], k * A[1][1]]];
         const fmtM = (m) => `[${m[0][0]},${m[0][1]};${m[1][0]},${m[1][1]}]`;
         return { id, difficulty: diff, type: 'scalar', prompt: `A = ${fmtM(A)}. Find ${k}A.`, answer: R, display: fmtM(R) };
       } else if (diff === 'hard') {
-        const a = rand(-5,8); const b = rand(-5,8); const c = rand(-5,8); const d = rand(-5,8);
+        const a = rand(-5, 8); const b = rand(-5, 8); const c = rand(-5, 8); const d = rand(-5, 8);
         const det = a * d - b * c;
         return { id, difficulty: diff, type: 'determinant', prompt: `Find the determinant of [${a},${b};${c},${d}]`, answer: det, display: String(det) };
       } else {
-        const A = [[rand(-3,5), rand(-3,5)], [rand(-3,5), rand(-3,5)]];
-        const B = [[rand(-3,5), rand(-3,5)], [rand(-3,5), rand(-3,5)]];
+        const A = [[rand(-3, 5), rand(-3, 5)], [rand(-3, 5), rand(-3, 5)]];
+        const B = [[rand(-3, 5), rand(-3, 5)], [rand(-3, 5), rand(-3, 5)]];
         const R = [
-          [A[0][0]*B[0][0]+A[0][1]*B[1][0], A[0][0]*B[0][1]+A[0][1]*B[1][1]],
-          [A[1][0]*B[0][0]+A[1][1]*B[1][0], A[1][0]*B[0][1]+A[1][1]*B[1][1]]
+          [A[0][0] * B[0][0] + A[0][1] * B[1][0], A[0][0] * B[0][1] + A[0][1] * B[1][1]],
+          [A[1][0] * B[0][0] + A[1][1] * B[1][0], A[1][0] * B[0][1] + A[1][1] * B[1][1]]
         ];
         const fmtM = (m) => `[${m[0][0]},${m[0][1]};${m[1][0]},${m[1][1]}]`;
         return { id, difficulty: diff, type: 'multiply', prompt: `A = ${fmtM(A)}, B = ${fmtM(B)}. Find AB.`, answer: R, display: fmtM(R) };
@@ -348,7 +345,7 @@ const generators = {
         const sig = randInt(11, 99) / 10;
         const exp = randInt(2, 7) * (Math.random() < 0.5 ? 1 : -1);
         const val = sig * Math.pow(10, exp);
-        prompt = `Write ${exp > 0 ? val.toLocaleString('en-US', {useGrouping: false}) : val.toFixed(Math.abs(exp) + 1)} in standard form.`;
+        prompt = `Write ${exp > 0 ? val.toLocaleString('en-US', { useGrouping: false }) : val.toFixed(Math.abs(exp) + 1)} in standard form.`;
         answer = `${sig} × 10^${exp}`; display = answer;
       } else if (diff === 'medium') {
         const a = randInt(11, 49) / 10; const ea = randInt(2, 5);
@@ -463,16 +460,16 @@ const generators = {
       const id = Date.now();
       if (diff === 'easy') {
         const a = [pos1d(), pos1d()]; const b = [pos1d(), pos1d()];
-        const dot = a[0]*b[0] + a[1]*b[1];
+        const dot = a[0] * b[0] + a[1] * b[1];
         return { id, difficulty: diff, type: 'dot2d', prompt: 'Find the dot product', vecA: a, vecB: b, answer: dot, display: String(dot) };
       } else if (diff === 'medium') {
         if (Math.random() < 0.5) {
           const a = [pos1d(), pos1d()]; const b = [pos1d(), pos1d()];
-          const dot = a[0]*b[0] + a[1]*b[1];
+          const dot = a[0] * b[0] + a[1] * b[1];
           return { id, difficulty: diff, type: 'dot2d', prompt: 'Find the dot product', vecA: a, vecB: b, answer: dot, display: String(dot) };
         } else {
           const a = [pos1d(), pos1d(), pos1d()]; const b = [pos1d(), pos1d(), pos1d()];
-          const dot = a[0]*b[0] + a[1]*b[1] + a[2]*b[2];
+          const dot = a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
           return { id, difficulty: diff, type: 'dot3d', prompt: 'Find the dot product', vecA: a, vecB: b, answer: dot, display: String(dot) };
         }
       } else if (diff === 'hard') {
@@ -493,7 +490,7 @@ const generators = {
         const C = matMul(A, B);
         const allPos = [];
         for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) allPos.push([i, j]);
-        for (let i = allPos.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [allPos[i], allPos[j]] = [allPos[j], allPos[i]]; }
+        for (let i = allPos.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[allPos[i], allPos[j]] = [allPos[j], allPos[i]]; }
         const blanks = allPos.slice(0, 4).sort((a, b) => a[0] !== b[0] ? a[0] - b[0] : a[1] - b[1]);
         const missingValues = blanks.map(([r, c]) => C[r][c]);
         const Cdisplay = C.map(row => [...row]);
@@ -546,7 +543,7 @@ const generators = {
         const x2 = randomInt(-5, 5); const y2 = randomInt(-5, 5);
         const t = randomInt(1, 3) / randomInt(1, 3);
         const px = (t * x2 + x1) / (t + 1); const py = (t * y2 + y1) / (t + 1);
-        return { id, difficulty: diff, prompt: `Point (${px.toFixed(1)},${py.toFixed(1)}) divides (${x1},${y1}) and (${x2},${y2}). Find ratio m:n`, answer: t, display: `1:${(1/t).toFixed(2)}` };
+        return { id, difficulty: diff, prompt: `Point (${px.toFixed(1)},${py.toFixed(1)}) divides (${x1},${y1}) and (${x2},${y2}). Find ratio m:n`, answer: t, display: `1:${(1 / t).toFixed(2)}` };
       } else {
         const x1 = randomInt(-5, 5); const y1 = randomInt(-5, 5);
         const x2 = randomInt(-5, 5); const y2 = randomInt(-5, 5);
@@ -561,7 +558,7 @@ const generators = {
       if (Array.isArray(answer)) {
         const parts = userStr.split(',').map(p => parseFloat(p.trim()));
         const correct = parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1]) &&
-                        Math.abs(parts[0] - answer[0]) < 0.2 && Math.abs(parts[1] - answer[1]) < 0.2;
+          Math.abs(parts[0] - answer[0]) < 0.2 && Math.abs(parts[1] - answer[1]) < 0.2;
         return { correct, display, message: correct ? 'Correct!' : 'Incorrect' };
       } else {
         const userNum = parseFloat(userStr);
@@ -587,7 +584,7 @@ const generators = {
         return { id, difficulty: diff, prompt: `Maximize Z = ${a}x + ${b}y at vertices ${JSON.stringify(vertices)}`, answer: maxVal, display: String(maxVal) };
       } else if (diff === 'hard') {
         const a = randomInt(1, 3); const b = randomInt(1, 3); const c1 = randomInt(4, 8); const c2 = randomInt(4, 8);
-        const corners = [[0, c1], [0, c2], [c1, 0], [c2/2, 0]].filter(p => p[0] >= 0 && p[1] >= 0);
+        const corners = [[0, c1], [0, c2], [c1, 0], [c2 / 2, 0]].filter(p => p[0] >= 0 && p[1] >= 0);
         let minVal = Infinity;
         corners.forEach(([x, y]) => { if (x + y >= c1 && 2 * x + y >= c2) minVal = Math.min(minVal, a * x + b * y); });
         const answer = minVal < Infinity ? minVal : 0;

@@ -2,15 +2,8 @@
 const router = require('express').Router();
 const banks = require('../lib/question-banks');
 
-function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+const { randomInt, simplifyFraction, triPick, setPick, gcd, lcm } = require('../lib/mathHelpers');
 const randInt = randomInt;
-function triPick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
-
-function simplifyFraction(num, den) {
-  if (den < 0) { num = -num; den = -den; }
-  const g = gcd(Math.abs(num), den);
-  return { num: num / g, den: den / g };
-}
 
 function toMixed(num, den) {
   const s = simplifyFraction(num, den);
@@ -364,9 +357,9 @@ function indicesgymQuestion(difficulty) {
   };
 
   const laws = (difficulty === 'easy') ? ['product', 'quotient']
-              : (difficulty === 'medium') ? ['product', 'quotient', 'power']
-              : (difficulty === 'hard') ? ['product', 'quotient', 'power', 'mixed', 'chain']
-              : ['power', 'mixed', 'chain', 'powerchain'];
+    : (difficulty === 'medium') ? ['product', 'quotient', 'power']
+      : (difficulty === 'hard') ? ['product', 'quotient', 'power', 'mixed', 'chain']
+        : ['power', 'mixed', 'chain', 'powerchain'];
   const law = laws[randomInt(0, laws.length - 1)];
 
   let prompt, correctText, distractors;
@@ -464,10 +457,10 @@ function polygymQuestion(difficulty) {
   const kinds = (difficulty === 'easy')
     ? ['intMul', 'twoDigAdd', 'intMul', 'twoDigAdd']
     : (difficulty === 'medium')
-    ? ['intTimesMono', 'monoAdd', 'intTimesMono', 'monoAdd', 'intMul']
-    : (difficulty === 'hard')
-    ? ['monoTimesMono', 'monoTimesMonoXY', 'monoBigAdd', 'monoTimesMono']
-    : ['monoSquare', 'monoTimesMonoXY', 'collectLikeTerms', 'monoSquare'];
+      ? ['intTimesMono', 'monoAdd', 'intTimesMono', 'monoAdd', 'intMul']
+      : (difficulty === 'hard')
+        ? ['monoTimesMono', 'monoTimesMonoXY', 'monoBigAdd', 'monoTimesMono']
+        : ['monoSquare', 'monoTimesMonoXY', 'collectLikeTerms', 'monoSquare'];
   const kind = kinds[randomInt(0, kinds.length - 1)];
 
   let prompt, correctText, distractors;
@@ -596,9 +589,9 @@ function tatsavitQuestion(difficulty, level) {
     type = Math.max(0, Math.min(8, Number(level)));
   } else {
     const pools = {
-      easy:      [0, 0, 0, 1, 2, 6, 7],
-      medium:    [0, 1, 1, 2, 3, 4, 6, 7],
-      hard:      [1, 2, 3, 4, 5, 6, 7, 8],
+      easy: [0, 0, 0, 1, 2, 6, 7],
+      medium: [0, 1, 1, 2, 3, 4, 6, 7],
+      hard: [1, 2, 3, 4, 5, 6, 7, 8],
       extrahard: [2, 3, 4, 5, 5, 8, 8, 8],
     };
     const pool = pools[difficulty] || pools.easy;
@@ -699,18 +692,18 @@ function tatsavitQuestion(difficulty, level) {
       const patterns = isHarder
         ? ['sub_neg', 'neg_add_neg', 'neg_sub_neg', 'neg_sub_pos', 'neg_add_pos']
         : isMed ? ['sub_neg', 'neg_add_neg', 'neg_sub_neg']
-        : ['sub_neg'];
+          : ['sub_neg'];
       const pat = triPick(patterns);
       const a = randomInt(2, isHarder ? 30 : 12);
       const b = randomInt(2, isHarder ? 30 : 12);
       let prompt, answer;
       switch (pat) {
-        case 'sub_neg':      prompt = `${a} − (−${b})`;   answer = a + b;  break;
-        case 'neg_add_neg':  prompt = `−${a} + (−${b})`;  answer = -(a + b); break;
-        case 'neg_sub_neg':  prompt = `−${a} − (−${b})`;  answer = -a + b; break;
-        case 'neg_sub_pos':  prompt = `−${a} − ${b}`;     answer = -(a + b); break;
-        case 'neg_add_pos':  prompt = `−${a} + ${b}`;     answer = b - a;  break;
-        default:             prompt = `${a} − (−${b})`;   answer = a + b;
+        case 'sub_neg': prompt = `${a} − (−${b})`; answer = a + b; break;
+        case 'neg_add_neg': prompt = `−${a} + (−${b})`; answer = -(a + b); break;
+        case 'neg_sub_neg': prompt = `−${a} − (−${b})`; answer = -a + b; break;
+        case 'neg_sub_pos': prompt = `−${a} − ${b}`; answer = -(a + b); break;
+        case 'neg_add_pos': prompt = `−${a} + ${b}`; answer = b - a; break;
+        default: prompt = `${a} − (−${b})`; answer = a + b;
       }
       return { id, type: 8, typeName: 'Negative Arithmetic', prompt: `${prompt} = ?`, answer, display: String(answer) };
     }
@@ -719,10 +712,6 @@ function tatsavitQuestion(difficulty, level) {
   }
 }
 
-function gcd(a, b) { a = Math.abs(a); b = Math.abs(b); while (b) { const t = b; b = a % b; a = t; } return a; }
-function lcm(a, b) { return Math.abs(a * b) / gcd(a, b); }
-
-function setPick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 function setRand(lo, hi) { return lo + Math.floor(Math.random() * (hi - lo + 1)); }
 function randomSubset(universe, k) {
   const copy = [...universe]; const result = [];
@@ -1693,7 +1682,7 @@ function curiosityVariation(req, res) {
         const isMultiply = /multiply|times|\*|x|×/.test(vv)
         const isAdd = /add|plus|\+/.test(vv)
         const isSubtract = /subtract|minus|\-/.test(vv)
-        
+
         const num = extractNumber(vv)
         const mentionsNumerator = /numerator/.test(vv)
         const mentionsDenominator = /denominator/.test(vv)

@@ -1,23 +1,9 @@
 'use strict';
 const router = require('express').Router();
 
-function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
-
-function gcd(a, b) {
-  a = Math.abs(a);
-  b = Math.abs(b);
-  while (b) { [a, b] = [b, a % b]; }
-  return a;
-}
-
-function simplifyFraction(num, den) {
-  if (den < 0) { num = -num; den = -den; }
-  const g = gcd(Math.abs(num), den);
-  return { num: num / g, den: den / g };
-}
+const { randomInt, triPick, gcd, simplifyFraction } = require('../lib/mathHelpers');
 
 function triRand(lo, hi) { return lo + Math.floor(Math.random() * (hi - lo + 1)); }
-function triPick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
 const PROB_VALID_CONTEXTS = ['balls', 'coins', 'dice', 'cards'];
 
@@ -272,41 +258,53 @@ function buildPermCombQuestion(op, level, n, r, id, isMixed) {
   if (op === 'P') {
     const answer = factorial(n) / factorial(n - r);
     if (level === 1) {
-      return { id, op, level, n, r, answer, kind: 'formula_fill',
+      return {
+        id, op, level, n, r, answer, kind: 'formula_fill',
         prompt: `${n}P${r} = ${n}! / (${n} − ${r})!`,
         formula: { op: 'P', n, r, blanks: ['n', 'n-r'] },
         expected: { 'n': n, 'n-r': n - r },
-        worked: pcWorkedExample(n, r, 'P') };
+        worked: pcWorkedExample(n, r, 'P')
+      };
     }
     if (level === 2) {
-      return { id, op, level, n, r, answer, kind: 'full_calc',
-        prompt: `Calculate ${n}P${r}.`, worked: pcWorkedExample(n, r, 'P') };
+      return {
+        id, op, level, n, r, answer, kind: 'full_calc',
+        prompt: `Calculate ${n}P${r}.`, worked: pcWorkedExample(n, r, 'P')
+      };
     }
     const tmpl = PERMCOMB_WORD_BANK_P[Math.floor(Math.random() * PERMCOMB_WORD_BANK_P.length)];
     const built = tmpl(n, r);
     const useR = built.forceR != null ? built.forceR : r;
     const ans = factorial(n) / factorial(n - useR);
-    return { id, op, level, n, r: useR, answer: ans, kind: isMixed ? 'word_pc_mixed' : 'word',
-      prompt: built.prompt, worked: pcWorkedExample(n, useR, 'P') };
+    return {
+      id, op, level, n, r: useR, answer: ans, kind: isMixed ? 'word_pc_mixed' : 'word',
+      prompt: built.prompt, worked: pcWorkedExample(n, useR, 'P')
+    };
   }
   const answerC = factorial(n) / (factorial(r) * factorial(n - r));
   if (level === 1) {
-    return { id, op, level, n, r, answer: answerC, kind: 'formula_fill',
+    return {
+      id, op, level, n, r, answer: answerC, kind: 'formula_fill',
       prompt: `${n}C${r} = ${n}! / (${r}! × (${n} − ${r})!)`,
       formula: { op: 'C', n, r, blanks: ['n', 'r', 'n-r'] },
       expected: { 'n': n, 'r': r, 'n-r': n - r },
-      worked: pcWorkedExample(n, r, 'C') };
+      worked: pcWorkedExample(n, r, 'C')
+    };
   }
   if (level === 2) {
-    return { id, op, level, n, r, answer: answerC, kind: 'full_calc',
-      prompt: `Calculate ${n}C${r}.`, worked: pcWorkedExample(n, r, 'C') };
+    return {
+      id, op, level, n, r, answer: answerC, kind: 'full_calc',
+      prompt: `Calculate ${n}C${r}.`, worked: pcWorkedExample(n, r, 'C')
+    };
   }
   const tmpl = PERMCOMB_WORD_BANK_C[Math.floor(Math.random() * PERMCOMB_WORD_BANK_C.length)];
   const built = tmpl(n, r);
   const useR = built.forceR != null ? built.forceR : r;
   const ansC = factorial(n) / (factorial(useR) * factorial(n - useR));
-  return { id, op, level, n, r: useR, answer: ansC, kind: isMixed ? 'word_pc_mixed' : 'word',
-    prompt: built.prompt, worked: pcWorkedExample(n, useR, 'C') };
+  return {
+    id, op, level, n, r: useR, answer: ansC, kind: isMixed ? 'word_pc_mixed' : 'word',
+    prompt: built.prompt, worked: pcWorkedExample(n, useR, 'C')
+  };
 }
 
 function generatePermCombQuestion(section, level, seen) {
@@ -424,7 +422,7 @@ const generators = {
             if (v !== modeVal && data.filter(x => x === v).length < 2) data.push(v);
           }
           // Shuffle
-          for (let i = data.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [data[i], data[j]] = [data[j], data[i]]; }
+          for (let i = data.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[data[i], data[j]] = [data[j], data[i]]; }
           const prompt = `Find the mode of: ${data.join(', ')}`;
           return { id, difficulty, type: 'mode', subtype: 'mode', prompt, data, answer: modeVal, display: String(modeVal) };
         } else {
@@ -463,7 +461,8 @@ const generators = {
         const fracMatch = userStr.match(/^(-?\d+)\/(-?\d+)$/);
         let uNum, uDen;
         if (fracMatch) { uNum = parseInt(fracMatch[1]); uDen = parseInt(fracMatch[2]); }
-        else { const n = parseFloat(userStr);
+        else {
+          const n = parseFloat(userStr);
           if (!isNaN(n)) {
             // Convert decimal to fraction for comparison
             if (Number.isInteger(n)) { uNum = n; uDen = 1; }
