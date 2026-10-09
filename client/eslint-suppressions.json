@@ -188,12 +188,6 @@
     }
   },
   "src/components/HintSystem/HintModal.jsx": {
-    "no-empty": {
-      "count": 2
-    },
-    "no-unused-vars": {
-      "count": 3
-    },
     "react-hooks/set-state-in-effect": {
       "count": 1
     }
@@ -353,14 +347,6 @@
   "src/monsters/classifier.js": {
     "no-unused-vars": {
       "count": 2
-    }
-  },
-  "src/monsters/fetchInterceptor.js": {
-    "no-empty": {
-      "count": 1
-    },
-    "no-unused-vars": {
-      "count": 7
     }
   },
   "src/monsters/monsterStore.js": {
