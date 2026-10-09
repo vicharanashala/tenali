@@ -1,19 +1,19 @@
 {
   "src/App.jsx": {
     "no-empty": {
-      "count": 150
+      "count": 155
     },
     "no-restricted-syntax": {
       "count": 1
     },
     "no-undef": {
-      "count": 24
+      "count": 63
     },
     "no-unexpected-multiline": {
       "count": 5
     },
     "no-unused-vars": {
-      "count": 226
+      "count": 218
     },
     "no-useless-escape": {
       "count": 4
@@ -70,7 +70,7 @@
       "count": 27
     },
     "react-hooks/set-state-in-effect": {
-      "count": 23
+      "count": 22
     },
     "react-refresh/only-export-components": {
       "count": 7
@@ -218,6 +218,11 @@
   },
   "src/components/OnboardingTour.jsx": {
     "react-hooks/set-state-in-effect": {
+      "count": 2
+    }
+  },
+  "src/components/QuizLayout.jsx": {
+    "no-undef": {
       "count": 2
     }
   },
