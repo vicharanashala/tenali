@@ -25,23 +25,23 @@
 
 import { HintModal } from './components/HintSystem/HintModal.jsx';
 import { useQuizHintsAndXp } from './components/HintSystem/useHints.jsx';
-import React, { useEffect, useState, useRef, useMemo, useCallback } from 'react';
+import React, { useEffect, useState, useRef, useMemo, useCallback, Suspense, lazy } from 'react';
 import ConceptualVisualDiagram from './components/ConceptualVisualDiagram';
 import VoiceAssistant from './components/VoiceAssistant';
 import OnboardingTour from './components/OnboardingTour';
-import SpatialReasoningMCQ from './SpatialReasoningMCQ';
-import ScribbleGuessApp from './ScribbleGuessApp';
-import ShapeSlicer3D from './ShapeSlicer3D';
-import ShapeTranslatorApp from './ShapeTranslatorApp';
-import NetBuilderApp from './NetBuilderApp';
-import CrossSectionApp from './CrossSectionApp';
+const SpatialReasoningMCQ = lazy(() => import('./SpatialReasoningMCQ'));
+const ScribbleGuessApp = lazy(() => import('./ScribbleGuessApp'));
+const ShapeSlicer3D = lazy(() => import('./ShapeSlicer3D'));
+const ShapeTranslatorApp = lazy(() => import('./ShapeTranslatorApp'));
+const NetBuilderApp = lazy(() => import('./NetBuilderApp'));
+const CrossSectionApp = lazy(() => import('./CrossSectionApp'));
 import DailyWarmupCard from './components/DailyWarmupCard';
 
 window.React = React;
 console.log("React version:", React.version);
-import LinearAlgebraApp from './LinearAlgebraApp'
+const LinearAlgebraApp = lazy(() => import('./LinearAlgebraApp'))
 import { TILES, FEATURED_TILES, MATH_LAB_ENTRY, GEOCRAFT_ENTRY } from './features/tiles'
-import LandingPage from './components/LandingPage/LandingPage.jsx'
+const LandingPage = lazy(() => import('./components/LandingPage/LandingPage.jsx'))
 import LandingNavbar from './components/LandingPage/LandingNavbar.jsx'
 
 
@@ -72,24 +72,25 @@ function useProgressSubmit(revealed, isCorrect, topic, questionId) {
 }
 
 
-import Vachana from './vachana'
-import ReflectionJournal from './ReflectionJournal'  // Feature CT — platform-wide reflection journal
+const Vachana = lazy(() => import('./vachana'))
+const ReflectionJournal = lazy(() => import('./ReflectionJournal'))  // Feature CT — platform-wide reflection journal
 import 'chart.js/auto'
 import { Line } from 'react-chartjs-2'
 
 import './App.css'
-import TreasureHuntApp from './treasurehunt/TreasureHuntApp.jsx'
-import EnhancedMathDetectiveApp from './detective-app'
+const TreasureHuntApp = lazy(() => import('./treasurehunt/TreasureHuntApp.jsx'))
+const EnhancedMathDetectiveApp = lazy(() => import('./detective-app'))
 import GlossaryText from './components/GlossaryText'
 import LearningVisual from './components/LearningVisual'
 import KeyTerms from './components/KeyTerms'
-import InteractiveLcmHcfApp from './LcmHcfApp';
-import IdliVadaSambharApp from './IdliVadaSambharApp';
-import CarJourneyApp from './CarJourneyApp';
-import RealWorldHubApp from './RealWorldHub';
+const InteractiveLcmHcfApp = lazy(() => import('./LcmHcfApp'));
+const IdliVadaSambharApp = lazy(() => import('./IdliVadaSambharApp'));
+const CarJourneyApp = lazy(() => import('./CarJourneyApp'));
+const RealWorldHubApp = lazy(() => import('./RealWorldHub'));
 import { cjTakeReco } from './cjReco'; // Feature CR — Road License difficulty hand-off
 const CJ_RECO_DIFFS = ['easy', 'medium', 'hard', 'extrahard'];
-import VisualMathLabRedux, {
+const VisualMathLabRedux = lazy(() => import('./VisualMathLabRedux'));
+import {
   FrogJumpTemplate,
   MathMachineTemplate,
   PlantArrayTemplate,
@@ -99,10 +100,11 @@ import VisualMathLabRedux, {
   AnswerInput,
 } from './VisualMathLabRedux';
 import CoordinateGrid from './components/CoordinateGrid';
-import LanguageDashboard from './language/LanguageDashboard'
-import ContrastChallengeApp, { QuizLayoutExtension } from './ContrastChallengeApp'
+const LanguageDashboard = lazy(() => import('./language/LanguageDashboard'))
+const ContrastChallengeApp = lazy(() => import('./ContrastChallengeApp'))
+import { QuizLayoutExtension } from './ContrastChallengeApp'
 import { VOCAB_CORPUS } from './vocabCorpus'
-import PercentExplanationApp from './PercentExplanationApp'
+const PercentExplanationApp = lazy(() => import('./PercentExplanationApp'))
 import { playSound } from './audioContext'
 import { installMonstersInterceptor } from './monsters/fetchInterceptor.js';
 import MonsterToast from './monsters/MonsterToast.jsx';
@@ -111,10 +113,10 @@ import CureFlow from './monsters/CureFlow.jsx';
 import GuidedSolver from './monsters/GuidedSolver.jsx';
 import { load as loadMonsterLog, getMonsterHealedState } from './monsters/monsterStore.js';
 import MonsterAvatar from './monsters/MonsterAvatar.jsx';
-import GeometryApp from './GeometryApp';
-import EquationSandboxApp from './lib/EquationSandboxApp.jsx';
-import QFormulaConceptApp from './lib/concept/QFormulaConceptApp.jsx';
-import SimulConceptApp from './lib/simul-concept/SimulConceptApp.jsx';
+const GeometryApp = lazy(() => import('./GeometryApp'));
+const EquationSandboxApp = lazy(() => import('./lib/EquationSandboxApp.jsx'));
+const QFormulaConceptApp = lazy(() => import('./lib/concept/QFormulaConceptApp.jsx'));
+const SimulConceptApp = lazy(() => import('./lib/simul-concept/SimulConceptApp.jsx'));
 
 // Concept Playgrounds entry points.
 //
@@ -139,21 +141,21 @@ function SimulConceptMode({ onBack }) {
 }
 import DiagnosticQuiz from './lib/DiagnosticQuiz.jsx';
 import { useI18n } from './lib/i18n.jsx';
-import CuriosityApp from './Curiosity.jsx';
-import ProctoredQuiz from './proctor/ProctoredQuiz'
+const CuriosityApp = lazy(() => import('./Curiosity.jsx'));
+const ProctoredQuiz = lazy(() => import('./proctor/ProctoredQuiz'))
 import useProctor from './proctor/useProctor'
 import ProctorDashboard from './proctor/ProctorDashboard'
 import ProctorPanel from './proctor/ProctorPanel'
-import PlaygroundApp from './PlaygroundApp'
-import LocalCompilerApp from './LocalCompilerApp'
-import BattleApp from './BattleApp'
-import SudokuApp from './SudokuApp'
-import WaterJugLab from './WaterJugLab'
-import EquationCraftingLab from './EquationCraftingLab'
+const PlaygroundApp = lazy(() => import('./PlaygroundApp'))
+const LocalCompilerApp = lazy(() => import('./LocalCompilerApp'))
+const BattleApp = lazy(() => import('./BattleApp'))
+const SudokuApp = lazy(() => import('./SudokuApp'))
+const WaterJugLab = lazy(() => import('./WaterJugLab'))
+const EquationCraftingLab = lazy(() => import('./EquationCraftingLab'))
 import { getLearnContent } from './data/learnContent.js'
-import AnglesLearnPage from './components/learning/AnglesLearnPage'
-import GSTLearnPage from './components/learning/GSTLearnPage'
-import FractionsLearnPage from './components/learning/FractionsLearnPage'
+const AnglesLearnPage = lazy(() => import('./components/learning/AnglesLearnPage'))
+const GSTLearnPage = lazy(() => import('./components/learning/GSTLearnPage'))
+const FractionsLearnPage = lazy(() => import('./components/learning/FractionsLearnPage'))
 
 // API base URL from environment variables (Vite)
 export const API = import.meta.env.VITE_API_BASE_URL || '';
@@ -45466,8 +45468,9 @@ function App() {
   if (mode === null && currentView === 'landing') {
     return (
       <div className="landing-view-wrapper">
-        <LandingPage
-          onExplorePuzzles={() => {
+        <Suspense fallback={<div style={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--clr-accent, #6366f1)' }}>Loading...</div>}>
+          <LandingPage
+            onExplorePuzzles={() => {
             setCurrentView('puzzles');
             try { window.history.replaceState({}, '', `${BASE}/?view=puzzles`); } catch (e) {}
           }}
@@ -45540,7 +45543,10 @@ function App() {
             }}
           />
         )}
-        <ReflectionJournal />
+        </Suspense>
+        <Suspense fallback={null}>
+          <ReflectionJournal />
+        </Suspense>
       </div>
     );
   }
@@ -45621,13 +45627,15 @@ function App() {
         </div>
       )}
       <div>
-        {mode === 'vachana' ? (
-          <Vachana onBack={() => setMode(null)} initialAdaptScore={diagnosticState[mode] || 0} />
-        ) : (
-          <div className={`card ${mode === 'contrastlist' ? 'is-wide' : ''}`}>
-            {renderContent()}
-          </div>
-        )}
+        <Suspense fallback={<div className="mode-loading-spinner" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '50vh', padding: '40px', fontSize: '1.2rem', color: 'var(--clr-accent, #6366f1)' }}>Loading...</div>}>
+          {mode === 'vachana' ? (
+            <Vachana onBack={() => setMode(null)} initialAdaptScore={diagnosticState[mode] || 0} />
+          ) : (
+            <div className={`card ${mode === 'contrastlist' ? 'is-wide' : ''}`}>
+              {renderContent()}
+            </div>
+          )}
+        </Suspense>
       </div>
       {renderCelebrationModal()}
       {/* Misconception Monsters — toast overlay (portals to body) + Hall modal. Spec §6. */}
@@ -45673,7 +45681,9 @@ function App() {
           setHallOpen(true)
         }}
       />}
-      <ReflectionJournal />
+      <Suspense fallback={null}>
+        <ReflectionJournal />
+      </Suspense>
     </div>
   )
 }
