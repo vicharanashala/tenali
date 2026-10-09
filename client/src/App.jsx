@@ -36,6 +36,7 @@ import ShapeTranslatorApp from './ShapeTranslatorApp';
 import NetBuilderApp from './NetBuilderApp';
 import CrossSectionApp from './CrossSectionApp';
 import DailyWarmupCard from './components/DailyWarmupCard';
+import { recordActivity } from './lib/streakTracker';
 
 window.React = React;
 console.log("React version:", React.version);
@@ -48,10 +49,14 @@ import LandingNavbar from './components/LandingPage/LandingNavbar.jsx'
 /**
  * useProgressSubmit Hook
  * Submits the result of a quiz question to the backend to track mastery and ensure unique questions.
+ * Also updates daily streak on correct answers (#324).
  */
 function useProgressSubmit(revealed, isCorrect, topic, questionId) {
   useEffect(() => {
     if (!revealed) return;
+    if (isCorrect) {
+      recordActivity();
+    }
     const token = localStorage.getItem('tenali-auth-token');
     if (!token || !topic) return;
 

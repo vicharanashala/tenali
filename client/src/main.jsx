@@ -10,6 +10,7 @@ import React from 'react'; window.React = React;
 import ReactDOM from 'react-dom/client'
 import App, { AuthMenu } from './App.jsx'
 import { GlobalXpPanel } from './components/HintSystem/HintModal.jsx';
+import { StreakIndicator } from './components/StreakIndicator.jsx';
 import { ProctorProvider } from './proctor/ProctorContext';
 import './index.css';
 import './kid-zone.css';
@@ -24,6 +25,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <App />
           {/* Hamburger menu (login/logout) — fixed top-right, visible on every page */}
           <AuthMenu />
+          <StreakIndicator />
           <GlobalXpPanel />
         </ProctorProvider>
       </AccessibilityProvider>
