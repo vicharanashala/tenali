@@ -43226,6 +43226,20 @@ function App() {
     )
   }
 
+  // Route: /matrixmystics → Matrix Mystics Landing View
+  if (pathname === '/matrixmystics') {
+    return (
+      <>
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <div className="app-shell"><div className="card">
+          <MatrixMysticsApp onBack={() => { window.location.href = withBase('/') }} />
+        </div></div>
+      </>
+    )
+  }
+
   // Route: /chapter1 → Cambridge IGCSE Chapter 1 (Reviewing Number Concepts)
   if (pathname === '/chapter1') {
     return (
@@ -44915,7 +44929,7 @@ function App() {
     indicesgym: IndicesGymApp,     // Indices-Gym — index laws (MCQ)
     polygym: PolyGymApp,           // Polynomials Gym — arithmetic → monomial algebra (MCQ)
     treasurehunt: TreasureHuntApp, // Treasure Hunt — solve & seek grid game
-    // matrixmystics mode removed — Matrix Mystics content now embedded in LinearAlgebraApp's mission quiz
+    matrixmystics: MatrixMysticsApp, // Matrix Mystics — 6 modules, 53 topics
     trackProgress: ProgressTrackerApp,
     riddle: RiddleApp,              // Math Riddles
     'water-jug-lab': WaterJugLab,

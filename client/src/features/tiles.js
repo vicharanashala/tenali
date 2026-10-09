@@ -47,6 +47,7 @@ export const TILES = [
     { key: 'language', name: 'Language Puzzles', subtitle: 'Fill in the blanks to create new words', color: 'orange', category: 'shelf' },
     { key: 'limits', name: 'Limits', subtitle: 'Evaluate limits', color: 'purple', category: 'calculus' },
     { key: 'linearalgebra', name: 'Linear Algebra', subtitle: '56 missions across 6 modules', color: 'orange', category: 'linear-algebra' },
+    { key: 'matrixmystics', name: 'Matrix Mystics', subtitle: 'Linear Algebra — 6 modules, 53 topics', color: 'orange', category: 'linear-algebra' },
     { key: 'lineareq', name: 'Linear Equations', subtitle: 'Solve for x in one variable', color: 'blue', category: 'algebra' },
     { key: 'lineq', name: 'Line Equation', subtitle: 'Find m and c from two points', color: 'green', category: 'shape-space' },
     { key: 'linprog', name: 'Linear Programming', subtitle: 'Optimize objective functions', color: 'green', category: 'algebra' },
