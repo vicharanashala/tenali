@@ -1,5 +1,6 @@
 'use strict';
 const router = require('express').Router();
+const { parseExcludeList, generateUnique } = require('../lib/questionDedup');
 
 function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
 const randInt = randomInt;
@@ -99,6 +100,78 @@ function invtrigQuestion(difficulty) {
     const x = randomInt(1, 9) / 10;
     const answer = Math.atan(x) * 180 / Math.PI;
     return { id, difficulty, prompt: `Find principal value of arctan(${x.toFixed(1)}) in degrees`, answer, display: answer.toFixed(2) };
+  }
+}
+
+// Pure generator for the Mensuration entry below — stateless dedup happens in
+// the route wrapper (TEN-MATH-024). The `_key` is stable for the same
+// (shape, params) combination, regardless of timestamp id.
+function generateMensurQuestion(diff) {
+  const id = Date.now();
+  let answer, prompt, display, _key;
+  if (diff === 'easy') {
+    const shape = pick(['rectangle', 'triangle', 'parallelogram']);
+    const a = rand(3, 15); const b = rand(3, 15);
+    _key = `${shape}:${a}x${b}`;
+    let displayEq;
+    if (shape === 'rectangle') { answer = a * b; prompt = `Area of rectangle: length = ${a}, width = ${b}`; displayEq = `${a} × ${b} = ${answer}`; }
+    else if (shape === 'triangle') { answer = a * b / 2; prompt = `Area of triangle: base = ${a}, height = ${b}`; displayEq = `½ × ${a} × ${b} = ${answer}`; }
+    else { answer = a * b; prompt = `Area of parallelogram: base = ${a}, height = ${b}`; displayEq = `${a} × ${b} = ${answer}`; }
+    return { id, difficulty: diff, type: 'area_2d', _key, prompt, answer, display: displayEq };
+  } else if (diff === 'medium') {
+    const r = rand(2, 12);
+    const subtype = pick(['area', 'circumference']);
+    _key = `${subtype}:${r}`;
+    let displayEq;
+    if (subtype === 'area') {
+      answer = Math.round(Math.PI * r * r * 100) / 100;
+      prompt = `Area of circle with radius ${r} (to 2 d.p., use π = 3.14159...)`;
+      displayEq = `π × ${r}² = ${answer}`;
+    } else {
+      answer = Math.round(2 * Math.PI * r * 100) / 100;
+      prompt = `Circumference of circle with radius ${r} (to 2 d.p.)`;
+      displayEq = `2 × π × ${r} = ${answer}`;
+    }
+    return { id, difficulty: diff, type: 'circle', _key, prompt, answer, display: displayEq };
+  } else if (diff === 'hard') {
+    const shape = pick(['cylinder', 'cone', 'sphere']);
+    const r = rand(2, 8);
+    let displayEq, h;
+    if (shape === 'cylinder') {
+      h = rand(3, 12);
+      answer = Math.round(Math.PI * r * r * h * 100) / 100;
+      prompt = `Volume of cylinder: radius = ${r}, height = ${h} (2 d.p.)`;
+      displayEq = `π × ${r}² × ${h} = ${answer}`;
+    } else if (shape === 'cone') {
+      h = rand(3, 12);
+      answer = Math.round(Math.PI * r * r * h / 3 * 100) / 100;
+      prompt = `Volume of cone: radius = ${r}, height = ${h} (2 d.p.)`;
+      displayEq = `⅓ × π × ${r}² × ${h} = ${answer}`;
+    } else {
+      h = null;
+      answer = Math.round(4/3 * Math.PI * r * r * r * 100) / 100;
+      prompt = `Volume of sphere with radius ${r} (2 d.p.)`;
+      displayEq = `⁴⁄₃ × π × ${r}³ = ${answer}`;
+    }
+    _key = `${shape}:${r}:${h === null ? 'na' : h}`;
+    return { id, difficulty: diff, type: 'volume', _key, prompt, answer, display: displayEq };
+  } else {
+    const shape = pick(['cylinder', 'sphere']);
+    const r = rand(2, 8);
+    let displayEq, h;
+    if (shape === 'cylinder') {
+      h = rand(3, 12);
+      answer = Math.round(2 * Math.PI * r * (r + h) * 100) / 100;
+      prompt = `Total surface area of cylinder: radius = ${r}, height = ${h} (2 d.p.)`;
+      displayEq = `2 × π × ${r} × (${r} + ${h}) = ${answer}`;
+    } else {
+      h = null;
+      answer = Math.round(4 * Math.PI * r * r * 100) / 100;
+      prompt = `Surface area of sphere with radius ${r} (2 d.p.)`;
+      displayEq = `4 × π × ${r}² = ${answer}`;
+    }
+    _key = `surf_${shape}:${r}:${h === null ? 'na' : h}`;
+    return { id, difficulty: diff, type: 'surface_area', _key, prompt, answer, display: displayEq };
   }
 }
 
@@ -521,68 +594,17 @@ const generators = {
   },
 
   mensur: {
-    question(difficulty) {
+    question(difficulty, query) {
       const diff = difficulty || 'easy';
-      const id = Date.now();
-      let answer, prompt, display;
-      if (diff === 'easy') {
-        const shape = pick(['rectangle', 'triangle', 'parallelogram']);
-        const a = rand(3, 15); const b = rand(3, 15);
-        let displayEq;
-        if (shape === 'rectangle') { answer = a * b; prompt = `Area of rectangle: length = ${a}, width = ${b}`; displayEq = `${a} × ${b} = ${answer}`; }
-        else if (shape === 'triangle') { answer = a * b / 2; prompt = `Area of triangle: base = ${a}, height = ${b}`; displayEq = `½ × ${a} × ${b} = ${answer}`; }
-        else { answer = a * b; prompt = `Area of parallelogram: base = ${a}, height = ${b}`; displayEq = `${a} × ${b} = ${answer}`; }
-        return { id, difficulty: diff, type: 'area_2d', prompt, answer, display: displayEq };
-      } else if (diff === 'medium') {
-        const r = rand(2, 12);
-        const subtype = pick(['area', 'circumference']);
-        let displayEq;
-        if (subtype === 'area') {
-          answer = Math.round(Math.PI * r * r * 100) / 100;
-          prompt = `Area of circle with radius ${r} (to 2 d.p., use π = 3.14159...)`;
-          displayEq = `π × ${r}² = ${answer}`;
-        } else {
-          answer = Math.round(2 * Math.PI * r * 100) / 100;
-          prompt = `Circumference of circle with radius ${r} (to 2 d.p.)`;
-          displayEq = `2 × π × ${r} = ${answer}`;
-        }
-        return { id, difficulty: diff, type: 'circle', prompt, answer, display: displayEq };
-      } else if (diff === 'hard') {
-        const shape = pick(['cylinder', 'cone', 'sphere']);
-        const r = rand(2, 8);
-        let displayEq;
-        if (shape === 'cylinder') {
-          const h = rand(3, 12);
-          answer = Math.round(Math.PI * r * r * h * 100) / 100;
-          prompt = `Volume of cylinder: radius = ${r}, height = ${h} (2 d.p.)`;
-          displayEq = `π × ${r}² × ${h} = ${answer}`;
-        } else if (shape === 'cone') {
-          const h = rand(3, 12);
-          answer = Math.round(Math.PI * r * r * h / 3 * 100) / 100;
-          prompt = `Volume of cone: radius = ${r}, height = ${h} (2 d.p.)`;
-          displayEq = `⅓ × π × ${r}² × ${h} = ${answer}`;
-        } else {
-          answer = Math.round(4/3 * Math.PI * r * r * r * 100) / 100;
-          prompt = `Volume of sphere with radius ${r} (2 d.p.)`;
-          displayEq = `⁴⁄₃ × π × ${r}³ = ${answer}`;
-        }
-        return { id, difficulty: diff, type: 'volume', prompt, answer, display: displayEq };
-      } else {
-        const shape = pick(['cylinder', 'sphere']);
-        const r = rand(2, 8);
-        let displayEq;
-        if (shape === 'cylinder') {
-          const h = rand(3, 12);
-          answer = Math.round(2 * Math.PI * r * (r + h) * 100) / 100;
-          prompt = `Total surface area of cylinder: radius = ${r}, height = ${h} (2 d.p.)`;
-          displayEq = `2 × π × ${r} × (${r} + ${h}) = ${answer}`;
-        } else {
-          answer = Math.round(4 * Math.PI * r * r * 100) / 100;
-          prompt = `Surface area of sphere with radius ${r} (2 d.p.)`;
-          displayEq = `4 × π × ${r}² = ${answer}`;
-        }
-        return { id, difficulty: diff, type: 'surface_area', prompt, answer, display: displayEq };
-      }
+      const exclude = parseExcludeList({ query });
+      const { question, key, attempts } = generateUnique(
+        () => generateMensurQuestion(diff),
+        q => q._key,
+        exclude
+      );
+      question._key = key;
+      question._attempts = attempts;
+      return question;
     },
     check(body) {
       const userNum = parseFloat((body.userAnswer || '').replace(/\s+/g, ''));

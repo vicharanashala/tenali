@@ -1262,7 +1262,12 @@ const generators = {
         }
       } else if (diff === 'medium') {
         if (type === 1) {
-          const a = randInt(4, 12); const b = randInt(4, 12);
+          // TEN-MATH-021: reject duplicate operands ("Find the LCM of 7 and 7"
+          // was reported). Range [4, 12] has 9 values, so ~89% chance of
+          // distinctness per attempt; cap at 8 retries as a safety net.
+          let a, b, attempts = 0;
+          do { a = randInt(4, 12); b = randInt(4, 12); attempts++; }
+          while (a === b && attempts < 8);
           answer = lcm(a, b); display = String(answer);
           prompt = `Find the LCM (Lowest Common Multiple) of ${a} and ${b}.`;
         } else if (type === 2) {
@@ -1286,7 +1291,17 @@ const generators = {
         }
       } else if (diff === 'hard') {
         if (type === 1) {
-          const a = randInt(3, 8); const b = randInt(3, 8); const c = randInt(3, 8);
+          // Pick three distinct integers in [3, 8] so the question reads
+          // meaningfully (TEN-MATH-021: duplicates like "LCM of 11, 14, and 14"
+          // were reported). At most 8 attempts; on a 3..8 range of 6 values
+          // the success rate per attempt is 6*5*4 / 6³ ≈ 56%, so 8 retries is
+          // overwhelmingly enough — if it ever fails, we still return a
+          // question rather than throw.
+          let a, b, c, attempts = 0;
+          do {
+            a = randInt(3, 8); b = randInt(3, 8); c = randInt(3, 8);
+            attempts++;
+          } while ((a === b || a === c || b === c) && attempts < 8);
           answer = lcm(lcm(a, b), c); display = String(answer);
           prompt = `Find the LCM of ${a}, ${b}, and ${c}.`;
         } else if (type === 2) {
@@ -1301,7 +1316,13 @@ const generators = {
           answer = base.b; display = String(answer);
           prompt = `The HCF of two numbers is ${base.h} and their LCM is ${base.l}. If one of the numbers is ${base.a}, what is the other number?`;
         } else {
-          const a = [3, 4, 6][randInt(0, 2)]; const b = [4, 5, 8][randInt(0, 2)]; const c = [6, 8, 12][randInt(0, 2)];
+          // Same dedup rule as type=1 — three runners with distinct lap times.
+          const aPool = [3, 4, 6]; const bPool = [4, 5, 8]; const cPool = [6, 8, 12];
+          let a, b, c, attempts = 0;
+          do {
+            a = aPool[randInt(0, 2)]; b = bPool[randInt(0, 2)]; c = cPool[randInt(0, 2)];
+            attempts++;
+          } while ((a === b || a === c || b === c) && attempts < 8);
           answer = lcm(lcm(a, b), c); display = String(answer);
           prompt = `Three runners start running a lap together. Runner A completes a lap in ${a} minutes, Runner B in ${b} minutes, and Runner C in ${c} minutes. After how many minutes will they next meet at the starting point?`;
         }
@@ -1312,7 +1333,9 @@ const generators = {
           answer = gcd(a - r, b - r); display = String(answer);
           prompt = `Find the largest number that divides ${a} and ${b} leaving a remainder of ${r} in each case.`;
         } else if (type === 2) {
-          const r = randInt(2, 5); const a = randInt(5, 10); const b = randInt(5, 10);
+          const r = randInt(2, 5); let a, b, attempts = 0;
+          do { a = randInt(5, 10); b = randInt(5, 10); attempts++; }
+          while (a === b && attempts < 8);
           answer = lcm(a, b) + r; display = String(answer);
           prompt = `What is the smallest positive integer which when divided by ${a} and ${b} leaves a remainder of ${r} in each case?`;
         } else if (type === 3) {
