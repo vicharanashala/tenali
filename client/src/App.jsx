@@ -40,6 +40,14 @@ import DailyWarmupCard from './components/DailyWarmupCard';
 window.React = React;
 console.log("React version:", React.version);
 import LinearAlgebraApp from './LinearAlgebraApp'
+import PathMap, {
+  PmQuestBanner,
+  PmSuggestIcon,
+  pmTrackAnswer,
+  PmGoalModal,
+  PmHomeSection,
+  PmHamburgerItem
+} from './PathMap';
 import { TILES, FEATURED_TILES, MATH_LAB_ENTRY, GEOCRAFT_ENTRY } from './features/tiles'
 import LandingPage from './components/LandingPage/LandingPage.jsx'
 import LandingNavbar from './components/LandingPage/LandingNavbar.jsx'
@@ -52,6 +60,7 @@ import LandingNavbar from './components/LandingPage/LandingNavbar.jsx'
 function useProgressSubmit(revealed, isCorrect, topic, questionId) {
   useEffect(() => {
     if (!revealed) return;
+    try { pmTrackAnswer(topic, 'medium', isCorrect); } catch {}
     const token = localStorage.getItem('tenali-auth-token');
     if (!token || !topic) return;
 
@@ -44920,6 +44929,7 @@ function App() {
     riddle: RiddleApp,              // Math Riddles
     'water-jug-lab': WaterJugLab,
     'equation-crafting-lab': EquationCraftingLab,
+    pathmap: PathMap, // Learning Path (prerequisite graph & personalized path)
   }
 
   // Get the component to render (or null if mode not set)
@@ -45635,6 +45645,9 @@ function App() {
         onOpenHall={() => setHallOpen(true)}
         onTap={() => setHallOpen(true)}
       />
+      {mode && mode !== 'pathmap' && (
+        <PmSuggestIcon moduleId={mode} onNavigate={(id) => setMode(id)} />
+      )}
       <HallPanel
         open={hallOpen}
         onClose={() => {
@@ -45690,6 +45703,7 @@ function Home({ onSelect, onBackToLanding, completedTopics = [], goldMastery = [
   const [showAbout, setShowAbout] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [search, setSearch] = useState('')
+  const [pmOpen, setPmOpen] = useState(false)
   const featuredApps = FEATURED_TILES
   const mathLabEntry = MATH_LAB_ENTRY
   const geocraftEntry = GEOCRAFT_ENTRY
@@ -45804,6 +45818,7 @@ function Home({ onSelect, onBackToLanding, completedTopics = [], goldMastery = [
               onMouseLeave={e => e.target.style.background = 'none'}>
               <strong style={{ color: 'var(--clr-accent)' }}>ℹ️ About Tenali</strong>
             </button>
+            <PmHamburgerItem onOpen={() => { setMenuOpen(false); setPmOpen(true); }} />
             {/* Visual Learning Universe & GeoCraft pinned at top of hamburger menu */}
             {[mathLabEntry, geocraftEntry].map(app => (
               <button key={app.key} onClick={() => {
@@ -45949,6 +45964,7 @@ function Home({ onSelect, onBackToLanding, completedTopics = [], goldMastery = [
           </button>
         </div>
       )}
+      {!search && !isGoalSelection && <PmQuestBanner onSelect={onSelect} />}
       {!search && !isGoalSelection && (
         <DailyWarmupCard completedTopics={completedTopics} apiBase={API} onSelectTopic={onSelect} />
       )}
@@ -45962,6 +45978,7 @@ function Home({ onSelect, onBackToLanding, completedTopics = [], goldMastery = [
           onChange={e => setSearch(e.target.value)}
         />
       </div>
+      {!search && !isGoalSelection && <PmHomeSection onSelect={onSelect} onOpenGoalPicker={() => setPmOpen(true)} />}
       <div id="tour-home-grid" className="menu-grid" ref={gridRef}>
         {filteredRegular.map((app) => {
           const isGold = goldMastery && goldMastery.includes(app.key)
@@ -45979,6 +45996,7 @@ function Home({ onSelect, onBackToLanding, completedTopics = [], goldMastery = [
         })}
       </div>
       <div className="grid-dimension">{rows} × {cols}</div>
+      <PmGoalModal open={pmOpen} onClose={() => setPmOpen(false)} onSelect={onSelect} />
     </>
   )
 }
