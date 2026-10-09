@@ -3,23 +3,25 @@ import { createPortal } from 'react-dom';
 import { API, getLocalXp, setLocalXp, changeXp } from './hintUtils.js';
 
 export function HintModal({ concept, questionId, questionData, answerData, revealed }) {
+  const effectiveQuestionId = questionId || (questionData ? (questionData._id || questionData.id || JSON.stringify(questionData)) : 'unknown');
+
   const [unlockedLevels, setUnlockedLevels] = useState({}); // { [level]: hintText }
   const [loadingLevel, setLoadingLevel] = useState(null);
   const [errorMsg, setErrorMsg] = useState('');
   const [cooldownRemaining, setCooldownRemaining] = useState(0);
   const [isMinimized, setIsMinimized] = useState(true);
-  const [portalTarget, setPortalTarget] = useState(null);
   const [activeAccordionId, setActiveAccordionId] = useState(null);
   const [confirmingLevel, setConfirmingLevel] = useState(null);
-  const effectiveQuestionId = questionId || (questionData ? (questionData._id || questionData.id || JSON.stringify(questionData)) : 'unknown');
+  const [activeQuestionId, setActiveQuestionId] = useState(effectiveQuestionId);
+  const portalTarget = typeof document !== 'undefined' ? document.body : null;
 
-  useEffect(() => {
-    setPortalTarget(document.body);
+  if (activeQuestionId !== effectiveQuestionId) {
+    setActiveQuestionId(effectiveQuestionId);
     setUnlockedLevels({});
     setErrorMsg('');
     setLoadingLevel(null);
     setCooldownRemaining(0);
-  }, [effectiveQuestionId]);
+  }
 
   useEffect(() => {
     if (cooldownRemaining > 0) {
@@ -85,7 +87,10 @@ export function HintModal({ concept, questionId, questionData, answerData, revea
         setLocalXp(data.balance);
         try {
           window.dispatchEvent(new CustomEvent('tenali-xp-float', { detail: { diff: -actualCost } }));
-        } catch { /* dispatch may fail */ }
+        } catch (e) {
+          // Non-fatal: the XP float is a cosmetic side effect and must not fail the unlock.
+          console.warn('[Hints] XP float event dispatch failed:', e);
+        }
       }
 
       setUnlockedLevels(prev => ({ ...prev, [level]: data.hint }));
@@ -98,7 +103,10 @@ export function HintModal({ concept, questionId, questionData, answerData, revea
 
       try {
         window.dispatchEvent(new CustomEvent('tenali-hint-used', { detail: { level } }));
-      } catch { /* dispatch may fail */ }
+      } catch (e) {
+        // Non-fatal: the hint counter is an auxiliary signal and must not fail the unlock.
+        console.warn('[Hints] Hint-used event dispatch failed:', e);
+      }
 
     } catch (err) {
       console.error(err);
