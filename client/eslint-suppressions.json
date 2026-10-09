@@ -7,13 +7,13 @@
       "count": 1
     },
     "no-undef": {
-      "count": 24
+      "count": 20
     },
     "no-unexpected-multiline": {
       "count": 5
     },
     "no-unused-vars": {
-      "count": 226
+      "count": 212
     },
     "no-useless-escape": {
       "count": 4
@@ -34,19 +34,13 @@
       "count": 6
     },
     "react-hooks/set-state-in-effect": {
-      "count": 93
+      "count": 92
     },
     "react-refresh/only-export-components": {
       "count": 6
     }
   },
   "src/BattleApp.jsx": {
-    "no-empty": {
-      "count": 2
-    },
-    "no-unused-vars": {
-      "count": 17
-    },
     "react-hooks/immutability": {
       "count": 1
     },
@@ -63,22 +57,11 @@
     }
   },
   "src/ContrastChallengeApp.jsx": {
-    "no-empty": {
-      "count": 7
-    },
-    "no-unused-vars": {
-      "count": 27
-    },
     "react-hooks/set-state-in-effect": {
-      "count": 23
+      "count": 22
     },
     "react-refresh/only-export-components": {
       "count": 7
-    }
-  },
-  "src/CrossSectionApp.jsx": {
-    "no-unused-vars": {
-      "count": 2
     }
   },
   "src/Curiosity.jsx": {
@@ -87,9 +70,6 @@
     }
   },
   "src/EquationCraftingLab.jsx": {
-    "no-unused-vars": {
-      "count": 2
-    },
     "no-useless-escape": {
       "count": 7
     },
@@ -105,37 +85,12 @@
       "count": 1
     }
   },
-  "src/LcmHcfApp.jsx": {
-    "react-hooks/set-state-in-effect": {
-      "count": 4
-    }
-  },
-  "src/LinearAlgebraApp.jsx": {
-    "react-hooks/purity": {
-      "count": 2
-    },
-    "react-hooks/refs": {
-      "count": 1
-    },
-    "react-hooks/set-state-in-effect": {
-      "count": 1
-    }
-  },
   "src/PercentExplanationApp.jsx": {
-    "no-unused-vars": {
-      "count": 1
-    },
     "react-hooks/set-state-in-effect": {
       "count": 2
     }
   },
   "src/PlaygroundApp.jsx": {
-    "no-empty": {
-      "count": 1
-    },
-    "no-unused-vars": {
-      "count": 2
-    },
     "no-useless-escape": {
       "count": 2
     },
@@ -153,28 +108,12 @@
       "count": 1
     }
   },
-  "src/ScribbleGuessApp.jsx": {
-    "no-unused-vars": {
-      "count": 9
-    }
-  },
-  "src/ShapeTranslatorApp.jsx": {
-    "no-unused-vars": {
-      "count": 2
-    }
-  },
   "src/SudokuApp.jsx": {
-    "no-unused-vars": {
-      "count": 2
-    },
     "react-hooks/purity": {
       "count": 1
     }
   },
   "src/WaterJugLab.jsx": {
-    "no-unused-vars": {
-      "count": 7
-    },
     "react-hooks/immutability": {
       "count": 1
     },
@@ -188,25 +127,11 @@
     }
   },
   "src/components/HintSystem/HintModal.jsx": {
-    "no-empty": {
-      "count": 2
-    },
-    "no-unused-vars": {
-      "count": 3
-    },
     "react-hooks/set-state-in-effect": {
       "count": 1
     }
   },
-  "src/components/HintSystem/hintUtils.js": {
-    "no-empty": {
-      "count": 1
-    }
-  },
   "src/components/HintSystem/useHints.jsx": {
-    "no-empty": {
-      "count": 1
-    },
     "no-undef": {
       "count": 1
     }
@@ -221,37 +146,13 @@
       "count": 2
     }
   },
-  "src/components/ScribbleCanvas.jsx": {
-    "no-unused-vars": {
-      "count": 1
-    }
-  },
   "src/components/ThreeDViewer.jsx": {
-    "no-unused-vars": {
-      "count": 2
-    },
     "react-refresh/only-export-components": {
       "count": 1
     }
   },
-  "src/components/learning/AngleChallenge.jsx": {
-    "no-unused-vars": {
-      "count": 1
-    }
-  },
   "src/components/learning/AnglesLearnPage.jsx": {
-    "no-empty": {
-      "count": 1
-    },
-    "no-unused-vars": {
-      "count": 1
-    },
     "react-hooks/set-state-in-effect": {
-      "count": 1
-    }
-  },
-  "src/components/learning/DragAngle.jsx": {
-    "no-unused-vars": {
       "count": 1
     }
   },
@@ -290,23 +191,7 @@
       "count": 1
     }
   },
-  "src/language/WordSearchApp.jsx": {
-    "no-unused-vars": {
-      "count": 3
-    }
-  },
-  "src/lib/MasteryBadge.jsx": {
-    "no-unused-vars": {
-      "count": 1
-    }
-  },
   "src/monsters/CureFlow.jsx": {
-    "no-unused-vars": {
-      "count": 1
-    },
-    "react-hooks/purity": {
-      "count": 1
-    },
     "react-hooks/set-state-in-effect": {
       "count": 2
     }
@@ -317,24 +202,13 @@
     }
   },
   "src/monsters/HallPanel.jsx": {
-    "no-unused-vars": {
-      "count": 1
-    },
     "react-hooks/set-state-in-effect": {
       "count": 1
     }
   },
   "src/monsters/MonsterDetail.jsx": {
-    "no-unused-vars": {
-      "count": 4
-    },
     "react-hooks/set-state-in-effect": {
       "count": 1
-    }
-  },
-  "src/monsters/MonsterToast.jsx": {
-    "no-unused-vars": {
-      "count": 3
     }
   },
   "src/monsters/__tests__/classifier.test.js": {
@@ -345,41 +219,10 @@
   "src/monsters/__tests__/fetchInterceptor.test.js": {
     "no-undef": {
       "count": 2
-    },
-    "no-unused-vars": {
-      "count": 1
-    }
-  },
-  "src/monsters/classifier.js": {
-    "no-unused-vars": {
-      "count": 2
-    }
-  },
-  "src/monsters/fetchInterceptor.js": {
-    "no-empty": {
-      "count": 1
-    },
-    "no-unused-vars": {
-      "count": 7
-    }
-  },
-  "src/monsters/monsterStore.js": {
-    "no-unused-vars": {
-      "count": 1
     }
   },
   "src/proctor/FloatingVideo.jsx": {
     "react-hooks/set-state-in-effect": {
-      "count": 1
-    }
-  },
-  "src/proctor/ProctorPanel.jsx": {
-    "no-empty": {
-      "count": 1
-    }
-  },
-  "src/proctor/ProctoredQuiz.jsx": {
-    "no-empty": {
       "count": 1
     }
   },
@@ -393,27 +236,7 @@
       "count": 1
     }
   },
-  "src/treasurehunt/TreasureHuntApp.jsx": {
-    "no-empty": {
-      "count": 1
-    },
-    "no-shadow-restricted-names": {
-      "count": 1
-    },
-    "no-unused-vars": {
-      "count": 2
-    },
-    "react-hooks/set-state-in-effect": {
-      "count": 2
-    }
-  },
   "src/vachana/exercises/EquationToStory.jsx": {
-    "no-empty": {
-      "count": 3
-    },
-    "no-unused-vars": {
-      "count": 7
-    },
     "react-hooks/immutability": {
       "count": 2
     },
@@ -431,29 +254,12 @@
       "count": 1
     }
   },
-  "src/vachana/exercises/ReadingTraps.jsx": {
-    "no-unused-vars": {
-      "count": 1
-    }
-  },
   "src/vachana/exercises/SchemaClassifier.jsx": {
-    "no-empty": {
-      "count": 2
-    },
-    "no-unused-vars": {
-      "count": 14
-    },
     "react-hooks/set-state-in-effect": {
       "count": 2
     }
   },
   "src/vachana/exercises/SyntacticRewriter.jsx": {
-    "no-empty": {
-      "count": 10
-    },
-    "no-unused-vars": {
-      "count": 5
-    },
     "react-hooks/immutability": {
       "count": 1
     },

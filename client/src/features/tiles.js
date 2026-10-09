@@ -53,6 +53,7 @@ export const TILES = [
     { key: 'log', name: 'Logarithms', subtitle: 'Evaluate, simplify, solve', color: 'purple', category: 'algebra' },
     { key: 'matrix', name: 'Matrices', subtitle: 'Add, multiply, determinant', color: 'blue', category: 'linear-algebra' },
     { key: 'mensur', name: 'Mensuration', subtitle: 'Area, volume, surface area', color: 'green', category: 'shape-space' },
+    { key: 'mensuration-lab', name: '📐 Mensuration Lab', subtitle: 'Geometry & shape puzzles', color: 'orange', category: 'shape-space' },
     { key: 'math-lab', name: '🔬 Visual Learning Universe', subtitle: 'Visual, Mensuration & Addition labs', color: 'orange', category: 'shape-space' },
     { key: 'multiply', name: 'Multiplication', subtitle: 'Practice any times table (2–19)', color: 'purple', category: 'number-foundations' },
     { key: 'bases', name: 'Number Bases', subtitle: 'Binary, decimal, hexadecimal', color: 'green', category: 'number-foundations' },
