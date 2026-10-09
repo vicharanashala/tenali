@@ -17,10 +17,26 @@ We welcome contributions from everyone, whether it's fixing a bug, adding a new 
 
 ### 3. Quality Checks
 These are what CI actually runs on every PR (see `.github/workflows/test.yml`) — matching them locally means you're not surprised by a red check:
+- **Client unit tests:** `cd client && npm test` (or `npm run test:watch` for watch mode).
 - **Client lint:** `cd client && npm run lint` (currently non-blocking in CI until `App.jsx` is split up — but please still run it and fix what you introduce).
 - **Server tests:** `cd server && npm test`.
 - **BKT unit check:** `node server/lib/bkt.test.js`.
 - If you fix existing lint issues, run `npx eslint . --prune-suppressions` to remove obsolete entries from `eslint-suppressions.json`.
+
+### 3.1. Writing Frontend Tests
+- **Location & Naming:** Place test files alongside the module under test using `*.test.js` or `*.test.jsx` (e.g. `client/src/lib/concept/conceptApi.test.js`).
+- **Mocking `fetch`:** Use Vitest's `vi.fn()`:
+  ```js
+  global.fetch = vi.fn();
+  global.fetch.mockResolvedValueOnce({ ok: true, json: async () => ({ success: true }) });
+  ```
+- **Stubbing Auth / `localStorage`:** Use standard `localStorage` methods in `beforeEach`:
+  ```js
+  beforeEach(() => {
+    localStorage.clear();
+    localStorage.setItem('tenali-auth-token', 'test-token');
+  });
+  ```
 
 There is no `npm run format` or root-level `npm run build`/`npm run test` in this repo — don't rely on tooling docs that assume a single unified script at the root; `client/` and `server/` are separate npm packages with their own scripts.
 

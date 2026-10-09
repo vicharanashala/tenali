@@ -22,11 +22,19 @@
  * without CORS issues during development.
  */
 
+/// <reference types="vitest" />
 import process from 'node:process'
-import { defineConfig } from 'vite'
+import { defineConfig, configDefaults } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './src/setupTests.js',
+    include: ['src/**/*.test.{js,jsx}', 'src/**/*.spec.{js,jsx}'],
+    exclude: [...configDefaults.exclude, '**/monsters/**'],
+  },
   // Base path is read from the VITE_BASE_PATH env var so deployments under a
   // subpath (e.g. /summership/) no longer need the `--base=/summership/` CLI flag.
   // Falls back to '/' for root deployments and local dev.
