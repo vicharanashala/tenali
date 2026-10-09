@@ -535,6 +535,44 @@ function getSpeedRunLimit(difficulty, isAdaptive) {
 }
 
 /**
+ * Builds a bank of weight blocks that can always add up to `target`.
+ * Pure helper shared by the weight-block quiz apps (balance-scale, mixed
+ * lab, addition) so each one produces an identical bank for a given target.
+ */
+const createDynamicWeightBank = (target) => {
+  let denominations = []
+  if (target >= 500) {
+    denominations = [500, 100, 50, 10, 5, 1]
+  } else if (target >= 100) {
+    denominations = [100, 50, 10, 5, 1]
+  } else if (target >= 15) {
+    denominations = [50, 10, 5, 1]
+  } else {
+    denominations = [5, 1]
+  }
+
+  let bank = []
+  denominations.forEach(d => {
+    let count = 4
+    if (d === 100) count = 10
+    if (d === 50) count = 6
+    if (d === 10) count = 15
+    if (d === 5) count = 8
+    if (d === 1) count = 15
+
+    const needed = Math.ceil(target / d) + 2
+    if (needed > count) {
+      count = needed
+    }
+
+    for (let i = 0; i < count; i++) {
+      bank.push({ id: `bank-${d}-${i}-${Math.random()}`, val: d })
+    }
+  })
+  return bank
+}
+
+/**
  * useTimer Hook
  * Supports three modes driven by the sessionGoal:
  *   'speed'    — countdown from limitSeconds → 0; fires onTimeout when it hits 0
@@ -42173,39 +42211,6 @@ function BalanceScaleApp({ onBack }) {
   const targetTotal = question ? (Number(question.a) + Number(question.b)) : 0
   const rightTotal = rightBlocks.reduce((acc, b) => acc + b.val, 0)
 
-  const createDynamicWeightBank = (target) => {
-    let denominations = [];
-    if (target >= 500) {
-      denominations = [500, 100, 50, 10, 5, 1];
-    } else if (target >= 100) {
-      denominations = [100, 50, 10, 5, 1];
-    } else if (target >= 15) {
-      denominations = [50, 10, 5, 1];
-    } else {
-      denominations = [5, 1];
-    }
-
-    let bank = [];
-    denominations.forEach(d => {
-      let count = 4;
-      if (d === 100) count = 10;
-      if (d === 50) count = 6;
-      if (d === 10) count = 15;
-      if (d === 5) count = 8;
-      if (d === 1) count = 15;
-
-      const needed = Math.ceil(target / d) + 2;
-      if (needed > count) {
-        count = needed;
-      }
-
-      for (let i = 0; i < count; i++) {
-        bank.push({ id: `bank-${d}-${i}-${Math.random()}`, val: d });
-      }
-    });
-    return bank;
-  };
-
   const fetchQuestion = async (selectedLevel) => {
     setLoading(true)
     setFeedback('')
@@ -44821,10 +44826,11 @@ function App() {
     'comic-addition': ComicAdditionApp,
     gk: GKApp,                    // General Knowledge
     addition: AdditionApp,         // Basic addition
+    'written-methods': WrittenMethodsApp,
     'column-addition': ColumnAdditionApp, // Column Addition with carries
+    'column-subtraction': ColumnSubtractionApp, // Column Subtraction with borrows
     'column-multiplication': ColumnMultiplicationApp, // Column Multiplication with carries
     'column-division': ColumnDivisionApp, // Column Division with long division steps
-    'column-subtraction': ColumnSubtractionApp, // Column Subtraction with borrows
     quadratic: QuadraticApp,       // Quadratic substitution
     multiply: MultiplyApp,         // Multiplication tables
     'visual-math': VisualMathApp,  // Visual Math Lab (mult/div visual)
@@ -45869,17 +45875,6 @@ function Home({ onSelect, onBackToLanding, completedTopics = [], goldMastery = [
               </button>
             ))}
 
-            {featuredApps.map(app => (
-              <button key={app.key} onClick={() => { setMenuOpen(false); onSelect(app.key) }} style={{
-                display: 'block', width: '100%', textAlign: 'left', padding: '10px 16px',
-                background: 'none', border: 'none', cursor: 'pointer', color: 'var(--clr-text)',
-                fontFamily: 'var(--font-body)', fontSize: '0.95rem', transition: 'background var(--transition)'
-              }} onMouseEnter={e => e.target.style.background = 'var(--clr-hover-strong)'}
-                onMouseLeave={e => e.target.style.background = 'none'}>
-                <strong style={{ color: 'var(--clr-accent)' }}>{app.name}</strong>
-                <span style={{ display: 'block', fontSize: '0.78rem', color: 'var(--clr-text-soft)', marginTop: '2px' }}>{app.subtitle}</span>
-              </button>
-            ))}
 
             <div style={{ height: '1px', background: 'var(--clr-border)', margin: '4px 0' }} />
 
@@ -48351,6 +48346,58 @@ function GKApp({ onBack, markTopicCompleted, isGoalMode = false }) {
       </div>}
     <HintModal concept={'gk'} questionId={question?.id || 'unknown'} questionData={question} revealed={revealed} hintsUsedCount={hintsUsedCount} xpBreakdown={xpBreakdown} bonusLoading={bonusLoading} />
 </QuizLayout>
+  )
+}
+
+/**
+ * WrittenMethodsApp Component
+ * Consolidates the four column arithmetic operations (Addition, Subtraction, Multiplication, Division)
+ * into a single student-facing Written Methods experience.
+ */
+function WrittenMethodsApp({ onBack, completedTopics = [], goldMastery = [], markTopicCompleted, setTransferTopic, setMode, initialOp = null }) {
+  const [selectedOp, setSelectedOp] = useState(initialOp)
+
+  // Standardized pedagogical ordering: Addition -> Subtraction -> Multiplication -> Division
+  const operations = [
+    { key: 'column-addition', name: 'Column Addition', subtitle: 'Vertical addition with carrying', icon: '➕', color: '#4caf50', Component: ColumnAdditionApp },
+    { key: 'column-subtraction', name: 'Column Subtraction', subtitle: 'Vertical subtraction with borrowing', icon: '➖', color: '#ff9800', Component: ColumnSubtractionApp },
+    { key: 'column-multiplication', name: 'Column Multiplication', subtitle: 'Vertical multiplication with carrying', icon: '✖️', color: '#2196f3', Component: ColumnMultiplicationApp },
+    { key: 'column-division', name: 'Column Division', subtitle: 'Vertical division with long division steps', icon: '➗', color: '#9c27b0', Component: ColumnDivisionApp },
+  ]
+
+  if (selectedOp) {
+    const opObj = operations.find(o => o.key === selectedOp)
+    if (opObj) {
+      const OpComponent = opObj.Component
+      return <OpComponent onBack={() => setSelectedOp(null)} completedTopics={completedTopics} goldMastery={goldMastery} markTopicCompleted={markTopicCompleted} setTransferTopic={setTransferTopic} setMode={setMode} />
+    }
+  }
+
+  return (
+    <div style={{ minHeight: '100vh', background: 'var(--clr-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', fontFamily: 'Inter, sans-serif' }}>
+      <div style={{ background: 'var(--clr-card)', border: '1.5px solid var(--clr-border)', borderRadius: '28px', boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '48px 40px', maxWidth: '720px', width: '100%', textAlign: 'center', position: 'relative' }}>
+        <button onClick={onBack} style={{ position: 'absolute', top: '24px', left: '24px', background: 'transparent', border: '1px solid var(--clr-border)', borderRadius: '6px', padding: '6px 14px', color: 'var(--clr-text-soft)', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer' }}>← Home</button>
+        <h1 style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 700, fontSize: '44px', color: 'var(--clr-text)', margin: '0 0 12px', lineHeight: 1.1 }}>Written Methods</h1>
+        <p style={{ color: 'var(--clr-text-soft)', fontSize: '0.95rem', margin: '0 0 36px', fontFamily: 'Inter, sans-serif', fontWeight: 400 }}>Master vertical arithmetic methods step-by-step with carrying and borrowing</p>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '16px', textAlign: 'left' }}>
+          {operations.map(op => (
+            <button key={op.key} onClick={() => setSelectedOp(op.key)} style={{
+              background: 'var(--clr-surface)', border: '1.5px solid var(--clr-border)', borderRadius: '16px',
+              padding: '20px 24px', cursor: 'pointer', display: 'flex', alignItems: 'flex-start', gap: '16px',
+              textAlign: 'left', transition: 'all 0.2s ease', color: 'var(--clr-text)'
+            }} onMouseEnter={e => { e.currentTarget.style.borderColor = op.color; e.currentTarget.style.transform = 'translateY(-2px)' }}
+               onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--clr-border)'; e.currentTarget.style.transform = 'none' }}>
+              <span style={{ fontSize: '1.8rem', lineHeight: 1 }}>{op.icon}</span>
+              <div>
+                <strong style={{ display: 'block', fontSize: '1.1rem', color: 'var(--clr-text)', marginBottom: '4px' }}>{op.name}</strong>
+                <span style={{ display: 'block', fontSize: '0.82rem', color: 'var(--clr-text-soft)', lineHeight: 1.4 }}>{op.subtitle}</span>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
   )
 }
 
@@ -52052,7 +52099,8 @@ function GymQuiz({ title, subtitle, typeKeys, welcomeText, algebraInput, onBack 
     }
     const gen = GYM_TYPES[t]?.generator
     setQuestion(gen ? gen(d) : null)
-    timer.start(sessionGoal, handleTimeout, getSpeedRunLimit(difficulty ?? 'easy', isAdaptive ?? false))
+    // GymQuiz has no session-goal concept; the no-arg form starts a count-up timer.
+    timer.start()
   }
 
   // Stop button (adaptive mode only): end the session and show the results screen.
@@ -53836,7 +53884,9 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
     setFeedback('')
     setRevealed(false)
     setIsCorrect(null)
-    timer.start(sessionGoal, handleTimeout, getSpeedRunLimit(difficulty ?? 'easy', isAdaptive ?? false))
+    // MultiplyApp has no generic speed-timeout handler: level 3 uses its own
+    // countdown below, so use useTimer's documented defaults here.
+    timer.start(sessionGoal)
     if (level === 3) startLevel3Countdown()
   }
 
@@ -55416,7 +55466,7 @@ function TransferChallengeApp({ topicKey, onBack, completedTopics, goldMastery, 
   )
 }
 
-function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, answerField, topicKey: customTopicKey }) {
+function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, answerField, topicKey: customTopicKey, extraActions }) {
   return function GeneratedQuizApp({ onBack, completedTopics = [], goldMastery = [], markTopicCompleted, markGoldMastery, updateCoins, setMode, setTransferTopic, initialDifficulty, initialNumQuestions, initialStarted, isGoalMode = false }) {
     const diffs = Object.keys(diffLabels)
     // Feature CR: a just-earned Road License pre-selects the earned difficulty (one-shot; student can change it)
@@ -55784,6 +55834,7 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
             }}>
               Start Quiz
             </button>
+            {extraActions && extraActions({ setMode, onBack })}
           </div>
         {isStage3Completed(topicKey, completedTopics) && (
           <div className="transfer-cta-box" style={{ marginTop: '20px', padding: '16px', background: 'var(--clr-hover, rgba(255,255,255,0.03))', borderRadius: '10px', border: '1px solid var(--clr-border)', textAlign: 'center' }}>
@@ -56412,6 +56463,14 @@ const BasesApp = makeQuizApp({
   title: 'Number Bases', subtitle: 'Binary, decimal, hexadecimal', apiPath: 'bases-api', topicKey: 'number-bases',
   diffLabels: { easy: 'Easy — Dec→Bin', medium: 'Medium — Bin→Dec', hard: 'Hard — Dec→Hex', extrahard: 'Extra Hard — Bin add / Hex→Bin' },
   placeholders: (q, d) => d === 'medium' ? 'e.g. 42' : d === 'hard' ? 'e.g. FF' : 'e.g. 101010',
+  extraActions: ({ setMode }) => setMode ? (
+    <button type="button" onClick={() => setMode('guess')} style={{
+      marginTop: '16px', background: 'transparent', border: '1px solid #5B5048', borderRadius: '6px',
+      padding: '10px 24px', color: '#C9BFB6', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer'
+    }}>
+      🔮 Guess the Number — Binary Mind-Reading Game
+    </button>
+  ) : null,
 })
 
 const CircleThApp = makeQuizApp({
@@ -56885,7 +56944,7 @@ function GymApp({ onBack }) {
   const [loading, setLoading] = useState(false)
   const [loadError, setLoadError] = useState('')
   const timer = useTimer()
-  const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('gym', finished, score, totalQ, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
+  const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('gym', phase === 'finished', score, totalQ, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
   const sessionGoal = 'standard'
   const isAdaptive = true
   const handleTimeout = async () => {
@@ -58631,7 +58690,7 @@ function RandomMixApp({ onBack, isGoalMode = false }) {
     }
   }, [isGoalMode]);
   const timer = useTimer()
-  const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('mix', finished, score, totalQ, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
+  const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('mix', phase === 'finished', score, totalQuestions, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
   const advanceFnRef = useRef(null)
   const submittedRef = useRef(false)
   const advancedRef = useRef(false)
@@ -62247,7 +62306,9 @@ function TwinHuntApp({ onBack, isGoalMode = false }) {
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
     const timeTaken = timer.stop ? timer.stop() : 0
-    const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
+    // Twin Hunt has no question payload; its result rows are labelled by round
+    // (see the pick handler below), so use the same label for a timed-out round.
+    const qPrompt = `Round ${round}`
     try {
       const r = await fetch(`${API}/twinhunt-api/check`, {
         method: 'POST',
@@ -62298,7 +62359,9 @@ const generateRound = (n) => {
     setFeedback('')
     setIsCorrect(null)
     setRevealed(false)
-    timer.start(sessionGoal, handleTimeout, getSpeedRunLimit(difficulty ?? 'easy', isAdaptive ?? false))
+    // Twin Hunt is not difficulty-graded, so fall back to the same 'easy'/non-adaptive
+    // values the `?? 'easy'` / `?? false` fallbacks in this template resolve to.
+    timer.start(sessionGoal, handleTimeout, getSpeedRunLimit('easy', false))
   }
 
   /**
@@ -65468,25 +65531,10 @@ function CustomApp({ onBack, isGoalMode = false }) {
     try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
     const timeTaken = timer.stop ? timer.stop() : 0
     const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
-    try {
-      const r = await fetch(`${API}/${apiPath}/check`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-        body: JSON.stringify({ ...(typeof question !== 'undefined' ? question : {}), userAnswer: '', answer: '', sessionGoal })
-      })
-      const d = await r.json()
-      const corrAns = d.display || d.correctAnswer || d.answer || '—'
-      if (typeof setResults === 'function') {
-        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
-      }
-      if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
-      }
-    } catch(e) {
-      console.error('handleTimeout error:', e)
-      if (typeof setResults === 'function') {
-        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
-      }
+    // CustomApp posts to a per-type check endpoint chosen in handleSubmit, so there is no
+    // single endpoint to ask here. Record the round without a server-supplied answer.
+    if (typeof setResults === 'function') {
+      setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
     }
   }
 
@@ -68652,37 +68700,6 @@ function RiyaApp({ onBack, isGoalMode = false }) {
 
   // ── Helpers ─────────────────────────────────────────────────────
   
-  const handleTimeout = async () => {
-    if (typeof revealed !== 'undefined' && revealed) return
-    if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
-    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
-    const timeTaken = timer.stop ? timer.stop() : 0
-    const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
-    try {
-      const r = await fetch(`${API}/riya-api/check`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-        body: JSON.stringify({ ...(typeof question !== 'undefined' ? question : {}), userAnswer: '', answer: '', sessionGoal })
-      })
-      const d = await r.json()
-      const corrAns = d.display || d.correctAnswer || d.answer || '—'
-      if (typeof setResults === 'function') {
-        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
-      }
-      if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
-      }
-    } catch(e) {
-      console.error('handleTimeout error:', e)
-      if (typeof setResults === 'function') {
-        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
-      }
-    }
-  }
-
 const startQuiz = () => {
     setPhase('quiz')
     setQuizIdx(0)
@@ -69013,12 +69030,6 @@ function TatsavitLineApp({ onBack }) {
   const [justSolved, setJustSolved] = useState(false)
   // Visible domain on each axis (±zoom units). Smaller = zoomed in.
   const [zoom, setZoom] = useState(10)
-  const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
-  useEffect(() => {
-    if (!isGoalMode) {
-      setSessionGoal('standard');
-    }
-  }, [isGoalMode]);
   const svgRef = useRef(null)
 
   // Regenerate random points when `round` changes

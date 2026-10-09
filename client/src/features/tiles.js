@@ -13,10 +13,7 @@ export const TILES = [
     { key: 'battle', name: '⚔️ Battle Arena', subtitle: 'Live fastest-finger duels', color: 'red', category: 'shelf' },
     { key: 'detective', name: '🔍 Detective Agency', subtitle: 'Solve math mysteries and crack cases!', color: 'indigo', category: 'shelf' },
     { key: 'addition', name: 'Addition', subtitle: '20-question addition practice', color: 'blue', category: 'number-foundations' },
-    { key: 'column-addition', name: 'Column Addition', subtitle: 'Vertical addition with carrying', color: 'blue', category: 'number-foundations', foldInto: 'basicarith' },
-    { key: 'column-division', name: 'Column Division', subtitle: 'Vertical division with long division', color: 'blue', category: 'number-foundations', foldInto: 'basicarith' },
-    { key: 'column-multiplication', name: 'Column Multiplication', subtitle: 'Vertical multiplication with carrying', color: 'blue', category: 'number-foundations', foldInto: 'basicarith' },
-    { key: 'column-subtraction', name: 'Column Subtraction', subtitle: 'Vertical subtraction with borrowing', color: 'blue', category: 'number-foundations', foldInto: 'basicarith' },
+    { key: 'written-methods', name: 'Written Methods', subtitle: 'Column +, −, ×, ÷ with carrying & borrowing', color: 'blue', category: 'number-foundations' },
     { key: 'angles', name: 'Angles', subtitle: 'Lines, points, parallel lines', color: 'green', category: 'shape-space' },
     { key: 'basicarith', name: 'Arithmetic', subtitle: '+, −, ×, ÷ with positive & negative', color: 'purple', category: 'number-foundations' },
     { key: 'banking', name: 'Banking (RD)', subtitle: 'Interest & recurring deposits', color: 'blue', category: 'everyday-maths' },
@@ -95,7 +92,6 @@ export const TILES = [
     { key: 'vocab', name: 'Vocabulary', subtitle: 'Match words to definitions', color: 'green', category: 'shelf' },
     { key: 'spot', name: 'Twin Hunt', subtitle: 'Find the common object', color: 'purple', category: 'shelf' },
     { key: 'gymdecimals', name: 'Decimals', subtitle: 'Signed decimal × decimal — 1-digit MCQ', color: 'purple', category: 'number-foundations', foldInto: 'decimals' },
-    { key: 'guess', name: 'Guess the Number', subtitle: 'Binary magic trick — mind-reading game', color: 'blue', category: 'number-foundations', foldInto: 'bases' },
     { key: 'funcgym', name: 'Functions', subtitle: 'Evaluate small polynomials (MCQ)', color: 'blue', category: 'algebra', foldInto: 'funceval' },
     { key: 'dotprodgym', name: 'Dot Products', subtitle: '2D/3D dot products (MCQ)', color: 'green', category: 'linear-algebra', foldInto: 'dotprod' },
     { key: 'fracaddgym', name: 'Fractions', subtitle: 'Add single-digit fractions (MCQ)', color: 'purple', category: 'number-foundations', foldInto: 'fractionadd' },
@@ -103,6 +99,7 @@ export const TILES = [
     { key: 'indicesgym', name: 'Indices', subtitle: 'Index laws (MCQ)', color: 'green', category: 'algebra', foldInto: 'indices' },
     { key: 'polygym', name: 'Polynomials', subtitle: 'Arithmetic → monomial algebra (MCQ)', color: 'blue', category: 'algebra', foldInto: 'polymul' },
     { key: 'water-jug-lab', name: '🧪 Water Jug Lab', subtitle: 'GCD discovery — 13-level progression', color: 'teal', category: 'shelf' },
+    { key: 'vachana', name: 'Vachana', subtitle: 'Mathematical Literacy Lab', color: 'orange', category: 'shelf' },
     { key: 'equation-crafting-lab', name: '⚗️ Equation Crafting Lab', subtitle: 'Build expressions in the mixing pot', color: 'orange', category: 'algebra' },
 ]
 
