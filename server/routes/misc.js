@@ -991,37 +991,6 @@ const generators = {
     },
   },
 
-  concept: {
-    question(difficulty, query = {}) {
-      difficulty = difficulty || 'easy';
-      if (difficulty === 'extrahard') difficulty = 'extra-hard';
-      const exclude = query.exclude ? query.exclude.split(',').map(Number) : [];
-      let pool = banks.concepts.filter((q) => q.difficulty === difficulty);
-      if (!pool.length) return null;
-      const unseen = pool.filter((q) => !exclude.includes(q.id));
-      if (unseen.length > 0) pool = unseen;
-      const q = pool[Math.floor(Math.random() * pool.length)];
-      return {
-        id: q.id,
-        question: q.question,
-        options: q.options,
-        difficulty: q.difficulty,
-      };
-    },
-    check(body) {
-      const { id, answerOption } = body || {};
-      const q = banks.concepts.find((item) => Number(item.id) === Number(id));
-      if (!q) return null;
-      const correct = String(answerOption || '').toUpperCase() === String(q.answerOption || '').toUpperCase();
-      return {
-        correct,
-        correctAnswer: q.answerOption,
-        correctAnswerText: q.answerText,
-        message: correct ? 'Correct!' : 'Incorrect',
-      };
-    },
-  },
-
   sets: {
     question(difficulty) {
       const diff = difficulty || 'easy';

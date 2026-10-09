@@ -622,7 +622,6 @@ app.use('/indicesgym-api',  miscRouter);
 app.use('/polygym-api',     miscRouter);
 app.use('/gk-api',          miscRouter);
 app.use('/vocab-api',       miscRouter);
-app.use('/concept-api',     miscRouter);
 app.use('/curiosity-api',   miscRouter);
 
 const geometryRouter = require('./routes/geometry');
@@ -1083,7 +1082,6 @@ app.post('/sqrt-api/check', (req, res) => {
 
 // Directory containing vocabulary question JSON files
 const vocabDir = path.join(__dirname, '..', 'vocab', 'questions');
-const conceptDir = path.join(__dirname, '..', 'concept', 'questions');
 
 /**
  * Load all vocabulary questions from JSON files
@@ -1094,7 +1092,7 @@ const conceptDir = path.join(__dirname, '..', 'concept', 'questions');
  */
 // Vocab is by far the largest set (~7,600 files) — loaded via loadJsonDir()
 // (see loadQuestions above) so the reads overlap instead of running one at a
-// time. Concepts is tiny (~15 files); left synchronous, not worth the churn.
+// time.
 async function loadVocabAsync() {
   try {
     return await loadJsonDir(vocabDir);
@@ -1103,21 +1101,10 @@ async function loadVocabAsync() {
   }
 }
 
-function loadConcepts() {
-  try {
-    const files = fs.readdirSync(conceptDir).filter((f) => f.endsWith('.json'));
-    return files.map((f) => JSON.parse(fs.readFileSync(path.join(conceptDir, f), 'utf8')));
-  } catch (e) {
-    return [];
-  }
-}
-
 // Populated by initData() before the server starts listening, same as
 // `questions` above.
 let vocabQuestions = [];
-const conceptQuestions = loadConcepts();
 const banks = require('./lib/question-banks');
-banks.concepts = conceptQuestions;
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // LEARNING JOURNEY ENDPOINTS

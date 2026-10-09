@@ -535,6 +535,44 @@ function getSpeedRunLimit(difficulty, isAdaptive) {
 }
 
 /**
+ * Builds a bank of weight blocks that can always add up to `target`.
+ * Pure helper shared by the weight-block quiz apps (balance-scale, mixed
+ * lab, addition) so each one produces an identical bank for a given target.
+ */
+const createDynamicWeightBank = (target) => {
+  let denominations = []
+  if (target >= 500) {
+    denominations = [500, 100, 50, 10, 5, 1]
+  } else if (target >= 100) {
+    denominations = [100, 50, 10, 5, 1]
+  } else if (target >= 15) {
+    denominations = [50, 10, 5, 1]
+  } else {
+    denominations = [5, 1]
+  }
+
+  let bank = []
+  denominations.forEach(d => {
+    let count = 4
+    if (d === 100) count = 10
+    if (d === 50) count = 6
+    if (d === 10) count = 15
+    if (d === 5) count = 8
+    if (d === 1) count = 15
+
+    const needed = Math.ceil(target / d) + 2
+    if (needed > count) {
+      count = needed
+    }
+
+    for (let i = 0; i < count; i++) {
+      bank.push({ id: `bank-${d}-${i}-${Math.random()}`, val: d })
+    }
+  })
+  return bank
+}
+
+/**
  * useTimer Hook
  * Supports three modes driven by the sessionGoal:
  *   'speed'    — countdown from limitSeconds → 0; fires onTimeout when it hits 0
@@ -42173,39 +42211,6 @@ function BalanceScaleApp({ onBack }) {
   const targetTotal = question ? (Number(question.a) + Number(question.b)) : 0
   const rightTotal = rightBlocks.reduce((acc, b) => acc + b.val, 0)
 
-  const createDynamicWeightBank = (target) => {
-    let denominations = [];
-    if (target >= 500) {
-      denominations = [500, 100, 50, 10, 5, 1];
-    } else if (target >= 100) {
-      denominations = [100, 50, 10, 5, 1];
-    } else if (target >= 15) {
-      denominations = [50, 10, 5, 1];
-    } else {
-      denominations = [5, 1];
-    }
-
-    let bank = [];
-    denominations.forEach(d => {
-      let count = 4;
-      if (d === 100) count = 10;
-      if (d === 50) count = 6;
-      if (d === 10) count = 15;
-      if (d === 5) count = 8;
-      if (d === 1) count = 15;
-
-      const needed = Math.ceil(target / d) + 2;
-      if (needed > count) {
-        count = needed;
-      }
-
-      for (let i = 0; i < count; i++) {
-        bank.push({ id: `bank-${d}-${i}-${Math.random()}`, val: d });
-      }
-    });
-    return bank;
-  };
-
   const fetchQuestion = async (selectedLevel) => {
     setLoading(true)
     setFeedback('')
@@ -52052,7 +52057,8 @@ function GymQuiz({ title, subtitle, typeKeys, welcomeText, algebraInput, onBack 
     }
     const gen = GYM_TYPES[t]?.generator
     setQuestion(gen ? gen(d) : null)
-    timer.start(sessionGoal, handleTimeout, getSpeedRunLimit(difficulty ?? 'easy', isAdaptive ?? false))
+    // GymQuiz has no session-goal concept; the no-arg form starts a count-up timer.
+    timer.start()
   }
 
   // Stop button (adaptive mode only): end the session and show the results screen.
@@ -53836,7 +53842,9 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
     setFeedback('')
     setRevealed(false)
     setIsCorrect(null)
-    timer.start(sessionGoal, handleTimeout, getSpeedRunLimit(difficulty ?? 'easy', isAdaptive ?? false))
+    // MultiplyApp has no generic speed-timeout handler: level 3 uses its own
+    // countdown below, so use useTimer's documented defaults here.
+    timer.start(sessionGoal)
     if (level === 3) startLevel3Countdown()
   }
 
@@ -56885,7 +56893,7 @@ function GymApp({ onBack }) {
   const [loading, setLoading] = useState(false)
   const [loadError, setLoadError] = useState('')
   const timer = useTimer()
-  const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('gym', finished, score, totalQ, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
+  const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('gym', phase === 'finished', score, totalQ, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
   const sessionGoal = 'standard'
   const isAdaptive = true
   const handleTimeout = async () => {
@@ -58631,7 +58639,7 @@ function RandomMixApp({ onBack, isGoalMode = false }) {
     }
   }, [isGoalMode]);
   const timer = useTimer()
-  const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('mix', finished, score, totalQ, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
+  const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('mix', phase === 'finished', score, totalQuestions, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
   const advanceFnRef = useRef(null)
   const submittedRef = useRef(false)
   const advancedRef = useRef(false)
@@ -62247,7 +62255,9 @@ function TwinHuntApp({ onBack, isGoalMode = false }) {
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
     const timeTaken = timer.stop ? timer.stop() : 0
-    const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
+    // Twin Hunt has no question payload; its result rows are labelled by round
+    // (see the pick handler below), so use the same label for a timed-out round.
+    const qPrompt = `Round ${round}`
     try {
       const r = await fetch(`${API}/twinhunt-api/check`, {
         method: 'POST',
@@ -62298,7 +62308,9 @@ const generateRound = (n) => {
     setFeedback('')
     setIsCorrect(null)
     setRevealed(false)
-    timer.start(sessionGoal, handleTimeout, getSpeedRunLimit(difficulty ?? 'easy', isAdaptive ?? false))
+    // Twin Hunt is not difficulty-graded, so fall back to the same 'easy'/non-adaptive
+    // values the `?? 'easy'` / `?? false` fallbacks in this template resolve to.
+    timer.start(sessionGoal, handleTimeout, getSpeedRunLimit('easy', false))
   }
 
   /**
@@ -65468,25 +65480,10 @@ function CustomApp({ onBack, isGoalMode = false }) {
     try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
     const timeTaken = timer.stop ? timer.stop() : 0
     const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
-    try {
-      const r = await fetch(`${API}/${apiPath}/check`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-        body: JSON.stringify({ ...(typeof question !== 'undefined' ? question : {}), userAnswer: '', answer: '', sessionGoal })
-      })
-      const d = await r.json()
-      const corrAns = d.display || d.correctAnswer || d.answer || '—'
-      if (typeof setResults === 'function') {
-        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
-      }
-      if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
-      }
-    } catch(e) {
-      console.error('handleTimeout error:', e)
-      if (typeof setResults === 'function') {
-        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
-      }
+    // CustomApp posts to a per-type check endpoint chosen in handleSubmit, so there is no
+    // single endpoint to ask here. Record the round without a server-supplied answer.
+    if (typeof setResults === 'function') {
+      setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
     }
   }
 
@@ -68652,37 +68649,6 @@ function RiyaApp({ onBack, isGoalMode = false }) {
 
   // ── Helpers ─────────────────────────────────────────────────────
   
-  const handleTimeout = async () => {
-    if (typeof revealed !== 'undefined' && revealed) return
-    if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
-    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
-    const timeTaken = timer.stop ? timer.stop() : 0
-    const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
-    try {
-      const r = await fetch(`${API}/riya-api/check`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-        body: JSON.stringify({ ...(typeof question !== 'undefined' ? question : {}), userAnswer: '', answer: '', sessionGoal })
-      })
-      const d = await r.json()
-      const corrAns = d.display || d.correctAnswer || d.answer || '—'
-      if (typeof setResults === 'function') {
-        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
-      }
-      if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
-      }
-    } catch(e) {
-      console.error('handleTimeout error:', e)
-      if (typeof setResults === 'function') {
-        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
-      }
-    }
-  }
-
 const startQuiz = () => {
     setPhase('quiz')
     setQuizIdx(0)
@@ -69013,12 +68979,6 @@ function TatsavitLineApp({ onBack }) {
   const [justSolved, setJustSolved] = useState(false)
   // Visible domain on each axis (±zoom units). Smaller = zoomed in.
   const [zoom, setZoom] = useState(10)
-  const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
-  useEffect(() => {
-    if (!isGoalMode) {
-      setSessionGoal('standard');
-    }
-  }, [isGoalMode]);
   const svgRef = useRef(null)
 
   // Regenerate random points when `round` changes

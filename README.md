@@ -125,7 +125,7 @@ Learning JSON → learnContent.js → Learning Page → Interactive Components
 
 Tenali (named after the legendary **Tenali Raman** — the witty Indian scholar who outwitted entire courts with logic) is an **adaptive math learning platform** featuring algorithmically-generated puzzle types, real-time multiplayer battles, and step-by-step solutions for every problem. Every question is generated on the fly — there is no question database — so practice is infinite and never repeats. Difficulty adapts to each learner in real time.
 
-There isn't one canonical "puzzle count" — different parts of the codebase group content differently, and that's worth naming instead of collapsing into a single number: the server exposes **93 distinct `*-api` route pairs** (the real unit of "a puzzle type"), grouped under **69 topic areas** in the `/graph` prerequisite map, and the home-screen tile registry (`client/src/features/tiles.js`) lists **100+ tiles**, because several route pairs surface as more than one tile (e.g. an MCQ "gym" drill and a full-form drill on the same topic, via `foldInto`). Use whichever number matches what you're actually counting.
+There isn't one canonical "puzzle count" — different parts of the codebase group content differently, and that's worth naming instead of collapsing into a single number: the server exposes **92 distinct `*-api` route pairs** (the real unit of "a puzzle type"), grouped under **69 topic areas** in the `/graph` prerequisite map, and the home-screen tile registry (`client/src/features/tiles.js`) lists **100+ tiles**, because several route pairs surface as more than one tile (e.g. an MCQ "gym" drill and a full-form drill on the same topic, via `foldInto`). Use whichever number matches what you're actually counting.
 
 It is built to run on a single VPS — `tenali.fun` — with one Node process serving the React app, the puzzle APIs, the JWT auth, the Socket.IO Battle Arena, and the multi-language code playground.
 
@@ -437,17 +437,16 @@ JWT auth with **fail-fast** in production, `express-rate-limit`, CORS allowlist,
 | 78 | Congruence | `/congruence-api` |
 | 79 | Similarity | `/similarity-api` |
 | 80 | Visual Math | `/visual-math-api` |
-| 81 | Conceptual | `/concept-api` |
-| 82 | Vocabulary (7,662 words) | `/vocab-api` |
-| 83 | GK (991 questions) | `/gk-api` |
-| 84 | Tatsavit | `/tatsavit-api` |
-| 85 | Sudoku | `/sudoku-api` |
-| 86 | Transfer scenarios | `/transfer-api` |
-| 87 | Darts | `/darts-api` |
-| 88 | Riddles | `/riddle-api` |
-| 89 | Square Root | `/sqrt-api` |
-| 90 | Squaring | `/squaring-api` |
-| 91 | Curiosity | `/curiosity-api` |
+| 81 | Vocabulary (7,662 words) | `/vocab-api` |
+| 82 | GK (991 questions) | `/gk-api` |
+| 83 | Tatsavit | `/tatsavit-api` |
+| 84 | Sudoku | `/sudoku-api` |
+| 85 | Transfer scenarios | `/transfer-api` |
+| 86 | Darts | `/darts-api` |
+| 87 | Riddles | `/riddle-api` |
+| 88 | Square Root | `/sqrt-api` |
+| 89 | Squaring | `/squaring-api` |
+| 90 | Curiosity | `/curiosity-api` |
 
 </details>
 
