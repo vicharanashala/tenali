@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import './LinearAlgebraApp.css'
+import { parseMathValue, compareNumericAnswers } from './lib/mathParser'
 
 const API = import.meta.env.VITE_API_BASE_URL || ''
 
@@ -127,10 +128,10 @@ const MISSIONS = [
       { q: 'Does y = x + 1 pass through the origin?', type: 'yesno', correct: 1 }
     ],
     realLife: [
-      { emoji: '💰', title: 'Simple Interest', equation: '', story: 'In simple interest, the interest earned equals the interest rate multiplied by the principal amount. If you deposit Rs0, you earn Rs0 interest. There is no starting amount of interest — it always begins at zero. This means the interest line always passes through the origin.', question: 'Why does the simple interest line always pass through the origin (0,0)?', answer: 'yes' },
-      { emoji: '🛒', title: 'Unit Pricing', equation: '', story: 'When you buy items at a fixed price per unit, the total cost equals the price times the quantity. If you buy zero items, you pay nothing — the cost is zero. There is no fixed charge, so the cost line goes through the origin.', question: 'Why does the unit pricing line pass through the origin (0,0)?', answer: 'yes' },
+      { emoji: '💰', title: 'Simple Interest', equation: '', story: 'In simple interest, the interest earned equals the interest rate multiplied by the principal amount. If you deposit Rs0, you earn Rs0 interest. There is no starting amount of interest — it always begins at zero. This means the interest line always passes through the origin.', question: 'Does the simple interest line always pass through the origin (0,0)?', answer: 'yes' },
+      { emoji: '🛒', title: 'Unit Pricing', equation: '', story: 'When you buy items at a fixed price per unit, the total cost equals the price times the quantity. If you buy zero items, you pay nothing — the cost is zero. There is no fixed charge, so the cost line goes through the origin.', question: 'Does the unit pricing line pass through the origin (0,0)?', answer: 'yes' },
       { emoji: '🏃', title: 'Distance', equation: '', story: 'Distance travelled equals speed multiplied by time. At time zero (the moment you start), you have covered zero distance. The starting point is the origin, and the slope of the distance-time graph represents your speed.', question: 'In a distance-time graph, what does the slope of the line represent in physical terms?', answer: 'speed' },
-      { emoji: '💧', title: 'Water Flow', equation: '', story: 'Water flows out of a tank at a constant rate. The volume dispensed equals the flow rate multiplied by time. At time zero, the tank has dispensed nothing — the volume is zero. The line starts at the origin.', question: 'Why does the water flow volume line pass through the origin (0,0)?', answer: 'yes' },
+      { emoji: '💧', title: 'Water Flow', equation: '', story: 'Water flows out of a tank at a constant rate. The volume dispensed equals the flow rate multiplied by time. At time zero, the tank has dispensed nothing — the volume is zero. The line starts at the origin.', question: 'Does the water flow volume line pass through the origin (0,0)?', answer: 'yes' },
       { emoji: '🌐', title: 'Network Bandwidth & Data Transfer Rates', equation: 'y = mx', type: 'mcq', concept: 'Comparing Slopes as Rates of Change', story: 'A network engineer plots the total data transferred (y, in GB) against time (x, in hours) for three different servers. Server A follows y=x, Server B follows y=2x, and Server C follows y=10x. Visually on a graph, what does the steepness of Server C\'s line represent in the real world compared to the others?', question: 'What does the steepness of Server C\'s line represent?', options: ['Server C has a higher network latency.', 'Server C transfers data at a much faster rate (higher bandwidth).', 'Server C started transferring data earlier than the others.', 'Server C has reached its maximum data capacity.'], answer: 'Server C transfers data at a much faster rate (higher bandwidth).', explanation: 'The slope of the line represents the rate of data transfer (GB/hour). A steeper line (m=10) means more data (y) is transferred in the same amount of time (x), indicating a higher bandwidth.' },
       { emoji: '🤖', title: 'Autonomous Vehicle Speed Profiling', equation: 'y = 10x vs y = x', type: 'numerical', concept: 'Distance-Time Graphs and Steepness', story: 'Three drones are flying at constant speeds. Their distance from the base (y, in meters) over time (x, in seconds) is plotted as y=x, y=2x, and y=10x. How many meters ahead is the fastest drone compared to the slowest drone exactly 5 seconds after takeoff?', question: 'How many meters ahead is the fastest drone at 5 seconds?', answer: '45', explanation: 'The fastest drone follows y=10x, so at x=5, distance = 50 meters. The slowest drone follows y=x, so at x=5, distance = 5 meters. Difference = 50 - 5 = 45 meters.' },
       { emoji: '💱', title: 'Currency Exchange & Conversion Graphs', equation: 'y = 10x', type: 'mcq', concept: 'Proportionality Constants & Value Inverse', story: 'A financial analyst plots currency conversion graphs where the x-axis is USD and the y-axis is the converted foreign currency. If Currency P follows y=x, Currency Q follows y=2x, and Currency R follows y=10x, which statement is mathematically true regarding their exchange values?', question: 'Which statement about exchange values is mathematically true?', options: ['Currency R is the strongest currency because it has the steepest line.', '1 USD buys 10 units of Currency R, meaning Currency R is actually weaker per unit than USD.', 'Currency P fluctuates the least over time.', 'Currency Q has a constant inflation rate of 2%.'], answer: '1 USD buys 10 units of Currency R, meaning Currency R is actually weaker per unit than USD.', explanation: 'The equation y=10x means for every 1 unit of x (USD), you get 10 units of y (Currency R). This means it takes more of Currency R to equal 1 USD, representing a mathematically weaker per-unit value despite having the steepest slope.' },
@@ -2704,10 +2705,10 @@ function LinearAlgebraApp({ onBack }) {
       correct = ynIdx === m.correct;
       msg = correct ? 'Correct!' : 'Not quite. Think about what GeoGebra shows.';
     } else if (m.answerType === 'num') {
-      const val = parseFloat(input);
+      const val = parseMathValue(input);
       if (isNaN(val)) { setFeedback({ correct: false, message: 'Please enter a number!', detail: '' }); setAttempts(a => a + 1); return; }
       const tol = m.tolerance !== undefined ? m.tolerance : 0.001;
-      correct = Math.abs(val - m.correct) <= tol;
+      correct = compareNumericAnswers(input, m.correct, tol);
       msg = correct ? 'Correct!' : 'Not right. Try again using GeoGebra.';
     } else if (m.answerType === 'text') {
       correct = textMatches(input, m.expectedKeywords || []);
@@ -2994,7 +2995,7 @@ function LinearAlgebraApp({ onBack }) {
         <div className="la-quiz-title">Quick Test <span style={{ fontSize:'0.7rem', opacity:0.6, textTransform:'uppercase' }}>({quizDifficulty})</span></div>
         {qs.map((q, i) => {
           const selected = quizAnswers[i];
-          const isCorrect = quizSubmitted && (q._isNum ? selected !== '' && Math.abs(parseFloat(selected) - q._answer) <= (q._tol || 0.001) : q._isText ? textMatches(selected || '', q._keywords || []) : selected === q.correct);
+          const isCorrect = quizSubmitted && (q._isNum ? selected !== '' && compareNumericAnswers(selected, q._answer, q._tol || 0.001) : q._isText ? textMatches(selected || '', q._keywords || []) : selected === q.correct);
           const isWrong = quizSubmitted && selected !== undefined && !isCorrect;
           if (q._isNum) {
             return (
@@ -3138,9 +3139,17 @@ function LinearAlgebraApp({ onBack }) {
                     })}
                   </div>
                   <button className="la-check-btn" onClick={() => {
-                    const exp = (rl.answer || '').replace(/\s+/g,'').toLowerCase();
-                    const got = (rlAnswer || '').replace(/\s+/g,'').toLowerCase();
-                    setRlFeedback(got.includes(exp) || got === exp ? '✓ Correct! Well done!' : '✗ Not quite. Try again!');
+                    let c = false;
+                    const expNum = parseMathValue(rl.answer);
+                    const gotNum = parseMathValue(rlAnswer);
+                    if (!isNaN(expNum) && !isNaN(gotNum)) {
+                      c = compareNumericAnswers(rlAnswer, rl.answer, 0.001);
+                    } else {
+                      const exp = (rl.answer || '').replace(/\s+/g,'').toLowerCase();
+                      const got = (rlAnswer || '').replace(/\s+/g,'').toLowerCase();
+                      c = (got === exp);
+                    }
+                    setRlFeedback(c ? '✓ Correct! Well done!' : '✗ Not quite. Try again!');
                   }} disabled={!rlAnswer.trim()}>Check</button>
                 </div>
               ) : (
@@ -3151,15 +3160,31 @@ function LinearAlgebraApp({ onBack }) {
                     style={{ flex: 1, minWidth: 150 }}
                       onKeyDown={e => {
                       if (e.key === 'Enter' && rlAnswer.trim()) {
-                        const exp = (rl.answer || '').replace(/\s+/g,'').toLowerCase();
-                        const got = rlAnswer.replace(/\s+/g,'').toLowerCase();
-                        setRlFeedback(got.includes(exp) || got === exp ? '✓ Correct! Well done!' : '✗ Not quite. Try again!');
+                        let c = false;
+                        const expNum = parseMathValue(rl.answer);
+                        const gotNum = parseMathValue(rlAnswer);
+                        if (!isNaN(expNum) && !isNaN(gotNum)) {
+                          c = compareNumericAnswers(rlAnswer, rl.answer, 0.001);
+                        } else {
+                          const exp = (rl.answer || '').replace(/\s+/g,'').toLowerCase();
+                          const got = rlAnswer.replace(/\s+/g,'').toLowerCase();
+                          c = (got === exp);
+                        }
+                        setRlFeedback(c ? '✓ Correct! Well done!' : '✗ Not quite. Try again!');
                       }
                     }} />
                   <button className="la-check-btn" onClick={() => {
-                    const exp = (rl.answer || '').replace(/\s+/g,'').toLowerCase();
-                    const got = rlAnswer.replace(/\s+/g,'').toLowerCase();
-                    setRlFeedback(got.includes(exp) || got === exp ? '✓ Correct! Well done!' : '✗ Not quite. Try again!');
+                    let c = false;
+                    const expNum = parseMathValue(rl.answer);
+                    const gotNum = parseMathValue(rlAnswer);
+                    if (!isNaN(expNum) && !isNaN(gotNum)) {
+                      c = compareNumericAnswers(rlAnswer, rl.answer, 0.001);
+                    } else {
+                      const exp = (rl.answer || '').replace(/\s+/g,'').toLowerCase();
+                      const got = rlAnswer.replace(/\s+/g,'').toLowerCase();
+                      c = (got === exp);
+                    }
+                    setRlFeedback(c ? '✓ Correct! Well done!' : '✗ Not quite. Try again!');
                   }} disabled={!rlAnswer.trim()}>Check</button>
                 </div>
               )}

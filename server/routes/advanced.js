@@ -1,4 +1,5 @@
 'use strict';
+const { parseMathValue, compareNumericAnswers } = require('../mathParser');
 const router = require('express').Router();
 
 function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
@@ -158,7 +159,9 @@ const generators = {
       const m = userStr.replace(/[()]/g, '').split(',');
       let correct = false;
       if (m.length === 2) {
-        correct = parseFloat(m[0]) === body.ansX && parseFloat(m[1]) === body.ansY;
+        const uX = parseMathValue(m[0]);
+        const uY = parseMathValue(m[1]);
+        correct = !isNaN(uX) && !isNaN(uY) && Math.abs(uX - body.ansX) < 0.01 && Math.abs(uY - body.ansY) < 0.01;
       }
       return { correct, display: body.display, message: correct ? 'Correct!' : 'Incorrect' };
     },

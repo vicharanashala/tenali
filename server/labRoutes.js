@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { parseMathValue, compareNumericAnswers } = require('./mathParser');
 
 const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
@@ -92,7 +93,13 @@ router.get('/basic-arithmetic-lab/generate', (req, res) => {
 router.post('/basic-arithmetic-lab/check', (req, res) => {
   const { answerOption, expected } = req.body;
   if (req.body.solve) return res.json({ correct: false, correctAnswer: expected });
-  const correct = String(answerOption).trim().toLowerCase() === String(expected).trim().toLowerCase();
+  let correct = false;
+  const expNum = parseMathValue(expected);
+  if (!isNaN(expNum) && !isNaN(parseMathValue(answerOption))) {
+    correct = compareNumericAnswers(answerOption, expected, 0.001);
+  } else {
+    correct = String(answerOption).trim().toLowerCase() === String(expected).trim().toLowerCase();
+  }
   res.json({ correct, correctAnswer: expected });
 });
 
@@ -240,7 +247,13 @@ router.get('/mensuration-lab/generate', (req, res) => {
 router.post('/mensuration-lab/check', (req, res) => {
   const { answerOption, expected } = req.body;
   if (req.body.solve) return res.json({ correct: false, correctAnswer: String(expected) });
-  const correct = String(answerOption).trim().toLowerCase() === String(expected).trim().toLowerCase();
+  let correct = false;
+  const expNum = parseMathValue(expected);
+  if (!isNaN(expNum) && !isNaN(parseMathValue(answerOption))) {
+    correct = compareNumericAnswers(answerOption, expected, 0.001);
+  } else {
+    correct = String(answerOption).trim().toLowerCase() === String(expected).trim().toLowerCase();
+  }
   res.json({ correct, correctAnswer: String(expected) });
 });
 
@@ -312,7 +325,13 @@ router.get('/visual-math-lab-redux/generate', (req, res) => {
 router.post('/visual-math-lab-redux/check', (req, res) => {
   const { answerOption, expected } = req.body;
   if (req.body.solve) return res.json({ correct: false, correctAnswer: String(expected) });
-  const correct = String(answerOption).trim().toLowerCase() === String(expected).trim().toLowerCase();
+  let correct = false;
+  const expNum = parseMathValue(expected);
+  if (!isNaN(expNum) && !isNaN(parseMathValue(answerOption))) {
+    correct = compareNumericAnswers(answerOption, expected, 0.001);
+  } else {
+    correct = String(answerOption).trim().toLowerCase() === String(expected).trim().toLowerCase();
+  }
   res.json({ correct, correctAnswer: String(expected) });
 });
 

@@ -26,6 +26,7 @@
 import { HintModal } from './components/HintSystem/HintModal.jsx';
 import { useQuizHintsAndXp } from './components/HintSystem/useHints.jsx';
 import React, { useEffect, useState, useRef, useMemo, useCallback } from 'react';
+import { parseMathValue, compareNumericAnswers } from './lib/mathParser';
 import ConceptualVisualDiagram from './components/ConceptualVisualDiagram';
 import VoiceAssistant from './components/VoiceAssistant';
 import OnboardingTour from './components/OnboardingTour';
@@ -6210,17 +6211,12 @@ function ch5_stdEqual(user, expected, tol) {
 // Universal answer checker (used only by fill-in questions)
 function ch5_checkFill(q, raw) {
   if (!raw || !raw.trim()) return false
-  switch (q.kind) {
-    case 'fill-num': return ch5_numEqual(raw, q.answer, q.tol)
-    case 'fill-frac': {
-      const u = ch5_parseFrac(raw)
-      const e = ch5_parseFrac(q.answer)
-      return ch5_fracEqual(u, e)
-    }
-    case 'fill-std': return ch5_stdEqual(ch5_parseStd(raw), ch5_parseStd(q.answer), q.tol)
-    case 'fill-text': return raw.trim().toLowerCase() === String(q.answer).trim().toLowerCase()
-    default: return false
+  const expectedNum = parseMathValue(q.answer);
+  const userNum = parseMathValue(raw);
+  if (!isNaN(expectedNum) && !isNaN(userNum)) {
+    return compareNumericAnswers(raw, q.answer, q.tol || 0.001);
   }
+  return raw.trim().toLowerCase() === String(q.answer).trim().toLowerCase()
 }
 
 // --- Lesson catalogue ---------------------------------------------------

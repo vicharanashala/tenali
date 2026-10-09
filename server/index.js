@@ -48,6 +48,7 @@ const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const math = require('mathjs');
 const fs = require('fs');
+const { parseMathValue, compareNumericAnswers } = require('./mathParser');
 const path = require('path');
 const http = require('http');
 const wordCreator = require('./wordCreator');
@@ -1616,33 +1617,19 @@ async function getUserFromReq(req) {
 function compareAnswers(userStr, expected) {
   if (expected === undefined || expected === null) return false;
   
-  const cleanUser = String(userStr || '').replace(/\s+/g, '').replace(/[%₹$,]/g, '').replace(/−/g, '-');
+  const cleanUser = String(userStr || '').replace(/[%₹$,]/g, '').replace(/−/g, '-');
+  const cleanExp = String(expected).replace(/[%₹$,]/g, '').replace(/−/g, '-');
   
-  // If expected is a fraction string like "5/12"
-  if (typeof expected === 'string' && expected.includes('/')) {
-    const [eNum, eDen] = expected.split('/').map(Number);
-    const expectedVal = eNum / eDen;
-    
-    let userVal;
-    if (cleanUser.includes('/')) {
-      const [uNum, uDen] = cleanUser.split('/').map(Number);
-      userVal = uNum / uDen;
-    } else {
-      userVal = parseFloat(cleanUser);
-    }
-    
-    return !isNaN(userVal) && Math.abs(userVal - expectedVal) <= 0.01;
+  // Try mathematical comparison first
+  const userNum = parseMathValue(cleanUser);
+  const expectedNum = parseMathValue(cleanExp);
+  
+  if (!isNaN(userNum) && !isNaN(expectedNum)) {
+    return Math.abs(userNum - expectedNum) <= 0.01;
   }
   
-  // Standard numerical comparison
-  const expectedNum = parseFloat(expected);
-  const userNum = parseFloat(cleanUser);
-  if (isNaN(expectedNum) || isNaN(userNum)) {
-    // String fallback
-    return String(userStr).trim().toLowerCase() === String(expected).trim().toLowerCase();
-  }
-  
-  return Math.abs(userNum - expectedNum) <= 0.01;
+  // String fallback
+  return String(userStr).trim().toLowerCase() === String(expected).trim().toLowerCase();
 }
 
 // Helper to determine if a topic is completed
