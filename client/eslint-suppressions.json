@@ -355,14 +355,6 @@
       "count": 2
     }
   },
-  "src/monsters/fetchInterceptor.js": {
-    "no-empty": {
-      "count": 1
-    },
-    "no-unused-vars": {
-      "count": 7
-    }
-  },
   "src/monsters/monsterStore.js": {
     "no-unused-vars": {
       "count": 1
