@@ -966,7 +966,23 @@ const generators = {
       if (difficulty === 'extrahard') difficulty = 'extra-hard';
       const exclude = query.exclude ? query.exclude.split(',').map(Number) : [];
       let pool = banks.vocab.filter((q) => q.difficulty === difficulty);
-      if (!pool.length) return null;
+      if (!pool.length) {
+        if (banks.vocab.length > 0) {
+          const fallbackOrder = ['easy', 'medium', 'hard', 'extra-hard', 'hardest'];
+          for (const fb of fallbackOrder) {
+            const fbPool = banks.vocab.filter((q) => q.difficulty === fb);
+            if (fbPool.length > 0) {
+              pool = fbPool;
+              break;
+            }
+          }
+          if (!pool.length) {
+            pool = banks.vocab;
+          }
+        } else {
+          return null;
+        }
+      }
       const unseen = pool.filter((q) => !exclude.includes(q.id));
       if (unseen.length > 0) pool = unseen;
       const q = pool[Math.floor(Math.random() * pool.length)];

@@ -15,6 +15,7 @@ scratch/
 server/_probe*.js
 .env
 *.env
+server/.env
 
 # Backup snapshots — never commit these; use git history instead
 *.bak
