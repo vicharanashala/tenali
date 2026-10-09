@@ -26,22 +26,17 @@ jobs:
 
   # Lint the client. This catches broken imports and obvious errors before review.
   #
-  # NON-BLOCKING (continue-on-error) until App.jsx is split up. `npm run lint`
-  # currently reports ~750 pre-existing errors on main, almost all of them in
-  # client/src/App.jsx (react-hooks/*, react-refresh/only-export-components).
-  # While the job fails on every branch it tells a contributor nothing about
-  # their own change, and a permanently red check trains everyone to ignore CI.
+  # BLOCKING. `npm run lint` reports 0 errors; the remaining output is warnings only.
+  # Pre-existing violations are tracked in client/eslint-suppressions.json rather than
+  # ignored, so the count must never grow. A PR that adds a new violation will fail here
+  # with no suppressions entry to cover it.
   #
-  # The output is still produced and still worth reading — reviewers should
-  # check that a PR does not ADD errors, which is easy to see by comparing the
-  # count against main.
-  #
-  # Flip this back to blocking once the App.jsx backlog is cleared. Tracked by
-  # the component-extraction epic #234.
+  # Before adding a suppression entry, try to fix the violation — most were real bugs
+  # (undefined variables crashing a quiz mode, not passing a prop a component reads).
+  # See CONTRIBUTING.md for the update workflow and how to prune the baseline.
   client-lint:
     name: Client lint
     runs-on: ubuntu-latest
-    continue-on-error: true
     defaults:
       run:
         working-directory: client

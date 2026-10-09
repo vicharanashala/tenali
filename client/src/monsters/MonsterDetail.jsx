@@ -295,16 +295,10 @@ function InteractiveMonsterDemo({ monsterId, colors }) {
   useEffect(() => {
     if (monsterId !== 'sign-swapper') return;
 
+    if (signSwapperStep === 3) return;
+
     const target = stepPositions[signSwapperStep];
 
-    if (signSwapperStep === 3) {
-      // Instant switch for the Sign Swapper ZAP!
-      setFrogValue(target);
-      setIsHopping(false);
-      return;
-    }
-
-    setIsHopping(true);
     const interval = setInterval(() => {
       setFrogValue((prev) => {
         if (prev === target) {
@@ -418,7 +412,16 @@ function InteractiveMonsterDemo({ monsterId, colors }) {
 
     const nextStep = () => {
       if (isHopping) return;
-      setSignSwapperStep((prev) => (prev + 1) % 4);
+      const next = (signSwapperStep + 1) % 4;
+      setSignSwapperStep(next);
+      if (next === 3) {
+        // Instant switch for the Sign Swapper ZAP!
+        setFrogValue(stepPositions[3]);
+        setIsHopping(false);
+      } else {
+        // Start the hop animation for the new step.
+        setIsHopping(true);
+      }
     };
 
     return (
