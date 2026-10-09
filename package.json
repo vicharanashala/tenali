@@ -5,7 +5,8 @@
   "description": "GitHub Actions bot that regenerates README contributor stats",
   "scripts": {
     "update-readme": "node scripts/update-readme-contributors.js",
-    "update-readme:dry": "node scripts/update-readme-contributors.js --dry-run"
+    "update-readme:dry": "node scripts/update-readme-contributors.js --dry-run",
+    "lint:baseline": "node .github/scripts/check-lint-baseline.js"
   },
   "engines": {
     "node": ">=20"

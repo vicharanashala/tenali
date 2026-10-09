@@ -17,10 +17,33 @@ We welcome contributions from everyone, whether it's fixing a bug, adding a new 
 
 ### 3. Quality Checks
 These are what CI actually runs on every PR (see `.github/workflows/test.yml`) — matching them locally means you're not surprised by a red check:
-- **Client lint:** `cd client && npm run lint` (currently non-blocking in CI until `App.jsx` is split up — but please still run it and fix what you introduce).
+- **Client lint:** `cd client && npm run lint` — this is **blocking** in CI. It currently reports 0 errors, so any error you see is one you introduced.
 - **Server tests:** `cd server && npm test`.
 - **BKT unit check:** `node server/lib/bkt.test.js`.
-- If you fix existing lint issues, run `npx eslint . --prune-suppressions` to remove obsolete entries from `eslint-suppressions.json`.
+- **Lint baseline guard:** `npm run lint:baseline` (from the repo root). CI runs the same check.
+
+#### The lint baseline, and why it may only shrink
+
+`client/eslint-suppressions.json` records every violation that already existed when the baseline was generated, which is what lets the lint job be green while you work. It is a **record of the past, not a place to park new problems** — a suppressed violation is invisible to `npm run lint`, so anything added to that file is a defect that has been hidden rather than fixed.
+
+Because of that, a CI job fails the PR if the baseline **grows** — a new file, a new rule, or a higher count for an existing entry:
+
+```
+Lint baseline guard — Fail if the lint baseline grew
+```
+
+Shrinking it is always fine and is the point: when you fix real violations, prune the entries that are no longer needed.
+
+```bash
+cd client
+npx eslint . --prune-suppressions   # after fixing violations
+```
+
+Three things worth knowing:
+
+- **Try to fix, don't suppress.** Most suppressed `no-undef`/`no-empty` hits have been genuine runtime bugs rather than lint noise. If you hit one, fix it and prune.
+- **If a new violation genuinely has to be baselined**, add it in its own PR that explains why and links the tracking issue, so the growth is reviewed on its own merits instead of riding along with unrelated work.
+- **Probing the gate:** `no-unused-vars` ignores identifiers matching `^[A-Z_]` (see `client/eslint.config.js`), so a throwaway violation named `_probe` or `Probe` will *not* be caught. Use a lowercase name when checking that a new error really fails CI.
 
 There is no `npm run format` or root-level `npm run build`/`npm run test` in this repo — don't rely on tooling docs that assume a single unified script at the root; `client/` and `server/` are separate npm packages with their own scripts.
 
