@@ -42440,6 +42440,123 @@ function PercentPage(props) {
   return <PercentExplanationApp {...props} PercentApp={PercentApp} />;
 }
 
+// ========== ROUTING: MODE-BASED (HOME MENU + QUIZZES) ==========
+// Map quiz mode keys to their component classes
+const modeMap = {
+  vachana: Vachana,          // Vachana Mathematical Literacy Lab
+  linearalgebra: LinearAlgebraApp, // Linear Algebra Module 1
+  missionquiz: MissionQuizApp, // Mission-specific Linear Algebra Quiz
+  'math-lab': MathLabHubApp,
+  'visual-math-lab-redux': VisualMathLabRedux,
+  'mensuration-lab': MensurationLabApp,
+  'basic-arith-lab': BasicArithmeticLabApp,
+  geocraft: GeometryApp,
+  battle: BattleApp,          // Live fastest-finger duels
+  sudoku: SudokuApp,          // 9x9 Sudoku puzzle
+
+  'comic-addition': ComicAdditionApp,
+  gk: GKApp,                    // General Knowledge
+  addition: AdditionApp,         // Basic addition
+  'column-addition': ColumnAdditionApp, // Column Addition with carries
+  'column-multiplication': ColumnMultiplicationApp, // Column Multiplication with carries
+  'column-division': ColumnDivisionApp, // Column Division with long division steps
+  'column-subtraction': ColumnSubtractionApp, // Column Subtraction with borrows
+  quadratic: QuadraticApp,       // Quadratic substitution
+  multiply: MultiplyApp,         // Multiplication tables
+  'visual-math': VisualMathApp,  // Visual Math Lab (mult/div visual)
+  vocab: VocabApp,               // Vocabulary
+  spot: TwinHuntApp,             // Twin Hunt (visual)
+  sqrt: SqrtApp,                 // Square root
+  polymul: PolyMulApp,           // Polynomial multiplication
+  polyfactor: PolyFactorApp,     // Polynomial factoring
+  primefactor: PrimeFactorApp,   // Prime factorization
+  qformula: QFormulaApp,         // Quadratic formula
+  'qformula-concept': QFormulaConceptMode, // Quadratic formula — 5-stage concept lab
+  simul: SimulApp,               // Simultaneous equations
+  'simul-concept': SimulConceptMode,       // Simultaneous equations — 5-stage concept lab
+  funceval: FuncEvalApp,         // Function evaluation
+  lineq: LineEqApp,              // Line equation
+  basicarith: BasicArithApp,     // Basic arithmetic (+, −, ×)
+  fractionadd: FractionsPage,    // Fractions (Learn -> Test)
+  surds: SurdsApp,               // Surds (simplify, add, multiply, rationalise)
+  indices: IndicesApp,           // Indices (laws of exponents)
+  sequences: SequencesApp,       // Sequences & Series
+  ratio: RatioApp,               // Ratio & Proportion
+  percent: PercentPage,                                                      // Percentages
+  sets: SetsApp,                 // Sets & Venn diagrams
+  trig: TrigApp,                 // Trigonometry
+  ineq: IneqApp,                 // Inequalities
+  coordgeom: CoordGeomInteractiveApp,       // Coordinate Geometry
+  prob: ProbApp,                 // Probability
+  stats: StatsApp,               // Statistics
+  matrix: MatrixApp,             // Matrices
+  vectors: VectorsApp,           // Vectors
+  dotprod: DotProdApp,           // Dot Products
+  transform: TransformApp,       // Transformations
+  mensur: MensurApp,             // Mensuration
+  bearings: BearingsApp,         // Bearings
+  log: LogApp,                   // Logarithms
+  diff: DiffApp,                 // Differentiation
+  bases: BasesApp,               // Number Bases
+  circleth: CircleThApp,         // Circle Theorems
+  integ: IntegApp,               // Integration
+  stdform: StdFormApp,           // Standard Form
+  bounds: BoundsApp,             // Bounds
+  sdt: SDTApp,
+  contrastlist: ContrastChallengeApp,   // Contrast Challenge
+  variation: VariationApp,       // Variation
+  hcflcm: InteractiveLcmHcfApp,  // HCF & LCM
+  idlivada: IdliVadaSambharApp,  // Idli–Vada–Sambhar (Multiples, Common Multiples & LCM)
+  carjourney: CarJourneyApp,     // The Car Journey (Feature CR — 16-stop math road trip)
+  realworld: RealWorldHubApp,    // Real-World hub (Feature CR) — phenomenon pathway cards
+  profitloss: ProfitLossApp,     // Profit & Loss
+  rounding: RoundingApp,         // Rounding
+  binomial: BinomialApp,         // Binomial Theorem
+  complex: ComplexApp,           // Complex Numbers
+  angles: AnglesApp,             // Angles
+  triangles: TrianglesApp,       // Triangles
+  congruence: CongruenceApp,     // Congruence
+  pythag: PythagApp,             // Pythagoras' Theorem
+  polygons: PolygonsApp,         // Polygons
+  similarity: SimilarityApp,     // Similarity
+  squaring: SquaringApp,         // Squaring (a+b)²
+  lineareq: LinearEqApp,         // Linear Equations
+  decimals: DecimalsApp,         // Decimals
+  permcomb: PermCombApp,         // Permutations & Combinations
+  limits: LimitsApp,             // Limits
+  invtrig: InvTrigApp,           // Inverse Trigonometry
+  remfactor: RemFactorApp,       // Remainder Theorem
+  heron: HeronApp,               // Heron's Formula
+  shares: SharesApp,             // Shares & Dividends
+  banking: BankingApp,           // Banking (RD)
+  gst: GSTPage,                  // GST (Learn -> Test)
+  section: SectionApp,           // Section Formula
+  linprog: LinProgApp,           // Linear Programming
+  circmeasure: CircMeasureApp,   // Circular Measure
+  conics: ConicsApp,             // Conic Sections
+  diffeq: DiffEqApp,             // Differential Equations
+  tatsavit: TatsavitApp,         // Tatsavit (progressive math drill)
+  language: LanguageDashboard,   // Language Puzzles Dashboard
+  randommix: RandomMixApp,       // Random Mix (adaptive)
+  custom: CustomApp,             // Custom lesson builder
+  gym: GymApp,                   // Unified adaptive Gym — bundles all 7 below
+  curiosity: CuriosityApp,       // Curiosity Mode — experiment with "what if" variations
+  guess: GuessNumberApp,         // Binary magic — guess a number 0–31
+  detective: EnhancedMathDetectiveApp, // Math Detective Agency — story-based mystery cases
+  gymdecimals: GymDecimalsApp,   // Gym Decimals — signed decimal multiplication (MCQ)
+  funcgym: FuncGymApp,           // Functions Gym — polynomial evaluation (MCQ)
+  dotprodgym: DotProdGymApp,     // DotProducts Gym — 2D/3D dot products (MCQ)
+  fracaddgym: FracAddGymApp,     // Fractions-add-gym — add fractions (MCQ)
+  lineqgym: LinEqGymApp,         // LinearEquations-Gym — solve linear equations (MCQ)
+  indicesgym: IndicesGymApp,     // Indices-Gym — index laws (MCQ)
+  polygym: PolyGymApp,           // Polynomials Gym — arithmetic → monomial algebra (MCQ)
+  treasurehunt: TreasureHuntApp, // Treasure Hunt — solve & seek grid game
+  trackProgress: ProgressTrackerApp,
+  riddle: RiddleApp,              // Math Riddles
+  'water-jug-lab': WaterJugLab,
+  'equation-crafting-lab': EquationCraftingLab,
+}
+
 function App() {
   const [diagnosticState, setDiagnosticState] = useState({});
   const { t } = useI18n();
@@ -42448,7 +42565,11 @@ function App() {
   const [mode, setMode] = useState(() => {
     try {
       const params = new URLSearchParams(window.location.search);
-      return params.get('mode') || null;
+      const queryMode = params.get('mode');
+      if (queryMode) return queryMode;
+      const pathKey = stripBase(window.location.pathname).replace(/^\/+/, '');
+      if (pathKey && modeMap[pathKey]) return pathKey;
+      return null;
     } catch {
       return null;
     }
@@ -42459,6 +42580,8 @@ function App() {
     try {
       const params = new URLSearchParams(window.location.search);
       if (params.get('mode')) return 'puzzles';
+      const pathKey = stripBase(window.location.pathname).replace(/^\/+/, '');
+      if (pathKey && modeMap[pathKey]) return 'puzzles';
       if (params.get('view') === 'puzzles') return 'puzzles';
       return 'landing';
     } catch {
@@ -43685,6 +43808,39 @@ function App() {
     )
   }
 
+  // Fallback for invalid pathname route (not root /, not explicit route, not a valid modeMap mode, and no query params)
+  const routePathKey = pathname.replace(/^\/+/, '');
+  const isInvalidRoute = Boolean(
+    routePathKey &&
+    routePathKey !== '' &&
+    !modeMap[routePathKey] &&
+    !new URLSearchParams(window.location.search).get('mode') &&
+    !new URLSearchParams(window.location.search).get('view')
+  );
+
+  if (isInvalidRoute) {
+    return (
+      <div className="app-shell">
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <div className="card" style={{ maxWidth: 500, margin: '4rem auto', padding: '2.5rem 2rem', textAlign: 'center' }}>
+          <h1 style={{ fontSize: '3rem', marginBottom: '0.5rem', color: 'var(--clr-accent)' }}>404</h1>
+          <h2 style={{ marginBottom: '1rem' }}>Page Not Found</h2>
+          <p style={{ opacity: 0.8, marginBottom: '1.5rem', lineHeight: 1.6 }}>
+            The requested path <code style={{ background: 'var(--clr-surface-soft)', padding: '2px 6px', borderRadius: 4 }}>/{routePathKey}</code> is not a valid route.
+          </p>
+          <button
+            onClick={() => { window.location.href = withBase('/'); }}
+            style={{ padding: '0.75rem 1.5rem', fontSize: '1rem', borderRadius: 8, cursor: 'pointer' }}
+          >
+            Return to Home
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   // ========== LINEAR ALGEBRA QUIZ ==========
   function LinearAlgebraQuizApp({ onBack }) {
     const diffs = ['easy', 'medium', 'hard']
@@ -44802,124 +44958,6 @@ function App() {
           )}
       </>
     )
-  }
-
-  // ========== ROUTING: MODE-BASED (HOME MENU + QUIZZES) ==========
-  // Map quiz mode keys to their component classes
-  const modeMap = {
-    vachana: Vachana,          // Vachana Mathematical Literacy Lab
-    linearalgebra: LinearAlgebraApp, // Linear Algebra Module 1
-    missionquiz: MissionQuizApp, // Mission-specific Linear Algebra Quiz
-    'math-lab': MathLabHubApp,
-    'visual-math-lab-redux': VisualMathLabRedux,
-    'mensuration-lab': MensurationLabApp,
-    'basic-arith-lab': BasicArithmeticLabApp,
-    geocraft: GeometryApp,
-    battle: BattleApp,          // Live fastest-finger duels
-    sudoku: SudokuApp,          // 9x9 Sudoku puzzle
-
-    'comic-addition': ComicAdditionApp,
-    gk: GKApp,                    // General Knowledge
-    addition: AdditionApp,         // Basic addition
-    'column-addition': ColumnAdditionApp, // Column Addition with carries
-    'column-multiplication': ColumnMultiplicationApp, // Column Multiplication with carries
-    'column-division': ColumnDivisionApp, // Column Division with long division steps
-    'column-subtraction': ColumnSubtractionApp, // Column Subtraction with borrows
-    quadratic: QuadraticApp,       // Quadratic substitution
-    multiply: MultiplyApp,         // Multiplication tables
-    'visual-math': VisualMathApp,  // Visual Math Lab (mult/div visual)
-    vocab: VocabApp,               // Vocabulary
-    spot: TwinHuntApp,             // Twin Hunt (visual)
-    sqrt: SqrtApp,                 // Square root
-    polymul: PolyMulApp,           // Polynomial multiplication
-    polyfactor: PolyFactorApp,     // Polynomial factoring
-    primefactor: PrimeFactorApp,   // Prime factorization
-    qformula: QFormulaApp,         // Quadratic formula
-    'qformula-concept': QFormulaConceptMode, // Quadratic formula — 5-stage concept lab
-    simul: SimulApp,               // Simultaneous equations
-    'simul-concept': SimulConceptMode,       // Simultaneous equations — 5-stage concept lab
-    funceval: FuncEvalApp,         // Function evaluation
-    lineq: LineEqApp,              // Line equation
-    basicarith: BasicArithApp,     // Basic arithmetic (+, −, ×)
-    fractionadd: FractionsPage,    // Fractions (Learn -> Test)
-    surds: SurdsApp,               // Surds (simplify, add, multiply, rationalise)
-    indices: IndicesApp,           // Indices (laws of exponents)
-    sequences: SequencesApp,       // Sequences & Series
-    ratio: RatioApp,               // Ratio & Proportion
-    percent: PercentPage,                                                      // Percentages
-    sets: SetsApp,                 // Sets & Venn diagrams
-    trig: TrigApp,                 // Trigonometry
-    ineq: IneqApp,                 // Inequalities
-    coordgeom: CoordGeomInteractiveApp,       // Coordinate Geometry
-    prob: ProbApp,                 // Probability
-    stats: StatsApp,               // Statistics
-    matrix: MatrixApp,             // Matrices
-    vectors: VectorsApp,           // Vectors
-    dotprod: DotProdApp,           // Dot Products
-    transform: TransformApp,       // Transformations
-    mensur: MensurApp,             // Mensuration
-    bearings: BearingsApp,         // Bearings
-    log: LogApp,                   // Logarithms
-    diff: DiffApp,                 // Differentiation
-    bases: BasesApp,               // Number Bases
-    circleth: CircleThApp,         // Circle Theorems
-    integ: IntegApp,               // Integration
-    stdform: StdFormApp,           // Standard Form
-    bounds: BoundsApp,             // Bounds
-    sdt: SDTApp,
-    contrastlist: ContrastChallengeApp,   // Contrast Challenge
-    variation: VariationApp,       // Variation
-    hcflcm: InteractiveLcmHcfApp,  // HCF & LCM
-    idlivada: IdliVadaSambharApp,  // Idli–Vada–Sambhar (Multiples, Common Multiples & LCM)
-    carjourney: CarJourneyApp,     // The Car Journey (Feature CR — 16-stop math road trip)
-    realworld: RealWorldHubApp,    // Real-World hub (Feature CR) — phenomenon pathway cards
-    profitloss: ProfitLossApp,     // Profit & Loss
-    rounding: RoundingApp,         // Rounding
-    binomial: BinomialApp,         // Binomial Theorem
-    complex: ComplexApp,           // Complex Numbers
-    angles: AnglesApp,             // Angles
-    triangles: TrianglesApp,       // Triangles
-    congruence: CongruenceApp,     // Congruence
-    pythag: PythagApp,             // Pythagoras' Theorem
-    polygons: PolygonsApp,         // Polygons
-    similarity: SimilarityApp,     // Similarity
-    squaring: SquaringApp,         // Squaring (a+b)²
-    lineareq: LinearEqApp,         // Linear Equations
-    decimals: DecimalsApp,         // Decimals
-    permcomb: PermCombApp,         // Permutations & Combinations
-    limits: LimitsApp,             // Limits
-    invtrig: InvTrigApp,           // Inverse Trigonometry
-    remfactor: RemFactorApp,       // Remainder Theorem
-    heron: HeronApp,               // Heron's Formula
-    shares: SharesApp,             // Shares & Dividends
-    banking: BankingApp,           // Banking (RD)
-    gst: GSTPage,                  // GST (Learn -> Test)
-    section: SectionApp,           // Section Formula
-    linprog: LinProgApp,           // Linear Programming
-    circmeasure: CircMeasureApp,   // Circular Measure
-    conics: ConicsApp,             // Conic Sections
-    diffeq: DiffEqApp,             // Differential Equations
-    tatsavit: TatsavitApp,         // Tatsavit (progressive math drill)
-    language: LanguageDashboard,   // Language Puzzles Dashboard
-    randommix: RandomMixApp,       // Random Mix (adaptive)
-    custom: CustomApp,             // Custom lesson builder
-    gym: GymApp,                   // Unified adaptive Gym — bundles all 7 below
-    curiosity: CuriosityApp,       // Curiosity Mode — experiment with "what if" variations
-    guess: GuessNumberApp,         // Binary magic — guess a number 0–31
-    detective: EnhancedMathDetectiveApp, // Math Detective Agency — story-based mystery cases
-    gymdecimals: GymDecimalsApp,   // Gym Decimals — signed decimal multiplication (MCQ)
-    funcgym: FuncGymApp,           // Functions Gym — polynomial evaluation (MCQ)
-    dotprodgym: DotProdGymApp,     // DotProducts Gym — 2D/3D dot products (MCQ)
-    fracaddgym: FracAddGymApp,     // Fractions-add-gym — add fractions (MCQ)
-    lineqgym: LinEqGymApp,         // LinearEquations-Gym — solve linear equations (MCQ)
-    indicesgym: IndicesGymApp,     // Indices-Gym — index laws (MCQ)
-    polygym: PolyGymApp,           // Polynomials Gym — arithmetic → monomial algebra (MCQ)
-    treasurehunt: TreasureHuntApp, // Treasure Hunt — solve & seek grid game
-    // matrixmystics mode removed — Matrix Mystics content now embedded in LinearAlgebraApp's mission quiz
-    trackProgress: ProgressTrackerApp,
-    riddle: RiddleApp,              // Math Riddles
-    'water-jug-lab': WaterJugLab,
-    'equation-crafting-lab': EquationCraftingLab,
   }
 
   // Get the component to render (or null if mode not set)
