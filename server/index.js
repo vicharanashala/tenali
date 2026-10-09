@@ -2135,6 +2135,12 @@ app.use('/api', labRoutes);
  * ends up on the live, current build at https://tenali.fun/matrixmystics/
  * instead of being served a stale SPA shell that can't reach the API.
  */
+// Explicit sub-app route for /matrixmystics (#222)
+app.use('/matrixmystics', express.static(clientDistPath));
+app.get(/\/matrixmystics.*/, (_req, res) => {
+  res.sendFile(path.join(clientDistPath, 'index.html'));
+});
+
 if (SUBPATH_REDIRECT && SUBPATH_REDIRECT !== '/') {
   app.get('/', (_req, res) => res.redirect(302, SUBPATH_REDIRECT + '/'));
 }
