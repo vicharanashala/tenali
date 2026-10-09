@@ -86,20 +86,6 @@
       "count": 1
     }
   },
-  "src/EquationCraftingLab.jsx": {
-    "no-unused-vars": {
-      "count": 2
-    },
-    "no-useless-escape": {
-      "count": 7
-    },
-    "react-hooks/purity": {
-      "count": 1
-    },
-    "react-hooks/set-state-in-effect": {
-      "count": 1
-    }
-  },
   "src/GeometryApp.jsx": {
     "react-hooks/set-state-in-effect": {
       "count": 1
