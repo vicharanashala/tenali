@@ -29,6 +29,48 @@
 ### ✨ **93 puzzle types across 69 topic areas · Algorithmically generated · Adaptive difficulty · Live multiplayer · Step-by-step solutions**
 
 </div>
+
+---
+
+## 🧭 Orientation: What is Tenali, Who is it For, and How to Contribute
+
+### 🌟 What is Tenali?
+
+**Tenali** (named after the legendary scholar **Tenali Raman**, known for his sharp logic and wit) is an **open-source adaptive math learning platform** featuring algorithmically-generated practice puzzles, interactive concept labs, real-time 1-vs-1 multiplayer duels, and step-by-step explanations for every problem.
+
+Every question is generated dynamically on the fly — there is no static question database — so practice is infinite and never repeats. Difficulty adapts in real time to each learner's performance across **93 distinct puzzle endpoints** spanning **69 topic areas**.
+
+### 🎯 Who is Tenali For?
+
+- 🎓 **K-12 Students & Learners**: Master mathematical concepts through interactive visual labs, adaptive practice, gamified rewards (badges, streaks, XP), and real-time multiplayer battles.
+- 🏫 **Educators & Schools**: Access a structured curriculum from basic arithmetic through linear algebra and calculus, with automated difficulty scaling and step-by-step explanations.
+- 💻 **Student Developers & Open-Source Contributors**: Gain real-world experience contributing to a full-stack production ed-tech codebase (React 19, Vite 8, Node.js 20+, Express 5, Socket.IO, MongoDB).
+
+### 🌿 Branch & Deployment Model (`main` vs `tenali-root`)
+
+Understanding how branches map to live production environments is crucial before contributing:
+
+```text
+  Contributor PRs ──▶ main branch ──▶ Live at https://tenali.fun/summership/
+                                            │
+                                            ▼ (Maintainer Sync)
+                                        tenali-root branch ──▶ Live at https://tenali.fun/
+```
+
+- **`main` Branch (Live at `/summership/`)**: All contributor pull requests target the `main` branch. When a PR is merged into `main`, GitHub Actions automatically deploys the code live to **`https://tenali.fun/summership/`**.
+- **`tenali-root` Branch (Live at Root `/`)**: The bare root domain **`https://tenali.fun/`** is served directly by the `tenali-root` branch on the server (configured in `server/deploy/tenali-nginx.conf`). Direct pushes to `tenali-root` are disabled.
+- **Why this matters**: Merging a PR to `main` deploys your change live to `tenali.fun/summership/`. Landing on `main` is not shipping to the bare root domain — core maintainers periodically sync tested releases from `main` into `tenali-root` to update the bare root site (`tenali.fun`).
+
+### 🤝 What Does Contributing Look Like?
+
+1. **Pick an Issue**: Check the [GitHub Issues tracker](https://github.com/vicharanashala/tenali/issues) for open tasks. All PRs must close an existing issue.
+2. **Submit Onboarding Document**: Every first-time contributor must submit an onboarding markdown file in `Ideas/ONBOARDING-<your-name>.md` before their first code PR (see [📝 Contributor Onboarding](#-contributor-onboarding-mandatory)).
+3. **Fork & Branch**: Fork `vicharanashala/tenali`, clone your fork, and create a branch named `fix/<issue-num>-<short-name>` or `feat/<issue-num>-<short-name>`.
+4. **Implement & Test**: Make concise changes, run `npm test` in `server`, and run `npm run build` in `client`.
+5. **Open Pull Request**: Create a PR targeting `main` with `Closes #N` in the description. Once merged, your contribution goes live at `https://tenali.fun/summership/`!
+
+---
+
 ## 🧠 Pedagogical Features: Progressive & Interactive Learning
 
 ### The Problem
@@ -95,6 +137,9 @@ Learning JSON → learnContent.js → Learning Page → Interactive Components
 
 **🧭 Orientation**
 - [🌟 What is Tenali?](#-what-is-tenali)
+- [🎯 Who is Tenali For?](#-who-is-tenali-for)
+- [🌿 Branch & Deployment Model](#-branch--deployment-model-main-vs-tenali-root)
+- [🤝 How to Contribute](#-what-does-contributing-look-like)
 - [📊 At a Glance](#-at-a-glance)
 - [🎯 User Workflow](#-user-workflow)
 
@@ -102,6 +147,7 @@ Learning JSON → learnContent.js → Learning Page → Interactive Components
 <td width="33%" valign="top">
 
 **🧠 Capabilities**
+- [🧠 Pedagogical Features](#-pedagogical-features-progressive--interactive-learning)
 - [🚀 Features in Depth](#-features-in-depth)
 - [🛠️ The Puzzle Types](#-the-puzzle-types)
 - [🏗️ Architecture](#-architecture)
@@ -121,9 +167,7 @@ Learning JSON → learnContent.js → Learning Page → Interactive Components
 
 ---
 
-## 🌟 What is Tenali?
-
-Tenali (named after the legendary **Tenali Raman** — the witty Indian scholar who outwitted entire courts with logic) is an **adaptive math learning platform** featuring algorithmically-generated puzzle types, real-time multiplayer battles, and step-by-step solutions for every problem. Every question is generated on the fly — there is no question database — so practice is infinite and never repeats. Difficulty adapts to each learner in real time.
+## 🧩 Content & Puzzle System Architecture
 
 There isn't one canonical "puzzle count" — different parts of the codebase group content differently, and that's worth naming instead of collapsing into a single number: the server exposes **93 distinct `*-api` route pairs** (the real unit of "a puzzle type"), grouped under **69 topic areas** in the `/graph` prerequisite map, and the home-screen tile registry (`client/src/features/tiles.js`) lists **100+ tiles**, because several route pairs surface as more than one tile (e.g. an MCQ "gym" drill and a full-form drill on the same topic, via `foldInto`). Use whichever number matches what you're actually counting.
 
