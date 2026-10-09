@@ -55,6 +55,27 @@ jobs:
       - run: npm ci
       - run: npm run lint
 
+  # Frontend unit tests (Vitest + jsdom) — added by issue #294.
+  # Unlike client-lint this is blocking: the suite starts out small and green,
+  # so a failure here means the PR genuinely broke something. It lives in this
+  # existing "Tests" workflow on purpose — do not spin up a competing
+  # workflow file for client tests.
+  client-test:
+    name: Client tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: client
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: client/package-lock.json
+      - run: npm ci
+      - run: npm test
+
   # API contract tests — uses npm ci so CI fails if lockfile is out of sync.
   server-contract:
     name: API contract tests
