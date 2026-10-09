@@ -333,12 +333,12 @@ router.post('/unlock', async (req, res) => {
 
       // Apply database updates atomically (much faster than loading/saving whole document)
       const updatedUser = await auth.User.findOneAndUpdate(
-        { _id: caller.id, coins: { $gte: cost } },
+        { _id: caller.id, xp: { $gte: cost } },
         {
-          $inc: { xp: -cost, coins: -cost, coinBalance: -cost, xpScore: -cost },
+          $inc: { xp: -cost },
           $push: { hintLogs: { concept, questionId, level: levelNum, unlockedAt: new Date() } }
         },
-        { new: true, select: 'xp coins coinBalance xpScore' }
+        { new: true, select: 'xp' }
       );
 
       const balance = updatedUser ? updatedUser.xp : Math.max(0, user.xp - cost);

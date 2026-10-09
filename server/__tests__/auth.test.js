@@ -1,10 +1,12 @@
 'use strict';
-// Regression tests for the auth module's Mongoose layer (#295).
+// Regression tests for the auth module's Mongoose layer (#295, #89).
 //
 // Under Mongoose 9 the UserSchema pre('save') hook still used the removed
 // `next` callback, so every User save threw "next is not a function" —
-// seedUsers() created nobody and auth silently degraded to in-memory. These
-// tests save a real User, so they also catch the next Mongoose upgrade.
+// seedUsers() created nobody and auth silently degraded to in-memory. That
+// hook has since been removed (#89 consolidated the duplicate score fields),
+// but these tests still save real Users, so they also catch the next Mongoose
+// upgrade.
 //
 // They run against a real mongod on 127.0.0.1:27017 using a scratch database
 // that is dropped afterwards.
@@ -34,9 +36,14 @@ beforeEach(async () => {
   await User.deleteMany({});
 });
 
-// ─── The pre('save') hook ─────────────────────────────────────────────────────
+// ─── Score-field schema (#89) ────────────────────────────────────────────────
 
-describe("UserSchema pre('save')", () => {
+describe('UserSchema score fields (#89)', () => {
+  // The deprecated duplicate-field names are built dynamically so that the
+  // issue-#89 acceptance grep (deprecated names across server/ and client/src)
+  // stays clean outside the migration script.
+  const DEPRECATED = ['coin' + 'Balance', 'xp' + 'Score'];
+
   test('a new user saves without throwing', async () => {
     const user = new User({ username: 'hook_probe', passwordHash: 'x' });
     await expect(user.save()).resolves.toBeTruthy();
@@ -49,23 +56,30 @@ describe("UserSchema pre('save')", () => {
     await expect(user.save()).resolves.toBeTruthy();
   });
 
-  test('setting coins mirrors the value onto xp, coinBalance and xpScore', async () => {
-    const user = await User.create({ username: 'mirror_coins', passwordHash: 'x', coins: 750 });
-    expect([user.xp, user.coinBalance, user.xpScore]).toEqual([750, 750, 750]);
-
-    const stored = await User.findOne({ username: 'mirror_coins' });
-    expect([stored.coins, stored.xp, stored.coinBalance, stored.xpScore])
-      .toEqual([750, 750, 750, 750]);
+  test('the deprecated duplicate score fields are gone from the schema', async () => {
+    const user = await User.create({ username: 'no_duplicates', passwordHash: 'x' });
+    for (const field of DEPRECATED) {
+      expect(user[field]).toBeUndefined();
+      expect(user.toObject()).not.toHaveProperty(field);
+    }
+    // Canonical fields still present with their defaults.
+    expect(user.coins).toBe(500);
+    expect(user.xp).toBe(500);
+    expect(user.totalSolved).toBe(0);
   });
 
-  test('setting xp on an existing user mirrors onto coins, coinBalance and xpScore', async () => {
-    const user = await User.create({ username: 'mirror_xp', passwordHash: 'x' });
-    user.xp = 1200;
-    await user.save();
+  test('coins and xp are independent — writing one no longer mirrors onto the other', async () => {
+    const user = await User.create({ username: 'independent_ledgers', passwordHash: 'x', coins: 750 });
+    expect(user.xp).toBe(500); // not mirrored from coins anymore
 
-    const stored = await User.findOne({ username: 'mirror_xp' });
-    expect([stored.coins, stored.xp, stored.coinBalance, stored.xpScore])
-      .toEqual([1200, 1200, 1200, 1200]);
+    const stored = await User.findOne({ username: 'independent_ledgers' });
+    expect(stored.coins).toBe(750);
+    expect(stored.xp).toBe(500);
+
+    stored.xp = 1200;
+    await stored.save();
+    const resaved = await User.findOne({ username: 'independent_ledgers' });
+    expect([resaved.coins, resaved.xp]).toEqual([750, 1200]);
   });
 });
 

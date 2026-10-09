@@ -29,11 +29,11 @@ async function update(userId, isCorrect, sessionGoal = 'standard') {
 
   const user = await User.findById(userId);
   if (user) {
-    user.coinBalance = (user.coinBalance || 0) + coinsEarned;
-    user.xpScore = (user.xpScore || 0) + xpEarned;
+    user.coins = (user.coins || 0) + coinsEarned;
+    user.xp = (user.xp || 0) + xpEarned;
     await user.save();
-    totalCoins = user.coinBalance;
-    totalXP = user.xpScore;
+    totalCoins = user.coins;
+    totalXP = user.xp;
   }
 
   return {
