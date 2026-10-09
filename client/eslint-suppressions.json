@@ -325,9 +325,6 @@
     }
   },
   "src/monsters/MonsterDetail.jsx": {
-    "no-unused-vars": {
-      "count": 4
-    },
     "react-hooks/set-state-in-effect": {
       "count": 1
     }
