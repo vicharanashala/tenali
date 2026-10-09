@@ -42436,9 +42436,394 @@ function BalanceScaleApp({ onBack }) {
  * produce a new function reference, causing React to tear down and reinitialize
  * the entire component tree — wiping activeSection, quiz progress, XP, etc.
  */
-function PercentPage(props) {
-  return <PercentExplanationApp {...props} PercentApp={PercentApp} />;
-}
+const BRIDGE_APPS = {
+  1: Bridge1App, 2: Bridge2App, 3: Bridge3App, 4: Bridge4App, 5: Bridge5App,
+  6: Bridge6App, 7: Bridge7App, 8: Bridge8App, 9: Bridge9App, 10: Bridge10App,
+  11: Bridge11App, 12: Bridge12App, 13: Bridge13App, 14: Bridge14App, 15: Bridge15App,
+  16: Bridge16App, 17: Bridge17App, 18: Bridge18App, 19: Bridge19App, 20: Bridge20App,
+  21: Bridge21App, 22: Bridge22App, 23: Bridge23App, 24: Bridge24App, 25: Bridge25App,
+  26: Bridge26App, 27: Bridge27App,
+};
+
+const CHAPTER_APPS = {
+  1: Chapter1App, 2: Chapter2App, 3: Chapter3App, 4: Chapter4App, 5: Chapter5App,
+  6: Chapter6App, 7: Chapter7App, 8: Chapter8App, 9: Chapter9App, 10: Chapter10App,
+  11: Chapter11App, 12: Chapter12App, 13: Chapter13App, 14: Chapter14App, 15: Chapter15App,
+  16: Chapter16App, 17: Chapter17App, 18: Chapter18App, 19: Chapter19App, 20: Chapter20App,
+  21: Chapter21App, 22: Chapter22App, 23: Chapter23App, 24: Chapter24App,
+};
+
+const ROUTE_TABLE = [
+  {
+    paths: ['/profile'],
+    render: ({ toggleTheme, theme, completedTopics, renderCelebrationModal, navigate }) => (
+      <div className="app-shell">
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <div className="card">
+          <AuthGate>
+            <div style={{ position: 'relative' }}>
+              <ProfileShowcase completedTopics={completedTopics} onSelectTopic={(topicKey) => navigate(`/?mode=${topicKey}`)} />
+            </div>
+          </AuthGate>
+        </div>
+        {renderCelebrationModal()}
+      </div>
+    )
+  },
+  {
+    paths: ['/tables'],
+    render: ({ toggleTheme, theme }) => (
+      <>
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <ScaffoldedTablesApp studentName="Student" />
+      </>
+    )
+  },
+  {
+    paths: ['/taittiriya'],
+    render: ({ toggleTheme, theme }) => (
+      <>
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <ScaffoldedTablesApp studentName="Taittiriya" />
+      </>
+    )
+  },
+  {
+    paths: ['/lakshya'],
+    render: ({ toggleTheme, theme }) => (
+      <>
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <LakshyaTablesApp studentName="Lakshya" />
+      </>
+    )
+  },
+  {
+    paths: ['/jatin'],
+    render: ({ toggleTheme, theme }) => (
+      <>
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <JatinTablesApp studentName="Jatin" />
+      </>
+    )
+  },
+  {
+    paths: ['/yazdan'],
+    render: ({ toggleTheme, theme }) => (
+      <>
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <YazdanTablesApp studentName="Yazdan" />
+      </>
+    )
+  },
+  {
+    paths: ['/tatsavit'],
+    render: ({ toggleTheme, theme, navigate }) => (
+      <>
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <TatsavitLineApp onBack={() => navigate('/')} />
+      </>
+    )
+  },
+  {
+    paths: ['/riddle'],
+    render: ({ toggleTheme, theme, navigate }) => (
+      <>
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <div className="app-shell"><div className="card">
+          <RiddleApp onBack={() => navigate('/')} />
+        </div></div>
+      </>
+    )
+  },
+  {
+    paths: ['/tatsavit0'],
+    render: ({ toggleTheme, theme, navigate }) => (
+      <>
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <TatsavitApp onBack={() => navigate('/')} />
+      </>
+    )
+  },
+  {
+    match: (p) => /\/language$/.test(p),
+    render: ({ toggleTheme, theme, navigate }) => (
+      <div className="app-shell">
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <div className="card">
+          <LanguageDashboard onBack={() => navigate('/')} />
+        </div>
+      </div>
+    )
+  },
+  {
+    paths: ['/tenth'],
+    render: ({ toggleTheme, theme, navigate }) => (
+      <>
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <AuthGate><TenthApp onBack={() => navigate('/')} /></AuthGate>
+      </>
+    )
+  },
+  {
+    paths: ['/geocraft'],
+    render: ({ toggleTheme, theme, navigate }) => (
+      <>
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <div className="app-shell">
+          <div className="card">
+            <GeometryApp onBack={() => navigate('/')} />
+          </div>
+        </div>
+      </>
+    )
+  },
+  {
+    paths: ['/gym'],
+    render: ({ toggleTheme, theme, navigate }) => (
+      <>
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <div className="app-shell"><div className="card">
+          <GymApp onBack={() => navigate('/tenth')} />
+        </div></div>
+      </>
+    )
+  },
+  {
+    match: (p) => {
+      const m = p.match(/^\/bridge([1-9]|1[0-9]|2[0-7])$/)
+      return m ? Number(m[1]) : null
+    },
+    render: ({ matchData, theme, toggleTheme, navigate }) => {
+      const BridgeComp = BRIDGE_APPS[matchData]
+      return (
+        <>
+          <button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button>
+          <div className="app-shell">
+            <div className="card">
+              <AuthGate>
+                <BridgeComp onBack={() => navigate('/chapter5')} />
+              </AuthGate>
+            </div>
+          </div>
+        </>
+      )
+    }
+  },
+  {
+    paths: ['/linearalgebra', '/la'],
+    render: ({ toggleTheme, theme, navigate }) => (
+      <>
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <div className="app-shell"><div className="card">
+          <LinearAlgebraApp onBack={() => navigate('/')} />
+        </div></div>
+      </>
+    )
+  },
+  {
+    match: (p) => {
+      const m = p.match(/^\/chapter([1-9]|1[0-9]|2[0-4])$/)
+      return m ? Number(m[1]) : null
+    },
+    render: ({ matchData, theme, toggleTheme, navigate }) => {
+      const ChapterComp = CHAPTER_APPS[matchData]
+      return (
+        <>
+          <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+            {theme === 'dark' ? '☀️' : '🌙'}
+          </button>
+          <AuthGate>
+            <ChapterComp onBack={() => navigate('/')} />
+          </AuthGate>
+        </>
+      )
+    }
+  },
+  {
+    paths: ['/tatsavit1'],
+    render: ({ toggleTheme, theme, navigate }) => (
+      <>
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <Tatsavit1App onBack={() => navigate('/')} />
+      </>
+    )
+  },
+  {
+    paths: ['/riya'],
+    render: ({ toggleTheme, theme, navigate }) => (
+      <>
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <RiyaApp onBack={() => navigate('/')} />
+      </>
+    )
+  },
+  {
+    paths: ['/intervalscheduling'],
+    render: () => <IntervalSchedulingApp />
+  },
+  {
+    paths: ['/extendedeuclid'],
+    render: () => <ExtendedEuclidApp />
+  },
+  {
+    paths: ['/water-jug-lab'],
+    render: ({ navigate }) => <WaterJugLab onBack={() => navigate('/')} />
+  },
+  {
+    paths: ['/equation-crafting-lab'],
+    render: ({ navigate }) => <EquationCraftingLab onBack={() => navigate('/')} />
+  },
+  {
+    paths: ['/linear'],
+    render: ({ toggleTheme, theme, navigate }) => (
+      <>
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <ProctorPanel />
+        <div className="app-shell"><div className="card">
+          <ProctoredQuiz
+            quizType="linear-algebra"
+            onBack={() => navigate('/')}
+            autoStartConsent={true}
+          >
+            <LinearAlgebraApp onBack={() => navigate('/')} />
+          </ProctoredQuiz>
+        </div></div>
+        <a href={withBase('/proctor')} className="proctor-dashboard-fab" title="Instructor Dashboard — view all proctor sessions">
+          📊 Dashboard
+        </a>
+      </>
+    )
+  },
+  {
+    paths: ['/proctor'],
+    render: ({ toggleTheme, theme, navigate }) => {
+      const ProctorDash = ProctorDashboard
+      return (
+        <>
+          <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+            {theme === 'dark' ? '☀️' : '🌙'}
+          </button>
+          <div className="app-shell"><div className="card">
+            <ProctorDash onBack={() => navigate('/')} />
+          </div></div>
+        </>
+      )
+    }
+  },
+  {
+    paths: ['/playground'],
+    render: ({ toggleTheme, theme, navigate }) => (
+      <>
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <PlaygroundApp onBack={() => navigate('/')} />
+      </>
+    )
+  },
+  {
+    paths: ['/battle'],
+    render: ({ toggleTheme, theme, navigate }) => (
+      <>
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <BattleApp onBack={() => navigate('/')} />
+      </>
+    )
+  },
+  {
+    paths: ['/sudoku'],
+    render: ({ toggleTheme, theme, navigate }) => (
+      <>
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <SudokuApp onBack={() => navigate('/')} />
+      </>
+    )
+  },
+  {
+    paths: ['/local-compiler', '/playground2'],
+    render: ({ toggleTheme, theme, navigate }) => (
+      <>
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <LocalCompilerApp onBack={() => navigate('/')} />
+      </>
+    )
+  },
+  {
+    paths: ['/supertables1'],
+    render: ({ toggleTheme, theme }) => (
+      <>
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <SuperTables1App />
+      </>
+    )
+  },
+  {
+    match: (p) => p === '/vachana' || p.startsWith('/vachana/'),
+    render: ({ toggleTheme, theme, navigate }) => (
+      <>
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <div className="app-shell">
+          <Vachana onBack={() => navigate('/')} />
+        </div>
+      </>
+    )
+  },
+  {
+    match: (p) => p === '/supertables' || p === '/supertables/',
+    render: ({ toggleTheme, theme }) => (
+      <>
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <SuperTablesApp />
+      </>
+    )
+  },
+];
 
 function App() {
   const [diagnosticState, setDiagnosticState] = useState({});
@@ -43012,677 +43397,56 @@ function App() {
     );
   };
 
-  // ========== ROUTING: URL-BASED (STUDENT PAGES) ==========
-  // Check if current URL matches a specific student page
-  const pathname = stripBase(window.location.pathname)
+  // ========== ROUTING: TABLE-DRIVEN (STUDENT PAGES) ==========
+  const [locationState, setLocationState] = useState(() => ({
+    pathname: stripBase(window.location.pathname),
+    search: window.location.search
+  }))
 
+  useEffect(() => {
+    const handlePopState = () => {
+      setLocationState({
+        pathname: stripBase(window.location.pathname),
+        search: window.location.search
+      })
+    }
+    window.addEventListener('popstate', handlePopState)
+    return () => window.removeEventListener('popstate', handlePopState)
+  }, [])
 
+  const navigate = useCallback((url, options = {}) => {
+    const fullUrl = withBase(url)
+    if (options.replace) {
+      window.history.replaceState(null, '', fullUrl)
+    } else {
+      window.history.pushState(null, '', fullUrl)
+    }
+    const newUrl = new URL(window.location.href)
+    setLocationState({
+      pathname: stripBase(newUrl.pathname),
+      search: newUrl.search
+    })
+  }, [])
 
-  // Route: /profile
-  if (pathname === '/profile') {
-    return (
-      <div className="app-shell">
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <div className="card">
-          <AuthGate>
-            <div style={{ position: 'relative' }}>
-              <ProfileShowcase completedTopics={completedTopics} onSelectTopic={(topicKey) => { window.location.href = withBase(`/?mode=${topicKey}`) }} />
-            </div>
-          </AuthGate>
-        </div>
-        {renderCelebrationModal()}
-      </div>
-    )
-  }
+  const pathname = locationState.pathname
 
-  // Route: /tables → Generic 5-level scaffolded tables app
-  if (pathname === '/tables') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <ScaffoldedTablesApp studentName="Student" />
-      </>
-    )
-  }
+  const matchedRoute = ROUTE_TABLE.find(r => {
+    if (r.paths) return r.paths.includes(pathname)
+    if (r.match) return r.match(pathname) !== null && r.match(pathname) !== false
+    return false
+  })
 
-  // Route: /taittiriya → Taittiriya's 5-level scaffolded tables app
-  if (pathname === '/taittiriya') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <ScaffoldedTablesApp studentName="Taittiriya" />
-      </>
-    )
-  }
-
-  // Route: /lakshya → Lakshya's mastery multiplication program
-  if (pathname === '/lakshya') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <LakshyaTablesApp studentName="Lakshya" />
-      </>
-    )
-  }
-
-  // Route: /jatin → Jatin's 10-level table learning strategy
-  if (pathname === '/jatin') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <JatinTablesApp studentName="Jatin" />
-      </>
-    )
-  }
-
-  // Route: /yazdan → Yazdan's 10-level progressive tables mastery
-  if (pathname === '/yazdan') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <YazdanTablesApp studentName="Yazdan" />
-      </>
-    )
-  }
-
-  // Route: /tatsavit → interactive "fit the line" exercise (two random points)
-  if (pathname === '/tatsavit') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <TatsavitLineApp onBack={() => { window.location.href = withBase('/') }} />
-      </>
-    )
-  }
-
-  if (pathname === '/riddle') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <div className="app-shell"><div className="card">
-          <RiddleApp onBack={() => { window.location.href = withBase('/') }} />
-        </div></div>
-      </>
-    )
-  }
-
-  // Route: /tatsavit0 → legacy 9-level progressive math drill (kept for reference)
-  if (pathname === '/tatsavit0') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <TatsavitApp onBack={() => { window.location.href = withBase('/') }} />
-      </>
-    )
-  }
-
-  // Route: */language → Language Puzzles dashboard and modules (matches any path ending with /language)
-  if (/\/language$/.test(pathname)) {
-    return (
-      <div className="app-shell">
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <div className="card">
-          <LanguageDashboard onBack={() => { window.location.href = withBase('/') }} />
-        </div>
-      </div>
-    )
-  }
-
-  // Route: /tenth → Cambridge IGCSE index page (links to all 24 chapters)
-  if (pathname === '/tenth') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <AuthGate><TenthApp onBack={() => { window.location.href = withBase('/') }} /></AuthGate>
-      </>
-    )
-  }
-
-  // Route: /geocraft → Kids Geometry Workspace
-  if (pathname === '/geocraft') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <div className="app-shell">
-          <div className="card">
-            <GeometryApp onBack={() => { window.location.href = withBase('/') }} />
-          </div>
-        </div>
-      </>
-    )
-  }
-
-  if (pathname === '/gym') {
-    return (<>
-      <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>{theme === 'dark' ? '☀️' : '🌙'}</button>
-      <div className="app-shell"><div className="card">
-        <GymApp onBack={() => { window.location.href = withBase('/tenth') }} />
-      </div></div>
-    </>)
-  }
-  if (pathname === '/bridge1') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge1App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
-  if (pathname === '/bridge2') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge2App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
-  if (pathname === '/bridge3') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge3App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
-  if (pathname === '/bridge4') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge4App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
-  if (pathname === '/bridge5') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge5App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
-  if (pathname === '/bridge6') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge6App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
-  if (pathname === '/bridge7') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge7App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
-  if (pathname === '/bridge8') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge8App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
-  if (pathname === '/bridge9') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge9App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
-  if (pathname === '/bridge10') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge10App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
-  if (pathname === '/bridge11') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge11App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
-  if (pathname === '/bridge12') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge12App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
-  if (pathname === '/bridge13') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge13App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
-  if (pathname === '/bridge14') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge14App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
-  if (pathname === '/bridge15') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge15App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
-  if (pathname === '/bridge16') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge16App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
-  if (pathname === '/bridge17') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge17App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
-  if (pathname === '/bridge18') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge18App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
-  if (pathname === '/bridge19') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge19App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
-  if (pathname === '/bridge20') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge20App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
-  if (pathname === '/bridge21') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge21App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
-  if (pathname === '/bridge22') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge22App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
-  if (pathname === '/bridge23') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge23App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
-  if (pathname === '/bridge24') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge24App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
-  if (pathname === '/bridge25') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge25App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
-  if (pathname === '/bridge26') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge26App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
-  if (pathname === '/bridge27') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge27App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
-
-  // Route: /linearalgebra → Linear Algebra Module 1 (Interactive Learning)
-  if (pathname === '/linearalgebra' || pathname === '/la') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <div className="app-shell"><div className="card">
-          <LinearAlgebraApp onBack={() => { window.location.href = withBase('/') }} />
-        </div></div>
-      </>
-    )
-  }
-
-  // Route: /chapter1 → Cambridge IGCSE Chapter 1 (Reviewing Number Concepts)
-  if (pathname === '/chapter1') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <AuthGate><Chapter1App onBack={() => { window.location.href = withBase('/') }} /></AuthGate>
-      </>
-    )
-  }
-
-  // Route: /chapter2 → Cambridge IGCSE Chapter 2 (Making Sense of Algebra)
-  if (pathname === '/chapter2') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <AuthGate><Chapter2App onBack={() => { window.location.href = withBase('/') }} /></AuthGate>
-      </>
-    )
-  }
-
-  // Route: /chapter3 → Cambridge IGCSE Chapter 3 (Lines, Angles and Shapes)
-  if (pathname === '/chapter3') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <AuthGate><Chapter3App onBack={() => { window.location.href = withBase('/') }} /></AuthGate>
-      </>
-    )
-  }
-
-  // Route: /chapter4 → Cambridge IGCSE Chapter 4 (Collecting, Organising and Displaying Data)
-  if (pathname === '/chapter4') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <AuthGate><Chapter4App onBack={() => { window.location.href = withBase('/') }} /></AuthGate>
-      </>
-    )
-  }
-
-  // Route: /chapter5 → Cambridge IGCSE Chapter 5 adaptive lesson chain
-  if (pathname === '/chapter5') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <AuthGate><Chapter5App onBack={() => { window.location.href = withBase('/') }} /></AuthGate>
-      </>
-    )
-  }
-
-  // Route: /chapter6 → Cambridge IGCSE Chapter 6 (Equations, Factors and Formulae)
-  if (pathname === '/chapter6') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <AuthGate><Chapter6App onBack={() => { window.location.href = withBase('/') }} /></AuthGate>
-      </>
-    )
-  }
-
-  // Route: /chapter7 → Cambridge IGCSE Chapter 7 (Perimeter, Area and Volume)
-  if (pathname === '/chapter7') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <AuthGate><Chapter7App onBack={() => { window.location.href = withBase('/') }} /></AuthGate>
-      </>
-    )
-  }
-
-  // Route: /chapter8 → Cambridge IGCSE Chapter 8 (Introduction to Probability)
-  if (pathname === '/chapter8') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <AuthGate><Chapter8App onBack={() => { window.location.href = withBase('/') }} /></AuthGate>
-      </>
-    )
-  }
-
-  // Route: /chapter9 → Cambridge IGCSE Chapter 9 (Sequences, Surds and Sets)
-  if (pathname === '/chapter9') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <AuthGate><Chapter9App onBack={() => { window.location.href = withBase('/') }} /></AuthGate>
-      </>
-    )
-  }
-
-  // Route: /chapter10 → Cambridge IGCSE Chapter 10 (Straight Lines & Quadratic Equations)
-  if (pathname === '/chapter10') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <AuthGate><Chapter10App onBack={() => { window.location.href = withBase('/') }} /></AuthGate>
-      </>
-    )
-  }
-
-  // Route: /chapter11 → Cambridge IGCSE Chapter 11 (Pythagoras' Theorem & Similar Shapes)
-  if (pathname === '/chapter11') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <AuthGate><Chapter11App onBack={() => { window.location.href = withBase('/') }} /></AuthGate>
-      </>
-    )
-  }
-
-  // Route: /chapter12 → Cambridge IGCSE Chapter 12 (Averages & Measures of Spread)
-  if (pathname === '/chapter12') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <AuthGate><Chapter12App onBack={() => { window.location.href = withBase('/') }} /></AuthGate>
-      </>
-    )
-  }
-
-  // Route: /chapter13 → Cambridge IGCSE Chapter 13 (Understanding Measurement)
-  if (pathname === '/chapter13') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <AuthGate><Chapter13App onBack={() => { window.location.href = withBase('/') }} /></AuthGate>
-      </>
-    )
-  }
-
-  // Route: /chapter14 → Cambridge IGCSE Chapter 14 (Further Equations & Inequalities)
-  if (pathname === '/chapter14') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <AuthGate><Chapter14App onBack={() => { window.location.href = withBase('/') }} /></AuthGate>
-      </>
-    )
-  }
-
-  // Route: /chapter15 → Cambridge IGCSE Chapter 15 (Scale Drawings, Bearings & Trigonometry)
-  if (pathname === '/chapter15') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <AuthGate><Chapter15App onBack={() => { window.location.href = withBase('/') }} /></AuthGate>
-      </>
-    )
-  }
-
-  // Route: /chapter16 → Cambridge IGCSE Chapter 16 (Scatter Diagrams & Correlation)
-  if (pathname === '/chapter16') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <AuthGate><Chapter16App onBack={() => { window.location.href = withBase('/') }} /></AuthGate>
-      </>
-    )
-  }
-
-  // Route: /chapter17 → Cambridge IGCSE Chapter 17 (Managing Money)
-  if (pathname === '/chapter17') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <AuthGate><Chapter17App onBack={() => { window.location.href = withBase('/') }} /></AuthGate>
-      </>
-    )
-  }
-
-  // Route: /chapter18 → Cambridge IGCSE Chapter 18 (Curved Graphs)
-  if (pathname === '/chapter18') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <AuthGate><Chapter18App onBack={() => { window.location.href = withBase('/') }} /></AuthGate>
-      </>
-    )
-  }
-
-  // Route: /chapter19 → Cambridge IGCSE Chapter 19 (Symmetry)
-  if (pathname === '/chapter19') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <AuthGate><Chapter19App onBack={() => { window.location.href = withBase('/') }} /></AuthGate>
-      </>
-    )
-  }
-
-  // Route: /chapter20 → Cambridge IGCSE Chapter 20 (Histograms & Cumulative Frequency)
-  if (pathname === '/chapter20') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <AuthGate><Chapter20App onBack={() => { window.location.href = withBase('/') }} /></AuthGate>
-      </>
-    )
-  }
-
-  // Route: /chapter21 → Cambridge IGCSE Chapter 21 (Ratio, Rate & Proportion)
-  if (pathname === '/chapter21') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <AuthGate><Chapter21App onBack={() => { window.location.href = withBase('/') }} /></AuthGate>
-      </>
-    )
-  }
-
-  // Route: /chapter22 → Cambridge IGCSE Chapter 22 (More Equations, Formulae & Functions)
-  if (pathname === '/chapter22') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <AuthGate><Chapter22App onBack={() => { window.location.href = withBase('/') }} /></AuthGate>
-      </>
-    )
-  }
-
-  // Route: /chapter23 → Cambridge IGCSE Chapter 23 (Transformations & Vectors)
-  if (pathname === '/chapter23') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <AuthGate><Chapter23App onBack={() => { window.location.href = withBase('/') }} /></AuthGate>
-      </>
-    )
-  }
-
-  // Route: /chapter24 → Cambridge IGCSE Chapter 24 (Probability with Tree & Venn Diagrams)
-  if (pathname === '/chapter24') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <AuthGate><Chapter24App onBack={() => { window.location.href = withBase('/') }} /></AuthGate>
-      </>
-    )
-  }
-
-  // Route: /tatsavit1 → IGCSE practice MCQ drill (fixed question bank from the Cambridge book)
-  if (pathname === '/tatsavit1') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <Tatsavit1App onBack={() => { window.location.href = withBase('/') }} />
-      </>
-    )
-  }
-
-  // Route: /riya → Riya's NIOS 311 Chapter 2 (Relations & Functions I) MCQ drill
-  if (pathname === '/riya') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <RiyaApp onBack={() => { window.location.href = withBase('/') }} />
-      </>
-    )
-  }
-
-  // Route: /intervalscheduling → Interval Scheduling algorithm quiz
-  if (pathname === '/intervalscheduling') {
-    return <IntervalSchedulingApp />
-  }
-
-  // Route: /extendedeuclid → Extended Euclidean algorithm quiz
-  if (pathname === '/extendedeuclid') {
-    return <ExtendedEuclidApp />
-  }
-
-  // Route: /water-jug-lab → Water Jug GCD Lab
-  if (pathname === '/water-jug-lab') {
-    return <WaterJugLab onBack={() => { window.location.href = withBase('/') }} />
-  }
-
-  // Route: /equation-crafting-lab → Equation Crafting Lab
-  if (pathname === '/equation-crafting-lab') {
-    return <EquationCraftingLab onBack={() => { window.location.href = withBase('/') }} />
-  }
-
-  // Route: /linear → Linear Algebra flashcards (proctored quiz)
-  // Proctoring starts automatically on this route — no toggle needed.
-  if (pathname === '/linear') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <ProctorPanel />
-        <div className="app-shell"><div className="card">
-          <ProctoredQuiz
-            quizType="linear-algebra"
-            onBack={() => { window.location.href = withBase('/') }}
-            autoStartConsent={true}
-          >
-            <LinearAlgebraApp onBack={() => { window.location.href = withBase('/') }} />
-          </ProctoredQuiz>
-        </div></div>
-        <a href={withBase('/proctor')} className="proctor-dashboard-fab" title="Instructor Dashboard — view all proctor sessions">
-          📊 Dashboard
-        </a>
-      </>
-    )
-  }
-
-  // Route: /proctor → Proctor Dashboard (instructor view)
-  if (pathname === '/proctor') {
-    const ProctorDash = ProctorDashboard
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <div className="app-shell"><div className="card">
-          <ProctorDash onBack={() => { window.location.href = withBase('/') }} />
-        </div></div>
-      </>
-    )
-  }
-
-  // Route: /playground → Code Playground
-  if (pathname === '/playground') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <PlaygroundApp onBack={() => { window.location.href = withBase('/') }} />
-      </>
-    )
-  }
-
-  // Route: /battle → Battle Arena
-  if (pathname === '/battle') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <BattleApp onBack={() => { window.location.href = withBase('/') }} />
-      </>
-    )
-  }
-
-  // Route: /sudoku → Sudoku Puzzle
-  if (pathname === '/sudoku') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <SudokuApp onBack={() => { window.location.href = withBase('/') }} />
-      </>
-    )
-  }
-
-  // Route: /local-compiler → Local Compiler (direct subprocess execution)
-  // Also supports /playground2 for backward compatibility
-  if (pathname === '/local-compiler' || pathname === '/playground2') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19'}
-        </button>
-        <LocalCompilerApp onBack={() => { window.location.href = withBase('/') }} />
-      </>
-    )
-  }
-
-  // Route: /supertables1 → Adaptive speed drill (2-phase)
-  if (pathname === '/supertables1') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <SuperTables1App />
-      </>
-    )
-  }
-
-  // Route: /vachana → Vachana Mathematical Literacy Lab
-  if (pathname === '/vachana' || pathname.startsWith('/vachana/')) {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <div className="app-shell">
-          <Vachana onBack={() => { window.location.href = withBase('/') }} />
-        </div>
-      </>
-    )
-  }
-
-  // Route: /supertables → 10-level progressive multiplication mastery
-  if (pathname === '/supertables') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <SuperTablesApp />
-      </>
-    )
+  if (matchedRoute) {
+    const matchData = matchedRoute.match ? matchedRoute.match(pathname) : null
+    return matchedRoute.render({
+      pathname,
+      matchData,
+      theme,
+      toggleTheme,
+      navigate,
+      renderCelebrationModal,
+      completedTopics
+    })
   }
 
   // ========== LINEAR ALGEBRA QUIZ ==========
