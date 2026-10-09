@@ -1,4 +1,7 @@
 const { ConceptMastery } = require('./models');
+const { bktUpdate, DEFAULT_PARAMS } = require('../lib/bkt');
+const { nextDisplayedMastery } = require('../lib/displayedMastery');
+const { MASTERY_THRESHOLD } = require('./constants');
 
 /**
  * Updates mastery statistics and determines if a concept is mastered.
@@ -15,29 +18,40 @@ async function update(userId, topicId, isCorrect) {
       userId,
       topicId,
       isMastered: false,
-      incorrectStreak: 0
+      incorrectStreak: 0,
+      pMastery: DEFAULT_PARAMS.pInit,
+      displayedMasteryPercent: DEFAULT_PARAMS.pInit * 100
     });
   }
 
-  let newlyMastered = false;
+  const prevPMastery = record.pMastery ?? DEFAULT_PARAMS.pInit;
+  const prevDisplayed = record.displayedMasteryPercent ?? (prevPMastery * 100);
+
+  const { pMasteryNext } = bktUpdate(prevPMastery, isCorrect);
+  record.pMastery = pMasteryNext;
+
+  // TODO (#289): gradeLevel is declared on User schema but not populated/mapped; fallback to '6-8'
+  const rawPercent = pMasteryNext * 100;
+  record.displayedMasteryPercent = nextDisplayedMastery(prevDisplayed, rawPercent, '6-8');
 
   if (isCorrect) {
     record.incorrectStreak = 0;
-    // Standard baseline mastery rule: mark completed on correct answer
-    if (!record.isMastered) {
-      record.isMastered = true;
-      newlyMastered = true;
-      record.completedAt = new Date();
-      record.lastRevisedAt = new Date();
-    } else {
-      record.lastRevisedAt = new Date();
-    }
   } else {
-    record.incorrectStreak += 1;
-    // Regress mastery if 3 consecutive incorrect attempts occur
-    if (record.incorrectStreak >= 3 && record.isMastered) {
-      record.isMastered = false;
-    }
+    record.incorrectStreak = (record.incorrectStreak || 0) + 1;
+  }
+
+  const previouslyMastered = record.isMastered || false;
+  const nowMastered = record.pMastery >= MASTERY_THRESHOLD;
+  let newlyMastered = false;
+
+  record.isMastered = nowMastered;
+
+  if (!previouslyMastered && nowMastered) {
+    newlyMastered = true;
+    record.completedAt = new Date();
+    record.lastRevisedAt = new Date();
+  } else {
+    record.lastRevisedAt = new Date();
   }
 
   await record.save();
@@ -45,7 +59,9 @@ async function update(userId, topicId, isCorrect) {
   return {
     isMastered: record.isMastered,
     newlyMastered,
-    incorrectStreak: record.incorrectStreak
+    incorrectStreak: record.incorrectStreak,
+    pMastery: record.pMastery,
+    displayedMasteryPercent: record.displayedMasteryPercent
   };
 }
 
