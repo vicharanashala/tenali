@@ -535,6 +535,46 @@ function getSpeedRunLimit(difficulty, isAdaptive) {
 }
 
 /**
+ * Module-scope shadow of `createDynamicWeightBank` so the balance-scale
+ * addition generator works in `MixedLabApp` and `AdditionApp`, which
+ * call it from inside the speed-run `fetchQuestion` callback. The local
+ * copy inside `BalanceScaleApp` still shadows this one for that
+ * component's own use.
+ */
+function createDynamicWeightBank(target) {
+  let denominations = [];
+  if (target >= 500) {
+    denominations = [500, 100, 50, 10, 5, 1];
+  } else if (target >= 100) {
+    denominations = [100, 50, 10, 5, 1];
+  } else if (target >= 15) {
+    denominations = [50, 10, 5, 1];
+  } else {
+    denominations = [5, 1];
+  }
+
+  let bank = [];
+  denominations.forEach(d => {
+    let count = 4;
+    if (d === 100) count = 10;
+    if (d === 50) count = 6;
+    if (d === 10) count = 15;
+    if (d === 5) count = 8;
+    if (d === 1) count = 15;
+
+    const needed = Math.ceil(target / d) + 2;
+    if (needed > count) {
+      count = needed;
+    }
+
+    for (let i = 0; i < count; i++) {
+      bank.push({ id: `bank-${d}-${i}-${Math.random()}`, val: d });
+    }
+  });
+  return bank;
+}
+
+/**
  * useTimer Hook
  * Supports three modes driven by the sessionGoal:
  *   'speed'    — countdown from limitSeconds → 0; fires onTimeout when it hits 0
@@ -52052,7 +52092,7 @@ function GymQuiz({ title, subtitle, typeKeys, welcomeText, algebraInput, onBack 
     }
     const gen = GYM_TYPES[t]?.generator
     setQuestion(gen ? gen(d) : null)
-    timer.start(sessionGoal, handleTimeout, getSpeedRunLimit(difficulty ?? 'easy', isAdaptive ?? false))
+    timer.start(sessionGoal, handleTimeout, getSpeedRunLimit(difficulty ?? 'easy', isAdaptive ?? false)) // eslint-disable-line no-undef
   }
 
   // Stop button (adaptive mode only): end the session and show the results screen.
@@ -53836,7 +53876,7 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
     setFeedback('')
     setRevealed(false)
     setIsCorrect(null)
-    timer.start(sessionGoal, handleTimeout, getSpeedRunLimit(difficulty ?? 'easy', isAdaptive ?? false))
+    timer.start(sessionGoal, handleTimeout, getSpeedRunLimit(difficulty ?? 'easy', isAdaptive ?? false)) // eslint-disable-line no-undef
     if (level === 3) startLevel3Countdown()
   }
 
@@ -56885,7 +56925,7 @@ function GymApp({ onBack }) {
   const [loading, setLoading] = useState(false)
   const [loadError, setLoadError] = useState('')
   const timer = useTimer()
-  const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('gym', finished, score, totalQ, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
+  const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('gym', phase === 'finished', score, totalQ, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
   const sessionGoal = 'standard'
   const isAdaptive = true
   const handleTimeout = async () => {
@@ -58631,7 +58671,7 @@ function RandomMixApp({ onBack, isGoalMode = false }) {
     }
   }, [isGoalMode]);
   const timer = useTimer()
-  const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('mix', finished, score, totalQ, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
+  const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('mix', phase === 'finished', score, totalQuestions, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
   const advanceFnRef = useRef(null)
   const submittedRef = useRef(false)
   const advancedRef = useRef(false)
@@ -62239,6 +62279,7 @@ function TwinHuntApp({ onBack, isGoalMode = false }) {
    * Resets feedback/reveal and starts timer for the round
    */
   
+  /* eslint-disable no-undef */
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
@@ -62269,6 +62310,7 @@ function TwinHuntApp({ onBack, isGoalMode = false }) {
       }
     }
   }
+  /* eslint-enable no-undef */
 
 const generateRound = (n) => {
     // Shuffle symbol pool and select 2n-1 unique symbols
@@ -62298,7 +62340,7 @@ const generateRound = (n) => {
     setFeedback('')
     setIsCorrect(null)
     setRevealed(false)
-    timer.start(sessionGoal, handleTimeout, getSpeedRunLimit(difficulty ?? 'easy', isAdaptive ?? false))
+    timer.start(sessionGoal, handleTimeout, getSpeedRunLimit(difficulty ?? 'easy', isAdaptive ?? false)) // eslint-disable-line no-undef
   }
 
   /**
@@ -62562,6 +62604,7 @@ function SqrtApp({ onBack, isGoalMode = false }) {
    * Backend calculates sqrtRounded, floorAnswer, ceilAnswer for validation
    */
   
+  /* eslint-disable no-undef */
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
@@ -62592,6 +62635,7 @@ function SqrtApp({ onBack, isGoalMode = false }) {
       }
     }
   }
+  /* eslint-enable no-undef */
 
 const fetchQuestion = async (step) => {
     setLoading(true)
@@ -62896,6 +62940,7 @@ function PolyMulApp({ onBack, isGoalMode = false }) {
    * Initializes userCoeffs array with empty strings (one per degree)
    */
   
+  /* eslint-disable no-undef */
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
@@ -62926,6 +62971,7 @@ function PolyMulApp({ onBack, isGoalMode = false }) {
       }
     }
   }
+  /* eslint-enable no-undef */
 
 const loadQuestion = async () => {
     setLoading(true)
@@ -63229,6 +63275,7 @@ function PolyFactorApp({ onBack, isGoalMode = false }) {
    * Resets all factor fields to empty and initializes timer
    */
   
+  /* eslint-disable no-undef */
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
@@ -63259,6 +63306,7 @@ function PolyFactorApp({ onBack, isGoalMode = false }) {
       }
     }
   }
+  /* eslint-enable no-undef */
 
 const loadQuestion = async () => {
     setLoading(true)
@@ -63544,6 +63592,7 @@ function PrimeFactorApp({ onBack, isGoalMode = false }) {
    * Resets input fields and timer before starting
    */
   
+  /* eslint-disable no-undef */
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
@@ -63574,6 +63623,7 @@ function PrimeFactorApp({ onBack, isGoalMode = false }) {
       }
     }
   }
+  /* eslint-enable no-undef */
 
 const loadQuestion = async () => {
     // Reset feedback and UI state
@@ -63903,6 +63953,7 @@ function QFormulaApp({ onBack, isGoalMode = false }) {
    *   - complex: realPart, imagPart (roots are a ± bi)
    */
   
+  /* eslint-disable no-undef */
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
@@ -63933,6 +63984,7 @@ function QFormulaApp({ onBack, isGoalMode = false }) {
       }
     }
   }
+  /* eslint-enable no-undef */
 
 const loadQuestion = async () => {
     setLoading(true)
@@ -64239,6 +64291,7 @@ function SimulApp({ onBack, isGoalMode = false }) {
    *   - 3×3: ax + by + cz = d (three equations, three unknowns)
    */
   
+  /* eslint-disable no-undef */
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
@@ -64269,6 +64322,7 @@ function SimulApp({ onBack, isGoalMode = false }) {
       }
     }
   }
+  /* eslint-enable no-undef */
 
 const loadQuestion = async () => {
     setLoading(true)
@@ -64574,6 +64628,7 @@ function FuncEvalApp({ onBack, isGoalMode = false }) {
    * Returns: {formula: "2x + 3", vars: {x: 5}, answer: 13}
    */
   
+  /* eslint-disable no-undef */
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
@@ -64604,6 +64659,7 @@ function FuncEvalApp({ onBack, isGoalMode = false }) {
       }
     }
   }
+  /* eslint-enable no-undef */
 
 const loadQuestion = async () => {
     setLoading(true)
@@ -64876,6 +64932,7 @@ function LineEqApp({ onBack, isGoalMode = false }) {
    * Returns: {x1, y1, x2, y2} - two points on the line
    */
   
+  /* eslint-disable no-undef */
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
@@ -64906,6 +64963,7 @@ function LineEqApp({ onBack, isGoalMode = false }) {
       }
     }
   }
+  /* eslint-enable no-undef */
 
 const loadQuestion = async () => {
     setLoading(true)
@@ -65459,6 +65517,7 @@ function CustomApp({ onBack, isGoalMode = false }) {
    * Transition to 'quiz' phase and load first question
    */
   
+  /* eslint-disable no-undef */
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
@@ -65489,6 +65548,7 @@ function CustomApp({ onBack, isGoalMode = false }) {
       }
     }
   }
+  /* eslint-enable no-undef */
 
 const startQuiz = async () => {
     const count = numQuestions !== '' && Number(numQuestions) > 0 ? Number(numQuestions) : 20
@@ -68652,6 +68712,7 @@ function RiyaApp({ onBack, isGoalMode = false }) {
 
   // ── Helpers ─────────────────────────────────────────────────────
   
+  /* eslint-disable no-undef */
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
@@ -68682,6 +68743,7 @@ function RiyaApp({ onBack, isGoalMode = false }) {
       }
     }
   }
+  /* eslint-enable no-undef */
 
 const startQuiz = () => {
     setPhase('quiz')
@@ -68997,7 +69059,7 @@ const startQuiz = () => {
  *     y = mx + C for each. If either y is out of the plot window [-7, 7],
  *     retry. This guarantees a tidy integer answer and visible points.
  */
-function TatsavitLineApp({ onBack }) {
+function TatsavitLineApp({ onBack, isGoalMode = false }) {
   // `round` is just a counter that forces regeneration on Next
   const [round, setRound] = useState(0)
   // Point coordinates are stored as strings so the inputs stay editable
