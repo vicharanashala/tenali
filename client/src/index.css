@@ -24,11 +24,14 @@
 /* Body reset: Remove default body margins */
 body {
   margin: 0;
+  background-color: #302723;
+  color: #ede8e3;
 }
 
 /* Root element: Ensure full viewport height for proper app layout centering */
 #root {
   min-height: 100vh;  /* Minimum height is full viewport */
+  background-color: #302723;
 }
 
 /* Accessibility: Dyslexia-friendly font support */

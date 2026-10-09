@@ -1,0 +1,4 @@
+1. In server do "node index.js"
+2. In client do "npm run dev"
+3. Finally do "git push origin main"
+
