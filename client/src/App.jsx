@@ -36,6 +36,7 @@ import ShapeTranslatorApp from './ShapeTranslatorApp';
 import NetBuilderApp from './NetBuilderApp';
 import CrossSectionApp from './CrossSectionApp';
 import DailyWarmupCard from './components/DailyWarmupCard';
+import PathMap, { PmHomeSection, PmQuestBanner, PmSuggestIcon, PmGoalModal } from './PathMap';
 
 window.React = React;
 console.log("React version:", React.version);
@@ -43226,6 +43227,20 @@ function App() {
     )
   }
 
+  // Route: /pathmap → Personalized Learning Path & Prerequisite Knowledge Graph (#321)
+  if (pathname === '/pathmap') {
+    return (
+      <>
+        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+        <div className="app-shell"><div className="card">
+          <PathMap onBack={() => { window.location.href = withBase('/') }} onSelectTopic={(key) => { window.location.href = withBase(`/?mode=${key}`) }} completedTopics={completedTopics} />
+        </div></div>
+      </>
+    )
+  }
+
   // Route: /chapter1 → Cambridge IGCSE Chapter 1 (Reviewing Number Concepts)
   if (pathname === '/chapter1') {
     return (
@@ -44920,6 +44935,7 @@ function App() {
     riddle: RiddleApp,              // Math Riddles
     'water-jug-lab': WaterJugLab,
     'equation-crafting-lab': EquationCraftingLab,
+    pathmap: PathMap,
   }
 
   // Get the component to render (or null if mode not set)

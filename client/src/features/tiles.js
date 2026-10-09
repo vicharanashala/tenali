@@ -104,6 +104,7 @@ export const TILES = [
     { key: 'polygym', name: 'Polynomials', subtitle: 'Arithmetic → monomial algebra (MCQ)', color: 'blue', category: 'algebra', foldInto: 'polymul' },
     { key: 'water-jug-lab', name: '🧪 Water Jug Lab', subtitle: 'GCD discovery — 13-level progression', color: 'teal', category: 'shelf' },
     { key: 'equation-crafting-lab', name: '⚗️ Equation Crafting Lab', subtitle: 'Build expressions in the mixing pot', color: 'orange', category: 'algebra' },
+    { key: 'pathmap', name: '📍 Learning Path', subtitle: 'Personalized prerequisite roadmap', color: 'orange', category: 'shelf' },
 ]
 
 // Hamburger-only entries (#190). Data only -- composition stays in App.jsx.
@@ -114,6 +115,7 @@ export const FEATURED_TILES = [
     { key: 'treasurehunt', name: 'Treasure Hunt', subtitle: 'Solve & seek on a treasure grid', color: 'featured' },
     { key: 'contrastlist', name: 'Contrast Challenge', subtitle: 'Distinguish similar concepts', color: 'featured' },
     { key: 'vachana', name: 'Vachana', subtitle: 'Mathematical Literacy Lab', color: 'featured' },
+    { key: 'pathmap', name: '📍 Learning Path', subtitle: 'Personalized prerequisite roadmap', color: 'featured' },
 ]
 
 // Hamburger pin for Visual Learning Universe (#191); also on home grid (#216).
