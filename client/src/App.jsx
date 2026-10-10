@@ -43,6 +43,7 @@ import MatrixMysticsApp from './matrixmystics/MatrixMysticsApp'
 import { TILES, FEATURED_TILES, MATH_LAB_ENTRY, GEOCRAFT_ENTRY } from './features/tiles'
 import LandingPage from './components/LandingPage/LandingPage.jsx'
 import LandingNavbar from './components/LandingPage/LandingNavbar.jsx'
+import MatrixMysticsHome from './components/MatrixMystics/MatrixMysticsHome.jsx'
 
 
 /**
@@ -86,6 +87,14 @@ import KeyTerms from './components/KeyTerms'
 import InteractiveLcmHcfApp from './LcmHcfApp';
 import IdliVadaSambharApp from './IdliVadaSambharApp';
 import CarJourneyApp from './CarJourneyApp';
+import GeoGebraLabApp from './GeoGebraLabApp';
+import KernelPlayground from './modules/KernelPlayground';
+import LinearAlgebraModule from './modules/LinearAlgebra';
+import LineStudioModule from './modules/LineStudio';
+import FunctionStudioModule from './modules/FunctionStudio';
+import InverseStudioModule from './modules/InverseStudio';
+import MatrixStudioModule from './modules/MatrixStudio';
+import DimensionStudioModule from './modules/DimensionStudio';
 import RealWorldHubApp from './RealWorldHub';
 import { cjTakeReco } from './cjReco'; // Feature CR — Road License difficulty hand-off
 const CJ_RECO_DIFFS = ['easy', 'medium', 'hard', 'extrahard'];
@@ -44877,7 +44886,24 @@ function App() {
     hcflcm: InteractiveLcmHcfApp,  // HCF & LCM
     idlivada: IdliVadaSambharApp,  // Idli–Vada–Sambhar (Multiples, Common Multiples & LCM)
     carjourney: CarJourneyApp,     // The Car Journey (Feature CR — 16-stop math road trip)
-    realworld: RealWorldHubApp,    // Real-World hub (Feature CR) — phenomenon pathway cards
+    geogebra: GeoGebraLabApp,      // GeoGebra Lab (Level 1: 33 hands-on practical challenges)
+    kernel: KernelPlayground,      // The Zero Balance Studio (Null space & kernel equilibrium)
+    'linear-algebra-studio': LinearAlgebraModule, // Visual intuition & interactive challenges
+    'point-studio': LinearAlgebraModule,
+    point: LinearAlgebraModule,
+    'line-studio': LineStudioModule,
+    line: LineStudioModule,
+    'function-studio': FunctionStudioModule,
+    function: FunctionStudioModule,
+    'inverse-studio': InverseStudioModule,
+    inversestudio: InverseStudioModule,
+    inverse: InverseStudioModule,
+    'matrix-studio': MatrixStudioModule,
+    matrixstudio: MatrixStudioModule,
+    'dimension-studio': DimensionStudioModule,
+    dimensionstudio: DimensionStudioModule,
+    'space-studio': DimensionStudioModule,
+    spacestudio: DimensionStudioModule,
     profitloss: ProfitLossApp,     // Profit & Loss
     rounding: RoundingApp,         // Rounding
     binomial: BinomialApp,         // Binomial Theorem
@@ -44984,6 +45010,68 @@ function App() {
             onBack={() => setMode('learning_journey_topic')}
           />
         </AuthGate>
+      );
+    }
+    if (mode === 'linear-algebra-studio' || mode === 'point-studio' || mode === 'point') {
+      return (
+        <LinearAlgebraModule
+          onBack={() => setMode(null)}
+          onNext={() => setMode('line-studio')}
+        />
+      );
+    }
+
+    if (mode === 'line-studio' || mode === 'line') {
+      return (
+        <LineStudioModule
+          onBack={() => setMode(null)}
+          onNext={() => setMode('dimension-studio')}
+        />
+      );
+    }
+
+    if (mode === 'dimension-studio' || mode === 'dimensionstudio' || mode === 'space-studio' || mode === 'spacestudio') {
+      return (
+        <DimensionStudioModule
+          onBack={() => setMode(null)}
+          onNext={() => setMode('function-studio')}
+        />
+      );
+    }
+
+    if (mode === 'function-studio' || mode === 'function') {
+      return (
+        <FunctionStudioModule
+          onBack={() => setMode(null)}
+          onNext={() => setMode('inverse-studio')}
+        />
+      );
+    }
+
+    if (mode === 'inverse-studio' || mode === 'inversestudio' || mode === 'inverse') {
+      return (
+        <InverseStudioModule
+          onBack={() => setMode(null)}
+          onNext={() => setMode('matrix-studio')}
+        />
+      );
+    }
+
+    if (mode === 'matrix-studio' || mode === 'matrixstudio') {
+      return (
+        <MatrixStudioModule
+          onBack={() => setMode(null)}
+          onNext={() => setMode('kernel')}
+        />
+      );
+    }
+
+    if (mode === 'kernel') {
+      return (
+        <KernelPlayground
+          onBack={() => setMode(null)}
+          onNext={() => setMode(null)}
+        />
       );
     }
 
@@ -45123,6 +45211,23 @@ function App() {
       gymdecimals: 'Gym Decimals', funcgym: 'Functions Gym', dotprodgym: 'Dot Products Gym',
       fracaddgym: 'Fractions Gym', lineqgym: 'Linear Equations Gym',
       indicesgym: 'Indices Gym', polygym: 'Polynomials Gym',
+      kernel: 'The Zero Balance (Kernel)',
+      'linear-algebra-studio': 'Point Studio',
+      'point-studio': 'Point Studio',
+      point: 'Point Studio',
+      'line-studio': 'Line Studio',
+      line: 'Line Studio',
+      'dimension-studio': 'Dimension Studio',
+      dimensionstudio: 'Dimension Studio',
+      'space-studio': 'Dimension Studio',
+      spacestudio: 'Dimension Studio',
+      'function-studio': 'Function Studio',
+      function: 'Function Studio',
+      'inverse-studio': 'Inverse Studio',
+      inversestudio: 'Inverse Studio',
+      inverse: 'Inverse Studio',
+      'matrix-studio': 'Matrix Studio',
+      matrixstudio: 'Matrix Studio',
     }
     return labels[key] || key
   }
@@ -45467,86 +45572,16 @@ function App() {
     )
   }
 
-  // ========== LANDING PAGE VIEW (Default when mode === null and currentView === 'landing') ==========
-  if (mode === null && currentView === 'landing') {
+  // ========== MATRIX MYSTICS HOME VIEW (Default when mode === null) ==========
+  if (mode === null) {
     return (
-      <div className="landing-view-wrapper">
-        <LandingPage
-          onExplorePuzzles={() => {
-            setCurrentView('puzzles');
-            try { window.history.replaceState({}, '', `${BASE}/?view=puzzles`); } catch (e) {}
-          }}
-          onSelectTopic={(topicKey) => {
-            setCurrentView('puzzles');
-            if (topicKey === 'goalpractice') {
-              setMode('goalpractice');
-            } else if (topicKey === 'angles') {
-              setIsGoalMode(false);
-              handleSelectMode(topicKey);
-            } else {
-              setMode(topicKey);
-              setIsGoalMode(false);
-            }
-          }}
-          currentView={currentView}
-          onViewChange={(v) => {
-            setCurrentView(v);
-            try {
-              if (v === 'puzzles') {
-                window.history.replaceState({}, '', `${BASE}/?view=puzzles`);
-              } else {
-                window.history.replaceState({}, '', `${BASE}/`);
-              }
-            } catch (e) {}
-          }}
-          theme={theme}
-          toggleTheme={toggleTheme}
-        />
-        {/* Misconception Monsters toast & hall overlays */}
-        <MonsterToast
-          onOpenHall={() => setHallOpen(true)}
-          onTap={() => setHallOpen(true)}
-        />
-        <HallPanel
-          open={hallOpen}
-          onClose={() => {
-            setHallOpen(false);
-            setGuidedSolverMonsterId(null);
-          }}
-          monsterLog={monsterLog}
-          initialSelectedId={guidedSolverMonsterId}
-          initialGuidedSolver={!!guidedSolverMonsterId}
-          onStartCure={(monsterId, topic) => {
-            setHallOpen(false);
-            setGuidedSolverMonsterId(null);
-            setActiveCure({ monsterId, topic });
-          }}
-          onOpenGuidedSolver={(monsterId) => {
-            setGuidedSolverMonsterId(monsterId);
-          }}
-          onCloseSolver={() => {
-            setGuidedSolverMonsterId(null);
-          }}
-        />
-        {activeCure && (
-          <CureFlow
-            monsterId={activeCure.monsterId}
-            topic={activeCure.topic}
-            onCancel={() => setActiveCure(null)}
-            onComplete={() => {
-              try { setMonsterLog(loadMonsterLog()); } catch {}
-              setActiveCure(null);
-              setHallOpen(true);
-            }}
-            onOpenGuidedSolver={(monsterId) => {
-              setActiveCure(null);
-              setGuidedSolverMonsterId(monsterId);
-              setHallOpen(true);
-            }}
-          />
-        )}
-        <ReflectionJournal />
-      </div>
+      <MatrixMysticsHome
+        onSelect={(key) => {
+          setMode(key);
+        }}
+        theme={theme}
+        toggleTheme={toggleTheme}
+      />
     );
   }
 
@@ -45628,6 +45663,8 @@ function App() {
       <div>
         {mode === 'vachana' ? (
           <Vachana onBack={() => setMode(null)} initialAdaptScore={diagnosticState[mode] || 0} />
+        ) : mode === 'geogebra' || mode === 'kernel' || mode === 'linear-algebra-studio' || mode === 'point-studio' || mode === 'point' || mode === 'line-studio' || mode === 'line' || mode === 'function-studio' || mode === 'function' || mode === 'inverse-studio' || mode === 'inversestudio' || mode === 'inverse' || mode === 'matrix-studio' || mode === 'matrixstudio' || mode === 'dimension-studio' || mode === 'dimensionstudio' || mode === 'space-studio' || mode === 'spacestudio' ? (
+          renderContent()
         ) : (
           <div className={`card ${mode === 'contrastlist' ? 'is-wide' : ''}`}>
             {renderContent()}

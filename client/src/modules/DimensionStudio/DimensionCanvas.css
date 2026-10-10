@@ -1,0 +1,484 @@
+/* ==========================================================================
+   DimensionCanvas.css - Styling for Multi-Dimensional Canvas (ℝ, ℝ², ℝ³, ℝⁿ)
+   ========================================================================== */
+
+.dc-wrapper {
+  display: flex;
+  flex-direction: column;
+  background: var(--clr-surface, #231e1a);
+  border: 1px solid var(--clr-border, rgba(255, 245, 230, 0.15));
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  margin-bottom: 0.65rem;
+}
+
+.dc-wrapper.compact {
+  margin-bottom: 0.5rem;
+}
+
+/* Header & Tabs */
+.dc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  background: var(--clr-card, #2c2622);
+  border-bottom: 1px solid var(--clr-border-subtle, rgba(255, 245, 230, 0.08));
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.dc-tab-group {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(18, 15, 13, 0.8);
+  padding: 0.2rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 245, 230, 0.08);
+}
+
+.dc-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: transparent;
+  border: none;
+  color: #a89e94;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.35rem 0.65rem;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.dc-tab:hover {
+  color: #ede8e3;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.dc-tab.active {
+  background: rgba(232, 134, 74, 0.15);
+  color: #e8864a;
+  border: 1px solid rgba(232, 134, 74, 0.35);
+}
+
+.dc-tab-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.dot-set {
+  background: #f59e0b;
+}
+
+.dot-1d {
+  background: #14b8a6;
+}
+
+.dot-2d {
+  background: #a855f7;
+}
+
+.dot-3d {
+  background: #e8864a;
+}
+
+.dot-nd {
+  background: #3b82f6;
+}
+
+.dc-tab-badge {
+  font-size: 0.7rem;
+  opacity: 0.75;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+}
+
+/* Address Pill */
+.dc-address-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.35rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 245, 230, 0.1);
+}
+
+.dc-address-label {
+  font-size: 0.75rem;
+  color: #a89e94;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.dc-address-val {
+  font-family: 'Cambria Math', 'KaTeX_Math', 'Fira Code', monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ede8e3;
+}
+
+/* Canvas Area */
+.dc-canvas-container {
+  position: relative;
+  width: 100%;
+  background: radial-gradient(circle at center, #1f1b17 0%, #13100e 100%);
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dc-canvas-inner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem 0 0.75rem 0;
+  cursor: crosshair;
+  user-select: none;
+}
+
+.dc-svg {
+  width: 100%;
+  max-height: 280px;
+  display: block;
+}
+
+.dc-interactive-point {
+  cursor: grab;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.4));
+  transition: r 0.15s ease;
+}
+
+.dc-interactive-point:hover {
+  r: 10.5;
+}
+
+/* Controls Bar */
+.dc-controls-bar {
+  width: 92%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  background: rgba(30, 26, 23, 0.7);
+  border: 1px solid rgba(255, 245, 230, 0.08);
+  border-radius: 10px;
+  flex-wrap: wrap;
+}
+
+.dc-ctrl-hint {
+  font-size: 0.78rem;
+  color: #a89e94;
+}
+
+.dc-slider-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.dc-slider-item label {
+  font-family: monospace;
+}
+
+.dc-slider-item input[type='range'] {
+  width: 90px;
+  accent-color: #e8864a;
+  cursor: pointer;
+}
+
+.dc-slider-val {
+  min-width: 28px;
+  font-family: monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ede8e3;
+}
+
+.dc-freedom-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #14b8a6;
+  background: rgba(20, 184, 166, 0.12);
+  border: 1px solid rgba(20, 184, 166, 0.3);
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+}
+
+/* 3D View */
+.dc-3d-container {
+  position: relative;
+  cursor: grab;
+}
+
+.dc-3d-container:active {
+  cursor: grabbing;
+}
+
+.dc-3d-hint-banner {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  z-index: 5;
+  font-size: 0.75rem;
+  color: #a89e94;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 245, 230, 0.1);
+}
+
+.dc-recenter-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 245, 230, 0.15);
+  color: #ede8e3;
+  font-size: 0.72rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.dc-recenter-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* nD View */
+.dc-nd-container {
+  width: 100%;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.dc-nd-preset-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.dc-nd-preset-label {
+  font-size: 0.8rem;
+  color: #a89e94;
+  font-weight: 600;
+}
+
+.dc-preset-btn {
+  background: rgba(30, 26, 23, 0.8);
+  border: 1px solid rgba(255, 245, 230, 0.15);
+  color: #ede8e3;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.dc-preset-btn:hover {
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.dc-preset-btn.active {
+  background: rgba(59, 130, 246, 0.2);
+  border-color: #3b82f6;
+  color: #60a5fa;
+}
+
+.dc-nd-vector-card {
+  background: rgba(23, 19, 16, 0.9);
+  border: 1px solid rgba(255, 245, 230, 0.12);
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.dc-nd-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 245, 230, 0.08);
+  padding-bottom: 0.6rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.dc-nd-dim-pill {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #3b82f6;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+}
+
+.dc-nd-math-expr {
+  font-family: 'Cambria Math', 'KaTeX_Math', monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ede8e3;
+}
+
+.dc-nd-channels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+
+.dc-nd-channel-item {
+  background: rgba(30, 26, 23, 0.75);
+  border: 1px solid rgba(255, 245, 230, 0.08);
+  border-radius: 8px;
+  padding: 0.65rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.dc-channel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+}
+
+.dc-channel-idx {
+  font-family: monospace;
+  font-weight: 700;
+  color: #3b82f6;
+}
+
+.dc-channel-name {
+  color: #ede8e3;
+  font-weight: 600;
+}
+
+.dc-channel-val {
+  font-family: monospace;
+  font-weight: 700;
+  color: #e8864a;
+}
+
+.dc-channel-slider {
+  width: 100%;
+  accent-color: #3b82f6;
+  cursor: pointer;
+}
+
+.dc-nd-insight-banner {
+  background: rgba(232, 134, 74, 0.08);
+  border: 1px solid rgba(232, 134, 74, 0.25);
+  border-radius: 8px;
+  padding: 0.65rem 0.85rem;
+  font-size: 0.82rem;
+  color: #ede8e3;
+  line-height: 1.45;
+}
+
+/* ==========================================================================
+   Sets & Cartesian Cross Product View Styles
+   ========================================================================== */
+
+.dc-set-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 0.65rem;
+}
+
+.dc-set-preset-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(30, 26, 23, 0.7);
+  padding: 0.5rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 245, 230, 0.08);
+  flex-wrap: wrap;
+}
+
+.dc-set-preset-label {
+  font-size: 0.78rem;
+  color: #a89e94;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.dc-set-info-card {
+  background: rgba(23, 19, 16, 0.9);
+  border: 1px solid rgba(255, 245, 230, 0.12);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.dc-set-info-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.dc-set-tag-badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-family: 'Cambria Math', monospace;
+}
+
+.dc-set-tag-badge.p-badge {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.15);
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+.dc-set-result-badge {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #ede8e3;
+  background: rgba(232, 134, 74, 0.15);
+  border: 1px solid rgba(232, 134, 74, 0.35);
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  font-family: 'Cambria Math', monospace;
+}
+
+.dc-set-explanation-banner {
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 8px;
+  padding: 0.65rem 0.85rem;
+  font-size: 0.82rem;
+  color: #ede8e3;
+  line-height: 1.45;
+}

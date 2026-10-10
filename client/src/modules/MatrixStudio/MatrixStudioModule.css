@@ -1,0 +1,1355 @@
+/* MatrixStudioModule.css - Tenali Tactile Design System */
+
+:root {
+  --clr-accent: #e8864a;
+  --clr-accent-hover: #d97736;
+  --clr-accent-soft: rgba(232, 134, 74, 0.12);
+  --clr-accent-border: rgba(232, 134, 74, 0.35);
+  --clr-accent-glow: rgba(232, 134, 74, 0.35);
+  --clr-card: #2c2622;
+  --clr-surface: #231e1a;
+  --clr-surface-alt: #362f2a;
+  --clr-border: rgba(255, 245, 230, 0.18);
+  --clr-border-subtle: rgba(255, 245, 230, 0.12);
+  --clr-text: #ede8e3;
+  --clr-heading: #ede8e3;
+  --clr-text-soft: #a89e94;
+  --clr-success: #10b981;
+  --clr-success-soft: rgba(16, 185, 129, 0.12);
+  --clr-success-border: rgba(16, 185, 129, 0.35);
+  --clr-success-text: #34d399;
+  --clr-danger: #ef4444;
+  --clr-danger-soft: rgba(239, 68, 68, 0.15);
+  --clr-danger-text: #f87171;
+  --clr-teal: #14b8a6;
+  --clr-purple: #a855f7;
+}
+
+.fs-studio-wrapper {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0.85rem 1rem 3.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: var(--clr-text, #ede8e3);
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   TOP NAVIGATION
+   ========================================================================== */
+.fs-top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fs-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--clr-surface, #2c2622);
+  border: 1px solid var(--clr-border, rgba(255, 245, 230, 0.18));
+  padding: 0.4rem 0.9rem;
+  border-radius: 9999px;
+  font-size: 0.825rem;
+  font-weight: 500;
+  color: var(--clr-text-soft, #a89e94);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  font-family: inherit;
+}
+
+.fs-back-btn:hover {
+  background: var(--clr-surface-alt, #362f2a);
+  color: var(--clr-text, #ede8e3);
+  border-color: var(--clr-accent, #e8864a);
+}
+
+.fs-progress-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  background: var(--clr-surface, #2c2622);
+  border: 1px solid var(--clr-border, rgba(255, 245, 230, 0.18));
+  border-radius: 9999px;
+  font-size: 0.775rem;
+  font-weight: 600;
+  color: var(--clr-accent, #e8864a);
+}
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+.fs-header {
+  text-align: center;
+  margin-bottom: 0.25rem;
+}
+
+.fs-phase-pill {
+  display: inline-block;
+  background: rgba(232, 134, 74, 0.12);
+  border: 1px solid rgba(232, 134, 74, 0.28);
+  color: var(--clr-accent, #e8864a);
+  font-size: 0.725rem;
+  font-weight: 700;
+  padding: 0.2rem 0.65rem;
+  border-radius: 9999px;
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.fs-title {
+  font-size: 1.65rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  margin: 0 0 0.25rem 0;
+  color: var(--clr-heading, var(--clr-text, #ede8e3));
+}
+
+.fs-subtitle {
+  font-size: 0.88rem;
+  color: var(--clr-text-soft, #a89e94);
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* ==========================================================================
+   STEPPER BAR
+   ========================================================================== */
+.fs-stepper-bar {
+  display: flex;
+  gap: 0.35rem;
+  width: 100%;
+  align-items: center;
+  overflow-x: auto;
+  padding: 2px;
+}
+
+.fs-step-pill {
+  flex: 1;
+  min-width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: var(--clr-surface, #231e1a);
+  border: 1px solid var(--clr-border-subtle, rgba(255, 245, 230, 0.12));
+  color: var(--clr-text-soft, #a89e94);
+  font-size: 0.725rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  padding: 0;
+  font-family: inherit;
+}
+
+.fs-step-pill:hover {
+  background: var(--clr-surface-alt, #362f2a);
+  color: var(--clr-text, #ede8e3);
+  border-color: var(--clr-accent, #e8864a);
+}
+
+.fs-step-pill.active {
+  background: rgba(232, 134, 74, 0.22);
+  color: #ffffff;
+  border-color: var(--clr-accent, #e8864a);
+  box-shadow: 0 0 10px rgba(232, 134, 74, 0.35);
+  font-weight: 800;
+}
+
+.fs-step-pill.completed:not(.active) {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.4);
+  color: #34d399;
+}
+
+/* ==========================================================================
+   CARD CONTAINER
+   ========================================================================== */
+.fs-card {
+  background: var(--clr-card, #2c2622);
+  border: 1px solid var(--clr-border, rgba(255, 245, 230, 0.18));
+  border-radius: 16px;
+  padding: 1.15rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.fs-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--clr-border-subtle, rgba(255, 245, 230, 0.08));
+  padding-bottom: 0.65rem;
+}
+
+.fs-question-badge {
+  background: var(--clr-accent, #e8864a);
+  color: #1a1512;
+  font-size: 0.725rem;
+  font-weight: 800;
+  padding: 0.2rem 0.55rem;
+  border-radius: 5px;
+  letter-spacing: 0.02em;
+}
+
+.fs-topic-badge {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--clr-text, #ede8e3);
+}
+
+.fs-card-line-badge {
+  background: rgba(232, 134, 74, 0.15);
+  border: 1px solid rgba(232, 134, 74, 0.35);
+  color: var(--clr-accent, #e8864a);
+  font-family: 'Fira Code', 'Roboto Mono', 'SF Mono', Consolas, monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.18rem 0.55rem;
+  border-radius: 6px;
+  letter-spacing: 0.02em;
+}
+
+.fs-question-num {
+  font-size: 0.75rem;
+  color: var(--clr-text-soft, #a89e94);
+}
+
+.fs-equation-pill-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(232, 134, 74, 0.1);
+  border: 1px solid rgba(232, 134, 74, 0.28);
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  margin-bottom: 0.55rem;
+  font-size: 0.8rem;
+}
+
+.fs-equation-pill-label {
+  color: var(--clr-text-soft, #a89e94);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+}
+
+.fs-equation-pill-val {
+  color: var(--clr-accent, #e8864a);
+  font-family: 'Fira Code', 'Roboto Mono', 'SF Mono', Consolas, monospace;
+  font-weight: 800;
+  font-size: 0.88rem;
+}
+
+.fs-equation-highlight {
+  color: var(--clr-accent, #e8864a);
+  font-family: 'Fira Code', 'Roboto Mono', 'SF Mono', Consolas, monospace;
+  font-weight: 800;
+  padding: 0.08rem 0.42rem;
+  background: rgba(232, 134, 74, 0.12);
+  border: 1px solid rgba(232, 134, 74, 0.28);
+  border-radius: 6px;
+  display: inline-block;
+  letter-spacing: 0.02em;
+}
+
+.fs-step-intro-block {
+  margin-top: 0.25rem;
+}
+
+.fs-step-heading {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--clr-heading, var(--clr-text, #ede8e3));
+  margin: 0 0 0.35rem 0;
+  line-height: 1.4;
+}
+
+.fs-step-subtext {
+  font-size: 0.825rem;
+  color: var(--clr-text-soft, #a89e94);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+.fs-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  background: var(--clr-accent, #e8864a);
+  color: #1a1512;
+  border: none;
+  padding: 0.5rem 1.15rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+  box-shadow: 0 2px 8px rgba(232, 134, 74, 0.3);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.fs-btn-primary:hover:not(:disabled) {
+  background: #d97736;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(232, 134, 74, 0.4);
+}
+
+.fs-btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.fs-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: transparent;
+  color: var(--clr-text-soft, #a89e94);
+  border: 1px solid var(--clr-border, rgba(255, 245, 230, 0.18));
+  padding: 0.45rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.825rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.fs-btn-secondary:hover {
+  background: var(--clr-surface, #231e1a);
+  color: var(--clr-text, #ede8e3);
+  border-color: var(--clr-accent, #e8864a);
+}
+
+.fs-step-footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.fs-step-footer-actions.between {
+  justify-content: space-between;
+}
+
+.fs-step-footer-actions.end {
+  justify-content: flex-end;
+}
+
+/* ==========================================================================
+   OPTIONS GRID (MCQ)
+   ========================================================================== */
+.fs-options-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.65rem;
+}
+
+.fs-option-btn {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: var(--clr-surface, #231e1a);
+  border: 1.5px solid var(--clr-border, rgba(255, 245, 230, 0.15));
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  color: var(--clr-text, #ede8e3);
+  font-size: 0.875rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+  line-height: 1.4;
+}
+
+.fs-option-btn:hover:not(:disabled) {
+  background: var(--clr-surface-alt, #362f2a);
+  border-color: var(--clr-accent, #e8864a);
+}
+
+.fs-option-btn.selected {
+  border-color: var(--clr-accent, #e8864a);
+  background: rgba(232, 134, 74, 0.12);
+}
+
+.fs-option-btn.correct {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+}
+
+.fs-option-btn.incorrect {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+}
+
+.fs-option-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  background: var(--clr-card, #2c2622);
+  border: 1px solid var(--clr-border, rgba(255, 245, 230, 0.2));
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  color: var(--clr-text-soft, #a89e94);
+}
+
+.fs-option-btn.selected .fs-option-letter {
+  background: var(--clr-accent, #e8864a);
+  color: #1a1512;
+  border-color: var(--clr-accent, #e8864a);
+}
+
+/* Feedback Notifications */
+.fs-inquiry-feedback {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.825rem;
+  line-height: 1.4;
+}
+
+.fs-inquiry-feedback.success {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #34d399;
+}
+
+.fs-inquiry-feedback.error {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #f87171;
+}
+
+/* ==========================================================================
+   QUESTION 1: VERIFICATION BAR & SINGLE SEQUENTIAL INPUT
+   ========================================================================== */
+.fs-q1-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: 0.65rem;
+}
+
+.fs-verification-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  padding: 0.65rem 0.9rem;
+  background: var(--clr-surface, #231e1a);
+  border: 1px solid var(--clr-border, rgba(255, 245, 230, 0.12));
+  border-radius: 10px;
+}
+
+.fs-verification-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.fs-verification-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--clr-text-soft, #a89e94);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.fs-verification-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--clr-text-soft, #a89e94);
+  transition: all 0.2s ease;
+}
+
+.fs-verification-chip.verified {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: #10b981;
+  color: #34d399;
+}
+
+.fs-verification-chip.line1.verified {
+  background: rgba(20, 184, 166, 0.15);
+  border-color: #14b8a6;
+  color: #2dd4bf;
+}
+
+.fs-verification-chip.line2.verified {
+  background: rgba(232, 134, 74, 0.15);
+  border-color: #e8864a;
+  color: #f97316;
+}
+
+.fs-verification-tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #34d399;
+  margin-left: 0.25rem;
+}
+
+.fs-verification-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.fs-single-input-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-top: 0.25rem;
+}
+
+.fs-single-input-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.fs-single-input-hint {
+  font-size: 0.825rem;
+  color: var(--clr-text-soft, #a89e94);
+  font-weight: 500;
+}
+
+.fs-single-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.fs-line-tag-label {
+  padding: 0.35rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  min-width: 65px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.fs-line-tag-label.line1 {
+  background: rgba(20, 184, 166, 0.15);
+  border: 1px solid rgba(20, 184, 166, 0.35);
+  color: #14b8a6;
+}
+
+.fs-line-tag-label.line2 {
+  background: rgba(232, 134, 74, 0.15);
+  border: 1px solid rgba(232, 134, 74, 0.35);
+  color: #e8864a;
+}
+
+.fs-tray-input-box {
+  flex: 1 1 0%;
+  min-width: 0;
+  padding: 0.55rem 0.85rem;
+  border: 1.5px solid var(--clr-border, rgba(255, 245, 230, 0.2));
+  border-radius: 8px;
+  background: #1a1816;
+  color: var(--clr-text, #ede8e3);
+  font-family: 'Fira Code', 'Roboto Mono', monospace;
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.15s ease;
+  box-sizing: border-box;
+}
+
+.fs-tray-input-box:focus {
+  border-color: var(--clr-accent, #e8864a);
+  box-shadow: 0 0 0 2px rgba(232, 134, 74, 0.25);
+}
+
+[data-theme="light"] .fs-verification-bar {
+  background: #f0ebe5;
+  border-color: rgba(60, 45, 30, 0.18);
+}
+
+[data-theme="light"] .fs-verification-chip {
+  background: rgba(60, 45, 30, 0.04);
+  border-color: rgba(60, 45, 30, 0.15);
+  color: #6b5e54;
+}
+
+[data-theme="light"] .fs-verification-chip.verified {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: #10b981;
+  color: #059669;
+}
+
+[data-theme="light"] .fs-verification-chip.line1.verified {
+  background: rgba(13, 148, 136, 0.12);
+  border-color: #0d9488;
+  color: #0d9488;
+}
+
+[data-theme="light"] .fs-verification-chip.line2.verified {
+  background: rgba(217, 119, 6, 0.12);
+  border-color: #d97706;
+  color: #b45309;
+}
+
+.fs-preset-chip {
+  padding: 0.3rem 0.65rem;
+  background: var(--clr-surface, #231e1a);
+  border: 1px solid var(--clr-border, rgba(255, 245, 230, 0.18));
+  border-radius: 9999px;
+  color: var(--clr-text, #ede8e3);
+  font-size: 0.78rem;
+  font-family: 'Fira Code', 'Roboto Mono', monospace;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.fs-preset-chip:hover {
+  background: var(--clr-surface-alt, #362f2a);
+  border-color: var(--clr-accent, #e8864a);
+  color: var(--clr-accent, #e8864a);
+}
+
+/* ==========================================================================
+   MATRIX SPECIFIC COMPONENTS (Brackets, Grids, Vectors)
+   ========================================================================== */
+.fs-matrix-assembly {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 1.25rem 0.5rem;
+  background: var(--clr-surface, #231e1a);
+  border: 1px solid var(--clr-border, rgba(255, 245, 230, 0.12));
+  border-radius: 12px;
+  margin-top: 0.75rem;
+}
+
+/* 2x2 Matrix Bracket */
+.fs-matrix-bracket {
+  position: relative;
+  display: inline-flex;
+  padding: 0.4rem 0.6rem;
+  background: #1a1816;
+  border-radius: 8px;
+  border-left: 3px solid var(--clr-accent, #e8864a);
+  border-right: 3px solid var(--clr-accent, #e8864a);
+}
+
+.fs-matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 60px);
+  gap: 0.45rem;
+}
+
+/* Column Vector Bracket */
+.fs-vector-bracket {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 0.4rem 0.55rem;
+  background: #1a1816;
+  border-radius: 8px;
+  border-left: 3px solid var(--clr-teal, #14b8a6);
+  border-right: 3px solid var(--clr-teal, #14b8a6);
+}
+
+.fs-vector-bracket.target {
+  border-left-color: var(--clr-purple, #a855f7);
+  border-right-color: var(--clr-purple, #a855f7);
+}
+
+.fs-cell-input {
+  width: 100%;
+  height: 38px;
+  background: #231e1a;
+  border: 1.5px solid var(--clr-border, rgba(255, 245, 230, 0.2));
+  border-radius: 6px;
+  color: var(--clr-text, #ede8e3);
+  font-family: 'Fira Code', 'Roboto Mono', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+  transition: all 0.15s ease;
+  box-sizing: border-box;
+}
+
+.fs-cell-input:focus {
+  border-color: var(--clr-accent, #e8864a);
+  box-shadow: 0 0 0 2px rgba(232, 134, 74, 0.25);
+  background: #2c2622;
+}
+
+.fs-cell-input:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.fs-static-cell {
+  width: 60px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fira Code', 'Roboto Mono', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--clr-text, #ede8e3);
+}
+
+.fs-math-sym {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--clr-text-soft, #a89e94);
+}
+
+/* ==========================================================================
+   CEREMONY & SANDBOX (Step 11)
+   ========================================================================== */
+.fs-ceremony-card {
+  background: linear-gradient(135deg, rgba(232, 134, 74, 0.12), rgba(20, 184, 166, 0.06));
+  border: 1.5px solid rgba(232, 134, 74, 0.35);
+  border-radius: 18px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.fs-ceremony-icon {
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.fs-ceremony-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--clr-heading, #ede8e3);
+  margin: 0 0 0.35rem 0;
+}
+
+.fs-ceremony-subtitle {
+  font-size: 0.88rem;
+  color: #f3efe6;
+  margin: 0 0 1rem 0;
+}
+
+.fs-earns-card {
+  background: rgba(232, 134, 74, 0.08);
+  border: 1px solid rgba(232, 134, 74, 0.25);
+  border-radius: 12px;
+  padding: 0.9rem 1.15rem;
+  margin-top: 0.75rem;
+}
+
+.fs-earns-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--clr-accent, #e8864a);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.35rem;
+}
+
+.fs-earns-text {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--clr-heading, var(--clr-text, #ede8e3));
+  margin: 0 0 0.35rem 0;
+  line-height: 1.45;
+}
+
+.fs-earns-sub {
+  font-size: 0.8rem;
+  color: var(--clr-text-soft, #a89e94);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.fs-takeaways-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  text-align: left;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 1rem 1.25rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 245, 230, 0.1);
+  margin-top: 0.85rem;
+}
+
+.fs-takeaway-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--clr-text, #ede8e3);
+}
+
+/* Sandbox Sliders Controls */
+.fs-sandbox-card {
+  background: var(--clr-surface, #231e1a);
+  border: 1px solid var(--clr-border, rgba(255, 245, 230, 0.15));
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.fs-sandbox-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.fs-sandbox-label {
+  font-size: 0.825rem;
+  font-weight: 700;
+  color: var(--clr-accent, #e8864a);
+}
+
+.fs-slider-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.fs-slider-input {
+  accent-color: var(--clr-accent, #e8864a);
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   GEOGEBRA ALGEBRA VIEW PANEL & ITEMS (Matching FunctionStudio Question 8)
+   ========================================================================== */
+.fs-ggb-algebra-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 0.85rem 0;
+  max-width: 520px;
+  width: 100%;
+}
+
+.fs-ggb-algebra-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--clr-text-soft, #a89e94);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.fs-ggb-algebra-item {
+  display: flex;
+  background: #ffffff;
+  border: 1px solid #dcdfe4;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  animation: ggbFadeSlideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes ggbFadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fs-ggb-gutter {
+  width: 32px;
+  background: #f1f3f4;
+  border-right: 1px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.fs-ggb-vis-circle {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #14b8a6;
+  background: rgba(20, 184, 166, 0.2);
+}
+
+.fs-ggb-vis-circle.line2 {
+  border-color: #e8864a;
+  background: rgba(232, 134, 74, 0.2);
+}
+
+.fs-ggb-vis-circle.intersect {
+  border-color: #a855f7;
+  background: rgba(168, 85, 247, 0.2);
+}
+
+.fs-ggb-algebra-body {
+  flex: 1;
+  padding: 0.55rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.fs-ggb-algebra-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fs-ggb-algebra-expr {
+  color: #1f2937;
+  font-size: 1.05rem;
+  font-family: 'Cambria Math', 'KaTeX_Math', 'Times New Roman', Georgia, serif;
+  letter-spacing: 0.01em;
+}
+
+.fs-ggb-algebra-dots {
+  color: #5f6368;
+  font-size: 1.25rem;
+  cursor: default;
+  line-height: 1;
+  user-select: none;
+  padding: 0 0.15rem;
+}
+
+.fs-ggb-algebra-result {
+  color: #1f2937;
+  font-size: 1.05rem;
+  font-family: 'Cambria Math', 'KaTeX_Math', 'Times New Roman', Georgia, serif;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding-left: 0.1rem;
+}
+
+.fs-ggb-algebra-result .val {
+  font-weight: 700;
+  color: #7e22ce;
+}
+
+/* ==========================================================================
+   QUESTION 4: SYSTEM ANATOMY & STRUCTURE INSPECTION
+   ========================================================================== */
+.fs-pattern-inspect-card {
+  background: var(--clr-surface, #231e1a);
+  border: 1.5px solid var(--clr-border, rgba(255, 245, 230, 0.15));
+  border-radius: 12px;
+  padding: 0.95rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.fs-pattern-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--clr-border-subtle, rgba(255, 245, 230, 0.08));
+  padding-bottom: 0.45rem;
+}
+
+.fs-pattern-title {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--clr-accent, #e8864a);
+}
+
+.fs-pattern-hint {
+  font-size: 0.78rem;
+  color: var(--clr-text-soft, #a89e94);
+  font-weight: 500;
+}
+
+.fs-pattern-equations {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.fs-pattern-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  padding: 0.4rem 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.fs-pattern-line-tag {
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.2rem 0.5rem;
+  border-radius: 5px;
+  min-width: 54px;
+  text-align: center;
+}
+
+.fs-pattern-line-tag.line1 {
+  background: rgba(20, 184, 166, 0.15);
+  border: 1px solid rgba(20, 184, 166, 0.35);
+  color: #14b8a6;
+}
+
+.fs-pattern-line-tag.line2 {
+  background: rgba(232, 134, 74, 0.15);
+  border: 1px solid rgba(232, 134, 74, 0.35);
+  color: #e8864a;
+}
+
+.fs-pattern-eq-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: 'Cambria Math', 'KaTeX_Math', 'Fira Code', Georgia, monospace;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.fs-pattern-coeff {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 28px;
+  padding: 0 0.35rem;
+  border-radius: 6px;
+  background: rgba(232, 134, 74, 0.18);
+  border: 1.5px solid var(--clr-accent, #e8864a);
+  color: #fba975;
+  box-shadow: 0 0 6px rgba(232, 134, 74, 0.2);
+}
+
+.fs-pattern-var {
+  color: #a89e94;
+  font-style: italic;
+  font-weight: 500;
+  border-bottom: 1.5px dashed rgba(168, 158, 148, 0.6);
+  padding: 0 0.15rem;
+}
+
+.fs-pattern-op,
+.fs-pattern-eq-sign {
+  color: #8c8278;
+  font-weight: 600;
+  padding: 0 0.1rem;
+}
+
+.fs-pattern-target {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 28px;
+  padding: 0 0.35rem;
+  border-radius: 6px;
+  background: rgba(168, 85, 247, 0.18);
+  border: 1.5px solid #a855f7;
+  color: #c084fc;
+  box-shadow: 0 0 6px rgba(168, 85, 247, 0.2);
+}
+
+.fs-pattern-legend {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+  flex-wrap: wrap;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--clr-border-subtle, rgba(255, 245, 230, 0.08));
+}
+
+.fs-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--clr-text-soft, #a89e94);
+}
+
+.fs-legend-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.fs-legend-swatch.coeff {
+  background: var(--clr-accent, #e8864a);
+}
+
+.fs-legend-swatch.var {
+  background: transparent;
+  border: 1.5px dashed #a89e94;
+}
+
+.fs-legend-swatch.target {
+  background: #a855f7;
+}
+
+[data-theme="light"] .fs-pattern-inspect-card {
+  background: #fdfbf7;
+  border-color: rgba(60, 45, 30, 0.18);
+}
+
+[data-theme="light"] .fs-pattern-row {
+  background: #f3efe8;
+  border-color: rgba(60, 45, 30, 0.12);
+}
+
+[data-theme="light"] .fs-pattern-coeff {
+  color: #c25e1a;
+  background: rgba(232, 134, 74, 0.15);
+}
+
+[data-theme="light"] .fs-pattern-target {
+  color: #7e22ce;
+  background: rgba(168, 85, 247, 0.15);
+}
+
+/* ==========================================================================
+   QUESTION 4: ℝ² ➔ ℝ² FUNCTION CARD & EVALUATION STYLES
+   ========================================================================== */
+.fs-r2-function-card {
+  background: var(--clr-surface, #231e1a);
+  border: 1px solid var(--clr-border, rgba(255, 245, 230, 0.12));
+  border-radius: 12px;
+  padding: 1.1rem 1.25rem;
+  margin: 0.65rem 0 1rem;
+}
+
+.fs-r2-function-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--clr-border, rgba(255, 245, 230, 0.08));
+}
+
+.fs-r2-map-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.55rem;
+  background: rgba(20, 184, 166, 0.12);
+  border: 1px solid rgba(20, 184, 166, 0.35);
+  color: var(--clr-teal, #14b8a6);
+  border-radius: 6px;
+}
+
+.fs-r2-formula {
+  font-family: 'Fira Code', 'Roboto Mono', monospace;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--clr-accent, #e8864a);
+}
+
+.fs-r2-breakdown {
+  margin-top: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.fs-r2-input-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  font-size: 0.88rem;
+}
+
+.fs-r2-strip-label {
+  color: var(--clr-text-soft, #a89e94);
+  font-weight: 600;
+}
+
+.fs-r2-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.55rem;
+  border-radius: 6px;
+  font-family: 'Fira Code', 'Roboto Mono', monospace;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.fs-r2-chip.x-chip,
+.fs-r2-val-chip.x-chip {
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  color: #38bdf8;
+}
+
+.fs-r2-chip.y-chip,
+.fs-r2-val-chip.y-chip {
+  background: rgba(251, 146, 60, 0.15);
+  border: 1px solid rgba(251, 146, 60, 0.4);
+  color: #fb923c;
+}
+
+.fs-r2-coord-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fs-r2-coord-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.45rem 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--clr-border, rgba(255, 245, 230, 0.06));
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.fs-r2-coord-name {
+  color: var(--clr-text-soft, #a89e94);
+  font-weight: 600;
+  min-width: 80px;
+}
+
+.fs-r2-coord-calc {
+  font-family: 'Fira Code', 'Roboto Mono', monospace;
+  color: var(--clr-text, #ede8e3);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.fs-r2-val-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.05rem 0.4rem;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.fs-r2-eval-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 0.5rem 0;
+}
+
+.fs-r2-eval-label {
+  font-family: 'Fira Code', 'Roboto Mono', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--clr-accent, #e8864a);
+}
+
+.fs-r2-paren {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--clr-text-soft, #a89e94);
+}
+
+.fs-r2-comma {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--clr-text-soft, #a89e94);
+}
+
+.fs-r2-input {
+  max-width: 130px;
+  height: 40px;
+  font-size: 1rem;
+  text-align: center;
+}
+
+[data-theme="light"] .fs-r2-function-card {
+  background: #fdfbf7;
+  border-color: rgba(60, 45, 30, 0.18);
+}
+
+[data-theme="light"] .fs-r2-coord-row {
+  background: #f5f0e8;
+  border-color: rgba(60, 45, 30, 0.12);
+}
+
+[data-theme="light"] .fs-r2-chip.x-chip,
+[data-theme="light"] .fs-r2-val-chip.x-chip {
+  background: rgba(2, 132, 199, 0.12);
+  border-color: rgba(2, 132, 199, 0.4);
+  color: #0284c7;
+}
+
+[data-theme="light"] .fs-r2-chip.y-chip,
+[data-theme="light"] .fs-r2-val-chip.y-chip {
+  background: rgba(234, 88, 12, 0.12);
+  border-color: rgba(234, 88, 12, 0.4);
+  color: #ea580c;
+}

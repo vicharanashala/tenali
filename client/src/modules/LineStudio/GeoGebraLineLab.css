@@ -1,0 +1,541 @@
+/* GeoGebraLineLab.css - Exact Tenali mode=kernel design language */
+
+.line-lab-root {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  width: 100%;
+}
+
+/* ==========================================================================
+   1. GRAPH CARD — Samagama Parchment Style from mode=kernel
+   ========================================================================== */
+.kp-graph-card,
+.line-lab-graph-card {
+  background: #fbf7ee;
+  border: 1px solid #d8c6a3;
+  border-radius: 16px;
+  padding: 1.15rem;
+  box-shadow: 0 6px 16px -2px rgba(107, 74, 29, 0.07);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.kp-graph-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.65rem;
+}
+
+.line-lab-small-btn {
+  background: #eedfc7;
+  border: 1px solid #d8c6a3;
+  color: #6b4a1d;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  font-size: 0.725rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.line-lab-small-btn:hover {
+  background: #ffffff;
+  color: #2c1d06;
+  border-color: #c9b48c;
+}
+
+/* GeoGebra Canvas Viewport Wrapper */
+.kp-geogebra-wrapper,
+.line-lab-canvas-wrapper {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  background: #fbf7ee;
+  border: 1px solid #e3d3b7;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 4px rgba(107, 74, 29, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kp-geogebra-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.25s ease;
+}
+
+.kp-geogebra-container > div {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Loading Overlay */
+.kp-geogebra-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: #fbf7ee;
+  color: #6b4a1d;
+  font-size: 0.85rem;
+  font-weight: 600;
+  z-index: 5;
+}
+
+.kp-geogebra-spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid rgba(107, 74, 29, 0.15);
+  border-top-color: #6b4a1d;
+  border-radius: 50%;
+  animation: kpSpin 0.8s linear infinite;
+}
+
+@keyframes kpSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* Graph Card Footer */
+.kp-graph-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.75rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid #ebdcc5;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.kp-graph-instruction {
+  font-size: 0.825rem;
+  color: #5b4a2c;
+  line-height: 1.45;
+  flex: 1;
+  min-width: 200px;
+}
+
+.line-lab-clear-btn {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #b91c1c;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.line-lab-clear-btn:hover {
+  background: rgba(239, 68, 68, 0.22);
+}
+
+/* Hide all GeoGebra unwanted algebra UI panels */
+.kp-geogebra-container .algebraView,
+.kp-geogebra-container .algebraPanel,
+.kp-geogebra-container .sidePanel,
+.kp-geogebra-container .matTab,
+.kp-geogebra-container .tabButton,
+.kp-geogebra-container [aria-label*="Algebra"],
+.kp-geogebra-container [data-title*="Algebra"],
+.kp-geogebra-container .gwt-SplitLayoutPanel-HDragger,
+.kp-geogebra-container .headerTab,
+.kp-geogebra-container .navHeader,
+.kp-geogebra-container .flatButton[data-title*="Algebra"],
+.kp-geogebra-container .flatButton[aria-label*="Algebra"],
+.kp-geogebra-container .tabPanelBand,
+.kp-geogebra-container .algebraTab,
+.kp-geogebra-container .toolsTab,
+.kp-geogebra-container [class*="tabButton"],
+.kp-geogebra-container [class*="sideBar"] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0 !important;
+}
+
+/* ==========================================================================
+   2. TACTILE CARD SYSTEM (Matching mode=kernel and Point Studio)
+   ========================================================================== */
+.kp-card {
+  background: var(--clr-card, #2c2622);
+  border: 1px solid var(--clr-border, rgba(255, 245, 230, 0.18));
+  border-radius: 16px;
+  padding: 1.15rem 1.35rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.08);
+}
+
+.kp-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.kp-card-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: var(--clr-text-soft, #a89e94);
+}
+
+.kp-badge {
+  font-size: 0.725rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  background: var(--clr-surface, #362f2a);
+  color: var(--clr-text-soft, #a89e94);
+  border: 1px solid var(--clr-border, rgba(255, 245, 230, 0.18));
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* Formula Pill */
+.line-lab-formula-pill {
+  background: rgba(20, 184, 166, 0.18);
+  border: 1px solid #14b8a6;
+  color: #2dd4bf;
+  padding: 0.2rem 0.65rem;
+  border-radius: 9999px;
+  font-family: 'Fira Code', ui-monospace, monospace;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   3. SLIDERS TRAY — Tactile Controls
+   ========================================================================== */
+.line-lab-sliders-tray,
+.line-lab-sliders-card {
+  background: var(--clr-surface, #362f2a);
+  border: 1px solid var(--clr-border, rgba(255, 245, 230, 0.12));
+  border-radius: 12px;
+  padding: 0.5rem 0.85rem;
+  box-sizing: border-box;
+}
+
+.line-lab-tray-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.35rem;
+}
+
+.line-lab-tray-title {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: var(--clr-text-soft, #a89e94);
+}
+
+.line-lab-sliders-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 540px) {
+  .line-lab-sliders-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.line-lab-slider-row {
+  background: var(--clr-card, #2c2622);
+  border: 1px solid var(--clr-border, rgba(255, 245, 230, 0.1));
+  border-radius: 8px;
+  padding: 0.45rem 0.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.line-lab-slider-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.line-lab-knob-name {
+  color: var(--clr-text, #ede8e3);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.line-lab-val-badge {
+  background: var(--clr-card, #2c2622);
+  border: 1px solid var(--clr-accent, #e8864a);
+  color: var(--clr-accent, #e8864a);
+  font-family: 'Fira Code', ui-monospace, monospace;
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+}
+
+.line-lab-slider-track {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.line-lab-stepper-btn {
+  background: var(--clr-card, #2c2622);
+  border: 1px solid var(--clr-border, rgba(255, 245, 230, 0.2));
+  color: var(--clr-text, #ede8e3);
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+  font-family: inherit;
+  padding: 0;
+}
+
+.line-lab-stepper-btn:hover {
+  background: var(--clr-accent, #e8864a);
+  color: #1a140e;
+  border-color: var(--clr-accent, #e8864a);
+}
+
+/* Custom Tactile Range Input */
+.line-lab-range {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: 1;
+  width: 100%;
+  height: 4px;
+  border-radius: 9999px;
+  background: var(--clr-surface, #231e1a);
+  border: 1px solid var(--clr-border, rgba(255, 245, 230, 0.15));
+  outline: none;
+  cursor: pointer;
+  margin: 0;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.line-lab-range:focus,
+.line-lab-range:focus-visible {
+  outline: none;
+  border-color: var(--clr-accent, #e8864a);
+}
+
+.line-lab-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid var(--clr-accent, #e8864a);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  cursor: grab;
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.15s ease;
+}
+
+.line-lab-range::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35), 0 0 0 4px rgba(232, 134, 74, 0.2);
+}
+
+.line-lab-range::-webkit-slider-thumb:active {
+  cursor: grabbing;
+  transform: scale(1.3);
+}
+
+.line-lab-range::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid var(--clr-accent, #e8864a);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  cursor: grab;
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.15s ease;
+}
+
+.line-lab-subtext {
+  font-size: 0.72rem;
+  color: var(--clr-text-soft, #a89e94);
+  line-height: 1.3;
+}
+
+/* ==========================================================================
+   4. INPUT BAR TRAY — GeoGebra Coordinate / Line Command
+   ========================================================================== */
+.line-lab-control-tray,
+.line-lab-control-card {
+  background: var(--clr-surface, #362f2a);
+  border: 1px solid var(--clr-border, rgba(255, 245, 230, 0.12));
+  border-radius: 14px;
+  padding: 0.85rem 1.1rem;
+  box-sizing: border-box;
+}
+
+.line-lab-input-row {
+  display: flex;
+  gap: 0.55rem;
+  margin-top: 0.65rem;
+}
+
+.line-lab-input-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: var(--clr-surface, #231e1a);
+  border: 1px solid var(--clr-border, rgba(255, 245, 230, 0.2));
+  border-radius: 8px;
+  padding: 0.4rem 0.65rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.line-lab-input-container:focus-within {
+  border-color: var(--clr-accent, #e8864a);
+  box-shadow: 0 0 0 2px rgba(232, 134, 74, 0.2);
+}
+
+.line-lab-input-prefix {
+  font-size: 0.95rem;
+  margin-right: 0.45rem;
+  opacity: 0.8;
+}
+
+.line-lab-input-box {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--clr-text, #ede8e3);
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+.line-lab-submit-btn {
+  background: var(--clr-accent, #e8864a);
+  color: #18120c;
+  border: none;
+  border-radius: 8px;
+  padding: 0.45rem 1rem;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.line-lab-submit-btn:hover:not(:disabled) {
+  background: #f59e0b;
+  transform: translateY(-1px);
+}
+
+.line-lab-submit-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Feedback Box */
+.line-lab-feedback-card {
+  margin-top: 0.65rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.825rem;
+}
+
+.line-lab-feedback-card.success {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid #10b981;
+  color: #a7f3d0;
+}
+
+.line-lab-feedback-card.error {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid #ef4444;
+  color: #fca5a5;
+}
+
+.line-lab-feedback-header {
+  font-weight: 700;
+  font-size: 0.725rem;
+  margin-bottom: 0.2rem;
+}
+
+.line-lab-feedback-text {
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   5. LIGHT MODE THEME ADAPTATION
+   ========================================================================== */
+[data-theme="light"] .kp-card,
+[data-theme="light"] .line-lab-sliders-tray,
+[data-theme="light"] .line-lab-control-tray,
+[data-theme="light"] .line-lab-sliders-card,
+[data-theme="light"] .line-lab-control-card {
+  background: #fffdf9;
+  border-color: rgba(60, 45, 30, 0.22);
+  box-shadow: 0 4px 16px rgba(60, 40, 20, 0.08);
+}
+
+[data-theme="light"] .line-lab-slider-row {
+  background: #f0ebe5;
+  border-color: rgba(60, 45, 30, 0.15);
+}
+
+[data-theme="light"] .line-lab-knob-name {
+  color: #2c2420;
+}
+
+[data-theme="light"] .line-lab-val-badge {
+  background: #ffffff;
+  border-color: #e07a3a;
+  color: #e07a3a;
+}
+
+[data-theme="light"] .line-lab-stepper-btn {
+  background: #ffffff;
+  border-color: rgba(60, 45, 30, 0.2);
+  color: #2c2420;
+}
+
+[data-theme="light"] .line-lab-range {
+  background: #e5ded6;
+  border-color: rgba(60, 45, 30, 0.2);
+}
+
+[data-theme="light"] .line-lab-input-container {
+  background: #ffffff;
+  border-color: rgba(60, 45, 30, 0.2);
+}
+
+[data-theme="light"] .line-lab-input-box {
+  color: #2c2420;
+}

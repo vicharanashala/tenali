@@ -42,6 +42,7 @@ export default defineConfig({
   server: {
     host: 'localhost',
     port: 5173,
+    allowedHosts: ['then-cornwall-futures-boot.trycloudflare.com'],
     // API proxy configuration: Forward API requests to backend services
     proxy: {
       // Primary API endpoint - routes to main quiz service

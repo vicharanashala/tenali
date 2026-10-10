@@ -1,0 +1,287 @@
+/* GeoGebraFunctionLab.css - Warm Parchment & Tenali Design System */
+
+.func-lab-root {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  width: 100%;
+}
+
+/* ==========================================================================
+   1. GRAPH CARD — Warm Parchment Style matching Tenali theme
+   ========================================================================== */
+.func-lab-graph-card {
+  background: #fbf7ee;
+  border: 1px solid #d8c6a3;
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 6px 16px -2px rgba(107, 74, 29, 0.07);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.func-lab-graph-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.65rem;
+}
+
+.func-lab-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #e8864a;
+  background: rgba(232, 134, 74, 0.1);
+  padding: 3px 9px;
+  border-radius: 9999px;
+  border: 1px solid rgba(232, 134, 74, 0.25);
+}
+
+.func-lab-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.func-lab-small-btn {
+  background: #eedfc7;
+  border: 1px solid #d8c6a3;
+  color: #6b4a1d;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  font-size: 0.725rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.func-lab-small-btn:hover {
+  background: #ffffff;
+  color: #2c1d06;
+  border-color: #c9b48c;
+}
+
+/* GeoGebra Canvas Viewport Wrapper */
+.func-lab-canvas-wrapper {
+  position: relative;
+  width: 100%;
+  height: 360px;
+  background: #fbf7ee;
+  border: 1px solid #e3d3b7;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 4px rgba(107, 74, 29, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: height 0.25s ease;
+}
+
+/* Compact Mode (for Question 8 & evaluation questions) */
+.func-lab-graph-card.compact {
+  padding: 0.55rem 0.85rem;
+  border-radius: 12px;
+}
+
+.func-lab-graph-card.compact .func-lab-graph-header {
+  margin-bottom: 0.35rem;
+}
+
+.func-lab-canvas-wrapper.compact {
+  height: 220px;
+}
+
+.func-lab-geogebra-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.25s ease;
+}
+
+.func-lab-geogebra-container > div {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Loading Overlay */
+.func-lab-geogebra-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: #fbf7ee;
+  color: #6b4a1d;
+  font-size: 0.85rem;
+  font-weight: 600;
+  z-index: 5;
+}
+
+.func-lab-geogebra-spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid rgba(107, 74, 29, 0.15);
+  border-top-color: #e8864a;
+  border-radius: 50%;
+  animation: funcSpin 0.8s linear infinite;
+}
+
+@keyframes funcSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Plotted Objects Legend */
+.func-lab-objects-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: center;
+  margin-top: 0.65rem;
+  padding: 0.4rem 0.6rem;
+  background: rgba(238, 223, 199, 0.4);
+  border-radius: 8px;
+  border: 1px dashed rgba(216, 198, 163, 0.8);
+  font-size: 0.75rem;
+  color: #6b4a1d;
+}
+
+.func-lab-object-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 2px 7px;
+  background: #ffffff;
+  border-radius: 6px;
+  border: 1px solid #d8c6a3;
+  font-weight: 600;
+}
+
+.func-lab-object-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* ==========================================================================
+   2. INPUT BAR — Graph on Top, Input Box Middle
+   ========================================================================== */
+.func-lab-input-card {
+  background: #ffffff;
+  border: 1px solid #e3d3b7;
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  box-shadow: 0 2px 8px rgba(107, 74, 29, 0.05);
+}
+
+.func-lab-input-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.func-lab-input-field {
+  flex: 1;
+  padding: 0.55rem 0.85rem;
+  border: 1.5px solid #d8c6a3;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: 'Fira Code', 'Roboto Mono', monospace;
+  background: #fbf7ee;
+  color: #2c1d06;
+  outline: none;
+  transition: all 0.15s ease;
+}
+
+.func-lab-input-field:focus {
+  border-color: #e8864a;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(232, 134, 74, 0.2);
+}
+
+.func-lab-plot-btn {
+  padding: 0.55rem 1.15rem;
+  background: #e8864a;
+  color: #1a1512;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(232, 134, 74, 0.25);
+}
+
+.func-lab-plot-btn:hover {
+  background: #d97736;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(232, 134, 74, 0.35);
+}
+
+.func-lab-feedback {
+  margin-top: 0.45rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.func-lab-feedback.success {
+  background: rgba(34, 197, 94, 0.1);
+  color: #15803d;
+  border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
+.func-lab-feedback.error {
+  background: rgba(239, 68, 68, 0.1);
+  color: #b91c1c;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.func-lab-feedback.info {
+  background: rgba(232, 134, 74, 0.1);
+  color: #c25e1d;
+  border: 1px solid rgba(232, 134, 74, 0.3);
+}
+
+/* Quick shortcut chips */
+.func-lab-shortcuts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.45rem;
+}
+
+.func-lab-shortcut-label {
+  font-size: 0.72rem;
+  color: #8c7653;
+  font-weight: 600;
+}
+
+.func-lab-shortcut-chip {
+  padding: 2px 7px;
+  background: #fbf7ee;
+  border: 1px solid #d8c6a3;
+  border-radius: 5px;
+  font-size: 0.72rem;
+  font-family: 'Fira Code', 'Roboto Mono', monospace;
+  color: #6b4a1d;
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.func-lab-shortcut-chip:hover {
+  background: #e8864a;
+  color: #1a1512;
+  border-color: #d97736;
+}
