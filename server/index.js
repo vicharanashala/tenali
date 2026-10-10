@@ -2179,6 +2179,35 @@ const BATTLE_ROUNDS = 5;
 const ROUND_DURATION_MS = 15000;
 const rooms = new Map();
 
+const ROOM_CLEANUP_INTERVAL_MS = 5 * 60 * 1000;
+const ENDED_ROOM_TTL_MS = 10 * 60 * 1000;
+const INACTIVE_ROOM_TTL_MS = 30 * 60 * 1000;
+
+function cleanupRooms(now = Date.now()) {
+  let prunedCount = 0;
+  for (const [code, room] of rooms.entries()) {
+    const lastActive = room.lastActiveAt || room.createdAt || now;
+    const age = now - lastActive;
+    const isEnded = room.state === 'ended';
+    const isExpiredEnded = isEnded && age > ENDED_ROOM_TTL_MS;
+    const isExpiredInactive = age > INACTIVE_ROOM_TTL_MS;
+
+    if (isExpiredEnded || isExpiredInactive) {
+      if (room.roundTimer) {
+        clearTimeout(room.roundTimer);
+      }
+      rooms.delete(code);
+      prunedCount++;
+    }
+  }
+  return prunedCount;
+}
+
+const roomCleanupInterval = setInterval(cleanupRooms, ROOM_CLEANUP_INTERVAL_MS);
+if (roomCleanupInterval && roomCleanupInterval.unref) {
+  roomCleanupInterval.unref();
+}
+
 function broadcastOpenRooms() {
   const openRooms = {};
   for (const topic of BATTLE_TOPICS) openRooms[topic] = [];
@@ -2932,12 +2961,15 @@ io.on('connection', (socket) => {
     if (!BATTLE_TOPICS.includes(topic)) {
       return cb?.({ ok: false, error: `Unknown topic: ${topic}` });
     }
+    const now = Date.now();
     const room = {
       code, topic,
       numQuestions: nq,
       players: [{ socketId: socket.id, name: (name || 'Player').slice(0, 20), score: 0, ready: false }],
       round: 0, state: 'waiting', currentQuestion: null, roundStartTime: 0, answers: {}, roundTimer: null,
       roundHistory: [], streaks: {},
+      createdAt: now,
+      lastActiveAt: now,
     };
     rooms.set(code, room);
     socket.join(code);
@@ -3130,4 +3162,6 @@ if (require.main === module) {
 
 module.exports = app;
 module.exports.io = io;
+module.exports.rooms = rooms;
+module.exports.cleanupRooms = cleanupRooms;
 
