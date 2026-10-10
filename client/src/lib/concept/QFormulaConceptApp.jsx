@@ -6,6 +6,7 @@ import Stage4Independent from './Stage4Independent';
 import Stage5Review from './Stage5Review';
 import CompletionScreen from './CompletionScreen';
 import { fetchConceptState, saveConceptStage, startConceptReview } from './conceptApi';
+import { reportScoreEvent } from '../scoreApi';
 
 const SKILL_ID = 'qformula';
 
@@ -49,6 +50,7 @@ export default function QFormulaConceptApp({ onBack, QFormulaApp }) {
     setSaving(true);
     setError(null);
     try {
+      reportScoreEvent({ type: 'quiz_correct', difficulty: 'medium', module: 'QFormula' });
       // The server returns the authoritative state, including currentStage.
       // We do not advance the stage locally: a save that fails must not look
       // like progress the learner has actually banked.

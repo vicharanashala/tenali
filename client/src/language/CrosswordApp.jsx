@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useTimer } from '../hooks/useTimer';
 import { QuizLayout } from '../components/QuizLayout';
+import { reportScoreEvent } from '../lib/scoreApi';
 import './CrosswordApp.css';
 
 // ─────────────────────────────────────────────────────────────
@@ -600,6 +601,7 @@ export default function CrosswordApp({ onBack }) {
       });
 
       if (isComplete) {
+        reportScoreEvent({ type: 'quiz_correct', difficulty: 'medium', module: 'Crossword' });
         const newSolved = new Set(solvedWords);
         newSolved.add(w.id);
         setSolvedWords(newSolved);

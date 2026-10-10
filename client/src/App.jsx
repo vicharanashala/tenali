@@ -42824,17 +42824,19 @@ function App() {
           body: JSON.stringify({
             completedTopics: finalCompleted,
             goldMastery: finalGold,
-            coins: finalCoins,
-            totalSolved: finalSolved,
             streak: finalStreak
           })
         });
         if (response.ok) {
           const data = await response.json();
-          // Update coins/streak if the server returned updated values
+          // Server-authoritative updates: update display state from server response
           if (data.coins !== undefined) {
             setCoins(data.coins);
             localStorage.setItem('tenali-coins', String(data.coins));
+          }
+          if (data.totalSolved !== undefined) {
+            setTotalSolved(data.totalSolved);
+            localStorage.setItem('tenali-total-solved', String(data.totalSolved));
           }
           if (data.streak !== undefined) {
             setStreak(data.streak);
@@ -42884,45 +42886,35 @@ function App() {
       next.push(startedKey);
     }
     setCompletedTopics(next);
-    syncProgressToServer(next, goldMastery, coins);
+    syncProgressToServer(next, goldMastery);
   };
 
   const markGoldMastery = (topicKey) => {
     if (goldMastery.includes(topicKey)) return;
     const next = [...goldMastery, topicKey];
     setGoldMastery(next);
-    syncProgressToServer(completedTopics, next, coins);
+    syncProgressToServer(completedTopics, next);
   };
 
-  const updateCoins = (amount) => {
-    const next = Math.max(0, coins + amount);
-    setCoins(next);
-    syncProgressToServer(completedTopics, goldMastery, next);
+  // #94: Display-only rendering for coins & solved count — server is sole authority
+  const updateCoins = (value) => {
+    if (typeof value === 'number') {
+      setCoins(value);
+      try { localStorage.setItem('tenali-coins', String(value)); } catch {}
+    }
   };
 
   useEffect(() => {
-    window.tenaliIncrementSolved = (amount) => {
-      setTotalSolved(prev => {
-        const next = prev + amount;
-        localStorage.setItem('tenali-total-solved', String(next));
-
-        let nextCompleted = completedTopics;
-        if (amount > 0 && mode && mode !== 'gk' && mode !== 'vocab' && mode !== 'randommix' && mode !== 'custom' && mode !== 'gym') {
-          const startedKey = `${mode}-started`;
-          if (!completedTopics.includes(startedKey)) {
-            nextCompleted = [...completedTopics, startedKey];
-            setCompletedTopics(nextCompleted);
-          }
-        }
-
-        syncProgressToServer(nextCompleted, goldMastery, coins, next);
-        return next;
-      });
+    window.tenaliIncrementSolved = (value) => {
+      if (typeof value === 'number') {
+        setTotalSolved(value);
+        try { localStorage.setItem('tenali-total-solved', String(value)); } catch {}
+      }
     };
     return () => {
       delete window.tenaliIncrementSolved;
     };
-  }, [completedTopics, goldMastery, coins, totalSolved, mode]);
+  }, []);
 
 
   // Sync current mode to window global for QuizLayoutExtension
