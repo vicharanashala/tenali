@@ -790,20 +790,35 @@ const generators = {
 
 };
 
+const { signQuestionToken, verifyQuestionToken } = require('../lib/questionToken');
+
 // ── Dispatcher ──────────────────────────────────────────────────────────────
 
 router.get('/question', (req, res) => {
   const topic = req.baseUrl.replace('-api', '').slice(1);
   const gen = generators[topic];
   if (!gen) return res.status(404).json({ error: 'Unknown topic' });
-  res.json(gen.question(req.query.difficulty || 'easy', req.query));
+  const q = gen.question(req.query.difficulty || 'easy', req.query);
+  if (q && typeof q === 'object') {
+    q.qToken = signQuestionToken({ topic, q });
+  }
+  res.json(q);
 });
 
 router.post('/check', require('express').json(), (req, res) => {
   const topic = req.baseUrl.replace('-api', '').slice(1);
   const gen = generators[topic];
   if (!gen) return res.status(404).json({ error: 'Unknown topic' });
-  res.json(gen.check(req.body || {}));
+
+  const qToken = req.body?.qToken || req.body?.token;
+  const verification = verifyQuestionToken(qToken);
+  if (!verification.valid) {
+    return res.status(400).json({ error: 'Invalid or missing question token' });
+  }
+
+  // Derive operands from verified token payload
+  const body = { ...req.body, ...(verification.payload?.q || {}) };
+  res.json(gen.check(body));
 });
 
 module.exports = router;

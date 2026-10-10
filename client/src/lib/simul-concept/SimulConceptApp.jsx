@@ -6,6 +6,7 @@ import Stage4Elimination from './Stage4Elimination';
 import Stage5Cases from './Stage5Cases';
 import CompletionScreen from '../concept/CompletionScreen';
 import { fetchConceptState, saveConceptStage, startConceptReview } from '../concept/conceptApi';
+import { reportScoreEvent } from '../scoreApi';
 
 const SKILL_ID = 'simul';
 
@@ -49,6 +50,7 @@ export default function SimulConceptApp({ onBack, SimulQuizApp }) {
     setSaving(true);
     setError(null);
     try {
+      reportScoreEvent({ type: 'quiz_correct', difficulty: 'medium', module: 'SimulConcept' });
       setState(await saveConceptStage(SKILL_ID, stageIndex, sessionData));
     } catch (err) {
       setError(err);
