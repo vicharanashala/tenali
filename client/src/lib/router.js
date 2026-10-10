@@ -27,5 +27,6 @@ export function getMode() {
 
 export function setMode(key) {
   const url = key ? `${BASE}/?mode=${key}` : `${BASE}/`;
-  history.replaceState(null, '', url);
+  history.pushState(null, '', url);
 }
+

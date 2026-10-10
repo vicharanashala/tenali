@@ -42555,6 +42555,23 @@ function App() {
     }
   }, [])
 
+  // Handle browser native Back/Forward button navigation (popstate)
+  useEffect(() => {
+    const handlePopState = () => {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const m = params.get('mode') || null;
+        const v = params.get('view') === 'puzzles' || m ? 'puzzles' : 'landing';
+        setMode(m);
+        setCurrentView(v);
+      } catch (e) {
+        console.error('Failed to handle popstate navigation:', e);
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
   // Synchronize browser URL query parameters dynamically with the active mode and view state
   useEffect(() => {
     try {
@@ -42563,16 +42580,16 @@ function App() {
       const currentParamView = params.get('view');
       if (mode) {
         if (currentMode !== mode) {
-          window.history.replaceState({}, '', `${BASE}/?mode=${mode}`);
+          window.history.pushState({}, '', `${BASE}/?mode=${mode}`);
         }
       } else {
         if (currentView === 'puzzles') {
           if (currentParamView !== 'puzzles' || currentMode) {
-            window.history.replaceState({}, '', `${BASE}/?view=puzzles`);
+            window.history.pushState({}, '', `${BASE}/?view=puzzles`);
           }
         } else {
           if (currentMode || currentParamView) {
-            window.history.replaceState({}, '', `${BASE}/`);
+            window.history.pushState({}, '', `${BASE}/`);
           }
         }
       }
