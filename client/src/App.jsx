@@ -55419,38 +55419,52 @@ function TransferChallengeApp({ topicKey, onBack, completedTopics, goldMastery, 
 function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, answerField, topicKey: customTopicKey }) {
   return function GeneratedQuizApp({ onBack, completedTopics = [], goldMastery = [], markTopicCompleted, markGoldMastery, updateCoins, setMode, setTransferTopic, initialDifficulty, initialNumQuestions, initialStarted, isGoalMode = false }) {
     const diffs = Object.keys(diffLabels)
+    const storageKey = `tenali_quiz_session_${apiPath}`
+    const savedSession = (() => {
+      try {
+        const raw = sessionStorage.getItem(storageKey)
+        if (raw) {
+          const parsed = JSON.parse(raw)
+          if (parsed && parsed.started && !parsed.finished && parsed.questionNumber > 0) {
+            return parsed
+          }
+        }
+      } catch (e) { }
+      return null
+    })()
+
     // Feature CR: a just-earned Road License pre-selects the earned difficulty (one-shot; student can change it)
-    const [difficulty, setDifficulty] = useState(() => initialDifficulty || cjTakeReco(customTopicKey || apiPath.replace('-api', ''), diffs) || diffs[0])
+    const [difficulty, setDifficulty] = useState(() => savedSession?.difficulty || initialDifficulty || cjTakeReco(customTopicKey || apiPath.replace('-api', ''), diffs) || diffs[0])
     const topicKey = customTopicKey || apiPath.replace('-api', '')
-    const [isAdaptive, setIsAdaptive] = useState(false)
-    const [adaptScore, setAdaptScore] = useState(0) // 0.0 (easy) → 3.0 (extrahard)
+    const [isAdaptive, setIsAdaptive] = useState(() => savedSession?.isAdaptive ?? false)
+    const [adaptScore, setAdaptScore] = useState(() => savedSession?.adaptScore ?? 0) // 0.0 (easy) → 3.0 (extrahard)
     const [reportAck, setReportAck] = useState('')
-    const [numQuestions, setNumQuestions] = useState(initialNumQuestions || String(DEFAULT_TOTAL))
-    const [started, setStarted] = useState(initialStarted || false)
+    const [numQuestions, setNumQuestions] = useState(() => savedSession ? String(savedSession.totalQ) : (initialNumQuestions || String(DEFAULT_TOTAL)))
+    const [started, setStarted] = useState(() => savedSession ? savedSession.started : (initialStarted || false))
     const [finished, setFinished] = useState(false)
-    const [question, setQuestion] = useState(null)
+    const [question, setQuestion] = useState(() => savedSession?.question || null)
     const [answer, setAnswer] = useState('')
-    const [score, setScore] = useState(0)
-    const [questionNumber, setQuestionNumber] = useState(initialStarted ? 1 : 0)
-    const [totalQ, setTotalQ] = useState(Number(initialNumQuestions) || DEFAULT_TOTAL)
+    const [score, setScore] = useState(() => savedSession?.score ?? 0)
+    const [questionNumber, setQuestionNumber] = useState(() => savedSession ? savedSession.questionNumber : (initialStarted ? 1 : 0))
+    const [totalQ, setTotalQ] = useState(() => savedSession ? savedSession.totalQ : (Number(initialNumQuestions) || DEFAULT_TOTAL))
     const [feedback, setFeedback] = useState('')
     const [isCorrect, setIsCorrect] = useState(null)
     const [loading, setLoading] = useState(false)
     const [loadError, setLoadError] = useState('')
     const [revealed, setRevealed] = useState(false)
     const [revealedCorrectAnswer, setRevealedCorrectAnswer] = useState('')
-  const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
-  useEffect(() => {
-    if (!isGoalMode) {
-      setSessionGoal('standard');
-    }
-  }, [isGoalMode]);
-    const [results, setResults] = useState([])
+    const [sessionGoal, setSessionGoal] = useState(isGoalMode ? 'speed' : 'standard')
+    useEffect(() => {
+      if (!isGoalMode) {
+        setSessionGoal('standard');
+      }
+    }, [isGoalMode]);
+    const [results, setResults] = useState(() => savedSession?.results || [])
     const timer = useTimer()
-  const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp(apiPath.split('-')[0], finished, score, totalQ, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
+    const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp(apiPath.split('-')[0], finished, score, totalQ, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
     const advanceFnRef = useRef(null)
     // Keep a ref for adaptive score so loadQuestion always sees latest
-    const adaptScoreRef = useRef(0)
+    const adaptScoreRef = useRef(savedSession?.adaptScore ?? 0)
     // Guards against double-submit and double-advance race conditions
     const submittedRef = useRef(false)
     const advancedRef = useRef(false)
@@ -55461,6 +55475,31 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
     // overwrite it, or a leftover fetch can setState after unmount.
     const questionAbortRef = useRef(null)
     useEffect(() => () => questionAbortRef.current?.abort(), [])
+
+    useEffect(() => {
+      try {
+        if (started && !finished) {
+          sessionStorage.setItem(storageKey, JSON.stringify({
+            started,
+            difficulty,
+            isAdaptive,
+            adaptScore,
+            score,
+            questionNumber,
+            totalQ,
+            results,
+            question
+          }))
+        } else if (finished) {
+          sessionStorage.removeItem(storageKey)
+        }
+      } catch (e) { }
+    }, [started, finished, difficulty, isAdaptive, adaptScore, score, questionNumber, totalQ, results, question])
+
+    const handleBack = () => {
+      try { sessionStorage.removeItem(storageKey) } catch (e) { }
+      if (onBack) onBack()
+    }
 
     useEffect(() => {
       if (finished) {
@@ -55721,7 +55760,7 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
             boxShadow: '0 20px 40px rgba(0,0,0,.45)', padding: '48px 40px', maxWidth: '720px', width: '100%',
             textAlign: 'center', position: 'relative'
           }}>
-            <button onClick={onBack} style={{
+            <button onClick={handleBack} style={{
               position: 'absolute', top: '24px', left: '24px', background: 'transparent',
               border: '1px solid #5B5048', borderRadius: '6px', padding: '6px 14px',
               color: '#A89C93', fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer'
@@ -55815,7 +55854,7 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
     }
 
     return (
-      <QuizLayout title={title} subtitle={subtitle} onBack={onBack} timer={timer}>
+      <QuizLayout title={title} subtitle={subtitle} onBack={handleBack} timer={timer}>
         {started && !finished && <>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.3rem' }}>
             <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
