@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import EquationSandbox from '../components/concept/EquationSandbox';
 import { logConceptAttempt } from './concept/conceptApi';
+import { reportScoreEvent } from './scoreApi';
 import confetti from 'canvas-confetti';
 
 const LEVELS = [
@@ -117,6 +118,7 @@ export default function EquationSandboxApp({ onBack }) {
   };
 
   const handleVictory = async (finalEquation) => {
+    reportScoreEvent({ type: 'quiz_correct', difficulty: 'medium', module: 'EquationSandbox' });
     confetti({
       particleCount: 100,
       spread: 70,

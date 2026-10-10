@@ -19,8 +19,7 @@
  */
 import { useState, useEffect, useRef, useCallback } from 'react';
 import './IdliVadaSambharApp.css';
-import { useI18n } from './lib/i18n.jsx';
-
+import { reportScoreEvent } from './lib/scoreApi';
 const PLAYERS = ['User', 'Tenali', 'Birbal'];
 const PLAYER_EMOJI = { User: '🧒', Tenali: '👦', Birbal: '👳' };
 
@@ -107,6 +106,7 @@ export default function IdliVadaSambharApp({ onBack }) {
     if (n === targetLcm && !hasWon) {
       setHasWon(true);
       setWinInfo({ lcm: n });
+      reportScoreEvent({ type: 'quiz_correct', difficulty: 'easy', module: 'IdliVadaSambhar' });
       return; // pause on the celebration overlay; advance happens on "Continue"
     }
     advance();

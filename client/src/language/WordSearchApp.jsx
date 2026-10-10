@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTimer } from '../hooks/useTimer';
 import { QuizLayout } from '../components/QuizLayout';
+import { reportScoreEvent } from '../lib/scoreApi';
 // eslint-disable-next-line no-unused-vars -- motion is used as <motion.div> in JSX
 import { motion, AnimatePresence } from 'framer-motion';
 import './WordSearchApp.css';
@@ -206,6 +207,7 @@ export default function WordSearchApp({ onBack }) {
       setTotalXp(newTotal);
       try { localStorage.setItem('tenali_wordsearch_xp', String(newTotal)); } catch { /* ignored */ }
 
+      reportScoreEvent({ type: 'quiz_correct', difficulty: 'medium', module: 'WordSearch' });
       showToast(`Found "${matched.word}"! +${xpGained} XP`, 'correct');
       setSuccessAnimation(true);
       setTimeout(() => setSuccessAnimation(false), 1000);

@@ -53,6 +53,7 @@ const http = require('http');
 const wordCreator = require('./wordCreator');
 const logger = require('./lib/logger');
 const { generateExplanation } = require('./explanations');
+const ledger = require('./lib/ledger');
 
 // Catch what would otherwise be a silent crash (or, for unhandled promise
 // rejections on Node 15+, a crash with no application-level record of why).
@@ -289,7 +290,7 @@ function extractAttemptDetails(req) {
   return { topicKey, questionPrompt, userInput };
 }
 
-// Global middleware to log student attempts for all quiz/check APIs
+// Global middleware to log student attempts and accrue scores server-side for all quiz/check APIs (#91)
 app.use((req, res, next) => {
   if (req.method !== 'POST' || !req.path.includes('-api/check')) {
     return next();
@@ -298,60 +299,75 @@ app.use((req, res, next) => {
   const isSolveOnly = req.body && req.body.solve === true;
   const originalJson = res.json.bind(res);
 
-  res.json = function (data) {
-    const jsonResult = originalJson(data);
+  res.json = async function (data) {
+    if (!data || typeof data !== 'object' || isSolveOnly) {
+      return originalJson(data);
+    }
 
-    if (isSolveOnly) return jsonResult;
+    try {
+      const user = await getUserFromReq(req);
+      if (user) {
+        const isCorrect = data.correct === true || data.isCorrect === true;
+        const eventType = isCorrect ? 'quiz_correct' : 'quiz_incorrect';
+        const recordRes = await ledger.recordEvent(user._id || user.id, {
+          type: eventType,
+          difficulty: req.body?.difficulty || req.body?.level,
+          speed: req.body?.speed,
+        });
 
-    // Run async logging in the background
-    (async () => {
-      try {
-        const user = await getUserFromReq(req);
-        if (user) {
-          const details = extractAttemptDetails(req);
-          if (details) {
-            const { topicKey, questionPrompt, userInput } = details;
-            
-            const isMongo = typeof user._id !== 'undefined';
-            if (isMongo) {
-              if (auth.StudentAttemptLog) {
-                await auth.StudentAttemptLog.create({
-                  studentId: user._id,
-                  topicKey,
-                  questionPrompt,
-                  userInput,
-                  correct: !!data.correct,
-                  hintsClickedCount: req.body.hintsUsed || 0,
-                  timeSpentSeconds: req.body.timeSpentSeconds || 0,
-                  stageNumber: 3,
-                  challengeType: 'standard'
-                });
-              }
-            } else {
-              if (!user.attemptLogs) {
-                user.attemptLogs = [];
-              }
-              user.attemptLogs.push({
+        if (recordRes && recordRes.success) {
+          data.coins = recordRes.coins;
+          data.xp = recordRes.xp;
+          data.totalSolved = recordRes.totalSolved;
+          data.coinsEarned = recordRes.coinsEarned;
+          data.xpEarned = recordRes.xpEarned;
+        }
+
+        // Student attempt logging
+        const details = extractAttemptDetails(req);
+        if (details) {
+          const { topicKey, questionPrompt, userInput } = details;
+          const isMongo = typeof user._id !== 'undefined';
+          if (isMongo) {
+            if (auth.StudentAttemptLog) {
+              await auth.StudentAttemptLog.create({
+                studentId: user._id,
                 topicKey,
                 questionPrompt,
                 userInput,
-                correct: !!data.correct,
-                timestamp: new Date(),
-                hintsClickedCount: req.body.hintsUsed || 0,
-                timeSpentSeconds: req.body.timeSpentSeconds || 0,
+                correct: isCorrect,
+                hintsClickedCount: req.body?.hintsUsed || 0,
+                timeSpentSeconds: req.body?.timeSpentSeconds || 0,
                 stageNumber: 3,
-                challengeType: 'standard'
+                challengeType: 'standard',
               });
+            }
+          } else {
+            if (!user.attemptLogs) {
+              user.attemptLogs = [];
+            }
+            user.attemptLogs.push({
+              topicKey,
+              questionPrompt,
+              userInput,
+              correct: isCorrect,
+              timestamp: new Date(),
+              hintsClickedCount: req.body?.hintsUsed || 0,
+              timeSpentSeconds: req.body?.timeSpentSeconds || 0,
+              stageNumber: 3,
+              challengeType: 'standard',
+            });
+            if (typeof user.save === 'function') {
               await user.save();
             }
           }
         }
-      } catch (err) {
-        logger.error(null,'[attempt-logger] Failed to log student attempt:', err.message);
       }
-    })();
+    } catch (err) {
+      logger.error(null, '[scoring-middleware] Failed to accrue score or log attempt:', err.message);
+    }
 
-    return jsonResult;
+    return originalJson(data);
   };
 
   next();
@@ -1599,7 +1615,14 @@ async function getUserFromReq(req) {
       const mongoose = require('mongoose');
       if (mongoose.connection.readyState === 1) {
         try {
-          const dbUser = await auth.User.findById(payload.sub || payload.username);
+          const userId = payload.id || payload.sub || payload.userId;
+          let dbUser = null;
+          if (userId && mongoose.Types.ObjectId.isValid(userId)) {
+            dbUser = await auth.User.findById(userId);
+          }
+          if (!dbUser && payload.username) {
+            dbUser = await auth.User.findOne({ username: String(payload.username).toLowerCase() });
+          }
           if (dbUser) return dbUser;
         } catch (dbErr) {
           logger.error(null,'[auth] Database query failed, falling back to in-memory profile:', dbErr.message);
@@ -1822,6 +1845,35 @@ function ensureUserMilestones(user) {
     }
   });
 }
+
+/**
+ * POST /api/score/event (#92)
+ * Generic authenticated scoring endpoint for self-contained / browser-only games.
+ * Note: these events are client-asserted (server cannot verify a browser-only game).
+ */
+app.post('/api/score/event', express.json(), auth.requireAuth, async (req, res) => {
+  try {
+    const event = req.body || {};
+    if (!event.type || typeof event.type !== 'string' || !event.type.trim()) {
+      return res.status(400).json({ error: 'event type is required' });
+    }
+
+    const userId = req.user.id;
+    const result = await ledger.recordEvent(userId, event);
+
+    return res.json({
+      success: true,
+      coins: result.coins,
+      xp: result.xp,
+      totalSolved: result.totalSolved,
+      coinsEarned: result.coinsEarned,
+      xpEarned: result.xpEarned,
+    });
+  } catch (err) {
+    console.error('Error recording score event:', err);
+    return res.status(500).json({ error: err.message || 'failed to record score event' });
+  }
+});
 
 app.post('/api/progress', express.json(), async (req, res) => {
   try {

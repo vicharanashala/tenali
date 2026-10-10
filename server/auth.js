@@ -106,36 +106,7 @@ const UserSchema = new mongoose.Schema({
     }
   ],
   gradeLevel: { type: String, default: 'Grade 3' },
-  coinBalance: { type: Number, default: 500 },
-  xpScore: { type: Number, default: 500 },
   role: { type: String, default: 'user', enum: ['user', 'admin'] }
-});
-
-// Mongoose 9 removed the `next` callback from document middleware: the hook is
-// awaited instead, so it takes no arguments and this body just runs to
-// completion. Do not reintroduce a `next` parameter — calling it throws.
-UserSchema.pre('save', function () {
-  if (this.isModified('coins')) {
-    const val = this.coins;
-    this.xp = val;
-    this.coinBalance = val;
-    this.xpScore = val;
-  } else if (this.isModified('xp')) {
-    const val = this.xp;
-    this.coins = val;
-    this.coinBalance = val;
-    this.xpScore = val;
-  } else if (this.isModified('coinBalance')) {
-    const val = this.coinBalance;
-    this.coins = val;
-    this.xp = val;
-    this.xpScore = val;
-  } else if (this.isModified('xpScore')) {
-    const val = this.xpScore;
-    this.coins = val;
-    this.xp = val;
-    this.coinBalance = val;
-  }
 });
 
 const ProgressSchema = new mongoose.Schema({
@@ -192,7 +163,6 @@ const UserStatsSchema = new mongoose.Schema({
   lastActiveDate: { type: String, default: "" },
   totalSolved: { type: Number, default: 0 },
   coins: { type: Number, default: 0 },
-  xpScore: { type: Number, default: 0 },
   updatedAt: { type: Date, default: Date.now }
 });
 const UserStats = mongoose.model('UserStats', UserStatsSchema);

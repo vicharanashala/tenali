@@ -59,8 +59,13 @@ export function getMasteryState(progress, exerciseId) {
  * Process an answer and return { newState, event }.
  * event is one of: 'level_up', 'mastered', 'level_down', 'correct', 'wrong'
  */
+import { reportScoreEvent } from '../lib/scoreApi';
+
 export function processMasteryAnswer(state, isCorrect, maxLevel) {
   const next = { ...state };
+  if (isCorrect && isCorrect !== 'skip_explore') {
+    reportScoreEvent({ type: 'quiz_correct', difficulty: 'easy', module: 'Vachana' });
+  }
 
   if (isCorrect === 'skip_explore') {
     next.currentLevel = Math.min(2, maxLevel);
