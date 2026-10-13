@@ -250,14 +250,16 @@ h1 {
   justify-content: center;
 }
 
-.grid-dimension {
-  text-align: center;
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: var(--clr-text-soft);
-  opacity: 0.45;  /* Very subtle text describing grid size */
-  margin-top: 16px;
-  letter-spacing: 0.06em;
+.home-section {
+  margin-bottom: 32px;
+}
+
+.home-section-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: var(--clr-text);
+  letter-spacing: -0.01em;
 }
 
 .menu-card {
