@@ -1,0 +1,61 @@
+/* Drill-Down Section View */
+.section-drilldown-view {
+  margin-top: 16px;
+  width: 100%;
+}
+
+.section-drilldown-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.section-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--clr-surface);
+  border: 1.5px solid var(--clr-border);
+  color: var(--clr-text);
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: background var(--transition), border-color var(--transition), transform 0.15s ease;
+}
+
+.section-back-btn:hover {
+  background: var(--clr-hover-strong);
+  border-color: var(--clr-accent);
+  transform: translateX(-2px);
+}
+
+.section-drilldown-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-drilldown-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.section-drilldown-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--clr-text);
+}
+
+.section-drilldown-subtitle {
+  font-size: 0.82rem;
+  color: var(--clr-text-soft);
+}

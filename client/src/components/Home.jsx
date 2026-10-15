@@ -1,9 +1,12 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { TILES } from '../features/tiles';
 import DailyWarmupCard from './DailyWarmupCard';
 import AboutModal from './AboutModal';
 import HomeNavMenu from './HomeNavMenu';
-import SectionFilterBar from './SectionFilterBar';
+import SearchBar from './SearchBar';
+import CategoryCardsGrid from './CategoryCardsGrid';
+import SectionDrilldownView from './SectionDrilldownView';
+import GlobalSearchResults from './GlobalSearchResults';
 import { PmQuestBanner, PmGoalModal, PmHomeSection } from '../PathMap';
 import { navigate } from '../lib/router';
 import './Home.css';
@@ -96,7 +99,6 @@ export default function Home({
   const [pmOpen, setPmOpen] = useState(false);
   const [selectedSection, setSelectedSection] = useState(null);
   const [activeSections, setActiveSections] = useState([]);
-  const searchInputRef = useRef(null);
 
   const isSearching = search.trim() !== '';
 
@@ -122,7 +124,6 @@ export default function Home({
   const handleClearSearch = () => {
     setSearch('');
     setActiveSections([]);
-    searchInputRef.current?.focus();
   };
 
   const renderMenuCard = (app) => {
@@ -150,6 +151,13 @@ export default function Home({
       </button>
     );
   };
+
+  const currentSection = selectedSection
+    ? HOME_SECTIONS.find((s) => s.key === selectedSection)
+    : null;
+  const sectionTiles = selectedSection
+    ? TILES.filter((app) => (app.category || 'shelf') === selectedSection)
+    : [];
 
   return (
     <>
@@ -265,201 +273,57 @@ export default function Home({
         <DailyWarmupCard completedTopics={completedTopics} apiBase={API} onSelectTopic={onSelect} />
       )}
 
-      <div className="search-bar-row">
-        <div className="search-bar-wrapper">
-          <input
-            id="tour-search-bar"
-            ref={searchInputRef}
-            className="search-bar"
-            type="text"
-            placeholder="Search all 90+ puzzles across sections…"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Escape') {
-                handleClearSearch();
-              }
-            }}
-          />
-          {search && (
-            <button
-              type="button"
-              className="search-clear-btn"
-              onClick={handleClearSearch}
-              aria-label="Clear search"
-              title="Clear search"
-            >
-              ✕
-            </button>
-          )}
-        </div>
-      </div>
+      <SearchBar
+        id="tour-search-bar"
+        placeholder="Search all 90+ puzzles across sections…"
+        value={search}
+        onChange={setSearch}
+        onClear={handleClearSearch}
+      />
 
       {!search && !isGoalSelection && !selectedSection && (
         <PmHomeSection onSelect={onSelect} onOpenGoalPicker={() => setPmOpen(true)} />
       )}
 
-      {/* Option C: Section Filter Bar displayed ONLY when searching across all sections */}
+      {/* Main Content Area */}
       {isSearching && (
-        <SectionFilterBar
-          sections={HOME_SECTIONS}
+        <GlobalSearchResults
+          id="tour-home-grid"
+          search={search}
+          filteredResults={filteredSearchResults}
+          searchCounts={searchCounts}
           activeSections={activeSections}
-          onSelectSections={setActiveSections}
-          counts={searchCounts}
+          setActiveSections={setActiveSections}
+          sections={HOME_SECTIONS}
+          renderCard={renderMenuCard}
+          onClearSearch={handleClearSearch}
         />
       )}
 
-      {/* Main Content Area */}
-      <div id="tour-home-grid">
-        {/* 1. Global Search Results View */}
-        {isSearching && (
-          <div className="search-results-container">
-            {filteredSearchResults.length > 0 && (
-              <div className="search-results-summary">
-                Found {filteredSearchResults.length} {filteredSearchResults.length === 1 ? 'puzzle' : 'puzzles'} matching &quot;{search}&quot;
-                {activeSections.length > 0 && ' in selected sections'}
-              </div>
-            )}
+      {!isSearching && selectedSection && (
+        <SectionDrilldownView
+          id="tour-home-grid"
+          section={currentSection}
+          tiles={sectionTiles}
+          completedTopics={completedTopics}
+          goldMastery={goldMastery}
+          isStage3Completed={isStage3Completed}
+          renderCard={renderMenuCard}
+          onBack={() => setSelectedSection(null)}
+        />
+      )}
 
-            {HOME_SECTIONS.map((section) => {
-              const sectionApps = filteredSearchResults.filter(
-                (app) => (app.category || 'shelf') === section.key
-              );
-              if (sectionApps.length === 0) return null;
-
-              return (
-                <section key={section.key} className="home-section">
-                  <h2 className="home-section-title">
-                    <span className="section-title-icon">{section.icon}</span>
-                    {section.title}
-                    <span className="section-match-badge">{sectionApps.length}</span>
-                  </h2>
-                  <div className="menu-grid">
-                    {sectionApps.map(renderMenuCard)}
-                  </div>
-                </section>
-              );
-            })}
-
-            {filteredSearchResults.length === 0 && (
-              <div className="search-empty-state">
-                <p>
-                  No puzzles found matching &quot;{search}&quot;
-                  {activeSections.length > 0 ? ' in the selected section filter' : ' across any section'}.
-                </p>
-                <button
-                  type="button"
-                  className="search-clear-action-btn"
-                  onClick={handleClearSearch}
-                >
-                  Clear Search
-                </button>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* 2. Section Drill-Down View */}
-        {!isSearching && selectedSection && (
-          <div className="section-drilldown-view">
-            {(() => {
-              const currentSection = HOME_SECTIONS.find((s) => s.key === selectedSection);
-              const sectionTiles = TILES.filter(
-                (app) => (app.category || 'shelf') === selectedSection
-              );
-              const sCompleted = sectionTiles.filter((app) =>
-                isStage3Completed(app.key, completedTopics)
-              ).length;
-              const sGold = sectionTiles.filter(
-                (app) => goldMastery && goldMastery.includes(app.key)
-              ).length;
-
-              return (
-                <>
-                  <div className="section-drilldown-header">
-                    <button
-                      type="button"
-                      className="section-back-btn"
-                      onClick={() => setSelectedSection(null)}
-                      aria-label="Back to all sections"
-                    >
-                      ← All Sections
-                    </button>
-                    <div className="section-drilldown-info">
-                      <span className="section-drilldown-icon">{currentSection?.icon}</span>
-                      <div>
-                        <h2 className="section-drilldown-title">{currentSection?.title}</h2>
-                        <span className="section-drilldown-subtitle">
-                          {sectionTiles.length} puzzles
-                          {sCompleted > 0 && ` · ${sCompleted} completed`}
-                          {sGold > 0 && ` · 🥇 ${sGold} gold`}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="menu-grid">
-                    {sectionTiles.map(renderMenuCard)}
-                  </div>
-                </>
-              );
-            })()}
-          </div>
-        )}
-
-        {/* 3. Outer View: Only 8 Section Cards */}
-        {!isSearching && !selectedSection && (
-          <div className="section-cards-grid">
-            {HOME_SECTIONS.map((section) => {
-              const sectionTiles = TILES.filter(
-                (app) => (app.category || 'shelf') === section.key
-              );
-              const completedCount = sectionTiles.filter((app) =>
-                isStage3Completed(app.key, completedTopics)
-              ).length;
-              const goldCount = sectionTiles.filter(
-                (app) => goldMastery && goldMastery.includes(app.key)
-              ).length;
-
-              return (
-                <button
-                  key={section.key}
-                  type="button"
-                  className={`section-category-card ${section.color || 'blue'}`}
-                  onClick={() => setSelectedSection(section.key)}
-                >
-                  <div className="section-card-top">
-                    <span className="section-card-icon">{section.icon}</span>
-                    <span className="section-card-badge">{sectionTiles.length} Puzzles</span>
-                  </div>
-                  <div className="section-card-main">
-                    <h3 className="section-card-title">{section.title}</h3>
-                    <p className="section-card-desc">{section.subtitle}</p>
-                  </div>
-                  <div className="section-card-footer">
-                    <div className="section-card-progress">
-                      {goldCount > 0 && (
-                        <span className="progress-pill gold" title="Gold Mastery">
-                          🥇 {goldCount}
-                        </span>
-                      )}
-                      {completedCount > 0 && (
-                        <span className="progress-pill completed" title="Completed">
-                          ✓ {completedCount}
-                        </span>
-                      )}
-                      {completedCount === 0 && goldCount === 0 && (
-                        <span className="progress-pill muted">0 / {sectionTiles.length} done</span>
-                      )}
-                    </div>
-                    <span className="section-card-cta">Explore →</span>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        )}
-      </div>
+      {!isSearching && !selectedSection && (
+        <CategoryCardsGrid
+          id="tour-home-grid"
+          sections={HOME_SECTIONS}
+          tiles={TILES}
+          completedTopics={completedTopics}
+          goldMastery={goldMastery}
+          isStage3Completed={isStage3Completed}
+          onSelectSection={setSelectedSection}
+        />
+      )}
 
       <PmGoalModal open={pmOpen} onClose={() => setPmOpen(false)} onSelect={onSelect} />
     </>
