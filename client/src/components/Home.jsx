@@ -121,6 +121,14 @@ export default function Home({
       ? searchMatches.filter((app) => activeSections.includes(app.category || 'shelf'))
       : searchMatches;
 
+  const handleSearchChange = (val) => {
+    // If starting a search from inside a drilled-down section and no custom filter is active yet
+    if (!search && val.trim() !== '' && selectedSection && activeSections.length === 0) {
+      setActiveSections([selectedSection]);
+    }
+    setSearch(val);
+  };
+
   const handleClearSearch = () => {
     setSearch('');
     setActiveSections([]);
@@ -275,9 +283,13 @@ export default function Home({
 
       <SearchBar
         id="tour-search-bar"
-        placeholder="Search all 90+ puzzles across sections…"
+        placeholder={
+          selectedSection && currentSection
+            ? `Search in ${currentSection.title}…`
+            : 'Search all 90+ puzzles across sections…'
+        }
         value={search}
-        onChange={setSearch}
+        onChange={handleSearchChange}
         onClear={handleClearSearch}
       />
 

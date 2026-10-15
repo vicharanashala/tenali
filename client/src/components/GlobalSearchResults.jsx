@@ -61,13 +61,24 @@ export default function GlobalSearchResults({
               No puzzles found matching &quot;{search}&quot;
               {activeSections.length > 0 ? ' in the selected section filter' : ' across any section'}.
             </p>
-            <button
-              type="button"
-              className="search-clear-action-btn"
-              onClick={onClearSearch}
-            >
-              Clear Search
-            </button>
+            <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', marginTop: '12px', flexWrap: 'wrap' }}>
+              {activeSections.length > 0 && searchCounts.all > 0 && (
+                <button
+                  type="button"
+                  className="search-clear-action-btn"
+                  onClick={() => setActiveSections([])}
+                >
+                  Search in all sections ({searchCounts.all} found)
+                </button>
+              )}
+              <button
+                type="button"
+                className="search-clear-action-btn"
+                onClick={onClearSearch}
+              >
+                Clear Search
+              </button>
+            </div>
           </div>
         )}
       </div>
