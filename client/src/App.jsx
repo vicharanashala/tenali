@@ -40,6 +40,8 @@ window.React = React;
 console.log("React version:", React.version);
 import LinearAlgebraApp from './LinearAlgebraApp'
 import Home from './components/Home'
+import PathMap, { PmSuggestIcon } from './PathMap';
+import { pmTrackAnswer } from './pathMapHelpers';
 import LandingPage from './components/LandingPage/LandingPage.jsx'
 import LandingNavbar from './components/LandingPage/LandingNavbar.jsx'
 import { createDynamicWeightBank } from './balanceScaleBank.js';

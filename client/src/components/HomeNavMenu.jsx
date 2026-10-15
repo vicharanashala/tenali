@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FEATURED_TILES, MATH_LAB_ENTRY, GEOCRAFT_ENTRY } from '../features/tiles';
+import { PmHamburgerItem } from '../PathMap';
 import { navigate } from '../lib/router';
+import './HomeNavMenu.css';
 
 function DropdownItem({ onClick, title, subtitle, style }) {
   return (
@@ -15,7 +17,7 @@ function DropdownItem({ onClick, title, subtitle, style }) {
  * HomeNavMenu
  * Hamburger menu toggle and slide-down drawer with navigation shortcuts.
  */
-export default function HomeNavMenu({ onSelect, onOpenAbout, search = '' }) {
+export default function HomeNavMenu({ onSelect, onOpenAbout, onOpenPmGoal, search = '' }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -130,6 +132,15 @@ export default function HomeNavMenu({ onSelect, onOpenAbout, search = '' }) {
             title="ℹ️ About Tenali"
             style={{ borderBottom: '1px solid var(--clr-border)' }}
           />
+
+          {onOpenPmGoal && (
+            <PmHamburgerItem
+              onOpen={() => {
+                setMenuOpen(false);
+                onOpenPmGoal();
+              }}
+            />
+          )}
 
           {/* Visual Learning Universe & GeoCraft */}
           {[mathLabEntry, geocraftEntry].map((app) => (

@@ -3,14 +3,23 @@
     "no-empty": {
       "count": 148
     },
+<<<<<<< HEAD
     "no-restricted-syntax": {
       "count": 1
+=======
+    "no-undef": {
+      "count": 40
+>>>>>>> 50430ff3 (feat(client): add section filter modal, search clear button, and modular component css)
     },
     "no-unexpected-multiline": {
       "count": 5
     },
     "no-unused-vars": {
+<<<<<<< HEAD
       "count": 209
+=======
+      "count": 211
+>>>>>>> 50430ff3 (feat(client): add section filter modal, search clear button, and modular component css)
     },
     "no-useless-escape": {
       "count": 4

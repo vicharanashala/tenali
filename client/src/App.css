@@ -250,46 +250,6 @@ h1 {
   justify-content: center;
 }
 
-.home-section {
-  margin-bottom: 32px;
-}
-
-.home-section-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin-bottom: 14px;
-  color: var(--clr-text);
-  letter-spacing: -0.01em;
-}
-
-.home-dropdown-item {
-  display: block;
-  width: 100%;
-  text-align: left;
-  padding: 10px 16px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--clr-text);
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  transition: background var(--transition);
-}
-
-.home-dropdown-item:hover {
-  background: var(--clr-hover-strong);
-}
-
-.home-dropdown-item-title {
-  color: var(--clr-accent);
-}
-
-.home-dropdown-item-subtitle {
-  display: block;
-  font-size: 0.78rem;
-  color: var(--clr-text-soft);
-  margin-top: 2px;
-}
 
 .menu-card {
   position: relative;

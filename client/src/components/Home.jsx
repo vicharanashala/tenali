@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { TILES } from '../features/tiles';
 import DailyWarmupCard from './DailyWarmupCard';
 import AboutModal from './AboutModal';
 import HomeNavMenu from './HomeNavMenu';
+import SectionFilterBar from './SectionFilterBar';
+import { PmQuestBanner, PmGoalModal, PmHomeSection } from '../PathMap';
 import { navigate } from '../lib/router';
+import './Home.css';
 
 const API = import.meta.env.VITE_API_BASE_URL || '';
 
@@ -30,7 +33,7 @@ const isStage3Completed = (topicKey, completedTopics) => {
 
 /**
  * Home Component
- * Main menu screen displaying all available quizzes in categorized sections.
+ * Main menu screen displaying all available quizzes in categorized sections with section filtering.
  */
 export default function Home({
   onSelect,
@@ -42,6 +45,9 @@ export default function Home({
 }) {
   const [showAbout, setShowAbout] = useState(false);
   const [search, setSearch] = useState('');
+  const [pmOpen, setPmOpen] = useState(false);
+  const [activeSections, setActiveSections] = useState([]);
+  const searchInputRef = useRef(null);
 
   const isSearching = search.trim() !== '';
   const filteredRegular = isSearching
@@ -51,6 +57,16 @@ export default function Home({
           a.subtitle.toLowerCase().includes(search.toLowerCase())
       )
     : TILES;
+
+  const counts = { all: filteredRegular.length };
+  HOME_SECTIONS.forEach(({ key }) => {
+    counts[key] = filteredRegular.filter((app) => (app.category || 'shelf') === key).length;
+  });
+
+  const visibleSections =
+    activeSections.length === 0
+      ? HOME_SECTIONS
+      : HOME_SECTIONS.filter((s) => activeSections.includes(s.key));
 
   return (
     <>
@@ -133,7 +149,12 @@ export default function Home({
         </div>
 
         {/* Hamburger navigation menu */}
-        <HomeNavMenu onSelect={onSelect} onOpenAbout={() => setShowAbout(true)} search={search} />
+        <HomeNavMenu
+          onSelect={onSelect}
+          onOpenAbout={() => setShowAbout(true)}
+          onOpenPmGoal={() => setPmOpen(true)}
+          search={search}
+        />
       </div>
 
       <AboutModal isOpen={showAbout} onClose={() => setShowAbout(false)} />
@@ -155,24 +176,60 @@ export default function Home({
         </div>
       )}
 
+      {!search && !isGoalSelection && <PmQuestBanner onSelect={onSelect} />}
+
       {!search && !isGoalSelection && (
         <DailyWarmupCard completedTopics={completedTopics} apiBase={API} onSelectTopic={onSelect} />
       )}
 
       <div className="search-bar-row">
-        <input
-          id="tour-search-bar"
-          className="search-bar"
-          type="text"
-          placeholder="Search puzzles…"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+        <div className="search-bar-wrapper">
+          <input
+            id="tour-search-bar"
+            ref={searchInputRef}
+            className="search-bar"
+            type="text"
+            placeholder="Search puzzles…"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Escape') {
+                setSearch('');
+              }
+            }}
+          />
+          {search && (
+            <button
+              type="button"
+              className="search-clear-btn"
+              onClick={() => {
+                setSearch('');
+                searchInputRef.current?.focus();
+              }}
+              aria-label="Clear search"
+              title="Clear search"
+            >
+              ✕
+            </button>
+          )}
+        </div>
       </div>
+
+      {!search && !isGoalSelection && (
+        <PmHomeSection onSelect={onSelect} onOpenGoalPicker={() => setPmOpen(true)} />
+      )}
+
+      {/* Section Filter Bar & Modal Trigger */}
+      <SectionFilterBar
+        sections={HOME_SECTIONS}
+        activeSections={activeSections}
+        onSelectSections={setActiveSections}
+        counts={counts}
+      />
 
       {/* Categorized Sections (#201, #202, #203) */}
       <div id="tour-home-grid">
-        {HOME_SECTIONS.map(({ key, title }) => {
+        {visibleSections.map(({ key, title }) => {
           const sectionApps = filteredRegular.filter((app) => (app.category || 'shelf') === key);
           if (sectionApps.length === 0) return null;
 
@@ -208,7 +265,16 @@ export default function Home({
             </section>
           );
         })}
+
+        {activeSections.length > 0 &&
+          visibleSections.every((s) => counts[s.key] === 0) && (
+            <div style={{ textAlign: 'center', padding: '32px 16px', color: 'var(--clr-text-soft)' }}>
+              No puzzles found matching &quot;{search}&quot; in the selected section{activeSections.length > 1 ? 's' : ''}.
+            </div>
+          )}
       </div>
+
+      <PmGoalModal open={pmOpen} onClose={() => setPmOpen(false)} onSelect={onSelect} />
     </>
   );
 }

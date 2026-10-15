@@ -1,0 +1,55 @@
+.home-section {
+  margin-bottom: 32px;
+}
+
+.home-section-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: var(--clr-text);
+  letter-spacing: -0.01em;
+}
+
+/* Search Bar Wrapper & Clear Button */
+.search-bar-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  align-items: center;
+}
+
+.search-bar-wrapper .search-bar {
+  padding-right: 36px;
+}
+
+.search-clear-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: none;
+  background: var(--clr-border);
+  color: var(--clr-text-soft);
+  cursor: pointer;
+  font-size: 11px;
+  line-height: 1;
+  padding: 0;
+  transition: background var(--transition), color var(--transition), transform 0.15s ease;
+}
+
+.search-clear-btn:hover {
+  background: var(--clr-hover-strong);
+  color: var(--clr-text);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.search-clear-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
