@@ -1659,6 +1659,10 @@ function History({ output, langId, code, stdin, onLoad }) {
       stdout: output.stdout || '',
     }
     setHistory(prev => [entry, ...prev].slice(0, 10))
+    // code and stdin are snapshotted from props at the moment output changes;
+    // they are intentionally excluded so typing in the editor doesn't create
+    // extra history entries.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [output, langId])
 
   if (history.length === 0) return null
