@@ -254,11 +254,6 @@
       "count": 1
     }
   },
-  "src/vachana/exercises/SchemaClassifier.jsx": {
-    "react-hooks/set-state-in-effect": {
-      "count": 2
-    }
-  },
   "src/vachana/exercises/SyntacticRewriter.jsx": {
     "react-hooks/immutability": {
       "count": 1
