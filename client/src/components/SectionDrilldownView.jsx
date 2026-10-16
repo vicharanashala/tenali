@@ -3,7 +3,7 @@ import './SectionDrilldownView.css';
 
 /**
  * SectionDrilldownView
- * Displays the drilled-down view for a single section with back navigation.
+ * Displays the drilled-down view for a single section with left-aligned category info.
  */
 export default function SectionDrilldownView({
   section,
@@ -12,7 +12,6 @@ export default function SectionDrilldownView({
   goldMastery = [],
   isStage3Completed,
   renderCard,
-  onBack,
   id,
 }) {
   const completedCount = tiles.filter((app) =>
@@ -25,14 +24,6 @@ export default function SectionDrilldownView({
   return (
     <div className="section-drilldown-view" id={id}>
       <div className="section-drilldown-header">
-        <button
-          type="button"
-          className="section-back-btn"
-          onClick={onBack}
-          aria-label="Back to all sections"
-        >
-          ← All Sections
-        </button>
         <div className="section-drilldown-info">
           {section?.icon && <span className="section-drilldown-icon">{section.icon}</span>}
           <div>

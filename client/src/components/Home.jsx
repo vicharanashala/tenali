@@ -88,7 +88,6 @@ const isStage3Completed = (topicKey, completedTopics) => {
  */
 export default function Home({
   onSelect,
-  onBackToLanding,
   completedTopics = [],
   goldMastery = [],
   isGoalSelection = false,
@@ -169,71 +168,41 @@ export default function Home({
 
   return (
     <>
-      <div style={{ position: 'relative' }}>
+      <div className="home-top-header">
         {isGoalSelection && onBack && (
           <button
+            type="button"
             onClick={onBack}
-            style={{
-              position: 'absolute',
-              top: '8px',
-              left: '0',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              background: 'var(--clr-card)',
-              border: '1.5px solid var(--clr-border)',
-              color: 'var(--clr-text)',
-              padding: '6px 12px',
-              borderRadius: 'var(--radius-sm)',
-              cursor: 'pointer',
-              fontFamily: 'var(--font-body)',
-              fontSize: '0.85rem',
-              fontWeight: '500',
-              transition: 'all var(--transition)',
-            }}
-            onMouseEnter={(e) => (e.target.style.background = 'var(--clr-hover-strong)')}
-            onMouseLeave={(e) => (e.target.style.background = 'var(--clr-card)')}
+            className="home-back-btn"
+            aria-label="Back to dashboard"
           >
             ← Back to Dashboard
           </button>
         )}
 
-        {!isGoalSelection && onBackToLanding && (
+        {!isGoalSelection && selectedSection && (
           <button
-            onClick={onBackToLanding}
-            style={{
-              position: 'absolute',
-              top: '8px',
-              left: '0',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              background: 'var(--clr-card)',
-              border: '1.5px solid var(--clr-border)',
-              color: 'var(--clr-text)',
-              padding: '6px 12px',
-              borderRadius: 'var(--radius-sm)',
-              cursor: 'pointer',
-              fontFamily: 'var(--font-body)',
-              fontSize: '0.85rem',
-              fontWeight: '500',
-              transition: 'all var(--transition)',
+            type="button"
+            onClick={() => {
+              setSelectedSection(null);
+              setActiveSections([]);
             }}
-            onMouseEnter={(e) => (e.target.style.background = 'var(--clr-hover-strong)')}
-            onMouseLeave={(e) => (e.target.style.background = 'var(--clr-card)')}
+            className="home-back-btn"
+            aria-label="Back to all sections"
           >
-            ← Overview
+            ← All Sections
           </button>
         )}
 
         <div
+          className="home-header-center"
           style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             gap: '16px',
             marginBottom: '4px',
-            paddingTop: isGoalSelection || onBackToLanding ? '44px' : '0',
+            paddingTop: isGoalSelection ? '44px' : '0',
           }}
         >
           <img src="/tenali.png" alt="Tenali Raman" style={{ width: '80px', height: 'auto', flexShrink: 0 }} />
@@ -321,7 +290,6 @@ export default function Home({
           goldMastery={goldMastery}
           isStage3Completed={isStage3Completed}
           renderCard={renderMenuCard}
-          onBack={() => setSelectedSection(null)}
         />
       )}
 

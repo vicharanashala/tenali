@@ -44822,10 +44822,6 @@ function App() {
 
     return (
       <Home
-        onBackToLanding={() => {
-          setCurrentView('landing');
-          try { window.history.replaceState({}, '', `${BASE}/`); } catch (e) {}
-        }}
         onSelect={(key) => {
           setCurrentView('puzzles');
           if (key === 'goalpractice') {
