@@ -586,7 +586,7 @@ const generators = {
     },
     check(body) {
       const userNum = parseFloat((body.userAnswer || '').replace(/\s+/g, ''));
-      const correct = !isNaN(userNum) && Math.abs(userNum - body.answer) < 0.5;
+      const correct = !isNaN(userNum) && Math.round(userNum * 100) === Math.round(body.answer * 100);
       return { correct, display: body.display, message: correct ? 'Correct!' : 'Incorrect' };
     },
   },

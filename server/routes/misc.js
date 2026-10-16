@@ -1181,7 +1181,7 @@ const generators = {
         const rn = ansNum / g; const rd = ansDen / g;
         answer = rd === 1 ? rn : Math.round((rn / rd) * 100) / 100;
         display = answer + ' km/h';
-        prompt = `A cyclist rides ${d1} km at ${s1} km/h then ${d2} km at ${s2} km/h. Find the average speed (to 2 d.p. if needed).`;
+        prompt = `A cyclist rides ${d1} km at ${s1} km/h then ${d2} km at ${s2} km/h. Find the average speed. Give your answer correct to 2 decimal places.`;
       } else {
         const ms = randInt(5, 30);
         answer = Math.round(ms * 3.6 * 100) / 100; display = answer + ' km/h';
@@ -1191,7 +1191,7 @@ const generators = {
     },
     check(body) {
       const ua = parseFloat((body.userAnswer || '').replace(/[^\d.\-\/]/g, ''));
-      const correct = !isNaN(ua) && Math.abs(ua - body.answer) < 0.05;
+      const correct = !isNaN(ua) && Math.round(ua * 100) === Math.round(body.answer * 100);
       return { correct, display: body.display, message: correct ? 'Correct!' : 'Incorrect' };
     },
   },
