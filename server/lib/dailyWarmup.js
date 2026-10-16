@@ -12,6 +12,8 @@
 
 const { bktUpdate, clamp } = require('./bkt');
 const { INTERVAL_DAYS, nextInterval } = require('./spacingLadder');
+const { randomInt, pick } = require('./mathHelpers');
+const randInt = randomInt;
 
 // ─── Constants & Configurations ─────────────────────────────────────────────
 
@@ -173,13 +175,7 @@ function updateTopicSpacingLadder(currentLadder = {}, topic, isCorrect) {
 
 // ─── Story Randomizers ──────────────────────────────────────────────────────
 
-function randInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
 
-function pick(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
 
 const CHARACTERS = ['Maya', 'Rohan', 'Aria', 'Tenali', 'Liam', 'Zara', 'Priya', 'Kavya', 'Arjun', 'Ananya', 'Vikram', 'Leo', 'Meera'];
 

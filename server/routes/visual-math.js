@@ -1,9 +1,9 @@
-﻿'use strict';
+'use strict';
 const router = require('express').Router();
 
 function vmRandInt(lo, hi) { return Math.floor(Math.random() * (hi - lo + 1)) + lo; }
 
-function vmPick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+const { vmPick } = require('../lib/mathHelpers');
 
 const VM_EMOJIS = ['ðŸŽ','ðŸŠ','ðŸ‹','ðŸ‡','ðŸ“','â­','ðŸŒ¸','ðŸ¦‹','ðŸ£','ðŸ­','ðŸ§','ðŸŽˆ','ðŸ¦„','ðŸ¬','ðŸ•'];
 

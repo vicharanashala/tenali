@@ -1,30 +1,21 @@
 'use strict';
 const router = require('express').Router();
 
-function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+const { randomInt, pick, triPick, gcd, simplifyFraction } = require('../lib/mathHelpers');
 const randInt = randomInt;
 function rand(lo, hi) { return lo + Math.floor(Math.random() * (hi - lo + 1)); }
-function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
-function gcd(a, b) { a = Math.abs(a); b = Math.abs(b); while (b) { const t = b; b = a % b; a = t; } return a; }
-
-function simplifyFraction(num, den) {
-  if (den < 0) { num = -num; den = -den; }
-  const g = gcd(Math.abs(num), den);
-  return { num: num / g, den: den / g };
-}
 
 function triRand(lo, hi) { return lo + Math.floor(Math.random() * (hi - lo + 1)); }
-function triPick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
-const PYTH_TRIPLES = [[3,4,5],[5,12,13],[8,15,17],[7,24,25],[6,8,10],[9,12,15],[12,16,20],[15,20,25],[9,40,41],[11,60,61],[20,21,29]];
+const PYTH_TRIPLES = [[3, 4, 5], [5, 12, 13], [8, 15, 17], [7, 24, 25], [6, 8, 10], [9, 12, 15], [12, 16, 20], [15, 20, 25], [9, 40, 41], [11, 60, 61], [20, 21, 29]];
 
 function pythagPoolForIndex(qIdx) {
   // Tier 0 (questions 1-3): single-digit sides only — only the (3,4,5) triple.
-  if (qIdx < 3) return { triples: [[3,4,5]], maxK: 1 };
+  if (qIdx < 3) return { triples: [[3, 4, 5]], maxK: 1 };
   // Tier 1 (questions 4-6): small double-digit sides, k=1.
-  if (qIdx < 6) return { triples: [[3,4,5],[6,8,10],[5,12,13],[9,12,15]], maxK: 1 };
+  if (qIdx < 6) return { triples: [[3, 4, 5], [6, 8, 10], [5, 12, 13], [9, 12, 15]], maxK: 1 };
   // Tier 2 (questions 7-9): broader pool, allow k=2.
-  if (qIdx < 9) return { triples: [[3,4,5],[6,8,10],[5,12,13],[9,12,15],[8,15,17],[7,24,25]], maxK: 2 };
+  if (qIdx < 9) return { triples: [[3, 4, 5], [6, 8, 10], [5, 12, 13], [9, 12, 15], [8, 15, 17], [7, 24, 25]], maxK: 2 };
   // Tier 3 (10+): full pool, larger multipliers permitted.
   return { triples: PYTH_TRIPLES.slice(0, 6), maxK: 3 };
 }
@@ -112,7 +103,7 @@ const generators = {
       if (difficulty === 'easy') {
         // SOH-CAH-TOA: find missing side in right triangle
         // Use Pythagorean triples for clean answers
-        const triples = [[3,4,5],[5,12,13],[8,15,17],[7,24,25],[6,8,10],[9,12,15],[10,24,26],[20,21,29]];
+        const triples = [[3, 4, 5], [5, 12, 13], [8, 15, 17], [7, 24, 25], [6, 8, 10], [9, 12, 15], [10, 24, 26], [20, 21, 29]];
         const [a, b, c] = triPick(triples);
         const subtype = triPick(['find_hyp', 'find_leg']);
         let prompt, answer;
@@ -175,7 +166,7 @@ const generators = {
           const b = triRand(5, 15);
           const C = triRand(30, 120);
           const radC = C * Math.PI / 180;
-          const c2 = a*a + b*b - 2*a*b*Math.cos(radC);
+          const c2 = a * a + b * b - 2 * a * b * Math.cos(radC);
           const c = Math.round(Math.sqrt(c2) * 10) / 10;
           const prompt = `Triangle: a = ${a}, b = ${b}, angle C = ${C}°. Find side c (1 d.p.).`;
           return { id, difficulty, type: 'cosine_rule', prompt, answer: c, answerDen: 1 };
@@ -212,7 +203,7 @@ const generators = {
           const x2 = x1 + 2 * triRand(-4, 4); const y2 = y1 + 2 * triRand(-4, 4);
           const mx = (x1 + x2) / 2; const my = (y1 + y2) / 2;
           const prompt = `Find the midpoint of (${x1}, ${y1}) and (${x2}, ${y2})`;
-          return { id, difficulty, type: 'coord', prompt, ansX: mx, ansY: my, display: `(${mx}, ${my})`, points: [{x:x1, y:y1}, {x:x2, y:y2}] };
+          return { id, difficulty, type: 'coord', prompt, ansX: mx, ansY: my, display: `(${mx}, ${my})`, points: [{ x: x1, y: y1 }, { x: x2, y: y2 }] };
         }
         else if (subType === 'reflection') {
           const axis = triPick(['x-axis', 'y-axis']);
@@ -221,7 +212,7 @@ const generators = {
           if (axis === 'x-axis') ansY = -y1;
           else ansX = -x1;
           const prompt = `Reflect (${x1}, ${y1}) across the ${axis}`;
-          return { id, difficulty, type: 'coord', prompt, ansX, ansY, display: `(${ansX}, ${ansY})`, points: [{x:x1, y:y1}] };
+          return { id, difficulty, type: 'coord', prompt, ansX, ansY, display: `(${ansX}, ${ansY})`, points: [{ x: x1, y: y1 }] };
         }
         else { // translation
           const x1 = triRand(-6, 6); const y1 = triRand(-6, 6);
@@ -229,20 +220,20 @@ const generators = {
           const ansX = x1 + dx; const ansY = y1 + dy;
           const vector = `<${dx}, ${dy}>`;
           const prompt = `Translate (${x1}, ${y1}) by the vector ${vector}`;
-          return { id, difficulty, type: 'coord', prompt, ansX, ansY, display: `(${ansX}, ${ansY})`, points: [{x:x1, y:y1}] };
+          return { id, difficulty, type: 'coord', prompt, ansX, ansY, display: `(${ansX}, ${ansY})`, points: [{ x: x1, y: y1 }] };
         }
       }
       else if (difficulty === 'medium') {
         // Lengths: distance, distance to origin
         const subType = triPick(['distance', 'distance_origin']);
-        const triples = [[3,4,5],[5,12,13],[8,15,17],[6,8,10],[9,12,15]];
+        const triples = [[3, 4, 5], [5, 12, 13], [8, 15, 17], [6, 8, 10], [9, 12, 15]];
 
         if (subType === 'distance_origin') {
           const [dx, dy, dist] = triPick(triples);
           const sx = triPick([1, -1]); const sy = triPick([1, -1]);
           const x1 = sx * dx; const y1 = sy * dy;
           const prompt = `Find the distance from (${x1}, ${y1}) to the origin`;
-          return { id, difficulty, type: 'scalar', prompt, answer: dist, display: String(dist), points: [{x:x1, y:y1}, {x:0, y:0}] };
+          return { id, difficulty, type: 'scalar', prompt, answer: dist, display: String(dist), points: [{ x: x1, y: y1 }, { x: 0, y: 0 }] };
         }
         else { // distance
           const [dx, dy, dist] = triPick(triples);
@@ -250,7 +241,7 @@ const generators = {
           const sx = triPick([1, -1]); const sy = triPick([1, -1]);
           const x2 = x1 + sx * dx; const y2 = y1 + sy * dy;
           const prompt = `Find the distance between (${x1}, ${y1}) and (${x2}, ${y2})`;
-          return { id, difficulty, type: 'scalar', prompt, answer: dist, display: String(dist), points: [{x:x1, y:y1}, {x:x2, y:y2}] };
+          return { id, difficulty, type: 'scalar', prompt, answer: dist, display: String(dist), points: [{ x: x1, y: y1 }, { x: x2, y: y2 }] };
         }
       }
       else if (difficulty === 'hard') {
@@ -268,7 +259,7 @@ const generators = {
         if (subType === 'gradient') {
           const display = mDen === 1 ? String(mNum) : `${mNum}/${mDen}`;
           const prompt = `Find the gradient (slope) of the line through (${x1}, ${y1}) and (${x2}, ${y2})`;
-          return { id, difficulty, type: 'fraction', prompt, ansNum: mNum, ansDen: mDen, display, points: [{x:x1, y:y1}, {x:x2, y:y2}] };
+          return { id, difficulty, type: 'fraction', prompt, ansNum: mNum, ansDen: mDen, display, points: [{ x: x1, y: y1 }, { x: x2, y: y2 }] };
         }
         else { // equation_line
           const cNum = y1 * mDen - mNum * x1;
@@ -284,7 +275,7 @@ const generators = {
           else if (cN < 0) eqStr += cStr;
 
           const prompt = `Find the equation of the line through (${x1}, ${y1}) and (${x2}, ${y2}). Format: y=mx+c`;
-          return { id, difficulty, type: 'equation', prompt, ansMNum: mNum, ansMDen: mDen, ansCNum: cN, ansCDen: cD, display: eqStr, points: [{x:x1, y:y1}, {x:x2, y:y2}] };
+          return { id, difficulty, type: 'equation', prompt, ansMNum: mNum, ansMDen: mDen, ansCNum: cN, ansCDen: cD, display: eqStr, points: [{ x: x1, y: y1 }, { x: x2, y: y2 }] };
         }
       }
       else {
@@ -295,9 +286,9 @@ const generators = {
           const x1 = triRand(-8, 8); const y1 = triRand(-8, 8);
           const x2 = triRand(-8, 8); const y2 = triRand(-8, 8);
           const x3 = triRand(-8, 8); const y3 = triRand(-8, 8);
-          const area = Math.abs((x1*(y2-y3) + x2*(y3-y1) + x3*(y1-y2)) / 2);
+          const area = Math.abs((x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2);
           const prompt = `Find the area of the triangle with vertices (${x1}, ${y1}), (${x2}, ${y2}), (${x3}, ${y3})`;
-          return { id, difficulty, type: 'scalar', prompt, answer: area, display: String(area), points: [{x:x1, y:y1}, {x:x2, y:y2}, {x:x3, y:y3}] };
+          return { id, difficulty, type: 'scalar', prompt, answer: area, display: String(area), points: [{ x: x1, y: y1 }, { x: x2, y: y2 }, { x: x3, y: y3 }] };
         }
         else { // perp_bisector
           const x1 = triRand(-6, 6); const y1 = triRand(-6, 6);
@@ -312,7 +303,7 @@ const generators = {
           const mDen = Math.abs(perpDen) / g;
           const prompt = `Find the gradient of the perpendicular bisector of (${x1}, ${y1}) and (${x2}, ${y2})`;
           const display = mDen === 1 ? String(mNum) : `${mNum}/${mDen}`;
-          return { id, difficulty, type: 'fraction', prompt, ansNum: mNum, ansDen: mDen, display, points: [{x:x1, y:y1}, {x:x2, y:y2}] };
+          return { id, difficulty, type: 'fraction', prompt, ansNum: mNum, ansDen: mDen, display, points: [{ x: x1, y: y1 }, { x: x2, y: y2 }] };
         }
       }
     },
@@ -351,7 +342,7 @@ const generators = {
           let cStr = eqMatch[2] || "+0";
 
           const parseFrac = (str) => {
-            const parts = str.replace('+','').split('/');
+            const parts = str.replace('+', '').split('/');
             if (parts.length === 1) return { num: parseInt(parts[0]), den: 1 };
             return simplifyFraction(parseInt(parts[0]), parseInt(parts[1]));
           };
@@ -481,7 +472,7 @@ const generators = {
         // 3D Pythagoras: space diagonal of cuboid
         // Use triples that nest: e.g. 3,4,5 then diagonal = √(3²+4²+5²) — not always clean
         // Instead: pick a,b,c so a²+b²+c² is a perfect square
-        const combos = [[1,2,2,3],[2,3,6,7],[2,6,9,11],[1,4,8,9],[4,4,7,9],[2,4,4,6],[3,6,6,9],[6,6,7,11],[1,2,14,15]];
+        const combos = [[1, 2, 2, 3], [2, 3, 6, 7], [2, 6, 9, 11], [1, 4, 8, 9], [4, 4, 7, 9], [2, 4, 4, 6], [3, 6, 6, 9], [6, 6, 7, 11], [1, 2, 14, 15]];
         // Actually simpler: use nested Pythagoras. floor diagonal d = √(a²+b²), then space = √(d²+c²)
         // Pick a triple for floor: (3,4,5), then space with c: (5,12,13) → a=3,b=4,c=12, space=13
         const nested = [
@@ -562,7 +553,7 @@ const generators = {
           prompt = `Volume of cone: radius = ${r}, height = ${h} (2 d.p.)`;
           displayEq = `⅓ × π × ${r}² × ${h} = ${answer}`;
         } else {
-          answer = Math.round(4/3 * Math.PI * r * r * r * 100) / 100;
+          answer = Math.round(4 / 3 * Math.PI * r * r * r * 100) / 100;
           prompt = `Volume of sphere with radius ${r} (2 d.p.)`;
           displayEq = `⁴⁄₃ × π × ${r}³ = ${answer}`;
         }

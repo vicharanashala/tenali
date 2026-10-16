@@ -1,16 +1,9 @@
 'use strict';
 const router = require('express').Router();
 
-function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+const { randomInt, pick, gcd, simplifyFraction } = require('../lib/mathHelpers');
 const randInt = randomInt;
 function rand(lo, hi) { return lo + Math.floor(Math.random() * (hi - lo + 1)); }
-function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
-function gcd(a, b) { a = Math.abs(a); b = Math.abs(b); while (b) { [a, b] = [b, a % b]; } return a; }
-function simplifyFraction(num, den) {
-  if (den < 0) { num = -num; den = -den; }
-  const g = gcd(Math.abs(num), den);
-  return { num: num / g, den: den / g };
-}
 function sup(n) {
   const map = '⁰¹²³⁴⁵⁶⁷⁸⁹';
   const s = String(Math.abs(n));
