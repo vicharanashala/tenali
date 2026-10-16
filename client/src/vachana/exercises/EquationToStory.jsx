@@ -1928,7 +1928,8 @@ export default function EquationToStory() {
   const [mascotAnim, setMascotAnim] = useState(false);
   const [floats, setFloats] = useState([]);
   const [confetti, setConfetti] = useState([]);
-  const timerRef = useState(null);
+  const timerRef = useRef(null);
+  const floatIdSeq = useRef(0);
 
   // Step 2 & Step 3 interaction state
   const dragValRef = useRef(null);
@@ -1956,7 +1957,7 @@ export default function EquationToStory() {
   };
 
   const addFloat = (n) => {
-    const id = Date.now() + Math.random();
+    const id = ++floatIdSeq.current;
     setFloats(f => [...f, { id, n }]);
     setTimeout(() => setFloats(f => f.filter(x => x.id !== id)), 1000);
   };
@@ -1972,7 +1973,7 @@ export default function EquationToStory() {
   };
 
   const startTimer = (overrideModule = activeModule) => {
-    if (timerRef[0]) clearInterval(timerRef[0]);
+    if (timerRef.current) clearInterval(timerRef.current);
     const maxSecs = getTimerMax(overrideModule);
     setTimeLeft(maxSecs);
     const id = setInterval(() => {
@@ -1985,10 +1986,10 @@ export default function EquationToStory() {
         return Math.round((t - 0.1) * 10) / 10;
       });
     }, 100);
-    timerRef[0] = id;
+    timerRef.current = id;
   };
 
-  const stopTimer = () => { if (timerRef[0]) clearInterval(timerRef[0]); };
+  const stopTimer = () => { if (timerRef.current) clearInterval(timerRef.current); };
 
   const resetQuestionState = () => {
     setFilledSlots({});
