@@ -30,8 +30,8 @@ export default function GlobalSearchResults({
       <div className="search-results-container" id={id}>
         {filteredResults.length > 0 && (
           <div className="search-results-summary">
-            Found {filteredResults.length} {filteredResults.length === 1 ? 'puzzle' : 'puzzles'} matching &quot;{search}&quot;
-            {activeSections.length > 0 && ' in selected sections'}
+            Found {filteredResults.length} {filteredResults.length === 1 ? 'puzzle' : 'puzzles'} matching &quot;{search}&quot;!
+            {activeSections.length > 0 && ' (filtered)'}
           </div>
         )}
 
@@ -59,7 +59,7 @@ export default function GlobalSearchResults({
           <div className="search-empty-state">
             <p>
               No puzzles found matching &quot;{search}&quot;
-              {activeSections.length > 0 ? ' in the selected section filter' : ' across any section'}.
+              {activeSections.length > 0 ? ' in the selected section filter' : ' across any section'}!
             </p>
             <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', marginTop: '12px', flexWrap: 'wrap' }}>
               {activeSections.length > 0 && searchCounts.all > 0 && (

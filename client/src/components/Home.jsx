@@ -285,8 +285,8 @@ export default function Home({
         id="tour-search-bar"
         placeholder={
           selectedSection && currentSection
-            ? `Search in ${currentSection.title}…`
-            : 'Search all 90+ puzzles across sections…'
+            ? `Search in ${currentSection.title}!`
+            : 'Search all Puzzles across all Sections!'
         }
         value={search}
         onChange={handleSearchChange}
