@@ -68,7 +68,7 @@ export default function GlobalSearchResults({
                   className="search-clear-action-btn"
                   onClick={() => setActiveSections([])}
                 >
-                  Search in all sections ({searchCounts.all} found)
+                  Search in all sections ({searchCounts.all} found)!
                 </button>
               )}
               <button
