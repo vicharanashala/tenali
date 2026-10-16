@@ -42161,6 +42161,39 @@ function DartBoardApp({ onBack }) {
   );
 }
 
+function createDynamicWeightBank(target) {
+  let denominations = [];
+  if (target >= 500) {
+    denominations = [500, 100, 50, 10, 5, 1];
+  } else if (target >= 100) {
+    denominations = [100, 50, 10, 5, 1];
+  } else if (target >= 15) {
+    denominations = [50, 10, 5, 1];
+  } else {
+    denominations = [5, 1];
+  }
+
+  let bank = [];
+  denominations.forEach(d => {
+    let count = 4;
+    if (d === 100) count = 10;
+    if (d === 50) count = 6;
+    if (d === 10) count = 15;
+    if (d === 5) count = 8;
+    if (d === 1) count = 15;
+
+    const needed = Math.ceil(target / d) + 2;
+    if (needed > count) {
+      count = needed;
+    }
+
+    for (let i = 0; i < count; i++) {
+      bank.push({ id: `bank-${d}-${i}-${Math.random()}`, val: d });
+    }
+  });
+  return bank;
+}
+
 function BalanceScaleApp({ onBack }) {
   const [level, setLevel] = useState(null) // 'easy' | 'medium' | 'hard'
   const [started, setStarted] = useState(false)
@@ -42181,39 +42214,6 @@ function BalanceScaleApp({ onBack }) {
   const advanceFnRef = useRef(null)
   const targetTotal = question ? (Number(question.a) + Number(question.b)) : 0
   const rightTotal = rightBlocks.reduce((acc, b) => acc + b.val, 0)
-
-  const createDynamicWeightBank = (target) => {
-    let denominations = [];
-    if (target >= 500) {
-      denominations = [500, 100, 50, 10, 5, 1];
-    } else if (target >= 100) {
-      denominations = [100, 50, 10, 5, 1];
-    } else if (target >= 15) {
-      denominations = [50, 10, 5, 1];
-    } else {
-      denominations = [5, 1];
-    }
-
-    let bank = [];
-    denominations.forEach(d => {
-      let count = 4;
-      if (d === 100) count = 10;
-      if (d === 50) count = 6;
-      if (d === 10) count = 15;
-      if (d === 5) count = 8;
-      if (d === 1) count = 15;
-
-      const needed = Math.ceil(target / d) + 2;
-      if (needed > count) {
-        count = needed;
-      }
-
-      for (let i = 0; i < count; i++) {
-        bank.push({ id: `bank-${d}-${i}-${Math.random()}`, val: d });
-      }
-    });
-    return bank;
-  };
 
   const fetchQuestion = async (selectedLevel) => {
     setLoading(true)
@@ -52070,7 +52070,7 @@ function GymQuiz({ title, subtitle, typeKeys, welcomeText, algebraInput, onBack 
     }
     const gen = GYM_TYPES[t]?.generator
     setQuestion(gen ? gen(d) : null)
-    timer.start(sessionGoal, handleTimeout, getSpeedRunLimit(difficulty ?? 'easy', isAdaptive ?? false))
+    timer.start()
   }
 
   // Stop button (adaptive mode only): end the session and show the results screen.
@@ -53854,7 +53854,7 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
     setFeedback('')
     setRevealed(false)
     setIsCorrect(null)
-    timer.start(sessionGoal, handleTimeout, getSpeedRunLimit(difficulty ?? 'easy', isAdaptive ?? false))
+    timer.start()
     if (level === 3) startLevel3Countdown()
   }
 
@@ -56903,6 +56903,7 @@ function GymApp({ onBack }) {
   const [loading, setLoading] = useState(false)
   const [loadError, setLoadError] = useState('')
   const timer = useTimer()
+  const finished = phase === 'finished'
   const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('gym', finished, score, totalQ, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
   const sessionGoal = 'standard'
   const isAdaptive = true
@@ -58649,7 +58650,8 @@ function RandomMixApp({ onBack, isGoalMode = false }) {
     }
   }, [isGoalMode]);
   const timer = useTimer()
-  const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('mix', finished, score, totalQ, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
+  const finished = phase === 'finished'
+  const { hintsUsedCount, xpBreakdown, bonusLoading } = useQuizHintsAndXp('mix', finished, score, totalQuestions, typeof isCorrect !== 'undefined' ? (isCorrect || false) : false, results);
   const advanceFnRef = useRef(null)
   const submittedRef = useRef(false)
   const advancedRef = useRef(false)
@@ -62258,37 +62260,20 @@ function TwinHuntApp({ onBack, isGoalMode = false }) {
    */
   
   const handleTimeout = async () => {
-    if (typeof revealed !== 'undefined' && revealed) return
-    if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
-    try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
-    try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
-    try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
+    if (revealed || finished) return
+    setIsCorrect(false)
+    setRevealed(true)
+    setFeedback("⏰ Time's up!")
     const timeTaken = timer.stop ? timer.stop() : 0
-    const qPrompt = question ? (question.prompt || question.question || (question.n1 !== undefined ? `${question.n1} ${question.op || '+'} ${question.n2}` : 'Question')) : 'Question'
-    try {
-      const r = await fetch(`${API}/twinhunt-api/check`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': authGetToken() ? `Bearer ${authGetToken()}` : '' },
-        body: JSON.stringify({ ...(typeof question !== 'undefined' ? question : {}), userAnswer: '', answer: '', sessionGoal })
-      })
-      const d = await r.json()
-      const corrAns = d.display || d.correctAnswer || d.answer || '—'
-      if (typeof setResults === 'function') {
-        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
-      }
-      if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
-      }
-    } catch(e) {
-      console.error('handleTimeout error:', e)
-      if (typeof setResults === 'function') {
-        setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: '—', correct: false, time: timeTaken }])
-      }
+    const qPrompt = `Round ${round}`
+    setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: commonSymbol, correct: false, time: timeTaken }])
+    if (sessionGoal === 'perfect') {
+      setFinished(true)
+      timer.reset()
     }
   }
 
-const generateRound = (n) => {
+  const generateRound = (n) => {
     // Shuffle symbol pool and select 2n-1 unique symbols
     const pool = [...TWIN_SYMBOLS].sort(() => Math.random() - 0.5)
     const common = pool[0]  // Symbol that will appear in both panels
@@ -62316,7 +62301,7 @@ const generateRound = (n) => {
     setFeedback('')
     setIsCorrect(null)
     setRevealed(false)
-    timer.start(sessionGoal, handleTimeout, getSpeedRunLimit(difficulty ?? 'easy', isAdaptive ?? false))
+    timer.start(sessionGoal, handleTimeout, getSpeedRunLimit('easy', false))
   }
 
   /**
@@ -62583,7 +62568,6 @@ function SqrtApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
@@ -62601,7 +62585,7 @@ function SqrtApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true); timer.reset() } catch(_) {}
       }
     } catch(e) {
       console.error('handleTimeout error:', e)
@@ -62917,7 +62901,6 @@ function PolyMulApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
@@ -62935,7 +62918,7 @@ function PolyMulApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true); timer.reset() } catch(_) {}
       }
     } catch(e) {
       console.error('handleTimeout error:', e)
@@ -63250,7 +63233,6 @@ function PolyFactorApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
@@ -63268,7 +63250,7 @@ function PolyFactorApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true); timer.reset() } catch(_) {}
       }
     } catch(e) {
       console.error('handleTimeout error:', e)
@@ -63565,7 +63547,6 @@ function PrimeFactorApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
@@ -63583,7 +63564,7 @@ function PrimeFactorApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true); timer.reset() } catch(_) {}
       }
     } catch(e) {
       console.error('handleTimeout error:', e)
@@ -63924,7 +63905,6 @@ function QFormulaApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
@@ -63942,7 +63922,7 @@ function QFormulaApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true); timer.reset() } catch(_) {}
       }
     } catch(e) {
       console.error('handleTimeout error:', e)
@@ -64260,7 +64240,6 @@ function SimulApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
@@ -64278,7 +64257,7 @@ function SimulApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true); timer.reset() } catch(_) {}
       }
     } catch(e) {
       console.error('handleTimeout error:', e)
@@ -64595,7 +64574,6 @@ function FuncEvalApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
@@ -64613,7 +64591,7 @@ function FuncEvalApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true); timer.reset() } catch(_) {}
       }
     } catch(e) {
       console.error('handleTimeout error:', e)
@@ -64897,7 +64875,6 @@ function LineEqApp({ onBack, isGoalMode = false }) {
   const handleTimeout = async () => {
     if (typeof revealed !== 'undefined' && revealed) return
     if (typeof finished !== 'undefined' && finished) return
-    if (typeof phase !== 'undefined' && phase === 'finished') return
     try { if (typeof setIsCorrect !== 'undefined') setIsCorrect(false) } catch(_) {}
     try { if (typeof setRevealed !== 'undefined') setRevealed(true) } catch(_) {}
     try { if (typeof setFeedback !== 'undefined') setFeedback("⏰ Time's up!") } catch(_) {}
@@ -64915,7 +64892,7 @@ function LineEqApp({ onBack, isGoalMode = false }) {
         setResults(prev => [...prev, { prompt: qPrompt, question: qPrompt, userAnswer: '(timeout)', correctAnswer: corrAns, correct: false, time: timeTaken }])
       }
       if (sessionGoal === 'perfect') {
-        try { if (typeof setFinished === 'function') setFinished(true); if (typeof setPhase === 'function') setPhase('finished'); timer.reset() } catch(_) {}
+        try { if (typeof setFinished === 'function') setFinished(true); timer.reset() } catch(_) {}
       }
     } catch(e) {
       console.error('handleTimeout error:', e)
