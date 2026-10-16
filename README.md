@@ -568,6 +568,16 @@ The Express server serves `client/dist/` statically. See `render.yaml` for the R
 cd client && npm run lint
 ```
 
+### Test
+
+```bash
+cd client && npm test          # frontend unit tests (Vitest + Testing Library, one-shot)
+cd client && npm run test:watch  # watch mode
+cd server && npm test          # server API tests
+```
+
+Frontend test conventions (naming, mocking `fetch`, `localStorage`, what is in scope) are documented in [CONTRIBUTING.md § Frontend Testing](CONTRIBUTING.md#frontend-testing). Tests target extracted modules such as `client/src/features/tiles.js` and `client/src/lib/concept/*` — testing the full `client/src/App.jsx` is out of scope until the component-extraction work progresses.
+
 ---
 
 ## 🧩 Add a New Puzzle
