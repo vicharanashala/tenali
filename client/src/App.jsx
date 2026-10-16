@@ -42572,7 +42572,7 @@ function App() {
       const currentParamView = params.get('view');
       if (mode) {
         if (currentMode !== mode) {
-          window.history.replaceState({}, '', `${BASE}/?mode=${mode}`);
+          window.history.pushState({ mode }, '', `${BASE}/?mode=${mode}`);
         }
       } else {
         if (currentView === 'puzzles') {
@@ -42589,6 +42589,30 @@ function App() {
       console.error('Failed to sync URL mode:', e);
     }
   }, [mode, currentView]);
+
+  // Listen for browser Back/Forward navigation (popstate) to restore mode and view
+  useEffect(() => {
+    const handlePopState = () => {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const urlMode = params.get('mode') || null;
+        const urlView = params.get('view') || (urlMode ? 'puzzles' : 'landing');
+        setMode(urlMode);
+        setCurrentView(urlView === 'puzzles' ? 'puzzles' : 'landing');
+        if (urlMode === 'angles') {
+          setLearningPhase('select');
+        } else {
+          setLearningPhase(null);
+        }
+        setIsGoalMode(urlMode === 'goalpractice');
+      } catch (e) {
+        console.error('Failed to handle popstate:', e);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   const { user } = useAuth()
   const [completedTopics, setCompletedTopics] = useState(() => {
