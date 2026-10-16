@@ -1,10 +1,7 @@
 {
   "src/App.jsx": {
     "no-empty": {
-      "count": 152
-    },
-    "no-restricted-syntax": {
-      "count": 1
+      "count": 151
     },
     "no-undef": {
       "count": 40
@@ -13,7 +10,7 @@
       "count": 5
     },
     "no-unused-vars": {
-      "count": 213
+      "count": 210
     },
     "no-useless-escape": {
       "count": 4
