@@ -1,4 +1,5 @@
 'use strict';
+const { nextFresh } = require('../lib/noRepeat');
 const router = require('express').Router();
 
 function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
@@ -853,7 +854,7 @@ router.get('/question', (req, res) => {
   const topic = req.baseUrl.replace('-api', '').slice(1);
   const gen = generators[topic];
   if (!gen) return res.status(404).json({ error: 'Unknown topic' });
-  res.json(gen.question(req.query.difficulty, req.query));
+  res.json(nextFresh(req, topic, () => gen.question(req.query.difficulty, req.query)));
 });
 
 router.post('/check', require('express').json(), (req, res) => {

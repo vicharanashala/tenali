@@ -136,22 +136,29 @@ function polyfactorFormatBoth(p, q, r, s) {
 
 function polyfactorMCQOptions(p, q, r, s, tier) {
   const correct = polyfactorFormatBoth(p, q, r, s);
-  const seen = new Set([correct]);
+  const correctExp = polyfactorExpand(p, q, r, s);
+  const seenQuadratics = new Set([`${correctExp.a},${correctExp.b},${correctExp.c}`]);
   const distractors = [];
 
-  const candidates = [
+  const candidateTuples = [
     [p, -q, r, s],
     [p, q, r, -s],
     [p, q + 1, r, s],
     [p, q, r, s + 1],
     [p, s, r, q],
     [p, -q, r, -s],
-  ].map(([P, Q, R, S]) => polyfactorFormatBoth(P, Q, R, S));
+    [p, q - 1, r, s],
+    [p, q, r, s - 1],
+    [p, q + 2, r, s],
+    [p, -q - 1, r, s],
+  ];
 
-  for (const c of candidates) {
-    if (!seen.has(c)) {
-      seen.add(c);
-      distractors.push(c);
+  for (const [P, Q, R, S] of candidateTuples) {
+    const exp = polyfactorExpand(P, Q, R, S);
+    const key = `${exp.a},${exp.b},${exp.c}`;
+    if (!seenQuadratics.has(key)) {
+      seenQuadratics.add(key);
+      distractors.push(polyfactorFormatBoth(P, Q, R, S));
       if (distractors.length === 3) break;
     }
   }
@@ -542,13 +549,17 @@ const generators = {
       if (is2x2) {
         const x = randomInt(-range.max, range.max);
         const y = randomInt(-range.max, range.max);
-        let a1 = randomInt(1, range.max), b1 = randomInt(1, range.max);
-        let a2 = randomInt(1, range.max), b2 = randomInt(1, range.max);
-        while (a1 * b2 === a2 * b1) { a2 = randomInt(1, range.max); b2 = randomInt(1, range.max); }
-        if (Math.random() < 0.3) a1 = -a1;
-        if (Math.random() < 0.3) b1 = -b1;
-        if (Math.random() < 0.3) a2 = -a2;
-        if (Math.random() < 0.3) b2 = -b2;
+        let a1, b1, a2, b2;
+        do {
+          a1 = randomInt(1, range.max);
+          b1 = randomInt(1, range.max);
+          a2 = randomInt(1, range.max);
+          b2 = randomInt(1, range.max);
+          if (Math.random() < 0.3) a1 = -a1;
+          if (Math.random() < 0.3) b1 = -b1;
+          if (Math.random() < 0.3) a2 = -a2;
+          if (Math.random() < 0.3) b2 = -b2;
+        } while (a1 * b2 === a2 * b1);
         const eqs = [
           { a: a1, b: b1, d: a1 * x + b1 * y },
           { a: a2, b: b2, d: a2 * x + b2 * y },

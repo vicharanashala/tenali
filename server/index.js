@@ -2335,7 +2335,8 @@ function generateBattleQ_basicarith() {
 }
 function generateBattleQ_hcflcm() {
   const type = pick(['hcf', 'lcm']);
-  const a = randomInt(2, 50), b = randomInt(2, 50);
+  const a = randomInt(2, 50); let b = randomInt(2, 50);
+  while (b === a) { b = randomInt(2, 50); }
   const g = gcd(a, b);
   return { prompt: type === 'hcf' ? `HCF of ${a} and ${b}` : `LCM of ${a} and ${b}`,
     answer: type === 'hcf' ? g : (a * b) / g, type: 'number' };
