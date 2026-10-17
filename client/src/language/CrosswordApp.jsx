@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import { useTimer } from '../hooks/useTimer';
-import { QuizLayout } from '../components/QuizLayout';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import QuizLayout from '../components/QuizLayout.jsx';
+import { useTimer } from '../hooks';
 import './CrosswordApp.css';
 
 // ─────────────────────────────────────────────────────────────

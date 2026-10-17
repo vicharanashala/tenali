@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useTimer } from '../hooks/useTimer';
-import { QuizLayout } from '../components/QuizLayout';
+import { useEffect, useState } from 'react';
+import QuizLayout from '../components/QuizLayout.jsx';
+import { useTimer } from '../hooks';
 // eslint-disable-next-line no-unused-vars -- motion is used as <motion.div> in JSX
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import './WordSearchApp.css';
 
 // Words based on user requirements
