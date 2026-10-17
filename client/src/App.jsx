@@ -45,30 +45,17 @@ import QuizLayout from './components/QuizLayout.jsx';
 import SuperTables from './components/concept/SuperTables.jsx';
 import SuperTables1 from './components/concept/SuperTables1.jsx';
 
-import { useAutoAdvance, useProgressSubmit as useProgressSubmitApi, useTimer } from "./hooks";
 import PathMap, {
-  PmQuestBanner,
-  PmSuggestIcon,
   PmGoalModal,
+  PmHamburgerItem,
   PmHomeSection,
-  PmHamburgerItem
+  PmQuestBanner,
+  PmSuggestIcon
 } from './PathMap';
-import { pmTrackAnswer } from './pathMapHelpers';
+import { useAutoAdvance, useProgressSubmit, useTimer } from "./hooks";
 
 window.React = React;
 console.log("React version:", React.version);
-
-
-/**
- * useProgressSubmit Hook
- * Submits the result of a quiz question to the backend to track mastery and ensure unique questions.
- */
-function useProgressSubmit(revealed, isCorrect, topic, questionId) {
-  useProgressSubmitApi(revealed, isCorrect, topic, questionId);
-  useEffect(() => {
-    if (revealed) pmTrackAnswer(topic, 'medium', isCorrect);
-  }, [revealed, isCorrect, topic]);
-}
 
 
 import 'chart.js/auto';
@@ -66911,3 +66898,4 @@ export function changeXp(delta) {
 
 export default App
 export { AuthMenu };
+
