@@ -45980,22 +45980,36 @@ function Home({ onSelect, onBackToLanding, completedTopics = [], goldMastery = [
       </div>
       {!search && !isGoalSelection && <PmHomeSection onSelect={onSelect} onOpenGoalPicker={() => setPmOpen(true)} />}
       <div id="tour-home-grid" className="menu-grid" ref={gridRef}>
-        {filteredRegular.map((app) => {
-          const isGold = goldMastery && goldMastery.includes(app.key)
-          const isCompleted = isStage3Completed(app.key, completedTopics)
-          return (
-            <button key={app.key} className={`menu-card ${isGold ? 'gold-card' : app.color}`} onClick={() => { if (app.isRedirect) { window.location.href = app.path; } else { onSelect(app.key); } }}>
-              <span className="menu-title">
-                {app.name}
-                {isGold && <span className="badge-indicator">🥇</span>}
-                {!isGold && isCompleted && <span className="badge-indicator">✅</span>}
-              </span>
-              <span className="menu-subtitle">{app.subtitle}</span>
-            </button>
-          )
-        })}
+        {isSearching && filteredRegular.length === 0 && filteredHamburgerApps.length === 0 ? (
+          <div
+            className="empty-section-card"
+            style={{
+              gridColumn: '1 / -1',
+              width: '100%',
+              textAlign: 'center',
+              padding: '32px'
+            }}
+          >
+            🔍 No puzzles found for "{search.trim()}". Try a different search term.
+          </div>
+        ) : (
+          filteredRegular.map((app) => {
+            const isGold = goldMastery && goldMastery.includes(app.key)
+            const isCompleted = isStage3Completed(app.key, completedTopics)
+            return (
+              <button key={app.key} className={`menu-card ${isGold ? 'gold-card' : app.color}`} onClick={() => { if (app.isRedirect) { window.location.href = app.path; } else { onSelect(app.key); } }}>
+                <span className="menu-title">
+                  {app.name}
+                  {isGold && <span className="badge-indicator">🥇</span>}
+                  {!isGold && isCompleted && <span className="badge-indicator">✅</span>}
+                </span>
+                <span className="menu-subtitle">{app.subtitle}</span>
+              </button>
+            )
+          })
+        )}
       </div>
-      <div className="grid-dimension">{rows} × {cols}</div>
+      {filteredRegular.length > 0 && <div className="grid-dimension">{rows} × {cols}</div>}
       <PmGoalModal open={pmOpen} onClose={() => setPmOpen(false)} onSelect={onSelect} />
     </>
   )
