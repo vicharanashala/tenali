@@ -23,107 +23,88 @@
 
 
 
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import LinearAlgebraApp from './LinearAlgebraApp';
+import ConceptualVisualDiagram from './components/ConceptualVisualDiagram';
+import DailyWarmupCard from './components/DailyWarmupCard';
 import { HintModal } from './components/HintSystem/HintModal.jsx';
 import { useQuizHintsAndXp } from './components/HintSystem/useHints.jsx';
-import React, { useEffect, useState, useRef, useMemo, useCallback } from 'react';
-import ConceptualVisualDiagram from './components/ConceptualVisualDiagram';
-import VoiceAssistant from './components/VoiceAssistant';
+import LandingNavbar from './components/LandingPage/LandingNavbar.jsx';
+import LandingPage from './components/LandingPage/LandingPage.jsx';
+import MathLabHub from './components/MathLabHub';
 import OnboardingTour from './components/OnboardingTour';
-import SpatialReasoningMCQ from './SpatialReasoningMCQ';
-import ScribbleGuessApp from './ScribbleGuessApp';
-import ShapeSlicer3D from './ShapeSlicer3D';
-import ShapeTranslatorApp from './ShapeTranslatorApp';
-import NetBuilderApp from './NetBuilderApp';
-import CrossSectionApp from './CrossSectionApp';
-import DailyWarmupCard from './components/DailyWarmupCard';
+import { FEATURED_TILES, GEOCRAFT_ENTRY, MATH_LAB_ENTRY, TILES } from './features/tiles';
+
+import BadgeIcon from './components/BadgeIcon';
+import DifficultySlider from './components/DifficultySlider.jsx';
+import Feedback from './components/Feedback.jsx';
+import GoalSuccessScorecard from './components/GoalSuccessScorecard.jsx';
+import NumPad from './components/NumPad.jsx';
+import ProfileShowcase from './components/ProfileShowcase.jsx';
+import QuizLayout from './components/QuizLayout.jsx';
+import SuperTables from './components/concept/SuperTables.jsx';
+import SuperTables1 from './components/concept/SuperTables1.jsx';
+
+import PathMap, {
+  PmGoalModal,
+  PmHamburgerItem,
+  PmHomeSection,
+  PmQuestBanner,
+  PmSuggestIcon
+} from './PathMap';
+import { useAutoAdvance, useProgressSubmit, useTimer } from "./hooks";
 
 window.React = React;
 console.log("React version:", React.version);
-import LinearAlgebraApp from './LinearAlgebraApp'
-import PathMap, {
-  PmQuestBanner,
-  PmSuggestIcon,
-  PmGoalModal,
-  PmHomeSection,
-  PmHamburgerItem
-} from './PathMap';
-import { pmTrackAnswer } from './pathMapHelpers';
-import { TILES, FEATURED_TILES, MATH_LAB_ENTRY, GEOCRAFT_ENTRY } from './features/tiles'
-import LandingPage from './components/LandingPage/LandingPage.jsx'
-import LandingNavbar from './components/LandingPage/LandingNavbar.jsx'
 
 
-/**
- * useProgressSubmit Hook
- * Submits the result of a quiz question to the backend to track mastery and ensure unique questions.
- */
-function useProgressSubmit(revealed, isCorrect, topic, questionId) {
-  useEffect(() => {
-    if (!revealed) return;
-    try { pmTrackAnswer(topic, 'medium', isCorrect); } catch {}
-    const token = localStorage.getItem('tenali-auth-token');
-    if (!token || !topic) return;
+import 'chart.js/auto';
+import { Line } from 'react-chartjs-2';
+import ReflectionJournal from './ReflectionJournal'; // Feature CT — platform-wide reflection journal
+import Vachana from './vachana';
 
-    const API = import.meta.env.VITE_API_BASE_URL || '';
-    fetch(`${API}/api/progress/update`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify({
-        topic,
-        isCorrect,
-        questionId
-      })
-    }).catch(err => console.error('Failed to update progress', err));
-  }, [revealed, isCorrect, topic, questionId]);
-}
-
-
-import Vachana from './vachana'
-import ReflectionJournal from './ReflectionJournal'  // Feature CT — platform-wide reflection journal
-import 'chart.js/auto'
-import { Line } from 'react-chartjs-2'
-
-import './App.css'
-import TreasureHuntApp from './treasurehunt/TreasureHuntApp.jsx'
-import EnhancedMathDetectiveApp from './detective-app'
-import GlossaryText from './components/GlossaryText'
-import LearningVisual from './components/LearningVisual'
-import KeyTerms from './components/KeyTerms'
-import InteractiveLcmHcfApp from './LcmHcfApp';
-import IdliVadaSambharApp from './IdliVadaSambharApp';
+import './App.css';
+import BattleApp from './BattleApp';
 import CarJourneyApp from './CarJourneyApp';
-import RealWorldHubApp from './RealWorldHub';
-import { cjTakeReco } from './cjReco'; // Feature CR — Road License difficulty hand-off
-const CJ_RECO_DIFFS = ['easy', 'medium', 'hard', 'extrahard'];
-import VisualMathLabRedux, {
-  FrogJumpTemplate,
-  MathMachineTemplate,
-  PlantArrayTemplate,
-  CandySharingTemplate,
-  EqualGroupsTemplate,
-  PictureMultiTemplate,
-  AnswerInput,
-} from './VisualMathLabRedux';
-import CoordinateGrid from './components/CoordinateGrid';
-import LanguageDashboard from './language/LanguageDashboard'
-import ContrastChallengeApp, { QuizLayoutExtension } from './ContrastChallengeApp'
-import { VOCAB_CORPUS } from './vocabCorpus'
-import PercentExplanationApp from './PercentExplanationApp'
-import { playSound } from './audioContext'
-import { installMonstersInterceptor } from './monsters/fetchInterceptor.js';
-import MonsterToast from './monsters/MonsterToast.jsx';
-import HallPanel from './monsters/HallPanel.jsx';
-import CureFlow from './monsters/CureFlow.jsx';
-import GuidedSolver from './monsters/GuidedSolver.jsx';
-import { load as loadMonsterLog, getMonsterHealedState } from './monsters/monsterStore.js';
-import MonsterAvatar from './monsters/MonsterAvatar.jsx';
+import ContrastChallengeApp from './ContrastChallengeApp';
+import CuriosityApp from './Curiosity.jsx';
+import EquationCraftingLab from './EquationCraftingLab';
 import GeometryApp from './GeometryApp';
-import EquationSandboxApp from './lib/EquationSandboxApp.jsx';
+import IdliVadaSambharApp from './IdliVadaSambharApp';
+import InteractiveLcmHcfApp from './LcmHcfApp';
+import LocalCompilerApp from './LocalCompilerApp';
+import PercentExplanationApp from './PercentExplanationApp';
+import PlaygroundApp from './PlaygroundApp';
+import RealWorldHubApp from './RealWorldHub';
+import SudokuApp from './SudokuApp';
+import VisualMathLabRedux from './VisualMathLabRedux';
+import WaterJugLab from './WaterJugLab';
+import { playSound } from './audioContext';
+import { cjTakeReco } from './cjReco'; // Feature CR — Road License difficulty hand-off
+import CoordinateGrid from './components/CoordinateGrid';
+import GlossaryText from './components/GlossaryText';
+import KeyTerms from './components/KeyTerms';
+import LearningVisual from './components/LearningVisual';
+import AnglesLearnPage from './components/learning/AnglesLearnPage';
+import FractionsLearnPage from './components/learning/FractionsLearnPage';
+import GSTLearnPage from './components/learning/GSTLearnPage';
+import { getLearnContent } from './data/learnContent.js';
+import EnhancedMathDetectiveApp from './detective-app';
+import LanguageDashboard from './language/LanguageDashboard';
 import QFormulaConceptApp from './lib/concept/QFormulaConceptApp.jsx';
+import { useI18n } from './lib/i18n.jsx';
 import SimulConceptApp from './lib/simul-concept/SimulConceptApp.jsx';
+import CureFlow from './monsters/CureFlow.jsx';
+import HallPanel from './monsters/HallPanel.jsx';
+import MonsterAvatar from './monsters/MonsterAvatar.jsx';
+import MonsterToast from './monsters/MonsterToast.jsx';
+import { installMonstersInterceptor } from './monsters/fetchInterceptor.js';
+import { getMonsterHealedState, load as loadMonsterLog } from './monsters/monsterStore.js';
+import ProctorDashboard from './proctor/ProctorDashboard';
+import ProctorPanel from './proctor/ProctorPanel';
+import ProctoredQuiz from './proctor/ProctoredQuiz';
+import TreasureHuntApp from './treasurehunt/TreasureHuntApp.jsx';
+const CJ_RECO_DIFFS = ['easy', 'medium', 'hard', 'extrahard'];
 
 // Concept Playgrounds entry points.
 //
@@ -146,23 +127,6 @@ function SimulConceptMode({ onBack }) {
     </AuthGate>
   );
 }
-import DiagnosticQuiz from './lib/DiagnosticQuiz.jsx';
-import { useI18n } from './lib/i18n.jsx';
-import CuriosityApp from './Curiosity.jsx';
-import ProctoredQuiz from './proctor/ProctoredQuiz'
-import useProctor from './proctor/useProctor'
-import ProctorDashboard from './proctor/ProctorDashboard'
-import ProctorPanel from './proctor/ProctorPanel'
-import PlaygroundApp from './PlaygroundApp'
-import LocalCompilerApp from './LocalCompilerApp'
-import BattleApp from './BattleApp'
-import SudokuApp from './SudokuApp'
-import WaterJugLab from './WaterJugLab'
-import EquationCraftingLab from './EquationCraftingLab'
-import { getLearnContent } from './data/learnContent.js'
-import AnglesLearnPage from './components/learning/AnglesLearnPage'
-import GSTLearnPage from './components/learning/GSTLearnPage'
-import FractionsLearnPage from './components/learning/FractionsLearnPage'
 
 // API base URL from environment variables (Vite)
 export const API = import.meta.env.VITE_API_BASE_URL || '';
@@ -514,24 +478,8 @@ const DEFAULT_TOTAL = 20
 // Delay before auto-advancing to the next question after a correct answer.
 // Bumped from 1500 → 3500 ms so users actually have time to read the feedback
 // (they can still press Enter or click "Next Question" to skip ahead immediately).
-const AUTO_ADVANCE_MS = 3500
 
-/**
- * useAutoAdvance Hook
- * Auto-advances to the next question after correct answer is revealed.
- * Only triggers if revealed=true AND isCorrect=true.
- * Calls advanceFnRef.current() after AUTO_ADVANCE_MS delay.
- *
- * @param {boolean} revealed - Whether the answer feedback is shown
- * @param {React.MutableRefObject<Function>} advanceFnRef - Ref to the advance function
- * @param {boolean} isCorrect - Whether the user's answer was correct
- */
-function useAutoAdvance(revealed, advanceFnRef, isCorrect) {
-  useEffect(() => {
-    // Disabled auto-advance so user has to click "Next Question" manually.
-    return;
-  }, [revealed, isCorrect])
-}
+
 
 /**
  * Speed-run time limits per difficulty level (seconds).
@@ -541,97 +489,6 @@ function getSpeedRunLimit(difficulty, isAdaptive) {
   if (isAdaptive) return 10
   const limits = { easy: 5, medium: 10, hard: 15, extrahard: 20 }
   return limits[difficulty] ?? 10
-}
-
-/**
- * useTimer Hook
- * Supports three modes driven by the sessionGoal:
- *   'speed'    — countdown from limitSeconds → 0; fires onTimeout when it hits 0
- *   'perfect'  — hidden (elapsed kept internally but not shown by QuizLayout)
- *   other      — count-up stopwatch (original behaviour)
- *
- * start(goal?, onTimeout?, limitSeconds?)
- *   goal        — 'speed' | 'perfect' | 'standard' | 'revision'
- *   onTimeout   — async function called when countdown reaches 0 (speed only)
- *   limitSeconds — total seconds for countdown (speed only)
- *
- * @returns {{ elapsed, remaining, mode, start, stop, reset }}
- *   elapsed   — seconds since start (count-up value; also used for timeTaken)
- *   remaining — seconds left (countdown; only meaningful in speed mode)
- *   mode      — current goal mode string
- *   start / stop / reset — control methods
- */
-export function useTimer() {
-  // Current elapsed time in seconds, displayed to user
-  const [elapsed, setElapsed]     = useState(0)
-  // Remaining time in seconds (for speed mode countdown)
-  const [remaining, setRemaining] = useState(0)
-  // Goal mode ('standard' | 'speed' | 'perfect' | 'revision')
-  const [mode, setMode]           = useState('standard')
-  // Reference to the timestamp when timer started (using Date.now())
-  const startRef    = useRef(typeof window !== 'undefined' ? Date.now() : 0)
-  
-  // Helper to extract current timestamp
-  const getTimestamp = () => Date.now()
-  const intervalRef = useRef(null)
-  const limitRef    = useRef(0)
-  const onTORef     = useRef(null) // timeout callback ref (avoids stale closure)
-  const firedRef    = useRef(false) // prevent double-fire
-
-  /**
-   * start(goal, onTimeout, limitSeconds)
-   * Backward-compatible: calling with no args or a number (initialValue) still starts a count-up timer.
-   */
-  const start = (goal = 'standard', onTimeout = null, limitSeconds = 15) => {
-    clearInterval(intervalRef.current)
-    let initialValue = 0
-    let currentGoal = goal
-    
-    // If the first argument is a number, we treat it as initialValue (backward compatibility for count-up timer)
-    if (typeof goal === 'number') {
-      initialValue = goal
-      currentGoal = 'standard'
-    }
-    
-    startRef.current = Date.now() - (initialValue * 1000)
-    limitRef.current = limitSeconds
-    onTORef.current  = onTimeout
-    firedRef.current = false
-    setMode(currentGoal)
-    setElapsed(initialValue)
-    setRemaining(currentGoal === 'speed' ? limitSeconds : 0)
-
-    intervalRef.current = setInterval(() => {
-      const secs = Math.floor((Date.now() - startRef.current) / 1000)
-      setElapsed(secs)
-      if (currentGoal === 'speed') {
-        const left = Math.max(0, limitRef.current - secs)
-        setRemaining(left)
-        if (left === 0 && !firedRef.current) {
-          firedRef.current = true
-          clearInterval(intervalRef.current)
-          if (typeof onTORef.current === 'function') onTORef.current()
-        }
-      }
-    }, 250)
-  }
-
-  const stop = () => {
-    clearInterval(intervalRef.current)
-    firedRef.current = true // prevent timeout after manual stop
-    return Math.floor((Date.now() - startRef.current) / 1000)
-  }
-
-  const reset = () => {
-    clearInterval(intervalRef.current)
-    firedRef.current = true
-    setElapsed(0)
-    setRemaining(0)
-  }
-
-  useEffect(() => () => clearInterval(intervalRef.current), [])
-
-  return { elapsed, remaining, mode, start, stop, reset }
 }
 
 /**
@@ -845,205 +702,6 @@ function Confetti() {
   );
 }
 
-// Success Scorecard Component
-function GoalSuccessScorecard({ score, totalQ, sessionGoal, resultsTable, buttons }) {
-  const goalDetails = {
-    speed: {
-      title: 'Speed Run Achieved!',
-      badge: '⚡ Speed Run',
-      color: 'var(--clr-accent)',
-      bgGlow: 'rgba(232, 134, 74, 0.15)',
-      bgLight: 'rgba(232, 134, 74, 0.08)',
-    },
-    perfect: {
-      title: 'Perfect Solve Achieved!',
-      badge: '🎯 Perfect Solve',
-      color: '#ffb300',
-      bgGlow: 'rgba(255, 179, 0, 0.15)',
-      bgLight: 'rgba(255, 179, 0, 0.08)',
-    },
-    revision: {
-      title: 'Revision Achieved!',
-      badge: '🔄 Revision',
-      color: '#d27c3c',
-      bgGlow: 'rgba(210, 124, 60, 0.15)',
-      bgLight: 'rgba(210, 124, 60, 0.08)',
-    }
-  }[sessionGoal] || {
-    title: 'Goal Achieved!',
-    badge: '🏆 Goal Completed',
-    color: 'var(--clr-accent)',
-    bgGlow: 'rgba(232, 134, 74, 0.15)',
-    bgLight: 'rgba(232, 134, 74, 0.08)',
-  };
-
-  const encouragingTexts = {
-    speed: [
-      "You have shown extreme talent by choosing this and mastering the speed!",
-      "Lightning fast! Your rapid calculations are absolutely elite.",
-      "Blazing reflexes! You've shown incredible mental agility under pressure.",
-      "Speed demon! You cruised through this challenge with extreme talent!"
-    ],
-    perfect: [
-      "Absolute perfection! You have shown extreme talent by choosing this and getting everything right.",
-      "A flawless performance! Your precision and focus are second to none.",
-      "Mastery unlocked! Not a single mistake was made. Exceptional talent!",
-      "Perfect score! You've demonstrated extreme talent and absolute mastery here."
-    ],
-    revision: [
-      "Outstanding dedication! You have shown extreme talent by choosing to revise and reinforce your skills.",
-      "Skill solidified! Dedicated revision is the hallmark of extreme talent.",
-      "Consistency is key! You've shown extreme talent by choosing to review your knowledge.",
-      "True learning mastery! Re-evaluating and refining your skills shows extreme talent."
-    ]
-  }[sessionGoal] || [
-    "Fantastic work! You have shown extreme talent by choosing this practice goal."
-  ];
-
-  const [encourageText, setEncourageText] = useState('');
-  useEffect(() => {
-    const textList = encouragingTexts;
-    const randomText = textList[Math.floor(Math.random() * textList.length)];
-    setEncourageText(randomText);
-  }, [sessionGoal]);
-
-  return (
-    <div className="goal-success-card" style={{ border: `2px solid ${goalDetails.bgGlow}`, boxShadow: `0 8px 32px ${goalDetails.bgGlow}, var(--shadow-card)` }}>
-      <Confetti />
-      
-      <div className="success-checkmark-container">
-        <svg className="success-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52" style={{
-          width: '80px',
-          height: '80px',
-          borderRadius: '50%',
-          display: 'block',
-          strokeWidth: '4',
-          stroke: goalDetails.color,
-          strokeMiterlimit: '10',
-          background: goalDetails.bgLight,
-          animation: `checkmarkFill .4s ease-in-out .4s forwards, checkmarkScale .3s ease-in-out .9s both`,
-        }}>
-          <circle className="success-checkmark-circle" cx="26" cy="26" r="25" fill="none" style={{
-            strokeDasharray: '166',
-            strokeDashoffset: '166',
-            strokeWidth: '4',
-            strokeMiterlimit: '10',
-            stroke: goalDetails.color,
-            animation: 'checkmarkStroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards'
-          }} />
-          <path className="success-checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" style={{
-            transformOrigin: '50% 50%',
-            strokeDasharray: '48',
-            strokeDashoffset: '48',
-            animation: 'checkmarkStroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards'
-          }} />
-        </svg>
-      </div>
-
-      <div style={{
-        display: 'inline-block',
-        padding: '4px 14px',
-        borderRadius: '20px',
-        fontSize: '0.85rem',
-        fontWeight: 'bold',
-        textTransform: 'uppercase',
-        letterSpacing: '1px',
-        color: '#fff',
-        backgroundColor: goalDetails.color,
-        marginBottom: '1rem',
-        boxShadow: `0 4px 12px ${goalDetails.bgGlow}`,
-      }}>
-        {goalDetails.badge}
-      </div>
-
-      <h2 style={{
-        fontSize: '2.2rem',
-        fontWeight: '800',
-        marginBottom: '0.5rem',
-        color: goalDetails.color,
-        fontFamily: 'var(--font-display, Georgia, serif)',
-      }}>
-        {goalDetails.title}
-      </h2>
-
-      <p style={{
-        fontSize: '1.05rem',
-        fontStyle: 'italic',
-        fontWeight: '500',
-        color: 'var(--clr-text-soft)',
-        margin: '1.2rem auto',
-        lineHeight: '1.6',
-        maxWidth: '460px',
-        padding: '0.8rem 1.2rem',
-        borderRadius: '12px',
-        background: 'var(--clr-hover)',
-        borderLeft: `4px solid ${goalDetails.color}`,
-        textAlign: 'center'
-      }}>
-        "{encourageText}"
-      </p>
-
-      <div style={{
-        margin: '2rem 0',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
-        <div style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'var(--clr-text-soft)', opacity: 0.7, marginBottom: '0.5rem' }}>
-          Final Score
-        </div>
-        <div style={{
-          fontSize: '3.5rem',
-          fontWeight: '900',
-          color: 'var(--clr-text)',
-          fontFamily: 'var(--font-display, Georgia, serif)',
-          display: 'flex',
-          alignItems: 'baseline',
-          justifyContent: 'center',
-          gap: '4px'
-        }}>
-          <span style={{ color: goalDetails.color }}>{score}</span>
-          <span style={{ fontSize: '1.8rem', color: 'var(--clr-text-soft)', opacity: 0.5, fontWeight: '400' }}>/</span>
-          <span style={{ fontSize: '1.8rem', color: 'var(--clr-text-soft)', opacity: 0.5, fontWeight: '400' }}>{totalQ}</span>
-        </div>
-      </div>
-
-      {resultsTable && (
-        <div style={{ textAlign: 'left', marginTop: '2rem', maxHeight: '300px', overflowY: 'auto', borderRadius: '12px', border: '1px solid var(--clr-border)' }}>
-          {resultsTable}
-        </div>
-      )}
-
-      <div style={{
-        display: 'flex',
-        gap: '12px',
-        justifyContent: 'center',
-        marginTop: '2.5rem',
-        flexWrap: 'wrap'
-      }}>
-        {buttons && buttons.map((btn, idx) => {
-          return React.cloneElement(btn, {
-            key: idx,
-            style: {
-              ...(btn.props.style || {}),
-              padding: '12px 24px',
-              fontSize: '0.95rem',
-              fontWeight: '600',
-              borderRadius: '30px',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease',
-              border: btn.props.style?.border || 'none',
-              background: btn.props.style?.background || `linear-gradient(135deg, ${goalDetails.color} 0%, rgba(141,110,99,0.3) 100%)`,
-              color: btn.props.style?.color || '#fff',
-              boxShadow: `0 4px 12px ${goalDetails.bgGlow}`,
-            }
-          });
-        })}
-      </div>
-    </div>
-  );
-}
 
 const enhanceFinishedScreen = (node, sessionGoal) => {
   if (!node) return node;
@@ -1093,658 +751,6 @@ const enhanceFinishedScreen = (node, sessionGoal) => {
 
   return node;
 };
-
-/**
-
-/**
- * NumPad Component
- * Virtual numeric keypad for touch-friendly numeric input (0-9, ±, backspace).
- * Used in addition, quadratic, multiplication, and other numeric quizzes.
- *
- * @param {Object} props
- * @param {string} props.value - Current input value
- * @param {Function} props.onChange - Callback when user presses a key: receives new value string
- * @param {Function} props.onSubmit - (Optional) Callback when user presses submit key
- * @param {boolean} props.disabled - If true, all buttons are disabled
- */
-
-/**
- * renderFeedback — Renders feedback text. For solve feedback, renders a
- * structured card with highlighted answer and formatted explanation.
- * For normal correct/wrong feedback, renders inline text.
- */
-function renderFeedback(feedback, isCorrect) {
-  if (!feedback) return null
-  const isSolve = isCorrect === false && feedback.startsWith('Solution:')
-  if (!isSolve) {
-    return (
-      <div className={`feedback ${isCorrect ? 'correct' : 'wrong'}`} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-        <span>{feedback}</span>
-      </div>
-    )
-  }
-  // Parse solve feedback: "Solution: ANSWER\nExplanation..."
-  const lines = feedback.split('\n')
-  const answerLine = lines[0].replace('Solution: ', '').trim()
-  const rawExplanation = lines.slice(1).filter(l => l.trim()).map(l => l.trim())
-
-  // Group lines into steps: lines starting with a keyword or number are step headers
-  const steps = []
-  for (const line of rawExplanation) {
-    // Detect step boundaries: numbered lines, "Step N:", "Answer:", "So,", "Therefore", etc.
-    const isStepStart = /^(\d+[\.\):]|Step\s|Answer:|So[, ]|Therefore|Result:|Formula:|First|Next|Then|Finally|Multiply|Divide|Add|Subtract|Convert|Simplify|Calculate|Apply|Using|Problem:)/i.test(line)
-    if (isStepStart || steps.length === 0) {
-      steps.push(line)
-    } else {
-      // Append to previous step
-      steps[steps.length - 1] += '\n' + line
-    }
-  }
-
-  return (
-    <div className="feedback solve">
-      <div className="solve-answer-badge" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-        <span>{answerLine}</span>
-      </div>
-      {steps.length > 0 && (
-        <div className="solve-timeline">
-          {steps.map((step, i) => (
-            <div key={i} className="solve-step">
-              <div className="solve-step-marker">
-                <div className="solve-step-dot" />
-                {i < steps.length - 1 && <div className="solve-step-line" />}
-              </div>
-              <div className="solve-step-content" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px', width: '100%' }}>
-                <span>{step}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  )
-}
-
-/**
- * DifficultySlider — Interactive difficulty bar with draggable seeker.
- * Props:
- *   pct        — current position 0-100
- *   onChange   — (newPct: number) => void  called on drag/click with 0-100
- *   maxWidth   — optional, default 260
- */
-function DifficultySlider({ pct, onChange, maxWidth = 260 }) {
-  const barRef = useRef(null)
-  const pctToPos = (p) => Math.min(100, Math.max(0, p))
-  const handleInteraction = (clientX) => {
-    const bar = barRef.current
-    if (!bar) return
-    const rect = bar.getBoundingClientRect()
-    const newPct = Math.min(100, Math.max(0, ((clientX - rect.left) / rect.width) * 100))
-    onChange(newPct)
-  }
-  const onPointerDown = (e) => {
-    e.preventDefault()
-    handleInteraction(e.clientX)
-    const onMove = (ev) => handleInteraction(ev.clientX)
-    const onUp = () => { window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerup', onUp) }
-    window.addEventListener('pointermove', onMove)
-    window.addEventListener('pointerup', onUp)
-  }
-  return (
-    <div ref={barRef} onPointerDown={onPointerDown} style={{ maxWidth, margin: '0.3rem auto 0.6rem', height: 20, borderRadius: 10, background: 'var(--color-border, #e0e0e0)', position: 'relative', cursor: 'pointer', touchAction: 'none' }}>
-      <div style={{ position: 'absolute', top: 7, left: 0, right: 0, height: 6, borderRadius: 3, background: 'linear-gradient(90deg, #4caf50, #ff9800, #f44336, #9c27b0)' }} />
-      <div style={{
-        position: 'absolute', top: 1, left: `calc(${pctToPos(pct)}% - 9px)`,
-        width: 18, height: 18, borderRadius: '50%',
-        background: '#fff', border: '2.5px solid var(--clr-accent, #e8864a)',
-        boxShadow: '0 1px 4px rgba(0,0,0,0.25)',
-        transition: 'left 0.3s ease',
-        pointerEvents: 'none'
-      }} />
-    </div>
-  )
-}
-
-function NumPad({ value, onChange, onSubmit, disabled, showDecimal, showSlash, showCaret, showX }) {
-  /**
-   * press(key): Handle numpad key press
-   * - '0'-'9': append to value
-   * - '±': toggle negative sign (add or remove from start)
-   * - '.': append decimal point (only if not already present)
-   * - '/': append slash for fractions (only if not already present)
-   * - '^': append caret for exponents (only if not already present)
-   * - 'x': append variable x
-   * - '⌫': delete last character (backspace)
-   */
-  const press = (key) => {
-    if (disabled) return
-    if (key === '⌫') {
-      onChange(value.slice(0, -1))
-    } else if (key === '±') {
-      onChange(value.startsWith('-') ? value.slice(1) : '-' + value)
-    } else if (key === '.') {
-      if (!value.includes('.')) onChange(value + '.')
-    } else if (key === '/') {
-      if (!value.includes('/')) onChange(value + '/')
-    } else if (key === '^') {
-      onChange(value + '^')
-    } else if (key === 'x') {
-      onChange(value + 'x')
-    } else {
-      onChange(value + key)
-    }
-  }
-
-  return (
-    <div className="numpad">
-      <div className="numpad-row">
-        {['1', '2', '3'].map((k) => (
-          <button key={k} type="button" className="numpad-key" onClick={() => press(k)} disabled={disabled}>{k}</button>
-        ))}
-      </div>
-      <div className="numpad-row">
-        {['4', '5', '6'].map((k) => (
-          <button key={k} type="button" className="numpad-key" onClick={() => press(k)} disabled={disabled}>{k}</button>
-        ))}
-      </div>
-      <div className="numpad-row">
-        {['7', '8', '9'].map((k) => (
-          <button key={k} type="button" className="numpad-key" onClick={() => press(k)} disabled={disabled}>{k}</button>
-        ))}
-      </div>
-      <div className="numpad-row">
-        <button type="button" className="numpad-key numpad-special" onClick={() => press('±')} disabled={disabled}>±</button>
-        <button type="button" className="numpad-key" onClick={() => press('0')} disabled={disabled}>0</button>
-        {showDecimal && <button type="button" className="numpad-key numpad-special" onClick={() => press('.')} disabled={disabled}>.</button>}
-        {showSlash && <button type="button" className="numpad-key numpad-special" onClick={() => press('/')} disabled={disabled}>/</button>}
-        {showCaret && <button type="button" className="numpad-key numpad-special" onClick={() => press('^')} disabled={disabled}>^</button>}
-        {showX && <button type="button" className="numpad-key numpad-special" onClick={() => press('x')} disabled={disabled}>x</button>}
-        <button type="button" className="numpad-key numpad-special" onClick={() => press('⌫')} disabled={disabled}>⌫</button>
-      </div>
-    </div>
-  )
-}
-
-/**
- * AdaptiveTablesApp Component
- * Implements an adaptive multiplication tables learning system with rolling-window algorithm.
- * Dynamically hides/shows reference table based on student performance.
- * Automatically advances to next table when student demonstrates mastery.
- *
- * === ADAPTATION ALGORITHM ===
- * Uses a rolling window of the last WINDOW (8) answers to evaluate performance:
- *
- * For the current window, calculates:
- *   - accuracy: % of correct answers
- *   - avgTime: average time per question in milliseconds
- *
- * State transitions:
- *   "learning" state (bad performance):
- *     - avgTime ≥ 6000ms OR accuracy < 70%
- *     - Action: Show the reference table, reset advancement counter
- *     - Purpose: Student needs help to avoid frustration
- *
- *   "comfortable" state (medium performance):
- *     - avgTime < 6000ms AND accuracy ≥ 70%
- *     - Action: Hide the table to build confidence, but keep status visible
- *     - Purpose: Student can do it, but might need occasional reference
- *
- *   "mastered" state (excellent performance):
- *     - avgTime < 3000ms AND accuracy ≥ 90%
- *     - First time: Hide table and start advancement counter
- *     - Each subsequent mastered answer (without table): +1 to advancement counter
- *     - When counter reaches ADVANCE_COUNT (5): Advance to next table (2→3→...→20)
- *     - Purpose: Student has internalized the pattern
- *
- * === PERSISTENCE ===
- * Current table progress saved to localStorage[tenali-tables-{studentName}]
- * Allows student to resume from last table on page reload
- *
- * @param {Object} props
- * @param {string} props.studentName - Student's name (used for localStorage key and display)
- */
-
-/**
- * ADAPTATION CONSTANTS
- * These control how aggressive the adaptive algorithm is and when advancement happens
- */
-const WINDOW = 8                   // Rolling window: analyze last 8 answers for each table
-const FAST_THRESH = 3000           // "Fast" speed threshold for mastery (ms)
-const MEDIUM_THRESH = 6000         // "Comfortable" speed threshold (ms)
-const ADVANCE_COUNT = 5            // How many consecutive "mastered without table" answers → advance to next table
-
-function AdaptiveTablesApp({ studentName }) {
-  // localStorage key for this student's progress: "tenali-tables-{studentName}"
-  const storageKey = `tenali-tables-${studentName}`
-
-  // === QUIZ FLOW STATE ===
-  // Phases: 'setup' (choose starting table) → 'playing' (answering questions) → 'finished' (mastered all)
-  const [phase, setPhase] = useState('setup')
-
-  // Current multiplication table (2–20). Loaded from localStorage if student has previous progress.
-  const [currentTable, setCurrentTable] = useState(() => {
-    try {
-      const saved = JSON.parse(localStorage.getItem(storageKey))
-      if (saved && saved.currentTable >= 2) return saved.currentTable
-    } catch { }
-    return 2  // Default to 2× table for new students
-  })
-
-  // Starting table selected by student in setup phase (used if restarting)
-  const [startTable, setStartTable] = useState(currentTable)
-
-  // === QUIZ RUNTIME STATE ===
-  // Current question object: {table, multiplier, answer}
-  const [question, setQuestion] = useState(null)
-  // User's text input (answer they're typing)
-  const [answer, setAnswer] = useState('')
-  // Feedback message shown after submission ("Correct! 3 × 4 = 12" or show correct answer)
-  const [feedback, setFeedback] = useState('')
-  // Boolean: is the current answer correct? (null until revealed)
-  const [isCorrect, setIsCorrect] = useState(null)
-  // Boolean: has the answer been revealed? (locks input, shows feedback)
-  const [revealed, setRevealed] = useState(false)
-  // Question counter (1, 2, 3, ...)
-  const [questionNum, setQuestionNum] = useState(0)
-  // Score: number of correct answers in this session
-  const [score, setScore] = useState(0)
-  // Timestamp when current question was generated (used to calc response time)
-  const [startTime, setStartTime] = useState(null)
-  // Array of all results this session: {q, yourAnswer, correct, time, table}
-  const [results, setResults] = useState([])
-
-  // === ADAPTIVE ALGORITHM STATE ===
-  // Rolling window of recent answers: [{correct: bool, timeMs: number}, ...] (max length WINDOW)
-  const [recentWindow, setRecentWindow] = useState([])
-  // Boolean: should the reference table (2×1, 2×2, ..., 2×10) be shown?
-  const [showTable, setShowTable] = useState(true)
-  // Counter: how many consecutive "mastered without table" answers? When ≥ ADVANCE_COUNT, advance.
-  const [masteredWithout, setMasteredWithout] = useState(0)
-  // Status message shown below header: "Learning — table shown", "Mastered! (3/5 to advance)", etc.
-  const [statusMsg, setStatusMsg] = useState('')
-
-  // Ref to the answer input field (for focus management)
-  const inputRef = useRef(null)
-  // Ref to the "advance to next question" function (used by useAutoAdvance)
-  const advanceFnRef = useRef(null)
-
-  /**
-   * save(tbl): Persist current table progress to localStorage
-   * Allows student to resume from same table if page is reloaded
-   */
-  const save = (tbl) => {
-    try { localStorage.setItem(storageKey, JSON.stringify({ currentTable: tbl })) } catch { }
-  }
-
-  /**
-   * generateQuestion(tbl): Create a new multiplication question
-   * Generates random multiplier (1-10), returns {table, multiplier, answer}
-   */
-  const generateQuestion = (tbl) => {
-    const multiplier = Math.floor(Math.random() * 10) + 1
-    return { table: tbl, multiplier, answer: tbl * multiplier }
-  }
-
-  /**
-   * beginPractice(): Transition from setup → playing phase
-   * Initializes all quiz state and generates first question
-   * Sets phase to 'playing' with chosen startTable and resets adaptive state
-   */
-  const beginPractice = () => {
-    const tbl = startTable
-    setCurrentTable(tbl)
-    save(tbl)  // Persist choice to localStorage
-    setPhase('playing')  // Move to playing phase
-    // Reset all quiz counters and state
-    setQuestionNum(0)
-    setScore(0)
-    setResults([])
-    setRecentWindow([])  // Clear adaptive window
-    setShowTable(true)   // Start by showing the reference table
-    setMasteredWithout(0)  // Reset advancement counter
-    setStatusMsg('Learning — table shown')
-    // Generate and display first question
-    const q = generateQuestion(tbl)
-    setQuestion(q)
-    setAnswer('')
-    setFeedback('')
-    setIsCorrect(null)
-    setRevealed(false)
-    setStartTime(Date.now())
-    setQuestionNum(1)  // First question
-    setTimeout(() => inputRef.current?.focus(), 50)  // Focus input field
-  }
-
-  /**
-   * nextQuestion(tbl?): Advance to the next question
-   * Generates new question for table (or currentTable if not specified)
-   * Clears previous feedback and resets input state
-   */
-  const nextQuestion = (tbl) => {
-    const table = tbl || currentTable
-    const q = generateQuestion(table)
-    setQuestion(q)
-    setAnswer('')
-    setFeedback('')
-    setIsCorrect(null)
-    setRevealed(false)
-    setStartTime(Date.now())
-    setQuestionNum(n => n + 1)
-    setTimeout(() => inputRef.current?.focus(), 50)
-  }
-
-  // Update the advance function ref so useAutoAdvance can call it
-  advanceFnRef.current = () => {
-    nextQuestion()
-  }
-
-  // Auto-advance after correct answer (after AUTO_ADVANCE_MS delay)
-  useAutoAdvance(revealed, advanceFnRef, isCorrect)
-  useProgressSubmit(revealed, isCorrect, 'addition', question?.id)
-  useProgressSubmit(revealed, isCorrect, 'balance-scale', question?.id)
-
-  // Keyboard shortcut: Enter key advances to next question after wrong answer
-  // (Auto-advance via useAutoAdvance handles correct answers)
-  useEffect(() => {
-    if (!revealed || isCorrect) return  // Only listen when wrong answer is revealed
-    const handleKey = (e) => {
-      if (e.key === 'Enter') { e.preventDefault(); nextQuestion() }
-    }
-    window.addEventListener('keydown', handleKey)
-    return () => window.removeEventListener('keydown', handleKey)
-  }, [revealed, isCorrect, currentTable])
-
-  /**
-   * evaluate(window): Analyze rolling window to determine student's mastery level
-   *
-   * Window must have ≥3 answers to be meaningful; otherwise return default "learning"
-   *
-   * Calculates:
-   *   - accuracy: (correct answers / total answers in window)
-   *   - avgTime: average response time in milliseconds
-   *
-   * Returns classification object: {level, avgTime, accuracy}
-   *   level: "mastered" | "comfortable" | "learning"
-   *
-   * Thresholds:
-   *   - "mastered": avgTime < 3000ms AND accuracy ≥ 90%
-   *   - "comfortable": avgTime < 6000ms AND accuracy ≥ 70%
-   *   - "learning": anything else (student needs the table or more practice)
-   */
-  const evaluate = (window) => {
-    // Not enough data yet; assume learning
-    if (window.length < 3) return { level: 'learning', avgTime: Infinity, accuracy: 0 }
-
-    // Calculate accuracy: what % of recent answers were correct?
-    const accuracy = window.filter(r => r.correct).length / window.length
-
-    // Calculate average response time in ms
-    const avgTime = window.reduce((s, r) => s + r.timeMs, 0) / window.length
-
-    // Determine mastery level based on speed and accuracy thresholds
-    if (avgTime < FAST_THRESH && accuracy >= 0.9) return { level: 'mastered', avgTime, accuracy }
-    if (avgTime < MEDIUM_THRESH && accuracy >= 0.7) return { level: 'comfortable', avgTime, accuracy }
-    return { level: 'learning', avgTime, accuracy }
-  }
-
-  /**
-   * handleSubmit(e): Process user's answer submission
-   * This is the CORE ADAPTATION LOGIC where all decisions are made
-   *
-   * Flow:
-   * 1. Validate answer (must be numeric)
-   * 2. Score the answer (correct/incorrect)
-   * 3. Add to rolling window
-   * 4. Evaluate rolling window to determine new mastery level
-   * 5. Adapt (show/hide table, advance tables, update status)
-   */
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    if (revealed || !question) return
-
-    // Parse user's answer and compare to correct answer
-    const userAns = parseInt(answer, 10)
-    const correct = userAns === question.answer
-    const elapsed = Date.now() - startTime  // Time taken for this question
-
-    // Reveal the correctness
-    setIsCorrect(correct)
-    setRevealed(true)
-    if (correct) setScore(s => s + 1)
-
-    // Generate feedback message with an encouraging speed cue.
-    // Old labels ("ok" / "slow") were too negative — students learning their
-    // tables for the first time felt scolded. Replace with affirmative cues
-    // that point toward the next milestone (under 5s, under 3s) and tell the
-    // student to keep going.
-    const speedCue = elapsed < FAST_THRESH
-      ? 'lightning fast 🚀'
-      : elapsed < MEDIUM_THRESH
-        ? "almost there — you'll be under 3s soon!"
-        : "you'll soon be under 5s, keep going!"
-    const fb = correct
-      ? `Correct! ${question.table} × ${question.multiplier} = ${question.answer} (${(elapsed / 1000).toFixed(1)}s — ${speedCue})`
-      : `${question.table} × ${question.multiplier} = ${question.answer} (you said ${userAns || '?'})`
-    setFeedback(fb)
-
-    // Record result for later display in results table
-    setResults(r => [...r, {
-      q: `${question.table} × ${question.multiplier}`,
-      yourAnswer: answer || '?',
-      correct: question.answer,
-      isCorrect: correct,
-      time: (elapsed / 1000).toFixed(1),
-      table: question.table
-    }])
-
-    // === ADAPTATION: UPDATE ROLLING WINDOW ===
-    // Keep only the last WINDOW answers; discard older ones
-    const newWindow = [...recentWindow, { correct, timeMs: elapsed }].slice(-WINDOW)
-    setRecentWindow(newWindow)
-
-    // === ADAPTATION: EVALUATE PERFORMANCE ===
-    // Analyze the rolling window to determine mastery level
-    const { level, avgTime, accuracy } = evaluate(newWindow)
-
-    // === ADAPTATION: DECISION TREE ===
-    // Different actions based on current level and whether table is shown
-
-    if (level === 'mastered' && !showTable) {
-      // CASE: Student is fast & accurate WITHOUT the table
-      // Action: Count this toward advancement threshold
-      const newCount = masteredWithout + 1
-      setMasteredWithout(newCount)
-
-      if (newCount >= ADVANCE_COUNT) {
-        // THRESHOLD REACHED: Student is ready for next table!
-        const nextTbl = currentTable + 1
-        if (nextTbl <= 20) {
-          // Advance to next table (2→3, 3→4, ..., 19→20)
-          setCurrentTable(nextTbl)
-          save(nextTbl)  // Persist to localStorage
-          setRecentWindow([])  // Clear window for fresh evaluation on new table
-          setShowTable(true)   // Show table for new level (student learns it first)
-          setMasteredWithout(0)  // Reset counter
-          setStatusMsg(`Great! Moving to ${nextTbl}× table`)
-          // Proceed to next question with new table
-          setTimeout(() => nextQuestion(nextTbl), AUTO_ADVANCE_MS)
-          return  // Skip normal auto-advance; we're explicitly calling nextQuestion
-        } else {
-          // nextTbl > 20: Student has finished all tables!
-          setPhase('finished')
-          return
-        }
-      }
-      // Not yet at threshold; show progress toward advancement
-      setStatusMsg(`Mastered! (${newCount}/${ADVANCE_COUNT} to advance) — avg ${(avgTime / 1000).toFixed(1)}s`)
-
-    } else if (level === 'mastered' && showTable) {
-      // CASE: Student is fast & accurate WITH the table
-      // Action: Hide the table (student doesn't need it) and challenge them to prove it without
-      setShowTable(false)
-      setMasteredWithout(0)  // Reset counter; next answered without table will start count-up
-      setStatusMsg(`Fast & accurate — table hidden! Prove it without help.`)
-
-    } else if (level === 'comfortable') {
-      // CASE: Student is doing okay (70-90% accuracy, 3-6s avg time)
-      // Action: Hide table to encourage independence, but don't push too hard yet
-      if (showTable) {
-        setShowTable(false)
-        setStatusMsg(`Getting comfortable — table hidden. Avg ${(avgTime / 1000).toFixed(1)}s`)
-      } else {
-        // Table already hidden; just update status
-        setStatusMsg(`Comfortable — avg ${(avgTime / 1000).toFixed(1)}s, ${Math.round(accuracy * 100)}% correct`)
-      }
-      setMasteredWithout(0)  // Reset advancement counter (not ready yet)
-
-    } else {
-      // CASE: Student is still building speed (< 70% accuracy or > 6s avg time).
-      // Action: Make sure the table is on screen so they can lean on it; reset
-      // the advancement counter. Phrasing is intentionally encouraging — early
-      // learners shouldn't be told they're "slow" or "need practice".
-      if (!showTable) {
-        setShowTable(true)
-        setStatusMsg(`No worries — bringing the table back to help. You've got this!`)
-      } else {
-        setStatusMsg(`Keep going — every try is making you faster 💪`)
-      }
-      setMasteredWithout(0)  // Reset; student's not ready to advance
-    }
-  }
-
-  const handleSolve = () => {
-    if (!question || revealed) return
-    setIsCorrect(false)
-    setRevealed(true)
-    setFeedback(`Solution: ${question.table} × ${question.multiplier} = ${question.answer}`)
-  }
-
-  /**
-   * renderTable(): Render the visual reference multiplication table
-   * Shows all 10 multiples (e.g., "2 × 1 = 2", "2 × 2 = 4", ..., "2 × 10 = 20")
-   * Only rendered when showTable === true
-   */
-  const renderTable = () => (
-    <div className="ref-table">
-      <div className="ref-table-title">{currentTable} × Table</div>
-      <div className="ref-table-rows">
-        {Array.from({ length: 10 }, (_, i) => i + 1).map(m => (
-          <div key={m} className="ref-table-row">
-            <span>{currentTable} × {m}</span>
-            <span>= {currentTable * m}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-
-  // ========== RENDER: SETUP PHASE ==========
-  // Allow student to choose which table to start from (2–20)
-  if (phase === 'setup') {
-    return (
-      <div className="app-shell">
-        <div className="card">
-          <h1>{studentName}'s Tables</h1>
-          <div className="welcome-box">
-            <p className="welcome-text">Which table would you like to start from?</p>
-            <div className="checkbox-group" style={{ marginBottom: '24px' }}>
-              {Array.from({ length: 19 }, (_, i) => i + 2).map(n => (
-                <label key={n} className={`checkbox-pill${startTable === n ? ' active' : ''}`}>
-                  <input type="radio" name="startTable" checked={startTable === n}
-                    onChange={() => setStartTable(n)} />
-                  {n}×
-                </label>
-              ))}
-            </div>
-            <button onClick={beginPractice}>Start Practice</button>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  // ========== RENDER: FINISHED PHASE ==========
-  // Student has mastered all tables up to 20×
-  if (phase === 'finished') {
-    return (
-      <div className="app-shell">
-        <div className="card">
-          <h1>Congratulations, {studentName}!</h1>
-          <div className="welcome-box">
-            <p className="welcome-text">You've mastered all tables up to 20×!</p>
-            <div className="final-score">{score} correct out of {questionNum}</div>
-            <button onClick={() => setPhase('setup')}>Start Over</button>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  // ========== RENDER: PLAYING PHASE ==========
-  // Main quiz interface: show current table (if applicable), question, input, and reference table (if applicable)
-  return (
-    <div className="app-shell">
-      <div className="card">
-        <div className="header-row">
-          <button className="back-button" onClick={() => setPhase('setup')}>← Change Table</button>
-        </div>
-        <h1>{studentName}'s Tables</h1>
-        <div className="top-mini-row">
-          <span className="score-pill">Score {score}</span>
-          <span className="progress-pill">Q {questionNum}</span>
-          <span className="timer-pill">{currentTable}× table</span>
-        </div>
-        {statusMsg && (
-          <p style={{ textAlign: 'center', fontSize: '0.85rem', color: 'var(--clr-text-soft)', margin: '4px 0 8px', fontWeight: 500 }}>
-            {statusMsg}
-          </p>
-        )}
-
-        <div className={showTable ? 'tables-layout' : ''}>
-          {showTable && renderTable()}
-          <div className="tables-quiz-area">
-            {question && (
-              <>
-                <div className="question-box">
-                  {question.table} × {question.multiplier} = ?
-                </div>
-                <form onSubmit={handleSubmit}>
-                  <input
-                    ref={inputRef}
-                    className="answer-input"
-                    type="text"
-                    inputMode="numeric"
-                    value={answer}
-                    onChange={e => { if (/^-?\d*$/.test(e.target.value)) setAnswer(e.target.value) }}
-                    placeholder="?"
-                    disabled={revealed}
-                    autoFocus
-                  />
-                  {!revealed && (
-                    <div className="button-row">
-                      <button type="submit" disabled={!answer}>Check</button>
-                    </div>
-                  )}
-                </form>
-                {renderFeedback(feedback, isCorrect)}
-                {!revealed && (
-                  <div className="button-row">
-                    <button onClick={handleSolve} disabled={!answer} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>
-                  </div>
-                )}
-                {revealed && (
-                  <div className="button-row">
-                    <button onClick={() => nextQuestion()}>Next</button>
-                  </div>
-                )}
-              </>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
 
 /* ── Scaffolded Tables App (Taittiriya) ──────────────────── */
 /**
@@ -2502,7 +1508,7 @@ function ScaffoldedTablesApp({ studentName, defaultTable = 2 }) {
                 </div>
               )}
             </form>
-            {renderFeedback(feedback, isCorrect)}
+            <Feedback feedback={feedback} isCorrect={isCorrect} />
             {revealed && !mastered && (
               <div className="button-row" style={{ marginTop: '0.3rem' }}>
                 <button onClick={() => nextQuestion()} style={{ width: '100%', padding: '0.6rem' }}>Next</button>
@@ -3076,7 +2082,7 @@ function YazdanTablesApp({ studentName }) {
                 style={{ fontSize: '1.5rem', textAlign: 'center', width: '100%', padding: '0.6rem' }} />
               {!revealed && <div className="button-row" style={{ marginTop: '0.4rem' }}><button type="submit" disabled={!answer} style={{ width: '100%', padding: '0.6rem' }}>Check</button></div>}
             </form>
-            {renderFeedback(feedback, isCorrect)}
+            <Feedback feedback={feedback} isCorrect={isCorrect} />
             {revealed && <div className="button-row" style={{ marginTop: '0.3rem' }}><button onClick={advance} style={{ width: '100%', padding: '0.6rem' }}>{round >= maxRounds ? 'Continue' : 'Next'}</button></div>}
           </>
         )}
@@ -3111,7 +2117,7 @@ function YazdanTablesApp({ studentName }) {
                 style={{ fontSize: '1.5rem', textAlign: 'center', width: '100%', padding: '0.6rem' }} />
               {!revealed && <div className="button-row" style={{ marginTop: '0.4rem' }}><button type="submit" disabled={!answer} style={{ width: '100%', padding: '0.6rem' }}>Check</button></div>}
             </form>
-            {renderFeedback(feedback, isCorrect)}
+            <Feedback feedback={feedback} isCorrect={isCorrect} />
             {revealed && <div className="button-row" style={{ marginTop: '0.3rem' }}><button onClick={advance} style={{ width: '100%', padding: '0.6rem' }}>{round >= maxRounds ? 'Continue' : 'Next'}</button></div>}
           </>
         )}
@@ -3140,7 +2146,7 @@ function YazdanTablesApp({ studentName }) {
                 )
               })}
             </div>
-            {renderFeedback(feedback, isCorrect)}
+            <Feedback feedback={feedback} isCorrect={isCorrect} />
             {revealed && <div className="button-row" style={{ marginTop: '0.3rem' }}><button onClick={advance} style={{ width: '100%', padding: '0.6rem' }}>{round >= maxRounds ? 'Continue' : 'Next'}</button></div>}
           </>
         )}
@@ -3204,7 +2210,7 @@ function YazdanTablesApp({ studentName }) {
                 <button onClick={handleMatchSubmit} style={{ width: '100%', padding: '0.6rem' }}>Check Matches</button>
               </div>
             )}
-            {renderFeedback(feedback, isCorrect)}
+            <Feedback feedback={feedback} isCorrect={isCorrect} />
             {matchRevealed && <div className="button-row" style={{ marginTop: '0.3rem' }}><button onClick={advance} style={{ width: '100%', padding: '0.6rem' }}>{round >= maxRounds ? 'Continue' : 'Next'}</button></div>}
           </>
         )}
@@ -3840,7 +2846,7 @@ function JatinTablesApp({ studentName }) {
               </form>
             )}
 
-            {renderFeedback(feedback, isCorrect)}
+            <Feedback feedback={feedback} isCorrect={isCorrect} />
             {revealed && <div className="button-row" style={{ marginTop: '0.3rem' }}><button onClick={advance} style={{ width: '100%', padding: '0.6rem' }}>{round >= maxRounds ? 'Continue' : 'Next'}</button></div>}
           </>
         )}
@@ -4441,7 +3447,7 @@ function LakshyaTablesApp({ studentName }) {
               </form>
             )}
 
-            {renderFeedback(feedback, isCorrect)}
+            <Feedback feedback={feedback} isCorrect={isCorrect} />
             {revealed && <div className="button-row" style={{ marginTop: '0.3rem' }}><button onClick={advance} style={{ width: '100%', padding: '0.6rem' }}>{round >= maxRounds ? 'Continue' : 'Next'}</button></div>}
           </>
         )}
@@ -4967,7 +3973,7 @@ function AdaptiveMixedApp({ studentName }) {
                   </div>
                 )}
               </form>
-              {renderFeedback(feedback, isCorrect)}
+              <Feedback feedback={feedback} isCorrect={isCorrect} />
               {!revealed && (
                 <div className="button-row">
                   <button onClick={handleSolve} disabled={!answer.trim()} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>
@@ -4988,1119 +3994,7 @@ function AdaptiveMixedApp({ studentName }) {
   )
 }
 
-/**
- * SuperTablesApp — 10-level progressive multiplication mastery
- *
- * Levels:
- *  1. Sequential Recall (horizontal 5+5 split, 20 questions)
- *  2. Random Recall (horizontal 5+5 split, 20 questions)
- *  3. Timed Answer Visibility (answer fades after 2s)
- *  4. Partial Shuffled Table (5 visible entries)
- *  5. Missing Digit Identification (type full answer)
- *  6. Multiple Choice Questions (4 options)
- *  7. Match the Following (3 pairs per round)
- *  8. Adaptive MCQ (tracks weak spots via sessionStorage)
- *  9. Direct Input (no assistance)
- * 10. Fill in the Blank (missing multiplier or answer)
- */
-/**
- * SuperTables1App — Continuous adaptive drill with two phases:
- *
- * Phase 1 (WITH lookup): Shuffled reference table shown on top. Questions asked
- *   continuously. 3 slowest facts highlighted. Uses rolling window of last 10
- *   correct attempts per fact. Once ALL 10 facts have avg < 5s → Phase 2.
- *
- * Phase 2 (WITHOUT lookup): Same questions, no reference table. Once the student
- *   answers 5 consecutive correct for EVERY fact → done.
- */
-function SuperTables1App() {
-  const shuffle = (arr) => {
-    const a = [...arr]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[a[i], a[j]] = [a[j], a[i]]; } return a;
-  }
-  const genTable = (n) => Array.from({ length: 10 }, (_, i) => ({ multiplier: i + 1, expression: `${n} × ${i + 1}`, answer: n * (i + 1) }))
 
-  // ── Session tracking (rolling window of last 10 correct attempts) ──
-  const getStore = () => { try { return JSON.parse(sessionStorage.getItem('st1_data') || '{}') } catch { return {} } }
-  const setStore = (d) => { sessionStorage.setItem('st1_data', JSON.stringify(d)) }
-
-  const recordCorrect = (tbl, mul, ms) => {
-    const d = getStore(); const k = `${tbl}x${mul}`
-    if (!d[k]) d[k] = { times: [], streak: 0 }
-    d[k].times.push(ms)
-    if (d[k].times.length > 10) d[k].times = d[k].times.slice(-10) // rolling window of 10
-    d[k].streak = (d[k].streak || 0) + 1
-    setStore(d)
-  }
-  const recordWrong = (tbl, mul) => {
-    const d = getStore(); const k = `${tbl}x${mul}`
-    if (!d[k]) d[k] = { times: [], streak: 0 }
-    d[k].streak = 0 // reset streak on wrong
-    setStore(d)
-  }
-  const getAvg = (tbl, mul) => {
-    const d = getStore(); const k = `${tbl}x${mul}`
-    const info = d[k]
-    if (!info || info.times.length === 0) return null
-    // trimmed mean: drop top/bottom 10%
-    const sorted = [...info.times].sort((a, b) => a - b)
-    if (sorted.length <= 2) return sorted.reduce((a, b) => a + b, 0) / sorted.length
-    const trim = Math.max(1, Math.round(sorted.length * 0.1))
-    const mid = sorted.slice(trim, sorted.length - trim)
-    return mid.length > 0 ? mid.reduce((a, b) => a + b, 0) / mid.length : sorted[Math.floor(sorted.length / 2)]
-  }
-  const getStreak = (tbl, mul) => {
-    const d = getStore(); const k = `${tbl}x${mul}`
-    return d[k] ? (d[k].streak || 0) : 0
-  }
-  // ── Sliding window: deterministic sequence, no randomness, no repeats possible ──
-  // Window of 3 multipliers: [2,3,4] for 10 rounds, then [3,4,5], then [4,5,6]... wraps around
-  const MULS = [2, 3, 4, 5, 6, 7, 8, 9] // eligible multipliers in order
-  const ROUNDS_PER_WINDOW = 10            // 10 questions per window of 3
-
-  // Pre-build the ENTIRE sequence for a drill session
-  const sequenceRef = useRef([])  // flat array of multipliers in order
-  const seqIndexRef = useRef(-1)  // current position
-  const currentWindowRef = useRef([]) // which 3 are active (for display)
-
-  const buildFullSequence = () => {
-    const seq = []
-    const windowMeta = [] // track which window each question belongs to
-    // Sliding windows: [2,3,4], [3,4,5], [4,5,6], ..., [8,9,2], [9,2,3], [2,3,4], ...
-    // We'll build enough for a long session (e.g., 20 windows = 200 questions)
-    for (let w = 0; w < 20; w++) {
-      const startIdx = w % MULS.length
-      const window = [
-        MULS[startIdx % MULS.length],
-        MULS[(startIdx + 1) % MULS.length],
-        MULS[(startIdx + 2) % MULS.length],
-      ]
-      // 10 rounds cycling through the 3: a,b,c,a,b,c,a,b,c,a
-      for (let r = 0; r < ROUNDS_PER_WINDOW; r++) {
-        seq.push({ mul: window[r % 3], window: [...window] })
-      }
-    }
-    return seq
-  }
-
-  const allStreak5 = (tbl) => {
-    for (let m = 1; m <= 10; m++) {
-      if (getStreak(tbl, m) < 5) return false
-    }
-    return true
-  }
-
-  // ── Styles (using Tenali CSS vars) ──
-  const S = {
-    page: { minHeight: '100vh', padding: '24px', fontFamily: 'var(--font-body, system-ui)', color: 'var(--clr-text)', background: 'var(--clr-bg)' },
-    title: { fontSize: '2.5rem', fontWeight: 900, marginBottom: 8, fontFamily: 'var(--font-display)', color: 'var(--clr-text)' },
-    subtitle: { fontSize: '1.1rem', color: 'var(--clr-text-soft)', marginBottom: 32 },
-    card: { background: 'var(--clr-card)', borderRadius: 'var(--radius)', boxShadow: 'var(--shadow-card)', padding: '28px 24px', maxWidth: 620, margin: '0 auto', color: 'var(--clr-text)' },
-    numGrid: { display: 'grid', gridTemplateColumns: 'repeat(10, 1fr)', gap: 6, width: '100%', margin: '0 auto' },
-    numBtn: { display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '10px 0', background: 'var(--clr-surface)', border: '2px solid var(--clr-border)', borderRadius: 'var(--radius-sm)', fontSize: '1rem', fontWeight: 800, cursor: 'pointer', transition: 'all var(--transition)', color: 'var(--clr-text)', fontFamily: 'var(--font-body)', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' },
-    btn: { border: 'none', borderRadius: 'var(--radius-sm)', padding: '10px 20px', fontWeight: 700, cursor: 'pointer', fontSize: '1rem', transition: 'all var(--transition)', fontFamily: 'var(--font-body)' },
-    btnPrimary: { background: 'var(--clr-accent)', color: '#fff' },
-    input: { width: 120, textAlign: 'center', fontSize: '1.6rem', fontWeight: 800, border: '2px solid var(--clr-accent)', borderRadius: 'var(--radius-sm)', padding: '10px 16px', outline: 'none', background: 'var(--clr-input)', color: 'var(--clr-text)', fontFamily: 'var(--font-body)' },
-    back: { background: 'none', border: 'none', color: 'var(--clr-accent)', fontWeight: 600, cursor: 'pointer', fontSize: '0.95rem', padding: 0, fontFamily: 'var(--font-body)' },
-    th: { padding: '8px 6px', fontSize: '0.8rem', fontWeight: 700, color: 'var(--clr-accent)', background: 'var(--clr-accent-soft)', border: '2px solid var(--clr-border)', whiteSpace: 'nowrap' },
-    td: { padding: '8px 6px', textAlign: 'center', fontWeight: 800, fontSize: '1rem', border: '2px solid var(--clr-border)', background: 'var(--clr-card)', color: 'var(--clr-text)', whiteSpace: 'nowrap' },
-    tdSlow: { padding: '8px 6px', textAlign: 'center', fontWeight: 800, fontSize: '1rem', border: '2px solid var(--clr-wrong)', background: 'var(--clr-wrong-bg)', color: 'var(--clr-wrong)', whiteSpace: 'nowrap' },
-    thSlow: { padding: '8px 6px', fontSize: '0.8rem', fontWeight: 700, color: 'var(--clr-wrong)', background: 'var(--clr-wrong-bg)', border: '2px solid var(--clr-wrong)', whiteSpace: 'nowrap' },
-    fbOk: { marginTop: 16, padding: 16, borderRadius: 'var(--radius-sm)', textAlign: 'center', background: 'var(--clr-correct-bg)', border: '1px solid var(--clr-correct)' },
-    fbNo: { marginTop: 16, padding: 16, borderRadius: 'var(--radius-sm)', textAlign: 'center', background: 'var(--clr-wrong-bg)', border: '1px solid var(--clr-wrong)' },
-  }
-
-  // ── State ──
-  const [screen, setScreen] = useState('home') // home | drill | done
-  const [tableNum, setTableNum] = useState(null)
-  const [phase, setPhase] = useState(1) // 1 = with lookup, 2 = without
-  const [currentMul, setCurrentMul] = useState(1)
-  const [shuffledTable, setShuffledTable] = useState([])
-  const [fb, setFb] = useState(null)
-  const startTimeRef = useRef(Date.now()) // ref, not state — always synchronous, no stale closures
-  const [questionsAnswered, setQuestionsAnswered] = useState(0)
-  const inputRef = useRef(null)
-
-  const startDrill = (num) => {
-    setTableNum(num)
-    // clear previous data for this table to start fresh
-    const d = getStore()
-    for (let m = 1; m <= 10; m++) delete d[`${num}x${m}`]
-    setStore(d)
-    // Build deterministic sequence
-    const fullSeq = buildFullSequence()
-    sequenceRef.current = fullSeq
-    seqIndexRef.current = 0
-    currentWindowRef.current = fullSeq[0].window
-    setPhase(1)
-    setShuffledTable(genTable(num))
-    setCurrentMul(fullSeq[0].mul)
-    setFb(null)
-    startTimeRef.current = Date.now()
-    setQuestionsAnswered(0)
-    setScreen('drill')
-  }
-
-  const goHome = () => { setScreen('home'); setTableNum(null) }
-
-  const goPhase2 = () => {
-    // Rebuild sequence for phase 2
-    const fullSeq = buildFullSequence()
-    sequenceRef.current = fullSeq
-    seqIndexRef.current = 0
-    currentWindowRef.current = fullSeq[0].window
-    setPhase(2)
-    setShuffledTable(genTable(tableNum))
-    setFb(null)
-    setCurrentMul(fullSeq[0].mul)
-    startTimeRef.current = Date.now()
-  }
-
-  const advance = () => {
-    setFb(null)
-    if (phase === 2 && allStreak5(tableNum)) {
-      setScreen('done')
-      return
-    }
-    // Simply advance the index — sequence is deterministic, no randomness
-    let nextIdx = seqIndexRef.current + 1
-    // If we've exhausted the sequence, rebuild (wraps around)
-    if (nextIdx >= sequenceRef.current.length) {
-      const fullSeq = buildFullSequence()
-      sequenceRef.current = fullSeq
-      nextIdx = 0
-    }
-    seqIndexRef.current = nextIdx
-    const entry = sequenceRef.current[nextIdx]
-    currentWindowRef.current = entry.window
-    setCurrentMul(entry.mul)
-    startTimeRef.current = Date.now()
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const val = parseInt(e.target.elements.ans.value, 10)
-    if (isNaN(val)) return
-    const correct = tableNum * currentMul
-    const ok = val === correct
-    const elapsed = Date.now() - startTimeRef.current // ref = always current, never stale
-    if (ok) {
-      recordCorrect(tableNum, currentMul, elapsed)
-    } else {
-      recordWrong(tableNum, currentMul)
-    }
-    setQuestionsAnswered(q => q + 1)
-    setFb({ ok, correctAns: correct, elapsed })
-    e.target.elements.ans.value = ''
-  }
-
-  // Focus management
-  useEffect(() => { if (!fb && inputRef.current) inputRef.current.focus() }, [fb, currentMul])
-  useEffect(() => {
-    if (!fb || screen !== 'drill') return
-    const handler = (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault()
-        e.stopImmediatePropagation()
-        advance()
-      }
-    }
-    // Use capture phase so this fires FIRST and stops the button click from also firing advance
-    window.addEventListener('keydown', handler, true)
-    return () => window.removeEventListener('keydown', handler, true)
-  }, [fb, screen, currentMul, phase, tableNum, questionsAnswered])
-
-  // ── Performance chart (same as SuperTables but using st1_data) ──
-  const renderChart = () => {
-    if (!tableNum) return null
-    const bars = []
-    let maxTime = 0
-    for (let m = 1; m <= 10; m++) {
-      const avg = getAvg(tableNum, m)
-      const avgSec = avg !== null ? avg / 1000 : 0
-      if (avgSec > maxTime) maxTime = avgSec
-      bars.push({ m, avg: avgSec, streak: getStreak(tableNum, m) })
-    }
-    const hasData = bars.some(b => b.avg > 0)
-    if (!hasData) return null
-    // Fixed scale: always 10s max so bars shrink as you get faster
-    maxTime = 10
-    const chartH = 100
-    const barW = `${100 / 10}%`
-    const focused = new Set(currentWindowRef.current)
-    return (
-      <div style={{ marginTop: 20, padding: '12px 0 0' }}>
-        <p style={{ textAlign: 'center', fontSize: '0.7rem', fontWeight: 700, color: 'var(--clr-text-soft)', margin: '0 0 6px', textTransform: 'uppercase', letterSpacing: 1 }}>
-          Avg. Time (last 10 correct) — {phase === 1 ? 'Target: under 5s each' : 'Streak target: 5 each'}
-        </p>
-        <div style={{ display: 'flex', alignItems: 'flex-end', position: 'relative', height: chartH, margin: '0 4px', borderBottom: '2px solid var(--clr-border)', borderLeft: '2px solid var(--clr-border)' }}>
-          <span style={{ position: 'absolute', left: -4, top: 0, fontSize: '0.55rem', color: 'var(--clr-text-soft)', transform: 'translateX(-100%)' }}>10s</span>
-          <span style={{ position: 'absolute', left: -4, bottom: -2, fontSize: '0.55rem', color: 'var(--clr-text-soft)', transform: 'translateX(-100%)' }}>0s</span>
-          {/* 5s threshold line */}
-          {phase === 1 && maxTime > 5 && (
-            <div style={{ position: 'absolute', left: 0, right: 0, bottom: `${(5 / maxTime) * chartH}px`, borderTop: '2px dashed var(--clr-correct)', opacity: 0.5 }}>
-              <span style={{ position: 'absolute', right: 0, top: -14, fontSize: '0.55rem', color: 'var(--clr-correct)', fontWeight: 700 }}>5s</span>
-            </div>
-          )}
-          {bars.map(b => {
-            const h = b.avg > 0 ? Math.max((b.avg / maxTime) * chartH, 4) : 0
-            const isSlow = focused.has(b.m)
-            return (
-              <div key={b.m} style={{ width: barW, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', height: '100%', padding: '0 1px', boxSizing: 'border-box' }}>
-                {b.avg > 0 && <span style={{ fontSize: '0.5rem', color: 'var(--clr-text-soft)', marginBottom: 1, fontWeight: 600 }}>{b.avg.toFixed(1)}</span>}
-                <div style={{
-                  width: '65%', height: h, minWidth: 6, borderRadius: '3px 3px 0 0',
-                  background: b.avg === 0 ? 'transparent' : isSlow ? 'var(--clr-wrong)' : b.avg < 5 ? 'var(--clr-correct)' : 'var(--clr-accent)',
-                  opacity: b.avg === 0 ? 0.15 : 0.85, transition: 'height 0.3s',
-                }} />
-              </div>
-            )
-          })}
-        </div>
-        <div style={{ display: 'flex', margin: '3px 4px 0' }}>
-          {bars.map(b => (
-            <div key={b.m} style={{ width: barW, textAlign: 'center', fontSize: '0.55rem', fontWeight: 700, color: 'var(--clr-text-soft)' }}>
-              ×{b.m}
-              {phase === 2 && <div style={{ fontSize: '0.5rem', color: b.streak >= 5 ? 'var(--clr-correct)' : 'var(--clr-text-soft)' }}>{b.streak}/5</div>}
-            </div>
-          ))}
-        </div>
-      </div>
-    )
-  }
-
-  // ── HOME ──
-  if (screen === 'home') {
-    return (
-      <div style={S.page}>
-        <div style={{ maxWidth: 620, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center' }}>
-            <h1 style={S.title}>SuperTables 1</h1>
-            <p style={S.subtitle}>Adaptive speed drill — master any table until it's automatic</p>
-          </div>
-          <div style={{ ...S.card, marginBottom: 24 }}>
-            <h2 style={{ textAlign: 'center', fontSize: '1.2rem', fontWeight: 700, margin: '0 0 20px', color: 'var(--clr-text)' }}>
-              Choose a multiplication table
-            </h2>
-            <div style={S.numGrid}>
-              {Array.from({ length: 50 }, (_, i) => i + 1).map(n => (
-                <button key={n} onClick={() => startDrill(n)} style={S.numBtn}
-                  onMouseOver={e => { e.currentTarget.style.background = 'var(--clr-accent)'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'var(--clr-accent)' }}
-                  onMouseOut={e => { e.currentTarget.style.background = 'var(--clr-surface)'; e.currentTarget.style.color = 'var(--clr-text)'; e.currentTarget.style.borderColor = 'var(--clr-border)' }}>
-                  {n}
-                </button>
-              ))}
-            </div>
-          </div>
-          <div style={{ textAlign: 'center' }}>
-            <p style={{ fontSize: '0.8rem', color: 'var(--clr-text-soft)', margin: '0 0 4px' }}>Phase 1: Answer with lookup table until all facts &lt; 5 seconds</p>
-            <p style={{ fontSize: '0.8rem', color: 'var(--clr-text-soft)', margin: 0 }}>Phase 2: No lookup — 5 consecutive correct per fact to finish</p>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  // ── DRILL ──
-  if (screen === 'drill') {
-    // Current window of 3 multipliers being practiced
-    const slow3 = new Set(currentWindowRef.current)
-    const table = genTable(tableNum)
-    const correct = tableNum * currentMul
-
-    return (
-      <div style={S.page}>
-        <div style={{ maxWidth: 620, margin: '0 auto' }}>
-          {/* Header */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-            <button onClick={goHome} style={S.back}>← Home</button>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--clr-text-soft)' }}>Table of {tableNum}</div>
-              <div style={{ fontSize: '1rem', fontWeight: 800, color: phase === 1 ? 'var(--clr-accent)' : 'var(--clr-correct)' }}>
-                {phase === 1 ? 'Phase 1 — With Lookup' : 'Phase 2 — From Memory'}
-              </div>
-            </div>
-            <div style={{ fontSize: '0.75rem', color: 'var(--clr-text-soft)', textAlign: 'right' }}>
-              Q #{questionsAnswered + 1}
-            </div>
-          </div>
-
-          {/* Phase 1: Lookup table — only the 3 facts currently being practiced */}
-          {phase === 1 && (
-            <div style={{ marginBottom: 20 }}>
-              {(() => {
-                // Show only the 3 focused facts; fallback to current question if set is empty
-                let focused = shuffledTable.filter(e => slow3.has(e.multiplier))
-                if (focused.length === 0) {
-                  focused = shuffledTable.filter(e => e.multiplier === currentMul)
-                }
-                return focused.length > 0 ? (
-                  <table style={{ margin: '0 auto', borderCollapse: 'collapse', width: 'auto', tableLayout: 'fixed' }}>
-                    <thead>
-                      <tr>
-                        {focused.map((e, i) => (
-                          <th key={i} style={S.thSlow}>{e.expression}</th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        {focused.map((e, i) => (
-                          <td key={i} style={S.tdSlow}>{e.answer}</td>
-                        ))}
-                      </tr>
-                    </tbody>
-                  </table>
-                ) : null
-              })()}
-              {/* Phase 2 button — prominently below the lookup table */}
-              <div style={{ textAlign: 'center', marginTop: 12 }}>
-                <button onClick={goPhase2} style={{
-                  padding: '10px 28px', fontSize: '1rem', fontWeight: 700,
-                  borderRadius: 'var(--radius-sm)', border: '2px solid var(--clr-accent)',
-                  background: 'var(--clr-card)', color: 'var(--clr-accent)',
-                  cursor: 'pointer', transition: 'all var(--transition)',
-                  fontFamily: 'var(--font-body)',
-                }}
-                  onMouseOver={e => { e.currentTarget.style.background = 'var(--clr-accent)'; e.currentTarget.style.color = '#fff' }}
-                  onMouseOut={e => { e.currentTarget.style.background = 'var(--clr-card)'; e.currentTarget.style.color = 'var(--clr-accent)' }}
-                >
-                  Ready? Go to Phase 2 →
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* Phase 2: Status badges */}
-          {phase === 2 && (
-            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 6, marginBottom: 16 }}>
-              {table.map(e => {
-                const streak = getStreak(tableNum, e.multiplier)
-                const done = streak >= 5
-                const isFocused = slow3.has(e.multiplier)
-                return (
-                  <div key={e.multiplier} style={{
-                    padding: '4px 10px', borderRadius: 6, fontSize: '0.75rem', fontWeight: 700,
-                    background: done ? 'var(--clr-correct-bg)' : isFocused ? 'var(--clr-wrong-bg)' : 'var(--clr-surface)',
-                    color: done ? 'var(--clr-correct)' : isFocused ? 'var(--clr-wrong)' : 'var(--clr-text-soft)',
-                    border: `1px solid ${done ? 'var(--clr-correct)' : isFocused ? 'var(--clr-wrong)' : 'var(--clr-border)'}`,
-                  }}>
-                    ×{e.multiplier}: {done ? '✓' : `${streak}/5`}
-                  </div>
-                )
-              })}
-            </div>
-          )}
-
-          {/* Question card */}
-          <div style={S.card}>
-            <div style={{ fontSize: '2rem', fontWeight: 900, textAlign: 'center', marginBottom: 24, color: 'var(--clr-text)', letterSpacing: '0.5px' }}>
-              {tableNum} × {currentMul} = ?
-            </div>
-
-            {fb ? (
-              <div style={fb.ok ? S.fbOk : S.fbNo}>
-                <p style={{ fontWeight: 700, fontSize: '1.1rem', color: fb.ok ? 'var(--clr-correct)' : 'var(--clr-wrong)', margin: 0 }}>
-                  {fb.ok ? '✓ Correct!' : `✗ The answer is ${fb.correctAns}`}
-                </p>
-                {fb.ok && fb.elapsed != null && <p style={{ fontSize: '0.8rem', color: 'var(--clr-text-soft)', margin: '4px 0 0' }}>{(fb.elapsed / 1000).toFixed(1)}s</p>}
-                <p style={{ fontSize: '0.85rem', color: 'var(--clr-text-soft)', marginTop: 12, fontWeight: 600 }}>Press Enter →</p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
-                <input ref={inputRef} name="ans" type="number" style={S.input} placeholder="?" autoComplete="off" />
-                <button type="submit" style={{ ...S.btn, ...S.btnPrimary }}>Submit</button>
-              </form>
-            )}
-          </div>
-
-          {/* Performance chart */}
-          {renderChart()}
-        </div>
-      </div>
-    )
-  }
-
-  // ── DONE ──
-  if (screen === 'done') {
-    return (
-      <div style={S.page}>
-        <div style={{ maxWidth: 480, margin: '0 auto', paddingTop: 40 }}>
-          <div style={{ ...S.card, textAlign: 'center' }}>
-            <div style={{ fontSize: '4rem', marginBottom: 12 }}>🏆</div>
-            <h2 style={{ margin: '0 0 8px', fontSize: '1.6rem', fontFamily: 'var(--font-display)', color: 'var(--clr-text)' }}>
-              Table of {tableNum} Mastered!
-            </h2>
-            <p style={{ color: 'var(--clr-text-soft)', margin: '0 0 8px' }}>
-              All 10 facts answered correctly 5 times in a row — without any lookup.
-            </p>
-            <p style={{ color: 'var(--clr-text-soft)', fontSize: '0.85rem', margin: '0 0 24px' }}>
-              Total questions answered: {questionsAnswered}
-            </p>
-
-            {/* Final times */}
-            <div style={{ marginBottom: 24 }}>
-              <table style={{ margin: '0 auto', borderCollapse: 'collapse' }}>
-                <thead>
-                  <tr>
-                    {genTable(tableNum).map((e, i) => (
-                      <th key={i} style={S.th}>{e.expression}</th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    {genTable(tableNum).map((e, i) => {
-                      const avg = getAvg(tableNum, e.multiplier)
-                      return <td key={i} style={S.td}>{avg !== null ? (avg / 1000).toFixed(1) + 's' : '—'}</td>
-                    })}
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, alignItems: 'center' }}>
-              <button onClick={goHome} style={{ ...S.btn, ...S.btnPrimary, fontSize: '1.1rem', padding: '12px 32px' }}>Practice Another Table</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  return null
-}
-
-function SuperTablesApp() {
-  // ── helpers ───────────────────────────────────────────
-  const stShuffle = (arr) => {
-    const a = [...arr]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[a[i], a[j]] = [a[j], a[i]]; } return a;
-  }
-  const stGenTable = (n) => Array.from({ length: 10 }, (_, i) => ({ multiplier: i + 1, expression: `${n} × ${i + 1}`, answer: n * (i + 1) }))
-  const stDistractors = (correct, tbl) => {
-    const tblAns = Array.from({ length: 10 }, (_, i) => tbl * (i + 1))
-    const s = new Set()
-    tblAns.forEach(a => { if (a !== correct) s.add(a) });
-    [correct - 1, correct + 1, correct - tbl, correct + tbl, correct - 10, correct + 10].forEach(v => { if (v > 0 && v !== correct) s.add(v) })
-    const picked = stShuffle([...s]).slice(0, 3)
-    while (picked.length < 3) picked.push(correct + picked.length + 1)
-    return stShuffle([correct, ...picked])
-  }
-  const stMask = (answer) => {
-    const s = String(answer); const pos = Math.floor(Math.random() * s.length)
-    return s.slice(0, pos) + '*' + s.slice(pos + 1)
-  }
-  // adaptive tracking — stores individual times for trimmed mean
-  const stGetAdaptive = () => { try { return JSON.parse(sessionStorage.getItem('st_adaptive') || '{}') } catch { return {} } }
-  const stSetAdaptive = (d) => { sessionStorage.setItem('st_adaptive', JSON.stringify(d)) }
-  const stRecord = (tbl, mul, ok, ms) => {
-    const d = stGetAdaptive(); const k = `${tbl}x${mul}`
-    if (!d[k]) d[k] = { wrong: 0, attempts: 0, times: [] }
-    // migrate old format (totalTime only) → new format (times array)
-    if (!d[k].times) d[k].times = d[k].totalTime ? Array(d[k].attempts).fill(Math.round(d[k].totalTime / d[k].attempts)) : []
-    // Only record time and count attempt for correct answers
-    // Wrong answers just increment the wrong counter — not counted as an attempt
-    if (ok) {
-      d[k].attempts++; d[k].times.push(ms)
-      if (d[k].times.length > 50) d[k].times = d[k].times.slice(-50)
-    } else {
-      d[k].wrong++
-    }
-    stSetAdaptive(d)
-  }
-  // Trimmed mean: discard bottom 10% and top 10%, average the middle 80%
-  const stTrimmedMean = (times) => {
-    if (!times || times.length === 0) return 0
-    if (times.length <= 2) return times.reduce((a, b) => a + b, 0) / times.length
-    const sorted = [...times].sort((a, b) => a - b)
-    const trim = Math.max(1, Math.round(sorted.length * 0.1))
-    const trimmed = sorted.slice(trim, sorted.length - trim)
-    if (trimmed.length === 0) return sorted[Math.floor(sorted.length / 2)]
-    return trimmed.reduce((a, b) => a + b, 0) / trimmed.length
-  }
-  const stWeak = (tbl) => {
-    const d = stGetAdaptive(); const w = []
-    for (let m = 1; m <= 10; m++) {
-      const info = d[`${tbl}x${m}`]
-      if (!info || info.attempts === 0) continue
-      const avg = stTrimmedMean(info.times || [])
-      if (info.wrong > 0 || avg > 5000) w.push({ m, sc: info.wrong * 2 + avg / 1000 })
-    }
-    return w.sort((a, b) => b.sc - a.sc).map(x => x.m)
-  }
-
-  // ── styles using Tenali CSS variables ─────────────────
-  const S = {
-    page: { minHeight: '100vh', padding: '24px', fontFamily: 'var(--font-body, system-ui)', color: 'var(--clr-text)', background: 'var(--clr-bg)' },
-    center: { textAlign: 'center' },
-    title: { fontSize: '2.5rem', fontWeight: 900, marginBottom: 8, fontFamily: 'var(--font-display)', color: 'var(--clr-text)' },
-    subtitle: { fontSize: '1.1rem', color: 'var(--clr-text-soft)', marginBottom: 32 },
-    card: { background: 'var(--clr-card)', borderRadius: 'var(--radius)', boxShadow: 'var(--shadow-card)', padding: '28px 24px', maxWidth: 620, margin: '0 auto', color: 'var(--clr-text)' },
-    btn: { border: 'none', borderRadius: 'var(--radius-sm)', padding: '10px 20px', fontWeight: 700, cursor: 'pointer', fontSize: '1rem', transition: 'all var(--transition)', fontFamily: 'var(--font-body)' },
-    btnPrimary: { background: 'var(--clr-accent)', color: '#fff' },
-    btnSecondary: { background: 'var(--clr-surface)', color: 'var(--clr-text)' },
-    input: { width: 120, textAlign: 'center', fontSize: '1.6rem', fontWeight: 800, border: '2px solid var(--clr-accent)', borderRadius: 'var(--radius-sm)', padding: '10px 16px', outline: 'none', background: 'var(--clr-input)', color: 'var(--clr-text)', fontFamily: 'var(--font-body)' },
-    optionBtn: { border: '2px solid var(--clr-border)', borderRadius: 'var(--radius-sm)', padding: '14px', fontWeight: 800, fontSize: '1.3rem', cursor: 'pointer', background: 'var(--clr-surface)', transition: 'all var(--transition)', color: 'var(--clr-text)', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' },
-    grid2: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 },
-    tableWrap: { overflowX: 'auto', marginBottom: 24 },
-    table: { margin: '0 auto', borderCollapse: 'collapse' },
-    th: { padding: '10px 14px', fontSize: '0.9rem', fontWeight: 700, color: 'var(--clr-accent)', background: 'var(--clr-accent-soft)', border: '2px solid var(--clr-border)' },
-    td: { padding: '10px 14px', textAlign: 'center', fontWeight: 800, fontSize: '1.2rem', border: '2px solid var(--clr-border)', background: 'var(--clr-card)', color: 'var(--clr-text)' },
-    qLabel: { fontSize: '0.85rem', color: 'var(--clr-text-soft)', fontWeight: 600, marginBottom: 8 },
-    qText: { fontSize: '2rem', fontWeight: 900, textAlign: 'center', marginBottom: 24, color: 'var(--clr-text)', letterSpacing: '0.5px' },
-    fbOk: { marginTop: 16, padding: 16, borderRadius: 'var(--radius-sm)', textAlign: 'center', background: 'var(--clr-correct-bg)', border: '1px solid var(--clr-correct)' },
-    fbNo: { marginTop: 16, padding: 16, borderRadius: 'var(--radius-sm)', textAlign: 'center', background: 'var(--clr-wrong-bg)', border: '1px solid var(--clr-wrong)' },
-    back: { background: 'none', border: 'none', color: 'var(--clr-accent)', fontWeight: 600, cursor: 'pointer', fontSize: '0.95rem', padding: 0, fontFamily: 'var(--font-body)' },
-    badge: { fontSize: '0.7rem', fontWeight: 700, color: 'var(--clr-accent)', background: 'var(--clr-accent-soft)', padding: '2px 8px', borderRadius: 99, display: 'inline-block' },
-    numGrid: { display: 'grid', gridTemplateColumns: 'repeat(10, 1fr)', gap: 6, width: '100%', margin: '0 auto' },
-    numBtn: { display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '10px 0', background: 'var(--clr-surface)', border: '2px solid var(--clr-border)', borderRadius: 'var(--radius-sm)', fontSize: '1rem', fontWeight: 800, cursor: 'pointer', transition: 'all var(--transition)', color: 'var(--clr-text)', fontFamily: 'var(--font-body)', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' },
-    matchCol: { flex: 1, display: 'flex', flexDirection: 'column', gap: 12 },
-    matchBtn: (active, matched) => ({
-      padding: '14px 16px', borderRadius: 'var(--radius-sm)', fontWeight: 800, fontSize: '1.15rem', border: '2px solid', cursor: matched ? 'default' : 'pointer', opacity: matched ? 0.5 : 1, transition: 'all var(--transition)', fontFamily: 'var(--font-body)',
-      borderColor: matched ? 'var(--clr-correct)' : active ? 'var(--clr-accent)' : 'var(--clr-border)',
-      background: matched ? 'var(--clr-correct-bg)' : active ? 'var(--clr-accent-soft)' : 'var(--clr-card)',
-      color: matched ? 'var(--clr-correct)' : active ? 'var(--clr-accent)' : 'var(--clr-text)'
-    }),
-    ansCol: (sel, matched) => ({
-      padding: '14px 16px', borderRadius: 'var(--radius-sm)', fontWeight: 800, fontSize: '1.15rem', border: '2px solid', cursor: matched ? 'default' : sel ? 'pointer' : 'not-allowed', opacity: matched ? 0.5 : 1, transition: 'all var(--transition)', fontFamily: 'var(--font-body)',
-      borderColor: matched ? 'var(--clr-correct)' : sel ? 'var(--clr-accent)' : 'var(--clr-border)',
-      background: matched ? 'var(--clr-correct-bg)' : sel ? 'var(--clr-accent-soft)' : 'var(--clr-card)',
-      color: matched ? 'var(--clr-correct)' : sel ? 'var(--clr-accent)' : 'var(--clr-text-soft)'
-    }),
-    // level progress bar
-    progressBar: { display: 'flex', alignItems: 'center', gap: 4, margin: '0 auto 24px', maxWidth: 400 },
-    progressStep: (done, active) => ({
-      flex: 1, height: 6, borderRadius: 3, transition: 'all var(--transition)',
-      background: done ? 'var(--clr-accent)' : active ? 'var(--clr-accent-soft)' : 'var(--clr-surface)'
-    }),
-  }
-
-  // ── level metadata (unchanged logic) ──────────────────
-  const LEVELS = [
-    { id: 1, name: 'Sequential Recall', desc: 'Answer in order with the table visible', icon: '📋' },
-    { id: 2, name: 'Random Recall', desc: 'Random questions with the table visible', icon: '🔀' },
-    { id: 3, name: 'Timed Visibility', desc: 'See the answer briefly, then recall it', icon: '⏱️' },
-    { id: 4, name: 'Partial Table', desc: 'Only 5 entries visible', icon: '🧩' },
-    { id: 5, name: 'Missing Digit', desc: 'One digit hidden — type full answer', icon: '🔍' },
-    { id: 6, name: 'Multiple Choice', desc: 'Pick from 4 options', icon: '🅰️' },
-    { id: 7, name: 'Match Pairs', desc: 'Match 3 questions to answers', icon: '🔗' },
-    { id: 8, name: 'Adaptive MCQ', desc: 'Focuses on your weak spots', icon: '🧠' },
-    { id: 9, name: 'Direct Input', desc: 'No help — type from memory', icon: '✍️' },
-    { id: 10, name: 'Fill in the Blank', desc: 'Find the missing value', icon: '📝' },
-  ]
-
-  // ── state (sequential progression) ────────────────────
-  const [screen, setScreen] = useState('home') // home | play | levelDone | allDone
-  const [tableNum, setTableNum] = useState(null)
-  const [currentLevel, setCurrentLevel] = useState(1) // 1–10, auto-progresses
-  const [idx, setIdx] = useState(0)
-  const [score, setScore] = useState(0)
-  const [fb, setFb] = useState(null)
-  const [phase, setPhase] = useState('show') // for L3
-  const [selected, setSelected] = useState(null) // for L7
-  const [matched, setMatched] = useState([]) // for L7
-  const [wrong7, setWrong7] = useState(false)
-  const [startTime, setStartTime] = useState(Date.now())
-  const [wrongAttempts, setWrongAttempts] = useState(0)
-  const inputRef = useRef(null)
-
-  // computed data
-  const [questions, setQuestions] = useState([])
-  const [visible, setVisible] = useState([])
-  const [options, setOptions] = useState([])
-  const [rounds, setRounds] = useState([])
-  const [roundIdx, setRoundIdx] = useState(0)
-  const [shuffledAns, setShuffledAns] = useState([])
-
-  const lid = currentLevel
-  const levelMeta = LEVELS[lid - 1] || LEVELS[0]
-  const totalQ = lid <= 2 ? 20 : lid === 4 ? 5 : lid === 7 ? rounds.length * 3 : 10
-  const cur = questions[Math.min(idx, questions.length - 1)] || { expression: '', answer: 0, multiplier: 1 }
-
-  // ── adaptive weighting helper ──────────────────────────
-  // Returns a shuffled question list that includes extra copies of weak facts.
-  // `base` = full 10-entry table, `count` = desired question count.
-  // Weak facts (from stWeak) get duplicated so they appear ~2× more often,
-  // but mixed with others so it doesn't feel overwhelming.
-  const stAdaptiveList = (base, num, count) => {
-    const weak = new Set(stWeak(num).slice(0, 4)) // top 4 weakest
-    if (weak.size === 0) return stShuffle(base).slice(0, count)
-    const pool = []
-    for (const e of base) {
-      pool.push(e)
-      if (weak.has(e.multiplier)) pool.push({ ...e }) // extra copy for weak facts
-    }
-    // shuffle and trim to count
-    const shuffled = stShuffle(pool)
-    if (shuffled.length >= count) return shuffled.slice(0, count)
-    // if we need more, repeat the pool
-    while (shuffled.length < count) shuffled.push(...stShuffle(base))
-    return shuffled.slice(0, count)
-  }
-
-  // ── setup a level (called with table number + uses currentLevel) ──
-  const setupLevel = (num, level) => {
-    setScreen('play'); setIdx(0); setScore(0); setFb(null); setPhase('show')
-    setSelected(null); setMatched([]); setWrong7(false); setRoundIdx(0); setStartTime(Date.now()); setWrongAttempts(0)
-    const tbl = stGenTable(num)
-    const first = tbl.slice(0, 5), second = tbl.slice(5)
-    // L1 & L2: sequential/halved structure preserved, but weak facts from each half get extra reps
-    if (level === 1) {
-      const weak = new Set(stWeak(num).slice(0, 4))
-      const firstQ = [...first]; first.forEach(e => { if (weak.has(e.multiplier)) firstQ.push(e) })
-      const secondQ = [...second]; second.forEach(e => { if (weak.has(e.multiplier)) secondQ.push(e) })
-      const fwd1 = firstQ.slice(0, 10), fwd2 = secondQ.slice(0, 10)
-      while (fwd1.length < 10) fwd1.push(first[fwd1.length % first.length])
-      while (fwd2.length < 10) fwd2.push(second[fwd2.length % second.length])
-      setQuestions([...fwd1, ...fwd2]); setVisible(first)
-    }
-    else if (level === 2) {
-      const weak = new Set(stWeak(num).slice(0, 4))
-      const firstPool = [...first]; first.forEach(e => { if (weak.has(e.multiplier)) firstPool.push(e) })
-      const secondPool = [...second]; second.forEach(e => { if (weak.has(e.multiplier)) secondPool.push(e) })
-      const r1 = stShuffle(firstPool).slice(0, 10), r2 = stShuffle(secondPool).slice(0, 10)
-      while (r1.length < 10) r1.push(first[r1.length % first.length])
-      while (r2.length < 10) r2.push(second[r2.length % second.length])
-      setQuestions([...stShuffle(r1), ...stShuffle(r2)]); setVisible(first)
-    }
-    else if (level === 3) { setQuestions(stAdaptiveList(tbl, num, 10)) }
-    else if (level === 4) {
-      // Prefer showing weak facts in the visible set
-      const weak = new Set(stWeak(num).slice(0, 3))
-      const weakEntries = tbl.filter(e => weak.has(e.multiplier))
-      const others = stShuffle(tbl.filter(e => !weak.has(e.multiplier)))
-      const v = stShuffle([...weakEntries, ...others].slice(0, 5))
-      setVisible(v); setQuestions(stShuffle(v))
-    }
-    else if (level === 5) { setQuestions(stAdaptiveList(tbl, num, 10).map(e => ({ ...e, masked: stMask(e.answer) }))) }
-    else if (level === 6) { const q = stAdaptiveList(tbl, num, 10); setQuestions(q); setOptions(stDistractors(q[0].answer, num)) }
-    else if (level === 7) {
-      // Ensure weak facts appear in the rounds
-      const weak = new Set(stWeak(num).slice(0, 3))
-      const weakEntries = tbl.filter(e => weak.has(e.multiplier))
-      const others = stShuffle(tbl.filter(e => !weak.has(e.multiplier)))
-      const ordered = [...weakEntries, ...others].slice(0, 9)
-      const sh = stShuffle(ordered); const r = []
-      for (let i = 0; i < sh.length; i += 3) r.push(sh.slice(i, i + 3))
-      if (r.length === 0) r.push(stShuffle(tbl).slice(0, 3))
-      setRounds(r); setShuffledAns(stShuffle(r[0].map(e => e.answer)))
-    } else if (level === 8) {
-      // L8 already fully adaptive — keep as is but use stAdaptiveList
-      const weak = stWeak(num); const weakE = weak.slice(0, 5).map(m => tbl.find(e => e.multiplier === m)).filter(Boolean)
-      const others = stShuffle(tbl.filter(e => !weak.includes(e.multiplier)))
-      const mix = [...weakE]; for (const o of others) { if (mix.length >= 10) break; if (!mix.find(m => m.multiplier === o.multiplier)) mix.push(o) }
-      while (mix.length < 10) mix.push(tbl[mix.length % 10])
-      const q = stShuffle(mix); setQuestions(q); setOptions(stDistractors(q[0].answer, num))
-    } else if (level === 9) { setQuestions(stAdaptiveList(tbl, num, 10)) }
-    else if (level === 10) { setQuestions(stAdaptiveList(tbl, num, 10).map(e => ({ ...e, blankType: Math.random() > 0.5 ? 'multiplier' : 'answer' }))) }
-  }
-
-  // Start from table selection → always Level 1
-  const startFromTable = (num) => {
-    setTableNum(num); setCurrentLevel(1); setupLevel(num, 1)
-  }
-
-  // Continue to next level
-  const continueToNext = () => {
-    if (currentLevel < 10) {
-      const next = currentLevel + 1
-      setCurrentLevel(next); setupLevel(tableNum, next)
-    } else {
-      setScreen('allDone')
-    }
-  }
-
-  // Reset everything
-  const goHome = () => { setScreen('home'); setTableNum(null); setCurrentLevel(1) }
-
-  // ── effects ───────────────────────────────────────────
-  // options update on idx change for MCQ levels
-  useEffect(() => {
-    if (screen !== 'play' || !tableNum) return
-    if ((lid === 6 || lid === 8) && questions[idx]) setOptions(stDistractors(questions[idx].answer, tableNum))
-  }, [idx, screen])
-
-  // L3 timed phases
-  useEffect(() => {
-    if (lid !== 3 || screen !== 'play') return
-    if (phase === 'show') { const t = setTimeout(() => setPhase('fading'), 2000); return () => clearTimeout(t) }
-    if (phase === 'fading') { const t = setTimeout(() => setPhase('ask'), 800); return () => clearTimeout(t) }
-  }, [phase, idx, lid, screen])
-
-  // L7 auto-advance after matching all 3
-  useEffect(() => {
-    if (lid !== 7 || matched.length !== 3) return
-    const t = setTimeout(() => {
-      const next = roundIdx + 1
-      if (next < rounds.length) { setRoundIdx(next); setMatched([]); setSelected(null); setWrong7(false); setShuffledAns(stShuffle(rounds[next].map(e => e.answer))) }
-      else { setRoundIdx(next) }
-    }, 800)
-    return () => clearTimeout(t)
-  }, [matched, lid])
-
-  useEffect(() => { setStartTime(Date.now()) }, [idx])
-  useEffect(() => { if (!fb && inputRef.current) inputRef.current.focus() }, [idx, fb, phase])
-
-  // Allow Enter key to advance when feedback is showing
-  const nextBtnRef = useRef(null)
-  useEffect(() => {
-    if (fb && nextBtnRef.current) nextBtnRef.current.focus()
-  }, [fb])
-  useEffect(() => {
-    if (!fb || screen !== 'play') return
-    const handler = (e) => { if (e.key === 'Enter') { e.preventDefault(); advance() } }
-    window.addEventListener('keydown', handler)
-    return () => window.removeEventListener('keydown', handler)
-  }, [fb, screen, idx, lid])
-
-  // ── answer handlers (level logic unchanged) ───────────
-  const handleInput = (e) => {
-    e.preventDefault()
-    const val = parseInt(e.target.elements.ans.value, 10)
-    if (isNaN(val)) return
-    let correctAns = cur.answer
-    if (lid === 10) correctAns = cur.blankType === 'multiplier' ? cur.multiplier : cur.answer
-    const ok = val === correctAns
-    if (ok) setScore(s => s + 1)
-    else setWrongAttempts(w => w + 1)
-    stRecord(tableNum, cur.multiplier, ok, Date.now() - startTime)
-    setFb({ ok, correctAns })
-    e.target.elements.ans.value = ''
-  }
-  const handlePick = (ans) => {
-    const ok = ans === cur.answer
-    if (ok) setScore(s => s + 1)
-    else setWrongAttempts(w => w + 1)
-    stRecord(tableNum, cur.multiplier, ok, Date.now() - startTime)
-    setFb({ ok, correctAns: cur.answer })
-  }
-  const advance = () => {
-    setFb(null)
-    if (lid === 3) setPhase('show')
-    if (lid <= 2 && idx < 19) {
-      const tbl = stGenTable(tableNum)
-      if (idx === 9) setVisible(tbl.slice(5))
-    }
-    // Check if this was the last question → show level completion
-    const nextIdx = idx + 1
-    const thisTotal = lid <= 2 ? 20 : lid === 4 ? 5 : lid === 7 ? rounds.length * 3 : 10
-    if (nextIdx >= thisTotal) {
-      setIdx(nextIdx)
-      setScreen('levelDone')
-    } else {
-      setIdx(nextIdx)
-    }
-  }
-
-  // L1/L2 visible half
-  const displayHalf = lid <= 2 && tableNum ? (idx < 10 ? stGenTable(tableNum).slice(0, 5) : stGenTable(tableNum).slice(5)) : []
-
-  const done = lid === 7 ? (roundIdx >= rounds.length) : (idx >= totalQ && fb === null)
-
-  // When L7 finishes via roundIdx, transition to levelDone
-  useEffect(() => {
-    if (lid === 7 && screen === 'play' && roundIdx >= rounds.length && rounds.length > 0) {
-      setScreen('levelDone')
-    }
-  }, [roundIdx, rounds.length, lid, screen])
-
-  // ── render helpers ────────────────────────────────────
-  const renderLevelProgress = () => (
-    <div style={{ textAlign: 'center', marginBottom: 8 }}>
-      <p style={{ fontSize: '0.9rem', color: 'var(--clr-text)', margin: '0 0 8px', fontWeight: 700 }}>
-        Level {lid} of 10 — {levelMeta.name}
-      </p>
-      <div style={S.progressBar}>
-        {LEVELS.map((_, i) => (
-          <div key={i} style={S.progressStep(i + 1 < lid, i + 1 === lid)} />
-        ))}
-      </div>
-    </div>
-  )
-
-  const renderTable = (entries, tblNum, hideM) => {
-    const filtered = hideM != null ? entries.filter(e => e.multiplier !== hideM) : entries
-    return (
-      <div style={S.tableWrap}>
-        <table style={S.table}>
-          <thead><tr>{filtered.map((e, i) => <th key={i} style={S.th}>{tblNum} × {e.multiplier}</th>)}</tr></thead>
-          <tbody><tr>{filtered.map((e, i) => <td key={i} style={S.td}>{e.answer}</td>)}</tr></tbody>
-        </table>
-      </div>
-    )
-  }
-
-  const renderFeedback = () => (
-    <div style={fb.ok ? S.fbOk : S.fbNo}>
-      <p style={{ fontWeight: 700, fontSize: '1.1rem', color: fb.ok ? 'var(--clr-correct)' : 'var(--clr-wrong)', margin: 0 }}>
-        {fb.ok ? '✓ Correct!' : `✗ The answer is ${fb.correctAns}`}
-      </p>
-      <button ref={nextBtnRef} onClick={advance} style={{ ...S.btn, ...S.btnPrimary, marginTop: 12 }}>Next →</button>
-    </div>
-  )
-
-  const renderInput = () => (
-    <form onSubmit={handleInput} style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
-      <input ref={inputRef} name="ans" type="number" style={S.input} placeholder="?" autoComplete="off" />
-      <button type="submit" style={{ ...S.btn, ...S.btnPrimary }}>Submit</button>
-    </form>
-  )
-
-  // ── Performance chart ──────────────────────────────────
-  const renderPerformanceChart = () => {
-    if (!tableNum) return null
-    const d = stGetAdaptive()
-    const bars = []
-    let maxTime = 0
-    for (let m = 1; m <= 10; m++) {
-      const info = d[`${tableNum}x${m}`]
-      const avg = info && info.attempts > 0 ? stTrimmedMean(info.times || []) / 1000 : 0
-      if (avg > maxTime) maxTime = avg
-      bars.push({ m, avg, attempts: info ? info.attempts : 0, wrong: info ? info.wrong : 0 })
-    }
-    const hasData = bars.some(b => b.attempts > 0)
-    if (!hasData) return null
-    maxTime = Math.max(maxTime, 1) // at least 1s scale
-    const chartH = 120
-    const barW = `${100 / 10}%`
-    return (
-      <div style={{ marginTop: 24, padding: '16px 0 0' }}>
-        <p style={{ textAlign: 'center', fontSize: '0.75rem', fontWeight: 700, color: 'var(--clr-text-soft)', margin: '0 0 8px', textTransform: 'uppercase', letterSpacing: 1 }}>
-          Avg. Time per Fact (seconds)
-        </p>
-        {/* Y-axis + bars */}
-        <div style={{ display: 'flex', alignItems: 'flex-end', gap: 0, position: 'relative', height: chartH, margin: '0 4px', borderBottom: '2px solid var(--clr-border)', borderLeft: '2px solid var(--clr-border)' }}>
-          {/* Y-axis labels */}
-          <span style={{ position: 'absolute', left: -4, top: 0, fontSize: '0.6rem', color: 'var(--clr-text-soft)', transform: 'translateX(-100%)', whiteSpace: 'nowrap' }}>{maxTime.toFixed(1)}s</span>
-          <span style={{ position: 'absolute', left: -4, top: '50%', fontSize: '0.6rem', color: 'var(--clr-text-soft)', transform: 'translateX(-100%) translateY(-50%)', whiteSpace: 'nowrap' }}>{(maxTime / 2).toFixed(1)}s</span>
-          <span style={{ position: 'absolute', left: -4, bottom: -2, fontSize: '0.6rem', color: 'var(--clr-text-soft)', transform: 'translateX(-100%)', whiteSpace: 'nowrap' }}>0s</span>
-          {/* Grid lines */}
-          <div style={{ position: 'absolute', left: 0, right: 0, top: '50%', borderTop: '1px dashed var(--clr-border)', opacity: 0.5 }} />
-          {/* Bars */}
-          {bars.map(b => {
-            const h = b.avg > 0 ? Math.max((b.avg / maxTime) * chartH, 4) : 0
-            const isWeak = b.wrong > 0 || b.avg > maxTime * 0.7
-            return (
-              <div key={b.m} style={{ width: barW, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', height: '100%', padding: '0 2px', boxSizing: 'border-box' }}>
-                {b.avg > 0 && <span style={{ fontSize: '0.55rem', color: 'var(--clr-text-soft)', marginBottom: 2, fontWeight: 600 }}>{b.avg.toFixed(1)}</span>}
-                <div style={{
-                  width: '70%', height: h, minWidth: 8,
-                  borderRadius: '4px 4px 0 0',
-                  background: b.attempts === 0 ? 'transparent' : isWeak ? 'var(--clr-wrong)' : 'var(--clr-accent)',
-                  opacity: b.attempts === 0 ? 0.15 : 0.85,
-                  transition: 'height 0.3s ease',
-                }} />
-              </div>
-            )
-          })}
-        </div>
-        {/* X-axis labels */}
-        <div style={{ display: 'flex', margin: '4px 4px 0' }}>
-          {bars.map(b => (
-            <div key={b.m} style={{ width: barW, textAlign: 'center', fontSize: '0.6rem', fontWeight: 700, color: 'var(--clr-text-soft)' }}>
-              ×{b.m}
-            </div>
-          ))}
-        </div>
-      </div>
-    )
-  }
-
-  // ── SCREENS ───────────────────────────────────────────
-
-  // HOME — just pick a table, no level selection
-  if (screen === 'home') {
-    return (
-      <div style={S.page}>
-        <div style={{ maxWidth: 480, margin: '0 auto' }}>
-          <div style={S.center}>
-            <h1 style={S.title}>SuperTables</h1>
-            <p style={S.subtitle}>Master multiplication through 10 progressive levels</p>
-          </div>
-          <div style={{ ...S.card, marginBottom: 24 }}>
-            <h2 style={{ textAlign: 'center', fontSize: '1.2rem', fontWeight: 700, margin: '0 0 20px', color: 'var(--clr-text)' }}>
-              Choose a multiplication table to begin
-            </h2>
-            <div style={S.numGrid}>
-              {Array.from({ length: 50 }, (_, i) => i + 1).map(n => (
-                <button key={n} onClick={() => startFromTable(n)} style={S.numBtn}
-                  onMouseOver={e => { e.currentTarget.style.background = 'var(--clr-accent)'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'var(--clr-accent)' }}
-                  onMouseOut={e => { e.currentTarget.style.background = 'var(--clr-surface)'; e.currentTarget.style.color = 'var(--clr-text)'; e.currentTarget.style.borderColor = 'var(--clr-border)' }}>
-                  {n}
-                </button>
-              ))}
-            </div>
-          </div>
-          <p style={{ textAlign: 'center', fontSize: '0.8rem', color: 'var(--clr-text-soft)' }}>
-            You'll progress from Level 1 → 10 automatically
-          </p>
-        </div>
-      </div>
-    )
-  }
-
-  // LEVEL DONE — show score + Continue button
-  if (screen === 'levelDone') {
-    const pct = Math.round((score / totalQ) * 100)
-    return (
-      <div style={S.page}>
-        <div style={{ maxWidth: 480, margin: '0 auto' }}>
-          {renderLevelProgress()}
-          <div style={{ ...S.card, textAlign: 'center' }}>
-            <div style={{ fontSize: '3.5rem', marginBottom: 12 }}>{pct === 100 ? '🏆' : pct >= 80 ? '🌟' : pct >= 50 ? '👍' : '💪'}</div>
-            <h2 style={{ margin: '0 0 4px', fontSize: '1.3rem', color: 'var(--clr-text)' }}>Level {lid} Complete!</h2>
-            <p style={{ fontSize: '0.9rem', color: 'var(--clr-text-soft)', margin: '0 0 16px' }}>{levelMeta.name}</p>
-            <p style={{ fontSize: '2.8rem', fontWeight: 900, color: 'var(--clr-accent)', margin: '0 0 4px' }}>{score}/{totalQ}</p>
-            <p style={{ color: 'var(--clr-text-soft)', marginBottom: 24 }}>{pct}% correct{wrongAttempts > 0 ? ` · ${wrongAttempts} wrong` : ''}</p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, alignItems: 'center' }}>
-              {currentLevel < 10 ? (
-                <button onClick={continueToNext} style={{ ...S.btn, ...S.btnPrimary, fontSize: '1.1rem', padding: '12px 32px' }}>
-                  Continue to Level {currentLevel + 1} →
-                </button>
-              ) : (
-                <button onClick={() => setScreen('allDone')} style={{ ...S.btn, ...S.btnPrimary, fontSize: '1.1rem', padding: '12px 32px' }}>
-                  See Final Results →
-                </button>
-              )}
-              <button onClick={() => setupLevel(tableNum, currentLevel)} style={{ ...S.btn, ...S.btnSecondary, fontSize: '0.85rem' }}>Retry this level</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  // ALL DONE — completed all 10 levels
-  if (screen === 'allDone') {
-    return (
-      <div style={S.page}>
-        <div style={{ maxWidth: 480, margin: '0 auto' }}>
-          <div style={{ ...S.card, textAlign: 'center' }}>
-            <div style={{ fontSize: '4rem', marginBottom: 12 }}>🎓</div>
-            <h2 style={{ margin: '0 0 8px', fontSize: '1.6rem', fontFamily: 'var(--font-display)', color: 'var(--clr-text)' }}>All 10 Levels Complete!</h2>
-            <p style={{ color: 'var(--clr-text-soft)', margin: '0 0 8px' }}>Table of {tableNum}</p>
-            <p style={{ fontSize: '1rem', color: 'var(--clr-text-soft)', margin: '0 0 32px' }}>
-              You've mastered all levels for the {tableNum} times table. Great work!
-            </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, alignItems: 'center' }}>
-              <button onClick={goHome} style={{ ...S.btn, ...S.btnPrimary, fontSize: '1.1rem', padding: '12px 32px' }}>Practice Another Table</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  // PLAY — Level 7 (match pairs) has its own layout
-  if (lid === 7) {
-    if (done) return null // handled by useEffect → levelDone
-    const rd = rounds[Math.min(roundIdx, rounds.length - 1)]
-    if (!rd) return null
-    return (
-      <div style={S.page}>
-        <div style={{ maxWidth: 560, margin: '0 auto' }}>
-          {renderLevelProgress()}
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 16 }}>
-            <button onClick={goHome} style={S.back}>← Quit</button>
-            <span style={{ fontSize: '0.85rem', color: 'var(--clr-text-soft)' }}>Table of {tableNum}</span>
-          </div>
-          <div style={S.card}>
-            <p style={S.qLabel}>Round {roundIdx + 1} of {rounds.length}</p>
-            <h2 style={{ textAlign: 'center', fontSize: '1.2rem', marginBottom: 16, fontWeight: 700, color: 'var(--clr-text)' }}>Match each question to its answer</h2>
-            {wrong7 && <p style={{ textAlign: 'center', color: 'var(--clr-wrong)', fontSize: '0.85rem', fontWeight: 600 }}>Not a match — try again!</p>}
-            <div style={{ display: 'flex', gap: 24 }}>
-              <div style={S.matchCol}>
-                {rd.map((e, i) => (
-                  <button key={i} disabled={matched.includes(i)} onClick={() => { setSelected(i); setWrong7(false) }}
-                    style={S.matchBtn(selected === i, matched.includes(i))}>{e.expression}</button>
-                ))}
-              </div>
-              <div style={S.matchCol}>
-                {shuffledAns.map((ans, i) => {
-                  const isM = matched.some(mi => rd[mi].answer === ans)
-                  return (
-                    <button key={i} disabled={isM || selected === null} onClick={() => {
-                      if (selected === null) return
-                      if (rd[selected].answer === ans) { stRecord(tableNum, rd[selected].multiplier, true, Date.now() - startTime); setMatched(m => [...m, selected]); setScore(s => s + 1); setSelected(null) }
-                      else { stRecord(tableNum, rd[selected].multiplier, false, Date.now() - startTime); setWrong7(true); setWrongAttempts(w => w + 1) }
-                    }} style={S.ansCol(selected !== null, isM)}>{ans}</button>
-                  )
-                })}
-              </div>
-            </div>
-          </div>
-          {renderPerformanceChart()}
-        </div>
-      </div>
-    )
-  }
-
-  // PLAY — generic (all other levels)
-  const qText = lid === 5 ? `${cur.expression} = ${cur.masked}`
-    : lid === 10 ? (cur.blankType === 'multiplier' ? `${tableNum} × ___ = ${cur.answer}` : `${tableNum} × ${cur.multiplier} = ___`)
-      : `${cur.expression} = ?`
-
-  return (
-    <div style={S.page}>
-      <div style={{ maxWidth: 600, margin: '0 auto' }}>
-        {renderLevelProgress()}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-          <button onClick={goHome} style={S.back}>← Quit</button>
-          <span style={{ fontSize: '0.85rem', color: 'var(--clr-text-soft)' }}>Table of {tableNum}</span>
-          <div style={{ width: 60 }} />
-        </div>
-
-        {/* Table display for L1, L2 */}
-        {lid <= 2 && renderTable(displayHalf, tableNum)}
-
-        {/* Table display for L4 */}
-        {lid === 4 && renderTable(visible, tableNum)}
-
-        <div style={S.card}>
-          <p style={S.qLabel}>Question {idx + 1} of {totalQ}</p>
-          <div style={S.qText}>{qText}</div>
-
-          {/* L3: show/fade answer */}
-          {lid === 3 && phase !== 'ask' && (
-            <div style={{ textAlign: 'center', marginBottom: 16 }}>
-              <span style={{ fontSize: '2.8rem', fontWeight: 900, color: 'var(--clr-accent)', transition: 'opacity 0.7s', opacity: phase === 'fading' ? 0 : 1 }}>{cur.answer}</span>
-            </div>
-          )}
-
-          {/* L5 hint */}
-          {lid === 5 && (
-            <div style={{ textAlign: 'center', marginBottom: 14 }}>
-              <p style={{ color: 'var(--clr-accent)', fontSize: '1rem', fontWeight: 700, margin: '0 0 4px' }}>
-                Type the FULL number (e.g. if 5* → type 52)
-              </p>
-              <p style={{ color: 'var(--clr-text-soft)', fontSize: '0.8rem', margin: 0 }}>
-                Not just the missing digit — enter the complete answer
-              </p>
-            </div>
-          )}
-
-          {/* L8 hint */}
-          {lid === 8 && <p style={{ textAlign: 'center', color: 'var(--clr-text-soft)', fontSize: '0.75rem', marginBottom: 12 }}>Adaptive — focuses on your weak spots</p>}
-
-          {/* Input or MCQ */}
-          {fb ? renderFeedback() : (
-            (lid === 6 || lid === 8) ? (
-              <div style={S.grid2}>
-                {options.map((o, i) => (
-                  <button key={i} onClick={() => handlePick(o)} style={S.optionBtn}
-                    onMouseOver={e => { e.currentTarget.style.borderColor = 'var(--clr-accent)'; e.currentTarget.style.background = 'var(--clr-accent-soft)' }}
-                    onMouseOut={e => { e.currentTarget.style.borderColor = 'var(--clr-border)'; e.currentTarget.style.background = 'var(--clr-surface)' }}>
-                    {o}
-                  </button>
-                ))}
-              </div>
-            ) : (lid === 3 && phase !== 'ask') ? null : renderInput()
-          )}
-        </div>
-        {renderPerformanceChart()}
-      </div>
-    </div>
-  )
-}
 
 /**
  * App Component (Main Shell)
@@ -41458,7 +39352,7 @@ function ComicAdditionApp({ onBack }) {
 
         {revealed && (
           <div style={{ marginTop: 20 }}>
-            {renderFeedback(feedback, isCorrect)}
+            <Feedback feedback={feedback} isCorrect={isCorrect} />
           </div>
         )}
 
@@ -41630,7 +39524,7 @@ function DragDropCountingApp({ onBack }) {
 
         {revealed && (
           <div style={{ marginTop: 20 }}>
-            {renderFeedback(feedback, isCorrect)}
+            <Feedback feedback={feedback} isCorrect={isCorrect} />
           </div>
         )}
       </div>
@@ -41885,7 +39779,7 @@ function CoordGeomInteractiveApp({ onBack }) {
 
         {revealed && (
           <div style={{ marginTop: 20 }}>
-            {renderFeedback(feedback, isCorrect)}
+            <Feedback feedback={feedback} isCorrect={isCorrect} />
           </div>
         )}
       </div>
@@ -42153,7 +40047,7 @@ function DartBoardApp({ onBack }) {
 
         {revealed && feedback && (
           <div style={{ marginTop: 20 }}>
-            {renderFeedback(feedback, isCorrect)}
+            <Feedback feedback={feedback} isCorrect={isCorrect} />
           </div>
         )}
       </div>
@@ -42425,7 +40319,7 @@ function BalanceScaleApp({ onBack }) {
 
       {revealed && (
         <div style={{ marginTop: 20 }}>
-          {renderFeedback(feedback, isCorrect)}
+          <Feedback feedback={feedback} isCorrect={isCorrect} />
         </div>
       )}
     </QuizLayout>
@@ -43663,7 +41557,7 @@ function App() {
         <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
           {theme === 'dark' ? '☀️' : '🌙'}
         </button>
-        <SuperTables1App />
+        <SuperTables1 />
       </>
     )
   }
@@ -43689,7 +41583,7 @@ function App() {
         <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
           {theme === 'dark' ? '☀️' : '🌙'}
         </button>
-        <SuperTablesApp />
+        <SuperTables />
       </>
     )
   }
@@ -43862,7 +41756,7 @@ function App() {
               <button onClick={loadQuestion}>Retry</button>
             </div>
           )}
-          {renderFeedback(feedback, isCorrect)}
+          <Feedback feedback={feedback} isCorrect={isCorrect} />
           {explanation && <div style={{ margin: '16px auto', maxWidth: 600, padding: '16px 20px', borderRadius: 'var(--radius)', background: 'var(--clr-surface)', border: '1px solid var(--clr-accent)', textAlign: 'left', whiteSpace: 'pre-wrap', fontSize: '0.92rem', lineHeight: '1.6', color: 'var(--clr-text)' }}>
             <strong style={{ color: 'var(--clr-accent)', display: 'block', marginBottom: '8px', fontSize: '1rem' }}>Step-by-Step Explanation</strong>
             {explanation}
@@ -44335,7 +42229,7 @@ function App() {
               <button onClick={loadQuestion}>Retry</button>
             </div>
           )}
-          {renderFeedback(feedback, isCorrect)}
+          <Feedback feedback={feedback} isCorrect={isCorrect} />
           {explanation && <div style={{ margin: '16px auto', maxWidth: 600, padding: '16px 20px', borderRadius: 'var(--radius)', background: 'var(--clr-surface)', border: '1px solid var(--clr-accent)', textAlign: 'left', whiteSpace: 'pre-wrap', fontSize: '0.92rem', lineHeight: '1.6', color: 'var(--clr-text)' }}>
             <strong style={{ color: 'var(--clr-accent)', display: 'block', marginBottom: '8px', fontSize: '1rem' }}>Explanation</strong>
             {explanation}
@@ -44819,7 +42713,7 @@ function App() {
     vachana: Vachana,          // Vachana Mathematical Literacy Lab
     linearalgebra: LinearAlgebraApp, // Linear Algebra Module 1
     missionquiz: MissionQuizApp, // Mission-specific Linear Algebra Quiz
-    'math-lab': MathLabHubApp,
+    'math-lab': MathLabHub,
     'visual-math-lab-redux': VisualMathLabRedux,
     'mensuration-lab': MensurationLabApp,
     'basic-arith-lab': BasicArithmeticLabApp,
@@ -46001,2057 +43895,7 @@ function Home({ onSelect, onBackToLanding, completedTopics = [], goldMastery = [
   )
 }
 
-export function getTopicBadgeLevel(topicKey, completedTopics = []) {
-  if (!completedTopics || !Array.isArray(completedTopics)) return 'locked';
-  if (completedTopics.includes(`${topicKey}-hard`) || completedTopics.includes(`${topicKey}-gold`)) {
-    return 'gold';
-  }
-  if (completedTopics.includes(`${topicKey}-medium`)) {
-    return 'silver';
-  }
-  if (completedTopics.includes(`${topicKey}-easy`)) {
-    return 'bronze';
-  }
-  if (completedTopics.includes(`${topicKey}-started`)) {
-    return 'blue';
-  }
-  return 'locked';
-}
 
-function BadgeIcon({ type, size = 64, locked = false, level = '' }) {
-  const colorFilter = locked ? 'grayscale(1) opacity(0.55)' : 'none';
-
-  const badgeMap = {
-    'counting-critters': 'dino',
-    'arithmetic-basics': 'trophy',
-    'fraction-explorer': 'feast',
-    'geometry-master': 'wizard',
-    'division-detective': 'detective',
-    'time-traveler': 'rocket',
-    'data-detective': 'chest',
-    'algebra-alchemist': 'flask',
-    'pythagoras-path': 'shield',
-    'trig-treasure': 'crown'
-  };
-
-  const mappedType = badgeMap[type] || type;
-  const imagePath = mappedType === 'topic'
-    ? `/badges/topic_${(level && level !== 'locked') ? level : 'blue'}.png`
-    : `/badges/${mappedType}.png`;
-  const levelClass = level ? `badge-level-${level}` : '';
-
-  return (
-    <div
-      className={`badge-icon-container ${locked ? 'badge-locked' : 'badge-unlocked'} ${levelClass}`}
-      style={{
-        width: size,
-        height: size,
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        filter: colorFilter,
-        position: 'relative'
-      }}
-    >
-      <img
-        src={imagePath}
-        alt={type}
-        style={{
-          width: '85%',
-          height: '85%',
-          objectFit: 'contain',
-          display: 'block'
-        }}
-        onError={(e) => {
-          e.target.src = '/badges/trophy.png';
-        }}
-      />
-    </div>
-  );
-}
-
-const TOPIC_DISPLAY_NAMES = {
-  'decimals': 'Decimals',
-  'rounding': 'Rounding',
-  'addition': 'Addition',
-  'basicarith': 'Basic Arithmetic',
-  'fractionadd': 'Fraction Addition',
-  'ratio': 'Ratios & Proportions',
-  'angles': 'Angles',
-  'triangles': 'Triangles',
-  'multiply': 'Multiplication',
-  'hcflcm': 'HCF & LCM',
-  'sdt': 'Speed, Distance & Time',
-  'variation': 'Variation & Rates',
-  'stats': 'Statistics',
-  'prob': 'Probability',
-  'lineareq': 'Linear Equations',
-  'lineq': 'Line Equation',
-  'pythag': "Pythagoras' Theorem",
-  'polygons': 'Polygons',
-  'trig': 'Trigonometry',
-  'coordgeom': 'Coordinate Geometry',
-  'percent': 'Percentages'
-};
-
-const getTopicDisplayName = (key) => {
-  if (!key) return '';
-  return TOPIC_DISPLAY_NAMES[key] || (key.charAt(0).toUpperCase() + key.slice(1));
-};
-
-function AchievementCollections({ completedTopics = [], onSelectTopic }) {
-  const [data, setData] = useState(null)
-  const [selectedBook, setSelectedBook] = useState(null)
-  const [loading, setLoading] = useState(true)
-
-  const fetchCollections = async () => {
-    const token = localStorage.getItem('tenali-auth-token')
-    if (!token) return
-    try {
-      const r = await fetch(`${API}/api/collections/progress`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      })
-      if (r.ok) {
-        const res = await r.json()
-        setData(res.collections)
-      }
-    } catch (e) {
-      console.error(e)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    fetchCollections()
-  }, [])
-
-  if (loading) {
-    return <div className="loading-screen">Opening the Collector Bookshelf...</div>
-  }
-
-  return (
-    <div className="bookshelf-container">
-      <h2 className="bookshelf-title">My Collector Bookshelf</h2>
-      <p className="bookshelf-subtitle">Complete all topics in a book to earn a shiny Gold Album Badge!</p>
-
-      <div className="bookshelf-grid">
-        {data && data.map(book => {
-          const isDone = book.completed;
-          return (
-            <div key={book.collectionId} className={`book-card ${book.badgeType}-theme ${!isDone ? 'book-locked' : 'book-unlocked'}`} onClick={() => setSelectedBook(book)}>
-              {/* Central Large Badge Hero Section */}
-              <div className="book-badge-hero">
-                <div className="book-badge-aura" />
-                <div className="book-badge-icon">
-                  <BadgeIcon type={book.badgeType} size={180} locked={!isDone} level={isDone ? 'gold' : ''} />
-                </div>
-              </div>
-
-              {/* Card Details Section */}
-              <div className="book-details-body">
-                <h3 className="book-title">{book.name}</h3>
-                <div style={{ display: 'flex', justifyContent: 'center', margin: '6px 0 12px 0' }}>
-                  <span className="book-badge-difficulty">{book.difficulty}</span>
-                </div>
-                <p className="book-desc">
-                  {book.description}
-                  <span className="book-desc-modules">
-                    <br />
-                    <strong>Learning Modules:</strong> {book.topics.map(t => TOPIC_DISPLAY_NAMES[t.topicKey] || t.topicKey).join(', ')}
-                  </span>
-                </p>
-
-                <div className="book-progress-wrapper">
-                  <div className="book-progress-text">
-                    <span>Progress</span>
-                    <strong>{book.completedCount} / {book.totalTopics} ({book.percentage}%)</strong>
-                  </div>
-                  <div className="book-progress-bar-bg">
-                    <div className="book-progress-bar-fill" style={{ width: `${book.percentage}%` }}></div>
-                  </div>
-                </div>
-
-                {!isDone && book.nextTopic && (
-                  <button className="book-next-btn" onClick={(e) => {
-                    e.stopPropagation();
-                    if (typeof onSelectTopic === 'function') {
-                      onSelectTopic(book.nextTopic);
-                    }
-                  }}>
-                    Play Next: {getTopicDisplayName(book.nextTopic)}
-                  </button>
-                )}
-                {isDone && <div className="book-complete-tag">Completed</div>}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {selectedBook && (
-        <div className="book-modal-overlay" onClick={() => setSelectedBook(null)}>
-          <div className="book-modal-content" onClick={e => e.stopPropagation()}>
-            <button className="book-modal-close" onClick={() => setSelectedBook(null)} aria-label="Close">✕</button>
-            <h2 className="book-modal-title">{selectedBook.name}</h2>
-            <p className="book-modal-desc">{selectedBook.description}</p>
-
-            <div className="book-pages">
-              <div className="book-page left-page">
-                <h3>Topics Checklist</h3>
-                <div className="topics-list-detailed">
-                  {selectedBook.topics.map(topic => {
-                    const level = getTopicBadgeLevel(topic.topicKey, completedTopics);
-                    const isStartedOrCompleted = level !== 'locked';
-                    return (
-                      <div key={topic.topicKey} className={`topic-row-check ${topic.completed ? 'completed' : isStartedOrCompleted ? 'completed' : 'locked'}`} onClick={() => {
-                        setSelectedBook(null);
-                        onSelectTopic(topic.topicKey);
-                      }}>
-                        <div style={{ display: 'flex', alignItems: 'center', marginRight: '4px' }}>
-                          <BadgeIcon type="trophy" level={level} size={32} locked={level === 'locked'} />
-                        </div>
-                        <div className="topic-text-info">
-                          <span className="topic-check-name">{getTopicDisplayName(topic.topicKey)}</span>
-                          <span className="topic-check-status">
-                            {level === 'gold' ? 'Gold Mastery!' : level === 'silver' ? 'Silver Complete!' : level === 'bronze' ? 'Bronze Complete!' : level === 'blue' ? 'Practice Started!' : 'Click to start practice'}
-                          </span>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <div className="book-page right-page">
-                <h3>Collection Badge</h3>
-                <div className="badge-showcase-large">
-                  <BadgeIcon type={selectedBook.badgeType} size={150} locked={!selectedBook.completed} level={selectedBook.completed ? 'gold' : ''} />
-                  <h4>{selectedBook.completed ? 'Unlocked' : 'Locked'}</h4>
-                  <p>{selectedBook.completed ? 'You earned the Gold Album Badge!' : 'Master all topics on the left to unlock!'}</p>
-                  {selectedBook.completed && (
-                    <div className="gold-ribbon-tag">ALBUM COMPLETED</div>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-function ProfileShowcase({ completedTopics = [], onSelectTopic }) {
-  const [profile, setProfile] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [collectionsProgress, setCollectionsProgress] = useState([])
-  const [selectedSection, setSelectedSection] = useState('bookshelf')
-  const [activeBadgeDetail, setActiveBadgeDetail] = useState(null)
-  const [dropdownOpen, setDropdownOpen] = useState(false)
-  const [sectionExpanded, setSectionExpanded] = useState(false)
-  const [showcaseExpanded, setShowcaseExpanded] = useState(true)
-
-  const dropdownRef = useRef(null)
-
-  // Dynamically compute the badges in the inventory based on collections progress and completed topics
-  const inventory = useMemo(() => {
-    const allBadges = [];
-    if (!collectionsProgress || collectionsProgress.length === 0) return [];
-
-    // A. Album Badges
-    collectionsProgress.forEach(col => {
-      allBadges.push({
-        badgeId: col.collectionId,
-        name: col.name,
-        badgeType: col.badgeType,
-        type: 'collection',
-        locked: !col.completed,
-        requirement: `Complete all topics in the "${col.name}" album.`,
-        description: col.description
-      })
-    })
-
-    // B. Topic Badges
-    const addedTopics = new Set()
-    collectionsProgress.forEach(col => {
-      col.topics.forEach(topic => {
-        if (!addedTopics.has(topic.topicKey)) {
-          addedTopics.add(topic.topicKey)
-          const level = getTopicBadgeLevel(topic.topicKey, completedTopics)
-          const topicName = getTopicDisplayName(topic.topicKey)
-          allBadges.push({
-            badgeId: topic.topicKey,
-            name: topicName,
-            badgeType: 'topic',
-            type: 'topic',
-            locked: level === 'locked',
-            requirement: `Complete Easy difficulty or start practice in the "${topicName}" quiz.`,
-            description: `Practice and master the "${topicName}" quiz to upgrade this badge from Blue to Gold!`
-          })
-        }
-      })
-    })
-
-    // C. Dynamically add custom topics not part of collections.json (e.g. Percentages)
-    if (completedTopics && Array.isArray(completedTopics)) {
-      completedTopics.forEach(tKey => {
-        const baseTopicKey = tKey.replace(/-(easy|medium|hard|gold|started|adaptive|extrahard)$/, '');
-        if (baseTopicKey && !addedTopics.has(baseTopicKey)) {
-          addedTopics.add(baseTopicKey);
-          const level = getTopicBadgeLevel(baseTopicKey, completedTopics);
-          if (level !== 'locked') {
-            const topicName = getTopicDisplayName(baseTopicKey);
-            allBadges.push({
-              badgeId: baseTopicKey,
-              name: topicName,
-              badgeType: 'topic',
-              type: 'topic',
-              locked: false,
-              requirement: `Complete Easy difficulty or start practice in the "${topicName}" quiz.`,
-              description: `Practice and master the "${topicName}" quiz to upgrade this badge from Blue to Gold!`
-            });
-          }
-        }
-      });
-    }
-
-    // D. Streak Badges
-    const userStreak = profile ? profile.streak : 0
-    const streaksConfig = [
-      { days: 3, id: 'streak_3', name: '3-Day Streak' },
-      { days: 7, id: 'streak_7', name: '7-Day Streak' },
-      { days: 15, id: 'streak_15', name: '15-Day Streak' },
-      { days: 30, id: 'streak_30', name: '30-Day Streak' }
-    ]
-    streaksConfig.forEach(s => {
-      allBadges.push({
-        badgeId: s.id,
-        name: s.name,
-        badgeType: s.id,
-        type: 'streak',
-        locked: userStreak < s.days,
-        requirement: `Maintain a consecutive active practice streak of at least ${s.days} days.`,
-        description: `Awarded for logging in and solving quizzes for ${s.days} consecutive days!`
-      })
-    })
-
-    return allBadges;
-  }, [collectionsProgress, completedTopics, profile]);
-
-  // Close dropdown on click outside
-  useEffect(() => {
-    if (!dropdownOpen) return
-    const handleOutsideClick = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setDropdownOpen(false)
-      }
-    }
-    document.addEventListener('mousedown', handleOutsideClick)
-    return () => document.removeEventListener('mousedown', handleOutsideClick)
-  }, [dropdownOpen])
-
-  const fetchProfileAndBadges = async () => {
-    const token = localStorage.getItem('tenali-auth-token')
-    if (!token) return
-    try {
-      // 1. Fetch Profile Info
-      const profileRes = await fetch(`${API}/api/profile/showcase`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      })
-      let profileData = null
-      if (profileRes.ok) {
-        profileData = await profileRes.json()
-        setProfile(profileData)
-      }
-
-      // 2. Fetch Collections Progress to build the full badge inventory
-      const progressRes = await fetch(`${API}/api/collections/progress`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      })
-      if (progressRes.ok) {
-        const progressData = await progressRes.json()
-        setCollectionsProgress(progressData.collections || [])
-      }
-    } catch (e) {
-      console.error('Failed to load profile details & badges:', e)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    fetchProfileAndBadges()
-  }, [])
-
-  const unlockedBadges = useMemo(() => {
-    const rawUnlocked = inventory.filter(b => !b.locked);
-    const getSortScore = (badge) => {
-      if (badge.type === 'collection') return 1;
-      if (badge.type === 'topic') {
-        const lvl = getTopicBadgeLevel(badge.badgeId, completedTopics);
-        if (lvl === 'gold')   return 2;
-        if (lvl === 'silver') return 4;
-        if (lvl === 'bronze') return 5;
-        if (lvl === 'blue')   return 6;
-      }
-      if (badge.type === 'streak') return 3;
-      return 7;
-    };
-    return [...rawUnlocked].sort((a, b) => {
-      const diff = getSortScore(a) - getSortScore(b);
-      if (diff !== 0) return diff;
-      return a.name.localeCompare(b.name);
-    });
-  }, [inventory, completedTopics]);
-
-  if (loading) {
-    return <div className="loading-screen">Opening Profile Showcase...</div>
-  }
-
-  const lockedTopics = inventory.filter(b => b.type === 'topic' && (b.locked || getTopicBadgeLevel(b.badgeId, completedTopics) !== 'gold'))
-  const lockedStreaks = inventory.filter(b => b.type === 'streak' && b.locked)
-
-  return (
-    <div className="profile-container">
-      <h2 className="profile-title">{profile ? profile.username.toUpperCase() : 'STUDENT'}'S CORNER</h2>
-
-      {/* Gamified Stats Section */}
-      <div className="gamified-stats-section" style={{ marginBottom: '32px' }}>
-        {/* Streak Pod */}
-        <div className="dashboard-stat-pod streak-pod">
-          <div className="fire-flame-wrapper">🔥</div>
-          <span className="dashboard-stat-val">{profile ? profile.streak : 0}</span>
-          <span className="dashboard-stat-lbl">Day Streak</span>
-        </div>
-
-        {/* Topics Mastered Pod */}
-        <div className="dashboard-stat-pod mastery-pod">
-          <div className="stat-icon-wrapper">👑</div>
-          <span className="dashboard-stat-val">{profile ? profile.masteryCount : 0}</span>
-          <span className="dashboard-stat-lbl">Topics Mastered</span>
-        </div>
-
-        {/* Questions Solved Pod */}
-        <div className="dashboard-stat-pod solved-pod">
-          <div className="stat-icon-wrapper">⭐</div>
-          <span className="dashboard-stat-val">{profile ? profile.totalSolved : 0}</span>
-          <span className="dashboard-stat-lbl">Solved Questions</span>
-        </div>
-      </div>
-
-      {/* My Badges Cabinet Section */}
-      <div className="my-badges-section">
-        <button
-          className={`collapsible-header-btn ${!showcaseExpanded ? 'collapsed' : ''}`}
-          onClick={() => setShowcaseExpanded(!showcaseExpanded)}
-          type="button"
-        >
-          <span style={{ fontSize: '1.3rem', fontWeight: 800, fontFamily: 'var(--font-display)' }}>My Badges Showcase</span>
-          <span className="collapsible-chevron" style={{ transform: showcaseExpanded ? 'rotate(180deg)' : 'rotate(0deg)', display: 'inline-block' }}>▼</span>
-        </button>
-
-        {showcaseExpanded && (
-          <div style={{ marginTop: '20px' }}>
-            {unlockedBadges.length === 0 ? (
-              <div className="empty-badges-card">
-                <span style={{ fontSize: '2.5rem' }}>🏆</span>
-                <p>You haven't unlocked any badges yet. Start solving quizzes to earn your first badge!</p>
-              </div>
-            ) : (
-              <div className="unlocked-badges-grid">
-                {unlockedBadges.map(badge => {
-                  const itemLevel = badge.type === 'collection'
-                    ? 'gold'
-                    : badge.type === 'topic'
-                      ? getTopicBadgeLevel(badge.badgeId, completedTopics)
-                      : '';
-                  return (
-                    <div
-                      key={badge.badgeId}
-                      className={`unlocked-badge-card level-${itemLevel}`}
-                      title={`${badge.name}: ${badge.description}`}
-                      onClick={() => setActiveBadgeDetail({ ...badge, level: itemLevel, isLocked: false })}
-                    >
-                      <div className="unlocked-badge-aura" />
-                      <BadgeIcon
-                        type={badge.badgeType}
-                        size={64}
-                        level={itemLevel}
-                      />
-                      <span className="unlocked-badge-name">{badge.name}</span>
-                      <span className="unlocked-badge-type-tag">{badge.type}</span>
-                    </div>
-                  )
-                })}
-              </div>
-            )}
-          </div>
-        )}
-      </div>
-
-      {/* Badges Yet to Receive Collapsible Section */}
-      <div className="yet-to-receive-section" style={{ marginTop: '32px' }}>
-        <button
-          className={`collapsible-header-btn ${!sectionExpanded ? 'collapsed' : ''}`}
-          onClick={() => setSectionExpanded(!sectionExpanded)}
-          type="button"
-        >
-          <span style={{ fontSize: '1.3rem', fontWeight: 800, fontFamily: 'var(--font-display)' }}>Badges Yet to Receive</span>
-          <span className="collapsible-chevron" style={{ transform: sectionExpanded ? 'rotate(180deg)' : 'rotate(0deg)', display: 'inline-block' }}>▼</span>
-        </button>
-
-        {sectionExpanded && (
-          <div className="collapsible-content-wrapper" style={{ marginTop: '20px' }}>
-            {/* Custom Interactive Dropdown Menu */}
-            <div className="yet-to-receive-dropdown-container" ref={dropdownRef}>
-              <button
-                className={`yet-to-receive-trigger ${dropdownOpen ? 'open' : ''}`}
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-                type="button"
-              >
-                <div className="trigger-content">
-                  <div className="trigger-text-wrapper">
-                    <span className="trigger-lbl">Show Category</span>
-                    <span className="trigger-val">
-                      {selectedSection === 'bookshelf' && '📚 Collector Bookshelf'}
-                      {selectedSection === 'mastery' && '👑 Topic Mastery'}
-                      {selectedSection === 'streaks' && '🔥 Daily Check-in'}
-                    </span>
-                  </div>
-                </div>
-                <span className="trigger-chevron">{dropdownOpen ? '▲' : '▼'}</span>
-              </button>
-
-              {dropdownOpen && (
-                <div className="yet-to-receive-dropdown-menu">
-                  <button
-                    className={`menu-item ${selectedSection === 'bookshelf' ? 'active' : ''}`}
-                    onClick={() => { setSelectedSection('bookshelf'); setDropdownOpen(false); }}
-                    type="button"
-                  >
-                    <span className="item-icon">📚</span>
-                    <div className="item-text">
-                      <strong>Collector Bookshelf</strong>
-                      <span>Progress through albums and unlock custom visual books</span>
-                    </div>
-                  </button>
-                  <button
-                    className={`menu-item ${selectedSection === 'mastery' ? 'active' : ''}`}
-                    onClick={() => { setSelectedSection('mastery'); setDropdownOpen(false); }}
-                    type="button"
-                  >
-                    <span className="item-icon">👑</span>
-                    <div className="item-text">
-                      <strong>Topic Mastery</strong>
-                      <span>Master math topics to upgrade your badges from blue to gold</span>
-                    </div>
-                  </button>
-                  <button
-                    className={`menu-item ${selectedSection === 'streaks' ? 'active' : ''}`}
-                    onClick={() => { setSelectedSection('streaks'); setDropdownOpen(false); }}
-                    type="button"
-                  >
-                    <span className="item-icon">🔥</span>
-                    <div className="item-text">
-                      <strong>Daily Check-in</strong>
-                      <span>Solve quizzes consecutively to earn streak milestones</span>
-                    </div>
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* Display Active Shelf Section */}
-            {selectedSection === 'bookshelf' ? (
-              <AchievementCollections completedTopics={completedTopics} onSelectTopic={onSelectTopic} />
-            ) : (
-              <div className="unlocked-badges-grid">
-                {selectedSection === 'mastery' && (
-                  <>
-                    {lockedTopics.length === 0 ? (
-                      <div className="empty-section-card" style={{ gridColumn: '1 / -1', width: '100%', textAlign: 'center', padding: '32px' }}>
-                        🎉 Awesome! You have unlocked Gold Mastery on all topics!
-                      </div>
-                    ) : (
-                      lockedTopics.map(item => {
-                        const itemLevel = getTopicBadgeLevel(item.badgeId, completedTopics);
-                        return (
-                          <div
-                            key={item.badgeId}
-                            className={`unlocked-badge-card locked-badge-card level-${itemLevel}`}
-                            title={`${item.name}: ${item.requirement}`}
-                            onClick={() => setActiveBadgeDetail({ ...item, level: itemLevel, isLocked: true })}
-                          >
-                            <div className="badge-lock-overlay-icon">🔒</div>
-                            <BadgeIcon type={item.badgeType} size={64} level={itemLevel} locked={true} />
-                            <span className="unlocked-badge-name">{item.name}</span>
-                            <span className="unlocked-badge-type-tag">{item.type}</span>
-                          </div>
-                        );
-                      })
-                    )}
-                  </>
-                )}
-
-                {selectedSection === 'streaks' && (
-                  <>
-                    {lockedStreaks.length === 0 ? (
-                      <div className="empty-section-card" style={{ gridColumn: '1 / -1', width: '100%', textAlign: 'center', padding: '32px' }}>
-                        🎉 Outstanding! You have unlocked all streak milestone badges!
-                      </div>
-                    ) : (
-                      lockedStreaks.map(item => (
-                        <div
-                          key={item.badgeId}
-                          className="unlocked-badge-card locked-badge-card"
-                          title={`${item.name}: ${item.requirement}`}
-                          onClick={() => setActiveBadgeDetail({ ...item, level: '', isLocked: true })}
-                        >
-                          <div className="badge-lock-overlay-icon">🔒</div>
-                          <BadgeIcon type={item.badgeType} size={64} locked={true} />
-                          <span className="unlocked-badge-name">{item.name}</span>
-                          <span className="unlocked-badge-type-tag">{item.type}</span>
-                        </div>
-                      ))
-                    )}
-                  </>
-                )}
-              </div>
-            )}
-          </div>
-        )}
-      </div>
-
-      <div className="profile-timeline-section" style={{ marginTop: '32px' }}>
-        <h3>Journey Milestones</h3>
-        <div className="timeline-trail">
-          {profile && profile.timeline && profile.timeline.map((item, idx) => {
-            const dateStr = new Date(item.date).toLocaleDateString('en-IN', {
-              day: 'numeric',
-              month: 'short',
-              year: 'numeric'
-            });
-            return (
-              <div key={idx} className="timeline-node">
-                <div className="timeline-marker">
-                  {item.type === 'system' ? '●' : '★'}
-                </div>
-                <div className="timeline-info">
-                  <span className="timeline-date">{dateStr}</span>
-                  <strong className="timeline-event">{item.event}</strong>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Interactive Badge Detail Overlay */}
-      {activeBadgeDetail && (
-        <div className="badge-detail-overlay" onClick={() => setActiveBadgeDetail(null)}>
-          <div className="badge-detail-modal" onClick={e => e.stopPropagation()}>
-            <button className="badge-detail-close" onClick={() => setActiveBadgeDetail(null)} aria-label="Close">✕</button>
-
-            <div className="badge-detail-hero">
-              <div className={`badge-detail-aura level-${activeBadgeDetail.level}`} style={{ background: activeBadgeDetail.isLocked ? '#e11d48' : '' }} />
-              <BadgeIcon
-                type={activeBadgeDetail.badgeType}
-                size={110}
-                level={activeBadgeDetail.level}
-                locked={activeBadgeDetail.isLocked}
-              />
-              {activeBadgeDetail.isLocked && (
-                <div style={{ position: 'absolute', fontSize: '2.5rem', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textShadow: '0 4px 8px rgba(0,0,0,0.5)' }}>🔒</div>
-              )}
-            </div>
-
-            <h2 className="badge-detail-title">{activeBadgeDetail.name}</h2>
-            <span className="badge-detail-tag" style={{ background: activeBadgeDetail.isLocked ? 'rgba(225, 29, 72, 0.15)' : '', borderColor: activeBadgeDetail.isLocked ? '#e11d48' : '', color: activeBadgeDetail.isLocked ? '#f43f5e' : '' }}>
-              {activeBadgeDetail.isLocked ? 'Locked ' : ''}{activeBadgeDetail.type} Badge
-            </span>
-
-            <p className="badge-detail-desc">{activeBadgeDetail.description}</p>
-
-            {activeBadgeDetail.isLocked ? (
-              <div className="badge-detail-requirement">
-                <strong>How to Unlock:</strong>
-                <p style={{ marginBottom: activeBadgeDetail.type === 'topic' ? '14px' : '0' }}>{activeBadgeDetail.requirement}</p>
-                {activeBadgeDetail.type === 'topic' && (
-                  <button
-                    className="book-next-btn"
-                    style={{ width: '100%', display: 'block' }}
-                    onClick={() => {
-                      setActiveBadgeDetail(null);
-                      onSelectTopic(activeBadgeDetail.badgeId);
-                    }}
-                  >
-                    Go Practice: {activeBadgeDetail.name}
-                  </button>
-                )}
-              </div>
-            ) : (
-              <div className="badge-detail-requirement">
-                <strong>Achievement Requirement:</strong>
-                <p>{activeBadgeDetail.requirement}</p>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-    </div>
-  )
-}
-
-/**
- * MathLabHubApp Component
- * A picker screen for the three visual labs: Visual Math Lab, Mensuration Lab,
- * and Addition (Balance Scale / Counting Apples).
- * Selecting a lab renders it inline; back button returns to this picker.
- */
-function MathLabHubApp({ onBack }) {
-  const [selectedActivities, setSelectedActivities] = useState([])
-  const [stage, setStage] = useState('choose')
-  const [difficulty, setDifficulty] = useState('easy')
-  const [numQuestions, setNumQuestions] = useState('5')
-
-  const labs = [
-    {
-      key: 'visual-math-lab-redux',
-      icon: '🎮',
-      name: 'Multiplication & division',
-      subtitle: 'Multiplication & Division',
-      desc: 'Practice multiplication and division through interactive visual puzzles',
-      accentVar: 'var(--clr-accent)',
-      accentAlpha: 'var(--clr-accent-soft)',
-    },
-    {
-      key: 'mensuration-lab',
-      icon: '🔷',
-      name: 'Mensuration Lab',
-      subtitle: 'Geometry & Shape Puzzles',
-      desc: 'Explore area, perimeter and volume through animated shape challenges',
-      accentVar: 'var(--clr-correct)',
-      accentAlpha: 'var(--clr-correct-bg)',
-    },
-    {
-      key: 'addition',
-      icon: '🍎',
-      name: 'Addition',
-      subtitle: 'Balance Scale & Counting Apples',
-      desc: 'Practice addition using visual balance scales and counting objects',
-      accentVar: 'var(--clr-accent)',
-      accentAlpha: 'var(--clr-accent-soft)',
-    },
-  ]
-
-  const selected = labs.find(lab => selectedActivities.includes(lab.key))
-  const selectedSet = useMemo(() => new Set(selectedActivities), [selectedActivities])
-  const selectedLabels = useMemo(() => selectedActivities
-    .map(key => labs.find(lab => lab.key === key)?.name)
-    .filter(Boolean), [selectedActivities])
-
-  const endpointMap = {
-    'visual-math-lab-redux': '/visual-math-lab-redux',
-    'mensuration-lab': '/mensuration-lab',
-    addition: '/addition-api',
-  }
-
-  const chooseLab = (lab) => {
-    const labKey = lab.key
-    setSelectedActivities(prev => prev.includes(labKey) ? prev.filter((item) => item !== labKey) : [...prev, labKey])
-  }
-
-  const mapAdditionDifficulty = (difficulty) => {
-    if (difficulty === 'hard') return 3
-    if (difficulty === 'medium') return 2
-    return 1
-  }
-
-  const updateNumQuestions = (value) => {
-    if (value === '' || /^\d+$/.test(value)) {
-      setNumQuestions(value)
-    }
-  }
-
-  if (stage === 'playing' && selectedActivities.length > 0) {
-    return (
-      <MixedLabApp
-        onBack={() => setStage('config')}
-        selectedActivities={selectedActivities}
-        initialDifficulty={difficulty}
-        initialNumQuestions={numQuestions}
-      />
-    )
-  }
-
-  if (stage === 'config' && selectedActivities.length > 0) {
-    const quickCounts = ['5', '10', '15', '20']
-
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
-        <div style={{
-          background: 'var(--clr-card)',
-          border: '1px solid var(--clr-border)',
-          borderRadius: 'var(--radius)',
-          padding: '40px 36px',
-          width: '100%',
-          maxWidth: '500px',
-          boxSizing: 'border-box',
-          textAlign: 'center',
-        }}>
-          {/* Back button */}
-          <div style={{ textAlign: 'left', marginBottom: '24px' }}>
-            <button
-              onClick={() => setStage('choose')}
-              style={{
-                background: 'var(--clr-surface)',
-                border: '1px solid var(--clr-border)',
-                borderRadius: '8px',
-                padding: '6px 14px',
-                cursor: 'pointer',
-                color: 'var(--clr-text-soft)',
-                fontFamily: 'var(--font-body)',
-                fontSize: '0.85rem',
-              }}
-            >← Back</button>
-          </div>
-
-          {/* Title */}
-          <h1 style={{ margin: '0 0 6px', fontSize: 'clamp(1.8rem, 3.8vw, 2.4rem)', fontWeight: 700, color: 'var(--clr-text)', fontFamily: 'var(--font-display)' }}>
-            Visual Learning Universe
-          </h1>
-          <p style={{ margin: '0 0 28px', color: 'var(--clr-text-soft)', fontSize: '0.9rem', fontFamily: 'var(--font-body)' }}>
-            Customize your quiz
-          </p>
-
-          {/* Selected Labs pills */}
-          <div style={{ marginBottom: '24px' }}>
-            <p style={{ margin: '0 0 10px', fontSize: '0.85rem', color: 'var(--clr-text-soft)', fontFamily: 'var(--font-body)' }}>
-              Selected Labs:
-            </p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'center' }}>
-              {selectedLabels.map((label) => (
-                <span key={label} style={{
-                  padding: '6px 14px',
-                  borderRadius: '20px',
-                  background: 'var(--clr-accent)',
-                  color: '#fff',
-                  fontFamily: 'var(--font-body)',
-                  fontSize: '0.85rem',
-                  fontWeight: 600,
-                }}>
-                  {label}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Difficulty */}
-          <div style={{ marginBottom: '24px' }}>
-            <p style={{ margin: '0 0 10px', fontSize: '0.85rem', color: 'var(--clr-text-soft)', fontFamily: 'var(--font-body)' }}>
-              Select Difficulty:
-            </p>
-            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'center' }}>
-              {[
-                { key: 'easy', label: 'Easy' },
-                { key: 'medium', label: 'Medium' },
-                { key: 'hard', label: 'Hard' },
-              ].map(({ key, label }) => (
-                <button key={key} onClick={() => setDifficulty(key)} style={{
-                  background: difficulty === key ? 'var(--clr-accent)' : 'transparent',
-                  color: difficulty === key ? '#fff' : 'var(--clr-text)',
-                  border: `1.5px solid ${difficulty === key ? 'var(--clr-accent)' : 'var(--clr-border)'}`,
-                  borderRadius: '20px',
-                  padding: '8px 20px',
-                  cursor: 'pointer',
-                  fontWeight: 600,
-                  fontFamily: 'var(--font-body)',
-                  fontSize: '0.9rem',
-                  transition: 'all var(--transition)',
-                }}>
-                  {label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Question count */}
-          <div style={{ marginBottom: '28px' }}>
-            <p style={{ margin: '0 0 10px', fontSize: '0.85rem', color: 'var(--clr-text-soft)', fontFamily: 'var(--font-body)' }}>
-              How many questions? (max 20)
-            </p>
-            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'center', marginBottom: '12px' }}>
-              {quickCounts.map(count => (
-                <button key={count} onClick={() => setNumQuestions(count)} style={{
-                  background: numQuestions === count ? 'var(--clr-accent)' : 'transparent',
-                  color: numQuestions === count ? '#fff' : 'var(--clr-text)',
-                  border: `1.5px solid ${numQuestions === count ? 'var(--clr-accent)' : 'var(--clr-border)'}`,
-                  borderRadius: '20px',
-                  padding: '8px 18px',
-                  cursor: 'pointer',
-                  fontWeight: 600,
-                  fontFamily: 'var(--font-body)',
-                  fontSize: '0.9rem',
-                  transition: 'all var(--transition)',
-                }}>
-                  {count}
-                </button>
-              ))}
-            </div>
-            <input
-              type="text"
-              value={numQuestions}
-              onChange={e => { const v = e.target.value; if (v === '' || /^\d+$/.test(v)) setNumQuestions(v) }}
-              style={{
-                width: '80px',
-                padding: '10px',
-                borderRadius: '8px',
-                border: '1.5px solid var(--clr-border)',
-                background: 'var(--clr-surface)',
-                color: 'var(--clr-text)',
-                fontFamily: 'var(--font-body)',
-                fontSize: '1rem',
-                textAlign: 'center',
-              }}
-              onFocus={e => e.currentTarget.style.setProperty('border-color', 'var(--clr-accent)')}
-              onBlur={e => e.currentTarget.style.setProperty('border-color', 'var(--clr-border)')}
-            />
-          </div>
-
-          {/* Start button */}
-          <button
-            onClick={() => setStage('playing')}
-            style={{
-              background: 'var(--clr-accent)',
-              border: 'none',
-              borderRadius: '12px',
-              padding: '14px 40px',
-              color: '#fff',
-              cursor: 'pointer',
-              fontSize: '1rem',
-              fontWeight: 800,
-              fontFamily: 'var(--font-body)',
-              transition: 'all var(--transition)',
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.setProperty('transform', 'translateY(-2px)');
-              e.currentTarget.style.setProperty('box-shadow', '0 8px 20px rgba(240,140,70,0.35)');
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.setProperty('transform', 'translateY(0)');
-              e.currentTarget.style.setProperty('box-shadow', 'none');
-            }}
-          >
-            Start Quiz
-          </button>
-        </div>
-      </div>
-    )
-  }
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
-      {/* Back button row */}
-      <div style={{ alignSelf: 'flex-start', marginBottom: '20px' }}>
-        <button
-          onClick={onBack}
-          style={{
-            background: 'var(--clr-surface)',
-            border: '1px solid var(--clr-border)',
-            borderRadius: '8px',
-            padding: '6px 14px',
-            cursor: 'pointer',
-            color: 'var(--clr-text-soft)',
-            fontFamily: 'var(--font-body)',
-            fontSize: '0.85rem',
-          }}
-          onMouseEnter={e => e.currentTarget.style.setProperty('background', 'var(--clr-hover-strong)')}
-          onMouseLeave={e => e.currentTarget.style.setProperty('background', 'var(--clr-surface)')}
-        >
-          ← Back
-        </button>
-      </div>
-
-      {/* Centered title */}
-      <div style={{ textAlign: 'center', marginBottom: '28px' }}>
-        <h1 style={{
-          margin: '0 0 6px', fontSize: 'clamp(1.8rem, 3.8vw, 2.4rem)', fontWeight: 700,
-          color: 'var(--clr-text)', fontFamily: 'var(--font-display)',
-        }}>
-          Visual Learning Universe
-        </h1>
-        <p style={{ margin: 0, fontSize: '0.88rem', color: 'var(--clr-text-soft)', fontFamily: 'var(--font-body)' }}>
-          Choose a lab to explore
-        </p>
-      </div>
-
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
-        gap: '16px',
-        width: '100%',
-        boxSizing: 'border-box',
-      }}>
-        {labs.map(lab => (
-          <button
-            key={lab.key}
-            onClick={() => chooseLab(lab)}
-            className="menu-card featured"
-            style={{
-              width: '100%',
-              height: 'auto',
-              minHeight: '160px',
-              borderColor: selectedSet.has(lab.key) ? 'var(--clr-accent)' : 'var(--clr-border)',
-              background: selectedSet.has(lab.key) ? 'var(--clr-surface)' : 'var(--clr-card)',
-              boxShadow: selectedSet.has(lab.key) ? '0 0 0 2px var(--clr-accent)' : undefined,
-              padding: '18px 14px',
-              gap: '6px',
-            }}
-          >
-            <span className="menu-title" style={{ fontSize: '0.95rem' }}>{lab.name}</span>
-            <span className="menu-subtitle" style={{ color: 'var(--clr-accent)', fontSize: '0.75rem', fontWeight: 600 }}>{lab.subtitle}</span>
-            <span className="menu-subtitle" style={{ fontSize: '0.72rem', marginTop: '2px', lineHeight: 1.4 }}>{lab.desc}</span>
-            {selectedSet.has(lab.key) && (
-              <span style={{
-                position: 'absolute', top: '10px', right: '10px',
-                background: 'var(--clr-accent)', color: '#fff',
-                width: '20px', height: '20px', borderRadius: '50%',
-                display: 'grid', placeItems: 'center',
-                fontSize: '0.7rem', fontWeight: 'bold',
-              }}>✓</span>
-            )}
-          </button>
-        ))}
-      </div>
-
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap', marginTop: '20px' }}>
-        <button
-          onClick={() => selectedActivities.length > 0 && setStage('config')}
-          disabled={selectedActivities.length === 0}
-          style={{
-            background: selectedActivities.length ? 'var(--clr-accent)' : 'var(--clr-card)',
-            border: 'none',
-            borderRadius: '16px',
-            padding: '14px 24px',
-            color: selectedActivities.length ? '#fff' : 'var(--clr-text-soft)',
-            cursor: selectedActivities.length ? 'pointer' : 'not-allowed',
-            fontSize: '0.95rem',
-            fontWeight: 700,
-            fontFamily: 'var(--font-body)',
-          }}
-        >
-          Continue
-        </button>
-        <span style={{ color: selectedActivities.length ? 'var(--clr-text-soft)' : '#f85149', fontSize: '0.88rem' }}>
-          {selectedActivities.length ? 'Continue with the selected activities.' : 'Please select at least one activity.'}
-        </span>
-      </div>
-    </div>
-  )
-}
-
-function MixedLabApp({ onBack, selectedActivities, initialDifficulty, initialNumQuestions }) {
-  const title = 'Visual Learning Universe'
-  const subtitle = 'Mixed activity quiz'
-  const [difficulty, setDifficulty] = useState(initialDifficulty || 'easy')
-  const [numQuestions, setNumQuestions] = useState(initialNumQuestions || '5')
-  const [started, setStarted] = useState(true)
-  const [finished, setFinished] = useState(false)
-  const [question, setQuestion] = useState(null)
-  const [answer, setAnswer] = useState('')
-  const [score, setScore] = useState(0)
-  const [questionNumber, setQuestionNumber] = useState(0)
-  const [totalQ, setTotalQ] = useState(Number(initialNumQuestions) || 5)
-  const [feedback, setFeedback] = useState('')
-  const [isCorrect, setIsCorrect] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [revealed, setRevealed] = useState(false)
-  const [results, setResults] = useState([])
-  const timer = useTimer()
-
-  const [additionMode, setAdditionMode] = useState('counting') // 'counting' or 'scale'
-  const [sourceItems, setSourceItems] = useState([])
-  const [targetItems, setTargetItems] = useState([])
-  const [rightBlocks, setRightBlocks] = useState([])
-  const [bankBlocks, setBankBlocks] = useState([])
-
-  const handleDragStart = (e, item, sourceZone) => {
-    e.dataTransfer.setData('text/plain', JSON.stringify({ item, sourceZone }))
-    e.currentTarget.classList.add('dragging')
-  }
-
-  const handleDragEnd = (e) => {
-    e.currentTarget.classList.remove('dragging')
-  }
-
-  const handleDragOver = (e) => {
-    e.preventDefault()
-  }
-
-  const handleDropCounting = (e, targetZone) => {
-    e.preventDefault()
-    if (revealed) return
-    try {
-      const data = JSON.parse(e.dataTransfer.getData('text/plain'))
-      if (data.sourceZone === targetZone) return
-      const { item, sourceZone } = data
-
-      if (sourceZone === 'source' && targetZone === 'target') {
-        setSourceItems(prev => prev.filter(i => i.id !== item.id))
-        setTargetItems(prev => [...prev, item])
-      } else if (sourceZone === 'target' && targetZone === 'source') {
-        setTargetItems(prev => prev.filter(i => i.id !== item.id))
-        setSourceItems(prev => [...prev, item])
-      }
-    } catch (err) { }
-  }
-
-  const handleDropScale = (e, targetZone) => {
-    e.preventDefault()
-    if (revealed) return
-    try {
-      const data = JSON.parse(e.dataTransfer.getData('text/plain'))
-      if (data.sourceZone === targetZone) return
-      const { item, sourceZone } = data
-
-      if (sourceZone === 'bank' && targetZone === 'right') {
-        setBankBlocks(prev => prev.filter(i => i.id !== item.id))
-        setRightBlocks(prev => [...prev, item])
-      } else if (sourceZone === 'right' && targetZone === 'bank') {
-        setRightBlocks(prev => prev.filter(i => i.id !== item.id))
-        setBankBlocks(prev => [...prev, item])
-      }
-    } catch (err) { }
-  }
-
-  const seenIdsRef = useRef(new Set())
-  const countsRef = useRef(selectedActivities.reduce((acc, key) => ({ ...acc, [key]: 0 }), {}))
-  const fetchingRef = useRef(false)
-  // Prefetch cache: holds the next question already fetched in background
-  const prefetchRef = useRef(null)
-
-  // Relative paths only — the `${API}` base is applied once at each fetch site
-  // (below). Including it here too caused a double `/summership` prefix under
-  // subpath deploys, so requests 404'd to index.html and broke question loading.
-  const endpoints = {
-    'visual-math-lab-redux': `/api/visual-math-lab-redux`,
-    'mensuration-lab': `/api/mensuration-lab`,
-    addition: `/addition-api`,
-  }
-
-  const chooseActivityKey = () => {
-    if (selectedActivities.length === 1) return selectedActivities[0]
-    const keys = [...selectedActivities]
-    keys.sort((a, b) => (countsRef.current[a] || 0) - (countsRef.current[b] || 0))
-    const minCount = countsRef.current[keys[0]]
-    const candidates = keys.filter(k => (countsRef.current[k] || 0) === minCount)
-    return candidates[Math.floor(Math.random() * candidates.length)]
-  }
-
-
-  const fetchQuestionFromActivity = async (activityKey) => {
-    try {
-      if (activityKey === 'addition') {
-        // Decide mode here so numbers can be generated with mode-correct limits
-        const mode = Math.random() > 0.5 ? 'counting' : 'scale'
-        let a, b
-        if (mode === 'counting') {
-          // Counting apples — keep sum small so it's visually manageable
-          //   easy: 2–12, medium: 15–35, hard: 15–50
-          const maxSum = difficulty === 'hard' ? 50 : difficulty === 'medium' ? 35 : 12
-          const minSum = difficulty === 'medium' || difficulty === 'hard' ? 15 : 2
-          const total = Math.floor(Math.random() * (maxSum - minSum + 1)) + minSum
-          a = Math.floor(Math.random() * (total - 1)) + 1
-          b = total - a
-        } else {
-          // Balance scale — numbers can go up to 1499
-          const maxVal = difficulty === 'hard' ? 1499 : difficulty === 'medium' ? 499 : 49
-          a = Math.floor(Math.random() * maxVal) + 1
-          b = Math.floor(Math.random() * maxVal) + 1
-        }
-        const total = a + b
-        const id = `add-${a}-${b}-${Date.now()}`
-        return { id, a, b, answer: String(total), activityKey, additionMode: mode }
-      }
-      const res = await fetch(`${API}${endpoints[activityKey]}/generate?difficulty=${difficulty}`)
-      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`)
-      const data = await res.json()
-      return { ...data, activityKey }
-    } catch (err) {
-      console.error(`Error in fetchQuestionFromActivity for ${activityKey}:`, err)
-      return null
-    }
-  }
-
-
-  const customGenerate = useCallback(async () => {
-    const maxAttempts = 12
-    let questionData = null
-
-    for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
-      const activityKey = chooseActivityKey()
-      const candidate = await fetchQuestionFromActivity(activityKey)
-      if (!candidate || !candidate.id) continue
-      if (seenIdsRef.current.has(candidate.id)) continue
-      seenIdsRef.current.add(candidate.id)
-      countsRef.current[activityKey] = (countsRef.current[activityKey] || 0) + 1
-      questionData = candidate
-      break
-    }
-
-    if (!questionData) {
-      const activityKey = selectedActivities[Math.floor(Math.random() * selectedActivities.length)]
-      const candidate = await fetchQuestionFromActivity(activityKey)
-      if (candidate && candidate.id) {
-        seenIdsRef.current.add(candidate.id)
-        countsRef.current[activityKey] = (countsRef.current[activityKey] || 0) + 1
-        questionData = candidate
-      }
-    }
-
-    return questionData
-  }, [difficulty, selectedActivities])
-
-  const customCheck = async ({ question: q, finalAns, solve }) => {
-    const endpoint = endpoints[q.activityKey] || '/addition-api'
-    if (q.activityKey === 'addition') {
-      // Check locally — answer is simply a + b
-      const correct = solve ? false : Number(finalAns) === Number(q.a) + Number(q.b)
-      const solution = `${q.a} + ${q.b} = ${Number(q.a) + Number(q.b)}`
-      const correctAnswer = String(Number(q.a) + Number(q.b))
-      return { correct, solution, correctAnswer }
-    }
-    const res = await fetch(`${API}${endpoint}/check`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ answerOption: solve ? '' : finalAns, expected: q.answer, solve: solve || false })
-    })
-    return res.json()
-  }
-
-
-  const startQuiz = () => {
-    const count = Math.max(1, Math.min(20, Number(numQuestions) || 5))
-    setTotalQ(count)
-    setStarted(true)
-    setFinished(false)
-    setScore(0)
-    setQuestionNumber(0)
-    setResults([])
-    seenIdsRef.current = new Set()
-    countsRef.current = selectedActivities.reduce((acc, key) => ({ ...acc, [key]: 0 }), {})
-    fetchingRef.current = false
-    prefetchRef.current = null
-  }
-
-  const fetchQuestion = async () => {
-    if (fetchingRef.current) return
-    fetchingRef.current = true
-    if (questionNumber >= totalQ) {
-      fetchingRef.current = false
-      setFinished(true)
-      timer.reset()
-      return
-    }
-    setLoading(true)
-    setFeedback('')
-    setAnswer('')
-    setRevealed(false)
-    setIsCorrect(null)
-    try {
-      // Use prefetched question if available, otherwise fetch now
-      let data = prefetchRef.current
-      prefetchRef.current = null
-      if (!data) {
-        data = await customGenerate()
-      }
-      
-      // Fallback if no question generated
-      if (!data) {
-        throw new Error("No question data returned from generation");
-      }
-      
-      setQuestion(data)
-      if (data.activityKey === 'addition') {
-        // Mode was decided at generation time so numbers already match it
-        const mode = data.additionMode || 'counting';
-        setAdditionMode(mode);
-        const targetTotal = Number(data.a) + Number(data.b);
-        if (mode === 'counting') {
-          // Give a few extra apples beyond the exact answer (so it's not an obvious count-all)
-          // but never go beyond difficulty caps
-          const extra = difficulty === 'easy' ? 2 : difficulty === 'medium' ? 4 : 6;
-          const totalApples = targetTotal + extra;
-          const initialItems = Array.from({ length: totalApples }, (_, i) => ({ id: `apple-${i}`, icon: '🍎' }));
-          setSourceItems(initialItems);
-          setTargetItems([]);
-        } else {
-          let initBank = [];
-          if (difficulty === 'easy') {
-            if (targetTotal >= 10) {
-              const numTens = Math.floor(targetTotal / 10) + 2;
-              const numOnes = Math.max(12, (targetTotal % 10) + 5);
-              for (let i = 0; i < numTens; i++) {
-                initBank.push({ id: `bank-10-${i}-${Math.random()}`, val: 10 });
-              }
-              for (let i = 0; i < numOnes; i++) {
-                initBank.push({ id: `bank-1-${i}-${Math.random()}`, val: 1 });
-              }
-            } else {
-              initBank = Array.from({ length: Math.max(15, targetTotal + 2) }, (_, i) => ({ id: `bank-1-${i}-${Math.random()}`, val: 1 }));
-            }
-          } else {
-            initBank = createDynamicWeightBank(targetTotal);
-          }
-          setBankBlocks(initBank);
-          setRightBlocks([]);
-        }
-      }
-      setQuestionNumber(n => n + 1)
-    } catch (err) {
-      console.error("Error fetching question in MathLab:", err)
-      // Fallback: Generate a local addition question so the quiz doesn't freeze
-      const fallbackA = Math.floor(Math.random() * (difficulty === 'hard' ? 30 : difficulty === 'medium' ? 15 : 8)) + 2;
-      const fallbackB = Math.floor(Math.random() * (difficulty === 'hard' ? 20 : difficulty === 'medium' ? 10 : 5)) + 1;
-      const total = fallbackA + fallbackB;
-      const fallbackData = {
-        id: `fallback-add-${fallbackA}-${fallbackB}-${Date.now()}`,
-        a: fallbackA,
-        b: fallbackB,
-        answer: String(total),
-        activityKey: 'addition',
-        additionMode: 'counting',
-        prompt: `What is ${fallbackA} + ${fallbackB}?`
-      }
-      setQuestion(fallbackData)
-      setAdditionMode('counting')
-      const totalApples = total + (difficulty === 'easy' ? 2 : difficulty === 'medium' ? 4 : 6);
-      setSourceItems(Array.from({ length: totalApples }, (_, i) => ({ id: `apple-${i}`, icon: '🍎' })));
-      setTargetItems([]);
-      setQuestionNumber(n => n + 1)
-    } finally {
-      setLoading(false)
-      fetchingRef.current = false
-      timer.start()
-    }
-    // Silently prefetch the next question in the background
-    customGenerate().then(next => { if (next) prefetchRef.current = next }).catch(() => { })
-  }
-
-  useEffect(() => {
-    if (started && !finished && questionNumber === 0) {
-      fetchQuestion()
-    }
-  }, [started, finished, questionNumber])
-
-  const formatMathLabAnswer = (qObj, ans) => {
-    if (!qObj) return ans
-    if (qObj.activityKey === 'addition') {
-      return `${qObj.a} + ${qObj.b} = ${ans}`
-    }
-    if (qObj.activityKey === 'visual-math-lab-redux') {
-      switch (qObj.template) {
-        case 'plant_arrays': return `${qObj.rows} × ${qObj.cols} = ${ans}`
-        case 'frog_jumps': return `${qObj.jumps} × ${qObj.step} = ${ans}`
-        case 'candy_sharing': return `${qObj.total} ÷ ${qObj.boxes} = ${ans}`
-        case 'equal_groups': return `${qObj.groups} × ${qObj.itemsPerGroup} = ${ans}`
-        case 'picture_multi': return `${qObj.n} × ${qObj.count} = ${ans}`
-        case 'math_machine': return `${qObj.input} × ${qObj.multiplier} = ${ans}`
-        default: return ans
-      }
-    }
-    if (qObj.activityKey === 'mensuration-lab') {
-      if (qObj.template === 'area_grid') {
-        return `${qObj.w} × ${qObj.h} = ${ans}`
-      }
-      if (qObj.template === 'perimeter_blocks') {
-        return `2 × (${qObj.w} + ${qObj.h}) = ${ans}`
-      }
-    }
-    return ans
-  }
-
-  const submitAns = async (optAns) => {
-    if (!question || revealed) return
-    let finalAns = optAns !== undefined ? optAns : answer
-    if (question.activityKey === 'addition') {
-      if (additionMode === 'counting') {
-        finalAns = String(targetItems.length)
-      } else if (additionMode === 'scale') {
-        const rightTotal = rightBlocks.reduce((acc, b) => acc + b.val, 0)
-        finalAns = String(rightTotal)
-      }
-    }
-    const timeTaken = timer.stop()
-    setAnswer(finalAns)
-    const data = await customCheck({ question, finalAns, solve: false })
-    setIsCorrect(data.correct)
-    if (data.correct) setScore(s => s + 1)
-    const ansString = formatMathLabAnswer(question, data.correctAnswer)
-    const explanationText = question.hint ? ` (${question.hint})` : ''
-    setFeedback(data.correct
-      ? `Correct! The answer is ${ansString}.${explanationText}`
-      : `Incorrect. The correct answer is ${ansString}.${explanationText}`
-    )
-    setResults(prev => [...prev, {
-      question: question.activityKey === 'addition'
-        ? (question.additionMode === 'counting'
-          ? `🍎 What is ${question.a} + ${question.b}?`
-          : `⚖️ What is ${question.a} + ${question.b}?`)
-        : question.prompt,
-      userAnswer: String(finalAns),
-      correctAnswer: String(ansString),
-      correct: data.correct,
-      time: timeTaken
-    }])
-    setRevealed(true)
-  }
-
-  const handleSolve = async () => {
-    if (revealed || !question) return
-    const timeTaken = timer.stop()
-    const data = await customCheck({ question, finalAns: '', solve: true })
-    setIsCorrect(false)
-    const ansString = formatMathLabAnswer(question, data.correctAnswer)
-    setFeedback(`Solution: ${ansString}`)
-    setResults(prev => [...prev, {
-      question: question.activityKey === 'addition'
-        ? (question.additionMode === 'counting'
-          ? `🍎 What is ${question.a} + ${question.b}?`
-          : `⚖️ What is ${question.a} + ${question.b}?`)
-        : question.prompt,
-      userAnswer: '—',
-      correctAnswer: String(ansString),
-      correct: false,
-      time: timeTaken
-    }])
-    if (question.activityKey === 'addition') {
-      if (additionMode === 'counting') {
-        const totalNeeded = Number(data.correctAnswer)
-        const allApples = [...sourceItems, ...targetItems]
-        setTargetItems(allApples.slice(0, totalNeeded))
-        setSourceItems(allApples.slice(totalNeeded))
-      } else if (additionMode === 'scale') {
-        let remainder = Number(data.correctAnswer)
-        let correctBlocks = []
-        let blockId = 0
-        const denom = difficulty === 'easy' ? [1] : (difficulty === 'medium' ? [50, 10, 5, 1] : [500, 100, 50, 10, 5, 1])
-        for (const d of denom) {
-          const count = Math.floor(remainder / d)
-          for (let k = 0; k < count; k++) {
-            correctBlocks.push({ id: `solve-block-${d}-${blockId++}`, val: d })
-          }
-          remainder %= d
-        }
-        setRightBlocks(correctBlocks)
-        setBankBlocks([])
-      }
-    }
-    setRevealed(true)
-  }
-
-  const handleSubmitOrNext = () => {
-    if (!revealed) {
-      submitAns()
-    } else {
-      fetchQuestion()
-    }
-  }
-
-  const advanceRef = useRef(() => { })
-  advanceRef.current = () => fetchQuestion()
-  useAutoAdvance(revealed, advanceRef, isCorrect)
-  useProgressSubmit(revealed, isCorrect, 'mixed-math-lab', question?.id)
-
-  const renderMensurationCustom = (q, ans, setAns, submitAns, revealed) => {
-    // ── COUNT SIDES / SHAPE NAME ──────────────────────────────────────────
-    if (q.template === 'count_sides' || q.template === 'shape_name') {
-      const sides = q.sides;
-      const color = q.color || '#FF6B6B';
-      const pts = Array.from({ length: sides }).map((_, i) => {
-        const angle = (i * 2 * Math.PI / sides) - Math.PI / 2;
-        return `${50 + 40 * Math.cos(angle)},${50 + 40 * Math.sin(angle)}`;
-      }).join(' ');
-      return (
-        <div className="men-canvas">
-          <div className="men-shape-wrapper">
-            <svg viewBox="0 0 100 100" className="men-shape-svg">
-              <defs>
-                <linearGradient id={`sg${sides}`} x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor={color} stopOpacity="0.9" />
-                  <stop offset="100%" stopColor={color} stopOpacity="0.5" />
-                </linearGradient>
-              </defs>
-              <polygon points={pts} fill={`url(#sg${sides})`} stroke="white" strokeWidth="3" />
-              {Array.from({ length: sides }).map((_, i) => {
-                const angle = (i * 2 * Math.PI / sides) - Math.PI / 2;
-                return <circle key={i} cx={50 + 40 * Math.cos(angle)} cy={50 + 40 * Math.sin(angle)} r="3.5" fill="white" opacity="0.9" />;
-              })}
-            </svg>
-          </div>
-          <div className="men-options-grid">
-            {q.options?.map(opt => (
-              <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
-                onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                {opt}{revealed && String(opt) === String(q.answer) && <span className="men-correct-tick"> ✓</span>}
-              </button>
-            ))}
-          </div>
-        </div>
-      );
-    }
-
-    // ── AREA GRID (interactive tap-to-count) ─────────────────────────────
-    if (q.template === 'area_grid') {
-      const counted = (typeof ans === 'string' && ans.startsWith('[')) ? JSON.parse(ans) : []; const setCounted = (updater) => { const next = typeof updater === 'function' ? updater(counted) : updater; setAns(JSON.stringify(next)); };
-
-      const allCount = q.w * q.h;
-      const handleCellClick = (idx) => {
-        if (revealed) return;
-        setCounted(prev => {
-          const next = prev.includes(idx) ? prev.filter(i => i !== idx) : [...prev, idx];
-          if (next.length === allCount) setTimeout(() => setAns(String(allCount)), 100);
-          return next;
-        });
-      };
-      return (
-        <div className="men-canvas" style={{ flexDirection: 'column', gap: '16px' }}>
-          <p className="men-canvas-tip">👆 Tap each square to count it!</p>
-          <div className="men-grid-wrap" style={{ gridTemplateColumns: `repeat(${q.w}, 1fr)` }}>
-            {Array.from({ length: allCount }).map((_, i) => (
-              <div key={i}
-                className={`men-grid-cell ${counted.includes(i) ? 'counted' : ''} ${revealed ? 'revealed' : ''}`}
-                onClick={() => handleCellClick(i)}>
-                {(counted.includes(i) || revealed) ? '✓' : ''}
-              </div>
-            ))}
-          </div>
-          <div className="men-cell-count-pill">
-            {revealed ? `✅ Area = ${q.answer} sq units` : `${counted.length} / ${allCount} counted`}
-          </div>
-        </div>
-      );
-    }
-
-    // ── PERIMETER BLOCKS (animated walking dot) ───────────────────────────
-    if (q.template === 'perimeter_blocks') {
-      const cellPx = 44;
-      const svgW = (q.w + 2) * cellPx;
-      const svgH = (q.h + 2) * cellPx;
-      const ox = cellPx; const oy = cellPx;
-      const rw = q.w * cellPx; const rh = q.h * cellPx;
-      return (
-        <div className="men-canvas" style={{ flexDirection: 'column', gap: '16px' }}>
-          <svg width={svgW} height={svgH} style={{ maxWidth: '100%' }}>
-            <defs>
-              <pattern id="gridP" width={cellPx} height={cellPx} patternUnits="userSpaceOnUse">
-                <path d={`M ${cellPx} 0 L 0 0 0 ${cellPx}`} fill="none" stroke="#E2E8F0" strokeWidth="1" />
-              </pattern>
-            </defs>
-            <rect x={ox} y={oy} width={rw} height={rh} fill="url(#gridP)" />
-            <rect x={ox} y={oy} width={rw} height={rh} fill="rgba(232,134,74,0.08)" stroke="#e8864a" strokeWidth="3" rx="4" />
-            <text x={ox + rw / 2} y={oy - 10} textAnchor="middle" fill="#e8864a" fontWeight="bold" fontSize="14">{q.w} units</text>
-            <text x={ox + rw + 16} y={oy + rh / 2 + 5} textAnchor="middle" fill="#e8864a" fontWeight="bold" fontSize="14"
-              transform={`rotate(90 ${ox + rw + 16} ${oy + rh / 2 + 5})`}>{q.h} units</text>
-            {revealed
-              ? <rect x={ox} y={oy} width={rw} height={rh} fill="none" stroke="#48BB78" strokeWidth="4" rx="4" strokeDasharray="10 4" />
-              : <circle r="7" fill="#FF7E67">
-                <animateMotion dur={`${(q.w + q.h) * 0.4}s`} repeatCount="indefinite"
-                  path={`M ${ox},${oy} L ${ox + rw},${oy} L ${ox + rw},${oy + rh} L ${ox},${oy + rh} Z`} />
-              </circle>
-            }
-          </svg>
-          <div className="men-options-grid">
-            {q.options?.map(opt => (
-              <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
-                onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                {opt}{revealed && String(opt) === String(q.answer) && <span className="men-correct-tick"> ✓</span>}
-              </button>
-            ))}
-          </div>
-        </div>
-      );
-    }
-
-    // ── COMPARE AREA ──────────────────────────────────────────────────────
-    if (q.template === 'compare_area') {
-      const scale = 36;
-      return (
-        <div className="men-canvas" style={{ flexDirection: 'column', gap: '20px' }}>
-          <div style={{ display: 'flex', gap: '30px', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'flex-end' }}>
-            {[q.shape1, q.shape2].map((sh, idx) => (
-              <div key={idx} style={{ textAlign: 'center' }}>
-                <div style={{
-                  width: `${sh.w * scale}px`, height: `${sh.h * scale}px`,
-                  background: sh.color || '#FF7E67', opacity: 0.85, borderRadius: '10px',
-                  boxShadow: `0 8px 20px ${sh.color || '#FF7E67'}55`,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: 'white', fontWeight: 800, fontSize: '1.2rem', fontFamily: 'Quicksand'
-                }}>{sh.w}×{sh.h}</div>
-                <div style={{ marginTop: '10px', fontWeight: 800, fontSize: '1.4rem', color: sh.color, fontFamily: 'Quicksand' }}>Shape {sh.label}</div>
-                <div style={{ fontSize: '0.95rem', color: '#718096', fontFamily: 'Nunito' }}>
-                  {revealed ? `Area = ${sh.w * sh.h}` : `${sh.w} × ${sh.h} = ?`}
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="men-options-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)', maxWidth: '440px' }}>
-            {q.options?.map(opt => (
-              <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
-                onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                {opt}{revealed && opt === q.answer && <span className="men-correct-tick"> ✓</span>}
-              </button>
-            ))}
-          </div>
-        </div>
-      );
-    }
-
-    // ── RECT VS SQUARE ────────────────────────────────────────────────────
-    if (q.template === 'rect_vs_square') {
-      const isSquare = q.w === q.h;
-      const scale = Math.min(45, 200 / Math.max(q.w, q.h));
-      const rw = q.w * scale; const rh = q.h * scale;
-      const ox = (280 - rw) / 2; const oy = (220 - rh) / 2;
-      return (
-        <div className="men-canvas" style={{ flexDirection: 'column', gap: '20px' }}>
-          <svg width="280" height="220" style={{ overflow: 'visible' }}>
-            <defs>
-              <linearGradient id="rectGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#F6D365" /><stop offset="100%" stopColor="#FDA085" />
-              </linearGradient>
-            </defs>
-            <rect x={ox} y={oy} width={rw} height={rh} fill="url(#rectGrad)" rx="8" className="men-rect-pulse" />
-            <text x={ox + rw / 2} y={oy - 12} textAnchor="middle" fill="#E2E8F0" fontWeight="bold" fontSize="18">{q.w}</text>
-            <text x={ox + rw + 16} y={oy + rh / 2 + 6} textAnchor="middle" fill="#E2E8F0" fontWeight="bold" fontSize="18">{q.h}</text>
-            {isSquare && [
-              `M ${ox + 8} ${oy} L ${ox + 8} ${oy + 8} L ${ox} ${oy + 8}`,
-              `M ${ox + rw - 8} ${oy} L ${ox + rw - 8} ${oy + 8} L ${ox + rw} ${oy + 8}`,
-              `M ${ox + rw - 8} ${oy + rh} L ${ox + rw - 8} ${oy + rh - 8} L ${ox + rw} ${oy + rh - 8}`,
-              `M ${ox + 8} ${oy + rh} L ${ox + 8} ${oy + rh - 8} L ${ox} ${oy + rh - 8}`
-            ].map((d, i) => <path key={i} d={d} fill="none" stroke="white" strokeWidth="2" />)}
-          </svg>
-          <div className="men-options-grid" style={{ gridTemplateColumns: 'repeat(2, 1fr)', maxWidth: '340px' }}>
-            {q.options?.map(opt => (
-              <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
-                onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                {opt === 'Square' ? '⬛' : '▬'} {opt}
-                {revealed && opt === q.answer && <span className="men-correct-tick"> ✓</span>}
-              </button>
-            ))}
-          </div>
-        </div>
-      );
-    }
-
-    // ── TRIANGLE AREA ──────────────────────────────────────────────────────
-    if (q.template === 'triangle_area') {
-      const scale = Math.min(45, 200 / Math.max(q.base, q.height));
-      const bPx = q.base * scale; const hPx = q.height * scale;
-      const svgW = bPx + 80; const svgH = hPx + 70;
-      const ox = 40; const oy = 30;
-      const pts = `${ox},${oy + hPx} ${ox + bPx / 2},${oy} ${ox + bPx},${oy + hPx}`;
-      return (
-        <div className="men-canvas" style={{ flexDirection: 'column', gap: '20px' }}>
-          <svg width={svgW} height={svgH} style={{ maxWidth: '100%', overflow: 'visible' }}>
-            <defs>
-              <linearGradient id="triGrd" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#F6D365" /><stop offset="100%" stopColor="#FDA085" />
-              </linearGradient>
-            </defs>
-            <polygon points={pts} fill="url(#triGrd)" stroke="white" strokeWidth="3" className="men-rect-pulse" />
-            <line x1={ox + bPx / 2} y1={oy} x2={ox + bPx / 2} y2={oy + hPx} stroke="#2D2520" strokeWidth="2.5" strokeDasharray="5 3" opacity="0.85" />
-            <path d={`M ${ox + bPx / 2 - 7} ${oy + hPx} L ${ox + bPx / 2 - 7} ${oy + hPx - 7} L ${ox + bPx / 2} ${oy + hPx - 7}`} fill="none" stroke="#2D2520" strokeWidth="1.5" opacity="0.85" />
-            {/* Height Label Pill */}
-            <rect x={ox + bPx / 2 + 8} y={oy + hPx / 2 - 12} width="52" height="22" rx="6" fill="#2D2520" stroke="#4A4038" strokeWidth="1.5" />
-            <text x={ox + bPx / 2 + 34} y={oy + hPx / 2 + 4} textAnchor="middle" fill="#F4F1ED" fontWeight="bold" fontSize="13">h={q.height}</text>
-            {/* Base Label Pill */}
-            <rect x={ox + bPx / 2 - 38} y={oy + hPx + 14} width="76" height="22" rx="6" fill="#2D2520" stroke="#4A4038" strokeWidth="1.5" />
-            <text x={ox + bPx / 2} y={oy + hPx + 30} textAnchor="middle" fill="#F4F1ED" fontWeight="bold" fontSize="13">base={q.base}</text>
-          </svg>
-          <div className="men-options-grid">
-            {q.options?.map(opt => (
-              <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
-                onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                {opt}{revealed && String(opt) === String(q.answer) && <span className="men-correct-tick"> ✓</span>}
-              </button>
-            ))}
-          </div>
-        </div>
-      );
-    }
-
-    // ── ANGLE TYPE ─────────────────────────────────────────────────────────
-    if (q.template === 'angle_type') {
-      const deg = q.degrees;
-      const rad = (deg * Math.PI) / 180;
-      const r = 90; const cx = 110; const cy = 120;
-      const x2 = cx + r * Math.cos(-rad); const y2 = cy + r * Math.sin(-rad);
-      const arcR = 50;
-      const ax = cx + arcR * Math.cos(-rad); const ay = cy + arcR * Math.sin(-rad);
-      const largeArc = deg > 180 ? 1 : 0;
-      const arcColor = deg < 90 ? '#48BB78' : deg === 90 ? '#4ECDC4' : '#FF7E67';
-      return (
-        <div className="men-canvas" style={{ flexDirection: 'column', gap: '20px' }}>
-          <svg width="220" height="160" style={{ overflow: 'visible' }}>
-            <line x1={cx} y1={cy} x2={cx + r} y2={cy} stroke="#988D84" strokeWidth="4.5" strokeLinecap="round" />
-            <line x1={cx} y1={cy} x2={x2} y2={y2} stroke="#F08C46" strokeWidth="4.5" strokeLinecap="round" />
-            <path d={`M ${cx + arcR} ${cy} A ${arcR} ${arcR} 0 ${largeArc} 0 ${ax} ${ay}`} fill="none" stroke={arcColor} strokeWidth="5" />
-            <text x={cx + arcR + 20} y={cy - 16} fill={arcColor} fontWeight="bold" fontSize="28">{deg}°</text>
-            {deg === 90 && <rect x={cx} y={cy - 20} width="20" height="20" fill="none" stroke="#4ECDC4" strokeWidth="3" />}
-            <circle cx={cx} cy={cy} r="5" fill="#2D3748" />
-          </svg>
-          <div className="men-options-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)', maxWidth: '400px' }}>
-            {q.options?.map(opt => {
-              const icons = { Acute: '🔺', Right: '📐', Obtuse: '🔻' };
-              return (
-                <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
-                  onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                  {icons[opt]} {opt}{revealed && opt === q.answer && <span className="men-correct-tick"> ✓</span>}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      );
-    }
-
-    // ── CIRCLE ─────────────────────────────────────────────────────────────
-    if (q.template === 'circle_q') {
-      const r = q.radius;
-      const rPx = Math.min(55, 160 / (r * 2 + 4)) * r;
-      const cx = 110; const cy = 110;
-      return (
-        <div className="men-canvas" style={{ flexDirection: 'column', gap: '20px' }}>
-          <svg width="220" height="220" style={{ overflow: 'visible' }}>
-            <defs>
-              <radialGradient id="circGrd" cx="40%" cy="35%">
-                <stop offset="0%" stopColor="#ffaa7b" /><stop offset="100%" stopColor="#e8864a" />
-              </radialGradient>
-            </defs>
-            <circle cx={cx} cy={cy} r={rPx} fill="url(#circGrd)" opacity="0.85" />
-            <line x1={cx} y1={cy} x2={cx + rPx} y2={cy} stroke="white" strokeWidth="2.5" strokeDasharray="6 3" />
-            <text x={cx + rPx / 2} y={cy - 8} textAnchor="middle" fill="white" fontWeight="bold" fontSize="14">r={r}</text>
-            <circle cx={cx} cy={cy} r="5" fill="white" />
-            {q.subtype === 'circumference' &&
-              <circle cx={cx} cy={cy} r={rPx + 8} fill="none" stroke="#FDA085" strokeWidth="3"
-                strokeDasharray="15 8" className="men-circle-spin" />}
-          </svg>
-          <div className="men-options-grid">
-            {q.options?.map(opt => (
-              <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
-                onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                {opt}{revealed && String(opt) === String(q.answer) && <span className="men-correct-tick"> ✓</span>}
-              </button>
-            ))}
-          </div>
-        </div>
-      );
-    }
-
-    // ── MISSING SIDE ───────────────────────────────────────────────────────
-    if (q.template === 'missing_side') {
-      return (
-        <div className="men-canvas" style={{ flexDirection: 'column', gap: '20px' }}>
-          {q.subtype === 'rect_missing' ? (
-            <svg width="180" height="140" style={{ overflow: 'visible' }}>
-              <defs>
-                <linearGradient id="misGrd" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#F6D365" /><stop offset="100%" stopColor="#FDA085" />
-                </linearGradient>
-              </defs>
-              <rect x="20" y="20" width="140" height="100" fill="url(#misGrd)" rx="8" opacity="0.8" />
-              <text x="90" y="75" textAnchor="middle" fill="white" fontWeight="bold" fontSize="18">Area={q.area}</text>
-              <text x="90" y="12" textAnchor="middle" fill="#FF7E67" fontWeight="bold" fontSize="16">? units</text>
-              {/* Rectangle Known Side Label */}
-              <text x="172" y="75" textAnchor="middle" fill="#E2E8F0" fontWeight="bold" fontSize="16" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.6)' }}>{q.knownSide}</text>
-            </svg>
-          ) : (
-            <svg width="140" height="140" style={{ overflow: 'visible' }}>
-              <rect x="20" y="20" width="100" height="100" fill="none" stroke="#e8864a" strokeWidth="3" strokeDasharray="8 4" rx="6" />
-              {[['70', '12'], ['133', '75'], ['70', '133'], ['7', '75']].map(([x, y], i) => (
-                <g key={i}>
-                  <circle cx={x} cy={parseInt(y) - 4} r="10" fill="#2D2520" stroke="#4A4038" strokeWidth="1" />
-                  <text x={x} y={y} textAnchor="middle" fill="#FF7E67" fontWeight="bold" fontSize="13">?</text>
-                </g>
-              ))}
-              {/* Square Perimeter Label Pill */}
-              <rect x="34" y="67" width="72" height="22" rx="6" fill="#2D2520" stroke="#4A4038" strokeWidth="1.5" />
-              <text x="70" y="83" textAnchor="middle" fill="#F4F1ED" fontWeight="bold" fontSize="13">P={q.perim}</text>
-            </svg>
-          )}
-          <div className="men-options-grid">
-            {q.options?.map(opt => (
-              <button key={opt} className={`men-choice-btn ${ans === opt ? 'selected' : ''}`}
-                onClick={() => !revealed && setAns(opt)} disabled={revealed}>
-                {opt}{revealed && String(opt) === String(q.answer) && <span className="men-correct-tick"> ✓</span>}
-              </button>
-            ))}
-          </div>
-        </div>
-      );
-    }
-
-    return null;
-  }
-
-  const renderMixedQuestionContent = () => {
-    if (!question || loading) return null;
-
-    if (question.activityKey === 'mensuration-lab') {
-      return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
-          {renderMensurationCustom(question, answer, setAnswer, submitAns, revealed)}
-        </div>
-      );
-    }
-
-    if (question.activityKey === 'visual-math-lab-redux') {
-      const props = { q: question, ans: answer, setAns: setAnswer, submitAns, revealed };
-      let visualElement = null;
-      if (question.template === 'frog_jumps') visualElement = <FrogJumpTemplate {...props} />;
-      else if (question.template === 'math_machine') visualElement = <MathMachineTemplate {...props} />;
-      else if (question.template === 'plant_arrays') visualElement = <PlantArrayTemplate {...props} />;
-      else if (question.template === 'candy_sharing') visualElement = <CandySharingTemplate {...props} />;
-      else if (question.template === 'equal_groups') visualElement = <EqualGroupsTemplate {...props} />;
-      else if (question.template === 'picture_multi') visualElement = <PictureMultiTemplate {...props} />;
-
-      return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', width: '100%', padding: '15px 0' }}>
-          {visualElement}
-          <AnswerInput ans={answer} setAns={setAnswer} submitAns={submitAns}
-            revealed={revealed} correctAnswer={formatMathLabAnswer(question, question.answer)} shake={false} options={question.options} />
-        </div>
-      );
-    }
-
-    if (question.activityKey === 'addition') {
-      if (additionMode === 'counting') {
-        return (
-          <div className="dnd-container" style={{ margin: '15px 0', width: '100%' }}>
-            <h3 style={{ textAlign: 'center', margin: '0 0 10px 0' }}>
-              Put {question.a} + {question.b} apples in the basket!
-            </h3>
-
-            <div
-              className="dnd-source"
-              onDragOver={handleDragOver}
-              onDrop={(e) => handleDropCounting(e, 'source')}
-              style={{ minHeight: '100px', padding: '15px', borderRadius: '10px' }}
-            >
-              {sourceItems.map(item => (
-                <div
-                  key={item.id}
-                  className="dnd-item"
-                  draggable={!revealed}
-                  onDragStart={(e) => handleDragStart(e, item, 'source')}
-                  onDragEnd={handleDragEnd}
-                  onClick={() => { if (!revealed) { setTargetItems(prev => [...prev, item]); setSourceItems(prev => prev.filter(i => i.id !== item.id)); } }}
-                  style={{ fontSize: '2.2rem', width: '44px', height: '44px', cursor: revealed ? 'default' : 'pointer' }}
-                >
-                  {item.icon}
-                </div>
-              ))}
-            </div>
-
-            <div
-              className="dnd-target"
-              onDragOver={handleDragOver}
-              onDrop={(e) => handleDropCounting(e, 'target')}
-              style={{ minHeight: '120px', padding: '20px', borderRadius: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-            >
-              <div style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--clr-accent)', marginBottom: '8px' }}>
-                🍎 Basket (Total: {targetItems.length})
-              </div>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'center' }}>
-                {targetItems.map(item => (
-                  <div
-                    key={item.id}
-                    className="dnd-item"
-                    draggable={!revealed}
-                    onDragStart={(e) => handleDragStart(e, item, 'target')}
-                    onDragEnd={handleDragEnd}
-                    onClick={() => !revealed && (setSourceItems(prev => [...prev, item]), setTargetItems(prev => prev.filter(i => i.id !== item.id)))}
-                    style={{ fontSize: '2.2rem', width: '44px', height: '44px', cursor: revealed ? 'default' : 'pointer' }}
-                  >
-                    {item.icon}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        );
-      } else if (additionMode === 'scale') {
-        const targetTotal = Number(question.a) + Number(question.b)
-        const rTotal = rightBlocks.reduce((acc, b) => acc + b.val, 0)
-        const diff = rTotal - targetTotal
-        const scaleFactor = difficulty === 'easy' ? 3 : (difficulty === 'medium' ? 0.3 : 0.03)
-        let rotation = diff * scaleFactor
-        if (rotation > 20) rotation = 20
-        if (rotation < -20) rotation = -20
-        const panRotation = -rotation
-
-        return (
-          <div style={{ margin: '15px 0', width: '100%' }}>
-
-
-            {/* ── Scale (tall container so blocks never overflow upward) ── */}
-            <div className="scale-container" style={{ height: '360px', overflow: 'visible' }}>
-              <div className="scale-beam" style={{ transform: `rotate(${rotation}deg)` }}>
-
-                <div className="scale-pan left" style={{ transform: `rotate(${panRotation}deg)`, height: '140px', width: '140px', overflow: 'visible' }}>
-                  <div
-                    className="weight-block"
-                    style={{
-                      background: '#34495e',
-                      borderColor: '#2c3e50',
-                      width: '56px',
-                      height: '56px',
-                      cursor: 'default',
-                      borderRadius: '10px'
-                    }}
-                  >
-                    {targetTotal}
-                  </div>
-                </div>
-
-                <div
-                  className="scale-pan right"
-                  style={{
-                    transform: `rotate(${panRotation}deg)`,
-                    height: '140px',
-                    width: rightBlocks.length > 12 ? '170px' : (rightBlocks.length > 8 ? '150px' : '140px'),
-                    overflow: 'visible',
-                    gap: rightBlocks.length > 12 ? '2px' : '4px',
-                    padding: rightBlocks.length > 12 ? '6px' : '12px',
-                    paddingBottom: rightBlocks.length > 12 ? '14px' : '20px'
-                  }}
-                  onDragOver={handleDragOver}
-                  onDrop={(e) => handleDropScale(e, 'right')}
-                >
-                  {rightBlocks.map(b => {
-                    const blockCount = rightBlocks.length;
-                    let size = '32px';
-                    if (blockCount > 12) {
-                      size = '22px';
-                    } else if (blockCount > 8) {
-                      size = '26px';
-                    }
-                    const fontSize = blockCount > 12 ? '0.7rem' : (blockCount > 8 ? '0.8rem' : '0.95rem');
-                    return (
-                      <div
-                        key={b.id}
-                        className={`weight-block val-${b.val}`}
-                        draggable={!revealed}
-                        onDragStart={(e) => handleDragStart(e, b, 'right')}
-                        onDragEnd={handleDragEnd}
-                        onClick={() => !revealed && (setBankBlocks(prev => [...prev, b]), setRightBlocks(prev => prev.filter(x => x.id !== b.id)))}
-                        style={{
-                          width: size,
-                          height: size,
-                          fontSize: fontSize,
-                          cursor: revealed ? 'default' : 'pointer',
-                          borderRadius: blockCount > 8 ? '4px' : '8px'
-                        }}
-                      >
-                        {b.val}
-                      </div>
-                    );
-                  })}
-                </div>
-
-              </div>
-              <div className="scale-fulcrum" style={{ borderBottomWidth: '60px', borderLeftWidth: '35px', borderRightWidth: '35px' }}></div>
-            </div>
-
-            <div
-              className="weight-bank"
-              onDragOver={handleDragOver}
-              onDrop={(e) => handleDropScale(e, 'bank')}
-              style={{ padding: '15px', marginTop: '20px', minHeight: '80px', gap: '8px' }}
-            >
-              {bankBlocks.map(b => (
-                <div
-                  key={b.id}
-                  className={`weight-block val-${b.val}`}
-                  draggable={!revealed}
-                  onDragStart={(e) => handleDragStart(e, b, 'bank')}
-                  onDragEnd={handleDragEnd}
-                  onClick={() => !revealed && (setRightBlocks(prev => [...prev, b]), setBankBlocks(prev => prev.filter(x => x.id !== b.id)))}
-                  style={{ width: b.val >= 100 ? '42px' : '32px', height: b.val >= 100 ? '42px' : '32px', fontSize: b.val >= 100 ? '0.85rem' : '0.95rem', cursor: revealed ? 'default' : 'pointer' }}
-                >
-                  {b.val}
-                </div>
-              ))}
-            </div>
-            <div style={{ textAlign: 'center', marginTop: '8px', fontSize: '1rem', color: 'var(--clr-text)' }}>
-              Right Side Total Weight: <strong>{rTotal}</strong>
-            </div>
-          </div>
-        );
-      }
-    }
-
-    return (
-      <>
-        {question.options && (
-          <div className="emoji-container" style={{ gap: '15px' }}>
-            {question.options.map(opt => (
-              <button key={opt} className={`kid-btn-choice ${answer === String(opt) ? 'selected' : ''}`} onClick={() => !revealed && setAnswer(String(opt))} disabled={revealed}>
-                {opt}
-              </button>
-            ))}
-          </div>
-        )}
-        {!question.options && (
-          <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-            <input type="text" className="fun-input"
-              value={answer} onChange={e => !revealed && setAnswer(e.target.value)}
-              onKeyDown={e => { if (e.key === 'Enter') handleSubmitOrNext(); }}
-              placeholder="?" disabled={revealed} autoFocus />
-          </div>
-        )}
-      </>
-    );
-  }
-
-  return (
-    <QuizLayout title={title} subtitle={subtitle} onBack={onBack} timer={started && !finished ? timer : null}>
-      {!started && !finished && <div className="welcome-box">
-        <p className="welcome-text">Start your mixed Visual Learning Universe quiz.</p>
-        <div className="question-count-row">
-          <label className="question-count-label">How many questions? (max 20)</label>
-          <input className="answer-input question-count-input" type="text" value={numQuestions} onChange={e => { const v = e.target.value; if (v === '' || (/^\d+$/.test(v) && Number(v) <= 20)) setNumQuestions(v) }} />
-        </div>
-        <div className="button-row"><button onClick={startQuiz}>Start Quiz</button></div>
-      </div>}
-      {started && !finished && <>
-        <div className="progress-pill center">Question {questionNumber}/{totalQ}</div>
-        <div className="question-box">{loading || !question ? 'Loading question…' : question.prompt}</div>
-        {renderMixedQuestionContent()}
-        {renderFeedback(feedback, isCorrect)}
-        <div className="button-row" style={{ marginTop: '30px' }}>
-          {!revealed ? (
-            <div style={{ display: 'flex', gap: '10px', width: '100%' }}>
-              <button className="kid-btn-primary" onClick={handleSolve} style={{ flex: 1, opacity: 0.75 }}>Show Answer</button>
-              <button className="kid-btn-primary" onClick={() => submitAns()} disabled={loading || (question?.activityKey === 'addition' && additionMode === 'counting' && targetItems.length === 0) || (question?.activityKey === 'addition' && additionMode === 'scale' && rightBlocks.length === 0) || (question?.activityKey !== 'addition' && !answer && !question?.options)} style={{ flex: 1 }}>Submit</button>
-            </div>
-          ) : (
-            <button className="kid-btn-primary" onClick={handleSubmitOrNext}>{questionNumber >= totalQ ? 'Finish Lab 🏁' : 'Next Question ➡️'}</button>
-          )}
-        </div>
-        {results.length > 0 && <ResultsTable results={results} />}
-      </>}
-      {finished && <div className="welcome-box">
-        <p className="welcome-text">Quiz complete.</p>
-        <p className="final-score">Final score: {score}/{totalQ}</p>
-        <ResultsTable results={results} />
-        <button className="kid-btn-primary" style={{ marginTop: '20px' }} onClick={onBack}>Play Again</button>
-      </div>}
-    </QuizLayout>
-  )
-}
 
 /**
  * GKApp Component (General Knowledge Quiz)
@@ -48352,7 +44196,7 @@ function GKApp({ onBack, markTopicCompleted, isGoalMode = false }) {
             })}
           </div>
         )}
-        {renderFeedback(feedback, isCorrect)}
+        <Feedback feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed ? <>
             <button onClick={handleSubmitOrNext} disabled={loading || !selected}>Submit</button>
@@ -51376,7 +47220,7 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
             </div>
           )
         })()}
-        {renderFeedback(feedback, isCorrect)}
+        <Feedback feedback={feedback} isCorrect={isCorrect} />
 
         {/* Action Controls */}
         <div className="button-row">
@@ -52649,7 +48493,7 @@ const fetchQuestion = async () => {
         </div>
         <input className="answer-input" type="text" value={answer} onChange={e => { if (!revealed) { const v = e.target.value; if (v === '' || v === '-' || /^-?\d+$/.test(v)) setAnswer(v) } }} disabled={revealed} placeholder="Type your answer" />
         <NumPad value={answer} onChange={v => !revealed && setAnswer(v)} disabled={revealed} />
-        {renderFeedback(feedback, isCorrect)}
+        <Feedback feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed ? <>
             <button onClick={handleSubmitOrNext} disabled={loading || answer === ''}>Submit</button>
@@ -52979,7 +48823,7 @@ const fetchQuestion = async (selectedDifficulty = difficulty) => {
         </div>
         <input className="answer-input" type="text" value={answer} onChange={(e) => { if (!revealed) { const v = e.target.value; if (v === '' || v === '-' || /^-?\d+$/.test(v)) setAnswer(v) } }} disabled={revealed} placeholder="y = ?" />
         <NumPad value={answer} onChange={(v) => !revealed && setAnswer(v)} disabled={revealed} />
-        {renderFeedback(feedback, isCorrect)}
+        <Feedback feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed ? <>
             <button onClick={handleSubmitOrNext} disabled={loading || answer === ''}>Submit</button>
@@ -54188,7 +50032,7 @@ function MultiplyApp({ onBack, completedTopics = [], goldMastery = [], markTopic
           onChange={(e) => { if (!revealed) { const v = e.target.value; if (v === '' || v === '-' || /^-?\d+$/.test(v)) setAnswer(v) } }}
           disabled={revealed} placeholder="Type your answer" autoFocus />
         <NumPad value={answer} onChange={(v) => !revealed && setAnswer(v)} disabled={revealed} />
-        {renderFeedback(feedback, isCorrect)}
+        <Feedback feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed ? <>
             <button onClick={() => level === 3 ? submitLevel3(answer) : handleSubmit()} disabled={answer === ''}>Submit</button>
@@ -54585,7 +50429,7 @@ const loadQuestion = async (excludeIds) => {
             })}
           </div>
         )}
-        {renderFeedback(feedback, isCorrect)}
+        <Feedback feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed ? <>
             <button onClick={handleSubmitOrNext} disabled={loading || !selected}>Submit</button>
@@ -55068,7 +50912,7 @@ function makeMCQuizApp({ title, subtitle, apiPath, diffLabels, tip, adaptiveOnly
               <button onClick={loadQuestion}>Retry</button>
             </div>
           )}
-          {renderFeedback(feedback, isCorrect)}
+          <Feedback feedback={feedback} isCorrect={isCorrect} />
           <div className="button-row">
             {!revealed ? (
               <button onClick={handleSolve} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>
@@ -55911,7 +51755,7 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
               <button onClick={loadQuestion}>Retry</button>
             </div>
           )}
-          {renderFeedback(feedback, isCorrect)}
+          <Feedback feedback={feedback} isCorrect={isCorrect} />
           <div className="button-row">
             {!revealed ? <>
               <button onClick={handleSubmit} disabled={loading || !answer.trim()}>Submit</button>
@@ -56373,7 +52217,7 @@ const loadQuestion = async () => {
         {question && <div style={{ textAlign: 'center' }}>
           {renderQuestion()}
         </div>}
-        {renderFeedback(feedback, isCorrect)}
+        <Feedback feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed ? (
             <>
@@ -57336,7 +53180,7 @@ function GymApp({ onBack }) {
             <button onClick={loadNext}>Retry</button>
           </div>
         )}
-        {renderFeedback(feedback, isCorrect)}
+        <Feedback feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed ? (
             <button onClick={handleSolve} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>
@@ -58369,7 +54213,7 @@ const loadQuestion = async () => {
             {numInput(valFinal, setValFinal, refFinal, null, 'Answer', question.answer)}
           </div>
         </div>}
-        {renderFeedback(feedback, isCorrect)}
+        <Feedback feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed ? <>
             <button onClick={handleSubmit} disabled={loading || !question || !isComplete()}>Submit</button>
@@ -59104,7 +54948,7 @@ function RandomMixApp({ onBack, isGoalMode = false }) {
           </div>
           {reportAck && <div style={{ textAlign: 'center', fontSize: '0.82rem', color: 'var(--clr-accent)', margin: '6px 0', fontWeight: 500 }}>{reportAck}</div>}
 
-          {renderFeedback(feedback, isCorrect)}
+          <Feedback feedback={feedback} isCorrect={isCorrect} />
 
           {revealed && isCorrect !== null && (
             <div style={{ fontSize: '0.8rem', color: 'var(--clr-dim)', marginTop: '0.3rem', textAlign: 'center' }}>
@@ -59342,7 +55186,7 @@ const loadQuestion = async () => {
           <div className="question-prompt" style={{ fontSize: '1.3rem', margin: '20px 0', lineHeight: '1.6' }}><GlossaryText text={question.prompt} /></div>
           <input className="answer-input" type="text" value={answer} onChange={e => { if (!revealed) setAnswer(e.target.value) }} disabled={revealed} placeholder={question.type === 'list' ? 'e.g. {1, 3, 5} or empty' : 'e.g. 12'} onKeyDown={handleKeyDown} autoFocus />
         </div>}
-        {renderFeedback(feedback, isCorrect)}
+        <Feedback feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed ? <>
             <button onClick={handleSubmit} disabled={loading || !answer.trim()}>Submit</button>
@@ -59571,7 +55415,7 @@ const loadQuestion = async () => {
           <div className="question-prompt" style={{ fontSize: '1.4rem', margin: '20px 0' }}><GlossaryText text={question.prompt} /></div>
           <input className="answer-input" type="text" value={answer} onChange={e => { if (!revealed) setAnswer(e.target.value) }} disabled={revealed} placeholder="e.g. 42 or 3/4" onKeyDown={handleKeyDown} autoFocus />
         </div>}
-        {renderFeedback(feedback, isCorrect)}
+        <Feedback feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed ? <>
             <button onClick={handleSubmit} disabled={loading || !answer.trim()}>Submit</button>
@@ -59851,7 +55695,7 @@ const loadQuestion = async () => {
           <div className="question-prompt" style={{ fontSize: '1.4rem', margin: '20px 0' }}><GlossaryText text={question.prompt} /></div>
           <input className="answer-input" type="text" value={answer} onChange={e => { if (!revealed) setAnswer(e.target.value) }} disabled={revealed} placeholder={placeholders[isAdaptive ? adaptiveLevel(adaptScore) : difficulty] || 'Type your answer'} onKeyDown={handleKeyDown} autoFocus />
         </div>}
-        {renderFeedback(feedback, isCorrect)}
+        <Feedback feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed ? <>
             <button onClick={handleSubmit} disabled={loading || !answer.trim()}>Submit</button>
@@ -61138,7 +56982,7 @@ const loadQuestion = async () => {
             />
           </div>
         )}
-        {renderFeedback(feedback, isCorrect)}
+        <Feedback feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed ? (
             <>
@@ -61463,7 +57307,7 @@ const loadQuestion = async () => {
             />
           </div>
         )}
-        {renderFeedback(feedback, isCorrect)}
+        <Feedback feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed ? (
             <>
@@ -62112,7 +57956,7 @@ const loadQuestion = async () => {
           )
         )}
 
-        {renderFeedback(feedback, isCorrect)}
+        <Feedback feedback={feedback} isCorrect={isCorrect} />
 
         <div className="button-row">
           {!revealed ? (
@@ -62500,7 +58344,7 @@ const generateRound = (n) => {
             </div>
           </div>
         </div>
-        {renderFeedback(feedback, isCorrect)}
+        <Feedback feedback={feedback} isCorrect={isCorrect} />
       </>}
       {finished && <div className="welcome-box">
         <p className="welcome-text">Game complete!</p>
@@ -62810,7 +58654,7 @@ const fetchQuestion = async (step) => {
         <div className="question-box">{loading || !question ? 'Loading question…' : `${question.prompt} = ?`}</div>
         <input className="answer-input" type="text" value={answer} onChange={(e) => { if (!revealed) { const v = e.target.value; if (v === '' || v === '-' || /^-?\d+$/.test(v)) setAnswer(v) } }} disabled={revealed} placeholder="Type your answer" />
         <NumPad value={answer} onChange={(v) => !revealed && setAnswer(v)} disabled={revealed} />
-        {renderFeedback(feedback, isCorrect)}
+        <Feedback feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed && <button onClick={handleSolve} disabled={loading || answer === ''} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>}
           <button onClick={handleSubmitOrNext} disabled={loading || (!revealed && answer === '')}>{revealed ? (questionNumber >= totalQ ? 'Finish Quiz' : 'Next Question') : 'Submit'}</button>
@@ -63154,7 +58998,7 @@ const loadQuestion = async () => {
             ))}
           </div>
         </>}
-        {renderFeedback(feedback, isCorrect)}
+        <Feedback feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed ? <>
             <button onClick={handleSubmit} disabled={loading || userCoeffs.some(c => c === '')}>Submit</button>
@@ -63478,7 +59322,7 @@ const loadQuestion = async () => {
             <span className="factor-group">)</span>
           </div>
         </>}
-        {renderFeedback(feedback, isCorrect)}
+        <Feedback feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed && <button onClick={handleSolve} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>}
           <button onClick={revealed ? () => advanceFnRef.current() : handleSubmit} disabled={loading || (!revealed && (!userP || !userQ || !userR || !userS))}>
@@ -63832,7 +59676,7 @@ const loadQuestion = async () => {
           {inputError && !revealed && <div className="feedback wrong" style={{ fontSize: '0.9rem', padding: '6px 14px', marginTop: 4 }}>{inputError}</div>}
           <NumPad value={currentInput} onChange={setCurrentInput} onSubmit={addFactor} disabled={revealed || remaining <= 1} />
         </>}
-        {renderFeedback(feedback, isCorrect)}
+        <Feedback feedback={feedback} isCorrect={isCorrect} />
         {revealed && <div className="button-row">
           <button onClick={() => advanceFnRef.current()}>{questionNumber >= totalQ ? 'Finish' : 'Next'}</button>
         </div>}
@@ -64161,7 +60005,7 @@ const loadQuestion = async () => {
             </>}
           </div>
         </>}
-        {renderFeedback(feedback, isCorrect)}
+        <Feedback feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed && <button onClick={handleSolve} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>}
           <button onClick={revealed ? () => advanceFnRef.current() : handleSubmit} disabled={loading || (!revealed && !userR1)}>
@@ -64506,7 +60350,7 @@ const loadQuestion = async () => {
               <input className="answer-input coeff-input" type="text" value={userZ} onChange={valInput(setUserZ)} disabled={revealed} onKeyDown={e => { if (e.key === 'Enter') handleSubmit() }} /></div>}
           </div>
         </>}
-        {renderFeedback(feedback, isCorrect)}
+        <Feedback feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed && <button onClick={handleSolve} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>}
           <button onClick={revealed ? () => advanceFnRef.current() : handleSubmit} disabled={loading || (!revealed && (!userX || !userY || (is3x3 && !userZ)))}>
@@ -64806,7 +60650,7 @@ const loadQuestion = async () => {
           </div>
           <NumPad value={answer} onChange={setAnswer} onSubmit={handleSubmit} disabled={revealed} />
         </>}
-        {renderFeedback(feedback, isCorrect)}
+        <Feedback feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed && <button onClick={handleSolve} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>}
           <button onClick={revealed ? () => advanceFnRef.current() : handleSubmit} disabled={loading || (!revealed && !answer)}>
@@ -65113,7 +60957,7 @@ const loadQuestion = async () => {
               <input className="answer-input coeff-input" type="text" value={userC} onChange={valInput(setUserC)} disabled={revealed} onKeyDown={e => { if (e.key === 'Enter') handleSubmit() }} /></div>
           </div>
         </>}
-        {renderFeedback(feedback, isCorrect)}
+        <Feedback feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed && <button onClick={handleSolve} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>}
           <button onClick={revealed ? () => advanceFnRef.current() : handleSubmit} disabled={loading || (!revealed && (!userM || !userC))}>
@@ -66420,7 +62264,7 @@ const startQuiz = async () => {
         <div className="progress-pill center">Question {qIndex + 1}/{totalQ}</div>
         {renderQuestion()}
         {renderInputs()}
-        {renderFeedback(feedback, isCorrect)}
+        <Feedback feedback={feedback} isCorrect={isCorrect} />
         <div className="button-row">
           {!revealed && <button onClick={handleSolve} disabled={loading} style={{ background: 'transparent', border: '1px solid var(--clr-accent)', color: 'var(--clr-accent)' }}>Solve</button>}
           <button onClick={revealed ? () => advanceRef.current() : handleSubmit} disabled={loading}>
@@ -69443,96 +65287,6 @@ function TatsavitLineApp({ onBack, isGoalMode = false }) {
 
 // The Vachana Literary Lab is now imported from its own directory to avoid bloating App.jsx.
 
-/**
- * QuizLayout Component
- * Wrapper layout for quiz apps (PolyFactorApp, PrimeFactorApp, QFormulaApp, etc.)
- * Provides consistent header with back button and title section
- * All quiz content is rendered via children prop
- *
- * @param {Object} props
- * @param {string} props.title - Main heading (e.g., "Prime Factors")
- * @param {string} props.subtitle - Subtitle/description
- * @param {Function} props.onBack - Callback when back button is clicked
- * @param {React.ReactNode} props.children - Quiz content to display
- */
-export function QuizLayout({ title, subtitle, onBack, children, timer, sessionGoal }) {
-  // Derive display values from the timer object
-  const isSpeed   = timer && (timer.mode === 'speed'   || sessionGoal === 'speed')
-  const isPerfect = sessionGoal === 'perfect'
-
-  // For speed mode: show remaining seconds with urgency colouring
-  const timerDisplay = (() => {
-    if (!timer) return null
-    if (isPerfect) return null // hide timer entirely for perfect solve
-    if (isSpeed) {
-      const left = timer.remaining ?? 0
-      const urgent = left <= 3
-      const warn   = left <= 5 && !urgent
-      const color  = urgent ? '#f44336' : warn ? '#ff9800' : '#4caf50'
-      return (
-        <div className="timer-pill" style={{
-          background: urgent ? 'rgba(244,67,54,0.15)' : warn ? 'rgba(255,152,0,0.15)' : undefined,
-          borderColor: color, color,
-          fontWeight: 700,
-          fontSize: '1rem',
-          minWidth: 56,
-          textAlign: 'center',
-          transition: 'color 0.3s, background 0.3s',
-          animation: urgent ? 'timerPulse 0.5s ease-in-out infinite alternate' : 'none',
-        }}>
-          ⚡ {left}s
-        </div>
-      )
-    }
-    // Standard / revision — count-up
-    return <div className="timer-pill">{timer.elapsed}s</div>
-  })()
-
-  // Goal mode badge
-  const goalBadge = (() => {
-    if (!sessionGoal || sessionGoal === 'standard') return null
-    const cfg = {
-      speed:    { label: '⚡ Speed Run',     bg: 'rgba(255,179,0,0.18)', border: '#ffb300', color: '#ffb300' },
-      perfect:  { label: '🎯 Perfect Solve', bg: 'rgba(244,67,54,0.18)', border: '#f44336', color: '#f44336' },
-      revision: { label: '🔄 Revision',      bg: 'rgba(33,150,243,0.18)', border: '#2196f3', color: '#2196f3' },
-    }[sessionGoal]
-    if (!cfg) return null
-    return (
-      <div style={{
-        display: 'inline-flex', alignItems: 'center', gap: 4,
-        padding: '2px 10px', borderRadius: 20, fontSize: '0.78rem', fontWeight: 600,
-        background: cfg.bg, border: `1.5px solid ${cfg.border}`, color: cfg.color,
-      }}>
-        {cfg.label}
-      </div>
-    )
-  })()
-
-  // Dynamically intercept children if finished and goal mode is active
-  const sessionGoalActive = sessionGoal && sessionGoal !== 'standard';
-  const processedChildren = React.Children.map(children, child => {
-    if (sessionGoalActive) {
-      return enhanceFinishedScreen(child, sessionGoal);
-    }
-    return child;
-  });
-
-  return (
-    <>
-      <div className="header-row">
-        <button className="back-button" onClick={onBack}>← Home</button>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          {goalBadge}
-          {timerDisplay}
-        </div>
-      </div>
-      <h1 style={{ fontSize: 'clamp(1.8rem, 3.8vw, 2.4rem)' }}>{title}</h1>
-      {subtitle && <p className="subtitle">{subtitle}</p>}
-      {processedChildren}
-      <QuizLayoutExtension children={children} />
-    </>
-  )
-}
 
 // ─── Learning Journey Core Components ───────────────────────────────────────
 
@@ -70696,7 +66450,7 @@ function GenericLabApp({ title, subtitle, endpoint, onBack, renderQuestionCustom
             </div>
           )}
 
-          {renderFeedback(feedback, isCorrect)}
+          <Feedback feedback={feedback} isCorrect={isCorrect} />
           <div className="button-row" style={{ marginTop: '30px' }}>
             {!revealed ? (
               <div style={{ display: 'flex', gap: '10px', width: '100%' }}>
@@ -71143,4 +66897,5 @@ export function changeXp(delta) {
 }
 
 export default App
-export { AuthMenu }
+export { AuthMenu };
+

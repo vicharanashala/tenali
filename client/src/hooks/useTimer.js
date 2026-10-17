@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 /**
  * useTimer Hook
@@ -7,11 +7,11 @@ import { useState, useEffect, useRef } from 'react';
  *   'perfect'  — hidden (elapsed kept internally but not shown by QuizLayout)
  *   other      — count-up stopwatch (original behaviour)
  */
-export function useTimer() {
+export default function useTimer() {
   const [elapsed, setElapsed] = useState(0);
   const [remaining, setRemaining] = useState(0);
   const [mode, setMode] = useState('standard');
-  const startRef = useRef(Date.now());
+  const startRef = useRef(() => Date.now());
   const intervalRef = useRef(null);
   const limitRef = useRef(0);
   const onTORef = useRef(null);
