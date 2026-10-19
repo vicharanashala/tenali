@@ -37,3 +37,13 @@
   font-size: 0.82rem;
   color: var(--clr-text-soft);
 }
+
+.section-drilldown-view .menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto 40px;
+  box-sizing: border-box;
+}

@@ -16,6 +16,16 @@
   margin-right: 6px;
 }
 
+.search-results-container .menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto 32px;
+  box-sizing: border-box;
+}
+
 .section-match-badge {
   display: inline-block;
   font-size: 0.72rem;

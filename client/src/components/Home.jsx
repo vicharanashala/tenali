@@ -7,8 +7,9 @@ import SearchBar from './SearchBar';
 import CategoryCardsGrid from './CategoryCardsGrid';
 import SectionDrilldownView from './SectionDrilldownView';
 import GlobalSearchResults from './GlobalSearchResults';
+import MenuCard from './MenuCard';
 import { PmQuestBanner, PmGoalModal, PmHomeSection } from '../PathMap';
-import { navigate } from '../lib/router';
+import { isTopicCompleted } from '../features/progress';
 import './Home.css';
 
 const API = import.meta.env.VITE_API_BASE_URL || '';
@@ -72,16 +73,6 @@ const HOME_SECTIONS = [
   },
 ];
 
-const isStage3Completed = (topicKey, completedTopics) => {
-  if (!completedTopics || !Array.isArray(completedTopics)) return false;
-  if (completedTopics.includes(topicKey)) return true;
-  return (
-    completedTopics.includes(`${topicKey}-easy`) &&
-    completedTopics.includes(`${topicKey}-medium`) &&
-    completedTopics.includes(`${topicKey}-hard`)
-  );
-};
-
 /**
  * Home Component
  * Main menu screen displaying 8 Section Cards outer view, drill-down section puzzles, and global search.
@@ -133,31 +124,15 @@ export default function Home({
     setActiveSections([]);
   };
 
-  const renderMenuCard = (app) => {
-    const isGold = goldMastery && goldMastery.includes(app.key);
-    const isCompleted = isStage3Completed(app.key, completedTopics);
-    return (
-      <button
-        key={app.key}
-        type="button"
-        className={`menu-card ${isGold ? 'gold-card' : app.color}`}
-        onClick={() => {
-          if (app.isRedirect) {
-            navigate(app.path);
-          } else {
-            onSelect(app.key);
-          }
-        }}
-      >
-        <span className="menu-title">
-          {app.name}
-          {isGold && <span className="badge-indicator">🥇</span>}
-          {!isGold && isCompleted && <span className="badge-indicator">✅</span>}
-        </span>
-        <span className="menu-subtitle">{app.subtitle}</span>
-      </button>
-    );
-  };
+  const renderMenuCard = (app) => (
+    <MenuCard
+      key={app.key}
+      app={app}
+      isCompleted={isTopicCompleted(app.key, completedTopics)}
+      isGold={Boolean(goldMastery && goldMastery.includes(app.key))}
+      onSelect={onSelect}
+    />
+  );
 
   const currentSection = selectedSection
     ? HOME_SECTIONS.find((s) => s.key === selectedSection)
@@ -169,7 +144,7 @@ export default function Home({
   return (
     <>
       <div className="home-top-header">
-        {isGoalSelection && onBack && (
+        {isGoalSelection && onBack && !selectedSection && (
           <button
             type="button"
             onClick={onBack}
@@ -180,7 +155,7 @@ export default function Home({
           </button>
         )}
 
-        {!isGoalSelection && selectedSection && (
+        {selectedSection && (
           <button
             type="button"
             onClick={() => {
@@ -202,7 +177,7 @@ export default function Home({
             justifyContent: 'center',
             gap: '16px',
             marginBottom: '4px',
-            paddingTop: isGoalSelection ? '44px' : '0',
+            paddingTop: (isGoalSelection || selectedSection) ? '44px' : '0',
           }}
         >
           <img src="/tenali.png" alt="Tenali Raman" style={{ width: '80px', height: 'auto', flexShrink: 0 }} />
@@ -288,7 +263,6 @@ export default function Home({
           tiles={sectionTiles}
           completedTopics={completedTopics}
           goldMastery={goldMastery}
-          isStage3Completed={isStage3Completed}
           renderCard={renderMenuCard}
         />
       )}
@@ -300,7 +274,6 @@ export default function Home({
           tiles={TILES}
           completedTopics={completedTopics}
           goldMastery={goldMastery}
-          isStage3Completed={isStage3Completed}
           onSelectSection={setSelectedSection}
         />
       )}

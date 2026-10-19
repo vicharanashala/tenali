@@ -1,0 +1,121 @@
+/* Topic Menu Card in Drilldown & Search Views */
+.topic-menu-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  text-align: left;
+  padding: 18px 16px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--clr-border);
+  background: var(--clr-surface);
+  color: var(--clr-text);
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  font-family: var(--font-body);
+  box-sizing: border-box;
+  min-height: 140px;
+  width: 100%;
+}
+
+.topic-menu-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+  border-color: var(--clr-accent);
+}
+
+/* Corner theme indicator dot */
+.topic-menu-card::before {
+  content: '';
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--dot, var(--clr-accent));
+  opacity: 0.85;
+}
+
+.topic-menu-card.purple { --dot: #9b6dca; }
+.topic-menu-card.blue   { --dot: #5a8fc2; }
+.topic-menu-card.green  { --dot: #5aab7a; }
+.topic-menu-card.orange { --dot: #e8864a; }
+.topic-menu-card.gold-card {
+  border-color: rgba(255, 193, 7, 0.45);
+  --dot: #d99b00;
+}
+
+.topic-card-main {
+  flex: 1;
+  width: 100%;
+  margin-bottom: 12px;
+  padding-right: 12px;
+}
+
+.topic-card-title {
+  font-size: 1.02rem;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+  color: var(--clr-text);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.topic-card-desc {
+  font-size: 0.8rem;
+  color: var(--clr-text-soft);
+  margin: 0;
+  line-height: 1.35;
+}
+
+.topic-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 10px;
+  border-top: 1px solid var(--clr-border);
+  margin-top: auto;
+}
+
+.topic-card-badges {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  min-height: 22px;
+}
+
+.topic-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 6px;
+  line-height: 1.2;
+}
+
+.topic-badge-pill.completed {
+  background: rgba(40, 167, 69, 0.15);
+  color: #28a745;
+}
+
+.topic-badge-pill.gold {
+  background: rgba(255, 193, 7, 0.18);
+  color: #d99b00;
+}
+
+.topic-card-cta {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--clr-accent);
+  transition: transform var(--transition);
+}
+
+.topic-menu-card:hover .topic-card-cta {
+  transform: translateX(2px);
+}

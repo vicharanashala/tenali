@@ -1,4 +1,5 @@
 import React from 'react';
+import { calculateSectionProgress } from '../features/progress';
 import './CategoryCardsGrid.css';
 
 /**
@@ -10,7 +11,6 @@ export default function CategoryCardsGrid({
   tiles = [],
   completedTopics = [],
   goldMastery = [],
-  isStage3Completed,
   onSelectSection,
   id,
 }) {
@@ -20,12 +20,11 @@ export default function CategoryCardsGrid({
         const sectionTiles = tiles.filter(
           (app) => (app.category || 'shelf') === section.key
         );
-        const completedCount = sectionTiles.filter((app) =>
-          isStage3Completed ? isStage3Completed(app.key, completedTopics) : false
-        ).length;
-        const goldCount = sectionTiles.filter(
-          (app) => goldMastery && goldMastery.includes(app.key)
-        ).length;
+        const { completedCount, goldCount } = calculateSectionProgress(
+          sectionTiles,
+          completedTopics,
+          goldMastery
+        );
 
         return (
           <button
@@ -44,18 +43,13 @@ export default function CategoryCardsGrid({
             </div>
             <div className="section-card-footer">
               <div className="section-card-progress">
+                <span className="progress-fraction">
+                  {completedCount}/{sectionTiles.length}
+                </span>
                 {goldCount > 0 && (
                   <span className="progress-pill gold" title="Gold Mastery">
                     🥇 {goldCount}
                   </span>
-                )}
-                {completedCount > 0 && (
-                  <span className="progress-pill completed" title="Completed">
-                    ✓ {completedCount}
-                  </span>
-                )}
-                {completedCount === 0 && goldCount === 0 && (
-                  <span className="progress-pill muted">0 / {sectionTiles.length} done</span>
                 )}
               </div>
               <span className="section-card-cta">Explore →</span>

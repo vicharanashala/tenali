@@ -112,6 +112,13 @@
   align-items: center;
 }
 
+.progress-fraction {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--clr-text-soft);
+  letter-spacing: 0.02em;
+}
+
 .progress-pill {
   display: inline-flex;
   align-items: center;

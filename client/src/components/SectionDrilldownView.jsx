@@ -1,4 +1,5 @@
 import React from 'react';
+import { calculateSectionProgress } from '../features/progress';
 import './SectionDrilldownView.css';
 
 /**
@@ -10,16 +11,14 @@ export default function SectionDrilldownView({
   tiles = [],
   completedTopics = [],
   goldMastery = [],
-  isStage3Completed,
   renderCard,
   id,
 }) {
-  const completedCount = tiles.filter((app) =>
-    isStage3Completed ? isStage3Completed(app.key, completedTopics) : false
-  ).length;
-  const goldCount = tiles.filter(
-    (app) => goldMastery && goldMastery.includes(app.key)
-  ).length;
+  const { completedCount, goldCount } = calculateSectionProgress(
+    tiles,
+    completedTopics,
+    goldMastery
+  );
 
   return (
     <div className="section-drilldown-view" id={id}>

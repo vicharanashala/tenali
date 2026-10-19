@@ -38,13 +38,21 @@ import CrossSectionApp from './CrossSectionApp';
 
 window.React = React;
 console.log("React version:", React.version);
-import LinearAlgebraApp from './LinearAlgebraApp'
-import Home from './components/Home'
+import Home from './components/Home';
+import LinearAlgebraApp from './LinearAlgebraApp';
 import PathMap, { PmSuggestIcon } from './PathMap';
 import { pmTrackAnswer } from './pathMapHelpers';
-import LandingPage from './components/LandingPage/LandingPage.jsx'
-import LandingNavbar from './components/LandingPage/LandingNavbar.jsx'
+import LandingPage from './components/LandingPage/LandingPage.jsx';
+import LandingNavbar from './components/LandingPage/LandingNavbar.jsx';
 import { createDynamicWeightBank } from './balanceScaleBank.js';
+import {
+  isStage3Completed,
+  getTopicBadgeLevel,
+  saveLocalProgress,
+  loadLocalProgress,
+} from './features/progress';
+
+export { getTopicBadgeLevel };
 
 
 /**
@@ -41318,13 +41326,6 @@ function TenthApp({ onBack }) {
 }
 
 
-const isStage3Completed = (topicKey, completedTopics) => {
-  if (!completedTopics || !Array.isArray(completedTopics)) return false;
-  if (completedTopics.includes(topicKey)) return true;
-  return completedTopics.includes(`${topicKey}-easy`) &&
-    completedTopics.includes(`${topicKey}-medium`) &&
-    completedTopics.includes(`${topicKey}-hard`);
-};
 
 const getTopicBadgeType = (topicKey, completedTopicsList) => {
   if (!completedTopicsList || !Array.isArray(completedTopicsList)) return 'topic_blue';
@@ -42480,22 +42481,20 @@ function App() {
   }, []);
 
   const syncProgressToServer = (newCompleted, newGold, newCoins, newSolved, newStreak) => {
-    let localCompleted = [];
-    try { localCompleted = JSON.parse(localStorage.getItem('tenali-completed-topics') || '[]') } catch { }
-    let localGold = [];
-    try { localGold = JSON.parse(localStorage.getItem('tenali-gold-mastery') || '[]') } catch { }
-    let localCoins = 0;
-    try { localCoins = parseInt(localStorage.getItem('tenali-coins') || '0', 10) } catch { }
-    let localSolved = 0;
-    try { localSolved = parseInt(localStorage.getItem('tenali-total-solved') || '0', 10) } catch { }
-    let localStreak = 0;
-    try { localStreak = parseInt(localStorage.getItem('tenali-streak') || '0', 10) } catch { }
+    const local = loadLocalProgress();
+    const finalCompleted = newCompleted || local.completedTopics;
+    const finalGold = newGold || local.goldMastery;
+    const finalCoins = newCoins !== undefined ? newCoins : local.coins;
+    const finalSolved = newSolved !== undefined ? newSolved : local.totalSolved;
+    const finalStreak = newStreak !== undefined ? newStreak : local.streak;
 
-    const finalCompleted = newCompleted || localCompleted;
-    const finalGold = newGold || localGold;
-    const finalCoins = newCoins !== undefined ? newCoins : localCoins;
-    const finalSolved = newSolved !== undefined ? newSolved : localSolved;
-    const finalStreak = newStreak !== undefined ? newStreak : localStreak;
+    saveLocalProgress({
+      completedTopics: finalCompleted,
+      goldMastery: finalGold,
+      coins: finalCoins,
+      totalSolved: finalSolved,
+      streak: finalStreak,
+    });
 
     // Check for new unlocks locally
     const enqueues = [];
@@ -42654,6 +42653,7 @@ function App() {
       next.push(startedKey);
     }
     setCompletedTopics(next);
+    saveLocalProgress({ completedTopics: next });
     syncProgressToServer(next, goldMastery, coins);
   };
 
@@ -42661,12 +42661,14 @@ function App() {
     if (goldMastery.includes(topicKey)) return;
     const next = [...goldMastery, topicKey];
     setGoldMastery(next);
+    saveLocalProgress({ goldMastery: next });
     syncProgressToServer(completedTopics, next, coins);
   };
 
   const updateCoins = (amount) => {
     const next = Math.max(0, coins + amount);
     setCoins(next);
+    saveLocalProgress({ coins: next });
     syncProgressToServer(completedTopics, goldMastery, next);
   };
 
@@ -44768,6 +44770,8 @@ function App() {
       return (
         <Home
           isGoalSelection={true}
+          completedTopics={completedTopics}
+          goldMastery={goldMastery}
           onBack={() => {
             setMode(null);
             setIsGoalMode(false);
@@ -44822,6 +44826,8 @@ function App() {
 
     return (
       <Home
+        completedTopics={completedTopics}
+        goldMastery={goldMastery}
         onSelect={(key) => {
           setCurrentView('puzzles');
           if (key === 'goalpractice') {
@@ -45476,24 +45482,8 @@ function App() {
       />}
       <ReflectionJournal />
     </div>
-  )
+  );
 }
-
-export function getTopicBadgeLevel(topicKey, completedTopics = []) {
-  if (!completedTopics || !Array.isArray(completedTopics)) return 'locked';
-  if (completedTopics.includes(`${topicKey}-hard`) || completedTopics.includes(`${topicKey}-gold`)) {
-    return 'gold';
-  }
-  if (completedTopics.includes(`${topicKey}-medium`)) {
-    return 'silver';
-  }
-  if (completedTopics.includes(`${topicKey}-easy`)) {
-    return 'bronze';
-  }
-  if (completedTopics.includes(`${topicKey}-started`)) {
-    return 'blue';
-  }
-  return 'locked';
 }
 
 function BadgeIcon({ type, size = 64, locked = false, level = '' }) {
