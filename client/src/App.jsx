@@ -51,6 +51,7 @@ import {
   saveLocalProgress,
   loadLocalProgress,
 } from './features/progress';
+import { useQuizCompletion } from './hooks/useQuizCompletion';
 
 export { getTopicBadgeLevel };
 
@@ -50222,14 +50223,15 @@ function AdditionApp({ onBack, completedTopics = [], goldMastery = [], markTopic
   const questionAbortRef = useRef(null)
   useEffect(() => () => questionAbortRef.current?.abort(), [])
 
-  useEffect(() => {
-    if (finished) {
-      const pass = score / totalQ >= 0.8
-      if (pass && markTopicCompleted) {
-        markTopicCompleted('addition', isAdaptive ? 'adaptive' : difficulty)
-      }
-    }
-  }, [finished, score, totalQ, markTopicCompleted])
+  useQuizCompletion({
+    topicKey: 'addition',
+    difficulty,
+    isAdaptive,
+    score,
+    totalQ,
+    finished,
+    markTopicCompleted,
+  })
 
   // Drag & Drop Visual Counting state
   const [sourceItems, setSourceItems] = useState([])
@@ -51840,14 +51842,15 @@ function BasicArithApp({ onBack, completedTopics = [], goldMastery = [], markTop
   const questionAbortRef = useRef(null)
   useEffect(() => () => questionAbortRef.current?.abort(), [])
 
-  useEffect(() => {
-    if (finished) {
-      const pass = score / totalQ >= 0.8
-      if (pass && markTopicCompleted) {
-        markTopicCompleted('basicarith', isAdaptive ? 'adaptive' : difficulty)
-      }
-    }
-  }, [finished, score, totalQ, markTopicCompleted, isAdaptive, difficulty])
+  useQuizCompletion({
+    topicKey: 'basicarith',
+    difficulty,
+    isAdaptive,
+    score,
+    totalQ,
+    finished,
+    markTopicCompleted,
+  })
 
   const effectiveDiff = () => (isAdaptive) ? adaptiveLevel(adaptScoreRef.current) : difficulty
 
@@ -54970,14 +54973,15 @@ function makeQuizApp({ title, subtitle, apiPath, diffLabels, placeholders, tip, 
     const questionAbortRef = useRef(null)
     useEffect(() => () => questionAbortRef.current?.abort(), [])
 
-    useEffect(() => {
-      if (finished) {
-        const pass = score / totalQ >= 0.8
-        if (pass && markTopicCompleted) {
-          markTopicCompleted(topicKey, isAdaptive ? 'adaptive' : difficulty)
-        }
-      }
-    }, [finished])
+    useQuizCompletion({
+      topicKey,
+      difficulty,
+      isAdaptive,
+      score,
+      totalQ,
+      finished,
+      markTopicCompleted,
+    })
 
     const effectiveDifficulty = () => isAdaptive ? adaptiveLevel(adaptScoreRef.current) : difficulty
 
@@ -59094,14 +59098,15 @@ function RatioApp({ onBack, completedTopics = [], goldMastery = [], markTopicCom
   const [started, setStarted] = useState(false)
   const [finished, setFinished] = useState(false)
 
-  useEffect(() => {
-    if (finished) {
-      const pass = score / totalQ >= 0.8
-      if (pass && markTopicCompleted) {
-        markTopicCompleted('ratio', isAdaptive ? 'adaptive' : difficulty)
-      }
-    }
-  }, [finished])
+  useQuizCompletion({
+    topicKey: 'ratio',
+    difficulty,
+    isAdaptive,
+    score,
+    totalQ,
+    finished,
+    markTopicCompleted,
+  })
 
   const [question, setQuestion] = useState(null)
   const [answer, setAnswer] = useState('')
@@ -60998,14 +61003,15 @@ function FractionAddApp({ onBack, completedTopics = [], goldMastery = [], markTo
   const [started, setStarted] = useState(false)
   const [finished, setFinished] = useState(false)
 
-  useEffect(() => {
-    if (finished) {
-      const pass = score / totalQ >= 0.8
-      if (pass && markTopicCompleted) {
-        markTopicCompleted('fractionadd', isAdaptive ? 'adaptive' : difficulty)
-      }
-    }
-  }, [finished])
+  useQuizCompletion({
+    topicKey: 'fractionadd',
+    difficulty,
+    isAdaptive,
+    score,
+    totalQ,
+    finished,
+    markTopicCompleted,
+  })
   // Current question object from API
   const [question, setQuestion] = useState(null)
   // User's answer as a string: "3/4" or "2 3/4" for mixed numbers
