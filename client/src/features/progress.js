@@ -91,7 +91,7 @@ export function getTopicBadgeLevel(topicKey, completedTopics = []) {
  */
 export function calculateSectionProgress(sectionTiles = [], completedTopics = [], goldMastery = []) {
   const completedCount = sectionTiles.filter((app) =>
-    isTopicCompleted(app.key, completedTopics)
+    isStage3Completed(app.key, completedTopics)
   ).length;
   const goldCount = sectionTiles.filter(
     (app) => goldMastery && Array.isArray(goldMastery) && goldMastery.includes(app.key)

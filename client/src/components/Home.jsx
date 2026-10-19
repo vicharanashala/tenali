@@ -9,7 +9,7 @@ import SectionDrilldownView from './SectionDrilldownView';
 import GlobalSearchResults from './GlobalSearchResults';
 import MenuCard from './MenuCard';
 import { PmQuestBanner, PmGoalModal, PmHomeSection } from '../PathMap';
-import { isTopicCompleted } from '../features/progress';
+import { isStage3Completed } from '../features/progress';
 import './Home.css';
 
 const API = import.meta.env.VITE_API_BASE_URL || '';
@@ -93,11 +93,12 @@ export default function Home({
   const isSearching = search.trim() !== '';
 
   // Global search across all 95 tiles across all 8 sections
+  const query = search.trim().toLowerCase();
   const searchMatches = isSearching
     ? TILES.filter(
         (a) =>
-          a.name.toLowerCase().includes(search.toLowerCase()) ||
-          a.subtitle.toLowerCase().includes(search.toLowerCase())
+          a.name.toLowerCase().includes(query) ||
+          a.subtitle.toLowerCase().includes(query)
       )
     : [];
 
@@ -128,7 +129,7 @@ export default function Home({
     <MenuCard
       key={app.key}
       app={app}
-      isCompleted={isTopicCompleted(app.key, completedTopics)}
+      isCompleted={isStage3Completed(app.key, completedTopics)}
       isGold={Boolean(goldMastery && goldMastery.includes(app.key))}
       onSelect={onSelect}
     />

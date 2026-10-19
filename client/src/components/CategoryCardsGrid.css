@@ -30,6 +30,7 @@
 }
 
 .section-category-card:hover {
+  background: var(--clr-surface);
   transform: translateY(-3px);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
   border-color: var(--clr-accent);
