@@ -139,3 +139,61 @@ export function saveLocalProgress({ completedTopics, goldMastery, coins, totalSo
     console.error('Failed to save progress to localStorage:', e);
   }
 }
+
+/**
+ * Safely marks a topic/difficulty as completed in localStorage.
+ * Ensures deduplicated arrays and automatically records the `${topicKey}-started` key.
+ *
+ * @param {string} topicKey
+ * @param {string} [difficulty='']
+ * @returns {string[]} The updated list of completed topic keys
+ */
+export function addCompletedTopic(topicKey, difficulty = '') {
+  if (!topicKey) return loadLocalProgress().completedTopics;
+  const local = loadLocalProgress();
+  const targetKey = difficulty ? `${topicKey}-${difficulty}` : topicKey;
+  const startedKey = `${topicKey}-started`;
+  const set = new Set(local.completedTopics);
+  set.add(targetKey);
+  set.add(startedKey);
+  const nextList = Array.from(set);
+  saveLocalProgress({ completedTopics: nextList });
+  return nextList;
+}
+
+/**
+ * Merges incoming progress updates with existing local storage monotonically.
+ * Completed topics and gold mastery are unified (Set union) so completed topics
+ * can NEVER be overwritten, lost, or downgraded by stale closures or async syncs.
+ *
+ * @param {{
+ *   completedTopics?: string[],
+ *   goldMastery?: string[],
+ *   coins?: number,
+ *   totalSolved?: number,
+ *   streak?: number
+ * }} incoming
+ * @returns {{
+ *   completedTopics: string[],
+ *   goldMastery: string[],
+ *   coins: number,
+ *   totalSolved: number,
+ *   streak: number
+ * }}
+ */
+export function reconcileProgress(incoming = {}) {
+  const local = loadLocalProgress();
+  const completedTopics = Array.from(
+    new Set([...local.completedTopics, ...(incoming.completedTopics || [])])
+  );
+  const goldMastery = Array.from(
+    new Set([...local.goldMastery, ...(incoming.goldMastery || [])])
+  );
+  const coins = incoming.coins !== undefined ? Math.max(local.coins, incoming.coins) : local.coins;
+  const totalSolved = incoming.totalSolved !== undefined ? Math.max(local.totalSolved, incoming.totalSolved) : local.totalSolved;
+  const streak = incoming.streak !== undefined ? Math.max(local.streak, incoming.streak) : local.streak;
+
+  const merged = { completedTopics, goldMastery, coins, totalSolved, streak };
+  saveLocalProgress(merged);
+  return merged;
+}

@@ -50,6 +50,8 @@ import {
   getTopicBadgeLevel,
   saveLocalProgress,
   loadLocalProgress,
+  addCompletedTopic,
+  reconcileProgress,
 } from './features/progress';
 import { useQuizCompletion } from './hooks/useQuizCompletion';
 
@@ -42409,16 +42411,12 @@ function App() {
         if (r.ok) {
           const data = await r.json()
           if (data) {
-            setCompletedTopics(data.completedTopics || [])
-            setGoldMastery(data.goldMastery || [])
-            setCoins(data.coins || 0)
-            setTotalSolved(data.totalSolved || 0)
-            setStreak(data.streak || 0)
-            localStorage.setItem('tenali-completed-topics', JSON.stringify(data.completedTopics || []))
-            localStorage.setItem('tenali-gold-mastery', JSON.stringify(data.goldMastery || []))
-            localStorage.setItem('tenali-coins', String(data.coins || 0))
-            localStorage.setItem('tenali-total-solved', String(data.totalSolved || 0))
-            localStorage.setItem('tenali-streak', String(data.streak || 0))
+            const merged = reconcileProgress(data);
+            setCompletedTopics(merged.completedTopics);
+            setGoldMastery(merged.goldMastery);
+            setCoins(merged.coins);
+            setTotalSolved(merged.totalSolved);
+            setStreak(merged.streak);
 
             if (data.newlyCompleted && data.newlyCompleted.length > 0) {
               const serverEnqueues = [];
@@ -42482,20 +42480,18 @@ function App() {
   }, []);
 
   const syncProgressToServer = (newCompleted, newGold, newCoins, newSolved, newStreak) => {
-    const local = loadLocalProgress();
-    const finalCompleted = newCompleted || local.completedTopics;
-    const finalGold = newGold || local.goldMastery;
-    const finalCoins = newCoins !== undefined ? newCoins : local.coins;
-    const finalSolved = newSolved !== undefined ? newSolved : local.totalSolved;
-    const finalStreak = newStreak !== undefined ? newStreak : local.streak;
-
-    saveLocalProgress({
-      completedTopics: finalCompleted,
-      goldMastery: finalGold,
-      coins: finalCoins,
-      totalSolved: finalSolved,
-      streak: finalStreak,
+    const merged = reconcileProgress({
+      completedTopics: newCompleted,
+      goldMastery: newGold,
+      coins: newCoins,
+      totalSolved: newSolved,
+      streak: newStreak,
     });
+    const finalCompleted = merged.completedTopics;
+    const finalGold = merged.goldMastery;
+    const finalCoins = merged.coins;
+    const finalSolved = merged.totalSolved;
+    const finalStreak = merged.streak;
 
     // Check for new unlocks locally
     const enqueues = [];
@@ -42646,15 +42642,8 @@ function App() {
   };
 
   const markTopicCompleted = (topicKey, difficulty = '') => {
-    const targetKey = difficulty ? `${topicKey}-${difficulty}` : topicKey;
-    if (completedTopics.includes(targetKey)) return;
-    let next = [...completedTopics, targetKey];
-    const startedKey = `${topicKey}-started`;
-    if (!next.includes(startedKey)) {
-      next.push(startedKey);
-    }
+    const next = addCompletedTopic(topicKey, difficulty);
     setCompletedTopics(next);
-    saveLocalProgress({ completedTopics: next });
     syncProgressToServer(next, goldMastery, coins);
   };
 
@@ -42679,12 +42668,14 @@ function App() {
         const next = prev + amount;
         localStorage.setItem('tenali-total-solved', String(next));
 
-        let nextCompleted = completedTopics;
+        const local = loadLocalProgress();
+        let nextCompleted = local.completedTopics;
         if (amount > 0 && mode && mode !== 'gk' && mode !== 'vocab' && mode !== 'randommix' && mode !== 'custom' && mode !== 'gym') {
           const startedKey = `${mode}-started`;
-          if (!completedTopics.includes(startedKey)) {
-            nextCompleted = [...completedTopics, startedKey];
+          if (!nextCompleted.includes(startedKey)) {
+            nextCompleted = [...nextCompleted, startedKey];
             setCompletedTopics(nextCompleted);
+            saveLocalProgress({ completedTopics: nextCompleted });
           }
         }
 
@@ -42695,7 +42686,7 @@ function App() {
     return () => {
       delete window.tenaliIncrementSolved;
     };
-  }, [completedTopics, goldMastery, coins, totalSolved, mode]);
+  }, [goldMastery, coins, totalSolved, mode]);
 
 
   // Sync current mode to window global for QuizLayoutExtension
