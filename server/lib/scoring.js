@@ -10,13 +10,16 @@
 // Value provenance. The numbers below are consolidated from the rewards
 // that are *already* paid out in the scattered call sites today:
 //
-//   server/lil/studentState.js        — 10/20 coins, 10/2 XP for quiz attempts
+//   server/lil/studentState.js        — 10 coins + 10 XP per correct answer
+//                                       (any difficulty), 20 coins for speed-run,
+//                                       0 coins + 2 XP on a wrong answer
 //   server/routes/review.js           — 15 coins + 15 XP per review completion
 //   server/index.js#evaluateCollections — collection coinReward (per JSON)
 //   server/hints/hintSpecs.js#COSTS   — 5/8/10 coins for hint tier 1/2/3
-//   server/hints/index.js             — +5 XP for daily check-in
-//   server/auth.js (UserSchema)       — milestone thresholds (already 3/7/15/30)
-//   client/src/App.jsx (~L55246)      — 150 coins for transfer-challenge win
+//   server/hints/index.js             — +5 XP for daily check-in (0 coins)
+//   server/index.js (POST /api/progress) — streak thresholds [3, 7, 15, 30]
+//   server/progress.js                — no coin/XP awarded on badge unlock today
+//   client/src/App.jsx                — 150 coins for transfer-challenge win
 //
 // Wiring rule changes go through this file only. Anything outside this file
 // that mutates user.coins/user.xp is by definition a regression.
@@ -29,31 +32,34 @@ const DIFFICULTY_KEYS = Object.freeze(['easy', 'medium', 'hard', 'extrahard']);
 
 const REWARD_RULES = Object.freeze({
   // Standard checked-quiz module: correct answer at the given difficulty.
-  // Today the browser tallies these and POSTs the running totals; #91 will
-  // move the tally server-side and the per-difficulty numbers will start
-  // being honored for the ~85 quiz modules.
+  // Today server/lil/studentState.js pays 10 coins + 10 XP regardless of
+  // difficulty (and the per-difficulty dimension isn't yet honored); the
+  // keyed shape is preserved so the table is ready for #91 to start
+  // differentiating values once the server takes over the tally.
   QUIZ_CORRECT: Object.freeze({
-    easy:      Object.freeze({ coins: 5,  xp: 10 }),
-    medium:    Object.freeze({ coins: 8,  xp: 10 }),
-    hard:      Object.freeze({ coins: 12, xp: 15 }),
-    extrahard: Object.freeze({ coins: 16, xp: 20 }),
-  }),
-  // Speed-run multiplier: same XP, 2× coins (matches server/lil/studentState).
-  QUIZ_CORRECT_SPEED: Object.freeze({
     easy:      Object.freeze({ coins: 10, xp: 10 }),
-    medium:    Object.freeze({ coins: 16, xp: 10 }),
-    hard:      Object.freeze({ coins: 24, xp: 15 }),
-    extrahard: Object.freeze({ coins: 32, xp: 20 }),
+    medium:    Object.freeze({ coins: 10, xp: 10 }),
+    hard:      Object.freeze({ coins: 10, xp: 10 }),
+    extrahard: Object.freeze({ coins: 10, xp: 10 }),
+  }),
+  // Speed-run multiplier: 2× coins, same XP — matches server/lil/studentState.
+  QUIZ_CORRECT_SPEED: Object.freeze({
+    easy:      Object.freeze({ coins: 20, xp: 10 }),
+    medium:    Object.freeze({ coins: 20, xp: 10 }),
+    hard:      Object.freeze({ coins: 20, xp: 10 }),
+    extrahard: Object.freeze({ coins: 20, xp: 10 }),
   }),
   // Effort XP on a wrong answer (no coins) — matches server/lil/studentState.
   QUIZ_INCORRECT: Object.freeze({ coins: 0, xp: 2 }),
 
   // Topic badge unlocks on /api/progress POST when the level goes up.
+  // Today server/progress.js does not award any coin/XP on a level change,
+  // so every level resolves to zero reward; #91 may revisit this.
   TOPIC_BADGE: Object.freeze({
-    started: Object.freeze({ coins: 0,   xp: 0   }),
-    bronze:  Object.freeze({ coins: 25,  xp: 25  }),
-    silver:  Object.freeze({ coins: 50,  xp: 50  }),
-    gold:    Object.freeze({ coins: 100, xp: 100 }),
+    started: Object.freeze({ coins: 0, xp: 0 }),
+    bronze:  Object.freeze({ coins: 0, xp: 0 }),
+    silver:  Object.freeze({ coins: 0, xp: 0 }),
+    gold:    Object.freeze({ coins: 0, xp: 0 }),
   }),
 
   // Completing an entire collection (every topic in it at gold).
@@ -62,7 +68,7 @@ const REWARD_RULES = Object.freeze({
   COLLECTION_DEFAULT_COIN_REWARD: 100,
 
   // Spaced-repetition ladder review completion (server/routes/review.js).
-  REVIEW_COMPLETION: Object.freeze({ coins: 5, xp: 15 }),
+  REVIEW_COMPLETION: Object.freeze({ coins: 15, xp: 15 }),
 
   // Transfer challenge win (client/src/App.jsx — only call site today).
   TRANSFER_WIN: Object.freeze({ coins: 150, xp: 0 }),

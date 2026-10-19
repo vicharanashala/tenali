@@ -44,15 +44,15 @@ describe('difficultyKey', () => {
 
 // ── coinsForCorrectAnswer ────────────────────────────────────────────────────
 describe('coinsForCorrectAnswer', () => {
-  test('easy/medium/hard/extrahard match the table', () => {
-    expect(coinsForCorrectAnswer('easy')).toEqual({ coins: 5, xp: 10 });
-    expect(coinsForCorrectAnswer('medium')).toEqual({ coins: 8, xp: 10 });
-    expect(coinsForCorrectAnswer('hard')).toEqual({ coins: 12, xp: 15 });
-    expect(coinsForCorrectAnswer('extrahard')).toEqual({ coins: 16, xp: 20 });
+  test('today every difficulty pays 10 coins + 10 XP (server/lil/studentState.js)', () => {
+    expect(coinsForCorrectAnswer('easy')).toEqual({ coins: 10, xp: 10 });
+    expect(coinsForCorrectAnswer('medium')).toEqual({ coins: 10, xp: 10 });
+    expect(coinsForCorrectAnswer('hard')).toEqual({ coins: 10, xp: 10 });
+    expect(coinsForCorrectAnswer('extrahard')).toEqual({ coins: 10, xp: 10 });
   });
   test('numeric difficulty maps to the same table', () => {
-    expect(coinsForCorrectAnswer(0)).toEqual({ coins: 5, xp: 10 });
-    expect(coinsForCorrectAnswer(3)).toEqual({ coins: 16, xp: 20 });
+    expect(coinsForCorrectAnswer(0)).toEqual({ coins: 10, xp: 10 });
+    expect(coinsForCorrectAnswer(3)).toEqual({ coins: 10, xp: 10 });
   });
   test('speed doubles coins, keeps XP identical', () => {
     const standard = coinsForCorrectAnswer('medium');
@@ -60,12 +60,16 @@ describe('coinsForCorrectAnswer', () => {
     expect(speedy.xp).toBe(standard.xp);
     expect(speedy.coins).toBe(standard.coins * 2);
   });
+  test('speed-run pays 20 coins + 10 XP at every difficulty', () => {
+    expect(coinsForCorrectAnswer('easy', { speed: true })).toEqual({ coins: 20, xp: 10 });
+    expect(coinsForCorrectAnswer('extrahard', { speed: true })).toEqual({ coins: 20, xp: 10 });
+  });
   test('returns a fresh object per call (no shared references)', () => {
     const a = coinsForCorrectAnswer('easy');
     const b = coinsForCorrectAnswer('easy');
     expect(a).not.toBe(b);
     a.coins = 999;
-    expect(b.coins).toBe(5);
+    expect(b.coins).toBe(10);
   });
 });
 
@@ -95,17 +99,17 @@ describe('coinsForHintUnlock', () => {
 
 // ── coinsForReviewCompletion ─────────────────────────────────────────────────
 describe('coinsForReviewCompletion', () => {
-  test('5 coins, 15 XP per review session', () => {
-    expect(coinsForReviewCompletion()).toEqual({ coins: 5, xp: 15 });
+  test('15 coins, 15 XP per review session (server/routes/review.js)', () => {
+    expect(coinsForReviewCompletion()).toEqual({ coins: 15, xp: 15 });
   });
 });
 
 // ── coinsForTopicBadge ──────────────────────────────────────────────────────
 describe('coinsForTopicBadge', () => {
-  test('bronze/silver/gold scale up', () => {
-    expect(coinsForTopicBadge('bronze')).toEqual({ coins: 25, xp: 25 });
-    expect(coinsForTopicBadge('silver')).toEqual({ coins: 50, xp: 50 });
-    expect(coinsForTopicBadge('gold')).toEqual({ coins: 100, xp: 100 });
+  test('every level currently awards zero — server/progress.js does not pay out on badge unlock', () => {
+    expect(coinsForTopicBadge('bronze')).toEqual({ coins: 0, xp: 0 });
+    expect(coinsForTopicBadge('silver')).toEqual({ coins: 0, xp: 0 });
+    expect(coinsForTopicBadge('gold')).toEqual({ coins: 0, xp: 0 });
   });
   test('started awards zero reward', () => {
     expect(coinsForTopicBadge('started')).toEqual({ coins: 0, xp: 0 });
