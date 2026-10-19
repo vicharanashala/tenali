@@ -26,3 +26,41 @@
   color: var(--clr-text-soft);
   margin-top: 2px;
 }
+
+.home-nav-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 50;
+  background: var(--clr-card);
+  border: 1.5px solid var(--clr-border);
+  border-radius: var(--radius-sm, 8px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), var(--shadow-card);
+  padding: 6px 0;
+  min-width: 240px;
+  max-width: 320px;
+  max-height: min(520px, calc(100vh - 75px));
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--clr-border) transparent;
+}
+
+.home-nav-dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.home-nav-dropdown::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.home-nav-dropdown::-webkit-scrollbar-thumb {
+  background: var(--clr-border);
+  border-radius: 4px;
+}
+
+.home-nav-dropdown::-webkit-scrollbar-thumb:hover {
+  background: var(--clr-text-soft);
+}
+
