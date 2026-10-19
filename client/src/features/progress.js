@@ -16,27 +16,6 @@ export const STORAGE_KEYS = {
   STREAK: 'tenali-streak',
 };
 
-/**
- * Checks whether a topic has been completed.
- * Returns true if the topic has been completed at any difficulty level (easy, medium, hard, adaptive, extrahard)
- * or if the bare topicKey exists in completedTopics. (Excludes '-started').
- *
- * @param {string} topicKey
- * @param {string[]} completedTopics
- * @returns {boolean}
- */
-export function isTopicCompleted(topicKey, completedTopics = []) {
-  if (!completedTopics || !Array.isArray(completedTopics)) return false;
-  if (completedTopics.includes(topicKey)) return true;
-  return (
-    completedTopics.includes(`${topicKey}-easy`) ||
-    completedTopics.includes(`${topicKey}-medium`) ||
-    completedTopics.includes(`${topicKey}-hard`) ||
-    completedTopics.includes(`${topicKey}-adaptive`) ||
-    completedTopics.includes(`${topicKey}-extrahard`) ||
-    completedTopics.includes(`${topicKey}-gold`)
-  );
-}
 
 /**
  * Checks whether a topic has achieved Stage 3 completion.
