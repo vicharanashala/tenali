@@ -1,7 +1,7 @@
 {
   "src/App.jsx": {
     "no-empty": {
-      "count": 148
+      "count": 146
     },
     "no-restricted-syntax": {
       "count": 1
