@@ -1,0 +1,536 @@
+/* ─── WhyMathApp — "Why Mathematics?", four guess-then-find-out surprises ── */
+
+.why-math-overlay {
+  position: fixed;
+  inset: 0;
+  /* Above the app's floating chrome (coin badge, Explore/Focus switch,
+     settings gear, up to z-index 9999): this is a full screen with its own
+     close button, and on phones that chrome sat on the progress dots. */
+  z-index: 10050;
+  /* Opaque: this is a full screen of its own, and a see-through backdrop
+     only showed the app's empty card shell behind it. */
+  background:
+    radial-gradient(1200px 600px at 50% -10%, var(--clr-accent-soft), transparent 60%),
+    var(--clr-bg, #141210);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: wm-fade 220ms ease both;
+}
+
+.why-math-card {
+  position: relative;
+  box-sizing: border-box;
+  width: min(100%, 640px);
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--clr-card, #1c1c1f);
+  border: 1.5px solid var(--clr-border, #444);
+  border-radius: 24px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  padding: 20px 26px 22px;
+  animation: wm-card-in 380ms cubic-bezier(0.2, 0.9, 0.3, 1.15) both;
+}
+
+/* ── Top bar: emoji progress dots + close ── */
+.wm-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.wm-progress {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+.wm-dot {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid var(--clr-border);
+  background: var(--clr-surface);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.45;
+  filter: grayscale(0.6);
+  transition: transform 200ms ease, opacity 200ms ease, border-color 200ms ease, filter 200ms ease;
+}
+.wm-dot.is-done {
+  opacity: 0.85;
+  filter: none;
+  border-color: var(--clr-accent);
+}
+.wm-dot.is-current {
+  opacity: 1;
+  filter: none;
+  border-color: var(--clr-accent);
+  box-shadow: 0 0 0 3px var(--clr-accent-soft);
+  transform: scale(1.12);
+}
+.wm-close {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--clr-border);
+  background: transparent;
+  color: var(--clr-text-soft);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.wm-close:hover { color: var(--clr-text); border-color: var(--clr-text-soft); }
+
+/* ── Stage: each screen slides in from the side it came from ── */
+.wm-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.wm-stage.is-forward { animation: wm-slide-in-right 340ms cubic-bezier(0.2, 0.9, 0.3, 1) both; }
+.wm-stage.is-back    { animation: wm-slide-in-left 340ms cubic-bezier(0.2, 0.9, 0.3, 1) both; }
+
+/* ── Tenali and his speech bubble ── */
+.wm-tenali {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+.wm-tenali-img {
+  width: 58px;
+  height: auto;
+  flex: 0 0 auto;
+  animation: wm-bob 2.6s ease-in-out infinite;
+}
+.wm-tenali.is-happy .wm-tenali-img { animation: wm-jump 600ms cubic-bezier(0.3, 1.6, 0.5, 1) both, wm-bob 2.6s ease-in-out 600ms infinite; }
+.wm-tenali.is-wow .wm-tenali-img { animation: wm-wobble 600ms ease both, wm-bob 2.6s ease-in-out 600ms infinite; }
+.wm-bubble {
+  position: relative;
+  margin: 0 0 8px;
+  padding: 10px 14px;
+  border-radius: 16px 16px 16px 4px;
+  background: var(--clr-surface);
+  border: 1.5px solid var(--clr-border);
+  color: var(--clr-text);
+  font-weight: 700;
+  font-size: 0.98rem;
+  line-height: 1.45;
+  animation: wm-pop 320ms cubic-bezier(0.3, 1.5, 0.5, 1) both;
+}
+
+/* ── Intro ── */
+.wm-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+  padding: 6px 0 4px;
+}
+.wm-title {
+  margin: 0;
+  font-family: var(--font-display, Georgia, serif);
+  font-size: clamp(1.8rem, 6vw, 2.5rem);
+  line-height: 1.1;
+  color: var(--clr-text);
+}
+.wm-how {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+.wm-how li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--clr-text);
+}
+.wm-preview {
+  display: flex;
+  gap: 12px;
+  font-size: 2rem;
+}
+.wm-preview span {
+  display: inline-block;
+  animation: wm-pop 420ms cubic-bezier(0.3, 1.6, 0.5, 1) both, wm-float 3s ease-in-out infinite;
+  animation-delay: calc(150ms + var(--i) * 110ms), calc(600ms + var(--i) * 300ms);
+}
+.wm-start { min-width: 200px; font-size: 1.05rem; }
+
+/* ── A surprise ── */
+.wm-surprise {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.wm-question {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.wm-question-emoji {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  background: var(--clr-accent-soft);
+  font-size: 1.9rem;
+  animation: wm-emoji-pop 600ms cubic-bezier(0.3, 1.6, 0.5, 1) 80ms both;
+}
+.wm-question-text {
+  margin: 0;
+  font-size: 1.12rem;
+  font-weight: 800;
+  line-height: 1.4;
+  color: var(--clr-text);
+}
+
+.wm-choices {
+  display: grid;
+  gap: 8px;
+}
+.wm-choice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 14px;
+  border: 1.5px solid var(--clr-border);
+  background: var(--clr-surface);
+  color: var(--clr-text);
+  font: inherit;
+  font-size: 0.98rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  animation: wm-rise 360ms ease both;
+  animation-delay: calc(120ms + var(--i) * 80ms);
+  transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+.wm-choice:hover:not(:disabled) { border-color: var(--clr-accent); transform: translateX(3px); }
+.wm-choice:disabled { cursor: default; }
+.wm-choice-letter {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--clr-card);
+  border: 1px solid var(--clr-border);
+  font-size: 0.8rem;
+  color: var(--clr-text-soft);
+}
+.wm-choice.is-picked {
+  border-color: var(--clr-accent);
+  background: var(--clr-accent-soft);
+}
+.wm-choice.is-picked .wm-choice-letter {
+  background: var(--clr-accent);
+  border-color: var(--clr-accent);
+  color: #fff;
+}
+.wm-choice.is-answer {
+  border-color: #4caf50;
+  background: rgba(76, 175, 80, 0.14);
+  animation: wm-pop 360ms cubic-bezier(0.3, 1.6, 0.5, 1) both;
+}
+.wm-choice.is-answer .wm-choice-letter { background: #4caf50; border-color: #4caf50; color: #fff; }
+.wm-choice.is-wrong { opacity: 0.6; text-decoration: line-through; text-decoration-thickness: 1.5px; }
+.wm-choice-tick { color: #4caf50; }
+
+.wm-explore {
+  display: flex;
+  flex-direction: column;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: var(--clr-surface);
+  border: 1.5px solid var(--clr-border);
+  animation: wm-rise 380ms cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+  transition: border-color 300ms ease, box-shadow 300ms ease;
+}
+.wm-explore.is-inviting {
+  border-color: var(--clr-accent);
+  box-shadow: 0 0 0 4px var(--clr-accent-soft);
+}
+.wm-explore .why-demo-svg { max-width: 320px; }
+.wm-slider-label {
+  font-size: 0.85rem;
+  color: var(--clr-text-soft);
+  margin: 4px 0 2px;
+}
+.wm-slider-value {
+  display: inline-block;
+  color: var(--clr-accent);
+  font-size: 1.05em;
+  animation: wm-pop 260ms cubic-bezier(0.3, 1.6, 0.5, 1) both;
+}
+.wm-drag-hint {
+  align-self: flex-end;
+  margin: 0 0 4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--clr-accent);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  pointer-events: none;
+  animation: wm-hint-bob 1.4s ease-in-out infinite;
+  transition: opacity 250ms ease;
+}
+.wm-drag-hint.is-done { opacity: 0; animation: none; }
+.wm-slider { width: 100%; }
+.wm-explore.is-inviting .wm-slider { animation: wm-wiggle 2.4s ease-in-out 900ms infinite; }
+.wm-live {
+  margin: 12px 0 0;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1.35;
+  color: var(--clr-text);
+  animation: wm-pop 280ms cubic-bezier(0.3, 1.6, 0.5, 1) both;
+}
+.wm-show-me {
+  align-self: center;
+  margin-top: 8px;
+  background: none;
+  border: none;
+  color: var(--clr-text-soft);
+  font: inherit;
+  font-size: 0.82rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.wm-show-me:hover { color: var(--clr-accent); }
+
+/* ── The reveal ── */
+.wm-reveal {
+  position: relative;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 2px solid var(--clr-accent);
+  background: var(--clr-accent-soft);
+  animation: wm-reveal-in 520ms cubic-bezier(0.3, 1.5, 0.5, 1) both;
+}
+.wm-reveal.is-right { border-color: #4caf50; background: rgba(76, 175, 80, 0.12); }
+.wm-reveal-badge { margin: 0; font-size: 0.85rem; font-weight: 800; color: var(--clr-text-soft); }
+.wm-reveal-head { margin: 4px 0 6px; font-size: 1.25rem; font-weight: 900; line-height: 1.25; color: var(--clr-text); }
+.wm-reveal-why { margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--clr-text); }
+
+.wm-confetti {
+  position: absolute;
+  left: 50%;
+  top: 18px;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+.wm-confetti span {
+  position: absolute;
+  font-size: 1.1rem;
+  animation: wm-burst 900ms cubic-bezier(0.2, 0.7, 0.4, 1) both;
+  animation-delay: calc(var(--i) * 12ms);
+}
+
+/* ── Finish ── */
+.wm-finish {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+.wm-score { margin: 0; font-size: 1.2rem; font-weight: 800; color: var(--clr-text); }
+.wm-score strong { color: var(--clr-accent); font-size: 1.3em; }
+.wm-stars { margin: 0; font-size: 2rem; letter-spacing: 6px; }
+.wm-stars span {
+  display: inline-block;
+  animation: wm-emoji-pop 520ms cubic-bezier(0.3, 1.6, 0.5, 1) both;
+  animation-delay: calc(200ms + var(--i) * 160ms);
+}
+.wm-recap {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: grid;
+  gap: 8px;
+}
+.wm-recap li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 12px;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--clr-text);
+  animation: wm-rise 360ms ease both;
+  animation-delay: calc(500ms + var(--i) * 90ms);
+}
+.wm-recap em { font-weight: 500; color: var(--clr-text-soft); }
+.wm-recap-emoji { font-size: 1.3rem; }
+.wm-finish-actions {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+/* ── Buttons ── */
+.wm-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.wm-cta:hover { transform: translateY(-2px); }
+.wm-cta-primary {
+  border: none;
+  background: var(--clr-accent);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(224, 123, 57, 0.35);
+}
+.wm-cta-ghost {
+  border: 1.5px solid var(--clr-border);
+  background: transparent;
+  color: var(--clr-text);
+}
+
+.wm-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--clr-border);
+}
+.wm-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: 1.5px solid var(--clr-border);
+  background: transparent;
+  color: var(--clr-text-soft);
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 200ms ease, color 200ms ease, border-color 200ms ease, transform 160ms ease;
+}
+.wm-btn:hover { transform: translateY(-1px); color: var(--clr-text); }
+.wm-btn.is-ready {
+  border-color: var(--clr-accent);
+  background: var(--clr-accent);
+  color: #fff;
+  animation: wm-ready 1.8s ease-in-out 600ms infinite;
+}
+
+/* ── Undo the app-wide <button> look (App.css gives every button 12px 28px
+   padding, an orange fill on hover and 40% opacity when disabled). Here
+   the buttons are dots, cards and links, and a revealed, disabled answer
+   must stay fully readable. ── */
+.wm-dot, .wm-close, .wm-show-me { padding: 0; box-shadow: none; }
+.wm-choice, .wm-btn, .wm-cta-ghost, .wm-show-me, .wm-dot, .wm-close { box-shadow: none; }
+.wm-dot:hover { background: var(--clr-surface); transform: scale(1.06); box-shadow: none; }
+.wm-dot.is-current:hover { transform: scale(1.12); box-shadow: 0 0 0 3px var(--clr-accent-soft); }
+.wm-close:hover { background: transparent; transform: none; box-shadow: none; }
+.wm-choice:hover:not(:disabled) { background: var(--clr-surface); box-shadow: none; }
+.wm-choice.is-picked:hover:not(:disabled) { background: var(--clr-accent-soft); }
+.wm-choice:disabled { opacity: 1; transform: none; }
+.wm-choice.is-answer:disabled { background: rgba(76, 175, 80, 0.14); }
+.wm-choice.is-wrong:disabled { opacity: 0.6; }
+.wm-show-me:hover { background: none; transform: none; box-shadow: none; }
+.wm-btn:hover { background: var(--clr-surface); box-shadow: none; }
+.wm-btn.is-ready:hover { background: var(--clr-accent); color: #fff; }
+.wm-cta-ghost:hover { background: var(--clr-surface); box-shadow: none; }
+.wm-cta-primary:hover { background: var(--clr-accent); box-shadow: 0 8px 22px rgba(224, 123, 57, 0.45); }
+
+/* ── Phones ── */
+@media (max-width: 520px) {
+  .why-math-overlay { padding: 10px; align-items: stretch; }
+  .why-math-card { max-height: none; height: 100%; padding: 14px 14px 16px; border-radius: 18px; display: flex; flex-direction: column; }
+  .wm-stage { flex: 1 0 auto; }
+  .wm-intro { flex: 1; justify-content: center; }
+  .wm-dot { width: 30px; height: 30px; font-size: 0.9rem; }
+  .wm-tenali-img { width: 46px; }
+  .wm-bubble { font-size: 0.92rem; }
+  .wm-question-emoji { width: 46px; height: 46px; font-size: 1.6rem; }
+  .wm-question-text { font-size: 1.02rem; }
+  .wm-finish-actions { grid-template-columns: 1fr; }
+}
+
+/* ── Keyframes ── */
+@keyframes wm-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes wm-card-in { from { opacity: 0; transform: translateY(14px) scale(0.97); } to { opacity: 1; transform: none; } }
+@keyframes wm-slide-in-right { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: none; } }
+@keyframes wm-slide-in-left { from { opacity: 0; transform: translateX(-28px); } to { opacity: 1; transform: none; } }
+@keyframes wm-rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes wm-pop { from { opacity: 0.3; transform: scale(0.9); } to { opacity: 1; transform: none; } }
+@keyframes wm-emoji-pop {
+  0% { transform: scale(0) rotate(-25deg); }
+  70% { transform: scale(1.15) rotate(6deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+@keyframes wm-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+@keyframes wm-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@keyframes wm-jump { 0% { transform: translateY(0); } 40% { transform: translateY(-14px) rotate(-6deg); } 100% { transform: translateY(0); } }
+@keyframes wm-wobble { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-8deg); } 75% { transform: rotate(8deg); } }
+@keyframes wm-hint-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+@keyframes wm-wiggle {
+  0%, 60%, 100% { transform: none; }
+  68% { transform: translateX(-4px); }
+  76% { transform: translateX(4px); }
+  84% { transform: translateX(-2px); }
+}
+@keyframes wm-reveal-in { from { opacity: 0; transform: scale(0.9) translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes wm-burst {
+  0% { opacity: 1; transform: rotate(var(--a)) translateY(0) scale(0.4); }
+  70% { opacity: 1; }
+  100% { opacity: 0; transform: rotate(var(--a)) translateY(calc(-1 * var(--d))) scale(1); }
+}
+@keyframes wm-ready { 0%, 100% { box-shadow: 0 0 0 0 rgba(224, 123, 57, 0.45); } 50% { box-shadow: 0 0 0 7px rgba(224, 123, 57, 0); } }
+
+/* Decoration only: respect a device asking for less motion. */
+@media (prefers-reduced-motion: reduce) {
+  .why-math-overlay *,
+  .why-math-overlay *::before,
+  .why-math-overlay *::after,
+  .why-math-overlay {
+    animation: none !important;
+    transition: none !important;
+  }
+  .wm-confetti { display: none; }
+}
