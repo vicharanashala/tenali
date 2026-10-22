@@ -41,12 +41,6 @@
     }
   },
   "src/BattleApp.jsx": {
-    "react-hooks/immutability": {
-      "count": 1
-    },
-    "react-hooks/preserve-manual-memoization": {
-      "count": 1
-    },
     "react-hooks/set-state-in-effect": {
       "count": 1
     }

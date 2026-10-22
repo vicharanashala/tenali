@@ -26,22 +26,16 @@ jobs:
 
   # Lint the client. This catches broken imports and obvious errors before review.
   #
-  # NON-BLOCKING (continue-on-error) until App.jsx is split up. `npm run lint`
-  # currently reports ~750 pre-existing errors on main, almost all of them in
-  # client/src/App.jsx (react-hooks/*, react-refresh/only-export-components).
-  # While the job fails on every branch it tells a contributor nothing about
-  # their own change, and a permanently red check trains everyone to ignore CI.
+  # BLOCKING (#338). The pre-existing errors, almost all in client/src/App.jsx,
+  # are baselined per file and per rule in client/eslint-suppressions.json
+  # (#277), so `npm run lint` passes on main and only NEW errors fail it.
   #
-  # The output is still produced and still worth reading — reviewers should
-  # check that a PR does not ADD errors, which is easy to see by comparing the
-  # count against main.
-  #
-  # Flip this back to blocking once the App.jsx backlog is cleared. Tracked by
-  # the component-extraction epic #234.
+  # Fixed a baselined error? Run `npx eslint . --prune-suppressions` in
+  # client/ and commit the updated file. ESLint fails while the file lists
+  # errors that no longer exist, so the baseline can only shrink.
   client-lint:
     name: Client lint
     runs-on: ubuntu-latest
-    continue-on-error: true
     defaults:
       run:
         working-directory: client
@@ -56,7 +50,7 @@ jobs:
       - run: npm run lint
 
   # Frontend unit tests (Vitest + jsdom) — added by issue #294.
-  # Unlike client-lint this is blocking: the suite starts out small and green,
+  # Blocking, like client-lint: the suite starts out small and green,
   # so a failure here means the PR genuinely broke something. It lives in this
   # existing "Tests" workflow on purpose — do not spin up a competing
   # workflow file for client tests.
