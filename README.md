@@ -26,7 +26,7 @@
 
 ---
 
-### ✨ **93 puzzle types (API routes) across 69 topic areas (graph nodes) · Algorithmically generated · Adaptive difficulty · Live multiplayer · Step-by-step solutions**
+### ✨ **92 puzzle types (API routes) across 69 topic areas (graph nodes) · Algorithmically generated · Adaptive difficulty · Live multiplayer · Step-by-step solutions**
 
 </div>
 ## 🧠 Pedagogical Features: Progressive & Interactive Learning
@@ -125,7 +125,7 @@ Learning JSON → learnContent.js → Learning Page → Interactive Components
 
 Tenali (named after the legendary **Tenali Raman** — the witty Indian scholar who outwitted entire courts with logic) is an **adaptive math learning platform** featuring algorithmically-generated puzzle types, real-time multiplayer battles, and step-by-step solutions for every problem. Every question is generated on the fly — there is no question database — so practice is infinite and never repeats. Difficulty adapts to each learner in real time.
 
-There isn't one canonical "puzzle count" — different parts of the codebase group content differently, and that's worth naming instead of collapsing into a single number: the server exposes **93 distinct `*-api` route pairs** (the real unit of "a puzzle type"), grouped under **69 topic areas** in the `/graph` prerequisite map, and the home-screen tile registry (`client/src/features/tiles.js`) lists **101 tiles**, because several route pairs surface as more than one tile (e.g. an MCQ "gym" drill and a full-form drill on the same topic, via `foldInto`). Use whichever number matches what you're actually counting.
+There isn't one canonical "puzzle count" — different parts of the codebase group content differently, and that's worth naming instead of collapsing into a single number: the server exposes **92 distinct `*-api` route pairs** (the real unit of "a puzzle type"), grouped under **69 topic areas** in the `/graph` prerequisite map, and the home-screen tile registry (`client/src/features/tiles.js`) lists **101 tiles**, because several route pairs surface as more than one tile (e.g. an MCQ "gym" drill and a full-form drill on the same topic, via `foldInto`). Use whichever number matches what you're actually counting.
 
 It is built to run on a single VPS — `tenali.fun` — with one Node process serving the React app, the puzzle APIs, the JWT auth, the Socket.IO Battle Arena, and the multi-language code playground.
 
@@ -435,21 +435,20 @@ JWT auth with **fail-fast** in production, `express-rate-limit`, CORS allowlist,
 | 76 | Congruence | `/congruence-api` |
 | 77 | Similarity | `/similarity-api` |
 | 78 | Visual Math | `/visual-math-api` |
-| 79 | Conceptual | `/concept-api` |
-| 80 | Vocabulary (7,662 words) | `/vocab-api` |
-| 81 | GK (991 questions) | `/gk-api` |
-| 82 | Tatsavit | `/tatsavit-api` |
-| 83 | Sudoku | `/sudoku-api` |
-| 84 | Transfer scenarios | `/transfer-api` |
-| 85 | Darts | `/darts-api` |
-| 86 | Riddles | `/riddle-api` |
-| 87 | Square Root | `/sqrt-api` |
-| 88 | Squaring | `/squaring-api` |
-| 89 | Curiosity | `/curiosity-api` |
-| 90 | Contrast | `/contrast-api` |
-| 91 | Matrix Mystics | `/matrixmystics-api` |
-| 92 | Treasure Hunt | `/treasurehunt-api` |
-| 93 | Word Creator | `/wordcreator-api` |
+| 79 | Vocabulary (7,662 words) | `/vocab-api` |
+| 80 | GK (991 questions) | `/gk-api` |
+| 81 | Tatsavit | `/tatsavit-api` |
+| 82 | Sudoku | `/sudoku-api` |
+| 83 | Transfer scenarios | `/transfer-api` |
+| 84 | Darts | `/darts-api` |
+| 85 | Riddles | `/riddle-api` |
+| 86 | Square Root | `/sqrt-api` |
+| 87 | Squaring | `/squaring-api` |
+| 88 | Curiosity | `/curiosity-api` |
+| 89 | Contrast | `/contrast-api` |
+| 90 | Matrix Mystics | `/matrixmystics-api` |
+| 91 | Treasure Hunt | `/treasurehunt-api` |
+| 92 | Word Creator | `/wordcreator-api` |
 
 </details>
 
@@ -482,7 +481,7 @@ JWT auth with **fail-fast** in production, `express-rate-limit`, CORS allowlist,
 │         └────────────┬────┴────────────┬────┘                   │
 │                      ▼                 ▼                         │
 │  ┌──────────────────────────────────────────────────────┐        │
-│  │  93 puzzle routes, grouped into router modules under │        │
+│  │  92 puzzle routes, grouped into router modules under │        │
 │  │  server/routes/ (GET ?question, POST ?check)         │        │
 │  └──────┬───────────────────────────────────────────────┘        │
 │         │                                                        │
@@ -632,7 +631,7 @@ Go beyond the mission statement. Describe Tenali as a system: the users (student
 **3. Current State of the Repository — What Has Been Done So Far**
 Walk through the repository and describe what already exists:
 - Tech stack (frontend, backend, database, auth, deployment).
-- Implemented features (the 93 puzzle types, adaptive difficulty, Battle Arena multiplayer, step-by-step explanations, the code playground, auth, etc.).
+- Implemented features (the 92 puzzle types, adaptive difficulty, Battle Arena multiplayer, step-by-step explanations, the code playground, auth, etc.).
 
 **4. Gaps Observed in the Code**
 This is the most important section. List concrete weaknesses, bugs, missing features, or design problems you found while reading the code. You can also pick issues stated on the Tenali GitHub repo and solve them. For each gap, include:
