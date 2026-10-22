@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint .",
+    "lint": "eslint . --suppressions-location eslint-suppressions.json",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest"
