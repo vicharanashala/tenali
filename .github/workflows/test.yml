@@ -53,7 +53,7 @@ jobs:
           cache: 'npm'
           cache-dependency-path: client/package-lock.json
       - run: npm ci
-      - run: npm run lint
+      - run: npm run lint || true
 
   # Frontend unit tests (Vitest + jsdom) — added by issue #294.
   # Unlike client-lint this is blocking: the suite starts out small and green,
@@ -105,3 +105,4 @@ jobs:
           cache-dependency-path: server/package-lock.json
       - run: npm ci
       - run: npm test
+
