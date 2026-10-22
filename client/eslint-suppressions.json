@@ -180,11 +180,6 @@
       "count": 1
     }
   },
-  "src/monsters/CureFlow.jsx": {
-    "react-hooks/set-state-in-effect": {
-      "count": 2
-    }
-  },
   "src/monsters/GuidedSolver.jsx": {
     "react-hooks/set-state-in-effect": {
       "count": 1
