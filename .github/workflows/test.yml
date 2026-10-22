@@ -24,6 +24,19 @@ jobs:
           node-version: '22'
       - run: node server/lib/bkt.test.js
 
+  # Fails when modeMap, the home tiles and the server's /<key>-api mounts
+  # disagree without a reason in scripts/topic-drift-allowlist.json (#233).
+  # Node built-ins only, so like the BKT job it needs no npm install.
+  topic-drift:
+    name: Topic drift check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/check-topic-drift.mjs
+
   # Lint the client. This catches broken imports and obvious errors before review.
   #
   # NON-BLOCKING (continue-on-error) until App.jsx is split up. `npm run lint`

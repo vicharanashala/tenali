@@ -1,0 +1,56 @@
+{
+  "_about": "Deliberate exceptions for scripts/check-topic-drift.mjs (issue #233). One line of reason per key. A key that stops needing its entry is reported as a warning so it can be removed.",
+
+  "aliases": {
+    "contrastlist": "contrast",
+    "missionquiz": "la-mission-quiz",
+    "language": "wordcreator"
+  },
+
+  "noTile": {
+    "carjourney": "Reached from the Real World hub (client/src/RealWorldHub.jsx) and the landing page Curriculum Explorer.",
+    "comic-addition": "Opened from inside the Addition screen (App.jsx renders ComicAdditionApp from its own state); the mode key only serves ?mode= links.",
+    "idlivada": "Folded into Fractions (#300): opened from inside the Fractions screen; the mode key only serves ?mode= links.",
+    "curiosity": "Hamburger menu item (What If / Curiosity Mode).",
+    "realworld": "Hamburger menu item (Real World hub).",
+    "riddle": "Hamburger menu item. Ship-or-retire is tracked in #247.",
+    "trackProgress": "Opened from the account menu (navigateTo('trackProgress')).",
+    "basic-arith-lab": "Origin: opened from inside Basic Arithmetic once #209 lands; the mode key also serves ?mode= links.",
+    "visual-math-lab-redux": "Linked from the Visual Learning Universe hub (math-lab). Ship-or-retire is tracked in #248.",
+    "missionquiz": "Part of the Linear Algebra lab, which is moving to its own branch (#224, #225).",
+    "visual-math": "No way in from the UI today. Ship-or-retire is tracked in #218."
+  },
+
+  "clientOnly": {
+    "basic-arith-lab": "Lab inside the Visual Learning Universe hub; no /basic-arith-lab-api route.",
+    "battle": "Live duels run over Socket.IO, not a REST question route.",
+    "carjourney": "Story pathway screen; no /carjourney-api route.",
+    "comic-addition": "Comic view inside the Addition screen; no /comic-addition-api route.",
+    "custom": "Lesson builder that mixes other topics' routes.",
+    "detective": "Story-based cases; no /detective-api route.",
+    "equation-crafting-lab": "Calls /alchemy-api, which the server does not mount, and falls back to a local question bank.",
+    "geocraft": "Interactive geometry lab; no /geocraft-api route.",
+    "guess": "Binary guess-the-number trick; no /guess-api route. Folding into bases is tracked in #210.",
+    "gym": "Bundles the gym drills, each of which has its own route.",
+    "idlivada": "Fractions sub-activity; no /idlivada-api route.",
+    "math-lab": "Hub screen (Visual Learning Universe) that links to the labs.",
+    "pathmap": "Learning Path; loads the prerequisite graph from graph/graph-data.json, no /pathmap-api route.",
+    "mensuration-lab": "Lab inside the Visual Learning Universe hub; no /mensuration-lab-api route.",
+    "qformula-concept": "Concept lab; uses /api/concept-session and /api/concept-playgrounds via client/src/lib/concept/conceptApi.js.",
+    "randommix": "Adaptive mix of other topics' routes.",
+    "realworld": "Hub screen of real-world pathway cards.",
+    "simul-concept": "Concept lab; uses /api/concept-session and /api/concept-playgrounds via client/src/lib/concept/conceptApi.js.",
+    "spot": "Twin Hunt; rounds are generated in the browser.",
+    "trackProgress": "Progress screen from the account menu; no /trackProgress-api route.",
+    "vachana": "Literacy lab with its own exercise screens; no /vachana-api route.",
+    "visual-math-lab-redux": "Lab inside the Visual Learning Universe hub; no /visual-math-lab-redux-api route.",
+    "water-jug-lab": "Calls /jug-api, which the server does not mount, and falls back to a local generator."
+  },
+
+  "serverOnly": {
+    "concept": "Orphan route; remove or wire up is tracked in #249.",
+    "darts": "Dart Board inside the Coordinate Geometry screen calls it.",
+    "matrixmystics": "Matrix Mystics is moving to its own branch (#221, #222, #223, #225).",
+    "transfer": "Learning Transfer Challenges, called from App.jsx outside modeMap."
+  }
+}
