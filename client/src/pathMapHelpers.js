@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 
 // ─── PathMap data & algorithms ───────────────────────────────────────────────
-// Graph data (fetched from /graph-data.json, same file index.html/path.html use)
+// Graph data (fetched from <base>/graph-data.json so it works under /summership/, same file index.html/path.html use)
 export let pmNodes = [];
 export let pmEdges = [];
 export let pmCatColor = {};
@@ -23,7 +23,7 @@ export function pmBuildDerivedMaps() {
 
 export function pmFetchGraphData() {
   if (!pmGraphDataPromise) {
-    pmGraphDataPromise = fetch('/graph-data.json')
+    pmGraphDataPromise = fetch(`${import.meta.env.BASE_URL}graph-data.json`)
       .then((res) => {
         if (!res.ok) throw new Error(`Failed to load graph-data.json (${res.status})`);
         return res.json();
