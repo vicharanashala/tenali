@@ -39,7 +39,6 @@ import DailyWarmupCard from './components/DailyWarmupCard';
 
 window.React = React;
 console.log("React version:", React.version);
-import LinearAlgebraApp from './LinearAlgebraApp'
 import PathMap, {
   PmQuestBanner,
   PmSuggestIcon,
@@ -42991,19 +42990,6 @@ function App() {
   if (pathname === '/bridge26') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge26App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
   if (pathname === '/bridge27') return (<><button className="theme-toggle" onClick={toggleTheme}>{theme === 'dark' ? '☀️' : '🌙'}</button><div className="app-shell"><div className="card"><AuthGate><Bridge27App onBack={() => { window.location.href = withBase('/chapter5') }} /></AuthGate></div></div></>)
 
-  // Route: /linearalgebra → Linear Algebra Module 1 (Interactive Learning)
-  if (pathname === '/linearalgebra' || pathname === '/la') {
-    return (
-      <>
-        <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
-          {theme === 'dark' ? '☀️' : '🌙'}
-        </button>
-        <div className="app-shell"><div className="card">
-          <LinearAlgebraApp onBack={() => { window.location.href = withBase('/') }} />
-        </div></div>
-      </>
-    )
-  }
 
   // Route: /chapter1 → Cambridge IGCSE Chapter 1 (Reviewing Number Concepts)
   if (pathname === '/chapter1') {
@@ -43352,7 +43338,6 @@ function App() {
             onBack={() => { window.location.href = withBase('/') }}
             autoStartConsent={true}
           >
-            <LinearAlgebraApp onBack={() => { window.location.href = withBase('/') }} />
           </ProctoredQuiz>
         </div></div>
         <a href={withBase('/proctor')} className="proctor-dashboard-fab" title="Instructor Dashboard — view all proctor sessions">
@@ -44598,8 +44583,6 @@ function App() {
   // Map quiz mode keys to their component classes
   const modeMap = {
     vachana: Vachana,          // Vachana Mathematical Literacy Lab
-    linearalgebra: LinearAlgebraApp, // Linear Algebra Module 1
-    missionquiz: MissionQuizApp, // Mission-specific Linear Algebra Quiz
     'math-lab': MathLabHubApp,
     'visual-math-lab-redux': VisualMathLabRedux,
     'mensuration-lab': MensurationLabApp,
@@ -44705,7 +44688,6 @@ function App() {
     indicesgym: IndicesGymApp,     // Indices-Gym — index laws (MCQ)
     polygym: PolyGymApp,           // Polynomials Gym — arithmetic → monomial algebra (MCQ)
     treasurehunt: TreasureHuntApp, // Treasure Hunt — solve & seek grid game
-    // matrixmystics mode removed — Matrix Mystics content now embedded in LinearAlgebraApp's mission quiz
     trackProgress: ProgressTrackerApp,
     riddle: RiddleApp,              // Math Riddles
     'water-jug-lab': WaterJugLab,
@@ -56471,24 +56453,6 @@ const PolyGymApp = makeMCQuizApp({
   tip: 'Every multiplication reduces to two single-digit numbers. Watch the signs and the powers.',
 })
 
-// ───────────────────────────────────────────────────────────────────────────
-// MATRIX MYSTICS — comprehensive linear algebra MCQ test bank
-// 6 modules, 53 topics, 1855+ questions across easy/medium/hard + real app.
-// ───────────────────────────────────────────────────────────────────────────
-
-const MatrixMysticsApp = makeMCQuizApp({
-  title: 'Matrix Mystics',
-  subtitle: 'Linear Algebra — 6 modules, 53 topics',
-  apiPath: 'matrixmystics-api',
-  adaptiveOnly: true,
-  diffLabels: {
-    easy: 'Easy',
-    medium: 'Medium',
-    hard: 'Hard',
-    extrahard: 'Extra Hard',
-  },
-  tip: 'All questions are MCQ. Read carefully — options are similar length to test real understanding.',
-})
 
 // ───────────────────────────────────────────────────────────────────────────
 // GYM — unified adaptive puzzle that draws from all 7 gym families.

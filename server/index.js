@@ -654,14 +654,11 @@ app.use('/circmeasure-api',advancedRouter);
 app.use('/conics-api',     advancedRouter);
 app.use('/vectors-api',       advancedRouter);
 app.use('/transform-api',     advancedRouter);
-app.use('/linearalgebra-api', advancedRouter);
 
 const statsRouter = require('./routes/stats');
 app.use('/permcomb-api',   statsRouter);
 const riddleRouter = require('./routes/riddle');
 app.use('/riddle-api', riddleRouter);
-const matrixMysticsRouter = require('./routes/matrixmystics');
-app.use('/matrixmystics-api', matrixMysticsRouter);
 const transferRouter = require('./routes/transfer');
 app.use('/transfer-api', transferRouter);
 app.use('/prob-api',  statsRouter);
@@ -670,8 +667,6 @@ const visualMathRouter = require('./routes/visual-math');
 app.use('/visual-math-api', visualMathRouter);
 const sudokuRouter = require('./routes/sudoku');
 app.use('/sudoku-api', sudokuRouter);
-const laMissionQuizRouter = require('./routes/la-mission-quiz');
-app.use('/la-mission-quiz-api', laMissionQuizRouter);
 app.use('/dotprodgym-api', advancedRouter);
 const { sudokuIsValid, sudokuSolve, sudokuGenerate } = require('./lib/sudoku');
 
