@@ -2,18 +2,54 @@ name: Deploy to droplet
 
 on:
   push:
-    branches: [main]
+    branches: [matrix-mystics]
   workflow_dispatch:
+    inputs:
+      app:
+        description: 'Which app to deploy (main | root | matrixmystics | all)'
+        required: false
+        default: 'matrixmystics'
 
 concurrency:
   group: deploy-droplet
   cancel-in-progress: false
 
 jobs:
+  # Decide which app this run belongs to before touching the box, so the
+  # concurrency group and the deploy step can never disagree.
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      target: ${{ steps.plan.outputs.target }}
+    steps:
+      - name: Resolve deploy target
+        id: plan
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          REF_NAME: ${{ github.ref_name }}
+          APP_INPUT: ${{ github.event.inputs.app }}
+        run: |
+          set -euo pipefail
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            target="${APP_INPUT:-matrixmystics}"
+          elif [ "$REF_NAME" = "matrix-mystics" ]; then
+            target="matrixmystics"
+          else
+            target="matrixmystics"
+          fi
+          echo "Deploying: $target"
+          echo "target=$target" >> "$GITHUB_OUTPUT"
+
   deploy:
+    needs: plan
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger deploy over SSH
+      - name: Check out the branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up SSH
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
@@ -24,5 +60,49 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -t ed25519 -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+
+      # The deploy tooling (script, systemd units, nginx template) lives on
+      # `main` — it is the tooling for every app, not part of this app's
+      # source. It is fetched from main and copied to the box before every
+      # run, so the script that executes is always the reviewed one.
+      - name: Ship the deploy tooling to the droplet
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          set -euo pipefail
+          git fetch --quiet origin main
+          rm -rf /tmp/tenali-deploy && mkdir -p /tmp/tenali-deploy
+          git archive origin/main server/deploy | tar -x -C /tmp/tenali-deploy --strip-components=2
           ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes \
-              "$SSH_USER@$SSH_HOST" 'bash /home/tenali/deploy.sh'
+              "$SSH_USER@$SSH_HOST" \
+              'rm -rf /home/tenali/.deploy-staging && mkdir -p /home/tenali/.deploy-staging'
+          tar -C /tmp/tenali-deploy -czf - . | \
+            ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes \
+                "$SSH_USER@$SSH_HOST" \
+                'tar -C /home/tenali/.deploy-staging -xzf -'
+          ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes \
+              "$SSH_USER@$SSH_HOST" \
+              'rm -rf /home/tenali/deploy && mv /home/tenali/.deploy-staging /home/tenali/deploy && chmod +x /home/tenali/deploy/deploy.sh'
+
+      - name: Deploy
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          TARGET: ${{ needs.plan.outputs.target }}
+        run: |
+          set -euo pipefail
+          ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes \
+              "$SSH_USER@$SSH_HOST" \
+              "bash /home/tenali/deploy/deploy.sh deploy $TARGET"
+
+      - name: Verify
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          TARGET: ${{ needs.plan.outputs.target }}
+        run: |
+          set -euo pipefail
+          ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes \
+              "$SSH_USER@$SSH_HOST" \
+              "bash /home/tenali/deploy/deploy.sh verify"
