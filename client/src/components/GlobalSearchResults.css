@@ -1,0 +1,62 @@
+/* Search Across All Sections Results */
+.search-results-container {
+  margin-top: 16px;
+  width: 100%;
+}
+
+.search-results-summary {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--clr-text-soft);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.section-title-icon {
+  margin-right: 6px;
+}
+
+.search-results-container .menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto 32px;
+  box-sizing: border-box;
+}
+
+.section-match-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 10px;
+  background: var(--clr-hover-strong);
+  color: var(--clr-accent);
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.search-empty-state {
+  text-align: center;
+  padding: 48px 16px;
+  color: var(--clr-text-soft);
+}
+
+.search-clear-action-btn {
+  margin-top: 12px;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--clr-border);
+  background: var(--clr-surface);
+  color: var(--clr-text);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.search-clear-action-btn:hover {
+  background: var(--clr-hover-strong);
+  border-color: var(--clr-accent);
+}

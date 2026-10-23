@@ -1,10 +1,7 @@
 {
   "src/App.jsx": {
     "no-empty": {
-      "count": 152
-    },
-    "no-restricted-syntax": {
-      "count": 1
+      "count": 146
     },
     "no-undef": {
       "count": 40
@@ -13,7 +10,7 @@
       "count": 5
     },
     "no-unused-vars": {
-      "count": 213
+      "count": 210
     },
     "no-useless-escape": {
       "count": 4
@@ -28,25 +25,19 @@
       "count": 64
     },
     "react-hooks/refs": {
-      "count": 80
+      "count": 78
     },
     "react-hooks/rules-of-hooks": {
       "count": 6
     },
     "react-hooks/set-state-in-effect": {
-      "count": 93
+      "count": 89
     },
     "react-refresh/only-export-components": {
       "count": 8
     }
   },
   "src/BattleApp.jsx": {
-    "react-hooks/immutability": {
-      "count": 1
-    },
-    "react-hooks/preserve-manual-memoization": {
-      "count": 1
-    },
     "react-hooks/set-state-in-effect": {
       "count": 1
     }
