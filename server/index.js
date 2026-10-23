@@ -52,6 +52,7 @@ const path = require('path');
 const http = require('http');
 const wordCreator = require('./wordCreator');
 const logger = require('./lib/logger');
+const { getStreakMilestoneBonus } = require('./lib/streak');
 const { randomInt, digitRange, gcd, lcm, simplifyFraction, pick } = require('./lib/mathHelpers');
 const { generateExplanation } = require('./explanations');
 
@@ -1919,9 +1920,17 @@ app.post('/api/progress', express.json(), async (req, res) => {
       }
     });
 
+    let streakMilestoneData = null;
     const streakMilestones = [3, 7, 15, 30];
     streakMilestones.forEach(days => {
       if (oldStreak < days && (user.streak || 0) >= days) {
+        const bonusCoins = getStreakMilestoneBonus(days);
+        
+        if (bonusCoins > 0) {
+          user.coins = (user.coins || 0) + bonusCoins;
+          streakMilestoneData = { days, bonusCoins };
+        }
+
         const eventName = `Reached a ${days}-Day Streak!`;
         const hasStreak = user.milestones.some(m => m.event === eventName);
         if (!hasStreak) {
@@ -1944,7 +1953,8 @@ app.post('/api/progress', express.json(), async (req, res) => {
       coins: user.coins,
       streak: user.streak || 0,
       totalSolved: user.totalSolved || 0,
-      newlyCompleted
+      newlyCompleted,
+      streakMilestoneData
     });
   } catch (err) {
     res.status(500).json({ error: err.message });

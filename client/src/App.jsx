@@ -18723,6 +18723,9 @@ function Chapter11App({ onBack }) {
     const ok = ch11_checkFill(currentQ, fillInput)
     setIsCorrect(ok); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
+    if (ok && typeof window.tenaliIncrementSolved === 'function') {
+      window.tenaliIncrementSolved(1)
+    }
   }
 
   const pickMcq = (displayIdx) => {
@@ -18731,6 +18734,9 @@ function Chapter11App({ onBack }) {
     const ok = optSourceIdx === currentQ.correct
     setSelectedIdx(displayIdx); setIsCorrect(ok); setRevealed(true)
     setLastWrongSrc(ok ? null : currentSourceIdx)
+    if (ok && typeof window.tenaliIncrementSolved === 'function') {
+      window.tenaliIncrementSolved(1)
+    }
   }
 
   const cancelAutoAdvance = () => {
@@ -18753,6 +18759,9 @@ function Chapter11App({ onBack }) {
     if (next >= workingList.length) {
       setProgress(p => ({ ...p, [activeId]: { ...(p[activeId] || {}), teachSeen: true, qIdx: lesson.questions.length, completed: true } }))
       setPhase('done')
+      if (typeof window.tenaliIncrementSolved === 'function') {
+        window.tenaliIncrementSolved(0)
+      }
     } else {
       setQIdx(next)
       setSelectedIdx(null); setFillInput(''); setRevealed(false); setIsCorrect(false)
@@ -42373,7 +42382,7 @@ function App() {
   const [totalSolved, setTotalSolved] = useState(() => {
     try { return parseInt(localStorage.getItem('tenali-total-solved') || '0', 10) } catch { return 0 }
   })
-  const [streak, setStreak] = useState(() => {
+  const [, setStreak] = useState(() => {
     try { return parseInt(localStorage.getItem('tenali-streak') || '0', 10) } catch { return 0 }
   })
   const [celebrationQueue, setCelebrationQueue] = useState([])
@@ -42403,6 +42412,23 @@ function App() {
   const [activeTopicId, setActiveTopicId] = useState('arithmetic_basics')
   const [progressData, setProgressData] = useState(null)
   const [showTour, setShowTour] = useState(() => localStorage.getItem('tenali_tour_seen') !== 'true')
+
+  // Keep daily practice streak in sync with events & localStorage
+  useEffect(() => {
+    const handleStreak = (e) => {
+      if (e?.detail?.streak !== undefined) {
+        setStreak(e.detail.streak);
+      } else {
+        try { setStreak(parseInt(localStorage.getItem('tenali-streak') || '0', 10)); } catch (err) { console.warn('[streak] could not read tenali-streak', err); }
+      }
+    };
+    window.addEventListener('tenali-streak-change', handleStreak);
+    window.addEventListener('storage', handleStreak);
+    return () => {
+      window.removeEventListener('tenali-streak-change', handleStreak);
+      window.removeEventListener('storage', handleStreak);
+    };
+  }, []);
 
   // Sync progress with backend on mount & whenever user changes
   useEffect(() => {
@@ -42551,39 +42577,7 @@ function App() {
       }
     });
 
-    // 2. Streak milestones
-    if (streak < 3 && finalStreak >= 3) {
-      enqueues.push({
-        title: "Streak Milestone!",
-        badgeType: "streak_3",
-        level: "",
-        message: "Congratulations! You have unlocked the 3-Day Streak badge for maintaining an active learning streak for 3 consecutive days."
-      });
-    }
-    if (streak < 7 && finalStreak >= 7) {
-      enqueues.push({
-        title: "Streak Milestone!",
-        badgeType: "streak_7",
-        level: "",
-        message: "Congratulations! You have unlocked the 7-Day Streak badge for maintaining an active learning streak for 7 consecutive days."
-      });
-    }
-    if (streak < 15 && finalStreak >= 15) {
-      enqueues.push({
-        title: "Streak Milestone!",
-        badgeType: "streak_15",
-        level: "",
-        message: "Congratulations! You have unlocked the 15-Day Streak badge for maintaining an active learning streak for 15 consecutive days."
-      });
-    }
-    if (streak < 30 && finalStreak >= 30) {
-      enqueues.push({
-        title: "Streak Milestone!",
-        badgeType: "streak_30",
-        level: "",
-        message: "Congratulations! You have unlocked the 30-Day Streak badge for maintaining an active learning streak for 30 consecutive days."
-      });
-    }
+    // 2. Streak milestones handled by server
 
     if (enqueues.length > 0) {
       setCelebrationQueue(prev => [...prev, ...enqueues]);
@@ -42619,8 +42613,18 @@ function App() {
             setStreak(data.streak);
             localStorage.setItem('tenali-streak', String(data.streak));
           }
+          const serverEnqueues = [];
+          
+          if (data.streakMilestoneData) {
+            serverEnqueues.push({
+              title: "Streak Milestone!",
+              badgeType: `streak_${data.streakMilestoneData.days}`,
+              level: "",
+              message: `Amazing! You've played for ${data.streakMilestoneData.days} days in a row! You earned a bonus of ${data.streakMilestoneData.bonusCoins} coins!`
+            });
+          }
+
           if (data.newlyCompleted && data.newlyCompleted.length > 0) {
-            const serverEnqueues = [];
             data.newlyCompleted.forEach(colId => {
               const displayName = colId.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
               const defaultBadgeTypes = {
@@ -42643,9 +42647,10 @@ function App() {
                 message: `Congratulations! You have completed the ${displayName} Collection and unlocked the Gold Album Badge!`
               });
             });
-            if (serverEnqueues.length > 0) {
-              setCelebrationQueue(prev => [...prev, ...serverEnqueues]);
-            }
+          }
+          
+          if (serverEnqueues.length > 0) {
+            setCelebrationQueue(prev => [...prev, ...serverEnqueues]);
           }
         }
       } catch (e) {
