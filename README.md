@@ -670,16 +670,19 @@ A reviewer will check the Onboarding Document against the following:
 
 ## 🌐 Deployment Topology
 
-`tenali.fun` is **not one deployment of this repo** — it's one nginx host fronting three separately-running apps on one server, each on its own port and systemd unit:
+`tenali.fun` is **not one deployment of this repo** — it's one nginx host fronting four separately-running apps on one server, each on its own port and systemd unit:
 
 ```
 tenali.fun
-  ├── /            → tenali-root branch (separate branch, PR + maintainer merge required — no direct pushes)
-  ├── /summership/ → THIS REPO's `main` branch  ← PRs from this README land here
-  └── /fln/        → vicharanashala/fln (a different repo entirely)
+  ├── /                → tenali-root branch (separate branch, PR + maintainer merge required — no direct pushes)
+  ├── /summership/     → THIS REPO's `main` branch  ← PRs from this README land here
+  ├── /matrixmystics/  → THIS REPO's `matrix-mystics` branch
+  └── /fln/            → vicharanashala/fln (a different repo entirely)
 ```
 
 **If you merge a PR to `main` here, it goes live at `tenali.fun/summership/`, not at the bare `tenali.fun` domain.** The root path is a separate branch (`tenali-root`) with its own PR-and-merge workflow — see that branch's own docs before touching it.
+
+The deploy script, the systemd units and the nginx site template for every app are committed to this repository under [`server/deploy/`](server/deploy/), and the deploy workflow ships them to the droplet before each run — see [DEPLOYMENT.md](DEPLOYMENT.md) for the full topology, the port table and the rollback procedure.
 
 > 🔒 **Security note:** The droplet IP, SSH host, and admin SSH credentials are never committed to source — they live only in server-side systemd unit files and deploy tooling outside this repo.
 
